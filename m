@@ -1,106 +1,111 @@
-Return-Path: <jester@theyoctojester.info>
+Return-Path: <derek@asterius.io>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E6F9CE79D6
-	for <webhook@archiver.kernel.org>; Wed, 20 Sep 2023 14:17:32 +0000 (UTC)
-Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
- by mx.groups.io with SMTP id smtpd.web10.40829.1695219441892750751
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 180C4C04AA7
+	for <webhook@archiver.kernel.org>; Wed, 20 Sep 2023 16:13:44 +0000 (UTC)
+Received: from mail-yw1-f180.google.com (mail-yw1-f180.google.com [209.85.128.180])
+ by mx.groups.io with SMTP id smtpd.web10.44331.1695226417721779488
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Sep 2023 07:17:22 -0700
+ Wed, 20 Sep 2023 09:13:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@theyoctojester-info.20230601.gappssmtp.com header.s=20230601 header.b=U+iL3dK8;
- spf=none, err=permanent DNS error (domain: theyoctojester.info, ip: 209.85.208.47, mailfrom: jester@theyoctojester.info)
-Received: by mail-ed1-f47.google.com with SMTP id 4fb4d7f45d1cf-51e28cac164so2135267a12.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 20 Sep 2023 07:17:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=theyoctojester-info.20230601.gappssmtp.com; s=20230601; t=1695219440; x=1695824240; darn=lists.openembedded.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=IJdAztqFRUOiRQTDZKhrjRaZ+PYJlBespXmIrYQL0eA=;
-        b=U+iL3dK8rzsnfE72hO9DaGQA0DGPW2PyMTezzEUStMoj+YeYJ6+CDoibkf35Ii+ZbX
-         drBGUIVSeCGSWlt3l8RSfCXNTZl4w9hbXxTB6NAPKDQ2upz2bVNkevvKku7UvyqeXF7V
-         NNthrJyCTwQI6vf3H+YQSyNzDUAT+hNgtwqq2wA4WyIK85SfsFMgu9/nPBlrF8R+AALG
-         BorY4Y1aC6z9bG8I4aGIgzsAFPyG2bCKwpGTSJ0hxNmMSTKmF3nwb+SqsJJxYvD59PJm
-         PBELmxP+k5zAP3Wy81zw/oipn1peyJvinR5wMVDPJY09cYCn/HUZ2demaV6BGxpWRlrH
-         7BTA==
+ dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.128.180, mailfrom: straka.derek@gmail.com)
+Received: by mail-yw1-f180.google.com with SMTP id 00721157ae682-59e77e4f707so44166907b3.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 20 Sep 2023 09:13:37 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695219440; x=1695824240;
-        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=IJdAztqFRUOiRQTDZKhrjRaZ+PYJlBespXmIrYQL0eA=;
-        b=ZrECUo5U6W7xy/g5Trtpx/j8vTzizhcLrb6V0LD3e3lxdhhoX5q0TA5VE3vfzSfnR+
-         8UK3jBrJUwbwYFh3KaTiJfrQ3T5pv7FbayXk2dVYhprLeDGlKGI5cyI80VBta6nVgAIe
-         i9FBXMxmL/i7T7pMAa3nNCbE+GgLWwuaNVK/ciZRKd79Rfp8OpPnnJeBdo8+9bshxmue
-         px6BqAvccJxfCvQWPce6ukEucuZhLH47I0RqNPPVjpYqPoBemXM+kGLsF0qrzAaztcYs
-         7usB/AQc3NE6N00lz49U8ELfkZhCoGd6XqNxC7EynzbS7WxPoZC32b9N3NK7STp1951R
-         vSZg==
-X-Gm-Message-State: AOJu0YzJNzMqVrG+9lK2zSlC29BsL0aVL6PD2YkUeBn00nvAQtAiXuuc
-	kb7Hle1ZOvpFDwwlLY/SCeR3addHQkC8ZpWny3DsDnJpHlXUUqkW4eQW4A==
-X-Google-Smtp-Source: AGHT+IFkDN+uDeFHiaLrHt0M4thONG33wpoM+Zceal3rSiRI0eNjzZy1Qk3dmeOOeeRHMDr56Gf1sMB6mhLyRLaKLI0=
-X-Received: by 2002:a05:6402:5242:b0:527:1855:be59 with SMTP id
- t2-20020a056402524200b005271855be59mr7637965edd.3.1695219440000; Wed, 20 Sep
- 2023 07:17:20 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1695226416; x=1695831216;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=xARlKqAaDny7qLgVixpVenmopuT9tPsSHk6Ih1d45pQ=;
+        b=ZjjD2DJx4mbmtjVlmCvdsZhF5y/UKju3Cxk/rBJABGNIwpTmhMPYfG9ZHc0UFt4U4M
+         vAzDoD+40x9LagHNGvkOIqfKOkmfSs2ZEA3GcuHcf4tJYYboB73jnj23yIXf4YJgze4U
+         /YTT6RWatQI95hj5FfgJRxR1ZhKlN69Sj+zHolA7szb4VFsSAloYEA8iEnv29jRsd1c1
+         sunZQ1IudFQoFt/yZT1fBbMYCllmJhwFBiXJOYLrhHejhNZicPoBM6nqiWHnUMkv/RDR
+         6M3pFT9vlaiWElTQI+PQrinqKGgLKMG59jJ8tHnI7Ql5XrVKs9H1YdX8Og0BqOaFRpGX
+         0cng==
+X-Gm-Message-State: AOJu0Yz71gtOdo9+bePnrJ8kpB3JFPtnBROpvhbsnBmQpqmrOIWtnN2v
+	O0Y1OBJMg5yaOC+18ZFR6oGqg1wJfs2a3g==
+X-Google-Smtp-Source: AGHT+IGNn14+8ha7yKt/d5O5U5v4lq3NKLnQ3cPoVOQphWL1Oy7gAg4s2vwjpRbXdyPg2sAeVOachA==
+X-Received: by 2002:a81:bb4a:0:b0:59e:9a44:9db9 with SMTP id a10-20020a81bb4a000000b0059e9a449db9mr2934136ywl.26.1695226416397;
+        Wed, 20 Sep 2023 09:13:36 -0700 (PDT)
+Received: from sparta.internal.asterius.io (c-73-228-213-122.hsd1.mn.comcast.net. [73.228.213.122])
+        by smtp.gmail.com with ESMTPSA id b1-20020a0dc001000000b0058e37788bf7sm3867432ywd.72.2023.09.20.09.13.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 20 Sep 2023 09:13:35 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Cc: Derek Straka <derek@asterius.io>
+Subject: [meta-python][PATCH] python3-absl: Update version 1.4.0 -> 2.0.0
+Date: Wed, 20 Sep 2023 16:13:13 +0000
+Message-Id: <20230920161313.1230258-1-derek@asterius.io>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-From: Josef Holzmayr <jester@theyoctojester.info>
-Date: Wed, 20 Sep 2023 16:16:54 +0200
-Message-ID: <CAEt6NwpLj4EPmZPQZ+YsAfThd3S_1QE2pNkF=ZNVidKf9qAaSQ@mail.gmail.com>
-Subject: OEDvM / TSC news
-To: openembedded-devel@lists.openembedded.org, 
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="00000000000089b8080605cb085e"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 20 Sep 2023 14:17:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105014
+ <openembedded-devel@lists.openembedded.org>; Wed, 20 Sep 2023 16:13:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105015
 
---00000000000089b8080605cb085e
-Content-Type: text/plain; charset="UTF-8"
+Changelog
+==================
+New
+Support Python 3.12.
 
-Hello my fellow OpenEmbedded aficionados, users, and developers!
+Changed
+absl-py no longer supports Python 3.6. It has reached end-of-life for more
+than a year now.
+(logging) logging.exception can now take exc_info as argument, with
+default value True. Prior to this change setting exc_info would raise
+KeyError, this change fixes this behaviour.
+(testing) For Python 3.11+, the calls to absltest.TestCase.enter_context
+are forwarded to unittest.TestCase.enterContext (when called via instance)
+or unittest.TestCase.enterClassContext (when called via class) now. As a
+result, on Python 3.11+, the private _cls_exit_stack attribute is not
+defined on absltest.TestCase and _exit_stack attribute is not defined on
+its instances.
+(testing) absltest.TestCase.assertSameStructure() now uses the test case's
+equality functions (registered with TestCase.addTypeEqualityFunc()) for
+comparing leaves of the structure.
+(testing) abslTest.TestCase.fail() now names its arguments
+(self, msg=None, user_msg=None), and not (self, msg=None, prefix=None),
+better reflecting the behavior and usage of the two message arguments.
+DEFINE_enum, DEFINE_multi_enum, and EnumParser now raise errors when
+enum_values is provided as a single string value. Additionally,
+EnumParser.enum_values is now stored as a list copy of the provided
+enum_values parameter.
+(testing) Updated paramaterized.CoopTestCase() to use Python 3 metaclass
+idioms. Most uses of this function continued working during the Python 3
+migration still worked because a Python 2 compatibility __metaclass__
+variables also existed. Now pure Python 3 base classes without backwards
+compatibility will work as intended.
+(testing) absltest.TestCase.assertSequenceStartsWith now explicitly fail
+when passed a Mapping or Set object as the whole argument.
 
-You might have noticed that the OEDvM is coming up on December 1st, 2023
-(see https://www.openembedded.org/wiki/OEDvM_2023.12)
-You also might have noticed that the TSC (Technical Steering Committee)
-elections are in full motion already.
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ .../python/{python3-absl_1.4.0.bb => python3-absl_2.0.0.bb}     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-absl_1.4.0.bb => python3-absl_2.0.0.bb} (76%)
 
-If both assumptions apply to you - congratulations!
+diff --git a/meta-python/recipes-devtools/python/python3-absl_1.4.0.bb b/meta-python/recipes-devtools/python/python3-absl_2.0.0.bb
+similarity index 76%
+rename from meta-python/recipes-devtools/python/python3-absl_1.4.0.bb
+rename to meta-python/recipes-devtools/python/python3-absl_2.0.0.bb
+index bbea9cacb..42c7f3f84 100644
+--- a/meta-python/recipes-devtools/python/python3-absl_1.4.0.bb
++++ b/meta-python/recipes-devtools/python/python3-absl_2.0.0.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ 
+-SRC_URI[sha256sum] = "d2c244d01048ba476e7c080bd2c6df5e141d211de80223460d5b3b8a2a58433d"
++SRC_URI[sha256sum] = "d9690211c5fcfefcdd1a45470ac2b5c5acd45241c3af71eed96bc5441746c0d5"
+ 
+ PYPI_PACKAGE = "absl-py"
+ 
+-- 
+2.34.1
 
-If not, consider joining the OpenEmbedded organization.
-As outlined at https://www.openembedded.org/wiki/Organization#Membership,
-it gives you a very direct way to influence the direction of the project.
-Not only through code, but also as a person, and an opinion. You are
-invited to join, regardless of your affiliation, or your contributions. We
-would like to have YOU, as the kind of person that you are.
-
-Feel interested? Reach out to either the board or me, and we are happy to
-talk!
-
-Greetz,
-Josef - on behalf of the OE board
-
---00000000000089b8080605cb085e
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hello my fellow OpenEmbedded aficionados, users, and devel=
-opers!<div><br></div><div>You might have noticed that the OEDvM is coming u=
-p on December 1st, 2023 (see=C2=A0<a href=3D"https://www.openembedded.org/w=
-iki/OEDvM_2023.12">https://www.openembedded.org/wiki/OEDvM_2023.12</a>)</di=
-v><div>You also might have noticed that the TSC (Technical Steering Committ=
-ee) elections are in full motion already.</div><div><br></div><div>If both =
-assumptions apply to you - congratulations!</div><div><br></div><div>If not=
-, consider joining the OpenEmbedded organization.=C2=A0</div><div>As outlin=
-ed at=C2=A0<a href=3D"https://www.openembedded.org/wiki/Organization#Member=
-ship">https://www.openembedded.org/wiki/Organization#Membership</a>, it giv=
-es you a very direct way to influence the direction of the project. Not onl=
-y through code, but also as a person, and an opinion. You are invited to jo=
-in, regardless of your affiliation, or your contributions. We would like to=
- have YOU, as the kind of person that you are.</div><div><br></div><div>Fee=
-l interested? Reach out to either the board or me, and we are happy to talk=
-!</div><div><br></div><div>Greetz,</div><div>Josef - on behalf of the OE bo=
-ard</div></div>
-
---00000000000089b8080605cb085e--
 
