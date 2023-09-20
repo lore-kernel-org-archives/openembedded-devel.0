@@ -1,98 +1,116 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <derek@asterius.io>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 149D6C04FF9
-	for <webhook@archiver.kernel.org>; Wed, 20 Sep 2023 20:05:01 +0000 (UTC)
-Received: from mail-oo1-f48.google.com (mail-oo1-f48.google.com [209.85.161.48])
- by mx.groups.io with SMTP id smtpd.web10.6250.1695240290876963484
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A1DC0C05022
+	for <webhook@archiver.kernel.org>; Wed, 20 Sep 2023 20:30:54 +0000 (UTC)
+Received: from mail-qk1-f179.google.com (mail-qk1-f179.google.com [209.85.222.179])
+ by mx.groups.io with SMTP id smtpd.web11.281.1695241846065769994
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Sep 2023 13:04:50 -0700
+ Wed, 20 Sep 2023 13:30:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=SPuUlQYm;
- spf=pass (domain: gmail.com, ip: 209.85.161.48, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f48.google.com with SMTP id 006d021491bc7-5731fe1d2bfso142054eaf.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 20 Sep 2023 13:04:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1695240290; x=1695845090; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=PCXQASCwL4ETHHjywtnM/E9GEFEI4RqGwfXbnPJXHTg=;
-        b=SPuUlQYmCtSj569V2ienAE4NmgkZ9bCl0GE68KQeGmsSowAcGzwp3sjnwersFyTUO6
-         NOJGbH18OM62uQFxxcxsoxEdLhhUjJqqCnLg8FuzqT4c7M/P3kzPqiuuNHysbAxvLKiv
-         5JgVFMCJh8lKywkc9bcRgjvsaer5WL1YKsQHhW3ztIOflcKhK6eqeCKNF2MU6tQgboxm
-         cInKU2XdOQoq0jfSiuWjp5xd4n3o5vUOeFf12z0Is5Oy88qrv+pNP40OfLvH2oYQo3+q
-         en10Q+hJy1OAjiDERDQA08OIff94tQmso+ddFCSCQaWiA62ykVVbR8xBdW5e1ad7C+Z5
-         t/XA==
+ dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.222.179, mailfrom: straka.derek@gmail.com)
+Received: by mail-qk1-f179.google.com with SMTP id af79cd13be357-770ef353b8fso11707885a.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 20 Sep 2023 13:30:45 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695240290; x=1695845090;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=PCXQASCwL4ETHHjywtnM/E9GEFEI4RqGwfXbnPJXHTg=;
-        b=v0xxDoF7tycGhoylQXETKlqwi5AE8n/QVcS8aLOJXZcFoqHJvQrfUfDz7SoKOMnUeT
-         buNi2Bf2Oiq+iQHx7k2qqDG3lPL4ym5nAWAiAwukFq/zeThAKDZ9cp+GT8uGhLumyxOv
-         JR7RIThusIdJmgtO2UI0k0sCu5Cak4TbJaps7O59dQaDYC1nhPvfy5DUQHXvj1YQAtsx
-         aRsIQfVMF/xfeSYD2HBnfistxA/iloA/TqbY1y1IlvIcBrE8ycXf0CdeeO7TcIMWhaER
-         P5lIzT/9arDShQ/ZsV2/4BweiMa5S1f5xSAapbRMIbyglOL3dvHm+osJAt5Y2+bSa+pz
-         y5Ew==
-X-Gm-Message-State: AOJu0YyNKs/JjiCA7FhWq9GhxeTIsb+gpmhsvN/jYFy9WuxczcUgTpfy
-	y3oHiBcFSZld5W85cWpqcMkCxvsAbSu8dv6mgYfNpqQKW6s=
-X-Google-Smtp-Source: AGHT+IGUDRr2WXBxUzz4eLXSyLnHX/0RHd0IWBYny28QGgG5kms94/69smKYr7C/cFQgzWFAd18grHq+UYFmVrMWRnQ=
-X-Received: by 2002:a05:6870:a105:b0:1d0:f5bd:6e9 with SMTP id
- m5-20020a056870a10500b001d0f5bd06e9mr3942558oae.22.1695240290038; Wed, 20 Sep
- 2023 13:04:50 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1695241845; x=1695846645;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=r8T/waFcYHuvsZukIFJX3PTRIkiCWlxGS5Ob8JizJvQ=;
+        b=c1Ckuv7GOikNoqYjiBn8NbtEQi3IZ+hq70tznPtjhiiicl5v42Nhil+/nVsgv0GKVk
+         RZisVuV8e7uWnBVQehRaZsA3W1sXgvoWL0xUvmmtstg2Xy8rvfeTEiN31R9XtPleHq/P
+         EhsUi5anYBS/TFuEArjrc0z6RavDykDxuch//cae+kr1T4VWMgWkPhaVQ1CIqyHvY88b
+         QVYT5XjuDl1/xpJdPqRZZnVR4ar8xzFOmxm0RQuZ9OcIESbCWKxq5I0arI2CPXtTQd1U
+         PuMO1dMDnl5vmSkhWymFsoRjGFabXkUvVQIKGRGNSFYdgFAxnKLczFdrWg42LRKdXjC+
+         lNEw==
+X-Gm-Message-State: AOJu0YzPfSBA/bAAThrBO6gum3P4kGmzDRp9cfrg1WcHUJgsMvx1DvAX
+	Qsc6y3H7gakT1Ak2ICRt6Q3dAnVSSw0UkQ==
+X-Google-Smtp-Source: AGHT+IHrs3Cl+cvCA3g5tKBGDMxS6aoekg21lecw7dUtuaPYpnDZdfc2atRTmwski7quS1T+f75/Uw==
+X-Received: by 2002:a05:620a:25d1:b0:76f:f64:58b4 with SMTP id y17-20020a05620a25d100b0076f0f6458b4mr4020973qko.31.1695241844523;
+        Wed, 20 Sep 2023 13:30:44 -0700 (PDT)
+Received: from sparta.internal.asterius.io (c-73-228-213-122.hsd1.mn.comcast.net. [73.228.213.122])
+        by smtp.gmail.com with ESMTPSA id f19-20020a05620a15b300b0076f1d8b1c2dsm16378qkk.12.2023.09.20.13.30.43
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 20 Sep 2023 13:30:44 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Cc: Derek Straka <derek@asterius.io>
+Subject: [meta-python][PATCH] python3-google-api-python-client: Update version 2.99.0 -> 2.100.0
+Date: Wed, 20 Sep 2023 20:30:34 +0000
+Message-Id: <20230920203034.1378450-1-derek@asterius.io>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20230918110305.38374-1-dse@thaumatec.com>
-In-Reply-To: <20230918110305.38374-1-dse@thaumatec.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 20 Sep 2023 13:04:23 -0700
-Message-ID: <CAMKF1sqGaJqAHp4_6gsvNPqXywGf=Gjv7ML2d=G16ZbLCW8N4g@mail.gmail.com>
-Subject: Re: [oe] [meta-webserver][PATCH v1 0/2] cockpit: Separate packagekit
- and apps packages
-To: Daniel Semkowicz <dse@thaumatec.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 20 Sep 2023 20:05:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105029
+ <openembedded-devel@lists.openembedded.org>; Wed, 20 Sep 2023 20:30:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105030
 
-I usually see this error with this package
+Changelog
+=========
+Features
+accesscontextmanager: Update the api https://togithub.com/googleapis/google-api-python-client/commit/f6f6113f42261f1be9d18d0336a54c9c8ca54da8 (f77ee26)
+advisorynotifications: Update the api https://togithub.com/googleapis/google-api-python-client/commit/0025b75976439ceedf5ecf184fd2cb3defd74af8 (f77ee26)
+aiplatform: Update the api https://togithub.com/googleapis/google-api-python-client/commit/fbcd223a51ef9353a69c895c5dd0664c7260139c (f77ee26)
+androidmanagement: Update the api https://togithub.com/googleapis/google-api-python-client/commit/23cd554b0425f9096938fa6a48d15dab16de96e4 (f77ee26)
+appengine: Update the api https://togithub.com/googleapis/google-api-python-client/commit/266598f5533b402c553c3c741c645d0a1dbc5e5e (f77ee26)
+artifactregistry: Update the api https://togithub.com/googleapis/google-api-python-client/commit/fe34c2221c9cdd48d08ba62fc8bc19960fbc9005 (f77ee26)
+assuredworkloads: Update the api https://togithub.com/googleapis/google-api-python-client/commit/86eaf3ff8d5be74e0254e22045789c5d6d8c969b (f77ee26)
+beyondcorp: Update the api https://togithub.com/googleapis/google-api-python-client/commit/f27ec8e0acbb16eacfda7eda5df7716be18cb7ef (f77ee26)
+blockchainnodeengine: Update the api https://togithub.com/googleapis/google-api-python-client/commit/bf425463c4dcd4b3cac74689accec071593114cd (f77ee26)
+checks: Update the api https://togithub.com/googleapis/google-api-python-client/commit/3d7acfbe7058daa7501bffe5fdbbe324092645e5 (f77ee26)
+chromemanagement: Update the api https://togithub.com/googleapis/google-api-python-client/commit/5310a182fd65eef841364c600a477bb4c8b7aaa8 (f77ee26)
+cloudasset: Update the api https://togithub.com/googleapis/google-api-python-client/commit/d076b1bd45757a9a790b1be5da6437c9f2de6104 (f77ee26)
+cloudfunctions: Update the api https://togithub.com/googleapis/google-api-python-client/commit/c9d14b98bffdee4b5509e7b0eeec94e37584c8b2 (f77ee26)
+cloudtasks: Update the api https://togithub.com/googleapis/google-api-python-client/commit/fe0bcad3476804ab033bffe71ee92cc8b26d6273 (f77ee26)
+composer: Update the api https://togithub.com/googleapis/google-api-python-client/commit/4d9e24a39caa038f30d6ef3593d6c5d4f6073793 (f77ee26)
+connectors: Update the api https://togithub.com/googleapis/google-api-python-client/commit/7e2e3f0687d86e98db77baebdefd91bed1be6619 (f77ee26)
+contactcenteraiplatform: Update the api https://togithub.com/googleapis/google-api-python-client/commit/ee747d28f2b9848d53c2fcbb4b92c2caac1f47e6 (f77ee26)
+datamigration: Update the api https://togithub.com/googleapis/google-api-python-client/commit/de2aa36bbf671e2754eeb329fce83b502aef74d4 (f77ee26)
+gkeonprem: Update the api https://togithub.com/googleapis/google-api-python-client/commit/f5890d08262d926b393d3e34eb518f5fb994ba33 (f77ee26)
+gmail: Update the api https://togithub.com/googleapis/google-api-python-client/commit/40b0348d282435d229e5980ceffaf572b7df7707 (f77ee26)
+integrations: Update the api https://togithub.com/googleapis/google-api-python-client/commit/ddf9afb276fa225bea8a677a50f0ddd7635310b1 (f77ee26)
+monitoring: Update the api https://togithub.com/googleapis/google-api-python-client/commit/f64be2390ca1e6e59ce63fcef8b22ee78922eae0 (f77ee26)
+mybusinessverifications: Update the api https://togithub.com/googleapis/google-api-python-client/commit/fde7890f06667733cb3917ab3edc573f979f7b14 (f77ee26)
+networkconnectivity: Update the api https://togithub.com/googleapis/google-api-python-client/commit/0d299134e87b7b373500b51d43799d931f7fbf8b (f77ee26)
+networkmanagement: Update the api https://togithub.com/googleapis/google-api-python-client/commit/47352429b14691f327743f9d54c079cef1dcf3cb (f77ee26)
+notebooks: Update the api https://togithub.com/googleapis/google-api-python-client/commit/66dd9d0e43a6698c5e3b9b2918a6971d8267d156 (f77ee26)
+paymentsresellersubscription: Update the api https://togithub.com/googleapis/google-api-python-client/commit/d0fae461de28dd1134dda00fb21998737241cfd7 (f77ee26)
+places: Update the api https://togithub.com/googleapis/google-api-python-client/commit/db06598e16cd646cfd0251627e4c607feabb1588 (f77ee26)
+run: Update the api https://togithub.com/googleapis/google-api-python-client/commit/d10dad24fea5a6ea8374ee69e3e7878619b4e708 (f77ee26)
+spanner: Update the api https://togithub.com/googleapis/google-api-python-client/commit/531ba38b88d4f5195a991037dec5db6223b71fbc (f77ee26)
+storage: Update the api https://togithub.com/googleapis/google-api-python-client/commit/8610476ae829869f9abc93a349ff6c1c52d5bade (f77ee26)
+transcoder: Update the api https://togithub.com/googleapis/google-api-python-client/commit/7d2dfac9b7a320ac21921266c437fc67cf525047 (f77ee26)
+vision: Update the api https://togithub.com/googleapis/google-api-python-client/commit/4de577bc69271c120360e6066de91e38e5f48ee4 (f77ee26)
 
-https://errors.yoctoproject.org/Errors/Details/737847/
+Bug Fixes
+smartdevicemanagement: Update the api https://togithub.com/googleapis/google-api-python-client/commit/03ffb2b7ad905cd7404f400b9311c92a6fe5a057 (f77ee26)
 
-Can you see if anything pops up to fix it while you are here ?
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ ...nt_2.99.0.bb => python3-google-api-python-client_2.100.0.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-google-api-python-client_2.99.0.bb => python3-google-api-python-client_2.100.0.bb} (86%)
 
-On Mon, Sep 18, 2023 at 4:03=E2=80=AFAM Daniel Semkowicz <dse@thaumatec.com=
-> wrote:
->
-> "Packagekit" and "apps" Cockpit modules were included in the main ${PN}
-> package. Move them to a separate packages like all other existing Cockpit
-> modules. This allows to choose which modules are installed in the system.
->
-> Daniel Semkowicz (2):
->   cockpit: Move packagekit to a separate package
->   cockpit: Move apps to a separate package
->
->  meta-webserver/recipes-webadmin/cockpit/cockpit_298.bb | 5 +++++
->  1 file changed, 5 insertions(+)
->
-> --
-> 2.41.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#104924): https://lists.openembedded.org/g/openembedde=
-d-devel/message/104924
-> Mute This Topic: https://lists.openembedded.org/mt/101430711/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+diff --git a/meta-python/recipes-devtools/python/python3-google-api-python-client_2.99.0.bb b/meta-python/recipes-devtools/python/python3-google-api-python-client_2.100.0.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-google-api-python-client_2.99.0.bb
+rename to meta-python/recipes-devtools/python/python3-google-api-python-client_2.100.0.bb
+index def02dee7..1c6253a83 100644
+--- a/meta-python/recipes-devtools/python/python3-google-api-python-client_2.99.0.bb
++++ b/meta-python/recipes-devtools/python/python3-google-api-python-client_2.100.0.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/googleapis/google-api-python-client"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+ 
+-SRC_URI[sha256sum] = "e733fd0f2c8793b1a000d5e69ac81b1b9ec0665b445b7ed83bdbbb0038973306"
++SRC_URI[sha256sum] = "eaed50efc2f8a4027dcca8fd0037f4b1b03b8093efc84ce3cb6c75bfc79a7e31"
+ 
+ inherit pypi setuptools3
+ 
+-- 
+2.34.1
+
 
