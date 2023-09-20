@@ -2,51 +2,51 @@ Return-Path: <derek@asterius.io>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 49DF4C04AAD
-	for <webhook@archiver.kernel.org>; Wed, 20 Sep 2023 16:30:44 +0000 (UTC)
-Received: from mail-io1-f51.google.com (mail-io1-f51.google.com [209.85.166.51])
- by mx.groups.io with SMTP id smtpd.web11.44853.1695227439774087056
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6FB0EC04AAE
+	for <webhook@archiver.kernel.org>; Wed, 20 Sep 2023 16:36:17 +0000 (UTC)
+Received: from mail-yb1-f172.google.com (mail-yb1-f172.google.com [209.85.219.172])
+ by mx.groups.io with SMTP id smtpd.web10.65.1695227773515354589
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Sep 2023 09:30:39 -0700
+ Wed, 20 Sep 2023 09:36:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.166.51, mailfrom: straka.derek@gmail.com)
-Received: by mail-io1-f51.google.com with SMTP id ca18e2360f4ac-7928ba24936so2356139f.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 20 Sep 2023 09:30:39 -0700 (PDT)
+ dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.219.172, mailfrom: straka.derek@gmail.com)
+Received: by mail-yb1-f172.google.com with SMTP id 3f1490d57ef6-d81b42a3108so75754276.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 20 Sep 2023 09:36:13 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695227438; x=1695832238;
+        d=1e100.net; s=20230601; t=1695227772; x=1695832572;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=JKcrnfhhxsqfJl1y775VEaDUJl1Iki9DcjvMjMau8ko=;
-        b=ug572j/XfjvhvcCGlIi8tGe4AuxC7bVUDwNW+yN5WhCXAawo5h23+tpIWT/d6clbqp
-         fLlwHUc4S8gLrukWTIgnAkm7fqPpj7bDzNLbO/kY5NZdG9Xf6AXLiLASOysEASOhJUIz
-         ZyVi1pNt5jWuVEBrusJB/BBAWfIvIPa7Z7sjUa+kp/x2Ao0tNfpMdbbBKcx6rRYy92xN
-         LaKq/XcQhWtThPPeDo10y+MM+iBBcUc/voBiWPj3B3DDoCg0/XrjhCtjCuT8PwB9zakB
-         9z3EcLcscNfLZllk9xFvUN07YRTD304dYiWJSGMd4DebHa6aW2BJZIkJzi8av5TfkvRT
-         qMeA==
-X-Gm-Message-State: AOJu0YwUX/Fmrkh4FNRkgKH/Jx+0ZdforFAhK4LtomRx4LWbjRmvJQZG
-	Z2W6f0vS7JC54WfuQ+SBbjWgUqsgzU/sQA==
-X-Google-Smtp-Source: AGHT+IGCtkT6vB+r27r0nJcKL9LNvaKurXS9+yG29g5LFo0sPufZostj6Da5aa/KKjYO4cziIOqrLg==
-X-Received: by 2002:a5e:c301:0:b0:784:314f:8d68 with SMTP id a1-20020a5ec301000000b00784314f8d68mr3373924iok.1.1695227438275;
-        Wed, 20 Sep 2023 09:30:38 -0700 (PDT)
+        bh=LBv3MiJUPrqpMUsAmq7fbZpp+ZbWVvv9B8dS+dRNB5U=;
+        b=WDuxJZFVmar3P7HGgOdnS2fHH/oGnAOiMeGC4VBTu6aHR9v3SsZLNCvxbGih+n54+F
+         FMFQmyTo0YCevwDAhDGXDyYvfsqvL/va0mju9PIyTZmwE1p8PAfSYfJNyTPnptliCLTz
+         1FGvZI+LsVpwKs6thlHZsox8l55cFdFlZdJIJZwrsG3ooVo6vvtU2HIus9oG9Q5586NY
+         MjfFD0XLob8ztgCbz8xRhVw1PQuMgTkzkALJUW5Uf7eVNCtZwxEtEzfVycaAp/HFm0s8
+         7k2fnJQWgG0kY7YxxKyUkIya2Nnnu1ON2+5t93fHtuY5VmZ1DHKSu+G73KwwPKQXBW9T
+         +pzg==
+X-Gm-Message-State: AOJu0YzkSJqfpOTH21UsNpXvhgbfSzuVQBXcFYHL6UKAuWtimNGCbPl/
+	7a7AIIz9dGdrdsS/lrROFWNlub6+RHJyqg==
+X-Google-Smtp-Source: AGHT+IEvawzz7ouPLFmjtSpAnOUAEzeq1BsHoa+5ijBx+iCbTVOMwiyy0ORpIztWwxK95MMfz/GFQA==
+X-Received: by 2002:a25:900e:0:b0:d7a:c4dc:e7b3 with SMTP id s14-20020a25900e000000b00d7ac4dce7b3mr2776148ybl.61.1695227772292;
+        Wed, 20 Sep 2023 09:36:12 -0700 (PDT)
 Received: from sparta.internal.asterius.io (c-73-228-213-122.hsd1.mn.comcast.net. [73.228.213.122])
-        by smtp.gmail.com with ESMTPSA id y7-20020a6bd807000000b0077e35ffac2fsm4028215iob.32.2023.09.20.09.30.37
+        by smtp.gmail.com with ESMTPSA id v82-20020a252f55000000b00d8161769507sm3431528ybv.25.2023.09.20.09.36.11
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 20 Sep 2023 09:30:37 -0700 (PDT)
+        Wed, 20 Sep 2023 09:36:11 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-python][PATCH] python3-bleak: Update receipe 0.20.2 -> 0.21.1
-Date: Wed, 20 Sep 2023 16:30:20 +0000
-Message-Id: <20230920163020.1237099-1-derek@asterius.io>
+Subject: [meta-python][PATCHv2] python3-bleak: Update version  0.20.2 -> 0.21.1
+Date: Wed, 20 Sep 2023 16:35:57 +0000
+Message-Id: <20230920163557.1240725-1-derek@asterius.io>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 20 Sep 2023 16:30:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105016
+ <openembedded-devel@lists.openembedded.org>; Wed, 20 Sep 2023 16:36:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105017
 
 Removed a patch the no longer appears to be needed and dropped support for python 3.7
 
@@ -87,10 +87,10 @@ Dropped support for Python 3.7.
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
  ...001-fix-poetry-version-compatibility.patch | 23 -------------------
- ...leak_0.20.2.bb => python3-bleak_0.21.1.bb} |  6 +----
- 2 files changed, 1 insertion(+), 28 deletions(-)
+ ...leak_0.20.2.bb => python3-bleak_0.21.1.bb} |  8 ++-----
+ 2 files changed, 2 insertions(+), 29 deletions(-)
  delete mode 100644 meta-python/recipes-devtools/python/python3-bleak/0001-fix-poetry-version-compatibility.patch
- rename meta-python/recipes-devtools/python/{python3-bleak_0.20.2.bb => python3-bleak_0.21.1.bb} (70%)
+ rename meta-python/recipes-devtools/python/{python3-bleak_0.20.2.bb => python3-bleak_0.21.1.bb} (65%)
 
 diff --git a/meta-python/recipes-devtools/python/python3-bleak/0001-fix-poetry-version-compatibility.patch b/meta-python/recipes-devtools/python/python3-bleak/0001-fix-poetry-version-compatibility.patch
 deleted file mode 100644
@@ -122,13 +122,13 @@ index 051ebbe67..000000000
 - pytest = "^7.0.0"
 - pytest-asyncio = "^0.19.0"
 diff --git a/meta-python/recipes-devtools/python/python3-bleak_0.20.2.bb b/meta-python/recipes-devtools/python/python3-bleak_0.21.1.bb
-similarity index 70%
+similarity index 65%
 rename from meta-python/recipes-devtools/python/python3-bleak_0.20.2.bb
 rename to meta-python/recipes-devtools/python/python3-bleak_0.21.1.bb
-index 9b81efe40..da7bce415 100644
+index 9b81efe40..4a1fafb5d 100644
 --- a/meta-python/recipes-devtools/python/python3-bleak_0.20.2.bb
 +++ b/meta-python/recipes-devtools/python/python3-bleak_0.21.1.bb
-@@ -3,11 +3,7 @@ HOMEPAGE = "https://github.com/hbldh/bleak"
+@@ -3,18 +3,14 @@ HOMEPAGE = "https://github.com/hbldh/bleak"
  LICENSE = "MIT"
  LIC_FILES_CHKSUM = "file://LICENSE;md5=bcbc2069a86cba1b5e47253679f66ed7"
  
@@ -141,6 +141,14 @@ index 9b81efe40..da7bce415 100644
  
  PYPI_PACKAGE = "bleak"
  
+ inherit pypi python_poetry_core
+ 
+ RDEPENDS:${PN} += " \
+-    python3-core (>=3.7) \
++    python3-core (>3.7) \
+     python3-async-timeout \
+     python3-dbus-fast \
+ "
 -- 
 2.34.1
 
