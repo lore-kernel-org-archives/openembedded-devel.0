@@ -1,93 +1,106 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <jester@theyoctojester.info>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D57FCCE79CA
-	for <webhook@archiver.kernel.org>; Wed, 20 Sep 2023 10:29:26 +0000 (UTC)
-Received: from mail-lj1-f179.google.com (mail-lj1-f179.google.com [209.85.208.179])
- by mx.groups.io with SMTP id smtpd.web11.34511.1695205766147579745
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E6F9CE79D6
+	for <webhook@archiver.kernel.org>; Wed, 20 Sep 2023 14:17:32 +0000 (UTC)
+Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
+ by mx.groups.io with SMTP id smtpd.web10.40829.1695219441892750751
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Sep 2023 03:29:26 -0700
+ Wed, 20 Sep 2023 07:17:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=W+qb+PT+;
- spf=pass (domain: gmail.com, ip: 209.85.208.179, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lj1-f179.google.com with SMTP id 38308e7fff4ca-2ba1e9b1fa9so109274951fa.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 20 Sep 2023 03:29:25 -0700 (PDT)
+ dkim=pass header.i=@theyoctojester-info.20230601.gappssmtp.com header.s=20230601 header.b=U+iL3dK8;
+ spf=none, err=permanent DNS error (domain: theyoctojester.info, ip: 209.85.208.47, mailfrom: jester@theyoctojester.info)
+Received: by mail-ed1-f47.google.com with SMTP id 4fb4d7f45d1cf-51e28cac164so2135267a12.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 20 Sep 2023 07:17:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1695205764; x=1695810564; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=i5tMr395ZuUKa/90HlcrRDcUvOgNegUhpclSqzGVdiw=;
-        b=W+qb+PT+rVlkPNK/YolmnDtBwnDhPTYR6L1+x8hI/aFrTsQywz7tGeehe3lXnDdSto
-         7agppsCn0Z9yFBHh/Vj/QiujBKEONru4IekKEoYRPqpfPdS4Cfz/tywmyRSq9AELzE9Y
-         NO5oatexH2GZC0yMj9f9Z/flEtGa8Nmvi0IYTAyA+xDGBV1+il0Pv4RYL93Bx200wVaN
-         dKVxjVtJbX31/Lj0byY6R+kolOtv614LHNBUSCOf6u6/bGOCXiZhJwoSMJaZlGkFrVEA
-         EbC/Xo7PzEnJgCs9iA/06dEvQLAdOd3jFksIR5XEqyj8DLwRFUt/lw508SYhphb/iohl
-         LXmQ==
+        d=theyoctojester-info.20230601.gappssmtp.com; s=20230601; t=1695219440; x=1695824240; darn=lists.openembedded.org;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=IJdAztqFRUOiRQTDZKhrjRaZ+PYJlBespXmIrYQL0eA=;
+        b=U+iL3dK8rzsnfE72hO9DaGQA0DGPW2PyMTezzEUStMoj+YeYJ6+CDoibkf35Ii+ZbX
+         drBGUIVSeCGSWlt3l8RSfCXNTZl4w9hbXxTB6NAPKDQ2upz2bVNkevvKku7UvyqeXF7V
+         NNthrJyCTwQI6vf3H+YQSyNzDUAT+hNgtwqq2wA4WyIK85SfsFMgu9/nPBlrF8R+AALG
+         BorY4Y1aC6z9bG8I4aGIgzsAFPyG2bCKwpGTSJ0hxNmMSTKmF3nwb+SqsJJxYvD59PJm
+         PBELmxP+k5zAP3Wy81zw/oipn1peyJvinR5wMVDPJY09cYCn/HUZ2demaV6BGxpWRlrH
+         7BTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695205764; x=1695810564;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=i5tMr395ZuUKa/90HlcrRDcUvOgNegUhpclSqzGVdiw=;
-        b=AVrrhhSHOroufhmRatUvOSVbzWF+/tmEjwQc6duushtGa0B9Rkf2BjetkNNcVTbPup
-         WeILuzwOJ5z/jRbKaLlX6Bbv9CFoyae8zQ2BkMMy10ZtCudB2etG/zEoAPXOhtA5aE4b
-         lGWq9Yo9bS14LmwMMVw2nqm6YgvWcgr9cc/MM/L3VT5qFDFt1wvfemmMNMckPyOLugy4
-         QkHUMUdOtmrl5DLF9/o1u8rlnmxvbTKUd65q6ryghjvl5QaNZYTEbcByEEwSsX2+pfhs
-         5Oq5YzZHUeHk3YrT5YVfeeBrnX5ol7Tfqo05p/lDyxo1uDvOnf7Lmg7A7h8d5VhRqhJs
-         eg9w==
-X-Gm-Message-State: AOJu0YwhJI84AI1nYde0ZTeDVbD9ktCfVnTrb2j5hX+CMq0dEOpUr7PU
-	gN/XION2X+ALaX+o9JKg5FdNyYt1Zyo=
-X-Google-Smtp-Source: AGHT+IFt3zjCBbbIO07Rnjvrkdz+y46Zs7588h1xDKq35MP02YSeMmxJ1EQMRqSz0HUfEOeCZ+eygg==
-X-Received: by 2002:a2e:8785:0:b0:2bf:7dac:a51 with SMTP id n5-20020a2e8785000000b002bf7dac0a51mr1677266lji.51.1695205764236;
-        Wed, 20 Sep 2023 03:29:24 -0700 (PDT)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id cf20-20020a170906b2d400b0099bd453357esm9080642ejb.41.2023.09.20.03.29.23
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 20 Sep 2023 03:29:23 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][PATCH 6/6] ot-br-posix: exclude siggen dependency on ipset
-Date: Wed, 20 Sep 2023 12:29:15 +0200
-Message-ID: <20230920102915.1269280-6-martin.jansa@gmail.com>
-X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20230920102915.1269280-1-martin.jansa@gmail.com>
-References: <20230920102915.1269280-1-martin.jansa@gmail.com>
+        d=1e100.net; s=20230601; t=1695219440; x=1695824240;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=IJdAztqFRUOiRQTDZKhrjRaZ+PYJlBespXmIrYQL0eA=;
+        b=ZrECUo5U6W7xy/g5Trtpx/j8vTzizhcLrb6V0LD3e3lxdhhoX5q0TA5VE3vfzSfnR+
+         8UK3jBrJUwbwYFh3KaTiJfrQ3T5pv7FbayXk2dVYhprLeDGlKGI5cyI80VBta6nVgAIe
+         i9FBXMxmL/i7T7pMAa3nNCbE+GgLWwuaNVK/ciZRKd79Rfp8OpPnnJeBdo8+9bshxmue
+         px6BqAvccJxfCvQWPce6ukEucuZhLH47I0RqNPPVjpYqPoBemXM+kGLsF0qrzAaztcYs
+         7usB/AQc3NE6N00lz49U8ELfkZhCoGd6XqNxC7EynzbS7WxPoZC32b9N3NK7STp1951R
+         vSZg==
+X-Gm-Message-State: AOJu0YzJNzMqVrG+9lK2zSlC29BsL0aVL6PD2YkUeBn00nvAQtAiXuuc
+	kb7Hle1ZOvpFDwwlLY/SCeR3addHQkC8ZpWny3DsDnJpHlXUUqkW4eQW4A==
+X-Google-Smtp-Source: AGHT+IFkDN+uDeFHiaLrHt0M4thONG33wpoM+Zceal3rSiRI0eNjzZy1Qk3dmeOOeeRHMDr56Gf1sMB6mhLyRLaKLI0=
+X-Received: by 2002:a05:6402:5242:b0:527:1855:be59 with SMTP id
+ t2-20020a056402524200b005271855be59mr7637965edd.3.1695219440000; Wed, 20 Sep
+ 2023 07:17:20 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: Josef Holzmayr <jester@theyoctojester.info>
+Date: Wed, 20 Sep 2023 16:16:54 +0200
+Message-ID: <CAEt6NwpLj4EPmZPQZ+YsAfThd3S_1QE2pNkF=ZNVidKf9qAaSQ@mail.gmail.com>
+Subject: OEDvM / TSC news
+To: openembedded-devel@lists.openembedded.org, 
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="00000000000089b8080605cb085e"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 20 Sep 2023 10:29:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105013
+ <openembedded-devel@lists.openembedded.org>; Wed, 20 Sep 2023 14:17:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105014
 
-* ipset is MACHINE_ARCH because inherits module-base.bbclass
-* fixes:
-  bitbake-diffsigs \
-    sstate-before/hammerhead-halium/cortexa8t2hf-neon-halium-webos-linux-gnueabi/ot-br-posix/0.3.0+git.do_package_write_ipk.sigdata.48e7c1f619a5069d7aef82321e09d5598873d41cf561d3af1cffc94732dcacf0 \
-    sstate-before/mako/cortexa8t2hf-neon-halium-webos-linux-gnueabi/ot-br-posix/0.3.0+git.do_package_write_ipk.sigdata.9e0988bdeaf607e7de39a2fc307129ef41b57170cd775805eee46f0f5f89b80c
-  Hash for task dependency ipset:do_packagedata changed from 5d72520e773137ba1d716eeca111fce4355169ed18e4c81b5e5d764abf569f18 to 89ad5bdbdc7bd3fb72625cb963aff2c794da51fe2f70ecbfb34b9cff9b1b9308
+--00000000000089b8080605cb085e
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
----
- meta-networking/conf/layer.conf | 1 +
- 1 file changed, 1 insertion(+)
+Hello my fellow OpenEmbedded aficionados, users, and developers!
 
-diff --git a/meta-networking/conf/layer.conf b/meta-networking/conf/layer.conf
-index ea6d9c9479..2343179a62 100644
---- a/meta-networking/conf/layer.conf
-+++ b/meta-networking/conf/layer.conf
-@@ -23,6 +23,7 @@ LICENSE_PATH += "${LAYERDIR}/licenses"
- SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
-   wireguard-tools->wireguard-module \
-   mdio-tools->mdio-netlink \
-+  ot-br-posix->ipset \
- "
- BBFILES_DYNAMIC += " \
-     meta-python:${LAYERDIR}/dynamic-layers/meta-python/recipes-*/*/*.bb \
--- 
-2.42.0
+You might have noticed that the OEDvM is coming up on December 1st, 2023
+(see https://www.openembedded.org/wiki/OEDvM_2023.12)
+You also might have noticed that the TSC (Technical Steering Committee)
+elections are in full motion already.
 
+If both assumptions apply to you - congratulations!
+
+If not, consider joining the OpenEmbedded organization.
+As outlined at https://www.openembedded.org/wiki/Organization#Membership,
+it gives you a very direct way to influence the direction of the project.
+Not only through code, but also as a person, and an opinion. You are
+invited to join, regardless of your affiliation, or your contributions. We
+would like to have YOU, as the kind of person that you are.
+
+Feel interested? Reach out to either the board or me, and we are happy to
+talk!
+
+Greetz,
+Josef - on behalf of the OE board
+
+--00000000000089b8080605cb085e
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hello my fellow OpenEmbedded aficionados, users, and devel=
+opers!<div><br></div><div>You might have noticed that the OEDvM is coming u=
+p on December 1st, 2023 (see=C2=A0<a href=3D"https://www.openembedded.org/w=
+iki/OEDvM_2023.12">https://www.openembedded.org/wiki/OEDvM_2023.12</a>)</di=
+v><div>You also might have noticed that the TSC (Technical Steering Committ=
+ee) elections are in full motion already.</div><div><br></div><div>If both =
+assumptions apply to you - congratulations!</div><div><br></div><div>If not=
+, consider joining the OpenEmbedded organization.=C2=A0</div><div>As outlin=
+ed at=C2=A0<a href=3D"https://www.openembedded.org/wiki/Organization#Member=
+ship">https://www.openembedded.org/wiki/Organization#Membership</a>, it giv=
+es you a very direct way to influence the direction of the project. Not onl=
+y through code, but also as a person, and an opinion. You are invited to jo=
+in, regardless of your affiliation, or your contributions. We would like to=
+ have YOU, as the kind of person that you are.</div><div><br></div><div>Fee=
+l interested? Reach out to either the board or me, and we are happy to talk=
+!</div><div><br></div><div>Greetz,</div><div>Josef - on behalf of the OE bo=
+ard</div></div>
+
+--00000000000089b8080605cb085e--
 
