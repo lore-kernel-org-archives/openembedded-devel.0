@@ -1,124 +1,135 @@
-Return-Path: <pdoshi@mvista.com>
+Return-Path: <chee.yang.lee@intel.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B5C43CD4F4B
-	for <webhook@archiver.kernel.org>; Fri, 22 Sep 2023 10:10:49 +0000 (UTC)
-Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
- by mx.groups.io with SMTP id smtpd.web11.18432.1695377441242815265
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F562CD4F53
+	for <webhook@archiver.kernel.org>; Fri, 22 Sep 2023 10:19:30 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.24])
+ by mx.groups.io with SMTP id smtpd.web11.18544.1695377960065652485
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 Sep 2023 03:10:41 -0700
+ Fri, 22 Sep 2023 03:19:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=g4YudUkV;
- spf=pass (domain: mvista.com, ip: 209.85.210.173, mailfrom: pdoshi@mvista.com)
-Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-690b8859c46so1733574b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 22 Sep 2023 03:10:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1695377440; x=1695982240; darn=lists.openembedded.org;
-        h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=3FRVMpefvgOE/I8kl3gD7X4GraiO6zHFqCM5pf/XyK0=;
-        b=g4YudUkVSjM8ioPsxxxF/GmgbnlNo2njcjKWqN5QLOXH5Oq19uXl+xYL8SMy144lzA
-         OjwGoyGh1c79+Kx0aLafS531yxmRLXKfYdGXKTEzLqFdCMUPLMVMzYbefRiw5HMlVpq+
-         Od1M5mO4aNKGijbZ2WwkgpPaieQQtovlvLH0s=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695377440; x=1695982240;
-        h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=3FRVMpefvgOE/I8kl3gD7X4GraiO6zHFqCM5pf/XyK0=;
-        b=pGJkyAaXE5uq0w/Xol8kACbj/27GFv07W3WGb1UIKSplnJ45EdImOY8+PdkeWab8Kq
-         s0ccwPjV3RLApYh5k3/JkxFc+F9uIo3wRvHauP0GDoLOKk+vq/6ds8BMiUBzJZy4tce5
-         TsUvi7eH6/fvmWmWbDsKaYB8gPjXdVsa38KvB9Uusbb3vqoyTCI3PUUIpTZVg9Udt/8+
-         XU++AljzMouWmamt4UBBygCuOzjRhorIn/fJkWHXcPt7lfbSq7akxs0oEKn7EEYkEadQ
-         1IKjdR9YvcVUli8EgDzBAdQqOCdeO1v5GyV8wWFHcQKGMPFEcagnGiqoLb8TpgkfF8gc
-         xefg==
-X-Gm-Message-State: AOJu0YxoItD4Tn2xn1Y7kyWua/0sAMkxu57Y8kx8oiJAOsIl5Yj4uYjx
-	G5JjI+V4+iTgjGaAZqMdNprKtXfsvpOQABsWhL8=
-X-Google-Smtp-Source: AGHT+IE5LYZp0xPpYo4xIac8UC0zVnH4hEUrjfMTijofUqHDu6ErqDALzIfRsNHbme5Cb6xzVXQGAA==
-X-Received: by 2002:a05:6a00:16d1:b0:68c:5cec:30d4 with SMTP id l17-20020a056a0016d100b0068c5cec30d4mr8781816pfc.27.1695377440368;
-        Fri, 22 Sep 2023 03:10:40 -0700 (PDT)
-Received: from localhost.localdomain ([182.74.28.237])
-        by smtp.gmail.com with ESMTPSA id 22-20020aa79216000000b00690dbab1623sm2838939pfo.81.2023.09.22.03.10.38
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Fri, 22 Sep 2023 03:10:39 -0700 (PDT)
-From: pdoshi@mvista.com
+ dkim=pass header.i=@intel.com header.s=Intel header.b=ev8OwRZB;
+ spf=pass (domain: intel.com, ip: 134.134.136.24, mailfrom: chee.yang.lee@intel.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1695377960; x=1726913960;
+  h=from:to:subject:date:message-id:in-reply-to:references:
+   mime-version:content-transfer-encoding;
+  bh=TT/9l7BMAnIIlpnnAR5cXTc3VrPh/JTiQt1lKQgQfyQ=;
+  b=ev8OwRZBa1s7IZpWvh88vJMfEhRTRTGMAf3h4VxbykfztY4Nz2Y/PuxD
+   3IktMF/f75cKpUisN5qd2UgaD+JCxMTr6p4fkOvsjVvm8V87jX1ewfj5z
+   /c4btq+W2NrgxUdR1xE/yzlfaDvXCtcroX/FxDAjhplgpz75ljECJMoac
+   zAo6g545V+vWVr5jLL2Ya5LkPA3IaIeyIhrsO1xp+24noJsSpGUlWTMg6
+   TMVPibyVzkJkaB6RkL5mXSDk/FnCgY8iaC9Urns+KqwA3D+yPfe4YTjFd
+   t3JVyN2FxdCqIvefqIeJaQutPIdiuwqH+64wGiv1q1NoIIuvJJxWh7m0J
+   g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10840"; a="383542992"
+X-IronPort-AV: E=Sophos;i="6.03,167,1694761200"; 
+   d="scan'208";a="383542992"
+Received: from fmsmga004.fm.intel.com ([10.253.24.48])
+  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Sep 2023 03:19:20 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10840"; a="817729064"
+X-IronPort-AV: E=Sophos;i="6.03,167,1694761200"; 
+   d="scan'208";a="817729064"
+Received: from andromeda02.png.intel.com ([10.221.253.198])
+  by fmsmga004.fm.intel.com with ESMTP; 22 Sep 2023 03:19:19 -0700
+From: chee.yang.lee@intel.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Priyal Doshi <pdoshi@mvista.com>
-Subject: [oe] [meta-oe][dunfell][PATCH v2] open-vm-tools: Security fix for  CVE-2023-20900
-Date: Fri, 22 Sep 2023 15:40:30 +0530
-Message-Id: <1695377430-11566-1-git-send-email-pdoshi@mvista.com>
-X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH 2/5] iniparser: Fix CVE-2023-33461
+Date: Fri, 22 Sep 2023 17:59:38 +0800
+Message-Id: <20230922095941.3958983-2-chee.yang.lee@intel.com>
+X-Mailer: git-send-email 2.37.3
+In-Reply-To: <20230922095941.3958983-1-chee.yang.lee@intel.com>
+References: <20230922095941.3958983-1-chee.yang.lee@intel.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 22 Sep 2023 10:10:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105049
+ <openembedded-devel@lists.openembedded.org>; Fri, 22 Sep 2023 10:19:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105051
 
-From: Priyal Doshi <pdoshi@mvista.com>
+From: Lee Chee Yang <chee.yang.lee@intel.com>
 
-Backport-from: https://github.com/vmware/open-vm-tools/commit/74b6d0d9000eda1a2c8f31c40c725fb0b8520b16
-
-Signed-off-by: Priyal Doshi <pdoshi@mvista.com>
+Signed-off-by: Lee Chee Yang <chee.yang.lee@intel.com>
 ---
- ...X509-certs-to-verify-the-SAML-token-signa.patch | 35 ++++++++++++++++++++++
- .../open-vm-tools/open-vm-tools_11.0.1.bb          |  1 +
- 2 files changed, 36 insertions(+)
- create mode 100644 meta-oe/recipes-support/open-vm-tools/open-vm-tools/0001-Allow-only-X509-certs-to-verify-the-SAML-token-signa.patch
+ .../iniparser/iniparser/CVE-2023-33461.patch  | 48 +++++++++++++++++++
+ .../iniparser/iniparser_4.1.bb                |  4 +-
+ 2 files changed, 51 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/iniparser/iniparser/CVE-2023-33461.patch
 
-diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools/0001-Allow-only-X509-certs-to-verify-the-SAML-token-signa.patch b/meta-oe/recipes-support/open-vm-tools/open-vm-tools/0001-Allow-only-X509-certs-to-verify-the-SAML-token-signa.patch
+diff --git a/meta-oe/recipes-support/iniparser/iniparser/CVE-2023-33461.patch b/meta-oe/recipes-support/iniparser/iniparser/CVE-2023-33461.patch
 new file mode 100644
-index 0000000..38daa05
+index 0000000000..db5fb06aac
 --- /dev/null
-+++ b/meta-oe/recipes-support/open-vm-tools/open-vm-tools/0001-Allow-only-X509-certs-to-verify-the-SAML-token-signa.patch
-@@ -0,0 +1,35 @@
-+From 7f3cced1e140ed36c6f8f66d7f4098323b0463b2 Mon Sep 17 00:00:00 2001
-+From: Katy Feng <fkaty@vmware.com>
-+Date: Fri, 25 Aug 2023 11:58:48 -0700
-+Subject: [PATCH] Allow only X509 certs to verify the SAML token signature.
++++ b/meta-oe/recipes-support/iniparser/iniparser/CVE-2023-33461.patch
+@@ -0,0 +1,48 @@
++CVE: CVE-2023-33461
++Upstream-Status: Backport [https://github.com/ndevilla/iniparser/pull/146/commits/ace9871f65d11b5d73f0b9ee8cf5d2807439442d]
++Signed-off-by: Lee Chee Yang <chee.yang.lee@intel.com>
 +
-+Upstream-Status: Backport from https://github.com/vmware/open-vm-tools/commit/74b6d0d9000eda1a2c8f31c40c725fb0b8520b16
-+CVE:  CVE-2023-20900
-+Signed-off-by: Priyal Doshi <pdoshi@mvista.com>
++
++From ace9871f65d11b5d73f0b9ee8cf5d2807439442d Mon Sep 17 00:00:00 2001
++From: Antonio <antoniolrt@gmail.com>
++Date: Fri, 2 Jun 2023 15:03:10 -0300
++Subject: [PATCH] Handle null return from iniparser_getstring
++
++Fix handling of NULL returns from iniparser_getstring in
++iniparser_getboolean, iniparser_getlongint and iniparser_getdouble,
++avoiding a crash.
 +---
-+ open-vm-tools/vgauth/serviceImpl/saml-xmlsec1.c | 9 ++++++++-
-+ 1 file changed, 8 insertions(+), 1 deletion(-)
++ src/iniparser.c | 6 +++---
++ 1 file changed, 3 insertions(+), 3 deletions(-)
 +
-+diff --git a/open-vm-tools/vgauth/serviceImpl/saml-xmlsec1.c b/open-vm-tools/vgauth/serviceImpl/saml-xmlsec1.c
-+index 2906d29..57db3b8 100644
-+--- a/open-vm-tools/vgauth/serviceImpl/saml-xmlsec1.c
-++++ b/open-vm-tools/vgauth/serviceImpl/saml-xmlsec1.c
-+@@ -1275,7 +1275,14 @@ VerifySignature(xmlDocPtr doc,
-+     */
-+    bRet = RegisterID(xmlDocGetRootElement(doc), "ID");
-+    if (bRet == FALSE) {
-+-      g_warning("failed to register ID\n");
-++      g_warning("Failed to register ID\n");
-++      goto done;
-++   }
-++
-++   /* Use only X509 certs to validate the signature */
-++   if (xmlSecPtrListAdd(&(dsigCtx->keyInfoReadCtx.enabledKeyData),
-++                        BAD_CAST xmlSecKeyDataX509Id) < 0) {
-++      g_warning("Failed to limit allowed key data\n");
-+       goto done;
-+    }
++diff --git a/src/iniparser.c b/src/iniparser.c
++index f1d1658..dbceb20 100644
++--- a/src/iniparser.c
+++++ b/src/iniparser.c
++@@ -456,7 +456,7 @@ long int iniparser_getlongint(const dictionary * d, const char * key, long int n
++     const char * str ;
 + 
-+-- 
-+2.7.4
-+
-diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools_11.0.1.bb b/meta-oe/recipes-support/open-vm-tools/open-vm-tools_11.0.1.bb
-index 9a1b3f4..e3b15e3 100644
---- a/meta-oe/recipes-support/open-vm-tools/open-vm-tools_11.0.1.bb
-+++ b/meta-oe/recipes-support/open-vm-tools/open-vm-tools_11.0.1.bb
-@@ -44,6 +44,7 @@ SRC_URI = "git://github.com/vmware/open-vm-tools.git;protocol=https;branch=maste
-     file://0001-utilBacktrace-Ignore-Warray-bounds.patch;patchdir=.. \
-     file://0001-hgfsmounter-Makefile.am-support-usrmerge.patch;patchdir=.. \
-     file://0001-Properly-check-authorization-on-incoming-guestOps-re.patch;patchdir=.. \
-+    file://0001-Allow-only-X509-certs-to-verify-the-SAML-token-signa.patch;patchdir=.. \
- "
++     str = iniparser_getstring(d, key, INI_INVALID_KEY);
++-    if (str==INI_INVALID_KEY) return notfound ;
+++    if (str==NULL || str==INI_INVALID_KEY) return notfound ;
++     return strtol(str, NULL, 0);
++ }
++ 
++@@ -511,7 +511,7 @@ double iniparser_getdouble(const dictionary * d, const char * key, double notfou
++     const char * str ;
++ 
++     str = iniparser_getstring(d, key, INI_INVALID_KEY);
++-    if (str==INI_INVALID_KEY) return notfound ;
+++    if (str==NULL || str==INI_INVALID_KEY) return notfound ;
++     return atof(str);
++ }
++ 
++@@ -553,7 +553,7 @@ int iniparser_getboolean(const dictionary * d, const char * key, int notfound)
++     const char * c ;
++ 
++     c = iniparser_getstring(d, key, INI_INVALID_KEY);
++-    if (c==INI_INVALID_KEY) return notfound ;
+++    if (c==NULL || c==INI_INVALID_KEY) return notfound ;
++     if (c[0]=='y' || c[0]=='Y' || c[0]=='1' || c[0]=='t' || c[0]=='T') {
++         ret = 1 ;
++     } else if (c[0]=='n' || c[0]=='N' || c[0]=='0' || c[0]=='f' || c[0]=='F') {
+diff --git a/meta-oe/recipes-support/iniparser/iniparser_4.1.bb b/meta-oe/recipes-support/iniparser/iniparser_4.1.bb
+index f9e1530161..5e42cdcb06 100644
+--- a/meta-oe/recipes-support/iniparser/iniparser_4.1.bb
++++ b/meta-oe/recipes-support/iniparser/iniparser_4.1.bb
+@@ -10,7 +10,9 @@ PV .= "+git${SRCPV}"
  
- SRCREV = "d3edfd142a81096f9f58aff17d84219b457f4987"
+ SRC_URI = "git://github.com/ndevilla/iniparser.git;protocol=https;branch=master \
+            file://0001-iniparser.pc-Make-libpath-a-variable.patch \
+-	   file://Add-CMake-support.patch"
++	   file://Add-CMake-support.patch \
++           file://CVE-2023-33461.patch \
++"
+ 
+ SRCREV= "deb85ad4936d4ca32cc2260ce43323d47936410d"
+ 
 -- 
-2.7.4
+2.37.3
 
 
