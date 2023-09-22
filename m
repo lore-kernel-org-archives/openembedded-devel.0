@@ -2,44 +2,44 @@ Return-Path: <chee.yang.lee@intel.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3AE9CCD4F52
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 53378CD4F57
 	for <webhook@archiver.kernel.org>; Fri, 22 Sep 2023 10:19:30 +0000 (UTC)
 Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.24])
  by mx.groups.io with SMTP id smtpd.web11.18544.1695377960065652485
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 Sep 2023 03:19:21 -0700
+ Fri, 22 Sep 2023 03:19:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@intel.com header.s=Intel header.b=T/JNkU7X;
+ dkim=pass header.i=@intel.com header.s=Intel header.b=U5fMFXA4;
  spf=pass (domain: intel.com, ip: 134.134.136.24, mailfrom: chee.yang.lee@intel.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1695377961; x=1726913961;
+  t=1695377962; x=1726913962;
   h=from:to:subject:date:message-id:in-reply-to:references:
    mime-version:content-transfer-encoding;
-  bh=GSBj/qQIB7N75MAawaHt87WtZc7+NVxTD0iMy8WOsnY=;
-  b=T/JNkU7XMavT4tZuTyFBf6U7zenc/KOHhICQw2ja+SEvgfIButoXT1yi
-   c+wJ8bf3a/QV1junFv2RJDGS+Rhsywst/4EIdjaCoI4PvOpui/Jdjm/H0
-   TORn4IFpWMa2X6TQNiDUU0h3mH2TbTNS8dkzcDKWJ7eX6oyjgIqD9PUcZ
-   ZlKJMi1J1MXWpIppW3Rzx09M+PU/vY7Pz9qX0EnndWgwz4dsun5MkPJyj
-   4Yj+WyI4Pgi6teiwwEfPU/1sTDJNrrTOOCHp3zj2xz7Hhbp3+YTjYIom0
-   jtRdRYYNuSBfuDeTvaXBjmJJxKNeQyY5iaAiyDWlT6gq/dkCbb6+VJKZ3
-   A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10840"; a="383542998"
+  bh=PlLTunGcGceN0tGR+eFkFfTlgh3l2o8lUOqvJOSCWKU=;
+  b=U5fMFXA4zb/U/ZMC3kWShwnkcBh5ZszbJZU9ZPVLPLQJnNAhNx6rQC2C
+   OnqZzETx+cvTc/4B669rHVnMfIBL31MYh1NswFt2dg2Q4F5iZ0mlvm85q
+   xiSxLtkcPcL4/jXcsjlMY1GYN8UbX8yH05Lk2fSN9ZF5v4+zfy3ssAIZh
+   7fVxjyhfXm0bu9iIPTVBTkgbpECFpwwGvXvvBOEOehv8FyLUzHT2iQCQA
+   QkXay7xKRFqS36ZPjXLQtkUirueFRESmqrsQ3wCQlQea5Oqm/CTNBylhL
+   rt82fmp6DVLUN88MY0dap3Y5ItHs13YnTkgz1lKMKAStX4dAARcp8sjG2
+   g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10840"; a="383542999"
 X-IronPort-AV: E=Sophos;i="6.03,167,1694761200"; 
-   d="scan'208";a="383542998"
+   d="scan'208";a="383542999"
 Received: from fmsmga004.fm.intel.com ([10.253.24.48])
   by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Sep 2023 03:19:21 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10840"; a="817729065"
+X-IronPort-AV: E=McAfee;i="6600,9927,10840"; a="817729066"
 X-IronPort-AV: E=Sophos;i="6.03,167,1694761200"; 
-   d="scan'208";a="817729065"
+   d="scan'208";a="817729066"
 Received: from andromeda02.png.intel.com ([10.221.253.198])
-  by fmsmga004.fm.intel.com with ESMTP; 22 Sep 2023 03:19:20 -0700
+  by fmsmga004.fm.intel.com with ESMTP; 22 Sep 2023 03:19:21 -0700
 From: chee.yang.lee@intel.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 3/5] opensc: fix CVE-2023-2977
-Date: Fri, 22 Sep 2023 17:59:39 +0800
-Message-Id: <20230922095941.3958983-3-chee.yang.lee@intel.com>
+Subject: [meta-oe][PATCH 4/5] x11vnc: Fix CVE-2020-29074
+Date: Fri, 22 Sep 2023 17:59:40 +0800
+Message-Id: <20230922095941.3958983-4-chee.yang.lee@intel.com>
 X-Mailer: git-send-email 2.37.3
 In-Reply-To: <20230922095941.3958983-1-chee.yang.lee@intel.com>
 References: <20230922095941.3958983-1-chee.yang.lee@intel.com>
@@ -49,88 +49,61 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 22 Sep 2023 10:19:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105052
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105053
 
 From: Lee Chee Yang <chee.yang.lee@intel.com>
 
 Signed-off-by: Lee Chee Yang <chee.yang.lee@intel.com>
 ---
- .../opensc/files/CVE-2023-2977.patch          | 54 +++++++++++++++++++
- .../recipes-support/opensc/opensc_0.23.0.bb   |  1 +
- 2 files changed, 55 insertions(+)
- create mode 100644 meta-oe/recipes-support/opensc/files/CVE-2023-2977.patch
+ .../x11vnc/files/CVE-2020-29074.patch         | 27 +++++++++++++++++++
+ .../recipes-graphics/x11vnc/x11vnc_0.9.16.bb  |  1 +
+ 2 files changed, 28 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/x11vnc/files/CVE-2020-29074.patch
 
-diff --git a/meta-oe/recipes-support/opensc/files/CVE-2023-2977.patch b/meta-oe/recipes-support/opensc/files/CVE-2023-2977.patch
+diff --git a/meta-oe/recipes-graphics/x11vnc/files/CVE-2020-29074.patch b/meta-oe/recipes-graphics/x11vnc/files/CVE-2020-29074.patch
 new file mode 100644
-index 0000000000..165fc316bf
+index 0000000000..fbdb9123cc
 --- /dev/null
-+++ b/meta-oe/recipes-support/opensc/files/CVE-2023-2977.patch
-@@ -0,0 +1,54 @@
-+CVE: CVE-2023-2977
-+Upstream-Status: Backport [ https://github.com/OpenSC/OpenSC/commit/81944d1529202bd28359bede57c0a15deb65ba8a ]
++++ b/meta-oe/recipes-graphics/x11vnc/files/CVE-2020-29074.patch
+@@ -0,0 +1,27 @@
++CVE: CVE-2020-29074
++Upstream-Status: Backport [https://github.com/LibVNC/x11vnc/commit/69eeb9f7baa14ca03b16c9de821f9876def7a36a ]
 +Signed-off-by: Lee Chee Yang <chee.yang.lee@intel.com>
 +
 +
-+From 81944d1529202bd28359bede57c0a15deb65ba8a Mon Sep 17 00:00:00 2001
-+From: fullwaywang <fullwaywang@tencent.com>
-+Date: Mon, 29 May 2023 10:38:48 +0800
-+Subject: [PATCH] pkcs15init: correct left length calculation to fix buffer
-+ overrun bug. Fixes #2785
++From 69eeb9f7baa14ca03b16c9de821f9876def7a36a Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Gu=C3=A9nal=20DAVALAN?= <guenal.davalan@uca.fr>
++Date: Wed, 18 Nov 2020 08:40:45 +0100
++Subject: [PATCH] scan: limit access to shared memory segments to current user
 +
 +---
-+ src/pkcs15init/pkcs15-cardos.c | 10 +++++-----
-+ 1 file changed, 5 insertions(+), 5 deletions(-)
++ src/scan.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/src/pkcs15init/pkcs15-cardos.c b/src/pkcs15init/pkcs15-cardos.c
-+index 9715cf390f..f41f73c349 100644
-+--- a/src/pkcs15init/pkcs15-cardos.c
-++++ b/src/pkcs15init/pkcs15-cardos.c
-+@@ -872,7 +872,7 @@ static int cardos_have_verifyrc_package(sc_card_t *card)
-+ 	sc_apdu_t apdu;
-+         u8        rbuf[SC_MAX_APDU_BUFFER_SIZE];
-+         int       r;
-+-	const u8  *p = rbuf, *q;
-++	const u8  *p = rbuf, *q, *pp;
-+ 	size_t    len, tlen = 0, ilen = 0;
++diff --git a/src/scan.c b/src/scan.c
++index 43e00d20..12994d52 100644
++--- a/src/scan.c
+++++ b/src/scan.c
++@@ -320,7 +320,7 @@ static int shm_create(XShmSegmentInfo *shm, XImage **ximg_ptr, int w, int h,
 + 
-+ 	sc_format_apdu(card, &apdu, SC_APDU_CASE_2_SHORT, 0xca, 0x01, 0x88);
-+@@ -888,13 +888,13 @@ static int cardos_have_verifyrc_package(sc_card_t *card)
-+ 		return 0;
++ #if HAVE_XSHM
++ 	shm->shmid = shmget(IPC_PRIVATE,
++-	    xim->bytes_per_line * xim->height, IPC_CREAT | 0777);
+++	    xim->bytes_per_line * xim->height, IPC_CREAT | 0600);
 + 
-+ 	while (len != 0) {
-+-		p = sc_asn1_find_tag(card->ctx, p, len, 0xe1, &tlen);
-+-		if (p == NULL)
-++		pp = sc_asn1_find_tag(card->ctx, p, len, 0xe1, &tlen);
-++		if (pp == NULL)
-+ 			return 0;
-+ 		if (card->type == SC_CARD_TYPE_CARDOS_M4_3)	{
-+ 			/* the verifyRC package on CardOS 4.3B use Manufacturer ID 0x01	*/
-+ 			/* and Package Number 0x07					*/
-+-			q = sc_asn1_find_tag(card->ctx, p, tlen, 0x01, &ilen);
-++			q = sc_asn1_find_tag(card->ctx, pp, tlen, 0x01, &ilen);
-+ 			if (q == NULL || ilen != 4)
-+ 				return 0;
-+ 			if (q[0] == 0x07)
-+@@ -902,7 +902,7 @@ static int cardos_have_verifyrc_package(sc_card_t *card)
-+ 		} else if (card->type == SC_CARD_TYPE_CARDOS_M4_4)	{
-+ 			/* the verifyRC package on CardOS 4.4 use Manufacturer ID 0x03	*/
-+ 			/* and Package Number 0x02					*/
-+-			q = sc_asn1_find_tag(card->ctx, p, tlen, 0x03, &ilen);
-++			q = sc_asn1_find_tag(card->ctx, pp, tlen, 0x03, &ilen);
-+ 			if (q == NULL || ilen != 4)
-+ 				return 0;
-+ 			if (q[0] == 0x02)
-diff --git a/meta-oe/recipes-support/opensc/opensc_0.23.0.bb b/meta-oe/recipes-support/opensc/opensc_0.23.0.bb
-index f68107df87..b3fc1f0458 100644
---- a/meta-oe/recipes-support/opensc/opensc_0.23.0.bb
-+++ b/meta-oe/recipes-support/opensc/opensc_0.23.0.bb
-@@ -16,6 +16,7 @@ SRCREV = "5497519ea6b4af596628f8f8f2f904bacaa3148f"
- SRC_URI = "git://github.com/OpenSC/OpenSC;branch=master;protocol=https \
-            file://0001-pkcs11-tool-Fix-private-key-import.patch \
-            file://0002-pkcs11-tool-Log-more-information-on-OpenSSL-errors.patch \
-+           file://CVE-2023-2977.patch \
-           "
- DEPENDS = "virtual/libiconv openssl"
++ 	if (shm->shmid == -1) {
++ 		rfbErr("shmget(%s) failed.\n", name);
+diff --git a/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.16.bb b/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.16.bb
+index 92b3ac5f67..3633bbc26b 100644
+--- a/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.16.bb
++++ b/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.16.bb
+@@ -11,6 +11,7 @@ PV .= "+git${SRCPV}"
+ 
+ SRC_URI = "git://github.com/LibVNC/x11vnc;branch=master;protocol=https \
+            file://starting-fix.patch \
++           file://CVE-2020-29074.patch \
+            "
+ S = "${WORKDIR}/git"
  
 -- 
 2.37.3
