@@ -1,321 +1,141 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <narpat.mali@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 45E81C04AAB
-	for <webhook@archiver.kernel.org>; Fri, 22 Sep 2023 11:46:32 +0000 (UTC)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.web11.19676.1695383185684338659
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B3FFCD4942
+	for <webhook@archiver.kernel.org>; Fri, 22 Sep 2023 12:12:02 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.19579.1695384718792605914
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 Sep 2023 04:46:26 -0700
+ Fri, 22 Sep 2023 05:11:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=DFJ2IEFt;
- spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-405361bb94eso17281335e9.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 22 Sep 2023 04:46:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1695383184; x=1695987984; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=/uY9qmU1Di9OrRzuWhkDFWehL9uwyN31Y1INwqkl1YI=;
-        b=DFJ2IEFtbjRDzuxim1LXttgA6tOO1xsIMJQIOjxTLO+UIWcpJ0gT79Kr5VNumQ89lz
-         KP0GE2gMYYPeaf01dXrBDnMVh0T0x16QUpuV8tfn3pIt4Zjw25C6o+ShApjH3IOFT61I
-         ho5ygzF8Aj9xvcCNgW75lBzXrrCsouzKKZeRTwKEhu51F/3TOKZ3NTOqA/+ipcA9GyEL
-         u2U5DISDgL5BmvmqWw2Vgyy5gIvS1P0rulVgzbEsImkU7O5NfYOs9pWdWi2AGZBpVAR0
-         Si7XsJoYQbI2sfUPmg6mtE4zFKsePBrr8cT4hSsqvcuszyRnI5ZofhP9I/gMmj46GZGD
-         PJTw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695383184; x=1695987984;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=/uY9qmU1Di9OrRzuWhkDFWehL9uwyN31Y1INwqkl1YI=;
-        b=VlDgrQ1GQe/Cj5HadYmJekHAJOAGu4N8/cAxKzhntmJk9D+JAxGmUBEPfAjx/oqP6P
-         s8oPE6Fz3/MwKHAt/kUlsODW7vnpG1J/enMc0KlKKmdQfRfh3XyrFoAPjzIyWjDRwFiM
-         q1+DEqFvPrzrBnyhMQzWhtDdQqo491ULIwEFKEmoPzGNxNyrzVTzvaqqVSC90L6U4RL8
-         EsdybsuqLQgtdb7+kp/pqNRX7oDRFPoWYg/qvgMl3g1h5abM7hAuNGehjwnWXfPEvNsP
-         bTQWrP/KDBnV3PI+F1F40SuhRlmWxpc0RlDLVFPH/Q7rZ70DIIG7EOeDN7m19dap9sOX
-         2i9A==
-X-Gm-Message-State: AOJu0YyL1QmSQGWzS/6nD3l+AiCUWBbG3eLks3lqdqbkn4nMSFX+oyT5
-	u4Un2CN2kSSC+9DBFDxj/H+zR3M9A+AjGUrWP84=
-X-Google-Smtp-Source: AGHT+IEP9uWycaw/ZcquMMBbs3+Hxe2KBbeTWW3w+a8+s2kiw21TKcsLNl3MNIasQU3VYcYQi0KSNMNFoBq/CnVjAQY=
-X-Received: by 2002:a5d:4988:0:b0:319:7656:3863 with SMTP id
- r8-20020a5d4988000000b0031976563863mr7110067wrq.47.1695383183358; Fri, 22 Sep
- 2023 04:46:23 -0700 (PDT)
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=YFKgZbQD;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=7629d4ac35=narpat.mali@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 38MCBsWB012687;
+	Fri, 22 Sep 2023 05:11:54 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=gvDEe
+	VmKfkPjz5FJsRNxhzHrhtqTVuWnElxjo9SgAKE=; b=YFKgZbQDokszTtIe7PrZ9
+	zxlRL7dijY6PpfZItn7p5HGpXe+Wz/n1ouFfRkf/LXuyTH//yoJhHrgwXRwYyMzG
+	+lE+baIQV4KZ1wfqCbr96VCDhtwg9ZYSfcLDBRtStk/LUC2WXbVswRqxLcx2B/6k
+	0x5W9mI7en8OS4VnxNjazxP6u+agmuZpduvtqHJiLf7xBz2Sc3XMI6Bsb0jEUR4G
+	2W2IEG5Ze80/7D5J/cO679h/to85lnIRzM0+z2UxO7cGuplXmE459utdn8TWCWCB
+	686Xy/U8McMe+al8RRhQmvw479IN0L6vcaDnJtO5m3HKsBV3Al4XqcMTm7wNIaiY
+	A==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3t8tr5rs39-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
+	Fri, 22 Sep 2023 05:11:53 -0700 (PDT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.32; Fri, 22 Sep 2023 05:11:51 -0700
+From: nmali <narpat.mali@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <akuster808@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH 1/1] open-vm-tools: fix CVE-2023-20900
+Date: Fri, 22 Sep 2023 12:11:26 +0000
+Message-ID: <20230922121126.2352442-1-narpat.mali@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-References: <20230918045713.1751183-1-raj.khem@gmail.com>
-In-Reply-To: <20230918045713.1751183-1-raj.khem@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Fri, 22 Sep 2023 13:46:09 +0200
-Message-ID: <CA+chaQdReDjBhEFHbiVKNnhLwmccYEcBuBjaOAT=cvtJYiAv9A@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] mongodb: Upgrade to 4.4.24
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000006701530605f12810"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-ORIG-GUID: kasEzl0R5fJQv7GWme1KxmfL-QsspB4i
+X-Proofpoint-GUID: kasEzl0R5fJQv7GWme1KxmfL-QsspB4i
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-09-22_10,2023-09-21_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0 adultscore=0
+ spamscore=0 lowpriorityscore=0 malwarescore=0 bulkscore=0 mlxlogscore=999
+ clxscore=1015 suspectscore=0 priorityscore=1501 phishscore=0 mlxscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2309180000
+ definitions=main-2309220104
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 22 Sep 2023 11:46:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105058
+ <openembedded-devel@lists.openembedded.org>; Fri, 22 Sep 2023 12:12:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105059
 
---0000000000006701530605f12810
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Narpat Mali <narpat.mali@windriver.com>
 
-I'll check what changed, but just FYI in some world builds I'm now seeing
-mongodb failure:
+A malicious actor that has been granted Guest Operation Privileges
+https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-security/GUID
+-6A952214-0E5E-4CCF-9D2A-90948FF643EC.html in a target virtual machine
+may be able to elevate their privileges if that target virtual machine
+has been assigned a more privileged Guest Alias https://vdc-download.
+vmware.com/vmwb-repository/dcr-public/d1902b0e-d479-46bf-8ac9-cee0e31
+e8ec0/07ce8dbd-db48-4261-9b8f-c6d3ad8ba472/vim.vm.guest.AliasManager.html .
 
-src/mongo/util/net/http_client_curl.cpp: In function 'size_t
-mongo::{anonymous}::ReadMemoryCallback(char*, size_t, size_t, void*)':
-src/mongo/util/net/http_client_curl.cpp:172:21: error: no matching function
-for call to 'min(size_t, long unsigned int)'
-  172 |             std::min(size * nitems, static_cast<unsigned
-long>(bufReader->remaining()));
-      |
-~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2023-20900
+https://security-tracker.debian.org/tracker/CVE-2023-20900
 
-looks like only 32bit builds are affected.
+Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
+---
+ .../open-vm-tools/CVE-2023-20900.patch        | 36 +++++++++++++++++++
+ .../open-vm-tools/open-vm-tools_11.3.5.bb     |  1 +
+ 2 files changed, 37 insertions(+)
+ create mode 100644 meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2023-20900.patch
 
-On Mon, Sep 18, 2023 at 6:57=E2=80=AFAM Khem Raj <raj.khem@gmail.com> wrote=
-:
+diff --git a/meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2023-20900.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2023-20900.patch
+new file mode 100644
+index 0000000000..1b51e500aa
+--- /dev/null
++++ b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2023-20900.patch
+@@ -0,0 +1,36 @@
++From 108d81c70d0a6792847051d121a660ef3511517d Mon Sep 17 00:00:00 2001
++From: Katy Feng <fkaty@vmware.com>
++Date: Fri, 22 Sep 2023 10:15:58 +0000
++Subject: [PATCH] Allow only X509 certs to verify the SAML token signature.
++
++CVE: CVE-2023-20900
++
++Upstream-Status: Backport [https://github.com/vmware/open-vm-tools/commit/74b6d0d9000eda1a2c8f31c40c725fb0b8520b16]
++
++Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
++---
++ open-vm-tools/vgauth/serviceImpl/saml-xmlsec1.c | 9 ++++++++-
++ 1 file changed, 8 insertions(+), 1 deletion(-)
++
++diff --git a/open-vm-tools/vgauth/serviceImpl/saml-xmlsec1.c b/open-vm-tools/vgauth/serviceImpl/saml-xmlsec1.c
++index aaa5082a..ad8fe304 100644
++--- a/open-vm-tools/vgauth/serviceImpl/saml-xmlsec1.c
+++++ b/open-vm-tools/vgauth/serviceImpl/saml-xmlsec1.c
++@@ -1273,7 +1273,14 @@ VerifySignature(xmlDocPtr doc,
++     */
++    bRet = RegisterID(xmlDocGetRootElement(doc), "ID");
++    if (bRet == FALSE) {
++-      g_warning("failed to register ID\n");
+++      g_warning("Failed to register ID\n");
+++      goto done;
+++   }
+++
+++   /* Use only X509 certs to validate the signature */
+++   if (xmlSecPtrListAdd(&(dsigCtx->keyInfoReadCtx.enabledKeyData),
+++                        BAD_CAST xmlSecKeyDataX509Id) < 0) {
+++      g_warning("Failed to limit allowed key data\n");
++       goto done;
++    }
++
++--
++2.40.0
+diff --git a/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.3.5.bb b/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.3.5.bb
+index 4670a85a67..cf3af007b9 100644
+--- a/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.3.5.bb
++++ b/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.3.5.bb
+@@ -45,6 +45,7 @@ SRC_URI = "git://github.com/vmware/open-vm-tools.git;protocol=https;branch=maste
+            file://0002-hgfsServerLinux-Consider-64bit-time_t-possibility.patch;patchdir=.. \
+            file://0001-open-vm-tools-Correct-include-path-for-poll.h.patch;patchdir=.. \
+            file://0001-Properly-check-authorization-on-incoming-guestOps-re.patch;patchdir=.. \
++           file://CVE-2023-20900.patch;patchdir=.. \
+            "
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "stable-(?P<pver>\d+(\.\d+)+)"
+-- 
+2.40.0
 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  .../mongodb/mongodb/PTHREAD_STACK_MIN.patch   | 19 -------------------
->  .../recipes-dbs/mongodb/mongodb_git.bb        |  7 +++----
->  2 files changed, 3 insertions(+), 23 deletions(-)
->  delete mode 100644
-> meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/PTHREAD_ST=
-ACK_MIN.patch
->
-> diff --git
-> a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/PTHREAD_=
-STACK_MIN.patch
-> b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/PTHREAD_=
-STACK_MIN.patch
-> deleted file mode 100644
-> index f08177d7b4..0000000000
-> ---
-> a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/PTHREAD_=
-STACK_MIN.patch
-> +++ /dev/null
-> @@ -1,19 +0,0 @@
-> -PTHREAD_STACK_MIN is no longer a compile time define in glibc 2.34+ and
-> since
-> -we only care for glibc and musl where PTHREAD_STACK_MIN is always define=
-d
-> there
-> -is no need to check for constant called PTHREAD_STACK_MIN since its
-> already defined
-> -this fix may not work for wider audience but for OE needs its sufficient
-> -
-> -Upstream-Status: Inappropriate [OE-only fix]
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---- a/src/third_party/boost-1.70.0/boost/thread/pthread/thread_data.hpp
-> -+++ b/src/third_party/boost-1.70.0/boost/thread/pthread/thread_data.hpp
-> -@@ -57,9 +57,7 @@ namespace boost
-> - #else
-> -           std::size_t page_size =3D ::sysconf( _SC_PAGESIZE);
-> - #endif
-> --#if PTHREAD_STACK_MIN > 0
-> -           if (size<PTHREAD_STACK_MIN) size=3DPTHREAD_STACK_MIN;
-> --#endif
-> -           size =3D ((size+page_size-1)/page_size)*page_size;
-> -           int res =3D pthread_attr_setstacksize(&val_, size);
-> -           BOOST_VERIFY(!res && "pthread_attr_setstacksize failed");
-> diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/
-> mongodb_git.bb b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/
-> mongodb_git.bb
-> index 21051a8958..f1a508f3f2 100644
-> --- a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/
-> mongodb_git.bb
-> +++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/
-> mongodb_git.bb
-> @@ -11,9 +11,9 @@ DEPENDS =3D "openssl libpcap zlib boost curl python3 \
->
->  inherit scons dos2unix siteinfo python3native systemd useradd
->
-> -PV =3D "4.4.19"
-> -#v4.4.18
-> -SRCREV =3D "9a996e0ad993148b9650dc402e6d3b1804ad3b8a"
-> +PV =3D "4.4.24"
-> +#v4.4.24
-> +SRCREV =3D "0b86b9b7b42ad9970c5f818c527dd86c0634243a"
->  SRC_URI =3D "git://github.com/mongodb/mongo.git;branch=3Dv4.4;protocol=
-=3Dhttps
-> \
->
-> file://0001-Tell-scons-to-use-build-settings-from-environment-va.patch \
->             file://0001-Use-long-long-instead-of-int64_t.patch \
-> @@ -29,7 +29,6 @@ SRC_URI =3D "git://
-> github.com/mongodb/mongo.git;branch=3Dv4.4;protocol=3Dhttps \
->             file://0001-include-needed-c-header.patch \
->             file://disable_runtime_check.patch \
->             file://ppc64_ARCH_BITS.patch \
-> -           file://PTHREAD_STACK_MIN.patch \
->
-> file://0001-add-explict-static_cast-size_t-to-maxMemoryUsageByte.patch \
->
-> file://0001-server-Adjust-the-cache-alignment-assumptions.patch \
->
-> file://0001-The-std-lib-unary-binary_function-base-classes-are-d.patch \
-> --
-> 2.42.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#104921):
-> https://lists.openembedded.org/g/openembedded-devel/message/104921
-> Mute This Topic: https://lists.openembedded.org/mt/101427962/3617156
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> martin.jansa@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
-
---0000000000006701530605f12810
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">I&#39;ll check what changed, but just FYI in some world bu=
-ilds I&#39;m now seeing mongodb failure:<div><br></div><div>src/mongo/util/=
-net/http_client_curl.cpp: In function &#39;size_t mongo::{anonymous}::ReadM=
-emoryCallback(char*, size_t, size_t, void*)&#39;:<br>src/mongo/util/net/htt=
-p_client_curl.cpp:172:21: error: no matching function for call to &#39;min(=
-size_t, long unsigned int)&#39;<br>=C2=A0 172 | =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 std::min(size * nitems, static_cast&lt;unsigned long&gt;(buf=
-Reader-&gt;remaining()));<br>=C2=A0 =C2=A0 =C2=A0 | =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~=
-~~~~~~~~~~~~~~~~~~~~<br></div><div><br></div><div>looks like only 32bit bui=
-lds are affected.</div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr=
-" class=3D"gmail_attr">On Mon, Sep 18, 2023 at 6:57=E2=80=AFAM Khem Raj &lt=
-;<a href=3D"mailto:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt; wrote:<br=
-></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;=
-border-left:1px solid rgb(204,204,204);padding-left:1ex">Signed-off-by: Khe=
-m Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_blank">raj.khem@=
-gmail.com</a>&gt;<br>
----<br>
-=C2=A0.../mongodb/mongodb/PTHREAD_STACK_MIN.patch=C2=A0 =C2=A0| 19 --------=
------------<br>
-=C2=A0.../recipes-dbs/mongodb/<a href=3D"http://mongodb_git.bb" rel=3D"nore=
-ferrer" target=3D"_blank">mongodb_git.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=
-=C2=A0 7 +++----<br>
-=C2=A02 files changed, 3 insertions(+), 23 deletions(-)<br>
-=C2=A0delete mode 100644 meta-oe/dynamic-layers/meta-python/recipes-dbs/mon=
-godb/mongodb/PTHREAD_STACK_MIN.patch<br>
-<br>
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb=
-/PTHREAD_STACK_MIN.patch b/meta-oe/dynamic-layers/meta-python/recipes-dbs/m=
-ongodb/mongodb/PTHREAD_STACK_MIN.patch<br>
-deleted file mode 100644<br>
-index f08177d7b4..0000000000<br>
---- a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb/PTHREA=
-D_STACK_MIN.patch<br>
-+++ /dev/null<br>
-@@ -1,19 +0,0 @@<br>
--PTHREAD_STACK_MIN is no longer a compile time define in glibc 2.34+ and si=
-nce<br>
--we only care for glibc and musl where PTHREAD_STACK_MIN is always defined =
-there<br>
--is no need to check for constant called PTHREAD_STACK_MIN since its alread=
-y defined<br>
--this fix may not work for wider audience but for OE needs its sufficient<b=
-r>
--<br>
--Upstream-Status: Inappropriate [OE-only fix]<br>
--Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=
-=3D"_blank">raj.khem@gmail.com</a>&gt;<br>
----- a/src/third_party/boost-1.70.0/boost/thread/pthread/thread_data.hpp<br=
->
--+++ b/src/third_party/boost-1.70.0/boost/thread/pthread/thread_data.hpp<br=
->
--@@ -57,9 +57,7 @@ namespace boost<br>
-- #else<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0std::size_t page_size =3D ::sysco=
-nf( _SC_PAGESIZE);<br>
-- #endif<br>
---#if PTHREAD_STACK_MIN &gt; 0<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (size&lt;PTHREAD_STACK_MIN) si=
-ze=3DPTHREAD_STACK_MIN;<br>
---#endif<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0size =3D ((size+page_size-1)/page=
-_size)*page_size;<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0int res =3D pthread_attr_setstack=
-size(&amp;val_, size);<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0BOOST_VERIFY(!res &amp;&amp; &quo=
-t;pthread_attr_setstacksize failed&quot;);<br>
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/<a href=
-=3D"http://mongodb_git.bb" rel=3D"noreferrer" target=3D"_blank">mongodb_git=
-.bb</a> b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/<a href=3D=
-"http://mongodb_git.bb" rel=3D"noreferrer" target=3D"_blank">mongodb_git.bb=
-</a><br>
-index 21051a8958..f1a508f3f2 100644<br>
---- a/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/<a href=3D"htt=
-p://mongodb_git.bb" rel=3D"noreferrer" target=3D"_blank">mongodb_git.bb</a>=
-<br>
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/<a href=3D"htt=
-p://mongodb_git.bb" rel=3D"noreferrer" target=3D"_blank">mongodb_git.bb</a>=
-<br>
-@@ -11,9 +11,9 @@ DEPENDS =3D &quot;openssl libpcap zlib boost curl python3=
- \<br>
-<br>
-=C2=A0inherit scons dos2unix siteinfo python3native systemd useradd<br>
-<br>
--PV =3D &quot;4.4.19&quot;<br>
--#v4.4.18<br>
--SRCREV =3D &quot;9a996e0ad993148b9650dc402e6d3b1804ad3b8a&quot;<br>
-+PV =3D &quot;4.4.24&quot;<br>
-+#v4.4.24<br>
-+SRCREV =3D &quot;0b86b9b7b42ad9970c5f818c527dd86c0634243a&quot;<br>
-=C2=A0SRC_URI =3D &quot;git://<a href=3D"http://github.com/mongodb/mongo.gi=
-t;branch=3Dv4.4;protocol=3Dhttps" rel=3D"noreferrer" target=3D"_blank">gith=
-ub.com/mongodb/mongo.git;branch=3Dv4.4;protocol=3Dhttps</a> \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0001-Tell-scons-to-use-bui=
-ld-settings-from-environment-va.patch \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0001-Use-long-long-instead=
--of-int64_t.patch \<br>
-@@ -29,7 +29,6 @@ SRC_URI =3D &quot;git://<a href=3D"http://github.com/mong=
-odb/mongo.git;branch=3Dv4.4;protocol=3Dhttps" rel=3D"noreferrer" target=3D"=
-_blank">github.com/mongodb/mongo.git;branch=3Dv4.4;protocol=3Dhttps</a> \<b=
-r>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0001-include-needed-c-head=
-er.patch \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://disable_runtime_check.patc=
-h \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://ppc64_ARCH_BITS.patch \<br=
->
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://PTHREAD_STACK_MIN.patch \<=
-br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0001-add-explict-static_ca=
-st-size_t-to-maxMemoryUsageByte.patch \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0001-server-Adjust-the-cac=
-he-alignment-assumptions.patch \<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0001-The-std-lib-unary-bin=
-ary_function-base-classes-are-d.patch \<br>
--- <br>
-2.42.0<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#104921): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/104921" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/104921</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/101427962/361=
-7156" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/101427962/3617156</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:martin.jansa@gmail.com" =
-target=3D"_blank">martin.jansa@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
-
---0000000000006701530605f12810--
 
