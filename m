@@ -2,96 +2,77 @@ Return-Path: <derek@asterius.io>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A8CDE8180B
-	for <webhook@archiver.kernel.org>; Fri, 22 Sep 2023 19:37:46 +0000 (UTC)
-Received: from mail-il1-f179.google.com (mail-il1-f179.google.com [209.85.166.179])
- by mx.groups.io with SMTP id smtpd.web11.6673.1695411464695057551
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 59313CE7A81
+	for <webhook@archiver.kernel.org>; Fri, 22 Sep 2023 21:26:47 +0000 (UTC)
+Received: from mail-io1-f54.google.com (mail-io1-f54.google.com [209.85.166.54])
+ by mx.groups.io with SMTP id smtpd.web10.9063.1695417997468742683
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 Sep 2023 12:37:44 -0700
+ Fri, 22 Sep 2023 14:26:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.166.179, mailfrom: straka.derek@gmail.com)
-Received: by mail-il1-f179.google.com with SMTP id e9e14a558f8ab-34fc2773fa4so8186695ab.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 22 Sep 2023 12:37:44 -0700 (PDT)
+ dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.166.54, mailfrom: straka.derek@gmail.com)
+Received: by mail-io1-f54.google.com with SMTP id ca18e2360f4ac-79fa425855cso38270739f.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 22 Sep 2023 14:26:37 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695411463; x=1696016263;
+        d=1e100.net; s=20230601; t=1695417996; x=1696022796;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=KXzQkLL+jNi2evd7xaLaKpeldQY721l7jk6eo4Vztgg=;
-        b=GrNSYCcvHC0Yxln/8iqZNfFcyqCEXKLQR4lhGxAW6PMurBWf6gUhvsutbEoK2bkV/2
-         CqCA6QSnW4dzPqzCVRXmqspiUbXhvBhRKKVxCM+0bsahZ3UgdH4AE8SRUkOKxI5766px
-         MsF/+SRMSsrHBCSJ9D9lnHQYX6dtLNsO/SCkXbD+FhsvXp6ir8U6hfeiUps4wdnjigc+
-         OAsqz6yxy26/sr1Us4iZKYxMz36n7WWs8DTGHWiTaVjz8tQbu/W+PlN6xK+k2rstHP3g
-         0pNSTFBQ11pmHuy5ccPkEsPwDhovvCyAgaCdQKA9qYdhYALan108wSGGHN1q9rUcHU4p
-         gJSA==
-X-Gm-Message-State: AOJu0YwDpfTR0Ka2nQC/QMjmucZY9sSD6EOpgoDLt/ZKdkbEdIuRtM+m
-	QRVVuJTzC3sfcx7x3EZSrB4CmqOjQB+nCw==
-X-Google-Smtp-Source: AGHT+IEQnNE0EhCcLWLB9r9p61eD+jESOCnDWFhLMHu4RCJKPqKM1DZhrOVPd1tAwF//T/p5RTvcYQ==
-X-Received: by 2002:a05:6e02:14d:b0:34f:379c:d58e with SMTP id j13-20020a056e02014d00b0034f379cd58emr587843ilr.20.1695411463414;
-        Fri, 22 Sep 2023 12:37:43 -0700 (PDT)
+        bh=S9d9olQszqfzapGjcqPdF1AWVE8PA2CKidARqAm4TgY=;
+        b=GR2mTkiD7Ki0qrPzAI2EbXz1qy+PaWo4NoO19l+txelk+x6thC7ZMETTbtmP9822DA
+         r02qvxj8oE6eIv/d+dbP1hRcLgueuCR3psA60KG2jqdnjCH3mKTJGZWpXFehcNFhjquf
+         TvP1UewsEHOUL9V75/ltiwRJ9FfQ8OFwHVDz5x1+RAnBpZBS8N0R+Di/wUDbeRDWzLOe
+         8U5dqt4NBw2LAjlOPvOEgayyaWT/IlSroh/9jDPQUqFDfrZJHXJnP7IwMSVM/xbqvfR4
+         g/uy6DWZJvuH3kVvG3FLshNygKb1TTLnzoJZ3K1pT8Ikg0r/qCuqiQAfd8wprhT/lYL2
+         OHfw==
+X-Gm-Message-State: AOJu0Yx9y9LmwrXssf9wjpSreqzh4lEqty+7jtkh7TYYjtYL0YsKzilT
+	6UkClnMshwaPsUdD7VyocaXZbmQeTpNbUw==
+X-Google-Smtp-Source: AGHT+IE7/GfZdZxAIvc1Uq6okr6z+qmyI5JTpgnYvVmLjszXQ0Vuvyg2G023D3h+SKzWHSsnfzf7mA==
+X-Received: by 2002:a5d:9510:0:b0:79f:a3ac:71dc with SMTP id d16-20020a5d9510000000b0079fa3ac71dcmr676505iom.8.1695417996077;
+        Fri, 22 Sep 2023 14:26:36 -0700 (PDT)
 Received: from sparta.internal.asterius.io (c-73-228-213-122.hsd1.mn.comcast.net. [73.228.213.122])
-        by smtp.gmail.com with ESMTPSA id o18-20020a92c052000000b00348c7e5e915sm1266099ilf.5.2023.09.22.12.37.42
+        by smtp.gmail.com with ESMTPSA id c3-20020a5ea903000000b00783b0780bd8sm1137018iod.4.2023.09.22.14.26.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 22 Sep 2023 12:37:42 -0700 (PDT)
+        Fri, 22 Sep 2023 14:26:35 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-python][PATCH] python3-netaddr: Update version 0.8.0 -> 0.9.0
-Date: Fri, 22 Sep 2023 19:37:31 +0000
-Message-Id: <20230922193731.3060662-1-derek@asterius.io>
+Subject: [meta-python][PATCH] python3-msgpack: Update version 1.0.5 -> 1.0.6
+Date: Fri, 22 Sep 2023 21:26:26 +0000
+Message-Id: <20230922212626.3128147-1-derek@asterius.io>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 22 Sep 2023 19:37:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105074
-
-Changelog
-=========
-Added:
-Add hash capabilities to OUI (#225, amitmi704)
-
-Fixed:
-Backwards incompatible: Handle RFC 6164 IPv6 addresses (don't reserve first IP
-address in point-to-point subnets) ($267, Damien Claisse)
-Technically backwards incompatible: Fix for is_loopback behaviour – consider
-IPNetwork('::1/128') to be loopback (#222, #223, niels)
-Include tutorials in source distributions (#215, Louis Sautier)
-Fix a documentation typo (#242, Wouter)
-Fix print syntax in the documentation to be Python 3 compatible (#221, François Magimel)
-Fix the Sphinx syntax in the documentation (#220, François Magimel)
-
-Other:
-Update the databases (#266, Jakub Stasiak)
-Deprecate Python 3.6 (#263, Jakub Stasiak)
-Eliminate unnecessary evals (#228, KOLANICH)
+ <openembedded-devel@lists.openembedded.org>; Fri, 22 Sep 2023 21:26:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105075
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../{python3-netaddr_0.8.0.bb => python3-netaddr_0.9.0.bb}     | 3 +--
+ .../{python3-msgpack_1.0.5.bb => python3-msgpack_1.0.6.bb}     | 3 +--
  1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-netaddr_0.8.0.bb => python3-netaddr_0.9.0.bb} (65%)
+ rename meta-python/recipes-devtools/python/{python3-msgpack_1.0.5.bb => python3-msgpack_1.0.6.bb} (80%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-netaddr_0.8.0.bb b/meta-python/recipes-devtools/python/python3-netaddr_0.9.0.bb
-similarity index 65%
-rename from meta-python/recipes-devtools/python/python3-netaddr_0.8.0.bb
-rename to meta-python/recipes-devtools/python/python3-netaddr_0.9.0.bb
-index 5ba006691..471d939a8 100644
---- a/meta-python/recipes-devtools/python/python3-netaddr_0.8.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-netaddr_0.9.0.bb
-@@ -2,8 +2,7 @@ SUMMARY = "A network address manipulation library for Python."
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=e6345d695ffe3776f68a56fe7962db44"
+diff --git a/meta-python/recipes-devtools/python/python3-msgpack_1.0.5.bb b/meta-python/recipes-devtools/python/python3-msgpack_1.0.6.bb
+similarity index 80%
+rename from meta-python/recipes-devtools/python/python3-msgpack_1.0.5.bb
+rename to meta-python/recipes-devtools/python/python3-msgpack_1.0.6.bb
+index 3965dad8e..3cddcb9ae 100644
+--- a/meta-python/recipes-devtools/python/python3-msgpack_1.0.5.bb
++++ b/meta-python/recipes-devtools/python/python3-msgpack_1.0.6.bb
+@@ -2,10 +2,9 @@ SUMMARY = "MessagePack (de)serializer"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=cd9523181d9d4fbf7ffca52eaa2a5751"
  
--SRC_URI[md5sum] = "34cad578473b66ad77bc3b2a7613ed4a"
--SRC_URI[sha256sum] = "d6cc57c7a07b1d9d2e917aa8b36ae8ce61c35ba3fcd1b83ca31c5a0ee2b5a243"
-+SRC_URI[sha256sum] = "7b46fa9b1a2d71fd5de9e4a3784ef339700a53a08c8040f08baf5f1194da0128"
+-PYPI_PACKAGE = "msgpack"
+ inherit pypi setuptools3 ptest
  
- inherit pypi setuptools3
+-SRC_URI[sha256sum] = "c075544284eadc5cddc70f4757331d99dcbc16b2bbd4849d15f8aae4cf36d31c"
++SRC_URI[sha256sum] = "25d3746da40f3c8c59c3b1d001e49fd2aa17904438f980d9a391370366df001e"
  
+ RDEPENDS:${PN}:class-target += "\
+     ${PYTHON_PN}-io \
 -- 
 2.34.1
 
