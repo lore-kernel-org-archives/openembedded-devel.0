@@ -1,102 +1,76 @@
-Return-Path: <derek@asterius.io>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 527CBCE7A86
-	for <webhook@archiver.kernel.org>; Fri, 22 Sep 2023 22:24:58 +0000 (UTC)
-Received: from mail-qv1-f45.google.com (mail-qv1-f45.google.com [209.85.219.45])
- by mx.groups.io with SMTP id smtpd.web10.10153.1695421495766420193
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C735CE7A89
+	for <webhook@archiver.kernel.org>; Sat, 23 Sep 2023 00:10:50 +0000 (UTC)
+Received: from mailout08.t-online.de (mailout08.t-online.de [194.25.134.20])
+ by mx.groups.io with SMTP id smtpd.web10.11988.1695427843676163396
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 Sep 2023 15:24:55 -0700
+ Fri, 22 Sep 2023 17:10:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.219.45, mailfrom: straka.derek@gmail.com)
-Received: by mail-qv1-f45.google.com with SMTP id 6a1803df08f44-6562395dfcfso14182976d6.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 22 Sep 2023 15:24:55 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695421494; x=1696026294;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Z0qEFLMzyimXC9zdUzeA3Ch0U9m6Vc4DKNK7yShadS0=;
-        b=lCnfD6peDJ2zGtSfHhmjJSr277zaac9WJ+lCh4sdEgM58SCVwjXMxWvHC38BcN33IY
-         vKlgUpJjAVBbucQN4jN//Zw2DRqB6ZNuXa2L5qcTnYydaspM/t4Z+vOd808kPmNP64II
-         OAaIsxGlnhdEYXMvxyhG75zWb+y4o1FOKCmmYTMGPGCvYsNTATvS4I/Z00Q1Nu1rBxfA
-         5WL9SFE4kJ6RhREAj7TbjDabuIkf32s9vsxd7GOEZlzL9IriObDUoPlNsTha1XyqkhU3
-         IKOVZhWf96UC7ooop6cpPKmos4Hl8PuF4GJA1hFSmMZ0e3EcvWbdxVxGG4tlGOEELmrT
-         KzAQ==
-X-Gm-Message-State: AOJu0YyUBBJ7mNGDTuUedo+6brXQkrZosroD0Ojam53c4tjF/OPqJxys
-	HOozC2nj6mbfdLBMnhUJLTGlx6ycarV6qg==
-X-Google-Smtp-Source: AGHT+IEwwokUAXBXHv1GfaV++jUM2N340h39D1dT+uDLlk0eHcDh+QccwBNFWF/FxTlSGq1KGMDyng==
-X-Received: by 2002:a05:6214:2502:b0:659:180c:38a0 with SMTP id gf2-20020a056214250200b00659180c38a0mr810438qvb.7.1695421494430;
-        Fri, 22 Sep 2023 15:24:54 -0700 (PDT)
-Received: from sparta.internal.asterius.io (c-73-228-213-122.hsd1.mn.comcast.net. [73.228.213.122])
-        by smtp.gmail.com with ESMTPSA id w6-20020a0ce106000000b0064f50e2c551sm1801779qvk.1.2023.09.22.15.24.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 22 Sep 2023 15:24:54 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
+ dkim=none (message not signed); spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.20, mailfrom: f_l_k@t-online.de)
+Received: from fwd72.aul.t-online.de (fwd72.aul.t-online.de [10.223.144.98])
+	by mailout08.t-online.de (Postfix) with SMTP id 0BA3FC2D2
+	for <openembedded-devel@lists.openembedded.org>; Sat, 23 Sep 2023 02:10:42 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.163.34.192]) by fwd72.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1qjqEK-23FnFc0; Sat, 23 Sep 2023 02:10:40 +0200
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-python][PATCH] python3-posix-ipc: Update version 1.0.5 -> 1.1.1
-Date: Fri, 22 Sep 2023 22:24:43 +0000
-Message-Id: <20230922222443.3161561-1-derek@asterius.io>
-X-Mailer: git-send-email 2.34.1
+Subject: [meta-gnome][PATCH 4/4] exiv2: Upgrade 0.27.6 -> 0.28.0
+Date: Sat, 23 Sep 2023 02:10:26 +0200
+Message-ID: <20230923001033.2805049-4-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.42.0
+In-Reply-To: <20230923001033.2805049-1-f_l_k@t-online.de>
+References: <20230923001033.2805049-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1695427840-56FF8F57-629795A4/0/0 CLEAN NORMAL
+X-TOI-MSGID: 5953848b-3715-4e26-a9b3-070772aeafb5
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 22 Sep 2023 22:24:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105079
+ <openembedded-devel@lists.openembedded.org>; Sat, 23 Sep 2023 00:10:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105082
 
-Verified LICENSE remains BSD-3-Clause (Copyright year updated)
+- add required dependencies on brotli and libinih
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../python/python3-posix-ipc_1.0.5.bb             | 15 ---------------
- .../python/python3-posix-ipc_1.1.1.bb             | 11 +++++++++++
- 2 files changed, 11 insertions(+), 15 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-posix-ipc_1.0.5.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-posix-ipc_1.1.1.bb
+ .../exiv2/{exiv2_0.27.6.bb =3D> exiv2_0.28.0.bb}                | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/exiv2/{exiv2_0.27.6.bb =3D> exiv2_0.28.0.=
+bb} (82%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-posix-ipc_1.0.5.bb b/meta-python/recipes-devtools/python/python3-posix-ipc_1.0.5.bb
-deleted file mode 100644
-index d66ef0e3c..000000000
---- a/meta-python/recipes-devtools/python/python3-posix-ipc_1.0.5.bb
-+++ /dev/null
-@@ -1,15 +0,0 @@
--DESCRIPTION = "POSIX IPC primitives (semaphores, shared memory and message queues) for Python"
--HOMEPAGE = "http://semanchuk.com/philip/posix_ipc/"
--SECTION = "devel/python"
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=dc089fb2f37e90799a54c19a20c9880f"
--
--PYPI_PACKAGE = "posix_ipc"
--
--# Archived version so we need to overwrite what the pypi class will derive
--PYPI_SRC_URI = "https://pypi.python.org/packages/source/p/${PYPI_PACKAGE}/${PYPI_PACKAGE}-${PV}.tar.gz"
--
--SRC_URI[md5sum] = "8c9443859492ecf3aae9182aa6b5c78c"
--SRC_URI[sha256sum] = "6cddb1ce2cf4aae383f2a0079c26c69bee257fe2720f372201ef047f8ceb8b97"
--
--inherit setuptools3 pypi
-diff --git a/meta-python/recipes-devtools/python/python3-posix-ipc_1.1.1.bb b/meta-python/recipes-devtools/python/python3-posix-ipc_1.1.1.bb
-new file mode 100644
-index 000000000..a71187399
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-posix-ipc_1.1.1.bb
-@@ -0,0 +1,11 @@
-+DESCRIPTION = "POSIX IPC primitives (semaphores, shared memory and message queues) for Python"
-+HOMEPAGE = "http://semanchuk.com/philip/posix_ipc/"
-+SECTION = "devel/python"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=513d94a7390d4d72f3475e2d45c739b5"
-+
-+PYPI_PACKAGE = "posix_ipc"
-+
-+SRC_URI[sha256sum] = "e2456ba0cfb2ee5ba14121450e8d825b3c4a1461fca0761220aab66d4111cbb7"
-+
-+inherit setuptools3 pypi
--- 
-2.34.1
+diff --git a/meta-oe/recipes-support/exiv2/exiv2_0.27.6.bb b/meta-oe/reci=
+pes-support/exiv2/exiv2_0.28.0.bb
+similarity index 82%
+rename from meta-oe/recipes-support/exiv2/exiv2_0.27.6.bb
+rename to meta-oe/recipes-support/exiv2/exiv2_0.28.0.bb
+index 6ccd9fb26..958810cf7 100644
+--- a/meta-oe/recipes-support/exiv2/exiv2_0.27.6.bb
++++ b/meta-oe/recipes-support/exiv2/exiv2_0.28.0.bb
+@@ -2,10 +2,10 @@ SUMMARY =3D "Exif, Iptc and XMP metadata manipulation l=
+ibrary and tools"
+ LICENSE =3D "GPL-2.0-only"
+ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D625f055f41728f84a8d7938acc35b=
+dc2"
+=20
+-DEPENDS =3D "zlib expat"
++DEPENDS =3D "zlib expat brotli libinih"
+=20
+ SRC_URI =3D "https://github.com/Exiv2/${BPN}/releases/download/v${PV}/${=
+BP}-Source.tar.gz"
+-SRC_URI[sha256sum] =3D "4c192483a1125dc59a3d70b30d30d32edace9e14adf52802=
+d2f853abf72db8a6"
++SRC_URI[sha256sum] =3D "89af3b5ef7277753ef7a7b5374ae017c6b9e304db3b688f1=
+948e73e103491f3d"
+ # Once patch is obsolete (project should be aware due to PRs), dos2unix =
+can be removed either
+ # inherit dos2unix
+ S =3D "${WORKDIR}/${BP}-Source"
+--=20
+2.42.0
 
 
