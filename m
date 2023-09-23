@@ -2,86 +2,88 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 23630CE7A89
-	for <webhook@archiver.kernel.org>; Sat, 23 Sep 2023 17:25:22 +0000 (UTC)
-Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com [209.85.128.172])
- by mx.groups.io with SMTP id smtpd.web10.24930.1695489913514792571
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 24104CE7A88
+	for <webhook@archiver.kernel.org>; Sat, 23 Sep 2023 17:26:52 +0000 (UTC)
+Received: from mail-yw1-f175.google.com (mail-yw1-f175.google.com [209.85.128.175])
+ by mx.groups.io with SMTP id smtpd.web10.24955.1695490006116497053
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 23 Sep 2023 10:25:13 -0700
+ Sat, 23 Sep 2023 10:26:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=gDiG1quE;
- spf=pass (domain: gmail.com, ip: 209.85.128.172, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f172.google.com with SMTP id 00721157ae682-59c00b5c8b2so47461327b3.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 23 Sep 2023 10:25:13 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZUXL6chW;
+ spf=pass (domain: gmail.com, ip: 209.85.128.175, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f175.google.com with SMTP id 00721157ae682-59c26aa19b7so46971087b3.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 23 Sep 2023 10:26:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1695489913; x=1696094713; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1695490005; x=1696094805; darn=lists.openembedded.org;
         h=content-transfer-encoding:in-reply-to:from:references:to
          :content-language:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=KDFfwdl7AcBAINzfWubNZhLSZd3BK+4gGAgLX7hgSNQ=;
-        b=gDiG1quED2RyTa0O8UXddeAKynnyGfpl5y1BGds9rGvNB5UmVO85xe/AkkpaqaGDZn
-         6v+x5QbOZ1yRrV/4miaDlk8rNAdSpprYSmEb4f3rs2Efprzcfw60Cry6bMz5QhSZB9HI
-         n6OLmkiOJPWVsqU9soIuvm7M7t4KYvo/75X3JwCEhJ1NsZ5j7pTgL+wCJVD+Nb3Fmy78
-         fTiwixmtxbzCrJIdMOfKTQkb4dtSOckTPdACvggfd/j7dm6Df8MUAlg4qDk5n/Hmngpm
-         B3YaKqBnWWRyvusYgpTDpJRS1NPQFsOE0UzTHdGgPCqKVdWqd5h6msNxLPQXPS1MI0gI
-         1tmQ==
+        bh=ub++ikhlE/HzEb8W58kR8Jt8YRHf1JqZxelVbLD+JE4=;
+        b=ZUXL6chWTyztMOtSDrVFBAOg3vwlen1/sn23KK2nad1FmNwgqy5BRYX5VNgG8iVxOB
+         /t1/sVq9T9LGol9H/Sw2oRzGap3nabVc7gxwEqMMhz2+BMLPU/IOcJABsLFiFmin5h3/
+         0qhfLZQOcsryhJTQ3Mq6V5R5nitPDdg28DwhO0Tc9/1AZuEqPHOVt/a1uZ4/txwl2WuF
+         5GGq5f61Y1pSdZt6G1GDBzGw/dVlxVp+gZA5dE9Wk6AHa4H/MWG04KWvhILbT3drwkWG
+         oj+EZxrv3hSJAddALgv3jgK7r6D33CMOlR8xGN/SSu/dEdrBl3FEpfYnfoBtfdDnfKo4
+         KdAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695489913; x=1696094713;
+        d=1e100.net; s=20230601; t=1695490005; x=1696094805;
         h=content-transfer-encoding:in-reply-to:from:references:to
          :content-language:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=KDFfwdl7AcBAINzfWubNZhLSZd3BK+4gGAgLX7hgSNQ=;
-        b=itP0SRdJt21w2bJ+G1NtWmseucVQ7igmat5IVwsIHIfnJojZyqzC1JbI670A4jYbxj
-         QIQlZUYMftNWihnt1WTLmvkBzO1T6a2/My9iTcB3nHo54u9YIMxCscL/WftA32BEURR1
-         3WOBpZKfeXyPMv20fG5gRrUONgBR15JPtk89tWMxeN42AllTpl/+woDZufTNal1XzzJr
-         S1LPP7pk4dgI7vYSdZd3XuSeEUiCgF+SjwXbI467dCsQ2DennQCZQlBsuBkPz40k/Ds4
-         ZludKjHjcaQN7HZAFMHrbvV70v/BkItjgcbv46pfn25jQJIjJQ5AdYW19dPOL3Rvz8FL
-         vHXg==
-X-Gm-Message-State: AOJu0YwZZn1ZKTjkbZ3GnO6KtGkw2bxi39IftuV8xTPcwAK8/l1912cg
-	Oep0kJ2LyrALR0gKgk+J1QPJCtQ4JWc=
-X-Google-Smtp-Source: AGHT+IF0vkR/g0nJWtfyMBANXc3tj59Kcsc4XQXqqwEMWbmIcSWAYM2hn6ksE6/f5vePv0iQk2vVYA==
-X-Received: by 2002:a81:528c:0:b0:58d:5df8:f61e with SMTP id g134-20020a81528c000000b0058d5df8f61emr2528845ywb.2.1695489912661;
-        Sat, 23 Sep 2023 10:25:12 -0700 (PDT)
+        bh=ub++ikhlE/HzEb8W58kR8Jt8YRHf1JqZxelVbLD+JE4=;
+        b=qHG/u1ZStDJsY+7dkLSTPe734VeXwbWCb6CNdiiYZBJJYxD6bgJwjrpes7FjQVZq1+
+         TU0gyW+ay2jOsHS9nOeezaHRCLCTZK3U+bWAYh8Tu4xGXjxBM17OrgJI9vymTOIEmwqS
+         gLhhmUgovgSEqmARyJRafgwXy6TW3lsJxfqmJdJ8myQviCMVdGycRF4jZR2QXwE76/qZ
+         6BKo8/c7uiLEc1nE6TYxGW6kI4Mq7Dy+tFGt5r9L9r5YscyO6zBTHeLZt0pzb3osgJ7c
+         X+vthfJULE3l7yxCSd1aQrNUu3nXNQiKcvudcAvOlapXe7ifOes0H7LFVo981THCnJtT
+         E3uQ==
+X-Gm-Message-State: AOJu0YxkTeg2gTV848LX2NSZb3TfyLMZAVip2NTKOMf21tSXqvYvErV9
+	EmPk5tVF/6iQHah443/FqcuBvjwCxMA=
+X-Google-Smtp-Source: AGHT+IGY0LJSHHxkZ51BSsaUsJGzV2n5BGhaBgwaPYill0rCMvFlOS44ljj/2unMXUN3D5QNcSJU1g==
+X-Received: by 2002:a0d:c084:0:b0:59b:1763:bff9 with SMTP id b126-20020a0dc084000000b0059b1763bff9mr3141517ywd.49.1695490005259;
+        Sat, 23 Sep 2023 10:26:45 -0700 (PDT)
 Received: from ?IPV6:2600:1700:9190:ba10::29? ([2600:1700:9190:ba10::29])
-        by smtp.gmail.com with ESMTPSA id w21-20020a814915000000b0059c2e3b7d88sm1509765ywa.12.2023.09.23.10.25.12
+        by smtp.gmail.com with ESMTPSA id l188-20020a0dc9c5000000b00595394ba941sm1521672ywd.81.2023.09.23.10.26.44
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 23 Sep 2023 10:25:12 -0700 (PDT)
-Message-ID: <177653b7-44e3-d658-5fc6-d69c90881539@gmail.com>
-Date: Sat, 23 Sep 2023 13:25:11 -0400
+        Sat, 23 Sep 2023 10:26:44 -0700 (PDT)
+Message-ID: <43ee5539-8273-3937-3634-e2eb8b88bc39@gmail.com>
+Date: Sat, 23 Sep 2023 13:26:44 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.0
-Subject: Re: [oe] [meta-python][kirkstone][PATCH v2 1/2]
- python3-requests-toolbelt: upgrade 0.9.1 -> 0.10.1
+Subject: Re: [oe] [meta-python][kirkstone][PATCH v2 2/2] Introduce
+ python3-trustme to fix ptest error of python3-requests-toolbelt
 Content-Language: en-US
 To: "Mali, Narpat" <narpat.mali@windriver.com>,
  openembedded-devel@lists.openembedded.org
-References: <177DFD1376FBF60F.28529@lists.openembedded.org>
- <1782D9483FC3D259.9600@lists.openembedded.org>
- <799cea32-9ffc-bc98-59ce-2fc9d11f364e@windriver.com>
+References: <20230823104110.1949022-1-narpat.mali@windriver.com>
+ <177DFD136D69B7A7.28529@lists.openembedded.org>
+ <1782D94E6954A090.4793@lists.openembedded.org>
+ <2f957332-7064-0463-b504-92842afc6071@windriver.com>
 From: akuster808 <akuster808@gmail.com>
-In-Reply-To: <799cea32-9ffc-bc98-59ce-2fc9d11f364e@windriver.com>
+In-Reply-To: <2f957332-7064-0463-b504-92842afc6071@windriver.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 23 Sep 2023 17:25:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105098
+ <openembedded-devel@lists.openembedded.org>; Sat, 23 Sep 2023 17:26:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105099
 
 
 
-On 9/22/23 8:14 AM, Mali, Narpat wrote:
+On 9/22/23 8:15 AM, Mali, Narpat wrote:
 > Gentle Reminder !!
 
-This appears to be a major version update which is a not within the 
-Stable branch charter.
+Since this appears to not affect the functionality of 
+python3-requests-toolbelt, request is declined.
 
-- Armin
+BR,
+Armin
 >
 > ../Narpat
 >
-> On 08-09-2023 12:08, Narpat Mali via lists.openembedded.org wrote:
+> On 08-09-2023 12:09, Narpat Mali via lists.openembedded.org wrote:
 >> Gentle Reminder !!
 >>
 >> ../Narpat
@@ -89,136 +91,219 @@ Stable branch charter.
 >> On 23-08-2023 16:11, Narpat Mali via lists.openembedded.org wrote:
 >>> From: Narpat Mali <narpat.mali@windriver.com>
 >>>
->>> Changelog:
->>> https://pyup.io/packages/pypi/requests-toolbelt/changelog
->>> https://github.com/requests/toolbelt/blob/master/HISTORY.rst
+>>> The ptest fails after python3-requests-toolbelt is upgraded
+>>> to 0.10.1.
 >>>
->>> - License-Update: url of License changed from http to https.
->>> - Fixing missing newline in dump utility.
->>> - Add support for preparing requests in BaseUrlSession.
->>> - Fix urllib3 warning to only emit on X509Adapter usage
+>>> =======================================================
+>>> Hint: make sure your test modules/packages have valid Python names.
+>>> Traceback:
+>>> ../../python3.11/importlib/{}init{}.py:126: in import_module
+>>>      return _bootstrap._gcd_import(name[level:], package, level)
+>>> tests/test_x509_adapter.py:20: in <module>
+>>>      import trustme
+>>> E   ModuleNotFoundError: No module named 'trustme'
+>>> =======================================================
 >>>
->>> Upstream master patches:
->>> 0.9.1 -> 0.10.0  : 
->>> https://git.openembedded.org/meta-openembedded/commit/?id=a4f2646ef27a3f27bc607d57b8166071f307426f
->>> 0.10.0 -> 0.10.1 : 
->>> https://git.openembedded.org/meta-openembedded/commit/?id=b5cd6f6164eb3ab0403f610236ac0cbbe5459671
+>>> The commit b93b4067ea "Fix x509 tests by using trustme" of
+>>> python3-requests-toolbelt introduces the trustme in 
+>>> test_x509_adapter.py.
+>>>
+>>> Introducing python3-trustme to fix ptest error of 
+>>> python3-requests-toolbelt,
+>>> also introducing python3-service-identity, which is requested by 
+>>> python3-trustme's
+>>> ptest.
+>>>
+>>> The ptest passes of all the three packages.
+>>>
+>>> Signed-off-by: Yue Tao <Yue.Tao@windriver.com>
+>>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>>>
+>>> Cherry-picked the upstream master commit:
+>>> https://git.openembedded.org/meta-openembedded/commit/?id=a4b6e3ee894047cd13c5d2b7bfc67f0093899537 
+>>>
 >>>
 >>> Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
 >>> ---
->>>   ...abc-deprecation-warning-in-downloadu.patch | 41 
->>> -------------------
->>>   ...bb => python3-requests-toolbelt_0.10.1.bb} |  8 ++--
->>>   2 files changed, 3 insertions(+), 46 deletions(-)
->>>   delete mode 100644 
->>> meta-python/recipes-devtools/python/python3-requests-toolbelt/0001-Fix-collections.abc-deprecation-warning-in-downloadu.patch
->>>   rename 
->>> meta-python/recipes-devtools/python/{python3-requests-toolbelt_0.9.1.bb 
->>> => python3-requests-toolbelt_0.10.1.bb} (70%)
+>>>   .../packagegroups/packagegroup-meta-python.bb |  2 ++
+>>>   .../python3-requests-toolbelt_0.10.1.bb       |  1 +
+>>>   .../python/python3-service-identity/run-ptest |  3 +++
+>>>   .../python/python3-service-identity_21.1.0.bb | 25 +++++++++++++++++
+>>>   .../python/python3-trustme/run-ptest          |  3 +++
+>>>   .../python/python3-trustme_0.9.0.bb           | 27 
+>>> +++++++++++++++++++
+>>>   6 files changed, 61 insertions(+)
+>>>   create mode 100644 
+>>> meta-python/recipes-devtools/python/python3-service-identity/run-ptest
+>>>   create mode 100644 
+>>> meta-python/recipes-devtools/python/python3-service-identity_21.1.0.bb
+>>>   create mode 100644 
+>>> meta-python/recipes-devtools/python/python3-trustme/run-ptest
+>>>   create mode 100644 
+>>> meta-python/recipes-devtools/python/python3-trustme_0.9.0.bb
 >>>
 >>> diff --git 
->>> a/meta-python/recipes-devtools/python/python3-requests-toolbelt/0001-Fix-collections.abc-deprecation-warning-in-downloadu.patch 
->>> b/meta-python/recipes-devtools/python/python3-requests-toolbelt/0001-Fix-collections.abc-deprecation-warning-in-downloadu.patch 
->>>
->>> deleted file mode 100644
->>> index baa833b6d2..0000000000
+>>> a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb 
+>>> b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+>>> index fdeb83c42a..c2481eb307 100644
 >>> --- 
->>> a/meta-python/recipes-devtools/python/python3-requests-toolbelt/0001-Fix-collections.abc-deprecation-warning-in-downloadu.patch
->>> +++ /dev/null
->>> @@ -1,41 +0,0 @@
->>> -From 7188b06330e5260be20bce8cbcf0d5ae44e34eaf Mon Sep 17 00:00:00 2001
->>> -From: Jon Dufresne <jon.dufresne@gmail.com>
->>> -Date: Fri, 1 Feb 2019 16:30:01 -0800
->>> -Subject: [PATCH] Fix collections.abc deprecation warning in 
->>> downloadutils
->>> -
->>> -Warning appears as:
->>> -
->>> -tests/test_downloadutils.py::test_stream_response_to_specific_filename
->>> -  requests_toolbelt/downloadutils/stream.py:161: 
->>> DeprecationWarning: Using or importing the ABCs from 'collections' 
->>> instead of from 'collections.abc' is deprecated, and in 3.8 it will 
->>> stop working
->>> -    if path and isinstance(getattr(path, 'write', None), 
->>> collections.Callable):
->>> -
->>> -Upstream-Status: Backport 
->>> [https://github.com/requests/toolbelt/commit/7188b06330e5260be20bce8cbcf0d5ae44e34eaf]
->>> -
->>> -Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
->>> ----
->>> - requests_toolbelt/downloadutils/stream.py | 3 +--
->>> - 1 file changed, 1 insertion(+), 2 deletions(-)
->>> -
->>> -diff --git a/requests_toolbelt/downloadutils/stream.py 
->>> b/requests_toolbelt/downloadutils/stream.py
->>> -index eed60a7..1d1c31b 100644
->>> ---- a/requests_toolbelt/downloadutils/stream.py
->>> -+++ b/requests_toolbelt/downloadutils/stream.py
->>> -@@ -1,6 +1,5 @@
->>> - # -*- coding: utf-8 -*-
->>> - """Utilities for dealing with streamed requests."""
->>> --import collections
->>> - import os.path
->>> - import re
->>> -
->>> -@@ -158,7 +157,7 @@ def stream_response_to_file(response, 
->>> path=None, chunksize=_DEFAULT_CHUNKSIZE):
->>> -     pre_opened = False
->>> -     fd = None
->>> -     filename = None
->>> --    if path and isinstance(getattr(path, 'write', None), 
->>> collections.Callable):
->>> -+    if path and callable(getattr(path, 'write', None)):
->>> -         pre_opened = True
->>> -         fd = path
->>> -         filename = getattr(fd, 'name', None)
->>> ---
->>> -2.25.1
->>> -
+>>> a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+>>> +++ 
+>>> b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+>>> @@ -373,6 +373,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
+>>>       python3-send2trash \
+>>>       python3-sentry-sdk \
+>>>       python3-serpent \
+>>> +    python3-service-identity \
+>>>       python3-sh \
+>>>       python3-sijax \
+>>>       python3-simpleeval \
+>>> @@ -408,6 +409,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
+>>>       python3-trafaret-config \
+>>>       python3-traitlets \
+>>>       python3-transitions \
+>>> +    python3-trustme \
+>>>       python3-twine \
+>>>       python3-twisted \
+>>>       python3-twitter \
 >>> diff --git 
->>> a/meta-python/recipes-devtools/python/python3-requests-toolbelt_0.9.1.bb 
+>>> a/meta-python/recipes-devtools/python/python3-requests-toolbelt_0.10.1.bb 
 >>> b/meta-python/recipes-devtools/python/python3-requests-toolbelt_0.10.1.bb 
 >>>
->>> similarity index 70%
->>> rename from 
->>> meta-python/recipes-devtools/python/python3-requests-toolbelt_0.9.1.bb
->>> rename to 
->>> meta-python/recipes-devtools/python/python3-requests-toolbelt_0.10.1.bb
->>> index 72ad7a6180..c39950ab5d 100644
+>>> index c39950ab5d..7191a3e6c1 100644
 >>> --- 
->>> a/meta-python/recipes-devtools/python/python3-requests-toolbelt_0.9.1.bb 
->>>
+>>> a/meta-python/recipes-devtools/python/python3-requests-toolbelt_0.10.1.bb
 >>> +++ 
 >>> b/meta-python/recipes-devtools/python/python3-requests-toolbelt_0.10.1.bb
->>> @@ -3,14 +3,12 @@ HOMEPAGE = "https://toolbelt.readthedocs.org"
->>>   AUTHOR = "Ian Cordasco, Cory Benfield"
->>>     LICENSE = "Apache-2.0"
->>> -LIC_FILES_CHKSUM = 
->>> "file://LICENSE;md5=71760e0f1dda8cff91b0bc9246caf571"
+>>> @@ -21,6 +21,7 @@ RDEPENDS:${PN}-ptest += " \
+>>>       ${PYTHON_PN}-betamax \
+>>>       ${PYTHON_PN}-mock \
+>>>       ${PYTHON_PN}-multiprocessing \
+>>> +        ${PYTHON_PN}-trustme \
+>>>   "
+>>>     do_install_ptest() {
+>>> diff --git 
+>>> a/meta-python/recipes-devtools/python/python3-service-identity/run-ptest 
+>>> b/meta-python/recipes-devtools/python/python3-service-identity/run-ptest 
+>>>
+>>> new file mode 100644
+>>> index 0000000000..b63c4de0d9
+>>> --- /dev/null
+>>> +++ 
+>>> b/meta-python/recipes-devtools/python/python3-service-identity/run-ptest 
+>>>
+>>> @@ -0,0 +1,3 @@
+>>> +#!/bin/sh
+>>> +
+>>> +pytest -o log_cli=true -o log_cli_level=INFO | sed -e 
+>>> 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 
+>>> 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" 
+>>> || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || 
+>>> $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if 
+>>> ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || 
+>>> $NF=="XPASS") {$NF="";print $0}else{print}}'
+>>> diff --git 
+>>> a/meta-python/recipes-devtools/python/python3-service-identity_21.1.0.bb 
+>>> b/meta-python/recipes-devtools/python/python3-service-identity_21.1.0.bb 
+>>>
+>>> new file mode 100644
+>>> index 0000000000..0210a5de22
+>>> --- /dev/null
+>>> +++ 
+>>> b/meta-python/recipes-devtools/python/python3-service-identity_21.1.0.bb 
+>>>
+>>> @@ -0,0 +1,25 @@
+>>> +DESCRIPTION = "The tools for verifying whether a certificate is 
+>>> valid for the intended purposes."
+>>> +HOMEPAGE = "https://pypi.org/project/service-identity"
+>>> +AUTHOR = "Hynek Schlawack"
+>>> +
+>>> +LICENSE = "MIT"
 >>> +LIC_FILES_CHKSUM = 
->>> "file://LICENSE;md5=6f14302a4b4099009ab38b4dde5f1075"
->>>     SRC_URI = "file://run-ptest \
->>> - 
->>> file://0001-Fix-collections.abc-deprecation-warning-in-downloadu.patch 
->>> \
->>> -           "
->>> +          "
->>>   -SRC_URI[md5sum] = "b1509735c4b4cf95df2619facbc3672e"
->>> -SRC_URI[sha256sum] = 
->>> "968089d4584ad4ad7c171454f0a5c6dac23971e9472521ea3b6d49d610aa6fc0"
+>>> "file://LICENSE;md5=8a0f079f4e6a215d6bd6f9d97cab4d5f"
+>>> +
+>>> +SRC_URI[md5sum] = "5e5c195d8fcedc72f9068be2ad9b5a13"
 >>> +SRC_URI[sha256sum] = 
->>> "62e09f7ff5ccbda92772a29f394a49c3ad6cb181d568b1337626b2abb628a63d"
->>>     inherit pypi setuptools3 ptest
+>>> "6e6c6086ca271dc11b033d17c3a8bea9f24ebff920c587da090afc9519419d34"
+>>> +
+>>> +inherit pypi setuptools3 ptest
+>>> +
+>>> +SRC_URI += " \
+>>> +    file://run-ptest \
+>>> +"
+>>> +
+>>> +RDEPENDS:${PN}-ptest += " \
+>>> +    ${PYTHON_PN}-pytest \
+>>> +"
+>>> +
+>>> +do_install_ptest() {
+>>> +    install -d ${D}${PTEST_PATH}/tests
+>>> +    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+>>> +    cp -rf ${S}/setup.py ${D}${PTEST_PATH}
+>>> +}
+>>> diff --git 
+>>> a/meta-python/recipes-devtools/python/python3-trustme/run-ptest 
+>>> b/meta-python/recipes-devtools/python/python3-trustme/run-ptest
+>>> new file mode 100644
+>>> index 0000000000..b63c4de0d9
+>>> --- /dev/null
+>>> +++ b/meta-python/recipes-devtools/python/python3-trustme/run-ptest
+>>> @@ -0,0 +1,3 @@
+>>> +#!/bin/sh
+>>> +
+>>> +pytest -o log_cli=true -o log_cli_level=INFO | sed -e 
+>>> 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 
+>>> 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" 
+>>> || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || 
+>>> $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if 
+>>> ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || 
+>>> $NF=="XPASS") {$NF="";print $0}else{print}}'
+>>> diff --git 
+>>> a/meta-python/recipes-devtools/python/python3-trustme_0.9.0.bb 
+>>> b/meta-python/recipes-devtools/python/python3-trustme_0.9.0.bb
+>>> new file mode 100644
+>>> index 0000000000..641512c46c
+>>> --- /dev/null
+>>> +++ b/meta-python/recipes-devtools/python/python3-trustme_0.9.0.bb
+>>> @@ -0,0 +1,27 @@
+>>> +DESCRIPTION = "A utility provides a fake certificate authority (CA)"
+>>> +HOMEPAGE = "https://pypi.org/project/trustme"
+>>> +AUTHOR = "Nathaniel J. Smith"
+>>> +
+>>> +LICENSE = "Apache-2.0"
+>>> +LIC_FILES_CHKSUM = 
+>>> "file://LICENSE;md5=d5a7af1a4b73e57431e25d15a2da745a"
+>>> +
+>>> +SRC_URI[md5sum] = "0e4d698e5aecaf8306cf440bf3dcbbe0"
+>>> +SRC_URI[sha256sum] = 
+>>> "5e07b23d70ceed64f3bb36ae4b9abc52354c16c98d45ab037bee2b5fbffe586c"
+>>> +
+>>> +inherit pypi setuptools3 ptest
+>>> +
+>>> +SRC_URI += " \
+>>> +    file://run-ptest \
+>>> +"
+>>> +
+>>> +RDEPENDS:${PN}-ptest += " \
+>>> +    ${PYTHON_PN}-pytest \
+>>> +    ${PYTHON_PN}-service-identity \
+>>> +    ${PYTHON_PN}-pyasn1-modules \
+>>> +"
+>>> +
+>>> +do_install_ptest() {
+>>> +    install -d ${D}${PTEST_PATH}/tests
+>>> +    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+>>> +    cp -rf ${S}/setup.py ${D}${PTEST_PATH}
+>>> +}
 >>>
 >>>
 >>>
 >>
 >> -=-=-=-=-=-=-=-=-=-=-=-
 >> Links: You receive all messages sent to this group.
->> View/Reply Online (#104798): 
->> https://lists.openembedded.org/g/openembedded-devel/message/104798
->> Mute This Topic: https://lists.openembedded.org/mt/100912004/7199376
+>> View/Reply Online (#104799): 
+>> https://lists.openembedded.org/g/openembedded-devel/message/104799
+>> Mute This Topic: https://lists.openembedded.org/mt/101232091/7199376
 >> Group Owner: openembedded-devel+owner@lists.openembedded.org
 >> Unsubscribe: 
 >> https://lists.openembedded.org/g/openembedded-devel/unsub 
