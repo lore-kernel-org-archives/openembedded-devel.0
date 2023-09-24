@@ -2,138 +2,158 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0BA8ACE7A88
-	for <webhook@archiver.kernel.org>; Sun, 24 Sep 2023 14:38:23 +0000 (UTC)
-Received: from mail-yw1-f179.google.com (mail-yw1-f179.google.com [209.85.128.179])
- by mx.groups.io with SMTP id smtpd.web10.40596.1695566298513888538
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EAFC0CE7A88
+	for <webhook@archiver.kernel.org>; Sun, 24 Sep 2023 14:39:02 +0000 (UTC)
+Received: from mail-yb1-f181.google.com (mail-yb1-f181.google.com [209.85.219.181])
+ by mx.groups.io with SMTP id smtpd.web10.40606.1695566338922024434
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 24 Sep 2023 07:38:18 -0700
+ Sun, 24 Sep 2023 07:38:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ROlmh9FN;
- spf=pass (domain: gmail.com, ip: 209.85.128.179, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f179.google.com with SMTP id 00721157ae682-59c215f2f4aso60319217b3.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 24 Sep 2023 07:38:18 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=CoB1FiKS;
+ spf=pass (domain: gmail.com, ip: 209.85.219.181, mailfrom: akuster808@gmail.com)
+Received: by mail-yb1-f181.google.com with SMTP id 3f1490d57ef6-d815a5eee40so5318810276.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 24 Sep 2023 07:38:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1695566297; x=1696171097; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1695566338; x=1696171138; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=R5FcIFy5LtULrOSB51Ffcn0TYk/Xsz6DI9isYdsn7JQ=;
-        b=ROlmh9FN9pOc7sWRPcSP3WT/nn+dz62mIkAzXhlNbXlRm1tmxuUkU4rYY2Y4Q9Lr0B
-         H2+CPUBM3LN+L1CgsQu5tBpHc6MMWeRJLx271Zo4AVhLRDWIspCJkOg3L4BlRLkBO28c
-         5NhaWbs7sJkrxjvloksb4Hy9WGH2O0LxRl8q0Z/nkuBkeWcqWB3ay6ZMoIj5PO60Zw3R
-         3afpfjC0VXxpVW2uEQOZ7MtVPorBYw9avKJdGnws8XNqwi1PO5gga1C4MaIXk68Y/v5x
-         9mn3h9BO+RhU7nQefedRY3J6nvGrOKrypVEDROeQdUGXbTIhrh/40WagHs1N+lFsFn5f
-         EIJw==
+        bh=hPk9pdKMK4UWwsrplfwPrnlYj63KX3TOmg1bp08/XNw=;
+        b=CoB1FiKS90hr4sQ69pYuIvxq3IG75qtxozvXh+3MAvXEX7o20JkuRg1VcA8QfsDOWj
+         gtA6XMKRFnrQckllBt0mgTwEi7fQ0mw+Xp8cJN3cpkOxCezOTXsTjlHowDJoUSZ/iwhi
+         4SWLUYtpO9vfov7/nHjfx9lvZYQJ5Cb9FL5hU14Xi0Q+odbgfo8WkFXUN+OyhTImMZic
+         5Puh4vBQ/ISdJj0RJBZ3aSrHR0KfgYFGAGOG0ZYxpAq6OrwKO8p3Fo7JWcNHqtKE9ug0
+         u4Xjroh3SBkhWvt/PF4O5JoayM5OxW2jmJgrDxNL9YDQvWUI/UKJPAiIm7e7eYRMbCG/
+         go8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695566297; x=1696171097;
+        d=1e100.net; s=20230601; t=1695566338; x=1696171138;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=R5FcIFy5LtULrOSB51Ffcn0TYk/Xsz6DI9isYdsn7JQ=;
-        b=eppB1t0Ap/ywRYfofSQ9nTPz99ZwrqK+PNJiCuCcGnO5zvUUftVPxRU6K1WlbkAS9t
-         E9yzN974O9BG33R2npHvN7YWay24kn/0yeW3cAGmQxapQPDi2nxrIuM0JHw7pK9mePsU
-         V13W9kJmxY8dPyIW/gkdQcJtMv4nlwN3OUz9t+lxD5hwFUVMpcb9dUtOVdyt+9OeTtMh
-         LPcgZ4dM/rMFxJBkIesPoqIWzKVROgqFpk2YDoomDhwzS/D3jfLlqFn1JSAK0AzmYYut
-         HX/sRXQtHEKCmjz3bZa8OPzm8Xc7W3iW/KhSIsPheB4cSAPkznIo5NclYBDlZNlUcfmc
-         cYBQ==
-X-Gm-Message-State: AOJu0Yy9EEoEx8bBVTecEcLlGLu2T8bO50MfV+a9KRXOi4CRU1JjJ1vQ
-	wgrQEEi0vQBHqFI3sp52mTrMh+9MLvs=
-X-Google-Smtp-Source: AGHT+IFPk0Tju6+lWAOZQHJhCLXPIrLeLhop463xXRjJR1ZKZXXoiKmPBYJ+Faq1I+mQKtibOA4B2w==
-X-Received: by 2002:a0d:d046:0:b0:586:c27c:3eee with SMTP id s67-20020a0dd046000000b00586c27c3eeemr5271958ywd.38.1695566297426;
-        Sun, 24 Sep 2023 07:38:17 -0700 (PDT)
+        bh=hPk9pdKMK4UWwsrplfwPrnlYj63KX3TOmg1bp08/XNw=;
+        b=M/UACagYPEeoQ8z5Z/FCAK6zilRz9Y9/lBMMl27G5cr+jHOnp+E7+8mDZwOGbe2uX6
+         BFpdDKO9ghOwfzntNhBCZp5oHjZ0lKI0tSIoaAP0metjIqx/VvN0gCl4Rt/B4sbbSoxd
+         reu0ETBu1C69K+PfATgAElv7qJiyLBInJQKEjrj1rAe/kgxivMYfF6Xr54zD2fXBKK8R
+         Abz8da/SqGbqZp3K/Zy1o5iQi9AARXhjWfMrfU4G+fYotjcPo0fcCh9QWRIYOuZcbWtg
+         Ja9hlVaQiRGM1DnR+3Qpgh+JdrUyfSpzG/wpir8TU0xVJy89ArHZ+ujs3skv/s4kRQEI
+         HfCQ==
+X-Gm-Message-State: AOJu0YyJ7lv/iBYOZTrBlvLJclBqookFTflucjJkLtDeXKF9CNHX/gYL
+	vagOsiNfRYXdAx+T8lqM8HySKvecwbE=
+X-Google-Smtp-Source: AGHT+IGEIaYHCXXmcRwbp631B2ysYcX3Yg/E0Z2LyzqAW71msJfy/uaw6V0j8iSpGMYKS9bP8StH2g==
+X-Received: by 2002:a0d:ff05:0:b0:59b:4f2d:231 with SMTP id p5-20020a0dff05000000b0059b4f2d0231mr4314695ywf.45.1695566337900;
+        Sun, 24 Sep 2023 07:38:57 -0700 (PDT)
 Received: from keaua.caveonetworks.com ([2600:1700:9190:ba10::29])
-        by smtp.gmail.com with ESMTPSA id j68-20020a0de047000000b0059b3d594c04sm1926418ywe.125.2023.09.24.07.38.16
+        by smtp.gmail.com with ESMTPSA id x125-20020a0dee83000000b0057a918d6644sm1919085ywe.128.2023.09.24.07.38.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 24 Sep 2023 07:38:17 -0700 (PDT)
+        Sun, 24 Sep 2023 07:38:57 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Armin Kuster <akuster@mvista.com>,
+Cc: Sanjay Chitroda <sanjay.chitroda@einfochips.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][mickledore][PATCH] openldap: update to 2.5.16.
-Date: Sun, 24 Sep 2023 10:38:16 -0400
-Message-Id: <20230924143816.982891-1-akuster808@gmail.com>
+Subject: [meta-oe][mickledore][PATCH] netkit-telnet: Fix CVE-2022-39028
+Date: Sun, 24 Sep 2023 10:38:57 -0400
+Message-Id: <20230924143857.982969-1-akuster808@gmail.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 24 Sep 2023 14:38:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105105
+ <openembedded-devel@lists.openembedded.org>; Sun, 24 Sep 2023 14:39:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105106
 
-From: Armin Kuster <akuster@mvista.com>
+From: Sanjay Chitroda <sanjay.chitroda@einfochips.com>
 
-2.5.x is an LTS version per the project.
-Drop patch now included.
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2022-39028
+https://security-tracker.debian.org/tracker/CVE-2022-39028
 
-Signed-off-by: Armin Kuster <akuster@mvista.com>
+Upstream Patch:
+https://cgit.freebsd.org/src/commit/?id=6914ffef4e23
+
+- Patch is adopted from FreeBSD, as same vulnerability of
+  telnetd is applicable to FreeBSD and netkit-telnet packages.
+
+Signed-off-by: Sanjay Chitroda <sanjay.chitroda@einfochips.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 7a423279cf6afe27cf6abf747f1a2021ee5b6d26)
-Signed-off-by: Armin Kuster <akuster@mvista.com>
+(cherry picked from commit d629fe71e4242fc0557f5668d9f223777eb60a0f)
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...ure-Pass-pthread_t-to-pthread_detach.patch | 32 -------------------
- ...{openldap_2.5.13.bb => openldap_2.5.16.bb} |  3 +-
- 2 files changed, 1 insertion(+), 34 deletions(-)
- delete mode 100644 meta-oe/recipes-support/openldap/openldap/0001-configure-Pass-pthread_t-to-pthread_detach.patch
- rename meta-oe/recipes-support/openldap/{openldap_2.5.13.bb => openldap_2.5.16.bb} (98%)
+ .../netkit-telnet/files/CVE-2022-39028.patch  | 53 +++++++++++++++++++
+ .../netkit-telnet/netkit-telnet_0.17.bb       |  1 +
+ 2 files changed, 54 insertions(+)
+ create mode 100644 meta-networking/recipes-netkit/netkit-telnet/files/CVE-2022-39028.patch
 
-diff --git a/meta-oe/recipes-support/openldap/openldap/0001-configure-Pass-pthread_t-to-pthread_detach.patch b/meta-oe/recipes-support/openldap/openldap/0001-configure-Pass-pthread_t-to-pthread_detach.patch
-deleted file mode 100644
-index 6e73f8b382..0000000000
---- a/meta-oe/recipes-support/openldap/openldap/0001-configure-Pass-pthread_t-to-pthread_detach.patch
-+++ /dev/null
-@@ -1,32 +0,0 @@
--From 7577b120acda087bf3f5f613c2c72663b3864ad8 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sun, 4 Sep 2022 09:43:06 -0700
--Subject: [PATCH] configure: Pass pthread_t to pthread_detach
--
--This helps compilers when using C2X standard
--
--Upstream-Status: Pending
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- configure.ac | 5 +----
-- 1 file changed, 1 insertion(+), 4 deletions(-)
--
--diff --git a/configure.ac b/configure.ac
--index 0978eeb..58d15f8 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -1467,10 +1467,7 @@ pthread_rwlock_t rwlock;
-- 				dnl save the flags
-- 				AC_LINK_IFELSE([AC_LANG_PROGRAM([[
-- #include <pthread.h>
---#ifndef NULL
---#define NULL (void*)0
---#endif
---]], [[pthread_detach(NULL);]])],[ol_cv_func_pthread_detach=yes],[ol_cv_func_pthread_detach=no])
--+]], [[pthread_detach((pthread_t)-1);]])],[ol_cv_func_pthread_detach=yes],[ol_cv_func_pthread_detach=no])
-- 			])
-- 
-- 			if test $ol_cv_func_pthread_detach = no ; then
---- 
--2.37.3
--
-diff --git a/meta-oe/recipes-support/openldap/openldap_2.5.13.bb b/meta-oe/recipes-support/openldap/openldap_2.5.16.bb
-similarity index 98%
-rename from meta-oe/recipes-support/openldap/openldap_2.5.13.bb
-rename to meta-oe/recipes-support/openldap/openldap_2.5.16.bb
-index b117677f9b..a56b454dc0 100644
---- a/meta-oe/recipes-support/openldap/openldap_2.5.13.bb
-+++ b/meta-oe/recipes-support/openldap/openldap_2.5.16.bb
-@@ -19,10 +19,9 @@ SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/$
-     file://slapd.service \
-     file://remove-user-host-pwd-from-version.patch \
-     file://0001-build-top.mk-unset-STRIP_OPTS.patch \
--    file://0001-configure-Pass-pthread_t-to-pthread_detach.patch \
- "
+diff --git a/meta-networking/recipes-netkit/netkit-telnet/files/CVE-2022-39028.patch b/meta-networking/recipes-netkit/netkit-telnet/files/CVE-2022-39028.patch
+new file mode 100644
+index 0000000000..e8c3f1d84b
+--- /dev/null
++++ b/meta-networking/recipes-netkit/netkit-telnet/files/CVE-2022-39028.patch
+@@ -0,0 +1,53 @@
++From 4133a888aa256312186962ab70d4a36eed5920c1 Mon Sep 17 00:00:00 2001
++From: Brooks Davis <brooks@FreeBSD.org>
++Date: Mon, 26 Sep 2022 18:56:51 +0100
++Subject: [PATCH] telnetd: fix two-byte input crash
++
++Move initialization of the slc table earlier so it doesn't get
++accessed before that happens.
++
++For details on the issue, see:
++https://pierrekim.github.io/blog/2022-08-24-2-byte-dos-freebsd-netbsd-telnetd-netkit-telnetd-inetutils-telnetd-kerberos-telnetd.html
++
++Reviewed by:	cy
++Obtained from:	NetBSD via cy
++Differential Revision:	https://reviews.freebsd.org/D36680
++
++CVE: CVE-2022-39028
++Upstream-Status: Backport [https://cgit.freebsd.org/src/commit/?id=6914ffef4e23]
++
++(cherry picked from commit 6914ffef4e2318ca1d0ead28eafb6f06055ce0f8)
++Signed-off-by: Sanjay Chitroda <sanjay.chitroda@einfochips.com>
++
++---
++ telnetd/telnetd.c | 10 +++++-----
++ 1 file changed, 5 insertions(+), 5 deletions(-)
++
++diff --git a/telnetd/telnetd.c b/telnetd/telnetd.c
++index f36f505..efa0fe1 100644
++--- a/telnetd/telnetd.c
+++++ b/telnetd/telnetd.c
++@@ -615,6 +615,11 @@ doit(struct sockaddr_in *who)
++ 	int level;
++ 	char user_name[256];
++ 
+++	/*
+++	 * Initialize the slc mapping table.
+++	 */
+++	get_slc_defaults();
+++
++ 	/*
++ 	 * Find an available pty to use.
++ 	 */
++@@ -698,11 +703,6 @@ void telnet(int f, int p)
++     char *HE;
++     const char *IM;
++ 
++-    /*
++-     * Initialize the slc mapping table.
++-     */
++-    get_slc_defaults();
++-
++     /*
++      * Do some tests where it is desireable to wait for a response.
++      * Rather than doing them slowly, one at a time, do them all
+diff --git a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
+index e28eeae491..d3de038d16 100644
+--- a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
++++ b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
+@@ -16,6 +16,7 @@ SRC_URI = "${DEBIAN_MIRROR}/main/n/netkit-telnet/netkit-telnet_${PV}.orig.tar.gz
+            file://0001-telnetd-utility.c-Fix-buffer-overflow-in-netoprintf.patch \
+            file://0001-utility-Include-time.h-form-time-and-strftime-protot.patch \
+            file://0001-Drop-using-register-keyword.patch \
++           file://CVE-2022-39028.patch \
+            "
  
--SRC_URI[sha256sum] = "ee3c430c4ef7b87c57b622108c7339376d6c27fbbf2767770be3de1df63d008c"
-+SRC_URI[sha256sum] = "546ba591822e8bb0e467d40c4d4a30f89d937c3a507fe83a578f582f6a211327"
- 
- DEPENDS = "util-linux groff-native"
- 
+ UPSTREAM_CHECK_URI = "${DEBIAN_MIRROR}/main/n/netkit-telnet/"
 -- 
 2.34.1
 
