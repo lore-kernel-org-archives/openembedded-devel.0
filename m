@@ -1,201 +1,140 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9C9FCCE7A8A
-	for <webhook@archiver.kernel.org>; Sun, 24 Sep 2023 07:02:19 +0000 (UTC)
-Received: from mailout01.t-online.de (mailout01.t-online.de [194.25.134.80])
- by mx.groups.io with SMTP id smtpd.web10.35630.1695538933487127863
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0BA8ACE7A88
+	for <webhook@archiver.kernel.org>; Sun, 24 Sep 2023 14:38:23 +0000 (UTC)
+Received: from mail-yw1-f179.google.com (mail-yw1-f179.google.com [209.85.128.179])
+ by mx.groups.io with SMTP id smtpd.web10.40596.1695566298513888538
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 24 Sep 2023 00:02:13 -0700
+ Sun, 24 Sep 2023 07:38:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.80, mailfrom: f_l_k@t-online.de)
-Received: from fwd73.aul.t-online.de (fwd73.aul.t-online.de [10.223.144.99])
-	by mailout01.t-online.de (Postfix) with SMTP id 7661C4CBE
-	for <openembedded-devel@lists.openembedded.org>; Sun, 24 Sep 2023 09:02:08 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.163.34.4]) by fwd73.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1qkJ82-2FMlof0; Sun, 24 Sep 2023 09:02:06 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ROlmh9FN;
+ spf=pass (domain: gmail.com, ip: 209.85.128.179, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f179.google.com with SMTP id 00721157ae682-59c215f2f4aso60319217b3.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 24 Sep 2023 07:38:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1695566297; x=1696171097; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=R5FcIFy5LtULrOSB51Ffcn0TYk/Xsz6DI9isYdsn7JQ=;
+        b=ROlmh9FN9pOc7sWRPcSP3WT/nn+dz62mIkAzXhlNbXlRm1tmxuUkU4rYY2Y4Q9Lr0B
+         H2+CPUBM3LN+L1CgsQu5tBpHc6MMWeRJLx271Zo4AVhLRDWIspCJkOg3L4BlRLkBO28c
+         5NhaWbs7sJkrxjvloksb4Hy9WGH2O0LxRl8q0Z/nkuBkeWcqWB3ay6ZMoIj5PO60Zw3R
+         3afpfjC0VXxpVW2uEQOZ7MtVPorBYw9avKJdGnws8XNqwi1PO5gga1C4MaIXk68Y/v5x
+         9mn3h9BO+RhU7nQefedRY3J6nvGrOKrypVEDROeQdUGXbTIhrh/40WagHs1N+lFsFn5f
+         EIJw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1695566297; x=1696171097;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=R5FcIFy5LtULrOSB51Ffcn0TYk/Xsz6DI9isYdsn7JQ=;
+        b=eppB1t0Ap/ywRYfofSQ9nTPz99ZwrqK+PNJiCuCcGnO5zvUUftVPxRU6K1WlbkAS9t
+         E9yzN974O9BG33R2npHvN7YWay24kn/0yeW3cAGmQxapQPDi2nxrIuM0JHw7pK9mePsU
+         V13W9kJmxY8dPyIW/gkdQcJtMv4nlwN3OUz9t+lxD5hwFUVMpcb9dUtOVdyt+9OeTtMh
+         LPcgZ4dM/rMFxJBkIesPoqIWzKVROgqFpk2YDoomDhwzS/D3jfLlqFn1JSAK0AzmYYut
+         HX/sRXQtHEKCmjz3bZa8OPzm8Xc7W3iW/KhSIsPheB4cSAPkznIo5NclYBDlZNlUcfmc
+         cYBQ==
+X-Gm-Message-State: AOJu0Yy9EEoEx8bBVTecEcLlGLu2T8bO50MfV+a9KRXOi4CRU1JjJ1vQ
+	wgrQEEi0vQBHqFI3sp52mTrMh+9MLvs=
+X-Google-Smtp-Source: AGHT+IFPk0Tju6+lWAOZQHJhCLXPIrLeLhop463xXRjJR1ZKZXXoiKmPBYJ+Faq1I+mQKtibOA4B2w==
+X-Received: by 2002:a0d:d046:0:b0:586:c27c:3eee with SMTP id s67-20020a0dd046000000b00586c27c3eeemr5271958ywd.38.1695566297426;
+        Sun, 24 Sep 2023 07:38:17 -0700 (PDT)
+Received: from keaua.caveonetworks.com ([2600:1700:9190:ba10::29])
+        by smtp.gmail.com with ESMTPSA id j68-20020a0de047000000b0059b3d594c04sm1926418ywe.125.2023.09.24.07.38.16
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 24 Sep 2023 07:38:17 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCHv4] gedit: Upgrade 44.2 -> 46.1
-Date: Sun, 24 Sep 2023 09:01:59 +0200
-Message-ID: <20230924070159.3720001-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.42.0
+Cc: Armin Kuster <akuster@mvista.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][mickledore][PATCH] openldap: update to 2.5.16.
+Date: Sun, 24 Sep 2023 10:38:16 -0400
+Message-Id: <20230924143816.982891-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1695538926-650B27A2-10D4276F/0/0 CLEAN NORMAL
-X-TOI-MSGID: 447356c9-140d-49e7-a534-8a9c3669ca17
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 24 Sep 2023 07:02:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105104
+ <openembedded-devel@lists.openembedded.org>; Sun, 24 Sep 2023 14:38:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105105
 
-- add recipes for libedit-amtk and libgedit-gtksourceview
-- drop deprecated amtk recipe
-- update dependencies
-- fix reproducibility issue
+From: Armin Kuster <akuster@mvista.com>
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+2.5.x is an LTS version per the project.
+Drop patch now included.
+
+Signed-off-by: Armin Kuster <akuster@mvista.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 7a423279cf6afe27cf6abf747f1a2021ee5b6d26)
+Signed-off-by: Armin Kuster <akuster@mvista.com>
 ---
- meta-gnome/recipes-gnome/amtk/amtk_5.6.1.bb   | 22 -----------------
- .../gedit/{gedit_44.2.bb =3D> gedit_46.1.bb}    | 13 +++++++---
- .../gedit/libgedit-amtk_5.8.0.bb              | 17 +++++++++++++
- .../gedit/libgedit-gtksourceview_299.0.4.bb   | 24 +++++++++++++++++++
- 4 files changed, 51 insertions(+), 25 deletions(-)
- delete mode 100644 meta-gnome/recipes-gnome/amtk/amtk_5.6.1.bb
- rename meta-gnome/recipes-gnome/gedit/{gedit_44.2.bb =3D> gedit_46.1.bb}=
- (69%)
- create mode 100644 meta-gnome/recipes-gnome/gedit/libgedit-amtk_5.8.0.bb
- create mode 100644 meta-gnome/recipes-gnome/gedit/libgedit-gtksourceview=
-_299.0.4.bb
+ ...ure-Pass-pthread_t-to-pthread_detach.patch | 32 -------------------
+ ...{openldap_2.5.13.bb => openldap_2.5.16.bb} |  3 +-
+ 2 files changed, 1 insertion(+), 34 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/openldap/openldap/0001-configure-Pass-pthread_t-to-pthread_detach.patch
+ rename meta-oe/recipes-support/openldap/{openldap_2.5.13.bb => openldap_2.5.16.bb} (98%)
 
-diff --git a/meta-gnome/recipes-gnome/amtk/amtk_5.6.1.bb b/meta-gnome/rec=
-ipes-gnome/amtk/amtk_5.6.1.bb
+diff --git a/meta-oe/recipes-support/openldap/openldap/0001-configure-Pass-pthread_t-to-pthread_detach.patch b/meta-oe/recipes-support/openldap/openldap/0001-configure-Pass-pthread_t-to-pthread_detach.patch
 deleted file mode 100644
-index fbc8f3845..000000000
---- a/meta-gnome/recipes-gnome/amtk/amtk_5.6.1.bb
+index 6e73f8b382..0000000000
+--- a/meta-oe/recipes-support/openldap/openldap/0001-configure-Pass-pthread_t-to-pthread_detach.patch
 +++ /dev/null
-@@ -1,22 +0,0 @@
--SUMMARY =3D "Actions, Menus and Toolbars Kit"
--LICENSE =3D "LGPL-3.0-or-later"
--LIC_FILES_CHKSUM =3D "file://LICENSES/LGPL-3.0-or-later.txt;md5=3Dc51d3e=
-ef3be114124d11349ca0d7e117"
+@@ -1,32 +0,0 @@
+-From 7577b120acda087bf3f5f613c2c72663b3864ad8 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sun, 4 Sep 2022 09:43:06 -0700
+-Subject: [PATCH] configure: Pass pthread_t to pthread_detach
 -
--DEPENDS =3D " \
--    glib-2.0-native \
--    gtk+3 \
--    gtk-doc-native \
--    libxslt-native \
--    docbook-xsl-stylesheets-native \
--    python3-pygments-native \
--"
+-This helps compilers when using C2X standard
 -
--GNOMEBASEBUILDCLASS =3D "meson"
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- configure.ac | 5 +----
+- 1 file changed, 1 insertion(+), 4 deletions(-)
 -
--GIR_MESON_OPTION =3D ""
+-diff --git a/configure.ac b/configure.ac
+-index 0978eeb..58d15f8 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -1467,10 +1467,7 @@ pthread_rwlock_t rwlock;
+- 				dnl save the flags
+- 				AC_LINK_IFELSE([AC_LANG_PROGRAM([[
+- #include <pthread.h>
+--#ifndef NULL
+--#define NULL (void*)0
+--#endif
+--]], [[pthread_detach(NULL);]])],[ol_cv_func_pthread_detach=yes],[ol_cv_func_pthread_detach=no])
+-+]], [[pthread_detach((pthread_t)-1);]])],[ol_cv_func_pthread_detach=yes],[ol_cv_func_pthread_detach=no])
+- 			])
+- 
+- 			if test $ol_cv_func_pthread_detach = no ; then
+--- 
+-2.37.3
 -
--inherit gnomebase gettext features_check gobject-introspection
--
--ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"
--
--SRC_URI[archive.sha256sum] =3D "d50115b85c872aac296934b5ee726a3fa156c6f5=
-ad96d27e0edd0aa5ad173228"
-diff --git a/meta-gnome/recipes-gnome/gedit/gedit_44.2.bb b/meta-gnome/re=
-cipes-gnome/gedit/gedit_46.1.bb
-similarity index 69%
-rename from meta-gnome/recipes-gnome/gedit/gedit_44.2.bb
-rename to meta-gnome/recipes-gnome/gedit/gedit_46.1.bb
-index 34c782297..01d7a072a 100644
---- a/meta-gnome/recipes-gnome/gedit/gedit_44.2.bb
-+++ b/meta-gnome/recipes-gnome/gedit/gedit_46.1.bb
-@@ -6,27 +6,34 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D75859989545e=
-37968a99b631ef42722e"
- GNOMEBASEBUILDCLASS =3D "meson"
-=20
- DEPENDS =3D " \
-+    appstream-glib-native \
-+    desktop-file-utils-native \
-+    libgedit-amtk \
-+    libgedit-gtksourceview \
-     gdk-pixbuf-native \
-     gtk+3 \
-     gsettings-desktop-schemas \
-     libpeas \
-     libsoup \
-     gspell \
--    gtksourceview4 \
-     tepl \
+diff --git a/meta-oe/recipes-support/openldap/openldap_2.5.13.bb b/meta-oe/recipes-support/openldap/openldap_2.5.16.bb
+similarity index 98%
+rename from meta-oe/recipes-support/openldap/openldap_2.5.13.bb
+rename to meta-oe/recipes-support/openldap/openldap_2.5.16.bb
+index b117677f9b..a56b454dc0 100644
+--- a/meta-oe/recipes-support/openldap/openldap_2.5.13.bb
++++ b/meta-oe/recipes-support/openldap/openldap_2.5.16.bb
+@@ -19,10 +19,9 @@ SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/$
+     file://slapd.service \
+     file://remove-user-host-pwd-from-version.patch \
+     file://0001-build-top.mk-unset-STRIP_OPTS.patch \
+-    file://0001-configure-Pass-pthread_t-to-pthread_detach.patch \
  "
-=20
--inherit gnomebase gsettings itstool gnome-help gobject-introspection gtk=
--doc vala gettext features_check mime-xdg python3targetconfig
-+inherit gnomebase gsettings itstool gnome-help gobject-introspection gtk=
--doc vala gettext features_check mime-xdg gtk-icon-cache python3targetcon=
-fig
-=20
- def gnome_verdir(v):
-     return oe.utils.trim_version(v, 1)
-=20
--SRC_URI[archive.sha256sum] =3D "3bbb1b3775d4c277daf54aaab44b0eb83a4eb1f0=
-9f0391800041c9e56893ec11"
-+SRC_URI[archive.sha256sum] =3D "a1a6e37f041765dff7227a1f5578b6f49faaf016=
-b1e17e869caf5bfb94c6aa4e"
-=20
- # gobject-introspection is mandatory and cannot be configured
- REQUIRED_DISTRO_FEATURES =3D "gobject-introspection-data"
- ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"
-=20
-+do_install:prepend() {
-+    sed -i -e 's|${B}||g' ${B}/plugins/filebrowser/gedit-file-browser-en=
-um-types.c
-+}
-+
- GIR_MESON_OPTION =3D ""
-=20
- GTKDOC_MESON_OPTION =3D "gtk_doc"
-diff --git a/meta-gnome/recipes-gnome/gedit/libgedit-amtk_5.8.0.bb b/meta=
--gnome/recipes-gnome/gedit/libgedit-amtk_5.8.0.bb
-new file mode 100644
-index 000000000..11da836ff
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/gedit/libgedit-amtk_5.8.0.bb
-@@ -0,0 +1,17 @@
-+SUMMARY =3D "libgedit-amtk - Actions, Menus and Toolbars Kit for GTK app=
-lications"
-+SECTION =3D "gnome"
-+LICENSE =3D "LGPL-3.0-or-later"
-+LIC_FILES_CHKSUM =3D "file://LICENSES/LGPL-3.0-or-later.txt;md5=3Dc51d3e=
-ef3be114124d11349ca0d7e117"
-+
-+DEPENDS =3D "glib-2.0 gtk+3"
-+
-+inherit meson pkgconfig gobject-introspection features_check gtk-doc
-+
-+SRC_URI =3D "git://github.com/gedit-technology/libgedit-amtk.git;protoco=
-l=3Dhttps;branch=3Dmain"
-+S =3D "${WORKDIR}/git"
-+SRCREV =3D "f6fbfd1c57de3d97cab2056a5c3088b0da49e8a4"
-+
-+ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"
-+
-+GIR_MESON_OPTION =3D "gobject_introspection"
-+GTKDOC_MESON_OPTION =3D "gtk_doc"
-diff --git a/meta-gnome/recipes-gnome/gedit/libgedit-gtksourceview_299.0.=
-4.bb b/meta-gnome/recipes-gnome/gedit/libgedit-gtksourceview_299.0.4.bb
-new file mode 100644
-index 000000000..3a655f650
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/gedit/libgedit-gtksourceview_299.0.4.bb
-@@ -0,0 +1,24 @@
-+SUMMARY =3D "Gedit Technology - Source code editing widget"
-+SECTION =3D "gnome"
-+LICENSE =3D "LGPL-2.1-only"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dfbc093901857fcd118f065f900982=
-c24"
-+
-+DEPENDS =3D "glib-2.0 gtk+3 libxml2"
-+
-+inherit meson pkgconfig gobject-introspection features_check gtk-doc
-+
-+SRC_URI =3D "git://github.com/gedit-technology/libgedit-gtksourceview.gi=
-t;protocol=3Dhttps;branch=3Dmain"
-+S =3D "${WORKDIR}/git"
-+SRCREV =3D "7062264d635f6efe04d88217a893a97ff385b873"
-+
-+ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"
-+
-+GIR_MESON_OPTION =3D "gobject_introspection"
-+GTKDOC_MESON_OPTION =3D "gtk_doc"
-+
-+do_install:prepend() {
-+    sed -i -e 's|${B}||g' ${B}/gtksourceview/gtksource-enumtypes.c
-+    sed -i -e 's|${B}||g' ${B}/gtksourceview/gtksource-enumtypes.h
-+}
-+
-+FILES:${PN} +=3D "${datadir}"
---=20
-2.42.0
+ 
+-SRC_URI[sha256sum] = "ee3c430c4ef7b87c57b622108c7339376d6c27fbbf2767770be3de1df63d008c"
++SRC_URI[sha256sum] = "546ba591822e8bb0e467d40c4d4a30f89d937c3a507fe83a578f582f6a211327"
+ 
+ DEPENDS = "util-linux groff-native"
+ 
+-- 
+2.34.1
 
 
