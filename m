@@ -1,86 +1,158 @@
-Return-Path: <samantha.jalabert@syslinbit.com>
+Return-Path: <costamagna.gianfranco@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5D253CE7A99
-	for <webhook@archiver.kernel.org>; Mon, 25 Sep 2023 11:42:31 +0000 (UTC)
-Received: from 8.mo575.mail-out.ovh.net (8.mo575.mail-out.ovh.net [46.105.74.219])
- by mx.groups.io with SMTP id smtpd.web10.58660.1695642148052040958
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 58342CE7A81
+	for <webhook@archiver.kernel.org>; Mon, 25 Sep 2023 13:14:02 +0000 (UTC)
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+ by mx.groups.io with SMTP id smtpd.web11.60997.1695647640381191807
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Sep 2023 04:42:28 -0700
+ Mon, 25 Sep 2023 06:14:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=softfail (domain: syslinbit.com, ip: 46.105.74.219, mailfrom: samantha.jalabert@syslinbit.com)
-Received: from director6.ghost.mail-out.ovh.net (unknown [10.109.156.77])
-	by mo575.mail-out.ovh.net (Postfix) with ESMTP id 35F28256BB
-	for <openembedded-devel@lists.openembedded.org>; Mon, 25 Sep 2023 11:42:26 +0000 (UTC)
-Received: from ghost-submission-6684bf9d7b-qwhs7 (unknown [10.111.208.234])
-	by director6.ghost.mail-out.ovh.net (Postfix) with ESMTPS id E83E91FD3C;
-	Mon, 25 Sep 2023 11:42:25 +0000 (UTC)
-Received: from syslinbit.com ([37.59.142.96])
-	by ghost-submission-6684bf9d7b-qwhs7 with ESMTPSA
-	id AChQNyFyEWWc0AUA4dzdTw
-	(envelope-from <samantha.jalabert@syslinbit.com>); Mon, 25 Sep 2023 11:42:25 +0000
-Authentication-Results: garm.ovh; auth=pass (GARM-96R001902136d8-9c45-49eb-a8e7-157d2ac4d41f,
-                    FBD810A19267834B149CBBD30CC19800876A49ED) smtp.auth=samantha.jalabert@syslinbit.com
-X-OVh-ClientIp: 141.94.99.231
-From: samantha.jalabert@syslinbit.com
-To: openembedded-devel@lists.openembedded.org,
-	mrybczynska@syslinbit.com
-Cc: Samantha Jalabert <samantha.jalabert@syslinbit.com>
-Subject: [meta-python][PATCH 6/6] Remove python3-isodate
-Date: Mon, 25 Sep 2023 11:41:42 +0000
-Message-Id: <20230925114142.2508458-7-samantha.jalabert@syslinbit.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=hqfPElmb;
+ spf=pass (domain: gmail.com, ip: 209.85.128.43, mailfrom: costamagna.gianfranco@gmail.com)
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-4053c6f0e50so55314845e9.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Sep 2023 06:14:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1695647638; x=1696252438; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=NEYzTU90ZYxZ7zZ88quAwVcWYS2X/8yAooSqikmwe/8=;
+        b=hqfPElmbWtrRU7tYaqkWPd+UjmP6/bQO4en4sbdXo/z2BJkjeVXqZh7LfgNWLRZHK0
+         Xlfs7kwBBBvaNDvF6JJMfBOhIGXDvnvFJ5NQ4/v/FqFsoJ87hK0jTo1qXJugKG4fKXGN
+         oDSwdPZYPSEqykBYGp0ayxXXTkw14C1pUUVhuR8yzaBOhOP10gF1Tkc37feqMrUQRxjG
+         CC225cBZ2GOrZ4uP/ZXsYGGBCc6RQAwfIdGhpiRxmz69QAuYpMOH93xz9v3j3gF7G4jy
+         BlP5vEit/QsprLa/3Mpy8St0LCn+bslS3Co8SitMfGo5+UIW+pM8cgWTfGWiB23w9OLN
+         +bOQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1695647638; x=1696252438;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=NEYzTU90ZYxZ7zZ88quAwVcWYS2X/8yAooSqikmwe/8=;
+        b=YKFmc7osBK0hMvrOPZ2Wiwe3zLkK5B/mlnOHcrT5IBIB3yaWV+ucXyA70Rzrgu3IPX
+         4vB/slSqtIHjQEaK1d7d2Ikr230uo+NgqVNrvsKnZNufwVkGUmTVCai7y2DUUOTFZn28
+         twSa2qIaPYV1MHoxW0L5lNbGmOKsvD7psXwf4ktsM+Dgt8dLLzQHOwlpcXw18Z9qCrpc
+         tYdbI6slTIOs9hqB0wQ2mIjE49+TJT1wxo18SCn+wbvWPPWqcEvLZqm6vfn+ZZh5KOCT
+         jURw7vzrAsPQUvn7yRlTudq7TO4GfS2WVAoleYjKCC8GlpzrKo9nUPnkTnlDh7k3iVtu
+         SQMQ==
+X-Gm-Message-State: AOJu0YwKRhIQg+HfnPXAXx8FYg6Ok7LxngO0qiGJvuKU1OzuAOiB6/ml
+	1M+cUu0GvH8Y17O1Nxa9vqocAD4AvL/Yrg==
+X-Google-Smtp-Source: AGHT+IF36dD17AOr/5VMzUcheIPhl/5vLCgn1XZcwvJdK5kwde1tX8xBchprGfPGz64ImiUGDOMx6Q==
+X-Received: by 2002:a1c:7c0a:0:b0:3fe:dcd0:2e32 with SMTP id x10-20020a1c7c0a000000b003fedcd02e32mr6122832wmc.19.1695647637778;
+        Mon, 25 Sep 2023 06:13:57 -0700 (PDT)
+Received: from Unimatrix08-Jammy.Abinsula (mob-5-90-45-88.net.vodafone.it. [5.90.45.88])
+        by smtp.gmail.com with ESMTPSA id 8-20020a05600c230800b003fe61c33df5sm15164296wmo.3.2023.09.25.06.13.51
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 25 Sep 2023 06:13:52 -0700 (PDT)
+From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
+X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+To: openembedded-devel@lists.openembedded.org
+Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Subject: [meta-oe][PATCH] mosquitto: upgrade 2.0.17 -> 2.0.18
+Date: Mon, 25 Sep 2023 15:13:49 +0200
+Message-Id: <20230925131349.12941-1-costamagnagianfranco@yahoo.it>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230925114142.2508458-1-samantha.jalabert@syslinbit.com>
-References: <20230925114142.2508458-1-samantha.jalabert@syslinbit.com>
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 8224135871776557321
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedviedrudelgedggedvucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomhepshgrmhgrnhhthhgrrdhjrghlrggsvghrthesshihshhlihhnsghithdrtghomhenucggtffrrghtthgvrhhnpeetleffjeffvdejvdfgueelvdfgheejieetheevteehleeljeduuedtteekgfeuffenucfkphepuddvjedrtddrtddruddpudeguddrleegrdelledrvdefuddpfeejrdehledrudegvddrleeinecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeoshgrmhgrnhhthhgrrdhjrghlrggsvghrthesshihshhlihhnsghithdrtghomheqpdhnsggprhgtphhtthhopedupdhrtghpthhtohepohhpvghnvghmsggvugguvgguqdguvghvvghlsehlihhsthhsrdhophgvnhgvmhgsvgguuggvugdrohhrghdpoffvtefjohhsthepmhhoheejhedpmhhouggvpehsmhhtphhouhht
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 25 Sep 2023 11:42:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105127
+ <openembedded-devel@lists.openembedded.org>; Mon, 25 Sep 2023 13:14:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105128
 
-From: Samantha Jalabert <samantha.jalabert@syslinbit.com>
-
-python3-isodate recipe is moved to openembedded-core.
-
-Signed-off-by: Marta Rybczynska <mrybczynska@syslinbit.com>
-Signed-off-by: Samantha Jalabert <samantha.jalabert@syslinbit.com>
+Add two patches from Debian, pull requests proposed upstream as 2894 and 2895
+to make it start only when board is online, and to fix dynamic websockets link failure
 ---
- .../python/python3-isodate_0.6.1.bb                | 14 --------------
- 1 file changed, 14 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-isodate_0=
-.6.1.bb
+ .../mosquitto/files/2894.patch                | 23 +++++++++++++++++
+ .../mosquitto/files/2895.patch                | 25 +++++++++++++++++++
+ ...osquitto_2.0.17.bb => mosquitto_2.0.18.bb} |  4 ++-
+ 3 files changed, 51 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-connectivity/mosquitto/files/2894.patch
+ create mode 100644 meta-networking/recipes-connectivity/mosquitto/files/2895.patch
+ rename meta-networking/recipes-connectivity/mosquitto/{mosquitto_2.0.17.bb => mosquitto_2.0.18.bb} (95%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-isodate_0.6.1.bb=
- b/meta-python/recipes-devtools/python/python3-isodate_0.6.1.bb
-deleted file mode 100644
-index c65083b777..0000000000
---- a/meta-python/recipes-devtools/python/python3-isodate_0.6.1.bb
-+++ /dev/null
-@@ -1,14 +0,0 @@
--SUMMARY =3D "ISO 8601 date/time parser"
--LICENSE =3D "BSD-3-Clause"
--LIC_FILES_CHKSUM =3D "file://PKG-INFO;beginline=3D8;endline=3D8;md5=3De9=
-10b35b0ef4e1f665b9a75d6afb7709"
--
--SRC_URI[sha256sum] =3D "48c5881de7e8b0a0d648cb024c8062dc84e7b840ed81e864=
-c7614fd3c127bde9"
--
--inherit pypi setuptools3
--
--RDEPENDS:${PN} +=3D " \
--    python3-numbers \
--    python3-six \
--"
--
--BBCLASSEXTEND =3D "native nativesdk"
---=20
+diff --git a/meta-networking/recipes-connectivity/mosquitto/files/2894.patch b/meta-networking/recipes-connectivity/mosquitto/files/2894.patch
+new file mode 100644
+index 000000000..3275e57e3
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/mosquitto/files/2894.patch
+@@ -0,0 +1,23 @@
++From: Joachim Zobel <jz-2017@heute-morgen.de>
++Date: Wed, 13 Sep 2023 09:55:34 +0200
++Subject: [PATCH] Link correctly with shared websockets library if needed see:
++ https://github.com/eclipse/mosquitto/pull/2751
++
++Patch contributed by Joachim Zobel <jz-2017@heute-morgen.de> and  Daniel Engberg <daniel.engberg.lists@pyret.net>
++---
++ src/CMakeLists.txt | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
++index 9380a04..dce8313 100644
++--- a/src/CMakeLists.txt
+++++ b/src/CMakeLists.txt
++@@ -200,7 +200,7 @@ if (WITH_WEBSOCKETS)
++ 			link_directories(${mosquitto_SOURCE_DIR})
++ 		endif (WIN32)
++ 	else (STATIC_WEBSOCKETS)
++-		set (MOSQ_LIBS ${MOSQ_LIBS} websockets)
+++		set (MOSQ_LIBS ${MOSQ_LIBS} websockets_shared)
++ 	endif (STATIC_WEBSOCKETS)
++ endif (WITH_WEBSOCKETS)
++ 
+diff --git a/meta-networking/recipes-connectivity/mosquitto/files/2895.patch b/meta-networking/recipes-connectivity/mosquitto/files/2895.patch
+new file mode 100644
+index 000000000..a9e9c97b8
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/mosquitto/files/2895.patch
+@@ -0,0 +1,25 @@
++From: Joachim Zobel <jz-2017@heute-morgen.de>
++Date: Wed, 13 Sep 2023 10:05:43 +0200
++Subject: [PATCH] Mosquitto now waits for network-online when starting
++ (Closes: #1036450)
++
++See: https://github.com/eclipse/mosquitto/issues/2878
++---
++ service/systemd/mosquitto.service.simple | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/service/systemd/mosquitto.service.simple b/service/systemd/mosquitto.service.simple
++index 15ee0d6..c2a330b 100644
++--- a/service/systemd/mosquitto.service.simple
+++++ b/service/systemd/mosquitto.service.simple
++@@ -1,8 +1,8 @@
++ [Unit]
++ Description=Mosquitto MQTT Broker
++ Documentation=man:mosquitto.conf(5) man:mosquitto(8)
++-After=network.target
++-Wants=network.target
+++After=network-online.target
+++Wants=network-online.target
++ 
++ [Service]
++ ExecStart=/usr/sbin/mosquitto -c /etc/mosquitto/mosquitto.conf
+diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.17.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.18.bb
+similarity index 95%
+rename from meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.17.bb
+rename to meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.18.bb
+index 690b6bc12..0c9ccc810 100644
+--- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.17.bb
++++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.18.bb
+@@ -17,9 +17,11 @@ DEPENDS = "uthash cjson"
+ SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
+            file://mosquitto.init \
+            file://1571.patch \
++           file://2894.patch \
++           file://2895.patch \
+ "
+ 
+-SRC_URI[sha256sum] = "3be7a911236567c1a9fbe25baf3e3167004ba4a0c151a448ef1f7fc077dba52f"
++SRC_URI[sha256sum] = "d665fe7d0032881b1371a47f34169ee4edab67903b2cd2b4c083822823f4448a"
+ 
+ inherit systemd update-rc.d useradd cmake pkgconfig
+ 
+-- 
 2.34.1
 
 
