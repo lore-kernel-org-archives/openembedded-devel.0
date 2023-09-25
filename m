@@ -2,120 +2,193 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 730F3CE7AAA
-	for <webhook@archiver.kernel.org>; Mon, 25 Sep 2023 17:26:04 +0000 (UTC)
-Received: from mail-oa1-f48.google.com (mail-oa1-f48.google.com [209.85.160.48])
- by mx.groups.io with SMTP id smtpd.web11.67388.1695662757473466508
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9A59FCE7AB4
+	for <webhook@archiver.kernel.org>; Mon, 25 Sep 2023 17:58:24 +0000 (UTC)
+Received: from mail-ot1-f43.google.com (mail-ot1-f43.google.com [209.85.210.43])
+ by mx.groups.io with SMTP id smtpd.web11.68214.1695664696826549321
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Sep 2023 10:25:57 -0700
+ Mon, 25 Sep 2023 10:58:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=aDadvqcv;
- spf=pass (domain: gmail.com, ip: 209.85.160.48, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f48.google.com with SMTP id 586e51a60fabf-1db2445b7afso4177041fac.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Sep 2023 10:25:57 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=VX/ExKow;
+ spf=pass (domain: gmail.com, ip: 209.85.210.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-ot1-f43.google.com with SMTP id 46e09a7af769-6bf04263dc8so4301809a34.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Sep 2023 10:58:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1695662756; x=1696267556; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1695664696; x=1696269496; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=aTYKYGzRyyq8E39NTMwk7KwEqT2A1oxC2mVQH5NeTb4=;
-        b=aDadvqcvnCug36eJS6YDUkG6oBxuAO3ASKxHdwKAJDphtriPBb34kcKkFhHG23I+HQ
-         FhFfxt1YHVSNpnJNyT26il8sgcR4YIXVFoL6thMzJtdA2nMvMqDMFD2Cr0BKvaRVJ38k
-         kQyom7Bsd+g1rdBFEYO9CoWy8X3XfYxxJbD6E+fDF7A4RkTua9rw4w+M1jdwdwdFalDo
-         sjThvmfnYITr2P1jHhhu9I0xyC/smdYaqR/iRg/B3YjayUxt17w/9cPOGccsMxrDRS9G
-         0llNtHebpaY7yNwnjoA4PxuRtTgoj0+DibARgIquBwZwsDjFjjyTZRsG23pGWmiXiccc
-         Fq+w==
+        bh=g1NUvRomJBB811TfEc5dL3cpCx3UbZghdCpN5IvgFKk=;
+        b=VX/ExKow6cK8aOPb7lQu96mUGEf81IA5bvviVF0BW79F3Br/TUeY/ED+6+s+J5s4GY
+         tRdBKyvZqy80XcxxzRh/IXO4AUvEN8xKitsv2hVZ/S6ZYsfLn2I72kV8zRTtHre4Em2Z
+         GeOc97ncUWQtX2MOVJ5Fqgka4WUBnXMBYGhdckBsGwdXk9zV83FFGJzOzURGXRJF9IKn
+         HyTwsZzOE5KACZ/UtRcqJNKMxTq4lOZ61/MLc0gPH7QvqWKz7/ysqxOua1K4nLj3w4ox
+         vBk6hAZABa9H0VpIDcfyT934SD/tjfNvnfGjL5NqzsoCcbUd4e4l/GvnGOAcskMyFMrC
+         hR0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695662756; x=1696267556;
+        d=1e100.net; s=20230601; t=1695664696; x=1696269496;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=aTYKYGzRyyq8E39NTMwk7KwEqT2A1oxC2mVQH5NeTb4=;
-        b=HyVDKsQtw+mtTiNMoMj5L+097UJxIz/J22GfUaG1BMkDhu/KHVzwY9DTWnTE9ZvbyW
-         jkjm+mzGgA6fGhZRKxOCdbZJpjSYbcgJg7bxwihvc3zB0s4qCXoAazcenfbJJ2CcwlkQ
-         CGeHNFZYCV63GyY7905OlfVdadzoqmhgpoVcaP5+tiz362VKIzMuVK/QzinrmHA5dxaU
-         4q/eBZccvYK9O2jdTdz7VkvdV3jqPRy/2FyPirUsuZTLGoMyWtEb3wmhQ0EUctkUmuy2
-         vxO6wgiXbpJ2bJIVJ7VptEVbzwm/Wiv9IAhCk830gDkpF5F2ZY2mqYZXyRxQ7g0MQ+oq
-         L2Nw==
-X-Gm-Message-State: AOJu0YyOYXXaW0H4+q9G2jb/2lYpimO058FJI7w6hpSHpYHRCow5hZHt
-	SsOgkxeCp5bvjFDB2mEQ62wLrTBLijHz/by06hKeJBg7Yc9oZw==
-X-Google-Smtp-Source: AGHT+IGnhculomij/CfoS1szoGjjWtClNhMBjfA/aFqEY88E3LRMv/7e5vmYVDMZY0ntm0Oqzsv46cOWgORC2dgmJV0=
-X-Received: by 2002:a05:6870:d38b:b0:1b0:408a:1d14 with SMTP id
- k11-20020a056870d38b00b001b0408a1d14mr9716288oag.44.1695662756697; Mon, 25
- Sep 2023 10:25:56 -0700 (PDT)
+        bh=g1NUvRomJBB811TfEc5dL3cpCx3UbZghdCpN5IvgFKk=;
+        b=FClyqVhRyUU/KUC0qUjZZ8OKhzGFuyXR24KsZmwiiaEYQuEvWoJ7Rvf5RG23iKDb3t
+         u1i3F2pxZeOGu7oZNUjDr7aE7Vqmlxjo8O7tXDBkZpVuC6JEzXf9w33rXSmtSak1PIKk
+         whVfOMIQks9dF4xAKzSItuC/Q1+eEkQ+LvslulH97omx6EuBDp5NQnupRRn1yUWP+852
+         LwE6CAaHaRnvjRK+/pxnjgYxZaujMc8lLeJvzlE1YeIsp/oTbHXUgiCBxeOj8NMpeC09
+         N+q59NvlzagqvUgZ67WSfVok1XgJnshtCnYo60Tih2JZikljGToBia2AEG9R5IKI8Pqj
+         fjzg==
+X-Gm-Message-State: AOJu0YyEmiF/YNP2PaC8zsJRH6xboIUM2lWe1z4TebCothjwVvXj8P/n
+	wO5Ck7a+uvAMqjVtUQC2MnWZRPLj6ocq50fYpTM=
+X-Google-Smtp-Source: AGHT+IH7obZgvhTAGNlxXLeVEUJ28bQiMlVvdduGc+POpddcAYK67DU7EnJuuHLQJom6Rdh+BV5dXDnRBOhKIvU8Ykw=
+X-Received: by 2002:a05:6871:594:b0:1bf:26f0:6b5b with SMTP id
+ u20-20020a056871059400b001bf26f06b5bmr9815164oan.32.1695664695924; Mon, 25
+ Sep 2023 10:58:15 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230918110305.38374-1-dse@thaumatec.com> <CAMKF1sqGaJqAHp4_6gsvNPqXywGf=Gjv7ML2d=G16ZbLCW8N4g@mail.gmail.com>
- <CAHgnY3kDUAUSR=o-HXEoBuybqqW47_4AGJScDUgvo-KDRewczg@mail.gmail.com>
-In-Reply-To: <CAHgnY3kDUAUSR=o-HXEoBuybqqW47_4AGJScDUgvo-KDRewczg@mail.gmail.com>
+References: <20230925131349.12941-1-costamagnagianfranco@yahoo.it>
+In-Reply-To: <20230925131349.12941-1-costamagnagianfranco@yahoo.it>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 25 Sep 2023 10:25:30 -0700
-Message-ID: <CAMKF1sr0HY1WL8fcwJ0Uoewgeu-geCYVN+A9Naj3=_qfsQRpsw@mail.gmail.com>
-Subject: Re: [oe] [meta-webserver][PATCH v1 0/2] cockpit: Separate packagekit
- and apps packages
-To: Daniel Semkowicz <dse@thaumatec.com>
-Cc: openembedded-devel@lists.openembedded.org
+Date: Mon, 25 Sep 2023 10:57:49 -0700
+Message-ID: <CAMKF1soBhLJudUsZ0MLcC2Xhg4nkm7Li12Akz0KBRy8dD6fKwg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] mosquitto: upgrade 2.0.17 -> 2.0.18
+To: Gianfranco <costamagna.gianfranco@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org, 
+	Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 25 Sep 2023 17:26:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105130
+ <openembedded-devel@lists.openembedded.org>; Mon, 25 Sep 2023 17:58:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105131
 
-I usually use - https://github.com/yoedistro/yoe-distro but I think it
-can be reproduced with poky + meta-openembedded as well.
+On Mon, Sep 25, 2023 at 6:15=E2=80=AFAM Gianfranco
+<costamagna.gianfranco@gmail.com> wrote:
+>
+> Add two patches from Debian, pull requests proposed upstream as 2894 and =
+2895
+> to make it start only when board is online, and to fix dynamic websockets=
+ link failure
+> ---
+>  .../mosquitto/files/2894.patch                | 23 +++++++++++++++++
+>  .../mosquitto/files/2895.patch                | 25 +++++++++++++++++++
+>  ...osquitto_2.0.17.bb =3D> mosquitto_2.0.18.bb} |  4 ++-
+>  3 files changed, 51 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-networking/recipes-connectivity/mosquitto/files/=
+2894.patch
+>  create mode 100644 meta-networking/recipes-connectivity/mosquitto/files/=
+2895.patch
+>  rename meta-networking/recipes-connectivity/mosquitto/{mosquitto_2.0.17.=
+bb =3D> mosquitto_2.0.18.bb} (95%)
+>
+> diff --git a/meta-networking/recipes-connectivity/mosquitto/files/2894.pa=
+tch b/meta-networking/recipes-connectivity/mosquitto/files/2894.patch
+> new file mode 100644
+> index 000000000..3275e57e3
+> --- /dev/null
+> +++ b/meta-networking/recipes-connectivity/mosquitto/files/2894.patch
+> @@ -0,0 +1,23 @@
+> +From: Joachim Zobel <jz-2017@heute-morgen.de>
+> +Date: Wed, 13 Sep 2023 09:55:34 +0200
+> +Subject: [PATCH] Link correctly with shared websockets library if needed=
+ see:
+> + https://github.com/eclipse/mosquitto/pull/2751
+> +
+> +Patch contributed by Joachim Zobel <jz-2017@heute-morgen.de> and  Daniel=
+ Engberg <daniel.engberg.lists@pyret.net>
 
-On Mon, Sep 25, 2023 at 6:53=E2=80=AFAM Daniel Semkowicz <dse@thaumatec.com=
-> wrote:
+It will be good to annotate the patch with Signed-off-by and Upstream-Statu=
+s:
+
+https://docs.yoctoproject.org/dev/contributor-guide/recipe-style-guide.html=
+?highlight=3Dupstream+status#patch-upstream-status
+
+> +---
+> + src/CMakeLists.txt | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+> +index 9380a04..dce8313 100644
+> +--- a/src/CMakeLists.txt
+> ++++ b/src/CMakeLists.txt
+> +@@ -200,7 +200,7 @@ if (WITH_WEBSOCKETS)
+> +                       link_directories(${mosquitto_SOURCE_DIR})
+> +               endif (WIN32)
+> +       else (STATIC_WEBSOCKETS)
+> +-              set (MOSQ_LIBS ${MOSQ_LIBS} websockets)
+> ++              set (MOSQ_LIBS ${MOSQ_LIBS} websockets_shared)
+> +       endif (STATIC_WEBSOCKETS)
+> + endif (WITH_WEBSOCKETS)
+> +
+> diff --git a/meta-networking/recipes-connectivity/mosquitto/files/2895.pa=
+tch b/meta-networking/recipes-connectivity/mosquitto/files/2895.patch
+> new file mode 100644
+> index 000000000..a9e9c97b8
+> --- /dev/null
+> +++ b/meta-networking/recipes-connectivity/mosquitto/files/2895.patch
+> @@ -0,0 +1,25 @@
+> +From: Joachim Zobel <jz-2017@heute-morgen.de>
+> +Date: Wed, 13 Sep 2023 10:05:43 +0200
+> +Subject: [PATCH] Mosquitto now waits for network-online when starting
+> + (Closes: #1036450)
+> +
+> +See: https://github.com/eclipse/mosquitto/issues/2878
+> +---
+> + service/systemd/mosquitto.service.simple | 4 ++--
+> + 1 file changed, 2 insertions(+), 2 deletions(-)
+> +
+> +diff --git a/service/systemd/mosquitto.service.simple b/service/systemd/=
+mosquitto.service.simple
+> +index 15ee0d6..c2a330b 100644
+> +--- a/service/systemd/mosquitto.service.simple
+> ++++ b/service/systemd/mosquitto.service.simple
+> +@@ -1,8 +1,8 @@
+> + [Unit]
+> + Description=3DMosquitto MQTT Broker
+> + Documentation=3Dman:mosquitto.conf(5) man:mosquitto(8)
+> +-After=3Dnetwork.target
+> +-Wants=3Dnetwork.target
+> ++After=3Dnetwork-online.target
+> ++Wants=3Dnetwork-online.target
+> +
+> + [Service]
+> + ExecStart=3D/usr/sbin/mosquitto -c /etc/mosquitto/mosquitto.conf
+> diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0=
+.17.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.18.bb
+> similarity index 95%
+> rename from meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.=
+17.bb
+> rename to meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.18=
+.bb
+> index 690b6bc12..0c9ccc810 100644
+> --- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.17.bb
+> +++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.18.bb
+> @@ -17,9 +17,11 @@ DEPENDS =3D "uthash cjson"
+>  SRC_URI =3D "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
+>             file://mosquitto.init \
+>             file://1571.patch \
+> +           file://2894.patch \
+> +           file://2895.patch \
+>  "
 >
-> Hello,
+> -SRC_URI[sha256sum] =3D "3be7a911236567c1a9fbe25baf3e3167004ba4a0c151a448=
+ef1f7fc077dba52f"
+> +SRC_URI[sha256sum] =3D "d665fe7d0032881b1371a47f34169ee4edab67903b2cd2b4=
+c083822823f4448a"
 >
-> Could you please provide some details about test setup? I tried to
-> build cockpit using meta-yoe with yoe distro and qemux86, but it was
-> built without any error. Building using clean poky also does not show
-> any error. It seems to be related to environment.
+>  inherit systemd update-rc.d useradd cmake pkgconfig
 >
-> Best regards
-> Daniel
+> --
+> 2.34.1
 >
-> On Wed, Sep 20, 2023 at 10:04=E2=80=AFPM Khem Raj <raj.khem@gmail.com> wr=
-ote:
-> >
-> > I usually see this error with this package
-> >
-> > https://errors.yoctoproject.org/Errors/Details/737847/
-> >
-> > Can you see if anything pops up to fix it while you are here ?
-> >
-> > On Mon, Sep 18, 2023 at 4:03=E2=80=AFAM Daniel Semkowicz <dse@thaumatec=
-.com> wrote:
-> > >
-> > > "Packagekit" and "apps" Cockpit modules were included in the main ${P=
-N}
-> > > package. Move them to a separate packages like all other existing Coc=
-kpit
-> > > modules. This allows to choose which modules are installed in the sys=
-tem.
-> > >
-> > > Daniel Semkowicz (2):
-> > >   cockpit: Move packagekit to a separate package
-> > >   cockpit: Move apps to a separate package
-> > >
-> > >  meta-webserver/recipes-webadmin/cockpit/cockpit_298.bb | 5 +++++
-> > >  1 file changed, 5 insertions(+)
-> > >
-> > > --
-> > > 2.41.0
-> > >
-> > >
-> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > > Links: You receive all messages sent to this group.
-> > > View/Reply Online (#104924): https://lists.openembedded.org/g/openemb=
-edded-devel/message/104924
-> > > Mute This Topic: https://lists.openembedded.org/mt/101430711/1997914
-> > > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsu=
-b [raj.khem@gmail.com]
-> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > >
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#105128): https://lists.openembedded.org/g/openembedde=
+d-devel/message/105128
+> Mute This Topic: https://lists.openembedded.org/mt/101573484/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
