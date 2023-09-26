@@ -1,116 +1,76 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <derek@asterius.io>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8AB04E7E65A
-	for <webhook@archiver.kernel.org>; Tue, 26 Sep 2023 17:54:06 +0000 (UTC)
-Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
- by mx.groups.io with SMTP id smtpd.web10.26401.1695750839432850338
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DBB8DE7E65E
+	for <webhook@archiver.kernel.org>; Tue, 26 Sep 2023 19:33:57 +0000 (UTC)
+Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com [209.85.128.178])
+ by mx.groups.io with SMTP id smtpd.web11.428.1695756836269866353
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Sep 2023 10:53:59 -0700
+ Tue, 26 Sep 2023 12:33:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=N1/3M7/o;
- spf=pass (domain: gmail.com, ip: 209.85.208.42, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-53406799540so5852928a12.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 26 Sep 2023 10:53:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1695750838; x=1696355638; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=GHs9JvVqLf6Ms7iOAtaX+fBpw4XQTU9Q7NB2KsLNX0A=;
-        b=N1/3M7/oKlpljzgdivrsfIbYk2e4avSfh/vpWEjBtKHzFrf4SBw/ZH1tA74zaSzEA5
-         9SwoJtj8G282irmtcqMafFCCNcMEgkvF2ocjsJ6ywMrs72nSXl0aK6ATSdUCLTyakKa7
-         VBXYAlQhs2BfLw6Dv49sFH5t7hOb+bHNnuYDj0s4ILa4/am+t9S9XCfdQYrCgwpQpoLx
-         oOLwkT4QxwhxsRlEgrHAskgrS4Ldl6M4r6KwarYpt/VPOIcSrn4JMN5kUEB62ii6Twlc
-         zqfsVtQxO6bpgLa9qHEym1w0BP6Lu9CdEpWiicMQrexcAxNEaU5MWqMVRNpWQcKQtqcz
-         j9cg==
+ dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.128.178, mailfrom: straka.derek@gmail.com)
+Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-5a1f00b75aaso7804357b3.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 26 Sep 2023 12:33:56 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695750838; x=1696355638;
+        d=1e100.net; s=20230601; t=1695756835; x=1696361635;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=GHs9JvVqLf6Ms7iOAtaX+fBpw4XQTU9Q7NB2KsLNX0A=;
-        b=DoN+Ol11FmfnTX807HzJUK1Uypljyu//eiF1jfnjtrUpzrtCSvdXGvWg4Rr/8IcsMH
-         LJ6JbNkyoGPg4fLZkbblqYhqAAATRwLe3XPUZ8J4/D9xjrL0D8IjC6I6fh9E4R7WiKpf
-         eB6I6/ybXQlW+EhHEUExvf9SZLYMIFF3K0lJWCzL7rUEMMyiaMoe8+kPJknt7qKKoe3i
-         Y5p8Ay+Oab+4J+yM0wKUhyZUyrxsd+2jpEJJ6L41LPA6B9rR4I3CTqizR9dg1h0yYZ5Q
-         kt8nxaAC51yFf814+S7P3GHvyJiPI33DoCqvdekbsgCEOT9HwU13zp9+ZO+Ts4UrFRvp
-         ZUQw==
-X-Gm-Message-State: AOJu0Yw63lTcNj/828gVjvw5Zc36IXmEHGs7lia3PlO/XvjAPF1thZ96
-	yPJEiWpmUxpV+S7MlNFHeoXdraC/skc=
-X-Google-Smtp-Source: AGHT+IFnYy5G0i9ICWinYLXK0ShvZtzaxA3E31DgXUCaDrHlXMesZuVPs/S/szUvcKSxMP0IB0xw4w==
-X-Received: by 2002:aa7:d44e:0:b0:52b:d169:b374 with SMTP id q14-20020aa7d44e000000b0052bd169b374mr9201752edr.3.1695750837645;
-        Tue, 26 Sep 2023 10:53:57 -0700 (PDT)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id s3-20020aa7d783000000b0053116e45317sm7019701edq.44.2023.09.26.10.53.57
+        bh=+IvIPbEvxFmKFUaWY++pjcjm/xf+0WphqG9TlHHfl8U=;
+        b=dhKBD12DDhIc8G+5U5mOdfZXtgcbAnKEAmGhzHYjUoQ9xLDO3UDifi+fXIJgObMs5d
+         u2ZnQZFoDQa8e748XGWLuaKsvU4EN0v5HKFNPHKlOuKmbCdmqGKjNkHSAXSPW9ZP4/gW
+         bvm2096qBfal7O6BE3Akn6C/Gq533Tr6RexiZoKW4pT8gzMrJc6+HSN3pW6g3Oqux3Z0
+         W3MouJlIba4l8b11pL+4O9khuwj3f0qC9sk0CrA+BqkGdNDBWcRwKOKBg5zlrWEUkULl
+         UrfivTHinm49cwpVL9jatCw5FtRIzr3qzuQGaqy7sHdxkNeRy2FvHPIXZvYbisjCxTbK
+         kirA==
+X-Gm-Message-State: AOJu0YwE6km9MmuqM51FcWBDPGbWbs1jirikuzq0za17KC6XVXH0r8DB
+	db/yMxXKCNnhiaJ9RTvXex9ejVeCD5gYCA==
+X-Google-Smtp-Source: AGHT+IFVeq2UonGDJkqjWEGhZlaayweXzszQKwTkjyDaqXhC8Ny0lLyCAhVjP+LDoq/UH43wcQzc5A==
+X-Received: by 2002:a0d:f2c7:0:b0:58c:b845:e4d6 with SMTP id b190-20020a0df2c7000000b0058cb845e4d6mr9941812ywf.4.1695756834976;
+        Tue, 26 Sep 2023 12:33:54 -0700 (PDT)
+Received: from sparta.internal.asterius.io (c-73-228-213-122.hsd1.mn.comcast.net. [73.228.213.122])
+        by smtp.gmail.com with ESMTPSA id bx6-20020a05690c080600b005928d602f44sm1991016ywb.31.2023.09.26.12.33.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 26 Sep 2023 10:53:57 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+        Tue, 26 Sep 2023 12:33:54 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][PATCH] gupnp: fix build with meson-1.2.0
-Date: Tue, 26 Sep 2023 19:53:54 +0200
-Message-ID: <20230926175354.2297242-1-martin.jansa@gmail.com>
-X-Mailer: git-send-email 2.42.0
+Cc: Derek Straka <derek@asterius.io>
+Subject: [meta-python][PATCH] python3-apiflask: Update version 2.0.1 -> 2.0.2
+Date: Tue, 26 Sep 2023 19:33:30 +0000
+Message-Id: <20230926193330.1562236-1-derek@asterius.io>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 26 Sep 2023 17:54:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105145
+ <openembedded-devel@lists.openembedded.org>; Tue, 26 Sep 2023 19:33:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105146
 
-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- ...roperly-spell-provide-in-.wrap-files.patch | 25 +++++++++++++++++++
- .../recipes-connectivity/gupnp/gupnp_1.4.1.bb |  1 +
- 2 files changed, 26 insertions(+)
- create mode 100644 meta-multimedia/recipes-connectivity/gupnp/gupnp/0001-build-properly-spell-provide-in-.wrap-files.patch
+ .../{python3-apiflask_2.0.1.bb => python3-apiflask_2.0.2.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-apiflask_2.0.1.bb => python3-apiflask_2.0.2.bb} (83%)
 
-diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp/0001-build-properly-spell-provide-in-.wrap-files.patch b/meta-multimedia/recipes-connectivity/gupnp/gupnp/0001-build-properly-spell-provide-in-.wrap-files.patch
-new file mode 100644
-index 0000000000..66f07094c5
---- /dev/null
-+++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp/0001-build-properly-spell-provide-in-.wrap-files.patch
-@@ -0,0 +1,25 @@
-+From 7a4515a356a3d5eb2af1f602c77a42a544e71efa Mon Sep 17 00:00:00 2001
-+From: Jan Beich <jbeich@FreeBSD.org>
-+Date: Sun, 9 Jul 2023 03:30:47 +0000
-+Subject: [PATCH] build: properly spell [provide] in *.wrap files
-+
-+meson.build:1:0: ERROR: Unexpected "[provides]" section, did you mean "[provide]"?
-+
-+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
-+Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gupnp/-/commit/884639bd29323cbb8fbd36bc69d08097a2ae2cd1]
-+---
-+ subprojects/gssdp-1.2.wrap | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/subprojects/gssdp-1.2.wrap b/subprojects/gssdp-1.2.wrap
-+index 469c75d..466b83b 100644
-+--- a/subprojects/gssdp-1.2.wrap
-++++ b/subprojects/gssdp-1.2.wrap
-+@@ -3,6 +3,6 @@ url = https://gitlab.gnome.org/GNOME/gssdp.git
-+ revision = gssdp-1.4
-+ depth = 1
-+  
-+-[provides]
-++[provide]
-+ dependency_name = gssdp-1.2
-+ 
-diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.4.1.bb b/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.4.1.bb
-index c21e7a05bf..efeb66f28f 100644
---- a/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.4.1.bb
-+++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.4.1.bb
-@@ -9,6 +9,7 @@ inherit meson pkgconfig vala gobject-introspection
+diff --git a/meta-python/recipes-devtools/python/python3-apiflask_2.0.1.bb b/meta-python/recipes-devtools/python/python3-apiflask_2.0.2.bb
+similarity index 83%
+rename from meta-python/recipes-devtools/python/python3-apiflask_2.0.1.bb
+rename to meta-python/recipes-devtools/python/python3-apiflask_2.0.2.bb
+index ad946470e..88afdda71 100644
+--- a/meta-python/recipes-devtools/python/python3-apiflask_2.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-apiflask_2.0.2.bb
+@@ -7,7 +7,7 @@ inherit pypi setuptools3
  
- SRC_URI = "${GNOME_MIRROR}/${BPN}/1.4/${BPN}-${PV}.tar.xz \
-     file://0001-all-Drop-xmlRecoverMemory.patch \
-+    file://0001-build-properly-spell-provide-in-.wrap-files.patch \
- "
- SRC_URI[sha256sum] = "899196b5e66f03b8e25f046a7a658cd2a6851becb83f2d55345ab3281655dc0c"
+ PYPI_PACKAGE = "APIFlask"
  
+-SRC_URI[sha256sum] = "7ffe29e082c6cc76d8ae78ba2445b5fcd69092fac04f4f8cd23b1c887cb291cc"
++SRC_URI[sha256sum] = "c1ab81640a1ab252888e2cc7ae556272a169b449c582abae309a8fe295f9337d"
+ 
+ RDEPENDS:${PN} += "\
+     python3-flask \
 -- 
-2.42.0
+2.34.1
 
 
