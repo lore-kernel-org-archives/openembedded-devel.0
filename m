@@ -1,109 +1,116 @@
-Return-Path: <narpat.mali@windriver.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 41C69E7E641
-	for <webhook@archiver.kernel.org>; Tue, 26 Sep 2023 14:30:44 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.20659.1695738640303677828
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8AB04E7E65A
+	for <webhook@archiver.kernel.org>; Tue, 26 Sep 2023 17:54:06 +0000 (UTC)
+Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
+ by mx.groups.io with SMTP id smtpd.web10.26401.1695750839432850338
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Sep 2023 07:30:40 -0700
+ Tue, 26 Sep 2023 10:53:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=DmebNfQ5;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=7633797b0d=narpat.mali@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 38QD1IEl013026;
-	Tue, 26 Sep 2023 07:30:36 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=+COwy
-	YnwREljWXuhk//jStOAnw5k2jXkcS/tFA90Hgc=; b=DmebNfQ5ALHsFmeNkJqCl
-	GrFXVsUcm3j5hBKu2AphvRO1kU92FB+CbHr2P5WSKP94ERroo6uPVQpb/Js59/3z
-	VEjpBsw642l0EEs0XnkcV0wl5C3l3iNgSymtRW39AW7BmX89DibQn/x56alAUeam
-	SbMRk8eR3VY2BN925DvFUQC3wE6tuGjc2GRkMnEhVmLT4DWENE5BveYqOCkYuZ6c
-	Yfh2fL3YIc9AOMkv2xH4cJwwkUJxgel1M/s/nXv5nEqOmSVGfJecjsf9t+Aqy+vF
-	WS6Fmw+Kl7Kd0RuekYbiS8lgAatJUpTKwrdpN61+2CyYe1MPJejD3rzWu37run45
-	g==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3t9yhgjhka-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
-	Tue, 26 Sep 2023 07:30:35 -0700 (PDT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.32; Tue, 26 Sep 2023 07:30:32 -0700
-From: nmali <narpat.mali@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <akuster808@gmail.com>
-Subject: [meta-python][kirkstone][PATCH 1/1] python3-django: upgrade 3.2.20 -> 3.2.21
-Date: Tue, 26 Sep 2023 14:29:43 +0000
-Message-ID: <20230926142943.2924070-1-narpat.mali@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=N1/3M7/o;
+ spf=pass (domain: gmail.com, ip: 209.85.208.42, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-53406799540so5852928a12.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 26 Sep 2023 10:53:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1695750838; x=1696355638; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=GHs9JvVqLf6Ms7iOAtaX+fBpw4XQTU9Q7NB2KsLNX0A=;
+        b=N1/3M7/oKlpljzgdivrsfIbYk2e4avSfh/vpWEjBtKHzFrf4SBw/ZH1tA74zaSzEA5
+         9SwoJtj8G282irmtcqMafFCCNcMEgkvF2ocjsJ6ywMrs72nSXl0aK6ATSdUCLTyakKa7
+         VBXYAlQhs2BfLw6Dv49sFH5t7hOb+bHNnuYDj0s4ILa4/am+t9S9XCfdQYrCgwpQpoLx
+         oOLwkT4QxwhxsRlEgrHAskgrS4Ldl6M4r6KwarYpt/VPOIcSrn4JMN5kUEB62ii6Twlc
+         zqfsVtQxO6bpgLa9qHEym1w0BP6Lu9CdEpWiicMQrexcAxNEaU5MWqMVRNpWQcKQtqcz
+         j9cg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1695750838; x=1696355638;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=GHs9JvVqLf6Ms7iOAtaX+fBpw4XQTU9Q7NB2KsLNX0A=;
+        b=DoN+Ol11FmfnTX807HzJUK1Uypljyu//eiF1jfnjtrUpzrtCSvdXGvWg4Rr/8IcsMH
+         LJ6JbNkyoGPg4fLZkbblqYhqAAATRwLe3XPUZ8J4/D9xjrL0D8IjC6I6fh9E4R7WiKpf
+         eB6I6/ybXQlW+EhHEUExvf9SZLYMIFF3K0lJWCzL7rUEMMyiaMoe8+kPJknt7qKKoe3i
+         Y5p8Ay+Oab+4J+yM0wKUhyZUyrxsd+2jpEJJ6L41LPA6B9rR4I3CTqizR9dg1h0yYZ5Q
+         kt8nxaAC51yFf814+S7P3GHvyJiPI33DoCqvdekbsgCEOT9HwU13zp9+ZO+Ts4UrFRvp
+         ZUQw==
+X-Gm-Message-State: AOJu0Yw63lTcNj/828gVjvw5Zc36IXmEHGs7lia3PlO/XvjAPF1thZ96
+	yPJEiWpmUxpV+S7MlNFHeoXdraC/skc=
+X-Google-Smtp-Source: AGHT+IFnYy5G0i9ICWinYLXK0ShvZtzaxA3E31DgXUCaDrHlXMesZuVPs/S/szUvcKSxMP0IB0xw4w==
+X-Received: by 2002:aa7:d44e:0:b0:52b:d169:b374 with SMTP id q14-20020aa7d44e000000b0052bd169b374mr9201752edr.3.1695750837645;
+        Tue, 26 Sep 2023 10:53:57 -0700 (PDT)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id s3-20020aa7d783000000b0053116e45317sm7019701edq.44.2023.09.26.10.53.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 26 Sep 2023 10:53:57 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: [meta-oe][PATCH] gupnp: fix build with meson-1.2.0
+Date: Tue, 26 Sep 2023 19:53:54 +0200
+Message-ID: <20230926175354.2297242-1-martin.jansa@gmail.com>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-GUID: HqGnzCrgHByjZLXT-ix3EnKm3HSEKm5R
-X-Proofpoint-ORIG-GUID: HqGnzCrgHByjZLXT-ix3EnKm3HSEKm5R
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-09-26_10,2023-09-26_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 impostorscore=0
- mlxlogscore=999 phishscore=0 malwarescore=0 priorityscore=1501 bulkscore=0
- spamscore=0 mlxscore=0 lowpriorityscore=0 suspectscore=0 clxscore=1015
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2309180000
- definitions=main-2309260126
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 26 Sep 2023 14:30:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105144
+ <openembedded-devel@lists.openembedded.org>; Tue, 26 Sep 2023 17:54:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105145
 
-From: Narpat Mali <narpat.mali@windriver.com>
-
-The delta between 3.2.20 and 3.2.21 contains the CVE-2023-41164 fix
-and other bugfixes. git log --oneline 3.2.20..3.2.21 shows:
-
-fd0ccd7fb3 (tag: 3.2.21) [3.2.x] Bumped version for 3.2.21 release.
-6f030b1149 [3.2.x] Fixed CVE-2023-41164 -- Fixed potential DoS in django.utils.encoding.uri_to_iri().
-73350a6369 [3.2.x] Added stub release notes for 3.2.21.
-75418f8c0e [3.2.x] Fixed #34756 -- Fixed docs HTML build on Sphinx 7.1+.
-848fe70f3e [3.2.x] Added CVE-2023-36053 to security archive.
-4012a87a58 [3.2.x] Post-release version bump.
-
-Release Notes: https://docs.djangoproject.com/en/dev/releases/3.2.21/
-
-Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 ---
- .../{python3-django_3.2.20.bb => python3-django_3.2.21.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-django_3.2.20.bb => python3-django_3.2.21.bb} (61%)
+ ...roperly-spell-provide-in-.wrap-files.patch | 25 +++++++++++++++++++
+ .../recipes-connectivity/gupnp/gupnp_1.4.1.bb |  1 +
+ 2 files changed, 26 insertions(+)
+ create mode 100644 meta-multimedia/recipes-connectivity/gupnp/gupnp/0001-build-properly-spell-provide-in-.wrap-files.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-django_3.2.20.bb b/meta-python/recipes-devtools/python/python3-django_3.2.21.bb
-similarity index 61%
-rename from meta-python/recipes-devtools/python/python3-django_3.2.20.bb
-rename to meta-python/recipes-devtools/python/python3-django_3.2.21.bb
-index b5224b41c..114866986 100644
---- a/meta-python/recipes-devtools/python/python3-django_3.2.20.bb
-+++ b/meta-python/recipes-devtools/python/python3-django_3.2.21.bb
-@@ -1,7 +1,7 @@
- require python-django.inc
- inherit setuptools3
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp/0001-build-properly-spell-provide-in-.wrap-files.patch b/meta-multimedia/recipes-connectivity/gupnp/gupnp/0001-build-properly-spell-provide-in-.wrap-files.patch
+new file mode 100644
+index 0000000000..66f07094c5
+--- /dev/null
++++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp/0001-build-properly-spell-provide-in-.wrap-files.patch
+@@ -0,0 +1,25 @@
++From 7a4515a356a3d5eb2af1f602c77a42a544e71efa Mon Sep 17 00:00:00 2001
++From: Jan Beich <jbeich@FreeBSD.org>
++Date: Sun, 9 Jul 2023 03:30:47 +0000
++Subject: [PATCH] build: properly spell [provide] in *.wrap files
++
++meson.build:1:0: ERROR: Unexpected "[provides]" section, did you mean "[provide]"?
++
++Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
++Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gupnp/-/commit/884639bd29323cbb8fbd36bc69d08097a2ae2cd1]
++---
++ subprojects/gssdp-1.2.wrap | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/subprojects/gssdp-1.2.wrap b/subprojects/gssdp-1.2.wrap
++index 469c75d..466b83b 100644
++--- a/subprojects/gssdp-1.2.wrap
+++++ b/subprojects/gssdp-1.2.wrap
++@@ -3,6 +3,6 @@ url = https://gitlab.gnome.org/GNOME/gssdp.git
++ revision = gssdp-1.4
++ depth = 1
++  
++-[provides]
+++[provide]
++ dependency_name = gssdp-1.2
++ 
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.4.1.bb b/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.4.1.bb
+index c21e7a05bf..efeb66f28f 100644
+--- a/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.4.1.bb
++++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.4.1.bb
+@@ -9,6 +9,7 @@ inherit meson pkgconfig vala gobject-introspection
  
--SRC_URI[sha256sum] = "dec2a116787b8e14962014bf78e120bba454135108e1af9e9b91ade7b2964c40"
-+SRC_URI[sha256sum] = "a5de4c484e7b7418e6d3e52a5b8794f0e6b9f9e4ce3c037018cf1c489fa87f3c"
+ SRC_URI = "${GNOME_MIRROR}/${BPN}/1.4/${BPN}-${PV}.tar.xz \
+     file://0001-all-Drop-xmlRecoverMemory.patch \
++    file://0001-build-properly-spell-provide-in-.wrap-files.patch \
+ "
+ SRC_URI[sha256sum] = "899196b5e66f03b8e25f046a7a658cd2a6851becb83f2d55345ab3281655dc0c"
  
- RDEPENDS:${PN} += "\
-     ${PYTHON_PN}-sqlparse \
-@@ -9,5 +9,5 @@ RDEPENDS:${PN} += "\
- 
- # Set DEFAULT_PREFERENCE so that the LTS version of django is built by
- # default. To build the 3.x branch, 
--# PREFERRED_VERSION_python3-django = "3.2.20" can be added to local.conf
-+# PREFERRED_VERSION_python3-django = "3.2.21" can be added to local.conf
- DEFAULT_PREFERENCE = "-1"
 -- 
-2.40.0
+2.42.0
 
 
