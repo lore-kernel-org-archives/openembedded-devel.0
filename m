@@ -1,84 +1,84 @@
-Return-Path: <derek@asterius.io>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 15875E8181E
-	for <webhook@archiver.kernel.org>; Tue, 26 Sep 2023 19:50:08 +0000 (UTC)
-Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com [209.85.128.178])
- by mx.groups.io with SMTP id smtpd.web10.838.1695757801229346304
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 53356E7F12C
+	for <webhook@archiver.kernel.org>; Tue, 26 Sep 2023 21:18:49 +0000 (UTC)
+Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com [209.85.215.170])
+ by mx.groups.io with SMTP id smtpd.web10.3013.1695763126084045996
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Sep 2023 12:50:01 -0700
+ Tue, 26 Sep 2023 14:18:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.128.178, mailfrom: straka.derek@gmail.com)
-Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-59f4bc88f9fso88253877b3.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 26 Sep 2023 12:50:01 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=L6zVI2HA;
+ spf=pass (domain: gmail.com, ip: 209.85.215.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f170.google.com with SMTP id 41be03b00d2f7-578b4997decso7626552a12.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 26 Sep 2023 14:18:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1695763125; x=1696367925; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Fi3/U2Ph41QNiYSj/dZrzSMZGtR5VRB3SlWdnd4QH5g=;
+        b=L6zVI2HArn8WHIUnqbQqqNZUqB1wPM4g0VJjuzp+l8Vj3VPyBidf95gs4/relJODlj
+         vleVJriPPuwpzj6wrWvCduXlFp3rEwTupniLIynEjM3dwV24PEVzy0CJQhcIVdouN6uo
+         hIAgDJEwkN4yvYAU7OEdVuhp7fDRmGntUE6QQMT36QpTKphE7bB1elEyJJdjpjjZL7bS
+         oVc7upRfphw1dpuF2fif0YVV7RmvE3JSpnQJ9GYDUfz3HXbcbTBb1NsNYqKtbhgtp7XF
+         rtaQvh95yfLGT/PncQ27vWnYndYKWjgyxp5VoBxQ21BzKhK6xKLFOdtcnrhPHjjtfe/K
+         nqiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695757800; x=1696362600;
+        d=1e100.net; s=20230601; t=1695763125; x=1696367925;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=kWyJDpoCGlpnI9aek0wCUxPHANUWmG4PG92QqydEfss=;
-        b=OP/BTFuGfI1Kw3vhk1ambd2lLLdHUSHcFoOJukhbFnvEFXDdAYxGiq3AtuJiK4sli7
-         qID3Q3D2pd0dg6dALPLWG1caWHJcJqQRJIV2F+8TObrV6/Rd5Rqk2mHN8lrDVNWoHEZO
-         9GE83n0rZrL44H6GXc2SjjQ8ACFNSfEiwHN6Tg/ysKlSflMehd5a+xzp6O96mq400e0z
-         I0l0TbqRARvFyNt3LHeFHRqrK5+nAcz+4JrQuIYbZnRtoyMuL9ZvbY+gtH/dhj1inuyd
-         E2sgJzrraZGvTvMNnMihqpu6ZRSmxZc22aT7LmDi1XQj2fOYzAkX+mdo3c5lF6eqmr5o
-         u15w==
-X-Gm-Message-State: AOJu0YztBTTIuf0zkZlL0DugHnMZ3iwhsl2QPdNs9D3XTPAAYhSMg/Dc
-	TQAP+CtBPyDeoIbAFlgBXhA6wdOkIT6c7w==
-X-Google-Smtp-Source: AGHT+IEY+A5vJEOE9t83Zc+wmp9dOYjI0jV7vUFaYcNvwt14B7TEicx+lzxqe7JxCZSA0Yi+ZmP4Eg==
-X-Received: by 2002:a0d:c101:0:b0:58d:7599:676a with SMTP id c1-20020a0dc101000000b0058d7599676amr10529084ywd.37.1695757799964;
-        Tue, 26 Sep 2023 12:49:59 -0700 (PDT)
-Received: from sparta.internal.asterius.io (c-73-228-213-122.hsd1.mn.comcast.net. [73.228.213.122])
-        by smtp.gmail.com with ESMTPSA id j185-20020a816ec2000000b00592236855cesm3131432ywc.61.2023.09.26.12.49.59
+        bh=Fi3/U2Ph41QNiYSj/dZrzSMZGtR5VRB3SlWdnd4QH5g=;
+        b=Vj9eOinZLVws08EPVeW1Q+oUL0DRoYKQrwxNb17mgLarMClj8sEpfAhUZTnxgWEtsL
+         RVB5HfZx/puKL4drr+EGX3D5T3f3SkMTtHYWm0XKblOtnv1RAtwfnTPNr7+J1z/W1bAD
+         FsESNmek9hHQLH8j63Fj/3pxYsVtO9TC5SiG0uBywgxjkN8MPGZqrGSjU5N0+5+YTNeo
+         ZM0s6BkfNra2kxscO8oyzuM2KPlLpX/UBAisQhsyJZNEPir+ic1ZNXmmzTy4Nxh8l78A
+         8U1Udb0OolBQuvPZfT7ywg2lCMJ116c9KB2GUraVBcfA71/YSrGxGdYpAJsEAArRoXmm
+         aC4A==
+X-Gm-Message-State: AOJu0Yws6MAhc8CtgXN/3fTguh5NoQBOWk5o3+hB7rM+cAZ0fisCDwnc
+	aMBKp++0HRHVgWCIG9K0Z0tNSmRVW6CpNg==
+X-Google-Smtp-Source: AGHT+IGG/JhmOfZV3zoXVNmpNPE9nCWItebYgLLlY9qr+Rmng/kCrX3QQoOYjQk6Ms5NPGCR5PEkrQ==
+X-Received: by 2002:a17:90b:1916:b0:26b:c3f:1503 with SMTP id mp22-20020a17090b191600b0026b0c3f1503mr10833532pjb.17.1695763125289;
+        Tue, 26 Sep 2023 14:18:45 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9100:2cb0::d373])
+        by smtp.gmail.com with ESMTPSA id f18-20020a637552000000b005777a50c14csm10069865pgn.0.2023.09.26.14.18.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 26 Sep 2023 12:49:59 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
+        Tue, 26 Sep 2023 14:18:44 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-python][PATCH] python3-async-timeout: remove old version of the library
-Date: Tue, 26 Sep 2023 19:49:48 +0000
-Message-Id: <20230926194948.1565612-1-derek@asterius.io>
-X-Mailer: git-send-email 2.34.1
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] cpp-netlib: Fix buildpaths in generated cmake files
+Date: Tue, 26 Sep 2023 14:18:42 -0700
+Message-ID: <20230926211842.4168206-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 26 Sep 2023 19:50:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105149
+ <openembedded-devel@lists.openembedded.org>; Tue, 26 Sep 2023 21:18:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105150
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../python/python3-async-timeout_4.0.0.bb      | 18 ------------------
- 1 file changed, 18 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-async-timeout_4.0.0.bb
+ meta-oe/recipes-support/cpp-netlib/cpp-netlib_git.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-async-timeout_4.0.0.bb b/meta-python/recipes-devtools/python/python3-async-timeout_4.0.0.bb
-deleted file mode 100644
-index ca61490fa..000000000
---- a/meta-python/recipes-devtools/python/python3-async-timeout_4.0.0.bb
-+++ /dev/null
-@@ -1,18 +0,0 @@
--SUMMARY = "asyncio-compatible timeout context manager"
--DESCRIPTION = "\
--The context manager is useful in cases when you want to apply \
--timeout logic around block of code or in cases when asyncio.wait_for() \
--is not suitable. Also it's much faster than asyncio.wait_for() because \
--timeout doesn't create a new task."
--HOMEPAGE = "https://github.com/aio-libs/async-timeout"
--LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=4fa41f15bb5f23b6d3560c5845eb8d57"
--
--SRC_URI[sha256sum] = "7d87a4e8adba8ededb52e579ce6bc8276985888913620c935094c2276fd83382"
--
--PYPI_PACKAGE = "async-timeout"
--inherit pypi setuptools3
--
--RDEPENDS:${PN} = "\
--    ${PYTHON_PN}-asyncio \
--"
+diff --git a/meta-oe/recipes-support/cpp-netlib/cpp-netlib_git.bb b/meta-oe/recipes-support/cpp-netlib/cpp-netlib_git.bb
+index b2bdb86c0d..bda5177fc4 100644
+--- a/meta-oe/recipes-support/cpp-netlib/cpp-netlib_git.bb
++++ b/meta-oe/recipes-support/cpp-netlib/cpp-netlib_git.bb
+@@ -23,3 +23,8 @@ inherit cmake pkgconfig
+ DEPENDS = "zlib boost openssl"
+ 
+ EXTRA_OECMAKE:append = " -DCPP-NETLIB_BUILD_TESTS=OFF -DCPP-NETLIB_BUILD_EXAMPLES=OFF"
++
++do_install:append() {
++    sed -i -e 's|${RECIPE_SYSROOT}||g' ${D}${libdir}/cmake/cppnetlib/cppnetlibConfig.cmake
++    sed -i -e 's|${RECIPE_SYSROOT}||g' ${D}${libdir}/cmake/cppnetlib/cppnetlibTargets-noconfig.cmake
++}
 -- 
-2.34.1
+2.42.0
 
 
