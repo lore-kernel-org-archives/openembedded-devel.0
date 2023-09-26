@@ -1,210 +1,174 @@
-Return-Path: <narpat.mali@windriver.com>
+Return-Path: <peron.clem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4FC40E7E624
-	for <webhook@archiver.kernel.org>; Tue, 26 Sep 2023 11:25:02 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.16378.1695727501067598316
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 94DD5E7E62E
+	for <webhook@archiver.kernel.org>; Tue, 26 Sep 2023 12:08:02 +0000 (UTC)
+Received: from mail-lf1-f49.google.com (mail-lf1-f49.google.com [209.85.167.49])
+ by mx.groups.io with SMTP id smtpd.web10.17391.1695730077086344545
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Sep 2023 04:25:01 -0700
+ Tue, 26 Sep 2023 05:07:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=lMn+3/u/;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=7633797b0d=narpat.mali@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 38Q9eHbR008475;
-	Tue, 26 Sep 2023 04:24:57 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=16kva
-	41Muuj1dOl3qt0jsFEnf1GBqqM3PzskB/cOUPQ=; b=lMn+3/u/0PoRh5NsC4XiE
-	EVOYIQ/WgN4O28tnSlHsom5qzw+/acR8/Oh0VyT1VXIOk60gKsDDEGwPKWtziqCd
-	mDjcW8sTMNXxTcPzVYbd6QMWQh375VQCep1lhZv2836OsgkzVuCo+pxhF+mpG+22
-	Hxyr5zDI3fn8fiQuJuvoTUp5HiYA/dYjmyCjJs6Mta8u6Dhp7Ih3ZUlFyoI0DkQ7
-	midaUPNlHyM50S9dUmfmc/FPlb0WGBnulksZV/iMzkaJzM5KFn8648nBdQLFsMv9
-	eL5lL9rUjsRBBNYrynsmLmkSD602TRUVjrGRMlecHZx3US1OT1Gr7dY/Fw3mhbb8
-	Q==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3t9ua0jgks-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
-	Tue, 26 Sep 2023 04:24:56 -0700 (PDT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.32; Tue, 26 Sep 2023 04:24:54 -0700
-From: nmali <narpat.mali@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <akuster808@gmail.com>
-Subject: [meta-python][kirkstone][PATCH 1/1] python3-django: fix CVE-2023-41164
-Date: Tue, 26 Sep 2023 11:24:28 +0000
-Message-ID: <20230926112428.2797804-1-narpat.mali@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=lEoqG/SM;
+ spf=pass (domain: gmail.com, ip: 209.85.167.49, mailfrom: peron.clem@gmail.com)
+Received: by mail-lf1-f49.google.com with SMTP id 2adb3069b0e04-50336768615so14823296e87.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 26 Sep 2023 05:07:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1695730075; x=1696334875; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=d2hvm+FFVI2znxGmdEBEhsib6xD78SusRd9Hv3r2izE=;
+        b=lEoqG/SMa9DTMaj0Ubydm+49srA5z/rXnN/upXi1hS1zir10jEz3lNLAnD8pvAQhmd
+         vg7qP6fyvFvxDh5y16cZd8RPtEKnzU95uUVC4u0cjDav1NCzAA8rKynicnjRxpIPOikH
+         n4+6Opw/jhBaXqa1XppcpgTxG/mYYfiNsRMGebOuzaSWrJIuSgX5b5KGdAsZUmZ9sx0f
+         MpWpKzHBUNY8xi09Mv8uvJ5aEXrfVDdFt8HexMXFHxjqwoPIPG0MCCvSenaz524ki/A7
+         RqkoNx6myU1sV5jHyx3/XMe1UneMdEnersL7gsmLdwISK81VKdcu7CA26ysu2FkWsYBE
+         Zy0Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1695730075; x=1696334875;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=d2hvm+FFVI2znxGmdEBEhsib6xD78SusRd9Hv3r2izE=;
+        b=sxHv4BbGzcG0JeSKflnC6EbgAase8U/DC4q6os/PPvqdOS5+wBI4vP6sP9/G3BT/6O
+         DGJrpxakxjCh0kRpHmmqHXyNGhxbrAglwEV3rDk9qx5JluSWvSKjDWPhbjrc+FfuX/zT
+         ZJkNzErO/rdM18cDNXAsmD4EuvIxMhXaAg1ubuBzpATRVao5Yvi19gxcdtPhoNaBnblx
+         6C6b4++fdlLtA323xsb0ALVS6/4VBLld96Yo4TlVkGIE6OlVa84rwixdy0/zhrKUFGBd
+         l/0POjPgyYRZUpipoYumD9Uy+Mia6q+3Wd7pukK9aDL37Tt7ol3boDIZiCf4Pd0I+U9g
+         PzEw==
+X-Gm-Message-State: AOJu0YzRzsJgPgxMHU8C0YpFQ8pexb4f/GLaFwphGdngKujKXdrSk2qL
+	pkWLYVkY3dXjSnCV7ogx6kLq1aglxPgBNe8ftRU=
+X-Google-Smtp-Source: AGHT+IEunQ+QtfY2h4A4uHKDNxNsnhnXRmuKm335Z9HxkxH0eWbko/3CS06VoKPddaqn62sXvamZNywUYpBtZFhkc0U=
+X-Received: by 2002:a05:6512:308c:b0:500:94aa:739c with SMTP id
+ z12-20020a056512308c00b0050094aa739cmr9281169lfd.61.1695730074855; Tue, 26
+ Sep 2023 05:07:54 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-GUID: jSmCbzUj857LQgPxLUomvSzCK70BOiQg
-X-Proofpoint-ORIG-GUID: jSmCbzUj857LQgPxLUomvSzCK70BOiQg
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-09-26_07,2023-09-25_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- malwarescore=0 suspectscore=0 spamscore=0 mlxlogscore=999 impostorscore=0
- adultscore=0 mlxscore=0 clxscore=1015 bulkscore=0 lowpriorityscore=0
- phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2309180000 definitions=main-2309260098
+References: <20230903160349.2052956-1-raj.khem@gmail.com> <20230903160349.2052956-2-raj.khem@gmail.com>
+In-Reply-To: <20230903160349.2052956-2-raj.khem@gmail.com>
+From: =?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>
+Date: Tue, 26 Sep 2023 14:07:39 +0200
+Message-ID: <CAJiuCccneOO_KjHK_G8v8Ak1s4D6ZyytEPzWpZ99NxKQTmfsiQ@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH 2/2] networkmanager-openvpn: Fix
+ build with lld on musl
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 26 Sep 2023 11:25:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105141
+ <openembedded-devel@lists.openembedded.org>; Tue, 26 Sep 2023 12:08:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105142
 
-From: Narpat Mali <narpat.mali@windriver.com>
+Hi Khem,
 
-In Django 3.2 before 3.2.21, 4 before 4.1.11, and 4.2 before 4.2.5,
-``django.utils.encoding.uri_to_iri()`` was subject to potential denial
-of service attack via certain inputs with a very large number of Unicode
-characters.
+On Sun, 3 Sept 2023 at 18:03, Khem Raj <raj.khem@gmail.com> wrote:
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  ...-script-Do-not-export-_IO_stdin_used.patch | 30 +++++++++++++++++++
+>  .../networkmanager-openvpn_1.10.2.bb          |  2 ++
+>  2 files changed, 32 insertions(+)
+>  create mode 100644 meta-networking/recipes-connectivity/networkmanager/n=
+etworkmanager-openvpn/0001-linker-script-Do-not-export-_IO_stdin_used.patch
+>
+> diff --git a/meta-networking/recipes-connectivity/networkmanager/networkm=
+anager-openvpn/0001-linker-script-Do-not-export-_IO_stdin_used.patch b/meta=
+-networking/recipes-connectivity/networkmanager/networkmanager-openvpn/0001=
+-linker-script-Do-not-export-_IO_stdin_used.patch
+> new file mode 100644
+> index 0000000000..eafd497ae2
+> --- /dev/null
+> +++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager-=
+openvpn/0001-linker-script-Do-not-export-_IO_stdin_used.patch
+> @@ -0,0 +1,30 @@
+> +From e09ba80e342b3b24bb2a46e11dae1c30cc61c75c Mon Sep 17 00:00:00 2001
+> +From: Khem Raj <raj.khem@gmail.com>
+> +Date: Sun, 3 Sep 2023 08:48:42 -0700
+> +Subject: [PATCH] linker-script: Do not export _IO_stdin_used
+> +
+> +This is glibc specific toolhain issue, it should have been handled in
+> +toolchain instead of exposing to applications. This was done to fix
+> +
+> +https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=3D835550
+> +
+> +Upstream-Status: Pending
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +---
+> + linker-script-binary.ver | 1 -
+> + 1 file changed, 1 deletion(-)
+> +
+> +diff --git a/linker-script-binary.ver b/linker-script-binary.ver
+> +index a2780c0..f030d35 100644
+> +--- a/linker-script-binary.ver
+> ++++ b/linker-script-binary.ver
+> +@@ -1,6 +1,5 @@
+> + {
+> + global:
+> +-      _IO_stdin_used;
 
-Since, there is no ptest available for python3-django so have not
-tested the patch changes at runtime.
+This gives me the following error when building for qemuarm64 with musl
 
-References:
-https://security-tracker.debian.org/tracker/CVE-2023-41164
-https://www.djangoproject.com/weblog/2023/sep/04/security-releases/
+/test-meta-oe/build/tmp/work/cortexa57-poky-linux-musl/networkmanager/1.44.=
+0/recipe-sysroot-native/usr/bin/aarch64-poky-linux-musl/../../libexec/aarch=
+64-poky-linux-musl/gcc/aarch64-poky-linux-musl/13.2.0/ld:/test-meta-oe/buil=
+d/tmp/work/cortexa57-poky-linux-musl/networkmanager/1.44.0/NetworkManager-1=
+.44.0/linker-script-binary.ver:3:
+syntax error in VERSION script
+collect2: error: ld returned 1 exit status
 
-Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
----
- .../python3-django/CVE-2023-41164.patch       | 105 ++++++++++++++++++
- .../python/python3-django_2.2.28.bb           |   1 +
- 2 files changed, 106 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-django/CVE-2023-41164.patch
+$> cat /test-meta-oe/build/tmp/work/cortexa57-poky-linux-musl/networkmanage=
+r/1.44.0/NetworkManager-1.44.0/linker-script-binary.ver
+{
+global:
+local:
+*;
+};
 
-diff --git a/meta-python/recipes-devtools/python/python3-django/CVE-2023-41164.patch b/meta-python/recipes-devtools/python/python3-django/CVE-2023-41164.patch
-new file mode 100644
-index 000000000..9bc38b0cc
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-django/CVE-2023-41164.patch
-@@ -0,0 +1,105 @@
-+From 9c95e8fec62153f8dfcc45a70b8a68d74333a66f Mon Sep 17 00:00:00 2001
-+From: Mariusz Felisiak <felisiak.mariusz@gmail.com>
-+Date: Tue, 26 Sep 2023 10:23:30 +0000
-+Subject: [PATCH] Fixed CVE-2023-41164 -- Fixed potential DoS in
-+ django.utils.encoding.uri_to_iri().
-+
-+Thanks MProgrammer (https://hackerone.com/mprogrammer) for the report.
-+
-+Co-authored-by: nessita <124304+nessita@users.noreply.github.com>
-+
-+CVE: CVE-2023-41164
-+
-+Upstream-Status: Backport [https://github.com/django/django/commit/3f41d6d62929dfe53eda8109b3b836f26645bdce]
-+
-+Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
-+---
-+ django/utils/encoding.py           |  6 ++++--
-+ docs/releases/2.2.28.txt           |  9 +++++++++
-+ tests/utils_tests/test_encoding.py | 21 ++++++++++++++++++++-
-+ 3 files changed, 33 insertions(+), 3 deletions(-)
-+
-+diff --git a/django/utils/encoding.py b/django/utils/encoding.py
-+index 98da647..3769702 100644
-+--- a/django/utils/encoding.py
-++++ b/django/utils/encoding.py
-+@@ -225,6 +225,7 @@ def repercent_broken_unicode(path):
-+     repercent-encode any octet produced that is not part of a strictly legal
-+     UTF-8 octet sequence.
-+     """
-++    changed_parts = []
-+     while True:
-+         try:
-+             path.decode()
-+@@ -232,9 +233,10 @@ def repercent_broken_unicode(path):
-+             # CVE-2019-14235: A recursion shouldn't be used since the exception
-+             # handling uses massive amounts of memory
-+             repercent = quote(path[e.start:e.end], safe=b"/#%[]=:;$&()+,!?*@'~")
-+-            path = path[:e.start] + force_bytes(repercent) + path[e.end:]
-++            changed_parts.append(path[: e.start] + repercent.encode())
-++            path = path[e.end :]
-+         else:
-+-            return path
-++            return b"".join(changed_parts) + path
-+
-+
-+ def filepath_to_uri(path):
-+diff --git a/docs/releases/2.2.28.txt b/docs/releases/2.2.28.txt
-+index ab4884b..40eb230 100644
-+--- a/docs/releases/2.2.28.txt
-++++ b/docs/releases/2.2.28.txt
-+@@ -47,3 +47,12 @@ CVE-2023-36053: Potential regular expression denial of service vulnerability in
-+ ``EmailValidator`` and ``URLValidator`` were subject to potential regular
-+ expression denial of service attack via a very large number of domain name
-+ labels of emails and URLs.
-++
-++Backporting the CVE-2023-41164 fix on Django 2.2.28.
-++
-++CVE-2023-41164: Potential denial of service vulnerability in ``django.utils.encoding.uri_to_iri()``
-++===================================================================================================
-++
-++``django.utils.encoding.uri_to_iri()`` was subject to potential denial of
-++service attack via certain inputs with a very large number of Unicode
-++characters.
-+diff --git a/tests/utils_tests/test_encoding.py b/tests/utils_tests/test_encoding.py
-+index ea7ba5f..93a3162 100644
-+--- a/tests/utils_tests/test_encoding.py
-++++ b/tests/utils_tests/test_encoding.py
-+@@ -1,8 +1,9 @@
-+ import datetime
-++import inspect
-+ import sys
-+ import unittest
-+ from unittest import mock
-+-from urllib.parse import quote_plus
-++from urllib.parse import quote, quote_plus
-+
-+ from django.test import SimpleTestCase
-+ from django.utils.encoding import (
-+@@ -100,6 +101,24 @@ class TestEncodingUtils(SimpleTestCase):
-+         except RecursionError:
-+             self.fail('Unexpected RecursionError raised.')
-+
-++    def test_repercent_broken_unicode_small_fragments(self):
-++        data = b"test\xfctest\xfctest\xfc"
-++        decoded_paths = []
-++
-++        def mock_quote(*args, **kwargs):
-++            # The second frame is the call to repercent_broken_unicode().
-++            decoded_paths.append(inspect.currentframe().f_back.f_locals["path"])
-++            return quote(*args, **kwargs)
-++
-++        with mock.patch("django.utils.encoding.quote", mock_quote):
-++            self.assertEqual(repercent_broken_unicode(data), b"test%FCtest%FCtest%FC")
-++
-++        # decode() is called on smaller fragment of the path each time.
-++        self.assertEqual(
-++            decoded_paths,
-++            [b"test\xfctest\xfctest\xfc", b"test\xfctest\xfc", b"test\xfc"],
-++        )
-++
-+
-+ class TestRFC3987IEncodingUtils(unittest.TestCase):
-+
-+--
-+2.40.0
-diff --git a/meta-python/recipes-devtools/python/python3-django_2.2.28.bb b/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
-index ec65a985d..c35323f45 100644
---- a/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
-+++ b/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
-@@ -7,6 +7,7 @@ inherit setuptools3
- 
- SRC_URI += "file://CVE-2023-31047.patch \
-             file://CVE-2023-36053.patch \
-+            file://CVE-2023-41164.patch \
-            "
- 
- SRC_URI[sha256sum] = "0200b657afbf1bc08003845ddda053c7641b9b24951e52acd51f6abda33a7413"
--- 
-2.40.0
+I am on top of master of Poky
 
+Regards,
+Clement
+
+> + local:
+> +       *;
+> + };
+> +--
+> +2.42.0
+> +
+> diff --git a/meta-networking/recipes-connectivity/networkmanager/networkm=
+anager-openvpn_1.10.2.bb b/meta-networking/recipes-connectivity/networkmana=
+ger/networkmanager-openvpn_1.10.2.bb
+> index 3114731f2a..024ef39361 100644
+> --- a/meta-networking/recipes-connectivity/networkmanager/networkmanager-=
+openvpn_1.10.2.bb
+> +++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager-=
+openvpn_1.10.2.bb
+> @@ -10,6 +10,8 @@ inherit gnomebase useradd gettext systemd
+>
+>  SRC_URI =3D "${GNOME_MIRROR}/NetworkManager-openvpn/${@gnome_verdir("${P=
+V}")}/NetworkManager-openvpn-${PV}.tar.xz"
+>
+> +SRC_URI:append:libc-musl =3D " file://0001-linker-script-Do-not-export-_=
+IO_stdin_used.patch"
+> +
+>  SRC_URI[sha256sum] =3D "62f0f2a8782221b923f212ac2a8ebbc1002efd6a90ee945d=
+ad4adfb56d076d21"
+>
+>  S =3D "${WORKDIR}/NetworkManager-openvpn-${PV}"
+> --
+> 2.42.0
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#104702): https://lists.openembedded.org/g/openembedde=
+d-devel/message/104702
+> Mute This Topic: https://lists.openembedded.org/mt/101132829/4240582
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [p=
+eron.clem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
