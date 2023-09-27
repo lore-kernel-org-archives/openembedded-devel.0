@@ -1,83 +1,90 @@
-Return-Path: <derek@asterius.io>
+Return-Path: <mingli.yu@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C3B48E80A93
-	for <webhook@archiver.kernel.org>; Wed, 27 Sep 2023 06:26:26 +0000 (UTC)
-Received: from mail-qk1-f171.google.com (mail-qk1-f171.google.com [209.85.222.171])
- by mx.groups.io with SMTP id smtpd.web11.12010.1695795977745288652
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A84AAE80A9A
+	for <webhook@archiver.kernel.org>; Wed, 27 Sep 2023 06:28:16 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.11793.1695796096167206905
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Sep 2023 23:26:17 -0700
+ Tue, 26 Sep 2023 23:28:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.222.171, mailfrom: straka.derek@gmail.com)
-Received: by mail-qk1-f171.google.com with SMTP id af79cd13be357-7740cf93901so574546085a.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 26 Sep 2023 23:26:17 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695795976; x=1696400776;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=WJRlPEeZK5kM79+CxeFZEcWTtOqV37GhXXVSUxPThxA=;
-        b=Hc8p+XD+LQkUZlCEV7a0c0d4TbNRToo4mmOx2ytzrt7WZ6Y0ZxV4BrfkwN+tTXnbp4
-         jJwHjKK/rCVBho17xhu527UBnCHS8YqhVspFPCmYDfx7ZRRf/sZChxIAreFrA7Osm63i
-         gwLC72c12w9UINU5n4T51IXY2JNxDs/liNPkFEiUEQqikmjFw0051Gdv525ohw/r3qxi
-         flaFmuWModQNyaNIRwTm3qm1WxhxlsLLV5CU3WIk+8aMaXNYe2whdFV2WCWXQu0bIwvu
-         FqnlVupLpStUZ5zGMR/5Uk2k0IA5pszLetXhc/vPN+5FuEDh0IBHqw86Wp19fr0M/E2Z
-         NL6w==
-X-Gm-Message-State: AOJu0Yzc2+jvhfKWV+MMPzPZaXSZzMc5DQtNqvdk0DSccWvhUWQSU95n
-	LI5jpa0t2LaVshiyTAv66mzMjIvNEHDz5w==
-X-Google-Smtp-Source: AGHT+IFoy/6K4qGJ16aGUeN1DTdDkdF7lK8laW5+s9RVm2uTDZKb+p9r2qm+VQmzwcANza2P63FqjQ==
-X-Received: by 2002:a05:620a:2ef:b0:770:67e3:1fee with SMTP id a15-20020a05620a02ef00b0077067e31feemr991360qko.65.1695795976130;
-        Tue, 26 Sep 2023 23:26:16 -0700 (PDT)
-Received: from sparta.internal.asterius.io (c-73-228-213-122.hsd1.mn.comcast.net. [73.228.213.122])
-        by smtp.gmail.com with ESMTPSA id q21-20020ae9e415000000b00767177a5bebsm5231253qkc.56.2023.09.26.23.26.15
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 26 Sep 2023 23:26:15 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-python][PATCH] python3-pytz-deprecation-shim: Remove outdated recipe meant to be a short lived shim
-Date: Wed, 27 Sep 2023 06:26:05 +0000
-Message-Id: <20230927062605.1703566-1-derek@asterius.io>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=nfghFB3s;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=7634a032c4=mingli.yu@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 38R5qode000790
+	for <openembedded-devel@lists.openembedded.org>; Tue, 26 Sep 2023 23:28:15 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=Oxf0q
+	NFIKHsc1QEJoGlKk6zKpgMSmcS29+MdLz5huko=; b=nfghFB3sqOPesgIi0vF46
+	B1FYKsEK3fHUI7iyx1a+djaTN3yujbzSWU0IxvX7gKNEhWucL4fy5xemqvIGGEb/
+	zsv0o9l3oVVukm3MvXmL/ATKZK1w4MT2OC5anOYYyUK953sADyhBgHK9BNmdJYVQ
+	NvEJjI6QRJPKHUR/vR9glqi43cdDLLyy6utEVcPIk37gw66r4BGlu2/IeppZE94k
+	67VeQ1OFGCm4koZga8KwHU2fAjehRGhKJ2h5METXreahYPv/myvvciG0aft3X8AA
+	qZhNijsydZyyzI4brqs4ljnHfg0zo3WKqId6XQM1H2qJvdUYoUYqNOyjdiRF6Yfb
+	Q==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3t9ua0ketp-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 26 Sep 2023 23:28:15 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.32; Tue, 26 Sep 2023 23:28:12 -0700
+Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.32 via Frontend Transport; Tue, 26 Sep 2023 23:28:11 -0700
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] mozjs-102: Remove the buildpath
+Date: Wed, 27 Sep 2023 14:28:13 +0800
+Message-ID: <20230927062813.2416905-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-GUID: PZqpqeXawjC2lAaV85sG5XSH2Ssc8jX2
+X-Proofpoint-ORIG-GUID: PZqpqeXawjC2lAaV85sG5XSH2Ssc8jX2
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-09-27_03,2023-09-26_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
+ malwarescore=0 suspectscore=0 spamscore=0 mlxlogscore=646 impostorscore=0
+ adultscore=0 mlxscore=0 clxscore=1011 bulkscore=0 lowpriorityscore=0
+ phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2309180000 definitions=main-2309270053
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 27 Sep 2023 06:26:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105170
+ <openembedded-devel@lists.openembedded.org>; Wed, 27 Sep 2023 06:28:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105171
 
-The upstream package hasn't been updated since 2020 and was meant to be a short term bridge to remote pytz.  As noted in the usage documents, "This library is intended for temporary usage only, and should allow you to drop your dependency on pytz while also giving your users notice that eventually you will remove support for the pytz-specific interface."  Three years should be sufficient for folks to move on from a temp library, so removing the recipe.
+From: Mingli Yu <mingli.yu@windriver.com>
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+Fixes:
+  WARNING: mozjs-102-102.9.0-r0 do_package_qa: QA Issue: File /usr/src/debug/mozjs-102/102.9.0-r0/intl/components/Unified_cpp_intl_components4.cpp in package mozjs-102-src contains reference to TMPDIR
+File /usr/src/debug/mozjs-102/102.9.0-r0/intl/components/Unified_cpp_intl_components0.cpp in package mozjs-102-src contains reference to TMPDIR
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- .../python3-pytz-deprecation-shim_0.1.0.post0.bb  | 15 ---------------
- 1 file changed, 15 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-pytz-deprecation-shim_0.1.0.post0.bb
+ meta-oe/recipes-extended/mozjs/mozjs-102_102.15.0.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pytz-deprecation-shim_0.1.0.post0.bb b/meta-python/recipes-devtools/python/python3-pytz-deprecation-shim_0.1.0.post0.bb
-deleted file mode 100644
-index 022cf39ac..000000000
---- a/meta-python/recipes-devtools/python/python3-pytz-deprecation-shim_0.1.0.post0.bb
-+++ /dev/null
-@@ -1,15 +0,0 @@
--SUMMARY = "Shims to help you safely remove pytz"
--HOMEPAGE = "https://github.com/pganssle/pytz-deprecation-shim"
--LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=fca9fd5c15a28eb874ba38577a585d48"
--
--SRC_URI[sha256sum] = "af097bae1b616dde5c5744441e2ddc69e74dfdcb0c263129610d85b87445a59d"
--
--PYPI_PACKAGE = "pytz_deprecation_shim"
--PYPI_SRC_URI = "https://files.pythonhosted.org/packages/94/f0/909f94fea74759654390a3e1a9e4e185b6cd9aa810e533e3586f39da3097/${PYPI_PACKAGE}-${PV}.tar.gz"
--
--inherit pypi python_setuptools_build_meta
--
--RDEPENDS:${PN} += "\
--        ${PYTHON_PN}-zoneinfo \
--"
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs-102_102.15.0.bb b/meta-oe/recipes-extended/mozjs/mozjs-102_102.15.0.bb
+index 08cfededa..15b90cb16 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs-102_102.15.0.bb
++++ b/meta-oe/recipes-extended/mozjs/mozjs-102_102.15.0.bb
+@@ -73,6 +73,8 @@ do_install:append() {
+     sed -e 's@${STAGING_DIR_HOST}@@g' \
+         -i ${D}${bindir}/js102-config
+     rm -f ${D}${libdir}/libjs_static.ajs
++    # remove the build path
++    sed -i -e 's@${WORKDIR}@@g' `find ${B} -name Unified_c*.c*`
+ }
+ 
+ PACKAGES =+ "lib${BPN}"
 -- 
-2.34.1
+2.25.1
 
 
