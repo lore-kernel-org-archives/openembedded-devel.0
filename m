@@ -1,260 +1,364 @@
-Return-Path: <alex.kiernan@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B0E1CE810D6
-	for <webhook@archiver.kernel.org>; Wed, 27 Sep 2023 12:02:31 +0000 (UTC)
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
- by mx.groups.io with SMTP id smtpd.web11.15720.1695816149441588346
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 069E9E80AAB
+	for <webhook@archiver.kernel.org>; Wed, 27 Sep 2023 14:00:33 +0000 (UTC)
+Received: from mail-yb1-f180.google.com (mail-yb1-f180.google.com [209.85.219.180])
+ by mx.groups.io with SMTP id smtpd.web11.18261.1695823227999367475
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 Sep 2023 05:02:29 -0700
+ Wed, 27 Sep 2023 07:00:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=jLDd53+k;
- spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: alex.kiernan@gmail.com)
-Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-32164a6af64so9500354f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 27 Sep 2023 05:02:29 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=NfTHxZAR;
+ spf=pass (domain: gmail.com, ip: 209.85.219.180, mailfrom: akuster808@gmail.com)
+Received: by mail-yb1-f180.google.com with SMTP id 3f1490d57ef6-d86a0c97ae6so7955635276.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 27 Sep 2023 07:00:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1695816147; x=1696420947; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1695823227; x=1696428027; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ScUHgjc9ktnqvK0zasQBi2OoxtrDax3B/VZqwjatz/0=;
-        b=jLDd53+kzGXbNAOxlad+43SfetV0SsjwAq6qmN0g1IB6NmQNgfmmuQG67xCEd+ljUB
-         HLfWAo+nFUr8DWaH0zN1Ejjp2zZNTf6Yhs2VJJTJZVvZUlK0AcAtao14R1JEiOpqBRt1
-         YyrI55FKNd3TVJxMxV30WsQzZ682Xkp0VBmn9x7zS2DgutRp5U4eBzFGV9aS0TGiCfNe
-         AsK9rB6G5Vw+eSK6i8TnLuobq+KK5L8Ths0oaHPNbdagNYmXycn5UtC8IxWmy4+Z7O6I
-         dlAvFkKbuPpiLgoS4HG2A2FLsSl8PgxCcD7a1UX1H4W1Lo4BCs/7gUEIsYxKuqHbfPXH
-         3epg==
+        bh=Fk5Ch/GSZHJ0snJs48VulbXZ1AdiDuT7jQWTFGBgPN4=;
+        b=NfTHxZARJ3UHOuU86EMo5xF2fg8lvTsMhYnkMzBXioDiyGsn1jlsztR6Goaqjwauwe
+         l2tn1Cm3XRfpd9KfwFRLIyTGxznVOLKO+bl2iwASZGpvRSn5fj7/7mBuFdsW0YpExR+5
+         gGRYSEw5hnNvkP8sXbfSndtzv/rrFhZPmIJcN7JCIzEiZyBM6BU5N3LVR3wUV7SwCAGZ
+         j1TNUWJu86wjrwcpPUgM7v0z49Fya3f4XulyInTJsoKCyY3xdF0bUNp8v2z9V+Nunx1M
+         UfQlr3vbf3VrO5AURl8yftyiue5DA+s/o29/w+wwJ+iNl/Plj6hNVMJQNUXu7M6//9R8
+         CyRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695816147; x=1696420947;
+        d=1e100.net; s=20230601; t=1695823227; x=1696428027;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=ScUHgjc9ktnqvK0zasQBi2OoxtrDax3B/VZqwjatz/0=;
-        b=t8xMbRYh/3qfVI6Kl4e482JBPAajVlmkNhq9jlw4bW04kfMSNPcFhgCi5KpddajIF5
-         IjysyjRUNQs1Q/dM2xQs0hagOceSLGNcvWbexcJdUJmFB+NsAtPA+D778T2XNpUz6IUc
-         B8uU+3/1C2YRYgj2PY/ChxMtRTXsziA6I+7B6nJIU+FKTOPb3/Nm2t6B2pd4rSa//gd8
-         miveuuxpJud3I8O3yh4q7xx7YPUB7H1grmXvd4kja4Y0kI5daOZhETcXGEy8le5vy0hd
-         4hX+viDeWxzWvnqNnPXtZnWzf8JVgGMNhKJZiK2roQdaHMfbQkyMptwDxo24G5Z6mgaV
-         9HnA==
-X-Gm-Message-State: AOJu0YwQBBsg/xyAROXRznx/T7r6Ayhqs8M3cH4lKu/a79kMmbBjFWHa
-	88sVoAqzQFajWQE0QluQIVAe8Q/gW6k=
-X-Google-Smtp-Source: AGHT+IGhaJWkw67j76DoNp4jyxaq3+38FkHGi/GCUPV365aQ4klBM5iaQ/hsZvTJtU88oJIpaSFVPA==
-X-Received: by 2002:a5d:63cf:0:b0:320:896:5ea0 with SMTP id c15-20020a5d63cf000000b0032008965ea0mr1534819wrw.31.1695816147233;
-        Wed, 27 Sep 2023 05:02:27 -0700 (PDT)
-Received: from localhost.localdomain ([5.148.102.211])
-        by smtp.gmail.com with ESMTPSA id r2-20020adfe682000000b0031ff89af0e4sm16963732wrm.99.2023.09.27.05.02.26
+        bh=Fk5Ch/GSZHJ0snJs48VulbXZ1AdiDuT7jQWTFGBgPN4=;
+        b=GyZjXfzF8XTmK6rpyd6VCJHJxarSy68huHZTy9pFqxORJ1B4nQq6wf8cB/eGhZAjVh
+         aGqzlafvtNwQKHx6LH+QySrsiovr9g1rlZvnMe+19N/iwpy5iHj0lMYqrwE8uwBYxBsT
+         DtUZyB03wGEQkAh3k8hwmWFboZOTECfL9Z7Er4FfX2wzADdlqJngdAkuVbjvqX/zI5dx
+         saXUnpGop5kL8J9sSKCCz6gopv9WjdLxABGK7/wtzSIS2LAtRrEFsNfEWF8utz7BqHHE
+         49ByRCdG381OWn47RJu5T963MBMk/L8waKuSNCmVAwR1SHHJP8lQ5PNc+rPr6cyzjCMy
+         UXgA==
+X-Gm-Message-State: AOJu0Yx+rOHu2PrSPARshktMNRf+A6DwuODDU5V9cN0abu+Y/PWGiCwK
+	+U2mLQGdHMd18C96Lk0nXxz1xQ7C5+E=
+X-Google-Smtp-Source: AGHT+IEn73BkJAG1qbu+uCf9tMtzDBj6dtCgzIv1jH4xx8otPYheS9oXpeBgjXhl8Ik9VEFzPS5Gzw==
+X-Received: by 2002:a25:7751:0:b0:d84:e754:d541 with SMTP id s78-20020a257751000000b00d84e754d541mr2429076ybc.4.1695823226716;
+        Wed, 27 Sep 2023 07:00:26 -0700 (PDT)
+Received: from keaua.caveonetworks.com ([2600:1700:9190:ba10:961:fe0e:be52:568a])
+        by smtp.gmail.com with ESMTPSA id w8-20020a25ac08000000b00d7b957d8ed9sm3388704ybi.17.2023.09.27.07.00.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 27 Sep 2023 05:02:26 -0700 (PDT)
-From: Alex Kiernan <alex.kiernan@gmail.com>
+        Wed, 27 Sep 2023 07:00:26 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Alex Kiernan <alex.kiernan@gmail.com>
-Subject: [meta-networking][PATCH] mdns: Upgrade 1790.80.10 -> 2200.0.8
-Date: Wed, 27 Sep 2023 13:02:18 +0100
-Message-Id: <20230927120218.26586-1-alex.kiernan@gmail.com>
-X-Mailer: git-send-email 2.39.0
+Cc: Armin Kuster <akuster@mvista.com>
+Subject: [meta-oe][kirkstone][PATCH] openldap: update to 2.5.16
+Date: Wed, 27 Sep 2023 10:00:25 -0400
+Message-Id: <20230927140025.1276277-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 27 Sep 2023 12:02:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105191
+ <openembedded-devel@lists.openembedded.org>; Wed, 27 Sep 2023 14:00:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105192
 
-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+2.5.x is an LTS version per the project.
+Drop patch now included.
+
+Signed-off-by: Armin Kuster <akuster@mvista.com>
 ---
+ ...if-filter-fix-parallel-build-failure.patch | 32 --------
+ ...-Makefile.in-ignore-the-mkdir-errors.patch | 33 --------
+ ...de-ldap_pvt_thread.h-before-redefini.patch | 54 -------------
+ .../openldap/openldap/CVE-2023-2953-1.patch   | 30 --------
+ .../openldap/openldap/CVE-2023-2953-2.patch   | 76 -------------------
+ ...{openldap_2.5.12.bb => openldap_2.5.16.bb} |  7 +-
+ 6 files changed, 1 insertion(+), 231 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/openldap/openldap/0001-ldif-filter-fix-parallel-build-failure.patch
+ delete mode 100644 meta-oe/recipes-support/openldap/openldap/0001-libraries-Makefile.in-ignore-the-mkdir-errors.patch
+ delete mode 100644 meta-oe/recipes-support/openldap/openldap/0001-librewrite-include-ldap_pvt_thread.h-before-redefini.patch
+ delete mode 100644 meta-oe/recipes-support/openldap/openldap/CVE-2023-2953-1.patch
+ delete mode 100644 meta-oe/recipes-support/openldap/openldap/CVE-2023-2953-2.patch
+ rename meta-oe/recipes-support/openldap/{openldap_2.5.12.bb => openldap_2.5.16.bb} (96%)
 
- ...01-Handle-interface-without-ifa_addr.patch | 38 +++++++++++++++++++
- ...rop-MacOS-specific-__block-qualifier.patch | 30 ---------------
- ...-mDNSCore-Fix-broken-debug-parameter.patch | 17 ++++-----
- .../mdns/mdns/0015-Add-missing-limits.h.patch | 23 +++++++++++
- .../{mdns_1790.80.10.bb => mdns_2200.0.8.bb}  |  7 ++--
- 5 files changed, 72 insertions(+), 43 deletions(-)
- create mode 100644 meta-networking/recipes-protocols/mdns/mdns/0001-Handle-interface-without-ifa_addr.patch
- delete mode 100644 meta-networking/recipes-protocols/mdns/mdns/0003-mDNSShared-Drop-MacOS-specific-__block-qualifier.patch
- create mode 100644 meta-networking/recipes-protocols/mdns/mdns/0015-Add-missing-limits.h.patch
- rename meta-networking/recipes-protocols/mdns/{mdns_1790.80.10.bb => mdns_2200.0.8.bb} (96%)
-
-diff --git a/meta-networking/recipes-protocols/mdns/mdns/0001-Handle-interface-without-ifa_addr.patch b/meta-networking/recipes-protocols/mdns/mdns/0001-Handle-interface-without-ifa_addr.patch
-new file mode 100644
-index 000000000000..daee318ae4a3
---- /dev/null
-+++ b/meta-networking/recipes-protocols/mdns/mdns/0001-Handle-interface-without-ifa_addr.patch
-@@ -0,0 +1,38 @@
-+From 1cc54320306e07c1fc0eed98e7fbcbb07a2f3b28 Mon Sep 17 00:00:00 2001
-+From: Stefan Agner <stefan@agner.ch>
-+Date: Fri, 23 Jun 2023 10:10:00 +0200
-+Subject: [PATCH] Handle interface without `ifa_addr`
-+
-+It seems that certain interface types may have `ifa_addr` set to null.
-+Handle this case gracefully.
-+
-+Upstream-Status: Submitted [https://github.com/apple-oss-distributions/mDNSResponder/pull/2/commits/11b410d4d683c90e693c40315997bb3e8ec90e9a]
-+
-+Signed-off-by: Stefan Agner <stefan@agner.ch>
-+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
-+---
-+ mDNSPosix/mDNSPosix.c | 4 +++-
-+ 1 file changed, 3 insertions(+), 1 deletion(-)
-+
-+diff --git a/mDNSPosix/mDNSPosix.c b/mDNSPosix/mDNSPosix.c
-+index d7f31cc4d5cf..f10301253f58 100644
-+--- a/mDNSPosix/mDNSPosix.c
-++++ b/mDNSPosix/mDNSPosix.c
-+@@ -1895,6 +1895,7 @@ mDNSlocal void InterfaceChangeCallback(int fd, void *context)
-+ 	    continue;
-+ 
-+         if ((ifa_loop4 == NULL) &&
-++            ((*ifi)->ifa_addr != NULL) &&
-+             ((*ifi)->ifa_addr->sa_family == AF_INET) &&
-+             ((*ifi)->ifa_flags & IFF_UP) &&
-+             ((*ifi)->ifa_flags & IFF_LOOPBACK))
-+@@ -1903,7 +1904,8 @@ mDNSlocal void InterfaceChangeCallback(int fd, void *context)
-+             continue;
-+         }
-+ 
-+-        if (     (((*ifi)->ifa_addr->sa_family == AF_INET)
-++        if (     ((*ifi)->ifa_addr != NULL) &&
-++                 (((*ifi)->ifa_addr->sa_family == AF_INET)
-+ #if HAVE_IPV6
-+                   || ((*ifi)->ifa_addr->sa_family == AF_INET6)
-+ #endif
-diff --git a/meta-networking/recipes-protocols/mdns/mdns/0003-mDNSShared-Drop-MacOS-specific-__block-qualifier.patch b/meta-networking/recipes-protocols/mdns/mdns/0003-mDNSShared-Drop-MacOS-specific-__block-qualifier.patch
+diff --git a/meta-oe/recipes-support/openldap/openldap/0001-ldif-filter-fix-parallel-build-failure.patch b/meta-oe/recipes-support/openldap/openldap/0001-ldif-filter-fix-parallel-build-failure.patch
 deleted file mode 100644
-index 0ac0bb6a4587..000000000000
---- a/meta-networking/recipes-protocols/mdns/mdns/0003-mDNSShared-Drop-MacOS-specific-__block-qualifier.patch
+index b42bd9764f..0000000000
+--- a/meta-oe/recipes-support/openldap/openldap/0001-ldif-filter-fix-parallel-build-failure.patch
 +++ /dev/null
-@@ -1,30 +0,0 @@
--From 4c0954f77ba05d77192ee1519929a39fbc978321 Mon Sep 17 00:00:00 2001
--From: Alex Kiernan <alex.kiernan@gmail.com>
--Date: Mon, 5 Dec 2022 15:14:22 +0000
--Subject: [PATCH 3/6] mDNSShared: Drop MacOS specific __block qualifier
+@@ -1,32 +0,0 @@
+-From 9e4ccd1e78ceac8de1ab66ee62ee216f1fbd4956 Mon Sep 17 00:00:00 2001
+-From: Yi Zhao <yi.zhao@windriver.com>
+-Date: Thu, 2 Dec 2021 11:38:15 +0800
+-Subject: [PATCH] ldif-filter: fix parallel build failure
 -
--Support for this extension only exists in MacOS/Clang, also it's not
--actually used here, so we can just drop it.
+-Add slapd-common.o as dependency for ldif-filter to fix the parallel
+-build failure:
+-  ld: cannot find slapd-common.o: No such file or directory
 -
 -Upstream-Status: Pending
--Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+-
+-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ----
-- mDNSShared/uds_daemon.c | 2 +-
+- tests/progs/Makefile.in | 2 +-
 - 1 file changed, 1 insertion(+), 1 deletion(-)
 -
--diff --git a/mDNSShared/uds_daemon.c b/mDNSShared/uds_daemon.c
--index 9ae5f78542d6..8c006b71a4ea 100644
----- a/mDNSShared/uds_daemon.c
--+++ b/mDNSShared/uds_daemon.c
--@@ -2912,7 +2912,7 @@ exit:
-- mDNSlocal mStatus add_domain_to_browser(request_state *info, const domainname *d)
-- {
--     browser_t *b, *p;
---    __block mStatus err;
--+    mStatus err;
+-diff --git a/tests/progs/Makefile.in b/tests/progs/Makefile.in
+-index 13f1e8be2..e4f4ccf98 100644
+---- a/tests/progs/Makefile.in
+-+++ b/tests/progs/Makefile.in
+-@@ -56,7 +56,7 @@ slapd-modify: slapd-modify.o $(OBJS) $(XLIBS)
+- slapd-bind: slapd-bind.o $(OBJS) $(XLIBS)
+- 	$(LTLINK) -o $@ slapd-bind.o $(OBJS) $(LIBS)
 - 
--     for (p = info->u.browser.browsers; p; p = p->next)
--     {
+--ldif-filter: ldif-filter.o $(XLIBS)
+-+ldif-filter: ldif-filter.o $(OBJS) $(XLIBS)
+- 	$(LTLINK) -o $@ ldif-filter.o $(OBJS) $(LIBS)
+- 
+- slapd-mtread: slapd-mtread.o $(OBJS) $(XLIBS)
 --- 
--2.35.1
+-2.25.1
 -
-diff --git a/meta-networking/recipes-protocols/mdns/mdns/0005-mDNSCore-Fix-broken-debug-parameter.patch b/meta-networking/recipes-protocols/mdns/mdns/0005-mDNSCore-Fix-broken-debug-parameter.patch
-index 39e67cdf4884..4cda71bdb1bc 100644
---- a/meta-networking/recipes-protocols/mdns/mdns/0005-mDNSCore-Fix-broken-debug-parameter.patch
-+++ b/meta-networking/recipes-protocols/mdns/mdns/0005-mDNSCore-Fix-broken-debug-parameter.patch
-@@ -1,28 +1,25 @@
--From 60533a8947af714cc593bae6b20d47f3a4828589 Mon Sep 17 00:00:00 2001
-+From 764b6202402e9e5687ff873330e5ad6be6f69df7 Mon Sep 17 00:00:00 2001
- From: Alex Kiernan <alex.kiernan@gmail.com>
- Date: Mon, 5 Dec 2022 22:49:49 +0000
--Subject: [PATCH 5/6] mDNSCore: Fix broken debug parameter
-+Subject: [PATCH] mDNSCore: Fix broken debug parameter
- 
--Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+diff --git a/meta-oe/recipes-support/openldap/openldap/0001-libraries-Makefile.in-ignore-the-mkdir-errors.patch b/meta-oe/recipes-support/openldap/openldap/0001-libraries-Makefile.in-ignore-the-mkdir-errors.patch
+deleted file mode 100644
+index 552726bb0a..0000000000
+--- a/meta-oe/recipes-support/openldap/openldap/0001-libraries-Makefile.in-ignore-the-mkdir-errors.patch
++++ /dev/null
+@@ -1,33 +0,0 @@
+-From 690f69791eb6cd0d7e94b4d73219ee864de27f62 Mon Sep 17 00:00:00 2001
+-From: Yi Zhao <yi.zhao@windriver.com>
+-Date: Mon, 10 Jan 2022 10:13:51 +0800
+-Subject: [PATCH] libraries/Makefile.in: ignore the mkdir errors
+-
+-Ignore the mkdir errors to fix the parallel build failure:
+-
+-../../build/shtool mkdir -p TOPDIR/tmp-glibc/work/cortexa15t2hf-neon-wrs-linux-gnueabi/openldap/2.5.9-r0/image/usr/lib
+-mkdir: cannot create directory 'TOPDIR/tmp-glibc/work/cortexa15t2hf-neon-wrs-linux-gnueabi/openldap/2.5.9-r0/image/usr/lib': File exists
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ----
- Upstream-Status: Pending
-+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
- 
-+---
-  mDNSCore/mDNS.c | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
- diff --git a/mDNSCore/mDNS.c b/mDNSCore/mDNS.c
--index 66979587ee82..e0a982fa1762 100644
-+index eecd7daa724e..1e843c081938 100644
- --- a/mDNSCore/mDNS.c
- +++ b/mDNSCore/mDNS.c
--@@ -9831,7 +9831,7 @@ mDNSlocal void mDNSCoreReceiveNoUnicastAnswers(mDNS *const m, const DNSMessage *
-+@@ -10210,7 +10210,7 @@ mDNSlocal void mDNSCoreReceiveNoUnicastAnswers(mDNS *const m, const DNSMessage *
-  #else
-                              const DNSServRef dnsserv = qptr->qDNSServer;
-  #endif
---                            debugf("mDNSCoreReceiveNoUnicastAnswers making negative cache entry TTL %d for %##s (%s)", negttl, name->c, DNSTypeName(q.qtype));
-+-                            debugf("mDNSCoreReceiveNoUnicastAnswers making negative cache entry TTL %d for %##s (%s)", negttl, currentQName, DNSTypeName(q.qtype));
- +                            debugf("mDNSCoreReceiveNoUnicastAnswers making negative cache entry TTL %d for %##s (%s)", negttl, currentQName->c, DNSTypeName(q.qtype));
-                              // Create a negative record for the current name in the CNAME chain.
-                              MakeNegativeCacheRecord(m, &m->rec.r, currentQName, currentQNameHash, q.qtype, q.qclass, negttl, mDNSInterface_Any,
-                                  dnsserv, response->h.flags);
+- libraries/Makefile.in | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/libraries/Makefile.in b/libraries/Makefile.in
+-index d9cb2ff..c6b251f 100644
+---- a/libraries/Makefile.in
+-+++ b/libraries/Makefile.in
+-@@ -24,7 +24,7 @@ PKGCONFIG_DIR=$(DESTDIR)$(libdir)/pkgconfig
+- PKGCONFIG_SRCDIRS=liblber libldap
+- 
+- install-local:
+--	@$(MKDIR) $(PKGCONFIG_DIR)
+-+	@-$(MKDIR) $(PKGCONFIG_DIR)
+- 	@for i in $(PKGCONFIG_SRCDIRS); do \
+- 	    $(INSTALL_DATA) $$i/*.pc $(PKGCONFIG_DIR); \
+- 	done
+--- 
+-2.17.1
+-
+diff --git a/meta-oe/recipes-support/openldap/openldap/0001-librewrite-include-ldap_pvt_thread.h-before-redefini.patch b/meta-oe/recipes-support/openldap/openldap/0001-librewrite-include-ldap_pvt_thread.h-before-redefini.patch
+deleted file mode 100644
+index bcd1525b67..0000000000
+--- a/meta-oe/recipes-support/openldap/openldap/0001-librewrite-include-ldap_pvt_thread.h-before-redefini.patch
++++ /dev/null
+@@ -1,54 +0,0 @@
+-From 79381ab335898c9184e22dd25b544adefa9bf6c5 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Mon, 7 Feb 2022 16:26:57 -0800
+-Subject: [PATCH] librewrite: include ldap_pvt_thread.h before redefining
+- calloc
+-
+-This helps compiling with musl, where sched.h is included by
+-ldap_pvt_thread.h which provides prototype for calloc() and conflicts
+-
+-/usr/include/sched.h:84:7: error: conflicting types for 'ber_memcalloc'
+-| void *calloc(size_t, size_t);
+-|       ^1
+-|  warning and 1 error generated.
+-| ./rewrite-int.h:44:21: note: expanded from macro 'calloc'
+-| #define calloc(x,y)     ber_memcalloc(x,y)
+-|                         ^
+-
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- libraries/librewrite/rewrite-int.h | 10 +++++-----
+- 1 file changed, 5 insertions(+), 5 deletions(-)
+-
+-diff --git a/libraries/librewrite/rewrite-int.h b/libraries/librewrite/rewrite-int.h
+-index 4481dd3..5ec226d 100644
+---- a/libraries/librewrite/rewrite-int.h
+-+++ b/libraries/librewrite/rewrite-int.h
+-@@ -40,6 +40,11 @@
+- 
+- #include <rewrite.h>
+- 
+-+#ifndef NO_THREADS
+-+#define USE_REWRITE_LDAP_PVT_THREADS
+-+#include <ldap_pvt_thread.h>
+-+#endif
+-+
+- #define malloc(x)	ber_memalloc(x)
+- #define calloc(x,y)	ber_memcalloc(x,y)
+- #define realloc(x,y)	ber_memrealloc(x,y)
+-@@ -47,11 +52,6 @@
+- #undef strdup
+- #define	strdup(x)	ber_strdup(x)
+- 
+--#ifndef NO_THREADS
+--#define USE_REWRITE_LDAP_PVT_THREADS
+--#include <ldap_pvt_thread.h>
+--#endif
+--
+- /*
+-  * For details, see RATIONALE.
+-  */
 --- 
 -2.35.1
 -
-diff --git a/meta-networking/recipes-protocols/mdns/mdns/0015-Add-missing-limits.h.patch b/meta-networking/recipes-protocols/mdns/mdns/0015-Add-missing-limits.h.patch
-new file mode 100644
-index 000000000000..9fe721ff0759
---- /dev/null
-+++ b/meta-networking/recipes-protocols/mdns/mdns/0015-Add-missing-limits.h.patch
-@@ -0,0 +1,23 @@
-+From 9fc45a2cf3b78573a568abf538a6e6f4bd30b2d7 Mon Sep 17 00:00:00 2001
-+From: Alex Kiernan <alex.kiernan@gmail.com>
-+Date: Wed, 27 Sep 2023 11:45:26 +0100
-+Subject: [PATCH] Add missing limits.h
-+
-+Upstream-Status: Pending
-+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
-+---
-+ mDNSShared/PlatformCommon.c | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/mDNSShared/PlatformCommon.c b/mDNSShared/PlatformCommon.c
-+index 9ce15468e217..c308af3e8b0e 100644
-+--- a/mDNSShared/PlatformCommon.c
-++++ b/mDNSShared/PlatformCommon.c
-+@@ -32,6 +32,7 @@
-+ #include <time.h>
-+ #include <sys/time.h>           // Needed for #include <sys/time.h>().
-+ #include <assert.h>
-++#include <limits.h>
-+ 
-+ 
-+ #include "mDNSEmbeddedAPI.h"    // Defines the interface provided to the client layer above
-diff --git a/meta-networking/recipes-protocols/mdns/mdns_1790.80.10.bb b/meta-networking/recipes-protocols/mdns/mdns_2200.0.8.bb
+diff --git a/meta-oe/recipes-support/openldap/openldap/CVE-2023-2953-1.patch b/meta-oe/recipes-support/openldap/openldap/CVE-2023-2953-1.patch
+deleted file mode 100644
+index 2517dac334..0000000000
+--- a/meta-oe/recipes-support/openldap/openldap/CVE-2023-2953-1.patch
++++ /dev/null
+@@ -1,30 +0,0 @@
+-From ea8dd2d279c5aeaf9d4672a4e95bebd99babcce1 Mon Sep 17 00:00:00 2001
+-From: Howard Chu <hyc@openldap.org>
+-Date: Wed, 24 Aug 2022 14:40:51 +0100
+-Subject: [PATCH] ITS#9904 ldif_open_url: check for ber_strdup failure
+-
+-Code present since 1999, df8f7cbb9b79be3be9205d116d1dd0b263d6861a
+-
+-Upstream-Status: Backport [https://git.openldap.org/openldap/openldap/-/commit/752d320cf96e46f24c0900f1a8f6af0a3fc3c4ce]
+-CVE: CVE-2023-2953
+-Signed-off-by: Ashish Sharma <asharma@mvista.com>
+----
+- libraries/libldap/fetch.c | 2 ++
+- 1 file changed, 2 insertions(+)
+-
+-diff --git a/libraries/libldap/fetch.c b/libraries/libldap/fetch.c
+-index 9e426dc647..536871bcfe 100644
+---- a/libraries/libldap/fetch.c
+-+++ b/libraries/libldap/fetch.c
+-@@ -69,6 +69,8 @@ ldif_open_url(
+- 		}
+- 
+- 		p = ber_strdup( urlstr );
+-+		if ( p == NULL )
+-+			return NULL;
+- 
+- 		/* But we should convert to LDAP_DIRSEP before use */
+- 		if ( LDAP_DIRSEP[0] != '/' ) {
+--- 
+-GitLab
+-
+diff --git a/meta-oe/recipes-support/openldap/openldap/CVE-2023-2953-2.patch b/meta-oe/recipes-support/openldap/openldap/CVE-2023-2953-2.patch
+deleted file mode 100644
+index 2f24df9266..0000000000
+--- a/meta-oe/recipes-support/openldap/openldap/CVE-2023-2953-2.patch
++++ /dev/null
+@@ -1,76 +0,0 @@
+-From 3f2abd0b2eeec8522e50d5c4ea4992e70e8f9915 Mon Sep 17 00:00:00 2001
+-From: Howard Chu <hyc@openldap.org>
+-Date: Thu, 25 Aug 2022 16:13:21 +0100
+-Subject: [PATCH] ITS#9904 ldap_url_parsehosts: check for strdup failure
+-
+-Avoid unnecessary strdup in IPv6 addr parsing, check for strdup
+-failure when dup'ing scheme.
+-
+-Code present since 2000, 8da110a9e726dbc612b302feafe0109271e6bc59
+-
+-Upstream-Status: Backport [https://git.openldap.org/openldap/openldap/-/commit/6563fab9e2feccb0a684d0398e78571d09fb808b]
+-CVE: CVE-2023-2953
+-Signed-off-by: Ashish Sharma <asharma@mvista.com>
+----
+- libraries/libldap/url.c | 21 ++++++++++++---------
+- 1 file changed, 12 insertions(+), 9 deletions(-)
+-
+-diff --git a/libraries/libldap/url.c b/libraries/libldap/url.c
+-index 7e56564265..8df0abd044 100644
+---- a/libraries/libldap/url.c
+-+++ b/libraries/libldap/url.c
+-@@ -1386,24 +1386,22 @@ ldap_url_parsehosts(
+- 		}
+- 		ludp->lud_port = port;
+- 		ludp->lud_host = specs[i];
+--		specs[i] = NULL;
+- 		p = strchr(ludp->lud_host, ':');
+- 		if (p != NULL) {
+- 			/* more than one :, IPv6 address */
+- 			if ( strchr(p+1, ':') != NULL ) {
+- 				/* allow [address] and [address]:port */
+- 				if ( *ludp->lud_host == '[' ) {
+--					p = LDAP_STRDUP(ludp->lud_host+1);
+--					/* copied, make sure we free source later */
+--					specs[i] = ludp->lud_host;
+--					ludp->lud_host = p;
+--					p = strchr( ludp->lud_host, ']' );
+-+					p = strchr( ludp->lud_host+1, ']' );
+- 					if ( p == NULL ) {
+- 						LDAP_FREE(ludp);
+- 						ldap_charray_free(specs);
+- 						return LDAP_PARAM_ERROR;
+- 					}
+--					*p++ = '\0';
+-+					/* Truncate trailing ']' and shift hostname down 1 char */
+-+					*p = '\0';
+-+					AC_MEMCPY( ludp->lud_host, ludp->lud_host+1, p - ludp->lud_host );
+-+					p++;
+- 					if ( *p != ':' ) {
+- 						if ( *p != '\0' ) {
+- 							LDAP_FREE(ludp);
+-@@ -1429,14 +1427,19 @@ ldap_url_parsehosts(
+- 				}
+- 			}
+- 		}
+--		ldap_pvt_hex_unescape(ludp->lud_host);
+- 		ludp->lud_scheme = LDAP_STRDUP("ldap");
+-+		if ( ludp->lud_scheme == NULL ) {
+-+			LDAP_FREE(ludp);
+-+			ldap_charray_free(specs);
+-+			return LDAP_NO_MEMORY;
+-+		}
+-+		specs[i] = NULL;
+-+		ldap_pvt_hex_unescape(ludp->lud_host);
+- 		ludp->lud_next = *ludlist;
+- 		*ludlist = ludp;
+- 	}
+- 
+- 	/* this should be an array of NULLs now */
+--	/* except entries starting with [ */
+- 	ldap_charray_free(specs);
+- 	return LDAP_SUCCESS;
+- }
+--- 
+-GitLab
+-
+diff --git a/meta-oe/recipes-support/openldap/openldap_2.5.12.bb b/meta-oe/recipes-support/openldap/openldap_2.5.16.bb
 similarity index 96%
-rename from meta-networking/recipes-protocols/mdns/mdns_1790.80.10.bb
-rename to meta-networking/recipes-protocols/mdns/mdns_2200.0.8.bb
-index aff7954f507b..8370ed50c08c 100644
---- a/meta-networking/recipes-protocols/mdns/mdns_1790.80.10.bb
-+++ b/meta-networking/recipes-protocols/mdns/mdns_2200.0.8.bb
-@@ -6,10 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=31c50371921e0fb731003bbc665f29bf"
+rename from meta-oe/recipes-support/openldap/openldap_2.5.12.bb
+rename to meta-oe/recipes-support/openldap/openldap_2.5.16.bb
+index cd29760b8c..9e9d05917d 100644
+--- a/meta-oe/recipes-support/openldap/openldap_2.5.12.bb
++++ b/meta-oe/recipes-support/openldap/openldap_2.5.16.bb
+@@ -19,15 +19,10 @@ SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/$
+     file://initscript \
+     file://slapd.service \
+     file://remove-user-host-pwd-from-version.patch \
+-    file://0001-ldif-filter-fix-parallel-build-failure.patch \
+     file://0001-build-top.mk-unset-STRIP_OPTS.patch \
+-    file://0001-libraries-Makefile.in-ignore-the-mkdir-errors.patch \
+-    file://0001-librewrite-include-ldap_pvt_thread.h-before-redefini.patch \
+-    file://CVE-2023-2953-1.patch \
+-    file://CVE-2023-2953-2.patch \
+ "
  
- DEPENDS:append:libc-musl = " musl-nscd"
+-SRC_URI[sha256sum] = "d5086cbfc49597fa7d0670a429a9054552d441b16ee8b2435412797ab0e37b96"
++SRC_URI[sha256sum] = "546ba591822e8bb0e467d40c4d4a30f89d937c3a507fe83a578f582f6a211327"
  
--SRC_URI = "git://github.com/apple-oss-distributions/mDNSResponder;protocol=https;branch=rel/mDNSResponder-1790 \
-+SRC_URI = "git://github.com/apple-oss-distributions/mDNSResponder;protocol=https;branch=main \
-            file://0001-dns-sd-Include-missing-headers.patch \
-            file://0002-make-Set-libdns_sd.so-soname-correctly.patch \
--           file://0003-mDNSShared-Drop-MacOS-specific-__block-qualifier.patch \
-            file://0004-make-Separate-TLS-targets-from-libraries.patch \
-            file://0005-mDNSCore-Fix-broken-debug-parameter.patch \
-            file://0006-make-Add-top-level-Makefile.patch \
-@@ -23,8 +22,10 @@ SRC_URI = "git://github.com/apple-oss-distributions/mDNSResponder;protocol=https
-            file://0008-Handle-errors-from-socket-calls.patch \
-            file://0009-remove-unneeded-headers.patch \
-            file://mdns.service \
-+           file://0015-Add-missing-limits.h.patch \
-+           file://0001-Handle-interface-without-ifa_addr.patch \
-            "
--SRCREV = "8769ab51605e465425d33d757f602ce5905ca639"
-+SRCREV = "d5029b5dff8aa59d1fc07ed796e994106ef58dee"
+ DEPENDS = "util-linux groff-native"
  
- # We install a stub Makefile in the top directory so that the various checks
- # in base.bbclass pass their tests for a Makefile, this ensures (that amongst
 -- 
-2.39.0
+2.34.1
 
 
