@@ -2,286 +2,149 @@ Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B7925E82CAF
-	for <webhook@archiver.kernel.org>; Wed, 27 Sep 2023 16:06:34 +0000 (UTC)
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
- by mx.groups.io with SMTP id smtpd.web10.21163.1695830786913602617
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6DA11E82CB0
+	for <webhook@archiver.kernel.org>; Wed, 27 Sep 2023 16:46:05 +0000 (UTC)
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+ by mx.groups.io with SMTP id smtpd.web10.22195.1695833164154400539
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 Sep 2023 09:06:27 -0700
+ Wed, 27 Sep 2023 09:46:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Ok/pK2+g;
- spf=pass (domain: gmail.com, ip: 209.85.221.49, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-307d58b3efbso9757236f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 27 Sep 2023 09:06:26 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=bf8etSem;
+ spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-40566f8a093so84701345e9.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 27 Sep 2023 09:46:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1695830785; x=1696435585; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=oCf/DrVn6vdgt427kFGDZ9IsIGpNmDw8wPpYe3DLgNQ=;
-        b=Ok/pK2+g+puRU1Ilpr2Z564Ez4O5+AHkl9B3DZI/9khyiGb+TjYwn0fYrLkTx0i4zR
-         NHrPW9QGpX9te3rssQ6dcYi5y7PknV7B4m8cn4vQn7859RJAh6a69bWvsH2mr2Vx+Umi
-         m1GyftPmQ/N1hAN/jePZG/MVYdGrhEDonP3gt02h37f/GvWfILzZXz8KDApwptYz097S
-         ZG7/DbUG+LDR1JF9fKMM6lwdMYHVnuSOm671xuE5dOWxMl2uDrkm5s9mmBdM7nwSzIr8
-         /g56850kCbkaMi6CYPnu2FhbBAaKWZil/r7vvIOrW3hldjqnos7Ca2f1p32gxyPc7mXm
-         C86w==
+        d=gmail.com; s=20230601; t=1695833162; x=1696437962; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=5f7PqW087D8GBw7Wcy5PPw+FR6m14Ilfd3DE8haWHUw=;
+        b=bf8etSem2lQChkmbp+RDl9mcf98U3APmoZY06qNzfstxTz3GsaUu8ABEbts3A/9rAq
+         6UtA5qUBzonANGdOOqDVAyRJ0si33tY0FFHkCXjaYzsL3/vrarYpoNIcZazQJGZv+Vwz
+         TW5+y+0npRQC9JvB+EtzCskaH/COIhPOwKDAhrwpj+o+LcJ93kYqrITX3hYVEh5KNyQK
+         AiJRt9tVhTk25fuRBcc0YJmrpDXS7l+jfYX8dkSKgnFC3v5G1cZAM+wEKUxqiDiTHrb9
+         uyXoSFo5g8N4fvkvFfl6rrwL4vxLSdkbfM35UQ/dypu08gimbGACHEvNljA9J2orQb6r
+         h3eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695830785; x=1696435585;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1695833162; x=1696437962;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=oCf/DrVn6vdgt427kFGDZ9IsIGpNmDw8wPpYe3DLgNQ=;
-        b=DO8GXQrpXxb3Ky/sXZYbUkWu+uJ1wldyljfizZ4efxkhOpk6c3sVXMHGSUgmwOJF1c
-         q+qOekit396A5C7wqx1l1SaE0ydIuaJb/8ES3y4KEdtEP3pXlRlfPMtRk0DGvyoRDuUP
-         6WxqBlGlIRW3Z/hcJ8L+ogj5/M4RDcexeCJBu5GRABT502Tva24h6QPlbaU1z5czVB9r
-         pizKLBPNTiwDePleT3aCwTIT2IY5K0Yi2Oyj+j9uiMcCWJdcZHwXQc7Vo9baOIAQ6QB8
-         pEXZ0hzirHQ9gIibMI2rYg6tXZXeWVzZMclOmfofHNWR0Fx1GC0vxKGWPBG3xMd22XJv
-         40Iw==
-X-Gm-Message-State: AOJu0YwNfpJLD826p9BS/Ji4j41I/GQBEyLQQ3w5hyDPyk7Uzgw1CP4R
-	N32cH8LG1s2UEw4ZnOQ4RogL8cd/s0iAUcKXPEQ=
-X-Google-Smtp-Source: AGHT+IFZY5tZbBP6QnUr857X77ycGY8nPlrnOnzGSFgCwtWTlFtzV7IdIiuaVFlPyzKKI4eOdbTnP0Y57zu/GJv3V3E=
-X-Received: by 2002:a5d:45cd:0:b0:321:7050:6fb6 with SMTP id
- b13-20020a5d45cd000000b0032170506fb6mr2221839wrs.67.1695830785053; Wed, 27
- Sep 2023 09:06:25 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230926175354.2297242-1-martin.jansa@gmail.com> <CAMKF1sqWvB-YHMJaXeeOyydHXbJxzErjYxgqOPX4srpT70rj3A@mail.gmail.com>
-In-Reply-To: <CAMKF1sqWvB-YHMJaXeeOyydHXbJxzErjYxgqOPX4srpT70rj3A@mail.gmail.com>
+        bh=5f7PqW087D8GBw7Wcy5PPw+FR6m14Ilfd3DE8haWHUw=;
+        b=bTJjeLpajulu59AgCKaDeulF+4RNtp8/Lesg25ST75BlZ5NNo1HlAz7Z9mV0zntwyQ
+         vy0U+etm0CoUz4izF9GuDL/kvY7ExDIx/P9r8HVX4iMn9igKNvrb9z2fBw8jXTxuZGlu
+         cI29MFznHX6SNLQofnKkItqOoeTiiKlktglYCrD9yQZZRFiPCY1w2iE+uq9FX7KJAdA4
+         y4Ah0UJa9aG5Oy8eoqUPsTu4Tsw+xjZoTmVYsBPGm4l58J0Lj2ZoWRK+ka1NbBI2qLD1
+         7AxckXO011RLynrLDNf8IUr0CfJvL1q1ADtA4IcDhLl6H1mdrbDg7xi2XFLT4r2d32m3
+         U8KA==
+X-Gm-Message-State: AOJu0Yzt2eAx+OkgeY9jBruB9QjWGa46Xu+m+SQb3st87A/gP+KHLGRY
+	3uoHlXCQArIM3Tc4w+p2hzK8KTP355Y=
+X-Google-Smtp-Source: AGHT+IGk90XDT+4tHfX4EVXbBpI4Oc5/JG+ZxSzb5eCYICN6yFHl1ZxRX0NgzqwdQ0KulgbjIBSPqg==
+X-Received: by 2002:a05:600c:230b:b0:405:3955:5872 with SMTP id 11-20020a05600c230b00b0040539555872mr2304900wmo.18.1695833162223;
+        Wed, 27 Sep 2023 09:46:02 -0700 (PDT)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id c6-20020a7bc846000000b0040641a9d49bsm2548612wml.17.2023.09.27.09.46.01
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 27 Sep 2023 09:46:01 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 27 Sep 2023 18:06:12 +0200
-Message-ID: <CA+chaQf4XJ6KhYENTuH9ZKqVqNhP6SV-paBOP8nOLznBvEhdjw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] gupnp: fix build with meson-1.2.0
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000008ad83b0606595f9c"
+To: openembedded-devel@lists.openembedded.org
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: [meta-oe][PATCH] gupnp-tools: fix build with meson-1.2.0
+Date: Wed, 27 Sep 2023 18:45:58 +0200
+Message-ID: <20230927164558.1985001-1-martin.jansa@gmail.com>
+X-Mailer: git-send-email 2.42.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 27 Sep 2023 16:06:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105194
+ <openembedded-devel@lists.openembedded.org>; Wed, 27 Sep 2023 16:46:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105195
 
---0000000000008ad83b0606595f9c
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+---
+ .../0001-build-Fix-wrap-file-syntax.patch     | 56 +++++++++++++++++++
+ .../gupnp/gupnp-tools_0.10.2.bb               |  4 +-
+ 2 files changed, 59 insertions(+), 1 deletion(-)
+ create mode 100644 meta-multimedia/recipes-connectivity/gupnp/gupnp-tools/0001-build-Fix-wrap-file-syntax.patch
 
-Agreed, there is
-https://gitlab.gnome.org/GNOME/gupnp-tools/-/commit/1372f9ebe45180d58cefb6c=
-0475fafe77de37ef2
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp-tools/0001-build-Fix-wrap-file-syntax.patch b/meta-multimedia/recipes-connectivity/gupnp/gupnp-tools/0001-build-Fix-wrap-file-syntax.patch
+new file mode 100644
+index 0000000000..5c13ce0bd5
+--- /dev/null
++++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp-tools/0001-build-Fix-wrap-file-syntax.patch
+@@ -0,0 +1,56 @@
++From 4c86f814fbe17eb5774055d69102408bbfc1cd63 Mon Sep 17 00:00:00 2001
++From: Jens Georg <mail@jensge.org>
++Date: Sun, 9 Jul 2023 21:47:48 +0200
++Subject: [PATCH] build: Fix wrap file syntax
++
++No idea why it worked in the first place
++
++Fixes #26
++
++Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
++Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gupnp-tools/-/commit/1372f9ebe45180d58cefb6c0475fafe77de37ef2]
++---
++ subprojects/gssdp-1.2.wrap    | 4 ++--
++ subprojects/gupnp-1.2.wrap    | 4 ++--
++ subprojects/gupnp-av-1.0.wrap | 4 ++--
++ 3 files changed, 6 insertions(+), 6 deletions(-)
++
++diff --git a/subprojects/gssdp-1.2.wrap b/subprojects/gssdp-1.2.wrap
++index 34d9b0b..f78d2fa 100644
++--- a/subprojects/gssdp-1.2.wrap
+++++ b/subprojects/gssdp-1.2.wrap
++@@ -3,6 +3,6 @@ url = https://gitlab.gnome.org/GNOME/gssdp.git
++ revision = master
++ depth = 1
++  
++-[provides]
++-dependency_name = gssdp-1.2
+++[provide]
+++dependency_names = gssdp-1.2
++ 
++diff --git a/subprojects/gupnp-1.2.wrap b/subprojects/gupnp-1.2.wrap
++index c345910..f92c055 100644
++--- a/subprojects/gupnp-1.2.wrap
+++++ b/subprojects/gupnp-1.2.wrap
++@@ -3,6 +3,6 @@ url = https://gitlab.gnome.org/GNOME/gupnp.git
++ revision = master
++ depth = 1
++  
++-[provides]
++-dependency_name = gupnp-1.2
+++[provide]
+++dependency_names = gupnp-1.2
++ 
++diff --git a/subprojects/gupnp-av-1.0.wrap b/subprojects/gupnp-av-1.0.wrap
++index 967e6d3..8c3b490 100644
++--- a/subprojects/gupnp-av-1.0.wrap
+++++ b/subprojects/gupnp-av-1.0.wrap
++@@ -3,6 +3,6 @@ url = https://gitlab.gnome.org/GNOME/gupnp-av.git
++ revision = master
++ depth = 1
++  
++-[provides]
++-dependency_name = gupnp-av-1.0
+++[provide]
+++dependency_names = gupnp-av-1.0
++ 
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp-tools_0.10.2.bb b/meta-multimedia/recipes-connectivity/gupnp/gupnp-tools_0.10.2.bb
+index 20aced8329..9731ede274 100644
+--- a/meta-multimedia/recipes-connectivity/gupnp/gupnp-tools_0.10.2.bb
++++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp-tools_0.10.2.bb
+@@ -9,7 +9,9 @@ inherit features_check meson pkgconfig gettext gtk-icon-cache
+ 
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
+-SRC_URI = "http://download.gnome.org/sources/${BPN}/0.10/${BPN}-${PV}.tar.xz"
++SRC_URI = "http://download.gnome.org/sources/${BPN}/0.10/${BPN}-${PV}.tar.xz \
++    file://0001-build-Fix-wrap-file-syntax.patch \
++"
+ SRC_URI[sha256sum] = "6de49ef4b375b8a164f74b766168b1184e0d28196b6b07a4f5341f08dfd85d6c"
+ 
+ RRECOMMENDS:${PN} = "adwaita-icon-theme"
+-- 
+2.42.0
 
-I haven't seen it in my world builds because it was "hidden" by gupnp
-failure.
-
-Will send patch later.
-
-On Wed, Sep 27, 2023 at 5:50=E2=80=AFPM Khem Raj <raj.khem@gmail.com> wrote=
-:
-
-> I think we need same/simiilar fix for gupnp-tools as well. See
-> https://errors.yoctoproject.org/Errors/Details/738235/
->
-> On Tue, Sep 26, 2023 at 10:54=E2=80=AFAM Martin Jansa <martin.jansa@gmail=
-.com>
-> wrote:
-> >
-> > Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
-> > ---
-> >  ...roperly-spell-provide-in-.wrap-files.patch | 25 +++++++++++++++++++
-> >  .../recipes-connectivity/gupnp/gupnp_1.4.1.bb |  1 +
-> >  2 files changed, 26 insertions(+)
-> >  create mode 100644
-> meta-multimedia/recipes-connectivity/gupnp/gupnp/0001-build-properly-spel=
-l-provide-in-.wrap-files.patch
-> >
-> > diff --git
-> a/meta-multimedia/recipes-connectivity/gupnp/gupnp/0001-build-properly-sp=
-ell-provide-in-.wrap-files.patch
-> b/meta-multimedia/recipes-connectivity/gupnp/gupnp/0001-build-properly-sp=
-ell-provide-in-.wrap-files.patch
-> > new file mode 100644
-> > index 0000000000..66f07094c5
-> > --- /dev/null
-> > +++
-> b/meta-multimedia/recipes-connectivity/gupnp/gupnp/0001-build-properly-sp=
-ell-provide-in-.wrap-files.patch
-> > @@ -0,0 +1,25 @@
-> > +From 7a4515a356a3d5eb2af1f602c77a42a544e71efa Mon Sep 17 00:00:00 2001
-> > +From: Jan Beich <jbeich@FreeBSD.org>
-> > +Date: Sun, 9 Jul 2023 03:30:47 +0000
-> > +Subject: [PATCH] build: properly spell [provide] in *.wrap files
-> > +
-> > +meson.build:1:0: ERROR: Unexpected "[provides]" section, did you mean
-> "[provide]"?
-> > +
-> > +Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
-> > +Upstream-Status: Backport [
-> https://gitlab.gnome.org/GNOME/gupnp/-/commit/884639bd29323cbb8fbd36bc69d=
-08097a2ae2cd1
-> ]
-> > +---
-> > + subprojects/gssdp-1.2.wrap | 2 +-
-> > + 1 file changed, 1 insertion(+), 1 deletion(-)
-> > +
-> > +diff --git a/subprojects/gssdp-1.2.wrap b/subprojects/gssdp-1.2.wrap
-> > +index 469c75d..466b83b 100644
-> > +--- a/subprojects/gssdp-1.2.wrap
-> > ++++ b/subprojects/gssdp-1.2.wrap
-> > +@@ -3,6 +3,6 @@ url =3D https://gitlab.gnome.org/GNOME/gssdp.git
-> > + revision =3D gssdp-1.4
-> > + depth =3D 1
-> > +
-> > +-[provides]
-> > ++[provide]
-> > + dependency_name =3D gssdp-1.2
-> > +
-> > diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.4.1.bb
-> b/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.4.1.bb
-> > index c21e7a05bf..efeb66f28f 100644
-> > --- a/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.4.1.bb
-> > +++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.4.1.bb
-> > @@ -9,6 +9,7 @@ inherit meson pkgconfig vala gobject-introspection
-> >
-> >  SRC_URI =3D "${GNOME_MIRROR}/${BPN}/1.4/${BPN}-${PV}.tar.xz \
-> >      file://0001-all-Drop-xmlRecoverMemory.patch \
-> > +    file://0001-build-properly-spell-provide-in-.wrap-files.patch \
-> >  "
-> >  SRC_URI[sha256sum] =3D
-> "899196b5e66f03b8e25f046a7a658cd2a6851becb83f2d55345ab3281655dc0c"
-> >
-> > --
-> > 2.42.0
-> >
-> >
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#105145):
-> https://lists.openembedded.org/g/openembedded-devel/message/105145
-> > Mute This Topic: https://lists.openembedded.org/mt/101601703/1997914
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[
-> raj.khem@gmail.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
->
-
---0000000000008ad83b0606595f9c
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Agreed, there is<div><a href=3D"https://gitlab.gnome.org/G=
-NOME/gupnp-tools/-/commit/1372f9ebe45180d58cefb6c0475fafe77de37ef2">https:/=
-/gitlab.gnome.org/GNOME/gupnp-tools/-/commit/1372f9ebe45180d58cefb6c0475faf=
-e77de37ef2</a><br></div><div><br></div><div>I haven&#39;t seen it in my wor=
-ld builds because it was &quot;hidden&quot; by gupnp failure.</div><div><br=
-></div><div>Will send patch later.</div></div><br><div class=3D"gmail_quote=
-"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, Sep 27, 2023 at 5:50=E2=80=
-=AFPM Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com">raj.khem@gmail.com=
-</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:=
-0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">=
-I think we need same/simiilar fix for gupnp-tools as well. See<br>
-<a href=3D"https://errors.yoctoproject.org/Errors/Details/738235/" rel=3D"n=
-oreferrer" target=3D"_blank">https://errors.yoctoproject.org/Errors/Details=
-/738235/</a><br>
-<br>
-On Tue, Sep 26, 2023 at 10:54=E2=80=AFAM Martin Jansa &lt;<a href=3D"mailto=
-:martin.jansa@gmail.com" target=3D"_blank">martin.jansa@gmail.com</a>&gt; w=
-rote:<br>
-&gt;<br>
-&gt; Signed-off-by: Martin Jansa &lt;<a href=3D"mailto:martin.jansa@gmail.c=
-om" target=3D"_blank">martin.jansa@gmail.com</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 ...roperly-spell-provide-in-.wrap-files.patch | 25 +++++++++++++=
-++++++<br>
-&gt;=C2=A0 .../recipes-connectivity/gupnp/<a href=3D"http://gupnp_1.4.1.bb"=
- rel=3D"noreferrer" target=3D"_blank">gupnp_1.4.1.bb</a> |=C2=A0 1 +<br>
-&gt;=C2=A0 2 files changed, 26 insertions(+)<br>
-&gt;=C2=A0 create mode 100644 meta-multimedia/recipes-connectivity/gupnp/gu=
-pnp/0001-build-properly-spell-provide-in-.wrap-files.patch<br>
-&gt;<br>
-&gt; diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp/0001-bui=
-ld-properly-spell-provide-in-.wrap-files.patch b/meta-multimedia/recipes-co=
-nnectivity/gupnp/gupnp/0001-build-properly-spell-provide-in-.wrap-files.pat=
-ch<br>
-&gt; new file mode 100644<br>
-&gt; index 0000000000..66f07094c5<br>
-&gt; --- /dev/null<br>
-&gt; +++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp/0001-build-prop=
-erly-spell-provide-in-.wrap-files.patch<br>
-&gt; @@ -0,0 +1,25 @@<br>
-&gt; +From 7a4515a356a3d5eb2af1f602c77a42a544e71efa Mon Sep 17 00:00:00 200=
-1<br>
-&gt; +From: Jan Beich &lt;jbeich@FreeBSD.org&gt;<br>
-&gt; +Date: Sun, 9 Jul 2023 03:30:47 +0000<br>
-&gt; +Subject: [PATCH] build: properly spell [provide] in *.wrap files<br>
-&gt; +<br>
-&gt; +meson.build:1:0: ERROR: Unexpected &quot;[provides]&quot; section, di=
-d you mean &quot;[provide]&quot;?<br>
-&gt; +<br>
-&gt; +Signed-off-by: Martin Jansa &lt;<a href=3D"mailto:martin.jansa@gmail.=
-com" target=3D"_blank">martin.jansa@gmail.com</a>&gt;<br>
-&gt; +Upstream-Status: Backport [<a href=3D"https://gitlab.gnome.org/GNOME/=
-gupnp/-/commit/884639bd29323cbb8fbd36bc69d08097a2ae2cd1" rel=3D"noreferrer"=
- target=3D"_blank">https://gitlab.gnome.org/GNOME/gupnp/-/commit/884639bd29=
-323cbb8fbd36bc69d08097a2ae2cd1</a>]<br>
-&gt; +---<br>
-&gt; + subprojects/gssdp-1.2.wrap | 2 +-<br>
-&gt; + 1 file changed, 1 insertion(+), 1 deletion(-)<br>
-&gt; +<br>
-&gt; +diff --git a/subprojects/gssdp-1.2.wrap b/subprojects/gssdp-1.2.wrap<=
-br>
-&gt; +index 469c75d..466b83b 100644<br>
-&gt; +--- a/subprojects/gssdp-1.2.wrap<br>
-&gt; ++++ b/subprojects/gssdp-1.2.wrap<br>
-&gt; +@@ -3,6 +3,6 @@ url =3D <a href=3D"https://gitlab.gnome.org/GNOME/gss=
-dp.git" rel=3D"noreferrer" target=3D"_blank">https://gitlab.gnome.org/GNOME=
-/gssdp.git</a><br>
-&gt; + revision =3D gssdp-1.4<br>
-&gt; + depth =3D 1<br>
-&gt; +<br>
-&gt; +-[provides]<br>
-&gt; ++[provide]<br>
-&gt; + dependency_name =3D gssdp-1.2<br>
-&gt; +<br>
-&gt; diff --git a/meta-multimedia/recipes-connectivity/gupnp/<a href=3D"htt=
-p://gupnp_1.4.1.bb" rel=3D"noreferrer" target=3D"_blank">gupnp_1.4.1.bb</a>=
- b/meta-multimedia/recipes-connectivity/gupnp/<a href=3D"http://gupnp_1.4.1=
-.bb" rel=3D"noreferrer" target=3D"_blank">gupnp_1.4.1.bb</a><br>
-&gt; index c21e7a05bf..efeb66f28f 100644<br>
-&gt; --- a/meta-multimedia/recipes-connectivity/gupnp/<a href=3D"http://gup=
-np_1.4.1.bb" rel=3D"noreferrer" target=3D"_blank">gupnp_1.4.1.bb</a><br>
-&gt; +++ b/meta-multimedia/recipes-connectivity/gupnp/<a href=3D"http://gup=
-np_1.4.1.bb" rel=3D"noreferrer" target=3D"_blank">gupnp_1.4.1.bb</a><br>
-&gt; @@ -9,6 +9,7 @@ inherit meson pkgconfig vala gobject-introspection<br>
-&gt;<br>
-&gt;=C2=A0 SRC_URI =3D &quot;${GNOME_MIRROR}/${BPN}/1.4/${BPN}-${PV}.tar.xz=
- \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 file://0001-all-Drop-xmlRecoverMemory.patch \<br>
-&gt; +=C2=A0 =C2=A0 file://0001-build-properly-spell-provide-in-.wrap-files=
-.patch \<br>
-&gt;=C2=A0 &quot;<br>
-&gt;=C2=A0 SRC_URI[sha256sum] =3D &quot;899196b5e66f03b8e25f046a7a658cd2a68=
-51becb83f2d55345ab3281655dc0c&quot;<br>
-&gt;<br>
-&gt; --<br>
-&gt; 2.42.0<br>
-&gt;<br>
-&gt;<br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt; Links: You receive all messages sent to this group.<br>
-&gt; View/Reply Online (#105145): <a href=3D"https://lists.openembedded.org=
-/g/openembedded-devel/message/105145" rel=3D"noreferrer" target=3D"_blank">=
-https://lists.openembedded.org/g/openembedded-devel/message/105145</a><br>
-&gt; Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/10160170=
-3/1997914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.=
-org/mt/101601703/1997914</a><br>
-&gt; Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openem=
-bedded.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.o=
-rg</a><br>
-&gt; Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-=
-devel/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedde=
-d.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com"=
- target=3D"_blank">raj.khem@gmail.com</a>]<br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt;<br>
-</blockquote></div>
-
---0000000000008ad83b0606595f9c--
 
