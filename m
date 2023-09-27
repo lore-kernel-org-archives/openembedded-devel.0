@@ -1,183 +1,134 @@
-Return-Path: <sdoshi@mvista.com>
+Return-Path: <narpat.mali@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1354FE80A9B
-	for <webhook@archiver.kernel.org>; Wed, 27 Sep 2023 06:57:37 +0000 (UTC)
-Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com [209.85.160.172])
- by mx.groups.io with SMTP id smtpd.web10.12043.1695797850745660895
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9EEC2E80AA2
+	for <webhook@archiver.kernel.org>; Wed, 27 Sep 2023 07:42:37 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.12698.1695800555899109092
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Sep 2023 23:57:32 -0700
+ Wed, 27 Sep 2023 00:42:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=DqEk0Qk0;
- spf=pass (domain: mvista.com, ip: 209.85.160.172, mailfrom: sdoshi@mvista.com)
-Received: by mail-qt1-f172.google.com with SMTP id d75a77b69052e-418201cb9e9so26995881cf.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 26 Sep 2023 23:57:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1695797849; x=1696402649; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=PDlE2UHKwLF8Z7UuGr/sBw5yA4G/dnYcTBOQb11jwR0=;
-        b=DqEk0Qk0vNeB2lnLR3n6KAHdJeBXTgTfEmQ92IIujA7QYYAA4DcefqSFXxz9fsKLfp
-         DaBToetU/4k4d5WUc8Mn3uA4b4e1OOPhFgM8HJPEz9l54a2bT/a1PlQ4OU/R+eD0UUf0
-         1gcQuE79ClST8e+yN7Ju1HOpBagSsymo1nqjc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695797849; x=1696402649;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=PDlE2UHKwLF8Z7UuGr/sBw5yA4G/dnYcTBOQb11jwR0=;
-        b=R8suFCJJ02QMif1MCpYaMenVTPPfXsCSc2Qo7BmAg0eejZeXjcqWXrFRecWaLzKFpF
-         ouognnDa6xfimPOzTkQEIo3TraN85I0ceXNjYrWHrK13u/8DWd/TSTyNINWxjICNbmkv
-         lp/PFwtAAbDPKcy375QvNzjSUbV8BB53Pfi8iMEHffVaU+zlkt6tgwZF1RK9SSQMgF0j
-         BrVhi5YO3ygKJpYArNqWZHPMmEKYlnExHJ7O8T0iMsaqTM4oizRur9NjsrJA+uLPkb6A
-         e3x7+4JNbtBLc1PBoQdhgj4vqYh0ThSiZP6vcn1Lww/zcm3778Y93r0MkyEEO5zhDcfA
-         q8/w==
-X-Gm-Message-State: AOJu0Yy4yrBDGMjhVwenZQdIu6CLqGWutfV3S4940rceitQmaZcO/7ki
-	wR7ERygcN5+ek/UWHN5KC9ntKNm2MZHNodVn/CA=
-X-Google-Smtp-Source: AGHT+IFddx9VSWqOrWAKSx3dvnNuCyqmcjsuY/hcMS2eGGxnwMLrDAmMfKDWfVK96IfIb4KRI1JsWA==
-X-Received: by 2002:ac8:7dc5:0:b0:418:1059:dfbc with SMTP id c5-20020ac87dc5000000b004181059dfbcmr1209723qte.45.1695797849379;
-        Tue, 26 Sep 2023 23:57:29 -0700 (PDT)
-Received: from siddharth-latitude-3420.mvista.com ([43.254.176.110])
-        by smtp.gmail.com with ESMTPSA id a21-20020a63e855000000b0057406c4306fsm10756861pgk.12.2023.09.26.23.57.27
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 26 Sep 2023 23:57:29 -0700 (PDT)
-From: Siddharth <sdoshi@mvista.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Siddharth Doshi <sdoshi@mvista.com>
-Subject: [meta-oe][dunfell][PATCH] php: Fix CVE-2023-3824
-Date: Wed, 27 Sep 2023 12:27:23 +0530
-Message-Id: <20230927065723.9561-1-sdoshi@mvista.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=C3cLHtCT;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=7634d97629=narpat.mali@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 38R60dM0032304;
+	Wed, 27 Sep 2023 07:42:34 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=MWoKp
+	bxZYoq2bgTtPl6fHQGutRTBwPauN7TFDoU0GiY=; b=C3cLHtCTSSR64d50n9tCQ
+	p5lLjAyCb+jEaUuDijmTKVjwq+WFolyTAbaY21+FrwAhw0gp/Edv9fujhtTYEAzb
+	izci/ohC9vY49nME7162lDbgnO2fVRfFhzyg+zb4PC8m3235bCtp4e3MMai3/rji
+	JKLj2jXrUfzYFNVXSaLK3QPr08bp+1xZx97juprMBrrdXVOXHlmyUPm++hqNCH7f
+	rpzWVBKQfb/Qp34dGvCmJa775Va4QG5WqeEl3PWExYMWpF/rYRMAk0WetPVGSTpa
+	U+Mk7tkiWlAMiQP9ZUxQDhSI83DYFz2tm+BLRzlmsuKyi0TNHq2nS1IEXuN2l9In
+	Q==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3t9n7x3pn0-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
+	Wed, 27 Sep 2023 07:42:34 +0000 (GMT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.32; Wed, 27 Sep 2023 00:42:31 -0700
+From: nmali <narpat.mali@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <akuster808@gmail.com>
+Subject: [meta-python][kirkstone][PATCH 1/1] python3-django: upgrade 4.2.3 -> 4.2.5
+Date: Wed, 27 Sep 2023 07:42:11 +0000
+Message-ID: <20230927074211.1049355-1-narpat.mali@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-ORIG-GUID: KX4paTznG8OnWj5jADuqV6WM9NXYphPO
+X-Proofpoint-GUID: KX4paTznG8OnWj5jADuqV6WM9NXYphPO
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-09-27_03,2023-09-26_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0 phishscore=0
+ priorityscore=1501 bulkscore=0 clxscore=1015 malwarescore=0
+ lowpriorityscore=0 mlxlogscore=999 impostorscore=0 spamscore=0 mlxscore=0
+ adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2309180000 definitions=main-2309270061
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 27 Sep 2023 06:57:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105172
+ <openembedded-devel@lists.openembedded.org>; Wed, 27 Sep 2023 07:42:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105173
 
-From: Siddharth Doshi <sdoshi@mvista.com>
+From: Narpat Mali <narpat.mali@windriver.com>
 
-Upstream-Status: Backport from [https://github.com/php/php-src/commit/80316123f3e9dcce8ac419bd9dd43546e2ccb5ef]
-CVE: CVE-2023-3824
-Signed-off-by: Siddharth Doshi <sdoshi@mvista.com>
+The delta between 4.2.3 and 4.2.5 contains the CVE-2023-41164 fix
+and other bugfixes. git log --oneline 4.2.3..4.2.5 shows:
+
+b8b2f74512 (tag: 4.2.5) [4.2.x] Bumped version for 4.2.5 release.
+9c51b4dcfa [4.2.x] Fixed CVE-2023-41164 -- Fixed potential DoS in django.utils.encoding.uri_to_iri().
+acfb427522 [4.2.x] Fixed #34803 -- Fixed queryset crash when filtering againts deeply nested OuterRef annotations.
+55a0b9c32e [4.2.x] Added stub release notes and release date for 4.2.5, 4.1.11, and 3.2.21.
+8e8c318449 [4.2.x] Avoided counting exceptions in AsyncClient docs.
+dcb9d7a0e4 [4.2.x] Improved formset docs by using a set instead of a list in the custom validation example.
+f55b420277 [4.2.x] Fixed #34781 -- Updated logging ref docs for django.server's request extra context value.
+46b2b08e45 [4.2.x] Fixed #34779 -- Avoided unnecessary selection of non-nullable m2m fields without natural keys during serialization.
+d34db6602e [4.2.x] Fixed #34773 -- Fixed syncing DEFAULT_FILE_STORAGE/STATICFILES_STORAGE settings with STORAGES.
+a22aeef555 [4.2.x] Fixed #15799 -- Doc'd that Storage._open() should raise FileNotFoundError when file doesn't exist.
+936afc2deb [4.2.x] Refs #34754 -- Added missing FullResultSet import.
+3a1863319c [4.2.x] Fixed #34754 -- Fixed JSONField check constraints validation on NULL values.
+951dcbb2e6 [4.2.x] Fixed #34756 -- Fixed docs HTML build on Sphinx 7.1+.
+a750fd0d7f [4.2.x] Added stub release notes for 4.2.5.
+a56c46642d [4.2.x] Post-release version bump.
+6f4c7c124a (tag: 4.2.4) [4.2.x] Bumped version for 4.2.4 release.
+e53d6239df [4.2.x] Added release date for 4.2.4.
+8808d9da6b [4.2.x] Fixed #34750 -- Fixed QuerySet.count() when grouping by unused multi-valued annotations.
+2ef2b2ffc0 [4.2.x] Corrected pycon formatting in some docs.
+8db9a0b5a0 [4.2.x] Fixed warnings per flake8 6.1.0.
+739da73164 [4.2.x] Fixed #34748 -- Fixed queryset crash when grouping by a reference in a subquery.
+a52a2b6678 [4.2.x] Fixed #34749 -- Corrected QuerySet.acreate() signature in docs.
+12ebd9a1ac [4.2.x] Refs #34712 -- Doc'd that defining STORAGES overrides the default configuration.
+1f9d00ef9f [4.2.x] Added missing backticks in docs.
+c99d935600 [4.2.x] Fixed typo in docs/ref/models/querysets.txt.
+da92a971a0 [4.2.x] Refs #30052 -- Clarified that defer() and only() do not work with aggregated fields.
+7a67b065d7 [4.2.x] Fixed #34717 -- Fixed QuerySet.aggregate() crash when referencing window functions.
+c646412a75 Added reference to TypedChoiceField in ChoiceField docs.
+f474ba4cb5 [4.2.x] Fixed #34309 -- Doc'd how to fully delete an app.
+e54f711d42 [4.2.x] Fixed #33405, Refs #7177 -- Clarified docs for filter escapejs regarding safe and unsafe usages.
+047844270b [4.2.x] Added stub release notes for 4.2.4.
+
+Release Notes: https://docs.djangoproject.com/en/dev/releases/4.2.5/
+
+Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
 ---
- .../php/php/CVE-2023-3824.patch               | 91 +++++++++++++++++++
- meta-oe/recipes-devtools/php/php_7.4.33.bb    |  1 +
- 2 files changed, 92 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2023-3824.patch
+ .../{python3-django_4.2.3.bb => python3-django_4.2.5.bb}      | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-django_4.2.3.bb => python3-django_4.2.5.bb} (61%)
 
-diff --git a/meta-oe/recipes-devtools/php/php/CVE-2023-3824.patch b/meta-oe/recipes-devtools/php/php/CVE-2023-3824.patch
-new file mode 100644
-index 000000000..953b5258e
---- /dev/null
-+++ b/meta-oe/recipes-devtools/php/php/CVE-2023-3824.patch
-@@ -0,0 +1,91 @@
-+From 80316123f3e9dcce8ac419bd9dd43546e2ccb5ef Mon Sep 17 00:00:00 2001
-+From: Niels Dossche <7771979+nielsdos@users.noreply.github.com>
-+Date: Mon, 10 Jul 2023 13:25:34 +0200
-+Subject: [PATCH] Fix buffer mismanagement in phar_dir_read()
-+
-+Fixes GHSA-jqcx-ccgc-xwhv.
-+
-+Upstream-Status: Backport from [https://github.com/php/php-src/commit/80316123f3e9dcce8ac419bd9dd43546e2ccb5ef]
-+CVE: CVE-2023-3824
-+Signed-off-by: Siddharth Doshi <sdoshi@mvista.com>
-+---
-+ ext/phar/dirstream.c                    | 15 ++++++++------
-+ ext/phar/tests/GHSA-jqcx-ccgc-xwhv.phpt | 27 +++++++++++++++++++++++++
-+ 2 files changed, 36 insertions(+), 6 deletions(-)
-+ create mode 100644 ext/phar/tests/GHSA-jqcx-ccgc-xwhv.phpt
-+
-+diff --git a/ext/phar/dirstream.c b/ext/phar/dirstream.c
-+index 4710703c..490b1452 100644
-+--- a/ext/phar/dirstream.c
-++++ b/ext/phar/dirstream.c
-+@@ -91,25 +91,28 @@ static int phar_dir_seek(php_stream *stream, zend_off_t offset, int whence, zend
-+  */
-+ static ssize_t phar_dir_read(php_stream *stream, char *buf, size_t count) /* {{{ */
-+ {
-+-	size_t to_read;
-+ 	HashTable *data = (HashTable *)stream->abstract;
-+ 	zend_string *str_key;
-+ 	zend_ulong unused;
-+ 
-++	if (count != sizeof(php_stream_dirent)) {
-++		return -1;
-++	}
-++
-+ 	if (HASH_KEY_NON_EXISTENT == zend_hash_get_current_key(data, &str_key, &unused)) {
-+ 		return 0;
-+ 	}
-+ 
-+ 	zend_hash_move_forward(data);
-+-	to_read = MIN(ZSTR_LEN(str_key), count);
-+ 
-+-	if (to_read == 0 || count < ZSTR_LEN(str_key)) {
-++	php_stream_dirent *dirent = (php_stream_dirent *) buf;
-++
-++	if (sizeof(dirent->d_name) <= ZSTR_LEN(str_key)) {
-+ 		return 0;
-+ 	}
-+ 
-+-	memset(buf, 0, sizeof(php_stream_dirent));
-+-	memcpy(((php_stream_dirent *) buf)->d_name, ZSTR_VAL(str_key), to_read);
-+-	((php_stream_dirent *) buf)->d_name[to_read + 1] = '\0';
-++	memset(dirent, 0, sizeof(php_stream_dirent));
-++	PHP_STRLCPY(dirent->d_name, ZSTR_VAL(str_key), sizeof(dirent->d_name), ZSTR_LEN(str_key));
-+ 
-+ 	return sizeof(php_stream_dirent);
-+ }
-+diff --git a/ext/phar/tests/GHSA-jqcx-ccgc-xwhv.phpt b/ext/phar/tests/GHSA-jqcx-ccgc-xwhv.phpt
-+new file mode 100644
-+index 00000000..4e12f05f
-+--- /dev/null
-++++ b/ext/phar/tests/GHSA-jqcx-ccgc-xwhv.phpt
-+@@ -0,0 +1,27 @@
-++--TEST--
-++GHSA-jqcx-ccgc-xwhv (Buffer overflow and overread in phar_dir_read())
-++--SKIPIF--
-++<?php if (!extension_loaded("phar")) die("skip"); ?>
-++--INI--
-++phar.readonly=0
-++--FILE--
-++<?php
-++$phar = new Phar(__DIR__. '/GHSA-jqcx-ccgc-xwhv.phar');
-++$phar->startBuffering();
-++$phar->addFromString(str_repeat('A', PHP_MAXPATHLEN - 1), 'This is the content of file 1.');
-++$phar->addFromString(str_repeat('B', PHP_MAXPATHLEN - 1).'C', 'This is the content of file 2.');
-++$phar->stopBuffering();
-++
-++$handle = opendir('phar://' . __DIR__ . '/GHSA-jqcx-ccgc-xwhv.phar');
-++var_dump(strlen(readdir($handle)));
-++// Must not be a string of length PHP_MAXPATHLEN+1
-++var_dump(readdir($handle));
-++closedir($handle);
-++?>
-++--CLEAN--
-++<?php
-++unlink(__DIR__. '/GHSA-jqcx-ccgc-xwhv.phar');
-++?>
-++--EXPECTF--
-++int(%d)
-++bool(false)
-+-- 
-+2.24.4
-+
-diff --git a/meta-oe/recipes-devtools/php/php_7.4.33.bb b/meta-oe/recipes-devtools/php/php_7.4.33.bb
-index cde482079..2a82d62ca 100644
---- a/meta-oe/recipes-devtools/php/php_7.4.33.bb
-+++ b/meta-oe/recipes-devtools/php/php_7.4.33.bb
-@@ -16,6 +16,7 @@ SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
-            file://debian-php-fixheader.patch \
-            file://0001-configure.ac-don-t-include-build-libtool.m4.patch \
-            file://0001-php.m4-don-t-unset-cache-variables.patch \
-+           file://CVE-2023-3824.patch \
-           "
+diff --git a/meta-python/recipes-devtools/python/python3-django_4.2.3.bb b/meta-python/recipes-devtools/python/python3-django_4.2.5.bb
+similarity index 61%
+rename from meta-python/recipes-devtools/python/python3-django_4.2.3.bb
+rename to meta-python/recipes-devtools/python/python3-django_4.2.5.bb
+index 1b6ae83fa..7b81d427c 100644
+--- a/meta-python/recipes-devtools/python/python3-django_4.2.3.bb
++++ b/meta-python/recipes-devtools/python/python3-django_4.2.5.bb
+@@ -1,7 +1,7 @@
+ require python-django.inc
+ inherit setuptools3
  
- SRC_URI_append_class-target = " \
+-SRC_URI[sha256sum] = "45a747e1c5b3d6df1b141b1481e193b033fd1fdbda3ff52677dc81afdaacbaed"
++SRC_URI[sha256sum] = "5e5c1c9548ffb7796b4a8a4782e9a2e5a3df3615259fc1bfd3ebc73b646146c1"
+ 
+ RDEPENDS:${PN} += "\
+     ${PYTHON_PN}-sqlparse \
+@@ -9,5 +9,5 @@ RDEPENDS:${PN} += "\
+ 
+ # Set DEFAULT_PREFERENCE so that the LTS version of django is built by
+ # default. To build the 4.x branch, 
+-# PREFERRED_VERSION_python3-django = "4.2.3" can be added to local.conf
++# PREFERRED_VERSION_python3-django = "4.2.5" can be added to local.conf
+ DEFAULT_PREFERENCE = "-1"
 -- 
-2.34.1
+2.40.0
 
 
