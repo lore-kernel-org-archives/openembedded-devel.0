@@ -1,117 +1,141 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <peron.clem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D15D9E82CC9
-	for <webhook@archiver.kernel.org>; Wed, 27 Sep 2023 19:20:47 +0000 (UTC)
-Received: from mail-oa1-f52.google.com (mail-oa1-f52.google.com [209.85.160.52])
- by mx.groups.io with SMTP id smtpd.web11.26331.1695842446009421555
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B300E82CCA
+	for <webhook@archiver.kernel.org>; Wed, 27 Sep 2023 19:48:08 +0000 (UTC)
+Received: from mail-lf1-f54.google.com (mail-lf1-f54.google.com [209.85.167.54])
+ by mx.groups.io with SMTP id smtpd.web10.26506.1695844086004700796
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 Sep 2023 12:20:46 -0700
+ Wed, 27 Sep 2023 12:48:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Hndkt3GD;
- spf=pass (domain: gmail.com, ip: 209.85.160.52, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f52.google.com with SMTP id 586e51a60fabf-1dd54aca17cso3207705fac.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 27 Sep 2023 12:20:45 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=JGE+coV8;
+ spf=pass (domain: gmail.com, ip: 209.85.167.54, mailfrom: peron.clem@gmail.com)
+Received: by mail-lf1-f54.google.com with SMTP id 2adb3069b0e04-5042bfb4fe9so18869758e87.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 27 Sep 2023 12:48:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1695842445; x=1696447245; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=3W7gpqTW1YKNir0nT1MQnz4rmJ2b16qqBkJbh9ZFzJs=;
-        b=Hndkt3GDTUMhuugvlyXZpwWPXnMARu886G1hUbFyrBE8zFcpMDQMWuIhloJnnN9qZ2
-         3Bc9+8K1S2aH62oC12T5PXt4KGsupzE910hmPTgcOQRVpg2ivkKAiMxOlCWELRcjvlim
-         2Y7G2SSEn4+gIHU2vjDJKT/dzDDwzi/4Pb+iZGjBZ0Py34LJEc6uUAWifLoqaSsRFSN7
-         tiun8u6QpZ7Jx4NcwomILwj0LvQBVuzL0jq0If24nxB3ehpoF23TtEYYvhj07vu8tDaq
-         u1RlhZzq8jloFSdX14RNbW0hJT+PrAlma1RjTS2yjZWDQDWyYKNyRR73mAmTk3ppkEJi
-         fKIQ==
+        d=gmail.com; s=20230601; t=1695844084; x=1696448884; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=97NthAUZZpgrwwkvgBEBr6gwXoshSRDQLSRET3DHO3k=;
+        b=JGE+coV8FJFUNcxC3yzj5ppOz+8mDIzYiPcvaFNERORQg+EtqlbEjbjUDsRgyfgXMJ
+         FTWFnDNMSKSNtrt+ZMSvviDqSNpNpmineMCjDSVy8/nnXgWsbmEX2ZAFrlStLe5EcpHr
+         +RX+dzQvWPKMF9QzXTAvHdB73C3ByDEUIkxFpgtomTCHSA4kPdScBRmGo8iAGeXyGsc1
+         ibvC4QKQlRf9NlKzJn3yOGHa8ae4wfG8QzqLwP1QnhCW9rc9KORwxnlEO2VqythrzdL6
+         +1TZnErP8T8n9f9ixnPwGWYX0phytdDPWQAtqdiDluKqlxTM0pWGyp/8XVSPOaiWGSPL
+         NDug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695842445; x=1696447245;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=3W7gpqTW1YKNir0nT1MQnz4rmJ2b16qqBkJbh9ZFzJs=;
-        b=GGlmXiwPLMntW43X1U4jOBaFC2GlDszQTWlx+l8Mr3IHzaGY3tTMUorRCryBbCN7Dn
-         Rcl99TaEFsHF2kAabIvre920fa6UXQQUSR6bckHmlj7n7MDnOFsmacLdCPhQcN/TZ37l
-         pQ6qSF05zoVbQvf74KC0+ztkilkHIAL18JdqCqr9z7UwYelAel4AddsKBwdvaybUqrMe
-         SJsMejM9DVK4k+gnIOkEOWNhuZbGX/M5956NYZLm8qJVvfVjK/xh0GoG0NWvzppNSfFr
-         Cfzk7WjDiRDmXH4Qv1WQ4gQJ65JLsXuPG1qXrNiSaPq7dYOlyZ5qyEuUnPPkdYgsWMk2
-         /T2w==
-X-Gm-Message-State: AOJu0Ywdh+RgGp9Hv/r0MnH28C1surreEqAumUGQlVPep50J2mvSh3y+
-	KeOeVmkBCchFq8tHwnlI1UdZoIw/ROcdhb6kkXw=
-X-Google-Smtp-Source: AGHT+IGPCdgfwfazJu0HpmsSgJnBm69HeJ/u8g3jsaN98VgCEPUgPElrJ5pakBwdV8RvgZPs6NhaX83ufa3lL78n1fE=
-X-Received: by 2002:a05:6870:b50d:b0:1d5:b0b9:f6f1 with SMTP id
- v13-20020a056870b50d00b001d5b0b9f6f1mr3509570oap.8.1695842445245; Wed, 27 Sep
- 2023 12:20:45 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1695844084; x=1696448884;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=97NthAUZZpgrwwkvgBEBr6gwXoshSRDQLSRET3DHO3k=;
+        b=A5UpEwHFrMDRNrrwzQ9EWBeeqcxU7tdl/xvrBiCQxmslkIcyp3sA3ZIRRCEoG7Du/e
+         ramTE8Q8NX0MtH3oFhAAgFPQ0EsPltbUH2lA+Vv76N/1/ov7YGwvk6eYrTCHEgQoD2kw
+         ZxR8VnTDXm+jP+BZTKTtO67a0ZoquOz5+6JwwlLPcT8zMjg3Gmt5a3lLE+4EN/YRY+EZ
+         1GWkCsMfeR3XXr4gnWJSHmfD8ujeHWhiGHEME/s1lzWRMSt6vqVQMUHoI9BV4C1fkEB6
+         6JbQivN3CcHZqF5TqxyA+puBizNH3VjJa+eftXDPgN+V/ZKvEuxY/8WX3vbbAaoLNfyz
+         z5gw==
+X-Gm-Message-State: AOJu0YySlaWtzXcR6AkDp7jBQOnWCDVxdh4js84kwkhi81lUN9+Enpsa
+	uTGbo31AwJXC7/r/qD3DbsC7sm/UeIY3YRHe36s=
+X-Google-Smtp-Source: AGHT+IHLdD0cv73nc+/do04FFvTeCyNoEGA7ynn2VVAmxRdNu68JotpHx18XNWYyXlOKqGLrKJtVJY4VRXIpNgmii14=
+X-Received: by 2002:a19:4f5d:0:b0:503:16d6:1f0b with SMTP id
+ a29-20020a194f5d000000b0050316d61f0bmr2360565lfk.25.1695844083751; Wed, 27
+ Sep 2023 12:48:03 -0700 (PDT)
 MIME-Version: 1.0
-References: <106a5b7b-060d-4a20-e508-82e220c23e39@gmail.com>
-In-Reply-To: <106a5b7b-060d-4a20-e508-82e220c23e39@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 27 Sep 2023 12:20:19 -0700
-Message-ID: <CAMKF1sp+FNkjPU1PYshw=YmDXa3cJvGK__+i_pF7AQ9f3nqs4Q@mail.gmail.com>
-Subject: Re: mickledore merge request: Sept 27th
-To: akuster808 <akuster808@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+References: <1788A95F04E8B4F0.25618@lists.openembedded.org> <CABXoSoW=xU3fvq6EcaMxopw8e3FhEOLmYG59O1Fiyu8DKcT6Zg@mail.gmail.com>
+In-Reply-To: <CABXoSoW=xU3fvq6EcaMxopw8e3FhEOLmYG59O1Fiyu8DKcT6Zg@mail.gmail.com>
+From: =?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>
+Date: Wed, 27 Sep 2023 21:47:51 +0200
+Message-ID: <CAJiuCccy1FUw_YtF+hf6N8m5NP1WDdSnKuV_m7tJnNbK3GVJJg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] protobuf: stage protoc binary to sysroot
+To: Samuli Piippo <samuli.piippo@gmail.com>, Ross Burton <Ross.Burton@arm.com>
+Cc: openembedded-devel@lists.openembedded.org, Khem Raj <raj.khem@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 27 Sep 2023 19:20:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105198
+ <openembedded-devel@lists.openembedded.org>; Wed, 27 Sep 2023 19:48:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105199
 
-merged thanks Armin
+Hi Samuli,
 
-On Wed, Sep 27, 2023 at 4:43=E2=80=AFAM akuster808 <akuster808@gmail.com> w=
-rote:
+On Wed, 27 Sept 2023 at 07:20, Samuli Piippo <samuli.piippo@gmail.com> wrote:
 >
-> The following changes since commit 32c529d435c45e60151c714936d451ed9e3414=
-66:
+> Re-applying this patch as it got removed in https://patchwork.yoctoproject.org/project/oe/patch/20230904161230.377450-1-ross.burton@arm.com/
 >
->    poppler: fix CVE-2023-34872 (2023-09-19 07:22:00 -0400)
+> On Wed, 27 Sept 2023 at 08:11, Samuli Piippo via lists.openembedded.org <samuli.piippo=gmail.com@lists.openembedded.org> wrote:
+>>
+>> From: Samuli Piippo <samuli.piippo@gmail.com>
+>>
+>> If protoc is enabled for the build, recipes using protobuf will
+>> fail when protoc is not available in the recipe sysroot:
+>>
+>> |   The imported target "protobuf::protoc" references the file
+>> |
+>> |      ".../recipe-sysroot/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-pokysdk-linux/usr/bin/protoc-3.21.5.0"
+>> |
+>> |   but this file does not exist.  Possible reasons include:
+>> |
+>> |   * The file was deleted, renamed, or moved to another location.
+>> |
+>> |   * An install or uninstall procedure did not complete successfully.
+>> |
+>> |   * The installation package was faulty and contained
+>> |
+>> |      ".../recipe-sysroot/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-pokysdk-linux/usr/lib/cmake/protobuf/protobuf-targets.cmake"
+>> |
+>> |   but not all the files it references.
+>>
+>> Use SYSROOT_DIRS to stage the binary to sysroot so it's always
+>> available for other recipes.
+
++Ross Burton
+
+You will have the same issue with gRPC binaries and I think the best solution
+is to fix the QT CMake instead of contaminating the rootfs, no?
+
+You should update to have something like this:
+https://github.com/etcd-cpp-apiv3/etcd-cpp-apiv3/blob/master/CMakeLists.txt
+
+Regards,
+Clement
+
+
+>>
+>> Signed-off-by: Samuli Piippo <samuli.piippo@qt.io>
+>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> ---
+>>  meta-oe/recipes-devtools/protobuf/protobuf_3.21.12.bb | 3 +++
+>>  1 file changed, 3 insertions(+)
+>>
+>> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.21.12.bb b/meta-oe/recipes-devtools/protobuf/protobuf_3.21.12.bb
+>> index d95e1c20f..06b21a0d6 100644
+>> --- a/meta-oe/recipes-devtools/protobuf/protobuf_3.21.12.bb
+>> +++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.21.12.bb
+>> @@ -92,6 +92,9 @@ PACKAGE_BEFORE_PN = "${PN}-compiler ${PN}-lite"
+>>  FILES:${PN}-compiler = "${bindir} ${libdir}/libprotoc${SOLIBS}"
+>>  FILES:${PN}-lite = "${libdir}/libprotobuf-lite${SOLIBS}"
+>>
+>> +# CMake requires binaries to exist in sysroot, even if they have wrong architecture.
+>> +SYSROOT_DIRS += "${bindir}"
+>> +
+>>  RDEPENDS:${PN}-compiler = "${PN}"
+>>  RDEPENDS:${PN}-dev += "${PN}-compiler"
+>>  RDEPENDS:${PN}-ptest = "bash ${@bb.utils.contains('PACKAGECONFIG', 'python', 'python3-protobuf', '', d)}"
+>> --
+>> 2.25.1
+>>
+>>
+>>
+>>
 >
-> are available in the Git repository at:
->
->    https://git.openembedded.org/meta-openembedded mickledore-next
->
-> for you to fetch changes up to 922f41b39f364e5b6be596b4b51e0fb37ffe1971:
->
->    x11vnc: Fix CVE-2020-29074 (2023-09-27 07:40:56 -0400)
->
-> ----------------------------------------------------------------
-> Armin Kuster (1):
->        openldap: update to 2.5.16.
->
-> Lee Chee Yang (2):
->        opensc: fix CVE-2023-2977
->        x11vnc: Fix CVE-2020-29074
->
-> Sanjay Chitroda (1):
->        netkit-telnet: Fix CVE-2022-39028
->
->   .../recipes-netkit/netkit-telnet/files/CVE-2022-39028.patch     | 53
-> ++++++++++++++++++++++++++++
->   .../recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb          | 1 +
->   meta-oe/recipes-graphics/x11vnc/files/CVE-2020-29074.patch      | 27
-> +++++++++++++++
->   meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.16.bb                | 1 +
->   .../0001-configure-Pass-pthread_t-to-pthread_detach.patch       | 32
-> -----------------
->   .../openldap/{openldap_2.5.13.bb =3D> openldap_2.5.16.bb} |  3 +-
->   meta-oe/recipes-support/opensc/files/CVE-2023-2977.patch        | 54
-> +++++++++++++++++++++++++++++
->   meta-oe/recipes-support/opensc/opensc_0.23.0.bb                 | 1 +
->   8 files changed, 138 insertions(+), 34 deletions(-)
->   create mode 100644
-> meta-networking/recipes-netkit/netkit-telnet/files/CVE-2022-39028.patch
->   create mode 100644
-> meta-oe/recipes-graphics/x11vnc/files/CVE-2020-29074.patch
->   delete mode 100644
-> meta-oe/recipes-support/openldap/openldap/0001-configure-Pass-pthread_t-t=
-o-pthread_detach.patch
->   rename meta-oe/recipes-support/openldap/{openldap_2.5.13.bb =3D>
-> openldap_2.5.16.bb} (98%)
->   create mode 100644
-> meta-oe/recipes-support/opensc/files/CVE-2023-2977.patch
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#105165): https://lists.openembedded.org/g/openembedded-devel/message/105165
+> Mute This Topic: https://lists.openembedded.org/mt/101612304/4240582
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [peron.clem@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
 >
 
