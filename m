@@ -1,240 +1,83 @@
-Return-Path: <samuli.piippo@gmail.com>
+Return-Path: <derek@asterius.io>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A9122E80A8A
-	for <webhook@archiver.kernel.org>; Wed, 27 Sep 2023 05:20:15 +0000 (UTC)
-Received: from mail-vs1-f53.google.com (mail-vs1-f53.google.com [209.85.217.53])
- by mx.groups.io with SMTP id smtpd.web10.11127.1695792011901501711
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DE611E80A8B
+	for <webhook@archiver.kernel.org>; Wed, 27 Sep 2023 05:29:55 +0000 (UTC)
+Received: from mail-qv1-f51.google.com (mail-qv1-f51.google.com [209.85.219.51])
+ by mx.groups.io with SMTP id smtpd.web11.11478.1695792593852130129
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Sep 2023 22:20:12 -0700
+ Tue, 26 Sep 2023 22:29:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=GaStJfNb;
- spf=pass (domain: gmail.com, ip: 209.85.217.53, mailfrom: samuli.piippo@gmail.com)
-Received: by mail-vs1-f53.google.com with SMTP id ada2fe7eead31-452863742f3so4741047137.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 26 Sep 2023 22:20:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1695792011; x=1696396811; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=B8+LZ7UMHcQl6RgIb6IHhdhk16NCLkaBaBhMtBZWcYc=;
-        b=GaStJfNbrSo7rl142U0JlX/WGsJNocGK2GuUF3OBOythLGOJYZbDno68cO6yMbI9SM
-         wJK4TmhOHWSGocF7s9AcDTavVOSkml61erqWW0ko15peeMuB17zSidMAWR0m3UqdvXMh
-         ddvvhlBmLN2SRQK29Eotv5692mWY9HFjmaBic6vuRF2kqYVBTrE6Qe32f/zayhQOlFKE
-         e2Pbolkr/dtv0hdKQZPAjbjsAkUKaUTp1tFSJvBbyxv7PaqsKQoHTupTlR1suds2PuvN
-         MudQt0JQ+VrNfmAMIHG+zzlwb8HRDs2iXI78NcIT+SDVj02/bf/UxK5oIuQkQem6CxEp
-         65fQ==
+ dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.219.51, mailfrom: straka.derek@gmail.com)
+Received: by mail-qv1-f51.google.com with SMTP id 6a1803df08f44-6588cc0e238so55412876d6.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 26 Sep 2023 22:29:53 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695792011; x=1696396811;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1695792592; x=1696397392;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=B8+LZ7UMHcQl6RgIb6IHhdhk16NCLkaBaBhMtBZWcYc=;
-        b=QLjDrBdnIRdLI+T7S/3qOhvUGbu0ZwMZRKKUiV48hNB0OFlTbN5We0lMLZVnw32xXx
-         4rnO4A/25A282lcuzw34alWZojRSJ34P7TN71N4R/wYDbfu1+m8y2KMRAEeiUkNBGspq
-         AO+F+c/i++hwU7C78At2TAOY/1nx1vfwT+UMlPLeGoGtrW0wg21+NWFdh06x2c+UAok5
-         /Y9VKVhq55wVdZzPfvkznbk2B+OLsB4qaRI6cEw/V/tsXREqd6X/GrKLTw1hPwRmgKn+
-         NkkRUks4VvCHJVxQekO4ByCJU9gXEDHKZCy72qIYkBMs1ANfPjmZG5hTSYW0LSsO8en2
-         v7HQ==
-X-Gm-Message-State: AOJu0YyqGx2r/5rp/y1hA6CZs2mjmVnzzk90X1/R+TduY3iwaeQ4kuGH
-	7Z/FwVz7CLTvpUMG1yOlnHSeZEMCTop+yxQJ01c=
-X-Google-Smtp-Source: AGHT+IF9F1LSKWlioyJ2cp+tZ3RWA9wqn+37Saoz45os1imxr+S/mIV5/XAAjI3KThBuk8g85eX8CacgAIJ7WLlLw+I=
-X-Received: by 2002:a05:6102:414:b0:44d:6256:ac8b with SMTP id
- d20-20020a056102041400b0044d6256ac8bmr1064292vsq.4.1695792010783; Tue, 26 Sep
- 2023 22:20:10 -0700 (PDT)
+        bh=qBFuKRIv4qy3pKbgEt+fbmQr4Z5NxjEyLmJiEUlRSr4=;
+        b=fb6E3CoPOQpGDnuDRfiZLknAL4JsFggIIwZSN0jRXVIaQBbarw4tU0DMeMkMVRmJHx
+         s/w5s5iGL/uPp1BbfY9ncTa6KN3NpLh2Lh49JJCAcUNgNDsL2OzsAJHJd0vEo0XQDLa4
+         xA0igFvncP7OGcOOdJ7YNqv6/ySU9tHLlAXkIfS7X7OzzenmjtkDI6bd+Iik7DCofVzz
+         5FuCQOMl6dWoBvSvqnOok54ewchSWQ4FcicdCKOGO7G9nC4Lx7ZlGPd+TSbqN2reuy0q
+         Rj5ORog8J4mr6yPOPc4PAz535TJOzUkv3YgRCOaY65oP2uBBWVG3XF9LAZI5Y8lzl+T6
+         9PLg==
+X-Gm-Message-State: AOJu0YwvJFjj6KZRSLI5lPML8rhx3PUWurT6jitzZO1h58NCT4EUXy5j
+	ruRv2rmPLk1Hl20HB4Ne3ij47i8rFsT+Lw==
+X-Google-Smtp-Source: AGHT+IHVLAxUHxJ81sT1ZkuM0W3Zsbp4Ds0mA99AB42Df9woNVIXMGNJriNcUkbQPMBazCeC6glP7w==
+X-Received: by 2002:a0c:da85:0:b0:64f:42e8:6f2 with SMTP id z5-20020a0cda85000000b0064f42e806f2mr1222498qvj.10.1695792592496;
+        Tue, 26 Sep 2023 22:29:52 -0700 (PDT)
+Received: from sparta.internal.asterius.io (c-73-228-213-122.hsd1.mn.comcast.net. [73.228.213.122])
+        by smtp.gmail.com with ESMTPSA id y7-20020a0cd987000000b006581e82a628sm1729660qvj.134.2023.09.26.22.29.51
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 26 Sep 2023 22:29:52 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Cc: Derek Straka <derek@asterius.io>
+Subject: [meta-python][PATCH] python3-flask-babel: update version 2.0.0 -> 3.1.0
+Date: Wed, 27 Sep 2023 05:29:44 +0000
+Message-Id: <20230927052944.1699146-1-derek@asterius.io>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <1788A95F04E8B4F0.25618@lists.openembedded.org>
-In-Reply-To: <1788A95F04E8B4F0.25618@lists.openembedded.org>
-From: Samuli Piippo <samuli.piippo@gmail.com>
-Date: Wed, 27 Sep 2023 08:19:58 +0300
-Message-ID: <CABXoSoW=xU3fvq6EcaMxopw8e3FhEOLmYG59O1Fiyu8DKcT6Zg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] protobuf: stage protoc binary to sysroot
-To: samuli.piippo@gmail.com
-Cc: openembedded-devel@lists.openembedded.org, Khem Raj <raj.khem@gmail.com>
-Content-Type: multipart/alternative; boundary="0000000000006a7042060650587f"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 27 Sep 2023 05:20:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105165
+ <openembedded-devel@lists.openembedded.org>; Wed, 27 Sep 2023 05:29:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105166
 
---0000000000006a7042060650587f
-Content-Type: text/plain; charset="UTF-8"
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ ...3-flask-babel_2.0.0.bb => python3-flask-babel_3.1.0.bb} | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-flask-babel_2.0.0.bb => python3-flask-babel_3.1.0.bb} (59%)
 
-Re-applying this patch as it got removed in
-https://patchwork.yoctoproject.org/project/oe/patch/20230904161230.377450-1-ross.burton@arm.com/
+diff --git a/meta-python/recipes-devtools/python/python3-flask-babel_2.0.0.bb b/meta-python/recipes-devtools/python/python3-flask-babel_3.1.0.bb
+similarity index 59%
+rename from meta-python/recipes-devtools/python/python3-flask-babel_2.0.0.bb
+rename to meta-python/recipes-devtools/python/python3-flask-babel_3.1.0.bb
+index 657c190ec..610c40f84 100644
+--- a/meta-python/recipes-devtools/python/python3-flask-babel_2.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-flask-babel_3.1.0.bb
+@@ -2,12 +2,11 @@ DESCRIPTION = "i18n and l10n support for Flask based on babel and pytz"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=51917f3e8e858f5ae295a7d0e2eb3cc9"
+ 
+-SRC_URI[md5sum] = "50d5e92d96ef58787bf85b5a1b0a5567"
+-SRC_URI[sha256sum] = "f9faf45cdb2e1a32ea2ec14403587d4295108f35017a7821a2b1acb8cfd9257d"
++SRC_URI[sha256sum] = "be015772c5d7f046f3b99c508dcf618636eb93d21b713b356db79f3e79f69f39"
+ 
+-PYPI_PACKAGE = "Flask-Babel"
++PYPI_PACKAGE = "flask_babel"
+ 
+-inherit pypi setuptools3
++inherit pypi python_poetry_core
+ 
+ RDEPENDS:${PN} += "\
+     ${PYTHON_PN}-speaklater \
+-- 
+2.34.1
 
-On Wed, 27 Sept 2023 at 08:11, Samuli Piippo via lists.openembedded.org
-<samuli.piippo=gmail.com@lists.openembedded.org> wrote:
-
-> From: Samuli Piippo <samuli.piippo@gmail.com>
->
-> If protoc is enabled for the build, recipes using protobuf will
-> fail when protoc is not available in the recipe sysroot:
->
-> |   The imported target "protobuf::protoc" references the file
-> |
-> |
-> ".../recipe-sysroot/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-pokysdk-linux/usr/bin/protoc-3.21.5.0"
-> |
-> |   but this file does not exist.  Possible reasons include:
-> |
-> |   * The file was deleted, renamed, or moved to another location.
-> |
-> |   * An install or uninstall procedure did not complete successfully.
-> |
-> |   * The installation package was faulty and contained
-> |
-> |
-> ".../recipe-sysroot/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-pokysdk-linux/usr/lib/cmake/protobuf/protobuf-targets.cmake"
-> |
-> |   but not all the files it references.
->
-> Use SYSROOT_DIRS to stage the binary to sysroot so it's always
-> available for other recipes.
->
-> Signed-off-by: Samuli Piippo <samuli.piippo@qt.io>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  meta-oe/recipes-devtools/protobuf/protobuf_3.21.12.bb | 3 +++
->  1 file changed, 3 insertions(+)
->
-> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.21.12.bb
-> b/meta-oe/recipes-devtools/protobuf/protobuf_3.21.12.bb
-> index d95e1c20f..06b21a0d6 100644
-> --- a/meta-oe/recipes-devtools/protobuf/protobuf_3.21.12.bb
-> +++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.21.12.bb
-> @@ -92,6 +92,9 @@ PACKAGE_BEFORE_PN = "${PN}-compiler ${PN}-lite"
->  FILES:${PN}-compiler = "${bindir} ${libdir}/libprotoc${SOLIBS}"
->  FILES:${PN}-lite = "${libdir}/libprotobuf-lite${SOLIBS}"
->
-> +# CMake requires binaries to exist in sysroot, even if they have wrong
-> architecture.
-> +SYSROOT_DIRS += "${bindir}"
-> +
->  RDEPENDS:${PN}-compiler = "${PN}"
->  RDEPENDS:${PN}-dev += "${PN}-compiler"
->  RDEPENDS:${PN}-ptest = "bash ${@bb.utils.contains('PACKAGECONFIG',
-> 'python', 'python3-protobuf', '', d)}"
-> --
-> 2.25.1
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#105163):
-> https://lists.openembedded.org/g/openembedded-devel/message/105163
-> Mute This Topic: https://lists.openembedded.org/mt/101612304/3617605
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> samuli.piippo@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
->
-
---0000000000006a7042060650587f
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Re-applying this patch as it got removed in <a href=3D"htt=
-ps://patchwork.yoctoproject.org/project/oe/patch/20230904161230.377450-1-ro=
-ss.burton@arm.com/">https://patchwork.yoctoproject.org/project/oe/patch/202=
-30904161230.377450-1-ross.burton@arm.com/</a></div><br><div class=3D"gmail_=
-quote"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, 27 Sept 2023 at 08:11,=
- Samuli Piippo via <a href=3D"http://lists.openembedded.org">lists.openembe=
-dded.org</a> &lt;samuli.piippo=3D<a href=3D"mailto:gmail.com@lists.openembe=
-dded.org">gmail.com@lists.openembedded.org</a>&gt; wrote:<br></div><blockqu=
-ote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px=
- solid rgb(204,204,204);padding-left:1ex">From: Samuli Piippo &lt;<a href=
-=3D"mailto:samuli.piippo@gmail.com" target=3D"_blank">samuli.piippo@gmail.c=
-om</a>&gt;<br>
-<br>
-If protoc is enabled for the build, recipes using protobuf will<br>
-fail when protoc is not available in the recipe sysroot:<br>
-<br>
-|=C2=A0 =C2=A0The imported target &quot;protobuf::protoc&quot; references t=
-he file<br>
-|<br>
-|=C2=A0 =C2=A0 =C2=A0 &quot;.../recipe-sysroot/usr/local/oe-sdk-hardcoded-b=
-uildpath/sysroots/x86_64-pokysdk-linux/usr/bin/protoc-3.21.5.0&quot;<br>
-|<br>
-|=C2=A0 =C2=A0but this file does not exist.=C2=A0 Possible reasons include:=
-<br>
-|<br>
-|=C2=A0 =C2=A0* The file was deleted, renamed, or moved to another location=
-.<br>
-|<br>
-|=C2=A0 =C2=A0* An install or uninstall procedure did not complete successf=
-ully.<br>
-|<br>
-|=C2=A0 =C2=A0* The installation package was faulty and contained<br>
-|<br>
-|=C2=A0 =C2=A0 =C2=A0 &quot;.../recipe-sysroot/usr/local/oe-sdk-hardcoded-b=
-uildpath/sysroots/x86_64-pokysdk-linux/usr/lib/cmake/protobuf/protobuf-targ=
-ets.cmake&quot;<br>
-|<br>
-|=C2=A0 =C2=A0but not all the files it references.<br>
-<br>
-Use SYSROOT_DIRS to stage the binary to sysroot so it&#39;s always<br>
-available for other recipes.<br>
-<br>
-Signed-off-by: Samuli Piippo &lt;<a href=3D"mailto:samuli.piippo@qt.io" tar=
-get=3D"_blank">samuli.piippo@qt.io</a>&gt;<br>
-Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D=
-"_blank">raj.khem@gmail.com</a>&gt;<br>
----<br>
-=C2=A0meta-oe/recipes-devtools/protobuf/<a href=3D"http://protobuf_3.21.12.=
-bb" rel=3D"noreferrer" target=3D"_blank">protobuf_3.21.12.bb</a> | 3 +++<br=
->
-=C2=A01 file changed, 3 insertions(+)<br>
-<br>
-diff --git a/meta-oe/recipes-devtools/protobuf/<a href=3D"http://protobuf_3=
-.21.12.bb" rel=3D"noreferrer" target=3D"_blank">protobuf_3.21.12.bb</a> b/m=
-eta-oe/recipes-devtools/protobuf/<a href=3D"http://protobuf_3.21.12.bb" rel=
-=3D"noreferrer" target=3D"_blank">protobuf_3.21.12.bb</a><br>
-index d95e1c20f..06b21a0d6 100644<br>
---- a/meta-oe/recipes-devtools/protobuf/<a href=3D"http://protobuf_3.21.12.=
-bb" rel=3D"noreferrer" target=3D"_blank">protobuf_3.21.12.bb</a><br>
-+++ b/meta-oe/recipes-devtools/protobuf/<a href=3D"http://protobuf_3.21.12.=
-bb" rel=3D"noreferrer" target=3D"_blank">protobuf_3.21.12.bb</a><br>
-@@ -92,6 +92,9 @@ PACKAGE_BEFORE_PN =3D &quot;${PN}-compiler ${PN}-lite&quo=
-t;<br>
-=C2=A0FILES:${PN}-compiler =3D &quot;${bindir} ${libdir}/libprotoc${SOLIBS}=
-&quot;<br>
-=C2=A0FILES:${PN}-lite =3D &quot;${libdir}/libprotobuf-lite${SOLIBS}&quot;<=
-br>
-<br>
-+# CMake requires binaries to exist in sysroot, even if they have wrong arc=
-hitecture.<br>
-+SYSROOT_DIRS +=3D &quot;${bindir}&quot;<br>
-+<br>
-=C2=A0RDEPENDS:${PN}-compiler =3D &quot;${PN}&quot;<br>
-=C2=A0RDEPENDS:${PN}-dev +=3D &quot;${PN}-compiler&quot;<br>
-=C2=A0RDEPENDS:${PN}-ptest =3D &quot;bash ${@bb.utils.contains(&#39;PACKAGE=
-CONFIG&#39;, &#39;python&#39;, &#39;python3-protobuf&#39;, &#39;&#39;, d)}&=
-quot;<br>
--- <br>
-2.25.1<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#105163): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/105163" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/105163</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/101612304/361=
-7605" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/101612304/3617605</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:samuli.piippo@gmail.com"=
- target=3D"_blank">samuli.piippo@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
-
---0000000000006a7042060650587f--
 
