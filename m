@@ -1,364 +1,141 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 069E9E80AAB
-	for <webhook@archiver.kernel.org>; Wed, 27 Sep 2023 14:00:33 +0000 (UTC)
-Received: from mail-yb1-f180.google.com (mail-yb1-f180.google.com [209.85.219.180])
- by mx.groups.io with SMTP id smtpd.web11.18261.1695823227999367475
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A8DE1E82CA8
+	for <webhook@archiver.kernel.org>; Wed, 27 Sep 2023 15:50:14 +0000 (UTC)
+Received: from mail-oa1-f48.google.com (mail-oa1-f48.google.com [209.85.160.48])
+ by mx.groups.io with SMTP id smtpd.web10.20708.1695829810983996002
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 Sep 2023 07:00:28 -0700
+ Wed, 27 Sep 2023 08:50:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=NfTHxZAR;
- spf=pass (domain: gmail.com, ip: 209.85.219.180, mailfrom: akuster808@gmail.com)
-Received: by mail-yb1-f180.google.com with SMTP id 3f1490d57ef6-d86a0c97ae6so7955635276.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 27 Sep 2023 07:00:27 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=X3C4e+kj;
+ spf=pass (domain: gmail.com, ip: 209.85.160.48, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f48.google.com with SMTP id 586e51a60fabf-1dceaa7aeffso3904764fac.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 27 Sep 2023 08:50:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1695823227; x=1696428027; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Fk5Ch/GSZHJ0snJs48VulbXZ1AdiDuT7jQWTFGBgPN4=;
-        b=NfTHxZARJ3UHOuU86EMo5xF2fg8lvTsMhYnkMzBXioDiyGsn1jlsztR6Goaqjwauwe
-         l2tn1Cm3XRfpd9KfwFRLIyTGxznVOLKO+bl2iwASZGpvRSn5fj7/7mBuFdsW0YpExR+5
-         gGRYSEw5hnNvkP8sXbfSndtzv/rrFhZPmIJcN7JCIzEiZyBM6BU5N3LVR3wUV7SwCAGZ
-         j1TNUWJu86wjrwcpPUgM7v0z49Fya3f4XulyInTJsoKCyY3xdF0bUNp8v2z9V+Nunx1M
-         UfQlr3vbf3VrO5AURl8yftyiue5DA+s/o29/w+wwJ+iNl/Plj6hNVMJQNUXu7M6//9R8
-         CyRw==
+        d=gmail.com; s=20230601; t=1695829810; x=1696434610; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=PZbDmuiFRgmayQz+dZlnAcsuSrwsiS+QNnWUSHmL8Yg=;
+        b=X3C4e+kjjfwEaycY9m6X4bMuIMXqUDrVcwOMK5e5izYCGY+Y0yfokGhOuSmRSw59OY
+         /U8ZNJNVkFYGtGBbquZdLpIFsKJBjBStMezf56YXzDTRUOKA8CKGDPVoOURseeWaZ6KS
+         pAc3F8IkNnheckp6t0r2GMeo20qKXatgyo8X4kaNyKtTA0j/IozZGjJCWAOPUR9Lkf95
+         SiGKMGK7VYU6OQUZaUSp0KJKK41nyj4j9bpPFmtrA8KrI5DAswSpCHjZwZBEoksPND+C
+         l3pzoOzp1jBsqMHd9SqLxE23q0aqYh16tY3XjsT5gPTAZg216dEpwtO0xyvj9nK+oQbj
+         gDvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695823227; x=1696428027;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Fk5Ch/GSZHJ0snJs48VulbXZ1AdiDuT7jQWTFGBgPN4=;
-        b=GyZjXfzF8XTmK6rpyd6VCJHJxarSy68huHZTy9pFqxORJ1B4nQq6wf8cB/eGhZAjVh
-         aGqzlafvtNwQKHx6LH+QySrsiovr9g1rlZvnMe+19N/iwpy5iHj0lMYqrwE8uwBYxBsT
-         DtUZyB03wGEQkAh3k8hwmWFboZOTECfL9Z7Er4FfX2wzADdlqJngdAkuVbjvqX/zI5dx
-         saXUnpGop5kL8J9sSKCCz6gopv9WjdLxABGK7/wtzSIS2LAtRrEFsNfEWF8utz7BqHHE
-         49ByRCdG381OWn47RJu5T963MBMk/L8waKuSNCmVAwR1SHHJP8lQ5PNc+rPr6cyzjCMy
-         UXgA==
-X-Gm-Message-State: AOJu0Yx+rOHu2PrSPARshktMNRf+A6DwuODDU5V9cN0abu+Y/PWGiCwK
-	+U2mLQGdHMd18C96Lk0nXxz1xQ7C5+E=
-X-Google-Smtp-Source: AGHT+IEn73BkJAG1qbu+uCf9tMtzDBj6dtCgzIv1jH4xx8otPYheS9oXpeBgjXhl8Ik9VEFzPS5Gzw==
-X-Received: by 2002:a25:7751:0:b0:d84:e754:d541 with SMTP id s78-20020a257751000000b00d84e754d541mr2429076ybc.4.1695823226716;
-        Wed, 27 Sep 2023 07:00:26 -0700 (PDT)
-Received: from keaua.caveonetworks.com ([2600:1700:9190:ba10:961:fe0e:be52:568a])
-        by smtp.gmail.com with ESMTPSA id w8-20020a25ac08000000b00d7b957d8ed9sm3388704ybi.17.2023.09.27.07.00.26
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 27 Sep 2023 07:00:26 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Armin Kuster <akuster@mvista.com>
-Subject: [meta-oe][kirkstone][PATCH] openldap: update to 2.5.16
-Date: Wed, 27 Sep 2023 10:00:25 -0400
-Message-Id: <20230927140025.1276277-1-akuster808@gmail.com>
-X-Mailer: git-send-email 2.34.1
+        d=1e100.net; s=20230601; t=1695829810; x=1696434610;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=PZbDmuiFRgmayQz+dZlnAcsuSrwsiS+QNnWUSHmL8Yg=;
+        b=dAAakwCoNWVurzuGITMZUOg7opYtdJtEYCUBtTEBnuY7W/E9s5NBJp7es0yo3nLtb7
+         jF9lrqfhLJrOA52QJdkhY8eEkpp/2k2ZzV0e2rlrTuFt1J8b1Lr2ltN1BngZpVqE4Nck
+         hiRkxQf/Y9As0pXfgEzs3l3B8eyydiPRBJxypKsQbl5aTTSePSmvutrOmkeCpzOAqvCm
+         BkZ8kosjZY0xrW2asrbyot2LqbImpqcRlHuzW75JneA8xBHaIyx62oow4JY3OJKbMDyO
+         uGHY0yZCeeQ8Uw3G+AppXYsPTHK8dYxWQiuKO1sMozNnGdI7XF1FKuRR2uLGnUkxv/+7
+         rlpg==
+X-Gm-Message-State: AOJu0Yw44xV2KENdL+dfm59tkMzFe4TWcdzseqqZ7Db4837dW3XK3cq9
+	ob8GfztwjFxXDe7c+pohdCplDtJglNkIU9l2zLo=
+X-Google-Smtp-Source: AGHT+IFq58H1NPDw9miRgfPlTvrkId7L4Xl5JmpOCxREqX+YbnLLTcoqw2aFH/1Jaysgu8co2wJRNYq/6r1Rfl/ypTw=
+X-Received: by 2002:a05:6870:171b:b0:1bf:f50f:6e2 with SMTP id
+ h27-20020a056870171b00b001bff50f06e2mr4164667oae.10.1695829810127; Wed, 27
+ Sep 2023 08:50:10 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20230926175354.2297242-1-martin.jansa@gmail.com>
+In-Reply-To: <20230926175354.2297242-1-martin.jansa@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 27 Sep 2023 08:49:44 -0700
+Message-ID: <CAMKF1sqWvB-YHMJaXeeOyydHXbJxzErjYxgqOPX4srpT70rj3A@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] gupnp: fix build with meson-1.2.0
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 27 Sep 2023 14:00:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105192
+ <openembedded-devel@lists.openembedded.org>; Wed, 27 Sep 2023 15:50:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105193
 
-2.5.x is an LTS version per the project.
-Drop patch now included.
+I think we need same/simiilar fix for gupnp-tools as well. See
+https://errors.yoctoproject.org/Errors/Details/738235/
 
-Signed-off-by: Armin Kuster <akuster@mvista.com>
----
- ...if-filter-fix-parallel-build-failure.patch | 32 --------
- ...-Makefile.in-ignore-the-mkdir-errors.patch | 33 --------
- ...de-ldap_pvt_thread.h-before-redefini.patch | 54 -------------
- .../openldap/openldap/CVE-2023-2953-1.patch   | 30 --------
- .../openldap/openldap/CVE-2023-2953-2.patch   | 76 -------------------
- ...{openldap_2.5.12.bb => openldap_2.5.16.bb} |  7 +-
- 6 files changed, 1 insertion(+), 231 deletions(-)
- delete mode 100644 meta-oe/recipes-support/openldap/openldap/0001-ldif-filter-fix-parallel-build-failure.patch
- delete mode 100644 meta-oe/recipes-support/openldap/openldap/0001-libraries-Makefile.in-ignore-the-mkdir-errors.patch
- delete mode 100644 meta-oe/recipes-support/openldap/openldap/0001-librewrite-include-ldap_pvt_thread.h-before-redefini.patch
- delete mode 100644 meta-oe/recipes-support/openldap/openldap/CVE-2023-2953-1.patch
- delete mode 100644 meta-oe/recipes-support/openldap/openldap/CVE-2023-2953-2.patch
- rename meta-oe/recipes-support/openldap/{openldap_2.5.12.bb => openldap_2.5.16.bb} (96%)
-
-diff --git a/meta-oe/recipes-support/openldap/openldap/0001-ldif-filter-fix-parallel-build-failure.patch b/meta-oe/recipes-support/openldap/openldap/0001-ldif-filter-fix-parallel-build-failure.patch
-deleted file mode 100644
-index b42bd9764f..0000000000
---- a/meta-oe/recipes-support/openldap/openldap/0001-ldif-filter-fix-parallel-build-failure.patch
-+++ /dev/null
-@@ -1,32 +0,0 @@
--From 9e4ccd1e78ceac8de1ab66ee62ee216f1fbd4956 Mon Sep 17 00:00:00 2001
--From: Yi Zhao <yi.zhao@windriver.com>
--Date: Thu, 2 Dec 2021 11:38:15 +0800
--Subject: [PATCH] ldif-filter: fix parallel build failure
--
--Add slapd-common.o as dependency for ldif-filter to fix the parallel
--build failure:
--  ld: cannot find slapd-common.o: No such file or directory
--
--Upstream-Status: Pending
--
--Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-----
-- tests/progs/Makefile.in | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/tests/progs/Makefile.in b/tests/progs/Makefile.in
--index 13f1e8be2..e4f4ccf98 100644
----- a/tests/progs/Makefile.in
--+++ b/tests/progs/Makefile.in
--@@ -56,7 +56,7 @@ slapd-modify: slapd-modify.o $(OBJS) $(XLIBS)
-- slapd-bind: slapd-bind.o $(OBJS) $(XLIBS)
-- 	$(LTLINK) -o $@ slapd-bind.o $(OBJS) $(LIBS)
-- 
---ldif-filter: ldif-filter.o $(XLIBS)
--+ldif-filter: ldif-filter.o $(OBJS) $(XLIBS)
-- 	$(LTLINK) -o $@ ldif-filter.o $(OBJS) $(LIBS)
-- 
-- slapd-mtread: slapd-mtread.o $(OBJS) $(XLIBS)
---- 
--2.25.1
--
-diff --git a/meta-oe/recipes-support/openldap/openldap/0001-libraries-Makefile.in-ignore-the-mkdir-errors.patch b/meta-oe/recipes-support/openldap/openldap/0001-libraries-Makefile.in-ignore-the-mkdir-errors.patch
-deleted file mode 100644
-index 552726bb0a..0000000000
---- a/meta-oe/recipes-support/openldap/openldap/0001-libraries-Makefile.in-ignore-the-mkdir-errors.patch
-+++ /dev/null
-@@ -1,33 +0,0 @@
--From 690f69791eb6cd0d7e94b4d73219ee864de27f62 Mon Sep 17 00:00:00 2001
--From: Yi Zhao <yi.zhao@windriver.com>
--Date: Mon, 10 Jan 2022 10:13:51 +0800
--Subject: [PATCH] libraries/Makefile.in: ignore the mkdir errors
--
--Ignore the mkdir errors to fix the parallel build failure:
--
--../../build/shtool mkdir -p TOPDIR/tmp-glibc/work/cortexa15t2hf-neon-wrs-linux-gnueabi/openldap/2.5.9-r0/image/usr/lib
--mkdir: cannot create directory 'TOPDIR/tmp-glibc/work/cortexa15t2hf-neon-wrs-linux-gnueabi/openldap/2.5.9-r0/image/usr/lib': File exists
--
--Upstream-Status: Pending
--
--Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-----
-- libraries/Makefile.in | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/libraries/Makefile.in b/libraries/Makefile.in
--index d9cb2ff..c6b251f 100644
----- a/libraries/Makefile.in
--+++ b/libraries/Makefile.in
--@@ -24,7 +24,7 @@ PKGCONFIG_DIR=$(DESTDIR)$(libdir)/pkgconfig
-- PKGCONFIG_SRCDIRS=liblber libldap
-- 
-- install-local:
---	@$(MKDIR) $(PKGCONFIG_DIR)
--+	@-$(MKDIR) $(PKGCONFIG_DIR)
-- 	@for i in $(PKGCONFIG_SRCDIRS); do \
-- 	    $(INSTALL_DATA) $$i/*.pc $(PKGCONFIG_DIR); \
-- 	done
---- 
--2.17.1
--
-diff --git a/meta-oe/recipes-support/openldap/openldap/0001-librewrite-include-ldap_pvt_thread.h-before-redefini.patch b/meta-oe/recipes-support/openldap/openldap/0001-librewrite-include-ldap_pvt_thread.h-before-redefini.patch
-deleted file mode 100644
-index bcd1525b67..0000000000
---- a/meta-oe/recipes-support/openldap/openldap/0001-librewrite-include-ldap_pvt_thread.h-before-redefini.patch
-+++ /dev/null
-@@ -1,54 +0,0 @@
--From 79381ab335898c9184e22dd25b544adefa9bf6c5 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Mon, 7 Feb 2022 16:26:57 -0800
--Subject: [PATCH] librewrite: include ldap_pvt_thread.h before redefining
-- calloc
--
--This helps compiling with musl, where sched.h is included by
--ldap_pvt_thread.h which provides prototype for calloc() and conflicts
--
--/usr/include/sched.h:84:7: error: conflicting types for 'ber_memcalloc'
--| void *calloc(size_t, size_t);
--|       ^1
--|  warning and 1 error generated.
--| ./rewrite-int.h:44:21: note: expanded from macro 'calloc'
--| #define calloc(x,y)     ber_memcalloc(x,y)
--|                         ^
--
--Upstream-Status: Pending
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- libraries/librewrite/rewrite-int.h | 10 +++++-----
-- 1 file changed, 5 insertions(+), 5 deletions(-)
--
--diff --git a/libraries/librewrite/rewrite-int.h b/libraries/librewrite/rewrite-int.h
--index 4481dd3..5ec226d 100644
----- a/libraries/librewrite/rewrite-int.h
--+++ b/libraries/librewrite/rewrite-int.h
--@@ -40,6 +40,11 @@
-- 
-- #include <rewrite.h>
-- 
--+#ifndef NO_THREADS
--+#define USE_REWRITE_LDAP_PVT_THREADS
--+#include <ldap_pvt_thread.h>
--+#endif
--+
-- #define malloc(x)	ber_memalloc(x)
-- #define calloc(x,y)	ber_memcalloc(x,y)
-- #define realloc(x,y)	ber_memrealloc(x,y)
--@@ -47,11 +52,6 @@
-- #undef strdup
-- #define	strdup(x)	ber_strdup(x)
-- 
---#ifndef NO_THREADS
---#define USE_REWRITE_LDAP_PVT_THREADS
---#include <ldap_pvt_thread.h>
---#endif
---
-- /*
--  * For details, see RATIONALE.
--  */
---- 
--2.35.1
--
-diff --git a/meta-oe/recipes-support/openldap/openldap/CVE-2023-2953-1.patch b/meta-oe/recipes-support/openldap/openldap/CVE-2023-2953-1.patch
-deleted file mode 100644
-index 2517dac334..0000000000
---- a/meta-oe/recipes-support/openldap/openldap/CVE-2023-2953-1.patch
-+++ /dev/null
-@@ -1,30 +0,0 @@
--From ea8dd2d279c5aeaf9d4672a4e95bebd99babcce1 Mon Sep 17 00:00:00 2001
--From: Howard Chu <hyc@openldap.org>
--Date: Wed, 24 Aug 2022 14:40:51 +0100
--Subject: [PATCH] ITS#9904 ldif_open_url: check for ber_strdup failure
--
--Code present since 1999, df8f7cbb9b79be3be9205d116d1dd0b263d6861a
--
--Upstream-Status: Backport [https://git.openldap.org/openldap/openldap/-/commit/752d320cf96e46f24c0900f1a8f6af0a3fc3c4ce]
--CVE: CVE-2023-2953
--Signed-off-by: Ashish Sharma <asharma@mvista.com>
-----
-- libraries/libldap/fetch.c | 2 ++
-- 1 file changed, 2 insertions(+)
--
--diff --git a/libraries/libldap/fetch.c b/libraries/libldap/fetch.c
--index 9e426dc647..536871bcfe 100644
----- a/libraries/libldap/fetch.c
--+++ b/libraries/libldap/fetch.c
--@@ -69,6 +69,8 @@ ldif_open_url(
-- 		}
-- 
-- 		p = ber_strdup( urlstr );
--+		if ( p == NULL )
--+			return NULL;
-- 
-- 		/* But we should convert to LDAP_DIRSEP before use */
-- 		if ( LDAP_DIRSEP[0] != '/' ) {
---- 
--GitLab
--
-diff --git a/meta-oe/recipes-support/openldap/openldap/CVE-2023-2953-2.patch b/meta-oe/recipes-support/openldap/openldap/CVE-2023-2953-2.patch
-deleted file mode 100644
-index 2f24df9266..0000000000
---- a/meta-oe/recipes-support/openldap/openldap/CVE-2023-2953-2.patch
-+++ /dev/null
-@@ -1,76 +0,0 @@
--From 3f2abd0b2eeec8522e50d5c4ea4992e70e8f9915 Mon Sep 17 00:00:00 2001
--From: Howard Chu <hyc@openldap.org>
--Date: Thu, 25 Aug 2022 16:13:21 +0100
--Subject: [PATCH] ITS#9904 ldap_url_parsehosts: check for strdup failure
--
--Avoid unnecessary strdup in IPv6 addr parsing, check for strdup
--failure when dup'ing scheme.
--
--Code present since 2000, 8da110a9e726dbc612b302feafe0109271e6bc59
--
--Upstream-Status: Backport [https://git.openldap.org/openldap/openldap/-/commit/6563fab9e2feccb0a684d0398e78571d09fb808b]
--CVE: CVE-2023-2953
--Signed-off-by: Ashish Sharma <asharma@mvista.com>
-----
-- libraries/libldap/url.c | 21 ++++++++++++---------
-- 1 file changed, 12 insertions(+), 9 deletions(-)
--
--diff --git a/libraries/libldap/url.c b/libraries/libldap/url.c
--index 7e56564265..8df0abd044 100644
----- a/libraries/libldap/url.c
--+++ b/libraries/libldap/url.c
--@@ -1386,24 +1386,22 @@ ldap_url_parsehosts(
-- 		}
-- 		ludp->lud_port = port;
-- 		ludp->lud_host = specs[i];
---		specs[i] = NULL;
-- 		p = strchr(ludp->lud_host, ':');
-- 		if (p != NULL) {
-- 			/* more than one :, IPv6 address */
-- 			if ( strchr(p+1, ':') != NULL ) {
-- 				/* allow [address] and [address]:port */
-- 				if ( *ludp->lud_host == '[' ) {
---					p = LDAP_STRDUP(ludp->lud_host+1);
---					/* copied, make sure we free source later */
---					specs[i] = ludp->lud_host;
---					ludp->lud_host = p;
---					p = strchr( ludp->lud_host, ']' );
--+					p = strchr( ludp->lud_host+1, ']' );
-- 					if ( p == NULL ) {
-- 						LDAP_FREE(ludp);
-- 						ldap_charray_free(specs);
-- 						return LDAP_PARAM_ERROR;
-- 					}
---					*p++ = '\0';
--+					/* Truncate trailing ']' and shift hostname down 1 char */
--+					*p = '\0';
--+					AC_MEMCPY( ludp->lud_host, ludp->lud_host+1, p - ludp->lud_host );
--+					p++;
-- 					if ( *p != ':' ) {
-- 						if ( *p != '\0' ) {
-- 							LDAP_FREE(ludp);
--@@ -1429,14 +1427,19 @@ ldap_url_parsehosts(
-- 				}
-- 			}
-- 		}
---		ldap_pvt_hex_unescape(ludp->lud_host);
-- 		ludp->lud_scheme = LDAP_STRDUP("ldap");
--+		if ( ludp->lud_scheme == NULL ) {
--+			LDAP_FREE(ludp);
--+			ldap_charray_free(specs);
--+			return LDAP_NO_MEMORY;
--+		}
--+		specs[i] = NULL;
--+		ldap_pvt_hex_unescape(ludp->lud_host);
-- 		ludp->lud_next = *ludlist;
-- 		*ludlist = ludp;
-- 	}
-- 
-- 	/* this should be an array of NULLs now */
---	/* except entries starting with [ */
-- 	ldap_charray_free(specs);
-- 	return LDAP_SUCCESS;
-- }
---- 
--GitLab
--
-diff --git a/meta-oe/recipes-support/openldap/openldap_2.5.12.bb b/meta-oe/recipes-support/openldap/openldap_2.5.16.bb
-similarity index 96%
-rename from meta-oe/recipes-support/openldap/openldap_2.5.12.bb
-rename to meta-oe/recipes-support/openldap/openldap_2.5.16.bb
-index cd29760b8c..9e9d05917d 100644
---- a/meta-oe/recipes-support/openldap/openldap_2.5.12.bb
-+++ b/meta-oe/recipes-support/openldap/openldap_2.5.16.bb
-@@ -19,15 +19,10 @@ SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/$
-     file://initscript \
-     file://slapd.service \
-     file://remove-user-host-pwd-from-version.patch \
--    file://0001-ldif-filter-fix-parallel-build-failure.patch \
-     file://0001-build-top.mk-unset-STRIP_OPTS.patch \
--    file://0001-libraries-Makefile.in-ignore-the-mkdir-errors.patch \
--    file://0001-librewrite-include-ldap_pvt_thread.h-before-redefini.patch \
--    file://CVE-2023-2953-1.patch \
--    file://CVE-2023-2953-2.patch \
- "
- 
--SRC_URI[sha256sum] = "d5086cbfc49597fa7d0670a429a9054552d441b16ee8b2435412797ab0e37b96"
-+SRC_URI[sha256sum] = "546ba591822e8bb0e467d40c4d4a30f89d937c3a507fe83a578f582f6a211327"
- 
- DEPENDS = "util-linux groff-native"
- 
--- 
-2.34.1
-
+On Tue, Sep 26, 2023 at 10:54=E2=80=AFAM Martin Jansa <martin.jansa@gmail.c=
+om> wrote:
+>
+> Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+> ---
+>  ...roperly-spell-provide-in-.wrap-files.patch | 25 +++++++++++++++++++
+>  .../recipes-connectivity/gupnp/gupnp_1.4.1.bb |  1 +
+>  2 files changed, 26 insertions(+)
+>  create mode 100644 meta-multimedia/recipes-connectivity/gupnp/gupnp/0001=
+-build-properly-spell-provide-in-.wrap-files.patch
+>
+> diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp/0001-build-=
+properly-spell-provide-in-.wrap-files.patch b/meta-multimedia/recipes-conne=
+ctivity/gupnp/gupnp/0001-build-properly-spell-provide-in-.wrap-files.patch
+> new file mode 100644
+> index 0000000000..66f07094c5
+> --- /dev/null
+> +++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp/0001-build-properl=
+y-spell-provide-in-.wrap-files.patch
+> @@ -0,0 +1,25 @@
+> +From 7a4515a356a3d5eb2af1f602c77a42a544e71efa Mon Sep 17 00:00:00 2001
+> +From: Jan Beich <jbeich@FreeBSD.org>
+> +Date: Sun, 9 Jul 2023 03:30:47 +0000
+> +Subject: [PATCH] build: properly spell [provide] in *.wrap files
+> +
+> +meson.build:1:0: ERROR: Unexpected "[provides]" section, did you mean "[=
+provide]"?
+> +
+> +Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+> +Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gupnp/-/commit=
+/884639bd29323cbb8fbd36bc69d08097a2ae2cd1]
+> +---
+> + subprojects/gssdp-1.2.wrap | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/subprojects/gssdp-1.2.wrap b/subprojects/gssdp-1.2.wrap
+> +index 469c75d..466b83b 100644
+> +--- a/subprojects/gssdp-1.2.wrap
+> ++++ b/subprojects/gssdp-1.2.wrap
+> +@@ -3,6 +3,6 @@ url =3D https://gitlab.gnome.org/GNOME/gssdp.git
+> + revision =3D gssdp-1.4
+> + depth =3D 1
+> +
+> +-[provides]
+> ++[provide]
+> + dependency_name =3D gssdp-1.2
+> +
+> diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.4.1.bb b/=
+meta-multimedia/recipes-connectivity/gupnp/gupnp_1.4.1.bb
+> index c21e7a05bf..efeb66f28f 100644
+> --- a/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.4.1.bb
+> +++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.4.1.bb
+> @@ -9,6 +9,7 @@ inherit meson pkgconfig vala gobject-introspection
+>
+>  SRC_URI =3D "${GNOME_MIRROR}/${BPN}/1.4/${BPN}-${PV}.tar.xz \
+>      file://0001-all-Drop-xmlRecoverMemory.patch \
+> +    file://0001-build-properly-spell-provide-in-.wrap-files.patch \
+>  "
+>  SRC_URI[sha256sum] =3D "899196b5e66f03b8e25f046a7a658cd2a6851becb83f2d55=
+345ab3281655dc0c"
+>
+> --
+> 2.42.0
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#105145): https://lists.openembedded.org/g/openembedde=
+d-devel/message/105145
+> Mute This Topic: https://lists.openembedded.org/mt/101601703/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
