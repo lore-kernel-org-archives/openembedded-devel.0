@@ -2,56 +2,56 @@ Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 55E77E810CA
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 60F67E810CC
 	for <webhook@archiver.kernel.org>; Wed, 27 Sep 2023 10:49:30 +0000 (UTC)
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
- by mx.groups.io with SMTP id smtpd.web10.14327.1695811768901789023
+Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
+ by mx.groups.io with SMTP id smtpd.web11.14601.1695811769525238583
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 27 Sep 2023 03:49:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=N9g/cNI0;
- spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-9b0168a9e05so1109366566b.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 27 Sep 2023 03:49:28 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=YR3J8Vyz;
+ spf=pass (domain: gmail.com, ip: 209.85.208.41, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f41.google.com with SMTP id 4fb4d7f45d1cf-532c66a105bso12591616a12.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 27 Sep 2023 03:49:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1695811767; x=1696416567; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1695811768; x=1696416568; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=YoqnTNVhxsZdnqyt2QoopHP5P46He74CVPfdV4Yesug=;
-        b=N9g/cNI0wJhiHukybZASC7OyirHUL06QdClY3/4sDC3Cb/H9a2c/YFpek+FBby3nEI
-         i0N4/UeiQDP0pvisAOGzZTgcFiBpPEHCfpxEwj8f4VnVldhhaCi4Dg7OCQh5DduHTYwo
-         2xP+5XkBVOspTsVr99vSsNHa+/1Z1yFAKm7laDOflNn6tFkayXNZxSkpRNeWK+w0F1Q4
-         wA2j5nONCbca7dfiDTKd6o+s/OLAFzQ+uOaFSG1TtsS+hrKgnwNFUHB7fVbagfVbCMrQ
-         zqKc6bjSGM+XN4hr5B1pXEXolHN1cNwoJaIfLqHOpaG7mdHe+51XTf0R3LAL0jKTwiYj
-         j1mA==
+        bh=fieIPinNJZQSiqvm3cw4Ja5xd+V6i0RiuSnHwXmYlEk=;
+        b=YR3J8VyzzLx+Am3RMM/eemjnRHwb4gS6ExZ1D2dtVaC+kD1/EVvTaQD+XiDOh+JVZv
+         HRkHXyoRQryd3Y2iWk4LDprJwlGQZeScf/kKB6G5AXOmjxDFoaaGsvwVrn1eY2yz3qYr
+         NTD9mrtn7WvOiFDEx8faOFHV0V0dIM0AOQCkfhLbMRg9Y6xdlwxPBMysNkUHA8y0GbBN
+         c+T6rIr6/L9A72JjPhDXfSGo5xxTdzycFmS5EHmGO0wIX6emLdKC2in4MggA/tb0sxNH
+         laJqXskAh5TJ+8AdIqLcMdI8ymmtS6Tovm1uWqIEj7qVHP63HtDw3fThQyaERKa5fk9c
+         Z7Zg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695811767; x=1696416567;
+        d=1e100.net; s=20230601; t=1695811768; x=1696416568;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=YoqnTNVhxsZdnqyt2QoopHP5P46He74CVPfdV4Yesug=;
-        b=pLu/PmSfyAP01bQP1v2zwkXnqgtjFyLYSdo8NMtIEd7ygzqdtX2U7m/N7reS/P+AXj
-         PPgVdZB6o4S3EKObANx4lZrWcncWlrxxVayHIlgcUr+We+iq1qENVL+rWy5XE9gBOuI9
-         88EWIbxKaGTuxXEV4hTtpdwas0wKbNTGnL6wBxVrcXDS5mhLTj01fzqAEVEBV1hATXHH
-         Sqt+2USJ0uUN1BWmZ7QYY6OhBv446Lr1hDtuq88H3+r0X4g92c8q/bgGSpRYowA4K/HN
-         uOxIPCxAaDEaDa2dWJtr5jqjyvOCRosbNNfJyL3aq3THP6rENBZ6BZPYadVzn478hfVV
-         06IA==
-X-Gm-Message-State: AOJu0Yz+b68mM+vkeowsGwqnjDp7QmrKwl3cSzlr+h4cG5zhghIipJUz
-	7xKuPPYQfIEK8cEHcOk3IEN74D6Rs/c=
-X-Google-Smtp-Source: AGHT+IGX21oRYSckYyDciUWroSUkzTb/0tIcBPU4rxwLWZgPrzRjE839d4cOJsLV1WsbEWzxOzxvDA==
-X-Received: by 2002:a17:906:53:b0:9a1:c991:a521 with SMTP id 19-20020a170906005300b009a1c991a521mr1364236ejg.4.1695811767249;
+        bh=fieIPinNJZQSiqvm3cw4Ja5xd+V6i0RiuSnHwXmYlEk=;
+        b=AIhTu27YwkKZ8QH7dteP6/2CF/q6J6VteSXCpdbM0LkewCRjOGswlHRHG34uf++0xD
+         vRH1Zb8/lfdC7kLlH+b7q6tXVNiXwUyElOxQOvmKas/ceR5KOydJVetDynsdOmMlwTte
+         +TaLRbF/sfx62WZVP8Nlu2QS7xxjKVeVLUYNEBuEAGpP6qJLaBcFrXCJtogFqAsKr6OT
+         NVTYlI9mtJxDTd/SkFxJKYdTfnH/NIc8RVenq+uHK3STUa5NcrKBvgAiSWf0QlVFVrwl
+         Bi2oe4iYgn0ojoo37LvKv5vfNJ+QKburXqvwNdlAaEs/3pL1RXEVd3EFV14bCGcGxWdg
+         6kRA==
+X-Gm-Message-State: AOJu0YyZ4HW/PRDc2sv/sLZBOQycFc60TAq7xejP7ryd+46D2E8treIv
+	nohliZDhaBxTsNGWiiMVvABFLx04NPs=
+X-Google-Smtp-Source: AGHT+IF5mdrEu1wuJKauI0n9xqAVhabJK5RLUIbyy0XIK+P+NOuHty/fhHUuRfz6fZiVYrZU6TARBw==
+X-Received: by 2002:aa7:c709:0:b0:533:520:a5a8 with SMTP id i9-20020aa7c709000000b005330520a5a8mr1794390edq.29.1695811767963;
         Wed, 27 Sep 2023 03:49:27 -0700 (PDT)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id cb25-20020a170906a45900b009ad778a68c5sm9174290ejb.60.2023.09.27.03.49.26
+        by smtp.gmail.com with ESMTPSA id cm15-20020a0564020c8f00b0053537ad3936sm442591edb.21.2023.09.27.03.49.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 27 Sep 2023 03:49:26 -0700 (PDT)
+        Wed, 27 Sep 2023 03:49:27 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][PATCH 3/4] mozjs: fix filename in MULTILIB_SCRIPTS
-Date: Wed, 27 Sep 2023 12:49:17 +0200
-Message-ID: <20230927104920.2052173-3-martin.jansa@gmail.com>
+Subject: [meta-oe][PATCH 4/4] mozjs: use PV in MULTILIB_SCRIPTS
+Date: Wed, 27 Sep 2023 12:49:18 +0200
+Message-ID: <20230927104920.2052173-4-martin.jansa@gmail.com>
 X-Mailer: git-send-email 2.42.0
 In-Reply-To: <20230927104920.2052173-1-martin.jansa@gmail.com>
 References: <20230927104920.2052173-1-martin.jansa@gmail.com>
@@ -61,32 +61,62 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 27 Sep 2023 10:49:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105188
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105189
 
-* fixes:
-  DEBUG: Executing shell function multilibscript_rename
-  mv: cannot stat 'lib32-mozjs-115/115.2.0/package/usr/bin/js102-config': No such file or directory
-  WARNING: exit code 1 from a shell command.
-* cannot use PV here just yet, see the next commit
+* to avoid possible issue next time new mozjs version recipe is
+  introduced (as multilib isn't as well tested as other build configs)
+
+* this depends on oe-core change to expand script name in MULTILIB_SCRIPTS:
+  https://lists.openembedded.org/g/openembedded-core/message/188301
 
 Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 ---
- meta-oe/recipes-extended/mozjs/mozjs-115_115.2.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-extended/mozjs/mozjs-102_102.15.0.bb | 7 ++++---
+ meta-oe/recipes-extended/mozjs/mozjs-115_115.2.0.bb  | 7 ++++---
+ 2 files changed, 8 insertions(+), 6 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs-115_115.2.0.bb b/meta-oe/recipes-extended/mozjs/mozjs-115_115.2.0.bb
-index babe39822a..b029c5f4ec 100644
---- a/meta-oe/recipes-extended/mozjs/mozjs-115_115.2.0.bb
-+++ b/meta-oe/recipes-extended/mozjs/mozjs-115_115.2.0.bb
-@@ -66,7 +66,7 @@ do_install() {
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs-102_102.15.0.bb b/meta-oe/recipes-extended/mozjs/mozjs-102_102.15.0.bb
+index 08cfededa7..f2781d7096 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs-102_102.15.0.bb
++++ b/meta-oe/recipes-extended/mozjs/mozjs-102_102.15.0.bb
+@@ -66,12 +66,13 @@ do_install() {
  
  inherit multilib_script multilib_header
  
 -MULTILIB_SCRIPTS += " ${PN}-dev:${bindir}/js102-config"
-+MULTILIB_SCRIPTS += " ${PN}-dev:${bindir}/js115-config"
++MAJ_VER = "${@oe.utils.trim_version("${PV}", 1)}"
++MULTILIB_SCRIPTS += "${PN}-dev:${bindir}/js${MAJ_VER}-config"
  
  do_install:append() {
-     oe_multilib_header mozjs-115/js-config.h
+-    oe_multilib_header mozjs-102/js-config.h
++    oe_multilib_header mozjs-${MAJ_VER}/js-config.h
+     sed -e 's@${STAGING_DIR_HOST}@@g' \
+-        -i ${D}${bindir}/js102-config
++        -i ${D}${bindir}/js${MAJ_VER}-config
+     rm -f ${D}${libdir}/libjs_static.ajs
+ }
+ 
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs-115_115.2.0.bb b/meta-oe/recipes-extended/mozjs/mozjs-115_115.2.0.bb
+index b029c5f4ec..fcdf64c932 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs-115_115.2.0.bb
++++ b/meta-oe/recipes-extended/mozjs/mozjs-115_115.2.0.bb
+@@ -66,12 +66,13 @@ do_install() {
+ 
+ inherit multilib_script multilib_header
+ 
+-MULTILIB_SCRIPTS += " ${PN}-dev:${bindir}/js115-config"
++MAJ_VER = "${@oe.utils.trim_version("${PV}", 1)}"
++MULTILIB_SCRIPTS += "${PN}-dev:${bindir}/js${MAJ_VER}-config"
+ 
+ do_install:append() {
+-    oe_multilib_header mozjs-115/js-config.h
++    oe_multilib_header mozjs-${MAJ_VER}/js-config.h
+     sed -e 's@${STAGING_DIR_HOST}@@g' \
+-        -i ${D}${bindir}/js115-config
++        -i ${D}${bindir}/js${MAJ_VER}-config
+     rm -f ${D}${libdir}/libjs_static.ajs
+ }
+ 
 -- 
 2.42.0
 
