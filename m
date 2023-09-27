@@ -2,90 +2,81 @@ Return-Path: <derek@asterius.io>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D368E80A8E
-	for <webhook@archiver.kernel.org>; Wed, 27 Sep 2023 05:41:26 +0000 (UTC)
-Received: from mail-qt1-f180.google.com (mail-qt1-f180.google.com [209.85.160.180])
- by mx.groups.io with SMTP id smtpd.web11.11574.1695793279669667218
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C3B48E80A93
+	for <webhook@archiver.kernel.org>; Wed, 27 Sep 2023 06:26:26 +0000 (UTC)
+Received: from mail-qk1-f171.google.com (mail-qk1-f171.google.com [209.85.222.171])
+ by mx.groups.io with SMTP id smtpd.web11.12010.1695795977745288652
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Sep 2023 22:41:19 -0700
+ Tue, 26 Sep 2023 23:26:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.160.180, mailfrom: straka.derek@gmail.com)
-Received: by mail-qt1-f180.google.com with SMTP id d75a77b69052e-41368601e92so57666681cf.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 26 Sep 2023 22:41:19 -0700 (PDT)
+ dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.222.171, mailfrom: straka.derek@gmail.com)
+Received: by mail-qk1-f171.google.com with SMTP id af79cd13be357-7740cf93901so574546085a.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 26 Sep 2023 23:26:17 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695793278; x=1696398078;
+        d=1e100.net; s=20230601; t=1695795976; x=1696400776;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=aZY9TXrF0ceDtDHGW3nw6UyvvPbFN8PQGB286oNzfeU=;
-        b=gXmB9Tnth/Qse47pIYCPdPT9g3neP/0mLqfqOpn6cTF9FXLX8/cqss8s9kUX4O9Cm7
-         vZoQa3HlsPbdVdwqARJSzLisSj+rmwhsIULfSxhmYTHZf5mPKRINLxVdYfcLqLA8twl+
-         QKLvjvmGFvmnnOPYAgWVG1T2qZGIPPnvuw30NgGjXbrk+2r32JpwXCXqt9zR36Upq615
-         vK51AIMTI5HC1KV64ITw8gsFxCm3tadiQb19NaLLKR0F+pJg8QxURT2VBvlDwWGLqBXg
-         eOcPYTf1hTZBxymuBC8fQN5Yiw/xv9Be+hiYkj+uf39hjgCQ8nCMAcu6p0vtVGU8B3d6
-         cc2A==
-X-Gm-Message-State: AOJu0YwChV/i6LbJZHLKEGtvN91+apnkFZVkGCnU+rJ7n4goDpCBd/7+
-	kDP9fMnyKs9daZY87FU1fKvGrs8JFvl8yA==
-X-Google-Smtp-Source: AGHT+IFFEoklJSCCVfbaCwJ0vSyM7QMg62P2GDIkFrsMbzT9Tvjv2hdBFfdFomJBz/xZFHXzjWwjIw==
-X-Received: by 2002:ac8:5907:0:b0:417:b026:7940 with SMTP id 7-20020ac85907000000b00417b0267940mr1027044qty.22.1695793278302;
-        Tue, 26 Sep 2023 22:41:18 -0700 (PDT)
+        bh=WJRlPEeZK5kM79+CxeFZEcWTtOqV37GhXXVSUxPThxA=;
+        b=Hc8p+XD+LQkUZlCEV7a0c0d4TbNRToo4mmOx2ytzrt7WZ6Y0ZxV4BrfkwN+tTXnbp4
+         jJwHjKK/rCVBho17xhu527UBnCHS8YqhVspFPCmYDfx7ZRRf/sZChxIAreFrA7Osm63i
+         gwLC72c12w9UINU5n4T51IXY2JNxDs/liNPkFEiUEQqikmjFw0051Gdv525ohw/r3qxi
+         flaFmuWModQNyaNIRwTm3qm1WxhxlsLLV5CU3WIk+8aMaXNYe2whdFV2WCWXQu0bIwvu
+         FqnlVupLpStUZ5zGMR/5Uk2k0IA5pszLetXhc/vPN+5FuEDh0IBHqw86Wp19fr0M/E2Z
+         NL6w==
+X-Gm-Message-State: AOJu0Yzc2+jvhfKWV+MMPzPZaXSZzMc5DQtNqvdk0DSccWvhUWQSU95n
+	LI5jpa0t2LaVshiyTAv66mzMjIvNEHDz5w==
+X-Google-Smtp-Source: AGHT+IFoy/6K4qGJ16aGUeN1DTdDkdF7lK8laW5+s9RVm2uTDZKb+p9r2qm+VQmzwcANza2P63FqjQ==
+X-Received: by 2002:a05:620a:2ef:b0:770:67e3:1fee with SMTP id a15-20020a05620a02ef00b0077067e31feemr991360qko.65.1695795976130;
+        Tue, 26 Sep 2023 23:26:16 -0700 (PDT)
 Received: from sparta.internal.asterius.io (c-73-228-213-122.hsd1.mn.comcast.net. [73.228.213.122])
-        by smtp.gmail.com with ESMTPSA id d8-20020ac81188000000b00411fcc18cc1sm5138184qtj.64.2023.09.26.22.41.17
+        by smtp.gmail.com with ESMTPSA id q21-20020ae9e415000000b00767177a5bebsm5231253qkc.56.2023.09.26.23.26.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 26 Sep 2023 22:41:17 -0700 (PDT)
+        Tue, 26 Sep 2023 23:26:15 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-python][PATCH] python3-prettytable: update version 3.6.0 -> 3.9.0
-Date: Wed, 27 Sep 2023 05:41:09 +0000
-Message-Id: <20230927054109.1702384-1-derek@asterius.io>
+Subject: [meta-python][PATCH] python3-pytz-deprecation-shim: Remove outdated recipe meant to be a short lived shim
+Date: Wed, 27 Sep 2023 06:26:05 +0000
+Message-Id: <20230927062605.1703566-1-derek@asterius.io>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 27 Sep 2023 05:41:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105169
+ <openembedded-devel@lists.openembedded.org>; Wed, 27 Sep 2023 06:26:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105170
 
-Removed unneeded UPSTREAM_* variables
-Verified license terms and updated location
+The upstream package hasn't been updated since 2020 and was meant to be a short term bridge to remote pytz.  As noted in the usage documents, "This library is intended for temporary usage only, and should allow you to drop your dependency on pytz while also giving your users notice that eventually you will remove support for the pytz-specific interface."  Three years should be sufficient for folks to move on from a temp library, so removing the recipe.
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- ...3-prettytable_3.6.0.bb => python3-prettytable_3.9.0.bb} | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-prettytable_3.6.0.bb => python3-prettytable_3.9.0.bb} (75%)
+ .../python3-pytz-deprecation-shim_0.1.0.post0.bb  | 15 ---------------
+ 1 file changed, 15 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pytz-deprecation-shim_0.1.0.post0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-prettytable_3.6.0.bb b/meta-python/recipes-devtools/python/python3-prettytable_3.9.0.bb
-similarity index 75%
-rename from meta-python/recipes-devtools/python/python3-prettytable_3.6.0.bb
-rename to meta-python/recipes-devtools/python/python3-prettytable_3.9.0.bb
-index 0c0692b14..c1e394d9b 100644
---- a/meta-python/recipes-devtools/python/python3-prettytable_3.6.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-prettytable_3.9.0.bb
-@@ -1,9 +1,9 @@
- SUMMARY = "Python library for displaying tabular data in a ASCII table format"
- HOMEPAGE = "http://code.google.com/p/prettytable"
- LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://COPYING;md5=c9a6829fcd174d9535b46211917c7671"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=c9a6829fcd174d9535b46211917c7671"
- 
--SRC_URI[sha256sum] = "2e0026af955b4ea67b22122f310b90eae890738c08cb0458693a49b6221530ac"
-+SRC_URI[sha256sum] = "f4ed94803c23073a90620b201965e5dc0bccf1760b7a7eaf3158cab8aaffdf34"
- 
- do_install:append() {
-     perm_files=`find "${D}${PYTHON_SITEPACKAGES_DIR}/" -name "*.txt" -o -name "PKG-INFO"`
-@@ -12,9 +12,6 @@ do_install:append() {
-     done
- }
- 
--UPSTREAM_CHECK_URI = "https://pypi.python.org/pypi/PrettyTable/"
--UPSTREAM_CHECK_REGEX = "/PrettyTable/(?P<pver>(\d+[\.\-_]*)+)"
+diff --git a/meta-python/recipes-devtools/python/python3-pytz-deprecation-shim_0.1.0.post0.bb b/meta-python/recipes-devtools/python/python3-pytz-deprecation-shim_0.1.0.post0.bb
+deleted file mode 100644
+index 022cf39ac..000000000
+--- a/meta-python/recipes-devtools/python/python3-pytz-deprecation-shim_0.1.0.post0.bb
++++ /dev/null
+@@ -1,15 +0,0 @@
+-SUMMARY = "Shims to help you safely remove pytz"
+-HOMEPAGE = "https://github.com/pganssle/pytz-deprecation-shim"
+-LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=fca9fd5c15a28eb874ba38577a585d48"
 -
- BBCLASSEXTEND = "native nativesdk"
- inherit pypi ptest python_hatchling
- 
+-SRC_URI[sha256sum] = "af097bae1b616dde5c5744441e2ddc69e74dfdcb0c263129610d85b87445a59d"
+-
+-PYPI_PACKAGE = "pytz_deprecation_shim"
+-PYPI_SRC_URI = "https://files.pythonhosted.org/packages/94/f0/909f94fea74759654390a3e1a9e4e185b6cd9aa810e533e3586f39da3097/${PYPI_PACKAGE}-${PV}.tar.gz"
+-
+-inherit pypi python_setuptools_build_meta
+-
+-RDEPENDS:${PN} += "\
+-        ${PYTHON_PN}-zoneinfo \
+-"
 -- 
 2.34.1
 
