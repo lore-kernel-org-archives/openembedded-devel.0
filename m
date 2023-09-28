@@ -1,156 +1,282 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <uvv.mail@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 12BD4E732E0
-	for <webhook@archiver.kernel.org>; Thu, 28 Sep 2023 15:01:38 +0000 (UTC)
-Received: from mail-oa1-f45.google.com (mail-oa1-f45.google.com [209.85.160.45])
- by mx.groups.io with SMTP id smtpd.web10.15806.1695913295624841861
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 257FAE732E1
+	for <webhook@archiver.kernel.org>; Thu, 28 Sep 2023 15:03:38 +0000 (UTC)
+Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
+ by mx.groups.io with SMTP id smtpd.web11.15594.1695913416388883329
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 28 Sep 2023 08:01:35 -0700
+ Thu, 28 Sep 2023 08:03:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=LBBpMqxa;
- spf=pass (domain: gmail.com, ip: 209.85.160.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f45.google.com with SMTP id 586e51a60fabf-1dc863efb61so6723438fac.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 28 Sep 2023 08:01:35 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=PuYqJFv8;
+ spf=pass (domain: gmail.com, ip: 209.85.208.47, mailfrom: uvv.mail@gmail.com)
+Received: by mail-ed1-f47.google.com with SMTP id 4fb4d7f45d1cf-530fa34ab80so31020359a12.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 28 Sep 2023 08:03:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1695913295; x=1696518095; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1695913415; x=1696518215; darn=lists.openembedded.org;
+        h=in-reply-to:from:references:cc:to:content-language:subject
+         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=uUtB1T5QdvJg9WRXXES8asOY2gzC3SvyVbNYdFG3P1Q=;
-        b=LBBpMqxaMjM09krTbX1eg1TSeXiVuggpnB7Mc4nFPkbCuTs1koUgZe0BhHNSHsI3Dx
-         AG/WtM8maSkz+sEhcn5LNYAwfxJ1Wr9+9bPpSrw8YiiZqkenutAZGKSttjHVLRjzeU6i
-         +WPXivTN5y2xqaITXrKDSM7fhLFaLkUXe5EYb09VnK8AnUrZF1cFgN9CMMqz7f4rcdXm
-         et3cDq6sryIN+i2TsJdvpit6Id6W/KpmTJSGoW7VXTA9UcE+3r/rpFlxc3VfJJAbd0Ug
-         cTGoE1EXB9pYqI/a5FsZI6y9srdbPCiBGDfyft3jD8t2/BkFL1wvUzSidL4OsXxyzGvw
-         IT4A==
+        bh=voaKnybJGylUpavbWRdegip5BG8R5Mqg/CnEO0cV8o4=;
+        b=PuYqJFv8N/4iok+TggDA6K0wON8nfR3SaV/a+w+esMx41xWNQgLwjcEPnnk9AiQFl8
+         I8FAZ+VyvryQeimG7EsD5P3Q7siCCldj2RiWYAOUMIm8+qBmKutAREe0sDN3xoEtVvex
+         mvq9C0FrHWU5FyM+Q/NqCwFHtB1NsDlP8//WhTnKzsBG+ZGjwlFeTitFztfDeEHTYaZt
+         IegrlmIOq6atksmRtTgYR7ne/QLozj1Nzv2lJ0rAJ/i229TNytGt8PBve/UZX28Tt+4u
+         ahRhn+aPw89cWmcjhsfpSVxZhDiLC8mD6M46BqU9Lyv7M9CfkiIGoosTksbIzNey3At7
+         Z+/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1695913295; x=1696518095;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=uUtB1T5QdvJg9WRXXES8asOY2gzC3SvyVbNYdFG3P1Q=;
-        b=h+c/C1ZeS4/UvfsjF0zAPtGCV9TgarQp0iIseoSrjFo20uHXSzkXFy6jnu35yNk3QN
-         NIeneqNLSgwRlSmqKRl9jZ9ca5/HFxPs/fTNoYZlNVySHeXkAZURCZkRE+S39kON23Vv
-         FE+ZzIRKqdQQNwy53iEu+FSwcel9i6JiT+eXqY3FLxcMtr9B0sjkQKy2fO8neFxiv2ZX
-         dB7H+Rc2cUZkJVPML3JRk6RuEBMYA0sxqbk8XzzhnmbnIKpQRBnckBhgaz+8Kfjiocbb
-         6dk8KxYcY8OE1Xw2girb+zVqR8y2ubph/z/G+45CTPj2Zvm2X+76FrKAJTfcq8z2H9VO
-         cw3A==
-X-Gm-Message-State: AOJu0YyMsX00V4DPCK6UvFiOB5nOI6TDTicl4trGouodqsVVAooX10Bg
-	Pr9nJGFS4lmlgFc3UZ1j9dwvbeZsg7vW1myrerU=
-X-Google-Smtp-Source: AGHT+IED7QPhJrBu6xgCHJbxmFR0yP4COzxQ4FUPHQUs3dLj1Ric15fKaXFAFfGMURoIA5tAtlTOB4GK21RoM2UP0Eg=
-X-Received: by 2002:a05:6871:70f:b0:1d6:8b7f:ce89 with SMTP id
- f15-20020a056871070f00b001d68b7fce89mr1479943oap.51.1695913294691; Thu, 28
- Sep 2023 08:01:34 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1695913415; x=1696518215;
+        h=in-reply-to:from:references:cc:to:content-language:subject
+         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=voaKnybJGylUpavbWRdegip5BG8R5Mqg/CnEO0cV8o4=;
+        b=lc9A71M5t8oABI2cywm0X68JI/py8ELqmwAdgEsUFtANlcljUwQJ9oPPdT/fOp/M65
+         Aikj+oHkn1l1L/xZQ0WkYbPb9GutkHRA3x7yBXcbMMme5+no8r/mC5llnOBhFCYWQEAn
+         p4dM7QsUYUOrU5W78uR+ldqxRXLKVUEWFvIMaRxL8xrhBW+FYBV6iv54KQfhikp+WoOf
+         SLOSnc8muabDQulfTqwzUB97l3J78n2VsUJiFxjIHWtlW31aEFQn6bmSCLk2PcXVSeZD
+         lRwpYFLHFdZitolbLt/EBiz060Kogz1UY0pGFnEp+HZatZIDrke6IeHBm5Ne4Qe+fsXD
+         PQjw==
+X-Gm-Message-State: AOJu0YwHmJqc+Jf6K01Bbvsrmv21kN1DrvlBDRrv8CZ6WVA5ueF3b4dX
+	kmXvnliJ+R2EculjsVsYAZk=
+X-Google-Smtp-Source: AGHT+IEWrYbpMqv3har9FA7OIWeAXtL3/FOLM5JHECObrGC4hM+T89AHeUTPRv8eQ6PETxOHTgudRQ==
+X-Received: by 2002:a05:6402:1d4d:b0:533:4a89:5b2e with SMTP id dz13-20020a0564021d4d00b005334a895b2emr1551198edb.1.1695913414433;
+        Thu, 28 Sep 2023 08:03:34 -0700 (PDT)
+Received: from [10.134.45.197] ([89.249.73.139])
+        by smtp.gmail.com with ESMTPSA id ek10-20020a056402370a00b00533dd4d2947sm6606166edb.74.2023.09.28.08.03.33
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 28 Sep 2023 08:03:34 -0700 (PDT)
+Content-Type: multipart/alternative;
+ boundary="------------eBTxPIGul0VVmRlx01Gg5erm"
+Message-ID: <f1f80ad8-bb44-4d7c-9be3-aa5c727fcc85@gmail.com>
+Date: Thu, 28 Sep 2023 17:03:30 +0200
 MIME-Version: 1.0
-References: <20230928093808.545770-1-costamagnagianfranco@yahoo.it>
-In-Reply-To: <20230928093808.545770-1-costamagnagianfranco@yahoo.it>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 28 Sep 2023 08:01:08 -0700
-Message-ID: <CAMKF1sp82ZNx=+2V-YX=+u_PWOESjmXT2MtfZWrMC5-HhXJYyA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 1/2] dlt-daemon:
-To: Gianfranco <costamagna.gianfranco@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org, 
-	Gianfranco Costamagna <costamagnagianfranco@yahoo.it>, Federico Briata <federicobriata@gmail.com>, 
-	Andrea Reali <andrea.reali@cnhind.com>, Gianfranco Costamagna <locutusofborg@debian.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][PATCH] protobuf: stage protoc binary to sysroot
+Content-Language: en-US
+To: Samuli Piippo <samuli.piippo@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org, Khem Raj <raj.khem@gmail.com>
+References: <1788A95F04E8B4F0.25618@lists.openembedded.org>
+ <CABXoSoW=xU3fvq6EcaMxopw8e3FhEOLmYG59O1Fiyu8DKcT6Zg@mail.gmail.com>
+From: Vyacheslav Yurkov <uvv.mail@gmail.com>
+In-Reply-To: <CABXoSoW=xU3fvq6EcaMxopw8e3FhEOLmYG59O1Fiyu8DKcT6Zg@mail.gmail.com>
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 28 Sep 2023 15:01:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105223
+ <openembedded-devel@lists.openembedded.org>; Thu, 28 Sep 2023 15:03:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105224
 
-I have staged it with some modified commit msg summary please check
-master-next and see if it looks ok.
+This is a multi-part message in MIME format.
+--------------eBTxPIGul0VVmRlx01Gg5erm
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Thu, Sep 28, 2023 at 2:38=E2=80=AFAM Gianfranco
-<costamagna.gianfranco@gmail.com> wrote:
+I think I was the one who originally removed protoc, because it's not 
+useful in the sysroot. Even if you satisfy cmake so it can find protoc 
+target, the next step is that it will try to use it, which will 
+obviously fail.
+
+The only reason to put it on the target sysroot would be if you really 
+going to use it _on the target_. But I guess this can be done via 
+bbappend in the user layer.
+
+Vyacheslav
+
+On 27.09.2023 07:19, Samuli Piippo wrote:
+> Re-applying this patch as it got removed in 
+> https://patchwork.yoctoproject.org/project/oe/patch/20230904161230.377450-1-ross.burton@arm.com/
 >
-> Make sure also without systemd enabled as default, the tools can be built=
- and installed,
-> such as dlt-adaptor, dlt-adaptor-stdin, dlt-adaptor-udp, dlt-examples and=
- dlt-console.
-> They have stub functionalities when systemd is not default, but they can =
-still be used with
-> limited functionalities
+> On Wed, 27 Sept 2023 at 08:11, Samuli Piippo via 
+> lists.openembedded.org <http://lists.openembedded.org> 
+> <samuli.piippo=gmail.com@lists.openembedded.org> wrote:
 >
-> Reported-By: Federico Briata <federicobriata@gmail.com>
-> Reported-By: Andrea Reali <andrea.reali@cnhind.com>
-> Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-> Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
-> ---
->  .../dlt-daemon/dlt-daemon_2.18.10.bb                | 13 +++++++------
->  1 file changed, 7 insertions(+), 6 deletions(-)
+>     From: Samuli Piippo <samuli.piippo@gmail.com>
 >
-> diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.10.bb b/=
-meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.10.bb
-> index 33fae0619..3811772a7 100644
-> --- a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.10.bb
-> +++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.10.bb
-> @@ -22,12 +22,13 @@ SRCREV =3D "0f2d4cfffada6f8448a2cb27995b38eb4271044f"
+>     If protoc is enabled for the build, recipes using protobuf will
+>     fail when protoc is not available in the recipe sysroot:
 >
->  S =3D "${WORKDIR}/git"
+>     |   The imported target "protobuf::protoc" references the file
+>     |
+>     |
+>     ".../recipe-sysroot/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-pokysdk-linux/usr/bin/protoc-3.21.5.0"
+>     |
+>     |   but this file does not exist.  Possible reasons include:
+>     |
+>     |   * The file was deleted, renamed, or moved to another location.
+>     |
+>     |   * An install or uninstall procedure did not complete successfully.
+>     |
+>     |   * The installation package was faulty and contained
+>     |
+>     |
+>     ".../recipe-sysroot/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-pokysdk-linux/usr/lib/cmake/protobuf/protobuf-targets.cmake"
+>     |
+>     |   but not all the files it references.
 >
-> -PACKAGECONFIG ?=3D "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '=
- systemd systemd-watchdog systemd-journal dlt-examples dlt-adaptor dlt-adap=
-tor-stdin dlt-adaptor-udp dlt-console ', '', d)} \
-> +PACKAGECONFIG ?=3D "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '=
- systemd systemd-watchdog systemd-journal ', '', d)} \
-> + dlt-examples dlt-adaptor dlt-adaptor-stdin dlt-adaptor-udp dlt-console =
-\
->   udp-connection dlt-system dlt-filetransfer "
->  # dlt-dbus
+>     Use SYSROOT_DIRS to stage the binary to sysroot so it's always
+>     available for other recipes.
 >
->  # General options
-> -PACKAGECONFIG[dlt-examples] =3D "-DWITH_DLT_EXAMPLES=3DON,-DWITH_DLT_EXA=
-MPLES=3DOFF,,dlt-daemon-systemd"
-> +PACKAGECONFIG[dlt-examples] =3D "-DWITH_DLT_EXAMPLES=3DON,-DWITH_DLT_EXA=
-MPLES=3DOFF"
+>     Signed-off-by: Samuli Piippo <samuli.piippo@qt.io>
+>     Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>     ---
+>      meta-oe/recipes-devtools/protobuf/protobuf_3.21.12.bb
+>     <http://protobuf_3.21.12.bb> | 3 +++
+>      1 file changed, 3 insertions(+)
 >
->  # Linux options
->  PACKAGECONFIG[systemd] =3D "-DWITH_SYSTEMD=3DON,-DWITH_SYSTEMD=3DOFF -DW=
-ITH_DLT_SYSTEM=3DOFF,systemd"
-> @@ -38,11 +39,11 @@ PACKAGECONFIG[udp-connection] =3D "-DWITH_UDP_CONNECT=
-ION=3DON,-DWITH_UDP_CONNECTION=3D
+>     diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.21.12.bb
+>     <http://protobuf_3.21.12.bb>
+>     b/meta-oe/recipes-devtools/protobuf/protobuf_3.21.12.bb
+>     <http://protobuf_3.21.12.bb>
+>     index d95e1c20f..06b21a0d6 100644
+>     --- a/meta-oe/recipes-devtools/protobuf/protobuf_3.21.12.bb
+>     <http://protobuf_3.21.12.bb>
+>     +++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.21.12.bb
+>     <http://protobuf_3.21.12.bb>
+>     @@ -92,6 +92,9 @@ PACKAGE_BEFORE_PN = "${PN}-compiler ${PN}-lite"
+>      FILES:${PN}-compiler = "${bindir} ${libdir}/libprotoc${SOLIBS}"
+>      FILES:${PN}-lite = "${libdir}/libprotobuf-lite${SOLIBS}"
 >
->  # Command line options
->  PACKAGECONFIG[dlt-system] =3D "-DWITH_DLT_SYSTEM=3DON,-DWITH_DLT_SYSTEM=
-=3DOFF"
-> -PACKAGECONFIG[dlt-adaptor] =3D "-DWITH_DLT_ADAPTOR=3DON,-DWITH_DLT_ADAPT=
-OR=3DOFF,,dlt-daemon-systemd"
-> -PACKAGECONFIG[dlt-adaptor-stdin] =3D "-DWITH_DLT_ADAPTOR_STDIN=3DON,-DWI=
-TH_DLT_ADAPTOR_STDIN=3DOFF,,dlt-daemon-systemd"
-> -PACKAGECONFIG[dlt-adaptor-udp] =3D "-DWITH_DLT_ADAPTOR_UDP=3DON,-DWITH_D=
-LT_ADAPTOR_UDP=3DOFF,,dlt-daemon-systemd"
-> +PACKAGECONFIG[dlt-adaptor] =3D "-DWITH_DLT_ADAPTOR=3DON,-DWITH_DLT_ADAPT=
-OR=3DOFF"
-> +PACKAGECONFIG[dlt-adaptor-stdin] =3D "-DWITH_DLT_ADAPTOR_STDIN=3DON,-DWI=
-TH_DLT_ADAPTOR_STDIN=3DOFF"
-> +PACKAGECONFIG[dlt-adaptor-udp] =3D "-DWITH_DLT_ADAPTOR_UDP=3DON,-DWITH_D=
-LT_ADAPTOR_UDP=3DOFF"
->  PACKAGECONFIG[dlt-filetransfer] =3D "-DWITH_DLT_FILETRANSFER=3DON,-DWITH=
-_DLT_FILETRANSFER=3DOFF"
-> -PACKAGECONFIG[dlt-console] =3D "-DWITH_DLT_CONSOLE=3DON,-DWITH_DLT_CONSO=
-LE=3DOFF,,dlt-daemon-systemd"
-> +PACKAGECONFIG[dlt-console] =3D "-DWITH_DLT_CONSOLE=3DON,-DWITH_DLT_CONSO=
-LE=3DOFF"
->
->  inherit autotools gettext cmake pkgconfig systemd
->
-> --
-> 2.34.1
+>     +# CMake requires binaries to exist in sysroot, even if they have
+>     wrong architecture.
+>     +SYSROOT_DIRS += "${bindir}"
+>     +
+>      RDEPENDS:${PN}-compiler = "${PN}"
+>      RDEPENDS:${PN}-dev += "${PN}-compiler"
+>      RDEPENDS:${PN}-ptest = "bash
+>     ${@bb.utils.contains('PACKAGECONFIG', 'python',
+>     'python3-protobuf', '', d)}"
+>     -- 
+>     2.25.1
 >
 >
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#105219): https://lists.openembedded.org/g/openembedde=
-d-devel/message/105219
-> Mute This Topic: https://lists.openembedded.org/mt/101634559/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
+>
+
+--------------eBTxPIGul0VVmRlx01Gg5erm
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <div class="moz-cite-prefix">I think I was the one who originally
+      removed protoc, because it's not useful in the sysroot. Even if
+      you satisfy cmake so it can find protoc target, the next step is
+      that it will try to use it, which will obviously fail.<br>
+      <br>
+      The only reason to put it on the target sysroot would be if you
+      really going to use it _on the target_. But I guess this can be
+      done via bbappend in the user layer.<br>
+      <br>
+      Vyacheslav<br>
+      <br>
+      On 27.09.2023 07:19, Samuli Piippo wrote:<br>
+    </div>
+    <blockquote type="cite"
+cite="mid:CABXoSoW=xU3fvq6EcaMxopw8e3FhEOLmYG59O1Fiyu8DKcT6Zg@mail.gmail.com">
+      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      <div dir="ltr">Re-applying this patch as it got removed in <a
+href="https://patchwork.yoctoproject.org/project/oe/patch/20230904161230.377450-1-ross.burton@arm.com/"
+          moz-do-not-send="true" class="moz-txt-link-freetext">https://patchwork.yoctoproject.org/project/oe/patch/20230904161230.377450-1-ross.burton@arm.com/</a></div>
+      <br>
+      <div class="gmail_quote">
+        <div dir="ltr" class="gmail_attr">On Wed, 27 Sept 2023 at 08:11,
+          Samuli Piippo via <a href="http://lists.openembedded.org"
+            moz-do-not-send="true">lists.openembedded.org</a>
+          &lt;samuli.piippo=<a
+            href="mailto:gmail.com@lists.openembedded.org"
+            moz-do-not-send="true" class="moz-txt-link-freetext">gmail.com@lists.openembedded.org</a>&gt;
+          wrote:<br>
+        </div>
+        <blockquote class="gmail_quote"
+style="margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">From:
+          Samuli Piippo &lt;<a href="mailto:samuli.piippo@gmail.com"
+            target="_blank" moz-do-not-send="true"
+            class="moz-txt-link-freetext">samuli.piippo@gmail.com</a>&gt;<br>
+          <br>
+          If protoc is enabled for the build, recipes using protobuf
+          will<br>
+          fail when protoc is not available in the recipe sysroot:<br>
+          <br>
+          |   The imported target "protobuf::protoc" references the file<br>
+          |<br>
+          |     
+".../recipe-sysroot/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-pokysdk-linux/usr/bin/protoc-3.21.5.0"<br>
+          |<br>
+          |   but this file does not exist.  Possible reasons include:<br>
+          |<br>
+          |   * The file was deleted, renamed, or moved to another
+          location.<br>
+          |<br>
+          |   * An install or uninstall procedure did not complete
+          successfully.<br>
+          |<br>
+          |   * The installation package was faulty and contained<br>
+          |<br>
+          |     
+".../recipe-sysroot/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-pokysdk-linux/usr/lib/cmake/protobuf/protobuf-targets.cmake"<br>
+          |<br>
+          |   but not all the files it references.<br>
+          <br>
+          Use SYSROOT_DIRS to stage the binary to sysroot so it's always<br>
+          available for other recipes.<br>
+          <br>
+          Signed-off-by: Samuli Piippo &lt;<a
+            href="mailto:samuli.piippo@qt.io" target="_blank"
+            moz-do-not-send="true" class="moz-txt-link-freetext">samuli.piippo@qt.io</a>&gt;<br>
+          Signed-off-by: Khem Raj &lt;<a
+            href="mailto:raj.khem@gmail.com" target="_blank"
+            moz-do-not-send="true" class="moz-txt-link-freetext">raj.khem@gmail.com</a>&gt;<br>
+          ---<br>
+           meta-oe/recipes-devtools/protobuf/<a
+            href="http://protobuf_3.21.12.bb" rel="noreferrer"
+            target="_blank" moz-do-not-send="true">protobuf_3.21.12.bb</a>
+          | 3 +++<br>
+           1 file changed, 3 insertions(+)<br>
+          <br>
+          diff --git a/meta-oe/recipes-devtools/protobuf/<a
+            href="http://protobuf_3.21.12.bb" rel="noreferrer"
+            target="_blank" moz-do-not-send="true">protobuf_3.21.12.bb</a>
+          b/meta-oe/recipes-devtools/protobuf/<a
+            href="http://protobuf_3.21.12.bb" rel="noreferrer"
+            target="_blank" moz-do-not-send="true">protobuf_3.21.12.bb</a><br>
+          index d95e1c20f..06b21a0d6 100644<br>
+          --- a/meta-oe/recipes-devtools/protobuf/<a
+            href="http://protobuf_3.21.12.bb" rel="noreferrer"
+            target="_blank" moz-do-not-send="true">protobuf_3.21.12.bb</a><br>
+          +++ b/meta-oe/recipes-devtools/protobuf/<a
+            href="http://protobuf_3.21.12.bb" rel="noreferrer"
+            target="_blank" moz-do-not-send="true">protobuf_3.21.12.bb</a><br>
+          @@ -92,6 +92,9 @@ PACKAGE_BEFORE_PN = "${PN}-compiler
+          ${PN}-lite"<br>
+           FILES:${PN}-compiler = "${bindir}
+          ${libdir}/libprotoc${SOLIBS}"<br>
+           FILES:${PN}-lite = "${libdir}/libprotobuf-lite${SOLIBS}"<br>
+          <br>
+          +# CMake requires binaries to exist in sysroot, even if they
+          have wrong architecture.<br>
+          +SYSROOT_DIRS += "${bindir}"<br>
+          +<br>
+           RDEPENDS:${PN}-compiler = "${PN}"<br>
+           RDEPENDS:${PN}-dev += "${PN}-compiler"<br>
+           RDEPENDS:${PN}-ptest = "bash
+          ${@bb.utils.contains('PACKAGECONFIG', 'python',
+          'python3-protobuf', '', d)}"<br>
+          -- <br>
+          2.25.1<br>
+          <br>
+          <br>
+          <br>
+          <br>
+        </blockquote>
+      </div>
+    </blockquote>
+    <br>
+  </body>
+</html>
+
+--------------eBTxPIGul0VVmRlx01Gg5erm--
 
