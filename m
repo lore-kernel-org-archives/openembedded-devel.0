@@ -1,65 +1,82 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <derek@asterius.io>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4161BE82CA4
-	for <webhook@archiver.kernel.org>; Fri, 29 Sep 2023 21:58:49 +0000 (UTC)
-Received: from mailout07.t-online.de (mailout07.t-online.de [194.25.134.83])
- by mx.groups.io with SMTP id smtpd.web10.30343.1696024726671947322
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 54CA4E82CB7
+	for <webhook@archiver.kernel.org>; Fri, 29 Sep 2023 22:00:29 +0000 (UTC)
+Received: from mail-qv1-f48.google.com (mail-qv1-f48.google.com [209.85.219.48])
+ by mx.groups.io with SMTP id smtpd.web10.30395.1696024820680880147
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 29 Sep 2023 14:58:47 -0700
+ Fri, 29 Sep 2023 15:00:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.83, mailfrom: f_l_k@t-online.de)
-Received: from fwd75.aul.t-online.de (fwd75.aul.t-online.de [10.223.144.101])
-	by mailout07.t-online.de (Postfix) with SMTP id A50634D0C5;
-	Fri, 29 Sep 2023 23:58:44 +0200 (CEST)
-Received: from [192.168.178.62] ([84.154.164.210]) by fwd75.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1qmLVS-1RhnCS0; Fri, 29 Sep 2023 23:58:43 +0200
-Date: Fri, 29 Sep 2023 23:58:43 +0200
-From: f_l_k@t-online.de
-Subject: Re: [oe] [meta-oe][PATCH] libnfs: dont install libnfs-config.cmake
-To: Khem Raj <raj.khem@gmail.com>
-Cc: Markus Volk <f_l_k@t-online.de>, openembedded-devel@lists.openembedded.org
-Message-Id: <V1PR1S.SNS6PQMSBPA81@t-online.de>
-In-Reply-To: <CAMKF1soFUO1FRe803VTj-EQXZt7LX+=PgNwq8UgHzS=giqoyqA@mail.gmail.com>
-References: <20230928233623.767530-1-f_l_k@t-online.de>
-	<CAMKF1soFUO1FRe803VTj-EQXZt7LX+=PgNwq8UgHzS=giqoyqA@mail.gmail.com>
-X-Mailer: geary/44.1
+ dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.219.48, mailfrom: straka.derek@gmail.com)
+Received: by mail-qv1-f48.google.com with SMTP id 6a1803df08f44-65afba4cfadso68512446d6.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 29 Sep 2023 15:00:20 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1696024819; x=1696629619;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=wUobAThG65WzI6bVglRNTzEciGDhqq3fy6JOf/kj2Q8=;
+        b=MnDpyFefST+CuvZtQg3LtYKY8WurQH/HdbZ+twADlBLLqaQjrFEMhA7ETQCbraqXtK
+         JnMI4v4D8NhOQ51W25YP/tSh3zYZNFvnIt5uRoce/73onabdweU5FhTvJ9DbWXN/jkOA
+         kob2xapQcxRsx7zMhoZDMMU3mB36li50jeSHXNeQoHoH+uPLQ0BUHbP7VauYp2RfbpZZ
+         VuzML5gCsIBckfW/2uI7dj2v74GX49VxOfBKouPT5aTzJNSD7votTdYO+Dfioe5UZNiD
+         2sWGoG9NQkmIHZBxa7QFLh8WcmCIJuLN4+AFTW9+4ZBQSFieusDqO4Nyv0WBhSg7cNqe
+         UjwQ==
+X-Gm-Message-State: AOJu0YySQfESV2hlDBv+G4gSDt78qVlyEtnmEFTonbQjks5S/CD8D7OK
+	XsOhZYpeicG+ymozJhEPxxR0LcPSy8z3+Io+Nco=
+X-Google-Smtp-Source: AGHT+IHFi33gTjC8NUQAssThOVEY4awEIs+p/+Rq+4kYHy36dBygjONdsXCE2Fms2bHhjoNEXKhSvg==
+X-Received: by 2002:a0c:fb02:0:b0:64f:7110:8a9a with SMTP id c2-20020a0cfb02000000b0064f71108a9amr5467330qvp.56.1696024819368;
+        Fri, 29 Sep 2023 15:00:19 -0700 (PDT)
+Received: from sparta.internal.asterius.io (c-73-228-213-122.hsd1.mn.comcast.net. [73.228.213.122])
+        by smtp.gmail.com with ESMTPSA id a5-20020a0cb345000000b006588bd29c7esm3666550qvf.28.2023.09.29.15.00.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 29 Sep 2023 15:00:18 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Cc: Derek Straka <derek@asterius.io>
+Subject: [meta-python][PATCH] python3-flask-cors: add initial version of the recipe for 4.0.0
+Date: Fri, 29 Sep 2023 22:00:09 +0000
+Message-Id: <20230929220009.2146196-1-derek@asterius.io>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-KG/qFWwEdRIc1NjRK2oo"
-X-TOI-EXPURGATEID: 150726::1696024723-98FF69D6-01120261/0/0 CLEAN NORMAL
-X-TOI-MSGID: 301b3ffa-1811-4379-a7a0-42bf873e27a5
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 29 Sep 2023 21:58:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105275
+ <openembedded-devel@lists.openembedded.org>; Fri, 29 Sep 2023 22:00:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105276
 
---=-KG/qFWwEdRIc1NjRK2oo
-Content-Type: text/plain; charset=us-ascii; format=flowed
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ .../python/python3-flask-cors_4.0.0.bb           | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-flask-cors_4.0.0.bb
 
-On Fri, Sep 29 2023 at 11:00:33 AM -07:00:00, Khem Raj 
-<raj.khem@gmail.com> wrote:
-> so I wonder how to reproduce the error this option suppresses.
-
-I encountered both issues when building for aarch64 raspberrypi4 with 
-up to date branches.
-
-The first one happens to me, if I try to build recent kodi for other 
-platforms than host
-<https://github.com/xbmc/xbmc/blob/c94910c9671755ff5a2425c322c9ec5f4a0ed576/cmake/modules/FindNFS.cmake#L32>
-
-and the second issue was that libnfs stopped build with clang because 
-of implicit-function-declaration. As far as i remember its been here
-<https://github.com/sahlberg/libnfs/blob/4755490afcd8f79421ece560a0b0ee98cf41846a/lib/socket.c#L301>
-
-
---=-KG/qFWwEdRIc1NjRK2oo
-Content-Type: text/html; charset=us-ascii
-
-<div id="geary-body" dir="auto">On Fri, Sep 29 2023 at 11:00:33 AM -07:00:00, Khem Raj &lt;raj.khem@gmail.com&gt; wrote:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">so I wonder how to reproduce the error this option suppresses.
-</div></blockquote><div><br></div><div>I encountered both issues when building for aarch64 raspberrypi4 with up to date branches.</div><div><br></div><div>The first one happens to me, if I try to build recent kodi for other platforms than host&nbsp;</div><div><a href="https://github.com/xbmc/xbmc/blob/c94910c9671755ff5a2425c322c9ec5f4a0ed576/cmake/modules/FindNFS.cmake#L32">https://github.com/xbmc/xbmc/blob/c94910c9671755ff5a2425c322c9ec5f4a0ed576/cmake/modules/FindNFS.cmake#L32</a></div><div><br></div><div>and the second issue was that libnfs stopped build with clang because of implicit-function-declaration. As far as i remember its been here</div><div><a href="https://github.com/sahlberg/libnfs/blob/4755490afcd8f79421ece560a0b0ee98cf41846a/lib/socket.c#L301">https://github.com/sahlberg/libnfs/blob/4755490afcd8f79421ece560a0b0ee98cf41846a/lib/socket.c#L301</a></div></div>
---=-KG/qFWwEdRIc1NjRK2oo--
+diff --git a/meta-python/recipes-devtools/python/python3-flask-cors_4.0.0.bb b/meta-python/recipes-devtools/python/python3-flask-cors_4.0.0.bb
+new file mode 100644
+index 000000000..1d0d86b4e
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-flask-cors_4.0.0.bb
+@@ -0,0 +1,16 @@
++HOMEPAGE = "https://pypi.python.org/pypi/Flask-Cors/"
++SUMMARY = "A Flask extension adding a decorator for CORS support"
++DESCRIPTION = "\
++  A Flask extension for handling Cross Origin Resource Sharing (CORS), making cross-origin AJAX possible \
++  "
++SECTION = "devel/python"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=118fecaa576ab51c1520f95e98db61ce"
++
++PYPI_PACKAGE = "Flask-Cors"
++
++SRC_URI[sha256sum] = "f268522fcb2f73e2ecdde1ef45e2fd5c71cc48fe03cffb4b441c6d1b40684eb0"
++
++inherit pypi setuptools3
++
++RDEPENDS:${PN} += "python3-flask"
+-- 
+2.34.1
 
 
