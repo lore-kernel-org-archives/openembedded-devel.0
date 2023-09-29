@@ -2,76 +2,74 @@ Return-Path: <derek@asterius.io>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0D34BE71D33
-	for <webhook@archiver.kernel.org>; Fri, 29 Sep 2023 20:56:58 +0000 (UTC)
-Received: from mail-qv1-f48.google.com (mail-qv1-f48.google.com [209.85.219.48])
- by mx.groups.io with SMTP id smtpd.web10.29046.1696021008173103674
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 54484E71D56
+	for <webhook@archiver.kernel.org>; Fri, 29 Sep 2023 21:07:58 +0000 (UTC)
+Received: from mail-oa1-f43.google.com (mail-oa1-f43.google.com [209.85.160.43])
+ by mx.groups.io with SMTP id smtpd.web10.29288.1696021677846855627
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 29 Sep 2023 13:56:48 -0700
+ Fri, 29 Sep 2023 14:07:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.219.48, mailfrom: straka.derek@gmail.com)
-Received: by mail-qv1-f48.google.com with SMTP id 6a1803df08f44-65afae9e51fso65641726d6.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 29 Sep 2023 13:56:48 -0700 (PDT)
+ dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.160.43, mailfrom: straka.derek@gmail.com)
+Received: by mail-oa1-f43.google.com with SMTP id 586e51a60fabf-1dd71c0a41fso3341886fac.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 29 Sep 2023 14:07:57 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1696021007; x=1696625807;
+        d=1e100.net; s=20230601; t=1696021677; x=1696626477;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=+vz4Hl40BKshc1HbChm/LaHwOn6zqYQP46aU6wZzEuw=;
-        b=MJU2i+k8MjJCzFVlH2l/EmU+3LxrwbQsMzB4obM5+g76sWsDzcN1Cl3BlL2WIUE02c
-         10NiB90ktol4sAssdBvy6gxBh8wOrk+/3ZWQl7ZNI/RlvXPHosi8aRCGXp7U2YDMwQ+r
-         /SuGGTsuNyXel+6uANZqeM2pM9nCoj7nluXJAsnnQn9NUnpKaTiaYZ3PeisBuLIpW4rY
-         RJlsXzSUQnwWbc50fiLXeT/GLTXN9kQWHJUDIADdrQv15N/4okF8MhFPcM2v6S+7elVo
-         bH9KyDhl4Cle5jULDe4heHBy+OQzNt34uelEN5I2wd/2IOVG9uH+wnM6xgFCLWAT9+1z
-         qwNA==
-X-Gm-Message-State: AOJu0YxGoLv6OpJ5pZqnriKQFD39siAHtVfBtuy034QCvZ6EnRgOSBSn
-	uYCeWyHKIGR9b3ZdphRTis/1vyINpWBXO4el
-X-Google-Smtp-Source: AGHT+IEaHc0g1v71nsyk/78UHJvk60SmaG/jJYdNek88Y1lhvP01z23Tp2dWGeUpjEcFYE2JN6hM0A==
-X-Received: by 2002:a0c:b3d2:0:b0:64f:67ae:a132 with SMTP id b18-20020a0cb3d2000000b0064f67aea132mr4532240qvf.23.1696021006700;
-        Fri, 29 Sep 2023 13:56:46 -0700 (PDT)
+        bh=tmP1LEs/PT/3ed+4Yb5HzQO7MuNCz1ENzAemTFJ9INk=;
+        b=Vk8+D2yauEk9jzI3vQSSfCgbnzmrassQcTTKrL8Yfc/GtNT6ohF8JVY82Oa9GOSkCL
+         2ljomDQgG/K+NYOgBlGZeXwsjuYJ0G3EIk2W2OpPXbXfzttUlHMUIWjDis/df0/jMDIw
+         RqmOgEhc3ENduUWzXHHXJkd7h/Le3bfI2AAec8d7T4OxVyytxHiPeqfYVzM8BVh3nXhU
+         Qp2Y5rPv5iPyxOPRniWz+MIj1D7xwXGf/w7JhS4+dRCu308w0racL8CE5yUyPnpcAgaE
+         bbudhN0AyB+hMczBiRSpHmstHs9MWkvLw997raBKNy/tK1ToPMRalq17F+SKhnBQeZTp
+         DMrg==
+X-Gm-Message-State: AOJu0Yx22FxWS4ME4ZpuW5ePu8oR7cFyGWc60JOWUXf0IDkflj6dC4SL
+	5EU2dExLqIUo2lDYolUCkG9CcRgGkm8YcxLs
+X-Google-Smtp-Source: AGHT+IG9IXfscYPqbXxdOdY5YxpnpwEoDxkJ2XWgWbabu7HrmzoK1x5W3aIW55hHwi9aFQDKxJjHTg==
+X-Received: by 2002:a05:6870:6111:b0:1d6:40f9:804a with SMTP id s17-20020a056870611100b001d640f9804amr5948418oae.57.1696021676558;
+        Fri, 29 Sep 2023 14:07:56 -0700 (PDT)
 Received: from sparta.internal.asterius.io (c-73-228-213-122.hsd1.mn.comcast.net. [73.228.213.122])
-        by smtp.gmail.com with ESMTPSA id f15-20020a0ccc8f000000b0065b5306565esm2576210qvl.112.2023.09.29.13.56.45
+        by smtp.gmail.com with ESMTPSA id k12-20020a0cf28c000000b0065d0a4262e0sm1636113qvl.70.2023.09.29.14.07.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 29 Sep 2023 13:56:46 -0700 (PDT)
+        Fri, 29 Sep 2023 14:07:56 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-python][PATCH] python3-flask: update version 2.3.2 -> 2.3.3
-Date: Fri, 29 Sep 2023 20:56:32 +0000
-Message-Id: <20230929205632.2106945-1-derek@asterius.io>
+Subject: [meta-python][PATCH] python3-google-api-core: update version 2.12.0
+Date: Fri, 29 Sep 2023 21:07:46 +0000
+Message-Id: <20230929210746.2125480-1-derek@asterius.io>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 29 Sep 2023 20:56:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105267
+ <openembedded-devel@lists.openembedded.org>; Fri, 29 Sep 2023 21:07:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105268
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../python/{python3-flask_2.3.2.bb => python3-flask_2.3.3.bb} | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-flask_2.3.2.bb => python3-flask_2.3.3.bb} (84%)
+ ...gle-api-core_2.11.1.bb => python3-google-api-core_2.12.0.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-google-api-core_2.11.1.bb => python3-google-api-core_2.12.0.bb} (86%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-flask_2.3.2.bb b/meta-python/recipes-devtools/python/python3-flask_2.3.3.bb
-similarity index 84%
-rename from meta-python/recipes-devtools/python/python3-flask_2.3.2.bb
-rename to meta-python/recipes-devtools/python/python3-flask_2.3.3.bb
-index c4c1ff7de..c8c8d870a 100644
---- a/meta-python/recipes-devtools/python/python3-flask_2.3.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-flask_2.3.3.bb
-@@ -6,9 +6,7 @@ HOMEPAGE = "https://github.com/mitsuhiko/flask/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=ffeffa59c90c9c4a033c7574f8f3fb75"
+diff --git a/meta-python/recipes-devtools/python/python3-google-api-core_2.11.1.bb b/meta-python/recipes-devtools/python/python3-google-api-core_2.12.0.bb
+similarity index 86%
+rename from meta-python/recipes-devtools/python/python3-google-api-core_2.11.1.bb
+rename to meta-python/recipes-devtools/python/python3-google-api-core_2.12.0.bb
+index de2bd3d12..28c6a7989 100644
+--- a/meta-python/recipes-devtools/python/python3-google-api-core_2.11.1.bb
++++ b/meta-python/recipes-devtools/python/python3-google-api-core_2.12.0.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
  
--SRC_URI[sha256sum] = "8c2f9abd47a9e8df7f0c3f091ce9497d011dc3b31effcf4c85a6e2b50f4114ef"
--
--PYPI_PACKAGE = "Flask"
-+SRC_URI[sha256sum] = "09c347a92aa7ff4a8e7f3206795f30d826654baf38b873d0744cd571ca609efc"
+ inherit pypi setuptools3
  
- inherit pypi python_setuptools_build_meta
+-SRC_URI[sha256sum] = "25d29e05a0058ed5f19c61c0a78b1b53adea4d9364b464d014fbda941f6d1c9a"
++SRC_URI[sha256sum] = "c22e01b1e3c4dcd90998494879612c38d0a3411d1f7b679eb89e2abe3ce1f553"
  
+ RDEPENDS:${PN} += "\
+     ${PYTHON_PN}-asyncio \
 -- 
 2.34.1
 
