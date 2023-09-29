@@ -1,271 +1,186 @@
-Return-Path: <pawel.langowski@3mdeb.com>
+Return-Path: <uvv.mail@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A8B11E71D36
-	for <webhook@archiver.kernel.org>; Fri, 29 Sep 2023 13:33:38 +0000 (UTC)
-Received: from 13.mo561.mail-out.ovh.net (13.mo561.mail-out.ovh.net [188.165.33.202])
- by mx.groups.io with SMTP id smtpd.web10.17286.1695994415598148106
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AFEB7E71D38
+	for <webhook@archiver.kernel.org>; Fri, 29 Sep 2023 13:38:58 +0000 (UTC)
+Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
+ by mx.groups.io with SMTP id smtpd.web10.17426.1695994732564021262
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 29 Sep 2023 06:33:36 -0700
+ Fri, 29 Sep 2023 06:38:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=softfail (domain: 3mdeb.com, ip: 188.165.33.202, mailfrom: pawel.langowski@3mdeb.com)
-Received: from director8.ghost.mail-out.ovh.net (unknown [10.108.4.253])
-	by mo561.mail-out.ovh.net (Postfix) with ESMTP id 9141028761
-	for <openembedded-devel@lists.openembedded.org>; Fri, 29 Sep 2023 13:33:33 +0000 (UTC)
-Received: from ghost-submission-6684bf9d7b-q5dbt (unknown [10.110.103.53])
-	by director8.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 0D5161FEA9;
-	Fri, 29 Sep 2023 13:33:32 +0000 (UTC)
-Received: from 3mdeb.com ([37.59.142.96])
-	by ghost-submission-6684bf9d7b-q5dbt with ESMTPSA
-	id 8X3gMyzSFmULEQEAGwuK9A
-	(envelope-from <pawel.langowski@3mdeb.com>); Fri, 29 Sep 2023 13:33:32 +0000
-Authentication-Results: garm.ovh; auth=pass (GARM-96R00100adb953-4c1d-438e-a437-572c358a6f5c,
-                    F4C01438C8D48F1A906F8422C144923CFADBE91B) smtp.auth=pawel.langowski@3mdeb.com
-X-OVh-ClientIp: 213.192.77.249
-From: Pawel Langowski <pawel.langowski@3mdeb.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=IFHaW7Qa;
+ spf=pass (domain: gmail.com, ip: 209.85.218.44, mailfrom: uvv.mail@gmail.com)
+Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-99bf3f59905so1875794966b.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 29 Sep 2023 06:38:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1695994731; x=1696599531; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=6PidK8aMZmgsLdEjG3L9Ga4rdG+CsUVUe0qcU8TeUK0=;
+        b=IFHaW7QaAP0fvD5HNJjszxzPEdO/I8tviZaIfthf4El/GI4bFGWkFroPE2P7MTdyQL
+         FRAoTKnwYNR7ule9j5Z5w87L8uUWW37pES/riOtLCrIZHUINrNFapGCraLT5TSQCUGBr
+         3WUt/pmViZHR+jEfoPngvJcHXMrqC95gXfTUwDLTJlaePpTDoSPFb6w9AdtEQ4pKbcj5
+         Tp3YGpWaCSW4PYmdgXiBlFI9b9ledDuIWS9KADb/SfGo0hajQtdlOafD7hV9szDs+fZt
+         S5HO9c6UiGFFrBjZ6trSoob1dHnN379//hP14LSa9Qt1c0wgJcD6VbyFA7w/RMd7yFh1
+         F2iw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1695994731; x=1696599531;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=6PidK8aMZmgsLdEjG3L9Ga4rdG+CsUVUe0qcU8TeUK0=;
+        b=GbzLRLajAo39b6g4mQzoZyAEkYfXusp0HSXZLqjhScCqK15g0ydxe4SOZ0apYgSVdJ
+         xNMK2pqYfUEWVUsxd0L15TB4A3BmA8F/IyKDFcYlw0EsjgpMnbXrDGDUBBmgHkwc1Ksw
+         OIi2NPp/o8HJsLSZ3oEwsWsOXEIOtELDqLfTirI3njdoeD0a3f6hndHQr77nHde7qczE
+         7QKj6g0uN89q6PUYWY+XwWbLC45DQzsDptXAfq/OHboY+6vm37UHhu2Dx/qEQUGhBxHg
+         05/qjynco0huDgsvddVx7qGjdGyi5x8+gKb6ftjDv4aFiWFA/THWRO618G1n2JeEJrJA
+         8Btg==
+X-Gm-Message-State: AOJu0YzIQkiC9U2EzPPUCVvI3EhtZRpilsTWm5b6pW8La2og5j7WVbz1
+	S9VR8yOPDEo7Yx3Na5evms9fnNSQP/pnwQYjH9Q=
+X-Google-Smtp-Source: AGHT+IGq6zamhVm/B0oDUdpITM2hJzHgwTNcF8diGpVUlCZtAHUIMILmqVYqSjzXyPpqs14GvdryWA==
+X-Received: by 2002:a17:906:3e52:b0:9b2:a798:8565 with SMTP id t18-20020a1709063e5200b009b2a7988565mr4140661eji.26.1695994730672;
+        Fri, 29 Sep 2023 06:38:50 -0700 (PDT)
+Received: from slackware.local ([89.249.73.142])
+        by smtp.gmail.com with ESMTPSA id zg22-20020a170907249600b009a5f1d15642sm12431287ejb.158.2023.09.29.06.38.49
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 29 Sep 2023 06:38:50 -0700 (PDT)
+From: Vyacheslav Yurkov <uvv.mail@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: piotr.krol@3mdeb.com,
-	tomasz.zyjewski@3mdeb.com
-Subject: [meta-networking][PATCHv4] recipes-connectivity: Add tayga recipe
-Date: Fri, 29 Sep 2023 15:33:10 +0200
-Message-ID: <20230929133310.217569-1-pawel.langowski@3mdeb.com>
-X-Mailer: git-send-email 2.41.0
+Cc: Vyacheslav Yurkov <uvv.mail@gmail.com>
+Subject: [meta-filesystems][PATCH 2/3] overlayfs-tools: Bump up the version
+Date: Fri, 29 Sep 2023 15:37:23 +0200
+Message-Id: <20230929133724.56928-2-uvv.mail@gmail.com>
+X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20230929133724.56928-1-uvv.mail@gmail.com>
+References: <20230929133724.56928-1-uvv.mail@gmail.com>
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 15144761125648642713
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: 0
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvkedrtddvgdeihecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecunecujfgurhephffvvefufffkofgggfestdekredtredttdenucfhrhhomheprfgrfigvlhcunfgrnhhgohifshhkihcuoehprgifvghlrdhlrghnghhofihskhhiseefmhguvggsrdgtohhmqeenucggtffrrghtthgvrhhnpefgffdtkefhkeeggfejhfetteelvdduvdefffeggfdvkefhheejhfeggedtgeefudenucffohhmrghinheplhhithgvtghhrdhorhhgnecukfhppeduvdejrddtrddtrddupddvudefrdduledvrdejjedrvdegledpfeejrdehledrudegvddrleeinecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeophgrfigvlhdrlhgrnhhgohifshhkihesfehmuggvsgdrtghomheqpdhnsggprhgtphhtthhopedupdhrtghpthhtohepohhpvghnvghmsggvugguvgguqdguvghvvghlsehlihhsthhsrdhophgvnhgvmhgsvgguuggvugdrohhrghdpoffvtefjohhsthepmhhoheeiuddpmhhouggvpehsmhhtphhouhht
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 29 Sep 2023 13:33:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105242
+ <openembedded-devel@lists.openembedded.org>; Fri, 29 Sep 2023 13:38:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105244
 
-Recipe for TAYGA - an out-of-kernel stateless NAT64 implementation for Li=
-nux
+Drop the patches, they have been merged upstream.
 
-Signed-off-by: Pawel Langowski <pawel.langowski@3mdeb.com>
+Signed-off-by: Vyacheslav Yurkov <uvv.mail@gmail.com>
 ---
- .../tayga/files/0001-include-sys-uio.patch    |  10 ++
- .../tayga/files/tayga.conf                    | 103 ++++++++++++++++++
- .../tayga/files/tayga.service                 |  12 ++
- .../recipes-connectivity/tayga/tayga_0.9.2.bb |  21 ++++
- 4 files changed, 146 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/tayga/files/0001=
--include-sys-uio.patch
- create mode 100644 meta-networking/recipes-connectivity/tayga/files/tayg=
-a.conf
- create mode 100644 meta-networking/recipes-connectivity/tayga/files/tayg=
-a.service
- create mode 100644 meta-networking/recipes-connectivity/tayga/tayga_0.9.=
-2.bb
+ ...-so-that-it-compiles-on-Ubuntu-20.04.patch | 43 -------------------
+ .../0002-makefile-fix-linking-flags.patch     | 33 --------------
+ .../overlayfs/overlayfs-tools_git.bb          |  4 +-
+ 3 files changed, 1 insertion(+), 79 deletions(-)
+ delete mode 100644 meta-filesystems/recipes-utils/overlayfs/overlayfs-tools/0001-Fixed-includes-so-that-it-compiles-on-Ubuntu-20.04.patch
+ delete mode 100644 meta-filesystems/recipes-utils/overlayfs/overlayfs-tools/0002-makefile-fix-linking-flags.patch
 
-diff --git a/meta-networking/recipes-connectivity/tayga/files/0001-includ=
-e-sys-uio.patch b/meta-networking/recipes-connectivity/tayga/files/0001-i=
-nclude-sys-uio.patch
-new file mode 100644
-index 000000000000..ab8c6b5ca0d7
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/tayga/files/0001-include-sys-u=
-io.patch
-@@ -0,0 +1,10 @@
-+--- tayga.h	2023-09-29 14:38:05.005837695 +0200
-++++ tayga-2.h	2023-09-29 14:37:45.560837257 +0200
-+@@ -20,6 +20,7 @@
-+ #include <sys/stat.h>
-+ #include <sys/ioctl.h>
-+ #include <sys/socket.h>
-++#include <sys/uio.h>
-+ #include <netinet/in.h>
-+ #include <arpa/inet.h>
-+ #include <unistd.h>
-diff --git a/meta-networking/recipes-connectivity/tayga/files/tayga.conf =
-b/meta-networking/recipes-connectivity/tayga/files/tayga.conf
-new file mode 100644
-index 000000000000..c1b6163a4591
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/tayga/files/tayga.conf
-@@ -0,0 +1,103 @@
-+#
-+# Sample configuration file for TAYGA 0.9.2
-+#
-+# Modify this to use your own addresses!!
-+#
-+
-+#
-+# TUN device that TAYGA will use to exchange IPv4 and IPv6 packets with =
-the
-+# kernel.  You may use any name you like, but `nat64' is recommended.
-+#
-+# This device may be created before starting the tayga daemon by running
-+# `tayga --mktun`.  This allows routing and firewall rules to be set up =
-prior
-+# to commencement of packet translation.
-+#
-+# Mandatory.
-+#
-+tun-device nat64
-+
-+#
-+# TAYGA's IPv4 address.  This is NOT your router's IPv4 address!  TAYGA
-+# requires its own address because it acts as an IPv4 and IPv6 router, a=
-nd
-+# needs to be able to send ICMP messages.  TAYGA will also respond to IC=
-MP
-+# echo requests (ping) at this address.
-+#
-+# This address can safely be located inside the dynamic-pool prefix.
-+#
-+# Mandatory.
-+#
-+ipv4-addr 192.168.254.1
-+
-+#
-+# TAYGA's IPv6 address.  This is NOT your router's IPv6 address!  TAYGA
-+# requires its own address because it acts as an IPv4 and IPv6 router, a=
-nd
-+# needs to be able to send ICMP messages.  TAYGA will also respond to IC=
-MP
-+# echo requests (ping6) at this address.
-+#
-+# You can leave ipv6-addr unspecified and TAYGA will construct its IPv6
-+# address using ipv4-addr and the NAT64 prefix.
-+#
-+# Optional if the NAT64 prefix is specified, otherwise mandatory.  It is=
- also
-+# mandatory if the NAT64 prefix is 64:ff9b::/96 and ipv4-addr is a priva=
-te
-+# (RFC1918) address.
-+#
-+#ipv6-addr 2001:db8:1::2
-+ipv6-addr fdaa:bb:1::1
-+
-+#
-+# The NAT64 prefix.  The IPv4 address space is mapped into the IPv6 addr=
-ess
-+# space by prepending this prefix to the IPv4 address.  Using a /96 pref=
-ix is
-+# recommended in most situations, but all lengths specified in RFC 6052 =
-are
-+# supported.
-+#
-+# This must be a prefix selected from your organization's IPv6 address s=
-pace
-+# or the Well-Known Prefix 64:ff9b::/96.  Note that using the Well-Known
-+# Prefix will prohibit IPv6 hosts from contacting IPv4 hosts that have p=
-rivate
-+# (RFC1918) addresses, per RFC 6052.
-+#
-+# The NAT64 prefix need not be specified if all required address mapping=
-s are
-+# listed in `map' directives.  (See below.)
-+#
-+# Optional.
-+#
-+##prefix 2001:db8:1:ffff::/96
-+prefix 64:ff9b::/96
-+
-+#
-+# Dynamic pool prefix.  IPv6 hosts which send traffic through TAYGA (and=
- do
-+# not correspond to a static map or an IPv4-translatable address in the =
-NAT64
-+# prefix) will be assigned an IPv4 address from the dynamic pool.  Dynam=
-ic
-+# maps are valid for 124 minutes after the last matching packet is seen.
-+#
-+# If no unassigned addresses remain in the dynamic pool (or no dynamic p=
-ool is
-+# configured), packets from unknown IPv6 hosts will be rejected with an =
-ICMP
-+# unreachable error.
-+#
-+# Optional.
-+#
-+dynamic-pool 192.168.254.0/24
-+
-+#
-+# Persistent data storage directory.  The dynamic.map file, which saves =
-the
-+# dynamic maps that are created from dynamic-pool, is stored in this
-+# directory.  Omit if you do not need these maps to be persistent betwee=
-n
-+# instances of TAYGA.
-+#
-+# Optional.
-+#
-+data-dir /var/spool/tayga
-+
-+#
-+# Establishes a single-host map.  If an IPv6 host should be consistently
-+# reachable at a specific IPv4 address, the mapping can be specified in =
-a
-+# `map' directive.  (IPv6 hosts numbered with an IPv4-translatable addre=
-ss do
-+# not need map directives.)
-+#
-+# IPv4 addresses specified in the `map' directive can safely be located =
-inside
-+# the dynamic-pool prefix.
-+#
-+# Optional.
-+#
-+#map 192.168.5.42 2001:db8:1:4444::1
-+#map 192.168.5.43 2001:db8:1:4444::2
-+#map 192.168.255.2 2001:db8:1:569::143
-diff --git a/meta-networking/recipes-connectivity/tayga/files/tayga.servi=
-ce b/meta-networking/recipes-connectivity/tayga/files/tayga.service
-new file mode 100644
-index 000000000000..0bffeb92a501
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/tayga/files/tayga.service
-@@ -0,0 +1,12 @@
-+[Unit]
-+SourcePath=3D/usr/sbin/tayga
-+Description=3DLSB: userspace NAT64
-+
-+[Service]
-+Type=3Dforking
-+ExecStart=3D/usr/sbin/tayga -d --config /etc/tayga.conf
-+RemainAfterExit=3Dyes
-+TimeoutStopSec=3Dinfinity
-+
-+[Install]
-+WantedBy=3Dmulti-user.target
-diff --git a/meta-networking/recipes-connectivity/tayga/tayga_0.9.2.bb b/=
-meta-networking/recipes-connectivity/tayga/tayga_0.9.2.bb
-new file mode 100644
-index 000000000000..36d35e6dee89
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/tayga/tayga_0.9.2.bb
-@@ -0,0 +1,21 @@
-+LICENSE =3D "GPL-2.0-only"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
-19f"
-+
-+SRC_URI =3D " \
-+        http://www.litech.org/tayga/tayga-${PV}.tar.bz2 \
-+        file://tayga.conf \
-+        file://tayga.service \
-+        file://0001-include-sys-uio.patch;striplevel=3D0 \
-+        "
-+SRC_URI[sha256sum] =3D "2b1f7927a9d2dcff9095aff3c271924b052ccfd2faca9588=
-b277431a44f0009c"
-+
-+SYSTEMD_PACKAGES =3D "${PN}"
-+SYSTEMD_SERVICE:${PN} =3D "tayga.service"
-+
-+do_install:append() {
-+  install -m 0644 ${WORKDIR}/tayga.conf ${D}${sysconfdir}/tayga.conf
-+  install -d ${D}${systemd_unitdir}/system/
-+  install -m 0644 ${WORKDIR}/tayga.service ${D}${systemd_unitdir}/system=
-/
-+}
-+
-+inherit autotools systemd
---=20
-2.41.0
+diff --git a/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools/0001-Fixed-includes-so-that-it-compiles-on-Ubuntu-20.04.patch b/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools/0001-Fixed-includes-so-that-it-compiles-on-Ubuntu-20.04.patch
+deleted file mode 100644
+index ed84d92c7..000000000
+--- a/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools/0001-Fixed-includes-so-that-it-compiles-on-Ubuntu-20.04.patch
++++ /dev/null
+@@ -1,43 +0,0 @@
+-From 81b4fbb5f52044cb348534c23f10b3884972b09b Mon Sep 17 00:00:00 2001
+-From: Beat Schaer <beat.schaer@wabtec.com>
+-Date: Fri, 19 Mar 2021 08:18:58 +0100
+-Subject: [PATCH] Fixed includes so that it compiles on Ubuntu 20.04
+-
+----
+-Upstream-Status: Pending
+-
+- logic.c | 3 +--
+- main.c  | 3 ++-
+- 2 files changed, 3 insertions(+), 3 deletions(-)
+-
+-diff --git a/logic.c b/logic.c
+-index 97767f5..47ebfaa 100644
+---- a/logic.c
+-+++ b/logic.c
+-@@ -7,8 +7,7 @@
+- #include <string.h>
+- #include <errno.h>
+- #include <unistd.h>
+--#include <attr/xattr.h>
+--#include <attr/attributes.h>
+-+#include <sys/xattr.h>
+- #include <fts.h>
+- #include <libgen.h>
+- #include "logic.h"
+-diff --git a/main.c b/main.c
+-index aa11239..f462b98 100644
+---- a/main.c
+-+++ b/main.c
+-@@ -12,7 +12,8 @@
+- #include <linux/limits.h>
+- #include <stdbool.h>
+- #include <sys/stat.h>
+--#include <attr/xattr.h>
+-+#include <sys/xattr.h>
+-+#include <errno.h>
+- #ifndef _SYS_STAT_H
+-   #include <linux/stat.h>
+- #endif
+--- 
+-2.25.1
+-
+diff --git a/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools/0002-makefile-fix-linking-flags.patch b/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools/0002-makefile-fix-linking-flags.patch
+deleted file mode 100644
+index 8fbb250f0..000000000
+--- a/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools/0002-makefile-fix-linking-flags.patch
++++ /dev/null
+@@ -1,33 +0,0 @@
+-From b4ff5886797e72d1c21da43261ca7648412f3186 Mon Sep 17 00:00:00 2001
+-From: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
+-Date: Mon, 23 May 2022 19:53:21 +0200
+-Subject: [PATCH] makefile: fix linking flags
+-
+-LDLIBS should be placed at the end according to
+-https://www.gnu.org/software/make/manual/html_node/Catalogue-of-Rules.html
+-
+-Signed-off-by: Vyacheslav Yurkov <Vyacheslav.Yurkov@bruker.com>
+----
+-Upstream-Status: Pending
+-
+- makefile | 4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/makefile b/makefile
+-index fb1bed4..038c7ce 100644
+---- a/makefile
+-+++ b/makefile
+-@@ -1,11 +1,11 @@
+- CFLAGS = -Wall -std=c99
+--LFLAGS = -lm
+-+LDLIBS = -lm
+- CC = gcc
+- 
+- all: overlay
+- 
+- overlay: main.o logic.o sh.o
+--	$(CC) $(LFLAGS) main.o logic.o sh.o -o overlay
+-+	$(CC) main.o logic.o sh.o -o overlay $(LDLIBS) 
+- 
+- main.o: main.c logic.h
+- 	$(CC) $(CFLAGS) -c main.c
+diff --git a/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_git.bb b/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_git.bb
+index c638be9af..de5155133 100644
+--- a/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_git.bb
++++ b/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_git.bb
+@@ -5,12 +5,10 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f312a7c4d02230e8f2b537295d375c69"
+ 
+ SRC_URI = "\
+     git://github.com/kmxz/overlayfs-tools.git;protocol=https;branch=master \
+-    file://0001-Fixed-includes-so-that-it-compiles-on-Ubuntu-20.04.patch \
+-    file://0002-makefile-fix-linking-flags.patch \
+ "
+ 
+ PV = "1.0+git${SRCPV}"
+-SRCREV = "291c7f4a3fb548d06c572700650c2e3bccb0cd27"
++SRCREV = "b5e5a829895ac98ccfe4629fbfbd8b819262bd00"
+ 
+ S = "${WORKDIR}/git"
+ B = "${S}"
+-- 
+2.35.1
 
 
