@@ -1,139 +1,173 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <bruce.ashfield@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5023FE728D5
-	for <webhook@archiver.kernel.org>; Fri, 29 Sep 2023 18:01:03 +0000 (UTC)
-Received: from mail-oa1-f49.google.com (mail-oa1-f49.google.com [209.85.160.49])
- by mx.groups.io with SMTP id smtpd.web11.24564.1696010460494739121
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 30E60E728E1
+	for <webhook@archiver.kernel.org>; Fri, 29 Sep 2023 19:50:45 +0000 (UTC)
+Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com [209.85.160.181])
+ by mx.groups.io with SMTP id smtpd.web11.27370.1696017040253371540
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 29 Sep 2023 11:01:00 -0700
+ Fri, 29 Sep 2023 12:50:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=HCzaqmMX;
- spf=pass (domain: gmail.com, ip: 209.85.160.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f49.google.com with SMTP id 586e51a60fabf-1dd2e65ed59so4613234fac.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 29 Sep 2023 11:01:00 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Qg/JGce9;
+ spf=pass (domain: gmail.com, ip: 209.85.160.181, mailfrom: bruce.ashfield@gmail.com)
+Received: by mail-qt1-f181.google.com with SMTP id d75a77b69052e-417f872fb94so86654711cf.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 29 Sep 2023 12:50:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1696010460; x=1696615260; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1696017039; x=1696621839; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=TeG4NgXfo4anBzkw08LgkXZBZu040A/Elc2S2pfQzJk=;
-        b=HCzaqmMX/egxSv1YvtW0kEb9n3QDkuO6mHyTsiP0Didb1WzlIm0HKvvkBbQFYCCNgB
-         t52fnhPTd/lCN9BJMOPIcCD7bo8ZLSaNBIDxTmBOMhatZAAMTdBGUP7aRwRHmmljgHul
-         ZwhQ3zMlUvXeflVhKKS6f9EhNF4YjvqFqq0FRM4Bh5N9tUBuVbTreqXGp3weunhf5HdB
-         6E0jLHCVFsbopsblTp0ijVxEXFUJwILfQJT00C8L+2f5Vz3pN1juIIETN4nkMLU4M9P/
-         az25IXhkGIY8L/4NICinAcXVZUpz6YwffpD/wcJrLKMdrq845mcccocYw5QWyRWw8nYa
-         hizw==
+        bh=lxqzBdH0kVwfqbZIkPRYGtpLnfAcnmvhVUmhjex3EwI=;
+        b=Qg/JGce9vILpXr+vBOqFoZ6yYbDH9OaZ37c2S8/RRwDNKzAIO4gLFFoQ1JySeWzv0W
+         uQmaJUMS6fmRpoDgEsnMCfesqrHjB7EFvsBHEmGpsNJYI3k+j5VIPioIpUxyVsonIcqM
+         MD1iOvxSAcy6xLkBzy/cYDL2EZpcq6YWZx5kwCKNiSMdPGg395RoBF2bQRdHF08wnA1n
+         k7cjKIkIE2Uihd5EJx81xT6lnstMHqo0K9iByxdBjI0+e3xUmd24NMk5dwPu/15iH1GP
+         M2IxKoMg+UpmdWLiEUlR/X2u0xtdzfE3t2rSvEZNKbDcsl251+5TjyCEygr12YmzOLLX
+         Fu6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1696010460; x=1696615260;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1696017039; x=1696621839;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=TeG4NgXfo4anBzkw08LgkXZBZu040A/Elc2S2pfQzJk=;
-        b=uyP17CRHcj4fLyG9VaeIl3C5zobODIwQRRGKx2T/I/msQd+3S/PRIVxKOLjvp49YNS
-         aTEJG8ziIdlNEVDxtYL4SZAppeS/yQzsmBdSCbXl5h8bcBbqumlR1+6yKIA1urj2GmZC
-         q8Co2W0inpGhz+lEz5kzWT3fehg0U1h3FBXmEsjtwRjt5Ev4bfrOCiONFP0BgfmSWcGt
-         qulk/zCH/mpBQ1WbJ3hBrHJcuMHJZ4tD+ga3xYy93iu9R7nmsoJ2diNTMNcf5Nt7xQ3Z
-         fd1/LBVNzz3FYJtYz0J5dzlFAjvm9dULP0Olza1PpFqP4T7QUDnc2We6Ub1fICjH4Y8n
-         UvCQ==
-X-Gm-Message-State: AOJu0YzxV9fnFYeTjxBnX5biXSOX6wM4l+PY5qx0gEpacohFEYitaE8t
-	Y1iKdfxQAcXxm++2UhYvve88TkioyKh95HmbWC3Swqx5K/w=
-X-Google-Smtp-Source: AGHT+IFN+7fQADegH9iY8GISHQYroPD95RF4MA/cy5SmPZ6v32FqMQbS2IjPzrWC0Fura3aJp8JuSi4OLlSe/dnPih0=
-X-Received: by 2002:a05:6870:470a:b0:1dd:7fa9:ebe9 with SMTP id
- b10-20020a056870470a00b001dd7fa9ebe9mr5053599oaq.12.1696010459556; Fri, 29
- Sep 2023 11:00:59 -0700 (PDT)
+        bh=lxqzBdH0kVwfqbZIkPRYGtpLnfAcnmvhVUmhjex3EwI=;
+        b=W5f3DuiFD2sH1kaQVyJxkLe28Lt/MiTiNM5GrjmO2bVj0W66G4pEA7+5lTDXU057DW
+         5yqHBLblBya6JKaAGxmQOSb88vD+bmswlJHVqCRYydW7KMmPFeef5XnX2nx7SRrKV3S/
+         SAEgLwwOLm25JfWQ+m6eG1pTY3C/pQVJLrqNXAQ+chYCZ0E3hq8eExG+gMr9KJJ7JNqr
+         7Jd4UkXcmdI/hVMlIN0Ja0Voy8MNU+R6m87OP/VZIvfueMHHEjpYzdp5Z5cDnFVRf/+w
+         El/mmMD2QOPv9SAcQFJdsxFKNhK8IrjTgouSsCZT/k9zNfKwKGu2kCn3B+cuAIas3aAu
+         fz9A==
+X-Gm-Message-State: AOJu0YyBq58NOhMiR0esMobobtc1mqTIXPRCw/I7esJnVDDxa0i5PFZw
+	zWDMOytY+kw7iVA+41zkSH1Y2HXVJ6N20g==
+X-Google-Smtp-Source: AGHT+IFbkUBa55APb7jE4XeYf3eNuUDYnFWj6wxLh//w+pv8aV93eWKLLhFv99ECCynaUMrtlOWS3A==
+X-Received: by 2002:a05:622a:246:b0:413:5e4d:bf40 with SMTP id c6-20020a05622a024600b004135e4dbf40mr5931293qtx.68.1696017038997;
+        Fri, 29 Sep 2023 12:50:38 -0700 (PDT)
+Received: from build.lan ([174.112.183.231])
+        by smtp.gmail.com with ESMTPSA id x14-20020ac8538e000000b0040331f93ee0sm3283472qtp.77.2023.09.29.12.50.38
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 29 Sep 2023 12:50:38 -0700 (PDT)
+From: bruce.ashfield@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Cc: raj.khem@gmail.com
+Subject: [PATCH 2/2] vboxguestdrivers: fix kernel v6.5 build
+Date: Fri, 29 Sep 2023 15:50:35 -0400
+Message-Id: <20230929195035.3515540-2-bruce.ashfield@gmail.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230929195035.3515540-1-bruce.ashfield@gmail.com>
+References: <20230929195035.3515540-1-bruce.ashfield@gmail.com>
 MIME-Version: 1.0
-References: <20230928233623.767530-1-f_l_k@t-online.de>
-In-Reply-To: <20230928233623.767530-1-f_l_k@t-online.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 29 Sep 2023 11:00:33 -0700
-Message-ID: <CAMKF1soFUO1FRe803VTj-EQXZt7LX+=PgNwq8UgHzS=giqoyqA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] libnfs: dont install libnfs-config.cmake
-To: Markus Volk <f_l_k@t-online.de>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 29 Sep 2023 18:01:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105260
+ <openembedded-devel@lists.openembedded.org>; Fri, 29 Sep 2023 19:50:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105262
 
-On Thu, Sep 28, 2023 at 4:36=E2=80=AFPM Markus Volk <f_l_k@t-online.de> wro=
-te:
->
-> kodi uses its own FindNFS.cmake to find libnfs and succeeds with pkgconfi=
-g.
-> If libnfs-config.cmake is found it will also be utilized (for win/mac?)
-> which is generally bad for cross-compiling and causes the prefix to get h=
-ardcoded
-> to /usr thus libnfs.so.5.0.2 is taken from the host machine
->
-> Removing this file fixes:
-> | aarch64-poky-linux-ld.lld: error: /usr/lib/libnfs.so.5.0.2 is incompati=
-ble with elf64-littleaarch64
-> | aarch64-poky-linux-clang++: error: linker command failed with exit code=
- 1 (use -v to see invocation)
-> | ninja: build stopped: subcommand failed.
->
-> Add CFLAG workaround to fix compiling with clang complaining about
-> old coding style while gcc doesn't care.
->
-> Signed-off-by: Markus Volk <f_l_k@t-online.de>
-> ---
->  meta-oe/recipes-connectivity/libnfs/libnfs_5.0.2.bb | 12 ++++++++++--
->  1 file changed, 10 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-oe/recipes-connectivity/libnfs/libnfs_5.0.2.bb b/meta-o=
-e/recipes-connectivity/libnfs/libnfs_5.0.2.bb
-> index e0df18a50..a025189b8 100644
-> --- a/meta-oe/recipes-connectivity/libnfs/libnfs_5.0.2.bb
-> +++ b/meta-oe/recipes-connectivity/libnfs/libnfs_5.0.2.bb
-> @@ -3,10 +3,18 @@ HOMEPAGE =3D "https://github.com/sahlberg/libnfs"
->  LICENSE =3D "LGPL-2.1-only & BSD-2-Clause & GPL-3.0-only"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D825301ba17efc9d188ee0abd4b924=
-ada"
->
-> -SRC_URI =3D "git://github.com/sahlberg/libnfs.git;protocol=3Dhttps;branc=
-h=3Dmaster \
-> -    file://0001-CMakeLists.txt-respect-CMAKE_INSTALL_LIBDIR-for-mult.pat=
-ch \
-> +SRC_URI =3D " \
-> +       git://github.com/sahlberg/libnfs.git;protocol=3Dhttps;branch=3Dma=
-ster \
-> +       file://0001-CMakeLists.txt-respect-CMAKE_INSTALL_LIBDIR-for-mult.=
-patch \
->  "
->  SRCREV =3D "40348f45d6beb8a8f50b6b63414a98fc1a061b7d"
->  S =3D "${WORKDIR}/git"
->
->  inherit cmake
-> +
-> +do_install:append() {
-> +       rm -f ${D}${libdir}/cmake/libnfs/libnfs-config.cmake
-> +}
-> +
-> +# Workaround for clang
-> +CFLAGS +=3D "-Wno-implicit-function-declaration"
+From: Bruce Ashfield <bruce.ashfield@gmail.com>
 
-I was curious what the real failure is underneath, so I removed it
-locally with clang and it seems to work for couple of arches
-arm64/x86_64
-so I wonder how to reproduce the error this option suppresses.
+When building against the 6.5 kernel (and kernel headers), the following
+build error is encountered:
 
-> --
-> 2.42.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#105230): https://lists.openembedded.org/g/openembedde=
-d-devel/message/105230
-> Mute This Topic: https://lists.openembedded.org/mt/101648795/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+   | vboxguestdrivers/7.0.10/vboxguestdrivers-7.0.10/vboxvideo/vbox_fb.c:194:24: error: 'drm_fb_helper_sys_fillrect' undeclared here (not in a function); did you mean 'drm_fb_helper_lastclose'?
+   |   194 |         .fb_fillrect = drm_fb_helper_sys_fillrect,
+   |       |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+   |       |                        drm_fb_helper_lastclose
+   | vboxguestdrivers/7.0.10/vboxguestdrivers-7.0.10/vboxvideo/vbox_fb.c:195:24: error: 'drm_fb_helper_sys_copyarea' undeclared here (not in a function); did you mean 'drm_fb_helper_set_par'?
+   |   195 |         .fb_copyarea = drm_fb_helper_sys_copyarea,
+   |       |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+   |       |                        drm_fb_helper_set_par
+   | vboxguestdrivers/7.0.10/vboxguestdrivers-7.0.10/vboxvideo/vbox_fb.c:196:25: error: 'drm_fb_helper_sys_imageblit' undeclared here (not in a function) |   196 |         .fb_imageblit = drm_fb_helper_sys_imageblit,
+   |       |                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A patch from vbox-dev has been posted to fix the issue.
+
+Upstream-Status: Submitted [https://www.mail-archive.com/vbox-dev@virtualbox.org/msg10129.html]
+
+Signed-off-by: Bruce Ashfield <bruce.ashfield@gmail.com>
+---
+
+Khem,
+
+With 6.4 going EOL upstream, I'm rushing in a bump to v6.5 for OEcore.
+
+This is a bump for the vboxguestdrives that solves issues in my tesing.
+
+Bruce
+
+ .../0001-vbox_fb-fix-kernel-v6.5-build.patch  | 50 +++++++++++++++++++
+ .../vboxguestdrivers_7.0.10.bb                |  1 +
+ 2 files changed, 51 insertions(+)
+ create mode 100644 meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-vbox_fb-fix-kernel-v6.5-build.patch
+
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-vbox_fb-fix-kernel-v6.5-build.patch b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-vbox_fb-fix-kernel-v6.5-build.patch
+new file mode 100644
+index 000000000..01969d4a1
+--- /dev/null
++++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-vbox_fb-fix-kernel-v6.5-build.patch
+@@ -0,0 +1,50 @@
++From 4cf34517b0c793405dca154cc70c9b5d1a566a8a Mon Sep 17 00:00:00 2001
++From: Bruce Ashfield <bruce.ashfield@gmail.com>
++Date: Fri, 29 Sep 2023 14:52:50 -0400
++Subject: [PATCH] vbox_fb: fix kernel v6.5 build
++
++When building against the 6.5 kernel (and kernel headers), the following
++build error is encountered:
++
++   | vboxguestdrivers/7.0.10/vboxguestdrivers-7.0.10/vboxvideo/vbox_fb.c:194:24: error: 'drm_fb_helper_sys_fillrect' undeclared here (not in a function); did you mean 'drm_fb_helper_lastclose'?
++   |   194 |         .fb_fillrect = drm_fb_helper_sys_fillrect,
++   |       |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~
++   |       |                        drm_fb_helper_lastclose
++   | vboxguestdrivers/7.0.10/vboxguestdrivers-7.0.10/vboxvideo/vbox_fb.c:195:24: error: 'drm_fb_helper_sys_copyarea' undeclared here (not in a function); did you mean 'drm_fb_helper_set_par'?
++   |   195 |         .fb_copyarea = drm_fb_helper_sys_copyarea,
++   |       |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~
++   |       |                        drm_fb_helper_set_par
++   | vboxguestdrivers/7.0.10/vboxguestdrivers-7.0.10/vboxvideo/vbox_fb.c:196:25: error: 'drm_fb_helper_sys_imageblit' undeclared here (not in a function)
++   |   196 |         .fb_imageblit = drm_fb_helper_sys_imageblit,
++   |       |                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~
++
++We backport a patch from vbox-dev to fix the issue.
++
++Upstream-Status: Submitted [https://www.mail-archive.com/vbox-dev@virtualbox.org/msg10129.html]
++
++Signed-off-by: Bruce Ashfield <bruce.ashfield@gmail.com>
++---
++ src/VBox/Additions/linux/drm/vbox_fb.c | 4 ++++
++ 1 file changed, 4 insertions(+)
++
++diff --git a/src/VBox/Additions/linux/drm/vbox_fb.c b/src/VBox/Additions/linux/drm/vbox_fb.c
++index 2a8c79ab..d453533c 100644
++--- a/src/VBox/Additions/linux/drm/vbox_fb.c
+++++ b/src/VBox/Additions/linux/drm/vbox_fb.c
++@@ -196,9 +196,13 @@ static struct fb_ops vboxfb_ops = {
++ 	.owner = THIS_MODULE,
++ 	.fb_check_var = drm_fb_helper_check_var,
++ 	.fb_set_par = drm_fb_helper_set_par,
+++#if RTLNX_VER_MIN(6, 5, 0)
+++	FB_DEFAULT_SYS_OPS,
+++#else
++ 	.fb_fillrect = drm_fb_helper_sys_fillrect,
++ 	.fb_copyarea = drm_fb_helper_sys_copyarea,
++ 	.fb_imageblit = drm_fb_helper_sys_imageblit,
+++#endif
++ 	.fb_pan_display = drm_fb_helper_pan_display,
++ 	.fb_blank = drm_fb_helper_blank,
++ 	.fb_setcmap = drm_fb_helper_setcmap,
++-- 
++2.34.1
++
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.10.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.10.bb
+index f19363652..8e9013824 100644
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.10.bb
++++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.10.bb
+@@ -13,6 +13,7 @@ VBOX_NAME = "VirtualBox-${PV}"
+ 
+ SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
+     file://Makefile.utils \
++    file://0001-vbox_fb-fix-kernel-v6.5-build.patch \
+ "
+ 
+ SRC_URI[sha256sum] = "0b1e6d8b7f87d017c7fae37f80586acff04f799ffc1d51e995954d6415dee371"
+-- 
+2.34.1
+
 
