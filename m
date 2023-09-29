@@ -1,83 +1,63 @@
-Return-Path: <uvv.mail@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0392DE77343
-	for <webhook@archiver.kernel.org>; Fri, 29 Sep 2023 22:28:30 +0000 (UTC)
-Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
- by mx.groups.io with SMTP id smtpd.web10.30977.1696026505450706287
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B4A47E7734B
+	for <webhook@archiver.kernel.org>; Fri, 29 Sep 2023 22:34:10 +0000 (UTC)
+Received: from mailout01.t-online.de (mailout01.t-online.de [194.25.134.80])
+ by mx.groups.io with SMTP id smtpd.web11.31015.1696026842533965513
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 29 Sep 2023 15:28:25 -0700
+ Fri, 29 Sep 2023 15:34:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=be2s90mv;
- spf=pass (domain: gmail.com, ip: 209.85.218.45, mailfrom: uvv.mail@gmail.com)
-Received: by mail-ej1-f45.google.com with SMTP id a640c23a62f3a-9ad810be221so2006216066b.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 29 Sep 2023 15:28:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1696026504; x=1696631304; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=dThlM2DCE9fwg5VzpxXIzqH4QzJ4KMu2XbESaW12TXE=;
-        b=be2s90mvvq+j+bb0POnTDxGvpL1gI/BCQq4kKgrK/AcNUQopPrCRcXjF2WL21oSl74
-         4WMPPNYxsdXBuwJtlGXXV4W0yoNmDqQnKAL24Ttd7mzsm+q9hR2mIxK+pxahfdZeVz1C
-         KJdXpZXlaPxpSc7DNZ0rjUMjdBOQRvlHjXj1HwNGG+E6LBIXE+suCfHZlwObfFwYLYta
-         nmO9+5/6ABOw6GccwW3OYml+VhGwdMIyvcmfp+NLz6kUs+bQIvcKs/MEsH8dPRdFYoqq
-         ZAtNUTa8qQ5FJi0gi35UZffkF6c1UpcL+D1oM4z1XMi/CflU3c4cfXDQ3o9GnyMTypV9
-         GCAw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1696026504; x=1696631304;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=dThlM2DCE9fwg5VzpxXIzqH4QzJ4KMu2XbESaW12TXE=;
-        b=dRzyjU8t8zvlVZ+M3x8DCBN1qoOaE5rX07oBEaoSf/qEeysDfLRaGlncCrwNkuy3Pu
-         Lkt6vF1665dLKUcZlo4UsX5Oh04pk/kONUklkWIjJ7jwSoNLkNvcyW2wOOCPgB34wEer
-         JkpAdMZ6aDgTa0JFG7SYRMSX9bHyRAGNFWQb8nnIUP8avyautdFBvhDuLluA11DmdZvm
-         u7TDIRoDHz3SG2pE/xy5MAYX4asO2rOi+puKyhYbv+eQzyh0cReRZt3ZSQLKjAaOxBd+
-         HubyaZ5WnenfN2SKIJlgNYKDNB4Yb13+rb9w0bs+bs1voIcnCB4EzO+W9e5wvWlWRQUi
-         6qkg==
-X-Gm-Message-State: AOJu0Yy9EszU+Nn0vDHKAe0aMxxUXTDWkftauLfIyvcqpoCicAr28NE3
-	zS6hD/vE5bqFFiS0EE60vECbIajdVu15mdHK
-X-Google-Smtp-Source: AGHT+IHOL8QKdlkGXsno2PIaShat/eQAaKe/tP9TkcLZKSWaf5r2YS73c3WA3I3Z4C2SYrpszPCscg==
-X-Received: by 2002:a17:907:1dca:b0:9ae:43be:e5f5 with SMTP id og10-20020a1709071dca00b009ae43bee5f5mr5224884ejc.4.1696026503493;
-        Fri, 29 Sep 2023 15:28:23 -0700 (PDT)
-Received: from slackware.local ([89.249.73.138])
-        by smtp.gmail.com with ESMTPSA id a19-20020a170906275300b0099290e2c163sm12953660ejd.204.2023.09.29.15.28.21
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 29 Sep 2023 15:28:23 -0700 (PDT)
-From: Vyacheslav Yurkov <uvv.mail@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Vyacheslav Yurkov <uvv.mail@gmail.com>
-Subject: [meta-filesystems][PATCH v2 1/3] overlayfs-tools: Drop unneeded dependency
-Date: Sat, 30 Sep 2023 00:26:57 +0200
-Message-Id: <20230929222659.57046-1-uvv.mail@gmail.com>
-X-Mailer: git-send-email 2.35.1
+ dkim=none (message not signed); spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.80, mailfrom: f_l_k@t-online.de)
+Received: from fwd74.aul.t-online.de (fwd74.aul.t-online.de [10.223.144.100])
+	by mailout01.t-online.de (Postfix) with SMTP id 17249386BC;
+	Sat, 30 Sep 2023 00:34:00 +0200 (CEST)
+Received: from [192.168.178.62] ([84.154.164.210]) by fwd74.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1qmM3Y-0rUHp20; Sat, 30 Sep 2023 00:33:56 +0200
+Date: Sat, 30 Sep 2023 00:34:03 +0200
+From: Markus Volk <f_l_k@t-online.de>
+Subject: Re: [oe] [meta-oe][PATCH] libnfs: dont install libnfs-config.cmake
+To: Khem Raj <raj.khem@gmail.com>
+Cc: Markus Volk <f_l_k@t-online.de>, openembedded-devel@lists.openembedded.org
+Message-Id: <ROQR1S.P33F0FS6C4YH@t-online.de>
+In-Reply-To: <CAMKF1soFUO1FRe803VTj-EQXZt7LX+=PgNwq8UgHzS=giqoyqA@mail.gmail.com>
+References: <20230928233623.767530-1-f_l_k@t-online.de>
+	<CAMKF1soFUO1FRe803VTj-EQXZt7LX+=PgNwq8UgHzS=giqoyqA@mail.gmail.com>
+X-Mailer: geary/44.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/alternative; boundary="=-CVGvKGmPbi6+CMevqk2d"
+X-TOI-EXPURGATEID: 150726::1696026836-4DA8BD65-602494DF/0/0 CLEAN NORMAL
+X-TOI-MSGID: ae2df6e7-23a6-4eaf-9a68-f2451bd3ee30
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 29 Sep 2023 22:28:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105277
+ <openembedded-devel@lists.openembedded.org>; Fri, 29 Sep 2023 22:34:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105280
 
-Signed-off-by: Vyacheslav Yurkov <uvv.mail@gmail.com>
----
- meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_git.bb | 1 -
- 1 file changed, 1 deletion(-)
+--=-CVGvKGmPbi6+CMevqk2d
+Content-Type: text/plain; charset=us-ascii; format=flowed
 
-diff --git a/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_git.bb b/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_git.bb
-index eb6e4963a..c638be9af 100644
---- a/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_git.bb
-+++ b/meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_git.bb
-@@ -15,7 +15,6 @@ SRCREV = "291c7f4a3fb548d06c572700650c2e3bccb0cd27"
- S = "${WORKDIR}/git"
- B = "${S}"
- 
--DEPENDS += "attr"
- # Required to have the fts.h header for musl
- DEPENDS:append:libc-musl = " fts"
- 
--- 
-2.35.1
+On Fri, Sep 29 2023 at 11:00:33 AM -07:00:00, Khem Raj 
+<raj.khem@gmail.com> wrote:
+> so I removed it
+> locally with clang and it seems to work for couple of arches
+> arm64/x86_64
+
+Should I send a v2 and remove the CFLAG? Since you can build for arm64, 
+maybe the problem is on my side?
+I am not really in need of this hack. clang17 also still has some minor 
+issues with onevpl from meta-intel. Nothing major, but there are still 
+enough minor issues to keep me from using clang toolchain regulary.
+
+
+--=-CVGvKGmPbi6+CMevqk2d
+Content-Type: text/html; charset=us-ascii
+
+<div id="geary-body" dir="auto">On Fri, Sep 29 2023 at 11:00:33 AM -07:00:00, Khem Raj &lt;raj.khem@gmail.com&gt; wrote:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">so I removed it
+locally with clang and it seems to work for couple of arches
+arm64/x86_64</div></blockquote><div><br></div><div><div>Should I send a v2 and remove the CFLAG? Since you can build for arm64, maybe the problem is on my side?</div><div>I am not really in need of this hack. clang17 also still has some minor issues with onevpl from meta-intel. Nothing major, but there are still enough minor issues to keep me from using clang toolchain regulary.</div></div></div>
+--=-CVGvKGmPbi6+CMevqk2d--
 
 
