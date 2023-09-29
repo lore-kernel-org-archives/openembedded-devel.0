@@ -1,109 +1,187 @@
-Return-Path: <SANJAY.CHITRODA@einfochips.com>
+Return-Path: <costamagna.gianfranco@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 511A2E810DF
-	for <webhook@archiver.kernel.org>; Fri, 29 Sep 2023 11:27:07 +0000 (UTC)
-Received: from alln-iport-7.cisco.com (alln-iport-7.cisco.com [173.37.142.94])
- by mx.groups.io with SMTP id smtpd.web10.14999.1695986819316833128
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D746FE71D21
+	for <webhook@archiver.kernel.org>; Fri, 29 Sep 2023 12:27:47 +0000 (UTC)
+Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
+ by mx.groups.io with SMTP id smtpd.web10.15910.1695990463483130938
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 29 Sep 2023 04:26:59 -0700
+ Fri, 29 Sep 2023 05:27:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: cisco.com, ip: 173.37.142.94, mailfrom: vivelmur@cisco.com)
-X-CSE-ConnectionGUID: eHw51OQISyKkd2b7m8sGBQ==
-X-CSE-MsgGUID: M54y+VktS2ySGjM3XDXN4Q==
-X-IPAS-Result: =?us-ascii?q?A0AeAACbsxZlmJxdJa1aHAEBAQEBAQcBARIBAQQEAQGBf?=
- =?us-ascii?q?QUBAQsBgy9VQEeWNJ18gg0BAQENAQE1DwQBAYwUAiY2Bw4BAgQBAQEBAwIDA?=
- =?us-ascii?q?QEBAQEBAQIBAQUBAQECAQcEFAEBAQEBAQEBHhkFDhAnhWgNhkoGMgEYAS0QI?=
- =?us-ascii?q?DEsKxmCfgGCXgMRtXeBAYMkAbAYgVKBSAGMPoMjgi8ngiiEfoEFgUYXAoIth?=
- =?us-ascii?q?XYEiUOFPgcygiaDVos4KoEICFyBaj0CDVQLC12BEYJEAgIROQ8FR1oWHQMHA?=
- =?us-ascii?q?1oqECsHBC8iBgkWLSUGUQQXFiQJExI+BIFngVEKgQY/EQ4RgkQiAj02GUuCW?=
- =?us-ascii?q?wkVQE52ECsEFBdtKG4fFR42ERIXDQMIdh0CESM8AwUDBDYKFQ0LIQVXA0cGT?=
- =?us-ascii?q?AsDAhwFAwMEgTYFDx4CEC4nAwMZTgIQFAM+AwMGAwsyAzBXSwxZAwkDBwVJQ?=
- =?us-ascii?q?AMLGA1IESw1FBsGP3MHohoDLUCCZIEOLJhRjAmCHaBAB5AQlQZNhVekCgsjm?=
- =?us-ascii?q?ASLFoJMlSdmhDACBAYFAhaBagQvgVtwgzcJSRkPjjeDYZAZJDICOQIHCwEBA?=
- =?us-ascii?q?wmLSQEB?=
-IronPort-Data: A9a23:kxHC1q41RvEaV75s+yp+lwxRtKTHchMFZxGqfqrLsTDasY5as4F+v
- mJKC22GOqmDMTGjetsnaI6+8xxTupLdn941QQJq+ypgZn8b8sCt6fZ1gavT04J+CuWZESqLO
- u1HMoGowPgcFyKa/lH1dOG58RGQ7InQLpLkEunIJyttcgFtTSYlmHpLlvUw6mJSqYDR7zil5
- 5Wq+KUzBHf/g2QvajNOuvrZwP9SlK2aVA0w7wRWic9j5Dcyp1FNZLoDKKe4KWfPQ4U8NoZWk
- M6akdlVVkuAl/scIovNfoTTKyXmcZaOVeS6sUe6boD56vR0SoPe5Y5gXBYUQR8/ZzxkBLmdw
- v0V3XC7YV9B0qEhBI3xXjEAexySM5Gq95fKAWfi6Ouq7nbXUHjgmf8xCREtEqchr7Mf7WFmr
- ZT0KRgXZRyFwumx2r/+F69nh98oK4/gO4Z3VnNIlG6CS615B8GYBfyXu7e03x9o7ixKNejfe
- ccdbCd1RB/BeBZIfFwQDfrSmc/x2CKuK2QH+Az9SawfxjWP3U9P06TWasvuVd6vHvV5rmDEn
- zeTl4j+KkhKaIPAodafyVqVh6nknS79cJ0TErGi9+BnmhuYwWl7IAUbSVah5/ywkE25c8leJ
- kkZ/DFopq83nGSsVtT7UhiyrXKIsxJZV9dOHukS7ACW1rGS5B6UAGUBRDNNZNEq8sgsSlQCz
- FaL2dDpCDlHv7icSHbb/bCRxRu7OjUOMWIYNXdUZQQA6tjn5oo0i3rnVd9lEqekyNb1GC3qx
- DyDhCU/gbsUhs4Kz7799lfC6w9AvbDTRQIzow7QRG/gs0VyZZWuYMqj7l2zAet8wJixQ3me4
- SEjouml/cMNAcuHyyndW8onJeT8jxqaCwH0jVlqFpgn0j2i/X+/YIxdiA2Swm80b67onhe0P
- SfuVRNtCIx7ZyT1MPcmC26lI4F7kvi6TIWNuuX8N4IWOvBMmBm7EDaCjHN8Mkj3m0Qq1Ko4I
- 5reLICnDG0RDuJsyz/eqwYhPV0DmHhWKYD7HMCTI/GbPVy2Py79pVAtawvmUwzBxPnYyDg5C
- v4GXydw9z1RUfflfg7c+pMJIFYBIBATXM6n9p0NK77YfVI5QgnN7sM9J5t/IuSJeIwLzo/1E
- o2VASe0NXKm3ySccFXWApydQOqxBcwXQY0H0dwEZAb0hCdLjXeH56YEfJx/Zqg86OFm1pZJo
- wotJa297gB0Ym2foVw1NMClxKQ7LUjDrVzVZUKNPmNgF6OMsiSUoLcIiCO1qnlXZsd23ONjy
- 4CdOvTzGstaH1U+VJ2INppCDTqZ5BAgpQ67ZGOQSvE7Rakm2NECx/DZ5hPvH/wxFA==
-IronPort-HdrOrdr: A9a23:847kSK5lKIuNfP8qpgPXwM/XdLJyesId70hD6qm+c3Nom6uj5q
- eTdZsgtCMc5Ax9ZJhko6HjBEDiewK5yXcK2+ks1N6ZNWGM0ldAbrsSiLcKqAePJ8SRzIJgPN
- 9bAstD4BmaNykCsS48izPIdeod/A==
-X-Talos-CUID: 9a23:bVXQ32xBQGVaxWZ4EF5rBgUZOt94K1rk7UzBAEy0U2w2Te2OZnWprfY=
-X-Talos-MUID: 9a23:ppDxoATakKGCDzirRXTJ2W1zd/lr/5/0GXsik7Bdi+W0E3BJbmI=
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-AV: E=Sophos;i="6.03,187,1694736000"; 
-   d="scan'208";a="163901786"
-Received: from rcdn-core-5.cisco.com ([173.37.93.156])
-  by alln-iport-7.cisco.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Sep 2023 11:26:58 +0000
-Received: from sjc-ads-6897.cisco.com (sjc-ads-6897.cisco.com [10.30.218.17])
-	by rcdn-core-5.cisco.com (8.15.2/8.15.2) with ESMTPS id 38TBQvjf031790
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
-	Fri, 29 Sep 2023 11:26:57 GMT
-Received: by sjc-ads-6897.cisco.com (Postfix, from userid 1822629)
-	id 6CBB5CC12B5; Fri, 29 Sep 2023 04:26:57 -0700 (PDT)
-From: sanjay.chitroda@einfochips.com
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=DnUTVYLT;
+ spf=pass (domain: gmail.com, ip: 209.85.208.46, mailfrom: costamagna.gianfranco@gmail.com)
+Received: by mail-ed1-f46.google.com with SMTP id 4fb4d7f45d1cf-5334d78c5f6so17763626a12.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 29 Sep 2023 05:27:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1695990461; x=1696595261; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=RFltwZuNvV4kqCPjT+mjegmA1Q3EAsyd8xd9OC4BOMY=;
+        b=DnUTVYLT/dZWubPMZqIlKYWShZxtUsjb1sglcNRenf4l15JrEfU3zroBzp1HT9Xzat
+         VhPBVY7Agf7nzZvq3RDhAuf+5aqDN0gpDjaZX0FoKynAoFlPYPaijGegcw7bHfoLeNiQ
+         VtkyzJkNfJth8dgy2qew/0RZ0pXpZqzuf7exxRLWxJRcBKUKjvbADukx4xE9AYLMbDsu
+         CGjVg7xhUnQDrnDWY6fDPBkdtpbTU9zmRIq7xYRVwx2wvnSOXOCWKb7qVe299kmh66E9
+         SmWYyar7rKr1i2Bwr4sYIt4bHlgZdzAnqd+ELsyAtu12Z1/JiTmZLcOsaIANr4yfSiYH
+         BTOA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1695990461; x=1696595261;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=RFltwZuNvV4kqCPjT+mjegmA1Q3EAsyd8xd9OC4BOMY=;
+        b=lP4eIip6w93QJ1uzkvfdXCsumH2xaCgC1IbN26oO6FH7a7fSHuHie/j8HywgpYjpJo
+         Qb9rUBGBlxnZShlyHIXhWJ67MontedxFpCq3vXJ9cLq8rSfzluCJKfzYa9k/tGDN9P9p
+         xYswG3elOSiX/Nf5L2j9T3u+3Z3Y+9tgQalxiGfoS5p6EjDB9t062RWkoHxxTM29gAHQ
+         28S4vKaoBrIvsPEdMyQ3H1rUTpd0nep8bc/XQIT8uPfcKIV2jasvb3BxdpxlOK0F+l+R
+         s4v49K4ns/zZbHhrNryruqRVe4ge64XntqU5vxiCJSNzeCs6qkmXfN3ml1/SNbKVvbqS
+         VS6g==
+X-Gm-Message-State: AOJu0YwYfnDbN6rjlLbVFeG2xx/XAvdtg8A+lvnXFpoYODfZh8bYi0TK
+	xZ2cagQ8WwGr9Y+Nluf/5EXjtgT0rmdiWg==
+X-Google-Smtp-Source: AGHT+IGRQO/C1xzmF8C2nb1hB+4Up9oRJzZLB2AsrABOWOopBc4PhRNuh6A9LSJ2WBTUpYrIiL0I0g==
+X-Received: by 2002:a05:6402:385:b0:52f:2a38:1f3 with SMTP id o5-20020a056402038500b0052f2a3801f3mr3323517edv.2.1695990461267;
+        Fri, 29 Sep 2023 05:27:41 -0700 (PDT)
+Received: from Unimatrix08-Jammy.Abinsula ([151.58.174.15])
+        by smtp.gmail.com with ESMTPSA id x18-20020aa7d6d2000000b0052febc781bfsm11051272edr.36.2023.09.29.05.27.39
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 29 Sep 2023 05:27:40 -0700 (PDT)
+From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
+X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
 To: openembedded-devel@lists.openembedded.org
-Cc: peter.marko@siemens.com, akuster808@gmail.com, Qi.Chen@windriver.com,
-        raj.khem@gmail.com, Sanjay Chitroda <sanjay.chitroda@einfochips.com>
-Subject: [meta-oe][PATCH 2/2] grpc: set CVE_STATUS for CVE-2023-32732
-Date: Fri, 29 Sep 2023 04:26:52 -0700
-Message-Id: <20230929112652.2898181-2-sanjay.chitroda@einfochips.com>
-X-Mailer: git-send-email 2.35.6
-In-Reply-To: <20230929112652.2898181-1-sanjay.chitroda@einfochips.com>
-References: <20230929112652.2898181-1-sanjay.chitroda@einfochips.com>
+Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
+	Gianfranco Costamagna <locutusofborg@debian.org>
+Subject: [meta-oe][PATCH 2/2] dlt-daemon: also enable experimental coredumphandler feature
+Date: Fri, 29 Sep 2023 14:27:33 +0200
+Message-Id: <20230929122733.712422-2-costamagnagianfranco@yahoo.it>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230929122733.712422-1-costamagnagianfranco@yahoo.it>
+References: <20230929122733.712422-1-costamagnagianfranco@yahoo.it>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Outbound-SMTP-Client: 10.30.218.17, sjc-ads-6897.cisco.com
-X-Outbound-Node: rcdn-core-5.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 29 Sep 2023 11:27:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105238
+ <openembedded-devel@lists.openembedded.org>; Fri, 29 Sep 2023 12:27:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105240
 
-From: Sanjay Chitroda <sanjay.chitroda@einfochips.com>
-
-CVE was introduced in v1.53.0 and not backported to v1.50.x branch.
-
-NVD references PR which introduces the vulnerability:
-Introduce by: https://github.com/grpc/grpc/pull/32309 (v1.53.x)
-
-Signed-off-by: Sanjay Chitroda <sanjay.chitroda@einfochips.com>
+Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
 ---
- meta-oe/recipes-devtools/grpc/grpc_1.50.1.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../dlt-daemon/dlt-daemon/544.patch           | 80 +++++++++++++++++++
+ .../dlt-daemon/dlt-daemon_2.18.10.bb          |  3 +
+ 2 files changed, 83 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/dlt-daemon/dlt-daemon/544.patch
 
-diff --git a/meta-oe/recipes-devtools/grpc/grpc_1.50.1.bb b/meta-oe/recipes-devtools/grpc/grpc_1.50.1.bb
-index 958992e1e..e05a0b1fb 100644
---- a/meta-oe/recipes-devtools/grpc/grpc_1.50.1.bb
-+++ b/meta-oe/recipes-devtools/grpc/grpc_1.50.1.bb
-@@ -30,6 +30,8 @@ SRC_URI = "gitsm://github.com/grpc/grpc.git;protocol=https;name=grpc;branch=${BR
- # Fixes build with older compilers 4.8 especially on ubuntu 14.04
- CXXFLAGS:append:class-native = " -Wl,--no-as-needed"
- 
-+CVE_STATUS[CVE-2023-32732] = "cpe-incorrect: CVE was introduced in v1.53.0 and not backported to v1.50.x branch"
+diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/544.patch b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/544.patch
+new file mode 100644
+index 000000000..550493351
+--- /dev/null
++++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/544.patch
+@@ -0,0 +1,80 @@
++Upstream-Status: Submitted [https://github.com/COVESA/dlt-daemon/pull/544]
 +
- inherit cmake pkgconfig
++From 5db28a4b85cf0ec3e128cfc7c9b71d12ec543695 Mon Sep 17 00:00:00 2001
++From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
++Date: Thu, 28 Sep 2023 12:54:23 +0200
++Subject: [PATCH] Add common dlt_cdh_cpuinfo.c to unblock build on non amd64
++ and i386 arcs
++
++---
++ src/core_dump_handler/dlt_cdh.h         |  2 ++
++ src/core_dump_handler/dlt_cdh_cpuinfo.c | 33 +++++++++++++++++++++++++
++ src/core_dump_handler/dlt_cdh_crashid.c |  2 +-
++ 3 files changed, 36 insertions(+), 1 deletion(-)
++ create mode 100644 src/core_dump_handler/dlt_cdh_cpuinfo.c
++
++diff --git a/src/core_dump_handler/dlt_cdh.h b/src/core_dump_handler/dlt_cdh.h
++index d572ecf3..8608c6c4 100644
++--- a/src/core_dump_handler/dlt_cdh.h
+++++ b/src/core_dump_handler/dlt_cdh.h
++@@ -55,6 +55,8 @@ typedef struct
++     uint64_t pc;
++     uint64_t ip;
++     uint64_t lr;
+++    uint64_t sp;
+++    uint64_t fp;
++ 
++ } cdh_registers_t;
++ 
++diff --git a/src/core_dump_handler/dlt_cdh_cpuinfo.c b/src/core_dump_handler/dlt_cdh_cpuinfo.c
++new file mode 100644
++index 00000000..d6fc3905
++--- /dev/null
+++++ b/src/core_dump_handler/dlt_cdh_cpuinfo.c
++@@ -0,0 +1,33 @@
+++/*
+++ * SPDX license identifier: MPL-2.0
+++ *
+++ * Copyright (C) 2011-2015, BMW AG
+++ *
+++ * This file is part of COVESA Project DLT - Diagnostic Log and Trace.
+++ *
+++ * This Source Code Form is subject to the terms of the
+++ * Mozilla Public License (MPL), v. 2.0.
+++ * If a copy of the MPL was not distributed with this file,
+++ * You can obtain one at http://mozilla.org/MPL/2.0/.
+++ *
+++ * For further information see http://www.covesa.org/.
+++ */
+++
+++/*!
+++ * \author Gianfranco Costamagna <locutusofborg@debian.org>
+++ *
+++ * \copyright Copyright © 2011-2015 BMW AG. \n
+++ * License MPL-2.0: Mozilla Public License version 2.0 http://mozilla.org/MPL/2.0/.
+++ *
+++ * \file dlt_cdh_cpuinfo.c
+++ */
+++
+++#include "dlt_cdh_cpuinfo.h"
+++
+++void get_registers(prstatus_t *prstatus, cdh_registers_t *registers)
+++{
+++/*    struct user_regs_struct *ptr_reg = (struct user_regs_struct *)prstatus->pr_reg;
+++
+++    registers->pc = ptr_reg->pc; /* [REG_PROC_COUNTER]; */
+++*/
+++}
++diff --git a/src/core_dump_handler/dlt_cdh_crashid.c b/src/core_dump_handler/dlt_cdh_crashid.c
++index bca44e0e..8dd98d70 100644
++--- a/src/core_dump_handler/dlt_cdh_crashid.c
+++++ b/src/core_dump_handler/dlt_cdh_crashid.c
++@@ -30,7 +30,7 @@
++ #include <stdio.h>
++ #include <string.h>
++ #include <errno.h>
++-#include <asm/prctl.h>
+++#include <sys/prctl.h>
++ #include <inttypes.h>
++ 
++ #include "dlt_cdh.h"
+diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.10.bb b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.10.bb
+index 3811772a7..1522d02c2 100644
+--- a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.10.bb
++++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.10.bb
+@@ -17,6 +17,7 @@ DEPENDS = "zlib gzip-native json-c"
+ SRC_URI = "git://github.com/COVESA/${BPN}.git;protocol=https;branch=master \
+            file://0002-Don-t-execute-processes-as-a-specific-user.patch \
+            file://0004-Modify-systemd-config-directory.patch \
++           file://544.patch \
+            "
+ SRCREV = "0f2d4cfffada6f8448a2cb27995b38eb4271044f"
  
- EXTRA_OECMAKE = " \
+@@ -47,6 +48,8 @@ PACKAGECONFIG[dlt-console] = "-DWITH_DLT_CONSOLE=ON,-DWITH_DLT_CONSOLE=OFF"
+ 
+ inherit autotools gettext cmake pkgconfig systemd
+ 
++# -DWITH_DLT_COREDUMPHANDLER=ON this feature is too experimental, disable for now
++#FILES:${PN} += "${libdir}/sysctl.d"
+ EXTRA_OECMAKE += "-DWITH_DLT_LOGSTORAGE_GZIP=ON -DWITH_EXTENDED_FILTERING=ON -DSYSTEMD_UNITDIR=${systemd_system_unitdir}"
+ 
+ PACKAGES += "${PN}-systemd"
 -- 
-2.35.6
+2.34.1
 
 
