@@ -1,84 +1,65 @@
-Return-Path: <derek@asterius.io>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B2A1E82CA0
-	for <webhook@archiver.kernel.org>; Fri, 29 Sep 2023 21:49:19 +0000 (UTC)
-Received: from mail-qv1-f53.google.com (mail-qv1-f53.google.com [209.85.219.53])
- by mx.groups.io with SMTP id smtpd.web11.30006.1696024157745183546
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4161BE82CA4
+	for <webhook@archiver.kernel.org>; Fri, 29 Sep 2023 21:58:49 +0000 (UTC)
+Received: from mailout07.t-online.de (mailout07.t-online.de [194.25.134.83])
+ by mx.groups.io with SMTP id smtpd.web10.30343.1696024726671947322
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 29 Sep 2023 14:49:17 -0700
+ Fri, 29 Sep 2023 14:58:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.219.53, mailfrom: straka.derek@gmail.com)
-Received: by mail-qv1-f53.google.com with SMTP id 6a1803df08f44-65b0e623189so52600866d6.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 29 Sep 2023 14:49:17 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1696024156; x=1696628956;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=PzXSoiGtHEJYpx3fmmxScWheYuspO72u/C3kHN1pE0Q=;
-        b=waLiujX411orY+fqUGUCfdtrLLzGSVHxuiXkUKDntCcGwWvfU1Ew5hMW+Sz+MxZIUU
-         7GNCM1uHuWEXJqnXMdv8hUa9e+RduWn5C9+YOpevrBjAN5JnfKWKDv3o3JduVTDXDKnZ
-         +3eUdSIvyBPkbQrzopKIF9YfBZlVzNVwhzyf255IgZTT6tz1CZnLpHDbjvS93ZA0aRnR
-         590906FF8BS0/gaES/+RAEjoL8kPinmoDKRrz2v/yCHdr5nFEIyrYRA96ONIjJL0bvly
-         2MQNxCpkG/rK6aDGdIremxBEtzvH+eYSGHfDU+SJHwcczM//lp/5R4pQpwRPrFWaD7pN
-         5nUA==
-X-Gm-Message-State: AOJu0YxVeBgpj3m+WprEeKSLrscrYOib3EbJKzSa4q8Z9knosCJr+6ad
-	iRBfKjnqHwS+WKlr/zRBz64bQP+/LO9KrZPHD+U=
-X-Google-Smtp-Source: AGHT+IFkiup0JcjDXjAsP6uSKunaE1V0ltRGvElCs+ppu8dvZJA2XnpxaR6eaLL3RuA4+XBPrpIdQQ==
-X-Received: by 2002:a0c:c207:0:b0:651:6349:fa7 with SMTP id l7-20020a0cc207000000b0065163490fa7mr6086299qvh.25.1696024156387;
-        Fri, 29 Sep 2023 14:49:16 -0700 (PDT)
-Received: from sparta.internal.asterius.io (c-73-228-213-122.hsd1.mn.comcast.net. [73.228.213.122])
-        by smtp.gmail.com with ESMTPSA id m8-20020a0cf188000000b0065898a8977dsm5444036qvl.71.2023.09.29.14.49.15
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 29 Sep 2023 14:49:15 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-python][PATCH 2/2] python3-boto3: add recipe for latest version of boto3
-Date: Fri, 29 Sep 2023 21:49:03 +0000
-Message-Id: <20230929214903.2144891-2-derek@asterius.io>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230929214903.2144891-1-derek@asterius.io>
-References: <20230929214903.2144891-1-derek@asterius.io>
+ dkim=none (message not signed); spf=none, err=SPF record not found (domain: t-online.de, ip: 194.25.134.83, mailfrom: f_l_k@t-online.de)
+Received: from fwd75.aul.t-online.de (fwd75.aul.t-online.de [10.223.144.101])
+	by mailout07.t-online.de (Postfix) with SMTP id A50634D0C5;
+	Fri, 29 Sep 2023 23:58:44 +0200 (CEST)
+Received: from [192.168.178.62] ([84.154.164.210]) by fwd75.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1qmLVS-1RhnCS0; Fri, 29 Sep 2023 23:58:43 +0200
+Date: Fri, 29 Sep 2023 23:58:43 +0200
+From: f_l_k@t-online.de
+Subject: Re: [oe] [meta-oe][PATCH] libnfs: dont install libnfs-config.cmake
+To: Khem Raj <raj.khem@gmail.com>
+Cc: Markus Volk <f_l_k@t-online.de>, openembedded-devel@lists.openembedded.org
+Message-Id: <V1PR1S.SNS6PQMSBPA81@t-online.de>
+In-Reply-To: <CAMKF1soFUO1FRe803VTj-EQXZt7LX+=PgNwq8UgHzS=giqoyqA@mail.gmail.com>
+References: <20230928233623.767530-1-f_l_k@t-online.de>
+	<CAMKF1soFUO1FRe803VTj-EQXZt7LX+=PgNwq8UgHzS=giqoyqA@mail.gmail.com>
+X-Mailer: geary/44.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/alternative; boundary="=-KG/qFWwEdRIc1NjRK2oo"
+X-TOI-EXPURGATEID: 150726::1696024723-98FF69D6-01120261/0/0 CLEAN NORMAL
+X-TOI-MSGID: 301b3ffa-1811-4379-a7a0-42bf873e27a5
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 29 Sep 2023 21:49:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105274
+ <openembedded-devel@lists.openembedded.org>; Fri, 29 Sep 2023 21:58:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105275
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- .../python/python3-boto3_1.28.57.bb              | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-boto3_1.28.57.bb
+--=-KG/qFWwEdRIc1NjRK2oo
+Content-Type: text/plain; charset=us-ascii; format=flowed
 
-diff --git a/meta-python/recipes-devtools/python/python3-boto3_1.28.57.bb b/meta-python/recipes-devtools/python/python3-boto3_1.28.57.bb
-new file mode 100644
-index 000000000..ad40fd0d0
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-boto3_1.28.57.bb
-@@ -0,0 +1,16 @@
-+HOMEPAGE = "https://github.com/boto/boto"
-+SUMMARY = "Amazon Web Services API"
-+DESCRIPTION = "\
-+  Boto3 is the Amazon Web Services (AWS) Software Development Kit (SDK) for Python, \
-+  which allows Python developers to write software that makes use of services like \
-+  Amazon S3 and Amazon EC2. \
-+  "
-+SECTION = "devel/python"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
-+
-+SRC_URI[sha256sum] = "e2d2824ba6459b330d097e94039a9c4f96ae3f4bcdc731d620589ad79dcd16d3"
-+
-+inherit pypi setuptools3
-+
-+RDEPENDS:${PN} += "python3-botocore python3-urllib3 python3-unixadmin"
--- 
-2.34.1
+On Fri, Sep 29 2023 at 11:00:33 AM -07:00:00, Khem Raj 
+<raj.khem@gmail.com> wrote:
+> so I wonder how to reproduce the error this option suppresses.
+
+I encountered both issues when building for aarch64 raspberrypi4 with 
+up to date branches.
+
+The first one happens to me, if I try to build recent kodi for other 
+platforms than host
+<https://github.com/xbmc/xbmc/blob/c94910c9671755ff5a2425c322c9ec5f4a0ed576/cmake/modules/FindNFS.cmake#L32>
+
+and the second issue was that libnfs stopped build with clang because 
+of implicit-function-declaration. As far as i remember its been here
+<https://github.com/sahlberg/libnfs/blob/4755490afcd8f79421ece560a0b0ee98cf41846a/lib/socket.c#L301>
+
+
+--=-KG/qFWwEdRIc1NjRK2oo
+Content-Type: text/html; charset=us-ascii
+
+<div id="geary-body" dir="auto">On Fri, Sep 29 2023 at 11:00:33 AM -07:00:00, Khem Raj &lt;raj.khem@gmail.com&gt; wrote:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">so I wonder how to reproduce the error this option suppresses.
+</div></blockquote><div><br></div><div>I encountered both issues when building for aarch64 raspberrypi4 with up to date branches.</div><div><br></div><div>The first one happens to me, if I try to build recent kodi for other platforms than host&nbsp;</div><div><a href="https://github.com/xbmc/xbmc/blob/c94910c9671755ff5a2425c322c9ec5f4a0ed576/cmake/modules/FindNFS.cmake#L32">https://github.com/xbmc/xbmc/blob/c94910c9671755ff5a2425c322c9ec5f4a0ed576/cmake/modules/FindNFS.cmake#L32</a></div><div><br></div><div>and the second issue was that libnfs stopped build with clang because of implicit-function-declaration. As far as i remember its been here</div><div><a href="https://github.com/sahlberg/libnfs/blob/4755490afcd8f79421ece560a0b0ee98cf41846a/lib/socket.c#L301">https://github.com/sahlberg/libnfs/blob/4755490afcd8f79421ece560a0b0ee98cf41846a/lib/socket.c#L301</a></div></div>
+--=-KG/qFWwEdRIc1NjRK2oo--
 
 
