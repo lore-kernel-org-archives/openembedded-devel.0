@@ -2,34 +2,34 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 196DDE748EF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1AC12E748F0
 	for <webhook@archiver.kernel.org>; Sat, 30 Sep 2023 22:37:27 +0000 (UTC)
 Received: from letterbox.kde.org (letterbox.kde.org [46.43.1.242])
- by mx.groups.io with SMTP id smtpd.web11.38340.1696069677655066169
+ by mx.groups.io with SMTP id smtpd.web11.38538.1696071302737402948
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 30 Sep 2023 03:27:58 -0700
+ Sat, 30 Sep 2023 03:55:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@kde.org header.s=users header.b=TkQspX7A;
+ dkim=fail reason="dkim: body hash did not verify" header.i=@kde.org header.s=users header.b=eSGKDruC;
  spf=pass (domain: kde.org, ip: 46.43.1.242, mailfrom: cordlandwehr@kde.org)
 Received: from behemoth.fritz.box (p200300e27f452f00b6559145a2cc519a.dip0.t-ipconnect.de [IPv6:2003:e2:7f45:2f00:b655:9145:a2cc:519a])
 	(Authenticated sender: cordlandwehr)
-	by letterbox.kde.org (Postfix) with ESMTPSA id 3A31A32C6E9;
-	Sat, 30 Sep 2023 11:27:56 +0100 (BST)
+	by letterbox.kde.org (Postfix) with ESMTPSA id CC7CE32C6F8;
+	Sat, 30 Sep 2023 11:55:00 +0100 (BST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kde.org; s=users;
-	t=1696069676; bh=hEyW6e+cPECeLss7aTtynDSpZGk5Uq06OMJ7V4EIIpE=;
+	t=1696071301; bh=hEyW6e+cPECeLss7aTtynDSpZGk5Uq06OMJ7V4EIIpE=;
 	h=From:To:Cc:Subject:Date:From;
-	b=TkQspX7AjzJNaUcD2etSF54awoodoykDAuNGZ6P6CVohH6oRj8VQIsBh3bhu+O+Lf
-	 bd2Hcq9egsH3mSxOebFJzEIewXdF/CYddtBHgZ6/i5NcPaeakm4mEuZ7dwJlILOxfs
-	 QOnC7BebZ/Fb8/7BCkEuCwTi+VT2QiL7yP1ouIqpqc7F+1ePfOomlWCMnnxfirOUe1
-	 xoQTpg/S9yLr2QLBN4KUNEYiLdTrD0Unk8jRAzWoADJrY5Jbvj8nTGCFnz5DErwO39
-	 5+aAyATdkJSz0r+6uoKvh2bq/3zSM3B0IU6KYQpPEaTl6UmZD4aiz67uTVKviB3Nja
-	 /8a8zM2i0i+zg==
+	b=eSGKDruCCsHeDVv4yOxiWTbUtQafVQTarlRfopytFhSEoZi2HzL7FWGencLaX01rC
+	 JGKyXddllD/y4YZYur4GpEjX754BvbOIuHi0vJuAse0GIqRrwsgtgOEG5Gm7hePxzL
+	 cmqIrf1fmrJ+DPkwKujAcb0pTj16FEBJFgEbT1k4ZrhZGLOfIH518kQ8US2SV1RsdJ
+	 j8HF5EOUwtbHsNEjQjKnqNlES5J/DbjoFQLjmNntWF7UHesyEIjaKRTwsZF6n7s5St
+	 ZTPqabPQULtUdu8S5gjaOkTra73d+6tRnJ3BMjqEwgO+LIOUxETL6YKFmxIeteU3MT
+	 90EhK5oWj6Haw==
 From: "Andreas Cord-Landwehr" <cordlandwehr@kde.org>
 To: openembedded-devel@lists.openembedded.org
 Cc: Andreas Cord-Landwehr <cordlandwehr@kde.org>
 Subject: [PATCH] wayland: consider pkgconfig sysroot for pkgdatadir
-Date: Sat, 30 Sep 2023 12:27:53 +0200
-Message-Id: <20230930102753.173721-1-cordlandwehr@kde.org>
+Date: Sat, 30 Sep 2023 12:54:54 +0200
+Message-Id: <20230930105454.197209-1-cordlandwehr@kde.org>
 X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
@@ -37,7 +37,7 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 30 Sep 2023 22:37:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105287
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105288
 
 Fix pkgconfig find calls to find wayland protocol XML files.
 See discussion in:
