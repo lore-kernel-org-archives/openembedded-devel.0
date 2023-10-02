@@ -1,100 +1,115 @@
-Return-Path: <costamagna.gianfranco@gmail.com>
+Return-Path: <mikko.rapeli@linaro.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B0EC8E784B2
-	for <webhook@archiver.kernel.org>; Mon,  2 Oct 2023 09:15:48 +0000 (UTC)
-Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
- by mx.groups.io with SMTP id smtpd.web11.77609.1696238143765446394
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B9F12E784AF
+	for <webhook@archiver.kernel.org>; Mon,  2 Oct 2023 09:23:08 +0000 (UTC)
+Received: from mail-lj1-f169.google.com (mail-lj1-f169.google.com [209.85.208.169])
+ by mx.groups.io with SMTP id smtpd.web11.77699.1696238579872804100
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Oct 2023 02:15:44 -0700
+ Mon, 02 Oct 2023 02:23:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=H2Lu8Tou;
- spf=pass (domain: gmail.com, ip: 209.85.218.41, mailfrom: costamagna.gianfranco@gmail.com)
-Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-9a9d82d73f9so2202931766b.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Oct 2023 02:15:43 -0700 (PDT)
+ dkim=pass header.i=@linaro.org header.s=google header.b=il1/xLHS;
+ spf=pass (domain: linaro.org, ip: 209.85.208.169, mailfrom: mikko.rapeli@linaro.org)
+Received: by mail-lj1-f169.google.com with SMTP id 38308e7fff4ca-2c008042211so259309811fa.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Oct 2023 02:22:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1696238142; x=1696842942; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=jhXtLRxLnNxxCoA6cbhaA3bm/p17SQtNQEDCYppnRTQ=;
-        b=H2Lu8Tou90erJaCkwhLatMNxWvP3DdsyRY2Q05G94kMGZpBKt5w//gdlISw0maYPIw
-         f62RIoMVYh/HeIjz25F4hZ5eD5aqRCMK+rEZpNIGF4u+RA0lQwWC9WWQagVXV3d32kh+
-         okYblmmBHfHA0XNyfZOMxv2PGoMZ3ysjod98JfjTfwsWywZvAuRWzq1YolGGGjVQdPdq
-         o6tPdbKtBWUyuUwMBsbXuWqcDXx8wHqvAihm+dge8ozDBvZjpWvn3fUCfIf2+J9tNCsa
-         pNA3FsQxTgh67qxvM6yiuNaPCzpR7NSsmhjQnRho0deLN81gBdSeYys/eD2lDBfB8UEH
-         0KOQ==
+        d=linaro.org; s=google; t=1696238578; x=1696843378; darn=lists.openembedded.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=ewNTm9aygPnAE+psp7kmQNAVfPm08ShP/a89U5ULqbc=;
+        b=il1/xLHSdbcaIGs/+fLz5l7AUaArrBa1gZizF3L4CxBiZxERx4HF+O6g84Lo5MSY/l
+         B352t7B5eyn8gn68xNTnKOQy4FMhV3wKVlK2bZKslc731SzCUvDXLYUMYSPYHP9E0s23
+         lhyF92PMW53J+1dH2aq1FBw/ipTwHbL81ifbqtJi5PFczwKayId/XuIQhiFXeMdEgpA+
+         zAuFB10m135AY+yeFZ+MoK0k2U+DO20RoW76vlKHMcVXvIArs9zXO9mypFCRi8xzLQsU
+         QsorlbJmAbuFWRTJMhovQLV32MvqzpIdVPnWBAzp1BLJ27fbJKZUeHwBEOYWH0s8/rlD
+         5SRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1696238142; x=1696842942;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=jhXtLRxLnNxxCoA6cbhaA3bm/p17SQtNQEDCYppnRTQ=;
-        b=kSzgwCbst+gXr2q4Di9zQutgxCoEDZfSiO55ZXjc3QSs4kbxHop6nGj5pg33ey7TDw
-         CpbtikZ978o7xXkClPFVrUOp6lCddM/fZa9ltCs+rvg8GU/lyonxkdYXyhHoamMQvuUp
-         QrZP4lLXXBNFQhC3csHQMdV3sN1hre9VP/VLLo0gwrRYV0rvFMm56W5/O+O9NdLIi52j
-         NBgm5oNY96nG8FZcsYY7d/KW5mb25iV+olzMYmVzSI7jn9RfNC3zpu/B0EgcK5HdJdh/
-         WJk/1dhfPE+7kreQt4i0XK0bYvqquR6ro87jfc3unwPj1Ahgt87xpJo7VbyJtewRfbcx
-         En6Q==
-X-Gm-Message-State: AOJu0Yzs8a7LCJ/CnMN20SJUdWb1/PA2dCRcmL9ZAIL7G+SmHFKrREoY
-	uNqHgkdm0ttva+0wmt9O/KRCMVgPAhvlDQ==
-X-Google-Smtp-Source: AGHT+IEaOzd6PoFpNhYYilsUP8SoTHeZim6Qh8aq2K/51E8uMIj/edh78sOGls/jtjKlj3WbKeZw3w==
-X-Received: by 2002:a17:906:3050:b0:9ad:e180:16e3 with SMTP id d16-20020a170906305000b009ade18016e3mr9378626ejd.37.1696238141531;
-        Mon, 02 Oct 2023 02:15:41 -0700 (PDT)
-Received: from Unimatrix08-Jammy.Abinsula ([151.58.174.15])
-        by smtp.gmail.com with ESMTPSA id d12-20020a1709064c4c00b0099bd86f9248sm16768977ejw.63.2023.10.02.02.15.40
+        d=1e100.net; s=20230601; t=1696238578; x=1696843378;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ewNTm9aygPnAE+psp7kmQNAVfPm08ShP/a89U5ULqbc=;
+        b=XRAaMzq/4Skf9g3+uWO8iBk6Vmj9rZX5Et84FwYAHZpQ3RFEnWSW87hUWL5eDJ7B2M
+         GjQoTrLqZ2lo7xEa/Z3Wlt4MrOAz1h7UwsaNyXC8x+YKKTqbF8ySlZJQZJN9ybx+h8Mc
+         7q4jtGJ9PrwNTKfKssyAkBBE8tnnQhS/VuSNKGSbaSHgmZJyDcK1hB6xcrP7sS/5sR7s
+         yOeyY+w/YwYvrV33fuDOANvEtK6fHe5bp3E9WKtsh+d7mVFvzhui7E3f3JriAZ0M8KWV
+         JpX4fAvkqOx/M/UZVZxz5VvWEvtEUfs49ZSoJi5UMGXLy72eIhJE4p8I7iN9DUGYg9BR
+         TwZQ==
+X-Gm-Message-State: AOJu0YxTrnALvCiLWk+fJ6WJ+ftS3ZHXNZ7Mq1naFasdvgqIPPkFLLGB
+	Isvxji0LsErPY2rUsJnQH/1qlQ==
+X-Google-Smtp-Source: AGHT+IF45WuN3LsmEO1FQSixoVyzkP04eu9Xd1bHnsR7Eqosku6tHdJ3BQIeCaC612rpj35ZR1gQvA==
+X-Received: by 2002:a2e:b6cd:0:b0:2bf:7905:12c3 with SMTP id m13-20020a2eb6cd000000b002bf790512c3mr9024676ljo.40.1696238577841;
+        Mon, 02 Oct 2023 02:22:57 -0700 (PDT)
+Received: from nuoska (dc7g6tyjby-d304c4945t-3.rev.dnainternet.fi. [2001:14ba:16cb:a800:e107:c77f:6058:ee33])
+        by smtp.gmail.com with ESMTPSA id b30-20020a05651c0b1e00b002c288388153sm1402549ljr.136.2023.10.02.02.22.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 02 Oct 2023 02:15:40 -0700 (PDT)
-From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-To: openembedded-devel@lists.openembedded.org
-Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Subject: [meta-oe][PATCH 2/2] dlt-daemon:
-Date: Mon,  2 Oct 2023 11:15:34 +0200
-Message-Id: <20231002091534.963730-2-costamagnagianfranco@yahoo.it>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231002091534.963730-1-costamagnagianfranco@yahoo.it>
-References: <20231002091534.963730-1-costamagnagianfranco@yahoo.it>
+        Mon, 02 Oct 2023 02:22:57 -0700 (PDT)
+Date: Mon, 2 Oct 2023 12:22:55 +0300
+From: Mikko Rapeli <mikko.rapeli@linaro.org>
+To: Jeffrey Pautler <jeffrey.pautler@ni.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] [PATCH] bolt: disable CVE checking for this recipe
+Message-ID: <ZRqL7yT0ME00CakU@nuoska>
+References: <20230929170731.749414-1-jeffrey.pautler@ni.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230929170731.749414-1-jeffrey.pautler@ni.com>
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 02 Oct 2023 09:15:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105302
+ <openembedded-devel@lists.openembedded.org>; Mon, 02 Oct 2023 09:23:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105303
 
-make sure systemd is enabled before trying to install the service files, otherwise we might face issues if we remove systemd support
-only for dlt-daemon e.g. with
-PACKAGECONFIG:remove="systemd systemd-watchdog systemd-journal"
----
- .../recipes-extended/dlt-daemon/dlt-daemon_2.18.10.bb  | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+Hi,
 
-diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.10.bb b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.10.bb
-index 1522d02c2..410fffa24 100644
---- a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.10.bb
-+++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.10.bb
-@@ -55,13 +55,13 @@ EXTRA_OECMAKE += "-DWITH_DLT_LOGSTORAGE_GZIP=ON -DWITH_EXTENDED_FILTERING=ON -DS
- PACKAGES += "${PN}-systemd"
- SYSTEMD_PACKAGES = "${PN} ${PN}-systemd"
- SYSTEMD_SERVICE:${PN} = " ${@bb.utils.contains('PACKAGECONFIG', 'systemd', 'dlt.service', '', d)} \
--                          ${@bb.utils.contains('PACKAGECONFIG', 'dlt-system', 'dlt-system.service', '', d)} \
--                          ${@bb.utils.contains('PACKAGECONFIG', 'dlt-dbus', 'dlt-dbus.service', '', d)}"
-+                          ${@bb.utils.contains('PACKAGECONFIG', 'systemd dlt-system', 'dlt-system.service', '', d)} \
-+                          ${@bb.utils.contains('PACKAGECONFIG', 'systemd dlt-dbus', 'dlt-dbus.service', '', d)}"
- SYSTEMD_AUTO_ENABLE:${PN} = "enable"
- SYSTEMD_SERVICE:${PN}-systemd = " \
--    ${@bb.utils.contains('PACKAGECONFIG', 'dlt-adaptor-udp', 'dlt-adaptor-udp.service', '', d)} \
--    ${@bb.utils.contains('PACKAGECONFIG', 'dlt-examples', 'dlt-example-user.service', '', d)} \
--    ${@bb.utils.contains('PACKAGECONFIG', 'dlt-examples dlt-console', 'dlt-receive.service', '', d)} \
-+    ${@bb.utils.contains('PACKAGECONFIG', 'systemd dlt-adaptor-udp', 'dlt-adaptor-udp.service', '', d)} \
-+    ${@bb.utils.contains('PACKAGECONFIG', 'systemd dlt-examples', 'dlt-example-user.service', '', d)} \
-+    ${@bb.utils.contains('PACKAGECONFIG', 'systemd dlt-examples dlt-console', 'dlt-receive.service', '', d)} \
- "
- SYSTEMD_AUTO_ENABLE:${PN}-systemd = "disable"
- 
--- 
-2.34.1
+On Fri, Sep 29, 2023 at 12:07:31PM -0500, Jeffrey Pautler wrote:
+> This bolt product does not currently have an entry in the CVE database.
+> However, the default cve-check logic that maps recipes to products in
+> the CVE database is incorrectly matching this package to a different
+> bolt product made by bolt-cms. As a result, CVE checking incorrectly
+> reports CVEs for that product for this package.
+> 
+> Signed-off-by: Jeffrey Pautler <jeffrey.pautler@ni.com>
+> ---
+>  meta-oe/recipes-bsp/bolt/bolt_0.9.5.bb | 2 ++
+>  1 file changed, 2 insertions(+)
+> 
+> diff --git a/meta-oe/recipes-bsp/bolt/bolt_0.9.5.bb b/meta-oe/recipes-bsp/bolt/bolt_0.9.5.bb
+> index b6ad6337c..583cc6378 100644
+> --- a/meta-oe/recipes-bsp/bolt/bolt_0.9.5.bb
+> +++ b/meta-oe/recipes-bsp/bolt/bolt_0.9.5.bb
+> @@ -12,6 +12,8 @@ SRCREV = "5a8a5866a847561566499847d46a97c612b4e6dd"
+>  
+>  S = "${WORKDIR}/git"
+>  
+> +CVE_CHECK_SKIP_RECIPE = "${PN}"
+
+I think this is wrong and dangerous for anyone who in the future tries to use
+cve checker for this recipe. Instead, set the CVE product with vendor correctly
+so that other products/vendors don't mix the results? Hopefully any new CVEs
+in the future will set the same vendor and product.
+
+Cheers,
+
+-Mikko
+
+>  inherit cmake pkgconfig meson features_check
+>  
+>  FILES:${PN} += "${datadir}/dbus-1/* \
+> -- 
+> 2.34.1
+> 
+
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#105252): https://lists.openembedded.org/g/openembedded-devel/message/105252
+> Mute This Topic: https://lists.openembedded.org/mt/101662068/7159507
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [mikko.rapeli@linaro.org]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
 
 
