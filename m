@@ -1,223 +1,423 @@
-Return-Path: <uvv.mail@gmail.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 866DCE748F7
-	for <webhook@archiver.kernel.org>; Mon,  2 Oct 2023 16:25:55 +0000 (UTC)
-Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
- by mx.groups.io with SMTP id smtpd.web10.86720.1696263949835911781
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 02D45E748FC
+	for <webhook@archiver.kernel.org>; Mon,  2 Oct 2023 17:08:36 +0000 (UTC)
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
+ by mx.groups.io with SMTP id smtpd.web11.87897.1696266506128744341
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Oct 2023 09:25:50 -0700
+ Mon, 02 Oct 2023 10:08:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=d2QOik2n;
- spf=pass (domain: gmail.com, ip: 209.85.218.45, mailfrom: uvv.mail@gmail.com)
-Received: by mail-ej1-f45.google.com with SMTP id a640c23a62f3a-9a9cd066db5so2438668366b.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Oct 2023 09:25:49 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=JGbNnxQp;
+ spf=pass (domain: gmail.com, ip: 209.85.221.45, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-3247cefa13aso22427f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Oct 2023 10:08:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1696263948; x=1696868748; darn=lists.openembedded.org;
-        h=in-reply-to:from:references:cc:to:content-language:subject
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ntyR/v60/xNXG+Mj1lfABhywe4Kyj4ScYU0HMlnaRy8=;
-        b=d2QOik2nf1OSlVb8MIDJEbwk8MDAvz5O6vAO5ncagpnVe1vhtnRmNjLz2UoxNHV6vq
-         Wnc3VdfluH6ihkxvm8IyTD/Gx3xaM9TV03Kbn0Tu8nhSj/ynpB/OUOnZXnlQ4n6G3o4O
-         ZMcPAJ2Ukitm2i6QAkBYdTzr6U3W+Kqsx9Q7wRUlOOJWi4c1hdo4aRKKyHF4eDCN29XV
-         DZExcyE2ZQxzSJ7IW10X8bCeNxfjvf7kHIoqG5qhtdzqgvlwccYeFI8MZAYSBkw75Jqa
-         qwIY1hnAzBTQMVmrWqMBI+yIeoGnNgcGN+2F3m7DcaqPuUpph1Q2xfeDldPjUkicK+bE
-         Ct4g==
+        d=gmail.com; s=20230601; t=1696266504; x=1696871304; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=y/5wmDc6R6drjcYxZBwl7r1ien+i0ipOWy5i18r/muQ=;
+        b=JGbNnxQp4c28n/KWa7KcrXejvig3pcW28Wd1+Yp7nWdIkReijARr/YKbyo60fZzJ4E
+         Fp7K4WUe5DuR3JGI/fu6nWk98uXps5JpL4pWXdWw3+xevw1OEN9cIi0FUR291QlUZ7jt
+         IgH7Wla3hcfdY0okHOPitHjzMK2agwAHexMtPnKt7E6dgF4DESdzunjzyy84teKaAzAh
+         zfaZG9swyJRjVMAwt6RuudgMdZQkR53REy0OM2QV5ADnx1hAbx858eSwq5Wn/ymJvTRS
+         LlLYGPrvV/iRc4xtRQCNfQQwPy4IP4hQljWznSYcJpDTIH8NSN1xo6LY9bSNmstxHkOD
+         CN4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1696263948; x=1696868748;
-        h=in-reply-to:from:references:cc:to:content-language:subject
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=ntyR/v60/xNXG+Mj1lfABhywe4Kyj4ScYU0HMlnaRy8=;
-        b=jN7VHFMtzExgBhdA+g5uIn9L9wwzVfDMv67nay0iLZv0I4ZLKQE7TAdSnGTiEIy80z
-         o7HmBSX7VBNpYcsZt+mTt85TIpbronwqL8TiBRf+oayncoZJpqbtuoPEw9hbGQuXpbC3
-         aacT8eiYH/dQ2ykPLsgdRHPEX0SEq5zPdeBIobzSJwKQF6EGQ9rgzEL3OxMTtbb41KQC
-         UzTNpWMDJxQdkQtwc/MyaI7Nt0cGmjk1M4MBWG27y85egj8TR7pu4GG7kBPaPwR2v/3Z
-         Kmp0yiB8X4BexQJHwHPLBWaGPg9uULeWErO9tAKzVURTWdUHOHtHMreQ4BGB0Cj18hx+
-         47BQ==
-X-Gm-Message-State: AOJu0Yyp5qUHu2cGGOarvgIUS/WM7DHgCf+HkSeCFdIrl2ZP54OmjIva
-	JP6Jadd9jSaIWWcazZgIuB8=
-X-Google-Smtp-Source: AGHT+IF0E+lrIYUSLhGjH4pUUIKFjl0xT+3qS0Xckj2xwyhflx8hQJuVUcKh2SMRZplR16zb9ouJHg==
-X-Received: by 2002:a17:906:10d1:b0:9b2:955a:e375 with SMTP id v17-20020a17090610d100b009b2955ae375mr9658821ejv.23.1696263947775;
-        Mon, 02 Oct 2023 09:25:47 -0700 (PDT)
-Received: from [192.168.67.29] (ip-109-43-241-91.web.vodafone.de. [109.43.241.91])
-        by smtp.gmail.com with ESMTPSA id jt24-20020a170906ca1800b009929d998abcsm17183688ejb.209.2023.10.02.09.25.41
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 02 Oct 2023 09:25:45 -0700 (PDT)
-Content-Type: multipart/alternative;
- boundary="------------GZXWnDJGcdnnEW0W1vUgEqqL"
-Message-ID: <266d7cf2-a300-4770-9c91-a39f0bc84946@gmail.com>
-Date: Mon, 2 Oct 2023 18:25:35 +0200
+        d=1e100.net; s=20230601; t=1696266504; x=1696871304;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=y/5wmDc6R6drjcYxZBwl7r1ien+i0ipOWy5i18r/muQ=;
+        b=GL4+Fm4qPgNvHSniNDMOc8+zUGVfOJuzKxu6zI7iW+66auXjBsDX00fV2RfogE6xAL
+         M+Qn6b97NsgHXje1WjkhBlT+dcd3p4VGGEaZhjiPxaukbAzITARHWA05vzluNZUIQujZ
+         IzliqXGDIHgl7NppJjnSfMI2HlEcg1SEigTDGh+Pk5HbhPaiacsz6Ufufon45cNjg/gv
+         nb2G4HBIwpy+QD3nR7RoiMcj41O6FbTPI/5navqacTaHQelbIvDDk481bltL28Aig+ZI
+         Y+qY/GpwtJrew8C/6SicLou9Fhgdkff7Dyv+FcJiJGK9QMV0Nqctc1fHZDAdRbG8rtQV
+         grgg==
+X-Gm-Message-State: AOJu0YyIwdt3wnDUYZc3+EPrNIcL2aFmzgpzU9zia4W6n6V+oOS9tlo6
+	ANV/qxYmyFBxJYDs0hCqOLHAhv8a6avatnsAOzg=
+X-Google-Smtp-Source: AGHT+IEBtQLYWiFOCL2Ef9/GCm67f1kW0icNSxs2BtE5cw30ozrTlex1L9aBEGqBIyzQ62n2/IbXB0QF8Tp8Pop/kGU=
+X-Received: by 2002:a5d:45c4:0:b0:321:504a:bc9a with SMTP id
+ b4-20020a5d45c4000000b00321504abc9amr9848621wrs.71.1696266504087; Mon, 02 Oct
+ 2023 10:08:24 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [PATCH] Revert "protobuf: stage protoc binary to sysroot"
-Content-Language: en-US
-To: Martin Jansa <martin.jansa@gmail.com>,
- =?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>
-Cc: Khem Raj <raj.khem@gmail.com>, Ross Burton <ross.burton@arm.com>,
- Samuli Piippo <samuli.piippo@gmail.com>,
- openembedded-devel <openembedded-devel@lists.openembedded.org>
-References: <20230930173003.3210-1-peron.clem@gmail.com>
- <4b4d6fb9-3034-46df-876c-81c534e4c801@gmail.com>
- <CAMKF1sp+ZiEfFhOOOvHbKBoRMA0fWeRpXXh9-s1uuY2qcO+PcA@mail.gmail.com>
- <CA+chaQc6z6MasEHbKUr1s+VKEO-n163T5WqAXHeXHXeXkC0wVA@mail.gmail.com>
- <CAJiuCcd=uZ+eUt8Brj-y48Gewy3=gzmDTOLdKrkhvZebZsSD2w@mail.gmail.com>
- <CA+chaQez2kfNHw4f3NK0ft4kagtfqsQTkoO=2DRQA63j2Kdn3A@mail.gmail.com>
-From: Vyacheslav Yurkov <uvv.mail@gmail.com>
-In-Reply-To: <CA+chaQez2kfNHw4f3NK0ft4kagtfqsQTkoO=2DRQA63j2Kdn3A@mail.gmail.com>
+References: <20230928091304.4000026-1-archana.polampalli@windriver.com>
+In-Reply-To: <20230928091304.4000026-1-archana.polampalli@windriver.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Mon, 2 Oct 2023 19:08:12 +0200
+Message-ID: <CA+chaQfcB59O8xDJiQW_rLWPz_zymU3YMxH8pqOsprLB0hNCfA@mail.gmail.com>
+Subject: Re: [oe][meta-oe][PATCH 1/1] nodejs: upgrade 18.17.1 -> 20.5.1
+To: archana.polampalli@windriver.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="0000000000006bc3360606bed244"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 02 Oct 2023 16:25:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105307
+ <openembedded-devel@lists.openembedded.org>; Mon, 02 Oct 2023 17:08:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105308
 
-This is a multi-part message in MIME format.
---------------GZXWnDJGcdnnEW0W1vUgEqqL
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+--0000000000006bc3360606bed244
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 01.10.2023 20:22, Martin Jansa wrote:
->
-> Issue with .cmake file from protobuf, right?
+On Thu, Sep 28, 2023 at 11:13=E2=80=AFAM Polampalli, Archana via
+lists.openembedded.org <archana.polampalli=3D
+windriver.com@lists.openembedded.org> wrote:
 
-No, it's the issue with the cmake of the project that uses protobuf. But 
-that depends on a user case, perhaps I didn't get it properly.
+> Update to latest release of latest LTS 20 release
+>
+>     * node v20 introduces several new features and fixes many bugs and
+> CVEs as shown in [1]
+>
+>     * Refresh 0001-liftoff-Correct-function-signatures.patch against 20.5=
+.1
+>
+>     * License-Update:
+>        - Change zlib version 1.2.13, October 13th, 2022 to version
+> 1.2.13.1, October xxth, 2022 [2]
+>        - Change Copyright 2023 from Ada authors to Yagiz Nizipli and
+> Daniel Lemire [4]
+>
+>     * Remove big-endian.patch as it is merged in v20.x [5] [6]
+>
+>     * Remove below list of patches since mips32 is deleted from v8 as par=
+t
+> of update V8 to 10.7.193.13 [7] [8]
+>        - mips-less-memory.patch
+>        - 0001-mips-Use-32bit-cast-for-operand-on-mips32.patch
+>
+>     * Update Using-native-binaries.patch for node_js2c, it resolved below
+> do_compile error [9]
+>        Error:
+>        /bin/sh: line 1:
+> build/tmp/work/core2-64-poky-linux/nodejs/20.5.1/node-v20.5.1/out/Release=
+/node_js2c:
+> No such file or directory
+>
+>     * Remove obsolete dtrace & etw configure options (we had:
+> --without-<feature>) from the recipe [10]
 
->     If we can properly fix it at the recipe level, then why should we
->     keep this workaround/hack?
->
->     Also if you really need it, you can have a .bbappend for
->     protoc/grpc in the downstream layer. But I would be in favor to
->     avoid this by default no?
->
->
-> I haven't seen any proper fix for this exact issue. Yes you can patch 
-> .cmake generation not to include bindir when building for target 
-> (while it needs it for native build), but then that change will break 
-> possible use of protobuf on target, so the SYSROOT_DIRS still seems 
-> like lesser evil here.
->
-> Here are some examples from meta-ros:
-> https://github.com/ros/meta-ros/commit/875ceed4b1c693c2eb0f2b7ea85385be576a62cc
-> https://github.com/ros/meta-ros/commit/67c03755543655ad0634e078bc30d8ab9969a16c
-> https://github.com/ros/meta-ros/commit/5e61eb0520d2841c0da7e14eecc833b3c4104533
-> https://github.com/ros/meta-ros/commit/a53bb7cc8b45a72b704e75311d68b37a6db50cdf
->
-> I don't care about protobuf, but the explanation from Samuli looks 
-> like the same issue as what I remember from above and I don't see how 
-> SYSROOT_DIRS causes mixing executables or any issues for installing 
-> them for target.
 
-I didn't look at the original issue of Samuli, but your issue is also 
-fixed by a workaround. IMHO, the proper fix would be not to make CMake 
-"happy" by providing a binary it can't use, but a proper export of 
-cross-compiled tools for 
-https://github.com/geographiclib/geographiclib/blob/main/CMakeLists.txt 
-library. I'd say the workflow should be similar to protobuf/grpc 
-recipes, i.e. a native recipe builds the libraries only, and the target 
-recipe builds tools and libraries.
+FYI: (in case someone else are seeing similar issues now)
+
+With this upgrade I'm seeing some files created during the build with node
+not to be intercepted by pseudo and recorded in its database.
+
+This results in sstate_report_unihash failure, because appinfo.json is now
+owned by 1026:1026 (my build UID/GID) instead of 0:0 as before:
+
+DEBUG: Executing python function sstate_report_unihash
+WARNING: KeyError in
+./package/usr/palm/applications/com.webos.app.videoplayer/appinfo.json
+ERROR: Error executing a python function in exec_func_python()
+autogenerated:
+
+The stack trace of python calls that resulted in this exception/failure was=
+:
+File: 'exec_func_python() autogenerated', lineno: 2, function: <module>
+     0001:
+ *** 0002:sstate_report_unihash(d)
+     0003:
+File:
+'/OE/build/luneos-nanbield/openembedded-core/meta/classes-global/sstate.bbc=
+lass',
+lineno: 880, function: sstate_report_unihash
+     0876:    report_unihash =3D getattr(bb.parse.siggen, 'report_unihash',
+None)
+     0877:
+     0878:    if report_unihash:
+     0879:        ss =3D sstate_state_fromvars(d)
+ *** 0880:        report_unihash(os.getcwd(), ss['task'], d)
+     0881:}
+     0882:
+     0883:#
+     0884:# Shell function to decompress and prepare a package for
+installation
+File: '/OE/build/luneos-nanbield/bitbake/lib/bb/siggen.py', lineno: 659,
+function: report_unihash
+     0655:
+     0656:            if "." in self.method:
+     0657:                (module, method) =3D self.method.rsplit('.', 1)
+     0658:                locs['method'] =3D
+getattr(importlib.import_module(module), method)
+ *** 0659:                outhash =3D bb.utils.better_eval('method(path,
+sigfile, task, d)', locs)
+     0660:            else:
+     0661:                outhash =3D bb.utils.better_eval(self.method +
+'(path, sigfile, task, d)', locs)
+     0662:
+     0663:            try:
+File: '/OE/build/luneos-nanbield/bitbake/lib/bb/utils.py', lineno: 434,
+function: better_eval
+     0430:    if extraglobals:
+     0431:        ctx =3D copy.copy(ctx)
+     0432:        for g in extraglobals:
+     0433:            ctx[g] =3D extraglobals[g]
+ *** 0434:    return eval(source, ctx, locals)
+     0435:
+     0436:@contextmanager
+     0437:def fileslocked(files, *args, **kwargs):
+     0438:    """Context manager for locking and unlocking file locks."""
+File: '<string>', lineno: 1, function: <module>
+  File "<string>", line 1, in <module>
+
+File:
+'/OE/build/luneos-nanbield/openembedded-core/meta/lib/oe/sstatesig.py',
+lineno: 649, function: OEOuthashBasic
+     0645:                process(root)
+     0646:            for f in files:
+     0647:                if f =3D=3D 'fixmepath':
+     0648:                    continue
+ *** 0649:                process(os.path.join(root, f))
+     0650:
+     0651:            for dir in dirs:
+     0652:                if os.path.islink(os.path.join(root, dir)):
+     0653:                    process(os.path.join(root, dir))
+File:
+'/OE/build/luneos-nanbield/openembedded-core/meta/lib/oe/sstatesig.py',
+lineno: 588, function: process
+     0584:                    except KeyError as e:
+     0585:                        bb.warn("KeyError in %s" % path)
+     0586:                        msg =3D ("KeyError: %s\nPath %s is owned =
+by
+uid %d, gid %d, which doesn't match "
+     0587:                            "any user/group on target. This may
+be due to host contamination." % (e, path, s.st_uid, s.st_gid))
+ *** 0588:                        raise
+Exception(msg).with_traceback(e.__traceback__)
+     0589:
+     0590:                if include_timestamps:
+     0591:                    update_hash(" %10d" % s.st_mtime)
+     0592:
+File:
+'/OE/build/luneos-nanbield/openembedded-core/meta/lib/oe/sstatesig.py',
+lineno: 582, function: process
+     0578:                    else:
+     0579:                        add_perm(stat.S_IXOTH, 'x')
+     0580:
+     0581:                    try:
+ *** 0582:                        update_hash(" %10s" %
+pwd.getpwuid(s.st_uid).pw_name)
+     0583:                        update_hash(" %10s" %
+grp.getgrgid(s.st_gid).gr_name)
+     0584:                    except KeyError as e:
+     0585:                        bb.warn("KeyError in %s" % path)
+     0586:                        msg =3D ("KeyError: %s\nPath %s is owned =
+by
+uid %d, gid %d, which doesn't match "
+Exception: Exception: KeyError: 'getpwuid(): uid not found: 1026'
+Path ./package/usr/palm/applications/com.webos.app.videoplayer/appinfo.json
+is owned by uid 1026, gid 1026, which doesn't match any user/group on
+target. This may be due to host contamination.
+
+martin@jama
+/OE/build/luneos-nanbield/tmp-glibc/work/corei7-64-webos-linux/com.webos.ap=
+p.videoplayer
+$ sqlite3 0.0.1-12+git-nodejs-20/pseudo/files.db "select * from files where
+path like '%yer/appinfo.json'"
+1107|/OE/build/luneos-nanbield/tmp-glibc/work/corei7-64-webos-linux/com.web=
+os.app.videoplayer/0.0.1-12+git/sstate-build-package/package/usr/palm/appli=
+cations/com.webos.app.videoplayer/appinfo.json|66305|41202418|1026|1026|331=
+88|0|0
+1192|/OE/build/luneos-nanbield/tmp-glibc/work/corei7-64-webos-linux/com.web=
+os.app.videoplayer/0.0.1-12+git/sstate-build-package/packages-split/com.web=
+os.app.videoplayer/usr/palm/applications/com.webos.app.videoplayer/appinfo.=
+json|66305|41
+202418|1026|1026|33188|0|0
+
+martin@jama
+/OE/build/luneos-nanbield/tmp-glibc/work/corei7-64-webos-linux/com.webos.ap=
+p.videoplayer
+$ sqlite3 0.0.1-12+git-nodejs-18/pseudo/files.db "select * from files where
+path like '%yer/appinfo.json'"
+56|/OE/build/luneos-nanbield/tmp-glibc/work/corei7-64-webos-linux/com.webos=
+.app.videoplayer/0.0.1-12+git/image/usr/palm/applications/com.webos.app.vid=
+eoplayer/appinfo.json|66305|42878067|0|0|33188|0|0
+374|/OE/build/luneos-nanbield/tmp-glibc/work/corei7-64-webos-linux/com.webo=
+s.app.videoplayer/0.0.1-12+git/package/usr/palm/applications/com.webos.app.=
+videoplayer/appinfo.json|66305|42878641|0|0|33188|0|0
+459|/OE/build/luneos-nanbield/tmp-glibc/work/corei7-64-webos-linux/com.webo=
+s.app.videoplayer/0.0.1-12+git/packages-split/com.webos.app.videoplayer/usr=
+/palm/applications/com.webos.app.videoplayer/appinfo.json|66305|42878641|0|=
+0|33188|0|0
+
+I'll provide more details when I debug this further.
 
 Regards,
-Slava
---------------GZXWnDJGcdnnEW0W1vUgEqqL
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <div class="moz-cite-prefix">On 01.10.2023 20:22, Martin Jansa
-      wrote:<br>
-    </div>
-    <blockquote type="cite"
-cite="mid:CA+chaQez2kfNHw4f3NK0ft4kagtfqsQTkoO=2DRQA63j2Kdn3A@mail.gmail.com">
-      <br>
-      <div dir="ltr">
-        <div class="gmail_quote">
-          <div>Issue with .cmake file from protobuf, right?</div>
-        </div>
-      </div>
-    </blockquote>
-    <br>
-    No, it's the issue with the cmake of the project that uses protobuf.
-    But that depends on a user case, perhaps I didn't get it properly.<br>
-    <br>
-    <blockquote type="cite"
-cite="mid:CA+chaQez2kfNHw4f3NK0ft4kagtfqsQTkoO=2DRQA63j2Kdn3A@mail.gmail.com">
-      <div dir="ltr">
-        <div class="gmail_quote">
-          <div> </div>
-          <blockquote class="gmail_quote"
-style="margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-            <div dir="ltr">
-              <div><span class="gmail_default"
-                  style="font-family:monospace">If w</span><span
-                  class="gmail_default">e can properly fix it at the
-                  recipe level, then why should we keep this
-                  workaround/hack?</span></div>
-              <div><span class="gmail_default"><br>
-                </span></div>
-              <div><span class="gmail_default">Also if you really need
-                  it, you can have a .bbappend for protoc/grpc in the
-                  downstream layer. But I would be in favor to avoid
-                  this by default no?</span></div>
-            </div>
-          </blockquote>
-          <div><br>
-          </div>
-          <div>I haven't seen any proper fix for this exact issue. Yes
-            you can patch .cmake generation not to include bindir when
-            building for target (while it needs it for native build),
-            but then that change will break possible use of protobuf on
-            target, so the SYSROOT_DIRS still seems like lesser evil
-            here.</div>
-          <div><br>
-          </div>
-          <div>Here are some examples from meta-ros:</div>
-          <div><a
-href="https://github.com/ros/meta-ros/commit/875ceed4b1c693c2eb0f2b7ea85385be576a62cc"
-              moz-do-not-send="true" class="moz-txt-link-freetext">https://github.com/ros/meta-ros/commit/875ceed4b1c693c2eb0f2b7ea85385be576a62cc</a><br>
-          </div>
-          <div><a
-href="https://github.com/ros/meta-ros/commit/67c03755543655ad0634e078bc30d8ab9969a16c"
-              moz-do-not-send="true" class="moz-txt-link-freetext">https://github.com/ros/meta-ros/commit/67c03755543655ad0634e078bc30d8ab9969a16c</a><br>
-          </div>
-          <div><a
-href="https://github.com/ros/meta-ros/commit/5e61eb0520d2841c0da7e14eecc833b3c4104533"
-              moz-do-not-send="true" class="moz-txt-link-freetext">https://github.com/ros/meta-ros/commit/5e61eb0520d2841c0da7e14eecc833b3c4104533</a><br>
-          </div>
-          <div><a
-href="https://github.com/ros/meta-ros/commit/a53bb7cc8b45a72b704e75311d68b37a6db50cdf"
-              moz-do-not-send="true" class="moz-txt-link-freetext">https://github.com/ros/meta-ros/commit/a53bb7cc8b45a72b704e75311d68b37a6db50cdf</a><br>
-          </div>
-          <div><br>
-          </div>
-          <div>I don't care about protobuf, but the explanation from
-            Samuli looks like the same issue as what I remember from
-            above and I don't see how SYSROOT_DIRS causes mixing
-            executables or any issues for installing them for target.</div>
-        </div>
-      </div>
-    </blockquote>
-    <br>
-    I didn't look at the original issue of Samuli, but your issue is
-    also fixed by a workaround. IMHO, the proper fix would be not to
-    make CMake "happy" by providing a binary it can't use, but a proper
-    export of cross-compiled tools for
-    <a class="moz-txt-link-freetext" href="https://github.com/geographiclib/geographiclib/blob/main/CMakeLists.txt">https://github.com/geographiclib/geographiclib/blob/main/CMakeLists.txt</a>
-    library. I'd say the workflow should be similar to protobuf/grpc
-    recipes, i.e. a native recipe builds the libraries only, and the
-    target recipe builds tools and libraries.<br>
-    <br>
-    Regards,<br>
-    Slava<br>
-  </body>
-</html>
+--0000000000006bc3360606bed244
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
---------------GZXWnDJGcdnnEW0W1vUgEqqL--
+<div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr">On Thu, Sep 28, 2023 at =
+11:13=E2=80=AFAM Polampalli, Archana via <a href=3D"http://lists.openembedd=
+ed.org">lists.openembedded.org</a> &lt;archana.polampalli=3D<a href=3D"mail=
+to:windriver.com@lists.openembedded.org">windriver.com@lists.openembedded.o=
+rg</a>&gt; wrote:<br></div><div class=3D"gmail_quote"><blockquote class=3D"=
+gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(20=
+4,204,204);padding-left:1ex">Update to latest release of latest LTS 20 rele=
+ase<br>
+<br>
+=C2=A0 =C2=A0 * node v20 introduces several new features and fixes many bug=
+s and CVEs as shown in [1]<br>
+<br>
+=C2=A0 =C2=A0 * Refresh 0001-liftoff-Correct-function-signatures.patch agai=
+nst 20.5.1<br>
+<br>
+=C2=A0 =C2=A0 * License-Update:<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0- Change zlib version 1.2.13, October 13th, 2022=
+ to version 1.2.13.1, October xxth, 2022 [2]<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0- Change Copyright 2023 from Ada authors to Yagi=
+z Nizipli and Daniel Lemire [4]<br>
+<br>
+=C2=A0 =C2=A0 * Remove big-endian.patch as it is merged in v20.x [5] [6]<br=
+>
+<br>
+=C2=A0 =C2=A0 * Remove below list of patches since mips32 is deleted from v=
+8 as part of update V8 to 10.7.193.13 [7] [8]<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0- mips-less-memory.patch<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0- 0001-mips-Use-32bit-cast-for-operand-on-mips32=
+.patch<br>
+<br>
+=C2=A0 =C2=A0 * Update Using-native-binaries.patch for node_js2c, it resolv=
+ed below do_compile error [9]<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0Error:<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0/bin/sh: line 1: build/tmp/work/core2-64-poky-li=
+nux/nodejs/20.5.1/node-v20.5.1/out/Release/node_js2c: No such file or direc=
+tory<br>
+<br>
+=C2=A0 =C2=A0 * Remove obsolete dtrace &amp; etw configure options (we had:=
+ --without-&lt;feature&gt;) from the recipe [10]</blockquote><div><br></div=
+><div>FYI: (in case someone else are seeing similar issues now)</div><div><=
+br></div><div>With this upgrade I&#39;m seeing some files created during th=
+e build with node not to be intercepted by pseudo and recorded in its datab=
+ase.</div><div><br></div><div>This results in=C2=A0sstate_report_unihash fa=
+ilure, because appinfo.json is now owned by 1026:1026 (my build UID/GID) in=
+stead of 0:0 as before:</div><div><br></div><div>DEBUG: Executing python fu=
+nction sstate_report_unihash</div>WARNING: KeyError in ./package/usr/palm/a=
+pplications/com.webos.app.videoplayer/appinfo.json<br>ERROR: Error executin=
+g a python function in exec_func_python() autogenerated:<br><br>The stack t=
+race of python calls that resulted in this exception/failure was:<br>File: =
+&#39;exec_func_python() autogenerated&#39;, lineno: 2, function: &lt;module=
+&gt;<br>=C2=A0 =C2=A0 =C2=A00001:<br>=C2=A0*** 0002:sstate_report_unihash(d=
+)<br>=C2=A0 =C2=A0 =C2=A00003:<br>File: &#39;/OE/build/luneos-nanbield/open=
+embedded-core/meta/classes-global/sstate.bbclass&#39;, lineno: 880, functio=
+n: sstate_report_unihash<br>=C2=A0 =C2=A0 =C2=A00876: =C2=A0 =C2=A0report_u=
+nihash =3D getattr(bb.parse.siggen, &#39;report_unihash&#39;, None)<br>=C2=
+=A0 =C2=A0 =C2=A00877:<br>=C2=A0 =C2=A0 =C2=A00878: =C2=A0 =C2=A0if report_=
+unihash: =C2=A0<br>=C2=A0 =C2=A0 =C2=A00879: =C2=A0 =C2=A0 =C2=A0 =C2=A0ss =
+=3D sstate_state_fromvars(d)<br>=C2=A0*** 0880: =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+report_unihash(os.getcwd(), ss[&#39;task&#39;], d)<br>=C2=A0 =C2=A0 =C2=A00=
+881:}<br>=C2=A0 =C2=A0 =C2=A00882:<br>=C2=A0 =C2=A0 =C2=A00883:#<br>=C2=A0 =
+=C2=A0 =C2=A00884:# Shell function to decompress and prepare a package for =
+installation<br>File: &#39;/OE/build/luneos-nanbield/bitbake/lib/bb/siggen.=
+py&#39;, lineno: 659, function: report_unihash<br>=C2=A0 =C2=A0 =C2=A00655:=
+<br>=C2=A0 =C2=A0 =C2=A00656: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if &=
+quot;.&quot; in self.method:<br>=C2=A0 =C2=A0 =C2=A00657: =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(module, method) =3D self.method.rspl=
+it(&#39;.&#39;, 1)<br>=C2=A0 =C2=A0 =C2=A00658: =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0locs[&#39;method&#39;] =3D getattr(importlib.im=
+port_module(module), method)<br>=C2=A0*** 0659: =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0outhash =3D bb.utils.better_eval(&#39;method(pa=
+th, sigfile, task, d)&#39;, locs)<br>=C2=A0 =C2=A0 =C2=A00660: =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0else:<br>=C2=A0 =C2=A0 =C2=A00661: =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0outhash =3D bb.utils.better=
+_eval(self.method + &#39;(path, sigfile, task, d)&#39;, locs)<br>=C2=A0 =C2=
+=A0 =C2=A00662:<br>=C2=A0 =C2=A0 =C2=A00663: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0try:<br>File: &#39;/OE/build/luneos-nanbield/bitbake/lib/bb/ut=
+ils.py&#39;, lineno: 434, function: better_eval<br>=C2=A0 =C2=A0 =C2=A00430=
+: =C2=A0 =C2=A0if extraglobals:<br>=C2=A0 =C2=A0 =C2=A00431: =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0ctx =3D copy.copy(ctx)<br>=C2=A0 =C2=A0 =C2=A00432: =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0for g in extraglobals:<br>=C2=A0 =C2=A0 =C2=A00433: =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0ctx[g] =3D extraglobals[g]<br>=C2=A0*** =
+0434: =C2=A0 =C2=A0return eval(source, ctx, locals)<br>=C2=A0 =C2=A0 =C2=A0=
+0435:<br>=C2=A0 =C2=A0 =C2=A00436:@contextmanager<br>=C2=A0 =C2=A0 =C2=A004=
+37:def fileslocked(files, *args, **kwargs):<br>=C2=A0 =C2=A0 =C2=A00438: =
+=C2=A0 =C2=A0&quot;&quot;&quot;Context manager for locking and unlocking fi=
+le locks.&quot;&quot;&quot;<br>File: &#39;&lt;string&gt;&#39;, lineno: 1, f=
+unction: &lt;module&gt;<br>=C2=A0 File &quot;&lt;string&gt;&quot;, line 1, =
+in &lt;module&gt;<br><br>File: &#39;/OE/build/luneos-nanbield/openembedded-=
+core/meta/lib/oe/sstatesig.py&#39;, lineno: 649, function: OEOuthashBasic<b=
+r>=C2=A0 =C2=A0 =C2=A00645: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0process(root)<br>=C2=A0 =C2=A0 =C2=A00646: =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0for f in files:<br>=C2=A0 =C2=A0 =C2=A00647: =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if f =3D=3D &#39;fixmepath&#39=
+;:<br>=C2=A0 =C2=A0 =C2=A00648: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0continue<br>=C2=A0*** 0649: =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0process(os.path.join(root, f))<br>=C2=A0=
+ =C2=A0 =C2=A00650:<br>=C2=A0 =C2=A0 =C2=A00651: =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0for dir in dirs:<br>=C2=A0 =C2=A0 =C2=A00652: =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if os.path.islink(os.path.join=
+(root, dir)):<br>=C2=A0 =C2=A0 =C2=A00653: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0process(os.path.join(root, dir))<br>F=
+ile: &#39;/OE/build/luneos-nanbield/openembedded-core/meta/lib/oe/sstatesig=
+.py&#39;, lineno: 588, function: process<br>=C2=A0 =C2=A0 =C2=A00584: =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0except Ke=
+yError as e:<br>=C2=A0 =C2=A0 =C2=A00585: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0bb.warn(&quot;KeyError =
+in %s&quot; % path)<br>=C2=A0 =C2=A0 =C2=A00586: =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0msg =3D (&quot;K=
+eyError: %s\nPath %s is owned by uid %d, gid %d, which doesn&#39;t match &q=
+uot;<br>=C2=A0 =C2=A0 =C2=A00587: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;any user/grou=
+p on target. This may be due to host contamination.&quot; % (e, path, s.st_=
+uid, s.st_gid))<br>=C2=A0*** 0588: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0raise Exception(msg).with_trac=
+eback(e.__traceback__)<br></div><div class=3D"gmail_quote">=C2=A0 =C2=A0 =
+=C2=A00589:<br>=C2=A0 =C2=A0 =C2=A00590: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0if include_timestamps:<br>=C2=A0 =C2=A0 =C2=A00591: =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0update=
+_hash(&quot; %10d&quot; % s.st_mtime)<br>=C2=A0 =C2=A0 =C2=A00592:<br>File:=
+ &#39;/OE/build/luneos-nanbield/openembedded-core/meta/lib/oe/sstatesig.py&=
+#39;, lineno: 582, function: process<br>=C2=A0 =C2=A0 =C2=A00578: =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0else:<br>=C2=
+=A0 =C2=A0 =C2=A00579: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0add_perm(stat.S_IXOTH, &#39;x&#39;)<br>=C2=
+=A0 =C2=A0 =C2=A00580:<br>=C2=A0 =C2=A0 =C2=A00581: =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0try:<br>=C2=A0*** 0582: =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0update_hash(&quot; %10s&quot; % pwd.getpwuid(s.st_uid).pw_name)<br>=
+=C2=A0 =C2=A0 =C2=A00583: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0update_hash(&quot; %10s&quot; % grp.getgr=
+gid(s.st_gid).gr_name)<br>=C2=A0 =C2=A0 =C2=A00584: =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0except KeyError as e:<br>=
+=C2=A0 =C2=A0 =C2=A00585: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0bb.warn(&quot;KeyError in %s&quot; % path=
+)<br>=C2=A0 =C2=A0 =C2=A00586: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0msg =3D (&quot;KeyError: %s\nPath =
+%s is owned by uid %d, gid %d, which doesn&#39;t match &quot;<br>Exception:=
+ Exception: KeyError: &#39;getpwuid(): uid not found: 1026&#39;<br>Path ./p=
+ackage/usr/palm/applications/com.webos.app.videoplayer/appinfo.json is owne=
+d by uid 1026, gid 1026, which doesn&#39;t match any user/group on target. =
+This may be due to host contamination.<br></div><div class=3D"gmail_quote">=
+<br></div><div class=3D"gmail_quote">martin@jama /OE/build/luneos-nanbield/=
+tmp-glibc/work/corei7-64-webos-linux/com.webos.app.videoplayer $ sqlite3 0.=
+0.1-12+git-nodejs-20/pseudo/files.db &quot;select * from files where path l=
+ike &#39;%yer/appinfo.json&#39;&quot;<br>1107|/OE/build/luneos-nanbield/tmp=
+-glibc/work/corei7-64-webos-linux/com.webos.app.videoplayer/0.0.1-12+git/ss=
+tate-build-package/package/usr/palm/applications/com.webos.app.videoplayer/=
+appinfo.json|66305|41202418|1026|1026|33188|0|0<br>1192|/OE/build/luneos-na=
+nbield/tmp-glibc/work/corei7-64-webos-linux/com.webos.app.videoplayer/0.0.1=
+-12+git/sstate-build-package/packages-split/com.webos.app.videoplayer/usr/p=
+alm/applications/com.webos.app.videoplayer/appinfo.json|66305|41<br>202418|=
+1026|1026|33188|0|0<br><br></div><div class=3D"gmail_quote">martin@jama /OE=
+/build/luneos-nanbield/tmp-glibc/work/corei7-64-webos-linux/com.webos.app.v=
+ideoplayer $ sqlite3 0.0.1-12+git-nodejs-18/pseudo/files.db &quot;select * =
+from files where path like &#39;%yer/appinfo.json&#39;&quot;<br>56|/OE/buil=
+d/luneos-nanbield/tmp-glibc/work/corei7-64-webos-linux/com.webos.app.videop=
+layer/0.0.1-12+git/image/usr/palm/applications/com.webos.app.videoplayer/ap=
+pinfo.json|66305|42878067|0|0|33188|0|0<br>374|/OE/build/luneos-nanbield/tm=
+p-glibc/work/corei7-64-webos-linux/com.webos.app.videoplayer/0.0.1-12+git/p=
+ackage/usr/palm/applications/com.webos.app.videoplayer/appinfo.json|66305|4=
+2878641|0|0|33188|0|0<br>459|/OE/build/luneos-nanbield/tmp-glibc/work/corei=
+7-64-webos-linux/com.webos.app.videoplayer/0.0.1-12+git/packages-split/com.=
+webos.app.videoplayer/usr/palm/applications/com.webos.app.videoplayer/appin=
+fo.json|66305|42878641|0|0|33188|0|0<br></div><div class=3D"gmail_quote"><b=
+r></div><div class=3D"gmail_quote">I&#39;ll provide more details when I deb=
+ug this further.</div><div class=3D"gmail_quote"><br></div><div class=3D"gm=
+ail_quote">Regards,</div></div></div>
+
+--0000000000006bc3360606bed244--
 
