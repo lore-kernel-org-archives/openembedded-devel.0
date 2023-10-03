@@ -1,115 +1,87 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <philip-dylan.gleonec@savoirfairelinux.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3BCC6E7AD4D
-	for <webhook@archiver.kernel.org>; Tue,  3 Oct 2023 13:43:20 +0000 (UTC)
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
- by mx.groups.io with SMTP id smtpd.web11.108241.1696340592535987673
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 51A40E7AD75
+	for <webhook@archiver.kernel.org>; Tue,  3 Oct 2023 15:57:33 +0000 (UTC)
+Received: from mail.savoirfairelinux.com (mail.savoirfairelinux.com [208.88.110.44])
+ by mx.groups.io with SMTP id smtpd.web11.111958.1696348650951045151
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 03 Oct 2023 06:43:12 -0700
+ Tue, 03 Oct 2023 08:57:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=FD4liR93;
- spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: akuster808@gmail.com)
-Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-691c05bc5aaso708566b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 03 Oct 2023 06:43:12 -0700 (PDT)
+ dkim=pass header.i=@savoirfairelinux.com header.s=DFC430D2-D198-11EC-948E-34200CB392D2 header.b=ZSJebc8/;
+ spf=pass (domain: savoirfairelinux.com, ip: 208.88.110.44, mailfrom: philip-dylan.gleonec@savoirfairelinux.com)
+Received: from localhost (localhost [127.0.0.1])
+	by mail.savoirfairelinux.com (Postfix) with ESMTP id 1687B9C1108
+	for <openembedded-devel@lists.openembedded.org>; Tue,  3 Oct 2023 11:57:29 -0400 (EDT)
+Received: from mail.savoirfairelinux.com ([127.0.0.1])
+ by localhost (mail.savoirfairelinux.com [127.0.0.1]) (amavis, port 10032)
+ with ESMTP id BB4HLBHrfIgd for <openembedded-devel@lists.openembedded.org>;
+ Tue,  3 Oct 2023 11:57:28 -0400 (EDT)
+Received: from localhost (localhost [127.0.0.1])
+	by mail.savoirfairelinux.com (Postfix) with ESMTP id 960E89C2BCB
+	for <openembedded-devel@lists.openembedded.org>; Tue,  3 Oct 2023 11:57:28 -0400 (EDT)
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.savoirfairelinux.com 960E89C2BCB
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1696340592; x=1696945392; darn=lists.openembedded.org;
-        h=content-transfer-encoding:subject:from:to:content-language
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=/RFdB0SI6ybPp0sT1qK/f/rfTQjYgzWDyXpcRG4ASg4=;
-        b=FD4liR93FOI9naa+F6h3wmne4BGhmVEz4kBGeP19RDjhPzG3t4dxuvY5NbvAAF+mlL
-         u34bVqdiB3t+UugZDSUFHTkiOpqmSB4Ok1C6V6uunvyKlVEwoy1YCnzfEFMF4dww9lki
-         iS7sOJLyspvjDrn9MqNN9pAjSrbp+U81A7EzPO8h+gN2SwuX6XOoWXd0rHGxUtYEx/Or
-         b1k86v1zqyQ3/VBKsyH8fqSSPXp9jUkghN7NRA/zkAi2xO6ko/FidIDAyB+s3sphMVUq
-         u6mQyp2jzZkxmwnMTgLt4VGiwnp8JhQrOcZ+ZrXrITDg/vBtIZgPcLWJwk5DCWO80gDV
-         9sUQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1696340592; x=1696945392;
-        h=content-transfer-encoding:subject:from:to:content-language
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=/RFdB0SI6ybPp0sT1qK/f/rfTQjYgzWDyXpcRG4ASg4=;
-        b=QhJSrzMkV1tNc2PElZDtUA/NRmrcE2Yw3tpasPjqiSTMmy4aee3bu7D5VjUlF/ZTJI
-         7DOMVn2UcXlyOIHhbu7gEWduHcomJuWAkL5sQlRasn7ZUroSUcp5v9EnHxQZuqovqrH3
-         6mROgtnlTQeu871rrXbNga39GigSoK3IfO++gJcjy5seAOWpmrAeo8fJ5qSsRszAcM87
-         Am/IBj3j+G/T8HQRCmszxCVu4D49HD+FIMgzyaqrQT/3a2LjI66jqQVTi3WQ+QEOJSEN
-         HQwboyanpts0Y9Vl615Qav6Tjtnpp0oSDESosIsZ+EyJT5EIUayhbEIhUB0xg3j3aRVs
-         A+Lw==
-X-Gm-Message-State: AOJu0Yy7H0L92sqG6yh7/VOnQVdW5tOqoO0b47tyJHvNkR00uEQ8djx1
-	tAY6N8QnEk1lFDUXhf662r4=
-X-Google-Smtp-Source: AGHT+IGm35egJrRtSGDOlynwh9oG+MDniyUGNjcxqhFkz8h/mEaxXI9QCUiP8Qatm/vxh7gQtQK9Xg==
-X-Received: by 2002:a05:6a20:9719:b0:162:6588:7174 with SMTP id hr25-20020a056a20971900b0016265887174mr12861297pzc.28.1696340591719;
-        Tue, 03 Oct 2023 06:43:11 -0700 (PDT)
-Received: from [10.0.237.240] ([50.202.47.34])
-        by smtp.gmail.com with ESMTPSA id e12-20020a170902744c00b001b8a2edab6asm1534995plt.244.2023.10.03.06.43.10
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 03 Oct 2023 06:43:11 -0700 (PDT)
-Message-ID: <368e66df-f33f-ea8b-b380-d0920e438ee9@gmail.com>
-Date: Tue, 3 Oct 2023 06:43:10 -0700
+	d=savoirfairelinux.com; s=DFC430D2-D198-11EC-948E-34200CB392D2;
+	t=1696348648; bh=4hjlDsdRj1S5s8IdUzuL51slg+oGVJw+iDYPVVJ7zIc=;
+	h=From:To:Date:Message-Id:MIME-Version;
+	b=ZSJebc8/8yZpTjRR/jW1kRRV41OM7wpgjftRpmwuDmUJJtRnnZxoWqH8ugntimHS6
+	 rGe5o8ui/idiIy2sTk0pLkW9k/PGCe3K5jgEwa03/v4dNqvtVz6EhpOnHV0lPqyeIH
+	 8VuE+PqQUSk0vNX3yk1KCiqupMDKs8KxHl3NxPWcm7639Y4yzPJCUIPUYUQXjR76Vy
+	 L1DhNgdX7WFBovh1hacAUmT6YV6CUmFvFjTs+L1zQ/6mbxAiK4Bu+BZ++uSuGu0pvZ
+	 UfCXgsKVqOzKQv+hzfF1JsIH602FIIUC5jL3PYJO6tL7zbuKqLnbxvgJMGI07QtDZQ
+	 8hnQS21Ma9T9Q==
+X-Virus-Scanned: amavis at mail.savoirfairelinux.com
+Received: from mail.savoirfairelinux.com ([127.0.0.1])
+ by localhost (mail.savoirfairelinux.com [127.0.0.1]) (amavis, port 10026)
+ with ESMTP id XcVnBb2KIJmG for <openembedded-devel@lists.openembedded.org>;
+ Tue,  3 Oct 2023 11:57:28 -0400 (EDT)
+Received: from t14pdgleonec.rennes.sfl (lmontsouris-657-1-69-118.w80-15.abo.wanadoo.fr [80.15.101.118])
+	by mail.savoirfairelinux.com (Postfix) with ESMTPSA id 409909C1108
+	for <openembedded-devel@lists.openembedded.org>; Tue,  3 Oct 2023 11:57:28 -0400 (EDT)
+From: Philip-Dylan Gleonec <philip-dylan.gleonec@savoirfairelinux.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] cukinia: fix license field
+Date: Tue,  3 Oct 2023 17:57:20 +0200
+Message-Id: <20231003155720.172377-1-philip-dylan.gleonec@savoirfairelinux.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-From: akuster808 <akuster808@gmail.com>
-Subject: dunfell merge request: Oct 3rd
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 03 Oct 2023 13:43:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105323
+ <openembedded-devel@lists.openembedded.org>; Tue, 03 Oct 2023 15:57:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105324
 
-The following changes since commit e42d1e758f9f08b98c0e8c6f0532316951bb276f:
+The recipe currently indicates that the cukinia package is licensed
+under both GPLv3 AND Apache 2.0 licensesi, but the upstream specifies
+GPLv3 OR Apache 2.0 license, at the choice of the user.
 
-   postgresql: refresh patches (2023-09-09 12:52:03 -0400)
+Signed-off-by: Philip-Dylan Gleonec <philip-dylan.gleonec@savoirfairelinu=
+x.com>
+---
+ meta-oe/recipes-test/cukinia/cukinia_0.6.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-are available in the Git repository at:
-
-   https://git.openembedded.org/meta-openembedded dunfell-next
-
-for you to fetch changes up to 0f10a0d394ddffeeb1db0ea94046d86792d704fe:
-
-   php: Fix CVE-2023-3824 (2023-09-30 08:55:03 -0400)
-
-----------------------------------------------------------------
-Bhargav Das (1):
-       iperf3: Fix CVE-2023-38403
-
-Hitendra Prajapati (1):
-       wireshark: Fix CVE-2023-2906
-
-Kirill Esipov (1):
-       catch2: switch from master to v2.x branch
-
-Priyal Doshi (1):
-       open-vm-tools: Security fix for CVE-2023-20900
-
-Siddharth Doshi (1):
-       php: Fix CVE-2023-3824
-
-  meta-networking/recipes-support/wireshark/files/CVE-2023-2906.patch | 
-38 +++++++++++++++++++
-  meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb |  1 +
-  meta-oe/recipes-benchmark/iperf3/iperf3/0001-Fix-memory-allocation-hazard-1542-.-1543.patch | 46 +++++++++++++++++++++++
-  meta-oe/recipes-benchmark/iperf3/iperf3_3.7.bb |  1 +
-  meta-oe/recipes-devtools/php/php/CVE-2023-3824.patch | 91 
-++++++++++++++++++++++++++++++++++++++++++++++
-  meta-oe/recipes-devtools/php/php_7.4.33.bb |  1 +
-  .../open-vm-tools/0001-Allow-only-X509-certs-to-verify-the-SAML-token-signa.patch | 35 ++++++++++++++++++
-  meta-oe/recipes-support/open-vm-tools/open-vm-tools_11.0.1.bb |  1 +
-  meta-oe/recipes-test/catch2/catch2_2.9.2.bb |  2 +-
-  9 files changed, 215 insertions(+), 1 deletion(-)
-  create mode 100644 
-meta-networking/recipes-support/wireshark/files/CVE-2023-2906.patch
-  create mode 100644 
-meta-oe/recipes-benchmark/iperf3/iperf3/0001-Fix-memory-allocation-hazard-1542-.-1543.patch
-  create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2023-3824.patch
-  create mode 100644 
-meta-oe/recipes-support/open-vm-tools/open-vm-tools/0001-Allow-only-X509-certs-to-verify-the-SAML-token-signa.patch 
+diff --git a/meta-oe/recipes-test/cukinia/cukinia_0.6.2.bb b/meta-oe/reci=
+pes-test/cukinia/cukinia_0.6.2.bb
+index ed7a3f06a..1bcfb0a9b 100644
+--- a/meta-oe/recipes-test/cukinia/cukinia_0.6.2.bb
++++ b/meta-oe/recipes-test/cukinia/cukinia_0.6.2.bb
+@@ -2,7 +2,7 @@ SUMMARY =3D "Linux firmware validation framework"
+ DESCRIPTION =3D "Cukinia is designed to help Linux-based embedded firmwa=
+re \
+ developers run simple system-level validation tests on their firmware."
+ HOMEPAGE =3D "https://github.com/savoirfairelinux/cukinia"
+-LICENSE =3D "GPL-3.0-only & Apache-2.0"
++LICENSE =3D "GPL-3.0-only | Apache-2.0"
+=20
+ LIC_FILES_CHKSUM =3D "file://LICENSE.GPLv3;md5=3Dd32239bcb673463ab874e80=
+d47fae504 \
+                     file://LICENSE;md5=3De3fc50a88d0a364313df4b21ef20c29=
+e"
+--=20
+2.30.2
 
 
