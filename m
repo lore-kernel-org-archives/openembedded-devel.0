@@ -1,109 +1,281 @@
-Return-Path: <mikko.rapeli@linaro.org>
+Return-Path: <pawel.langowski@3mdeb.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 366E4E75423
-	for <webhook@archiver.kernel.org>; Tue,  3 Oct 2023 04:55:04 +0000 (UTC)
-Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com [209.85.167.44])
- by mx.groups.io with SMTP id smtpd.web11.101724.1696308894199674587
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6EF14E75434
+	for <webhook@archiver.kernel.org>; Tue,  3 Oct 2023 07:49:46 +0000 (UTC)
+Received: from 8.mo583.mail-out.ovh.net (8.mo583.mail-out.ovh.net [178.32.116.78])
+ by mx.groups.io with SMTP id smtpd.web11.103188.1696319382627082252
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Oct 2023 21:54:54 -0700
+ Tue, 03 Oct 2023 00:49:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=Gq/NAgQp;
- spf=pass (domain: linaro.org, ip: 209.85.167.44, mailfrom: mikko.rapeli@linaro.org)
-Received: by mail-lf1-f44.google.com with SMTP id 2adb3069b0e04-50435a9f800so523330e87.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Oct 2023 21:54:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1696308892; x=1696913692; darn=lists.openembedded.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=Typ37ZMqoQGdNKR28PShDIIt0odv/YWsZeEl/vi9hZQ=;
-        b=Gq/NAgQpqua22gI51/tWOvY+XC1YNZBaAQ6IovoEcBF61qABcu0FZXkcgeAnAlYwaE
-         nAOftHc+6G0vVYbW0CFoOIzYiYOaPJsfHfkGAMhZKWOOc2taBYEqbFhCvRCMa6vSrf15
-         /k9eJkTXt6OiyzFBoUGioCYWEbW6C5jhO7CxeSZqHCfHTaQ5mpnnjclqeaQNqjJ0Neo7
-         040icC9OrQ9jV2VX3SzCHk4Lpk9n+ZzNDImZjbPSXVMwULRYTdASIIKbZh1qIJTjPPLs
-         s5LNKkFgUjfdke1fJ+S5GD5Zkj/ZG0kJXSHeIIVNssfp0qMPK66V4fKS2BOO4xob38wb
-         Lvdw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1696308892; x=1696913692;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Typ37ZMqoQGdNKR28PShDIIt0odv/YWsZeEl/vi9hZQ=;
-        b=ciJvhQr7J1gSIjMhwSExaGPFqfGGiEEfFGdmSXQPGTC5BguuErMCopHYO6vAT0dYiP
-         BKyyWl6/QJiOE8xNQ4K1YJC6IQqy5U66P7oNnyBunqsSPxGGGofHhUQo8aurgU4+XfBK
-         Z486hNkup6MyfSu5nKoryUskEhz+uTMUf7pbkmHOLAZvJfq/90jrW3XTIGBa2hC4gOCT
-         P4/dsmN90K2VQnaCZSDJaJY/438XDd7MEQSKtZL8TOrEjR/Ro7zicazxVdAfT6huN1m7
-         PAoIY9BnpkuuSiU3AsdxmfCZV6TmGXD0/dRVQHT3G7EDCYzJRJgRQ9RXBVA1bmeQOFnA
-         FljQ==
-X-Gm-Message-State: AOJu0Yzbgmi+SmiNhfRuSK3gLEgKO+NtL5ip1AschpSvdjxHXZPkV5Py
-	HDSlqfljtEaWL8UKt356nRJgtg==
-X-Google-Smtp-Source: AGHT+IFBrfjEJlK+0BVtPNcRPEWwJ6My0vvCTwLT81XQKFeRPtJdV0nbb3eMPe1TtR6RuQ3onxQA+g==
-X-Received: by 2002:a19:8c50:0:b0:502:f2a8:d380 with SMTP id i16-20020a198c50000000b00502f2a8d380mr9415237lfj.19.1696308892052;
-        Mon, 02 Oct 2023 21:54:52 -0700 (PDT)
-Received: from nuoska (dc7g6tyjby-d304c4945t-3.rev.dnainternet.fi. [2001:14ba:16cb:a800:e107:c77f:6058:ee33])
-        by smtp.gmail.com with ESMTPSA id j1-20020a19f501000000b005056e9b734esm49606lfb.151.2023.10.02.21.54.50
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 02 Oct 2023 21:54:51 -0700 (PDT)
-Date: Tue, 3 Oct 2023 07:54:49 +0300
-From: Mikko Rapeli <mikko.rapeli@linaro.org>
-To: Alex Stewart <alex.stewart@ni.com>
-Cc: Jeffrey Pautler <jeffrey.pautler@ni.com>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [PATCH] bolt: disable CVE checking for this recipe
-Message-ID: <ZRuemRmjlQ9p2Kzk@nuoska>
-References: <20230929170731.749414-1-jeffrey.pautler@ni.com>
- <ZRqL7yT0ME00CakU@nuoska>
- <23d7986a-4bd8-4445-ac32-3f2d8fa98663@ni.com>
+ dkim=none (message not signed); spf=softfail (domain: 3mdeb.com, ip: 178.32.116.78, mailfrom: pawel.langowski@3mdeb.com)
+Received: from director5.ghost.mail-out.ovh.net (unknown [10.109.138.52])
+	by mo583.mail-out.ovh.net (Postfix) with ESMTP id 7A1CE211A2
+	for <openembedded-devel@lists.openembedded.org>; Tue,  3 Oct 2023 07:49:40 +0000 (UTC)
+Received: from ghost-submission-6684bf9d7b-r9cbt (unknown [10.110.103.73])
+	by director5.ghost.mail-out.ovh.net (Postfix) with ESMTPS id C75101FEA4;
+	Tue,  3 Oct 2023 07:49:39 +0000 (UTC)
+Received: from 3mdeb.com ([37.59.142.101])
+	by ghost-submission-6684bf9d7b-r9cbt with ESMTPSA
+	id xUxaJZPHG2WjLAAA6QRSDA
+	(envelope-from <pawel.langowski@3mdeb.com>); Tue, 03 Oct 2023 07:49:39 +0000
+Authentication-Results: garm.ovh; auth=pass (GARM-101G00415c86915-d588-4ad5-91f8-ddee1475da2f,
+                    444C33B3F4575406F9FC87223DE8D01215E8EE40) smtp.auth=pawel.langowski@3mdeb.com
+X-OVh-ClientIp: 213.192.77.249
+From: Pawel Langowski <pawel.langowski@3mdeb.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: piotr.krol@3mdeb.com,
+	tomasz.zyjewski@3mdeb.com
+Subject: [meta-networking][PATCHv5] recipes-connectivity: Add tayga recipe
+Date: Tue,  3 Oct 2023 09:49:29 +0200
+Message-ID: <20231003074929.505981-1-pawel.langowski@3mdeb.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <23d7986a-4bd8-4445-ac32-3f2d8fa98663@ni.com>
+X-Ovh-Tracer-Id: 14381119511522947737
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: 0
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvkedrfeehgddulecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecunecujfgurhephffvvefufffkofgggfestdekredtredttdenucfhrhhomheprfgrfigvlhcunfgrnhhgohifshhkihcuoehprgifvghlrdhlrghnghhofihskhhiseefmhguvggsrdgtohhmqeenucggtffrrghtthgvrhhnpefgffdtkefhkeeggfejhfetteelvdduvdefffeggfdvkefhheejhfeggedtgeefudenucffohhmrghinheplhhithgvtghhrdhorhhgnecukfhppeduvdejrddtrddtrddupddvudefrdduledvrdejjedrvdegledpfeejrdehledrudegvddruddtudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeduvdejrddtrddtrddupdhmrghilhhfrhhomhepoehprgifvghlrdhlrghnghhofihskhhiseefmhguvggsrdgtohhmqedpnhgspghrtghpthhtohepuddprhgtphhtthhopehophgvnhgvmhgsvgguuggvugdquggvvhgvlheslhhishhtshdrohhpvghnvghmsggvugguvggurdhorhhgpdfovfetjfhoshhtpehmohehkeefpdhmohguvgepshhmthhpohhuth
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 03 Oct 2023 04:55:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105317
+ <openembedded-devel@lists.openembedded.org>; Tue, 03 Oct 2023 07:49:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105318
 
-Hi,
+Recipe for TAYGA - an out-of-kernel stateless NAT64 implementation for Li=
+nux
 
-On Mon, Oct 02, 2023 at 11:53:42AM -0400, Alex Stewart wrote:
-> On 10/2/23 05:22, Mikko Rapeli via lists.openembedded.org wrote:
-> > Hi,
-> > 
-> > On Fri, Sep 29, 2023 at 12:07:31PM -0500, Jeffrey Pautler wrote:
-> > > This bolt product does not currently have an entry in the CVE database.
-> > > However, the default cve-check logic that maps recipes to products in
-> > > the CVE database is incorrectly matching this package to a different
-> > > bolt product made by bolt-cms. As a result, CVE checking incorrectly
-> > > reports CVEs for that product for this package.
-> > > 
-> > > Signed-off-by: Jeffrey Pautler <jeffrey.pautler@ni.com>
-> > > ---
-> > >   meta-oe/recipes-bsp/bolt/bolt_0.9.5.bb | 2 ++
-> > >   1 file changed, 2 insertions(+)
-> > > 
-> > > diff --git a/meta-oe/recipes-bsp/bolt/bolt_0.9.5.bb b/meta-oe/recipes-bsp/bolt/bolt_0.9.5.bb
-> > > index b6ad6337c..583cc6378 100644
-> > > --- a/meta-oe/recipes-bsp/bolt/bolt_0.9.5.bb
-> > > +++ b/meta-oe/recipes-bsp/bolt/bolt_0.9.5.bb
-> > > @@ -12,6 +12,8 @@ SRCREV = "5a8a5866a847561566499847d46a97c612b4e6dd"
-> > >   S = "${WORKDIR}/git"
-> > > +CVE_CHECK_SKIP_RECIPE = "${PN}"
-> > I think this is wrong and dangerous for anyone who in the future tries to use
-> > cve checker for this recipe. Instead, set the CVE product with vendor correctly
-> > so that other products/vendors don't mix the results? Hopefully any new CVEs
-> > in the future will set the same vendor and product.
-> 
-> Are you suggesting that he set the string to something like...
-> `cpe:*:a:freedesktop:bolt:*`
-> 
-> on the hopes that, if the Free Desktop folks open a CPE in the future, that
-> it will match?
+Signed-off-by: Pawel Langowski <pawel.langowski@3mdeb.com>
+---
+ .../tayga/files/0001-include-sys-uio.patch    |  18 +++
+ .../tayga/files/tayga.conf                    | 103 ++++++++++++++++++
+ .../tayga/files/tayga.service                 |  12 ++
+ .../recipes-connectivity/tayga/tayga_0.9.2.bb |  21 ++++
+ 4 files changed, 154 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/tayga/files/0001=
+-include-sys-uio.patch
+ create mode 100644 meta-networking/recipes-connectivity/tayga/files/tayg=
+a.conf
+ create mode 100644 meta-networking/recipes-connectivity/tayga/files/tayg=
+a.service
+ create mode 100644 meta-networking/recipes-connectivity/tayga/tayga_0.9.=
+2.bb
 
-Yes, if other Freedesktop projects have used these before.
+diff --git a/meta-networking/recipes-connectivity/tayga/files/0001-includ=
+e-sys-uio.patch b/meta-networking/recipes-connectivity/tayga/files/0001-i=
+nclude-sys-uio.patch
+new file mode 100644
+index 000000000000..0c6f1609af5e
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/tayga/files/0001-include-sys-u=
+io.patch
+@@ -0,0 +1,18 @@
++
++This patch addresses the following clang failure: tayga-0.9.2/nat64.c:11=
+9:6:
++error: call to undeclared function 'writev'; ISO C99 and later do not su=
+pport
++implicit function declarations [-Wimplicit-function-declaration]
++
++Upstream-Status: Pending
++Signed-off-by: Pawel Langowski <pawel.langowski@3mdeb.com>
++
++--- tayga.h	2023-09-29 14:38:05.005837695 +0200
+++++ tayga-2.h	2023-09-29 14:37:45.560837257 +0200
++@@ -20,6 +20,7 @@
++ #include <sys/stat.h>
++ #include <sys/ioctl.h>
++ #include <sys/socket.h>
+++#include <sys/uio.h>
++ #include <netinet/in.h>
++ #include <arpa/inet.h>
++ #include <unistd.h>
+diff --git a/meta-networking/recipes-connectivity/tayga/files/tayga.conf =
+b/meta-networking/recipes-connectivity/tayga/files/tayga.conf
+new file mode 100644
+index 000000000000..c1b6163a4591
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/tayga/files/tayga.conf
+@@ -0,0 +1,103 @@
++#
++# Sample configuration file for TAYGA 0.9.2
++#
++# Modify this to use your own addresses!!
++#
++
++#
++# TUN device that TAYGA will use to exchange IPv4 and IPv6 packets with =
+the
++# kernel.  You may use any name you like, but `nat64' is recommended.
++#
++# This device may be created before starting the tayga daemon by running
++# `tayga --mktun`.  This allows routing and firewall rules to be set up =
+prior
++# to commencement of packet translation.
++#
++# Mandatory.
++#
++tun-device nat64
++
++#
++# TAYGA's IPv4 address.  This is NOT your router's IPv4 address!  TAYGA
++# requires its own address because it acts as an IPv4 and IPv6 router, a=
+nd
++# needs to be able to send ICMP messages.  TAYGA will also respond to IC=
+MP
++# echo requests (ping) at this address.
++#
++# This address can safely be located inside the dynamic-pool prefix.
++#
++# Mandatory.
++#
++ipv4-addr 192.168.254.1
++
++#
++# TAYGA's IPv6 address.  This is NOT your router's IPv6 address!  TAYGA
++# requires its own address because it acts as an IPv4 and IPv6 router, a=
+nd
++# needs to be able to send ICMP messages.  TAYGA will also respond to IC=
+MP
++# echo requests (ping6) at this address.
++#
++# You can leave ipv6-addr unspecified and TAYGA will construct its IPv6
++# address using ipv4-addr and the NAT64 prefix.
++#
++# Optional if the NAT64 prefix is specified, otherwise mandatory.  It is=
+ also
++# mandatory if the NAT64 prefix is 64:ff9b::/96 and ipv4-addr is a priva=
+te
++# (RFC1918) address.
++#
++#ipv6-addr 2001:db8:1::2
++ipv6-addr fdaa:bb:1::1
++
++#
++# The NAT64 prefix.  The IPv4 address space is mapped into the IPv6 addr=
+ess
++# space by prepending this prefix to the IPv4 address.  Using a /96 pref=
+ix is
++# recommended in most situations, but all lengths specified in RFC 6052 =
+are
++# supported.
++#
++# This must be a prefix selected from your organization's IPv6 address s=
+pace
++# or the Well-Known Prefix 64:ff9b::/96.  Note that using the Well-Known
++# Prefix will prohibit IPv6 hosts from contacting IPv4 hosts that have p=
+rivate
++# (RFC1918) addresses, per RFC 6052.
++#
++# The NAT64 prefix need not be specified if all required address mapping=
+s are
++# listed in `map' directives.  (See below.)
++#
++# Optional.
++#
++##prefix 2001:db8:1:ffff::/96
++prefix 64:ff9b::/96
++
++#
++# Dynamic pool prefix.  IPv6 hosts which send traffic through TAYGA (and=
+ do
++# not correspond to a static map or an IPv4-translatable address in the =
+NAT64
++# prefix) will be assigned an IPv4 address from the dynamic pool.  Dynam=
+ic
++# maps are valid for 124 minutes after the last matching packet is seen.
++#
++# If no unassigned addresses remain in the dynamic pool (or no dynamic p=
+ool is
++# configured), packets from unknown IPv6 hosts will be rejected with an =
+ICMP
++# unreachable error.
++#
++# Optional.
++#
++dynamic-pool 192.168.254.0/24
++
++#
++# Persistent data storage directory.  The dynamic.map file, which saves =
+the
++# dynamic maps that are created from dynamic-pool, is stored in this
++# directory.  Omit if you do not need these maps to be persistent betwee=
+n
++# instances of TAYGA.
++#
++# Optional.
++#
++data-dir /var/spool/tayga
++
++#
++# Establishes a single-host map.  If an IPv6 host should be consistently
++# reachable at a specific IPv4 address, the mapping can be specified in =
+a
++# `map' directive.  (IPv6 hosts numbered with an IPv4-translatable addre=
+ss do
++# not need map directives.)
++#
++# IPv4 addresses specified in the `map' directive can safely be located =
+inside
++# the dynamic-pool prefix.
++#
++# Optional.
++#
++#map 192.168.5.42 2001:db8:1:4444::1
++#map 192.168.5.43 2001:db8:1:4444::2
++#map 192.168.255.2 2001:db8:1:569::143
+diff --git a/meta-networking/recipes-connectivity/tayga/files/tayga.servi=
+ce b/meta-networking/recipes-connectivity/tayga/files/tayga.service
+new file mode 100644
+index 000000000000..0bffeb92a501
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/tayga/files/tayga.service
+@@ -0,0 +1,12 @@
++[Unit]
++SourcePath=3D/usr/sbin/tayga
++Description=3DLSB: userspace NAT64
++
++[Service]
++Type=3Dforking
++ExecStart=3D/usr/sbin/tayga -d --config /etc/tayga.conf
++RemainAfterExit=3Dyes
++TimeoutStopSec=3Dinfinity
++
++[Install]
++WantedBy=3Dmulti-user.target
+diff --git a/meta-networking/recipes-connectivity/tayga/tayga_0.9.2.bb b/=
+meta-networking/recipes-connectivity/tayga/tayga_0.9.2.bb
+new file mode 100644
+index 000000000000..36d35e6dee89
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/tayga/tayga_0.9.2.bb
+@@ -0,0 +1,21 @@
++LICENSE =3D "GPL-2.0-only"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
+19f"
++
++SRC_URI =3D " \
++        http://www.litech.org/tayga/tayga-${PV}.tar.bz2 \
++        file://tayga.conf \
++        file://tayga.service \
++        file://0001-include-sys-uio.patch;striplevel=3D0 \
++        "
++SRC_URI[sha256sum] =3D "2b1f7927a9d2dcff9095aff3c271924b052ccfd2faca9588=
+b277431a44f0009c"
++
++SYSTEMD_PACKAGES =3D "${PN}"
++SYSTEMD_SERVICE:${PN} =3D "tayga.service"
++
++do_install:append() {
++  install -m 0644 ${WORKDIR}/tayga.conf ${D}${sysconfdir}/tayga.conf
++  install -d ${D}${systemd_unitdir}/system/
++  install -m 0644 ${WORKDIR}/tayga.service ${D}${systemd_unitdir}/system=
+/
++}
++
++inherit autotools systemd
+--=20
+2.41.0
 
-Cheers,
-
--Mikko
 
