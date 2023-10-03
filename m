@@ -1,86 +1,109 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <mikko.rapeli@linaro.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 10172E82CAD
-	for <webhook@archiver.kernel.org>; Tue,  3 Oct 2023 04:23:24 +0000 (UTC)
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
- by mx.groups.io with SMTP id smtpd.web10.101860.1696306998357821439
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 366E4E75423
+	for <webhook@archiver.kernel.org>; Tue,  3 Oct 2023 04:55:04 +0000 (UTC)
+Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com [209.85.167.44])
+ by mx.groups.io with SMTP id smtpd.web11.101724.1696308894199674587
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 02 Oct 2023 21:23:18 -0700
+ Mon, 02 Oct 2023 21:54:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=f3Wgg8jp;
- spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-1c60cec8041so3311415ad.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Oct 2023 21:23:18 -0700 (PDT)
+ dkim=pass header.i=@linaro.org header.s=google header.b=Gq/NAgQp;
+ spf=pass (domain: linaro.org, ip: 209.85.167.44, mailfrom: mikko.rapeli@linaro.org)
+Received: by mail-lf1-f44.google.com with SMTP id 2adb3069b0e04-50435a9f800so523330e87.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 02 Oct 2023 21:54:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1696306997; x=1696911797; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=661vZ0mWxG+d2utGHlJZBsC+5qBd+wXOM8WfsDYvQGM=;
-        b=f3Wgg8jpElGz3f41DCjPN1dtsrCMh2j2wzacXK5L8ohqPijJdE5IxHy+CFTkmFGuPS
-         ZvfgdnVcQffl+BbqZ1e78nFfFsiKdDE63thq2OhBtEyyDyKKvong9NLBVo16DxzJnvsJ
-         UxpRcfsUmKZO18tG/I6ySSMKTenTYoLNvdP9P+RmmK4xd37fXFDsJ8sfyqYzJynCjXJj
-         CuaXPxDZ5QbkFkPldtZWmXAte5xq0IWNOaXKNNxcsi7jZFsdIOdUkjfDN0fwvna6qlBZ
-         SfeRQPBqhIXtdBq8pHSiCdKTSaFWP5P3C2j6KLV34xBbh5LRbIYCTAZXtp4YJ33boh7B
-         OOfw==
+        d=linaro.org; s=google; t=1696308892; x=1696913692; darn=lists.openembedded.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=Typ37ZMqoQGdNKR28PShDIIt0odv/YWsZeEl/vi9hZQ=;
+        b=Gq/NAgQpqua22gI51/tWOvY+XC1YNZBaAQ6IovoEcBF61qABcu0FZXkcgeAnAlYwaE
+         nAOftHc+6G0vVYbW0CFoOIzYiYOaPJsfHfkGAMhZKWOOc2taBYEqbFhCvRCMa6vSrf15
+         /k9eJkTXt6OiyzFBoUGioCYWEbW6C5jhO7CxeSZqHCfHTaQ5mpnnjclqeaQNqjJ0Neo7
+         040icC9OrQ9jV2VX3SzCHk4Lpk9n+ZzNDImZjbPSXVMwULRYTdASIIKbZh1qIJTjPPLs
+         s5LNKkFgUjfdke1fJ+S5GD5Zkj/ZG0kJXSHeIIVNssfp0qMPK66V4fKS2BOO4xob38wb
+         Lvdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1696306997; x=1696911797;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=661vZ0mWxG+d2utGHlJZBsC+5qBd+wXOM8WfsDYvQGM=;
-        b=u+sRTixyH1lHXQflZPEB2C+HKeMIMSJ8cliC/H72Dq658oMUrsFXYSAHuNdb4NnIHu
-         u1r2tTXI2hHMuwnqe82m3iFdnKZWZKVSiDHfSgK4r3RPb2dPva4t15TUE+f2fHh0VTkp
-         h4lkNB0owYe1NwBwRLwiXzFs6ej1tMG0neqxsJr2/MJPjkbmHLqFwvK+pt1rpi1hL3F+
-         4jPIdD/RiiC44vkkPjJbUKOYkJxRWSwB/ohhw8lfQFyoJHlasxQ+W4ZScD9pp9WZ0Tq8
-         d39+21ESRgCIhcuGaSl7LmDibz9JlLJM88FgPm8KXmXo5TJhWKn6S2L4DqYmnVFhw3JC
-         XYrw==
-X-Gm-Message-State: AOJu0YyRPuBnY8OaV0Ap4mQC31Hc7SBcQtdF7Ujkil++oIrc2GlC+jwO
-	ITeqFLKHEFgW+CamNsSvyqW4Z9NWjgSgpg==
-X-Google-Smtp-Source: AGHT+IEbW14juEmNdymqiOEJ+zMXMCBO36oCFQFRiwBSeH+SPfyIXHEv/kKyhdT123f/JngIakz7KQ==
-X-Received: by 2002:a17:902:f541:b0:1c0:c174:3695 with SMTP id h1-20020a170902f54100b001c0c1743695mr14082598plf.13.1696306997363;
-        Mon, 02 Oct 2023 21:23:17 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9100:2cb0::7f07])
-        by smtp.gmail.com with ESMTPSA id c1-20020a170903234100b001b8a00d4f7asm320041plh.9.2023.10.02.21.23.16
+        d=1e100.net; s=20230601; t=1696308892; x=1696913692;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Typ37ZMqoQGdNKR28PShDIIt0odv/YWsZeEl/vi9hZQ=;
+        b=ciJvhQr7J1gSIjMhwSExaGPFqfGGiEEfFGdmSXQPGTC5BguuErMCopHYO6vAT0dYiP
+         BKyyWl6/QJiOE8xNQ4K1YJC6IQqy5U66P7oNnyBunqsSPxGGGofHhUQo8aurgU4+XfBK
+         Z486hNkup6MyfSu5nKoryUskEhz+uTMUf7pbkmHOLAZvJfq/90jrW3XTIGBa2hC4gOCT
+         P4/dsmN90K2VQnaCZSDJaJY/438XDd7MEQSKtZL8TOrEjR/Ro7zicazxVdAfT6huN1m7
+         PAoIY9BnpkuuSiU3AsdxmfCZV6TmGXD0/dRVQHT3G7EDCYzJRJgRQ9RXBVA1bmeQOFnA
+         FljQ==
+X-Gm-Message-State: AOJu0Yzbgmi+SmiNhfRuSK3gLEgKO+NtL5ip1AschpSvdjxHXZPkV5Py
+	HDSlqfljtEaWL8UKt356nRJgtg==
+X-Google-Smtp-Source: AGHT+IFBrfjEJlK+0BVtPNcRPEWwJ6My0vvCTwLT81XQKFeRPtJdV0nbb3eMPe1TtR6RuQ3onxQA+g==
+X-Received: by 2002:a19:8c50:0:b0:502:f2a8:d380 with SMTP id i16-20020a198c50000000b00502f2a8d380mr9415237lfj.19.1696308892052;
+        Mon, 02 Oct 2023 21:54:52 -0700 (PDT)
+Received: from nuoska (dc7g6tyjby-d304c4945t-3.rev.dnainternet.fi. [2001:14ba:16cb:a800:e107:c77f:6058:ee33])
+        by smtp.gmail.com with ESMTPSA id j1-20020a19f501000000b005056e9b734esm49606lfb.151.2023.10.02.21.54.50
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 02 Oct 2023 21:23:16 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 2/3] python3-lz4: Fix ptest result format
-Date: Mon,  2 Oct 2023 21:23:12 -0700
-Message-ID: <20231003042313.1153843-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20231003042313.1153843-1-raj.khem@gmail.com>
-References: <20231003042313.1153843-1-raj.khem@gmail.com>
+        Mon, 02 Oct 2023 21:54:51 -0700 (PDT)
+Date: Tue, 3 Oct 2023 07:54:49 +0300
+From: Mikko Rapeli <mikko.rapeli@linaro.org>
+To: Alex Stewart <alex.stewart@ni.com>
+Cc: Jeffrey Pautler <jeffrey.pautler@ni.com>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] [PATCH] bolt: disable CVE checking for this recipe
+Message-ID: <ZRuemRmjlQ9p2Kzk@nuoska>
+References: <20230929170731.749414-1-jeffrey.pautler@ni.com>
+ <ZRqL7yT0ME00CakU@nuoska>
+ <23d7986a-4bd8-4445-ac32-3f2d8fa98663@ni.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <23d7986a-4bd8-4445-ac32-3f2d8fa98663@ni.com>
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 03 Oct 2023 04:23:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105315
+ <openembedded-devel@lists.openembedded.org>; Tue, 03 Oct 2023 04:55:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105317
 
-This is to support ptest format
-https://wiki.yoctoproject.org/wiki/Ptest
+Hi,
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-python/recipes-devtools/python/python3-lz4/run-ptest | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Mon, Oct 02, 2023 at 11:53:42AM -0400, Alex Stewart wrote:
+> On 10/2/23 05:22, Mikko Rapeli via lists.openembedded.org wrote:
+> > Hi,
+> > 
+> > On Fri, Sep 29, 2023 at 12:07:31PM -0500, Jeffrey Pautler wrote:
+> > > This bolt product does not currently have an entry in the CVE database.
+> > > However, the default cve-check logic that maps recipes to products in
+> > > the CVE database is incorrectly matching this package to a different
+> > > bolt product made by bolt-cms. As a result, CVE checking incorrectly
+> > > reports CVEs for that product for this package.
+> > > 
+> > > Signed-off-by: Jeffrey Pautler <jeffrey.pautler@ni.com>
+> > > ---
+> > >   meta-oe/recipes-bsp/bolt/bolt_0.9.5.bb | 2 ++
+> > >   1 file changed, 2 insertions(+)
+> > > 
+> > > diff --git a/meta-oe/recipes-bsp/bolt/bolt_0.9.5.bb b/meta-oe/recipes-bsp/bolt/bolt_0.9.5.bb
+> > > index b6ad6337c..583cc6378 100644
+> > > --- a/meta-oe/recipes-bsp/bolt/bolt_0.9.5.bb
+> > > +++ b/meta-oe/recipes-bsp/bolt/bolt_0.9.5.bb
+> > > @@ -12,6 +12,8 @@ SRCREV = "5a8a5866a847561566499847d46a97c612b4e6dd"
+> > >   S = "${WORKDIR}/git"
+> > > +CVE_CHECK_SKIP_RECIPE = "${PN}"
+> > I think this is wrong and dangerous for anyone who in the future tries to use
+> > cve checker for this recipe. Instead, set the CVE product with vendor correctly
+> > so that other products/vendors don't mix the results? Hopefully any new CVEs
+> > in the future will set the same vendor and product.
+> 
+> Are you suggesting that he set the string to something like...
+> `cpe:*:a:freedesktop:bolt:*`
+> 
+> on the hopes that, if the Free Desktop folks open a CPE in the future, that
+> it will match?
 
-diff --git a/meta-python/recipes-devtools/python/python3-lz4/run-ptest b/meta-python/recipes-devtools/python/python3-lz4/run-ptest
-index 1b245bcd8f..3004024619 100644
---- a/meta-python/recipes-devtools/python/python3-lz4/run-ptest
-+++ b/meta-python/recipes-devtools/python/python3-lz4/run-ptest
-@@ -1,3 +1,3 @@
- #!/bin/sh
- 
--pytest -v
-+pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'| sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s : %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
--- 
-2.42.0
+Yes, if other Freedesktop projects have used these before.
 
+Cheers,
+
+-Mikko
 
