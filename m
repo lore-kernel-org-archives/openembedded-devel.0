@@ -1,102 +1,151 @@
-Return-Path: <bbara93@gmail.com>
+Return-Path: <daniel.klauer@gin.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DF4D7E8FDD5
-	for <webhook@archiver.kernel.org>; Wed,  4 Oct 2023 07:25:57 +0000 (UTC)
-Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
- by mx.groups.io with SMTP id smtpd.web11.13140.1696404355705086616
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 82CD6E7B5ED
+	for <webhook@archiver.kernel.org>; Wed,  4 Oct 2023 10:54:39 +0000 (UTC)
+Received: from good-out-03.clustermail.de (good-out-03.clustermail.de [212.223.36.1])
+ by mx.groups.io with SMTP id smtpd.web10.15501.1696416871520275223
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Oct 2023 00:25:56 -0700
+ Wed, 04 Oct 2023 03:54:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Y0i1hCuh;
- spf=pass (domain: gmail.com, ip: 209.85.218.48, mailfrom: bbara93@gmail.com)
-Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-99c3d3c3db9so295456866b.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Oct 2023 00:25:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1696404354; x=1697009154; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=1VgCFwOBwEUHXMwCYFyyUtmBNRuXy8jb8eZbx7MP0rQ=;
-        b=Y0i1hCuhKlBBt+/8S3JKxAkMwgmdvIZVTk9IyNRV6wlRIVYvAvsMfZfJJDB7KqSq1x
-         WJNGPRpqKDcN0VK0LSxsgMTWwAq5fheKW3Zalu55KCY+6wexj6DwdUPtiKMnKtPs4X4b
-         1gHMOhIA6EHC3z7LwtHiEEp1N7Qsou9jZWqI/URTEp8bWnu+TTGlzZfYn73b6/8kjzoF
-         YO3R+ELw8uRr43zwDmW4OnI806zy5O5DHvWj7VUpU+7F2bCFZjOHSuuNqW23mI58D05U
-         esYlVUIrXm7uqHnBMIwP9g5Yz3e8hUW+sQ7hKA7dZRYhwgKA/+iq7jhOsHkuykZSs4mg
-         ZXFQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1696404354; x=1697009154;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=1VgCFwOBwEUHXMwCYFyyUtmBNRuXy8jb8eZbx7MP0rQ=;
-        b=Jbo6/jVsDbUymrwxdJbNmnFyMycNGlD7o3+N6LDd7myxeugQz+UY+iPoWN8bZRwjdm
-         f2fOPOb4oTLzdNgIrlP61qpaTvjqbHif7fnR6Thf5UKXBHOfaLaWXnkLN/GHHQlxLvNT
-         GRMV0mWWC6n/o013p5dC/FLNvSUSnHX2CmF4J6AkUR5DHBwUQvXDCSCoicmW+1XObvXP
-         2yHu4gI61OG0eVcjWOBBdKvtOBuSMJItkAzzNK90WS5Jdk7NQ38hX1t/IQwY98MSSKoy
-         ALZtAnyf9Tq2lAwqgOCUzoo7S5QvtgD1ZdjwO5RScqKjmWfWHvymjn7QeB2y/VlWjJIt
-         bnGw==
-X-Gm-Message-State: AOJu0YzD3aLO5hN9gTZqLdHvgVkmTv2lekVJm9JRq5iUgJshMaf1o/Ta
-	hwlbXgE5ExJfse8jinT5kYs=
-X-Google-Smtp-Source: AGHT+IFcETFj/oKRRFaJskEtRT6o9HH2LTa6JD+haJuFS6IARBFit+gm4Kgmo7zEcdxR4ZEIIhMPsA==
-X-Received: by 2002:a17:906:7389:b0:9ae:406c:3420 with SMTP id f9-20020a170906738900b009ae406c3420mr1136945ejl.30.1696404353820;
-        Wed, 04 Oct 2023 00:25:53 -0700 (PDT)
-Received: from PCBABN.skidata.net ([91.230.2.244])
-        by smtp.gmail.com with ESMTPSA id m8-20020a1709060d8800b009b654751c14sm2270190eji.47.2023.10.04.00.25.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 Oct 2023 00:25:53 -0700 (PDT)
-From: Benjamin Bara <bbara93@gmail.com>
-To: raj.khem@gmail.com
-Cc: openembedded-devel@lists.openembedded.org,
-	Benjamin Bara <benjamin.bara@skidata.com>
-Subject: [meta-oe][PATCH] libvpx: upgrade 1.13.0 -> 1.13.1
-Date: Wed,  4 Oct 2023 09:24:43 +0200
-Message-Id: <20231004072443.2870686-1-bbara93@gmail.com>
+ dkim=none (message not signed); spf=pass (domain: gin.de, ip: 212.223.36.1, mailfrom: daniel.klauer@gin.de)
+Received: from [10.0.0.9] (helo=frontend.clustermail.de)
+	by smtpout-01.clustermail.de with esmtp (Exim 4.96)
+	(envelope-from <Daniel.Klauer@gin.de>)
+	id 1qnzWO-0005Yg-1t
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 04 Oct 2023 12:54:28 +0200
+Received: from [217.6.33.237] (helo=Win2012-02.gin-domain.local)
+	by frontend.clustermail.de with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384
+	(Exim 4.96)
+	(envelope-from <Daniel.Klauer@gin.de>)
+	id 1qnzWN-0005ai-2X
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 04 Oct 2023 12:54:28 +0200
+Received: from daniel-desktop2.fritz.box (10.176.8.48) by
+ Win2012-02.gin-domain.local (10.160.128.12) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.48; Wed, 4 Oct 2023 12:54:27 +0200
+From: Daniel Klauer <daniel.klauer@gin.de>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] graphviz: Fix build to not use $prefix as search dir
+Date: Wed, 4 Oct 2023 12:54:03 +0200
+Message-ID: <20231004105403.6508-1-daniel.klauer@gin.de>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.176.8.48]
+X-ClientProxiedBy: Win2012-02.gin-domain.local (10.160.128.12) To
+ Win2012-02.gin-domain.local (10.160.128.12)
+X-EsetResult: clean, is OK
+X-EsetId: 37303A29342AAB58657262
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 04 Oct 2023 07:25:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105329
+ <openembedded-devel@lists.openembedded.org>; Wed, 04 Oct 2023 10:54:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105330
 
-From: Benjamin Bara <benjamin.bara@skidata.com>
+The graphviz configure script used $prefix/include and $prefix/lib search
+directories, thus bypassing the recipe sysroot, which could lead to build
+contamination or failures. The added patch (backported from graphviz 9.0.0)
+fixes this.
 
-Changelog:
-=========
-This release contains two security related fixes. One each for VP8 and
-VP9.
+Due to the $prefix != /usr check in the configure script, this issue only
+showed up for recipe build variants which use a different prefix value,
+such as nativesdk-graphviz (prefix = SDKPATHNATIVE/...) or graphviz-native
+(prefix = STAGING_DIR_NATIVE/...). Using STAGING_DIR_NATIVE is probably not
+a problem, since it is recipe-specific anyways, but using SDKPATHNATIVE
+may be a problem, if it happens to exist and contains headers/libraries.
+Even though this may be unlikely with the default SDKPATH =
+"/usr/local/oe-sdk-hardcoded-buildpath" value used in bitbake.conf,
+the problem can still be triggered, especially if the paths like prefix
+or SDKPATH are customized in a build.
 
-- Upgrading:
-  This release is ABI compatible with the previous release.
-
-- Bug fixes:
-  https://crbug.com/1486441 (CVE-2023-5217)
-  Fix to a crash related to VP9 encoding (#1642)
-
-Signed-off-by: Benjamin Bara <benjamin.bara@skidata.com>
+Link: https://gitlab.com/graphviz/graphviz/-/issues/2442
+Signed-off-by: Daniel Klauer <daniel.klauer@gin.de>
 ---
- .../webm/{libvpx_1.13.0.bb => libvpx_1.13.1.bb}                 | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-multimedia/webm/{libvpx_1.13.0.bb => libvpx_1.13.1.bb} (96%)
+ ...-not-put-prefix-based-paths-in-compi.patch | 58 +++++++++++++++++++
+ .../graphviz/graphviz_8.1.0.bb                |  1 +
+ 2 files changed, 59 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/graphviz/graphviz/0001-Autotools-fix-do-not-put-prefix-based-paths-in-compi.patch
 
-diff --git a/meta-oe/recipes-multimedia/webm/libvpx_1.13.0.bb b/meta-oe/recipes-multimedia/webm/libvpx_1.13.1.bb
-similarity index 96%
-rename from meta-oe/recipes-multimedia/webm/libvpx_1.13.0.bb
-rename to meta-oe/recipes-multimedia/webm/libvpx_1.13.1.bb
-index 558b448ba..eab5546a1 100644
---- a/meta-oe/recipes-multimedia/webm/libvpx_1.13.0.bb
-+++ b/meta-oe/recipes-multimedia/webm/libvpx_1.13.1.bb
-@@ -7,7 +7,7 @@ LICENSE = "BSD-3-Clause"
+diff --git a/meta-oe/recipes-graphics/graphviz/graphviz/0001-Autotools-fix-do-not-put-prefix-based-paths-in-compi.patch b/meta-oe/recipes-graphics/graphviz/graphviz/0001-Autotools-fix-do-not-put-prefix-based-paths-in-compi.patch
+new file mode 100644
+index 000000000..0d3f41270
+--- /dev/null
++++ b/meta-oe/recipes-graphics/graphviz/graphviz/0001-Autotools-fix-do-not-put-prefix-based-paths-in-compi.patch
+@@ -0,0 +1,58 @@
++From 671e0d091b40ef7deb4a9d43e0dbed2a44edbec8 Mon Sep 17 00:00:00 2001
++From: Matthew Fernandez <matthew.fernandez@gmail.com>
++Date: Sat, 9 Sep 2023 01:03:04 -0700
++Subject: [PATCH] Autotools: fix: do not put '$prefix' based paths in
++ compilation flags
++
++This was causing problems with cross-compilation with a dedicated sysroot,
++because compilation would incorrectly use headers and libraries from the
++`--prefix` path. The `--prefix` path is meant to indicate a target path to
++install to, not a path from which to source dependent libraries.
++
++Gitlab: fixes #2442
++Reported-by: Daniel Klauer
++Suggested-by: Daniel Klauer
++
++Upstream-Status: Backport [https://gitlab.com/graphviz/graphviz/-/commit/012d250a903e13114bce3ba40995fb957fed7848]
++Signed-off-by: Daniel Klauer <daniel.klauer@gin.de>
++---
++ CHANGELOG.md | 3 +++
++ configure.ac | 8 --------
++ 2 files changed, 3 insertions(+), 8 deletions(-)
++
++diff --git a/CHANGELOG.md b/CHANGELOG.md
++index b9b7e8e08..3a15fd256 100644
++--- a/CHANGELOG.md
+++++ b/CHANGELOG.md
++@@ -39,6 +39,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
++   longer fails due to missing PHP files. #2388
++ - Syntax for a loop in `gvmap.sh` has been corrected. This was a regression in
++   Graphviz 2.50.0. #2404
+++- The Autotools build system no longer uses headers and libraries from the
+++  `--prefix` path given on the command line. This previously caused
+++  cross-compilation to incorrectly pick up host headers and libraries. #2442
++ 
++ ## [8.0.5] – 2023-04-30
++ 
++diff --git a/configure.ac b/configure.ac
++index 573a3ee5d..7d53346de 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -190,14 +190,6 @@ if test "x${prefix}" = "xNONE"; then
++ 	AC_SUBST([prefix])
++ fi
++ 
++-# automatically check for other dependencies in $prefix first
++-if test "x${prefix}" != "x/usr"; then
++-	CPPFLAGS="$CPPFLAGS -I${prefix}/include"
++-	LDFLAGS="$LDFLAGS -L${prefix}/lib"
++-	PKG_CONFIG_PATH="$prefix/lib/pkgconfig$PATHSEPARATOR$PKG_CONFIG_PATH"
++-	export PKG_CONFIG_PATH
++-fi
++-
++ dnl -----------------------------------
++ # Static/Shared binaries
++ 
++-- 
++2.34.1
++
+diff --git a/meta-oe/recipes-graphics/graphviz/graphviz_8.1.0.bb b/meta-oe/recipes-graphics/graphviz/graphviz_8.1.0.bb
+index ccc114007..4d40ee4de 100644
+--- a/meta-oe/recipes-graphics/graphviz/graphviz_8.1.0.bb
++++ b/meta-oe/recipes-graphics/graphviz/graphviz_8.1.0.bb
+@@ -19,6 +19,7 @@ DEPENDS:append:class-nativesdk = " ${BPN}-native"
+ inherit autotools-brokensep pkgconfig gettext qemu
  
- LIC_FILES_CHKSUM = "file://LICENSE;md5=d5b04755015be901744a78cc30d390d4"
- 
--SRCREV = "d6eb9696aa72473c1a11d34d928d35a3acc0c9a9"
-+SRCREV = "10b9492dcf05b652e2e4b370e205bd605d421972"
- SRC_URI += "git://chromium.googlesource.com/webm/libvpx;protocol=https;branch=main \
-            file://libvpx-configure-support-blank-prefix.patch \
+ SRC_URI = "https://gitlab.com/api/v4/projects/4207231/packages/generic/${BPN}-releases/${PV}/${BP}.tar.xz \
++           file://0001-Autotools-fix-do-not-put-prefix-based-paths-in-compi.patch \
             "
+ # Use native mkdefs
+ SRC_URI:append:class-target = "\
 -- 
 2.34.1
 
