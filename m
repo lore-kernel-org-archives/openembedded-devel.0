@@ -2,107 +2,89 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2638DE7C4F1
-	for <webhook@archiver.kernel.org>; Wed,  4 Oct 2023 20:06:40 +0000 (UTC)
-Received: from mail-oa1-f44.google.com (mail-oa1-f44.google.com [209.85.160.44])
- by mx.groups.io with SMTP id smtpd.web10.4788.1696449992046394341
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 24F8EE7C4F1
+	for <webhook@archiver.kernel.org>; Wed,  4 Oct 2023 20:07:50 +0000 (UTC)
+Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
+ by mx.groups.io with SMTP id smtpd.web11.4935.1696450060702241294
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Oct 2023 13:06:32 -0700
+ Wed, 04 Oct 2023 13:07:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=YjnWYips;
- spf=pass (domain: gmail.com, ip: 209.85.160.44, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f44.google.com with SMTP id 586e51a60fabf-1e106eb414cso103834fac.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Oct 2023 13:06:31 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=HcFqJcTF;
+ spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-1c5cd27b1acso1299105ad.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Oct 2023 13:07:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1696449991; x=1697054791; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=so9GGiLLBG/O2Z7aqzFAxSHEVB4/8//lYp1muPfwAxI=;
-        b=YjnWYipsa2YLxMtupEZq4BLk1/Pxvr8bvMhV6ID/NQWJE3om3u0/iwNAjL/p9yc2YS
-         EEc8537L78Q7MzRhIGgFsOC606AMN3eZvFU1k+R+KO5BOsXJqXePc23p+Won+FST19t7
-         gW/dU7LjIJ5Cwy2L9oTcapEDwoeuAZThY1KAwv0wSSOp7Ary8BtZdX7psrtXnCHQAYAx
-         If22cIiks/65Op0ORoMVjLEQJ38FcJZPgyd1L7S8kB6v6nRd1qmGBB+jfqMg2pESJjjZ
-         4KQJ2s7WvXOZYfFNFP3Q9OGZb1TZkvPOGeZ2XVffAO4g8vbvI8nNz7OBr5BNipPE2l+e
-         7u7w==
+        d=gmail.com; s=20230601; t=1696450060; x=1697054860; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Yrck50+6iusDAlQlRp5vnpKyhvG3jlGjIMcZbYB8xFw=;
+        b=HcFqJcTFcyqXVKUrUJ7cSrs4Nhoah14KmcCtQ0/33bPzgEpaWwYOiK2f0yv0MIVEOE
+         47N5ul74C3Yf/K5BOImE5mOt8mPx3QHRXqJ1fH9EQBkUdkB3bOLVWAkh9x67igAc+HKG
+         YAWxqMOgaD1BpVyymN7we5A6rR8HYT+ufvmjfbIEJMfhC3kOkzqhyCSOhqTQVAhCfFwe
+         dQG+NSts/l5+4guzhPV+hoWhYTPYnI+ND2rYqsfhdpXum6iRXKCRMyokNDfONrads9fF
+         33mlWWB8LNiV1k3QEwiL14cmGNn6fv8Xeff1qT4CDoS/pLCHKvs53VDIwgksw1aWA7Wv
+         DvNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1696449991; x=1697054791;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=so9GGiLLBG/O2Z7aqzFAxSHEVB4/8//lYp1muPfwAxI=;
-        b=BF7GljrokDdKDRLSheItIyRk0eA9TlwyG+dGPXsGt8DPk5AMJ8pZyeTHQBP2cBKsVh
-         rOqaTRzK2cXHSQU+y74sY/sTzFPQ2aDoF3rVcoP7/SJrzdcigZKPFnbDNX1YNvwIOPim
-         DIWyW5gbGKAUSbgJOCauCEpQCwFlwDz0DB6NdtFpnlg/aygX2qI8dkSZU8Nt/UWpdI3Q
-         8ZO+2p+LVI2viNQYuboPm9nleoQKFKgXtYVe2+EBmelMSFgSGPztR3tRthLJG4zEhDYU
-         HFiO4lueB9DsbWLSohc8MXLrWeg5I06wwQxMvBmYgt5E18oK6wA/ZYg4USngFjQFRRcP
-         ElLQ==
-X-Gm-Message-State: AOJu0YzT6tLINuL8z6vWicsbkpSeizurZMHHBj+Me0rldV2/1ggP03r1
-	rQT79P4M/sXBrvfrVgmA+gzfdb5xbKOjRQQAJ9c=
-X-Google-Smtp-Source: AGHT+IGv1Zh2R22zilYuiQ66GSU65+6yjNrlDA6N4XHbqJDBo9OLLAZD1stEFITlCZnzQOu9Xoo23Bf8DXZszvnrunw=
-X-Received: by 2002:a05:6870:9593:b0:1dd:7f3a:b703 with SMTP id
- k19-20020a056870959300b001dd7f3ab703mr3719696oao.0.1696449991290; Wed, 04 Oct
- 2023 13:06:31 -0700 (PDT)
-MIME-Version: 1.0
-References: <20231003205747.84389-1-marex@denx.de>
-In-Reply-To: <20231003205747.84389-1-marex@denx.de>
+        d=1e100.net; s=20230601; t=1696450060; x=1697054860;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Yrck50+6iusDAlQlRp5vnpKyhvG3jlGjIMcZbYB8xFw=;
+        b=Qv11ikzIE3DrQ6tvAz1kFreK7ZTZP8wQiFuwsdl5b/otfGnhck0OF0y31/wjGxBf3U
+         WciVhX+x7SiaLGZh8PqPruiM/LLq5aF4LiAR9ya9xfvJSVn2SQ8u7vu4aKWPsVbEoeZ2
+         QBjPisLM1x4gd/mL11Wn6eyl1rVYEoBLFiodBAcLh7xF0Eb5XMVDMRVDiPx2DgGIYXpy
+         vOtMHSkynzuIpGzasfC40tjOdNr2J/6m8uqFBk1QbsYxfrO0e/wOX1AqAHWIgA7lAyW6
+         xrYe3aOmtVXxhlt6bX5fqLEZB9G7A+dqGUBbM+N2WfQe99vuRZpNBdHI+517d9D8QZ60
+         IozA==
+X-Gm-Message-State: AOJu0YxLcasTm/HOc5kPjbrCNdyXQ3PU1xzaOzntoto1UA07jtnLfc8d
+	6pXwt3++cQyrIerGRmaR50KMxU+z+RysXg==
+X-Google-Smtp-Source: AGHT+IFGq1eOlr63zymJAiEilaHqa5Z8pM+WG1bvR+M60M2dUmOyezLmWctyc2Pdk7aVv50XqjN5CQ==
+X-Received: by 2002:a17:903:120f:b0:1c7:5f03:8562 with SMTP id l15-20020a170903120f00b001c75f038562mr3721274plh.30.1696450059798;
+        Wed, 04 Oct 2023 13:07:39 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9100:2cb0::7f07])
+        by smtp.gmail.com with ESMTPSA id c4-20020a170902d48400b001c73d829fb7sm4176878plg.15.2023.10.04.13.07.39
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 04 Oct 2023 13:07:39 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 4 Oct 2023 13:06:05 -0700
-Message-ID: <CAMKF1sq3B8kq+dT1WMobwya_eVWOi_BTjB2xs5SvVjYGU70iKQ@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH] faad2: Upgrade 2.10.0 -> 2.10.1
-To: Marek Vasut <marex@denx.de>
-Cc: openembedded-devel@lists.openembedded.org, 
-	Alex Kiernan <alex.kiernan@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] minicoredumber: Fix ptest reporting
+Date: Wed,  4 Oct 2023 13:07:36 -0700
+Message-ID: <20231004200736.173557-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.42.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 04 Oct 2023 20:06:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105341
+ <openembedded-devel@lists.openembedded.org>; Wed, 04 Oct 2023 20:07:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105342
 
-seeing this
+Fixes
+     AssertionError:-
+     ptests which had no test results:
+     ['minicoredumper']
 
-make[2]: *** No rule to make target '../../git/include/faad.h', needed
-by 'all-am'.  Stop.
-make[2]: *** Waiting for unfinished jobs....
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-kernel/minicoredumper/files/run-ptest | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-https://errors.yoctoproject.org/Errors/Details/739273/
+diff --git a/meta-oe/recipes-kernel/minicoredumper/files/run-ptest b/meta-oe/recipes-kernel/minicoredumper/files/run-ptest
+index fbddc0774d..6746132ce6 100644
+--- a/meta-oe/recipes-kernel/minicoredumper/files/run-ptest
++++ b/meta-oe/recipes-kernel/minicoredumper/files/run-ptest
+@@ -6,7 +6,7 @@ echo expecting Segmentation fault with core dump ...
+ minicoredumper_demo 6 & sleep 3 && minicoredumper_demo
+ 
+ if ls /var/crash/ | grep minicoredumper; then
+-	echo SUCCESS
++	echo "PASS: minicoredumper"
+ else
+-	echo FAIL
++	echo "FAIL: minicoredumper"
+ fi
+-- 
+2.42.0
 
-is it some sort of race ?
-
-On Tue, Oct 3, 2023 at 1:58=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
->
-> Update faad2 to latest 2.10.1 release. Use SRCREV matching tag 2.10.1 .
->
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> Cc: Alex Kiernan <alex.kiernan@gmail.com>
-> Cc: Khem Raj <raj.khem@gmail.com>
-> ---
->  .../faad2/{faad2_2.10.0.bb =3D> faad2_2.10.1.bb}                  | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-oe/recipes-multimedia/faad2/{faad2_2.10.0.bb =3D> faad2_2.10=
-.1.bb} (88%)
->
-> diff --git a/meta-oe/recipes-multimedia/faad2/faad2_2.10.0.bb b/meta-oe/r=
-ecipes-multimedia/faad2/faad2_2.10.1.bb
-> similarity index 88%
-> rename from meta-oe/recipes-multimedia/faad2/faad2_2.10.0.bb
-> rename to meta-oe/recipes-multimedia/faad2/faad2_2.10.1.bb
-> index 1b4236073..5d54dcfe1 100644
-> --- a/meta-oe/recipes-multimedia/faad2/faad2_2.10.0.bb
-> +++ b/meta-oe/recipes-multimedia/faad2/faad2_2.10.1.bb
-> @@ -10,7 +10,7 @@ LICENSE_FLAGS =3D "commercial"
->  PV .=3D "+git${SRCPV}"
->
->  SRC_URI =3D "git://github.com/knik0/faad2.git;branch=3Dmaster;protocol=
-=3Dhttps"
-> -SRCREV =3D "df42c6fc018552519d140e3d8ffe7046ed48b0cf"
-> +SRCREV =3D "3918dee56063500d0aa23d6c3c94b211ac471a8c"
->
->  S =3D "${WORKDIR}/git"
->
-> --
-> 2.40.1
->
 
