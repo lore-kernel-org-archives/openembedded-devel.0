@@ -1,175 +1,134 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <beniaminsandu@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ECAC5E7C4E5
-	for <webhook@archiver.kernel.org>; Wed,  4 Oct 2023 16:58:15 +0000 (UTC)
-Received: from mail-oa1-f45.google.com (mail-oa1-f45.google.com [209.85.160.45])
- by mx.groups.io with SMTP id smtpd.web11.24036.1696438692414849058
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 913E3E7C4E7
+	for <webhook@archiver.kernel.org>; Wed,  4 Oct 2023 17:30:06 +0000 (UTC)
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.web10.25490.1696440604968551296
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Oct 2023 09:58:12 -0700
+ Wed, 04 Oct 2023 10:30:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=hSB5mo1t;
- spf=pass (domain: gmail.com, ip: 209.85.160.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f45.google.com with SMTP id 586e51a60fabf-1dce0f9e222so1579944fac.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Oct 2023 09:58:12 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=SQdPRIiU;
+ spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: beniaminsandu@gmail.com)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-40684f53ef3so359845e9.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Oct 2023 10:30:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1696438691; x=1697043491; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=STdda2xWo6r7F5YEpaWdjx9W5vElquC1nwgI89u77Zc=;
-        b=hSB5mo1tnxSi3YxVlaobGcL46tbbxH23XpLqy1Lftmi4Cc4lid2JA2BTiNHR41Ws5Z
-         nzf+JXl+z9SbJAGn7wFMbBF7EhS+05MkhIxdxfbKqL7vjvD+1dvVmfI+zaLuNKiuhjky
-         jgAw9SClJoeKEJ+OjC7CGhBBIG9JJCO5RDR9mwg6iWdAN3OEnMICE8NvobDDnTDR3mwS
-         c5fcprlporpBiG2DRX3ZZEJA1X1dJCan4u3Zr8pIku+4GNYGM9PSW3CW5vZ4xlWE+aZC
-         i08SgBt9oSS0rJaOeuLOLEypIWmJnF2OzHX7TpzQphffhiz5Xu2SwmYL+Sluv8RGXhhv
-         I2RQ==
+        d=gmail.com; s=20230601; t=1696440603; x=1697045403; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=LbkydAg8I+qlF46XMe04TQGTyR62x1kwVg2dYnE3s30=;
+        b=SQdPRIiUvLiosyJQydo2i4nx+QvPkrIgBIzuPfkrvZtkiPNvkBYBwvp/+BadEHffWN
+         bIxBj3xxieGV91UhVux+VqLsIf/h7GJlaQStjG+AtXiV8fwaFET0b8+NNXIjEwpmu/x6
+         cw6Z0A7A2cF5JXXSznXx74hUBg58bXDI0RNFbRO1JyR0bYJGvl5m5qKlUVx9a+uKAfjX
+         NGR4RN51nssLO8EQNwEgMaxs+c8L7UxFRhyzVcLOrp10BzJJU0bEZ24zHgdcH9AX/5z7
+         nu43jyrBA8sictfp6cUD3jRnrzI6CpVHPdq+fgVao/ftxUT7n+jkREozRIIFN509r1Qd
+         3T+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1696438691; x=1697043491;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=STdda2xWo6r7F5YEpaWdjx9W5vElquC1nwgI89u77Zc=;
-        b=l6NTCm7Y94PZiWE3tD+iUWK+ySzh9z+OfcM8Hz5kPQFfUs9TLbontKB+Z45nKBzWFI
-         0DtOLLNf2nrPG4XO9vLxyGitBXWL2b3tomQwAK7jJM9vGy4d2XLQMxYMWfedzoI6+4wY
-         2zaw07r4t2pfibdWYCONJTpofnswooK5zrBiBB+YXYNTkw3hmITO+9R7orxjjrXMjRNr
-         uVjcT7USYxxGee3OK8MOoGJ+mZgNdBrjk7d23jsfcZhu9jCWCXEZHJJtkp9p4E3fOaGZ
-         EV1WLKkNgonaAm1dn3Iv9jUk0yyeO2ra74nT65SV7DRgbYGHYB3KdDY01HBOtILs0UAO
-         cvaQ==
-X-Gm-Message-State: AOJu0YzWK108GAPkDlH12FAYVoTOzBzQPX4CwdqDVFfzx+mI960mcD2B
-	lgZijE9Te6ogWgcG1HVzBofn3yZ4vlU4s05y6MwWYjfKQjY=
-X-Google-Smtp-Source: AGHT+IEBEMpjgJVSMLbUbp/e+d6QQkG3VoWtCibvkGUifW6ofUVhfI6VmjIaBRekwkYUe1cVRyIXbyGAE8Xrcoe2Ozw=
-X-Received: by 2002:a05:6870:b025:b0:1bf:9f6:b810 with SMTP id
- y37-20020a056870b02500b001bf09f6b810mr3183473oae.36.1696438691494; Wed, 04
- Oct 2023 09:58:11 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1696440603; x=1697045403;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=LbkydAg8I+qlF46XMe04TQGTyR62x1kwVg2dYnE3s30=;
+        b=WsOlQVFa9nAezIVUCOYshQ6YKC/VkDV8hz2cVzckewWQXbUeS2prBP0jtMDUhXciK4
+         OYxFVNd1iC/Qx23o1NEyZjnroTQ109t5orYW3CTnKSEgGBrUVy+5r6NA9Rrocu4o7kLH
+         ZkIHWjQy8Kkh2Qmm51UQ8/J2nZWQKfSxNvFk9juI/T4gJv13v5mN/Vn7kYl0dkuIadnY
+         BLgDtM5XqX2F0XF0dOuB+iIVCfvo+q9h2y6dl6utLw0FMxHD+qWf9T6YfXph3wecPlaQ
+         g4ZWJDNyPSkg3j76/RCcOKyHgepH19GQP9HvaceDjdGYGDr5slP8F/Ha217ch01o7Qhs
+         CfbQ==
+X-Gm-Message-State: AOJu0YzMICOnRC3vdLkZyfYqd/doAAECca89wF0HvpElydzVEEpICXBu
+	WaYVM5Xa9J4HKpnXa6EZ96Rwz0qviPcUeQ==
+X-Google-Smtp-Source: AGHT+IGMEw7f5g3QrKL1lMUyAhpfGl9VxUw7DREdqbhf2xu9eeFh/rXM0yuOiD4D+LkOzPIsi9CZmA==
+X-Received: by 2002:a7b:cc07:0:b0:405:3ae6:2401 with SMTP id f7-20020a7bcc07000000b004053ae62401mr2903785wmh.14.1696440603226;
+        Wed, 04 Oct 2023 10:30:03 -0700 (PDT)
+Received: from arn-bsandu-l4.corp.ad.wrs.com (87-168-141.netrunf.cytanet.com.cy. [87.228.168.141])
+        by smtp.gmail.com with ESMTPSA id p21-20020a05600c205500b003fefaf299b6sm2022911wmg.38.2023.10.04.10.30.02
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 04 Oct 2023 10:30:02 -0700 (PDT)
+From: Beniamin Sandu <beniaminsandu@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Beniamin Sandu <beniaminsandu@gmail.com>
+Subject: [meta-oe][PATCH] libnet: upgrade version v1.2 -> v1.3
+Date: Wed,  4 Oct 2023 20:29:56 +0300
+Message-Id: <20231004172956.103060-1-beniaminsandu@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20231004161345.322169-1-joe.slater@windriver.com>
-In-Reply-To: <20231004161345.322169-1-joe.slater@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 4 Oct 2023 09:57:45 -0700
-Message-ID: <CAMKF1spFprH3HOwJ=3PdpiSA3-H-U4qDGOG4EsK2ViBTaPEtGg@mail.gmail.com>
-Subject: Re: [oe] [meta-webserver][PATCH 1/1] nginx: add configure option
-To: joe.slater@windriver.com
-Cc: openembedded-devel@lists.openembedded.org, randy.macleod@windriver.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 04 Oct 2023 16:58:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105339
+ <openembedded-devel@lists.openembedded.org>; Wed, 04 Oct 2023 17:30:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105340
 
-On Wed, Oct 4, 2023 at 9:13=E2=80=AFAM Joe Slater via lists.openembedded.or=
-g
-<joe.slater=3Dwindriver.com@lists.openembedded.org> wrote:
->
-> From: Joe Slater <joe.slater@windriver.com>
->
-> Support --with-http_xslt_module configure option via a PACKAGECONFIG
-> option.  The option is not added to the defaults.
->
-> Signed-off-by: Joe Slater <joe.slater@windriver.com>
-> ---
->  .../files/0001-configure-libxslt-conf.patch   | 39 +++++++++++++++++++
->  meta-webserver/recipes-httpd/nginx/nginx.inc  |  3 ++
->  2 files changed, 42 insertions(+)
->  create mode 100644 meta-webserver/recipes-httpd/nginx/files/0001-configu=
-re-libxslt-conf.patch
->
-> diff --git a/meta-webserver/recipes-httpd/nginx/files/0001-configure-libx=
-slt-conf.patch b/meta-webserver/recipes-httpd/nginx/files/0001-configure-li=
-bxslt-conf.patch
-> new file mode 100644
-> index 0000000000..7ba2a1fb85
-> --- /dev/null
-> +++ b/meta-webserver/recipes-httpd/nginx/files/0001-configure-libxslt-con=
-f.patch
-> @@ -0,0 +1,39 @@
-> +From 0c3c669464a514cf8d0cac08282ecb2b486f440f Mon Sep 17 00:00:00 2001
-> +From: Joe Slater <joe.slater@windriver.com>
-> +Date: Tue, 3 Oct 2023 19:21:17 +0000
-> +Subject: [PATCH] configure: libxslt conf
-> +
-> +Modify to find libxslt related include files under sysroot.
-> +
-> +Upstream-Status: Pending
-> +
-> +Signed-off-by: Joe Slater <joe.slater@windriver.com>
-> +---
-> + auto/lib/libxslt/conf | 4 ++--
-> + 1 file changed, 2 insertions(+), 2 deletions(-)
-> +
-> +diff --git a/auto/lib/libxslt/conf b/auto/lib/libxslt/conf
-> +index 3063ac7..eb77886 100644
-> +--- a/auto/lib/libxslt/conf
-> ++++ b/auto/lib/libxslt/conf
-> +@@ -12,7 +12,7 @@
-> +                       #include <libxslt/xsltInternals.h>
-> +                       #include <libxslt/transform.h>
-> +                       #include <libxslt/xsltutils.h>"
-> +-    ngx_feature_path=3D"/usr/include/libxml2"
-> ++    ngx_feature_path=3D"=3D/usr/include/libxml2"
+Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
+---
+ ...64_t-instead-of-__int64_t-for-mingw-.patch | 33 -------------------
+ .../libnet/{libnet_1.2.bb => libnet_1.3.bb}   |  5 ++-
+ 2 files changed, 2 insertions(+), 36 deletions(-)
+ delete mode 100644 meta-oe/recipes-connectivity/libnet/libnet/0001-Use-standard-int64_t-instead-of-__int64_t-for-mingw-.patch
+ rename meta-oe/recipes-connectivity/libnet/{libnet_1.2.bb => libnet_1.3.bb} (78%)
 
-For OE usecase, this might be enough, however, upstream might support
-different compilers or even older gcc or clang where sysroot support is not
-there or are configures with sysroot support disabled so =3Dincpath syntax =
-may
-not work universally.  Perhaps adding a new case where PREFIX is set
-then prepend
-that to path if not them proceed as normal might make it easier to not rely=
- on
-tool features.
+diff --git a/meta-oe/recipes-connectivity/libnet/libnet/0001-Use-standard-int64_t-instead-of-__int64_t-for-mingw-.patch b/meta-oe/recipes-connectivity/libnet/libnet/0001-Use-standard-int64_t-instead-of-__int64_t-for-mingw-.patch
+deleted file mode 100644
+index a32414bdf..000000000
+--- a/meta-oe/recipes-connectivity/libnet/libnet/0001-Use-standard-int64_t-instead-of-__int64_t-for-mingw-.patch
++++ /dev/null
+@@ -1,33 +0,0 @@
+-From a1659e261888bdbed51803132d52d9a6c6803c8a Mon Sep 17 00:00:00 2001
+-From: Joachim Nilsson <troglobit@gmail.com>
+-Date: Sat, 19 Oct 2019 12:26:26 +0200
+-Subject: [PATCH] Use standard int64_t instead of __int64_t for mingw cross
+- build
+-
+-Signed-off-by: Joachim Nilsson <troglobit@gmail.com>
+----
+-Upstream-Status: Pending
+-
+- include/libnet/libnet-structures.h | 6 +++---
+- 1 file changed, 3 insertions(+), 3 deletions(-)
+-
+-diff --git a/include/libnet/libnet-structures.h b/include/libnet/libnet-structures.h
+-index 6084caa..34fffc6 100644
+---- a/include/libnet/libnet-structures.h
+-+++ b/include/libnet/libnet-structures.h
+-@@ -49,9 +49,9 @@ struct libnet_port_list_chain
+- /* libnet statistics structure */
+- struct libnet_stats
+- {
+--    __int64_t packets_sent;               /* packets sent */
+--    __int64_t packet_errors;              /* packets errors */
+--    __int64_t bytes_written;              /* bytes written */
+-+    int64_t packets_sent;               /* packets sent */
+-+    int64_t packet_errors;              /* packets errors */
+-+    int64_t bytes_written;              /* bytes written */
+- };
+- 
+- 
+--- 
+-2.25.1
+-
+diff --git a/meta-oe/recipes-connectivity/libnet/libnet_1.2.bb b/meta-oe/recipes-connectivity/libnet/libnet_1.3.bb
+similarity index 78%
+rename from meta-oe/recipes-connectivity/libnet/libnet_1.2.bb
+rename to meta-oe/recipes-connectivity/libnet/libnet_1.3.bb
+index eaa0a0445..b4648832f 100644
+--- a/meta-oe/recipes-connectivity/libnet/libnet_1.2.bb
++++ b/meta-oe/recipes-connectivity/libnet/libnet_1.3.bb
+@@ -8,11 +8,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=07f291bf6e78efa05cec668cf6a09acc"
+ 
+ DEPENDS = "libpcap"
+ 
+-SRC_URI = "git://github.com/libnet/libnet.git;protocol=https;branch=master \
+-	file://0001-Use-standard-int64_t-instead-of-__int64_t-for-mingw-.patch"
++SRC_URI = "git://github.com/libnet/libnet.git;protocol=https;branch=master"
+ 
+ SRC_URI[sha256sum] = "1e9e9054d688b059bcbaf878d8c4fbf69bfc0c9386cd4e7779fbb53339050d2e"
+-SRCREV = "deeeeaeb84f8bc5d2299913d4ccf53d0d4c26966"
++SRCREV = "deaebdfe2743e8a6f04d3c307d9272afeeecfade"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.25.1
 
-> +     ngx_feature_libs=3D"-lxml2 -lxslt"
-> +     ngx_feature_test=3D"xmlParserCtxtPtr    ctxt =3D NULL;
-> +                       xsltStylesheetPtr   sheet =3D NULL;
-> +@@ -100,7 +100,7 @@ fi
-> +     ngx_feature_name=3DNGX_HAVE_EXSLT
-> +     ngx_feature_run=3Dno
-> +     ngx_feature_incs=3D"#include <libexslt/exslt.h>"
-> +-    ngx_feature_path=3D"/usr/include/libxml2"
-> ++    ngx_feature_path=3D"=3D/usr/include/libxml2"
-> +     ngx_feature_libs=3D"-lexslt"
-> +     ngx_feature_test=3D"exsltRegisterAll();"
-> +     . auto/feature
-> +--
-> +2.35.5
-> +
-> diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserve=
-r/recipes-httpd/nginx/nginx.inc
-> index 1ea32f7c94..8890e0bea1 100644
-> --- a/meta-webserver/recipes-httpd/nginx/nginx.inc
-> +++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
-> @@ -22,6 +22,7 @@ SRC_URI =3D " \
->      file://nginx-volatile.conf \
->      file://nginx.service \
->      file://nginx-fix-pidfile.patch \
-> +    file://0001-configure-libxslt-conf.patch \
->  "
->
->  inherit siteinfo update-rc.d useradd systemd
-> @@ -47,6 +48,8 @@ PACKAGECONFIG[ipv6] =3D "--with-ipv6,,"
->  PACKAGECONFIG[webdav] =3D "--with-http_dav_module,,"
->  PACKAGECONFIG[stream] =3D "--with-stream,,"
->
-> +PACKAGECONFIG[xslt] =3D "--with-http_xslt_module,,libxslt"
-> +
->  do_configure () {
->      if [ "${SITEINFO_BITS}" =3D "64" ]; then
->          PTRSIZE=3D8
-> --
-> 2.25.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#105337): https://lists.openembedded.org/g/openembedde=
-d-devel/message/105337
-> Mute This Topic: https://lists.openembedded.org/mt/101758666/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
 
