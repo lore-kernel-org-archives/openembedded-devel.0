@@ -1,152 +1,126 @@
-Return-Path: <daniel.klauer@gin.de>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 82CD6E7B5ED
-	for <webhook@archiver.kernel.org>; Wed,  4 Oct 2023 10:54:39 +0000 (UTC)
-Received: from good-out-03.clustermail.de (good-out-03.clustermail.de [212.223.36.1])
- by mx.groups.io with SMTP id smtpd.web10.15501.1696416871520275223
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1175EE7C4D0
+	for <webhook@archiver.kernel.org>; Wed,  4 Oct 2023 15:07:44 +0000 (UTC)
+Received: from out2-smtp.messagingengine.com (out2-smtp.messagingengine.com [66.111.4.26])
+ by mx.groups.io with SMTP id smtpd.web10.12763.1696402818074236888
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Oct 2023 03:54:32 -0700
+ Wed, 04 Oct 2023 00:00:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: gin.de, ip: 212.223.36.1, mailfrom: daniel.klauer@gin.de)
-Received: from [10.0.0.9] (helo=frontend.clustermail.de)
-	by smtpout-01.clustermail.de with esmtp (Exim 4.96)
-	(envelope-from <Daniel.Klauer@gin.de>)
-	id 1qnzWO-0005Yg-1t
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Oct 2023 12:54:28 +0200
-Received: from [217.6.33.237] (helo=Win2012-02.gin-domain.local)
-	by frontend.clustermail.de with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384
-	(Exim 4.96)
-	(envelope-from <Daniel.Klauer@gin.de>)
-	id 1qnzWN-0005ai-2X
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Oct 2023 12:54:28 +0200
-Received: from daniel-desktop2.fritz.box (10.176.8.48) by
- Win2012-02.gin-domain.local (10.160.128.12) with Microsoft SMTP Server (TLS)
- id 15.0.1497.48; Wed, 4 Oct 2023 12:54:27 +0200
-From: Daniel Klauer <daniel.klauer@gin.de>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] graphviz: Fix build to not use $prefix as search dir
-Date: Wed, 4 Oct 2023 12:54:03 +0200
-Message-ID: <20231004105403.6508-1-daniel.klauer@gin.de>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@zhukoff.net header.s=fm2 header.b=e6+qF5N3;
+ dkim=pass header.i=@messagingengine.com header.s=fm2 header.b=fbKdbJOi;
+ spf=pass (domain: zhukoff.net, ip: 66.111.4.26, mailfrom: pavel@zhukoff.net)
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
+	by mailout.nyi.internal (Postfix) with ESMTP id 67E0D5C02EE;
+	Wed,  4 Oct 2023 03:00:17 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+  by compute2.internal (MEProxy); Wed, 04 Oct 2023 03:00:17 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zhukoff.net; h=
+	cc:cc:content-transfer-encoding:content-type:date:date:from:from
+	:in-reply-to:message-id:mime-version:reply-to:sender:subject
+	:subject:to:to; s=fm2; t=1696402817; x=1696489217; bh=cxRK5n7n0a
+	56TrQsgNAUqqPthvZSWjr3lPjVnyzOoGo=; b=e6+qF5N35Rt1QvMakiQ6xkg5gU
+	z9+21rTVEv/P8dIzeE2ao4Nr+ZaDWbrOrDv8x0LgJY8yP2h3XCw3rK/ifi3hPx32
+	SsoUEVWVu6W0whtf7pxj6+nZ49uyPPceT02DaVhL1ZvjNtAiBpZQT1W52M8hZ1NN
+	TXvXcMC90DgIxyae/cR9I64F3803Z60lCcWg6qiWINqZFRsP6thTsUlSluG/3L+T
+	XJHRaBaZV2lgtDUgIIsHoGvSUtI5DUQURsq7z0Cv29lOk+W0Tvapr259LFAo0qBp
+	VVBIKFlfvjeL1h1We4kZP8MjIkB0io4YoazfPUOlEabA16yAebzxje/tQeVQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:date:date:feedback-id:feedback-id:from:from
+	:in-reply-to:message-id:mime-version:reply-to:sender:subject
+	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+	:x-sasl-enc; s=fm2; t=1696402817; x=1696489217; bh=cxRK5n7n0a56T
+	rQsgNAUqqPthvZSWjr3lPjVnyzOoGo=; b=fbKdbJOizW9mCp/XnAf7FOTrkgLeT
+	T1X9SRIqnc3IepWe0D5y+PVnY9BGs1Vo0QlIIgZYXLUiS9pAm432ltRRQlEEqrUt
+	rv9wfbfNvfHM2YN1pyghYTHVzOHS6h7+isDe9R9RiO7d0ium2nj+TXk8Xi3+WVir
+	209i0151jk/KxNIVs380vCw8i66tuv7DlyX3q16h+kJgp15whIiPAIFLpZCBHt0U
+	OxQBV6zZpqUm1zWaOWO3UOG2ZKvQLdf6Bs4+lRePn2pHP1dn24aLGcm3b8KfrddV
+	y9zOEhC/uP6hH9aW+tCfpgcCCuuaU/E+BEJDJ+GrUi59977NDrrPGRT1g==
+X-ME-Sender: <xms:gQ0dZSrGEBxDYe3eFOpyS3HzdO8HUmhz8-WCASvodoFbturQkDqohg>
+    <xme:gQ0dZQo43Ge9GCV4e44ynWFp74fi2TCkUfmF_gRUr4T1yZwAlEQTMbjltlroPMS1p
+    ox7dUpa02WXDzhP15A>
+X-ME-Received: <xmr:gQ0dZXMwtV9xfAJLKzEejvYHATiln4bdMxgNxGf9jsqSJ9HW88H36BK1rrm3w0wrarr0fYlVw6ubEJGwQbynVcY0>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrgedugddutdcutefuodetggdotefrodftvf
+    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+    uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
+    fjughrpefhvfevufffkffoggfgsedtkeertdertddtnecuhfhrohhmpefrrghvvghlucgk
+    hhhukhhovhcuudcuoehprghvvghlseiihhhukhhofhhfrdhnvghtqeenucggtffrrghtth
+    gvrhhnpeevffefudetkeduffettddugeefteeigfehfefhgfdufffgledtieegudejfedv
+    gfenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehprg
+    hvvghlseiihhhukhhofhhfrdhnvght
+X-ME-Proxy: <xmx:gQ0dZR5flDJND30AmLF4KUSnJOvV_Tjq2GhV05BkY1OKxgxM_ceRbA>
+    <xmx:gQ0dZR44jcbtg66Ej2I2mxneGqKDR8sU6-VkjpHKZrMNg1S8KD77JA>
+    <xmx:gQ0dZRh1Gqv9ATf7o_SKML18vZTxWNKw3nDgUIwuGK9pU0wDxVRVcQ>
+    <xmx:gQ0dZejIXnVgr4WewtGrkh4CxTIMGecngLMiW-jNSH36HW-3huJDKg>
+Feedback-ID: ib94946c9:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 4 Oct 2023 03:00:16 -0400 (EDT)
+From: "Pavel Zhukov" <pavel@zhukoff.net>
+To: openembedded-devel@lists.openembedded.org
+Cc: Pavel Zhukov <pavel@zhukoff.net>
+Subject: [PATCH 1/3] dummy-sdk-package.inc: Filter packages which are marked for installation
+Date: Wed,  4 Oct 2023 08:57:26 +0200
+Message-ID: <20231004065728.4283-1-pavel@zhukoff.net>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.176.8.48]
-X-ClientProxiedBy: Win2012-02.gin-domain.local (10.160.128.12) To
- Win2012-02.gin-domain.local (10.160.128.12)
-X-EsetResult: clean, is OK
-X-EsetId: 37303A29342AAB58657262
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 04 Oct 2023 10:54:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105330
+ <openembedded-devel@lists.openembedded.org>; Wed, 04 Oct 2023 15:07:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105332
 
-The graphviz configure script used $prefix/include and $prefix/lib search
-directories, thus bypassing the recipe sysroot, which could lead to build
-contamination or failures. The added patch (backported from graphviz 9.0.0)
-fixes this.
+From: Pavel Zhukov <pavel@zhukoff.net>
 
-Due to the $prefix != /usr check in the configure script, this issue only
-showed up for recipe build variants which use a different prefix value,
-such as nativesdk-graphviz (prefix = SDKPATHNATIVE/...) or graphviz-native
-(prefix = STAGING_DIR_NATIVE/...). Using STAGING_DIR_NATIVE is probably not
-a problem, since it is recipe-specific anyways, but using SDKPATHNATIVE
-may be a problem, if it happens to exist and contains headers/libraries.
-Even though this may be unlikely with the default SDKPATH =
-"/usr/local/oe-sdk-hardcoded-buildpath" value used in bitbake.conf,
-the problem can still be triggered, especially if the paths like prefix
-or SDKPATH are customized in a build.
+if packages is provided by dummysdk and in the same time marked for
+installation with IMAGE_INSTALL it causes conflict in apt because virtual providers are
+not taken into account if package is asked to be installed explicitly.
+Filter such packages from provides/conflicts to workaround this problem.
+This workaround brakes RPM usecase because of file conlicts with
+DUMMYPROVIDES, use DUMMYPROVIDES_PACKAGES_MULTILIB instead (which
+doesn't include file based conflicts).
+While this is needed for the case of package_deb only adding it for all
+package managers to not complicate the code.
 
-Link: https://gitlab.com/graphviz/graphviz/-/issues/2442
-Signed-off-by: Daniel Klauer <daniel.klauer@gin.de>
+Fixes: [Yocto #13338] [Yocto #14066]
+
+Fixes:
+The following information may help to resolve the situation:
+
+The following packages have unmet dependencies:
+ target-sdk-provides-dummy : Conflicts: bash
+E: Unable to correct problems, you have held broken packages.
+
+Signed-off-by: Pavel Zhukov <pavel@zhukoff.net>
 ---
- ...-not-put-prefix-based-paths-in-compi.patch | 58 +++++++++++++++++++
- .../graphviz/graphviz_8.1.0.bb                |  1 +
- 2 files changed, 59 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/graphviz/graphviz/0001-Autotools-fix-do-not-put-prefix-based-paths-in-compi.patch
+ meta/recipes-core/meta/dummy-sdk-package.inc | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/graphviz/graphviz/0001-Autotools-fix-do-not-put-prefix-based-paths-in-compi.patch b/meta-oe/recipes-graphics/graphviz/graphviz/0001-Autotools-fix-do-not-put-prefix-based-paths-in-compi.patch
-new file mode 100644
-index 000000000..0d3f41270
---- /dev/null
-+++ b/meta-oe/recipes-graphics/graphviz/graphviz/0001-Autotools-fix-do-not-put-prefix-based-paths-in-compi.patch
-@@ -0,0 +1,58 @@
-+From 671e0d091b40ef7deb4a9d43e0dbed2a44edbec8 Mon Sep 17 00:00:00 2001
-+From: Matthew Fernandez <matthew.fernandez@gmail.com>
-+Date: Sat, 9 Sep 2023 01:03:04 -0700
-+Subject: [PATCH] Autotools: fix: do not put '$prefix' based paths in
-+ compilation flags
-+
-+This was causing problems with cross-compilation with a dedicated sysroot,
-+because compilation would incorrectly use headers and libraries from the
-+`--prefix` path. The `--prefix` path is meant to indicate a target path to
-+install to, not a path from which to source dependent libraries.
-+
-+Gitlab: fixes #2442
-+Reported-by: Daniel Klauer
-+Suggested-by: Daniel Klauer
-+
-+Upstream-Status: Backport [https://gitlab.com/graphviz/graphviz/-/commit/012d250a903e13114bce3ba40995fb957fed7848]
-+Signed-off-by: Daniel Klauer <daniel.klauer@gin.de>
-+---
-+ CHANGELOG.md | 3 +++
-+ configure.ac | 8 --------
-+ 2 files changed, 3 insertions(+), 8 deletions(-)
-+
-+diff --git a/CHANGELOG.md b/CHANGELOG.md
-+index b9b7e8e08..3a15fd256 100644
-+--- a/CHANGELOG.md
-++++ b/CHANGELOG.md
-+@@ -39,6 +39,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
-+   longer fails due to missing PHP files. #2388
-+ - Syntax for a loop in `gvmap.sh` has been corrected. This was a regression in
-+   Graphviz 2.50.0. #2404
-++- The Autotools build system no longer uses headers and libraries from the
-++  `--prefix` path given on the command line. This previously caused
-++  cross-compilation to incorrectly pick up host headers and libraries. #2442
-+ 
-+ ## [8.0.5] – 2023-04-30
-+ 
-+diff --git a/configure.ac b/configure.ac
-+index 573a3ee5d..7d53346de 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -190,14 +190,6 @@ if test "x${prefix}" = "xNONE"; then
-+ 	AC_SUBST([prefix])
-+ fi
-+ 
-+-# automatically check for other dependencies in $prefix first
-+-if test "x${prefix}" != "x/usr"; then
-+-	CPPFLAGS="$CPPFLAGS -I${prefix}/include"
-+-	LDFLAGS="$LDFLAGS -L${prefix}/lib"
-+-	PKG_CONFIG_PATH="$prefix/lib/pkgconfig$PATHSEPARATOR$PKG_CONFIG_PATH"
-+-	export PKG_CONFIG_PATH
-+-fi
-+-
-+ dnl -----------------------------------
-+ # Static/Shared binaries
-+ 
-+-- 
-+2.34.1
-+
-diff --git a/meta-oe/recipes-graphics/graphviz/graphviz_8.1.0.bb b/meta-oe/recipes-graphics/graphviz/graphviz_8.1.0.bb
-index ccc114007..4d40ee4de 100644
---- a/meta-oe/recipes-graphics/graphviz/graphviz_8.1.0.bb
-+++ b/meta-oe/recipes-graphics/graphviz/graphviz_8.1.0.bb
-@@ -19,6 +19,7 @@ DEPENDS:append:class-nativesdk = " ${BPN}-native"
- inherit autotools-brokensep pkgconfig gettext qemu
+diff --git a/meta/recipes-core/meta/dummy-sdk-package.inc b/meta/recipes-core/meta/dummy-sdk-package.inc
+index bd26e39ad3..6ccafbf8bc 100644
+--- a/meta/recipes-core/meta/dummy-sdk-package.inc
++++ b/meta/recipes-core/meta/dummy-sdk-package.inc
+@@ -19,13 +19,14 @@ PR[vardeps] += "DUMMYPROVIDES"
+ PR[vardeps] += "DUMMYPROVIDES_PACKAGES"
  
- SRC_URI = "https://gitlab.com/api/v4/projects/4207231/packages/generic/${BPN}-releases/${PV}/${BP}.tar.xz \
-+           file://0001-Autotools-fix-do-not-put-prefix-based-paths-in-compi.patch \
-            "
- # Use native mkdefs
- SRC_URI:append:class-target = "\
+ DUMMYPROVIDES_PACKAGES ??= ""
+-DUMMYPROVIDES_PACKAGES_MULTILIB = "${@' '.join([multilib_pkg_extend(d, pkg) for pkg in d.getVar('DUMMYPROVIDES_PACKAGES').split()])}"
++DUMMYPROVIDES_PACKAGES_FILTERED = "${@' '.join([pkg for pkg in d.getVar('DUMMYPROVIDES_PACKAGES').split() if d.getVar('IMAGE_INSTALL') is not None and pkg not in d.getVar('IMAGE_INSTALL').split()])}"
++DUMMYPROVIDES_PACKAGES_MULTILIB = "${@' '.join([multilib_pkg_extend(d, pkg) for pkg in d.getVar('DUMMYPROVIDES_PACKAGES_FILTERED').split()])}"
+ DUMMYPROVIDES += "${DUMMYPROVIDES_PACKAGES_MULTILIB}"
+ 
+ python populate_packages:prepend() {
+     p = d.getVar("PN")
+     d.appendVar("RPROVIDES:%s" % p, "${DUMMYPROVIDES}")
+-    d.appendVar("RCONFLICTS:%s" % p, "${DUMMYPROVIDES}")
++    d.appendVar("RCONFLICTS:%s" % p, "${DUMMYPROVIDES_PACKAGES_MULTILIB}")
+     d.appendVar("RREPLACES:%s" % p, "${DUMMYPROVIDES_PACKAGES_MULTILIB}")
+ }
+ 
 -- 
-2.34.1
+2.41.0
 
 
