@@ -1,210 +1,175 @@
-Return-Path: <philip@balister.org>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AF831E7C4E5
-	for <webhook@archiver.kernel.org>; Wed,  4 Oct 2023 16:33:35 +0000 (UTC)
-Received: from out1-smtp.messagingengine.com (out1-smtp.messagingengine.com [66.111.4.25])
- by mx.groups.io with SMTP id smtpd.web11.22764.1696436075103416973
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ECAC5E7C4E5
+	for <webhook@archiver.kernel.org>; Wed,  4 Oct 2023 16:58:15 +0000 (UTC)
+Received: from mail-oa1-f45.google.com (mail-oa1-f45.google.com [209.85.160.45])
+ by mx.groups.io with SMTP id smtpd.web11.24036.1696438692414849058
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Oct 2023 09:14:35 -0700
+ Wed, 04 Oct 2023 09:58:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@zhukoff.net header.s=fm2 header.b=tu1/Ynr5;
- dkim=pass header.i=@messagingengine.com header.s=fm2 header.b=bJ9gFEmy;
- spf=pass (domain: zhukoff.net, ip: 66.111.4.25, mailfrom: pavel@zhukoff.net)
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
-	by mailout.nyi.internal (Postfix) with ESMTP id 4B32F5C02DB;
-	Wed,  4 Oct 2023 12:14:34 -0400 (EDT)
-Received: from imap51 ([10.202.2.101])
-  by compute4.internal (MEProxy); Wed, 04 Oct 2023 12:14:34 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zhukoff.net; h=
-	cc:cc:content-type:content-type:date:date:from:from:in-reply-to
-	:in-reply-to:message-id:mime-version:references:reply-to:sender
-	:subject:subject:to:to; s=fm2; t=1696436074; x=1696522474; bh=0R
-	wFpv0QrvlWL632LuC+ZEMd+RX1jzXvWyiOeVeDnn0=; b=tu1/Ynr572Gawo6C2r
-	7x7qe7lhkEwEhLF3CtUKvuiOnGJnZ1VckyGr67bD8j8mhUgFcsPI2WcXvO/Bk63D
-	l7fDT+HHiMz/B+m+yPCDKdMspQkmyMZ4p/3Bz4Vr/JGtfmfs3uerBA36+RN2JQcO
-	aKqWLnA7HKWUnmk3GkezJNwHw2f5v7OCEGYgdEo6I01b09TeZjciGdZN4IKCNANY
-	eWLtnRgIV61qBBY88B8gaVscvg7xfvWGtmVkJFBMPTqUb0FtFi8EIR15TXphcdfd
-	GOrwoZP3SGF0NjspiKTxUK0TRqIeHIC77IHfJpBnslaFmFd+y6+Z9VbOEWxzjdD4
-	Qnig==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:content-type:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:sender:subject
-	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
-	:x-sasl-enc; s=fm2; t=1696436074; x=1696522474; bh=0RwFpv0QrvlWL
-	632LuC+ZEMd+RX1jzXvWyiOeVeDnn0=; b=bJ9gFEmye4AyzourTquhl/jhXgyjs
-	ozCmnqE/jG2IUMbcIac/s8r9luzYwwtyb4g71+t9+wpaLchGleuKFwfqOswXoVe0
-	Lobww/tqqWHpHCLczTotER2GQRz+SnPdJqOaeuSWQeT0qFYTdGa6vO2JkzdYOAi1
-	SHfmXRk+tWP3+xg/pg0AMJLh0UZw+ymZ9KuNNsW78qyExSDj1AzDHRjvRED3P2Cm
-	82M+MPTpB7acOMiQt+rNGwp5dis6AdRZUesQiT3RtVtGxCHxHUobkG6v64ISADOR
-	hNp2yArtxo/CJ+SBPfcZmC6gn7Qm439IMvwjIOGfu4LvwQvtNDgH+D/aw==
-X-ME-Sender: <xms:ao8dZXfyij2FrCUJsXM_2Skv1EqdTx-C8aRd9qRdl3RFIa3RTHTZWg>
-    <xme:ao8dZdNCqgnjwNWQYDNjXlokSa3ZL2PZaF63gvVaVyXOnCgUt3bHuekpGbbtsln5t
-    nlpJZmM9qpsw0gmM4s>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrgedvgdeljecutefuodetggdotefrodftvf
-    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
-    uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
-    fjughrpefofgggkfgjfhffhffvvefutgesrgdtreerreertdenucfhrhhomhepfdfrrghv
-    vghlucgkhhhukhhovhdfuceophgrvhgvlhesiihhuhhkohhffhdrnhgvtheqnecuggftrf
-    grthhtvghrnheptefhfeeiffejvdekieejueeivdetudelvdehueetudfhkedugeevvdel
-    jeduieehnecuffhomhgrihhnpehophgvnhgvmhgsvgguuggvugdrohhrghenucevlhhush
-    htvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehprghvvghlseiihhhu
-    khhofhhfrdhnvght
-X-ME-Proxy: <xmx:ao8dZQhebKHk5SvTz8-8uPXi0Bm4MGXmqYfczvDJl59MzvAe5YR4Pw>
-    <xmx:ao8dZY-l4vvvn8TxD6dQwXcSqJFNej65gsc5FQQ9wcM0_ST1GDwDRg>
-    <xmx:ao8dZTu8Vr63IIBML0SJC74rBvvReha8QPhKyO0Gw8EmM5tVI-MVcQ>
-    <xmx:ao8dZQ7dtiNKrZwkb6kHE-uJkRholoP2zprvb4PNQN36QADn-IvB3w>
-Feedback-ID: ib94946c9:Fastmail
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
-	id 069E9B60089; Wed,  4 Oct 2023 12:14:34 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.9.0-alpha0-958-g1b1b911df8-fm-20230927.002-g1b1b911d
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=hSB5mo1t;
+ spf=pass (domain: gmail.com, ip: 209.85.160.45, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f45.google.com with SMTP id 586e51a60fabf-1dce0f9e222so1579944fac.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Oct 2023 09:58:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1696438691; x=1697043491; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=STdda2xWo6r7F5YEpaWdjx9W5vElquC1nwgI89u77Zc=;
+        b=hSB5mo1tnxSi3YxVlaobGcL46tbbxH23XpLqy1Lftmi4Cc4lid2JA2BTiNHR41Ws5Z
+         nzf+JXl+z9SbJAGn7wFMbBF7EhS+05MkhIxdxfbKqL7vjvD+1dvVmfI+zaLuNKiuhjky
+         jgAw9SClJoeKEJ+OjC7CGhBBIG9JJCO5RDR9mwg6iWdAN3OEnMICE8NvobDDnTDR3mwS
+         c5fcprlporpBiG2DRX3ZZEJA1X1dJCan4u3Zr8pIku+4GNYGM9PSW3CW5vZ4xlWE+aZC
+         i08SgBt9oSS0rJaOeuLOLEypIWmJnF2OzHX7TpzQphffhiz5Xu2SwmYL+Sluv8RGXhhv
+         I2RQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1696438691; x=1697043491;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=STdda2xWo6r7F5YEpaWdjx9W5vElquC1nwgI89u77Zc=;
+        b=l6NTCm7Y94PZiWE3tD+iUWK+ySzh9z+OfcM8Hz5kPQFfUs9TLbontKB+Z45nKBzWFI
+         0DtOLLNf2nrPG4XO9vLxyGitBXWL2b3tomQwAK7jJM9vGy4d2XLQMxYMWfedzoI6+4wY
+         2zaw07r4t2pfibdWYCONJTpofnswooK5zrBiBB+YXYNTkw3hmITO+9R7orxjjrXMjRNr
+         uVjcT7USYxxGee3OK8MOoGJ+mZgNdBrjk7d23jsfcZhu9jCWCXEZHJJtkp9p4E3fOaGZ
+         EV1WLKkNgonaAm1dn3Iv9jUk0yyeO2ra74nT65SV7DRgbYGHYB3KdDY01HBOtILs0UAO
+         cvaQ==
+X-Gm-Message-State: AOJu0YzWK108GAPkDlH12FAYVoTOzBzQPX4CwdqDVFfzx+mI960mcD2B
+	lgZijE9Te6ogWgcG1HVzBofn3yZ4vlU4s05y6MwWYjfKQjY=
+X-Google-Smtp-Source: AGHT+IEBEMpjgJVSMLbUbp/e+d6QQkG3VoWtCibvkGUifW6ofUVhfI6VmjIaBRekwkYUe1cVRyIXbyGAE8Xrcoe2Ozw=
+X-Received: by 2002:a05:6870:b025:b0:1bf:9f6:b810 with SMTP id
+ y37-20020a056870b02500b001bf09f6b810mr3183473oae.36.1696438691494; Wed, 04
+ Oct 2023 09:58:11 -0700 (PDT)
 MIME-Version: 1.0
-Message-Id: <219770fd-d741-4300-ace1-97cbc3af11a7@app.fastmail.com>
-In-Reply-To: 
- <CAMKF1squqBoDcuEdRY_MS=uJfyc7bVtK15pLrh8VunKo4YvvDw@mail.gmail.com>
-References: <20231004065728.4283-1-pavel@zhukoff.net>
- <CAMKF1squqBoDcuEdRY_MS=uJfyc7bVtK15pLrh8VunKo4YvvDw@mail.gmail.com>
-Date: Wed, 04 Oct 2023 18:11:48 +0200
-From: "Pavel Zhukov" <pavel@zhukoff.net>
-To: "Khem Raj" <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [PATCH 1/3] dummy-sdk-package.inc: Filter packages which are marked for installation
-Content-Type: multipart/alternative;
- boundary=f555627f95924b8a9774ca261d9dc89d
+References: <20231004161345.322169-1-joe.slater@windriver.com>
+In-Reply-To: <20231004161345.322169-1-joe.slater@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 4 Oct 2023 09:57:45 -0700
+Message-ID: <CAMKF1spFprH3HOwJ=3PdpiSA3-H-U4qDGOG4EsK2ViBTaPEtGg@mail.gmail.com>
+Subject: Re: [oe] [meta-webserver][PATCH 1/1] nginx: add configure option
+To: joe.slater@windriver.com
+Cc: openembedded-devel@lists.openembedded.org, randy.macleod@windriver.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 04 Oct 2023 16:33:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105338
+ <openembedded-devel@lists.openembedded.org>; Wed, 04 Oct 2023 16:58:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105339
 
---f555627f95924b8a9774ca261d9dc89d
-Content-Type: text/plain
+On Wed, Oct 4, 2023 at 9:13=E2=80=AFAM Joe Slater via lists.openembedded.or=
+g
+<joe.slater=3Dwindriver.com@lists.openembedded.org> wrote:
+>
+> From: Joe Slater <joe.slater@windriver.com>
+>
+> Support --with-http_xslt_module configure option via a PACKAGECONFIG
+> option.  The option is not added to the defaults.
+>
+> Signed-off-by: Joe Slater <joe.slater@windriver.com>
+> ---
+>  .../files/0001-configure-libxslt-conf.patch   | 39 +++++++++++++++++++
+>  meta-webserver/recipes-httpd/nginx/nginx.inc  |  3 ++
+>  2 files changed, 42 insertions(+)
+>  create mode 100644 meta-webserver/recipes-httpd/nginx/files/0001-configu=
+re-libxslt-conf.patch
+>
+> diff --git a/meta-webserver/recipes-httpd/nginx/files/0001-configure-libx=
+slt-conf.patch b/meta-webserver/recipes-httpd/nginx/files/0001-configure-li=
+bxslt-conf.patch
+> new file mode 100644
+> index 0000000000..7ba2a1fb85
+> --- /dev/null
+> +++ b/meta-webserver/recipes-httpd/nginx/files/0001-configure-libxslt-con=
+f.patch
+> @@ -0,0 +1,39 @@
+> +From 0c3c669464a514cf8d0cac08282ecb2b486f440f Mon Sep 17 00:00:00 2001
+> +From: Joe Slater <joe.slater@windriver.com>
+> +Date: Tue, 3 Oct 2023 19:21:17 +0000
+> +Subject: [PATCH] configure: libxslt conf
+> +
+> +Modify to find libxslt related include files under sysroot.
+> +
+> +Upstream-Status: Pending
+> +
+> +Signed-off-by: Joe Slater <joe.slater@windriver.com>
+> +---
+> + auto/lib/libxslt/conf | 4 ++--
+> + 1 file changed, 2 insertions(+), 2 deletions(-)
+> +
+> +diff --git a/auto/lib/libxslt/conf b/auto/lib/libxslt/conf
+> +index 3063ac7..eb77886 100644
+> +--- a/auto/lib/libxslt/conf
+> ++++ b/auto/lib/libxslt/conf
+> +@@ -12,7 +12,7 @@
+> +                       #include <libxslt/xsltInternals.h>
+> +                       #include <libxslt/transform.h>
+> +                       #include <libxslt/xsltutils.h>"
+> +-    ngx_feature_path=3D"/usr/include/libxml2"
+> ++    ngx_feature_path=3D"=3D/usr/include/libxml2"
 
-Whoops. Sorry. wrong alias.
-I'm resending to proper ML. 
+For OE usecase, this might be enough, however, upstream might support
+different compilers or even older gcc or clang where sysroot support is not
+there or are configures with sysroot support disabled so =3Dincpath syntax =
+may
+not work universally.  Perhaps adding a new case where PREFIX is set
+then prepend
+that to path if not them proceed as normal might make it easier to not rely=
+ on
+tool features.
 
-On Wed, Oct 4, 2023, at 17:51, Khem Raj wrote:
-> Wrong mailing list core layer patches go to oe-core mailing list not oe-devel 
-> 
-> On Wed, Oct 4, 2023 at 8:07 AM Pavel Zhukov <pavel@zhukoff.net> wrote:
->> From: Pavel Zhukov <pavel@zhukoff.net>
->> 
->> if packages is provided by dummysdk and in the same time marked for
->> installation with IMAGE_INSTALL it causes conflict in apt because virtual providers are
->> not taken into account if package is asked to be installed explicitly.
->> Filter such packages from provides/conflicts to workaround this problem.
->> This workaround brakes RPM usecase because of file conlicts with
->> DUMMYPROVIDES, use DUMMYPROVIDES_PACKAGES_MULTILIB instead (which
->> doesn't include file based conflicts).
->> While this is needed for the case of package_deb only adding it for all
->> package managers to not complicate the code.
->> 
->> Fixes: [Yocto #13338] [Yocto #14066]
->> 
->> Fixes:
->> The following information may help to resolve the situation:
->> 
->> The following packages have unmet dependencies:
->>  target-sdk-provides-dummy : Conflicts: bash
->> E: Unable to correct problems, you have held broken packages.
->> 
->> Signed-off-by: Pavel Zhukov <pavel@zhukoff.net>
->> ---
->>  meta/recipes-core/meta/dummy-sdk-package.inc | 5 +++--
->>  1 file changed, 3 insertions(+), 2 deletions(-)
->> 
->> diff --git a/meta/recipes-core/meta/dummy-sdk-package.inc b/meta/recipes-core/meta/dummy-sdk-package.inc
->> index bd26e39ad3..6ccafbf8bc 100644
->> --- a/meta/recipes-core/meta/dummy-sdk-package.inc
->> +++ b/meta/recipes-core/meta/dummy-sdk-package.inc
->> @@ -19,13 +19,14 @@ PR[vardeps] += "DUMMYPROVIDES"
->>  PR[vardeps] += "DUMMYPROVIDES_PACKAGES"
->> 
->>  DUMMYPROVIDES_PACKAGES ??= ""
->> -DUMMYPROVIDES_PACKAGES_MULTILIB = "${@' '.join([multilib_pkg_extend(d, pkg) for pkg in d.getVar('DUMMYPROVIDES_PACKAGES').split()])}"
->> +DUMMYPROVIDES_PACKAGES_FILTERED = "${@' '.join([pkg for pkg in d.getVar('DUMMYPROVIDES_PACKAGES').split() if d.getVar('IMAGE_INSTALL') is not None and pkg not in d.getVar('IMAGE_INSTALL').split()])}"
->> +DUMMYPROVIDES_PACKAGES_MULTILIB = "${@' '.join([multilib_pkg_extend(d, pkg) for pkg in d.getVar('DUMMYPROVIDES_PACKAGES_FILTERED').split()])}"
->>  DUMMYPROVIDES += "${DUMMYPROVIDES_PACKAGES_MULTILIB}"
->> 
->>  python populate_packages:prepend() {
->>      p = d.getVar("PN")
->>      d.appendVar("RPROVIDES:%s" % p, "${DUMMYPROVIDES}")
->> -    d.appendVar("RCONFLICTS:%s" % p, "${DUMMYPROVIDES}")
->> +    d.appendVar("RCONFLICTS:%s" % p, "${DUMMYPROVIDES_PACKAGES_MULTILIB}")
->>      d.appendVar("RREPLACES:%s" % p, "${DUMMYPROVIDES_PACKAGES_MULTILIB}")
->>  }
->> 
->> -- 
->> 2.41.0
->> 
->> 
->> 
-
---f555627f95924b8a9774ca261d9dc89d
-Content-Type: text/html
-Content-Transfer-Encoding: quoted-printable
-
-<!DOCTYPE html><html><head><title></title><style type=3D"text/css">p.MsoNor=
-mal,p.MsoNoSpacing{margin:0}</style></head><body><div>Whoops. Sorry. wrong =
-alias.<br></div><div>I'm resending to proper ML.&nbsp;<br></div><div><br></=
-div><div>On Wed, Oct 4, 2023, at 17:51, Khem Raj wrote:<br></div><blockquot=
-e type=3D"cite" id=3D"qt" style=3D""><div dir=3D"auto">Wrong mailing list c=
-ore layer patches go to oe-core mailing list not oe-devel&nbsp;<br></div><d=
-iv><div><br></div><div class=3D"qt-gmail_quote"><div dir=3D"ltr" class=3D"q=
-t-gmail_attr">On Wed, Oct 4, 2023 at 8:07 AM Pavel Zhukov &lt;<a href=3D"ma=
-ilto:pavel@zhukoff.net">pavel@zhukoff.net</a>&gt; wrote:<br></div><blockquo=
-te class=3D"qt-gmail_quote" style=3D"margin-top:0px;margin-right:0px;margin=
--bottom:0px;margin-left:0.8ex;border-left-width:1px;border-left-style:solid=
-;border-left-color:rgb(204, 204, 204);padding-left:1ex;"><div>From: Pavel Z=
-hukov &lt;<a href=3D"mailto:pavel@zhukoff.net" target=3D"_blank">pavel@zhuk=
-off.net</a>&gt;<br></div><div> <br></div><div> if packages is provided by d=
-ummysdk and in the same time marked for<br></div><div> installation with IM=
-AGE_INSTALL it causes conflict in apt because virtual providers are<br></di=
-v><div> not taken into account if package is asked to be installed explicit=
-ly.<br></div><div> Filter such packages from provides/conflicts to workarou=
-nd this problem.<br></div><div> This workaround brakes RPM usecase because =
-of file conlicts with<br></div><div> DUMMYPROVIDES, use DUMMYPROVIDES_PACKA=
-GES_MULTILIB instead (which<br></div><div> doesn't include file based confl=
-icts).<br></div><div> While this is needed for the case of package_deb only=
- adding it for all<br></div><div> package managers to not complicate the co=
-de.<br></div><div> <br></div><div> Fixes: [Yocto #13338] [Yocto #14066]<br>=
-</div><div> <br></div><div> Fixes:<br></div><div> The following information=
- may help to resolve the situation:<br></div><div> <br></div><div> The foll=
-owing packages have unmet dependencies:<br></div><div> &nbsp;target-sdk-pro=
-vides-dummy : Conflicts: bash<br></div><div> E: Unable to correct problems,=
- you have held broken packages.<br></div><div> <br></div><div> Signed-off-b=
-y: Pavel Zhukov &lt;<a href=3D"mailto:pavel@zhukoff.net" target=3D"_blank">=
-pavel@zhukoff.net</a>&gt;<br></div><div> ---<br></div><div> &nbsp;meta/reci=
-pes-core/meta/dummy-sdk-package.inc | 5 +++--<br></div><div> &nbsp;1 file c=
-hanged, 3 insertions(+), 2 deletions(-)<br></div><div> <br></div><div> diff=
- --git a/meta/recipes-core/meta/dummy-sdk-package.inc b/meta/recipes-core/m=
-eta/dummy-sdk-package.inc<br></div><div> index bd26e39ad3..6ccafbf8bc 10064=
-4<br></div><div> --- a/meta/recipes-core/meta/dummy-sdk-package.inc<br></di=
-v><div> +++ b/meta/recipes-core/meta/dummy-sdk-package.inc<br></div><div> @=
-@ -19,13 +19,14 @@ PR[vardeps] +=3D "DUMMYPROVIDES"<br></div><div> &nbsp;PR=
-[vardeps] +=3D "DUMMYPROVIDES_PACKAGES"<br></div><div> <br></div><div> &nbs=
-p;DUMMYPROVIDES_PACKAGES ??=3D ""<br></div><div> -DUMMYPROVIDES_PACKAGES_MU=
-LTILIB =3D "${@' '.join([multilib_pkg_extend(d, pkg) for pkg in d.getVar('D=
-UMMYPROVIDES_PACKAGES').split()])}"<br></div><div> +DUMMYPROVIDES_PACKAGES_=
-FILTERED =3D "${@' '.join([pkg for pkg in d.getVar('DUMMYPROVIDES_PACKAGES'=
-).split() if d.getVar('IMAGE_INSTALL') is not None and pkg not in d.getVar(=
-'IMAGE_INSTALL').split()])}"<br></div><div> +DUMMYPROVIDES_PACKAGES_MULTILI=
-B =3D "${@' '.join([multilib_pkg_extend(d, pkg) for pkg in d.getVar('DUMMYP=
-ROVIDES_PACKAGES_FILTERED').split()])}"<br></div><div> &nbsp;DUMMYPROVIDES =
-+=3D "${DUMMYPROVIDES_PACKAGES_MULTILIB}"<br></div><div> <br></div><div> &n=
-bsp;python populate_packages:prepend() {<br></div><div> &nbsp; &nbsp; &nbsp=
-;p =3D d.getVar("PN")<br></div><div> &nbsp; &nbsp; &nbsp;d.appendVar("RPROV=
-IDES:%s" % p, "${DUMMYPROVIDES}")<br></div><div> -&nbsp; &nbsp; d.appendVar=
-("RCONFLICTS:%s" % p, "${DUMMYPROVIDES}")<br></div><div> +&nbsp; &nbsp; d.a=
-ppendVar("RCONFLICTS:%s" % p, "${DUMMYPROVIDES_PACKAGES_MULTILIB}")<br></di=
-v><div> &nbsp; &nbsp; &nbsp;d.appendVar("RREPLACES:%s" % p, "${DUMMYPROVIDE=
-S_PACKAGES_MULTILIB}")<br></div><div> &nbsp;}<br></div><div> <br></div><div=
-> -- <br></div><div> 2.41.0<br></div><div> <br></div><div> <br></div><div> =
-<br></div></blockquote></div></div></blockquote><div><br></div></body></htm=
-l>
-
---f555627f95924b8a9774ca261d9dc89d--
+> +     ngx_feature_libs=3D"-lxml2 -lxslt"
+> +     ngx_feature_test=3D"xmlParserCtxtPtr    ctxt =3D NULL;
+> +                       xsltStylesheetPtr   sheet =3D NULL;
+> +@@ -100,7 +100,7 @@ fi
+> +     ngx_feature_name=3DNGX_HAVE_EXSLT
+> +     ngx_feature_run=3Dno
+> +     ngx_feature_incs=3D"#include <libexslt/exslt.h>"
+> +-    ngx_feature_path=3D"/usr/include/libxml2"
+> ++    ngx_feature_path=3D"=3D/usr/include/libxml2"
+> +     ngx_feature_libs=3D"-lexslt"
+> +     ngx_feature_test=3D"exsltRegisterAll();"
+> +     . auto/feature
+> +--
+> +2.35.5
+> +
+> diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserve=
+r/recipes-httpd/nginx/nginx.inc
+> index 1ea32f7c94..8890e0bea1 100644
+> --- a/meta-webserver/recipes-httpd/nginx/nginx.inc
+> +++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
+> @@ -22,6 +22,7 @@ SRC_URI =3D " \
+>      file://nginx-volatile.conf \
+>      file://nginx.service \
+>      file://nginx-fix-pidfile.patch \
+> +    file://0001-configure-libxslt-conf.patch \
+>  "
+>
+>  inherit siteinfo update-rc.d useradd systemd
+> @@ -47,6 +48,8 @@ PACKAGECONFIG[ipv6] =3D "--with-ipv6,,"
+>  PACKAGECONFIG[webdav] =3D "--with-http_dav_module,,"
+>  PACKAGECONFIG[stream] =3D "--with-stream,,"
+>
+> +PACKAGECONFIG[xslt] =3D "--with-http_xslt_module,,libxslt"
+> +
+>  do_configure () {
+>      if [ "${SITEINFO_BITS}" =3D "64" ]; then
+>          PTRSIZE=3D8
+> --
+> 2.25.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#105337): https://lists.openembedded.org/g/openembedde=
+d-devel/message/105337
+> Mute This Topic: https://lists.openembedded.org/mt/101758666/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
