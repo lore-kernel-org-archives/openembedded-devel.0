@@ -1,141 +1,463 @@
-Return-Path: <joerg.sommer@navimatix.de>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5CCC7E93708
-	for <webhook@archiver.kernel.org>; Thu,  5 Oct 2023 11:03:07 +0000 (UTC)
-Received: from EUR03-AM7-obe.outbound.protection.outlook.com (EUR03-AM7-obe.outbound.protection.outlook.com [40.107.105.69])
- by mx.groups.io with SMTP id smtpd.web11.12637.1696503785587717114
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 934DEE9370D
+	for <webhook@archiver.kernel.org>; Thu,  5 Oct 2023 13:01:48 +0000 (UTC)
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+ by mx.groups.io with SMTP id smtpd.web11.14598.1696510902944382406
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Oct 2023 04:03:06 -0700
+ Thu, 05 Oct 2023 06:01:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@navimatix.de header.s=selector1 header.b=iWX3j6EH;
- spf=pass (domain: navimatix.de, ip: 40.107.105.69, mailfrom: joerg.sommer@navimatix.de)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=DD2pOkXs4Cx50OUCKm8CEgkHr/jE+v5IiH5TlD9unhNRal3tH7Lh0R/3UR77NW8Wt7gRmZc43QlpWqHmR45FwjViYdgDZOHahp3C58Nm21oRsa9olFDpxBd0dnLCZkzB1F3jBYQaYzG37GreGUgkVfpUJHsCsyZ+YxmGAF5Y6DZJit6BlUy1JVCnKOAbjB+KfOrG/opr4HVtqubSDGSBRRERByAqceTda5Yzr6PxzVwf48bm3PueY7jG1dxCJ031ePGbSeq7+fmzFFpshn3q94a7RkEERv3N6WEbHDKY2ZHlm6ZDI7YyugQedy8Rjr8fnJiDs/q/yeMHKLDEzZRByg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=AoHVlZmZzzJ8qhxP3RzUVIdmP0meNAvA78ekGje4VOo=;
- b=GtYjkkWAqrI37GgfREdrpJ2rxNNc1XGn/XUvLJmFmS2ff9tcGGvunGM334zUMRTLd0FSFxWFgyzFCKD8NxZW++6S2Axu23kT9aO0sGyhUWrNx2LFPj2Mo8igVfG446dldvn0WRHkOmC6AEazxhBWt8LLh1WxxAFqhuHYsrksgl7m1gIx3gi3OLNED0wUufWP+NUHxqaYfUbvy7oHHeLb6jluQh9QlH3pYGhXXBNwCtbWXGS+6Z5KnlR4WgDc7QKsOaKgyR/kf/1oF/QDj2L92o1zPwsE3eBVIdIiV79EkG7Kenn9v6bj6ce4tnUk08WfqhZH6Ldppz8QjcZCqCD32w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=navimatix.de; dmarc=pass action=none header.from=navimatix.de;
- dkim=pass header.d=navimatix.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=navimatix.de;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AoHVlZmZzzJ8qhxP3RzUVIdmP0meNAvA78ekGje4VOo=;
- b=iWX3j6EH6KitiO249gNwbcnl/jNIpg0lHAQvtju0yoEAa5HI1WCQS3Uqmo5R1x9aS7TXswNEvLGmTeDhIkOwxjWk9kNwI+Y8CfW6EdKqPIom7ICteehDjG4MHQFy/EbE/7+2FpHl4Jd5xSzCBvX3eUb5WgnsT/+9k4shLd/O6Y0=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=navimatix.de;
-Received: from VI1PR0102MB3136.eurprd01.prod.exchangelabs.com
- (2603:10a6:803:5::26) by DU0PR01MB9429.eurprd01.prod.exchangelabs.com
- (2603:10a6:10:32c::18) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.29; Thu, 5 Oct
- 2023 11:03:01 +0000
-Received: from VI1PR0102MB3136.eurprd01.prod.exchangelabs.com
- ([fe80::fedc:a1fb:55e9:fb31]) by
- VI1PR0102MB3136.eurprd01.prod.exchangelabs.com
- ([fe80::fedc:a1fb:55e9:fb31%3]) with mapi id 15.20.6838.016; Thu, 5 Oct 2023
- 11:03:01 +0000
-From: =?UTF-8?q?J=C3=B6rg=20Sommer?= <joerg.sommer@navimatix.de>
-To: openembedded-devel@lists.openembedded.org
-CC: =?UTF-8?q?J=C3=B6rg=20Sommer?= <joerg.sommer@navimatix.de>
-Subject: [meta-oe][PATCH] collectd: Use https in SRC_URI, add HOMEPAGE
-Date: Thu,  5 Oct 2023 13:02:26 +0200
-Message-ID: <9c70b1b137efc84b24a4b7c52e1182fa1976400e.1696503746.git.joerg.sommer@navimatix.de>
-X-Mailer: git-send-email 2.34.1
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-ClientProxiedBy: BE0P281CA0018.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:b10:a::28) To VI1PR0102MB3136.eurprd01.prod.exchangelabs.com
- (2603:10a6:803:5::26)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=kb4QDblP;
+ spf=pass (domain: gmail.com, ip: 209.85.221.44, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-32329d935d4so883890f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 05 Oct 2023 06:01:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1696510901; x=1697115701; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=ZYc8MBsgj2CsQFEtoro6vcOolltoNaOXrPX19rrlGDA=;
+        b=kb4QDblPhol3QWRMdyxh+5pBzGSuhTDKa3qzpL1mpZ1MIY2Jaozr/E1fofV34ukvwO
+         gqGY8rkl5s/lhujZhXZhpL97oDgvWnO+yZj5FDjbA/TfWHwh7jrXTdbXsGtr9Y3w2leG
+         TqX0/NwVGZySaN1ZO2ZcpqF5ocx/Vy6CSUl/BNEHk7b+St+vMZKgzjueTk60foZP1M00
+         TG6uzWauoz5u5C3vuZtGXIDuZ3sRLoL5k6ITh8KeFgjDjqUYNKEpx/FECPkQNgQyt5Yc
+         mJB/19tWgkKr8te1xb/QclMfvf/e1+owsk/tdm/uAmq7FNZx/leTnxZ5BvbF/wTQeRoQ
+         QjVA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1696510901; x=1697115701;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=ZYc8MBsgj2CsQFEtoro6vcOolltoNaOXrPX19rrlGDA=;
+        b=GZYAonzpRC0Svh/x4ro7Ai5PufmaUpNGkP/pu0uYF5YCFt9ik0UZ/OPjBvD/her3Q2
+         A3UMqYKtcHO2YJgIlXeaMcdtbGeCuIMwdrpajM1X2a3czQL3F3BFgVQnoD0QpUNON46+
+         cQchUzzAU7QZW0Ji1JXoKhaWqo6VYJwGYG54ROSw+N0dP9up2QYTH1j+lSxImcW2GSzS
+         tDrS4HvIlRl4JsHoiSGgmBgRtdWAqi5L31wPeBmd+Khy2Cuai13nZrMU2W/P2J36dxel
+         mvyCk37K+BfLSmEDXOPhii9xxDw1hN6eC5fvhoB7uKizS5eiSWIvGF+tANo1PKRborpd
+         GieA==
+X-Gm-Message-State: AOJu0YzjFPGs+9CbR4oWuZVahEMFuFBLfiQwUtEFObkqRWhvi6xkUNBX
+	CnaMiLiloqnhtCg/UzA1wgZVhQ3jc41ikZjGIfY=
+X-Google-Smtp-Source: AGHT+IGWbH1WHu8RbCwZF/OdaxjG0n7T/jLwQp4fXm69RFA/gXMfxaxef+pfXRzl2ERdfTfH4Zm53okHpc1z1Y4V2u0=
+X-Received: by 2002:adf:ed10:0:b0:323:33b1:dc44 with SMTP id
+ a16-20020adfed10000000b0032333b1dc44mr4710364wro.0.1696510900913; Thu, 05 Oct
+ 2023 06:01:40 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: VI1PR0102MB3136:EE_|DU0PR01MB9429:EE_
-X-MS-Office365-Filtering-Correlation-Id: 82d349c6-e60c-4953-c8a3-08dbc592a3dd
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	Wyls2iP1+9qXmkI5sfcGq1NpgCL5Qh8rHkp9StFCgTtjk8VU2bG9RfzbO/snHQDBfhomRfkM8gfOzRr3SUWYRayZOtEpQo01TzUgziBhBdqYhOcg+22HROVwDivq6zLfEUNByRJuA88JexNxBpUXtTbC6MUX1LRQi2PDCRBCTqUaXC1WMGTBbqm3GHRhowaQnVKB0TCszsbHWHwERpspCUqL3LvgGAtADcKacSWr/BzDTdweRE6qzE7wcIWkuryt/Yh3uVL/d3AIzCyvAxVc31/QtIoRXJA0Uv4h1fFFlGgzqtSVUB4ZEqJEQAKMd2qmY8J5ZSZFgayDOTJ8wjLtNquWts0bWHnSiBMB1R80pUxxubaJaUL9dCx+RyJ+xk0ur0ZHodqVSZ9bQpyGzfrJK1fPTOUoAEBmNq0GcXV3gS7TtGNjy8r12NSnsWMG9Og8y3TGL//Ook52jMw0dfpDj5aBPMfT4uLOzB88wjYkpXLiMtt8fgL7pIyr3Xu3IjUEQnUN5+5X6kPou7oCqNksuLrKQgmY/dKLwQLpsg/z7DIs6MlhFzNAFm9nPE19UTIqNaVOayb7rLJ4QMn43OtmUdsmAUz/z5UDvTnkMNy/Tr0=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR0102MB3136.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230031)(396003)(346002)(376002)(136003)(366004)(39840400004)(230922051799003)(451199024)(186009)(64100799003)(1800799009)(52116002)(6666004)(6512007)(6506007)(6486002)(478600001)(38100700002)(86362001)(38350700002)(6916009)(316002)(2906002)(83380400001)(26005)(2616005)(107886003)(66574015)(36756003)(41300700001)(66946007)(4326008)(8936002)(8676002)(66476007)(66556008)(5660300002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?2DXtpZHzWSoS/6Hxk3S+nGAKiM1qGc8IaDuC2MyPA0bFq1+7sBtUt7fFTr6s?=
- =?us-ascii?Q?Hcnm5hKqf00jtpLX6DIQDwjUC0MEKvl72179Xoe9IjvNICrb/aY3B3tCAmEW?=
- =?us-ascii?Q?epkk8Hfxm5jxdKOp2YFxEC5zoaFM+vlLpI5XQsG69bD1icdj4e9Ch/eKozhz?=
- =?us-ascii?Q?ybXJrMpIeQqjis38DLKBtGoB8zcC1woFCAvSQXhplk7XgGt1wHjf2wXPGRQt?=
- =?us-ascii?Q?/nCydDfXqDbUL2/7G6sseKJfU/nXCmk1HmVuHVeCg1+ZC4jsr2xSsnC0tWAI?=
- =?us-ascii?Q?dWpG/n4ioxT7pPLlaLxCMKAc81nKuo3/Khs1exE2iAkJcV05VGppZ4sC87cI?=
- =?us-ascii?Q?6JsN3pLKsLJO5weuT+5jB1+GdLZdqVZu+9l1VZvxUpLoCLKouQqRKjraRu/A?=
- =?us-ascii?Q?hVpq8ZLzzUvIJ9FofhiSVUHgTbZweEZ6SjuO3M9gZsoOwZ67PtN6xa/ANCzE?=
- =?us-ascii?Q?fGsIaBh3STTZ9/Q6uSAKLGYswS67JObajChJGRH/h0Qwsnd7/YIWU1StoWGM?=
- =?us-ascii?Q?TxKSMIaroLQKM27Q2hNJWSc+/DxTdhPUJ2YWwPTSkYo6az+R/a9NkMmm4p3S?=
- =?us-ascii?Q?fi/tkuLtmsvxXIM57kHGdr56MbWigyoySEJeS+Mk1DT0KiLCZlI/N9cT0qLm?=
- =?us-ascii?Q?oe3DwMLZKAFMq9veL7AnxI4+2ReM6imdVkwhiEvnEMrDSrLrA5DM6WO8z1I5?=
- =?us-ascii?Q?A13i4RapwYWn49L+6sMZUlfrEtgrzhBDFEFMOt2m9dHNsgUR/ik4G5AwZpV9?=
- =?us-ascii?Q?9Kx5zXb/cWr2xAOj7KLjgTHyYvIBL09mpNyOOmSctAPAt0+rnAJcjdaHNJxs?=
- =?us-ascii?Q?Xcc7YPC4dPBIBWXv06TId4fnznd9PEcPWc/IU6Ocf9aMYmAY/grx9YoMwt50?=
- =?us-ascii?Q?fmdchI83Am5Z+aK/HTnRcqsw0HOKZJggQab9Js2GuOov1LiVU6kDhxZLIQ5w?=
- =?us-ascii?Q?q9NCxJ/sJdeh0o/k75+xPrS2jpvtC/4qRQhPXSIAtFmoxo+xhvUgLs0UFJkb?=
- =?us-ascii?Q?VVAZnMIABjqS9E7PPFFzF5f6zQhri2/nKhyWF77rOAVLxxxSCwdI45j4Imc/?=
- =?us-ascii?Q?zYGLKRN79YHUyXHjU8oGqx5RPSvmgfW5SRUguN0BFuMka5V/E5KQpDVVZ1Kb?=
- =?us-ascii?Q?jO+aZDWPmtD2dmQwqornJnUKPqLQBoy3PQFApFH1r7XOkdte0Kv76qiWGrRz?=
- =?us-ascii?Q?NNTe2tscF5QyUjPz0NLojlX+9JzH32B99ttZZH0miK1coh/9OIN3pu5oUFqm?=
- =?us-ascii?Q?tqRH9+E9DvUJVegry1WEMEE2W675eFsqCxlr1/aWN9sjw/z1LBQ535pbte3/?=
- =?us-ascii?Q?RZEe/QL7PKd1Ic/2JldPUu56VQDY0RrYyGb8YfSZQUjdL2uOXgtjBczOKK0E?=
- =?us-ascii?Q?7D3zl/89pbm4YeYuInWznqo2qGYuFN1QMveAq7qf2W9uTceRBA8ZyGtzvmlq?=
- =?us-ascii?Q?qSdfShOA0NFODF/dafHjTcC35A6awKwrmKVp1X0pdK8sn0ql7gwyjPjDeXA4?=
- =?us-ascii?Q?VtCH4WzP7lAuvPr1xKjahGGbhHQ9yL6q9PA2KObX7PoofboRt9tHqunny6u+?=
- =?us-ascii?Q?Wlh7WhUtEBEkBujSH0DQWWAQXf1e4Gftqq4DCER/EYjt+XvCojbQVYGySZii?=
- =?us-ascii?Q?xQ=3D=3D?=
-X-OriginatorOrg: navimatix.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 82d349c6-e60c-4953-c8a3-08dbc592a3dd
-X-MS-Exchange-CrossTenant-AuthSource: VI1PR0102MB3136.eurprd01.prod.exchangelabs.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Oct 2023 11:03:01.0684
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: c87b4f54-b992-4813-8f3f-4a876324197f
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: RY5pIuf62McvbcGXukrDN4erH6xgMFEY8POiX2PlmH++JL6t00LGDVN8OOe5/cNpIrf3LFnTxXnmDULzn7H4maaOCe47MLfGKyjtsiL3L1w=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR01MB9429
+References: <20230927084242.1195772-1-peron.clem@gmail.com> <20230927084242.1195772-2-peron.clem@gmail.com>
+In-Reply-To: <20230927084242.1195772-2-peron.clem@gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Thu, 5 Oct 2023 15:01:27 +0200
+Message-ID: <CA+chaQdCcx34vW+iWEYQ_X1Ad+5yYyK9btW6G4gZ77f+aBeLog@mail.gmail.com>
+Subject: Re: [oe] [PATCH v3 1/9] protobuf: upgrade 3.21.12 -> 4.22.2
+To: =?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org, 
+	Xiangyu Chen <xiangyu.chen@windriver.com>
+Content-Type: multipart/alternative; boundary="0000000000009b4d600606f7b945"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 05 Oct 2023 11:03:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105354
+ <openembedded-devel@lists.openembedded.org>; Thu, 05 Oct 2023 13:01:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105355
 
-Signed-off-by: J=C3=B6rg Sommer <joerg.sommer@navimatix.de>
----
- meta-oe/recipes-extended/collectd/collectd_5.12.0.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+--0000000000009b4d600606f7b945
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-oe/recipes-extended/collectd/collectd_5.12.0.bb b/meta-oe=
-/recipes-extended/collectd/collectd_5.12.0.bb
-index 479c12d6a..bd4a5b3e8 100644
---- a/meta-oe/recipes-extended/collectd/collectd_5.12.0.bb
-+++ b/meta-oe/recipes-extended/collectd/collectd_5.12.0.bb
-@@ -1,11 +1,12 @@
- SUMMARY =3D "Collects and summarises system performance statistics"
- DESCRIPTION =3D "collectd is a daemon which collects system performance st=
-atistics periodically and provides mechanisms to store the values in a vari=
-ety of ways, for example in RRD files."
-+HOMEPAGE =3D "https://collectd.org/"
- LICENSE =3D "GPL-2.0-only & MIT"
- LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D1bd21f19f7f0c61a7be8ecacb0e2885=
-4"
-=20
- DEPENDS =3D "rrdtool curl libpcap libxml2 yajl libgcrypt libtool lvm2"
-=20
--SRC_URI =3D "http://collectd.org/files/collectd-${PV}.tar.bz2 \
-+SRC_URI =3D "https://collectd.org/files/collectd-${PV}.tar.bz2 \
-            file://collectd.init \
-            file://collectd.service \
-            file://no-gcrypt-badpath.patch \
---=20
-2.34.1
+This breaks opencv builds with dnn PACKAGECONFIG is enabled.
 
+opencv is using -std=3Dc++11 and now
+recipe-sysroot/usr/include/google/protobuf/stubs/common.h
+includes absl/strings/string_view.h which fails with
+opencv/4.8.0/recipe-sysroot/usr/include/absl/base/policy_checks.h:79:2:
+error: #error "C++ versions less than C++14 are not supported."
+   79 | #error "C++ versions less than C++14 are not supported."
+      |  ^~~~~
+
+as shown in http://errors.yoctoproject.org/Errors/Details/739306/
+
+Passing
+-DOPENCV_SKIP_CMAKE_CXX_STANDARD=3DOFF -DCMAKE_CXX_STANDARD=3D14
+in dnn PACKAGECONFIG:
+PACKAGECONFIG[dnn] =3D "-DBUILD_opencv_dnn=3DON -DPROTOBUF_UPDATE_FILES=3DO=
+N
+-DBUILD_PROTOBUF=3DOFF -DOPENCV_SKIP_CMAKE_CXX_STANDARD=3DOFF
+-DCMAKE_CXX_STANDARD=3D14,-DBUILD_opencv_dnn=3DOFF,protobuf protobuf-native=
+,"
+
+helps with this first part, but then it fails to link with absl:
+http://errors.yoctoproject.org/Errors/Details/739308/
+
+At least protobuf isn't upgraded in nanbield branch yet, so it still builds
+there.
+
+On Wed, Sep 27, 2023 at 10:42=E2=80=AFAM Cl=C3=A9ment P=C3=A9ron <peron.cle=
+m@gmail.com> wrote:
+
+> From: Xiangyu Chen <xiangyu.chen@windriver.com>
+>
+> Signed-off-by: Xiangyu Chen <xiangyu.chen@windriver.com>
+> Signed-off-by: Cl=C3=A9ment P=C3=A9ron <peron.clem@gmail.com>
+> ---
+>  ...efile-respect-CXX-LDFLAGS-variables-fix-.patch | 15 +++++++++------
+>  .../{protobuf_3.21.12.bb =3D> protobuf_4.22.2.bb}   | 11 ++++++++---
+>  2 files changed, 17 insertions(+), 9 deletions(-)
+>  rename meta-oe/recipes-devtools/protobuf/{protobuf_3.21.12.bb =3D>
+> protobuf_4.22.2.bb} (86%)
+>
+> diff --git
+> a/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-respe=
+ct-CXX-LDFLAGS-variables-fix-.patch
+> b/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-respe=
+ct-CXX-LDFLAGS-variables-fix-.patch
+> index 36c3c597a..7c4bf260e 100644
+> ---
+> a/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-respe=
+ct-CXX-LDFLAGS-variables-fix-.patch
+> +++
+> b/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-respe=
+ct-CXX-LDFLAGS-variables-fix-.patch
+> @@ -30,7 +30,7 @@ Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+>   1 file changed, 4 insertions(+), 2 deletions(-)
+>
+>  diff --git a/examples/Makefile b/examples/Makefile
+> -index 1c7ec8d63..85f591231 100644
+> +index ef7a4ef58..7206e14e1 100644
+>  --- a/examples/Makefile
+>  +++ b/examples/Makefile
+>  @@ -2,6 +2,8 @@
+> @@ -42,17 +42,20 @@ index 1c7ec8d63..85f591231 100644
+>   all: cpp java python
+>
+>   cpp:    add_person_cpp    list_people_cpp
+> -@@ -40,11 +42,11 @@ protoc_middleman_dart: addressbook.proto
+> +@@ -41,11 +43,11 @@ protoc_middleman_dart: addressbook.proto
+>
+>   add_person_cpp: add_person.cc protoc_middleman
+>         pkg-config --cflags protobuf  # fails if protobuf is not installe=
+d
+> --      c++ -std=3Dc++11 add_person.cc addressbook.pb.cc -o add_person_cp=
+p
+> `pkg-config --cflags --libs protobuf`
+> -+      $(CXX) $(CXXFLAGS) $(LDFLAGS)
+> ../src/google/protobuf/.libs/timestamp.pb.o $(PROTOBUF) add_person.cc
+> addressbook.pb.cc -o add_person_cpp
+> +-      c++ -std=3Dc++14 add_person.cc addressbook.pb.cc -o add_person_cp=
+p
+> `pkg-config --cflags --libs protobuf`
+> ++      $(CXX) $(CXXFLAGS) $(LDFLAGS)
+> ../src/google/protobuf/.libs/timestamp.pb.o $(PROTOBUF) add_person.cc
+> addressbook.pb.cc -o add_person_cpp #$(CXX) -std=3Dc++17 $(PROTOBUF)
+> add_person.cc addressbook.pb.cc -o add_person_cpp
+>
+>   list_people_cpp: list_people.cc protoc_middleman
+>         pkg-config --cflags protobuf  # fails if protobuf is not installe=
+d
+> --      c++ -std=3Dc++11 list_people.cc addressbook.pb.cc -o
+> list_people_cpp `pkg-config --cflags --libs protobuf`
+> -+      $(CXX) $(CXXFLAGS) $(LDFLAGS)
+> ../src/google/protobuf/.libs/timestamp.pb.o $(PROTOBUF) list_people.cc
+> addressbook.pb.cc -o list_people_cpp
+> +-      c++ -std=3Dc++14 list_people.cc addressbook.pb.cc -o
+> list_people_cpp `pkg-config --cflags --libs protobuf`
+> ++      $(CXX) $(CXXFLAGS) $(LDFLAGS)
+> ../src/google/protobuf/.libs/timestamp.pb.o $(PROTOBUF) list_people.cc
+> addressbook.pb.cc -o list_people_cpp #$(CXX) -std=3Dc++17 $(PROTOBUF)
+> list_people.cc addressbook.pb.cc -o list_people_cpp
+>
+>   add_person_dart: add_person.dart protoc_middleman_dart
+>
+> +--
+> +2.34.1
+> +
+> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.21.12.bb
+> b/meta-oe/recipes-devtools/protobuf/protobuf_4.22.2.bb
+> similarity index 86%
+> rename from meta-oe/recipes-devtools/protobuf/protobuf_3.21.12.bb
+> rename to meta-oe/recipes-devtools/protobuf/protobuf_4.22.2.bb
+> index d95e1c20f..b97da6ea6 100644
+> --- a/meta-oe/recipes-devtools/protobuf/protobuf_3.21.12.bb
+> +++ b/meta-oe/recipes-devtools/protobuf/protobuf_4.22.2.bb
+> @@ -7,12 +7,12 @@ SECTION =3D "console/tools"
+>  LICENSE =3D "BSD-3-Clause"
+>  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D37b5762e07f0af8c74ce80a8bda42=
+66b"
+>
+> -DEPENDS =3D "zlib"
+> +DEPENDS =3D "zlib abseil-cpp"
+>  DEPENDS:append:class-target =3D " protobuf-native"
+>
+> -SRCREV =3D "f0dc78d7e6e331b8c6bb2d5283e06aa26883ca7c"
+> +SRCREV =3D "81f89d509d6771dcccb619cbe26ac86cec472582"
+>
+> -SRC_URI =3D "git://
+> github.com/protocolbuffers/protobuf.git;branch=3D21.x;protocol=3Dhttps \
+> +SRC_URI =3D "gitsm://
+> github.com/protocolbuffers/protobuf.git;branch=3D22.x;protocol=3Dhttps \
+>             file://run-ptest \
+>
+> file://0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch \
+>             file://0001-Fix-linking-error-with-ld-gold.patch \
+> @@ -35,6 +35,7 @@ EXTRA_OECMAKE +=3D "\
+>      -Dprotobuf_BUILD_LIBPROTOC=3DON \
+>      -Dprotobuf_BUILD_TESTS=3DOFF \
+>      -Dprotobuf_BUILD_EXAMPLES=3DOFF \
+> +    -Dprotobuf_ABSL_PROVIDER=3D"package" \
+>  "
+>
+>  TEST_SRC_DIR =3D "examples"
+> @@ -52,7 +53,11 @@ do_compile_ptest() {
+>         cp ${S}/${TEST_SRC_DIR}/Makefile "${B}/${TEST_SRC_DIR}/"
+>         sed -e 's|libdir=3D|libdir=3D${PKG_CONFIG_SYSROOT_DIR}|' -i
+> "${B}/${TEST_SRC_DIR}/protobuf.pc"
+>         sed -e 's|Cflags:|Cflags: -I${S}/src|' -i
+> "${B}/${TEST_SRC_DIR}/protobuf.pc"
+> +       sed -e 's|Cflags:|Cflags: -I${WORKDIR}/recipe-sysroot{includedir}
+> |' -i "${B}/${TEST_SRC_DIR}/protobuf.pc"
+>         sed -e 's|Libs:|Libs: -L${B}|' -i
+> "${B}/${TEST_SRC_DIR}/protobuf.pc"
+> +       sed -e 's|Libs:|Libs: -L${WORKDIR}/recipe-sysroot/usr/lib|' -i
+> "${B}/${TEST_SRC_DIR}/protobuf.pc"
+> +       sed -e 's|Libs:|Libs: -labsl_log_internal_check_op |' -i
+> "${B}/${TEST_SRC_DIR}/protobuf.pc"
+> +       sed -e 's|Libs:|Libs: -labsl_log_internal_message |' -i
+> "${B}/${TEST_SRC_DIR}/protobuf.pc"
+>         # Until out-of-tree build of examples is supported, we have to us=
+e
+> this approach
+>         sed -e
+> 's|../src/google/protobuf/.libs/timestamp.pb.o|${B}/CMakeFiles/libprotobu=
+f.dir/src/google/protobuf/timestamp.pb.cc.o|'
+> -i "${B}/${TEST_SRC_DIR}/Makefile"
+>         export PKG_CONFIG_PATH=3D"${B}/${TEST_SRC_DIR}"
+> --
+> 2.34.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#105176):
+> https://lists.openembedded.org/g/openembedded-devel/message/105176
+> Mute This Topic: https://lists.openembedded.org/mt/101613793/3617156
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> martin.jansa@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--0000000000009b4d600606f7b945
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>This breaks opencv builds with dnn PACKAGECONFIG is e=
+nabled.</div><div><br></div><div>opencv is using=C2=A0-std=3Dc++11 and now<=
+/div><div>recipe-sysroot/usr/include/google/protobuf/stubs/common.h<br></di=
+v><div>includes=C2=A0absl/strings/string_view.h which fails with<br>opencv/=
+4.8.0/recipe-sysroot/usr/include/absl/base/policy_checks.h:79:2: error: #er=
+ror &quot;C++ versions less than C++14 are not supported.&quot;<br>=C2=A0 =
+=C2=A079 | #error &quot;C++ versions less than C++14 are not supported.&quo=
+t;<br>=C2=A0 =C2=A0 =C2=A0 | =C2=A0^~~~~<br></div><div><br></div><div>as sh=
+own in=C2=A0<a href=3D"http://errors.yoctoproject.org/Errors/Details/739306=
+/">http://errors.yoctoproject.org/Errors/Details/739306/</a></div><div><br>=
+</div><div>Passing</div><div>-DOPENCV_SKIP_CMAKE_CXX_STANDARD=3DOFF -DCMAKE=
+_CXX_STANDARD=3D14<br></div><div>in dnn PACKAGECONFIG:</div><div>PACKAGECON=
+FIG[dnn] =3D &quot;-DBUILD_opencv_dnn=3DON -DPROTOBUF_UPDATE_FILES=3DON -DB=
+UILD_PROTOBUF=3DOFF -DOPENCV_SKIP_CMAKE_CXX_STANDARD=3DOFF -DCMAKE_CXX_STAN=
+DARD=3D14,-DBUILD_opencv_dnn=3DOFF,protobuf protobuf-native,&quot;<br></div=
+><div><br></div><div>helps with this first part, but then it fails to link =
+with absl:</div><div><a href=3D"http://errors.yoctoproject.org/Errors/Detai=
+ls/739308/">http://errors.yoctoproject.org/Errors/Details/739308/</a><br></=
+div><div><br></div><div>At least protobuf isn&#39;t upgraded in nanbield br=
+anch yet, so it still builds there.</div><br><div class=3D"gmail_quote"><di=
+v dir=3D"ltr" class=3D"gmail_attr">On Wed, Sep 27, 2023 at 10:42=E2=80=AFAM=
+ Cl=C3=A9ment P=C3=A9ron &lt;<a href=3D"mailto:peron.clem@gmail.com">peron.=
+clem@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" st=
+yle=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padd=
+ing-left:1ex">From: Xiangyu Chen &lt;<a href=3D"mailto:xiangyu.chen@windriv=
+er.com" target=3D"_blank">xiangyu.chen@windriver.com</a>&gt;<br>
+<br>
+Signed-off-by: Xiangyu Chen &lt;<a href=3D"mailto:xiangyu.chen@windriver.co=
+m" target=3D"_blank">xiangyu.chen@windriver.com</a>&gt;<br>
+Signed-off-by: Cl=C3=A9ment P=C3=A9ron &lt;<a href=3D"mailto:peron.clem@gma=
+il.com" target=3D"_blank">peron.clem@gmail.com</a>&gt;<br>
+---<br>
+=C2=A0...efile-respect-CXX-LDFLAGS-variables-fix-.patch | 15 +++++++++-----=
+-<br>
+=C2=A0.../{<a href=3D"http://protobuf_3.21.12.bb" rel=3D"noreferrer" target=
+=3D"_blank">protobuf_3.21.12.bb</a> =3D&gt; <a href=3D"http://protobuf_4.22=
+.2.bb" rel=3D"noreferrer" target=3D"_blank">protobuf_4.22.2.bb</a>}=C2=A0 =
+=C2=A0| 11 ++++++++---<br>
+=C2=A02 files changed, 17 insertions(+), 9 deletions(-)<br>
+=C2=A0rename meta-oe/recipes-devtools/protobuf/{<a href=3D"http://protobuf_=
+3.21.12.bb" rel=3D"noreferrer" target=3D"_blank">protobuf_3.21.12.bb</a> =
+=3D&gt; <a href=3D"http://protobuf_4.22.2.bb" rel=3D"noreferrer" target=3D"=
+_blank">protobuf_4.22.2.bb</a>} (86%)<br>
+<br>
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makef=
+ile-respect-CXX-LDFLAGS-variables-fix-.patch b/meta-oe/recipes-devtools/pro=
+tobuf/protobuf/0001-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.pa=
+tch<br>
+index 36c3c597a..7c4bf260e 100644<br>
+--- a/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-res=
+pect-CXX-LDFLAGS-variables-fix-.patch<br>
++++ b/meta-oe/recipes-devtools/protobuf/protobuf/0001-examples-Makefile-res=
+pect-CXX-LDFLAGS-variables-fix-.patch<br>
+@@ -30,7 +30,7 @@ Signed-off-by: Leon Anavi &lt;<a href=3D"mailto:leon.anav=
+i@konsulko.com" target=3D"_blank">leon.anavi@konsulko.com</a>&gt;<br>
+=C2=A0 1 file changed, 4 insertions(+), 2 deletions(-)<br>
+<br>
+=C2=A0diff --git a/examples/Makefile b/examples/Makefile<br>
+-index 1c7ec8d63..85f591231 100644<br>
++index ef7a4ef58..7206e14e1 100644<br>
+=C2=A0--- a/examples/Makefile<br>
+=C2=A0+++ b/examples/Makefile<br>
+=C2=A0@@ -2,6 +2,8 @@<br>
+@@ -42,17 +42,20 @@ index 1c7ec8d63..85f591231 100644<br>
+=C2=A0 all: cpp java python<br>
+<br>
+=C2=A0 cpp:=C2=A0 =C2=A0 add_person_cpp=C2=A0 =C2=A0 list_people_cpp<br>
+-@@ -40,11 +42,11 @@ protoc_middleman_dart: addressbook.proto<br>
++@@ -41,11 +43,11 @@ protoc_middleman_dart: addressbook.proto<br>
+<br>
+=C2=A0 add_person_cpp: add_person.cc protoc_middleman<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 pkg-config --cflags protobuf=C2=A0 # fails if p=
+rotobuf is not installed<br>
+--=C2=A0 =C2=A0 =C2=A0 c++ -std=3Dc++11 add_person.cc <a href=3D"http://add=
+ressbook.pb.cc" rel=3D"noreferrer" target=3D"_blank">addressbook.pb.cc</a> =
+-o add_person_cpp `pkg-config --cflags --libs protobuf`<br>
+-+=C2=A0 =C2=A0 =C2=A0 $(CXX) $(CXXFLAGS) $(LDFLAGS) ../src/google/protobuf=
+/.libs/timestamp.pb.o $(PROTOBUF) add_person.cc <a href=3D"http://addressbo=
+ok.pb.cc" rel=3D"noreferrer" target=3D"_blank">addressbook.pb.cc</a> -o add=
+_person_cpp<br>
++-=C2=A0 =C2=A0 =C2=A0 c++ -std=3Dc++14 add_person.cc <a href=3D"http://add=
+ressbook.pb.cc" rel=3D"noreferrer" target=3D"_blank">addressbook.pb.cc</a> =
+-o add_person_cpp `pkg-config --cflags --libs protobuf`<br>
+++=C2=A0 =C2=A0 =C2=A0 $(CXX) $(CXXFLAGS) $(LDFLAGS) ../src/google/protobuf=
+/.libs/timestamp.pb.o $(PROTOBUF) add_person.cc <a href=3D"http://addressbo=
+ok.pb.cc" rel=3D"noreferrer" target=3D"_blank">addressbook.pb.cc</a> -o add=
+_person_cpp #$(CXX) -std=3Dc++17 $(PROTOBUF) add_person.cc <a href=3D"http:=
+//addressbook.pb.cc" rel=3D"noreferrer" target=3D"_blank">addressbook.pb.cc=
+</a> -o add_person_cpp<br>
+<br>
+=C2=A0 list_people_cpp: list_people.cc protoc_middleman<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 pkg-config --cflags protobuf=C2=A0 # fails if p=
+rotobuf is not installed<br>
+--=C2=A0 =C2=A0 =C2=A0 c++ -std=3Dc++11 list_people.cc <a href=3D"http://ad=
+dressbook.pb.cc" rel=3D"noreferrer" target=3D"_blank">addressbook.pb.cc</a>=
+ -o list_people_cpp `pkg-config --cflags --libs protobuf`<br>
+-+=C2=A0 =C2=A0 =C2=A0 $(CXX) $(CXXFLAGS) $(LDFLAGS) ../src/google/protobuf=
+/.libs/timestamp.pb.o $(PROTOBUF) list_people.cc <a href=3D"http://addressb=
+ook.pb.cc" rel=3D"noreferrer" target=3D"_blank">addressbook.pb.cc</a> -o li=
+st_people_cpp<br>
++-=C2=A0 =C2=A0 =C2=A0 c++ -std=3Dc++14 list_people.cc <a href=3D"http://ad=
+dressbook.pb.cc" rel=3D"noreferrer" target=3D"_blank">addressbook.pb.cc</a>=
+ -o list_people_cpp `pkg-config --cflags --libs protobuf`<br>
+++=C2=A0 =C2=A0 =C2=A0 $(CXX) $(CXXFLAGS) $(LDFLAGS) ../src/google/protobuf=
+/.libs/timestamp.pb.o $(PROTOBUF) list_people.cc <a href=3D"http://addressb=
+ook.pb.cc" rel=3D"noreferrer" target=3D"_blank">addressbook.pb.cc</a> -o li=
+st_people_cpp #$(CXX) -std=3Dc++17 $(PROTOBUF) list_people.cc <a href=3D"ht=
+tp://addressbook.pb.cc" rel=3D"noreferrer" target=3D"_blank">addressbook.pb=
+.cc</a> -o list_people_cpp<br>
+<br>
+=C2=A0 add_person_dart: add_person.dart protoc_middleman_dart<br>
+<br>
++--<br>
++2.34.1<br>
++<br>
+diff --git a/meta-oe/recipes-devtools/protobuf/<a href=3D"http://protobuf_3=
+.21.12.bb" rel=3D"noreferrer" target=3D"_blank">protobuf_3.21.12.bb</a> b/m=
+eta-oe/recipes-devtools/protobuf/<a href=3D"http://protobuf_4.22.2.bb" rel=
+=3D"noreferrer" target=3D"_blank">protobuf_4.22.2.bb</a><br>
+similarity index 86%<br>
+rename from meta-oe/recipes-devtools/protobuf/<a href=3D"http://protobuf_3.=
+21.12.bb" rel=3D"noreferrer" target=3D"_blank">protobuf_3.21.12.bb</a><br>
+rename to meta-oe/recipes-devtools/protobuf/<a href=3D"http://protobuf_4.22=
+.2.bb" rel=3D"noreferrer" target=3D"_blank">protobuf_4.22.2.bb</a><br>
+index d95e1c20f..b97da6ea6 100644<br>
+--- a/meta-oe/recipes-devtools/protobuf/<a href=3D"http://protobuf_3.21.12.=
+bb" rel=3D"noreferrer" target=3D"_blank">protobuf_3.21.12.bb</a><br>
++++ b/meta-oe/recipes-devtools/protobuf/<a href=3D"http://protobuf_4.22.2.b=
+b" rel=3D"noreferrer" target=3D"_blank">protobuf_4.22.2.bb</a><br>
+@@ -7,12 +7,12 @@ SECTION =3D &quot;console/tools&quot;<br>
+=C2=A0LICENSE =3D &quot;BSD-3-Clause&quot;<br>
+=C2=A0LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D37b5762e07f0af8c74ce8=
+0a8bda4266b&quot;<br>
+<br>
+-DEPENDS =3D &quot;zlib&quot;<br>
++DEPENDS =3D &quot;zlib abseil-cpp&quot;<br>
+=C2=A0DEPENDS:append:class-target =3D &quot; protobuf-native&quot;<br>
+<br>
+-SRCREV =3D &quot;f0dc78d7e6e331b8c6bb2d5283e06aa26883ca7c&quot;<br>
++SRCREV =3D &quot;81f89d509d6771dcccb619cbe26ac86cec472582&quot;<br>
+<br>
+-SRC_URI =3D &quot;git://<a href=3D"http://github.com/protocolbuffers/proto=
+buf.git;branch=3D21.x;protocol=3Dhttps" rel=3D"noreferrer" target=3D"_blank=
+">github.com/protocolbuffers/protobuf.git;branch=3D21.x;protocol=3Dhttps</a=
+> \<br>
++SRC_URI =3D &quot;gitsm://<a href=3D"http://github.com/protocolbuffers/pro=
+tobuf.git;branch=3D22.x;protocol=3Dhttps" rel=3D"noreferrer" target=3D"_bla=
+nk">github.com/protocolbuffers/protobuf.git;branch=3D22.x;protocol=3Dhttps<=
+/a> \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://run-ptest \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0001-examples-Makefile-res=
+pect-CXX-LDFLAGS-variables-fix-.patch \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://0001-Fix-linking-error-wit=
+h-ld-gold.patch \<br>
+@@ -35,6 +35,7 @@ EXTRA_OECMAKE +=3D &quot;\<br>
+=C2=A0 =C2=A0 =C2=A0-Dprotobuf_BUILD_LIBPROTOC=3DON \<br>
+=C2=A0 =C2=A0 =C2=A0-Dprotobuf_BUILD_TESTS=3DOFF \<br>
+=C2=A0 =C2=A0 =C2=A0-Dprotobuf_BUILD_EXAMPLES=3DOFF \<br>
++=C2=A0 =C2=A0 -Dprotobuf_ABSL_PROVIDER=3D&quot;package&quot; \<br>
+=C2=A0&quot;<br>
+<br>
+=C2=A0TEST_SRC_DIR =3D &quot;examples&quot;<br>
+@@ -52,7 +53,11 @@ do_compile_ptest() {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 cp ${S}/${TEST_SRC_DIR}/Makefile &quot;${B}/${T=
+EST_SRC_DIR}/&quot;<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 sed -e &#39;s|libdir=3D|libdir=3D${PKG_CONFIG_S=
+YSROOT_DIR}|&#39; -i &quot;${B}/${TEST_SRC_DIR}/protobuf.pc&quot;<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 sed -e &#39;s|Cflags:|Cflags: -I${S}/src|&#39; =
+-i &quot;${B}/${TEST_SRC_DIR}/protobuf.pc&quot;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0sed -e &#39;s|Cflags:|Cflags: -I${WORKDIR}/reci=
+pe-sysroot{includedir} |&#39; -i &quot;${B}/${TEST_SRC_DIR}/protobuf.pc&quo=
+t;<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 sed -e &#39;s|Libs:|Libs: -L${B}|&#39; -i &quot=
+;${B}/${TEST_SRC_DIR}/protobuf.pc&quot;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0sed -e &#39;s|Libs:|Libs: -L${WORKDIR}/recipe-s=
+ysroot/usr/lib|&#39; -i &quot;${B}/${TEST_SRC_DIR}/protobuf.pc&quot;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0sed -e &#39;s|Libs:|Libs: -labsl_log_internal_c=
+heck_op |&#39; -i &quot;${B}/${TEST_SRC_DIR}/protobuf.pc&quot;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0sed -e &#39;s|Libs:|Libs: -labsl_log_internal_m=
+essage |&#39; -i &quot;${B}/${TEST_SRC_DIR}/protobuf.pc&quot;<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 # Until out-of-tree build of examples is suppor=
+ted, we have to use this approach<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 sed -e &#39;s|../src/google/protobuf/.libs/time=
+stamp.pb.o|${B}/CMakeFiles/libprotobuf.dir/src/google/protobuf/timestamp.pb=
+.cc.o|&#39; -i &quot;${B}/${TEST_SRC_DIR}/Makefile&quot;<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 export PKG_CONFIG_PATH=3D&quot;${B}/${TEST_SRC_=
+DIR}&quot;<br>
+-- <br>
+2.34.1<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#105176): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/105176" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/105176</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/101613793/361=
+7156" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/101613793/3617156</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:martin.jansa@gmail.com" =
+target=3D"_blank">martin.jansa@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
+
+--0000000000009b4d600606f7b945--
 
