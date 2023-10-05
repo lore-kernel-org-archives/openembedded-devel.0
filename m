@@ -2,180 +2,195 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 60AC4E936F6
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 621F9E936F7
 	for <webhook@archiver.kernel.org>; Thu,  5 Oct 2023 02:35:11 +0000 (UTC)
-Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com [209.85.210.169])
- by mx.groups.io with SMTP id smtpd.web10.6998.1696473310975202470
+Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
+ by mx.groups.io with SMTP id smtpd.web10.6996.1696473309560079846
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Oct 2023 19:35:11 -0700
+ Wed, 04 Oct 2023 19:35:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=loumv/WE;
- spf=pass (domain: gmail.com, ip: 209.85.210.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f169.google.com with SMTP id d2e1a72fcca58-6934202b8bdso398474b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Oct 2023 19:35:10 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=hGp6sq+O;
+ spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f176.google.com with SMTP id d2e1a72fcca58-691c05bc5aaso401573b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Oct 2023 19:35:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1696473310; x=1697078110; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=QbCiybS7hIE3vMgsGqg9T3TQAmvR26wJ2qQb8LVvzgw=;
-        b=loumv/WEzAPc3sHXnmqVmt1fvxnSiGp6r2x/06YpPJtdsHc0Kfq2tpoahHcAktGOD4
-         7jkTq1jH4CVr6LzF46A4BPi9o/+yHEJ0n9N1jdA4b6LdZ1pQRkKUnaBuI/dUnnHRuGq/
-         /jvd0iXFOg4TjMpcawn75igddbPAVUgUf48uvfGWRVMIFod7HIVOrkBu5hcCWyuqOY18
-         0UoM0p9GC554FMjkYH51AfJLpr+giD8d0cFI6qbl/XAuhRqJu1pXATdxh1hgx6vby+TV
-         U8sSS1OyjrIjg+EnPzk3giQKHUY7mV9VBs+Qx9o3UXPPn2z+o2nwH3X8HEG73bnjY4Dt
-         5rnw==
+        d=gmail.com; s=20230601; t=1696473309; x=1697078109; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=6JPdYQCvCOBFOrh5zJYrfIj6Epesq6l3QOHGGYhjiis=;
+        b=hGp6sq+OwjHoq7IAU4vFA7E4rg7HqvHyZPVjpxBMmJH3iBZSFrgjlzpvH5ZIeZm+SS
+         jIbIfHtZjqnGX2lu2lUR1QpzHB0Ggq7DDPHIHE6J4DN50qWb5KyMlzRkNwmy0HjBVaDQ
+         F2/rQdeJXyoI4fX4RuAdHKugsNWSK7zGTWk0RFdHJ5SO8BEui9iAaretBD1aLQspm1S6
+         a2kvadwPcMaj40dbi4+lojN/lMFufRKm52EsVUl1UXGTdut7bO1ojC4TshAEpMbfCJfy
+         DWuXIrW95UmNC0uK7nsSrXjDrzpTXTcz/Cf88GQvI45xDEz9QhtNAgqhpoOL/XKXE8lW
+         O8Lg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1696473310; x=1697078110;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=QbCiybS7hIE3vMgsGqg9T3TQAmvR26wJ2qQb8LVvzgw=;
-        b=Mg/boB7nBqyCkIHKvQNH+r1ur8HvZWtUQTlfldwy3BbChCO56zC/spQyxj2+UsvQW5
-         4hEJedw73eyrND5FK2Oe7MBq78k7PjfaDlA25XSEPZ3fTiUdjePPCnfj6ZTsGw16ELc7
-         l2QEv4g+o5wf2RXzVt7tpUuV/9zw0+6DyZk+xj3yng+oRV0CGk3M4nxKdBZ22JHXB4XU
-         ZzEEL3syks7F4RRBe5tJv/V/hmt8yalVfEA8sCBnK5RX6sv0Fw3MLbJkhxYDjHhJOUwe
-         wfKWg3OdpUHW3ggMpE5H37YQpBWwegH4sts0wlZHYjhm6yRgndzTyklHXqBX94ABQCm5
-         O1Zg==
-X-Gm-Message-State: AOJu0YxJmYKcZpcTHHNf+5LDitEcjLCNufC1cSK70+K21vfhUkyc6nhS
-	BC5beXEfbMfK+VQn0+WRC6aV24euG1tbRA==
-X-Google-Smtp-Source: AGHT+IFeKrwAshygRw5L2zsEmkISELwmFm8vkzXhD7FSkra/t+SCmGSc3tVZSGroDvNx0aTfiWCdQA==
-X-Received: by 2002:a05:6a21:66c7:b0:157:609f:6012 with SMTP id ze7-20020a056a2166c700b00157609f6012mr3735211pzb.61.1696473310126;
-        Wed, 04 Oct 2023 19:35:10 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1696473309; x=1697078109;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=6JPdYQCvCOBFOrh5zJYrfIj6Epesq6l3QOHGGYhjiis=;
+        b=IonD00/nhPffBvTNB8j1wcpa532zrU80yb9cuN7pXx1l8Rz4A4bU0EaXQ2PXiSkKBP
+         VV1J7gGrALP4+MzRjLDue+V5kDnqsaf2bXkFjd+roUHxnn7KrbF9N3+Lxf9TxND8NaEt
+         S7nZbrgWqy4UAV7ZgYUXOiBt0zb2WXlwGzodnHO7zO/UZUIjgUIg1VjmOjDlAm8Bc39h
+         ma6atRRn577wls2+JtPAoNLtNgfuR2kGAMDkUF5WXzbhrMiJN3F+85Y3VkJkd04CI2B/
+         DR9dB0f34pQJ8z+kp37Ro12Y3enacYQ+9oUfa0X2RzO12aRUVF9CRU9TnQU19jzel+vM
+         0MdA==
+X-Gm-Message-State: AOJu0YzxCC4d/7vtanpOFXr91/RTdAaJakK+aO2m2B/H47vOJuTywDSk
+	rvr41MBzMxqKCzvUdUZUWBymLXrjLe+EyA==
+X-Google-Smtp-Source: AGHT+IE48/RDrunVm7FzMOU3Wr7PMes8oLxnud/o5LuQ/CPCJVDXHsLDbAxnBYfOtAfhk+vQcS87jg==
+X-Received: by 2002:a05:6a21:7748:b0:14c:d5e9:21b8 with SMTP id bc8-20020a056a21774800b0014cd5e921b8mr4136679pzc.30.1696473308609;
+        Wed, 04 Oct 2023 19:35:08 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9100:2cb0::7f07])
-        by smtp.gmail.com with ESMTPSA id i8-20020aa787c8000000b0068fe76cdc62sm235680pfo.93.2023.10.04.19.35.08
+        by smtp.gmail.com with ESMTPSA id i8-20020aa787c8000000b0068fe76cdc62sm235680pfo.93.2023.10.04.19.35.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 Oct 2023 19:35:09 -0700 (PDT)
+        Wed, 04 Oct 2023 19:35:08 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-openembedded][PATCH 2/4] images: Delete layer specific base images
-Date: Wed,  4 Oct 2023 19:35:03 -0700
-Message-ID: <20231005023505.1072671-2-raj.khem@gmail.com>
+Subject: [meta-openembedded][PATCH 1/4] images: Inherit from core-image-base
+Date: Wed,  4 Oct 2023 19:35:02 -0700
+Message-ID: <20231005023505.1072671-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20231005023505.1072671-1-raj.khem@gmail.com>
-References: <20231005023505.1072671-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 05 Oct 2023 02:35:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105350
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105349
 
-These were essentially duplicates of core-image-minimal, however
-core-image-base is a better baseline for upper layers, so switched the
-consumers of these images to use core-image-base
+We really do not need to define base images which already exist in core
+layer, reuse them here.
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../images/meta-filesystems-image-base.bb                  | 7 -------
- .../images/meta-multimedia-image-base.bb                   | 7 -------
- .../recipes-core/images/meta-networking-image-base.bb      | 7 -------
- meta-oe/recipes-core/images/meta-oe-image-base.bb          | 7 -------
- meta-perl/recipes-core/images/meta-perl-base.bb            | 7 -------
- meta-python/recipes-core/images/meta-python-image-base.bb  | 7 -------
- .../recipes-core/images/meta-webserver-image-base.bb       | 7 -------
- 7 files changed, 49 deletions(-)
- delete mode 100644 meta-filesystems/recipes-filesystems/images/meta-filesystems-image-base.bb
- delete mode 100644 meta-multimedia/recipes-multimedia/images/meta-multimedia-image-base.bb
- delete mode 100644 meta-networking/recipes-core/images/meta-networking-image-base.bb
- delete mode 100644 meta-oe/recipes-core/images/meta-oe-image-base.bb
- delete mode 100644 meta-perl/recipes-core/images/meta-perl-base.bb
- delete mode 100644 meta-python/recipes-core/images/meta-python-image-base.bb
- delete mode 100644 meta-webserver/recipes-core/images/meta-webserver-image-base.bb
+ .../recipes-filesystems/images/meta-filesystems-image.bb       | 2 +-
+ .../recipes-multimedia/images/meta-multimedia-image.bb         | 2 +-
+ meta-networking/recipes-core/images/meta-networking-image.bb   | 2 +-
+ meta-oe/recipes-core/images/meta-oe-image.bb                   | 2 +-
+ meta-oe/recipes-core/images/meta-oe-ptest-image.bb             | 3 +--
+ meta-perl/recipes-core/images/meta-perl-image.bb               | 2 +-
+ meta-perl/recipes-core/images/meta-perl-ptest-image.bb         | 3 +--
+ meta-python/recipes-core/images/meta-python-image.bb           | 2 +-
+ meta-python/recipes-core/images/meta-python-ptest-image.bb     | 3 +--
+ meta-webserver/recipes-core/images/meta-webserver-image.bb     | 2 +-
+ 10 files changed, 10 insertions(+), 13 deletions(-)
 
-diff --git a/meta-filesystems/recipes-filesystems/images/meta-filesystems-image-base.bb b/meta-filesystems/recipes-filesystems/images/meta-filesystems-image-base.bb
-deleted file mode 100644
-index c89b1e1362..0000000000
---- a/meta-filesystems/recipes-filesystems/images/meta-filesystems-image-base.bb
-+++ /dev/null
-@@ -1,7 +0,0 @@
--SUMMARY = "meta-filesystems build test image"
+diff --git a/meta-filesystems/recipes-filesystems/images/meta-filesystems-image.bb b/meta-filesystems/recipes-filesystems/images/meta-filesystems-image.bb
+index ca21d2a0ed..80fb9f9137 100644
+--- a/meta-filesystems/recipes-filesystems/images/meta-filesystems-image.bb
++++ b/meta-filesystems/recipes-filesystems/images/meta-filesystems-image.bb
+@@ -1,3 +1,3 @@
+-require  meta-filesystems-image-base.bb
++require recipes-core/images/core-image-base.bb
+ 
+ IMAGE_INSTALL += "packagegroup-meta-filesystems"
+diff --git a/meta-multimedia/recipes-multimedia/images/meta-multimedia-image.bb b/meta-multimedia/recipes-multimedia/images/meta-multimedia-image.bb
+index 9f2fda9fef..dc76265a9b 100644
+--- a/meta-multimedia/recipes-multimedia/images/meta-multimedia-image.bb
++++ b/meta-multimedia/recipes-multimedia/images/meta-multimedia-image.bb
+@@ -1,3 +1,3 @@
+-require  meta-multimedia-image-base.bb
++require recipes-core/images/core-image-base.bb
+ 
+ IMAGE_INSTALL += "packagegroup-meta-multimedia"
+diff --git a/meta-networking/recipes-core/images/meta-networking-image.bb b/meta-networking/recipes-core/images/meta-networking-image.bb
+index f4c7401b35..20d3271c94 100644
+--- a/meta-networking/recipes-core/images/meta-networking-image.bb
++++ b/meta-networking/recipes-core/images/meta-networking-image.bb
+@@ -1,3 +1,3 @@
+-require  meta-networking-image-base.bb
++require recipes-core/images/core-image-base.bb
+ 
+ IMAGE_INSTALL += "packagegroup-meta-networking"
+diff --git a/meta-oe/recipes-core/images/meta-oe-image.bb b/meta-oe/recipes-core/images/meta-oe-image.bb
+index 1565549059..1338adf29f 100644
+--- a/meta-oe/recipes-core/images/meta-oe-image.bb
++++ b/meta-oe/recipes-core/images/meta-oe-image.bb
+@@ -1,4 +1,4 @@
+-require  meta-oe-image-base.bb
++require recipes-core/images/core-image-base.bb
+ 
+ SUMMARY = "meta-oe build test image"
+ 
+diff --git a/meta-oe/recipes-core/images/meta-oe-ptest-image.bb b/meta-oe/recipes-core/images/meta-oe-ptest-image.bb
+index 613da02977..dd03022c57 100644
+--- a/meta-oe/recipes-core/images/meta-oe-ptest-image.bb
++++ b/meta-oe/recipes-core/images/meta-oe-ptest-image.bb
+@@ -1,10 +1,9 @@
+ inherit features_check
+ REQUIRED_DISTRO_FEATURES = "ptest"
+ 
++require recipes-core/images/core-image-base.bb
+ require conf/include/ptest-packagelists-meta-oe.inc
+ 
+-require  meta-oe-image-base.bb
 -
--IMAGE_INSTALL = "packagegroup-core-boot"
+ SUMMARY = "meta-oe ptest test image"
+ 
+ DESCRIPTION += "Also including the ${MCNAME} ptest package."
+diff --git a/meta-perl/recipes-core/images/meta-perl-image.bb b/meta-perl/recipes-core/images/meta-perl-image.bb
+index b8d3a76e6a..c46cba21cd 100644
+--- a/meta-perl/recipes-core/images/meta-perl-image.bb
++++ b/meta-perl/recipes-core/images/meta-perl-image.bb
+@@ -1,4 +1,4 @@
+-require  meta-perl-base.bb
++require recipes-core/images/core-image-base.bb
+ 
+ SUMMARY = "meta-perl build test image"
+ 
+diff --git a/meta-perl/recipes-core/images/meta-perl-ptest-image.bb b/meta-perl/recipes-core/images/meta-perl-ptest-image.bb
+index 7cca6402b2..d846717580 100644
+--- a/meta-perl/recipes-core/images/meta-perl-ptest-image.bb
++++ b/meta-perl/recipes-core/images/meta-perl-ptest-image.bb
+@@ -1,10 +1,9 @@
+ inherit features_check
+ REQUIRED_DISTRO_FEATURES += "ptest"
+ 
+-require  meta-perl-base.bb
 -
--LICENSE = "MIT"
+ SUMMARY = "meta-perl build ptest image"
+ 
++require recipes-core/images/core-image-base.bb
+ require conf/include/ptest-packagelists-meta-perl.inc
+ 
+ DESCRIPTION += "Also including the ${MCNAME} ptest package."
+diff --git a/meta-python/recipes-core/images/meta-python-image.bb b/meta-python/recipes-core/images/meta-python-image.bb
+index 6353d389b5..fbe3efc600 100644
+--- a/meta-python/recipes-core/images/meta-python-image.bb
++++ b/meta-python/recipes-core/images/meta-python-image.bb
+@@ -1,4 +1,4 @@
+-require  meta-python-image-base.bb
++require recipes-core/images/core-image-base.bb
+ 
+ SUMMARY = "meta-python build test image"
+ 
+diff --git a/meta-python/recipes-core/images/meta-python-ptest-image.bb b/meta-python/recipes-core/images/meta-python-ptest-image.bb
+index a649cbb94c..f781322537 100644
+--- a/meta-python/recipes-core/images/meta-python-ptest-image.bb
++++ b/meta-python/recipes-core/images/meta-python-ptest-image.bb
+@@ -1,10 +1,9 @@
+ inherit features_check
+ REQUIRED_DISTRO_FEATURES = "ptest"
+ 
++require recipes-core/images/core-image-base.bb
+ require conf/include/ptest-packagelists-meta-python.inc
+ 
+-require  meta-python-image-base.bb
 -
--inherit core-image
-diff --git a/meta-multimedia/recipes-multimedia/images/meta-multimedia-image-base.bb b/meta-multimedia/recipes-multimedia/images/meta-multimedia-image-base.bb
-deleted file mode 100644
-index 249f989a4b..0000000000
---- a/meta-multimedia/recipes-multimedia/images/meta-multimedia-image-base.bb
-+++ /dev/null
-@@ -1,7 +0,0 @@
--SUMMARY = "meta-multimedia build test image"
--
--IMAGE_INSTALL = "packagegroup-core-boot"
--
--LICENSE = "MIT"
--
--inherit core-image
-diff --git a/meta-networking/recipes-core/images/meta-networking-image-base.bb b/meta-networking/recipes-core/images/meta-networking-image-base.bb
-deleted file mode 100644
-index eaf1409537..0000000000
---- a/meta-networking/recipes-core/images/meta-networking-image-base.bb
-+++ /dev/null
-@@ -1,7 +0,0 @@
--SUMMARY = "meta-networking build test image"
--
--IMAGE_INSTALL = "packagegroup-core-boot"
--
--LICENSE = "MIT"
--
--inherit core-image
-diff --git a/meta-oe/recipes-core/images/meta-oe-image-base.bb b/meta-oe/recipes-core/images/meta-oe-image-base.bb
-deleted file mode 100644
-index df92f16705..0000000000
---- a/meta-oe/recipes-core/images/meta-oe-image-base.bb
-+++ /dev/null
-@@ -1,7 +0,0 @@
--SUMMARY = "meta-oe build test image"
--
--IMAGE_INSTALL = "packagegroup-core-boot"
--
--LICENSE = "MIT"
--
--inherit core-image
-diff --git a/meta-perl/recipes-core/images/meta-perl-base.bb b/meta-perl/recipes-core/images/meta-perl-base.bb
-deleted file mode 100644
-index 2af10b218c..0000000000
---- a/meta-perl/recipes-core/images/meta-perl-base.bb
-+++ /dev/null
-@@ -1,7 +0,0 @@
--SUMMARY = "meta-perl build test image"
--
--IMAGE_INSTALL = "packagegroup-core-boot"
--
--LICENSE = "MIT"
--
--inherit core-image
-diff --git a/meta-python/recipes-core/images/meta-python-image-base.bb b/meta-python/recipes-core/images/meta-python-image-base.bb
-deleted file mode 100644
-index 81081e61b2..0000000000
---- a/meta-python/recipes-core/images/meta-python-image-base.bb
-+++ /dev/null
-@@ -1,7 +0,0 @@
--SUMMARY = "meta-python build test image"
--
--IMAGE_INSTALL = "packagegroup-core-boot"
--
--LICENSE = "MIT"
--
--inherit core-image
-diff --git a/meta-webserver/recipes-core/images/meta-webserver-image-base.bb b/meta-webserver/recipes-core/images/meta-webserver-image-base.bb
-deleted file mode 100644
-index a4ce10f674..0000000000
---- a/meta-webserver/recipes-core/images/meta-webserver-image-base.bb
-+++ /dev/null
-@@ -1,7 +0,0 @@
--SUMMARY = "meta-webserver build test image"
--
--IMAGE_INSTALL = "packagegroup-core-boot"
--
--LICENSE = "MIT"
--
--inherit core-image
+ SUMMARY = "meta-python ptest test image"
+ 
+ DESCRIPTION += "Also including the ${MCNAME} ptest package."
+diff --git a/meta-webserver/recipes-core/images/meta-webserver-image.bb b/meta-webserver/recipes-core/images/meta-webserver-image.bb
+index ce4f8a0387..9d2badc236 100644
+--- a/meta-webserver/recipes-core/images/meta-webserver-image.bb
++++ b/meta-webserver/recipes-core/images/meta-webserver-image.bb
+@@ -1,3 +1,3 @@
+-require  meta-webserver-image-base.bb
++require recipes-core/images/core-image-base.bb
+ 
+ IMAGE_INSTALL += "packagegroup-meta-webserver"
 -- 
 2.42.0
 
