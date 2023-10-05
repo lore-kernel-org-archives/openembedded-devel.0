@@ -1,254 +1,141 @@
-Return-Path: <meenali.gupta@windriver.com>
+Return-Path: <joerg.sommer@navimatix.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 07D27E7C4F5
-	for <webhook@archiver.kernel.org>; Thu,  5 Oct 2023 07:15:05 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.9998.1696490095475541670
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5CCC7E93708
+	for <webhook@archiver.kernel.org>; Thu,  5 Oct 2023 11:03:07 +0000 (UTC)
+Received: from EUR03-AM7-obe.outbound.protection.outlook.com (EUR03-AM7-obe.outbound.protection.outlook.com [40.107.105.69])
+ by mx.groups.io with SMTP id smtpd.web11.12637.1696503785587717114
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 05 Oct 2023 00:14:55 -0700
+ Thu, 05 Oct 2023 04:03:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=QUVBTeGU;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=864239b5d2=meenali.gupta@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 39574Mvt005400
-	for <openembedded-devel@lists.openembedded.org>; Thu, 5 Oct 2023 07:14:54 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=wgDN1
-	kqlIT9aGn9FAYBInv6tipLZGcheFAAzr3BjO24=; b=QUVBTeGUUphKVIxKP7u7h
-	aD8tFNHLuJOmN34+PmsUQv3fVv7ZaKfdn93Y0n3JaDuB/SOxSfHrAOF3Oro4jrXW
-	RlTKKrHuVPw51UNQjboURC6oryw9Gby3zKKgCARouvDBSzTFQDvJhUgP9eNC1MmT
-	jtRPcxNZ5uR3n5eP/ZUG2EleWyI+0Hy5YPJZHkxopHSROl8l3DYzPwocBY5dW/FI
-	i1i+zytFSMjWIW42Xm5q/IOJD9dMiYwgdJWfUwcG/eaVxDv0lV2g7W1HrgjRXt8B
-	69Y/T4gEGWaF6KS73ET7tabkVimQWCl6+w2DsZJm3Y9HS892Bp6o38Q5pFCnpoxR
-	A==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3tean64s01-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 05 Oct 2023 07:14:54 +0000 (GMT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.32; Thu, 5 Oct 2023 00:14:49 -0700
-From: Meenali Gupta <meenali.gupta@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <Hari.GPillai@windriver.com>
-Subject: [oe][meta-networking][kirkstone][PATCH 1/1] open-vm-tools: fix CVE-2023-20867
-Date: Thu, 5 Oct 2023 07:14:31 +0000
-Message-ID: <20231005071431.2086154-1-meenali.gupta@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=fail reason="dkim: body hash did not verify" header.i=@navimatix.de header.s=selector1 header.b=iWX3j6EH;
+ spf=pass (domain: navimatix.de, ip: 40.107.105.69, mailfrom: joerg.sommer@navimatix.de)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=DD2pOkXs4Cx50OUCKm8CEgkHr/jE+v5IiH5TlD9unhNRal3tH7Lh0R/3UR77NW8Wt7gRmZc43QlpWqHmR45FwjViYdgDZOHahp3C58Nm21oRsa9olFDpxBd0dnLCZkzB1F3jBYQaYzG37GreGUgkVfpUJHsCsyZ+YxmGAF5Y6DZJit6BlUy1JVCnKOAbjB+KfOrG/opr4HVtqubSDGSBRRERByAqceTda5Yzr6PxzVwf48bm3PueY7jG1dxCJ031ePGbSeq7+fmzFFpshn3q94a7RkEERv3N6WEbHDKY2ZHlm6ZDI7YyugQedy8Rjr8fnJiDs/q/yeMHKLDEzZRByg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=AoHVlZmZzzJ8qhxP3RzUVIdmP0meNAvA78ekGje4VOo=;
+ b=GtYjkkWAqrI37GgfREdrpJ2rxNNc1XGn/XUvLJmFmS2ff9tcGGvunGM334zUMRTLd0FSFxWFgyzFCKD8NxZW++6S2Axu23kT9aO0sGyhUWrNx2LFPj2Mo8igVfG446dldvn0WRHkOmC6AEazxhBWt8LLh1WxxAFqhuHYsrksgl7m1gIx3gi3OLNED0wUufWP+NUHxqaYfUbvy7oHHeLb6jluQh9QlH3pYGhXXBNwCtbWXGS+6Z5KnlR4WgDc7QKsOaKgyR/kf/1oF/QDj2L92o1zPwsE3eBVIdIiV79EkG7Kenn9v6bj6ce4tnUk08WfqhZH6Ldppz8QjcZCqCD32w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=navimatix.de; dmarc=pass action=none header.from=navimatix.de;
+ dkim=pass header.d=navimatix.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=navimatix.de;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=AoHVlZmZzzJ8qhxP3RzUVIdmP0meNAvA78ekGje4VOo=;
+ b=iWX3j6EH6KitiO249gNwbcnl/jNIpg0lHAQvtju0yoEAa5HI1WCQS3Uqmo5R1x9aS7TXswNEvLGmTeDhIkOwxjWk9kNwI+Y8CfW6EdKqPIom7ICteehDjG4MHQFy/EbE/7+2FpHl4Jd5xSzCBvX3eUb5WgnsT/+9k4shLd/O6Y0=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=navimatix.de;
+Received: from VI1PR0102MB3136.eurprd01.prod.exchangelabs.com
+ (2603:10a6:803:5::26) by DU0PR01MB9429.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:32c::18) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.29; Thu, 5 Oct
+ 2023 11:03:01 +0000
+Received: from VI1PR0102MB3136.eurprd01.prod.exchangelabs.com
+ ([fe80::fedc:a1fb:55e9:fb31]) by
+ VI1PR0102MB3136.eurprd01.prod.exchangelabs.com
+ ([fe80::fedc:a1fb:55e9:fb31%3]) with mapi id 15.20.6838.016; Thu, 5 Oct 2023
+ 11:03:01 +0000
+From: =?UTF-8?q?J=C3=B6rg=20Sommer?= <joerg.sommer@navimatix.de>
+To: openembedded-devel@lists.openembedded.org
+CC: =?UTF-8?q?J=C3=B6rg=20Sommer?= <joerg.sommer@navimatix.de>
+Subject: [meta-oe][PATCH] collectd: Use https in SRC_URI, add HOMEPAGE
+Date: Thu,  5 Oct 2023 13:02:26 +0200
+Message-ID: <9c70b1b137efc84b24a4b7c52e1182fa1976400e.1696503746.git.joerg.sommer@navimatix.de>
+X-Mailer: git-send-email 2.34.1
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-ClientProxiedBy: BE0P281CA0018.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:b10:a::28) To VI1PR0102MB3136.eurprd01.prod.exchangelabs.com
+ (2603:10a6:803:5::26)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-GUID: CPHo4lva3dyxPE8S-xcC3xIXf71adzgI
-X-Proofpoint-ORIG-GUID: CPHo4lva3dyxPE8S-xcC3xIXf71adzgI
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.267,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-10-05_03,2023-10-02_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0 spamscore=0
- suspectscore=0 clxscore=1011 phishscore=0 malwarescore=0
- lowpriorityscore=0 mlxscore=0 adultscore=0 mlxlogscore=999 bulkscore=0
- priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2309180000 definitions=main-2310050054
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: VI1PR0102MB3136:EE_|DU0PR01MB9429:EE_
+X-MS-Office365-Filtering-Correlation-Id: 82d349c6-e60c-4953-c8a3-08dbc592a3dd
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	Wyls2iP1+9qXmkI5sfcGq1NpgCL5Qh8rHkp9StFCgTtjk8VU2bG9RfzbO/snHQDBfhomRfkM8gfOzRr3SUWYRayZOtEpQo01TzUgziBhBdqYhOcg+22HROVwDivq6zLfEUNByRJuA88JexNxBpUXtTbC6MUX1LRQi2PDCRBCTqUaXC1WMGTBbqm3GHRhowaQnVKB0TCszsbHWHwERpspCUqL3LvgGAtADcKacSWr/BzDTdweRE6qzE7wcIWkuryt/Yh3uVL/d3AIzCyvAxVc31/QtIoRXJA0Uv4h1fFFlGgzqtSVUB4ZEqJEQAKMd2qmY8J5ZSZFgayDOTJ8wjLtNquWts0bWHnSiBMB1R80pUxxubaJaUL9dCx+RyJ+xk0ur0ZHodqVSZ9bQpyGzfrJK1fPTOUoAEBmNq0GcXV3gS7TtGNjy8r12NSnsWMG9Og8y3TGL//Ook52jMw0dfpDj5aBPMfT4uLOzB88wjYkpXLiMtt8fgL7pIyr3Xu3IjUEQnUN5+5X6kPou7oCqNksuLrKQgmY/dKLwQLpsg/z7DIs6MlhFzNAFm9nPE19UTIqNaVOayb7rLJ4QMn43OtmUdsmAUz/z5UDvTnkMNy/Tr0=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR0102MB3136.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230031)(396003)(346002)(376002)(136003)(366004)(39840400004)(230922051799003)(451199024)(186009)(64100799003)(1800799009)(52116002)(6666004)(6512007)(6506007)(6486002)(478600001)(38100700002)(86362001)(38350700002)(6916009)(316002)(2906002)(83380400001)(26005)(2616005)(107886003)(66574015)(36756003)(41300700001)(66946007)(4326008)(8936002)(8676002)(66476007)(66556008)(5660300002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?2DXtpZHzWSoS/6Hxk3S+nGAKiM1qGc8IaDuC2MyPA0bFq1+7sBtUt7fFTr6s?=
+ =?us-ascii?Q?Hcnm5hKqf00jtpLX6DIQDwjUC0MEKvl72179Xoe9IjvNICrb/aY3B3tCAmEW?=
+ =?us-ascii?Q?epkk8Hfxm5jxdKOp2YFxEC5zoaFM+vlLpI5XQsG69bD1icdj4e9Ch/eKozhz?=
+ =?us-ascii?Q?ybXJrMpIeQqjis38DLKBtGoB8zcC1woFCAvSQXhplk7XgGt1wHjf2wXPGRQt?=
+ =?us-ascii?Q?/nCydDfXqDbUL2/7G6sseKJfU/nXCmk1HmVuHVeCg1+ZC4jsr2xSsnC0tWAI?=
+ =?us-ascii?Q?dWpG/n4ioxT7pPLlaLxCMKAc81nKuo3/Khs1exE2iAkJcV05VGppZ4sC87cI?=
+ =?us-ascii?Q?6JsN3pLKsLJO5weuT+5jB1+GdLZdqVZu+9l1VZvxUpLoCLKouQqRKjraRu/A?=
+ =?us-ascii?Q?hVpq8ZLzzUvIJ9FofhiSVUHgTbZweEZ6SjuO3M9gZsoOwZ67PtN6xa/ANCzE?=
+ =?us-ascii?Q?fGsIaBh3STTZ9/Q6uSAKLGYswS67JObajChJGRH/h0Qwsnd7/YIWU1StoWGM?=
+ =?us-ascii?Q?TxKSMIaroLQKM27Q2hNJWSc+/DxTdhPUJ2YWwPTSkYo6az+R/a9NkMmm4p3S?=
+ =?us-ascii?Q?fi/tkuLtmsvxXIM57kHGdr56MbWigyoySEJeS+Mk1DT0KiLCZlI/N9cT0qLm?=
+ =?us-ascii?Q?oe3DwMLZKAFMq9veL7AnxI4+2ReM6imdVkwhiEvnEMrDSrLrA5DM6WO8z1I5?=
+ =?us-ascii?Q?A13i4RapwYWn49L+6sMZUlfrEtgrzhBDFEFMOt2m9dHNsgUR/ik4G5AwZpV9?=
+ =?us-ascii?Q?9Kx5zXb/cWr2xAOj7KLjgTHyYvIBL09mpNyOOmSctAPAt0+rnAJcjdaHNJxs?=
+ =?us-ascii?Q?Xcc7YPC4dPBIBWXv06TId4fnznd9PEcPWc/IU6Ocf9aMYmAY/grx9YoMwt50?=
+ =?us-ascii?Q?fmdchI83Am5Z+aK/HTnRcqsw0HOKZJggQab9Js2GuOov1LiVU6kDhxZLIQ5w?=
+ =?us-ascii?Q?q9NCxJ/sJdeh0o/k75+xPrS2jpvtC/4qRQhPXSIAtFmoxo+xhvUgLs0UFJkb?=
+ =?us-ascii?Q?VVAZnMIABjqS9E7PPFFzF5f6zQhri2/nKhyWF77rOAVLxxxSCwdI45j4Imc/?=
+ =?us-ascii?Q?zYGLKRN79YHUyXHjU8oGqx5RPSvmgfW5SRUguN0BFuMka5V/E5KQpDVVZ1Kb?=
+ =?us-ascii?Q?jO+aZDWPmtD2dmQwqornJnUKPqLQBoy3PQFApFH1r7XOkdte0Kv76qiWGrRz?=
+ =?us-ascii?Q?NNTe2tscF5QyUjPz0NLojlX+9JzH32B99ttZZH0miK1coh/9OIN3pu5oUFqm?=
+ =?us-ascii?Q?tqRH9+E9DvUJVegry1WEMEE2W675eFsqCxlr1/aWN9sjw/z1LBQ535pbte3/?=
+ =?us-ascii?Q?RZEe/QL7PKd1Ic/2JldPUu56VQDY0RrYyGb8YfSZQUjdL2uOXgtjBczOKK0E?=
+ =?us-ascii?Q?7D3zl/89pbm4YeYuInWznqo2qGYuFN1QMveAq7qf2W9uTceRBA8ZyGtzvmlq?=
+ =?us-ascii?Q?qSdfShOA0NFODF/dafHjTcC35A6awKwrmKVp1X0pdK8sn0ql7gwyjPjDeXA4?=
+ =?us-ascii?Q?VtCH4WzP7lAuvPr1xKjahGGbhHQ9yL6q9PA2KObX7PoofboRt9tHqunny6u+?=
+ =?us-ascii?Q?Wlh7WhUtEBEkBujSH0DQWWAQXf1e4Gftqq4DCER/EYjt+XvCojbQVYGySZii?=
+ =?us-ascii?Q?xQ=3D=3D?=
+X-OriginatorOrg: navimatix.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 82d349c6-e60c-4953-c8a3-08dbc592a3dd
+X-MS-Exchange-CrossTenant-AuthSource: VI1PR0102MB3136.eurprd01.prod.exchangelabs.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Oct 2023 11:03:01.0684
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: c87b4f54-b992-4813-8f3f-4a876324197f
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: RY5pIuf62McvbcGXukrDN4erH6xgMFEY8POiX2PlmH++JL6t00LGDVN8OOe5/cNpIrf3LFnTxXnmDULzn7H4maaOCe47MLfGKyjtsiL3L1w=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR01MB9429
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 05 Oct 2023 07:15:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105353
+ <openembedded-devel@lists.openembedded.org>; Thu, 05 Oct 2023 11:03:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105354
 
-A fully compromised ESXi host can force VMware Tools to
-fail to authenticate host-to-guest operations, impacting
-the confidentiality and integrity of the guest virtual machine.
-
-Signed-off-by: Meenali Gupta <meenali.gupta@windriver.com>
+Signed-off-by: J=C3=B6rg Sommer <joerg.sommer@navimatix.de>
 ---
- .../open-vm-tools/CVE-2023-20867.patch        | 158 ++++++++++++++++++
- .../open-vm-tools/open-vm-tools_11.3.5.bb     |   1 +
- 2 files changed, 159 insertions(+)
- create mode 100644 meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2023-20867.patch
+ meta-oe/recipes-extended/collectd/collectd_5.12.0.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2023-20867.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2023-20867.patch
-new file mode 100644
-index 000000000..071ddf45d
---- /dev/null
-+++ b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2023-20867.patch
-@@ -0,0 +1,158 @@
-+From 32fe1b6ac239255a91020020510453685459b28a Mon Sep 17 00:00:00 2001
-+From: John Wolfe <jwolfe@vmware.com>
-+Date: Mon, 8 May 2023 19:04:57 -0700
-+Subject: [PATCH] open-vm-tools: Remove some dead code.
-+
-+Address CVE-2023-20867.
-+Remove some authentication types which were deprecated long
-+ago and are no longer in use. These are dead code.
-+
-+Upstream-Status: Backport [https://github.com/vmware/open-vm-tools/blob/CVE-2023-20867.patch/2023-20867-Remove-some-dead-code.patch]
-+CVE: CVE-2023-20867
-+
-+Signed-off-by: Meenali Gupta <meenali.gupta@windriver.com>
-+---
-+ open-vm-tools/services/plugins/vix/vixTools.c | 100 ------------------
-+ 1 file changed, 100 deletions(-)
-+
-+diff --git a/open-vm-tools/services/plugins/vix/vixTools.c b/open-vm-tools/services/plugins/vix/vixTools.c
-+index bde74021..6e51d1f4 100644
-+--- a/open-vm-tools/services/plugins/vix/vixTools.c
-++++ b/open-vm-tools/services/plugins/vix/vixTools.c
-+@@ -254,7 +254,6 @@ char *gImpersonatedUsername = NULL;
-+ #define  VIX_TOOLS_CONFIG_API_AUTHENTICATION          "Authentication"
-+ #define  VIX_TOOLS_CONFIG_AUTHTYPE_AGENTS             "InfrastructureAgents"
-+
-+-#define VIX_TOOLS_CONFIG_INFRA_AGENT_DISABLED_DEFAULT  TRUE
-+
-+ /*
-+  * The switch that controls all APIs
-+@@ -730,8 +729,6 @@ VixError GuestAuthSAMLAuthenticateAndImpersonate(
-+
-+ void GuestAuthUnimpersonate();
-+
-+-static Bool VixToolsCheckIfAuthenticationTypeEnabled(GKeyFile *confDictRef,
-+-                                                     const char *typeName);
-+
-+ #if SUPPORT_VGAUTH
-+
-+@@ -7913,29 +7910,6 @@ VixToolsImpersonateUser(VixCommandRequestHeader *requestMsg,   // IN
-+                                           userToken);
-+       break;
-+    }
-+-   case VIX_USER_CREDENTIAL_ROOT:
-+-   {
-+-      if ((requestMsg->requestFlags & VIX_REQUESTMSG_HAS_HASHED_SHARED_SECRET) &&
-+-          !VixToolsCheckIfAuthenticationTypeEnabled(gConfDictRef,
-+-                                            VIX_TOOLS_CONFIG_AUTHTYPE_AGENTS)) {
-+-          /*
-+-           * Don't accept hashed shared secret if disabled.
-+-           */
-+-          g_message("%s: Requested authentication type has been disabled.\n",
-+-                    __FUNCTION__);
-+-          err = VIX_E_GUEST_AUTHTYPE_DISABLED;
-+-          goto done;
-+-      }
-+-   }
-+-   // fall through
-+-
-+-   case VIX_USER_CREDENTIAL_CONSOLE_USER:
-+-      err = VixToolsImpersonateUserImplEx(NULL,
-+-                                          credentialType,
-+-                                          NULL,
-+-                                          loadUserProfile,
-+-                                          userToken);
-+-      break;
-+    case VIX_USER_CREDENTIAL_NAME_PASSWORD:
-+    case VIX_USER_CREDENTIAL_NAME_PASSWORD_OBFUSCATED:
-+    case VIX_USER_CREDENTIAL_NAMED_INTERACTIVE_USER:
-+@@ -8104,36 +8078,6 @@ VixToolsImpersonateUserImplEx(char const *credentialTypeStr,         // IN
-+          }
-+       }
-+
-+-      /*
-+-       * If the VMX asks to be root, then we allow them.
-+-       * The VMX will make sure that only it will pass this value in,
-+-       * and only when the VM and host are configured to allow this.
-+-       */
-+-      if ((VIX_USER_CREDENTIAL_ROOT == credentialType)
-+-            && (thisProcessRunsAsRoot)) {
-+-         *userToken = PROCESS_CREATOR_USER_TOKEN;
-+-
-+-         gImpersonatedUsername = Util_SafeStrdup("_ROOT_");
-+-         err = VIX_OK;
-+-         goto quit;
-+-      }
-+-
-+-      /*
-+-       * If the VMX asks to be root, then we allow them.
-+-       * The VMX will make sure that only it will pass this value in,
-+-       * and only when the VM and host are configured to allow this.
-+-       *
-+-       * XXX This has been deprecated XXX
-+-       */
-+-      if ((VIX_USER_CREDENTIAL_CONSOLE_USER == credentialType)
-+-            && ((allowConsoleUserOps) || !(thisProcessRunsAsRoot))) {
-+-         *userToken = PROCESS_CREATOR_USER_TOKEN;
-+-
-+-         gImpersonatedUsername = Util_SafeStrdup("_CONSOLE_USER_NAME_");
-+-         err = VIX_OK;
-+-         goto quit;
-+-      }
-+-
-+       /*
-+        * If the VMX asks us to run commands in the context of the current
-+        * user, make sure that the user who requested the command is the
-+@@ -10814,50 +10758,6 @@ VixToolsCheckIfVixCommandEnabled(int opcode,                          // IN
-+ }
-+
-+
-+-/*
-+- *-----------------------------------------------------------------------------
-+- *
-+- * VixToolsCheckIfAuthenticationTypeEnabled --
-+- *
-+- *    Checks to see if a given authentication type has been
-+- *    disabled via the tools configuration.
-+- *
-+- * Return value:
-+- *    TRUE if enabled, FALSE otherwise.
-+- *
-+- * Side effects:
-+- *    None
-+- *
-+- *-----------------------------------------------------------------------------
-+- */
-+-
-+-static Bool
-+-VixToolsCheckIfAuthenticationTypeEnabled(GKeyFile *confDictRef,     // IN
-+-                                         const char *typeName)      // IN
-+-{
-+-   char authnDisabledName[64]; // Authentication.<AuthenticationType>.disabled
-+-   gboolean disabled;
-+-
-+-   Str_Snprintf(authnDisabledName, sizeof(authnDisabledName),
-+-                VIX_TOOLS_CONFIG_API_AUTHENTICATION ".%s.disabled",
-+-                typeName);
-+-
-+-   ASSERT(confDictRef != NULL);
-+-
-+-   /*
-+-    * XXX Skip doing the strcmp() to verify the auth type since we only
-+-    * have the one typeName (VIX_TOOLS_CONFIG_AUTHTYPE_AGENTS), and default
-+-    * it to VIX_TOOLS_CONFIG_INFRA_AGENT_DISABLED_DEFAULT.
-+-    */
-+-   disabled = VMTools_ConfigGetBoolean(confDictRef,
-+-                                       VIX_TOOLS_CONFIG_API_GROUPNAME,
-+-                                       authnDisabledName,
-+-                                       VIX_TOOLS_CONFIG_INFRA_AGENT_DISABLED_DEFAULT);
-+-
-+-   return !disabled;
-+-}
-+-
-+-
-+ /*
-+  *-----------------------------------------------------------------------------
-+  *
-+--
-+2.40.0
-diff --git a/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.3.5.bb b/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.3.5.bb
-index 4670a85a6..c80827a99 100644
---- a/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.3.5.bb
-+++ b/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.3.5.bb
-@@ -45,6 +45,7 @@ SRC_URI = "git://github.com/vmware/open-vm-tools.git;protocol=https;branch=maste
-            file://0002-hgfsServerLinux-Consider-64bit-time_t-possibility.patch;patchdir=.. \
-            file://0001-open-vm-tools-Correct-include-path-for-poll.h.patch;patchdir=.. \
-            file://0001-Properly-check-authorization-on-incoming-guestOps-re.patch;patchdir=.. \
-+           file://CVE-2023-20867.patch;patchdir=.. \
-            "
- 
- UPSTREAM_CHECK_GITTAGREGEX = "stable-(?P<pver>\d+(\.\d+)+)"
--- 
-2.40.0
+diff --git a/meta-oe/recipes-extended/collectd/collectd_5.12.0.bb b/meta-oe=
+/recipes-extended/collectd/collectd_5.12.0.bb
+index 479c12d6a..bd4a5b3e8 100644
+--- a/meta-oe/recipes-extended/collectd/collectd_5.12.0.bb
++++ b/meta-oe/recipes-extended/collectd/collectd_5.12.0.bb
+@@ -1,11 +1,12 @@
+ SUMMARY =3D "Collects and summarises system performance statistics"
+ DESCRIPTION =3D "collectd is a daemon which collects system performance st=
+atistics periodically and provides mechanisms to store the values in a vari=
+ety of ways, for example in RRD files."
++HOMEPAGE =3D "https://collectd.org/"
+ LICENSE =3D "GPL-2.0-only & MIT"
+ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D1bd21f19f7f0c61a7be8ecacb0e2885=
+4"
+=20
+ DEPENDS =3D "rrdtool curl libpcap libxml2 yajl libgcrypt libtool lvm2"
+=20
+-SRC_URI =3D "http://collectd.org/files/collectd-${PV}.tar.bz2 \
++SRC_URI =3D "https://collectd.org/files/collectd-${PV}.tar.bz2 \
+            file://collectd.init \
+            file://collectd.service \
+            file://no-gcrypt-badpath.patch \
+--=20
+2.34.1
 
 
