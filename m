@@ -1,133 +1,254 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <meenali.gupta@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4CDC4E936F9
-	for <webhook@archiver.kernel.org>; Thu,  5 Oct 2023 02:35:21 +0000 (UTC)
-Received: from mail-io1-f42.google.com (mail-io1-f42.google.com [209.85.166.42])
- by mx.groups.io with SMTP id smtpd.web10.7000.1696473312081764791
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 07D27E7C4F5
+	for <webhook@archiver.kernel.org>; Thu,  5 Oct 2023 07:15:05 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.9998.1696490095475541670
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 04 Oct 2023 19:35:12 -0700
+ Thu, 05 Oct 2023 00:14:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=FJgQgdjq;
- spf=pass (domain: gmail.com, ip: 209.85.166.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-io1-f42.google.com with SMTP id ca18e2360f4ac-79fa416b7ffso23171439f.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 04 Oct 2023 19:35:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1696473311; x=1697078111; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=aIDAorcmO5oJBob0SAwzVEFqlmPMET+IC34Aj/ZnLU4=;
-        b=FJgQgdjqdvHQo2QKuhJ3c0fjX9x5MFpbffaKqbIwqhyG1ubjONPpWwltFRD4VFIRMs
-         uajmzO2AsPnIFh64Oa8bxstgI8Jc3yG4PYC7Fa9ksGuL1Pd53IOEsPr4bxI/IYqkkhFy
-         ao60E94t/ldANDTc/Rzmcei3q1FQGoQMIWFuSLrL1jID7xYgPUP1pc0yhZ8QJyRAwE8S
-         NgxRVbJ9zJr2ppIwfaWy9Z17kCr3ntj2fnovLHHL+JT2l5WyEAtdUPvlPNdDLbb22dxh
-         dNfL/Gx6QwZaPtZ6VTbrFBFsymcGF4r1n7wfuFF1C4D9omU1aDcT+WucOko85UcMLjOh
-         oJ/Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1696473311; x=1697078111;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=aIDAorcmO5oJBob0SAwzVEFqlmPMET+IC34Aj/ZnLU4=;
-        b=UXg8yT1AxFKwCFckGnWuHZf9AchU4pawD/jbjT3W+pyv14z0QZmyZbyhJwzclMZEq8
-         yc9K5flWpsuz/OckxxkxqTzaIo66Ohh6dbBk7ewyREYMRsxX3Rpx8b9G9eQQZOBKKlvN
-         FEnMvFU5kJxtHwPXBih2FyPhM75JgBPQzKlA7ipFUI/kf8AodCgHpDDY3prG32kY0xny
-         DXvS3d2Hzk2EFVXU7xCFUs3pdrpvNnZb7P5w7Eoe1AffHys34/NWpxzVzyrVHuqlBn35
-         HKbBzdypXKC+nXPMuhTgH2wvcDEFOPPkM7++Se9GNJ3D0N8cxIb0XGjgjnzJi/gSPem2
-         PFig==
-X-Gm-Message-State: AOJu0Yy0p6UdFdvRu3d61qYmAef2i79W2Vkkd7mCogWju2kyVUApiS3C
-	eQDoUp9STCQzUnmUT6aBxztPpAkYOXw6FA==
-X-Google-Smtp-Source: AGHT+IFYSxeenREIPJ8YBX5XzPjuEZHtGW1j7mQlYM7O/H/kXHR5H6vqFdj2Jh4qrVY/9LEt08wT9Q==
-X-Received: by 2002:a92:c045:0:b0:34f:cd3c:e029 with SMTP id o5-20020a92c045000000b0034fcd3ce029mr3915414ilf.13.1696473311004;
-        Wed, 04 Oct 2023 19:35:11 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9100:2cb0::7f07])
-        by smtp.gmail.com with ESMTPSA id i8-20020aa787c8000000b0068fe76cdc62sm235680pfo.93.2023.10.04.19.35.10
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 Oct 2023 19:35:10 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-openembedded][PATCH 3/4] images: Rename <layer>-image to <layer>-image-all
-Date: Wed,  4 Oct 2023 19:35:04 -0700
-Message-ID: <20231005023505.1072671-3-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20231005023505.1072671-1-raj.khem@gmail.com>
-References: <20231005023505.1072671-1-raj.khem@gmail.com>
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=QUVBTeGU;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=864239b5d2=meenali.gupta@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 39574Mvt005400
+	for <openembedded-devel@lists.openembedded.org>; Thu, 5 Oct 2023 07:14:54 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=wgDN1
+	kqlIT9aGn9FAYBInv6tipLZGcheFAAzr3BjO24=; b=QUVBTeGUUphKVIxKP7u7h
+	aD8tFNHLuJOmN34+PmsUQv3fVv7ZaKfdn93Y0n3JaDuB/SOxSfHrAOF3Oro4jrXW
+	RlTKKrHuVPw51UNQjboURC6oryw9Gby3zKKgCARouvDBSzTFQDvJhUgP9eNC1MmT
+	jtRPcxNZ5uR3n5eP/ZUG2EleWyI+0Hy5YPJZHkxopHSROl8l3DYzPwocBY5dW/FI
+	i1i+zytFSMjWIW42Xm5q/IOJD9dMiYwgdJWfUwcG/eaVxDv0lV2g7W1HrgjRXt8B
+	69Y/T4gEGWaF6KS73ET7tabkVimQWCl6+w2DsZJm3Y9HS892Bp6o38Q5pFCnpoxR
+	A==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3tean64s01-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 05 Oct 2023 07:14:54 +0000 (GMT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.32; Thu, 5 Oct 2023 00:14:49 -0700
+From: Meenali Gupta <meenali.gupta@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <Hari.GPillai@windriver.com>
+Subject: [oe][meta-networking][kirkstone][PATCH 1/1] open-vm-tools: fix CVE-2023-20867
+Date: Thu, 5 Oct 2023 07:14:31 +0000
+Message-ID: <20231005071431.2086154-1-meenali.gupta@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-GUID: CPHo4lva3dyxPE8S-xcC3xIXf71adzgI
+X-Proofpoint-ORIG-GUID: CPHo4lva3dyxPE8S-xcC3xIXf71adzgI
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.267,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-10-05_03,2023-10-02_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0 spamscore=0
+ suspectscore=0 clxscore=1011 phishscore=0 malwarescore=0
+ lowpriorityscore=0 mlxscore=0 adultscore=0 mlxlogscore=999 bulkscore=0
+ priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2309180000 definitions=main-2310050054
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 05 Oct 2023 02:35:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105351
+ <openembedded-devel@lists.openembedded.org>; Thu, 05 Oct 2023 07:15:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105353
 
-These are test images to build all recipes in layer. Renaming them makes
-them refect what they are. Moreover we can rename the ptest images to
-match OE-Core naming conventions for meta-oe/meta-perl/meta-python
+A fully compromised ESXi host can force VMware Tools to
+fail to authenticate host-to-guest operations, impacting
+the confidentiality and integrity of the guest virtual machine.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Meenali Gupta <meenali.gupta@windriver.com>
 ---
- ...{meta-filesystems-image.bb => meta-filesystems-image-all.bb} | 0
- .../{meta-multimedia-image.bb => meta-multimedia-image-all.bb}  | 0
- .../recipes-multimedia/images/multimedia-libcamera-image.bb     | 2 +-
- .../{meta-networking-image.bb => meta-networking-image-all.bb}  | 0
- .../images/{meta-oe-image.bb => meta-oe-image-all.bb}           | 0
- .../images/{meta-perl-image.bb => meta-perl-image-all.bb}       | 0
- .../images/{meta-python-image.bb => meta-python-image-all.bb}   | 0
- .../{meta-webserver-image.bb => meta-webserver-image-all.bb}    | 0
- 8 files changed, 1 insertion(+), 1 deletion(-)
- rename meta-filesystems/recipes-filesystems/images/{meta-filesystems-image.bb => meta-filesystems-image-all.bb} (100%)
- rename meta-multimedia/recipes-multimedia/images/{meta-multimedia-image.bb => meta-multimedia-image-all.bb} (100%)
- rename meta-networking/recipes-core/images/{meta-networking-image.bb => meta-networking-image-all.bb} (100%)
- rename meta-oe/recipes-core/images/{meta-oe-image.bb => meta-oe-image-all.bb} (100%)
- rename meta-perl/recipes-core/images/{meta-perl-image.bb => meta-perl-image-all.bb} (100%)
- rename meta-python/recipes-core/images/{meta-python-image.bb => meta-python-image-all.bb} (100%)
- rename meta-webserver/recipes-core/images/{meta-webserver-image.bb => meta-webserver-image-all.bb} (100%)
+ .../open-vm-tools/CVE-2023-20867.patch        | 158 ++++++++++++++++++
+ .../open-vm-tools/open-vm-tools_11.3.5.bb     |   1 +
+ 2 files changed, 159 insertions(+)
+ create mode 100644 meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2023-20867.patch
 
-diff --git a/meta-filesystems/recipes-filesystems/images/meta-filesystems-image.bb b/meta-filesystems/recipes-filesystems/images/meta-filesystems-image-all.bb
-similarity index 100%
-rename from meta-filesystems/recipes-filesystems/images/meta-filesystems-image.bb
-rename to meta-filesystems/recipes-filesystems/images/meta-filesystems-image-all.bb
-diff --git a/meta-multimedia/recipes-multimedia/images/meta-multimedia-image.bb b/meta-multimedia/recipes-multimedia/images/meta-multimedia-image-all.bb
-similarity index 100%
-rename from meta-multimedia/recipes-multimedia/images/meta-multimedia-image.bb
-rename to meta-multimedia/recipes-multimedia/images/meta-multimedia-image-all.bb
-diff --git a/meta-multimedia/recipes-multimedia/images/multimedia-libcamera-image.bb b/meta-multimedia/recipes-multimedia/images/multimedia-libcamera-image.bb
-index bc1c52ad48..bc2e858b42 100644
---- a/meta-multimedia/recipes-multimedia/images/multimedia-libcamera-image.bb
-+++ b/meta-multimedia/recipes-multimedia/images/multimedia-libcamera-image.bb
-@@ -4,7 +4,7 @@
- DESCRIPTION = "libcamera image"
- LICENSE = "MIT"
+diff --git a/meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2023-20867.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2023-20867.patch
+new file mode 100644
+index 000000000..071ddf45d
+--- /dev/null
++++ b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2023-20867.patch
+@@ -0,0 +1,158 @@
++From 32fe1b6ac239255a91020020510453685459b28a Mon Sep 17 00:00:00 2001
++From: John Wolfe <jwolfe@vmware.com>
++Date: Mon, 8 May 2023 19:04:57 -0700
++Subject: [PATCH] open-vm-tools: Remove some dead code.
++
++Address CVE-2023-20867.
++Remove some authentication types which were deprecated long
++ago and are no longer in use. These are dead code.
++
++Upstream-Status: Backport [https://github.com/vmware/open-vm-tools/blob/CVE-2023-20867.patch/2023-20867-Remove-some-dead-code.patch]
++CVE: CVE-2023-20867
++
++Signed-off-by: Meenali Gupta <meenali.gupta@windriver.com>
++---
++ open-vm-tools/services/plugins/vix/vixTools.c | 100 ------------------
++ 1 file changed, 100 deletions(-)
++
++diff --git a/open-vm-tools/services/plugins/vix/vixTools.c b/open-vm-tools/services/plugins/vix/vixTools.c
++index bde74021..6e51d1f4 100644
++--- a/open-vm-tools/services/plugins/vix/vixTools.c
+++++ b/open-vm-tools/services/plugins/vix/vixTools.c
++@@ -254,7 +254,6 @@ char *gImpersonatedUsername = NULL;
++ #define  VIX_TOOLS_CONFIG_API_AUTHENTICATION          "Authentication"
++ #define  VIX_TOOLS_CONFIG_AUTHTYPE_AGENTS             "InfrastructureAgents"
++
++-#define VIX_TOOLS_CONFIG_INFRA_AGENT_DISABLED_DEFAULT  TRUE
++
++ /*
++  * The switch that controls all APIs
++@@ -730,8 +729,6 @@ VixError GuestAuthSAMLAuthenticateAndImpersonate(
++
++ void GuestAuthUnimpersonate();
++
++-static Bool VixToolsCheckIfAuthenticationTypeEnabled(GKeyFile *confDictRef,
++-                                                     const char *typeName);
++
++ #if SUPPORT_VGAUTH
++
++@@ -7913,29 +7910,6 @@ VixToolsImpersonateUser(VixCommandRequestHeader *requestMsg,   // IN
++                                           userToken);
++       break;
++    }
++-   case VIX_USER_CREDENTIAL_ROOT:
++-   {
++-      if ((requestMsg->requestFlags & VIX_REQUESTMSG_HAS_HASHED_SHARED_SECRET) &&
++-          !VixToolsCheckIfAuthenticationTypeEnabled(gConfDictRef,
++-                                            VIX_TOOLS_CONFIG_AUTHTYPE_AGENTS)) {
++-          /*
++-           * Don't accept hashed shared secret if disabled.
++-           */
++-          g_message("%s: Requested authentication type has been disabled.\n",
++-                    __FUNCTION__);
++-          err = VIX_E_GUEST_AUTHTYPE_DISABLED;
++-          goto done;
++-      }
++-   }
++-   // fall through
++-
++-   case VIX_USER_CREDENTIAL_CONSOLE_USER:
++-      err = VixToolsImpersonateUserImplEx(NULL,
++-                                          credentialType,
++-                                          NULL,
++-                                          loadUserProfile,
++-                                          userToken);
++-      break;
++    case VIX_USER_CREDENTIAL_NAME_PASSWORD:
++    case VIX_USER_CREDENTIAL_NAME_PASSWORD_OBFUSCATED:
++    case VIX_USER_CREDENTIAL_NAMED_INTERACTIVE_USER:
++@@ -8104,36 +8078,6 @@ VixToolsImpersonateUserImplEx(char const *credentialTypeStr,         // IN
++          }
++       }
++
++-      /*
++-       * If the VMX asks to be root, then we allow them.
++-       * The VMX will make sure that only it will pass this value in,
++-       * and only when the VM and host are configured to allow this.
++-       */
++-      if ((VIX_USER_CREDENTIAL_ROOT == credentialType)
++-            && (thisProcessRunsAsRoot)) {
++-         *userToken = PROCESS_CREATOR_USER_TOKEN;
++-
++-         gImpersonatedUsername = Util_SafeStrdup("_ROOT_");
++-         err = VIX_OK;
++-         goto quit;
++-      }
++-
++-      /*
++-       * If the VMX asks to be root, then we allow them.
++-       * The VMX will make sure that only it will pass this value in,
++-       * and only when the VM and host are configured to allow this.
++-       *
++-       * XXX This has been deprecated XXX
++-       */
++-      if ((VIX_USER_CREDENTIAL_CONSOLE_USER == credentialType)
++-            && ((allowConsoleUserOps) || !(thisProcessRunsAsRoot))) {
++-         *userToken = PROCESS_CREATOR_USER_TOKEN;
++-
++-         gImpersonatedUsername = Util_SafeStrdup("_CONSOLE_USER_NAME_");
++-         err = VIX_OK;
++-         goto quit;
++-      }
++-
++       /*
++        * If the VMX asks us to run commands in the context of the current
++        * user, make sure that the user who requested the command is the
++@@ -10814,50 +10758,6 @@ VixToolsCheckIfVixCommandEnabled(int opcode,                          // IN
++ }
++
++
++-/*
++- *-----------------------------------------------------------------------------
++- *
++- * VixToolsCheckIfAuthenticationTypeEnabled --
++- *
++- *    Checks to see if a given authentication type has been
++- *    disabled via the tools configuration.
++- *
++- * Return value:
++- *    TRUE if enabled, FALSE otherwise.
++- *
++- * Side effects:
++- *    None
++- *
++- *-----------------------------------------------------------------------------
++- */
++-
++-static Bool
++-VixToolsCheckIfAuthenticationTypeEnabled(GKeyFile *confDictRef,     // IN
++-                                         const char *typeName)      // IN
++-{
++-   char authnDisabledName[64]; // Authentication.<AuthenticationType>.disabled
++-   gboolean disabled;
++-
++-   Str_Snprintf(authnDisabledName, sizeof(authnDisabledName),
++-                VIX_TOOLS_CONFIG_API_AUTHENTICATION ".%s.disabled",
++-                typeName);
++-
++-   ASSERT(confDictRef != NULL);
++-
++-   /*
++-    * XXX Skip doing the strcmp() to verify the auth type since we only
++-    * have the one typeName (VIX_TOOLS_CONFIG_AUTHTYPE_AGENTS), and default
++-    * it to VIX_TOOLS_CONFIG_INFRA_AGENT_DISABLED_DEFAULT.
++-    */
++-   disabled = VMTools_ConfigGetBoolean(confDictRef,
++-                                       VIX_TOOLS_CONFIG_API_GROUPNAME,
++-                                       authnDisabledName,
++-                                       VIX_TOOLS_CONFIG_INFRA_AGENT_DISABLED_DEFAULT);
++-
++-   return !disabled;
++-}
++-
++-
++ /*
++  *-----------------------------------------------------------------------------
++  *
++--
++2.40.0
+diff --git a/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.3.5.bb b/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.3.5.bb
+index 4670a85a6..c80827a99 100644
+--- a/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.3.5.bb
++++ b/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.3.5.bb
+@@ -45,6 +45,7 @@ SRC_URI = "git://github.com/vmware/open-vm-tools.git;protocol=https;branch=maste
+            file://0002-hgfsServerLinux-Consider-64bit-time_t-possibility.patch;patchdir=.. \
+            file://0001-open-vm-tools-Correct-include-path-for-poll.h.patch;patchdir=.. \
+            file://0001-Properly-check-authorization-on-incoming-guestOps-re.patch;patchdir=.. \
++           file://CVE-2023-20867.patch;patchdir=.. \
+            "
  
--require  meta-multimedia-image.bb
-+require  meta-multimedia-image-all.bb
- 
- IMAGE_INSTALL += " \
-         kernel-modules \
-diff --git a/meta-networking/recipes-core/images/meta-networking-image.bb b/meta-networking/recipes-core/images/meta-networking-image-all.bb
-similarity index 100%
-rename from meta-networking/recipes-core/images/meta-networking-image.bb
-rename to meta-networking/recipes-core/images/meta-networking-image-all.bb
-diff --git a/meta-oe/recipes-core/images/meta-oe-image.bb b/meta-oe/recipes-core/images/meta-oe-image-all.bb
-similarity index 100%
-rename from meta-oe/recipes-core/images/meta-oe-image.bb
-rename to meta-oe/recipes-core/images/meta-oe-image-all.bb
-diff --git a/meta-perl/recipes-core/images/meta-perl-image.bb b/meta-perl/recipes-core/images/meta-perl-image-all.bb
-similarity index 100%
-rename from meta-perl/recipes-core/images/meta-perl-image.bb
-rename to meta-perl/recipes-core/images/meta-perl-image-all.bb
-diff --git a/meta-python/recipes-core/images/meta-python-image.bb b/meta-python/recipes-core/images/meta-python-image-all.bb
-similarity index 100%
-rename from meta-python/recipes-core/images/meta-python-image.bb
-rename to meta-python/recipes-core/images/meta-python-image-all.bb
-diff --git a/meta-webserver/recipes-core/images/meta-webserver-image.bb b/meta-webserver/recipes-core/images/meta-webserver-image-all.bb
-similarity index 100%
-rename from meta-webserver/recipes-core/images/meta-webserver-image.bb
-rename to meta-webserver/recipes-core/images/meta-webserver-image-all.bb
+ UPSTREAM_CHECK_GITTAGREGEX = "stable-(?P<pver>\d+(\.\d+)+)"
 -- 
-2.42.0
+2.40.0
 
 
