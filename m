@@ -1,774 +1,103 @@
-Return-Path: <narpat.mali@windriver.com>
+Return-Path: <cvubrugier@fastmail.fm>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A742E81E00
-	for <webhook@archiver.kernel.org>; Fri,  6 Oct 2023 14:14:30 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.13749.1696601665099664954
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AD731E81E19
+	for <webhook@archiver.kernel.org>; Fri,  6 Oct 2023 15:58:02 +0000 (UTC)
+Received: from out1-smtp.messagingengine.com (out1-smtp.messagingengine.com [66.111.4.25])
+ by mx.groups.io with SMTP id smtpd.web10.16682.1696607880872253795
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 06 Oct 2023 07:14:25 -0700
+ Fri, 06 Oct 2023 08:58:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=fiF+tdsH;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=8643e9eac7=narpat.mali@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 3967kHHu004438;
-	Fri, 6 Oct 2023 07:14:21 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=PuD8K
-	MmMIGTH6I3YmFKXwadWG4LHzH0fJc7PDRs85X4=; b=fiF+tdsHTx/gbnY2COSAs
-	k7QRKMe6EbflRxoxOWGgSOZLsjaxcQ/iy3mNHpDIxoU4yIYoSoNqwrezggpMdDZh
-	VrzHFUqEXEJrALu9ElQe5jKH1ntbeyfpuheSLgqs5aurG0uBKKaHre+bnR1V12Bw
-	JeffwTWXaOeKm2LCyV/fW2y6UzIjnQOCG07O2H1tS02z4LxcLRlClAUDiAP3KA4G
-	5/+OOSsPb0oKMKSvebbdOGTsof2IHKtnNBhnxTC6p0FB0qzdNd43sDurOLWGnjE7
-	Vq6vQVMwyi4lV5XwCvMC/kcW6I/QEICAqcukqBhitnCHd2ILBP4d1GHoyZEBAKLF
-	Q==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3thu0s18y8-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
-	Fri, 06 Oct 2023 07:14:20 -0700 (PDT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.32; Fri, 6 Oct 2023 07:14:17 -0700
-From: nmali <narpat.mali@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <akuster808@gmail.com>
-Subject: [meta-python][kirkstone][PATCH 1/1] python3-gevent: fix CVE-2023-41419
-Date: Fri, 6 Oct 2023 14:13:49 +0000
-Message-ID: <20231006141349.887405-1-narpat.mali@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@fastmail.fm header.s=fm2 header.b=UnmuLtB2;
+ dkim=pass header.i=@messagingengine.com header.s=fm2 header.b=CT8oHAVj;
+ spf=pass (domain: fastmail.fm, ip: 66.111.4.25, mailfrom: cvubrugier@fastmail.fm)
+Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
+	by mailout.nyi.internal (Postfix) with ESMTP id 2BEEF5C0247;
+	Fri,  6 Oct 2023 11:58:00 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+  by compute6.internal (MEProxy); Fri, 06 Oct 2023 11:58:00 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fastmail.fm; h=
+	cc:cc:content-transfer-encoding:content-type:date:date:from:from
+	:in-reply-to:message-id:mime-version:reply-to:sender:subject
+	:subject:to:to; s=fm2; t=1696607880; x=1696694280; bh=hAYlTPE44e
+	rY/ood1xcpGjkGhyufonqsb7RSzodg/jk=; b=UnmuLtB2o/Xby6YRjcBWNpqt77
+	w2VEiN27gAHus74g7DfnE2sW7AURaisBbv7E9uPb2VLQteKYAuFqL1EaR38OLlUe
+	k3xtIirx0zHOZ7Fz/vWrXM2bSZywcUmVa6b7ta54djP5eJPdWvgYh6y7FSnMkJOV
+	50BXRhGUgDx8UV+gbh+eS5Gws3o+1OUt1jR4xgxMWU5mdbybgvlRGibXju3Q2ILI
+	HD0xKb+f2b0sw2zhhgxGvA0kXGrbipF7APpWuI1ndI8ma6/tmRUbnxb65eIC85Ae
+	D2yBNdAGuHilPfgxkeQ1GFBXwV6XfofN1lePC5lEnLn7RNbHdiBhbPMB6MLg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:date:date:feedback-id:feedback-id:from:from
+	:in-reply-to:message-id:mime-version:reply-to:sender:subject
+	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+	:x-sasl-enc; s=fm2; t=1696607880; x=1696694280; bh=hAYlTPE44erY/
+	ood1xcpGjkGhyufonqsb7RSzodg/jk=; b=CT8oHAVjtSAd5fXBLZrozISpiROtg
+	d0Oz8cvS4tzT3+/gRccj9BHNrYLr/MJ2OrDRBFsQh9G7HvFsi2jmC8H1Mei3Er11
+	b/WewS9I7uOILU45y552lRTapM4SF6AEU9LO0HlvsnARckU8un5xs0/L69+OqjsU
+	n2PZEU2toXo5dvwOrQIem9ydqab3yQEGXJwPpQFpNCAYJPdjY4K7CCLr8JveRxLD
+	iq6vgEd+r00JDmuMaapeSuBXmkdjOUVEpSwBYi1sVWMEBOIuzPPjnJx4F/1/hpr2
+	AxVmr0OWKLOlOQINuOwpugoUbBrw2bQPjCaoAV5leHfGygVFmC1qkStvQ==
+X-ME-Sender: <xms:hy4gZTfCiaYHVRy9tnWWpXD0gfVZfSbquixdqxpMXrouNMdlTT8Fcw>
+    <xme:hy4gZZM3z7G8NRHw8fsWWOZuwn2nAMTbobrL8GXICRPv6D4gem5HNCohBXwpU0DQM
+    aqTRgtEuJH8ubMUrw>
+X-ME-Received: <xmr:hy4gZcgTDY6nd_Ex2un2KZvXWuTNWyF8BT7TqKn3cIYx_ByR-CUte9uUpnGu4Ewnm0UpQwXE1b_SXRlkXCnpASYkFxaX8imWscBk>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrgeeigdelfecutefuodetggdotefrodftvf
+    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+    uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
+    fjughrpefhvfevufffkffoggfgsedtkeertdertddtnecuhfhrohhmpegtvhhusghruhhg
+    ihgvrhesfhgrshhtmhgrihhlrdhfmhenucggtffrrghtthgvrhhnpeeiueeltdekgeekvd
+    evleegfeehhfffieevieelvdejudfgiedvteejffeltdelheenucffohhmrghinhepghhi
+    thhhuhgsrdgtohhmnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilh
+    hfrhhomheptghvuhgsrhhughhivghrsehfrghsthhmrghilhdrfhhm
+X-ME-Proxy: <xmx:hy4gZU-Imiyuzxy-Mjy_R__lawOpQEyb_vwOO5_j1U0Jy-oy8fQ7dQ>
+    <xmx:hy4gZfvHWjsxLc68yDhnoCcDyqUxOIPhLem-3NZE1xYWSnBnygNb6Q>
+    <xmx:hy4gZTFEnVtYR4pLcUs68NKs7nKj8RC5P7Iw7omdKgIuvc0cdI-BCA>
+    <xmx:iC4gZd3hLavdYGzQkhgG81QHQRWYh4uDUNnKBbCUL1K0l_A8h4ubqQ>
+Feedback-ID: i09e840f8:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
+ 6 Oct 2023 11:57:59 -0400 (EDT)
+From: cvubrugier@fastmail.fm
+To: openembedded-devel@lists.openembedded.org
+Cc: Christophe Vu-Brugier <christophe.vu-brugier@seagate.com>
+Subject: [PATCH 1/2] libnvme: upgrade 1.5 -> 1.6
+Date: Fri,  6 Oct 2023 17:57:43 +0200
+Message-Id: <20231006155744.36093-1-cvubrugier@fastmail.fm>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-GUID: LIstDRyRox4RdTajwAcHgNNJ7SS_i_D1
-X-Proofpoint-ORIG-GUID: LIstDRyRox4RdTajwAcHgNNJ7SS_i_D1
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.267,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-10-06_12,2023-10-06_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 lowpriorityscore=0
- phishscore=0 suspectscore=0 bulkscore=0 adultscore=0 malwarescore=0
- mlxlogscore=999 impostorscore=0 clxscore=1015 spamscore=0
- priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2309180000 definitions=main-2310060104
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 06 Oct 2023 14:14:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105369
+ <openembedded-devel@lists.openembedded.org>; Fri, 06 Oct 2023 15:58:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105370
 
-From: Narpat Mali <narpat.mali@windriver.com>
+From: Christophe Vu-Brugier <christophe.vu-brugier@seagate.com>
 
-An issue in Gevent Gevent before version 23.9.1 allows a remote attacker
-to escalate privileges via a crafted script to the WSGIServer component.
-
-References:
-https://nvd.nist.gov/vuln/detail/CVE-2023-41419
-https://github.com/advisories/GHSA-x7m3-jprg-wc5g
-
-Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
+Signed-off-by: Christophe Vu-Brugier <christophe.vu-brugier@seagate.com>
 ---
- .../python3-gevent/CVE-2023-41419.patch       | 673 ++++++++++++++++++
- .../python/python3-gevent_21.12.0.bb          |   2 +
- 2 files changed, 675 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-gevent/CVE-2023-41419.patch
+ .../recipes-support/libnvme/{libnvme_1.5.bb => libnvme_1.6.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/libnvme/{libnvme_1.5.bb => libnvme_1.6.bb} (94%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-gevent/CVE-2023-41419.patch b/meta-python/recipes-devtools/python/python3-gevent/CVE-2023-41419.patch
-new file mode 100644
-index 0000000000..c92ba876a8
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-gevent/CVE-2023-41419.patch
-@@ -0,0 +1,673 @@
-+From f80ee15e27b67b6fdd101d5f91cf584d19b2b26e Mon Sep 17 00:00:00 2001
-+From: Jason Madden <jamadden@gmail.com>
-+Date: Fri, 6 Oct 2023 12:41:59 +0000
-+Subject: [PATCH] gevent.pywsgi: Much improved handling of chunk trailers.
-+ Validation is much stricter to the specification.
-+
-+Fixes #1989
-+
-+CVE: CVE-2023-41419
-+
-+Upstream-Status: Backport [https://github.com/gevent/gevent/commit/2f53c851eaf926767fbac62385615efd4886221c]
-+
-+Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
-+---
-+ docs/changes/1989.bugfix         |  26 ++++
-+ src/gevent/pywsgi.py             | 229 ++++++++++++++++++++++++-------
-+ src/gevent/subprocess.py         |   7 +-
-+ src/gevent/testing/testcase.py   |   2 +-
-+ src/gevent/tests/test__pywsgi.py | 193 ++++++++++++++++++++++++--
-+ 5 files changed, 390 insertions(+), 67 deletions(-)
-+ create mode 100644 docs/changes/1989.bugfix
-+
-+diff --git a/docs/changes/1989.bugfix b/docs/changes/1989.bugfix
-+new file mode 100644
-+index 0000000..7ce4a93
-+--- /dev/null
-++++ b/docs/changes/1989.bugfix
-+@@ -0,0 +1,26 @@
-++Make ``gevent.pywsgi`` comply more closely with the HTTP specification
-++for chunked transfer encoding. In particular, we are much stricter
-++about trailers, and trailers that are invalid (too long or featuring
-++disallowed characters) forcibly close the connection to the client
-++*after* the results have been sent.
-++
-++Trailers otherwise continue to be ignored and are not available to the
-++WSGI application.
-++
-++Previously, carefully crafted invalid trailers in chunked requests on
-++keep-alive connections might appear as two requests to
-++``gevent.pywsgi``. Because this was handled exactly as a normal
-++keep-alive connection with two requests, the WSGI application should
-++handle it normally. However, if you were counting on some upstream
-++server to filter incoming requests based on paths or header fields,
-++and the upstream server simply passed trailers through without
-++validating them, then this embedded second request would bypass those
-++checks. (If the upstream server validated that the trailers meet the
-++HTTP specification, this could not occur, because characters that are
-++required in an HTTP request, like a space, are not allowed in
-++trailers.) CVE-2023-41419 was reserved for this.
-++
-++Our thanks to the original reporters, Keran Mu
-++(mkr22@mails.tsinghua.edu.cn) and Jianjun Chen
-++(jianjun@tsinghua.edu.cn), from Tsinghua University and Zhongguancun
-++Laboratory.
-+diff --git a/src/gevent/pywsgi.py b/src/gevent/pywsgi.py
-+index 0ebe095..078398a 100644
-+--- a/src/gevent/pywsgi.py
-++++ b/src/gevent/pywsgi.py
-+@@ -1,13 +1,28 @@
-+ # Copyright (c) 2005-2009, eventlet contributors
-+ # Copyright (c) 2009-2018, gevent contributors
-+ """
-+-A pure-Python, gevent-friendly WSGI server.
-++A pure-Python, gevent-friendly WSGI server implementing HTTP/1.1.
-+
-+ The server is provided in :class:`WSGIServer`, but most of the actual
-+ WSGI work is handled by :class:`WSGIHandler` --- a new instance is
-+ created for each request. The server can be customized to use
-+ different subclasses of :class:`WSGIHandler`.
-+
-++.. important::
-++   This server is intended primarily for development and testing, and
-++   secondarily for other "safe" scenarios where it will not be exposed to
-++   potentially malicious input. The code has not been security audited,
-++   and is not intended for direct exposure to the public Internet. For production
-++   usage on the Internet, either choose a production-strength server such as
-++   gunicorn, or put a reverse proxy between gevent and the Internet.
-++.. versionchanged:: NEXT
-++   Complies more closely with the HTTP specification for chunked transfer encoding.
-++   In particular, we are much stricter about trailers, and trailers that
-++   are invalid (too long or featuring disallowed characters) forcibly close
-++   the connection to the client *after* the results have been sent.
-++   Trailers otherwise continue to be ignored and are not available to the
-++   WSGI application.
-++
-+ """
-+ from __future__ import absolute_import
-+
-+@@ -22,10 +37,7 @@ import time
-+ import traceback
-+ from datetime import datetime
-+
-+-try:
-+-    from urllib import unquote
-+-except ImportError:
-+-    from urllib.parse import unquote # python 2 pylint:disable=import-error,no-name-in-module
-++from urllib.parse import unquote
-+
-+ from gevent import socket
-+ import gevent
-+@@ -53,29 +65,52 @@ __all__ = [
-+
-+ MAX_REQUEST_LINE = 8192
-+ # Weekday and month names for HTTP date/time formatting; always English!
-+-_WEEKDAYNAME = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-+-_MONTHNAME = [None,  # Dummy so we can use 1-based month numbers
-++_WEEKDAYNAME = ("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
-++_MONTHNAME = (None,  # Dummy so we can use 1-based month numbers
-+               "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-+-              "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-++              "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
-+
-+ # The contents of the "HEX" grammar rule for HTTP, upper and lowercase A-F plus digits,
-+ # in byte form for comparing to the network.
-+ _HEX = string.hexdigits.encode('ascii')
-+
-++# The characters allowed in "token" rules.
-++
-++# token          = 1*tchar
-++# tchar          = "!" / "#" / "$" / "%" / "&" / "'" / "*"
-++#                / "+" / "-" / "." / "^" / "_" / "`" / "|" / "~"
-++#                / DIGIT / ALPHA
-++#                ; any VCHAR, except delimiters
-++# ALPHA          =  %x41-5A / %x61-7A   ; A-Z / a-z
-++_ALLOWED_TOKEN_CHARS = frozenset(
-++    # Remember we have to be careful because bytestrings
-++    # inexplicably iterate as integers, which are not equal to bytes.
-++
-++    # explicit chars then DIGIT
-++    (c.encode('ascii') for c in "!#$%&'*+-.^_`|~0123456789")
-++    # Then we add ALPHA
-++) | {c.encode('ascii') for c in string.ascii_letters}
-++assert b'A' in _ALLOWED_TOKEN_CHARS
-++
-++
-+ # Errors
-+ _ERRORS = {}
-+ _INTERNAL_ERROR_STATUS = '500 Internal Server Error'
-+ _INTERNAL_ERROR_BODY = b'Internal Server Error'
-+-_INTERNAL_ERROR_HEADERS = [('Content-Type', 'text/plain'),
-+-                           ('Connection', 'close'),
-+-                           ('Content-Length', str(len(_INTERNAL_ERROR_BODY)))]
-++_INTERNAL_ERROR_HEADERS = (
-++    ('Content-Type', 'text/plain'),
-++    ('Connection', 'close'),
-++    ('Content-Length', str(len(_INTERNAL_ERROR_BODY)))
-++)
-+ _ERRORS[500] = (_INTERNAL_ERROR_STATUS, _INTERNAL_ERROR_HEADERS, _INTERNAL_ERROR_BODY)
-+
-+ _BAD_REQUEST_STATUS = '400 Bad Request'
-+ _BAD_REQUEST_BODY = ''
-+-_BAD_REQUEST_HEADERS = [('Content-Type', 'text/plain'),
-+-                        ('Connection', 'close'),
-+-                        ('Content-Length', str(len(_BAD_REQUEST_BODY)))]
-++_BAD_REQUEST_HEADERS = (
-++    ('Content-Type', 'text/plain'),
-++    ('Connection', 'close'),
-++    ('Content-Length', str(len(_BAD_REQUEST_BODY)))
-++)
-+ _ERRORS[400] = (_BAD_REQUEST_STATUS, _BAD_REQUEST_HEADERS, _BAD_REQUEST_BODY)
-+
-+ _REQUEST_TOO_LONG_RESPONSE = b"HTTP/1.1 414 Request URI Too Long\r\nConnection: close\r\nContent-length: 0\r\n\r\n"
-+@@ -204,23 +239,32 @@ class Input(object):
-+         # Read and return the next integer chunk length. If no
-+         # chunk length can be read, raises _InvalidClientInput.
-+
-+-        # Here's the production for a chunk:
-+-        # (http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html)
-+-        #   chunk          = chunk-size [ chunk-extension ] CRLF
-+-        #                    chunk-data CRLF
-+-        #   chunk-size     = 1*HEX
-+-        #   chunk-extension= *( ";" chunk-ext-name [ "=" chunk-ext-val ] )
-+-        #   chunk-ext-name = token
-+-        #   chunk-ext-val  = token | quoted-string
-+-
-+-        # To cope with malicious or broken clients that fail to send valid
-+-        # chunk lines, the strategy is to read character by character until we either reach
-+-        # a ; or newline. If at any time we read a non-HEX digit, we bail. If we hit a
-+-        # ;, indicating an chunk-extension, we'll read up to the next
-+-        # MAX_REQUEST_LINE characters
-+-        # looking for the CRLF, and if we don't find it, we bail. If we read more than 16 hex characters,
-+-        # (the number needed to represent a 64-bit chunk size), we bail (this protects us from
-+-        # a client that sends an infinite stream of `F`, for example).
-++        # Here's the production for a chunk (actually the whole body):
-++        # (https://www.rfc-editor.org/rfc/rfc7230#section-4.1)
-++
-++        # chunked-body   = *chunk
-++        #                  last-chunk
-++        #                  trailer-part
-++        #                  CRLF
-++        #
-++        # chunk          = chunk-size [ chunk-ext ] CRLF
-++        #                  chunk-data CRLF
-++        # chunk-size     = 1*HEXDIG
-++        # last-chunk     = 1*("0") [ chunk-ext ] CRLF
-++        # trailer-part   = *( header-field CRLF )
-++        # chunk-data     = 1*OCTET ; a sequence of chunk-size octets
-++
-++        # To cope with malicious or broken clients that fail to send
-++        # valid chunk lines, the strategy is to read character by
-++        # character until we either reach a ; or newline. If at any
-++        # time we read a non-HEX digit, we bail. If we hit a ;,
-++        # indicating an chunk-extension, we'll read up to the next
-++        # MAX_REQUEST_LINE characters ("A server ought to limit the
-++        # total length of chunk extensions received") looking for the
-++        # CRLF, and if we don't find it, we bail. If we read more than
-++        # 16 hex characters, (the number needed to represent a 64-bit
-++        # chunk size), we bail (this protects us from a client that
-++        # sends an infinite stream of `F`, for example).
-+
-+         buf = BytesIO()
-+         while 1:
-+@@ -228,16 +272,20 @@ class Input(object):
-+             if not char:
-+                 self._chunked_input_error = True
-+                 raise _InvalidClientInput("EOF before chunk end reached")
-+-            if char == b'\r':
-+-                break
-+-            if char == b';':
-++
-++            if char in (
-++                b'\r', # Beginning EOL
-++                b';', # Beginning extension
-++            ):
-+                 break
-+
-+-            if char not in _HEX:
-++            if char not in _HEX: # Invalid data.
-+                 self._chunked_input_error = True
-+                 raise _InvalidClientInput("Non-hex data", char)
-++
-+             buf.write(char)
-+-            if buf.tell() > 16:
-++
-++            if buf.tell() > 16: # Too many hex bytes
-+                 self._chunked_input_error = True
-+                 raise _InvalidClientInput("Chunk-size too large.")
-+
-+@@ -257,11 +305,72 @@ class Input(object):
-+         if char == b'\r':
-+             # We either got here from the main loop or from the
-+             # end of an extension
-++            self.__read_chunk_size_crlf(rfile, newline_only=True)
-++            result = int(buf.getvalue(), 16)
-++            if result == 0:
-++                # The only time a chunk size of zero is allowed is the final
-++                # chunk. It is either followed by another \r\n, or some trailers
-++                # which are then followed by \r\n.
-++                while self.__read_chunk_trailer(rfile):
-++                    pass
-++            return result
-++
-++    # Trailers have the following production (they are a header-field followed by CRLF)
-++    # See above for the definition of "token".
-++    #
-++    # header-field   = field-name ":" OWS field-value OWS
-++    # field-name     = token
-++    # field-value    = *( field-content / obs-fold )
-++    # field-content  = field-vchar [ 1*( SP / HTAB ) field-vchar ]
-++    # field-vchar    = VCHAR / obs-text
-++    # obs-fold       = CRLF 1*( SP / HTAB )
-++    #                ; obsolete line folding
-++    #                ; see Section 3.2.4
-++
-++
-++    def __read_chunk_trailer(self, rfile, ):
-++        # With rfile positioned just after a \r\n, read a trailer line.
-++        # Return a true value if a non-empty trailer was read, and
-++        # return false if an empty trailer was read (meaning the trailers are
-++        # done).
-++        # If a single line exceeds the MAX_REQUEST_LINE, raise an exception.
-++        # If the field-name portion contains invalid characters, raise an exception.
-++
-++        i = 0
-++        empty = True
-++        seen_field_name = False
-++        while i < MAX_REQUEST_LINE:
-++            char = rfile.read(1)
-++            if char == b'\r':
-++                # Either read the next \n or raise an error.
-++                self.__read_chunk_size_crlf(rfile, newline_only=True)
-++                break
-++            # Not a \r, so we are NOT an empty chunk.
-++            empty = False
-++            if char == b':' and i > 0:
-++                # We're ending the field-name part; stop validating characters.
-++                # Unless : was the first character...
-++                seen_field_name = True
-++            if not seen_field_name and char not in _ALLOWED_TOKEN_CHARS:
-++                raise _InvalidClientInput('Invalid token character: %r' % (char,))
-++            i += 1
-++        else:
-++            # We read too much
-++            self._chunked_input_error = True
-++            raise _InvalidClientInput("Too large chunk trailer")
-++        return not empty
-++
-++    def __read_chunk_size_crlf(self, rfile, newline_only=False):
-++        # Also for safety, correctly verify that we get \r\n when expected.
-++        if not newline_only:
-+             char = rfile.read(1)
-+-            if char != b'\n':
-++            if char != b'\r':
-+                 self._chunked_input_error = True
-+-                raise _InvalidClientInput("Line didn't end in CRLF")
-+-            return int(buf.getvalue(), 16)
-++                raise _InvalidClientInput("Line didn't end in CRLF: %r" % (char,))
-++        char = rfile.read(1)
-++        if char != b'\n':
-++            self._chunked_input_error = True
-++            raise _InvalidClientInput("Line didn't end in LF: %r" % (char,))
-+
-+     def _chunked_read(self, length=None, use_readline=False):
-+         # pylint:disable=too-many-branches
-+@@ -294,7 +403,7 @@ class Input(object):
-+
-+                 self.position += datalen
-+                 if self.chunk_length == self.position:
-+-                    rfile.readline()
-++                    self.__read_chunk_size_crlf(rfile)
-+
-+                 if length is not None:
-+                     length -= datalen
-+@@ -307,9 +416,9 @@ class Input(object):
-+                 # determine the next size to read
-+                 self.chunk_length = self.__read_chunk_length(rfile)
-+                 self.position = 0
-+-                if self.chunk_length == 0:
-+-                    # Last chunk. Terminates with a CRLF.
-+-                    rfile.readline()
-++                # If chunk_length was 0, we already read any trailers and
-++                # validated that we have ended with \r\n\r\n.
-++
-+         return b''.join(response)
-+
-+     def read(self, length=None):
-+@@ -532,7 +641,8 @@ class WSGIHandler(object):
-+         elif len(words) == 2:
-+             self.command, self.path = words
-+             if self.command != "GET":
-+-                raise _InvalidClientRequest('Expected GET method: %r' % (raw_requestline,))
-++                raise _InvalidClientRequest('Expected GET method; Got command=%r; path=%r; raw=%r' % (
-++                    self.command, self.path, raw_requestline,))
-+             self.request_version = "HTTP/0.9"
-+             # QQQ I'm pretty sure we can drop support for HTTP/0.9
-+         else:
-+@@ -1000,14 +1110,28 @@ class WSGIHandler(object):
-+             finally:
-+                 try:
-+                     self.wsgi_input._discard()
-+-                except (socket.error, IOError):
-+-                    # Don't let exceptions during discarding
-++                except _InvalidClientInput:
-++                    # This one is deliberately raised to the outer
-++                    # scope, because, with the incoming stream in some bad state,
-++                    # we can't be sure we can synchronize and properly parse the next
-++                    # request.
-++                    raise
-++                except socket.error
-++                    # Don't let socket exceptions during discarding
-+                     # input override any exception that may have been
-+                     # raised by the application, such as our own _InvalidClientInput.
-+                     # In the general case, these aren't even worth logging (see the comment
-+                     # just below)
-+                     pass
-+-        except _InvalidClientInput:
-++        except _InvalidClientInput as ex:
-++            # DO log this one because:
-++            # - Some of the data may have been read and acted on by the
-++            #   application;
-++            # - The response may or may not have been sent;
-++            # - It's likely that the client is bad, or malicious, and
-++            #   users might wish to take steps to block the client.
-++            self._handle_client_error(ex)
-++            self.close_connection = True
-+             self._send_error_response_if_possible(400)
-+         except socket.error as ex:
-+             if ex.args[0] in self.ignored_socket_errors:
-+@@ -1054,17 +1178,22 @@ class WSGIHandler(object):
-+     def _handle_client_error(self, ex):
-+         # Called for invalid client input
-+         # Returns the appropriate error response.
-+-        if not isinstance(ex, ValueError):
-++        if not isinstance(ex, (ValueError, _InvalidClientInput)):
-+             # XXX: Why not self._log_error to send it through the loop's
-+             # handle_error method?
-++            # _InvalidClientRequest is a ValueError; _InvalidClientInput is an IOError.
-+             traceback.print_exc()
-+         if isinstance(ex, _InvalidClientRequest):
-+             # No formatting needed, that's already been handled. In fact, because the
-+             # formatted message contains user input, it might have a % in it, and attempting
-+             # to format that with no arguments would be an error.
-+-            self.log_error(ex.formatted_message)
-++            # However, the error messages do not include the requesting IP
-++            # necessarily, so we do add that.
-++            self.log_error('(from %s) %s', self.client_address, ex.formatted_message)
-+         else:
-+-            self.log_error('Invalid request: %s', str(ex) or ex.__class__.__name__)
-++            self.log_error('Invalid request (from %s): %s',
-++                           self.client_address,
-++                           str(ex) or ex.__class__.__name__)
-+         return ('400', _BAD_REQUEST_RESPONSE)
-+
-+     def _headers(self):
-+diff --git a/src/gevent/subprocess.py b/src/gevent/subprocess.py
-+index 38c9bd3..8a8ccad 100644
-+--- a/src/gevent/subprocess.py
-++++ b/src/gevent/subprocess.py
-+@@ -352,10 +352,11 @@ def check_output(*popenargs, **kwargs):
-+
-+     To capture standard error in the result, use ``stderr=STDOUT``::
-+
-+-        >>> print(check_output(["/bin/sh", "-c",
-++        >>> output = check_output(["/bin/sh", "-c",
-+         ...               "ls -l non_existent_file ; exit 0"],
-+-        ...              stderr=STDOUT).decode('ascii').strip())
-+-        ls: non_existent_file: No such file or directory
-++        ...              stderr=STDOUT).decode('ascii').strip()
-++        >>> print(output.rsplit(':', 1)[1].strip())
-++        No such file or directory
-+
-+     There is an additional optional argument, "input", allowing you to
-+     pass a string to the subprocess's stdin.  If you use this argument
-+diff --git a/src/gevent/testing/testcase.py b/src/gevent/testing/testcase.py
-+index cd5db80..aa86dcf 100644
-+--- a/src/gevent/testing/testcase.py
-++++ b/src/gevent/testing/testcase.py
-+@@ -225,7 +225,7 @@ class TestCaseMetaClass(type):
-+                 classDict.pop(key)
-+                 # XXX: When did we stop doing this?
-+                 #value = wrap_switch_count_check(value)
-+-                value = _wrap_timeout(timeout, value)
-++                #value = _wrap_timeout(timeout, value)
-+                 error_fatal = getattr(value, 'error_fatal', error_fatal)
-+                 if error_fatal:
-+                     value = errorhandler.wrap_error_fatal(value)
-+diff --git a/src/gevent/tests/test__pywsgi.py b/src/gevent/tests/test__pywsgi.py
-+index d2125a8..d46030b 100644
-+--- a/src/gevent/tests/test__pywsgi.py
-++++ b/src/gevent/tests/test__pywsgi.py
-+@@ -25,21 +25,11 @@ from gevent import monkey
-+ monkey.patch_all()
-+
-+ from contextlib import contextmanager
-+-try:
-+-    from urllib.parse import parse_qs
-+-except ImportError:
-+-    # Python 2
-+-    from urlparse import parse_qs
-++from urllib.parse import parse_qs
-+ import os
-+ import sys
-+-try:
-+-    # On Python 2, we want the C-optimized version if
-+-    # available; it has different corner-case behaviour than
-+-    # the Python implementation, and it used by socket.makefile
-+-    # by default.
-+-    from cStringIO import StringIO
-+-except ImportError:
-+-    from io import BytesIO as StringIO
-++from io import BytesIO as StringIO
-++
-+ import weakref
-+ import unittest
-+ from wsgiref.validate import validator
-+@@ -156,6 +146,10 @@ class Response(object):
-+     @classmethod
-+     def read(cls, fd, code=200, reason='default', version='1.1',
-+              body=None, chunks=None, content_length=None):
-++        """
-++        Read an HTTP response, optionally perform assertions,
-++        and return the Response object.
-++        """
-+         # pylint:disable=too-many-branches
-+         _status_line, headers = read_headers(fd)
-+         self = cls(_status_line, headers)
-+@@ -716,7 +710,14 @@ class TestNegativeReadline(TestCase):
-+
-+ class TestChunkedPost(TestCase):
-+
-++    calls = 0
-++
-++    def setUp(self):
-++        super().setUp()
-++        self.calls = 0
-++
-+     def application(self, env, start_response):
-++        self.calls += 1
-+         self.assertTrue(env.get('wsgi.input_terminated'))
-+         start_response('200 OK', [('Content-Type', 'text/plain')])
-+         if env['PATH_INFO'] == '/a':
-+@@ -730,6 +731,8 @@ class TestChunkedPost(TestCase):
-+         if env['PATH_INFO'] == '/c':
-+             return list(iter(lambda: env['wsgi.input'].read(1), b''))
-+
-++        return [b'We should not get here', env['PATH_INFO'].encode('ascii')]
-++
-+     def test_014_chunked_post(self):
-+         data = (b'POST /a HTTP/1.1\r\nHost: localhost\r\nConnection: close\r\n'
-+                 b'Transfer-Encoding: chunked\r\n\r\n'
-+@@ -797,6 +800,170 @@ class TestChunkedPost(TestCase):
-+             fd.write(data)
-+             read_http(fd, code=400)
-+
-++    def test_trailers_keepalive_ignored(self):
-++        # Trailers after a chunk are ignored.
-++        data = (
-++            b'POST /a HTTP/1.1\r\n'
-++            b'Host: localhost\r\n'
-++            b'Connection: keep-alive\r\n'
-++            b'Transfer-Encoding: chunked\r\n'
-++            b'\r\n'
-++            b'2\r\noh\r\n'
-++            b'4\r\n hai\r\n'
-++            b'0\r\n' # last-chunk
-++            # Normally the final CRLF would go here, but if you put in a
-++            # trailer, it doesn't.
-++            b'trailer1: value1\r\n'
-++            b'trailer2: value2\r\n'
-++            b'\r\n' # Really terminate the chunk.
-++            b'POST /a HTTP/1.1\r\n'
-++            b'Host: localhost\r\n'
-++            b'Connection: close\r\n'
-++            b'Transfer-Encoding: chunked\r\n'
-++            b'\r\n'
-++            b'2\r\noh\r\n'
-++            b'4\r\n bye\r\n'
-++            b'0\r\n' # last-chunk
-++        )
-++        with self.makefile() as fd:
-++            fd.write(data)
-++            read_http(fd, body='oh hai')
-++            read_http(fd, body='oh bye')
-++
-++        self.assertEqual(self.calls, 2)
-++
-++    def test_trailers_too_long(self):
-++        # Trailers after a chunk are ignored.
-++        data = (
-++            b'POST /a HTTP/1.1\r\n'
-++            b'Host: localhost\r\n'
-++            b'Connection: keep-alive\r\n'
-++            b'Transfer-Encoding: chunked\r\n'
-++            b'\r\n'
-++            b'2\r\noh\r\n'
-++            b'4\r\n hai\r\n'
-++            b'0\r\n' # last-chunk
-++            # Normally the final CRLF would go here, but if you put in a
-++            # trailer, it doesn't.
-++            b'trailer2: value2' # not lack of \r\n
-++        )
-++        data += b't' * pywsgi.MAX_REQUEST_LINE
-++        # No termination, because we detect the trailer as being too
-++        # long and abort the connection.
-++        with self.makefile() as fd:
-++            fd.write(data)
-++            read_http(fd, body='oh hai')
-++            with self.assertRaises(ConnectionClosed):
-++                read_http(fd, body='oh bye')
-++
-++    def test_trailers_request_smuggling_missing_last_chunk_keep_alive(self):
-++        # When something that looks like a request line comes in the trailer
-++        # as the first line, immediately after an invalid last chunk.
-++        # We detect this and abort the connection, because the
-++        # whitespace in the GET line isn't a legal part of a trailer.
-++        # If we didn't abort the connection, then, because we specified
-++        # keep-alive, the server would be hanging around waiting for more input.
-++        data = (
-++            b'POST /a HTTP/1.1\r\n'
-++            b'Host: localhost\r\n'
-++            b'Connection: keep-alive\r\n'
-++            b'Transfer-Encoding: chunked\r\n'
-++            b'\r\n'
-++            b'2\r\noh\r\n'
-++            b'4\r\n hai\r\n'
-++            b'0' # last-chunk, but missing the \r\n
-++            # Normally the final CRLF would go here, but if you put in a
-++            # trailer, it doesn't.
-++            # b'\r\n'
-++            b'GET /path2?a=:123 HTTP/1.1\r\n'
-++            b'Host: a.com\r\n'
-++            b'Connection: close\r\n'
-++            b'\r\n'
-++        )
-++        with self.makefile() as fd:
-++            fd.write(data)
-++            read_http(fd, body='oh hai')
-++            with self.assertRaises(ConnectionClosed):
-++                read_http(fd)
-++
-++        self.assertEqual(self.calls, 1)
-++
-++    def test_trailers_request_smuggling_missing_last_chunk_close(self):
-++        # Same as the above, except the trailers are actually valid
-++        # and since we ask to close the connection we don't get stuck
-++        # waiting for more input.
-++        data = (
-++            b'POST /a HTTP/1.1\r\n'
-++            b'Host: localhost\r\n'
-++            b'Connection: close\r\n'
-++            b'Transfer-Encoding: chunked\r\n'
-++            b'\r\n'
-++            b'2\r\noh\r\n'
-++            b'4\r\n hai\r\n'
-++            b'0\r\n' # last-chunk
-++            # Normally the final CRLF would go here, but if you put in a
-++            # trailer, it doesn't.
-++            # b'\r\n'
-++            b'GETpath2a:123 HTTP/1.1\r\n'
-++            b'Host: a.com\r\n'
-++            b'Connection: close\r\n'
-++            b'\r\n'
-++        )
-++        with self.makefile() as fd:
-++            fd.write(data)
-++            read_http(fd, body='oh hai')
-++            with self.assertRaises(ConnectionClosed):
-++                read_http(fd)
-++
-++    def test_trailers_request_smuggling_header_first(self):
-++        # When something that looks like a header comes in the first line.
-++        data = (
-++            b'POST /a HTTP/1.1\r\n'
-++            b'Host: localhost\r\n'
-++            b'Connection: keep-alive\r\n'
-++            b'Transfer-Encoding: chunked\r\n'
-++            b'\r\n'
-++            b'2\r\noh\r\n'
-++            b'4\r\n hai\r\n'
-++            b'0\r\n' # last-chunk, but only one CRLF
-++            b'Header: value\r\n'
-++            b'GET /path2?a=:123 HTTP/1.1\r\n'
-++            b'Host: a.com\r\n'
-++            b'Connection: close\r\n'
-++            b'\r\n'
-++        )
-++        with self.makefile() as fd:
-++            fd.write(data)
-++            read_http(fd, body='oh hai')
-++            with self.assertRaises(ConnectionClosed):
-++                read_http(fd, code=400)
-++
-++        self.assertEqual(self.calls, 1)
-++
-++    def test_trailers_request_smuggling_request_terminates_then_header(self):
-++        data = (
-++            b'POST /a HTTP/1.1\r\n'
-++            b'Host: localhost\r\n'
-++            b'Connection: keep-alive\r\n'
-++            b'Transfer-Encoding: chunked\r\n'
-++            b'\r\n'
-++            b'2\r\noh\r\n'
-++            b'4\r\n hai\r\n'
-++            b'0\r\n' # last-chunk
-++            b'\r\n'
-++            b'Header: value'
-++            b'GET /path2?a=:123 HTTP/1.1\r\n'
-++            b'Host: a.com\r\n'
-++            b'Connection: close\r\n'
-++            b'\r\n'
-++        )
-++        with self.makefile() as fd:
-++            fd.write(data)
-++            read_http(fd, body='oh hai')
-++            read_http(fd, code=400)
-++
-++        self.assertEqual(self.calls, 1)
-++
-+
-+ class TestUseWrite(TestCase):
-+
-+--
-+2.40.0
-diff --git a/meta-python/recipes-devtools/python/python3-gevent_21.12.0.bb b/meta-python/recipes-devtools/python/python3-gevent_21.12.0.bb
-index 9efeec4d9f..fd6b0f531a 100644
---- a/meta-python/recipes-devtools/python/python3-gevent_21.12.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-gevent_21.12.0.bb
-@@ -13,6 +13,8 @@ RDEPENDS:${PN} = "${PYTHON_PN}-greenlet \
+diff --git a/meta-oe/recipes-support/libnvme/libnvme_1.5.bb b/meta-oe/recipes-support/libnvme/libnvme_1.6.bb
+similarity index 94%
+rename from meta-oe/recipes-support/libnvme/libnvme_1.5.bb
+rename to meta-oe/recipes-support/libnvme/libnvme_1.6.bb
+index 4b6f1e30b..37e5d6301 100644
+--- a/meta-oe/recipes-support/libnvme/libnvme_1.5.bb
++++ b/meta-oe/recipes-support/libnvme/libnvme_1.6.bb
+@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c \
+                     file://ccan/licenses/CC0;md5=c17af43b05840255a6fedc5eda9d56cc \
+                     file://ccan/licenses/BSD-MIT;md5=838c366f69b72c5df05c96dff79b35f2"
+ DEPENDS = "json-c"
+-SRCREV = "4fea83db8328ea788ea8f1001e8ce1cb80ef5fae"
++SRCREV = "37a803cf77e224f66d86b1e1d9e74a15f55ea600"
  
- SRC_URI[sha256sum] = "f48b64578c367b91fa793bf8eaaaf4995cb93c8bc45860e473bf868070ad094e"
+ SRC_URI = "git://github.com/linux-nvme/libnvme;protocol=https;branch=master"
  
-+SRC_URI += "file://CVE-2023-41419.patch"
-+
- inherit pypi setuptools3
- 
- # Don't embed libraries, link to the system instead
 -- 
-2.40.0
+2.30.2
 
 
