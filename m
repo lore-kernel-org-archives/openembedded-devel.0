@@ -1,106 +1,110 @@
-Return-Path: <costamagna.gianfranco@gmail.com>
+Return-Path: <dzagorui@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E29FBE92FF6
-	for <webhook@archiver.kernel.org>; Fri,  6 Oct 2023 07:46:56 +0000 (UTC)
-Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com [209.85.208.49])
- by mx.groups.io with SMTP id smtpd.web10.7737.1696578411126874362
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 38C8CE92FFB
+	for <webhook@archiver.kernel.org>; Fri,  6 Oct 2023 10:05:38 +0000 (UTC)
+Received: from rcdn-iport-6.cisco.com (rcdn-iport-6.cisco.com [173.37.86.77])
+ by mx.groups.io with SMTP id smtpd.web10.9266.1696586737161020176
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 06 Oct 2023 00:46:51 -0700
+ Fri, 06 Oct 2023 03:05:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Oh6bE29L;
- spf=pass (domain: gmail.com, ip: 209.85.208.49, mailfrom: costamagna.gianfranco@gmail.com)
-Received: by mail-ed1-f49.google.com with SMTP id 4fb4d7f45d1cf-533d31a8523so3337817a12.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 06 Oct 2023 00:46:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1696578409; x=1697183209; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=XToGuJnRLgHCFHzt4ijMjI3Y9aSY7w+y77/SDiz1Bkw=;
-        b=Oh6bE29LUya1E3zvq6rGNOyFaJLT5ZilyGfSL6ypYcLF4pF/qUQMAeBzKgJcDa2cdG
-         tdq5WbJ4o3IYmWpQdygvijemQoSJvR8MQ3p0gpMvLabanH6XO9iVOWsvIGI5EyOm9Fzf
-         SyrH+EWg/dtu56XFioobetZMgbPaAiyN42kIHpW47S8rprks66mawGDgKKiYb/+nPtu4
-         0+rLl0sEXvfVotltou0pIV+nCbQp429Es0wjZ0+Ut4Ut5gYxbGeY0oCqOYxi399TpsPy
-         BQmFq9PGqofK0exgJY4+Kf3/uAC/Y4zl52lRSr4vF0hoahs5TPr0TsqpLrQn5lQyZ8YF
-         nOmw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1696578409; x=1697183209;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=XToGuJnRLgHCFHzt4ijMjI3Y9aSY7w+y77/SDiz1Bkw=;
-        b=pYvZkdzcIMUv8vo5uAnPoW3tRcfXzQYX4RrQB7gWfruwWUCQWyIEYCMXVZvuQJzCxE
-         tDLq/DaKagOFYztxhrJoRfzdhuKgzd4jP1l4jXlecgGcSBhodD3yjX/0+ztzjdsfpyBv
-         0NvB0Z3WKDpmIUNlvOEkjhUQKy9M+HN3SsZMO8uVaiEbC3kzQ4JzwPxdmYu5RqR3pTiM
-         mshupU/qQD5DhSlM8fqyMGX6UlAevpWGD5dHZJOwszHgXte0NeTjQ2jzomzYBHIGPTID
-         050SeiraAEApjXDX48rQQs3/ASr0XfpJFDosCQluAbQAansv02hKjgUxOINgWO1SnQA+
-         UP9A==
-X-Gm-Message-State: AOJu0YxydegxeuKxu8F13g5JxxU7VXhx9kZolWMBSvk6ECgLr72IT/OK
-	Ppz1Ws2l/hGAIYVnFk5h7DOiPKA/4cmL+A==
-X-Google-Smtp-Source: AGHT+IHOQZb/iFMToAVZVWYA6CqZ0G4ZdDRJQxmmGfEDn1QHWuQqcx9D64r2A4wzKoGsY8TYebMuag==
-X-Received: by 2002:a17:906:cc0d:b0:9a5:874a:9745 with SMTP id ml13-20020a170906cc0d00b009a5874a9745mr6535182ejb.26.1696578408789;
-        Fri, 06 Oct 2023 00:46:48 -0700 (PDT)
-Received: from Unimatrix08-Jammy.lan (mob-5-90-41-13.net.vodafone.it. [5.90.41.13])
-        by smtp.gmail.com with ESMTPSA id t24-20020a1709066bd800b0099ddc81903asm2450396ejs.221.2023.10.06.00.46.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 06 Oct 2023 00:46:48 -0700 (PDT)
-From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport header.b=f9CEnX9l;
+ spf=pass (domain: cisco.com, ip: 173.37.86.77, mailfrom: dzagorui@cisco.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=cisco.com; i=@cisco.com; l=913; q=dns/txt; s=iport;
+  t=1696586737; x=1697796337;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=36CPcJgf1T93uiiXuitzJkLK0k7SYsbLi10raYT3AGI=;
+  b=f9CEnX9lnYzBIk7d9zh1ZvVXLBqzMtIHCIL477GijgsuMNIGe+PiXZ0n
+   rqmbLurt2yWJ0Rn97yVd+U5zm4Hu7vI6XTvFDYgWwSOoA9/LNQw+Z/6qE
+   5kij9Gs8sDCYVFml+gVVBVhwE6MK0MZ7VcT0JLnokSi9mMfaQnTSOjRlq
+   Y=;
+X-CSE-ConnectionGUID: 3EslMw6PSB6I3ieOm5TgFQ==
+X-CSE-MsgGUID: fHK8EANPRn65v+sajqs5RQ==
+X-IPAS-Result: =?us-ascii?q?A0BMAQCK2x9lmJxdJa1agliDMVVASJQOoCGBJQNWDwEBA?=
+ =?us-ascii?q?Q0BATETBAEBjBYCJjQJDgECBAEBAQEDAgMBAQEBAQEBAgEBBQEBAQIBBwQUA?=
+ =?us-ascii?q?QEBAQEBAQEeGQUOECeFaA2HBQEYAYE6RIJ+AYJeA7I2giyBAYMkAYFRrjGBa?=
+ =?us-ascii?q?IFIjD+FUicbgUlEglGCLYJhAoEngQaFdgSDfoU7B4JWg1iKSXITR1oWGwMHA?=
+ =?us-ascii?q?1kqECsHBDIiBgkWLSUGUQQXFiQJExI+BIM4CoEDPw8OEYJDIgI9NhlLglsJF?=
+ =?us-ascii?q?UFNdhArBBQXgRRuHxUeNxESFw0DCHYdAhEjPAMFAwQ0ChUNCyEFFEMDRwZMC?=
+ =?us-ascii?q?wMCHAUDAwSBOAUPHgIQLikDAxlNAhAUAzsDAwYDCzEDMFdLDFkEbSgDCQMHB?=
+ =?us-ascii?q?UlAAwsYDUgRLDUUGwY/cwecLYJogQ4sIschhBaMAZUHGjOFV6QOLpgJixaYW?=
+ =?us-ascii?q?4QxAgQGBQIWgWM6gVszGggbFYMiCUkZD445g1+PeUQyAjkCBwsBAQMJiG6CW?=
+ =?us-ascii?q?wEB?=
+IronPort-Data: A9a23:2J3NZ6x+X+uaXLPCCTN6t+ctxirEfRIJ4+MujC+fZmUNrF6WrkUAx
+ mVKXmqEOf7ZMGD9KoslbIy38xgPsMSEm4NjHAQ5rlhgHilAwSbn6Xt1DatR0we6dJCroJdPt
+ p1GAjX4BJlpCCea/lH0auSJQUBUjcmgXqD7BPPPJhd/TAplTDZJoR94kobVuKYw6TSCK13L4
+ YiaT/H3Ygf/gGcsaj9MscpvlTs21BjMkGJA1rABTagjUG/2zxE9EJ8ZLKetGHr0KqE88jmSH
+ rurIBmRpws1zj91Yj+Xuu+Tnn4iHtY+CTOzZk9+AMBOtPTtShsaic7XPNJEAateZq7gc9pZk
+ L2hvrToIesl0zGldOk1C3Fl/y9C0aJuo5LcJV2g7/So5RPnKHrh5PAzME4YBNhNkgp3KTkmG
+ f0wMjsBaFWIgPi7he/9Qeh3jcNlJ87uVG8dkig/lneCUrB3GtaaHvuiCdxwhF/cguhCD//RY
+ NAEaBJkbQ/LZFtEPVJ/5JcWxb3y2CmjK2IEwL6TjaQXwDj+5SpJ6r6zbcSWYdWIXN4IpH/N8
+ woq+EygUk1Fa7Rz0wGt9WqhgOLKly73VI8eUbG16PNuqFmS3XAIThoOWF22pPO0hkKzV5RYM
+ UN8x8Y1hbI5+EruRd7nUljl5nWFpRUbHdFXFoXW9T1h1IKPzh2dI3dadgVrNv19tcIRQGEW2
+ XGwyoaB6SNUjJWZTneU97GxpDy0ODQIIWJqWcPiZVZVizUEiNxj5i8jXuqPA4bu0YKoQWCYL
+ ySi6Xlh1+9K3Kbnwo3ipQif6w9AsKQlWeLc2+k6dniu4gU8b4m/asn1r1Pa9v1Hao2eSzFtX
+ UToeeDAtIji7rnUxERhpdnh+pnyuZ5p1xWH0TZS82EJrWjFxpJaVdk4DMtCDEloKN0YXjTif
+ VXevwhcjLcKYir0MPQvPd7pVZxzpUQFKTgDfq6MBjapSsYpHDJrAAk1DaJt9zm3yRN1wf1X1
+ WmzKJn3VB729piLPBLvF7tCjtfHNwg1xHjYQtjg3g+73L+FDEN5up9bWGZimtsRtfveyC2Mq
+ o43H5LTl313DrakCgGJqtF7ELz/BSVhbXwAg5YJJrfrz8sPMDxJNsI9Npt6K9A/w/kLy7uQl
+ px/M2cBoGfCabT8AV3iQhhehHnHBP6TcVpT0fQQAGuV
+IronPort-HdrOrdr: A9a23:zMQne6xo3uOKt3LtF7T+KrPwOb1zdoMgy1knxilNoHtuA66lfq
+ +V8sjzuSWYtN9zYgBCpTn/Asi9qBrnnPYfi7X5Vo3MYOCJggeVxflZjbcLB1bbaknDHik379
+ YET5RD
+X-Talos-CUID: =?us-ascii?q?9a23=3AddfPD2izNZJwp9fxQYWqXjURcjJuKVDGyFLPfXe?=
+ =?us-ascii?q?DIzhIE7yYblrNxKxKqp87?=
+X-Talos-MUID: 9a23:YIwpKQp0ht5ZtaPftagezz9CF5dFyoKWMkZTzItFoMCGLDctAQ7I2Q==
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-AV: E=Sophos;i="6.03,203,1694736000"; 
+   d="scan'208";a="122684074"
+Received: from rcdn-core-5.cisco.com ([173.37.93.156])
+  by rcdn-iport-6.cisco.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Oct 2023 10:05:36 +0000
+Received: from sjc-ads-6980.cisco.com (sjc-ads-6980.cisco.com [10.30.218.100])
+	by rcdn-core-5.cisco.com (8.15.2/8.15.2) with ESMTPS id 396A5ZDi028281
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 6 Oct 2023 10:05:36 GMT
+Received: by sjc-ads-6980.cisco.com (Postfix, from userid 487941)
+	id 6F7B4CC1280; Fri,  6 Oct 2023 03:05:35 -0700 (PDT)
+From: Denys Zagorui <dzagorui@cisco.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
-	Gianfranco Costamagna <locutusofborg@debian.org>
-Subject: [meta-oe][PATCH] dlt-daemon: Add an additional fix for non-systemd builds
-Date: Fri,  6 Oct 2023 09:46:06 +0200
-Message-Id: <20231006074606.1814427-1-costamagnagianfranco@yahoo.it>
-X-Mailer: git-send-email 2.34.1
+Subject: [meta-oe][PATCH] libbpf: add arm, powerpc and mips64 to COMPATIBLE_HOST
+Date: Fri,  6 Oct 2023 10:05:35 +0000
+Message-Id: <20231006100535.1812417-1-dzagorui@cisco.com>
+X-Mailer: git-send-email 2.23.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Outbound-SMTP-Client: 10.30.218.100, sjc-ads-6980.cisco.com
+X-Outbound-Node: rcdn-core-5.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 06 Oct 2023 07:46:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105366
+ <openembedded-devel@lists.openembedded.org>; Fri, 06 Oct 2023 10:05:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105367
 
-Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
+There is is no build time issues with libbpf for these
+architectures so we can add them to COMPATIBLE_HOST
+
+Signed-off-by: Denys Zagorui <dzagorui@cisco.com>
 ---
- .../dlt-daemon/dlt-daemon_2.18.10.bb                 | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+ meta-oe/recipes-kernel/libbpf/libbpf_1.2.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.10.bb b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.10.bb
-index ab367ad82..410fffa24 100644
---- a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.10.bb
-+++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.10.bb
-@@ -32,7 +32,7 @@ PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', ' systemd s
- PACKAGECONFIG[dlt-examples] = "-DWITH_DLT_EXAMPLES=ON,-DWITH_DLT_EXAMPLES=OFF"
+diff --git a/meta-oe/recipes-kernel/libbpf/libbpf_1.2.0.bb b/meta-oe/recipes-kernel/libbpf/libbpf_1.2.0.bb
+index 71ca10e5a..a8e1e5c0c 100644
+--- a/meta-oe/recipes-kernel/libbpf/libbpf_1.2.0.bb
++++ b/meta-oe/recipes-kernel/libbpf/libbpf_1.2.0.bb
+@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/libbpf/libbpf.git;protocol=https;branch=master"
+ SRCREV = "fbd60dbff51c870f5e80a17c4f2fd639eb80af90"
  
- # Linux options
--PACKAGECONFIG[systemd] = "-DWITH_SYSTEMD=ON,-DWITH_SYSTEMD=OFF,systemd"
-+PACKAGECONFIG[systemd] = "-DWITH_SYSTEMD=ON,-DWITH_SYSTEMD=OFF -DWITH_DLT_SYSTEM=OFF,systemd"
- PACKAGECONFIG[systemd-watchdog] = "-DWITH_SYSTEMD_WATCHDOG=ON,-DWITH_SYSTEMD_WATCHDOG=OFF,systemd,libsystemd"
- PACKAGECONFIG[systemd-journal] = "-DWITH_SYSTEMD_JOURNAL=ON,-DWITH_SYSTEMD_JOURNAL=OFF,systemd,libsystemd"
- PACKAGECONFIG[dlt-dbus] = "-DWITH_DLT_DBUS=ON,-DWITH_DLT_DBUS=OFF,dbus,dbus-lib"
-@@ -55,13 +55,13 @@ EXTRA_OECMAKE += "-DWITH_DLT_LOGSTORAGE_GZIP=ON -DWITH_EXTENDED_FILTERING=ON -DS
- PACKAGES += "${PN}-systemd"
- SYSTEMD_PACKAGES = "${PN} ${PN}-systemd"
- SYSTEMD_SERVICE:${PN} = " ${@bb.utils.contains('PACKAGECONFIG', 'systemd', 'dlt.service', '', d)} \
--                          ${@bb.utils.contains('PACKAGECONFIG', 'dlt-system', 'dlt-system.service', '', d)} \
--                          ${@bb.utils.contains('PACKAGECONFIG', 'dlt-dbus', 'dlt-dbus.service', '', d)}"
-+                          ${@bb.utils.contains('PACKAGECONFIG', 'systemd dlt-system', 'dlt-system.service', '', d)} \
-+                          ${@bb.utils.contains('PACKAGECONFIG', 'systemd dlt-dbus', 'dlt-dbus.service', '', d)}"
- SYSTEMD_AUTO_ENABLE:${PN} = "enable"
- SYSTEMD_SERVICE:${PN}-systemd = " \
--    ${@bb.utils.contains('PACKAGECONFIG', 'dlt-adaptor-udp', 'dlt-adaptor-udp.service', '', d)} \
--    ${@bb.utils.contains('PACKAGECONFIG', 'dlt-examples', 'dlt-example-user.service', '', d)} \
--    ${@bb.utils.contains('PACKAGECONFIG', 'dlt-examples dlt-console', 'dlt-receive.service', '', d)} \
-+    ${@bb.utils.contains('PACKAGECONFIG', 'systemd dlt-adaptor-udp', 'dlt-adaptor-udp.service', '', d)} \
-+    ${@bb.utils.contains('PACKAGECONFIG', 'systemd dlt-examples', 'dlt-example-user.service', '', d)} \
-+    ${@bb.utils.contains('PACKAGECONFIG', 'systemd dlt-examples dlt-console', 'dlt-receive.service', '', d)} \
- "
- SYSTEMD_AUTO_ENABLE:${PN}-systemd = "disable"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+-COMPATIBLE_HOST = "(x86_64|i.86|aarch64|riscv64|powerpc64).*-linux"
++COMPATIBLE_HOST = "(x86_64|i.86|arm|aarch64|riscv64|powerpc|powerpc64|mips64).*-linux"
+ 
+ S = "${WORKDIR}/git/src"
  
 -- 
-2.34.1
+2.23.1
 
 
