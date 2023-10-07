@@ -1,143 +1,99 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <changqing.li@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E3495E94126
-	for <webhook@archiver.kernel.org>; Fri,  6 Oct 2023 21:06:59 +0000 (UTC)
-Received: from mta-64-226.siemens.flowmailer.net (mta-64-226.siemens.flowmailer.net [185.136.64.226])
- by mx.groups.io with SMTP id smtpd.web10.5571.1696626409395223468
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9774AE92FFD
+	for <webhook@archiver.kernel.org>; Sat,  7 Oct 2023 06:06:35 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.13244.1696658786724176350
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 06 Oct 2023 14:06:50 -0700
+ Fri, 06 Oct 2023 23:06:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=Vuq9UOCa;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.226, mailfrom: fm-256628-20231006210646b8a10875ed2ada3a87-p1wa6h@rts-flowmailer.siemens.com)
-Received: by mta-64-226.siemens.flowmailer.net with ESMTPSA id 20231006210646b8a10875ed2ada3a87
-        for <openembedded-devel@lists.openembedded.org>;
-        Fri, 06 Oct 2023 23:06:46 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
- d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=887fJsl/0YmkrS5BY3/e8uF39fUYQ0NrOboF6tG586o=;
- b=Vuq9UOCa0HvDKHLIaNEfBVNQlV+S2SnKGE6c/+k8uYLN0+uaX40Xx8E2VflKogNnWNh5Y0
- BjAk8yx2r220neNsA+RYnjUbE7AJCDfpfm0BP9jz3udwWE5grCkEkNozin4NbBh0Y3b0BClO
- kKrFbPhxfIsZ/IUYlfjqT8UHXiag8=;
-From: Peter Marko <peter.marko@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>,
-	Khem Raj <raj.khem@gmail.com>,
-	Peter Marko <peter.marko@siemens.com>
-Subject: [meta-networking][kirkstone][PATCH 4/5] mosquitto: upgrade 2.0.17 -> 2.0.18
-Date: Fri,  6 Oct 2023 23:05:06 +0200
-Message-Id: <20231006210507.556767-5-peter.marko@siemens.com>
-In-Reply-To: <20231006210507.556767-1-peter.marko@siemens.com>
-References: <20231006210507.556767-1-peter.marko@siemens.com>
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=irvoqjpA;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=86448006c3=changqing.li@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 3975extR000564
+	for <openembedded-devel@lists.openembedded.org>; Fri, 6 Oct 2023 23:06:26 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=eyjHI
+	u4Uq6zbgAafj0dDEDnwy/seHkWaOq3Bay5965w=; b=irvoqjpAWFuRnhXNt7twN
+	P0dQ0M9khpj5AUUMXacVaqNNSZ6ydSJDsDWe1qNVFgzI2RqrsOJiPpUuZ46/wnZP
+	e5ARtsb+JaCdJydkMwURRpxyFV3Th0EZ014Ixx6UoVPh+rJ2wBIYjSfW8adNU5oG
+	uoSzX8wesSD7iXha9ewfek6n79PVhXdgJwQEcxgrBVRoejnBT54obRSpSOiH5IuR
+	XhjdInvoTsasoTdsoQ6JigO8N4d/I2P+ASVJfHBkJRIZvHH9il2Sww/gFopN+1oX
+	YwjNBrI1m/0XaJqLrYpGjEMNhQs6AQ3wCuirZXgFX6cZu9pXK3ghWX+8eTkp/xBT
+	g==
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3thu0s1xxs-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 06 Oct 2023 23:06:26 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.32; Fri, 6 Oct 2023 23:06:23 -0700
+Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.32 via Frontend Transport; Fri, 6 Oct 2023 23:06:22 -0700
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [kirkstone][meta-networking][PATCH] mbedtls: set up /usr/bin/hello as alternative
+Date: Sat, 7 Oct 2023 14:06:23 +0800
+Message-ID: <20231007060623.4022793-1-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-256628:519-21489:flowmailer
+Content-Type: text/plain
+X-Proofpoint-GUID: p5QjkmsdNt5UnECWnX4KDpbu_TNEm0Yx
+X-Proofpoint-ORIG-GUID: p5QjkmsdNt5UnECWnX4KDpbu_TNEm0Yx
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.267,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-10-07_03,2023-10-06_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 lowpriorityscore=0
+ phishscore=0 suspectscore=0 bulkscore=0 adultscore=0 malwarescore=0
+ mlxlogscore=926 impostorscore=0 clxscore=1015 spamscore=0
+ priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2309180000 definitions=main-2310070053
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 06 Oct 2023 21:06:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105377
+ <openembedded-devel@lists.openembedded.org>; Sat, 07 Oct 2023 06:06:35 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105379
 
-From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
+From: Denys Dmytriyenko <denis@denix.org>
 
-Add two patches from Debian, pull requests proposed upstream as 2894 and 2895
-to make it start only when board is online, and to fix dynamic websockets link failure
+As mbedtls installs this rather generically-named /usr/bin/hello binary,
+it conflicts with the one provided by lmbench, hence set it up as an
+alternative to avoid conflicts when both are installed to rootfs or SDK.
 
+Signed-off-by: Denys Dmytriyenko <denis@denix.org>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- .../mosquitto/files/2894.patch                | 23 +++++++++++++++++
- .../mosquitto/files/2895.patch                | 25 +++++++++++++++++++
- ...osquitto_2.0.17.bb => mosquitto_2.0.18.bb} |  4 ++-
- 3 files changed, 51 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-connectivity/mosquitto/files/2894.patch
- create mode 100644 meta-networking/recipes-connectivity/mosquitto/files/2895.patch
- rename meta-networking/recipes-connectivity/mosquitto/{mosquitto_2.0.17.bb => mosquitto_2.0.18.bb} (95%)
+ .../recipes-connectivity/mbedtls/mbedtls_2.28.2.bb           | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-connectivity/mosquitto/files/2894.patch b/meta-networking/recipes-connectivity/mosquitto/files/2894.patch
-new file mode 100644
-index 0000000000..3275e57e38
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/mosquitto/files/2894.patch
-@@ -0,0 +1,23 @@
-+From: Joachim Zobel <jz-2017@heute-morgen.de>
-+Date: Wed, 13 Sep 2023 09:55:34 +0200
-+Subject: [PATCH] Link correctly with shared websockets library if needed see:
-+ https://github.com/eclipse/mosquitto/pull/2751
-+
-+Patch contributed by Joachim Zobel <jz-2017@heute-morgen.de> and  Daniel Engberg <daniel.engberg.lists@pyret.net>
-+---
-+ src/CMakeLists.txt | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-+index 9380a04..dce8313 100644
-+--- a/src/CMakeLists.txt
-++++ b/src/CMakeLists.txt
-+@@ -200,7 +200,7 @@ if (WITH_WEBSOCKETS)
-+ 			link_directories(${mosquitto_SOURCE_DIR})
-+ 		endif (WIN32)
-+ 	else (STATIC_WEBSOCKETS)
-+-		set (MOSQ_LIBS ${MOSQ_LIBS} websockets)
-++		set (MOSQ_LIBS ${MOSQ_LIBS} websockets_shared)
-+ 	endif (STATIC_WEBSOCKETS)
-+ endif (WITH_WEBSOCKETS)
-+ 
-diff --git a/meta-networking/recipes-connectivity/mosquitto/files/2895.patch b/meta-networking/recipes-connectivity/mosquitto/files/2895.patch
-new file mode 100644
-index 0000000000..a9e9c97b83
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/mosquitto/files/2895.patch
-@@ -0,0 +1,25 @@
-+From: Joachim Zobel <jz-2017@heute-morgen.de>
-+Date: Wed, 13 Sep 2023 10:05:43 +0200
-+Subject: [PATCH] Mosquitto now waits for network-online when starting
-+ (Closes: #1036450)
-+
-+See: https://github.com/eclipse/mosquitto/issues/2878
-+---
-+ service/systemd/mosquitto.service.simple | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/service/systemd/mosquitto.service.simple b/service/systemd/mosquitto.service.simple
-+index 15ee0d6..c2a330b 100644
-+--- a/service/systemd/mosquitto.service.simple
-++++ b/service/systemd/mosquitto.service.simple
-+@@ -1,8 +1,8 @@
-+ [Unit]
-+ Description=Mosquitto MQTT Broker
-+ Documentation=man:mosquitto.conf(5) man:mosquitto(8)
-+-After=network.target
-+-Wants=network.target
-++After=network-online.target
-++Wants=network-online.target
-+ 
-+ [Service]
-+ ExecStart=/usr/sbin/mosquitto -c /etc/mosquitto/mosquitto.conf
-diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.17.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.18.bb
-similarity index 95%
-rename from meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.17.bb
-rename to meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.18.bb
-index 690b6bc126..0c9ccc810d 100644
---- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.17.bb
-+++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_2.0.18.bb
-@@ -17,9 +17,11 @@ DEPENDS = "uthash cjson"
- SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
-            file://mosquitto.init \
-            file://1571.patch \
-+           file://2894.patch \
-+           file://2895.patch \
- "
+diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.2.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.2.bb
+index 5696f94b0e..1553c71885 100644
+--- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.2.bb
++++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.28.2.bb
+@@ -26,7 +26,7 @@ S = "${WORKDIR}/git"
+ SRCREV = "89f040a5c938985c5f30728baed21e49d0846a53"
+ SRC_URI = "git://github.com/ARMmbed/mbedtls.git;protocol=https;branch=mbedtls-2.28"
  
--SRC_URI[sha256sum] = "3be7a911236567c1a9fbe25baf3e3167004ba4a0c151a448ef1f7fc077dba52f"
-+SRC_URI[sha256sum] = "d665fe7d0032881b1371a47f34169ee4edab67903b2cd2b4c083822823f4448a"
+-inherit cmake
++inherit cmake update-alternatives
  
- inherit systemd update-rc.d useradd cmake pkgconfig
+ PACKAGECONFIG ??= "shared-libs programs"
+ PACKAGECONFIG[shared-libs] = "-DUSE_SHARED_MBEDTLS_LIBRARY=ON,-DUSE_SHARED_MBEDTLS_LIBRARY=OFF"
+@@ -41,4 +41,7 @@ RPROVIDES:${PN} = "polarssl"
+ PACKAGES =+ "${PN}-programs"
+ FILES:${PN}-programs = "${bindir}/"
  
++ALTERNATIVE:${PN}-programs = "hello"
++ALTERNATIVE_LINK_NAME[hello] = "${bindir}/hello"
++
+ BBCLASSEXTEND = "native nativesdk"
 -- 
-2.30.2
+2.25.1
 
 
