@@ -1,109 +1,107 @@
-Return-Path: <meenali.gupta@windriver.com>
+Return-Path: <cvubrugier@fastmail.fm>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C66B7E95A67
-	for <webhook@archiver.kernel.org>; Sun,  8 Oct 2023 06:31:56 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.33527.1696746715449779336
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8F655E95A8F
+	for <webhook@archiver.kernel.org>; Sun,  8 Oct 2023 15:52:21 +0000 (UTC)
+Received: from wout1-smtp.messagingengine.com (wout1-smtp.messagingengine.com [64.147.123.24])
+ by mx.groups.io with SMTP id smtpd.web11.40530.1696780339210231213
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 07 Oct 2023 23:31:55 -0700
+ Sun, 08 Oct 2023 08:52:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@windriver.com header.s=PPS06212021 header.b=rEDTXyla;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=8645064759=meenali.gupta@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 3986K2S2000890
-	for <openembedded-devel@lists.openembedded.org>; Sat, 7 Oct 2023 23:31:54 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:cc:subject:date:message-id:mime-version:content-type
-	:content-transfer-encoding; s=PPS06212021; bh=bzmuF89Kng0sZhSXa8
-	8Mkfyai5LVrbRpacjb5/+/n6A=; b=rEDTXylaN/Skm8BTd8KkQRX9pmdYmMNgzS
-	ZV8Sgz/8rpUAUYSVfZePm+nimdj0PFsoSs19hdJHMcddVFe9p7rRqv8oD82bT6W1
-	/fBWJGRViszK76NIym85XbM7CSIZOWpyM7FCAqPN5zMOnG8+YXLKeH4ij7TQNAY2
-	sOyiz9HTG+sOcHfbi9mYjnnQLkmEa8Nm4KJ6Pkd091gwaaSX0UiiKc10aX3PFmra
-	dFQ4na3Qpx/wOqI8TZrOmavBqeE7R+7v4SNLNxTcak1ql+t/AGHqVJMIdZ9Z8kCI
-	bBtbrxQJltvzhigUqqGMfjavRiWkJOu23mTPbBzOWNcPmNc+2d3Q==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3tk6ufgha5-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Sat, 07 Oct 2023 23:31:54 -0700 (PDT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.32; Sat, 7 Oct 2023 23:31:52 -0700
-From: Meenali Gupta <meenali.gupta@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <Hari.GPillai@windriver.com>
-Subject: [oe][meta-networking][mickledore][PATCH 1/1] lldpd: upgrade 1.0.16 -> 1.0.17
-Date: Sun, 8 Oct 2023 06:31:33 +0000
-Message-ID: <20231008063133.2302460-1-meenali.gupta@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@fastmail.fm header.s=fm2 header.b=MbA2GtDy;
+ dkim=pass header.i=@messagingengine.com header.s=fm2 header.b=gZKRRsdh;
+ spf=pass (domain: fastmail.fm, ip: 64.147.123.24, mailfrom: cvubrugier@fastmail.fm)
+Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
+	by mailout.west.internal (Postfix) with ESMTP id 86FC032009F3;
+	Sun,  8 Oct 2023 11:52:18 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+  by compute1.internal (MEProxy); Sun, 08 Oct 2023 11:52:18 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fastmail.fm; h=
+	cc:cc:content-transfer-encoding:content-type:date:date:from:from
+	:in-reply-to:in-reply-to:message-id:mime-version:references
+	:reply-to:sender:subject:subject:to:to; s=fm2; t=1696780338; x=
+	1696866738; bh=SHxcQgsDHaSBScJfMOsoi4cgt8uxjH9cv295g+p0R/E=; b=M
+	bA2GtDyxUdscYO9hH9KnnrCJ8cVTwUi/WTohYZp2yMvbKhXPtB/+zgFABlNVSndb
+	/e4/cF6snrb59MiUN8zE9G66AP0QSGbBBck5F6PDM3yANa70ahH5xTnyY6B0zlrO
+	CaH037sEyDmYED42frFHjSTDTFmFjd2xCWits9isZEqYZEPGfnEW6VFhfunYWwCP
+	maKnsl3gQGhWmIY8xizk3aokQBSo8Kjf9zeMMwDME7L8prVhrlDStyZaMwlriObc
+	7jzVsCCJAsCVADaxPVYbt10Cid3i4WJbkm1tK+ujIn3mMVsRz/vxsW/AA0LnP5RD
+	HD49llQ22b1awDn4HcJTQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:date:date:feedback-id:feedback-id:from:from
+	:in-reply-to:in-reply-to:message-id:mime-version:references
+	:reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1696780338; x=
+	1696866738; bh=SHxcQgsDHaSBScJfMOsoi4cgt8uxjH9cv295g+p0R/E=; b=g
+	ZKRRsdh/u8U1kNJWaaOLHFhgDjUUZ0Je4CypZ+gVaXlBMDC5dKdg2gNAZeJMMLP0
+	khgxaN3S4Wpimhv3H0XXZQc6IGkRkaQAbtFR7KhpbANi1fWtt9bXbGiSoit4eS5+
+	TjCSL/aKANLQrKy9sH/5Fs0RhrYjQOv5V4uGzdYzPdDu6uMeEfdoj1cyb6NmjlkF
+	7HwF2gBVQcbx2GCrprYr9pk7e/q0udjUCLFHsuOuNvXFATvfc4h1H8p2loHTgQgO
+	f3ZEFNOi5q5WsdvFtY8iorPJuPyvI9qYaqDT1TGJKLRAD9dkwAZ7RnI8wR+mcq4f
+	+7BqLkuT0seKcGQWPoOtg==
+X-ME-Sender: <xms:MdAiZYz3Z8i_ptMEBv5lHOp4lL9d9NrCQ6PFswz9eWckkTZQ9BWdoQ>
+    <xme:MdAiZcRKsqGAOGqz3silUno4u63I6ayJ9CDCPtv9oTIfRL3usrboDuKZ7RvdRuiJU
+    saF9qm5JMHN9Qvzjw>
+X-ME-Received: <xmr:MdAiZaVFJuS-T2EIBQwgdPZaitWMEY4wgHqsNFDpHHNxvor6brNvh9MJfiDygUZsCcg1yw3HznY36zN1i5VvjNVY3Go4xis2GREw>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrhedugdelhecutefuodetggdotefrodftvf
+    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+    uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
+    fjughrpefhvfevufffkffojghfggfgsedtkeertdertddtnecuhfhrohhmpegtvhhusghr
+    uhhgihgvrhesfhgrshhtmhgrihhlrdhfmhenucggtffrrghtthgvrhhnpeejhffhieekje
+    egvedtgfeuiefhudevgeetuddtueduheeffeehiefftefgjeeuvdenucffohhmrghinhep
+    ghhithhhuhgsrdgtohhmnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrg
+    hilhhfrhhomheptghvuhgsrhhughhivghrsehfrghsthhmrghilhdrfhhm
+X-ME-Proxy: <xmx:MdAiZWhR3RXBZq_BY9meUVKgjgFH3yhLBhChRUsiLpHhBuqdqgg9tg>
+    <xmx:MdAiZaDdgp6g7e9MN4nLmicKKQhqqp0-ouOsP0ggvqPBOeR5qS8yxg>
+    <xmx:MdAiZXK5PKGCFoHpSF8BLT-ytw9WOodJFbhI5HEfzVGB-g2hNXA5ow>
+    <xmx:MtAiZVqSVuLWYAw-5QPirHSRgaP3v-GJnRil37Hi2OJYmaZnu-SCTQ>
+Feedback-ID: i09e840f8:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sun,
+ 8 Oct 2023 11:52:17 -0400 (EDT)
+From: cvubrugier@fastmail.fm
+To: openembedded-devel@lists.openembedded.org
+Cc: Christophe Vu-Brugier <christophe.vu-brugier@seagate.com>
+Subject: [meta-oe][PATCH v2 2/2] nvme-cli: upgrade 2.5 -> 2.6
+Date: Sun,  8 Oct 2023 17:52:05 +0200
+Message-Id: <20231008155205.267182-2-cvubrugier@fastmail.fm>
+X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20231008155205.267182-1-cvubrugier@fastmail.fm>
+References: <20231008155205.267182-1-cvubrugier@fastmail.fm>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-GUID: e6S-qbd9457KfB5xc2wEole4tNAPbABq
-X-Proofpoint-ORIG-GUID: e6S-qbd9457KfB5xc2wEole4tNAPbABq
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.267,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-10-08_03,2023-10-06_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxlogscore=999 clxscore=1015
- lowpriorityscore=0 suspectscore=0 malwarescore=0 adultscore=0 spamscore=0
- priorityscore=1501 impostorscore=0 bulkscore=0 mlxscore=0 phishscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2309180000
- definitions=main-2310080058
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 3986K2S2000890
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 08 Oct 2023 06:31:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105385
+ <openembedded-devel@lists.openembedded.org>; Sun, 08 Oct 2023 15:52:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105386
 
-This release only contains bugfixes and security fixes.
+From: Christophe Vu-Brugier <christophe.vu-brugier@seagate.com>
 
-Highlighted bugfixes in 1.0.17:
-=E2=80=82=E2=80=82=E2=80=82=E2=80=82=E2=80=82=E2=80=82Read overflow when =
-parsing CDP addresses. Thanks to Matteo Memelli.
-=E2=80=82=E2=80=82=E2=80=82=E2=80=82=E2=80=82=E2=80=82Don't output empty =
-lines on configure commands.
-Changelog:
-=E2=80=82=E2=80=82=E2=80=82=E2=80=82=E2=80=82=E2=80=82https://github.com/=
-lldpd/lldpd/releases/tag/1.0.17
-
-References:=E2=80=82
-=E2=80=82=E2=80=82=E2=80=82=E2=80=82=E2=80=82https://nvd.nist.gov/vuln/de=
-tail/CVE-2023-41910
-
-Signed-off-by: Meenali Gupta <meenali.gupta@windriver.com>
+Signed-off-by: Christophe Vu-Brugier <christophe.vu-brugier@seagate.com>
 ---
- .../recipes-daemons/lldpd/{lldpd_1.0.16.bb =3D> lldpd_1.0.17.bb}  | 2 +-
+ .../recipes-bsp/nvme-cli/{nvme-cli_2.5.bb => nvme-cli_2.6.bb}   | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-daemons/lldpd/{lldpd_1.0.16.bb =3D> lldpd=
-_1.0.17.bb} (96%)
+ rename meta-oe/recipes-bsp/nvme-cli/{nvme-cli_2.5.bb => nvme-cli_2.6.bb} (95%)
 
-diff --git a/meta-networking/recipes-daemons/lldpd/lldpd_1.0.16.bb b/meta=
--networking/recipes-daemons/lldpd/lldpd_1.0.17.bb
-similarity index 96%
-rename from meta-networking/recipes-daemons/lldpd/lldpd_1.0.16.bb
-rename to meta-networking/recipes-daemons/lldpd/lldpd_1.0.17.bb
-index 799270510..aa29f4158 100644
---- a/meta-networking/recipes-daemons/lldpd/lldpd_1.0.16.bb
-+++ b/meta-networking/recipes-daemons/lldpd/lldpd_1.0.17.bb
-@@ -12,7 +12,7 @@ SRC_URI =3D "\
-     file://run-ptest \
-     "
-=20
--SRC_URI[sha256sum] =3D "e3b391650c7ba67cea2fe84d67fdb4d7fc8aa1ec5cf86eb8=
-bb984711df8465a9"
-+SRC_URI[sha256sum] =3D "9343177f145d2bca66ef03d59528079d3f1663c624b1e2b9=
-d08268efdc6127ce"
-=20
- inherit autotools update-rc.d useradd systemd pkgconfig bash-completion =
-github-releases ptest
-=20
---=20
-2.40.0
+diff --git a/meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.5.bb b/meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.6.bb
+similarity index 95%
+rename from meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.5.bb
+rename to meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.6.bb
+index 492de65a8..0d8923f34 100644
+--- a/meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.5.bb
++++ b/meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.6.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8264535c0c4e9c6c335635c4026a8022 \
+                     file://ccan/licenses/CC0;md5=c17af43b05840255a6fedc5eda9d56cc \
+                     file://ccan/licenses/BSD-MIT;md5=838c366f69b72c5df05c96dff79b35f2"
+ DEPENDS = "json-c libnvme"
+-SRCREV = "d6c07e0de9be777009ebb9ab7475bee1ae3e0e95"
++SRCREV = "bd2f882a49a14b0e21a94c928128b1979e4316fd"
+ 
+ SRC_URI = "git://github.com/linux-nvme/nvme-cli.git;branch=master;protocol=https"
+ 
+-- 
+2.40.1
 
 
