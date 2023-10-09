@@ -1,280 +1,228 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <cvubrugier@fastmail.fm>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B880CD610B
-	for <webhook@archiver.kernel.org>; Mon,  9 Oct 2023 16:41:51 +0000 (UTC)
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
- by mx.groups.io with SMTP id smtpd.web10.68229.1696869708901382925
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A6148CD6130
+	for <webhook@archiver.kernel.org>; Mon,  9 Oct 2023 19:48:12 +0000 (UTC)
+Received: from out3-smtp.messagingengine.com (out3-smtp.messagingengine.com [66.111.4.27])
+ by mx.groups.io with SMTP id smtpd.web11.72914.1696880884455384428
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 09 Oct 2023 09:41:48 -0700
+ Mon, 09 Oct 2023 12:48:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=mD6Z8qSH;
- spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-1c60cec8041so27893405ad.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 09 Oct 2023 09:41:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1696869708; x=1697474508; darn=lists.openembedded.org;
-        h=in-reply-to:autocrypt:from:content-language:references:cc:to
-         :subject:user-agent:mime-version:date:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=gmBaV29TOu6e5LVj4Fc+gJRegH4cf+KVjYoCRllMJjg=;
-        b=mD6Z8qSHX8jP5kr+fsz4iAaYrx/gj94Y5N9KK5Tr5bIDf6TpIrcbJ4JQiKdJid625j
-         gjZWEEd64rnsYsffdn4Ld5rlfLNyfXjXaMsuA7WNw/C+t8a+pfL1fjlJzBHY/erzP4k6
-         iLTcCMdUKTiKbgV040GAYl3v4OjYS5pLszUbXaNwCBvluQC8QTZDfdU+Rbg3ZeFRnxnv
-         Qe9tvUhAYawE+bGGfMH25AoH0aSfAKLu7upfJL+bg7+mzf26YoYzTqR3bRNy9ZLkS5cc
-         vvynxtfhLeZpWPI3vIdU2X2IB7FXN0s+BekwJNGshsjgy6yFmUq42pL60rIwA005/m/i
-         LrKA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1696869708; x=1697474508;
-        h=in-reply-to:autocrypt:from:content-language:references:cc:to
-         :subject:user-agent:mime-version:date:message-id:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=gmBaV29TOu6e5LVj4Fc+gJRegH4cf+KVjYoCRllMJjg=;
-        b=uFg3xo4L+nG5tdw9ga+qKUMmZ2ENhr18royC+5Oz78EWHT/zptDP73/4pd8T/3fkTe
-         KXz/sAE/ptOPIm7tCHEqsaZNGDaq7C6SqC6kRdbr8YnXIeuR6hPOQrM9KZz8up9rC1bu
-         w1d2NDkXBGnfRl4EXcYwPI6Dt/ItJcNpGAWgN4P4ibotfUDyV2J85VbYBRxwKMH3uwbd
-         6/10UID8EVz2pZ0tq0EQe08IkG7V1iiTfcGJY9+tfllR9JaaTd6HFzAspj8GFIXXq0LA
-         pyR7c1AVHjGFnK5fp4j94asjuw7pPjJaK7//9D1cRFJKRSY3jmkoDuvUoJDPMVEdZS98
-         aO+w==
-X-Gm-Message-State: AOJu0YyDe8lChn4X1PxGNbS+DqGs5dgi4L7pyXx4W13dRWNvW7FuyJVq
-	RPHKH1JUABo1iHNoWPu1L+Q=
-X-Google-Smtp-Source: AGHT+IFOhYZRBnYyrqOtMT8+61IqXMZX3OOHecpf4AZbMJ6zYFwB0ANiZqfgH0GlyLlhnGrSD58TNw==
-X-Received: by 2002:a17:903:1d0:b0:1bc:844:5831 with SMTP id e16-20020a17090301d000b001bc08445831mr16139826plh.57.1696869708156;
-        Mon, 09 Oct 2023 09:41:48 -0700 (PDT)
-Received: from ?IPV6:2601:646:9100:2cb0:a9f6:8efc:88d7:f84b? ([2601:646:9100:2cb0:a9f6:8efc:88d7:f84b])
-        by smtp.gmail.com with ESMTPSA id y13-20020a170902ed4d00b001c898328289sm6128563plb.158.2023.10.09.09.41.46
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 09 Oct 2023 09:41:47 -0700 (PDT)
-Message-ID: <3a4dea33-b94e-4646-8ffe-a7e12f41898f@gmail.com>
-Date: Mon, 9 Oct 2023 09:41:45 -0700
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][PATCH v2 1/2] libnvme: upgrade 1.5 -> 1.6
-To: Christophe Vu-Brugier <cvubrugier@fastmail.fm>,
- openembedded-devel@lists.openembedded.org
+ dkim=pass header.i=@fastmail.fm header.s=fm2 header.b=LQs6uDaM;
+ dkim=pass header.i=@messagingengine.com header.s=fm2 header.b=AulIEW2m;
+ spf=pass (domain: fastmail.fm, ip: 66.111.4.27, mailfrom: cvubrugier@fastmail.fm)
+Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
+	by mailout.nyi.internal (Postfix) with ESMTP id BA3DD5C0377;
+	Mon,  9 Oct 2023 15:48:03 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+  by compute1.internal (MEProxy); Mon, 09 Oct 2023 15:48:03 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fastmail.fm; h=
+	cc:cc:content-transfer-encoding:content-type:date:date:from:from
+	:in-reply-to:message-id:mime-version:reply-to:sender:subject
+	:subject:to:to; s=fm2; t=1696880883; x=1696967283; bh=gmc/3nPHf5
+	im/NnYE2AKA+jHcsQ7qq/Qs0BmCAvIRVM=; b=LQs6uDaMVNzUi1bH/PNdPUJT5E
+	AzdraIR+CO39uKd3y+WDZV1wwUW4lGfB9Jcf0JCwKKD3lFTENcIpe13rjZYGQUsC
+	I55uvnv6v9VM503+eJ26TvmkTSsKivw/IOqqu0Wn9acEV5hMwcbyXc3Cewxksepb
+	ryNUrsWvB0w/gFmgQ7pbMTGDBiw+GIODD72YMLnM4wxPpZzixYxzVmEFf621U6qc
+	AbNlmRVjBf9g8/ZXDGrycGuwQVWfg0DkVu7bsGVObVRRykWcQCymnLiM4QWvEbXJ
+	XvgTnsNylI7nI0mT9jtB5urp7TDI+Tn/PiZri/CI0ditqwieHdeKP+Ec08+A==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:date:date:feedback-id:feedback-id:from:from
+	:in-reply-to:message-id:mime-version:reply-to:sender:subject
+	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+	:x-sasl-enc; s=fm2; t=1696880883; x=1696967283; bh=gmc/3nPHf5im/
+	NnYE2AKA+jHcsQ7qq/Qs0BmCAvIRVM=; b=AulIEW2mYDUAPJIZ6Tc2HvcPQdRg7
+	y7Ciy977zUlQ3f4Zh25coXbi8KLwhWff/niRYXJdkAq7wdq8tKVKFxHKOtuUALSc
+	A8564zvEzC+/xjOq5gi7XM/6cTD9utRkaLK/Jmp9jTI6j6PCFS6Y6r5qIzaro2Jf
+	JYRx08ooYnXVKUjL9WU6ZvIRlo2hI1xt5Y3zB12bRT0/BX5YzJw0AhNwsOSKoJB+
+	/x+g+B7WcGi4OCr0I0o8KRZr2P6gjrAjAThJ/b1nVf/7XcGSw/esCthNNrM0AgPZ
+	OC7DEQIBoN37oOVzhi99nM5WmerqXvpf7EivRuWvZyGrk1rufEl2WNTFg==
+X-ME-Sender: <xms:81gkZSvUDt5-W1kBcVBNWlBZqgGHx1sEfF8MXBCRNWODuZxDv3MtDg>
+    <xme:81gkZXcUiQiBle_CNcqxNauxh2Fp1wVfCR4Ii9CFZBPe_b4q5UoTW0RL5uzzikBqL
+    qTl56aC0eMdVblv2A>
+X-ME-Received: <xmr:81gkZdz41NGzxp6Ymq6fZ82hrTkyhOeON99cq9_CXZyOm4FWOxxZuBbgT8hPXmw39UFlbvDkCTRowBanvqUg>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrheefgddugeduucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+    cujfgurhephffvvefufffkofgggfestdekredtredttdenucfhrhhomheptghvuhgsrhhu
+    ghhivghrsehfrghsthhmrghilhdrfhhmnecuggftrfgrthhtvghrnhepjefgtefghfetgf
+    eljeeuieejgfeiffeffeekgfefkeffieetledvfffhveeulefhnecuffhomhgrihhnpehg
+    ihhthhhusgdrtghomhdpghgvnhhtohhordhorhhgnecuvehluhhsthgvrhfuihiivgeptd
+    enucfrrghrrghmpehmrghilhhfrhhomheptghvuhgsrhhughhivghrsehfrghsthhmrghi
+    lhdrfhhm
+X-ME-Proxy: <xmx:81gkZdMJ9ybrR-VxIOQhf-AG8uygj6OsqCguGkOh1djRR-OdReZWtA>
+    <xmx:81gkZS-Fys7qhq_2NDBoddRmWUYnjLFhWa4RhXb5wOwZx2sIVs22vA>
+    <xmx:81gkZVWLHQqx8Ux5AI67UncCwcoUtfufq-8ytAnmyHCzhaH_qqElNA>
+    <xmx:81gkZXHVHRcof-OEcX8HPph9ifLeFtejQqIyEioPO003LMjZAprWLw>
+Feedback-ID: i09e840f8:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
+ 9 Oct 2023 15:48:03 -0400 (EDT)
+From: cvubrugier@fastmail.fm
+To: openembedded-devel@lists.openembedded.org
 Cc: Christophe Vu-Brugier <christophe.vu-brugier@seagate.com>
-References: <20231008155205.267182-1-cvubrugier@fastmail.fm>
-Content-Language: en-US
-From: Khem Raj <raj.khem@gmail.com>
-Autocrypt: addr=raj.khem@gmail.com; keydata=
- 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
-In-Reply-To: <20231008155205.267182-1-cvubrugier@fastmail.fm>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------p1CYew3FYVn7kr0xEDJlwNoJ"
+Subject: [meta-oe][PATCH] libnvme: apply patch already upstream to fix build with musl
+Date: Mon,  9 Oct 2023 21:47:50 +0200
+Message-Id: <20231009194750.131009-1-cvubrugier@fastmail.fm>
+X-Mailer: git-send-email 2.40.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 09 Oct 2023 16:41:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105391
+ <openembedded-devel@lists.openembedded.org>; Mon, 09 Oct 2023 19:48:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105392
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------p1CYew3FYVn7kr0xEDJlwNoJ
-Content-Type: multipart/mixed; boundary="------------a6HVsHyvcm0PQspoCpIulXVB";
- protected-headers="v1"
-From: Khem Raj <raj.khem@gmail.com>
-To: Christophe Vu-Brugier <cvubrugier@fastmail.fm>,
- openembedded-devel@lists.openembedded.org
-Cc: Christophe Vu-Brugier <christophe.vu-brugier@seagate.com>
-Message-ID: <3a4dea33-b94e-4646-8ffe-a7e12f41898f@gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v2 1/2] libnvme: upgrade 1.5 -> 1.6
-References: <20231008155205.267182-1-cvubrugier@fastmail.fm>
-In-Reply-To: <20231008155205.267182-1-cvubrugier@fastmail.fm>
+From: Christophe Vu-Brugier <christophe.vu-brugier@seagate.com>
 
---------------a6HVsHyvcm0PQspoCpIulXVB
-Content-Type: multipart/mixed; boundary="------------Rd1diChu6F0HbAILtqbJ0Jkj"
+Build failure with musl due to conflicting definitions of ioctl()
+between glibc and musl has been fixed by libnvme developers with this
+commit:
 
---------------Rd1diChu6F0HbAILtqbJ0Jkj
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+ * https://github.com/linux-nvme/libnvme/commit/ca47ba3119365eafac0ab25a86cab9d9a1b29bd4
 
-T24gMTAvOC8yMyA4OjUyIEFNLCBDaHJpc3RvcGhlIFZ1LUJydWdpZXIgd3JvdGU6DQo+IEZy
-b206IENocmlzdG9waGUgVnUtQnJ1Z2llciA8Y2hyaXN0b3BoZS52dS1icnVnaWVyQHNlYWdh
-dGUuY29tPg0KPiANCj4gQmFja3BvcnQgdXBzdHJlYW0gcGF0Y2ggdG8gZml4IGJ1aWxkIHdp
-dGggbXVzbC4NCj4gDQoNClRoaXMgc2VlbXMgYW4gaW1wcm92ZW1lbnQgb3ZlciB3aGF0IEkg
-YXBwbGllZCB0byBtYXN0ZXIgYWxyZWFkeS4gU28gDQpwbGVhc2UgcmViYXNlIHlvdXIgcGF0
-Y2ggb24gdG9wIG9mIGxhdGVzdCBtYXN0ZXIgYW5kIHJlc2VuZCBwbGVhc2UuDQoNCj4gU2ln
-bmVkLW9mZi1ieTogQ2hyaXN0b3BoZSBWdS1CcnVnaWVyIDxjaHJpc3RvcGhlLnZ1LWJydWdp
-ZXJAc2VhZ2F0ZS5jb20+DQo+IC0tLQ0KPiAgIC4uLjAxLXRlc3QtaGFuZGxlLVBPU0lYLWlv
-Y3RsLXByb3RvdHlwZS5wYXRjaCB8IDY4ICsrKysrKysrKysrKysrKysrKysNCj4gICAuLi4v
-e2xpYm52bWVfMS41LmJiID0+IGxpYm52bWVfMS42LmJifSAgICAgICAgfCAgMiArLQ0KPiAg
-IDIgZmlsZXMgY2hhbmdlZCwgNjkgaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbigtKQ0KPiAg
-IGNyZWF0ZSBtb2RlIDEwMDY0NCBtZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9saWJudm1lL2xp
-Ym52bWUvMDAwMS10ZXN0LWhhbmRsZS1QT1NJWC1pb2N0bC1wcm90b3R5cGUucGF0Y2gNCj4g
-ICByZW5hbWUgbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvbGlibnZtZS97bGlibnZtZV8xLjUu
-YmIgPT4gbGlibnZtZV8xLjYuYmJ9ICg5NCUpDQo+IA0KPiBkaWZmIC0tZ2l0IGEvbWV0YS1v
-ZS9yZWNpcGVzLXN1cHBvcnQvbGlibnZtZS9saWJudm1lLzAwMDEtdGVzdC1oYW5kbGUtUE9T
-SVgtaW9jdGwtcHJvdG90eXBlLnBhdGNoIGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvbGli
-bnZtZS9saWJudm1lLzAwMDEtdGVzdC1oYW5kbGUtUE9TSVgtaW9jdGwtcHJvdG90eXBlLnBh
-dGNoDQo+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+IGluZGV4IDAwMDAwMDAwMC4uZWY5Y2M0
-N2QyDQo+IC0tLSAvZGV2L251bGwNCj4gKysrIGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQv
-bGlibnZtZS9saWJudm1lLzAwMDEtdGVzdC1oYW5kbGUtUE9TSVgtaW9jdGwtcHJvdG90eXBl
-LnBhdGNoDQo+IEBAIC0wLDAgKzEsNjggQEANCj4gK0Zyb20gY2E0N2JhMzExOTM2NWVhZmFj
-MGFiMjVhODZjYWI5ZDlhMWIyOWJkNCBNb24gU2VwIDE3IDAwOjAwOjAwIDIwMDENCj4gK0Zy
-b206IFNhbSBKYW1lcyA8c2FtQGdlbnRvby5vcmc+DQo+ICtEYXRlOiBTYXQsIDMwIFNlcCAy
-MDIzIDA2OjM4OjUzICswMTAwDQo+ICtTdWJqZWN0OiBbUEFUQ0hdIHRlc3Q6IGhhbmRsZSBQ
-T1NJWCBpb2N0bCBwcm90b3R5cGUNCj4gKw0KPiArZ2xpYmMgaGFzIHRoZSBmb2xsb3dpbmcg
-cHJvdG90eXBlIGZvciBpb2N0bDogaW50IGlvY3RsKGludCBmZCwgdW5zaWduZWQgbG9uZyBy
-ZXF1ZXN0LCAuLi4pDQo+ICtQT1NJWCAoaW5jLiBtdXNsKSBoYXMgdGhlIGZvbGxvd2luZyBm
-b3IgaW9jdGw6IGludCBpb2N0bChpbnQgZmQsIGludCByZXF1ZXN0LCAuLi4pDQo+ICsNCj4g
-K0NoZWNrIHdoaWNoIHByb3RvdHlwZSBpcyB1c2VkIGluIDxzeXMvaW9jdGwuaD4gdG8gYXZv
-aWQgYSBjb25mbGljdCBhbmQgY29uZGl0aW9uYWxseQ0KPiArZGVmaW5lIHRoZSByaWdodCBv
-bmUgZm9yIHRoZSBzeXN0ZW0uDQo+ICsNCj4gK0J1ZzogaHR0cHM6Ly9idWdzLmdlbnRvby5v
-cmcvOTE0OTIxDQo+ICtTaWduZWQtb2ZmLWJ5OiBTYW0gSmFtZXMgPHNhbUBnZW50b28ub3Jn
-Pg0KPiArVXBzdHJlYW0tU3RhdHVzOiBCYWNrcG9ydCBbaHR0cHM6Ly9naXRodWIuY29tL2xp
-bnV4LW52bWUvbGlibnZtZS9jb21taXQvY2E0N2JhMzExOTM2NWVhZmFjMGFiMjVhODZjYWI5
-ZDlhMWIyOWJkNF0NCj4gKy0tLQ0KPiArIG1lc29uLmJ1aWxkICAgICAgIHwgMTAgKysrKysr
-KysrKw0KPiArIHRlc3QvaW9jdGwvbW9jay5jIHwgIDYgKysrKystDQo+ICsgMiBmaWxlcyBj
-aGFuZ2VkLCAxNSBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9uKC0pDQo+ICsNCj4gK2RpZmYg
-LS1naXQgYS9tZXNvbi5idWlsZCBiL21lc29uLmJ1aWxkDQo+ICtpbmRleCA2ZmNmMWRhLi4y
-Yzk3OWNjIDEwMDY0NA0KPiArLS0tIGEvbWVzb24uYnVpbGQNCj4gKysrKyBiL21lc29uLmJ1
-aWxkDQo+ICtAQCAtMjMwLDYgKzIzMCwxNiBAQCBjb25mLnNldCgNCj4gKyAgICAgKSwNCj4g
-KyAgICAgZGVzY3JpcHRpb246ICdJcyBuZXR3b3JrIGFkZHJlc3MgYW5kIHNlcnZpY2UgdHJh
-bnNsYXRpb24gYXZhaWxhYmxlJw0KPiArICkNCj4gKytjb25mLnNldCgNCj4gKysgICAgJ0hB
-VkVfR0xJQkNfSU9DVEwnLA0KPiArKyAgICBjYy5jb21waWxlcygNCj4gKysgICAgICAgICcn
-JyNpbmNsdWRlIDxzeXMvaW9jdGwuaD4NCj4gKysgICAgICAgIGludCBpb2N0bChpbnQgZmQs
-IHVuc2lnbmVkIGxvbmcgcmVxdWVzdCwgLi4uKTsNCj4gKysgICAgICAgICcnJywNCj4gKysg
-ICAgICAgIG5hbWU6ICdpb2N0bCBoYXMgZ2xpYmMtc3R5bGUgcHJvdG90eXBlJw0KPiArKyAg
-ICApLA0KPiArKyAgICBkZXNjcmlwdGlvbjogJ0lzIGlvY3RsIHRoZSBnbGliYyBpbnRlcmZh
-Y2UgKHJhdGhlciB0aGFuIFBPU0lYKScNCj4gKyspDQo+ICsNCj4gKyBpZiBjYy5oYXNfZnVu
-Y3Rpb25fYXR0cmlidXRlKCdmYWxsdGhyb3VnaCcpDQo+ICsgICBjb25mLnNldCgnZmFsbHRo
-cm91Z2gnLCAnX19hdHRyaWJ1dGVfXygoX19mYWxsdGhyb3VnaF9fKSknKQ0KPiArZGlmZiAt
-LWdpdCBhL3Rlc3QvaW9jdGwvbW9jay5jIGIvdGVzdC9pb2N0bC9tb2NrLmMNCj4gK2luZGV4
-IGU5MTcyNDQuLjVkMmFjOTQgMTAwNjQ0DQo+ICstLS0gYS90ZXN0L2lvY3RsL21vY2suYw0K
-PiArKysrIGIvdGVzdC9pb2N0bC9tb2NrLmMNCj4gK0BAIC0xMTQsNyArMTE0LDExIEBAIHZv
-aWQgZW5kX21vY2tfY21kcyh2b2lkKQ0KPiArIAl9IFwNCj4gKyB9KQ0KPiArDQo+ICsrI2lm
-ZGVmIEhBVkVfR0xJQkNfSU9DVEwNCj4gKyBpbnQgaW9jdGwoaW50IGZkLCB1bnNpZ25lZCBs
-b25nIHJlcXVlc3QsIC4uLikNCj4gKysjZWxzZQ0KPiArK2ludCBpb2N0bChpbnQgZmQsIGlu
-dCByZXF1ZXN0LCAuLi4pDQo+ICsrI2VuZGlmDQo+ICsgew0KPiArIAlzdHJ1Y3QgbW9ja19j
-bWRzICptb2NrX2NtZHM7DQo+ICsgCWJvb2wgcmVzdWx0NjQ7DQo+ICtAQCAtMTQxLDcgKzE0
-NSw3IEBAIGludCBpb2N0bChpbnQgZmQsIHVuc2lnbmVkIGxvbmcgcmVxdWVzdCwgLi4uKQ0K
-PiArIAkJcmVzdWx0NjQgPSB0cnVlOw0KPiArIAkJYnJlYWs7DQo+ICsgCWRlZmF1bHQ6DQo+
-ICstCQlmYWlsKCJ1bmV4cGVjdGVkICVzICVsdSIsIF9fZnVuY19fLCByZXF1ZXN0KTsNCj4g
-KysJCWZhaWwoInVuZXhwZWN0ZWQgJXMgJWx1IiwgX19mdW5jX18sICh1bnNpZ25lZCBsb25n
-KSByZXF1ZXN0KTsNCj4gKyAJfQ0KPiArIAljaGVjayhtb2NrX2NtZHMtPnJlbWFpbmluZ19j
-bWRzLA0KPiArIAkgICAgICAidW5leHBlY3RlZCAlcyBjb21tYW5kIiwgbW9ja19jbWRzLT5u
-YW1lKTsNCj4gKy0tDQo+ICsyLjQwLjENCj4gKw0KPiBkaWZmIC0tZ2l0IGEvbWV0YS1vZS9y
-ZWNpcGVzLXN1cHBvcnQvbGlibnZtZS9saWJudm1lXzEuNS5iYiBiL21ldGEtb2UvcmVjaXBl
-cy1zdXBwb3J0L2xpYm52bWUvbGlibnZtZV8xLjYuYmINCj4gc2ltaWxhcml0eSBpbmRleCA5
-NCUNCj4gcmVuYW1lIGZyb20gbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvbGlibnZtZS9saWJu
-dm1lXzEuNS5iYg0KPiByZW5hbWUgdG8gbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvbGlibnZt
-ZS9saWJudm1lXzEuNi5iYg0KPiBpbmRleCA0YjZmMWUzMGIuLjM3ZTVkNjMwMSAxMDA2NDQN
-Cj4gLS0tIGEvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvbGlibnZtZS9saWJudm1lXzEuNS5i
-Yg0KPiArKysgYi9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9saWJudm1lL2xpYm52bWVfMS42
-LmJiDQo+IEBAIC0xMSw3ICsxMSw3IEBAIExJQ19GSUxFU19DSEtTVU0gPSAiZmlsZTovL0NP
-UFlJTkc7bWQ1PTRmYmQ2NTM4MGNkZDI1NTk1MTA3OTAwOGIzNjQ1MTZjIFwNCj4gICAgICAg
-ICAgICAgICAgICAgICAgIGZpbGU6Ly9jY2FuL2xpY2Vuc2VzL0NDMDttZDU9YzE3YWY0M2Iw
-NTg0MDI1NWE2ZmVkYzVlZGE5ZDU2Y2MgXA0KPiAgICAgICAgICAgICAgICAgICAgICAgZmls
-ZTovL2NjYW4vbGljZW5zZXMvQlNELU1JVDttZDU9ODM4YzM2NmY2OWI3MmM1ZGYwNWM5NmRm
-Zjc5YjM1ZjIiDQo+ICAgREVQRU5EUyA9ICJqc29uLWMiDQo+IC1TUkNSRVYgPSAiNGZlYTgz
-ZGI4MzI4ZWE3ODhlYThmMTAwMWU4Y2UxY2I4MGVmNWZhZSINCj4gK1NSQ1JFViA9ICIzN2E4
-MDNjZjc3ZTIyNGY2NmQ4NmIxZTFkOWU3NGExNWY1NWVhNjAwIg0KPiAgIA0KPiAgIFNSQ19V
-UkkgPSAiZ2l0Oi8vZ2l0aHViLmNvbS9saW51eC1udm1lL2xpYm52bWU7cHJvdG9jb2w9aHR0
-cHM7YnJhbmNoPW1hc3RlciINCj4gICANCj4gDQo+IA0KPiANCj4gLT0tPS09LT0tPS09LT0t
-PS09LT0tPS0NCj4gTGlua3M6IFlvdSByZWNlaXZlIGFsbCBtZXNzYWdlcyBzZW50IHRvIHRo
-aXMgZ3JvdXAuDQo+IFZpZXcvUmVwbHkgT25saW5lICgjMTA1Mzg3KTogaHR0cHM6Ly9saXN0
-cy5vcGVuZW1iZWRkZWQub3JnL2cvb3BlbmVtYmVkZGVkLWRldmVsL21lc3NhZ2UvMTA1Mzg3
-DQo+IE11dGUgVGhpcyBUb3BpYzogaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL210
-LzEwMTgzNTA5OS8xOTk3OTE0DQo+IEdyb3VwIE93bmVyOiBvcGVuZW1iZWRkZWQtZGV2ZWwr
-b3duZXJAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBVbnN1YnNjcmliZTogaHR0cHM6Ly9s
-aXN0cy5vcGVuZW1iZWRkZWQub3JnL2cvb3BlbmVtYmVkZGVkLWRldmVsL3Vuc3ViIFtyYWou
-a2hlbUBnbWFpbC5jb21dDQo+IC09LT0tPS09LT0tPS09LT0tPS09LT0tDQo+IA0K
---------------Rd1diChu6F0HbAILtqbJ0Jkj
-Content-Type: application/pgp-keys; name="OpenPGP_0xBB053355919D3314.asc"
-Content-Disposition: attachment; filename="OpenPGP_0xBB053355919D3314.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Christophe Vu-Brugier <christophe.vu-brugier@seagate.com>
+---
+ ...l-Check-for-ioctl-signature-for-musl.patch | 38 -----------
+ ...01-test-handle-POSIX-ioctl-prototype.patch | 68 +++++++++++++++++++
+ .../recipes-support/libnvme/libnvme_1.6.bb    |  2 +-
+ 3 files changed, 69 insertions(+), 39 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/libnvme/libnvme/0001-ioctl-Check-for-ioctl-signature-for-musl.patch
+ create mode 100644 meta-oe/recipes-support/libnvme/libnvme/0001-test-handle-POSIX-ioctl-prototype.patch
 
------BEGIN PGP PUBLIC KEY BLOCK-----
+diff --git a/meta-oe/recipes-support/libnvme/libnvme/0001-ioctl-Check-for-ioctl-signature-for-musl.patch b/meta-oe/recipes-support/libnvme/libnvme/0001-ioctl-Check-for-ioctl-signature-for-musl.patch
+deleted file mode 100644
+index 06f7b5712..000000000
+--- a/meta-oe/recipes-support/libnvme/libnvme/0001-ioctl-Check-for-ioctl-signature-for-musl.patch
++++ /dev/null
+@@ -1,38 +0,0 @@
+-From ad1ac4215f051bd42b7ddf64dad63d8215cc3ac4 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sat, 7 Oct 2023 17:50:54 -0700
+-Subject: [PATCH] ioctl: Check for ioctl signature for musl
+-
+-Fixes
+-../git/test/ioctl/mock.c:117:5: error: conflicting types for 'ioctl'
+-  117 | int ioctl(int fd, unsigned long request, ...)
+-      |     ^
+-/mnt/b/yoe/master/build/tmp/work/cortexa15t2hf-neon-yoe-linux-musleabi/libnvme/1.6/recipe-sysroot/usr/include/sys/ioctl.h:115:5: note: previous declaration is here
+-  115 | int ioctl (int, int, ...);
+-      |     ^
+-
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- test/ioctl/mock.c | 4 ++++
+- 1 file changed, 4 insertions(+)
+-
+-diff --git a/test/ioctl/mock.c b/test/ioctl/mock.c
+-index e917244..7d5c983 100644
+---- a/test/ioctl/mock.c
+-+++ b/test/ioctl/mock.c
+-@@ -114,7 +114,11 @@ void end_mock_cmds(void)
+- 	} \
+- })
+- 
+-+#if defined(__linux__) && !defined(__GLIBC__)
+-+int ioctl(int fd, int request, ...)
+-+#else
+- int ioctl(int fd, unsigned long request, ...)
+-+#endif
+- {
+- 	struct mock_cmds *mock_cmds;
+- 	bool result64;
+--- 
+-2.42.0
+-
+diff --git a/meta-oe/recipes-support/libnvme/libnvme/0001-test-handle-POSIX-ioctl-prototype.patch b/meta-oe/recipes-support/libnvme/libnvme/0001-test-handle-POSIX-ioctl-prototype.patch
+new file mode 100644
+index 000000000..ef9cc47d2
+--- /dev/null
++++ b/meta-oe/recipes-support/libnvme/libnvme/0001-test-handle-POSIX-ioctl-prototype.patch
+@@ -0,0 +1,68 @@
++From ca47ba3119365eafac0ab25a86cab9d9a1b29bd4 Mon Sep 17 00:00:00 2001
++From: Sam James <sam@gentoo.org>
++Date: Sat, 30 Sep 2023 06:38:53 +0100
++Subject: [PATCH] test: handle POSIX ioctl prototype
++
++glibc has the following prototype for ioctl: int ioctl(int fd, unsigned long request, ...)
++POSIX (inc. musl) has the following for ioctl: int ioctl(int fd, int request, ...)
++
++Check which prototype is used in <sys/ioctl.h> to avoid a conflict and conditionally
++define the right one for the system.
++
++Bug: https://bugs.gentoo.org/914921
++Signed-off-by: Sam James <sam@gentoo.org>
++Upstream-Status: Backport [https://github.com/linux-nvme/libnvme/commit/ca47ba3119365eafac0ab25a86cab9d9a1b29bd4]
++---
++ meson.build       | 10 ++++++++++
++ test/ioctl/mock.c |  6 +++++-
++ 2 files changed, 15 insertions(+), 1 deletion(-)
++
++diff --git a/meson.build b/meson.build
++index 6fcf1da..2c979cc 100644
++--- a/meson.build
+++++ b/meson.build
++@@ -230,6 +230,16 @@ conf.set(
++     ),
++     description: 'Is network address and service translation available'
++ )
+++conf.set(
+++    'HAVE_GLIBC_IOCTL',
+++    cc.compiles(
+++        '''#include <sys/ioctl.h>
+++        int ioctl(int fd, unsigned long request, ...);
+++        ''',
+++        name: 'ioctl has glibc-style prototype'
+++    ),
+++    description: 'Is ioctl the glibc interface (rather than POSIX)'
+++)
++ 
++ if cc.has_function_attribute('fallthrough')
++   conf.set('fallthrough', '__attribute__((__fallthrough__))')
++diff --git a/test/ioctl/mock.c b/test/ioctl/mock.c
++index e917244..5d2ac94 100644
++--- a/test/ioctl/mock.c
+++++ b/test/ioctl/mock.c
++@@ -114,7 +114,11 @@ void end_mock_cmds(void)
++ 	} \
++ })
++ 
+++#ifdef HAVE_GLIBC_IOCTL
++ int ioctl(int fd, unsigned long request, ...)
+++#else
+++int ioctl(int fd, int request, ...)
+++#endif
++ {
++ 	struct mock_cmds *mock_cmds;
++ 	bool result64;
++@@ -141,7 +145,7 @@ int ioctl(int fd, unsigned long request, ...)
++ 		result64 = true;
++ 		break;
++ 	default:
++-		fail("unexpected %s %lu", __func__, request);
+++		fail("unexpected %s %lu", __func__, (unsigned long) request);
++ 	}
++ 	check(mock_cmds->remaining_cmds,
++ 	      "unexpected %s command", mock_cmds->name);
++-- 
++2.40.1
++
+diff --git a/meta-oe/recipes-support/libnvme/libnvme_1.6.bb b/meta-oe/recipes-support/libnvme/libnvme_1.6.bb
+index 26ad36d7d..802edac50 100644
+--- a/meta-oe/recipes-support/libnvme/libnvme_1.6.bb
++++ b/meta-oe/recipes-support/libnvme/libnvme_1.6.bb
+@@ -14,7 +14,7 @@ DEPENDS = "json-c"
+ SRCREV = "37a803cf77e224f66d86b1e1d9e74a15f55ea600"
+ 
+ SRC_URI = "git://github.com/linux-nvme/libnvme;protocol=https;branch=master \
+-           file://0001-ioctl-Check-for-ioctl-signature-for-musl.patch \
++           file://0001-test-handle-POSIX-ioctl-prototype.patch \
+ "
+ 
+ S = "${WORKDIR}/git"
+-- 
+2.40.1
 
-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
-//VuX4EDPW3CZmbPy6U=3D
-=3D+jUt
------END PGP PUBLIC KEY BLOCK-----
-
---------------Rd1diChu6F0HbAILtqbJ0Jkj--
-
---------------a6HVsHyvcm0PQspoCpIulXVB--
-
---------------p1CYew3FYVn7kr0xEDJlwNoJ
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wmMEABEIACMWIQSPpVvapDR0rgZCCc27BTNVkZ0zFAUCZSQtSgUDAAAAAAAKCRC7BTNVkZ0zFGlV
-AKCBIXzrMmpy0C35STRwuQkB12++XACePrZD5LJUSMJdaaNyN/riYuOWG7M=
-=10Zs
------END PGP SIGNATURE-----
-
---------------p1CYew3FYVn7kr0xEDJlwNoJ--
 
