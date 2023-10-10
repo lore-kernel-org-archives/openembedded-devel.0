@@ -2,82 +2,112 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4EF83CD8CB1
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5097CCD8CB2
 	for <webhook@archiver.kernel.org>; Tue, 10 Oct 2023 18:52:43 +0000 (UTC)
-Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
- by mx.groups.io with SMTP id smtpd.web10.2395.1696963961978992690
+Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
+ by mx.groups.io with SMTP id smtpd.web11.2457.1696963962450659549
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 10 Oct 2023 11:52:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=M1jTvOxr;
- spf=pass (domain: gmail.com, ip: 209.85.210.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f175.google.com with SMTP id d2e1a72fcca58-68fb85afef4so4528386b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Oct 2023 11:52:41 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=j96CTSOZ;
+ spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f171.google.com with SMTP id d2e1a72fcca58-693375d2028so5367870b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Oct 2023 11:52:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1696963961; x=1697568761; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=kZ/oC6HpvBXcozH9t1uxKiwFDB7ODyJoogEol/f5MXE=;
-        b=M1jTvOxr3BfiyVBagaQZY/y5V6K5woLUTruptWY1B309IuIQySAQDTm+wp8sxg4dRr
-         6PCOmesGqgSpi4f32W46EbP1L5fgRpBcF79sqwzYc8X+EdPVy0M+qBaamreWWEuRPr3n
-         9NVD/LkkYH8eC5WLlhafLsEv608ZeXsmAS6O4HfW+fnQMFAoSRbmiGn+ADmy2ZgYXG9r
-         Vc+OvMcVlidOlpefbWCLKKZjCOr3JcLZge8uM0wJsyiFF7vKWrAnC2o5j+UHWZY54+8l
-         xWlz2zHU1sTBkDdrWDpRcETZ0G+k58NpQ7t/sSzu1qgjhd05Lz9ruaJL0OPIcUr6TzkA
-         KMuw==
+        d=gmail.com; s=20230601; t=1696963962; x=1697568762; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=OZ6kWY3es2cFd60gR2ja/UAgUp63VjmurOF5+omKAb0=;
+        b=j96CTSOZQ3PpuIqxsLUAYv9ZFwU8IJ2/HLWB64yaCw89YLhdDYZtdfa5C2FJPVHgZu
+         oNKX5U3UljG/x8vDQS0gY3Y6GbTr6sXHbUuQcZsyTv7iS0hIMvkoqF1fPMKR/vQmCCxX
+         2g/3dv6xry17JVbBMjr5XNaz3HW53oyzxj7C1fUZRgYTjuBjqaGWy+Fs8CTqx/NsFqNY
+         +dkoQS55og0dEBo1HBJR142Cdb4uY1cbeOHYrM7YediUJaRdADFk9IobFyqt1Kg916ku
+         Rs9IO46TXu2/nmgbOuiNh53sKHVKPj5ZnZn/bVUbYaAVfGrFrF77ll0t8QLJTIep/iFj
+         CROw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1696963961; x=1697568761;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=kZ/oC6HpvBXcozH9t1uxKiwFDB7ODyJoogEol/f5MXE=;
-        b=aDqNbwi2Km8OcnOWle1n2wHy5ZUSC34I+ywJK37ts0bnq9idwnu3smygRk8JGswnMc
-         y8xDE1RcAxLWsA5Vk3rp3GG/kV7G+8LUrjmhe7DL6iwVD9eo/fsB70HM+0A2IJauP3sa
-         c5stfdvv0LVKYKyhn4qTMXf/FyeuzFUjoOCUZa71g05vbKamuc6VwsbjjYczBhrSxpCx
-         ppq/vl5P06OJp/HD/qI9TQBYaGt0H/QDm6pi0uM492be4+DgO/PnSN+oQwYsfmqgmFtD
-         BuNBPG+RusA4sNi0nsNOlYoOzZOaD9UEp6W6e2xiQ3cODsPFqjYENplmreclEulhrDjq
-         7WFg==
-X-Gm-Message-State: AOJu0YzwVnYvGv6vU+Sp1pG8OiNzLnZI1Se41PInhhotmRiTyncumWWC
-	f41ha8bxy61pwTI1naQcTd/65sZ/m7VSnw==
-X-Google-Smtp-Source: AGHT+IH0//PXK7LdO2xuAHMeF4jRdOPU1vTb+hJiuOH3tPI+M/6gAeK2UZ+SWc6o0HardttbrjGmwQ==
-X-Received: by 2002:aa7:88ce:0:b0:690:b8b1:7b9e with SMTP id k14-20020aa788ce000000b00690b8b17b9emr16249897pff.0.1696963960959;
-        Tue, 10 Oct 2023 11:52:40 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1696963962; x=1697568762;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=OZ6kWY3es2cFd60gR2ja/UAgUp63VjmurOF5+omKAb0=;
+        b=RN6sec0ZJLWyGnaISS3t9DohM99/qwLDDzfjPPLM97oXRF2DMFl2S3rBRE7UqCZuUI
+         4zFzUUxGIa4PMiRmu2XVkCIkDW8lCUeoQKAT8zFKC4uT2cgFc7HvvHe6do9+jHQ6itWZ
+         tdReKlmH4YVz6T4gwMxUnRxJmv0e2qkWP1y3XJu2bUOZ1lT+99sAUWGTQ0jxUl0Onf0b
+         PG1H9qdzSL24GCKysvKxIrcbJhJNVloD3XHGdQ/w01fNyOBMKf8POiuS43thliIpYQFg
+         jnvRsCTg2QMUdv5izWWKodGtnlhbQYP1SB2Fliat1av12gvjN5WapRBfU+KY0xRUGaA6
+         GqDQ==
+X-Gm-Message-State: AOJu0YwjccTLVhgjluBOjz6ARr46BZmXRTJaEv0RZR0MvvXNokxR+i67
+	5SNBhw1rwbSyAa/8DKFL3g0waXFhd5jeUQ==
+X-Google-Smtp-Source: AGHT+IES/3fBLjIMVaiCgKzPMhHCt9DQRU1l9GQoAhqbB815ThPWcXfOA9g+7kYm/MkcON5skUviYQ==
+X-Received: by 2002:a05:6a00:230c:b0:68a:6305:a4cc with SMTP id h12-20020a056a00230c00b0068a6305a4ccmr22422332pfh.5.1696963961634;
+        Tue, 10 Oct 2023 11:52:41 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9100:2cb0::7f07])
-        by smtp.gmail.com with ESMTPSA id a21-20020a62e215000000b0069353ac3d3esm8534886pfi.38.2023.10.10.11.52.40
+        by smtp.gmail.com with ESMTPSA id a21-20020a62e215000000b0069353ac3d3esm8534886pfi.38.2023.10.10.11.52.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 10 Oct 2023 11:52:40 -0700 (PDT)
+        Tue, 10 Oct 2023 11:52:41 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/2] kernel-selftest: Copy the .config from kernel build
-Date: Tue, 10 Oct 2023 11:52:37 -0700
-Message-ID: <20231010185238.2842132-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/2] kernel-selftest: Use clang options when clang is available
+Date: Tue, 10 Oct 2023 11:52:38 -0700
+Message-ID: <20231010185238.2842132-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.42.0
+In-Reply-To: <20231010185238.2842132-1-raj.khem@gmail.com>
+References: <20231010185238.2842132-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 10 Oct 2023 18:52:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105414
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105415
+
+Enable bpf only with clang
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../kernel-selftest/kernel-selftest.bb           | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
 
 diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-index e4eba5f954..2e5680d775 100644
+index 2e5680d775..291a83aaad 100644
 --- a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
 +++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-@@ -83,7 +83,7 @@ either install it and add it to HOSTTOOLS, or add clang-native from meta-clang t
-     fi
-     fi
-     mkdir -p ${S}/include/config ${S}/bits
--    touch ${S}/include/config/auto.conf
-+    install -Dm 0644 ${STAGING_KERNEL_BUILDDIR}/.config ${S}/include/config/auto.conf
-     if [ "${SITEINFO_BITS}" != "32" ]; then
-         for f in long-double endianness floatn struct_rwlock; do
-             cp ${RECIPE_SYSROOT}${includedir}/bits/$f-64.h ${S}/bits/$f-32.h
+@@ -18,7 +18,9 @@ SRC_URI += "file://run-ptest \
+ # we will append other kernel selftest in the future
+ # bpf was added in 4.10 with: https://github.com/torvalds/linux/commit/5aa5bd14c5f8660c64ceedf14a549781be47e53d
+ # if you have older kernel than that you need to remove it from PACKAGECONFIG
+-PACKAGECONFIG ??= "firmware bpf"
++PACKAGECONFIG ??= "firmware"
++# bpf needs working clang compiler anyway
++PACKAGECONFIG:append:toolchain-clang:x86-64 = " bpf"
+ PACKAGECONFIG:remove:x86 = "bpf"
+ PACKAGECONFIG:remove:arm = "bpf vm"
+ # host ptrace.h is used to compile BPF target but mips ptrace.h is needed
+@@ -54,17 +56,15 @@ EXTRA_OEMAKE = '\
+     CC="${CC}" \
+     AR="${AR}" \
+     LD="${LD}" \
+-    LLVM=1 \
+-    CONFIG_CC_IS_GCC= \
+-    CONFIG_CC_IS_CLANG=y \
+-    CONFIG_CC_IMPLICIT_FALLTHROUGH= \
+     CLANG="clang -fno-stack-protector -target ${TARGET_ARCH} ${TOOLCHAIN_OPTIONS} -isystem ${S} -D__WORDSIZE=\'64\' -Wno-error=unused-command-line-argument" \
+-    HOSTCC="clang -unwindlib=libgcc -rtlib=libgcc -stdlib=libstdc++ ${BUILD_CFLAGS} ${BUILD_LDFLAGS} -Wno-error=unused-command-line-argument" \
+-    HOSTLD="clang ${BUILD_LDFLAGS} -unwindlib=libgcc -rtlib=libgcc -stdlib=libstdc++" \
+     DESTDIR="${D}" \
+-    MACHINE="${ARCH}" \
+     V=1 \
+ '
++EXTRA_OEMAKE:append:toolchain-clang = "\
++    LLVM=1 CONFIG_CC_IS_GCC= CONFIG_CC_IS_CLANG=y CONFIG_CC_IMPLICIT_FALLTHROUGH= \
++    HOSTCC="clang -unwindlib=libgcc -rtlib=libgcc -stdlib=libstdc++ ${BUILD_CFLAGS} ${BUILD_LDFLAGS} -Wno-error=unused-command-line-argument" \
++    HOSTLD="clang ${BUILD_LDFLAGS} -unwindlib=libgcc -rtlib=libgcc -stdlib=libstdc++" \
++"
+ 
+ KERNEL_SELFTEST_SRC ?= "Makefile \
+                         include \
 -- 
 2.42.0
 
