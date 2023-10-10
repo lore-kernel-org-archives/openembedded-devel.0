@@ -2,57 +2,57 @@ Return-Path: <fabien.thomas@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DD060CD691B
-	for <webhook@archiver.kernel.org>; Tue, 10 Oct 2023 09:39:56 +0000 (UTC)
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
- by mx.groups.io with SMTP id smtpd.web11.87078.1696930793894659534
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 06B94CD6134
+	for <webhook@archiver.kernel.org>; Tue, 10 Oct 2023 09:39:57 +0000 (UTC)
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+ by mx.groups.io with SMTP id smtpd.web10.87407.1696930791248458593
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Oct 2023 02:39:54 -0700
+ Tue, 10 Oct 2023 02:39:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=V5m2IasO;
- spf=pass (domain: smile.fr, ip: 209.85.221.41, mailfrom: fabien.thomas@smile.fr)
-Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-32ccafde8e0so428465f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Oct 2023 02:39:53 -0700 (PDT)
+ dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=NOWVZmn6;
+ spf=pass (domain: smile.fr, ip: 209.85.221.48, mailfrom: fabien.thomas@smile.fr)
+Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-3247cefa13aso4973852f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Oct 2023 02:39:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1696930792; x=1697535592; darn=lists.openembedded.org;
+        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1696930789; x=1697535589; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=NMZY4KLV8nhdJmooczmjn6lxJR6KYIDMlc0BxdkbQAs=;
-        b=V5m2IasOlJ5owcYETVTsRKCUjHcjSyfeoT7hAEDehYkdJvhn8vyMNtrmIlkCNNswJo
-         k4mdPvw6zYO6vTaMSY6bLThdYyrFd7m13yr6ZNeAvJ2qbv8j6DY0nG9AvKDtW391edXm
-         y6bc6VXAU73FU8VSz7SGK1djB71xJrbnuJasu2KJafGAEJCKCihHzYvzJU50XAGmFXoJ
-         Cg3bluuRX2TSnhGpFVqt52ViEhe614sCsz154veK6Ud3hJvklIJ2h9mo35oeySwJpiiY
-         yrlBWMA772DaY+Eos3ymnqvi8g6jRiOnTQzle9hjNToABGZheVo65C2ARzwAaQvmxc3N
-         wJgw==
+        bh=+BwGQ1z2n3nwBMpJqB+1/4qt3hUDRurm9i7rvXzuzDY=;
+        b=NOWVZmn6CJbg9kMBUbXXoHFRM//Syh1TV0e862c8RObTtSh44sydqmG6eOpmDDwozn
+         BLJ/1PtQUF5UCGbuu3lqkBKyuHCjglieA9gJ5jGCTfdIHEPVCjGm+mnzjIWcAmJBfuh/
+         sPuWlo4t2onWLm8wb5QURbvFijxWR970N9EUpdTnLTnYB+ZnQadLzyhqDluSlJgq/YdI
+         pzsSPpnxgp5vR6PcDlEXJ7fswshX/JALI6TaIgS8Y3Cp0TTkPixQ2PgxNPsl1bRt1efB
+         cPa+FH5URhBD1RWjEnlQkhcHheYLXt43EpdpqSvLKTuc6xCvNsXRf4c9/tyGg7WWrUek
+         nreA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1696930792; x=1697535592;
+        d=1e100.net; s=20230601; t=1696930789; x=1697535589;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=NMZY4KLV8nhdJmooczmjn6lxJR6KYIDMlc0BxdkbQAs=;
-        b=i0fq6BVQZaw9uH8IK7F2yvxTGZTscuNNmDWeNDKDj/6ju4UONjbBCKUEjdz8NezFtK
-         8nWtCnGqvvn0kGS5q/ufgUBEdRew+OKI9mqVBBEkc8n58/T7gmq3VvfDKBoxLG1VY9w4
-         vETyDZrN0RBuvOzBu1yQLF+vnsmva3500s2J0ANZATd8Sg5fc9NdbWmoSyoU73UZN7xH
-         WT+cVwJITUMVRvHCxOUth8jN53Pw/T6E9bzZsymBvp/uQ7l728hmxg6n2J17rlD81p0b
-         94DDNWR0v3/eWCCiHKfp5J80CSBzXZpSVRRi48BWtFsa1TSw9YCGUMzeWeFA2U9z63yI
-         isrw==
-X-Gm-Message-State: AOJu0YxkKJkrMijppdd+KP8R8V0aWJmgVnvzyOyqNlp5oE85auV22Tkk
-	F3MkOm/V4T6NseN+1iLYL1LJ5UmwA1oSuFzQ8yE=
-X-Google-Smtp-Source: AGHT+IEMyYIQ/McTSDYWkVBgicpR+suQrrC2y4e/UZZ0xYU0CpJp3U+Udw8MLGISoiFC88m4RhDxkg==
-X-Received: by 2002:adf:f290:0:b0:321:8181:601e with SMTP id k16-20020adff290000000b003218181601emr15783131wro.8.1696930792214;
-        Tue, 10 Oct 2023 02:39:52 -0700 (PDT)
+        bh=+BwGQ1z2n3nwBMpJqB+1/4qt3hUDRurm9i7rvXzuzDY=;
+        b=KicH+VifudUs51pCT3tkRwm7e2ptneEIv6eB74oQk9ocUOQWRpVO3IXkAwK64jJMqI
+         DQ6OtvVbeFexbR1iuiT7x805ybdkNHQx4b3Q8mRaoGdkUZfr0PnRG2mK1xCEHQY8lq79
+         1CHaTN7PPiNhKWwQxvKI+mziQtk9zaWNXwcJ9h0xAWV0dpXHLFj4rRMzN5FMkjtSdVKb
+         43953dCVwO4uJsxhzOlRz1AYOlMa/D6gjKyRviO4HtXpF/IfLnm0pUiApjil9hFvT/hh
+         nQr2ZCssjhaYTjwfz7wRvnT2B/PtC9Jlod6z32w07bF+JskOaCjHrnEShAkMw+cDMmSm
+         qsMg==
+X-Gm-Message-State: AOJu0YxGUtyA1PnCndyCMOFR6N3HKJvb7pRTJB5XR3ZJBnvi72Ww2eUZ
+	mQjRiNLpH2vjWja5YGa1z/DlNY+JC91w8960LwI=
+X-Google-Smtp-Source: AGHT+IEBdrNjHytSxTPLfuuPeQuaPfB63dbtT2/1zeufcZLrfg1Rkw1zB6rIEvup3Y4wBiKUtt7r0g==
+X-Received: by 2002:a5d:4cc3:0:b0:31f:f8c1:f43c with SMTP id c3-20020a5d4cc3000000b0031ff8c1f43cmr14877333wrt.41.1696930789496;
+        Tue, 10 Oct 2023 02:39:49 -0700 (PDT)
 Received: from p-nan-fatho.home (2a01cb0584747e00ad7461ecf2f04d44.ipv6.abo.wanadoo.fr. [2a01:cb05:8474:7e00:ad74:61ec:f2f0:4d44])
-        by smtp.gmail.com with ESMTPSA id p4-20020a5d68c4000000b003232f167df5sm12150639wrw.108.2023.10.10.02.39.51
+        by smtp.gmail.com with ESMTPSA id p4-20020a5d68c4000000b003232f167df5sm12150639wrw.108.2023.10.10.02.39.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 10 Oct 2023 02:39:52 -0700 (PDT)
+        Tue, 10 Oct 2023 02:39:49 -0700 (PDT)
 From: Fabien Thomas <fabien.thomas@smile.fr>
 To: openembedded-devel@lists.openembedded.org
 Cc: Fabien Thomas <fabien.thomas@smile.fr>,
 	Yoann Congal <yoann.congal@smile.fr>
-Subject: [meta-oe][PATCH 5/7] Add static-passwd and static-group files
-Date: Tue, 10 Oct 2023 11:39:38 +0200
-Message-Id: <20231010093940.75037-5-fabien.thomas@smile.fr>
+Subject: [meta-multimedia][PATCH 3/7] Add static-passwd and static-group files
+Date: Tue, 10 Oct 2023 11:39:36 +0200
+Message-Id: <20231010093940.75037-3-fabien.thomas@smile.fr>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231010093940.75037-1-fabien.thomas@smile.fr>
 References: <20231010093940.75037-1-fabien.thomas@smile.fr>
@@ -61,8 +61,8 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 10 Oct 2023 09:39:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105401
+ <openembedded-devel@lists.openembedded.org>; Tue, 10 Oct 2023 09:39:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105399
 
 In order to pass reproducible tests, recipes that use the
 useradd class must have static ids configured.
@@ -70,44 +70,29 @@ useradd class must have static ids configured.
 Signed-off-by: Fabien Thomas <fabien.thomas@smile.fr>
 Reviewed-by: Yoann Congal <yoann.congal@smile.fr>
 ---
- meta-oe/files/static-group-meta-oe  |  8 ++++++++
- meta-oe/files/static-passwd-meta-oe | 11 +++++++++++
- 2 files changed, 19 insertions(+)
- create mode 100644 meta-oe/files/static-group-meta-oe
- create mode 100644 meta-oe/files/static-passwd-meta-oe
+ meta-multimedia/files/static-group-meta-multimedia  | 2 ++
+ meta-multimedia/files/static-passwd-meta-multimedia | 2 ++
+ 2 files changed, 4 insertions(+)
+ create mode 100644 meta-multimedia/files/static-group-meta-multimedia
+ create mode 100644 meta-multimedia/files/static-passwd-meta-multimedia
 
-diff --git a/meta-oe/files/static-group-meta-oe b/meta-oe/files/static-group-meta-oe
+diff --git a/meta-multimedia/files/static-group-meta-multimedia b/meta-multimedia/files/static-group-meta-multimedia
 new file mode 100644
-index 000000000..79c9bb6e1
+index 000000000..c76233171
 --- /dev/null
-+++ b/meta-oe/files/static-group-meta-oe
-@@ -0,0 +1,8 @@
-+redis:x:600:
-+xrdp:x:601:
-+sanlock:x:602:
-+mysql:x:603:
-+postgres:x:604:
-+zabbix:x:605:
-+mail:x:606:
-+nogroup:x:607:
++++ b/meta-multimedia/files/static-group-meta-multimedia
+@@ -0,0 +1,2 @@
++pipewire:x:660:
++mpd:x:665:
 \ No newline at end of file
-diff --git a/meta-oe/files/static-passwd-meta-oe b/meta-oe/files/static-passwd-meta-oe
+diff --git a/meta-multimedia/files/static-passwd-meta-multimedia b/meta-multimedia/files/static-passwd-meta-multimedia
 new file mode 100644
-index 000000000..4c312b7b1
+index 000000000..94e1310ea
 --- /dev/null
-+++ b/meta-oe/files/static-passwd-meta-oe
-@@ -0,0 +1,11 @@
-+redis:x:600:600::/:/bin/nologin
-+xrdp:x:601:601::/:/bin/nologin
-+sanlock:x:602:602::/:/bin/nologin
-+mysql:x:603:603::/:/bin/nologin
-+postgres:x:604:604::/:/bin/nologin
-+zabbix:x:605:605::/:/bin/nologin
-+cyrus:x:606:nogroup::/:/bin/nologin
-+pcp:x:620:nogroup::/:/bin/nologin
-+pcpqa:x:621:nogroup::/:/bin/nologin
-+influxdb:x:622:nogroup::/:/bin/nologin
-+mongodb:x:623:nogroup::/:/bin/nologin
++++ b/meta-multimedia/files/static-passwd-meta-multimedia
+@@ -0,0 +1,2 @@
++pipewire:x:660:660::/:/bin/nologin
++mpd:x:665:665::/:/bin/nologin
 \ No newline at end of file
 -- 
 2.34.1
