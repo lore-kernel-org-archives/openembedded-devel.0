@@ -1,88 +1,86 @@
-Return-Path: <fabien.thomas@smile.fr>
+Return-Path: <costamagna.gianfranco@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 041F9CD691B
-	for <webhook@archiver.kernel.org>; Tue, 10 Oct 2023 09:40:07 +0000 (UTC)
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
- by mx.groups.io with SMTP id smtpd.web10.87410.1696930796698045469
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 56C95E95A9F
+	for <webhook@archiver.kernel.org>; Tue, 10 Oct 2023 10:18:57 +0000 (UTC)
+Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
+ by mx.groups.io with SMTP id smtpd.web11.87625.1696933135219708660
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Oct 2023 02:39:57 -0700
+ Tue, 10 Oct 2023 03:18:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=To8MTZCD;
- spf=pass (domain: smile.fr, ip: 209.85.221.41, mailfrom: fabien.thomas@smile.fr)
-Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-32d3755214dso246954f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Oct 2023 02:39:56 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=as4JsesI;
+ spf=pass (domain: gmail.com, ip: 209.85.208.41, mailfrom: costamagna.gianfranco@gmail.com)
+Received: by mail-ed1-f41.google.com with SMTP id 4fb4d7f45d1cf-53d82bea507so632104a12.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 10 Oct 2023 03:18:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1696930795; x=1697535595; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=O125sec/IcYFsb66agGOG04KDoY7xwOim3wBU8plccM=;
-        b=To8MTZCDg1lMnDcJUJd3lsl3EPtwji7bWbF/ix6UphD1Znlfyj2u9KbTHj+ssyQAmV
-         odLsUf9r1jlrQlq9EzOU4ivXFCnThnKUxd9vcZtXz5Pse4sv6Fd+jFT0hBBTP2csoCsh
-         GaVmt0c/eXTOqIOmEETbki8uxYrcP3yDgJ9PpbPvFUb1QkCQ0UQ2Wv4kG0ok13mlRSG5
-         01ay4dNmZb+7DFTbcJvQN2OHp/tD8mOWSfoI4HsJizfjS4PlSWai2OOc0z0uW1rzgEVE
-         OQEdXdsOftkhq6AQjIh397He9cCVrVWqK91SiR7r6u/6KT0YwTejHLRkxXw9Iq9hGseX
-         DViw==
+        d=gmail.com; s=20230601; t=1696933133; x=1697537933; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=zVgzk+ness+bNKJN3E7HSWrZXT62Abl3Co+KAbR5N1A=;
+        b=as4JsesIlP3EyeRoNQrGgrQahMhkgSjtWOTLGyqco11oGiOQm8Hx3ENPptee+bRq+n
+         Ssy/H9bZz/j7zh432ntB6RhMHeBTheH+D3xQHMjudM0NFknQftqHYnWf4RmJICNUkpTp
+         umxRg3zjHhn0ne211K4Np8zFDuIN7uFwsbkV6M7VoX39GorKFp0yDqdMIbNnD/ovDEuc
+         ZOqbsB6yoYmid7gIComTDKg0Xnw0XnYSVM0RRm6cgZRe8XLErOgAj9wwcvQwZ76mWH2l
+         41LuiSky8kHjiYjHCUAzAmiO9rHGcuOvRWTsgnAiRfrzyF3AUB1o0tOuBBhkLzu6P655
+         Q5zQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1696930795; x=1697535595;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=O125sec/IcYFsb66agGOG04KDoY7xwOim3wBU8plccM=;
-        b=uSC1B3PzISE07O0i9rQzvwr4tsTBm2AyNYuWjq2/bUp3mT6eONit2Ju10RUqIEPYkK
-         hpy2sAjv9Hc97ckJ8Kr3MSF9JtegpAZYhiXCzjKtAGpqYF3V93SCmd3RKKlvT5J538Ur
-         0VDG2eVoJ7Dg+9Eu7Lw+l6iqcQTTnSKAVhpwtjR24UzLAloJmR0vVg4opnCAJlPbQ9/I
-         lF6G0HDQcfhebp8aHcNCznjziQdHoZ2GORa1Pk+BLGfnGea3Ppf81jTPQLMjrmXxKI0K
-         6XRKx74rG78pqXKfGUIXb1P6qPBNJppySvk+FrJovjxqURh1KlqNDOCXn2EN5xJzysXj
-         ulbg==
-X-Gm-Message-State: AOJu0YxUJa4tPPUI1Scu4Bt5HZPvNO8xV9pDDej4CmqwHrnwtBEE6XUn
-	I0vT1NwXgBM1ptuA8TUGPsVvibmBadKsiMf/MmM=
-X-Google-Smtp-Source: AGHT+IHY7+UdM2ZkloqddeaTcjulEOW+sSg5ZtopCE4nqd8l49TVYLqe9LHdZWX0Us2jueW1T4LeZQ==
-X-Received: by 2002:a05:6000:5c9:b0:329:69b4:c0f8 with SMTP id bh9-20020a05600005c900b0032969b4c0f8mr12349088wrb.26.1696930795040;
-        Tue, 10 Oct 2023 02:39:55 -0700 (PDT)
-Received: from p-nan-fatho.home (2a01cb0584747e00ad7461ecf2f04d44.ipv6.abo.wanadoo.fr. [2a01:cb05:8474:7e00:ad74:61ec:f2f0:4d44])
-        by smtp.gmail.com with ESMTPSA id p4-20020a5d68c4000000b003232f167df5sm12150639wrw.108.2023.10.10.02.39.54
+        d=1e100.net; s=20230601; t=1696933133; x=1697537933;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=zVgzk+ness+bNKJN3E7HSWrZXT62Abl3Co+KAbR5N1A=;
+        b=BhhxICldUGR2vBuo2jKKVdnSAfkIH7eWQ/XP1Mhg4q3gFBTF0bAmqKJn190wJP8vlL
+         D2rcmCZa75V8emI8NWBa3cyAp0GQw8syex2/5WNvVF8vaZrMoYTPSy/Bj90r/rF7l0on
+         CCTl1gpms7y27JnKRNjJ9KWZOAEbR2r7ZZ4gz+HRipFWm6TGSt4Nwrqey4mzF1sB3RM0
+         6Q7Wj93kScytY9SR5Y2cXuY0WGboCKuGSkNtOtjz7jYfbOiVB4QkjwIghm/iqCepml9x
+         FO4pO3wTXBFKOJ5kjmAdp1CdW/reRe9OcYd+B/HpAHQRHSTUsfUNi8TmeOuJkpcxMCOP
+         9zWQ==
+X-Gm-Message-State: AOJu0YzoErZfGeqPOdC89EAy8Anwk2Gv+pEF58+iUuwabTyE5x8K7RWs
+	h+51o4R+R//6G+Vv8n4QDkxTGRIEfeEkEg==
+X-Google-Smtp-Source: AGHT+IFzy5nBfc8sGPV++ylAapXg8wiiqHv21h1CGvhMhVuRA9hVqr0CIBvhq5QRjtJhY43FvgFJpg==
+X-Received: by 2002:a50:cc0c:0:b0:53d:a90e:be90 with SMTP id m12-20020a50cc0c000000b0053da90ebe90mr238135edi.15.1696933132882;
+        Tue, 10 Oct 2023 03:18:52 -0700 (PDT)
+Received: from Unimatrix08-Jammy.Abinsula ([151.58.174.15])
+        by smtp.gmail.com with ESMTPSA id ba10-20020a0564021aca00b005346bebc2a5sm7395649edb.86.2023.10.10.03.18.50
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 10 Oct 2023 02:39:54 -0700 (PDT)
-From: Fabien Thomas <fabien.thomas@smile.fr>
+        Tue, 10 Oct 2023 03:18:51 -0700 (PDT)
+From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
+X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
 To: openembedded-devel@lists.openembedded.org
-Cc: Fabien Thomas <fabien.thomas@smile.fr>,
-	Yoann Congal <yoann.congal@smile.fr>
-Subject: [meta-webserver][PATCH 7/7] Add static-passwd and static-group files
-Date: Tue, 10 Oct 2023 11:39:40 +0200
-Message-Id: <20231010093940.75037-7-fabien.thomas@smile.fr>
+Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
+	Gianfranco Costamagna <locutusofborg@debian.org>
+Subject: [meta-oe][PATCH] cpprestsdk: fix typo in comment, tag is actually 2.0.18
+Date: Tue, 10 Oct 2023 12:18:48 +0200
+Message-Id: <20231010101848.2377814-1-costamagnagianfranco@yahoo.it>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231010093940.75037-1-fabien.thomas@smile.fr>
-References: <20231010093940.75037-1-fabien.thomas@smile.fr>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 10 Oct 2023 09:40:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105403
+ <openembedded-devel@lists.openembedded.org>; Tue, 10 Oct 2023 10:18:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105404
 
-In order to pass reproducible tests, recipes that use the
-useradd class must have static ids configured.
-
-Signed-off-by: Fabien Thomas <fabien.thomas@smile.fr>
-Reviewed-by: Yoann Congal <yoann.congal@smile.fr>
+Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
 ---
- meta-webserver/files/static-passwd-meta-webserver | 2 ++
- 1 file changed, 2 insertions(+)
- create mode 100644 meta-webserver/files/static-passwd-meta-webserver
+ meta-oe/recipes-support/cpprest/cpprest_2.10.18.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-webserver/files/static-passwd-meta-webserver b/meta-webserver/files/static-passwd-meta-webserver
-new file mode 100644
-index 000000000..028cf8d94
---- /dev/null
-+++ b/meta-webserver/files/static-passwd-meta-webserver
-@@ -0,0 +1,2 @@
-+www:x:690:nogroup::/:/bin/nologin
-+netdata:x:691:nogroup::/:/bin/nologin
-\ No newline at end of file
+diff --git a/meta-oe/recipes-support/cpprest/cpprest_2.10.18.bb b/meta-oe/recipes-support/cpprest/cpprest_2.10.18.bb
+index 1633412cf..36545503e 100644
+--- a/meta-oe/recipes-support/cpprest/cpprest_2.10.18.bb
++++ b/meta-oe/recipes-support/cpprest/cpprest_2.10.18.bb
+@@ -11,7 +11,7 @@ SRC_URI = "git://github.com/Microsoft/cpprestsdk.git;protocol=https;branch=maste
+            file://disable-float-tests.patch \
+            file://disable-outside-tests.patch "
+ 
+-# tag 2.10.17
++# tag 2.10.18
+ SRCREV= "122d09549201da5383321d870bed45ecb9e168c5"
+ 
+ S = "${WORKDIR}/git"
 -- 
 2.34.1
 
