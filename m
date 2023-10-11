@@ -1,148 +1,90 @@
-Return-Path: <joe.slater@windriver.com>
+Return-Path: <akash.hadke27@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9DAECCD98CC
-	for <webhook@archiver.kernel.org>; Tue, 10 Oct 2023 23:11:16 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.4180.1696979469861271581
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 195D4CD6E50
+	for <webhook@archiver.kernel.org>; Wed, 11 Oct 2023 09:04:30 +0000 (UTC)
+Received: from mail-il1-f174.google.com (mail-il1-f174.google.com [209.85.166.174])
+ by mx.groups.io with SMTP id smtpd.web10.12355.1697015061729948527
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 10 Oct 2023 16:11:09 -0700
+ Wed, 11 Oct 2023 02:04:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=DD+dEKQ8;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=86471dd6ef=joe.slater@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 39AHRhlr012670
-	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Oct 2023 16:11:09 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=bXfUR
-	pxlmb6YKOXZ+WI653xFYCScr3oG43succMc0OQ=; b=DD+dEKQ8lLdQgvx1yOlrb
-	Di2/TrDvPt07Bd44Y9RY35E17a3RcY4sByYBSxiZqrR0DjmOKnvQ8igKguVOJfsQ
-	Ulg3Ee3eoyV0FyDx8Y2GGrU6verXtbq4w170mRVCsF2I4rZMTF9gGYX+xQlA59gu
-	uw0RZL5pN10pgVTzM246VSew7fUErRQGV6INeDLY+P/wzZCsFqk8kMlDgu+kTO8A
-	qtmz19cO5xzpa0B3VK6du+xMJR6wsmNWoH/IzEhWwDCrMjYSz1laG23v9OcYieP7
-	O1TOW8mUftOejjEe0MjKUo6m1nU6DNhUimh8TSOAErZsWsFHXPUWfanSzYaXBGPK
-	A==
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3tk6ufjuhj-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 10 Oct 2023 16:11:09 -0700 (PDT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.32; Tue, 10 Oct 2023 16:11:07 -0700
-Received: from ala-jslater-lx2.corp.ad.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.32 via Frontend Transport; Tue, 10 Oct 2023 16:11:07 -0700
-From: <joe.slater@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <joe.slater@windriver.com>, <randy.macleod@windriver.com>
-Subject: [mickledore][meta-webserver][PATCH 1/1] nginx: add configure option
-Date: Tue, 10 Oct 2023 16:11:08 -0700
-Message-ID: <20231010231108.3465803-1-joe.slater@windriver.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=iIfqG3NJ;
+ spf=pass (domain: gmail.com, ip: 209.85.166.174, mailfrom: akash.hadke27@gmail.com)
+Received: by mail-il1-f174.google.com with SMTP id e9e14a558f8ab-35291dbf7efso6740265ab.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Oct 2023 02:04:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1697015060; x=1697619860; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=egLc9M99NfkyNRYN6uMKu6qg+mvPNsQzcxoowmJojWQ=;
+        b=iIfqG3NJSQLTP1gonGmG6mDg5FibraW7R1RrCyE0wc6yWsfwABq7mYq5VvhUPW2M2l
+         yEfdQ4vRTj72Wl1fOwrXg1/OuinrHsYgOyhD7mXtqJWozIdPqmzKJZ9z3SEM2q0qCSoE
+         n8LbZJRIcAYdP6A0YMfeIFkOUNX2YTSaQMD4/08lUFM1t6Cs/OOVtU3xM7dUUjwgv/2+
+         71rO1DoJWDnw87Qvslih2uDfe3+JMME6DGYgHXCUclyqTQFxdhKpsHm/Nv9+P9IZPraa
+         jEP8VBIZkf1BS2iqlD7RM/ezJFDOOw4GVGCYkXrVjHFwh1LtTZh3cVH+P+JEqaPZTQ/v
+         iHRA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1697015060; x=1697619860;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=egLc9M99NfkyNRYN6uMKu6qg+mvPNsQzcxoowmJojWQ=;
+        b=wkQdpBaspPNk4JtFIgXrA90DqHlU5FG2GCO1IvbS6HL4mYz9kFNKvpygVSx5ZlVKSt
+         8RrRGjlsK+LRP9tGZ5SPtXwI5sxMpfKIAY8lyHeFuXHrpT3MkY9edTg2lgWTcj14/Fn3
+         K4es3zHEUvk7AlL1CIch8hc5gQJbr8ZljxR3vGAJkFhvKJle/gi0l2NClQLcXQ5b85vP
+         A5qeKIOoo+CcGyZ5FPV/86AXNjGWsChVqfaNdpENjt+iWwEbFiu49H35ry3uWzB/urfd
+         5W7AIKxakS8hgu4IBsV8WUXujOk+oIStIdOEoDKZ7CL+4CCczx3EAI2Zb+t4fyS2H4sq
+         XTzQ==
+X-Gm-Message-State: AOJu0YyiZEodQTc/VyhOE+XQmPXmr6mAn/ViJTEICCvBeXBAAS3XHBdA
+	u2OuhqzZkENzvmpvaO3SlJc/OMOIIaD+eZDv
+X-Google-Smtp-Source: AGHT+IH6FIJo3OaB/1NSRbnZmAn3NKN+gidzavvL3I3p+1CdKIfkiP3Lsjd9nHpfOPxHXq+vLFM2PQ==
+X-Received: by 2002:a05:6602:2e03:b0:792:6068:dcc8 with SMTP id o3-20020a0566022e0300b007926068dcc8mr26925389iow.2.1697015060671;
+        Wed, 11 Oct 2023 02:04:20 -0700 (PDT)
+Received: from L-18010.kpit.com ([49.15.232.214])
+        by smtp.gmail.com with ESMTPSA id l9-20020a62be09000000b00694f14a784bsm9528685pff.52.2023.10.11.02.04.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 11 Oct 2023 02:04:20 -0700 (PDT)
+From: Akash Hadke <akash.hadke27@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: ranjitsinh.rathod@kpit.com,
+	akash hadke <akash.hadke@kpit.com>
+Subject: [oe][meta-oe][master][PATCH] libeigen: Set LICENSE for libeigen-dev
+Date: Wed, 11 Oct 2023 14:33:51 +0530
+Message-Id: <20231011090351.195260-1-akash.hadke27@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: ixsrCD5f_hLL4MPliFPiN_ehHDCHPHQl
-X-Proofpoint-ORIG-GUID: ixsrCD5f_hLL4MPliFPiN_ehHDCHPHQl
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.267,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-10-10_19,2023-10-10_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxlogscore=999 clxscore=1015
- lowpriorityscore=0 suspectscore=0 malwarescore=0 adultscore=0 spamscore=0
- priorityscore=1501 impostorscore=0 bulkscore=0 mlxscore=0 phishscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2309180000
- definitions=main-2310100178
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 10 Oct 2023 23:11:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105420
+ <openembedded-devel@lists.openembedded.org>; Wed, 11 Oct 2023 09:04:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105421
 
-From: Joe Slater <joe.slater@windriver.com>
+Set 'LICENSE' for 'libeigen-dev' package as
+'MPL-2.0 & Apache-2.0 & BSD-3-Clause & LGPL-2.1-only'
 
-Support --with-http_xslt_module configure option via a PACKAGECONFIG
-option.  The option is not added to the defaults.
+'libeigen-dev' package does not contain any 'GPL-3.0-only'
+and 'MINPACK' license files hence update the license.
 
-Cherry-pick from master.
-
-Signed-off-by: Joe Slater <joe.slater@windriver.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit e0ac8eec48ddddc93751cfcdef2557998bfe91c8)
+Signed-off-by: akash hadke <akash.hadke@kpit.com>
+Signed-off-by: Akash Hadke <akash.hadke27@gmail.com>
 ---
- .../files/0001-configure-libxslt-conf.patch   | 39 +++++++++++++++++++
- meta-webserver/recipes-httpd/nginx/nginx.inc  |  3 ++
- 2 files changed, 42 insertions(+)
- create mode 100644 meta-webserver/recipes-httpd/nginx/files/0001-configure-libxslt-conf.patch
+ meta-oe/recipes-support/libeigen/libeigen_3.4.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-webserver/recipes-httpd/nginx/files/0001-configure-libxslt-conf.patch b/meta-webserver/recipes-httpd/nginx/files/0001-configure-libxslt-conf.patch
-new file mode 100644
-index 0000000000..7ba2a1fb85
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/files/0001-configure-libxslt-conf.patch
-@@ -0,0 +1,39 @@
-+From 0c3c669464a514cf8d0cac08282ecb2b486f440f Mon Sep 17 00:00:00 2001
-+From: Joe Slater <joe.slater@windriver.com>
-+Date: Tue, 3 Oct 2023 19:21:17 +0000
-+Subject: [PATCH] configure: libxslt conf
-+
-+Modify to find libxslt related include files under sysroot.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Joe Slater <joe.slater@windriver.com>
-+---
-+ auto/lib/libxslt/conf | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/auto/lib/libxslt/conf b/auto/lib/libxslt/conf
-+index 3063ac7..eb77886 100644
-+--- a/auto/lib/libxslt/conf
-++++ b/auto/lib/libxslt/conf
-+@@ -12,7 +12,7 @@
-+                       #include <libxslt/xsltInternals.h>
-+                       #include <libxslt/transform.h>
-+                       #include <libxslt/xsltutils.h>"
-+-    ngx_feature_path="/usr/include/libxml2"
-++    ngx_feature_path="=/usr/include/libxml2"
-+     ngx_feature_libs="-lxml2 -lxslt"
-+     ngx_feature_test="xmlParserCtxtPtr    ctxt = NULL;
-+                       xsltStylesheetPtr   sheet = NULL;
-+@@ -100,7 +100,7 @@ fi
-+     ngx_feature_name=NGX_HAVE_EXSLT
-+     ngx_feature_run=no
-+     ngx_feature_incs="#include <libexslt/exslt.h>"
-+-    ngx_feature_path="/usr/include/libxml2"
-++    ngx_feature_path="=/usr/include/libxml2"
-+     ngx_feature_libs="-lexslt"
-+     ngx_feature_test="exsltRegisterAll();"
-+     . auto/feature
-+-- 
-+2.35.5
-+
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
-index 6992a84c79..8078b7621a 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx.inc
-+++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
-@@ -22,6 +22,7 @@ SRC_URI = " \
-     file://nginx-volatile.conf \
-     file://nginx.service \
-     file://nginx-fix-pidfile.patch \
-+    file://0001-configure-libxslt-conf.patch \
- "
- 
- inherit siteinfo update-rc.d useradd systemd
-@@ -46,6 +47,8 @@ PACKAGECONFIG[http-auth-request] = "--with-http_auth_request_module,,"
- PACKAGECONFIG[ipv6] = "--with-ipv6,,"
- PACKAGECONFIG[webdav] = "--with-http_dav_module,,"
- 
-+PACKAGECONFIG[xslt] = "--with-http_xslt_module,,libxslt"
-+
- do_configure () {
-     if [ "${SITEINFO_BITS}" = "64" ]; then
-         PTRSIZE=8
+diff --git a/meta-oe/recipes-support/libeigen/libeigen_3.4.0.bb b/meta-oe/recipes-support/libeigen/libeigen_3.4.0.bb
+index 28305c985..ffb4429a4 100644
+--- a/meta-oe/recipes-support/libeigen/libeigen_3.4.0.bb
++++ b/meta-oe/recipes-support/libeigen/libeigen_3.4.0.bb
+@@ -1,6 +1,7 @@
+ DESCRIPTION = "Eigen is a C++ template library for linear algebra: matrices, vectors, numerical solvers, and related algorithms."
+ HOMEPAGE = "http://eigen.tuxfamily.org/"
+ LICENSE = "MPL-2.0 & Apache-2.0 & BSD-3-Clause & GPL-3.0-only & LGPL-2.1-only & MINPACK"
++LICENSE:${PN}-dev = "MPL-2.0 & Apache-2.0 & BSD-3-Clause & LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://COPYING.MPL2;md5=815ca599c9df247a0c7f619bab123dad \
+                     file://COPYING.BSD;md5=2dd0510ee95e59ca28834b875bc96596 \
+                     file://COPYING.GPL;md5=d32239bcb673463ab874e80d47fae504 \
 -- 
 2.25.1
 
