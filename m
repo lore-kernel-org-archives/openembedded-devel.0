@@ -1,130 +1,656 @@
-Return-Path: <danismostlikely@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 91C89CDB47C
-	for <webhook@archiver.kernel.org>; Wed, 11 Oct 2023 19:07:13 +0000 (UTC)
-Received: from mail-io1-f53.google.com (mail-io1-f53.google.com [209.85.166.53])
- by mx.groups.io with SMTP id smtpd.web11.25347.1697051225614835015
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 34128CDB481
+	for <webhook@archiver.kernel.org>; Wed, 11 Oct 2023 19:25:16 +0000 (UTC)
+Received: from mail-yw1-f180.google.com (mail-yw1-f180.google.com [209.85.128.180])
+ by mx.groups.io with SMTP id smtpd.web11.25764.1697052304807387652
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Oct 2023 12:07:05 -0700
+ Wed, 11 Oct 2023 12:25:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=myyUqArS;
- spf=pass (domain: gmail.com, ip: 209.85.166.53, mailfrom: danismostlikely@gmail.com)
-Received: by mail-io1-f53.google.com with SMTP id ca18e2360f4ac-79fd60f40ebso3449039f.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Oct 2023 12:07:05 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=HIFOZL8B;
+ spf=pass (domain: gmail.com, ip: 209.85.128.180, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f180.google.com with SMTP id 00721157ae682-5a7c08b7744so2426437b3.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Oct 2023 12:25:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1697051224; x=1697656024; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=0UGzUCyvaw5zrsNHWrN7CsLJurwNsIQGKm1L13OltSc=;
-        b=myyUqArSW8rGFv6HxFLFngjJMR0eU8doCC0f5KOZnJ2d5goPQb3dzbQmynGeHTZuae
-         y3bmC9ux0/gtxehreCzBSVACIpPmnw2sPFkE1Bte+UOulk4qWRejr/ass0nDFor3qiyo
-         lokYQwrV4FGsyk51x42MqY/jKfclvqqRokULya1qiWCIuHAvScZ74rL1ny7lWyfTqeiO
-         66hRbh4SDVXiTVx4FH8sinPkZNXF0AuKONd+fusL6zLLgH0kLfCry2naIZ2x13bxqugh
-         WewK5bDAxxN1q/RwJTAIIQi1HRkis5T52EmTq7s6mjb5p1jREwmrdrw2x68ci7SKnTKO
-         dGBw==
+        d=gmail.com; s=20230601; t=1697052304; x=1697657104; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=APG8h32U9n+GDDWR1D0Aw7v7hqcbLKs1tnji4x7K2nM=;
+        b=HIFOZL8BLxINq71LR8gmDMUZ2O8QMTb/86M6RWllqLjgIbQe9nPkKDZye8NnNx5ckJ
+         BBpbGi7Xnq0MSEAwd8w8+YPAWwYltCosnjj53Tx07lXeYyHSXH2oE9WjucFcS9i5bn5E
+         DSSHjaZwStXzGmlJiA0nUlM8I5b4FWXd+cHKjJKgpeQMaTvsPQsgkMHBS81ua6Fj0b0x
+         HlOSOxTM0ty0MAJAdP9D9WdRKSAsczOq6iBscBK60m2JZnoCL8o4xrY+G0tYVjOf+6Vi
+         VmrZTazpp7m4eQZZnjFkiGfLWDM9WmSH4v5FIkP10kmacG4j0xGpCvRM0I1GgmOFH0yg
+         MA/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1697051224; x=1697656024;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=0UGzUCyvaw5zrsNHWrN7CsLJurwNsIQGKm1L13OltSc=;
-        b=dZaC3daJ7zMpJMXti+zJzXTJ7fmlu2jvehnkg/wbpb2cf0hpGEZfy1qmav9p7hcXxh
-         5XKhEzEAhSS1CkBIDTkrWuZ/GOk6+g6u+fXfFEeiXAUVF0izWG8vqLHZvjR5dQB54+51
-         xa2TOMH6qpS4CqIWBtWwH4HZ4Zlx5kZj0ZPJWQ39dsn2/h6o+Ac0tXN03bkBGMoT9vnY
-         lMxeijZlGcm4+9LM8bwW5mailMH8YIswZb5fjXRQoELx+tz42xtsdN0WYF41SrpNQPZ4
-         cTu7BkOaSUXxHgAgtb6jOSiEazPjaBDPrj6YNQCLys5c8NqicClGFGN6Z1uAv1MJqzDk
-         1ohA==
-X-Gm-Message-State: AOJu0Yy/SjdnT5ECfUY7cpNLCzGqVLjZr2Xt9ainbsd9ARv5jBzDEU7x
-	gqgRKE1YtjB3gWCnbIFuAcSCcdVt4XwfOw==
-X-Google-Smtp-Source: AGHT+IFAUtyURt6+j+GtbWRPso0AshqWT2DjbKKCwQU4b4VItkNfEqC0S6vACe/mOxyzEFEP8BzrCw==
-X-Received: by 2002:a05:6602:4a07:b0:7a2:50ef:66e1 with SMTP id eh7-20020a0566024a0700b007a250ef66e1mr13885981iob.8.1697051224538;
-        Wed, 11 Oct 2023 12:07:04 -0700 (PDT)
-Received: from nebuchadnezzar.home.dankm.pro ([204.83.204.143])
-        by smtp.gmail.com with ESMTPSA id 8-20020a5d9c48000000b007836c7e8dccsm3658465iof.17.2023.10.11.12.07.03
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 11 Oct 2023 12:07:04 -0700 (PDT)
-From: Daniel McGregor <danismostlikely@gmail.com>
-X-Google-Original-From: Daniel McGregor <daniel.mcgregor@vecima.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Daniel McGregor <daniel.mcgregor@vecima.com>
-Subject: [meta-python][PATCH] python3-pylint: allow native build
-Date: Wed, 11 Oct 2023 13:06:50 -0600
-Message-ID: <20231011190650.622937-1-daniel.mcgregor@vecima.com>
-X-Mailer: git-send-email 2.41.0
+        d=1e100.net; s=20230601; t=1697052304; x=1697657104;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=APG8h32U9n+GDDWR1D0Aw7v7hqcbLKs1tnji4x7K2nM=;
+        b=D2+hLC5DOxkM+fGtM+Evo3qXATyPZKSj+fPcmYlkceLgTj+qRChSoGQeP93KBPNVhT
+         M35WHorKw4cmFTFAs0xwIG2OFamSaYnioFbfLILeDqaiL963vRUScWW+3k2WpFItMN+0
+         jD6odjH/s8LIr2mdBxPe0fctcK/bI9DAt+AINoK+VU15+gXBpGbCjJemcQFzPvFNA3bG
+         5SuwVWlbtZyhjpQe8ec5dyXesMzDzk5XH7gCKpQPOMkQj0jJ3Pyqjnj0SyQMVOMuI3+R
+         Dkez3RHZPPRF6cYnG/0vY5Q+jaT33/fq3KelfLqvmsYJBBqr0zzbjTt0PHokwCHdKool
+         secQ==
+X-Gm-Message-State: AOJu0Yx9piEx9eQYkGvKjxM8/2As2QI2qloMxt1wW5Ch5kDuGwSwHEY2
+	CyF0Q/d8L5z3tFpVN6C/UAg6DCiXDNA=
+X-Google-Smtp-Source: AGHT+IHZBiyZaOobN96E51+5SqevgEskgKhMkjUpywK83YDlhfBONFAE5CTR6dYhQj7K6bwEJUTm2A==
+X-Received: by 2002:a0d:e88d:0:b0:59b:d7c0:ea0c with SMTP id r135-20020a0de88d000000b0059bd7c0ea0cmr23859201ywe.11.1697052303738;
+        Wed, 11 Oct 2023 12:25:03 -0700 (PDT)
+Received: from ?IPV6:2600:1700:9190:ba10:2353:bef7:9049:722c? ([2600:1700:9190:ba10:2353:bef7:9049:722c])
+        by smtp.gmail.com with ESMTPSA id i184-20020a816dc1000000b0057d24f8278bsm5294633ywc.104.2023.10.11.12.25.03
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 11 Oct 2023 12:25:03 -0700 (PDT)
+Message-ID: <cd0e1b6d-cd62-427e-b787-b607acb9b6d3@gmail.com>
+Date: Wed, 11 Oct 2023 15:25:02 -0400
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: nanbield merge request: Oct 11th ( master sync)
+Content-Language: en-US
+To: Khem Raj <raj.khem@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+References: <f03dae38-7498-41d4-8fa2-164f73aec839@gmail.com>
+ <CAMKF1so9YZR=akTv2ec08CTqk_2Nz2+C8k0q4xxJhq+X0Tminw@mail.gmail.com>
+From: akuster808 <akuster808@gmail.com>
+Autocrypt: addr=akuster808@gmail.com; keydata=
+ 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
+ ApZ86eOP
+In-Reply-To: <CAMKF1so9YZR=akTv2ec08CTqk_2Nz2+C8k0q4xxJhq+X0Tminw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 11 Oct 2023 19:07:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105436
+ <openembedded-devel@lists.openembedded.org>; Wed, 11 Oct 2023 19:25:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105437
 
-We use pylint for some native recipes in our build. Allow pylint
-to be a native recipe, and likewise allow its runtime dependencies
-to be native recipes.
 
-Signed-off-by: Daniel McGregor <daniel.mcgregor@vecima.com>
----
- meta-python/recipes-devtools/python/python3-astroid_3.0.0.bb  | 2 ++
- meta-python/recipes-devtools/python/python3-dill_0.3.7.bb     | 2 ++
- meta-python/recipes-devtools/python/python3-mccabe_0.7.0.bb   | 2 ++
- meta-python/recipes-devtools/python/python3-pylint_3.0.0.bb   | 2 ++
- meta-python/recipes-devtools/python/python3-tomlkit_0.12.1.bb | 2 ++
- 5 files changed, 10 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-astroid_3.0.0.bb b/meta-python/recipes-devtools/python/python3-astroid_3.0.0.bb
-index 2f80187b2b2..cdf6fc74edf 100644
---- a/meta-python/recipes-devtools/python/python3-astroid_3.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-astroid_3.0.0.bb
-@@ -34,3 +34,5 @@ RDEPENDS:${PN}-tests:class-target += "\
-     ${PYTHON_PN}-unittest \
-     ${PYTHON_PN}-xml \
- "
-+
-+BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-dill_0.3.7.bb b/meta-python/recipes-devtools/python/python3-dill_0.3.7.bb
-index b6b788110d9..673964f3b70 100644
---- a/meta-python/recipes-devtools/python/python3-dill_0.3.7.bb
-+++ b/meta-python/recipes-devtools/python/python3-dill_0.3.7.bb
-@@ -15,3 +15,5 @@ RDEPENDS:${PN} += "\
-     ${PYTHON_PN}-profile \
-     ${PYTHON_PN}-core \
- "
-+
-+BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-mccabe_0.7.0.bb b/meta-python/recipes-devtools/python/python3-mccabe_0.7.0.bb
-index a2c72fcc997..265b28a7715 100644
---- a/meta-python/recipes-devtools/python/python3-mccabe_0.7.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-mccabe_0.7.0.bb
-@@ -9,3 +9,5 @@ SRC_URI[sha256sum] = "348e0240c33b60bbdf4e523192ef919f28cb2c3d7d5c7794f74009290f
- inherit pypi setuptools3
- 
- DEPENDS += "${PYTHON_PN}-pytest-runner-native"
-+
-+BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-pylint_3.0.0.bb b/meta-python/recipes-devtools/python/python3-pylint_3.0.0.bb
-index 413e6599db1..bd2faa5b5af 100644
---- a/meta-python/recipes-devtools/python/python3-pylint_3.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pylint_3.0.0.bb
-@@ -48,3 +48,5 @@ do_install_ptest() {
-     install -Dm 0644 ${S}/tests/.pylint_primer_tests/.gitkeep ${D}${PTEST_PATH}/tests/.pylint_primer_tests/.gitkeep
-     sed -i 's#/usr/bin/python$#/usr/bin/python3#g' ${D}${PTEST_PATH}/tests/data/ascript
- }
-+
-+BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-tomlkit_0.12.1.bb b/meta-python/recipes-devtools/python/python3-tomlkit_0.12.1.bb
-index e86a3c78981..59e83e00db7 100644
---- a/meta-python/recipes-devtools/python/python3-tomlkit_0.12.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-tomlkit_0.12.1.bb
-@@ -27,3 +27,5 @@ do_install_ptest() {
-         install -d ${D}${PTEST_PATH}/tests
-         cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
- }
-+
-+BBCLASSEXTEND = "native nativesdk"
--- 
-2.41.0
+On 10/11/23 1:49 PM, Khem Raj wrote:
+> merged thanks Armin. I think we might need another sync with master after this.
+
+yep. was planning to.
+
+br,
+Armin
+>
+> On Wed, Oct 11, 2023 at 5:37 AM akuster808 <akuster808@gmail.com> wrote:
+>> The following changes since commit 3dd5d208be018f0f676d1adfceb9c22f19ad2ffe:
+>>
+>>     meta-openemnedded: Add myself as nanbield maintainer (2023-09-25
+>> 11:39:20 -0700)
+>>
+>> are available in the Git repository at:
+>>
+>>     https://git.openembedded.org/meta-openembedded nanbield-next
+>>
+>> for you to fetch changes up to 278c3f75e32f38f71bb52d161fe06bcb6f6bdd2f:
+>>
+>>     kernel-selftest: Build headers before compiling tests (2023-10-04
+>> 07:52:49 -0700)
+>>
+>> ----------------------------------------------------------------
+>> Alex Kiernan (2):
+>>         mdns: Upgrade 1790.80.10 -> 2200.0.8
+>>         jq: Upgrade 1.6+git -> 1.7
+>>
+>> Archana Polampalli (1):
+>>         nodejs: upgrade 18.17.1 -> 20.5.1
+>>
+>> Bruce Ashfield (2):
+>>         zfs: update to v2.2.0-rc4
+>>         vboxguestdrivers: fix kernel v6.5 build
+>>
+>> Clément Péron (6):
+>>         etcd-cpp-apiv3: upgrade 0.14.3 -> 0.15.3
+>>         devtools: grpc: bump to 1.56.2
+>>         protobuf: upgrade 4.22.2 -> 4.23.4
+>>         protobuf-c: bump to next release to support protobuf 4.23.x
+>>         mariadb: add missing <cstdint> in rocksdb string_util.h
+>>         etcd-cpp-apiv3: fix build when gRPC is cross compiled
+>>
+>> Derek Straka (32):
+>>         python3-apiflask: Update version 2.0.1 -> 2.0.2
+>>         python3-argh: Update version 0.29.3 -> 0.29.4
+>>         python3-async-timeout: remove old version of the library
+>>         python3-pydantic: Update version 1.10.7 -> 2.4.1
+>>         python3-pyhamcrest: Fix upstream check by specifying the
+>> UPSTREAM_CHECK_URI and UPSTREAM_CHECK_REGEX
+>>         python3-pyasn1-modules: Update version 0.2.8 -> 0.3.0
+>>         python-pyiface: Update version from git -> 0.0.11
+>>         python3-pymysql: Fix upstream check by specifying the
+>> UPSTREAM_CHECK_URI and UPSTREAM_CHECK_REGEX
+>>         python3-pymysql: update verion 1.0.2 -> 1.1.0
+>>         python3-pyproj: update version 3.6.0 -> 3.6.1
+>>         python3-pyproject-api: update version 1.5.1 -> 1.6.1
+>>         python3-redis: update version 5.0.0 -> 5.0.1
+>>         python3-traitlets: update version 5.9.0 -> 5.10.1
+>>         python3-xxhash: update version 3.2.0 -> 3.3.0
+>>         python3-pyzmq: update version 25.0.0 -> 25.1.1
+>>         python3-cachecontrol: Fix upstream check by specifying the
+>> UPSTREAM_CHECK_URI and UPSTREAM_CHECK_REGEX
+>>         python3-flask-babel: update version 2.0.0 -> 3.1.0
+>>         python3-idna-ssl: Fix upstream check by specifying the
+>> UPSTREAM_CHECK_URI and UPSTREAM_CHECK_REGEX
+>>         python3-ninja-syntax: Fix upstream check by specifying the
+>> UPSTREAM_CHECK_URI and UPSTREAM_CHECK_REGEX
+>>         python3-prettytable: update version 3.6.0 -> 3.9.0
+>>         python3-pytz-deprecation-shim: Remove outdated recipe meant to be
+>> a short lived shim
+>>         python3-tzlocal: Remove dependency on pytz_deprecation_shim
+>> removed in release 5.0
+>>         python3-astroid: update version 2.16.6 -> 3.0.0
+>>         python3-flask: update version 2.3.2 -> 2.3.3
+>>         python3-google-api-core: update version 2.12.0
+>>         python3-google-api-python-client: update version 2.100.0 -> 2.101.0
+>>         python3-google-auth: update version 2.23.0 -> 2.23.1
+>>         python3-parse-type: update version 0.5.2 -> 0.6.2
+>>         python3-nacl: Add recipe for the latest release of PyNaCl
+>>         python3-botocore: add recipe for latest version of botocore
+>>         python3-boto3: add recipe for latest version of boto3
+>>         python3-flask-cors: add initial version of the recipe for 4.0.0
+>>
+>> Gianfranco Costamagna (1):
+>>         mosquitto: upgrade 2.0.17 -> 2.0.18
+>>
+>> Jeffrey Pautler (1):
+>>         bolt: disable CVE checking for this recipe
+>>
+>> Khem Raj (14):
+>>         mozjs-115: Apply autoconf tuple mismatch fix
+>>         cpp-netlib: Fix build with boost 1.80+
+>>         cpp-netlib: Fix buildpaths in generated cmake files
+>>         python3-pybluez: Fix patch upstream-status
+>>         python3-pynetlinux: Fix patch upstream-status
+>>         libnet-idn-encode: Add recipe
+>>         libio-socket-ssl-perl: Change
+>> libnet-libidn-perl->libnet-idn-encode rdep for ptests
+>>         libnfs: Drop -Wno-implicit-function-declaration
+>>         webkitgtk3: Do not use musttail with clang on arm
+>>         fftw: Fix ptest result reporting
+>>         nodejs: Fix ptest result reporting
+>>         relayd: Update to latest tip of trunk
+>>         relayd: Fix build with clang
+>>         kernel-selftest: Build headers before compiling tests
+>>
+>> Markus Volk (7):
+>>         gedit: Upgrade 44.2 -> 46.1
+>>         tepl: Upgrade 6.4.0 -> 6.8.0
+>>         libblockdev: Upgrade 2.28 -> 3.03
+>>         udisks2: Upgrade 2.9.4 -> 2.10.1
+>>         mozjs: Upgrade 102.15.0 -> 102.15.1
+>>         libnfs: dont install libnfs-config.cmake
+>>         gnome-remote-desktop: Upgrade 44.2 -> 45.0
+>>
+>> Martin Jansa (9):
+>>         gupnp: fix build with meson-1.2.0
+>>         minifi-cpp, mozjs-115, redis-7.2.1, pv: add missing Upstream-Status
+>>         mozjs: fix filename in MULTILIB_SCRIPTS
+>>         gupnp-tools: fix build with meson-1.2.0
+>>         gnome-tweaks, networkmanager-fortisslvpn, libesmtp,
+>> json-schema-validator, python3-pybluez, python3-pynetlinux, apache2: Fix
+>> Malformed Upstream-Status
+>>         mozjs: use PV in MULTILIB_SCRIPTS
+>>         mosquitto, etcd-cpp-apiv3: add missing Upstream-Status
+>>         meta-oe/dynamic-layers: add Upstream-Status where missing
+>>         meta-oe/dynamic-layers: add one more missing Upstream-Status and
+>> fix one malformed
+>>
+>> Michał Iwanicki (1):
+>>         python3-pyu2f: add recipe
+>>
+>> Mingli Yu (1):
+>>         mozjs-102: Remove the buildpath
+>>
+>> Ross Burton (1):
+>>         webkitgtk3: reduce size of -dbg package
+>>
+>> Samantha Jalabert (6):
+>>         Remove python3-rdflib
+>>         Remove python3-license-expression
+>>         Remove python3-xmltodict
+>>         Remove python3-booleanpy
+>>         Remove python3-click
+>>         Remove python3-isodate
+>>
+>> Samuli Piippo (1):
+>>         protobuf: stage protoc binary to sysroot
+>>
+>> Vyacheslav Yurkov (3):
+>>         overlayfs-tools: Drop unneeded dependency
+>>         overlayfs-tools: Bump up the version
+>>         overlayfs-tools: Install fsck binary
+>>
+>> Xiangyu Chen (3):
+>>         mosh: add support of protobuf 4.22.x
+>>         protobuf: upgrade 3.21.12 -> 4.22.2
+>>         protobuf-c: add support of protobuf 4.22.x
+>>
+>>    meta-filesystems/recipes-filesystems/zfs/zfs_2.2.0.bb           | 2 +-
+>>    .../0001-Makefile-proper-location-of-LDFLAGS.patch              | 32
+>> ---------
+>>    meta-filesystems/recipes-utils/overlayfs/overlayfs-progs_git.bb | 32
+>> ---------
+>>    ...001-Fixed-includes-so-that-it-compiles-on-Ubuntu-20.04.patch | 43
+>> -----------
+>>    .../overlayfs-tools/0002-makefile-fix-linking-flags.patch       | 33
+>> ---------
+>>    meta-filesystems/recipes-utils/overlayfs/overlayfs-tools_git.bb | 10 +--
+>>    meta-filesystems/recipes-utils/xfstests/xfstests_2023.03.05.bb  | 2 +-
+>>    ...nome-remote-desktop_44.2.bb => gnome-remote-desktop_45.0.bb} |   4 +-
+>>    meta-gnome/recipes-gnome/amtk/amtk_5.6.1.bb                     | 22
+>> ------
+>>    meta-gnome/recipes-gnome/gedit/{gedit_44.2.bb => gedit_46.1.bb} |  13 +++-
+>>    meta-gnome/recipes-gnome/gedit/libgedit-amtk_5.8.0.bb           | 17 +++++
+>>    .../recipes-gnome/gedit/libgedit-gtksourceview_299.0.4.bb       | 24
+>> +++++++
+>>    .../0002-meson-fix-invalid-positional-argument.patch            | 2 +-
+>>    meta-gnome/recipes-gnome/tepl/{tepl_6.4.0.bb => tepl_6.8.0.bb} |   6 +-
+>>    .../gupnp/gupnp-tools/0001-build-Fix-wrap-file-syntax.patch     | 56
+>> +++++++++++++++
+>>    .../recipes-connectivity/gupnp/gupnp-tools_0.10.2.bb            | 4 +-
+>>    .../0001-build-properly-spell-provide-in-.wrap-files.patch      | 25
+>> +++++++
+>>    meta-multimedia/recipes-connectivity/gupnp/gupnp_1.4.1.bb       | 1 +
+>>    meta-networking/recipes-connectivity/mosquitto/files/2894.patch | 25
+>> +++++++
+>>    meta-networking/recipes-connectivity/mosquitto/files/2895.patch | 27
+>> +++++++
+>>    .../mosquitto/{mosquitto_2.0.17.bb => mosquitto_2.0.18.bb} |   4 +-
+>>    .../networkmanager-fortisslvpn/0001-fix-ppp-2.5.0-build.patch   | 2 +-
+>>    .../networkmanager-fortisslvpn/0002-fix-ppp-2.5.0-build.patch   | 2 +-
+>>    .../relayd/relayd/0001-rtnl_flush-Error-on-failed-write.patch   | 34
+>> ---------
+>>    meta-networking/recipes-connectivity/relayd/relayd_git.bb       | 8 +--
+>>    .../mdns/mdns/0001-Handle-interface-without-ifa_addr.patch      | 38
+>> ++++++++++
+>>    .../0003-mDNSShared-Drop-MacOS-specific-__block-qualifier.patch | 30
+>> --------
+>>    .../mdns/mdns/0005-mDNSCore-Fix-broken-debug-parameter.patch    | 17 ++---
+>>    .../recipes-protocols/mdns/mdns/0015-Add-missing-limits.h.patch | 23
+>> ++++++
+>>    .../mdns/{mdns_1790.80.10.bb => mdns_2200.0.8.bb} |   7 +-
+>>    .../libesmtp/0001-Add-build-option-for-NTLM-support.patch       | 2 +-
+>>    .../recipes-graphics/openbox/openbox-xdgmenu/7_6.diff           | 2 +
+>>    .../openbox/openbox-xdgmenu/fix-menu-generation.patch           | 2 +
+>>    .../openbox/openbox-xdgmenu/port-gnome-menus3.patch             | 2 +
+>>    .../lirc/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch | 2 +
+>>    ...1-Makefile.am-do-not-clobber-PYTHONPATH-from-build-env.patch | 2 +
+>>    .../lirc/lirc/0001-Unbolt-ubuntu-hack.patch                     | 2 +-
+>>    .../recipes-connectivity/lirc/lirc/fix_build_errors.patch       | 2 +
+>>    .../netplan/0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch  | 2 +
+>>    .../android-tools/0001-Fixes-for-yocto-build.patch              | 2 +
+>>    ...2-android-tools-modifications-to-make-it-build-in-yoct.patch | 2 +
+>>    ...3-Update-usage-of-usbdevfs_urb-to-match-new-kernel-UAP.patch | 2 +
+>>    .../0004-adb-Fix-build-on-big-endian-systems.patch              | 2 +
+>>    .../android-tools/0005-adb-Allow-adbd-to-be-run-as-root.patch   | 2 +
+>>    .../android-tools/debian/Add-riscv64-support.patch              | 2 +
+>>    .../android-tools/debian/Added-missing-headers.patch            | 2 +
+>>    .../android-tools/android-tools/debian/Nonnull.patch            | 2 +
+>>    .../android-tools/android-tools/debian/Vector-cast.patch        | 2 +
+>>    .../android-tools/debian/add-missing-headers.patch              | 2 +
+>>    .../external/libunwind/20150704-CVE-2015-3239_dwarf_i.h.patch   | 2 +
+>>    .../external/libunwind/legacy_built-in_sync_functions.patch     | 2 +
+>>    .../android-tools/debian/external/libunwind/user_pt_regs.patch  | 2 +
+>>    .../android-tools/debian/fix-attribute-issue-with-gcc.patch     | 2 +
+>>    .../android-tools/debian/fix-build-on-non-x86.patch             | 2 +
+>>    .../android-tools/debian/fix-gettid-exception-declaration.patch | 2 +
+>>    .../android-tools/debian/fix-standard-namespace-errors.patch    | 2 +
+>>    .../android-tools/debian/hard-code-build-number.patch           | 2 +
+>>    .../android-tools/android-tools/debian/libusb-header-path.patch | 2 +
+>>    .../android-tools/debian/move-log-file-to-proper-dir.patch      | 2 +
+>>    .../android-tools/android-tools/debian/simg_dump-python3.patch  | 2 +
+>>    .../android-tools/android-tools/debian/stdatomic.patch          | 2 +
+>>    .../android-tools/debian/stub-out-fastdeploy.patch              | 2 +
+>>    .../android-tools/debian/system/core/Add-riscv64-support.patch  | 2 +
+>>    .../debian/system/core/Added-missing-headers.patch              | 2 +
+>>    .../android-tools/debian/system/core/Nonnull.patch              | 2 +
+>>    .../android-tools/debian/system/core/Vector-cast.patch          | 2 +
+>>    .../android-tools/debian/system/core/add-missing-headers.patch  | 2 +
+>>    .../debian/system/core/fix-attribute-issue-with-gcc.patch       | 2 +
+>>    .../android-tools/debian/system/core/fix-build-on-non-x86.patch | 2 +
+>>    .../debian/system/core/fix-gettid-exception-declaration.patch   | 2 +
+>>    .../debian/system/core/fix-standard-namespace-errors.patch      | 2 +
+>>    .../debian/system/core/hard-code-build-number.patch             | 2 +
+>>    .../android-tools/debian/system/core/libusb-header-path.patch   | 2 +
+>>    .../debian/system/core/move-log-file-to-proper-dir.patch        | 2 +
+>>    .../android-tools/debian/system/core/simg_dump-python3.patch    | 2 +
+>>    .../android-tools/debian/system/core/stdatomic.patch            | 2 +
+>>    .../android-tools/debian/system/core/stub-out-fastdeploy.patch  | 2 +
+>>    .../debian/system/core/throw-exception-on-unknown-os.patch      | 2 +
+>>    .../android-tools/debian/throw-exception-on-unknown-os.patch    | 2 +
+>>    meta-oe/recipes-bsp/bolt/bolt_0.9.5.bb                          | 2 +
+>>    meta-oe/recipes-connectivity/libnfs/libnfs_5.0.2.bb             | 9 ++-
+>>    .../mosh/0001-configure.ac-add-support-of-protobuf-4.22.x.patch | 63
+>> +++++++++++++++++
+>>    meta-oe/recipes-connectivity/mosh/mosh_1.4.0.bb                 | 7 +-
+>>    .../mariadb/0001-Add-missing-includes-cstdint-and-cstdio.patch  | 16 ++++-
+>>    ...1-Revert-Changed-GRPCPP_ABSEIL_SYNC-to-GPR_ABSEIL_SYNC.patch | 62
+>> ----------------
+>>    .../0001-cmake-add-separate-export-for-plugin-targets.patch     | 93
+>> ------------------------
+>>    .../recipes-devtools/grpc/grpc/0001-fix-CVE-2023-32732.patch    | 81
+>> ---------------------
+>>    .../recipes-devtools/grpc/{grpc_1.50.1.bb => grpc_1.56.2.bb} |   7 +-
+>>    ...1-configure-Pass-_XOPEN_SOURCE-when-checking-for-strpt.patch | 40
+>> -----------
+>>    .../0002-builtin-Replace-_BSD_SOURCE-with-_DEFAULT_SOURCE.patch | 32
+>> ---------
+>>    meta-oe/recipes-devtools/jq/{jq_git.bb => jq_1.7.bb} |  25 ++++---
+>>    .../json-schema-validator/0002-Fix-assumed-signed-char.patch    | 2 +-
+>>    .../0003-For-root-value-use-empty-pointer.patch                 | 2 +-
+>>    .../oe-npm-cache                                                | 0
+>>    ...-oe-cache-native_18.17.bb => nodejs-oe-cache-native_20.5.bb} |   0
+>>    .../nodejs/nodejs/0001-Using-native-binaries.patch              | 19 ++++-
+>>    .../nodejs/0001-liftoff-Correct-function-signatures.patch       | 42
+>> ++++-------
+>>    .../nodejs/0001-mips-Use-32bit-cast-for-operand-on-mips32.patch | 34
+>> ---------
+>>    meta-oe/recipes-devtools/nodejs/nodejs/big-endian.patch         | 18 -----
+>>    meta-oe/recipes-devtools/nodejs/nodejs/mips-less-memory.patch   | 37
+>> ----------
+>>    meta-oe/recipes-devtools/nodejs/nodejs/run-ptest                | 5 ++
+>>    .../nodejs/{nodejs_18.17.1.bb => nodejs_20.5.1.bb} |   9 +--
+>>    ...1-Makefile.am-do-not-compile-the-code-which-was-genera.patch | 106
+>> ++++++++++++++++++++++++++++
+>>    meta-oe/recipes-devtools/protobuf/protobuf-c_1.4.1.bb           | 6 +-
+>>    .../protobuf/protobuf/0001-Fix-linking-error-with-ld-gold.patch | 69
+>> ------------------
+>>    ...1-examples-Makefile-respect-CXX-LDFLAGS-variables-fix-.patch | 15 ++--
+>>    .../protobuf/{protobuf_3.21.12.bb => protobuf_4.23.4.bb} |  22 ++++--
+>>    .../etcd-cpp-apiv3/0001-cmake-fix-when-cross-compiling.patch    | 68
+>> ++++++++++++++++++
+>>    .../etcd/{etcd-cpp-apiv3_0.14.3.bb => etcd-cpp-apiv3_0.15.3.bb} |   8 ++-
+>>    .../libblockdev/{libblockdev_2.28.bb => libblockdev_3.03.bb} |  15 ++--
+>>    .../0001-BundledOSSPUUID.cmake-Pass-CFLAGS-to-compiler.patch    | 2 +
+>>    ...1-Fix-the-constness-issues-around-autovector-iterator_.patch | 2 +
+>>    .../mozjs/{mozjs-102_102.15.0.bb => mozjs-102_102.15.1.bb} |  11 +--
+>>    ...1-build-do-not-use-autoconf-s-config.sub-to-canonicali.patch | 25
+>> +++++--
+>>    meta-oe/recipes-extended/mozjs/mozjs-115/fix-musl-build.patch   | 2 +
+>>    meta-oe/recipes-extended/mozjs/mozjs-115_115.2.0.bb             | 8 ++-
+>>    .../redis/redis-7.2.1/hiredis-use-default-CC-if-it-is-set.patch | 2 +
+>>    .../recipes-extended/redis/redis-7.2.1/oe-use-libc-malloc.patch | 2 +
+>>    meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb       | 2 +-
+>>    .../cpp-netlib/a53f123040998744602f190944464af0e159ea19.patch   | 30
+>> ++++++++
+>>    meta-oe/recipes-support/cpp-netlib/cpp-netlib_git.bb            | 10 ++-
+>>    meta-oe/recipes-support/fftw/fftw/run-ptest                     | 15 ++--
+>>    ...1-pv-display-handle-error-of-tcgetpgrp-in-pv_in_foregr.patch | 2 +
+>>    .../udisks2/0001-Makefile.am-Dont-include-buildpath.patch       | 47
+>> ++++++++++++
+>>    .../udisks/{udisks2_2.9.4.bb => udisks2_2.10.1.bb} |   8 ++-
+>>    .../vboxguestdrivers/0001-vbox_fb-fix-kernel-v6.5-build.patch   | 50
+>> +++++++++++++
+>>    .../recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.10.bb | 1 +
+>>    .../recipes-support/webkitgtk/webkitgtk3/no-musttail-arm.patch  | 21
+>> ++++++
+>>    meta-oe/recipes-support/webkitgtk/webkitgtk3_2.42.0.bb          | 4 ++
+>>    meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.083.bb     | 2 +-
+>>    meta-perl/recipes-perl/libnet/libnet-idn-encode_2.500.bb        | 23
+>> ++++++
+>>    .../recipes-core/packagegroups/packagegroup-meta-python.bb      | 1 -
+>>    meta-python/recipes-devtools/python/python-idna-ssl.inc         | 15 ----
+>>    .../{python3-apiflask_2.0.1.bb => python3-apiflask_2.0.2.bb} |   2 +-
+>>    .../python/{python3-argh_0.29.3.bb => python3-argh_0.29.4.bb} |   2 +-
+>>    .../{python3-astroid_2.15.6.bb => python3-astroid_3.0.0.bb} |   3 +-
+>>    .../recipes-devtools/python/python3-async-timeout_4.0.0.bb      | 18 -----
+>>    meta-python/recipes-devtools/python/python3-booleanpy_4.0.bb    | 13 ----
+>>    meta-python/recipes-devtools/python/python3-boto3_1.28.57.bb    | 16 +++++
+>>    meta-python/recipes-devtools/python/python3-botocore_1.31.57.bb | 10 +++
+>>    .../recipes-devtools/python/python3-cachecontrol_0.13.1.bb      | 3 +
+>>    meta-python/recipes-devtools/python/python3-click/run-ptest     | 3 -
+>>    meta-python/recipes-devtools/python/python3-click_8.1.7.bb      | 39
+>> ----------
+>>    ...ython3-flask-babel_2.0.0.bb => python3-flask-babel_3.1.0.bb} |   7 +-
+>>    meta-python/recipes-devtools/python/python3-flask-cors_4.0.0.bb | 16 +++++
+>>    .../python/{python3-flask_2.3.2.bb => python3-flask_2.3.3.bb} |   4 +-
+>>    ...gle-api-core_2.11.1.bb => python3-google-api-core_2.12.0.bb} |   2 +-
+>>    ...t_2.100.0.bb => python3-google-api-python-client_2.101.0.bb} |   2 +-
+>>    ...hon3-google-auth_2.23.0.bb => python3-google-auth_2.23.1.bb} |   2 +-
+>>    meta-python/recipes-devtools/python/python3-idna-ssl_1.1.0.bb   | 19 ++++-
+>>    meta-python/recipes-devtools/python/python3-isodate_0.6.1.bb    | 14 ----
+>>    .../python/python3-license-expression/run-ptest                 | 3 -
+>>    .../python/python3-license-expression_30.1.1.bb                 | 36
+>> ----------
+>>    meta-python/recipes-devtools/python/python3-nacl_1.5.0.bb       | 25
+>> +++++++
+>>    .../recipes-devtools/python/python3-ninja-syntax_1.7.2.bb       | 2 +
+>>    ...{python3-parse-type_0.5.2.bb => python3-parse-type_0.6.2.bb} |  12 +---
+>>    ...ython3-prettytable_3.6.0.bb => python3-prettytable_3.9.0.bb} |   7 +-
+>>    ...-pyasn1-modules_0.2.8.bb => python3-pyasn1-modules_0.3.0.bb} |   7 +-
+>>    ...1-Use-Py_ssize_t-when-parsing-buffer-length-fix-426-42.patch | 5 +-
+>>    .../{python3-pydantic_1.10.7.bb => python3-pydantic_2.4.1.bb} |   8 ++-
+>>    meta-python/recipes-devtools/python/python3-pyhamcrest_2.0.4.bb | 3 +
+>>    .../{python3-pyiface_git.bb => python3-pyiface_0.0.11.bb} |  16 ++---
+>>    .../{python3-pymysql_1.0.2.bb => python3-pymysql_1.1.0.bb} |   7 +-
+>>    .../python/python3-pynetlinux/0002-Fixed-relative-imports.patch | 2 +-
+>>    .../python/{python3-pyproj_3.6.0.bb => python3-pyproj_3.6.1.bb} |   2 +-
+>>    ...n3-pyproject-api_1.5.1.bb => python3-pyproject-api_1.6.1.bb} |   2 +-
+>>    .../python/python3-pytz-deprecation-shim_0.1.0.post0.bb         | 15 ----
+>>    meta-python/recipes-devtools/python/python3-pyu2f_0.1.5.bb      | 20
+>> ++++++
+>>    .../python/{python3-pyzmq_25.0.0.bb => python3-pyzmq_25.1.1.bb} |   8 +--
+>>    meta-python/recipes-devtools/python/python3-rdflib_7.0.0.bb     | 19 -----
+>>    .../python/{python3-redis_5.0.0.bb => python3-redis_5.0.1.bb} |   2 +-
+>>    .../{python3-traitlets_5.9.0.bb => python3-traitlets_5.10.1.bb} |   4 +-
+>>    meta-python/recipes-devtools/python/python3-tzlocal_5.0.1.bb    | 1 -
+>>    meta-python/recipes-devtools/python/python3-xmltodict/run-ptest | 3 -
+>>    meta-python/recipes-devtools/python/python3-xmltodict_0.13.0.bb | 29
+>> --------
+>>    .../python/{python3-xxhash_3.2.0.bb => python3-xxhash_3.3.0.bb} |   6 +-
+>>    ...1-modules-mappers-config9.m4-Add-server-directory-to-i.patch | 2 +-
+>>    177 files changed, 1146 insertions(+), 1117 deletions(-)
+>>    delete mode 100644
+>> meta-filesystems/recipes-utils/overlayfs/overlayfs-progs/0001-Makefile-proper-location-of-LDFLAGS.patch
+>>    delete mode 100644
+>> meta-filesystems/recipes-utils/overlayfs/overlayfs-progs_git.bb
+>>    delete mode 100644
+>> meta-filesystems/recipes-utils/overlayfs/overlayfs-tools/0001-Fixed-includes-so-that-it-compiles-on-Ubuntu-20.04.patch
+>>    delete mode 100644
+>> meta-filesystems/recipes-utils/overlayfs/overlayfs-tools/0002-makefile-fix-linking-flags.patch
+>>    rename
+>> meta-gnome/dynamic-layers/meta-virtualization/recipes-gnome/gnome-remote-desktop/{gnome-remote-desktop_44.2.bb
+>> => gnome-remote-desktop_45.0.bb} (82%)
+>>    delete mode 100644 meta-gnome/recipes-gnome/amtk/amtk_5.6.1.bb
+>>    rename meta-gnome/recipes-gnome/gedit/{gedit_44.2.bb => gedit_46.1.bb}
+>> (69%)
+>>    create mode 100644 meta-gnome/recipes-gnome/gedit/libgedit-amtk_5.8.0.bb
+>>    create mode 100644
+>> meta-gnome/recipes-gnome/gedit/libgedit-gtksourceview_299.0.4.bb
+>>    rename meta-gnome/recipes-gnome/tepl/{tepl_6.4.0.bb => tepl_6.8.0.bb}
+>> (88%)
+>>    create mode 100644
+>> meta-multimedia/recipes-connectivity/gupnp/gupnp-tools/0001-build-Fix-wrap-file-syntax.patch
+>>    create mode 100644
+>> meta-multimedia/recipes-connectivity/gupnp/gupnp/0001-build-properly-spell-provide-in-.wrap-files.patch
+>>    create mode 100644
+>> meta-networking/recipes-connectivity/mosquitto/files/2894.patch
+>>    create mode 100644
+>> meta-networking/recipes-connectivity/mosquitto/files/2895.patch
+>>    rename
+>> meta-networking/recipes-connectivity/mosquitto/{mosquitto_2.0.17.bb =>
+>> mosquitto_2.0.18.bb} (95%)
+>>    delete mode 100644
+>> meta-networking/recipes-connectivity/relayd/relayd/0001-rtnl_flush-Error-on-failed-write.patch
+>>    create mode 100644
+>> meta-networking/recipes-protocols/mdns/mdns/0001-Handle-interface-without-ifa_addr.patch
+>>    delete mode 100644
+>> meta-networking/recipes-protocols/mdns/mdns/0003-mDNSShared-Drop-MacOS-specific-__block-qualifier.patch
+>>    create mode 100644
+>> meta-networking/recipes-protocols/mdns/mdns/0015-Add-missing-limits.h.patch
+>>    rename meta-networking/recipes-protocols/mdns/{mdns_1790.80.10.bb =>
+>> mdns_2200.0.8.bb} (96%)
+>>    create mode 100644
+>> meta-oe/recipes-connectivity/mosh/mosh/0001-configure.ac-add-support-of-protobuf-4.22.x.patch
+>>    delete mode 100644
+>> meta-oe/recipes-devtools/grpc/grpc/0001-Revert-Changed-GRPCPP_ABSEIL_SYNC-to-GPR_ABSEIL_SYNC.patch
+>>    delete mode 100644
+>> meta-oe/recipes-devtools/grpc/grpc/0001-cmake-add-separate-export-for-plugin-targets.patch
+>>    delete mode 100644
+>> meta-oe/recipes-devtools/grpc/grpc/0001-fix-CVE-2023-32732.patch
+>>    rename meta-oe/recipes-devtools/grpc/{grpc_1.50.1.bb =>
+>> grpc_1.56.2.bb} (90%)
+>>    delete mode 100644
+>> meta-oe/recipes-devtools/jq/jq/0001-configure-Pass-_XOPEN_SOURCE-when-checking-for-strpt.patch
+>>    delete mode 100644
+>> meta-oe/recipes-devtools/jq/jq/0002-builtin-Replace-_BSD_SOURCE-with-_DEFAULT_SOURCE.patch
+>>    rename meta-oe/recipes-devtools/jq/{jq_git.bb => jq_1.7.bb} (67%)
+>>    rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-18.17 =>
+>> nodejs-oe-cache-20.5}/oe-npm-cache (100%)
+>>    rename
+>> meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-native_18.17.bb =>
+>> nodejs-oe-cache-native_20.5.bb} (100%)
+>>    delete mode 100644
+>> meta-oe/recipes-devtools/nodejs/nodejs/0001-mips-Use-32bit-cast-for-operand-on-mips32.patch
+>>    delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/big-endian.patch
+>>    delete mode 100644
+>> meta-oe/recipes-devtools/nodejs/nodejs/mips-less-memory.patch
+>>    rename meta-oe/recipes-devtools/nodejs/{nodejs_18.17.1.bb =>
+>> nodejs_20.5.1.bb} (94%)
+>>    create mode 100644
+>> meta-oe/recipes-devtools/protobuf/protobuf-c/0001-Makefile.am-do-not-compile-the-code-which-was-genera.patch
+>>    delete mode 100644
+>> meta-oe/recipes-devtools/protobuf/protobuf/0001-Fix-linking-error-with-ld-gold.patch
+>>    rename meta-oe/recipes-devtools/protobuf/{protobuf_3.21.12.bb =>
+>> protobuf_4.23.4.bb} (76%)
+>>    create mode 100644
+>> meta-oe/recipes-extended/etcd/etcd-cpp-apiv3/0001-cmake-fix-when-cross-compiling.patch
+>>    rename meta-oe/recipes-extended/etcd/{etcd-cpp-apiv3_0.14.3.bb =>
+>> etcd-cpp-apiv3_0.15.3.bb} (67%)
+>>    rename meta-oe/recipes-extended/libblockdev/{libblockdev_2.28.bb =>
+>> libblockdev_3.03.bb} (73%)
+>>    rename meta-oe/recipes-extended/mozjs/{mozjs-102_102.15.0.bb =>
+>> mozjs-102_102.15.1.bb} (87%)
+>>    create mode 100644
+>> meta-oe/recipes-support/cpp-netlib/cpp-netlib/a53f123040998744602f190944464af0e159ea19.patch
+>>    create mode 100644
+>> meta-oe/recipes-support/udisks/udisks2/0001-Makefile.am-Dont-include-buildpath.patch
+>>    rename meta-oe/recipes-support/udisks/{udisks2_2.9.4.bb =>
+>> udisks2_2.10.1.bb} (86%)
+>>    create mode 100644
+>> meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers/0001-vbox_fb-fix-kernel-v6.5-build.patch
+>>    create mode 100644
+>> meta-oe/recipes-support/webkitgtk/webkitgtk3/no-musttail-arm.patch
+>>    create mode 100644
+>> meta-perl/recipes-perl/libnet/libnet-idn-encode_2.500.bb
+>>    delete mode 100644 meta-python/recipes-devtools/python/python-idna-ssl.inc
+>>    rename meta-python/recipes-devtools/python/{python3-apiflask_2.0.1.bb
+>> => python3-apiflask_2.0.2.bb} (83%)
+>>    rename meta-python/recipes-devtools/python/{python3-argh_0.29.3.bb =>
+>> python3-argh_0.29.4.bb} (90%)
+>>    rename meta-python/recipes-devtools/python/{python3-astroid_2.15.6.bb
+>> => python3-astroid_3.0.0.bb} (87%)
+>>    delete mode 100644
+>> meta-python/recipes-devtools/python/python3-async-timeout_4.0.0.bb
+>>    delete mode 100644
+>> meta-python/recipes-devtools/python/python3-booleanpy_4.0.bb
+>>    create mode 100644
+>> meta-python/recipes-devtools/python/python3-boto3_1.28.57.bb
+>>    create mode 100644
+>> meta-python/recipes-devtools/python/python3-botocore_1.31.57.bb
+>>    delete mode 100644
+>> meta-python/recipes-devtools/python/python3-click/run-ptest
+>>    delete mode 100644
+>> meta-python/recipes-devtools/python/python3-click_8.1.7.bb
+>>    rename
+>> meta-python/recipes-devtools/python/{python3-flask-babel_2.0.0.bb =>
+>> python3-flask-babel_3.1.0.bb} (59%)
+>>    create mode 100644
+>> meta-python/recipes-devtools/python/python3-flask-cors_4.0.0.bb
+>>    rename meta-python/recipes-devtools/python/{python3-flask_2.3.2.bb =>
+>> python3-flask_2.3.3.bb} (84%)
+>>    rename
+>> meta-python/recipes-devtools/python/{python3-google-api-core_2.11.1.bb
+>> => python3-google-api-core_2.12.0.bb} (86%)
+>>    rename
+>> meta-python/recipes-devtools/python/{python3-google-api-python-client_2.100.0.bb
+>> => python3-google-api-python-client_2.101.0.bb} (86%)
+>>    rename
+>> meta-python/recipes-devtools/python/{python3-google-auth_2.23.0.bb =>
+>> python3-google-auth_2.23.1.bb} (87%)
+>>    delete mode 100644
+>> meta-python/recipes-devtools/python/python3-isodate_0.6.1.bb
+>>    delete mode 100644
+>> meta-python/recipes-devtools/python/python3-license-expression/run-ptest
+>>    delete mode 100644
+>> meta-python/recipes-devtools/python/python3-license-expression_30.1.1.bb
+>>    create mode 100644
+>> meta-python/recipes-devtools/python/python3-nacl_1.5.0.bb
+>>    rename
+>> meta-python/recipes-devtools/python/{python3-parse-type_0.5.2.bb =>
+>> python3-parse-type_0.6.2.bb} (51%)
+>>    rename
+>> meta-python/recipes-devtools/python/{python3-prettytable_3.6.0.bb =>
+>> python3-prettytable_3.9.0.bb} (75%)
+>>    rename
+>> meta-python/recipes-devtools/python/{python3-pyasn1-modules_0.2.8.bb =>
+>> python3-pyasn1-modules_0.3.0.bb} (74%)
+>>    rename meta-python/recipes-devtools/python/{python3-pydantic_1.10.7.bb
+>> => python3-pydantic_2.4.1.bb} (61%)
+>>    rename meta-python/recipes-devtools/python/{python3-pyiface_git.bb =>
+>> python3-pyiface_0.0.11.bb} (65%)
+>>    rename meta-python/recipes-devtools/python/{python3-pymysql_1.0.2.bb
+>> => python3-pymysql_1.1.0.bb} (63%)
+>>    rename meta-python/recipes-devtools/python/{python3-pyproj_3.6.0.bb =>
+>> python3-pyproj_3.6.1.bb} (87%)
+>>    rename
+>> meta-python/recipes-devtools/python/{python3-pyproject-api_1.5.1.bb =>
+>> python3-pyproject-api_1.6.1.bb} (86%)
+>>    delete mode 100644
+>> meta-python/recipes-devtools/python/python3-pytz-deprecation-shim_0.1.0.post0.bb
+>>    create mode 100644
+>> meta-python/recipes-devtools/python/python3-pyu2f_0.1.5.bb
+>>    rename meta-python/recipes-devtools/python/{python3-pyzmq_25.0.0.bb =>
+>> python3-pyzmq_25.1.1.bb} (81%)
+>>    delete mode 100644
+>> meta-python/recipes-devtools/python/python3-rdflib_7.0.0.bb
+>>    rename meta-python/recipes-devtools/python/{python3-redis_5.0.0.bb =>
+>> python3-redis_5.0.1.bb} (83%)
+>>    rename meta-python/recipes-devtools/python/{python3-traitlets_5.9.0.bb
+>> => python3-traitlets_5.10.1.bb} (57%)
+>>    delete mode 100644
+>> meta-python/recipes-devtools/python/python3-xmltodict/run-ptest
+>>    delete mode 100644
+>> meta-python/recipes-devtools/python/python3-xmltodict_0.13.0.bb
+>>    rename meta-python/recipes-devtools/python/{python3-xxhash_3.2.0.bb =>
+>> python3-xxhash_3.3.0.bb} (69%)
+>>
 
 
