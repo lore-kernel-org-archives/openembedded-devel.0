@@ -1,126 +1,116 @@
-Return-Path: <reatmon@ti.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EAD74CD6E77
-	for <webhook@archiver.kernel.org>; Wed, 11 Oct 2023 14:23:51 +0000 (UTC)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- by mx.groups.io with SMTP id smtpd.web11.17824.1697034230134002545
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 85E24CDB462
+	for <webhook@archiver.kernel.org>; Wed, 11 Oct 2023 16:21:42 +0000 (UTC)
+Received: from mail-oa1-f47.google.com (mail-oa1-f47.google.com [209.85.160.47])
+ by mx.groups.io with SMTP id smtpd.web11.20999.1697041293120270174
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 11 Oct 2023 07:23:50 -0700
+ Wed, 11 Oct 2023 09:21:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=hIk6fWID;
- spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: reatmon@ti.com)
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39BENlwA114723;
-	Wed, 11 Oct 2023 09:23:47 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1697034227;
-	bh=z+73vUptO13CNmxr4HVWAp2Gs6AR21j9ESeOKNaR+WE=;
-	h=Date:Subject:To:References:From:In-Reply-To;
-	b=hIk6fWIDaVgzhFvEl2kl6WqKsA6NHxHW7TMqbji7n5nsB8GIGwE0ChIHtGiS9+SSl
-	 kO5+6Y1s9np+aauDv6jdUjtsiYyTTbHB7TzR+70OqJhaZar+Yd7xKUauwVrcK/4rax
-	 kuyGX17hvlJ6NM6XiR3xgzJK/UOp4GimQFlpo/gQ=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
-	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39BENlaS019918
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 11 Oct 2023 09:23:47 -0500
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 11
- Oct 2023 09:23:47 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 11 Oct 2023 09:23:47 -0500
-Received: from [10.249.38.142] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39BENkKQ015497;
-	Wed, 11 Oct 2023 09:23:47 -0500
-Message-ID: <acd75534-fa71-4b49-9903-b8d691ca6701@ti.com>
-Date: Wed, 11 Oct 2023 09:23:46 -0500
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=BcCeuApI;
+ spf=pass (domain: gmail.com, ip: 209.85.160.47, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f47.google.com with SMTP id 586e51a60fabf-1c0fcbf7ae4so5213512fac.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 11 Oct 2023 09:21:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1697041292; x=1697646092; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=WK//cQcKGxBKtngJtikCanC8gfANUyEQ4RV9fuBJ84s=;
+        b=BcCeuApIA8zc6dBNIBNOC6TfN1spQuGWLHtRaJLq5RKJrg/hA6Tda34PgdwLRi4TF8
+         oxPTJy3gJeG1KzXX1x8irn3Ls0c2eHNgEh+U0hwtIZKRpvdwjlXt4ZQoclgHwGipOrDs
+         YXvlwLTwapNiu7qm9yHSlxXj3ze2aH7sgJNcM9dKHMYlW0ox7RLiCYHz9f9aN3yrOuef
+         rRaOLXJbu2l/OAdyQ8AEKhVEuCYVz8HQ0jo9hlwjiIaWY0AbmmOt79vjmihUuzr8TLDp
+         zjqeGVXuP3rJSS/aAdS3yl/AQiW02kcgSAIiKeKYZMkJglqHlL3iaOL2Uwh4VdjH8T43
+         ghsg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1697041292; x=1697646092;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=WK//cQcKGxBKtngJtikCanC8gfANUyEQ4RV9fuBJ84s=;
+        b=F1vY61ADG8XBYtpVC7BWMcuJ25Cxanzv8DxBcPWN7n9AOunD28symSYtQ1oTbOXziT
+         wYN12sNDH5yuMamQUetUnaIGR2ctFhcP1U99fEQTYDioO/yUEF8xrw2FGRfLpdYSKA9+
+         q7B7kYo1BZ+5vkknleUJaegoOvYZrbIFCj4t518XpJL9SAOyEszZ/O1C10tn1AUAxrMT
+         r971KUyYh/ktFX0VWb9BjG/TYJrm51pIsWy1hZhTvqRCPls5BXLQwrrOQy9mSGgmfYtK
+         oqdpxlUzAC0+QQr7WqvnB+kRhv/HmxZ0gSgrNyXH9DGTPfb7wo+z7XPdnGbP+8Vm7nRi
+         P6gQ==
+X-Gm-Message-State: AOJu0YwaDOBH0lkifvL5bux6RuS7rTAeLV4Y8ZPB1jvLYyOT4wxYBq8s
+	/6oC0u7Iv6P/St1wlfAEOnhDDF5uypJkYgp0ysY=
+X-Google-Smtp-Source: AGHT+IGoOwnEmTyxLeLJCE50L3EClNAJljF05WybO+CHAEENaPFldFOxvRjDfIPrSINZfkvqVmMlfYFsQyV46A4OrUY=
+X-Received: by 2002:a05:6870:8919:b0:1d5:8d8b:dcc with SMTP id
+ i25-20020a056870891900b001d58d8b0dccmr24993396oao.18.1697041292282; Wed, 11
+ Oct 2023 09:21:32 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][PATCH 2/2] kernel-selftest: Use clang options when
- clang is available
-Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>, <openembedded-devel@lists.openembedded.org>
-References: <20231010185238.2842132-1-raj.khem@gmail.com>
- <20231010185238.2842132-2-raj.khem@gmail.com>
-From: Ryan Eatmon <reatmon@ti.com>
-In-Reply-To: <20231010185238.2842132-2-raj.khem@gmail.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20231011090631.195716-1-akash.hadke27@gmail.com>
+In-Reply-To: <20231011090631.195716-1-akash.hadke27@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 11 Oct 2023 09:21:06 -0700
+Message-ID: <CAMKF1so7uQnqjOmAb8AV12HXmjBy0zMwndTTv0eakORx4_SWdg@mail.gmail.com>
+Subject: Re: [oe][meta-oe][kirkstone][PATCH] libeigen: Set LICENSE for libeigen-dev
+To: akash hadke <akash.hadke27@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org, ranjitsinh.rathod@kpit.com, 
+	akash hadke <akash.hadke@kpit.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 11 Oct 2023 14:23:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105424
+ <openembedded-devel@lists.openembedded.org>; Wed, 11 Oct 2023 16:21:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105425
 
+is there any GPL-3.0 code in main package ? if not perhaps it should
+mention GPL-2.0-only maybe instead and no need to make special entry
+for dev package.
 
-Thank you.  This fixed our nightly master builds.  Much appreciated.
-
-
-On 10/10/2023 1:52 PM, Khem Raj wrote:
-> Enable bpf only with clang
-> 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+On Wed, Oct 11, 2023 at 2:07=E2=80=AFAM akash hadke <akash.hadke27@gmail.co=
+m> wrote:
+>
+> Set 'LICENSE' for 'libeigen-dev' package as
+> 'MPL-2.0 & Apache-2.0 & BSD-3-Clause & LGPL-2.1-only'
+>
+> 'libeigen-dev' package does not contain any 'GPL-3.0-only'
+> and 'MINPACK' license files hence update the license.
+>
+> Signed-off-by: akash hadke <akash.hadke@kpit.com>
+> Signed-off-by: Akash Hadke <akash.hadke27@gmail.com>
 > ---
->   .../kernel-selftest/kernel-selftest.bb           | 16 ++++++++--------
->   1 file changed, 8 insertions(+), 8 deletions(-)
-> 
-> diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-> index 2e5680d775..291a83aaad 100644
-> --- a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-> +++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-> @@ -18,7 +18,9 @@ SRC_URI += "file://run-ptest \
->   # we will append other kernel selftest in the future
->   # bpf was added in 4.10 with: https://github.com/torvalds/linux/commit/5aa5bd14c5f8660c64ceedf14a549781be47e53d
->   # if you have older kernel than that you need to remove it from PACKAGECONFIG
-> -PACKAGECONFIG ??= "firmware bpf"
-> +PACKAGECONFIG ??= "firmware"
-> +# bpf needs working clang compiler anyway
-> +PACKAGECONFIG:append:toolchain-clang:x86-64 = " bpf"
->   PACKAGECONFIG:remove:x86 = "bpf"
->   PACKAGECONFIG:remove:arm = "bpf vm"
->   # host ptrace.h is used to compile BPF target but mips ptrace.h is needed
-> @@ -54,17 +56,15 @@ EXTRA_OEMAKE = '\
->       CC="${CC}" \
->       AR="${AR}" \
->       LD="${LD}" \
-> -    LLVM=1 \
-> -    CONFIG_CC_IS_GCC= \
-> -    CONFIG_CC_IS_CLANG=y \
-> -    CONFIG_CC_IMPLICIT_FALLTHROUGH= \
->       CLANG="clang -fno-stack-protector -target ${TARGET_ARCH} ${TOOLCHAIN_OPTIONS} -isystem ${S} -D__WORDSIZE=\'64\' -Wno-error=unused-command-line-argument" \
-> -    HOSTCC="clang -unwindlib=libgcc -rtlib=libgcc -stdlib=libstdc++ ${BUILD_CFLAGS} ${BUILD_LDFLAGS} -Wno-error=unused-command-line-argument" \
-> -    HOSTLD="clang ${BUILD_LDFLAGS} -unwindlib=libgcc -rtlib=libgcc -stdlib=libstdc++" \
->       DESTDIR="${D}" \
-> -    MACHINE="${ARCH}" \
->       V=1 \
->   '
-> +EXTRA_OEMAKE:append:toolchain-clang = "\
-> +    LLVM=1 CONFIG_CC_IS_GCC= CONFIG_CC_IS_CLANG=y CONFIG_CC_IMPLICIT_FALLTHROUGH= \
-> +    HOSTCC="clang -unwindlib=libgcc -rtlib=libgcc -stdlib=libstdc++ ${BUILD_CFLAGS} ${BUILD_LDFLAGS} -Wno-error=unused-command-line-argument" \
-> +    HOSTLD="clang ${BUILD_LDFLAGS} -unwindlib=libgcc -rtlib=libgcc -stdlib=libstdc++" \
-> +"
->   
->   KERNEL_SELFTEST_SRC ?= "Makefile \
->                           include \
-> 
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
+>  meta-oe/recipes-support/libeigen/libeigen_3.4.0.bb | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/meta-oe/recipes-support/libeigen/libeigen_3.4.0.bb b/meta-oe=
+/recipes-support/libeigen/libeigen_3.4.0.bb
+> index 1cae76b42..467c51d98 100644
+> --- a/meta-oe/recipes-support/libeigen/libeigen_3.4.0.bb
+> +++ b/meta-oe/recipes-support/libeigen/libeigen_3.4.0.bb
+> @@ -2,6 +2,7 @@ DESCRIPTION =3D "Eigen is a C++ template library for line=
+ar algebra: matrices, vec
+>  AUTHOR =3D "Beno=C3=AEt Jacob and Ga=C3=ABl Guennebaud and others"
+>  HOMEPAGE =3D "http://eigen.tuxfamily.org/"
+>  LICENSE =3D "MPL-2.0 & Apache-2.0 & BSD-3-Clause & GPL-3.0-only & LGPL-2=
+.1-only & MINPACK"
+> +LICENSE:${PN}-dev =3D "MPL-2.0 & Apache-2.0 & BSD-3-Clause & LGPL-2.1-on=
+ly"
+>  LIC_FILES_CHKSUM =3D "file://COPYING.MPL2;md5=3D815ca599c9df247a0c7f619b=
+ab123dad \
+>                      file://COPYING.BSD;md5=3D2dd0510ee95e59ca28834b875bc=
+96596 \
+>                      file://COPYING.GPL;md5=3Dd32239bcb673463ab874e80d47f=
+ae504 \
+> --
+> 2.25.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#105415): https://lists.openembedded.org/g/openembedded-devel/message/105415
-> Mute This Topic: https://lists.openembedded.org/mt/101881727/6551054
+> View/Reply Online (#105422): https://lists.openembedded.org/g/openembedde=
+d-devel/message/105422
+> Mute This Topic: https://lists.openembedded.org/mt/101893030/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [reatmon@ti.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
-
--- 
-Ryan Eatmon                reatmon@ti.com
------------------------------------------
-Texas Instruments, Inc.  -  LCPD  -  MGTS
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
