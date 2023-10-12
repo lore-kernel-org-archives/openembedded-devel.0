@@ -1,170 +1,145 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B9C39CDB46E
-	for <webhook@archiver.kernel.org>; Thu, 12 Oct 2023 15:09:22 +0000 (UTC)
-Received: from mail-oa1-f45.google.com (mail-oa1-f45.google.com [209.85.160.45])
- by mx.groups.io with SMTP id smtpd.web11.14513.1697123354528788829
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E3F4CCDB46E
+	for <webhook@archiver.kernel.org>; Thu, 12 Oct 2023 17:51:23 +0000 (UTC)
+Received: from mailout10.t-online.de (mailout10.t-online.de [194.25.134.21])
+ by mx.groups.io with SMTP id smtpd.web11.19288.1697133075175553203
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 12 Oct 2023 08:09:14 -0700
+ Thu, 12 Oct 2023 10:51:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=PRFv474+;
- spf=pass (domain: gmail.com, ip: 209.85.160.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f45.google.com with SMTP id 586e51a60fabf-1dd5b98d9aeso529302fac.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 12 Oct 2023 08:09:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1697123354; x=1697728154; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=PyjdK1xw2muMv/u51FHx7p8KSfzQ2Li3DVeMSEvRLhs=;
-        b=PRFv474+aw6X+y+8Kr2gxRGW3gtQdsTTUqhUZ8oW8yBQNp6cK2jrYW6pe+WfmXuguu
-         7e/a6W842B1nNGsU+8EwPD6jRC6nZcUMwDcqfwbbY3SLavcvJnj5MTxEGMhiv4ucuR0Z
-         hx+7r2/XGOFgJHqUdFbBpz9ZKPNeJyc6yiU2R5ZceeBDQSDKA8TmYa/cPyJLzx//1C0T
-         HkGJLcCqsQMWTw3x+oDBQOvS0fqwQH3Z2kN8tQG/AttVkNPvyfclPkz2nMcLh78jVYtJ
-         QBddiOGkQX0N3bGiAAdGy//CCQo2HZDnDrI2rBmnlui/10ClLkQvE4JjU0iI9S1x4p6B
-         1Glw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1697123354; x=1697728154;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=PyjdK1xw2muMv/u51FHx7p8KSfzQ2Li3DVeMSEvRLhs=;
-        b=XITS6fim4KXKh5eVRt/onVnY9iYPeDE9bRiYlV8A3haLrAJaVrrlEr/hX2e2oan0Ps
-         6AXod3vakhhbgP5FyUH5Ok8QtcLKPgMugLmY30v1syUfc/D/ONaqZgW1DxhTE/TQ3d+V
-         X7XJdTLKZN0obcPt7EDn29dHcaq7msI0SHc5w7IVvzSnEJB/B5peC836O5aqGzlPTpDZ
-         VbWv4sg9f3tClAgc4/j3DYZBGTdrJSr7Sg1j42k0PfqEkjTBteQlkhifLNJuRPIIglvV
-         tgCGB3pcx6lRH+UId1jUhEHNWQoPo9dW6oPhVAISNYaM+3PlEfYm57CGQJiiVSwt7yVV
-         o6kg==
-X-Gm-Message-State: AOJu0YxGb7dVl1kUc3pNE5T0eXhuHhw00x2fEhMrs2rvZnZDPZSNZFM5
-	KM5lYoVO3kMvfKHRoWWZPMD+Z/HLu4MIKgtUsgk=
-X-Google-Smtp-Source: AGHT+IHuwBswJV5U9BBnaZIIVQE3Aftybg/baMY3oef4H0Vmi2wWidfcutT3t+ss3w5tZ416OhZMyf5JcFEJRJX3ewc=
-X-Received: by 2002:a05:6870:795:b0:1b7:629b:de06 with SMTP id
- en21-20020a056870079500b001b7629bde06mr12376826oab.20.1697123353675; Thu, 12
- Oct 2023 08:09:13 -0700 (PDT)
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.21, mailfrom: f_l_k@t-online.de)
+Received: from fwd83.aul.t-online.de (fwd83.aul.t-online.de [10.223.144.109])
+	by mailout10.t-online.de (Postfix) with SMTP id 6FD854AAC4
+	for <openembedded-devel@lists.openembedded.org>; Thu, 12 Oct 2023 19:50:56 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.163.39.41]) by fwd83.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1qqzpn-3LLyW90; Thu, 12 Oct 2023 19:50:55 +0200
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-multimedia][PATCH] wireplumber: Upgrade 0.4.14 -> 0.4.15
+Date: Thu, 12 Oct 2023 19:51:01 +0200
+Message-ID: <20231012175101.23379-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
-References: <20231011163346.1856498-1-luca.fancellu@arm.com>
- <20231011163346.1856498-4-luca.fancellu@arm.com> <CAMKF1so89orai-uOFF3pKRUze2v9BEC6s5Yy7K8DFjWFH_CPyQ@mail.gmail.com>
- <0AF6ED9B-AD74-4DC5-B65F-F1EE861818AA@arm.com> <CAMKF1soL+SMx5cHLTBnTZQ5x_YKbYSr2TnCTdBqkEut9Ly=Kug@mail.gmail.com>
- <2E85458C-8CC7-4422-9EC7-48AF2F5A945E@arm.com>
-In-Reply-To: <2E85458C-8CC7-4422-9EC7-48AF2F5A945E@arm.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 12 Oct 2023 08:08:47 -0700
-Message-ID: <CAMKF1so+WaxYmNF8MF7eOVx4dpeAimpE51xZ+gFXhFn6Zibqrw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 3/3] linuxptp: add systemd services
-To: Luca Fancellu <Luca.Fancellu@arm.com>
-Cc: Diego Sueiro <Diego.Sueiro@arm.com>, Rahul Singh <Rahul.Singh@arm.com>, 
-	"openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+X-TOI-EXPURGATEID: 150726::1697133055-DEFFADE8-B64C26E4/0/0 CLEAN NORMAL
+X-TOI-MSGID: 0b8d3273-86d8-4285-9f2f-03e8d722109e
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 12 Oct 2023 15:09:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105457
+ <openembedded-devel@lists.openembedded.org>; Thu, 12 Oct 2023 17:51:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105458
 
-On Thu, Oct 12, 2023 at 7:39=E2=80=AFAM Luca Fancellu <Luca.Fancellu@arm.co=
-m> wrote:
->
->
->
-> > On 12 Oct 2023, at 15:22, Khem Raj <raj.khem@gmail.com> wrote:
-> >
-> >
-> >
-> > On Thu, Oct 12, 2023 at 2:56 AM Luca Fancellu <Luca.Fancellu@arm.com> w=
-rote:
-> > Hi Khem,
-> >
-> > >>
-> > >> diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp/systemd/=
-phc2sys@.service b/meta-oe/recipes-connectivity/linuxptp/linuxptp/systemd/p=
-hc2sys@.service
-> > >> new file mode 100644
-> > >> index 000000000000..dd2512bdca11
-> > >> --- /dev/null
-> > >> +++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp/systemd/phc2sys=
-@.service
-> > >> @@ -0,0 +1,13 @@
-> > >> +[Unit]
-> > >> +Description=3DSynchronize system clock or PTP hardware clock (PHC)
-> > >> +Documentation=3Dman:phc2sys
-> > >> +Requires=3Dptp4l.service
-> > >> +After=3Dptp4l.service
-> > >> +Before=3Dtime-sync.target
-> > >> +
-> > >> +[Service]
-> > >> +Type=3Dsimple
-> > >> +ExecStart=3D/usr/sbin/phc2sys -w -s %I
-> > >
-> > > Can these paths be derived from ${sbindir} during do_install.
-> > >
-> > >
-> > >> +
-> > >> +[Install]
-> > >> +WantedBy=3Dmulti-user.target
-> > >> diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp/systemd/=
-ptp4l@.service b/meta-oe/recipes-connectivity/linuxptp/linuxptp/systemd/ptp=
-4l@.service
-> > >> new file mode 100644
-> > >> index 000000000000..1bad2d72df6b
-> > >> --- /dev/null
-> > >> +++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp/systemd/ptp4l@.=
-service
-> > >> @@ -0,0 +1,11 @@
-> > >> +[Unit]
-> > >> +Description=3DPrecision Time Protocol (PTP) service for %I
-> > >> +Documentation=3Dman:ptp4l
-> > >> +After=3Dsys-subsystem-net-devices-%i.device
-> > >> +
-> > >> +[Service]
-> > >> +Type=3Dsimple
-> > >> +ExecStart=3D/usr/sbin/ptp4l -f /etc/linuxptp/ptp4l.conf -i %I
-> > >
-> > > Can these paths be derived from ${sbindir} and ${sysconfdir} bitbake =
-variables
-> > > during do_install ? This should make them more portable
-> >
-> > Yes I can do that, for both ${sbindir} and ${sysconfdir}, I see the mak=
-efile sets
-> > sbindir =3D $(prefix)/sbin, we already pass ${prefix} in the make comma=
-nd line,
-> > do you think we should pass also sbindir=3D to ensure consistency?
-> >
-> > I think it is that we store the origin service file as a template like =
-service.in and then when installing it during do_install substitute the pat=
-hs with original value of these variables there are many examples of this i=
-n metadata
-> >
-> >
->
-> Yes of course, that part is very clear, what I=E2=80=99m asking is:
->
-> Since the Makefile hardcode sbindir, is it enough if I replace ${prefix} =
-and ${sysconfdir} in the service?
->
-> For example here:
-> > >> +++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp/systemd/ptp4l@.=
-service
-> > >> @@ -0,0 +1,11 @@
-> > >> +[Unit]
-> > >> +Description=3DPrecision Time Protocol (PTP) service for %I
-> > >> +Documentation=3Dman:ptp4l
-> > >> +After=3Dsys-subsystem-net-devices-%i.device
-> > >> +
-> > >> +[Service]
-> > >> +Type=3Dsimple
-> > >> +ExecStart=3D/usr/sbin/ptp4l -f /etc/linuxptp/ptp4l.conf -i %I
->
-> It will be: ExecStart=3D@PREFIX@/sbin/ptp4l -f @SYSCONFDIR@/linuxptp/ptp4=
-l.conf -i %I
+Additions:
 
-just ensure it keeps working for usrmerge DISTRO_FEATURE as well.
+  - A new "DSP policy" module has been added; its purpose is to automatic=
+ally
+    load a filter-chain when a certain hardware device is present, so tha=
+t
+    audio always goes through this software DSP before reaching the devic=
+e.
+    This is mainly to support Apple M1/M2 devices, which require a softwa=
+re
+    DSP to be always present
 
->
-> So that in do_install I can do the sed substitution using ${prefix} and $=
-{sysconfdir}
->
->
+  - WpImplModule now supports loading module arguments directly from a SP=
+A-JSON
+    config file; this is mainly to support DSP configuration for Apple M1=
+/M2
+    and will likely be reworked for 0.5
+
+  - Added support for automatically combining Bluetooth LE Audio device s=
+ets
+    (e.g. pairs of earbuds) (!500)
+
+  - Added command line options in ``wpctl`` to display device/node names =
+and
+    nicknames instead of descriptions
+
+  - Added zsh completions file for ``wpctl``
+
+  - The device profile selection policy now respects the ``device.profile=
+``
+    property if it is set on the device; this is useful to hand-pick a pr=
+ofile
+    based on static configuration rules (alsa_monitor.rules)
+
+Changes/Fixes:
+
+  - Linking policy now sends an error to the client before destroying the=
+ node,
+    if it determines that the node cannot be linked to any target; this f=
+ixes
+    error reporting on the client side
+
+  - Fixed a crash in suspend-node that could happen when destroying virtu=
+al
+    sinks that were loaded from another process such as pw-loopback (#467=
+)
+
+  - Virtual machine default period size has been bumped to 1024 (#507)
+
+  - Updated bluez5 default configuration, using ``bluez5.roles`` instead =
+of
+    ``bluez5.headset-roles`` now (!498)
+
+  - Disabled Bluetooth autoconnect by default (!514)
+
+  - Removed ``RestrictNamespaces`` option from the systemd services in or=
+der to
+    allow libcamera to load sandboxed IPA modules (#466)
+
+  - Fixed a JSON encoding bug with empty strings (#471)
+
+  - Lua code can now parse strings without quotes from SPA-JSON
+
+  - Added some missing `\since` annotations and made them show up in the
+    generated gobject-introspection file, to help bindings generators
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ .../{wireplumber_0.4.14.bb =3D> wireplumber_0.4.15.bb}          | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-multimedia/recipes-multimedia/wireplumber/{wireplumber_0.4.1=
+4.bb =3D> wireplumber_0.4.15.bb} (98%)
+
+diff --git a/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0=
+.4.14.bb b/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.4=
+.15.bb
+similarity index 98%
+rename from meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.=
+4.14.bb
+rename to meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.4.=
+15.bb
+index 6f93b443d..679921922 100644
+--- a/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.4.14.b=
+b
++++ b/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.4.15.b=
+b
+@@ -11,7 +11,7 @@ DEPENDS =3D "glib-2.0 glib-2.0-native lua pipewire \
+     ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data"=
+, "python3-native python3-lxml-native doxygen-native", "", d)} \
+ "
+=20
+-SRCREV =3D "6d0c7f7b7f484b3cd2aaf2e2b3cc902c095b4946"
++SRCREV =3D "d67b48e595cb4612fd7fd47f97df6b8883ef7f60"
+ SRC_URI =3D " \
+     git://gitlab.freedesktop.org/pipewire/wireplumber.git;branch=3Dmaste=
+r;protocol=3Dhttps \
+     file://90-OE-disable-session-dbus-dependent-features.lua \
+@@ -133,7 +133,7 @@ CONFFILES:${PN} +=3D " \
+ # itself to become a daemon, in practice, the PipeWire daemon is used.
+ RRECOMMENDS:${PN} +=3D "pipewire ${PN}-scripts ${PN}-modules-meta"
+=20
+-FILES:${PN} +=3D "${systemd_user_unitdir} ${systemd_system_unitdir}"
++FILES:${PN} +=3D "${systemd_user_unitdir} ${systemd_system_unitdir} ${da=
+tadir}/zsh"
+=20
+ FILES:libwireplumber =3D " \
+     ${libdir}/libwireplumber-*.so.* \
+--=20
+2.42.0
+
 
