@@ -2,56 +2,56 @@ Return-Path: <yi.zhao@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 918A0CDB46E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A23DCCDB47E
 	for <webhook@archiver.kernel.org>; Thu, 12 Oct 2023 11:56:41 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.9203.1697111794554135209
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.9282.1697111798607293854
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 12 Oct 2023 04:56:34 -0700
+ Thu, 12 Oct 2023 04:56:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=bc/UvUxp;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=86490ded89=yi.zhao@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 39C9sH2e027166
-	for <openembedded-devel@lists.openembedded.org>; Thu, 12 Oct 2023 04:56:34 -0700
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=aFbDi5KY;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=86490ded89=yi.zhao@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 39CAUnfs011211
+	for <openembedded-devel@lists.openembedded.org>; Thu, 12 Oct 2023 11:56:37 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
 	 h=from:to:subject:date:message-id:in-reply-to:references
 	:content-transfer-encoding:content-type:mime-version; s=
-	PPS06212021; bh=J0epU2kt4Xnu4lJt2XzP/B5rqFb3i/GJJLNlY90+gz8=; b=
-	bc/UvUxpxiWwmIRgrs+WAeQTriIzVdm/adqnP2WNt4351nixuLaXYjk9mPcfAW2r
-	ySJocKSX/sESStwkPdNMfXJUUKEWopsp8krt2JoDP/6Nx5qVMgf9bHVQjo3jOQvH
-	SehY0oSMgVl+sAktOZ4ISb0Ubz/6YktAWy96aYK70IXHbcEEogmXiCatBHzOKwt2
-	7whpYwb2NuE8+DTs/v7fe2wx3mQigr7Kn3SYvTH5OdUViJ3HD0Sf0fQ+ZdpE3TTe
-	uTh5wtqYn19hhMegwcy4FaENgNOpiskD4ZLvcuW/OphZ9uffyWZuz1av+SwQY6mK
-	iqnB4n199UDnZkGjFTz5Qg==
-Received: from nam10-mw2-obe.outbound.protection.outlook.com (mail-mw2nam10lp2101.outbound.protection.outlook.com [104.47.55.101])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3tnhq4scce-1
+	PPS06212021; bh=qttNHbSECqw5cGbB3YXB4XgTocFiTOWZg6vNtOwWZ5o=; b=
+	aFbDi5KY2jCVc4jccDPGt3whjuSn7zSWVI+s6OEnhMOktl4D5qKevZ2osVrRTUo5
+	vNFu6yFY2feuC74stkzdx6Fm6JEzCH3zT4vQ66A8HyjlcJGptD9ZJc5RTK0iO46S
+	4klkP8tEO83kn3QF8Yr+vJZMu42rdHQMLJN3+hF8D7ziUhSr/mVZZU3XB6iDhRyX
+	ZLpKE4l0/swdqc4+9f6s5K3WFUSYWKUTNjzih0A5GM5gZqqOuq+DhlJ5bVSu4R9y
+	btwo1UANbOCezJrnHOtbSsdZujqoLmB1mX4RnhLfkShAQoLj9P6t2GeDx0hd8tDH
+	qFde7cn4aaWgfVM90gHgzw==
+Received: from nam12-bn8-obe.outbound.protection.outlook.com (mail-bn8nam12lp2169.outbound.protection.outlook.com [104.47.55.169])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3tnhuehcf7-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 12 Oct 2023 04:56:34 -0700 (PDT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 12 Oct 2023 11:56:37 +0000 (GMT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=EKYmO2S0738VGV3h0cFyFvkeG6lUyk1xOsUm9VuLxYxR2YUc2hXvD11MCXYJ8xGjEpO0+nmxyqAJ9zeDffcW0+qWzq0iBY2deyxWwkYWuL3zGQASe46K+35jECgbSfPuFKfNZ4V72Qi/8bcogkgy7JxHXqJUkOpzmGtdNehY6fGOTJUhAL0yDwYJWIdciKlNfKdf+7XZ1GC0M0kIwKZNefkQ3R5Ms7epK9tBjKgKx48r5N7OQX8p2dy3sSdAOeBK1/Si1bnbQmvstl+BAEeyC75ngEOqAt4YGDv1wlNez1HwkSjdkwYpRite6Q5f8063b2ku4KhxgzTTq1kVdI+A6g==
+ b=KBs13shOXdEqO/DVJUMVtO0wUleUgzcmyJIJP1pnSlg2BRJVxk6Qg0yiVkXaAU7XqgHaePCE9TQErk6dz9baV8AYrqSZNTLqGKLrO0P9m4Fx1s+WBo0CMvIfoxFFlgxokX2z9lOEmAFIfHH0ZnCvEwzJmIjhEXSeeEtDrRu3iaiGBNPpxApzg6ZOw/TAsS+0SHQxr/SbUl0b7STO4Cb/EP2XeR5qyfAqMnY0Ip13QMI9ZLQui8kugTtCrTEnxFA1rIbwcmM9UPpswralx/MkZsh6q7oa/Ik9ZF0kRhB6AJAk5VaLsjO+fThKinS5NwmPf+VRYbtunR+r2BJH7hdZug==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=J0epU2kt4Xnu4lJt2XzP/B5rqFb3i/GJJLNlY90+gz8=;
- b=hdcztavCOqlFJdhz0dhE53DLB4hzJxkIZfitkPY/3EesXVlLrJHFJ8xIKx8scoCiw6Eh9gqEFXPp9Cgw3BC/n1rK/DTAZCdboxpwwYkDDTna1vZMFHRjqlkI7B9b+7YJ5nUjOPS593JTUYAJlf1KcWVxgVz7gQG9AxSTPNNlC7y0YMtj6dIVUzKxgpgns7c3RD869yq/QH5SmfZwzwWPc9LtGHuKn2MYB2Dh8TDoDitx/pb7XQYKqDcIuy7/TNocHwyvvDIqyYcX5DI3l+3zXz6TEl65lz+4MioVBc6OqDEQOhe1DsTI/G3va+I3gX6AeX+Ud66mTdLzzz7fHYw1ww==
+ bh=qttNHbSECqw5cGbB3YXB4XgTocFiTOWZg6vNtOwWZ5o=;
+ b=QK0b6yyzx4FbfkG+hlpJkeGIl56jgcYp4XlFzeE+gHO/Tw3Nm4dkK+XY7G5CmlqmJsfkAHYw7c+o0UaBX+l63NaJ8SSkPfYm0BEJa8dwpKMMBZXKlWGlxaYwUgJdRu6HLNAROGJgFxTwylczjBoFSie9yexFqZIBKjORu8qbvdF4Ek0AqXO9ogroSLJXmfQZS9wSg0/zCcRqJhToNeKz0oGs+8EhUEJl68UgkNW0lh1xP8l+sjkwcbzQDYe70XFoQt5SfqB04jAmlzoq5o4AMvEAYJmiiFHRhQRXhW2YeZay+eYKuqDyqyjOi7EWO+LJUIj6oQuqMKkKkFK0mDW5rA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
 Received: from CO1PR11MB4867.namprd11.prod.outlook.com (2603:10b6:303:9a::13)
- by MN0PR11MB5964.namprd11.prod.outlook.com (2603:10b6:208:373::17) with
+ by MN6PR11MB8218.namprd11.prod.outlook.com (2603:10b6:208:47c::20) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.38; Thu, 12 Oct
- 2023 11:56:30 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.44; Thu, 12 Oct
+ 2023 11:56:34 +0000
 Received: from CO1PR11MB4867.namprd11.prod.outlook.com
  ([fe80::96db:9814:2d71:a957]) by CO1PR11MB4867.namprd11.prod.outlook.com
  ([fe80::96db:9814:2d71:a957%6]) with mapi id 15.20.6863.043; Thu, 12 Oct 2023
- 11:56:30 +0000
+ 11:56:32 +0000
 From: Yi Zhao <yi.zhao@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH 3/4] libtevent: fix ptest
-Date: Thu, 12 Oct 2023 19:56:13 +0800
-Message-Id: <20231012115614.3133797-3-yi.zhao@windriver.com>
+Subject: [meta-networking][PATCH 4/4] libldb: add ptest
+Date: Thu, 12 Oct 2023 19:56:14 +0800
+Message-Id: <20231012115614.3133797-4-yi.zhao@windriver.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20231012115614.3133797-1-yi.zhao@windriver.com>
 References: <20231012115614.3133797-1-yi.zhao@windriver.com>
@@ -62,96 +62,103 @@ X-ClientProxiedBy: SG2PR02CA0002.apcprd02.prod.outlook.com
  (2603:10b6:303:9a::13)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PR11MB4867:EE_|MN0PR11MB5964:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4bcb61fb-f002-4012-718c-08dbcb1a45b4
+X-MS-TrafficTypeDiagnostic: CO1PR11MB4867:EE_|MN6PR11MB8218:EE_
+X-MS-Office365-Filtering-Correlation-Id: b23c6db6-81f5-4da5-d6ea-08dbcb1a4664
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	rEsEvy5Pe0oaSEFfiqoUA2kDZPtYmVggbPRwh5CzRLH425/tO7SiSifCPSOaFdTCnbtTwrdJdwR65VAm1CXLR1VJ2sjRscrvzftcPxVNHEjTVhUZiq+8Xsxv5+W1LFhyqvOLL+6m+6N+e+pqXHTh9yeJ4QZpCUxiWyj5WJI14/CtIW8nNYTEostmKCmZQTH/nJeXMXsoYqED7XiZ2sfwDi9D8nx0B/DR3QuEQtDp48GSJW4+XqV5+PPJt7j7SzNAPJmgNIYt/Drh8X0NNCaEDYNnogeOwqG9v3xKyCE+12rgXBaGoiVBnAbHPwHnC8fL0PN9zmjafpO+gAiV+mIC7X1CIqu5Jcn8gVUjiiacf6KzLbT9IEh5gO7nA9qYuhXRZsp0xeMUUUiGIKzirSEOLD6f+wFkSen8G4WajRa17q5T4VCGcM71F+hSXYt+u3QcenbpD7vBKa1dzYBMZKYIHe8LQL2VZXsCJNjB7udUYpovtUuP1lDmqnJDY0Qk4MWGkef+/Hl+fg3EBdB3qSkzZAcVXgrhX7pjbAzZHvNb22B0hX/MdalQDGWU9I4jEc5rgtlIoxivkT9krP+B2mF9X2Pa5DKRIi13lxQZ9PT6MWA=
+	/cBPVxaTzsDIueSAAp0Y2DaGcfuZeLCy81iBS/tlIS8dhX86rtsWWN9uz00Me7NHkwJffpN131PLZvto75kdYpn0KWFtctrFS7v1rXZWA/qrTFgFjn8ggzXCZ2c5Cigm51SkwodOo5/U2Az8jCw/bdJtuqjVoVsxL8M5VGJFv46B5qLJoP6CM44VNnFgpY+Fher4yWpy/kRSb+tHoasyqKxO0mpR9+DI1/Eu/s7ftJur239KtlZpaUxPRDkNe9Fe+fNIof2Ynzd4L94A0Nw9e1W01rrX/mKBVnx+y8QYJC6TQXw7dLKNSDo+n225/NTm+Yt8rlPsgx5H4nEsU11eHYGxe+rbnUetUAOnJblzPYlyKPg98RX0MmDXL7GciHPfrE/gk+J3bffwtU4dh/d1qPfNrLGLiM8GcGbSZkQQ1qUIRF5pisIInb/gtgXyyw2TDiUKSZYY4y4G89OyjSqZLVcxGAM+hvxonNLBXSNdKLeM2dCZbnqHoxOlKJsBMjdO0qXa4Y9evHRuy/A8h1W+hSB0NCEjfF5SzpfHL/rZdSagN5Mb/tK3Fs3AYU8iFpfsniWyxMQtz4jUjg1aZeJwsbmRJsvFA9szegflQTJ2USI=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB4867.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(39840400004)(366004)(136003)(376002)(396003)(346002)(230922051799003)(1800799009)(186009)(64100799003)(451199024)(1076003)(2616005)(83380400001)(26005)(6512007)(5660300002)(44832011)(66476007)(66556008)(316002)(38100700002)(6916009)(8936002)(8676002)(66946007)(2906002)(6666004)(41300700001)(38350700002)(478600001)(52116002)(6506007)(36756003)(86362001)(6486002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR11MB4867.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(376002)(136003)(396003)(366004)(39850400004)(346002)(230922051799003)(1800799009)(451199024)(64100799003)(186009)(26005)(66946007)(66556008)(66476007)(83380400001)(316002)(6916009)(2616005)(1076003)(44832011)(5660300002)(478600001)(86362001)(6506007)(52116002)(6666004)(6486002)(8936002)(8676002)(2906002)(38350700002)(38100700002)(6512007)(41300700001)(36756003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?8dUU4TFiDANOUU0+1jJcHL2MZyi3A4pHUgNwmtNr5eIgv42E8hDlTsU5xa9F?=
- =?us-ascii?Q?PUz3+3ijpDho+wMHcLoWEN9IrtNzMFrwf2lSdYL8ofxbl1xYSMjnuejhhFa5?=
- =?us-ascii?Q?J6SPTqu5ovVZAIcOaYdbIZOW+WWOesb/rSiHGF6vC68N+eyM+4Z5eSuAyygV?=
- =?us-ascii?Q?WFLyNV5/mz/PPunQkL5HLpYlUFl9yfYWAvGg3rnLD10nkNa42rGnJpzmqaQz?=
- =?us-ascii?Q?jnExJ9kUByOMHPzMkanDsgS9Bi6b2XxU5lbkLQ9322fNzm/BVQIszAV1iyAH?=
- =?us-ascii?Q?A2be7WPUwILEr7I8/uD021Hk6s4zbz7dR+aqET1ZxpE32sgItv+YVZot6lt3?=
- =?us-ascii?Q?WpTorsNYfEdWbMqdr4j4P7V0wzOk2bqyzXKhSgJHoAkVe8nwMfrcSf579rVz?=
- =?us-ascii?Q?Qu2Ka+mz16EbmhazWhPis0k4ydDuYXnvahw/V/siy5k+65o2N0TyRY2osoko?=
- =?us-ascii?Q?klGQf1d6YjRolOEHtzsaKmsbpBy3M+TKR40zjV/fE3Ou9xyEHyl8cyK8o5jX?=
- =?us-ascii?Q?Ajg8fRs8XG+CQRLaDdtUl4edc75I2Twm1y18/M3KdSsqRPpUZH3QbM/brtzf?=
- =?us-ascii?Q?nDiQQiYC/0wuHo2rgppxbfBuZ2owq4RuuOiTKU96Wuxg5/nAB7UPBl8tRR8A?=
- =?us-ascii?Q?SWFPXs7E7QUkEyNqdXtWRhvzgWaGGDfQAhmQ14D5PWOq4Ev4mszCO/ySI1Nq?=
- =?us-ascii?Q?b7sJkGQXi+UOrUJvf41mIUAi86BEur16A53R56NWdodAakpfFW5mWYfzdtK2?=
- =?us-ascii?Q?u+/3OmuOfIkdeoegQKOjHvnbkasik5ONJflZ2CaxisI8qmbxkyv1upW+fxu4?=
- =?us-ascii?Q?fsjuUxYvXxCcQoPE17GMpd6rk1iDMxAAAO6xXuYoKHfheAytlzoRqVuRS34s?=
- =?us-ascii?Q?q8B5sXrf8pxFNLYXc/4+2/faVtNrB/QstujUuafh6ay08xBEv6/4BxwTJef/?=
- =?us-ascii?Q?zKqmgdfyzX/q34NTQeto8R+qfg77PJ0IETZXycJLLnM/zR1auuhAD3M7nTet?=
- =?us-ascii?Q?r8QG5ByhUmbkvOSw5J+0R9zKCC/vdR5cwsJPqLGP0Zzl5rwtPdjrqBFyyyx5?=
- =?us-ascii?Q?bwveh3I8jt08odfcnWmpuKFh1uPW4XkYCUN3zD30sSKLaMuYkbj96ch6Q2YO?=
- =?us-ascii?Q?VeyakrAE1w+HVVnCXiNQxBmKdJ/wQfUSR3Sc2RL10mRpVF9gxQd70Jp1Yrl0?=
- =?us-ascii?Q?oEPRqbsM8A3Ca/bELYDGncXM8WkiDA95/PaS6x6Q9HhMSl+6r3uRWz5+krG/?=
- =?us-ascii?Q?e4lqa99BSp5WlEu2u/cNXAFNp66VmEDh3iMugszjpj6ICu+BbhMXfvquhd5/?=
- =?us-ascii?Q?Dbe+sftRN8QJc+1EsFo5F2J6uc8bv8bW/CLlShklYhs57w2BLnMJG21/YMNL?=
- =?us-ascii?Q?h5LpaUezyR+vsl3J8+7AiRKSPteEsE7Noll2A10JRp09k3QhM5IEjQCVmZj+?=
- =?us-ascii?Q?nycRZufqlWWlepFIF3GhFRQIOKekICnT9qSmoHTgQNhskGRMx5A3dcaLRnjT?=
- =?us-ascii?Q?TzLy8DLZAMdIf92/TWvDJbkzh74aKi5EJer3NnAJEhjw+inr38SAGCK/nkT+?=
- =?us-ascii?Q?+Xc8/6U+e7XBFEjwH/LAzqgtZMkrbX3+UgNyN+fy?=
+	=?us-ascii?Q?H4GdB1OXReRW8lWjqEGT1wZC6RnXsbHqV2SyUaY9EEPzvSZpG+LeJP3eKCFd?=
+ =?us-ascii?Q?jEv//XNPO7Z7yCsFKbE0msG38YTBMlXHIiQMdMSLPfwuuI7VwDRIzplMupUA?=
+ =?us-ascii?Q?iYW6Bic7/QSDfOpvOxoVv2uGYwxSOCbqZPEJPVf8ypK/Prkxao7v60edR4MK?=
+ =?us-ascii?Q?391VhqOQ0fTS59+OQxE+F0iuTeAImwSdpQmDdvKyw1B9Jh3H6T9fMjASZsbH?=
+ =?us-ascii?Q?eSdS/JTZs9LbN+NzusKFk8+fRflBqjn7BoaQfnrmjY9HSbrdgQuChHhjHIAx?=
+ =?us-ascii?Q?zU3emjAOVdh8V1Yhju6UUPIw3wEnYc5jx7SoVD8lDHLeB9w++YFk1QvgYIKW?=
+ =?us-ascii?Q?kGbcKMet6iJNUoVRY7lcA243dz4H+QAyaQE1LV1LHrBQiL1Lro5SBTnL8mY0?=
+ =?us-ascii?Q?C8PjrOb9FlmqzyZ/sl1+XzBQHoSdqEfr508CzWvGXSk0N5ifzdtQuHNwkZ9T?=
+ =?us-ascii?Q?7R5EF1SKKUJosOzgK5dfb/5n+PoVmwIT+f3sUxBNdDnqWAn8PHNNnK6pzNjo?=
+ =?us-ascii?Q?WKSrRAbQDAi2903VHutwJiG5TuwZi8/07QWDK0mxUqm04qnUizTpJKe+nrtU?=
+ =?us-ascii?Q?sKJcjvMeyubUgdEg2R8ifie9jz08UdhiWavxe5azOvPvCO/OFgTiGBv4kNA8?=
+ =?us-ascii?Q?0kWDVoAXgxmPTcuV+VyIsny9HMxDhy5hEL+Opffn9tKI5LK9oWex1OOEZCIU?=
+ =?us-ascii?Q?0HuZZ0ZxQ7cR2AyfR42WD0cjKMhSbaHiFTNLU2uQWv9w8i94gMsaKNhSe+Jy?=
+ =?us-ascii?Q?O9E7LU98jA8TpIMF+MbI4titGfcy7TJBFMYq1XXDnfB548EinKHghkSnH9IO?=
+ =?us-ascii?Q?y2Hbobg6z/imMIHwrh9wL6pxcGy0FXq01T66l7jDJRCCDeWHEQCzlOKRPB30?=
+ =?us-ascii?Q?Ev92Wfh5CHCcpwDBRB8fP6Y/ve6Jr9QJwviDjdDmbOhx5NQ3I5QwL1MudHXG?=
+ =?us-ascii?Q?N1Mr6WvlLb31kBarmQwwSP3X7PLUGTutvf+ZNRlAXTCNBrfEWK68IA7oqRMq?=
+ =?us-ascii?Q?4zinEjgbEAWJcHUsvDXaGumyQRHfifpp3nncKlT/FYy2syYvW3sy2VnpxAE2?=
+ =?us-ascii?Q?OQhnm6x/rbDjqLeeYl/I3npyFyC+1d+OASH8vwTmEJXDRWbSFq4m3/KCKsHP?=
+ =?us-ascii?Q?DaOdrA+eEVfE1gzE+v4Rg88mmdDfhTa9DfHmG//rn+6yRDYhWEYxX6aAG5pR?=
+ =?us-ascii?Q?6QkEkxiX1Hykzv1/vMFaHuDYoIGIAsGcTpQi4HQNQE6f1HrdLbLivUCuag4X?=
+ =?us-ascii?Q?jbj26ERXQ5N8j6cEdcc/CrZmQ1ySrPB/WXfWpZ5L3/7adu0V4mpn9dt+liGd?=
+ =?us-ascii?Q?Xk668/J7QyBlq9AiW/bbV+Z8UQxAYf/3S4B2ZG9qwgSgBJqmKZTBBa1wZPVf?=
+ =?us-ascii?Q?XUgzHQUZDBCqnxgyLzoXqZ9c4YbLFS2vle2B+3JivMy9tj3xcbWvp43A+6V5?=
+ =?us-ascii?Q?woyLM3HbdA2gRW33scIHS60GYFIZcPsX6UiLlxbkbFByQlLZP99qrWKttKxz?=
+ =?us-ascii?Q?q+BIEk9Nin2P6UQD1WvxlSXyVEUaYgx8Z0V1gh1/bzpCYqW1ittkYOCdRsD9?=
+ =?us-ascii?Q?acIaPGJ+sfrxxWBqfg3GrclHQ1/sRFEhR9BymiMp?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4bcb61fb-f002-4012-718c-08dbcb1a45b4
+X-MS-Exchange-CrossTenant-Network-Message-Id: b23c6db6-81f5-4da5-d6ea-08dbcb1a4664
 X-MS-Exchange-CrossTenant-AuthSource: CO1PR11MB4867.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Oct 2023 11:56:30.3570
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Oct 2023 11:56:31.5037
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: cxnz/RYIas7QRLU7mZ9eCk02wV5z1wnL3hcMkyeGzjT/O1+cFUeNkj5TzeuGLnh1Vuub5BLqtv7JjsxzSCJ8mw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR11MB5964
-X-Proofpoint-GUID: BRgciVGroxW4AX0au7VzSYHW_KsFm2ot
-X-Proofpoint-ORIG-GUID: BRgciVGroxW4AX0au7VzSYHW_KsFm2ot
+X-MS-Exchange-CrossTenant-UserPrincipalName: tWGA6MuZyIj2sNWFBcG5r5xTdAsiOWgXHKEaHHedBH2EEKZ1Bk7D7hwzJprluGuXoq7DEMjuGClwAHTpES8nRA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN6PR11MB8218
+X-Proofpoint-GUID: UzfNByXckFWEi81M1o5DmPcO0XievK0G
+X-Proofpoint-ORIG-GUID: UzfNByXckFWEi81M1o5DmPcO0XievK0G
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.267,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2023-10-12_05,2023-10-12_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0 spamscore=0
- malwarescore=0 lowpriorityscore=0 priorityscore=1501 phishscore=0
- mlxlogscore=980 impostorscore=0 adultscore=0 suspectscore=0 clxscore=1015
- mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2309180000 definitions=main-2310120098
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0
+ impostorscore=0 adultscore=0 spamscore=0 mlxlogscore=999 mlxscore=0
+ bulkscore=0 phishscore=0 lowpriorityscore=0 clxscore=1015
+ priorityscore=1501 malwarescore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.19.0-2309180000 definitions=main-2310120098
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 12 Oct 2023 11:56:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105447
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105448
 
 * use external cmocka instead of bundled cmocka
 * add run-ptest script
 
 Ptest results:
-$ ./run-ptest
-PASS: replace_testsuite
-PASS: test_tevent_tag
-PASS: test_tevent_trace
+$ ptest-runner libldb
+START: ptest-runner
+2023-10-12T11:49
+BEGIN: /usr/lib/libldb/ptest
+PASS: test_ldb_dn
+PASS: test_ldb_qsort
+DURATION: 0
+END: /usr/lib/libldb/ptest
+2023-10-12T11:49
+STOP: ptest-runner
+TOTAL: 1 FAIL: 0
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
  ...ix-musl-libc-conflicting-types-error.patch | 45 -------------------
- .../libtevent/libtevent/run-ptest             | 17 +++++++
- .../libtevent/libtevent_0.14.1.bb             | 20 +++------
- 3 files changed, 24 insertions(+), 58 deletions(-)
- delete mode 100644 meta-networking/recipes-support/libtevent/libtevent/cmocka-fix-musl-libc-conflicting-types-error.patch
- create mode 100644 meta-networking/recipes-support/libtevent/libtevent/run-ptest
+ .../recipes-support/libldb/libldb/run-ptest   | 17 +++++++
+ .../recipes-support/libldb/libldb_2.7.2.bb    | 14 +++---
+ 3 files changed, 26 insertions(+), 50 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/libldb/libldb/cmocka-fix-musl-libc-conflicting-types-error.patch
+ create mode 100644 meta-networking/recipes-support/libldb/libldb/run-ptest
 
-diff --git a/meta-networking/recipes-support/libtevent/libtevent/cmocka-fix-musl-libc-conflicting-types-error.patch b/meta-networking/recipes-support/libtevent/libtevent/cmocka-fix-musl-libc-conflicting-types-error.patch
+diff --git a/meta-networking/recipes-support/libldb/libldb/cmocka-fix-musl-libc-conflicting-types-error.patch b/meta-networking/recipes-support/libldb/libldb/cmocka-fix-musl-libc-conflicting-types-error.patch
 deleted file mode 100644
-index 5795ff3bd..000000000
---- a/meta-networking/recipes-support/libtevent/libtevent/cmocka-fix-musl-libc-conflicting-types-error.patch
+index 8e756d8d3..000000000
+--- a/meta-networking/recipes-support/libldb/libldb/cmocka-fix-musl-libc-conflicting-types-error.patch
 +++ /dev/null
 @@ -1,45 +0,0 @@
--From 1d4dedab5039bb671f44566d8573ee3532ba7176 Mon Sep 17 00:00:00 2001
+-From a37eb0a46669592e32ed4e004abb2698ee4f90c5 Mon Sep 17 00:00:00 2001
 -From: Changqing Li <changqing.li@windriver.com>
 -Date: Wed, 25 Jul 2018 09:55:25 +0800
 -Subject: [PATCH] cmocka: fix musl libc conflicting types error
@@ -196,18 +203,18 @@ index 5795ff3bd..000000000
 --- 
 -2.25.1
 -
-diff --git a/meta-networking/recipes-support/libtevent/libtevent/run-ptest b/meta-networking/recipes-support/libtevent/libtevent/run-ptest
+diff --git a/meta-networking/recipes-support/libldb/libldb/run-ptest b/meta-networking/recipes-support/libldb/libldb/run-ptest
 new file mode 100644
-index 000000000..19f7a4a3a
+index 000000000..f0de0578c
 --- /dev/null
-+++ b/meta-networking/recipes-support/libtevent/libtevent/run-ptest
++++ b/meta-networking/recipes-support/libldb/libldb/run-ptest
 @@ -0,0 +1,17 @@
 +#!/bin/sh
 +
 +ptestdir=$(dirname "$(readlink -f "$0")")
 +cd "$ptestdir"/tests || exit
 +
-+tests="replace_testsuite test_tevent_tag test_tevent_trace"
++tests="test_ldb_dn test_ldb_qsort"
 +
 +for f in $tests
 +do
@@ -219,64 +226,58 @@ index 000000000..19f7a4a3a
 +        fi
 +    fi
 +done
-diff --git a/meta-networking/recipes-support/libtevent/libtevent_0.14.1.bb b/meta-networking/recipes-support/libtevent/libtevent_0.14.1.bb
-index b34c186ca..9a2b5ede2 100644
---- a/meta-networking/recipes-support/libtevent/libtevent_0.14.1.bb
-+++ b/meta-networking/recipes-support/libtevent/libtevent_0.14.1.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://tevent.samba.org"
+diff --git a/meta-networking/recipes-support/libldb/libldb_2.7.2.bb b/meta-networking/recipes-support/libldb/libldb_2.7.2.bb
+index daf0f73b8..c4b7602bf 100644
+--- a/meta-networking/recipes-support/libldb/libldb_2.7.2.bb
++++ b/meta-networking/recipes-support/libldb/libldb_2.7.2.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://ldb.samba.org"
  SECTION = "libs"
- LICENSE = "LGPL-3.0-or-later"
+ LICENSE = "LGPL-3.0-or-later & LGPL-2.1-or-later & GPL-3.0-or-later"
  
--DEPENDS += "libtalloc libtirpc"
-+DEPENDS += "libtalloc libtirpc cmocka"
- RDEPENDS:python3-tevent = "python3"
+-DEPENDS += "libtdb libtalloc libtevent popt"
++DEPENDS += "libtdb libtalloc libtevent popt cmocka"
+ RDEPENDS:pyldb += "python3"
  
  export PYTHONHASHSEED="1"
-@@ -11,10 +11,9 @@ export PYTHONHASHSEED="1"
- SRC_URI = "https://samba.org/ftp/tevent/tevent-${PV}.tar.gz \
-            file://0001-Add-configure-options-for-packages.patch \
-            file://0002-Fix-pyext_PATTERN-for-cross-compilation.patch \
+@@ -12,10 +12,9 @@ SRC_URI = "http://samba.org/ftp/ldb/ldb-${PV}.tar.gz \
+            file://0001-do-not-import-target-module-while-cross-compile.patch \
+            file://0002-ldb-Add-configure-options-for-packages.patch \
+            file://0003-Fix-pyext_PATTERN-for-cross-compilation.patch \
 +           file://run-ptest \
            "
  
 -SRC_URI:append:libc-musl = " file://cmocka-fix-musl-libc-conflicting-types-error.patch"
 -
- LIC_FILES_CHKSUM = "file://tevent.h;endline=26;md5=47386b7c539bf2706b7ce52dc9341681"
+ PACKAGECONFIG ??= "\
+     ${@bb.utils.filter('DISTRO_FEATURES', 'acl', d)} \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'xattr', 'attr', '', d)} \
+@@ -37,7 +36,7 @@ LIC_FILES_CHKSUM = "file://pyldb.h;endline=24;md5=dfbd238cecad76957f7f860fbe9ada
  
- SRC_URI[sha256sum] = "ef85fcaa80ffd2351036ba4b347630fef2a1ac3da964a7f1820466bad03cd00d"
-@@ -42,27 +41,22 @@ export WAF_NO_PREFORK="yes"
+ SRC_URI[sha256sum] = "26ee72d647854e662d99643eb2b2d341655abf31f4990838d6650fb5cf9209c8"
+ 
+-inherit pkgconfig waf-samba
++inherit pkgconfig waf-samba ptest
+ 
+ S = "${WORKDIR}/ldb-${PV}"
+ 
+@@ -47,7 +46,7 @@ export WAF_NO_PREFORK="yes"
  
  EXTRA_OECONF += "--disable-rpath \
                   --disable-rpath-install \
 -                 --bundled-libraries=cmocka \
 +                 --bundled-libraries=NONE \
                   --builtin-libraries=replace \
-                  --with-libiconv=${STAGING_DIR_HOST}${prefix}\
-                  --without-gettext \
-                 "
- 
--do_install:append() {
--    install -Dm 0755 ${B}/bin/test_tevent_trace ${D}${bindir}/test_tevent_trace
--    install -Dm 0755 ${B}/bin/test_tevent_tag ${D}${bindir}/test_tevent_tag
--    install -Dm 0755 ${B}/bin/replace_testsuite ${D}${bindir}/replace_testsuite
+                  --with-modulesdir=${libdir}/ldb/modules \
+                  --with-privatelibdir=${libdir}/ldb \
+@@ -81,3 +80,8 @@ do_configure:prepend() {
+     # For a clean rebuild
+     rm -fr bin/
+ }
++
 +do_install_ptest() {
 +    install -d ${D}${PTEST_PATH}/tests
-+    install -m 0755 ${B}/bin/test_tevent_* ${D}${PTEST_PATH}/tests/
-+    install -m 0755 ${B}/bin/replace_testsuite ${D}${PTEST_PATH}/tests/
- }
- 
- PACKAGES += "python3-tevent"
- 
- RPROVIDES:${PN}-dbg += "python3-tevent-dbg"
- 
--FILES:${PN} += "${libdir}/tevent/*"
--FILES:${PN}-ptest += "${bindir}/replace_testsuite \
--                      ${bindir}/test_tevent_tag \
--                      ${bindir}/test_tevent_trace \
--                      ${libdir}/libcmocka-tevent.so"
- FILES:python3-tevent = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*"
- 
- INSANE_SKIP:${MLPREFIX}python3-tevent = "dev-so"
++    install -m 0755 ${B}/bin/test_ldb_* ${D}${PTEST_PATH}/tests/
++}
 -- 
 2.25.1
 
