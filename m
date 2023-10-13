@@ -2,82 +2,179 @@ Return-Path: <beniaminsandu@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B8E4CCDB47E
-	for <webhook@archiver.kernel.org>; Fri, 13 Oct 2023 14:04:30 +0000 (UTC)
-Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
- by mx.groups.io with SMTP id smtpd.web11.39216.1697205866855111848
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D907BCDB47E
+	for <webhook@archiver.kernel.org>; Fri, 13 Oct 2023 14:07:50 +0000 (UTC)
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+ by mx.groups.io with SMTP id smtpd.web10.39310.1697206070135106409
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 13 Oct 2023 07:04:26 -0700
+ Fri, 13 Oct 2023 07:07:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ak4Be4+o;
- spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: beniaminsandu@gmail.com)
-Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-1c9de3f66e5so15227395ad.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 13 Oct 2023 07:04:26 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=PBj5dXUO;
+ spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: beniaminsandu@gmail.com)
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4075c58ac39so22328155e9.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 13 Oct 2023 07:07:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1697205866; x=1697810666; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=gW+orbpuq6QtG2nIbXo/oK18Nj8TV0TfbAJQEk7cq4Y=;
-        b=ak4Be4+oEgnZGwWqAZELW4mYpiKnefaq8SDGfLm7QAvpZEaApRZaOxfA71LHxELubz
-         HX5YwplLSuKCWsRxwr6cLdwH6eMVACzOFU34YdxolImmbicaknB4EGSuEu8Us5xUs3G0
-         kn6HhXNoo/S19qHMnWO9GX8wn0Uy/OFigmvWaDzUIdzPEqLqXgEQNjAhsbthsRxgWm2R
-         Bj1Swm0mN+vzyLlX4GUuR8LRNbs5SzaCs6pVgxEXCyAA/MQ9rlIv3O8hXBMwv9GwEjtd
-         DnIdC6pKwdjGw79f0bjqOf4gl0TuJ2mT2es3JB41UgmvOKFPsNIU39NPR/CJnWdBFcAy
-         YwBg==
+        d=gmail.com; s=20230601; t=1697206068; x=1697810868; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=2jjZSm2novk4uzCCD3gHmE7UhrlVwtlEEfhTDY5zww0=;
+        b=PBj5dXUONhnDYvm4/O7PRg8ouA5dHiO9acl+vrcljW2c0QeUYhSA0rJPM+KWZdy/76
+         dJ9U4Iz0XmymTPlnZT8pu/ZhvgYKrjy+l+kEKnDi87PZTqDlrDbmPuAfjok+Uj7YLVQx
+         lNHtfVFt7A8Eb5eB8F5pvZJrJKO0cJs7i5yXQKj8WRn3jBbPk9sdYuamG5wVmMJ8ombM
+         KDNwPGrTy7HT7SJu5xyfqISVrVfjkuaIsnmjhHQnpuCH1+CpCijwLT+puXHVT3iBKlbT
+         zWUnq9Zx0NR4UQzUpIoHE+J6hEUYY1YulGcNgr8Wsu6cCYC3RwC5XFbmvZurrdkD9M8b
+         yC0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1697205866; x=1697810666;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1697206068; x=1697810868;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=gW+orbpuq6QtG2nIbXo/oK18Nj8TV0TfbAJQEk7cq4Y=;
-        b=lSZjrMC6gQXCJy/w3nsOlvlikPe6QYm2posbalvX1ABWJ2pn/MwGqp5P6MR+EhsT1w
-         lx3XvKPwDz3JLzjD9wLTi/6caigGa0owQSrRzBflNxzyHtCHDFH/OypTyFdN/8agCpKI
-         8sR9XCXWdAi9AChUjMCCoBaKcMMRrIvI1x/U9tzohWBCOOkB593n+/LLLZ2WepXxwJuM
-         FLhelZCzcnCJcB84xXub63QCw2WCwR2yQCcrZ7RQvPXmLcGVtGxm9e8IlidPIo6eo6N5
-         b93MpEUNor6aw3+MFQ9Wo8M6qb2PLffglvqao0qLfMLs2glNKQVnh0Gk1+8paUK5Vibk
-         FSbA==
-X-Gm-Message-State: AOJu0YwiC+0n8P/y+K1j3P2pUd6Tdsw/KXHNDPV0C2APfTZdFGHLtzU4
-	wQPJK+Dqn7IAf9NR8X0nO5k+GaOl4+34hfBk+qw=
-X-Google-Smtp-Source: AGHT+IE24d3OfT+bumEGT10hIyVuBzOXZWh6/T/V4rxS+85TgAObTdhhK+P+G5n3P7x8D3+CwTojfeBQ1H3Blk3U+ao=
-X-Received: by 2002:a17:90b:3911:b0:268:5431:f2a7 with SMTP id
- ob17-20020a17090b391100b002685431f2a7mr25940688pjb.28.1697205865829; Fri, 13
- Oct 2023 07:04:25 -0700 (PDT)
-MIME-Version: 1.0
-References: <20231013125705.322898-1-beniaminsandu@gmail.com> <ZSlEMt2vRc-57r-t@nuoska>
-In-Reply-To: <ZSlEMt2vRc-57r-t@nuoska>
+        bh=2jjZSm2novk4uzCCD3gHmE7UhrlVwtlEEfhTDY5zww0=;
+        b=q89DlB6dar4YDQk4CvgdSjvYACMwQAH09m/dlYovfbRsT2Kp/TcgpjsqQHj0L7g0P3
+         +PULYIXz5vV+5Ruf/i22KN3iayR3vwxtsZajg8Re8/6FxZWue9YZK+rEzDjXqDLnIoXx
+         q25FmLmrRG+jGtb6n3aaB/dj5e4+tkh0zrTMUlTsvpjTAqlZretMwL6bC7eiJr6nQ/X/
+         hraiCs3YSLjUdKQt+hkaZmTEdatQclqZWOoTnlMDBCuESZR2Jskg5txbJ0X4jGOtRJ/x
+         +uoxmhkLEifngWvSs17cu7Uydh0cYMgL7W5K3BV1m0LWXs5G3T/NrG07kvHhKkmxWULE
+         R2qw==
+X-Gm-Message-State: AOJu0Yzfuwoi6TDpOU7zERL4my16IY9y5LaaJ6ruQEWlLP9u9kS8iQns
+	l+K14YHwEdXDIfrAYZcfXVdlWex6S1SkXPMe
+X-Google-Smtp-Source: AGHT+IG2S0kpjoaVAkJM6Xok1VXKeWJrEKrMtEm92pkh0qb7+ZaC6OIdrwDS9hflHH7XeBtzifMMDw==
+X-Received: by 2002:a05:600c:2218:b0:3f7:cb42:fa28 with SMTP id z24-20020a05600c221800b003f7cb42fa28mr23026408wml.28.1697206068331;
+        Fri, 13 Oct 2023 07:07:48 -0700 (PDT)
+Received: from uk-l1.. (cpc147796-finc20-2-0-cust5.4-2.cable.virginm.net. [86.20.236.6])
+        by smtp.gmail.com with ESMTPSA id h19-20020a05600c351300b004053a6b8c41sm235672wmq.12.2023.10.13.07.07.47
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 13 Oct 2023 07:07:47 -0700 (PDT)
 From: Beniamin Sandu <beniaminsandu@gmail.com>
-Date: Fri, 13 Oct 2023 15:04:14 +0100
-Message-ID: <CABQJdOH6wDNRbsUA3poiZWseq07uDOvN--NaTMvsHd5EDWBs=w@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH v2] mbedtls: upgrade 3.4.1 -> 3.5.0
-To: Mikko Rapeli <mikko.rapeli@linaro.org>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+To: openembedded-devel@lists.openembedded.org
+Cc: Beniamin Sandu <beniaminsandu@gmail.com>
+Subject: [meta-networking][PATCH v3] mbedtls: upgrade 3.4.1 -> 3.5.0
+Date: Fri, 13 Oct 2023 15:07:19 +0100
+Message-Id: <20231013140719.344880-1-beniaminsandu@gmail.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 13 Oct 2023 14:04:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105469
+ <openembedded-devel@lists.openembedded.org>; Fri, 13 Oct 2023 14:07:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105470
 
-On Fri, 13 Oct 2023 at 14:20, Mikko Rapeli <mikko.rapeli@linaro.org> wrote:
->
-> Hi,
->
-> Adding CVE-2023-43615 to the commit message would be nice. Maybe
-> upstream omitted that on purpose if the issue was not public
-> when preparing the release.
+* Includes security fix for CVE-2023-43615 - Buffer overread in TLS stream cipher suites
+* Includes security fix for CVE-2023-45199 - Buffer overflow in TLS handshake parsing with ECDH
+* Includes aesce compilation fixes
 
-There are actually 2 CVEs mentioned in the release notes, but not in
-the changelog file. It was silly of me to not double check before
-copying that. Will send a v3 soon which mentions both of them. :)
+Full changelog: https://github.com/Mbed-TLS/mbedtls/releases/tag/mbedtls-3.5.0
 
-Thanks,
-Beni
->
-> https://mbed-tls.readthedocs.io/en/latest/security-advisories/mbedtls-security-advisory-2023-10-1/
-> mentions that TLS with null cipher and RC4 are affected but I hope those
-> are not used in any real products.
->
-> Cheers,
->
-> -Mikko
+Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
+---
+ ...cify-an-arch-version-when-enabling-c.patch | 33 ------------------
+ ...t-target-attribute-when-building-wit.patch | 34 -------------------
+ .../{mbedtls_3.4.1.bb => mbedtls_3.5.0.bb}    |  4 +--
+ 3 files changed, 1 insertion(+), 70 deletions(-)
+ delete mode 100644 meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-aesce-do-not-specify-an-arch-version-when-enabling-c.patch
+ delete mode 100644 meta-networking/recipes-connectivity/mbedtls/mbedtls/0002-aesce-use-correct-target-attribute-when-building-wit.patch
+ rename meta-networking/recipes-connectivity/mbedtls/{mbedtls_3.4.1.bb => mbedtls_3.5.0.bb} (93%)
+
+diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-aesce-do-not-specify-an-arch-version-when-enabling-c.patch b/meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-aesce-do-not-specify-an-arch-version-when-enabling-c.patch
+deleted file mode 100644
+index 44d74754c..000000000
+--- a/meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-aesce-do-not-specify-an-arch-version-when-enabling-c.patch
++++ /dev/null
+@@ -1,33 +0,0 @@
+-From 2246925e3cb16183e25d4e2cfd13fb800df86270 Mon Sep 17 00:00:00 2001
+-From: Beniamin Sandu <beniaminsandu@gmail.com>
+-Date: Sun, 25 Jun 2023 19:58:08 +0300
+-Subject: [PATCH] aesce: do not specify an arch version when enabling crypto
+- instructions
+-
+-Building mbedtls with different aarch64 tuning variations revealed
+-that we should use the crypto extensions without forcing a particular
+-architecture version or core, as that can create issues.
+-
+-Upstream-Status: Backport [https://github.com/Mbed-TLS/mbedtls/commit/471a975942dec76bf0ccb92b6c6da055385683fb]
+-
+-Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
+----
+- library/aesce.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/library/aesce.c b/library/aesce.c
+-index fe056dc4c..843de3973 100644
+---- a/library/aesce.c
+-+++ b/library/aesce.c
+-@@ -60,7 +60,7 @@
+- #           error "A more recent GCC is required for MBEDTLS_AESCE_C"
+- #       endif
+- #       pragma GCC push_options
+--#       pragma GCC target ("arch=armv8-a+crypto")
+-+#       pragma GCC target ("+crypto")
+- #       define MBEDTLS_POP_TARGET_PRAGMA
+- #   else
+- #       error "Only GCC and Clang supported for MBEDTLS_AESCE_C"
+--- 
+-2.25.1
+-
+diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls/0002-aesce-use-correct-target-attribute-when-building-wit.patch b/meta-networking/recipes-connectivity/mbedtls/mbedtls/0002-aesce-use-correct-target-attribute-when-building-wit.patch
+deleted file mode 100644
+index c8f6cb750..000000000
+--- a/meta-networking/recipes-connectivity/mbedtls/mbedtls/0002-aesce-use-correct-target-attribute-when-building-wit.patch
++++ /dev/null
+@@ -1,34 +0,0 @@
+-From 03d3523f974536f2358047382aadb0d4cc762f8a Mon Sep 17 00:00:00 2001
+-From: Beniamin Sandu <beniaminsandu@gmail.com>
+-Date: Mon, 26 Jun 2023 12:07:21 +0300
+-Subject: [PATCH] aesce: use correct target attribute when building with clang
+-
+-Seems clang has its own issues when it comes to crypto extensions,
+-and right now the best way to avoid them is to accurately enable
+-the needed instructions instead of the broad crypto feature.
+-
+-E.g.: https://github.com/llvm/llvm-project/issues/61645
+-
+-Upstream-Status: Backport [https://github.com/Mbed-TLS/mbedtls/commit/aa4f6219014d863bed51453e5261178adc66be34]
+-
+-Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
+----
+- library/aesce.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/library/aesce.c b/library/aesce.c
+-index 843de3973..7bea088ba 100644
+---- a/library/aesce.c
+-+++ b/library/aesce.c
+-@@ -53,7 +53,7 @@
+- #       if __clang_major__ < 4
+- #           error "A more recent Clang is required for MBEDTLS_AESCE_C"
+- #       endif
+--#       pragma clang attribute push (__attribute__((target("crypto"))), apply_to=function)
+-+#       pragma clang attribute push (__attribute__((target("aes"))), apply_to=function)
+- #       define MBEDTLS_POP_TARGET_PRAGMA
+- #   elif defined(__GNUC__)
+- #       if __GNUC__ < 6
+--- 
+-2.25.1
+-
+diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.4.1.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.5.0.bb
+similarity index 93%
+rename from meta-networking/recipes-connectivity/mbedtls/mbedtls_3.4.1.bb
+rename to meta-networking/recipes-connectivity/mbedtls/mbedtls_3.5.0.bb
+index a6f8583b2..1fd187ab2 100644
+--- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.4.1.bb
++++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.5.0.bb
+@@ -23,10 +23,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ SECTION = "libs"
+ 
+ S = "${WORKDIR}/git"
+-SRCREV = "72718dd87e087215ce9155a826ee5a66cfbe9631"
++SRCREV = "1ec69067fa1351427f904362c1221b31538c8b57"
+ SRC_URI = "git://github.com/ARMmbed/mbedtls.git;protocol=https;branch=master \
+-	file://0001-aesce-do-not-specify-an-arch-version-when-enabling-c.patch \
+-	file://0002-aesce-use-correct-target-attribute-when-building-wit.patch \
+ 	file://run-ptest"
+ 
+ inherit cmake update-alternatives ptest
+-- 
+2.34.1
+
 
