@@ -2,156 +2,218 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C413DCDB47E
-	for <webhook@archiver.kernel.org>; Fri, 13 Oct 2023 17:15:51 +0000 (UTC)
-Received: from mail-oa1-f45.google.com (mail-oa1-f45.google.com [209.85.160.45])
- by mx.groups.io with SMTP id smtpd.web10.44555.1697217350452918861
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E5556CDB47E
+	for <webhook@archiver.kernel.org>; Fri, 13 Oct 2023 17:19:31 +0000 (UTC)
+Received: from mail-oa1-f44.google.com (mail-oa1-f44.google.com [209.85.160.44])
+ by mx.groups.io with SMTP id smtpd.web11.44610.1697217564482259742
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 13 Oct 2023 10:15:50 -0700
+ Fri, 13 Oct 2023 10:19:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=YhHS/0lM;
- spf=pass (domain: gmail.com, ip: 209.85.160.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f45.google.com with SMTP id 586e51a60fabf-1d544a4a2f2so1342982fac.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 13 Oct 2023 10:15:50 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=fIKmXq4H;
+ spf=pass (domain: gmail.com, ip: 209.85.160.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f44.google.com with SMTP id 586e51a60fabf-1e10ba12fd3so1317388fac.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 13 Oct 2023 10:19:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1697217349; x=1697822149; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1697217564; x=1697822364; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=kUyBCVkjKcyEqPFGAAoAB5vM601fuICEFfyClVYQtfs=;
-        b=YhHS/0lMov7226ERHIse3vfkKU2adWQ5rmZ0TusfnAHwQzb73ImoAoxKa/mvvVBMaF
-         bCz2URP9OJRz601iavztB7uT5pvoDSSnk49VyO2K5rcCrEbMxkUoGO2NPxSI7rxAMHrC
-         lzKSCxfgq5mZKdinFFpIjekWXvDIsZ1pLCFFkwwErmTDgDgk22+88Mj8CRyTwuyKr3Ak
-         YfsKjE47+zxfdzMYQFBJ+U6YYD2i+82wTeLRSuVOUKj/hlPpjdtn2Wsc75OhzlEaVIx2
-         W0fwp7yBrX2jEWhnbw53QCvZlXXBhpIGApaXB7E2U2YwwErLcv+cCZiEuym82wzPNMzc
-         4/aw==
+        bh=Ja9NtlC4k6YEHbO+ntxTrGbnZ3olMsKVNm02umRse/c=;
+        b=fIKmXq4HQBt2h/u1BU7DBQyeDQrgNsKNu+T6QENnXdO91GX2DlUvrpzPh2Ungq8D08
+         ZBKRFuBiwR8F29h5IJxomiiufYTkW1tkkUxBvtUEAWynSX8c5XLA0k3UxjzIcz8bXCYd
+         GckYGZnUTZLHBP5/bPBdLyr/9upFd6LKLHHmzG3X2p7LxmMxNl7FnIL5n0mTk5Vs3rN3
+         tSa/7lxdZhoxYdmksQfV9TsT8y40PRRaeF1DVZQx+sQ6MrSOj91LGRasATp69TqxOE3N
+         GbePwILh9bH5YK3zb6XYmPhg7GGGX5TryU5B+YAQjkmLK4J/IUrzc3XfKsLPxpiWf7Eq
+         bNgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1697217349; x=1697822149;
+        d=1e100.net; s=20230601; t=1697217564; x=1697822364;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=kUyBCVkjKcyEqPFGAAoAB5vM601fuICEFfyClVYQtfs=;
-        b=qFEXIO4PajE3Id5XjKk3l8ExUUozmi/M/SwqdV9GfU/gOiIJM53ugFcxUBHc3UkdF7
-         stgljQIEqmKj3NfvL4z50swUOOM4nQn4nxOvzyO8xBbjn0LI5rJJfVp0njkMIxVZrgDo
-         KFus33oeVK9iu/lIiTADd/T20/Z/sy1vnaVdSa5dE6SS1aHr5Ndqu3vsIGdYPdHc33HF
-         2XnATQFyndJAUxfbHxeTWFzN3YMXbJnj0rhJc1pnJeJbftfgxpQtLix+CGa8uRTZ2fG+
-         3T4AlteHNWGUBi16TXFrl4HArYAX40U9L12N3fxRayLLVNRnto5isPEYMgEjbsrFoWJS
-         UZnA==
-X-Gm-Message-State: AOJu0YzWWOQB22ZD/3WKE41h1l2kq24n3JM0uzpSjblrrU+d52VcsEDn
-	jrgf7Pp52Ov5Msil9tq0spS6o6Lnec4PWT70CL4=
-X-Google-Smtp-Source: AGHT+IG0fcNtiKJ3b31cZ+6AIc3wT8/Wzt/Wu5MkObhGzkkZrPtoBnJn8b2L5B8/f0dieskKaPGKcx/mlhHZDxeHaBo=
-X-Received: by 2002:a05:6871:106:b0:1e9:af65:5612 with SMTP id
- y6-20020a056871010600b001e9af655612mr6965157oab.42.1697217349623; Fri, 13 Oct
- 2023 10:15:49 -0700 (PDT)
+        bh=Ja9NtlC4k6YEHbO+ntxTrGbnZ3olMsKVNm02umRse/c=;
+        b=lNndYQhc7oMMv3Xh0080WuC8C6WXouCohpGbvckZLOz5EHByBgxDarwfENUI1Vw5Ju
+         q/KsqTE8L2uetOjwuu/3LUfD3jWML0lUjPg/0bPu6mK5XzPhjZvonqp4NPxtF8dyXELm
+         nNCG1YPzEkiPRZpD0T01W4ba8H2klLPui7RjRCqoQ8BN+UPGgQkZfF1FyTspiG3Iz9fw
+         u5Mif5wvLDcnfxP2bPL8XDrZ3iotkoujSB/W+/LbDDCwiwRPiTwtremILSgTaOPw9tMw
+         cT8wilYHCWS1jwFVpbPBtD18d5g2rGq/8wsB3M+Zke+hP0RC7qhmS0DZeZIsmfu2inhP
+         jLeQ==
+X-Gm-Message-State: AOJu0YxIY+LaBtrcHXnbr8Ley927t7j3fgHkFKGm2B+TAOILYveb78bh
+	3TFsVjv+gwEBMr8GkKlHmNVdPKYKFXo5yuRz1Dk=
+X-Google-Smtp-Source: AGHT+IGhcRyQinUzPyVXyPC3iYx+ZiIiHo8+mtcL4A4thYMgsO2VKkNhP7oIn0d97Xts9SOjZnPvN+OPrCDlCeALI0M=
+X-Received: by 2002:a05:6870:1351:b0:1e9:e02e:f4cc with SMTP id
+ 17-20020a056870135100b001e9e02ef4ccmr2386348oac.29.1697217563647; Fri, 13 Oct
+ 2023 10:19:23 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231013170801.3966008-1-tgamblin@baylibre.com> <20231013170801.3966008-4-tgamblin@baylibre.com>
-In-Reply-To: <20231013170801.3966008-4-tgamblin@baylibre.com>
+References: <20231013140719.344880-1-beniaminsandu@gmail.com>
+In-Reply-To: <20231013140719.344880-1-beniaminsandu@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 13 Oct 2023 10:15:23 -0700
-Message-ID: <CAMKF1sosN6zU2raudiYFbDwCAixjdqApWPWR2yYDBpdY-2egMw@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH 4/4] python3-pytest-mock: disable broken ptests
-To: Trevor Gamblin <tgamblin@baylibre.com>
+Date: Fri, 13 Oct 2023 10:18:57 -0700
+Message-ID: <CAMKF1so9ZzJr0jbrOWEOoHdChUkz6JHa7CZH75LDxtEAb45uMg@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH v3] mbedtls: upgrade 3.4.1 -> 3.5.0
+To: Beniamin Sandu <beniaminsandu@gmail.com>
 Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 13 Oct 2023 17:15:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105485
+ <openembedded-devel@lists.openembedded.org>; Fri, 13 Oct 2023 17:19:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105486
 
-On Fri, Oct 13, 2023 at 10:08=E2=80=AFAM Trevor Gamblin <tgamblin@baylibre.=
-com> wrote:
->
-> Two introspection-related ptests are consistently failing. For now,
-> disable them so that a clean ptest run is available.
->
-For regular runs can we  move it out of PTESTS_PROBLEMS_META_PYTHON into
-either PTESTS_FAST_META_PYTHON or PTESTS_SLOW_META_PYTHON
+fails to compile on x86
+https://errors.yoctoproject.org/Errors/Details/739887/
 
-> Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
+On Fri, Oct 13, 2023 at 7:15=E2=80=AFAM Beniamin Sandu <beniaminsandu@gmail=
+.com> wrote:
+>
+> * Includes security fix for CVE-2023-43615 - Buffer overread in TLS strea=
+m cipher suites
+> * Includes security fix for CVE-2023-45199 - Buffer overflow in TLS hands=
+hake parsing with ECDH
+> * Includes aesce compilation fixes
+>
+> Full changelog: https://github.com/Mbed-TLS/mbedtls/releases/tag/mbedtls-=
+3.5.0
+>
+> Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
 > ---
->  ...t_mock-skip-args-introspection-tests.patch | 38 +++++++++++++++++++
->  .../python/python3-pytest-mock_3.11.1.bb      |  1 +
->  2 files changed, 39 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/python3-pytest-mo=
-ck/0001-test_pytest_mock-skip-args-introspection-tests.patch
+>  ...cify-an-arch-version-when-enabling-c.patch | 33 ------------------
+>  ...t-target-attribute-when-building-wit.patch | 34 -------------------
+>  .../{mbedtls_3.4.1.bb =3D> mbedtls_3.5.0.bb}    |  4 +--
+>  3 files changed, 1 insertion(+), 70 deletions(-)
+>  delete mode 100644 meta-networking/recipes-connectivity/mbedtls/mbedtls/=
+0001-aesce-do-not-specify-an-arch-version-when-enabling-c.patch
+>  delete mode 100644 meta-networking/recipes-connectivity/mbedtls/mbedtls/=
+0002-aesce-use-correct-target-attribute-when-building-wit.patch
+>  rename meta-networking/recipes-connectivity/mbedtls/{mbedtls_3.4.1.bb =
+=3D> mbedtls_3.5.0.bb} (93%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-pytest-mock/0001=
--test_pytest_mock-skip-args-introspection-tests.patch b/meta-python/recipes=
--devtools/python/python3-pytest-mock/0001-test_pytest_mock-skip-args-intros=
-pection-tests.patch
-> new file mode 100644
-> index 0000000000..f024e79d93
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-pytest-mock/0001-test_p=
-ytest_mock-skip-args-introspection-tests.patch
-> @@ -0,0 +1,38 @@
-> +From e184fb950ad3b52c5c16438d39fe4d516c784e30 Mon Sep 17 00:00:00 2001
-> +From: Trevor Gamblin <tgamblin@baylibre.com>
-> +Date: Thu, 12 Oct 2023 17:32:40 -0400
-> +Subject: [PATCH] test_pytest_mock: skip args introspection tests
-> +
-> +Disable these two tests for now so that python3-pytest-mock can have
-> +successful ptest runs.
-> +
-> +Upstream-Status: Inappropriate [OE-Specific]
-> +
-> +Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
-> +---
-> + tests/test_pytest_mock.py | 2 ++
-> + 1 file changed, 2 insertions(+)
-> +
-> +diff --git a/tests/test_pytest_mock.py b/tests/test_pytest_mock.py
-> +index 3d53241..157b6c3 100644
-> +--- a/tests/test_pytest_mock.py
-> ++++ b/tests/test_pytest_mock.py
-> +@@ -581,6 +581,7 @@ def test_assert_called_wrapper(mocker: MockerFixture=
-) -> None:
-> +     stub.assert_called()
-> +
-> +
-> ++@pytest.mark.skip("Async not correctly detected, skip for now")
-> + @pytest.mark.usefixtures("needs_assert_rewrite")
-> + def test_assert_called_args_with_introspection(mocker: MockerFixture) -=
-> None:
-> +     stub =3D mocker.stub()
-> +@@ -597,6 +598,7 @@ def test_assert_called_args_with_introspection(mocke=
-r: MockerFixture) -> None:
-> +         stub.assert_called_once_with(*wrong_args)
-> +
-> +
-> ++@pytest.mark.skip("Async not correctly detected, skip for now")
-> + @pytest.mark.usefixtures("needs_assert_rewrite")
-> + def test_assert_called_kwargs_with_introspection(mocker: MockerFixture)=
- -> None:
-> +     stub =3D mocker.stub()
-> +--
-> +2.41.0
-> +
-> diff --git a/meta-python/recipes-devtools/python/python3-pytest-mock_3.11=
-.1.bb b/meta-python/recipes-devtools/python/python3-pytest-mock_3.11.1.bb
-> index 69d74567c3..7fd998edc6 100644
-> --- a/meta-python/recipes-devtools/python/python3-pytest-mock_3.11.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-pytest-mock_3.11.1.bb
-> @@ -8,6 +8,7 @@ LIC_FILES_CHKSUM =3D " \
->  SRC_URI =3D " \
->      git://github.com/pytest-dev/pytest-mock;branch=3Dmain;protocol=3Dhtt=
-ps \
->      file://run-ptest \
-> +    file://0001-test_pytest_mock-skip-args-introspection-tests.patch \
->  "
+> diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-ae=
+sce-do-not-specify-an-arch-version-when-enabling-c.patch b/meta-networking/=
+recipes-connectivity/mbedtls/mbedtls/0001-aesce-do-not-specify-an-arch-vers=
+ion-when-enabling-c.patch
+> deleted file mode 100644
+> index 44d74754c..000000000
+> --- a/meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-aesce-do-=
+not-specify-an-arch-version-when-enabling-c.patch
+> +++ /dev/null
+> @@ -1,33 +0,0 @@
+> -From 2246925e3cb16183e25d4e2cfd13fb800df86270 Mon Sep 17 00:00:00 2001
+> -From: Beniamin Sandu <beniaminsandu@gmail.com>
+> -Date: Sun, 25 Jun 2023 19:58:08 +0300
+> -Subject: [PATCH] aesce: do not specify an arch version when enabling cry=
+pto
+> - instructions
+> -
+> -Building mbedtls with different aarch64 tuning variations revealed
+> -that we should use the crypto extensions without forcing a particular
+> -architecture version or core, as that can create issues.
+> -
+> -Upstream-Status: Backport [https://github.com/Mbed-TLS/mbedtls/commit/47=
+1a975942dec76bf0ccb92b6c6da055385683fb]
+> -
+> -Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
+> ----
+> - library/aesce.c | 2 +-
+> - 1 file changed, 1 insertion(+), 1 deletion(-)
+> -
+> -diff --git a/library/aesce.c b/library/aesce.c
+> -index fe056dc4c..843de3973 100644
+> ---- a/library/aesce.c
+> -+++ b/library/aesce.c
+> -@@ -60,7 +60,7 @@
+> - #           error "A more recent GCC is required for MBEDTLS_AESCE_C"
+> - #       endif
+> - #       pragma GCC push_options
+> --#       pragma GCC target ("arch=3Darmv8-a+crypto")
+> -+#       pragma GCC target ("+crypto")
+> - #       define MBEDTLS_POP_TARGET_PRAGMA
+> - #   else
+> - #       error "Only GCC and Clang supported for MBEDTLS_AESCE_C"
+> ---
+> -2.25.1
+> -
+> diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls/0002-ae=
+sce-use-correct-target-attribute-when-building-wit.patch b/meta-networking/=
+recipes-connectivity/mbedtls/mbedtls/0002-aesce-use-correct-target-attribut=
+e-when-building-wit.patch
+> deleted file mode 100644
+> index c8f6cb750..000000000
+> --- a/meta-networking/recipes-connectivity/mbedtls/mbedtls/0002-aesce-use=
+-correct-target-attribute-when-building-wit.patch
+> +++ /dev/null
+> @@ -1,34 +0,0 @@
+> -From 03d3523f974536f2358047382aadb0d4cc762f8a Mon Sep 17 00:00:00 2001
+> -From: Beniamin Sandu <beniaminsandu@gmail.com>
+> -Date: Mon, 26 Jun 2023 12:07:21 +0300
+> -Subject: [PATCH] aesce: use correct target attribute when building with =
+clang
+> -
+> -Seems clang has its own issues when it comes to crypto extensions,
+> -and right now the best way to avoid them is to accurately enable
+> -the needed instructions instead of the broad crypto feature.
+> -
+> -E.g.: https://github.com/llvm/llvm-project/issues/61645
+> -
+> -Upstream-Status: Backport [https://github.com/Mbed-TLS/mbedtls/commit/aa=
+4f6219014d863bed51453e5261178adc66be34]
+> -
+> -Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
+> ----
+> - library/aesce.c | 2 +-
+> - 1 file changed, 1 insertion(+), 1 deletion(-)
+> -
+> -diff --git a/library/aesce.c b/library/aesce.c
+> -index 843de3973..7bea088ba 100644
+> ---- a/library/aesce.c
+> -+++ b/library/aesce.c
+> -@@ -53,7 +53,7 @@
+> - #       if __clang_major__ < 4
+> - #           error "A more recent Clang is required for MBEDTLS_AESCE_C"
+> - #       endif
+> --#       pragma clang attribute push (__attribute__((target("crypto"))),=
+ apply_to=3Dfunction)
+> -+#       pragma clang attribute push (__attribute__((target("aes"))), ap=
+ply_to=3Dfunction)
+> - #       define MBEDTLS_POP_TARGET_PRAGMA
+> - #   elif defined(__GNUC__)
+> - #       if __GNUC__ < 6
+> ---
+> -2.25.1
+> -
+> diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.4.1.b=
+b b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.5.0.bb
+> similarity index 93%
+> rename from meta-networking/recipes-connectivity/mbedtls/mbedtls_3.4.1.bb
+> rename to meta-networking/recipes-connectivity/mbedtls/mbedtls_3.5.0.bb
+> index a6f8583b2..1fd187ab2 100644
+> --- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.4.1.bb
+> +++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.5.0.bb
+> @@ -23,10 +23,8 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D3b83ef96387=
+f14655fc854ddc3c6bd57"
+>  SECTION =3D "libs"
 >
->  SRCREV ?=3D "d3e73f2e93f7b93eba0a36e17e43bafd969da4fe"
+>  S =3D "${WORKDIR}/git"
+> -SRCREV =3D "72718dd87e087215ce9155a826ee5a66cfbe9631"
+> +SRCREV =3D "1ec69067fa1351427f904362c1221b31538c8b57"
+>  SRC_URI =3D "git://github.com/ARMmbed/mbedtls.git;protocol=3Dhttps;branc=
+h=3Dmaster \
+> -       file://0001-aesce-do-not-specify-an-arch-version-when-enabling-c.=
+patch \
+> -       file://0002-aesce-use-correct-target-attribute-when-building-wit.=
+patch \
+>         file://run-ptest"
+>
+>  inherit cmake update-alternatives ptest
 > --
-> 2.41.0
+> 2.34.1
 >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#105483): https://lists.openembedded.org/g/openembedde=
-d-devel/message/105483
-> Mute This Topic: https://lists.openembedded.org/mt/101944758/1997914
+> View/Reply Online (#105470): https://lists.openembedded.org/g/openembedde=
+d-devel/message/105470
+> Mute This Topic: https://lists.openembedded.org/mt/101940558/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
 aj.khem@gmail.com]
