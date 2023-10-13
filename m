@@ -2,86 +2,89 @@ Return-Path: <fabien.thomas@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CE30ECDB47E
-	for <webhook@archiver.kernel.org>; Fri, 13 Oct 2023 14:19:00 +0000 (UTC)
-Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com [209.85.167.44])
- by mx.groups.io with SMTP id smtpd.web10.39590.1697206738673035512
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B47CECDB47E
+	for <webhook@archiver.kernel.org>; Fri, 13 Oct 2023 14:24:00 +0000 (UTC)
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+ by mx.groups.io with SMTP id smtpd.web11.39751.1697207038453792204
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 13 Oct 2023 07:18:59 -0700
+ Fri, 13 Oct 2023 07:23:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=AY0dMB6H;
- spf=pass (domain: smile.fr, ip: 209.85.167.44, mailfrom: fabien.thomas@smile.fr)
-Received: by mail-lf1-f44.google.com with SMTP id 2adb3069b0e04-50435a9f800so2814372e87.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 13 Oct 2023 07:18:58 -0700 (PDT)
+ dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=ddBAyiJ2;
+ spf=pass (domain: smile.fr, ip: 209.85.221.48, mailfrom: fabien.thomas@smile.fr)
+Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-32d849cc152so2055670f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 13 Oct 2023 07:23:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1697206737; x=1697811537; darn=lists.openembedded.org;
+        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1697207037; x=1697811837; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Hn71WhrS/Iw6k6IKKX+TZvE4ObB6kBnOWgIosuxTq6M=;
-        b=AY0dMB6H33/8VC36KFEwihCWQQShHCWdZapyGA9Jf5mkcqEtd0wc300nt9yb72lDcg
-         RVkocnHWwngtYKoLOE4CblKMR3KLQ0IptcMRmDwiJngWvRHnIVrG9dZvAYlIWSrvEyYf
-         ATWUKJlxl/MXeyCtn6ixd0EjiXhNFVm49vIofOEWCVKQiayNX84U4h1vaUcfPEGXehyX
-         J0EDu5ErctGy0ZPTx8DspzObPWvFh70CqCf2Ub3lIV8YcoND7Og0G7jzv202vTgNdtVR
-         9hXsjJpyE7hzk22AraKBXKr7RUEMfKraR5YKuW2Cfrc5wrW2ziDhDGPuRfp0VapX2Q2r
-         pbKg==
+        bh=/RskAwLwmcxjfwSh1YBGYbjAZd1wwbJXD+hvathq3z0=;
+        b=ddBAyiJ29K6+PONFTLZMmp4wV5KGk2XtQoWvnCukM6eK+a1s/d3sgRV/kbl7hekPVI
+         8g+M4EItmGrQrq/K6omF6iqhSOtzrXK3GrNoCaMxAOo+aR0g7QpIZ8u/MoM2wFLHBFad
+         9Od2X4wKkjNM6+qEGXYeYcADOY4aQUi5KPBRdhSXRRtKQY0cS7X5cxWtacyOuu4lbCMS
+         iQM1PLKJqPNK+D4p+dHC3wqmlYHax5lVfIQQqy0ehbpBnVs2NRBDOFcpZQkkgpPDUpZy
+         CSIQbHM4XutY9mqYT0SM0QfbCICQ5v8n29COwLim5PwqACKhhE3I8KdkHUshYFo2t5rg
+         xLNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1697206737; x=1697811537;
+        d=1e100.net; s=20230601; t=1697207037; x=1697811837;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Hn71WhrS/Iw6k6IKKX+TZvE4ObB6kBnOWgIosuxTq6M=;
-        b=FLXrjxq6jsh9v+iahqlJJbMbntQKCJIDJkuXKFHI0OTKmYSG2SQaNt+74qX8wF8dhc
-         OyhEXgwEeHkFjuXt7P1dkBFf4+It2ibSORByy40voubYzDRQmd+79rFIoqwYx8+6iaLW
-         5AuX6MQn9tLQTQ6bMU4Fmp2AnftFEc3cETlPl2/1XEOmYlKKMxVLdgU56qLZu8OfCshH
-         NEwP2l9bv35PrOQ73Q1gUnq8HqCjvEpldUy+OXXV5GM/Sd+nSNkRKXbNHjwPe1jS5Pzl
-         U9DocNIErCKySjN1LYuBTiktJP7m7a9aLtfbDse8D4vk5Qog5iqidAFpYCYnfFLmkZTw
-         fIFw==
-X-Gm-Message-State: AOJu0YxXeh0ioFJHZ/ZXnJqIu2lgAOJyYWz0RzB8UtORETEQgunfSJ0b
-	944phqlOPQT3bs10uZDYctSZBQl1gNA3RPyLUfo=
-X-Google-Smtp-Source: AGHT+IEHq8hEO83fvp+d1Z8k/G2JcPy9Zrr6AqwF64pJ03dSw7YZnlWfrigyTnvU/S4iKzMvCJJiPg==
-X-Received: by 2002:a05:6512:1586:b0:503:5cd:998b with SMTP id bp6-20020a056512158600b0050305cd998bmr26875481lfb.28.1697206736704;
-        Fri, 13 Oct 2023 07:18:56 -0700 (PDT)
+        bh=/RskAwLwmcxjfwSh1YBGYbjAZd1wwbJXD+hvathq3z0=;
+        b=p+NXpvwz/xoRA/6heP1xWp0QuNW9mJt/+Hm/AY/BX2osIOpeDQX/Y5GQ7EGH2ieZG8
+         KZ0/0quKgEEgzzQGfhJdAdYZaLuyWJOR9u57VxmN7ZdrNC9hndUNE3Pt+At9wOdNAcMl
+         SEI3x0iUF9DagRXECB/bt6HjQyZenzYWWcBn5fnNZs8XajARnr4MnV04ITMvPe/1Nif0
+         OQik1KkQNzASZc/Ef47+J4BUYnSF0XcmBc9w/wTNhaC3/lEMoIOspHcDOd7tztNcE0Gn
+         xkjdXGZGcqIVz4V5T5YfMU16r+Lilchw+3haBebxoK0XKbjMuWYSjD1Tjib1jo+vOWyC
+         TDiA==
+X-Gm-Message-State: AOJu0YxTP0k/YkYkHQCyBzVl4yXv/XRoSW9JhYrEVwyTGQLhuOEFNTZF
+	p8Z6/13sfx/OagGFLMmkVp/F2wUIqmCk/vCfBJQ=
+X-Google-Smtp-Source: AGHT+IEC3RrnXni8VBG0z6yjYX9BZzfaagMuGIUD5+earVOAU910P9UCz441lGKqykUpyKxpNLwszg==
+X-Received: by 2002:a5d:5911:0:b0:324:e284:fab8 with SMTP id v17-20020a5d5911000000b00324e284fab8mr24858625wrd.39.1697207036682;
+        Fri, 13 Oct 2023 07:23:56 -0700 (PDT)
 Received: from p-nan-fatho.home (2a01cb0584747e0021d4f13fbc3604e3.ipv6.abo.wanadoo.fr. [2a01:cb05:8474:7e00:21d4:f13f:bc36:4e3])
-        by smtp.gmail.com with ESMTPSA id n38-20020a05600c502600b003fefaf299b6sm253850wmr.38.2023.10.13.07.18.56
+        by smtp.gmail.com with ESMTPSA id j11-20020a05600c42cb00b0040652e8ca13sm252689wme.43.2023.10.13.07.23.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 13 Oct 2023 07:18:56 -0700 (PDT)
+        Fri, 13 Oct 2023 07:23:56 -0700 (PDT)
 From: Fabien Thomas <fabien.thomas@smile.fr>
 To: openembedded-devel@lists.openembedded.org
 Cc: Fabien Thomas <fabien.thomas@smile.fr>,
 	Yoann Congal <yoann.congal@smile.fr>
-Subject: [meta-networking][PATCH] layer.conf : Add meta-python dependency
-Date: Fri, 13 Oct 2023 16:18:54 +0200
-Message-Id: <20231013141854.2949506-1-fabien.thomas@smile.fr>
+Subject: [meta-initramfs][PATCH] klibc/klibc.inc : Add DEBUG_PREFIX_MAP flag.
+Date: Fri, 13 Oct 2023 16:23:54 +0200
+Message-Id: <20231013142354.2951123-1-fabien.thomas@smile.fr>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 13 Oct 2023 14:19:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105473
+ <openembedded-devel@lists.openembedded.org>; Fri, 13 Oct 2023 14:24:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105474
 
-If feature ad-dc is enable, recipe samba depends on python3-dnspython
-which is in meta-python.
+Following reproducible-builds.org recommendations, using compiler flags
+like -ffile-prefix-map or -fdebug-prefix-map allows replace build-time
+paths by install-time ones in the debugging sections of binaries.
+
+Variable DEBUG_PREFIX_MAP set these flags correctly in yocto build
+context to guarantee reproducible builds.
 
 Signed-off-by: Fabien Thomas <fabien.thomas@smile.fr>
 Reviewed-by: Yoann Congal <yoann.congal@smile.fr>
 ---
- meta-networking/conf/layer.conf | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-initramfs/recipes-devtools/klibc/klibc.inc | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-networking/conf/layer.conf b/meta-networking/conf/layer.conf
-index 2343179a6..2a541e98b 100644
---- a/meta-networking/conf/layer.conf
-+++ b/meta-networking/conf/layer.conf
-@@ -14,7 +14,7 @@ BBFILE_PRIORITY_networking-layer = "5"
- LAYERVERSION_networking-layer = "1"
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+index 113459b52..6093e19b7 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
++++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+@@ -32,6 +32,7 @@ SRC_URI[sha256sum] = "d673a294f742d59368222ff5c38462d81098c55063799de6fb8a7ba3d4
+ S = "${WORKDIR}/klibc-${PV}"
  
- LAYERDEPENDS_networking-layer = "core"
--LAYERDEPENDS_networking-layer += "openembedded-layer"
-+LAYERDEPENDS_networking-layer += "openembedded-layer meta-python"
- 
- LAYERSERIES_COMPAT_networking-layer = "nanbield"
+ OPTFLAGS = "${TUNE_CCARGS} -Os -fcommon"
++OPTFLAGS:append = " ${DEBUG_PREFIX_MAP}"
+ OPTFLAGS:append:toolchain-clang = " -fno-builtin-bcmp"
+ OPTFLAGS:append:toolchain-clang:mipsarch = " -no-integrated-as"
  
 -- 
 2.34.1
