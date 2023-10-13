@@ -1,159 +1,101 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <tgamblin@baylibre.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 61786CDB482
-	for <webhook@archiver.kernel.org>; Fri, 13 Oct 2023 16:12:31 +0000 (UTC)
-Received: from mail-oa1-f49.google.com (mail-oa1-f49.google.com [209.85.160.49])
- by mx.groups.io with SMTP id smtpd.web11.42893.1697213544970122602
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A6512CDB47E
+	for <webhook@archiver.kernel.org>; Fri, 13 Oct 2023 17:08:11 +0000 (UTC)
+Received: from mail-qk1-f171.google.com (mail-qk1-f171.google.com [209.85.222.171])
+ by mx.groups.io with SMTP id smtpd.web10.44366.1697216884790746777
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 13 Oct 2023 09:12:25 -0700
+ Fri, 13 Oct 2023 10:08:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZrcC3odE;
- spf=pass (domain: gmail.com, ip: 209.85.160.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f49.google.com with SMTP id 586e51a60fabf-1e1b1b96746so1273140fac.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 13 Oct 2023 09:12:24 -0700 (PDT)
+ dkim=pass header.i=@baylibre-com.20230601.gappssmtp.com header.s=20230601 header.b=2t5hG8IP;
+ spf=pass (domain: baylibre.com, ip: 209.85.222.171, mailfrom: tgamblin@baylibre.com)
+Received: by mail-qk1-f171.google.com with SMTP id af79cd13be357-7757523362fso152003485a.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 13 Oct 2023 10:08:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1697213544; x=1697818344; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=khNMUqM87240oKxcCphVjYSSw23BZQqaFVILEVGH1YM=;
-        b=ZrcC3odEXfUUpXoj58cmKoavkVHoWNQrK+JPb7i/z9n2CN52bG+YXUeIm1LNl6gO3d
-         GQvI47Kpu+f8jOD6iLRpkfnY6ZNdIzS+Hqnjv7H2RyOWUl1oXgikmmZdM4D3maBrVCF5
-         nct7JaXLS8cAhiXTT3NqvS3gnc9qqnIanbcZkaKfGio0Ym0GyZr2QokCAKcwjfzzfR7v
-         upu7ua2QtnktfEWttSIRelXfcOzOkf5pSFYiJ+d93dpTx7UnlC2GmGxnkExlVcrdnQBt
-         FQLg+nksUZ0AeeKCeU9Gr/fvVWA2fS5wGO7AUFj56P6eoFa1Csb6jdUwq0rF1a01Vkvv
-         yVHA==
+        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1697216884; x=1697821684; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=KEzerSLwIi0lw5kHtAK6LdSqnuznOhUAXRX73nu5SVM=;
+        b=2t5hG8IPUoN/gWyWdUuDZCTFw4RSIEs466SFu/MZPcwRuGPgVHDjUm6nYsM/DmHTDY
+         oGJWdPkt1BotmgyShI9d32oxrpUXRKpVWKx2FbF1+ZpMYtP6RQJjT9BMPLtr7caAo8FY
+         sz0Gxambw3wgA0ks0oy4E09sQbxkz81726aDAj0bYuOpuxB9KQCxzLcRT8mvi8ZtYwfP
+         kwxH5bMVCs94ynbYzLs5zq3OUGcQEHceLH9eeEmyZA8tK2fRszhMsWRGn/SiGQIGgRTj
+         OtGpLl7yyy8ER3y4Ql+92HC6UAHy3IlCa9iIEqw7RlBSh3BHhRq9zxBHWp7y48mw3Ke6
+         jygQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1697213544; x=1697818344;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=khNMUqM87240oKxcCphVjYSSw23BZQqaFVILEVGH1YM=;
-        b=iGfY53x1mB9B7aaRPBrvSZw/hiazTOpsv9CN0XYaSi5QMOa5dSURQTXjvLKEi5tf8d
-         PEcT/foDlSr+7rVvtBvY0Fh8ljKVs/yAo2hcrLcGd25/pc7OX34kXtC5GHphiynybu7n
-         tWsVnpW44QxJ7x2KNYmGieCOBl2djJ6fH9J2Bx27VbL4whFmQtu+NT4xMyQBPlkfsq6V
-         i8INBvD3AXbUh4/7MfNCXZElQCq75XYp9rzLBySvdUSCsQ4+zNMgnx4XUjXN+yIwzbIF
-         K/0p0Lnsq/sjjQ+q4AlKmrPzMCVYF+fh6a4sS/l84iD5OyQYmmbdjbFbQLkZEAPsBUYT
-         ymJA==
-X-Gm-Message-State: AOJu0YznI+fBL3gRC1ySR0dYmbLSScS2wuK0xYPGvV/qvE8Dmt81e7Cd
-	rtrCAzwiIWBhlPUnbuwAT20MshxYm5t4efNOQUI=
-X-Google-Smtp-Source: AGHT+IG9Oz+0XRds4GBunvYHC3BEHuAWcpyf9TjfeEsR7l3iobf/z+OiAI1W7AR4J4b+PAEaCalmbkBw0zTGnzSvlDs=
-X-Received: by 2002:a05:6871:1d2:b0:1d5:a85a:13b6 with SMTP id
- q18-20020a05687101d200b001d5a85a13b6mr30357260oad.45.1697213544091; Fri, 13
- Oct 2023 09:12:24 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1697216884; x=1697821684;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=KEzerSLwIi0lw5kHtAK6LdSqnuznOhUAXRX73nu5SVM=;
+        b=XOTWSIIuFmuc7rL38OaIXNutYWJMcTipH+YxwySBl20lBHwJ9emcCSt3n05OQGXJsu
+         cS7bntSD5EF7bOZWZFVUHIXRWhXDFpA68pDWk5K8Hf0JqVR325XTnf7oWcgEVH0rtjwq
+         bLEiy/4L4CodpwCptGIVRYqy6rwfS6hu71u5faOKxGMQ/5hrEfMIOtsidh6vX6EUEHdN
+         EP+XKpPH8wvl7Dy6jez0On1hogqKE6Zfnrhm8QG0CIWzdjqu/yksQkq62DttK6xmLBdh
+         ESxXWycO+0TKyRtSoaTZspwsaKCkgOfz76PdbaB+vpMZHvQ8f+21b9yOmOux83daemPI
+         mepA==
+X-Gm-Message-State: AOJu0Yw8WKut1gxl5+gzSOCQ6uXm4Q94QLap0f1PFisIQowkmxPsUT7f
+	5b/OpiBi5y2IEOattMrZ2bqtK4/ZfESAyfnBnGhPXQ==
+X-Google-Smtp-Source: AGHT+IEgLt+DaEI9H5w1HKtNI4qj2ifc6hBAkgAyLrnPmGMXi+0WKwQAvhbfI7g3YUSI/ceOBCG39Q==
+X-Received: by 2002:a05:620a:c8a:b0:773:d86f:ec88 with SMTP id q10-20020a05620a0c8a00b00773d86fec88mr25009930qki.35.1697216883658;
+        Fri, 13 Oct 2023 10:08:03 -0700 (PDT)
+Received: from megalith.cgocable.net ([2001:1970:5b1f:ab00:fc4e:ec42:7e5d:48dd])
+        by smtp.gmail.com with ESMTPSA id oo22-20020a05620a531600b00767dba7a4d3sm781068qkn.109.2023.10.13.10.08.03
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 13 Oct 2023 10:08:03 -0700 (PDT)
+From: Trevor Gamblin <tgamblin@baylibre.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-python][PATCH 1/4] python-git-pw: add from meta-patchtest
+Date: Fri, 13 Oct 2023 13:07:58 -0400
+Message-ID: <20231013170801.3966008-1-tgamblin@baylibre.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-References: <20231013153951.2166008-1-david.pierret@smile.fr>
-In-Reply-To: <20231013153951.2166008-1-david.pierret@smile.fr>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 13 Oct 2023 09:11:58 -0700
-Message-ID: <CAMKF1srw3o95qQt9dZJVcXtuiH3D__spomnG2JJ6yAc1qRABgg@mail.gmail.com>
-Subject: Re: [oe] [meta-perl][PATCH] libtext: add ptest
-To: David Pierret <david.pierret@smile.fr>
-Cc: openembedded-devel@lists.openembedded.org, 
-	Hongxu Jia <hongxu.jia@windriver.com>, Tim moto-timo Orling <ticotimo@gmail.com>, 
-	Yoann Congal <yoann.congal@smile.fr>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 13 Oct 2023 16:12:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105479
+ <openembedded-devel@lists.openembedded.org>; Fri, 13 Oct 2023 17:08:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105480
 
-it will be good to also make it part of PTESTS_FAST_META_PERL or
-PTESTS_SLOW_META_PERL
-in meta-perl/conf/include/ptest-packagelists-meta-perl.inc
+git-pw is a tool for integrating Git with Patchwork instances.  Add it
+to meta-python from meta-patchtest so that more workflows can take
+advantage of it.
 
-so we can run it as part of ptest image in CI
+Signed-off-by: Trevor Gamblin <tgamblin@baylibre.com>
+---
+ .../python/python3-git-pw_2.5.0.bb            | 20 +++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-git-pw_2.5.0.bb
 
-On Fri, Oct 13, 2023 at 8:49=E2=80=AFAM David Pierret <david.pierret@smile.=
-fr> wrote:
->
-> Signed-off-by: David Pierret <david.pierret@smile.fr>
-> Reviewed-by: Yoann Congal <yoann.congal@smile.fr>
-> ---
->  .../libtext/libtext-diff-perl/run-ptest       | 19 +++++++++++++++++++
->  .../libtext/libtext-diff-perl_1.41.bb         | 11 +++++++++--
->  2 files changed, 28 insertions(+), 2 deletions(-)
->  create mode 100644 meta-perl/recipes-perl/libtext/libtext-diff-perl/run-=
-ptest
->
-> diff --git a/meta-perl/recipes-perl/libtext/libtext-diff-perl/run-ptest b=
-/meta-perl/recipes-perl/libtext/libtext-diff-perl/run-ptest
-> new file mode 100644
-> index 000000000..c65b6cf8e
-> --- /dev/null
-> +++ b/meta-perl/recipes-perl/libtext/libtext-diff-perl/run-ptest
-> @@ -0,0 +1,19 @@
-> +#!/bin/sh
-> +
-> +for case in `find t -type f -name '*.t'`; do
-> +    perl $case >$case.output 2>&1
-> +    ret=3D$?
-> +    cat $case.output
-> +    if [ $ret -ne 0 ]; then
-> +        echo "FAIL: ${case%.t}"
-> +    elif grep -i 'SKIP' $case.output; then
-> +        echo "SKIP: ${case%.t}"
-> +    else
-> +        echo "PASS: ${case%.t}"
-> +    fi
-> +
-> +    rm -f $case.output
-> +done
-> +
-> +
-> +
-> diff --git a/meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb b/m=
-eta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb
-> index afdf63ede..9dfadde8e 100644
-> --- a/meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb
-> +++ b/meta-perl/recipes-perl/libtext/libtext-diff-perl_1.41.bb
-> @@ -11,17 +11,24 @@ HOMEPAGE =3D "http://search.cpan.org/~ovid/Text-Diff/=
-"
->  LICENSE =3D "Artistic-1.0 | GPL-2.0-or-later"
->  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D385c55653886acac3821999a3ccd1=
-7b3"
->
-> -SRC_URI =3D "${CPAN_MIRROR}/authors/id/O/OV/OVID/Text-Diff-${PV}.tar.gz"
-> +SRC_URI =3D "${CPAN_MIRROR}/authors/id/O/OV/OVID/Text-Diff-${PV}.tar.gz =
-\
-> +           file://run-ptest \
-> +          "
->  SRC_URI[md5sum] =3D "30d56e6dd5551ca16b8e16cc7299dc21"
->  SRC_URI[sha256sum] =3D "a67f50a48e313c1680cc662109ce5f913ea71454db355d0c=
-f4db87ac89d2d2fa"
->
->  S =3D "${WORKDIR}/Text-Diff-${PV}"
->
-> -inherit cpan
-> +inherit cpan ptest
-> +RDEPENDS:${PN}-ptest +=3D "perl-module-test perl-module-test-more"
->
->  RDEPENDS:${PN} =3D " libalgorithm-diff-perl \
->                     perl-module-extutils-makemaker \
->                     perl-module-exporter \
->  "
->
-> +do_install_ptest () {
-> +    cp -r ${B}/t ${D}${PTEST_PATH}
-> +}
-> +
->  BBCLASSEXTEND =3D "native"
-> --
-> 2.39.2
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#105478): https://lists.openembedded.org/g/openembedde=
-d-devel/message/105478
-> Mute This Topic: https://lists.openembedded.org/mt/101942826/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+diff --git a/meta-python/recipes-devtools/python/python3-git-pw_2.5.0.bb b/meta-python/recipes-devtools/python/python3-git-pw_2.5.0.bb
+new file mode 100644
+index 0000000000..d060a922b7
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-git-pw_2.5.0.bb
+@@ -0,0 +1,20 @@
++SUMMARY = "A tool for integrating Git with Patchwork"
++HOMEPAGE = "https://github.com/getpatchwork/git-pw"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=26e1a171d943c64f00c51f90c256b9d4"
++
++SRC_URI[sha256sum] = "c60169f9566bd6710f9c0985a005a0c326460b739d3f2b5c5c71e85211584590"
++
++inherit pypi python_setuptools_build_meta
++
++DEPENDS += " \
++    python3-pbr-native \
++"
++
++RDEPENDS:${PN} += " \
++    python3-arrow \
++    python3-click \
++    python3-pyyaml \
++    python3-requests \
++    python3-tabulate \
++"
+-- 
+2.41.0
+
 
