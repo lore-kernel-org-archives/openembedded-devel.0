@@ -1,145 +1,89 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <leimaohui@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E3F4CCDB46E
-	for <webhook@archiver.kernel.org>; Thu, 12 Oct 2023 17:51:23 +0000 (UTC)
-Received: from mailout10.t-online.de (mailout10.t-online.de [194.25.134.21])
- by mx.groups.io with SMTP id smtpd.web11.19288.1697133075175553203
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 60FF1CDB47E
+	for <webhook@archiver.kernel.org>; Fri, 13 Oct 2023 03:55:27 +0000 (UTC)
+Received: from esa7.hc1455-7.c3s2.iphmx.com (esa7.hc1455-7.c3s2.iphmx.com [139.138.61.252])
+ by mx.groups.io with SMTP id smtpd.web11.31474.1697169321754191026
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 12 Oct 2023 10:51:15 -0700
+ Thu, 12 Oct 2023 20:55:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.21, mailfrom: f_l_k@t-online.de)
-Received: from fwd83.aul.t-online.de (fwd83.aul.t-online.de [10.223.144.109])
-	by mailout10.t-online.de (Postfix) with SMTP id 6FD854AAC4
-	for <openembedded-devel@lists.openembedded.org>; Thu, 12 Oct 2023 19:50:56 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.163.39.41]) by fwd83.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1qqzpn-3LLyW90; Thu, 12 Oct 2023 19:50:55 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 139.138.61.252, mailfrom: leimaohui@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10861"; a="114829460"
+X-IronPort-AV: E=Sophos;i="6.03,219,1694703600"; 
+   d="scan'208";a="114829460"
+Received: from unknown (HELO yto-r3.gw.nic.fujitsu.com) ([218.44.52.219])
+  by esa7.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Oct 2023 12:55:12 +0900
+Received: from yto-m1.gw.nic.fujitsu.com (yto-nat-yto-m1.gw.nic.fujitsu.com [192.168.83.64])
+	by yto-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 51469C3F94
+	for <openembedded-devel@lists.openembedded.org>; Fri, 13 Oct 2023 12:55:10 +0900 (JST)
+Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
+	by yto-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id 88CA0CF7DE
+	for <openembedded-devel@lists.openembedded.org>; Fri, 13 Oct 2023 12:55:09 +0900 (JST)
+Received: from ubuntu20.g08.fujitsu.local (unknown [10.193.129.153])
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id B81CF6BC67;
+	Fri, 13 Oct 2023 12:55:08 +0900 (JST)
+From: leimaohui@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH] wireplumber: Upgrade 0.4.14 -> 0.4.15
-Date: Thu, 12 Oct 2023 19:51:01 +0200
-Message-ID: <20231012175101.23379-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.42.0
+Cc: Lei Maohui <leimaohui@fujitsu.com>
+Subject: [oe] [meta-gnome][PATCH] gexiv2: Fix do_package QA issue when usrmerge enabled.
+Date: Fri, 13 Oct 2023 11:55:06 +0800
+Message-Id: <20231013035506.3046-1-leimaohui@fujitsu.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1697133055-DEFFADE8-B64C26E4/0/0 CLEAN NORMAL
-X-TOI-MSGID: 0b8d3273-86d8-4285-9f2f-03e8d722109e
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-27932.004
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-27932.004
+X-TMASE-Result: 10--2.245900-10.000000
+X-TMASE-MatchedRID: fEO0z8fyv33c+HB+YVvemCeaCBMY8cEnAycZ15wAFvi4hslioo9fGO79
+	DJRUi35pTQ0JkPG287/mn3xyPJAJoh2P280ZiGmRngIgpj8eDcBpkajQR5gb3lQwtQm7iV5jKra
+	uXd3MZDXzY+SMm0ortKgB7+4UjYG56edpsnmNuUOCRCSZJztC2f89KOZNami4G6ANC/qtXsq54d
+	MdmBy2KMxXkQ2s4DKC8WX6nrVoOUNYOUxqOZP8HxXFEH92Kf64nTtPxlIuIBW9Hzj86YHXBCnif
+	x5AGfCL
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 12 Oct 2023 17:51:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105458
+ <openembedded-devel@lists.openembedded.org>; Fri, 13 Oct 2023 03:55:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105459
 
-Additions:
+From: Lei Maohui <leimaohui@fujitsu.com>
 
-  - A new "DSP policy" module has been added; its purpose is to automatic=
-ally
-    load a filter-chain when a certain hardware device is present, so tha=
-t
-    audio always goes through this software DSP before reaching the devic=
-e.
-    This is mainly to support Apple M1/M2 devices, which require a softwa=
-re
-    DSP to be always present
+ERROR: gexiv2-0.14.2-r0 do_package: QA Issue: gexiv2: Files/directories were installed but not shipped in any package:
+  /usr/lib
+  /usr/lib/python3.11
+  /usr/lib/python3.11/site-packages
+  /usr/lib/python3.11/site-packages/gi
+  /usr/lib/python3.11/site-packages/gi/overrides
+  /usr/lib/python3.11/site-packages/gi/overrides/GExiv2.py
+  /usr/lib/python3.11/site-packages/gi/overrides/__pycache__
+  /usr/lib/python3.11/site-packages/gi/overrides/__pycache__/GExiv2.cpython-311.pyc
 
-  - WpImplModule now supports loading module arguments directly from a SP=
-A-JSON
-    config file; this is mainly to support DSP configuration for Apple M1=
-/M2
-    and will likely be reworked for 0.5
-
-  - Added support for automatically combining Bluetooth LE Audio device s=
-ets
-    (e.g. pairs of earbuds) (!500)
-
-  - Added command line options in ``wpctl`` to display device/node names =
-and
-    nicknames instead of descriptions
-
-  - Added zsh completions file for ``wpctl``
-
-  - The device profile selection policy now respects the ``device.profile=
-``
-    property if it is set on the device; this is useful to hand-pick a pr=
-ofile
-    based on static configuration rules (alsa_monitor.rules)
-
-Changes/Fixes:
-
-  - Linking policy now sends an error to the client before destroying the=
- node,
-    if it determines that the node cannot be linked to any target; this f=
-ixes
-    error reporting on the client side
-
-  - Fixed a crash in suspend-node that could happen when destroying virtu=
-al
-    sinks that were loaded from another process such as pw-loopback (#467=
-)
-
-  - Virtual machine default period size has been bumped to 1024 (#507)
-
-  - Updated bluez5 default configuration, using ``bluez5.roles`` instead =
-of
-    ``bluez5.headset-roles`` now (!498)
-
-  - Disabled Bluetooth autoconnect by default (!514)
-
-  - Removed ``RestrictNamespaces`` option from the systemd services in or=
-der to
-    allow libcamera to load sandboxed IPA modules (#466)
-
-  - Fixed a JSON encoding bug with empty strings (#471)
-
-  - Lua code can now parse strings without quotes from SPA-JSON
-
-  - Added some missing `\since` annotations and made them show up in the
-    generated gobject-introspection file, to help bindings generators
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
 ---
- .../{wireplumber_0.4.14.bb =3D> wireplumber_0.4.15.bb}          | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-multimedia/recipes-multimedia/wireplumber/{wireplumber_0.4.1=
-4.bb =3D> wireplumber_0.4.15.bb} (98%)
+ meta-gnome/recipes-gnome/gexiv2/gexiv2_0.14.2.bb | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0=
-.4.14.bb b/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.4=
-.15.bb
-similarity index 98%
-rename from meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.=
-4.14.bb
-rename to meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.4.=
-15.bb
-index 6f93b443d..679921922 100644
---- a/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.4.14.b=
-b
-+++ b/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.4.15.b=
-b
-@@ -11,7 +11,7 @@ DEPENDS =3D "glib-2.0 glib-2.0-native lua pipewire \
-     ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data"=
-, "python3-native python3-lxml-native doxygen-native", "", d)} \
- "
-=20
--SRCREV =3D "6d0c7f7b7f484b3cd2aaf2e2b3cc902c095b4946"
-+SRCREV =3D "d67b48e595cb4612fd7fd47f97df6b8883ef7f60"
- SRC_URI =3D " \
-     git://gitlab.freedesktop.org/pipewire/wireplumber.git;branch=3Dmaste=
-r;protocol=3Dhttps \
-     file://90-OE-disable-session-dbus-dependent-features.lua \
-@@ -133,7 +133,7 @@ CONFFILES:${PN} +=3D " \
- # itself to become a daemon, in practice, the PipeWire daemon is used.
- RRECOMMENDS:${PN} +=3D "pipewire ${PN}-scripts ${PN}-modules-meta"
-=20
--FILES:${PN} +=3D "${systemd_user_unitdir} ${systemd_system_unitdir}"
-+FILES:${PN} +=3D "${systemd_user_unitdir} ${systemd_system_unitdir} ${da=
-tadir}/zsh"
-=20
- FILES:libwireplumber =3D " \
-     ${libdir}/libwireplumber-*.so.* \
---=20
-2.42.0
+diff --git a/meta-gnome/recipes-gnome/gexiv2/gexiv2_0.14.2.bb b/meta-gnome/recipes-gnome/gexiv2/gexiv2_0.14.2.bb
+index 15091d4cd4..19d31f4286 100644
+--- a/meta-gnome/recipes-gnome/gexiv2/gexiv2_0.14.2.bb
++++ b/meta-gnome/recipes-gnome/gexiv2/gexiv2_0.14.2.bb
+@@ -25,3 +25,11 @@ src_package_preprocess () {
+         sed -i -e "s,${B}/../${BPN}-${PV}/${BPN}/,,g" \
+             ${B}/gexiv2/gexiv2-enums.cpp
+ }
++
++do_install:append() {
++        # gexiv2 harcodes usr/lib as install path, so this corrects it to actual libdir
++        if [ "${prefix}/lib" != "${libdir}" ]; then
++            mv ${D}/${prefix}/lib/* ${D}/${libdir}/
++            rm -rf ${D}/${prefix}/lib
++        fi
++}
+-- 
+2.25.1
 
 
