@@ -1,91 +1,83 @@
-Return-Path: <fabien.thomas@smile.fr>
+Return-Path: <beniaminsandu@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B7811CDB483
-	for <webhook@archiver.kernel.org>; Fri, 13 Oct 2023 14:02:20 +0000 (UTC)
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
- by mx.groups.io with SMTP id smtpd.web10.39124.1697205731767664313
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B8E4CCDB47E
+	for <webhook@archiver.kernel.org>; Fri, 13 Oct 2023 14:04:30 +0000 (UTC)
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.web11.39216.1697205866855111848
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 13 Oct 2023 07:02:12 -0700
+ Fri, 13 Oct 2023 07:04:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=OoCYh0ar;
- spf=pass (domain: smile.fr, ip: 209.85.128.46, mailfrom: fabien.thomas@smile.fr)
-Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-405524e6769so13846805e9.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 13 Oct 2023 07:02:11 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ak4Be4+o;
+ spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: beniaminsandu@gmail.com)
+Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-1c9de3f66e5so15227395ad.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 13 Oct 2023 07:04:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1697205730; x=1697810530; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=46+Rh0tUROaTU3vZtpZWJecTNMj7NpvLPppggkFgjfo=;
-        b=OoCYh0arucvyI4fRFm+pCxPf6l3z82F5rab34BOgZQF8tIuLnSoyzt/R8gNzZM+UHH
-         QoQlzixkvO7Cv4ZMFQfMRAhoXSc6jZs7E71Hc0GWqK+I1AWrzJIYETpAMgD5IhFbyVt4
-         oSGghIUrM3yHVh0NS00mV7f+1It7IWjVWujgoek0AzYoQlY9IJ/u65Y1u3V+C/VM0lN0
-         WYDY59d7IVRkxIJTLezZFZOMccg60ro7nBSWRAOHZPLD8bDmh76/X59mChCsacS9hiY9
-         4jRmwApXEJgpiMgqk5eodev9h0TvPzRrOteRBEXKaBsPwECvT8LkJiN277VTVUtQQT++
-         dw1w==
+        d=gmail.com; s=20230601; t=1697205866; x=1697810666; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=gW+orbpuq6QtG2nIbXo/oK18Nj8TV0TfbAJQEk7cq4Y=;
+        b=ak4Be4+oEgnZGwWqAZELW4mYpiKnefaq8SDGfLm7QAvpZEaApRZaOxfA71LHxELubz
+         HX5YwplLSuKCWsRxwr6cLdwH6eMVACzOFU34YdxolImmbicaknB4EGSuEu8Us5xUs3G0
+         kn6HhXNoo/S19qHMnWO9GX8wn0Uy/OFigmvWaDzUIdzPEqLqXgEQNjAhsbthsRxgWm2R
+         Bj1Swm0mN+vzyLlX4GUuR8LRNbs5SzaCs6pVgxEXCyAA/MQ9rlIv3O8hXBMwv9GwEjtd
+         DnIdC6pKwdjGw79f0bjqOf4gl0TuJ2mT2es3JB41UgmvOKFPsNIU39NPR/CJnWdBFcAy
+         YwBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1697205730; x=1697810530;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1697205866; x=1697810666;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=46+Rh0tUROaTU3vZtpZWJecTNMj7NpvLPppggkFgjfo=;
-        b=hcPGIbaP7Vud0ydwWqZtWM2PX8Gn18fHKU8ZzWRlFGDs+YqcESKJOldD+x91rrAw2s
-         NqENaAGUkAvPVfCE7fcfjzmIWG9LY+w2CM0t1VnCtRImWgZntzMCPLmvqcU9I5r8OOqG
-         MIpCXsyu42o69h5/7JDyDwUHHN3gx5g2sw0nzhS9WDWgz7e1DlfdSMjAlRoB2MEInKxX
-         9fL5Mh84jozKLvnnCEYbrEmjyzcYKGcobPpTtCNkos0jeG6a5x9CWTyWR6flI+sAztFI
-         Cp5iVzDYD6+BPjsZhrNtnmVIa6UiAz7FcYGdTrwftzpxV1n21yEKS/tmaDFwcx8zYCRw
-         A96Q==
-X-Gm-Message-State: AOJu0YxeA/5OuGRkTi4/4neJndcAM5gfNNZj1QzQMdGo1cjmCEGg/3gK
-	vNdy3pr7FtVA5zn9qkHNBEsHZWx8sLEpVxvtoKA=
-X-Google-Smtp-Source: AGHT+IHk9arcE8si2Ixs4CgF6uxvmZIWJqune9/WquokzklC8ffKmQnQLRfd2fBqC7j6jgXJHzxSkQ==
-X-Received: by 2002:a05:600c:358e:b0:406:51a0:17ea with SMTP id p14-20020a05600c358e00b0040651a017eamr177687wmq.10.1697205729049;
-        Fri, 13 Oct 2023 07:02:09 -0700 (PDT)
-Received: from p-nan-fatho.home (2a01cb0584747e0021d4f13fbc3604e3.ipv6.abo.wanadoo.fr. [2a01:cb05:8474:7e00:21d4:f13f:bc36:4e3])
-        by smtp.gmail.com with ESMTPSA id m32-20020a05600c3b2000b004065d67c3c9sm224195wms.8.2023.10.13.07.02.08
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 13 Oct 2023 07:02:08 -0700 (PDT)
-From: Fabien Thomas <fabien.thomas@smile.fr>
-To: openembedded-devel@lists.openembedded.org
-Cc: Fabien Thomas <fabien.thomas@smile.fr>,
-	Yoann Congal <yoann.congal@smile.fr>,
-	Dan McGregor <danismostlikely@gmail.com>
-Subject: [meta-oe][PATCH] static-group-meta-oe : Fix nogroup value
-Date: Fri, 13 Oct 2023 16:02:05 +0200
-Message-Id: <20231013140205.2944335-1-fabien.thomas@smile.fr>
-X-Mailer: git-send-email 2.34.1
+        bh=gW+orbpuq6QtG2nIbXo/oK18Nj8TV0TfbAJQEk7cq4Y=;
+        b=lSZjrMC6gQXCJy/w3nsOlvlikPe6QYm2posbalvX1ABWJ2pn/MwGqp5P6MR+EhsT1w
+         lx3XvKPwDz3JLzjD9wLTi/6caigGa0owQSrRzBflNxzyHtCHDFH/OypTyFdN/8agCpKI
+         8sR9XCXWdAi9AChUjMCCoBaKcMMRrIvI1x/U9tzohWBCOOkB593n+/LLLZ2WepXxwJuM
+         FLhelZCzcnCJcB84xXub63QCw2WCwR2yQCcrZ7RQvPXmLcGVtGxm9e8IlidPIo6eo6N5
+         b93MpEUNor6aw3+MFQ9Wo8M6qb2PLffglvqao0qLfMLs2glNKQVnh0Gk1+8paUK5Vibk
+         FSbA==
+X-Gm-Message-State: AOJu0YwiC+0n8P/y+K1j3P2pUd6Tdsw/KXHNDPV0C2APfTZdFGHLtzU4
+	wQPJK+Dqn7IAf9NR8X0nO5k+GaOl4+34hfBk+qw=
+X-Google-Smtp-Source: AGHT+IE24d3OfT+bumEGT10hIyVuBzOXZWh6/T/V4rxS+85TgAObTdhhK+P+G5n3P7x8D3+CwTojfeBQ1H3Blk3U+ao=
+X-Received: by 2002:a17:90b:3911:b0:268:5431:f2a7 with SMTP id
+ ob17-20020a17090b391100b002685431f2a7mr25940688pjb.28.1697205865829; Fri, 13
+ Oct 2023 07:04:25 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20231013125705.322898-1-beniaminsandu@gmail.com> <ZSlEMt2vRc-57r-t@nuoska>
+In-Reply-To: <ZSlEMt2vRc-57r-t@nuoska>
+From: Beniamin Sandu <beniaminsandu@gmail.com>
+Date: Fri, 13 Oct 2023 15:04:14 +0100
+Message-ID: <CABQJdOH6wDNRbsUA3poiZWseq07uDOvN--NaTMvsHd5EDWBs=w@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH v2] mbedtls: upgrade 3.4.1 -> 3.5.0
+To: Mikko Rapeli <mikko.rapeli@linaro.org>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 13 Oct 2023 14:02:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105468
+ <openembedded-devel@lists.openembedded.org>; Fri, 13 Oct 2023 14:04:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105469
 
-nogroup value configured in static-group-meta-oe, used for
-reproducible tests, was not consistent with value defined by
-base-passwd in oe-core. Fix its value to 65534.
+On Fri, 13 Oct 2023 at 14:20, Mikko Rapeli <mikko.rapeli@linaro.org> wrote:
+>
+> Hi,
+>
+> Adding CVE-2023-43615 to the commit message would be nice. Maybe
+> upstream omitted that on purpose if the issue was not public
+> when preparing the release.
 
-Signed-off-by: Fabien Thomas <fabien.thomas@smile.fr>
-Reviewed-by: Yoann Congal <yoann.congal@smile.fr>
-Reported-by: Dan McGregor <danismostlikely@gmail.com>
----
- meta-oe/files/static-group-meta-oe | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+There are actually 2 CVEs mentioned in the release notes, but not in
+the changelog file. It was silly of me to not double check before
+copying that. Will send a v3 soon which mentions both of them. :)
 
-diff --git a/meta-oe/files/static-group-meta-oe b/meta-oe/files/static-group-meta-oe
-index 79c9bb6e1..9f2700e55 100644
---- a/meta-oe/files/static-group-meta-oe
-+++ b/meta-oe/files/static-group-meta-oe
-@@ -5,4 +5,5 @@ mysql:x:603:
- postgres:x:604:
- zabbix:x:605:
- mail:x:606:
--nogroup:x:607:
-\ No newline at end of file
-+nogroup:x:65534:
-+
--- 
-2.34.1
-
+Thanks,
+Beni
+>
+> https://mbed-tls.readthedocs.io/en/latest/security-advisories/mbedtls-security-advisory-2023-10-1/
+> mentions that TLS with null cipher and RC4 are affected but I hope those
+> are not used in any real products.
+>
+> Cheers,
+>
+> -Mikko
 
