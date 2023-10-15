@@ -2,173 +2,151 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E872ECDB489
-	for <webhook@archiver.kernel.org>; Sun, 15 Oct 2023 13:19:06 +0000 (UTC)
-Received: from EUR04-HE1-obe.outbound.protection.outlook.com (EUR04-HE1-obe.outbound.protection.outlook.com [40.107.7.52])
- by mx.groups.io with SMTP id smtpd.web10.89880.1697367079777818269
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 047EECDB48E
+	for <webhook@archiver.kernel.org>; Sun, 15 Oct 2023 13:19:07 +0000 (UTC)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com (EUR05-VI1-obe.outbound.protection.outlook.com [40.107.21.83])
+ by mx.groups.io with SMTP id smtpd.web11.89851.1697367731043602381
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 15 Oct 2023 03:51:22 -0700
+ Sun, 15 Oct 2023 04:02:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@welotec.com header.s=selector1 header.b=Q1m/u5K1;
- spf=pass (domain: welotec.com, ip: 40.107.7.52, mailfrom: p.lobacz@welotec.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@welotec.com header.s=selector1 header.b=rXRtgzmd;
+ spf=pass (domain: welotec.com, ip: 40.107.21.83, mailfrom: p.lobacz@welotec.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=BGOZuDCOOHBbXFxCbQiKYf/S2yaqJJIPn9/67jNVBmHJuhMhBhWMv6iPyeSBOhuRYbbdQS/ugKwa4Gwp7g28M14brsWmpJ8GerMY8fkzc74kRPLTphuJlx3XTiEH84UDRc59FcfzMZ/WceVpdyYnkkxx0ZfELxqXZUA7WXrPDzfaw7GMS/FCkuoRwlhWReKkcl+cihfg/0//NwSXXnjpSlPnGgM+NFwmvw6XDU3FKPdN/7RpiEOqjmF51DQdWniV42Quu6ffQYvWu7UzmUwgnWqqAHAwYZD/K5M2Wqa3++n55bHyYt9rPFqHTZXrGzBU32Qv/e4/Of1aGDk9WgUmyA==
+ b=c3LlC6Pk2KNOrbKLC4zy/KEBtglDLP9aPHe483SrwymBImLVZ80Mu8crAgf9p7OTfnkwDQUcMOxlWix7fs4NoXXf2a8PlGAoqYCpYOZGb/N5nUq4/HD1Wu83NiYvaekDCG1me47ns7wRB7JYCkbfxkZwdQ66ACcuSrmusYdFYZO5H+jlaEn//4lwHZD+4qaQLBUNwsE4WVkjbtRk6OQQe6vcFK2YfNudLrIglTDB4HX+ly1pe4yYaJMitKsnHgxTkvGR+cgxOUOM2412BuEbxdG3mVKprCQB9UbzhS/DHSmg3Gew9PWUB7a5jY5SMwNoQEowyiMEE7tbDzJsv3zfUA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JnX9tAVxLp4QlhJzMxAxH/3nnIEHsh8J9yRQjoMvhIs=;
- b=LObFS1R0D2Cnm7frALmk6zEIqyndamgqe4RsOew0LQ3yStJKJCBwXIYaJSuVKBQ9Ow3SmBIekaHSQ0U9e0VvTplkxGtWS7QeGPT0R3yc+a6aaJnhGijLj4WZrjJx9muv5c21tRW4mp1Elr/kZWnpJPz2tV/j4vf1cE1iV895eE39eyJaXymbS5eSAZknby3rpFUsFN/4RAzHb5FtodpnqOCtpkRx25T4WoYBIePj9b0Bf4sVYWBlozoPL6a3S+WakKVjdaEBDM2GqaLc4PKR5HXA+xBZceQmoSCUJCwI0fH3ea0Np8ihOdd3ztVrKOurb0tl/qVkiDRmB5aeLcBidQ==
+ bh=aMcad87igkPOQdlt5omEoFA/YQ0WOqE9pSirTeraGHY=;
+ b=RPPNMejuWI+WI+uOoQq8OkrLZ3z+YxHvx0mmGBR5uB8sMr1pvfy24+ESpotu0FTANefaD0w2fubcFry5+5bjqzN9p4dO737TuSgxdKbh2nWAFsmkLVYJ4h8Xdn38egDNJt1DhNHVlZOuTU45WDcNYTLaewSsAPO5jiRDa99YEuj64jgxboZScD/ZFRHU/BoIFQ0Ii+mfAZFRhIjywA7zCl+VZOqqT5lVSyzb4qfOImcb274FI1XiUJHXPx+4GzvMABZB0C2fKX8x/uLynjLIpuzxE2fmS5owATjaeg+6yWgVXEWZiFzxCaew9IER4wXa0VkJls4yf6JkftD6kO/cyQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=welotec.com; dmarc=pass action=none header.from=welotec.com;
  dkim=pass header.d=welotec.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=welotec.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JnX9tAVxLp4QlhJzMxAxH/3nnIEHsh8J9yRQjoMvhIs=;
- b=Q1m/u5K1zPMU+mgLWonDAydmOwtq2taaMjXAeJSiYZ8Dnlnloeb4XGWhJZHGSgaJlpm5+pAbBfJnhuW07EGGAKDU9tyeOyMfnxWCMYIwEI37oKSiRy2inFTT4E3cYJEHJqJCJO5xk1Cm1coTJBHSt9dXgjrBVd7bP9P9FzA4EDucmg7BFYBVH1PLpPNfqDhzx83UaltdYftN83NpS+TRaPTH57K9qbfnFfjSl5jpW8gF4BzmZGEcu/WFoSRdJ1mlwPXNrhJ4dRrE3GorDOTalZTBUvjcTw6RJt7tk8AXBPQC+mSQJsEleCuRSdKoH48xkwaTW2lH83FAHSNBh1ge7A==
+ bh=aMcad87igkPOQdlt5omEoFA/YQ0WOqE9pSirTeraGHY=;
+ b=rXRtgzmd1LAcRhsL8VOjIdGqzfO4MskoRKk+LiOkv3Hp0jFtrTYXAr3aamtsrqVXd9qsrSMZNIg9XIEQROcyel5rlxlcv3c9eAZjmH9JYdCnTJlXydKNYcxfH74A6QPPXf2faVOmwdmMQ/uMf5KgySAc7fX90F5xuoD9eKOKTne8ehEi8w1RZ0IQiCpslnIDlPQ84x17dqjh+9jmnpguJoDZe06uQGd5OifX7Tc3XlXFRocAzw2LpdeUipw0SwquBxZM35KbgJ7oNCPtkqh2o0Ji0nrhvnpx7lNaBteB8BHL97HWMcuDeBRuWQXnZ4nade1dkFgNP6JIz3aHs4IGBA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=welotec.com;
 Received: from VI1PR04MB5373.eurprd04.prod.outlook.com (2603:10a6:803:da::22)
- by AM9PR04MB8308.eurprd04.prod.outlook.com (2603:10a6:20b:3e3::10) with
+ by AS8PR04MB7925.eurprd04.prod.outlook.com (2603:10a6:20b:2a2::15) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6886.34; Sun, 15 Oct
- 2023 10:51:13 +0000
+ 2023 11:02:06 +0000
 Received: from VI1PR04MB5373.eurprd04.prod.outlook.com
  ([fe80::3090:4af6:ae14:b9c3]) by VI1PR04MB5373.eurprd04.prod.outlook.com
  ([fe80::3090:4af6:ae14:b9c3%6]) with mapi id 15.20.6886.034; Sun, 15 Oct 2023
- 10:51:13 +0000
+ 11:02:06 +0000
 From: =?UTF-8?B?UGlvdHIgxYFvYmFjeg==?= <p.lobacz@welotec.com>
 To: openembedded-devel@lists.openembedded.org
-CC: =?UTF-8?q?Piotr=20=C5=81obacz=20via=20lists=2Eopenembedded=2Eorg?= <p.lobacz=welotec.com@lists.openembedded.org>,
-	=?UTF-8?q?Piotr=20=C5=81obacz?= <p.lobacz@welotec.com>
-Subject: [OE-Core][PATCH v14 04/11] path.py: add support for ACLs and all additional attributes
-Date: Sun, 15 Oct 2023 12:50:48 +0200
-Message-ID: <20231015105055.52510-4-p.lobacz@welotec.com>
+CC: =?UTF-8?q?Piotr=20=C5=81obacz?= <p.lobacz@welotec.com>
+Subject: [OE-Core][PATCH v14 06/11] package.bbclass: add support for ACLs and xattr
+Date: Sun, 15 Oct 2023 13:01:49 +0200
+Message-ID: <20231015110154.53364-6-p.lobacz@welotec.com>
 X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20231015105055.52510-1-p.lobacz@welotec.com>
-References: <20231015105055.52510-1-p.lobacz@welotec.com>
-X-ClientProxiedBy: FR2P281CA0168.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:99::17) To VI1PR04MB5373.eurprd04.prod.outlook.com
+In-Reply-To: <20231015110154.53364-1-p.lobacz@welotec.com>
+References: <20231015110154.53364-1-p.lobacz@welotec.com>
+X-ClientProxiedBy: BE1P281CA0087.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:b10:78::17) To VI1PR04MB5373.eurprd04.prod.outlook.com
  (2603:10a6:803:da::22)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: VI1PR04MB5373:EE_|AM9PR04MB8308:EE_
-X-MS-Office365-Filtering-Correlation-Id: cb040596-61b5-4010-1066-08dbcd6ca636
+X-MS-TrafficTypeDiagnostic: VI1PR04MB5373:EE_|AS8PR04MB7925:EE_
+X-MS-Office365-Filtering-Correlation-Id: f203c0aa-adf7-4615-adf5-08dbcd6e2bab
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	PNbIgkgSahbNdOg+TADpIJhrJ1p8+uGCXuXY/WHpTKqd9nmTez9LahUIbftFdygXCPl/juNov8vyM2TE5tzk3qV7uy3qdtKH/xoVTdfgNavquioBNAm4GIzzDqORkbaLWo0SZT+pkaubN/1bCiwAtpD8mQsGhKlSnJZPEjegaRhtNwChRjdY9y565wdYzXNRRahzT9j2C6OYOPIvUsrVZgmeiFJmD1WBbjUIYSKwiAHVizWmwy58PCTuFAIl4ZfZElONNxHIok6awylIwd3aUhSr6f98bTpxE+skTNB8LDwjKYLcvlKsZGKN4ovQeeTSkmNmLj1YdfWF7zju9fvHQtYoHaLHtWdurCSawGDU2Ko948PdWXDyP/HiUbyZoOtfNP9+wd9FbZRAD9mt2SD9ZUAB9okRZhWDQS5klGRDl0gRQFS4oxJJqyQiH3EdWG/rGXPgIjYcsDYPvxRniX1u2DviiV3SSsmaDPCK2NAfEiv/r1S7lcKwiI28ft/71S3X2us/4GKLQ0tykVExAAbDN1nI7fXIuKXLOhQgnnrvT2i5D3ehRrE4JoMsx6xvPggbrjcChbr7wDVwJiO0X9uDvsFdUm/VCbc2JNye+Zd+H0K5tUKhCPv3bcV214KTX9pO
+	KmuEp9CMNlhusCJOsCI3XpWJXvA+eEzp1d7Ah931HK79xjVI8DxEfh9V422qTSSkoAHYGcKTbFf593H+HeceKKoefvJHTBtyMIPdNA7TZ0A6ayP8e7VLVLN0za9ipvun1JjIB/R2P6KWgOcb38JXFbgC5r1EOrA/AJLz4rhz0JFURIT8yPaoGIw7TzFV+aGEjQyS98ZNOBtRYpfuld9E2ExcoWauuqSfzynzikeHnfeEIO6ICSe5qnLeStMxndjSA3Q5VlFGTELUrFhT+dtyLK81/mvTl1Nvr+Hws7zVSBg2mERSuMFSt7tC42uD4NpPR3o903nK3yptEhL2uMMFxR7lbwlOsAP65zVwQKnMJXz1Hddf3IFYI2cOd5BcZAuU7PBzJeBAjyApBPzlqsPLjBboxqU4inpZcYtOLBoN/RuGT+hc8eatEY5KuvjsZJQ8pkF8CIQoWvRy7eQroD9Dt/UIo7lGmNVfq3anaMf5hPmXBPdrdTYXpA64MH+GIY/tNUrCA+8C8qXkE7kBWcsQE7xHaM/9hy6kNLPCte6huJIDT0qscf164s6Fb8gpn9LvxwZvwWHUyrqPAMtDsr6jpSqG7LfXpRZC0ALmPpTclt5quIF1wtrCbkbXXExP5Sl/
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR04MB5373.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(136003)(346002)(376002)(39830400003)(396003)(366004)(1800799009)(64100799003)(451199024)(186009)(38100700002)(6512007)(26005)(66574015)(2616005)(1076003)(478600001)(6486002)(5660300002)(8676002)(4326008)(450100002)(8936002)(86362001)(2906002)(6916009)(316002)(54906003)(36756003)(41300700001)(66476007)(66556008)(66946007)(6666004)(52116002)(6506007)(38350700005)(83380400001);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR04MB5373.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(366004)(346002)(376002)(39830400003)(136003)(396003)(186009)(1800799009)(64100799003)(451199024)(6666004)(6506007)(6512007)(52116002)(478600001)(6486002)(83380400001)(107886003)(1076003)(2616005)(66574015)(26005)(2906002)(6916009)(66476007)(5660300002)(66946007)(41300700001)(66556008)(316002)(8936002)(4326008)(8676002)(86362001)(36756003)(38100700002)(38350700005);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?j9vCzqIv2s4DWKPoiUxFi6o1pkYTujW4T/X3enHdbL1oS+w+cA6rpOXpBzgV?=
- =?us-ascii?Q?QybtlWQb9DUebYa11y1pVBgwETlfby/EFw1bujBEygfhzZGHLZUyoA22ceTD?=
- =?us-ascii?Q?+Gt7e/dCqaqZYDDqY4Fb5KEst6zxgg+Vpg2BWCCjMzNw1yFw21cGFHhY+vt8?=
- =?us-ascii?Q?NkYsdLJs/YLF6U0FVlGKcEswXaIOl22xPef/2LfOWwuCKe9z5kGAV9474gTG?=
- =?us-ascii?Q?8qObOmfqHqrDpDSGl7g7RwHUZUZUeuyUip3ZGjam6aADpcDctY1m+S1t4sq7?=
- =?us-ascii?Q?3LG+IkwdoObqGDPhhvIIbgNgVZpCK6HsMHTUEqZu4et6Md2B/xjTDM1uJVjW?=
- =?us-ascii?Q?F8zI/dFE5XpsrEaRbx2dcXvXfTjyKjh5HpdS0qWNcJXz57I4LXg+QIGnrwFQ?=
- =?us-ascii?Q?yAIh8U7usOLuv1U38q9psYZsVsbc0l5BhfDq0zdPe0Z5wWIW5+UG2sM1JfEF?=
- =?us-ascii?Q?HDkNy8LzFFmzPvPZGhbtT8PqtrkNNst/cgR4GNMIOp98/Vm6qy8rL4P7p0BX?=
- =?us-ascii?Q?H5X6w8L4F5sOvwNcDJXER8zSG0++5xFQaeTPBSt4LDjmNRRMj627n/cnGgXT?=
- =?us-ascii?Q?vE8ezqa6+d/1sfWX5PoduCm3Vn9UjJRREHJJ6JlDz8G0BfeZo1X1UV4P/9vD?=
- =?us-ascii?Q?HlTdxCREtvuFt89LKap0CWPvjK2TjaWHHEhLHsKTYcpvhN1cDlBnWcZwl7D9?=
- =?us-ascii?Q?AifCCfPEHb1VRlaMALiSlYyaj6V4VpHtuMYswarRggHwkaavNUbkRBqUG/+e?=
- =?us-ascii?Q?f9Zr+kop9bm4+rpXx0j5B8llwStOyyfjDh8bUrbt2l9QTEMqSBATnGri9i3f?=
- =?us-ascii?Q?3IVkNRF6Un8D1wKC5wMjVwLZXOT+upWFMH10C5QmyBFN4/1EJ/poILyW3N5B?=
- =?us-ascii?Q?oHswe2mZDQ9IGg/QKQ2Hm8OfSQ6Tkj6gSuQnNJhkebMyNDqL+0KZOY8UCZU1?=
- =?us-ascii?Q?j6OMGEZVcKeiwb0esb0++Zqj6soTvu+8Tmb8AN6izGESNE0H3rG4dEh+ycaH?=
- =?us-ascii?Q?3W60bLvYAaspwBhBweAwOgj7tBB+YacFRHCtYpOgSNPEbdRZ8gOJFplB5Yuy?=
- =?us-ascii?Q?TNcHgz/miFiTbmcxaer7UjhHdVKySL+2o5IZolXHY77qsYhneSo2jrHMYGsm?=
- =?us-ascii?Q?INTmgg3Kr82pfQ3kLG3LIZ3iXXy+16dRnZvH6b4wBKhnniADV3gpn8jcSaHm?=
- =?us-ascii?Q?2YgjkaDkZ369SpR6PtlC7Jm5S8mt6HfxgqiVHiDFXl5axrIObUTShYD4G9XF?=
- =?us-ascii?Q?Mlx0mUgG99nIiHf0iP5roR0U2BUogu8kcFjV/VQDT0pWjWe5sKhCms64iG2b?=
- =?us-ascii?Q?UxaaHAH8yZvvbFaSCeYpu5BNOsQpsJhleEmt5GrEEDGNeukO84N7K//vola4?=
- =?us-ascii?Q?O3de2fnTMF7gAgv59jVIUDJRnNyOVi/BNQ5l0vXt9d0pc9J6y8hcGo0+wDAY?=
- =?us-ascii?Q?niAxpBJU18kHbLM5RaBfJxDp3N8QxcmgV1NcvXiRBwaamGVY6gVQPuiLo+AG?=
- =?us-ascii?Q?W4u0WONQ3PQ8ulDaVayft0CaLEcpugIJP3B4aFmAKmOVetLyMZ0CKjoL+ihQ?=
- =?us-ascii?Q?tgYhCjxBKipBChcYVWduLg9w3dH/3+yvnJPIueD9?=
+	=?us-ascii?Q?ENds5DcR7Aw/YJP2Xz5D7e2r77aesmJlVNiGxoclT6RHeUzfMb9g00/jxwIU?=
+ =?us-ascii?Q?DtTOCazK1qEvoWhr1WBJ+272c0NYzCeVIgWL1qFI3FXDq+8tcDm90XjEJbHO?=
+ =?us-ascii?Q?q6NHXYdLtq0aWN6kjlTP1WAgbhsPpIVXp4v1uYzH+aHjJ3vzzTIwjqlS2EPn?=
+ =?us-ascii?Q?jb3SBr4BKfz7B+WYGraDXTt/j7sNx0i6Th0p/40zLCxi5kzWvPMXC6Q0MPVJ?=
+ =?us-ascii?Q?4ShVWWjueni/cEsWqoqUD2HEy0/QmJz38DpCPYuuMmxFSMNnER9WK6lQjoAL?=
+ =?us-ascii?Q?IQyYYP43bFr8p8M3cXyV3LGhmPUNVoOuYzEGhy2kcT84NVvSRuzHmRC5s/kK?=
+ =?us-ascii?Q?VY7dXOsSPcKuw4hZz8O3BamIla7Tv2m0dzHsfeDSpoWKmdUwoicc6J+4ng2H?=
+ =?us-ascii?Q?dPtkBdq+X0I7bVzhDP6SvY9lms3y9xg5Douy3wA13QJuRtgWVYkP0il2QYuu?=
+ =?us-ascii?Q?5AksnitMEAVVdaILh2DBpkNEzbUnGr9etyyBBurenmslK8pSTA8/8ebm9dR7?=
+ =?us-ascii?Q?CoiF/pbBKeC1Rl9oxqWzd9mSUizcpy0RE7MjInVHSCUmOd9C4ERE+Wp20ZXv?=
+ =?us-ascii?Q?uLm5wODO5Fm5mQrPCMWGaOUXSQ29nARRhFlGw8SBOXOjsrVk9TnfaYL6CVOg?=
+ =?us-ascii?Q?n1U9F0KKVBH9zjJQkrAaSfgNcqOahIGZWu5W5ebGCB7DhaHu1PYkPgOSK99/?=
+ =?us-ascii?Q?MxasIVcKvdSUfxUiZD03Tf0rIH9N8UyhCNBYK48NyvqgFiAYO7wgq4xDX4Kn?=
+ =?us-ascii?Q?4uLzg9Ge7K19UCrZKkLZlRIrM0fWYS3u69ybrKwIvv6xVVZRBiN0nS2AeNbL?=
+ =?us-ascii?Q?9DzFnSaP8YL3eyxVe5vw6WLbTdR4Kiu12xU3AYlR/ohRje54JfZPBaln+zBE?=
+ =?us-ascii?Q?73bNxCVp8k2qfK4W6jzDwmnZlwD0EME+zadszNrT8pPt1lB5zws7jeH/NKP8?=
+ =?us-ascii?Q?Zf4t0Jn7AsHHaKC32J0ozT+V6dLX1BWNvArOKL41RRF1KI+emR6CLU1lbwyk?=
+ =?us-ascii?Q?5dEM7zCYxHf/R0/Ro669RDnvGOUi8F+giJezOgWr7UP/ZY/hJWHDeCcuz9gn?=
+ =?us-ascii?Q?OosQnl9WJQgQupfKyolH+h4Yg1z8K8uAXjBNW1i1j9nw3t9RM2xGUWHx/vfi?=
+ =?us-ascii?Q?n4EydM/aFXpkmoj7IvfDvb6QfFGv1x8PRVLNskHvfOOXZZsMyYjGAPs07RiX?=
+ =?us-ascii?Q?m4BipslUvPdFclPIZLLSMiTSkEgWDf38YRjl1Vr6dJzK0b+oAjqgSix6zOQk?=
+ =?us-ascii?Q?yx2lu0nOUzQcGc46O5zYWYZws1X7dKPp1PPjd/MOfMO4hga79dz3HIsmfHRe?=
+ =?us-ascii?Q?XNf0HoSmxiOXWootjr3zOdzFPwRJ0MwI7J6aSMagJuB+PXBdqVzEuIhnIe9q?=
+ =?us-ascii?Q?qgGOyXCgkRIx3qJhYLRzplKuC/TjByX7Q1g/WMudVZAszsxzyL+r0UlJSLGh?=
+ =?us-ascii?Q?2QWs43U+Oh+jisO5Ayatd/VubtQ3BVJERSV2oTZOvueiZ+r7LLk1vCFs5IAL?=
+ =?us-ascii?Q?ni6dQqvzc3tC0tYN37iUz09YWwaBQ/v/hAryP7hBrF02e8BxI/N2JWctxBEq?=
+ =?us-ascii?Q?8cST21WrcWs3ZfPJlK2aSiH+eG9u8ttitm0uKSFU?=
 X-OriginatorOrg: welotec.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: cb040596-61b5-4010-1066-08dbcd6ca636
+X-MS-Exchange-CrossTenant-Network-Message-Id: f203c0aa-adf7-4615-adf5-08dbcd6e2bab
 X-MS-Exchange-CrossTenant-AuthSource: VI1PR04MB5373.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Oct 2023 10:51:13.2972
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Oct 2023 11:02:06.7176
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 25111a7f-1d5a-4c51-a4ca-7f8e44011b39
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: UGBfXmTBVc4P74jhRcpuZU+qAnCM4ete/dOldZrZ3s/uQ8Pq66jcCmHSfaoi9eW7ZX3iXie9v/GunZ41UYjGdg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8308
+X-MS-Exchange-CrossTenant-UserPrincipalName: pyj1wV3Fqh7bMCjFcST0F102nSGFFO5lTjTUpQhsByw0HsSudhU13EDq/g3ZeuqIGiAU4RFp+qA9LkOu2wIC1Q==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB7925
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 15 Oct 2023 13:19:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105504
+ <openembedded-devel@lists.openembedded.org>; Sun, 15 Oct 2023 13:19:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105511
 
-From: Piotr =C5=81obacz via lists.openembedded.org <p.lobacz=3Dwelotec.com@=
-lists.openembedded.org>
+Extend `tar` command, with additional parameters, depending
+on choosen package class and target distro features, in order
+to support ACLs and xattr.
 
-Extend `tar` command inside copytree() and copyhardlinktree() functions,
-with additional parameters, in order to support ACLs and xattr. The posix
-format doesn't need to be set in here, as GNU tar switches to it whenewer
-is uses --acls and/or --xattrs parameters.
-
-Additionaly change preservation of additional attributes for `cp` command
-to all (meaning mode, ownership, timestamps etc.) not only xattrs, which
-were previously.
+Currently only `package_ipk` supports fully ACLs and xattr.
 
 Signed-off-by: Piotr =C5=81obacz <p.lobacz@welotec.com>
 ---
- meta/lib/oe/path.py | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ meta/classes-global/package.bbclass | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
-diff --git a/meta/lib/oe/path.py b/meta/lib/oe/path.py
-index 0dc8f172d5..56e8e214ac 100644
---- a/meta/lib/oe/path.py
-+++ b/meta/lib/oe/path.py
-@@ -92,7 +92,7 @@ def copytree(src, dst):
-     # This way we also preserve hardlinks between files in the tree.
+diff --git a/meta/classes-global/package.bbclass b/meta/classes-global/pack=
+age.bbclass
+index 580884cd83..22af6552d7 100644
+--- a/meta/classes-global/package.bbclass
++++ b/meta/classes-global/package.bbclass
+@@ -353,8 +353,13 @@ python perform_packagecopy () {
 =20
-     bb.utils.mkdirhier(dst)
--    cmd =3D "tar --xattrs --xattrs-include=3D'*' -cf - -S -C %s -p . | tar=
- --xattrs --xattrs-include=3D'*' -xf - -C %s" % (src, dst)
-+    cmd =3D "tar --acls --xattrs --xattrs-include=3D'*' -cf - -S -C %s -p =
-. | tar --acls --xattrs --xattrs-include=3D'*' -xf - -C %s" % (src, dst)
+     # Start by package population by taking a copy of the installed
+     # files to operate on
+-    # Preserve sparse files and hard links
+-    cmd =3D 'tar --exclude=3D./sysroot-only -cf - -C %s -p -S . | tar -xf =
+- -C %s' % (dest, dvar)
++    # Preserve sparse files, hard links, ACLs and extended attributes
++    # TODO: for the moment only ipk packages are supporting ACLs and exten=
+ded attributes
++    # we need to add support for other package systems as well, but that d=
+oesn't bother
++    # tar from creating archives with acl and/or xattr support
++    acl =3D bb.utils.contains('DISTRO_FEATURES', 'acl', '--acls', '', d)
++    xattr =3D bb.utils.contains('DISTRO_FEATURES', 'xattr', '--xattrs', ''=
+, d)
++    cmd =3D f'tar --format=3Dposix {acl} {xattr} --numeric-owner --exclude=
+=3D./sysroot-only -cf - -C {dest} -p -S . | tar --format=3Dposix {acl} {xat=
+tr} -xf - -C {dvar}'
      subprocess.check_output(cmd, shell=3DTrue, stderr=3Dsubprocess.STDOUT)
 =20
- def copyhardlinktree(src, dst):
-@@ -119,7 +119,7 @@ def copyhardlinktree(src, dst):
-     if (canhard):
-         # Need to copy directories only with tar first since cp will error=
- if two=20
-         # writers try and create a directory at the same time
--        cmd =3D "cd %s; find . -type d -print | tar --xattrs --xattrs-incl=
-ude=3D'*' -cf - -S -C %s -p --no-recursion --files-from - | tar --xattrs --=
-xattrs-include=3D'*' -xhf - -C %s" % (src, src, dst)
-+        cmd =3D "cd %s; find . -type d -print | tar --acls --xattrs --xatt=
-rs-include=3D'*' -cf - -S -C %s -p --no-recursion --files-from - | tar --ac=
-ls --xattrs --xattrs-include=3D'*' -xhf - -C %s" % (src, src, dst)
-         subprocess.check_output(cmd, shell=3DTrue, stderr=3Dsubprocess.STD=
-OUT)
-         source =3D ''
-         if os.path.isdir(src):
-@@ -130,7 +130,7 @@ def copyhardlinktree(src, dst):
-         else:
-             source =3D src
-             s_dir =3D os.getcwd()
--        cmd =3D 'cp -afl --preserve=3Dxattr %s %s' % (source, os.path.real=
-path(dst))
-+        cmd =3D 'cp -afl --preserve=3Dall %s %s' % (source, os.path.realpa=
-th(dst))
-         subprocess.check_output(cmd, shell=3DTrue, cwd=3Ds_dir, stderr=3Ds=
-ubprocess.STDOUT)
-     else:
-         copytree(src, dst)
+     # replace RPATHs for the nativesdk binaries, to make them relocatable
 --=20
 2.42.0
 
