@@ -1,212 +1,242 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 98B49CDB47E
-	for <webhook@archiver.kernel.org>; Sun, 15 Oct 2023 14:51:27 +0000 (UTC)
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
- by mx.groups.io with SMTP id smtpd.web10.94655.1697381479466156924
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E7416CDB483
+	for <webhook@archiver.kernel.org>; Sun, 15 Oct 2023 15:06:27 +0000 (UTC)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com (EUR05-VI1-obe.outbound.protection.outlook.com [40.107.21.83])
+ by mx.groups.io with SMTP id smtpd.web11.89851.1697367731043602381
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 15 Oct 2023 07:51:19 -0700
+ Sun, 15 Oct 2023 04:02:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=SIUZzakA;
- spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-32da9ef390fso605272f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 15 Oct 2023 07:51:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1697381478; x=1697986278; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=ol2F1vcMuxBOEPRh2S05mOmF2HrdRZhLMUxkjbQ+Z7g=;
-        b=SIUZzakAbq2+INSFSnrJCA3M2OiAheTcik7t+dCWtsBD9l84AJdfYTNWaUUojSLIZU
-         ul9Z3QKgPWb9VE5GsovHtBPt5uQrTrIoho8d+c7bkNR5oWC3t9S5YDJVWPaByLt/bk/p
-         A8/OzTpK+OaU9QQzPC9FKKsCTbCFWMoQ6xGmA2SrxlPjpVMxVWCQHM3xKF3p6QfNuFYO
-         eUwnKLZIiMqdGEVGu3iXskveiGqDsNx62Rb67zggSq85u9zRT/rhHrToSLfGUdq8ej+g
-         TtSyby4bvzVa/rHR9/mI4IhH1sdX6Bjp+mzjr63bgc4cy+4vdOs3MitOpQ1op1QV2aC1
-         fqZw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1697381478; x=1697986278;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ol2F1vcMuxBOEPRh2S05mOmF2HrdRZhLMUxkjbQ+Z7g=;
-        b=aGqBaUdg7xE+xMxyKBRKC/P4KjuAtQOtAtQjTvkT5e6C749wd3LhEUqnjXIu47fB1L
-         P/o4HixAA/7ZQ2GQeCkj9b4hwIfQGwq/9s19iEf84dPXarDOjjGFK15uiL+0OkdU4tIR
-         ab5bsBnEopKmS3DeemhBPKA88aDzt84RDBGU9KslgRq+EvF6OzNZkZT79hXRBuKiaUlF
-         Kyyq3o835MESZ4gv95FZiPtkTlmzKlS10mF9UhkO/DcVAloM/D6GaBPlQDs9kvVVaiUD
-         qrE2rzDUKRAjaUnJl3lucb4LEIupL6MYTVTUjvWG03DkTx0OktyFWGo3o4YBgc3iLUyH
-         jvrw==
-X-Gm-Message-State: AOJu0Yx/QwuWByxf2viR9S36WB2v4PdZYxdP3YAUdg36mbH0XGDAAUDK
-	VZDGWyLhYx3TccE5SWjdW+ZXOt5h1y3cCBsJ4Vs=
-X-Google-Smtp-Source: AGHT+IF5itTVpkHWUSvGNDKfuRpAgeWbmcfcq+/dyU92y2zQIqKV+ei5a3WdpiYAsYKUWhnLpz8/zbRo+0qTbkZWBS4=
-X-Received: by 2002:adf:9c8d:0:b0:32d:88dd:4142 with SMTP id
- d13-20020adf9c8d000000b0032d88dd4142mr9812926wre.16.1697381477486; Sun, 15
- Oct 2023 07:51:17 -0700 (PDT)
-MIME-Version: 1.0
-References: <20231015110154.53364-1-p.lobacz@welotec.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@welotec.com header.s=selector1 header.b=k+jpcVO5;
+ spf=pass (domain: welotec.com, ip: 40.107.21.83, mailfrom: p.lobacz@welotec.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=T7lMISpfq38qpD3mpr1UVEYRz8c4XprMMKnijm7fu9KJkA6D5KNyhKdJH+seIZjCxCDw0iS5yrk9pLj+VHxfLwGFoa0KEPNped2ycUWKAz+1xjdk2pPHwTeKtXVZ5LvRNqj74JOSTK5WeHgJjKNba9ZUV22FdUXP8IAIQpKHJX/4QOVmxOSy6svibFX88tv24rXtK6AJnyw3xrDIGoX23zksP75FQHE0NYJnIkDOUANFYpGXEfEwav7Fm6GC//TOestqXrqAN1Eg7hdlD5x2EpePlolseMOa3Km9O5BCymzYbXcCx24JI9e55aWBLnRkxt4HNjzRDD5ltMGS77wxzA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=aufmz5XXUPx3GT5C7Upri0nkPs2fm01KEawbIS+GMqA=;
+ b=nUTxUZOHOT/i4ZsfeYU2LjFyBHTOUN30uXpgkTzPJhojDP6YRdan49WTCZzQ1WvpJk27tWSQCBOuPabZ6PNC+CTI5Z+50o9MEyU3apmaLyXAp7DfsZBRBCleNTCVN6v+kg2RSOorS9ppTh61mwEnIao+9MPwl2+u6PHzrjiaaFVDdLo7bCeFYLVFDgRRchxu7NyaB3LSsfSVFLL3ZpTQzvw2+VgMZGQQGRXmSt3emUYTVAb52LB9mpCbu6Ih+rtEh9ELiwrNgMh9v2Da7Zqkf+PBy2wc+9Gz6vTy+RNH4JZqBZuP8URz4GO6NEvUb5xDcv5zsWFbGK0Nu4yedfNHbw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=welotec.com; dmarc=pass action=none header.from=welotec.com;
+ dkim=pass header.d=welotec.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=welotec.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=aufmz5XXUPx3GT5C7Upri0nkPs2fm01KEawbIS+GMqA=;
+ b=k+jpcVO5wmk8FvZMLrpZZLITMRPvUTrurQMUQr4VI4/aoeGFanDCDJAZafYL4xhOesJIKoSH2aGsychaQ7Qww8xIjesZ974J3o405bLAN7RrEkaS7e6eAgZFvmVhMM02gaMarfu4VzT8C4OtmWN8if9aBQcLH2sedNtc5xZXDgZmC/a7bYnoRCmGoStqVY/qOFBvzvbfY1qQPrdfp9NGfvgXiKA3Pe2CLFvSHJVNdKXp3EoVSaibuzJHTiAL4JJIxWUaQPdHa6H9H2MT0TVZZw/q2KQFMLtPils06vLG+Irm7yrlyVJHGWNCVkPUVVu9DOgvVMw7S+kqfSjBYqzklg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=welotec.com;
+Received: from VI1PR04MB5373.eurprd04.prod.outlook.com (2603:10a6:803:da::22)
+ by AS8PR04MB7925.eurprd04.prod.outlook.com (2603:10a6:20b:2a2::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6886.34; Sun, 15 Oct
+ 2023 11:02:08 +0000
+Received: from VI1PR04MB5373.eurprd04.prod.outlook.com
+ ([fe80::3090:4af6:ae14:b9c3]) by VI1PR04MB5373.eurprd04.prod.outlook.com
+ ([fe80::3090:4af6:ae14:b9c3%6]) with mapi id 15.20.6886.034; Sun, 15 Oct 2023
+ 11:02:08 +0000
+From: =?UTF-8?B?UGlvdHIgxYFvYmFjeg==?= <p.lobacz@welotec.com>
+To: openembedded-devel@lists.openembedded.org
+CC: =?UTF-8?q?Piotr=20=C5=81obacz?= <p.lobacz@welotec.com>
+Subject: [OE-Core][PATCH v14 10/11] opkg: add options to enable support for acl and xattr
+Date: Sun, 15 Oct 2023 13:01:53 +0200
+Message-ID: <20231015110154.53364-10-p.lobacz@welotec.com>
+X-Mailer: git-send-email 2.42.0
 In-Reply-To: <20231015110154.53364-1-p.lobacz@welotec.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sun, 15 Oct 2023 16:51:04 +0200
-Message-ID: <CA+chaQfON78OrVdk1Wd1De3DY0f5B_e1p=YiO+TFP2zPaoSSRQ@mail.gmail.com>
-Subject: Re: [oe] [OE-Core][PATCH v14 01/11] package.bbclass: override tar
- with tar-native
-To: =?UTF-8?Q?Piotr_=C5=81obacz?= <p.lobacz@welotec.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="00000000000003985d0607c26c46"
+References: <20231015110154.53364-1-p.lobacz@welotec.com>
+X-ClientProxiedBy: BE1P281CA0087.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:b10:78::17) To VI1PR04MB5373.eurprd04.prod.outlook.com
+ (2603:10a6:803:da::22)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: VI1PR04MB5373:EE_|AS8PR04MB7925:EE_
+X-MS-Office365-Filtering-Correlation-Id: 370a3236-af35-48df-ed7e-08dbcd6e2cef
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	HSpSc901mY6CojVi8GfDR3MaukdFjxMIniT9x8uGdUHtaoGq7EMuRwliA0NCpF3WHiMYoh3Q762KXyuydKUwaosSAGnHS8CEO+0ajgyr57kwS7waWlAMCqeLEvk5bjJi73QCu4DC3QUnlhf/LTSq04oHlPEXVeLfS00gnj7VPgxMMslXUVqLYylumeqHQvaafLwge4DjIx1PuOdBHGPeOWPHtg8CGO2xavMhWpcKqbSdIykDymGA16M4MuZ/nxaQHNCGPjbU/Ph3Own09bHY+qpxwAD4u2OM+rRFjnqSTzHiFuGOu8vX3kkS4Dlpzv+W9VRUC1J5p/zVNlfyi5SK+jvWNbUs14A7sFq7TPOgYdnyXt4MFx233KjBFGsdavMnS9GaL72ZlBHx9rOxWPm25bw1k1/1wuTujA33zLYmbddCIr4Pkh7iLAumACuHTYB7m8N+YA2l7a5Hwc6tRcsOGNwDJf37YstUCOeMd1LfzrFY2CAr/cwA/UAt2col2p49UwbXO4RtyM6lyfs5ejxqszb9GYcqZ5yV3mOtHHgMFOEq/BkZofnJQho1+vvEVZaFANhBep7uanXsl28L4x+tgiYRyhOt2hl0WSQj0rZ5u70=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR04MB5373.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(366004)(346002)(376002)(39830400003)(136003)(396003)(186009)(1800799009)(64100799003)(451199024)(6666004)(6506007)(6512007)(52116002)(478600001)(966005)(6486002)(83380400001)(107886003)(1076003)(2616005)(66574015)(26005)(2906002)(6916009)(66476007)(5660300002)(66946007)(41300700001)(66556008)(316002)(8936002)(4326008)(8676002)(86362001)(36756003)(38100700002)(38350700005);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?YnlY1GFSdY5gkZaY86TXC2eldBVZuXGfL5iRIkcij7NvqrPRy8FvttwQgrf6?=
+ =?us-ascii?Q?U0m9sOm1iSOF+LaccQIeLRp8fcenBVg6vIC5SuEUnh2jFCxlI07U+wXXLAw/?=
+ =?us-ascii?Q?fJ2+xBLPnLCH2VPJZPSaok6fsWFcPU23p7N7nEhqPn/XwcVJLenx0vdtozRQ?=
+ =?us-ascii?Q?mHaMqcCD+lkMhHn2Nj8DF/OwjyO4Ojj63M75QvAcU+j/Qze/EJvfYnP8aPcE?=
+ =?us-ascii?Q?jYg0VWOmKxEsKXQGvBIQZdHZ9QlBoYvBDbyFyvpIkDxOAQIXC4e9S3JPTn87?=
+ =?us-ascii?Q?U+o4FcRaz9GDXn/sQUPfQeh3n27273BP4J2TJtUs4gVWjQnUlM4iCS7wKReu?=
+ =?us-ascii?Q?Wgqvmg2rV/wJUWZFTqjXpneyisaFAs83R6MVoyVfzMuFrbJkjxKSwrgZHPhX?=
+ =?us-ascii?Q?e9254wQ88tkvE7pXI2Pdzji42ZvPDeI7Np+N7GlpuzwpXHXom3PoSDZuTJov?=
+ =?us-ascii?Q?eL8jMKeZtux47d4n/UxjWm5q3Dm3TDVu5CxaTwkTuIUQMWjTOk0P+eqEtYnl?=
+ =?us-ascii?Q?8Rw66AlKL5hC6EFFnUlieJICZEPcmCrO7whSgLI4u1bytGT+jjoDKUynNbwC?=
+ =?us-ascii?Q?CrhKIub982EHg0K1WCxocEhOQiVlg51Jlxq9t+8KNG1ynqLUv4lJgJ0P1mqq?=
+ =?us-ascii?Q?d1x+cGyW1qAmZrEpduHNCKfwvBKt3jyPoqKbU+zOEvQ53S/mIciWWJFEM24t?=
+ =?us-ascii?Q?2myTcQjkhou0rl9lersn1R60Lxr/z5P9XWN0lCYGN9Abp846Mq9nk4uVbbgw?=
+ =?us-ascii?Q?WF/704wTUZLn6Gn7yxpNWdCD5paEKlecS5Nc7fRrbaGsGt3AuhCFK676EXqH?=
+ =?us-ascii?Q?asZBjXfFjYpKd081hkjfHSVk9SlxWSxK0eRi0lBH97T9to0Xwu/N1UaSG1Pj?=
+ =?us-ascii?Q?QTqwX6v0Mx3UI5kooyh8Ag9b4XxMs7ULAwQA+ezKnhz5Z5DOocXznoZ93NGl?=
+ =?us-ascii?Q?/gKoAeNTGmYmaQKCZMGGsqEzAIJFFgjczvGtSag4acdMS+CWvAsqoUin7wRx?=
+ =?us-ascii?Q?I4mPmM1Y28iJtILxYiyNDx42BuWgeIABZxmTI7FaihCsPk5hq9dwHrPNpZcn?=
+ =?us-ascii?Q?R03bdxs+69KIgLHAChtnUYEIDlp6DJRt8hfij+K+J2tEmejOFD8xrqWtp0nA?=
+ =?us-ascii?Q?r56mdY5HDAsTcKjWwIJ7u8O4Nt/QSLSP6w8TaR3UkHlhY1GCDCd1f+rX2WeR?=
+ =?us-ascii?Q?i0V4Ntubkfd135inx2ubEKmhrobJEqTbPXt65Z53/YeZMxMFjlqW0z2DppjR?=
+ =?us-ascii?Q?CtHBqtBqeqBVPt8rBxRR9C4m32gNRCUzzfbCR2oDFVNumfqgnj6CTlW+8+Bh?=
+ =?us-ascii?Q?/A2K2xM2YpIBy8DpTxQt/H0Q5mnHE3r/u1UawMrKdBbc3YDmHZBGacpN3lIc?=
+ =?us-ascii?Q?Uzq3kMBSxTT9UekkWvORDetSYgciW71QAuZmIGtdYSDqJOcj71w3rTeudtoc?=
+ =?us-ascii?Q?LjLxahX8j+H0P8fzZXPiqp3BNiQtMpwRaUhMecMyqgbgyDjg+IsM8errxVWC?=
+ =?us-ascii?Q?46gvrq43BDP3LbZ9/dFfVbX+pYrx3FT5somYWgH5rVhieZQcmC9aS+gWnkVW?=
+ =?us-ascii?Q?KbzVIQWm74Mb4GRDn9/d3f0v+vj0lAS69ePEmwqd?=
+X-OriginatorOrg: welotec.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 370a3236-af35-48df-ed7e-08dbcd6e2cef
+X-MS-Exchange-CrossTenant-AuthSource: VI1PR04MB5373.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Oct 2023 11:02:08.8342
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 25111a7f-1d5a-4c51-a4ca-7f8e44011b39
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: WwpA9QJgf6D5V+5zHQVSoDfBX8P/Tv6G12eBELweUSxXlXrRazzc6ynnFLH3pDcm6knPCslJxcLrt3ORIGuSRg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB7925
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 15 Oct 2023 14:51:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105515
+ <openembedded-devel@lists.openembedded.org>; Sun, 15 Oct 2023 15:06:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105516
 
---00000000000003985d0607c26c46
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+The libarchive library, which is being used by opkg, supports ACLs
+and xattr already.
 
-Wrong ML, oe-core patches should go to
-openembedded-core@lists.openembedded.org
+More informations can be read at this link:
+https://github.com/libarchive/libarchive/pull/691
 
-On Sun, Oct 15, 2023 at 3:19=E2=80=AFPM Piotr =C5=81obacz <p.lobacz@welotec=
-.com> wrote:
+Signed-off-by: Piotr =C5=81obacz <p.lobacz@welotec.com>
+---
+ ...-to-enable-support-for-acl-and-xattr.patch | 70 +++++++++++++++++++
+ meta/recipes-devtools/opkg/opkg_0.6.2.bb      |  5 +-
+ 2 files changed, 74 insertions(+), 1 deletion(-)
+ create mode 100644 meta/recipes-devtools/opkg/opkg/0002-Add-options-to-ena=
+ble-support-for-acl-and-xattr.patch
 
-> Due to the bugs https://savannah.gnu.org/bugs/?61934 and
-> https://savannah.gnu.org/bugs/?59184, which are fixed in
-> tar version 1.35, we need to force yocto to use it instead
-> of the one provided by the host machine.
->
-> perform_packagecopy function and opkg-build script, will use
-> the tar provided by tar recipe, which is already in proper
-> version.
->
-> Signed-off-by: Piotr =C5=81obacz <p.lobacz@welotec.com>
-> ---
->  meta/classes-global/package.bbclass | 7 +++++--
->  1 file changed, 5 insertions(+), 2 deletions(-)
->
-> diff --git a/meta/classes-global/package.bbclass
-> b/meta/classes-global/package.bbclass
-> index 7787042e21..580884cd83 100644
-> --- a/meta/classes-global/package.bbclass
-> +++ b/meta/classes-global/package.bbclass
-> @@ -58,8 +58,11 @@ ALL_MULTILIB_PACKAGE_ARCHS =3D
-> "${@all_multilib_tune_values(d, 'PACKAGE_ARCHS')}"
->
->  # rpm is used for the per-file dependency identification
->  # dwarfsrcfiles is used to determine the list of debug source files
-> -PACKAGE_DEPENDS +=3D "rpm-native dwarfsrcfiles-native"
-> -
-> +# minimal tar version 1.35 is needed as it has fixed bugs for storing AC=
-L
-> entries in textual representation
-> +# and extracting files with xattrs that are read-only; this needs to wor=
-k
-> only if acl or xattr are turned on
-> +PACKAGE_DEPENDS +=3D "rpm-native dwarfsrcfiles-native
-> ${@bb.utils.contains_any('DISTRO_FEATURES', 'acl xattr',
-> 'tar-replacement-native', '', d)}"
-> +# perform_packagecopy and opkg-build require tar to be in the PATH
-> +EXTRANATIVEPATH +=3D "${@bb.utils.contains_any('DISTRO_FEATURES', 'acl
-> xattr', 'tar-native', '', d)}"
->
->  # If your postinstall can execute at rootfs creation time rather than on
->  # target but depends on a native/cross tool in order to execute, you nee=
-d
-> to
-> --
-> 2.42.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#105509):
-> https://lists.openembedded.org/g/openembedded-devel/message/105509
-> Mute This Topic: https://lists.openembedded.org/mt/101976150/3617156
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> martin.jansa@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
+diff --git a/meta/recipes-devtools/opkg/opkg/0002-Add-options-to-enable-sup=
+port-for-acl-and-xattr.patch b/meta/recipes-devtools/opkg/opkg/0002-Add-opt=
+ions-to-enable-support-for-acl-and-xattr.patch
+new file mode 100644
+index 0000000000..26b2a36c42
+--- /dev/null
++++ b/meta/recipes-devtools/opkg/opkg/0002-Add-options-to-enable-support-fo=
+r-acl-and-xattr.patch
+@@ -0,0 +1,70 @@
++From 1c935e994bd572d9fff436f660ac1a060a434df0 Mon Sep 17 00:00:00 2001
++From: Maciej Liszewski <m.liszewski@welotec.com>
++Date: Tue, 4 Jul 2023 22:01:58 +0200
++Subject: [PATCH] Add options to enable support for acl and xattr
++MIME-Version: 1.0
++Content-Type: text/plain; charset=3DUTF-8
++Content-Transfer-Encoding: 8bit
++
++The libarchive library, which is being used by opkg, supports ACLs
++and xattr already.
++
++More informations can be read at this link:
++https://github.com/libarchive/libarchive/pull/691
++
++Upstream-Status: Backport [ef743b75745939df210a9e6a70a44d69181ef05a]
++
++[1] https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D15097
++
++Signed-off-by: Maciej Liszewski <m.liszewski@welotec.com>
++Signed-off-by: Piotr =C5=81obacz <p.lobacz@welotec.com>
++---
++ configure.ac           | 12 ++++++++++++
++ libopkg/opkg_archive.c |  8 ++++++++
++ 2 files changed, 20 insertions(+)
++
++diff --git a/configure.ac b/configure.ac
++index 389a818..46949cd 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -158,6 +158,18 @@ return OPENSSL_VERSION_NUMBER; ],
++   AC_SUBST(OPENSSL_LIBS)
++ fi
++=20
+++# check for ACL support
+++AC_ARG_WITH([acl], [AS_HELP_STRING([--with-acl], [Enable ACL support])])
+++if test "x$with_acl" =3D "xyes"; then
+++  AC_DEFINE([ENABLE_ACL], [1], [Enable ACL support])
+++fi
+++
+++# check for xattr support
+++AC_ARG_WITH([xattr], [AS_HELP_STRING([--with-xattr], [Enable xattr suppor=
+t])])
+++if test "x$with_xattr" =3D "xyes"; then
+++  AC_DEFINE([ENABLE_XATTR], [1], [Enable xattr support])
+++fi
+++
++ # check for libsolv solver
++ AC_ARG_WITH(libsolv, AC_HELP_STRING([--with-libsolv], [Use libsolv solver=
+ support.
++   ]), [], [with_libsolv=3D"no"])
++diff --git a/libopkg/opkg_archive.c b/libopkg/opkg_archive.c
++index 03a4afb..8dd902d 100644
++--- a/libopkg/opkg_archive.c
+++++ b/libopkg/opkg_archive.c
++@@ -912,6 +912,14 @@ struct opkg_ar *ar_open_pkg_data_archive(const char *=
+filename)
++     ar->extract_flags =3D ARCHIVE_EXTRACT_OWNER | ARCHIVE_EXTRACT_PERM |
++         ARCHIVE_EXTRACT_TIME | ARCHIVE_EXTRACT_UNLINK | ARCHIVE_EXTRACT_N=
+O_OVERWRITE;
++=20
+++#ifdef ENABLE_ACL
+++    ar->extract_flags |=3D ARCHIVE_EXTRACT_ACL;
+++#endif
+++
+++#ifdef ENABLE_XATTR
+++    ar->extract_flags |=3D ARCHIVE_EXTRACT_FFLAGS | ARCHIVE_EXTRACT_XATTR=
+;
+++#endif
+++
++     if (opkg_config->ignore_uid)
++         ar->extract_flags &=3D ~ARCHIVE_EXTRACT_OWNER;
++=20
++--=20
++2.34.1
++
+diff --git a/meta/recipes-devtools/opkg/opkg_0.6.2.bb b/meta/recipes-devtoo=
+ls/opkg/opkg_0.6.2.bb
+index 46be137354..d7dc6ab715 100644
+--- a/meta/recipes-devtools/opkg/opkg_0.6.2.bb
++++ b/meta/recipes-devtools/opkg/opkg_0.6.2.bb
+@@ -15,6 +15,7 @@ PE =3D "1"
+ SRC_URI =3D "http://downloads.yoctoproject.org/releases/${BPN}/${BPN}-${PV=
+}.tar.gz \
+            file://opkg.conf \
+            file://0001-opkg_conf-create-opkg.lock-in-run-instead-of-var-ru=
+n.patch \
++           file://0002-Add-options-to-enable-support-for-acl-and-xattr.pat=
+ch \
+            file://run-ptest \
+            "
+=20
+@@ -30,8 +31,10 @@ inherit autotools pkgconfig ptest
+ target_localstatedir :=3D "${localstatedir}"
+ OPKGLIBDIR ??=3D "${target_localstatedir}/lib"
+=20
+-PACKAGECONFIG ??=3D "libsolv"
++PACKAGECONFIG ??=3D "libsolv ${@bb.utils.filter('DISTRO_FEATURES', 'acl xa=
+ttr', d)}"
+=20
++PACKAGECONFIG[acl] =3D "--with-acl,--without-acl"
++PACKAGECONFIG[xattr] =3D "--with-xattr,--without-xattr"
+ PACKAGECONFIG[gpg] =3D "--enable-gpg,--disable-gpg,\
+     gnupg gpgme libgpg-error,\
+     ${@ "gnupg" if ("native" in d.getVar("PN")) else "gnupg-gpg"}\
+--=20
+2.42.0
 
---00000000000003985d0607c26c46
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Wrong ML, oe-core patches should go to=C2=A0<a href=3D"mai=
-lto:openembedded-core@lists.openembedded.org">openembedded-core@lists.opene=
-mbedded.org</a></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Sun, Oct 15, 2023 at 3:19=E2=80=AFPM Piotr =C5=81obacz &=
-lt;<a href=3D"mailto:p.lobacz@welotec.com">p.lobacz@welotec.com</a>&gt; wro=
-te:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px =
-0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Due to the b=
-ugs <a href=3D"https://savannah.gnu.org/bugs/?61934" rel=3D"noreferrer" tar=
-get=3D"_blank">https://savannah.gnu.org/bugs/?61934</a> and<br>
-<a href=3D"https://savannah.gnu.org/bugs/?59184" rel=3D"noreferrer" target=
-=3D"_blank">https://savannah.gnu.org/bugs/?59184</a>, which are fixed in<br=
->
-tar version 1.35, we need to force yocto to use it instead<br>
-of the one provided by the host machine.<br>
-<br>
-perform_packagecopy function and opkg-build script, will use<br>
-the tar provided by tar recipe, which is already in proper<br>
-version.<br>
-<br>
-Signed-off-by: Piotr =C5=81obacz &lt;<a href=3D"mailto:p.lobacz@welotec.com=
-" target=3D"_blank">p.lobacz@welotec.com</a>&gt;<br>
----<br>
-=C2=A0meta/classes-global/package.bbclass | 7 +++++--<br>
-=C2=A01 file changed, 5 insertions(+), 2 deletions(-)<br>
-<br>
-diff --git a/meta/classes-global/package.bbclass b/meta/classes-global/pack=
-age.bbclass<br>
-index 7787042e21..580884cd83 100644<br>
---- a/meta/classes-global/package.bbclass<br>
-+++ b/meta/classes-global/package.bbclass<br>
-@@ -58,8 +58,11 @@ ALL_MULTILIB_PACKAGE_ARCHS =3D &quot;${@all_multilib_tun=
-e_values(d, &#39;PACKAGE_ARCHS&#39;)}&quot;<br>
-<br>
-=C2=A0# rpm is used for the per-file dependency identification<br>
-=C2=A0# dwarfsrcfiles is used to determine the list of debug source files<b=
-r>
--PACKAGE_DEPENDS +=3D &quot;rpm-native dwarfsrcfiles-native&quot;<br>
--<br>
-+# minimal tar version 1.35 is needed as it has fixed bugs for storing ACL =
-entries in textual representation<br>
-+# and extracting files with xattrs that are read-only; this needs to work =
-only if acl or xattr are turned on<br>
-+PACKAGE_DEPENDS +=3D &quot;rpm-native dwarfsrcfiles-native ${@bb.utils.con=
-tains_any(&#39;DISTRO_FEATURES&#39;, &#39;acl xattr&#39;, &#39;tar-replacem=
-ent-native&#39;, &#39;&#39;, d)}&quot;<br>
-+# perform_packagecopy and opkg-build require tar to be in the PATH<br>
-+EXTRANATIVEPATH +=3D &quot;${@bb.utils.contains_any(&#39;DISTRO_FEATURES&#=
-39;, &#39;acl xattr&#39;, &#39;tar-native&#39;, &#39;&#39;, d)}&quot;<br>
-<br>
-=C2=A0# If your postinstall can execute at rootfs creation time rather than=
- on<br>
-=C2=A0# target but depends on a native/cross tool in order to execute, you =
-need to<br>
--- <br>
-2.42.0<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#105509): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/105509" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/105509</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/101976150/361=
-7156" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/101976150/3617156</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:martin.jansa@gmail.com" =
-target=3D"_blank">martin.jansa@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
-
---00000000000003985d0607c26c46--
 
