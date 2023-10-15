@@ -2,177 +2,173 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 07789CDB490
-	for <webhook@archiver.kernel.org>; Sun, 15 Oct 2023 13:19:07 +0000 (UTC)
-Received: from EUR04-HE1-obe.outbound.protection.outlook.com (EUR04-HE1-obe.outbound.protection.outlook.com [40.107.7.52])
- by mx.groups.io with SMTP id smtpd.web10.89880.1697367079777818269
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EE1E5CDB48D
+	for <webhook@archiver.kernel.org>; Sun, 15 Oct 2023 13:19:06 +0000 (UTC)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com (EUR05-VI1-obe.outbound.protection.outlook.com [40.107.21.80])
+ by mx.groups.io with SMTP id smtpd.web11.89849.1697367728016861852
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 15 Oct 2023 03:51:21 -0700
+ Sun, 15 Oct 2023 04:02:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@welotec.com header.s=selector1 header.b=TqefWG3m;
- spf=pass (domain: welotec.com, ip: 40.107.7.52, mailfrom: p.lobacz@welotec.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@welotec.com header.s=selector1 header.b=iOaZOrLR;
+ spf=pass (domain: welotec.com, ip: 40.107.21.80, mailfrom: p.lobacz@welotec.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=SICsG9SN/dRzuNj1RqzLu76sSulbp2J8GK8V4r6M0l0ODvADkyBQcOlhFFzVbmYBwjIqMC6QQjxVsvztp4jWFe5TDdMTnu/Gts3WhJgrUivrPaI3EdDxomM+HGb41psHduWogPsJGrZHSDMM1blcOF/fvnVUw0Rx0LjOCgGNEWpeSQD7Ey2QLbBp0XLmShDrBrnklEeXO9n0PoqBVyldi+pdlvNL0hgWjunlolSH+ajyJP23wY9hiSpNHfyQMg9ONMLCrwLgiyrpObnLUz1WzqWl0pw/EuSRd6BaszxCVe7LaCMVUd59yi3sp5TZKTgvrxQZR/nCcmcivPe2vc8yYQ==
+ b=bP5Niz0ndEtOWdUOWE3t2Il0pbd+j+9CrGo9feEnBnmEo7PR6+oKh2FL96fA80FcYhVYQVtL8CpU7vJR2Xxbpq5ctzq4xR/LonwoRkOGeiWFvc+ie1NdDoUVwvYicx9G9fd+kXxTmXOZ0Y+oIX5uW1HRB4nd5fjKPUQ2vMxLT1e+uV2RE2/MADFldewavJTX/YwHZbsKEeMrEQreGRny1HM52AqJ5iqWQtNty0WTNMtMQlMRbnFyPUmTRJC5MisFnL+4OpKdPVfarrqYbjmUXqn4HNm54VCvLswR7A3usPAnBWQosn+Ymy5rlAS2Eg9cx9EtJRg3Nhj6vZakElj8oQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=962+Qutmx7yOQMSpDwCTL5Y8ribZgRBYEVAZLIMnMYY=;
- b=XrDCuSC/WrM1F+mKF+HmAZAtr1GYw9UGN6pwPqGhL9GVPCXY1w4TStOcEkezj1FVgEgffww6P7U716oz3DC6DirmcM8ji0IqxZaj97osyr9CKvYFWFBovLNQyVX2KZQLDXSrO5QKFLiDLTazfeUazGVpbSjJVKIR+iSMvg3KCtic6lFEb4JO1yB0MDM2h+sWG7fiugQ4IaCairOm0ol4HbrpYmjejckzFZWKhDbQRnFcGf3NQIe16Hc58SP3vpxca51ajwjwvt4DAXXwn7eFTE01q2eHj9oZXrRqA9T3suqCybgv/u8CAw3ZOLpZZzYf09puSSlGODTDYcjc5wbrLQ==
+ bh=JnX9tAVxLp4QlhJzMxAxH/3nnIEHsh8J9yRQjoMvhIs=;
+ b=VtGE/MOd3nmYZMzdlJ+LvEi2mJyLrUPRkOl3c8/Rz99UANuqm2ADHBBpoNa3E48SmuEhw8UzFCvnWxZgR1dyl/tvSbDBMFDmem3KL6I+3cHhp/btWa4eo71pHWCeYQWw2Z8wO1fflZ2x5NqKXf6DfH/pJjjevECsPjRXCZk2iVpMY7QfeTzUY/7nYuQmpWymC2I9iHiCYGq88yglHkEfA+8lMrIIRrCnmER6oe5wp72O1Ep3q34VLxvc9RZYPks8vEC6GNtllHgOzuMTV6DDDw58z1aCf56+ad4xXTqiufun5vkyTAS51ehwYnGZrknF5/0kKMwBwEGWx+LgjqP8lQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=welotec.com; dmarc=pass action=none header.from=welotec.com;
  dkim=pass header.d=welotec.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=welotec.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=962+Qutmx7yOQMSpDwCTL5Y8ribZgRBYEVAZLIMnMYY=;
- b=TqefWG3mg9+qs6DZ5BiyTwGuRSkdoRM1YNnon/593MguciEhKQCdPXFYpVOUf7RA3HV99kc29sWOidEdoqyMmAjV4hGe04z4sl5ztUs+60DSlMDtzuDzViGXBgGHF/s4yAYtAWaUsLnKqFWiKhyyDahfw54TAPmdei0CwNqEhzirV3Diwv3obsnNYSgm527TkqAhnno9dHNjq35GG1JflNHwqbIjmeFfq+hmXgTMjgvP9s9GxDif5s/mBDj6kSGsePWIknK+SQ5trXPInANO4D19+ulBMlYB0Jhw9TdvR2835i6xiYVDquB1eAr6G4GhxcUGFYV7xeyDSNZAlI77zQ==
+ bh=JnX9tAVxLp4QlhJzMxAxH/3nnIEHsh8J9yRQjoMvhIs=;
+ b=iOaZOrLR46Egbh6Ifrn7bTF1WvpE9rRiINXTjEjD2BZ8t5+/BzRvfv7P+W+Qt7zjxMkAKeJfJQp32eLemozvJNsVl/X8yLuPQ7pLfT395NtM1uYasR5+/CeeULoZy2eTwOkDNO92bKDN3WPo3m/LQP/2UwxC1DXAYoAfXU+lbinmycMVfa+1MP5IKYiyl+M1TIWmX5xQVIxtdQwRnmznqpZafWkDPjhgkAXZxUWG7HJysi9DbI6vQr7skisg9n/OvRW5hFJJ3NQe7ziNQv5xw66TlFfnFUP/oOFKcocWC8uoLk4qwaVa2KuVOsXYZrd+uXSkLgBV3WCDhrHD5sAtNQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=welotec.com;
 Received: from VI1PR04MB5373.eurprd04.prod.outlook.com (2603:10a6:803:da::22)
- by AM9PR04MB8308.eurprd04.prod.outlook.com (2603:10a6:20b:3e3::10) with
+ by AS8PR04MB7925.eurprd04.prod.outlook.com (2603:10a6:20b:2a2::15) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6886.34; Sun, 15 Oct
- 2023 10:51:14 +0000
+ 2023 11:02:05 +0000
 Received: from VI1PR04MB5373.eurprd04.prod.outlook.com
  ([fe80::3090:4af6:ae14:b9c3]) by VI1PR04MB5373.eurprd04.prod.outlook.com
  ([fe80::3090:4af6:ae14:b9c3%6]) with mapi id 15.20.6886.034; Sun, 15 Oct 2023
- 10:51:14 +0000
+ 11:02:05 +0000
 From: =?UTF-8?B?UGlvdHIgxYFvYmFjeg==?= <p.lobacz@welotec.com>
 To: openembedded-devel@lists.openembedded.org
-CC: =?UTF-8?q?Piotr=20=C5=81obacz?= <p.lobacz@welotec.com>
-Subject: [OE-Core][PATCH v14 07/11] sstate.bbclass: add support for ACLs and xattr
-Date: Sun, 15 Oct 2023 12:50:51 +0200
-Message-ID: <20231015105055.52510-7-p.lobacz@welotec.com>
+CC: =?UTF-8?q?Piotr=20=C5=81obacz=20via=20lists=2Eopenembedded=2Eorg?= <p.lobacz=welotec.com@lists.openembedded.org>,
+	=?UTF-8?q?Piotr=20=C5=81obacz?= <p.lobacz@welotec.com>
+Subject: [OE-Core][PATCH v14 04/11] path.py: add support for ACLs and all additional attributes
+Date: Sun, 15 Oct 2023 13:01:47 +0200
+Message-ID: <20231015110154.53364-4-p.lobacz@welotec.com>
 X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20231015105055.52510-1-p.lobacz@welotec.com>
-References: <20231015105055.52510-1-p.lobacz@welotec.com>
-X-ClientProxiedBy: FR2P281CA0168.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:99::17) To VI1PR04MB5373.eurprd04.prod.outlook.com
+In-Reply-To: <20231015110154.53364-1-p.lobacz@welotec.com>
+References: <20231015110154.53364-1-p.lobacz@welotec.com>
+X-ClientProxiedBy: BE1P281CA0087.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:b10:78::17) To VI1PR04MB5373.eurprd04.prod.outlook.com
  (2603:10a6:803:da::22)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: VI1PR04MB5373:EE_|AM9PR04MB8308:EE_
-X-MS-Office365-Filtering-Correlation-Id: ebad915b-9cc0-455e-7b7a-08dbcd6ca724
+X-MS-TrafficTypeDiagnostic: VI1PR04MB5373:EE_|AS8PR04MB7925:EE_
+X-MS-Office365-Filtering-Correlation-Id: 45bf8a35-5b7f-4a03-430e-08dbcd6e2abd
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	gm04zhn99yYoxQ6EBHCXek+FPu4qAGpe/tnRg5DfouzyNLFXZkalndZnBZftGOytLSRPjdbQRTBbrtHoV715KBYCy/rph6hgk3u/KWvp3mo1/dAf9G9cTc+mJx7IvSLn92/5V7NMREx7O9mwV1jFLMQpjYs8xb/lLUIIChyULxCI25h/IebOitJZSMfeutxyaaZpcAk7vtkRcGZpwe6JFOITiSfWSx1H2pEXWYlnlga22q76Us9uqk563l/PNweTRgk3xTjkcEV/feuBFcYYCzmOylgALqhgKCyUi43HxDLxS25Ozj0i2jdARkZKZriRSU/UsVqbaolU9e5zOF6N/KxdcOKbGDJHx8yxJfa31act2PsqlvMsfFHSGwOLiPie5rj6ZZJRVISPEpD4S9MXKxlgwYJe6zT4YfTCsOVsPh9eug2xgOaRsj20aMjcmKfAra7j8za2DrkM1YcwvgDkwTnidm8cYQfHe2X+t5Al7c/OOpUi4OGAP4ekglDuPVYRwf3s94uRMd9kNuEjluBwwi8vvm88DTlXY/CESnW1cacVjArZ28n6HjWq0r+NV8rAuA4w0guLuLzDCB6UCAIOkLAv6HR27IQhEH9sgIxwFJo=
+	um5G31PZrTgcy2HKAetHyUnzX6WoxTzu0X1ht0nQ2S61l5edyp6ufFFNzCxDyYIPvoZWdV5hKWJQKXKglQELYJL6CKISer6OUumP2huc/w5dqc1BnS2rqEnO9r9b5Nchq/ixzQJMxGCN5Rr415KQgVEAc/3h8cc6HTKw5eGqMKg8iC93k0Q+lBjeE3gtzjRgYFlzWpoKWVQ8/kv6mkHf35u2X9r63AZ+T4g6WCvLmXWsox7wVowXUhAW8A1GkRwt3RvTfm55sDprfDJBE+T78DiRjhTke+9YVrGERdgqLj8doh5kWNf7yl85KzjorEjSd19qFyuKNHu2VXLfRRNchT8xh+abEXs2V/lJp4z40kvZUNxpdY15I2Rh3i798tCZaSLBXRyIJFAVZBjAWkocpx7fy87CwN2OsgQPayfxV9oJEisqzV4lYKNv/iH3d/c4KMJTsIcLU5rv2rvBoMetGejxb3OD8imGTdiEz2R9l1wYmzKcbRAbmMPjUieayQ1pC6H0KzEMWU75AUd3xncr4wREJg2MFXIED28E99qTiIpsXY15letBWakesgo5lm54dM6+TO2eDjnYaGbb6T672pr5otO9BGbvvmuj6aYf8M3c+c1oWmoEdqW/MNZsNkie
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR04MB5373.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(136003)(346002)(376002)(39830400003)(396003)(366004)(1800799009)(64100799003)(451199024)(186009)(38100700002)(6512007)(26005)(66574015)(107886003)(2616005)(1076003)(478600001)(966005)(6486002)(5660300002)(8676002)(4326008)(8936002)(86362001)(2906002)(6916009)(316002)(36756003)(41300700001)(66476007)(66556008)(66946007)(6666004)(52116002)(6506007)(38350700005)(83380400001);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR04MB5373.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(366004)(346002)(376002)(39830400003)(136003)(396003)(186009)(1800799009)(64100799003)(451199024)(6666004)(6506007)(6512007)(52116002)(478600001)(6486002)(83380400001)(1076003)(2616005)(66574015)(26005)(2906002)(6916009)(54906003)(66476007)(5660300002)(66946007)(41300700001)(66556008)(316002)(8936002)(4326008)(8676002)(450100002)(86362001)(36756003)(38100700002)(38350700005);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?BuaxJKtaHyhFYubyozGP9CkbcXOLlm7z6UPqy5k92mztMoSHnott/Jwiv6cr?=
- =?us-ascii?Q?tFzD7S6zjDAPz86C1ClS8WTJBkZe0AjD4OOWqH+hsgn1Q4LWhoJDgcOwEnPu?=
- =?us-ascii?Q?ERVIWk9y9lt1pDdB8jiT2hYVe4JzHQ5GnziwgNGj/FpPoLcR4HdDyxjUzwkq?=
- =?us-ascii?Q?JgoX+UOQ/qR+46ZSFsArfFh+qSuSkCOeeePiwdzBFocF/2jlADngz16pcE6k?=
- =?us-ascii?Q?UsqAs6hz1mQc+VSlHLOaME7mRj1Q3478ZsS+u1Ug066JCaa8G5YNKKovuvv/?=
- =?us-ascii?Q?oVBPoUK7ddnR+LfpCBcM3xviRcVjA61DhYs5v7QZe4Dca8sHMbUTOqsOCyGe?=
- =?us-ascii?Q?T7GitWnJy6gbNCQwzgtNH/4cl6oQZSPxNU7nwZN5tqj7d4idlAtsrS0aTtev?=
- =?us-ascii?Q?hpoEfCo8S3hweqYe3e5C9zHqo0UjgciWtoUQ5eFVScmllTbhF+02c0XonSJ6?=
- =?us-ascii?Q?WbCncelahKp3VeDGHiLeiASctLhfl4Kah27gc3sJqZp5T5IpZagdjdBPLRb2?=
- =?us-ascii?Q?HKGdrWJQ/dw/2SCofAMfFu/3U99wQYJKkKgvvkcomQvcmH2ahWLqURgOp+va?=
- =?us-ascii?Q?UllASA4zDLVWcfB63q6QRs97Sduq8jIUZcz1tC/xbFeRAqSenzCLwHQK9P4B?=
- =?us-ascii?Q?BWVy7+bpSRjULvEgc2S96oPZpuz1UXh38yQ1Jmiw7cHYDcVqvYrr4QW+LPHh?=
- =?us-ascii?Q?5/3YW/6Rp5Ln4wyGPgObcZG0RG9IjhXM424MbGrBRCCg6wkwfjeSRBOE2+rn?=
- =?us-ascii?Q?qHlvclvEMu7ucdr6M3o6YIVOi0XqmwL5ig60uLK95ca00g7KXA4uzgsTPxjC?=
- =?us-ascii?Q?7182fyN8Pvdf8a8NAKALTgNy3C6BXZsiCSrqWGISubxIaGMLJON3eA2Ml1BP?=
- =?us-ascii?Q?RuOJAmGnptIkdu//6GCb/Fhuh9BRSfw6QnPs1wwJO09onCSffybKtqVaF7qD?=
- =?us-ascii?Q?dJuZ4/RLpgg7mB48hY2y9/NVZDn0BVkrL2X571COEN9hFwUDl4rkPYTBsbVo?=
- =?us-ascii?Q?i9MjhyEMuPUvkoadcRnhqXWh1MxjSW7PaHprtD8KDfeyNXiZZH7HgATp7ktm?=
- =?us-ascii?Q?RGuqpTRLfkt3YcSY7ymaUCW9e8srtW28cEBCPYTT7/9kLLae6AAQFhnnXqeq?=
- =?us-ascii?Q?W1pcgf+DXKWoyRKOtBIIsvo1kAZLKFxaLDca5cifr7lLKXZElOoygC8sLYXk?=
- =?us-ascii?Q?kASiCreiUhUYDzZ1p5D669WD2HoE8kn+XJS1DEnUkEDsVMHvdbflF5piYJ1N?=
- =?us-ascii?Q?TJynvqJ6aFnrRkhKd53cxUijb1UzXDD+/eTQqgQpFHJgIoNKB/I9CkNNAW8s?=
- =?us-ascii?Q?opytEVJV1Xk98yS8DmYU4A/hHPUWBh9m1CAlB+wVFC5y7dyeyi6BZNbbBWfM?=
- =?us-ascii?Q?NRTqwWRNeOgqjIu8g4siV6CsKYJtsvonShi9J3xKJGM3dXK3Jy+TWYy4+3Ve?=
- =?us-ascii?Q?TtgDg5PvFYgRqqtNAPoWlFCIBfOkP6sfW2kKF3+48mykbpQnYCBnDkKGCzf/?=
- =?us-ascii?Q?6ZahC46a3ulxYxbdXFiMYl3Vicz59u9IgLAjHX54RsCuvE14WaJxCN4xd1tX?=
- =?us-ascii?Q?wMk6M1XvHEXE0uGahONbbxzBws69lPeJYAuk39dd?=
+	=?us-ascii?Q?viytxgE67OYAuD9iAIrfc2N55r6fpRI/aVLmIj2zLvZSvNYGS24agOiQOkeJ?=
+ =?us-ascii?Q?t4fu7c68t0jhH/u3KNior4HgOxgdXoNn1CJExXHH+J7Uc7bH6YqqcWRsb1U5?=
+ =?us-ascii?Q?h4lv2mz4WBnzn6qxj2xc0X0cRgcZ7RhOApE27+eGiYKoy/5Z1T50O7g1rM9w?=
+ =?us-ascii?Q?TcqbC6ZB2Y0IzG1utqR2j8KzGzoXNeoziq2tUnx+K3/WD/zpplznw5PP1jgl?=
+ =?us-ascii?Q?ebyb71DC/0pRVe1Aw0pe75zoVMM3ASIm0z0q31URESPprFkRc8T1fYBEdeeo?=
+ =?us-ascii?Q?30SWR0Fp1AjE83c42TXdPNLCWG6RbE8Ac54iIdNYqktI/8vrROgoDCJHFTcz?=
+ =?us-ascii?Q?reBr7/WShEw+nyebVQiSRPh0DtWCrasN1udDil64PyyMJTyebXzET7x31i/Q?=
+ =?us-ascii?Q?mQtjiInSo4UaQitToZM8U9TQdqGZJJx0GB7oKJYmV8X9vxZNxwPOEaUvBaM1?=
+ =?us-ascii?Q?Sj2yBsP3uQsEN8ay9JkGiDxHUYRwmuBOAqIOjyjY3vA98XvIeqpUWim9xwPp?=
+ =?us-ascii?Q?04YdhQLkyAgYDHR7Km7yG19hxjxxvA0br/4S5aNPuSBCgYsZjPNcaYg5mbp3?=
+ =?us-ascii?Q?bAf8RP0WethzhvQUOL98/vC776bZP13+8xl0JLIFrgwOhXSTLztLvip1Vzny?=
+ =?us-ascii?Q?616l5efxKa7XNe1KNKkQmYyDr118/8mMZoARBQhwM0YEJ/ziiZj0LcsjyaTG?=
+ =?us-ascii?Q?QwP1+ZMxkjo0KMDjhHLsKyfYqiPy12aR+YzseQdLTn45+V+YCEdA8EI1aD3h?=
+ =?us-ascii?Q?VJq/Hh7j7ziMWPk41pesMCGanQQnRMBiVhqAEXzzp94bdaoKnuuFxMDIhpon?=
+ =?us-ascii?Q?Niq2+/igGbzhuFeVDtwWkRpmcVAFI6gtS5c1JekiRYfCuXhv5BWS5LOSqYZl?=
+ =?us-ascii?Q?u2vKAGAyx7rAixIW+p52L0v9ZA61GBbY+p+SmyeFm1YC7nQnSbl/dvsZ9EBi?=
+ =?us-ascii?Q?fJZlVcGWZEFue8SA3UK3N3oZS8MNowaeqjX58KLelkmL4rariI79gcaBIK9W?=
+ =?us-ascii?Q?Nh8cToy3t7Ut+1GT/4zOpN1nB3KGCEaME1UmjfbBZAr/sROHKB0y9Serh26a?=
+ =?us-ascii?Q?UQsevcRNfURHETVmTLX6OWTL0s8yU63ijmmXVWxQQ8SUggcg7Z23hbqKDAED?=
+ =?us-ascii?Q?et8GQJUMYXe56navwZx2FHW+ufEkKTDjcO36bCycSig5cUjTgnc7O9dF66Ap?=
+ =?us-ascii?Q?5GB1Lf5rgVK87FCrTel8Wpqtn4cY3BqIrL2DSLFV6PCcrAs4T0b9AiuUufNO?=
+ =?us-ascii?Q?zkde8MrzH33an/qRT0+dAtBoUHjcdXoVJRTDS87BsjI8k41+GSuyxpSpnddp?=
+ =?us-ascii?Q?K0//++2L7cgludqQKwIFXO4ocEbc7xStmWtFiv59MDteIXy1tGHHMr6dVuil?=
+ =?us-ascii?Q?RH/XqRu+pOSiXZGIhnP1g9s2yCRKXqc7lZgyfs+GI0vInal0DFoeSRqzt4x4?=
+ =?us-ascii?Q?SzP65E5iOFXHLPsYvO1ooOdEfNdx/twLffK9U67j7iV33N7tuwzzwYcI1/ye?=
+ =?us-ascii?Q?aBB+vOrc3ZCUnE+BnDKYDst2cfDckP8bwGTF07vCZJhrBrE2unYuIqA/zf1q?=
+ =?us-ascii?Q?aTxNxAsL3+3prsjLrUSl+WlZMdOBHFOZAUWB+8qn?=
 X-OriginatorOrg: welotec.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ebad915b-9cc0-455e-7b7a-08dbcd6ca724
+X-MS-Exchange-CrossTenant-Network-Message-Id: 45bf8a35-5b7f-4a03-430e-08dbcd6e2abd
 X-MS-Exchange-CrossTenant-AuthSource: VI1PR04MB5373.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Oct 2023 10:51:14.8944
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Oct 2023 11:02:05.2150
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 25111a7f-1d5a-4c51-a4ca-7f8e44011b39
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: f6yxuOdbq3IGo9GHSxUim6twB6MsekJLTvkJ7e0lDoEBphpHCoLmIzd8l/PHmpFW+Mb/qZmbdJhkL8NwO0mbOA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8308
+X-MS-Exchange-CrossTenant-UserPrincipalName: 00Z0ENlMjNDxWcwhJfu0h/byZARa7UXcPmZolDa4jWmgVlDNKSxAzWf0vxoRdc7L3TedMP6BxTh8IWxDljHaCw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB7925
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 15 Oct 2023 13:19:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105500
+ <openembedded-devel@lists.openembedded.org>; Sun, 15 Oct 2023 13:19:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105508
 
-Extend `tar` command, with additional parameters, depending
-on choosen package class and target distro features, in order
-to support ACLs and xattr.
+From: Piotr =C5=81obacz via lists.openembedded.org <p.lobacz=3Dwelotec.com@=
+lists.openembedded.org>
 
-Additionaly set archive posix format, in order to preserve
-milliseconds in timestamps for reproducibility tests.
+Extend `tar` command inside copytree() and copyhardlinktree() functions,
+with additional parameters, in order to support ACLs and xattr. The posix
+format doesn't need to be set in here, as GNU tar switches to it whenewer
+is uses --acls and/or --xattrs parameters.
 
-Currently only `package_ipk` supports fully ACLs and xattr.
+Additionaly change preservation of additional attributes for `cp` command
+to all (meaning mode, ownership, timestamps etc.) not only xattrs, which
+were previously.
 
 Signed-off-by: Piotr =C5=81obacz <p.lobacz@welotec.com>
 ---
- meta/classes-global/sstate.bbclass | 19 +++++++++++++++++--
- 1 file changed, 17 insertions(+), 2 deletions(-)
+ meta/lib/oe/path.py | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta/classes-global/sstate.bbclass b/meta/classes-global/sstat=
-e.bbclass
-index 5ae6f515f2..3e7b2ce474 100644
---- a/meta/classes-global/sstate.bbclass
-+++ b/meta/classes-global/sstate.bbclass
-@@ -829,7 +829,22 @@ sstate_create_package () {
- 	mkdir --mode=3D0775 -p `dirname ${SSTATE_PKG}`
- 	TFILE=3D`mktemp ${SSTATE_PKG}.XXXXXXXX`
+diff --git a/meta/lib/oe/path.py b/meta/lib/oe/path.py
+index 0dc8f172d5..56e8e214ac 100644
+--- a/meta/lib/oe/path.py
++++ b/meta/lib/oe/path.py
+@@ -92,7 +92,7 @@ def copytree(src, dst):
+     # This way we also preserve hardlinks between files in the tree.
 =20
--	OPT=3D"-cS"
-+	# Notice, that if you create an archive in POSIX format (see section GNU =
-tar and POSIX tar) and the environment variable POSIXLY_CORRECT is set,
-+	# then the two archives created using the same options on the same set of=
- files will not be byte-to-byte equivalent even with the above option.
-+	# This is because the posix default for extended header names includes th=
-e PID of the tar process, which is different at each run. To produce
-+	# byte-to-byte equivalent archives in this case, either unset POSIXLY_COR=
-RECT, or use the following option:
-+	#
-+	# --pax-option=3Dexthdr.name=3D%d/PaxHeaders/%f,atime:=3D0,ctime:=3D0
-+	#
-+	# https://www.gnu.org/software/tar/manual/html_node/PAX-keywords.html
-+	MTIME_ARGS=3D"--mtime=3D@${SOURCE_DATE_EPOCH:-$(date +%s)} --pax-option=
-=3Dexthdr.name=3D%d/PaxHeaders/%f,atime:=3D0,ctime:=3D0"
-+	# --clamp-mtime requires tar > 1.28. Only use it if SOURCE_DATE_EPOCH is =
-set, to avoid having a generic case dependency on tar > 1.28.
-+	# this setting will make sure files generated at build time have consiste=
-nt mtimes, for reproducible builds.
-+	if [ ! -z "$SOURCE_DATE_EPOCH"  ]; then
-+	        MTIME_ARGS=3D"$MTIME_ARGS --clamp-mtime"
-+	fi
-+
-+	OPT=3D"--format=3Dposix ${@bb.utils.contains('DISTRO_FEATURES', 'acl', '-=
--acls', '', d)} ${@bb.utils.contains('DISTRO_FEATURES', 'xattr', '--xattrs'=
-, '', d)} --numeric-owner ${MTIME_ARGS} -cS"
- 	ZSTD=3D"zstd -${SSTATE_ZSTD_CLEVEL} -T${ZSTD_THREADS}"
- 	# Use pzstd if available
- 	if [ -x "$(command -v pzstd)" ]; then
-@@ -895,7 +910,7 @@ sstate_unpack_package () {
- 		ZSTD=3D"pzstd -p ${ZSTD_THREADS}"
- 	fi
+     bb.utils.mkdirhier(dst)
+-    cmd =3D "tar --xattrs --xattrs-include=3D'*' -cf - -S -C %s -p . | tar=
+ --xattrs --xattrs-include=3D'*' -xf - -C %s" % (src, dst)
++    cmd =3D "tar --acls --xattrs --xattrs-include=3D'*' -cf - -S -C %s -p =
+. | tar --acls --xattrs --xattrs-include=3D'*' -xf - -C %s" % (src, dst)
+     subprocess.check_output(cmd, shell=3DTrue, stderr=3Dsubprocess.STDOUT)
 =20
--	tar -I "$ZSTD" -xvpf ${SSTATE_PKG}
-+	tar -I "$ZSTD" --format=3Dposix ${@bb.utils.contains('DISTRO_FEATURES', '=
-acl', '--acls', '', d)} ${@bb.utils.contains('DISTRO_FEATURES', 'xattr', '-=
--xattrs', '', d)} -xvpf ${SSTATE_PKG}
- 	# update .siginfo atime on local/NFS mirror if it is a symbolic link
- 	[ ! -h ${SSTATE_PKG}.siginfo ] || [ ! -e ${SSTATE_PKG}.siginfo ] || touch=
- -a ${SSTATE_PKG}.siginfo 2>/dev/null || true
- 	# update each symbolic link instead of any referenced file
+ def copyhardlinktree(src, dst):
+@@ -119,7 +119,7 @@ def copyhardlinktree(src, dst):
+     if (canhard):
+         # Need to copy directories only with tar first since cp will error=
+ if two=20
+         # writers try and create a directory at the same time
+-        cmd =3D "cd %s; find . -type d -print | tar --xattrs --xattrs-incl=
+ude=3D'*' -cf - -S -C %s -p --no-recursion --files-from - | tar --xattrs --=
+xattrs-include=3D'*' -xhf - -C %s" % (src, src, dst)
++        cmd =3D "cd %s; find . -type d -print | tar --acls --xattrs --xatt=
+rs-include=3D'*' -cf - -S -C %s -p --no-recursion --files-from - | tar --ac=
+ls --xattrs --xattrs-include=3D'*' -xhf - -C %s" % (src, src, dst)
+         subprocess.check_output(cmd, shell=3DTrue, stderr=3Dsubprocess.STD=
+OUT)
+         source =3D ''
+         if os.path.isdir(src):
+@@ -130,7 +130,7 @@ def copyhardlinktree(src, dst):
+         else:
+             source =3D src
+             s_dir =3D os.getcwd()
+-        cmd =3D 'cp -afl --preserve=3Dxattr %s %s' % (source, os.path.real=
+path(dst))
++        cmd =3D 'cp -afl --preserve=3Dall %s %s' % (source, os.path.realpa=
+th(dst))
+         subprocess.check_output(cmd, shell=3DTrue, cwd=3Ds_dir, stderr=3Ds=
+ubprocess.STDOUT)
+     else:
+         copytree(src, dst)
 --=20
 2.42.0
 
