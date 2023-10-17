@@ -1,209 +1,80 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A2DDCDB465
-	for <webhook@archiver.kernel.org>; Tue, 17 Oct 2023 02:41:05 +0000 (UTC)
-Received: from mail-ot1-f45.google.com (mail-ot1-f45.google.com [209.85.210.45])
- by mx.groups.io with SMTP id smtpd.web10.199293.1697510461887513021
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B8D03CDB474
+	for <webhook@archiver.kernel.org>; Tue, 17 Oct 2023 07:23:56 +0000 (UTC)
+Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
+ by mx.groups.io with SMTP id smtpd.web10.202204.1697527435500664762
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 16 Oct 2023 19:41:02 -0700
+ Tue, 17 Oct 2023 00:23:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=SqOfkqp1;
- spf=pass (domain: gmail.com, ip: 209.85.210.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f45.google.com with SMTP id 46e09a7af769-6c4bad60a1aso3114726a34.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 16 Oct 2023 19:41:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1697510461; x=1698115261; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=GDZKyvMs6DqdHyvliAUzopn0t4KFePsQ3wE39S9Y5XI=;
-        b=SqOfkqp1fOkL6T+FxAGMekvRelH6ea3kEVAapKgstRoCsS2GypAYs7Qie78KVh/mR2
-         U9Q6E52uWwhUsd2BkElGq9UPHkBIWpCgb+Z7wORKUMQ56Dln64stDhByI5ghwWz6cD+q
-         E9RsyuF32CddCwr4dbx0MufQGNYnG8e4brzTnE5/cQAt957Xl0odATDFQ8kf257hb7bQ
-         CRKzLKqSJs2E8vYkHjxXt5rdTc7tWCKCht43NLNoaOp83RwEfgdZhcNHprInBnH75pzA
-         9PZaODZ6pXY1tbt+NCAaXTpmHaDk0vlnFSKD5A7LPbF85V816J+GXXG/fOlt8MedCFNk
-         JAtQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1697510461; x=1698115261;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=GDZKyvMs6DqdHyvliAUzopn0t4KFePsQ3wE39S9Y5XI=;
-        b=ktiEBegYw5u3u2/ApoFFdFBhgOdwf+dfTDBJ4xgH3tuhA1evSGWtgOXRy398mtB3fX
-         3c8rUoV616sx8K/cQJATOoR0OPm+TGz4FK2kyWCDAA2/ufgb5stAsB4Iz5jrDWwmP3i9
-         1Mg/slswUSdg0HRDWA6GOBkIti5rnRp3cCd96nHM+FCjmsRFyNdhtHAFV617hKupVU45
-         IzCZgC7ZmSPu3IUm9B6qNfYu3y+qQgp9+HH9HyK9oqqezoxEto933udbJ2CMZE15+TQv
-         lIfB2NTv4FZ7/Z+njdgXA80m9u0mjvjWqMQ9iiemqRuLe53hG0c5KQ/SWceic+orKfyC
-         kKlA==
-X-Gm-Message-State: AOJu0YzeMGHCAIDjInHhLaam4KEOesur4VzMrdgSnJCl1oAuongkQWsp
-	6aaJdb6DyYNKose7TMzStsDUiigW5vA7x1lf5783ShFbD+w=
-X-Google-Smtp-Source: AGHT+IEyeMIpZ25HJq9TOaUDwWM/ZOI59I3CBAEh/GvD1urNE+rJSC0X/YSDhG/FrRWG1Ce4uQJOS8YLStFjhKaNV+w=
-X-Received: by 2002:a05:6870:ac8f:b0:1e9:9376:2b36 with SMTP id
- ns15-20020a056870ac8f00b001e993762b36mr1019619oab.36.1697510460953; Mon, 16
- Oct 2023 19:41:00 -0700 (PDT)
-MIME-Version: 1.0
-References: <20231017011718.144753-1-chi.xu@windriver.com> <CAMKF1srPUnze5t5win9RhH_XOfC+dcCxafsz_v7dtmkZduCErQ@mail.gmail.com>
- <DM4PR11MB53905F02ADA3D27604B7CF1B9AD6A@DM4PR11MB5390.namprd11.prod.outlook.com>
-In-Reply-To: <DM4PR11MB53905F02ADA3D27604B7CF1B9AD6A@DM4PR11MB5390.namprd11.prod.outlook.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 16 Oct 2023 19:40:34 -0700
-Message-ID: <CAMKF1sp+6T7BrnspZruhKJuN=neLzDhpdi8CeCQKAPU8a9teJw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] re2: Add ptest support
-To: "Xu, Chi" <Chi.Xu@windriver.com>
-Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10865"; a="124747726"
+X-IronPort-AV: E=Sophos;i="6.03,231,1694703600"; 
+   d="scan'208";a="124747726"
+Received: from unknown (HELO oym-r4.gw.nic.fujitsu.com) ([210.162.30.92])
+  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 Oct 2023 16:23:51 +0900
+Received: from oym-m1.gw.nic.fujitsu.com (oym-nat-oym-m1.gw.nic.fujitsu.com [192.168.87.58])
+	by oym-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 6C44ADDC67
+	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Oct 2023 16:23:50 +0900 (JST)
+Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
+	by oym-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id 9B0C5D500F
+	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Oct 2023 16:23:49 +0900 (JST)
+Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.52])
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id C0C9170BC7;
+	Tue, 17 Oct 2023 16:23:48 +0900 (JST)
+From: wangmy@fujitsu.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH v3] dnf-plugin-tui: create symlinks from /usr/ to /.
+Date: Tue, 17 Oct 2023 15:23:38 +0800
+Message-Id: <1697527418-5791-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-27940.005
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-27940.005
+X-TMASE-Result: 10-1.599900-10.000000
+X-TMASE-MatchedRID: N4NqWiMGRfn3FZ31mJ166LPx3rO+jk2QTSz0JdEAJbT7vFWrBZLBuCUA
+	i6zraQcQCC8aAmGeO6lV00+whwxVQy/7QU2czuUNA9lly13c/gHzWEMQjooUzWAN6i+va16ukWN
+	Ccn0XQOLfjT8jjWZr5U+ar1fsIOhmcwmXl5CnQGlvTnqYKYXTRlXgGeVUh3WdmyiLZetSf8nyb6
+	HMFK1qe8gz2YRMI7vTJ0RPnyOnrZKqfRvKAwYdQFQg7piBmlrxGkm6wbRMdYcsfrcdhtXHfB7l4
+	L/zH/NCcBRAZdSBS8yhlgFZC1PrUS5BGh0MiQGsIf7zAsZYBMJLv5Eyr/YIrqsDhztRXZ9Cm+LY
+	9A78UVCLPa6Os9XH3IQhTU20ySbR
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 17 Oct 2023 02:41:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105549
+ <openembedded-devel@lists.openembedded.org>; Tue, 17 Oct 2023 07:23:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105550
 
-On Mon, Oct 16, 2023 at 7:00=E2=80=AFPM Xu, Chi <Chi.Xu@windriver.com> wrot=
-e:
->
-> Get it.
-> Can I understand that if all the test cases pass, we should add pteat to =
-PTESTS_SLOW_META_OE or PTESTS_FAST_META_OE in the patch?
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-if it can finish running in less than 30s then its considered to be fast fa=
-mily.
+From Poky 4.3, by default, usrmerge has been enabled.
+Some important binaries have been installed to /usr/sbin instead of
+/sbin such as init. So it is necessary to create symlinks from /usr/
+to /, such as /usr/sbin to /sbin, /usr/bin to /bin.
 
->
-> Thanks,
-> Chi
->
-> > -----Original Message-----
-> > From: Khem Raj <raj.khem@gmail.com>
-> > Sent: Tuesday, October 17, 2023 9:52 AM
-> > To: Xu, Chi <Chi.Xu@windriver.com>
-> > Cc: openembedded-devel@lists.openembedded.org
-> > Subject: Re: [oe] [meta-oe][PATCH] re2: Add ptest support
-> >
-> > CAUTION: This email comes from a non Wind River email account!
-> > Do not click links or open attachments unless you recognize the sender =
-and
-> > know the content is safe.
-> >
-> > Thanks for adding ptest, I see that it passes all tests but runs for lo=
-nger.
-> > Maybe add it to PTESTS_SLOW_META_OE as well.
-> >
-> > On Mon, Oct 16, 2023 at 6:17=E2=80=AFPM Chi Xu <chi.xu@eng.windriver.co=
-m> wrote:
-> > >
-> > > From: Chi Xu <chi.xu@windriver.com>
-> > >
-> > > Test results:
-> > > root@qemux86-64:~# ptest-runner re2 -t 7200
-> > > START: ptest-runner
-> > > 2023-10-16T08:36
-> > > BEGIN: /usr/lib/re2/ptest
-> > > PASS: charclass_test
-> > > PASS: compile_test
-> > > PASS: filtered_re2_test
-> > > PASS: mimics_pcre_test
-> > > PASS: parse_test
-> > > PASS: possible_match_test
-> > > PASS: re2_test
-> > > PASS: re2_arg_test
-> > > PASS: regexp_test
-> > > PASS: required_prefix_test
-> > > PASS: search_test
-> > > PASS: set_test
-> > > PASS: simplify_test
-> > > PASS: string_generator_test
-> > > PASS: dfa_test
-> > > PASS: exhaustive1_test
-> > > PASS: exhaustive2_test
-> > > PASS: exhaustive3_test
-> > > PASS: exhaustive_test
-> > > PASS: random_test
-> > > DURATION: 2085
-> > > END: /usr/lib/re2/ptest
-> > > 2023-10-16T09:11
-> > > STOP: ptest-runner
-> > > TOTAL: 1 FAIL: 0
-> > >
-> > > Signed-off-by: Chi Xu <chi.xu@windriver.com>
-> > > ---
-> > >  meta-oe/recipes-support/re2/re2/run-ptest     |  3 +++
-> > >  meta-oe/recipes-support/re2/re2_2023.03.01.bb | 16 +++++++++++++---
-> > >  2 files changed, 16 insertions(+), 3 deletions(-)  create mode 10064=
-4
-> > > meta-oe/recipes-support/re2/re2/run-ptest
-> > >
-> > > diff --git a/meta-oe/recipes-support/re2/re2/run-ptest
-> > > b/meta-oe/recipes-support/re2/re2/run-ptest
-> > > new file mode 100644
-> > > index 000000000..8bd5fd1ef
-> > > --- /dev/null
-> > > +++ b/meta-oe/recipes-support/re2/re2/run-ptest
-> > > @@ -0,0 +1,3 @@
-> > > +#!/bin/sh
-> > > +
-> > > +ctest --force-new-ctest-process | sed -u 's/\*\*\*/   /g' | awk '/Te=
-st
-> > +#/{gsub(/Passed/,"PASS"); gsub(/Failed/,"FAIL"); gsub(/Skipped/,"SKIP"=
-);
-> > print $6": "$4; fflush();}'
-> > > diff --git a/meta-oe/recipes-support/re2/re2_2023.03.01.bb
-> > > b/meta-oe/recipes-support/re2/re2_2023.03.01.bb
-> > > index 78bf695a4..fe210d510 100644
-> > > --- a/meta-oe/recipes-support/re2/re2_2023.03.01.bb
-> > > +++ b/meta-oe/recipes-support/re2/re2_2023.03.01.bb
-> > > @@ -6,17 +6,27 @@ LIC_FILES_CHKSUM =3D
-> > "file://LICENSE;md5=3D3b5c31eb512bdf3cb11ffd5713963760"
-> > >  # tag 2023-03-01
-> > >  SRCREV =3D "241e2e430836e80f93d704d1f06cd3e7fe3100f5"
-> > >
-> > > -SRC_URI =3D "git://github.com/google/re2.git;branch=3Dmain;protocol=
-=3Dhttps"
-> > > +SRC_URI =3D "git://github.com/google/re2.git;branch=3Dmain;protocol=
-=3Dhttps \
-> > > +           ${@bb.utils.contains('PTEST_ENABLED', '1', 'file://run-pt=
-est', '', d)} \
-> > > +          "
-> > >
-> > >  S =3D "${WORKDIR}/git"
-> > >
-> > > -inherit cmake
-> > > +inherit cmake ptest
-> > > +RDEPENDS:${PN}-ptest +=3D "cmake sed"
-> > >
-> > >  EXTRA_OECMAKE +=3D " \
-> > >         -DBUILD_SHARED_LIBS=3DON \
-> > > -       -DRE2_BUILD_TESTING=3DOFF \
-> > > +        ${@bb.utils.contains('PTEST_ENABLED', '1',
-> > > + '-DRE2_BUILD_TESTING=3DON', '-DRE2_BUILD_TESTING=3DOFF', d)} \
-> > >  "
-> > >
-> > > +do_install_ptest () {
-> > > +    cp -r ${B}/*_test ${D}${PTEST_PATH}
-> > > +    cp -r ${B}/CTestTestfile.cmake ${D}${PTEST_PATH}
-> > > +    sed -i -e 's#${B}#${PTEST_PATH}#g' `find ${D}${PTEST_PATH} -name
-> > CTestTestfile.cmake`
-> > > +    sed -i -e 's#${S}#${PTEST_PATH}#g' `find ${D}${PTEST_PATH} -name
-> > > +CTestTestfile.cmake` }
-> > > +
-> > >  # ignore .so in /usr/lib64
-> > >  FILES:${PN} =3D "${libdir}"
-> > >  INSANE_SKIP:${PN} +=3D "dev-so"
-> > > --
-> > > 2.25.1
-> > >
-> > >
-> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > > Links: You receive all messages sent to this group.
-> > > View/Reply Online (#105545):
-> > > https://lists.openembedded.org/g/openembedded-devel/message/105545
-> > > Mute This Topic: https://lists.openembedded.org/mt/102010115/1997914
-> > > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > > Unsubscribe: https://lists.openembedded.org/g/openembedded-
-> > devel/unsub
-> > > [raj.khem@gmail.com]
-> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > >
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+---
+ meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
+index 94023922a2..0709019056 100644
+--- a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
++++ b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
+@@ -4,7 +4,7 @@ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+ SRC_URI = "git://github.com/ubinux/dnf-plugin-tui.git;branch=master;protocol=https"
+-SRCREV = "83917a3935ac7ce1d8d96e914d96a6679319a336"
++SRCREV = "baac322a8a6d57e62c703f6ed523152baec18b4f"
+ PV = "1.3"
+ 
+ SRC_URI:append:class-target = " file://oe-remote.repo.sample"
+-- 
+2.34.1
+
 
