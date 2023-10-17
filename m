@@ -1,99 +1,91 @@
-Return-Path: <charles.perry@savoirfairelinux.com>
+Return-Path: <clopez@igalia.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 39005C41513
-	for <webhook@archiver.kernel.org>; Tue, 17 Oct 2023 22:10:42 +0000 (UTC)
-Received: from mail.savoirfairelinux.com (mail.savoirfairelinux.com [208.88.110.44])
- by mx.groups.io with SMTP id smtpd.web11.268806.1697580640488455578
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 48101CDB474
+	for <webhook@archiver.kernel.org>; Tue, 17 Oct 2023 22:25:02 +0000 (UTC)
+Received: from fanzine2.igalia.com (fanzine2.igalia.com [178.60.130.6])
+ by mx.groups.io with SMTP id smtpd.web11.269079.1697581497263299267
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 17 Oct 2023 15:10:41 -0700
+ Tue, 17 Oct 2023 15:24:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@savoirfairelinux.com header.s=DFC430D2-D198-11EC-948E-34200CB392D2 header.b=RfT8OoDT;
- spf=pass (domain: savoirfairelinux.com, ip: 208.88.110.44, mailfrom: charles.perry@savoirfairelinux.com)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.savoirfairelinux.com (Postfix) with ESMTP id 5B2399C27A3
-	for <openembedded-devel@lists.openembedded.org>; Tue, 17 Oct 2023 18:10:39 -0400 (EDT)
-Received: from mail.savoirfairelinux.com ([127.0.0.1])
- by localhost (mail.savoirfairelinux.com [127.0.0.1]) (amavis, port 10032)
- with ESMTP id EOdnqSHcu3wt; Tue, 17 Oct 2023 18:10:38 -0400 (EDT)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.savoirfairelinux.com (Postfix) with ESMTP id 776059C3240;
-	Tue, 17 Oct 2023 18:10:38 -0400 (EDT)
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.savoirfairelinux.com 776059C3240
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=savoirfairelinux.com; s=DFC430D2-D198-11EC-948E-34200CB392D2;
-	t=1697580638; bh=P7tJx6W38qbcCmg5YERuc5/NS5VmO4D+Kp8/E7AXTbg=;
-	h=From:To:Date:Message-Id:MIME-Version;
-	b=RfT8OoDTjb3CLPBmGkuvHktyfd/hayDbWKamXzmKu4wCtwWD+LUMpjbUIj6qHyUSJ
-	 UUGeXSHMd4lbvQiBOq+PL9MVsfjPcOXuz54TRWsY9QdQgS2i1DOhLosJL25zrWjAwL
-	 cCAoSiJnjzLyVNt1qGe/A+rETpx/6vtuKEVQq4ZgVbWCvkxekKogbaaWd1FmRwWyAp
-	 4HSJDTJus2nF4hcYqyIiELgCwNPwhH40abAc8YRiIhp55c4cJDDqogjAEU8DX8TgH/
-	 /0vxteMZ3Gp6WF2ZbNa3gDDjt3YI2eWA+Wmxb/SpL4JHAvuWKOWRQhPTSS+ietA+iX
-	 B5RAieBJl67Qw==
-X-Virus-Scanned: amavis at mail.savoirfairelinux.com
-Received: from mail.savoirfairelinux.com ([127.0.0.1])
- by localhost (mail.savoirfairelinux.com [127.0.0.1]) (amavis, port 10026)
- with ESMTP id yjM0JPLweQpS; Tue, 17 Oct 2023 18:10:38 -0400 (EDT)
-Received: from pcperry.mtl.sfl (unknown [192.168.51.254])
-	by mail.savoirfairelinux.com (Postfix) with ESMTPSA id 60A429C27A3;
-	Tue, 17 Oct 2023 18:10:38 -0400 (EDT)
-From: Charles Perry <charles.perry@savoirfairelinux.com>
+ dkim=pass header.i=@igalia.com header.s=20170329 header.b=mhGB54hT;
+ spf=pass (domain: igalia.com, ip: 178.60.130.6, mailfrom: clopez@igalia.com)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
+	s=20170329; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
+	To:From:Sender:Reply-To:Cc:Content-Type:Content-ID:Content-Description:
+	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=RXqq7uAkCWMD0d4xalVFFWDmAMEJoFmlEQuZVrj2ZdM=; b=mhGB54hTUEDnBTGJcLrLSEKkNR
+	XDKza9D/Z2U7B4i68huwDdxna84WWieiWsD0ClWcVB8YV1ZAzmXihLcO2/NyFtMnT0b4PlvhpJQSt
+	ZaXnyUKGpZ7KppWHzCpVd26lF9rtnNVN6ZLcJsFohDWbxE77uks6LhDU6xN1N8xoWkO1o/Av+5zKs
+	0YM/pw3gc8tIpZdw/xVLklSrFy/Z9U5HskkLTE/epzPGgh6TtdEDR2KSnHs4tAdEbtJbLyguASkfY
+	3zU8a8PMniGWtigQKbiO/9lj4CymWTBg15EuJ7NMTkSvJbfIQGkzMUpPDXGlEqkrnRCkJN7Ueznqh
+	lfU5sQAw==;
+Received: from bl14-19-118.dsl.telepac.pt ([85.247.19.118] helo=trinity.bot.igalia.com)
+	by fanzine2.igalia.com with esmtpsa 
+	(Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
+	id 1qssUg-001bIh-N1
+	for <openembedded-devel@lists.openembedded.org>; Wed, 18 Oct 2023 00:24:54 +0200
+From: Carlos Alberto Lopez Perez <clopez@igalia.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Charles Perry <charles.perry@savoirfairelinux.com>
-Subject: [meta-networking][PATCH 1/2] libosip2: add recipe
-Date: Tue, 17 Oct 2023 18:10:30 -0400
-Message-Id: <20231017221031.2376761-1-charles.perry@savoirfairelinux.com>
-X-Mailer: git-send-email 2.40.1
+Subject: [meta-oe][PATCH] libbacktrace: Update version and enable shared library.
+Date: Tue, 17 Oct 2023 23:24:54 +0100
+Message-Id: <20231017222454.26684-1-clopez@igalia.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 17 Oct 2023 22:10:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105562
+ <openembedded-devel@lists.openembedded.org>; Tue, 17 Oct 2023 22:25:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105563
 
-The GNU oSIP library is an implementation of SIP - rfc3261. It can be a
-useful building block for an embedded device application.
+* Update to the last version as of today.
+* Fix typo: EXTRA_OECONF
+* Enable building a shared library (.so)
+* Disable building a static library (.a)
+* Manually passing `-fPIC` is not longer needed because that
+  flag is already enabled by autotools when building the
+  shared library.
+* Enable the RISCV64 build-recause libunwind supports this
+  archicture since OE-Core-rev: 2b2f6ff01efd
 
-Signed-off-by: Charles Perry <charles.perry@savoirfairelinux.com>
+Signed-off-by: Carlos Alberto Lopez Perez <clopez@igalia.com>
 ---
-Builds with poky and poky-tiny on qemux86-64.
+ .../recipes-extended/libbacktrace/libbacktrace_git.bb    | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
 
- .../recipes-support/libosip2/libosip2_5.3.1.bb    | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
- create mode 100644 meta-networking/recipes-support/libosip2/libosip2_5.3=
-.1.bb
-
-diff --git a/meta-networking/recipes-support/libosip2/libosip2_5.3.1.bb b=
-/meta-networking/recipes-support/libosip2/libosip2_5.3.1.bb
-new file mode 100644
-index 000000000..fa99d33e1
---- /dev/null
-+++ b/meta-networking/recipes-support/libosip2/libosip2_5.3.1.bb
-@@ -0,0 +1,15 @@
-+SUMMARY =3D "The GNU oSIP library is an implementation of SIP - rfc3261"
-+DESCRIPTION =3D "SIP stands for the Session Initiation Protocol and is d=
-escribed \
-+by the rfc3261 (wich deprecates rfc2543). This library aims to provide m=
-ultimedia \
-+and telecom software developers an easy and powerful interface to initia=
-te and \
-+control SIP based sessions in their applications. SIP is a open standard=
- \
-+replacement from IETF for H323."
-+HOMEPAGE =3D "http://www.gnu.org/software/osip/osip.html"
-+SECTION =3D "libs"
-+LICENSE =3D "LGPL-2.1-or-later"
-+LIC_FILES_CHKSUM =3D "file://src/osip2/osip.c;beginline=3D1;endline=3D19=
-;md5=3D22ca0da0e41276c50c81b733953c208d"
-+
-+SRC_URI =3D "${GNU_MIRROR}/osip/${BPN}-${PV}.tar.gz"
-+SRC_URI[sha256sum] =3D "fe82fe841608266ac15a5c1118216da00c554d5006e2875a=
-8ac3752b1e6adc79"
-+
-+inherit autotools
---=20
-2.40.1
+diff --git a/meta-oe/recipes-extended/libbacktrace/libbacktrace_git.bb b/meta-oe/recipes-extended/libbacktrace/libbacktrace_git.bb
+index 609e55f4a..46fa81866 100644
+--- a/meta-oe/recipes-extended/libbacktrace/libbacktrace_git.bb
++++ b/meta-oe/recipes-extended/libbacktrace/libbacktrace_git.bb
+@@ -11,20 +11,17 @@ DEPENDS += "libunwind"
+ SRC_URI = "git://github.com/ianlancetaylor/libbacktrace;protocol=https;branch=master"
+ 
+ PV = "1.0+git${SRCPV}"
+-SRCREV = "4f57c999716847e45505b3df170150876b545088"
++SRCREV = "9ae4f4ae4481b1e69d38ed810980d33103544613"
+ 
+ S = "${WORKDIR}/git"
+ 
+ inherit autotools
+ 
+-EXTR_OECONF += "--with-system-libunwind"
+-
+-CFLAGS += "-fPIC"
++EXTRA_OECONF += "--with-system-libunwind --enable-shared --disable-static"
+ 
+ do_configure() {
+     oe_runconf
+ }
+ 
+-# libunwind does not support RISCV yet
+-COMPATIBLE_HOST:riscv64 = "null"
++# libunwind does not support RISCV32 yet
+ COMPATIBLE_HOST:riscv32 = "null"
+-- 
+2.30.2
 
 
