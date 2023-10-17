@@ -2,98 +2,121 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 622B2CDB482
-	for <webhook@archiver.kernel.org>; Tue, 17 Oct 2023 17:17:10 +0000 (UTC)
-Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
- by mx.groups.io with SMTP id smtpd.web11.224656.1697563026698581871
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 715D0CDB474
+	for <webhook@archiver.kernel.org>; Tue, 17 Oct 2023 17:26:10 +0000 (UTC)
+Received: from mail-ua1-f53.google.com (mail-ua1-f53.google.com [209.85.222.53])
+ by mx.groups.io with SMTP id smtpd.web11.225550.1697563566415691812
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 17 Oct 2023 10:17:06 -0700
+ Tue, 17 Oct 2023 10:26:06 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Vr3st+OV;
- spf=pass (domain: gmail.com, ip: 209.85.215.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f172.google.com with SMTP id 41be03b00d2f7-58e119bb28eso5372743a12.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Oct 2023 10:17:06 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=JQJbYdgK;
+ spf=pass (domain: gmail.com, ip: 209.85.222.53, mailfrom: raj.khem@gmail.com)
+Received: by mail-ua1-f53.google.com with SMTP id a1e0cc1a2514c-7b5f28da928so2229158241.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 17 Oct 2023 10:26:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1697563026; x=1698167826; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=kK60Dy3lE/DKeMxuU7WgVad0Sy+qJu510S8Pc2DGBso=;
-        b=Vr3st+OVNIK5UjYD7SccN0W7um6Lzr723xuf8kW+ZfD20Z+e0+ZEjgsQBWS/Z2c1/6
-         nn/CQ0KeCJ0TmJUVhsiafxnTeBA5y/tHUbuv5gneW/tRhCyxQzDEIM6r7nOPCM7CWH39
-         12+VOwNDbutiSyZzZZWZmUd1AcGukk1GrM0PUBFnJniX+6yOwCVFlT1cYqIj4yCUGK3M
-         PrVozRMkfaC6jCHP+3K1IbqkxHQtwV8Ug90R8K/Px5lHYZ0W2tqMO/Q7ZeM4mXg6qcuj
-         GTH8lrM11oJ0oJ+3vpp7CtrDZXa7pXfnV/mUOncBj1ntqM1YAlEpTaMwtpJnmFSHMJqq
-         M9jw==
+        d=gmail.com; s=20230601; t=1697563565; x=1698168365; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=9gqpn7waQNONgxamYLqrbnx0Jb1hWM4FrVix7AbaNcM=;
+        b=JQJbYdgKktw2ThytzXbYkm7qYadNBZpZijFEh5HveXzHiA4Wg+vGEuaqxWtdnFpiuV
+         E0SQqoGIsRit33bkWYDRAzWylLpjbJ794NrZt+QhprCU2a8MqaTfWYpJ95BNO1qmnt6V
+         H59b8HVTjzXGIZnHFfQulaAoFpPg09hvGDCh5aomtlo6AqNEXEGX7P7HC+YNjbz9stXG
+         3s1ED26TLLNoF5Iujhh+8/WFH+6Xqvtg6mXLvqMyvhUeqTpIO3wl7pqAM4bPb6b/WOuF
+         y7xCIO7g+D9J8+8WJKjtOHb0ULpbDi5wcJdo3dqn8/JZ88To4sWrVjl1V9LLPX5jpTAM
+         vtbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1697563026; x=1698167826;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=kK60Dy3lE/DKeMxuU7WgVad0Sy+qJu510S8Pc2DGBso=;
-        b=egX233+jmZ9cvVKvyOVCtnWCdYgFGcqHUKkmlqMSR1ag1+Z7jPGqOyrfJNrpbd4J7w
-         hAsPkBofQVyhSWLWu/enkYOXu0pgFJNBaQAnVE1I7j4UWYeEX9zD+m4Ytb7LrgvhTJsY
-         MYP//KiqWKCQqCNUYXHf2FDwDIxIcYrs/VnhyJ/1z7to4w+/YCtUFk+XbdzSgKvDxvXo
-         xSZfXMWhiEBg+1hPoeQw5qnNnQ4Zs+NyDICILZTGLgb+plsp/VaGUB3p++OZZ/gLX6xm
-         9vASWWPOTGckHpPUqQ40YKIKSly6KBUyxn3UzYG+HI17HWfn7MUP68FnDNHkXTyTCv8G
-         55IA==
-X-Gm-Message-State: AOJu0YzILJrdFfgu6EemtM3mGUvDu1RYtKjiuZckPZLZOAv5yRsgbiLc
-	nX9SyA/a6/5M8sFdyZqiR6vhAOTMz+evxQ==
-X-Google-Smtp-Source: AGHT+IGu63T3oj81jk6PziQyvBKbc+wBO/r+r9PQUbeeqDdmYfJ70snDRsCVwluOgvBbRDqto/CT4Q==
-X-Received: by 2002:a17:90b:3b4a:b0:277:422d:3a0f with SMTP id ot10-20020a17090b3b4a00b00277422d3a0fmr3830904pjb.17.1697563025691;
-        Tue, 17 Oct 2023 10:17:05 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9100:2cb0::7f07])
-        by smtp.gmail.com with ESMTPSA id nn18-20020a17090b38d200b00268b439a0cbsm1587129pjb.23.2023.10.17.10.17.04
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 17 Oct 2023 10:17:04 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] leveldb: Upgrade to 1.23 plus latest git
-Date: Tue, 17 Oct 2023 10:17:02 -0700
-Message-ID: <20231017171702.2964390-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.42.0
+        d=1e100.net; s=20230601; t=1697563565; x=1698168365;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=9gqpn7waQNONgxamYLqrbnx0Jb1hWM4FrVix7AbaNcM=;
+        b=EOekPBs/Se1s9qDq5so++0BL/KqUSXbJKnzZ0DToLqTQI81XYRv015qFIGmPEh/ERg
+         wdzusBFAAK89OBMAGfW6ZZYt4yDVeLjJOyg1BhAW14HZJqThINZRbFjsK+oisIoTw/y2
+         fKQOoxvdZtckmHgOj9Ch4TWKMiGS+htVwBkfsPL6G7JQLEDLOHpkLZAiWe3FR+oyCYWq
+         BgyDE8MlNM+ZgL5fJ5UJfl0vY5UDlEOel6EEjJBavKFmIxdVChGJGhT07oXPTSRW4uut
+         8l+ko71sVrl6tfsrK+cKTmbHmfL/HTsisnBT4JDK+XkhcSv7b/dpOOGhwxTBKHBiN53X
+         HZmA==
+X-Gm-Message-State: AOJu0YxOGSye/kitdbS86+iykPO8UoYlBvz7FPJcshDSWXmISTtdkW+P
+	d1ujr4Uiqk+m7d/C2/7W6YU/MxHWx6R9GfebwNRA0A8+dR+cpw==
+X-Google-Smtp-Source: AGHT+IG1NWHSJp0QQWLPfFZNBv3u6KICjxP7hhycE+F7mmEufTi8YIAui/37+tHr4G/UI93F8IRFm24hd6d2vF/AZCw=
+X-Received: by 2002:a05:6102:34eb:b0:457:e822:60e8 with SMTP id
+ bi11-20020a05610234eb00b00457e82260e8mr3095105vsb.29.1697563565256; Tue, 17
+ Oct 2023 10:26:05 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20231016090604.2306962-1-mingli.yu@windriver.com>
+In-Reply-To: <20231016090604.2306962-1-mingli.yu@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 17 Oct 2023 10:25:38 -0700
+Message-ID: <CAMKF1srxhYu1Cw+4Am34LkMA1gkSVzYebmS_jy5jM+seQgGnQg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] vboxguestdrivers: Remove the buildpath
+To: "Yu, Mingli" <mingli.yu@eng.windriver.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 17 Oct 2023 17:17:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105556
+ <openembedded-devel@lists.openembedded.org>; Tue, 17 Oct 2023 17:26:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105557
 
-Switch to git submods as it needs gtest and benchmarks checked out at a
-particular commit
+This patch is good but it fails now to compile with clang see
+https://errors.yoctoproject.org/Errors/Details/739936/
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../recipes-dbs/leveldb/{leveldb_1.22.bb => leveldb_1.23.bb} | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-dbs/leveldb/{leveldb_1.22.bb => leveldb_1.23.bb} (89%)
-
-diff --git a/meta-oe/recipes-dbs/leveldb/leveldb_1.22.bb b/meta-oe/recipes-dbs/leveldb/leveldb_1.23.bb
-similarity index 89%
-rename from meta-oe/recipes-dbs/leveldb/leveldb_1.22.bb
-rename to meta-oe/recipes-dbs/leveldb/leveldb_1.23.bb
-index 6afc45ab7e..61fa02c154 100644
---- a/meta-oe/recipes-dbs/leveldb/leveldb_1.22.bb
-+++ b/meta-oe/recipes-dbs/leveldb/leveldb_1.23.bb
-@@ -4,14 +4,13 @@ HOMEPAGE = "https://github.com/google/leveldb"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=92d1b128950b11ba8495b64938fc164d"
- 
--SRC_URI = "git://github.com/google/${BPN}.git;branch=main;protocol=https \
-+SRC_URI = "gitsm://github.com/google/${BPN}.git;branch=main;protocol=https \
-            file://run-ptest"
- 
--SRCREV = "78b39d68c15ba020c0d60a3906fb66dbf1697595"
-+SRCREV = "068d5ee1a3ac40dabd00d211d5013af44be55bea"
- S = "${WORKDIR}/git"
- 
- inherit cmake ptest
--
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[benchmarks] = "-DLEVELDB_BUILD_BENCHMARKS=ON,-DLEVELDB_BUILD_BENCHMARKS=OFF,sqlite"
- PACKAGECONFIG[snappy] = ",,snappy"
--- 
-2.42.0
-
+On Mon, Oct 16, 2023 at 2:06=E2=80=AFAM Yu, Mingli <mingli.yu@eng.windriver=
+.com> wrote:
+>
+> From: Mingli Yu <mingli.yu@windriver.com>
+>
+> Fixes:
+>   WARNING: vboxguestdrivers-7.0.10-r0 do_package_qa: QA Issue: File /usr/=
+lib/modules/6.1.51-yocto-standard/kernel/misc/vboxsf.ko in package kernel-m=
+odule-vboxsf-6.1.51-yocto-standard contains reference to TMPDIR [buildpaths=
+]
+>   WARNING: vboxguestdrivers-7.0.10-r0 do_package_qa: QA Issue: File /usr/=
+lib/modules/6.1.51-yocto-standard/kernel/misc/vboxguest.ko in package kerne=
+l-module-vboxguest-6.1.51-yocto-standard contains reference to TMPDIR [buil=
+dpaths]
+>   WARNING: vboxguestdrivers-7.0.10-r0 do_package_qa: QA Issue: File /usr/=
+lib/modules/6.1.51-yocto-standard/kernel/misc/vboxvideo.ko in package kerne=
+l-module-vboxvideo-6.1.51-yocto-standard contains reference to TMPDIR [buil=
+dpaths]
+>
+> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+> ---
+>  .../recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.10.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.=
+0.10.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.10.=
+bb
+> index 8e9013824..c478ac62e 100644
+> --- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.10.bb
+> +++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.10.bb
+> @@ -24,7 +24,7 @@ S:task-patch =3D "${WORKDIR}/${VBOX_NAME}"
+>  export VBOX_KBUILD_TARGET_ARCH=3D"${ARCH}"
+>  export VBOX_KBUILD_TARGET_ARCH:x86-64=3D"amd64"
+>
+> -EXTRA_OEMAKE +=3D "KERN_DIR=3D'${WORKDIR}/${KERNEL_VERSION}/build' KBUIL=
+D_VERBOSE=3D1"
+> +EXTRA_OEMAKE +=3D "KERN_DIR=3D'${WORKDIR}/${KERNEL_VERSION}/build' KBUIL=
+D_VERBOSE=3D1 CC=3D"${CC} ${DEBUG_PREFIX_MAP} -fdebug-prefix-map=3D${STAGIN=
+G_KERNEL_DIR}=3D${KERNEL_SRC_PATH}""
+>
+>  # otherwise 5.2.22 builds just vboxguest
+>  MAKE_TARGETS =3D "all"
+> --
+> 2.25.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#105542): https://lists.openembedded.org/g/openembedde=
+d-devel/message/105542
+> Mute This Topic: https://lists.openembedded.org/mt/101992179/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
