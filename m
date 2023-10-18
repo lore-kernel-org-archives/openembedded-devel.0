@@ -2,66 +2,64 @@ Return-Path: <akash.hadke27@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1258ACDB47E
-	for <webhook@archiver.kernel.org>; Wed, 18 Oct 2023 10:42:46 +0000 (UTC)
-Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com [209.85.210.194])
- by mx.groups.io with SMTP id smtpd.web11.278255.1697625757994723224
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0FD3ECDB47E
+	for <webhook@archiver.kernel.org>; Wed, 18 Oct 2023 10:44:26 +0000 (UTC)
+Received: from mail-oo1-f65.google.com (mail-oo1-f65.google.com [209.85.161.65])
+ by mx.groups.io with SMTP id smtpd.web11.278273.1697625857576879082
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 18 Oct 2023 03:42:38 -0700
+ Wed, 18 Oct 2023 03:44:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Ac20t5Aq;
- spf=pass (domain: gmail.com, ip: 209.85.210.194, mailfrom: akash.hadke27@gmail.com)
-Received: by mail-pf1-f194.google.com with SMTP id d2e1a72fcca58-6ba8eb7e581so1008021b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 18 Oct 2023 03:42:37 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Za2HkCvD;
+ spf=pass (domain: gmail.com, ip: 209.85.161.65, mailfrom: akash.hadke27@gmail.com)
+Received: by mail-oo1-f65.google.com with SMTP id 006d021491bc7-57bf04841ccso1372143eaf.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 18 Oct 2023 03:44:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1697625757; x=1698230557; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1697625856; x=1698230656; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=+5fWDjAHaXrV3nTbunhqkTXjictfBv8B5FQq2xCo4bM=;
-        b=Ac20t5AqRGxp+ZCwhVzM8Pnw6QMsR3QyClwOmJdBNv7x0Qg/GbULV7h1ZusPfCUsCE
-         LuRz1r8snbXZO09x7/Twv1OF0wIOSIAKlYLI6cStVt1/X3EdU0vhGLZdWblyaMAsdbcY
-         jo/1xWPAx48vGm4eIdqyQdZTac4Zjmd+kPz9rEbdLTrW3X9Ij1PJ9Dis1GxqU6uLLweE
-         EeUXJ7HG4/7otrlnpb01ZZr6PWdGs8788MGK+M+YAKQLadzXDgyVbopPw+sMBZlWQts8
-         Jajo18TRT7JlDG5CmGmCmne9mWRl/C5LNb1Q7OS1YoZo19PIZAamgCexYpT+N/3Ta06c
-         Qfuw==
+        bh=vVeGa8CFrNM36bJhhmi2g/OOeXShFPaDr20apxz2G04=;
+        b=Za2HkCvDZsKpM5DPZm/1FKBN5JAENyCybppQ4evjGjs70DZRxWu1KlXw9IE+OPj5qL
+         FzcqX68nWVPc2lMzXXrDGkGDmC718Iqo15morPglv+W21NSYtiZCuwBjeIg0FBikr0Ie
+         FCIj/pXZyctt3mOA1eYzJb8vH6F34O1kJr0iwb6SHcVujKL5IvlqOAnKzg9YgbGTp5Gh
+         kHYt7WeC1Y02mpA+e56cd7IcIwOi7MkJjiGqjeQfL8UsMhldDZ4T23To4ikc75H57N8T
+         RlF/YdkOHJYtzPO/PHQ/MKCx9tyGFwFrABFJTlGScxfmPo+xeX3Y98AARNMc0h8/jTtX
+         pxOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1697625757; x=1698230557;
+        d=1e100.net; s=20230601; t=1697625856; x=1698230656;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=+5fWDjAHaXrV3nTbunhqkTXjictfBv8B5FQq2xCo4bM=;
-        b=sxVOFpPFwEqDqIfe9ajkH458eGBCzYs1LZsjDX7WAsA03xPepxSPTACCt+8HyOZ4su
-         4ijjXviP9WsMN4oRxVfj9oe0uUy2Di5jVtXV/GmQmThJQ0nrNGAiqmACT7F5sR3JKOwP
-         fQrYGCptowDGUQKix4oE7S6k2agiUQ01Au1dDNAfItqGDzAKyr6NEP+8AEgH6KXAv+jp
-         LK+iqLxbHRM2iwaed6OvGZvig7CV52iUWhdnX24trm4TIAhNse6tjuaoypNWvGfzbjy7
-         z4F8Z6Sh6ibIUdMOZhLxYfUacuFf6Jfk+fHVc441XYIqqlC+kIQ0hbZ08daR3TmhFogZ
-         r2ZQ==
-X-Gm-Message-State: AOJu0Yznv+ruMhg5iXY9N/HQsrb4PcyWLHpJBg2Bj2mn7t/d7iJ3OYvY
-	kUHf6fafuKzYD2TGVshyxGdKznNpJiVXcg==
-X-Google-Smtp-Source: AGHT+IFYeRUumaxXKUc9WJT+GxggqljkAbFosYSjceDXEVwj93LeDrJzpYtUSc3cg369vKBOsC+BHQ==
-X-Received: by 2002:a05:6a20:c182:b0:15d:6fd3:8e74 with SMTP id bg2-20020a056a20c18200b0015d6fd38e74mr5379763pzb.3.1697625756904;
-        Wed, 18 Oct 2023 03:42:36 -0700 (PDT)
+        bh=vVeGa8CFrNM36bJhhmi2g/OOeXShFPaDr20apxz2G04=;
+        b=l6AgXB9XJAKqHlgAYcEISetE3lMS32EzfaSQthZUSNJY/aJcwfHSAOOSzXQquDL2h+
+         FA4fU/A+y3CN/tke0ZYuvK7zh2njr720hw3EdbsEUHP2UhHs42hHJEaHraHRHFtKZ/j0
+         acKDFpbOFhjoQ9IRwiSv4sgOo1UqQJkuVEzR0ly/PBRsyrldF8VpZPIPSq9jXwgBRl+J
+         w+F3GLlHBMI/eSjtk+4wSbySgPpTgiEHVeQRCyfVGiprlgTwyS2gUqydrXa0e31KbJkk
+         JePaiQ8YTSc0TiEhI9W/zjKshRfywz4gLzjxWfAJJlsfzSTURlQwwNoSQAVDJKnvzRGL
+         xBKQ==
+X-Gm-Message-State: AOJu0YwA6ec1NIaZOvVdeJvOyNOkT//rITnrMoXGeseG79/sJOR9bzO+
+	H9cMmtrFkhcd5sHiAZCxxyksZANZj/as9Q==
+X-Google-Smtp-Source: AGHT+IFmhG79dyDQTEm2aev3XS04gS3TPb9EXRyIP2KnQo56A3OVyO/PoZgbkpHhqq01sVa5JLgYAA==
+X-Received: by 2002:a05:6359:7041:b0:166:d98f:89b with SMTP id ua1-20020a056359704100b00166d98f089bmr4725640rwb.1.1697625856354;
+        Wed, 18 Oct 2023 03:44:16 -0700 (PDT)
 Received: from L-18010.kpit.com ([2401:4900:1c17:cf4:b6e8:1680:2a6e:78e2])
-        by smtp.gmail.com with ESMTPSA id 16-20020a17090a199000b002636dfcc6f5sm1139564pji.3.2023.10.18.03.42.34
+        by smtp.gmail.com with ESMTPSA id d12-20020a056a00198c00b0064f76992905sm2971174pfl.202.2023.10.18.03.44.14
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 18 Oct 2023 03:42:36 -0700 (PDT)
+        Wed, 18 Oct 2023 03:44:16 -0700 (PDT)
 From: Akash Hadke <akash.hadke27@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: ranjitsinh.rathod@kpit.com,
 	akash hadke <akash.hadke@kpit.com>
-Subject: [meta-java][kirkstone][PATCH] meta-java: Adapt LICENSE as SPDX identifiers
-Date: Wed, 18 Oct 2023 16:12:07 +0530
-Message-Id: <20231018104207.478330-1-akash.hadke27@gmail.com>
+Subject: [meta-java][master][PATCH] meta-java: Adapt LICENSE as SPDX identifiers
+Date: Wed, 18 Oct 2023 16:13:35 +0530
+Message-Id: <20231018104335.478441-1-akash.hadke27@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 18 Oct 2023 10:42:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105568
-
-From: akash hadke <akash.hadke@kpit.com>
+ <openembedded-devel@lists.openembedded.org>; Wed, 18 Oct 2023 10:44:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105569
 
 As per Yocto 4.0 migration, LICENSE variables should use SPDX
 identifiers
@@ -134,7 +132,7 @@ index c81e064..e325d94 100644
  
  DEPENDS = "fastjar-native zip-native"
 diff --git a/recipes-core/classpath/classpath.inc b/recipes-core/classpath/classpath.inc
-index 42c5daf..f3a6aff 100644
+index 35e7db3..0a53e14 100644
 --- a/recipes-core/classpath/classpath.inc
 +++ b/recipes-core/classpath/classpath.inc
 @@ -3,7 +3,7 @@ HOMEPAGE = "http://www.gnu.org/software/classpath/"
@@ -185,7 +183,7 @@ index 42ad957..d01d5b2 100644
  
  HOMEPAGE = "http://xom.nu"
 diff --git a/recipes-extended/dbus/dbus-java_2.7.bb b/recipes-extended/dbus/dbus-java_2.7.bb
-index ca7652a..e29264a 100644
+index 0e5ae92..1bfe5a7 100644
 --- a/recipes-extended/dbus/dbus-java_2.7.bb
 +++ b/recipes-extended/dbus/dbus-java_2.7.bb
 @@ -4,7 +4,7 @@ SUMMARY:${PN}-bin = "${SUMMARY} (Binaries)"
