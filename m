@@ -1,5346 +1,594 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E57E4CDB482
-	for <webhook@archiver.kernel.org>; Wed, 18 Oct 2023 22:08:05 +0000 (UTC)
-Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com [209.85.167.44])
- by mx.groups.io with SMTP id smtpd.web10.14142.1697666882303019161
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 38878CDB47E
+	for <webhook@archiver.kernel.org>; Wed, 18 Oct 2023 23:19:16 +0000 (UTC)
+Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com [209.85.128.182])
+ by mx.groups.io with SMTP id smtpd.web10.15628.1697671152456642151
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 18 Oct 2023 15:08:03 -0700
+ Wed, 18 Oct 2023 16:19:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ilDJlUve;
- spf=pass (domain: gmail.com, ip: 209.85.167.44, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lf1-f44.google.com with SMTP id 2adb3069b0e04-507973f3b65so9340300e87.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 18 Oct 2023 15:08:02 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=AOdO0AVI;
+ spf=pass (domain: gmail.com, ip: 209.85.128.182, mailfrom: ticotimo@gmail.com)
+Received: by mail-yw1-f182.google.com with SMTP id 00721157ae682-5a7c011e113so99219007b3.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 18 Oct 2023 16:19:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1697666880; x=1698271680; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=vaq3rImPV86eCs368aMfzVff0/xFwfthKpUs7F1NYVE=;
-        b=ilDJlUvewgVnemief3sayHXX2jjqNQv2v1bRBSAr3Z+w2u5/liNIolfD0pb/mi2Bdr
-         e9yjesQRnGBQBLrMxluaiYCZeNSZLZj/D7Ah8WL/1APRMhViZ4QNsWkvI4xrUXXay/c5
-         /+0Dx5P+nefWdQwsndZXXJhnx3FD7C6HL89OfWlUUFu2pTV0P9ERloATBdXxwsf+ccAq
-         V3CmrY2/njO5jg7eQnH/EBLjpRMiaOpYlJtOtzO/THSEhKcOC5xOopvZIjVeQrHTTqu0
-         hKkHKZDc7KU7J/kfEsMljse40BnU7supnWs2i+K8LuFdmJTz8YwFNHW3R4sKI6iUYzV+
-         En5w==
+        d=gmail.com; s=20230601; t=1697671151; x=1698275951; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=aOAc0B/LdHM36JefMpZ/1MtwG7wVhjClMKdACK5i5/c=;
+        b=AOdO0AVIqe/JQ6t42RudY0+ZFlVFHMcUQrnexC65jR6jx1SL/lst03/UGHRUU4JAct
+         fgfdg2BjyESMfh3XsYDHeHzNj5ZjCCnnh6ePWD1w865Ukzusmq5oeuEbdeNCV9cyXJ/e
+         p2OsBvpMw7g7RGV3l2/hfycnChcCP0/cWk4dzyjx+l3+WGPz9d+HUcCYjSiAU23cf6hN
+         kmXvOXwIlmgwV3OQJiYtgTIad+QZUZa62wZTmxNnZb1ERF24y1cA3Qhv88mlKpsENa6q
+         5Bx4UcYBwJyASgVKjB96HoHalEflIGfyTmHQnFUuSYyyLYAa6AM1IN8KcSC5dBTdQjx3
+         Dwrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1697666880; x=1698271680;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1697671151; x=1698275951;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=vaq3rImPV86eCs368aMfzVff0/xFwfthKpUs7F1NYVE=;
-        b=aCLg1HPJyDSuP1ifFqRxjNJfDipUztYrcF0btr60e7yATrbxeCMn1Dok5mDQOZTU2g
-         8SpLwpKbUWiRXT1Ssr7OkLwfsebSO+K63BTGrt1Hb0zdOwBaRfpeA4At7XY3cl2HYh//
-         fUy6WQxogrHRQKuyxykv5ZUOyG0NFI/bkkyFAGvSVIHHnkrXvakUSO6IMFeKIHKPl7F6
-         4LqO0pLHtHJrRWD9Ecw10ONQ6HIAx592s9jvm8/MkjIOuV3ttecckKakb0vqHl4QdTGU
-         PDM/p4czdwkze/BU5MQ4/IaEVm9skgRi3uAkxcvOpYPP/HIvDcT3ANAhb2QQm7+q7WkY
-         z15w==
-X-Gm-Message-State: AOJu0Yz9ikxAO4QoMmT8IC1t71QZUmWF6pHJGGc2DEb+iqR7zxx8qv7/
-	Kg7FDOsJeY96LD5ARKtYdGaxkRFJNmI=
-X-Google-Smtp-Source: AGHT+IHsEcpGgIwqo9yUR7pwSfZbMMRRzAu7KkF8vo1kP0D0OhS5gEiTJoR7m9Nj7nkhFMkwD1YIbg==
-X-Received: by 2002:ac2:464a:0:b0:507:9701:26ff with SMTP id s10-20020ac2464a000000b00507970126ffmr182945lfo.31.1697666879099;
-        Wed, 18 Oct 2023 15:07:59 -0700 (PDT)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id eg38-20020a05640228a600b0053e67bcb3e7sm3359102edb.82.2023.10.18.15.07.58
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 18 Oct 2023 15:07:58 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][RFC][PATCH] nodejs: Revert io_uring support from bundled libuv-1.46.0
-Date: Thu, 19 Oct 2023 00:07:54 +0200
-Message-ID: <20231018220754.2445290-1-martin.jansa@gmail.com>
-X-Mailer: git-send-email 2.42.0
+        bh=aOAc0B/LdHM36JefMpZ/1MtwG7wVhjClMKdACK5i5/c=;
+        b=UZ0mmd8ftLro4Vdo79gQwmJaK5UV8kUiSnimBT1cW365AxlaS6leMyWEwAlYV1oJAb
+         IzqbXIeJgjJza55TlTdz2+3JffN/w9RMYlDMe9BGyuTNihfTu0HYqECJViYVUD8IgVyy
+         2JX8yxaRq93oDllXVed5lhcoNQ/OtYjJa2VxUCjjKKi69YcWONWr8FCVN3bCwlOZnZuX
+         kUI06kEuCgte4TCAPzNC77134PBGgCNc3VoBTIF9GthWUXxONMwKPbFfkT3OjHOeNDn5
+         hzlmDXeATsM1Su+o2etEHVsMITYyk7m0bvP3dXaWMDb2bvbrt5/Izpq+P4z28h4OvCji
+         zvKA==
+X-Gm-Message-State: AOJu0YwWbfsLQ7nFal0Tzxgyb78BAucW7SNtgW5FVYXAl3aZ4wS6nd0o
+	RNQhy9UcTlC2rDUt43rmxM2rlXp6fLoYxy/xQfQ=
+X-Google-Smtp-Source: AGHT+IHIvytUTJyn3esMw9F7BX7XK22cX7o4OFZjpz68Nmu8n4H1k3mXZGld+FB1gpv8tB2ctBYdKHCeAtiTMuk+tPc=
+X-Received: by 2002:a81:5d57:0:b0:5a7:b481:4dd2 with SMTP id
+ r84-20020a815d57000000b005a7b4814dd2mr711064ywb.47.1697671151518; Wed, 18 Oct
+ 2023 16:19:11 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20230928091304.4000026-1-archana.polampalli@windriver.com>
+ <178A59668B8F4A5C.9230@lists.openembedded.org> <CA+chaQfec515o-qNEYWWhsnAxcwDy2fKeo9ShM1up61HaNMW_w@mail.gmail.com>
+In-Reply-To: <CA+chaQfec515o-qNEYWWhsnAxcwDy2fKeo9ShM1up61HaNMW_w@mail.gmail.com>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Wed, 18 Oct 2023 16:19:00 -0700
+Message-ID: <CANx9H-AzDAv-wnyBKGTpFu_+d6HXhp0pv2muABWhNf+GqUNxqQ@mail.gmail.com>
+Subject: Re: [oe][meta-oe][PATCH 1/1] nodejs: upgrade 18.17.1 -> 20.5.1
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: archana.polampalli@windriver.com, 
+	openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000ee87eb060805dd10"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 18 Oct 2023 22:08:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105584
+ <openembedded-devel@lists.openembedded.org>; Wed, 18 Oct 2023 23:19:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105585
 
-* Pseudo fails to intercept some of the syscalls used by the
-  new version as documented in:
-  https://github.com/shr-project/com.webos.app.minimal/tree/recipes
+--000000000000ee87eb060805dd10
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Now we have 3 options:
+On Wed, Oct 18, 2023 at 1:41=E2=80=AFPM Martin Jansa <martin.jansa@gmail.co=
+m> wrote:
 
-1) every use of nodejs-native where io_uring might be used (like in webpack)
-   needs to export UV_USE_IO_URING=0 before using node, but be aware that
-   the PR says it's only temporary and this variable might be removed in future.
-   Unfortunately many people are lucky enough not to know what pseudo even is,
-   so they might not realize that host-user-contamination QA issues or
-   "KeyError: 'getpwuid(): uid not found" might be related to this (and they
-   probably won't find this e-mail as well:
-   https://lists.openembedded.org/g/openembedded-devel/message/105583
+> I've narrowed this down to simple reproducer with webpack creating pack
+> with "hello world" as shown in:
+> https://github.com/shr-project/com.webos.app.minimal/tree/recipes
+>
+> Then with this reproducer I've bisected it to nodejs-20.3.0 with libuv
+> upgrade 1.45.0 which brings support for io_uring which doesn't work with
+> pseudo in:
+>
+> https://github.com/libuv/libuv/pull/3952/commits/26c79a942b92573a1388c0ee=
+8a6ad4397f009318
+>
+> Now we have 3 options:
+>
+> 1) either every use of nodejs-native where io_uring might be used (like i=
+n
+> webpack) needs to export UV_USE_IO_URING=3D0 before using node, but be aw=
+are
+> that the PR says it's only temporary and this variable might be removed i=
+n
+> future. Unfortunately many people are lucky enough not to know what pseud=
+o
+> even is, so they might not realize that host-user-contamination QA issues
+> or "KeyError: 'getpwuid(): uid not found" might be related to this (and
+> they probably won't find this e-mail as well).
+>
+> 2) revert the io_uring changes from bundled libuv, I've already verified
+> this with nodejs-20.3.0, for 20.8.1 it would need couple more commits to =
+be
+> reverted as 20.8.1 uses even newer libuv-1.46.0. The changes are massive
+> and it will be PIA to update them for every nodejs release, patch for
+> keeping UV_USE_IO_URING support after it's removed from upstream libuv wi=
+ll
+> be much smaller, but PIA to use UV_USE_IO_URING whenever using
+> nodejs-native during build.
+>
+> 3) fix pseudo to correctly work with io_uring calls, definitely best
+> long-term solution as more and more tools will now switch to io_uring, bu=
+t
+> without active maintainer of pseudo it might be _very_ difficult to
+> implement this and there aren't many people willing to touch this beast.
+>
+> Any opinions?
+>
+>
+I would advise we not be overly aggressive about updates for important
+tools like NodeJS and Django.
 
-2) revert the io_uring changes from bundled libuv, to make sure it stays disabled.
-   The changes are massive and it will be PIA to update them for every nodejs release
-   I've already separated them for nodejs-20.3.0 where I've initialy tested this
-   on top of libuv-1.45.0 and for 20.4.0 this need another patch for changes
-   from libuv-1.46.0.
-   Patch for keeping UV_USE_IO_URING support after it's removed from upstream libuv
-   will be much smaller, but PIA to use UV_USE_IO_URING whenever using nodejs-native
-   during build.
+I don't think many consumers are building products on the latest greatest
+NodeJS release (which this isn't, latest is 21), many may not even be on
+the latest LTS (18 vs.16). While we can have a floating "latest" recipe, we
+should keep an LTS recipe.
+We tried to do this for Django in meta-python, but later commits wiped out
+the comments and the upstream check.
+https://git.openembedded.org/meta-openembedded/commit/meta-python/recipes-d=
+evtools/python?id=3D961755a7bd17f7347f7dd0f2de3d2400a9c36f09
 
-3) fix pseudo to correctly work with io_uring calls, definitely best long-term solution
-   as more and more tools will now switch to io_uring, but without active maintainer
-   of pseudo it might be _very_ difficult to implement this and there aren't many
-   people willing to touch this beast.
 
-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
----
- ...t-io_uring-changes-from-libuv-1.46.0.patch | 3414 +++++++++++++++++
- ...t-io_uring-changes-from-libuv-1.45.0.patch | 1803 +++++++++
- .../recipes-devtools/nodejs/nodejs_20.8.1.bb  |    2 +
- 3 files changed, 5219 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0001-Revert-io_uring-changes-from-libuv-1.46.0.patch
- create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0002-Revert-io_uring-changes-from-libuv-1.45.0.patch
+On Mon, Oct 2, 2023 at 7:08=E2=80=AFPM Martin Jansa via lists.openembedded.=
+org
+> <martin.jansa=3Dgmail.com@lists.openembedded.org> wrote:
+>
+>> On Thu, Sep 28, 2023 at 11:13=E2=80=AFAM Polampalli, Archana via
+>> lists.openembedded.org <archana.polampalli=3D
+>> windriver.com@lists.openembedded.org> wrote:
+>>
+>>> Update to latest release of latest LTS 20 release
+>>>
+>>>     * node v20 introduces several new features and fixes many bugs and
+>>> CVEs as shown in [1]
+>>>
+>>>     * Refresh 0001-liftoff-Correct-function-signatures.patch against
+>>> 20.5.1
+>>>
+>>>     * License-Update:
+>>>        - Change zlib version 1.2.13, October 13th, 2022 to version
+>>> 1.2.13.1, October xxth, 2022 [2]
+>>>        - Change Copyright 2023 from Ada authors to Yagiz Nizipli and
+>>> Daniel Lemire [4]
+>>>
+>>>     * Remove big-endian.patch as it is merged in v20.x [5] [6]
+>>>
+>>>     * Remove below list of patches since mips32 is deleted from v8 as
+>>> part of update V8 to 10.7.193.13 [7] [8]
+>>>        - mips-less-memory.patch
+>>>        - 0001-mips-Use-32bit-cast-for-operand-on-mips32.patch
+>>>
+>>>     * Update Using-native-binaries.patch for node_js2c, it resolved
+>>> below do_compile error [9]
+>>>        Error:
+>>>        /bin/sh: line 1:
+>>> build/tmp/work/core2-64-poky-linux/nodejs/20.5.1/node-v20.5.1/out/Relea=
+se/node_js2c:
+>>> No such file or directory
+>>>
+>>>     * Remove obsolete dtrace & etw configure options (we had:
+>>> --without-<feature>) from the recipe [10]
+>>
+>>
+>> FYI: (in case someone else are seeing similar issues now)
+>>
+>> With this upgrade I'm seeing some files created during the build with
+>> node not to be intercepted by pseudo and recorded in its database.
+>>
+>> This results in sstate_report_unihash failure, because appinfo.json is
+>> now owned by 1026:1026 (my build UID/GID) instead of 0:0 as before:
+>>
+>> DEBUG: Executing python function sstate_report_unihash
+>> WARNING: KeyError in
+>> ./package/usr/palm/applications/com.webos.app.videoplayer/appinfo.json
+>> ERROR: Error executing a python function in exec_func_python()
+>> autogenerated:
+>>
+>> The stack trace of python calls that resulted in this exception/failure
+>> was:
+>> File: 'exec_func_python() autogenerated', lineno: 2, function: <module>
+>>      0001:
+>>  *** 0002:sstate_report_unihash(d)
+>>      0003:
+>> File:
+>> '/OE/build/luneos-nanbield/openembedded-core/meta/classes-global/sstate.=
+bbclass',
+>> lineno: 880, function: sstate_report_unihash
+>>      0876:    report_unihash =3D getattr(bb.parse.siggen, 'report_unihas=
+h',
+>> None)
+>>      0877:
+>>      0878:    if report_unihash:
+>>      0879:        ss =3D sstate_state_fromvars(d)
+>>  *** 0880:        report_unihash(os.getcwd(), ss['task'], d)
+>>      0881:}
+>>      0882:
+>>      0883:#
+>>      0884:# Shell function to decompress and prepare a package for
+>> installation
+>> File: '/OE/build/luneos-nanbield/bitbake/lib/bb/siggen.py', lineno: 659,
+>> function: report_unihash
+>>      0655:
+>>      0656:            if "." in self.method:
+>>      0657:                (module, method) =3D self.method.rsplit('.', 1=
+)
+>>      0658:                locs['method'] =3D
+>> getattr(importlib.import_module(module), method)
+>>  *** 0659:                outhash =3D bb.utils.better_eval('method(path,
+>> sigfile, task, d)', locs)
+>>      0660:            else:
+>>      0661:                outhash =3D bb.utils.better_eval(self.method +
+>> '(path, sigfile, task, d)', locs)
+>>      0662:
+>>      0663:            try:
+>> File: '/OE/build/luneos-nanbield/bitbake/lib/bb/utils.py', lineno: 434,
+>> function: better_eval
+>>      0430:    if extraglobals:
+>>      0431:        ctx =3D copy.copy(ctx)
+>>      0432:        for g in extraglobals:
+>>      0433:            ctx[g] =3D extraglobals[g]
+>>  *** 0434:    return eval(source, ctx, locals)
+>>      0435:
+>>      0436:@contextmanager
+>>      0437:def fileslocked(files, *args, **kwargs):
+>>      0438:    """Context manager for locking and unlocking file locks.""=
+"
+>> File: '<string>', lineno: 1, function: <module>
+>>   File "<string>", line 1, in <module>
+>>
+>> File:
+>> '/OE/build/luneos-nanbield/openembedded-core/meta/lib/oe/sstatesig.py',
+>> lineno: 649, function: OEOuthashBasic
+>>      0645:                process(root)
+>>      0646:            for f in files:
+>>      0647:                if f =3D=3D 'fixmepath':
+>>      0648:                    continue
+>>  *** 0649:                process(os.path.join(root, f))
+>>      0650:
+>>      0651:            for dir in dirs:
+>>      0652:                if os.path.islink(os.path.join(root, dir)):
+>>      0653:                    process(os.path.join(root, dir))
+>> File:
+>> '/OE/build/luneos-nanbield/openembedded-core/meta/lib/oe/sstatesig.py',
+>> lineno: 588, function: process
+>>      0584:                    except KeyError as e:
+>>      0585:                        bb.warn("KeyError in %s" % path)
+>>      0586:                        msg =3D ("KeyError: %s\nPath %s is own=
+ed
+>> by uid %d, gid %d, which doesn't match "
+>>      0587:                            "any user/group on target. This ma=
+y
+>> be due to host contamination." % (e, path, s.st_uid, s.st_gid))
+>>  *** 0588:                        raise
+>> Exception(msg).with_traceback(e.__traceback__)
+>>      0589:
+>>      0590:                if include_timestamps:
+>>      0591:                    update_hash(" %10d" % s.st_mtime)
+>>      0592:
+>> File:
+>> '/OE/build/luneos-nanbield/openembedded-core/meta/lib/oe/sstatesig.py',
+>> lineno: 582, function: process
+>>      0578:                    else:
+>>      0579:                        add_perm(stat.S_IXOTH, 'x')
+>>      0580:
+>>      0581:                    try:
+>>  *** 0582:                        update_hash(" %10s" %
+>> pwd.getpwuid(s.st_uid).pw_name)
+>>      0583:                        update_hash(" %10s" %
+>> grp.getgrgid(s.st_gid).gr_name)
+>>      0584:                    except KeyError as e:
+>>      0585:                        bb.warn("KeyError in %s" % path)
+>>      0586:                        msg =3D ("KeyError: %s\nPath %s is own=
+ed
+>> by uid %d, gid %d, which doesn't match "
+>> Exception: Exception: KeyError: 'getpwuid(): uid not found: 1026'
+>> Path
+>> ./package/usr/palm/applications/com.webos.app.videoplayer/appinfo.json i=
+s
+>> owned by uid 1026, gid 1026, which doesn't match any user/group on targe=
+t.
+>> This may be due to host contamination.
+>>
+>> martin@jama
+>> /OE/build/luneos-nanbield/tmp-glibc/work/corei7-64-webos-linux/com.webos=
+.app.videoplayer
+>> $ sqlite3 0.0.1-12+git-nodejs-20/pseudo/files.db "select * from files wh=
+ere
+>> path like '%yer/appinfo.json'"
+>>
+>> 1107|/OE/build/luneos-nanbield/tmp-glibc/work/corei7-64-webos-linux/com.=
+webos.app.videoplayer/0.0.1-12+git/sstate-build-package/package/usr/palm/ap=
+plications/com.webos.app.videoplayer/appinfo.json|66305|41202418|1026|1026|=
+33188|0|0
+>>
+>> 1192|/OE/build/luneos-nanbield/tmp-glibc/work/corei7-64-webos-linux/com.=
+webos.app.videoplayer/0.0.1-12+git/sstate-build-package/packages-split/com.=
+webos.app.videoplayer/usr/palm/applications/com.webos.app.videoplayer/appin=
+fo.json|66305|41
+>> 202418|1026|1026|33188|0|0
+>>
+>> martin@jama
+>> /OE/build/luneos-nanbield/tmp-glibc/work/corei7-64-webos-linux/com.webos=
+.app.videoplayer
+>> $ sqlite3 0.0.1-12+git-nodejs-18/pseudo/files.db "select * from files wh=
+ere
+>> path like '%yer/appinfo.json'"
+>>
+>> 56|/OE/build/luneos-nanbield/tmp-glibc/work/corei7-64-webos-linux/com.we=
+bos.app.videoplayer/0.0.1-12+git/image/usr/palm/applications/com.webos.app.=
+videoplayer/appinfo.json|66305|42878067|0|0|33188|0|0
+>>
+>> 374|/OE/build/luneos-nanbield/tmp-glibc/work/corei7-64-webos-linux/com.w=
+ebos.app.videoplayer/0.0.1-12+git/package/usr/palm/applications/com.webos.a=
+pp.videoplayer/appinfo.json|66305|42878641|0|0|33188|0|0
+>>
+>> 459|/OE/build/luneos-nanbield/tmp-glibc/work/corei7-64-webos-linux/com.w=
+ebos.app.videoplayer/0.0.1-12+git/packages-split/com.webos.app.videoplayer/=
+usr/palm/applications/com.webos.app.videoplayer/appinfo.json|66305|42878641=
+|0|0|33188|0|0
+>>
+>> I'll provide more details when I debug this further.
+>>
+>> Regards,
+>>
+>>
+>>
+>>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#105583):
+> https://lists.openembedded.org/g/openembedded-devel/message/105583
+> Mute This Topic: https://lists.openembedded.org/mt/101098430/924729
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> ticotimo@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-Revert-io_uring-changes-from-libuv-1.46.0.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0001-Revert-io_uring-changes-from-libuv-1.46.0.patch
-new file mode 100644
-index 0000000000..d98463d0d8
---- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/0001-Revert-io_uring-changes-from-libuv-1.46.0.patch
-@@ -0,0 +1,3414 @@
-+From 937dfa70104b7401a7570a98cf6e0a534e250557 Mon Sep 17 00:00:00 2001
-+From: Martin Jansa <martin.jansa@gmail.com>
-+Date: Wed, 18 Oct 2023 22:43:55 +0200
-+Subject: [PATCH] Revert io_uring changes from libuv-1.46.0
-+
-+Included in nodejs-20.4.0 with the libuv upgrade to 1.46.0 in:
-+https://github.com/nodejs/node/commit/6199e1946c9abd59bd71a61870a4f6c85e100b18
-+
-+Revert "linux: work around io_uring IORING_OP_CLOSE bug (#4059)"
-+This reverts commit 1752791c9ea89dbf54e2a20a9d9f899119a2d179.
-+Revert "linux: fs_read to use io_uring if iovcnt > IOV_MAX (#4023)"
-+This reverts commit e7b96331703e929e75d93c574573c9736e34b0c0.
-+Revert "linux: add some more iouring backed fs ops (#4012)"
-+This reverts commit 962b8e626ceaaf296eecab1d008e8b70dc6da5e7.
-+Revert "android: disable io_uring support (#4016)"
-+This reverts commit 281e6185cc9e77c582ff6ca9e4c00d57e6b90d95.
-+Revert "unix,win: replace QUEUE with struct uv__queue (#4022)"
-+This reverts commit 1b01b786c0180d29f07dccbb98001a2b3148828a.
-+Revert "fs: use WTF-8 on Windows (#2970)"
-+This reverts commit 8f32a14afaaa47514a7d28e1e069a8329e2dd939.
-+
-+Dropped deps/uv/docs deps/uv/test changes as these dirs aren't included
-+in nodejs tarballs.
-+
-+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
-+---
-+Upstream-Status: Inappropriate [OE specific]
-+
-+ deps/uv/include/uv.h                     |  10 +-
-+ deps/uv/include/uv/darwin.h              |   6 +-
-+ deps/uv/include/uv/linux.h               |   2 +-
-+ deps/uv/include/uv/threadpool.h          |   2 +-
-+ deps/uv/include/uv/unix.h                |  44 ++--
-+ deps/uv/include/uv/win.h                 |   4 +-
-+ deps/uv/src/queue.h                      | 154 ++++++-----
-+ deps/uv/src/threadpool.c                 |  72 +++---
-+ deps/uv/src/unix/aix.c                   |  14 +-
-+ deps/uv/src/unix/async.c                 |  52 ++--
-+ deps/uv/src/unix/core.c                  |  53 ++--
-+ deps/uv/src/unix/fs.c                    |  41 +--
-+ deps/uv/src/unix/fsevents.c              |  84 +++---
-+ deps/uv/src/unix/internal.h              |  11 -
-+ deps/uv/src/unix/kqueue.c                |  18 +-
-+ deps/uv/src/unix/linux.c                 | 257 +++----------------
-+ deps/uv/src/unix/loop-watcher.c          |  20 +-
-+ deps/uv/src/unix/loop.c                  |  28 +-
-+ deps/uv/src/unix/os390-syscalls.c        |  24 +-
-+ deps/uv/src/unix/os390-syscalls.h        |   2 +-
-+ deps/uv/src/unix/os390.c                 |  14 +-
-+ deps/uv/src/unix/pipe.c                  |   2 +-
-+ deps/uv/src/unix/posix-poll.c            |  14 +-
-+ deps/uv/src/unix/process.c               |  38 +--
-+ deps/uv/src/unix/signal.c                |   8 +-
-+ deps/uv/src/unix/stream.c                |  56 ++--
-+ deps/uv/src/unix/sunos.c                 |  18 +-
-+ deps/uv/src/unix/tcp.c                   |   4 +-
-+ deps/uv/src/unix/tty.c                   |   2 +-
-+ deps/uv/src/unix/udp.c                   |  76 +++---
-+ deps/uv/src/uv-common.c                  |  28 +-
-+ deps/uv/src/uv-common.h                  |   3 +-
-+ deps/uv/src/win/core.c                   |   6 +-
-+ deps/uv/src/win/fs.c                     | 311 ++++++++---------------
-+ deps/uv/src/win/handle-inl.h             |   2 +-
-+ deps/uv/src/win/pipe.c                   |  26 +-
-+ deps/uv/src/win/tcp.c                    |   4 +-
-+ deps/uv/src/win/udp.c                    |   4 +-
-+ deps/uv/test/test-fs.c                   |  53 ----
-+ deps/uv/test/test-list.h                 |   2 -
-+ deps/uv/test/test-queue-foreach-delete.c |   5 +-
-+ deps/uv/test/test-threadpool-cancel.c    |   5 -
-+ 42 files changed, 625 insertions(+), 954 deletions(-)
-+
-+diff --git a/deps/uv/include/uv.h b/deps/uv/include/uv.h
-+index 02397dd0fdd..1af95289776 100644
-+--- a/deps/uv/include/uv.h
-++++ b/deps/uv/include/uv.h
-+@@ -59,12 +59,6 @@ extern "C" {
-+ #include <stdio.h>
-+ #include <stdint.h>
-+ 
-+-/* Internal type, do not use. */
-+-struct uv__queue {
-+-  struct uv__queue* next;
-+-  struct uv__queue* prev;
-+-};
-+-
-+ #if defined(_WIN32)
-+ # include "uv/win.h"
-+ #else
-+@@ -466,7 +460,7 @@ struct uv_shutdown_s {
-+   uv_handle_type type;                                                        \
-+   /* private */                                                               \
-+   uv_close_cb close_cb;                                                       \
-+-  struct uv__queue handle_queue;                                              \
-++  void* handle_queue[2];                                                      \
-+   union {                                                                     \
-+     int fd;                                                                   \
-+     void* reserved[4];                                                        \
-+@@ -1870,7 +1864,7 @@ struct uv_loop_s {
-+   void* data;
-+   /* Loop reference counting. */
-+   unsigned int active_handles;
-+-  struct uv__queue handle_queue;
-++  void* handle_queue[2];
-+   union {
-+     void* unused;
-+     unsigned int count;
-+diff --git a/deps/uv/include/uv/darwin.h b/deps/uv/include/uv/darwin.h
-+index 06962bfda80..d226415820b 100644
-+--- a/deps/uv/include/uv/darwin.h
-++++ b/deps/uv/include/uv/darwin.h
-+@@ -40,7 +40,7 @@
-+   void* cf_state;                                                             \
-+   uv_mutex_t cf_mutex;                                                        \
-+   uv_sem_t cf_sem;                                                            \
-+-  struct uv__queue cf_signals;                                                \
-++  void* cf_signals[2];                                                        \
-+ 
-+ #define UV_PLATFORM_FS_EVENT_FIELDS                                           \
-+   uv__io_t event_watcher;                                                     \
-+@@ -48,8 +48,8 @@
-+   int realpath_len;                                                           \
-+   int cf_flags;                                                               \
-+   uv_async_t* cf_cb;                                                          \
-+-  struct uv__queue cf_events;                                                 \
-+-  struct uv__queue cf_member;                                                 \
-++  void* cf_events[2];                                                         \
-++  void* cf_member[2];                                                         \
-+   int cf_error;                                                               \
-+   uv_mutex_t cf_mutex;                                                        \
-+ 
-+diff --git a/deps/uv/include/uv/linux.h b/deps/uv/include/uv/linux.h
-+index 9f22f8cf726..9b38405a190 100644
-+--- a/deps/uv/include/uv/linux.h
-++++ b/deps/uv/include/uv/linux.h
-+@@ -28,7 +28,7 @@
-+   int inotify_fd;                                                             \
-+ 
-+ #define UV_PLATFORM_FS_EVENT_FIELDS                                           \
-+-  struct uv__queue watchers;                                                  \
-++  void* watchers[2];                                                          \
-+   int wd;                                                                     \
-+ 
-+ #endif /* UV_LINUX_H */
-+diff --git a/deps/uv/include/uv/threadpool.h b/deps/uv/include/uv/threadpool.h
-+index 24ce916fda4..9708ebdd530 100644
-+--- a/deps/uv/include/uv/threadpool.h
-++++ b/deps/uv/include/uv/threadpool.h
-+@@ -31,7 +31,7 @@ struct uv__work {
-+   void (*work)(struct uv__work *w);
-+   void (*done)(struct uv__work *w, int status);
-+   struct uv_loop_s* loop;
-+-  struct uv__queue wq;
-++  void* wq[2];
-+ };
-+ 
-+ #endif /* UV_THREADPOOL_H_ */
-+diff --git a/deps/uv/include/uv/unix.h b/deps/uv/include/uv/unix.h
-+index 09f88a56742..95447b8dd67 100644
-+--- a/deps/uv/include/uv/unix.h
-++++ b/deps/uv/include/uv/unix.h
-+@@ -92,8 +92,8 @@ typedef struct uv__io_s uv__io_t;
-+ 
-+ struct uv__io_s {
-+   uv__io_cb cb;
-+-  struct uv__queue pending_queue;
-+-  struct uv__queue watcher_queue;
-++  void* pending_queue[2];
-++  void* watcher_queue[2];
-+   unsigned int pevents; /* Pending event mask i.e. mask at next tick. */
-+   unsigned int events;  /* Current event mask. */
-+   int fd;
-+@@ -220,21 +220,21 @@ typedef struct {
-+ #define UV_LOOP_PRIVATE_FIELDS                                                \
-+   unsigned long flags;                                                        \
-+   int backend_fd;                                                             \
-+-  struct uv__queue pending_queue;                                             \
-+-  struct uv__queue watcher_queue;                                             \
-++  void* pending_queue[2];                                                     \
-++  void* watcher_queue[2];                                                     \
-+   uv__io_t** watchers;                                                        \
-+   unsigned int nwatchers;                                                     \
-+   unsigned int nfds;                                                          \
-+-  struct uv__queue wq;                                                        \
-++  void* wq[2];                                                                \
-+   uv_mutex_t wq_mutex;                                                        \
-+   uv_async_t wq_async;                                                        \
-+   uv_rwlock_t cloexec_lock;                                                   \
-+   uv_handle_t* closing_handles;                                               \
-+-  struct uv__queue process_handles;                                           \
-+-  struct uv__queue prepare_handles;                                           \
-+-  struct uv__queue check_handles;                                             \
-+-  struct uv__queue idle_handles;                                              \
-+-  struct uv__queue async_handles;                                             \
-++  void* process_handles[2];                                                   \
-++  void* prepare_handles[2];                                                   \
-++  void* check_handles[2];                                                     \
-++  void* idle_handles[2];                                                      \
-++  void* async_handles[2];                                                     \
-+   void (*async_unused)(void);  /* TODO(bnoordhuis) Remove in libuv v2. */     \
-+   uv__io_t async_io_watcher;                                                  \
-+   int async_wfd;                                                              \
-+@@ -257,7 +257,7 @@ typedef struct {
-+ #define UV_PRIVATE_REQ_TYPES /* empty */
-+ 
-+ #define UV_WRITE_PRIVATE_FIELDS                                               \
-+-  struct uv__queue queue;                                                     \
-++  void* queue[2];                                                             \
-+   unsigned int write_index;                                                   \
-+   uv_buf_t* bufs;                                                             \
-+   unsigned int nbufs;                                                         \
-+@@ -265,12 +265,12 @@ typedef struct {
-+   uv_buf_t bufsml[4];                                                         \
-+ 
-+ #define UV_CONNECT_PRIVATE_FIELDS                                             \
-+-  struct uv__queue queue;                                                     \
-++  void* queue[2];                                                             \
-+ 
-+ #define UV_SHUTDOWN_PRIVATE_FIELDS /* empty */
-+ 
-+ #define UV_UDP_SEND_PRIVATE_FIELDS                                            \
-+-  struct uv__queue queue;                                                     \
-++  void* queue[2];                                                             \
-+   struct sockaddr_storage addr;                                               \
-+   unsigned int nbufs;                                                         \
-+   uv_buf_t* bufs;                                                             \
-+@@ -286,8 +286,8 @@ typedef struct {
-+   uv_connect_t *connect_req;                                                  \
-+   uv_shutdown_t *shutdown_req;                                                \
-+   uv__io_t io_watcher;                                                        \
-+-  struct uv__queue write_queue;                                               \
-+-  struct uv__queue write_completed_queue;                                     \
-++  void* write_queue[2];                                                       \
-++  void* write_completed_queue[2];                                             \
-+   uv_connection_cb connection_cb;                                             \
-+   int delayed_error;                                                          \
-+   int accepted_fd;                                                            \
-+@@ -300,8 +300,8 @@ typedef struct {
-+   uv_alloc_cb alloc_cb;                                                       \
-+   uv_udp_recv_cb recv_cb;                                                     \
-+   uv__io_t io_watcher;                                                        \
-+-  struct uv__queue write_queue;                                               \
-+-  struct uv__queue write_completed_queue;                                     \
-++  void* write_queue[2];                                                       \
-++  void* write_completed_queue[2];                                             \
-+ 
-+ #define UV_PIPE_PRIVATE_FIELDS                                                \
-+   const char* pipe_fname; /* NULL or strdup'ed */
-+@@ -311,19 +311,19 @@ typedef struct {
-+ 
-+ #define UV_PREPARE_PRIVATE_FIELDS                                             \
-+   uv_prepare_cb prepare_cb;                                                   \
-+-  struct uv__queue queue;                                                     \
-++  void* queue[2];                                                             \
-+ 
-+ #define UV_CHECK_PRIVATE_FIELDS                                               \
-+   uv_check_cb check_cb;                                                       \
-+-  struct uv__queue queue;                                                     \
-++  void* queue[2];                                                             \
-+ 
-+ #define UV_IDLE_PRIVATE_FIELDS                                                \
-+   uv_idle_cb idle_cb;                                                         \
-+-  struct uv__queue queue;                                                     \
-++  void* queue[2];                                                             \
-+ 
-+ #define UV_ASYNC_PRIVATE_FIELDS                                               \
-+   uv_async_cb async_cb;                                                       \
-+-  struct uv__queue queue;                                                     \
-++  void* queue[2];                                                             \
-+   int pending;                                                                \
-+ 
-+ #define UV_TIMER_PRIVATE_FIELDS                                               \
-+@@ -352,7 +352,7 @@ typedef struct {
-+   int retcode;
-+ 
-+ #define UV_PROCESS_PRIVATE_FIELDS                                             \
-+-  struct uv__queue queue;                                                     \
-++  void* queue[2];                                                             \
-+   int status;                                                                 \
-+ 
-+ #define UV_FS_PRIVATE_FIELDS                                                  \
-+diff --git a/deps/uv/include/uv/win.h b/deps/uv/include/uv/win.h
-+index 6f8c47298e4..92a95fa15f1 100644
-+--- a/deps/uv/include/uv/win.h
-++++ b/deps/uv/include/uv/win.h
-+@@ -357,7 +357,7 @@ typedef struct {
-+   /* Counter to started timer */                                              \
-+   uint64_t timer_counter;                                                     \
-+   /* Threadpool */                                                            \
-+-  struct uv__queue wq;                                                        \
-++  void* wq[2];                                                                \
-+   uv_mutex_t wq_mutex;                                                        \
-+   uv_async_t wq_async;
-+ 
-+@@ -486,7 +486,7 @@ typedef struct {
-+     uint32_t payload_remaining;                                               \
-+     uint64_t dummy; /* TODO: retained for ABI compat; remove this in v2.x. */ \
-+   } ipc_data_frame;                                                           \
-+-  struct uv__queue ipc_xfer_queue;                                            \
-++  void* ipc_xfer_queue[2];                                                    \
-+   int ipc_xfer_queue_length;                                                  \
-+   uv_write_t* non_overlapped_writes_tail;                                     \
-+   CRITICAL_SECTION readfile_thread_lock;                                      \
-+diff --git a/deps/uv/src/queue.h b/deps/uv/src/queue.h
-+index 5f8489e9bc5..ff3540a0a51 100644
-+--- a/deps/uv/src/queue.h
-++++ b/deps/uv/src/queue.h
-+@@ -18,73 +18,91 @@
-+ 
-+ #include <stddef.h>
-+ 
-+-#define uv__queue_data(pointer, type, field)                                  \
-+-  ((type*) ((char*) (pointer) - offsetof(type, field)))
-+-
-+-#define uv__queue_foreach(q, h)                                               \
-+-  for ((q) = (h)->next; (q) != (h); (q) = (q)->next)
-+-
-+-static inline void uv__queue_init(struct uv__queue* q) {
-+-  q->next = q;
-+-  q->prev = q;
-+-}
-+-
-+-static inline int uv__queue_empty(const struct uv__queue* q) {
-+-  return q == q->next;
-+-}
-+-
-+-static inline struct uv__queue* uv__queue_head(const struct uv__queue* q) {
-+-  return q->next;
-+-}
-+-
-+-static inline struct uv__queue* uv__queue_next(const struct uv__queue* q) {
-+-  return q->next;
-+-}
-+-
-+-static inline void uv__queue_add(struct uv__queue* h, struct uv__queue* n) {
-+-  h->prev->next = n->next;
-+-  n->next->prev = h->prev;
-+-  h->prev = n->prev;
-+-  h->prev->next = h;
-+-}
-+-
-+-static inline void uv__queue_split(struct uv__queue* h,
-+-                                   struct uv__queue* q,
-+-                                   struct uv__queue* n) {
-+-  n->prev = h->prev;
-+-  n->prev->next = n;
-+-  n->next = q;
-+-  h->prev = q->prev;
-+-  h->prev->next = h;
-+-  q->prev = n;
-+-}
-+-
-+-static inline void uv__queue_move(struct uv__queue* h, struct uv__queue* n) {
-+-  if (uv__queue_empty(h))
-+-    uv__queue_init(n);
-+-  else
-+-    uv__queue_split(h, h->next, n);
-+-}
-+-
-+-static inline void uv__queue_insert_head(struct uv__queue* h,
-+-                                         struct uv__queue* q) {
-+-  q->next = h->next;
-+-  q->prev = h;
-+-  q->next->prev = q;
-+-  h->next = q;
-+-}
-+-
-+-static inline void uv__queue_insert_tail(struct uv__queue* h,
-+-                                         struct uv__queue* q) {
-+-  q->next = h;
-+-  q->prev = h->prev;
-+-  q->prev->next = q;
-+-  h->prev = q;
-+-}
-+-
-+-static inline void uv__queue_remove(struct uv__queue* q) {
-+-  q->prev->next = q->next;
-+-  q->next->prev = q->prev;
-+-}
-++typedef void *QUEUE[2];
-++
-++/* Private macros. */
-++#define QUEUE_NEXT(q)       (*(QUEUE **) &((*(q))[0]))
-++#define QUEUE_PREV(q)       (*(QUEUE **) &((*(q))[1]))
-++#define QUEUE_PREV_NEXT(q)  (QUEUE_NEXT(QUEUE_PREV(q)))
-++#define QUEUE_NEXT_PREV(q)  (QUEUE_PREV(QUEUE_NEXT(q)))
-++
-++/* Public macros. */
-++#define QUEUE_DATA(ptr, type, field)                                          \
-++  ((type *) ((char *) (ptr) - offsetof(type, field)))
-++
-++/* Important note: mutating the list while QUEUE_FOREACH is
-++ * iterating over its elements results in undefined behavior.
-++ */
-++#define QUEUE_FOREACH(q, h)                                                   \
-++  for ((q) = QUEUE_NEXT(h); (q) != (h); (q) = QUEUE_NEXT(q))
-++
-++#define QUEUE_EMPTY(q)                                                        \
-++  ((const QUEUE *) (q) == (const QUEUE *) QUEUE_NEXT(q))
-++
-++#define QUEUE_HEAD(q)                                                         \
-++  (QUEUE_NEXT(q))
-++
-++#define QUEUE_INIT(q)                                                         \
-++  do {                                                                        \
-++    QUEUE_NEXT(q) = (q);                                                      \
-++    QUEUE_PREV(q) = (q);                                                      \
-++  }                                                                           \
-++  while (0)
-++
-++#define QUEUE_ADD(h, n)                                                       \
-++  do {                                                                        \
-++    QUEUE_PREV_NEXT(h) = QUEUE_NEXT(n);                                       \
-++    QUEUE_NEXT_PREV(n) = QUEUE_PREV(h);                                       \
-++    QUEUE_PREV(h) = QUEUE_PREV(n);                                            \
-++    QUEUE_PREV_NEXT(h) = (h);                                                 \
-++  }                                                                           \
-++  while (0)
-++
-++#define QUEUE_SPLIT(h, q, n)                                                  \
-++  do {                                                                        \
-++    QUEUE_PREV(n) = QUEUE_PREV(h);                                            \
-++    QUEUE_PREV_NEXT(n) = (n);                                                 \
-++    QUEUE_NEXT(n) = (q);                                                      \
-++    QUEUE_PREV(h) = QUEUE_PREV(q);                                            \
-++    QUEUE_PREV_NEXT(h) = (h);                                                 \
-++    QUEUE_PREV(q) = (n);                                                      \
-++  }                                                                           \
-++  while (0)
-++
-++#define QUEUE_MOVE(h, n)                                                      \
-++  do {                                                                        \
-++    if (QUEUE_EMPTY(h))                                                       \
-++      QUEUE_INIT(n);                                                          \
-++    else {                                                                    \
-++      QUEUE* q = QUEUE_HEAD(h);                                               \
-++      QUEUE_SPLIT(h, q, n);                                                   \
-++    }                                                                         \
-++  }                                                                           \
-++  while (0)
-++
-++#define QUEUE_INSERT_HEAD(h, q)                                               \
-++  do {                                                                        \
-++    QUEUE_NEXT(q) = QUEUE_NEXT(h);                                            \
-++    QUEUE_PREV(q) = (h);                                                      \
-++    QUEUE_NEXT_PREV(q) = (q);                                                 \
-++    QUEUE_NEXT(h) = (q);                                                      \
-++  }                                                                           \
-++  while (0)
-++
-++#define QUEUE_INSERT_TAIL(h, q)                                               \
-++  do {                                                                        \
-++    QUEUE_NEXT(q) = (h);                                                      \
-++    QUEUE_PREV(q) = QUEUE_PREV(h);                                            \
-++    QUEUE_PREV_NEXT(q) = (q);                                                 \
-++    QUEUE_PREV(h) = (q);                                                      \
-++  }                                                                           \
-++  while (0)
-++
-++#define QUEUE_REMOVE(q)                                                       \
-++  do {                                                                        \
-++    QUEUE_PREV_NEXT(q) = QUEUE_NEXT(q);                                       \
-++    QUEUE_NEXT_PREV(q) = QUEUE_PREV(q);                                       \
-++  }                                                                           \
-++  while (0)
-+ 
-+ #endif /* QUEUE_H_ */
-+diff --git a/deps/uv/src/threadpool.c b/deps/uv/src/threadpool.c
-+index dbef67f2f10..51962bf0021 100644
-+--- a/deps/uv/src/threadpool.c
-++++ b/deps/uv/src/threadpool.c
-+@@ -37,10 +37,10 @@ static unsigned int slow_io_work_running;
-+ static unsigned int nthreads;
-+ static uv_thread_t* threads;
-+ static uv_thread_t default_threads[4];
-+-static struct uv__queue exit_message;
-+-static struct uv__queue wq;
-+-static struct uv__queue run_slow_work_message;
-+-static struct uv__queue slow_io_pending_wq;
-++static QUEUE exit_message;
-++static QUEUE wq;
-++static QUEUE run_slow_work_message;
-++static QUEUE slow_io_pending_wq;
-+ 
-+ static unsigned int slow_work_thread_threshold(void) {
-+   return (nthreads + 1) / 2;
-+@@ -56,7 +56,7 @@ static void uv__cancelled(struct uv__work* w) {
-+  */
-+ static void worker(void* arg) {
-+   struct uv__work* w;
-+-  struct uv__queue* q;
-++  QUEUE* q;
-+   int is_slow_work;
-+ 
-+   uv_sem_post((uv_sem_t*) arg);
-+@@ -68,49 +68,49 @@ static void worker(void* arg) {
-+ 
-+     /* Keep waiting while either no work is present or only slow I/O
-+        and we're at the threshold for that. */
-+-    while (uv__queue_empty(&wq) ||
-+-           (uv__queue_head(&wq) == &run_slow_work_message &&
-+-            uv__queue_next(&run_slow_work_message) == &wq &&
-++    while (QUEUE_EMPTY(&wq) ||
-++           (QUEUE_HEAD(&wq) == &run_slow_work_message &&
-++            QUEUE_NEXT(&run_slow_work_message) == &wq &&
-+             slow_io_work_running >= slow_work_thread_threshold())) {
-+       idle_threads += 1;
-+       uv_cond_wait(&cond, &mutex);
-+       idle_threads -= 1;
-+     }
-+ 
-+-    q = uv__queue_head(&wq);
-++    q = QUEUE_HEAD(&wq);
-+     if (q == &exit_message) {
-+       uv_cond_signal(&cond);
-+       uv_mutex_unlock(&mutex);
-+       break;
-+     }
-+ 
-+-    uv__queue_remove(q);
-+-    uv__queue_init(q);  /* Signal uv_cancel() that the work req is executing. */
-++    QUEUE_REMOVE(q);
-++    QUEUE_INIT(q);  /* Signal uv_cancel() that the work req is executing. */
-+ 
-+     is_slow_work = 0;
-+     if (q == &run_slow_work_message) {
-+       /* If we're at the slow I/O threshold, re-schedule until after all
-+          other work in the queue is done. */
-+       if (slow_io_work_running >= slow_work_thread_threshold()) {
-+-        uv__queue_insert_tail(&wq, q);
-++        QUEUE_INSERT_TAIL(&wq, q);
-+         continue;
-+       }
-+ 
-+       /* If we encountered a request to run slow I/O work but there is none
-+          to run, that means it's cancelled => Start over. */
-+-      if (uv__queue_empty(&slow_io_pending_wq))
-++      if (QUEUE_EMPTY(&slow_io_pending_wq))
-+         continue;
-+ 
-+       is_slow_work = 1;
-+       slow_io_work_running++;
-+ 
-+-      q = uv__queue_head(&slow_io_pending_wq);
-+-      uv__queue_remove(q);
-+-      uv__queue_init(q);
-++      q = QUEUE_HEAD(&slow_io_pending_wq);
-++      QUEUE_REMOVE(q);
-++      QUEUE_INIT(q);
-+ 
-+       /* If there is more slow I/O work, schedule it to be run as well. */
-+-      if (!uv__queue_empty(&slow_io_pending_wq)) {
-+-        uv__queue_insert_tail(&wq, &run_slow_work_message);
-++      if (!QUEUE_EMPTY(&slow_io_pending_wq)) {
-++        QUEUE_INSERT_TAIL(&wq, &run_slow_work_message);
-+         if (idle_threads > 0)
-+           uv_cond_signal(&cond);
-+       }
-+@@ -118,13 +118,13 @@ static void worker(void* arg) {
-+ 
-+     uv_mutex_unlock(&mutex);
-+ 
-+-    w = uv__queue_data(q, struct uv__work, wq);
-++    w = QUEUE_DATA(q, struct uv__work, wq);
-+     w->work(w);
-+ 
-+     uv_mutex_lock(&w->loop->wq_mutex);
-+     w->work = NULL;  /* Signal uv_cancel() that the work req is done
-+                         executing. */
-+-    uv__queue_insert_tail(&w->loop->wq, &w->wq);
-++    QUEUE_INSERT_TAIL(&w->loop->wq, &w->wq);
-+     uv_async_send(&w->loop->wq_async);
-+     uv_mutex_unlock(&w->loop->wq_mutex);
-+ 
-+@@ -139,12 +139,12 @@ static void worker(void* arg) {
-+ }
-+ 
-+ 
-+-static void post(struct uv__queue* q, enum uv__work_kind kind) {
-++static void post(QUEUE* q, enum uv__work_kind kind) {
-+   uv_mutex_lock(&mutex);
-+   if (kind == UV__WORK_SLOW_IO) {
-+     /* Insert into a separate queue. */
-+-    uv__queue_insert_tail(&slow_io_pending_wq, q);
-+-    if (!uv__queue_empty(&run_slow_work_message)) {
-++    QUEUE_INSERT_TAIL(&slow_io_pending_wq, q);
-++    if (!QUEUE_EMPTY(&run_slow_work_message)) {
-+       /* Running slow I/O tasks is already scheduled => Nothing to do here.
-+          The worker that runs said other task will schedule this one as well. */
-+       uv_mutex_unlock(&mutex);
-+@@ -153,7 +153,7 @@ static void post(struct uv__queue* q, enum uv__work_kind kind) {
-+     q = &run_slow_work_message;
-+   }
-+ 
-+-  uv__queue_insert_tail(&wq, q);
-++  QUEUE_INSERT_TAIL(&wq, q);
-+   if (idle_threads > 0)
-+     uv_cond_signal(&cond);
-+   uv_mutex_unlock(&mutex);
-+@@ -220,9 +220,9 @@ static void init_threads(void) {
-+   if (uv_mutex_init(&mutex))
-+     abort();
-+ 
-+-  uv__queue_init(&wq);
-+-  uv__queue_init(&slow_io_pending_wq);
-+-  uv__queue_init(&run_slow_work_message);
-++  QUEUE_INIT(&wq);
-++  QUEUE_INIT(&slow_io_pending_wq);
-++  QUEUE_INIT(&run_slow_work_message);
-+ 
-+   if (uv_sem_init(&sem, 0))
-+     abort();
-+@@ -285,9 +285,9 @@ static int uv__work_cancel(uv_loop_t* loop, uv_req_t* req, struct uv__work* w) {
-+   uv_mutex_lock(&mutex);
-+   uv_mutex_lock(&w->loop->wq_mutex);
-+ 
-+-  cancelled = !uv__queue_empty(&w->wq) && w->work != NULL;
-++  cancelled = !QUEUE_EMPTY(&w->wq) && w->work != NULL;
-+   if (cancelled)
-+-    uv__queue_remove(&w->wq);
-++    QUEUE_REMOVE(&w->wq);
-+ 
-+   uv_mutex_unlock(&w->loop->wq_mutex);
-+   uv_mutex_unlock(&mutex);
-+@@ -297,7 +297,7 @@ static int uv__work_cancel(uv_loop_t* loop, uv_req_t* req, struct uv__work* w) {
-+ 
-+   w->work = uv__cancelled;
-+   uv_mutex_lock(&loop->wq_mutex);
-+-  uv__queue_insert_tail(&loop->wq, &w->wq);
-++  QUEUE_INSERT_TAIL(&loop->wq, &w->wq);
-+   uv_async_send(&loop->wq_async);
-+   uv_mutex_unlock(&loop->wq_mutex);
-+ 
-+@@ -308,21 +308,21 @@ static int uv__work_cancel(uv_loop_t* loop, uv_req_t* req, struct uv__work* w) {
-+ void uv__work_done(uv_async_t* handle) {
-+   struct uv__work* w;
-+   uv_loop_t* loop;
-+-  struct uv__queue* q;
-+-  struct uv__queue wq;
-++  QUEUE* q;
-++  QUEUE wq;
-+   int err;
-+   int nevents;
-+ 
-+   loop = container_of(handle, uv_loop_t, wq_async);
-+   uv_mutex_lock(&loop->wq_mutex);
-+-  uv__queue_move(&loop->wq, &wq);
-++  QUEUE_MOVE(&loop->wq, &wq);
-+   uv_mutex_unlock(&loop->wq_mutex);
-+ 
-+   nevents = 0;
-+ 
-+-  while (!uv__queue_empty(&wq)) {
-+-    q = uv__queue_head(&wq);
-+-    uv__queue_remove(q);
-++  while (!QUEUE_EMPTY(&wq)) {
-++    q = QUEUE_HEAD(&wq);
-++    QUEUE_REMOVE(q);
-+ 
-+     w = container_of(q, struct uv__work, wq);
-+     err = (w->work == uv__cancelled) ? UV_ECANCELED : 0;
-+diff --git a/deps/uv/src/unix/aix.c b/deps/uv/src/unix/aix.c
-+index 3af3009a216..f1afbed49ec 100644
-+--- a/deps/uv/src/unix/aix.c
-++++ b/deps/uv/src/unix/aix.c
-+@@ -136,7 +136,7 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+   struct pollfd pqry;
-+   struct pollfd* pe;
-+   struct poll_ctl pc;
-+-  struct uv__queue* q;
-++  QUEUE* q;
-+   uv__io_t* w;
-+   uint64_t base;
-+   uint64_t diff;
-+@@ -151,18 +151,18 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+   int reset_timeout;
-+ 
-+   if (loop->nfds == 0) {
-+-    assert(uv__queue_empty(&loop->watcher_queue));
-++    assert(QUEUE_EMPTY(&loop->watcher_queue));
-+     return;
-+   }
-+ 
-+   lfields = uv__get_internal_fields(loop);
-+ 
-+-  while (!uv__queue_empty(&loop->watcher_queue)) {
-+-    q = uv__queue_head(&loop->watcher_queue);
-+-    uv__queue_remove(q);
-+-    uv__queue_init(q);
-++  while (!QUEUE_EMPTY(&loop->watcher_queue)) {
-++    q = QUEUE_HEAD(&loop->watcher_queue);
-++    QUEUE_REMOVE(q);
-++    QUEUE_INIT(q);
-+ 
-+-    w = uv__queue_data(q, uv__io_t, watcher_queue);
-++    w = QUEUE_DATA(q, uv__io_t, watcher_queue);
-+     assert(w->pevents != 0);
-+     assert(w->fd >= 0);
-+     assert(w->fd < (int) loop->nwatchers);
-+diff --git a/deps/uv/src/unix/async.c b/deps/uv/src/unix/async.c
-+index 0ff2669e30a..5751b6d02be 100644
-+--- a/deps/uv/src/unix/async.c
-++++ b/deps/uv/src/unix/async.c
-+@@ -55,7 +55,7 @@ int uv_async_init(uv_loop_t* loop, uv_async_t* handle, uv_async_cb async_cb) {
-+   handle->pending = 0;
-+   handle->u.fd = 0; /* This will be used as a busy flag. */
-+ 
-+-  uv__queue_insert_tail(&loop->async_handles, &handle->queue);
-++  QUEUE_INSERT_TAIL(&loop->async_handles, &handle->queue);
-+   uv__handle_start(handle);
-+ 
-+   return 0;
-+@@ -124,7 +124,7 @@ static void uv__async_spin(uv_async_t* handle) {
-+ 
-+ void uv__async_close(uv_async_t* handle) {
-+   uv__async_spin(handle);
-+-  uv__queue_remove(&handle->queue);
-++  QUEUE_REMOVE(&handle->queue);
-+   uv__handle_stop(handle);
-+ }
-+ 
-+@@ -132,8 +132,8 @@ void uv__async_close(uv_async_t* handle) {
-+ static void uv__async_io(uv_loop_t* loop, uv__io_t* w, unsigned int events) {
-+   char buf[1024];
-+   ssize_t r;
-+-  struct uv__queue queue;
-+-  struct uv__queue* q;
-++  QUEUE queue;
-++  QUEUE* q;
-+   uv_async_t* h;
-+   _Atomic int *pending;
-+ 
-+@@ -157,13 +157,13 @@ static void uv__async_io(uv_loop_t* loop, uv__io_t* w, unsigned int events) {
-+     abort();
-+   }
-+ 
-+-  uv__queue_move(&loop->async_handles, &queue);
-+-  while (!uv__queue_empty(&queue)) {
-+-    q = uv__queue_head(&queue);
-+-    h = uv__queue_data(q, uv_async_t, queue);
-++  QUEUE_MOVE(&loop->async_handles, &queue);
-++  while (!QUEUE_EMPTY(&queue)) {
-++    q = QUEUE_HEAD(&queue);
-++    h = QUEUE_DATA(q, uv_async_t, queue);
-+ 
-+-    uv__queue_remove(q);
-+-    uv__queue_insert_tail(&loop->async_handles, q);
-++    QUEUE_REMOVE(q);
-++    QUEUE_INSERT_TAIL(&loop->async_handles, q);
-+ 
-+     /* Atomically fetch and clear pending flag */
-+     pending = (_Atomic int*) &h->pending;
-+@@ -241,8 +241,8 @@ static int uv__async_start(uv_loop_t* loop) {
-+ 
-+ 
-+ void uv__async_stop(uv_loop_t* loop) {
-+-  struct uv__queue queue;
-+-  struct uv__queue* q;
-++  QUEUE queue;
-++  QUEUE* q;
-+   uv_async_t* h;
-+ 
-+   if (loop->async_io_watcher.fd == -1)
-+@@ -251,13 +251,13 @@ void uv__async_stop(uv_loop_t* loop) {
-+   /* Make sure no other thread is accessing the async handle fd after the loop
-+    * cleanup.
-+    */
-+-  uv__queue_move(&loop->async_handles, &queue);
-+-  while (!uv__queue_empty(&queue)) {
-+-    q = uv__queue_head(&queue);
-+-    h = uv__queue_data(q, uv_async_t, queue);
-++  QUEUE_MOVE(&loop->async_handles, &queue);
-++  while (!QUEUE_EMPTY(&queue)) {
-++    q = QUEUE_HEAD(&queue);
-++    h = QUEUE_DATA(q, uv_async_t, queue);
-+ 
-+-    uv__queue_remove(q);
-+-    uv__queue_insert_tail(&loop->async_handles, q);
-++    QUEUE_REMOVE(q);
-++    QUEUE_INSERT_TAIL(&loop->async_handles, q);
-+ 
-+     uv__async_spin(h);
-+   }
-+@@ -275,20 +275,20 @@ void uv__async_stop(uv_loop_t* loop) {
-+ 
-+ 
-+ int uv__async_fork(uv_loop_t* loop) {
-+-  struct uv__queue queue;
-+-  struct uv__queue* q;
-++  QUEUE queue;
-++  QUEUE* q;
-+   uv_async_t* h;
-+ 
-+   if (loop->async_io_watcher.fd == -1) /* never started */
-+     return 0;
-+ 
-+-  uv__queue_move(&loop->async_handles, &queue);
-+-  while (!uv__queue_empty(&queue)) {
-+-    q = uv__queue_head(&queue);
-+-    h = uv__queue_data(q, uv_async_t, queue);
-++  QUEUE_MOVE(&loop->async_handles, &queue);
-++  while (!QUEUE_EMPTY(&queue)) {
-++    q = QUEUE_HEAD(&queue);
-++    h = QUEUE_DATA(q, uv_async_t, queue);
-+ 
-+-    uv__queue_remove(q);
-+-    uv__queue_insert_tail(&loop->async_handles, q);
-++    QUEUE_REMOVE(q);
-++    QUEUE_INSERT_TAIL(&loop->async_handles, q);
-+ 
-+     /* The state of any thread that set pending is now likely corrupt in this
-+      * child because the user called fork, so just clear these flags and move
-+diff --git a/deps/uv/src/unix/core.c b/deps/uv/src/unix/core.c
-+index 25c5181f370..55aa962787e 100644
-+--- a/deps/uv/src/unix/core.c
-++++ b/deps/uv/src/unix/core.c
-+@@ -344,7 +344,7 @@ static void uv__finish_close(uv_handle_t* handle) {
-+   }
-+ 
-+   uv__handle_unref(handle);
-+-  uv__queue_remove(&handle->handle_queue);
-++  QUEUE_REMOVE(&handle->handle_queue);
-+ 
-+   if (handle->close_cb) {
-+     handle->close_cb(handle);
-+@@ -380,7 +380,7 @@ int uv_backend_fd(const uv_loop_t* loop) {
-+ static int uv__loop_alive(const uv_loop_t* loop) {
-+   return uv__has_active_handles(loop) ||
-+          uv__has_active_reqs(loop) ||
-+-         !uv__queue_empty(&loop->pending_queue) ||
-++         !QUEUE_EMPTY(&loop->pending_queue) ||
-+          loop->closing_handles != NULL;
-+ }
-+ 
-+@@ -389,8 +389,8 @@ static int uv__backend_timeout(const uv_loop_t* loop) {
-+   if (loop->stop_flag == 0 &&
-+       /* uv__loop_alive(loop) && */
-+       (uv__has_active_handles(loop) || uv__has_active_reqs(loop)) &&
-+-      uv__queue_empty(&loop->pending_queue) &&
-+-      uv__queue_empty(&loop->idle_handles) &&
-++      QUEUE_EMPTY(&loop->pending_queue) &&
-++      QUEUE_EMPTY(&loop->idle_handles) &&
-+       (loop->flags & UV_LOOP_REAP_CHILDREN) == 0 &&
-+       loop->closing_handles == NULL)
-+     return uv__next_timeout(loop);
-+@@ -399,7 +399,7 @@ static int uv__backend_timeout(const uv_loop_t* loop) {
-+ 
-+ 
-+ int uv_backend_timeout(const uv_loop_t* loop) {
-+-  if (uv__queue_empty(&loop->watcher_queue))
-++  if (QUEUE_EMPTY(&loop->watcher_queue))
-+     return uv__backend_timeout(loop);
-+   /* Need to call uv_run to update the backend fd state. */
-+   return 0;
-+@@ -431,8 +431,7 @@ int uv_run(uv_loop_t* loop, uv_run_mode mode) {
-+ 
-+   while (r != 0 && loop->stop_flag == 0) {
-+     can_sleep =
-+-        uv__queue_empty(&loop->pending_queue) &&
-+-        uv__queue_empty(&loop->idle_handles);
-++        QUEUE_EMPTY(&loop->pending_queue) && QUEUE_EMPTY(&loop->idle_handles);
-+ 
-+     uv__run_pending(loop);
-+     uv__run_idle(loop);
-+@@ -448,7 +447,7 @@ int uv_run(uv_loop_t* loop, uv_run_mode mode) {
-+ 
-+     /* Process immediate callbacks (e.g. write_cb) a small fixed number of
-+      * times to avoid loop starvation.*/
-+-    for (r = 0; r < 8 && !uv__queue_empty(&loop->pending_queue); r++)
-++    for (r = 0; r < 8 && !QUEUE_EMPTY(&loop->pending_queue); r++)
-+       uv__run_pending(loop);
-+ 
-+     /* Run one final update on the provider_idle_time in case uv__io_poll
-+@@ -827,17 +826,17 @@ int uv_fileno(const uv_handle_t* handle, uv_os_fd_t* fd) {
-+ 
-+ 
-+ static void uv__run_pending(uv_loop_t* loop) {
-+-  struct uv__queue* q;
-+-  struct uv__queue pq;
-++  QUEUE* q;
-++  QUEUE pq;
-+   uv__io_t* w;
-+ 
-+-  uv__queue_move(&loop->pending_queue, &pq);
-++  QUEUE_MOVE(&loop->pending_queue, &pq);
-+ 
-+-  while (!uv__queue_empty(&pq)) {
-+-    q = uv__queue_head(&pq);
-+-    uv__queue_remove(q);
-+-    uv__queue_init(q);
-+-    w = uv__queue_data(q, uv__io_t, pending_queue);
-++  while (!QUEUE_EMPTY(&pq)) {
-++    q = QUEUE_HEAD(&pq);
-++    QUEUE_REMOVE(q);
-++    QUEUE_INIT(q);
-++    w = QUEUE_DATA(q, uv__io_t, pending_queue);
-+     w->cb(loop, w, POLLOUT);
-+   }
-+ }
-+@@ -892,8 +891,8 @@ static void maybe_resize(uv_loop_t* loop, unsigned int len) {
-+ void uv__io_init(uv__io_t* w, uv__io_cb cb, int fd) {
-+   assert(cb != NULL);
-+   assert(fd >= -1);
-+-  uv__queue_init(&w->pending_queue);
-+-  uv__queue_init(&w->watcher_queue);
-++  QUEUE_INIT(&w->pending_queue);
-++  QUEUE_INIT(&w->watcher_queue);
-+   w->cb = cb;
-+   w->fd = fd;
-+   w->events = 0;
-+@@ -919,8 +918,8 @@ void uv__io_start(uv_loop_t* loop, uv__io_t* w, unsigned int events) {
-+     return;
-+ #endif
-+ 
-+-  if (uv__queue_empty(&w->watcher_queue))
-+-    uv__queue_insert_tail(&loop->watcher_queue, &w->watcher_queue);
-++  if (QUEUE_EMPTY(&w->watcher_queue))
-++    QUEUE_INSERT_TAIL(&loop->watcher_queue, &w->watcher_queue);
-+ 
-+   if (loop->watchers[w->fd] == NULL) {
-+     loop->watchers[w->fd] = w;
-+@@ -945,8 +944,8 @@ void uv__io_stop(uv_loop_t* loop, uv__io_t* w, unsigned int events) {
-+   w->pevents &= ~events;
-+ 
-+   if (w->pevents == 0) {
-+-    uv__queue_remove(&w->watcher_queue);
-+-    uv__queue_init(&w->watcher_queue);
-++    QUEUE_REMOVE(&w->watcher_queue);
-++    QUEUE_INIT(&w->watcher_queue);
-+     w->events = 0;
-+ 
-+     if (w == loop->watchers[w->fd]) {
-+@@ -955,14 +954,14 @@ void uv__io_stop(uv_loop_t* loop, uv__io_t* w, unsigned int events) {
-+       loop->nfds--;
-+     }
-+   }
-+-  else if (uv__queue_empty(&w->watcher_queue))
-+-    uv__queue_insert_tail(&loop->watcher_queue, &w->watcher_queue);
-++  else if (QUEUE_EMPTY(&w->watcher_queue))
-++    QUEUE_INSERT_TAIL(&loop->watcher_queue, &w->watcher_queue);
-+ }
-+ 
-+ 
-+ void uv__io_close(uv_loop_t* loop, uv__io_t* w) {
-+   uv__io_stop(loop, w, POLLIN | POLLOUT | UV__POLLRDHUP | UV__POLLPRI);
-+-  uv__queue_remove(&w->pending_queue);
-++  QUEUE_REMOVE(&w->pending_queue);
-+ 
-+   /* Remove stale events for this file descriptor */
-+   if (w->fd != -1)
-+@@ -971,8 +970,8 @@ void uv__io_close(uv_loop_t* loop, uv__io_t* w) {
-+ 
-+ 
-+ void uv__io_feed(uv_loop_t* loop, uv__io_t* w) {
-+-  if (uv__queue_empty(&w->pending_queue))
-+-    uv__queue_insert_tail(&loop->pending_queue, &w->pending_queue);
-++  if (QUEUE_EMPTY(&w->pending_queue))
-++    QUEUE_INSERT_TAIL(&loop->pending_queue, &w->pending_queue);
-+ }
-+ 
-+ 
-+diff --git a/deps/uv/src/unix/fs.c b/deps/uv/src/unix/fs.c
-+index 6b051c124f2..00d385c24b7 100644
-+--- a/deps/uv/src/unix/fs.c
-++++ b/deps/uv/src/unix/fs.c
-+@@ -62,6 +62,7 @@
-+ 
-+ #if defined(__linux__)
-+ # include <sys/sendfile.h>
-++# include <sys/utsname.h>
-+ #endif
-+ 
-+ #if defined(__sun)
-+@@ -903,6 +904,31 @@ out:
-+ 
-+ 
-+ #ifdef __linux__
-++static unsigned uv__kernel_version(void) {
-++  static _Atomic unsigned cached_version;
-++  struct utsname u;
-++  unsigned version;
-++  unsigned major;
-++  unsigned minor;
-++  unsigned patch;
-++
-++  version = atomic_load_explicit(&cached_version, memory_order_relaxed);
-++  if (version != 0)
-++    return version;
-++
-++  if (-1 == uname(&u))
-++    return 0;
-++
-++  if (3 != sscanf(u.release, "%u.%u.%u", &major, &minor, &patch))
-++    return 0;
-++
-++  version = major * 65536 + minor * 256 + patch;
-++  atomic_store_explicit(&cached_version, version, memory_order_relaxed);
-++
-++  return version;
-++}
-++
-++
-+ /* Pre-4.20 kernels have a bug where CephFS uses the RADOS copy-from command
-+  * in copy_file_range() when it shouldn't. There is no workaround except to
-+  * fall back to a regular copy.
-+@@ -1905,9 +1931,6 @@ int uv_fs_link(uv_loop_t* loop,
-+                uv_fs_cb cb) {
-+   INIT(LINK);
-+   PATH2;
-+-  if (cb != NULL)
-+-    if (uv__iou_fs_link(loop, req))
-+-      return 0;
-+   POST;
-+ }
-+ 
-+@@ -1920,9 +1943,6 @@ int uv_fs_mkdir(uv_loop_t* loop,
-+   INIT(MKDIR);
-+   PATH;
-+   req->mode = mode;
-+-  if (cb != NULL)
-+-    if (uv__iou_fs_mkdir(loop, req))
-+-      return 0;
-+   POST;
-+ }
-+ 
-+@@ -2074,9 +2094,6 @@ int uv_fs_rename(uv_loop_t* loop,
-+                  uv_fs_cb cb) {
-+   INIT(RENAME);
-+   PATH2;
-+-  if (cb != NULL)
-+-    if (uv__iou_fs_rename(loop, req))
-+-      return 0;
-+   POST;
-+ }
-+ 
-+@@ -2123,9 +2140,6 @@ int uv_fs_symlink(uv_loop_t* loop,
-+   INIT(SYMLINK);
-+   PATH2;
-+   req->flags = flags;
-+-  if (cb != NULL)
-+-    if (uv__iou_fs_symlink(loop, req))
-+-      return 0;
-+   POST;
-+ }
-+ 
-+@@ -2133,9 +2147,6 @@ int uv_fs_symlink(uv_loop_t* loop,
-+ int uv_fs_unlink(uv_loop_t* loop, uv_fs_t* req, const char* path, uv_fs_cb cb) {
-+   INIT(UNLINK);
-+   PATH;
-+-  if (cb != NULL)
-+-    if (uv__iou_fs_unlink(loop, req))
-+-      return 0;
-+   POST;
-+ }
-+ 
-+diff --git a/deps/uv/src/unix/fsevents.c b/deps/uv/src/unix/fsevents.c
-+index df703f3635f..0535b4547aa 100644
-+--- a/deps/uv/src/unix/fsevents.c
-++++ b/deps/uv/src/unix/fsevents.c
-+@@ -80,13 +80,13 @@ enum uv__cf_loop_signal_type_e {
-+ typedef enum uv__cf_loop_signal_type_e uv__cf_loop_signal_type_t;
-+ 
-+ struct uv__cf_loop_signal_s {
-+-  struct uv__queue member;
-++  QUEUE member;
-+   uv_fs_event_t* handle;
-+   uv__cf_loop_signal_type_t type;
-+ };
-+ 
-+ struct uv__fsevents_event_s {
-+-  struct uv__queue member;
-++  QUEUE member;
-+   int events;
-+   char path[1];
-+ };
-+@@ -98,7 +98,7 @@ struct uv__cf_loop_state_s {
-+   FSEventStreamRef fsevent_stream;
-+   uv_sem_t fsevent_sem;
-+   uv_mutex_t fsevent_mutex;
-+-  struct uv__queue fsevent_handles;
-++  void* fsevent_handles[2];
-+   unsigned int fsevent_handle_count;
-+ };
-+ 
-+@@ -150,22 +150,22 @@ static void (*pFSEventStreamStop)(FSEventStreamRef);
-+ 
-+ #define UV__FSEVENTS_PROCESS(handle, block)                                   \
-+     do {                                                                      \
-+-      struct uv__queue events;                                                \
-+-      struct uv__queue* q;                                                    \
-++      QUEUE events;                                                           \
-++      QUEUE* q;                                                               \
-+       uv__fsevents_event_t* event;                                            \
-+       int err;                                                                \
-+       uv_mutex_lock(&(handle)->cf_mutex);                                     \
-+       /* Split-off all events and empty original queue */                     \
-+-      uv__queue_move(&(handle)->cf_events, &events);                          \
-++      QUEUE_MOVE(&(handle)->cf_events, &events);                              \
-+       /* Get error (if any) and zero original one */                          \
-+       err = (handle)->cf_error;                                               \
-+       (handle)->cf_error = 0;                                                 \
-+       uv_mutex_unlock(&(handle)->cf_mutex);                                   \
-+       /* Loop through events, deallocating each after processing */           \
-+-      while (!uv__queue_empty(&events)) {                                     \
-+-        q = uv__queue_head(&events);                                          \
-+-        event = uv__queue_data(q, uv__fsevents_event_t, member);              \
-+-        uv__queue_remove(q);                                                  \
-++      while (!QUEUE_EMPTY(&events)) {                                         \
-++        q = QUEUE_HEAD(&events);                                              \
-++        event = QUEUE_DATA(q, uv__fsevents_event_t, member);                  \
-++        QUEUE_REMOVE(q);                                                      \
-+         /* NOTE: Checking uv__is_active() is required here, because handle    \
-+          * callback may close handle and invoking it after it will lead to    \
-+          * incorrect behaviour */                                             \
-+@@ -193,14 +193,14 @@ static void uv__fsevents_cb(uv_async_t* cb) {
-+ 
-+ /* Runs in CF thread, pushed event into handle's event list */
-+ static void uv__fsevents_push_event(uv_fs_event_t* handle,
-+-                                    struct uv__queue* events,
-++                                    QUEUE* events,
-+                                     int err) {
-+   assert(events != NULL || err != 0);
-+   uv_mutex_lock(&handle->cf_mutex);
-+ 
-+   /* Concatenate two queues */
-+   if (events != NULL)
-+-    uv__queue_add(&handle->cf_events, events);
-++    QUEUE_ADD(&handle->cf_events, events);
-+ 
-+   /* Propagate error */
-+   if (err != 0)
-+@@ -224,12 +224,12 @@ static void uv__fsevents_event_cb(const FSEventStreamRef streamRef,
-+   char* path;
-+   char* pos;
-+   uv_fs_event_t* handle;
-+-  struct uv__queue* q;
-++  QUEUE* q;
-+   uv_loop_t* loop;
-+   uv__cf_loop_state_t* state;
-+   uv__fsevents_event_t* event;
-+   FSEventStreamEventFlags flags;
-+-  struct uv__queue head;
-++  QUEUE head;
-+ 
-+   loop = info;
-+   state = loop->cf_state;
-+@@ -238,9 +238,9 @@ static void uv__fsevents_event_cb(const FSEventStreamRef streamRef,
-+ 
-+   /* For each handle */
-+   uv_mutex_lock(&state->fsevent_mutex);
-+-  uv__queue_foreach(q, &state->fsevent_handles) {
-+-    handle = uv__queue_data(q, uv_fs_event_t, cf_member);
-+-    uv__queue_init(&head);
-++  QUEUE_FOREACH(q, &state->fsevent_handles) {
-++    handle = QUEUE_DATA(q, uv_fs_event_t, cf_member);
-++    QUEUE_INIT(&head);
-+ 
-+     /* Process and filter out events */
-+     for (i = 0; i < numEvents; i++) {
-+@@ -318,10 +318,10 @@ static void uv__fsevents_event_cb(const FSEventStreamRef streamRef,
-+           event->events = UV_CHANGE;
-+       }
-+ 
-+-      uv__queue_insert_tail(&head, &event->member);
-++      QUEUE_INSERT_TAIL(&head, &event->member);
-+     }
-+ 
-+-    if (!uv__queue_empty(&head))
-++    if (!QUEUE_EMPTY(&head))
-+       uv__fsevents_push_event(handle, &head, 0);
-+   }
-+   uv_mutex_unlock(&state->fsevent_mutex);
-+@@ -403,7 +403,7 @@ static void uv__fsevents_destroy_stream(uv__cf_loop_state_t* state) {
-+ static void uv__fsevents_reschedule(uv__cf_loop_state_t* state,
-+                                     uv_loop_t* loop,
-+                                     uv__cf_loop_signal_type_t type) {
-+-  struct uv__queue* q;
-++  QUEUE* q;
-+   uv_fs_event_t* curr;
-+   CFArrayRef cf_paths;
-+   CFStringRef* paths;
-+@@ -446,9 +446,9 @@ static void uv__fsevents_reschedule(uv__cf_loop_state_t* state,
-+ 
-+     q = &state->fsevent_handles;
-+     for (; i < path_count; i++) {
-+-      q = uv__queue_next(q);
-++      q = QUEUE_NEXT(q);
-+       assert(q != &state->fsevent_handles);
-+-      curr = uv__queue_data(q, uv_fs_event_t, cf_member);
-++      curr = QUEUE_DATA(q, uv_fs_event_t, cf_member);
-+ 
-+       assert(curr->realpath != NULL);
-+       paths[i] =
-+@@ -486,8 +486,8 @@ final:
-+ 
-+     /* Broadcast error to all handles */
-+     uv_mutex_lock(&state->fsevent_mutex);
-+-    uv__queue_foreach(q, &state->fsevent_handles) {
-+-      curr = uv__queue_data(q, uv_fs_event_t, cf_member);
-++    QUEUE_FOREACH(q, &state->fsevent_handles) {
-++      curr = QUEUE_DATA(q, uv_fs_event_t, cf_member);
-+       uv__fsevents_push_event(curr, NULL, err);
-+     }
-+     uv_mutex_unlock(&state->fsevent_mutex);
-+@@ -606,7 +606,7 @@ static int uv__fsevents_loop_init(uv_loop_t* loop) {
-+   if (err)
-+     goto fail_sem_init;
-+ 
-+-  uv__queue_init(&loop->cf_signals);
-++  QUEUE_INIT(&loop->cf_signals);
-+ 
-+   err = uv_sem_init(&state->fsevent_sem, 0);
-+   if (err)
-+@@ -616,7 +616,7 @@ static int uv__fsevents_loop_init(uv_loop_t* loop) {
-+   if (err)
-+     goto fail_fsevent_mutex_init;
-+ 
-+-  uv__queue_init(&state->fsevent_handles);
-++  QUEUE_INIT(&state->fsevent_handles);
-+   state->fsevent_need_reschedule = 0;
-+   state->fsevent_handle_count = 0;
-+ 
-+@@ -675,7 +675,7 @@ fail_mutex_init:
-+ void uv__fsevents_loop_delete(uv_loop_t* loop) {
-+   uv__cf_loop_signal_t* s;
-+   uv__cf_loop_state_t* state;
-+-  struct uv__queue* q;
-++  QUEUE* q;
-+ 
-+   if (loop->cf_state == NULL)
-+     return;
-+@@ -688,10 +688,10 @@ void uv__fsevents_loop_delete(uv_loop_t* loop) {
-+   uv_mutex_destroy(&loop->cf_mutex);
-+ 
-+   /* Free any remaining data */
-+-  while (!uv__queue_empty(&loop->cf_signals)) {
-+-    q = uv__queue_head(&loop->cf_signals);
-+-    s = uv__queue_data(q, uv__cf_loop_signal_t, member);
-+-    uv__queue_remove(q);
-++  while (!QUEUE_EMPTY(&loop->cf_signals)) {
-++    q = QUEUE_HEAD(&loop->cf_signals);
-++    s = QUEUE_DATA(q, uv__cf_loop_signal_t, member);
-++    QUEUE_REMOVE(q);
-+     uv__free(s);
-+   }
-+ 
-+@@ -735,22 +735,22 @@ static void* uv__cf_loop_runner(void* arg) {
-+ static void uv__cf_loop_cb(void* arg) {
-+   uv_loop_t* loop;
-+   uv__cf_loop_state_t* state;
-+-  struct uv__queue* item;
-+-  struct uv__queue split_head;
-++  QUEUE* item;
-++  QUEUE split_head;
-+   uv__cf_loop_signal_t* s;
-+ 
-+   loop = arg;
-+   state = loop->cf_state;
-+ 
-+   uv_mutex_lock(&loop->cf_mutex);
-+-  uv__queue_move(&loop->cf_signals, &split_head);
-++  QUEUE_MOVE(&loop->cf_signals, &split_head);
-+   uv_mutex_unlock(&loop->cf_mutex);
-+ 
-+-  while (!uv__queue_empty(&split_head)) {
-+-    item = uv__queue_head(&split_head);
-+-    uv__queue_remove(item);
-++  while (!QUEUE_EMPTY(&split_head)) {
-++    item = QUEUE_HEAD(&split_head);
-++    QUEUE_REMOVE(item);
-+ 
-+-    s = uv__queue_data(item, uv__cf_loop_signal_t, member);
-++    s = QUEUE_DATA(item, uv__cf_loop_signal_t, member);
-+ 
-+     /* This was a termination signal */
-+     if (s->handle == NULL)
-+@@ -778,7 +778,7 @@ int uv__cf_loop_signal(uv_loop_t* loop,
-+   item->type = type;
-+ 
-+   uv_mutex_lock(&loop->cf_mutex);
-+-  uv__queue_insert_tail(&loop->cf_signals, &item->member);
-++  QUEUE_INSERT_TAIL(&loop->cf_signals, &item->member);
-+ 
-+   state = loop->cf_state;
-+   assert(state != NULL);
-+@@ -807,7 +807,7 @@ int uv__fsevents_init(uv_fs_event_t* handle) {
-+   handle->realpath_len = strlen(handle->realpath);
-+ 
-+   /* Initialize event queue */
-+-  uv__queue_init(&handle->cf_events);
-++  QUEUE_INIT(&handle->cf_events);
-+   handle->cf_error = 0;
-+ 
-+   /*
-+@@ -832,7 +832,7 @@ int uv__fsevents_init(uv_fs_event_t* handle) {
-+   /* Insert handle into the list */
-+   state = handle->loop->cf_state;
-+   uv_mutex_lock(&state->fsevent_mutex);
-+-  uv__queue_insert_tail(&state->fsevent_handles, &handle->cf_member);
-++  QUEUE_INSERT_TAIL(&state->fsevent_handles, &handle->cf_member);
-+   state->fsevent_handle_count++;
-+   state->fsevent_need_reschedule = 1;
-+   uv_mutex_unlock(&state->fsevent_mutex);
-+@@ -872,7 +872,7 @@ int uv__fsevents_close(uv_fs_event_t* handle) {
-+   /* Remove handle from  the list */
-+   state = handle->loop->cf_state;
-+   uv_mutex_lock(&state->fsevent_mutex);
-+-  uv__queue_remove(&handle->cf_member);
-++  QUEUE_REMOVE(&handle->cf_member);
-+   state->fsevent_handle_count--;
-+   state->fsevent_need_reschedule = 1;
-+   uv_mutex_unlock(&state->fsevent_mutex);
-+diff --git a/deps/uv/src/unix/internal.h b/deps/uv/src/unix/internal.h
-+index fe588513603..6c5822e6a0d 100644
-+--- a/deps/uv/src/unix/internal.h
-++++ b/deps/uv/src/unix/internal.h
-+@@ -335,30 +335,20 @@ int uv__iou_fs_close(uv_loop_t* loop, uv_fs_t* req);
-+ int uv__iou_fs_fsync_or_fdatasync(uv_loop_t* loop,
-+                                   uv_fs_t* req,
-+                                   uint32_t fsync_flags);
-+-int uv__iou_fs_link(uv_loop_t* loop, uv_fs_t* req);
-+-int uv__iou_fs_mkdir(uv_loop_t* loop, uv_fs_t* req);
-+ int uv__iou_fs_open(uv_loop_t* loop, uv_fs_t* req);
-+ int uv__iou_fs_read_or_write(uv_loop_t* loop,
-+                              uv_fs_t* req,
-+                              int is_read);
-+-int uv__iou_fs_rename(uv_loop_t* loop, uv_fs_t* req);
-+ int uv__iou_fs_statx(uv_loop_t* loop,
-+                      uv_fs_t* req,
-+                      int is_fstat,
-+                      int is_lstat);
-+-int uv__iou_fs_symlink(uv_loop_t* loop, uv_fs_t* req);
-+-int uv__iou_fs_unlink(uv_loop_t* loop, uv_fs_t* req);
-+ #else
-+ #define uv__iou_fs_close(loop, req) 0
-+ #define uv__iou_fs_fsync_or_fdatasync(loop, req, fsync_flags) 0
-+-#define uv__iou_fs_link(loop, req) 0
-+-#define uv__iou_fs_mkdir(loop, req) 0
-+ #define uv__iou_fs_open(loop, req) 0
-+ #define uv__iou_fs_read_or_write(loop, req, is_read) 0
-+-#define uv__iou_fs_rename(loop, req) 0
-+ #define uv__iou_fs_statx(loop, req, is_fstat, is_lstat) 0
-+-#define uv__iou_fs_symlink(loop, req) 0
-+-#define uv__iou_fs_unlink(loop, req) 0
-+ #endif
-+ 
-+ #if defined(__APPLE__)
-+@@ -439,7 +429,6 @@ int uv__statx(int dirfd,
-+               struct uv__statx* statxbuf);
-+ void uv__statx_to_stat(const struct uv__statx* statxbuf, uv_stat_t* buf);
-+ ssize_t uv__getrandom(void* buf, size_t buflen, unsigned flags);
-+-unsigned uv__kernel_version(void);
-+ #endif
-+ 
-+ typedef int (*uv__peersockfunc)(int, struct sockaddr*, socklen_t*);
-+diff --git a/deps/uv/src/unix/kqueue.c b/deps/uv/src/unix/kqueue.c
-+index b78242d3be4..82916d65933 100644
-+--- a/deps/uv/src/unix/kqueue.c
-++++ b/deps/uv/src/unix/kqueue.c
-+@@ -133,7 +133,7 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+   struct timespec spec;
-+   unsigned int nevents;
-+   unsigned int revents;
-+-  struct uv__queue* q;
-++  QUEUE* q;
-+   uv__io_t* w;
-+   uv_process_t* process;
-+   sigset_t* pset;
-+@@ -152,19 +152,19 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+   int reset_timeout;
-+ 
-+   if (loop->nfds == 0) {
-+-    assert(uv__queue_empty(&loop->watcher_queue));
-++    assert(QUEUE_EMPTY(&loop->watcher_queue));
-+     return;
-+   }
-+ 
-+   lfields = uv__get_internal_fields(loop);
-+   nevents = 0;
-+ 
-+-  while (!uv__queue_empty(&loop->watcher_queue)) {
-+-    q = uv__queue_head(&loop->watcher_queue);
-+-    uv__queue_remove(q);
-+-    uv__queue_init(q);
-++  while (!QUEUE_EMPTY(&loop->watcher_queue)) {
-++    q = QUEUE_HEAD(&loop->watcher_queue);
-++    QUEUE_REMOVE(q);
-++    QUEUE_INIT(q);
-+ 
-+-    w = uv__queue_data(q, uv__io_t, watcher_queue);
-++    w = QUEUE_DATA(q, uv__io_t, watcher_queue);
-+     assert(w->pevents != 0);
-+     assert(w->fd >= 0);
-+     assert(w->fd < (int) loop->nwatchers);
-+@@ -307,8 +307,8 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+ 
-+       /* Handle kevent NOTE_EXIT results */
-+       if (ev->filter == EVFILT_PROC) {
-+-        uv__queue_foreach(q, &loop->process_handles) {
-+-          process = uv__queue_data(q, uv_process_t, queue);
-++        QUEUE_FOREACH(q, &loop->process_handles) {
-++          process = QUEUE_DATA(q, uv_process_t, queue);
-+           if (process->pid == fd) {
-+             process->flags |= UV_HANDLE_REAP;
-+             loop->flags |= UV_LOOP_REAP_CHILDREN;
-+diff --git a/deps/uv/src/unix/linux.c b/deps/uv/src/unix/linux.c
-+index 48b9c2c43e1..5f84ad0eea3 100644
-+--- a/deps/uv/src/unix/linux.c
-++++ b/deps/uv/src/unix/linux.c
-+@@ -48,7 +48,6 @@
-+ #include <sys/sysinfo.h>
-+ #include <sys/sysmacros.h>
-+ #include <sys/types.h>
-+-#include <sys/utsname.h>
-+ #include <time.h>
-+ #include <unistd.h>
-+ 
-+@@ -151,11 +150,6 @@ enum {
-+   UV__IORING_OP_CLOSE = 19,
-+   UV__IORING_OP_STATX = 21,
-+   UV__IORING_OP_EPOLL_CTL = 29,
-+-  UV__IORING_OP_RENAMEAT = 35,
-+-  UV__IORING_OP_UNLINKAT = 36,
-+-  UV__IORING_OP_MKDIRAT = 37,
-+-  UV__IORING_OP_SYMLINKAT = 38,
-+-  UV__IORING_OP_LINKAT = 39,
-+ };
-+ 
-+ enum {
-+@@ -168,10 +162,6 @@ enum {
-+   UV__IORING_SQ_CQ_OVERFLOW = 2u,
-+ };
-+ 
-+-enum {
-+-  UV__MKDIRAT_SYMLINKAT_LINKAT = 1u,
-+-};
-+-
-+ struct uv__io_cqring_offsets {
-+   uint32_t head;
-+   uint32_t tail;
-+@@ -267,7 +257,7 @@ STATIC_ASSERT(EPOLL_CTL_MOD < 4);
-+ 
-+ struct watcher_list {
-+   RB_ENTRY(watcher_list) entry;
-+-  struct uv__queue watchers;
-++  QUEUE watchers;
-+   int iterating;
-+   char* path;
-+   int wd;
-+@@ -310,31 +300,6 @@ static struct watcher_root* uv__inotify_watchers(uv_loop_t* loop) {
-+ }
-+ 
-+ 
-+-unsigned uv__kernel_version(void) {
-+-  static _Atomic unsigned cached_version;
-+-  struct utsname u;
-+-  unsigned version;
-+-  unsigned major;
-+-  unsigned minor;
-+-  unsigned patch;
-+-
-+-  version = atomic_load_explicit(&cached_version, memory_order_relaxed);
-+-  if (version != 0)
-+-    return version;
-+-
-+-  if (-1 == uname(&u))
-+-    return 0;
-+-
-+-  if (3 != sscanf(u.release, "%u.%u.%u", &major, &minor, &patch))
-+-    return 0;
-+-
-+-  version = major * 65536 + minor * 256 + patch;
-+-  atomic_store_explicit(&cached_version, version, memory_order_relaxed);
-+-
-+-  return version;
-+-}
-+-
-+-
-+ ssize_t
-+ uv__fs_copy_file_range(int fd_in,
-+                        off_t* off_in,
-+@@ -420,9 +385,6 @@ int uv__io_uring_register(int fd, unsigned opcode, void* arg, unsigned nargs) {
-+ 
-+ 
-+ static int uv__use_io_uring(void) {
-+-#if defined(__ANDROID_API__)
-+-  return 0;  /* Possibly available but blocked by seccomp. */
-+-#else
-+   /* Ternary: unknown=0, yes=1, no=-1 */
-+   static _Atomic int use_io_uring;
-+   char* val;
-+@@ -437,7 +399,6 @@ static int uv__use_io_uring(void) {
-+   }
-+ 
-+   return use > 0;
-+-#endif
-+ }
-+ 
-+ 
-+@@ -542,10 +503,6 @@ static void uv__iou_init(int epollfd,
-+   iou->sqelen = sqelen;
-+   iou->ringfd = ringfd;
-+   iou->in_flight = 0;
-+-  iou->flags = 0;
-+-
-+-  if (uv__kernel_version() >= /* 5.15.0 */ 0x050F00)
-+-    iou->flags |= UV__MKDIRAT_SYMLINKAT_LINKAT;
-+ 
-+   for (i = 0; i <= iou->sqmask; i++)
-+     iou->sqarray[i] = i;  /* Slot -> sqe identity mapping. */
-+@@ -727,7 +684,7 @@ static struct uv__io_uring_sqe* uv__iou_get_sqe(struct uv__iou* iou,
-+   req->work_req.loop = loop;
-+   req->work_req.work = NULL;
-+   req->work_req.done = NULL;
-+-  uv__queue_init(&req->work_req.wq);
-++  QUEUE_INIT(&req->work_req.wq);
-+ 
-+   uv__req_register(loop, req);
-+   iou->in_flight++;
-+@@ -757,17 +714,6 @@ int uv__iou_fs_close(uv_loop_t* loop, uv_fs_t* req) {
-+   struct uv__io_uring_sqe* sqe;
-+   struct uv__iou* iou;
-+ 
-+-  /* Work around a poorly understood bug in older kernels where closing a file
-+-   * descriptor pointing to /foo/bar results in ETXTBSY errors when trying to
-+-   * execve("/foo/bar") later on. The bug seems to have been fixed somewhere
-+-   * between 5.15.85 and 5.15.90. I couldn't pinpoint the responsible commit
-+-   * but good candidates are the several data race fixes. Interestingly, it
-+-   * seems to manifest only when running under Docker so the possibility of
-+-   * a Docker bug can't be completely ruled out either. Yay, computers.
-+-   */
-+-  if (uv__kernel_version() < /* 5.15.90 */ 0x050F5A)
-+-    return 0;
-+-
-+   iou = &uv__get_internal_fields(loop)->iou;
-+ 
-+   sqe = uv__iou_get_sqe(iou, loop, req);
-+@@ -808,55 +754,6 @@ int uv__iou_fs_fsync_or_fdatasync(uv_loop_t* loop,
-+ }
-+ 
-+ 
-+-int uv__iou_fs_link(uv_loop_t* loop, uv_fs_t* req) {
-+-  struct uv__io_uring_sqe* sqe;
-+-  struct uv__iou* iou;
-+-
-+-  iou = &uv__get_internal_fields(loop)->iou;
-+-
-+-  if (!(iou->flags & UV__MKDIRAT_SYMLINKAT_LINKAT))
-+-    return 0;
-+-
-+-  sqe = uv__iou_get_sqe(iou, loop, req);
-+-  if (sqe == NULL)
-+-    return 0;
-+-
-+-  sqe->addr = (uintptr_t) req->path;
-+-  sqe->fd = AT_FDCWD;
-+-  sqe->addr2 = (uintptr_t) req->new_path;
-+-  sqe->len = AT_FDCWD;
-+-  sqe->opcode = UV__IORING_OP_LINKAT;
-+-
-+-  uv__iou_submit(iou);
-+-
-+-  return 1;
-+-}
-+-
-+-
-+-int uv__iou_fs_mkdir(uv_loop_t* loop, uv_fs_t* req) {
-+-  struct uv__io_uring_sqe* sqe;
-+-  struct uv__iou* iou;
-+-
-+-  iou = &uv__get_internal_fields(loop)->iou;
-+-
-+-  if (!(iou->flags & UV__MKDIRAT_SYMLINKAT_LINKAT))
-+-    return 0;
-+-
-+-  sqe = uv__iou_get_sqe(iou, loop, req);
-+-  if (sqe == NULL)
-+-    return 0;
-+-
-+-  sqe->addr = (uintptr_t) req->path;
-+-  sqe->fd = AT_FDCWD;
-+-  sqe->len = req->mode;
-+-  sqe->opcode = UV__IORING_OP_MKDIRAT;
-+-
-+-  uv__iou_submit(iou);
-+-
-+-  return 1;
-+-}
-+-
-+-
-+ int uv__iou_fs_open(uv_loop_t* loop, uv_fs_t* req) {
-+   struct uv__io_uring_sqe* sqe;
-+   struct uv__iou* iou;
-+@@ -879,86 +776,16 @@ int uv__iou_fs_open(uv_loop_t* loop, uv_fs_t* req) {
-+ }
-+ 
-+ 
-+-int uv__iou_fs_rename(uv_loop_t* loop, uv_fs_t* req) {
-+-  struct uv__io_uring_sqe* sqe;
-+-  struct uv__iou* iou;
-+-
-+-  iou = &uv__get_internal_fields(loop)->iou;
-+-
-+-  sqe = uv__iou_get_sqe(iou, loop, req);
-+-  if (sqe == NULL)
-+-    return 0;
-+-
-+-  sqe->addr = (uintptr_t) req->path;
-+-  sqe->fd = AT_FDCWD;
-+-  sqe->addr2 = (uintptr_t) req->new_path;
-+-  sqe->len = AT_FDCWD;
-+-  sqe->opcode = UV__IORING_OP_RENAMEAT;
-+-
-+-  uv__iou_submit(iou);
-+-
-+-  return 1;
-+-}
-+-
-+-
-+-int uv__iou_fs_symlink(uv_loop_t* loop, uv_fs_t* req) {
-+-  struct uv__io_uring_sqe* sqe;
-+-  struct uv__iou* iou;
-+-
-+-  iou = &uv__get_internal_fields(loop)->iou;
-+-
-+-  if (!(iou->flags & UV__MKDIRAT_SYMLINKAT_LINKAT))
-+-    return 0;
-+-
-+-  sqe = uv__iou_get_sqe(iou, loop, req);
-+-  if (sqe == NULL)
-+-    return 0;
-+-
-+-  sqe->addr = (uintptr_t) req->path;
-+-  sqe->fd = AT_FDCWD;
-+-  sqe->addr2 = (uintptr_t) req->new_path;
-+-  sqe->opcode = UV__IORING_OP_SYMLINKAT;
-+-
-+-  uv__iou_submit(iou);
-+-
-+-  return 1;
-+-}
-+-
-+-
-+-int uv__iou_fs_unlink(uv_loop_t* loop, uv_fs_t* req) {
-+-  struct uv__io_uring_sqe* sqe;
-+-  struct uv__iou* iou;
-+-
-+-  iou = &uv__get_internal_fields(loop)->iou;
-+-
-+-  sqe = uv__iou_get_sqe(iou, loop, req);
-+-  if (sqe == NULL)
-+-    return 0;
-+-
-+-  sqe->addr = (uintptr_t) req->path;
-+-  sqe->fd = AT_FDCWD;
-+-  sqe->opcode = UV__IORING_OP_UNLINKAT;
-+-
-+-  uv__iou_submit(iou);
-+-
-+-  return 1;
-+-}
-+-
-+-
-+ int uv__iou_fs_read_or_write(uv_loop_t* loop,
-+                              uv_fs_t* req,
-+                              int is_read) {
-+   struct uv__io_uring_sqe* sqe;
-+   struct uv__iou* iou;
-+ 
-+-  /* If iovcnt is greater than IOV_MAX, cap it to IOV_MAX on reads and fallback
-+-   * to the threadpool on writes */
-+-  if (req->nbufs > IOV_MAX) {
-+-    if (is_read)
-+-      req->nbufs = IOV_MAX;
-+-    else
-+-      return 0;
-+-  }
-++  /* For the moment, if iovcnt is greater than IOV_MAX, fallback to the
-++   * threadpool. In the future we might take advantage of IOSQE_IO_LINK. */
-++  if (req->nbufs > IOV_MAX)
-++    return 0;
-+ 
-+   iou = &uv__get_internal_fields(loop)->iou;
-+ 
-+@@ -1265,7 +1092,7 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+   struct uv__iou* ctl;
-+   struct uv__iou* iou;
-+   int real_timeout;
-+-  struct uv__queue* q;
-++  QUEUE* q;
-+   uv__io_t* w;
-+   sigset_t* sigmask;
-+   sigset_t sigset;
-+@@ -1311,11 +1138,11 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+ 
-+   memset(&e, 0, sizeof(e));
-+ 
-+-  while (!uv__queue_empty(&loop->watcher_queue)) {
-+-    q = uv__queue_head(&loop->watcher_queue);
-+-    w = uv__queue_data(q, uv__io_t, watcher_queue);
-+-    uv__queue_remove(q);
-+-    uv__queue_init(q);
-++  while (!QUEUE_EMPTY(&loop->watcher_queue)) {
-++    q = QUEUE_HEAD(&loop->watcher_queue);
-++    w = QUEUE_DATA(q, uv__io_t, watcher_queue);
-++    QUEUE_REMOVE(q);
-++    QUEUE_INIT(q);
-+ 
-+     op = EPOLL_CTL_MOD;
-+     if (w->events == 0)
-+@@ -2272,8 +2099,8 @@ static int uv__inotify_fork(uv_loop_t* loop, struct watcher_list* root) {
-+   struct watcher_list* tmp_watcher_list_iter;
-+   struct watcher_list* watcher_list;
-+   struct watcher_list tmp_watcher_list;
-+-  struct uv__queue queue;
-+-  struct uv__queue* q;
-++  QUEUE queue;
-++  QUEUE* q;
-+   uv_fs_event_t* handle;
-+   char* tmp_path;
-+ 
-+@@ -2285,41 +2112,41 @@ static int uv__inotify_fork(uv_loop_t* loop, struct watcher_list* root) {
-+    */
-+   loop->inotify_watchers = root;
-+ 
-+-  uv__queue_init(&tmp_watcher_list.watchers);
-++  QUEUE_INIT(&tmp_watcher_list.watchers);
-+   /* Note that the queue we use is shared with the start and stop()
-+-   * functions, making uv__queue_foreach unsafe to use. So we use the
-+-   * uv__queue_move trick to safely iterate. Also don't free the watcher
-++   * functions, making QUEUE_FOREACH unsafe to use. So we use the
-++   * QUEUE_MOVE trick to safely iterate. Also don't free the watcher
-+    * list until we're done iterating. c.f. uv__inotify_read.
-+    */
-+   RB_FOREACH_SAFE(watcher_list, watcher_root,
-+                   uv__inotify_watchers(loop), tmp_watcher_list_iter) {
-+     watcher_list->iterating = 1;
-+-    uv__queue_move(&watcher_list->watchers, &queue);
-+-    while (!uv__queue_empty(&queue)) {
-+-      q = uv__queue_head(&queue);
-+-      handle = uv__queue_data(q, uv_fs_event_t, watchers);
-++    QUEUE_MOVE(&watcher_list->watchers, &queue);
-++    while (!QUEUE_EMPTY(&queue)) {
-++      q = QUEUE_HEAD(&queue);
-++      handle = QUEUE_DATA(q, uv_fs_event_t, watchers);
-+       /* It's critical to keep a copy of path here, because it
-+        * will be set to NULL by stop() and then deallocated by
-+        * maybe_free_watcher_list
-+        */
-+       tmp_path = uv__strdup(handle->path);
-+       assert(tmp_path != NULL);
-+-      uv__queue_remove(q);
-+-      uv__queue_insert_tail(&watcher_list->watchers, q);
-++      QUEUE_REMOVE(q);
-++      QUEUE_INSERT_TAIL(&watcher_list->watchers, q);
-+       uv_fs_event_stop(handle);
-+ 
-+-      uv__queue_insert_tail(&tmp_watcher_list.watchers, &handle->watchers);
-++      QUEUE_INSERT_TAIL(&tmp_watcher_list.watchers, &handle->watchers);
-+       handle->path = tmp_path;
-+     }
-+     watcher_list->iterating = 0;
-+     maybe_free_watcher_list(watcher_list, loop);
-+   }
-+ 
-+-  uv__queue_move(&tmp_watcher_list.watchers, &queue);
-+-  while (!uv__queue_empty(&queue)) {
-+-      q = uv__queue_head(&queue);
-+-      uv__queue_remove(q);
-+-      handle = uv__queue_data(q, uv_fs_event_t, watchers);
-++  QUEUE_MOVE(&tmp_watcher_list.watchers, &queue);
-++  while (!QUEUE_EMPTY(&queue)) {
-++      q = QUEUE_HEAD(&queue);
-++      QUEUE_REMOVE(q);
-++      handle = QUEUE_DATA(q, uv_fs_event_t, watchers);
-+       tmp_path = handle->path;
-+       handle->path = NULL;
-+       err = uv_fs_event_start(handle, handle->cb, tmp_path, 0);
-+@@ -2341,7 +2168,7 @@ static struct watcher_list* find_watcher(uv_loop_t* loop, int wd) {
-+ 
-+ static void maybe_free_watcher_list(struct watcher_list* w, uv_loop_t* loop) {
-+   /* if the watcher_list->watchers is being iterated over, we can't free it. */
-+-  if ((!w->iterating) && uv__queue_empty(&w->watchers)) {
-++  if ((!w->iterating) && QUEUE_EMPTY(&w->watchers)) {
-+     /* No watchers left for this path. Clean up. */
-+     RB_REMOVE(watcher_root, uv__inotify_watchers(loop), w);
-+     inotify_rm_watch(loop->inotify_fd, w->wd);
-+@@ -2356,8 +2183,8 @@ static void uv__inotify_read(uv_loop_t* loop,
-+   const struct inotify_event* e;
-+   struct watcher_list* w;
-+   uv_fs_event_t* h;
-+-  struct uv__queue queue;
-+-  struct uv__queue* q;
-++  QUEUE queue;
-++  QUEUE* q;
-+   const char* path;
-+   ssize_t size;
-+   const char *p;
-+@@ -2400,7 +2227,7 @@ static void uv__inotify_read(uv_loop_t* loop,
-+        * What can go wrong?
-+        * A callback could call uv_fs_event_stop()
-+        * and the queue can change under our feet.
-+-       * So, we use uv__queue_move() trick to safely iterate over the queue.
-++       * So, we use QUEUE_MOVE() trick to safely iterate over the queue.
-+        * And we don't free the watcher_list until we're done iterating.
-+        *
-+        * First,
-+@@ -2408,13 +2235,13 @@ static void uv__inotify_read(uv_loop_t* loop,
-+        * not to free watcher_list.
-+        */
-+       w->iterating = 1;
-+-      uv__queue_move(&w->watchers, &queue);
-+-      while (!uv__queue_empty(&queue)) {
-+-        q = uv__queue_head(&queue);
-+-        h = uv__queue_data(q, uv_fs_event_t, watchers);
-++      QUEUE_MOVE(&w->watchers, &queue);
-++      while (!QUEUE_EMPTY(&queue)) {
-++        q = QUEUE_HEAD(&queue);
-++        h = QUEUE_DATA(q, uv_fs_event_t, watchers);
-+ 
-+-        uv__queue_remove(q);
-+-        uv__queue_insert_tail(&w->watchers, q);
-++        QUEUE_REMOVE(q);
-++        QUEUE_INSERT_TAIL(&w->watchers, q);
-+ 
-+         h->cb(h, path, events, 0);
-+       }
-+@@ -2476,13 +2303,13 @@ int uv_fs_event_start(uv_fs_event_t* handle,
-+ 
-+   w->wd = wd;
-+   w->path = memcpy(w + 1, path, len);
-+-  uv__queue_init(&w->watchers);
-++  QUEUE_INIT(&w->watchers);
-+   w->iterating = 0;
-+   RB_INSERT(watcher_root, uv__inotify_watchers(loop), w);
-+ 
-+ no_insert:
-+   uv__handle_start(handle);
-+-  uv__queue_insert_tail(&w->watchers, &handle->watchers);
-++  QUEUE_INSERT_TAIL(&w->watchers, &handle->watchers);
-+   handle->path = w->path;
-+   handle->cb = cb;
-+   handle->wd = wd;
-+@@ -2503,7 +2330,7 @@ int uv_fs_event_stop(uv_fs_event_t* handle) {
-+   handle->wd = -1;
-+   handle->path = NULL;
-+   uv__handle_stop(handle);
-+-  uv__queue_remove(&handle->watchers);
-++  QUEUE_REMOVE(&handle->watchers);
-+ 
-+   maybe_free_watcher_list(w, handle->loop);
-+ 
-+diff --git a/deps/uv/src/unix/loop-watcher.c b/deps/uv/src/unix/loop-watcher.c
-+index 2db8b515df7..b8c1c2a7102 100644
-+--- a/deps/uv/src/unix/loop-watcher.c
-++++ b/deps/uv/src/unix/loop-watcher.c
-+@@ -32,7 +32,7 @@
-+   int uv_##name##_start(uv_##name##_t* handle, uv_##name##_cb cb) {           \
-+     if (uv__is_active(handle)) return 0;                                      \
-+     if (cb == NULL) return UV_EINVAL;                                         \
-+-    uv__queue_insert_head(&handle->loop->name##_handles, &handle->queue);     \
-++    QUEUE_INSERT_HEAD(&handle->loop->name##_handles, &handle->queue);         \
-+     handle->name##_cb = cb;                                                   \
-+     uv__handle_start(handle);                                                 \
-+     return 0;                                                                 \
-+@@ -40,21 +40,21 @@
-+                                                                               \
-+   int uv_##name##_stop(uv_##name##_t* handle) {                               \
-+     if (!uv__is_active(handle)) return 0;                                     \
-+-    uv__queue_remove(&handle->queue);                                         \
-++    QUEUE_REMOVE(&handle->queue);                                             \
-+     uv__handle_stop(handle);                                                  \
-+     return 0;                                                                 \
-+   }                                                                           \
-+                                                                               \
-+   void uv__run_##name(uv_loop_t* loop) {                                      \
-+     uv_##name##_t* h;                                                         \
-+-    struct uv__queue queue;                                                   \
-+-    struct uv__queue* q;                                                      \
-+-    uv__queue_move(&loop->name##_handles, &queue);                            \
-+-    while (!uv__queue_empty(&queue)) {                                        \
-+-      q = uv__queue_head(&queue);                                             \
-+-      h = uv__queue_data(q, uv_##name##_t, queue);                            \
-+-      uv__queue_remove(q);                                                    \
-+-      uv__queue_insert_tail(&loop->name##_handles, q);                        \
-++    QUEUE queue;                                                              \
-++    QUEUE* q;                                                                 \
-++    QUEUE_MOVE(&loop->name##_handles, &queue);                                \
-++    while (!QUEUE_EMPTY(&queue)) {                                            \
-++      q = QUEUE_HEAD(&queue);                                                 \
-++      h = QUEUE_DATA(q, uv_##name##_t, queue);                                \
-++      QUEUE_REMOVE(q);                                                        \
-++      QUEUE_INSERT_TAIL(&loop->name##_handles, q);                            \
-+       h->name##_cb(h);                                                        \
-+     }                                                                         \
-+   }                                                                           \
-+diff --git a/deps/uv/src/unix/loop.c b/deps/uv/src/unix/loop.c
-+index a9468e8e19c..90a51b339de 100644
-+--- a/deps/uv/src/unix/loop.c
-++++ b/deps/uv/src/unix/loop.c
-+@@ -50,20 +50,20 @@ int uv_loop_init(uv_loop_t* loop) {
-+          sizeof(lfields->loop_metrics.metrics));
-+ 
-+   heap_init((struct heap*) &loop->timer_heap);
-+-  uv__queue_init(&loop->wq);
-+-  uv__queue_init(&loop->idle_handles);
-+-  uv__queue_init(&loop->async_handles);
-+-  uv__queue_init(&loop->check_handles);
-+-  uv__queue_init(&loop->prepare_handles);
-+-  uv__queue_init(&loop->handle_queue);
-++  QUEUE_INIT(&loop->wq);
-++  QUEUE_INIT(&loop->idle_handles);
-++  QUEUE_INIT(&loop->async_handles);
-++  QUEUE_INIT(&loop->check_handles);
-++  QUEUE_INIT(&loop->prepare_handles);
-++  QUEUE_INIT(&loop->handle_queue);
-+ 
-+   loop->active_handles = 0;
-+   loop->active_reqs.count = 0;
-+   loop->nfds = 0;
-+   loop->watchers = NULL;
-+   loop->nwatchers = 0;
-+-  uv__queue_init(&loop->pending_queue);
-+-  uv__queue_init(&loop->watcher_queue);
-++  QUEUE_INIT(&loop->pending_queue);
-++  QUEUE_INIT(&loop->watcher_queue);
-+ 
-+   loop->closing_handles = NULL;
-+   uv__update_time(loop);
-+@@ -85,7 +85,7 @@ int uv_loop_init(uv_loop_t* loop) {
-+   err = uv__process_init(loop);
-+   if (err)
-+     goto fail_signal_init;
-+-  uv__queue_init(&loop->process_handles);
-++  QUEUE_INIT(&loop->process_handles);
-+ 
-+   err = uv_rwlock_init(&loop->cloexec_lock);
-+   if (err)
-+@@ -152,9 +152,9 @@ int uv_loop_fork(uv_loop_t* loop) {
-+     if (w == NULL)
-+       continue;
-+ 
-+-    if (w->pevents != 0 && uv__queue_empty(&w->watcher_queue)) {
-++    if (w->pevents != 0 && QUEUE_EMPTY(&w->watcher_queue)) {
-+       w->events = 0; /* Force re-registration in uv__io_poll. */
-+-      uv__queue_insert_tail(&loop->watcher_queue, &w->watcher_queue);
-++      QUEUE_INSERT_TAIL(&loop->watcher_queue, &w->watcher_queue);
-+     }
-+   }
-+ 
-+@@ -180,7 +180,7 @@ void uv__loop_close(uv_loop_t* loop) {
-+   }
-+ 
-+   uv_mutex_lock(&loop->wq_mutex);
-+-  assert(uv__queue_empty(&loop->wq) && "thread pool work queue not empty!");
-++  assert(QUEUE_EMPTY(&loop->wq) && "thread pool work queue not empty!");
-+   assert(!uv__has_active_reqs(loop));
-+   uv_mutex_unlock(&loop->wq_mutex);
-+   uv_mutex_destroy(&loop->wq_mutex);
-+@@ -192,8 +192,8 @@ void uv__loop_close(uv_loop_t* loop) {
-+   uv_rwlock_destroy(&loop->cloexec_lock);
-+ 
-+ #if 0
-+-  assert(uv__queue_empty(&loop->pending_queue));
-+-  assert(uv__queue_empty(&loop->watcher_queue));
-++  assert(QUEUE_EMPTY(&loop->pending_queue));
-++  assert(QUEUE_EMPTY(&loop->watcher_queue));
-+   assert(loop->nfds == 0);
-+ #endif
-+ 
-+diff --git a/deps/uv/src/unix/os390-syscalls.c b/deps/uv/src/unix/os390-syscalls.c
-+index 7f90c270906..5861aaaa202 100644
-+--- a/deps/uv/src/unix/os390-syscalls.c
-++++ b/deps/uv/src/unix/os390-syscalls.c
-+@@ -27,7 +27,7 @@
-+ #include <termios.h>
-+ #include <sys/msg.h>
-+ 
-+-static struct uv__queue global_epoll_queue;
-++static QUEUE global_epoll_queue;
-+ static uv_mutex_t global_epoll_lock;
-+ static uv_once_t once = UV_ONCE_INIT;
-+ 
-+@@ -178,18 +178,18 @@ static void after_fork(void) {
-+ 
-+ 
-+ static void child_fork(void) {
-+-  struct uv__queue* q;
-++  QUEUE* q;
-+   uv_once_t child_once = UV_ONCE_INIT;
-+ 
-+   /* reset once */
-+   memcpy(&once, &child_once, sizeof(child_once));
-+ 
-+   /* reset epoll list */
-+-  while (!uv__queue_empty(&global_epoll_queue)) {
-++  while (!QUEUE_EMPTY(&global_epoll_queue)) {
-+     uv__os390_epoll* lst;
-+-    q = uv__queue_head(&global_epoll_queue);
-+-    uv__queue_remove(q);
-+-    lst = uv__queue_data(q, uv__os390_epoll, member);
-++    q = QUEUE_HEAD(&global_epoll_queue);
-++    QUEUE_REMOVE(q);
-++    lst = QUEUE_DATA(q, uv__os390_epoll, member);
-+     uv__free(lst->items);
-+     lst->items = NULL;
-+     lst->size = 0;
-+@@ -201,7 +201,7 @@ static void child_fork(void) {
-+ 
-+ 
-+ static void epoll_init(void) {
-+-  uv__queue_init(&global_epoll_queue);
-++  QUEUE_INIT(&global_epoll_queue);
-+   if (uv_mutex_init(&global_epoll_lock))
-+     abort();
-+ 
-+@@ -225,7 +225,7 @@ uv__os390_epoll* epoll_create1(int flags) {
-+     lst->items[lst->size - 1].revents = 0;
-+     uv_once(&once, epoll_init);
-+     uv_mutex_lock(&global_epoll_lock);
-+-    uv__queue_insert_tail(&global_epoll_queue, &lst->member);
-++    QUEUE_INSERT_TAIL(&global_epoll_queue, &lst->member);
-+     uv_mutex_unlock(&global_epoll_lock);
-+   }
-+ 
-+@@ -352,14 +352,14 @@ int epoll_wait(uv__os390_epoll* lst, struct epoll_event* events,
-+ 
-+ 
-+ int epoll_file_close(int fd) {
-+-  struct uv__queue* q;
-++  QUEUE* q;
-+ 
-+   uv_once(&once, epoll_init);
-+   uv_mutex_lock(&global_epoll_lock);
-+-  uv__queue_foreach(q, &global_epoll_queue) {
-++  QUEUE_FOREACH(q, &global_epoll_queue) {
-+     uv__os390_epoll* lst;
-+ 
-+-    lst = uv__queue_data(q, uv__os390_epoll, member);
-++    lst = QUEUE_DATA(q, uv__os390_epoll, member);
-+     if (fd < lst->size && lst->items != NULL && lst->items[fd].fd != -1)
-+       lst->items[fd].fd = -1;
-+   }
-+@@ -371,7 +371,7 @@ int epoll_file_close(int fd) {
-+ void epoll_queue_close(uv__os390_epoll* lst) {
-+   /* Remove epoll instance from global queue */
-+   uv_mutex_lock(&global_epoll_lock);
-+-  uv__queue_remove(&lst->member);
-++  QUEUE_REMOVE(&lst->member);
-+   uv_mutex_unlock(&global_epoll_lock);
-+ 
-+   /* Free resources */
-+diff --git a/deps/uv/src/unix/os390-syscalls.h b/deps/uv/src/unix/os390-syscalls.h
-+index d5f3bcf8b1c..9f504171d85 100644
-+--- a/deps/uv/src/unix/os390-syscalls.h
-++++ b/deps/uv/src/unix/os390-syscalls.h
-+@@ -45,7 +45,7 @@ struct epoll_event {
-+ };
-+ 
-+ typedef struct {
-+-  struct uv__queue member;
-++  QUEUE member;
-+   struct pollfd* items;
-+   unsigned long size;
-+   int msg_queue;
-+diff --git a/deps/uv/src/unix/os390.c b/deps/uv/src/unix/os390.c
-+index bbd37692d1d..a87c2d77faf 100644
-+--- a/deps/uv/src/unix/os390.c
-++++ b/deps/uv/src/unix/os390.c
-+@@ -815,7 +815,7 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+   uv__os390_epoll* ep;
-+   int have_signals;
-+   int real_timeout;
-+-  struct uv__queue* q;
-++  QUEUE* q;
-+   uv__io_t* w;
-+   uint64_t base;
-+   int count;
-+@@ -827,19 +827,19 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+   int reset_timeout;
-+ 
-+   if (loop->nfds == 0) {
-+-    assert(uv__queue_empty(&loop->watcher_queue));
-++    assert(QUEUE_EMPTY(&loop->watcher_queue));
-+     return;
-+   }
-+ 
-+   lfields = uv__get_internal_fields(loop);
-+ 
-+-  while (!uv__queue_empty(&loop->watcher_queue)) {
-++  while (!QUEUE_EMPTY(&loop->watcher_queue)) {
-+     uv_stream_t* stream;
-+ 
-+-    q = uv__queue_head(&loop->watcher_queue);
-+-    uv__queue_remove(q);
-+-    uv__queue_init(q);
-+-    w = uv__queue_data(q, uv__io_t, watcher_queue);
-++    q = QUEUE_HEAD(&loop->watcher_queue);
-++    QUEUE_REMOVE(q);
-++    QUEUE_INIT(q);
-++    w = QUEUE_DATA(q, uv__io_t, watcher_queue);
-+ 
-+     assert(w->pevents != 0);
-+     assert(w->fd >= 0);
-+diff --git a/deps/uv/src/unix/pipe.c b/deps/uv/src/unix/pipe.c
-+index d332f351830..ce91ac49b30 100644
-+--- a/deps/uv/src/unix/pipe.c
-++++ b/deps/uv/src/unix/pipe.c
-+@@ -297,7 +297,7 @@ out:
-+   uv__req_init(handle->loop, req, UV_CONNECT);
-+   req->handle = (uv_stream_t*)handle;
-+   req->cb = cb;
-+-  uv__queue_init(&req->queue);
-++  QUEUE_INIT(&req->queue);
-+ 
-+   /* Force callback to run on next tick in case of error. */
-+   if (err)
-+diff --git a/deps/uv/src/unix/posix-poll.c b/deps/uv/src/unix/posix-poll.c
-+index 2e016c2fbae..7e7de86845d 100644
-+--- a/deps/uv/src/unix/posix-poll.c
-++++ b/deps/uv/src/unix/posix-poll.c
-+@@ -137,7 +137,7 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+   sigset_t set;
-+   uint64_t time_base;
-+   uint64_t time_diff;
-+-  struct uv__queue* q;
-++  QUEUE* q;
-+   uv__io_t* w;
-+   size_t i;
-+   unsigned int nevents;
-+@@ -149,19 +149,19 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+   int reset_timeout;
-+ 
-+   if (loop->nfds == 0) {
-+-    assert(uv__queue_empty(&loop->watcher_queue));
-++    assert(QUEUE_EMPTY(&loop->watcher_queue));
-+     return;
-+   }
-+ 
-+   lfields = uv__get_internal_fields(loop);
-+ 
-+   /* Take queued watchers and add their fds to our poll fds array.  */
-+-  while (!uv__queue_empty(&loop->watcher_queue)) {
-+-    q = uv__queue_head(&loop->watcher_queue);
-+-    uv__queue_remove(q);
-+-    uv__queue_init(q);
-++  while (!QUEUE_EMPTY(&loop->watcher_queue)) {
-++    q = QUEUE_HEAD(&loop->watcher_queue);
-++    QUEUE_REMOVE(q);
-++    QUEUE_INIT(q);
-+ 
-+-    w = uv__queue_data(q, uv__io_t, watcher_queue);
-++    w = QUEUE_DATA(q, uv__io_t, watcher_queue);
-+     assert(w->pevents != 0);
-+     assert(w->fd >= 0);
-+     assert(w->fd < (int) loop->nwatchers);
-+diff --git a/deps/uv/src/unix/process.c b/deps/uv/src/unix/process.c
-+index dd58c18d9b9..bbf367b57d3 100644
-+--- a/deps/uv/src/unix/process.c
-++++ b/deps/uv/src/unix/process.c
-+@@ -108,17 +108,17 @@ void uv__wait_children(uv_loop_t* loop) {
-+   int status;
-+   int options;
-+   pid_t pid;
-+-  struct uv__queue pending;
-+-  struct uv__queue* q;
-+-  struct uv__queue* h;
-++  QUEUE pending;
-++  QUEUE* q;
-++  QUEUE* h;
-+ 
-+-  uv__queue_init(&pending);
-++  QUEUE_INIT(&pending);
-+ 
-+   h = &loop->process_handles;
-+-  q = uv__queue_head(h);
-++  q = QUEUE_HEAD(h);
-+   while (q != h) {
-+-    process = uv__queue_data(q, uv_process_t, queue);
-+-    q = uv__queue_next(q);
-++    process = QUEUE_DATA(q, uv_process_t, queue);
-++    q = QUEUE_NEXT(q);
-+ 
-+ #ifndef UV_USE_SIGCHLD
-+     if ((process->flags & UV_HANDLE_REAP) == 0)
-+@@ -149,18 +149,18 @@ void uv__wait_children(uv_loop_t* loop) {
-+ 
-+     assert(pid == process->pid);
-+     process->status = status;
-+-    uv__queue_remove(&process->queue);
-+-    uv__queue_insert_tail(&pending, &process->queue);
-++    QUEUE_REMOVE(&process->queue);
-++    QUEUE_INSERT_TAIL(&pending, &process->queue);
-+   }
-+ 
-+   h = &pending;
-+-  q = uv__queue_head(h);
-++  q = QUEUE_HEAD(h);
-+   while (q != h) {
-+-    process = uv__queue_data(q, uv_process_t, queue);
-+-    q = uv__queue_next(q);
-++    process = QUEUE_DATA(q, uv_process_t, queue);
-++    q = QUEUE_NEXT(q);
-+ 
-+-    uv__queue_remove(&process->queue);
-+-    uv__queue_init(&process->queue);
-++    QUEUE_REMOVE(&process->queue);
-++    QUEUE_INIT(&process->queue);
-+     uv__handle_stop(process);
-+ 
-+     if (process->exit_cb == NULL)
-+@@ -176,7 +176,7 @@ void uv__wait_children(uv_loop_t* loop) {
-+ 
-+     process->exit_cb(process, exit_status, term_signal);
-+   }
-+-  assert(uv__queue_empty(&pending));
-++  assert(QUEUE_EMPTY(&pending));
-+ }
-+ 
-+ /*
-+@@ -978,7 +978,7 @@ int uv_spawn(uv_loop_t* loop,
-+                               UV_PROCESS_WINDOWS_VERBATIM_ARGUMENTS)));
-+ 
-+   uv__handle_init(loop, (uv_handle_t*)process, UV_PROCESS);
-+-  uv__queue_init(&process->queue);
-++  QUEUE_INIT(&process->queue);
-+   process->status = 0;
-+ 
-+   stdio_count = options->stdio_count;
-+@@ -1041,7 +1041,7 @@ int uv_spawn(uv_loop_t* loop,
-+ 
-+     process->pid = pid;
-+     process->exit_cb = options->exit_cb;
-+-    uv__queue_insert_tail(&loop->process_handles, &process->queue);
-++    QUEUE_INSERT_TAIL(&loop->process_handles, &process->queue);
-+     uv__handle_start(process);
-+   }
-+ 
-+@@ -1103,10 +1103,10 @@ int uv_kill(int pid, int signum) {
-+ 
-+ 
-+ void uv__process_close(uv_process_t* handle) {
-+-  uv__queue_remove(&handle->queue);
-++  QUEUE_REMOVE(&handle->queue);
-+   uv__handle_stop(handle);
-+ #ifdef UV_USE_SIGCHLD
-+-  if (uv__queue_empty(&handle->loop->process_handles))
-++  if (QUEUE_EMPTY(&handle->loop->process_handles))
-+     uv_signal_stop(&handle->loop->child_watcher);
-+ #endif
-+ }
-+diff --git a/deps/uv/src/unix/signal.c b/deps/uv/src/unix/signal.c
-+index 63aba5a60e0..bb70523f561 100644
-+--- a/deps/uv/src/unix/signal.c
-++++ b/deps/uv/src/unix/signal.c
-+@@ -291,16 +291,16 @@ int uv__signal_loop_fork(uv_loop_t* loop) {
-+ 
-+ 
-+ void uv__signal_loop_cleanup(uv_loop_t* loop) {
-+-  struct uv__queue* q;
-++  QUEUE* q;
-+ 
-+   /* Stop all the signal watchers that are still attached to this loop. This
-+    * ensures that the (shared) signal tree doesn't contain any invalid entries
-+    * entries, and that signal handlers are removed when appropriate.
-+-   * It's safe to use uv__queue_foreach here because the handles and the handle
-++   * It's safe to use QUEUE_FOREACH here because the handles and the handle
-+    * queue are not modified by uv__signal_stop().
-+    */
-+-  uv__queue_foreach(q, &loop->handle_queue) {
-+-    uv_handle_t* handle = uv__queue_data(q, uv_handle_t, handle_queue);
-++  QUEUE_FOREACH(q, &loop->handle_queue) {
-++    uv_handle_t* handle = QUEUE_DATA(q, uv_handle_t, handle_queue);
-+ 
-+     if (handle->type == UV_SIGNAL)
-+       uv__signal_stop((uv_signal_t*) handle);
-+diff --git a/deps/uv/src/unix/stream.c b/deps/uv/src/unix/stream.c
-+index 28c4d5463c4..03f92b5045a 100644
-+--- a/deps/uv/src/unix/stream.c
-++++ b/deps/uv/src/unix/stream.c
-+@@ -94,8 +94,8 @@ void uv__stream_init(uv_loop_t* loop,
-+   stream->accepted_fd = -1;
-+   stream->queued_fds = NULL;
-+   stream->delayed_error = 0;
-+-  uv__queue_init(&stream->write_queue);
-+-  uv__queue_init(&stream->write_completed_queue);
-++  QUEUE_INIT(&stream->write_queue);
-++  QUEUE_INIT(&stream->write_completed_queue);
-+   stream->write_queue_size = 0;
-+ 
-+   if (loop->emfile_fd == -1) {
-+@@ -439,15 +439,15 @@ int uv__stream_open(uv_stream_t* stream, int fd, int flags) {
-+ 
-+ void uv__stream_flush_write_queue(uv_stream_t* stream, int error) {
-+   uv_write_t* req;
-+-  struct uv__queue* q;
-+-  while (!uv__queue_empty(&stream->write_queue)) {
-+-    q = uv__queue_head(&stream->write_queue);
-+-    uv__queue_remove(q);
-++  QUEUE* q;
-++  while (!QUEUE_EMPTY(&stream->write_queue)) {
-++    q = QUEUE_HEAD(&stream->write_queue);
-++    QUEUE_REMOVE(q);
-+ 
-+-    req = uv__queue_data(q, uv_write_t, queue);
-++    req = QUEUE_DATA(q, uv_write_t, queue);
-+     req->error = error;
-+ 
-+-    uv__queue_insert_tail(&stream->write_completed_queue, &req->queue);
-++    QUEUE_INSERT_TAIL(&stream->write_completed_queue, &req->queue);
-+   }
-+ }
-+ 
-+@@ -627,7 +627,7 @@ static void uv__drain(uv_stream_t* stream) {
-+   uv_shutdown_t* req;
-+   int err;
-+ 
-+-  assert(uv__queue_empty(&stream->write_queue));
-++  assert(QUEUE_EMPTY(&stream->write_queue));
-+   if (!(stream->flags & UV_HANDLE_CLOSING)) {
-+     uv__io_stop(stream->loop, &stream->io_watcher, POLLOUT);
-+     uv__stream_osx_interrupt_select(stream);
-+@@ -714,7 +714,7 @@ static void uv__write_req_finish(uv_write_t* req) {
-+   uv_stream_t* stream = req->handle;
-+ 
-+   /* Pop the req off tcp->write_queue. */
-+-  uv__queue_remove(&req->queue);
-++  QUEUE_REMOVE(&req->queue);
-+ 
-+   /* Only free when there was no error. On error, we touch up write_queue_size
-+    * right before making the callback. The reason we don't do that right away
-+@@ -731,7 +731,7 @@ static void uv__write_req_finish(uv_write_t* req) {
-+   /* Add it to the write_completed_queue where it will have its
-+    * callback called in the near future.
-+    */
-+-  uv__queue_insert_tail(&stream->write_completed_queue, &req->queue);
-++  QUEUE_INSERT_TAIL(&stream->write_completed_queue, &req->queue);
-+   uv__io_feed(stream->loop, &stream->io_watcher);
-+ }
-+ 
-+@@ -837,7 +837,7 @@ static int uv__try_write(uv_stream_t* stream,
-+ }
-+ 
-+ static void uv__write(uv_stream_t* stream) {
-+-  struct uv__queue* q;
-++  QUEUE* q;
-+   uv_write_t* req;
-+   ssize_t n;
-+   int count;
-+@@ -851,11 +851,11 @@ static void uv__write(uv_stream_t* stream) {
-+   count = 32;
-+ 
-+   for (;;) {
-+-    if (uv__queue_empty(&stream->write_queue))
-++    if (QUEUE_EMPTY(&stream->write_queue))
-+       return;
-+ 
-+-    q = uv__queue_head(&stream->write_queue);
-+-    req = uv__queue_data(q, uv_write_t, queue);
-++    q = QUEUE_HEAD(&stream->write_queue);
-++    req = QUEUE_DATA(q, uv_write_t, queue);
-+     assert(req->handle == stream);
-+ 
-+     n = uv__try_write(stream,
-+@@ -899,19 +899,19 @@ error:
-+ 
-+ static void uv__write_callbacks(uv_stream_t* stream) {
-+   uv_write_t* req;
-+-  struct uv__queue* q;
-+-  struct uv__queue pq;
-++  QUEUE* q;
-++  QUEUE pq;
-+ 
-+-  if (uv__queue_empty(&stream->write_completed_queue))
-++  if (QUEUE_EMPTY(&stream->write_completed_queue))
-+     return;
-+ 
-+-  uv__queue_move(&stream->write_completed_queue, &pq);
-++  QUEUE_MOVE(&stream->write_completed_queue, &pq);
-+ 
-+-  while (!uv__queue_empty(&pq)) {
-++  while (!QUEUE_EMPTY(&pq)) {
-+     /* Pop a req off write_completed_queue. */
-+-    q = uv__queue_head(&pq);
-+-    req = uv__queue_data(q, uv_write_t, queue);
-+-    uv__queue_remove(q);
-++    q = QUEUE_HEAD(&pq);
-++    req = QUEUE_DATA(q, uv_write_t, queue);
-++    QUEUE_REMOVE(q);
-+     uv__req_unregister(stream->loop, req);
-+ 
-+     if (req->bufs != NULL) {
-+@@ -1174,7 +1174,7 @@ int uv_shutdown(uv_shutdown_t* req, uv_stream_t* stream, uv_shutdown_cb cb) {
-+   stream->shutdown_req = req;
-+   stream->flags &= ~UV_HANDLE_WRITABLE;
-+ 
-+-  if (uv__queue_empty(&stream->write_queue))
-++  if (QUEUE_EMPTY(&stream->write_queue))
-+     uv__io_feed(stream->loop, &stream->io_watcher);
-+ 
-+   return 0;
-+@@ -1227,7 +1227,7 @@ static void uv__stream_io(uv_loop_t* loop, uv__io_t* w, unsigned int events) {
-+     uv__write_callbacks(stream);
-+ 
-+     /* Write queue drained. */
-+-    if (uv__queue_empty(&stream->write_queue))
-++    if (QUEUE_EMPTY(&stream->write_queue))
-+       uv__drain(stream);
-+   }
-+ }
-+@@ -1270,7 +1270,7 @@ static void uv__stream_connect(uv_stream_t* stream) {
-+   stream->connect_req = NULL;
-+   uv__req_unregister(stream->loop, req);
-+ 
-+-  if (error < 0 || uv__queue_empty(&stream->write_queue)) {
-++  if (error < 0 || QUEUE_EMPTY(&stream->write_queue)) {
-+     uv__io_stop(stream->loop, &stream->io_watcher, POLLOUT);
-+   }
-+ 
-+@@ -1352,7 +1352,7 @@ int uv_write2(uv_write_t* req,
-+   req->handle = stream;
-+   req->error = 0;
-+   req->send_handle = send_handle;
-+-  uv__queue_init(&req->queue);
-++  QUEUE_INIT(&req->queue);
-+ 
-+   req->bufs = req->bufsml;
-+   if (nbufs > ARRAY_SIZE(req->bufsml))
-+@@ -1367,7 +1367,7 @@ int uv_write2(uv_write_t* req,
-+   stream->write_queue_size += uv__count_bufs(bufs, nbufs);
-+ 
-+   /* Append the request to write_queue. */
-+-  uv__queue_insert_tail(&stream->write_queue, &req->queue);
-++  QUEUE_INSERT_TAIL(&stream->write_queue, &req->queue);
-+ 
-+   /* If the queue was empty when this function began, we should attempt to
-+    * do the write immediately. Otherwise start the write_watcher and wait
-+diff --git a/deps/uv/src/unix/sunos.c b/deps/uv/src/unix/sunos.c
-+index 2d6bae79604..75b6fbad493 100644
-+--- a/deps/uv/src/unix/sunos.c
-++++ b/deps/uv/src/unix/sunos.c
-+@@ -148,7 +148,7 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+   struct port_event events[1024];
-+   struct port_event* pe;
-+   struct timespec spec;
-+-  struct uv__queue* q;
-++  QUEUE* q;
-+   uv__io_t* w;
-+   sigset_t* pset;
-+   sigset_t set;
-+@@ -166,16 +166,16 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+   int reset_timeout;
-+ 
-+   if (loop->nfds == 0) {
-+-    assert(uv__queue_empty(&loop->watcher_queue));
-++    assert(QUEUE_EMPTY(&loop->watcher_queue));
-+     return;
-+   }
-+ 
-+-  while (!uv__queue_empty(&loop->watcher_queue)) {
-+-    q = uv__queue_head(&loop->watcher_queue);
-+-    uv__queue_remove(q);
-+-    uv__queue_init(q);
-++  while (!QUEUE_EMPTY(&loop->watcher_queue)) {
-++    q = QUEUE_HEAD(&loop->watcher_queue);
-++    QUEUE_REMOVE(q);
-++    QUEUE_INIT(q);
-+ 
-+-    w = uv__queue_data(q, uv__io_t, watcher_queue);
-++    w = QUEUE_DATA(q, uv__io_t, watcher_queue);
-+     assert(w->pevents != 0);
-+ 
-+     if (port_associate(loop->backend_fd,
-+@@ -316,8 +316,8 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+         continue;  /* Disabled by callback. */
-+ 
-+       /* Events Ports operates in oneshot mode, rearm timer on next run. */
-+-      if (w->pevents != 0 && uv__queue_empty(&w->watcher_queue))
-+-        uv__queue_insert_tail(&loop->watcher_queue, &w->watcher_queue);
-++      if (w->pevents != 0 && QUEUE_EMPTY(&w->watcher_queue))
-++        QUEUE_INSERT_TAIL(&loop->watcher_queue, &w->watcher_queue);
-+     }
-+ 
-+     uv__metrics_inc_events(loop, nevents);
-+diff --git a/deps/uv/src/unix/tcp.c b/deps/uv/src/unix/tcp.c
-+index d6c848f4610..ab4e06c2f67 100644
-+--- a/deps/uv/src/unix/tcp.c
-++++ b/deps/uv/src/unix/tcp.c
-+@@ -124,7 +124,7 @@ int uv_tcp_init_ex(uv_loop_t* loop, uv_tcp_t* tcp, unsigned int flags) {
-+   if (domain != AF_UNSPEC) {
-+     err = new_socket(tcp, domain, 0);
-+     if (err) {
-+-      uv__queue_remove(&tcp->handle_queue);
-++      QUEUE_REMOVE(&tcp->handle_queue);
-+       if (tcp->io_watcher.fd != -1)
-+         uv__close(tcp->io_watcher.fd);
-+       tcp->io_watcher.fd = -1;
-+@@ -252,7 +252,7 @@ out:
-+   uv__req_init(handle->loop, req, UV_CONNECT);
-+   req->cb = cb;
-+   req->handle = (uv_stream_t*) handle;
-+-  uv__queue_init(&req->queue);
-++  QUEUE_INIT(&req->queue);
-+   handle->connect_req = req;
-+ 
-+   uv__io_start(handle->loop, &handle->io_watcher, POLLOUT);
-+diff --git a/deps/uv/src/unix/tty.c b/deps/uv/src/unix/tty.c
-+index d099bdb3b67..7a5390c1a8b 100644
-+--- a/deps/uv/src/unix/tty.c
-++++ b/deps/uv/src/unix/tty.c
-+@@ -222,7 +222,7 @@ skip:
-+     int rc = r;
-+     if (newfd != -1)
-+       uv__close(newfd);
-+-    uv__queue_remove(&tty->handle_queue);
-++    QUEUE_REMOVE(&tty->handle_queue);
-+     do
-+       r = fcntl(fd, F_SETFL, saved_flags);
-+     while (r == -1 && errno == EINTR);
-+diff --git a/deps/uv/src/unix/udp.c b/deps/uv/src/unix/udp.c
-+index c2814512a5f..f556808fbae 100644
-+--- a/deps/uv/src/unix/udp.c
-++++ b/deps/uv/src/unix/udp.c
-+@@ -62,18 +62,18 @@ void uv__udp_close(uv_udp_t* handle) {
-+ 
-+ void uv__udp_finish_close(uv_udp_t* handle) {
-+   uv_udp_send_t* req;
-+-  struct uv__queue* q;
-++  QUEUE* q;
-+ 
-+   assert(!uv__io_active(&handle->io_watcher, POLLIN | POLLOUT));
-+   assert(handle->io_watcher.fd == -1);
-+ 
-+-  while (!uv__queue_empty(&handle->write_queue)) {
-+-    q = uv__queue_head(&handle->write_queue);
-+-    uv__queue_remove(q);
-++  while (!QUEUE_EMPTY(&handle->write_queue)) {
-++    q = QUEUE_HEAD(&handle->write_queue);
-++    QUEUE_REMOVE(q);
-+ 
-+-    req = uv__queue_data(q, uv_udp_send_t, queue);
-++    req = QUEUE_DATA(q, uv_udp_send_t, queue);
-+     req->status = UV_ECANCELED;
-+-    uv__queue_insert_tail(&handle->write_completed_queue, &req->queue);
-++    QUEUE_INSERT_TAIL(&handle->write_completed_queue, &req->queue);
-+   }
-+ 
-+   uv__udp_run_completed(handle);
-+@@ -90,16 +90,16 @@ void uv__udp_finish_close(uv_udp_t* handle) {
-+ 
-+ static void uv__udp_run_completed(uv_udp_t* handle) {
-+   uv_udp_send_t* req;
-+-  struct uv__queue* q;
-++  QUEUE* q;
-+ 
-+   assert(!(handle->flags & UV_HANDLE_UDP_PROCESSING));
-+   handle->flags |= UV_HANDLE_UDP_PROCESSING;
-+ 
-+-  while (!uv__queue_empty(&handle->write_completed_queue)) {
-+-    q = uv__queue_head(&handle->write_completed_queue);
-+-    uv__queue_remove(q);
-++  while (!QUEUE_EMPTY(&handle->write_completed_queue)) {
-++    q = QUEUE_HEAD(&handle->write_completed_queue);
-++    QUEUE_REMOVE(q);
-+ 
-+-    req = uv__queue_data(q, uv_udp_send_t, queue);
-++    req = QUEUE_DATA(q, uv_udp_send_t, queue);
-+     uv__req_unregister(handle->loop, req);
-+ 
-+     handle->send_queue_size -= uv__count_bufs(req->bufs, req->nbufs);
-+@@ -121,7 +121,7 @@ static void uv__udp_run_completed(uv_udp_t* handle) {
-+       req->send_cb(req, req->status);
-+   }
-+ 
-+-  if (uv__queue_empty(&handle->write_queue)) {
-++  if (QUEUE_EMPTY(&handle->write_queue)) {
-+     /* Pending queue and completion queue empty, stop watcher. */
-+     uv__io_stop(handle->loop, &handle->io_watcher, POLLOUT);
-+     if (!uv__io_active(&handle->io_watcher, POLLIN))
-+@@ -280,20 +280,20 @@ static void uv__udp_sendmsg(uv_udp_t* handle) {
-+   uv_udp_send_t* req;
-+   struct mmsghdr h[20];
-+   struct mmsghdr* p;
-+-  struct uv__queue* q;
-++  QUEUE* q;
-+   ssize_t npkts;
-+   size_t pkts;
-+   size_t i;
-+ 
-+-  if (uv__queue_empty(&handle->write_queue))
-++  if (QUEUE_EMPTY(&handle->write_queue))
-+     return;
-+ 
-+ write_queue_drain:
-+-  for (pkts = 0, q = uv__queue_head(&handle->write_queue);
-++  for (pkts = 0, q = QUEUE_HEAD(&handle->write_queue);
-+        pkts < ARRAY_SIZE(h) && q != &handle->write_queue;
-+-       ++pkts, q = uv__queue_head(q)) {
-++       ++pkts, q = QUEUE_HEAD(q)) {
-+     assert(q != NULL);
-+-    req = uv__queue_data(q, uv_udp_send_t, queue);
-++    req = QUEUE_DATA(q, uv_udp_send_t, queue);
-+     assert(req != NULL);
-+ 
-+     p = &h[pkts];
-+@@ -325,16 +325,16 @@ write_queue_drain:
-+   if (npkts < 1) {
-+     if (errno == EAGAIN || errno == EWOULDBLOCK || errno == ENOBUFS)
-+       return;
-+-    for (i = 0, q = uv__queue_head(&handle->write_queue);
-++    for (i = 0, q = QUEUE_HEAD(&handle->write_queue);
-+          i < pkts && q != &handle->write_queue;
-+-         ++i, q = uv__queue_head(&handle->write_queue)) {
-++         ++i, q = QUEUE_HEAD(&handle->write_queue)) {
-+       assert(q != NULL);
-+-      req = uv__queue_data(q, uv_udp_send_t, queue);
-++      req = QUEUE_DATA(q, uv_udp_send_t, queue);
-+       assert(req != NULL);
-+ 
-+       req->status = UV__ERR(errno);
-+-      uv__queue_remove(&req->queue);
-+-      uv__queue_insert_tail(&handle->write_completed_queue, &req->queue);
-++      QUEUE_REMOVE(&req->queue);
-++      QUEUE_INSERT_TAIL(&handle->write_completed_queue, &req->queue);
-+     }
-+     uv__io_feed(handle->loop, &handle->io_watcher);
-+     return;
-+@@ -343,11 +343,11 @@ write_queue_drain:
-+   /* Safety: npkts known to be >0 below. Hence cast from ssize_t
-+    * to size_t safe.
-+    */
-+-  for (i = 0, q = uv__queue_head(&handle->write_queue);
-++  for (i = 0, q = QUEUE_HEAD(&handle->write_queue);
-+        i < (size_t)npkts && q != &handle->write_queue;
-+-       ++i, q = uv__queue_head(&handle->write_queue)) {
-++       ++i, q = QUEUE_HEAD(&handle->write_queue)) {
-+     assert(q != NULL);
-+-    req = uv__queue_data(q, uv_udp_send_t, queue);
-++    req = QUEUE_DATA(q, uv_udp_send_t, queue);
-+     assert(req != NULL);
-+ 
-+     req->status = req->bufs[0].len;
-+@@ -357,25 +357,25 @@ write_queue_drain:
-+      * why we don't handle partial writes. Just pop the request
-+      * off the write queue and onto the completed queue, done.
-+      */
-+-    uv__queue_remove(&req->queue);
-+-    uv__queue_insert_tail(&handle->write_completed_queue, &req->queue);
-++    QUEUE_REMOVE(&req->queue);
-++    QUEUE_INSERT_TAIL(&handle->write_completed_queue, &req->queue);
-+   }
-+ 
-+   /* couldn't batch everything, continue sending (jump to avoid stack growth) */
-+-  if (!uv__queue_empty(&handle->write_queue))
-++  if (!QUEUE_EMPTY(&handle->write_queue))
-+     goto write_queue_drain;
-+   uv__io_feed(handle->loop, &handle->io_watcher);
-+ #else  /* __linux__ || ____FreeBSD__ */
-+   uv_udp_send_t* req;
-+   struct msghdr h;
-+-  struct uv__queue* q;
-++  QUEUE* q;
-+   ssize_t size;
-+ 
-+-  while (!uv__queue_empty(&handle->write_queue)) {
-+-    q = uv__queue_head(&handle->write_queue);
-++  while (!QUEUE_EMPTY(&handle->write_queue)) {
-++    q = QUEUE_HEAD(&handle->write_queue);
-+     assert(q != NULL);
-+ 
-+-    req = uv__queue_data(q, uv_udp_send_t, queue);
-++    req = QUEUE_DATA(q, uv_udp_send_t, queue);
-+     assert(req != NULL);
-+ 
-+     memset(&h, 0, sizeof h);
-+@@ -414,8 +414,8 @@ write_queue_drain:
-+      * why we don't handle partial writes. Just pop the request
-+      * off the write queue and onto the completed queue, done.
-+      */
-+-    uv__queue_remove(&req->queue);
-+-    uv__queue_insert_tail(&handle->write_completed_queue, &req->queue);
-++    QUEUE_REMOVE(&req->queue);
-++    QUEUE_INSERT_TAIL(&handle->write_completed_queue, &req->queue);
-+     uv__io_feed(handle->loop, &handle->io_watcher);
-+   }
-+ #endif  /* __linux__ || ____FreeBSD__ */
-+@@ -729,7 +729,7 @@ int uv__udp_send(uv_udp_send_t* req,
-+   memcpy(req->bufs, bufs, nbufs * sizeof(bufs[0]));
-+   handle->send_queue_size += uv__count_bufs(req->bufs, req->nbufs);
-+   handle->send_queue_count++;
-+-  uv__queue_insert_tail(&handle->write_queue, &req->queue);
-++  QUEUE_INSERT_TAIL(&handle->write_queue, &req->queue);
-+   uv__handle_start(handle);
-+ 
-+   if (empty_queue && !(handle->flags & UV_HANDLE_UDP_PROCESSING)) {
-+@@ -739,7 +739,7 @@ int uv__udp_send(uv_udp_send_t* req,
-+      * away. In such cases the `io_watcher` has to be queued for asynchronous
-+      * write.
-+      */
-+-    if (!uv__queue_empty(&handle->write_queue))
-++    if (!QUEUE_EMPTY(&handle->write_queue))
-+       uv__io_start(handle->loop, &handle->io_watcher, POLLOUT);
-+   } else {
-+     uv__io_start(handle->loop, &handle->io_watcher, POLLOUT);
-+@@ -1007,8 +1007,8 @@ int uv__udp_init_ex(uv_loop_t* loop,
-+   handle->send_queue_size = 0;
-+   handle->send_queue_count = 0;
-+   uv__io_init(&handle->io_watcher, uv__udp_io, fd);
-+-  uv__queue_init(&handle->write_queue);
-+-  uv__queue_init(&handle->write_completed_queue);
-++  QUEUE_INIT(&handle->write_queue);
-++  QUEUE_INIT(&handle->write_completed_queue);
-+ 
-+   return 0;
-+ }
-+diff --git a/deps/uv/src/uv-common.c b/deps/uv/src/uv-common.c
-+index 916f3f4e006..cec771fab21 100644
-+--- a/deps/uv/src/uv-common.c
-++++ b/deps/uv/src/uv-common.c
-+@@ -533,17 +533,17 @@ int uv_udp_recv_stop(uv_udp_t* handle) {
-+ 
-+ 
-+ void uv_walk(uv_loop_t* loop, uv_walk_cb walk_cb, void* arg) {
-+-  struct uv__queue queue;
-+-  struct uv__queue* q;
-++  QUEUE queue;
-++  QUEUE* q;
-+   uv_handle_t* h;
-+ 
-+-  uv__queue_move(&loop->handle_queue, &queue);
-+-  while (!uv__queue_empty(&queue)) {
-+-    q = uv__queue_head(&queue);
-+-    h = uv__queue_data(q, uv_handle_t, handle_queue);
-++  QUEUE_MOVE(&loop->handle_queue, &queue);
-++  while (!QUEUE_EMPTY(&queue)) {
-++    q = QUEUE_HEAD(&queue);
-++    h = QUEUE_DATA(q, uv_handle_t, handle_queue);
-+ 
-+-    uv__queue_remove(q);
-+-    uv__queue_insert_tail(&loop->handle_queue, q);
-++    QUEUE_REMOVE(q);
-++    QUEUE_INSERT_TAIL(&loop->handle_queue, q);
-+ 
-+     if (h->flags & UV_HANDLE_INTERNAL) continue;
-+     walk_cb(h, arg);
-+@@ -553,14 +553,14 @@ void uv_walk(uv_loop_t* loop, uv_walk_cb walk_cb, void* arg) {
-+ 
-+ static void uv__print_handles(uv_loop_t* loop, int only_active, FILE* stream) {
-+   const char* type;
-+-  struct uv__queue* q;
-++  QUEUE* q;
-+   uv_handle_t* h;
-+ 
-+   if (loop == NULL)
-+     loop = uv_default_loop();
-+ 
-+-  uv__queue_foreach(q, &loop->handle_queue) {
-+-    h = uv__queue_data(q, uv_handle_t, handle_queue);
-++  QUEUE_FOREACH(q, &loop->handle_queue) {
-++    h = QUEUE_DATA(q, uv_handle_t, handle_queue);
-+ 
-+     if (only_active && !uv__is_active(h))
-+       continue;
-+@@ -846,7 +846,7 @@ uv_loop_t* uv_loop_new(void) {
-+ 
-+ 
-+ int uv_loop_close(uv_loop_t* loop) {
-+-  struct uv__queue* q;
-++  QUEUE* q;
-+   uv_handle_t* h;
-+ #ifndef NDEBUG
-+   void* saved_data;
-+@@ -855,8 +855,8 @@ int uv_loop_close(uv_loop_t* loop) {
-+   if (uv__has_active_reqs(loop))
-+     return UV_EBUSY;
-+ 
-+-  uv__queue_foreach(q, &loop->handle_queue) {
-+-    h = uv__queue_data(q, uv_handle_t, handle_queue);
-++  QUEUE_FOREACH(q, &loop->handle_queue) {
-++    h = QUEUE_DATA(q, uv_handle_t, handle_queue);
-+     if (!(h->flags & UV_HANDLE_INTERNAL))
-+       return UV_EBUSY;
-+   }
-+diff --git a/deps/uv/src/uv-common.h b/deps/uv/src/uv-common.h
-+index cd57e5a3515..decde5362c8 100644
-+--- a/deps/uv/src/uv-common.h
-++++ b/deps/uv/src/uv-common.h
-+@@ -323,7 +323,7 @@ void uv__threadpool_cleanup(void);
-+     (h)->loop = (loop_);                                                      \
-+     (h)->type = (type_);                                                      \
-+     (h)->flags = UV_HANDLE_REF;  /* Ref the loop when active. */              \
-+-    uv__queue_insert_tail(&(loop_)->handle_queue, &(h)->handle_queue);        \
-++    QUEUE_INSERT_TAIL(&(loop_)->handle_queue, &(h)->handle_queue);            \
-+     uv__handle_platform_init(h);                                              \
-+   }                                                                           \
-+   while (0)
-+@@ -415,7 +415,6 @@ struct uv__iou {
-+   size_t sqelen;
-+   int ringfd;
-+   uint32_t in_flight;
-+-  uint32_t flags;
-+ };
-+ #endif  /* __linux__ */
-+ 
-+diff --git a/deps/uv/src/win/core.c b/deps/uv/src/win/core.c
-+index e9885a0f1ff..9a3be58849a 100644
-+--- a/deps/uv/src/win/core.c
-++++ b/deps/uv/src/win/core.c
-+@@ -255,8 +255,8 @@ int uv_loop_init(uv_loop_t* loop) {
-+   loop->time = 0;
-+   uv_update_time(loop);
-+ 
-+-  uv__queue_init(&loop->wq);
-+-  uv__queue_init(&loop->handle_queue);
-++  QUEUE_INIT(&loop->wq);
-++  QUEUE_INIT(&loop->handle_queue);
-+   loop->active_reqs.count = 0;
-+   loop->active_handles = 0;
-+ 
-+@@ -358,7 +358,7 @@ void uv__loop_close(uv_loop_t* loop) {
-+   }
-+ 
-+   uv_mutex_lock(&loop->wq_mutex);
-+-  assert(uv__queue_empty(&loop->wq) && "thread pool work queue not empty!");
-++  assert(QUEUE_EMPTY(&loop->wq) && "thread pool work queue not empty!");
-+   assert(!uv__has_active_reqs(loop));
-+   uv_mutex_unlock(&loop->wq_mutex);
-+   uv_mutex_destroy(&loop->wq_mutex);
-+diff --git a/deps/uv/src/win/fs.c b/deps/uv/src/win/fs.c
-+index fc209c54f47..deb9438d689 100644
-+--- a/deps/uv/src/win/fs.c
-++++ b/deps/uv/src/win/fs.c
-+@@ -144,97 +144,26 @@ void uv__fs_init(void) {
-+ }
-+ 
-+ 
-+-static int32_t fs__decode_wtf8_char(const char** input) {
-+-  uint32_t code_point;
-+-  uint8_t b1;
-+-  uint8_t b2;
-+-  uint8_t b3;
-+-  uint8_t b4;
-+-
-+-  b1 = **input;
-+-  if (b1 <= 0x7F)
-+-    return b1; /* ASCII code point */
-+-  if (b1 < 0xC2)
-+-    return -1; /* invalid: continuation byte */
-+-  code_point = b1;
-+-
-+-  b2 = *++*input;
-+-  if ((b2 & 0xC0) != 0x80)
-+-    return -1; /* invalid: not a continuation byte */
-+-  code_point = (code_point << 6) | (b2 & 0x3F);
-+-  if (b1 <= 0xDF)
-+-    return 0x7FF & code_point; /* two-byte character */
-+-
-+-  b3 = *++*input;
-+-  if ((b3 & 0xC0) != 0x80)
-+-    return -1; /* invalid: not a continuation byte */
-+-  code_point = (code_point << 6) | (b3 & 0x3F);
-+-  if (b1 <= 0xEF)
-+-    return 0xFFFF & code_point; /* three-byte character */
-+-
-+-  b4 = *++*input;
-+-  if ((b4 & 0xC0) != 0x80)
-+-    return -1; /* invalid: not a continuation byte */
-+-  code_point = (code_point << 6) | (b4 & 0x3F);
-+-  if (b1 <= 0xF4)
-+-    if (code_point <= 0x10FFFF)
-+-      return code_point; /* four-byte character */
-+-
-+-  /* code point too large */
-+-  return -1;
-+-}
-+-
-+-
-+-static ssize_t fs__get_length_wtf8(const char* source_ptr) {
-+-  size_t w_target_len = 0;
-+-  int32_t code_point;
-+-
-+-  do {
-+-    code_point = fs__decode_wtf8_char(&source_ptr);
-+-    if (code_point < 0)
-+-      return -1;
-+-    if (code_point > 0xFFFF)
-+-      w_target_len++;
-+-    w_target_len++;
-+-  } while (*source_ptr++);
-+-  return w_target_len;
-+-}
-+-
-+-
-+-static void fs__wtf8_to_wide(const char* source_ptr, WCHAR* w_target) {
-+-  int32_t code_point;
-+-
-+-  do {
-+-    code_point = fs__decode_wtf8_char(&source_ptr);
-+-    /* fs__get_length_wtf8 should have been called and checked first. */
-+-    assert(code_point >= 0);
-+-    if (code_point > 0x10000) {
-+-      assert(code_point < 0x10FFFF);
-+-      *w_target++ = (((code_point - 0x10000) >> 10) + 0xD800);
-+-      *w_target++ = ((code_point - 0x10000) & 0x3FF) + 0xDC00;
-+-    } else {
-+-      *w_target++ = code_point;
-+-    }
-+-  } while (*source_ptr++);
-+-}
-+-
-+-
-+ INLINE static int fs__capture_path(uv_fs_t* req, const char* path,
-+     const char* new_path, const int copy_path) {
-+-  WCHAR* buf;
-+-  WCHAR* pos;
-+-  size_t buf_sz = 0;
-+-  size_t path_len = 0;
-+-  ssize_t pathw_len = 0;
-+-  ssize_t new_pathw_len = 0;
-++  char* buf;
-++  char* pos;
-++  ssize_t buf_sz = 0, path_len = 0, pathw_len = 0, new_pathw_len = 0;
-+ 
-+   /* new_path can only be set if path is also set. */
-+   assert(new_path == NULL || path != NULL);
-+ 
-+   if (path != NULL) {
-+-    pathw_len = fs__get_length_wtf8(path);
-+-    if (pathw_len < 0)
-+-      return ERROR_INVALID_NAME;
-++    pathw_len = MultiByteToWideChar(CP_UTF8,
-++                                    0,
-++                                    path,
-++                                    -1,
-++                                    NULL,
-++                                    0);
-++    if (pathw_len == 0) {
-++      return GetLastError();
-++    }
-++
-+     buf_sz += pathw_len * sizeof(WCHAR);
-+   }
-+ 
-+@@ -244,9 +173,16 @@ INLINE static int fs__capture_path(uv_fs_t* req, const char* path,
-+   }
-+ 
-+   if (new_path != NULL) {
-+-    new_pathw_len = fs__get_length_wtf8(new_path);
-+-    if (new_pathw_len < 0)
-+-      return ERROR_INVALID_NAME;
-++    new_pathw_len = MultiByteToWideChar(CP_UTF8,
-++                                        0,
-++                                        new_path,
-++                                        -1,
-++                                        NULL,
-++                                        0);
-++    if (new_pathw_len == 0) {
-++      return GetLastError();
-++    }
-++
-+     buf_sz += new_pathw_len * sizeof(WCHAR);
-+   }
-+ 
-+@@ -258,7 +194,7 @@ INLINE static int fs__capture_path(uv_fs_t* req, const char* path,
-+     return 0;
-+   }
-+ 
-+-  buf = uv__malloc(buf_sz);
-++  buf = (char*) uv__malloc(buf_sz);
-+   if (buf == NULL) {
-+     return ERROR_OUTOFMEMORY;
-+   }
-+@@ -266,17 +202,29 @@ INLINE static int fs__capture_path(uv_fs_t* req, const char* path,
-+   pos = buf;
-+ 
-+   if (path != NULL) {
-+-    fs__wtf8_to_wide(path, pos);
-+-    req->file.pathw = pos;
-+-    pos += pathw_len;
-++    DWORD r = MultiByteToWideChar(CP_UTF8,
-++                                  0,
-++                                  path,
-++                                  -1,
-++                                  (WCHAR*) pos,
-++                                  pathw_len);
-++    assert(r == (DWORD) pathw_len);
-++    req->file.pathw = (WCHAR*) pos;
-++    pos += r * sizeof(WCHAR);
-+   } else {
-+     req->file.pathw = NULL;
-+   }
-+ 
-+   if (new_path != NULL) {
-+-    fs__wtf8_to_wide(new_path, pos);
-+-    req->fs.info.new_pathw = pos;
-+-    pos += new_pathw_len;
-++    DWORD r = MultiByteToWideChar(CP_UTF8,
-++                                  0,
-++                                  new_path,
-++                                  -1,
-++                                  (WCHAR*) pos,
-++                                  new_pathw_len);
-++    assert(r == (DWORD) new_pathw_len);
-++    req->fs.info.new_pathw = (WCHAR*) pos;
-++    pos += r * sizeof(WCHAR);
-+   } else {
-+     req->fs.info.new_pathw = NULL;
-+   }
-+@@ -284,8 +232,8 @@ INLINE static int fs__capture_path(uv_fs_t* req, const char* path,
-+   req->path = path;
-+   if (path != NULL && copy_path) {
-+     memcpy(pos, path, path_len);
-+-    assert(path_len == buf_sz - (pos - buf) * sizeof(WCHAR));
-+-    req->path = (char*) pos;
-++    assert(path_len == buf_sz - (pos - buf));
-++    req->path = pos;
-+   }
-+ 
-+   req->flags |= UV_FS_FREE_PATHS;
-+@@ -311,115 +259,57 @@ INLINE static void uv__fs_req_init(uv_loop_t* loop, uv_fs_t* req,
-+ }
-+ 
-+ 
-+-static int32_t fs__get_surrogate_value(const WCHAR* w_source_ptr,
-+-                                       size_t w_source_len) {
-+-  WCHAR u;
-+-  WCHAR next;
-+-
-+-  u = w_source_ptr[0];
-+-  if (u >= 0xD800 && u <= 0xDBFF && w_source_len > 1) {
-+-    next = w_source_ptr[1];
-+-    if (next >= 0xDC00 && next <= 0xDFFF)
-+-      return 0x10000 + ((u - 0xD800) << 10) + (next - 0xDC00);
-+-  }
-+-  return u;
-+-}
-+-
-+-
-+-static size_t fs__get_length_wide(const WCHAR* w_source_ptr,
-+-                                  size_t w_source_len) {
-+-  size_t target_len;
-+-  int32_t code_point;
-++static int fs__wide_to_utf8(WCHAR* w_source_ptr,
-++                               DWORD w_source_len,
-++                               char** target_ptr,
-++                               uint64_t* target_len_ptr) {
-++  int r;
-++  int target_len;
-++  char* target;
-++  target_len = WideCharToMultiByte(CP_UTF8,
-++                                   0,
-++                                   w_source_ptr,
-++                                   w_source_len,
-++                                   NULL,
-++                                   0,
-++                                   NULL,
-++                                   NULL);
-+ 
-+-  target_len = 0;
-+-  for (; w_source_len; w_source_len--, w_source_ptr++) {
-+-    code_point = fs__get_surrogate_value(w_source_ptr, w_source_len);
-+-    /* Can be invalid UTF-8 but must be valid WTF-8. */
-+-    assert(code_point >= 0);
-+-    if (code_point < 0x80)
-+-      target_len += 1;
-+-    else if (code_point < 0x800)
-+-      target_len += 2;
-+-    else if (code_point < 0x10000)
-+-      target_len += 3;
-+-    else {
-+-      target_len += 4;
-+-      w_source_ptr++;
-+-      w_source_len--;
-+-    }
-++  if (target_len == 0) {
-++    return -1;
-+   }
-+-  return target_len;
-+-}
-+ 
-+-
-+-static int fs__wide_to_wtf8(WCHAR* w_source_ptr,
-+-                            size_t w_source_len,
-+-                            char** target_ptr,
-+-                            size_t* target_len_ptr) {
-+-  size_t target_len;
-+-  char* target;
-+-  int32_t code_point;
-+-
-+-  /* If *target_ptr is provided, then *target_len_ptr must be its length
-+-   * (excluding space for null), otherwise we will compute the target_len_ptr
-+-   * length and may return a new allocation in *target_ptr if target_ptr is
-+-   * provided. */
-+-  if (target_ptr == NULL || *target_ptr == NULL) {
-+-    target_len = fs__get_length_wide(w_source_ptr, w_source_len);
-+-    if (target_len_ptr != NULL)
-+-      *target_len_ptr = target_len;
-+-  } else {
-+-    target_len = *target_len_ptr;
-++  if (target_len_ptr != NULL) {
-++    *target_len_ptr = target_len;
-+   }
-+ 
-+-  if (target_ptr == NULL)
-++  if (target_ptr == NULL) {
-+     return 0;
-+-
-+-  if (*target_ptr == NULL) {
-+-    target = uv__malloc(target_len + 1);
-+-    if (target == NULL) {
-+-      SetLastError(ERROR_OUTOFMEMORY);
-+-      return -1;
-+-    }
-+-    *target_ptr = target;
-+-  } else {
-+-    target = *target_ptr;
-+-  }
-+-
-+-  for (; w_source_len; w_source_len--, w_source_ptr++) {
-+-    code_point = fs__get_surrogate_value(w_source_ptr, w_source_len);
-+-    /* Can be invalid UTF-8 but must be valid WTF-8. */
-+-    assert(code_point >= 0);
-+-
-+-    if (code_point < 0x80) {
-+-      *target++ = code_point;
-+-    } else if (code_point < 0x800) {
-+-      *target++ = 0xC0 | (code_point >> 6);
-+-      *target++ = 0x80 | (code_point & 0x3F);
-+-    } else if (code_point < 0x10000) {
-+-      *target++ = 0xE0 | (code_point >> 12);
-+-      *target++ = 0x80 | ((code_point >> 6) & 0x3F);
-+-      *target++ = 0x80 | (code_point & 0x3F);
-+-    } else {
-+-      *target++ = 0xF0 | (code_point >> 18);
-+-      *target++ = 0x80 | ((code_point >> 12) & 0x3F);
-+-      *target++ = 0x80 | ((code_point >> 6) & 0x3F);
-+-      *target++ = 0x80 | (code_point & 0x3F);
-+-      w_source_ptr++;
-+-      w_source_len--;
-+-    }
-+   }
-+-  assert((size_t) (target - *target_ptr) == target_len);
-+ 
-+-  *target++ = '\0';
-++  target = uv__malloc(target_len + 1);
-++  if (target == NULL) {
-++    SetLastError(ERROR_OUTOFMEMORY);
-++    return -1;
-++  }
-+ 
-++  r = WideCharToMultiByte(CP_UTF8,
-++                          0,
-++                          w_source_ptr,
-++                          w_source_len,
-++                          target,
-++                          target_len,
-++                          NULL,
-++                          NULL);
-++  assert(r == target_len);
-++  target[target_len] = '\0';
-++  *target_ptr = target;
-+   return 0;
-+ }
-+ 
-+ 
-+-INLINE static int fs__readlink_handle(HANDLE handle,
-+-                                      char** target_ptr,
-+-                                      size_t* target_len_ptr) {
-++INLINE static int fs__readlink_handle(HANDLE handle, char** target_ptr,
-++    uint64_t* target_len_ptr) {
-+   char buffer[MAXIMUM_REPARSE_DATA_BUFFER_SIZE];
-+   REPARSE_DATA_BUFFER* reparse_data = (REPARSE_DATA_BUFFER*) buffer;
-+   WCHAR* w_target;
-+@@ -549,8 +439,7 @@ INLINE static int fs__readlink_handle(HANDLE handle,
-+     return -1;
-+   }
-+ 
-+-  assert(target_ptr == NULL || *target_ptr == NULL);
-+-  return fs__wide_to_wtf8(w_target, w_target_len, target_ptr, target_len_ptr);
-++  return fs__wide_to_utf8(w_target, w_target_len, target_ptr, target_len_ptr);
-+ }
-+ 
-+ 
-+@@ -1540,8 +1429,7 @@ void fs__scandir(uv_fs_t* req) {
-+       uv__dirent_t* dirent;
-+ 
-+       size_t wchar_len;
-+-      size_t wtf8_len;
-+-      char* wtf8;
-++      size_t utf8_len;
-+ 
-+       /* Obtain a pointer to the current directory entry. */
-+       position += next_entry_offset;
-+@@ -1568,8 +1456,11 @@ void fs__scandir(uv_fs_t* req) {
-+           info->FileName[1] == L'.')
-+         continue;
-+ 
-+-      /* Compute the space required to store the filename as WTF-8. */
-+-      wtf8_len = fs__get_length_wide(&info->FileName[0], wchar_len);
-++      /* Compute the space required to store the filename as UTF-8. */
-++      utf8_len = WideCharToMultiByte(
-++          CP_UTF8, 0, &info->FileName[0], wchar_len, NULL, 0, NULL, NULL);
-++      if (utf8_len == 0)
-++        goto win32_error;
-+ 
-+       /* Resize the dirent array if needed. */
-+       if (dirents_used >= dirents_size) {
-+@@ -1589,17 +1480,26 @@ void fs__scandir(uv_fs_t* req) {
-+        * includes room for the first character of the filename, but `utf8_len`
-+        * doesn't count the NULL terminator at this point.
-+        */
-+-      dirent = uv__malloc(sizeof *dirent + wtf8_len);
-++      dirent = uv__malloc(sizeof *dirent + utf8_len);
-+       if (dirent == NULL)
-+         goto out_of_memory_error;
-+ 
-+       dirents[dirents_used++] = dirent;
-+ 
-+       /* Convert file name to UTF-8. */
-+-      wtf8 = &dirent->d_name[0];
-+-      if (fs__wide_to_wtf8(&info->FileName[0], wchar_len, &wtf8, &wtf8_len) == -1)
-++      if (WideCharToMultiByte(CP_UTF8,
-++                              0,
-++                              &info->FileName[0],
-++                              wchar_len,
-++                              &dirent->d_name[0],
-++                              utf8_len,
-++                              NULL,
-++                              NULL) == 0)
-+         goto win32_error;
-+ 
-++      /* Add a null terminator to the filename. */
-++      dirent->d_name[utf8_len] = '\0';
-++
-+       /* Fill out the type field. */
-+       if (info->FileAttributes & FILE_ATTRIBUTE_DEVICE)
-+         dirent->d_type = UV__DT_CHAR;
-+@@ -1808,7 +1708,6 @@ void fs__closedir(uv_fs_t* req) {
-+ 
-+ INLINE static int fs__stat_handle(HANDLE handle, uv_stat_t* statbuf,
-+     int do_lstat) {
-+-  size_t target_length = 0;
-+   FILE_FS_DEVICE_INFORMATION device_info;
-+   FILE_ALL_INFORMATION file_info;
-+   FILE_FS_VOLUME_INFORMATION volume_info;
-+@@ -1904,10 +1803,9 @@ INLINE static int fs__stat_handle(HANDLE handle, uv_stat_t* statbuf,
-+      * to be treated as a regular file. The higher level lstat function will
-+      * detect this failure and retry without do_lstat if appropriate.
-+      */
-+-    if (fs__readlink_handle(handle, NULL, &target_length) != 0)
-++    if (fs__readlink_handle(handle, NULL, &statbuf->st_size) != 0)
-+       return -1;
-+     statbuf->st_mode |= S_IFLNK;
-+-    statbuf->st_size = target_length;
-+   }
-+ 
-+   if (statbuf->st_mode == 0) {
-+@@ -2763,7 +2661,6 @@ static void fs__readlink(uv_fs_t* req) {
-+     return;
-+   }
-+ 
-+-  assert(req->ptr == NULL);
-+   if (fs__readlink_handle(handle, (char**) &req->ptr, NULL) != 0) {
-+     DWORD error = GetLastError();
-+     SET_REQ_WIN32_ERROR(req, error);
-+@@ -2823,8 +2720,7 @@ static ssize_t fs__realpath_handle(HANDLE handle, char** realpath_ptr) {
-+     return -1;
-+   }
-+ 
-+-  assert(*realpath_ptr == NULL);
-+-  r = fs__wide_to_wtf8(w_realpath_ptr, w_realpath_len, realpath_ptr, NULL);
-++  r = fs__wide_to_utf8(w_realpath_ptr, w_realpath_len, realpath_ptr, NULL);
-+   uv__free(w_realpath_buf);
-+   return r;
-+ }
-+@@ -2844,7 +2740,6 @@ static void fs__realpath(uv_fs_t* req) {
-+     return;
-+   }
-+ 
-+-  assert(req->ptr == NULL);
-+   if (fs__realpath_handle(handle, (char**) &req->ptr) == -1) {
-+     CloseHandle(handle);
-+     SET_REQ_WIN32_ERROR(req, GetLastError());
-+diff --git a/deps/uv/src/win/handle-inl.h b/deps/uv/src/win/handle-inl.h
-+index 4722e85790a..5c843c241ef 100644
-+--- a/deps/uv/src/win/handle-inl.h
-++++ b/deps/uv/src/win/handle-inl.h
-+@@ -75,7 +75,7 @@
-+ 
-+ #define uv__handle_close(handle)                                        \
-+   do {                                                                  \
-+-    uv__queue_remove(&(handle)->handle_queue);                          \
-++    QUEUE_REMOVE(&(handle)->handle_queue);                              \
-+     uv__active_handle_rm((uv_handle_t*) (handle));                      \
-+                                                                         \
-+     (handle)->flags |= UV_HANDLE_CLOSED;                                \
-+diff --git a/deps/uv/src/win/pipe.c b/deps/uv/src/win/pipe.c
-+index f0cac382256..5e4276387ac 100644
-+--- a/deps/uv/src/win/pipe.c
-++++ b/deps/uv/src/win/pipe.c
-+@@ -55,7 +55,7 @@ static const int pipe_prefix_len = sizeof(pipe_prefix) - 1;
-+ typedef struct {
-+   uv__ipc_socket_xfer_type_t xfer_type;
-+   uv__ipc_socket_xfer_info_t xfer_info;
-+-  struct uv__queue member;
-++  QUEUE member;
-+ } uv__ipc_xfer_queue_item_t;
-+ 
-+ /* IPC frame header flags. */
-+@@ -111,7 +111,7 @@ int uv_pipe_init(uv_loop_t* loop, uv_pipe_t* handle, int ipc) {
-+   handle->name = NULL;
-+   handle->pipe.conn.ipc_remote_pid = 0;
-+   handle->pipe.conn.ipc_data_frame.payload_remaining = 0;
-+-  uv__queue_init(&handle->pipe.conn.ipc_xfer_queue);
-++  QUEUE_INIT(&handle->pipe.conn.ipc_xfer_queue);
-+   handle->pipe.conn.ipc_xfer_queue_length = 0;
-+   handle->ipc = ipc;
-+   handle->pipe.conn.non_overlapped_writes_tail = NULL;
-+@@ -637,13 +637,13 @@ void uv__pipe_endgame(uv_loop_t* loop, uv_pipe_t* handle) {
-+ 
-+   if (handle->flags & UV_HANDLE_CONNECTION) {
-+     /* Free pending sockets */
-+-    while (!uv__queue_empty(&handle->pipe.conn.ipc_xfer_queue)) {
-+-      struct uv__queue* q;
-++    while (!QUEUE_EMPTY(&handle->pipe.conn.ipc_xfer_queue)) {
-++      QUEUE* q;
-+       SOCKET socket;
-+ 
-+-      q = uv__queue_head(&handle->pipe.conn.ipc_xfer_queue);
-+-      uv__queue_remove(q);
-+-      xfer_queue_item = uv__queue_data(q, uv__ipc_xfer_queue_item_t, member);
-++      q = QUEUE_HEAD(&handle->pipe.conn.ipc_xfer_queue);
-++      QUEUE_REMOVE(q);
-++      xfer_queue_item = QUEUE_DATA(q, uv__ipc_xfer_queue_item_t, member);
-+ 
-+       /* Materialize socket and close it */
-+       socket = WSASocketW(FROM_PROTOCOL_INFO,
-+@@ -1124,20 +1124,20 @@ int uv__pipe_accept(uv_pipe_t* server, uv_stream_t* client) {
-+   uv_loop_t* loop = server->loop;
-+   uv_pipe_t* pipe_client;
-+   uv_pipe_accept_t* req;
-+-  struct uv__queue* q;
-++  QUEUE* q;
-+   uv__ipc_xfer_queue_item_t* item;
-+   int err;
-+ 
-+   if (server->ipc) {
-+-    if (uv__queue_empty(&server->pipe.conn.ipc_xfer_queue)) {
-++    if (QUEUE_EMPTY(&server->pipe.conn.ipc_xfer_queue)) {
-+       /* No valid pending sockets. */
-+       return WSAEWOULDBLOCK;
-+     }
-+ 
-+-    q = uv__queue_head(&server->pipe.conn.ipc_xfer_queue);
-+-    uv__queue_remove(q);
-++    q = QUEUE_HEAD(&server->pipe.conn.ipc_xfer_queue);
-++    QUEUE_REMOVE(q);
-+     server->pipe.conn.ipc_xfer_queue_length--;
-+-    item = uv__queue_data(q, uv__ipc_xfer_queue_item_t, member);
-++    item = QUEUE_DATA(q, uv__ipc_xfer_queue_item_t, member);
-+ 
-+     err = uv__tcp_xfer_import(
-+         (uv_tcp_t*) client, item->xfer_type, &item->xfer_info);
-+@@ -1891,7 +1891,7 @@ static void uv__pipe_queue_ipc_xfer_info(
-+   item->xfer_type = xfer_type;
-+   item->xfer_info = *xfer_info;
-+ 
-+-  uv__queue_insert_tail(&handle->pipe.conn.ipc_xfer_queue, &item->member);
-++  QUEUE_INSERT_TAIL(&handle->pipe.conn.ipc_xfer_queue, &item->member);
-+   handle->pipe.conn.ipc_xfer_queue_length++;
-+ }
-+ 
-+diff --git a/deps/uv/src/win/tcp.c b/deps/uv/src/win/tcp.c
-+index 187f36e2a61..6b282e0b501 100644
-+--- a/deps/uv/src/win/tcp.c
-++++ b/deps/uv/src/win/tcp.c
-+@@ -175,14 +175,14 @@ int uv_tcp_init_ex(uv_loop_t* loop, uv_tcp_t* handle, unsigned int flags) {
-+     sock = socket(domain, SOCK_STREAM, 0);
-+     if (sock == INVALID_SOCKET) {
-+       err = WSAGetLastError();
-+-      uv__queue_remove(&handle->handle_queue);
-++      QUEUE_REMOVE(&handle->handle_queue);
-+       return uv_translate_sys_error(err);
-+     }
-+ 
-+     err = uv__tcp_set_socket(handle->loop, handle, sock, domain, 0);
-+     if (err) {
-+       closesocket(sock);
-+-      uv__queue_remove(&handle->handle_queue);
-++      QUEUE_REMOVE(&handle->handle_queue);
-+       return uv_translate_sys_error(err);
-+     }
-+ 
-+diff --git a/deps/uv/src/win/udp.c b/deps/uv/src/win/udp.c
-+index eab53842d4f..8a982d1907d 100644
-+--- a/deps/uv/src/win/udp.c
-++++ b/deps/uv/src/win/udp.c
-+@@ -146,14 +146,14 @@ int uv__udp_init_ex(uv_loop_t* loop,
-+     sock = socket(domain, SOCK_DGRAM, 0);
-+     if (sock == INVALID_SOCKET) {
-+       err = WSAGetLastError();
-+-      uv__queue_remove(&handle->handle_queue);
-++      QUEUE_REMOVE(&handle->handle_queue);
-+       return uv_translate_sys_error(err);
-+     }
-+ 
-+     err = uv__udp_set_socket(handle->loop, handle, sock, domain);
-+     if (err) {
-+       closesocket(sock);
-+-      uv__queue_remove(&handle->handle_queue);
-++      QUEUE_REMOVE(&handle->handle_queue);
-+       return uv_translate_sys_error(err);
-+     }
-+   }
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0002-Revert-io_uring-changes-from-libuv-1.45.0.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0002-Revert-io_uring-changes-from-libuv-1.45.0.patch
-new file mode 100644
-index 0000000000..77cd53b759
---- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/0002-Revert-io_uring-changes-from-libuv-1.45.0.patch
-@@ -0,0 +1,1803 @@
-+From 6d2ef4c8ba2304ee4941a6719b3ad9bd63e415a9 Mon Sep 17 00:00:00 2001
-+From: Martin Jansa <martin.jansa@gmail.com>
-+Date: Wed, 18 Oct 2023 21:09:44 +0200
-+Subject: [PATCH] Revert io_uring changes from libuv-1.45.0
-+
-+This reverts https://github.com/libuv/libuv/pull/3952/commits/26c79a942b92573a1388c0ee8a6ad4397f009318
-+
-+Included in nodejs-20.3.0 with the libuv upgrade to 1.45.0 in:
-+https://github.com/nodejs/node/commit/bfcb3d1d9a876f399013d326bd65804f9eda77e4
-+
-+Reverted libuv commits:
-+Revert "linux: fix WRITEV with lots of bufs using io_uring (#4004)"
-+This reverts commit ef6a9a624df0a00687037474025a3608472f722a.
-+Revert "linux: work around EOWNERDEAD io_uring kernel bug (#4002)"
-+This reverts commit d23a20f62cc50b9fd7694992263f1d296d8f5cb4.
-+Revert "unix: handle CQ overflow in iou ring (#3991)"
-+This reverts commit 30fc896cc1b5822e9f1eb462587fe4b368a6215c.
-+Revert "unix: constrained_memory should return UINT64_MAX (#3753)"
-+This reverts commit 6ad347fae4520f39520d34bd7c7f5ddafab13a69.
-+Revert "linux: use io_uring to batch epoll_ctl calls (#3979)"
-+This reverts commit 6e073ef5daf93b708a654008959b823b58029e88.
-+Revert "linux: fix logic bug in sqe ring space check (#3980)"
-+This reverts commit f27208224084fc972b9d2802486d97ef31b51a39.
-+Revert "src: fix events/events_waiting metrics counter (#3957)"
-+This reverts commit e02642cf3b768b2c58a41f97fa38507e032ae415.
-+Revert "linux: remove bug workaround for obsolete kernels (#3965)"
-+This reverts commit 1c935a34454167b23f8eef7f0f63d7119f0de747.
-+Revert "linux: add IORING_OP_CLOSE support (#3964)"
-+This reverts commit dfae365f844e127621128a76bce7165e3f99a8d9.
-+Revert "linux: add IORING_OP_OPENAT support (#3963)"
-+This reverts commit 5ca5e475bb1711e65323ef1594a31818e5a1a9eb.
-+Revert "linux: fix academic valgrind warning (#3960)"
-+This reverts commit a7ff759ca1deacb2e0e6ae3c2d3dce91cc637dfe.
-+Revert "linux: introduce io_uring support (#3952)"
-+This reverts commit d2c31f429b87b476a7f1344d145dad4752a406d4.
-+
-+Dropped deps/uv/docs deps/uv/test changes as these dirs aren't included
-+in nodejs tarballs.
-+
-+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
-+---
-+Upstream-Status: Inappropriate [OE specific]
-+
-+ deps/uv/docs/src/fs.rst               |   6 -
-+ deps/uv/docs/src/misc.rst             |   5 +-
-+ deps/uv/src/threadpool.c              |  21 -
-+ deps/uv/src/unix/aix.c                |  11 +-
-+ deps/uv/src/unix/fs.c                 |  57 +-
-+ deps/uv/src/unix/internal.h           |  23 -
-+ deps/uv/src/unix/kqueue.c             |  10 +-
-+ deps/uv/src/unix/linux.c              | 998 +++-----------------------
-+ deps/uv/src/unix/os390.c              |  11 +-
-+ deps/uv/src/unix/posix-poll.c         |  11 +-
-+ deps/uv/src/uv-common.h               |  28 -
-+ deps/uv/src/win/core.c                |  20 +-
-+ deps/uv/test/test-fs.c                |  33 -
-+ deps/uv/test/test-list.h              |   4 -
-+ deps/uv/test/test-metrics.c           | 151 ----
-+ deps/uv/test/test-threadpool-cancel.c |  34 +-
-+ 16 files changed, 138 insertions(+), 1285 deletions(-)
-+
-+diff --git a/deps/uv/src/threadpool.c b/deps/uv/src/threadpool.c
-+index 51962bf0021..a3da53026f9 100644
-+--- a/deps/uv/src/threadpool.c
-++++ b/deps/uv/src/threadpool.c
-+@@ -275,13 +275,9 @@ void uv__work_submit(uv_loop_t* loop,
-+ }
-+ 
-+ 
-+-/* TODO(bnoordhuis) teach libuv how to cancel file operations
-+- * that go through io_uring instead of the thread pool.
-+- */
-+ static int uv__work_cancel(uv_loop_t* loop, uv_req_t* req, struct uv__work* w) {
-+   int cancelled;
-+ 
-+-  uv_once(&once, init_once);  /* Ensure |mutex| is initialized. */
-+   uv_mutex_lock(&mutex);
-+   uv_mutex_lock(&w->loop->wq_mutex);
-+ 
-+@@ -311,15 +307,12 @@ void uv__work_done(uv_async_t* handle) {
-+   QUEUE* q;
-+   QUEUE wq;
-+   int err;
-+-  int nevents;
-+ 
-+   loop = container_of(handle, uv_loop_t, wq_async);
-+   uv_mutex_lock(&loop->wq_mutex);
-+   QUEUE_MOVE(&loop->wq, &wq);
-+   uv_mutex_unlock(&loop->wq_mutex);
-+ 
-+-  nevents = 0;
-+-
-+   while (!QUEUE_EMPTY(&wq)) {
-+     q = QUEUE_HEAD(&wq);
-+     QUEUE_REMOVE(q);
-+@@ -327,20 +320,6 @@ void uv__work_done(uv_async_t* handle) {
-+     w = container_of(q, struct uv__work, wq);
-+     err = (w->work == uv__cancelled) ? UV_ECANCELED : 0;
-+     w->done(w, err);
-+-    nevents++;
-+-  }
-+-
-+-  /* This check accomplishes 2 things:
-+-   * 1. Even if the queue was empty, the call to uv__work_done() should count
-+-   *    as an event. Which will have been added by the event loop when
-+-   *    calling this callback.
-+-   * 2. Prevents accidental wrap around in case nevents == 0 events == 0.
-+-   */
-+-  if (nevents > 1) {
-+-    /* Subtract 1 to counter the call to uv__work_done(). */
-+-    uv__metrics_inc_events(loop, nevents - 1);
-+-    if (uv__get_internal_fields(loop)->current_timeout == 0)
-+-      uv__metrics_inc_events_waiting(loop, nevents - 1);
-+   }
-+ }
-+ 
-+diff --git a/deps/uv/src/unix/aix.c b/deps/uv/src/unix/aix.c
-+index f1afbed49ec..b855282ebc8 100644
-+--- a/deps/uv/src/unix/aix.c
-++++ b/deps/uv/src/unix/aix.c
-+@@ -131,7 +131,6 @@ int uv__io_check_fd(uv_loop_t* loop, int fd) {
-+ 
-+ 
-+ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+-  uv__loop_internal_fields_t* lfields;
-+   struct pollfd events[1024];
-+   struct pollfd pqry;
-+   struct pollfd* pe;
-+@@ -155,8 +154,6 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+     return;
-+   }
-+ 
-+-  lfields = uv__get_internal_fields(loop);
-+-
-+   while (!QUEUE_EMPTY(&loop->watcher_queue)) {
-+     q = QUEUE_HEAD(&loop->watcher_queue);
-+     QUEUE_REMOVE(q);
-+@@ -220,7 +217,7 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+   base = loop->time;
-+   count = 48; /* Benchmarks suggest this gives the best throughput. */
-+ 
-+-  if (lfields->flags & UV_METRICS_IDLE_TIME) {
-++  if (uv__get_internal_fields(loop)->flags & UV_METRICS_IDLE_TIME) {
-+     reset_timeout = 1;
-+     user_timeout = timeout;
-+     timeout = 0;
-+@@ -235,12 +232,6 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+     if (timeout != 0)
-+       uv__metrics_set_provider_entry_time(loop);
-+ 
-+-    /* Store the current timeout in a location that's globally accessible so
-+-     * other locations like uv__work_done() can determine whether the queue
-+-     * of events in the callback were waiting when poll was called.
-+-     */
-+-    lfields->current_timeout = timeout;
-+-
-+     nfds = pollset_poll(loop->backend_fd,
-+                         events,
-+                         ARRAY_SIZE(events),
-+diff --git a/deps/uv/src/unix/fs.c b/deps/uv/src/unix/fs.c
-+index 00d385c24b7..c696a8d5500 100644
-+--- a/deps/uv/src/unix/fs.c
-++++ b/deps/uv/src/unix/fs.c
-+@@ -61,11 +61,10 @@
-+ #endif
-+ 
-+ #if defined(__linux__)
-+-# include <sys/sendfile.h>
-+-# include <sys/utsname.h>
-++# include "sys/utsname.h"
-+ #endif
-+ 
-+-#if defined(__sun)
-++#if defined(__linux__) || defined(__sun)
-+ # include <sys/sendfile.h>
-+ # include <sys/sysmacros.h>
-+ #endif
-+@@ -1554,7 +1553,26 @@ static int uv__fs_statx(int fd,
-+     return UV_ENOSYS;
-+   }
-+ 
-+-  uv__statx_to_stat(&statxbuf, buf);
-++  buf->st_dev = makedev(statxbuf.stx_dev_major, statxbuf.stx_dev_minor);
-++  buf->st_mode = statxbuf.stx_mode;
-++  buf->st_nlink = statxbuf.stx_nlink;
-++  buf->st_uid = statxbuf.stx_uid;
-++  buf->st_gid = statxbuf.stx_gid;
-++  buf->st_rdev = makedev(statxbuf.stx_rdev_major, statxbuf.stx_rdev_minor);
-++  buf->st_ino = statxbuf.stx_ino;
-++  buf->st_size = statxbuf.stx_size;
-++  buf->st_blksize = statxbuf.stx_blksize;
-++  buf->st_blocks = statxbuf.stx_blocks;
-++  buf->st_atim.tv_sec = statxbuf.stx_atime.tv_sec;
-++  buf->st_atim.tv_nsec = statxbuf.stx_atime.tv_nsec;
-++  buf->st_mtim.tv_sec = statxbuf.stx_mtime.tv_sec;
-++  buf->st_mtim.tv_nsec = statxbuf.stx_mtime.tv_nsec;
-++  buf->st_ctim.tv_sec = statxbuf.stx_ctime.tv_sec;
-++  buf->st_ctim.tv_nsec = statxbuf.stx_ctime.tv_nsec;
-++  buf->st_birthtim.tv_sec = statxbuf.stx_btime.tv_sec;
-++  buf->st_birthtim.tv_nsec = statxbuf.stx_btime.tv_nsec;
-++  buf->st_flags = 0;
-++  buf->st_gen = 0;
-+ 
-+   return 0;
-+ #else
-+@@ -1798,9 +1816,6 @@ int uv_fs_chown(uv_loop_t* loop,
-+ int uv_fs_close(uv_loop_t* loop, uv_fs_t* req, uv_file file, uv_fs_cb cb) {
-+   INIT(CLOSE);
-+   req->file = file;
-+-  if (cb != NULL)
-+-    if (uv__iou_fs_close(loop, req))
-+-      return 0;
-+   POST;
-+ }
-+ 
-+@@ -1848,9 +1863,6 @@ int uv_fs_lchown(uv_loop_t* loop,
-+ int uv_fs_fdatasync(uv_loop_t* loop, uv_fs_t* req, uv_file file, uv_fs_cb cb) {
-+   INIT(FDATASYNC);
-+   req->file = file;
-+-  if (cb != NULL)
-+-    if (uv__iou_fs_fsync_or_fdatasync(loop, req, /* IORING_FSYNC_DATASYNC */ 1))
-+-      return 0;
-+   POST;
-+ }
-+ 
-+@@ -1858,9 +1870,6 @@ int uv_fs_fdatasync(uv_loop_t* loop, uv_fs_t* req, uv_file file, uv_fs_cb cb) {
-+ int uv_fs_fstat(uv_loop_t* loop, uv_fs_t* req, uv_file file, uv_fs_cb cb) {
-+   INIT(FSTAT);
-+   req->file = file;
-+-  if (cb != NULL)
-+-    if (uv__iou_fs_statx(loop, req, /* is_fstat */ 1, /* is_lstat */ 0))
-+-      return 0;
-+   POST;
-+ }
-+ 
-+@@ -1868,9 +1877,6 @@ int uv_fs_fstat(uv_loop_t* loop, uv_fs_t* req, uv_file file, uv_fs_cb cb) {
-+ int uv_fs_fsync(uv_loop_t* loop, uv_fs_t* req, uv_file file, uv_fs_cb cb) {
-+   INIT(FSYNC);
-+   req->file = file;
-+-  if (cb != NULL)
-+-    if (uv__iou_fs_fsync_or_fdatasync(loop, req, /* no flags */ 0))
-+-      return 0;
-+   POST;
-+ }
-+ 
-+@@ -1917,9 +1923,6 @@ int uv_fs_lutime(uv_loop_t* loop,
-+ int uv_fs_lstat(uv_loop_t* loop, uv_fs_t* req, const char* path, uv_fs_cb cb) {
-+   INIT(LSTAT);
-+   PATH;
-+-  if (cb != NULL)
-+-    if (uv__iou_fs_statx(loop, req, /* is_fstat */ 0, /* is_lstat */ 1))
-+-      return 0;
-+   POST;
-+ }
-+ 
-+@@ -1981,9 +1984,6 @@ int uv_fs_open(uv_loop_t* loop,
-+   PATH;
-+   req->flags = flags;
-+   req->mode = mode;
-+-  if (cb != NULL)
-+-    if (uv__iou_fs_open(loop, req))
-+-      return 0;
-+   POST;
-+ }
-+ 
-+@@ -2012,11 +2012,6 @@ int uv_fs_read(uv_loop_t* loop, uv_fs_t* req,
-+   memcpy(req->bufs, bufs, nbufs * sizeof(*bufs));
-+ 
-+   req->off = off;
-+-
-+-  if (cb != NULL)
-+-    if (uv__iou_fs_read_or_write(loop, req, /* is_read */ 1))
-+-      return 0;
-+-
-+   POST;
-+ }
-+ 
-+@@ -2124,9 +2119,6 @@ int uv_fs_sendfile(uv_loop_t* loop,
-+ int uv_fs_stat(uv_loop_t* loop, uv_fs_t* req, const char* path, uv_fs_cb cb) {
-+   INIT(STAT);
-+   PATH;
-+-  if (cb != NULL)
-+-    if (uv__iou_fs_statx(loop, req, /* is_fstat */ 0, /* is_lstat */ 0))
-+-      return 0;
-+   POST;
-+ }
-+ 
-+@@ -2190,11 +2182,6 @@ int uv_fs_write(uv_loop_t* loop,
-+   memcpy(req->bufs, bufs, nbufs * sizeof(*bufs));
-+ 
-+   req->off = off;
-+-
-+-  if (cb != NULL)
-+-    if (uv__iou_fs_read_or_write(loop, req, /* is_read */ 0))
-+-      return 0;
-+-
-+   POST;
-+ }
-+ 
-+diff --git a/deps/uv/src/unix/internal.h b/deps/uv/src/unix/internal.h
-+index 6c5822e6a0d..d439ae6dd3d 100644
-+--- a/deps/uv/src/unix/internal.h
-++++ b/deps/uv/src/unix/internal.h
-+@@ -329,28 +329,6 @@ int uv__random_getentropy(void* buf, size_t buflen);
-+ int uv__random_readpath(const char* path, void* buf, size_t buflen);
-+ int uv__random_sysctl(void* buf, size_t buflen);
-+ 
-+-/* io_uring */
-+-#ifdef __linux__
-+-int uv__iou_fs_close(uv_loop_t* loop, uv_fs_t* req);
-+-int uv__iou_fs_fsync_or_fdatasync(uv_loop_t* loop,
-+-                                  uv_fs_t* req,
-+-                                  uint32_t fsync_flags);
-+-int uv__iou_fs_open(uv_loop_t* loop, uv_fs_t* req);
-+-int uv__iou_fs_read_or_write(uv_loop_t* loop,
-+-                             uv_fs_t* req,
-+-                             int is_read);
-+-int uv__iou_fs_statx(uv_loop_t* loop,
-+-                     uv_fs_t* req,
-+-                     int is_fstat,
-+-                     int is_lstat);
-+-#else
-+-#define uv__iou_fs_close(loop, req) 0
-+-#define uv__iou_fs_fsync_or_fdatasync(loop, req, fsync_flags) 0
-+-#define uv__iou_fs_open(loop, req) 0
-+-#define uv__iou_fs_read_or_write(loop, req, is_read) 0
-+-#define uv__iou_fs_statx(loop, req, is_fstat, is_lstat) 0
-+-#endif
-+-
-+ #if defined(__APPLE__)
-+ int uv___stream_fd(const uv_stream_t* handle);
-+ #define uv__stream_fd(handle) (uv___stream_fd((const uv_stream_t*) (handle)))
-+@@ -427,7 +405,6 @@ int uv__statx(int dirfd,
-+               int flags,
-+               unsigned int mask,
-+               struct uv__statx* statxbuf);
-+-void uv__statx_to_stat(const struct uv__statx* statxbuf, uv_stat_t* buf);
-+ ssize_t uv__getrandom(void* buf, size_t buflen, unsigned flags);
-+ #endif
-+ 
-+diff --git a/deps/uv/src/unix/kqueue.c b/deps/uv/src/unix/kqueue.c
-+index 82916d65933..deb486bae7a 100644
-+--- a/deps/uv/src/unix/kqueue.c
-++++ b/deps/uv/src/unix/kqueue.c
-+@@ -127,7 +127,6 @@ static void uv__kqueue_delete(int kqfd, const struct kevent *ev) {
-+ 
-+ 
-+ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+-  uv__loop_internal_fields_t* lfields;
-+   struct kevent events[1024];
-+   struct kevent* ev;
-+   struct timespec spec;
-+@@ -156,7 +155,6 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+     return;
-+   }
-+ 
-+-  lfields = uv__get_internal_fields(loop);
-+   nevents = 0;
-+ 
-+   while (!QUEUE_EMPTY(&loop->watcher_queue)) {
-+@@ -224,7 +222,7 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+   base = loop->time;
-+   count = 48; /* Benchmarks suggest this gives the best throughput. */
-+ 
-+-  if (lfields->flags & UV_METRICS_IDLE_TIME) {
-++  if (uv__get_internal_fields(loop)->flags & UV_METRICS_IDLE_TIME) {
-+     reset_timeout = 1;
-+     user_timeout = timeout;
-+     timeout = 0;
-+@@ -247,12 +245,6 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+     if (pset != NULL)
-+       pthread_sigmask(SIG_BLOCK, pset, NULL);
-+ 
-+-    /* Store the current timeout in a location that's globally accessible so
-+-     * other locations like uv__work_done() can determine whether the queue
-+-     * of events in the callback were waiting when poll was called.
-+-     */
-+-    lfields->current_timeout = timeout;
-+-
-+     nfds = kevent(loop->backend_fd,
-+                   events,
-+                   nevents,
-+diff --git a/deps/uv/src/unix/linux.c b/deps/uv/src/unix/linux.c
-+index 5f84ad0eea3..343e37f2527 100644
-+--- a/deps/uv/src/unix/linux.c
-++++ b/deps/uv/src/unix/linux.c
-+@@ -27,8 +27,6 @@
-+ #include "internal.h"
-+ 
-+ #include <inttypes.h>
-+-#include <stdatomic.h>
-+-#include <stddef.h>  /* offsetof */
-+ #include <stdint.h>
-+ #include <stdio.h>
-+ #include <stdlib.h>
-+@@ -40,29 +38,15 @@
-+ #include <net/if.h>
-+ #include <sys/epoll.h>
-+ #include <sys/inotify.h>
-+-#include <sys/mman.h>
-+ #include <sys/param.h>
-+ #include <sys/prctl.h>
-+ #include <sys/stat.h>
-+ #include <sys/syscall.h>
-+ #include <sys/sysinfo.h>
-+-#include <sys/sysmacros.h>
-+ #include <sys/types.h>
-+ #include <time.h>
-+ #include <unistd.h>
-+ 
-+-#ifndef __NR_io_uring_setup
-+-# define __NR_io_uring_setup 425
-+-#endif
-+-
-+-#ifndef __NR_io_uring_enter
-+-# define __NR_io_uring_enter 426
-+-#endif
-+-
-+-#ifndef __NR_io_uring_register
-+-# define __NR_io_uring_register 427
-+-#endif
-+-
-+ #ifndef __NR_copy_file_range
-+ # if defined(__x86_64__)
-+ #  define __NR_copy_file_range 326
-+@@ -132,129 +116,6 @@
-+ # include <netpacket/packet.h>
-+ #endif /* HAVE_IFADDRS_H */
-+ 
-+-enum {
-+-  UV__IORING_SETUP_SQPOLL = 2u,
-+-};
-+-
-+-enum {
-+-  UV__IORING_FEAT_SINGLE_MMAP = 1u,
-+-  UV__IORING_FEAT_NODROP = 2u,
-+-  UV__IORING_FEAT_RSRC_TAGS = 1024u,  /* linux v5.13 */
-+-};
-+-
-+-enum {
-+-  UV__IORING_OP_READV = 1,
-+-  UV__IORING_OP_WRITEV = 2,
-+-  UV__IORING_OP_FSYNC = 3,
-+-  UV__IORING_OP_OPENAT = 18,
-+-  UV__IORING_OP_CLOSE = 19,
-+-  UV__IORING_OP_STATX = 21,
-+-  UV__IORING_OP_EPOLL_CTL = 29,
-+-};
-+-
-+-enum {
-+-  UV__IORING_ENTER_GETEVENTS = 1u,
-+-  UV__IORING_ENTER_SQ_WAKEUP = 2u,
-+-};
-+-
-+-enum {
-+-  UV__IORING_SQ_NEED_WAKEUP = 1u,
-+-  UV__IORING_SQ_CQ_OVERFLOW = 2u,
-+-};
-+-
-+-struct uv__io_cqring_offsets {
-+-  uint32_t head;
-+-  uint32_t tail;
-+-  uint32_t ring_mask;
-+-  uint32_t ring_entries;
-+-  uint32_t overflow;
-+-  uint32_t cqes;
-+-  uint64_t reserved0;
-+-  uint64_t reserved1;
-+-};
-+-
-+-STATIC_ASSERT(40 == sizeof(struct uv__io_cqring_offsets));
-+-
-+-struct uv__io_sqring_offsets {
-+-  uint32_t head;
-+-  uint32_t tail;
-+-  uint32_t ring_mask;
-+-  uint32_t ring_entries;
-+-  uint32_t flags;
-+-  uint32_t dropped;
-+-  uint32_t array;
-+-  uint32_t reserved0;
-+-  uint64_t reserved1;
-+-};
-+-
-+-STATIC_ASSERT(40 == sizeof(struct uv__io_sqring_offsets));
-+-
-+-struct uv__io_uring_cqe {
-+-  uint64_t user_data;
-+-  int32_t res;
-+-  uint32_t flags;
-+-};
-+-
-+-STATIC_ASSERT(16 == sizeof(struct uv__io_uring_cqe));
-+-
-+-struct uv__io_uring_sqe {
-+-  uint8_t opcode;
-+-  uint8_t flags;
-+-  uint16_t ioprio;
-+-  int32_t fd;
-+-  union {
-+-    uint64_t off;
-+-    uint64_t addr2;
-+-  };
-+-  union {
-+-    uint64_t addr;
-+-  };
-+-  uint32_t len;
-+-  union {
-+-    uint32_t rw_flags;
-+-    uint32_t fsync_flags;
-+-    uint32_t open_flags;
-+-    uint32_t statx_flags;
-+-  };
-+-  uint64_t user_data;
-+-  union {
-+-    uint16_t buf_index;
-+-    uint64_t pad[3];
-+-  };
-+-};
-+-
-+-STATIC_ASSERT(64 == sizeof(struct uv__io_uring_sqe));
-+-STATIC_ASSERT(0 == offsetof(struct uv__io_uring_sqe, opcode));
-+-STATIC_ASSERT(1 == offsetof(struct uv__io_uring_sqe, flags));
-+-STATIC_ASSERT(2 == offsetof(struct uv__io_uring_sqe, ioprio));
-+-STATIC_ASSERT(4 == offsetof(struct uv__io_uring_sqe, fd));
-+-STATIC_ASSERT(8 == offsetof(struct uv__io_uring_sqe, off));
-+-STATIC_ASSERT(16 == offsetof(struct uv__io_uring_sqe, addr));
-+-STATIC_ASSERT(24 == offsetof(struct uv__io_uring_sqe, len));
-+-STATIC_ASSERT(28 == offsetof(struct uv__io_uring_sqe, rw_flags));
-+-STATIC_ASSERT(32 == offsetof(struct uv__io_uring_sqe, user_data));
-+-STATIC_ASSERT(40 == offsetof(struct uv__io_uring_sqe, buf_index));
-+-
-+-struct uv__io_uring_params {
-+-  uint32_t sq_entries;
-+-  uint32_t cq_entries;
-+-  uint32_t flags;
-+-  uint32_t sq_thread_cpu;
-+-  uint32_t sq_thread_idle;
-+-  uint32_t features;
-+-  uint32_t reserved[4];
-+-  struct uv__io_sqring_offsets sq_off;  /* 40 bytes */
-+-  struct uv__io_cqring_offsets cq_off;  /* 40 bytes */
-+-};
-+-
-+-STATIC_ASSERT(40 + 40 + 40 == sizeof(struct uv__io_uring_params));
-+-STATIC_ASSERT(40 == offsetof(struct uv__io_uring_params, sq_off));
-+-STATIC_ASSERT(80 == offsetof(struct uv__io_uring_params, cq_off));
-+-
-+-STATIC_ASSERT(EPOLL_CTL_ADD < 4);
-+-STATIC_ASSERT(EPOLL_CTL_DEL < 4);
-+-STATIC_ASSERT(EPOLL_CTL_MOD < 4);
-+-
-+ struct watcher_list {
-+   RB_ENTRY(watcher_list) entry;
-+   QUEUE watchers;
-+@@ -276,17 +137,6 @@ static int compare_watchers(const struct watcher_list* a,
-+ static void maybe_free_watcher_list(struct watcher_list* w,
-+                                     uv_loop_t* loop);
-+ 
-+-static void uv__epoll_ctl_flush(int epollfd,
-+-                                struct uv__iou* ctl,
-+-                                struct epoll_event (*events)[256]);
-+-
-+-static void uv__epoll_ctl_prep(int epollfd,
-+-                               struct uv__iou* ctl,
-+-                               struct epoll_event (*events)[256],
-+-                               int op,
-+-                               int fd,
-+-                               struct epoll_event* e);
-+-
-+ RB_GENERATE_STATIC(watcher_root, watcher_list, entry, compare_watchers)
-+ 
-+ 
-+@@ -356,187 +206,7 @@ ssize_t uv__getrandom(void* buf, size_t buflen, unsigned flags) {
-+ }
-+ 
-+ 
-+-int uv__io_uring_setup(int entries, struct uv__io_uring_params* params) {
-+-  return syscall(__NR_io_uring_setup, entries, params);
-+-}
-+-
-+-
-+-int uv__io_uring_enter(int fd,
-+-                       unsigned to_submit,
-+-                       unsigned min_complete,
-+-                       unsigned flags) {
-+-  /* io_uring_enter used to take a sigset_t but it's unused
-+-   * in newer kernels unless IORING_ENTER_EXT_ARG is set,
-+-   * in which case it takes a struct io_uring_getevents_arg.
-+-   */
-+-  return syscall(__NR_io_uring_enter,
-+-                 fd,
-+-                 to_submit,
-+-                 min_complete,
-+-                 flags,
-+-                 NULL,
-+-                 0L);
-+-}
-+-
-+-
-+-int uv__io_uring_register(int fd, unsigned opcode, void* arg, unsigned nargs) {
-+-  return syscall(__NR_io_uring_register, fd, opcode, arg, nargs);
-+-}
-+-
-+-
-+-static int uv__use_io_uring(void) {
-+-  /* Ternary: unknown=0, yes=1, no=-1 */
-+-  static _Atomic int use_io_uring;
-+-  char* val;
-+-  int use;
-+-
-+-  use = atomic_load_explicit(&use_io_uring, memory_order_relaxed);
-+-
-+-  if (use == 0) {
-+-    val = getenv("UV_USE_IO_URING");
-+-    use = val == NULL || atoi(val) ? 1 : -1;
-+-    atomic_store_explicit(&use_io_uring, use, memory_order_relaxed);
-+-  }
-+-
-+-  return use > 0;
-+-}
-+-
-+-
-+-static void uv__iou_init(int epollfd,
-+-                         struct uv__iou* iou,
-+-                         uint32_t entries,
-+-                         uint32_t flags) {
-+-  struct uv__io_uring_params params;
-+-  struct epoll_event e;
-+-  size_t cqlen;
-+-  size_t sqlen;
-+-  size_t maxlen;
-+-  size_t sqelen;
-+-  uint32_t i;
-+-  char* sq;
-+-  char* sqe;
-+-  int ringfd;
-+-
-+-  sq = MAP_FAILED;
-+-  sqe = MAP_FAILED;
-+-
-+-  if (!uv__use_io_uring())
-+-    return;
-+-
-+-  /* SQPOLL required CAP_SYS_NICE until linux v5.12 relaxed that requirement.
-+-   * Mostly academic because we check for a v5.13 kernel afterwards anyway.
-+-   */
-+-  memset(&params, 0, sizeof(params));
-+-  params.flags = flags;
-+-
-+-  if (flags & UV__IORING_SETUP_SQPOLL)
-+-    params.sq_thread_idle = 10;  /* milliseconds */
-+-
-+-  /* Kernel returns a file descriptor with O_CLOEXEC flag set. */
-+-  ringfd = uv__io_uring_setup(entries, &params);
-+-  if (ringfd == -1)
-+-    return;
-+-
-+-  /* IORING_FEAT_RSRC_TAGS is used to detect linux v5.13 but what we're
-+-   * actually detecting is whether IORING_OP_STATX works with SQPOLL.
-+-   */
-+-  if (!(params.features & UV__IORING_FEAT_RSRC_TAGS))
-+-    goto fail;
-+-
-+-  /* Implied by IORING_FEAT_RSRC_TAGS but checked explicitly anyway. */
-+-  if (!(params.features & UV__IORING_FEAT_SINGLE_MMAP))
-+-    goto fail;
-+-
-+-  /* Implied by IORING_FEAT_RSRC_TAGS but checked explicitly anyway. */
-+-  if (!(params.features & UV__IORING_FEAT_NODROP))
-+-    goto fail;
-+-
-+-  sqlen = params.sq_off.array + params.sq_entries * sizeof(uint32_t);
-+-  cqlen =
-+-      params.cq_off.cqes + params.cq_entries * sizeof(struct uv__io_uring_cqe);
-+-  maxlen = sqlen < cqlen ? cqlen : sqlen;
-+-  sqelen = params.sq_entries * sizeof(struct uv__io_uring_sqe);
-+-
-+-  sq = mmap(0,
-+-            maxlen,
-+-            PROT_READ | PROT_WRITE,
-+-            MAP_SHARED | MAP_POPULATE,
-+-            ringfd,
-+-            0);  /* IORING_OFF_SQ_RING */
-+-
-+-  sqe = mmap(0,
-+-             sqelen,
-+-             PROT_READ | PROT_WRITE,
-+-             MAP_SHARED | MAP_POPULATE,
-+-             ringfd,
-+-             0x10000000ull);  /* IORING_OFF_SQES */
-+-
-+-  if (sq == MAP_FAILED || sqe == MAP_FAILED)
-+-    goto fail;
-+-
-+-  if (flags & UV__IORING_SETUP_SQPOLL) {
-+-    /* Only interested in completion events. To get notified when
-+-     * the kernel pulls items from the submission ring, add POLLOUT.
-+-     */
-+-    memset(&e, 0, sizeof(e));
-+-    e.events = POLLIN;
-+-    e.data.fd = ringfd;
-+-
-+-    if (epoll_ctl(epollfd, EPOLL_CTL_ADD, ringfd, &e))
-+-      goto fail;
-+-  }
-+-
-+-  iou->sqhead = (uint32_t*) (sq + params.sq_off.head);
-+-  iou->sqtail = (uint32_t*) (sq + params.sq_off.tail);
-+-  iou->sqmask = *(uint32_t*) (sq + params.sq_off.ring_mask);
-+-  iou->sqarray = (uint32_t*) (sq + params.sq_off.array);
-+-  iou->sqflags = (uint32_t*) (sq + params.sq_off.flags);
-+-  iou->cqhead = (uint32_t*) (sq + params.cq_off.head);
-+-  iou->cqtail = (uint32_t*) (sq + params.cq_off.tail);
-+-  iou->cqmask = *(uint32_t*) (sq + params.cq_off.ring_mask);
-+-  iou->sq = sq;
-+-  iou->cqe = sq + params.cq_off.cqes;
-+-  iou->sqe = sqe;
-+-  iou->sqlen = sqlen;
-+-  iou->cqlen = cqlen;
-+-  iou->maxlen = maxlen;
-+-  iou->sqelen = sqelen;
-+-  iou->ringfd = ringfd;
-+-  iou->in_flight = 0;
-+-
-+-  for (i = 0; i <= iou->sqmask; i++)
-+-    iou->sqarray[i] = i;  /* Slot -> sqe identity mapping. */
-+-
-+-  return;
-+-
-+-fail:
-+-  if (sq != MAP_FAILED)
-+-    munmap(sq, maxlen);
-+-
-+-  if (sqe != MAP_FAILED)
-+-    munmap(sqe, sqelen);
-+-
-+-  uv__close(ringfd);
-+-}
-+-
-+-
-+-static void uv__iou_delete(struct uv__iou* iou) {
-+-  if (iou->ringfd != -1) {
-+-    munmap(iou->sq, iou->maxlen);
-+-    munmap(iou->sqe, iou->sqelen);
-+-    uv__close(iou->ringfd);
-+-    iou->ringfd = -1;
-+-  }
-+-}
-+-
-+-
-+ int uv__platform_loop_init(uv_loop_t* loop) {
-+-  uv__loop_internal_fields_t* lfields;
-+-
-+-  lfields = uv__get_internal_fields(loop);
-+-  lfields->ctl.ringfd = -1;
-+-  lfields->iou.ringfd = -1;
-+-
-+   loop->inotify_watchers = NULL;
-+   loop->inotify_fd = -1;
-+   loop->backend_fd = epoll_create1(O_CLOEXEC);
-+@@ -544,9 +214,6 @@ int uv__platform_loop_init(uv_loop_t* loop) {
-+   if (loop->backend_fd == -1)
-+     return UV__ERR(errno);
-+ 
-+-  uv__iou_init(loop->backend_fd, &lfields->iou, 64, UV__IORING_SETUP_SQPOLL);
-+-  uv__iou_init(loop->backend_fd, &lfields->ctl, 256, 0);
-+-
-+   return 0;
-+ }
-+ 
-+@@ -559,8 +226,6 @@ int uv__io_fork(uv_loop_t* loop) {
-+ 
-+   uv__close(loop->backend_fd);
-+   loop->backend_fd = -1;
-+-
-+-  /* TODO(bnoordhuis) Loses items from the submission and completion rings. */
-+   uv__platform_loop_delete(loop);
-+ 
-+   err = uv__platform_loop_init(loop);
-+@@ -572,62 +237,42 @@ int uv__io_fork(uv_loop_t* loop) {
-+ 
-+ 
-+ void uv__platform_loop_delete(uv_loop_t* loop) {
-+-  uv__loop_internal_fields_t* lfields;
-+-
-+-  lfields = uv__get_internal_fields(loop);
-+-  uv__iou_delete(&lfields->ctl);
-+-  uv__iou_delete(&lfields->iou);
-+-
-+-  if (loop->inotify_fd != -1) {
-+-    uv__io_stop(loop, &loop->inotify_read_watcher, POLLIN);
-+-    uv__close(loop->inotify_fd);
-+-    loop->inotify_fd = -1;
-+-  }
-++  if (loop->inotify_fd == -1) return;
-++  uv__io_stop(loop, &loop->inotify_read_watcher, POLLIN);
-++  uv__close(loop->inotify_fd);
-++  loop->inotify_fd = -1;
-+ }
-+ 
-+ 
-+-struct uv__invalidate {
-+-  struct epoll_event (*prep)[256];
-+-  struct epoll_event* events;
-+-  int nfds;
-+-};
-+-
-+-
-+ void uv__platform_invalidate_fd(uv_loop_t* loop, int fd) {
-+-  uv__loop_internal_fields_t* lfields;
-+-  struct uv__invalidate* inv;
-++  struct epoll_event* events;
-+   struct epoll_event dummy;
-+-  int i;
-++  uintptr_t i;
-++  uintptr_t nfds;
-+ 
-+-  lfields = uv__get_internal_fields(loop);
-+-  inv = lfields->inv;
-++  assert(loop->watchers != NULL);
-++  assert(fd >= 0);
-+ 
-+-  /* Invalidate events with same file descriptor */
-+-  if (inv != NULL)
-+-    for (i = 0; i < inv->nfds; i++)
-+-      if (inv->events[i].data.fd == fd)
-+-        inv->events[i].data.fd = -1;
-++  events = (struct epoll_event*) loop->watchers[loop->nwatchers];
-++  nfds = (uintptr_t) loop->watchers[loop->nwatchers + 1];
-++  if (events != NULL)
-++    /* Invalidate events with same file descriptor */
-++    for (i = 0; i < nfds; i++)
-++      if (events[i].data.fd == fd)
-++        events[i].data.fd = -1;
-+ 
-+   /* Remove the file descriptor from the epoll.
-+    * This avoids a problem where the same file description remains open
-+    * in another process, causing repeated junk epoll events.
-+    *
-+    * We pass in a dummy epoll_event, to work around a bug in old kernels.
-+-   *
-+-   * Work around a bug in kernels 3.10 to 3.19 where passing a struct that
-+-   * has the EPOLLWAKEUP flag set generates spurious audit syslog warnings.
-+    */
-+-  memset(&dummy, 0, sizeof(dummy));
-+-
-+-  if (inv == NULL) {
-++  if (loop->backend_fd >= 0) {
-++    /* Work around a bug in kernels 3.10 to 3.19 where passing a struct that
-++     * has the EPOLLWAKEUP flag set generates spurious audit syslog warnings.
-++     */
-++    memset(&dummy, 0, sizeof(dummy));
-+     epoll_ctl(loop->backend_fd, EPOLL_CTL_DEL, fd, &dummy);
-+-  } else {
-+-    uv__epoll_ctl_prep(loop->backend_fd,
-+-                       &lfields->ctl,
-+-                       inv->prep,
-+-                       EPOLL_CTL_DEL,
-+-                       fd,
-+-                       &dummy);
-+   }
-+ }
-+ 
-+@@ -653,454 +298,27 @@ int uv__io_check_fd(uv_loop_t* loop, int fd) {
-+ }
-+ 
-+ 
-+-/* Caller must initialize SQE and call uv__iou_submit(). */
-+-static struct uv__io_uring_sqe* uv__iou_get_sqe(struct uv__iou* iou,
-+-                                                uv_loop_t* loop,
-+-                                                uv_fs_t* req) {
-+-  struct uv__io_uring_sqe* sqe;
-+-  uint32_t head;
-+-  uint32_t tail;
-+-  uint32_t mask;
-+-  uint32_t slot;
-+-
-+-  if (iou->ringfd == -1)
-+-    return NULL;
-+-
-+-  head = atomic_load_explicit((_Atomic uint32_t*) iou->sqhead,
-+-                              memory_order_acquire);
-+-  tail = *iou->sqtail;
-+-  mask = iou->sqmask;
-+-
-+-  if ((head & mask) == ((tail + 1) & mask))
-+-    return NULL;  /* No room in ring buffer. TODO(bnoordhuis) maybe flush it? */
-+-
-+-  slot = tail & mask;
-+-  sqe = iou->sqe;
-+-  sqe = &sqe[slot];
-+-  memset(sqe, 0, sizeof(*sqe));
-+-  sqe->user_data = (uintptr_t) req;
-+-
-+-  /* Pacify uv_cancel(). */
-+-  req->work_req.loop = loop;
-+-  req->work_req.work = NULL;
-+-  req->work_req.done = NULL;
-+-  QUEUE_INIT(&req->work_req.wq);
-+-
-+-  uv__req_register(loop, req);
-+-  iou->in_flight++;
-+-
-+-  return sqe;
-+-}
-+-
-+-
-+-static void uv__iou_submit(struct uv__iou* iou) {
-+-  uint32_t flags;
-+-
-+-  atomic_store_explicit((_Atomic uint32_t*) iou->sqtail,
-+-                        *iou->sqtail + 1,
-+-                        memory_order_release);
-+-
-+-  flags = atomic_load_explicit((_Atomic uint32_t*) iou->sqflags,
-+-                               memory_order_acquire);
-+-
-+-  if (flags & UV__IORING_SQ_NEED_WAKEUP)
-+-    if (uv__io_uring_enter(iou->ringfd, 0, 0, UV__IORING_ENTER_SQ_WAKEUP))
-+-      if (errno != EOWNERDEAD)  /* Kernel bug. Harmless, ignore. */
-+-        perror("libuv: io_uring_enter(wakeup)");  /* Can't happen. */
-+-}
-+-
-+-
-+-int uv__iou_fs_close(uv_loop_t* loop, uv_fs_t* req) {
-+-  struct uv__io_uring_sqe* sqe;
-+-  struct uv__iou* iou;
-+-
-+-  iou = &uv__get_internal_fields(loop)->iou;
-+-
-+-  sqe = uv__iou_get_sqe(iou, loop, req);
-+-  if (sqe == NULL)
-+-    return 0;
-+-
-+-  sqe->fd = req->file;
-+-  sqe->opcode = UV__IORING_OP_CLOSE;
-+-
-+-  uv__iou_submit(iou);
-+-
-+-  return 1;
-+-}
-+-
-+-
-+-int uv__iou_fs_fsync_or_fdatasync(uv_loop_t* loop,
-+-                                  uv_fs_t* req,
-+-                                  uint32_t fsync_flags) {
-+-  struct uv__io_uring_sqe* sqe;
-+-  struct uv__iou* iou;
-+-
-+-  iou = &uv__get_internal_fields(loop)->iou;
-+-
-+-  sqe = uv__iou_get_sqe(iou, loop, req);
-+-  if (sqe == NULL)
-+-    return 0;
-+-
-+-  /* Little known fact: setting seq->off and seq->len turns
-+-   * it into an asynchronous sync_file_range() operation.
-+-   */
-+-  sqe->fd = req->file;
-+-  sqe->fsync_flags = fsync_flags;
-+-  sqe->opcode = UV__IORING_OP_FSYNC;
-+-
-+-  uv__iou_submit(iou);
-+-
-+-  return 1;
-+-}
-+-
-+-
-+-int uv__iou_fs_open(uv_loop_t* loop, uv_fs_t* req) {
-+-  struct uv__io_uring_sqe* sqe;
-+-  struct uv__iou* iou;
-+-
-+-  iou = &uv__get_internal_fields(loop)->iou;
-+-
-+-  sqe = uv__iou_get_sqe(iou, loop, req);
-+-  if (sqe == NULL)
-+-    return 0;
-+-
-+-  sqe->addr = (uintptr_t) req->path;
-+-  sqe->fd = AT_FDCWD;
-+-  sqe->len = req->mode;
-+-  sqe->opcode = UV__IORING_OP_OPENAT;
-+-  sqe->open_flags = req->flags | O_CLOEXEC;
-+-
-+-  uv__iou_submit(iou);
-+-
-+-  return 1;
-+-}
-+-
-+-
-+-int uv__iou_fs_read_or_write(uv_loop_t* loop,
-+-                             uv_fs_t* req,
-+-                             int is_read) {
-+-  struct uv__io_uring_sqe* sqe;
-+-  struct uv__iou* iou;
-+-
-+-  /* For the moment, if iovcnt is greater than IOV_MAX, fallback to the
-+-   * threadpool. In the future we might take advantage of IOSQE_IO_LINK. */
-+-  if (req->nbufs > IOV_MAX)
-+-    return 0;
-+-
-+-  iou = &uv__get_internal_fields(loop)->iou;
-+-
-+-  sqe = uv__iou_get_sqe(iou, loop, req);
-+-  if (sqe == NULL)
-+-    return 0;
-+-
-+-  sqe->addr = (uintptr_t) req->bufs;
-+-  sqe->fd = req->file;
-+-  sqe->len = req->nbufs;
-+-  sqe->off = req->off < 0 ? -1 : req->off;
-+-  sqe->opcode = is_read ? UV__IORING_OP_READV : UV__IORING_OP_WRITEV;
-+-
-+-  uv__iou_submit(iou);
-+-
-+-  return 1;
-+-}
-+-
-+-
-+-int uv__iou_fs_statx(uv_loop_t* loop,
-+-                     uv_fs_t* req,
-+-                     int is_fstat,
-+-                     int is_lstat) {
-+-  struct uv__io_uring_sqe* sqe;
-+-  struct uv__statx* statxbuf;
-+-  struct uv__iou* iou;
-+-
-+-  statxbuf = uv__malloc(sizeof(*statxbuf));
-+-  if (statxbuf == NULL)
-+-    return 0;
-+-
-+-  iou = &uv__get_internal_fields(loop)->iou;
-+-
-+-  sqe = uv__iou_get_sqe(iou, loop, req);
-+-  if (sqe == NULL) {
-+-    uv__free(statxbuf);
-+-    return 0;
-+-  }
-+-
-+-  req->ptr = statxbuf;
-+-
-+-  sqe->addr = (uintptr_t) req->path;
-+-  sqe->addr2 = (uintptr_t) statxbuf;
-+-  sqe->fd = AT_FDCWD;
-+-  sqe->len = 0xFFF; /* STATX_BASIC_STATS + STATX_BTIME */
-+-  sqe->opcode = UV__IORING_OP_STATX;
-+-
-+-  if (is_fstat) {
-+-    sqe->addr = (uintptr_t) "";
-+-    sqe->fd = req->file;
-+-    sqe->statx_flags |= 0x1000; /* AT_EMPTY_PATH */
-+-  }
-+-
-+-  if (is_lstat)
-+-    sqe->statx_flags |= AT_SYMLINK_NOFOLLOW;
-+-
-+-  uv__iou_submit(iou);
-+-
-+-  return 1;
-+-}
-+-
-+-
-+-void uv__statx_to_stat(const struct uv__statx* statxbuf, uv_stat_t* buf) {
-+-  buf->st_dev = makedev(statxbuf->stx_dev_major, statxbuf->stx_dev_minor);
-+-  buf->st_mode = statxbuf->stx_mode;
-+-  buf->st_nlink = statxbuf->stx_nlink;
-+-  buf->st_uid = statxbuf->stx_uid;
-+-  buf->st_gid = statxbuf->stx_gid;
-+-  buf->st_rdev = makedev(statxbuf->stx_rdev_major, statxbuf->stx_rdev_minor);
-+-  buf->st_ino = statxbuf->stx_ino;
-+-  buf->st_size = statxbuf->stx_size;
-+-  buf->st_blksize = statxbuf->stx_blksize;
-+-  buf->st_blocks = statxbuf->stx_blocks;
-+-  buf->st_atim.tv_sec = statxbuf->stx_atime.tv_sec;
-+-  buf->st_atim.tv_nsec = statxbuf->stx_atime.tv_nsec;
-+-  buf->st_mtim.tv_sec = statxbuf->stx_mtime.tv_sec;
-+-  buf->st_mtim.tv_nsec = statxbuf->stx_mtime.tv_nsec;
-+-  buf->st_ctim.tv_sec = statxbuf->stx_ctime.tv_sec;
-+-  buf->st_ctim.tv_nsec = statxbuf->stx_ctime.tv_nsec;
-+-  buf->st_birthtim.tv_sec = statxbuf->stx_btime.tv_sec;
-+-  buf->st_birthtim.tv_nsec = statxbuf->stx_btime.tv_nsec;
-+-  buf->st_flags = 0;
-+-  buf->st_gen = 0;
-+-}
-+-
-+-
-+-static void uv__iou_fs_statx_post(uv_fs_t* req) {
-+-  struct uv__statx* statxbuf;
-+-  uv_stat_t* buf;
-+-
-+-  buf = &req->statbuf;
-+-  statxbuf = req->ptr;
-+-  req->ptr = NULL;
-+-
-+-  if (req->result == 0) {
-+-    uv__msan_unpoison(statxbuf, sizeof(*statxbuf));
-+-    uv__statx_to_stat(statxbuf, buf);
-+-    req->ptr = buf;
-+-  }
-+-
-+-  uv__free(statxbuf);
-+-}
-+-
-+-
-+-static void uv__poll_io_uring(uv_loop_t* loop, struct uv__iou* iou) {
-+-  struct uv__io_uring_cqe* cqe;
-+-  struct uv__io_uring_cqe* e;
-+-  uv_fs_t* req;
-+-  uint32_t head;
-+-  uint32_t tail;
-+-  uint32_t mask;
-+-  uint32_t i;
-+-  uint32_t flags;
-+-  int nevents;
-+-  int rc;
-+-
-+-  head = *iou->cqhead;
-+-  tail = atomic_load_explicit((_Atomic uint32_t*) iou->cqtail,
-+-                              memory_order_acquire);
-+-  mask = iou->cqmask;
-+-  cqe = iou->cqe;
-+-  nevents = 0;
-+-
-+-  for (i = head; i != tail; i++) {
-+-    e = &cqe[i & mask];
-+-
-+-    req = (uv_fs_t*) (uintptr_t) e->user_data;
-+-    assert(req->type == UV_FS);
-+-
-+-    uv__req_unregister(loop, req);
-+-    iou->in_flight--;
-+-
-+-    /* io_uring stores error codes as negative numbers, same as libuv. */
-+-    req->result = e->res;
-+-
-+-    switch (req->fs_type) {
-+-      case UV_FS_FSTAT:
-+-      case UV_FS_LSTAT:
-+-      case UV_FS_STAT:
-+-        uv__iou_fs_statx_post(req);
-+-        break;
-+-      default:  /* Squelch -Wswitch warnings. */
-+-        break;
-+-    }
-+-
-+-    uv__metrics_update_idle_time(loop);
-+-    req->cb(req);
-+-    nevents++;
-+-  }
-+-
-+-  atomic_store_explicit((_Atomic uint32_t*) iou->cqhead,
-+-                        tail,
-+-                        memory_order_release);
-+-
-+-  /* Check whether CQE's overflowed, if so enter the kernel to make them
-+-   * available. Don't grab them immediately but in the next loop iteration to
-+-   * avoid loop starvation. */
-+-  flags = atomic_load_explicit((_Atomic uint32_t*) iou->sqflags,
-+-                               memory_order_acquire);
-+-
-+-  if (flags & UV__IORING_SQ_CQ_OVERFLOW) {
-+-    do
-+-      rc = uv__io_uring_enter(iou->ringfd, 0, 0, UV__IORING_ENTER_GETEVENTS);
-+-    while (rc == -1 && errno == EINTR);
-+-
-+-    if (rc < 0)
-+-      perror("libuv: io_uring_enter(getevents)");  /* Can't happen. */
-+-  }
-+-
-+-  uv__metrics_inc_events(loop, nevents);
-+-  if (uv__get_internal_fields(loop)->current_timeout == 0)
-+-    uv__metrics_inc_events_waiting(loop, nevents);
-+-}
-+-
-+-
-+-static void uv__epoll_ctl_prep(int epollfd,
-+-                               struct uv__iou* ctl,
-+-                               struct epoll_event (*events)[256],
-+-                               int op,
-+-                               int fd,
-+-                               struct epoll_event* e) {
-+-  struct uv__io_uring_sqe* sqe;
-+-  struct epoll_event* pe;
-+-  uint32_t mask;
-+-  uint32_t slot;
-+-
-+-  if (ctl->ringfd == -1) {
-+-    if (!epoll_ctl(epollfd, op, fd, e))
-+-      return;
-+-
-+-    if (op == EPOLL_CTL_DEL)
-+-      return;  /* Ignore errors, may be racing with another thread. */
-+-
-+-    if (op != EPOLL_CTL_ADD)
-+-      abort();
-+-
-+-    if (errno != EEXIST)
-+-      abort();
-+-
-+-    /* File descriptor that's been watched before, update event mask. */
-+-    if (!epoll_ctl(epollfd, EPOLL_CTL_MOD, fd, e))
-+-      return;
-+-
-+-    abort();
-+-  } else {
-+-    mask = ctl->sqmask;
-+-    slot = (*ctl->sqtail)++ & mask;
-+-
-+-    pe = &(*events)[slot];
-+-    *pe = *e;
-+-
-+-    sqe = ctl->sqe;
-+-    sqe = &sqe[slot];
-+-
-+-    memset(sqe, 0, sizeof(*sqe));
-+-    sqe->addr = (uintptr_t) pe;
-+-    sqe->fd = epollfd;
-+-    sqe->len = op;
-+-    sqe->off = fd;
-+-    sqe->opcode = UV__IORING_OP_EPOLL_CTL;
-+-    sqe->user_data = op | slot << 2 | (int64_t) fd << 32;
-+-
-+-    if ((*ctl->sqhead & mask) == (*ctl->sqtail & mask))
-+-      uv__epoll_ctl_flush(epollfd, ctl, events);
-+-  }
-+-}
-+-
-+-
-+-static void uv__epoll_ctl_flush(int epollfd,
-+-                                struct uv__iou* ctl,
-+-                                struct epoll_event (*events)[256]) {
-+-  struct epoll_event oldevents[256];
-+-  struct uv__io_uring_cqe* cqe;
-+-  uint32_t oldslot;
-+-  uint32_t slot;
-+-  uint32_t n;
-+-  int fd;
-+-  int op;
-+-  int rc;
-+-
-+-  STATIC_ASSERT(sizeof(oldevents) == sizeof(*events));
-+-  assert(ctl->ringfd != -1);
-+-  assert(*ctl->sqhead != *ctl->sqtail);
-+-
-+-  n = *ctl->sqtail - *ctl->sqhead;
-+-  do
-+-    rc = uv__io_uring_enter(ctl->ringfd, n, n, UV__IORING_ENTER_GETEVENTS);
-+-  while (rc == -1 && errno == EINTR);
-+-
-+-  if (rc < 0)
-+-    perror("libuv: io_uring_enter(getevents)");  /* Can't happen. */
-+-
-+-  if (rc != (int) n)
-+-    abort();
-+-
-+-  assert(*ctl->sqhead == *ctl->sqtail);
-+-
-+-  memcpy(oldevents, *events, sizeof(*events));
-+-
-+-  /* Failed submissions are either EPOLL_CTL_DEL commands for file descriptors
-+-   * that have been closed, or EPOLL_CTL_ADD commands for file descriptors
-+-   * that we are already watching. Ignore the former and retry the latter
-+-   * with EPOLL_CTL_MOD.
-+-   */
-+-  while (*ctl->cqhead != *ctl->cqtail) {
-+-    slot = (*ctl->cqhead)++ & ctl->cqmask;
-+-
-+-    cqe = ctl->cqe;
-+-    cqe = &cqe[slot];
-+-
-+-    if (cqe->res == 0)
-+-      continue;
-+-
-+-    fd = cqe->user_data >> 32;
-+-    op = 3 & cqe->user_data;
-+-    oldslot = 255 & (cqe->user_data >> 2);
-+-
-+-    if (op == EPOLL_CTL_DEL)
-+-      continue;
-+-
-+-    if (op != EPOLL_CTL_ADD)
-+-      abort();
-+-
-+-    if (cqe->res != -EEXIST)
-+-      abort();
-+-
-+-    uv__epoll_ctl_prep(epollfd,
-+-                       ctl,
-+-                       events,
-+-                       EPOLL_CTL_MOD,
-+-                       fd,
-+-                       &oldevents[oldslot]);
-+-  }
-+-}
-+-
-+-
-+ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+-  uv__loop_internal_fields_t* lfields;
-++  /* A bug in kernels < 2.6.37 makes timeouts larger than ~30 minutes
-++   * effectively infinite on 32 bits architectures.  To avoid blocking
-++   * indefinitely, we cap the timeout and poll again if necessary.
-++   *
-++   * Note that "30 minutes" is a simplification because it depends on
-++   * the value of CONFIG_HZ.  The magic constant assumes CONFIG_HZ=1200,
-++   * that being the largest value I have seen in the wild (and only once.)
-++   */
-++  static const int max_safe_timeout = 1789569;
-+   struct epoll_event events[1024];
-+-  struct epoll_event prep[256];
-+-  struct uv__invalidate inv;
-+   struct epoll_event* pe;
-+   struct epoll_event e;
-+-  struct uv__iou* ctl;
-+-  struct uv__iou* iou;
-+   int real_timeout;
-+   QUEUE* q;
-+   uv__io_t* w;
-+   sigset_t* sigmask;
-+   sigset_t sigset;
-+   uint64_t base;
-+-  int have_iou_events;
-+   int have_signals;
-+   int nevents;
-+-  int epollfd;
-+   int count;
-+   int nfds;
-+   int fd;
-+@@ -1109,9 +327,47 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+   int user_timeout;
-+   int reset_timeout;
-+ 
-+-  lfields = uv__get_internal_fields(loop);
-+-  ctl = &lfields->ctl;
-+-  iou = &lfields->iou;
-++  if (loop->nfds == 0) {
-++    assert(QUEUE_EMPTY(&loop->watcher_queue));
-++    return;
-++  }
-++
-++  memset(&e, 0, sizeof(e));
-++
-++  while (!QUEUE_EMPTY(&loop->watcher_queue)) {
-++    q = QUEUE_HEAD(&loop->watcher_queue);
-++    QUEUE_REMOVE(q);
-++    QUEUE_INIT(q);
-++
-++    w = QUEUE_DATA(q, uv__io_t, watcher_queue);
-++    assert(w->pevents != 0);
-++    assert(w->fd >= 0);
-++    assert(w->fd < (int) loop->nwatchers);
-++
-++    e.events = w->pevents;
-++    e.data.fd = w->fd;
-++
-++    if (w->events == 0)
-++      op = EPOLL_CTL_ADD;
-++    else
-++      op = EPOLL_CTL_MOD;
-++
-++    /* XXX Future optimization: do EPOLL_CTL_MOD lazily if we stop watching
-++     * events, skip the syscall and squelch the events after epoll_wait().
-++     */
-++    if (epoll_ctl(loop->backend_fd, op, w->fd, &e)) {
-++      if (errno != EEXIST)
-++        abort();
-++
-++      assert(op == EPOLL_CTL_ADD);
-++
-++      /* We've reactivated a file descriptor that's been watched before. */
-++      if (epoll_ctl(loop->backend_fd, EPOLL_CTL_MOD, w->fd, &e))
-++        abort();
-++    }
-++
-++    w->events = w->pevents;
-++  }
-+ 
-+   sigmask = NULL;
-+   if (loop->flags & UV_LOOP_BLOCK_SIGPROF) {
-+@@ -1125,7 +381,7 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+   count = 48; /* Benchmarks suggest this gives the best throughput. */
-+   real_timeout = timeout;
-+ 
-+-  if (lfields->flags & UV_METRICS_IDLE_TIME) {
-++  if (uv__get_internal_fields(loop)->flags & UV_METRICS_IDLE_TIME) {
-+     reset_timeout = 1;
-+     user_timeout = timeout;
-+     timeout = 0;
-+@@ -1134,56 +390,24 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+     user_timeout = 0;
-+   }
-+ 
-+-  epollfd = loop->backend_fd;
-+-
-+-  memset(&e, 0, sizeof(e));
-+-
-+-  while (!QUEUE_EMPTY(&loop->watcher_queue)) {
-+-    q = QUEUE_HEAD(&loop->watcher_queue);
-+-    w = QUEUE_DATA(q, uv__io_t, watcher_queue);
-+-    QUEUE_REMOVE(q);
-+-    QUEUE_INIT(q);
-+-
-+-    op = EPOLL_CTL_MOD;
-+-    if (w->events == 0)
-+-      op = EPOLL_CTL_ADD;
-+-
-+-    w->events = w->pevents;
-+-    e.events = w->pevents;
-+-    e.data.fd = w->fd;
-+-
-+-    uv__epoll_ctl_prep(epollfd, ctl, &prep, op, w->fd, &e);
-+-  }
-+-
-+-  inv.events = events;
-+-  inv.prep = &prep;
-+-  inv.nfds = -1;
-+-
-+   for (;;) {
-+-    if (loop->nfds == 0)
-+-      if (iou->in_flight == 0)
-+-        break;
-+-
-+-    /* All event mask mutations should be visible to the kernel before
-+-     * we enter epoll_pwait().
-+-     */
-+-    if (ctl->ringfd != -1)
-+-      while (*ctl->sqhead != *ctl->sqtail)
-+-        uv__epoll_ctl_flush(epollfd, ctl, &prep);
-+-
-+     /* Only need to set the provider_entry_time if timeout != 0. The function
-+      * will return early if the loop isn't configured with UV_METRICS_IDLE_TIME.
-+      */
-+     if (timeout != 0)
-+       uv__metrics_set_provider_entry_time(loop);
-+ 
-+-    /* Store the current timeout in a location that's globally accessible so
-+-     * other locations like uv__work_done() can determine whether the queue
-+-     * of events in the callback were waiting when poll was called.
-++    /* See the comment for max_safe_timeout for an explanation of why
-++     * this is necessary.  Executive summary: kernel bug workaround.
-+      */
-+-    lfields->current_timeout = timeout;
-++    if (sizeof(int32_t) == sizeof(long) && timeout >= max_safe_timeout)
-++      timeout = max_safe_timeout;
-+ 
-+-    nfds = epoll_pwait(epollfd, events, ARRAY_SIZE(events), timeout, sigmask);
-++    nfds = epoll_pwait(loop->backend_fd,
-++                       events,
-++                       ARRAY_SIZE(events),
-++                       timeout,
-++                       sigmask);
-+ 
-+     /* Update loop->time unconditionally. It's tempting to skip the update when
-+      * timeout == 0 (i.e. non-blocking poll) but there is no guarantee that the
-+@@ -1203,7 +427,7 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+         continue;
-+ 
-+       if (timeout == 0)
-+-        break;
-++        return;
-+ 
-+       /* We may have been inside the system call for longer than |timeout|
-+        * milliseconds so we need to update the timestamp to avoid drift.
-+@@ -1224,18 +448,27 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+         continue;
-+ 
-+       if (timeout == 0)
-+-        break;
-++        return;
-+ 
-+       /* Interrupted by a signal. Update timeout and poll again. */
-+       goto update_timeout;
-+     }
-+ 
-+-    have_iou_events = 0;
-+     have_signals = 0;
-+     nevents = 0;
-+ 
-+-    inv.nfds = nfds;
-+-    lfields->inv = &inv;
-++    {
-++      /* Squelch a -Waddress-of-packed-member warning with gcc >= 9. */
-++      union {
-++        struct epoll_event* events;
-++        uv__io_t* watchers;
-++      } x;
-++
-++      x.events = events;
-++      assert(loop->watchers != NULL);
-++      loop->watchers[loop->nwatchers] = x.watchers;
-++      loop->watchers[loop->nwatchers + 1] = (void*) (uintptr_t) nfds;
-++    }
-+ 
-+     for (i = 0; i < nfds; i++) {
-+       pe = events + i;
-+@@ -1245,12 +478,6 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+       if (fd == -1)
-+         continue;
-+ 
-+-      if (fd == iou->ringfd) {
-+-        uv__poll_io_uring(loop, iou);
-+-        have_iou_events = 1;
-+-        continue;
-+-      }
-+-
-+       assert(fd >= 0);
-+       assert((unsigned) fd < loop->nwatchers);
-+ 
-+@@ -1262,7 +489,7 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+          * Ignore all errors because we may be racing with another thread
-+          * when the file descriptor is closed.
-+          */
-+-        uv__epoll_ctl_prep(epollfd, ctl, &prep, EPOLL_CTL_DEL, fd, pe);
-++        epoll_ctl(loop->backend_fd, EPOLL_CTL_DEL, fd, pe);
-+         continue;
-+       }
-+ 
-+@@ -1319,13 +546,11 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+       loop->signal_io_watcher.cb(loop, &loop->signal_io_watcher, POLLIN);
-+     }
-+ 
-+-    lfields->inv = NULL;
-+-
-+-    if (have_iou_events != 0)
-+-      break;  /* Event loop should cycle now so don't poll again. */
-++    loop->watchers[loop->nwatchers] = NULL;
-++    loop->watchers[loop->nwatchers + 1] = NULL;
-+ 
-+     if (have_signals != 0)
-+-      break;  /* Event loop should cycle now so don't poll again. */
-++      return;  /* Event loop should cycle now so don't poll again. */
-+ 
-+     if (nevents != 0) {
-+       if (nfds == ARRAY_SIZE(events) && --count != 0) {
-+@@ -1333,11 +558,11 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+         timeout = 0;
-+         continue;
-+       }
-+-      break;
-++      return;
-+     }
-+ 
-+     if (timeout == 0)
-+-      break;
-++      return;
-+ 
-+     if (timeout == -1)
-+       continue;
-+@@ -1347,14 +572,10 @@ update_timeout:
-+ 
-+     real_timeout -= (loop->time - base);
-+     if (real_timeout <= 0)
-+-      break;
-++      return;
-+ 
-+     timeout = real_timeout;
-+   }
-+-
-+-  if (ctl->ringfd != -1)
-+-    while (*ctl->sqhead != *ctl->sqtail)
-+-      uv__epoll_ctl_flush(epollfd, ctl, &prep);
-+ }
-+ 
-+ uint64_t uv__hrtime(uv_clocktype_t type) {
-+@@ -1867,7 +1088,7 @@ static uint64_t uv__read_uint64(const char* filename) {
-+   if (0 == uv__slurp(filename, buf, sizeof(buf)))
-+     if (1 != sscanf(buf, "%" PRIu64, &rc))
-+       if (0 == strcmp(buf, "max\n"))
-+-        rc = UINT64_MAX;
-++        rc = ~0ull;
-+ 
-+   return rc;
-+ }
-+@@ -1903,7 +1124,6 @@ static void uv__get_cgroup1_memory_limits(char buf[static 1024], uint64_t* high,
-+   char filename[4097];
-+   char* p;
-+   int n;
-+-  uint64_t cgroup1_max;
-+ 
-+   /* Find out where the controller is mounted. */
-+   p = uv__cgroup1_find_memory_controller(buf, &n);
-+@@ -1920,22 +1140,12 @@ static void uv__get_cgroup1_memory_limits(char buf[static 1024], uint64_t* high,
-+      * as indicated by uv__read_uint64 returning 0.
-+      */
-+      if (*high != 0 && *max != 0)
-+-       goto update_limits;
-++       return;
-+   }
-+ 
-+   /* Fall back to the limits of the global memory controller. */
-+   *high = uv__read_uint64("/sys/fs/cgroup/memory/memory.soft_limit_in_bytes");
-+   *max = uv__read_uint64("/sys/fs/cgroup/memory/memory.limit_in_bytes");
-+-
-+-  /* uv__read_uint64 detects cgroup2's "max", so we need to separately detect
-+-   * cgroup1's maximum value (which is derived from LONG_MAX and PAGE_SIZE).
-+-   */
-+-update_limits:
-+-  cgroup1_max = LONG_MAX & ~(sysconf(_SC_PAGESIZE) - 1);
-+-  if (*high == cgroup1_max)
-+-    *high = UINT64_MAX;
-+-  if (*max == cgroup1_max)
-+-    *max = UINT64_MAX;
-+ }
-+ 
-+ static void uv__get_cgroup2_memory_limits(char buf[static 1024], uint64_t* high,
-+diff --git a/deps/uv/src/unix/os390.c b/deps/uv/src/unix/os390.c
-+index a87c2d77faf..3954b2c2753 100644
-+--- a/deps/uv/src/unix/os390.c
-++++ b/deps/uv/src/unix/os390.c
-+@@ -808,7 +808,6 @@ static int os390_message_queue_handler(uv__os390_epoll* ep) {
-+ 
-+ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+   static const int max_safe_timeout = 1789569;
-+-  uv__loop_internal_fields_t* lfields;
-+   struct epoll_event events[1024];
-+   struct epoll_event* pe;
-+   struct epoll_event e;
-+@@ -831,8 +830,6 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+     return;
-+   }
-+ 
-+-  lfields = uv__get_internal_fields(loop);
-+-
-+   while (!QUEUE_EMPTY(&loop->watcher_queue)) {
-+     uv_stream_t* stream;
-+ 
-+@@ -880,7 +877,7 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+   int nevents = 0;
-+   have_signals = 0;
-+ 
-+-  if (lfields->flags & UV_METRICS_IDLE_TIME) {
-++  if (uv__get_internal_fields(loop)->flags & UV_METRICS_IDLE_TIME) {
-+     reset_timeout = 1;
-+     user_timeout = timeout;
-+     timeout = 0;
-+@@ -899,12 +896,6 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+     if (sizeof(int32_t) == sizeof(long) && timeout >= max_safe_timeout)
-+       timeout = max_safe_timeout;
-+ 
-+-    /* Store the current timeout in a location that's globally accessible so
-+-     * other locations like uv__work_done() can determine whether the queue
-+-     * of events in the callback were waiting when poll was called.
-+-     */
-+-    lfields->current_timeout = timeout;
-+-
-+     nfds = epoll_wait(loop->ep, events,
-+                       ARRAY_SIZE(events), timeout);
-+ 
-+diff --git a/deps/uv/src/unix/posix-poll.c b/deps/uv/src/unix/posix-poll.c
-+index 7e7de86845d..711780ece8d 100644
-+--- a/deps/uv/src/unix/posix-poll.c
-++++ b/deps/uv/src/unix/posix-poll.c
-+@@ -132,7 +132,6 @@ static void uv__pollfds_del(uv_loop_t* loop, int fd) {
-+ 
-+ 
-+ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+-  uv__loop_internal_fields_t* lfields;
-+   sigset_t* pset;
-+   sigset_t set;
-+   uint64_t time_base;
-+@@ -153,8 +152,6 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+     return;
-+   }
-+ 
-+-  lfields = uv__get_internal_fields(loop);
-+-
-+   /* Take queued watchers and add their fds to our poll fds array.  */
-+   while (!QUEUE_EMPTY(&loop->watcher_queue)) {
-+     q = QUEUE_HEAD(&loop->watcher_queue);
-+@@ -182,7 +179,7 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+   assert(timeout >= -1);
-+   time_base = loop->time;
-+ 
-+-  if (lfields->flags & UV_METRICS_IDLE_TIME) {
-++  if (uv__get_internal_fields(loop)->flags & UV_METRICS_IDLE_TIME) {
-+     reset_timeout = 1;
-+     user_timeout = timeout;
-+     timeout = 0;
-+@@ -201,12 +198,6 @@ void uv__io_poll(uv_loop_t* loop, int timeout) {
-+     if (timeout != 0)
-+       uv__metrics_set_provider_entry_time(loop);
-+ 
-+-    /* Store the current timeout in a location that's globally accessible so
-+-     * other locations like uv__work_done() can determine whether the queue
-+-     * of events in the callback were waiting when poll was called.
-+-     */
-+-    lfields->current_timeout = timeout;
-+-
-+     if (pset != NULL)
-+       if (pthread_sigmask(SIG_BLOCK, pset, NULL))
-+         abort();
-+diff --git a/deps/uv/src/uv-common.h b/deps/uv/src/uv-common.h
-+index decde5362c8..2720121addc 100644
-+--- a/deps/uv/src/uv-common.h
-++++ b/deps/uv/src/uv-common.h
-+@@ -396,37 +396,9 @@ struct uv__loop_metrics_s {
-+ void uv__metrics_update_idle_time(uv_loop_t* loop);
-+ void uv__metrics_set_provider_entry_time(uv_loop_t* loop);
-+ 
-+-#ifdef __linux__
-+-struct uv__iou {
-+-  uint32_t* sqhead;
-+-  uint32_t* sqtail;
-+-  uint32_t* sqarray;
-+-  uint32_t sqmask;
-+-  uint32_t* sqflags;
-+-  uint32_t* cqhead;
-+-  uint32_t* cqtail;
-+-  uint32_t cqmask;
-+-  void* sq;   /* pointer to munmap() on event loop teardown */
-+-  void* cqe;  /* pointer to array of struct uv__io_uring_cqe */
-+-  void* sqe;  /* pointer to array of struct uv__io_uring_sqe */
-+-  size_t sqlen;
-+-  size_t cqlen;
-+-  size_t maxlen;
-+-  size_t sqelen;
-+-  int ringfd;
-+-  uint32_t in_flight;
-+-};
-+-#endif  /* __linux__ */
-+-
-+ struct uv__loop_internal_fields_s {
-+   unsigned int flags;
-+   uv__loop_metrics_t loop_metrics;
-+-  int current_timeout;
-+-#ifdef __linux__
-+-  struct uv__iou ctl;
-+-  struct uv__iou iou;
-+-  void* inv;  /* used by uv__platform_invalidate_fd() */
-+-#endif  /* __linux__ */
-+ };
-+ 
-+ #endif /* UV_COMMON_H_ */
-+diff --git a/deps/uv/src/win/core.c b/deps/uv/src/win/core.c
-+index 9a3be58849a..e4041ec86a6 100644
-+--- a/deps/uv/src/win/core.c
-++++ b/deps/uv/src/win/core.c
-+@@ -424,7 +424,6 @@ int uv_backend_timeout(const uv_loop_t* loop) {
-+ 
-+ 
-+ static void uv__poll_wine(uv_loop_t* loop, DWORD timeout) {
-+-  uv__loop_internal_fields_t* lfields;
-+   DWORD bytes;
-+   ULONG_PTR key;
-+   OVERLAPPED* overlapped;
-+@@ -434,10 +433,9 @@ static void uv__poll_wine(uv_loop_t* loop, DWORD timeout) {
-+   uint64_t user_timeout;
-+   int reset_timeout;
-+ 
-+-  lfields = uv__get_internal_fields(loop);
-+   timeout_time = loop->time + timeout;
-+ 
-+-  if (lfields->flags & UV_METRICS_IDLE_TIME) {
-++  if (uv__get_internal_fields(loop)->flags & UV_METRICS_IDLE_TIME) {
-+     reset_timeout = 1;
-+     user_timeout = timeout;
-+     timeout = 0;
-+@@ -452,12 +450,6 @@ static void uv__poll_wine(uv_loop_t* loop, DWORD timeout) {
-+     if (timeout != 0)
-+       uv__metrics_set_provider_entry_time(loop);
-+ 
-+-    /* Store the current timeout in a location that's globally accessible so
-+-     * other locations like uv__work_done() can determine whether the queue
-+-     * of events in the callback were waiting when poll was called.
-+-     */
-+-    lfields->current_timeout = timeout;
-+-
-+     GetQueuedCompletionStatus(loop->iocp,
-+                               &bytes,
-+                               &key,
-+@@ -515,7 +507,6 @@ static void uv__poll_wine(uv_loop_t* loop, DWORD timeout) {
-+ 
-+ 
-+ static void uv__poll(uv_loop_t* loop, DWORD timeout) {
-+-  uv__loop_internal_fields_t* lfields;
-+   BOOL success;
-+   uv_req_t* req;
-+   OVERLAPPED_ENTRY overlappeds[128];
-+@@ -527,10 +518,9 @@ static void uv__poll(uv_loop_t* loop, DWORD timeout) {
-+   uint64_t actual_timeout;
-+   int reset_timeout;
-+ 
-+-  lfields = uv__get_internal_fields(loop);
-+   timeout_time = loop->time + timeout;
-+ 
-+-  if (lfields->flags & UV_METRICS_IDLE_TIME) {
-++  if (uv__get_internal_fields(loop)->flags & UV_METRICS_IDLE_TIME) {
-+     reset_timeout = 1;
-+     user_timeout = timeout;
-+     timeout = 0;
-+@@ -547,12 +537,6 @@ static void uv__poll(uv_loop_t* loop, DWORD timeout) {
-+     if (timeout != 0)
-+       uv__metrics_set_provider_entry_time(loop);
-+ 
-+-    /* Store the current timeout in a location that's globally accessible so
-+-     * other locations like uv__work_done() can determine whether the queue
-+-     * of events in the callback were waiting when poll was called.
-+-     */
-+-    lfields->current_timeout = timeout;
-+-
-+     success = pGetQueuedCompletionStatusEx(loop->iocp,
-+                                            overlappeds,
-+                                            ARRAY_SIZE(overlappeds),
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_20.8.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_20.8.1.bb
-index d02e733ba6..65f4eb3f3a 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_20.8.1.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_20.8.1.bb
-@@ -24,6 +24,8 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
-            file://0004-v8-don-t-override-ARM-CFLAGS.patch \
-            file://system-c-ares.patch \
-            file://0001-liftoff-Correct-function-signatures.patch \
-+           file://0001-Revert-io_uring-changes-from-libuv-1.46.0.patch \
-+           file://0002-Revert-io_uring-changes-from-libuv-1.45.0.patch \
-            file://run-ptest \
-            "
- 
--- 
-2.42.0
+--000000000000ee87eb060805dd10
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
+<div dir=3D"ltr" class=3D"gmail_attr">On Wed, Oct 18, 2023 at 1:41=E2=80=AF=
+PM Martin Jansa &lt;<a href=3D"mailto:martin.jansa@gmail.com">martin.jansa@=
+gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
+-left:1ex"><div dir=3D"ltr">I&#39;ve narrowed this down to simple reproduce=
+r with webpack creating pack with &quot;hello world&quot; as shown in:<div>=
+<a href=3D"https://github.com/shr-project/com.webos.app.minimal/tree/recipe=
+s" target=3D"_blank">https://github.com/shr-project/com.webos.app.minimal/t=
+ree/recipes</a><br></div><div><br></div><div>Then with this reproducer I&#3=
+9;ve bisected it to nodejs-20.3.0 with libuv upgrade 1.45.0 which brings su=
+pport for io_uring which doesn&#39;t work with pseudo in:</div><div><a href=
+=3D"https://github.com/libuv/libuv/pull/3952/commits/26c79a942b92573a1388c0=
+ee8a6ad4397f009318" target=3D"_blank">https://github.com/libuv/libuv/pull/3=
+952/commits/26c79a942b92573a1388c0ee8a6ad4397f009318</a><br></div><div><br>=
+</div><div>Now we have 3 options:</div><div><br></div><div>1) either every =
+use of nodejs-native where io_uring might be used (like in webpack) needs t=
+o export=C2=A0UV_USE_IO_URING=3D0 before using node, but be aware that the =
+PR says it&#39;s only temporary and this variable might be removed in futur=
+e. Unfortunately many people are lucky enough not to know what pseudo even =
+is, so they might not realize that host-user-contamination QA issues or &qu=
+ot;KeyError: &#39;getpwuid(): uid not found&quot; might be related to this =
+(and they probably won&#39;t find this e-mail as well).</div><div><br></div=
+><div>2) revert the io_uring changes from bundled libuv, I&#39;ve already v=
+erified this with nodejs-20.3.0, for 20.8.1 it would need couple more commi=
+ts to be reverted as 20.8.1 uses even newer libuv-1.46.0. The changes are m=
+assive and it will be PIA to update them for every nodejs release, patch fo=
+r keeping UV_USE_IO_URING support after it&#39;s removed from upstream libu=
+v will be much smaller, but PIA to use=C2=A0UV_USE_IO_URING whenever using =
+nodejs-native during build.</div><div><br></div><div>3) fix pseudo to corre=
+ctly work with io_uring calls, definitely best long-term solution as more a=
+nd more tools will now switch to io_uring, but without active maintainer of=
+ pseudo it might be _very_ difficult to implement this and there aren&#39;t=
+ many people willing to touch this beast.</div><div><br></div><div>Any opin=
+ions?</div></div><br></blockquote><div><br></div><div>I would advise we not=
+ be overly aggressive about updates for important tools like NodeJS and Dja=
+ngo.</div><div><br></div><div>I don&#39;t think many consumers are building=
+ products on the latest greatest NodeJS release (which this isn&#39;t, late=
+st is 21), many may not even be on the latest LTS (18 vs.16). While we can =
+have a floating &quot;latest&quot; recipe, we should keep an LTS recipe.</d=
+iv><div>We tried to do this for Django in meta-python, but later commits wi=
+ped out the comments and the upstream check.</div><div><a href=3D"https://g=
+it.openembedded.org/meta-openembedded/commit/meta-python/recipes-devtools/p=
+ython?id=3D961755a7bd17f7347f7dd0f2de3d2400a9c36f09">https://git.openembedd=
+ed.org/meta-openembedded/commit/meta-python/recipes-devtools/python?id=3D96=
+1755a7bd17f7347f7dd0f2de3d2400a9c36f09</a></div><div><br></div><div><br></d=
+iv><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bord=
+er-left:1px solid rgb(204,204,204);padding-left:1ex"><div class=3D"gmail_qu=
+ote"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Oct 2, 2023 at 7:08=E2=
+=80=AFPM Martin Jansa via <a href=3D"http://lists.openembedded.org" target=
+=3D"_blank">lists.openembedded.org</a> &lt;martin.jansa=3D<a href=3D"mailto=
+:gmail.com@lists.openembedded.org" target=3D"_blank">gmail.com@lists.openem=
+bedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
+-left:1ex"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr">On Thu, Sep 2=
+8, 2023 at 11:13=E2=80=AFAM Polampalli, Archana via <a href=3D"http://lists=
+.openembedded.org" target=3D"_blank">lists.openembedded.org</a> &lt;archana=
+.polampalli=3D<a href=3D"mailto:windriver.com@lists.openembedded.org" targe=
+t=3D"_blank">windriver.com@lists.openembedded.org</a>&gt; wrote:<br></div><=
+div class=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=3D"margin=
+:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"=
+>Update to latest release of latest LTS 20 release<br>
+<br>
+=C2=A0 =C2=A0 * node v20 introduces several new features and fixes many bug=
+s and CVEs as shown in [1]<br>
+<br>
+=C2=A0 =C2=A0 * Refresh 0001-liftoff-Correct-function-signatures.patch agai=
+nst 20.5.1<br>
+<br>
+=C2=A0 =C2=A0 * License-Update:<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0- Change zlib version 1.2.13, October 13th, 2022=
+ to version 1.2.13.1, October xxth, 2022 [2]<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0- Change Copyright 2023 from Ada authors to Yagi=
+z Nizipli and Daniel Lemire [4]<br>
+<br>
+=C2=A0 =C2=A0 * Remove big-endian.patch as it is merged in v20.x [5] [6]<br=
+>
+<br>
+=C2=A0 =C2=A0 * Remove below list of patches since mips32 is deleted from v=
+8 as part of update V8 to 10.7.193.13 [7] [8]<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0- mips-less-memory.patch<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0- 0001-mips-Use-32bit-cast-for-operand-on-mips32=
+.patch<br>
+<br>
+=C2=A0 =C2=A0 * Update Using-native-binaries.patch for node_js2c, it resolv=
+ed below do_compile error [9]<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0Error:<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0/bin/sh: line 1: build/tmp/work/core2-64-poky-li=
+nux/nodejs/20.5.1/node-v20.5.1/out/Release/node_js2c: No such file or direc=
+tory<br>
+<br>
+=C2=A0 =C2=A0 * Remove obsolete dtrace &amp; etw configure options (we had:=
+ --without-&lt;feature&gt;) from the recipe [10]</blockquote><div><br></div=
+><div>FYI: (in case someone else are seeing similar issues now)</div><div><=
+br></div><div>With this upgrade I&#39;m seeing some files created during th=
+e build with node not to be intercepted by pseudo and recorded in its datab=
+ase.</div><div><br></div><div>This results in=C2=A0sstate_report_unihash fa=
+ilure, because appinfo.json is now owned by 1026:1026 (my build UID/GID) in=
+stead of 0:0 as before:</div><div><br></div><div>DEBUG: Executing python fu=
+nction sstate_report_unihash</div>WARNING: KeyError in ./package/usr/palm/a=
+pplications/com.webos.app.videoplayer/appinfo.json<br>ERROR: Error executin=
+g a python function in exec_func_python() autogenerated:<br><br>The stack t=
+race of python calls that resulted in this exception/failure was:<br>File: =
+&#39;exec_func_python() autogenerated&#39;, lineno: 2, function: &lt;module=
+&gt;<br>=C2=A0 =C2=A0 =C2=A00001:<br>=C2=A0*** 0002:sstate_report_unihash(d=
+)<br>=C2=A0 =C2=A0 =C2=A00003:<br>File: &#39;/OE/build/luneos-nanbield/open=
+embedded-core/meta/classes-global/sstate.bbclass&#39;, lineno: 880, functio=
+n: sstate_report_unihash<br>=C2=A0 =C2=A0 =C2=A00876: =C2=A0 =C2=A0report_u=
+nihash =3D getattr(bb.parse.siggen, &#39;report_unihash&#39;, None)<br>=C2=
+=A0 =C2=A0 =C2=A00877:<br>=C2=A0 =C2=A0 =C2=A00878: =C2=A0 =C2=A0if report_=
+unihash: =C2=A0<br>=C2=A0 =C2=A0 =C2=A00879: =C2=A0 =C2=A0 =C2=A0 =C2=A0ss =
+=3D sstate_state_fromvars(d)<br>=C2=A0*** 0880: =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+report_unihash(os.getcwd(), ss[&#39;task&#39;], d)<br>=C2=A0 =C2=A0 =C2=A00=
+881:}<br>=C2=A0 =C2=A0 =C2=A00882:<br>=C2=A0 =C2=A0 =C2=A00883:#<br>=C2=A0 =
+=C2=A0 =C2=A00884:# Shell function to decompress and prepare a package for =
+installation<br>File: &#39;/OE/build/luneos-nanbield/bitbake/lib/bb/siggen.=
+py&#39;, lineno: 659, function: report_unihash<br>=C2=A0 =C2=A0 =C2=A00655:=
+<br>=C2=A0 =C2=A0 =C2=A00656: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if &=
+quot;.&quot; in self.method:<br>=C2=A0 =C2=A0 =C2=A00657: =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(module, method) =3D self.method.rspl=
+it(&#39;.&#39;, 1)<br>=C2=A0 =C2=A0 =C2=A00658: =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0locs[&#39;method&#39;] =3D getattr(importlib.im=
+port_module(module), method)<br>=C2=A0*** 0659: =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0outhash =3D bb.utils.better_eval(&#39;method(pa=
+th, sigfile, task, d)&#39;, locs)<br>=C2=A0 =C2=A0 =C2=A00660: =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0else:<br>=C2=A0 =C2=A0 =C2=A00661: =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0outhash =3D bb.utils.better=
+_eval(self.method + &#39;(path, sigfile, task, d)&#39;, locs)<br>=C2=A0 =C2=
+=A0 =C2=A00662:<br>=C2=A0 =C2=A0 =C2=A00663: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0try:<br>File: &#39;/OE/build/luneos-nanbield/bitbake/lib/bb/ut=
+ils.py&#39;, lineno: 434, function: better_eval<br>=C2=A0 =C2=A0 =C2=A00430=
+: =C2=A0 =C2=A0if extraglobals:<br>=C2=A0 =C2=A0 =C2=A00431: =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0ctx =3D copy.copy(ctx)<br>=C2=A0 =C2=A0 =C2=A00432: =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0for g in extraglobals:<br>=C2=A0 =C2=A0 =C2=A00433: =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0ctx[g] =3D extraglobals[g]<br>=C2=A0*** =
+0434: =C2=A0 =C2=A0return eval(source, ctx, locals)<br>=C2=A0 =C2=A0 =C2=A0=
+0435:<br>=C2=A0 =C2=A0 =C2=A00436:@contextmanager<br>=C2=A0 =C2=A0 =C2=A004=
+37:def fileslocked(files, *args, **kwargs):<br>=C2=A0 =C2=A0 =C2=A00438: =
+=C2=A0 =C2=A0&quot;&quot;&quot;Context manager for locking and unlocking fi=
+le locks.&quot;&quot;&quot;<br>File: &#39;&lt;string&gt;&#39;, lineno: 1, f=
+unction: &lt;module&gt;<br>=C2=A0 File &quot;&lt;string&gt;&quot;, line 1, =
+in &lt;module&gt;<br><br>File: &#39;/OE/build/luneos-nanbield/openembedded-=
+core/meta/lib/oe/sstatesig.py&#39;, lineno: 649, function: OEOuthashBasic<b=
+r>=C2=A0 =C2=A0 =C2=A00645: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0process(root)<br>=C2=A0 =C2=A0 =C2=A00646: =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0for f in files:<br>=C2=A0 =C2=A0 =C2=A00647: =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if f =3D=3D &#39;fixmepath&#39=
+;:<br>=C2=A0 =C2=A0 =C2=A00648: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0continue<br>=C2=A0*** 0649: =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0process(os.path.join(root, f))<br>=C2=A0=
+ =C2=A0 =C2=A00650:<br>=C2=A0 =C2=A0 =C2=A00651: =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0for dir in dirs:<br>=C2=A0 =C2=A0 =C2=A00652: =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if os.path.islink(os.path.join=
+(root, dir)):<br>=C2=A0 =C2=A0 =C2=A00653: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0process(os.path.join(root, dir))<br>F=
+ile: &#39;/OE/build/luneos-nanbield/openembedded-core/meta/lib/oe/sstatesig=
+.py&#39;, lineno: 588, function: process<br>=C2=A0 =C2=A0 =C2=A00584: =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0except Ke=
+yError as e:<br>=C2=A0 =C2=A0 =C2=A00585: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0bb.warn(&quot;KeyError =
+in %s&quot; % path)<br>=C2=A0 =C2=A0 =C2=A00586: =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0msg =3D (&quot;K=
+eyError: %s\nPath %s is owned by uid %d, gid %d, which doesn&#39;t match &q=
+uot;<br>=C2=A0 =C2=A0 =C2=A00587: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;any user/grou=
+p on target. This may be due to host contamination.&quot; % (e, path, s.st_=
+uid, s.st_gid))<br>=C2=A0*** 0588: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0raise Exception(msg).with_trac=
+eback(e.__traceback__)<br></div><div class=3D"gmail_quote">=C2=A0 =C2=A0 =
+=C2=A00589:<br>=C2=A0 =C2=A0 =C2=A00590: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0if include_timestamps:<br>=C2=A0 =C2=A0 =C2=A00591: =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0update=
+_hash(&quot; %10d&quot; % s.st_mtime)<br>=C2=A0 =C2=A0 =C2=A00592:<br>File:=
+ &#39;/OE/build/luneos-nanbield/openembedded-core/meta/lib/oe/sstatesig.py&=
+#39;, lineno: 582, function: process<br>=C2=A0 =C2=A0 =C2=A00578: =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0else:<br>=C2=
+=A0 =C2=A0 =C2=A00579: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0add_perm(stat.S_IXOTH, &#39;x&#39;)<br>=C2=
+=A0 =C2=A0 =C2=A00580:<br>=C2=A0 =C2=A0 =C2=A00581: =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0try:<br>=C2=A0*** 0582: =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0update_hash(&quot; %10s&quot; % pwd.getpwuid(s.st_uid).pw_name)<br>=
+=C2=A0 =C2=A0 =C2=A00583: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0update_hash(&quot; %10s&quot; % grp.getgr=
+gid(s.st_gid).gr_name)<br>=C2=A0 =C2=A0 =C2=A00584: =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0except KeyError as e:<br>=
+=C2=A0 =C2=A0 =C2=A00585: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0bb.warn(&quot;KeyError in %s&quot; % path=
+)<br>=C2=A0 =C2=A0 =C2=A00586: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0msg =3D (&quot;KeyError: %s\nPath =
+%s is owned by uid %d, gid %d, which doesn&#39;t match &quot;<br>Exception:=
+ Exception: KeyError: &#39;getpwuid(): uid not found: 1026&#39;<br>Path ./p=
+ackage/usr/palm/applications/com.webos.app.videoplayer/appinfo.json is owne=
+d by uid 1026, gid 1026, which doesn&#39;t match any user/group on target. =
+This may be due to host contamination.<br></div><div class=3D"gmail_quote">=
+<br></div><div class=3D"gmail_quote">martin@jama /OE/build/luneos-nanbield/=
+tmp-glibc/work/corei7-64-webos-linux/com.webos.app.videoplayer $ sqlite3 0.=
+0.1-12+git-nodejs-20/pseudo/files.db &quot;select * from files where path l=
+ike &#39;%yer/appinfo.json&#39;&quot;<br>1107|/OE/build/luneos-nanbield/tmp=
+-glibc/work/corei7-64-webos-linux/com.webos.app.videoplayer/0.0.1-12+git/ss=
+tate-build-package/package/usr/palm/applications/com.webos.app.videoplayer/=
+appinfo.json|66305|41202418|1026|1026|33188|0|0<br>1192|/OE/build/luneos-na=
+nbield/tmp-glibc/work/corei7-64-webos-linux/com.webos.app.videoplayer/0.0.1=
+-12+git/sstate-build-package/packages-split/com.webos.app.videoplayer/usr/p=
+alm/applications/com.webos.app.videoplayer/appinfo.json|66305|41<br>202418|=
+1026|1026|33188|0|0<br><br></div><div class=3D"gmail_quote">martin@jama /OE=
+/build/luneos-nanbield/tmp-glibc/work/corei7-64-webos-linux/com.webos.app.v=
+ideoplayer $ sqlite3 0.0.1-12+git-nodejs-18/pseudo/files.db &quot;select * =
+from files where path like &#39;%yer/appinfo.json&#39;&quot;<br>56|/OE/buil=
+d/luneos-nanbield/tmp-glibc/work/corei7-64-webos-linux/com.webos.app.videop=
+layer/0.0.1-12+git/image/usr/palm/applications/com.webos.app.videoplayer/ap=
+pinfo.json|66305|42878067|0|0|33188|0|0<br>374|/OE/build/luneos-nanbield/tm=
+p-glibc/work/corei7-64-webos-linux/com.webos.app.videoplayer/0.0.1-12+git/p=
+ackage/usr/palm/applications/com.webos.app.videoplayer/appinfo.json|66305|4=
+2878641|0|0|33188|0|0<br>459|/OE/build/luneos-nanbield/tmp-glibc/work/corei=
+7-64-webos-linux/com.webos.app.videoplayer/0.0.1-12+git/packages-split/com.=
+webos.app.videoplayer/usr/palm/applications/com.webos.app.videoplayer/appin=
+fo.json|66305|42878641|0|0|33188|0|0<br></div><div class=3D"gmail_quote"><b=
+r></div><div class=3D"gmail_quote">I&#39;ll provide more details when I deb=
+ug this further.</div><div class=3D"gmail_quote"><br></div><div class=3D"gm=
+ail_quote">Regards,</div></div></div>
+<br>
+<br>
+<br>
+</blockquote></div>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#105583): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/105583" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/105583</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/101098430/924=
+729" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
+/101098430/924729</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
+et=3D"_blank">ticotimo@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
+
+--000000000000ee87eb060805dd10--
 
