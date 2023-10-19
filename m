@@ -1,546 +1,208 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8CB08CDB482
-	for <webhook@archiver.kernel.org>; Thu, 19 Oct 2023 06:47:28 +0000 (UTC)
-Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
- by mx.groups.io with SMTP id smtpd.web11.21519.1697698045222050638
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B877CDB483
+	for <webhook@archiver.kernel.org>; Thu, 19 Oct 2023 06:52:08 +0000 (UTC)
+Received: from esa5.fujitsucc.c3s2.iphmx.com (esa5.fujitsucc.c3s2.iphmx.com [68.232.159.76])
+ by mx.groups.io with SMTP id smtpd.web11.21567.1697698317690122848
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 18 Oct 2023 23:47:25 -0700
+ Wed, 18 Oct 2023 23:51:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=LKmNxLwi;
- spf=pass (domain: gmail.com, ip: 209.85.218.50, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f50.google.com with SMTP id a640c23a62f3a-9be3b66f254so847281766b.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 18 Oct 2023 23:47:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1697698043; x=1698302843; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=hVsCYg5ZCnKz62Ltn9ykcb8mFfyCF7MxceDwqblklF4=;
-        b=LKmNxLwi0xmq+z/Skjc2nHP1h8MNqHbbJEX/NpsRLFFRg9dTrbxJI+lUuJNoYzvFQw
-         unxMI1YUoniDM+1n0yHzsLrVQNJtHvI7r2MF/Rmtp6OHEFVU403Xn5CZjaU9Gnf0LdHc
-         GNY5YZ/RHNuKCBz9E5AmRGrICDns971llC2KFBL9Q2feF+XPsTBmpCx//XsuqpwRzbmo
-         bbqOjFByb07aBGRPcVjqAnIdGikunSVLFwqLzIxFB0r6PuYVZjU7Ub8mHq6h0LF8aKjG
-         mSCMvmP88XFl913ty0akx6fkgH/cfrUVhAyASwE8blJtI+VC0WzBz8lJl2VHGqN39GZe
-         zTEg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1697698043; x=1698302843;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=hVsCYg5ZCnKz62Ltn9ykcb8mFfyCF7MxceDwqblklF4=;
-        b=s0kFaHvlssu4DEhCvyBmW1vPbPd5OgncTyhpqNTpyuq3HbB0m4DSl3Szpt1Kp52kWF
-         gZItZjpvSJA/hX6fHajSW+v7cNgZjEoOG1uLp9BmMFfzSSLgIGoRbaxDMXLqAq5SicG1
-         oCr95BtGlEm3uPWlfZ+Hv+O1hToOM7HR1QYoRQ12RTaJbtXWPV2elQ1klU7N2pD8Gx6i
-         GZ52icyPZOE9sNKExAbMsgU5jdSoGUF4ObGyyXjYzOE0B6NMRq6myiiOtbL4/sJ19E/i
-         uS1Vcg1E1imdGxBuA+zQelIgCJ7CQ/nhDzmSS2jPY94C1dYhU3iU3JvLn6tMyww4Eji+
-         Qv3Q==
-X-Gm-Message-State: AOJu0YwpEHxnLkFch3MBIgyXLWWQIC7vWJNlL7Ezhzrb7D8OmeSk4+6L
-	FMxFKbr/7IFzP2D3qENhou5S0zIFGyM=
-X-Google-Smtp-Source: AGHT+IHuXPuo2lcfixioxXQW7Kc4hYYlPyg8QxlVghZ3Aju7Sl+aD50CNT8mzplaFinxGosUJ8xq2g==
-X-Received: by 2002:a17:906:7315:b0:9ad:ef31:6efc with SMTP id di21-20020a170906731500b009adef316efcmr1151462ejc.21.1697698042978;
-        Wed, 18 Oct 2023 23:47:22 -0700 (PDT)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id lg5-20020a170906f88500b009ad875d12d7sm2923670ejb.210.2023.10.18.23.47.22
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 18 Oct 2023 23:47:22 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][PATCH] opencv: refresh protobuf-v22 compatibility patch with backported version
-Date: Thu, 19 Oct 2023 08:47:16 +0200
-Message-ID: <20231019064717.3156959-1-martin.jansa@gmail.com>
-X-Mailer: git-send-email 2.42.0
+ dkim=pass header.i=@fujitsu.com header.s=fj1 header.b=Bc4qbcDd;
+ spf=pass (domain: fujitsu.com, ip: 68.232.159.76, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj1;
+  t=1697698317; x=1729234317;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=MQ9kLF+Dqdi2BrwCMUwaRrQiZIJsn2oIzPByoRMfMZk=;
+  b=Bc4qbcDdgXezJciSCD0iNaob0Pq5Am1BXJp7CJXb2KLEM0NnItdHl63j
+   MPdFm8tBpLgT1xCkeS7T+lIm4ihuPtJRi4NvhFY/m6kBGToGXC0G735qT
+   +HqAAhx/RQ4cw/iquJJCzMKUARusqbLJ3ObPNhL77/TY26oF2uTKzxTnY
+   YueGH/3kpN2iomyHYn5ObDnZelbQctoH0P8AQfcZ7kz3mqzMjANyoyS7+
+   TRjDBPrP8ClBcbfjLBTvpla/c1JXZfXGMy/Or8mV001yUVX1lHtZ7vZfy
+   jef9qnDklXRt5ZQ/JqHOm027rtOd4GQ13wrpTrpquuS4qxFh6grnUBH+c
+   w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10867"; a="100119544"
+X-IronPort-AV: E=Sophos;i="6.03,236,1694703600"; 
+   d="scan'208";a="100119544"
+Received: from mail-tycjpn01lp2169.outbound.protection.outlook.com (HELO JPN01-TYC-obe.outbound.protection.outlook.com) ([104.47.23.169])
+  by ob1.fujitsucc.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Oct 2023 15:51:54 +0900
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=fs1MXSxyunYBSOgoj+Zhctb2o78YNJWj8IGa8Cxg9wVv0M4Kyuh0tMX0DLq9M4FtS+OkRzMytuvkscLgMAV209h53I0TXq795yeHdCc/OtJYSTYvcNLG0ON8BfTokxLgTzrq6k4vXDKngAlirGuMn1akTFWWPWe631B8sHeLkO9ER+dmNsGwtTrHUsW/lG9NzMWrkbZmQWS1E/ek0xvGV0zdXrZ+Qd4p40unvVtYUpbPcMYWaQ4w9cYZIyXmBAyjfWJWM+9a6x7ibrN/2YrJKS1UM1OJTOwGs7FiE0tYCjKnsOjUaNdk07JYc14tUUNFuUbeHUjLULuAimPYuzKBdQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=MQ9kLF+Dqdi2BrwCMUwaRrQiZIJsn2oIzPByoRMfMZk=;
+ b=ghL+0OmlxMOeOYblZN04t8AgAd/pVScQgI68QpxjkwQwvJR+qlGo3/1XVO8OoY+yAU0mpyUFRR07BrRJ2BGUsbB19gxa0ChPgaSw1Qu636lId+gmHOsO9YASnJkBgk4ynEdcVHyjpcpgDVvVdb96BmgdDrKbRTGCYrSOgrQ6dUili8EwgY0sKggBzgSue93Vb6ssn7GCPvNiLBSgOT6qqhAaYCOaqX1gseqModkO6GweNWNXgZUJEr0wG+unc/al6JFXoa7LLpNxm+3ycCJlptBwkI574fQHA1SuT776do2yenqm4/piuv/MKLmgh5cRCqDyxruBJBDUMP1THIXcLQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=fujitsu.com; dmarc=pass action=none header.from=fujitsu.com;
+ dkim=pass header.d=fujitsu.com; arc=none
+Received: from OSBPR01MB1845.jpnprd01.prod.outlook.com (2603:1096:603:5::13)
+ by TYCPR01MB8584.jpnprd01.prod.outlook.com (2603:1096:400:138::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6907.24; Thu, 19 Oct
+ 2023 06:51:52 +0000
+Received: from OSBPR01MB1845.jpnprd01.prod.outlook.com
+ ([fe80::286f:2b02:30a1:e44]) by OSBPR01MB1845.jpnprd01.prod.outlook.com
+ ([fe80::286f:2b02:30a1:e44%6]) with mapi id 15.20.6907.022; Thu, 19 Oct 2023
+ 06:51:51 +0000
+From: "Mingyu Wang (Fujitsu)" <wangmy@fujitsu.com>
+To: Ross Burton <Ross.Burton@arm.com>
+CC: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: RE: [oe] [meta-oe] [PATCH v3] dnf-plugin-tui: create symlinks from
+ /usr/ to /.
+Thread-Topic: [oe] [meta-oe] [PATCH v3] dnf-plugin-tui: create symlinks from
+ /usr/ to /.
+Thread-Index: AQHaAMrgXUTYe4VH/0y+bWsAqqYi6rBNvWOAgALvFwA=
+Date: Thu, 19 Oct 2023 06:51:51 +0000
+Message-ID: 
+ <OSBPR01MB1845965B443CCECAD4B7B5D5DCD4A@OSBPR01MB1845.jpnprd01.prod.outlook.com>
+References: <1697527418-5791-1-git-send-email-wangmy@fujitsu.com>
+ <7F1CE9DA-A95C-4079-9436-F8D233A6A116@arm.com>
+In-Reply-To: <7F1CE9DA-A95C-4079-9436-F8D233A6A116@arm.com>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+ =?utf-8?B?TVNJUF9MYWJlbF9hNzI5NWNjMS1kMjc5LTQyYWMtYWI0ZC0zYjBmNGZlY2Uw?=
+ =?utf-8?B?NTBfQWN0aW9uSWQ9YWRkNGRmODktOTk2NC00YzM2LTg1OTEtNGVhYjZhMWNj?=
+ =?utf-8?B?ZjhlO01TSVBfTGFiZWxfYTcyOTVjYzEtZDI3OS00MmFjLWFiNGQtM2IwZjRm?=
+ =?utf-8?B?ZWNlMDUwX0NvbnRlbnRCaXRzPTA7TVNJUF9MYWJlbF9hNzI5NWNjMS1kMjc5?=
+ =?utf-8?B?LTQyYWMtYWI0ZC0zYjBmNGZlY2UwNTBfRW5hYmxlZD10cnVlO01TSVBfTGFi?=
+ =?utf-8?B?ZWxfYTcyOTVjYzEtZDI3OS00MmFjLWFiNGQtM2IwZjRmZWNlMDUwX01ldGhv?=
+ =?utf-8?B?ZD1TdGFuZGFyZDtNU0lQX0xhYmVsX2E3Mjk1Y2MxLWQyNzktNDJhYy1hYjRk?=
+ =?utf-8?B?LTNiMGY0ZmVjZTA1MF9OYW1lPUZVSklUU1UtUkVTVFJJQ1RFROKAiztNU0lQ?=
+ =?utf-8?B?X0xhYmVsX2E3Mjk1Y2MxLWQyNzktNDJhYy1hYjRkLTNiMGY0ZmVjZTA1MF9T?=
+ =?utf-8?B?ZXREYXRlPTIwMjMtMTAtMTlUMDY6Mzk6MzhaO01TSVBfTGFiZWxfYTcyOTVj?=
+ =?utf-8?B?YzEtZDI3OS00MmFjLWFiNGQtM2IwZjRmZWNlMDUwX1NpdGVJZD1hMTlmMTIx?=
+ =?utf-8?Q?d-81e1-4858-a9d8-736e267fd4c7;?=
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=fujitsu.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: OSBPR01MB1845:EE_|TYCPR01MB8584:EE_
+x-ms-office365-filtering-correlation-id: 02e9f77f-826a-4ab9-7567-08dbd06fdfe1
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 
+ hrtt9VcHtpGCHuxm3XujEgPKtqpQtjuM49Zaw+9kVPdDoeqC392y3e2nTdp2GhU1yxTWk6/WjpHwfCC5LPkz48Mwo4WCy/kKo1rSKUfcBPDaOlAU/LYkv+24xTlj/QfNY4r08S85T1N33fUGe3Tp673vIyjxkRicmKvctEt+i/kjqjsySQwJrSLhw4X0R/Yfpnu2BfIOnX/72sI2LP6y/cSZDYWxeURZwjR4HAxT2DzbaUF0nCxDcT24BejJutBR8WoyyuCXdWB46D+sSw02XNOWNZaL2JnJTWt6yyjiwu86rn8LZ/ngnBcPyV25ekSFFkDVUmfdD2BMvm9joQPeXwMy5Wa6jOxYvZ8X0oawla1DqXGognDBRu4VhvFsuT1od4SgAmLXbMjZl8Gdp+mewhNAOWtKkEV9Xhlv3iEzlrL67tfaPzClokJLmmLr9gkMTmJlpVFDdLfTzNuAn77fiFzk3Z7QreUlQWMaN0XiF5cgrhFCcMsiP+QuV2BIiHu/BQCSzMnGfCac9n+mreCPk58VLlI/QL3biXyaFWB1Desg6c1sb+QRKHfO+mDJRMW3pbJ8aifx0ZgeChf9vtD6j/q8B5iwfZ2h48UPIldFxQBrelf6dDKw8z4ZOkx0zPg1ci/Ix58gFtLWHiiut+E65k0ok7SXZKBiEnD5CZkr5kU=
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:OSBPR01MB1845.jpnprd01.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(376002)(136003)(396003)(366004)(39860400002)(346002)(230922051799003)(186009)(1800799009)(1590799021)(64100799003)(451199024)(83380400001)(122000001)(7696005)(6506007)(71200400001)(38070700005)(53546011)(66446008)(8936002)(966005)(52536014)(478600001)(82960400001)(26005)(76116006)(316002)(66476007)(66946007)(64756008)(4326008)(6916009)(8676002)(66556008)(33656002)(85182001)(86362001)(41300700001)(2906002)(5660300002)(9686003)(38100700002)(55016003)(1580799018)(66899024);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?utf-8?B?b2tocndQWS8yeHFEdjF6WnE5TDgzOWY3bzh6YnFKQndocEErQ0hwbWdqWUZC?=
+ =?utf-8?B?MHpxUnp5dUpESUZ3d3FrQ0pqalpnNnR4WDJzMlNOK29RVUtQNUx3Q2xseDM4?=
+ =?utf-8?B?U29WenVrZ1FTM2RlSUw2cEhwRjY0cTNaM1RKRlZFdUlTNDM1VmRLUmdSaDRa?=
+ =?utf-8?B?TXNZRFM0WW9NeHppeVJ6STFkV3hmQmtzUWdkS2J5L1ZCWGZERUszLzVnUlc3?=
+ =?utf-8?B?UUc0aEdxdXVHSmhPT2xIQTRqeWtkZnEwN3BSTHN5cVg2VW1UNExMWUZxelJF?=
+ =?utf-8?B?aExsRmxXT1ZnUXhnQk1udzdJRVBVMklzUUZwaG1IaWtMMDVnRS9jcWNZeFVi?=
+ =?utf-8?B?UGx3VmxVak9obEF4MmgzOXpBTXhDckROR1F3L0JpOVg2amFkdnl5eEVmbnBw?=
+ =?utf-8?B?NUxYWUw2MFBvaUU0bHNyakd6NElsdjdOeElBZmRiZ3IrRnh5VDR5T0MxTS9U?=
+ =?utf-8?B?cjV6S0JnbnlXdWRLbVpuZTQrSUtja3FkVHhTbkdXb0dhS3JNMG5pYkRlV2Yy?=
+ =?utf-8?B?REw1eWhHYloxeUFTRnVuTkNvZjZaT0lFdk5BY0g4VkhPU0pFZ3FEMzF5QnE0?=
+ =?utf-8?B?VVowMFhiU0ZMVXZxUFNRN2t5SmJWTFI3K3c3TmNodVFZd1oxRTVuK1hxdGtp?=
+ =?utf-8?B?bjAyMDVqU3BzeW92a0pFcURmdHNZaHFXMElmZWxseUdHSW1BMUFFVzQ3OUlr?=
+ =?utf-8?B?cGFFcWY1UmYvam9jRHpaTllpWlBQQWVzazVMNzA4bkhuMmxNcGRwbXc2dy8v?=
+ =?utf-8?B?cEpwS283bnpQdWh4S0JwS0t6Vk9tZGVISXNpNS9yWHBoU0dLYnhqREZtUHZ2?=
+ =?utf-8?B?OTk5STN6Mmt3dUg3THZnTHVGVHQvUjZSNW9lQU5lcGdXY25rR0JuZ1lmamRl?=
+ =?utf-8?B?SUNOUmp2elU1RXZEdlRaYmVFa0RxS3UrbW1jOUVQWXpHSUtNSTFHeWNLQkI3?=
+ =?utf-8?B?ZGQrZzFma3NHR0tYY2JJVVV1QXBNUFNWdk5rRW5EV25FNVlZY0VnL2twUUM3?=
+ =?utf-8?B?NGhvbUJSS3p1cWVpL1pNU3VscGZDWFJpVUZPWXdkbWFNbzIwZWhNZW05YUFh?=
+ =?utf-8?B?YlcvWXNDQ3dvSWdwWDBjN1RWUXpyemJNY2hiclRMTmdQcmlicDAyTnROSENL?=
+ =?utf-8?B?WWJIYi9CTDRsQVRpMHFsakxUcEUxRFVRNkRrazF5UEhwQ0lVS1lkd3o2ekV0?=
+ =?utf-8?B?ZDhKODltUGtzU25ITHFxOXJzcWNVSmN2Nm0ydDZOc2FZYmxtT0xrbzhmOGV1?=
+ =?utf-8?B?blN1M00rclQ0akZzc3dNbkdTYjJYV2M3T2dLdU5DamlFVlVrQTl1eVAzL1VJ?=
+ =?utf-8?B?bE40akhLcjZkT1R5cTd3UVB3OXJyTDJ3Y0d3R2RMR28vL05wZUE5enVzaXF6?=
+ =?utf-8?B?Q25rTTZIREhGeDV2bzgxdmcxN2h5UkZ6OEJaY3RkWWlzd2ovdFVJTlZha2pj?=
+ =?utf-8?B?SmlrWGNkZlRGcUQrYXNWT2VMRG5Md3dvWW9laU02VS9nVnY0R3F1dVlhSlZB?=
+ =?utf-8?B?S1lmRDBxNkxZMXNmQU8wZWl5SURJTVdvZkVVRGJVbVlOUFZudjJJNkZJaHFl?=
+ =?utf-8?B?Q0lCUFp4bnBadGFteUFXV1p3VW9Bc3NHaTk1RjU3NDIyVG9IMTMzRjVWbFNr?=
+ =?utf-8?B?WlNCQlBGMkIzUTU3bkFib2dOUVJTcStEUktKVG5kalh6K0pzaHRYRm9QMitT?=
+ =?utf-8?B?S0JvRHdLckZOQXRpL0YrV2pyRG1iM0dRS3J1MjY4TENjZldKeEVJOGF4NnN0?=
+ =?utf-8?B?L2ZxU1BVY2V5WFlHTVVsRUJHbWZuZWRjNHpGbFNmek9RL3haRWtoMWhnRXZK?=
+ =?utf-8?B?azVERzRhR3NROWhlK2tTUVpxNWMrUHd3T2NTdmVYdFRsVTZNd0VFRUNaMk5B?=
+ =?utf-8?B?YkRpY0ZNdnVPVUhOckgrTlpHSW9HdmtBK0hjelVlbTZlY21Jd2hMZUJhc0tZ?=
+ =?utf-8?B?aDN6d0IzME1lYm04Y3F2dW1PTlpINmZSbnBkMm1KUERwd01PeFgxTjRpaHRP?=
+ =?utf-8?B?Q1hiQ1VtNXcvTkM2T3lreEZnL2QyeWE4UnZuYktWQ2pvamhtS1dBZURKVlJK?=
+ =?utf-8?B?dDU3eVFmWmgxM2wrc1dZQzU5TXRaWTZsaHhCRWdsV096SHNnVHc2SnRxTVpB?=
+ =?utf-8?Q?d1z/95IjL1UHwmaOFvpc2LoSw?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: 
+	+cJwSDCUqgKXg6NLx9LAWlErvCyRI0Kr7Q1Q+KdnVls4O1OnYfzPRiCoJ8kniiwWcBORc6GZamHgctYVuOFp3Vc9rnnT+ccmeHnyIHqMp9o8OwcqjGPVTKEuVWPylM4B5oyIZWwsuTD3c7ctdxB3XYIjXvPHc8tOkqFS5BYOcMzaMkfGsuFBxNjDpNYTvJmVGCMhfboTDYVOaL+M1QKQr16cYR9Gv+KAvU9sxa01idtIxH1vhu2O4v4eyYvf2tW/yecrM+LHw/y4o0uMGMeyAJa4Z5mrXm8AeZ9GC1kwSlo4g/8jEdUjjwik+Kwa3sx5VxqgYW86wdPhMSs8+JsaGkLtNsxjil45uS44twHSv+0hl7MEBcAk0rz7K837/UHkk7PVeUZalbGl6jsnPYDyVb5n22kDUSn6FLl4ckG2RX+Y0ZVTmyEx9WYcJTeugFCWMJe8ChEJIUcqqt2nnwWdnT9GTLSV9a1xYQVpl+I2BPCKAxp4rXFYYsoQsEx3vln8tV5I/XHut6O8U0qmu8FbzXyI5ETWK3G34LWd/xPhQwGbJnTaS3QSHHEHZrX8TGrKyG3vDYo0ild/li/EtVBTOTfXaZXS0OnR6/zEARYb2w7AcrR//ku9znjGrK1Y/MKMcRp9GRktc9zvJNRhCyIWvaXxGZWr2ZqC8P3no3c+SbMAQyYpTPXcgjWlbQlJaL0Xxz7rlSjuTwK92JTlPYOphRzdLM1u6kiW+V/o8O/uN8S7WgFUAH6BjWZjrWqmUKUifaDpynWO7arAUcBXm/QzL9wk/yXoPTF5bC8wrWVTtTC4lkLiqJsPUsKtqrlXR0kv
+X-OriginatorOrg: fujitsu.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: OSBPR01MB1845.jpnprd01.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 02e9f77f-826a-4ab9-7567-08dbd06fdfe1
+X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Oct 2023 06:51:51.8797
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: a19f121d-81e1-4858-a9d8-736e267fd4c7
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: KjjAclazrZSNqj27smSS795PXs9sj3eBaJ6rFnAhxUdfsp/o4bLt2miNNc1tBn5nDPofb2COvl+6Bx3dvBSnCw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYCPR01MB8584
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 19 Oct 2023 06:47:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105590
+ <openembedded-devel@lists.openembedded.org>; Thu, 19 Oct 2023 06:52:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105591
 
-* as a bonus it fixes building with tests PACKAGECONFIG enabled as reported in:
-  https://github.com/openembedded/meta-openembedded/commit/225ce6a14a8110ab6b573b4dc9f5297a03d17e0f#r129831882
-
-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
----
- .../opencv/fix-build-with-protobuf-v22.patch  | 385 ++++--------------
- 1 file changed, 88 insertions(+), 297 deletions(-)
-
-diff --git a/meta-oe/recipes-support/opencv/opencv/fix-build-with-protobuf-v22.patch b/meta-oe/recipes-support/opencv/opencv/fix-build-with-protobuf-v22.patch
-index 536060cfd9..265d723c6e 100644
---- a/meta-oe/recipes-support/opencv/opencv/fix-build-with-protobuf-v22.patch
-+++ b/meta-oe/recipes-support/opencv/opencv/fix-build-with-protobuf-v22.patch
-@@ -1,19 +1,60 @@
--From 5e4150826fea6f37276f348c65d94ce4847d1211 Mon Sep 17 00:00:00 2001
-+From 75f7475fcfb35cbe4d8f5ccf5c4ac8bc78f2dc30 Mon Sep 17 00:00:00 2001
- From: Kumataro <Kumataro@users.noreply.github.com>
--Date: Sat, 7 Oct 2023 10:11:25 +0900
--Subject: [PATCH] 3rdparty: supporting protobuf v22 and later
-+Date: Thu, 19 Oct 2023 14:45:08 +0900
-+Subject: [PATCH] Merge pull request #24372 from Kumataro:fix24369
- 
--Upstream-Status: Submitted [https://github.com/opencv/opencv/pull/24372]
-+Supporting protobuf v22 and later(with abseil-cpp/C++17) #24372
-+
-+fix https://github.com/opencv/opencv/issues/24369
-+related https://github.com/opencv/opencv/issues/23791
-+
-+1. This patch supports external protobuf v22 and later, it required abseil-cpp and c++17.
-+    Even if the built-in protobuf is upgraded to v22 or later,
-+    the dependency on abseil-cpp and the requirement for C++17 will continue.
-+2. Some test for caffe required patched protobuf, so this patch disable them.
-+
-+This patch is tested by following libraries.
-+-  Protobuf:                    /usr/local/lib/libprotobuf.so (4.24.4)
-+-  abseil-cpp:                YES (20230125)
-+
-+See details at https://github.com/opencv/opencv/wiki/How_to_contribute#making-a-good-pull-request
-+
-+- [x] I agree to contribute to the project under Apache 2 License.
-+- [x] To the best of my knowledge, the proposed patch is not based on a code under GPL or another license that is incompatible with OpenCV
-+- [x] The PR is proposed to the proper branch
-+- [x] There is a reference to the original bug report and related work
-+- [x] There is accuracy test, performance test and test data in opencv_extra repository, if applicable
-+      Patch to opencv_extra has the same branch name.
-+- [x] The feature is well documented and sample code can be built with the project CMake
-+
-+Upstream-Status: Backport [https://github.com/opencv/opencv/commit/6e4280ea81b59c6dca45bb9801b758377beead55]
- ---
-- cmake/OpenCVFindProtobuf.cmake | 37 ++++++++++++++++++++++++++++++++++
-- modules/dnn/CMakeLists.txt     |  9 +++++++++
-- 2 files changed, 46 insertions(+)
-+ cmake/OpenCVFindProtobuf.cmake   | 35 +++++++++++++++++++++++++++-----
-+ modules/dnn/CMakeLists.txt       |  6 ++++++
-+ modules/dnn/test/test_layers.cpp | 24 ++++++++++++++++++----
-+ 3 files changed, 56 insertions(+), 9 deletions(-)
- 
- diff --git a/cmake/OpenCVFindProtobuf.cmake b/cmake/OpenCVFindProtobuf.cmake
--index 8835347d1d..9bd5c28db8 100644
-+index 8835347d1d..5b1e17529f 100644
- --- a/cmake/OpenCVFindProtobuf.cmake
- +++ b/cmake/OpenCVFindProtobuf.cmake
--@@ -67,6 +67,38 @@ else()
-+@@ -30,8 +30,14 @@ if(BUILD_PROTOBUF)
-+   set(Protobuf_LIBRARIES "libprotobuf")
-+   set(HAVE_PROTOBUF TRUE)
-+ else()
-++  # we still need this for command PROTOBUF_GENERATE_CPP.
-++  set(protobuf_MODULE_COMPATIBLE ON)
-++
-+   unset(Protobuf_VERSION CACHE)
-+-  find_package(Protobuf QUIET)
-++  find_package(Protobuf QUIET CONFIG)
-++  if(NOT Protobuf_FOUND)
-++    find_package(Protobuf QUIET)
-++  endif()
-+ 
-+   # Backwards compatibility
-+   # Define camel case versions of input variables
-+@@ -67,6 +73,20 @@ else()
-    endif()
-  endif()
-  
-@@ -21,82 +62,49 @@ index 8835347d1d..9bd5c28db8 100644
- +# In Protocol Buffers v22.0 and later drops C++11 support and depends abseil-cpp.
- +#   Details: https://protobuf.dev/news/2022-08-03/
- +# And if std::text_view is in abseil-cpp requests C++17 and later.
--+if(HAVE_PROTOBUF)
--+    if("${Protobuf_VERSION}" MATCHES [[[0-9]+.([0-9]+).[0-9]+]])
--+        string(COMPARE GREATER_EQUAL "${CMAKE_MATCH_1}" "22" REQUEST_ABSL)
--+
--+        if(REQUEST_ABSL)
--+            string(COMPARE GREATER_EQUAL "${CMAKE_CXX_STANDARD}" "17" USED_AFTER_CXX17)
--+            if(NOT USED_AFTER_CXX17)
--+                message("CMAKE_CXX_STANDARD : ${CMAKE_CXX_STANDARD}")
--+                message("protobuf           : ${Protobuf_VERSION}")
--+                message(FATAL_ERROR "protobuf(v22 and later) and abseil-cpp request CMAKE_CXX_STANDARD=17 and later.")
--+            endif()
--+
--+            ocv_check_modules(ABSL_STRINGS absl_strings)
--+            if(NOT ABSL_STRINGS_FOUND)
--+                message(FATAL_ERROR "protobuf(v22 and later) requests abseil-cpp(strings), but missing.")
--+            endif()
--+
--+            ocv_check_modules(ABSL_LOG absl_log)
--+            if(NOT ABSL_LOG_FOUND)
--+                message(FATAL_ERROR "protobuf(v22 and later) requests abseil-cpp(log), but missing.")
--+            endif()
- +
--+        endif()
--+    else()
--+        message(FATAL_ERROR "Protobuf version(${Protobuf_VERSION}) is unexpected to split.")
-++if(HAVE_PROTOBUF)
-++  if(NOT (Protobuf_VERSION VERSION_LESS 22))
-++    if((CMAKE_CXX_STANDARD EQUAL 98) OR (CMAKE_CXX_STANDARD LESS 17))
-++      message(STATUS "CMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD} is too old to support protobuf(${Protobuf_VERSION}) and/or abseil-cpp. Use C++17 or later. Turning HAVE_PROTOBUF off")
-++      set(HAVE_PROTOBUF FALSE)
- +    endif()
-++  endif()
- +endif()
- +
-  if(HAVE_PROTOBUF AND PROTOBUF_UPDATE_FILES AND NOT COMMAND PROTOBUF_GENERATE_CPP)
-    message(FATAL_ERROR "Can't configure protobuf dependency (BUILD_PROTOBUF=${BUILD_PROTOBUF} PROTOBUF_UPDATE_FILES=${PROTOBUF_UPDATE_FILES})")
-  endif()
--@@ -89,3 +121,8 @@ if(HAVE_PROTOBUF)
--     BUILD_PROTOBUF THEN "build (${Protobuf_VERSION})"
--     ELSE "${__location} (${Protobuf_VERSION})")
-- endif()
--+
--+if(HAVE_ABSL_STRINGS AND HAVE_ABSL_LOG)
--+  list(APPEND CUSTOM_STATUS absl)
--+  list(APPEND CUSTOM_STATUS_absl "      abseil-cpp:" "YES (${ABSL_STRINGS_VERSION})" )
--+endif()
--diff --git a/modules/dnn/CMakeLists.txt b/modules/dnn/CMakeLists.txt
--index 804b78ead2..d32007b37e 100644
----- a/modules/dnn/CMakeLists.txt
--+++ b/modules/dnn/CMakeLists.txt
--@@ -149,6 +149,15 @@ if(NOT BUILD_PROTOBUF)
--   list(APPEND include_dirs ${Protobuf_INCLUDE_DIRS})
-- endif()
-- 
--+if(HAVE_ABSL_STRINGS)
--+  list(APPEND libs ${ABSL_STRINGS_LIBRARIES})
--+  list(APPEND include_dirs ${ABSL_STRTRINGS_INCLUDE_DIRS})
--+endif()
--+if(HAVE_ABSL_LOG)
--+  list(APPEND libs ${ABSL_LOG_LIBRARIES})
--+  list(APPEND include_dirs ${ABSL_LOG_INCLUDE_DIRS})
--+endif()
-+@@ -74,15 +94,20 @@ endif()
-+ if(HAVE_PROTOBUF)
-+   list(APPEND CUSTOM_STATUS protobuf)
-+   if(NOT BUILD_PROTOBUF)
-++    unset( __location)
-+     if(TARGET "${Protobuf_LIBRARIES}")
-+       get_target_property(__location "${Protobuf_LIBRARIES}" IMPORTED_LOCATION_RELEASE)
-+       if(NOT __location)
-+         get_target_property(__location "${Protobuf_LIBRARIES}" IMPORTED_LOCATION)
-+       endif()
-+-    elseif(Protobuf_LIBRARY)
-+-      set(__location "${Protobuf_LIBRARY}")
-+-    else()
-+-      set(__location "${Protobuf_LIBRARIES}")
-++    endif()
- +
-- set(sources_options "")
-- 
-- list(APPEND libs ${LAPACK_LIBRARIES})
--From 06a7669521d205f647d3e718322ccd153cdbbb77 Mon Sep 17 00:00:00 2001
--From: Kumataro <Kumataro@users.noreply.github.com>
--Date: Sun, 8 Oct 2023 09:39:35 +0900
--Subject: [PATCH] dnn: disable some tests for external protobuf
--
-----
-- modules/dnn/CMakeLists.txt         |  5 +++++
-- modules/dnn/src/caffe/caffe_io.cpp | 24 ++++++++++++++++++++++--
-- modules/dnn/test/test_layers.cpp   | 16 ++++++++++++++++
-- 3 files changed, 43 insertions(+), 2 deletions(-)
--
-++    if(NOT __location)
-++      if(Protobuf_LIBRARY)
-++        set(__location "${Protobuf_LIBRARY}")
-++      else()
-++        set(__location "${Protobuf_LIBRARIES}")
-++      endif()
-+     endif()
-+   endif()
-+   list(APPEND CUSTOM_STATUS_protobuf "    Protobuf:"
- diff --git a/modules/dnn/CMakeLists.txt b/modules/dnn/CMakeLists.txt
--index d32007b37e..face38465f 100644
-+index 804b78ead2..9fcc460909 100644
- --- a/modules/dnn/CMakeLists.txt
- +++ b/modules/dnn/CMakeLists.txt
--@@ -254,6 +254,12 @@ ocv_create_module(${libs} ${dnn_runtime_libs})
-+@@ -245,6 +245,12 @@ ocv_create_module(${libs} ${dnn_runtime_libs})
-  ocv_add_samples()
-  ocv_add_accuracy_tests(${dnn_runtime_libs})
-  
-@@ -109,215 +117,13 @@ index d32007b37e..face38465f 100644
-  set(perf_path "${CMAKE_CURRENT_LIST_DIR}/perf")
-  file(GLOB_RECURSE perf_srcs "${perf_path}/*.cpp")
-  file(GLOB_RECURSE perf_hdrs "${perf_path}/*.hpp" "${perf_path}/*.h")
--@@ -318,3 +322,4 @@ if(OPENCV_TEST_DNN_TFLITE)
--     ocv_target_compile_definitions(opencv_perf_dnn PRIVATE "OPENCV_TEST_DNN_TFLITE=1")
--   endif()
-- endif()
--+
--diff --git a/modules/dnn/src/caffe/caffe_io.cpp b/modules/dnn/src/caffe/caffe_io.cpp
--index ebecf95eea..ebceca84cf 100644
----- a/modules/dnn/src/caffe/caffe_io.cpp
--+++ b/modules/dnn/src/caffe/caffe_io.cpp
--@@ -1130,7 +1130,17 @@ bool ReadProtoFromTextFile(const char* filename, Message* proto) {
--     parser.AllowUnknownField(true);
--     parser.SetRecursionLimit(1000);
-- #endif
---    return parser.Parse(&input, proto);
--+    const bool ret = parser.Parse(&input, proto);
--+
--+#ifdef OPENCV_DNN_EXTERNAL_PROTOBUF
--+    if(!ret)
--+    {
--+        LOG(ERROR) << "Some data requires patched protobuf (available in OpenCV source tree only).";
--+        CV_Error_(Error::StsError,("Some data requires patched protobuf (available in OpenCV source tree only)."));
--+    }
--+#endif
--+
--+    return ret;
-- }
-- 
-- bool ReadProtoFromBinaryFile(const char* filename, Message* proto) {
--@@ -1148,7 +1158,17 @@ bool ReadProtoFromTextBuffer(const char* data, size_t len, Message* proto) {
--     parser.AllowUnknownField(true);
--     parser.SetRecursionLimit(1000);
-- #endif
---    return parser.Parse(&input, proto);
--+    const bool ret = parser.Parse(&input, proto);
--+
--+#ifdef OPENCV_DNN_EXTERNAL_PROTOBUF
--+    if(!ret)
--+    {
--+        LOG(ERROR) << "Some data requires patched protobuf (available in OpenCV source tree only).";
--+        CV_Error_(Error::StsError,("Some data requires patched protobuf (available in OpenCV source tree only)."));
--+    }
--+#endif
--+
--+    return ret;
-- }
-- 
-- 
- diff --git a/modules/dnn/test/test_layers.cpp b/modules/dnn/test/test_layers.cpp
--index 763d94b99c..a07d442d76 100644
-+index 763d94b99c..6cb6d54b3f 100644
- --- a/modules/dnn/test/test_layers.cpp
- +++ b/modules/dnn/test/test_layers.cpp
--@@ -754,7 +754,11 @@ TEST_F(Layer_RNN_Test, get_set_test)
--     EXPECT_EQ(shape(outputs[1]), shape(nT, nS, nH));
-- }
-+@@ -756,11 +756,15 @@ TEST_F(Layer_RNN_Test, get_set_test)
-  
--+#ifndef OPENCV_DNN_EXTERNAL_PROTOBUF
-  TEST_P(Test_Caffe_layers, Accum)
--+#else
--+TEST_P(Test_Caffe_layers, DISABLED_Accum)  // requires patched protobuf (available in OpenCV source tree only)
--+#endif
-- {
--     if (backend == DNN_BACKEND_OPENCV && target != DNN_TARGET_CPU)
--         applyTestTag(CV_TEST_TAG_DNN_SKIP_OPENCL, CV_TEST_TAG_DNN_SKIP_OPENCL_FP16);
--@@ -778,7 +782,11 @@ TEST_P(Test_Caffe_layers, ChannelNorm)
--     testLayerUsingCaffeModels("channel_norm", false, false);
-- }
-- 
--+#ifndef OPENCV_DNN_EXTERNAL_PROTOBUF
-- TEST_P(Test_Caffe_layers, DataAugmentation)
--+#else
--+TEST_P(Test_Caffe_layers, DISABLED_DataAugmentation)  // requires patched protobuf (available in OpenCV source tree only)
--+#endif
-- {
--     if (backend == DNN_BACKEND_OPENCV && target == DNN_TARGET_OPENCL_FP16)
--         applyTestTag(CV_TEST_TAG_DNN_SKIP_OPENCL_FP16);
--@@ -787,7 +795,11 @@ TEST_P(Test_Caffe_layers, DataAugmentation)
--     testLayerUsingCaffeModels("data_augmentation_8x6", true, false);
-- }
-- 
--+#ifndef OPENCV_DNN_EXTERNAL_PROTOBUF
-- TEST_P(Test_Caffe_layers, Resample)
--+#else
--+TEST_P(Test_Caffe_layers, DISABLED_Resample)  // requires patched protobuf (available in OpenCV source tree only)
--+#endif
-- {
--     if (backend != DNN_BACKEND_OPENCV)
--         applyTestTag(CV_TEST_TAG_DNN_SKIP_IE_NN_BUILDER, CV_TEST_TAG_DNN_SKIP_IE_NGRAPH);
--@@ -795,7 +807,11 @@ TEST_P(Test_Caffe_layers, Resample)
--     testLayerUsingCaffeModels("nearest", false, false);
-- }
-- 
--+#ifndef OPENCV_DNN_EXTERNAL_PROTOBUF
-- TEST_P(Test_Caffe_layers, Correlation)
--+#else
--+TEST_P(Test_Caffe_layers, DISABLED_Correlation)  // requires patched protobuf (available in OpenCV source tree only)
--+#endif
-- {
--     if (backend == DNN_BACKEND_OPENCV && target == DNN_TARGET_OPENCL_FP16)
--         applyTestTag(CV_TEST_TAG_DNN_SKIP_IE_NGRAPH, CV_TEST_TAG_DNN_SKIP_IE_NN_BUILDER,
--From 2c33798f41942aefc203183d673ce4846f32dba4 Mon Sep 17 00:00:00 2001
--From: Kumataro <Kumataro@users.noreply.github.com>
--Date: Sun, 8 Oct 2023 13:28:40 +0900
--Subject: [PATCH] use GREATER instead of GREATER_EQUAL and remove new blank
-- line at EOF
--
-----
-- cmake/OpenCVFindProtobuf.cmake | 6 ++++--
-- 1 file changed, 4 insertions(+), 2 deletions(-)
--
--diff --git a/cmake/OpenCVFindProtobuf.cmake b/cmake/OpenCVFindProtobuf.cmake
--index 9bd5c28db8..ba147526d6 100644
----- a/cmake/OpenCVFindProtobuf.cmake
--+++ b/cmake/OpenCVFindProtobuf.cmake
--@@ -71,12 +71,14 @@ endif()
-- # In Protocol Buffers v22.0 and later drops C++11 support and depends abseil-cpp.
-- #   Details: https://protobuf.dev/news/2022-08-03/
-- # And if std::text_view is in abseil-cpp requests C++17 and later.
--+
-- if(HAVE_PROTOBUF)
--     if("${Protobuf_VERSION}" MATCHES [[[0-9]+.([0-9]+).[0-9]+]])
---        string(COMPARE GREATER_EQUAL "${CMAKE_MATCH_1}" "22" REQUEST_ABSL)
--+        string(COMPARE GREATER "${CMAKE_MATCH_1}" "21" REQUEST_ABSL)  # >=22
-- 
--         if(REQUEST_ABSL)
---            string(COMPARE GREATER_EQUAL "${CMAKE_CXX_STANDARD}" "17" USED_AFTER_CXX17)
--+            string(COMPARE GREATER "${CMAKE_CXX_STANDARD}" "16" USED_AFTER_CXX17)  # >=17
--+
--             if(NOT USED_AFTER_CXX17)
--                 message("CMAKE_CXX_STANDARD : ${CMAKE_CXX_STANDARD}")
--                 message("protobuf           : ${Protobuf_VERSION}")
--From cd709eefbeedd116bf3495b42280323b932791ff Mon Sep 17 00:00:00 2001
--From: Kumataro <Kumataro@users.noreply.github.com>
--Date: Mon, 9 Oct 2023 21:51:04 +0900
--Subject: [PATCH] fix for review
--
-----
-- cmake/OpenCVFindProtobuf.cmake     |  5 ----
-- modules/dnn/src/caffe/caffe_io.cpp | 24 ++----------------
-- modules/dnn/test/test_layers.cpp   | 40 +++++++++++++++---------------
-- 3 files changed, 22 insertions(+), 47 deletions(-)
--
--diff --git a/cmake/OpenCVFindProtobuf.cmake b/cmake/OpenCVFindProtobuf.cmake
--index ba147526d6..2faf1010bf 100644
----- a/cmake/OpenCVFindProtobuf.cmake
--+++ b/cmake/OpenCVFindProtobuf.cmake
--@@ -123,8 +123,3 @@ if(HAVE_PROTOBUF)
--     BUILD_PROTOBUF THEN "build (${Protobuf_VERSION})"
--     ELSE "${__location} (${Protobuf_VERSION})")
-- endif()
---
---if(HAVE_ABSL_STRINGS AND HAVE_ABSL_LOG)
---  list(APPEND CUSTOM_STATUS absl)
---  list(APPEND CUSTOM_STATUS_absl "      abseil-cpp:" "YES (${ABSL_STRINGS_VERSION})" )
---endif()
--diff --git a/modules/dnn/src/caffe/caffe_io.cpp b/modules/dnn/src/caffe/caffe_io.cpp
--index ebceca84cf..ebecf95eea 100644
----- a/modules/dnn/src/caffe/caffe_io.cpp
--+++ b/modules/dnn/src/caffe/caffe_io.cpp
--@@ -1130,17 +1130,7 @@ bool ReadProtoFromTextFile(const char* filename, Message* proto) {
--     parser.AllowUnknownField(true);
--     parser.SetRecursionLimit(1000);
-- #endif
---    const bool ret = parser.Parse(&input, proto);
---
---#ifdef OPENCV_DNN_EXTERNAL_PROTOBUF
---    if(!ret)
---    {
---        LOG(ERROR) << "Some data requires patched protobuf (available in OpenCV source tree only).";
---        CV_Error_(Error::StsError,("Some data requires patched protobuf (available in OpenCV source tree only)."));
---    }
---#endif
---
---    return ret;
--+    return parser.Parse(&input, proto);
-- }
-- 
-- bool ReadProtoFromBinaryFile(const char* filename, Message* proto) {
--@@ -1158,17 +1148,7 @@ bool ReadProtoFromTextBuffer(const char* data, size_t len, Message* proto) {
--     parser.AllowUnknownField(true);
--     parser.SetRecursionLimit(1000);
-- #endif
---    const bool ret = parser.Parse(&input, proto);
---
---#ifdef OPENCV_DNN_EXTERNAL_PROTOBUF
---    if(!ret)
---    {
---        LOG(ERROR) << "Some data requires patched protobuf (available in OpenCV source tree only).";
---        CV_Error_(Error::StsError,("Some data requires patched protobuf (available in OpenCV source tree only)."));
---    }
---#endif
---
---    return ret;
--+    return parser.Parse(&input, proto);
-- }
-- 
-- 
--diff --git a/modules/dnn/test/test_layers.cpp b/modules/dnn/test/test_layers.cpp
--index a07d442d76..5c6fc541d7 100644
----- a/modules/dnn/test/test_layers.cpp
--+++ b/modules/dnn/test/test_layers.cpp
--@@ -754,17 +754,17 @@ TEST_F(Layer_RNN_Test, get_set_test)
--     EXPECT_EQ(shape(outputs[1]), shape(nT, nS, nH));
-- }
-- 
---#ifndef OPENCV_DNN_EXTERNAL_PROTOBUF
-- TEST_P(Test_Caffe_layers, Accum)
---#else
---TEST_P(Test_Caffe_layers, DISABLED_Accum)  // requires patched protobuf (available in OpenCV source tree only)
---#endif
-  {
- +#ifdef OPENCV_DNN_EXTERNAL_PROTOBUF
- +    throw SkipTestException("Requires patched protobuf");
-@@ -331,15 +137,9 @@ index a07d442d76..5c6fc541d7 100644
-  }
-  
-  TEST_P(Test_Caffe_layers, FlowWarp)
--@@ -782,42 +782,42 @@ TEST_P(Test_Caffe_layers, ChannelNorm)
--     testLayerUsingCaffeModels("channel_norm", false, false);
-- }
-+@@ -780,27 +784,39 @@ TEST_P(Test_Caffe_layers, ChannelNorm)
-  
---#ifndef OPENCV_DNN_EXTERNAL_PROTOBUF
-  TEST_P(Test_Caffe_layers, DataAugmentation)
---#else
---TEST_P(Test_Caffe_layers, DISABLED_DataAugmentation)  // requires patched protobuf (available in OpenCV source tree only)
---#endif
-  {
- +#ifdef OPENCV_DNN_EXTERNAL_PROTOBUF
- +    throw SkipTestException("Requires patched protobuf");
-@@ -352,11 +152,7 @@ index a07d442d76..5c6fc541d7 100644
- +#endif
-  }
-  
---#ifndef OPENCV_DNN_EXTERNAL_PROTOBUF
-  TEST_P(Test_Caffe_layers, Resample)
---#else
---TEST_P(Test_Caffe_layers, DISABLED_Resample)  // requires patched protobuf (available in OpenCV source tree only)
---#endif
-  {
- +#ifdef OPENCV_DNN_EXTERNAL_PROTOBUF
- +    throw SkipTestException("Requires patched protobuf");
-@@ -368,11 +164,7 @@ index a07d442d76..5c6fc541d7 100644
- +#endif
-  }
-  
---#ifndef OPENCV_DNN_EXTERNAL_PROTOBUF
-  TEST_P(Test_Caffe_layers, Correlation)
---#else
---TEST_P(Test_Caffe_layers, DISABLED_Correlation)  // requires patched protobuf (available in OpenCV source tree only)
---#endif
-  {
- +#ifdef OPENCV_DNN_EXTERNAL_PROTOBUF
- +    throw SkipTestException("Requires patched protobuf");
-@@ -381,12 +173,11 @@ index a07d442d76..5c6fc541d7 100644
-          applyTestTag(CV_TEST_TAG_DNN_SKIP_IE_NGRAPH, CV_TEST_TAG_DNN_SKIP_IE_NN_BUILDER,
-                       CV_TEST_TAG_DNN_SKIP_OPENCL, CV_TEST_TAG_DNN_SKIP_OPENCL_FP16);
-      testLayerUsingCaffeModels("correlation", false, false, 0.0, 0.0, 2);
-- }
- +#endif
-+ }
-  
-  TEST_P(Test_Caffe_layers, Convolution2Inputs)
-- {
--@@ -1657,12 +1657,11 @@ private:
-+@@ -1641,12 +1657,11 @@ private:
-      int outWidth, outHeight, zoomFactor;
-  };
-  
-@@ -402,7 +193,7 @@ index a07d442d76..5c6fc541d7 100644
-  #if defined(INF_ENGINE_RELEASE) && INF_ENGINE_VER_MAJOR_EQ(2021030000)
-      if (backend == DNN_BACKEND_INFERENCE_ENGINE_NGRAPH && target == DNN_TARGET_MYRIAD)
-          applyTestTag(CV_TEST_TAG_DNN_SKIP_IE_MYRIAD, CV_TEST_TAG_DNN_SKIP_IE_NGRAPH);  // exception
--@@ -1686,6 +1685,7 @@ TEST_P(Test_Caffe_layers, DISABLED_Interp)  // requires patched protobuf (availa
-+@@ -1670,6 +1685,7 @@ TEST_P(Test_Caffe_layers, DISABLED_Interp)  // requires patched protobuf (availa
-  
-      // Test an implemented layer.
-      testLayerUsingCaffeModels("layer_interp", false, false);
--- 
-2.42.0
-
+PiBJc27igJl0IHRoaXMgd2hhdCBjcmVhdGVfbWVyZ2VkX3Vzcl9zeW1saW5rcyBpbiBpbWFnZS5i
+YmNsYXNzIGRvZXM/ICBXaHkgZG9lcw0KPiBhIERORiBwbHVnaW4gbmVlZCB0byBkbyB0aGlzLCBh
+bmQgbm90IGFueXRoaW5nIGVsc2U/DQpCZWNhdXNlIGRuZi1wbHVnaW4tdHVpIGlzIHVzZWQgdG8g
+Y3JlYXRlZCByb290ZnMgaW4gYW55IG5hdGl2ZXNkayBlbnZpcm9ubWVudC4NCkl0IGlzIG5vdCBp
+biBhIGJpdGJha2UgZW52aXJvbm1lbnQsIHNvIGltYWdlLmJiY2xhc3MgY2Fubm90IGJlIHVzZWQu
+DQrCoCAtLQ0KQmVzdCBSZWdhcmRzDQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0NCldhbmcgTWluZ3l1DQpEZXZlbG9wbWVudCBEZXB0LkkNCk5hbmpp
+bmcgRnVqaXRzdSBOYW5kYSBTb2Z0d2FyZSBUZWNoLiBDby4sIEx0ZC4oRk5TVCkgTm8uIDYgV2Vu
+emh1IFJvYWQsIE5hbmppbmcsIDIxMDAxMiwgQ2hpbmENClRFTDogKzg2KzI1LTg2NjMwNTY2LTg1
+NjgNCkNPSU5TOiA3OTk4ODU0OA0KRkFYOiArODYrMjUtODMzMTc2ODUNCk1BSUw6IHdhbmdteUBm
+dWppdHN1LmNvbQ0KaHR0cDovL3d3dy5mdWppdHN1LmNvbS9jbi9mbnN0Lw0KDQo+IC0tLS0tT3Jp
+Z2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IFJvc3MgQnVydG9uIDxSb3NzLkJ1cnRvbkBhcm0u
+Y29tPg0KPiBTZW50OiBUdWVzZGF5LCBPY3RvYmVyIDE3LCAyMDIzIDU6NTEgUE0NCj4gVG86IFdh
+bmcsIE1pbmd5dS/njosg6bij55GcIDx3YW5nbXlAZnVqaXRzdS5jb20+DQo+IENjOiBvcGVuZW1i
+ZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBTdWJqZWN0OiBSZTogW29lXSBb
+bWV0YS1vZV0gW1BBVENIIHYzXSBkbmYtcGx1Z2luLXR1aTogY3JlYXRlIHN5bWxpbmtzIGZyb20g
+L3Vzci8NCj4gdG8gLy4NCj4gDQo+IElzbuKAmXQgdGhpcyB3aGF0IGNyZWF0ZV9tZXJnZWRfdXNy
+X3N5bWxpbmtzIGluIGltYWdlLmJiY2xhc3MgZG9lcz8gIFdoeSBkb2VzDQo+IGEgRE5GIHBsdWdp
+biBuZWVkIHRvIGRvIHRoaXMsIGFuZCBub3QgYW55dGhpbmcgZWxzZT8NCj4gDQo+IFJvc3MNCj4g
+DQo+ID4gT24gMTcgT2N0IDIwMjMsIGF0IDA4OjIzLCB3YW5nbXkgdmlhIGxpc3RzLm9wZW5lbWJl
+ZGRlZC5vcmcNCj4gPHdhbmdteT1mdWppdHN1LmNvbUBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPiB3
+cm90ZToNCj4gPg0KPiA+IEZyb20gUG9reSA0LjMsIGJ5IGRlZmF1bHQsIHVzcm1lcmdlIGhhcyBi
+ZWVuIGVuYWJsZWQuDQo+ID4gU29tZSBpbXBvcnRhbnQgYmluYXJpZXMgaGF2ZSBiZWVuIGluc3Rh
+bGxlZCB0byAvdXNyL3NiaW4gaW5zdGVhZCBvZg0KPiA+IC9zYmluIHN1Y2ggYXMgaW5pdC4gU28g
+aXQgaXMgbmVjZXNzYXJ5IHRvIGNyZWF0ZSBzeW1saW5rcyBmcm9tIC91c3IvDQo+ID4gdG8gLywg
+c3VjaCBhcyAvdXNyL3NiaW4gdG8gL3NiaW4sIC91c3IvYmluIHRvIC9iaW4uDQo+ID4NCj4gPiBT
+aWduZWQtb2ZmLWJ5OiBXYW5nIE1pbmd5dSA8d2FuZ215QGZ1aml0c3UuY29tPg0KPiA+IC0tLQ0K
+PiA+IG1ldGEtb2UvcmVjaXBlcy1kZXZ0b29scy9kbmYtcGx1Z2luLXR1aS9kbmYtcGx1Z2luLXR1
+aV9naXQuYmIgfCAyICstDQo+ID4gMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRl
+bGV0aW9uKC0pDQo+ID4NCj4gPiBkaWZmIC0tZ2l0DQo+ID4gYS9tZXRhLW9lL3JlY2lwZXMtZGV2
+dG9vbHMvZG5mLXBsdWdpbi10dWkvZG5mLXBsdWdpbi10dWlfZ2l0LmJiDQo+ID4gYi9tZXRhLW9l
+L3JlY2lwZXMtZGV2dG9vbHMvZG5mLXBsdWdpbi10dWkvZG5mLXBsdWdpbi10dWlfZ2l0LmJiDQo+
+ID4gaW5kZXggOTQwMjM5MjJhMi4uMDcwOTAxOTA1NiAxMDA2NDQNCj4gPiAtLS0gYS9tZXRhLW9l
+L3JlY2lwZXMtZGV2dG9vbHMvZG5mLXBsdWdpbi10dWkvZG5mLXBsdWdpbi10dWlfZ2l0LmJiDQo+
+ID4gKysrIGIvbWV0YS1vZS9yZWNpcGVzLWRldnRvb2xzL2RuZi1wbHVnaW4tdHVpL2RuZi1wbHVn
+aW4tdHVpX2dpdC5iYg0KPiA+IEBAIC00LDcgKzQsNyBAQCBMSUNFTlNFID0gIkdQTC0yLjAtb25s
+eSINCj4gPiBMSUNfRklMRVNfQ0hLU1VNID0NCj4gImZpbGU6Ly9DT1BZSU5HO21kNT1iMjM0ZWU0
+ZDY5ZjVmY2U0NDg2YTgwZmRhZjRhNDI2MyINCj4gPg0KPiA+IFNSQ19VUkkgPQ0KPiAiZ2l0Oi8v
+Z2l0aHViLmNvbS91YmludXgvZG5mLXBsdWdpbi10dWkuZ2l0O2JyYW5jaD1tYXN0ZXI7cHJvdG9j
+b2w9aHR0cHMiDQo+ID4gLVNSQ1JFViA9ICI4MzkxN2EzOTM1YWM3Y2UxZDhkOTZlOTE0ZDk2YTY2
+NzkzMTlhMzM2Ig0KPiA+ICtTUkNSRVYgPSAiYmFhYzMyMmE4YTZkNTdlNjJjNzAzZjZlZDUyMzE1
+MmJhZWMxOGI0ZiINCj4gPiBQViA9ICIxLjMiDQo+ID4NCj4gPiBTUkNfVVJJOmFwcGVuZDpjbGFz
+cy10YXJnZXQgPSAiIGZpbGU6Ly9vZS1yZW1vdGUucmVwby5zYW1wbGUiDQo+ID4gLS0NCj4gPiAy
+LjM0LjENCj4gPg0KPiA+DQo+ID4gLT0tPS09LT0tPS09LT0tPS09LT0tPS0NCj4gPiBMaW5rczog
+WW91IHJlY2VpdmUgYWxsIG1lc3NhZ2VzIHNlbnQgdG8gdGhpcyBncm91cC4NCj4gPiBWaWV3L1Jl
+cGx5IE9ubGluZSAoIzEwNTU1MCk6DQo+ID4gaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3Jn
+L2cvb3BlbmVtYmVkZGVkLWRldmVsL21lc3NhZ2UvMTA1NTUwDQo+ID4gTXV0ZSBUaGlzIFRvcGlj
+OiBodHRwczovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvbXQvMTAyMDEzMzc0LzY4NzU4ODgNCj4g
+PiBHcm91cCBPd25lcjogb3BlbmVtYmVkZGVkLWRldmVsK293bmVyQGxpc3RzLm9wZW5lbWJlZGRl
+ZC5vcmcNCj4gPiBVbnN1YnNjcmliZTogaHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL2cv
+b3BlbmVtYmVkZGVkLWRldmVsL3Vuc3ViDQo+ID4gW3Jvc3MuYnVydG9uQGFybS5jb21dDQo+ID4g
+LT0tPS09LT0tPS09LT0tPS09LT0tPS0NCj4gPg0KDQo=
 
