@@ -1,75 +1,104 @@
-Return-Path: <rybczynska@gmail.com>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DF96FCDB465
-	for <webhook@archiver.kernel.org>; Thu, 19 Oct 2023 07:44:38 +0000 (UTC)
-Received: from mail-lj1-f180.google.com (mail-lj1-f180.google.com [209.85.208.180])
- by mx.groups.io with SMTP id smtpd.web11.22188.1697701473906701922
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F3F91C41513
+	for <webhook@archiver.kernel.org>; Thu, 19 Oct 2023 08:00:28 +0000 (UTC)
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+ by mx.groups.io with SMTP id smtpd.web11.22410.1697702425659993871
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 19 Oct 2023 00:44:34 -0700
+ Thu, 19 Oct 2023 01:00:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=HPbf5ndr;
- spf=pass (domain: gmail.com, ip: 209.85.208.180, mailfrom: rybczynska@gmail.com)
-Received: by mail-lj1-f180.google.com with SMTP id 38308e7fff4ca-2c50ec238aeso77601731fa.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Oct 2023 00:44:33 -0700 (PDT)
+ dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=orSTpeiB;
+ spf=pass (domain: smile.fr, ip: 209.85.221.44, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-32d9cb5e0fcso5152166f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 19 Oct 2023 01:00:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1697701472; x=1698306272; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=uh7EXUgrTDLzAdFz3s3XyrjefOUceJ4s29yx6QDUeqc=;
-        b=HPbf5ndr/MjtkxB/GfepC6tkvLMwr3rE/J0azZXJiVMuqUtTYaDrE8sRLEFr1zx17E
-         yjzsDSeDAW7N6/GVgN1Lc/fSBhYsj67BtKLyLD0oOL4AmsOFYAYjHWnzxDokaGEtL33n
-         tUhW+8Js1qWaCGKDSc1YES9axrnRDpBAObFExsdB+UXl7lCOpljBjwf026Jy6oRXJvnZ
-         F2O7tkZCbOLsTJZmssbNF0xgJUO8TTef8HuNmQEAPWFhtqSmDw7An38D1IZEhBVqQheI
-         v8vZlSfWHiw4yHf7XlR3bumW4IBhPzOs1pezJ3IGwtusGZ1r+GwrgDr65bOQ0pr4Q/46
-         JuVQ==
+        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1697702423; x=1698307223; darn=lists.openembedded.org;
+        h=content-transfer-encoding:organization:subject:cc:content-language
+         :to:from:user-agent:mime-version:date:message-id:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=wO7NsBQAi6WmL0VCHToWJ1mcue59cSanxL3yd/z+wtE=;
+        b=orSTpeiBT2PfZNFcxipfH+UbqF7DqInb9J5VAyMzokKo0+MCrYwGdwnX5t1UQB7oPL
+         B9PWsKcHIVjG+lcfxy5GoVRsusfw8LJ0aKIC+1xBtHBaR5w+LR0Tk+ZyxF5CUo/jXm3Z
+         nszqOB4+H/bXQLLsbubdpl2xeGKnUiPsgWq4yL6qS6/Bk3uEC4vCu9gtYscy7VMstFLs
+         KbE53cYrvoFwP+9WVGSHj3yoRR4UrqhY1NHkMTXetgCT39A08X9Tblwz+lEEtPwXb4+Y
+         +kBal578ZeaB1yROLgBV7R1YqVABfYRz7QzFUUKH1Ma6opl85TyQoYMZo8AWxtT87YLc
+         Odbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1697701472; x=1698306272;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=uh7EXUgrTDLzAdFz3s3XyrjefOUceJ4s29yx6QDUeqc=;
-        b=BjswpStjpTpla3R36idQbpcUFJ2IVuh9/g17wlj35Z/xPiZvKoXScSOaRU9YL0Fze+
-         TGt/8P7bCiIzIn4/ZCQ7Mnf4+Wyrc8Bf4AqeBYExqOjk0GkGgTV3AZkFDBMiwa6aQoKM
-         qDscZ7houK6RQ4KsSuyHCLjI8ZBWEwS/BjEVVIMdxzRn6vOqhwHisf7aIfwvgSMxyRr+
-         NkEAdLTOvBDfHh9hh64oIwTmbTvHKU9dQbQfgxKhYF1mZrM8sLFdRmwPb2aYBzVIVIr+
-         3/uWs+Nf27U2/Gv+QbI/YPi89jJtUh64DW/sBuqgYfh3nIFueV5xsYQiv94MKtUwjmqU
-         X+qQ==
-X-Gm-Message-State: AOJu0Yy7LbcyIctshZ8EUQOz7V39oP0r4rkr0aMH4hKXPdklMZCLIqJd
-	DNtRnW+FRzDBjuHszOCFNdVzdHHh0swRLzP5SWc=
-X-Google-Smtp-Source: AGHT+IG2sSt5O+Fdl+ehkv2zo49dFB6zHNx3WC08nlneXegp0lF/st3nCBBHUdBUIrxhHgUiF1SDJqmvKqz56zkhgPw=
-X-Received: by 2002:a2e:b947:0:b0:2bc:b224:98ac with SMTP id
- 7-20020a2eb947000000b002bcb22498acmr766331ljs.31.1697701471793; Thu, 19 Oct
- 2023 00:44:31 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1697702423; x=1698307223;
+        h=content-transfer-encoding:organization:subject:cc:content-language
+         :to:from:user-agent:mime-version:date:message-id:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=wO7NsBQAi6WmL0VCHToWJ1mcue59cSanxL3yd/z+wtE=;
+        b=Q2T8+F+XR/FlmDhwUOnfPk+2GgVGhb6wShWFv5R0V1AA9Y4g7lGPo3AwigpPNbKGCK
+         73xPLz91OpBL55et1cikYC6XTDmXRpruPFhMSfOcnM/BOuTs5K7/HVzuoQZ9TqIwbdYf
+         yUmZfw5GWouBnjiSxfSyCdtrsd5Z0zrV5VG1tWYkzmRZ0bFcUQgUQK6eLqm5PTFi0fBC
+         XmjtMY31JVpQ82jla1LzYkc2/D6vvQiBTT2cSxUFoNI6XvpOJ437OJ+Urnzb0jRGFcG9
+         QDQY9V96KGl594D1NTMx8aQw/YEiKF1lo/jO62c0LQJDgn6nW39EOzpJYgiTqG/E+xaT
+         l2hA==
+X-Gm-Message-State: AOJu0YxOUMWPUnCMErFKsoIoOUKWDZtELmWT7IfVo7Un5HBf020VRY4d
+	cmlkykB86EOeHhrsGzptr2N8Mw==
+X-Google-Smtp-Source: AGHT+IG+IFtAwM5B/ge1cUwNVNGdrrHutkq+QT/LSsfprb2Xmixh2JIOxparkRNYIJrLJz1bnHD6kg==
+X-Received: by 2002:a5d:5646:0:b0:32d:a853:af6e with SMTP id j6-20020a5d5646000000b0032da853af6emr901575wrw.1.1697702423489;
+        Thu, 19 Oct 2023 01:00:23 -0700 (PDT)
+Received: from [10.1.10.109] (static-css-ccs-204145.business.bouyguestelecom.com. [176.157.204.145])
+        by smtp.gmail.com with ESMTPSA id k6-20020adfe8c6000000b0030647449730sm3865296wrn.74.2023.10.19.01.00.23
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 19 Oct 2023 01:00:23 -0700 (PDT)
+Message-ID: <c8b8ee57-7e21-0189-ba71-3e4805725bcc@smile.fr>
+Date: Thu, 19 Oct 2023 10:00:21 +0200
 MIME-Version: 1.0
-References: <20231018102821.595049-1-martin.jansa@gmail.com>
-In-Reply-To: <20231018102821.595049-1-martin.jansa@gmail.com>
-From: Marta Rybczynska <rybczynska@gmail.com>
-Date: Thu, 19 Oct 2023 09:44:19 +0200
-Message-ID: <CAApg2=SO6MdrSGBGUT09-Dq4W6Ljx1ZF-msGvmbUWuePcR3AfA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] nodejs: update to latest v20 version 20.8.1
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+From: Yoann Congal <yoann.congal@smile.fr>
+To: openembedded-core@lists.openembedded.org,
+ openembedded-devel@lists.openembedded.org
+Content-Language: en-US
+Cc: =?UTF-8?B?SsOpcsOpbXkgUm9zZW4=?= <jeremy.rosen@smile.fr>
+Subject: Detecting unimplemented ptests with heuristics
+Organization: Smile ECS
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 19 Oct 2023 07:44:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105592
+ <openembedded-devel@lists.openembedded.org>; Thu, 19 Oct 2023 08:00:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105593
 
-On Wed, Oct 18, 2023 at 12:28=E2=80=AFPM Martin Jansa <martin.jansa@gmail.c=
-om> wrote:
->
-> * updates to latest v20 version
->
+Hi everyone,
 
-This version brings a fix to CVE-2023-44487 and a number of other
-ones, so from the security
-standpoint it is something to bring in.
+We recently implemented a way to detect recipes for upstream code that contain unit tests but does not implement ptests.
+Those recipes make good candidates for increasing the ptests coverage.
 
-Cheers,
-Marta
+This is implemented as a QA check. The check is disabled by default since it generates a lot of warning at build.
+In order to activate it (in local.conf for exemple) :
+WARN_QA += "unimplemented-ptest"
+
+The warnings looks like:
+WARNING: time-1.9-r0 do_patch: QA Issue: time: autotools-based tests detected [unimplemented-ptest]
+ 
+I've generated the list for the unimplemented ptests for oe-core and for meta-openembedded:
+  329 unimplemented-ptests_oe-core.log: https://gist.github.com/ycongal-smile/dd51b0e450a8f0083e9d5cc10eeeb060#file-unimplemented-ptests_oe-core-log
+ 1080 unimplemented-ptests_meta-openembedded.log: https://gist.github.com/ycongal-smile/dd51b0e450a8f0083e9d5cc10eeeb060#file-unimplemented-ptests_meta-openembedded-log
+
+Those were generated with :
+bitbake --runall patch world
+
+... without the meta-openembedded layers for oe-core.
+
+For meta-openembedded, I have excluded OE-core recipes from world with:
+EXCLUDE_FROM_WORLD:layer-core = '1'
+EXCLUDE_FROM_WORLD:layer-yoctobsp = '1'
+EXCLUDE_FROM_WORLD:layer-yocto = '1'
+
+For the curious, the code is here:
+https://git.yoctoproject.org/poky/tree/meta/classes-global/insane.bbclass?id=07546cc63f5e2a1a74bd7f5cac6ad1c9948264d4#n1351
+
+And the doc was sent here: https://lists.yoctoproject.org/g/docs/message/4335
+
+Regards,
+-- 
+Yoann Congal
+Smile ECS - Tech Expert
 
