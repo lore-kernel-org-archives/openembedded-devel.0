@@ -1,93 +1,89 @@
-Return-Path: <matthias@extraklein.de>
+Return-Path: <david.pierret@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 98CB0CDB474
-	for <webhook@archiver.kernel.org>; Fri, 20 Oct 2023 07:39:36 +0000 (UTC)
-Received: from relay.yourmailgateway.de (relay.yourmailgateway.de [188.68.61.107])
- by mx.groups.io with SMTP id smtpd.web11.49569.1697787570742210579
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BE56CCDB474
+	for <webhook@archiver.kernel.org>; Fri, 20 Oct 2023 08:04:46 +0000 (UTC)
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+ by mx.groups.io with SMTP id smtpd.web10.49752.1697789078398622223
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 20 Oct 2023 00:39:33 -0700
+ Fri, 20 Oct 2023 01:04:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@extraklein.de header.s=key2 header.b=S7KJig3v;
- spf=pass (domain: extraklein.de, ip: 188.68.61.107, mailfrom: matthias@extraklein.de)
-Received: from mors-relay-8405.netcup.net (localhost [127.0.0.1])
-	by mors-relay-8405.netcup.net (Postfix) with ESMTPS id 4SBc0w2kjwz6y4L
-	for <openembedded-devel@lists.openembedded.org>; Fri, 20 Oct 2023 09:39:28 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=extraklein.de;
-	s=key2; t=1697787568;
-	bh=bJHcCWZVplU9lZWkBaiDdOAJOAVRS369xS/EYDkT3UQ=;
-	h=From:To:Cc:Subject:Date:From;
-	b=S7KJig3vGbyRiAW2OKJmzN0hmBp25lUINvmO/FTqgKPSWVXpjfOBCvXJYxXOiIXlv
-	 YAz4TeLKoqQntzzdc6ZUmcTcdD6cIlGbw+afxBUHRAFRbhc9BOpmQ5oKow2keQKKZb
-	 cgZUqMKRIZk6XY5JckkHUNAc7iGaDWEriYisLjCSKQoSQF/L0CzNPEJ+ex2/TeBhEm
-	 ySTJcvgtaBjAGFpDB0A0oEzv24S0dDPQMHft4qxgddns1WAZv0EsWhwSnpscG/9wdQ
-	 0NM5TUIEAIgZtvHZumKUxr8kl2zWcWNb8MEsHAdfJDINvVne0K5I8m0J7gBe7XInrd
-	 IfzIjOZF3j0Ew==
-Received: from policy02-mors.netcup.net (unknown [46.38.225.35])
-	by mors-relay-8405.netcup.net (Postfix) with ESMTPS id 4SBc0w20rrz6y43
-	for <openembedded-devel@lists.openembedded.org>; Fri, 20 Oct 2023 09:39:28 +0200 (CEST)
-Received: from mx2fa3.netcup.net (unknown [10.243.12.53])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by policy02-mors.netcup.net (Postfix) with ESMTPS id 4SBc0w0W2Yz8sZh
-	for <openembedded-devel@lists.openembedded.org>; Fri, 20 Oct 2023 09:39:27 +0200 (CEST)
-Received: from localhost (ip-088-152-117-169.um26.pools.vodafone-ip.de [88.152.117.169])
-	by mx2fa3.netcup.net (Postfix) with ESMTPSA id 67CC4140060;
-	Fri, 20 Oct 2023 09:39:23 +0200 (CEST)
-Authentication-Results: mx2fa3;
-        spf=pass (sender IP is 88.152.117.169) smtp.mailfrom=matthias@extraklein.de smtp.helo=localhost
-Received-SPF: pass (mx2fa3: connection is authenticated)
-From: Matthias Klein <matthias@extraklein.de>
+ dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=QOTmP1q6;
+ spf=pass (domain: smile.fr, ip: 209.85.221.47, mailfrom: david.pierret@smile.fr)
+Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-32dc9ff4a8fso355344f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 20 Oct 2023 01:04:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1697789076; x=1698393876; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=zhOCririqF1JGyoAwqKz3cyvqt8pLiWi7BLqAyPTHo8=;
+        b=QOTmP1q6ZDsFSJR9F/oqx6NY8Wj7cUgU5A8FCDKIp829EQXvR7P5eWRgSR8NS5FaeE
+         KUA4/+Wgv4H7IIl14QMt5ib5EL/frJb2Z30b/lzIerOyfKdlXxXiiaUjj2KtWjdF85FH
+         i9EnAKmrV+hrqUge61EVWAKobKQDCmCYMtM4q3zuICtAA2dEUh44Vyf0Ta2eqmi1IIBx
+         N620lkaJE0KWUnWMBfTrx2DD2AcEBzwGYTzv7ZW/Jk/dPM6Jiz+4gO47dnl5ccomG2HY
+         mfgSbckrfEZ17X1hiJHHAwn5gMHjgVJypJcvnvwEtch/IbWbmvGKO3zZfdFjdU9S8xr9
+         Az+Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1697789076; x=1698393876;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=zhOCririqF1JGyoAwqKz3cyvqt8pLiWi7BLqAyPTHo8=;
+        b=V2s5+J1V8krVN2+cnW1Dt5sO1jirD7sPoMsGSpz9Vhb2ZtBD8c4+aXyAzB7FWfwtfn
+         K8IJHxq1rILolh1ks9jXBs88NZZDnz3eZB9+bn/Ez19VWx8BzxyBmKd0AnVmmWQppChC
+         EuK3kCbdCacM22TynFaLUjgrbanMVB7jByVxduay8aeWP30KEna6GVOhiixpW6eJ3tVx
+         SR0Mn4+zFkRq2dsvILNtzeGL/yS/m3pab/deZ0gsoXBVNKRoWHTkIXExgrSNicUY4JR5
+         hyO1/s0ixwh4Yb0+VActJ9+YkA4XLt9PPgFRsC5hFSONX2o6gfb9xsgvhUSQtrSKcQVV
+         VF6g==
+X-Gm-Message-State: AOJu0YyW5zWCPZAx/jglKGGXjcQiHMi0zGkA7qnMgtXUvKa0hcFHMQvJ
+	mGl4Xaq5Zv7Cql3CMJsWTlEu0O/B80qR5LWAPzc=
+X-Google-Smtp-Source: AGHT+IGNTuPLKeWjYmu2GAa6BGS11oC12ZANUe+9CM/L1jKxMlCxeeMXpkP9xQaa0GNZMNQKNDyvZg==
+X-Received: by 2002:a5d:4c8a:0:b0:32c:d7e6:4054 with SMTP id z10-20020a5d4c8a000000b0032cd7e64054mr620600wrs.53.1697789076557;
+        Fri, 20 Oct 2023 01:04:36 -0700 (PDT)
+Received: from P-TOU-PARSEC.tailace47.ts.net ([2a01:cb19:9313:2700:7490:fa4a:1f26:167f])
+        by smtp.gmail.com with ESMTPSA id o3-20020a5d6843000000b003143c9beeaesm1128668wrw.44.2023.10.20.01.04.36
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 20 Oct 2023 01:04:36 -0700 (PDT)
+From: David Pierret <david.pierret@smile.fr>
 To: openembedded-devel@lists.openembedded.org
-Cc: Matthias Klein <matthias@extraklein.de>
-Subject: [meta-oe][PATCH] paho-mqtt-c: upgrade 1.3.12 -> 1.3.13
-Date: Fri, 20 Oct 2023 09:38:50 +0200
-Message-Id: <20231020073850.2630-1-matthias@extraklein.de>
+Cc: Tim moto-timo Orling <TicoTimo@gmail.com>,
+	Derek Straka <derek@asterius.io>,
+	David Pierret <david.pierret@smile.fr>,
+	Yoann Congal <yoann.congal@smile.fr>
+Subject: [meta-python][PATCH] python3-rapidjson: add missing ptest dependency
+Date: Fri, 20 Oct 2023 10:04:49 +0200
+Message-Id: <20231020080449.1426391-1-david.pierret@smile.fr>
 X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-X-PPP-Message-ID: <169778756367.4876.6639591768143288187@mx2fa3.netcup.net>
-X-Rspamd-Queue-Id: 67CC4140060
-X-Rspamd-Server: rspamd-worker-8404
-X-NC-CID: +Q76/VSG/6dHOM+9o4G5hZo1tqjd8fI1qGuxp4rz9mBBGIrziU0=
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 20 Oct 2023 07:39:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105614
+ <openembedded-devel@lists.openembedded.org>; Fri, 20 Oct 2023 08:04:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105615
 
-Service release.
-Issues resolved:
-https://github.com/eclipse/paho.mqtt.c/milestone/20?closed=3D1
+add the pytz module dependency.
 
-Signed-off-by: Matthias Klein <matthias@extraklein.de>
+Signed-off-by: David Pierret <david.pierret@smile.fr>
+Reviewed-by: Yoann Congal <yoann.congal@smile.fr>
 ---
- .../{paho-mqtt-c_1.3.12.bb =3D> paho-mqtt-c_1.3.13.bb}            | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-connectivity/paho-mqtt-c/{paho-mqtt-c_1.3.12.bb =3D=
-> paho-mqtt-c_1.3.13.bb} (95%)
+ meta-python/recipes-devtools/python/python3-rapidjson_1.11.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.3.12.=
-bb b/meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.3.13.bb
-similarity index 95%
-rename from meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.3.12.b=
-b
-rename to meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.3.13.bb
-index 4decb098c..6f229001f 100644
---- a/meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.3.12.bb
-+++ b/meta-oe/recipes-connectivity/paho-mqtt-c/paho-mqtt-c_1.3.13.bb
-@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM =3D " \
-=20
- SRC_URI =3D "git://github.com/eclipse/paho.mqtt.c;protocol=3Dhttps;branc=
-h=3Dmaster"
-=20
--SRCREV =3D "4157a27d39f1dd5b95750ecb6acd1481432785d8"
-+SRCREV =3D "07a875788d8cc6f5833b12581d6e3e349b34d719"
-=20
- DEPENDS =3D "openssl"
-=20
---=20
+diff --git a/meta-python/recipes-devtools/python/python3-rapidjson_1.11.bb b/meta-python/recipes-devtools/python/python3-rapidjson_1.11.bb
+index 3ea559488..74e46ca5f 100644
+--- a/meta-python/recipes-devtools/python/python3-rapidjson_1.11.bb
++++ b/meta-python/recipes-devtools/python/python3-rapidjson_1.11.bb
+@@ -27,6 +27,7 @@ DEPENDS += " \
+ RDEPENDS:${PN}-ptest += " \
+     ${PYTHON_PN}-pytest \
+     ${PYTHON_PN}-unittest-automake-output \
++    ${PYTHON_PN}-pytz \
+ "
+ 
+ RDEPENDS:${PN} += " \
+-- 
 2.39.2
 
 
