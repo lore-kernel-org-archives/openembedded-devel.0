@@ -1,47 +1,47 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <samuli.piippo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 72B59CDB47E
-	for <webhook@archiver.kernel.org>; Fri, 20 Oct 2023 07:07:46 +0000 (UTC)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.web11.49253.1697785658491656404
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 782BBCDB474
+	for <webhook@archiver.kernel.org>; Fri, 20 Oct 2023 07:11:26 +0000 (UTC)
+Received: from mail-vk1-f179.google.com (mail-vk1-f179.google.com [209.85.221.179])
+ by mx.groups.io with SMTP id smtpd.web11.49279.1697785880893522508
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 20 Oct 2023 00:07:38 -0700
+ Fri, 20 Oct 2023 00:11:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=lmAt6tkq;
- spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-40651a726acso3960275e9.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 20 Oct 2023 00:07:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=g3J1w7+K;
+ spf=pass (domain: gmail.com, ip: 209.85.221.179, mailfrom: samuli.piippo@gmail.com)
+Received: by mail-vk1-f179.google.com with SMTP id 71dfb90a1353d-49d0f24a815so204947e0c.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 20 Oct 2023 00:11:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1697785657; x=1698390457; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1697785880; x=1698390680; darn=lists.openembedded.org;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=d9VC/jQkDtpxDbs0xLTLnQiTZjFDjO7k6DfN/PrtosM=;
-        b=lmAt6tkqBhrj2lr875ateebFjrsCpyOCYMFDFdlsx/uNPDmsa2fypWlYeg3Md16EP9
-         HUkfWvXxkS0ke8j13nyvAdMQxJM0uod9jR3hwAQmVZkuNy1ApKdFTy2k9WquyokSKrQh
-         VWmMBINN1j6Jke6gYUExdfInWF0DbbvMtu1HhWZpcJpxJ+ZKrz1L6N8855klhCwvXFf9
-         tzsam2ZA+kw1X3lKJKDsHWkf50VL53JJKqIF6HWSQQ2VtTWQmxVoGjXQW/yU52QytTgW
-         VqxRmp6YQNefPZ0EuGDzxWTsVv00o+yjpTYN5p34ea8t6u0Ef8xJBGVQIikOwpHP8w0P
-         4w6g==
+        bh=bTiFipaDMKkAtuh2dD9J2U0e2djcwSUiT84xGePMecw=;
+        b=g3J1w7+KWE4HcjcJyZQCwPUXQ9CKxyJiv/lz+oHotVHGxI6/kPVfohvPh/5NZMvubs
+         TiK++oJwP2Bjux7/sFpgimWEynQkPRfBK/S1StEOfx7hE6LYGC94274XxaO/oORldE5b
+         ku+YSFf0+Sb1RH/l9chuSIOU+7DMpC9O/SvdOiI3BojflKpZnRxoyqFqX8RlnXWbPE5P
+         Bqjw1MpSxRA/lICJ8BYs9Ne7LRpHBrp8NWxd1+8y5BpAt+fRDTN3u0feKegLSFLZq7Pt
+         KWIVWP/ndY8XpCfAUX8zUYIP6h0pXrP9xKqHzjO7lGxjQD8i9J5rVYDQ9GVwdYG973ED
+         k+wA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1697785657; x=1698390457;
+        d=1e100.net; s=20230601; t=1697785880; x=1698390680;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=d9VC/jQkDtpxDbs0xLTLnQiTZjFDjO7k6DfN/PrtosM=;
-        b=vzoYhA98BIRCAmsc86Qtm3TyGyIOrTIY6IIy9VtW7TzmA2hY/apz81F7Ch1vXhAj0L
-         1AhCFWKI/3wIzw0CtFCEm9Btwc11iPWv2bC04TNFT6+fUpjc8XXd6BZBHp0InUrZT8jd
-         eT0Iq6HeSqrxl0HI1eVvUzfMz+LjOm6Yt3TQ6UuwvNUB2ncqo4ZDdyRSC0naNRuIj0rz
-         ckpxKs7xuLoIMngY25cLmeVBFc4Sr4TVvCjloHPj0t3U/3L7LWjjMXpM0meeUWBtxFJs
-         N17xaJCXednJKQDLzwb3JQNLZx/O1WlTdkmgBRu81jXAg2K5K02DSZDvbRcRGyj2QKxj
-         n28Q==
-X-Gm-Message-State: AOJu0YzXjjdZyqlfg9Qq7sxEgMa0OO+rbQB5sg53VDo23rmLL9qd3meu
-	Cua4ePXx84T4rJ2P5424//SgBLPdJnZJx+4YEjE=
-X-Google-Smtp-Source: AGHT+IEj8MHNYMKHuEcEyS5XfY7rjRLim4YVVx0Jc51L74aZNz3xidxQqX3WSZjL4LHaiFWk7NIanV/8OVI01yVlAzI=
-X-Received: by 2002:a05:600c:4444:b0:405:49aa:d578 with SMTP id
- v4-20020a05600c444400b0040549aad578mr766515wmn.37.1697785656659; Fri, 20 Oct
- 2023 00:07:36 -0700 (PDT)
+        bh=bTiFipaDMKkAtuh2dD9J2U0e2djcwSUiT84xGePMecw=;
+        b=khSoRZcsXX749HVDSnEPPsGpJ4X7DdhqE9chVOrcQYYVI6x9L8/WFB2tPBTfow0AVl
+         2PQtmmJ6XjB+ycNH6Bmjf8AhmZtO9mMWy0Wd6ixDdQnmGXh0j7XoO+Y4Mwj3T356qr4j
+         knmty8mMyoR3KIyFWvir6CUyrVmNr6Ma3t7JqtvmPNhkKVa7FBsUESVUqCoacWUQK2Yd
+         mv2CaH8yp/vja6+4vRBFkqGDinE7/8ide5XWrIj2aQmt2DNun7T92vWTVaH1pnCef8N9
+         SCt6aHv4b3dArk9CPmoppv2T+dRSs8SlNAuytTSMuKdv9GbeuPM9/AvAahkVf/K+bC1W
+         XOKA==
+X-Gm-Message-State: AOJu0YyfrH0LNbziovpw5hHKKrPLRJQW/IS4IGKmn/4ljHR0pEK1mhLH
+	0THRXfxEwyT7f0UOrQN7LEbHneCbVpH2nOLxzSE=
+X-Google-Smtp-Source: AGHT+IHed00FbCm3PUXUygrxSds2l5G30rnRtUusFaFE4bU0qV65uEvS2D+SCzcsXCotTpqnzN0sw3XfjF82Hb/d1sk=
+X-Received: by 2002:a67:ab0c:0:b0:452:6ac0:ed19 with SMTP id
+ u12-20020a67ab0c000000b004526ac0ed19mr1238827vse.31.1697785879809; Fri, 20
+ Oct 2023 00:11:19 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230930173003.3210-1-peron.clem@gmail.com> <4b4d6fb9-3034-46df-876c-81c534e4c801@gmail.com>
  <CAMKF1sp+ZiEfFhOOOvHbKBoRMA0fWeRpXXh9-s1uuY2qcO+PcA@mail.gmail.com>
@@ -51,40 +51,43 @@ References: <20230930173003.3210-1-peron.clem@gmail.com> <4b4d6fb9-3034-46df-876
  <178A5713556C6E82.9230@lists.openembedded.org> <9714b98c-66b5-48bc-a00a-69e1634b0307@gmail.com>
  <CABXoSoVp=45ccqwzQXFF1y=fjcwCGjXh0HiuLBAE-UssDzf5Yg@mail.gmail.com> <babbfd71-062b-4ad5-9ef9-00acc52ae090@gmail.com>
 In-Reply-To: <babbfd71-062b-4ad5-9ef9-00acc52ae090@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Fri, 20 Oct 2023 09:07:21 +0200
-Message-ID: <CA+chaQcRqvNw=poVdCM0waCCWQ+i7Ys09EHjxPbLKsV8biLnaA@mail.gmail.com>
+From: Samuli Piippo <samuli.piippo@gmail.com>
+Date: Fri, 20 Oct 2023 10:11:08 +0300
+Message-ID: <CABXoSoVkvT7py3ZEtZc5gKYuLKzJYesWvi=65zRA5osHQa87tQ@mail.gmail.com>
 Subject: Re: [oe] [PATCH] Revert "protobuf: stage protoc binary to sysroot"
 To: Vyacheslav Yurkov <uvv.mail@gmail.com>
-Cc: Samuli Piippo <samuli.piippo@gmail.com>, =?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>, 
+Cc: Martin Jansa <martin.jansa@gmail.com>, =?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>, 
 	Khem Raj <raj.khem@gmail.com>, Ross Burton <ross.burton@arm.com>, 
 	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="000000000000f8534606082086cc"
+Content-Type: multipart/alternative; boundary="0000000000004558340608209402"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 20 Oct 2023 07:07:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105611
+ <openembedded-devel@lists.openembedded.org>; Fri, 20 Oct 2023 07:11:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105612
 
---000000000000f8534606082086cc
+--0000000000004558340608209402
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-No, it installs whatever recipe stages in do_populate_sysroot which is
-controlled by SYSROOT_DIRS, so the solution still makes sense to me as
-explained before and IMHO is better than the alternatives (changing the
-protobuf .cmake files to be different in sysroot and in PN-dev).
+Dependency to the recipe name will always install all packages to RSS.
+You can verify this by checking that the libprotoc.so from the
+nativesdk-protobuf-compile package is in the sysroot.
+The problem you are facing is the fact that binaries are not installed into
+the sysroot (for nativesdk builds), so you are only missing the
+bin/protoc-23.4.0 file.
+The proposed and twice reverted fix for this is the aforementioned
+SYSROOT_DIRS.
 
-On Fri, Oct 20, 2023 at 8:17=E2=80=AFAM Vyacheslav Yurkov <uvv.mail@gmail.c=
-om>
-wrote:
+-samuli
+
+On Fri, 20 Oct 2023 at 09:17, Vyacheslav Yurkov <uvv.mail@gmail.com> wrote:
 
 > I think the problem goes down to how dependencies are populated in the
 > sysroot. I raised this question in oe-core mailing list
 > https://lists.openembedded.org/g/openembedded-core/message/189324 , but
 > didn't get an answer yet.
 >
-> DEPENDS +=3D "protobuf" will only install the main package of protobuf to
+> DEPENDS += "protobuf" will only install the main package of protobuf to
 > the sysroot, because it assumes that nativesdk-protobuf-compiler is also
 > part of the main package (which is not). I guess the part of the system
 > populating sysroot deals with recipes only, and not with packages. I'm
@@ -103,26 +106,22 @@ wrote:
 > with CMake.
 >
 > inherit cmake
-> DEPENDS +=3D "protobuf"
+> DEPENDS += "protobuf"
 >
 > do_configure:prepend() {
 >     echo "find_package(Protobuf CONFIG)" > ${S}/CMakeLists.txt
 > }
 >
-> BBCLASSEXTEND =3D "nativesdk"
+> BBCLASSEXTEND = "nativesdk"
 >
 > ---
 > CMake Error at
-> tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-test/1.0/recipe-sysroot=
-/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-pokysdk-linux/usr/lib=
-/cmake/protobuf/protobuf-targets.cmake:107
+> tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-test/1.0/recipe-sysroot/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-pokysdk-linux/usr/lib/cmake/protobuf/protobuf-targets.cmake:107
 > (message):
 >   The imported target "protobuf::protoc" references the file
 >
 >
->  "tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-test/1.0/recipe-sysro=
-ot/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-pokysdk-linux/usr/b=
-in/protoc-23.4.0"
+>  "tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-test/1.0/recipe-sysroot/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-pokysdk-linux/usr/bin/protoc-23.4.0"
 >
 >   but this file does not exist.
 > ---
@@ -141,18 +140,14 @@ in/protoc-23.4.0"
 > wrote:
 >
 >> I'd like to follow-up on this and say that I see this issue now with
->> nativesdk build, in particular nativesdk-grpc recipe fails in master wit=
-h
->> the same error. I hope that's partially related to the issue everybody i=
-s
+>> nativesdk build, in particular nativesdk-grpc recipe fails in master with
+>> the same error. I hope that's partially related to the issue everybody is
 >> confused about, but I'd like understand how to properly fix it.
 >>
 >> |   The imported target "protobuf::protoc" references the file
 >> |
 >> |
->> "/home/uvv/projects/poky/build/tmp/work/x86_64-nativesdk-pokysdk-linux/n=
-ativesdk-grpc/1.56.2/recipe-sysroot/usr/local/oe-sdk-hardcoded-buildpath/sy=
-sroots/x86_64-pokysdk-linux/usr/bin/protoc-23.4.0"
+>> "/home/uvv/projects/poky/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-grpc/1.56.2/recipe-sysroot/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-pokysdk-linux/usr/bin/protoc-23.4.0"
 >> |
 >> |   but this file does not exist.  Possible reasons include:
 >> |
@@ -164,9 +159,7 @@ sroots/x86_64-pokysdk-linux/usr/bin/protoc-23.4.0"
 >> cross-compilation, because SDKMACHINE and HOST might be different.
 >> In this particular grpc case there's an option to say where the actual
 >> protoc executable is (
->> -D_gRPC_PROTOBUF_PROTOC_EXECUTABLE=3D/home/uvv/projects/poky/build/tmp/w=
-ork/x86_64-nativesdk-pokysdk-linux/nativesdk-grpc/1.56.2/recipe-sysroot-nat=
-ive/usr/bin/protoc
+>> -D_gRPC_PROTOBUF_PROTOC_EXECUTABLE=/home/uvv/projects/poky/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-grpc/1.56.2/recipe-sysroot-native/usr/bin/protoc
 >> is passed to grpc).
 >>
 >> So there shouldn't be any issues here, but nativesdk build still fails.
@@ -178,8 +171,7 @@ ive/usr/bin/protoc
 >> nativesdk-protobuf RPROVIDES nativesdk-protobuf-compiler
 >>
 >> Moreover, if I go into devshell and forcefully install
->> nativesdk-libprotobuf-compiler, then `bitbake nativesdk-grpc` is happy a=
-nd
+>> nativesdk-libprotobuf-compiler, then `bitbake nativesdk-grpc` is happy and
 >> compiles!
 >>
 >> So something wrong with the dependencies in protobuf recipe, but I can't
@@ -190,19 +182,22 @@ nd
 >>
 >>
 
---000000000000f8534606082086cc
+--0000000000004558340608209402
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">No, it installs whatever recipe stages in do_populate_sysr=
-oot which is controlled by=C2=A0SYSROOT_DIRS, so the solution still makes s=
-ense to me as explained before and IMHO is better than the alternatives (ch=
-anging the protobuf .cmake files to be different in sysroot and in PN-dev).=
-</div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">=
-On Fri, Oct 20, 2023 at 8:17=E2=80=AFAM Vyacheslav Yurkov &lt;<a href=3D"ma=
-ilto:uvv.mail@gmail.com">uvv.mail@gmail.com</a>&gt; wrote:<br></div><blockq=
-uote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1p=
-x solid rgb(204,204,204);padding-left:1ex"><u></u>
+<div dir=3D"ltr"><div>Dependency to the recipe name will always install all=
+ packages to RSS.</div><div>You can verify this by checking that the libpro=
+toc.so from the nativesdk-protobuf-compile package is in the sysroot.</div>=
+<div>The problem you are facing is the fact that binaries are not installed=
+ into the sysroot (for nativesdk builds), so you are only missing the bin/p=
+rotoc-23.4.0 file.<br></div><div>The proposed and twice reverted fix for th=
+is is the aforementioned SYSROOT_DIRS.</div><div><br></div><div>-samuli<br>=
+</div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_=
+attr">On Fri, 20 Oct 2023 at 09:17, Vyacheslav Yurkov &lt;<a href=3D"mailto=
+:uvv.mail@gmail.com">uvv.mail@gmail.com</a>&gt; wrote:<br></div><blockquote=
+ class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px so=
+lid rgb(204,204,204);padding-left:1ex"><u></u>
 
  =20
    =20
@@ -365,5 +360,5 @@ d
 
 </blockquote></div>
 
---000000000000f8534606082086cc--
+--0000000000004558340608209402--
 
