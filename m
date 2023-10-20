@@ -1,89 +1,109 @@
-Return-Path: <david.pierret@smile.fr>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BE56CCDB474
-	for <webhook@archiver.kernel.org>; Fri, 20 Oct 2023 08:04:46 +0000 (UTC)
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
- by mx.groups.io with SMTP id smtpd.web10.49752.1697789078398622223
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B080BC004C0
+	for <webhook@archiver.kernel.org>; Fri, 20 Oct 2023 08:09:16 +0000 (UTC)
+Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
+ by mx.groups.io with SMTP id smtpd.web11.49892.1697789350277264578
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 20 Oct 2023 01:04:39 -0700
+ Fri, 20 Oct 2023 01:09:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=QOTmP1q6;
- spf=pass (domain: smile.fr, ip: 209.85.221.47, mailfrom: david.pierret@smile.fr)
-Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-32dc9ff4a8fso355344f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 20 Oct 2023 01:04:38 -0700 (PDT)
+ dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=bFt47BKR;
+ spf=pass (domain: smile.fr, ip: 209.85.218.50, mailfrom: yoann.congal@smile.fr)
+Received: by mail-ej1-f50.google.com with SMTP id a640c23a62f3a-9c603e2354fso117101166b.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 20 Oct 2023 01:09:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1697789076; x=1698393876; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=zhOCririqF1JGyoAwqKz3cyvqt8pLiWi7BLqAyPTHo8=;
-        b=QOTmP1q6ZDsFSJR9F/oqx6NY8Wj7cUgU5A8FCDKIp829EQXvR7P5eWRgSR8NS5FaeE
-         KUA4/+Wgv4H7IIl14QMt5ib5EL/frJb2Z30b/lzIerOyfKdlXxXiiaUjj2KtWjdF85FH
-         i9EnAKmrV+hrqUge61EVWAKobKQDCmCYMtM4q3zuICtAA2dEUh44Vyf0Ta2eqmi1IIBx
-         N620lkaJE0KWUnWMBfTrx2DD2AcEBzwGYTzv7ZW/Jk/dPM6Jiz+4gO47dnl5ccomG2HY
-         mfgSbckrfEZ17X1hiJHHAwn5gMHjgVJypJcvnvwEtch/IbWbmvGKO3zZfdFjdU9S8xr9
-         Az+Q==
+        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1697789349; x=1698394149; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:organization:from:references
+         :cc:to:content-language:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=hbgeVF0F9E3EbsFjBZM++wTRCYme0oGfVFzSjiHtTr8=;
+        b=bFt47BKR0atBp5qbFh/QEIsciO6ClYArUiWOVMHIEztali668k506LirTpW1xiCRCF
+         PBPGp/vNlWrhMqkpggrVGB+j2cCS+Tihd6szuMoUz1q7GD0vZZTQJdDuzb3T7rGJoJPu
+         UXkyVOx8ryUoJW+SYhrXhZJLOsCK0P5eDaoUgW0trNM9R9IsXXmahO58bboT48CxRBDE
+         JxkgKQVyokVdb5qkzTU6yJiUvDimKct+FDT63kOU/ZN8WSLXWDL62os9a1UzYdkmo8vh
+         AoEtkG0BLJKfgYYfABzqgdvniH3/LcK93GdGKygYzOKcsQgLpU13fJp8qARdcPrm/Gri
+         n8Vg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1697789076; x=1698393876;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1697789349; x=1698394149;
+        h=content-transfer-encoding:in-reply-to:organization:from:references
+         :cc:to:content-language:subject:user-agent:mime-version:date
+         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=zhOCririqF1JGyoAwqKz3cyvqt8pLiWi7BLqAyPTHo8=;
-        b=V2s5+J1V8krVN2+cnW1Dt5sO1jirD7sPoMsGSpz9Vhb2ZtBD8c4+aXyAzB7FWfwtfn
-         K8IJHxq1rILolh1ks9jXBs88NZZDnz3eZB9+bn/Ez19VWx8BzxyBmKd0AnVmmWQppChC
-         EuK3kCbdCacM22TynFaLUjgrbanMVB7jByVxduay8aeWP30KEna6GVOhiixpW6eJ3tVx
-         SR0Mn4+zFkRq2dsvILNtzeGL/yS/m3pab/deZ0gsoXBVNKRoWHTkIXExgrSNicUY4JR5
-         hyO1/s0ixwh4Yb0+VActJ9+YkA4XLt9PPgFRsC5hFSONX2o6gfb9xsgvhUSQtrSKcQVV
-         VF6g==
-X-Gm-Message-State: AOJu0YyW5zWCPZAx/jglKGGXjcQiHMi0zGkA7qnMgtXUvKa0hcFHMQvJ
-	mGl4Xaq5Zv7Cql3CMJsWTlEu0O/B80qR5LWAPzc=
-X-Google-Smtp-Source: AGHT+IGNTuPLKeWjYmu2GAa6BGS11oC12ZANUe+9CM/L1jKxMlCxeeMXpkP9xQaa0GNZMNQKNDyvZg==
-X-Received: by 2002:a5d:4c8a:0:b0:32c:d7e6:4054 with SMTP id z10-20020a5d4c8a000000b0032cd7e64054mr620600wrs.53.1697789076557;
-        Fri, 20 Oct 2023 01:04:36 -0700 (PDT)
-Received: from P-TOU-PARSEC.tailace47.ts.net ([2a01:cb19:9313:2700:7490:fa4a:1f26:167f])
-        by smtp.gmail.com with ESMTPSA id o3-20020a5d6843000000b003143c9beeaesm1128668wrw.44.2023.10.20.01.04.36
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 20 Oct 2023 01:04:36 -0700 (PDT)
-From: David Pierret <david.pierret@smile.fr>
-To: openembedded-devel@lists.openembedded.org
-Cc: Tim moto-timo Orling <TicoTimo@gmail.com>,
-	Derek Straka <derek@asterius.io>,
-	David Pierret <david.pierret@smile.fr>,
-	Yoann Congal <yoann.congal@smile.fr>
-Subject: [meta-python][PATCH] python3-rapidjson: add missing ptest dependency
-Date: Fri, 20 Oct 2023 10:04:49 +0200
-Message-Id: <20231020080449.1426391-1-david.pierret@smile.fr>
-X-Mailer: git-send-email 2.39.2
+        bh=hbgeVF0F9E3EbsFjBZM++wTRCYme0oGfVFzSjiHtTr8=;
+        b=lUAjKHD7PgX7wtjomzSSGVVLPUWhtawud/wAtlj9yTDb9TuPTg2+VjWwxsua+uw9px
+         RV+PwwceMryeG38Pyfkk+hMM/CVRV/Y6n3BjgeD2a1Z9unBRU+Vm6YaL5a9FPbeUmter
+         vTlhohhfmFegtEQUaRLy8YI0ggAdcD0VS9FYZGVySamFi7eRVfdHADwB3AAd3FEaPaZw
+         3emDN6+dX9VwZG3DWASVA1maWPHYpzDmbOxo0iweGs9Zt1SCMZ8iVBQnz76BpJWiGBl0
+         SIttorI9osx1WA8IxS+sKcYa5yR+eTfJnp47i25Pfp0Pc+Z7ZAeym0jRyXn6qlcyrPmZ
+         BWAA==
+X-Gm-Message-State: AOJu0YxUbyaqn9sWb7CNywOabuGvhw3OzQkLghczKySsbRAgECrj4pLi
+	dAcVr0tpuw4i9QUbjfqztXRCuQ==
+X-Google-Smtp-Source: AGHT+IE1lZwslACIGjViQSgsENKN8OGk35Knj6n7+h4YCjaexzzgwd9q4+jmAky9JR6bnt3vbQg2Vg==
+X-Received: by 2002:a17:907:9619:b0:9aa:1794:945b with SMTP id gb25-20020a170907961900b009aa1794945bmr3635484ejc.22.1697789348588;
+        Fri, 20 Oct 2023 01:09:08 -0700 (PDT)
+Received: from [192.168.0.35] ([89.159.1.53])
+        by smtp.gmail.com with ESMTPSA id 16-20020a170906225000b0098921e1b064sm987075ejr.181.2023.10.20.01.09.08
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 20 Oct 2023 01:09:08 -0700 (PDT)
+Message-ID: <9cafbdb4-0ba4-7726-bf6b-fbc681dd5549@smile.fr>
+Date: Fri, 20 Oct 2023 10:09:07 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Subject: Re: [OE-core] Detecting unimplemented ptests with heuristics
+Content-Language: en-US
+To: Michael Opdenacker <michael.opdenacker@bootlin.com>
+Cc: =?UTF-8?B?SsOpcsOpbXkgUm9zZW4=?= <jeremy.rosen@smile.fr>,
+ openembedded-core@lists.openembedded.org,
+ openembedded-devel@lists.openembedded.org
+References: <c8b8ee57-7e21-0189-ba71-3e4805725bcc@smile.fr>
+ <f0d794fd-ae24-4999-b564-c608da9f0af7@bootlin.com>
+From: Yoann Congal <yoann.congal@smile.fr>
+Organization: Smile ECS
+In-Reply-To: <f0d794fd-ae24-4999-b564-c608da9f0af7@bootlin.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 20 Oct 2023 08:04:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105615
+ <openembedded-devel@lists.openembedded.org>; Fri, 20 Oct 2023 08:09:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105616
 
-add the pytz module dependency.
+On 10/19/23 17:21, Michael Opdenacker wrote:
+> Hi Yoann
 
-Signed-off-by: David Pierret <david.pierret@smile.fr>
-Reviewed-by: Yoann Congal <yoann.congal@smile.fr>
----
- meta-python/recipes-devtools/python/python3-rapidjson_1.11.bb | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/meta-python/recipes-devtools/python/python3-rapidjson_1.11.bb b/meta-python/recipes-devtools/python/python3-rapidjson_1.11.bb
-index 3ea559488..74e46ca5f 100644
---- a/meta-python/recipes-devtools/python/python3-rapidjson_1.11.bb
-+++ b/meta-python/recipes-devtools/python/python3-rapidjson_1.11.bb
-@@ -27,6 +27,7 @@ DEPENDS += " \
- RDEPENDS:${PN}-ptest += " \
-     ${PYTHON_PN}-pytest \
-     ${PYTHON_PN}-unittest-automake-output \
-+    ${PYTHON_PN}-pytz \
- "
+Hi,
  
- RDEPENDS:${PN} += " \
--- 
-2.39.2
+> On 19.10.23 at 10:00, Yoann Congal wrote:
+>> Hi everyone,
+>>
+>> We recently implemented a way to detect recipes for upstream code that contain unit tests but does not implement ptests.
+>> Those recipes make good candidates for increasing the ptests coverage.
+>>
+>> This is implemented as a QA check. The check is disabled by default since it generates a lot of warning at build.
+>> In order to activate it (in local.conf for exemple) :
+>> WARN_QA += "unimplemented-ptest"
+>>
+>> The warnings looks like:
+>> WARNING: time-1.9-r0 do_patch: QA Issue: time: autotools-based tests detected [unimplemented-ptest]
+>>   I've generated the list for the unimplemented ptests for oe-core and for meta-openembedded:
+>>    329 unimplemented-ptests_oe-core.log: https://gist.github.com/ycongal-smile/dd51b0e450a8f0083e9d5cc10eeeb060#file-unimplemented-ptests_oe-core-log
+>>   1080 unimplemented-ptests_meta-openembedded.log: https://gist.github.com/ycongal-smile/dd51b0e450a8f0083e9d5cc10eeeb060#file-unimplemented-ptests_meta-openembedded-log
+> 
+> Thanks, indeed, I "own" recipes that were flagged :)
+> Maybe, you could find a way to notify the maintainers of such recipes, as in the AUH upgrade status reports (https://lists.openembedded.org/g/openembedded-core/message/188589 for example).
 
+Good idea, Thanks!
+
+I've created a bug to not forget : 
+15249 – Notify the maintainers of unimplemented ptests
+https://bugzilla.yoctoproject.org/show_bug.cgi?id=15249
+I've CC'd you :)
+
+Regards,
+-- 
+Yoann Congal
+Smile ECS - Tech Expert
 
