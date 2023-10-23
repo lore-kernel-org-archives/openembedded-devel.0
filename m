@@ -2,80 +2,76 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D5789C25B41
-	for <webhook@archiver.kernel.org>; Mon, 23 Oct 2023 08:13:09 +0000 (UTC)
-Received: from esa11.hc1455-7.c3s2.iphmx.com (esa11.hc1455-7.c3s2.iphmx.com [207.54.90.137])
- by mx.groups.io with SMTP id smtpd.web11.116077.1698048787679154119
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B5709C001E0
+	for <webhook@archiver.kernel.org>; Mon, 23 Oct 2023 08:14:19 +0000 (UTC)
+Received: from esa8.hc1455-7.c3s2.iphmx.com (esa8.hc1455-7.c3s2.iphmx.com [139.138.61.253])
+ by mx.groups.io with SMTP id smtpd.web10.115732.1698048854861068988
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Oct 2023 01:13:08 -0700
+ Mon, 23 Oct 2023 01:14:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 207.54.90.137, mailfrom: wangmy@fujitsu.com)
-X-IronPort-AV: E=McAfee;i="6600,9927,10871"; a="116573364"
+ dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 139.138.61.253, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10871"; a="125175543"
 X-IronPort-AV: E=Sophos;i="6.03,244,1694703600"; 
-   d="scan'208";a="116573364"
-Received: from unknown (HELO yto-r2.gw.nic.fujitsu.com) ([218.44.52.218])
-  by esa11.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Oct 2023 17:13:06 +0900
-Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
-	by yto-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 360ECD618B
-	for <openembedded-devel@lists.openembedded.org>; Mon, 23 Oct 2023 17:13:03 +0900 (JST)
-Received: from aks-ab1.gw.nic.fujitsu.com (aks-ab1.gw.nic.fujitsu.com [192.51.207.11])
-	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 799EBF80F
-	for <openembedded-devel@lists.openembedded.org>; Mon, 23 Oct 2023 17:13:02 +0900 (JST)
+   d="scan'208";a="125175543"
+Received: from unknown (HELO oym-r2.gw.nic.fujitsu.com) ([210.162.30.90])
+  by esa8.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Oct 2023 17:14:12 +0900
+Received: from oym-m4.gw.nic.fujitsu.com (oym-nat-oym-m4.gw.nic.fujitsu.com [192.168.87.61])
+	by oym-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 76745CD7E3
+	for <openembedded-devel@lists.openembedded.org>; Mon, 23 Oct 2023 17:14:10 +0900 (JST)
+Received: from aks-ab2.gw.nic.fujitsu.com (aks-ab2.gw.nic.fujitsu.com [192.51.207.12])
+	by oym-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id A1B23D5D50
+	for <openembedded-devel@lists.openembedded.org>; Mon, 23 Oct 2023 17:14:09 +0900 (JST)
 Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.52])
-	by aks-ab1.gw.nic.fujitsu.com (Postfix) with ESMTP id 5FA082FC6ECB;
-	Mon, 23 Oct 2023 17:13:01 +0900 (JST)
+	by aks-ab2.gw.nic.fujitsu.com (Postfix) with ESMTP id 77DD78719A;
+	Mon, 23 Oct 2023 17:14:08 +0900 (JST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] adw-gtk3: upgrade 4.9 -> 5.1
-Date: Mon, 23 Oct 2023 16:12:48 +0800
-Message-Id: <1698048768-24147-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] ctags: upgrade 6.0.20230917.0 -> 6.0.20231001.0
+Date: Mon, 23 Oct 2023 16:13:24 +0800
+Message-Id: <1698048804-24202-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1408-9.0.0.1002-27952.006
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1408-9.0.1002-27952.006
-X-TMASE-Result: 10-2.825800-10.000000
-X-TMASE-MatchedRID: S9L8qTrmXfGjz0nOeth/yUIIxwDaU5mrTfK5j0EZbyshm837eIt7zb6p
-	xbTOjavy+7QcRaVoa8nGKIf6hBf7VaGGOyqBK41vEXjPIvKd74CC7C2rJeUToWFHVj+6F+rIa+2
-	jJ5e7tWCxfbhqGxLk+4Ay6p60ZV62To3UJuRLIoTdB/CxWTRRu+rAZ8KTspSzoHBF1/NqfSK+pv
-	ha3plW4yJFIlP+0B5/jYyMiMdisxtfERIxsXGnsHdJYRCYUrNNH0ZWQUC79hWU5A2N41YhwxyDa
-	XlbzbC7iB6mlDKe1V7S/yytHeCN9GXv4CQeNUk7G6qTOwq/n71+3BndfXUhXQ==
+X-TMASE-Result: 10-1.026400-10.000000
+X-TMASE-MatchedRID: 6e3s/u+cBDSjz0nOeth/yQPZZctd3P4B1cuIRwt/4MiysPB8dBBorXKn
+	6DBj/gsEIvrftAIhWmJ6eYPYGCVgy3gcxJAgqZ0ZaDCzqDR7DPauLG21Eb4T84Fum2PEjqt1o8W
+	MkQWv6iV3LAytsQR4e1cppCzPq+1UxlblqLlYqXJRsa+0tFX+C5ioaS7Bpknb6+lQ/zw3NVL8eO
+	ItjRV2A5E5CUs1hukxVN+lnF5iJgWqmKbU8LvYvk27xLdnnBxk8oEtydZcStP+v9v52ZIoWjoAf
+	389xF3XFSk9HhUZnw7OGIWnws4LoyHWPYzouJUy
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 23 Oct 2023 08:13:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105630
+ <openembedded-devel@lists.openembedded.org>; Mon, 23 Oct 2023 08:14:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105631
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Changelog:
-=============
-Fix Headerbar Buttons Width error.
-Fix Geary sidebar looks broken error.
-
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../gnome-themes/{adw-gtk3_4.9.bb => adw-gtk3_5.1.bb}           | 2 +-
+ .../ctags/{ctags_6.0.20230917.0.bb => ctags_6.0.20231001.0.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-gnome/gnome-themes/{adw-gtk3_4.9.bb => adw-gtk3_5.1.bb} (88%)
+ rename meta-oe/recipes-devtools/ctags/{ctags_6.0.20230917.0.bb => ctags_6.0.20231001.0.bb} (95%)
 
-diff --git a/meta-oe/recipes-gnome/gnome-themes/adw-gtk3_4.9.bb b/meta-oe/recipes-gnome/gnome-themes/adw-gtk3_5.1.bb
-similarity index 88%
-rename from meta-oe/recipes-gnome/gnome-themes/adw-gtk3_4.9.bb
-rename to meta-oe/recipes-gnome/gnome-themes/adw-gtk3_5.1.bb
-index d7b7eef977..577acda59b 100644
---- a/meta-oe/recipes-gnome/gnome-themes/adw-gtk3_4.9.bb
-+++ b/meta-oe/recipes-gnome/gnome-themes/adw-gtk3_5.1.bb
-@@ -11,6 +11,6 @@ inherit meson
- SRC_URI = "git://github.com/lassekongo83/adw-gtk3.git;protocol=https;branch=main"
+diff --git a/meta-oe/recipes-devtools/ctags/ctags_6.0.20230917.0.bb b/meta-oe/recipes-devtools/ctags/ctags_6.0.20231001.0.bb
+similarity index 95%
+rename from meta-oe/recipes-devtools/ctags/ctags_6.0.20230917.0.bb
+rename to meta-oe/recipes-devtools/ctags/ctags_6.0.20231001.0.bb
+index 02afbfbbba..c1ec9e8e8a 100644
+--- a/meta-oe/recipes-devtools/ctags/ctags_6.0.20230917.0.bb
++++ b/meta-oe/recipes-devtools/ctags/ctags_6.0.20231001.0.bb
+@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
+ 
+ inherit autotools-brokensep pkgconfig manpages
+ 
+-SRCREV = "481ad1b36daca1d40060dd32b0d825cddc97e9cb"
++SRCREV = "0aa6d047ffd78c3baff508a53f4a176d97a28b5b"
+ SRC_URI = "git://github.com/universal-ctags/ctags;branch=master;protocol=https"
  
  S = "${WORKDIR}/git"
--SRCREV = "08d3dfbde51d4cb0a3bb8e58a81aa61064857d89"
-+SRCREV = "a3e1050341956fcae53b2b4403affcf2578a42f4"
- 
- FILES:${PN} = "${datadir}/themes"
 -- 
 2.34.1
 
