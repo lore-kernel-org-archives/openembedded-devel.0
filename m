@@ -1,81 +1,204 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <markku.degerholm@vaisala.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EA5C2CDB474
-	for <webhook@archiver.kernel.org>; Mon, 23 Oct 2023 09:01:29 +0000 (UTC)
-Received: from esa10.hc1455-7.c3s2.iphmx.com (esa10.hc1455-7.c3s2.iphmx.com [139.138.36.225])
- by mx.groups.io with SMTP id smtpd.web10.116268.1698051681585730678
- for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Oct 2023 02:01:22 -0700
-Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 139.138.36.225, mailfrom: wangmy@fujitsu.com)
-X-IronPort-AV: E=McAfee;i="6600,9927,10871"; a="124891110"
-X-IronPort-AV: E=Sophos;i="6.03,244,1694703600"; 
-   d="scan'208";a="124891110"
-Received: from unknown (HELO yto-r2.gw.nic.fujitsu.com) ([218.44.52.218])
-  by esa10.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Oct 2023 18:01:19 +0900
-Received: from yto-m4.gw.nic.fujitsu.com (yto-nat-yto-m4.gw.nic.fujitsu.com [192.168.83.67])
-	by yto-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 24494D618A
-	for <openembedded-devel@lists.openembedded.org>; Mon, 23 Oct 2023 18:01:17 +0900 (JST)
-Received: from aks-ab2.gw.nic.fujitsu.com (aks-ab2.gw.nic.fujitsu.com [192.51.207.12])
-	by yto-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 62BECD5040
-	for <openembedded-devel@lists.openembedded.org>; Mon, 23 Oct 2023 18:01:16 +0900 (JST)
-Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.52])
-	by aks-ab2.gw.nic.fujitsu.com (Postfix) with ESMTP id 57D2487287;
-	Mon, 23 Oct 2023 18:01:15 +0900 (JST)
-From: wangmy@fujitsu.com
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BC7FECDB474
+	for <webhook@archiver.kernel.org>; Mon, 23 Oct 2023 10:36:20 +0000 (UTC)
+Subject: Re: [meta-python][kirkstone][PATCH 1/1] python3-gevent: fix CVE-2023-41419
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-regex: upgrade 2023.8.8 -> 2023.10.3
-Date: Mon, 23 Oct 2023 17:00:57 +0800
-Message-Id: <1698051657-26394-1-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-X-TM-AS-GCONF: 00
-X-TM-AS-Product-Ver: IMSS-9.1.0.1408-9.0.0.1002-27952.006
-X-TM-AS-User-Approved-Sender: Yes
-X-TMASE-Version: IMSS-9.1.0.1408-9.0.1002-27952.006
-X-TMASE-Result: 10-0.854400-10.000000
-X-TMASE-MatchedRID: 6e3s/u+cBDSjz0nOeth/yUIIxwDaU5mrVBDQSDMig9EH8UzOewTxw+79
-	DJRUi35pTQ0JkPG287/mn3xyPJAJopGZilTi8ctSOwpfLMeBwRuuLG21Eb4T84Fum2PEjqt1o8W
-	MkQWv6iV3LAytsQR4e42j49Ftap9ExlblqLlYqXKGG1FWkFL1YZ0+G61rfyKcIehCCGvpoPsSWW
-	SwAbhMfJhNqbeJxqc00sL5iibbMDpbSTqy8WuFI3gW5nK8qqY55QOz92EzScj+v9v52ZIoWjoAf
-	389xF3XFSk9HhUZnw7OGIWnws4LoyHWPYzouJUy
-X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
+From: markku.degerholm@vaisala.com
+X-Originating-Location: Vantaa, Uusimaa, FI (193.143.230.131)
+X-Originating-Platform: Windows Chrome 118
+User-Agent: GROUPS.IO Web Poster
+MIME-Version: 1.0
+Date: Mon, 23 Oct 2023 03:36:17 -0700
+References: <20231006141349.887405-1-narpat.mali@windriver.com>
+In-Reply-To: <20231006141349.887405-1-narpat.mali@windriver.com>
+Message-ID: <6763.1698057377571807424@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="PyikDaH6rn3IYDAllc3u"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 23 Oct 2023 09:01:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105685
+ <openembedded-devel@lists.openembedded.org>; Mon, 23 Oct 2023 10:36:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105686
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+--PyikDaH6rn3IYDAllc3u
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Changelog:
- pdated to Unicode 15.1.0.
+Hi,
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
----
- .../{python3-regex_2023.8.8.bb => python3-regex_2023.10.3.bb}   | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-regex_2023.8.8.bb => python3-regex_2023.10.3.bb} (79%)
+Thanks for the CVE fix, however we have detected that is has caused a regre=
+ssion resulting in non-importable Python module `gevent.pywsgi`.
 
-diff --git a/meta-python/recipes-devtools/python/python3-regex_2023.8.8.bb b/meta-python/recipes-devtools/python/python3-regex_2023.10.3.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-regex_2023.8.8.bb
-rename to meta-python/recipes-devtools/python/python3-regex_2023.10.3.bb
-index 1676bab26a..c26d55f474 100644
---- a/meta-python/recipes-devtools/python/python3-regex_2023.8.8.bb
-+++ b/meta-python/recipes-devtools/python/python3-regex_2023.10.3.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=7b5751ddd6b643203c31ff873051d069"
- 
- inherit pypi setuptools3
- 
--SRC_URI[sha256sum] = "fcbdc5f2b0f1cd0f6a56cdb46fe41d2cce1e644e3b68832f3eeebc5fb0f7712e"
-+SRC_URI[sha256sum] = "3fef4f844d2290ee0ba57addcec17eec9e3df73f10a2748485dfd6a3a188cc0f"
- 
- RDEPENDS:${PN} += " \
- 	python3-stringold \
--- 
-2.34.1
+The regression is caused by this commit on `meta-openembedded`:
 
+6432fee6d python3-gevent: fix CVE-2023-41419
+
+The change is introduced here on the mailing list:
+
+https://lists.openembedded.org/g/openembedded-devel/message/105369?p=3D%2C%=
+2C%2C20%2C0%2C0%2C0%3A%3Acreated%2C0%2Cpython3-gevent%2C20%2C2%2C0%2C101798=
+168
+
+And brought to `kirkstone` release here:
+
+https://lists.openembedded.org/g/openembedded-devel/message/105626?p=3D%2C%=
+2C%2C20%2C0%2C0%2C0%3A%3Acreated%2C0%2Cpython3-gevent%2C20%2C2%2C0%2C102106=
+531
+
+When running on our embedded device, the symptoms are:
+
+Python 3.10.13 (main, Aug 24 2023, 12:59:26) [GCC 11.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import gevent.pywsgi
+Traceback (most recent call last):
+File "<stdin>", line 1, in <module>
+File "/usr/lib/python3.10/site-packages/gevent/pywsgi.py", line 1119
+except socket.error
+^
+SyntaxError: expected ':'
+
+This is because the patch states
+
++@@ -1000,14 +1110,28 @@ class WSGIHandler(object):
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0finally:
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0try:
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0self.wsgi_input._discard()
++-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 except (socket.er=
+ror, IOError):
++-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 # D=
+on't let exceptions during discarding
+++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 except _InvalidCl=
+ientInput:
+++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 # T=
+his one is deliberately raised to the outer
+++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 # s=
+cope, because, with the incoming stream in some bad state,
+++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 # w=
+e can't be sure we can synchronize and properly parse the next
+++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 # r=
+equest.
+++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 rai=
+se
+++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 except socket.err=
+or
+++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 # D=
+on't let socket exceptions during discarding
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0# input override any exception that may have been
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0# raised by the application, such as our own _InvalidClientInput.
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0# In the general case, these aren't even worth logging (see the comment
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0# just below)
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0pass
+
+which causes a Python syntax violation on line `except socket.error` due to=
+ a missing colon.
+
+Kind regards,
+Markku
+
+--PyikDaH6rn3IYDAllc3u
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div>Hi,</div>
+<div>&nbsp;</div>
+<div>Thanks for the CVE fix, however we have detected that is has caused a =
+regression resulting in non-importable Python module `gevent.pywsgi`.</div>
+<div>&nbsp;</div>
+<div>The regression is caused by this commit on `meta-openembedded`:</div>
+<div>&nbsp;</div>
+<div>&nbsp; &nbsp; 6432fee6d python3-gevent: fix CVE-2023-41419</div>
+<div>&nbsp;</div>
+<div>The change is introduced here on the mailing list:</div>
+<div>&nbsp; &nbsp;&nbsp;</div>
+<div>&nbsp; &nbsp; https://lists.openembedded.org/g/openembedded-devel/mess=
+age/105369?p=3D%2C%2C%2C20%2C0%2C0%2C0%3A%3Acreated%2C0%2Cpython3-gevent%2C=
+20%2C2%2C0%2C101798168</div>
+<div>&nbsp;</div>
+<div>And brought to `kirkstone` release here:</div>
+<div>&nbsp;</div>
+<div>&nbsp; &nbsp; https://lists.openembedded.org/g/openembedded-devel/mess=
+age/105626?p=3D%2C%2C%2C20%2C0%2C0%2C0%3A%3Acreated%2C0%2Cpython3-gevent%2C=
+20%2C2%2C0%2C102106531</div>
+<div>&nbsp; &nbsp;&nbsp;</div>
+<div>&nbsp; &nbsp;&nbsp;</div>
+<div>When running on our embedded device, the symptoms are:</div>
+<div>&nbsp;</div>
+<div>&nbsp; &nbsp; Python 3.10.13 (main, Aug 24 2023, 12:59:26) [GCC 11.4.0=
+] on linux</div>
+<div>&nbsp; &nbsp; Type "help", "copyright", "credits" or "license" for mor=
+e information.</div>
+<div>&nbsp; &nbsp; &gt;&gt;&gt; import gevent.pywsgi</div>
+<div>&nbsp; &nbsp; Traceback (most recent call last):</div>
+<div>&nbsp; &nbsp; &nbsp; File "&lt;stdin&gt;", line 1, in &lt;module&gt;</=
+div>
+<div>&nbsp; &nbsp; &nbsp; File "/usr/lib/python3.10/site-packages/gevent/py=
+wsgi.py", line 1119</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; except socket.error</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp;^</div>
+<div>&nbsp; &nbsp; SyntaxError: expected ':'</div>
+<div>&nbsp;</div>
+<div>This is because the patch states</div>
+<div>&nbsp;</div>
+<div>&nbsp; &nbsp; +@@ -1000,14 +1110,28 @@ class WSGIHandler(object):</div=
+>
+<div>&nbsp; &nbsp; +&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;finally=
+:</div>
+<div>&nbsp; &nbsp; +&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
+ &nbsp;try:</div>
+<div>&nbsp; &nbsp; +&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
+ &nbsp; &nbsp; &nbsp;self.wsgi_input._discard()</div>
+<div>&nbsp; &nbsp; +-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; except (socket.error, IOError):</div>
+<div>&nbsp; &nbsp; +-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; # Don't let exceptions during discarding</div>
+<div>&nbsp; &nbsp; ++&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; except _InvalidClientInput:</div>
+<div>&nbsp; &nbsp; ++&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; # This one is deliberately raised to the outer</div>
+<div>&nbsp; &nbsp; ++&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; # scope, because, with the incoming stream in some bad stat=
+e,</div>
+<div>&nbsp; &nbsp; ++&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; # we can't be sure we can synchronize and properly parse th=
+e next</div>
+<div>&nbsp; &nbsp; ++&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; # request.</div>
+<div>&nbsp; &nbsp; ++&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; raise</div>
+<div>&nbsp; &nbsp; ++&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; except socket.error</div>
+<div>&nbsp; &nbsp; ++&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; # Don't let socket exceptions during discarding</div>
+<div>&nbsp; &nbsp; +&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
+ &nbsp; &nbsp; &nbsp;# input override any exception that may have been</div=
+>
+<div>&nbsp; &nbsp; +&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
+ &nbsp; &nbsp; &nbsp;# raised by the application, such as our own _InvalidC=
+lientInput.</div>
+<div>&nbsp; &nbsp; +&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
+ &nbsp; &nbsp; &nbsp;# In the general case, these aren't even worth logging=
+ (see the comment</div>
+<div>&nbsp; &nbsp; +&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
+ &nbsp; &nbsp; &nbsp;# just below)</div>
+<div>&nbsp; &nbsp; +&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
+ &nbsp; &nbsp; &nbsp;pass</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>which causes a Python syntax violation on line `except socket.error` d=
+ue to a missing colon.</div>
+<div>&nbsp;</div>
+<div>Kind regards,&nbsp;</div>
+<div>&nbsp;Markku</div>
+<div>&nbsp;</div>
+
+--PyikDaH6rn3IYDAllc3u--
 
