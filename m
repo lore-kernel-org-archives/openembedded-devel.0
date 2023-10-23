@@ -1,117 +1,82 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C5EBCDB474
-	for <webhook@archiver.kernel.org>; Sun, 22 Oct 2023 20:10:16 +0000 (UTC)
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
- by mx.groups.io with SMTP id smtpd.web10.106242.1698005415223639578
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D5789C25B41
+	for <webhook@archiver.kernel.org>; Mon, 23 Oct 2023 08:13:09 +0000 (UTC)
+Received: from esa11.hc1455-7.c3s2.iphmx.com (esa11.hc1455-7.c3s2.iphmx.com [207.54.90.137])
+ by mx.groups.io with SMTP id smtpd.web11.116077.1698048787679154119
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 22 Oct 2023 13:10:15 -0700
+ Mon, 23 Oct 2023 01:13:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=DEnR6ivn;
- spf=pass (domain: gmail.com, ip: 209.85.221.50, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-32d895584f1so1807866f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 22 Oct 2023 13:10:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1698005414; x=1698610214; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=Mtthg6b/T3oiuTA9/Ac87UP97yD2XLm/FQgvq1+516E=;
-        b=DEnR6ivn55CPFg9AX00RyOigY56pnUPRYpLNMxey83klDT9R4AIBSaZ/yCtlE0iC/N
-         kpp0pP8YETGgKQQrxoDNM3EcFKHQlKKiKEANQ7Y9/tBgY+hEQRrQC85ZheKoYiVXGNZB
-         mdD+++sZWsF+FHJvbVJXwi86ql0jJOOQmRdbOhl/R/H6f6NFRJFsvAn2tBWNrEPL8Iks
-         ujNKCBMBOQx5I7xkPcAxJHMclSAkSHQNXX9xx26Fj0rXlsSqvThjG6QPSxjFTPkzvF6q
-         zf8KJNsLnAf3Byv7uyzVG7dNL61T5sdqXZkJzZXCIay7fsFuPlrzEeoVL7v/WJOy52YQ
-         1qvQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1698005414; x=1698610214;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Mtthg6b/T3oiuTA9/Ac87UP97yD2XLm/FQgvq1+516E=;
-        b=CxOy/yuv7Zn+lIS0wlMRJ6ovE5wV9wJvtLGbMUFymKry7ET7wbOEmcRF+RrUuAYoqL
-         xP8vfV2/ohWvclAARJBiba/+u7AdOpWfzVB3pXr0FNNsFxtdp5nTSDax//PiN6aLM9Xv
-         OQ5PIO1LZRwHbrWchHT3IzbuyB1PlD73sKXxH0Z6MEkUkaABbwE7jsRSp4ewuTHQAnr9
-         u8NL+glYElknwfPJ+2kGsLIzQ+zjdF9HjYbIkX8pKPsHENdHW4jWuQ9zo0mXtSkQyf2/
-         t+yAA0LOOsesLEJn23XtaZP+zHFqUwrJSrtZaR/BNkn+48Aswb2TjcHhOQYgU6ElS4vP
-         8F9Q==
-X-Gm-Message-State: AOJu0Yyz/k8LKFpnaSs2BafwIoaffPu4NV5kRkJmJobYrTa9X8wnN4Ml
-	uK5VnuLIo/St0ZqRjf6Y6svR4QbDhDGT//oEqds=
-X-Google-Smtp-Source: AGHT+IF4Tcxd4rcCa3ItoDIx47dpfqFbpiDA6hHrH0REzNalHzfdkw8Yro5MveHFnLOhZCDCY4vhSuZWYpK5nigdJDc=
-X-Received: by 2002:a5d:4cc2:0:b0:32d:c0c9:f661 with SMTP id
- c2-20020a5d4cc2000000b0032dc0c9f661mr4553554wrt.51.1698005413350; Sun, 22 Oct
- 2023 13:10:13 -0700 (PDT)
-MIME-Version: 1.0
-References: <17895B01A59EF33C.9230@lists.openembedded.org>
-In-Reply-To: <17895B01A59EF33C.9230@lists.openembedded.org>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sun, 22 Oct 2023 22:10:01 +0200
-Message-ID: <CA+chaQddWyNJNSFsVrcjpZASGc-17oQdwfRZO5s=DcXX0sQ+tQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][kirkstone][PATCH] packagegroup-meta-multimedia:
- restore x11 restriction for projucer
-To: martin.jansa@gmail.com, akuster808 <akuster808@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000007d51da060853b171"
+ dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 207.54.90.137, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10871"; a="116573364"
+X-IronPort-AV: E=Sophos;i="6.03,244,1694703600"; 
+   d="scan'208";a="116573364"
+Received: from unknown (HELO yto-r2.gw.nic.fujitsu.com) ([218.44.52.218])
+  by esa11.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Oct 2023 17:13:06 +0900
+Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
+	by yto-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 360ECD618B
+	for <openembedded-devel@lists.openembedded.org>; Mon, 23 Oct 2023 17:13:03 +0900 (JST)
+Received: from aks-ab1.gw.nic.fujitsu.com (aks-ab1.gw.nic.fujitsu.com [192.51.207.11])
+	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 799EBF80F
+	for <openembedded-devel@lists.openembedded.org>; Mon, 23 Oct 2023 17:13:02 +0900 (JST)
+Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.52])
+	by aks-ab1.gw.nic.fujitsu.com (Postfix) with ESMTP id 5FA082FC6ECB;
+	Mon, 23 Oct 2023 17:13:01 +0900 (JST)
+From: wangmy@fujitsu.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] adw-gtk3: upgrade 4.9 -> 5.1
+Date: Mon, 23 Oct 2023 16:12:48 +0800
+Message-Id: <1698048768-24147-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1408-9.0.0.1002-27952.006
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1408-9.0.1002-27952.006
+X-TMASE-Result: 10-2.825800-10.000000
+X-TMASE-MatchedRID: S9L8qTrmXfGjz0nOeth/yUIIxwDaU5mrTfK5j0EZbyshm837eIt7zb6p
+	xbTOjavy+7QcRaVoa8nGKIf6hBf7VaGGOyqBK41vEXjPIvKd74CC7C2rJeUToWFHVj+6F+rIa+2
+	jJ5e7tWCxfbhqGxLk+4Ay6p60ZV62To3UJuRLIoTdB/CxWTRRu+rAZ8KTspSzoHBF1/NqfSK+pv
+	ha3plW4yJFIlP+0B5/jYyMiMdisxtfERIxsXGnsHdJYRCYUrNNH0ZWQUC79hWU5A2N41YhwxyDa
+	XlbzbC7iB6mlDKe1V7S/yytHeCN9GXv4CQeNUk7G6qTOwq/n71+3BndfXUhXQ==
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 22 Oct 2023 20:10:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105629
+ <openembedded-devel@lists.openembedded.org>; Mon, 23 Oct 2023 08:13:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105630
 
---0000000000007d51da060853b171
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-On Fri, Sep 29, 2023 at 1:26=E2=80=AFPM Martin Jansa via lists.openembedded=
-.org
-<martin.jansa=3Dgmail.com@lists.openembedded.org> wrote:
+Changelog:
+=============
+Fix Headerbar Buttons Width error.
+Fix Geary sidebar looks broken error.
 
-> * it was removed in:
->
-> https://git.openembedded.org/meta-openembedded/commit/?id=3Ddeb11a823c32d=
-4090b3724a589641810e06df6bc
-> * but still needed as shown in world build without x11 in DISTRO_FEATURES=
-:
-> ERROR: Nothing RPROVIDES 'projucer' (but
-> /OE/build/luneos-nanbield/meta-openembedded/meta-multimedia/recipes-multi=
-media/packagegroups/
-> packagegroup-meta-multimedia.bb RDEPENDS on or otherwise requires it)
-> projucer was skipped: missing required distro feature 'x11' (not in
-> DISTRO_FEATURES)
-> NOTE: Runtime target 'projucer' is unbuildable, removing...
-> Missing or unbuildable dependency chain was: ['projucer']
->
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+---
+ .../gnome-themes/{adw-gtk3_4.9.bb => adw-gtk3_5.1.bb}           | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-gnome/gnome-themes/{adw-gtk3_4.9.bb => adw-gtk3_5.1.bb} (88%)
 
-gentle ping
+diff --git a/meta-oe/recipes-gnome/gnome-themes/adw-gtk3_4.9.bb b/meta-oe/recipes-gnome/gnome-themes/adw-gtk3_5.1.bb
+similarity index 88%
+rename from meta-oe/recipes-gnome/gnome-themes/adw-gtk3_4.9.bb
+rename to meta-oe/recipes-gnome/gnome-themes/adw-gtk3_5.1.bb
+index d7b7eef977..577acda59b 100644
+--- a/meta-oe/recipes-gnome/gnome-themes/adw-gtk3_4.9.bb
++++ b/meta-oe/recipes-gnome/gnome-themes/adw-gtk3_5.1.bb
+@@ -11,6 +11,6 @@ inherit meson
+ SRC_URI = "git://github.com/lassekongo83/adw-gtk3.git;protocol=https;branch=main"
+ 
+ S = "${WORKDIR}/git"
+-SRCREV = "08d3dfbde51d4cb0a3bb8e58a81aa61064857d89"
++SRCREV = "a3e1050341956fcae53b2b4403affcf2578a42f4"
+ 
+ FILES:${PN} = "${datadir}/themes"
+-- 
+2.34.1
 
---0000000000007d51da060853b171
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr">On Fri, Sep 29, 2023 at 1:26=E2=80=AFPM M=
-artin Jansa via <a href=3D"http://lists.openembedded.org">lists.openembedde=
-d.org</a> &lt;martin.jansa=3D<a href=3D"mailto:gmail.com@lists.openembedded=
-.org">gmail.com@lists.openembedded.org</a>&gt; wrote:<br></div><div class=
-=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px =
-0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">* it was=
- removed in:<br>
-=C2=A0 <a href=3D"https://git.openembedded.org/meta-openembedded/commit/?id=
-=3Ddeb11a823c32d4090b3724a589641810e06df6bc" rel=3D"noreferrer" target=3D"_=
-blank">https://git.openembedded.org/meta-openembedded/commit/?id=3Ddeb11a82=
-3c32d4090b3724a589641810e06df6bc</a><br>
-* but still needed as shown in world build without x11 in DISTRO_FEATURES:<=
-br>
-ERROR: Nothing RPROVIDES &#39;projucer&#39; (but /OE/build/luneos-nanbield/=
-meta-openembedded/meta-multimedia/recipes-multimedia/packagegroups/<a href=
-=3D"http://packagegroup-meta-multimedia.bb" rel=3D"noreferrer" target=3D"_b=
-lank">packagegroup-meta-multimedia.bb</a> RDEPENDS on or otherwise requires=
- it)<br>
-projucer was skipped: missing required distro feature &#39;x11&#39; (not in=
- DISTRO_FEATURES)<br>
-NOTE: Runtime target &#39;projucer&#39; is unbuildable, removing...<br>
-Missing or unbuildable dependency chain was: [&#39;projucer&#39;]<br></bloc=
-kquote><div><br></div><div>gentle ping=C2=A0</div></div></div>
-
---0000000000007d51da060853b171--
 
