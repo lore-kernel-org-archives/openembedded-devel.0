@@ -2,86 +2,75 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E69BBCDB474
-	for <webhook@archiver.kernel.org>; Mon, 23 Oct 2023 08:30:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C6240CDB474
+	for <webhook@archiver.kernel.org>; Mon, 23 Oct 2023 08:31:39 +0000 (UTC)
 Received: from esa8.hc1455-7.c3s2.iphmx.com (esa8.hc1455-7.c3s2.iphmx.com [139.138.61.253])
- by mx.groups.io with SMTP id smtpd.web10.115924.1698049853877712233
+ by mx.groups.io with SMTP id smtpd.web10.115939.1698049891698346273
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Oct 2023 01:30:54 -0700
+ Mon, 23 Oct 2023 01:31:32 -0700
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 139.138.61.253, mailfrom: wangmy@fujitsu.com)
-X-IronPort-AV: E=McAfee;i="6600,9927,10871"; a="125177396"
+X-IronPort-AV: E=McAfee;i="6600,9927,10871"; a="125177471"
 X-IronPort-AV: E=Sophos;i="6.03,244,1694703600"; 
-   d="scan'208";a="125177396"
-Received: from unknown (HELO yto-r1.gw.nic.fujitsu.com) ([218.44.52.217])
-  by esa8.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Oct 2023 17:30:51 +0900
-Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
-	by yto-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id 8E105D66C3
-	for <openembedded-devel@lists.openembedded.org>; Mon, 23 Oct 2023 17:30:49 +0900 (JST)
-Received: from aks-ab1.gw.nic.fujitsu.com (aks-ab1.gw.nic.fujitsu.com [192.51.207.11])
-	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id DD651D9682
-	for <openembedded-devel@lists.openembedded.org>; Mon, 23 Oct 2023 17:30:48 +0900 (JST)
+   d="scan'208";a="125177471"
+Received: from unknown (HELO yto-r4.gw.nic.fujitsu.com) ([218.44.52.220])
+  by esa8.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Oct 2023 17:31:29 +0900
+Received: from yto-m4.gw.nic.fujitsu.com (yto-nat-yto-m4.gw.nic.fujitsu.com [192.168.83.67])
+	by yto-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 54D09D3EA9
+	for <openembedded-devel@lists.openembedded.org>; Mon, 23 Oct 2023 17:31:27 +0900 (JST)
+Received: from aks-ab2.gw.nic.fujitsu.com (aks-ab2.gw.nic.fujitsu.com [192.51.207.12])
+	by yto-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 8F230D5076
+	for <openembedded-devel@lists.openembedded.org>; Mon, 23 Oct 2023 17:31:26 +0900 (JST)
 Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.52])
-	by aks-ab1.gw.nic.fujitsu.com (Postfix) with ESMTP id 977A62FC7F7E;
-	Mon, 23 Oct 2023 17:30:47 +0900 (JST)
+	by aks-ab2.gw.nic.fujitsu.com (Postfix) with ESMTP id 6DD9188225;
+	Mon, 23 Oct 2023 17:31:25 +0900 (JST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-bitarray: upgrade 2.8.1 -> 2.8.2
-Date: Mon, 23 Oct 2023 16:29:30 +0800
-Message-Id: <1698049770-24999-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-bitstruct: upgrade 8.17.0 -> 8.18.0
+Date: Mon, 23 Oct 2023 16:31:11 +0800
+Message-Id: <1698049871-25037-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1408-9.0.0.1002-27952.006
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1408-9.0.1002-27952.006
-X-TMASE-Result: 10--2.676500-10.000000
-X-TMASE-MatchedRID: n7p0zKhDeQSjz0nOeth/yUIIxwDaU5mrPsGG+kQsvKjq3cKabNWGAEJL
-	NSh4QSBdaFON7rVZ3jT9k/FBDAgpqNuV4eqNSZjfA9lly13c/gHVy4hHC3/gyLKw8Hx0EGitcqf
-	oMGP+CwQi+t+0AiFaYgB/8cibO8IYRY1tl9vG/AZv+ggm5QAi4QFA6pSxaDHmgW6bY8SOq3WjxY
-	yRBa/qJcFwgTvxipFajoczmuoPCq3cuolB0xUdeGwxmyol/Tze93dmykR615oL/Wbmf0r/tWvIH
-	1YuaERZ07WTwmfSZHpcFVLVCKvwP18B9MxLWhCLWhhrIZifgiwdJuEZuYbKVcUkrvIudlEZl07d
-	DrsiYvyCLhFTP3QRDAbYwClu/qh3
+X-TMASE-Result: 10-1.621100-10.000000
+X-TMASE-MatchedRID: 7cZymtcOvx2jz0nOeth/yQPZZctd3P4B1cuIRwt/4MiysPB8dBBorXKn
+	6DBj/gsEIvrftAIhWmIAf/HImzvCGEWNbZfbxvwGOwpfLMeBwRtV4BnlVId1nZsoi2XrUn/J8m+
+	hzBStantdY+ZoWiLImydET58jp62S3i00pvvignEXqRzgLHQHX5TiXERiY0wOyUTg34V9472uUN
+	JdkWndH0DRhvNTgabfqK78i+ra0SBipp91V869Omdid9XJqA7TS7+RMq/2CK6rA4c7UV2fQpvi2
+	PQO/FFQiz2ujrPVx9yEIU1NtMkm0Q==
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 23 Oct 2023 08:30:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105651
+ <openembedded-devel@lists.openembedded.org>; Mon, 23 Oct 2023 08:31:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105652
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Changelog:
-=============
- * update cibuildwheel to 2.16.1 in order to provide cp312 wheels on PyPI
- * improve error messages for masked assignment
- * simplify test collection
- * added 'pytest.ini' to allow running pytest with no additional arguments,
-   see #208
- * 'util.sc_encode()': avoid writing empty blocks at end of compressed
-   stream, ie. skip encoding when total population count is reached
-
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-bitarray_2.8.1.bb => python3-bitarray_2.8.2.bb}    | 2 +-
+ ...{python3-bitstruct_8.17.0.bb => python3-bitstruct_8.18.0.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-bitarray_2.8.1.bb => python3-bitarray_2.8.2.bb} (77%)
+ rename meta-python/recipes-devtools/python/{python3-bitstruct_8.17.0.bb => python3-bitstruct_8.18.0.bb} (79%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-bitarray_2.8.1.bb b/meta-python/recipes-devtools/python/python3-bitarray_2.8.2.bb
-similarity index 77%
-rename from meta-python/recipes-devtools/python/python3-bitarray_2.8.1.bb
-rename to meta-python/recipes-devtools/python/python3-bitarray_2.8.2.bb
-index cb94df5644..39d2b6a717 100644
---- a/meta-python/recipes-devtools/python/python3-bitarray_2.8.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-bitarray_2.8.2.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/ilanschnell/bitarray"
- LICENSE = "PSF-2.0"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=2ad702cdcd49e8d2ac01d7e7d0810d2d"
+diff --git a/meta-python/recipes-devtools/python/python3-bitstruct_8.17.0.bb b/meta-python/recipes-devtools/python/python3-bitstruct_8.18.0.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python3-bitstruct_8.17.0.bb
+rename to meta-python/recipes-devtools/python/python3-bitstruct_8.18.0.bb
+index d1d30cdb3c..ee1ecd66b1 100644
+--- a/meta-python/recipes-devtools/python/python3-bitstruct_8.17.0.bb
++++ b/meta-python/recipes-devtools/python/python3-bitstruct_8.18.0.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/eerimoq/bitstruct"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d9aa4ec07de78abae21c490c9ffe61bd"
  
--SRC_URI[sha256sum] = "e68ceef35a88625d16169550768fcc8d3894913e363c24ecbf6b8c07eb02c8f3"
-+SRC_URI[sha256sum] = "f90b2f44b5b23364d5fbade2c34652e15b1fcfe813c46f828e008f68a709160f"
+-SRC_URI[sha256sum] = "eb94b40e4218a23aa8f90406b836a9e6ed83e48b8d112ce3f96408463bd1b874"
++SRC_URI[sha256sum] = "91865b210a4bfa86817537c0d934fac97fe671717f08665dc134551cfed3be13"
  
- inherit setuptools3 pypi
+ PYPI_PACKAGE = "bitstruct"
  
 -- 
 2.34.1
