@@ -1,77 +1,209 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <richard.purdie@linuxfoundation.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D1D9C25B67
-	for <webhook@archiver.kernel.org>; Mon, 23 Oct 2023 23:53:25 +0000 (UTC)
-Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
- by mx.groups.io with SMTP id smtpd.web11.6908.1698105203684505101
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C890EC07545
+	for <webhook@archiver.kernel.org>; Tue, 24 Oct 2023 11:09:28 +0000 (UTC)
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+ by mx.groups.io with SMTP id smtpd.web11.15466.1698145766206669115
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Oct 2023 16:53:24 -0700
+ Tue, 24 Oct 2023 04:09:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: wangmy@fujitsu.com)
-X-IronPort-AV: E=McAfee;i="6600,9927,10872"; a="137287064"
-X-IronPort-AV: E=Sophos;i="6.03,246,1694703600"; 
-   d="scan'208";a="137287064"
-Received: from unknown (HELO oym-r3.gw.nic.fujitsu.com) ([210.162.30.91])
-  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Oct 2023 08:53:22 +0900
-Received: from oym-m1.gw.nic.fujitsu.com (oym-nat-oym-m1.gw.nic.fujitsu.com [192.168.87.58])
-	by oym-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 774A7CA1E6
-	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Oct 2023 08:53:19 +0900 (JST)
-Received: from aks-ab2.gw.nic.fujitsu.com (aks-ab2.gw.nic.fujitsu.com [192.51.207.12])
-	by oym-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id A9C6FD88A6
-	for <openembedded-devel@lists.openembedded.org>; Tue, 24 Oct 2023 08:53:18 +0900 (JST)
-Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.52])
-	by aks-ab2.gw.nic.fujitsu.com (Postfix) with ESMTP id 948BE86FD2;
-	Tue, 24 Oct 2023 08:53:17 +0900 (JST)
-From: wangmy@fujitsu.com
+ dkim=pass header.i=@linuxfoundation.org header.s=google header.b=PfkyLO+W;
+ spf=pass (domain: linuxfoundation.org, ip: 209.85.128.54, mailfrom: richard.purdie@linuxfoundation.org)
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-40806e4106dso25086155e9.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 24 Oct 2023 04:09:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linuxfoundation.org; s=google; t=1698145764; x=1698750564; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=3v/3YA5BTFOog9Z4duE+9vZyJinUFO5N2xTz66X3axY=;
+        b=PfkyLO+WObS2CDMQffGuST29bmzA9WpIm/bMlN5DNaiNflIXwBSrNOvws6YoHvOBbr
+         pV42u4bU85PH3U3UXw+FNzwKftp08Uf41AqaOjxvpjcQ4H8Uggskss6yJ/wF7zq6pUKl
+         226wXwKVYKB8l6+EYlojeJMkPzY08uh6Wlrpw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1698145764; x=1698750564;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=3v/3YA5BTFOog9Z4duE+9vZyJinUFO5N2xTz66X3axY=;
+        b=rSBfz9OrDC2i+kdYB8VgLeBvV9ayHrA+IF+AJL5GnSQY+BXuUoqaJdAb3bN+BqqGAd
+         kBCMaB/kixf7tcLKzKi+mTSReICQJLt2KZvLu3U0s6yfpDUBU85S/UMEbXBsk7kOqQBk
+         bZWmIJLq+DGCyf7FuO+hklvYTaZfF9lwaV9H36fF8ZE5f7IZVJHqQGsXXbTuQ8G3Mi3i
+         yjnnLysbdeiw/CgHLY+QiVStx7Ns3raP/Q9PMk/0HsXDhD1FGOU+ZJiH0s2SYWljOm/E
+         5nJY4UiLnifvv7FD4feoQHSYSd+WneWt6xuGKwgB3Ti2+th8Jaw5jTWJnzp/sJqBBgcQ
+         sIHw==
+X-Gm-Message-State: AOJu0Yz7f84SvcLG7BePNjflFGCT45/290u8rt0zOmBFoJGPt/ugMkNA
+	ZwWS4wpSqRaCWyoJOsf0rb/IKiIXmidZezNZpzA=
+X-Google-Smtp-Source: AGHT+IEcZgK0MK4GbXjOmqohQx2w7xkGf2aMMXAEuRzmsZZCiN8ExTlR/kQ2Qnyse5KqXDO7IA7JYg==
+X-Received: by 2002:a7b:c4d8:0:b0:408:36bb:5b0c with SMTP id g24-20020a7bc4d8000000b0040836bb5b0cmr13490936wmk.7.1698145764138;
+        Tue, 24 Oct 2023 04:09:24 -0700 (PDT)
+Received: from localhost.localdomain ([2001:8b0:aba:5f3c:ae1f:6bff:fe41:1692])
+        by smtp.gmail.com with ESMTPSA id z2-20020a05600c0a0200b004060f0a0fd5sm11784047wmp.13.2023.10.24.04.09.23
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 24 Oct 2023 04:09:23 -0700 (PDT)
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] zchunk: upgrade 1.3.1 -> 1.3.2
-Date: Tue, 24 Oct 2023 07:53:01 +0800
-Message-Id: <1698105181-32517-1-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-X-TM-AS-GCONF: 00
-X-TM-AS-Product-Ver: IMSS-9.1.0.1408-9.0.0.1002-27954.003
-X-TM-AS-User-Approved-Sender: Yes
-X-TMASE-Version: IMSS-9.1.0.1408-9.0.1002-27954.003
-X-TMASE-Result: 10-2.243400-10.000000
-X-TMASE-MatchedRID: 6e3s/u+cBDSjz0nOeth/yQPZZctd3P4Bchr4pBLGIvAH8UzOewTxw+z9
-	H+EUMUMlIvrftAIhWmJ6eYPYGCVgy3gcxJAgqZ0ZaDCzqDR7DPZqp573tpzEI8EguqiGeZ5Jo8W
-	MkQWv6iV3LAytsQR4e1cppCzPq+1UxlblqLlYqXJsZPLQOx2LRCG0pGJbF4c76dR24UwLhohwO5
-	g84v3Qp4KaCflsjuhxNEx4fKHnjNTOMGYuvCZhFc/MLcRRl2CJQDhYwtuvZgn+v9v52ZIoWjoAf
-	389xF3XFSk9HhUZnw7OGIWnws4LoyHWPYzouJUy
-X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
+Subject: [meta-python][PATCH] meta-python: Drop broken BBCLASSEXTEND variants
+Date: Tue, 24 Oct 2023 12:09:21 +0100
+Message-Id: <20231024110921.57789-1-richard.purdie@linuxfoundation.org>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 23 Oct 2023 23:53:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105715
+ <openembedded-devel@lists.openembedded.org>; Tue, 24 Oct 2023 11:09:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105716
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+The command "bitbake universe -c fetch" currently throws a ton of warnings
+as there are many 'impossible' dependencies.
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+In some cases these variants may never have worked and were just added by copy
+and paste of recipes. In some cases they once clearly did work but became
+broken somewhere along the way. Users may also be carrying local bbappend files
+which add further BBCLASSEXTEND.
+
+Having universe fetch work without warnings is desireable so clean up the broken
+variants. Anyone actually needing something dropped here can propose adding it
+and the correct functional dependencies back quite easily. This also then
+ensures we're not carrying or fixing things nobody uses.
+
+Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
 ---
- .../recipes-support/zchunk/{zchunk_1.3.1.bb => zchunk_1.3.2.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/zchunk/{zchunk_1.3.1.bb => zchunk_1.3.2.bb} (93%)
+ .../recipes-connectivity/python-thrift/python3-thrift_0.16.0.bb | 2 +-
+ .../recipes-devtools/python/python3-aiohttp-jinja2_1.5.1.bb     | 2 --
+ meta-python/recipes-devtools/python/python3-autobahn_23.6.2.bb  | 2 --
+ meta-python/recipes-devtools/python/python3-bandit_1.7.5.bb     | 2 --
+ meta-python/recipes-devtools/python/python3-can_4.2.2.bb        | 2 --
+ .../recipes-devtools/python/python3-covdefaults_2.3.0.bb        | 2 --
+ meta-python/recipes-devtools/python/python3-ninja_1.11.1.bb     | 1 -
+ meta-python/recipes-devtools/python/python3-pyudev_0.24.1.bb    | 2 --
+ .../python/python3-robotframework-seriallibrary_0.4.3.bb        | 2 --
+ meta-python/recipes-devtools/python/python3-snappy_0.6.1.bb     | 2 --
+ meta-python/recipes-devtools/python/python3-txaio_23.1.1.bb     | 2 --
+ meta-python/recipes-extended/pywbem/python3-pywbem_1.6.2.bb     | 2 --
+ 12 files changed, 1 insertion(+), 22 deletions(-)
 
-diff --git a/meta-oe/recipes-support/zchunk/zchunk_1.3.1.bb b/meta-oe/recipes-support/zchunk/zchunk_1.3.2.bb
-similarity index 93%
-rename from meta-oe/recipes-support/zchunk/zchunk_1.3.1.bb
-rename to meta-oe/recipes-support/zchunk/zchunk_1.3.2.bb
-index 2961e449f1..27ebd63949 100644
---- a/meta-oe/recipes-support/zchunk/zchunk_1.3.1.bb
-+++ b/meta-oe/recipes-support/zchunk/zchunk_1.3.2.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=daf6e68539f564601a5a5869c31e5242"
+diff --git a/meta-python/recipes-connectivity/python-thrift/python3-thrift_0.16.0.bb b/meta-python/recipes-connectivity/python-thrift/python3-thrift_0.16.0.bb
+index 9bb3053885..63065e00ba 100644
+--- a/meta-python/recipes-connectivity/python-thrift/python3-thrift_0.16.0.bb
++++ b/meta-python/recipes-connectivity/python-thrift/python3-thrift_0.16.0.bb
+@@ -17,4 +17,4 @@ RDEPENDS:${PN} += "\
+     python3-threading \
+ "
  
- SRC_URI = "git://github.com/zchunk/zchunk.git;protocol=https;branch=main"
+-BBCLASSEXTEND = "native nativesdk"
++BBCLASSEXTEND = "native"
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp-jinja2_1.5.1.bb b/meta-python/recipes-devtools/python/python3-aiohttp-jinja2_1.5.1.bb
+index 68cbb265f4..4c4ed3ffd9 100644
+--- a/meta-python/recipes-devtools/python/python3-aiohttp-jinja2_1.5.1.bb
++++ b/meta-python/recipes-devtools/python/python3-aiohttp-jinja2_1.5.1.bb
+@@ -11,5 +11,3 @@ RDEPENDS:${PN} += " \
+     ${PYTHON_PN}-jinja2 \
+     ${PYTHON_PN}-aiohttp \
+ "
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-autobahn_23.6.2.bb b/meta-python/recipes-devtools/python/python3-autobahn_23.6.2.bb
+index 54c8f23fc3..42a8e0e7b5 100644
+--- a/meta-python/recipes-devtools/python/python3-autobahn_23.6.2.bb
++++ b/meta-python/recipes-devtools/python/python3-autobahn_23.6.2.bb
+@@ -19,5 +19,3 @@ RDEPENDS:${PN} += " \
+     ${PYTHON_PN}-txaio \
+     ${PYTHON_PN}-six \
+ "
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-bandit_1.7.5.bb b/meta-python/recipes-devtools/python/python3-bandit_1.7.5.bb
+index bccdf284e5..ede7f92e8d 100644
+--- a/meta-python/recipes-devtools/python/python3-bandit_1.7.5.bb
++++ b/meta-python/recipes-devtools/python/python3-bandit_1.7.5.bb
+@@ -17,5 +17,3 @@ RDEPENDS:${PN} += "\
+         python3-six \
+         python3-stevedore \
+         "
+-
+-BBCLASSEXTEND = "native"
+diff --git a/meta-python/recipes-devtools/python/python3-can_4.2.2.bb b/meta-python/recipes-devtools/python/python3-can_4.2.2.bb
+index f3cfd17244..9ca926d66c 100644
+--- a/meta-python/recipes-devtools/python/python3-can_4.2.2.bb
++++ b/meta-python/recipes-devtools/python/python3-can_4.2.2.bb
+@@ -27,5 +27,3 @@ RDEPENDS:${PN} += " \
+     python3-typing-extensions \
+     python3-wrapt \
+ "
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-covdefaults_2.3.0.bb b/meta-python/recipes-devtools/python/python3-covdefaults_2.3.0.bb
+index b7709aa1ca..a0ef2af828 100644
+--- a/meta-python/recipes-devtools/python/python3-covdefaults_2.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-covdefaults_2.3.0.bb
+@@ -27,5 +27,3 @@ do_install_ptest() {
+         install -d ${D}${PTEST_PATH}
+         cp -rf ${S}/tests ${D}${PTEST_PATH}
+ }
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-ninja_1.11.1.bb b/meta-python/recipes-devtools/python/python3-ninja_1.11.1.bb
+index 3b9077f326..dd07968f03 100644
+--- a/meta-python/recipes-devtools/python/python3-ninja_1.11.1.bb
++++ b/meta-python/recipes-devtools/python/python3-ninja_1.11.1.bb
+@@ -22,4 +22,3 @@ RDEPENDS:${PN} = " \
+     python3-ninja-syntax \
+ "
  
--SRCREV = "b462b1587f7d3aa782689430e83e96c737748f33"
-+SRCREV = "bdd6d6fc150d53d89658bebbfa73a7bfd9a89cb4"
- S = "${WORKDIR}/git"
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-pyudev_0.24.1.bb b/meta-python/recipes-devtools/python/python3-pyudev_0.24.1.bb
+index 98817f9312..6fcf346bc4 100644
+--- a/meta-python/recipes-devtools/python/python3-pyudev_0.24.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pyudev_0.24.1.bb
+@@ -20,5 +20,3 @@ RDEPENDS:${PN} = "\
+     ${PYTHON_PN}-fcntl \
+     libudev \
+ "
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-robotframework-seriallibrary_0.4.3.bb b/meta-python/recipes-devtools/python/python3-robotframework-seriallibrary_0.4.3.bb
+index 4ad5c3601d..4c0bd7e3ec 100644
+--- a/meta-python/recipes-devtools/python/python3-robotframework-seriallibrary_0.4.3.bb
++++ b/meta-python/recipes-devtools/python/python3-robotframework-seriallibrary_0.4.3.bb
+@@ -13,5 +13,3 @@ RDEPENDS:${PN} += " \
+     ${PYTHON_PN}-pyserial \
+     ${PYTHON_PN}-robotframework \
+ "
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-snappy_0.6.1.bb b/meta-python/recipes-devtools/python/python3-snappy_0.6.1.bb
+index 8a30f7cb78..bd0979d0b4 100644
+--- a/meta-python/recipes-devtools/python/python3-snappy_0.6.1.bb
++++ b/meta-python/recipes-devtools/python/python3-snappy_0.6.1.bb
+@@ -11,5 +11,3 @@ inherit pypi setuptools3
+ PYPI_PACKAGE = "python-snappy"
  
- DEPENDS = "zstd"
+ RDEPENDS:${PN} += "snappy"
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-txaio_23.1.1.bb b/meta-python/recipes-devtools/python/python3-txaio_23.1.1.bb
+index 7559accf41..3b0562421b 100644
+--- a/meta-python/recipes-devtools/python/python3-txaio_23.1.1.bb
++++ b/meta-python/recipes-devtools/python/python3-txaio_23.1.1.bb
+@@ -10,5 +10,3 @@ inherit pypi setuptools3
+ RDEPENDS:${PN} += " \
+     ${PYTHON_PN}-twisted \
+ "
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-extended/pywbem/python3-pywbem_1.6.2.bb b/meta-python/recipes-extended/pywbem/python3-pywbem_1.6.2.bb
+index 01e4719ba4..f607de7799 100644
+--- a/meta-python/recipes-extended/pywbem/python3-pywbem_1.6.2.bb
++++ b/meta-python/recipes-extended/pywbem/python3-pywbem_1.6.2.bb
+@@ -49,5 +49,3 @@ ALTERNATIVE:${PN} = "mof_compiler"
+ ALTERNATIVE_TARGET[mof_compiler] = "${bindir}/mof_compiler"
+ 
+ ALTERNATIVE_PRIORITY = "60"
+-
+-BBCLASSEXTEND = "native"
 -- 
 2.34.1
 
