@@ -2,59 +2,59 @@ Return-Path: <richard.purdie@linuxfoundation.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C890EC07545
-	for <webhook@archiver.kernel.org>; Tue, 24 Oct 2023 11:09:28 +0000 (UTC)
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
- by mx.groups.io with SMTP id smtpd.web11.15466.1698145766206669115
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A691EC07545
+	for <webhook@archiver.kernel.org>; Tue, 24 Oct 2023 11:10:48 +0000 (UTC)
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
+ by mx.groups.io with SMTP id smtpd.web10.145271.1698145838233560192
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 Oct 2023 04:09:26 -0700
+ Tue, 24 Oct 2023 04:10:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linuxfoundation.org header.s=google header.b=PfkyLO+W;
- spf=pass (domain: linuxfoundation.org, ip: 209.85.128.54, mailfrom: richard.purdie@linuxfoundation.org)
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-40806e4106dso25086155e9.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 24 Oct 2023 04:09:25 -0700 (PDT)
+ dkim=pass header.i=@linuxfoundation.org header.s=google header.b=X65WYHCd;
+ spf=pass (domain: linuxfoundation.org, ip: 209.85.221.52, mailfrom: richard.purdie@linuxfoundation.org)
+Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-32ddfb38c02so3082945f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 24 Oct 2023 04:10:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linuxfoundation.org; s=google; t=1698145764; x=1698750564; darn=lists.openembedded.org;
+        d=linuxfoundation.org; s=google; t=1698145836; x=1698750636; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=3v/3YA5BTFOog9Z4duE+9vZyJinUFO5N2xTz66X3axY=;
-        b=PfkyLO+WObS2CDMQffGuST29bmzA9WpIm/bMlN5DNaiNflIXwBSrNOvws6YoHvOBbr
-         pV42u4bU85PH3U3UXw+FNzwKftp08Uf41AqaOjxvpjcQ4H8Uggskss6yJ/wF7zq6pUKl
-         226wXwKVYKB8l6+EYlojeJMkPzY08uh6Wlrpw=
+        bh=esztdnNTrQ4kW/+FOdD+dnNnnV856IrPZiHvuLGP8+k=;
+        b=X65WYHCdBu88QvAahnzyIlRyuACU/9VYGZ3XmWKNJ4mRrgpp4gp7dfqU752xuwIAN1
+         L6fD4J3OryPdTMHkbGRMC+sBLIuTWQqjF4aRpifpe8qwSqVYc6dwsQHt18OSeItaJFms
+         31dv+Qnag2t1iB9li0cDFMhUHlysCkL2zd1N0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1698145764; x=1698750564;
+        d=1e100.net; s=20230601; t=1698145836; x=1698750636;
         h=content-transfer-encoding:mime-version:message-id:date:subject:to
          :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=3v/3YA5BTFOog9Z4duE+9vZyJinUFO5N2xTz66X3axY=;
-        b=rSBfz9OrDC2i+kdYB8VgLeBvV9ayHrA+IF+AJL5GnSQY+BXuUoqaJdAb3bN+BqqGAd
-         kBCMaB/kixf7tcLKzKi+mTSReICQJLt2KZvLu3U0s6yfpDUBU85S/UMEbXBsk7kOqQBk
-         bZWmIJLq+DGCyf7FuO+hklvYTaZfF9lwaV9H36fF8ZE5f7IZVJHqQGsXXbTuQ8G3Mi3i
-         yjnnLysbdeiw/CgHLY+QiVStx7Ns3raP/Q9PMk/0HsXDhD1FGOU+ZJiH0s2SYWljOm/E
-         5nJY4UiLnifvv7FD4feoQHSYSd+WneWt6xuGKwgB3Ti2+th8Jaw5jTWJnzp/sJqBBgcQ
-         sIHw==
-X-Gm-Message-State: AOJu0Yz7f84SvcLG7BePNjflFGCT45/290u8rt0zOmBFoJGPt/ugMkNA
-	ZwWS4wpSqRaCWyoJOsf0rb/IKiIXmidZezNZpzA=
-X-Google-Smtp-Source: AGHT+IEcZgK0MK4GbXjOmqohQx2w7xkGf2aMMXAEuRzmsZZCiN8ExTlR/kQ2Qnyse5KqXDO7IA7JYg==
-X-Received: by 2002:a7b:c4d8:0:b0:408:36bb:5b0c with SMTP id g24-20020a7bc4d8000000b0040836bb5b0cmr13490936wmk.7.1698145764138;
-        Tue, 24 Oct 2023 04:09:24 -0700 (PDT)
+        bh=esztdnNTrQ4kW/+FOdD+dnNnnV856IrPZiHvuLGP8+k=;
+        b=fQm1KGvkA0fRrdLhIDvpoRJ5pZTYIqukfZwCUt79U620ldVylqmjFIWbP74eRkAAOJ
+         RRchh7mK38+T8ZgskUHxgz/+y2uIQEp1OKumEBGkEXXjFUkNa3A7PYeYHgn0ceP88iut
+         FMJVp0bAetfHLN2Zh7wh0nliVyg/6HoU1UMuP2R7PPdoXCz8il+8HGBLcUP6fclfQWLi
+         bjLgG9nbKeCh8izp8gJlwR/YMz1bd5fc3mFZx0WhOE1TUkQy7ImbKiOq/P1UEXp/Da9u
+         xGDLEmxEIZe+7wX18dGtr9AEevAocmjbNx4YsWFtjll77GhuZkFh3XbGzLzvc9yGz4z0
+         qsiw==
+X-Gm-Message-State: AOJu0YxXSmMXxbVfvnXoRcVCo3K0lLvUycvI3ok+yV1JiYAHfwbSHree
+	EBrTV+tSEWl5URhMImo3qpo3IWqaFIX4GkfsDds=
+X-Google-Smtp-Source: AGHT+IF14NSueoz4RdFjYBihWKbzkXxZbq6VWWHypLTUeHhdJ3954ufwIDILN4vJQSb5ITvj/EaMcw==
+X-Received: by 2002:adf:fe8a:0:b0:32d:a495:a9b7 with SMTP id l10-20020adffe8a000000b0032da495a9b7mr8692850wrr.61.1698145836319;
+        Tue, 24 Oct 2023 04:10:36 -0700 (PDT)
 Received: from localhost.localdomain ([2001:8b0:aba:5f3c:ae1f:6bff:fe41:1692])
-        by smtp.gmail.com with ESMTPSA id z2-20020a05600c0a0200b004060f0a0fd5sm11784047wmp.13.2023.10.24.04.09.23
+        by smtp.gmail.com with ESMTPSA id m5-20020a5d6a05000000b0031f3ad17b2csm9690044wru.52.2023.10.24.04.10.35
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 24 Oct 2023 04:09:23 -0700 (PDT)
+        Tue, 24 Oct 2023 04:10:36 -0700 (PDT)
 From: Richard Purdie <richard.purdie@linuxfoundation.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH] meta-python: Drop broken BBCLASSEXTEND variants
-Date: Tue, 24 Oct 2023 12:09:21 +0100
-Message-Id: <20231024110921.57789-1-richard.purdie@linuxfoundation.org>
+Subject: [meta-oe][PATCH] meta-oe: Drop broken BBCLASSEXTEND variants
+Date: Tue, 24 Oct 2023 12:10:35 +0100
+Message-Id: <20231024111035.57900-1-richard.purdie@linuxfoundation.org>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 24 Oct 2023 11:09:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105716
+ <openembedded-devel@lists.openembedded.org>; Tue, 24 Oct 2023 11:10:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105717
 
 The command "bitbake universe -c fetch" currently throws a ton of warnings
 as there are many 'impossible' dependencies.
@@ -71,139 +71,117 @@ ensures we're not carrying or fixing things nobody uses.
 
 Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
 ---
- .../recipes-connectivity/python-thrift/python3-thrift_0.16.0.bb | 2 +-
- .../recipes-devtools/python/python3-aiohttp-jinja2_1.5.1.bb     | 2 --
- meta-python/recipes-devtools/python/python3-autobahn_23.6.2.bb  | 2 --
- meta-python/recipes-devtools/python/python3-bandit_1.7.5.bb     | 2 --
- meta-python/recipes-devtools/python/python3-can_4.2.2.bb        | 2 --
- .../recipes-devtools/python/python3-covdefaults_2.3.0.bb        | 2 --
- meta-python/recipes-devtools/python/python3-ninja_1.11.1.bb     | 1 -
- meta-python/recipes-devtools/python/python3-pyudev_0.24.1.bb    | 2 --
- .../python/python3-robotframework-seriallibrary_0.4.3.bb        | 2 --
- meta-python/recipes-devtools/python/python3-snappy_0.6.1.bb     | 2 --
- meta-python/recipes-devtools/python/python3-txaio_23.1.1.bb     | 2 --
- meta-python/recipes-extended/pywbem/python3-pywbem_1.6.2.bb     | 2 --
- 12 files changed, 1 insertion(+), 22 deletions(-)
+ meta-oe/recipes-connectivity/ser2net/ser2net_4.3.13.bb        | 2 --
+ meta-oe/recipes-connectivity/zeromq/czmq_4.2.1.bb             | 2 --
+ meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb | 2 --
+ meta-oe/recipes-devtools/heaptrack/heaptrack_1.2.0.bb         | 2 +-
+ meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.0.bb           | 2 +-
+ meta-oe/recipes-graphics/xorg-app/xkbutils_1.0.5.bb           | 2 --
+ meta-oe/recipes-graphics/xorg-app/xsetroot_1.1.2.bb           | 1 -
+ meta-oe/recipes-multimedia/jack/jack_1.19.22.bb               | 1 -
+ meta-oe/recipes-printing/cups/cups-filters_1.28.17.bb         | 2 --
+ 9 files changed, 2 insertions(+), 14 deletions(-)
 
-diff --git a/meta-python/recipes-connectivity/python-thrift/python3-thrift_0.16.0.bb b/meta-python/recipes-connectivity/python-thrift/python3-thrift_0.16.0.bb
-index 9bb3053885..63065e00ba 100644
---- a/meta-python/recipes-connectivity/python-thrift/python3-thrift_0.16.0.bb
-+++ b/meta-python/recipes-connectivity/python-thrift/python3-thrift_0.16.0.bb
-@@ -17,4 +17,4 @@ RDEPENDS:${PN} += "\
-     python3-threading \
+diff --git a/meta-oe/recipes-connectivity/ser2net/ser2net_4.3.13.bb b/meta-oe/recipes-connectivity/ser2net/ser2net_4.3.13.bb
+index a4c244d447..47f2c26ce4 100644
+--- a/meta-oe/recipes-connectivity/ser2net/ser2net_4.3.13.bb
++++ b/meta-oe/recipes-connectivity/ser2net/ser2net_4.3.13.bb
+@@ -14,5 +14,3 @@ SRC_URI[sha256sum] = "ed8b98448d535111d9a593b067601a8b53e2874814d706b2421a9490a6
+ UPSTREAM_CHECK_URI = "http://sourceforge.net/projects/ser2net/files/ser2net"
+ 
+ inherit autotools pkgconfig
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-oe/recipes-connectivity/zeromq/czmq_4.2.1.bb b/meta-oe/recipes-connectivity/zeromq/czmq_4.2.1.bb
+index 86fde7ccfb..ce9d758d9f 100644
+--- a/meta-oe/recipes-connectivity/zeromq/czmq_4.2.1.bb
++++ b/meta-oe/recipes-connectivity/zeromq/czmq_4.2.1.bb
+@@ -30,8 +30,6 @@ PACKAGECONFIG[nss] = "-DCZMQ_WITH_NSS=ON,-DCZMQ_WITH_NSS=OFF,nss"
+ PACKAGECONFIG[systemd] = "-DCZMQ_WITH_SYSTEMD=ON,-DCZMQ_WITH_SYSTEMD=OFF,systemd"
+ PACKAGECONFIG[uuid] = "-DCZMQ_WITH_UUID=ON,-DCZMQ_WITH_UUID=OFF,util-linux"
+ 
+-BBCLASSEXTEND = "nativesdk"
+-
+ do_install:append() {
+         mkdir -p ${D}/${includedir}/${BPN}
+         mv ${D}/${includedir}/sha1.h ${D}/${includedir}/${BPN}/.
+diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
+index 0709019056..a5d614961a 100644
+--- a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
++++ b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
+@@ -42,6 +42,4 @@ RDEPENDS:${PN} += " \
+     dnf \
+     libnewt-python \
  "
+-DEPENDS:append:class-nativesdk = " file-replacement-nativesdk"
+-BBCLASSEXTEND = "nativesdk"
+ SKIP_RECIPE[dnf-plugin-tui] ?= "${@bb.utils.contains('PACKAGE_CLASSES', 'package_rpm', '', 'does not build correctly without package_rpm in PACKAGE_CLASSES', d)}"
+diff --git a/meta-oe/recipes-devtools/heaptrack/heaptrack_1.2.0.bb b/meta-oe/recipes-devtools/heaptrack/heaptrack_1.2.0.bb
+index 29937e26d0..be2c0f5394 100644
+--- a/meta-oe/recipes-devtools/heaptrack/heaptrack_1.2.0.bb
++++ b/meta-oe/recipes-devtools/heaptrack/heaptrack_1.2.0.bb
+@@ -29,4 +29,4 @@ EXTRA_OECMAKE += "-DHEAPTRACK_BUILD_GUI=OFF"
+ COMPATIBLE_HOST:riscv32 = "null"
+ COMPATIBLE_HOST:riscv64 = "null"
  
 -BBCLASSEXTEND = "native nativesdk"
 +BBCLASSEXTEND = "native"
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp-jinja2_1.5.1.bb b/meta-python/recipes-devtools/python/python3-aiohttp-jinja2_1.5.1.bb
-index 68cbb265f4..4c4ed3ffd9 100644
---- a/meta-python/recipes-devtools/python/python3-aiohttp-jinja2_1.5.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp-jinja2_1.5.1.bb
-@@ -11,5 +11,3 @@ RDEPENDS:${PN} += " \
-     ${PYTHON_PN}-jinja2 \
-     ${PYTHON_PN}-aiohttp \
- "
--
+diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.0.bb b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.0.bb
+index c71e535649..f2d74078e8 100644
+--- a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.0.bb
++++ b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.5.0.bb
+@@ -18,4 +18,4 @@ EXTRA_OECMAKE += "-DOPENJPEG_INSTALL_LIB_DIR=${@d.getVar('baselib').replace('/',
+ 
+ FILES:${PN} += "${libdir}/openjpeg*"
+ 
 -BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-autobahn_23.6.2.bb b/meta-python/recipes-devtools/python/python3-autobahn_23.6.2.bb
-index 54c8f23fc3..42a8e0e7b5 100644
---- a/meta-python/recipes-devtools/python/python3-autobahn_23.6.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-autobahn_23.6.2.bb
-@@ -19,5 +19,3 @@ RDEPENDS:${PN} += " \
-     ${PYTHON_PN}-txaio \
-     ${PYTHON_PN}-six \
- "
--
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-bandit_1.7.5.bb b/meta-python/recipes-devtools/python/python3-bandit_1.7.5.bb
-index bccdf284e5..ede7f92e8d 100644
---- a/meta-python/recipes-devtools/python/python3-bandit_1.7.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-bandit_1.7.5.bb
-@@ -17,5 +17,3 @@ RDEPENDS:${PN} += "\
-         python3-six \
-         python3-stevedore \
-         "
--
++BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-graphics/xorg-app/xkbutils_1.0.5.bb b/meta-oe/recipes-graphics/xorg-app/xkbutils_1.0.5.bb
+index a672ba5e5e..f078ad60eb 100644
+--- a/meta-oe/recipes-graphics/xorg-app/xkbutils_1.0.5.bb
++++ b/meta-oe/recipes-graphics/xorg-app/xkbutils_1.0.5.bb
+@@ -13,7 +13,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=64322fab5239f5c8d97cf6e0e14f1c62"
+ 
+ DEPENDS += "libxaw libxkbfile"
+ 
 -BBCLASSEXTEND = "native"
-diff --git a/meta-python/recipes-devtools/python/python3-can_4.2.2.bb b/meta-python/recipes-devtools/python/python3-can_4.2.2.bb
-index f3cfd17244..9ca926d66c 100644
---- a/meta-python/recipes-devtools/python/python3-can_4.2.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-can_4.2.2.bb
-@@ -27,5 +27,3 @@ RDEPENDS:${PN} += " \
-     python3-typing-extensions \
-     python3-wrapt \
- "
 -
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-covdefaults_2.3.0.bb b/meta-python/recipes-devtools/python/python3-covdefaults_2.3.0.bb
-index b7709aa1ca..a0ef2af828 100644
---- a/meta-python/recipes-devtools/python/python3-covdefaults_2.3.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-covdefaults_2.3.0.bb
-@@ -27,5 +27,3 @@ do_install_ptest() {
-         install -d ${D}${PTEST_PATH}
-         cp -rf ${S}/tests ${D}${PTEST_PATH}
- }
--
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-ninja_1.11.1.bb b/meta-python/recipes-devtools/python/python3-ninja_1.11.1.bb
-index 3b9077f326..dd07968f03 100644
---- a/meta-python/recipes-devtools/python/python3-ninja_1.11.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-ninja_1.11.1.bb
-@@ -22,4 +22,3 @@ RDEPENDS:${PN} = " \
-     python3-ninja-syntax \
- "
+ SRC_URI_EXT = "xz"
+ SRC_URI[sha256sum] = "f6a4a8e9c54582beb3787b1faa8168caab125c1fee0ca9cfa5b6c9c1df25eea4"
+diff --git a/meta-oe/recipes-graphics/xorg-app/xsetroot_1.1.2.bb b/meta-oe/recipes-graphics/xorg-app/xsetroot_1.1.2.bb
+index 30a1e089e3..a9a8acf05c 100644
+--- a/meta-oe/recipes-graphics/xorg-app/xsetroot_1.1.2.bb
++++ b/meta-oe/recipes-graphics/xorg-app/xsetroot_1.1.2.bb
+@@ -8,7 +8,6 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=6ea29dbee22324787c061f039e0529de"
  
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-pyudev_0.24.1.bb b/meta-python/recipes-devtools/python/python3-pyudev_0.24.1.bb
-index 98817f9312..6fcf346bc4 100644
---- a/meta-python/recipes-devtools/python/python3-pyudev_0.24.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyudev_0.24.1.bb
-@@ -20,5 +20,3 @@ RDEPENDS:${PN} = "\
-     ${PYTHON_PN}-fcntl \
-     libudev \
- "
--
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-robotframework-seriallibrary_0.4.3.bb b/meta-python/recipes-devtools/python/python3-robotframework-seriallibrary_0.4.3.bb
-index 4ad5c3601d..4c0bd7e3ec 100644
---- a/meta-python/recipes-devtools/python/python3-robotframework-seriallibrary_0.4.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-robotframework-seriallibrary_0.4.3.bb
-@@ -13,5 +13,3 @@ RDEPENDS:${PN} += " \
-     ${PYTHON_PN}-pyserial \
-     ${PYTHON_PN}-robotframework \
- "
--
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-snappy_0.6.1.bb b/meta-python/recipes-devtools/python/python3-snappy_0.6.1.bb
-index 8a30f7cb78..bd0979d0b4 100644
---- a/meta-python/recipes-devtools/python/python3-snappy_0.6.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-snappy_0.6.1.bb
-@@ -11,5 +11,3 @@ inherit pypi setuptools3
- PYPI_PACKAGE = "python-snappy"
- 
- RDEPENDS:${PN} += "snappy"
--
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-txaio_23.1.1.bb b/meta-python/recipes-devtools/python/python3-txaio_23.1.1.bb
-index 7559accf41..3b0562421b 100644
---- a/meta-python/recipes-devtools/python/python3-txaio_23.1.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-txaio_23.1.1.bb
-@@ -10,5 +10,3 @@ inherit pypi setuptools3
- RDEPENDS:${PN} += " \
-     ${PYTHON_PN}-twisted \
- "
--
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-extended/pywbem/python3-pywbem_1.6.2.bb b/meta-python/recipes-extended/pywbem/python3-pywbem_1.6.2.bb
-index 01e4719ba4..f607de7799 100644
---- a/meta-python/recipes-extended/pywbem/python3-pywbem_1.6.2.bb
-+++ b/meta-python/recipes-extended/pywbem/python3-pywbem_1.6.2.bb
-@@ -49,5 +49,3 @@ ALTERNATIVE:${PN} = "mof_compiler"
- ALTERNATIVE_TARGET[mof_compiler] = "${bindir}/mof_compiler"
- 
- ALTERNATIVE_PRIORITY = "60"
--
+ DEPENDS += "xbitmaps libxcursor"
 -BBCLASSEXTEND = "native"
+ 
+ SRC_URI[md5sum] = "5fe769c8777a6e873ed1305e4ce2c353"
+ SRC_URI[sha256sum] = "10c442ba23591fb5470cea477a0aa5f679371f4f879c8387a1d9d05637ae417c"
+diff --git a/meta-oe/recipes-multimedia/jack/jack_1.19.22.bb b/meta-oe/recipes-multimedia/jack/jack_1.19.22.bb
+index 104b946c68..ef9936daba 100644
+--- a/meta-oe/recipes-multimedia/jack/jack_1.19.22.bb
++++ b/meta-oe/recipes-multimedia/jack/jack_1.19.22.bb
+@@ -50,4 +50,3 @@ FILES:jack-utils = "${bindir}/*"
+ 
+ FILES:${PN}-doc += " ${datadir}/jack-audio-connection-kit/reference/html/*"
+ 
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-oe/recipes-printing/cups/cups-filters_1.28.17.bb b/meta-oe/recipes-printing/cups/cups-filters_1.28.17.bb
+index fd82bb39c2..01c29d2c97 100644
+--- a/meta-oe/recipes-printing/cups/cups-filters_1.28.17.bb
++++ b/meta-oe/recipes-printing/cups/cups-filters_1.28.17.bb
+@@ -30,8 +30,6 @@ EXTRA_OECONF:class-native += " --with-pdftops=pdftops \
+                                     --disable-ldap \
+                                     --with-png --without-jpeg --without-tiff"
+ 
+-BBCLASSEXTEND = "native"
+-
+ PACKAGECONFIG[jpeg] = "--with-jpeg,--without-jpeg,jpeg"
+ PACKAGECONFIG[png] = "--with-png,--without-png,libpng"
+ PACKAGECONFIG[tiff] = "--with-tiff,--without-tiff,tiff"
 -- 
 2.34.1
 
