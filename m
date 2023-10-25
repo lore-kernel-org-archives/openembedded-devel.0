@@ -1,377 +1,197 @@
-Return-Path: <Sana.Kazi@kpit.com>
+Return-Path: <joerg.sommer@navimatix.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1F6D3C25B47
-	for <webhook@archiver.kernel.org>; Wed, 25 Oct 2023 08:35:47 +0000 (UTC)
-Received: from IND01-MAX-obe.outbound.protection.outlook.com (IND01-MAX-obe.outbound.protection.outlook.com [40.107.222.68])
- by mx.groups.io with SMTP id smtpd.web11.39151.1698222946023525055
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 422C4C25B47
+	for <webhook@archiver.kernel.org>; Wed, 25 Oct 2023 08:57:17 +0000 (UTC)
+Received: from EUR02-DB5-obe.outbound.protection.outlook.com (EUR02-DB5-obe.outbound.protection.outlook.com [40.107.249.53])
+ by mx.groups.io with SMTP id smtpd.web10.169177.1698224230583794739
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Oct 2023 01:35:46 -0700
+ Wed, 25 Oct 2023 01:57:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@kpit.com header.s=selector1 header.b=dym8OGkq;
- spf=pass (domain: kpit.com, ip: 40.107.222.68, mailfrom: sana.kazi@kpit.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@navimatix.de header.s=selector1 header.b=DBoSMIeu;
+ spf=pass (domain: navimatix.de, ip: 40.107.249.53, mailfrom: joerg.sommer@navimatix.de)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=iIzEmDwLXAfLlKeIej1dHNrA1oz5pF+0A16nwnbdg/GM6xbJNKZwqwbDwPyB/LhvH6A+YRrNtUB847xqs8nQVQA7OuWkDZ9/sFwcXyo15QfWkrwbWsZzuSpxFCyiuXPiDd1mvQh3T1FYq8YoVrpXQSqb8mib92FGXEpVGAgitkkFc93/NSOEk3ur8wz2MyG1SeZ4PPsPbhU6rEXijsMzqPCtzsRpFYc9QLbssCRWaO9XtxRVzHtXJCy9Eea4lWCEuserfdcrE//nttdMENTDVioHkEdXFvc9uZnzL59ytYByLGwjhXCvy+a5iw45fOZofFkwlDGrjPIdsIi9oih2xA==
+ b=AjOIi1bt1y85uwH0onncQGZ229Ixue3pksvSRPaW1FG4jkt7NdYYPVJYTF5xmmH4cEbbrHSfYKyBEzw3+zRSR3j0FQeXXzQ15cs4cvl5A7G8uhgwbPW7DcWLhNlQvg1gCdI0nXw5E5p3JBBmSGKupDbuAVbdf2GSc2nqiIbDlkvljzy6/8UaY+KZWMiX5l6uUwsED0wn3t2Gej10GwooVPEwP3L5LwCJOTc2LlwQ2on/c17Z62NzE7YmyElZPbG297YzIoqFieUjp/bdgwhNH7BVVWRLk4PapueguP8NnEDsllT7ddFQfxL+rIz14z69S4/4gDmy6D1GynaimlyYyA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Xt6abx3g/I88496FWYplrNNVlI2PLjutGp69V+xHpwM=;
- b=e3f0WuDz3JTM+dWmZAu82cOoq0pkCxc54dCfN5/9BcHq5kvThulcC4bKH2CmKmWnIJ5zSUn8SJ0gwaxMRcfmryHHwav247TfN8c3/S6/V13k7KQvCiRs/hrYg8Ny6jFQL9aTizC0geBKwEddFcPlIwouIkKmUllBH+J3zP7MHBEkhg5MnqbjcatD7eUBuNn/BzVPeXLGV9Urb1CxP0d4wkMNWBZ+fkIXC+4KjKHAQL2OB/FFBJA4OfqG4dPfkZ+cwPQ9Zc5SNLqmWuCg5M/GTTpMF+VhhJCwfkP6fXK2gxTYrk1Gu4X73/Hv0ZXFmGskZUtuR3J9oVoDOW6PSF3eCg==
+ bh=xLvrH+OLGbAdGJtY8Or79ALT+OD6LOHmWlOyaWq73ZY=;
+ b=PzjP1UQolGlk4P4c8l2PP2Hub7mj2ZPsET/Q3KHo/Mq7fWs1GIdmhV7OZIJ74aVVtfkhr0WSMlZxct3RJ+AmL9sq8uZ+pVuepiTFlill9xLl/QoGqxqNTaHV8BvkYmb/2D0tbMx5lYHR+zOFBc1gKUpE23ja8ffXQdwHxv8h/tNNznVp1MOEKMwptjCgum8uC9cV6aRR1LtqjpONQWwcOee0V8IEOiK1mwNEkteyXjWxwPiYcPMOE2WIy04dMiShgyzaZzjWmcTlXabf2UwYJ/j5yhg34uB5Gur9NgVsVLzzBFnnSRncC1zK5H9jLZ5l2m2uglctqkXoVubpy9itoA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=kpit.com; dmarc=pass action=none header.from=kpit.com;
- dkim=pass header.d=kpit.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kpit.com; s=selector1;
+ smtp.mailfrom=navimatix.de; dmarc=pass action=none header.from=navimatix.de;
+ dkim=pass header.d=navimatix.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=navimatix.de;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Xt6abx3g/I88496FWYplrNNVlI2PLjutGp69V+xHpwM=;
- b=dym8OGkq9b8ZPKywUMgTVUhqKYCF4TeSQ8GJfUwbAFizW+4akX9ZNJJw0Wd8/cHRIZXvWiKUaerBIQ85FdnunBJU1PUNPXf67ofJ5AR6EZvf6u7ajMxDuv7eDy2a3qDvzSA6cP2Q2FD/u3lXFzVgxWAa7S6arZairS3NzmTZfgw=
-Received: from PN3PR01MB7710.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01:9f::7)
- by PN0PR01MB9098.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01:161::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6907.31; Wed, 25 Oct
- 2023 08:35:39 +0000
-Received: from PN3PR01MB7710.INDPRD01.PROD.OUTLOOK.COM
- ([fe80::b515:8b24:83ab:9875]) by PN3PR01MB7710.INDPRD01.PROD.OUTLOOK.COM
- ([fe80::b515:8b24:83ab:9875%5]) with mapi id 15.20.6907.025; Wed, 25 Oct 2023
- 08:35:39 +0000
-From: Sana Kazi <Sana.Kazi@kpit.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, "sanakazisk19@gmail.com"
-	<sanakazisk19@gmail.com>
-Subject: Re: [oe] [meta-oe][kirkstone][PATCH] ntfs-3g-ntfsprogs: Upgrade
- 2022.5.17 to 2022.10.3
-Thread-Topic: [oe] [meta-oe][kirkstone][PATCH] ntfs-3g-ntfsprogs: Upgrade
- 2022.5.17 to 2022.10.3
-Thread-Index: AQHZ4VibNKmIoggQ1kKiyU9ekhyG17Bad1XE
-Date: Wed, 25 Oct 2023 08:35:38 +0000
-Message-ID: 
- <PN3PR01MB7710D98F880C48A928BFC25499DEA@PN3PR01MB7710.INDPRD01.PROD.OUTLOOK.COM>
-References: <20230907065617.2172750-1-sanakazisk19@gmail.com>
-In-Reply-To: <20230907065617.2172750-1-sanakazisk19@gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=kpit.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PN3PR01MB7710:EE_|PN0PR01MB9098:EE_
-x-ms-office365-filtering-correlation-id: e1766d78-1be6-4be1-80d8-08dbd5355e00
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- XH/aZXXHTxjrbTOFir8xaL06qn5IpN+oolecsmI9wF8nvEg/1eQCGBKqCui3P3yRHW0eMq9u2IfnViB5XDEiISRXtdgWBMaTIOz3Jqozi1eWMV0F2UAU5gdQ2bA1B8FAXP/OuoIHcvZuyG4x5W3vnJIsFuZ2nqJ0Mu8XOoKdHWJokPDpnzPWI4YAZlV/j4HupVVGpkRzz8bpZsW7BzF/p9EgYAFLJu7vQyZKT1aS6d2a3H/7cAbk+B29Om+4KBXuIEGBspduq9hUmcgQRWUzsizirUOUOxyYrMvm2bORnxe0+0OgXdkgZz4tKu2LLbIRhBeMkkc91uleom/CGe4MFd0pBw/DocyBBMBRkvaKqCI3kpm9clE5W6q3+crBcsUpdbQYY8iVeG2HdMkLM79ePkSsSksM1k04wAH8RDChyXZYVhGL1iZe7X/lB7CPGRV8DYVvkKUrQgynhZH2hnUELsxpBztw4LuQ04H/De8ApV86tICun00Whfp4s6YVky7JHNpdsnooAMRmCKdYj81zhJ1Mmc5Wsh193gU96Gc36kgv2qDpdwUVzQEs9zLey2r5jQwZEWpJd6vfyqUJAY2pjjQaGnksZ0GFINUV9kL+rx8=
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN3PR01MB7710.INDPRD01.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230031)(136003)(396003)(376002)(346002)(39860400002)(366004)(230922051799003)(1800799009)(451199024)(64100799003)(186009)(76116006)(52536014)(64756008)(2906002)(86362001)(166002)(66476007)(66946007)(38100700002)(316002)(66446008)(122000001)(6506007)(478600001)(7696005)(71200400001)(1015004)(55016003)(45080400002)(9686003)(66574015)(83380400001)(66556008)(110136005)(8676002)(5660300002)(41300700001)(33656002)(8936002)(38070700009)(19627405001);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?iso-8859-1?Q?8YUDavKQPNA3JuBUz4pwz0G5nBYA3WxPB9XcGeAptpN35jW28EPQQeJGOP?=
- =?iso-8859-1?Q?wfm/f5NklIOqcOXgfqoeZgSQBbIl6o1TYH1QXBKxeqw6irJOGXJbm+Y8N/?=
- =?iso-8859-1?Q?WgPs4vgPCj+Ew4XjV05rqb0DLIiwx7pYS1Ky3XkYcEA9iwmGLxnE2Kv5uP?=
- =?iso-8859-1?Q?UsXN+M9KYOl4KMP2+e0p0KWieLSFgE4vAA9X7ryv68C8RI3pIZwSc+PBMB?=
- =?iso-8859-1?Q?HKmxmG3/ChMN2rmZS/OfoJdQqrpjsXtv6Xs55g1H9A9LdEIwM7z7wi5hMs?=
- =?iso-8859-1?Q?KW57kiAiYdSpVdWpxxBq1c1dF0m3Yx97vvhRc0sTFz/vg2vvoXZ2ySUjh8?=
- =?iso-8859-1?Q?L3EunKhQm6C5U1zjlWBABtKvomTbV4m9BMas8rwktqB12B8J1gGwnIeklC?=
- =?iso-8859-1?Q?u9SdWU+ggWYdYx9NxW/kcOk2TD9NU8ElBeuSBL7qFiY611zuxNQri/KQFa?=
- =?iso-8859-1?Q?0FlUJ8ljFZANAwZb7rmRRJBE2nYlPP/hgrN90XXihRItTmdZXXii+2tWNx?=
- =?iso-8859-1?Q?uPdY/xPYYNkG93Xe4LI2mYuKw2SP0Gm13CFWUMz4NclIaBF0TBBsnmxo8e?=
- =?iso-8859-1?Q?21LqrdCv733USS6Q8aqRLHL7JVfaHtWDkh/85wI+cmLuxvNrEJgE90SEju?=
- =?iso-8859-1?Q?CqX/uPfDGUrWx0Eo3DK0jPeBGZdwqbhGCZJ2UUu3uGbAl3WCt9mRCHzaeu?=
- =?iso-8859-1?Q?XhyXOAKq+b/c6H49aB6awpyMz9CWCkJS7dT+GaOOBEFvyO9byGA49sXOJg?=
- =?iso-8859-1?Q?YJTFGnmBnVUgKXr8ckFeFhKl+ck5Xw/8PZ48sXPnhxeYCzHaHSGJyRIRAj?=
- =?iso-8859-1?Q?Oj2mYxP4oER6Mw4U5GcMq0NtP4rF0Y1ANv1HfXxyi/2+rweueS/6HO65Tz?=
- =?iso-8859-1?Q?dO1MWoweEXI0AbdinXjm/1+2+7tfEnetO9Ely0opZLUeMpQ4ERoUxDRirl?=
- =?iso-8859-1?Q?wzLUP9LLNhJSQWfCBU1g0qyzdfSxMugF4+dZtmyT3rIjtQV3nJjibpF0K1?=
- =?iso-8859-1?Q?No8KlVL3EOSUIzjoYMZdzGtZtESTbHm7Kwhn1NszsB2RcqCzvwT/luzbdB?=
- =?iso-8859-1?Q?E9K+KE9rVabkYYTJ3pWtU0PQ68M0mnJfl3aHrSk3zhHPDweTZHrGhijozV?=
- =?iso-8859-1?Q?N/9lp81W4tnYp0l2Y5hZqoFmjti8mJgwmO9rRE0C8Sk9g6klIqPOYz8H/h?=
- =?iso-8859-1?Q?SiZSI6/mcP4jsbSow0GULNsUy4we+TxvlQkX4hKSc9WFJE47mrqsiHc1/5?=
- =?iso-8859-1?Q?TUT1/KYvBAtifTNyOHqM+FO6J0vMtkvhHKpkJ4eu3taFe8b7/LGXbX+Rk/?=
- =?iso-8859-1?Q?oO8pgUvoGdmZZA1XcDlR9mfFpiHFfOjbzrun6VzZkVPUjS2CA32z07cTWG?=
- =?iso-8859-1?Q?xXzwaJgx8CNLMakYAGWCXBFbQx42mz178IY3JMTMqs6TRtrKcTMr0y6O6E?=
- =?iso-8859-1?Q?5xckDJlY6Hf4t/fWrIpYj/gb6gPQK2OgPftdtPtGq+HtfJLr/zo+/r/Fzu?=
- =?iso-8859-1?Q?F0lQZInb/ALtgOA/zU+JeOTF4XwMLWg/1gfNG7bgBrMsZ82OhfeMExB42x?=
- =?iso-8859-1?Q?WcQaKZWfz1PPJjIiURGKfeUt3G+CO7FCGL4zeGaKh4iwDFdfh4UAwIRSga?=
- =?iso-8859-1?Q?pW6WoEC8zeNrAYSrsXgk+NLAvSm6NCRJh5NZ7v+uuhEpKCQLSGelfMLnIE?=
- =?iso-8859-1?Q?xiwUC9dRIHNOIdMZU+Q=3D?=
-Content-Type: multipart/alternative;
-	boundary="_000_PN3PR01MB7710D98F880C48A928BFC25499DEAPN3PR01MB7710INDP_"
+ bh=xLvrH+OLGbAdGJtY8Or79ALT+OD6LOHmWlOyaWq73ZY=;
+ b=DBoSMIeuKhkrsUAs31qm+BdCgwu5z7HYqr0rojb/OOeK4vbdGoPNTOkvirWVXSzYTbe6yzSz3bpuc2qoCg14LqQjc8rLL66jqe6A/afTL9vQBZIO5tfb27jV6zmrLkiZBq50gbMdmyh5H4fHOiBAtx2NQme1t2+DeqFS4LwvBDs=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=navimatix.de;
+Received: from VI1PR0102MB3136.eurprd01.prod.exchangelabs.com
+ (2603:10a6:803:5::26) by PAXPR01MB9316.eurprd01.prod.exchangelabs.com
+ (2603:10a6:102:2c0::9) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6933.19; Wed, 25 Oct
+ 2023 08:57:06 +0000
+Received: from VI1PR0102MB3136.eurprd01.prod.exchangelabs.com
+ ([fe80::e2d5:b5c9:16e3:1417]) by
+ VI1PR0102MB3136.eurprd01.prod.exchangelabs.com
+ ([fe80::e2d5:b5c9:16e3:1417%3]) with mapi id 15.20.6907.032; Wed, 25 Oct 2023
+ 08:57:05 +0000
+Message-ID: <d9ff922b-383a-4cec-b206-84d86987f4f8@navimatix.de>
+Date: Wed, 25 Oct 2023 10:57:04 +0200
+User-Agent: Mozilla Thunderbird
+To: openembedded-devel@lists.openembedded.org
+Content-Language: en-US, de-DE
+From: =?UTF-8?Q?J=C3=B6rg_Sommer?= <joerg.sommer@navimatix.de>
+Subject: openssl-native.rm_work runs before kernel-module.install -> no
+ signature
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-ClientProxiedBy: BE1P281CA0025.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:b10:15::6) To VI1PR0102MB3136.eurprd01.prod.exchangelabs.com
+ (2603:10a6:803:5::26)
 MIME-Version: 1.0
-X-OriginatorOrg: kpit.com
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: VI1PR0102MB3136:EE_|PAXPR01MB9316:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9ef01d95-5b15-426c-a205-08dbd5385cef
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	TpITqthv/IXc7LnETsXbGrQ0fDzWcnJpj+lE96H/yMDH9xvhnfqepzU+Ha4GVjIiQJVNakzU6ezJrHqreCGJBZ88j9UxYAr4K/nRsQoGQ53ihaL2gqSTLrdtIL/8w7D93fRzmtnu1dOA1ljwGq4PTdGAsdWy7JwqBvT4tg4DBoaUmQh8oPvo99k/Elvsn3hcW+bqLTqKTXSKGxpV6BUzNkvBP/5R8CUR8eeK+BTDDxn2GxMMQ0lFPrApH2Fvh/x3UBl/Di5PtwQFNP3gwUv5UD8JmlKdmQX+JooGI+OG1O0Vs10+1xZF/pAhZ9UjoVUaFhyLgQMqZCtnP2j6Tqq/Fr/Li6ByDDCG5fK3+lJ/z0ASDykA+/G3uVGkrHjh6mmCeQ56PoVdJlwQ8nyA8Fykq1MTdn21j11p5zWHHPoz83wD6dt5nrqbiEtTJQnSQMYJdCYU/kFPyeEtMatAdryrtn3PZyz/pm2zwt4Qst3AgDiVNm92JcX/RHt6zJnHa+J8W7/9cWME/amoXp1x2u6zC7CtfI9Hw81IQqpZs2UzMGULL7eGzOLW9kDuILU5M5+s9SjGm3vjW2KuROV6Vxw+9OS9kzcWFkjASe/FPUm6jNU=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR0102MB3136.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230031)(39840400004)(396003)(366004)(376002)(346002)(136003)(230922051799003)(186009)(1800799009)(64100799003)(451199024)(41300700001)(6506007)(478600001)(2616005)(6512007)(66556008)(66476007)(66946007)(36756003)(6916009)(316002)(31696002)(6486002)(966005)(86362001)(66574015)(26005)(83380400001)(38100700002)(8676002)(8936002)(5660300002)(31686004)(2906002)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?00sd6207hmRlEQHSnoXGWXzYQ9jTGxEZ4Z14wmKK3m+IVDOGpbWxjK6QF9jd?=
+ =?us-ascii?Q?lBBsNtzFXM/nrMJBvKONbp9FnL6Bz/qfzYUnpk86CwuhGWQx2WKIBtSf1b5c?=
+ =?us-ascii?Q?6ZdIaBLrTja1S709goFgQMjB0XiIho7I5rd6yXdVAAeqMdET93j6AfsXrYSD?=
+ =?us-ascii?Q?3cCy366dAPrdPMZMCE/i9owvHHPX7cgBaOHOluX0MIcHqfeGGjVi5smXHzju?=
+ =?us-ascii?Q?gfRRr3ijMVSPHOsWwnbUb7ii1eQSm9afnGF6YcJ8qFcnEgmRa3ETBAkfsYqi?=
+ =?us-ascii?Q?EauJUBEGcXzP/4ySQFVtnl739snE8TiCbWFf/hNVdoViTdQhgqVkwZKbDmen?=
+ =?us-ascii?Q?uFYJK3fieRtiUmy54ROsQGzwSpGxilVBI+/6lAxX0/pSbnWUCGCFPqzhjfCH?=
+ =?us-ascii?Q?U128tmRUThIuqBIJoFvgxDOYx7XQHeyXDpG1m/pLX5Ojy8UnbPuLFiKHCgE+?=
+ =?us-ascii?Q?HLNkhIQ4PL3cH8IyJMG2TSMm10p6E6moMDFdYURkinUvhsoQ3hWQ/Ol3XYv6?=
+ =?us-ascii?Q?iAnrIAlY0MibQODCpQZyfFKX/mlL9ajF3rIzSou4pPHPUkM4tFBGJNXjJCwR?=
+ =?us-ascii?Q?jpZNNfpKHKeZW22Ez7740Q3yGyRzfvCBoyfomPhMgZDdUkyzncjK7hZ7cdHp?=
+ =?us-ascii?Q?VtT1yQUocwhuzHqEwnN58C0nueFJLCQIfN3ICXEXzhpRZFqUUDb/+hA4f8dc?=
+ =?us-ascii?Q?5801SUWdVZeKbJ7/a4uEzv8B9sKeIe8K4mk4dhOk6u7Q0h/XchDrqhccFEfE?=
+ =?us-ascii?Q?NKhoBVEqwnuWVLFnHv0xd4YwOshJ9z4T0r5Up1LXL6/mK7/8mH2exgn6OXeF?=
+ =?us-ascii?Q?SWT8y43FTJMFJ8Aq3rnfIPvw7Qlb4JhYxyw+pYG9Jj7S82JbPyUAUbZdlSHo?=
+ =?us-ascii?Q?GWR7by+uePHF1P6RHTMqZRFprKEMALVk77SJCAtZRYrBGSP/DKjkWJKwSWWe?=
+ =?us-ascii?Q?DhsaB2XgNhYs1ImKT3vEdy6Cuyp5Egn8rkadszsxQFGMXu51IttwmwHcaw+Y?=
+ =?us-ascii?Q?FlHIYZM4YkLrmkCJGUsSahRl4K0vsegxdKvmzu9uj2Zk9SDOWQWt5bBUhMRO?=
+ =?us-ascii?Q?+J+vSRO0qt0jD2kEaVHgUxbHtwgz4gfGBSTIQ+CiaZcnZISAbsKaKacx+RQ/?=
+ =?us-ascii?Q?ZOJ1KOjjgTfnblRI0mkeau26iuxMqJn0hva6h+A+USgGkUa7oGo3oVv6f0e1?=
+ =?us-ascii?Q?wK6E1Os/Yv+cQ01zhUZOsnGbOpSmjdlRtKb7zb/EW7BmOpYuImGRq7xE5xqB?=
+ =?us-ascii?Q?jukoqaFDe6GpgMZLkGlSO9jR+0kTSmyCplE4V/bVNiQ5Ys/eLr3KXyYFEddz?=
+ =?us-ascii?Q?d0aM0pL8V7ti3BdU1dHYUussS/WC0usn/f07JmD0YKDmdho8FftxqhEsu+Ae?=
+ =?us-ascii?Q?JkUdOu6iihWARoVNXY/CpZTQLmtjSfQku0ZSGsIH7UQseqvwm/AT3xq4xbS6?=
+ =?us-ascii?Q?WSWVINbIOeDv7y2dv5qARPg1oSWoj7oNPtCuRK6iM+wCyuhZBOOiCkO9raEv?=
+ =?us-ascii?Q?Yr+cRVMLdjxqpAI5j4tZv8q56Q8ZKb75veXCKHgc3Tb0MTXuap6knq0UfWx8?=
+ =?us-ascii?Q?CS+ohpkMEcQwh0no7msBhBqUoxHiwmGDWJKepeJ0wxxDn3f5R6tchysJ253d?=
+ =?us-ascii?Q?0Q=3D=3D?=
+X-OriginatorOrg: navimatix.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9ef01d95-5b15-426c-a205-08dbd5385cef
+X-MS-Exchange-CrossTenant-AuthSource: VI1PR0102MB3136.eurprd01.prod.exchangelabs.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PN3PR01MB7710.INDPRD01.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: e1766d78-1be6-4be1-80d8-08dbd5355e00
-X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Oct 2023 08:35:38.9509
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Oct 2023 08:57:05.9091
  (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 3539451e-b46e-4a26-a242-ff61502855c7
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: S0KgcBFJfEQlkSdaGeK33oGmrnmiIk0RitG5mZcnP63T2bxOU+a9exYodxCK9VqY
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PN0PR01MB9098
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: c87b4f54-b992-4813-8f3f-4a876324197f
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: DcgKK/Ig2LUklGGV4iqWErWRiz9vvQEN28VqkR9kNUf767KEHi5UQOZ0Xtr1tWGy4yG1DDTCZJzOcJKy/IMfBDfypDkoIv4nNHVJPQ/WR/o=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR01MB9316
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 25 Oct 2023 08:35:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105725
+ <openembedded-devel@lists.openembedded.org>; Wed, 25 Oct 2023 08:57:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105726
 
---_000_PN3PR01MB7710D98F880C48A928BFC25499DEAPN3PR01MB7710INDP_
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-Hi OpenEmbedded-Devel Team ,
+I'm having an odd problem building the external kernel module
+kernel-module-imx-gpu-viv [1]. I'm using kirkstone and have rm_work
+enabled.
 
-I am writing to inquire about the status of the patch mentioned in the mail=
- below that I submitted to OpenEmbedded-Devel and when it is expected to be=
- integrated?
+[1]  https://layers.openembedded.org/layerindex/recipe/40267/
 
- Thanks & Regards,
+The module builds fine, but the install step contains the module signing
+which **silently** fails with *libcrypto.so.3* not found:
 
- Sana Kazi
- KPIT Technologies Limited
+```
+| make -C /build/tmp/work-shared/ziborium/kernel-source
+M=3D/build/tmp/work/machine-pyxis-linux/kernel-module-imx-gpu-viv/6.4.3.p4.=
+2-r0/git/src
+modules_install
+| make[1]: Entering directory '/build/tmp/work-shared/machine/kernel-source=
+'
+| make -C /build/tmp/work-shared/machine/kernel-build-artifacts -f
+/build/tmp/work-shared/machine/kernel-source/Makefile modules_install
+| make[2]: Entering directory
+'/build/tmp/work-shared/machine/kernel-build-artifacts'
+| test -e include/generated/autoconf.h -a -e include/config/auto.conf ||
+(		\
+| echo >&2;							\
+| echo >&2 "  ERROR: Kernel configuration is invalid.";		\
+| echo >&2 "         include/generated/autoconf.h or
+include/config/auto.conf are missing.";\
+| echo >&2 "         Run 'make oldconfig && make prepare' on kernel src
+to fix it.";	\
+| echo >&2 ;							\
+| /bin/false)
+| make -f
+/build/tmp/work-shared/machine/kernel-source/scripts/Makefile.modinst
+|   mkdir -p
+/build/tmp/work/machine-dist-linux/kernel-module-imx-gpu-viv/6.4.3.p4.2-r0/=
+image/usr/lib/modules/5.15.60-imx8mm+g343e81c0e39e/extra/;
+cp
+/build/tmp/work/machine-dist-linux/kernel-module-imx-gpu-viv/6.4.3.p4.2-r0/=
+git/src/galcore.ko
+/build/tmp/work/machine-dist-linux/kernel-module-imx-gpu-viv/6.4.3.p4.2-r0/=
+image/usr/lib/modules/5.15.60-imx8mm+g343e81c0e39e/extra/galcore.ko
+|   :
+|   scripts/sign-file "sha1" "certs/signing_key.pem"
+certs/signing_key.x509
+/build/tmp/work/machine-dist-linux/kernel-module-imx-gpu-viv/6.4.3.p4.2-r0/=
+image/usr/lib/modules/5.15.60-imx8mm+g343e81c0e39e/extra/galcore.ko
+|| true
+| scripts/sign-file: error while loading shared libraries:
+libcrypto.so.3: cannot open shared object file: No such file or directory
+|   sh /build/tmp/work-shared/machine/kernel-source/scripts/depmod.sh
+echo 5.15.60-imx8mm+g343e81c0e39e
+| Warning: modules_install: missing 'System.map' file. Skipping depmod.
+| make[2]: Leaving directory
+'/build/tmp/work-shared/machine/kernel-build-artifacts'
+| make[1]: Leaving directory '/build/tmp/work-shared/machine/kernel-source'
+```
 
+I noticed that there are special dependency definitions in make-mod-scripts
 
-________________________________
-From: openembedded-devel@lists.openembedded.org <openembedded-devel@lists.o=
-penembedded.org> on behalf of sana kazi via lists.openembedded.org <sanakaz=
-isk19=3Dgmail.com@lists.openembedded.org>
-Sent: Thursday, September 7, 2023 12:26 PM
-To: openembedded-devel@lists.openembedded.org <openembedded-devel@lists.ope=
-nembedded.org>
-Cc: sanakazisk19@gmail.com <sanakazisk19@gmail.com>
-Subject: [oe] [meta-oe][kirkstone][PATCH] ntfs-3g-ntfsprogs: Upgrade 2022.5=
-.17 to 2022.10.3
+```
+do_configure[depends] +=3D "virtual/kernel:do_shared_workdir
+openssl-native:do_populate_sysroot"
+do_compile[depends] +=3D "virtual/kernel:do_compile_kernelmodules"
+```
 
-Caution: This email originated from outside of the KPIT. Do not click links=
- or open attachments unless you recognize the sender and know the content i=
-s safe.
+and module-base.bbclass (inherited by module.bbclass)
 
-From: Omkar Patil <omkar.patil@kpit.com>
+```
+# We do the dependency this way because the output is not preserved
+# in sstate, so we must force do_compile to run (once).
+do_configure[depends] +=3D "make-mod-scripts:do_compile"
+```
 
-Changes:
-Rejected zero-sized runs
-Avoided merging runlists with no runs
+Is there an additional dependency needed to address rm_work?
 
-Fix CVE-2022-40284
+Kind regards
 
-Dunfell and master both have latest version of ntfs-3g-ntfsprogs
-2022.10.3. Therefore, upgrade the version on kirkstone too.
-
-Signed-off-by: Omkar Patil <omkarpatil10.93@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 5d5e8854718dab02c2737e3faf288f830a514841)
-Signed-off-by: Sana Kazi <sanakazisk19@gmail.com>
----
- ...3g-ntfsprogs_2022.5.17.bb =3D> ntfs-3g-ntfsprogs_2022.10.3.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/{ntfs-3g-ntf=
-sprogs_2022.5.17.bb =3D> ntfs-3g-ntfsprogs_2022.10.3.bb} (95%)
-
-diff --git a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g=
--ntfsprogs_2022.5.17.bb b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfs=
-progs/ntfs-3g-ntfsprogs_2022.10.3.bb
-similarity index 95%
-rename from meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-=
-ntfsprogs_2022.5.17.bb
-rename to meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-nt=
-fsprogs_2022.10.3.bb
-index b29716ad4..37a8106bb 100644
---- a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfspr=
-ogs_2022.5.17.bb
-+++ b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfspr=
-ogs_2022.10.3.bb
-@@ -10,7 +10,7 @@ SRC_URI =3D "https://apc01.safelinks.protection.outlook.c=
-om/?url=3Dhttp%3A%2F%2Ftuxera.com%2Fopensource%2Fntfs-3g_ntfsprogs-%24&data=
-=3D05%7C01%7CSana.Kazi%40kpit.com%7C15f74e1dcecf44faeac808dbaf6fba8e%7C3539=
-451eb46e4a26a242ff61502855c7%7C0%7C0%7C638296666670807254%7CUnknown%7CTWFpb=
-GZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7=
-C3000%7C%7C%7C&sdata=3DuGwpKtNULV3O3fyr8gynGij4JHzOF0h%2F%2FoNyDqBAHSI%3D&r=
-eserved=3D0{PV}.tgz \
-            file://0001-libntfs-3g-Makefile.am-fix-install-failed-while-hos=
-t.patch \
- "
- S =3D "${WORKDIR}/ntfs-3g_ntfsprogs-${PV}"
--SRC_URI[sha256sum] =3D "0489fbb6972581e1b417ab578d543f6ae522e7fa648c3c9b49=
-c789510fd5eb93"
-+SRC_URI[sha256sum] =3D "f20e36ee68074b845e3629e6bced4706ad053804cbaf062fba=
-e60738f854170c"
-
- UPSTREAM_CHECK_URI =3D "https://apc01.safelinks.protection.outlook.com/?ur=
-l=3Dhttps%3A%2F%2Fwww.tuxera.com%2Fcommunity%2Fopen-source-ntfs-3g%2F&data=
-=3D05%7C01%7CSana.Kazi%40kpit.com%7C15f74e1dcecf44faeac808dbaf6fba8e%7C3539=
-451eb46e4a26a242ff61502855c7%7C0%7C0%7C638296666670807254%7CUnknown%7CTWFpb=
-GZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7=
-C3000%7C%7C%7C&sdata=3Dy4lfjW6VN8Go8vwIPGapbXmgcYNR%2BKTkY%2BuzFjYKyeA%3D&r=
-eserved=3D0<https://www.tuxera.com/community/open-source-ntfs-3g/>"
- UPSTREAM_CHECK_REGEX =3D "ntfs-3g_ntfsprogs-(?P<pver>\d+(\.\d+)+)\.tgz"
---
-2.25.1
-
-This message contains information that may be privileged or confidential an=
-d is the property of the KPIT Technologies Ltd. It is intended only for the=
- person to whom it is addressed. If you are not the intended recipient, you=
- are not authorized to read, print, retain copy, disseminate, distribute, o=
-r use this message or any part thereof. If you receive this message in erro=
-r, please notify the sender immediately and delete all copies of this messa=
-ge. KPIT Technologies Ltd. does not accept any liability for virus infected=
- mails.
-
---_000_PN3PR01MB7710D98F880C48A928BFC25499DEAPN3PR01MB7710INDP_
-Content-Type: text/html; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
-1">
-<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
-ttom:0;} </style>
-</head>
-<body dir=3D"ltr">
-<div class=3D"elementToProof" style=3D"font-family: Constantia, &quot;Hoefl=
-er Text&quot;, serif; font-size: 11pt; color: rgb(0, 0, 0);">
-Hi <span style=3D"font-weight: 400;">OpenEmbedded-Devel Team</span>&nbsp;,<=
-/div>
-<div class=3D"elementToProof" style=3D"font-family: Constantia, &quot;Hoefl=
-er Text&quot;, serif; font-size: 11pt; color: rgb(0, 0, 0);">
-<br>
-</div>
-<div class=3D"elementToProof" style=3D"font-family: Constantia, &quot;Hoefl=
-er Text&quot;, serif; font-size: 11pt; color: rgb(0, 0, 0);">
-<span style=3D"font-weight: 400;">I am writing to inquire about the status =
-of the patch mentioned in the mail below that I submitted&nbsp;to OpenEmbed=
-ded-Devel and when it is expected to be integrated?</span></div>
-<div class=3D"elementToProof" style=3D"font-family: Constantia, &quot;Hoefl=
-er Text&quot;, serif; font-size: 11pt; color: rgb(0, 0, 0);">
-<span style=3D"font-weight: 400;"><br>
-</span></div>
-<div id=3D"Signature">
-<div style=3D"text-align: left; margin: 0px; background-color: rgb(255, 255=
-, 255);">
-<span style=3D"font-family: Arial, sans-serif; font-size: 10pt; color: blac=
-k; background-color: white;">&nbsp;</span><span style=3D"font-family: Arial=
-, sans-serif; font-size: 10pt; color: rgb(0, 51, 102); background-color: wh=
-ite;">Thanks &amp; Regards,</span></div>
-<div style=3D"margin: 0px; background-color: rgb(255, 255, 255);">
-<p style=3D"text-align: left; margin: 0px; font-family: Calibri, sans-serif=
-; font-size: 11pt;">
-<span style=3D"font-family: Arial, sans-serif; font-size: 10pt; color: blac=
-k; background-color: white;">&nbsp;</span><span style=3D"font-family: Arial=
-, sans-serif; font-size: 10pt; color: rgb(0, 51, 102); background-color: wh=
-ite;">Sana Kazi<br>
-&nbsp;KPIT Technologies Limited<br>
-</span></p>
-</div>
-<div style=3D"margin-right: 0px; margin-left: 0px;"><span style=3D"font-fam=
-ily: Calibri, Arial, Helvetica, sans-serif;"><br>
-</span></div>
-</div>
-<div id=3D"appendonsend"></div>
-<div style=3D"font-family: Constantia, &quot;Hoefler Text&quot;, serif; fon=
-t-size: 11pt; color: rgb(0, 0, 0);">
-<br>
-</div>
-<hr style=3D"display: inline-block; width: 98%;">
-<div id=3D"divRplyFwdMsg" dir=3D"ltr"><span style=3D"font-family: Calibri, =
-sans-serif; font-size: 11pt; color: rgb(0, 0, 0);"><b>From:</b>&nbsp;openem=
-bedded-devel@lists.openembedded.org &lt;openembedded-devel@lists.openembedd=
-ed.org&gt; on behalf of sana kazi via lists.openembedded.org
- &lt;sanakazisk19=3Dgmail.com@lists.openembedded.org&gt;<br>
-<b>Sent:</b>&nbsp;Thursday, September 7, 2023 12:26 PM<br>
-<b>To:</b>&nbsp;openembedded-devel@lists.openembedded.org &lt;openembedded-=
-devel@lists.openembedded.org&gt;<br>
-<b>Cc:</b>&nbsp;sanakazisk19@gmail.com &lt;sanakazisk19@gmail.com&gt;<br>
-<b>Subject:</b>&nbsp;[oe] [meta-oe][kirkstone][PATCH] ntfs-3g-ntfsprogs: Up=
-grade 2022.5.17 to 2022.10.3</span>
-<div>&nbsp;</div>
-</div>
-<div><span style=3D"font-size: 11pt;">Caution: This email originated from o=
-utside of the KPIT. Do not click links or open attachments unless you recog=
-nize the sender and know the content is safe.<br>
-<br>
-From: Omkar Patil &lt;omkar.patil@kpit.com&gt;<br>
-<br>
-Changes:<br>
-Rejected zero-sized runs<br>
-Avoided merging runlists with no runs<br>
-<br>
-Fix CVE-2022-40284<br>
-<br>
-Dunfell and master both have latest version of ntfs-3g-ntfsprogs<br>
-2022.10.3. Therefore, upgrade the version on kirkstone too.<br>
-<br>
-Signed-off-by: Omkar Patil &lt;omkarpatil10.93@gmail.com&gt;<br>
-Signed-off-by: Khem Raj &lt;raj.khem@gmail.com&gt;<br>
-(cherry picked from commit 5d5e8854718dab02c2737e3faf288f830a514841)<br>
-Signed-off-by: Sana Kazi &lt;sanakazisk19@gmail.com&gt;<br>
----<br>
-&nbsp;...3g-ntfsprogs_2022.5.17.bb =3D&gt; ntfs-3g-ntfsprogs_2022.10.3.bb} =
-| 2 +-<br>
-&nbsp;1 file changed, 1 insertion(+), 1 deletion(-)<br>
-&nbsp;rename meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/{ntfs-3=
-g-ntfsprogs_2022.5.17.bb =3D&gt; ntfs-3g-ntfsprogs_2022.10.3.bb} (95%)<br>
-<br>
-diff --git a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g=
--ntfsprogs_2022.5.17.bb b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfs=
-progs/ntfs-3g-ntfsprogs_2022.10.3.bb<br>
-similarity index 95%<br>
-rename from meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-=
-ntfsprogs_2022.5.17.bb<br>
-rename to meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-nt=
-fsprogs_2022.10.3.bb<br>
-index b29716ad4..37a8106bb 100644<br>
---- a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfspr=
-ogs_2022.5.17.bb<br>
-+++ b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfspr=
-ogs_2022.10.3.bb<br>
-@@ -10,7 +10,7 @@ SRC_URI =3D &quot;https://apc01.safelinks.protection.outl=
-ook.com/?url=3Dhttp%3A%2F%2Ftuxera.com%2Fopensource%2Fntfs-3g_ntfsprogs-%24=
-&amp;data=3D05%7C01%7CSana.Kazi%40kpit.com%7C15f74e1dcecf44faeac808dbaf6fba=
-8e%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C638296666670807254%7CUnknow=
-n%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI=
-6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=3DuGwpKtNULV3O3fyr8gynGij4JHzOF0h%2F%2FoN=
-yDqBAHSI%3D&amp;reserved=3D0{PV}.tgz
- \<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href=
-=3D"file://0001-libntfs-3g-Makefile.am-fix-install-failed-while-host.patch"=
- id=3D"OWA23061f83-ce2b-f3c7-72c6-38ccb609b122" class=3D"OWAAutoLink" data-=
-auth=3D"NotApplicable">
-file://0001-libntfs-3g-Makefile.am-fix-install-failed-while-host.patch</a>&=
-nbsp;\<br>
-&nbsp;&quot;<br>
-&nbsp;S =3D &quot;${WORKDIR}/ntfs-3g_ntfsprogs-${PV}&quot;<br>
--SRC_URI[sha256sum] =3D &quot;0489fbb6972581e1b417ab578d543f6ae522e7fa648c3=
-c9b49c789510fd5eb93&quot;<br>
-+SRC_URI[sha256sum] =3D &quot;f20e36ee68074b845e3629e6bced4706ad053804cbaf0=
-62fbae60738f854170c&quot;<br>
-<br>
-&nbsp;UPSTREAM_CHECK_URI =3D &quot;<a href=3D"https://www.tuxera.com/commun=
-ity/open-source-ntfs-3g/" id=3D"OWA6893a29b-6926-78de-fc13-f3c4a7df1a3b" cl=
-ass=3D"OWAAutoLink" data-auth=3D"NotApplicable">https://apc01.safelinks.pro=
-tection.outlook.com/?url=3Dhttps%3A%2F%2Fwww.tuxera.com%2Fcommunity%2Fopen-=
-source-ntfs-3g%2F&amp;data=3D05%7C01%7CSana.Kazi%40kpit.com%7C15f74e1dcecf4=
-4faeac808dbaf6fba8e%7C3539451eb46e4a26a242ff61502855c7%7C0%7C0%7C6382966666=
-70807254%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTi=
-I6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=3Dy4lfjW6VN8Go8vwIPGapbX=
-mgcYNR%2BKTkY%2BuzFjYKyeA%3D&amp;reserved=3D0</a>&quot;<br>
-&nbsp;UPSTREAM_CHECK_REGEX =3D &quot;ntfs-3g_ntfsprogs-(?P&lt;pver&gt;\d+(\=
-.\d+)+)\.tgz&quot;<br>
---<br>
-2.25.1<br>
-<br>
-</span></div>
-This message contains information that may be privileged or confidential an=
-d is the property of the KPIT Technologies Ltd. It is intended only for the=
- person to whom it is addressed. If you are not the intended recipient, you=
- are not authorized to read, print,
- retain copy, disseminate, distribute, or use this message or any part ther=
-eof. If you receive this message in error, please notify the sender immedia=
-tely and delete all copies of this message. KPIT Technologies Ltd. does not=
- accept any liability for virus
- infected mails.
-</body>
-</html>
-
---_000_PN3PR01MB7710D98F880C48A928BFC25499DEAPN3PR01MB7710INDP_--
+J=C3=B6rg Sommer
+--=20
+Navimatix GmbH
+Tatzendpromenade 2
+D-07745 Jena
+Gesch=C3=A4ftsf=C3=BChrer: Steffen Sp=C3=A4the, Jan Rommeley
+Registergericht: Amtsgericht Jena, HRB 501480
 
