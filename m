@@ -1,86 +1,187 @@
-Return-Path: <jester@theyoctojester.info>
+Return-Path: <akash.hadke27@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 039CBC25B6B
-	for <webhook@archiver.kernel.org>; Thu, 26 Oct 2023 13:30:47 +0000 (UTC)
-Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com [209.85.208.44])
- by mx.groups.io with SMTP id smtpd.web11.70510.1698327038345551120
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 42047C25B48
+	for <webhook@archiver.kernel.org>; Thu, 26 Oct 2023 14:08:17 +0000 (UTC)
+Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
+ by mx.groups.io with SMTP id smtpd.web11.71527.1698329291174241949
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Oct 2023 06:30:38 -0700
+ Thu, 26 Oct 2023 07:08:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@theyoctojester-info.20230601.gappssmtp.com header.s=20230601 header.b=cIww20ra;
- spf=none, err=permanent DNS error (domain: theyoctojester.info, ip: 209.85.208.44, mailfrom: jester@theyoctojester.info)
-Received: by mail-ed1-f44.google.com with SMTP id 4fb4d7f45d1cf-53de8fc1ad8so1423688a12.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Oct 2023 06:30:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=K9p5GL6H;
+ spf=pass (domain: gmail.com, ip: 209.85.210.170, mailfrom: akash.hadke27@gmail.com)
+Received: by mail-pf1-f170.google.com with SMTP id d2e1a72fcca58-6bbfb8f7ac4so217772b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Oct 2023 07:08:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=theyoctojester-info.20230601.gappssmtp.com; s=20230601; t=1698327037; x=1698931837; darn=lists.openembedded.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=ndO5bUYSzSoIwe0hFBOaUNd1kr3/d/yw7n1CC3H5KNM=;
-        b=cIww20ra+zfVcONjEb6FMbRKsPXOp4IxzoDJoT8SPW1RCq9AJoFIVOmbGUXA1BGHr8
-         w5AGQKchzFh6WS5tXLr89Ifq85Lryxw8toIr8bXi/KuRA+cMldFRZf8W7C2CPL3sfsdE
-         pyNRoj76cpOILQTr1uQBaFeHfLmLzahH6tarLfs7XOqobBBKlcVlL+ls+oopA4xRLOg6
-         k9gGycpyJozXu0y0d5tSaHpKhR3HWWsuZLDtATzom4yK5J93oz64XqcM2dL7wPXbdx8q
-         aBPjGCbcrS/7teO43njbKc0xLyTbVyw3s+CWfKsvSQAMxXotPtY7/L9RKKLLYLBUk9td
-         fCrg==
+        d=gmail.com; s=20230601; t=1698329290; x=1698934090; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=l8w0U6et4mtvnsHNosSAcjP/L73ho5uO8dJeHmfmsdg=;
+        b=K9p5GL6HRB1en2cm9aiDNkOkh7qub1A4S68lhgibOR5xdLkYIazBDJFKtTMi9xWfgy
+         YkO4rLrWyUEdGevtTOwRPzS+ebbuPCAVrttY0sU8Gt5RoT7EJ5yp+WhW7QOx1w1UuByL
+         pU/ioQovfQNWmNmsdjPlChFS89PbtCLdfHiQOVkSne3Nm0gEBFCXD/n5wz8eoa5RTg4V
+         W5zT5GWH1+3IdWHB7iUGngoYNzatzb1CLee2fHqfy4kDVoWPOg8W+HAhCPmC5ly1No2l
+         T5ijEIgWlO8Cx+99aYmaxyobAomd4BvFheEwb/EO4dLDwBs0PVGuHFl23qkw9+c9zpNH
+         4Elw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1698327037; x=1698931837;
-        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=ndO5bUYSzSoIwe0hFBOaUNd1kr3/d/yw7n1CC3H5KNM=;
-        b=bS4DkReYq7dgTMHV7VqciCQMAyo+qNzFOnSRU6j5dzU6wRk3AD9L4O+FgN7qlx8ESU
-         RrB61bFwIkBi0W4U9P8u2Mvd//qF3ondWUUW4Hkiq2r6yrCtepnmbhtXjBY7eor7P8+x
-         w8SKqyfE1vqewdSJlKM3uYXDx1QoJhFpPEjrx15/SZBXO9y1JtKAyl1QHp2DcVh35RRU
-         IyBCgUpJ38godN11JbkPQ+supWU6fWS5Dt+Y08VkBbKynh/wvpIuKuKLKet7YkhvuxqX
-         o7Cu4TGDjsVFOJwpyhLjRM89twzTUeCBj4p89IJ7rhFvdlzHkan4p8VUXaVgIzd/jyTk
-         DTRA==
-X-Gm-Message-State: AOJu0YzmRt9CFfAVDO+7LKe51EfwbKRB0aNV++SLSx41SQdL4BwGXErs
-	i3YB3rhTyaBagnvXxMh7dsTFz/bFD1WhGKYroewGaHLlVOXBkQwjaVp+Xg==
-X-Google-Smtp-Source: AGHT+IHRyKKfDCyQhOdHc/TvKTRID5BVxx9PksY+089e5A7Ee8YD73cZPAU/SSDo5F4ZTC6dFQIBT6+kLZnWWFXfZjY=
-X-Received: by 2002:a05:6402:1d4d:b0:540:c8b7:6023 with SMTP id
- dz13-20020a0564021d4d00b00540c8b76023mr5264117edb.35.1698327036462; Thu, 26
- Oct 2023 06:30:36 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1698329290; x=1698934090;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=l8w0U6et4mtvnsHNosSAcjP/L73ho5uO8dJeHmfmsdg=;
+        b=pyAl+2ePXRp6/GOmw1pYjaeD2M4v0m/baIua0nQv0gsRJ1OwUycZdWcL8H5Ziu1LU+
+         FI1nZq0Qcj2CLBAuiHckHOSgpllxlWf89VObb9JqkiwjtlcE2+TmLj3sluJv1oeeRZlL
+         kiqYSfs+Inv0dxvCpgsscFhl+5KPLdIT2l/f4BeSNQf7SVrDC+Ioqc+ykJ0u/ZAPUp1S
+         LJ8Zu4eW6TeHI4A5yMI1ZWlEVvwbqCZmjWnyl6ZeE3TLUFXpAD7VPVY+wIKO9zkXUIYC
+         SpWSTDrrQrw7T09cfr7GrCGCbHuXCVx7kP9f7PONP+71U6bfSje2H4Zsz0U0S4Jp9heA
+         7e1Q==
+X-Gm-Message-State: AOJu0YxCCwgtSjhDp/QF1N1BKBhUsT3m/gE7h1L3ficRmHvo38fwLghc
+	9fK4+J20NjKI1HEl8WEtYb5epunD15o=
+X-Google-Smtp-Source: AGHT+IF6qUvy3hq83KoGuPNPqLd7MJsgzVHdC0AzC9yCdm+nVDCyZmTRzKdl7JdLE+N8ab3MvnsnrA==
+X-Received: by 2002:a05:6a00:4598:b0:6be:4b10:b27d with SMTP id it24-20020a056a00459800b006be4b10b27dmr18176624pfb.0.1698329289549;
+        Thu, 26 Oct 2023 07:08:09 -0700 (PDT)
+Received: from L-18010.kpit.com ([203.192.207.62])
+        by smtp.gmail.com with ESMTPSA id k2-20020aa79982000000b006c03d1ba03asm2898410pfh.220.2023.10.26.07.08.07
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 26 Oct 2023 07:08:09 -0700 (PDT)
+From: Akash Hadke <akash.hadke27@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: ranjitsinh.rathod@kpit.com
+Subject: [meta-java][master][PATCH v2] meta-java: Adapt LICENSE as SPDX identifiers
+Date: Thu, 26 Oct 2023 19:37:26 +0530
+Message-Id: <20231026140726.20258-1-akash.hadke27@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-From: Josef Holzmayr <jester@theyoctojester.info>
-Date: Thu, 26 Oct 2023 15:30:10 +0200
-Message-ID: <CAEt6NwrEPS379dzhPKO1rKDk8uc7anzjNNah=GRV+=EDcUdvWg@mail.gmail.com>
-Subject: OpenEmbedded Workshop CFP - February 5th, 2024
-To: openembedded-devel@lists.openembedded.org, 
-	openembedded-core <openembedded-core@lists.openembedded.org>, 
-	openembedded-members@lists.openembedded.org, 
-	Yocto-mailing-list <yocto@lists.yoctoproject.org>
-Content-Type: multipart/alternative; boundary="000000000000b8a8d406089e93a0"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 26 Oct 2023 13:30:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105750
+ <openembedded-devel@lists.openembedded.org>; Thu, 26 Oct 2023 14:08:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105751
 
---000000000000b8a8d406089e93a0
-Content-Type: text/plain; charset="UTF-8"
+As per Yocto 4.0 migration, LICENSE variables should use SPDX
+identifiers
+Convert this by a tool present at below location
+poky/scripts/contrib/convert-spdx-licenses.py
 
-We are hosting a workshop on Monday, February 5th 2024 in Brussels. Yes
-exactly, the day right after FOSDEM. So make sure to extend your stay and
-share your findings or the things you bring. How? By submitting to the OE
-Workshop 2024 CFP. Open now and waiting for you.
+Link: https://docs.yoctoproject.org/migration-guides/migration-4.0.html#license-changes
 
-https://pretalx.com/oe-ws-2024/cfp
+Signed-off-by: Ranjitsinh Rathod <ranjitsinh.rathod@kpit.com>
+Signed-off-by: Akash Hadke <akash.hadke27@gmail.com>
+---
+ .../ca-certificates-java/ca-certificates-java_20180516.bb       | 2 +-
+ recipes-core/cacao/cacao-initial-native_0.98.bb                 | 2 +-
+ recipes-core/classpath/classpath-native.inc                     | 2 +-
+ recipes-core/classpath/classpath.inc                            | 2 +-
+ recipes-core/fastjar/fastjar.inc                                | 2 +-
+ recipes-core/jamvm/jamvm.inc                                    | 2 +-
+ recipes-core/xml-commons/xom_1.2.10.bb                          | 2 +-
+ recipes-extended/dbus/dbus-java_2.7.bb                          | 2 +-
+ 8 files changed, 8 insertions(+), 8 deletions(-)
 
-Josef,
-on behalf of the OpenEmbedded board
+diff --git a/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb b/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
+index 460d39a..368458b 100644
+--- a/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
++++ b/recipes-core/ca-certificates-java/ca-certificates-java_20180516.bb
+@@ -1,7 +1,7 @@
+ SUMMARY = "Common CA certificates (JKS trustStore)"
+ DESCRIPTION = "This package uses the hooks of the ca-certificates \
+ package to update the cacerts JKS trustStore used for many java runtimes."
+-LICENSE = "GPLv2+"
++LICENSE = "GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "\
+ 	file://debian/copyright;md5=ab0f6b6900f6564dc3e273dfa36fcc72 \
+ 	file://src/main/java/org/debian/security/InvalidKeystorePasswordException.java;endline=17;md5=f9150bf1ca3139a38ddb54f9e1c0eb9b \
+diff --git a/recipes-core/cacao/cacao-initial-native_0.98.bb b/recipes-core/cacao/cacao-initial-native_0.98.bb
+index 8432456..e8c9bdb 100644
+--- a/recipes-core/cacao/cacao-initial-native_0.98.bb
++++ b/recipes-core/cacao/cacao-initial-native_0.98.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "CacaoVM for use as OpenEmbedded's Java VM"
+ HOMEPAGE = "http://www.cacaojvm.org/"
+-LICENSE  = "GPL-2.0"
++LICENSE  = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+ SECTION  = "interpreters"
+ 
+diff --git a/recipes-core/classpath/classpath-native.inc b/recipes-core/classpath/classpath-native.inc
+index c81e064..e325d94 100644
+--- a/recipes-core/classpath/classpath-native.inc
++++ b/recipes-core/classpath/classpath-native.inc
+@@ -1,6 +1,6 @@
+ SUMMARY = "GNU Classpath standard Java libraries - For native Java-dependent programs"
+ HOMEPAGE = "http://www.gnu.org/software/classpath/"
+-LICENSE = "GPL-2.0 & SAX-PD"
++LICENSE = "GPL-2.0-only & SAX-PD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=af0004801732bc4b20d90f351cf80510"
+ 
+ DEPENDS = "fastjar-native zip-native"
+diff --git a/recipes-core/classpath/classpath.inc b/recipes-core/classpath/classpath.inc
+index 35e7db3..0a53e14 100644
+--- a/recipes-core/classpath/classpath.inc
++++ b/recipes-core/classpath/classpath.inc
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.gnu.org/software/classpath/"
+ SECTION = "libs"
+ 
+ # GPLv2 + custom linking exception
+-LICENSE = "GPL-2.0 & SAX-PD"
++LICENSE = "GPL-2.0-only & SAX-PD"
+ 
+ PBN = "classpath"
+ 
+diff --git a/recipes-core/fastjar/fastjar.inc b/recipes-core/fastjar/fastjar.inc
+index 8412236..1fb58a8 100644
+--- a/recipes-core/fastjar/fastjar.inc
++++ b/recipes-core/fastjar/fastjar.inc
+@@ -2,7 +2,7 @@ SUMMARY = "jar replacement written in C."
+ HOMEPAGE = "http://savannah.nongnu.org/projects/fastjar/"
+ SECTION = "devel"
+ PRIORITY = "optional"
+-LICENSE = "GPLv2"
++LICENSE = "GPL-2.0-only"
+ PR = "r1"
+ 
+ DEPENDS = "zlib"
+diff --git a/recipes-core/jamvm/jamvm.inc b/recipes-core/jamvm/jamvm.inc
+index 693817f..57e77c1 100644
+--- a/recipes-core/jamvm/jamvm.inc
++++ b/recipes-core/jamvm/jamvm.inc
+@@ -1,6 +1,6 @@
+ SUMMARY = "A compact Java Virtual Machine which conforms to the JVM specification version 2."
+ HOMEPAGE = "http://jamvm.sourceforge.net/"
+-LICENSE = "GPL-2.0"
++LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
+ 
+ DEPENDS = "zlib classpath virtual/javac-native libffi virtual/java-initial-native"
+diff --git a/recipes-core/xml-commons/xom_1.2.10.bb b/recipes-core/xml-commons/xom_1.2.10.bb
+index 42ad957..d01d5b2 100644
+--- a/recipes-core/xml-commons/xom_1.2.10.bb
++++ b/recipes-core/xml-commons/xom_1.2.10.bb
+@@ -1,7 +1,7 @@
+ SUMMARY = "Tree-based API for processing XML with Java"
+ DESCRIPTION = "XML object model which is a tree-based API for processing XML \
+ with Java that strives for correctness, simplicity, and performance."
+-LICENSE = "LGPL-2.1"
++LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3f18f166096348ef9d457214a2484816"
+ 
+ HOMEPAGE = "http://xom.nu"
+diff --git a/recipes-extended/dbus/dbus-java_2.7.bb b/recipes-extended/dbus/dbus-java_2.7.bb
+index 0e5ae92..1bfe5a7 100644
+--- a/recipes-extended/dbus/dbus-java_2.7.bb
++++ b/recipes-extended/dbus/dbus-java_2.7.bb
+@@ -4,7 +4,7 @@ SUMMARY:${PN}-bin = "${SUMMARY} (Binaries)"
+ AUTHOR = "Matthew Johnson <dbus@matthew.ath.cx>"
+ HOMEPAGE = "http://dbus.freedesktop.org/doc/dbus-java"
+ SECTION = "libs"
+-LICENSE = "LGPL-2.1 & AFL-2.1"
++LICENSE = "LGPL-2.1-only & AFL-2.1"
+ 
+ DEPENDS = "libmatthew gettext-native fastjar-native"
+ RDEPENDS:${PN}-viewer = "java2-runtime libunixsocket-java ${PN}-bin libmatthew-debug-java ${JPN}"
+-- 
+2.25.1
 
---000000000000b8a8d406089e93a0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>We are hosting a workshop on Monday, February 5th 202=
-4 in Brussels. Yes exactly, the day right after FOSDEM. So make sure to ext=
-end your stay and share your findings or the things you bring. How? By subm=
-itting to the OE Workshop 2024 CFP. Open now and waiting for you.</div><div=
-><br><a href=3D"https://pretalx.com/oe-ws-2024/cfp">https://pretalx.com/oe-=
-ws-2024/cfp</a><br></div><br><div>Josef,</div><div>on behalf of the OpenEmb=
-edded board</div></div>
-
---000000000000b8a8d406089e93a0--
 
