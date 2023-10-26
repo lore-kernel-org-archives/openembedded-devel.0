@@ -2,61 +2,63 @@ Return-Path: <richard.purdie@linuxfoundation.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B6751C25B48
-	for <webhook@archiver.kernel.org>; Thu, 26 Oct 2023 13:09:16 +0000 (UTC)
-Received: from mail-lj1-f178.google.com (mail-lj1-f178.google.com [209.85.208.178])
- by mx.groups.io with SMTP id smtpd.web10.199610.1698325747965193658
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BF4F0C25B6B
+	for <webhook@archiver.kernel.org>; Thu, 26 Oct 2023 13:11:26 +0000 (UTC)
+Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com [209.85.167.45])
+ by mx.groups.io with SMTP id smtpd.web11.69986.1698325881905352077
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Oct 2023 06:09:08 -0700
+ Thu, 26 Oct 2023 06:11:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linuxfoundation.org header.s=google header.b=TsVr3qwx;
- spf=pass (domain: linuxfoundation.org, ip: 209.85.208.178, mailfrom: richard.purdie@linuxfoundation.org)
-Received: by mail-lj1-f178.google.com with SMTP id 38308e7fff4ca-2c5039d4e88so13028701fa.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Oct 2023 06:09:07 -0700 (PDT)
+ dkim=pass header.i=@linuxfoundation.org header.s=google header.b=ayLxWBMr;
+ spf=pass (domain: linuxfoundation.org, ip: 209.85.167.45, mailfrom: richard.purdie@linuxfoundation.org)
+Received: by mail-lf1-f45.google.com with SMTP id 2adb3069b0e04-5079f3f3d7aso1313589e87.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Oct 2023 06:11:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linuxfoundation.org; s=google; t=1698325746; x=1698930546; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=81vggvcZ2RRc860zWwIidi6ybvkNc4kKjhcIUPCKY94=;
-        b=TsVr3qwxh7cvHnYmeIbx+6WNqffLyyxV57HpBq4E1ZbwV/0hQ07+E5/h5KuucC9ezy
-         lyI5wmuJy5jLzJ6ISLPyL2mxCDyKf8jvqPRpxCxkRSFY6wX1AVaSnpxprVDacuNBVTof
-         cOPHYeahrYuBFrWf8CvEzEjDX8r2sGUFKrhgk=
+        d=linuxfoundation.org; s=google; t=1698325880; x=1698930680; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=BwFx1YsdR4rHMsbfERek+MS0aCWq6PKgmDNXcH47qCw=;
+        b=ayLxWBMricFSvJQQGwmRRKLi6eqtEt8OQavgDMw/UQBB4STJqKr6nOtd1Y9Ox6El9g
+         oMNMayhn1Po8XoqTR/gruNH4Qjaw0oQpPY2rH2NzfjJRd+EASA4p8Od6JPFClgwf6fUR
+         ShBHnFKT7Mgm5ABDGqEE8jdY4AF1ixJYrPzb0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1698325746; x=1698930546;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=81vggvcZ2RRc860zWwIidi6ybvkNc4kKjhcIUPCKY94=;
-        b=DNPS4oP3cds+hKj08WS1d2HC4UsSEoOYcTpnf6VMYq9w7Ztah/Sf53vb0jrcHEycOV
-         GMLR9CZQSYmjnihZX3ToaKNGKwCcMiolYtALgRhddQAtAEkpMxnItALjnMV3egWgrf/V
-         fQgAgfxzGmjJFy+68wwYdES1Tv0Za8tIzY9j0v44PTFmTYV29IvHVg5GyaDye2+wHFr/
-         RqBPVnl0Ki2CnMm3OQiK4uAJiMUqDTXo8xQKAfgYf8twy7Gpl92y6nK8+v6jVAIyi1kM
-         h38uTyRm3d+hgzDS1LCLTDg6B47DExuv3y1/PCk8Hele0vmMB5TFiEdDMUdxFWFXmyeB
-         PDew==
-X-Gm-Message-State: AOJu0Yx/B2KVWM6tJpox5gsPR2q7RYGdZqzBhPF111I5gEWDiGeaKGye
-	CNBRgMhCBFxvxmWSf4SClv0kAiHQGetsaBauYsM=
-X-Google-Smtp-Source: AGHT+IEyebk6Nw60c60R4C6Sw02Q/sotJ2HbpsbF8N6rkZZB29F6hFsKZcbSEGwxgBON2SeKFpkR2A==
-X-Received: by 2002:a2e:b5b7:0:b0:2bf:fae2:f97 with SMTP id f23-20020a2eb5b7000000b002bffae20f97mr12113053ljn.12.1698325745643;
-        Thu, 26 Oct 2023 06:09:05 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1698325880; x=1698930680;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=BwFx1YsdR4rHMsbfERek+MS0aCWq6PKgmDNXcH47qCw=;
+        b=a3HSr2HTcffgFB8v7d/maBpZBUmAFrQTLHtMoNsrY2MVa7f9aCKPbLFj9HiMICCkgK
+         sI39lVO2B4HjHFrvrS8axsjAPRN4jLA7bhRbq7alaYO92C7hj2kjEq89xxwGFktjs9c9
+         Ex00nXRcTMVb+XlQCHkx37i/bYaZgKOvXG6fXL/hy5aiK3SSL3nF92lW7CZCyk9Bn6QM
+         +DI7PvfygDTlWyWr3t3NRsScdmsYeu+EuwlNizhiisTeS+jBq3p34aubWyi6F5UIo78Q
+         x0y0G26HOKG/nrPasgVUugZ7xPpJvFpPHUw8Dba7dmgeokV03iyE8Akko6WQNJwGcRnH
+         mMKA==
+X-Gm-Message-State: AOJu0Yy1Ind9SywiCyTsMpmKI5/ttsZSP99mOYM61eBfBvhx+Lz3oyFA
+	WDlapNCP4g4Y0oBuAuNDjaqKyxs1NWjY2xI2J8w=
+X-Google-Smtp-Source: AGHT+IGcTfOmy+9dWMNOrgzviy76EBDHbpiiZpMiBubl+hBkQXznITKOVROxCd8sUYVj9Hx+2Bus0w==
+X-Received: by 2002:ac2:4e93:0:b0:502:a46e:257a with SMTP id o19-20020ac24e93000000b00502a46e257amr12431375lfr.56.1698325879846;
+        Thu, 26 Oct 2023 06:11:19 -0700 (PDT)
 Received: from max.int.rpsys.net ([2001:8b0:aba:5f3c:aeb5:bfd7:dc1c:82a3])
-        by smtp.gmail.com with ESMTPSA id h1-20020a05600c350100b003fe1fe56202sm2541890wmq.33.2023.10.26.06.09.05
+        by smtp.gmail.com with ESMTPSA id q18-20020adff792000000b0030647449730sm14202024wrp.74.2023.10.26.06.11.19
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Oct 2023 06:09:05 -0700 (PDT)
+        Thu, 26 Oct 2023 06:11:19 -0700 (PDT)
 From: Richard Purdie <richard.purdie@linuxfoundation.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-openembedded] [PATCH] python-blivet: Adapt to upstream branch name changes
-Date: Thu, 26 Oct 2023 14:09:04 +0100
-Message-Id: <20231026130904.1500640-1-richard.purdie@linuxfoundation.org>
+Subject: [meta-openembedded] [kirkstone] [PATCH 2/3] python-blivet: Adapt to upstream branch name changes
+Date: Thu, 26 Oct 2023 14:11:17 +0100
+Message-Id: <20231026131118.1500868-2-richard.purdie@linuxfoundation.org>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20231026131118.1500868-1-richard.purdie@linuxfoundation.org>
+References: <20231026131118.1500868-1-richard.purdie@linuxfoundation.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 26 Oct 2023 13:09:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105742
-
-Upstream now use main as their development branch.
+ <openembedded-devel@lists.openembedded.org>; Thu, 26 Oct 2023 13:11:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105744
 
 Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
 ---
@@ -64,7 +66,7 @@ Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.3.0.bb b/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.3.0.bb
-index aba127897..42bcf4651 100644
+index 29e7a267d..36ab065b5 100644
 --- a/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.3.0.bb
 +++ b/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.3.0.bb
 @@ -9,7 +9,7 @@ S = "${WORKDIR}/git"
