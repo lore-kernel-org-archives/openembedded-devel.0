@@ -1,297 +1,331 @@
-Return-Path: <quaresma.jose@gmail.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 380C7C25B6B
-	for <webhook@archiver.kernel.org>; Thu, 26 Oct 2023 08:35:05 +0000 (UTC)
-Received: from mail-vs1-f47.google.com (mail-vs1-f47.google.com [209.85.217.47])
- by mx.groups.io with SMTP id smtpd.web10.195450.1698309299733781788
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D3EEC25B48
+	for <webhook@archiver.kernel.org>; Thu, 26 Oct 2023 08:47:55 +0000 (UTC)
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
+ by mx.groups.io with SMTP id smtpd.web11.66030.1698310068213552956
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Oct 2023 01:34:59 -0700
+ Thu, 26 Oct 2023 01:47:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=B7QfWahw;
- spf=pass (domain: gmail.com, ip: 209.85.217.47, mailfrom: quaresma.jose@gmail.com)
-Received: by mail-vs1-f47.google.com with SMTP id ada2fe7eead31-457d9ffc9d2so412110137.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Oct 2023 01:34:59 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=mAAP5Yro;
+ spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-32d9b507b00so476976f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Oct 2023 01:47:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1698309298; x=1698914098; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1698310066; x=1698914866; darn=lists.openembedded.org;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=+YFedBg08rUkg7SI8gOI1Kp7Yer7odRyCJ4yTPSttxA=;
-        b=B7QfWahwkd+GpOiF7lGOxmv0HsuMYMamEq4xFAWNo8vv0iPxSFiti6T/rCwSfQxzDU
-         iExxgBcAhf9gRCHcJ94iRwRLRyADGdKB6AD/WVr3d5U3bJCz7OLT7cujnNeYj3J4OCEm
-         8fzmQV0fazHKcRCtDSrKiV79z0V6kptR98O2i+Jp9MIb5Ys1B7K8KtTkhMneEjNdYQYP
-         Gux1XCs6E5vDbNA0UTig7tSTInA420kDpwavLdyHIXQu73ZSDZU9XeiXt0d8JYstdZCd
-         62K9/c3FFPZmt5LajUypvxCFvsKqlN17zPyK+YKnbai47EjyjE/OwktKR5GTYOTFA7Hr
-         jTJA==
+        bh=CzDpViGnlSZ0DocbUgV1953NRJtdZmBasT3367zTLs8=;
+        b=mAAP5Yro5okV1eP+sX71ZTWZ+0F2e1aNBnzO3/0ziiKQRx8DJcNWzOO0XtE29kkj0I
+         vA5/scwKmh9OC5gt/LGl9Qd55opOuxTZundA5a5/xUqSTNKX67+9ElP5mSotTyfrOBZV
+         FvZ2AS10y2WopgnzXaDi70FNTYo/kzegAayAitCFR0SSPgdSoH/2TwKv8lfwBnECkVol
+         emGoDz6lJeXPPeU2gmexjtGwbreUEP1llGGoKa3XpWRyaGPtDsNtCCbzQe61KUFB3KqI
+         kmwxPcqrCnq0LWB4KYHysWcOwEKYLpCgv4l4tZPnvFeZgcFq8S/Cpaq2MbbMjTlZeArv
+         zCKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1698309298; x=1698914098;
+        d=1e100.net; s=20230601; t=1698310066; x=1698914866;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=+YFedBg08rUkg7SI8gOI1Kp7Yer7odRyCJ4yTPSttxA=;
-        b=rqF4KzP94HGtIpU6eAdX+xWeLpousFX9DvGpjFRJVi0WvO3Dy+1kxGnnIimDh9f+f9
-         1PFIAfnAa4AcmANQ3+/cIwZpVe1LZrFPF3dvfDI8/R1lsFQxz986rYMGafJHixpmwhT7
-         9R+A0ob+4fZxJ+eCgevIDau8uvTcXXrGx3mhDUB5XggJthOvfueQqWQnaKu6jiloZHEi
-         RqfXRRFMrsdQrG27TRNlsxMyHmnLZWDRIRuTOHDDqZMWdzxZ60KLDnDTQ2r3Ut09G4Mz
-         uFoMXtyU3Wmxosi4U+At6xmzURha9ISpemGs/GlM5ryb4bOHFg0XCzCY4AKyWpxwrkWa
-         pqQw==
-X-Gm-Message-State: AOJu0YxN3ucocZBya0/TA+xLSptgsQUPegAPGD9/F5i+Nj22FY1gp017
-	wf/01LtmZ9dU91OFWjG1pnlkfQFQpk2/pIhoFFw=
-X-Google-Smtp-Source: AGHT+IF7LJXTi8BftgWokZoBf5BWqPHA7cZ5ZNDiNUQFkRs0CsP6MUDuBmUoT2fmqyK4a5pN5S2AFZeSkMmGfqs4aXA=
-X-Received: by 2002:a05:6102:3faa:b0:44e:837a:25e with SMTP id
- o42-20020a0561023faa00b0044e837a025emr1227765vsv.11.1698309298619; Thu, 26
- Oct 2023 01:34:58 -0700 (PDT)
+        bh=CzDpViGnlSZ0DocbUgV1953NRJtdZmBasT3367zTLs8=;
+        b=ndfeqKYO+iw/WhnZrtQweeZODMSbG5qCX9c92pDKnTcM5/gxLOnXjcK728QtzqPPKU
+         NQEVI8z64If96voC0IqQHKqu/Fep9syeFpojAEm7skZH/2PC5t6ymjRUJb6wZ6SnBPhZ
+         VxhWaserIqgpfPhdp79NJvNfDcRI+1axcZsWQicXxliqJUmuFFQCW6ntrELLdzzDDV4P
+         /2zEklAzT2cCBPvPuMun6YOfz1c+mzHUbwib2MwjuroQuDTbqwGwwNKBTFhrTX0eTfMR
+         62PMgl5D+vYji0IWF3ndv/WRaBENjF27SiXJiwJADsl6pjZI9aJy/so081v1Ngpi9H4u
+         Meng==
+X-Gm-Message-State: AOJu0YyjaT4UCXXHtjiLXO/KDWsZ1eNsBEDvE3uTR3ZvUPNXv/SEfmpW
+	MrsflWAKvVWUSqcR4b4su7Hv/qNAweGeRPyA01I=
+X-Google-Smtp-Source: AGHT+IHFfSUWm4Ih/obzX0tS4QyEcQWtMFzf3NBKcJ3xu1yR5pEfpcQ3gdvs14780/9T/V3H4aOTGPIUS1J/O78oSUQ=
+X-Received: by 2002:adf:e507:0:b0:329:6e92:8d77 with SMTP id
+ j7-20020adfe507000000b003296e928d77mr12555785wrm.51.1698310066285; Thu, 26
+ Oct 2023 01:47:46 -0700 (PDT)
 MIME-Version: 1.0
 References: <d9ff922b-383a-4cec-b206-84d86987f4f8@navimatix.de>
  <CANPvuRkMCLPXo9FWwU+gDn4=O51=7OGWMj=Z47NGEv6F-8uZTw@mail.gmail.com>
- <CADkTA4N-aH1jf3SAVykTQ+G+t-baWNEOBjH5O56u25QJmmqw5w@mail.gmail.com> <CAMKF1srD7oyOwy8-ycm=wqqnpC8fGT858pManMLS6QCWL9tXXA@mail.gmail.com>
-In-Reply-To: <CAMKF1srD7oyOwy8-ycm=wqqnpC8fGT858pManMLS6QCWL9tXXA@mail.gmail.com>
-From: Jose Quaresma <quaresma.jose@gmail.com>
-Date: Thu, 26 Oct 2023 09:34:47 +0100
-Message-ID: <CANPvuRmrKmZC65RqFkHV2-wTZnMmLwH0f_cQprmB3Boc5w7sNg@mail.gmail.com>
+ <CADkTA4N-aH1jf3SAVykTQ+G+t-baWNEOBjH5O56u25QJmmqw5w@mail.gmail.com>
+ <CAMKF1srD7oyOwy8-ycm=wqqnpC8fGT858pManMLS6QCWL9tXXA@mail.gmail.com> <CANPvuRmrKmZC65RqFkHV2-wTZnMmLwH0f_cQprmB3Boc5w7sNg@mail.gmail.com>
+In-Reply-To: <CANPvuRmrKmZC65RqFkHV2-wTZnMmLwH0f_cQprmB3Boc5w7sNg@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Thu, 26 Oct 2023 10:47:33 +0200
+Message-ID: <CA+chaQd4QPvQbso9jvYEBeX4rEb+fpv9NKBGJKox434NuN5gxQ@mail.gmail.com>
 Subject: Re: [oe] openssl-native.rm_work runs before kernel-module.install ->
  no signature
-To: Khem Raj <raj.khem@gmail.com>
-Cc: Bruce Ashfield <bruce.ashfield@gmail.com>, joerg.sommer@navimatix.de, 
-	openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000007691d906089a7262"
+To: Jose Quaresma <quaresma.jose@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>, Bruce Ashfield <bruce.ashfield@gmail.com>, 
+	joerg.sommer@navimatix.de, openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="00000000000038324e06089aa0ad"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 26 Oct 2023 08:35:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105731
+ <openembedded-devel@lists.openembedded.org>; Thu, 26 Oct 2023 08:47:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105732
 
---0000000000007691d906089a7262
+--00000000000038324e06089aa0ad
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Khem Raj <raj.khem@gmail.com> escreveu no dia quarta, 25/10/2023 =C3=A0(s) =
-18:18:
+But something like this inside of the external kernel module should work,
+right? If yes, then it could be moved to module.bbclass or something.
 
-> I wonder if something like below would help
+At least as long as the RPATH is set correctly, that worked for me with
+some old 4.9 kernels in:
+https://github.com/shr-distribution/linux/commit/409f7adf4a862e439b5bec0473=
+9b67713e08b8ba
+
+On Thu, Oct 26, 2023 at 10:35=E2=80=AFAM Jose Quaresma <quaresma.jose@gmail=
+.com>
+wrote:
+
 >
-> diff --git a/meta/recipes-kernel/make-mod-scripts/make-mod-scripts_1.0.bb
-> b/meta/recipes-kernel/make-mod-scripts/make-mod-scripts_1.0.bb
-> index 2cff48c39c3..6133721334c 100644
-> --- a/meta/recipes-kernel/make-mod-scripts/make-mod-scripts_1.0.bb
-> +++ b/meta/recipes-kernel/make-mod-scripts/make-mod-scripts_1.0.bb
-> @@ -12,7 +12,7 @@ S =3D "${WORKDIR}"
 >
->  do_configure[depends] +=3D "virtual/kernel:do_shared_workdir
-> openssl-native:do_populate_sysroot"
->  do_compile[depends] +=3D "virtual/kernel:do_compile_kernelmodules"
-> -
-> +do_populate_sysroot[depends] +=3D "openssl-native:do_populate_sysroot"
+> Khem Raj <raj.khem@gmail.com> escreveu no dia quarta, 25/10/2023 =C3=A0(s=
+)
+> 18:18:
 >
-
-This doesn't solve the problem because at compile time the openssl is
-already there on native sysroot
-and this is the reason for the sign-file to be linked with openssl.
-The make-mod-script doesn't install anything and only calls make on the
-shared staging kernel dir
-and the consequence is creating some binaries on the shared staging kernel
-builddir.
-One of the tools it builds is the sign-file linked dynamically with the
-openssl in the native sysroot of
-make-mod-script. At the end of make-mod-script the rm_work deletes the
-native sysroot
-and this will remove the openssl libcrypto.so.3.
-Next time the sign-file in the shared staging kernel builddir will run the
-libcrypto.so.3 will not be found.
-Without using the rm_work class everything works as expected.
-
-Jose
-
-
->  DEPENDS +=3D "bc-native bison-native"
->  DEPENDS +=3D "gmp-native"
+>> I wonder if something like below would help
+>>
+>> diff --git a/meta/recipes-kernel/make-mod-scripts/make-mod-scripts_1.0.b=
+b
+>> b/meta/recipes-kernel/make-mod-scripts/make-mod-scripts_1.0.bb
+>> index 2cff48c39c3..6133721334c 100644
+>> --- a/meta/recipes-kernel/make-mod-scripts/make-mod-scripts_1.0.bb
+>> +++ b/meta/recipes-kernel/make-mod-scripts/make-mod-scripts_1.0.bb
+>> @@ -12,7 +12,7 @@ S =3D "${WORKDIR}"
+>>
+>>  do_configure[depends] +=3D "virtual/kernel:do_shared_workdir
+>> openssl-native:do_populate_sysroot"
+>>  do_compile[depends] +=3D "virtual/kernel:do_compile_kernelmodules"
+>> -
+>> +do_populate_sysroot[depends] +=3D "openssl-native:do_populate_sysroot"
+>>
 >
-> On Wed, Oct 25, 2023 at 7:45=E2=80=AFAM Bruce Ashfield <bruce.ashfield@gm=
-ail.com>
-> wrote:
-> >
-> > On Wed, Oct 25, 2023 at 7:40=E2=80=AFAM Jose Quaresma <quaresma.jose@gm=
-ail.com>
-> wrote:
-> > >
-> > > Hi Joerg,
-> > >
-> > > This topic has already been discussed previously in
-> > > https://lists.openembedded.org/g/openembedded-core/topic/98296212
-> > >
-> > > Bruce even sent a patch but it was never integrated, probably because
-> it was a very invasive change.
-> > > https://lists.openembedded.org/g/openembedded-core/message/182024
-> >
-> > Heh. No, that wasn't the reason. The change wasn't invasive, it is
-> > isolated to just the single recipe.
-> >
-> > I just didn't have the cycles to chase down host specific issues and
-> > uninative updates.
-> >
-> > Clobbering rm_work isn't the right solution IMHO, but it can do the job=
-.
-> >
-> > Bruce
-> >
-> > >
-> > > Anyway you can solve this problem with:
-> > > RM_WORK_EXCLUDE +=3D "make-mod-scripts"
-> > >
-> > > Jose
-> > >
-> > > J=C3=B6rg Sommer via lists.openembedded.org <joerg.sommer=3D
-> navimatix.de@lists.openembedded.org> escreveu no dia quarta, 25/10/2023
-> =C3=A0(s) 09:57:
-> > >>
-> > >> Hi,
-> > >>
-> > >> I'm having an odd problem building the external kernel module
-> > >> kernel-module-imx-gpu-viv [1]. I'm using kirkstone and have rm_work
-> > >> enabled.
-> > >>
-> > >> [1]  https://layers.openembedded.org/layerindex/recipe/40267/
-> > >>
-> > >> The module builds fine, but the install step contains the module
-> signing
-> > >> which **silently** fails with *libcrypto.so.3* not found:
-> > >>
-> > >> ```
-> > >> | make -C /build/tmp/work-shared/ziborium/kernel-source
-> > >>
-> M=3D/build/tmp/work/machine-pyxis-linux/kernel-module-imx-gpu-viv/6.4.3.p=
-4.2-r0/git/src
-> > >> modules_install
-> > >> | make[1]: Entering directory
-> '/build/tmp/work-shared/machine/kernel-source'
-> > >> | make -C /build/tmp/work-shared/machine/kernel-build-artifacts -f
-> > >> /build/tmp/work-shared/machine/kernel-source/Makefile modules_instal=
+> This doesn't solve the problem because at compile time the openssl is
+> already there on native sysroot
+> and this is the reason for the sign-file to be linked with openssl.
+> The make-mod-script doesn't install anything and only calls make on the
+> shared staging kernel dir
+> and the consequence is creating some binaries on the shared staging kerne=
 l
-> > >> | make[2]: Entering directory
-> > >> '/build/tmp/work-shared/machine/kernel-build-artifacts'
-> > >> | test -e include/generated/autoconf.h -a -e include/config/auto.con=
-f
-> ||
-> > >> (               \
-> > >> | echo >&2;                                                     \
-> > >> | echo >&2 "  ERROR: Kernel configuration is invalid.";         \
-> > >> | echo >&2 "         include/generated/autoconf.h or
-> > >> include/config/auto.conf are missing.";\
-> > >> | echo >&2 "         Run 'make oldconfig && make prepare' on kernel
-> src
-> > >> to fix it.";    \
-> > >> | echo >&2 ;                                                    \
-> > >> | /bin/false)
-> > >> | make -f
-> > >> /build/tmp/work-shared/machine/kernel-source/scripts/Makefile.modins=
-t
-> > >> |   mkdir -p
-> > >>
-> /build/tmp/work/machine-dist-linux/kernel-module-imx-gpu-viv/6.4.3.p4.2-r=
-0/image/usr/lib/modules/5.15.60-imx8mm+g343e81c0e39e/extra/;
-> > >> cp
-> > >>
-> /build/tmp/work/machine-dist-linux/kernel-module-imx-gpu-viv/6.4.3.p4.2-r=
-0/git/src/galcore.ko
-> > >>
-> /build/tmp/work/machine-dist-linux/kernel-module-imx-gpu-viv/6.4.3.p4.2-r=
-0/image/usr/lib/modules/5.15.60-imx8mm+g343e81c0e39e/extra/galcore.ko
-> > >> |   :
-> > >> |   scripts/sign-file "sha1" "certs/signing_key.pem"
-> > >> certs/signing_key.x509
-> > >>
-> /build/tmp/work/machine-dist-linux/kernel-module-imx-gpu-viv/6.4.3.p4.2-r=
-0/image/usr/lib/modules/5.15.60-imx8mm+g343e81c0e39e/extra/galcore.ko
-> > >> || true
-> > >> | scripts/sign-file: error while loading shared libraries:
-> > >> libcrypto.so.3: cannot open shared object file: No such file or
-> directory
-> > >> |   sh /build/tmp/work-shared/machine/kernel-source/scripts/depmod.s=
-h
-> > >> echo 5.15.60-imx8mm+g343e81c0e39e
-> > >> | Warning: modules_install: missing 'System.map' file. Skipping
-> depmod.
-> > >> | make[2]: Leaving directory
-> > >> '/build/tmp/work-shared/machine/kernel-build-artifacts'
-> > >> | make[1]: Leaving directory
-> '/build/tmp/work-shared/machine/kernel-source'
-> > >> ```
-> > >>
-> > >> I noticed that there are special dependency definitions in
-> make-mod-scripts
-> > >>
-> > >> ```
-> > >> do_configure[depends] +=3D "virtual/kernel:do_shared_workdir
-> > >> openssl-native:do_populate_sysroot"
-> > >> do_compile[depends] +=3D "virtual/kernel:do_compile_kernelmodules"
-> > >> ```
-> > >>
-> > >> and module-base.bbclass (inherited by module.bbclass)
-> > >>
-> > >> ```
-> > >> # We do the dependency this way because the output is not preserved
-> > >> # in sstate, so we must force do_compile to run (once).
-> > >> do_configure[depends] +=3D "make-mod-scripts:do_compile"
-> > >> ```
-> > >>
-> > >> Is there an additional dependency needed to address rm_work?
-> > >>
-> > >> Kind regards
-> > >>
-> > >> J=C3=B6rg Sommer
-> > >> --
-> > >> Navimatix GmbH
-> > >> Tatzendpromenade 2
-> > >> D-07745 Jena
-> > >> Gesch=C3=A4ftsf=C3=BChrer: Steffen Sp=C3=A4the, Jan Rommeley
-> > >> Registergericht: Amtsgericht Jena, HRB 501480
-> > >>
-> > >>
-> > >>
-> > >
-> > >
-> > > --
-> > > Best regards,
-> > >
-> > > Jos=C3=A9 Quaresma
-> >
-> >
-> >
-> > --
-> > - Thou shalt not follow the NULL pointer, for chaos and madness await
-> > thee at its end
-> > - "Use the force Harry" - Gandalf, Star Trek II
-> >
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#105729):
-> https://lists.openembedded.org/g/openembedded-devel/message/105729
-> > Mute This Topic: https://lists.openembedded.org/mt/102174355/1997914
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[
-> raj.khem@gmail.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
+> builddir.
+> One of the tools it builds is the sign-file linked dynamically with the
+> openssl in the native sysroot of
+> make-mod-script. At the end of make-mod-script the rm_work deletes the
+> native sysroot
+> and this will remove the openssl libcrypto.so.3.
+> Next time the sign-file in the shared staging kernel builddir will run th=
+e
+> libcrypto.so.3 will not be found.
+> Without using the rm_work class everything works as expected.
+>
+> Jose
+>
+>
+>>  DEPENDS +=3D "bc-native bison-native"
+>>  DEPENDS +=3D "gmp-native"
+>>
+>> On Wed, Oct 25, 2023 at 7:45=E2=80=AFAM Bruce Ashfield <bruce.ashfield@g=
+mail.com>
+>> wrote:
+>> >
+>> > On Wed, Oct 25, 2023 at 7:40=E2=80=AFAM Jose Quaresma <quaresma.jose@g=
+mail.com>
+>> wrote:
+>> > >
+>> > > Hi Joerg,
+>> > >
+>> > > This topic has already been discussed previously in
+>> > > https://lists.openembedded.org/g/openembedded-core/topic/98296212
+>> > >
+>> > > Bruce even sent a patch but it was never integrated, probably becaus=
+e
+>> it was a very invasive change.
+>> > > https://lists.openembedded.org/g/openembedded-core/message/182024
+>> >
+>> > Heh. No, that wasn't the reason. The change wasn't invasive, it is
+>> > isolated to just the single recipe.
+>> >
+>> > I just didn't have the cycles to chase down host specific issues and
+>> > uninative updates.
+>> >
+>> > Clobbering rm_work isn't the right solution IMHO, but it can do the jo=
+b.
+>> >
+>> > Bruce
+>> >
+>> > >
+>> > > Anyway you can solve this problem with:
+>> > > RM_WORK_EXCLUDE +=3D "make-mod-scripts"
+>> > >
+>> > > Jose
+>> > >
+>> > > J=C3=B6rg Sommer via lists.openembedded.org <joerg.sommer=3D
+>> navimatix.de@lists.openembedded.org> escreveu no dia quarta, 25/10/2023
+>> =C3=A0(s) 09:57:
+>> > >>
+>> > >> Hi,
+>> > >>
+>> > >> I'm having an odd problem building the external kernel module
+>> > >> kernel-module-imx-gpu-viv [1]. I'm using kirkstone and have rm_work
+>> > >> enabled.
+>> > >>
+>> > >> [1]  https://layers.openembedded.org/layerindex/recipe/40267/
+>> > >>
+>> > >> The module builds fine, but the install step contains the module
+>> signing
+>> > >> which **silently** fails with *libcrypto.so.3* not found:
+>> > >>
+>> > >> ```
+>> > >> | make -C /build/tmp/work-shared/ziborium/kernel-source
+>> > >>
+>> M=3D/build/tmp/work/machine-pyxis-linux/kernel-module-imx-gpu-viv/6.4.3.=
+p4.2-r0/git/src
+>> > >> modules_install
+>> > >> | make[1]: Entering directory
+>> '/build/tmp/work-shared/machine/kernel-source'
+>> > >> | make -C /build/tmp/work-shared/machine/kernel-build-artifacts -f
+>> > >> /build/tmp/work-shared/machine/kernel-source/Makefile modules_insta=
+ll
+>> > >> | make[2]: Entering directory
+>> > >> '/build/tmp/work-shared/machine/kernel-build-artifacts'
+>> > >> | test -e include/generated/autoconf.h -a -e
+>> include/config/auto.conf ||
+>> > >> (               \
+>> > >> | echo >&2;                                                     \
+>> > >> | echo >&2 "  ERROR: Kernel configuration is invalid.";         \
+>> > >> | echo >&2 "         include/generated/autoconf.h or
+>> > >> include/config/auto.conf are missing.";\
+>> > >> | echo >&2 "         Run 'make oldconfig && make prepare' on kernel
+>> src
+>> > >> to fix it.";    \
+>> > >> | echo >&2 ;                                                    \
+>> > >> | /bin/false)
+>> > >> | make -f
+>> > >> /build/tmp/work-shared/machine/kernel-source/scripts/Makefile.modin=
+st
+>> > >> |   mkdir -p
+>> > >>
+>> /build/tmp/work/machine-dist-linux/kernel-module-imx-gpu-viv/6.4.3.p4.2-=
+r0/image/usr/lib/modules/5.15.60-imx8mm+g343e81c0e39e/extra/;
+>> > >> cp
+>> > >>
+>> /build/tmp/work/machine-dist-linux/kernel-module-imx-gpu-viv/6.4.3.p4.2-=
+r0/git/src/galcore.ko
+>> > >>
+>> /build/tmp/work/machine-dist-linux/kernel-module-imx-gpu-viv/6.4.3.p4.2-=
+r0/image/usr/lib/modules/5.15.60-imx8mm+g343e81c0e39e/extra/galcore.ko
+>> > >> |   :
+>> > >> |   scripts/sign-file "sha1" "certs/signing_key.pem"
+>> > >> certs/signing_key.x509
+>> > >>
+>> /build/tmp/work/machine-dist-linux/kernel-module-imx-gpu-viv/6.4.3.p4.2-=
+r0/image/usr/lib/modules/5.15.60-imx8mm+g343e81c0e39e/extra/galcore.ko
+>> > >> || true
+>> > >> | scripts/sign-file: error while loading shared libraries:
+>> > >> libcrypto.so.3: cannot open shared object file: No such file or
+>> directory
+>> > >> |   sh /build/tmp/work-shared/machine/kernel-source/scripts/depmod.=
+sh
+>> > >> echo 5.15.60-imx8mm+g343e81c0e39e
+>> > >> | Warning: modules_install: missing 'System.map' file. Skipping
+>> depmod.
+>> > >> | make[2]: Leaving directory
+>> > >> '/build/tmp/work-shared/machine/kernel-build-artifacts'
+>> > >> | make[1]: Leaving directory
+>> '/build/tmp/work-shared/machine/kernel-source'
+>> > >> ```
+>> > >>
+>> > >> I noticed that there are special dependency definitions in
+>> make-mod-scripts
+>> > >>
+>> > >> ```
+>> > >> do_configure[depends] +=3D "virtual/kernel:do_shared_workdir
+>> > >> openssl-native:do_populate_sysroot"
+>> > >> do_compile[depends] +=3D "virtual/kernel:do_compile_kernelmodules"
+>> > >> ```
+>> > >>
+>> > >> and module-base.bbclass (inherited by module.bbclass)
+>> > >>
+>> > >> ```
+>> > >> # We do the dependency this way because the output is not preserved
+>> > >> # in sstate, so we must force do_compile to run (once).
+>> > >> do_configure[depends] +=3D "make-mod-scripts:do_compile"
+>> > >> ```
+>> > >>
+>> > >> Is there an additional dependency needed to address rm_work?
+>> > >>
+>> > >> Kind regards
+>> > >>
+>> > >> J=C3=B6rg Sommer
+>> > >> --
+>> > >> Navimatix GmbH
+>> > >> Tatzendpromenade 2
+>> > >> D-07745 Jena
+>> > >> Gesch=C3=A4ftsf=C3=BChrer: Steffen Sp=C3=A4the, Jan Rommeley
+>> > >> Registergericht: Amtsgericht Jena, HRB 501480
+>> > >>
+>> > >>
+>> > >>
+>> > >
+>> > >
+>> > > --
+>> > > Best regards,
+>> > >
+>> > > Jos=C3=A9 Quaresma
+>> >
+>> >
+>> >
+>> > --
+>> > - Thou shalt not follow the NULL pointer, for chaos and madness await
+>> > thee at its end
+>> > - "Use the force Harry" - Gandalf, Star Trek II
+>> >
+>> >
+>> >
+>>
+>
+>
+> --
+> Best regards,
+>
+> Jos=C3=A9 Quaresma
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#105731):
+> https://lists.openembedded.org/g/openembedded-devel/message/105731
+> Mute This Topic: https://lists.openembedded.org/mt/102174355/3617156
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> martin.jansa@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 >
 
-
---=20
-Best regards,
-
-Jos=C3=A9 Quaresma
-
---0000000000007691d906089a7262
+--00000000000038324e06089aa0ad
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">Khem Raj &lt;<a href=3D"mailto:raj.kh=
-em@gmail.com">raj.khem@gmail.com</a>&gt; escreveu no dia quarta, 25/10/2023=
- =C3=A0(s) 18:18:<br></div><blockquote class=3D"gmail_quote" style=3D"margi=
-n:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex=
-">I wonder if something like below would help<br>
+<div dir=3D"ltr">But something like this inside of the external kernel modu=
+le should work, right? If yes, then it could be moved to module.bbclass or =
+something.<div><br></div><div>At least as long as the RPATH is set correctl=
+y, that worked for me with some old 4.9 kernels in:</div><div><a href=3D"ht=
+tps://github.com/shr-distribution/linux/commit/409f7adf4a862e439b5bec04739b=
+67713e08b8ba">https://github.com/shr-distribution/linux/commit/409f7adf4a86=
+2e439b5bec04739b67713e08b8ba</a><br></div></div><br><div class=3D"gmail_quo=
+te"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, Oct 26, 2023 at 10:35=E2=
+=80=AFAM Jose Quaresma &lt;<a href=3D"mailto:quaresma.jose@gmail.com">quare=
+sma.jose@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote=
+" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);=
+padding-left:1ex"><div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div clas=
+s=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">Khem Raj &lt;<a hre=
+f=3D"mailto:raj.khem@gmail.com" target=3D"_blank">raj.khem@gmail.com</a>&gt=
+; escreveu no dia quarta, 25/10/2023 =C3=A0(s) 18:18:<br></div><blockquote =
+class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px sol=
+id rgb(204,204,204);padding-left:1ex">I wonder if something like below woul=
+d help<br>
 <br>
 diff --git a/meta/recipes-kernel/make-mod-scripts/<a href=3D"http://make-mo=
 d-scripts_1.0.bb" rel=3D"noreferrer" target=3D"_blank">make-mod-scripts_1.0=
@@ -515,27 +549,31 @@ br>
 &gt; thee at its end<br>
 &gt; - &quot;Use the force Harry&quot; - Gandalf, Star Trek II<br>
 &gt;<br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt; Links: You receive all messages sent to this group.<br>
-&gt; View/Reply Online (#105729): <a href=3D"https://lists.openembedded.org=
-/g/openembedded-devel/message/105729" rel=3D"noreferrer" target=3D"_blank">=
-https://lists.openembedded.org/g/openembedded-devel/message/105729</a><br>
-&gt; Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/10217435=
-5/1997914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.=
-org/mt/102174355/1997914</a><br>
-&gt; Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openem=
-bedded.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.o=
-rg</a><br>
-&gt; Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-=
-devel/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedde=
-d.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com"=
- target=3D"_blank">raj.khem@gmail.com</a>]<br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+&gt; <br>
 &gt;<br>
 </blockquote></div><br clear=3D"all"><div><br></div><span class=3D"gmail_si=
 gnature_prefix">-- </span><br><div dir=3D"ltr" class=3D"gmail_signature"><d=
 iv dir=3D"ltr">Best regards,<div><br>Jos=C3=A9 Quaresma</div></div></div></=
 div>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#105731): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/105731" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/105731</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/102174355/361=
+7156" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/102174355/3617156</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:martin.jansa@gmail.com" =
+target=3D"_blank">martin.jansa@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div>
 
---0000000000007691d906089a7262--
+--00000000000038324e06089aa0ad--
 
