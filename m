@@ -1,196 +1,141 @@
-Return-Path: <peron.clem@gmail.com>
+Return-Path: <richard.purdie@linuxfoundation.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CC164C25B47
-	for <webhook@archiver.kernel.org>; Fri, 27 Oct 2023 16:50:57 +0000 (UTC)
-Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com [209.85.167.53])
- by mx.groups.io with SMTP id smtpd.web11.11990.1698425454771286963
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DDA1AC25B47
+	for <webhook@archiver.kernel.org>; Fri, 27 Oct 2023 16:53:37 +0000 (UTC)
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
+ by mx.groups.io with SMTP id smtpd.web11.12049.1698425607511345126
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 27 Oct 2023 09:50:55 -0700
+ Fri, 27 Oct 2023 09:53:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=hGMfDz1d;
- spf=pass (domain: gmail.com, ip: 209.85.167.53, mailfrom: peron.clem@gmail.com)
-Received: by mail-lf1-f53.google.com with SMTP id 2adb3069b0e04-507be298d2aso3341168e87.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 27 Oct 2023 09:50:54 -0700 (PDT)
+ dkim=pass header.i=@linuxfoundation.org header.s=google header.b=RJY9E5iB;
+ spf=pass (domain: linuxfoundation.org, ip: 209.85.221.43, mailfrom: richard.purdie@linuxfoundation.org)
+Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-32f760cbff3so297874f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 27 Oct 2023 09:53:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1698425452; x=1699030252; darn=lists.openembedded.org;
-        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=/XJ7D7rRJ0qrEATjdJoZi8HBRc549k+y9RIQYFkyC+k=;
-        b=hGMfDz1d9944565GlrlFig/Veo/ngRioSTuh5GpVV3f5nWjOjd2DTkFjVhsa9/35/c
-         d2aihCZuo9ExitozkL2AXrlJIrJnTxD6vlrRpJu4tzPX4m+HCZ1mD5VYdSm1pPnJJF59
-         goNV909Yj99t0oLbbDuRfV1csplkpqGkXpAM1jG+2OQbWq5ct20/r4nPl3wEiUCwvYUL
-         OYCLBAQjMIadAv5jenDhZWKS2ZOh7EQjKBCyOLEFMQfnwIPdd90OApg0hEWPOUsIL/cH
-         JOLd1pjg5GAf7wQozIVhmYUxNCcWb2cEov8zqYIaZ+W7JIZvqXPpkSf/AfFJ1C2McWSb
-         Z6IA==
+        d=linuxfoundation.org; s=google; t=1698425606; x=1699030406; darn=lists.openembedded.org;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=8NMvN8NtPLltfrgxD/O1WglqvW9prg8HChw72gaXkwM=;
+        b=RJY9E5iBgD2tyWG116qmLJo1f3NNgT4I5JMf1ncsA+9mzJ1Qd4hJTyx3RvjGZHLMr7
+         lNBur4z5N/IzCmjlnEf4UwE37T2txeK7eM0rIkFhYXJd2qiCbWFBj9H/2cwdgzuB+LmW
+         qkK4gZeUIh95oalnQl2kukN4C3Zd7VgXWMCys=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1698425452; x=1699030252;
-        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=/XJ7D7rRJ0qrEATjdJoZi8HBRc549k+y9RIQYFkyC+k=;
-        b=U4lIBMlzevzxTg2qR6gzt9voHkdqPcj4AzpAQFZAJDq3hwpTHu1mErn8RO8xpADOrN
-         mC06A0uKAAKn8yFi6XheAZS8tDMMhyQ0LZKPBgwzKd38mRyWOnUEcnRWJS53UN1pc74P
-         PMi7o0METzsJ6har9TPyhixZ7qj3AEP7Rhw2RohqIOeCXaHiejgQ7ghIswP7JOaEqf5M
-         P0wMpiy+wcISPtK72pQgX7akB6YkU/cOkIrwaLxvA9gb508+26CibBsTHJU+2v66hgoc
-         8fNPto7cSm18KDXCZvGP+LC+Vh7EHqY1lAfwhdpp7zgvOzECkgNUHKI5++BDVpmIOTZz
-         HYzA==
-X-Gm-Message-State: AOJu0YyyOA8Upuztq1j8+Xmc7cCFgUf8+GGYGf1/6+4mPPDKhhneP60f
-	18cHRWPi0vfQmqy7a9MZVOFiwXUT73p7QZME9hYCp/lF
-X-Google-Smtp-Source: AGHT+IHj919hCOvz+H8ZJDD7NLwiH+/vwA/C4tQ8niBHu5dHwiBNq2OVNXs1TsVEyuFWmgBPtmi/7sI7QwaIAer40ak=
-X-Received: by 2002:a05:6512:128b:b0:508:126a:751e with SMTP id
- u11-20020a056512128b00b00508126a751emr3062515lfs.36.1698425451856; Fri, 27
- Oct 2023 09:50:51 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1698425606; x=1699030406;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=8NMvN8NtPLltfrgxD/O1WglqvW9prg8HChw72gaXkwM=;
+        b=mbm1zYVEK0Pp6sPK6CO66M10baod0tWYpplkgvBcDYIr5D6of+LHuMvCqiq+3tSDL9
+         DcV2fpAYWtG5VjZ8rPjF9nfWV05Ggu2FfNZQQq9FhesWQndnPef4sHPt1pZ7Q6FMO4hy
+         O0W1jXYu9lS8HGklOdJPdpGleHXBiVyQfAW/qwQVmLWKmZLdTskluQrK0+BqGphbzpU/
+         Uq9bF8TGy2vGC+zNISNOqyTgnZvQxgFkBgwnnqnF/2c2b2GvNB566jVko6HNKbDNwsgo
+         scB1YQYH08NtGgd5IQFAsIR6bGy7umw+KU32BaSCBv3UEShzgal+AhPgobtz4mlHo/ez
+         N7/g==
+X-Gm-Message-State: AOJu0YxLZMOXUfoB2uacxFNbaOllQmV9poGW9SiRXZT+MICceelZwcpZ
+	wp1+7X6B//A8ktY7z/OOUYvcng==
+X-Google-Smtp-Source: AGHT+IEDAB2ps3s085EpegKib1nvJudDWZbPakQbuY4upevkevAc46B4yTT4amCOdg4Yd/SUnT3kTQ==
+X-Received: by 2002:adf:e44a:0:b0:32d:a2d7:ae88 with SMTP id t10-20020adfe44a000000b0032da2d7ae88mr2180928wrm.43.1698425605621;
+        Fri, 27 Oct 2023 09:53:25 -0700 (PDT)
+Received: from ?IPv6:2001:8b0:aba:5f3c:35e4:65b9:f46b:317d? ([2001:8b0:aba:5f3c:35e4:65b9:f46b:317d])
+        by smtp.gmail.com with ESMTPSA id d16-20020adfef90000000b0032326908972sm2117078wro.17.2023.10.27.09.53.24
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 27 Oct 2023 09:53:25 -0700 (PDT)
+Message-ID: <b07976f49a6a948c28950f68069bfeec926fe0d5.camel@linuxfoundation.org>
+Subject: Re: meta-oe source mirroring
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: Tom Rini <trini@konsulko.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>, Armin
+	Kuster <akuster808@gmail.com>, Khem Raj <raj.khem@gmail.com>
+Date: Fri, 27 Oct 2023 17:53:24 +0100
+In-Reply-To: <20231027163016.GX496310@bill-the-cat>
+References: 
+	<f928e9f7f4e98eeb45db886a70b26cd7c292702f.camel@linuxfoundation.org>
+	 <20231027163016.GX496310@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.48.1-0ubuntu1 
 MIME-Version: 1.0
-References: <20231027150244.231022-1-peron.clem@gmail.com>
-In-Reply-To: <20231027150244.231022-1-peron.clem@gmail.com>
-From: =?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>
-Date: Fri, 27 Oct 2023 18:50:41 +0200
-Message-ID: <CAJiuCcf33QLQrd6_H4tK48GdOXHaoLHu7cjmhJfc_PK2RBaMpw@mail.gmail.com>
-Subject: Re: [PATCH] connectivity: add pcapplusplus recipe
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="000000000000bc4aeb0608b57d2d"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 27 Oct 2023 16:50:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105779
+ <openembedded-devel@lists.openembedded.org>; Fri, 27 Oct 2023 16:53:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105780
 
---000000000000bc4aeb0608b57d2d
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Fri, 2023-10-27 at 12:30 -0400, Tom Rini wrote:
+> On Thu, Oct 26, 2023 at 03:22:26PM +0100, Richard Purdie wrote:
+>=20
+> > I'm happy to say that meta-openembedded source mirroring is now working
+> > via the Yocto Project's infrastructure and available through the
+> > project's source mirrors.
+> >=20
+> > An example successful run with master is here:
+> >=20
+> > https://autobuilder.yoctoproject.org/typhoon/#/builders/156/builds/19
+> >=20
+> > Nanbield should also work.
+> >=20
+> > kirkstone is here and is now error free but does show a lot of
+> > warnings:
+> >=20
+> > https://autobuilder.yoctoproject.org/typhoon/#/builders/156/builds/27
+> >=20
+> > dunfell is also error free but also shows warnings:
+> >=20
+> > https://autobuilder.yoctoproject.org/typhoon/#/builders/156/builds/31
+> >=20
+> > I did have to disable two recipes as one uses mercurial (the other has
+> > it as a dependency) and the mercurial checkout format changed between
+> > versions. The mirrors from later releases don't work with the version
+> > of mercurial-native from dunfell meta-oe. Disabling it was the
+> > easiest/safest path forward.
+> >=20
+> > Currently these are all scheduled to run automatically. If we can fix
+> > the warnings, that can stay. If there isn't a desire to fix the
+> > warnings in stable branches, we'd probably disable the scheduler for
+> > them since we have a policy of no warnings on the autobuilder.
+>=20
+> Maybe it's because I'm missing a different step, but I've always had to
+> setup source mirrors for SCM archives to be in a subdirectory, not just
+> for mercurial style problems but for hash changes. For example I have:
+> $ ls -d ~/work/OE/downloads/*/git2_sourceware.org.git.glibc.git.tar.gz
+> /home/trini/work/OE/downloads/dunfell/git2_sourceware.org.git.glibc.git.t=
+ar.gz
+> /home/trini/work/OE/downloads/honister/git2_sourceware.org.git.glibc.git.=
+tar.gz
+> ...
+>=20
+> And then have in my PREMIRRORS:
+> git://.*/.*     ${SOURCE_MIRROR_URL}/${LAYERSERIES_COMPAT:core} \n \
+> gitsm://.*/.*   ${SOURCE_MIRROR_URL}/${LAYERSERIES_COMPAT:core} \n \
+>=20
+> So that I get the right thing. Might this be closer to the path forward
+> to solve the above issue? Or is mine because I'm not generating the
+> archives correctly to start with (and so the mercurial issue really is
+> special) ?
 
-Hi,
+The idea is that information is not removed from the archives so that a
+newer archive should always have everything the older one had plus
+more. In that sense, DL_DIR should be shareable between newer and older
+releases and the mirror tarballs should to. They don't have to be
+identical, newer ones may contain new revisions, as long as the older
+ones are still there.
 
-Le ven. 27 oct. 2023, 17:02, Cl=C3=A9ment P=C3=A9ron <peron.clem@gmail.com>=
- a =C3=A9crit :
+For YP, we only have one source mirror for all releases.
 
-> Add PcapPlusPlus 23.09 recipe.
->
-> Signed-off-by: Cl=C3=A9ment P=C3=A9ron <peron.clem@gmail.com>
-> ---
->  .../pcapplusplus/pcapplusplus_23.09.bb        | 19 +++++++++++++++++++
->  1 file changed, 19 insertions(+)
->  create mode 100644 meta-oe/recipes-connectivity/pcapplusplus/
-> pcapplusplus_23.09.bb
->
-> diff --git a/meta-oe/recipes-connectivity/pcapplusplus/
-> pcapplusplus_23.09.bb b/meta-oe/recipes-connectivity/pcapplusplus/
-> pcapplusplus_23.09.bb
-> new file mode 100644
-> index 000000000..90f18b7aa
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/pcapplusplus/pcapplusplus_23.09.bb
-> @@ -0,0 +1,19 @@
-> +SUMMARY =3D "A multiplatform C++ library for capturing, parsing and
-> crafting of network packets"
-> +HOMEPAGE =3D "https://pcapplusplus.github.io/"
-> +BUGTRACKER =3D "https://github.com/seladb/PcapPlusPlus/issues"
-> +SECTION =3D "libs/network"
-> +LICENSE =3D "Unlicense"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D911690f51af322440237a253d695d=
-19f"
-> +
-> +DEPENDS =3D "libpcap"
-> +
-> +SRC_URI =3D "git://
-> github.com/seladb/PcapPlusPlus.git;protocol=3Dhttps;branch=3Dmaster"
-> +SRCREV =3D "4cf8ed44f9dd145f874dc1dd747dfefcfcab75be"
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +inherit cmake
-> +
-> +PACKAGECONFIG ??=3D "shared"
-> +PACKAGECONFIG[zstd] =3D
-> "-DLIGHT_PCAPNG_ZSTD=3DON,-DLIGHT_PCAPNG_ZSTD=3DOFF,zstd"
-> +PACKAGECONFIG[shared] =3D "-DBUILD_SHARED_LIBS=3DON,-DBUILD_SHARED_LIBS=
-=3DOFF
+With mercurial, they changed the on disk format newer tooling creates
+so it doesn't work with the mercurial-native from dunfell. If you
+ASSUME_PROVIDED it, or update the recipe it would work. Since it is a
+single recipe on an fairly old release (now) I'm not worrying too much
+about it. The mirrors do have the data and people would make it work if
+they needed to.
+
+Cheers,
+
+Richard
 
 
-I will send a v2 to also disable Tests and Examples binaries in the package
 
-Regards
-
---=20
-> 2.42.0
->
->
-
---000000000000bc4aeb0608b57d2d
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"auto"><div>Hi,<br><br><div class=3D"gmail_quote"><div dir=3D"lt=
-r" class=3D"gmail_attr">Le ven. 27 oct. 2023, 17:02, Cl=C3=A9ment P=C3=A9ro=
-n &lt;<a href=3D"mailto:peron.clem@gmail.com">peron.clem@gmail.com</a>&gt; =
-a =C3=A9crit=C2=A0:<br></div><blockquote class=3D"gmail_quote" style=3D"mar=
-gin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">Add PcapPlusPlu=
-s 23.09 recipe.<br>
-<br>
-Signed-off-by: Cl=C3=A9ment P=C3=A9ron &lt;<a href=3D"mailto:peron.clem@gma=
-il.com" target=3D"_blank" rel=3D"noreferrer">peron.clem@gmail.com</a>&gt;<b=
-r>
----<br>
-=C2=A0.../pcapplusplus/<a href=3D"http://pcapplusplus_23.09.bb" rel=3D"nore=
-ferrer noreferrer" target=3D"_blank">pcapplusplus_23.09.bb</a>=C2=A0 =C2=A0=
- =C2=A0 =C2=A0 | 19 +++++++++++++++++++<br>
-=C2=A01 file changed, 19 insertions(+)<br>
-=C2=A0create mode 100644 meta-oe/recipes-connectivity/pcapplusplus/<a href=
-=3D"http://pcapplusplus_23.09.bb" rel=3D"noreferrer noreferrer" target=3D"_=
-blank">pcapplusplus_23.09.bb</a><br>
-<br>
-diff --git a/meta-oe/recipes-connectivity/pcapplusplus/<a href=3D"http://pc=
-applusplus_23.09.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">pcappl=
-usplus_23.09.bb</a> b/meta-oe/recipes-connectivity/pcapplusplus/<a href=3D"=
-http://pcapplusplus_23.09.bb" rel=3D"noreferrer noreferrer" target=3D"_blan=
-k">pcapplusplus_23.09.bb</a><br>
-new file mode 100644<br>
-index 000000000..90f18b7aa<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-connectivity/pcapplusplus/<a href=3D"http://pcapplusp=
-lus_23.09.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">pcapplusplus_=
-23.09.bb</a><br>
-@@ -0,0 +1,19 @@<br>
-+SUMMARY =3D &quot;A multiplatform C++ library for capturing, parsing and c=
-rafting of network packets&quot;<br>
-+HOMEPAGE =3D &quot;<a href=3D"https://pcapplusplus.github.io/" rel=3D"nore=
-ferrer noreferrer" target=3D"_blank">https://pcapplusplus.github.io/</a>&qu=
-ot;<br>
-+BUGTRACKER =3D &quot;<a href=3D"https://github.com/seladb/PcapPlusPlus/iss=
-ues" rel=3D"noreferrer noreferrer" target=3D"_blank">https://github.com/sel=
-adb/PcapPlusPlus/issues</a>&quot;<br>
-+SECTION =3D &quot;libs/network&quot;<br>
-+LICENSE =3D &quot;Unlicense&quot;<br>
-+LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D911690f51af322440237a253d6=
-95d19f&quot;<br>
-+<br>
-+DEPENDS =3D &quot;libpcap&quot;<br>
-+<br>
-+SRC_URI =3D &quot;git://<a href=3D"http://github.com/seladb/PcapPlusPlus.g=
-it;protocol=3Dhttps;branch=3Dmaster" rel=3D"noreferrer noreferrer" target=
-=3D"_blank">github.com/seladb/PcapPlusPlus.git;protocol=3Dhttps;branch=3Dma=
-ster</a>&quot;<br>
-+SRCREV =3D &quot;4cf8ed44f9dd145f874dc1dd747dfefcfcab75be&quot;<br>
-+<br>
-+S =3D &quot;${WORKDIR}/git&quot;<br>
-+<br>
-+inherit cmake<br>
-+<br>
-+PACKAGECONFIG ??=3D &quot;shared&quot;<br>
-+PACKAGECONFIG[zstd] =3D &quot;-DLIGHT_PCAPNG_ZSTD=3DON,-DLIGHT_PCAPNG_ZSTD=
-=3DOFF,zstd&quot;<br>
-+PACKAGECONFIG[shared] =3D &quot;-DBUILD_SHARED_LIBS=3DON,-DBUILD_SHARED_LI=
-BS=3DOFF</blockquote></div></div><div dir=3D"auto"><br></div><div dir=3D"au=
-to">I will send a v2 to also disable Tests and Examples binaries in the pac=
-kage</div><div dir=3D"auto"><br></div><div dir=3D"auto">Regards=C2=A0</div>=
-<div dir=3D"auto"><br></div><div dir=3D"auto"></div><div dir=3D"auto"><div =
-class=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=3D"margin:0 0=
- 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
--- <br>
-2.42.0<br>
-<br>
-</blockquote></div></div></div>
-
---000000000000bc4aeb0608b57d2d--
 
