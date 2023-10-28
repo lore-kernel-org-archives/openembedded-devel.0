@@ -1,115 +1,175 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <peron.clem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4698AC25B67
-	for <webhook@archiver.kernel.org>; Sat, 28 Oct 2023 05:06:15 +0000 (UTC)
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
- by mx.groups.io with SMTP id smtpd.web11.13319.1698469570193580447
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B3163C0032E
+	for <webhook@archiver.kernel.org>; Sat, 28 Oct 2023 10:20:06 +0000 (UTC)
+Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com [209.85.167.50])
+ by mx.groups.io with SMTP id smtpd.web11.15560.1698488402688886655
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 27 Oct 2023 22:06:10 -0700
+ Sat, 28 Oct 2023 03:20:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=drJwQUj3;
- spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-1c87a85332bso24589345ad.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 27 Oct 2023 22:06:10 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=emJB7WYa;
+ spf=pass (domain: gmail.com, ip: 209.85.167.50, mailfrom: peron.clem@gmail.com)
+Received: by mail-lf1-f50.google.com with SMTP id 2adb3069b0e04-507c78d258fso4250319e87.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 28 Oct 2023 03:20:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1698469569; x=1699074369; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=zmgCkOCZ1AK8MorZ6VDUYCrEqhsvs9BSYeViI/qmatk=;
-        b=drJwQUj3LBUSHq+TnG6AjGpwQQiYPD00qSnl34ZbiUp+rud/q9icVUpPfgnDxthSf4
-         4OIxw78X4M2UQrka8IvEJoP24J6m31Hvp3LVTBr2wikk6VaeydbDMSKYfkLBahFRYn/n
-         BTtBGRQPOZ4UXMvaokYHV0pjOSDA/ZVkl4Ej2yI6pITwJ+PWXLHqGELibozeX8JNk53Z
-         vaBS4HnoS0VhYSg6EIiPPK49AXqODOoLTkpWsA7sruHtgUYlXrfFdn9/m6eCQMhPzA+h
-         VIsA1gyMC+Zkw/p/+kt5vawd93zsgimZcVmx3q+//SNMpn5/M2tAqhiEE0y/EgrXEPic
-         zikA==
+        d=gmail.com; s=20230601; t=1698488401; x=1699093201; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=zLbzMwcYZJjgQN3LJsNCXcHOW9c/yQ7AbocklmAxMoU=;
+        b=emJB7WYawgR81t1hMKekuBvRIEtsKGB/2oRy7N1iNJMQMwpCS02C8UVy0lZFgxPGmM
+         dIPiylVDQTbKhVEYIt/UFZrCoqYL4QujKOy9en549CtDECUyb56+APYdWIUTUX5kaO9f
+         +0tO3Vp+rgy9sw9tePY2SzOWDl+UgfTfifOEevpACMQ0WIizDFPk+EWfLynXPK61mXCw
+         AXb3RVgBhIA0DW/zWZ8CQBK7Z+EKQKW6VHZ9psgVKbxBSBaKPSpEI+hiuXzhI9iFgiBu
+         8ujeqjm3bQRnOXKu3UrkJM5wMt167m6V5sf/TPMCqTRjQy/vJ91HFhrQ+aUt26fLPm5m
+         HPlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1698469569; x=1699074369;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=zmgCkOCZ1AK8MorZ6VDUYCrEqhsvs9BSYeViI/qmatk=;
-        b=dTL33P6k/07F6UaUB5gyir4OVBbNh+7DH48z3SaxcmfOfeSOFtLYq5UU49xDpL8wJZ
-         zUyLRLerTxQFxm/G2Nffk9KDtPMPITlXspbrkcu9hC+Cuwdo+6bbSk/El/12l7YRwQJh
-         TWI5riAaoPZ25pPO9/m34H6ofj3B+qlSPRaUJGy1wUVfALIfHcT9e8YwKEpP97LL/ZG9
-         P0etDHGGOaPv8oG+3pkVP3XbKRB1y0iIpx3C/TcoOKacH4haI3rUHoKwJ+R4RwhpCjtj
-         tIwiqnZdGzy09te245JhcNNhWyAhZ7qqLMYtQMWro9nhyD4Lc6k1HhlyPwF8lG+K27n4
-         WsSg==
-X-Gm-Message-State: AOJu0YxBgWp6GRw3bT1x9Z7dxcOUcqBokzIY1eKIHDwEYqdKKpBq4z1Y
-	+nnzYKQl1eTmXnQXxvxk5do7ogcUoBU=
-X-Google-Smtp-Source: AGHT+IGutmbLwTNn0gcE3LJbuidBZhKLZblD7c0HXQioheEiAdh43Qd0aj4RUHHL6o7zzsymseEuog==
-X-Received: by 2002:a17:903:20d4:b0:1cc:2dad:7ae9 with SMTP id i20-20020a17090320d400b001cc2dad7ae9mr1883457plb.32.1698469569238;
-        Fri, 27 Oct 2023 22:06:09 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9100:2cb0::46eb])
-        by smtp.gmail.com with ESMTPSA id e2-20020a170902d38200b001c627413e87sm407614pld.290.2023.10.27.22.06.08
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 27 Oct 2023 22:06:08 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][meta-gnome][PATCH v2] network-manager-applet,networkmanager-openvpn, networkmanager: Apply linker versioning patch when using lld only
-Date: Fri, 27 Oct 2023 22:06:06 -0700
-Message-ID: <20231028050606.3438884-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.42.0
+        d=1e100.net; s=20230601; t=1698488401; x=1699093201;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=zLbzMwcYZJjgQN3LJsNCXcHOW9c/yQ7AbocklmAxMoU=;
+        b=un0cf9X7wzqEqfgbdb3lAKWcLcDKaMu9hPvZjdEtKAgwblN00T4mqpboUOHB1KtKQq
+         U4mA6oi/9dQzRBRaIV9wdXO/EXRtkUBt5C4LmTK/zsFA7ZaPfqmsG+E4XfpP3SAwldfI
+         NipjJigjln3dILyYThPmosF/pftZGoVUyxY3e9roLi3lFAtTZv9/JgipgV2699+CFNrT
+         RYqA5lpwagCRX06cu9bCzvvvQiZtc+R36v95hnGBh2A3fBYDZ4hFo3/B201UJ//SDB3S
+         Kvs01VRSTppBsBlBdaPWQw/Hsvo8Jkub6b/AUMLZ+EsRkTqg7fEM2b9JqOuQ7Ih0kPL3
+         OUeg==
+X-Gm-Message-State: AOJu0YxwgGJjLWBofxE+liGYkEwMFVjBIGZ6pw89HniNm0MaSSJJT2gW
+	53f+Lnx1OduaLBs7ak8mc75uLPSYhDK5bqJr9SM=
+X-Google-Smtp-Source: AGHT+IERzBwLMl3WWK2bzi70W5rflwFIhcfTv9mxO2cK1iBORf+Qy9gjbsM7mxe8+E2etNp4QPmToNXfI/vDHx0qXyE=
+X-Received: by 2002:a05:6512:48d0:b0:503:15a5:b368 with SMTP id
+ er16-20020a05651248d000b0050315a5b368mr3745293lfb.16.1698488400389; Sat, 28
+ Oct 2023 03:20:00 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20231027194914.78513-1-peron.clem@gmail.com> <DB5PR02MB102132E9626696DE2B38664C1EFDCA@DB5PR02MB10213.eurprd02.prod.outlook.com>
+In-Reply-To: <DB5PR02MB102132E9626696DE2B38664C1EFDCA@DB5PR02MB10213.eurprd02.prod.outlook.com>
+From: =?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>
+Date: Sat, 28 Oct 2023 12:19:48 +0200
+Message-ID: <CAJiuCcf2CtT1Nka5L-X1XHuWYcig4EmgJqDsMeZ+sTZ4dNxZxg@mail.gmail.com>
+Subject: Re: [oe] [PATCH v2] connectivity: add pcapplusplus recipe
+To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 28 Oct 2023 05:06:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105784
+ <openembedded-devel@lists.openembedded.org>; Sat, 28 Oct 2023 10:20:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105785
 
-This patch caused GNU linker to fail linking, therefore limit it to just
-lld.
+Hi Peter,
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../network-manager-applet/network-manager-applet_1.32.0.bb     | 2 +-
- .../networkmanager/networkmanager-openvpn_1.10.2.bb             | 2 +-
- .../networkmanager/networkmanager_1.44.0.bb                     | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+On Fri, 27 Oct 2023 at 22:40, Peter Kjellerstedt
+<peter.kjellerstedt@axis.com> wrote:
+>
+> > -----Original Message-----
+> > From: openembedded-devel@lists.openembedded.org <openembedded-devel@lis=
+ts.openembedded.org> On Behalf Of Cl=C3=A9ment P=C3=A9ron
+> > Sent: den 27 oktober 2023 21:49
+> > To: openembedded-devel@lists.openembedded.org
+> > Cc: Cl=C3=A9ment P=C3=A9ron <peron.clem@gmail.com>
+> > Subject: [oe] [PATCH v2] connectivity: add pcapplusplus recipe
+>
+> A more standard subject would be something like:
+>
+> pcapplusplus: Add recipe
+>
+> >
+> > Add PcapPlusPlus 23.09 recipe.
+> >
+> > Signed-off-by: Cl=C3=A9ment P=C3=A9ron <peron.clem@gmail.com>
+> > ---
+> >  .../pcapplusplus/pcapplusplus_23.09.bb        | 21 +++++++++++++++++++
+> >  1 file changed, 21 insertions(+)
+> >  create mode 100644 meta-oe/recipes-connectivity/pcapplusplus/pcapplusp=
+lus_23.09.bb
+> >
+> > diff --git a/meta-oe/recipes-
+> > connectivity/pcapplusplus/pcapplusplus_23.09.bb b/meta-oe/recipes-conne=
+ctivity/pcapplusplus/pcapplusplus_23.09.bb
+> > new file mode 100644
+> > index 000000000..39c6942c8
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-connectivity/pcapplusplus/pcapplusplus_23.09.bb
+> > @@ -0,0 +1,21 @@
+> > +SUMMARY =3D "A multiplatform C++ library for capturing, parsing and cr=
+afting of network packets"
+> > +HOMEPAGE =3D "https://pcapplusplus.github.io/"
+> > +BUGTRACKER =3D "https://github.com/seladb/PcapPlusPlus/issues"
+> > +SECTION =3D "libs/network"
+> > +LICENSE =3D "Unlicense"
+> > +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D911690f51af322440237a253d69=
+5d19f"
+> > +
+> > +DEPENDS =3D "libpcap"
+> > +
+> > +SRC_URI =3D "git://github.com/seladb/PcapPlusPlus.git;protocol=3Dhttps=
+;branch=3Dmaster"
+> > +SRCREV =3D "4cf8ed44f9dd145f874dc1dd747dfefcfcab75be"
+> > +
+> > +S =3D "${WORKDIR}/git"
+> > +
+> > +inherit cmake
+> > +
+> > +PACKAGECONFIG ??=3D ""
+> > +PACKAGECONFIG[examples] =3D "-DPCAPPP_BUILD_EXAMPLES=3DON,-DPCAPPP_BUI=
+LD_EXAMPLES=3DOFF"
+> > +PACKAGECONFIG[shared] =3D "-DBUILD_SHARED_LIBS=3DON,-DBUILD_SHARED_LIB=
+S=3DOFF"
+>
+> Did you really mean to not enable the "shared" PACAKEGCONFIG,
+> and thus only build static libraries? That seems very odd.
 
-diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.32.0.bb b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.32.0.bb
-index 20fc0f3868..058aeb58d2 100644
---- a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.32.0.bb
-+++ b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.32.0.bb
-@@ -9,7 +9,7 @@ inherit features_check gnomebase gsettings gtk-icon-cache gettext pkgconfig
- 
- ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
- 
--SRC_URI:append:libc-musl = " file://0001-linker-script-Do-not-export-_IO_stdin_used.patch"
-+SRC_URI:append:libc-musl = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-lld', ' file://0001-linker-scripts-Do-not-export-_IO_stdin_used.patch', '', d)}"
- 
- SRC_URI[archive.sha256sum] = "a2b5affa1505ad43902959fdbe09e5bcec57b11ed333fa60458ffb9c62efba38"
- 
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.10.2.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.10.2.bb
-index 024ef39361..a9afe3a7e4 100644
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.10.2.bb
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.10.2.bb
-@@ -10,7 +10,7 @@ inherit gnomebase useradd gettext systemd
- 
- SRC_URI = "${GNOME_MIRROR}/NetworkManager-openvpn/${@gnome_verdir("${PV}")}/NetworkManager-openvpn-${PV}.tar.xz"
- 
--SRC_URI:append:libc-musl = " file://0001-linker-script-Do-not-export-_IO_stdin_used.patch"
-+SRC_URI:append:libc-musl = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-lld', ' file://0001-linker-scripts-Do-not-export-_IO_stdin_used.patch', '', d)}"
- 
- SRC_URI[sha256sum] = "62f0f2a8782221b923f212ac2a8ebbc1002efd6a90ee945dad4adfb56d076d21"
- 
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.44.0.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.44.0.bb
-index 84ef70c9af..8d1c877baa 100644
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.44.0.bb
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.44.0.bb
-@@ -31,7 +31,7 @@ SRC_URI = " \
-     file://enable-dhcpcd.conf \
-     file://enable-iwd.conf \
- "
--SRC_URI:append:libc-musl = " file://0001-linker-scripts-Do-not-export-_IO_stdin_used.patch"
-+SRC_URI:append:libc-musl = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-lld', ' file://0001-linker-scripts-Do-not-export-_IO_stdin_used.patch', '', d)}"
- 
- SRC_URI[sha256sum] = "edca09637d182f806b3b12d8c5623d7badbd73ccca1ae63be20d2f298779fb9f"
- 
--- 
-2.42.0
+Thanks for your feedback, indeed in my application I only use a small
+part of Pcap++ and don't want to have all the Pcap++ shared library.
 
+Also the shared library is not the default behavior on PcapPP repo as
+they are some issues with Windows DLL.
+
+>
+> > +PACKAGECONFIG[tests] =3D "-DPCAPPP_BUILD_TESTS=3DON,-DPCAPPP_BUILD_TES=
+TS=3DOFF"
+> > +PACKAGECONFIG[zstd] =3D "-DLIGHT_PCAPNG_ZSTD=3DON,-DLIGHT_PCAPNG_ZSTD=
+=3DOFF,zstd"
+>
+> Since it is unlikely that anyone wants to enable the examples and
+> only build statically, I would suggest replacing the first two
+> PACKAGECONFIGs above with:
+
+Examples may be bad naming. It's more like "Tools" which binaries like
+Arping, DnsSpoofing, HttpAnalyzer, etc...
+
+Then inside these Examples there are trivial ones that are called "Tutorial=
+s"
+which the configuration is not configurable here.
+
+>
+> EXTRA_OECMAKE +=3D "-DBUILD_SHARED_LIBS=3DON -DPCAPPP_BUILD_EXAMPLES=3DOF=
+F"
+>
+> And unless you plan on adding ptest support, you may as well remove the
+> tests PACKAGECONFIG too, and make that:
+>
+> EXTRA_OECMAKE +=3D "-DBUILD_SHARED_LIBS=3DON -DPCAPPP_BUILD_EXAMPLES=3DOF=
+F -DPCAPPP_BUILD_TESTS=3DOFF"
+>
+> And if either of those three matches the upstream defaults,
+> you can of course remove it altogether.
+
+So you prefer to have everything defined with EXTRA_OECMAKE.
+
+Why not let the user have this configurable through packageconfig if
+it's possible and doesn't cost?
+
+Thanks
+Clement
+
+>
+> > --
+> > 2.39.3 (Apple Git-145)
+>
+> //Peter
 
