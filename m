@@ -1,93 +1,113 @@
-Return-Path: <arthur.oliveira@ossystems.com.br>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3007FC4332F
-	for <webhook@archiver.kernel.org>; Tue, 31 Oct 2023 17:36:13 +0000 (UTC)
-Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com [209.85.160.181])
- by mx.groups.io with SMTP id smtpd.web11.2047.1698773763995779626
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8AE50C4332F
+	for <webhook@archiver.kernel.org>; Tue, 31 Oct 2023 17:51:43 +0000 (UTC)
+Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
+ by mx.groups.io with SMTP id smtpd.web10.2386.1698774699126833209
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 31 Oct 2023 10:36:04 -0700
+ Tue, 31 Oct 2023 10:51:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ossystems-com-br.20230601.gappssmtp.com header.s=20230601 header.b=H0A2Xw+o;
- spf=pass (domain: ossystems.com.br, ip: 209.85.160.181, mailfrom: arthur.oliveira@ossystems.com.br)
-Received: by mail-qt1-f181.google.com with SMTP id d75a77b69052e-41cc7379b23so36862031cf.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 31 Oct 2023 10:36:03 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=nUv+lfeT;
+ spf=pass (domain: konsulko.com, ip: 209.85.208.52, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ed1-f52.google.com with SMTP id 4fb4d7f45d1cf-53e08b60febso9566712a12.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 31 Oct 2023 10:51:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ossystems-com-br.20230601.gappssmtp.com; s=20230601; t=1698773763; x=1699378563; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=yKC8wx9U7UOLRoKWfv9UBp+U3hallBMamktOHgC3gI4=;
-        b=H0A2Xw+odE+sD8f7n1xlWFMShxc4jDDRek08KbJIxYVpgaRSKuODA6hxruUWfhLd5C
-         yfvurH4VAtsAZekgd5cfFiR6M4zd6aHDkT+Vf3ixUrllENarTuw2cBV2Cwp0Dli+A/6K
-         cG6x7/ebR6F4bv/yWPzGqtBTrS8vAiIa83NkNvjiqPSOq/BoIfjQGz9EeF6t/SYPXxr4
-         NXOlBMOL7zuZNgDLAWo73KSX44TEeCBN9fcnt/knV2LWw2GPdBg3/y4x+5R38jnmS56+
-         5rW3FEe/mOBhrQU1TeexrG3WPdbNdOrRGDD34GGJPQ+SZcPPRtLzRUDG8L1nqhkTKPu8
-         4evA==
+        d=konsulko.com; s=google; t=1698774697; x=1699379497; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=cl9Tk2PHHS6RZcD6wWSNMSv3ahPOnyAfY0YbgVHy98c=;
+        b=nUv+lfeTM0PJtiRVbjjCiyJLGJeSMP8W51HYWXMf1yR+6kZqx1wlo3BB6Tc4Ydjvvu
+         H0VxOjtKwtgDRwxtew644Xx0IJmTdGpfdMjfJV9943rtqY8thhy6Q9cPEnAEWGQRHBKG
+         XlJEcrNe/j/mpIZAylKMhNXtEhe/MqBkc/YVA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1698773763; x=1699378563;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=yKC8wx9U7UOLRoKWfv9UBp+U3hallBMamktOHgC3gI4=;
-        b=efLCWRwhbUsR6v1nL0woBdoQDidYliCUN4/ki4ozVXiBMbM+FUcAYSGuU34F4QeE7z
-         LhwWr2bhvYScCtlOBQf1nMLVcDzbTKTy45F1WMblQ88OuxVUjQlfch5QkVZTVKo/E1/a
-         VmaWSCK9kB07IhVNO2I2vtgia6ei9PSzAMI/srRNt3x2O/msCbgTcjBgFKx2sLMCojPh
-         hPDL3qg7XVSNisHilmoOcHw0exvIxN9qa9e1Pg2MH0sFaQ2rjltpP0WwxVR9CLBCn/nP
-         HKzw/9TBoa3SXfilLZIJTMErkE2CVPPMlsm0s8+BQwCUKX26Hf6YU3DcU/TERU65JTm4
-         aP1w==
-X-Gm-Message-State: AOJu0YzvEij4wFor0d6N7UfgR7DJCxqXNPi7Wpy8pmODRlnJ5eYU2mg4
-	ZZNoytpGnSiYR9bzBqwDb/G0ZWkuwjCc/BvXB1X/pg==
-X-Google-Smtp-Source: AGHT+IFS66cETHiq7QnaL7LlgmxmcHtpcCk1chMerVmPZaJYlkLdrF3wLa+JzuDsasfXoxXljfdTFA==
-X-Received: by 2002:a05:622a:30f:b0:41c:d9e7:7782 with SMTP id q15-20020a05622a030f00b0041cd9e77782mr16793875qtw.68.1698773762815;
-        Tue, 31 Oct 2023 10:36:02 -0700 (PDT)
-Received: from hyper.lab.ossystems (189-11-177-132.user3p.brasiltelecom.net.br. [189.11.177.132])
-        by smtp.gmail.com with ESMTPSA id e26-20020ac8671a000000b00417f330026bsm679984qtp.49.2023.10.31.10.36.01
+        d=1e100.net; s=20230601; t=1698774697; x=1699379497;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=cl9Tk2PHHS6RZcD6wWSNMSv3ahPOnyAfY0YbgVHy98c=;
+        b=Zlheq51Pv5hKO4sKMvXFH26VWLYsE8M8JkO7BURI+p7jujdz0pcbZdn7TA2pCLImP6
+         IvnWufUCcNuDoYLg5ynQZcrKGfzzUl4ajI4VTjgEg5tvYd91PCY+w9pnbairqblbRaZ4
+         zqkq6hq3Y3v9OS8T0O5Ue6hkOL9Ca1SUDPS2JSU+aXjX2DsILavGLNXs8oo+wEDPltBl
+         NZ7MLGHdTC1TAswCHTIsUax7E2nnBaSvLlHPgfyWMB51r3Px+9B8/lHyd/QbY+wjFu8V
+         kX6L0SdQCkr69TYOFP8g9w6W4saFZQu8wWquTjgljGBOIvYKmq/0QJRFF8oQ49xdDkt/
+         TWSA==
+X-Gm-Message-State: AOJu0YwpwrvAZX80srX1A7qkgLIqxrt/Ak88vyHc/T4RYM+JdRj6vgO4
+	F0wEnNN2CELoQhjXaPSZVazpWJ/PXlkmOlHTSuo=
+X-Google-Smtp-Source: AGHT+IHDl2mp0GwGbuHHCJOOxtbHNu9/e+E5ysQsDcSJu06axJh1ivd9+TkCw7i/w0gDyArw6I6C0A==
+X-Received: by 2002:a17:907:3181:b0:9d2:b968:9ddf with SMTP id xe1-20020a170907318100b009d2b9689ddfmr49239ejb.25.1698774696977;
+        Tue, 31 Oct 2023 10:51:36 -0700 (PDT)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id i1-20020a1709064ec100b009d2eb40ff9dsm1316642ejv.33.2023.10.31.10.51.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 31 Oct 2023 10:36:02 -0700 (PDT)
-From: arthur.oliveira@ossystems.com.br
+        Tue, 31 Oct 2023 10:51:36 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Arthur Oliveira <arthur.oliveira@ossystems.com.br>
-Subject: [meta-python][PATCH 3/3] python3-zope.event: Add Zope.Event Python Recipe
-Date: Tue, 31 Oct 2023 14:35:54 -0300
-Message-Id: <20231031173554.1786139-4-arthur.oliveira@ossystems.com.br>
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH] python3-rarfile: add recipe
+Date: Tue, 31 Oct 2023 19:51:33 +0200
+Message-Id: <20231031175133.2902962-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20231031173554.1786139-1-arthur.oliveira@ossystems.com.br>
-References: <20231031173554.1786139-1-arthur.oliveira@ossystems.com.br>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 31 Oct 2023 17:36:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105806
+ <openembedded-devel@lists.openembedded.org>; Tue, 31 Oct 2023 17:51:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105807
 
-From: Arthur Oliveira <arthur.oliveira@ossystems.com.br>
+Add rarfile, a Python module for RAR archive reading. Version 4.1
+brings:
 
-This commit adds the python3-zope.event recipe, which provides a simple event
-system. It is licensed under ZPL-2.1.
+- Support 7zip/p7zip as decompression backend
+- RAR5: check password before trying to read file
+- Make get_rar_version a public function
+- New option: part_only for RarFile, to read only single file and
+  allow it to be middle-part of multi-volume archive
+- Add RarFile.printdir, use it in dumprar. Needed to examine
+  FILE_COPY or HARD_LINK entries that do not contain data
 
-Signed-off-by: Arthur Oliveira <arthur.oliveira@ossystems.com.br>
+Add run-time dependencies on p7zip as it is one of the supported
+backend as well as to other required Python libraries.
+
+This work was sponsored by GOVCERT.LU.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../recipes-devtools/python/python3-zope.event_5.0.bb     | 8 ++++++++
- 1 file changed, 8 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-zope.event_5.0.bb
+ .../python/python3-rarfile_4.1.bb             | 23 +++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-rarfile_4.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-zope.event_5.0.bb b/meta-python/recipes-devtools/python/python3-zope.event_5.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-rarfile_4.1.bb b/meta-python/recipes-devtools/python/python3-rarfile_4.1.bb
 new file mode 100644
-index 000000000..1955ef4bb
+index 000000000..ece92ee3b
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-zope.event_5.0.bb
-@@ -0,0 +1,8 @@
-+DESCRIPTION = "The zope.event package provides a simple event system"
++++ b/meta-python/recipes-devtools/python/python3-rarfile_4.1.bb
+@@ -0,0 +1,23 @@
++SUMMARY = "RAR archive reader for Python"
++HOMEPAGE = "https://github.com/markokr/rarfile"
++LICENSE = "ISC"
++SECTION = "devel/python"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=2f31e224cbf0c29cb6c55f2bae0e165f"
 +
-+LICENSE = "ZPL-2.1"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=72092419572155ddc2d4fb7631c63dd3"
++inherit setuptools3
 +
-+SRC_URI[sha256sum] = "bac440d8d9891b4068e2b5a2c5e2c9765a9df762944bda6955f96bb9b91e67cd"
++SRC_URI[sha256sum] = "db60b3b5bc1c4bdeb941427d50b606d51df677353385255583847639473eda48"
 +
-+inherit pypi setuptools3
++inherit pypi
++
++PYPI_PACKAGE="rarfile"
++
++RDEPENDS:${PN} += "\
++    p7zip \
++    ${PYTHON_PN}-core \
++    ${PYTHON_PN}-datetime \
++    ${PYTHON_PN}-crypt \
++    ${PYTHON_PN}-io \
++"
++
++BBCLASSEXTEND = "native nativesdk"
 -- 
 2.39.2
 
