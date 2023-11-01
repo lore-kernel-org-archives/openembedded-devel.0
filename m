@@ -1,158 +1,110 @@
-Return-Path: <kai.kang@eng.windriver.com>
+Return-Path: <arthur.oliveira@ossystems.com.br>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 49D98C4332F
-	for <webhook@archiver.kernel.org>; Wed,  1 Nov 2023 07:07:38 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.1489.1698822450082080439
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5C54AC4167B
+	for <webhook@archiver.kernel.org>; Wed,  1 Nov 2023 12:33:30 +0000 (UTC)
+Received: from mail-qv1-f54.google.com (mail-qv1-f54.google.com [209.85.219.54])
+ by mx.groups.io with SMTP id smtpd.web11.5844.1698842003497270562
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Nov 2023 00:07:30 -0700
+ Wed, 01 Nov 2023 05:33:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=OXixLBTB;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=9669bac9c4=kai.kang@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 3A16ilXj015477;
-	Wed, 1 Nov 2023 07:07:28 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=NLE7N
-	EjfQx3ka+Eb1ddcNe+6GpHqnu8M465jJFq2wwk=; b=OXixLBTBYChDw5zk7A9m7
-	QYFffUnrs8rBQmfvZIs3ScWxQ5OlrGG630RZ/Zip1IIBTIt321qFyVByX/KYjGYw
-	17VdNScDNZ8eoYTMbx4W3TwlctV0A5tLqBLVgMwQ49PkErZmdJHATV8P5ZrIr1r0
-	8KPYrxkoXKtdNgHUnCAefBijVuiJ067Yukg6NLQWwBG0D+5QPHI+2mJBYi5y5Q99
-	U2I8t8bt0NsFkebbTz9CQyoHYm/Go2S6bIfT+BiZUUjU2myMIKmSckrtjQ1zGRCX
-	a+zm2WhxBECpecvhBy0zlZdqGJ8ysz74OVn7WmzwmpIiy9UJ76ewx0ZYpFNnLzPf
-	Q==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3u0s96cjsb-18
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
-	Wed, 01 Nov 2023 07:07:28 +0000 (GMT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.34; Wed, 1 Nov 2023 00:07:29 -0700
-Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.34 via Frontend Transport; Wed, 1 Nov 2023 00:07:29 -0700
-From: <kai.kang@windriver.com>
-To: <raj.khem@gmail.com>
-CC: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-python][PATCH] python3-nacl: drop duplicate recipe
-Date: Wed, 1 Nov 2023 15:07:22 +0800
-Message-ID: <20231101070722.2549598-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@ossystems-com-br.20230601.gappssmtp.com header.s=20230601 header.b=b2KASnXY;
+ spf=pass (domain: ossystems.com.br, ip: 209.85.219.54, mailfrom: arthur.oliveira@ossystems.com.br)
+Received: by mail-qv1-f54.google.com with SMTP id 6a1803df08f44-66d0169cf43so43633986d6.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Nov 2023 05:33:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ossystems-com-br.20230601.gappssmtp.com; s=20230601; t=1698842002; x=1699446802; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=K+lb3J1tmLFZDcqPrP74kc53BGC2BBskiKcRLj+pPSw=;
+        b=b2KASnXYTzRqPWDM1anuOswhKL1XmAvLpygAPf74I7Bx94beOC018v3IhasbcJvqDm
+         y7kvFV2hJqZWSo6sI0ydkq4SzsHeKcctVzrvBsNqw2Lekn1+ar5sR6jRkswBmGIzzoqY
+         EEUpLTzMoUKhWEvULQ+lsIvqbdFOkVOuFZaJD51cpB23KBUMvrtZV/gQLvgTN85KMHhV
+         H4N1y0vQo+/o6ca4jaFUeO4xil6pdckRpMa6zXG3HyroMT3IrxCgpNjxj9QxZOcSwaVc
+         tkOuXlJJBs2uGJCd81TC30ytK67j91iiFXMOnkO5yLcrE8aJ+kZ0oegudzCM+PtVGkFL
+         rNNA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1698842002; x=1699446802;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=K+lb3J1tmLFZDcqPrP74kc53BGC2BBskiKcRLj+pPSw=;
+        b=pTi+f4RItkRqeoePNlBBjEibF7at8YF6ZbYRMBSbFUa3PFeLTSs8pFK+yz+cQ9PC4e
+         ZH6PfUv/pRzc3OrA81CRseQnrjoUX+G6NE35iRQjnZ0X7fsrqrzA/5INMK7JIvP80A3W
+         9ynyixaOH8E4Z3mlfP0E7vfLbx3CoXvaFA/ErMDeQrZ1GdcE9GfVgLrCoytuSic6fzbs
+         ITSbF95en2H+EgN38vSIBuDfjIoiTgT8u42j+djzcPff/1NvmWN9MSv1n/4QQZ49Mw0a
+         jnqFaQ2GGF2YsBCR3NYzUmSHUESOHFCW+rJHmTjDFx3ZT4cMe3R4M4bjDbhSOvU/UgCm
+         OPMA==
+X-Gm-Message-State: AOJu0YykmuWUkGCJEMgxKxY8AKmFVJc8fFqm54wDlNM5mJEteRgVVXmt
+	as87wAcC9OdU5BWWsJSibh5P3tkyRM231Dbwfo0DZA==
+X-Google-Smtp-Source: AGHT+IGjECX4mm/sBgr5UvFA2V1iylAuRnvmN2EHghRNW/zsEd2m3pZxvmUMKSwDfYKPia4LC9CtNA==
+X-Received: by 2002:a05:6214:1313:b0:656:4712:af9f with SMTP id pn19-20020a056214131300b006564712af9fmr22368159qvb.13.1698842001735;
+        Wed, 01 Nov 2023 05:33:21 -0700 (PDT)
+Received: from hyper.lab.ossystems (189-11-177-132.user3p.brasiltelecom.net.br. [189.11.177.132])
+        by smtp.gmail.com with ESMTPSA id i5-20020ad44ba5000000b0065b22afe53csm1422601qvw.94.2023.11.01.05.33.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 01 Nov 2023 05:33:21 -0700 (PDT)
+From: arthur.oliveira@ossystems.com.br
+To: openembedded-devel@lists.openembedded.org
+Cc: Arthur Oliveira <arthur.oliveira@ossystems.com.br>
+Subject: [meta-python][PATCH 0/3] Branch Name: topic-add-python-recipes
+Date: Wed,  1 Nov 2023 09:33:14 -0300
+Message-Id: <20231101123317.1806460-1-arthur.oliveira@ossystems.com.br>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: ma1pAEt_E29LVW42fXeXvSL__OKZ8LN4
-X-Proofpoint-GUID: ma1pAEt_E29LVW42fXeXvSL__OKZ8LN4
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-11-01_04,2023-10-31_03,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 phishscore=0
- spamscore=0 priorityscore=1501 malwarescore=0 suspectscore=0
- lowpriorityscore=0 impostorscore=0 bulkscore=0 mlxlogscore=999 mlxscore=0
- adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2310240000 definitions=main-2311010059
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 01 Nov 2023 07:07:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105814
+ <openembedded-devel@lists.openembedded.org>; Wed, 01 Nov 2023 12:33:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105815
 
-From: Kai Kang <kai.kang@windriver.com>
+From: Arthur Oliveira <arthur.oliveira@ossystems.com.br>
 
-Recipes python3-nacl and python3-pynacl are exactly the same reipces for
-python packge "PyNaCl", so drop the latter one python3-nacl_1.5.0.bb.
+Description: This branch introduces three new Python recipes for the
+meta-openembedded layer. The recipes include python3-flask-restx,
+python3-objectpath, and python3-zope.event. These recipes are aimed at
+extending the capabilities of Yocto by adding support for various Python
+packages. Each recipe is accompanied by a commit log that follows the
+established standards for commit messages. This branch enhances the
+meta-openembedded layer with valuable Python packages, expanding its utility
+for embedded system development.
 
-And let python3-pynacl rprovides python3-nacl in case it is required by
-other recipes. Ajust the order in python3-pynacl as well accord to
+Commit Logs:
 
-https://docs.yoctoproject.org/dev/contributor-guide/recipe-style-guide.html#recipe-ordering
+1. "python3-zopeevent: Add Zope.Event Python Recipe"
+   - This commit adds the Python recipe for Zope.Event, which provides a simple
+   event system.
+   - It is licensed under ZPL-2.1.
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- .../python/python3-nacl_1.5.0.bb              | 25 -------------------
- .../python/python3-pynacl_1.5.0.bb            | 22 ++++++++--------
- 2 files changed, 12 insertions(+), 35 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-nacl_1.5.0.bb
+2. "python3-objectpath: Add ObjectPath Python Recipe"
+   - This commit adds the Python recipe for ObjectPath, an agile NoSQL query
+   language for semi-structured data.
+   - It is licensed under MIT.
 
-diff --git a/meta-python/recipes-devtools/python/python3-nacl_1.5.0.bb b/meta-python/recipes-devtools/python/python3-nacl_1.5.0.bb
-deleted file mode 100644
-index 7d5292745..000000000
---- a/meta-python/recipes-devtools/python/python3-nacl_1.5.0.bb
-+++ /dev/null
-@@ -1,25 +0,0 @@
--SUMMARY = "Python binding to the Networking and Cryptography (NaCl) library"
--HOMEPAGE = "https://github.com/pyca/pynacl"
--LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=8cc789b082b3d97e1ccc5261f8594d3f"
--
--PYPI_PACKAGE = "PyNaCl"
--
--inherit pypi setuptools3
--
--SRC_URI[sha256sum] = "8ac7448f09ab85811607bdd21ec2464495ac8b7c66d146bf545b0f08fb9220ba"
--
--DEPENDS += "\
--    libsodium \
--    python3-cffi-native \
--    python3-pip-native \
--"
--
--RDEPENDS:${PN}:class-target += " \
--    python3-cffi \
--    python3-pycparser \
--"
--
--export SODIUM_INSTALL = "system"
--
--BBCLASSEXTEND = "native"
-\ No newline at end of file
-diff --git a/meta-python/recipes-devtools/python/python3-pynacl_1.5.0.bb b/meta-python/recipes-devtools/python/python3-pynacl_1.5.0.bb
-index 5a8ed131a..0747c67c1 100644
---- a/meta-python/recipes-devtools/python/python3-pynacl_1.5.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pynacl_1.5.0.bb
-@@ -10,21 +10,11 @@ PYPI_PACKAGE = "PyNaCl"
- 
- inherit pypi python_setuptools_build_meta
- 
--# in meta-virtualization layer
--#
--RCONFLICTS:${PN} = "python3-nacl"
--
- DEPENDS += "\
-     ${PYTHON_PN}-cffi-native \
-     libsodium \
- "
- 
--RDEPENDS:${PN} = "\
--    ${PYTHON_PN}-six \
--    ${PYTHON_PN}-cffi \
--    libsodium \
--"
--
- do_compile:prepend() {
-     export SODIUM_INSTALL=system
- }
-@@ -32,3 +22,15 @@ do_compile:prepend() {
- do_install:prepend() {
-     export SODIUM_INSTALL=system
- }
-+
-+RDEPENDS:${PN} = "\
-+    ${PYTHON_PN}-six \
-+    ${PYTHON_PN}-cffi \
-+    libsodium \
-+"
-+
-+RPROVIDES:${PN} = "python3-nacl"
-+
-+# in meta-virtualization layer
-+#
-+RCONFLICTS:${PN} = "python3-nacl"
+3. "python3-flask-restx: Add Flask-RestX Python Recipe"
+   - This commit adds the Python recipe for Flask-RestX, a fully featured
+   framework for fast, easy, and documented API development with Flask.
+   - It is licensed under BSD-3.
+
+Each recipe contributes to the richness of Python libraries available for
+Yocto, enhancing its capabilities for embedded development.
+
+Arthur Oliveira (3):
+  python3-flask-restx: Add Flask-RestX Python Recipe
+  python3-objectpath: Add ObjectPath Python Recipe
+  python3-zopeevent: Add Zope.Event Python Recipe
+
+ .../python/python3-flask-restx_1.2.0.bb             | 13 +++++++++++++
+ .../python/python3-objectpath_0.6.1.bb              |  9 +++++++++
+ .../python/python3-zopeevent_5.0.bb                 |  8 ++++++++
+ 3 files changed, 30 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-flask-restx_1.2.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-objectpath_0.6.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-zopeevent_5.0.bb
+
 -- 
-2.34.1
+2.39.2
 
 
