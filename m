@@ -2,56 +2,56 @@ Return-Path: <arthur.oliveira@ossystems.com.br>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5AF32C4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C596C4167D
 	for <webhook@archiver.kernel.org>; Wed,  1 Nov 2023 12:33:30 +0000 (UTC)
-Received: from mail-oi1-f174.google.com (mail-oi1-f174.google.com [209.85.167.174])
- by mx.groups.io with SMTP id smtpd.web11.5847.1698842007673288392
+Received: from mail-qv1-f44.google.com (mail-qv1-f44.google.com [209.85.219.44])
+ by mx.groups.io with SMTP id smtpd.web11.5846.1698842004890724305
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Nov 2023 05:33:27 -0700
+ Wed, 01 Nov 2023 05:33:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ossystems-com-br.20230601.gappssmtp.com header.s=20230601 header.b=WB6DApBA;
- spf=pass (domain: ossystems.com.br, ip: 209.85.167.174, mailfrom: arthur.oliveira@ossystems.com.br)
-Received: by mail-oi1-f174.google.com with SMTP id 5614622812f47-3b2f507c03cso3588520b6e.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Nov 2023 05:33:27 -0700 (PDT)
+ dkim=pass header.i=@ossystems-com-br.20230601.gappssmtp.com header.s=20230601 header.b=khGvLR6L;
+ spf=pass (domain: ossystems.com.br, ip: 209.85.219.44, mailfrom: arthur.oliveira@ossystems.com.br)
+Received: by mail-qv1-f44.google.com with SMTP id 6a1803df08f44-66d0ceba445so39165866d6.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Nov 2023 05:33:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ossystems-com-br.20230601.gappssmtp.com; s=20230601; t=1698842006; x=1699446806; darn=lists.openembedded.org;
+        d=ossystems-com-br.20230601.gappssmtp.com; s=20230601; t=1698842003; x=1699446803; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=z625Rh6v0Z1hCTe7v0G2rueBJ60MUjuVszitCEu7Og8=;
-        b=WB6DApBASO0dOPreJatIc6GIajkzThszCqpbkc2CEuezrXMBLk2FMXNwNEfCQRiLhN
-         M3EJv9wt9gQ7myPCRFTQMPAGZN4dAGFQWIC/c5s5Z9NZJ8DBJAx9lXOU24rpyFbEGt7C
-         Zzo1pU+m2/0z0N0WYfycfCikRn5IURTEV3cMRx6EdkuSJPbccT/EnfojEwhadHx1xM5B
-         7S6X3Sjmj7zQWv1NUxKVxqaTxGFLeLkLxK5+DnlZcKlCUWV0IeQ6k1JbsczfiucIBTh4
-         Lo1Z2xkQ5qrFFmL7iorqiSohpKd6I2E0GtSDM2ysQhgmGanE6gQ3cjSII4U+7nxmBxp5
-         5vLw==
+        bh=UaTRNQL1m7g2omCKTNm36xHJmAsoWfee5y3myRxUgo8=;
+        b=khGvLR6LWIZqabLFwbD01Sv9OEq2EaxcsqZT2m5og60Wppwyuc7ZlAyWrJWFF2WcSj
+         +QmV5uApRRNFNVYQFQYubYFQ1XoSU+rCdwWldHSz8wD+Vz+6YYIdtwdN9hgDeFZwe8W5
+         1OfmuAqwffxA1Ah6kF/AXsIVkZH0Yj07J/nxuK0iSxqshnW44cU5SfROB5uVgl70/hm0
+         Aaar6+tijw2UTy15JU+aUm2+2Hdb0X1VyuO5rVPaq7kSTCfYCbJ97ruRyoIK19MB7dlH
+         7foKjeQ0u50w27zYrjn1LJ0SORyjdvzOxgIP23mso69eCNAxvGgYK8wVem0660dVyYPN
+         O+xQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1698842006; x=1699446806;
+        d=1e100.net; s=20230601; t=1698842003; x=1699446803;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=z625Rh6v0Z1hCTe7v0G2rueBJ60MUjuVszitCEu7Og8=;
-        b=UdfF2BJt4UNs37GpbuKCiVAbIp6KY4w5qlHgiXNlsXEDd3dkj8dticJ8vXbe9UeXlG
-         lOSooM/uiP242eAOX4MWH9EEY8ao1TnGF7kFnXhzOBz5G84xnrhcivttglJmuzzudXA+
-         ISaIQe1JccLZEXVNX1nzXXMSqCVk7TPKkuW+SN7fWOrIOqW/dVchl+uOOqTP0IzgdL+u
-         +e63sFT52sSYGmOdXLE5mbiL0E3vfMEnirVHrmkvI5p2/WmDli75al/ceeqUJhGa1Tmq
-         NGGDIrt/hps2Yv4A0qllWOcrKoDq7M6ZYj/+whsg3wzNnH8jPFtdxixY8OgWOLR1P3/1
-         BFyg==
-X-Gm-Message-State: AOJu0Yx3olU6pCl1Gu1ogn/F7eA6CaZa6o1002+wfVKFZUhIQLxlo560
-	pnb3VLkRfTD9IU3bp772ZSjFIweqARgKJP5pCrb1/Q==
-X-Google-Smtp-Source: AGHT+IGHfsFMfI6r7QxyOCX5KDM0xBQZ+L58liAxb4kbCCn0algqWE9YsMOTkzOL1s80BCXLTTDP/Q==
-X-Received: by 2002:aca:1115:0:b0:3b5:6599:ce4c with SMTP id 21-20020aca1115000000b003b56599ce4cmr4186872oir.57.1698842006452;
-        Wed, 01 Nov 2023 05:33:26 -0700 (PDT)
+        bh=UaTRNQL1m7g2omCKTNm36xHJmAsoWfee5y3myRxUgo8=;
+        b=RLz98cWC1p0cZKAMBkRKu8OESWIhRtYZ0FKet8t7xjPcrQGoqR1USZt32e6PEZ//UY
+         LtsVlt9fpF5G0id6YTW1/9krP+WbbO6dZZYTIxbzlOp5Hq4Cmn+JwGseynbI549TMt4D
+         OtZPUIGaOoNtGvf+cikzCHltscunvpoAe66+gDFoSCGYS2qteIGGTVQnSNPWQmfZIton
+         SxntW77REGOCWHQDkVaB5jg3ZdzlsZMYgxtLNn9yPnkI8Ezeje9zxWSV12YTHbtLVZ82
+         hZ1Y1NjWjFk89rOuh45gbpyBRF/rimp0n5mSkRInlI/Bv0IITkXmGFZVZufqiOOwYBf8
+         5MUw==
+X-Gm-Message-State: AOJu0Yymkf24LUkqV2Hij3F2OON64L1j2zq0UCEn8VjIdYJzCIH0PHxo
+	H/u2K/Yvy3BagIU7dKGN60Yoa3zGvqLL5uilDMb2Sg==
+X-Google-Smtp-Source: AGHT+IGz4l4/BFTTCDL50UuQraYiB6XG8EYOC7hakjVUijJQOowlS4qMNrNpbu0vCnA3ljggolzEUQ==
+X-Received: by 2002:a05:6214:401:b0:671:567d:b13c with SMTP id z1-20020a056214040100b00671567db13cmr13713405qvx.63.1698842003236;
+        Wed, 01 Nov 2023 05:33:23 -0700 (PDT)
 Received: from hyper.lab.ossystems (189-11-177-132.user3p.brasiltelecom.net.br. [189.11.177.132])
-        by smtp.gmail.com with ESMTPSA id i5-20020ad44ba5000000b0065b22afe53csm1422601qvw.94.2023.11.01.05.33.25
+        by smtp.gmail.com with ESMTPSA id i5-20020ad44ba5000000b0065b22afe53csm1422601qvw.94.2023.11.01.05.33.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 01 Nov 2023 05:33:26 -0700 (PDT)
+        Wed, 01 Nov 2023 05:33:22 -0700 (PDT)
 From: arthur.oliveira@ossystems.com.br
 To: openembedded-devel@lists.openembedded.org
 Cc: Arthur Oliveira <arthur.oliveira@ossystems.com.br>
-Subject: [meta-python][PATCH 3/3] python3-zopeevent: Add Zope.Event Python Recipe
-Date: Wed,  1 Nov 2023 09:33:17 -0300
-Message-Id: <20231101123317.1806460-4-arthur.oliveira@ossystems.com.br>
+Subject: [meta-python][PATCH 1/3] python3-flask-restx: Add Flask-RestX Python Recipe
+Date: Wed,  1 Nov 2023 09:33:15 -0300
+Message-Id: <20231101123317.1806460-2-arthur.oliveira@ossystems.com.br>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231101123317.1806460-1-arthur.oliveira@ossystems.com.br>
 References: <20231101123317.1806460-1-arthur.oliveira@ossystems.com.br>
@@ -61,31 +61,41 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 01 Nov 2023 12:33:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105818
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105816
 
 From: Arthur Oliveira <arthur.oliveira@ossystems.com.br>
 
-This commit adds the python3-zopeevent recipe, which provides a simple event
-system. It is licensed under ZPL-2.1.
----
- .../recipes-devtools/python/python3-zopeevent_5.0.bb      | 8 ++++++++
- 1 file changed, 8 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-zopeevent_5.0.bb
+This commit introduces the python3-flask-restx recipe, which brings a fully
+featured framework for fast, easy, and documented API development with Flask.
+It is released under the BSD-3-Clause license.
 
-diff --git a/meta-python/recipes-devtools/python/python3-zopeevent_5.0.bb b/meta-python/recipes-devtools/python/python3-zopeevent_5.0.bb
+Signed-off-by: Arthur Oliveira <arthur.oliveira@ossystems.com.br>
+---
+update license to BSD-3-Clause
+---
+ .../python/python3-flask-restx_1.2.0.bb             | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-flask-restx_1.2.0.bb
+
+diff --git a/meta-python/recipes-devtools/python/python3-flask-restx_1.2.0.bb b/meta-python/recipes-devtools/python/python3-flask-restx_1.2.0.bb
 new file mode 100644
-index 000000000..1955ef4bb
+index 000000000..cff797139
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-zopeevent_5.0.bb
-@@ -0,0 +1,8 @@
-+DESCRIPTION = "The zope.event package provides a simple event system"
++++ b/meta-python/recipes-devtools/python/python3-flask-restx_1.2.0.bb
+@@ -0,0 +1,13 @@
++DESCRIPTION = "Fully featured framework for fast, easy and documented API development with Flask"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=c96dd911c6d9e32868b6bc667a38a3e2"
 +
-+LICENSE = "ZPL-2.1"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=72092419572155ddc2d4fb7631c63dd3"
-+
-+SRC_URI[sha256sum] = "bac440d8d9891b4068e2b5a2c5e2c9765a9df762944bda6955f96bb9b91e67cd"
++SRC_URI[sha256sum] = "9a5338b108c57fbed1d24d5d53fe98442b2be7ffa2ff3291305af7a613ce6fc0"
 +
 +inherit pypi setuptools3
++
++RDEPENDS:${PN} += " \
++    python3-isodate \
++    python3-jsonschema \
++    python3-pytz \
++"
 -- 
 2.39.2
 
