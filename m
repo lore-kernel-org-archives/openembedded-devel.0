@@ -2,127 +2,107 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B55DC4332F
-	for <webhook@archiver.kernel.org>; Wed,  1 Nov 2023 22:33:23 +0000 (UTC)
-Received: from mail-ot1-f50.google.com (mail-ot1-f50.google.com [209.85.210.50])
- by mx.groups.io with SMTP id smtpd.web11.1723.1698877996061166685
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D511AC4332F
+	for <webhook@archiver.kernel.org>; Thu,  2 Nov 2023 03:09:14 +0000 (UTC)
+Received: from mail-oa1-f52.google.com (mail-oa1-f52.google.com [209.85.160.52])
+ by mx.groups.io with SMTP id smtpd.web10.23391.1698894547082355064
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Nov 2023 15:33:16 -0700
+ Wed, 01 Nov 2023 20:09:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=P8DM8mHb;
- spf=pass (domain: gmail.com, ip: 209.85.210.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f50.google.com with SMTP id 46e09a7af769-6ce2bcb131fso168310a34.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Nov 2023 15:33:15 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=aX16r6gb;
+ spf=pass (domain: gmail.com, ip: 209.85.160.52, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f52.google.com with SMTP id 586e51a60fabf-1ea4a3d0a44so310845fac.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Nov 2023 20:09:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1698877995; x=1699482795; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1698894546; x=1699499346; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Y1N088B5y3WKUApFq5EEg0HyhDb3HrxPBZFTRTxRkbE=;
-        b=P8DM8mHbhKvMY3uvm2Ab1nqIIT4j0DDqiot7CIbaoISPyB+SaaU6/UGJG8ku6FLo77
-         MnXLwLOQItrLZJY3P6u/TkSxm3jJUyxcwvYdmY4O/upN17MsN4gpP5zfy6cXU7NfwuXD
-         2zVQUF6dTEpXfvI6UK9tTm/vkGyYDgLd/VnC9NRv3pGCLiH6yMIof4Z8vj6RcCnhA1NC
-         YYYYbPzJvxa1Uv59K3leQx+jcLZSJB5S0y3TH8i3ij57tgj1YGh2RR8bkDLwOvV+oMnN
-         9AlKPA5ZqPd123xFYtm3hj3Nfat6mIqYQ4Pgsnwu7BXFOLquQtSFbQcBaTpcRtFS/QgO
-         6e6w==
+        bh=zWPrtCkNEs2cPBBnRVKD7pAPn09Rh2QJSCCpE2eyE9c=;
+        b=aX16r6gb11U7KTM81HP6J3Mm1l+yCC4r9qVgu6sBSYAAqJvHKundGTaUfWJFy9LApH
+         GN9c+95sQzynEoI/clEMryL2JxVi/O5ao81bssDR98kErHkuuusTV09XzkT1GeItzUhJ
+         1sWHxHUYXk5YgjfMdVfNfA+VuV7QUBJ+O7wb078etm8HsZOijY8A3oUW/HJgvhcgZk2G
+         XWc0DLRA9dcY4bWaAJyGgkvZ9xX/xPuTghOkZLtYGXQCxkUlAHIg47KaH6n0hXNNdoGw
+         HtulBUPxSv+AkHX+Jzi+pPSotKiOvjxCzRfISmZw0VlFvDWonYOJcmnod+SSGq93pRZX
+         4zcg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1698877995; x=1699482795;
+        d=1e100.net; s=20230601; t=1698894546; x=1699499346;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Y1N088B5y3WKUApFq5EEg0HyhDb3HrxPBZFTRTxRkbE=;
-        b=sLxxF8ST5ZJxvsk+4bRPhum1MSRXm6ULKJ75vMaKLJt4UrLxToud8lDZSc7uir9jn6
-         HCu6QQfFp2r+BCipagABcHv9hBfn5xLSAu/HHIpQbWnqsFux9kAjY8yp7tt6SHVNwWBs
-         FvTAkq4YW29bdlQajDdei5k18ln8R1i5xGCWT4ZwFtsBbUjQ7v9vT3RnDJP/BMJKesJW
-         60pjQM8DhWvS9K0DsD+KU0ZS5ibyumhY6W7q73InavBOcv8I2e9LGZYfkQW7IKkVRufx
-         sNYtMTQG4HdyBn4bO1VjFG0R1R5iSnFiqiFNJ+8b8s2pFJBOiZ7bk9Bj+0PAdTArXfPV
-         tDMg==
-X-Gm-Message-State: AOJu0YwLnSJ2pnzCNAoXtndWbROYb0JC+7B0wvjg/mSI5fudFFPWp0o/
-	SLUInoKEUlNgbk3h1oZ0SZ4XGC+nwLTV+VsWB48n9IYbm1ONfw==
-X-Google-Smtp-Source: AGHT+IFZ78j9uEZPaq4KMygmw4Lo1CKwwEJItRlZYekroAo+xfnMQIQfekNZDUNNvaqESi6Fonk0U8E5wH6LuOs49ls=
-X-Received: by 2002:a05:6870:a9a1:b0:1b0:649f:e68a with SMTP id
- ep33-20020a056870a9a100b001b0649fe68amr20802639oab.25.1698877995236; Wed, 01
- Nov 2023 15:33:15 -0700 (PDT)
+        bh=zWPrtCkNEs2cPBBnRVKD7pAPn09Rh2QJSCCpE2eyE9c=;
+        b=lAVQ8lVu7CrIcqNa8BBlSHlyxqUdj3iNHH2CEXF1pElzht7sJf0wiVKqSracYil9qi
+         Q/dNg/TOW1OHKTT4CueDq7Q7tfOfQPnEeqZv4bk23iXGALCu0wzDtaFhdjqjEZeyfTeL
+         e53elBZnjK4Um7jp5sgkSEdM96O0Ojps43bqMsBY2JYUJcdI/Sqa0VeaFfInHfQua5Q1
+         DvgRAsT9yYduUi9uUDmm35DOHpx3hOvQUHQMUJ89LnXVH4cxTKyj48P/oM48Lcc0Dgew
+         9LIPM2Blt1gkaQMbido0m7hbE9ZrkyDtiRbotZAiOK0gPA96ntVJQ6GKXXEavgkkVhSi
+         S1bg==
+X-Gm-Message-State: AOJu0YyX8228TocQg7gacP1M1TKlrAgvH7QTmAcNN88r86Ruh4YgQdrM
+	ekk8XykZgBc0p0yJ8KL64CmFQWlLOlIVwAq5z3oZq6VAwxxGnQ==
+X-Google-Smtp-Source: AGHT+IFlGnW9WvBfWI9/KkUIihS+bShQmOJE7GjftzjjW7lFZ9UAhzHCdT+M/1M5VHh3Q1Y+NOsZPdhF3c6fl8xNdDM=
+X-Received: by 2002:a05:6870:d88f:b0:1e9:bda0:771 with SMTP id
+ oe15-20020a056870d88f00b001e9bda00771mr21424287oac.4.1698894546160; Wed, 01
+ Nov 2023 20:09:06 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231031203328.3372015-1-daiane.angolini@foundries.io>
-In-Reply-To: <20231031203328.3372015-1-daiane.angolini@foundries.io>
+References: <20231101123317.1806460-1-arthur.oliveira@ossystems.com.br> <20231101123317.1806460-4-arthur.oliveira@ossystems.com.br>
+In-Reply-To: <20231101123317.1806460-4-arthur.oliveira@ossystems.com.br>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 1 Nov 2023 15:32:49 -0700
-Message-ID: <CAMKF1sonjev2Q5ApkNpS8mFkxykFF3OGJH5k-rFC_z+AgsN2sQ@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH] wireguard-tools: Use PACKAGECONFIG
- to select wg-quick and bashcompletion
-To: daiane.angolini@foundries.io
+Date: Wed, 1 Nov 2023 20:08:39 -0700
+Message-ID: <CAMKF1sout=pMrO1_Vu55pKDBbAWTyq=CQuQ7n7Apye9j3Jj5XQ@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH 3/3] python3-zopeevent: Add Zope.Event
+ Python Recipe
+To: arthur.oliveira@ossystems.com.br
 Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 01 Nov 2023 22:33:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105828
+ <openembedded-devel@lists.openembedded.org>; Thu, 02 Nov 2023 03:09:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105829
 
-this fails see
-https://errors.yoctoproject.org/Errors/Details/741221/
+fails to fetch - https://errors.yoctoproject.org/Errors/Details/741245/
 
-On Tue, Oct 31, 2023 at 1:33=E2=80=AFPM Daiane Angolini via
-lists.openembedded.org
-<daiane.angolini=3Dfoundries.io@lists.openembedded.org> wrote:
+On Wed, Nov 1, 2023 at 5:34=E2=80=AFAM <arthur.oliveira@ossystems.com.br> w=
+rote:
 >
-> Condition the creation of sub-packages and their consequences to a
-> PACKAGECONFIG, which can be overriden outside the metalayer.
+> From: Arthur Oliveira <arthur.oliveira@ossystems.com.br>
 >
-> Signed-off-by: Daiane Angolini <daiane.angolini@foundries.io>
+> This commit adds the python3-zopeevent recipe, which provides a simple ev=
+ent
+> system. It is licensed under ZPL-2.1.
 > ---
->  .../wireguard/wireguard-tools_1.0.20210914.bb          | 10 ++++++----
->  1 file changed, 6 insertions(+), 4 deletions(-)
+>  .../recipes-devtools/python/python3-zopeevent_5.0.bb      | 8 ++++++++
+>  1 file changed, 8 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/python3-zopeevent=
+_5.0.bb
 >
-> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0=
-.20210914.bb b/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0=
-.20210914.bb
-> index 20435338c..44b9eb2f7 100644
-> --- a/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.202109=
-14.bb
-> +++ b/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.202109=
-14.bb
-> @@ -11,11 +11,15 @@ do_install () {
->      oe_runmake DESTDIR=3D"${D}" PREFIX=3D"${prefix}" SYSCONFDIR=3D"${sys=
-confdir}" \
->          SYSTEMDUNITDIR=3D"${systemd_system_unitdir}" \
->          WITH_SYSTEMDUNITS=3D${@bb.utils.contains('DISTRO_FEATURES', 'sys=
-temd', 'yes', '', d)} \
-> -        WITH_BASHCOMPLETION=3Dyes \
-> -        WITH_WGQUICK=3Dyes \
-> +        ${PACKAGECONFIG_ARGS} \
->          install
->  }
->
-> +PACKAGECONFIG ??=3D "bashcompletion wgquick"
+> diff --git a/meta-python/recipes-devtools/python/python3-zopeevent_5.0.bb=
+ b/meta-python/recipes-devtools/python/python3-zopeevent_5.0.bb
+> new file mode 100644
+> index 000000000..1955ef4bb
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-zopeevent_5.0.bb
+> @@ -0,0 +1,8 @@
+> +DESCRIPTION =3D "The zope.event package provides a simple event system"
 > +
-> +PACKAGECONFIG[bashcompletion] =3D "WITH_BASHCOMPLETION=3Dyes, , , , , "
-> +PACKAGECONFIG[wgquick] =3D "WITH_WGQUICK=3Dyes, , ,${PN} bash,${PN}-wg-q=
-uick, "
+> +LICENSE =3D "ZPL-2.1"
+> +LIC_FILES_CHKSUM =3D "file://PKG-INFO;beginline=3D8;endline=3D8;md5=3D72=
+092419572155ddc2d4fb7631c63dd3"
 > +
->  PACKAGES +=3D "${PN}-wg-quick"
->
->  FILES:${PN} =3D " \
-> @@ -27,8 +31,6 @@ FILES:${PN}-wg-quick =3D " \
->      ${systemd_system_unitdir} \
->  "
->
-> -RDEPENDS:${PN}-wg-quick =3D "${PN} bash"
->  RRECOMMENDS:${PN} =3D " \
->      kernel-module-wireguard \
-> -    ${PN}-wg-quick \
->      "
+> +SRC_URI[sha256sum] =3D "bac440d8d9891b4068e2b5a2c5e2c9765a9df762944bda69=
+55f96bb9b91e67cd"
+> +
+> +inherit pypi setuptools3
 > --
-> 2.34.1
+> 2.39.2
 >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#105808): https://lists.openembedded.org/g/openembedde=
-d-devel/message/105808
-> Mute This Topic: https://lists.openembedded.org/mt/102306255/1997914
+> View/Reply Online (#105818): https://lists.openembedded.org/g/openembedde=
+d-devel/message/105818
+> Mute This Topic: https://lists.openembedded.org/mt/102318091/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
 aj.khem@gmail.com]
