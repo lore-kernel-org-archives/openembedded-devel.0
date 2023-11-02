@@ -2,53 +2,53 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C51FC41535
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4208EC0018A
 	for <webhook@archiver.kernel.org>; Thu,  2 Nov 2023 14:05:38 +0000 (UTC)
-Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
- by mx.groups.io with SMTP id smtpd.web10.32025.1698933929619659558
+Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
+ by mx.groups.io with SMTP id smtpd.web10.32024.1698933928887511587
  for <openembedded-devel@lists.openembedded.org>;
  Thu, 02 Nov 2023 07:05:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=JZVbLiok;
- spf=pass (domain: konsulko.com, ip: 209.85.208.51, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-543456dbd7bso4054554a12.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Nov 2023 07:05:29 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=pe7pvjsC;
+ spf=pass (domain: konsulko.com, ip: 209.85.208.53, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ed1-f53.google.com with SMTP id 4fb4d7f45d1cf-54394328f65so1611538a12.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Nov 2023 07:05:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1698933928; x=1699538728; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1698933927; x=1699538727; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=0eiJ7jCNmGUdNMMGTOYQIAEqXKV5KoLx6utA/GJmXVY=;
-        b=JZVbLiokDod03uqNzp69l0MVlkv9EadeAV77ffdrzAbWVjk0NlgV7rnkfa37TIRstT
-         ++twAW9d+RQn2J4c0LItKntj4SRVkooDr//Gm8V04L6hpvvaQs1DCWwgXnHe/BOhgApn
-         6GcONNvo7nBW8Z/xuK51mIHDSOkGxZjiRjtfU=
+        bh=aG/iQsuQdzTOykuNwXanH8RefAqSscpfq9TFqk0YuEE=;
+        b=pe7pvjsC8RGfb8Q280abaaz5alnUykzrf5E00EpdpatRSC4as47w+Y33woK0lRoWzR
+         B3Tls7ITOnrZvknluc8lqfmizxXzo/lEccOEbjMZpblMmQaUqYYO2C6+qScOIm1ZuwNP
+         TC+ex1Wziy+OiRipkUwljP6sfhjoCKdlXZhYc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1698933928; x=1699538728;
+        d=1e100.net; s=20230601; t=1698933927; x=1699538727;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=0eiJ7jCNmGUdNMMGTOYQIAEqXKV5KoLx6utA/GJmXVY=;
-        b=DsORbHqjxQbDsIr2eZ3XElTDF+ASjl4HQ0zj313ZK4tD26TNNPa0xvZvWpK/NRv+vi
-         RtQpFCwL48w0lKRb+DF26RxAoVaEqw5asdC7Am0eR4EQ7NgUhn4dyGrGZu2lqDRzv6hw
-         7V65iXfwToC5e/00GYpYnaXFxlel0nAJMnU9SQsE9xURFYZqmNFUSo9ehV+apHi8IEw7
-         HnCHMqPT8ZRChKhQGW3ssf7rfSE6AFM1+nMH4Zpg/zciOcS5s5e2M45Jrkg+/0VYmstw
-         yHSIJfEPrVaTcKLI+X0EZMG1XnAUS0yb501lq1btVB+8yfioOooln/YM0Ls7Uc9GiJqd
-         gz4Q==
-X-Gm-Message-State: AOJu0YzY5BqrhHj+uONvqbDsI3oE9TXZnuqZ698eXoDAStJVlt2gtJBW
-	bLr7DqiOfGgGuUzdCrtPzTrSZ4a+QLT3Tq2dYU8=
-X-Google-Smtp-Source: AGHT+IEUNMGFacKU9WkHv4Raxr4L+47PJaq11fa9O/aXuOSrBgADFAdpQ9z90HWF/vZbzqYwmvTHQQ==
-X-Received: by 2002:a50:9e05:0:b0:543:92cc:620a with SMTP id z5-20020a509e05000000b0054392cc620amr5251396ede.0.1698933927995;
+        bh=aG/iQsuQdzTOykuNwXanH8RefAqSscpfq9TFqk0YuEE=;
+        b=JujQulZzqQc3VBq5BA442pi84mvXUFq2gaN4DJ5lUnplrHXWTN74xWlYW9hKSKzpPN
+         +Og8KjP2wIRDTvff01i/WTGVH5c6HDd95E6Jz8tuNSvbyFRvw6iq0VnGczYVQZlckHZQ
+         FiccUY3zrWhCryV2MnYtZmG0L8QCCg1eNQ1+54vD0cFb+Zy5cQwGwCZZGl12tKIwx7Et
+         vBnNss956GI+R+Cq1Qj/y2N7Td4F4er/MCX17pmRD0VkKs3st8nJG0j3Ph4uQ1QHqSD4
+         E0cBpOCJm773P9VfmtCodji2z4TMpMdA5STBYlUiDLyhm7vMvuIGadtYZh4tmTv0E1M7
+         i8eA==
+X-Gm-Message-State: AOJu0Yxu3nkKkmrUfJQki9rkhNY1P4ExZBe0iK2jJ5qqgWcG2OnE7ggL
+	U7P1bzIWL+UY4A5gVM+Uj7Ox8sTQlzDRYexFusM=
+X-Google-Smtp-Source: AGHT+IFQoO43xDyG0O0VL9cioMauJohvhbRM6sTf34nBYqY5DB28j0/JbR29rJrLY3Y+J6U7+rKjbg==
+X-Received: by 2002:a05:6402:1bc4:b0:53e:3b8f:8a58 with SMTP id ch4-20020a0564021bc400b0053e3b8f8a58mr14670456edb.11.1698933927113;
         Thu, 02 Nov 2023 07:05:27 -0700 (PDT)
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id d5-20020a50f685000000b005401a4184ddsm2401763edn.27.2023.11.02.07.05.27
+        by smtp.gmail.com with ESMTPSA id d5-20020a50f685000000b005401a4184ddsm2401763edn.27.2023.11.02.07.05.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 02 Nov 2023 07:05:27 -0700 (PDT)
+        Thu, 02 Nov 2023 07:05:26 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/4] python3-olefile: add recipe
-Date: Thu,  2 Nov 2023 16:05:22 +0200
-Message-Id: <20231102140523.3337713-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/4] python3-oletools: add recipe
+Date: Thu,  2 Nov 2023 16:05:21 +0200
+Message-Id: <20231102140523.3337713-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231102140523.3337713-1-leon.anavi@konsulko.com>
 References: <20231102140523.3337713-1-leon.anavi@konsulko.com>
@@ -58,47 +58,51 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 02 Nov 2023 14:05:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105840
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105839
 
-Add olefile, a package to parse, read and write Microsoft OLE2
-files. Version 0.46 changelog:
+Add oletools, Python tools to analyze security characteristics of
+MS Office and OLE files. Version 0.60.1 changelog:
 
-- OleFileIO can now be used as a context manager (with...as), to
-  close the file automatically (see doc).
-- Improved handling of malformed files.
-- Fixed several bugs.
+- olevba:
+  fixed a bug when calling XLMMacroDeobfuscator
+  removed keyword "sample" causing false positives
+- oleid: fixed OleID init issue
+- oleobj:
+  added simple detection of CVE-2021-40444 initial stage
+  added detection for customUI onLoad
+  improved handling of incorrect filenames in OLE package
+- rtfobj: fixed code to find URLs in OLE2Link objects for Py3
+- ftguess:
+  added PowerPoint and XPS formats
+  fixed issue with XPS and malformed documents
+  added XLSB format
+- improved logging with common module log_helper
 
 This work was sponsored by GOVCERT.LU.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/python3-olefile_0.46.bb              | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-olefile_0.46.bb
+ .../python/python3-oletools_0.60.1.bb                 | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-oletools_0.60.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-olefile_0.46.bb b/meta-python/recipes-devtools/python/python3-olefile_0.46.bb
+diff --git a/meta-python/recipes-devtools/python/python3-oletools_0.60.1.bb b/meta-python/recipes-devtools/python/python3-oletools_0.60.1.bb
 new file mode 100644
-index 000000000..e29f30f6f
+index 000000000..fbb7955d6
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-olefile_0.46.bb
-@@ -0,0 +1,17 @@
-+SUMMARY = "Python package to parse, read and write Microsoft OLE2 files"
++++ b/meta-python/recipes-devtools/python/python3-oletools_0.60.1.bb
+@@ -0,0 +1,11 @@
++SUMMARY = "Python tools to analyze security characteristics of MS Office and OLE files"
 +HOMEPAGE = "https://github.com/decalage2/olefile"
 +LICENSE = "BSD-2-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e21a06208415d5eb2001555d37851362"
++LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=d7dd4b0d1f7153322a546e89b5a0a632"
 +
-+SRC_URI[sha256sum] = "133b031eaf8fd2c9399b78b8bc5b8fcbe4c31e85295749bb17a87cba8f3c3964"
++SRC_URI[sha256sum] = "67a796da4c4b8e2feb9a6b2495bef8798a3323a75512de4e5669d9dc9d1fae31"
 +
 +inherit pypi setuptools3
 +
-+PYPI_PACKAGE = "olefile"
++PYPI_PACKAGE = "oletools"
 +PYPI_PACKAGE_EXT = "zip"
-+
-+RDEPENDS:${PN} += "\
-+    ${PYTHON_PN}-core \
-+    ${PYTHON_PN}-datetime \
-+    ${PYTHON_PN}-logging \
-+"
 -- 
 2.39.2
 
