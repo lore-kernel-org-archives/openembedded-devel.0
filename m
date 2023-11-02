@@ -2,157 +2,123 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2BE25C4167B
-	for <webhook@archiver.kernel.org>; Thu,  2 Nov 2023 17:51:50 +0000 (UTC)
-Received: from mail-oi1-f182.google.com (mail-oi1-f182.google.com [209.85.167.182])
- by mx.groups.io with SMTP id smtpd.web11.38383.1698947500235947892
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2FEA6C4332F
+	for <webhook@archiver.kernel.org>; Thu,  2 Nov 2023 17:55:40 +0000 (UTC)
+Received: from mail-oa1-f42.google.com (mail-oa1-f42.google.com [209.85.160.42])
+ by mx.groups.io with SMTP id smtpd.web11.38519.1698947733189707048
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Nov 2023 10:51:40 -0700
+ Thu, 02 Nov 2023 10:55:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=WeqyxaIw;
- spf=pass (domain: gmail.com, ip: 209.85.167.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f182.google.com with SMTP id 5614622812f47-3b2f2b9a176so772263b6e.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Nov 2023 10:51:40 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Glvmb6Lb;
+ spf=pass (domain: gmail.com, ip: 209.85.160.42, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f42.google.com with SMTP id 586e51a60fabf-1eb7a8e9dd0so701683fac.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Nov 2023 10:55:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1698947499; x=1699552299; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1698947732; x=1699552532; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=A0fG6Ii5zPXAEX8+TwClNR9Vn0C7VeNv7shBG/9kkis=;
-        b=WeqyxaIwWd+65R+6GBfpaqeI4pFeELqXHVrPf/J6vKqslDllp0jSk2/b433q4NO3G6
-         nmALzN0Azs4eGwBg365OHO49QNcI1CVD6O2n5JrjxeDneUEkJc88D+0iVND5CJxyjji4
-         1bD6RBt56SjoHhrQexz2E+oXcO96lEt+PJ8n5GV278F9vM/OJwgoQh1caSyY7gyBP8fI
-         BV2WiKuGJgNsSrlPF3v+LdTQ6O613gS0YO0TvHuWvUqp0CDWR860AVIscg7qnkv4fR/Z
-         0Bu9huN054SjMU75xGnF8tCUiojcnyT9iU+3ETzXwU25UlI7m+4pJKCg11qwybQMthFn
-         dSlQ==
+        bh=LTef4og5SeHnwX2rFlTbq/O8p7hQ038hbs3imx8coiQ=;
+        b=Glvmb6LbEDHVX8LCmtWCzVBRs1xnzwORBmTeHCVip4fTFfOIAqSoef21H5G4qfcs4f
+         OgIFAF0HCC5jQwXHLh2LO6Yute8WlJrsj6uHx1CWwReMrEhLtKrvcawNr9y7U8kCHDF9
+         v2uQJnkC/+Xf/zsdeLN+5Y3af5YcNKvX9mmgLXyH7JWnEpgysv+46+b6JR7f7WuOpdh1
+         5WZdsBp5m1fugGriw5B0E1i+QRtmUZ/YxLI6BTQDMPprwENJ34KinMUZfoweMlcXWkUW
+         MhE5huic8rIuVRVk+bEnvqOAoWK/gGZvia0J2z6WSVhC3qKAgu/5lDNyV5/SKIRvs4u0
+         6feQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1698947499; x=1699552299;
+        d=1e100.net; s=20230601; t=1698947732; x=1699552532;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=A0fG6Ii5zPXAEX8+TwClNR9Vn0C7VeNv7shBG/9kkis=;
-        b=lkd3ZIpPvRFJjADcOAXd6ym/+1nPolxdSAYiTFp2smeOXNQZfM7fzFyTIWOO9jZH0e
-         +ixfy06BtksnUYFMLVgM5Q3IDGLKPql4KLmjedr64oh7adHsx/R4Ulc95YfGxvD7rTdF
-         3S9rb2wtkYMT+SOIH/e4paegL1PMXuXX0Hg2ne8HILJePrbkMVdu9vvDhctCxUPer1gF
-         q21NRBDoUPowrUNeUDC4iRHKH5qBbPbdKvoKde/TWsnyPtKO1H88VVo4UgEFG/tGRzmV
-         YH8Z2rhGhuj79/sqg/6HBEPoz9Wqp6kHGccak+9OnrBiBom5OSEZW78aY7RdtaB7iW9E
-         XHFw==
-X-Gm-Message-State: AOJu0YznKoj7Cv/MaQfN4aNPuuH6SO0rjHxxrwXl0AMAsmhQJiB8xN07
-	uZHXqbkyc9OOYKb4UDq1gbFdWmcQh1qkWFxWdCM=
-X-Google-Smtp-Source: AGHT+IG5upN8LBdiRbDQS+/F6RAvI9E2Pe0RXSDyNJKykTvISaYV/iCDjsIgABlInH+pr/CBbsCYF/SCcJODwpV0zUg=
-X-Received: by 2002:a05:6870:ad0c:b0:1e9:c252:4853 with SMTP id
- nt12-20020a056870ad0c00b001e9c2524853mr23779186oab.5.1698947499225; Thu, 02
- Nov 2023 10:51:39 -0700 (PDT)
+        bh=LTef4og5SeHnwX2rFlTbq/O8p7hQ038hbs3imx8coiQ=;
+        b=gFgDLOBwK3RtVQ77nTI72925Gy9M21nC/JdLUXN171onMLXIvQoanqejVdYBqfW9hG
+         sXQk9Ielhr5GaL3u6hztSiSCE/Wp9iusvoOdxpixPK3XzR1zMitiqKfpDhujjjK5RSwU
+         4vXAYLelKwAjR5H6hiWtFVZqdqDjetuh1SHc2DhT8iaVr/59UA5TiPhTN768QLOVfx0B
+         Wl0uHgLcigX9Z6TtBXfG0b7MYQehj0r4iPJfVQ74EcyyhVxzT3y5NzIxdiulZ9t6N1yk
+         0inNdVi0jyTNv9hLDRnxOdzmz+Fj3uJVqsTGRPYYvKM/bMA7aKnlpZ1ZNwirrWb9rURk
+         I2zw==
+X-Gm-Message-State: AOJu0Yz8gZ5+1cuqfa+UrZBhO1cP2A57l3i/chBMAEUo+oGjwhgzEMkF
+	NXOykChCWpUiTdQh/0z5UTfE8Iqkub+/OkvkwspQ18u9eM0=
+X-Google-Smtp-Source: AGHT+IGYgM3IMUdEFT7wUbj3Ch51ImW3w9IbrWp8HDGrtJIAcx3cxMyKPOQQMr/6g/03Enor/WTrgts6z1qJSAroOLQ=
+X-Received: by 2002:a05:6870:7996:b0:1e9:8ab9:e20 with SMTP id
+ he22-20020a056870799600b001e98ab90e20mr24313818oab.58.1698947732404; Thu, 02
+ Nov 2023 10:55:32 -0700 (PDT)
 MIME-Version: 1.0
-References: <9353bb8c5660859357ba062c7d5924051d249b83.camel@linuxfoundation.org>
-In-Reply-To: <9353bb8c5660859357ba062c7d5924051d249b83.camel@linuxfoundation.org>
+References: <CAMKF1sp424KMAuT94jxXAwJ1YaSS6DvskRQu1X_9Y9w+tZuL2w@mail.gmail.com>
+ <20231102061923.810849-1-mingli.yu@windriver.com>
+In-Reply-To: <20231102061923.810849-1-mingli.yu@windriver.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 2 Nov 2023 10:51:13 -0700
-Message-ID: <CAMKF1srDOiMrisZJwAm5=ft_pDzncXbaytJfqP4cMW17vv8r4w@mail.gmail.com>
-Subject: Re: meta-openembedded CVEs, patch stats and AUH
-To: Richard Purdie <richard.purdie@linuxfoundation.org>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
-	Armin Kuster <akuster808@gmail.com>, Marta Rybczynska <marta.rybczynska@syslinbit.com>, 
-	Ross Burton <ross.burton@arm.com>, Yoann Congal <yoann.congal@smile.fr>
+Date: Thu, 2 Nov 2023 10:55:06 -0700
+Message-ID: <CAMKF1spOjpT3ZCVatbuObYJKaH8=FNRprvGuJqJo_krByXWrdQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH v3] vboxguestdrivers: Remove the buildpath
+To: "Yu, Mingli" <mingli.yu@eng.windriver.com>
+Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 02 Nov 2023 17:51:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105844
+ <openembedded-devel@lists.openembedded.org>; Thu, 02 Nov 2023 17:55:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105845
 
-Awesome work !
+please rebase it against master or master-next and resend. I can not apply =
+v3
 
-On Thu, Nov 2, 2023 at 6:49=E2=80=AFAM Richard Purdie
-<richard.purdie@linuxfoundation.org> wrote:
+On Wed, Nov 1, 2023 at 11:19=E2=80=AFPM Yu, Mingli <mingli.yu@eng.windriver=
+.com> wrote:
 >
-> Patch Metrics and CVEs
-> ----------------------
+> From: Mingli Yu <mingli.yu@windriver.com>
 >
-> I'm now pleased to say we have CVE and patch metrics being generated
-> (Thanks Yoann and Ross):
+> Fixes:
+>   WARNING: vboxguestdrivers-7.0.10-r0 do_package_qa: QA Issue: File /usr/=
+lib/modules/6.1.51-yocto-standard/kernel/misc/vboxsf.ko in package kernel-m=
+odule-vboxsf-6.1.51-yocto-standard contains reference to TMPDIR [buildpaths=
+]
+>   WARNING: vboxguestdrivers-7.0.10-r0 do_package_qa: QA Issue: File /usr/=
+lib/modules/6.1.51-yocto-standard/kernel/misc/vboxguest.ko in package kerne=
+l-module-vboxguest-6.1.51-yocto-standard contains reference to TMPDIR [buil=
+dpaths]
+>   WARNING: vboxguestdrivers-7.0.10-r0 do_package_qa: QA Issue: File /usr/=
+lib/modules/6.1.51-yocto-standard/kernel/misc/vboxvideo.ko in package kerne=
+l-module-vboxvideo-6.1.51-yocto-standard contains reference to TMPDIR [buil=
+dpaths]
 >
-> https://autobuilder.yocto.io/pub/non-release/patchmetrics-meta-oe/
->
-> which for example generates this:
->
-> https://autobuilder.yocto.io/pub/non-release/patchmetrics-meta-oe/cve-sta=
-tus-master.txt
->
-> (268 CVEs)
->
-> This doesn't work for the LTS branches since the layer override being
-> used to generate it on master won't work for kirkstone/dunfell.
->
-> Those reports are generated live onto the site daily but aren't emailed
-> anywhere at this time.
->
->
-> Mirroring
-> ---------
->
-> I covered mirroring for meta-oe layers here:
->
-> https://lists.openembedded.org/g/openembedded-devel/message/105754
->
-> Basically it works but we need to decide whether we can fix the
-> warnings to keep this enabled for dunfell/kirkstone.
->
->
-> Reproducibility
-> ---------------
->
-> We can now test reproducibility for meta-oe on the autobuilder:
-> https://autobuilder.yoctoproject.org/typhoon/#/builders/155
->
-> In order to make this useful we really need a list of known issues so
-> that we can then exclude them and start showing regressions.
->
->
-> AUH
+> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 > ---
+>  .../recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.10.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> This is now working and generating updates. It takes a while to run and
-> generates a lot of emails.
+> diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.=
+0.10.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.10.=
+bb
+> index 8e9013824..ed2dc54d6 100644
+> --- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.10.bb
+> +++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.10.bb
+> @@ -24,7 +24,7 @@ S:task-patch =3D "${WORKDIR}/${VBOX_NAME}"
+>  export VBOX_KBUILD_TARGET_ARCH=3D"${ARCH}"
+>  export VBOX_KBUILD_TARGET_ARCH:x86-64=3D"amd64"
 >
-> https://autobuilder.yoctoproject.org/typhoon/#/builders/159/builds/8
-> (18 hours so far)
+> -EXTRA_OEMAKE +=3D "KERN_DIR=3D'${WORKDIR}/${KERNEL_VERSION}/build' KBUIL=
+D_VERBOSE=3D1"
+> +EXTRA_OEMAKE +=3D "KERN_DIR=3D'${WORKDIR}/${KERNEL_VERSION}/build' KBUIL=
+D_VERBOSE=3D1 CC=3D'${CC} ${DEBUG_PREFIX_MAP} -fdebug-prefix-map=3D${STAGIN=
+G_KERNEL_DIR}=3D${KERNEL_SRC_PATH} -fdebug-prefix-map=3D${STAGING_KERNEL_BU=
+ILDDIR}=3D${KERNEL_SRC_PATH}'"
 >
-> meta-oe summary:
-> https://lists.yoctoproject.org/g/test-list/message/425
-> TOTAL: attempted=3D206 succeeded=3D42(20.39%) failed=3D164(79.61%)
->
-> meta-python summary:
-> https://lists.yoctoproject.org/g/test-list/message/426
-> TOTAL: attempted=3D92 succeeded=3D50(54.35%) failed=3D42(45.65%)
->
-> meta-perl summary:
-> https://lists.yoctoproject.org/g/test-list/message/434
-> TOTAL: attempted=3D7 succeeded=3D5(71.43%) failed=3D2(28.57%)
->
-> meta-networking summary:
-> https://lists.yoctoproject.org/g/test-list/message/767
-> TOTAL: attempted=3D43 succeeded=3D8(18.60%) failed=3D35(81.40%)
->
-> so around ~350 emails of which ~105 were successful upgrades. I'm not
-> sure whether we want to enable that to send to openembedded-devel?
-> There are lot of failures and there are a lot of recipes where the
-> upstream status couldn't be checked. Is anyone interested in working on
-> improving things in either of those areas?
->
-> There are also various backend improvements we'd love to make to the
-> AUH code now we've seen how it works in practise in this role.
+>  # otherwise 5.2.22 builds just vboxguest
+>  MAKE_TARGETS =3D "all"
+> --
+> 2.25.1
 >
 >
-> Summary
-> -------
->
-> All things considered, this shows what our tooling is capable of and
-> we've a good baseline. Whether/how we enable/use this going forward
-> depends a lot on whether people are willing to step up and help
-> maintain/process the results. It can't/won't be Khem/I trying to make
-> and keep it all working so this is where we need help from the wider
-> community.
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#105834): https://lists.openembedded.org/g/openembedde=
+d-devel/message/105834
+> Mute This Topic: https://lists.openembedded.org/mt/102336760/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
 
