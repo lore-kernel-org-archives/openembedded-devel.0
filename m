@@ -1,224 +1,151 @@
-Return-Path: <kai.kang@eng.windriver.com>
+Return-Path: <richard.purdie@linuxfoundation.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D33B7C4167B
-	for <webhook@archiver.kernel.org>; Thu,  2 Nov 2023 06:29:35 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.25281.1698906569980730938
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 386F0C4332F
+	for <webhook@archiver.kernel.org>; Thu,  2 Nov 2023 13:49:38 +0000 (UTC)
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
+ by mx.groups.io with SMTP id smtpd.web10.31616.1698932977068205000
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Nov 2023 23:29:30 -0700
+ Thu, 02 Nov 2023 06:49:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=LPrB7ex3;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=9670a5cd56=kai.kang@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 3A241Vhg017650
-	for <openembedded-devel@lists.openembedded.org>; Thu, 2 Nov 2023 06:29:29 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding:content-type; s=
-	PPS06212021; bh=guJgDwR/GTbUzwPxAnbjadEelBXSBJmMYJ5ixVTXxow=; b=
-	LPrB7ex3BRXxgDRvSbhnxDAa6x4Zc8Ap8M7In5lIbAV8Tr5iuFfM2z6rpGOicwjx
-	2utbb2MRq9GD3qibtB+V3YiMXkeW9XpHKi/v6h7wDnZjDZtUkq5UPS/qMlsg8JYC
-	TSzmIOFbIQM67dLB0chQjwgndMOvCY8qM3iXcPkl1UoumKM2+y2MYKkZ3qKVG+Bm
-	e1ZIacsoDKXw2H/OAzN2BBVl7SGCRMkfkhqSxZOT95wcXM6HtdnATqRnBhrb0dBE
-	9faFmvXm7MspQ1sGU7LhIMJkimqUj1j2h5Bu+vwS8vC+dAns+fRvZtxWOqaM+pCl
-	gEqk0cle65rJF+Q956evqw==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3u430h84k4-9
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 02 Nov 2023 06:29:29 +0000 (GMT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.34; Wed, 1 Nov 2023 23:29:30 -0700
-Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.34 via Frontend Transport; Wed, 1 Nov 2023 23:29:29 -0700
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-python][PATCH 2/2] python3-blivetgui: 2.3.0 -> 2.4.2
-Date: Thu, 2 Nov 2023 14:29:24 +0800
-Message-ID: <20231102062924.786081-2-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231102062924.786081-1-kai.kang@windriver.com>
-References: <20231102062924.786081-1-kai.kang@windriver.com>
+ dkim=pass header.i=@linuxfoundation.org header.s=google header.b=Drzjj/RJ;
+ spf=pass (domain: linuxfoundation.org, ip: 209.85.221.46, mailfrom: richard.purdie@linuxfoundation.org)
+Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-32dc9ff4a8fso540694f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Nov 2023 06:49:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linuxfoundation.org; s=google; t=1698932975; x=1699537775; darn=lists.openembedded.org;
+        h=mime-version:user-agent:content-transfer-encoding:date:to:from
+         :subject:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=YNXLJhHR6yIc0XDD+PVlpiHTcS3s6YgEckF3tJngbls=;
+        b=Drzjj/RJC/pf7iegzLo3iVjC8Q+1KWqVwC6ZfFTNPMwq4GJ8zu5cxUZIATZl6QzEXG
+         FyPiGCXwgeZNBaO072mQpJDc+zhk+HBtBAtSjr0ProF+4l5qN0MWNxPw6XS5FEo0cgAG
+         bNm7rKIigGCxBVOA+9/sPc49zPzhj44auYmKA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1698932975; x=1699537775;
+        h=mime-version:user-agent:content-transfer-encoding:date:to:from
+         :subject:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=YNXLJhHR6yIc0XDD+PVlpiHTcS3s6YgEckF3tJngbls=;
+        b=LoXGuax3/SU2/rETUbSOKv00wfn3J5bh9UJxPzMf2yZWUMnE+p+cauFeq4vwgHcW/k
+         mSPGc+gz3IDcGg7IOWiw/LF3dOmyy11d5A/xp65L2kiDtQNjpcfBDJmwuUKwI7o5k++J
+         iSS/1AR1DH4haaU4qBIIu7h24buOPFIYUFr/7xL4BEC3S51jBfbP3efB4Li/UHLAvUf7
+         1X5VqH3vRmHU9FbEtqtSsGXlmAReVjG8zZ4Ymgkg8FguY7OU6M7ucskb5e823qnYWosd
+         uorHPIwoQFsLhR4SJr4txJXT0jvhY5EjHQ2EbkZqAwyS1wSduHZ6mwv/DJAJPp8oA8+h
+         HE4w==
+X-Gm-Message-State: AOJu0YxprhC6Cj5xgA/QnzGDcAatTdUMvjjX1P8kr32c89ZlKQjt02eZ
+	niS3t3ectBTbMrplKXDWazqyFA==
+X-Google-Smtp-Source: AGHT+IFj3a9j8N1GeU4THWOKCWKSc3a+b323vwOquYO2jXn7GtJk3UluLm2HkoD3HIOf9j5UquHzkg==
+X-Received: by 2002:a05:6000:154a:b0:32f:7ae7:da49 with SMTP id 10-20020a056000154a00b0032f7ae7da49mr14421542wry.51.1698932975424;
+        Thu, 02 Nov 2023 06:49:35 -0700 (PDT)
+Received: from ?IPv6:2001:8b0:aba:5f3c:c187:f0:bd0d:8811? ([2001:8b0:aba:5f3c:c187:f0:bd0d:8811])
+        by smtp.gmail.com with ESMTPSA id m11-20020adffa0b000000b00323293bd023sm2538811wrr.6.2023.11.02.06.49.34
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 02 Nov 2023 06:49:35 -0700 (PDT)
+Message-ID: <9353bb8c5660859357ba062c7d5924051d249b83.camel@linuxfoundation.org>
+Subject: meta-openembedded CVEs, patch stats and AUH
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: Khem Raj <raj.khem@gmail.com>, openembedded-devel
+ <openembedded-devel@lists.openembedded.org>, Armin Kuster
+ <akuster808@gmail.com>,  Marta Rybczynska <marta.rybczynska@syslinbit.com>,
+ Ross Burton <ross.burton@arm.com>, Yoann Congal <yoann.congal@smile.fr>
+Date: Thu, 02 Nov 2023 13:49:34 +0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.48.1-0ubuntu1 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: LqnZCw141Nuvob7qClNt5z5uTFMPuTYu
-X-Proofpoint-ORIG-GUID: LqnZCw141Nuvob7qClNt5z5uTFMPuTYu
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-11-01_23,2023-11-01_02,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0 suspectscore=0
- spamscore=0 phishscore=0 priorityscore=1501 lowpriorityscore=0
- mlxlogscore=999 adultscore=0 mlxscore=0 clxscore=1015 impostorscore=0
- malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2310240000 definitions=main-2311020048
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 02 Nov 2023 06:29:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105836
+ <openembedded-devel@lists.openembedded.org>; Thu, 02 Nov 2023 13:49:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105837
 
-From: Kai Kang <kai.kang@windriver.com>
+Patch Metrics and CVEs
+----------------------
 
-Update python3-blivetgui from 2.3.0 to 2.4.2
+I'm now pleased to say we have CVE and patch metrics being generated
+(Thanks Yoann and Ross):
 
-* drop patches that there are not needed any more
-* not set var `B` that out of source tree build is supported
-* inherit setuptools3 rather than setuptools3_legacy
+https://autobuilder.yocto.io/pub/non-release/patchmetrics-meta-oe/
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+which for example generates this:
+
+https://autobuilder.yocto.io/pub/non-release/patchmetrics-meta-oe/cve-statu=
+s-master.txt
+
+(268 CVEs)
+
+This doesn't work for the LTS branches since the layer override being
+used to generate it on master won't work for kirkstone/dunfell.
+
+Those reports are generated live onto the site daily but aren't emailed
+anywhere at this time.
+
+
+Mirroring
+---------
+
+I covered mirroring for meta-oe layers here:
+
+https://lists.openembedded.org/g/openembedded-devel/message/105754
+
+Basically it works but we need to decide whether we can fix the
+warnings to keep this enabled for dunfell/kirkstone.
+
+
+Reproducibility
+---------------
+
+We can now test reproducibility for meta-oe on the autobuilder:
+https://autobuilder.yoctoproject.org/typhoon/#/builders/155
+
+In order to make this useful we really need a list of known issues so
+that we can then exclude them and start showing regressions.
+
+
+AUH
 ---
- ...ols-instead-of-distutils-in-setup.py.patch | 30 ----------
- ...Use-symbolic-list-add-and-edit-icons.patch | 56 -------------------
- ...ui_2.3.0.bb => python3-blivetgui_2.4.2.bb} | 18 ++----
- 3 files changed, 5 insertions(+), 99 deletions(-)
- delete mode 100644 meta-python/recipes-extended/python-blivet/python3-blivetgui/0001-Use-setuptools-instead-of-distutils-in-setup.py.patch
- delete mode 100644 meta-python/recipes-extended/python-blivet/python3-blivetgui/0002-Use-symbolic-list-add-and-edit-icons.patch
- rename meta-python/recipes-extended/python-blivet/{python3-blivetgui_2.3.0.bb => python3-blivetgui_2.4.2.bb} (61%)
 
-diff --git a/meta-python/recipes-extended/python-blivet/python3-blivetgui/0001-Use-setuptools-instead-of-distutils-in-setup.py.patch b/meta-python/recipes-extended/python-blivet/python3-blivetgui/0001-Use-setuptools-instead-of-distutils-in-setup.py.patch
-deleted file mode 100644
-index c88912bfa..000000000
---- a/meta-python/recipes-extended/python-blivet/python3-blivetgui/0001-Use-setuptools-instead-of-distutils-in-setup.py.patch
-+++ /dev/null
-@@ -1,30 +0,0 @@
--From 54014061be2fed20d6c35aba9719ea70a9fea9ea Mon Sep 17 00:00:00 2001
--From: Vojtech Trefny <vtrefny@redhat.com>
--Date: Wed, 1 Sep 2021 08:59:19 +0200
--Subject: [PATCH] Use setuptools instead of distutils in setup.py
--
--The distutils module is deprecated and will be removed in Python
--3.12.
--
--Upstream-Status: Backport [https://github.com/kraj/blivet-gui/commit/54014061be2fed20d6c35aba9719ea70a9fea9ea]
-----
-- setup.py | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/setup.py b/setup.py
--index aa8ef57..77849a1 100644
----- a/setup.py
--+++ b/setup.py
--@@ -1,7 +1,7 @@
-- from __future__ import print_function
-- 
---from distutils.core import setup
---from distutils.command.sdist import sdist
--+from setuptools import setup
--+from setuptools.command.sdist import sdist
-- import glob
-- import sys
-- 
---- 
--2.35.1
--
-diff --git a/meta-python/recipes-extended/python-blivet/python3-blivetgui/0002-Use-symbolic-list-add-and-edit-icons.patch b/meta-python/recipes-extended/python-blivet/python3-blivetgui/0002-Use-symbolic-list-add-and-edit-icons.patch
-deleted file mode 100644
-index 3a95859ad..000000000
---- a/meta-python/recipes-extended/python-blivet/python3-blivetgui/0002-Use-symbolic-list-add-and-edit-icons.patch
-+++ /dev/null
-@@ -1,56 +0,0 @@
--Upstream-Status: Backport [https://github.com/storaged-project/blivet-gui/commit/eb8ec968]
--
--Signed-off-by: Kai Kang <kai.kang@windriver.com>
--
--From eb8ec968d1ee8b4b710568b1eb8536296f90751e Mon Sep 17 00:00:00 2001
--From: Adam Williamson <awilliam@redhat.com>
--Date: Thu, 17 Feb 2022 11:16:22 -0800
--Subject: [PATCH] Use symbolic list-add and edit- icons (Adwaita dropped old
-- ones)
--
--adwaita-icon-theme 42 no longer includes the non-symbolic icons
--for these names. The choices are to switch to symbolic ones or
--carry the non-symbolic ones downstream.
--
--Signed-off-by: Adam Williamson <awilliam@redhat.com>
-----
-- blivetgui/list_actions.py      | 8 ++++----
-- blivetgui/processing_window.py | 6 +++---
-- 2 files changed, 7 insertions(+), 7 deletions(-)
--
--diff --git a/blivetgui/list_actions.py b/blivetgui/list_actions.py
--index b7c1f9c..5388feb 100644
----- a/blivetgui/list_actions.py
--+++ b/blivetgui/list_actions.py
--@@ -48,10 +48,10 @@ def __init__(self, blivet_gui):
--         self.blivet_gui = blivet_gui
-- 
--         icon_theme = Gtk.IconTheme.get_default()  # pylint: disable=no-value-for-parameter
---        icon_add = Gtk.IconTheme.load_icon(icon_theme, "list-add", 16, 0)
---        icon_delete = Gtk.IconTheme.load_icon(icon_theme, "edit-delete", 16, 0)
---        icon_edit = Gtk.IconTheme.load_icon(icon_theme, "edit-select-all", 16, 0)
---        icon_misc = Gtk.IconTheme.load_icon(icon_theme, "edit-paste", 16, 0)
--+        icon_add = Gtk.IconTheme.load_icon(icon_theme, "list-add-symbolic", 16, 0)
--+        icon_delete = Gtk.IconTheme.load_icon(icon_theme, "edit-delete-symbolic", 16, 0)
--+        icon_edit = Gtk.IconTheme.load_icon(icon_theme, "edit-select-all-symbolic", 16, 0)
--+        icon_misc = Gtk.IconTheme.load_icon(icon_theme, "edit-paste-symbolic", 16, 0)
-- 
--         self.action_icons = {"add": icon_add, "delete": icon_delete, "edit": icon_edit,
--                              "misc": icon_misc}
--diff --git a/blivetgui/processing_window.py b/blivetgui/processing_window.py
--index c400f90..a020ae8 100644
----- a/blivetgui/processing_window.py
--+++ b/blivetgui/processing_window.py
--@@ -93,9 +93,9 @@ def add_action_view(self):
--         """
-- 
--         icon_theme = Gtk.IconTheme.get_default()  # pylint: disable=no-value-for-parameter
---        icon_add = Gtk.IconTheme.load_icon(icon_theme, "list-add", 16, 0)
---        icon_delete = Gtk.IconTheme.load_icon(icon_theme, "edit-delete", 16, 0)
---        icon_edit = Gtk.IconTheme.load_icon(icon_theme, "edit-select-all", 16, 0)
--+        icon_add = Gtk.IconTheme.load_icon(icon_theme, "list-add-symbolic", 16, 0)
--+        icon_delete = Gtk.IconTheme.load_icon(icon_theme, "edit-delete-symbolic", 16, 0)
--+        icon_edit = Gtk.IconTheme.load_icon(icon_theme, "edit-select-all-symbolic", 16, 0)
-- 
--         actions_list = Gtk.ListStore(GdkPixbuf.Pixbuf, str, GdkPixbuf.Pixbuf)
-- 
-diff --git a/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.3.0.bb b/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.4.2.bb
-similarity index 61%
-rename from meta-python/recipes-extended/python-blivet/python3-blivetgui_2.3.0.bb
-rename to meta-python/recipes-extended/python-blivet/python3-blivetgui_2.4.2.bb
-index 42bcf4651..b6e04e081 100644
---- a/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.3.0.bb
-+++ b/meta-python/recipes-extended/python-blivet/python3-blivetgui_2.4.2.bb
-@@ -5,20 +5,14 @@ SECTION = "devel/python"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
--S = "${WORKDIR}/git"
--B = "${S}"
-+SRC_URI = "git://github.com/storaged-project/blivet-gui.git;branch=main;protocol=https"
-+SRCREV = "9b6a83a7aef546ddacafcc656984c9bbed67a8ec"
- 
--SRCREV = "42512ee48494cee71febf04078d9774f0146a085"
--SRC_URI = "git://github.com/storaged-project/blivet-gui.git;branch=main;protocol=https \
--           file://0001-Use-setuptools-instead-of-distutils-in-setup.py.patch \
--           file://0002-Use-symbolic-list-add-and-edit-icons.patch \
--           "
-+S = "${WORKDIR}/git"
- 
--inherit features_check
-+inherit features_check setuptools3
- REQUIRED_DISTRO_FEATURES = "x11 systemd gobject-introspection-data"
- 
--inherit setuptools3_legacy python3native
--
- PIP_INSTALL_PACKAGE = "blivet_gui"
- 
- RDEPENDS:${PN} = "python3-pygobject python3 \
-@@ -26,6 +20,4 @@ RDEPENDS:${PN} = "python3-pygobject python3 \
-                   python3-pid libreport \
- "
- 
--FILES:${PN} += " \
--    ${datadir}/* \
--    "
-+FILES:${PN} += "${datadir}/*"
--- 
-2.34.1
+This is now working and generating updates. It takes a while to run and
+generates a lot of emails.
+
+https://autobuilder.yoctoproject.org/typhoon/#/builders/159/builds/8
+(18 hours so far)
+
+meta-oe summary:
+https://lists.yoctoproject.org/g/test-list/message/425
+TOTAL: attempted=3D206 succeeded=3D42(20.39%) failed=3D164(79.61%)
+
+meta-python summary:
+https://lists.yoctoproject.org/g/test-list/message/426
+TOTAL: attempted=3D92 succeeded=3D50(54.35%) failed=3D42(45.65%)
+
+meta-perl summary:
+https://lists.yoctoproject.org/g/test-list/message/434
+TOTAL: attempted=3D7 succeeded=3D5(71.43%) failed=3D2(28.57%)
+
+meta-networking summary:
+https://lists.yoctoproject.org/g/test-list/message/767
+TOTAL: attempted=3D43 succeeded=3D8(18.60%) failed=3D35(81.40%)
+
+so around ~350 emails of which ~105 were successful upgrades. I'm not
+sure whether we want to enable that to send to openembedded-devel?
+There are lot of failures and there are a lot of recipes where the
+upstream status couldn't be checked. Is anyone interested in working on
+improving things in either of those areas?
+
+There are also various backend improvements we'd love to make to the
+AUH code now we've seen how it works in practise in this role.
+
+
+Summary
+-------
+
+All things considered, this shows what our tooling is capable of and
+we've a good baseline. Whether/how we enable/use this going forward
+depends a lot on whether people are willing to step up and help
+maintain/process the results. It can't/won't be Khem/I trying to make
+and keep it all working so this is where we need help from the wider
+community.
 
 
