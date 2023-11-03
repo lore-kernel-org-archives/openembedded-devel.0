@@ -2,39 +2,39 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 65A16C27C5A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A3F33C3DA6E
 	for <webhook@archiver.kernel.org>; Fri,  3 Nov 2023 19:53:07 +0000 (UTC)
 Received: from a27-23.smtp-out.us-west-2.amazonses.com (a27-23.smtp-out.us-west-2.amazonses.com [54.240.27.23])
- by mx.groups.io with SMTP id smtpd.web10.63862.1699041165508911707
+ by mx.groups.io with SMTP id smtpd.web11.62987.1699041168582173462
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 03 Nov 2023 12:52:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=Ahsh+DRb;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=BPOFvxQs;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.23, mailfrom: 0101018b96bee859-1408588b-0015-4aa1-9265-cc41157a0b08-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=Ra9G8Z/y;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=qajdoNYs;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.23, mailfrom: 0101018b96bee7ea-2e6e0e1d-b890-4a03-a21f-3449d2e86e28-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
 	t=1699041175;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=r0RkiJ0TTttdq5tCLcoce+Jbj096sO6FgaSm9/W9HFg=;
-	b=Ahsh+DRbZGXxDOLblgVofG9YdcWHKQCbrrc7zGWsNbMTF3G3ehsy1zajYzPK3PPj
-	vDCeMdnDuHU9nS34aKXr63N8WWRPQYg+KCpMFCJrMNyw9LgvmBAk1uJ6ZjBjBj/ATFK
-	AjXD9//0pySTOBPvTtdnbW+q2ATQX3Dp4T5hVm04=
+	bh=56s4OlRoPLaVW4j4sagANhZ93grFIMfK6MMQ4OBIlv8=;
+	b=Ra9G8Z/yb8246WCw1OErWTVi0JGfEuIuTiTGVmrgCGShT2juh4by+lzFmFPyurXx
+	BhjL60mW7oCOcZovfu3IvQJXFSY8h5iXfQ39dUDa+ADLhh5Mog78wtA1IoSA5VK00zH
+	/sCfrQBqnyHzKOSToH0H+620wcc1fKl05hey++wY=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699041175;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=r0RkiJ0TTttdq5tCLcoce+Jbj096sO6FgaSm9/W9HFg=;
-	b=BPOFvxQssI6T3PIpS83yZIE5dS0ZzHF3g2K98UlKTbuR+wUYtPA/iLBPP8yYVz/W
-	sIaENCsw7ZQPXKDWXynMHWR53io1C4IB8OLRY75VtzI83f5PCG+tHbe+64CfJa36xbp
-	O5ofZm3ipVrCjVi9YkE2HocWjnv6dOc6zYYzRC7g=
-Content-Type: multipart/mixed; boundary="===============6164760988844390007=="
+	bh=56s4OlRoPLaVW4j4sagANhZ93grFIMfK6MMQ4OBIlv8=;
+	b=qajdoNYsz9Vx9uoG4p1ytAT0O6dwed22zDiHyhLzjgKVTuIeBWRJMXx4DMEdaiUA
+	cx43OYl/0NKXonlOWSSzb1CSkJJcBtNh0XahOVvsqm1yAR8/ocEG94FN9qmmdEKln9V
+	9fo9kBo5fiLjcEjxu2d21j7IV1zXq8RfB5ZnLdJM=
+Content-Type: multipart/mixed; boundary="===============5882364915278477587=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] ttf-lklug: upgrading to 20090803 FAILED
-Message-ID: <0101018b96bee859-1408588b-0015-4aa1-9265-cc41157a0b08-000000@us-west-2.amazonses.com>
+Subject: [AUH] ttf-liberation-sans-narrow: upgrading to 2.00.1 FAILED
+Message-ID: <0101018b96bee7ea-2e6e0e1d-b890-4a03-a21f-3449d2e86e28-000000@us-west-2.amazonses.com>
 Date: Fri, 3 Nov 2023 19:52:55 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
 X-SES-Outgoing: 2023.11.03-54.240.27.23
@@ -42,9 +42,9 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 19:53:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106026
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106025
 
---===============6164760988844390007==
+--===============5882364915278477587==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,14 +52,14 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *ttf-lklug* to *20090803* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *ttf-liberation-sans-narrow* to *2.00.1* has Failed (devtool error).
 
 Detailed error information:
 
-The following devtool command failed:  upgrade ttf-lklug -V 20090803
+The following devtool command failed:  upgrade ttf-liberation-sans-narrow -V 2.00.1
 NOTE: Reconnecting to bitbake server...
 Loading cache...done.
-Loaded 5055 entries from dependency cache.
+Loaded 5054 entries from dependency cache.
 NOTE: Resolving any missing task queue dependencies
 
 Build Configuration:
@@ -95,7 +95,7 @@ NOTE: Tasks Summary: Attempted 103 tasks of which 100 didn't need to be rerun an
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 3 seconds
 Loading cache...done.
-Loaded 5055 entries from dependency cache.
+Loaded 5054 entries from dependency cache.
 Parsing recipes...done.
 Parsing of 3056 .bb files complete (3054 cached, 2 parsed). 4887 targets, 92 skipped, 0 masked, 0 errors.
 NOTE: Resolving any missing task queue dependencies
@@ -132,11 +132,30 @@ NOTE: Executing Tasks
 NOTE: Tasks Summary: Attempted 3 tasks of which 0 didn't need to be rerun and all succeeded.
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 3 seconds
+DEBUG 5 [Errno 25] Inappropriate ioctl for device
+Adding changed files:   0% |                                   | ETA:  --:--:--
+Adding changed files:   0% |                                   | ETA:  --:--:--
+Adding changed files: 100% |####################################| Time: 0:00:00
 
 INFO: Extracting current version source...
+INFO: Adding local source files to srctree...
 INFO: Extracting upgraded version source...
-INFO: Fetching https://src.fedoraproject.org/repo/pkgs/lklug-fonts/lklug-20090803.tar.gz/b6e0daaf8cf41208fd2a7bc04fb23f84/lklug-20090803.tar.gz...
-ERROR: Cannot determine where the source tree is after unpacking in /tmp/devtoolhxexf7uw: ['COPYING', 'lklug.sfd', 'Makefile', 'convert.ff', 'README.fonts', 'CREDITS']
+INFO: Fetching https://releases.pagure.org/liberation-fonts/liberation-fonts-ttf-2.00.1.tar.gz...
+INFO: Rebasing devtool onto 9f6c4053ff2614413d62f31a484a19db759c79ef
+Traceback (most recent call last):
+  File "/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts/devtool", line 349, in <module>
+    ret = main()
+          ^^^^^^
+  File "/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts/devtool", line 336, in main
+    ret = args.func(args, config, basepath, workspace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts/lib/devtool/upgrade.py", line 568, in upgrade
+    new_licenses = _extract_licenses(srctree_s, (rd.getVar('LIC_FILES_CHKSUM') or ""))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts/lib/devtool/upgrade.py", line 476, in _extract_licenses
+    with open(os.path.join(srcpath, path), 'rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/sources/ttf-liberation-sans-narrow/COPYING'
 
 
 Please review the attached files for further information and build/update failures.
@@ -144,5 +163,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============6164760988844390007==--
+--===============5882364915278477587==--
 
