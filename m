@@ -1,419 +1,321 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <hprajapati@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F538C4332F
-	for <webhook@archiver.kernel.org>; Fri,  3 Nov 2023 04:13:12 +0000 (UTC)
-Received: from mail-yb1-f171.google.com (mail-yb1-f171.google.com [209.85.219.171])
- by mx.groups.io with SMTP id smtpd.web10.25034.1698984789146028716
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5DA76C4332F
+	for <webhook@archiver.kernel.org>; Fri,  3 Nov 2023 05:49:43 +0000 (UTC)
+Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
+ by mx.groups.io with SMTP id smtpd.web11.30887.1698990578470664788
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Nov 2023 21:13:09 -0700
+ Thu, 02 Nov 2023 22:49:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=MrI/o0wM;
- spf=pass (domain: gmail.com, ip: 209.85.219.171, mailfrom: ticotimo@gmail.com)
-Received: by mail-yb1-f171.google.com with SMTP id 3f1490d57ef6-d9ca471cf3aso1653790276.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Nov 2023 21:13:09 -0700 (PDT)
+ dkim=pass header.i=@mvista.com header.s=google header.b=MI1lUzFA;
+ spf=pass (domain: mvista.com, ip: 209.85.215.182, mailfrom: hprajapati@mvista.com)
+Received: by mail-pg1-f182.google.com with SMTP id 41be03b00d2f7-5b92b670f2aso1348245a12.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Nov 2023 22:49:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1698984788; x=1699589588; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=pg9Q0hmL1BdqXCMAo209qS0maPwguTuGXcWsm8JN48A=;
-        b=MrI/o0wMAQLO207XWuIGKLty6HQx3JmHF8H1ChfU6E10fxHA4vrc13oQUHD1AtVPf0
-         hHLGaWsVGXRDJASueeg6NivAjihl/3DBt54ROA2V+sVWN9Q95NSUGbvnxgSUVP9neUHd
-         NNCV7Pbc5saL3w2zyzAVp3VxhlypmIcvLQcA8SKUcO/p947FyB3c4M20q1fhiDwckGpx
-         RL3kAKu/O5kvK9uJvpo57UBnWJtuGWXhkNNMFxHmdld+7Ebcg62CLskWI5bNa8IZcAwF
-         H+3tDSjQlxCVv7VmAdQteayqlQJT16YwcWVjPUZACt4X3l0EgnwLYuWe767Y5GHcs8J1
-         K4lw==
+        d=mvista.com; s=google; t=1698990578; x=1699595378; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=MbzeW1kkWKWKNezjcYoYaWpFCucvw+hlg97tAYg8+nw=;
+        b=MI1lUzFATs0+33ZPsfKM8WRlwwpU0XJExsJHsMwYLzpJDU70ivWKVHtBbTNVB4vOLx
+         7NAPesirCYcd1qX2au5/xRDIsxvvQgxAUItkve1Ph25HGizsJMNuNU8xTulJcTHelh96
+         0lNDOJFOvjXSrd3S646NzvmR5hdy6eyAnSuvk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1698984788; x=1699589588;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1698990578; x=1699595378;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=pg9Q0hmL1BdqXCMAo209qS0maPwguTuGXcWsm8JN48A=;
-        b=qpQBaHu/CwJbVbdsB0NMeUAeexrfgIznROUZcHFilQ6o8rFVDO0kxgCUUsRmXPUSkA
-         SJSYlGAyE8BeOpNa1lBjezCsABBivix6NBg8yuk9aBilBi3oAmrLHFg29Op1cqHiPqcj
-         EPXKLmcT8VrhbECao2T/U4UPFMFouLQSrtuhIQivY8AVmn8Wvs847SOKutPNFnzyScCR
-         Qz1nlCRKrb5HFHeB/JVWR7+C1bj3zq5qRPBAZqQuq+BSx6zapMD1OOmTLPJLIbex98Fc
-         cMMKmtlszGcf7FwMaV1H4RmiuVpTEUPEexD2mrccTY2m0K8dYhj7Y0mbTXgO4TGJ6/BV
-         u+zg==
-X-Gm-Message-State: AOJu0Yzu75gduyY7txOlTFykNhllBBKJgVL31Hj7V1DnN5ckETwlv64q
-	VJZjaDte/RQCHmlNR9akTavSbfwq07JVfUatUP4=
-X-Google-Smtp-Source: AGHT+IHF8D/iZ2pHSBMeU8+9qLUPyBdhQWLGk6a/XP6TxITnstI4FONi23ucC21VenfSdIkhVJzIi9TJjeNbQbN5aI4=
-X-Received: by 2002:a25:e0c9:0:b0:d9a:384a:d4c5 with SMTP id
- x192-20020a25e0c9000000b00d9a384ad4c5mr23304247ybg.33.1698984788235; Thu, 02
- Nov 2023 21:13:08 -0700 (PDT)
+        bh=MbzeW1kkWKWKNezjcYoYaWpFCucvw+hlg97tAYg8+nw=;
+        b=UP9DMuinTG7EB49Sz43UMo8OvQbY42wyEQkZ7kjeVBhiuWZ/F7h/A0AXYh+iDn/QSU
+         3aA7tGEPx1VbrBxvrfH8uSAmjgmYncAQ18MVNISUJP2MMvUB05gj+mzxc71zyAumJlnQ
+         F3V3tsZJpQK9o6ClFeNg2nYBbD9sxb4RNdG4MSuKsh3lvexuDIl5QunVUIjIbH3BLgBy
+         Yg4f/ZNHZ3fZarxm/doByv8qipe03pzsiRMXfgl3D57nQ6EmKvEMAsFG4wMXm3sKVhJC
+         1rItHDMiumnfyGPGHbN4P5VshLkA8hdGB3JtewvCsQuL7Nys6txSfjMOMsIC1UucDlAL
+         uRrA==
+X-Gm-Message-State: AOJu0YzlDPD2WjiLKxx5eXlPO4rX/BleQqaX1JYJZ0zga9Wm+NmbbY7i
+	mB/JG3OY9F0nUQhbvuiq6MO7HmcomgbsvEBxPkVNXw==
+X-Google-Smtp-Source: AGHT+IFQRHHQzhl5Qc9BEbimk/aAEk1DKQMz5h0hRYgc+9YZcwOCx2+RVPiBMFhas+7Yj29okp7OpA==
+X-Received: by 2002:a05:6a21:7785:b0:180:db7b:23f2 with SMTP id bd5-20020a056a21778500b00180db7b23f2mr14777087pzc.61.1698990577576;
+        Thu, 02 Nov 2023 22:49:37 -0700 (PDT)
+Received: from MVIN00016.mvista.com ([150.129.170.135])
+        by smtp.gmail.com with ESMTPSA id fd15-20020a056a002e8f00b006b5922221f4sm630216pfb.8.2023.11.02.22.49.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 02 Nov 2023 22:49:37 -0700 (PDT)
+From: Hitendra Prajapati <hprajapati@mvista.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Hitendra Prajapati <hprajapati@mvista.com>
+Subject: [meta-networking][dunfell][PATCH] wireshark: Fix CVE-2023-3649
+Date: Fri,  3 Nov 2023 11:19:31 +0530
+Message-Id: <20231103054931.31565-1-hprajapati@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <9353bb8c5660859357ba062c7d5924051d249b83.camel@linuxfoundation.org>
- <CAMKF1srDOiMrisZJwAm5=ft_pDzncXbaytJfqP4cMW17vv8r4w@mail.gmail.com>
-In-Reply-To: <CAMKF1srDOiMrisZJwAm5=ft_pDzncXbaytJfqP4cMW17vv8r4w@mail.gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Thu, 2 Nov 2023 21:12:57 -0700
-Message-ID: <CANx9H-Ar+r-mBK8O2SxjfYF9vJdoeFouDTrvfQFQPqUvrAW04A@mail.gmail.com>
-Subject: Re: [oe] meta-openembedded CVEs, patch stats and AUH
-To: Khem Raj <raj.khem@gmail.com>
-Cc: Armin Kuster <akuster808@gmail.com>, Marta Rybczynska <marta.rybczynska@syslinbit.com>, 
-	Richard Purdie <richard.purdie@linuxfoundation.org>, Ross Burton <ross.burton@arm.com>, 
-	Yoann Congal <yoann.congal@smile.fr>, 
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="000000000000c81942060937b8d8"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 04:13:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105848
+ <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 05:49:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105849
 
---000000000000c81942060937b8d8
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Upstream-Status: Backport from https://gitlab.com/wireshark/wireshark/-/commit/75e0ffcb42f3816e5f2fdef12f3c9ae906130b0c
 
-On Thu, Nov 2, 2023 at 10:51=E2=80=AFAM Khem Raj <raj.khem@gmail.com> wrote=
-:
+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
+---
+ .../wireshark/files/CVE-2023-3649.patch       | 231 ++++++++++++++++++
+ .../wireshark/wireshark_3.2.18.bb             |   1 +
+ 2 files changed, 232 insertions(+)
+ create mode 100644 meta-networking/recipes-support/wireshark/files/CVE-2023-3649.patch
 
-> Awesome work !
+diff --git a/meta-networking/recipes-support/wireshark/files/CVE-2023-3649.patch b/meta-networking/recipes-support/wireshark/files/CVE-2023-3649.patch
+new file mode 100644
+index 000000000..5e92bd8a2
+--- /dev/null
++++ b/meta-networking/recipes-support/wireshark/files/CVE-2023-3649.patch
+@@ -0,0 +1,231 @@
++From 75e0ffcb42f3816e5f2fdef12f3c9ae906130b0c Mon Sep 17 00:00:00 2001
++From: John Thacker <johnthacker@gmail.com>
++Date: Sat, 24 Jun 2023 00:34:50 -0400
++Subject: [PATCH] iscsi: Check bounds when extracting TargetAddress
++
++Use tvb_ functions that do bounds checking when parsing the
++TargetAddress string, instead of incrementing a pointer to an
++extracted char* and sometimes accidentally overrunning the
++string.
++
++While we're there, go ahead and add support for IPv6 addresses.
++
++Fix #19164
++
++(backported from commit 94349bbdaeb384b12d554dd65e7be7ceb0e93d21)
++
++Upstream-Status: Backport [https://gitlab.com/wireshark/wireshark/-/commit/75e0ffcb42f3816e5f2fdef12f3c9ae906130b0c]
++CVE: CVE-2023-3649
++Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
++---
++ epan/dissectors/packet-iscsi.c | 146 +++++++++++++++++----------------
++ 1 file changed, 75 insertions(+), 71 deletions(-)
++
++diff --git a/epan/dissectors/packet-iscsi.c b/epan/dissectors/packet-iscsi.c
++index 8a80f49..08f44a8 100644
++--- a/epan/dissectors/packet-iscsi.c
+++++ b/epan/dissectors/packet-iscsi.c
++@@ -20,8 +20,6 @@
++ 
++ #include "config.h"
++ 
++-#include <stdio.h>
++-
++ #include <epan/packet.h>
++ #include <epan/prefs.h>
++ #include <epan/conversation.h>
++@@ -29,6 +27,7 @@
++ #include "packet-scsi.h"
++ #include <epan/crc32-tvb.h>
++ #include <wsutil/crc32.h>
+++#include <wsutil/inet_addr.h>
++ #include <wsutil/strtoi.h>
++ 
++ void proto_register_iscsi(void);
++@@ -512,70 +511,81 @@ typedef struct _iscsi_conv_data {
++    dissector for the address/port that TargetAddress points to.
++    (it starts to be common to use redirectors to point to non-3260 ports)
++ */
+++static address null_address = ADDRESS_INIT_NONE;
+++
++ static void
++-iscsi_dissect_TargetAddress(packet_info *pinfo, tvbuff_t* tvb, proto_tree *tree, char *val, guint offset)
+++iscsi_dissect_TargetAddress(packet_info *pinfo, tvbuff_t* tvb, proto_tree *tree, guint offset)
++ {
++-    address *addr = NULL;
+++    address addr = ADDRESS_INIT_NONE;
++     guint16 port;
++-    char *value = wmem_strdup(wmem_packet_scope(), val);
++-    char *p = NULL, *pgt = NULL;
++-
++-    if (value[0] == '[') {
++-        /* this looks like an ipv6 address */
++-        p = strchr(value, ']');
++-        if (p != NULL) {
++-            *p = 0;
++-            p += 2;    /* skip past "]:" */
++-
++-            pgt = strchr(p, ',');
++-            if (pgt != NULL) {
++-                *pgt++ = 0;
++-            }
+++    int colon_offset;
+++    int end_offset;
+++    char *ip_str, *port_str;
+++
+++    colon_offset = tvb_find_guint8(tvb, offset, -1, ':');
+++    if (colon_offset == -1) {
+++        /* RFC 7143 13.8 TargetAddress "If the TCP port is not specified,
+++         * it is assumed to be the IANA-assigned default port for iSCSI",
+++         * so nothing to do here.
+++         */
+++        return;
+++    }
++ 
++-            /* can't handle ipv6 yet */
+++    /* We found a colon, so there's at least one byte and this won't fail. */
+++    if (tvb_get_guint8(tvb, offset) == '[') {
+++        offset++;
+++        /* could be an ipv6 address */
+++        end_offset = tvb_find_guint8(tvb, offset, -1, ']');
+++        if (end_offset == -1) {
+++            return;
++         }
++-    } else {
++-        /* This is either a ipv4 address or a dns name */
++-        int i0,i1,i2,i3;
++-        if (sscanf(value, "%d.%d.%d.%d", &i0,&i1,&i2,&i3) == 4) {
++-            /* looks like a ipv4 address */
++-            p = strchr(value, ':');
++-            if (p != NULL) {
++-                char *addr_data;
++-
++-                *p++ = 0;
++-
++-                pgt = strchr(p, ',');
++-                if (pgt != NULL) {
++-                    *pgt++ = 0;
++-                }
++ 
++-                addr_data = (char *) wmem_alloc(wmem_packet_scope(), 4);
++-                addr_data[0] = i0;
++-                addr_data[1] = i1;
++-                addr_data[2] = i2;
++-                addr_data[3] = i3;
++-
++-                addr = wmem_new(wmem_packet_scope(), address);
++-                addr->type = AT_IPv4;
++-                addr->len  = 4;
++-                addr->data = addr_data;
+++        /* look for the colon before the port, if any */
+++        colon_offset = tvb_find_guint8(tvb, end_offset, -1, ':');
+++        if (colon_offset == -1) {
+++            return;
+++        }
++ 
++-                if (!ws_strtou16(p, NULL, &port)) {
++-                    proto_tree_add_expert_format(tree, pinfo, &ei_iscsi_keyvalue_invalid,
++-                        tvb, offset + (guint)strlen(value), (guint)strlen(p), "Invalid port: %s", p);
++-                }
++-            }
+++        ws_in6_addr *ip6_addr = wmem_new(pinfo->pool, ws_in6_addr);
+++        ip_str = tvb_get_string_enc(pinfo->pool, tvb, offset, end_offset - offset, ENC_ASCII);
+++        if (ws_inet_pton6(ip_str, ip6_addr)) {
+++            /* looks like a ipv6 address */
+++            set_address(&addr, AT_IPv6, sizeof(ws_in6_addr), ip6_addr);
+++        }
++ 
+++    } else {
+++        /* This is either a ipv4 address or a dns name */
+++        ip_str = tvb_get_string_enc(pinfo->pool, tvb, offset, colon_offset - offset, ENC_ASCII);
+++        ws_in4_addr *ip4_addr = wmem_new(pinfo->pool, ws_in4_addr);
+++        if (ws_inet_pton4(ip_str, ip4_addr)) {
+++            /* looks like a ipv4 address */
+++            set_address(&addr, AT_IPv4, 4, ip4_addr);
++         }
+++        /* else a DNS host name; we could, theoretically, try to use
+++         * name resolution information in the capture to lookup the address.
+++         */
++     }
++ 
+++    /* Extract the port */
+++    end_offset = tvb_find_guint8(tvb, colon_offset, -1, ',');
+++    int port_len;
+++    if (end_offset == -1) {
+++        port_len = tvb_reported_length_remaining(tvb, colon_offset + 1);
+++    } else {
+++        port_len = end_offset - (colon_offset + 1);
+++    }
+++    port_str = tvb_get_string_enc(pinfo->pool, tvb, colon_offset + 1, port_len, ENC_ASCII);
+++    if (!ws_strtou16(port_str, NULL, &port)) {
+++        proto_tree_add_expert_format(tree, pinfo, &ei_iscsi_keyvalue_invalid,
+++            tvb, colon_offset + 1, port_len, "Invalid port: %s", port_str);
+++        return;
+++    }
++ 
++     /* attach a conversation dissector to this address/port tuple */
++-    if (addr && !pinfo->fd->visited) {
+++    if (!addresses_equal(&addr, &null_address) && !pinfo->fd->visited) {
++         conversation_t *conv;
++ 
++-        conv = conversation_new(pinfo->num, addr, addr, ENDPOINT_TCP, port, port, NO_ADDR2|NO_PORT2);
+++        conv = conversation_new(pinfo->num, &addr, &null_address, ENDPOINT_TCP, port, 0, NO_ADDR2|NO_PORT2);
++         if (conv == NULL) {
++             return;
++         }
++@@ -587,30 +597,24 @@ iscsi_dissect_TargetAddress(packet_info *pinfo, tvbuff_t* tvb, proto_tree *tree,
++ static gint
++ addTextKeys(packet_info *pinfo, proto_tree *tt, tvbuff_t *tvb, gint offset, guint32 text_len) {
++     const gint limit = offset + text_len;
+++    tvbuff_t *keyvalue_tvb;
+++    int len, value_offset;
++ 
++     while(offset < limit) {
++-        char *key = NULL, *value = NULL;
++-        gint len = tvb_strnlen(tvb, offset, limit - offset);
++-
++-        if(len == -1) {
++-            len = limit - offset;
++-        } else {
++-            len = len + 1;
++-        }
++-
++-        key = tvb_get_string_enc(wmem_packet_scope(), tvb, offset, len, ENC_ASCII);
++-        if (key == NULL) {
++-            break;
++-        }
++-        value = strchr(key, '=');
++-        if (value == NULL) {
+++        /* RFC 7143 6.1 Text Format: "Every key=value pair, including the
+++         * last or only pair in a LTDS, MUST be followed by one null (0x00)
+++         * delimiter.
+++         */
+++        proto_tree_add_item_ret_length(tt, hf_iscsi_KeyValue, tvb, offset, -1, ENC_ASCII, &len);
+++        keyvalue_tvb = tvb_new_subset_length(tvb, offset, len);
+++        value_offset = tvb_find_guint8(keyvalue_tvb, 0, len, '=');
+++        if (value_offset == -1) {
++             break;
++         }
++-        *value++ = 0;
+++        value_offset++;
++ 
++-        proto_tree_add_item(tt, hf_iscsi_KeyValue, tvb, offset, len, ENC_ASCII|ENC_NA);
++-        if (!strcmp(key, "TargetAddress")) {
++-            iscsi_dissect_TargetAddress(pinfo, tvb, tt, value, offset + (guint)strlen("TargetAddress") + 2);
+++        if (tvb_strneql(keyvalue_tvb, 0, "TargetAddress=", strlen("TargetAddress=")) == 0) {
+++            iscsi_dissect_TargetAddress(pinfo, keyvalue_tvb, tt, value_offset);
++         }
++ 
++         offset += len;
++@@ -2941,7 +2945,7 @@ proto_register_iscsi(void)
++         },
++         { &hf_iscsi_KeyValue,
++           { "KeyValue", "iscsi.keyvalue",
++-            FT_STRING, BASE_NONE, NULL, 0,
+++            FT_STRINGZ, BASE_NONE, NULL, 0,
++             "Key/value pair", HFILL }
++         },
++         { &hf_iscsi_Text_F,
++-- 
++2.25.1
++
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb b/meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb
+index 64e436df3..b4425cb66 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb
+@@ -18,6 +18,7 @@ SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz
+            file://CVE-2023-0667.patch \
+            file://CVE-2023-0668.patch \
+            file://CVE-2023-2906.patch \
++           file://CVE-2023-3649.patch \
+            "
+ UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
+ 
+-- 
+2.25.1
 
-
-I agree. This is very exciting.
-
-
->
-> On Thu, Nov 2, 2023 at 6:49=E2=80=AFAM Richard Purdie
-> <richard.purdie@linuxfoundation.org> wrote:
-> >
-> > Patch Metrics and CVEs
-> > ----------------------
-> >
-> > I'm now pleased to say we have CVE and patch metrics being generated
-> > (Thanks Yoann and Ross):
-> >
-> > https://autobuilder.yocto.io/pub/non-release/patchmetrics-meta-oe/
-> >
-> > which for example generates this:
-> >
-> >
-> https://autobuilder.yocto.io/pub/non-release/patchmetrics-meta-oe/cve-sta=
-tus-master.txt
-> >
-> > (268 CVEs)
-> >
-> > This doesn't work for the LTS branches since the layer override being
-> > used to generate it on master won't work for kirkstone/dunfell.
-> >
-> > Those reports are generated live onto the site daily but aren't emailed
-> > anywhere at this time.
-> >
-> >
-> > Mirroring
-> > ---------
-> >
-> > I covered mirroring for meta-oe layers here:
-> >
-> > https://lists.openembedded.org/g/openembedded-devel/message/105754
-> >
-> > Basically it works but we need to decide whether we can fix the
-> > warnings to keep this enabled for dunfell/kirkstone.
-> >
-> >
-> > Reproducibility
-> > ---------------
-> >
-> > We can now test reproducibility for meta-oe on the autobuilder:
-> > https://autobuilder.yoctoproject.org/typhoon/#/builders/155
-> >
-> > In order to make this useful we really need a list of known issues so
-> > that we can then exclude them and start showing regressions.
-> >
-> >
-> > AUH
-> > ---
-> >
-> > This is now working and generating updates. It takes a while to run and
-> > generates a lot of emails.
-> >
-> > https://autobuilder.yoctoproject.org/typhoon/#/builders/159/builds/8
-> > (18 hours so far)
-> >
-> > meta-oe summary:
-> > https://lists.yoctoproject.org/g/test-list/message/425
-> > TOTAL: attempted=3D206 succeeded=3D42(20.39%) failed=3D164(79.61%)
-> >
-> > meta-python summary:
-> > https://lists.yoctoproject.org/g/test-list/message/426
-> > TOTAL: attempted=3D92 succeeded=3D50(54.35%) failed=3D42(45.65%)
-> >
-> > meta-perl summary:
-> > https://lists.yoctoproject.org/g/test-list/message/434
-> > TOTAL: attempted=3D7 succeeded=3D5(71.43%) failed=3D2(28.57%)
-> >
-
-
-
-> It is good to see this capability on the AB. I previously ran similar AUH
-jobs for Perl and Python recipes (including meta-oe via inherit filters) on
-some hardware I had access to (thank you Mark Hatley).
-
-We saw some uptick in contributions, mostly to meta-python, as a result of
-my prior auh@moto-timo.dev emails. We do not see many folks addressing the
-AUH devtool/etc failures and those that do not even succeed to check
-upstream status are somewhat masked because no email output is sent (it
-only goes to stdout).
-
-
-> > meta-networking summary:
-> > https://lists.yoctoproject.org/g/test-list/message/767
-> > TOTAL: attempted=3D43 succeeded=3D8(18.60%) failed=3D35(81.40%)
-> >
-> > so around ~350 emails of which ~105 were successful upgrades. I'm not
-> > sure whether we want to enable that to send to openembedded-devel?
-> > There are lot of failures and there are a lot of recipes where the
-> > upstream status couldn't be checked. Is anyone interested in working on
-> > improving things in either of those areas?
-> >
-> > There are also various backend improvements we'd love to make to the
-> > AUH code now we've seen how it works in practise in this role.
-> >
-> >
-> > Summary
-> > -------
-> >
-> > All things considered, this shows what our tooling is capable of and
-> > we've a good baseline. Whether/how we enable/use this going forward
-> > depends a lot on whether people are willing to step up and help
-> > maintain/process the results. It can't/won't be Khem/I trying to make
-> > and keep it all working so this is where we need help from the wider
-> > community.
-> >
-
-
-I don=E2=80=99t think anyone (including myself) that are =E2=80=9Clayer mai=
-ntainers=E2=80=9D can
-handle this volume of updates either. I used to try to keep up, but the
-flood of even successful updates is just too great. On average, each recipe
-takes 10-60 minutes to upgrade, verify changes, add some helpful git commit
-information, build and run time test. Some contributors send upgrades that
-build, but runtime testing is lacking and e.g. dependency or license
-changes are missed. Ptest could help with catching runtime failures, but we
-still need people willing to review and fix the failures. Ptests can also
-add a lot of additional dependencies (for which we do not have recipes) and
-someone still needs to be responding to any failures. The devtool and other
-AUH failures, such as po4a for several years, tell us perhaps some pruning
-of recipes is timely.
-
-The quality of these layers is a community effort. There is no magic team
-waiting to do the work. It is all of you. It is all of us.
-
-=E2=80=94Tim
-
-
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#105844):
-> https://lists.openembedded.org/g/openembedded-devel/message/105844
-> Mute This Topic: https://lists.openembedded.org/mt/102342283/924729
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> ticotimo@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
-
---000000000000c81942060937b8d8
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Thu, Nov 2, 2023 at 10:51=E2=80=AFAM Khem Raj &lt;<a hre=
-f=3D"mailto:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt; wrote:<br></div>=
-<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
-left-width:1px;border-left-style:solid;padding-left:1ex;border-left-color:r=
-gb(204,204,204)">Awesome work !</blockquote><div dir=3D"auto"><br></div><di=
-v dir=3D"auto">I agree. This is very exciting.</div><div dir=3D"auto"><br><=
-/div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bo=
-rder-left-width:1px;border-left-style:solid;padding-left:1ex;border-left-co=
-lor:rgb(204,204,204)" dir=3D"auto"><br>
-<br>
-On Thu, Nov 2, 2023 at 6:49=E2=80=AFAM Richard Purdie<br>
-&lt;<a href=3D"mailto:richard.purdie@linuxfoundation.org" target=3D"_blank"=
->richard.purdie@linuxfoundation.org</a>&gt; wrote:<br>
-&gt;<br>
-&gt; Patch Metrics and CVEs<br>
-&gt; ----------------------<br>
-&gt;<br>
-&gt; I&#39;m now pleased to say we have CVE and patch metrics being generat=
-ed<br>
-&gt; (Thanks Yoann and Ross):<br>
-&gt;<br>
-&gt; <a href=3D"https://autobuilder.yocto.io/pub/non-release/patchmetrics-m=
-eta-oe/" rel=3D"noreferrer" target=3D"_blank">https://autobuilder.yocto.io/=
-pub/non-release/patchmetrics-meta-oe/</a><br>
-&gt;<br>
-&gt; which for example generates this:<br>
-&gt;<br>
-&gt; <a href=3D"https://autobuilder.yocto.io/pub/non-release/patchmetrics-m=
-eta-oe/cve-status-master.txt" rel=3D"noreferrer" target=3D"_blank">https://=
-autobuilder.yocto.io/pub/non-release/patchmetrics-meta-oe/cve-status-master=
-.txt</a><br>
-&gt;<br>
-&gt; (268 CVEs)<br>
-&gt;<br>
-&gt; This doesn&#39;t work for the LTS branches since the layer override be=
-ing<br>
-&gt; used to generate it on master won&#39;t work for kirkstone/dunfell.<br=
->
-&gt;<br>
-&gt; Those reports are generated live onto the site daily but aren&#39;t em=
-ailed<br>
-&gt; anywhere at this time.<br>
-&gt;<br>
-&gt;<br>
-&gt; Mirroring<br>
-&gt; ---------<br>
-&gt;<br>
-&gt; I covered mirroring for meta-oe layers here:<br>
-&gt;<br>
-&gt; <a href=3D"https://lists.openembedded.org/g/openembedded-devel/message=
-/105754" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.or=
-g/g/openembedded-devel/message/105754</a><br>
-&gt;<br>
-&gt; Basically it works but we need to decide whether we can fix the<br>
-&gt; warnings to keep this enabled for dunfell/kirkstone.<br>
-&gt;<br>
-&gt;<br>
-&gt; Reproducibility<br>
-&gt; ---------------<br>
-&gt;<br>
-&gt; We can now test reproducibility for meta-oe on the autobuilder:<br>
-&gt; <a href=3D"https://autobuilder.yoctoproject.org/typhoon/#/builders/155=
-" rel=3D"noreferrer" target=3D"_blank">https://autobuilder.yoctoproject.org=
-/typhoon/#/builders/155</a><br>
-&gt;<br>
-&gt; In order to make this useful we really need a list of known issues so<=
-br>
-&gt; that we can then exclude them and start showing regressions.<br>
-&gt;<br>
-&gt;<br>
-&gt; AUH<br>
-&gt; ---<br>
-&gt;<br>
-&gt; This is now working and generating updates. It takes a while to run an=
-d<br>
-&gt; generates a lot of emails.<br>
-&gt;<br>
-&gt; <a href=3D"https://autobuilder.yoctoproject.org/typhoon/#/builders/159=
-/builds/8" rel=3D"noreferrer" target=3D"_blank">https://autobuilder.yoctopr=
-oject.org/typhoon/#/builders/159/builds/8</a><br>
-&gt; (18 hours so far)<br>
-&gt;<br>
-&gt; meta-oe summary:<br>
-&gt; <a href=3D"https://lists.yoctoproject.org/g/test-list/message/425" rel=
-=3D"noreferrer" target=3D"_blank">https://lists.yoctoproject.org/g/test-lis=
-t/message/425</a><br>
-&gt; TOTAL: attempted=3D206 succeeded=3D42(20.39%) failed=3D164(79.61%)<br>
-&gt;<br>
-&gt; meta-python summary:<br>
-&gt; <a href=3D"https://lists.yoctoproject.org/g/test-list/message/426" rel=
-=3D"noreferrer" target=3D"_blank">https://lists.yoctoproject.org/g/test-lis=
-t/message/426</a><br>
-&gt; TOTAL: attempted=3D92 succeeded=3D50(54.35%) failed=3D42(45.65%)<br>
-&gt;<br>
-&gt; meta-perl summary:<br>
-&gt; <a href=3D"https://lists.yoctoproject.org/g/test-list/message/434" rel=
-=3D"noreferrer" target=3D"_blank">https://lists.yoctoproject.org/g/test-lis=
-t/message/434</a><br>
-&gt; TOTAL: attempted=3D7 succeeded=3D5(71.43%) failed=3D2(28.57%)<br>
-&gt;</blockquote><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px =
-0px 0.8ex;border-left-width:1px;border-left-style:solid;padding-left:1ex;bo=
-rder-left-color:rgb(204,204,204)" dir=3D"auto"></blockquote><blockquote cla=
-ss=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;=
-border-left-style:solid;padding-left:1ex;border-left-color:rgb(204,204,204)=
-" dir=3D"auto"></blockquote><div dir=3D"auto"><br></div><blockquote class=
-=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;bo=
-rder-left-style:solid;padding-left:1ex;border-left-color:rgb(204,204,204)" =
-dir=3D"auto"><br></blockquote><div dir=3D"auto">It is good to see this capa=
-bility on the AB. I previously ran similar AUH jobs for Perl and Python rec=
-ipes (including meta-oe via inherit filters) on some hardware I had access =
-to (thank you Mark Hatley).</div><div dir=3D"auto"><br></div><blockquote cl=
-ass=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px=
-;border-left-style:solid;padding-left:1ex;border-left-color:rgb(204,204,204=
-)" dir=3D"auto"></blockquote><div dir=3D"auto">We saw some uptick in contri=
-butions, mostly to meta-python, as a result of my prior <a href=3D"mailto:a=
-uh@moto-timo.dev">auh@moto-timo.dev</a> emails. We do not see many folks ad=
-dressing the AUH devtool/etc failures and those that do not even succeed to=
- check upstream status are somewhat masked because no email output is sent =
-(it only goes to stdout).</div><div dir=3D"auto"><br></div><blockquote clas=
-s=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;b=
-order-left-style:solid;padding-left:1ex;border-left-color:rgb(204,204,204)"=
- dir=3D"auto"><br>
-&gt; meta-networking summary:<br>
-&gt; <a href=3D"https://lists.yoctoproject.org/g/test-list/message/767" rel=
-=3D"noreferrer" target=3D"_blank">https://lists.yoctoproject.org/g/test-lis=
-t/message/767</a><br>
-&gt; TOTAL: attempted=3D43 succeeded=3D8(18.60%) failed=3D35(81.40%)<br>
-&gt;<br>
-&gt; so around ~350 emails of which ~105 were successful upgrades. I&#39;m =
-not<br>
-&gt; sure whether we want to enable that to send to openembedded-devel?<br>
-&gt; There are lot of failures and there are a lot of recipes where the<br>
-&gt; upstream status couldn&#39;t be checked. Is anyone interested in worki=
-ng on<br>
-&gt; improving things in either of those areas?<br>
-&gt;<br>
-&gt; There are also various backend improvements we&#39;d love to make to t=
-he<br>
-&gt; AUH code now we&#39;ve seen how it works in practise in this role.<br>
-&gt;<br>
-&gt;<br>
-&gt; Summary<br>
-&gt; -------<br>
-&gt;<br>
-&gt; All things considered, this shows what our tooling is capable of and<b=
-r>
-&gt; we&#39;ve a good baseline. Whether/how we enable/use this going forwar=
-d<br>
-&gt; depends a lot on whether people are willing to step up and help<br>
-&gt; maintain/process the results. It can&#39;t/won&#39;t be Khem/I trying =
-to make<br>
-&gt; and keep it all working so this is where we need help from the wider<b=
-r>
-&gt; community.<br>
-&gt;</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">I don=E2=80=
-=99t think anyone (including myself) that are =E2=80=9Clayer maintainers=E2=
-=80=9D can handle this volume of updates either. I used to try to keep up, =
-but the flood of even successful updates is just too great. On average, eac=
-h recipe takes 10-60 minutes to upgrade, verify changes, add some helpful g=
-it commit information, build and run time test. Some contributors send upgr=
-ades that build, but runtime testing is lacking and e.g. dependency or lice=
-nse changes are missed. Ptest could help with catching runtime failures, bu=
-t we still need people willing to review and fix the failures. Ptests can a=
-lso add a lot of additional dependencies (for which we do not have recipes)=
- and someone still needs to be responding to any failures. The devtool and =
-other AUH failures, such as po4a for several years, tell us perhaps some pr=
-uning of recipes is timely.</div><div dir=3D"auto"><br></div><div dir=3D"au=
-to">The quality of these layers is a community effort. There is no magic te=
-am waiting to do the work. It is all of you. It is all of us.</div><div dir=
-=3D"auto"><br></div><div dir=3D"auto">=E2=80=94Tim</div><div dir=3D"auto"><=
-br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
-x;border-left-width:1px;border-left-style:solid;padding-left:1ex;border-lef=
-t-color:rgb(204,204,204)" dir=3D"auto"><br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#105844): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/105844" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/105844</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/102342283/924=
-729" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
-/102342283/924729</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
-et=3D"_blank">ticotimo@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
-
---000000000000c81942060937b8d8--
 
