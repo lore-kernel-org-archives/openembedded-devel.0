@@ -2,49 +2,49 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DF8DBC197A0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DB8E0C19F28
 	for <webhook@archiver.kernel.org>; Fri,  3 Nov 2023 19:52:52 +0000 (UTC)
 Received: from a27-29.smtp-out.us-west-2.amazonses.com (a27-29.smtp-out.us-west-2.amazonses.com [54.240.27.29])
- by mx.groups.io with SMTP id smtpd.web10.63883.1699041169692248448
+ by mx.groups.io with SMTP id smtpd.web10.63882.1699041169562798519
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 03 Nov 2023 12:52:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=DFIrwkCK;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=ongZHybe;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.29, mailfrom: 0101018b96beccae-43afb2b2-165e-4d3c-bbf0-dd2b1ddd5b56-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=Z6Fs/0jP;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=mTdmp+P7;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.29, mailfrom: 0101018b96bece7c-82744a8d-5207-4fe8-9d0c-16748a487d5e-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
 	t=1699041169;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=npZ+L341cvbEVhgPSdGLRKxjFRohg2Nw5frfTdg+ef0=;
-	b=DFIrwkCKtKcfx/DctXpiZonK/kwXCSQVJNIDKMTRgEWh5S+uhcSf9V5Ox2yyTAkG
-	CbvnAxrjYW6ijhrtSdBaclR9a15M2Esv/vBzd9W6HASPn8SRjOdvFQ4fUUvY50HVoRf
-	EO1+DgwT+uh+lcNWYSG9nkKm88E8iy1odhad12ko=
+	bh=D39Swu5xEmYrRoIPAQLBUntSJQKDMdZqcW6Owv7QLRs=;
+	b=Z6Fs/0jPjE8v94yEkLMOLHusRUF7obAkNs+K8L1FOfkLoviFoyLiiCVUXygEIPCB
+	+NSPKie/P2g765FiacvbDQrMaoeg8njL+iW8tJzDFQWguYnjbNPmZ9WLbppCKH0zT5u
+	BWVtNPCrn3gQyypHel7ci2smZ+Mjeso12mQQ+fdk=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699041169;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=npZ+L341cvbEVhgPSdGLRKxjFRohg2Nw5frfTdg+ef0=;
-	b=ongZHybeekHPT/5elD4ZXwUThVHoRV47WV58UKl+7H890gJTTDw7KOJx15b2c67w
-	Ee4qM96n1za3oxIRRmShsiO8HeNjT7oG1HuwBylLGmFluDk4LXFdUzr0y0s5sWKyJQc
-	pMGEFRBrA2SPReJ2XMdv6piyPDhVi6cCzLmMnQEw=
-Content-Type: multipart/mixed; boundary="===============4754372902478965574=="
+	bh=D39Swu5xEmYrRoIPAQLBUntSJQKDMdZqcW6Owv7QLRs=;
+	b=mTdmp+P7eafwKKs7y2UCO1+mOwzexzmtvnlQGQQgJpsaDBK4u+248oofRMWUwVpe
+	F7ar3PC+/OABF6oEsS5XVHwPb4e33wcPfNgfdky/BipF5jD7v2pCrQIqt9Tie0Y5DfO
+	4tAPn5ve06/wGa3YlXUQeAa0Chf6ZdbZbO1ax+TA=
+Content-Type: multipart/mixed; boundary="===============4094448398902401342=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] libfastjson: upgrading to 1.2304.0 SUCCEEDED
-Message-ID: <0101018b96beccae-43afb2b2-165e-4d3c-bbf0-dd2b1ddd5b56-000000@us-west-2.amazonses.com>
-Date: Fri, 3 Nov 2023 19:52:48 +0000
+Subject: [AUH] libsdl-net: upgrading to 1.2.8-1 FAILED
+Message-ID: <0101018b96bece7c-82744a8d-5207-4fe8-9d0c-16748a487d5e-000000@us-west-2.amazonses.com>
+Date: Fri, 3 Nov 2023 19:52:49 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
 X-SES-Outgoing: 2023.11.03-54.240.27.29
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 19:52:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105972
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105969
 
---===============4754372902478965574==
+--===============4094448398902401342==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,110 +52,106 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *libfastjson* to *1.2304.0* has Succeeded.
+that the automatic attempt to upgrade the recipe *libsdl-net* to *1.2.8-1* has Failed (devtool error).
 
-Next steps:
-    - apply the patch: git am 0001-libfastjson-upgrade-0.99.9-1.2304.0.patch
-    - check the changes to upstream patches and summarize them in the commit message,
-    - compile an image that contains the package
-    - perform some basic sanity tests
-    - amend the patch and sign it off: git commit -s --reset-author --amend
-    - send it to the appropriate mailing list
+Detailed error information:
 
-Alternatively, if you believe the recipe should not be upgraded at this time,
-you can fill RECIPE_NO_UPDATE_REASON in respective recipe file so that
-automatic upgrades would no longer be attempted.
+The following devtool command failed:  upgrade libsdl-net -V 1.2.8-1
+NOTE: Reconnecting to bitbake server...
+Loading cache...done.
+Loaded 4978 entries from dependency cache.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.6.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "x86_64-poky-linux"
+MACHINE              = "qemux86-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.3+snapshot-e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+TUNE_FEATURES        = "m64 core2"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+meta-oe              
+meta-python          
+meta-perl            
+meta-networking      
+meta-multimedia      
+meta-gnome           
+meta-xfce            
+meta-filesystems     
+meta-initramfs       
+meta-webserver       = "tmp-auh-upgrades:cb8cb480357ae953b60f747739b6e27d526903f7"
+workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+
+Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
+done.
+Sstate summary: Wanted 10 Local 10 Mirrors 0 Missed 0 Current 20 (100% match, 100% complete)
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 103 tasks of which 100 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 8 seconds
+Loading cache...done.
+Loaded 4978 entries from dependency cache.
+Parsing recipes...done.
+Parsing of 3056 .bb files complete (3054 cached, 2 parsed). 4887 targets, 92 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.6.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "x86_64-poky-linux"
+MACHINE              = "qemux86-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.3+snapshot-e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+TUNE_FEATURES        = "m64 core2"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+meta-oe              
+meta-python          
+meta-perl            
+meta-networking      
+meta-multimedia      
+meta-gnome           
+meta-xfce            
+meta-filesystems     
+meta-initramfs       
+meta-webserver       = "tmp-auh-upgrades:cb8cb480357ae953b60f747739b6e27d526903f7"
+workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+
+Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
+done.
+Sstate summary: Wanted 1 Local 0 Mirrors 0 Missed 1 Current 0 (0% match, 0% complete)
+NOTE: Executing Tasks
+WARNING: Failed to fetch URL https://www.libsdl.org/projects/SDL_net/release/SDL_net-1.2.8-1.tar.gz, attempting MIRRORS if available
+NOTE: Tasks Summary: Attempted 2 tasks of which 0 didn't need to be rerun and 1 failed.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 7 seconds
+NOTE: The errors for this build are stored in /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231103143954.txt
+You can send the errors to a reports server by running:
+  send-error-report /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231103143954.txt [-s server]
+NOTE: The contents of these logs will be posted in public if you use the above command with the default server. Please ensure you remove any identifying or proprietary information when prompted before sending.
+
+INFO: Extracting current version source...
+INFO: Extracting upgraded version source...
+INFO: Fetching https://www.libsdl.org/projects/SDL_net/release/SDL_net-1.2.8-1.tar.gz...
+ERROR: Fetcher failure: Fetch command export PSEUDO_DISABLED=1; export SSL_CERT_FILE="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export GIT_SSL_CAINFO="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export ftp_proxy="http://proxy.yocto.io:5187/"; export FTP_PROXY="http://proxy.yocto.io:5187/"; export PATH="/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/sysroots-uninative/x86_64-linux/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-adk2jf3k/work/recipe-sysroot-native/usr/bin/x86_64-poky-linux:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-adk2jf3k/work/recipe-sysroot/usr/bin/crossscripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-adk2jf3k/work/recipe-sysroot-native/usr/sbin:/hom
+ e/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-adk2jf3k/work/recipe-sysroot-native/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-adk2jf3k/work/recipe-sysroot-native/sbin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-adk2jf3k/work/recipe-sysroot-native/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/bitbake/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools"; export HOME="/home/pokybuild"; /usr/bin/env wget -t 2 -T 30 --passive-ftp -O /srv/autobuilder/autobuilder.yocto.io/current_sources/SDL_net-1.2.8-1.tar.gz.tmp -P /srv/autobuilder/autobuilder.yocto.io/current_sources 'https://www.libsdl.org/projects/SDL_net/release/SDL_net-1.2.8-1.tar.gz' --progress=dot -v failed with exit code 8, no output
+ERROR: Bitbake Fetcher Error: FetchError('Unable to fetch URL from any source.', 'https://www.libsdl.org/projects/SDL_net/release/SDL_net-1.2.8-1.tar.gz')
+ERROR: Logfile of failure stored in: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-adk2jf3k/work/temp/log.do_fetch.2281590
+ERROR: Failed to fetch URL https://www.libsdl.org/projects/SDL_net/release/SDL_net-1.2.8-1.tar.gz
+
 
 Please review the attached files for further information and build/update failures.
 Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi?product=Automated%20Update%20Handler
 
 Regards,
 The Upgrade Helper
-
--- >8 --
-From 29723afc65af7f2f2dca6e989fee55f29625ae89 Mon Sep 17 00:00:00 2001
-From: Upgrade Helper <auh@yoctoproject.org>
-Date: Fri, 3 Nov 2023 13:57:33 +0000
-Subject: [PATCH] libfastjson: upgrade 0.99.9 -> 1.2304.0
-
----
- .../rsyslog/{libfastjson_0.99.9.bb => libfastjson_1.2304.0.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/rsyslog/{libfastjson_0.99.9.bb => libfastjson_1.2304.0.bb} (85%)
-
-diff --git a/meta-oe/recipes-extended/rsyslog/libfastjson_0.99.9.bb b/meta-oe/recipes-extended/rsyslog/libfastjson_1.2304.0.bb
-similarity index 85%
-rename from meta-oe/recipes-extended/rsyslog/libfastjson_0.99.9.bb
-rename to meta-oe/recipes-extended/rsyslog/libfastjson_1.2304.0.bb
-index 24ad17267..f16126d93 100644
---- a/meta-oe/recipes-extended/rsyslog/libfastjson_0.99.9.bb
-+++ b/meta-oe/recipes-extended/rsyslog/libfastjson_1.2304.0.bb
-@@ -8,7 +8,7 @@ DEPENDS = ""
- 
- SRC_URI = "git://github.com/rsyslog/libfastjson.git;protocol=https;branch=master"
- 
--SRCREV = "0293afb3913f760c449348551cca4d2df59c1a00"
-+SRCREV = "3a8402c1de7c7747c95229db26d8d32fb85a7a52"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.39.2
-
-
---===============4754372902478965574==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="buildhistory-diff-full.txt"
-
-packages/core2-64-poky-linux/libfastjson: PKGV changed from 0.99.9 [default] to 1.2304.0 [default]
-packages/core2-64-poky-linux/libfastjson: PV changed from "0.99.9" to "1.2304.0"
-packages/core2-64-poky-linux/libfastjson/libfastjson-dbg: PKGV changed from 0.99.9 [default] to 1.2304.0 [default]
-packages/core2-64-poky-linux/libfastjson/libfastjson-dbg: PKGSIZE changed from 122952 to 121976 (-1%)
-packages/core2-64-poky-linux/libfastjson/libfastjson-dbg: PV changed from "0.99.9" to "1.2304.0"
-packages/core2-64-poky-linux/libfastjson/libfastjson-dev: PKGV changed from 0.99.9 [default] to 1.2304.0 [default]
-packages/core2-64-poky-linux/libfastjson/libfastjson-dev: PKGSIZE changed from 59134 to 59136 (+0%)
-packages/core2-64-poky-linux/libfastjson/libfastjson-dev: PV changed from "0.99.9" to "1.2304.0"
-packages/core2-64-poky-linux/libfastjson/libfastjson-doc: PKGV changed from 0.99.9 [default] to 1.2304.0 [default]
-packages/core2-64-poky-linux/libfastjson/libfastjson-doc: PV changed from "0.99.9" to "1.2304.0"
-packages/core2-64-poky-linux/libfastjson/libfastjson-locale: PKGV changed from 0.99.9 [default] to 1.2304.0 [default]
-packages/core2-64-poky-linux/libfastjson/libfastjson-locale: PV changed from "0.99.9" to "1.2304.0"
-packages/core2-64-poky-linux/libfastjson/libfastjson-src: PKGV changed from 0.99.9 [default] to 1.2304.0 [default]
-packages/core2-64-poky-linux/libfastjson/libfastjson-src: PKGSIZE changed from 151419 to 151819 (+0%)
-packages/core2-64-poky-linux/libfastjson/libfastjson-src: PV changed from "0.99.9" to "1.2304.0"
-packages/core2-64-poky-linux/libfastjson/libfastjson-staticdev: PKGV changed from 0.99.9 [default] to 1.2304.0 [default]
-packages/core2-64-poky-linux/libfastjson/libfastjson-staticdev: PV changed from "0.99.9" to "1.2304.0"
-packages/core2-64-poky-linux/libfastjson/libfastjson: PKGV changed from 0.99.9 [default] to 1.2304.0 [default]
-packages/core2-64-poky-linux/libfastjson/libfastjson: PV changed from "0.99.9" to "1.2304.0"
-
---===============4754372902478965574==
-Content-Type: application/octet-stream
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment;
- filename="0001-libfastjson-upgrade-0.99.9-1.2304.0.patch"
-
-RnJvbSAyOTcyM2FmYzY1YWY3ZjJmMmRjYTZlOTg5ZmVlNTVmMjk2MjVhZTg5IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBVcGdyYWRlIEhlbHBlciA8YXVoQHlvY3RvcHJvamVjdC5vcmc+
-CkRhdGU6IEZyaSwgMyBOb3YgMjAyMyAxMzo1NzozMyArMDAwMApTdWJqZWN0OiBbUEFUQ0hdIGxp
-YmZhc3Rqc29uOiB1cGdyYWRlIDAuOTkuOSAtPiAxLjIzMDQuMAoKLS0tCiAuLi4vcnN5c2xvZy97
-bGliZmFzdGpzb25fMC45OS45LmJiID0+IGxpYmZhc3Rqc29uXzEuMjMwNC4wLmJifSAgfCAyICst
-CiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkKIHJlbmFtZSBt
-ZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvcnN5c2xvZy97bGliZmFzdGpzb25fMC45OS45LmJiID0+
-IGxpYmZhc3Rqc29uXzEuMjMwNC4wLmJifSAoODUlKQoKZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVj
-aXBlcy1leHRlbmRlZC9yc3lzbG9nL2xpYmZhc3Rqc29uXzAuOTkuOS5iYiBiL21ldGEtb2UvcmVj
-aXBlcy1leHRlbmRlZC9yc3lzbG9nL2xpYmZhc3Rqc29uXzEuMjMwNC4wLmJiCnNpbWlsYXJpdHkg
-aW5kZXggODUlCnJlbmFtZSBmcm9tIG1ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9yc3lzbG9nL2xp
-YmZhc3Rqc29uXzAuOTkuOS5iYgpyZW5hbWUgdG8gbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL3Jz
-eXNsb2cvbGliZmFzdGpzb25fMS4yMzA0LjAuYmIKaW5kZXggMjRhZDE3MjY3Li5mMTYxMjZkOTMg
-MTAwNjQ0Ci0tLSBhL21ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC9yc3lzbG9nL2xpYmZhc3Rqc29u
-XzAuOTkuOS5iYgorKysgYi9tZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvcnN5c2xvZy9saWJmYXN0
-anNvbl8xLjIzMDQuMC5iYgpAQCAtOCw3ICs4LDcgQEAgREVQRU5EUyA9ICIiCiAKIFNSQ19VUkkg
-PSAiZ2l0Oi8vZ2l0aHViLmNvbS9yc3lzbG9nL2xpYmZhc3Rqc29uLmdpdDtwcm90b2NvbD1odHRw
-czticmFuY2g9bWFzdGVyIgogCi1TUkNSRVYgPSAiMDI5M2FmYjM5MTNmNzYwYzQ0OTM0ODU1MWNj
-YTRkMmRmNTljMWEwMCIKK1NSQ1JFViA9ICIzYTg0MDJjMWRlN2M3NzQ3Yzk1MjI5ZGIyNmQ4ZDMy
-ZmI4NWE3YTUyIgogCiBTID0gIiR7V09SS0RJUn0vZ2l0IgogCi0tIAoyLjM5LjIKCg==
-
---===============4754372902478965574==--
+--===============4094448398902401342==--
 
