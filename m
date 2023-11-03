@@ -2,49 +2,49 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6DD60C18E16
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 651B5C18E17
 	for <webhook@archiver.kernel.org>; Fri,  3 Nov 2023 19:52:52 +0000 (UTC)
-Received: from a27-31.smtp-out.us-west-2.amazonses.com (a27-31.smtp-out.us-west-2.amazonses.com [54.240.27.31])
- by mx.groups.io with SMTP id smtpd.web11.62988.1699041169001019615
+Received: from a27-23.smtp-out.us-west-2.amazonses.com (a27-23.smtp-out.us-west-2.amazonses.com [54.240.27.23])
+ by mx.groups.io with SMTP id smtpd.web10.63867.1699041165979797613
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 03 Nov 2023 12:52:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=A8A0+boL;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=CS0Eqnpr;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.31, mailfrom: 0101018b96becfd1-4874af17-e204-4577-b7ea-4ab5d4a84398-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=gBPBtR8+;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=g+aRtIfX;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.23, mailfrom: 0101018b96bed284-baec8685-1a2a-467c-9321-fd21ef9760f8-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
-	t=1699041169;
+	t=1699041170;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=n3Mvm+ofyjZOVZHDvQ4cgsCON3NR8YA9+W/bRwu98uQ=;
-	b=A8A0+boLljCQz/G+UKBpq7y0j5Kf7wjh/TfmZLPeI35nehe/ac+iIxCeKOC/gn8l
-	brD6JrBsoOHuySrLNKyShnZ1UN1yv5v2LfKcvF4wjKl2Mg/TxA6AjSLaIlsYKEJFOys
-	xiqmBqCK4y+lvd8XDqj1za0AGJZm1wKpmMARY2OM=
+	bh=gbcHC0JA3tMbEd4YpnqO20DnaKEMA9vVRJlOpnZRGq0=;
+	b=gBPBtR8+tcUpTocT2D2nzdH6XTa0ZKyPVc2SexC6rLgLYJm3U2l7OFdN/kHSdwRT
+	FYRX4/isS7NFa9UtOnqGTlS+7VOhljmnbLyWu7z3x9WdDNtrnr26O1LTFgE+TUPw7nC
+	G9nVYGkfkD4c6MfHbVK2t8ye2DUagwwQ6PGX6vSA=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699041169;
+	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699041170;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=n3Mvm+ofyjZOVZHDvQ4cgsCON3NR8YA9+W/bRwu98uQ=;
-	b=CS0EqnprljoOou50lHZREAU/Al6birr0QkhKj5OavRn5O2PxS7XIRcWVXIwBzHfc
-	udLqa7BM/EVBc4JE9Vo1FJYqkxF7mC2jur9SQKXBbk5U88b42+ENiiH9w21Iq0YtQFf
-	dhWTLbzfdxURkYAt5n+db5EnqnpyH3MIjHnvY/YY=
-Content-Type: multipart/mixed; boundary="===============3264537723764116474=="
+	bh=gbcHC0JA3tMbEd4YpnqO20DnaKEMA9vVRJlOpnZRGq0=;
+	b=g+aRtIfXiW6Jr8PmCgawIeUES94wWYMXAJj4x8I9MLCk41GNVbZvzr6z+15KYEo1
+	+7lxNpicWqXvfmD8BUYcUPPXq4JoXu3TAWGglWkYpXiYKD0GyYhE7BZdE/60EbDLhil
+	E0iwoCpSaqBKZInsJgaO0QTnwPGXpfUkxUUAAuSY=
+Content-Type: multipart/mixed; boundary="===============6547901205739923399=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] libspatialite: upgrading to 5.1.0-RC1 FAILED
-Message-ID: <0101018b96becfd1-4874af17-e204-4577-b7ea-4ab5d4a84398-000000@us-west-2.amazonses.com>
-Date: Fri, 3 Nov 2023 19:52:49 +0000
+Subject: [AUH] mime-support: upgrading to 3.66 FAILED
+Message-ID: <0101018b96bed284-baec8685-1a2a-467c-9321-fd21ef9760f8-000000@us-west-2.amazonses.com>
+Date: Fri, 3 Nov 2023 19:52:50 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
-X-SES-Outgoing: 2023.11.03-54.240.27.31
+X-SES-Outgoing: 2023.11.03-54.240.27.23
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 19:52:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105982
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105983
 
---===============3264537723764116474==
+--===============6547901205739923399==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,14 +52,14 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *libspatialite* to *5.1.0-RC1* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *mime-support* to *3.66* has Failed (devtool error).
 
 Detailed error information:
 
-Running 'devtool upgrade' for recipe libspatialite failed.
+The following devtool command failed:  upgrade mime-support -V 3.66
 NOTE: Reconnecting to bitbake server...
 Loading cache...done.
-Loaded 4989 entries from dependency cache.
+Loaded 4999 entries from dependency cache.
 NOTE: Resolving any missing task queue dependencies
 
 Build Configuration:
@@ -84,7 +84,7 @@ meta-gnome
 meta-xfce            
 meta-filesystems     
 meta-initramfs       
-meta-webserver       = "tmp-auh-upgrades:1b21216363222bf79a61e9f6469b2ddbc7ed03e9"
+meta-webserver       = "tmp-auh-upgrades:d7c196aeffa0020f8ecf0450c9b811a5687cbeb0"
 workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
 
 Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
@@ -93,9 +93,9 @@ Sstate summary: Wanted 10 Local 10 Mirrors 0 Missed 0 Current 20 (100% match, 10
 NOTE: Executing Tasks
 NOTE: Tasks Summary: Attempted 103 tasks of which 100 didn't need to be rerun and all succeeded.
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 7 seconds
+NOTE: Writing buildhistory took: 9 seconds
 Loading cache...done.
-Loaded 4989 entries from dependency cache.
+Loaded 4999 entries from dependency cache.
 Parsing recipes...done.
 Parsing of 3056 .bb files complete (3054 cached, 2 parsed). 4887 targets, 92 skipped, 0 masked, 0 errors.
 NOTE: Resolving any missing task queue dependencies
@@ -122,39 +122,30 @@ meta-gnome
 meta-xfce            
 meta-filesystems     
 meta-initramfs       
-meta-webserver       = "tmp-auh-upgrades:1b21216363222bf79a61e9f6469b2ddbc7ed03e9"
+meta-webserver       = "tmp-auh-upgrades:d7c196aeffa0020f8ecf0450c9b811a5687cbeb0"
 workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
 
 Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
 done.
 Sstate summary: Wanted 1 Local 0 Mirrors 0 Missed 1 Current 0 (0% match, 0% complete)
 NOTE: Executing Tasks
-NOTE: Tasks Summary: Attempted 3 tasks of which 0 didn't need to be rerun and all succeeded.
+WARNING: Failed to fetch URL http://ftp.debian.org/debian/pool/main/m/mime-support/mime-support_3.66.tar.gz, attempting MIRRORS if available
+NOTE: Tasks Summary: Attempted 2 tasks of which 0 didn't need to be rerun and 1 failed.
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 7 seconds
-DEBUG 5 [Errno 25] Inappropriate ioctl for device
-Adding changed files:   0% |                                   | ETA:  --:--:--
-Adding changed files:   0% |                                   | ETA:  --:--:--
-Adding changed files:  15% |#####                               | ETA:  0:00:01
-Adding changed files:  31% |###########                         | ETA:  0:00:00
-Adding changed files:  47% |#################                   | ETA:  0:00:00
-Adding changed files:  63% |######################              | ETA:  0:00:00
-Adding changed files:  78% |############################        | ETA:  0:00:00
-Adding changed files:  94% |##################################  | ETA:  0:00:00
-Adding changed files: 100% |####################################| Time: 0:00:01
+NOTE: Writing buildhistory took: 13 seconds
+NOTE: The errors for this build are stored in /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231103153908.txt
+You can send the errors to a reports server by running:
+  send-error-report /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231103153908.txt [-s server]
+NOTE: The contents of these logs will be posted in public if you use the above command with the default server. Please ensure you remove any identifying or proprietary information when prompted before sending.
+
 INFO: Extracting current version source...
 INFO: Extracting upgraded version source...
-INFO: Fetching http://www.gaia-gis.it/gaia-sins/libspatialite-sources/libspatialite-5.1.0-RC1.tar.gz...
-INFO: Rebasing devtool onto 1fb794f5d4ae8912461904438b317982802357e4
-WARNING: Command 'git rebase 1fb794f5d4ae8912461904438b317982802357e4' failed:
-Auto-merging configure.ac
-CONFLICT (content): Merge conflict in configure.ac
-
-You will need to resolve conflicts in order to complete the upgrade.
-INFO: Using source tree as build directory since recipe inherits autotools-brokensep
-INFO: Upgraded source extracted to /home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/sources/libspatialite
-INFO: New recipe is /home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/recipes/libspatialite/libspatialite_5.1.0-RC1.bb
-
+INFO: Fetching http://ftp.debian.org/debian/pool/main/m/mime-support/mime-support_3.66.tar.gz...
+ERROR: Fetcher failure: Fetch command export PSEUDO_DISABLED=1; export SSL_CERT_FILE="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export GIT_SSL_CAINFO="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export ftp_proxy="http://proxy.yocto.io:5187/"; export FTP_PROXY="http://proxy.yocto.io:5187/"; export PATH="/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/sysroots-uninative/x86_64-linux/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-kbrfpxoc/work/recipe-sysroot-native/usr/bin/x86_64-poky-linux:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-kbrfpxoc/work/recipe-sysroot/usr/bin/crossscripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-kbrfpxoc/work/recipe-sysroot-native/usr/sbin:/hom
+ e/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-kbrfpxoc/work/recipe-sysroot-native/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-kbrfpxoc/work/recipe-sysroot-native/sbin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-kbrfpxoc/work/recipe-sysroot-native/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/bitbake/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools"; export HOME="/home/pokybuild"; /usr/bin/env wget -t 2 -T 30 --passive-ftp -O /srv/autobuilder/autobuilder.yocto.io/current_sources/mime-support_3.66.tar.gz.tmp -P /srv/autobuilder/autobuilder.yocto.io/current_sources 'http://ftp.debian.org/debian/pool/main/m/mime-support/mime-support_3.66.tar.gz' --progress=dot -v failed with exit code 8, no output
+ERROR: Bitbake Fetcher Error: FetchError('Unable to fetch URL from any source.', 'http://ftp.debian.org/debian/pool/main/m/mime-support/mime-support_3.66.tar.gz')
+ERROR: Logfile of failure stored in: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-kbrfpxoc/work/temp/log.do_fetch.2114917
+ERROR: Failed to fetch URL http://ftp.debian.org/debian/pool/main/m/mime-support/mime-support_3.66.tar.gz
 
 
 Please review the attached files for further information and build/update failures.
@@ -162,5 +153,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============3264537723764116474==--
+--===============6547901205739923399==--
 
