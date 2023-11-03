@@ -1,97 +1,105 @@
-Return-Path: <arthur.oliveira@ossystems.com.br>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 86EC2C4167B
-	for <webhook@archiver.kernel.org>; Fri,  3 Nov 2023 13:10:55 +0000 (UTC)
-Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com [209.85.128.178])
- by mx.groups.io with SMTP id smtpd.web10.51462.1699017046571556019
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C17FBC4167B
+	for <webhook@archiver.kernel.org>; Fri,  3 Nov 2023 13:25:05 +0000 (UTC)
+Received: from mail-lf1-f43.google.com (mail-lf1-f43.google.com [209.85.167.43])
+ by mx.groups.io with SMTP id smtpd.web10.51749.1699017900450552515
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Nov 2023 06:10:46 -0700
+ Fri, 03 Nov 2023 06:25:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ossystems-com-br.20230601.gappssmtp.com header.s=20230601 header.b=ENM0OADQ;
- spf=pass (domain: ossystems.com.br, ip: 209.85.128.178, mailfrom: arthur.oliveira@ossystems.com.br)
-Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-5b3b17d36d5so27319807b3.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 06:10:46 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=p5frHIZE;
+ spf=pass (domain: konsulko.com, ip: 209.85.167.43, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-lf1-f43.google.com with SMTP id 2adb3069b0e04-507d1cc0538so2656168e87.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 06:25:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ossystems-com-br.20230601.gappssmtp.com; s=20230601; t=1699017045; x=1699621845; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1699017898; x=1699622698; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=WQbdv2pjVYnIeJc2yG64vH1Z6hiWH/oiFWyg3NV6EQ0=;
-        b=ENM0OADQzZxJrxZ4jrnfpof6atIgNO+8p9B/yXIjlrOZqZzVS/WXOodfymlc6tTvml
-         VfSgL3RHeRUsHztgUpnHhMcDx+lovM3iWRZ+FTMub2d/dKp20sWjLYfUoBbobfl2aT5I
-         BfdXWG5NFQ/5URyykdlJUjwLNkgXaccYhUrHdRnVknGZXpfeMFBh/cfewk12cR0WuTHM
-         Gy8Am3yO++lk8/Q7gEiQhh28ou60vJiVGeVp2wnMCtok+Lqb9FIXAL4p5p5jf9h2b7oK
-         8GI5VpgguvD+Sa7GHQQ4L+OHvzZQrMFB0TbF/O+Nd5bQnMARIyVmn11JkRO3U5/Ha6jG
-         RXSA==
+        bh=Nu5ykAvqsRvzHdCPom+GFk9ZqF32DDPYnn/BYtOh/rM=;
+        b=p5frHIZEhqaMyr69hP3sbeh3HkisWvG2vHR+QbYWgIn6l76ZeAXQh1FiDgIAvIjJO9
+         fwZxPrWAUR0Q9/IBXE5cQlzFrWd8GYaAXPJnAuYSyxZo/GhcZ8kwkJiKRdE4NmG7t8KB
+         alGIGwjyEjeQl12cH0IkWm3vvRkqkwN4cHxJs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699017045; x=1699621845;
+        d=1e100.net; s=20230601; t=1699017898; x=1699622698;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=WQbdv2pjVYnIeJc2yG64vH1Z6hiWH/oiFWyg3NV6EQ0=;
-        b=FnQL5lm4DKjFjU6uiTFPXw0MCGHu7M7wawATDT+wLwqjcUnscbmFSIF2QwPQYbrwVx
-         ptisj/YaQ/H+Thk7O0h94qmc6ci3X4y0HIGNgoXigYnHz4ii2dJjLc6R+E7w8aWYDeoz
-         ArJ8YLbbwwsqoxyVeqjGdi1HnYngbxbdyKu4qGBLQbs1fXiHZFjrI9IabROkzinlKCwt
-         meRC4bjcpw0pjUIx8Zc3j3fuI7KW+L1UdNpu8IGM9bl4g+M7vhUb8B6x+s4fZbnhfyOP
-         t32jUIPTqLF9Gyhdjkd5DMz20+lON65t65S9+sw/BtP/WX6HCntIGEcCqWQELITqPzeX
-         Yoww==
-X-Gm-Message-State: AOJu0YyYGAPSQq62byvjGLG2foTcu3BWigEzOMC39JvYrXkqcUYF/Gyv
-	aoMGueDWZWHaXxCOtuRulJxWUT0feervKpG/zwmEVg==
-X-Google-Smtp-Source: AGHT+IFrDJRkDqP1jx6eUYTl4/UqJmczSkfeA9FfxWUUb/5BOQGzLdBzdGo96JINCi0Jb+iHDrN13g==
-X-Received: by 2002:a81:9b83:0:b0:5b3:f93c:d55 with SMTP id s125-20020a819b83000000b005b3f93c0d55mr1942379ywg.4.1699017045481;
-        Fri, 03 Nov 2023 06:10:45 -0700 (PDT)
-Received: from hyper.lab.ossystems (189-11-177-132.user3p.brasiltelecom.net.br. [189.11.177.132])
-        by smtp.gmail.com with ESMTPSA id z145-20020a0dd797000000b005a0f9718a5fsm894927ywd.78.2023.11.03.06.10.44
+        bh=Nu5ykAvqsRvzHdCPom+GFk9ZqF32DDPYnn/BYtOh/rM=;
+        b=vz+j2PsJnrxzrtJCpmcN1FkY0IgBYWhR2mkHxRE0N/nTdoUniepa/2LtjcjcdrD6sE
+         LYnMo9S/hF1o+rK2wVc9Ra4U/LspDeXwJMWpZ1rPbzAVI7stPrkIqZdkuZi6z5qxZqJB
+         nQ+EAnx91H7WwJsyef1fg77KVyM2TzB1RVh8HHyety1UPdcoVEohagItttY3q6spjP4h
+         1vauseQd9f9WdNE1Plb1gG+mcbuEpsyLJ5X1A2tsDTzH594hsNFVNsXupiUV6Jd4hA0l
+         M1zRiDzSYxtfA0KyvXhkcZEJNoa+emANZIzr6qjm9tF3YmO5uB/o9AD/UcWKP22FD0oF
+         chrQ==
+X-Gm-Message-State: AOJu0Yz2WhjSfCiQKloGiftQe/VIOSgQqjvn3ymSH7BDauXp0lQcnEg5
+	CuTNEkf5W5fIBQiJdgN2dvdU4UMtn1Gfhztj1ls=
+X-Google-Smtp-Source: AGHT+IGPmnwIqIl3UsWgIANor/amBC8YpIpoj/K4pLdHPnsSgZ49x/m6S+EJfjTy2sqjtfZJUsx+lQ==
+X-Received: by 2002:ac2:4555:0:b0:509:4a55:f189 with SMTP id j21-20020ac24555000000b005094a55f189mr3643364lfm.11.1699017898108;
+        Fri, 03 Nov 2023 06:24:58 -0700 (PDT)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id s6-20020a5d4ec6000000b0032f79e55eb8sm1869754wrv.16.2023.11.03.06.24.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 03 Nov 2023 06:10:45 -0700 (PDT)
-From: arthur.oliveira@ossystems.com.br
+        Fri, 03 Nov 2023 06:24:57 -0700 (PDT)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Arthur Oliveira <arthur.oliveira@ossystems.com.br>
-Subject: [meta-python][PATCH 3/3] python3-zopeevent: Add Zope.Event Python Recipe
-Date: Fri,  3 Nov 2023 10:10:37 -0300
-Message-Id: <20231103131037.2997335-4-arthur.oliveira@ossystems.com.br>
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/2] python3-unoconv: add recipe
+Date: Fri,  3 Nov 2023 15:24:53 +0200
+Message-Id: <20231103132453.3853904-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20231103131037.2997335-1-arthur.oliveira@ossystems.com.br>
-References: <20231103131037.2997335-1-arthur.oliveira@ossystems.com.br>
+In-Reply-To: <20231103132453.3853904-1-leon.anavi@konsulko.com>
+References: <20231103132453.3853904-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 13:10:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105860
+ <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 13:25:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105862
 
-From: Arthur Oliveira <arthur.oliveira@ossystems.com.br>
+Add unoconv version 0.9.0, an universal office converter - convert
+between any document format supported by LibreOffice/OpenOffice.
 
-This commit adds the python3-zopeevent recipe, which provides a simple event
-system. It is licensed under ZPL-2.1.
+This work was sponsored by GOVCERT.LU.
 
-Signed-off-by: Arthur Oliveira <arthur.oliveira@ossystems.com.br>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
-Add PYPI_PACKAGE to fix fetch
----
- .../recipes-devtools/python/python3-zopeevent_5.0.bb   | 10 ++++++++++
- 1 file changed, 10 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-zopeevent_5.0.bb
+ .../python/python3-unoconv_0.9.0.bb           | 23 +++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-unoconv_0.9.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-zopeevent_5.0.bb b/meta-python/recipes-devtools/python/python3-zopeevent_5.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-unoconv_0.9.0.bb b/meta-python/recipes-devtools/python/python3-unoconv_0.9.0.bb
 new file mode 100644
-index 000000000..4d914c63e
+index 000000000..3c944b4f2
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-zopeevent_5.0.bb
-@@ -0,0 +1,10 @@
-+DESCRIPTION = "The zope.event package provides a simple event system"
++++ b/meta-python/recipes-devtools/python/python3-unoconv_0.9.0.bb
+@@ -0,0 +1,23 @@
++SUMMARY = "Universal Office Converter - Office document conversion"
++HOMEPAGE = "https://github.com/unoconv/unoconv"
++LICENSE = "GPL-2.0-only"
++SECTION = "devel/python"
++LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
 +
-+LICENSE = "ZPL-2.1"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=72092419572155ddc2d4fb7631c63dd3"
-+
-+SRC_URI[sha256sum] = "bac440d8d9891b4068e2b5a2c5e2c9765a9df762944bda6955f96bb9b91e67cd"
-+
-+PYPI_PACKAGE = "zope.event"
++SRC_URI[sha256sum] = "308ebfd98e67d898834876348b27caf41470cd853fbe2681cc7dacd8fd5e6031"
 +
 +inherit pypi setuptools3
++
++PYPI_PACKAGE="unoconv"
++
++RDEPENDS:${PN} += "\
++    ${PYTHON_PN}-distutils \
++    ${PYTHON_PN}-core \
++    ${PYTHON_PN}-shell \
++"
++
++do_install:append() {
++  sed -i -e 's:^#!/usr/bin/env python$:#!/usr/bin/env python3:' ${D}/usr/bin/unoconv
++}
++
++BBCLASSEXTEND = "native nativesdk"
 -- 
 2.39.2
 
