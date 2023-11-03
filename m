@@ -2,49 +2,49 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A3109C25B6A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DD1A9C0018A
 	for <webhook@archiver.kernel.org>; Fri,  3 Nov 2023 19:52:54 +0000 (UTC)
-Received: from a27-193.smtp-out.us-west-2.amazonses.com (a27-193.smtp-out.us-west-2.amazonses.com [54.240.27.193])
- by mx.groups.io with SMTP id smtpd.web10.63872.1699041166191524446
+Received: from a27-31.smtp-out.us-west-2.amazonses.com (a27-31.smtp-out.us-west-2.amazonses.com [54.240.27.31])
+ by mx.groups.io with SMTP id smtpd.web10.63869.1699041166068823599
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Nov 2023 12:52:51 -0700
+ Fri, 03 Nov 2023 12:52:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=NEEsuPOd;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=orqDR+gi;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.193, mailfrom: 0101018b96bed697-0624fa75-6057-4959-9735-dca484619eee-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=e6JDMpR4;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=N7nlaZom;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.31, mailfrom: 0101018b96bee0f9-fd6f464c-eae3-4903-8c7f-11d1a3b0428a-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
-	t=1699041171;
+	t=1699041173;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=WM1AOk+gcl1f+OCsu8ptav449DtlA948i3OyqvxirQw=;
-	b=NEEsuPOdb/DIBGH83E6lRrAd4HQSHcVtfodzM7/KH87qfMTOHSM6tjRq8OlFOiNa
-	mtRMOHeaT6oz9BPG1NrYv5o3mUldVmV/PoV4tGitgalfo1vc55Zo/ZqB7UUKnSxv3Tt
-	6JBgkC7tEiAuoh8ZS/1CjxAkrUPTUKK6OD8u7Ov0=
+	bh=/RAlzZgpxUgR6UVqPmRxDM8+RUx25g+guLO/r4WDYRM=;
+	b=e6JDMpR4TcPPO6SykvuwdjG9U7pNvCcANKPhNct4kZe3l1N03z48+8nm+JQcbL8O
+	YRdJYkH5h+NPvSVrW1+FepNyZ6QAiPFoT3HDPzrlvNS3BXLfKIDs4tMxINY9xDhaMBO
+	urYX4tZ4BErgolFBLengm50nBBgQ7lkjYNi9KLNA=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699041171;
+	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699041173;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=WM1AOk+gcl1f+OCsu8ptav449DtlA948i3OyqvxirQw=;
-	b=orqDR+giQe8WMjgnwN8UM5Y7mUoZsN/WCV6QfDsa8GG3I/FOWs9HZaOqj3b7vLEg
-	IqQkh2+WwiAYyFdOw5wAnj0o2Hqrob5KMm3uoluN4E1Sx6irqJpV+Hy+oTaqM8mcDg/
-	OQLBmmg/UTDFPfAsHmOYZjTmeh/J497XwZRcXrsw=
-Content-Type: multipart/mixed; boundary="===============5031436454089407126=="
+	bh=/RAlzZgpxUgR6UVqPmRxDM8+RUx25g+guLO/r4WDYRM=;
+	b=N7nlaZomrFtHKLnMmi6By7hY0OR1qEcab89rzk7acWomJWVjRYys9RwXzaCkTIA+
+	y0uXy860Fujr7c4vX1fsqVO0dF5m3b97gEM4EAH/tn0w/y98fps4nwdUQztLbgWW0gD
+	deYe9dnjUZmnh0WFmYj6OnAgvT4C4My2/CPjwwvo=
+Content-Type: multipart/mixed; boundary="===============7403732845706039641=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] opencv: upgrading to 4.8.1 FAILED
-Message-ID: <0101018b96bed697-0624fa75-6057-4959-9735-dca484619eee-000000@us-west-2.amazonses.com>
-Date: Fri, 3 Nov 2023 19:52:51 +0000
+Subject: [AUH] sessreg: upgrading to 1.1.3 FAILED
+Message-ID: <0101018b96bee0f9-fd6f464c-eae3-4903-8c7f-11d1a3b0428a-000000@us-west-2.amazonses.com>
+Date: Fri, 3 Nov 2023 19:52:53 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
-X-SES-Outgoing: 2023.11.03-54.240.27.193
+X-SES-Outgoing: 2023.11.03-54.240.27.31
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 19:52:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106004
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106012
 
---===============5031436454089407126==
+--===============7403732845706039641==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,14 +52,14 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *opencv* to *4.8.1* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *sessreg* to *1.1.3* has Failed (devtool error).
 
 Detailed error information:
 
-The following devtool command failed:  upgrade opencv -V 4.8.1 -S 5199850039ad23f1f0e6cccea5061a9fea5efca6
+The following devtool command failed:  upgrade sessreg -V 1.1.3
 NOTE: Reconnecting to bitbake server...
 Loading cache...done.
-Loaded 5013 entries from dependency cache.
+Loaded 5040 entries from dependency cache.
 NOTE: Resolving any missing task queue dependencies
 
 Build Configuration:
@@ -84,23 +84,68 @@ meta-gnome
 meta-xfce            
 meta-filesystems     
 meta-initramfs       
-meta-webserver       = "tmp-auh-upgrades:a1dbc55905e764117f9d4842c6a0e22a8e2fb370"
+meta-webserver       = "tmp-auh-upgrades:81123b9f2daaf672917b464b0e080c5b54922a75"
 workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
 
 Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
 done.
 Sstate summary: Wanted 10 Local 10 Mirrors 0 Missed 0 Current 20 (100% match, 100% complete)
 NOTE: Executing Tasks
-NOTE: Tasks Summary: Attempted 104 tasks of which 100 didn't need to be rerun and all succeeded.
+NOTE: Tasks Summary: Attempted 103 tasks of which 100 didn't need to be rerun and all succeeded.
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 4 seconds
+Loading cache...done.
+Loaded 5040 entries from dependency cache.
+Parsing recipes...done.
+Parsing of 3056 .bb files complete (3054 cached, 2 parsed). 4887 targets, 92 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.6.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "x86_64-poky-linux"
+MACHINE              = "qemux86-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.3+snapshot-e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+TUNE_FEATURES        = "m64 core2"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+meta-oe              
+meta-python          
+meta-perl            
+meta-networking      
+meta-multimedia      
+meta-gnome           
+meta-xfce            
+meta-filesystems     
+meta-initramfs       
+meta-webserver       = "tmp-auh-upgrades:81123b9f2daaf672917b464b0e080c5b54922a75"
+workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+
+Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
+done.
+Sstate summary: Wanted 1 Local 0 Mirrors 0 Missed 1 Current 0 (0% match, 0% complete)
+NOTE: Executing Tasks
+WARNING: Failed to fetch URL https://www.x.org/releases//individual/app/sessreg-1.1.3.tar.bz2, attempting MIRRORS if available
+NOTE: Tasks Summary: Attempted 2 tasks of which 0 didn't need to be rerun and 1 failed.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 4 seconds
+NOTE: The errors for this build are stored in /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231103182556.txt
+You can send the errors to a reports server by running:
+  send-error-report /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231103182556.txt [-s server]
+NOTE: The contents of these logs will be posted in public if you use the above command with the default server. Please ensure you remove any identifying or proprietary information when prompted before sending.
 
 INFO: Extracting current version source...
-INFO: SRC_URI contains some conditional appends/prepends - will create branches to represent these
 INFO: Extracting upgraded version source...
-ERROR: Execution of 'git checkout 5199850039ad23f1f0e6cccea5061a9fea5efca6' failed with exit code 128:
-fatal: reference is not a tree: 5199850039ad23f1f0e6cccea5061a9fea5efca6
-
+INFO: Fetching https://www.x.org/releases//individual/app/sessreg-1.1.3.tar.bz2...
+ERROR: Fetcher failure: Fetch command export PSEUDO_DISABLED=1; export SSL_CERT_FILE="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export GIT_SSL_CAINFO="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export ftp_proxy="http://proxy.yocto.io:5187/"; export FTP_PROXY="http://proxy.yocto.io:5187/"; export PATH="/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/sysroots-uninative/x86_64-linux/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-ob0t1gdg/work/recipe-sysroot-native/usr/bin/x86_64-poky-linux:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-ob0t1gdg/work/recipe-sysroot/usr/bin/crossscripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-ob0t1gdg/work/recipe-sysroot-native/usr/sbin:/hom
+ e/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-ob0t1gdg/work/recipe-sysroot-native/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-ob0t1gdg/work/recipe-sysroot-native/sbin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-ob0t1gdg/work/recipe-sysroot-native/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/bitbake/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools"; export HOME="/home/pokybuild"; /usr/bin/env wget -t 2 -T 30 --passive-ftp -O /srv/autobuilder/autobuilder.yocto.io/current_sources/sessreg-1.1.3.tar.bz2.tmp -P /srv/autobuilder/autobuilder.yocto.io/current_sources 'https://www.x.org/releases//individual/app/sessreg-1.1.3.tar.bz2' --progress=dot -v failed with exit code 8, no output
+ERROR: Bitbake Fetcher Error: FetchError('Unable to fetch URL from any source.', 'https://www.x.org/releases//individual/app/sessreg-1.1.3.tar.bz2')
+ERROR: Logfile of failure stored in: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-ob0t1gdg/work/temp/log.do_fetch.2172213
+ERROR: Failed to fetch URL https://www.x.org/releases//individual/app/sessreg-1.1.3.tar.bz2
 
 
 Please review the attached files for further information and build/update failures.
@@ -108,5 +153,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============5031436454089407126==--
+--===============7403732845706039641==--
 
