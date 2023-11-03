@@ -2,49 +2,50 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D6632C072A4
-	for <webhook@archiver.kernel.org>; Fri,  3 Nov 2023 19:52:49 +0000 (UTC)
-Received: from a27-193.smtp-out.us-west-2.amazonses.com (a27-193.smtp-out.us-west-2.amazonses.com [54.240.27.193])
- by mx.groups.io with SMTP id smtpd.web11.62980.1699041166512237170
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1FB56C074FE
+	for <webhook@archiver.kernel.org>; Fri,  3 Nov 2023 19:52:50 +0000 (UTC)
+Received: from a27-192.smtp-out.us-west-2.amazonses.com (a27-192.smtp-out.us-west-2.amazonses.com [54.240.27.192])
+ by mx.groups.io with SMTP id smtpd.web11.62978.1699041166303881370
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 03 Nov 2023 12:52:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=HLYxLIBT;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=GEdNEDiV;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.193, mailfrom: 0101018b96bec26c-c0c48333-93b4-4e48-8f8e-f05a0a90f7b2-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=cOt6izIr;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=gaQ5P4qR;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.192, mailfrom: 0101018b96bec154-cd4021ed-c6bd-42ff-9566-8b7d67b902fe-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
-	t=1699041166;
+	t=1699041165;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=4EtTE/GN1rmg5nBcByfJYKh8nm31rFVtUT0syfCHa2g=;
-	b=HLYxLIBToY9NxrD4uLTTZgMcWJ3rEXDnMsb/US1ok42Vvld2x37uur4BPLx4Chss
-	06fXHYDYrkMqmuzc95NQSyyqUY8NQGANqgeki4MEuVeoKQMXjMgHqBrvWstOzUr2rPN
-	o9YTYHgZBVo8MaZnM/7diCmSp8NPRJWa3I72ilbw=
+	bh=VLOUHO0GKAV3GvKvIdLcdIt7GCzKeYS8H16sUQjpZkE=;
+	b=cOt6izIrvJ0nXyIx3MthIlwQcM6X/uPJLm+dDdA8GnYdCGYMosqgMtmjde4+kQVH
+	Lic+CQKzoU11s0PxAFXi0rcHCOaK6deF2Wq4C+EgbbyIxGLGRMZoKZoocPkPmkW3O1e
+	pMArc9bQojI/c9oisc4NvwKvPS/MJ7uITxrOv2Q4=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699041166;
+	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699041165;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=4EtTE/GN1rmg5nBcByfJYKh8nm31rFVtUT0syfCHa2g=;
-	b=GEdNEDiV+0Q7a6ZvwGw81XpNPYqmnFvzQ9pKl3tgqMitcYFuXjY3VvPEyAqOxNch
-	jk0d9/7LUzOUiyzJRwkIgUtaE6qCmAlr0SJQ1Dvq3Bk2n072m/wRQB4VschCX4QVfgw
-	tZN9H9l3JmgzTSPJ4wsXmholOu1jcFBEYBEo5+A4=
-Content-Type: multipart/mixed; boundary="===============1561487651454110855=="
+	bh=VLOUHO0GKAV3GvKvIdLcdIt7GCzKeYS8H16sUQjpZkE=;
+	b=gaQ5P4qRanCcjKKdSE345kchzHuqd5pPNo3Cj9raLkBrktTuZ4Q+z8rwpyy+zm2h
+	XTWrZYMh8u2Is6BNYJYADNseartT9MNnGrcr8uVf5Kn6udxjwHX2MPKtUWNKJp06hew
+	IGoFHNFNhrFcR9Z55eAG5/8yEVb2XCSRROqy5Hwc=
+Content-Type: multipart/mixed; boundary="===============8283349499276059869=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] fluentbit: upgrading to 2.1.10 FAILED
-Message-ID: <0101018b96bec26c-c0c48333-93b4-4e48-8f8e-f05a0a90f7b2-000000@us-west-2.amazonses.com>
+Subject: [AUH] etcd: upgrading to 0223ca52b8d6d4953f708e5e4245c37cb4274115
+ FAILED
+Message-ID: <0101018b96bec154-cd4021ed-c6bd-42ff-9566-8b7d67b902fe-000000@us-west-2.amazonses.com>
 Date: Fri, 3 Nov 2023 19:52:45 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
-X-SES-Outgoing: 2023.11.03-54.240.27.193
+X-SES-Outgoing: 2023.11.03-54.240.27.192
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 19:52:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105907
+ <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 19:52:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105901
 
---===============1561487651454110855==
+--===============8283349499276059869==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,14 +53,14 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *fluentbit* to *2.1.10* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *etcd* to *0223ca52b8d6d4953f708e5e4245c37cb4274115* has Failed (devtool error).
 
 Detailed error information:
 
-The following devtool command failed:  upgrade fluentbit -V 2.1.10
+The following devtool command failed:  upgrade etcd -S 0223ca52b8d6d4953f708e5e4245c37cb4274115
 NOTE: Reconnecting to bitbake server...
 Loading cache...done.
-Loaded 4920 entries from dependency cache.
+Loaded 4916 entries from dependency cache.
 NOTE: Resolving any missing task queue dependencies
 
 Build Configuration:
@@ -84,7 +85,7 @@ meta-gnome
 meta-xfce            
 meta-filesystems     
 meta-initramfs       
-meta-webserver       = "tmp-auh-upgrades:cd1667adcdd9a2e0834675ebf825ef4728b88664"
+meta-webserver       = "tmp-auh-upgrades:fb780a423997d74cfa5f16cfe81ffd10a29527d7"
 workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
 
 Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
@@ -93,60 +94,24 @@ Sstate summary: Wanted 10 Local 10 Mirrors 0 Missed 0 Current 20 (100% match, 10
 NOTE: Executing Tasks
 NOTE: Tasks Summary: Attempted 103 tasks of which 100 didn't need to be rerun and all succeeded.
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
-Loading cache...done.
-Loaded 4920 entries from dependency cache.
-Parsing recipes...done.
-Parsing of 3056 .bb files complete (3054 cached, 2 parsed). 4887 targets, 92 skipped, 0 masked, 0 errors.
-NOTE: Resolving any missing task queue dependencies
-
-Build Configuration:
-BB_VERSION           = "2.6.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "x86_64-poky-linux"
-MACHINE              = "qemux86-64"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.3+snapshot-e575f59b82eae78fb1ac8df7198eaa4a7a963259"
-TUNE_FEATURES        = "m64 core2"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
-meta-oe              
-meta-python          
-meta-perl            
-meta-networking      
-meta-multimedia      
-meta-gnome           
-meta-xfce            
-meta-filesystems     
-meta-initramfs       
-meta-webserver       = "tmp-auh-upgrades:cd1667adcdd9a2e0834675ebf825ef4728b88664"
-workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
-
-Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
-done.
-Sstate summary: Wanted 1 Local 0 Mirrors 0 Missed 1 Current 0 (0% match, 0% complete)
-NOTE: Executing Tasks
-WARNING: Failed to fetch URL https://releases.fluentbit.io/1.9/source-2.1.10.tar.gz;subdir=fluent-bit-2.1.10;downloadfilename=fluentbit-2.1.10.tar.gz, attempting MIRRORS if available
-NOTE: Tasks Summary: Attempted 2 tasks of which 0 didn't need to be rerun and 1 failed.
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
-NOTE: The errors for this build are stored in /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231103121715.txt
-You can send the errors to a reports server by running:
-  send-error-report /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231103121715.txt [-s server]
-NOTE: The contents of these logs will be posted in public if you use the above command with the default server. Please ensure you remove any identifying or proprietary information when prompted before sending.
+NOTE: Writing buildhistory took: 3 seconds
 
 INFO: Extracting current version source...
-INFO: SRC_URI contains some conditional appends/prepends - will create branches to represent these
-INFO: Extracting upgraded version source...
-INFO: Fetching https://releases.fluentbit.io/1.9/source-2.1.10.tar.gz;subdir=fluent-bit-2.1.10;downloadfilename=fluentbit-2.1.10.tar.gz...
-ERROR: Fetcher failure: Fetch command export PSEUDO_DISABLED=1; export SSL_CERT_FILE="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export GIT_SSL_CAINFO="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export ftp_proxy="http://proxy.yocto.io:5187/"; export FTP_PROXY="http://proxy.yocto.io:5187/"; export PATH="/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/sysroots-uninative/x86_64-linux/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-jil1cnbu/work/recipe-sysroot-native/usr/bin/x86_64-poky-linux:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-jil1cnbu/work/recipe-sysroot/usr/bin/crossscripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-jil1cnbu/work/recipe-sysroot-native/usr/sbin:/hom
- e/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-jil1cnbu/work/recipe-sysroot-native/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-jil1cnbu/work/recipe-sysroot-native/sbin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-jil1cnbu/work/recipe-sysroot-native/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/bitbake/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools"; export HOME="/home/pokybuild"; /usr/bin/env wget -t 2 -T 30 --passive-ftp -O /srv/autobuilder/autobuilder.yocto.io/current_sources/fluentbit-2.1.10.tar.gz.tmp -P /srv/autobuilder/autobuilder.yocto.io/current_sources 'https://releases.fluentbit.io/1.9/source-2.1.10.tar.gz' --progress=dot -v failed with exit code 8, no output
-ERROR: Bitbake Fetcher Error: FetchError('Unable to fetch URL from any source.', 'https://releases.fluentbit.io/1.9/source-2.1.10.tar.gz;subdir=fluent-bit-2.1.10;downloadfilename=fluentbit-2.1.10.tar.gz')
-ERROR: Logfile of failure stored in: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-jil1cnbu/work/temp/log.do_fetch.49618
-ERROR: Failed to fetch URL https://releases.fluentbit.io/1.9/source-2.1.10.tar.gz;subdir=fluent-bit-2.1.10;downloadfilename=fluentbit-2.1.10.tar.gz
+INFO: Adding local source files to srctree...
+Traceback (most recent call last):
+  File "/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts/devtool", line 349, in <module>
+    ret = main()
+          ^^^^^^
+  File "/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts/devtool", line 336, in main
+    ret = args.func(args, config, basepath, workspace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts/lib/devtool/upgrade.py", line 563, in upgrade
+    old_licenses = _extract_licenses(srctree_s, (rd.getVar('LIC_FILES_CHKSUM') or ""))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts/lib/devtool/upgrade.py", line 476, in _extract_licenses
+    with open(os.path.join(srcpath, path), 'rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/etcd/3.5.7/etcd-3.5.7/src/go.etcd.io/etcd/v3//LICENSE'
 
 
 Please review the attached files for further information and build/update failures.
@@ -154,5 +119,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============1561487651454110855==--
+--===============8283349499276059869==--
 
