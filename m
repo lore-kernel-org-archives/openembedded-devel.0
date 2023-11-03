@@ -2,49 +2,49 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E9D91C27C58
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D53F2C27C57
 	for <webhook@archiver.kernel.org>; Fri,  3 Nov 2023 19:53:06 +0000 (UTC)
-Received: from a27-193.smtp-out.us-west-2.amazonses.com (a27-193.smtp-out.us-west-2.amazonses.com [54.240.27.193])
- by mx.groups.io with SMTP id smtpd.web10.63872.1699041166191524446
+Received: from a27-192.smtp-out.us-west-2.amazonses.com (a27-192.smtp-out.us-west-2.amazonses.com [54.240.27.192])
+ by mx.groups.io with SMTP id smtpd.web10.63884.1699041169953094075
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Nov 2023 12:52:56 -0700
+ Fri, 03 Nov 2023 12:52:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=fDhQSt/u;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=pD/UXLaf;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.193, mailfrom: 0101018b96beea62-069633f9-2752-4c0f-92ac-13abf34970be-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=Um5XcdHS;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=AqkfNv2k;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.192, mailfrom: 0101018b96bef4a2-799f4b8f-fbdd-4d5c-90cf-482367e4c917-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
-	t=1699041176;
+	t=1699041178;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=Wnfuv7VK39jfV8c4YuMDpirOQTtAPdlRi/nZmsWFcm0=;
-	b=fDhQSt/uCK4wHz7q7Vn8AMoFMsXh5vMWfHbk5VyoW77aeHMLHmDdVYv/nDXwF5lv
-	Itmyo4z06QV8lLYYaMFQtMGObbs4Yv7uEJ0FB9p0dXFzEGdsUyN3Mb/QgnFVbmmFwCY
-	JDCkCLVu3LOJ5od9COqBrs5zvtSHYP3e80yqD3CM=
+	bh=ggU2XOMuG9m8xFCIW1EQq6hKTzbHX21nDEbFe/gG874=;
+	b=Um5XcdHSM8nXNhlaD4xD4fUAQ4aGVA3dwBLWv5+EUWy8riEVNyN8k4KJJlkyLyOa
+	mdWeqKAit07tsWoo1xx7lGp3DhzlAGzx+ANCI9U1tdy+9VELcLp5YUfqBEgcN0ovxPM
+	S+AXStQs2NnvTlN0JCIjpEutP6QMMybejrRhqzW4=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699041176;
+	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699041178;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=Wnfuv7VK39jfV8c4YuMDpirOQTtAPdlRi/nZmsWFcm0=;
-	b=pD/UXLaf/0evguCYAcrMDFTpgZ+AwRCt3me+C78TxtqLYirJsKjm7J1fLTTokWsh
-	Tc+63L037f4RujoQnqPwdlqjzuWEJWYw4FH6pzo5OOObeMDJ2LH0b9ehYYywesP5pFY
-	sBfrMuo7Kr6jbp4HYrJTI7nRqCh0zvtL/0QgK+Yc=
-Content-Type: multipart/mixed; boundary="===============6942029744828801016=="
+	bh=ggU2XOMuG9m8xFCIW1EQq6hKTzbHX21nDEbFe/gG874=;
+	b=AqkfNv2kwqqR1sMY4H+cRg3WJac/mTMfKV7sSo7ryD6gTugMVtSgwFRoRVLLcyNR
+	yZO6Gr5jPIE3C93rfBlDHReUDAMt75oW64lgATwexqcR2iKCNu56BaYLx/kwBhZgNTn
+	OBAbztABS5IoYfiWuORyV7U3PDMBZ+awBgoMVSdQ=
+Content-Type: multipart/mixed; boundary="===============0135726330115146390=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] vulkan-cts: upgrading to 4.6.3.3 FAILED
-Message-ID: <0101018b96beea62-069633f9-2752-4c0f-92ac-13abf34970be-000000@us-west-2.amazonses.com>
-Date: Fri, 3 Nov 2023 19:52:56 +0000
+Subject: [AUH] serial-forward: upgrading to 0710 FAILED
+Message-ID: <0101018b96bef4a2-799f4b8f-fbdd-4d5c-90cf-482367e4c917-000000@us-west-2.amazonses.com>
+Date: Fri, 3 Nov 2023 19:52:58 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
-X-SES-Outgoing: 2023.11.03-54.240.27.193
+X-SES-Outgoing: 2023.11.03-54.240.27.192
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 19:53:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106031
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106033
 
---===============6942029744828801016==
+--===============0135726330115146390==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,14 +52,14 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *vulkan-cts* to *4.6.3.3* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *serial-forward* to *0710* has Failed (devtool error).
 
 Detailed error information:
 
-The following devtool command failed:  upgrade vulkan-cts -V 4.6.3.3 -S 99aa8522cbcb3ad319d35af360df9a59cd22e6ac
+Running 'devtool upgrade' for recipe serial-forward failed.
 NOTE: Reconnecting to bitbake server...
 Loading cache...done.
-Loaded 5058 entries from dependency cache.
+Loaded 5040 entries from dependency cache.
 NOTE: Resolving any missing task queue dependencies
 
 Build Configuration:
@@ -84,40 +84,53 @@ meta-gnome
 meta-xfce            
 meta-filesystems     
 meta-initramfs       
-meta-webserver       = "tmp-auh-upgrades:1a608d5832f4c537063e680037052daa85ea607f"
+meta-webserver       = "tmp-auh-upgrades:81123b9f2daaf672917b464b0e080c5b54922a75"
 workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
 
 Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
 done.
 Sstate summary: Wanted 10 Local 10 Mirrors 0 Missed 0 Current 20 (100% match, 100% complete)
 NOTE: Executing Tasks
-NOTE: Tasks Summary: Attempted 103 tasks of which 100 didn't need to be rerun and 1 failed.
+NOTE: Tasks Summary: Attempted 103 tasks of which 100 didn't need to be rerun and all succeeded.
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 3 seconds
-NOTE: The errors for this build are stored in /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231103191051.txt
-You can send the errors to a reports server by running:
-  send-error-report /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231103191051.txt [-s server]
-NOTE: The contents of these logs will be posted in public if you use the above command with the default server. Please ensure you remove any identifying or proprietary information when prompted before sending.
-
+NOTE: Writing buildhistory took: 4 seconds
 INFO: Extracting current version source...
-INFO: SRC_URI contains some conditional appends/prepends - will create branches to represent these
-ERROR: Applying patch 'fix-clang-private-operator.patch' on target directory '/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/vulkan-cts/1.3.3.1/devtooltmp-imig_0e0/workdir/git'
-CmdError('sh -c \'PATCHFILE="fix-clang-private-operator.patch" git -c user.name="OpenEmbedded" -c user.email="oe.patch@oe" commit -F /tmp/tmpqle2lhs_ --author="Dmitry Baryshkov <dmitry.baryshkov@linaro.org>" --date="Thu, 16 Jul 2020 01:05:56 +0300"\'', 0, 'stdout: On branch devtool-override-toolchain-clang
-Changes not staged for commit:
-  (use "git add <file>..." to update what will be committed)
-  (use "git restore <file>..." to discard changes in working directory)
-  (commit or discard the untracked or modified content in submodules)
-\tmodified:   external/glslang/src (modified content)
+INFO: Extracting upgraded version source...
+INFO: Rebasing devtool onto 89b1988b0ecaff1059cfbbb1545c0bd44fce87d8
+WARNING: Command 'git rebase 89b1988b0ecaff1059cfbbb1545c0bd44fce87d8' failed:
+Auto-merging fsoaudiod/configure.ac
+CONFLICT (content): Merge conflict in fsoaudiod/configure.ac
+Auto-merging fsodatad/configure.ac
+CONFLICT (content): Merge conflict in fsodatad/configure.ac
+Auto-merging fsodeviced/configure.ac
+CONFLICT (content): Merge conflict in fsodeviced/configure.ac
+Auto-merging fsogsmd/configure.ac
+CONFLICT (content): Merge conflict in fsogsmd/configure.ac
+Auto-merging fsonetworkd/configure.ac
+CONFLICT (content): Merge conflict in fsonetworkd/configure.ac
+Auto-merging fsosystemd/configure.ac
+CONFLICT (content): Merge conflict in fsosystemd/configure.ac
+Auto-merging fsotdld/configure.ac
+CONFLICT (content): Merge conflict in fsotdld/configure.ac
+Auto-merging fsousaged/configure.ac
+CONFLICT (content): Merge conflict in fsousaged/configure.ac
+Auto-merging libfsobasics/configure.ac
+CONFLICT (content): Merge conflict in libfsobasics/configure.ac
+Auto-merging libfsoframework/configure.ac
+CONFLICT (content): Merge conflict in libfsoframework/configure.ac
+Auto-merging libfsoresource/configure.ac
+CONFLICT (content): Merge conflict in libfsoresource/configure.ac
+Auto-merging libfsosystem/configure.ac
+CONFLICT (content): Merge conflict in libfsosystem/configure.ac
+Auto-merging libfsotransport/configure.ac
+CONFLICT (content): Merge conflict in libfsotransport/configure.ac
+Auto-merging libgsm0710mux/configure.ac
+CONFLICT (content): Merge conflict in libgsm0710mux/configure.ac
 
-Untracked files:
-  (use "git add <file>..." to include in what will be committed)
-\tpatches/
+You will need to resolve conflicts in order to complete the upgrade.
+INFO: Upgraded source extracted to /home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/sources/serial-forward
+INFO: New recipe is /home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/recipes/serial-forward/serial-forward_git.bb
 
-no changes added to commit (use "git add" and/or "git commit -a")
-
-stderr: ')
-ERROR: Logfile of failure stored in: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/vulkan-cts/1.3.3.1/devtooltmp-imig_0e0/temp/log.do_patch.2494734
-ERROR: Extracting source for vulkan-cts failed
 
 
 Please review the attached files for further information and build/update failures.
@@ -125,5 +138,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============6942029744828801016==--
+--===============0135726330115146390==--
 
