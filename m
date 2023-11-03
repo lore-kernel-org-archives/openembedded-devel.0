@@ -2,49 +2,49 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D0FD1C00A5A
-	for <webhook@archiver.kernel.org>; Fri,  3 Nov 2023 19:52:48 +0000 (UTC)
-Received: from a27-192.smtp-out.us-west-2.amazonses.com (a27-192.smtp-out.us-west-2.amazonses.com [54.240.27.192])
- by mx.groups.io with SMTP id smtpd.web11.62983.1699041167638722586
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1C65BC04FDE
+	for <webhook@archiver.kernel.org>; Fri,  3 Nov 2023 19:52:49 +0000 (UTC)
+Received: from a27-45.smtp-out.us-west-2.amazonses.com (a27-45.smtp-out.us-west-2.amazonses.com [54.240.27.45])
+ by mx.groups.io with SMTP id smtpd.web11.62971.1699041165185365512
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 03 Nov 2023 12:52:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=B8tnXw+i;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=b5h/xe5A;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.192, mailfrom: 0101018b96bec6b2-cdf955c9-cc98-4773-b401-8121df76a9d2-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=T4I+AqRR;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=dPDwLtnb;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.45, mailfrom: 0101018b96bec699-b44d4c12-06bd-4735-8f72-561706ba8344-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
 	t=1699041167;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=N+bBRTiBcMraxowfwNT8AKvM4YzoND9m8TCIiEe5qQk=;
-	b=B8tnXw+ivkP/G39toHKb/UcrGCa1wWCubYGegroVszLOEtqD5bhNyKkktxLSROyn
-	eXFeM3nYSGssdGoyoYHA3XROBzWItu6YxbC4xImqn5DsDT3hHvgrysk/j9Z/dwgaiVM
-	6s0z/uibHgcvHnSI6HnDtzqhtxQjY3ZdXXk/Jz5k=
+	bh=jRHj66H4ckrkUXmxGIlj8HdcLNNi4C4T8dPofL3SOeg=;
+	b=T4I+AqRRCPzMQno5Igo1lFkLAJE9Jobh8KheT2BeoO4fJughJ9IU4gUZ/Ezig7k/
+	DOOQ54aP69U5Qs+7j4d8fRWXRiTcs+swJYq0rVKMzchG3zoSjPv0ijqXOttJ0HBauYG
+	55e2WnarrXmuiGc7ZP/tfYdR+tMrZzvClhpfhe/U=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699041167;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=N+bBRTiBcMraxowfwNT8AKvM4YzoND9m8TCIiEe5qQk=;
-	b=b5h/xe5AdvzOLskL+fVX0E8qy6ab52UodJ0YzW8Q0bojGVnHeGkkZANuAaAzTlky
-	7RFnEv1ktRRZ/iCqGrZQ06sLWLVJPUBQXR037WvAK1gRhsFSHlthuPcL4Kp/RRohqpy
-	5yi+rIZVqYz20ds98gkMph8PcXhAfYk0y/jbzIZI=
-Content-Type: multipart/mixed; boundary="===============6468401416069999949=="
+	bh=jRHj66H4ckrkUXmxGIlj8HdcLNNi4C4T8dPofL3SOeg=;
+	b=dPDwLtnbUyGAr2J9hZIcBuSrlxJXvbMCRFrAIteOChj7H+2feUc3hGEfjBz0QcRX
+	D/KT8WNpXDcQmwPt0cEq6jzcMGFUEAU1YA8K1M/CLZN5LBY43mcKJRhxKxriCCR3n4R
+	jzEqIgfr5rXdvN6Usk78VwfwViY3Xke+OdZlVB9Q=
+Content-Type: multipart/mixed; boundary="===============8612292960420567018=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] gnulib: upgrading to 20030524. FAILED
-Message-ID: <0101018b96bec6b2-cdf955c9-cc98-4773-b401-8121df76a9d2-000000@us-west-2.amazonses.com>
+Subject: [AUH] glm: upgrading to 214 FAILED
+Message-ID: <0101018b96bec699-b44d4c12-06bd-4735-8f72-561706ba8344-000000@us-west-2.amazonses.com>
 Date: Fri, 3 Nov 2023 19:52:47 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
-X-SES-Outgoing: 2023.11.03-54.240.27.192
+X-SES-Outgoing: 2023.11.03-54.240.27.45
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 19:52:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105929
+ <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 19:52:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105924
 
---===============6468401416069999949==
+--===============8612292960420567018==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,11 +52,11 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *gnulib* to *20030524.* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *glm* to *214* has Failed (devtool error).
 
 Detailed error information:
 
-The following devtool command failed:  upgrade gnulib -V 20030524. -S 8da087fd9cdc501105370ddfad7a7c9a3e622850
+Running 'devtool upgrade' for recipe glm failed.
 NOTE: Reconnecting to bitbake server...
 Loading cache...done.
 Loaded 4943 entries from dependency cache.
@@ -94,23 +94,22 @@ NOTE: Executing Tasks
 NOTE: Tasks Summary: Attempted 103 tasks of which 100 didn't need to be rerun and all succeeded.
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 3 seconds
-
 INFO: Extracting current version source...
-INFO: The gnulib recipe has do_patch disabled. Running only do_configure task dependencies
-Traceback (most recent call last):
-  File "/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts/devtool", line 349, in <module>
-    ret = main()
-          ^^^^^^
-  File "/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts/devtool", line 336, in main
-    ret = args.func(args, config, basepath, workspace)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts/lib/devtool/upgrade.py", line 563, in upgrade
-    old_licenses = _extract_licenses(srctree_s, (rd.getVar('LIC_FILES_CHKSUM') or ""))
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts/lib/devtool/upgrade.py", line 476, in _extract_licenses
-    with open(os.path.join(srcpath, path), 'rb') as f:
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-FileNotFoundError: [Errno 2] No such file or directory: '/home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/sources/gnulib/COPYING'
+INFO: Adding local source files to srctree...
+INFO: Extracting upgraded version source...
+INFO: Rebasing devtool onto 7fe8a1944c66fb9acf3aa2930966cfafa4ee9e09
+WARNING: Command 'git rebase 7fe8a1944c66fb9acf3aa2930966cfafa4ee9e09' failed:
+Auto-merging glm/detail/intrinsic_geometric.inl
+CONFLICT (content): Merge conflict in glm/detail/intrinsic_geometric.inl
+Auto-merging glm/detail/setup.hpp
+CONFLICT (content): Merge conflict in glm/detail/setup.hpp
+Auto-merging glm/detail/type_vec4.hpp
+Auto-merging test/gtx/gtx_simd_vec4.cpp
+
+You will need to resolve conflicts in order to complete the upgrade.
+INFO: Upgraded source extracted to /home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/sources/glm
+INFO: New recipe is /home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/recipes/glm/glm_0.9.9.8.bb
+
 
 
 Please review the attached files for further information and build/update failures.
@@ -118,5 +117,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============6468401416069999949==--
+--===============8612292960420567018==--
 
