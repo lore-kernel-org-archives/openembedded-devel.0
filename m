@@ -1,232 +1,483 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AB16CC4332F
-	for <webhook@archiver.kernel.org>; Fri,  3 Nov 2023 14:47:46 +0000 (UTC)
-Received: from mail-yw1-f174.google.com (mail-yw1-f174.google.com [209.85.128.174])
- by mx.groups.io with SMTP id smtpd.web10.54806.1699022864487153396
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D7552C4332F
+	for <webhook@archiver.kernel.org>; Fri,  3 Nov 2023 14:59:36 +0000 (UTC)
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
+ by mx.groups.io with SMTP id smtpd.web10.55586.1699023570672662895
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Nov 2023 07:47:44 -0700
+ Fri, 03 Nov 2023 07:59:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=kKFFHe7O;
- spf=pass (domain: gmail.com, ip: 209.85.128.174, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f174.google.com with SMTP id 00721157ae682-5ae143e08b1so25334047b3.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 07:47:44 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=C7OduJYe;
+ spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-307d58b3efbso1214171f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 07:59:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699022863; x=1699627663; darn=lists.openembedded.org;
-        h=content-transfer-encoding:autocrypt:subject:from:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=D13Z/xJvQGdSgHR1Na3ohcQ0IUYC2QkXr0CnFVaQ3Bo=;
-        b=kKFFHe7ONahFKCOuzfO36Z7S20BZgoX24WfGP21Yzu2meWDHhuPu+QSLTne4dENROT
-         o1Lfq1sHlhjnMbQEejDngdO07F0GaOSYcpD2jVYUwRkXUHg4hkWSyLo9xZBv+d/77wps
-         0uGACPoOyuEXi+a5M7NJPW2But6qloGl9w1RZEll7/YWcbRFh+i77z8nsuQUPWnnfl+C
-         cuZ53V8vGn3oCOPRjzNbtpqFpVubUmzQ+lwHN2zMGX6EoW5RHFQYtzDDuyBQP9fcpdlS
-         /pJziml4gkra0m+ge2V0Sw9YqbMDKj0TDuXicS06p/mfFxMXFaqNXVQn0z1+TxFlmShA
-         WRMQ==
+        d=gmail.com; s=20230601; t=1699023569; x=1699628369; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=8lV00jFQzdnJI+aDSm/LWynvkmLdcsYoroAbsgYgh20=;
+        b=C7OduJYenANZB5AKX/ZCW6sUmxPczfVkVsESpLvnheZx7WWyT8px0zo/sAwUerWZd2
+         8jZT826jxA2KkOk2NugtKaVkRGWUkrFb/11BYvSjaKlA4dYKeyn471lHefzA5gydNx8e
+         nx4Mon5WmrdCTzt5FJ9n3mTutHEaYliO6Np0BCJ0dyoAsYL26Clda4IbROnmK1JLbHlG
+         AKMhQvKye3YdKP777Pxn8JJOlx1bYPUqkoxM/rLQ3vxgT6iR8T4kF/u+hb91Y3MCuByo
+         0o5+p0jJBbOVBkDWs6YLgFYEXo8rROqqx7JLimULawqiT86r9ZO4VlXNqIHgspN5YkSP
+         UUjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699022863; x=1699627663;
-        h=content-transfer-encoding:autocrypt:subject:from:to
-         :content-language:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=D13Z/xJvQGdSgHR1Na3ohcQ0IUYC2QkXr0CnFVaQ3Bo=;
-        b=pN/XHeedqpvPRidu5shmc8lULo7nMqd7hpSx6dVtFnBaZnXQKOUuyTxy5wQdUyOfZD
-         TjAIc4aoz+2rScTQ/4msCthiQ5F/dmUaYJhbUYJk62BKv7rwTQkrmo2wRIjiF8LdH+6M
-         m5wJF57jalmGa+nORFg9H0bmosj8AjXv/5oML+r7C1mR8H9gNiZqszl3Qjkb2+gkEBt6
-         ucn2dDHIM8yjnbKIMheNLvoVUvAlEzCMqY4WdTiDAfzV1WfmN5FhOeSR4K5OoajaWqRG
-         p7H8yo/376unB8C8JvjARLJCN8vHalp6bH8glyYUr3p+IzEgP1LwyZHXlLhKeASP+EXi
-         PKPQ==
-X-Gm-Message-State: AOJu0YxqcFDGVEpC9s1iYovhhdAYd5XFiunJ03QV1UIO1krJ1yT0nDvc
-	B7Z9d4shA3pfaBWeuj/UiL8QFnFRKEhMMw==
-X-Google-Smtp-Source: AGHT+IHLd4ksaDBg0snHWMpgKTqhNOfXyrm8NI2y5B79dbLiGyo9Z9LMm4c3vyY4VOZrzA/7uPX+DA==
-X-Received: by 2002:a0d:e68b:0:b0:5b3:1d71:6df7 with SMTP id p133-20020a0de68b000000b005b31d716df7mr3385568ywe.22.1699022863634;
-        Fri, 03 Nov 2023 07:47:43 -0700 (PDT)
-Received: from ?IPV6:2600:1700:9190:ba10:cad2:13bf:c8a:49d6? ([2600:1700:9190:ba10:cad2:13bf:c8a:49d6])
-        by smtp.gmail.com with ESMTPSA id z184-20020a814cc1000000b005869fd2b5bcsm996564ywa.127.2023.11.03.07.47.43
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 03 Nov 2023 07:47:43 -0700 (PDT)
-Message-ID: <d2651b9b-d360-4aeb-947e-4f1a8a09d348@gmail.com>
-Date: Fri, 3 Nov 2023 10:47:43 -0400
+        d=1e100.net; s=20230601; t=1699023569; x=1699628369;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=8lV00jFQzdnJI+aDSm/LWynvkmLdcsYoroAbsgYgh20=;
+        b=no5t/HFzeyv87olpR1FynjZDkIki9V0kNRYYq43iORy74rWKkzwQnXO0E6DmD3ci3v
+         G7QtIalI9hx5CsuN5zJQQMfj5ZGmUfOwy5MCRld83SCLhSuOlRyPC3kaTw2MBdwyhPzb
+         idbk6tFN7+NMwwjqTpA2nA4nx0f8ewCvnnrIlBDcL4jSRCqsI4HZWI1PEjHh5nTlSky+
+         nEjPZjFyQb/Wch1D1bV/7jGZ+O1urd1vjiBJEY+4XD9Db51pa5R+ZKePplpD+alP14uF
+         UWcBaRSiDqZ+4N/Op1A5RxBX79W8ZiRNPiHcSSoj7U5cqUb/LVFqR3IJKNtdpqxmJp/2
+         eyXw==
+X-Gm-Message-State: AOJu0Yy2izI7BypClIHzOKtVMmpBwuY6EtCr1+6Pd19Gh2GAvg+gBZJG
+	T/S2kHl9KD6FCib1VdchWHKGRk2zVdJa6Y9g64Q=
+X-Google-Smtp-Source: AGHT+IGVpGcwAjq1N4t3zeSs6gPpHYfHHcEhHdoQAfPYsFXWpbhPSgXDdH75RkaUf16ph9AL/aoZxt/iJ9v4vUrH1+k=
+X-Received: by 2002:a05:6000:1c9:b0:32d:8185:9526 with SMTP id
+ t9-20020a05600001c900b0032d81859526mr15279207wrx.55.1699023568833; Fri, 03
+ Nov 2023 07:59:28 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-From: akuster808 <akuster808@gmail.com>
-Subject: kirkstone merge request: Nov 3rd
-Autocrypt: addr=akuster808@gmail.com; keydata=
- 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
- ApZ86eOP
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <d2651b9b-d360-4aeb-947e-4f1a8a09d348@gmail.com>
+In-Reply-To: <d2651b9b-d360-4aeb-947e-4f1a8a09d348@gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Fri, 3 Nov 2023 15:59:15 +0100
+Message-ID: <CA+chaQcStT4hL36n3d7budYTLN+7zD43s1FKd=X5_+gwRppu8Q@mail.gmail.com>
+Subject: Re: [oe] kirkstone merge request: Nov 3rd
+To: Armin Kuster <akuster808@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>, 
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="0000000000004912aa060940c0c6"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 14:47:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105865
+ <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 14:59:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105866
 
-The following changes since commit 9c5541f7e18a1fac3b8dea71e1ebb8398d58e6ff:
+--0000000000004912aa060940c0c6
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-   python3-django: upgrade 4.2.3 -> 4.2.5 (2023-09-27 10:23:28 -0400)
+Can you please include:
+https://patchwork.yoctoproject.org/project/oe/patch/20230929112628.3839203-=
+1-martin.jansa@gmail.com/
 
-are available in the Git repository at:
+this is 3rd kirkstone pull where it was missed.
 
-   https://git.openembedded.org/meta-openembedded kirkstone-next
+On Fri, Nov 3, 2023 at 3:47=E2=80=AFPM Armin Kuster <akuster808@gmail.com> =
+wrote:
 
-for you to fetch changes up to 79a6f60dabad9e5b0e041efa91379447ef030482:
+> The following changes since commit
+> 9c5541f7e18a1fac3b8dea71e1ebb8398d58e6ff:
+>
+>    python3-django: upgrade 4.2.3 -> 4.2.5 (2023-09-27 10:23:28 -0400)
+>
+> are available in the Git repository at:
+>
+>    https://git.openembedded.org/meta-openembedded kirkstone-next
+>
+> for you to fetch changes up to 79a6f60dabad9e5b0e041efa91379447ef030482:
+>
+>    mbedtls: upgrade 2.28.2 -> 2.28.5 (2023-10-17 09:07:38 -0400)
+>
+> ----------------------------------------------------------------
+> Denys Dmytriyenko (1):
+>        mbedtls: set up /usr/bin/hello as alternative
+>
+> Gianfranco Costamagna (3):
+>        mosquitto: do not automatically depend on dlt-daemon, it's a
+> non-mandatory logging system
+>        mosquitto: upgrade 2.0.15 -> 2.0.17
+>        mosquitto: upgrade 2.0.17 -> 2.0.18
+>
+> Joe Slater (1):
+>        nginx: add configure option
+>
+> Martin Jansa (1):
+>        mosquitto: add missing Upstream-Status
+>
+> Meenali Gupta (1):
+>        open-vm-tools: fix CVE-2023-20867
+>
+> Narpat Mali (1):
+>        python3-gevent: fix CVE-2023-41419
+>
+> Polampalli, Archana (4):
+>        samba: fix CVE-2023-34966
+>        samba: fix CVE-2022-2127
+>        samba:fix CVE-2023-34967
+>        samba: fix CVE-2023-34968
+>
+> Wang Mingyu (1):
+>        mosquitto: upgrade 2.0.14 -> 2.0.15
+>
+> Yi Zhao (1):
+>        mbedtls: upgrade 2.28.2 -> 2.28.5
+>
+>   .../mbedtls/{mbedtls_2.28.2.bb =3D> mbedtls_2.28.5.bb} |   7 +-
+>   meta-networking/recipes-connectivity/mosquitto/files/2894.patch | 25 ++
+>   meta-networking/recipes-connectivity/mosquitto/files/2895.patch | 27 ++
+>   .../recipes-connectivity/mosquitto/files/mosquitto.init         | 20 +-
+>   .../mosquitto/{mosquitto_2.0.14.bb =3D> mosquitto_2.0.18.bb} |   6 +-
+>   .../recipes-connectivity/samba/samba/CVE-2022-2127.patch        | 44 ++
+>   .../recipes-connectivity/samba/samba/CVE-2023-34966_0001.patch  | 78 ++=
+++
+>   .../recipes-connectivity/samba/samba/CVE-2023-34966_0002.patch  | 140
+> ++++++
+>   .../recipes-connectivity/samba/samba/CVE-2023-34967_0001.patch  | 178
+> ++++++++
+>   .../recipes-connectivity/samba/samba/CVE-2023-34967_0002.patch  | 125
+> ++++++
+>   .../recipes-connectivity/samba/samba/CVE-2023-34968_0001.patch  | 104
+> +++++
+>   .../recipes-connectivity/samba/samba/CVE-2023-34968_0002.patch  | 39 ++
+>   .../recipes-connectivity/samba/samba/CVE-2023-34968_0003.patch  | 65 ++=
++
+>   .../recipes-connectivity/samba/samba/CVE-2023-34968_0004.patch  | 85 ++=
+++
+>   .../recipes-connectivity/samba/samba/CVE-2023-34968_0005.patch  | 83 ++=
+++
+>   .../recipes-connectivity/samba/samba/CVE-2023-34968_0006.patch  | 57 ++=
++
+>   .../recipes-connectivity/samba/samba/CVE-2023-34968_0007.patch  | 49 ++
+>   .../recipes-connectivity/samba/samba/CVE-2023-34968_0008.patch  | 62 ++=
++
+>   .../recipes-connectivity/samba/samba/CVE-2023-34968_0009.patch  | 465
+> +++++++++++++++++++
+>   .../recipes-connectivity/samba/samba/CVE-2023-34968_0010.patch  | 484
+> ++++++++++++++++++++
+>   .../recipes-connectivity/samba/samba/CVE-2023-34968_0011.patch  | 295
+> ++++++++++++
+>   meta-networking/recipes-connectivity/samba/samba_4.14.14.bb     | 16 +
+>   .../open-vm-tools/open-vm-tools/CVE-2023-20867.patch            | 158
+> +++++++
+>   .../recipes-support/open-vm-tools/open-vm-tools_11.3.5.bb       | 1 +
+>   .../recipes-devtools/python/python3-gevent/CVE-2023-41419.patch | 673
+> ++++++++++++++++++++++++++++
+>   meta-python/recipes-devtools/python/python3-gevent_21.12.0.bb   | 2 +
+>   .../recipes-httpd/nginx/files/0001-configure-libxslt-conf.patch | 39 ++
+>   meta-webserver/recipes-httpd/nginx/nginx.inc                    | 3 +
+>   28 files changed, 3316 insertions(+), 14 deletions(-)
+>   rename meta-networking/recipes-connectivity/mbedtls/{mbedtls_2.28.2.bb
+> =3D> mbedtls_2.28.5.bb} (91%)
+>   create mode 100644
+> meta-networking/recipes-connectivity/mosquitto/files/2894.patch
+>   create mode 100644
+> meta-networking/recipes-connectivity/mosquitto/files/2895.patch
+>   rename
+> meta-networking/recipes-connectivity/mosquitto/{mosquitto_2.0.14.bb =3D>
+> mosquitto_2.0.18.bb} (94%)
+>   create mode 100644
+> meta-networking/recipes-connectivity/samba/samba/CVE-2022-2127.patch
+>   create mode 100644
+> meta-networking/recipes-connectivity/samba/samba/CVE-2023-34966_0001.patc=
+h
+>   create mode 100644
+> meta-networking/recipes-connectivity/samba/samba/CVE-2023-34966_0002.patc=
+h
+>   create mode 100644
+> meta-networking/recipes-connectivity/samba/samba/CVE-2023-34967_0001.patc=
+h
+>   create mode 100644
+> meta-networking/recipes-connectivity/samba/samba/CVE-2023-34967_0002.patc=
+h
+>   create mode 100644
+> meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0001.patc=
+h
+>   create mode 100644
+> meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0002.patc=
+h
+>   create mode 100644
+> meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0003.patc=
+h
+>   create mode 100644
+> meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0004.patc=
+h
+>   create mode 100644
+> meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0005.patc=
+h
+>   create mode 100644
+> meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0006.patc=
+h
+>   create mode 100644
+> meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0007.patc=
+h
+>   create mode 100644
+> meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0008.patc=
+h
+>   create mode 100644
+> meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0009.patc=
+h
+>   create mode 100644
+> meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0010.patc=
+h
+>   create mode 100644
+> meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0011.patc=
+h
+>   create mode 100644
+>
+> meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2023-2086=
+7.patch
+>   create mode 100644
+> meta-python/recipes-devtools/python/python3-gevent/CVE-2023-41419.patch
+>   create mode 100644
+> meta-webserver/recipes-httpd/nginx/files/0001-configure-libxslt-conf.patc=
+h
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#105865):
+> https://lists.openembedded.org/g/openembedded-devel/message/105865
+> Mute This Topic: https://lists.openembedded.org/mt/102365349/3617156
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> martin.jansa@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
 
-   mbedtls: upgrade 2.28.2 -> 2.28.5 (2023-10-17 09:07:38 -0400)
+--0000000000004912aa060940c0c6
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-----------------------------------------------------------------
-Denys Dmytriyenko (1):
-       mbedtls: set up /usr/bin/hello as alternative
+<div dir=3D"ltr">Can you please include:<div><a href=3D"https://patchwork.y=
+octoproject.org/project/oe/patch/20230929112628.3839203-1-martin.jansa@gmai=
+l.com/">https://patchwork.yoctoproject.org/project/oe/patch/20230929112628.=
+3839203-1-martin.jansa@gmail.com/</a><br></div><div><br></div><div>this is =
+3rd kirkstone pull where it was missed.</div></div><br><div class=3D"gmail_=
+quote"><div dir=3D"ltr" class=3D"gmail_attr">On Fri, Nov 3, 2023 at 3:47=E2=
+=80=AFPM Armin Kuster &lt;<a href=3D"mailto:akuster808@gmail.com">akuster80=
+8@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
+-left:1ex">The following changes since commit 9c5541f7e18a1fac3b8dea71e1ebb=
+8398d58e6ff:<br>
+<br>
+=C2=A0=C2=A0 python3-django: upgrade 4.2.3 -&gt; 4.2.5 (2023-09-27 10:23:28=
+ -0400)<br>
+<br>
+are available in the Git repository at:<br>
+<br>
+=C2=A0=C2=A0 <a href=3D"https://git.openembedded.org/meta-openembedded" rel=
+=3D"noreferrer" target=3D"_blank">https://git.openembedded.org/meta-openemb=
+edded</a> kirkstone-next<br>
+<br>
+for you to fetch changes up to 79a6f60dabad9e5b0e041efa91379447ef030482:<br=
+>
+<br>
+=C2=A0=C2=A0 mbedtls: upgrade 2.28.2 -&gt; 2.28.5 (2023-10-17 09:07:38 -040=
+0)<br>
+<br>
+----------------------------------------------------------------<br>
+Denys Dmytriyenko (1):<br>
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 mbedtls: set up /usr/bin/hello as alte=
+rnative<br>
+<br>
+Gianfranco Costamagna (3):<br>
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 mosquitto: do not automatically depend=
+ on dlt-daemon, it&#39;s a <br>
+non-mandatory logging system<br>
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 mosquitto: upgrade 2.0.15 -&gt; 2.0.17=
+<br>
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 mosquitto: upgrade 2.0.17 -&gt; 2.0.18=
+<br>
+<br>
+Joe Slater (1):<br>
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 nginx: add configure option<br>
+<br>
+Martin Jansa (1):<br>
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 mosquitto: add missing Upstream-Status=
+<br>
+<br>
+Meenali Gupta (1):<br>
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 open-vm-tools: fix CVE-2023-20867<br>
+<br>
+Narpat Mali (1):<br>
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 python3-gevent: fix CVE-2023-41419<br>
+<br>
+Polampalli, Archana (4):<br>
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 samba: fix CVE-2023-34966<br>
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 samba: fix CVE-2022-2127<br>
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 samba:fix CVE-2023-34967<br>
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 samba: fix CVE-2023-34968<br>
+<br>
+Wang Mingyu (1):<br>
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 mosquitto: upgrade 2.0.14 -&gt; 2.0.15=
+<br>
+<br>
+Yi Zhao (1):<br>
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 mbedtls: upgrade 2.28.2 -&gt; 2.28.5<b=
+r>
+<br>
+=C2=A0=C2=A0.../mbedtls/{<a href=3D"http://mbedtls_2.28.2.bb" rel=3D"norefe=
+rrer" target=3D"_blank">mbedtls_2.28.2.bb</a> =3D&gt; <a href=3D"http://mbe=
+dtls_2.28.5.bb" rel=3D"noreferrer" target=3D"_blank">mbedtls_2.28.5.bb</a>}=
+ |=C2=A0=C2=A0 7 +-<br>
+=C2=A0=C2=A0meta-networking/recipes-connectivity/mosquitto/files/2894.patch=
+ | 25 ++<br>
+=C2=A0=C2=A0meta-networking/recipes-connectivity/mosquitto/files/2895.patch=
+ | 27 ++<br>
+=C2=A0=C2=A0.../recipes-connectivity/mosquitto/files/mosquitto.init=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 20 +-<br>
+=C2=A0=C2=A0.../mosquitto/{<a href=3D"http://mosquitto_2.0.14.bb" rel=3D"no=
+referrer" target=3D"_blank">mosquitto_2.0.14.bb</a> =3D&gt; <a href=3D"http=
+://mosquitto_2.0.18.bb" rel=3D"noreferrer" target=3D"_blank">mosquitto_2.0.=
+18.bb</a>} |=C2=A0=C2=A0 6 +-<br>
+=C2=A0=C2=A0.../recipes-connectivity/samba/samba/CVE-2022-2127.patch=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 44 ++<br>
+=C2=A0=C2=A0.../recipes-connectivity/samba/samba/CVE-2023-34966_0001.patch=
+=C2=A0 | 78 ++++<br>
+=C2=A0=C2=A0.../recipes-connectivity/samba/samba/CVE-2023-34966_0002.patch=
+=C2=A0 | 140 <br>
+++++++<br>
+=C2=A0=C2=A0.../recipes-connectivity/samba/samba/CVE-2023-34967_0001.patch=
+=C2=A0 | 178 <br>
+++++++++<br>
+=C2=A0=C2=A0.../recipes-connectivity/samba/samba/CVE-2023-34967_0002.patch=
+=C2=A0 | 125 <br>
+++++++<br>
+=C2=A0=C2=A0.../recipes-connectivity/samba/samba/CVE-2023-34968_0001.patch=
+=C2=A0 | 104 <br>
++++++<br>
+=C2=A0=C2=A0.../recipes-connectivity/samba/samba/CVE-2023-34968_0002.patch=
+=C2=A0 | 39 ++<br>
+=C2=A0=C2=A0.../recipes-connectivity/samba/samba/CVE-2023-34968_0003.patch=
+=C2=A0 | 65 +++<br>
+=C2=A0=C2=A0.../recipes-connectivity/samba/samba/CVE-2023-34968_0004.patch=
+=C2=A0 | 85 ++++<br>
+=C2=A0=C2=A0.../recipes-connectivity/samba/samba/CVE-2023-34968_0005.patch=
+=C2=A0 | 83 ++++<br>
+=C2=A0=C2=A0.../recipes-connectivity/samba/samba/CVE-2023-34968_0006.patch=
+=C2=A0 | 57 +++<br>
+=C2=A0=C2=A0.../recipes-connectivity/samba/samba/CVE-2023-34968_0007.patch=
+=C2=A0 | 49 ++<br>
+=C2=A0=C2=A0.../recipes-connectivity/samba/samba/CVE-2023-34968_0008.patch=
+=C2=A0 | 62 +++<br>
+=C2=A0=C2=A0.../recipes-connectivity/samba/samba/CVE-2023-34968_0009.patch=
+=C2=A0 | 465 <br>
++++++++++++++++++++<br>
+=C2=A0=C2=A0.../recipes-connectivity/samba/samba/CVE-2023-34968_0010.patch=
+=C2=A0 | 484 <br>
+++++++++++++++++++++<br>
+=C2=A0=C2=A0.../recipes-connectivity/samba/samba/CVE-2023-34968_0011.patch=
+=C2=A0 | 295 <br>
+++++++++++++<br>
+=C2=A0=C2=A0meta-networking/recipes-connectivity/samba/<a href=3D"http://sa=
+mba_4.14.14.bb" rel=3D"noreferrer" target=3D"_blank">samba_4.14.14.bb</a>=
+=C2=A0=C2=A0=C2=A0=C2=A0 | 16 +<br>
+=C2=A0=C2=A0.../open-vm-tools/open-vm-tools/CVE-2023-20867.patch=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 158 <br>
++++++++<br>
+=C2=A0=C2=A0.../recipes-support/open-vm-tools/<a href=3D"http://open-vm-too=
+ls_11.3.5.bb" rel=3D"noreferrer" target=3D"_blank">open-vm-tools_11.3.5.bb<=
+/a>=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 1 +<br>
+=C2=A0=C2=A0.../recipes-devtools/python/python3-gevent/CVE-2023-41419.patch=
+ | 673 <br>
+++++++++++++++++++++++++++++<br>
+=C2=A0=C2=A0meta-python/recipes-devtools/python/<a href=3D"http://python3-g=
+event_21.12.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-gevent_21.12=
+.0.bb</a>=C2=A0=C2=A0 | 2 +<br>
+=C2=A0=C2=A0.../recipes-httpd/nginx/files/0001-configure-libxslt-conf.patch=
+ | 39 ++<br>
+=C2=A0=C2=A0meta-webserver/recipes-httpd/nginx/nginx.inc=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 | 3 +<br>
+=C2=A0=C2=A028 files changed, 3316 insertions(+), 14 deletions(-)<br>
+=C2=A0=C2=A0rename meta-networking/recipes-connectivity/mbedtls/{<a href=3D=
+"http://mbedtls_2.28.2.bb" rel=3D"noreferrer" target=3D"_blank">mbedtls_2.2=
+8.2.bb</a> <br>
+=3D&gt; <a href=3D"http://mbedtls_2.28.5.bb" rel=3D"noreferrer" target=3D"_=
+blank">mbedtls_2.28.5.bb</a>} (91%)<br>
+=C2=A0=C2=A0create mode 100644 <br>
+meta-networking/recipes-connectivity/mosquitto/files/2894.patch<br>
+=C2=A0=C2=A0create mode 100644 <br>
+meta-networking/recipes-connectivity/mosquitto/files/2895.patch<br>
+=C2=A0=C2=A0rename <br>
+meta-networking/recipes-connectivity/mosquitto/{<a href=3D"http://mosquitto=
+_2.0.14.bb" rel=3D"noreferrer" target=3D"_blank">mosquitto_2.0.14.bb</a> =
+=3D&gt; <br>
+<a href=3D"http://mosquitto_2.0.18.bb" rel=3D"noreferrer" target=3D"_blank"=
+>mosquitto_2.0.18.bb</a>} (94%)<br>
+=C2=A0=C2=A0create mode 100644 <br>
+meta-networking/recipes-connectivity/samba/samba/CVE-2022-2127.patch<br>
+=C2=A0=C2=A0create mode 100644 <br>
+meta-networking/recipes-connectivity/samba/samba/CVE-2023-34966_0001.patch<=
+br>
+=C2=A0=C2=A0create mode 100644 <br>
+meta-networking/recipes-connectivity/samba/samba/CVE-2023-34966_0002.patch<=
+br>
+=C2=A0=C2=A0create mode 100644 <br>
+meta-networking/recipes-connectivity/samba/samba/CVE-2023-34967_0001.patch<=
+br>
+=C2=A0=C2=A0create mode 100644 <br>
+meta-networking/recipes-connectivity/samba/samba/CVE-2023-34967_0002.patch<=
+br>
+=C2=A0=C2=A0create mode 100644 <br>
+meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0001.patch<=
+br>
+=C2=A0=C2=A0create mode 100644 <br>
+meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0002.patch<=
+br>
+=C2=A0=C2=A0create mode 100644 <br>
+meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0003.patch<=
+br>
+=C2=A0=C2=A0create mode 100644 <br>
+meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0004.patch<=
+br>
+=C2=A0=C2=A0create mode 100644 <br>
+meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0005.patch<=
+br>
+=C2=A0=C2=A0create mode 100644 <br>
+meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0006.patch<=
+br>
+=C2=A0=C2=A0create mode 100644 <br>
+meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0007.patch<=
+br>
+=C2=A0=C2=A0create mode 100644 <br>
+meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0008.patch<=
+br>
+=C2=A0=C2=A0create mode 100644 <br>
+meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0009.patch<=
+br>
+=C2=A0=C2=A0create mode 100644 <br>
+meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0010.patch<=
+br>
+=C2=A0=C2=A0create mode 100644 <br>
+meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0011.patch<=
+br>
+=C2=A0=C2=A0create mode 100644 <br>
+meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2023-20867.=
+patch<br>
+=C2=A0=C2=A0create mode 100644 <br>
+meta-python/recipes-devtools/python/python3-gevent/CVE-2023-41419.patch<br>
+=C2=A0=C2=A0create mode 100644 <br>
+meta-webserver/recipes-httpd/nginx/files/0001-configure-libxslt-conf.patch<=
+br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#105865): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/105865" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/105865</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/102365349/361=
+7156" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/102365349/3617156</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:martin.jansa@gmail.com" =
+target=3D"_blank">martin.jansa@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div>
 
-Gianfranco Costamagna (3):
-       mosquitto: do not automatically depend on dlt-daemon, it's a 
-non-mandatory logging system
-       mosquitto: upgrade 2.0.15 -> 2.0.17
-       mosquitto: upgrade 2.0.17 -> 2.0.18
-
-Joe Slater (1):
-       nginx: add configure option
-
-Martin Jansa (1):
-       mosquitto: add missing Upstream-Status
-
-Meenali Gupta (1):
-       open-vm-tools: fix CVE-2023-20867
-
-Narpat Mali (1):
-       python3-gevent: fix CVE-2023-41419
-
-Polampalli, Archana (4):
-       samba: fix CVE-2023-34966
-       samba: fix CVE-2022-2127
-       samba:fix CVE-2023-34967
-       samba: fix CVE-2023-34968
-
-Wang Mingyu (1):
-       mosquitto: upgrade 2.0.14 -> 2.0.15
-
-Yi Zhao (1):
-       mbedtls: upgrade 2.28.2 -> 2.28.5
-
-  .../mbedtls/{mbedtls_2.28.2.bb => mbedtls_2.28.5.bb} |   7 +-
-  meta-networking/recipes-connectivity/mosquitto/files/2894.patch | 25 ++
-  meta-networking/recipes-connectivity/mosquitto/files/2895.patch | 27 ++
-  .../recipes-connectivity/mosquitto/files/mosquitto.init         | 20 +-
-  .../mosquitto/{mosquitto_2.0.14.bb => mosquitto_2.0.18.bb} |   6 +-
-  .../recipes-connectivity/samba/samba/CVE-2022-2127.patch        | 44 ++
-  .../recipes-connectivity/samba/samba/CVE-2023-34966_0001.patch  | 78 ++++
-  .../recipes-connectivity/samba/samba/CVE-2023-34966_0002.patch  | 140 
-++++++
-  .../recipes-connectivity/samba/samba/CVE-2023-34967_0001.patch  | 178 
-++++++++
-  .../recipes-connectivity/samba/samba/CVE-2023-34967_0002.patch  | 125 
-++++++
-  .../recipes-connectivity/samba/samba/CVE-2023-34968_0001.patch  | 104 
-+++++
-  .../recipes-connectivity/samba/samba/CVE-2023-34968_0002.patch  | 39 ++
-  .../recipes-connectivity/samba/samba/CVE-2023-34968_0003.patch  | 65 +++
-  .../recipes-connectivity/samba/samba/CVE-2023-34968_0004.patch  | 85 ++++
-  .../recipes-connectivity/samba/samba/CVE-2023-34968_0005.patch  | 83 ++++
-  .../recipes-connectivity/samba/samba/CVE-2023-34968_0006.patch  | 57 +++
-  .../recipes-connectivity/samba/samba/CVE-2023-34968_0007.patch  | 49 ++
-  .../recipes-connectivity/samba/samba/CVE-2023-34968_0008.patch  | 62 +++
-  .../recipes-connectivity/samba/samba/CVE-2023-34968_0009.patch  | 465 
-+++++++++++++++++++
-  .../recipes-connectivity/samba/samba/CVE-2023-34968_0010.patch  | 484 
-++++++++++++++++++++
-  .../recipes-connectivity/samba/samba/CVE-2023-34968_0011.patch  | 295 
-++++++++++++
-  meta-networking/recipes-connectivity/samba/samba_4.14.14.bb     | 16 +
-  .../open-vm-tools/open-vm-tools/CVE-2023-20867.patch            | 158 
-+++++++
-  .../recipes-support/open-vm-tools/open-vm-tools_11.3.5.bb       | 1 +
-  .../recipes-devtools/python/python3-gevent/CVE-2023-41419.patch | 673 
-++++++++++++++++++++++++++++
-  meta-python/recipes-devtools/python/python3-gevent_21.12.0.bb   | 2 +
-  .../recipes-httpd/nginx/files/0001-configure-libxslt-conf.patch | 39 ++
-  meta-webserver/recipes-httpd/nginx/nginx.inc                    | 3 +
-  28 files changed, 3316 insertions(+), 14 deletions(-)
-  rename meta-networking/recipes-connectivity/mbedtls/{mbedtls_2.28.2.bb 
-=> mbedtls_2.28.5.bb} (91%)
-  create mode 100644 
-meta-networking/recipes-connectivity/mosquitto/files/2894.patch
-  create mode 100644 
-meta-networking/recipes-connectivity/mosquitto/files/2895.patch
-  rename 
-meta-networking/recipes-connectivity/mosquitto/{mosquitto_2.0.14.bb => 
-mosquitto_2.0.18.bb} (94%)
-  create mode 100644 
-meta-networking/recipes-connectivity/samba/samba/CVE-2022-2127.patch
-  create mode 100644 
-meta-networking/recipes-connectivity/samba/samba/CVE-2023-34966_0001.patch
-  create mode 100644 
-meta-networking/recipes-connectivity/samba/samba/CVE-2023-34966_0002.patch
-  create mode 100644 
-meta-networking/recipes-connectivity/samba/samba/CVE-2023-34967_0001.patch
-  create mode 100644 
-meta-networking/recipes-connectivity/samba/samba/CVE-2023-34967_0002.patch
-  create mode 100644 
-meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0001.patch
-  create mode 100644 
-meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0002.patch
-  create mode 100644 
-meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0003.patch
-  create mode 100644 
-meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0004.patch
-  create mode 100644 
-meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0005.patch
-  create mode 100644 
-meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0006.patch
-  create mode 100644 
-meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0007.patch
-  create mode 100644 
-meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0008.patch
-  create mode 100644 
-meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0009.patch
-  create mode 100644 
-meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0010.patch
-  create mode 100644 
-meta-networking/recipes-connectivity/samba/samba/CVE-2023-34968_0011.patch
-  create mode 100644 
-meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2023-20867.patch
-  create mode 100644 
-meta-python/recipes-devtools/python/python3-gevent/CVE-2023-41419.patch
-  create mode 100644 
-meta-webserver/recipes-httpd/nginx/files/0001-configure-libxslt-conf.patch
-
+--0000000000004912aa060940c0c6--
 
