@@ -2,49 +2,49 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9EAD5C07E98
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 318FEC0755A
 	for <webhook@archiver.kernel.org>; Fri,  3 Nov 2023 19:52:50 +0000 (UTC)
-Received: from a27-23.smtp-out.us-west-2.amazonses.com (a27-23.smtp-out.us-west-2.amazonses.com [54.240.27.23])
- by mx.groups.io with SMTP id smtpd.web10.63867.1699041165979797613
+Received: from a27-193.smtp-out.us-west-2.amazonses.com (a27-193.smtp-out.us-west-2.amazonses.com [54.240.27.193])
+ by mx.groups.io with SMTP id smtpd.web10.63872.1699041166191524446
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 03 Nov 2023 12:52:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=VObJcLnU;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=fVZkVO1H;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.23, mailfrom: 0101018b96bebfa7-652c4899-7c0a-4aa3-99fe-f375fe668a7e-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=WLJFBxaV;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=L46FCtzQ;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.193, mailfrom: 0101018b96bec020-0eebfbbf-683e-458b-9ccd-f72887f73f84-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
 	t=1699041165;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=rCx5ecJSCYBJA4+JI9z+2VorTO1glRIt8gjK0/4oang=;
-	b=VObJcLnUi3vx2g/a3o26tsvK5vSqsbJhPkjW1qqyrmh3w96WaYX3JlumLkgoBKwH
-	gYpdkS3j4ASlviDolZgqIN0rCUifWMDDW+dyxelC+6yzMqlV6u8ll9ZknKNi9uwOQi1
-	XdTVvqNbo5SPgO7JOd4pppl3n8JR20ggGjmIO2BQ=
+	bh=0DpbrpVLzCVBzHBbkJ+J+kXGVQYiBnxvW1Af8Ge+H8U=;
+	b=WLJFBxaVQMriLwCRbOIrX9VaVTPlYWYl5YB9D0vf9pPAvl67LGjcHuVbTbcYhOGi
+	dZOZS0XYUPfZbmBllfiUDxXEpIUGvyqQ2iMRs8ccHOLgOJTfz2r/g5T7CgiYo4lTtO2
+	URsnC7hwjdBr/Wfglb7Thac+zYtRI7xcM7YYhsQw=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699041165;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=rCx5ecJSCYBJA4+JI9z+2VorTO1glRIt8gjK0/4oang=;
-	b=fVZkVO1HUmaa6H/Sscal/7J4tqz4a5FbzJIJJVsD4URQU+ZNfgaPZwUHB0tre7Rq
-	oEb3J0PDp2IIEam+YOujcEBz6etUvlSIZinRbd+PlGsUrs2cZ2UrCZaLSnAuBiMn0EK
-	eQtimyLmbaUPZFmzzJIazKJXfOldUagNtThC755U=
-Content-Type: multipart/mixed; boundary="===============7857508410211470568=="
+	bh=0DpbrpVLzCVBzHBbkJ+J+kXGVQYiBnxvW1Af8Ge+H8U=;
+	b=L46FCtzQ0ixvfJqim9Q+LhuS8wim6vlZajrrsK1D4bYB+w6p8p9t20QOtRyX03qr
+	gMRTquTmA+d0gqdEW1LD0trZrfyEJgd2P6XfWB0bQoxJdeIm56/0ByKu7gLmlQyQZYh
+	/4KbCIaMHVZq69eCzzG3muLr9ADzHXUhN2EZdSb8=
+Content-Type: multipart/mixed; boundary="===============5656645123332067686=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] clinfo: upgrading to 20170207 FAILED
-Message-ID: <0101018b96bebfa7-652c4899-7c0a-4aa3-99fe-f375fe668a7e-000000@us-west-2.amazonses.com>
+Subject: [AUH] cpuid: upgrading to 20230614-1 FAILED
+Message-ID: <0101018b96bec020-0eebfbbf-683e-458b-9ccd-f72887f73f84-000000@us-west-2.amazonses.com>
 Date: Fri, 3 Nov 2023 19:52:45 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
-X-SES-Outgoing: 2023.11.03-54.240.27.23
+X-SES-Outgoing: 2023.11.03-54.240.27.193
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 19:52:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105891
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105899
 
---===============7857508410211470568==
+--===============5656645123332067686==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,11 +52,11 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *clinfo* to *20170207* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *cpuid* to *20230614-1* has Failed (devtool error).
 
 Detailed error information:
 
-The following devtool command failed:  upgrade clinfo -V 20170207 -S 43851fd67aa67cdb8bf23969d05ecd1a83572c38
+The following devtool command failed:  upgrade cpuid -V 20230614-1
 NOTE: Reconnecting to bitbake server...
 Loading cache...done.
 Loaded 4910 entries from dependency cache.
@@ -84,7 +84,7 @@ meta-gnome
 meta-xfce            
 meta-filesystems     
 meta-initramfs       
-meta-webserver       = "tmp-auh-upgrades:dbf35acbc2e8cabdd21b19195d64d6fc9fb0078c"
+meta-webserver       = "tmp-auh-upgrades:9a1a717062d2072ede68804b88b57c01aeae8250"
 workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
 
 Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
@@ -94,12 +94,58 @@ NOTE: Executing Tasks
 NOTE: Tasks Summary: Attempted 103 tasks of which 100 didn't need to be rerun and all succeeded.
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 3 seconds
+Loading cache...done.
+Loaded 4910 entries from dependency cache.
+Parsing recipes...done.
+Parsing of 3056 .bb files complete (3054 cached, 2 parsed). 4887 targets, 92 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.6.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "x86_64-poky-linux"
+MACHINE              = "qemux86-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.3+snapshot-e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+TUNE_FEATURES        = "m64 core2"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+meta-oe              
+meta-python          
+meta-perl            
+meta-networking      
+meta-multimedia      
+meta-gnome           
+meta-xfce            
+meta-filesystems     
+meta-initramfs       
+meta-webserver       = "tmp-auh-upgrades:9a1a717062d2072ede68804b88b57c01aeae8250"
+workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+
+Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
+done.
+Sstate summary: Wanted 1 Local 0 Mirrors 0 Missed 1 Current 0 (0% match, 0% complete)
+NOTE: Executing Tasks
+WARNING: Failed to fetch URL http://www.etallen.com/cpuid/cpuid-20230614-1.src.tar.gz, attempting MIRRORS if available
+NOTE: Tasks Summary: Attempted 2 tasks of which 0 didn't need to be rerun and 1 failed.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 3 seconds
+NOTE: The errors for this build are stored in /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231103115802.txt
+You can send the errors to a reports server by running:
+  send-error-report /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231103115802.txt [-s server]
+NOTE: The contents of these logs will be posted in public if you use the above command with the default server. Please ensure you remove any identifying or proprietary information when prompted before sending.
 
 INFO: Extracting current version source...
 INFO: Extracting upgraded version source...
-ERROR: Revision 43851fd67aa67cdb8bf23969d05ecd1a83572c38 was found on multiple branches: 
-  
-Please provide the correct branch in the devtool command with "--srcbranch" or "-B" option.
+INFO: Fetching http://www.etallen.com/cpuid/cpuid-20230614-1.src.tar.gz...
+ERROR: Fetcher failure: Fetch command export PSEUDO_DISABLED=1; export SSL_CERT_FILE="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export GIT_SSL_CAINFO="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export ftp_proxy="http://proxy.yocto.io:5187/"; export FTP_PROXY="http://proxy.yocto.io:5187/"; export PATH="/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/sysroots-uninative/x86_64-linux/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-n975_n8g/work/recipe-sysroot-native/usr/bin/x86_64-poky-linux:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-n975_n8g/work/recipe-sysroot/usr/bin/crossscripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-n975_n8g/work/recipe-sysroot-native/usr/sbin:/hom
+ e/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-n975_n8g/work/recipe-sysroot-native/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-n975_n8g/work/recipe-sysroot-native/sbin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-n975_n8g/work/recipe-sysroot-native/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/bitbake/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools"; export HOME="/home/pokybuild"; /usr/bin/env wget -t 2 -T 30 --passive-ftp -O /srv/autobuilder/autobuilder.yocto.io/current_sources/cpuid-20230614-1.src.tar.gz.tmp -P /srv/autobuilder/autobuilder.yocto.io/current_sources 'http://www.etallen.com/cpuid/cpuid-20230614-1.src.tar.gz' --progress=dot -v failed with exit code 8, no output
+ERROR: Bitbake Fetcher Error: FetchError('Unable to fetch URL from any source.', 'http://www.etallen.com/cpuid/cpuid-20230614-1.src.tar.gz')
+ERROR: Logfile of failure stored in: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-n975_n8g/work/temp/log.do_fetch.4098979
+ERROR: Failed to fetch URL http://www.etallen.com/cpuid/cpuid-20230614-1.src.tar.gz
 
 
 Please review the attached files for further information and build/update failures.
@@ -107,5 +153,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============7857508410211470568==--
+--===============5656645123332067686==--
 
