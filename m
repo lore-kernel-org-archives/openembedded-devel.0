@@ -1,103 +1,181 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <bruce.ashfield@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B1DCCC4332F
-	for <webhook@archiver.kernel.org>; Fri,  3 Nov 2023 13:25:05 +0000 (UTC)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.web10.51747.1699017899188668897
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CCCC6C4332F
+	for <webhook@archiver.kernel.org>; Fri,  3 Nov 2023 13:28:45 +0000 (UTC)
+Received: from mail-io1-f41.google.com (mail-io1-f41.google.com [209.85.166.41])
+ by mx.groups.io with SMTP id smtpd.web10.51814.1699018123489548270
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Nov 2023 06:24:59 -0700
+ Fri, 03 Nov 2023 06:28:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=e6b+BOZ2;
- spf=pass (domain: konsulko.com, ip: 209.85.128.42, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-40906fc54fdso16098375e9.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 06:24:58 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=g0RuZ+eD;
+ spf=pass (domain: gmail.com, ip: 209.85.166.41, mailfrom: bruce.ashfield@gmail.com)
+Received: by mail-io1-f41.google.com with SMTP id ca18e2360f4ac-7a94de8c70cso69363339f.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 06:28:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1699017897; x=1699622697; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=YD9ISSW6FPlw8KcS6prPcfJ1fop/JcrRx9uLOpvBdsc=;
-        b=e6b+BOZ2eGs0eSOQDRKiPCo4vMkVTOIGkk0Gw8hWj9vefVgaXlWta3A8S//MWnxG9B
-         Lq4wpmqQKxcQmT2g/rxCy8X+yx/Pc4sbQhH1BshQ5JE9Vs2vbhJ9wOI+mh28jZRRN/o9
-         3HnvlUcoxtkXNL1o4V0JwAqoa/viwEY+oPVz4=
+        d=gmail.com; s=20230601; t=1699018123; x=1699622923; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=yZJAxcz/a4iWitfCIk2EGrhMl1pxiS/3frK38aVkdNU=;
+        b=g0RuZ+eDY5MwOBAQw3OvCbhVlvk3owuAPXXbgWZ9ooC3ILeBQe22SZ7Stmae6DSmP9
+         dJK7JptTa9V2TEGSYt8j2VINYE4CoHe9ohi4Lcf4N0Ir+l2czHqV8K6jg6coF4hj7tpo
+         KJFmj3Hq4UsHQf832M3K1hLCxQsDYSWq4V/dYRg9akKK4LAHeOVlmTVtlHEQ3pbvapLh
+         gTcETSzn8NGzMRYTxJQeTmkASddVBd5+Zncos/as3t4YIeqnuidn87bmhXszc0XTV4lr
+         IwlEoTZIlxu1p5y0zoUhoOXMOX/M9C407+lhy1WexinjKXNVqv70xMctXFBuytnWGQy5
+         dhMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699017897; x=1699622697;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=YD9ISSW6FPlw8KcS6prPcfJ1fop/JcrRx9uLOpvBdsc=;
-        b=fPREzg9Oo/WPFgdUDUvcsODjpp1ZaU9IvqPcXGrbLNQ2yR2cdnypXaD9/g6OW1Bxod
-         Lhrbc+kzy0fF0+G3iKxBHzr1TYz0Gy7jelOO4QByAjxlzDi8ihRiBZOQYu+c2hmqVLNF
-         VZDqo2iCmuXva2xn6aNvplvxwP9trTK0s2VoVkqze+PhmfR7Js+fCcnUqicgcUjtkbtW
-         mnYfwEj76n8t1ANJf48xIE46Lwhe2QwfaqLs6b4imQubJoauyJ86fzPQ2yai0l1piv/t
-         N/uF0t4l+Lb9YD2Fxrohb/0C0adfbg0Bm0JRJPHZGIMJZ1bHYiDgLxsHk5gb79em4ep/
-         RSDg==
-X-Gm-Message-State: AOJu0YyWYS8XwyijNYqQmjD0vsdcMTEIFnv0POsluVBxb7oc+P2TSXc7
-	pz96Yq3krUd+gQTPowi5FAXtfDAYUbvVCgAGKoM=
-X-Google-Smtp-Source: AGHT+IHqSYH6mccz42uOyuKJb3rmnjXISIiYTXXOrUV7F6B4v4Ss78Cb9b0fSOJeC3or80+5Ekf1YQ==
-X-Received: by 2002:adf:d1c9:0:b0:32d:8094:f4c8 with SMTP id b9-20020adfd1c9000000b0032d8094f4c8mr18047763wrd.19.1699017897181;
-        Fri, 03 Nov 2023 06:24:57 -0700 (PDT)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id s6-20020a5d4ec6000000b0032f79e55eb8sm1869754wrv.16.2023.11.03.06.24.56
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 03 Nov 2023 06:24:56 -0700 (PDT)
-From: Leon Anavi <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/2] python3-screeninfo: add recipe
-Date: Fri,  3 Nov 2023 15:24:52 +0200
-Message-Id: <20231103132453.3853904-1-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.39.2
+        d=1e100.net; s=20230601; t=1699018123; x=1699622923;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=yZJAxcz/a4iWitfCIk2EGrhMl1pxiS/3frK38aVkdNU=;
+        b=YyKyf9HnQ40zIxWHAcrFckuB+4EVYKzV1tBiqGhoq3P+1uwbXccASCEZ0xmtIAiIbg
+         SfO6vTSXUCRI62Wh/7vz5sLz6rv4Q6TLM8xeXwEevsj67VAwI+3HKLxoaTY8IRR0OZzv
+         LsjVuYKBCvQHZRtiGS9/VU9Q842Z0rLF5BbZyQD7qHLJIQGvuGTDqMs3CtFhKx8vspGo
+         uWyPnPWlR2mz8/hKGKwHbTwowxJYWjidXAmruq2WzREgCWJEqn5V8sxeIq/oN8cESsPd
+         xJCtxbTEPMf3PAiAz/g/HDkat5H7s0cckLlVLVL3CH2n2NoOWUWw9dk+J7vBDqudkzgR
+         461g==
+X-Gm-Message-State: AOJu0Yw/aVdovgNX2Y/PvCzfkfoqyG5IDwWY5m9KlC0OXTFvdIQ++HwB
+	5A9hVD5pFwfcNbviDHzKw6sMFxKXnD/PuHx+nsw=
+X-Google-Smtp-Source: AGHT+IG+pzUqaSLUBk2mxVvZ2cWpUJ7/FZwV96KddvgMH8lfTAuatsJGV7f8XNZ919Sst5WT5fz70jn9PRTQwKPkpoQ=
+X-Received: by 2002:a05:6602:1491:b0:7a9:5e03:a785 with SMTP id
+ a17-20020a056602149100b007a95e03a785mr25775233iow.15.1699018121169; Fri, 03
+ Nov 2023 06:28:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <d9ff922b-383a-4cec-b206-84d86987f4f8@navimatix.de>
+ <CANPvuRkMCLPXo9FWwU+gDn4=O51=7OGWMj=Z47NGEv6F-8uZTw@mail.gmail.com>
+ <CADkTA4N-aH1jf3SAVykTQ+G+t-baWNEOBjH5O56u25QJmmqw5w@mail.gmail.com>
+ <CAMKF1srD7oyOwy8-ycm=wqqnpC8fGT858pManMLS6QCWL9tXXA@mail.gmail.com>
+ <CANPvuRmrKmZC65RqFkHV2-wTZnMmLwH0f_cQprmB3Boc5w7sNg@mail.gmail.com>
+ <c89d8ff8-d3b1-40b7-bf07-3d8928c0fa48@navimatix.de> <CADkTA4NK8=9su8PUSiLETUpe725fezrHqacneiKkjDz4iDP6Lw@mail.gmail.com>
+ <034542e5-9942-42b1-b57a-49c007d7e058@navimatix.de> <CADkTA4MKV9h6ttdFEtKdiQ7jP8LfPbbWk8agqK9g0goExWZNmw@mail.gmail.com>
+ <1792E56CCC9D9F4D.20486@lists.openembedded.org> <ad3674f6-60e7-4b35-9c3c-4814c42cac4d@navimatix.de>
+In-Reply-To: <ad3674f6-60e7-4b35-9c3c-4814c42cac4d@navimatix.de>
+From: Bruce Ashfield <bruce.ashfield@gmail.com>
+Date: Fri, 3 Nov 2023 09:28:29 -0400
+Message-ID: <CADkTA4Nb=59ceks1WsbUG5g-zqsJtb1RVG-geUDqA0XzGCcShw@mail.gmail.com>
+Subject: Re: [oe] openssl-native.rm_work runs before kernel-module.install ->
+ no signature
+To: =?UTF-8?B?SsO2cmcgU29tbWVy?= <joerg.sommer@navimatix.de>
+Cc: Jose Quaresma <quaresma.jose@gmail.com>, Khem Raj <raj.khem@gmail.com>, 
+	openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 13:25:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105861
+ <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 13:28:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105863
 
-Add screeninfo, fetch location and size of physical screens.
-Versions 0.8.1 and 0.8.0 changelog:
+On Fri, Nov 3, 2023 at 3:49=E2=80=AFAM J=C3=B6rg Sommer <joerg.sommer@navim=
+atix.de> wrote:
+>
+> On 30.10.23 14:24, J=C3=B6rg Sommer via lists.openembedded.org wrote:
+> > On 30.10.23 13:29, Bruce Ashfield wrote:
+> >> On Mon, Oct 30, 2023 at 4:40=E2=80=AFAM J=C3=B6rg Sommer <joerg.sommer=
+@navimatix.de> wrote:
+> >>> On 26.10.23 17:25, Bruce Ashfield wrote:
+> >
+> >>>> I ran into issues with some kernel versions, but we may have moved o=
+n
+> >>>> far enough that it is no longer an issue.
+> >>>
+> >>> Do you remember what kind of issues these were? Possibly I can check =
+if
+> >>> they still exist.
+> >>
+> >> It was kernels older than 5.10 failing to take the r-path changes and
+> >> hence failing when doing the signing step.
+> >
+> > This could be solved by setting LD_LIBRARY_PATH. Would this be okay?
+> >
+> > ```
+> > diff --git i/meta/classes/module.bbclass w/meta/classes/module.bbclass
+> > index a09ec3ed1e..38e1c95216 100644
+> > --- i/meta/classes/module.bbclass
+> > +++ w/meta/classes/module.bbclass
+> > @@ -51,6 +51,7 @@ module_do_install() {
+> >                    INSTALL_FW_PATH=3D"${D}${nonarch_base_libdir}/firmwa=
+re" \
+> >                    CC=3D"${KERNEL_CC}" LD=3D"${KERNEL_LD}" \
+> >                    O=3D${STAGING_KERNEL_BUILDDIR} \
+> > +                  LD_LIBRARY_PATH=3D"/build/tmp/sysroots-components/x8=
+6_64/openssl-native/usr/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}" \
+> >                    ${MODULES_INSTALL_TARGET}
+> >
+> >         if [ ! -e "${B}/${MODULES_MODULE_SYMVERS_LOCATION}/Module.symve=
+rs" ] ; then
+> > ```
+>
+> Hi Bruce,
+>
+> I would like to here your opinion to this issue, because you've provided
+> the most to the discussion. I would like to submit a patch to fix
+> problem; either the BUILD_LDFLAGS one or the LD_LIBRARY_PATH.
+>
 
-- Added typing information
-- Started tracking changes
-- Switched to poetry
-- Added ignoring of enumerators that work, but return no valid
-  monitors
-- Added ScreenInfoError to list of top-level symbols
+Thanks for the ping! gmail annoyingly doesn't show me anything
+different when I'm
+actually on the to: of an email .. I need to enhance my filters to at
+least star the
+email, so I'll notice them faster.
 
-This work was sponsored by GOVCERT.LU.
+But I digress.
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- .../python/python3-screeninfo_0.8.1.bb           | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-screeninfo_0.8.1.bb
+The proposal is going in the right direction.
 
-diff --git a/meta-python/recipes-devtools/python/python3-screeninfo_0.8.1.bb b/meta-python/recipes-devtools/python/python3-screeninfo_0.8.1.bb
-new file mode 100644
-index 000000000..0fb3f3a22
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-screeninfo_0.8.1.bb
-@@ -0,0 +1,16 @@
-+DESCRIPTION = "Fetch location and size of physical screens."
-+HOMEPAGE = "https://github.com/rr-/screeninfo"
-+SECTION = "devel/python"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=a23813181e06852d377bc25ae5563a97"
-+
-+PYPI_PACKAGE = "screeninfo"
-+
-+SRC_URI[sha256sum] = "9983076bcc7e34402a1a9e4d7dabf3729411fd2abb3f3b4be7eba73519cd2ed1"
-+
-+inherit pypi setuptools3
-+
-+RDEPENDS:${PN} += "\
-+    ${PYTHON_PN}-core \
-+    ${PYTHON_PN}-profile \
-+"
--- 
-2.39.2
+The problem is that we really don't want any references into the
+recipe sysroots,
+whether they survive rm_work or not. Since we are installing the output of =
+the
+mods to the shared location, that is where all their references and require=
+ments
+are supposed to be contained.
 
+The idea with something using library paths, etc, was that we should arrang=
+e
+for the dependencies to also be installed into the STAGING_KERNEL_BUILDDIR
+structure and adjust the make_mod_scripts appropriately to find them there
+(either at build or dynamically at runtime).
+
+There's also an existing libelf (and zlib) dependency that popped out when =
+I
+was working through the static linking issues. But that is because I
+had to statically
+link everything built by the scripts, not just the sign-tool (and so
+far, those other
+utilities have escaped causing us problems, but are probably just waiting t=
+o
+appear :).
+
+If we were to adjust the LD_LIBRARY_PATH, the values should be programmatic=
+ally
+pulled out via pkg-config versus something quite as explicit as in your wor=
+k in
+progress patch (alternatively IIRC there are utilities that adjust rpath an=
+d
+dynamic linking in use in other parts of the build, we could possibly lever=
+age
+them).
+
+Bruce
+
+> Kind regards
+>
+> J=C3=B6rg Sommer
+> --
+> Navimatix GmbH
+> Tatzendpromenade 2
+> D-07745 Jena
+> Gesch=C3=A4ftsf=C3=BChrer: Steffen Sp=C3=A4the, Jan Rommeley
+> Registergericht: Amtsgericht Jena, HRB 501480
+
+
+
+--=20
+- Thou shalt not follow the NULL pointer, for chaos and madness await
+thee at its end
+- "Use the force Harry" - Gandalf, Star Trek II
 
