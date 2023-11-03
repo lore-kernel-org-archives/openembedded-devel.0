@@ -2,66 +2,63 @@ Return-Path: <festevam@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 98835C41535
-	for <webhook@archiver.kernel.org>; Fri,  3 Nov 2023 20:10:59 +0000 (UTC)
-Received: from mail-yb1-f182.google.com (mail-yb1-f182.google.com [209.85.219.182])
- by mx.groups.io with SMTP id smtpd.web10.64287.1699042251557199728
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 752ACC4167D
+	for <webhook@archiver.kernel.org>; Fri,  3 Nov 2023 20:11:39 +0000 (UTC)
+Received: from mail-yw1-f173.google.com (mail-yw1-f173.google.com [209.85.128.173])
+ by mx.groups.io with SMTP id smtpd.web10.64313.1699042291561378707
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Nov 2023 13:10:51 -0700
+ Fri, 03 Nov 2023 13:11:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZXBQc0WI;
- spf=pass (domain: gmail.com, ip: 209.85.219.182, mailfrom: festevam@gmail.com)
-Received: by mail-yb1-f182.google.com with SMTP id 3f1490d57ef6-d9fdc712b8fso597977276.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 13:10:51 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=GVoQgEY9;
+ spf=pass (domain: gmail.com, ip: 209.85.128.173, mailfrom: festevam@gmail.com)
+Received: by mail-yw1-f173.google.com with SMTP id 00721157ae682-5afb6dda6a3so4870447b3.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 13:11:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699042250; x=1699647050; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=rM9g164omL8jbJt6sW92CccCg5kuPq6Ldz5U77eMtIY=;
-        b=ZXBQc0WIPlu0dX3AdZhQK4/XrVb9X5fHuh428Kuhu2+uPvVzJ9/0YvTr9nvDgwokHs
-         irAI5v6qyXfCuiiVjHylb2eQk4Mb7Xn2GFDfYSsAfVVWhasUYjsg8fiOWnJFfaLCOLfN
-         W3eUZesXUcsd9JX6qkTdFpiUdRyX/3oqiW/FlMk4whWbixpEKAzdgSQP7Ekawz1Se3Dp
-         vNGWRN/F5G5DTso7Tg/kloc7vlw5KTwTFzEWIBQfPq8T7xMdIwOux501WRxkM/Ks3qrS
-         GpSISAiUP3czsdFhxaNR1AcqEjM+6u6xuaOkvqyNg1ddrxKORxAp1YmfyLlmCywOkygA
-         lAOg==
+        d=gmail.com; s=20230601; t=1699042290; x=1699647090; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=7evKIfBspp8N7EMTfBaDLcfJVTAJNArAvKisHXgkwYU=;
+        b=GVoQgEY9j9T9mgtirL+vEYfQot/llkdyXD7g7cox1KywgbK4XsWKrDyDLq7yz+tnCK
+         mGwRVkV3+zQkAZMvZjaEPw2uqMFwY7XaJx5fukM2qGnBc2Et3DUL4vECQ6IZ+uTOoGUL
+         sKYf3lkcer5mh1pPKZvekuJFhf74u6D9UkoNwGHFtGzsrbliViHP9nUwWrsS+1Hou4pH
+         ojqhpkv6QV5W9gQp8vZmiuB7Z7bstgd62v448prd87WU3MjSKeUi0u6+lR5p8YkEMP5N
+         ctJ99fWVgBHezbDUscwwTP4owjoS9gUGjGZcl5O91fSR44US4XxKog7lq8liVQkYgQ1O
+         Op4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699042250; x=1699647050;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=rM9g164omL8jbJt6sW92CccCg5kuPq6Ldz5U77eMtIY=;
-        b=AKVNLP8LkQTlZlC0RalZYtSQoz8OyGCneFsqdzi6HIaewC2cvGyaIsSMduYftlT6cq
-         ZHWrs6+qZW96/68VfX+u1ovmq+fxnqBDi5zt9YdjyfB2xEo4uk2KrAs8R0bvz6Qlr3vL
-         aJqLqwACGPBvKBGD4zQmWf3M7dcx+t6baXcz8aiMVIKoCJaNihoLo+mLu83FgyH8Tvoh
-         ieDB5soMlJo60XQETs3MXyWbWZu1/rVxnYJsgsJjXFDUbqZRzYxrtTyRGHYDEcKn/so9
-         83ampbjYdQ1XFJh4PiW58KkpOqu3JhLLU5AZwEWMQlfTie7s4pnAQAUZR4FFlddfdhg4
-         2aIA==
-X-Gm-Message-State: AOJu0YzUTKE6xn13M1O+RZSlhbSLJq+LLzUNlOk5m6MdscofxteYv2aL
-	37TwGbLPsd/bU5kH4d7M9MTqZzEmkZY=
-X-Google-Smtp-Source: AGHT+IFsuPi7QeZ6BVTLg/CEiGpIOF6kGIh+7x1pN5y6QPE6P4xYuDkd3Tow4Ft6YqmTgTNak9/y0A==
-X-Received: by 2002:a25:df91:0:b0:da0:c9a4:53a9 with SMTP id w139-20020a25df91000000b00da0c9a453a9mr18347276ybg.0.1699042250147;
-        Fri, 03 Nov 2023 13:10:50 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1699042290; x=1699647090;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=7evKIfBspp8N7EMTfBaDLcfJVTAJNArAvKisHXgkwYU=;
+        b=TwvHDb2JwXP9nP2g9782+G0J9OtD6UzCeyI0GH1Fy9JAEfnELQSwAeN6SB1NT6UKem
+         LPb5ZMrwn6xLGe8myB12PotJTtYqKp2Elbv1BOjpPzxFORwSiTRl2EXHfjsrMTYQhZUB
+         OInCvSFL/WXd96M1zBb7nfUQx57SDkSY81HrKhx4wGWFcQdEl0WYWgOmEchAMt8zcb4N
+         21rC4i5U+ydtH4hJLDvEQ6U00DpRPMCiY3wy6TZLdmV0NavLUs+Dk6HTtB6UnhMjw00t
+         k5YmKkzjfnhbtuGr6u9Qqak2kfCBT9pvhdpm+fQWSWWJekLEdxvrAEHCmA2M98R3PaEl
+         jqgw==
+X-Gm-Message-State: AOJu0Yw1pZ+cRkpezd/tz0kDXP+4/PBiXHcYdyyMI0g2jpvh8+AggWZQ
+	nnHQBoAnKb+sxzvwQaiwjtl2Xq2tFMI=
+X-Google-Smtp-Source: AGHT+IH2EoD4lZul9PlJkU+SOqDm4MbFm1QrE648Y8QR27vox7ziUBqrEfqZ6mFmnOqLMn+AtQYS4Q==
+X-Received: by 2002:a05:690c:2f86:b0:5b3:2e6a:ec63 with SMTP id ew6-20020a05690c2f8600b005b32e6aec63mr8446752ywb.1.1699042290403;
+        Fri, 03 Nov 2023 13:11:30 -0700 (PDT)
 Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:fe70:4f05:3ab8:f73c])
-        by smtp.gmail.com with ESMTPSA id a18-20020a25ae12000000b00d9cd730e4d0sm1213389ybj.26.2023.11.03.13.10.48
+        by smtp.gmail.com with ESMTPSA id c124-20020a814e82000000b0059b50f126fbsm1339848ywb.114.2023.11.03.13.11.29
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 03 Nov 2023 13:10:49 -0700 (PDT)
+        Fri, 03 Nov 2023 13:11:29 -0700 (PDT)
 From: Fabio Estevam <festevam@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Fabio Estevam <festevam@denx.de>
-Subject: [PATCH 2/3] multipath-tools: Use https for github
-Date: Fri,  3 Nov 2023 17:10:34 -0300
-Message-Id: <20231103201035.14120-2-festevam@gmail.com>
+Subject: [PATCH 1/3] openocd: Use https for github
+Date: Fri,  3 Nov 2023 17:11:22 -0300
+Message-Id: <20231103201124.14216-1-festevam@gmail.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231103201035.14120-1-festevam@gmail.com>
-References: <20231103201035.14120-1-festevam@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 20:10:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106088
+ <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 20:11:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106090
 
 From: Fabio Estevam <festevam@denx.de>
 
@@ -72,22 +69,22 @@ Change it accordingly.
 
 Signed-off-by: Fabio Estevam <festevam@denx.de>
 ---
- .../recipes-support/multipath-tools/multipath-tools_0.9.3.bb    | 2 +-
+ meta-oe/recipes-devtools/openocd/openocd_git.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.9.3.bb b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.9.3.bb
-index ae4b3b9bf..a7a9019e3 100644
---- a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.9.3.bb
-+++ b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.9.3.bb
-@@ -29,7 +29,7 @@ DEPENDS = "libdevmapper \
+diff --git a/meta-oe/recipes-devtools/openocd/openocd_git.bb b/meta-oe/recipes-devtools/openocd/openocd_git.bb
+index d30d9c346..19ef98738 100644
+--- a/meta-oe/recipes-devtools/openocd/openocd_git.bb
++++ b/meta-oe/recipes-devtools/openocd/openocd_git.bb
+@@ -7,7 +7,7 @@ RDEPENDS:${PN} = "libusb1"
+ SRC_URI = " \
+     git://repo.or.cz/openocd.git;protocol=http;name=openocd;branch=master \
+     git://repo.or.cz/r/git2cl.git;protocol=http;destsuffix=tools/git2cl;name=git2cl;branch=master \
+-    git://github.com/msteveb/jimtcl.git;protocol=http;destsuffix=git/jimtcl;name=jimtcl;branch=master \
++    git://github.com/msteveb/jimtcl.git;protocol=https;destsuffix=git/jimtcl;name=jimtcl;branch=master \
+     git://repo.or.cz/r/libjaylink.git;protocol=http;destsuffix=git/src/jtag/drivers/libjaylink;name=libjaylink;branch=master \
+ "
  
- LICENSE = "GPL-2.0-only"
- 
--SRC_URI = "git://github.com/opensvc/multipath-tools.git;protocol=http;branch=master \
-+SRC_URI = "git://github.com/opensvc/multipath-tools.git;protocol=https;branch=master \
-            file://multipathd.oe \
-            file://multipath.conf.example \
-            file://0021-RH-fixup-udev-rules-for-redhat.patch \
 -- 
 2.34.1
 
