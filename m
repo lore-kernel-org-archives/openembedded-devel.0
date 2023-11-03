@@ -2,49 +2,49 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3FF19C07CB1
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F349C07D59
 	for <webhook@archiver.kernel.org>; Fri,  3 Nov 2023 19:52:50 +0000 (UTC)
-Received: from a27-31.smtp-out.us-west-2.amazonses.com (a27-31.smtp-out.us-west-2.amazonses.com [54.240.27.31])
- by mx.groups.io with SMTP id smtpd.web11.62977.1699041166149435499
+Received: from a27-30.smtp-out.us-west-2.amazonses.com (a27-30.smtp-out.us-west-2.amazonses.com [54.240.27.30])
+ by mx.groups.io with SMTP id smtpd.web10.63870.1699041166116860266
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 03 Nov 2023 12:52:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=YHXfJjwd;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=DSHahwf0;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.31, mailfrom: 0101018b96bec000-39f8f48c-3a7a-4eb1-a83e-1d13af273cbc-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=Tojiivbm;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=XEhHqBFC;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.30, mailfrom: 0101018b96bec0b3-bf931f92-1a5c-4a15-a736-201f51abc8e3-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
 	t=1699041165;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=RNBqXpA7cg9/b+zp8viHaklye7TrDVmveGb8UuMFGDw=;
-	b=YHXfJjwdkLdDi1u822ndyaa56E23H65k9mebEHcXkuoez/FHC/5E2ri5gViWp4E5
-	ieybgL7HiZz+g2q4gDJ4eLFM47fc/PVV4D1UM0mDqmazHDZd/YtvYhKHpOuyKSQYdLH
-	ohraLQK4OXGBrzPQhbGyqGuduVe573OmQ/ylyQh8=
+	bh=xEJLyhMiv5dt5YeeIW2y2zDEJpCtlyrGgglzb4FG+4M=;
+	b=TojiivbmqXueQgzOMcdZ2UX+RL2Gb6AZqI1US4V0OqHHV/nLQ4jP3nwAAqZu622N
+	uij2R6wXdlRX+lGajCmIXVN9v9g+Ed0N/Y+OS1Zc0kldeMPmHhXcgm5WlErD+Ule6WD
+	z3+YpSiiHBsOiY5FVuFeOkPW/Kh6Z1BW785i8V9o=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699041165;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=RNBqXpA7cg9/b+zp8viHaklye7TrDVmveGb8UuMFGDw=;
-	b=DSHahwf0Tn2D6f1/ddgvh99+0pCP/UvXwegcl8pHWIw3D6CxM9Jv76ipCheKlLH6
-	/ltoAG3ylyCjSZaGLmqdxsT9w/qFc6bYeWqJEu/zUI2HRxr3sU3DmnU6osvta1biQAf
-	rNIgYiw3fl/1pC1Hd1hyIsb5Dhb7hvePIMaz65xY=
-Content-Type: multipart/mixed; boundary="===============3431449073972501499=="
+	bh=xEJLyhMiv5dt5YeeIW2y2zDEJpCtlyrGgglzb4FG+4M=;
+	b=XEhHqBFCp4j9HV5LFL01vZeXMparTTMEK8rHeDAu0CB64fnN7pMNWSqtkRoFezHL
+	D6B2g1SAP06rhUmdtzmn3F2OA1wkPoQwXyp0sRnHrHWa0MhqM9+lwz6famsQXd72jm9
+	BtThqoOUGzXlpXPQ1OR8JQpbjYILo3t0jZDOW2fg=
+Content-Type: multipart/mixed; boundary="===============3342102491942769122=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] cpp-netlib: upgrading to 505122 FAILED
-Message-ID: <0101018b96bec000-39f8f48c-3a7a-4eb1-a83e-1d13af273cbc-000000@us-west-2.amazonses.com>
+Subject: [AUH] ctapi-common: upgrading to 23.8 FAILED
+Message-ID: <0101018b96bec0b3-bf931f92-1a5c-4a15-a736-201f51abc8e3-000000@us-west-2.amazonses.com>
 Date: Fri, 3 Nov 2023 19:52:45 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
-X-SES-Outgoing: 2023.11.03-54.240.27.31
+X-SES-Outgoing: 2023.11.03-54.240.27.30
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 19:52:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105897
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105896
 
---===============3431449073972501499==
+--===============3342102491942769122==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,14 +52,14 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *cpp-netlib* to *505122* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *ctapi-common* to *23.8* has Failed (devtool error).
 
 Detailed error information:
 
-Running 'devtool upgrade' for recipe cpp-netlib failed.
+The following devtool command failed:  upgrade ctapi-common -V 23.8
 NOTE: Reconnecting to bitbake server...
 Loading cache...done.
-Loaded 4910 entries from dependency cache.
+Loaded 4914 entries from dependency cache.
 NOTE: Resolving any missing task queue dependencies
 
 Build Configuration:
@@ -84,32 +84,33 @@ meta-gnome
 meta-xfce            
 meta-filesystems     
 meta-initramfs       
-meta-webserver       = "tmp-auh-upgrades:9a1a717062d2072ede68804b88b57c01aeae8250"
+meta-webserver       = "tmp-auh-upgrades:fb780a423997d74cfa5f16cfe81ffd10a29527d7"
 workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
 
 Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
 done.
-Sstate summary: Wanted 10 Local 10 Mirrors 0 Missed 0 Current 20 (100% match, 100% complete)
+Sstate summary: Wanted 11 Local 11 Mirrors 0 Missed 0 Current 22 (100% match, 100% complete)
 NOTE: Executing Tasks
-NOTE: Tasks Summary: Attempted 103 tasks of which 100 didn't need to be rerun and all succeeded.
+WARNING: No source unpacked to S - either the ctapi-common recipe doesn't use any source or the correct source directory could not be determined
+NOTE: Tasks Summary: Attempted 113 tasks of which 110 didn't need to be rerun and all succeeded.
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 3 seconds
+
 INFO: Extracting current version source...
-INFO: Extracting upgraded version source...
-INFO: Rebasing devtool onto cf505122d72d7ca3376d2a2a160105cffbf64bcf
-WARNING: Command 'git rebase cf505122d72d7ca3376d2a2a160105cffbf64bcf' failed:
-Auto-merging boost/network/protocol/http/client/connection/async_normal.hpp
-Auto-merging boost/network/protocol/http/client/connection/normal_delegate.hpp
-CONFLICT (content): Merge conflict in boost/network/protocol/http/client/connection/normal_delegate.hpp
-Auto-merging boost/network/protocol/http/client/connection/normal_delegate.ipp
-CONFLICT (content): Merge conflict in boost/network/protocol/http/client/connection/normal_delegate.ipp
-Auto-merging boost/network/protocol/http/client/connection/ssl_delegate.ipp
-CONFLICT (content): Merge conflict in boost/network/protocol/http/client/connection/ssl_delegate.ipp
-
-You will need to resolve conflicts in order to complete the upgrade.
-INFO: Upgraded source extracted to /home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/sources/cpp-netlib
-INFO: New recipe is /home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/recipes/cpp-netlib/cpp-netlib_git.bb
-
+Traceback (most recent call last):
+  File "/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts/devtool", line 349, in <module>
+    ret = main()
+          ^^^^^^
+  File "/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts/devtool", line 336, in main
+    ret = args.func(args, config, basepath, workspace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts/lib/devtool/upgrade.py", line 563, in upgrade
+    old_licenses = _extract_licenses(srctree_s, (rd.getVar('LIC_FILES_CHKSUM') or ""))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts/lib/devtool/upgrade.py", line 476, in _extract_licenses
+    with open(os.path.join(srcpath, path), 'rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/sources/ctapi-common/../ctapi-common.LICENSE'
 
 
 Please review the attached files for further information and build/update failures.
@@ -117,5 +118,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============3431449073972501499==--
+--===============3342102491942769122==--
 
