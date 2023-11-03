@@ -1,339 +1,419 @@
-Return-Path: <johnathanx.mantey@intel.com>
+Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C947C4332F
-	for <webhook@archiver.kernel.org>; Thu,  2 Nov 2023 19:41:01 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.136])
- by mx.groups.io with SMTP id smtpd.web11.41741.1698954059808130866
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F538C4332F
+	for <webhook@archiver.kernel.org>; Fri,  3 Nov 2023 04:13:12 +0000 (UTC)
+Received: from mail-yb1-f171.google.com (mail-yb1-f171.google.com [209.85.219.171])
+ by mx.groups.io with SMTP id smtpd.web10.25034.1698984789146028716
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Nov 2023 12:41:00 -0700
+ Thu, 02 Nov 2023 21:13:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@intel.com header.s=Intel header.b=bfqE4gBM;
- spf=pass (domain: intel.com, ip: 192.55.52.136, mailfrom: johnathanx.mantey@intel.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1698954059; x=1730490059;
-  h=references:from:to:cc:subject:date:in-reply-to:
-   message-id:content-transfer-encoding:mime-version;
-  bh=iIg52SKZuZjW7WLNIZnRwRVuduFy8zH1WlcoC3rviIE=;
-  b=bfqE4gBMz9bNNMV6moCiMYVoXd/nDY39F0wniIQXbr1hb5PbxDFbz1iZ
-   V5C0iJi/7g95ll889x9kBUq0rF5F+8G1vVthZcBBahusRsZ8k7puqFb+q
-   lhs6IU99dNfUTzpIP5e9tg6ffXBmaRJSM8l15X5ZdFR7zRFuanRp0YtFt
-   X2YeuinOE+PK7P2mFb9PWMOGy/liREMQMOp1+bFftHrDgGwT0LoMCWAUM
-   DzCj+0nU5ZkssZWQ0Dp5VPCjJHfifMn3kCehS1fVolf8uT8PMC/6lQ3N3
-   PeAN3kh4DDy35q1FGNaFZwZRjttQuQTEVDmgxIj24sVXENQs0ddR6ZUiM
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10882"; a="368144433"
-X-IronPort-AV: E=Sophos;i="6.03,272,1694761200"; 
-   d="scan'208";a="368144433"
-Received: from orviesa001.jf.intel.com ([10.64.159.141])
-  by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Nov 2023 12:40:59 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.03,272,1694761200"; 
-   d="scan'208";a="9118858"
-Received: from fmsmsx602.amr.corp.intel.com ([10.18.126.82])
-  by orviesa001.jf.intel.com with ESMTP/TLS/AES256-GCM-SHA384; 02 Nov 2023 12:40:58 -0700
-Received: from fmsmsx610.amr.corp.intel.com (10.18.126.90) by
- fmsmsx602.amr.corp.intel.com (10.18.126.82) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.34; Thu, 2 Nov 2023 12:40:57 -0700
-Received: from fmsedg601.ED.cps.intel.com (10.1.192.135) by
- fmsmsx610.amr.corp.intel.com (10.18.126.90) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.34 via Frontend Transport; Thu, 2 Nov 2023 12:40:57 -0700
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com (104.47.55.101)
- by edgegateway.intel.com (192.55.55.70) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2507.34; Thu, 2 Nov 2023 12:40:57 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=EhuKlrSwtC43jAuiGMfJlOhRQ2K6xqmqTbyc53BzxncxesZCcu3MdFlxa2snfiuTFuz6T9qUpGetpIMaGU333UKvOh+MSe0BLc1hAgQet4VwfXmy+TufwNzhbmYIX+aAmcXFUg8KU+6mZkKuP/MNX55aSkrxqFFp7ow99sgOkToyRMH1qTzJ8ozqSJNEiT1SfppH+sz3BNzzQ1YIhdA1TFOl9IWe8fIzVReIKPKj60pMdhMtNa7wuz36MvpkOnvTAAisnBJCSqdf6L9g+oPw8OUTRcbzP8KWP8zo3Jc3yAxos5hkjtoGxW/aTvjpur6ZQE6N3me8WAZ88p4ZLfDf/w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=v8GjHp055Fb/KDzyQpinD7tv2uJTgQvTQ5Wx0xIntNA=;
- b=DtH8oGwb9I/xpx21h2hhO847ruA4TYdgrz0vb7eA9OV8Vi0yIUbM+74RhnpStPVhx0l4XUNzNcJuW7qfA+CmZxZEJnXNnSYwoJ9UiDu/U6vKqCk/Ahyb/TMoPQPURLeHF/AWOkoO+anKVk60BS0RsTM5MlwLL7pD6InlXlFRhAA7BubyvCCFxRl0u6QTJZuNZmRocAKlvETXEg6F7rXztwwfjXWvkhbtz/j8xrCGFm4PuoGhhFaYJs61FdvJHsNu5InzAlASgpgrZvnLbky9fTs+XXN1Y3wUhPT/BV9b/IlcT32AsOKBSBl4tWExtXoOZbEuq9lTtIlcm6jeRBxwVg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=intel.com;
-Received: from BL1PR11MB5978.namprd11.prod.outlook.com (2603:10b6:208:385::18)
- by CY5PR11MB6462.namprd11.prod.outlook.com (2603:10b6:930:32::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.21; Thu, 2 Nov
- 2023 19:40:55 +0000
-Received: from BL1PR11MB5978.namprd11.prod.outlook.com
- ([fe80::5d1:aa22:7c98:f3c6]) by BL1PR11MB5978.namprd11.prod.outlook.com
- ([fe80::5d1:aa22:7c98:f3c6%6]) with mapi id 15.20.6954.019; Thu, 2 Nov 2023
- 19:40:55 +0000
-References: <20231102172736.221038-1-johnathanx.mantey@intel.com>
- <CAMKF1sqafeMMeYfk-eY3gSEUFUL0=XKmSAaJ5Ha9gY68NDFqNQ@mail.gmail.com>
-User-agent: mu4e 1.8.11; emacs 28.3
-From: Johnathan Mantey <johnathanx.mantey@intel.com>
-To: Khem Raj <raj.khem@gmail.com>
-CC: <openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-oe][PATCH] Update ipmitool to eliminate unneeded patch
-Date: Thu, 2 Nov 2023 12:39:02 -0700
-In-Reply-To: <CAMKF1sqafeMMeYfk-eY3gSEUFUL0=XKmSAaJ5Ha9gY68NDFqNQ@mail.gmail.com>
-Message-ID: <87wmv02bay.fsf@intel.com>
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-ClientProxiedBy: MW4PR04CA0130.namprd04.prod.outlook.com
- (2603:10b6:303:84::15) To BL1PR11MB5978.namprd11.prod.outlook.com
- (2603:10b6:208:385::18)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=MrI/o0wM;
+ spf=pass (domain: gmail.com, ip: 209.85.219.171, mailfrom: ticotimo@gmail.com)
+Received: by mail-yb1-f171.google.com with SMTP id 3f1490d57ef6-d9ca471cf3aso1653790276.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Nov 2023 21:13:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1698984788; x=1699589588; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=pg9Q0hmL1BdqXCMAo209qS0maPwguTuGXcWsm8JN48A=;
+        b=MrI/o0wMAQLO207XWuIGKLty6HQx3JmHF8H1ChfU6E10fxHA4vrc13oQUHD1AtVPf0
+         hHLGaWsVGXRDJASueeg6NivAjihl/3DBt54ROA2V+sVWN9Q95NSUGbvnxgSUVP9neUHd
+         NNCV7Pbc5saL3w2zyzAVp3VxhlypmIcvLQcA8SKUcO/p947FyB3c4M20q1fhiDwckGpx
+         RL3kAKu/O5kvK9uJvpo57UBnWJtuGWXhkNNMFxHmdld+7Ebcg62CLskWI5bNa8IZcAwF
+         H+3tDSjQlxCVv7VmAdQteayqlQJT16YwcWVjPUZACt4X3l0EgnwLYuWe767Y5GHcs8J1
+         K4lw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1698984788; x=1699589588;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=pg9Q0hmL1BdqXCMAo209qS0maPwguTuGXcWsm8JN48A=;
+        b=qpQBaHu/CwJbVbdsB0NMeUAeexrfgIznROUZcHFilQ6o8rFVDO0kxgCUUsRmXPUSkA
+         SJSYlGAyE8BeOpNa1lBjezCsABBivix6NBg8yuk9aBilBi3oAmrLHFg29Op1cqHiPqcj
+         EPXKLmcT8VrhbECao2T/U4UPFMFouLQSrtuhIQivY8AVmn8Wvs847SOKutPNFnzyScCR
+         Qz1nlCRKrb5HFHeB/JVWR7+C1bj3zq5qRPBAZqQuq+BSx6zapMD1OOmTLPJLIbex98Fc
+         cMMKmtlszGcf7FwMaV1H4RmiuVpTEUPEexD2mrccTY2m0K8dYhj7Y0mbTXgO4TGJ6/BV
+         u+zg==
+X-Gm-Message-State: AOJu0Yzu75gduyY7txOlTFykNhllBBKJgVL31Hj7V1DnN5ckETwlv64q
+	VJZjaDte/RQCHmlNR9akTavSbfwq07JVfUatUP4=
+X-Google-Smtp-Source: AGHT+IHF8D/iZ2pHSBMeU8+9qLUPyBdhQWLGk6a/XP6TxITnstI4FONi23ucC21VenfSdIkhVJzIi9TJjeNbQbN5aI4=
+X-Received: by 2002:a25:e0c9:0:b0:d9a:384a:d4c5 with SMTP id
+ x192-20020a25e0c9000000b00d9a384ad4c5mr23304247ybg.33.1698984788235; Thu, 02
+ Nov 2023 21:13:08 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL1PR11MB5978:EE_|CY5PR11MB6462:EE_
-X-MS-Office365-Filtering-Correlation-Id: b4a2577e-6717-4132-107d-08dbdbdba148
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: P9Y+buStWSOixAPaT3guScwTwInnsh/6IiTcfFSrDv329zib0Z1mzGwhny5iO/9P+ncMAsOl7ZdVqmfJdQ8XPYO0THNrN7A8bbPbZEV6+LkFRaWTuxYctgjuuTLr59zhqBXPWKS5IyygB5uXWgzvlO9FTRzb+N24F92lxSEv6O3DdzwisU0GnYYh6ZhMameaS99GogGN3qxeH+sUL0XYaYLpNusrzIPj/V0X2ww2p4tS2eLGJZWL1SkoapbeZZ7t9PjJAjzLJ31g8dkqyKg+kD5l0NgUSqIQ7pcVByOdhjDfL8B4QxEFW2eAFMstuXg7I9rGFRs1O6/hC75WhEl3a8XWEl8yorWHYe1QPJPzj/HC7prhSPLJotQuubfchUHscgYQTLfcDSkaEqOUDejsS94dAbWJzIAZIMkgnYcf2oIFCfKK5S6lpQ6R4gIwbmkRkJ7JeAYhm3cTJnQSQLt/ErAGPHpyjWk79CtZtHnMWFb23tAsMAvkjV8JFJ/aKLQ49XIcLwpcBSuLW52pebdSKsvHdjkNHqGpD9UgueDAijJjFNrp5J47E4MsTxVcuEhi4sJEux0kh2vGQB+8vqff0A==
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BL1PR11MB5978.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(39860400002)(366004)(396003)(376002)(136003)(346002)(230922051799003)(186009)(1800799009)(64100799003)(451199024)(66899024)(966005)(66946007)(26005)(38100700002)(66476007)(316002)(66556008)(6916009)(5660300002)(8676002)(8936002)(4326008)(53546011)(6666004)(6512007)(2906002)(6486002)(2616005)(15650500001)(41300700001)(478600001)(6506007)(86362001)(82960400001)(36756003)(83380400001);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?a3RmQ3pybUVrQkQyT0srbTNCVjQvelQvd3FXSjFickFZQW1YNkhxR210aExD?=
- =?utf-8?B?dUgxQkhjMElYcWNlVHJ0azJabzB0ZzdzNm44SHg3ZjRSb2ZiZ3d6cmJzeWgy?=
- =?utf-8?B?YkhYVXB0NWZHclprbmcyb2ErWFMyZWl5WE5VcWFMdVUvamFvN2dKckU5YTUw?=
- =?utf-8?B?cjlSakZqLzdqdmYxai9mYVB0emkyNGFjVGpzK2QvRGlmaFlwb2JOVkZqS2lB?=
- =?utf-8?B?aENuTG1pWFd6MTlCS2k2VElaK3ZRMTZGbzkybDRub2szMWxIcFFtcFpqOTFI?=
- =?utf-8?B?c3NYK1lFOTRQTGxabzBza2lnU1Qwa0tNYStLTzBuOUNaQzlHSmhVYkZzWmV0?=
- =?utf-8?B?QXZ2UU10d3RuU3cveWhUUlZBZ1hPcjhiYmF1UGtzQnpoaFA1blAvK1VVSWQ1?=
- =?utf-8?B?Y1p5Rmd4Q3BCeFpNRW9hSHFyZ1BCaG5DaVM4ekcwRkRjYlZXRWxCRFdVbmlM?=
- =?utf-8?B?SDRBZXkwdlM3UW56ZkdnMWRyeGp4aVp1ZXVWTGdWRER6OFN6b0FkenEwOE03?=
- =?utf-8?B?NnlmenpEaUU4ZzZUYVpENzl4MUQyRTJiTDYzZjJHb1k2UjJMUVdxZDZqVFRV?=
- =?utf-8?B?cEJSVW84TDF3bEtrM0JBWGl5NUpKemhRQWVVS2c3K0JCWWJXc0lISUord21w?=
- =?utf-8?B?OTljUHlJSnN6Vk1Cd0ZQY0tpYW4xZXVxNHNHQjlmS1Y1WlhYb21LTUpTamZq?=
- =?utf-8?B?Y0w3ZVFjam5FT1RiVEoyalJvcTZJTVozVklqVnNBWEE1cVdqdTlrMXNEc0lo?=
- =?utf-8?B?MVR0cWU2TkN1a095UDRwTHRGNEtMMkU3RXdtZ1dCMysvcGNTSkFGbUFOeHF3?=
- =?utf-8?B?YmFyK0xmdTFFaVZRMU8yaERFK2NhOHdnenJjYVkxaFFzU3duR25YR3Exa2E1?=
- =?utf-8?B?QzRCYmtkaEtpRy8xU2VsTHllMEQ3b1dXbkF0VTVHcnQ3S3M1QVpKQ3hWck40?=
- =?utf-8?B?ZTkvNnN5WXdjK2RXeWxQU2tSNzRtZEhxTDV4YUZwazBINEs1aW00czBFRkdT?=
- =?utf-8?B?SkcyWlpsK2x2TmNxUmVkNHo0REV4bE90QnVrT3hPTHR4L3JEbGdBc0xZUW1t?=
- =?utf-8?B?SFhieVI3R1hqK2QzVUVkSld6TlV6WkErUTY1Ym1mK1JRNVJoTGR3Z29UOXhV?=
- =?utf-8?B?ZTB0RjZWd2xzVmxZdGpYUFRwemNUdDdVeUJFekxvSnhIVHhrdUgyOW0zeE02?=
- =?utf-8?B?SjZVNVpxQVlBR0krbHZSTDJ6RE5Sd2lFdmxqTERMWTdLZ2ZPZ0prZmUvaGd2?=
- =?utf-8?B?R014WEovdEhjOVloNzNBR3pnTUZpeElmZU1CdjNsRGRxTy9ZbkNQZFpBNXB4?=
- =?utf-8?B?MXNudlJjR2RkQU14YTc4ZGkzZEdMYTlrU2FwcDVQaFdsajI1WW9TZDFXU3kw?=
- =?utf-8?B?VEZCRjBJd3I1SlRULy9rSytaWTNaUm5SZVN4d3NiYUl2MWxyeEpSeDgzR2lt?=
- =?utf-8?B?WkJXUFdhWmpLczMxRFQwYytBUmQ5ZnlUZ0I2NVpXSjd5bmJEc1JPWUlWL0s3?=
- =?utf-8?B?dkdYWC9BSEtxS0orQlBXNHFiZWd0eUJTdlJONFZxR1RLMzRySWEyK21JdzJM?=
- =?utf-8?B?cTRiV2ZJZS9hdzlxU3crQmdOSXZjQlM1VkIxQjF5eDVqZ09uUHBEeUFFQmtC?=
- =?utf-8?B?ckt0VHhGM1lDNDJLVFh6NkJvUDQ1dWtDaGRqS0Z0U0N1N3lONzVpaWdRRWV5?=
- =?utf-8?B?RWpPMDlrQ0N6QWxRQXVSNC9yVS9XWVRRZlZQVHR2SjVTaWtXZFNwQ3JJU21I?=
- =?utf-8?B?SWxTbHF6YjJUZDFSWHJ0b3UrT211ZUp5cEtHVHY2MEF0R1pQcC9Sb2Z4bEo3?=
- =?utf-8?B?NTErVE8zMzRTd1pwdTdRWUtOa3Jpc2hlZGYyN2hqNDk2WExOWEp3d01IalNC?=
- =?utf-8?B?TkFaandGTkNVT3Y4K2pYZDZEakN3UVNxME9JcGluZVBJWk1jYkhBOUhSeHBt?=
- =?utf-8?B?VHIvRVJjcTVHY1N1SEhRaXVKNXN6ODBNWGV1cm1GT1FNbHJ5YWJFa3lNYmcx?=
- =?utf-8?B?cmQ3azdZdkoxVytEOEZuL09keGZrcnk1UXdkZVNRR28xR0pyaVZ1dUEvMFEz?=
- =?utf-8?B?VytBQ1VXWnc3OUxaNU1zTGR0Y3NTRUxyajcwdjAvTUNuOFMzZVNnOXN1dzI0?=
- =?utf-8?B?eEdiL3h2ZVo0N3lTUG9WS2NiTWQydjFIWE9wUlkrWEJrL3lmaURRajlKN1F3?=
- =?utf-8?B?Tmc9PQ==?=
-X-MS-Exchange-CrossTenant-Network-Message-Id: b4a2577e-6717-4132-107d-08dbdbdba148
-X-MS-Exchange-CrossTenant-AuthSource: BL1PR11MB5978.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Nov 2023 19:40:55.5984
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: vjSy51a42GtHyqJas0xpDtxIYnr3t9xgnngfBnf4ynNlPTuW6Ct9Ton4mRjQNj+pBuuEeQzRrbEAmeQs5Xkh2J8qDcY3C/yWGWEp5f8BLp4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR11MB6462
-X-OriginatorOrg: intel.com
+References: <9353bb8c5660859357ba062c7d5924051d249b83.camel@linuxfoundation.org>
+ <CAMKF1srDOiMrisZJwAm5=ft_pDzncXbaytJfqP4cMW17vv8r4w@mail.gmail.com>
+In-Reply-To: <CAMKF1srDOiMrisZJwAm5=ft_pDzncXbaytJfqP4cMW17vv8r4w@mail.gmail.com>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Thu, 2 Nov 2023 21:12:57 -0700
+Message-ID: <CANx9H-Ar+r-mBK8O2SxjfYF9vJdoeFouDTrvfQFQPqUvrAW04A@mail.gmail.com>
+Subject: Re: [oe] meta-openembedded CVEs, patch stats and AUH
+To: Khem Raj <raj.khem@gmail.com>
+Cc: Armin Kuster <akuster808@gmail.com>, Marta Rybczynska <marta.rybczynska@syslinbit.com>, 
+	Richard Purdie <richard.purdie@linuxfoundation.org>, Ross Burton <ross.burton@arm.com>, 
+	Yoann Congal <yoann.congal@smile.fr>, 
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="000000000000c81942060937b8d8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 02 Nov 2023 19:41:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105847
+ <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 04:13:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105848
+
+--000000000000c81942060937b8d8
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Nov 2, 2023 at 10:51=E2=80=AFAM Khem Raj <raj.khem@gmail.com> wrote=
+:
+
+> Awesome work !
 
 
-Khem Raj <raj.khem@gmail.com> writes:
+I agree. This is very exciting.
 
-> Thanks for the patch, few nits for future reference
-> The patch is not generated against standalone meta-openembedded=20
-> repo
-> so please do so. it makes it easy
-> for us to appy it. The subject line has a familiar format
+
 >
-> recipe: <summary>
->
-> Details.
->
-> The append is not needed the option can be merged into the=20
-> options
-> just above it.
->
-> I have made this tweaks and pushed it into staging ( master-next=20
-> )
-> please test it out as well on your end
->
-
-I have applied your changes and performed some tests. Everything=20
-is working as expected.
-Thank you for fixing this for me, and getting it staged!
-
-> On Thu, Nov 2, 2023 at 10:27=E2=80=AFAM Johnathan Mantey
-> <johnathanx.mantey@intel.com> wrote:
->>
->> The upstream ipmitool code has implemented an autoconfig=20
->> control to
->> enable and disable dynamic fetching of the IANA numbers=20
->> file. As a
->> result the patch removing the code that blocks fetching the=20
->> IANA numbers is
->> no longer relevant.
->>
->> The patch being removed explicitlly blocks downloading the IANA
->> numbers file. Maintain this behavior at this level by using the
->> --disable-registry-download feature.
->>
->> In order for that autoconfig switch to work, the recipe must=20
->> inherit
->> the pkgconfig feature. Without the pkgconfig dependency the=20
->> code in
->> the configure.ac file causes a compile time error.
->>
->> Tested:
->> IANA numbers file isn't downloaded.
->> Manually downloaded IANA file is installed in /usr/share/misc
->> Enabling registry download enables dynamic download of IANA=20
->> numbers
->>
->> Signed-off-by: Johnathan Mantey <johnathanx.mantey@intel.com>
->> ---
->>  ...-the-logic-to-download-IANA-PEN-data.patch | 41=20
->>  -------------------
->>  .../ipmitool/ipmitool_1.8.19.bb               |  8 ++--
->>  2 files changed, 5 insertions(+), 44 deletions(-)
->>  delete mode 100644=20
->>  meta-openembedded/meta-oe/recipes-kernel/ipmitool/ipmitool/0001-configu=
-re-Remove-the-logic-to-download-IANA-PEN-data.patch
->>
->> diff --git
-> a/meta-openembedded/meta-oe/recipes-kernel/ipmitool/ipmitool/0001-configu=
-re-Remove-the-logic-to-download-IANA-PEN-data.patch
-> b/meta-openembedded/meta-oe/recipes-kernel/ipmitool/ipmitool/0001-configu=
-re-Remove-the-logic-to-download-IANA-PEN-data.patch
->> deleted file mode 100644
->> index 442f132718..0000000000
->> ---=20
->> a/meta-openembedded/meta-oe/recipes-kernel/ipmitool/ipmitool/0001-config=
-ure-Remove-the-logic-to-download-IANA-PEN-data.patch
->> +++ /dev/null
->> @@ -1,41 +0,0 @@
->> -From 63d72f97bd106dd2101cd7fdac6df4f7a053d67c Mon Sep 17=20
->> 00:00:00 2001
->> -From: Khem Raj <raj.khem@gmail.com>
->> -Date: Fri, 2 Sep 2022 08:27:39 -0700
->> -Subject: [PATCH] configure: Remove the logic to download IANA=20
->> PEN database
->> - during configure
->> -
->> -OE will do all downloading before it starts to configure=20
->> therefore this
->> -step is moved out into bitbake recipe, so we can make it=20
->> immutable build
->> -
->> -Upstream-Status: Inappropriate [OE-Specific]
->> -
->> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ----
->> - configure.ac | 16 +---------------
->> - 1 file changed, 1 insertion(+), 15 deletions(-)
->> -
->> ---- a/configure.ac
->> -+++ b/configure.ac
->> -@@ -56,21 +56,7 @@ if test "x$exec_prefix" =3D "xNONE"; then
->> -       exec_prefix=3D"$prefix"
->> - fi
->> -
->> --if test "x$WGET" =3D "x"; then
->> --      if test "x$CURL" =3D "x"; then
->> --              AC_MSG_WARN([** Neither wget nor curl could be=20
->> found.])
->> --              AC_MSG_WARN([** IANA PEN database will not be=20
->> installed by `make install` !])
->> --      else
->> --              DOWNLOAD=3D"$CURL --location --progress-bar"
->> --              AM_CONDITIONAL([DOWNLOAD], [true])
->> --      fi
->> --else
->> --      DOWNLOAD=3D"$WGET -c -nd -O -"
->> --      AM_CONDITIONAL([DOWNLOAD], [true])
->> --fi
->> --
->> --AC_MSG_WARN([** Download is:])
->> --AC_MSG_WARN($DOWNLOAD)
->> -+AM_CONDITIONAL([DOWNLOAD], [false])
->> - AC_SUBST(DOWNLOAD, $DOWNLOAD)
->> -
->> - dnl
->> diff --git=20
->> a/meta-openembedded/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.19.bb=20
->> b/meta-openembedded/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.19.bb
->> index ab9074bba5..1c541faf8c 100644
->> ---=20
->> a/meta-openembedded/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.19.bb
->> +++=20
->> b/meta-openembedded/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.19.bb
->> @@ -21,10 +21,9 @@ LICENSE =3D "BSD-3-Clause"
->>  LIC_FILES_CHKSUM =3D=20
->>  "file://COPYING;md5=3D9aa91e13d644326bf281924212862184"
->>
->>  DEPENDS =3D "openssl readline ncurses"
->> -SRCREV =3D "19d78782d795d0cf4ceefe655f616210c9143e62"
->> +SRCREV =3D "ab5ce5baff097ebb6e2a17a171858be213ee68d3"
->>  SRC_URI =3D=20
->>  "git://codeberg.org/ipmitool/ipmitool;protocol=3Dhttps;branch=3Dmaster=
-=20
->>  \
->>             ${IANA_ENTERPRISE_NUMBERS} \
->> -=20
->> file://0001-configure-Remove-the-logic-to-download-IANA-PEN-data.patch=20
->> \
->>             "
->>  IANA_ENTERPRISE_NUMBERS ?=3D ""
->>
->> @@ -34,7 +33,7 @@ IANA_ENTERPRISE_NUMBERS ?=3D ""
->>
->>  S =3D "${WORKDIR}/git"
->>
->> -inherit autotools
->> +inherit autotools pkgconfig
->>
->>  do_install:append() {
->>          if [ -e ${WORKDIR}/iana-enterprise-numbers ]; then
->> @@ -50,5 +49,8 @@ FILES:${PN} +=3D "${datadir}/misc"
->>  # --enable-file-security adds some security checks
->>  # --disable-intf-free disables FreeIPMI support - we don't=20
->>  want to depend on
->>  #   FreeIPMI libraries, FreeIPMI has its own ipmitoool-like=20
->>  utility.
->> +# --disable-registry-download prevents the IANA numbers from=20
->> being fetched
->> +#   at build time, as it is not repeatable.
->>  #
->>  EXTRA_OECONF =3D "--disable-dependency-tracking=20
->>  --enable-file-security --disable-intf-free"
->> +EXTRA_OECONF:append =3D " --disable-registry-download "
->> --
->> 2.41.0
->>
->>
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->> Links: You receive all messages sent to this group.
->> View/Reply Online (#105842):=20
->> https://lists.openembedded.org/g/openembedded-devel/message/105842
->> Mute This Topic:=20
->> https://lists.openembedded.org/mt/102347757/1997914
->> Group Owner: openembedded-devel+owner@lists.openembedded.org
->> Unsubscribe:=20
->> https://lists.openembedded.org/g/openembedded-devel/unsub=20
->> [raj.khem@gmail.com]
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->>
+> On Thu, Nov 2, 2023 at 6:49=E2=80=AFAM Richard Purdie
+> <richard.purdie@linuxfoundation.org> wrote:
+> >
+> > Patch Metrics and CVEs
+> > ----------------------
+> >
+> > I'm now pleased to say we have CVE and patch metrics being generated
+> > (Thanks Yoann and Ross):
+> >
+> > https://autobuilder.yocto.io/pub/non-release/patchmetrics-meta-oe/
+> >
+> > which for example generates this:
+> >
+> >
+> https://autobuilder.yocto.io/pub/non-release/patchmetrics-meta-oe/cve-sta=
+tus-master.txt
+> >
+> > (268 CVEs)
+> >
+> > This doesn't work for the LTS branches since the layer override being
+> > used to generate it on master won't work for kirkstone/dunfell.
+> >
+> > Those reports are generated live onto the site daily but aren't emailed
+> > anywhere at this time.
+> >
+> >
+> > Mirroring
+> > ---------
+> >
+> > I covered mirroring for meta-oe layers here:
+> >
+> > https://lists.openembedded.org/g/openembedded-devel/message/105754
+> >
+> > Basically it works but we need to decide whether we can fix the
+> > warnings to keep this enabled for dunfell/kirkstone.
+> >
+> >
+> > Reproducibility
+> > ---------------
+> >
+> > We can now test reproducibility for meta-oe on the autobuilder:
+> > https://autobuilder.yoctoproject.org/typhoon/#/builders/155
+> >
+> > In order to make this useful we really need a list of known issues so
+> > that we can then exclude them and start showing regressions.
+> >
+> >
+> > AUH
+> > ---
+> >
+> > This is now working and generating updates. It takes a while to run and
+> > generates a lot of emails.
+> >
+> > https://autobuilder.yoctoproject.org/typhoon/#/builders/159/builds/8
+> > (18 hours so far)
+> >
+> > meta-oe summary:
+> > https://lists.yoctoproject.org/g/test-list/message/425
+> > TOTAL: attempted=3D206 succeeded=3D42(20.39%) failed=3D164(79.61%)
+> >
+> > meta-python summary:
+> > https://lists.yoctoproject.org/g/test-list/message/426
+> > TOTAL: attempted=3D92 succeeded=3D50(54.35%) failed=3D42(45.65%)
+> >
+> > meta-perl summary:
+> > https://lists.yoctoproject.org/g/test-list/message/434
+> > TOTAL: attempted=3D7 succeeded=3D5(71.43%) failed=3D2(28.57%)
+> >
 
 
---=20
-Johnathan Mantey
+
+> It is good to see this capability on the AB. I previously ran similar AUH
+jobs for Perl and Python recipes (including meta-oe via inherit filters) on
+some hardware I had access to (thank you Mark Hatley).
+
+We saw some uptick in contributions, mostly to meta-python, as a result of
+my prior auh@moto-timo.dev emails. We do not see many folks addressing the
+AUH devtool/etc failures and those that do not even succeed to check
+upstream status are somewhat masked because no email output is sent (it
+only goes to stdout).
+
+
+> > meta-networking summary:
+> > https://lists.yoctoproject.org/g/test-list/message/767
+> > TOTAL: attempted=3D43 succeeded=3D8(18.60%) failed=3D35(81.40%)
+> >
+> > so around ~350 emails of which ~105 were successful upgrades. I'm not
+> > sure whether we want to enable that to send to openembedded-devel?
+> > There are lot of failures and there are a lot of recipes where the
+> > upstream status couldn't be checked. Is anyone interested in working on
+> > improving things in either of those areas?
+> >
+> > There are also various backend improvements we'd love to make to the
+> > AUH code now we've seen how it works in practise in this role.
+> >
+> >
+> > Summary
+> > -------
+> >
+> > All things considered, this shows what our tooling is capable of and
+> > we've a good baseline. Whether/how we enable/use this going forward
+> > depends a lot on whether people are willing to step up and help
+> > maintain/process the results. It can't/won't be Khem/I trying to make
+> > and keep it all working so this is where we need help from the wider
+> > community.
+> >
+
+
+I don=E2=80=99t think anyone (including myself) that are =E2=80=9Clayer mai=
+ntainers=E2=80=9D can
+handle this volume of updates either. I used to try to keep up, but the
+flood of even successful updates is just too great. On average, each recipe
+takes 10-60 minutes to upgrade, verify changes, add some helpful git commit
+information, build and run time test. Some contributors send upgrades that
+build, but runtime testing is lacking and e.g. dependency or license
+changes are missed. Ptest could help with catching runtime failures, but we
+still need people willing to review and fix the failures. Ptests can also
+add a lot of additional dependencies (for which we do not have recipes) and
+someone still needs to be responding to any failures. The devtool and other
+AUH failures, such as po4a for several years, tell us perhaps some pruning
+of recipes is timely.
+
+The quality of these layers is a community effort. There is no magic team
+waiting to do the work. It is all of you. It is all of us.
+
+=E2=80=94Tim
+
+
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#105844):
+> https://lists.openembedded.org/g/openembedded-devel/message/105844
+> Mute This Topic: https://lists.openembedded.org/mt/102342283/924729
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> ticotimo@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--000000000000c81942060937b8d8
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Thu, Nov 2, 2023 at 10:51=E2=80=AFAM Khem Raj &lt;<a hre=
+f=3D"mailto:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt; wrote:<br></div>=
+<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
+left-width:1px;border-left-style:solid;padding-left:1ex;border-left-color:r=
+gb(204,204,204)">Awesome work !</blockquote><div dir=3D"auto"><br></div><di=
+v dir=3D"auto">I agree. This is very exciting.</div><div dir=3D"auto"><br><=
+/div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bo=
+rder-left-width:1px;border-left-style:solid;padding-left:1ex;border-left-co=
+lor:rgb(204,204,204)" dir=3D"auto"><br>
+<br>
+On Thu, Nov 2, 2023 at 6:49=E2=80=AFAM Richard Purdie<br>
+&lt;<a href=3D"mailto:richard.purdie@linuxfoundation.org" target=3D"_blank"=
+>richard.purdie@linuxfoundation.org</a>&gt; wrote:<br>
+&gt;<br>
+&gt; Patch Metrics and CVEs<br>
+&gt; ----------------------<br>
+&gt;<br>
+&gt; I&#39;m now pleased to say we have CVE and patch metrics being generat=
+ed<br>
+&gt; (Thanks Yoann and Ross):<br>
+&gt;<br>
+&gt; <a href=3D"https://autobuilder.yocto.io/pub/non-release/patchmetrics-m=
+eta-oe/" rel=3D"noreferrer" target=3D"_blank">https://autobuilder.yocto.io/=
+pub/non-release/patchmetrics-meta-oe/</a><br>
+&gt;<br>
+&gt; which for example generates this:<br>
+&gt;<br>
+&gt; <a href=3D"https://autobuilder.yocto.io/pub/non-release/patchmetrics-m=
+eta-oe/cve-status-master.txt" rel=3D"noreferrer" target=3D"_blank">https://=
+autobuilder.yocto.io/pub/non-release/patchmetrics-meta-oe/cve-status-master=
+.txt</a><br>
+&gt;<br>
+&gt; (268 CVEs)<br>
+&gt;<br>
+&gt; This doesn&#39;t work for the LTS branches since the layer override be=
+ing<br>
+&gt; used to generate it on master won&#39;t work for kirkstone/dunfell.<br=
+>
+&gt;<br>
+&gt; Those reports are generated live onto the site daily but aren&#39;t em=
+ailed<br>
+&gt; anywhere at this time.<br>
+&gt;<br>
+&gt;<br>
+&gt; Mirroring<br>
+&gt; ---------<br>
+&gt;<br>
+&gt; I covered mirroring for meta-oe layers here:<br>
+&gt;<br>
+&gt; <a href=3D"https://lists.openembedded.org/g/openembedded-devel/message=
+/105754" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.or=
+g/g/openembedded-devel/message/105754</a><br>
+&gt;<br>
+&gt; Basically it works but we need to decide whether we can fix the<br>
+&gt; warnings to keep this enabled for dunfell/kirkstone.<br>
+&gt;<br>
+&gt;<br>
+&gt; Reproducibility<br>
+&gt; ---------------<br>
+&gt;<br>
+&gt; We can now test reproducibility for meta-oe on the autobuilder:<br>
+&gt; <a href=3D"https://autobuilder.yoctoproject.org/typhoon/#/builders/155=
+" rel=3D"noreferrer" target=3D"_blank">https://autobuilder.yoctoproject.org=
+/typhoon/#/builders/155</a><br>
+&gt;<br>
+&gt; In order to make this useful we really need a list of known issues so<=
+br>
+&gt; that we can then exclude them and start showing regressions.<br>
+&gt;<br>
+&gt;<br>
+&gt; AUH<br>
+&gt; ---<br>
+&gt;<br>
+&gt; This is now working and generating updates. It takes a while to run an=
+d<br>
+&gt; generates a lot of emails.<br>
+&gt;<br>
+&gt; <a href=3D"https://autobuilder.yoctoproject.org/typhoon/#/builders/159=
+/builds/8" rel=3D"noreferrer" target=3D"_blank">https://autobuilder.yoctopr=
+oject.org/typhoon/#/builders/159/builds/8</a><br>
+&gt; (18 hours so far)<br>
+&gt;<br>
+&gt; meta-oe summary:<br>
+&gt; <a href=3D"https://lists.yoctoproject.org/g/test-list/message/425" rel=
+=3D"noreferrer" target=3D"_blank">https://lists.yoctoproject.org/g/test-lis=
+t/message/425</a><br>
+&gt; TOTAL: attempted=3D206 succeeded=3D42(20.39%) failed=3D164(79.61%)<br>
+&gt;<br>
+&gt; meta-python summary:<br>
+&gt; <a href=3D"https://lists.yoctoproject.org/g/test-list/message/426" rel=
+=3D"noreferrer" target=3D"_blank">https://lists.yoctoproject.org/g/test-lis=
+t/message/426</a><br>
+&gt; TOTAL: attempted=3D92 succeeded=3D50(54.35%) failed=3D42(45.65%)<br>
+&gt;<br>
+&gt; meta-perl summary:<br>
+&gt; <a href=3D"https://lists.yoctoproject.org/g/test-list/message/434" rel=
+=3D"noreferrer" target=3D"_blank">https://lists.yoctoproject.org/g/test-lis=
+t/message/434</a><br>
+&gt; TOTAL: attempted=3D7 succeeded=3D5(71.43%) failed=3D2(28.57%)<br>
+&gt;</blockquote><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px =
+0px 0.8ex;border-left-width:1px;border-left-style:solid;padding-left:1ex;bo=
+rder-left-color:rgb(204,204,204)" dir=3D"auto"></blockquote><blockquote cla=
+ss=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;=
+border-left-style:solid;padding-left:1ex;border-left-color:rgb(204,204,204)=
+" dir=3D"auto"></blockquote><div dir=3D"auto"><br></div><blockquote class=
+=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;bo=
+rder-left-style:solid;padding-left:1ex;border-left-color:rgb(204,204,204)" =
+dir=3D"auto"><br></blockquote><div dir=3D"auto">It is good to see this capa=
+bility on the AB. I previously ran similar AUH jobs for Perl and Python rec=
+ipes (including meta-oe via inherit filters) on some hardware I had access =
+to (thank you Mark Hatley).</div><div dir=3D"auto"><br></div><blockquote cl=
+ass=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px=
+;border-left-style:solid;padding-left:1ex;border-left-color:rgb(204,204,204=
+)" dir=3D"auto"></blockquote><div dir=3D"auto">We saw some uptick in contri=
+butions, mostly to meta-python, as a result of my prior <a href=3D"mailto:a=
+uh@moto-timo.dev">auh@moto-timo.dev</a> emails. We do not see many folks ad=
+dressing the AUH devtool/etc failures and those that do not even succeed to=
+ check upstream status are somewhat masked because no email output is sent =
+(it only goes to stdout).</div><div dir=3D"auto"><br></div><blockquote clas=
+s=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;b=
+order-left-style:solid;padding-left:1ex;border-left-color:rgb(204,204,204)"=
+ dir=3D"auto"><br>
+&gt; meta-networking summary:<br>
+&gt; <a href=3D"https://lists.yoctoproject.org/g/test-list/message/767" rel=
+=3D"noreferrer" target=3D"_blank">https://lists.yoctoproject.org/g/test-lis=
+t/message/767</a><br>
+&gt; TOTAL: attempted=3D43 succeeded=3D8(18.60%) failed=3D35(81.40%)<br>
+&gt;<br>
+&gt; so around ~350 emails of which ~105 were successful upgrades. I&#39;m =
+not<br>
+&gt; sure whether we want to enable that to send to openembedded-devel?<br>
+&gt; There are lot of failures and there are a lot of recipes where the<br>
+&gt; upstream status couldn&#39;t be checked. Is anyone interested in worki=
+ng on<br>
+&gt; improving things in either of those areas?<br>
+&gt;<br>
+&gt; There are also various backend improvements we&#39;d love to make to t=
+he<br>
+&gt; AUH code now we&#39;ve seen how it works in practise in this role.<br>
+&gt;<br>
+&gt;<br>
+&gt; Summary<br>
+&gt; -------<br>
+&gt;<br>
+&gt; All things considered, this shows what our tooling is capable of and<b=
+r>
+&gt; we&#39;ve a good baseline. Whether/how we enable/use this going forwar=
+d<br>
+&gt; depends a lot on whether people are willing to step up and help<br>
+&gt; maintain/process the results. It can&#39;t/won&#39;t be Khem/I trying =
+to make<br>
+&gt; and keep it all working so this is where we need help from the wider<b=
+r>
+&gt; community.<br>
+&gt;</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">I don=E2=80=
+=99t think anyone (including myself) that are =E2=80=9Clayer maintainers=E2=
+=80=9D can handle this volume of updates either. I used to try to keep up, =
+but the flood of even successful updates is just too great. On average, eac=
+h recipe takes 10-60 minutes to upgrade, verify changes, add some helpful g=
+it commit information, build and run time test. Some contributors send upgr=
+ades that build, but runtime testing is lacking and e.g. dependency or lice=
+nse changes are missed. Ptest could help with catching runtime failures, bu=
+t we still need people willing to review and fix the failures. Ptests can a=
+lso add a lot of additional dependencies (for which we do not have recipes)=
+ and someone still needs to be responding to any failures. The devtool and =
+other AUH failures, such as po4a for several years, tell us perhaps some pr=
+uning of recipes is timely.</div><div dir=3D"auto"><br></div><div dir=3D"au=
+to">The quality of these layers is a community effort. There is no magic te=
+am waiting to do the work. It is all of you. It is all of us.</div><div dir=
+=3D"auto"><br></div><div dir=3D"auto">=E2=80=94Tim</div><div dir=3D"auto"><=
+br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
+x;border-left-width:1px;border-left-style:solid;padding-left:1ex;border-lef=
+t-color:rgb(204,204,204)" dir=3D"auto"><br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#105844): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/105844" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/105844</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/102342283/924=
+729" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
+/102342283/924729</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
+et=3D"_blank">ticotimo@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
+
+--000000000000c81942060937b8d8--
 
