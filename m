@@ -2,49 +2,49 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A9B2C001DD
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 88108C4708E
 	for <webhook@archiver.kernel.org>; Fri,  3 Nov 2023 20:02:28 +0000 (UTC)
-Received: from a27-191.smtp-out.us-west-2.amazonses.com (a27-191.smtp-out.us-west-2.amazonses.com [54.240.27.191])
- by mx.groups.io with SMTP id smtpd.web11.63229.1699041739546348899
+Received: from a27-193.smtp-out.us-west-2.amazonses.com (a27-193.smtp-out.us-west-2.amazonses.com [54.240.27.193])
+ by mx.groups.io with SMTP id smtpd.web11.63223.1699041739147715432
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 03 Nov 2023 13:02:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=Vv4bGAnb;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=W44NOvot;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.191, mailfrom: 0101018b96c7812a-91dc1cf2-8f4d-41f3-9a81-8c3678df64d1-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=OzwiAyf1;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=aoqNoJe6;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.193, mailfrom: 0101018b96c781d6-7bbaf903-ca90-490d-b297-84b485a6a14e-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
 	t=1699041739;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=X1X8JkqjhYeQEwdrInmMCow4P60i6yRAU5HF0AOCL6w=;
-	b=Vv4bGAnbqsamRLnsp2OFddOY86tVxwOjglfLSQKlJsSevzExhQ+rSxkZTuO54IpZ
-	eH/X3vNaL/ZCl9iGqQF7CC4+S38SEmXd1dCtnvPSSz50pSPrMfIQeSincbsr/bAWwQq
-	acCRV4F6HLJ9OOWsJ4dKOBGAc9vJ+AA1+4edppXc=
+	bh=w25H3RffoeS8XiJvQdZQwttIk9f/BHxmeAlsAXKR7N4=;
+	b=OzwiAyf1T3Yyb/NaWHAGUL5M/YM6rsK1LTU91V2xR5gMKYaJuaWPDU1j/k02ne53
+	W9mGisWQvbQdvzgUjvqBtQ3haeOcu9rZn60VAzGzx9J6jreTYhnKSU8fIJpaiEqYzSm
+	5e1vR134+xvdNr1BFlmwHXzt87ujaE1jMOGR6B94=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699041739;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=X1X8JkqjhYeQEwdrInmMCow4P60i6yRAU5HF0AOCL6w=;
-	b=W44NOvotiIZDCVUs6+Xv6Exvh/oGBsyw5cJxwFBRSGQhmSIqsC3qanEKjl4shT1j
-	5MOJZdfYeO+VNnAjkRWI+GQ0WMWj2AJE2jwc5IOAqvxjLcvspAAurNIDZfTZW9BJjHu
-	/kxs7PrzAR2VfoHIXhs62gN6je5G3kdwUsykJ+Jk=
-Content-Type: multipart/mixed; boundary="===============1956028319183541706=="
+	bh=w25H3RffoeS8XiJvQdZQwttIk9f/BHxmeAlsAXKR7N4=;
+	b=aoqNoJe6uZxZVjttsEqT8nTRHfp/07jPOfBsdPdrPgCdCw4+fEa4I11RSEEPb2Ne
+	zttb/b37G2uuw8wDg+JVOfkqL/XG6ujK25XwoRtCfqWpFSb4pPe4bLi0EFnR3n5ABKm
+	OYutLl5kTvfmBk/CO7vdE3z7/SBWj2l3VA6CwJuQ=
+Content-Type: multipart/mixed; boundary="===============4247252606804138201=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] perfetto: upgrading to 38.0 FAILED
-Message-ID: <0101018b96c7812a-91dc1cf2-8f4d-41f3-9a81-8c3678df64d1-000000@us-west-2.amazonses.com>
+Subject: [AUH] pm-graph: upgrading to 5.11 FAILED
+Message-ID: <0101018b96c781d6-7bbaf903-ca90-490d-b297-84b485a6a14e-000000@us-west-2.amazonses.com>
 Date: Fri, 3 Nov 2023 20:02:19 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
-X-SES-Outgoing: 2023.11.03-54.240.27.191
+X-SES-Outgoing: 2023.11.03-54.240.27.193
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 20:02:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106076
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106075
 
---===============1956028319183541706==
+--===============4247252606804138201==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,14 +52,14 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *perfetto* to *38.0* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *pm-graph* to *5.11* has Failed (devtool error).
 
 Detailed error information:
 
-Running 'devtool upgrade' for recipe perfetto failed.
+Running 'devtool upgrade' for recipe pm-graph failed.
 NOTE: Reconnecting to bitbake server...
 Loading cache...done.
-Loaded 5024 entries from dependency cache.
+Loaded 5025 entries from dependency cache.
 NOTE: Resolving any missing task queue dependencies
 
 Build Configuration:
@@ -93,19 +93,18 @@ Sstate summary: Wanted 10 Local 10 Mirrors 0 Missed 0 Current 20 (100% match, 10
 NOTE: Executing Tasks
 NOTE: Tasks Summary: Attempted 103 tasks of which 100 didn't need to be rerun and all succeeded.
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 5 seconds
+NOTE: Writing buildhistory took: 6 seconds
 INFO: Extracting current version source...
 INFO: Extracting upgraded version source...
-INFO: Rebasing devtool onto d1b5447730ebe38e2f559e389615efcc496a5b09
-WARNING: Command 'git rebase d1b5447730ebe38e2f559e389615efcc496a5b09' failed:
-Auto-merging sdk/perfetto.cc
-CONFLICT (add/add): Merge conflict in sdk/perfetto.cc
-Auto-merging sdk/perfetto.h
-CONFLICT (add/add): Merge conflict in sdk/perfetto.h
+INFO: Rebasing devtool onto ab51af84b9fa35dba67de79da847463ca82e306a
+WARNING: Command 'git rebase ab51af84b9fa35dba67de79da847463ca82e306a' failed:
+Auto-merging Makefile
+CONFLICT (content): Merge conflict in Makefile
 
 You will need to resolve conflicts in order to complete the upgrade.
-INFO: Upgraded source extracted to /home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/sources/perfetto
-INFO: New recipe is /home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/recipes/perfetto/perfetto.bb
+INFO: Using source tree as build directory since that would be the default for this recipe
+INFO: Upgraded source extracted to /home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/sources/pm-graph
+INFO: New recipe is /home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/recipes/pm-graph/pm-graph_5.11.bb
 
 
 
@@ -114,5 +113,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============1956028319183541706==--
+--===============4247252606804138201==--
 
