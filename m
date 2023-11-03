@@ -2,49 +2,49 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D5876C25B56
-	for <webhook@archiver.kernel.org>; Fri,  3 Nov 2023 19:52:53 +0000 (UTC)
-Received: from a27-30.smtp-out.us-west-2.amazonses.com (a27-30.smtp-out.us-west-2.amazonses.com [54.240.27.30])
- by mx.groups.io with SMTP id smtpd.web10.63870.1699041166116860266
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 06C40C25B58
+	for <webhook@archiver.kernel.org>; Fri,  3 Nov 2023 19:52:54 +0000 (UTC)
+Received: from a27-31.smtp-out.us-west-2.amazonses.com (a27-31.smtp-out.us-west-2.amazonses.com [54.240.27.31])
+ by mx.groups.io with SMTP id smtpd.web11.62977.1699041166149435499
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 03 Nov 2023 12:52:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=SC/Ck3Vr;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=OYIZEBnA;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.30, mailfrom: 0101018b96becafd-3ae58637-f8d5-4f42-a889-d46a23be5a5a-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=QUZjVr8N;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=lz5uwBEo;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.31, mailfrom: 0101018b96beca2e-069070b3-cec9-40ea-a4f1-f1d99a5d8911-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
 	t=1699041168;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=jZ753UcAHgy1Gwwu5+TGgsMshvtLOP+x0L05kHkUZE0=;
-	b=SC/Ck3Vr8Y8jMHcQeuYyTMYK+1RzB5VaEt7n6KKPTRXsd8b3fHNjzINs8hQIzPrh
-	ELvYILAYKRlseMM5VSLVMVmUDDI9geVOWhX/YGobX598ZzEIbm4P4f+ExHdLYzT0Exc
-	VjGVcxD67hCxca+CTCJ/xFsfUq6ZJ0acE/7xg6cc=
+	bh=OebBaK5WjZcAm8smQdA6pnrTNKjdBeELqvimuccJSrk=;
+	b=QUZjVr8NqR1VUuBHlXOzmegZ3/qBUW1ngDqcreZQJO5Eupty+z09Ntrw/tf1quXJ
+	z97GkrZd9ghGK1oay7SEO/TXcWoWD9FE8yymAqqOVGby/c4a6b3RIJqI1wetiAcJsX1
+	mUs/wz5Nr2hKwJtXzIzpJCC4FW3el2fmuQ0Hvqpk=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699041168;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=jZ753UcAHgy1Gwwu5+TGgsMshvtLOP+x0L05kHkUZE0=;
-	b=OYIZEBnAM+tQUfLd1iizFr5snkxiFe9JN5eHNyGWdD1KGpnkpY/ldn0TO+uj6HUo
-	rImen59qjmOMb0xMWAt1eeLPzwRBN8GbBYLtxPwSQY2XP4QlNFSWX0T/RVBDqP3XJxZ
-	J/uVNUm2wHErwPhEXS6fud58cdqBprr1OD4keP4A=
-Content-Type: multipart/mixed; boundary="===============7110007821945550333=="
+	bh=OebBaK5WjZcAm8smQdA6pnrTNKjdBeELqvimuccJSrk=;
+	b=lz5uwBEoruMyvuxosX7/WTibEALEbyrKKGLV0IZXW66UxmE76u8/J5SYdLDTPseQ
+	fE/6VSDrU9moMdUnxcRwIY3O528vZJfNe6NLwDi2bXU8/a/ETZYrR/EI+yZvHXQhdbN
+	o/rGBb+I3BDC7LpHi5gb62x+vI+BTmZSwQYX6e5A=
+Content-Type: multipart/mixed; boundary="===============1626674541891137198=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] krb5: upgrading to 1.21.2 FAILED
-Message-ID: <0101018b96becafd-3ae58637-f8d5-4f42-a889-d46a23be5a5a-000000@us-west-2.amazonses.com>
-Date: Fri, 3 Nov 2023 19:52:48 +0000
+Subject: [AUH] inotify-tools: upgrading to 4.23.9.0 FAILED
+Message-ID: <0101018b96beca2e-069070b3-cec9-40ea-a4f1-f1d99a5d8911-000000@us-west-2.amazonses.com>
+Date: Fri, 3 Nov 2023 19:52:47 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
-X-SES-Outgoing: 2023.11.03-54.240.27.30
+X-SES-Outgoing: 2023.11.03-54.240.27.31
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 19:52:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105948
+ <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 19:52:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105942
 
---===============7110007821945550333==
+--===============1626674541891137198==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,14 +52,14 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *krb5* to *1.21.2* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *inotify-tools* to *4.23.9.0* has Failed (devtool error).
 
 Detailed error information:
 
-The following devtool command failed:  upgrade krb5 -V 1.21.2
+Running 'devtool upgrade' for recipe inotify-tools failed.
 NOTE: Reconnecting to bitbake server...
 Loading cache...done.
-Loaded 4960 entries from dependency cache.
+Loaded 4959 entries from dependency cache.
 NOTE: Resolving any missing task queue dependencies
 
 Build Configuration:
@@ -84,7 +84,7 @@ meta-gnome
 meta-xfce            
 meta-filesystems     
 meta-initramfs       
-meta-webserver       = "tmp-auh-upgrades:84fabf2f393d403a83cd1a8d12e37c507bcf2262"
+meta-webserver       = "tmp-auh-upgrades:af578c0118d90ae3dcd85dfdd847d9b12139c6bd"
 workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
 
 Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
@@ -93,24 +93,18 @@ Sstate summary: Wanted 10 Local 10 Mirrors 0 Missed 0 Current 20 (100% match, 10
 NOTE: Executing Tasks
 NOTE: Tasks Summary: Attempted 103 tasks of which 100 didn't need to be rerun and all succeeded.
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 12 seconds
-
+NOTE: Writing buildhistory took: 3 seconds
 INFO: Extracting current version source...
-INFO: Adding local source files to srctree...
-Traceback (most recent call last):
-  File "/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts/devtool", line 349, in <module>
-    ret = main()
-          ^^^^^^
-  File "/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts/devtool", line 336, in main
-    ret = args.func(args, config, basepath, workspace)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts/lib/devtool/upgrade.py", line 563, in upgrade
-    old_licenses = _extract_licenses(srctree_s, (rd.getVar('LIC_FILES_CHKSUM') or ""))
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts/lib/devtool/upgrade.py", line 476, in _extract_licenses
-    with open(os.path.join(srcpath, path), 'rb') as f:
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-FileNotFoundError: [Errno 2] No such file or directory: '/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/krb5/1.20.2/krb5-1.20.2/src/../NOTICE'
+INFO: Extracting upgraded version source...
+INFO: Rebasing devtool onto 5c2ab772338bcbe516306bf8cf1059ddf2fa6bb7
+WARNING: Command 'git rebase 5c2ab772338bcbe516306bf8cf1059ddf2fa6bb7' failed:
+Auto-merging libinotifytools/src/inotifytools.cpp
+CONFLICT (content): Merge conflict in libinotifytools/src/inotifytools.cpp
+
+You will need to resolve conflicts in order to complete the upgrade.
+INFO: Upgraded source extracted to /home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/sources/inotify-tools
+INFO: New recipe is /home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/recipes/inotify-tools/inotify-tools_4.23.9.0.bb
+
 
 
 Please review the attached files for further information and build/update failures.
@@ -118,5 +112,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============7110007821945550333==--
+--===============1626674541891137198==--
 
