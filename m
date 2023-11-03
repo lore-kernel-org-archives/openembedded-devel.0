@@ -2,104 +2,101 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C17FBC4167B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B1DCCC4332F
 	for <webhook@archiver.kernel.org>; Fri,  3 Nov 2023 13:25:05 +0000 (UTC)
-Received: from mail-lf1-f43.google.com (mail-lf1-f43.google.com [209.85.167.43])
- by mx.groups.io with SMTP id smtpd.web10.51749.1699017900450552515
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+ by mx.groups.io with SMTP id smtpd.web10.51747.1699017899188668897
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Nov 2023 06:25:00 -0700
+ Fri, 03 Nov 2023 06:24:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=p5frHIZE;
- spf=pass (domain: konsulko.com, ip: 209.85.167.43, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-lf1-f43.google.com with SMTP id 2adb3069b0e04-507d1cc0538so2656168e87.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 06:25:00 -0700 (PDT)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=e6b+BOZ2;
+ spf=pass (domain: konsulko.com, ip: 209.85.128.42, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-40906fc54fdso16098375e9.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 06:24:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1699017898; x=1699622698; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Nu5ykAvqsRvzHdCPom+GFk9ZqF32DDPYnn/BYtOh/rM=;
-        b=p5frHIZEhqaMyr69hP3sbeh3HkisWvG2vHR+QbYWgIn6l76ZeAXQh1FiDgIAvIjJO9
-         fwZxPrWAUR0Q9/IBXE5cQlzFrWd8GYaAXPJnAuYSyxZo/GhcZ8kwkJiKRdE4NmG7t8KB
-         alGIGwjyEjeQl12cH0IkWm3vvRkqkwN4cHxJs=
+        d=konsulko.com; s=google; t=1699017897; x=1699622697; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=YD9ISSW6FPlw8KcS6prPcfJ1fop/JcrRx9uLOpvBdsc=;
+        b=e6b+BOZ2eGs0eSOQDRKiPCo4vMkVTOIGkk0Gw8hWj9vefVgaXlWta3A8S//MWnxG9B
+         Lq4wpmqQKxcQmT2g/rxCy8X+yx/Pc4sbQhH1BshQ5JE9Vs2vbhJ9wOI+mh28jZRRN/o9
+         3HnvlUcoxtkXNL1o4V0JwAqoa/viwEY+oPVz4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699017898; x=1699622698;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Nu5ykAvqsRvzHdCPom+GFk9ZqF32DDPYnn/BYtOh/rM=;
-        b=vz+j2PsJnrxzrtJCpmcN1FkY0IgBYWhR2mkHxRE0N/nTdoUniepa/2LtjcjcdrD6sE
-         LYnMo9S/hF1o+rK2wVc9Ra4U/LspDeXwJMWpZ1rPbzAVI7stPrkIqZdkuZi6z5qxZqJB
-         nQ+EAnx91H7WwJsyef1fg77KVyM2TzB1RVh8HHyety1UPdcoVEohagItttY3q6spjP4h
-         1vauseQd9f9WdNE1Plb1gG+mcbuEpsyLJ5X1A2tsDTzH594hsNFVNsXupiUV6Jd4hA0l
-         M1zRiDzSYxtfA0KyvXhkcZEJNoa+emANZIzr6qjm9tF3YmO5uB/o9AD/UcWKP22FD0oF
-         chrQ==
-X-Gm-Message-State: AOJu0Yz2WhjSfCiQKloGiftQe/VIOSgQqjvn3ymSH7BDauXp0lQcnEg5
-	CuTNEkf5W5fIBQiJdgN2dvdU4UMtn1Gfhztj1ls=
-X-Google-Smtp-Source: AGHT+IGPmnwIqIl3UsWgIANor/amBC8YpIpoj/K4pLdHPnsSgZ49x/m6S+EJfjTy2sqjtfZJUsx+lQ==
-X-Received: by 2002:ac2:4555:0:b0:509:4a55:f189 with SMTP id j21-20020ac24555000000b005094a55f189mr3643364lfm.11.1699017898108;
-        Fri, 03 Nov 2023 06:24:58 -0700 (PDT)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id s6-20020a5d4ec6000000b0032f79e55eb8sm1869754wrv.16.2023.11.03.06.24.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        d=1e100.net; s=20230601; t=1699017897; x=1699622697;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=YD9ISSW6FPlw8KcS6prPcfJ1fop/JcrRx9uLOpvBdsc=;
+        b=fPREzg9Oo/WPFgdUDUvcsODjpp1ZaU9IvqPcXGrbLNQ2yR2cdnypXaD9/g6OW1Bxod
+         Lhrbc+kzy0fF0+G3iKxBHzr1TYz0Gy7jelOO4QByAjxlzDi8ihRiBZOQYu+c2hmqVLNF
+         VZDqo2iCmuXva2xn6aNvplvxwP9trTK0s2VoVkqze+PhmfR7Js+fCcnUqicgcUjtkbtW
+         mnYfwEj76n8t1ANJf48xIE46Lwhe2QwfaqLs6b4imQubJoauyJ86fzPQ2yai0l1piv/t
+         N/uF0t4l+Lb9YD2Fxrohb/0C0adfbg0Bm0JRJPHZGIMJZ1bHYiDgLxsHk5gb79em4ep/
+         RSDg==
+X-Gm-Message-State: AOJu0YyWYS8XwyijNYqQmjD0vsdcMTEIFnv0POsluVBxb7oc+P2TSXc7
+	pz96Yq3krUd+gQTPowi5FAXtfDAYUbvVCgAGKoM=
+X-Google-Smtp-Source: AGHT+IHqSYH6mccz42uOyuKJb3rmnjXISIiYTXXOrUV7F6B4v4Ss78Cb9b0fSOJeC3or80+5Ekf1YQ==
+X-Received: by 2002:adf:d1c9:0:b0:32d:8094:f4c8 with SMTP id b9-20020adfd1c9000000b0032d8094f4c8mr18047763wrd.19.1699017897181;
         Fri, 03 Nov 2023 06:24:57 -0700 (PDT)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id s6-20020a5d4ec6000000b0032f79e55eb8sm1869754wrv.16.2023.11.03.06.24.56
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 03 Nov 2023 06:24:56 -0700 (PDT)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/2] python3-unoconv: add recipe
-Date: Fri,  3 Nov 2023 15:24:53 +0200
-Message-Id: <20231103132453.3853904-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/2] python3-screeninfo: add recipe
+Date: Fri,  3 Nov 2023 15:24:52 +0200
+Message-Id: <20231103132453.3853904-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20231103132453.3853904-1-leon.anavi@konsulko.com>
-References: <20231103132453.3853904-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 13:25:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105862
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105861
 
-Add unoconv version 0.9.0, an universal office converter - convert
-between any document format supported by LibreOffice/OpenOffice.
+Add screeninfo, fetch location and size of physical screens.
+Versions 0.8.1 and 0.8.0 changelog:
+
+- Added typing information
+- Started tracking changes
+- Switched to poetry
+- Added ignoring of enumerators that work, but return no valid
+  monitors
+- Added ScreenInfoError to list of top-level symbols
 
 This work was sponsored by GOVCERT.LU.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/python3-unoconv_0.9.0.bb           | 23 +++++++++++++++++++
- 1 file changed, 23 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-unoconv_0.9.0.bb
+ .../python/python3-screeninfo_0.8.1.bb           | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-screeninfo_0.8.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-unoconv_0.9.0.bb b/meta-python/recipes-devtools/python/python3-unoconv_0.9.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-screeninfo_0.8.1.bb b/meta-python/recipes-devtools/python/python3-screeninfo_0.8.1.bb
 new file mode 100644
-index 000000000..3c944b4f2
+index 000000000..0fb3f3a22
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-unoconv_0.9.0.bb
-@@ -0,0 +1,23 @@
-+SUMMARY = "Universal Office Converter - Office document conversion"
-+HOMEPAGE = "https://github.com/unoconv/unoconv"
-+LICENSE = "GPL-2.0-only"
++++ b/meta-python/recipes-devtools/python/python3-screeninfo_0.8.1.bb
+@@ -0,0 +1,16 @@
++DESCRIPTION = "Fetch location and size of physical screens."
++HOMEPAGE = "https://github.com/rr-/screeninfo"
 +SECTION = "devel/python"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE.md;md5=a23813181e06852d377bc25ae5563a97"
 +
-+SRC_URI[sha256sum] = "308ebfd98e67d898834876348b27caf41470cd853fbe2681cc7dacd8fd5e6031"
++PYPI_PACKAGE = "screeninfo"
++
++SRC_URI[sha256sum] = "9983076bcc7e34402a1a9e4d7dabf3729411fd2abb3f3b4be7eba73519cd2ed1"
 +
 +inherit pypi setuptools3
 +
-+PYPI_PACKAGE="unoconv"
-+
 +RDEPENDS:${PN} += "\
-+    ${PYTHON_PN}-distutils \
 +    ${PYTHON_PN}-core \
-+    ${PYTHON_PN}-shell \
++    ${PYTHON_PN}-profile \
 +"
-+
-+do_install:append() {
-+  sed -i -e 's:^#!/usr/bin/env python$:#!/usr/bin/env python3:' ${D}/usr/bin/unoconv
-+}
-+
-+BBCLASSEXTEND = "native nativesdk"
 -- 
 2.39.2
 
