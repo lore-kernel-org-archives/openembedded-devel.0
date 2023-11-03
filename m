@@ -2,49 +2,49 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B473CC00A5A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EDE85C04E83
 	for <webhook@archiver.kernel.org>; Fri,  3 Nov 2023 19:53:05 +0000 (UTC)
-Received: from a27-193.smtp-out.us-west-2.amazonses.com (a27-193.smtp-out.us-west-2.amazonses.com [54.240.27.193])
- by mx.groups.io with SMTP id smtpd.web10.63868.1699041166053805877
+Received: from a27-23.smtp-out.us-west-2.amazonses.com (a27-23.smtp-out.us-west-2.amazonses.com [54.240.27.23])
+ by mx.groups.io with SMTP id smtpd.web10.63867.1699041165979797613
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 03 Nov 2023 12:53:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=Nv4Ipyw/;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=MarwlDjI;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.193, mailfrom: 0101018b96bef937-6f54d603-2988-464c-883f-dd0d9406debb-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=hQMah+5j;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=YlB1rKpm;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.23, mailfrom: 0101018b96bef8b2-6e2bd6fe-b63f-4349-bb5f-3037ab3aacc3-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
-	t=1699041180;
+	t=1699041179;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=F6vUd4iwcrGgNvETZ+Bav+5sGcx6jPoESDHOI5GGgCs=;
-	b=Nv4Ipyw/QsL2yJhdD3v4TGxv+PecEqKBB/ZFTYARMcsAD9AO5Pfe9qLOVfGstNLW
-	yDJNFD3TNshy4cDjGuu8VOUmTkKB2T/lgcbJhtQmoXv79cYCCv6ZC7Rr8MK1GKLGG8d
-	HUPYDQg5ICYmUWEArf2MdZTI85ppxPikrOckS+Gw=
+	bh=uuoTR3hn9RXzDe7J2+KolKffMFLd9muZMwzKspXDliA=;
+	b=hQMah+5jDRBucIJ3e9cClPzotGUX0E1l2gNjDQ73y0SDrFVdSWAWNGfTOFoU0gzn
+	dEKqAka50Y+5jAoEMDjdqZqYXTXl7PWiErGs/hZsZ28o4WPXFg2Sy8eLIEIwKpn6+TH
+	Wug3c8uCspeMZI0yJnBpWvTm9MHoYT7p2m6OLHMw=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699041180;
+	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699041179;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=F6vUd4iwcrGgNvETZ+Bav+5sGcx6jPoESDHOI5GGgCs=;
-	b=MarwlDjIa1W/Kq/HkcD5SJy44L30H2pVD/VnuPDo2FLXYdUws1iZwNujP9QP51Ra
-	xryPrNF7eZqDvN5H8ZcA/OY4SsK+zgw1ZSEqGIMuMj4KfrdBwjNKc73QpEpHWcAeZy5
-	GvlM6PaF84LHyi5beOPexgAJQ2XPuVioMYS7tmlM=
-Content-Type: multipart/mixed; boundary="===============5617189245430407120=="
+	bh=uuoTR3hn9RXzDe7J2+KolKffMFLd9muZMwzKspXDliA=;
+	b=YlB1rKpmhta+s/zos5A2x8CLimz8Cg9jkf+nxwL8C18ZY/WWQ9Be9Pa7joH6+NWK
+	BLjymhYhpnPmbYoy/fEN6oSb4i1eixfC/OaXoxyZP1Mopa/LL+Bh6q/fZ5GVIOLQgAn
+	th4t2utKqPGKIfcNxdVIjPG/8FHqoWdAUXlrIyMc=
+Content-Type: multipart/mixed; boundary="===============8043304223178016106=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] zabbix: upgrading to 6.4.8 FAILED
-Message-ID: <0101018b96bef937-6f54d603-2988-464c-883f-dd0d9406debb-000000@us-west-2.amazonses.com>
+Subject: [AUH] xgamma: upgrading to 1.0.7 FAILED
+Message-ID: <0101018b96bef8b2-6e2bd6fe-b63f-4349-bb5f-3037ab3aacc3-000000@us-west-2.amazonses.com>
 Date: Fri, 3 Nov 2023 19:52:59 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
-X-SES-Outgoing: 2023.11.03-54.240.27.193
+X-SES-Outgoing: 2023.11.03-54.240.27.23
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 19:53:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106044
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106041
 
---===============5617189245430407120==
+--===============8043304223178016106==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,14 +52,14 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *zabbix* to *6.4.8* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *xgamma* to *1.0.7* has Failed (devtool error).
 
 Detailed error information:
 
-The following devtool command failed:  upgrade zabbix -V 6.4.8
+The following devtool command failed:  upgrade xgamma -V 1.0.7
 NOTE: Reconnecting to bitbake server...
 Loading cache...done.
-Loaded 5079 entries from dependency cache.
+Loaded 5066 entries from dependency cache.
 NOTE: Resolving any missing task queue dependencies
 
 Build Configuration:
@@ -84,7 +84,7 @@ meta-gnome
 meta-xfce            
 meta-filesystems     
 meta-initramfs       
-meta-webserver       = "tmp-auh-upgrades:908c14296bd89c67c8ae271dfd1542a901f850e5"
+meta-webserver       = "tmp-auh-upgrades:8667b0d03e24c6e92338573692c9667934232125"
 workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
 
 Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
@@ -95,7 +95,7 @@ NOTE: Tasks Summary: Attempted 103 tasks of which 100 didn't need to be rerun an
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 3 seconds
 Loading cache...done.
-Loaded 5079 entries from dependency cache.
+Loaded 5066 entries from dependency cache.
 Parsing recipes...done.
 Parsing of 3056 .bb files complete (3054 cached, 2 parsed). 4887 targets, 92 skipped, 0 masked, 0 errors.
 NOTE: Resolving any missing task queue dependencies
@@ -122,31 +122,30 @@ meta-gnome
 meta-xfce            
 meta-filesystems     
 meta-initramfs       
-meta-webserver       = "tmp-auh-upgrades:908c14296bd89c67c8ae271dfd1542a901f850e5"
+meta-webserver       = "tmp-auh-upgrades:8667b0d03e24c6e92338573692c9667934232125"
 workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
 
 Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
 done.
 Sstate summary: Wanted 1 Local 0 Mirrors 0 Missed 1 Current 0 (0% match, 0% complete)
 NOTE: Executing Tasks
-WARNING: Failed to fetch URL https://cdn.zabbix.com/zabbix/sources/stable/6.2/zabbix-6.4.8.tar.gz, attempting MIRRORS if available
+WARNING: Failed to fetch URL https://www.x.org/releases//individual/app/xgamma-1.0.7.tar.bz2, attempting MIRRORS if available
 NOTE: Tasks Summary: Attempted 2 tasks of which 0 didn't need to be rerun and 1 failed.
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 3 seconds
-NOTE: The errors for this build are stored in /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231103194235.txt
+NOTE: The errors for this build are stored in /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231103192757.txt
 You can send the errors to a reports server by running:
-  send-error-report /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231103194235.txt [-s server]
+  send-error-report /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231103192757.txt [-s server]
 NOTE: The contents of these logs will be posted in public if you use the above command with the default server. Please ensure you remove any identifying or proprietary information when prompted before sending.
 
 INFO: Extracting current version source...
-INFO: Adding local source files to srctree...
 INFO: Extracting upgraded version source...
-INFO: Fetching https://cdn.zabbix.com/zabbix/sources/stable/6.2/zabbix-6.4.8.tar.gz...
-ERROR: Fetcher failure: Fetch command export PSEUDO_DISABLED=1; export SSL_CERT_FILE="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export GIT_SSL_CAINFO="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export ftp_proxy="http://proxy.yocto.io:5187/"; export FTP_PROXY="http://proxy.yocto.io:5187/"; export PATH="/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/sysroots-uninative/x86_64-linux/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-f27wwrlu/work/recipe-sysroot-native/usr/bin/x86_64-poky-linux:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-f27wwrlu/work/recipe-sysroot/usr/bin/crossscripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-f27wwrlu/work/recipe-sysroot-native/usr/sbin:/hom
- e/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-f27wwrlu/work/recipe-sysroot-native/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-f27wwrlu/work/recipe-sysroot-native/sbin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-f27wwrlu/work/recipe-sysroot-native/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/bitbake/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools"; export HOME="/home/pokybuild"; /usr/bin/env wget -t 2 -T 30 --passive-ftp -O /srv/autobuilder/autobuilder.yocto.io/current_sources/zabbix-6.4.8.tar.gz.tmp -P /srv/autobuilder/autobuilder.yocto.io/current_sources 'https://cdn.zabbix.com/zabbix/sources/stable/6.2/zabbix-6.4.8.tar.gz' --progress=dot -v failed with exit code 8, no output
-ERROR: Bitbake Fetcher Error: FetchError('Unable to fetch URL from any source.', 'https://cdn.zabbix.com/zabbix/sources/stable/6.2/zabbix-6.4.8.tar.gz')
-ERROR: Logfile of failure stored in: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-f27wwrlu/work/temp/log.do_fetch.2676475
-ERROR: Failed to fetch URL https://cdn.zabbix.com/zabbix/sources/stable/6.2/zabbix-6.4.8.tar.gz
+INFO: Fetching https://www.x.org/releases//individual/app/xgamma-1.0.7.tar.bz2...
+ERROR: Fetcher failure: Fetch command export PSEUDO_DISABLED=1; export SSL_CERT_FILE="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export GIT_SSL_CAINFO="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export ftp_proxy="http://proxy.yocto.io:5187/"; export FTP_PROXY="http://proxy.yocto.io:5187/"; export PATH="/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/sysroots-uninative/x86_64-linux/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-vuviy87y/work/recipe-sysroot-native/usr/bin/x86_64-poky-linux:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-vuviy87y/work/recipe-sysroot/usr/bin/crossscripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-vuviy87y/work/recipe-sysroot-native/usr/sbin:/hom
+ e/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-vuviy87y/work/recipe-sysroot-native/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-vuviy87y/work/recipe-sysroot-native/sbin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-vuviy87y/work/recipe-sysroot-native/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/bitbake/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools"; export HOME="/home/pokybuild"; /usr/bin/env wget -t 2 -T 30 --passive-ftp -O /srv/autobuilder/autobuilder.yocto.io/current_sources/xgamma-1.0.7.tar.bz2.tmp -P /srv/autobuilder/autobuilder.yocto.io/current_sources 'https://www.x.org/releases//individual/app/xgamma-1.0.7.tar.bz2' --progress=dot -v failed with exit code 8, no output
+ERROR: Bitbake Fetcher Error: FetchError('Unable to fetch URL from any source.', 'https://www.x.org/releases//individual/app/xgamma-1.0.7.tar.bz2')
+ERROR: Logfile of failure stored in: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-vuviy87y/work/temp/log.do_fetch.2587828
+ERROR: Failed to fetch URL https://www.x.org/releases//individual/app/xgamma-1.0.7.tar.bz2
 
 
 Please review the attached files for further information and build/update failures.
@@ -154,5 +153,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============5617189245430407120==--
+--===============8043304223178016106==--
 
