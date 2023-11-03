@@ -2,49 +2,49 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 89C9EC25B4D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A5104C25B51
 	for <webhook@archiver.kernel.org>; Fri,  3 Nov 2023 19:52:53 +0000 (UTC)
-Received: from a27-45.smtp-out.us-west-2.amazonses.com (a27-45.smtp-out.us-west-2.amazonses.com [54.240.27.45])
- by mx.groups.io with SMTP id smtpd.web11.62971.1699041165185365512
+Received: from a27-192.smtp-out.us-west-2.amazonses.com (a27-192.smtp-out.us-west-2.amazonses.com [54.240.27.192])
+ by mx.groups.io with SMTP id smtpd.web10.63859.1699041165176728042
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 03 Nov 2023 12:52:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=TfBG3BmY;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=ZUpqxQwK;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.45, mailfrom: 0101018b96becd6f-ede1f9c6-de7f-47f9-b828-fd287ce400d7-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=Xxavv5UE;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=jwsiB+62;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.192, mailfrom: 0101018b96beccd7-00e1acaf-6fad-4cb6-a095-7159fe4db374-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
 	t=1699041168;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=8JXtBqWRRpJ1EpJKli86Qxwje3iRo3gCg7tEhXFEUw4=;
-	b=TfBG3BmYaPDof1TGx8DWvK2IDhEnQcYzyOlqPNgFsbkMwUt34Fs3IIhJH4bE42BZ
-	Wb/mThdt1RbEU3GyTo0RuPsVOxZiiMNVQnu1K1ETWgu8TgH3RxQI294JzqmwyBFSoFa
-	CNt1y2+i19P6i0/1rhXpXRYGBsWJn61vmaKNlVSQ=
+	bh=JS74uR/zralcdZaH1srH44NUeXG/KImf2M8ikPYELjY=;
+	b=Xxavv5UEa4yxRJBYXKtSIT1FmZE6mrnT9icBxqoVbBIEg+pASZVrOzuCYHwRHY07
+	EwMbx8vGvfhDnN4WQ7SWuJqw94GycbqWQ1PHPdrKDBiiGcIsGocZzc4YH77qRGZ/1eo
+	AdGS9ZHce0aOPjgiUC1x6sjfJ9v/bmaP6QWwk380=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699041168;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=8JXtBqWRRpJ1EpJKli86Qxwje3iRo3gCg7tEhXFEUw4=;
-	b=ZUpqxQwKGHQZWT8rtZgNv8MVggvWZIg1Cez2FZTzxylaEUjmYXUJYNcl9vYUSpVk
-	QFaMEtXBvsiEvUdsvYctb507ZyomgbkNb9Prn+6RT95C+09O0Sj3r35GeG4fhftj0WX
-	1KgbYBA4OyEoXvf6q2lbKu7AZFSHMIMvfyYhBZys=
-Content-Type: multipart/mixed; boundary="===============1494713649825070613=="
+	bh=JS74uR/zralcdZaH1srH44NUeXG/KImf2M8ikPYELjY=;
+	b=jwsiB+621byPklqHkcxB+cM8HRZMsY6m3fGVeHT6MdR4xMXBDDRL/mKfWM1QWAx7
+	hpnPjaOihsr9DOjkRWlQ+vqxM7TUJIci0K47uryRttxWL0VPhf/XB7kRmllNJAKMApm
+	e6XfDr8Ecx7SXBQ78DneIO3X8GItEL4DPPpxwR/I=
+Content-Type: multipart/mixed; boundary="===============6958988086216199327=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] libpeas: upgrading to 2.0.0 FAILED
-Message-ID: <0101018b96becd6f-ede1f9c6-de7f-47f9-b828-fd287ce400d7-000000@us-west-2.amazonses.com>
+Subject: [AUH] liblightmodbus: upgrading to 3.0 FAILED
+Message-ID: <0101018b96beccd7-00e1acaf-6fad-4cb6-a095-7159fe4db374-000000@us-west-2.amazonses.com>
 Date: Fri, 3 Nov 2023 19:52:48 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
-X-SES-Outgoing: 2023.11.03-54.240.27.45
+X-SES-Outgoing: 2023.11.03-54.240.27.192
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 03 Nov 2023 19:52:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105956
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/105954
 
---===============1494713649825070613==
+--===============6958988086216199327==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,14 +52,14 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *libpeas* to *2.0.0* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *liblightmodbus* to *3.0* has Failed (devtool error).
 
 Detailed error information:
 
-Running 'devtool upgrade' for recipe libpeas failed.
+The following devtool command failed:  upgrade liblightmodbus -V 3.0 -S e7be88bc65abec4a902f4e5194d7235ebd3a19aa
 NOTE: Reconnecting to bitbake server...
 Loading cache...done.
-Loaded 4973 entries from dependency cache.
+Loaded 4971 entries from dependency cache.
 NOTE: Resolving any missing task queue dependencies
 
 Build Configuration:
@@ -84,75 +84,21 @@ meta-gnome
 meta-xfce            
 meta-filesystems     
 meta-initramfs       
-meta-webserver       = "tmp-auh-upgrades:e3651a0232daf8d53dfc21789e28ef9db54ccd03"
+meta-webserver       = "tmp-auh-upgrades:942696509537c45e0643cdf17aaf516d8159e4df"
 workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
 
 Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
 done.
-Sstate summary: Wanted 11 Local 11 Mirrors 0 Missed 0 Current 22 (100% match, 100% complete)
+Sstate summary: Wanted 10 Local 10 Mirrors 0 Missed 0 Current 20 (100% match, 100% complete)
 NOTE: Executing Tasks
-NOTE: Tasks Summary: Attempted 113 tasks of which 110 didn't need to be rerun and all succeeded.
+NOTE: Tasks Summary: Attempted 103 tasks of which 100 didn't need to be rerun and all succeeded.
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 8 seconds
-Loading cache...done.
-Loaded 4973 entries from dependency cache.
-Parsing recipes...done.
-Parsing of 3056 .bb files complete (3054 cached, 2 parsed). 4887 targets, 92 skipped, 0 masked, 0 errors.
-NOTE: Resolving any missing task queue dependencies
+NOTE: Writing buildhistory took: 11 seconds
 
-Build Configuration:
-BB_VERSION           = "2.6.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "x86_64-poky-linux"
-MACHINE              = "qemux86-64"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.3+snapshot-e575f59b82eae78fb1ac8df7198eaa4a7a963259"
-TUNE_FEATURES        = "m64 core2"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
-meta-oe              
-meta-python          
-meta-perl            
-meta-networking      
-meta-multimedia      
-meta-gnome           
-meta-xfce            
-meta-filesystems     
-meta-initramfs       
-meta-webserver       = "tmp-auh-upgrades:e3651a0232daf8d53dfc21789e28ef9db54ccd03"
-workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
-
-Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
-done.
-Sstate summary: Wanted 10 Local 9 Mirrors 0 Missed 1 Current 18 (90% match, 96% complete)
-NOTE: Executing Tasks
-NOTE: Tasks Summary: Attempted 93 tasks of which 90 didn't need to be rerun and all succeeded.
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 7 seconds
-DEBUG 5 [Errno 25] Inappropriate ioctl for device
-Adding changed files:   0% |                                   | ETA:  --:--:--
-Adding changed files:   0% |                                   | ETA:  --:--:--
-Adding changed files:  48% |#################                   | ETA:  0:00:00
-Adding changed files:  96% |##################################  | ETA:  0:00:00
-Adding changed files: 100% |####################################| Time: 0:00:00
 INFO: Extracting current version source...
 INFO: Extracting upgraded version source...
-INFO: Fetching https://download.gnome.org/sources//libpeas/2.0/libpeas-2.0.0.tar.xz;name=archive...
-INFO: Rebasing devtool onto 486abc18da830c8fc52f1abb2f93962f2fdf5784
-WARNING: Command 'git rebase 486abc18da830c8fc52f1abb2f93962f2fdf5784' failed:
-CONFLICT (modify/delete): peas-demo/meson.build deleted in HEAD and modified in 735e33f (Remove builddir and srcdir paths from test binaries).  Version 735e33f (Remove builddir and srcdir paths from test binaries) of peas-demo/meson.build left in tree.
-CONFLICT (modify/delete): tests/libpeas-gtk/testing/meson.build deleted in HEAD and modified in 735e33f (Remove builddir and srcdir paths from test binaries).  Version 735e33f (Remove builddir and srcdir paths from test binaries) of tests/libpeas-gtk/testing/meson.build left in tree.
-Auto-merging tests/libpeas/testing/meson.build
-CONFLICT (content): Merge conflict in tests/libpeas/testing/meson.build
-Auto-merging tests/testing-util/meson.build
-CONFLICT (content): Merge conflict in tests/testing-util/meson.build
-
-You will need to resolve conflicts in order to complete the upgrade.
-INFO: Upgraded source extracted to /home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/sources/libpeas
-INFO: New recipe is /home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/recipes/libpeas/libpeas_2.0.0.bb
+ERROR: Execution of 'git checkout e7be88bc65abec4a902f4e5194d7235ebd3a19aa' failed with exit code 128:
+fatal: reference is not a tree: e7be88bc65abec4a902f4e5194d7235ebd3a19aa
 
 
 
@@ -161,5 +107,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============1494713649825070613==--
+--===============6958988086216199327==--
 
