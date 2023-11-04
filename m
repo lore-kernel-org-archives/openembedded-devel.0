@@ -2,49 +2,49 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EB310C04A95
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EE4D7C04E83
 	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 01:38:19 +0000 (UTC)
-Received: from a27-191.smtp-out.us-west-2.amazonses.com (a27-191.smtp-out.us-west-2.amazonses.com [54.240.27.191])
- by mx.groups.io with SMTP id smtpd.web11.2194.1699061893058992672
+Received: from a27-45.smtp-out.us-west-2.amazonses.com (a27-45.smtp-out.us-west-2.amazonses.com [54.240.27.45])
+ by mx.groups.io with SMTP id smtpd.web11.2210.1699061896657852813
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 03 Nov 2023 18:38:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=axchbaTB;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=XPWXNK4P;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.191, mailfrom: 0101018b97fb1931-b4998496-9671-4926-8fe1-45b867c7b487-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=aEoCqqdj;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=G7qa7anN;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.45, mailfrom: 0101018b97fb1931-b9671fa1-4b6a-4137-9444-3ab85aeef465-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
 	t=1699061897;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=6AD/tfogOOsLT+qMFOzT3wIEXs9ORjRBD8GWq8AeG/c=;
-	b=axchbaTBAsplncFrqOj4L7DZOs5/n3+tJife17lkTNYSB1B5AOj1bFitTa6Al6xM
-	2fFq4tosPC8Hv1foIVcL/sODwVjZRuIqbtTVTuV4wGBMXrh7m7r5LeDkIZRg03OaVdz
-	vc6kewEV5ewfTR2ZmnJbdG0lar3zBzM+eU7jd2Ao=
+	bh=J6vrSE836IuqIs0hqTQqoHIr6ljmoMMkucZVTlb1f+4=;
+	b=aEoCqqdjDq61xFPl/DWObvJQ0cyATB0TelhLYoAnANMmeqz9CvLRoc/oB5eIZh7b
+	KRsgjkQxLkBQoW+HH9USCioI88Rnl86fH9H7hEwWhNI5xM4cWsdo335p25kYTFsZmox
+	ErVUAsgDpQCmC7lvPmsMTXU17dMf3+TAwU4xD+tw=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699061897;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=6AD/tfogOOsLT+qMFOzT3wIEXs9ORjRBD8GWq8AeG/c=;
-	b=XPWXNK4PyJa98XB+Q5CY6plzW4TXPU3iuZqmxGvy7ezVkyQ1I/AN1yP0aRCbprig
-	nkUEmuO90byUcj2YbLQMofL7G8zGJ210mIBwXjZKf1dSKKMcleDqTiOKH8yXP1WMi73
-	Fer9U83A/u2DnNvEGMsMecngBADd5dr1EsNuOyNw=
-Content-Type: multipart/mixed; boundary="===============7756411944762264635=="
+	bh=J6vrSE836IuqIs0hqTQqoHIr6ljmoMMkucZVTlb1f+4=;
+	b=G7qa7anN0fjnX4k5odH3SrHA0V4ZxRHPIdathWiMYwimyAwKADnFSeuai0pi8lwO
+	SoGlGgkDAg9AIXJMwtoPIOEoRCj6clk6JgBmxyvTxF6Jvku+k2w5zzJUC7sgYZqimkZ
+	mBUiup1Ov86B36cGgwHdhBewKFArG0sVNPJVyNQM=
+Content-Type: multipart/mixed; boundary="===============6684131599437585421=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] python3-shellingham: upgrading to 1.5.4 SUCCEEDED
-Message-ID: <0101018b97fb1931-b4998496-9671-4926-8fe1-45b867c7b487-000000@us-west-2.amazonses.com>
+Subject: [AUH] python3-service-identity: upgrading to 23.1.0 FAILED
+Message-ID: <0101018b97fb1931-b9671fa1-4b6a-4137-9444-3ab85aeef465-000000@us-west-2.amazonses.com>
 Date: Sat, 4 Nov 2023 01:38:17 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
-X-SES-Outgoing: 2023.11.04-54.240.27.191
+X-SES-Outgoing: 2023.11.04-54.240.27.45
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 01:38:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106165
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106164
 
---===============7756411944762264635==
+--===============6684131599437585421==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,123 +52,107 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *python3-shellingham* to *1.5.4* has Succeeded.
+that the automatic attempt to upgrade the recipe *python3-service-identity* to *23.1.0* has Failed (devtool error).
 
-Next steps:
-    - apply the patch: git am 0001-python3-shellingham-upgrade-1.5.3-1.5.4.patch
-    - check the changes to upstream patches and summarize them in the commit message,
-    - compile an image that contains the package
-    - perform some basic sanity tests
-    - amend the patch and sign it off: git commit -s --reset-author --amend
-    - send it to the appropriate mailing list
+Detailed error information:
 
-Alternatively, if you believe the recipe should not be upgraded at this time,
-you can fill RECIPE_NO_UPDATE_REASON in respective recipe file so that
-automatic upgrades would no longer be attempted.
+The following devtool command failed:  upgrade python3-service-identity -V 23.1.0
+NOTE: Reconnecting to bitbake server...
+Loading cache...done.
+Loaded 5073 entries from dependency cache.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.6.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "x86_64-poky-linux"
+MACHINE              = "qemux86-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.3+snapshot-e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+TUNE_FEATURES        = "m64 core2"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       
+workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+meta-oe              
+meta-python          
+meta-perl            
+meta-networking      
+meta-multimedia      
+meta-gnome           
+meta-xfce            
+meta-filesystems     
+meta-initramfs       
+meta-webserver       = "tmp-auh-upgrades:b6ddd3c086246b9851928045998898034659c1a9"
+
+Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
+done.
+Sstate summary: Wanted 10 Local 10 Mirrors 0 Missed 0 Current 20 (100% match, 100% complete)
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 103 tasks of which 100 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 7 seconds
+Loading cache...done.
+Loaded 5073 entries from dependency cache.
+Parsing recipes...done.
+Parsing of 3056 .bb files complete (3054 cached, 2 parsed). 4887 targets, 92 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.6.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "x86_64-poky-linux"
+MACHINE              = "qemux86-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.3+snapshot-e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+TUNE_FEATURES        = "m64 core2"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       
+workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+meta-oe              
+meta-python          
+meta-perl            
+meta-networking      
+meta-multimedia      
+meta-gnome           
+meta-xfce            
+meta-filesystems     
+meta-initramfs       
+meta-webserver       = "tmp-auh-upgrades:b6ddd3c086246b9851928045998898034659c1a9"
+
+Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
+done.
+Sstate summary: Wanted 1 Local 0 Mirrors 0 Missed 1 Current 0 (0% match, 0% complete)
+NOTE: Executing Tasks
+WARNING: Failed to fetch URL https://files.pythonhosted.org/packages/source/s/service-identity/service-identity-23.1.0.tar.gz;downloadfilename=service-identity-23.1.0.tar.gz, attempting MIRRORS if available
+NOTE: Tasks Summary: Attempted 2 tasks of which 0 didn't need to be rerun and 1 failed.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 7 seconds
+NOTE: The errors for this build are stored in /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231104003245.txt
+You can send the errors to a reports server by running:
+  send-error-report /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231104003245.txt [-s server]
+NOTE: The contents of these logs will be posted in public if you use the above command with the default server. Please ensure you remove any identifying or proprietary information when prompted before sending.
+
+INFO: Extracting current version source...
+INFO: Adding local source files to srctree...
+INFO: Extracting upgraded version source...
+INFO: Fetching https://files.pythonhosted.org/packages/source/s/service-identity/service-identity-23.1.0.tar.gz;downloadfilename=service-identity-23.1.0.tar.gz...
+ERROR: Fetcher failure: Fetch command export PSEUDO_DISABLED=1; export SSL_CERT_FILE="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export GIT_SSL_CAINFO="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export ftp_proxy="http://proxy.yocto.io:5187/"; export FTP_PROXY="http://proxy.yocto.io:5187/"; export PATH="/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/sysroots-uninative/x86_64-linux/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-sq6nuqda/work/recipe-sysroot-native/usr/bin/x86_64-poky-linux:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-sq6nuqda/work/recipe-sysroot/usr/bin/crossscripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-sq6nuqda/work/recipe-sysroot-native/usr/sbin:/hom
+ e/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-sq6nuqda/work/recipe-sysroot-native/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-sq6nuqda/work/recipe-sysroot-native/sbin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-sq6nuqda/work/recipe-sysroot-native/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/bitbake/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools"; export HOME="/home/pokybuild"; /usr/bin/env wget -t 2 -T 30 --passive-ftp -O /srv/autobuilder/autobuilder.yocto.io/current_sources/service-identity-23.1.0.tar.gz.tmp -P /srv/autobuilder/autobuilder.yocto.io/current_sources 'https://files.pythonhosted.org/packages/source/s/service-identity/service-identity-23.1.0.tar.gz' --progress=dot -v failed with exit code 8, no output
+ERROR: Bitbake Fetcher Error: FetchError('Unable to fetch URL from any source.', 'https://files.pythonhosted.org/packages/source/s/service-identity/service-identity-23.1.0.tar.gz;downloadfilename=service-identity-23.1.0.tar.gz')
+ERROR: Logfile of failure stored in: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-sq6nuqda/work/temp/log.do_fetch.3979942
+ERROR: Failed to fetch URL https://files.pythonhosted.org/packages/source/s/service-identity/service-identity-23.1.0.tar.gz;downloadfilename=service-identity-23.1.0.tar.gz
+
 
 Please review the attached files for further information and build/update failures.
 Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi?product=Automated%20Update%20Handler
 
 Regards,
 The Upgrade Helper
-
--- >8 --
-From a08cfb5573f88d4d984eabfc52c438a64018434e Mon Sep 17 00:00:00 2001
-From: Upgrade Helper <auh@yoctoproject.org>
-Date: Sat, 4 Nov 2023 00:38:44 +0000
-Subject: [PATCH] python3-shellingham: upgrade 1.5.3 -> 1.5.4
-
----
- ...ython3-shellingham_1.5.3.bb => python3-shellingham_1.5.4.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-shellingham_1.5.3.bb => python3-shellingham_1.5.4.bb} (71%)
-
-diff --git a/meta-python/recipes-devtools/python/python3-shellingham_1.5.3.bb b/meta-python/recipes-devtools/python/python3-shellingham_1.5.4.bb
-similarity index 71%
-rename from meta-python/recipes-devtools/python/python3-shellingham_1.5.3.bb
-rename to meta-python/recipes-devtools/python/python3-shellingham_1.5.4.bb
-index aff5f24a6..e519e8e22 100644
---- a/meta-python/recipes-devtools/python/python3-shellingham_1.5.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-shellingham_1.5.4.bb
-@@ -3,7 +3,7 @@ SECTION = "devel/python"
- LICENSE = "ISC"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=78e1c0248051c32a38a7f820c30bd7a5"
- 
--SRC_URI[sha256sum] = "cb4a6fec583535bc6da17b647dd2330cf7ef30239e05d547d99ae3705fd0f7f8"
-+SRC_URI[sha256sum] = "8dbca0739d487e5bd35ab3ca4b36e11c4078f3a234bfce294b0a0291363404de"
- 
- inherit pypi setuptools3
- 
--- 
-2.39.2
-
-
---===============7756411944762264635==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="buildhistory-diff-full.txt"
-
-packages/core2-64-poky-linux/python3-shellingham: PKGV changed from 1.5.3 [default] to 1.5.4 [default]
-packages/core2-64-poky-linux/python3-shellingham: SRC_URI changed from "https://files.pythonhosted.org/packages/source/s/shellingham/shellingham-1.5.3.tar.gz;downloadfilename=shellingham-1.5.3.tar.gz" to "https://files.pythonhosted.org/packages/source/s/shellingham/shellingham-1.5.4.tar.gz;downloadfilename=shellingham-1.5.4.tar.gz"
-packages/core2-64-poky-linux/python3-shellingham: PV changed from "1.5.3" to "1.5.4"
-packages/core2-64-poky-linux/python3-shellingham/python3-shellingham-dbg: PKGV changed from 1.5.3 [default] to 1.5.4 [default]
-packages/core2-64-poky-linux/python3-shellingham/python3-shellingham-dbg: PV changed from "1.5.3" to "1.5.4"
-packages/core2-64-poky-linux/python3-shellingham/python3-shellingham-dev: PKGV changed from 1.5.3 [default] to 1.5.4 [default]
-packages/core2-64-poky-linux/python3-shellingham/python3-shellingham-dev: PV changed from "1.5.3" to "1.5.4"
-packages/core2-64-poky-linux/python3-shellingham/python3-shellingham-doc: PKGV changed from 1.5.3 [default] to 1.5.4 [default]
-packages/core2-64-poky-linux/python3-shellingham/python3-shellingham-doc: PV changed from "1.5.3" to "1.5.4"
-packages/core2-64-poky-linux/python3-shellingham/python3-shellingham-locale: PKGV changed from 1.5.3 [default] to 1.5.4 [default]
-packages/core2-64-poky-linux/python3-shellingham/python3-shellingham-locale: PV changed from "1.5.3" to "1.5.4"
-packages/core2-64-poky-linux/python3-shellingham/python3-shellingham-src: PKGV changed from 1.5.3 [default] to 1.5.4 [default]
-packages/core2-64-poky-linux/python3-shellingham/python3-shellingham-src: PV changed from "1.5.3" to "1.5.4"
-packages/core2-64-poky-linux/python3-shellingham/python3-shellingham-staticdev: PKGV changed from 1.5.3 [default] to 1.5.4 [default]
-packages/core2-64-poky-linux/python3-shellingham/python3-shellingham-staticdev: PV changed from "1.5.3" to "1.5.4"
-packages/core2-64-poky-linux/python3-shellingham/python3-shellingham: PKGV changed from 1.5.3 [default] to 1.5.4 [default]
-packages/core2-64-poky-linux/python3-shellingham/python3-shellingham: PKGSIZE changed from 39329 to 39388 (+0%)
-packages/core2-64-poky-linux/python3-shellingham/python3-shellingham: PV changed from "1.5.3" to "1.5.4"
-Changes to packages/core2-64-poky-linux/python3-shellingham (sysroot):
-  /usr/lib/python3.11/site-packages/shellingham-1.5.3.dist-info moved to /usr/lib/python3.11/site-packages/shellingham-1.5.4.dist-info
-
---===============7756411944762264635==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="buildhistory-diff.txt"
-
-Changes to packages/core2-64-poky-linux/python3-shellingham (sysroot):
-  /usr/lib/python3.11/site-packages/shellingham-1.5.3.dist-info moved to /usr/lib/python3.11/site-packages/shellingham-1.5.4.dist-info
-
---===============7756411944762264635==
-Content-Type: application/octet-stream
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment;
- filename="0001-python3-shellingham-upgrade-1.5.3-1.5.4.patch"
-
-RnJvbSBhMDhjZmI1NTczZjg4ZDRkOTg0ZWFiZmM1MmM0MzhhNjQwMTg0MzRlIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBVcGdyYWRlIEhlbHBlciA8YXVoQHlvY3RvcHJvamVjdC5vcmc+
-CkRhdGU6IFNhdCwgNCBOb3YgMjAyMyAwMDozODo0NCArMDAwMApTdWJqZWN0OiBbUEFUQ0hdIHB5
-dGhvbjMtc2hlbGxpbmdoYW06IHVwZ3JhZGUgMS41LjMgLT4gMS41LjQKCi0tLQogLi4ueXRob24z
-LXNoZWxsaW5naGFtXzEuNS4zLmJiID0+IHB5dGhvbjMtc2hlbGxpbmdoYW1fMS41LjQuYmJ9IHwg
-MiArLQogMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pCiByZW5h
-bWUgbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24ve3B5dGhvbjMtc2hlbGxpbmdo
-YW1fMS41LjMuYmIgPT4gcHl0aG9uMy1zaGVsbGluZ2hhbV8xLjUuNC5iYn0gKDcxJSkKCmRpZmYg
-LS1naXQgYS9tZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24zLXNoZWxs
-aW5naGFtXzEuNS4zLmJiIGIvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0
-aG9uMy1zaGVsbGluZ2hhbV8xLjUuNC5iYgpzaW1pbGFyaXR5IGluZGV4IDcxJQpyZW5hbWUgZnJv
-bSBtZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24zLXNoZWxsaW5naGFt
-XzEuNS4zLmJiCnJlbmFtZSB0byBtZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9w
-eXRob24zLXNoZWxsaW5naGFtXzEuNS40LmJiCmluZGV4IGFmZjVmMjRhNi4uZTUxOWU4ZTIyIDEw
-MDY0NAotLS0gYS9tZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24zLXNo
-ZWxsaW5naGFtXzEuNS4zLmJiCisrKyBiL21ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0
-aG9uL3B5dGhvbjMtc2hlbGxpbmdoYW1fMS41LjQuYmIKQEAgLTMsNyArMyw3IEBAIFNFQ1RJT04g
-PSAiZGV2ZWwvcHl0aG9uIgogTElDRU5TRSA9ICJJU0MiCiBMSUNfRklMRVNfQ0hLU1VNID0gImZp
-bGU6Ly9MSUNFTlNFO21kNT03OGUxYzAyNDgwNTFjMzJhMzhhN2Y4MjBjMzBiZDdhNSIKIAotU1JD
-X1VSSVtzaGEyNTZzdW1dID0gImNiNGE2ZmVjNTgzNTM1YmM2ZGExN2I2NDdkZDIzMzBjZjdlZjMw
-MjM5ZTA1ZDU0N2Q5OWFlMzcwNWZkMGY3ZjgiCitTUkNfVVJJW3NoYTI1NnN1bV0gPSAiOGRiY2Ew
-NzM5ZDQ4N2U1YmQzNWFiM2NhNGIzNmUxMWM0MDc4ZjNhMjM0YmZjZTI5NGIwYTAyOTEzNjM0MDRk
-ZSIKIAogaW5oZXJpdCBweXBpIHNldHVwdG9vbHMzCiAKLS0gCjIuMzkuMgoK
-
---===============7756411944762264635==--
+--===============6684131599437585421==--
 
