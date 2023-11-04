@@ -2,49 +2,49 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8A2BBC001B0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 99959C001B5
 	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 01:38:19 +0000 (UTC)
-Received: from a27-23.smtp-out.us-west-2.amazonses.com (a27-23.smtp-out.us-west-2.amazonses.com [54.240.27.23])
- by mx.groups.io with SMTP id smtpd.web11.2211.1699061896970147969
+Received: from a27-29.smtp-out.us-west-2.amazonses.com (a27-29.smtp-out.us-west-2.amazonses.com [54.240.27.29])
+ by mx.groups.io with SMTP id smtpd.web10.2285.1699061895183596183
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 03 Nov 2023 18:38:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=B8KnZA/z;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=pJFnS8zv;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.23, mailfrom: 0101018b97fb1c9f-eb3a3715-a498-47fa-819e-139543c05875-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=gU60JeJa;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=IDQ4bjWo;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.29, mailfrom: 0101018b97fb1c0c-3048fcbf-06d0-40e9-862f-a8b0cfef7b87-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
 	t=1699061898;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=wj2ETIwCeAmeM1zMpgbHLnIHrQ4wfibRwX0O1Gm483w=;
-	b=B8KnZA/zGF49pHNmEH5xttNdREU/2KnpGp1ByFClTGDkhj2ndwPcbfOM1Wrok53j
-	qIkljZI0enY4WZuSnhgfmeCcqSJpcWL1CKyOQjYp1yPv2M/yRQVOqz8fKYZ803hIMOB
-	9guwlwfzHeYtz0FOJg1fdbYNAkqWQAD+qXTTOLjI=
+	bh=wmflRlhUm6DGfsE5DSBPVCRjZ+gUyTdkP8I/jcRk988=;
+	b=gU60JeJaf7qxS5bNPFUDpNM6qw86+NM1mjg4npJfTsoWypYIYsG7VyS4OZY7TW1E
+	8UhVBkRJqN5W27GeRRufkD89UOshnCYTjwdWjA9hNXF9Petdl0XvGkNM/fphajmcM2e
+	TjNNNP3Te/syrNLIrvI/7AIVsMTDHWSWdhLb2sNA=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699061898;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=wj2ETIwCeAmeM1zMpgbHLnIHrQ4wfibRwX0O1Gm483w=;
-	b=pJFnS8zv9yCLcD2cCm5AYoybq3Cq6MFZQlNwY6SdYTjHm/d4Hy/JkrnAnaiGAXgx
-	01nF8xxiKbfBZvHLhPMnVuh0NbpRJ3N9MObUFxCj57kqgXzbxaPVKqYJUg0GaT03ObC
-	o1AoPQV8vCd5IbzM/Fius5bsnA+4ttCSeAbal2P0=
-Content-Type: multipart/mixed; boundary="===============2958814859717804649=="
+	bh=wmflRlhUm6DGfsE5DSBPVCRjZ+gUyTdkP8I/jcRk988=;
+	b=IDQ4bjWofGEogmN0jcfQJK9T4rZAwV8l/BWgI9hF9FoVxLNRTyaBJrSRlJ8ngWiI
+	/avU84qMZtI3NPE0VItV0JcxbXtrz7DC8EM8QlEhERokrGX5vmRNFNqdLnnvizWeVBI
+	pk3ZftOCt9bwWCDT6SvB4XmvGL3/ayYGjwny+hsU=
+Content-Type: multipart/mixed; boundary="===============2453597703895031373=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] python3-werkzeug: upgrading to 3.0.1 FAILED
-Message-ID: <0101018b97fb1c9f-eb3a3715-a498-47fa-819e-139543c05875-000000@us-west-2.amazonses.com>
+Subject: [AUH] python3-websockets: upgrading to 12.0 SUCCEEDED
+Message-ID: <0101018b97fb1c0c-3048fcbf-06d0-40e9-862f-a8b0cfef7b87-000000@us-west-2.amazonses.com>
 Date: Sat, 4 Nov 2023 01:38:18 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
-X-SES-Outgoing: 2023.11.04-54.240.27.23
+X-SES-Outgoing: 2023.11.04-54.240.27.29
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 01:38:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106175
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106174
 
---===============2958814859717804649==
+--===============2453597703895031373==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,106 +52,151 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *python3-werkzeug* to *3.0.1* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *python3-websockets* to *12.0* has Succeeded.
 
-Detailed error information:
+Next steps:
+    - apply the patch: git am 0001-python3-websockets-upgrade-11.0.3-12.0.patch
+    - check the changes to upstream patches and summarize them in the commit message,
+    - compile an image that contains the package
+    - perform some basic sanity tests
+    - amend the patch and sign it off: git commit -s --reset-author --amend
+    - send it to the appropriate mailing list
 
-The following devtool command failed:  upgrade python3-werkzeug -V 3.0.1
-NOTE: Reconnecting to bitbake server...
-Loading cache...done.
-Loaded 5116 entries from dependency cache.
-NOTE: Resolving any missing task queue dependencies
-
-Build Configuration:
-BB_VERSION           = "2.6.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "x86_64-poky-linux"
-MACHINE              = "qemux86-64"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.3+snapshot-e575f59b82eae78fb1ac8df7198eaa4a7a963259"
-TUNE_FEATURES        = "m64 core2"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       
-workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
-meta-oe              
-meta-python          
-meta-perl            
-meta-networking      
-meta-multimedia      
-meta-gnome           
-meta-xfce            
-meta-filesystems     
-meta-initramfs       
-meta-webserver       = "tmp-auh-upgrades:bd817382bf586a0bf5891142eeb230ccdf1194b4"
-
-Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
-done.
-Sstate summary: Wanted 10 Local 10 Mirrors 0 Missed 0 Current 20 (100% match, 100% complete)
-NOTE: Executing Tasks
-NOTE: Tasks Summary: Attempted 103 tasks of which 100 didn't need to be rerun and all succeeded.
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 8 seconds
-Loading cache...done.
-Loaded 5116 entries from dependency cache.
-Parsing recipes...done.
-Parsing of 3056 .bb files complete (3054 cached, 2 parsed). 4887 targets, 92 skipped, 0 masked, 0 errors.
-NOTE: Resolving any missing task queue dependencies
-
-Build Configuration:
-BB_VERSION           = "2.6.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "x86_64-poky-linux"
-MACHINE              = "qemux86-64"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.3+snapshot-e575f59b82eae78fb1ac8df7198eaa4a7a963259"
-TUNE_FEATURES        = "m64 core2"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       
-workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
-meta-oe              
-meta-python          
-meta-perl            
-meta-networking      
-meta-multimedia      
-meta-gnome           
-meta-xfce            
-meta-filesystems     
-meta-initramfs       
-meta-webserver       = "tmp-auh-upgrades:bd817382bf586a0bf5891142eeb230ccdf1194b4"
-
-Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
-done.
-Sstate summary: Wanted 1 Local 0 Mirrors 0 Missed 1 Current 0 (0% match, 0% complete)
-NOTE: Executing Tasks
-WARNING: Failed to fetch URL https://files.pythonhosted.org/packages/source/W/Werkzeug/Werkzeug-3.0.1.tar.gz;downloadfilename=Werkzeug-3.0.1.tar.gz, attempting MIRRORS if available
-NOTE: Tasks Summary: Attempted 2 tasks of which 0 didn't need to be rerun and 1 failed.
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 7 seconds
-NOTE: The errors for this build are stored in /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231104011613.txt
-You can send the errors to a reports server by running:
-  send-error-report /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231104011613.txt [-s server]
-NOTE: The contents of these logs will be posted in public if you use the above command with the default server. Please ensure you remove any identifying or proprietary information when prompted before sending.
-
-INFO: Extracting current version source...
-INFO: Extracting upgraded version source...
-INFO: Fetching https://files.pythonhosted.org/packages/source/W/Werkzeug/Werkzeug-3.0.1.tar.gz;downloadfilename=Werkzeug-3.0.1.tar.gz...
-ERROR: Fetcher failure: Fetch command export PSEUDO_DISABLED=1; export SSL_CERT_FILE="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export GIT_SSL_CAINFO="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export ftp_proxy="http://proxy.yocto.io:5187/"; export FTP_PROXY="http://proxy.yocto.io:5187/"; export PATH="/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/sysroots-uninative/x86_64-linux/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-3tnjhf8f/work/recipe-sysroot-native/usr/bin/x86_64-poky-linux:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-3tnjhf8f/work/recipe-sysroot/usr/bin/crossscripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-3tnjhf8f/work/recipe-sysroot-native/usr/sbin:/hom
- e/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-3tnjhf8f/work/recipe-sysroot-native/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-3tnjhf8f/work/recipe-sysroot-native/sbin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-3tnjhf8f/work/recipe-sysroot-native/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/bitbake/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools"; export HOME="/home/pokybuild"; /usr/bin/env wget -t 2 -T 30 --passive-ftp -O /srv/autobuilder/autobuilder.yocto.io/current_sources/Werkzeug-3.0.1.tar.gz.tmp -P /srv/autobuilder/autobuilder.yocto.io/current_sources 'https://files.pythonhosted.org/packages/source/W/Werkzeug/Werkzeug-3.0.1.tar.gz' --progress=dot -v failed with exit code 8, no output
-ERROR: Bitbake Fetcher Error: FetchError('Unable to fetch URL from any source.', 'https://files.pythonhosted.org/packages/source/W/Werkzeug/Werkzeug-3.0.1.tar.gz;downloadfilename=Werkzeug-3.0.1.tar.gz')
-ERROR: Logfile of failure stored in: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-3tnjhf8f/work/temp/log.do_fetch.138173
-ERROR: Failed to fetch URL https://files.pythonhosted.org/packages/source/W/Werkzeug/Werkzeug-3.0.1.tar.gz;downloadfilename=Werkzeug-3.0.1.tar.gz
-
+Alternatively, if you believe the recipe should not be upgraded at this time,
+you can fill RECIPE_NO_UPDATE_REASON in respective recipe file so that
+automatic upgrades would no longer be attempted.
 
 Please review the attached files for further information and build/update failures.
 Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi?product=Automated%20Update%20Handler
 
 Regards,
 The Upgrade Helper
---===============2958814859717804649==--
+
+-- >8 --
+From de96d16150ee08f4f714b43c40d9bc384bb0089f Mon Sep 17 00:00:00 2001
+From: Upgrade Helper <auh@yoctoproject.org>
+Date: Sat, 4 Nov 2023 01:14:23 +0000
+Subject: [PATCH] python3-websockets: upgrade 11.0.3 -> 12.0
+
+---
+ ...{python3-websockets_11.0.3.bb => python3-websockets_12.0.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-websockets_11.0.3.bb => python3-websockets_12.0.bb} (79%)
+
+diff --git a/meta-python/recipes-devtools/python/python3-websockets_11.0.3.bb b/meta-python/recipes-devtools/python/python3-websockets_12.0.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python3-websockets_11.0.3.bb
+rename to meta-python/recipes-devtools/python/python3-websockets_12.0.bb
+index e6971c829..f89c3b629 100644
+--- a/meta-python/recipes-devtools/python/python3-websockets_11.0.3.bb
++++ b/meta-python/recipes-devtools/python/python3-websockets_12.0.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=51924a6af4495b8cfaee1b1da869b6f4"
+ 
+ inherit pypi setuptools3
+ 
+-SRC_URI[sha256sum] = "88fc51d9a26b10fc331be344f1781224a375b78488fc343620184e95a4b27016"
++SRC_URI[sha256sum] = "81df9cbcbb6c260de1e007e58c011bfebe2dafc8435107b0537f393dd38c8b1b"
+ 
+ BBCLASSEXTEND = "native nativesdk"
+ 
+-- 
+2.39.2
+
+
+--===============2453597703895031373==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="buildhistory-diff-full.txt"
+
+packages/core2-64-poky-linux/python3-websockets: PV changed from "11.0.3" to "12.0"
+packages/core2-64-poky-linux/python3-websockets: SRC_URI changed from "https://files.pythonhosted.org/packages/source/w/websockets/websockets-11.0.3.tar.gz;downloadfilename=websockets-11.0.3.tar.gz" to "https://files.pythonhosted.org/packages/source/w/websockets/websockets-12.0.tar.gz;downloadfilename=websockets-12.0.tar.gz"
+packages/core2-64-poky-linux/python3-websockets: PKGV changed from 11.0.3 [default] to 12.0 [default]
+packages/core2-64-poky-linux/python3-websockets/python3-websockets-dbg: PV changed from "11.0.3" to "12.0"
+packages/core2-64-poky-linux/python3-websockets/python3-websockets-dbg: PKGV changed from 11.0.3 [default] to 12.0 [default]
+packages/core2-64-poky-linux/python3-websockets/python3-websockets-dev: PV changed from "11.0.3" to "12.0"
+packages/core2-64-poky-linux/python3-websockets/python3-websockets-dev: PKGV changed from 11.0.3 [default] to 12.0 [default]
+packages/core2-64-poky-linux/python3-websockets/python3-websockets-doc: PV changed from "11.0.3" to "12.0"
+packages/core2-64-poky-linux/python3-websockets/python3-websockets-doc: PKGV changed from 11.0.3 [default] to 12.0 [default]
+packages/core2-64-poky-linux/python3-websockets/python3-websockets-locale: PV changed from "11.0.3" to "12.0"
+packages/core2-64-poky-linux/python3-websockets/python3-websockets-locale: PKGV changed from 11.0.3 [default] to 12.0 [default]
+packages/core2-64-poky-linux/python3-websockets/python3-websockets-src: PV changed from "11.0.3" to "12.0"
+packages/core2-64-poky-linux/python3-websockets/python3-websockets-src: PKGV changed from 11.0.3 [default] to 12.0 [default]
+packages/core2-64-poky-linux/python3-websockets/python3-websockets-staticdev: PV changed from "11.0.3" to "12.0"
+packages/core2-64-poky-linux/python3-websockets/python3-websockets-staticdev: PKGV changed from 11.0.3 [default] to 12.0 [default]
+packages/core2-64-poky-linux/python3-websockets/python3-websockets: FILELIST: directory renamed /usr/lib/python3.11/site-packages/websockets-11.0.3.dist-info -> /usr/lib/python3.11/site-packages/websockets-12.0.dist-info, removed "/usr/lib/python3.11/site-packages/websockets/sync/compatibility.py /usr/lib/python3.11/site-packages/websockets/sync/__pycache__/compatibility.cpython-311.pyc"
+packages/core2-64-poky-linux/python3-websockets/python3-websockets: PKGSIZE changed from 902811 to 907455 (+1%)
+packages/core2-64-poky-linux/python3-websockets/python3-websockets: PV changed from "11.0.3" to "12.0"
+packages/core2-64-poky-linux/python3-websockets/python3-websockets: PKGV changed from 11.0.3 [default] to 12.0 [default]
+Changes to packages/core2-64-poky-linux/python3-websockets (sysroot):
+  /usr/lib/python3.11/site-packages/websockets-12.0.dist-info was added
+  /usr/lib/python3.11/site-packages/websockets-12.0.dist-info/LICENSE was added
+  /usr/lib/python3.11/site-packages/websockets-12.0.dist-info/METADATA was added
+  /usr/lib/python3.11/site-packages/websockets-12.0.dist-info/RECORD was added
+  /usr/lib/python3.11/site-packages/websockets-12.0.dist-info/top_level.txt was added
+  /usr/lib/python3.11/site-packages/websockets-12.0.dist-info/WHEEL was added
+  /usr/lib/python3.11/site-packages/websockets-11.0.3.dist-info was removed
+  /usr/lib/python3.11/site-packages/websockets-11.0.3.dist-info/LICENSE was removed
+  /usr/lib/python3.11/site-packages/websockets-11.0.3.dist-info/METADATA was removed
+  /usr/lib/python3.11/site-packages/websockets-11.0.3.dist-info/RECORD was removed
+  /usr/lib/python3.11/site-packages/websockets-11.0.3.dist-info/top_level.txt was removed
+  /usr/lib/python3.11/site-packages/websockets-11.0.3.dist-info/WHEEL was removed
+  /usr/lib/python3.11/site-packages/websockets/sync/compatibility.py was removed
+  /usr/lib/python3.11/site-packages/websockets/sync/__pycache__/compatibility.cpython-311.pyc was removed
+
+--===============2453597703895031373==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="buildhistory-diff.txt"
+
+packages/core2-64-poky-linux/python3-websockets/python3-websockets: FILELIST: directory renamed /usr/lib/python3.11/site-packages/websockets-11.0.3.dist-info -> /usr/lib/python3.11/site-packages/websockets-12.0.dist-info, removed "/usr/lib/python3.11/site-packages/websockets/sync/__pycache__/compatibility.cpython-311.pyc /usr/lib/python3.11/site-packages/websockets/sync/compatibility.py"
+Changes to packages/core2-64-poky-linux/python3-websockets (sysroot):
+  /usr/lib/python3.11/site-packages/websockets-12.0.dist-info was added
+  /usr/lib/python3.11/site-packages/websockets-12.0.dist-info/LICENSE was added
+  /usr/lib/python3.11/site-packages/websockets-12.0.dist-info/METADATA was added
+  /usr/lib/python3.11/site-packages/websockets-12.0.dist-info/RECORD was added
+  /usr/lib/python3.11/site-packages/websockets-12.0.dist-info/top_level.txt was added
+  /usr/lib/python3.11/site-packages/websockets-12.0.dist-info/WHEEL was added
+  /usr/lib/python3.11/site-packages/websockets-11.0.3.dist-info was removed
+  /usr/lib/python3.11/site-packages/websockets-11.0.3.dist-info/LICENSE was removed
+  /usr/lib/python3.11/site-packages/websockets-11.0.3.dist-info/METADATA was removed
+  /usr/lib/python3.11/site-packages/websockets-11.0.3.dist-info/RECORD was removed
+  /usr/lib/python3.11/site-packages/websockets-11.0.3.dist-info/top_level.txt was removed
+  /usr/lib/python3.11/site-packages/websockets-11.0.3.dist-info/WHEEL was removed
+  /usr/lib/python3.11/site-packages/websockets/sync/compatibility.py was removed
+  /usr/lib/python3.11/site-packages/websockets/sync/__pycache__/compatibility.cpython-311.pyc was removed
+
+--===============2453597703895031373==
+Content-Type: application/octet-stream
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+ filename="0001-python3-websockets-upgrade-11.0.3-12.0.patch"
+
+RnJvbSBkZTk2ZDE2MTUwZWUwOGY0ZjcxNGI0M2M0MGQ5YmMzODRiYjAwODlmIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBVcGdyYWRlIEhlbHBlciA8YXVoQHlvY3RvcHJvamVjdC5vcmc+
+CkRhdGU6IFNhdCwgNCBOb3YgMjAyMyAwMToxNDoyMyArMDAwMApTdWJqZWN0OiBbUEFUQ0hdIHB5
+dGhvbjMtd2Vic29ja2V0czogdXBncmFkZSAxMS4wLjMgLT4gMTIuMAoKLS0tCiAuLi57cHl0aG9u
+My13ZWJzb2NrZXRzXzExLjAuMy5iYiA9PiBweXRob24zLXdlYnNvY2tldHNfMTIuMC5iYn0gfCAy
+ICstCiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkKIHJlbmFt
+ZSBtZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi97cHl0aG9uMy13ZWJzb2NrZXRz
+XzExLjAuMy5iYiA9PiBweXRob24zLXdlYnNvY2tldHNfMTIuMC5iYn0gKDc5JSkKCmRpZmYgLS1n
+aXQgYS9tZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24zLXdlYnNvY2tl
+dHNfMTEuMC4zLmJiIGIvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9u
+My13ZWJzb2NrZXRzXzEyLjAuYmIKc2ltaWxhcml0eSBpbmRleCA3OSUKcmVuYW1lIGZyb20gbWV0
+YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9uMy13ZWJzb2NrZXRzXzExLjAu
+My5iYgpyZW5hbWUgdG8gbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9u
+My13ZWJzb2NrZXRzXzEyLjAuYmIKaW5kZXggZTY5NzFjODI5Li5mODljM2I2MjkgMTAwNjQ0Ci0t
+LSBhL21ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9uL3B5dGhvbjMtd2Vic29ja2V0
+c18xMS4wLjMuYmIKKysrIGIvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0
+aG9uMy13ZWJzb2NrZXRzXzEyLjAuYmIKQEAgLTYsNyArNiw3IEBAIExJQ19GSUxFU19DSEtTVU0g
+PSAiZmlsZTovL0xJQ0VOU0U7bWQ1PTUxOTI0YTZhZjQ0OTViOGNmYWVlMWIxZGE4NjliNmY0Igog
+CiBpbmhlcml0IHB5cGkgc2V0dXB0b29sczMKIAotU1JDX1VSSVtzaGEyNTZzdW1dID0gIjg4ZmM1
+MWQ5YTI2YjEwZmMzMzFiZTM0NGYxNzgxMjI0YTM3NWI3ODQ4OGZjMzQzNjIwMTg0ZTk1YTRiMjcw
+MTYiCitTUkNfVVJJW3NoYTI1NnN1bV0gPSAiODFkZjljYmNiYjZjMjYwZGUxZTAwN2U1OGMwMTFi
+ZmViZTJkYWZjODQzNTEwN2IwNTM3ZjM5M2RkMzhjOGIxYiIKIAogQkJDTEFTU0VYVEVORCA9ICJu
+YXRpdmUgbmF0aXZlc2RrIgogCi0tIAoyLjM5LjIKCg==
+
+--===============2453597703895031373==--
 
