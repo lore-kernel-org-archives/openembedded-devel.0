@@ -2,49 +2,49 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 90B01C41535
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C83D1C05031
 	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 07:31:11 +0000 (UTC)
-Received: from a27-23.smtp-out.us-west-2.amazonses.com (a27-23.smtp-out.us-west-2.amazonses.com [54.240.27.23])
- by mx.groups.io with SMTP id smtpd.web11.5393.1699083060403949600
+Received: from a27-191.smtp-out.us-west-2.amazonses.com (a27-191.smtp-out.us-west-2.amazonses.com [54.240.27.191])
+ by mx.groups.io with SMTP id smtpd.web10.5529.1699083061004355690
  for <openembedded-devel@lists.openembedded.org>;
  Sat, 04 Nov 2023 00:31:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=HEWvronl;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=Z/I6Uqu2;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.23, mailfrom: 0101018b993e0608-4c539293-aae3-42be-8218-6fc6630c8874-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=MjMYboKW;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=mj4biAsj;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.191, mailfrom: 0101018b993e03c5-2e933114-db17-460f-a3b5-61f0db2fd3df-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
 	t=1699083060;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=rZaHCh4gdvFK6fxnsxBr6tdoz6ijYYZbSDwqrnGJG0M=;
-	b=HEWvronlWOMuIAFX8MKxqsVB1B2TMHy6gXPZXmUREYDL0vxUkDZGumcz9cBoMH/C
-	GNVZuVJtSZuoousuTudL7vrfvTE5BiSLOrNH78F8jhwIMMKuXEChMqw638b7WM3merh
-	W3/5S0OMDMj0X1XuAZQYmI+v7eF/WWeD3DySWSGA=
+	bh=Dhl0ZS4995tII9yLk8UlU92/CZNCNoFiuBBVyHNjb7Y=;
+	b=MjMYboKWS9VBXhGcA5Uhy+lpQQLZ68OjWma3QZIXbgE+tt3trd1bcDxWl3hk+nAi
+	heOa3vkLm0KagYbPg8qZkPsoBnEqnd1VsobXFSL79fxoFHKgDM6jzUcTybLg58Q4dcW
+	9244EPvntKpr2Rpc+QQqs/EDqCQIb1EfODuiFM1k=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699083060;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=rZaHCh4gdvFK6fxnsxBr6tdoz6ijYYZbSDwqrnGJG0M=;
-	b=Z/I6Uqu2E1+9a6rJihb9JcqN+Dx9FWWtsfP6Vzi1mnZ1EYsVi9pYa7Cc9ws+vIDe
-	0VXPStRdknkyUor5vNFI6RzlDliKgdYQAFxeSZ43vrpIZYV4ETEBZv7J1/gD05rtlL3
-	tL8hL9rmqhg1x4ylwvNAmoUUsKthVvKdq+mEItqI=
-Content-Type: multipart/mixed; boundary="===============0057019064599593060=="
+	bh=Dhl0ZS4995tII9yLk8UlU92/CZNCNoFiuBBVyHNjb7Y=;
+	b=mj4biAsj3+SDkOlCtAPtUlyNb+FNi6gX69rqJ5xHTos+Rp0dtDbJPEck+p4+Y1FN
+	RY+Cud+kku23RuBzZVawGh9cjEVtuwaEJx8OHF3A47x7mqgp4Xuk9qN01swQkDBs56Q
+	CMxfzGdwoMjkKP4TJL/ZclypQtP1qixRl2ARwBEQ=
+Content-Type: multipart/mixed; boundary="===============0023568672948569585=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] xfdesktop: upgrading to 4.19.1 FAILED
-Message-ID: <0101018b993e0608-4c539293-aae3-42be-8218-6fc6630c8874-000000@us-west-2.amazonses.com>
+Subject: [AUH] xfce4-notes-plugin: upgrading to 1.10.0 SUCCEEDED
+Message-ID: <0101018b993e03c5-2e933114-db17-460f-a3b5-61f0db2fd3df-000000@us-west-2.amazonses.com>
 Date: Sat, 4 Nov 2023 07:31:00 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
-X-SES-Outgoing: 2023.11.04-54.240.27.23
+X-SES-Outgoing: 2023.11.04-54.240.27.191
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 07:31:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106346
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106336
 
---===============0057019064599593060==
+--===============0023568672948569585==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,16 +52,10 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *xfdesktop* to *4.19.1* has Failed(do_compile).
-
-Detailed error information:
-
-do_compile failed
-
-
+that the automatic attempt to upgrade the recipe *xfce4-notes-plugin* to *1.10.0* has Succeeded.
 
 Next steps:
-    - apply the patch: git am 0001-xfdesktop-upgrade-4.18.1-4.19.1.patch
+    - apply the patch: git am 0001-xfce4-notes-plugin-upgrade-1.9.0-1.10.0.patch
     - check the changes to upstream patches and summarize them in the commit message,
     - compile an image that contains the package
     - perform some basic sanity tests
@@ -79,425 +73,514 @@ Regards,
 The Upgrade Helper
 
 -- >8 --
-From f93c9ae9dcbb4b53ccf5602dcc6e1f66ac11c9d0 Mon Sep 17 00:00:00 2001
+From 4a48d03ab7dd6888570a008115b57b627ea80a08 Mon Sep 17 00:00:00 2001
 From: Upgrade Helper <auh@yoctoproject.org>
-Date: Sat, 4 Nov 2023 07:22:47 +0000
-Subject: [PATCH] xfdesktop: upgrade 4.18.1 -> 4.19.1
+Date: Sat, 4 Nov 2023 06:34:25 +0000
+Subject: [PATCH] xfce4-notes-plugin: upgrade 1.9.0 -> 1.10.0
 
 ---
- .../xfdesktop/{xfdesktop_4.18.1.bb => xfdesktop_4.19.1.bb}      | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-xfce/recipes-xfce/xfdesktop/{xfdesktop_4.18.1.bb => xfdesktop_4.19.1.bb} (86%)
+ .../notes/xfce4-notes-plugin_1.10.0.bb        | 140 ++++++++++++++++++
+ .../notes/xfce4-notes-plugin_1.9.0.bb         |  10 --
+ 2 files changed, 140 insertions(+), 10 deletions(-)
+ create mode 100644 meta-xfce/recipes-panel-plugins/notes/xfce4-notes-plugin_1.10.0.bb
+ delete mode 100644 meta-xfce/recipes-panel-plugins/notes/xfce4-notes-plugin_1.9.0.bb
 
-diff --git a/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.18.1.bb b/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.19.1.bb
-similarity index 86%
-rename from meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.18.1.bb
-rename to meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.19.1.bb
-index f4d5fef8e..fe44356a7 100644
---- a/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.18.1.bb
-+++ b/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.19.1.bb
-@@ -20,7 +20,7 @@ inherit xfce features_check
- 
- REQUIRED_DISTRO_FEATURES = "x11"
- 
--SRC_URI[sha256sum] = "ef9268190c25877e22a9ff5aa31cc8ede120239cb0dfca080c174e7eed4ff756"
-+SRC_URI[sha256sum] = "b47b49ebf2990aedc640ac5bf3dce6a1ed610a7b05c93d8b69bd272c4b6b77e5"
- 
- PACKAGECONFIG ??= "notify"
- PACKAGECONFIG[notify] = "--enable-notifications,--disable-notifications,libnotify"
+diff --git a/meta-xfce/recipes-panel-plugins/notes/xfce4-notes-plugin_1.10.0.bb b/meta-xfce/recipes-panel-plugins/notes/xfce4-notes-plugin_1.10.0.bb
+new file mode 100644
+index 000000000..b82424764
+--- /dev/null
++++ b/meta-xfce/recipes-panel-plugins/notes/xfce4-notes-plugin_1.10.0.bb
+@@ -0,0 +1,140 @@
++# FIXME: the LIC_FILES_CHKSUM values have been updated by 'devtool upgrade'.
++# The following is the difference between the old and the new license text.
++# Please update the LICENSE value if needed, and summarize the changes in
++# the commit message via 'License-Update:' tag.
++# (example: 'License-Update: copyright years updated.')
++#
++# The changes:
++#
++# --- COPYING
++# +++ COPYING
++# @@ -1,12 +1,12 @@
++# -		    GNU GENERAL PUBLIC LICENSE
++# -		       Version 2, June 1991
++# -
++# - Copyright (C) 1989, 1991 Free Software Foundation, Inc.
++# -     59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++# +                    GNU GENERAL PUBLIC LICENSE
++# +                       Version 2, June 1991
++# +
++# + Copyright (C) 1989, 1991 Free Software Foundation, Inc.,
++# + 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
++#   Everyone is permitted to copy and distribute verbatim copies
++#   of this license document, but changing it is not allowed.
++#  
++# -			    Preamble
++# +                            Preamble
++#  
++#    The licenses for most software are designed to take away your
++#  freedom to share and change it.  By contrast, the GNU General Public
++# @@ -15,7 +15,7 @@
++#  General Public License applies to most of the Free Software
++#  Foundation's software and to any other program whose authors commit to
++#  using it.  (Some other Free Software Foundation software is covered by
++# -the GNU Library General Public License instead.)  You can apply it to
++# +the GNU Lesser General Public License instead.)  You can apply it to
++#  your programs, too.
++#  
++#    When we speak of free software, we are referring to freedom, not
++# @@ -55,8 +55,8 @@
++#  
++#    The precise terms and conditions for copying, distribution and
++#  modification follow.
++# -
++# -		    GNU GENERAL PUBLIC LICENSE
++# +
++# +                    GNU GENERAL PUBLIC LICENSE
++#     TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
++#  
++#    0. This License applies to any program or other work which contains
++# @@ -110,7 +110,7 @@
++#      License.  (Exception: if the Program itself is interactive but
++#      does not normally print such an announcement, your work based on
++#      the Program is not required to print an announcement.)
++# -
++# +
++#  These requirements apply to the modified work as a whole.  If
++#  identifiable sections of that work are not derived from the Program,
++#  and can be reasonably considered independent and separate works in
++# @@ -168,7 +168,7 @@
++#  access to copy the source code from the same place counts as
++#  distribution of the source code, even though third parties are not
++#  compelled to copy the source along with the object code.
++# -
++# +
++#    4. You may not copy, modify, sublicense, or distribute the Program
++#  except as expressly provided under this License.  Any attempt
++#  otherwise to copy, modify, sublicense or distribute the Program is
++# @@ -225,7 +225,7 @@
++#  
++#  This section is intended to make thoroughly clear what is believed to
++#  be a consequence of the rest of this License.
++# -
++# +
++#    8. If the distribution and/or use of the Program is restricted in
++#  certain countries either by patents or by copyrighted interfaces, the
++#  original copyright holder who places the Program under this License
++# @@ -255,7 +255,7 @@
++#  of preserving the free status of all derivatives of our free software and
++#  of promoting the sharing and reuse of software generally.
++#  
++# -			    NO WARRANTY
++# +                            NO WARRANTY
++#  
++#    11. BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
++#  FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW.  EXCEPT WHEN
++# @@ -277,9 +277,9 @@
++#  PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE
++#  POSSIBILITY OF SUCH DAMAGES.
++#  
++# -		     END OF TERMS AND CONDITIONS
++# -
++# -	    How to Apply These Terms to Your New Programs
++# +                     END OF TERMS AND CONDITIONS
++# +
++# +            How to Apply These Terms to Your New Programs
++#  
++#    If you develop a new program, and you want it to be of the greatest
++#  possible use to the public, the best way to achieve this is to make it
++# @@ -303,17 +303,16 @@
++#      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++#      GNU General Public License for more details.
++#  
++# -    You should have received a copy of the GNU General Public License
++# -    along with this program; if not, write to the Free Software
++# -    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++# -
++# +    You should have received a copy of the GNU General Public License along
++# +    with this program; if not, write to the Free Software Foundation, Inc.,
++# +    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
++#  
++#  Also add information on how to contact you by electronic and paper mail.
++#  
++#  If the program is interactive, make it output a short notice like this
++#  when it starts in an interactive mode:
++#  
++# -    Gnomovision version 69, Copyright (C) year  name of author
++# +    Gnomovision version 69, Copyright (C) year name of author
++#      Gnomovision comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
++#      This is free software, and you are welcome to redistribute it
++#      under certain conditions; type `show c' for details.
++# @@ -336,5 +335,5 @@
++#  This General Public License does not permit incorporating your program into
++#  proprietary programs.  If your program is a subroutine library, you may
++#  consider it more useful to permit linking proprietary applications with the
++# -library.  If this is what you want to do, use the GNU Library General
++# +library.  If this is what you want to do, use the GNU Lesser General
++#  Public License instead of this License.
++# 
++#
++
++SUMMARY = "Notes plugin for the Xfce Panel"
++HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-notes-plugin"
++LICENSE = "GPL-2.0-only"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++
++inherit xfce-panel-plugin
++
++DEPENDS += "gtk+3 libxfce4ui xfce4-panel xfconf"
++
++SRC_URI[sha256sum] = "2ee4406042edd352a91e166c83b60d13220ef04dce3fa6b9e0eb13636d636929"
+diff --git a/meta-xfce/recipes-panel-plugins/notes/xfce4-notes-plugin_1.9.0.bb b/meta-xfce/recipes-panel-plugins/notes/xfce4-notes-plugin_1.9.0.bb
+deleted file mode 100644
+index dc0fc2c60..000000000
+--- a/meta-xfce/recipes-panel-plugins/notes/xfce4-notes-plugin_1.9.0.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-SUMMARY = "Notes plugin for the Xfce Panel"
+-HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-notes-plugin"
+-LICENSE = "GPL-2.0-only"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+-
+-inherit xfce-panel-plugin
+-
+-DEPENDS += "gtk+3 libxfce4ui xfce4-panel xfconf"
+-
+-SRC_URI[sha256sum] = "13f909c948b639f96de64cf793eb74cb1779589201d3933eff214ee8f35ab088"
 -- 
 2.39.2
 
 
---===============0057019064599593060==
+--===============0023568672948569585==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="bitbake-output-qemux86-64.txt"
+Content-Disposition: attachment; filename="buildhistory-diff-full.txt"
 
-NOTE: Reconnecting to bitbake server...
-Loading cache...done.
-Loaded 4979 entries from dependency cache.
-Parsing recipes...done.
-Parsing of 3055 .bb files complete (3054 cached, 1 parsed). 4886 targets, 92 skipped, 0 masked, 0 errors.
-Removing 1 recipes from the core2-64 sysroot...done.
-Removing 1 recipes from the qemux86_64 sysroot...done.
-NOTE: Resolving any missing task queue dependencies
+packages/core2-64-poky-linux/xfce4-notes-plugin: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin: PACKAGES: added "xfce4-notes-plugin-locale-en-ca"
+packages/core2-64-poky-linux/xfce4-notes-plugin: SRC_URI changed from "http://archive.xfce.org/src/panel-plugins/xfce4-notes-plugin/1.9/xfce4-notes-plugin-1.9.0.tar.bz2" to "http://archive.xfce.org/src/panel-plugins/xfce4-notes-plugin/1.10/xfce4-notes-plugin-1.10.0.tar.bz2"
+packages/core2-64-poky-linux/xfce4-notes-plugin: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-dbg: PKGSIZE changed from 1152256 to 1165120 (+1%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-dbg: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-dbg: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-dev: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-dev: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-doc: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-doc: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-am: PKGSIZE changed from 4160 to 4162 (+0%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-am: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-am: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ar: PKGSIZE changed from 4332 to 4364 (+1%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ar: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ar: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ast: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ast: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-be: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-be: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-bg: PKGSIZE changed from 4621 to 4905 (+6%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-bg: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-bg: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ca: PKGSIZE changed from 3915 to 4156 (+6%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ca: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ca: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-cs: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-cs: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-da: PKGSIZE changed from 3917 to 3859 (-1%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-da: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-da: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-de: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-de: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-el: PKGSIZE changed from 4811 to 5113 (+6%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-el: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-el: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-en-au: PKGSIZE changed from 3604 to 3636 (+1%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-en-au: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-en-au: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-en-gb: PKGSIZE changed from 3617 to 3663 (+1%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-en-gb: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-en-gb: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-es: PKGSIZE changed from 4193 to 4251 (+1%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-es: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-es: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-et: PKGSIZE changed from 1896 to 4074 (+115%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-et: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-et: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-eu: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-eu: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-fi: PKGSIZE changed from 3855 to 4062 (+5%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-fi: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-fi: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-fr: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-fr: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-gl: PKGSIZE changed from 3791 to 4028 (+6%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-gl: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-gl: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-he: PKGSIZE changed from 4406 to 4412 (+0%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-he: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-he: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-hr: PKGSIZE changed from 3760 to 3790 (+1%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-hr: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-hr: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-hu: PKGSIZE changed from 3854 to 3894 (+1%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-hu: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-hu: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-hy-am: PKGSIZE changed from 4483 to 4477 (-0%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-hy-am: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-hy-am: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-hye: PKGSIZE changed from 4486 to 4529 (+1%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-hye: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-hye: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-id: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-id: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ie: PKGSIZE changed from 3618 to 3651 (+1%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ie: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ie: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-is: PKGSIZE changed from 3802 to 3838 (+1%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-is: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-is: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-it: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-it: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ja: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ja: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-kk: PKGSIZE changed from 4391 to 4670 (+6%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-kk: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-kk: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ko: PKGSIZE changed from 3883 to 4122 (+6%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ko: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ko: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-lt: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-lt: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-lv: PKGSIZE changed from 2912 to 2945 (+1%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-lv: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-lv: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ms: PKGSIZE changed from 3610 to 3841 (+6%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ms: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ms: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-nb: PKGSIZE changed from 4108 to 4097 (-0%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-nb: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-nb: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-nl: PKGSIZE changed from 3706 to 3952 (+7%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-nl: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-nl: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-oc: PKGSIZE changed from 3860 to 4087 (+6%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-oc: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-oc: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-pl: PKGSIZE changed from 3869 to 4076 (+5%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-pl: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-pl: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-pt-br: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-pt-br: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-pt: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-pt: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ro: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ro: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ru: PKGSIZE changed from 4931 to 4952 (+0%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ru: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ru: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-sk: PKGSIZE changed from 3861 to 4121 (+7%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-sk: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-sk: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-sl: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-sl: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-sq: PKGSIZE changed from 3778 to 4002 (+6%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-sq: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-sq: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-sr: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-sr: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-sv: PKGSIZE changed from 3844 to 4072 (+6%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-sv: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-sv: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-th: PKGSIZE changed from 5409 to 5708 (+6%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-th: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-th: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-tr: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-tr: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ug: PKGSIZE changed from 4533 to 4568 (+1%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ug: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ug: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-uk: PKGSIZE changed from 4685 to 4990 (+7%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-uk: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-uk: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ur-pk: PKGSIZE changed from 3004 to 3045 (+1%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ur-pk: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ur-pk: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ur: PKGSIZE changed from 2987 to 3028 (+1%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ur: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-ur: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-vi: PKGSIZE changed from 2438 to 2499 (+3%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-vi: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-vi: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-zh-cn: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-zh-cn: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-zh-tw: PKGSIZE changed from 3615 to 3860 (+7%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-zh-tw: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-zh-tw: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-src: PKGSIZE changed from 429988 to 405729 (-6%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-src: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-src: FILELIST: directory renamed /usr/src/debug/xfce4-notes-plugin/1.9.0-r0/lib -> /usr/src/debug/xfce4-notes-plugin/1.10.0-r0/lib, removed "/usr/src/debug/xfce4-notes-plugin/1.9.0-r0/src/main-status-icon.c /usr/src/debug/xfce4-notes-plugin/1.9.0-r0/src/xfce-autostart.c /usr/src/debug/xfce4-notes-plugin/1.9.0-r0/src/main-panel-plugin.c /usr/src/debug/xfce4-notes-plugin/1.9.0-r0/src/xfce-autostart.h /usr/src/debug/xfce4-notes-plugin/1.9.0-r0/src/main-popup.c /usr/src/debug/xfce4-notes-plugin/1.9.0-r0/src/main-settings-dialog.c", added "/usr/src/debug/xfce4-notes-plugin/1.10.0-r0/libc/xfce-autostart.h /usr/src/debug/xfce4-notes-plugin/1.10.0-r0/src/main-popup.c /usr/src/debug/xfce4-notes-plugin/1.10.0-r0/libc/xfce-autostart.c /usr/src/debug/xfce4-notes-plugin/1.10.0-r0/src/main-settings-dialog.c /usr/src/debug/xfce4-notes-plugin/1.10.0-r0/src/main-status-icon.c /usr/src/debug/xfce4-notes-plugin/1.10.0-r0/src/main-panel-
+ plugin.c"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-src: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-staticdev: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-staticdev: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin: PKGSIZE changed from 339668 to 339922 (+0%)
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin: PV changed from "1.9.0" to "1.10.0"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin: PKGV changed from 1.9.0 [default] to 1.10.0 [default]
 
-Build Configuration:
-BB_VERSION           = "2.6.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "x86_64-poky-linux"
-MACHINE              = "qemux86-64"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.3+snapshot-e575f59b82eae78fb1ac8df7198eaa4a7a963259"
-TUNE_FEATURES        = "m64 core2"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       
-workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
-meta-oe              
-meta-python          
-meta-perl            
-meta-networking      
-meta-multimedia      
-meta-gnome           
-meta-xfce            
-meta-filesystems     
-meta-initramfs       
-meta-webserver       = "tmp-auh-upgrades:d765d335766a5df78a4827802410c400132f976d"
+--===============0023568672948569585==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="buildhistory-diff.txt"
 
-Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
-done.
-Sstate summary: Wanted 580 Local 571 Mirrors 0 Missed 9 Current 649 (98% match, 99% complete)
-NOTE: Executing Tasks
-NOTE: Running setscene task 665 of 1229 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/thunar/thunar_4.18.4.bb:do_create_spdx_setscene)
-NOTE: Running setscene task 666 of 1229 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/xfconf/xfconf_4.18.0.bb:do_create_spdx_setscene)
-NOTE: Running setscene task 673 of 1229 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.19.1.bb:do_populate_lic_setscene)
-NOTE: Running setscene task 675 of 1229 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.19.1.bb:do_deploy_source_date_epoch_setscene)
-NOTE: Running setscene task 696 of 1229 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/intltool/intltool_0.51.0.bb:do_create_spdx_setscene)
-NOTE: recipe xfdesktop-4.19.1-r0: task do_populate_lic_setscene: Started
-NOTE: recipe xfdesktop-4.19.1-r0: task do_deploy_source_date_epoch_setscene: Started
-NOTE: recipe intltool-0.51.0-r0: task do_create_spdx_setscene: Started
-NOTE: recipe thunar-4.18.4-r0: task do_create_spdx_setscene: Started
-NOTE: recipe xfconf-4.18.0-r0: task do_create_spdx_setscene: Started
-NOTE: recipe xfdesktop-4.19.1-r0: task do_deploy_source_date_epoch_setscene: Succeeded
-NOTE: recipe xfconf-4.18.0-r0: task do_create_spdx_setscene: Succeeded
-NOTE: recipe xfdesktop-4.19.1-r0: task do_populate_lic_setscene: Succeeded
-NOTE: Running setscene task 978 of 1229 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.19.1.bb:do_recipe_qa_setscene)
-NOTE: recipe intltool-0.51.0-r0: task do_create_spdx_setscene: Succeeded
-NOTE: recipe thunar-4.18.4-r0: task do_create_spdx_setscene: Succeeded
-NOTE: Running setscene task 981 of 1229 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/exo/exo_4.18.0.bb:do_create_spdx_setscene)
-NOTE: Running setscene task 1006 of 1229 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-gnome/libnotify/libnotify_0.8.2.bb:do_create_spdx_setscene)
-NOTE: recipe xfdesktop-4.19.1-r0: task do_recipe_qa_setscene: Started
-NOTE: recipe exo-4.18.0-r0: task do_create_spdx_setscene: Started
-NOTE: recipe libnotify-0.8.2-r0: task do_create_spdx_setscene: Started
-NOTE: recipe xfdesktop-4.19.1-r0: task do_recipe_qa_setscene: Succeeded
-NOTE: recipe libnotify-0.8.2-r0: task do_create_spdx_setscene: Succeeded
-NOTE: recipe exo-4.18.0-r0: task do_create_spdx_setscene: Succeeded
-NOTE: Running setscene task 1042 of 1229 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-graphics/cairo/cairo_1.16.0.bb:do_create_spdx_setscene)
-NOTE: Running task 785 of 3356 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.19.1.bb:do_fetch)
-NOTE: recipe cairo-1.16.0-r0: task do_create_spdx_setscene: Started
-NOTE: recipe xfdesktop-4.19.1-r0: task do_fetch: Started
-NOTE: recipe xfdesktop-4.19.1-r0: task do_fetch: Succeeded
-NOTE: Running task 798 of 3356 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.19.1.bb:do_unpack)
-NOTE: recipe cairo-1.16.0-r0: task do_create_spdx_setscene: Succeeded
-NOTE: Running setscene task 1047 of 1229 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/glib-2.0/glib-2.0_2.78.0.bb:do_create_spdx_setscene)
-NOTE: recipe xfdesktop-4.19.1-r0: task do_unpack: Started
-NOTE: recipe glib-2.0-1_2.78.0-r0: task do_create_spdx_setscene: Started
-NOTE: recipe glib-2.0-1_2.78.0-r0: task do_create_spdx_setscene: Succeeded
-NOTE: Setscene tasks completed
-NOTE: recipe xfdesktop-4.19.1-r0: task do_unpack: Succeeded
-NOTE: Running task 3281 of 3356 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.19.1.bb:do_patch)
-NOTE: Running task 3302 of 3356 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.19.1.bb:do_prepare_recipe_sysroot)
-NOTE: Running task 3330 of 3356 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.19.1.bb:do_collect_spdx_deps)
-NOTE: recipe xfdesktop-4.19.1-r0: task do_patch: Started
-NOTE: recipe xfdesktop-4.19.1-r0: task do_prepare_recipe_sysroot: Started
-NOTE: recipe xfdesktop-4.19.1-r0: task do_patch: Succeeded
-NOTE: recipe xfdesktop-4.19.1-r0: task do_collect_spdx_deps: Started
-NOTE: recipe xfdesktop-4.19.1-r0: task do_prepare_recipe_sysroot: Succeeded
-NOTE: recipe xfdesktop-4.19.1-r0: task do_collect_spdx_deps: Succeeded
-NOTE: Running task 3344 of 3356 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.19.1.bb:do_configure)
-NOTE: recipe xfdesktop-4.19.1-r0: task do_configure: Started
-Log data follows:
-| DEBUG: Executing python function extend_recipe_sysroot
-| NOTE: Direct dependencies are ['/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-gnome/recipes-gnome/libwnck/libwnck3_43.0.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/exo/exo_4.18.0.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/garcon/garcon_4.18.1.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.18.3.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.18.1.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/thunar/thunar_4.18.4.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/xfconf/xfconf_4.18.0.bb:do_populate_sysroot', '/h
- ome/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/glib-2.0/glib-2.0_2.78.0.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/glibc/glibc_2.38.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/gcc/gcc-cross_13.2.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/gcc/gcc-runtime_13.2.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/intltool/intltool_0.51.0.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/libtool/libtool-cross_2.4.7.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/libtool/libtool-native_2.4.7.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/quilt/quilt-native_0.67.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes
- -gnome/gdk-pixbuf/gdk-pixbuf_2.42.10.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-gnome/gtk+/gtk+3_3.24.38.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-gnome/hicolor-icon-theme/hicolor-icon-theme_0.17.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-gnome/libnotify/libnotify_0.8.2.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-graphics/cairo/cairo_1.16.0.bb:do_populate_sysroot', 'virtual:native:/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/gettext/gettext_0.22.bb:do_populate_sysroot', 'virtual:native:/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/autoconf/autoconf_2.72c.bb:do_populate_sysroot', 'virtual:native:/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/automake/automake_1.16.5.bb:do_populate_sysroot', 'virtual:native:/home/pokybuild/yocto-worker/auh-meta-oe/buil
- d/meta/recipes-devtools/intltool/intltool_0.51.0.bb:do_populate_sysroot', 'virtual:native:/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/patch/patch_2.7.6.bb:do_populate_sysroot', 'virtual:native:/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/pkgconfig/pkgconfig_git.bb:do_populate_sysroot', 'virtual:native:/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/pseudo/pseudo_git.bb:do_populate_sysroot', 'virtual:native:/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-gnome/gtk+/gtk+3_3.24.38.bb:do_populate_sysroot']
-| NOTE: Installed into sysroot: []
-| NOTE: Skipping as already exists in sysroot: ['libwnck3', 'exo', 'garcon', 'libxfce4ui', 'libxfce4util', 'thunar', 'xfconf', 'glib-2.0', 'glibc', 'gcc-cross-x86_64', 'gcc-runtime', 'intltool', 'libtool-cross', 'libtool-native', 'quilt-native', 'gdk-pixbuf', 'gtk+3', 'hicolor-icon-theme', 'libnotify', 'cairo', 'gettext-native', 'autoconf-native', 'automake-native', 'intltool-native', 'patch-native', 'pkgconfig-native', 'pseudo-native', 'gtk+3-native', 'wayland', 'wayland-protocols', 'libxrandr', 'libxrender', 'fontconfig', 'libpng', 'gobject-introspection', 'libxfixes', 'opkg-utils', 'at-spi2-core', 'pango', 'libxi', 'libepoxy', 'libxext', 'libjpeg-turbo', 'mesa', 'libxdamage', 'libxcursor', 'libxkbcommon', 'libxcomposite', 'libx11', 'libxres', 'startup-notification', 'xfce4-dev-tools', 'libsm', 'libice', 'attr-native', 'texinfo-dummy-native', 'libgcc', 'linux-libc-headers', 'gettext-minimal-native', 'libffi', 'bash-completion', 'libpcre2', 'zlib', 'util-linux', 'shared-mime-info', 
- 'gnu-config-native', 'm4-native', 'libmpc-native', 'binutils-cross-x86_64', 'flex-native', 'gmp-native', 'mpfr-native', 'xz-native', 'zlib-native', 'zstd-native', 'libxml-parser-perl-native', 'perl', 'vala', 'libxcb', 'pixman', 'at-spi2-core-native', 'libxrender-native', 'libxrandr-native', 'libxfixes-native', 'pango-native', 'cairo-native', 'glib-2.0-native', 'python3-native', 'libx11-native', 'libpng-native', 'libxext-native', 'libxi-native', 'gdk-pixbuf-native', 'libxdamage-native', 'libxcursor-native', 'libxcomposite-native', 'gobject-introspection-native', 'fontconfig-native', 'libjpeg-turbo-native', 'xfce4-panel', 'systemd', 'desktop-file-utils', 'libxml2', 'expat', 'xorgproto', 'util-macros', 'freetype', 'python3', 'libxtst', 'dbus', 'harfbuzz', 'fribidi', 'libxft', 'vulkan-loader', 'libxshmfence', 'libdrm', 'vulkan-headers', 'libxxf86vm', 'xrandr', 'xkeyboard-config', 'xtrans', 'xcb-util', 'bzip2', 'libpam', 'util-linux-libuuid', 'libxcrypt', 'ncurses', 'libcap-ng', 'perl-na
- tive', 'expat-native', 'gdbm', 'libxau', 'xcb-proto', 'libxdmcp', 'libpthread-stubs', 'libxml2-native', 'libxtst-native', 'dbus-native', 'xorgproto-native', 'util-macros-native', 'harfbuzz-native', 'freetype-native', 'fribidi-native', 'libxft-native', 'pixman-native', 'libxcb-native', 'libsm-native', 'libffi-native', 'libpcre2-native', 'util-linux-native', 'openssl-native', 'libnsl2-native', 'libedit-native', 'ncurses-native', 'libtirpc-native', 'gdbm-native', 'sqlite3-native', 'bzip2-native', 'util-linux-libuuid-native', 'xtrans-native', 'shared-mime-info-native', 'cmake-native', 'libseccomp', 'shadow-native', 'libcap', 'kmod', 'base-files', 'zstd', 'base-passwd', 'shadow-sysroot', 'initscripts', 'shadow', 'acl', 'update-rc.d', 'sqlite3', 'xz', 'libnsl2', 'openssl', 'libedit', 'libtirpc', 'icu', 'libpciaccess', 'cracklib', 'make-native', 'icu-native', 'libxdmcp-native', 'xcb-proto-native', 'libpthread-stubs-native', 'libxau-native', 'libice-native', 'libcap-ng-native', 'itstool-nat
- ive', 'attr', 'unzip-native']
-| DEBUG: Python function extend_recipe_sysroot finished
-| DEBUG: Executing shell function autotools_preconfigure
-| DEBUG: Shell function autotools_preconfigure finished
-| DEBUG: Executing python function autotools_aclocals
-| DEBUG: SITE files ['endian-little', 'common-linux', 'common-glibc', 'bit-64', 'x86_64-linux', 'common']
-| DEBUG: Python function autotools_aclocals finished
-| DEBUG: Executing shell function do_configure
-| automake (GNU automake) 1.16.5
-| Copyright (C) 2021 Free Software Foundation, Inc.
-| License GPLv2+: GNU GPL version 2 or later <https://gnu.org/licenses/gpl-2.0.html>
-| This is free software: you are free to change and redistribute it.
-| There is NO WARRANTY, to the extent permitted by law.
-| 
-| Written by Tom Tromey <tromey@redhat.com>
-|        and Alexandre Duret-Lutz <adl@gnu.org>.
-| AUTOV is 1.16
-| NOTE: Executing ACLOCAL="aclocal --system-acdir=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/share/aclocal/ --automake-acdir=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot-native/usr/share/aclocal-1.16" autoreconf -Wcross --verbose --install --force --exclude=autopoint --exclude=gtkdocize -I /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/xfdesktop-4.19.1/m4/ -I /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot-native/usr/share/aclocal/
-| autoreconf: export WARNINGS=cross,no-obsolete
-| autoreconf: Entering directory '.'
-| autoreconf: running: aclocal --system-acdir=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/share/aclocal/ --automake-acdir=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot-native/usr/share/aclocal-1.16 -I /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/xfdesktop-4.19.1/m4/ -I /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot-native/usr/share/aclocal/ --force -I m4 ${ACLOCAL_FLAGS}
-| autoreconf: configure.ac: tracing
-| autoreconf: running: libtoolize --copy --force
-| libtoolize: putting auxiliary files in '.'.
-| libtoolize: copying file './ltmain.sh'
-| libtoolize: putting macros in AC_CONFIG_MACRO_DIRS, 'm4'.
-| libtoolize: copying file 'm4/libtool.m4'
-| libtoolize: copying file 'm4/ltoptions.m4'
-| libtoolize: copying file 'm4/ltsugar.m4'
-| libtoolize: copying file 'm4/ltversion.m4'
-| libtoolize: copying file 'm4/lt~obsolete.m4'
-| autoreconf: configure.ac: not using Intltool
-| autoreconf: configure.ac: not using Gtkdoc
-| autoreconf: running: aclocal --system-acdir=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/share/aclocal/ --automake-acdir=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot-native/usr/share/aclocal-1.16 -I /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/xfdesktop-4.19.1/m4/ -I /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot-native/usr/share/aclocal/ --force -I m4 ${ACLOCAL_FLAGS}
-| autoreconf: running: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot-native/usr/bin/autoconf --include=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/xfdesktop-4.19.1/m4/ --include=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot-native/usr/share/aclocal/ --force
-| autoreconf: running: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot-native/usr/bin/autoheader --include=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/xfdesktop-4.19.1/m4/ --include=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot-native/usr/share/aclocal/ --force
-| autoreconf: running: automake --add-missing --copy --force-missing
-| configure.ac:38: installing './compile'
-| configure.ac:31: installing './missing'
-| common/Makefile.am: installing './depcomp'
-| autoreconf: './config.sub' is updated
-| autoreconf: './config.guess' is updated
-| autoreconf: Leaving directory '.'
-| NOTE: Running ../xfdesktop-4.19.1/configure  --build=x86_64-linux 		  --host=x86_64-poky-linux 		  --target=x86_64-poky-linux 		  --prefix=/usr 		  --exec_prefix=/usr 		  --bindir=/usr/bin 		  --sbindir=/usr/sbin 		  --libexecdir=/usr/libexec 		  --datadir=/usr/share 		  --sysconfdir=/etc 		  --sharedstatedir=/com 		  --localstatedir=/var 		  --libdir=/usr/lib 		  --includedir=/usr/include 		  --oldincludedir=/usr/include 		  --infodir=/usr/share/info 		  --mandir=/usr/share/man 		  --disable-silent-rules 		  --disable-dependency-tracking 		  --with-libtool-sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot  --disable-static  --enable-notifications --enable-nls
-| configure: loading site script /home/pokybuild/yocto-worker/auh-meta-oe/build/meta/site/endian-little
-| configure: loading site script /home/pokybuild/yocto-worker/auh-meta-oe/build/meta/site/common-linux
-| configure: loading site script /home/pokybuild/yocto-worker/auh-meta-oe/build/meta/site/common-glibc
-| configure: loading site script /home/pokybuild/yocto-worker/auh-meta-oe/build/meta/site/x86_64-linux
-| configure: loading site script /home/pokybuild/yocto-worker/auh-meta-oe/build/meta/site/common
-| configure: loading site script /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/share/x86_64-poky-linux_config_site.d/ncurses_config
-| checking for a BSD-compatible install... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools/install -c
-| checking whether build environment is sane... yes
-| checking for x86_64-poky-linux-strip... x86_64-poky-linux-strip
-| checking for a race-free mkdir -p... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools/mkdir -p
-| checking for gawk... gawk
-| checking whether make sets $(MAKE)... yes
-| checking whether make supports nested variables... yes
-| checking whether UID '6000' is supported by ustar format... yes
-| checking whether GID '6000' is supported by ustar format... yes
-| checking how to create a ustar tar archive... gnutar
-| checking whether to enable maintainer-specific portions of Makefiles... no
-| checking whether make supports nested variables... (cached) yes
-| checking whether make supports the include directive... yes (GNU style)
-| checking for x86_64-poky-linux-gcc... x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot
-| checking whether the C compiler works... yes
-| checking for C compiler default output file name... a.out
-| checking for suffix of executables...
-| checking whether we are cross compiling... yes
-| checking for suffix of object files... o
-| checking whether the compiler supports GNU C... yes
-| checking whether x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot accepts -g... yes
-| checking for x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot option to enable C11 features... none needed
-| checking whether x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot understands -c and -o together... yes
-| checking dependency style of x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot... none
-| checking for stdio.h... (cached) yes
-| checking for stdlib.h... (cached) yes
-| checking for string.h... (cached) yes
-| checking for inttypes.h... (cached) yes
-| checking for stdint.h... (cached) yes
-| checking for strings.h... (cached) yes
-| checking for sys/stat.h... (cached) yes
-| checking for sys/types.h... (cached) yes
-| checking for unistd.h... (cached) yes
-| checking for wchar.h... yes
-| checking for minix/config.h... no
-| checking whether it is safe to define __EXTENSIONS__... yes
-| checking whether _XOPEN_SOURCE should be defined... no
-| checking for library containing strerror... none required
-| checking for x86_64-poky-linux-gcc... (cached) x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot
-| checking whether the compiler supports GNU C... (cached) yes
-| checking whether x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot accepts -g... (cached) yes
-| checking for x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot option to enable C11 features... (cached) none needed
-| checking whether x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot understands -c and -o together... (cached) yes
-| checking dependency style of x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot... (cached) none
-| checking for a sed that does not truncate output... (cached) sed
-| checking build system type... x86_64-pc-linux-gnu
-| checking host system type... x86_64-poky-linux-gnu
-| checking how to print strings... printf
-| checking for a sed that does not truncate output... (cached) sed
-| checking for grep that handles long lines and -e... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools/grep
-| checking for egrep... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools/grep -E
-| checking for fgrep... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools/grep -F
-| checking for ld used by x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot... x86_64-poky-linux-ld --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot
-| checking if the linker (x86_64-poky-linux-ld --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot  ) is GNU ld... yes
-| checking for BSD- or MS-compatible name lister (nm)... x86_64-poky-linux-gcc-nm
-| checking the name lister (x86_64-poky-linux-gcc-nm) interface... BSD nm
-| checking whether ln -s works... yes
-| checking the maximum length of command line arguments... 1572864
-| checking how to convert x86_64-pc-linux-gnu file names to x86_64-poky-linux-gnu format... func_convert_file_noop
-| checking how to convert x86_64-pc-linux-gnu file names to toolchain format... func_convert_file_noop
-| checking for x86_64-poky-linux-ld --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot   option to reload object files... -r
-| checking for x86_64-poky-linux-file... no
-| checking for file... file
-| configure: WARNING: using cross tools not prefixed with host triplet
-| checking for x86_64-poky-linux-objdump... x86_64-poky-linux-objdump
-| checking how to recognize dependent libraries... pass_all
-| checking for x86_64-poky-linux-dlltool... no
-| checking for dlltool... no
-| checking how to associate runtime and link libraries... printf %s\n
-| checking for x86_64-poky-linux-ar... x86_64-poky-linux-gcc-ar
-| checking for archiver @FILE support... @
-| checking for x86_64-poky-linux-strip... (cached) x86_64-poky-linux-strip
-| checking for x86_64-poky-linux-ranlib... x86_64-poky-linux-gcc-ranlib
-| checking command to parse x86_64-poky-linux-gcc-nm output from x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot object... ok
-| checking for sysroot... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot
-| checking for a working dd... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools/dd
-| checking how to truncate binary pipes... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools/dd bs=4096 count=1
-| checking for x86_64-poky-linux-mt... no
-| checking for mt... no
-| checking if : is a manifest tool... no
-| checking for dlfcn.h... yes
-| checking for objdir... .libs
-| checking if x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot supports -fno-rtti -fno-exceptions... no
-| checking for x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot option to produce PIC... -fPIC -DPIC
-| checking if x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot PIC flag -fPIC -DPIC works... yes
-| checking if x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot static flag -static works... yes
-| checking if x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot supports -c -o file.o... yes
-| checking if x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot supports -c -o file.o... (cached) yes
-| checking whether the x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot linker (x86_64-poky-linux-ld --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot   -m elf_x86_64) supports shared libraries... yes
-| checking whether -lc should be explicitly linked in... no
-| checking dynamic linker characteristics... GNU/Linux ld.so
-| checking how to hardcode library paths into programs... immediate
-| checking whether stripping libraries is possible... yes
-| checking if libtool supports shared libraries... yes
-| checking whether to build shared libraries... yes
-| checking whether to build static libraries... no
-| checking for ctype.h... yes
-| checking for errno.h... yes
-| checking for fcntl.h... yes
-| checking for math.h... yes
-| checking for pwd.h... yes
-| checking for signal.h... yes
-| checking for string.h... (cached) yes
-| checking for sys/param.h... yes
-| checking for sys/stat.h... (cached) yes
-| checking for sys/types.h... (cached) yes
-| checking for time.h... yes
-| checking for unistd.h... (cached) yes
-| checking whether NLS is requested... yes
-| checking for msgfmt... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot-native/usr/bin/msgfmt
-| checking for gmsgfmt... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot-native/usr/bin/msgfmt
-| checking for xgettext... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot-native/usr/bin/xgettext
-| checking for msgmerge... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot-native/usr/bin/msgmerge
-| checking for ld... x86_64-poky-linux-ld --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot   -m elf_x86_64
-| checking if the linker (x86_64-poky-linux-ld --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot   -m elf_x86_64) is GNU ld... yes
-| checking for shared library run path origin... done
-| checking 32-bit host C ABI... no
-| checking how to run the C preprocessor... x86_64-poky-linux-gcc -E --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security
-| checking for egrep -e... (cached) /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools/grep -E
-| checking for ELF binary format... yes
-| checking for the common suffixes of directories in the library search path... lib,lib,lib64
-| checking for CFPreferencesCopyAppValue... no
-| checking for CFLocaleCopyCurrent... no
-| checking for GNU gettext in libc... yes
-| checking whether to use NLS... yes
-| checking where the gettext function comes from... libc
-| checking for x86_64-poky-linux-pkg-config... no
-| checking for pkg-config... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot-native/usr/bin/pkg-config
-| checking pkg-config is at least version 0.9.0... yes
-| checking for gio-2.0 >= 2.66.0... 2.78.0
-| checking GIO_CFLAGS... -pthread -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/libmount -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/blkid -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/glib-2.0 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/lib/glib-2.0/include
-| checking GIO_LIBS... -lgio-2.0 -lgobject-2.0 -lglib-2.0
-| checking for x86_64-poky-linux-pkg-config... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot-native/usr/bin/pkg-config
-| checking pkg-config is at least version 0.9.0... yes
-| checking for gio-unix-2.0 >= 2.66.0... 2.78.0
-| checking GIO_UNIX_CFLAGS... -pthread -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/gio-unix-2.0 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/libmount -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/blkid -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/glib-2.0 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/lib/glib-2.0/include
-| checking GIO_UNIX_LIBS... -lgio-2.0 -lgobject-2.0 -lglib-2.0
-| checking for x86_64-poky-linux-pkg-config... (cached) /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot-native/usr/bin/pkg-config
-| checking pkg-config is at least version 0.9.0... yes
-| checking for gmodule-2.0 >= 2.66.0... 2.78.0
-| checking GMODULE_CFLAGS... -pthread -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/glib-2.0 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/lib/glib-2.0/include
-| checking GMODULE_LIBS... -Wl,--export-dynamic -lgmodule-2.0 -pthread -lglib-2.0
-| checking for x86_64-poky-linux-pkg-config... (cached) /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot-native/usr/bin/pkg-config
-| checking pkg-config is at least version 0.9.0... yes
-| checking for gobject-2.0 >= 2.66.0... 2.78.0
-| checking GOBJECT_CFLAGS... -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/glib-2.0 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/lib/glib-2.0/include
-| checking GOBJECT_LIBS... -lgobject-2.0 -lglib-2.0
-| checking for x86_64-poky-linux-pkg-config... (cached) /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot-native/usr/bin/pkg-config
-| checking pkg-config is at least version 0.9.0... yes
-| checking for gthread-2.0 >= 2.66.0... 2.78.0
-| checking GTHREAD_CFLAGS... -pthread -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/glib-2.0 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/lib/glib-2.0/include
-| checking GTHREAD_LIBS... -lgthread-2.0 -pthread -lglib-2.0
-| checking for x86_64-poky-linux-pkg-config... (cached) /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot-native/usr/bin/pkg-config
-| checking pkg-config is at least version 0.9.0... yes
-| checking for gtk+-3.0 >= 3.24.0... 3.24.38
-| checking GTK_CFLAGS... -pthread -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/gtk-3.0 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/at-spi2-atk/2.0 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/at-spi-2.0 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/dbus-1.0 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/lib/dbus-1.0/include -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/gtk-3.0 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/gio
- -unix-2.0 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/cairo -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/pango-1.0 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/harfbuzz -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/pango-1.0 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/fribidi -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/harfbuzz -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/atk-1.0 -I/home/pokybuild/yocto-worker/
- auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/cairo -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/pixman-1 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/freetype2 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/libdrm -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/gdk-pixbuf-2.0 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/libpng16 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/libmount -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/cor
- e2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/blkid -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/glib-2.0 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/lib/glib-2.0/include
-| checking GTK_LIBS... -lgtk-3 -lgdk-3 -lpangocairo-1.0 -lpango-1.0 -lharfbuzz -latk-1.0 -lcairo-gobject -lcairo -lgdk_pixbuf-2.0 -lgio-2.0 -lgobject-2.0 -lglib-2.0
-| checking for x86_64-poky-linux-pkg-config... (cached) /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot-native/usr/bin/pkg-config
-| checking pkg-config is at least version 0.9.0... yes
-| checking for libxfce4util-1.0 >= 4.13.0... 4.18.1
-| checking LIBXFCE4UTIL_CFLAGS... -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/xfce4 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/glib-2.0 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/lib/glib-2.0/include
-| checking LIBXFCE4UTIL_LIBS... -lxfce4util -lglib-2.0
-| checking for x86_64-poky-linux-pkg-config... (cached) /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot-native/usr/bin/pkg-config
-| checking pkg-config is at least version 0.9.0... yes
-| checking for libxfce4ui-2 >= 4.13.0... 4.18.3
-| checking LIBXFCE4UI_CFLAGS... -pthread -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/xfce4/libxfce4ui-2 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/gtk-3.0 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/at-spi2-atk/2.0 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/at-spi-2.0 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/dbus-1.0 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/lib/dbus-1.0/include -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysro
- ot/usr/include/gtk-3.0 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/gio-unix-2.0 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/cairo -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/pango-1.0 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/harfbuzz -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/pango-1.0 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/fribidi -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/harfbuzz -I/home/pokyb
- uild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/atk-1.0 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/cairo -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/pixman-1 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/freetype2 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/libdrm -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/gdk-pixbuf-2.0 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/libpng16 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/b
- uild/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/libmount -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/blkid -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/xfce4 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/include/glib-2.0 -I/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot/usr/lib/glib-2.0/include
-| checking LIBXFCE4UI_LIBS... -lxfce4ui-2 -lgtk-3 -lgdk-3 -lpangocairo-1.0 -lpango-1.0 -lharfbuzz -latk-1.0 -lcairo-gobject -lcairo -lgdk_pixbuf-2.0 -lgio-2.0 -lgobject-2.0 -lxfce4util -lglib-2.0
-| checking for x86_64-poky-linux-pkg-config... (cached) /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/recipe-sysroot-native/usr/bin/pkg-config
-| checking pkg-config is at least version 0.9.0... yes
-| checking for libxfce4windowing-0 >= 4.19.1... not found
-| *** The required package libxfce4windowing-0 was not found on your system.
-| *** Please install libxfce4windowing-0 (atleast version 4.19.1) or adjust
-| *** the PKG_CONFIG_PATH environment variable if you
-| *** installed the package in a nonstandard prefix so that
-| *** pkg-config is able to find it.
-| NOTE: The following config.log files may provide further information.
-| NOTE: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/build/config.log
-| ERROR: configure failed
-| WARNING: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/temp/run.do_configure.2798254:286 exit 1 from 'exit 1'
-| WARNING: Backtrace (BB generated script):
-| 	#1: bbfatal_log, /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/temp/run.do_configure.2798254, line 286
-| 	#2: oe_runconf, /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/temp/run.do_configure.2798254, line 262
-| 	#3: autotools_do_configure, /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/temp/run.do_configure.2798254, line 232
-| 	#4: do_configure, /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/temp/run.do_configure.2798254, line 152
-| 	#5: main, /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/temp/run.do_configure.2798254, line 290
-NOTE: recipe xfdesktop-4.19.1-r0: task do_configure: Failed
-NOTE: Tasks Summary: Attempted 3344 tasks of which 3338 didn't need to be rerun and 1 failed.
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
-NOTE: The errors for this build are stored in /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231104072215.txt
-You can send the errors to a reports server by running:
-  send-error-report /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231104072215.txt [-s server]
-NOTE: The contents of these logs will be posted in public if you use the above command with the default server. Please ensure you remove any identifying or proprietary information when prompted before sending.
+packages/core2-64-poky-linux/xfce4-notes-plugin: PACKAGES: added "xfce4-notes-plugin-locale-en-ca"
+packages/core2-64-poky-linux/xfce4-notes-plugin/xfce4-notes-plugin-locale-et: PKGSIZE changed from 1896 to 4074 (+115%)
 
-Summary: 1 task failed:
-  /home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.19.1.bb:do_configure
-Summary: There were 2 ERROR messages, returning a non-zero exit code.
-ERROR: xfdesktop-4.19.1-r0 do_configure: configure failed
-ERROR: xfdesktop-4.19.1-r0 do_configure: ExecutionError('/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/temp/run.do_configure.2798254', 1, None, None)
-ERROR: Logfile of failure stored in: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfdesktop/4.19.1/temp/log.do_configure.2798254
-ERROR: Task (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.19.1.bb:do_configure) failed with exit code '1'
-
---===============0057019064599593060==
+--===============0023568672948569585==
 Content-Type: application/octet-stream
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment;
- filename="0001-xfdesktop-upgrade-4.18.1-4.19.1.patch"
+ filename="0001-xfce4-notes-plugin-upgrade-1.9.0-1.10.0.patch"
 
-RnJvbSBmOTNjOWFlOWRjYmI0YjUzY2NmNTYwMmRjYzZlMWY2NmFjMTFjOWQwIE1vbiBTZXAgMTcg
+RnJvbSA0YTQ4ZDAzYWI3ZGQ2ODg4NTcwYTAwODExNWI1N2I2MjdlYTgwYTA4IE1vbiBTZXAgMTcg
 MDA6MDA6MDAgMjAwMQpGcm9tOiBVcGdyYWRlIEhlbHBlciA8YXVoQHlvY3RvcHJvamVjdC5vcmc+
-CkRhdGU6IFNhdCwgNCBOb3YgMjAyMyAwNzoyMjo0NyArMDAwMApTdWJqZWN0OiBbUEFUQ0hdIHhm
-ZGVza3RvcDogdXBncmFkZSA0LjE4LjEgLT4gNC4xOS4xCgotLS0KIC4uLi94ZmRlc2t0b3Ave3hm
-ZGVza3RvcF80LjE4LjEuYmIgPT4geGZkZXNrdG9wXzQuMTkuMS5iYn0gICAgICB8IDIgKy0KIDEg
-ZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQogcmVuYW1lIG1ldGEt
-eGZjZS9yZWNpcGVzLXhmY2UveGZkZXNrdG9wL3t4ZmRlc2t0b3BfNC4xOC4xLmJiID0+IHhmZGVz
-a3RvcF80LjE5LjEuYmJ9ICg4NiUpCgpkaWZmIC0tZ2l0IGEvbWV0YS14ZmNlL3JlY2lwZXMteGZj
-ZS94ZmRlc2t0b3AveGZkZXNrdG9wXzQuMTguMS5iYiBiL21ldGEteGZjZS9yZWNpcGVzLXhmY2Uv
-eGZkZXNrdG9wL3hmZGVza3RvcF80LjE5LjEuYmIKc2ltaWxhcml0eSBpbmRleCA4NiUKcmVuYW1l
-IGZyb20gbWV0YS14ZmNlL3JlY2lwZXMteGZjZS94ZmRlc2t0b3AveGZkZXNrdG9wXzQuMTguMS5i
-YgpyZW5hbWUgdG8gbWV0YS14ZmNlL3JlY2lwZXMteGZjZS94ZmRlc2t0b3AveGZkZXNrdG9wXzQu
-MTkuMS5iYgppbmRleCBmNGQ1ZmVmOGUuLmZlNDQzNTZhNyAxMDA2NDQKLS0tIGEvbWV0YS14ZmNl
-L3JlY2lwZXMteGZjZS94ZmRlc2t0b3AveGZkZXNrdG9wXzQuMTguMS5iYgorKysgYi9tZXRhLXhm
-Y2UvcmVjaXBlcy14ZmNlL3hmZGVza3RvcC94ZmRlc2t0b3BfNC4xOS4xLmJiCkBAIC0yMCw3ICsy
-MCw3IEBAIGluaGVyaXQgeGZjZSBmZWF0dXJlc19jaGVjawogCiBSRVFVSVJFRF9ESVNUUk9fRkVB
-VFVSRVMgPSAieDExIgogCi1TUkNfVVJJW3NoYTI1NnN1bV0gPSAiZWY5MjY4MTkwYzI1ODc3ZTIy
-YTlmZjVhYTMxY2M4ZWRlMTIwMjM5Y2IwZGZjYTA4MGMxNzRlN2VlZDRmZjc1NiIKK1NSQ19VUklb
-c2hhMjU2c3VtXSA9ICJiNDdiNDllYmYyOTkwYWVkYzY0MGFjNWJmM2RjZTZhMWVkNjEwYTdiMDVj
-OTNkOGI2OWJkMjcyYzRiNmI3N2U1IgogCiBQQUNLQUdFQ09ORklHID8/PSAibm90aWZ5IgogUEFD
-S0FHRUNPTkZJR1tub3RpZnldID0gIi0tZW5hYmxlLW5vdGlmaWNhdGlvbnMsLS1kaXNhYmxlLW5v
-dGlmaWNhdGlvbnMsbGlibm90aWZ5IgotLSAKMi4zOS4yCgo=
+CkRhdGU6IFNhdCwgNCBOb3YgMjAyMyAwNjozNDoyNSArMDAwMApTdWJqZWN0OiBbUEFUQ0hdIHhm
+Y2U0LW5vdGVzLXBsdWdpbjogdXBncmFkZSAxLjkuMCAtPiAxLjEwLjAKCi0tLQogLi4uL25vdGVz
+L3hmY2U0LW5vdGVzLXBsdWdpbl8xLjEwLjAuYmIgICAgICAgIHwgMTQwICsrKysrKysrKysrKysr
+KysrKwogLi4uL25vdGVzL3hmY2U0LW5vdGVzLXBsdWdpbl8xLjkuMC5iYiAgICAgICAgIHwgIDEw
+IC0tCiAyIGZpbGVzIGNoYW5nZWQsIDE0MCBpbnNlcnRpb25zKCspLCAxMCBkZWxldGlvbnMoLSkK
+IGNyZWF0ZSBtb2RlIDEwMDY0NCBtZXRhLXhmY2UvcmVjaXBlcy1wYW5lbC1wbHVnaW5zL25vdGVz
+L3hmY2U0LW5vdGVzLXBsdWdpbl8xLjEwLjAuYmIKIGRlbGV0ZSBtb2RlIDEwMDY0NCBtZXRhLXhm
+Y2UvcmVjaXBlcy1wYW5lbC1wbHVnaW5zL25vdGVzL3hmY2U0LW5vdGVzLXBsdWdpbl8xLjkuMC5i
+YgoKZGlmZiAtLWdpdCBhL21ldGEteGZjZS9yZWNpcGVzLXBhbmVsLXBsdWdpbnMvbm90ZXMveGZj
+ZTQtbm90ZXMtcGx1Z2luXzEuMTAuMC5iYiBiL21ldGEteGZjZS9yZWNpcGVzLXBhbmVsLXBsdWdp
+bnMvbm90ZXMveGZjZTQtbm90ZXMtcGx1Z2luXzEuMTAuMC5iYgpuZXcgZmlsZSBtb2RlIDEwMDY0
+NAppbmRleCAwMDAwMDAwMDAuLmI4MjQyNDc2NAotLS0gL2Rldi9udWxsCisrKyBiL21ldGEteGZj
+ZS9yZWNpcGVzLXBhbmVsLXBsdWdpbnMvbm90ZXMveGZjZTQtbm90ZXMtcGx1Z2luXzEuMTAuMC5i
+YgpAQCAtMCwwICsxLDE0MCBAQAorIyBGSVhNRTogdGhlIExJQ19GSUxFU19DSEtTVU0gdmFsdWVz
+IGhhdmUgYmVlbiB1cGRhdGVkIGJ5ICdkZXZ0b29sIHVwZ3JhZGUnLgorIyBUaGUgZm9sbG93aW5n
+IGlzIHRoZSBkaWZmZXJlbmNlIGJldHdlZW4gdGhlIG9sZCBhbmQgdGhlIG5ldyBsaWNlbnNlIHRl
+eHQuCisjIFBsZWFzZSB1cGRhdGUgdGhlIExJQ0VOU0UgdmFsdWUgaWYgbmVlZGVkLCBhbmQgc3Vt
+bWFyaXplIHRoZSBjaGFuZ2VzIGluCisjIHRoZSBjb21taXQgbWVzc2FnZSB2aWEgJ0xpY2Vuc2Ut
+VXBkYXRlOicgdGFnLgorIyAoZXhhbXBsZTogJ0xpY2Vuc2UtVXBkYXRlOiBjb3B5cmlnaHQgeWVh
+cnMgdXBkYXRlZC4nKQorIworIyBUaGUgY2hhbmdlczoKKyMKKyMgLS0tIENPUFlJTkcKKyMgKysr
+IENPUFlJTkcKKyMgQEAgLTEsMTIgKzEsMTIgQEAKKyMgLQkJICAgIEdOVSBHRU5FUkFMIFBVQkxJ
+QyBMSUNFTlNFCisjIC0JCSAgICAgICBWZXJzaW9uIDIsIEp1bmUgMTk5MQorIyAtCisjIC0gQ29w
+eXJpZ2h0IChDKSAxOTg5LCAxOTkxIEZyZWUgU29mdHdhcmUgRm91bmRhdGlvbiwgSW5jLgorIyAt
+ICAgICA1OSBUZW1wbGUgUGxhY2UsIFN1aXRlIDMzMCwgQm9zdG9uLCBNQSAgMDIxMTEtMTMwNyAg
+VVNBCisjICsgICAgICAgICAgICAgICAgICAgIEdOVSBHRU5FUkFMIFBVQkxJQyBMSUNFTlNFCisj
+ICsgICAgICAgICAgICAgICAgICAgICAgIFZlcnNpb24gMiwgSnVuZSAxOTkxCisjICsKKyMgKyBD
+b3B5cmlnaHQgKEMpIDE5ODksIDE5OTEgRnJlZSBTb2Z0d2FyZSBGb3VuZGF0aW9uLCBJbmMuLAor
+IyArIDUxIEZyYW5rbGluIFN0cmVldCwgRmlmdGggRmxvb3IsIEJvc3RvbiwgTUEgMDIxMTAtMTMw
+MSBVU0EKKyMgICBFdmVyeW9uZSBpcyBwZXJtaXR0ZWQgdG8gY29weSBhbmQgZGlzdHJpYnV0ZSB2
+ZXJiYXRpbSBjb3BpZXMKKyMgICBvZiB0aGlzIGxpY2Vuc2UgZG9jdW1lbnQsIGJ1dCBjaGFuZ2lu
+ZyBpdCBpcyBub3QgYWxsb3dlZC4KKyMgIAorIyAtCQkJICAgIFByZWFtYmxlCisjICsgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgUHJlYW1ibGUKKyMgIAorIyAgICBUaGUgbGljZW5zZXMgZm9y
+IG1vc3Qgc29mdHdhcmUgYXJlIGRlc2lnbmVkIHRvIHRha2UgYXdheSB5b3VyCisjICBmcmVlZG9t
+IHRvIHNoYXJlIGFuZCBjaGFuZ2UgaXQuICBCeSBjb250cmFzdCwgdGhlIEdOVSBHZW5lcmFsIFB1
+YmxpYworIyBAQCAtMTUsNyArMTUsNyBAQAorIyAgR2VuZXJhbCBQdWJsaWMgTGljZW5zZSBhcHBs
+aWVzIHRvIG1vc3Qgb2YgdGhlIEZyZWUgU29mdHdhcmUKKyMgIEZvdW5kYXRpb24ncyBzb2Z0d2Fy
+ZSBhbmQgdG8gYW55IG90aGVyIHByb2dyYW0gd2hvc2UgYXV0aG9ycyBjb21taXQgdG8KKyMgIHVz
+aW5nIGl0LiAgKFNvbWUgb3RoZXIgRnJlZSBTb2Z0d2FyZSBGb3VuZGF0aW9uIHNvZnR3YXJlIGlz
+IGNvdmVyZWQgYnkKKyMgLXRoZSBHTlUgTGlicmFyeSBHZW5lcmFsIFB1YmxpYyBMaWNlbnNlIGlu
+c3RlYWQuKSAgWW91IGNhbiBhcHBseSBpdCB0bworIyArdGhlIEdOVSBMZXNzZXIgR2VuZXJhbCBQ
+dWJsaWMgTGljZW5zZSBpbnN0ZWFkLikgIFlvdSBjYW4gYXBwbHkgaXQgdG8KKyMgIHlvdXIgcHJv
+Z3JhbXMsIHRvby4KKyMgIAorIyAgICBXaGVuIHdlIHNwZWFrIG9mIGZyZWUgc29mdHdhcmUsIHdl
+IGFyZSByZWZlcnJpbmcgdG8gZnJlZWRvbSwgbm90CisjIEBAIC01NSw4ICs1NSw4IEBACisjICAK
+KyMgICAgVGhlIHByZWNpc2UgdGVybXMgYW5kIGNvbmRpdGlvbnMgZm9yIGNvcHlpbmcsIGRpc3Ry
+aWJ1dGlvbiBhbmQKKyMgIG1vZGlmaWNhdGlvbiBmb2xsb3cuCisjIC0MCisjIC0JCSAgICBHTlUg
+R0VORVJBTCBQVUJMSUMgTElDRU5TRQorIyArCisjICsgICAgICAgICAgICAgICAgICAgIEdOVSBH
+RU5FUkFMIFBVQkxJQyBMSUNFTlNFCisjICAgICBURVJNUyBBTkQgQ09ORElUSU9OUyBGT1IgQ09Q
+WUlORywgRElTVFJJQlVUSU9OIEFORCBNT0RJRklDQVRJT04KKyMgIAorIyAgICAwLiBUaGlzIExp
+Y2Vuc2UgYXBwbGllcyB0byBhbnkgcHJvZ3JhbSBvciBvdGhlciB3b3JrIHdoaWNoIGNvbnRhaW5z
+CisjIEBAIC0xMTAsNyArMTEwLDcgQEAKKyMgICAgICBMaWNlbnNlLiAgKEV4Y2VwdGlvbjogaWYg
+dGhlIFByb2dyYW0gaXRzZWxmIGlzIGludGVyYWN0aXZlIGJ1dAorIyAgICAgIGRvZXMgbm90IG5v
+cm1hbGx5IHByaW50IHN1Y2ggYW4gYW5ub3VuY2VtZW50LCB5b3VyIHdvcmsgYmFzZWQgb24KKyMg
+ICAgICB0aGUgUHJvZ3JhbSBpcyBub3QgcmVxdWlyZWQgdG8gcHJpbnQgYW4gYW5ub3VuY2VtZW50
+LikKKyMgLQwKKyMgKworIyAgVGhlc2UgcmVxdWlyZW1lbnRzIGFwcGx5IHRvIHRoZSBtb2RpZmll
+ZCB3b3JrIGFzIGEgd2hvbGUuICBJZgorIyAgaWRlbnRpZmlhYmxlIHNlY3Rpb25zIG9mIHRoYXQg
+d29yayBhcmUgbm90IGRlcml2ZWQgZnJvbSB0aGUgUHJvZ3JhbSwKKyMgIGFuZCBjYW4gYmUgcmVh
+c29uYWJseSBjb25zaWRlcmVkIGluZGVwZW5kZW50IGFuZCBzZXBhcmF0ZSB3b3JrcyBpbgorIyBA
+QCAtMTY4LDcgKzE2OCw3IEBACisjICBhY2Nlc3MgdG8gY29weSB0aGUgc291cmNlIGNvZGUgZnJv
+bSB0aGUgc2FtZSBwbGFjZSBjb3VudHMgYXMKKyMgIGRpc3RyaWJ1dGlvbiBvZiB0aGUgc291cmNl
+IGNvZGUsIGV2ZW4gdGhvdWdoIHRoaXJkIHBhcnRpZXMgYXJlIG5vdAorIyAgY29tcGVsbGVkIHRv
+IGNvcHkgdGhlIHNvdXJjZSBhbG9uZyB3aXRoIHRoZSBvYmplY3QgY29kZS4KKyMgLQwKKyMgKwor
+IyAgICA0LiBZb3UgbWF5IG5vdCBjb3B5LCBtb2RpZnksIHN1YmxpY2Vuc2UsIG9yIGRpc3RyaWJ1
+dGUgdGhlIFByb2dyYW0KKyMgIGV4Y2VwdCBhcyBleHByZXNzbHkgcHJvdmlkZWQgdW5kZXIgdGhp
+cyBMaWNlbnNlLiAgQW55IGF0dGVtcHQKKyMgIG90aGVyd2lzZSB0byBjb3B5LCBtb2RpZnksIHN1
+YmxpY2Vuc2Ugb3IgZGlzdHJpYnV0ZSB0aGUgUHJvZ3JhbSBpcworIyBAQCAtMjI1LDcgKzIyNSw3
+IEBACisjICAKKyMgIFRoaXMgc2VjdGlvbiBpcyBpbnRlbmRlZCB0byBtYWtlIHRob3JvdWdobHkg
+Y2xlYXIgd2hhdCBpcyBiZWxpZXZlZCB0bworIyAgYmUgYSBjb25zZXF1ZW5jZSBvZiB0aGUgcmVz
+dCBvZiB0aGlzIExpY2Vuc2UuCisjIC0MCisjICsKKyMgICAgOC4gSWYgdGhlIGRpc3RyaWJ1dGlv
+biBhbmQvb3IgdXNlIG9mIHRoZSBQcm9ncmFtIGlzIHJlc3RyaWN0ZWQgaW4KKyMgIGNlcnRhaW4g
+Y291bnRyaWVzIGVpdGhlciBieSBwYXRlbnRzIG9yIGJ5IGNvcHlyaWdodGVkIGludGVyZmFjZXMs
+IHRoZQorIyAgb3JpZ2luYWwgY29weXJpZ2h0IGhvbGRlciB3aG8gcGxhY2VzIHRoZSBQcm9ncmFt
+IHVuZGVyIHRoaXMgTGljZW5zZQorIyBAQCAtMjU1LDcgKzI1NSw3IEBACisjICBvZiBwcmVzZXJ2
+aW5nIHRoZSBmcmVlIHN0YXR1cyBvZiBhbGwgZGVyaXZhdGl2ZXMgb2Ygb3VyIGZyZWUgc29mdHdh
+cmUgYW5kCisjICBvZiBwcm9tb3RpbmcgdGhlIHNoYXJpbmcgYW5kIHJldXNlIG9mIHNvZnR3YXJl
+IGdlbmVyYWxseS4KKyMgIAorIyAtCQkJICAgIE5PIFdBUlJBTlRZCisjICsgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgTk8gV0FSUkFOVFkKKyMgIAorIyAgICAxMS4gQkVDQVVTRSBUSEUgUFJP
+R1JBTSBJUyBMSUNFTlNFRCBGUkVFIE9GIENIQVJHRSwgVEhFUkUgSVMgTk8gV0FSUkFOVFkKKyMg
+IEZPUiBUSEUgUFJPR1JBTSwgVE8gVEhFIEVYVEVOVCBQRVJNSVRURUQgQlkgQVBQTElDQUJMRSBM
+QVcuICBFWENFUFQgV0hFTgorIyBAQCAtMjc3LDkgKzI3Nyw5IEBACisjICBQUk9HUkFNUyksIEVW
+RU4gSUYgU1VDSCBIT0xERVIgT1IgT1RIRVIgUEFSVFkgSEFTIEJFRU4gQURWSVNFRCBPRiBUSEUK
+KyMgIFBPU1NJQklMSVRZIE9GIFNVQ0ggREFNQUdFUy4KKyMgIAorIyAtCQkgICAgIEVORCBPRiBU
+RVJNUyBBTkQgQ09ORElUSU9OUworIyAtDAorIyAtCSAgICBIb3cgdG8gQXBwbHkgVGhlc2UgVGVy
+bXMgdG8gWW91ciBOZXcgUHJvZ3JhbXMKKyMgKyAgICAgICAgICAgICAgICAgICAgIEVORCBPRiBU
+RVJNUyBBTkQgQ09ORElUSU9OUworIyArCisjICsgICAgICAgICAgICBIb3cgdG8gQXBwbHkgVGhl
+c2UgVGVybXMgdG8gWW91ciBOZXcgUHJvZ3JhbXMKKyMgIAorIyAgICBJZiB5b3UgZGV2ZWxvcCBh
+IG5ldyBwcm9ncmFtLCBhbmQgeW91IHdhbnQgaXQgdG8gYmUgb2YgdGhlIGdyZWF0ZXN0CisjICBw
+b3NzaWJsZSB1c2UgdG8gdGhlIHB1YmxpYywgdGhlIGJlc3Qgd2F5IHRvIGFjaGlldmUgdGhpcyBp
+cyB0byBtYWtlIGl0CisjIEBAIC0zMDMsMTcgKzMwMywxNiBAQAorIyAgICAgIE1FUkNIQU5UQUJJ
+TElUWSBvciBGSVRORVNTIEZPUiBBIFBBUlRJQ1VMQVIgUFVSUE9TRS4gIFNlZSB0aGUKKyMgICAg
+ICBHTlUgR2VuZXJhbCBQdWJsaWMgTGljZW5zZSBmb3IgbW9yZSBkZXRhaWxzLgorIyAgCisjIC0g
+ICAgWW91IHNob3VsZCBoYXZlIHJlY2VpdmVkIGEgY29weSBvZiB0aGUgR05VIEdlbmVyYWwgUHVi
+bGljIExpY2Vuc2UKKyMgLSAgICBhbG9uZyB3aXRoIHRoaXMgcHJvZ3JhbTsgaWYgbm90LCB3cml0
+ZSB0byB0aGUgRnJlZSBTb2Z0d2FyZQorIyAtICAgIEZvdW5kYXRpb24sIEluYy4sIDU5IFRlbXBs
+ZSBQbGFjZSwgU3VpdGUgMzMwLCBCb3N0b24sIE1BICAwMjExMS0xMzA3ICBVU0EKKyMgLQorIyAr
+ICAgIFlvdSBzaG91bGQgaGF2ZSByZWNlaXZlZCBhIGNvcHkgb2YgdGhlIEdOVSBHZW5lcmFsIFB1
+YmxpYyBMaWNlbnNlIGFsb25nCisjICsgICAgd2l0aCB0aGlzIHByb2dyYW07IGlmIG5vdCwgd3Jp
+dGUgdG8gdGhlIEZyZWUgU29mdHdhcmUgRm91bmRhdGlvbiwgSW5jLiwKKyMgKyAgICA1MSBGcmFu
+a2xpbiBTdHJlZXQsIEZpZnRoIEZsb29yLCBCb3N0b24sIE1BIDAyMTEwLTEzMDEgVVNBLgorIyAg
+CisjICBBbHNvIGFkZCBpbmZvcm1hdGlvbiBvbiBob3cgdG8gY29udGFjdCB5b3UgYnkgZWxlY3Ry
+b25pYyBhbmQgcGFwZXIgbWFpbC4KKyMgIAorIyAgSWYgdGhlIHByb2dyYW0gaXMgaW50ZXJhY3Rp
+dmUsIG1ha2UgaXQgb3V0cHV0IGEgc2hvcnQgbm90aWNlIGxpa2UgdGhpcworIyAgd2hlbiBpdCBz
+dGFydHMgaW4gYW4gaW50ZXJhY3RpdmUgbW9kZToKKyMgIAorIyAtICAgIEdub21vdmlzaW9uIHZl
+cnNpb24gNjksIENvcHlyaWdodCAoQykgeWVhciAgbmFtZSBvZiBhdXRob3IKKyMgKyAgICBHbm9t
+b3Zpc2lvbiB2ZXJzaW9uIDY5LCBDb3B5cmlnaHQgKEMpIHllYXIgbmFtZSBvZiBhdXRob3IKKyMg
+ICAgICBHbm9tb3Zpc2lvbiBjb21lcyB3aXRoIEFCU09MVVRFTFkgTk8gV0FSUkFOVFk7IGZvciBk
+ZXRhaWxzIHR5cGUgYHNob3cgdycuCisjICAgICAgVGhpcyBpcyBmcmVlIHNvZnR3YXJlLCBhbmQg
+eW91IGFyZSB3ZWxjb21lIHRvIHJlZGlzdHJpYnV0ZSBpdAorIyAgICAgIHVuZGVyIGNlcnRhaW4g
+Y29uZGl0aW9uczsgdHlwZSBgc2hvdyBjJyBmb3IgZGV0YWlscy4KKyMgQEAgLTMzNiw1ICszMzUs
+NSBAQAorIyAgVGhpcyBHZW5lcmFsIFB1YmxpYyBMaWNlbnNlIGRvZXMgbm90IHBlcm1pdCBpbmNv
+cnBvcmF0aW5nIHlvdXIgcHJvZ3JhbSBpbnRvCisjICBwcm9wcmlldGFyeSBwcm9ncmFtcy4gIElm
+IHlvdXIgcHJvZ3JhbSBpcyBhIHN1YnJvdXRpbmUgbGlicmFyeSwgeW91IG1heQorIyAgY29uc2lk
+ZXIgaXQgbW9yZSB1c2VmdWwgdG8gcGVybWl0IGxpbmtpbmcgcHJvcHJpZXRhcnkgYXBwbGljYXRp
+b25zIHdpdGggdGhlCisjIC1saWJyYXJ5LiAgSWYgdGhpcyBpcyB3aGF0IHlvdSB3YW50IHRvIGRv
+LCB1c2UgdGhlIEdOVSBMaWJyYXJ5IEdlbmVyYWwKKyMgK2xpYnJhcnkuICBJZiB0aGlzIGlzIHdo
+YXQgeW91IHdhbnQgdG8gZG8sIHVzZSB0aGUgR05VIExlc3NlciBHZW5lcmFsCisjICBQdWJsaWMg
+TGljZW5zZSBpbnN0ZWFkIG9mIHRoaXMgTGljZW5zZS4KKyMgCisjCisKK1NVTU1BUlkgPSAiTm90
+ZXMgcGx1Z2luIGZvciB0aGUgWGZjZSBQYW5lbCIKK0hPTUVQQUdFID0gImh0dHA6Ly9nb29kaWVz
+LnhmY2Uub3JnL3Byb2plY3RzL3BhbmVsLXBsdWdpbnMveGZjZTQtbm90ZXMtcGx1Z2luIgorTElD
+RU5TRSA9ICJHUEwtMi4wLW9ubHkiCitMSUNfRklMRVNfQ0hLU1VNID0gImZpbGU6Ly9DT1BZSU5H
+O21kNT1iMjM0ZWU0ZDY5ZjVmY2U0NDg2YTgwZmRhZjRhNDI2MyIKKworaW5oZXJpdCB4ZmNlLXBh
+bmVsLXBsdWdpbgorCitERVBFTkRTICs9ICJndGsrMyBsaWJ4ZmNlNHVpIHhmY2U0LXBhbmVsIHhm
+Y29uZiIKKworU1JDX1VSSVtzaGEyNTZzdW1dID0gIjJlZTQ0MDYwNDJlZGQzNTJhOTFlMTY2Yzgz
+YjYwZDEzMjIwZWYwNGRjZTNmYTZiOWUwZWIxMzYzNmQ2MzY5MjkiCmRpZmYgLS1naXQgYS9tZXRh
+LXhmY2UvcmVjaXBlcy1wYW5lbC1wbHVnaW5zL25vdGVzL3hmY2U0LW5vdGVzLXBsdWdpbl8xLjku
+MC5iYiBiL21ldGEteGZjZS9yZWNpcGVzLXBhbmVsLXBsdWdpbnMvbm90ZXMveGZjZTQtbm90ZXMt
+cGx1Z2luXzEuOS4wLmJiCmRlbGV0ZWQgZmlsZSBtb2RlIDEwMDY0NAppbmRleCBkYzBmYzJjNjAu
+LjAwMDAwMDAwMAotLS0gYS9tZXRhLXhmY2UvcmVjaXBlcy1wYW5lbC1wbHVnaW5zL25vdGVzL3hm
+Y2U0LW5vdGVzLXBsdWdpbl8xLjkuMC5iYgorKysgL2Rldi9udWxsCkBAIC0xLDEwICswLDAgQEAK
+LVNVTU1BUlkgPSAiTm90ZXMgcGx1Z2luIGZvciB0aGUgWGZjZSBQYW5lbCIKLUhPTUVQQUdFID0g
+Imh0dHA6Ly9nb29kaWVzLnhmY2Uub3JnL3Byb2plY3RzL3BhbmVsLXBsdWdpbnMveGZjZTQtbm90
+ZXMtcGx1Z2luIgotTElDRU5TRSA9ICJHUEwtMi4wLW9ubHkiCi1MSUNfRklMRVNfQ0hLU1VNID0g
+ImZpbGU6Ly9DT1BZSU5HO21kNT05NGQ1NWQ1MTJhOWJhMzZjYWE5YjdkZjA3OWJhZTE5ZiIKLQot
+aW5oZXJpdCB4ZmNlLXBhbmVsLXBsdWdpbgotCi1ERVBFTkRTICs9ICJndGsrMyBsaWJ4ZmNlNHVp
+IHhmY2U0LXBhbmVsIHhmY29uZiIKLQotU1JDX1VSSVtzaGEyNTZzdW1dID0gIjEzZjkwOWM5NDhi
+NjM5Zjk2ZGU2NGNmNzkzZWI3NGNiMTc3OTU4OTIwMWQzOTMzZWZmMjE0ZWU4ZjM1YWIwODgiCi0t
+IAoyLjM5LjIKCg==
 
---===============0057019064599593060==--
+--===============0023568672948569585==--
 
