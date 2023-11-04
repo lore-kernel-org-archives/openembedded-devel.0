@@ -2,49 +2,49 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D6B7EC0729B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BE36FC05055
 	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 03:13:05 +0000 (UTC)
-Received: from a27-193.smtp-out.us-west-2.amazonses.com (a27-193.smtp-out.us-west-2.amazonses.com [54.240.27.193])
- by mx.groups.io with SMTP id smtpd.web11.3429.1699067574852049682
+Received: from a27-33.smtp-out.us-west-2.amazonses.com (a27-33.smtp-out.us-west-2.amazonses.com [54.240.27.33])
+ by mx.groups.io with SMTP id smtpd.web10.3561.1699067574945175211
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Nov 2023 20:12:54 -0700
+ Fri, 03 Nov 2023 20:12:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=SdN/YR3s;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=jBZ/AuiN;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.193, mailfrom: 0101018b9851b6f7-3cfc415c-6d57-45df-ae2d-ec2631cbdbba-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=eHsx0+1j;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=S4FfbF2V;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.33, mailfrom: 0101018b9851b7f4-d51697e0-cdf4-4d3c-9925-49461e847d61-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
 	t=1699067574;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=nCoaeVqSsH0RkLOO/Gv0yUr2lI2LZiczJtyuxIqVUNI=;
-	b=SdN/YR3s/+Nk4hISmJ29JYWea4nb4M0vQqSRs2PL+Yu6ha4wfA3h7+tKAXuOh7B2
-	6KjqPm9GOFrXUsgYEJds7MsvWWwilUlvexMAKlWWAvpOVlg/7rJjIjQ1Jgr5l8QYSIG
-	e2XPU6o6DK4GQgMfAsCG0v9+AQrrECyllunxthGY=
+	bh=WSoyUnStX8DCwBNDA8jQVP+g+Itpm/vy2UyKeS/kDcs=;
+	b=eHsx0+1j3X+ds98LbB4mmLHsrPWtCw8xpX/xQWWNzwCGuoBuePk75WcCGx8l+RcO
+	Z9EbcTryRSdGmbrtDwGrLy9aoYWhLR4Ld/ZmJKhp0d9G7rhP0keoISjnRnx0I5NwkIb
+	2xtmKpDCGppzWDHKiSncLLKgbP/CLOlA6ZZDZtMA=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699067574;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=nCoaeVqSsH0RkLOO/Gv0yUr2lI2LZiczJtyuxIqVUNI=;
-	b=jBZ/AuiNrWxNG7gFgp1YYhh+NM6nkR5s1YIfpPoruxZ/zjIzZP4CVGxIL+gmi0hP
-	EdLmS7/Ee5bziUyySfF/BNa5mOhYH8PaKBm8+vfKoQt2oZjEJuG5p+6U5SyJp/AChu/
-	NBCCaECgYoljLNxFqVpDToF1Dod9gbo1TYUHy7lA=
-Content-Type: multipart/mixed; boundary="===============2301045568000025104=="
+	bh=WSoyUnStX8DCwBNDA8jQVP+g+Itpm/vy2UyKeS/kDcs=;
+	b=S4FfbF2VLVYkX3H0MkyE8nhz8Mg7VuwCN5+qc3U8LZzZ1lKbuNh2GKgRNkyIyg5r
+	KIIKouffAumpCa11eO15RzsR2lDw4TNf6iP3+U5+h8H9ohGcuBPKrtr4KC0AcZz6aCi
+	VAQP8PM+QuTngVOa3uXCGUsZn1Q623ukljJPwOt0=
+Content-Type: multipart/mixed; boundary="===============7474534938702266598=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] libdnet: upgrading to 1.17.0 FAILED
-Message-ID: <0101018b9851b6f7-3cfc415c-6d57-45df-ae2d-ec2631cbdbba-000000@us-west-2.amazonses.com>
+Subject: [AUH] net-snmp: upgrading to 5.9.4 FAILED
+Message-ID: <0101018b9851b7f4-d51697e0-cdf4-4d3c-9925-49461e847d61-000000@us-west-2.amazonses.com>
 Date: Sat, 4 Nov 2023 03:12:54 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
-X-SES-Outgoing: 2023.11.04-54.240.27.193
+X-SES-Outgoing: 2023.11.04-54.240.27.33
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 03:13:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106209
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106211
 
---===============2301045568000025104==
+--===============7474534938702266598==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,14 +52,14 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *libdnet* to *1.17.0* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *net-snmp* to *5.9.4* has Failed (devtool error).
 
 Detailed error information:
 
-Running 'devtool upgrade' for recipe libdnet failed.
+Running 'devtool upgrade' for recipe net-snmp failed.
 NOTE: Reconnecting to bitbake server...
 Loading cache...done.
-Loaded 4892 entries from dependency cache.
+Loaded 4898 entries from dependency cache.
 NOTE: Resolving any missing task queue dependencies
 
 Build Configuration:
@@ -93,17 +93,68 @@ Sstate summary: Wanted 10 Local 10 Mirrors 0 Missed 0 Current 20 (100% match, 10
 NOTE: Executing Tasks
 NOTE: Tasks Summary: Attempted 103 tasks of which 100 didn't need to be rerun and all succeeded.
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
+NOTE: Writing buildhistory took: 3 seconds
+Loading cache...done.
+Loaded 4898 entries from dependency cache.
+Parsing recipes...done.
+Parsing of 3056 .bb files complete (3054 cached, 2 parsed). 4887 targets, 92 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.6.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "x86_64-poky-linux"
+MACHINE              = "qemux86-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.3+snapshot-e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+TUNE_FEATURES        = "m64 core2"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       
+workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+meta-oe              
+meta-python          
+meta-perl            
+meta-networking      
+meta-multimedia      
+meta-gnome           
+meta-xfce            
+meta-filesystems     
+meta-initramfs       
+meta-webserver       = "tmp-auh-upgrades:94f9a00138770904008444e59a3bfffd77f05d31"
+
+Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
+done.
+Sstate summary: Wanted 1 Local 0 Mirrors 0 Missed 1 Current 0 (0% match, 0% complete)
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 3 tasks of which 0 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 3 seconds
+DEBUG 5 [Errno 25] Inappropriate ioctl for device
+Adding changed files:   0% |                                   | ETA:  --:--:--
+Adding changed files:   0% |                                   | ETA:  --:--:--
+Adding changed files:  14% |#####                               | ETA:  0:00:01
+Adding changed files:  29% |##########                          | ETA:  0:00:00
+Adding changed files:  44% |################                    | ETA:  0:00:00
+Adding changed files:  59% |#####################               | ETA:  0:00:00
+Adding changed files:  74% |##########################          | ETA:  0:00:00
+Adding changed files:  89% |################################    | ETA:  0:00:00
+Adding changed files: 100% |####################################| Time: 0:00:00
 INFO: Extracting current version source...
+INFO: Adding local source files to srctree...
 INFO: Extracting upgraded version source...
-INFO: Rebasing devtool onto 912f7848bfff4ebc6d610f802a3144f84880cbe4
-WARNING: Command 'git rebase 912f7848bfff4ebc6d610f802a3144f84880cbe4' failed:
-Auto-merging configure.ac
-CONFLICT (content): Merge conflict in configure.ac
+INFO: Fetching https://downloads.sourceforge.net/net-snmp/net-snmp-5.9.4.tar.gz...
+INFO: Rebasing devtool onto 6bb817423b0e65cd427cda155fce8b54f31283d9
+WARNING: Command 'git rebase 6bb817423b0e65cd427cda155fce8b54f31283d9' failed:
+Auto-merging agent/mibgroup/if-mib/data_access/interface_linux.c
+CONFLICT (content): Merge conflict in agent/mibgroup/if-mib/data_access/interface_linux.c
 
 You will need to resolve conflicts in order to complete the upgrade.
-INFO: Upgraded source extracted to /home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/sources/libdnet
-INFO: New recipe is /home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/recipes/libdnet/libdnet_1.17.0.bb
+INFO: Using source tree as build directory since recipe inherits autotools-brokensep
+INFO: Upgraded source extracted to /home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/sources/net-snmp
+INFO: New recipe is /home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/recipes/net-snmp/net-snmp_5.9.4.bb
 
 
 
@@ -112,5 +163,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============2301045568000025104==--
+--===============7474534938702266598==--
 
