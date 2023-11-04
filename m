@@ -1,111 +1,110 @@
-Return-Path: <alex.kiernan@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C77DC4332F
-	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 11:53:54 +0000 (UTC)
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
- by mx.groups.io with SMTP id smtpd.web10.7949.1699098829544379369
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8BA50C4167B
+	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 14:59:25 +0000 (UTC)
+Received: from mailout07.t-online.de (mailout07.t-online.de [194.25.134.83])
+ by mx.groups.io with SMTP id smtpd.web10.11012.1699109957963639722
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 04 Nov 2023 04:53:49 -0700
+ Sat, 04 Nov 2023 07:59:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Mk3dguGe;
- spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: alex.kiernan@gmail.com)
-Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-40790b0a224so22737585e9.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 04:53:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699098827; x=1699703627; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=wq5hRKE5l8Pe1IDdQn+9nlro5zwJ3dwSovY2JtyddqQ=;
-        b=Mk3dguGeliEYVxo2Rb1HyEqyCGxICvUSWskWlgR7jSGBIPwiV3BpymJKqksotDw7mY
-         KyrDJjIfrJ8gJARg6LtDPvP3uZwjL8Xigt8tXMFHv/i3miqrgbHOEQloNCvdPGShcnDU
-         6N51H+4axirN/yRATasviKZbnkuwnoARxAwr+J4jIBSC71tCxz/C0cJ4eK0t5rMrMmPg
-         vl0radHzdIds90OlTsKLe9MgtJHTiVMqgOcYza//zIUMEHt6WNrbfBP7g4G2/SjJ4rJs
-         xPJWrrMWRyVgRLiZ6caa5tbUKbnDwBK4cTaTQP84EuU1/b7o2x/U30qi8cCUI3CeXW4x
-         dw2g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699098827; x=1699703627;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=wq5hRKE5l8Pe1IDdQn+9nlro5zwJ3dwSovY2JtyddqQ=;
-        b=qiuKpr5gaI5skF1YP3R+KZtfoXqIs7o9Ne/sidEo8Fwse3sXSfqvTjGjBV33mL04LS
-         FIciZM4nO7bd771a84CTgMDgKDbGQ7PAh2bsWSMy8HHAKQ0ivioHyjkCFBwcCL3wGAov
-         Kw8qUO39Py2ywShDiWqGJhWfTekT0QSmDrcVMumiPpTKX6IuvYR7LQmnGYAsdKu4j2q8
-         kiUyyEy7Etx1ol1XKHgzEMoeaUWoZir0VGKMz94u1MW0T2n0FIXtD/ZdtwdRmXQmU5BU
-         e600ZilTnCZk+W0NGq0IOnJTl9iRNmu7TasXG3Y+V0mU4WGCOjqsNa+nQ0H4h0kk4LyU
-         bH4g==
-X-Gm-Message-State: AOJu0Yxk8McXSD4TMjEU/uCFApaqYT53Ge51oR40YBiCbNau/OsoFZSu
-	0lXNIgYcp37K50FAj02/yNld5T51trc=
-X-Google-Smtp-Source: AGHT+IG/JYkqxNHEc9dRziLEGrtGhyH03OsK6V8/7Wf+MHbSO1dt92SjdwMX3bNZQApDom2Co8itKQ==
-X-Received: by 2002:a05:600c:a01:b0:409:7b62:f694 with SMTP id z1-20020a05600c0a0100b004097b62f694mr897389wmp.11.1699098827199;
-        Sat, 04 Nov 2023 04:53:47 -0700 (PDT)
-Received: from localhost.localdomain (cust18-dsl93-89-130.idnet.net. [93.89.130.18])
-        by smtp.gmail.com with ESMTPSA id ha7-20020a05600c860700b004080f0376a0sm5369725wmb.42.2023.11.04.04.53.46
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 04 Nov 2023 04:53:46 -0700 (PDT)
-From: Alex Kiernan <alex.kiernan@gmail.com>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.83, mailfrom: f_l_k@t-online.de)
+Received: from fwd80.aul.t-online.de (fwd80.aul.t-online.de [10.223.144.106])
+	by mailout07.t-online.de (Postfix) with SMTP id B964C52617
+	for <openembedded-devel@lists.openembedded.org>; Sat,  4 Nov 2023 15:59:15 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.163.35.165]) by fwd80.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1qzI7G-00YN740; Sat, 4 Nov 2023 15:59:15 +0100
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Alex Kiernan <alex.kiernan@gmail.com>
-Subject: [meta-oe][PATCH] reptyr: Add 0.10.0
-Date: Sat,  4 Nov 2023 11:53:32 +0000
-Message-Id: <20231104115333.13795-1-alex.kiernan@gmail.com>
-X-Mailer: git-send-email 2.39.0
+Subject: [meta-gnome][PATCH 2/3] libgweather4: Upgrade 4.2.0 -> 4.4.0
+Date: Sat,  4 Nov 2023 15:59:31 +0100
+Message-ID: <20231104145932.128150-2-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.42.0
+In-Reply-To: <20231104145932.128150-1-f_l_k@t-online.de>
+References: <20231104145932.128150-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=UTF-8
+X-TOI-EXPURGATEID: 150726::1699109955-58FF2ED2-32F34870/0/0 CLEAN NORMAL
+X-TOI-MSGID: 84185eb2-ebbe-4fc0-93fe-b1f600db3ae7
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 11:53:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106370
+ <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 14:59:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106371
 
-reptyr is a utility for taking an existing running program and attaching
-it to a new terminal.
+GWeather 4.4.0 (stable)
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+- nws: fix null string comparison when reading visibility [!282]
+- Translation updates
+- Location database changes
+  - Adds Cities from Ukraines Zaporizhzhia Oblast [!276]
+
+GWeather 4.3.2 (development)
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+
+- Fix fallback metric unit detection logic [!231]
+- Documentation fixes [!229]
+- Performance improvements for nearest location lookups [!271]
+- Location database changes
+  - Add Ulsan city and Ulsan Airport [!218]
+  - Add Koblenz and Mainz (Germany) [!184]
+  - Add S=C3=A3o Bento do Sul, Brazil [!220]
+  - Add Ryazan' city [!224]
+  - Add Freiburg and Heidelberg in Germany [!225]
+  - Add Nottingham, UK [!268]
+  - Add cities and airports in Argentina [!270]
+  - Add Bracknell, United Kingdom [!249]
+  - Update Romanian cities [!255]
+  - Add cities in Rwanda [!260]
+  - Add Mahilyow, Belarus [!250]
+  - Add Aachen (North Rhine-Westphalia, Germany) [!246]
+  - Add airports, structure of regions and biggest regional cities of Ukr=
+aine
+[!242]
+  - Add Osh City (Kyrgyzstan) [!190]
+  - Add city Caravaca de la Cruz [!237]
+  - Add a new Argentinian city, Bah=C3=ADa Blanca [!177]
+  - Fix timezone for Denpasar [#209]
+  - Fix spelling of Siem Reap [#199]
+  - Add Rio Grande in Brazil [!226]
+  - Add major cities of Japan [!267]
+  - Add some cities in Germany [!266]
+- Translation updates
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
+ .../{libgweather4_4.2.0.bb =3D> libgweather4_4.4.0.bb}            | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/libgweather/{libgweather4_4.2.0.bb =3D> =
+libgweather4_4.4.0.bb} (87%)
 
- .../recipes-support/reptyr/reptyr_0.10.0.bb   | 29 +++++++++++++++++++
- 1 file changed, 29 insertions(+)
- create mode 100644 meta-oe/recipes-support/reptyr/reptyr_0.10.0.bb
-
-diff --git a/meta-oe/recipes-support/reptyr/reptyr_0.10.0.bb b/meta-oe/recipes-support/reptyr/reptyr_0.10.0.bb
-new file mode 100644
-index 000000000000..57b31a78d9f5
---- /dev/null
-+++ b/meta-oe/recipes-support/reptyr/reptyr_0.10.0.bb
-@@ -0,0 +1,29 @@
-+SUMMARY = "Reparent a running program to a new terminal"
-+DESCRIPTION = "reptyr is a utility for taking an existing running program and \
-+attaching it to a new terminal. Started a long-running process over ssh, but \
-+have to leave and don't want to interrupt it? Just start a screen, use reptyr \
-+to grab it, and then kill the ssh session and head on home."
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=25a0555028c71837623fa6dfa4cc45c0"
-+
-+SRC_URI = "git://github.com/nelhage/reptyr.git;protocol=https;branch=master"
-+SRCREV = "1238097fc2cd15db058d2185cc4985daa87bcd41"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit bash-completion github-releases manpages pkgconfig
-+
-+GITHUB_BASE_URI = "https://github.com/nelhage/${BPN}/releases/"
-+
-+PACKAGECONFIG ?= ""
-+PACKAGECONFIG[manpages] = ""
-+
-+EXTRA_OEMAKE = "'BINDIR=${bindir}' 'MANDIR=${mandir}' 'PKG_CONFIG=${STAGING_BINDIR_NATIVE}/pkg-config'"
-+
-+do_compile () {
-+	oe_runmake
-+}
-+
-+do_install () {
-+	oe_runmake install 'DESTDIR=${D}'
-+}
--- 
-2.39.0
+diff --git a/meta-gnome/recipes-gnome/libgweather/libgweather4_4.2.0.bb b=
+/meta-gnome/recipes-gnome/libgweather/libgweather4_4.4.0.bb
+similarity index 87%
+rename from meta-gnome/recipes-gnome/libgweather/libgweather4_4.2.0.bb
+rename to meta-gnome/recipes-gnome/libgweather/libgweather4_4.4.0.bb
+index f2ffcfdd7..81ae8317d 100644
+--- a/meta-gnome/recipes-gnome/libgweather/libgweather4_4.2.0.bb
++++ b/meta-gnome/recipes-gnome/libgweather/libgweather4_4.4.0.bb
+@@ -12,7 +12,7 @@ inherit gnomebase gsettings gobject-introspection gette=
+xt gi-docgen vala feature
+ REQUIRED_DISTRO_FEATURES =3D "opengl"
+=20
+ SRC_URI +=3D "file://0001-Allow-building-gir-in-cross-environments.patch=
+"
+-SRC_URI[archive.sha256sum] =3D "af8a812da0d8976a000e1d62572c256086a81732=
+3fbf35b066dbfdd8d2ca6203"
++SRC_URI[archive.sha256sum] =3D "366e866ff2a708b894cfea9475b8e8ff54cb3e2b=
+477ea72a8ade0dabee5f48a4"
+=20
+ GTKDOC_MESON_OPTION =3D "gtk_doc"
+=20
+--=20
+2.42.0
 
 
