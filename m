@@ -2,49 +2,49 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 48480C4167D
-	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 01:38:33 +0000 (UTC)
-Received: from a27-23.smtp-out.us-west-2.amazonses.com (a27-23.smtp-out.us-west-2.amazonses.com [54.240.27.23])
- by mx.groups.io with SMTP id smtpd.web11.2218.1699061904265446986
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 58A27C10F1D
+	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 01:38:22 +0000 (UTC)
+Received: from a27-30.smtp-out.us-west-2.amazonses.com (a27-30.smtp-out.us-west-2.amazonses.com [54.240.27.30])
+ by mx.groups.io with SMTP id smtpd.web10.2287.1699061895830641512
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Nov 2023 18:38:24 -0700
+ Fri, 03 Nov 2023 18:38:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=DDsw1Qtn;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=JZykmFnV;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.23, mailfrom: 0101018b97fb30d7-3277c79e-7e95-4af7-8329-9c0f766e4f72-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=GV7zqCkQ;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=T1i5koA0;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.30, mailfrom: 0101018b97fb0f83-5d6d6208-9bab-495c-b036-c3874fea1dbe-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
-	t=1699061903;
+	t=1699061895;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=avoRr9/B60URVgTYrBl7kosFNbA38H1u2vypb3tD83g=;
-	b=DDsw1QtnoxjVWHa9o3DXpupx3QT6yMxH7I7I2z6hCjQbnj372p2yw4lVXiuHn1MK
-	5Im7k4o1P4riwPQCMAIkMyjboZANw2BHDmdRDODhVZveYUS1OGOi4WP72j5WEePIHAC
-	BVXImmfn5A2Q76XAf9EC/E97q9VCeR2MLapyoHOY=
+	bh=DihNtt9zeK8PGgorzUJNwa2nMbDLCKcSSfISwlzdcGU=;
+	b=GV7zqCkQW6akJn7eyywfv3ZzDjM0+pmeyU/WUBQCS6H6EIWDfLVzRREsONfnmkSh
+	NRzqytlpt43ZdqQD8Xnl3cjx7dToEe2ixMYaGRTbAS4bTxTot6WlEaf3TKfsl+D2yEo
+	H66PfabjQNUYatz5tmpe6AnWJYk63pCOHLQkXSbk=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699061903;
+	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699061895;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=avoRr9/B60URVgTYrBl7kosFNbA38H1u2vypb3tD83g=;
-	b=JZykmFnVo8AaEqkAuMKClCdHgNX9UzE+pqp9DjdUqrJKAsD+yXA8T9uX7U4NhnyA
-	vzHac2gobC5q+0sg9J+GcfmucFFOf9ZD1ABQtu55ce2qR1GA1SNPWrTxwSs2Vhkvzxx
-	L8S2HTNlRAYann2Pxm4ddnHxGNOmt8KjnMhF/WBI=
-Content-Type: multipart/mixed; boundary="===============3784565915272090559=="
+	bh=DihNtt9zeK8PGgorzUJNwa2nMbDLCKcSSfISwlzdcGU=;
+	b=T1i5koA0d5EaaibabJW3yEVLU+b1b4Yternjak5SLVU85E16gbFDLhBRq7vt7qrd
+	GDzFo+rFuY2cWEqM0sUmtqj0Uh7DK4czJ5W9HfimMgO4+lDy7Vdbk6SB43ClELNr4Qp
+	OeePibWUVNpUi+TpXmXOYJE4x1eIKDkWrFoJ4/DE=
+Content-Type: multipart/mixed; boundary="===============1910987151312911664=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] python3-wtforms: upgrading to 3.1.1 FAILED
-Message-ID: <0101018b97fb30d7-3277c79e-7e95-4af7-8329-9c0f766e4f72-000000@us-west-2.amazonses.com>
-Date: Sat, 4 Nov 2023 01:38:23 +0000
+Subject: [AUH] python3-google-auth: upgrading to 2.23.4 SUCCEEDED
+Message-ID: <0101018b97fb0f83-5d6d6208-9bab-495c-b036-c3874fea1dbe-000000@us-west-2.amazonses.com>
+Date: Sat, 4 Nov 2023 01:38:15 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
-X-SES-Outgoing: 2023.11.04-54.240.27.23
+X-SES-Outgoing: 2023.11.04-54.240.27.30
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 01:38:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106184
+ <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 01:38:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106124
 
---===============3784565915272090559==
+--===============1910987151312911664==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,106 +52,757 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *python3-wtforms* to *3.1.1* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *python3-google-auth* to *2.23.4* has Succeeded.
 
-Detailed error information:
+Next steps:
+    - apply the patch: git am 0001-python3-google-auth-upgrade-2.23.3-2.23.4.patch
+    - check the changes to upstream patches and summarize them in the commit message,
+    - compile an image that contains the package
+    - perform some basic sanity tests
+    - amend the patch and sign it off: git commit -s --reset-author --amend
+    - send it to the appropriate mailing list
 
-The following devtool command failed:  upgrade python3-wtforms -V 3.1.1
-NOTE: Reconnecting to bitbake server...
-Loading cache...done.
-Loaded 5117 entries from dependency cache.
-NOTE: Resolving any missing task queue dependencies
-
-Build Configuration:
-BB_VERSION           = "2.6.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "x86_64-poky-linux"
-MACHINE              = "qemux86-64"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.3+snapshot-e575f59b82eae78fb1ac8df7198eaa4a7a963259"
-TUNE_FEATURES        = "m64 core2"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       
-workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
-meta-oe              
-meta-python          
-meta-perl            
-meta-networking      
-meta-multimedia      
-meta-gnome           
-meta-xfce            
-meta-filesystems     
-meta-initramfs       
-meta-webserver       = "tmp-auh-upgrades:bd817382bf586a0bf5891142eeb230ccdf1194b4"
-
-Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
-done.
-Sstate summary: Wanted 10 Local 10 Mirrors 0 Missed 0 Current 20 (100% match, 100% complete)
-NOTE: Executing Tasks
-NOTE: Tasks Summary: Attempted 103 tasks of which 100 didn't need to be rerun and all succeeded.
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 8 seconds
-Loading cache...done.
-Loaded 5117 entries from dependency cache.
-Parsing recipes...done.
-Parsing of 3056 .bb files complete (3054 cached, 2 parsed). 4887 targets, 92 skipped, 0 masked, 0 errors.
-NOTE: Resolving any missing task queue dependencies
-
-Build Configuration:
-BB_VERSION           = "2.6.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "x86_64-poky-linux"
-MACHINE              = "qemux86-64"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.3+snapshot-e575f59b82eae78fb1ac8df7198eaa4a7a963259"
-TUNE_FEATURES        = "m64 core2"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       
-workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
-meta-oe              
-meta-python          
-meta-perl            
-meta-networking      
-meta-multimedia      
-meta-gnome           
-meta-xfce            
-meta-filesystems     
-meta-initramfs       
-meta-webserver       = "tmp-auh-upgrades:bd817382bf586a0bf5891142eeb230ccdf1194b4"
-
-Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
-done.
-Sstate summary: Wanted 1 Local 0 Mirrors 0 Missed 1 Current 0 (0% match, 0% complete)
-NOTE: Executing Tasks
-WARNING: Failed to fetch URL https://files.pythonhosted.org/packages/source/W/WTForms/WTForms-3.1.1.tar.gz;downloadfilename=WTForms-3.1.1.tar.gz, attempting MIRRORS if available
-NOTE: Tasks Summary: Attempted 2 tasks of which 0 didn't need to be rerun and 1 failed.
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 8 seconds
-NOTE: The errors for this build are stored in /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231104011814.txt
-You can send the errors to a reports server by running:
-  send-error-report /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231104011814.txt [-s server]
-NOTE: The contents of these logs will be posted in public if you use the above command with the default server. Please ensure you remove any identifying or proprietary information when prompted before sending.
-
-INFO: Extracting current version source...
-INFO: Extracting upgraded version source...
-INFO: Fetching https://files.pythonhosted.org/packages/source/W/WTForms/WTForms-3.1.1.tar.gz;downloadfilename=WTForms-3.1.1.tar.gz...
-ERROR: Fetcher failure: Fetch command export PSEUDO_DISABLED=1; export SSL_CERT_FILE="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export GIT_SSL_CAINFO="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export ftp_proxy="http://proxy.yocto.io:5187/"; export FTP_PROXY="http://proxy.yocto.io:5187/"; export PATH="/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/sysroots-uninative/x86_64-linux/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-6n1klscc/work/recipe-sysroot-native/usr/bin/x86_64-poky-linux:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-6n1klscc/work/recipe-sysroot/usr/bin/crossscripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-6n1klscc/work/recipe-sysroot-native/usr/sbin:/hom
- e/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-6n1klscc/work/recipe-sysroot-native/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-6n1klscc/work/recipe-sysroot-native/sbin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-6n1klscc/work/recipe-sysroot-native/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/bitbake/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools"; export HOME="/home/pokybuild"; /usr/bin/env wget -t 2 -T 30 --passive-ftp -O /srv/autobuilder/autobuilder.yocto.io/current_sources/WTForms-3.1.1.tar.gz.tmp -P /srv/autobuilder/autobuilder.yocto.io/current_sources 'https://files.pythonhosted.org/packages/source/W/WTForms/WTForms-3.1.1.tar.gz' --progress=dot -v failed with exit code 8, no output
-ERROR: Bitbake Fetcher Error: FetchError('Unable to fetch URL from any source.', 'https://files.pythonhosted.org/packages/source/W/WTForms/WTForms-3.1.1.tar.gz;downloadfilename=WTForms-3.1.1.tar.gz')
-ERROR: Logfile of failure stored in: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-6n1klscc/work/temp/log.do_fetch.155691
-ERROR: Failed to fetch URL https://files.pythonhosted.org/packages/source/W/WTForms/WTForms-3.1.1.tar.gz;downloadfilename=WTForms-3.1.1.tar.gz
-
+Alternatively, if you believe the recipe should not be upgraded at this time,
+you can fill RECIPE_NO_UPDATE_REASON in respective recipe file so that
+automatic upgrades would no longer be attempted.
 
 Please review the attached files for further information and build/update failures.
 Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi?product=Automated%20Update%20Handler
 
 Regards,
 The Upgrade Helper
---===============3784565915272090559==--
+
+-- >8 --
+From 8e5542de4a1f680e2a704cc883357488749baa96 Mon Sep 17 00:00:00 2001
+From: Upgrade Helper <auh@yoctoproject.org>
+Date: Fri, 3 Nov 2023 21:29:43 +0000
+Subject: [PATCH] python3-google-auth: upgrade 2.23.3 -> 2.23.4
+
+---
+ ...hon3-google-auth_2.23.3.bb => python3-google-auth_2.23.4.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-google-auth_2.23.3.bb => python3-google-auth_2.23.4.bb} (87%)
+
+diff --git a/meta-python/recipes-devtools/python/python3-google-auth_2.23.3.bb b/meta-python/recipes-devtools/python/python3-google-auth_2.23.4.bb
+similarity index 87%
+rename from meta-python/recipes-devtools/python/python3-google-auth_2.23.3.bb
+rename to meta-python/recipes-devtools/python/python3-google-auth_2.23.4.bb
+index e5433b083..c7bf2857a 100644
+--- a/meta-python/recipes-devtools/python/python3-google-auth_2.23.3.bb
++++ b/meta-python/recipes-devtools/python/python3-google-auth_2.23.4.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+ 
+ inherit pypi setuptools3
+ 
+-SRC_URI[sha256sum] = "6864247895eea5d13b9c57c9e03abb49cb94ce2dc7c58e91cba3248c7477c9e3"
++SRC_URI[sha256sum] = "79905d6b1652187def79d491d6e23d0cbb3a21d3c7ba0dbaa9c8a01906b13ff3"
+ 
+ RDEPENDS:${PN} += "\
+     ${PYTHON_PN}-asyncio \
+-- 
+2.39.2
+
+
+--===============1910987151312911664==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="buildhistory-diff-full.txt"
+
+packages/core2-64-poky-linux/python3-google-auth: SRC_URI changed from "https://files.pythonhosted.org/packages/source/g/google-auth/google-auth-2.23.3.tar.gz;downloadfilename=google-auth-2.23.3.tar.gz" to "https://files.pythonhosted.org/packages/source/g/google-auth/google-auth-2.23.4.tar.gz;downloadfilename=google-auth-2.23.4.tar.gz"
+packages/core2-64-poky-linux/python3-google-auth: PV changed from "2.23.3" to "2.23.4"
+packages/core2-64-poky-linux/python3-google-auth: PKGV changed from 2.23.3 [default] to 2.23.4 [default]
+packages/core2-64-poky-linux/python3-google-auth/python3-google-auth-dbg: PV changed from "2.23.3" to "2.23.4"
+packages/core2-64-poky-linux/python3-google-auth/python3-google-auth-dbg: PKGV changed from 2.23.3 [default] to 2.23.4 [default]
+packages/core2-64-poky-linux/python3-google-auth/python3-google-auth-dev: PV changed from "2.23.3" to "2.23.4"
+packages/core2-64-poky-linux/python3-google-auth/python3-google-auth-dev: PKGV changed from 2.23.3 [default] to 2.23.4 [default]
+packages/core2-64-poky-linux/python3-google-auth/python3-google-auth-doc: PV changed from "2.23.3" to "2.23.4"
+packages/core2-64-poky-linux/python3-google-auth/python3-google-auth-doc: PKGV changed from 2.23.3 [default] to 2.23.4 [default]
+packages/core2-64-poky-linux/python3-google-auth/python3-google-auth-locale: PV changed from "2.23.3" to "2.23.4"
+packages/core2-64-poky-linux/python3-google-auth/python3-google-auth-locale: PKGV changed from 2.23.3 [default] to 2.23.4 [default]
+packages/core2-64-poky-linux/python3-google-auth/python3-google-auth-src: PV changed from "2.23.3" to "2.23.4"
+packages/core2-64-poky-linux/python3-google-auth/python3-google-auth-src: PKGV changed from 2.23.3 [default] to 2.23.4 [default]
+packages/core2-64-poky-linux/python3-google-auth/python3-google-auth-staticdev: PV changed from "2.23.3" to "2.23.4"
+packages/core2-64-poky-linux/python3-google-auth/python3-google-auth-staticdev: PKGV changed from 2.23.3 [default] to 2.23.4 [default]
+packages/core2-64-poky-linux/python3-google-auth/python3-google-auth: PV changed from "2.23.3" to "2.23.4"
+packages/core2-64-poky-linux/python3-google-auth/python3-google-auth: PKGV changed from 2.23.3 [default] to 2.23.4 [default]
+packages/core2-64-poky-linux/python3-google-auth/python3-google-auth: PKGSIZE changed from 1280116 to 1284806 (+0%)
+Changes to packages/core2-64-poky-linux/python3-google-auth (sysroot):
+  /usr/lib/python3.11/site-packages/google_auth-2.23.3.dist-info moved to /usr/lib/python3.11/site-packages/google_auth-2.23.4.dist-info
+
+--===============1910987151312911664==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="bitbake-output-qemuarm_musl.txt"
+
+NOTE: Reconnecting to bitbake server...
+Loading cache...done.
+Loaded 4919 entries from dependency cache.
+Parsing recipes...done.
+Parsing of 3055 .bb files complete (3053 cached, 2 parsed). 4885 targets, 143 skipped, 0 masked, 0 errors.
+Removing 29 recipes from the core2-64 sysroot...done.
+Removing 71 recipes from the qemux86_64 sysroot...done.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.6.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "x86_64-poky-linux-musl"
+MACHINE              = "qemux86-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.3+snapshot-e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+TUNE_FEATURES        = "m64 core2"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       
+workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+meta-oe              
+meta-python          
+meta-perl            
+meta-networking      
+meta-multimedia      
+meta-gnome           
+meta-xfce            
+meta-filesystems     
+meta-initramfs       
+meta-webserver       = "tmp-auh-upgrades:2c97f5ba165ca21c102ac4ee8503fd07de61986d"
+
+Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
+done.
+Sstate summary: Wanted 617 Local 602 Mirrors 0 Missed 15 Current 183 (97% match, 98% complete)
+Removing 2 stale sstate objects for arch qemux86_64...done.
+NOTE: Executing Tasks
+NOTE: Running setscene task 187 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-aiosignal_1.3.1.bb:do_packagedata_setscene)
+NOTE: Running setscene task 188 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-async-timeout_4.0.3.bb:do_packagedata_setscene)
+NOTE: Running setscene task 192 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-cchardet_2.1.7.bb:do_packagedata_setscene)
+NOTE: Running setscene task 193 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-charset-normalizer_3.3.0.bb:do_packagedata_setscene)
+NOTE: Running setscene task 197 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-google-auth_2.23.4.bb:do_create_spdx_setscene)
+NOTE: Running setscene task 204 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-aiohttp_3.8.6.bb:do_deploy_source_date_epoch_setscene)
+NOTE: Running setscene task 205 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-cachetools_5.3.1.bb:do_packagedata_setscene)
+NOTE: Running setscene task 206 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-google-auth_2.23.4.bb:do_populate_lic_setscene)
+NOTE: Running setscene task 207 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-google-auth_2.23.4.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 208 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-idna-ssl_1.1.0.bb:do_packagedata_setscene)
+NOTE: Running setscene task 209 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-multidict_6.0.4.bb:do_packagedata_setscene)
+NOTE: Running setscene task 210 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-pyasn1-modules_0.3.0.bb:do_create_spdx_setscene)
+NOTE: Running setscene task 211 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-pyasn1-modules_0.3.0.bb:do_package_write_deb_setscene)
+NOTE: Running setscene task 212 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-pyasn1-modules_0.3.0.bb:do_package_write_ipk_setscene)
+NOTE: Running setscene task 213 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-pyasn1-modules_0.3.0.bb:do_package_write_rpm_setscene)
+NOTE: Running setscene task 214 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-rsa_4.9.bb:do_create_spdx_setscene)
+NOTE: recipe python3-async-timeout-4.0.3-r0: task do_packagedata_setscene: Started
+NOTE: recipe python3-cchardet-2.1.7-r0: task do_packagedata_setscene: Started
+NOTE: recipe python3-aiosignal-1.3.1-r0: task do_packagedata_setscene: Started
+NOTE: recipe python3-charset-normalizer-3.3.0-r0: task do_packagedata_setscene: Started
+NOTE: recipe python3-google-auth-2.23.4-r0: task do_create_spdx_setscene: Started
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_deploy_source_date_epoch_setscene: Started
+NOTE: recipe python3-google-auth-2.23.4-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe python3-google-auth-2.23.4-r0: task do_populate_lic_setscene: Started
+NOTE: recipe python3-cachetools-5.3.1-r0: task do_packagedata_setscene: Started
+NOTE: recipe python3-idna-ssl-1.1.0-r0: task do_packagedata_setscene: Started
+NOTE: recipe python3-multidict-6.0.4-r0: task do_packagedata_setscene: Started
+NOTE: recipe python3-pyasn1-modules-0.3.0-r0: task do_create_spdx_setscene: Started
+NOTE: recipe python3-pyasn1-modules-0.3.0-r0: task do_package_write_deb_setscene: Started
+NOTE: recipe python3-rsa-4.9-r0: task do_create_spdx_setscene: Started
+NOTE: recipe python3-pyasn1-modules-0.3.0-r0: task do_package_write_ipk_setscene: Started
+NOTE: recipe python3-pyasn1-modules-0.3.0-r0: task do_package_write_rpm_setscene: Started
+NOTE: recipe python3-google-auth-2.23.4-r0: task do_populate_lic_setscene: Succeeded
+NOTE: Running setscene task 215 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-rsa_4.9.bb:do_package_write_deb_setscene)
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_deploy_source_date_epoch_setscene: Succeeded
+NOTE: Running setscene task 216 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-aiohttp_3.8.6.bb:do_recipe_qa_setscene)
+NOTE: recipe python3-google-auth-2.23.4-r0: task do_create_spdx_setscene: Succeeded
+NOTE: recipe python3-rsa-4.9-r0: task do_create_spdx_setscene: Succeeded
+NOTE: Running setscene task 217 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-google-auth_2.23.4.bb:do_packagedata_setscene)
+NOTE: Running setscene task 218 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-rsa_4.9.bb:do_package_write_ipk_setscene)
+NOTE: recipe python3-pyasn1-modules-0.3.0-r0: task do_create_spdx_setscene: Succeeded
+NOTE: Running setscene task 219 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-rsa_4.9.bb:do_package_write_rpm_setscene)
+NOTE: recipe python3-aiosignal-1.3.1-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe python3-async-timeout-4.0.3-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 223 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-yarl_1.9.2.bb:do_packagedata_setscene)
+NOTE: recipe python3-idna-ssl-1.1.0-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 227 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/base-passwd/base-passwd_3.6.1.bb:do_populate_sysroot_setscene)
+NOTE: recipe python3-pyasn1-modules-0.3.0-r0: task do_package_write_rpm_setscene: Succeeded
+NOTE: Running setscene task 236 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/python/python3-attrs_23.1.0.bb:do_packagedata_setscene)
+NOTE: recipe python3-cchardet-2.1.7-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 237 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/python/python3-chardet_5.2.0.bb:do_packagedata_setscene)
+NOTE: Running setscene task 241 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/python/python3-six_1.16.0.bb:do_create_spdx_setscene)
+WARNING: Logfile for failed setscene task is /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux-musl/python3-charset-normalizer/3.3.0/temp/log.do_packagedata_setscene.3318720
+NOTE: recipe python3-multidict-6.0.4-r0: task do_packagedata_setscene: Succeeded
+WARNING: Setscene task (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-charset-normalizer_3.3.0.bb:do_packagedata_setscene) failed with exit code '1' - real task will be run instead
+NOTE: Running setscene task 242 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-charset-normalizer_3.3.0.bb:do_package_setscene)
+NOTE: recipe python3-pyasn1-modules-0.3.0-r0: task do_package_write_ipk_setscene: Succeeded
+WARNING: Logfile for failed setscene task is /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux-musl/python3-cachetools/5.3.1/temp/log.do_packagedata_setscene.3318723
+WARNING: Setscene task (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-cachetools_5.3.1.bb:do_packagedata_setscene) failed with exit code '1' - real task will be run instead
+NOTE: recipe python3-pyasn1-modules-0.3.0-r0: task do_package_write_deb_setscene: Succeeded
+NOTE: recipe python3-rsa-4.9-r0: task do_package_write_deb_setscene: Started
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe python3-google-auth-2.23.4-r0: task do_packagedata_setscene: Started
+NOTE: recipe python3-rsa-4.9-r0: task do_package_write_ipk_setscene: Started
+NOTE: recipe python3-rsa-4.9-r0: task do_package_write_rpm_setscene: Started
+NOTE: recipe python3-google-auth-2.23.4-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe python3-yarl-1.9.2-r0: task do_packagedata_setscene: Started
+NOTE: recipe base-passwd-3.6.1-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe python3-attrs-23.1.0-r0: task do_packagedata_setscene: Started
+NOTE: recipe python3-chardet-5.2.0-r0: task do_packagedata_setscene: Started
+NOTE: recipe python3-six-1.16.0-r0: task do_create_spdx_setscene: Started
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe python3-rsa-4.9-r0: task do_package_write_deb_setscene: Succeeded
+NOTE: recipe python3-rsa-4.9-r0: task do_package_write_ipk_setscene: Succeeded
+NOTE: Running setscene task 243 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-cachetools_5.3.1.bb:do_package_setscene)
+NOTE: recipe python3-rsa-4.9-r0: task do_package_write_rpm_setscene: Succeeded
+NOTE: recipe python3-six-1.16.0-r0: task do_create_spdx_setscene: Succeeded
+NOTE: recipe python3-google-auth-2.23.4-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe python3-yarl-1.9.2-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe python3-attrs-23.1.0-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 244 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-google-auth_2.23.4.bb:do_package_setscene)
+NOTE: Running setscene task 248 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-pyasn1-modules_0.3.0.bb:do_packagedata_setscene)
+NOTE: Running setscene task 249 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-rsa_4.9.bb:do_packagedata_setscene)
+NOTE: Running setscene task 256 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/python/python3-pyasn1_0.5.0.bb:do_packagedata_setscene)
+NOTE: Running setscene task 257 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/python/python3-pytest_7.4.2.bb:do_packagedata_setscene)
+NOTE: Running setscene task 258 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/python/python3-six_1.16.0.bb:do_package_write_deb_setscene)
+NOTE: Running setscene task 259 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/python/python3-six_1.16.0.bb:do_package_write_ipk_setscene)
+NOTE: Running setscene task 260 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/python/python3-six_1.16.0.bb:do_package_write_rpm_setscene)
+NOTE: Running setscene task 261 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/python/python3-typing-extensions_4.8.0.bb:do_packagedata_setscene)
+NOTE: Running setscene task 262 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/python/python3_3.11.5.bb:do_create_spdx_setscene)
+NOTE: Running setscene task 263 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/python/python3_3.11.5.bb:do_package_write_deb_setscene)
+NOTE: Running setscene task 264 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/python/python3_3.11.5.bb:do_package_write_ipk_setscene)
+NOTE: recipe base-passwd-3.6.1-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe python3-chardet-5.2.0-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 268 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/python/python3_3.11.5.bb:do_package_write_rpm_setscene)
+NOTE: Running setscene task 270 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-extended/shadow/shadow-sysroot_4.6.bb:do_populate_sysroot_setscene)
+NOTE: recipe shadow-sysroot-4.6-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe python3-six-1.16.0-r0: task do_package_write_deb_setscene: Started
+NOTE: recipe python3-rsa-4.9-r0: task do_packagedata_setscene: Started
+NOTE: recipe python3-six-1.16.0-r0: task do_package_write_ipk_setscene: Started
+NOTE: recipe python3-typing-extensions-4.8.0-r0: task do_packagedata_setscene: Started
+NOTE: recipe python3-pyasn1-modules-0.3.0-r0: task do_packagedata_setscene: Started
+NOTE: recipe python3-six-1.16.0-r0: task do_package_write_rpm_setscene: Started
+NOTE: recipe python3-pyasn1-0.5.0-r0: task do_packagedata_setscene: Started
+NOTE: recipe python3-pytest-7.4.2-r0: task do_packagedata_setscene: Started
+NOTE: recipe python3-3.11.5-r0: task do_package_write_deb_setscene: Started
+NOTE: recipe python3-3.11.5-r0: task do_create_spdx_setscene: Started
+NOTE: recipe python3-3.11.5-r0: task do_package_write_ipk_setscene: Started
+NOTE: recipe python3-3.11.5-r0: task do_package_write_rpm_setscene: Started
+NOTE: recipe python3-six-1.16.0-r0: task do_package_write_deb_setscene: Succeeded
+NOTE: recipe python3-six-1.16.0-r0: task do_package_write_ipk_setscene: Succeeded
+NOTE: recipe python3-six-1.16.0-r0: task do_package_write_rpm_setscene: Succeeded
+NOTE: Running setscene task 276 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/python/python3-six_1.16.0.bb:do_packagedata_setscene)
+NOTE: recipe python3-rsa-4.9-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe python3-pyasn1-modules-0.3.0-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe python3-typing-extensions-4.8.0-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe python3-pytest-7.4.2-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe shadow-sysroot-4.6-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe python3-pyasn1-0.5.0-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 423 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-extended/shadow/shadow-sysroot_4.6.bb:do_recipe_qa_setscene)
+NOTE: recipe python3-six-1.16.0-r0: task do_packagedata_setscene: Started
+NOTE: recipe python3-3.11.5-r0: task do_create_spdx_setscene: Succeeded
+NOTE: Running setscene task 439 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/gcc/gcc-runtime_13.2.bb:do_create_spdx_setscene)
+NOTE: recipe shadow-sysroot-4.6-r0: task do_recipe_qa_setscene: Started
+NOTE: Running task 352 of 2270 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-aiohttp_3.8.6.bb:do_fetch)
+NOTE: recipe python3-six-1.16.0-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe gcc-runtime-13.2.0-r0: task do_create_spdx_setscene: Started
+NOTE: recipe shadow-sysroot-4.6-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_fetch: Started
+NOTE: recipe python3-3.11.5-r0: task do_package_write_ipk_setscene: Succeeded
+NOTE: recipe python3-3.11.5-r0: task do_package_write_deb_setscene: Succeeded
+NOTE: recipe python3-3.11.5-r0: task do_package_write_rpm_setscene: Succeeded
+NOTE: Running setscene task 445 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/coreutils/coreutils_9.4.bb:do_packagedata_setscene)
+NOTE: Running setscene task 446 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/musl/musl-locales_git.bb:do_packagedata_setscene)
+NOTE: Running setscene task 447 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/binutils/binutils_2.41.bb:do_packagedata_setscene)
+NOTE: Running setscene task 448 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/gcc/gcc_13.2.bb:do_packagedata_setscene)
+NOTE: Running setscene task 449 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-extended/bash/bash_5.2.15.bb:do_packagedata_setscene)
+NOTE: Running setscene task 450 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-extended/sed/sed_4.9.bb:do_packagedata_setscene)
+NOTE: Running setscene task 451 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-extended/timezone/tzdata.bb:do_packagedata_setscene)
+NOTE: Running setscene task 452 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-extended/unzip/unzip_6.0.bb:do_packagedata_setscene)
+NOTE: Running setscene task 453 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-support/ca-certificates/ca-certificates_20211016.bb:do_packagedata_setscene)
+NOTE: Running setscene task 454 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-support/ptest-runner/ptest-runner_2.4.2.bb:do_packagedata_setscene)
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_fetch: Succeeded
+NOTE: Running task 477 of 2270 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-aiohttp_3.8.6.bb:do_unpack)
+NOTE: recipe python3-charset-normalizer-3.3.0-r0: task do_package_setscene: Started
+NOTE: recipe python3-google-auth-2.23.4-r0: task do_package_setscene: Started
+NOTE: recipe gcc-runtime-13.2.0-r0: task do_create_spdx_setscene: Succeeded
+NOTE: Running setscene task 456 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/musl/musl_git.bb:do_create_spdx_setscene)
+NOTE: recipe python3-cachetools-5.3.1-r0: task do_package_setscene: Started
+NOTE: recipe ca-certificates-20211016-r0: task do_packagedata_setscene: Started
+NOTE: recipe tzdata-2023c-r0: task do_packagedata_setscene: Started
+NOTE: recipe unzip-1_6.0-r0: task do_packagedata_setscene: Started
+NOTE: recipe ptest-runner-2.4.2+git-r0: task do_packagedata_setscene: Started
+NOTE: recipe musl-locales-1.0+git-r0: task do_packagedata_setscene: Started
+NOTE: recipe binutils-2.41-r0: task do_packagedata_setscene: Started
+NOTE: recipe sed-4.9-r0: task do_packagedata_setscene: Started
+NOTE: recipe gcc-13.2.0-r0: task do_packagedata_setscene: Started
+NOTE: recipe bash-5.2.15-r0: task do_packagedata_setscene: Started
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_unpack: Started
+NOTE: recipe coreutils-9.4-r0: task do_packagedata_setscene: Started
+NOTE: recipe musl-1.2.4+git-r0: task do_create_spdx_setscene: Started
+NOTE: recipe ca-certificates-20211016-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe unzip-1_6.0-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe musl-1.2.4+git-r0: task do_create_spdx_setscene: Succeeded
+NOTE: Running setscene task 466 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/gcc/gcc-cross_13.2.bb:do_create_spdx_setscene)
+NOTE: recipe ptest-runner-2.4.2+git-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe tzdata-2023c-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 468 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/base-files/base-files_3.0.14.bb:do_packagedata_setscene)
+NOTE: Running setscene task 470 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/base-passwd/base-passwd_3.6.1.bb:do_packagedata_setscene)
+NOTE: Running setscene task 471 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-extended/shadow/shadow_4.13.bb:do_packagedata_setscene)
+NOTE: recipe python3-charset-normalizer-3.3.0-r0: task do_package_setscene: Succeeded
+NOTE: Running setscene task 482 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-charset-normalizer_3.3.0.bb:do_recipe_qa_setscene)
+NOTE: recipe base-files-3.0.14-r0: task do_packagedata_setscene: Started
+NOTE: recipe gcc-cross-x86_64-13.2.0-r0: task do_create_spdx_setscene: Started
+NOTE: recipe python3-cachetools-5.3.1-r0: task do_package_setscene: Succeeded
+NOTE: recipe base-passwd-3.6.1-r0: task do_packagedata_setscene: Started
+NOTE: recipe python3-google-auth-2.23.4-r0: task do_package_setscene: Succeeded
+NOTE: recipe shadow-4.13-r0: task do_packagedata_setscene: Started
+NOTE: Running setscene task 483 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-cachetools_5.3.1.bb:do_deploy_source_date_epoch_setscene)
+NOTE: Running setscene task 484 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-google-auth_2.23.4.bb:do_deploy_source_date_epoch_setscene)
+NOTE: Running setscene task 485 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/python/python3_3.11.5.bb:do_packagedata_setscene)
+NOTE: Running setscene task 486 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/python/python3_3.11.5.bb:do_populate_sysroot_setscene)
+NOTE: recipe musl-locales-1.0+git-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe binutils-2.41-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_unpack: Succeeded
+NOTE: Running setscene task 493 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/elfutils/elfutils_0.189.bb:do_packagedata_setscene)
+NOTE: recipe python3-charset-normalizer-3.3.0-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe gcc-13.2.0-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 498 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-support/libmpc/libmpc_1.3.1.bb:do_packagedata_setscene)
+NOTE: recipe bash-5.2.15-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe gcc-cross-x86_64-13.2.0-r0: task do_create_spdx_setscene: Succeeded
+NOTE: recipe base-files-3.0.14-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe sed-4.9-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe python3-google-auth-2.23.4-r0: task do_deploy_source_date_epoch_setscene: Started
+NOTE: recipe python3-cachetools-5.3.1-r0: task do_deploy_source_date_epoch_setscene: Started
+NOTE: recipe base-passwd-3.6.1-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 528 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/base-passwd/base-passwd_3.6.1.bb:do_recipe_qa_setscene)
+NOTE: recipe python3-charset-normalizer-3.3.0-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe coreutils-9.4-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe elfutils-0.189-r0: task do_packagedata_setscene: Started
+NOTE: recipe python3-3.11.5-r0: task do_packagedata_setscene: Started
+NOTE: recipe python3-3.11.5-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libmpc-1.3.1-r0: task do_packagedata_setscene: Started
+NOTE: recipe python3-cachetools-5.3.1-r0: task do_deploy_source_date_epoch_setscene: Succeeded
+NOTE: recipe python3-google-auth-2.23.4-r0: task do_deploy_source_date_epoch_setscene: Succeeded
+NOTE: Running setscene task 532 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-cachetools_5.3.1.bb:do_recipe_qa_setscene)
+NOTE: Running setscene task 533 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-google-auth_2.23.4.bb:do_recipe_qa_setscene)
+NOTE: Running task 897 of 2270 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-aiohttp_3.8.6.bb:do_patch)
+NOTE: recipe base-passwd-3.6.1-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libmpc-1.3.1-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 537 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-support/mpfr/mpfr_4.2.1.bb:do_packagedata_setscene)
+NOTE: recipe base-passwd-3.6.1-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe shadow-4.13-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe python3-google-auth-2.23.4-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_patch: Started
+NOTE: recipe elfutils-0.189-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe python3-cachetools-5.3.1-r0: task do_recipe_qa_setscene: Started
+NOTE: Running setscene task 543 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/fts/fts_1.2.7.bb:do_packagedata_setscene)
+NOTE: Running setscene task 545 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/musl/musl-legacy-error.bb:do_packagedata_setscene)
+NOTE: Running setscene task 547 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/musl/musl-obstack.bb:do_packagedata_setscene)
+NOTE: Running setscene task 551 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-extended/libarchive/libarchive_3.7.2.bb:do_packagedata_setscene)
+NOTE: Running setscene task 553 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-support/argp-standalone/argp-standalone_1.4.1.bb:do_packagedata_setscene)
+NOTE: Running setscene task 555 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-support/libmicrohttpd/libmicrohttpd_0.9.77.bb:do_packagedata_setscene)
+NOTE: recipe python3-google-auth-2.23.4-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe mpfr-4.2.1-r0: task do_packagedata_setscene: Started
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_patch: Succeeded
+NOTE: recipe musl-legacy-error-1.0-r0: task do_packagedata_setscene: Started
+NOTE: recipe fts-1.2.7-r0: task do_packagedata_setscene: Started
+NOTE: recipe musl-obstack-1.2.3-r0: task do_packagedata_setscene: Started
+NOTE: recipe argp-standalone-1.4.1-r0: task do_packagedata_setscene: Started
+NOTE: recipe python3-cachetools-5.3.1-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running task 1005 of 2270 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-cachetools_5.3.1.bb:do_fetch)
+NOTE: recipe libarchive-3.7.2-r0: task do_packagedata_setscene: Started
+NOTE: recipe libmicrohttpd-0.9.77-r0: task do_packagedata_setscene: Started
+NOTE: recipe mpfr-4.2.1-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe musl-legacy-error-1.0-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe musl-obstack-1.2.3-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe fts-1.2.7-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe python3-cachetools-5.3.1-r0: task do_fetch: Started
+NOTE: recipe libarchive-3.7.2-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe argp-standalone-1.4.1-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 572 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-extended/zstd/zstd_1.5.5.bb:do_packagedata_setscene)
+NOTE: Running setscene task 577 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-support/attr/acl_2.3.1.bb:do_packagedata_setscene)
+NOTE: recipe libmicrohttpd-0.9.77-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe python3-cachetools-5.3.1-r0: task do_fetch: Succeeded
+NOTE: Running setscene task 583 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/file/file_5.45.bb:do_packagedata_setscene)
+NOTE: Running setscene task 585 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-support/curl/curl_8.4.0.bb:do_packagedata_setscene)
+NOTE: Running setscene task 587 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-support/gnutls/gnutls_3.8.1.bb:do_packagedata_setscene)
+NOTE: Running setscene task 589 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-support/libgcrypt/libgcrypt_1.10.2.bb:do_packagedata_setscene)
+NOTE: Running task 1047 of 2270 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-cachetools_5.3.1.bb:do_unpack)
+NOTE: recipe python3-3.11.5-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe python3-3.11.5-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 594 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/expat/expat_2.5.0.bb:do_packagedata_setscene)
+NOTE: Running setscene task 595 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/expat/expat_2.5.0.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 596 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/util-linux/util-linux-libuuid_2.39.2.bb:do_packagedata_setscene)
+NOTE: Running setscene task 597 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/util-linux/util-linux-libuuid_2.39.2.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 598 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/libedit/libedit_20230828-3.1.bb:do_packagedata_setscene)
+NOTE: Running setscene task 599 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/libedit/libedit_20230828-3.1.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 601 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/python/python3_3.11.5.bb:do_recipe_qa_setscene)
+NOTE: Running setscene task 602 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-extended/libnsl/libnsl2_git.bb:do_packagedata_setscene)
+NOTE: Running setscene task 603 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-extended/libnsl/libnsl2_git.bb:do_populate_sysroot_setscene)
+NOTE: recipe zstd-1.5.5-r0: task do_packagedata_setscene: Started
+NOTE: recipe acl-2.3.1-r0: task do_packagedata_setscene: Started
+NOTE: recipe file-5.45-r0: task do_packagedata_setscene: Started
+NOTE: recipe libgcrypt-1.10.2-r0: task do_packagedata_setscene: Started
+NOTE: recipe curl-8.4.0-r0: task do_packagedata_setscene: Started
+NOTE: recipe python3-cachetools-5.3.1-r0: task do_unpack: Started
+NOTE: recipe gnutls-3.8.1-r0: task do_packagedata_setscene: Started
+NOTE: recipe util-linux-libuuid-2.39.2-r0: task do_packagedata_setscene: Started
+NOTE: recipe libnsl2-2.0.0-r0: task do_packagedata_setscene: Started
+NOTE: recipe libnsl2-2.0.0-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe expat-2.5.0-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libedit-20230828-3.1-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libedit-20230828-3.1-r0: task do_packagedata_setscene: Started
+NOTE: recipe expat-2.5.0-r0: task do_packagedata_setscene: Started
+NOTE: recipe python3-cachetools-5.3.1-r0: task do_unpack: Succeeded
+NOTE: Running setscene task 604 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-support/gdbm/gdbm_1.23.bb:do_packagedata_setscene)
+NOTE: recipe util-linux-libuuid-2.39.2-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe zstd-1.5.5-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 608 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-support/gdbm/gdbm_1.23.bb:do_populate_sysroot_setscene)
+NOTE: recipe python3-3.11.5-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe file-5.45-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 612 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-extended/bzip2/bzip2_1.0.8.bb:do_packagedata_setscene)
+NOTE: recipe libgcrypt-1.10.2-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 613 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-extended/bzip2/bzip2_1.0.8.bb:do_populate_sysroot_setscene)
+NOTE: recipe util-linux-libuuid-2.39.2-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe libedit-20230828-3.1-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe acl-2.3.1-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 615 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-extended/xz/xz_5.4.4.bb:do_packagedata_setscene)
+NOTE: recipe curl-8.4.0-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe libnsl2-2.0.0-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe gdbm-1.23-r0: task do_packagedata_setscene: Started
+NOTE: Running setscene task 617 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/ncurses/ncurses_6.4.bb:do_packagedata_setscene)
+NOTE: Running setscene task 619 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-extended/libtirpc/libtirpc_1.3.3.bb:do_packagedata_setscene)
+NOTE: Running setscene task 620 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-extended/xz/xz_5.4.4.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 624 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-support/attr/attr_2.5.1.bb:do_packagedata_setscene)
+NOTE: recipe expat-2.5.0-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 628 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-connectivity/openssl/openssl_3.1.4.bb:do_packagedata_setscene)
+NOTE: recipe expat-2.5.0-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 629 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-connectivity/openssl/openssl_3.1.4.bb:do_populate_sysroot_setscene)
+NOTE: recipe libnsl2-2.0.0-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe gdbm-1.23-r0: task do_populate_sysroot_setscene: Started
+NOTE: Running setscene task 631 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/expat/expat_2.5.0.bb:do_recipe_qa_setscene)
+NOTE: recipe python3-3.11.5-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe libedit-20230828-3.1-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 633 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-extended/libnsl/libnsl2_git.bb:do_recipe_qa_setscene)
+NOTE: Running setscene task 634 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/ncurses/ncurses_6.4.bb:do_populate_sysroot_setscene)
+NOTE: recipe bzip2-1.0.8-r0: task do_packagedata_setscene: Started
+NOTE: recipe util-linux-libuuid-2.39.2-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 636 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/util-linux/util-linux-libuuid_2.39.2.bb:do_recipe_qa_setscene)
+NOTE: recipe bzip2-1.0.8-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe xz-5.4.4-r0: task do_packagedata_setscene: Started
+NOTE: recipe libtirpc-1.3.3-r0: task do_packagedata_setscene: Started
+NOTE: recipe xz-5.4.4-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe ncurses-6.4-r0: task do_packagedata_setscene: Started
+NOTE: recipe attr-2.5.1-r0: task do_packagedata_setscene: Started
+NOTE: recipe gnutls-3.8.1-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe openssl-3.1.4-r0: task do_packagedata_setscene: Started
+NOTE: Running setscene task 638 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/libedit/libedit_20230828-3.1.bb:do_recipe_qa_setscene)
+NOTE: recipe expat-2.5.0-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe openssl-3.1.4-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libnsl2-2.0.0-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe ncurses-6.4-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe gdbm-1.23-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 639 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-extended/libtirpc/libtirpc_1.3.3.bb:do_populate_sysroot_setscene)
+NOTE: recipe util-linux-libuuid-2.39.2-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe bzip2-1.0.8-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 645 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-extended/libidn/libidn2_2.3.4.bb:do_packagedata_setscene)
+NOTE: recipe gdbm-1.23-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 648 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-support/gdbm/gdbm_1.23.bb:do_recipe_qa_setscene)
+NOTE: recipe expat-2.5.0-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe libtirpc-1.3.3-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 651 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-support/gnutls/libtasn1_4.19.0.bb:do_packagedata_setscene)
+NOTE: Running setscene task 654 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-support/libffi/libffi_3.4.4.bb:do_packagedata_setscene)
+NOTE: recipe libedit-20230828-3.1-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libnsl2-2.0.0-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 655 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-support/libffi/libffi_3.4.4.bb:do_populate_sysroot_setscene)
+NOTE: recipe util-linux-libuuid-2.39.2-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe bzip2-1.0.8-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 657 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-support/libcap/libcap_2.69.bb:do_packagedata_setscene)
+NOTE: Running setscene task 659 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-extended/bzip2/bzip2_1.0.8.bb:do_recipe_qa_setscene)
+NOTE: recipe xz-5.4.4-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: recipe attr-2.5.1-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe ncurses-6.4-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 666 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-support/libgpg-error/libgpg-error_1.47.bb:do_packagedata_setscene)
+NOTE: Running setscene task 668 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-support/libseccomp/libseccomp_2.5.4.bb:do_packagedata_setscene)
+NOTE: recipe openssl-3.1.4-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 671 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-support/nettle/nettle_3.9.1.bb:do_packagedata_setscene)
+NOTE: Running setscene task 674 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-support/sqlite/sqlite3_3.43.2.bb:do_packagedata_setscene)
+NOTE: recipe libtirpc-1.3.3-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libidn2-2.3.4-r0: task do_packagedata_setscene: Started
+NOTE: recipe xz-5.4.4-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 677 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-extended/xz/xz_5.4.4.bb:do_recipe_qa_setscene)
+NOTE: recipe libedit-20230828-3.1-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe gdbm-1.23-r0: task do_recipe_qa_setscene: Started
+NOTE: Running setscene task 678 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-support/sqlite/sqlite3_3.43.2.bb:do_populate_sysroot_setscene)
+NOTE: recipe libtasn1-4.19.0-r0: task do_packagedata_setscene: Started
+NOTE: recipe libffi-3.4.4-r0: task do_packagedata_setscene: Started
+NOTE: recipe ncurses-6.4-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 680 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/ncurses/ncurses_6.4.bb:do_recipe_qa_setscene)
+NOTE: recipe libffi-3.4.4-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libcap-2.69-r0: task do_packagedata_setscene: Started
+NOTE: recipe openssl-3.1.4-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 682 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-connectivity/openssl/openssl_3.1.4.bb:do_recipe_qa_setscene)
+NOTE: recipe bzip2-1.0.8-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libseccomp-2.5.4-r0: task do_packagedata_setscene: Started
+NOTE: recipe libgpg-error-1.47-r0: task do_packagedata_setscene: Started
+NOTE: recipe sqlite3-3_3.43.2-r0: task do_packagedata_setscene: Started
+NOTE: recipe gdbm-1.23-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe nettle-3.9.1-r0: task do_packagedata_setscene: Started
+NOTE: recipe xz-5.4.4-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe sqlite3-3_3.43.2-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libffi-3.4.4-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe libtasn1-4.19.0-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe ncurses-6.4-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe bzip2-1.0.8-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe libtirpc-1.3.3-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 691 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-extended/libtirpc/libtirpc_1.3.3.bb:do_recipe_qa_setscene)
+NOTE: recipe libcap-2.69-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe openssl-3.1.4-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe xz-5.4.4-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running setscene task 693 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-extended/pam/libpam_1.5.3.bb:do_packagedata_setscene)
+NOTE: recipe libseccomp-2.5.4-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe libidn2-2.3.4-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 703 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-support/libunistring/libunistring_1.1.bb:do_packagedata_setscene)
+NOTE: recipe sqlite3-3_3.43.2-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe ncurses-6.4-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe nettle-3.9.1-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 707 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-support/gmp/gmp_6.3.0.bb:do_packagedata_setscene)
+NOTE: recipe libffi-3.4.4-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 712 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-support/libffi/libffi_3.4.4.bb:do_recipe_qa_setscene)
+NOTE: recipe openssl-3.1.4-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe libtirpc-1.3.3-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libgpg-error-1.47-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe sqlite3-3_3.43.2-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 714 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/opkg-utils/opkg-utils_0.6.2.bb:do_packagedata_setscene)
+NOTE: Running setscene task 715 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/opkg-utils/opkg-utils_0.6.2.bb:do_populate_sysroot_setscene)
+NOTE: recipe libpam-1.5.3-r0: task do_packagedata_setscene: Started
+NOTE: Running setscene task 719 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-support/sqlite/sqlite3_3.43.2.bb:do_recipe_qa_setscene)
+NOTE: recipe libunistring-1.1-r0: task do_packagedata_setscene: Started
+NOTE: recipe gmp-6.3.0-r0: task do_packagedata_setscene: Started
+NOTE: recipe libtirpc-1.3.3-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe libffi-3.4.4-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe opkg-utils-0.6.2-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe opkg-utils-0.6.2-r0: task do_packagedata_setscene: Started
+NOTE: recipe sqlite3-3_3.43.2-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libffi-3.4.4-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe libunistring-1.1-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe gmp-6.3.0-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe sqlite3-3_3.43.2-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe opkg-utils-0.6.2-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe opkg-utils-0.6.2-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 731 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/opkg-utils/opkg-utils_0.6.2.bb:do_recipe_qa_setscene)
+NOTE: recipe opkg-utils-0.6.2-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe opkg-utils-0.6.2-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe libpam-1.5.3-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 733 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-extended/cracklib/cracklib_2.9.11.bb:do_packagedata_setscene)
+NOTE: recipe cracklib-2.9.11-r0: task do_packagedata_setscene: Started
+NOTE: recipe cracklib-2.9.11-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 738 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/zlib/zlib_1.3.bb:do_packagedata_setscene)
+NOTE: Running setscene task 739 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/zlib/zlib_1.3.bb:do_populate_sysroot_setscene)
+NOTE: recipe zlib-1.3-r0: task do_packagedata_setscene: Started
+NOTE: recipe zlib-1.3-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe zlib-1.3-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 749 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/gcc/gcc-runtime_13.2.bb:do_packagedata_setscene)
+NOTE: recipe zlib-1.3-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 751 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/zlib/zlib_1.3.bb:do_recipe_qa_setscene)
+NOTE: Running setscene task 752 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/gcc/gcc-runtime_13.2.bb:do_populate_sysroot_setscene)
+NOTE: recipe gcc-runtime-13.2.0-r0: task do_packagedata_setscene: Started
+NOTE: recipe zlib-1.3-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe gcc-runtime-13.2.0-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe zlib-1.3-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe gcc-runtime-13.2.0-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 754 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/gcc/libgcc_13.2.bb:do_packagedata_setscene)
+NOTE: recipe libgcc-13.2.0-r0: task do_packagedata_setscene: Started
+NOTE: recipe gcc-runtime-13.2.0-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 756 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/gcc/gcc-runtime_13.2.bb:do_recipe_qa_setscene)
+NOTE: Running setscene task 757 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/gcc/libgcc_13.2.bb:do_populate_sysroot_setscene)
+NOTE: recipe libgcc-13.2.0-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 759 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/musl/musl_git.bb:do_packagedata_setscene)
+NOTE: recipe libgcc-13.2.0-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe gcc-runtime-13.2.0-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe musl-1.2.4+git-r0: task do_packagedata_setscene: Started
+NOTE: recipe gcc-runtime-13.2.0-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe musl-1.2.4+git-r0: task do_packagedata_setscene: Succeeded
+NOTE: Running setscene task 761 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/musl/bsd-headers.bb:do_packagedata_setscene)
+NOTE: Running setscene task 762 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/musl/libssp-nonshared.bb:do_packagedata_setscene)
+NOTE: Running setscene task 763 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-kernel/linux-libc-headers/linux-libc-headers_6.5.bb:do_packagedata_setscene)
+NOTE: recipe libgcc-13.2.0-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 764 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/musl/musl_git.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 766 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/gcc/libgcc_13.2.bb:do_recipe_qa_setscene)
+NOTE: recipe libssp-nonshared-1.0-r0: task do_packagedata_setscene: Started
+NOTE: recipe bsd-headers-1.0-r0: task do_packagedata_setscene: Started
+NOTE: recipe linux-libc-headers-6.5-r0: task do_packagedata_setscene: Started
+NOTE: recipe musl-1.2.4+git-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libgcc-13.2.0-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libgcc-13.2.0-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe bsd-headers-1.0-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe libssp-nonshared-1.0-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe linux-libc-headers-6.5-r0: task do_packagedata_setscene: Succeeded
+NOTE: recipe musl-1.2.4+git-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 770 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/musl/bsd-headers.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 771 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/musl/libssp-nonshared.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 773 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/musl/musl_git.bb:do_recipe_qa_setscene)
+NOTE: recipe libssp-nonshared-1.0-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe musl-1.2.4+git-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe bsd-headers-1.0-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe musl-1.2.4+git-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe libssp-nonshared-1.0-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 778 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/musl/libssp-nonshared.bb:do_recipe_qa_setscene)
+NOTE: Running setscene task 779 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/gcc/gcc-cross_13.2.bb:do_populate_sysroot_setscene)
+NOTE: recipe bsd-headers-1.0-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 781 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/musl/bsd-headers.bb:do_recipe_qa_setscene)
+NOTE: recipe libssp-nonshared-1.0-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe bsd-headers-1.0-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe gcc-cross-x86_64-13.2.0-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libssp-nonshared-1.0-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe bsd-headers-1.0-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe gcc-cross-x86_64-13.2.0-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 784 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/gcc/gcc-cross_13.2.bb:do_recipe_qa_setscene)
+NOTE: Running setscene task 786 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-kernel/linux-libc-headers/linux-libc-headers_6.5.bb:do_populate_sysroot_setscene)
+NOTE: recipe gcc-cross-x86_64-13.2.0-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe linux-libc-headers-6.5-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe gcc-cross-x86_64-13.2.0-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe linux-libc-headers-6.5-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 787 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/binutils/binutils-cross_2.41.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 789 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-kernel/linux-libc-headers/linux-libc-headers_6.5.bb:do_recipe_qa_setscene)
+NOTE: recipe binutils-cross-x86_64-2.41-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe linux-libc-headers-6.5-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe linux-libc-headers-6.5-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe binutils-cross-x86_64-2.41-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 797 of 800 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/binutils/binutils-cross_2.41.bb:do_recipe_qa_setscene)
+NOTE: recipe binutils-cross-x86_64-2.41-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe binutils-cross-x86_64-2.41-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Setscene tasks completed
+NOTE: Running task 2014 of 2270 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-aiohttp_3.8.6.bb:do_prepare_recipe_sysroot)
+NOTE: Running task 2075 of 2270 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-cachetools_5.3.1.bb:do_packagedata)
+NOTE: Running task 2217 of 2270 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-charset-normalizer_3.3.0.bb:do_packagedata)
+NOTE: Running task 2233 of 2270 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-aiohttp_3.8.6.bb:do_collect_spdx_deps)
+NOTE: Running task 2234 of 2270 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-cachetools_5.3.1.bb:do_collect_spdx_deps)
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_prepare_recipe_sysroot: Started
+NOTE: recipe python3-cachetools-5.3.1-r0: task do_packagedata: Started
+NOTE: recipe python3-charset-normalizer-3.3.0-r0: task do_packagedata: Started
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_collect_spdx_deps: Started
+NOTE: recipe python3-cachetools-5.3.1-r0: task do_collect_spdx_deps: Started
+NOTE: recipe python3-cachetools-5.3.1-r0: task do_collect_spdx_deps: Succeeded
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_prepare_recipe_sysroot: Succeeded
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_collect_spdx_deps: Succeeded
+NOTE: Running task 2252 of 2270 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-aiohttp_3.8.6.bb:do_configure)
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_configure: Started
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_configure: Succeeded
+NOTE: Running task 2253 of 2270 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-aiohttp_3.8.6.bb:do_compile)
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_compile: Started
+NOTE: recipe python3-charset-normalizer-3.3.0-r0: task do_packagedata: Succeeded
+NOTE: recipe python3-cachetools-5.3.1-r0: task do_packagedata: Succeeded
+NOTE: Running task 2254 of 2270 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-cachetools_5.3.1.bb:do_create_spdx)
+NOTE: Running task 2255 of 2270 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-cachetools_5.3.1.bb:do_package_write_ipk)
+NOTE: Running task 2256 of 2270 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-cachetools_5.3.1.bb:do_package_write_deb)
+NOTE: Running task 2257 of 2270 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-cachetools_5.3.1.bb:do_package_write_rpm)
+NOTE: recipe python3-cachetools-5.3.1-r0: task do_create_spdx: Started
+NOTE: recipe python3-cachetools-5.3.1-r0: task do_package_write_ipk: Started
+NOTE: recipe python3-cachetools-5.3.1-r0: task do_package_write_deb: Started
+NOTE: recipe python3-cachetools-5.3.1-r0: task do_package_write_rpm: Started
+NOTE: recipe python3-cachetools-5.3.1-r0: task do_create_spdx: Succeeded
+NOTE: recipe python3-cachetools-5.3.1-r0: task do_package_write_ipk: Succeeded
+NOTE: recipe python3-cachetools-5.3.1-r0: task do_package_write_deb: Succeeded
+NOTE: recipe python3-cachetools-5.3.1-r0: task do_package_write_rpm: Succeeded
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_compile: Succeeded
+NOTE: Running task 2258 of 2270 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-aiohttp_3.8.6.bb:do_install)
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_install: Started
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_install: Succeeded
+NOTE: Running task 2259 of 2270 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-aiohttp_3.8.6.bb:do_package)
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_package: Started
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_package: Succeeded
+NOTE: Running task 2260 of 2270 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-aiohttp_3.8.6.bb:do_packagedata)
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_packagedata: Started
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_packagedata: Succeeded
+NOTE: Running task 2261 of 2270 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-aiohttp_3.8.6.bb:do_create_spdx)
+NOTE: Running task 2262 of 2270 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-aiohttp_3.8.6.bb:do_package_write_ipk)
+NOTE: Running task 2263 of 2270 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-aiohttp_3.8.6.bb:do_package_write_deb)
+NOTE: Running task 2264 of 2270 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-aiohttp_3.8.6.bb:do_package_write_rpm)
+NOTE: Running task 2265 of 2270 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-google-auth_2.23.4.bb:do_package_write_ipk)
+NOTE: Running task 2266 of 2270 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-google-auth_2.23.4.bb:do_package_write_deb)
+NOTE: Running task 2267 of 2270 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-google-auth_2.23.4.bb:do_package_write_rpm)
+NOTE: Running task 2268 of 2270 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-google-auth_2.23.4.bb:do_package_qa)
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_create_spdx: Started
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_package_write_ipk: Started
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_package_write_deb: Started
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_package_write_rpm: Started
+NOTE: recipe python3-google-auth-2.23.4-r0: task do_package_write_ipk: Started
+NOTE: recipe python3-google-auth-2.23.4-r0: task do_package_write_deb: Started
+NOTE: recipe python3-google-auth-2.23.4-r0: task do_package_write_rpm: Started
+NOTE: recipe python3-google-auth-2.23.4-r0: task do_package_qa: Started
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_create_spdx: Succeeded
+NOTE: Running task 2269 of 2270 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-google-auth_2.23.4.bb:do_create_runtime_spdx)
+NOTE: recipe python3-google-auth-2.23.4-r0: task do_create_runtime_spdx: Started
+NOTE: recipe python3-google-auth-2.23.4-r0: task do_create_runtime_spdx: Succeeded
+NOTE: recipe python3-google-auth-2.23.4-r0: task do_package_qa: Succeeded
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_package_write_ipk: Succeeded
+NOTE: recipe python3-google-auth-2.23.4-r0: task do_package_write_deb: Succeeded
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_package_write_rpm: Succeeded
+NOTE: recipe python3-google-auth-2.23.4-r0: task do_package_write_ipk: Succeeded
+NOTE: recipe python3-google-auth-2.23.4-r0: task do_package_write_rpm: Succeeded
+NOTE: recipe python3-aiohttp-3.8.6-r0: task do_package_write_deb: Succeeded
+NOTE: Running noexec task 2270 of 2270 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-python/recipes-devtools/python/python3-google-auth_2.23.4.bb:do_build)
+NOTE: Tasks Summary: Attempted 2270 tasks of which 2241 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 7 seconds
+
+Summary: There were 17 ERROR messages, returning a non-zero exit code.
+ERROR: python3-charset-normalizer-3.3.0-r0 do_packagedata_setscene: QA Issue: Package version for package python3-charset-normalizer-src went backwards which would break package feeds (from 0:3.3.2-r0 to 0:3.3.0-r0) [version-going-backwards]
+ERROR: python3-charset-normalizer-3.3.0-r0 do_packagedata_setscene: QA Issue: Package version for package python3-charset-normalizer-dbg went backwards which would break package feeds (from 0:3.3.2-r0 to 0:3.3.0-r0) [version-going-backwards]
+ERROR: python3-cachetools-5.3.1-r0 do_packagedata_setscene: QA Issue: Package version for package python3-cachetools-src went backwards which would break package feeds (from 0:5.3.2-r0 to 0:5.3.1-r0) [version-going-backwards]
+ERROR: python3-charset-normalizer-3.3.0-r0 do_packagedata_setscene: QA Issue: Package version for package python3-charset-normalizer-staticdev went backwards which would break package feeds (from 0:3.3.2-r0 to 0:3.3.0-r0) [version-going-backwards]
+ERROR: python3-cachetools-5.3.1-r0 do_packagedata_setscene: QA Issue: Package version for package python3-cachetools-dbg went backwards which would break package feeds (from 0:5.3.2-r0 to 0:5.3.1-r0) [version-going-backwards]
+ERROR: python3-cachetools-5.3.1-r0 do_packagedata_setscene: QA Issue: Package version for package python3-cachetools-ptest went backwards which would break package feeds (from 0:5.3.2-r0 to 0:5.3.1-r0) [version-going-backwards]
+ERROR: python3-charset-normalizer-3.3.0-r0 do_packagedata_setscene: QA Issue: Package version for package python3-charset-normalizer-dev went backwards which would break package feeds (from 0:3.3.2-r0 to 0:3.3.0-r0) [version-going-backwards]
+ERROR: python3-cachetools-5.3.1-r0 do_packagedata_setscene: QA Issue: Package version for package python3-cachetools-staticdev went backwards which would break package feeds (from 0:5.3.2-r0 to 0:5.3.1-r0) [version-going-backwards]
+ERROR: python3-charset-normalizer-3.3.0-r0 do_packagedata_setscene: QA Issue: Package version for package python3-charset-normalizer-doc went backwards which would break package feeds (from 0:3.3.2-r0 to 0:3.3.0-r0) [version-going-backwards]
+ERROR: python3-charset-normalizer-3.3.0-r0 do_packagedata_setscene: QA Issue: Package version for package python3-charset-normalizer-locale went backwards which would break package feeds (from 0:3.3.2-r0 to 0:3.3.0-r0) [version-going-backwards]
+ERROR: python3-cachetools-5.3.1-r0 do_packagedata_setscene: QA Issue: Package version for package python3-cachetools-dev went backwards which would break package feeds (from 0:5.3.2-r0 to 0:5.3.1-r0) [version-going-backwards]
+ERROR: python3-charset-normalizer-3.3.0-r0 do_packagedata_setscene: QA Issue: Package version for package python3-charset-normalizer went backwards which would break package feeds (from 0:3.3.2-r0 to 0:3.3.0-r0) [version-going-backwards]
+ERROR: python3-cachetools-5.3.1-r0 do_packagedata_setscene: QA Issue: Package version for package python3-cachetools-doc went backwards which would break package feeds (from 0:5.3.2-r0 to 0:5.3.1-r0) [version-going-backwards]
+ERROR: python3-charset-normalizer-3.3.0-r0 do_packagedata_setscene: Fatal QA errors were found, failing task.
+ERROR: python3-cachetools-5.3.1-r0 do_packagedata_setscene: QA Issue: Package version for package python3-cachetools-locale went backwards which would break package feeds (from 0:5.3.2-r0 to 0:5.3.1-r0) [version-going-backwards]
+ERROR: python3-cachetools-5.3.1-r0 do_packagedata_setscene: QA Issue: Package version for package python3-cachetools went backwards which would break package feeds (from 0:5.3.2-r0 to 0:5.3.1-r0) [version-going-backwards]
+ERROR: python3-cachetools-5.3.1-r0 do_packagedata_setscene: Fatal QA errors were found, failing task.
+
+--===============1910987151312911664==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="buildhistory-diff.txt"
+
+Changes to packages/core2-64-poky-linux/python3-google-auth (sysroot):
+  /usr/lib/python3.11/site-packages/google_auth-2.23.3.dist-info moved to /usr/lib/python3.11/site-packages/google_auth-2.23.4.dist-info
+
+--===============1910987151312911664==
+Content-Type: application/octet-stream
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+ filename="0001-python3-google-auth-upgrade-2.23.3-2.23.4.patch"
+
+RnJvbSA4ZTU1NDJkZTRhMWY2ODBlMmE3MDRjYzg4MzM1NzQ4ODc0OWJhYTk2IE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBVcGdyYWRlIEhlbHBlciA8YXVoQHlvY3RvcHJvamVjdC5vcmc+
+CkRhdGU6IEZyaSwgMyBOb3YgMjAyMyAyMToyOTo0MyArMDAwMApTdWJqZWN0OiBbUEFUQ0hdIHB5
+dGhvbjMtZ29vZ2xlLWF1dGg6IHVwZ3JhZGUgMi4yMy4zIC0+IDIuMjMuNAoKLS0tCiAuLi5ob24z
+LWdvb2dsZS1hdXRoXzIuMjMuMy5iYiA9PiBweXRob24zLWdvb2dsZS1hdXRoXzIuMjMuNC5iYn0g
+fCAyICstCiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkKIHJl
+bmFtZSBtZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi97cHl0aG9uMy1nb29nbGUt
+YXV0aF8yLjIzLjMuYmIgPT4gcHl0aG9uMy1nb29nbGUtYXV0aF8yLjIzLjQuYmJ9ICg4NyUpCgpk
+aWZmIC0tZ2l0IGEvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9uMy1n
+b29nbGUtYXV0aF8yLjIzLjMuYmIgYi9tZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhv
+bi9weXRob24zLWdvb2dsZS1hdXRoXzIuMjMuNC5iYgpzaW1pbGFyaXR5IGluZGV4IDg3JQpyZW5h
+bWUgZnJvbSBtZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24zLWdvb2ds
+ZS1hdXRoXzIuMjMuMy5iYgpyZW5hbWUgdG8gbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9w
+eXRob24vcHl0aG9uMy1nb29nbGUtYXV0aF8yLjIzLjQuYmIKaW5kZXggZTU0MzNiMDgzLi5jN2Jm
+Mjg1N2EgMTAwNjQ0Ci0tLSBhL21ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9uL3B5
+dGhvbjMtZ29vZ2xlLWF1dGhfMi4yMy4zLmJiCisrKyBiL21ldGEtcHl0aG9uL3JlY2lwZXMtZGV2
+dG9vbHMvcHl0aG9uL3B5dGhvbjMtZ29vZ2xlLWF1dGhfMi4yMy40LmJiCkBAIC01LDcgKzUsNyBA
+QCBMSUNfRklMRVNfQ0hLU1VNID0gImZpbGU6Ly9MSUNFTlNFO21kNT04NmQzZjNhOTVjMzI0Yzk0
+NzliZDg5ODY5NjhmNDMyNyIKIAogaW5oZXJpdCBweXBpIHNldHVwdG9vbHMzCiAKLVNSQ19VUklb
+c2hhMjU2c3VtXSA9ICI2ODY0MjQ3ODk1ZWVhNWQxM2I5YzU3YzllMDNhYmI0OWNiOTRjZTJkYzdj
+NThlOTFjYmEzMjQ4Yzc0NzdjOWUzIgorU1JDX1VSSVtzaGEyNTZzdW1dID0gIjc5OTA1ZDZiMTY1
+MjE4N2RlZjc5ZDQ5MWQ2ZTIzZDBjYmIzYTIxZDNjN2JhMGRiYWE5YzhhMDE5MDZiMTNmZjMiCiAK
+IFJERVBFTkRTOiR7UE59ICs9ICJcCiAgICAgJHtQWVRIT05fUE59LWFzeW5jaW8gXAotLSAKMi4z
+OS4yCgo=
+
+--===============1910987151312911664==--
 
