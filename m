@@ -2,49 +2,49 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 43E68C072DD
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 52587C07352
 	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 03:13:06 +0000 (UTC)
-Received: from a27-29.smtp-out.us-west-2.amazonses.com (a27-29.smtp-out.us-west-2.amazonses.com [54.240.27.29])
- by mx.groups.io with SMTP id smtpd.web11.3427.1699067574491030197
+Received: from a27-193.smtp-out.us-west-2.amazonses.com (a27-193.smtp-out.us-west-2.amazonses.com [54.240.27.193])
+ by mx.groups.io with SMTP id smtpd.web10.3552.1699067574151944784
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 03 Nov 2023 20:12:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=TUVmGrnk;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=VzurxXm5;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.29, mailfrom: 0101018b9851b635-890dc800-2e79-4f7a-8c2e-9af5263cc9a6-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=FNfGEIx9;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=VV+gWJcw;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.193, mailfrom: 0101018b9851b43e-9ac9d0b1-13b1-4635-a784-838cc7ec58be-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
 	t=1699067573;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=e8xeYx7z3sxcLpLRCHlbsifc8GO3qKDslajVUIrh0DU=;
-	b=TUVmGrnkoh33iOSksyNfeE43S4TFYu3U6IR9QmoDDCtFnFkgdMtFSuWRA3MKRSo9
-	XdRfzq40OWoEJoTYRHuc0uHA68wEqUhSFsDQbY4pniFfyaitW8Y6+BJ8delwEU/ArNd
-	R1MkQ2C/lnwZi3PtohxDgrFx1VdZ2nJGcFXDoriI=
+	bh=Rwzw6Hq+zhUIin+OOSU9P7U2JntgV4wVXwygI1pGMb0=;
+	b=FNfGEIx93AUWNwX4HlFoPtZ4InLey0odaPveUKEVRQXPapOobuEDWpRZui9EbwzN
+	2ga4Nnjj+D331q4ObVFvxKkmDDWOhp6Tapq9yM5JzvXpY/Z9mBAvoioNg7dXDw56Ahh
+	bcx40KiW8k2E3ZbcACULMi60UXHvrgtq76qP/YVU=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699067573;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=e8xeYx7z3sxcLpLRCHlbsifc8GO3qKDslajVUIrh0DU=;
-	b=VzurxXm5CucrsQQlfFe0OP+NoQlitVGv4zm59gqZW+Gfs5+ENijVZhmQXegqPIzY
-	FSNwZECYRZ1b/oUH75Vrb00yB/L0ln/3z2LXIzlM4aqufQ7yNWOj2AVoBATrhpdmDov
-	71/1+NMvpYdeq6+aBj0KU3/dwKtwcs4AsfkANyH4=
-Content-Type: multipart/mixed; boundary="===============3220188095016656007=="
+	bh=Rwzw6Hq+zhUIin+OOSU9P7U2JntgV4wVXwygI1pGMb0=;
+	b=VV+gWJcwlj1Uep8ZYJDF90k3t4pcsmL5vI+KN0daOeD+TU4jzfl/PXBb5UwziFiS
+	tO1qzXzKt49f/JF2ukikfjwhkfjcadS8E1ECNj1LwynnKr3p2gsn6UnaU4Gv1rdLueR
+	t4jjKXllOWhUhyLCmhIMSmDVSvk03UJmM5XHOIVI=
+Content-Type: multipart/mixed; boundary="===============1061772623883984788=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] libtdb: upgrading to 1.4.9 FAILED
-Message-ID: <0101018b9851b635-890dc800-2e79-4f7a-8c2e-9af5263cc9a6-000000@us-west-2.amazonses.com>
+Subject: [AUH] daq: upgrading to 3.0.12 FAILED
+Message-ID: <0101018b9851b43e-9ac9d0b1-13b1-4635-a784-838cc7ec58be-000000@us-west-2.amazonses.com>
 Date: Sat, 4 Nov 2023 03:12:53 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
-X-SES-Outgoing: 2023.11.04-54.240.27.29
+X-SES-Outgoing: 2023.11.04-54.240.27.193
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 03:13:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106202
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106197
 
---===============3220188095016656007==
+--===============1061772623883984788==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,14 +52,14 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *libtdb* to *1.4.9* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *daq* to *3.0.12* has Failed (devtool error).
 
 Detailed error information:
 
-Running 'devtool upgrade' for recipe libtdb failed.
+The following devtool command failed:  upgrade daq -V 3.0.12
 NOTE: Reconnecting to bitbake server...
 Loading cache...done.
-Loaded 4895 entries from dependency cache.
+Loaded 4887 entries from dependency cache.
 NOTE: Resolving any missing task queue dependencies
 
 Build Configuration:
@@ -85,7 +85,7 @@ meta-gnome
 meta-xfce            
 meta-filesystems     
 meta-initramfs       
-meta-webserver       = "tmp-auh-upgrades:94f9a00138770904008444e59a3bfffd77f05d31"
+meta-webserver       = "tmp-auh-upgrades:bc321736b97ea68814607226c414dbbdfe8ced28"
 
 Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
 done.
@@ -95,7 +95,7 @@ NOTE: Tasks Summary: Attempted 103 tasks of which 100 didn't need to be rerun an
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 3 seconds
 Loading cache...done.
-Loaded 4895 entries from dependency cache.
+Loaded 4887 entries from dependency cache.
 Parsing recipes...done.
 Parsing of 3056 .bb files complete (3054 cached, 2 parsed). 4887 targets, 92 skipped, 0 masked, 0 errors.
 NOTE: Resolving any missing task queue dependencies
@@ -123,33 +123,29 @@ meta-gnome
 meta-xfce            
 meta-filesystems     
 meta-initramfs       
-meta-webserver       = "tmp-auh-upgrades:94f9a00138770904008444e59a3bfffd77f05d31"
+meta-webserver       = "tmp-auh-upgrades:bc321736b97ea68814607226c414dbbdfe8ced28"
 
 Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
 done.
 Sstate summary: Wanted 1 Local 0 Mirrors 0 Missed 1 Current 0 (0% match, 0% complete)
 NOTE: Executing Tasks
-NOTE: Tasks Summary: Attempted 3 tasks of which 0 didn't need to be rerun and all succeeded.
+WARNING: Failed to fetch URL http://fossies.org/linux/misc/daq-3.0.12.tar.gz, attempting MIRRORS if available
+NOTE: Tasks Summary: Attempted 2 tasks of which 0 didn't need to be rerun and 1 failed.
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 3 seconds
-DEBUG 5 [Errno 25] Inappropriate ioctl for device
-Adding changed files:   0% |                                   | ETA:  --:--:--
-Adding changed files:   0% |                                   | ETA:  --:--:--
-Adding changed files: 100% |####################################| Time: 0:00:00
+NOTE: The errors for this build are stored in /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231104020826.txt
+You can send the errors to a reports server by running:
+  send-error-report /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231104020826.txt [-s server]
+NOTE: The contents of these logs will be posted in public if you use the above command with the default server. Please ensure you remove any identifying or proprietary information when prompted before sending.
+
 INFO: Extracting current version source...
 INFO: Extracting upgraded version source...
-INFO: Fetching https://samba.org/ftp/tdb/tdb-1.4.9.tar.gz...
-INFO: Rebasing devtool onto 5ad3fbd76c627690150f74adade4a02770226cf0
-WARNING: Command 'git rebase 5ad3fbd76c627690150f74adade4a02770226cf0' failed:
-Auto-merging lib/replace/wscript
-CONFLICT (content): Merge conflict in lib/replace/wscript
-Auto-merging wscript
-
-You will need to resolve conflicts in order to complete the upgrade.
-INFO: Using source tree as build directory since that would be the default for this recipe
-INFO: Upgraded source extracted to /home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/sources/libtdb
-INFO: New recipe is /home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/recipes/libtdb/libtdb_1.4.9.bb
-
+INFO: Fetching http://fossies.org/linux/misc/daq-3.0.12.tar.gz...
+ERROR: Fetcher failure: Fetch command export PSEUDO_DISABLED=1; export SSL_CERT_FILE="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export GIT_SSL_CAINFO="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export ftp_proxy="http://proxy.yocto.io:5187/"; export FTP_PROXY="http://proxy.yocto.io:5187/"; export PATH="/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/sysroots-uninative/x86_64-linux/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-yn52tawa/work/recipe-sysroot-native/usr/bin/x86_64-poky-linux:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-yn52tawa/work/recipe-sysroot/usr/bin/crossscripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-yn52tawa/work/recipe-sysroot-native/usr/sbin:/hom
+ e/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-yn52tawa/work/recipe-sysroot-native/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-yn52tawa/work/recipe-sysroot-native/sbin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-yn52tawa/work/recipe-sysroot-native/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/bitbake/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools"; export HOME="/home/pokybuild"; /usr/bin/env wget -t 2 -T 30 --passive-ftp -O /srv/autobuilder/autobuilder.yocto.io/current_sources/daq-3.0.12.tar.gz.tmp -P /srv/autobuilder/autobuilder.yocto.io/current_sources 'http://fossies.org/linux/misc/daq-3.0.12.tar.gz' --progress=dot -v failed with exit code 8, no output
+ERROR: Bitbake Fetcher Error: FetchError('Unable to fetch URL from any source.', 'http://fossies.org/linux/misc/daq-3.0.12.tar.gz')
+ERROR: Logfile of failure stored in: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-yn52tawa/work/temp/log.do_fetch.429748
+ERROR: Failed to fetch URL http://fossies.org/linux/misc/daq-3.0.12.tar.gz
 
 
 Please review the attached files for further information and build/update failures.
@@ -157,5 +153,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============3220188095016656007==--
+--===============1061772623883984788==--
 
