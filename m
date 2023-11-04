@@ -2,448 +2,582 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 14207C0729B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0EA06C07208
 	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 07:31:12 +0000 (UTC)
-Received: from a27-191.smtp-out.us-west-2.amazonses.com (a27-191.smtp-out.us-west-2.amazonses.com [54.240.27.191])
- by mx.groups.io with SMTP id smtpd.web10.5527.1699083060908871589
+Received: from a27-29.smtp-out.us-west-2.amazonses.com (a27-29.smtp-out.us-west-2.amazonses.com [54.240.27.29])
+ by mx.groups.io with SMTP id smtpd.web10.5522.1699083060683087738
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 04 Nov 2023 00:31:01 -0700
+ Sat, 04 Nov 2023 00:31:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=Wixxdt8B;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=IFP8ltPZ;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.191, mailfrom: 0101018b993e045d-52d2c7c7-6346-497a-907e-58a711ff9be0-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=Y1YicOYq;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=iw2hon2r;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.29, mailfrom: 0101018b993e02aa-34b20647-e306-4549-9628-ebe48fcfbed9-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
 	t=1699083060;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=Juy/+/IIpC0I4XuUdG3k6B990ZQrnXHRxiZYBUEffGw=;
-	b=Wixxdt8BYUwW/qvbM1ggUdnpJvcB1sUvQIEPSUP43iayKXJuj/1t/bqOyokYSFmc
-	mKszPNmP4Ub0KMGZxJ9v5lDGg6IrmbdGR5rQOHQteq3zgLFRytzhmZfcFT0XMO2BbXM
-	w+Z68+ir2ErWatsmE+SG9iVHHLLCan/uWCWsK5ik=
+	bh=48G9lDg05h8tjDo6zlEZNxa8RgsknAVmaazNRjIm3FI=;
+	b=Y1YicOYqH1NR8bl0SNNFt+1nwFxzPQZQsxVyD/2NBVv7y3FOtUSfrpgPKDGzJucY
+	4hPsfOpvlJ5gNgj5txwn2iQMydida5SkJHj5TkzNjQnVScAGCQZYRGGeKvTzhI394Ey
+	tJwS9rg9n8t109cm7dUbewQQJIleAzKNlpda91pE=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699083060;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=Juy/+/IIpC0I4XuUdG3k6B990ZQrnXHRxiZYBUEffGw=;
-	b=IFP8ltPZPKDcTOKGFoGqG9F1vgiXBtGp72VOVABBe71z8O3dczfTO7BC74M5s4gY
-	jxjGwqeeM1sB6MJo3TsAmzRYvZRLAW/R9f7DIvRdCiUrO4XqoSC0HznpBIa9UpcPwGx
-	kYTyEq0go2zxgNk0tzw0rqPOLbDwJf7uDqIHbzmU=
-Content-Type: multipart/mixed; boundary="===============5216636588746280189=="
+	bh=48G9lDg05h8tjDo6zlEZNxa8RgsknAVmaazNRjIm3FI=;
+	b=iw2hon2r2tfmJXCQiINioM6kEAcL7S6btvTRvI1E1rEkWhIy5LCcGvFB5Fkkpm+u
+	UZ84aTCc7lc4fqJSSihQJuwCactGsJ6eCa3sIXsIEQGCJKEZRKtNqGZGzlTqH6q9CLF
+	wWIaWWP856CZG04KLOdO3SLkBc964ThUOspr0+7k=
+Content-Type: multipart/mixed; boundary="===============5249886068511809393=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] xfce4-settings: upgrading to 4.19.0 FAILED
-Message-ID: <0101018b993e045d-52d2c7c7-6346-497a-907e-58a711ff9be0-000000@us-west-2.amazonses.com>
-Date: Sat, 4 Nov 2023 07:31:00 +0000
+Subject: [AUH] xfce4-mailwatch-plugin: upgrading to 1.3.1 SUCCEEDED
+Message-ID: <0101018b993e02aa-34b20647-e306-4549-9628-ebe48fcfbed9-000000@us-west-2.amazonses.com>
+Date: Sat, 4 Nov 2023 07:30:59 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
-X-SES-Outgoing: 2023.11.04-54.240.27.191
+X-SES-Outgoing: 2023.11.04-54.240.27.29
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 07:31:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106333
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106323
 
---===============5216636588746280189==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-
-SGVsbG8sCgp0aGlzIGVtYWlsIGlzIGEgbm90aWZpY2F0aW9uIGZyb20gdGhlIEF1dG8gVXBncmFk
-ZSBIZWxwZXIKdGhhdCB0aGUgYXV0b21hdGljIGF0dGVtcHQgdG8gdXBncmFkZSB0aGUgcmVjaXBl
-ICp4ZmNlNC1zZXR0aW5ncyogdG8gKjQuMTkuMCogaGFzIEZhaWxlZChkb19jb21waWxlKS4KCkRl
-dGFpbGVkIGVycm9yIGluZm9ybWF0aW9uOgoKZG9fY29tcGlsZSBmYWlsZWQKCgoKTmV4dCBzdGVw
-czoKICAgIC0gYXBwbHkgdGhlIHBhdGNoOiBnaXQgYW0gMDAwMS14ZmNlNC1zZXR0aW5ncy11cGdy
-YWRlLTQuMTguMi00LjE5LjAucGF0Y2gKICAgIC0gY2hlY2sgdGhlIGNoYW5nZXMgdG8gdXBzdHJl
-YW0gcGF0Y2hlcyBhbmQgc3VtbWFyaXplIHRoZW0gaW4gdGhlIGNvbW1pdCBtZXNzYWdlLAogICAg
-LSBjb21waWxlIGFuIGltYWdlIHRoYXQgY29udGFpbnMgdGhlIHBhY2thZ2UKICAgIC0gcGVyZm9y
-bSBzb21lIGJhc2ljIHNhbml0eSB0ZXN0cwogICAgLSBhbWVuZCB0aGUgcGF0Y2ggYW5kIHNpZ24g
-aXQgb2ZmOiBnaXQgY29tbWl0IC1zIC0tcmVzZXQtYXV0aG9yIC0tYW1lbmQKICAgIC0gc2VuZCBp
-dCB0byB0aGUgYXBwcm9wcmlhdGUgbWFpbGluZyBsaXN0CgpBbHRlcm5hdGl2ZWx5LCBpZiB5b3Ug
-YmVsaWV2ZSB0aGUgcmVjaXBlIHNob3VsZCBub3QgYmUgdXBncmFkZWQgYXQgdGhpcyB0aW1lLAp5
-b3UgY2FuIGZpbGwgUkVDSVBFX05PX1VQREFURV9SRUFTT04gaW4gcmVzcGVjdGl2ZSByZWNpcGUg
-ZmlsZSBzbyB0aGF0CmF1dG9tYXRpYyB1cGdyYWRlcyB3b3VsZCBubyBsb25nZXIgYmUgYXR0ZW1w
-dGVkLgoKUGxlYXNlIHJldmlldyB0aGUgYXR0YWNoZWQgZmlsZXMgZm9yIGZ1cnRoZXIgaW5mb3Jt
-YXRpb24gYW5kIGJ1aWxkL3VwZGF0ZSBmYWlsdXJlcy4KQW55IHByb2JsZW0gcGxlYXNlIGZpbGUg
-YSBidWcgYXQgaHR0cHM6Ly9idWd6aWxsYS55b2N0b3Byb2plY3Qub3JnL2VudGVyX2J1Zy5jZ2k/
-cHJvZHVjdD1BdXRvbWF0ZWQlMjBVcGRhdGUlMjBIYW5kbGVyCgpSZWdhcmRzLApUaGUgVXBncmFk
-ZSBIZWxwZXIKCi0tID44IC0tCkZyb20gNTUwMzdjMDBiYzViY2E2YzE1YjE5YjkwYjk1MjgyMmY2
-ZWQ4NWFiOSBNb24gU2VwIDE3IDAwOjAwOjAwIDIwMDEKRnJvbTogVXBncmFkZSBIZWxwZXIgPGF1
-aEB5b2N0b3Byb2plY3Qub3JnPgpEYXRlOiBTYXQsIDQgTm92IDIwMjMgMDY6NTU6MDIgKzAwMDAK
-U3ViamVjdDogW1BBVENIXSB4ZmNlNC1zZXR0aW5nczogdXBncmFkZSA0LjE4LjIgLT4gNC4xOS4w
-CgotLS0KIC4uLjAwMS14c2V0dGluZ3MueG1sLVNldC1kZWZhdWx0LXRoZW1lcy5wYXRjaCB8IDQx
-IC0tLS0tLS0tLS0tLS0tLS0tLS0KIC4uLm5nc180LjE4LjIuYmIgPT4geGZjZTQtc2V0dGluZ3Nf
-NC4xOS4wLmJifSB8ICAzICstCiAyIGZpbGVzIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCA0MyBk
-ZWxldGlvbnMoLSkKIGRlbGV0ZSBtb2RlIDEwMDY0NCBtZXRhLXhmY2UvcmVjaXBlcy14ZmNlL3hm
-Y2U0LXNldHRpbmdzL2ZpbGVzLzAwMDEteHNldHRpbmdzLnhtbC1TZXQtZGVmYXVsdC10aGVtZXMu
-cGF0Y2gKIHJlbmFtZSBtZXRhLXhmY2UvcmVjaXBlcy14ZmNlL3hmY2U0LXNldHRpbmdzL3t4ZmNl
-NC1zZXR0aW5nc180LjE4LjIuYmIgPT4geGZjZTQtc2V0dGluZ3NfNC4xOS4wLmJifSAoODglKQoK
-ZGlmZiAtLWdpdCBhL21ldGEteGZjZS9yZWNpcGVzLXhmY2UveGZjZTQtc2V0dGluZ3MvZmlsZXMv
-MDAwMS14c2V0dGluZ3MueG1sLVNldC1kZWZhdWx0LXRoZW1lcy5wYXRjaCBiL21ldGEteGZjZS9y
-ZWNpcGVzLXhmY2UveGZjZTQtc2V0dGluZ3MvZmlsZXMvMDAwMS14c2V0dGluZ3MueG1sLVNldC1k
-ZWZhdWx0LXRoZW1lcy5wYXRjaApkZWxldGVkIGZpbGUgbW9kZSAxMDA2NDQKaW5kZXggM2E0YzAw
-OTEzLi4wMDAwMDAwMDAKLS0tIGEvbWV0YS14ZmNlL3JlY2lwZXMteGZjZS94ZmNlNC1zZXR0aW5n
-cy9maWxlcy8wMDAxLXhzZXR0aW5ncy54bWwtU2V0LWRlZmF1bHQtdGhlbWVzLnBhdGNoCisrKyAv
-ZGV2L251bGwKQEAgLTEsNDEgKzAsMCBAQAotRnJvbSAyMjE4YmE4YTIxZTlmNTcxNWI2NTJjNjQx
-NmMyZGRiNTUyNjg2YjE0IE1vbiBTZXAgMTcgMDA6MDA6MDAgMjAwMQotRnJvbTogPT9VVEYtOD9x
-P0FuZHJlYXM9MjBNPUMzPUJDbGxlcj89IDxzY2huaXR6ZWx0b255QGdvb2dsZW1haWwuY29tPgot
-RGF0ZTogU3VuLCAyMCBNYXkgMjAxMiAxNToyMjowOSArMDIwMAotU3ViamVjdDogW1BBVENIXSB4
-c2V0dGluZ3MueG1sOiBTZXQgZGVmYXVsdCB0aGVtZXMKLU1JTUUtVmVyc2lvbjogMS4wCi1Db250
-ZW50LVR5cGU6IHRleHQvcGxhaW47IGNoYXJzZXQ9VVRGLTgKLUNvbnRlbnQtVHJhbnNmZXItRW5j
-b2Rpbmc6IDhiaXQKLQotVXBzdHJlYW0tU3RhdHVzOiBJbmFwcHJvcHJpYXRlIFtjb25maWd1cmF0
-aW9uXQotCi1TaWduZWQtb2ZmLWJ5OiBBbmRyZWFzIE3DvGxsZXIgPHNjaG5pdHplbHRvbnlAZ29v
-Z2xlbWFpbC5jb20+Ci0KLVRoZW1lIFhmY2UgZG9lc24ndCB3b3JrIGFzIGV4cGVjdGVkLiBGb3Ig
-ZXhhbXBsZSwgbm8gbGF5b3V0IGluIHN0YXJ0Ci1tZW51IGFuZCBhcHBsaWNhdGlvbnMnIG1lbnUg
-YmFyLiBBbmQgR3RrQ29sb3JCdXR0b24gaXMgYmxhbmsgaW4gY29uZmlnCi10YWIgcGFnZSBmcm9t
-IHhmY2U0LXRlcm1pbmFsIC0+IEVkaXQgLT4gUHJlZmVyZW5jZSAtPiBDb2xvcnMuCi0KLVNvIHVz
-ZSBBZHdhaXRhIGFzIGRlZmF1bHQgdGhlbWUgaW5zdGVhZC4KLQotU2lnbmVkLW9mZi1ieTogS2Fp
-IEthbmcgPGthaS5rYW5nQHdpbmRyaXZlci5jb20+Ci0tLS0KLSB4ZnNldHRpbmdzZC94c2V0dGlu
-Z3MueG1sIHwgNCArKy0tCi0gMSBmaWxlIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKSwgMiBkZWxl
-dGlvbnMoLSkKLQotZGlmZiAtLWdpdCBhL3hmc2V0dGluZ3NkL3hzZXR0aW5ncy54bWwgYi94ZnNl
-dHRpbmdzZC94c2V0dGluZ3MueG1sCi1pbmRleCBkOGZlMmFjLi4wZjUyNDZiIDEwMDY0NAotLS0t
-IGEveGZzZXR0aW5nc2QveHNldHRpbmdzLnhtbAotKysrIGIveGZzZXR0aW5nc2QveHNldHRpbmdz
-LnhtbAotQEAgLTYsOCArNiw4IEBACi0gCi0gPGNoYW5uZWwgbmFtZT0ieHNldHRpbmdzIiB2ZXJz
-aW9uPSIxLjAiPgotICAgPHByb3BlcnR5IG5hbWU9Ik5ldCIgdHlwZT0iZW1wdHkiPgotLSAgICA8
-cHJvcGVydHkgbmFtZT0iVGhlbWVOYW1lIiB0eXBlPSJlbXB0eSIvPgotLSAgICA8cHJvcGVydHkg
-bmFtZT0iSWNvblRoZW1lTmFtZSIgdHlwZT0iZW1wdHkiLz4KLSsgICAgPHByb3BlcnR5IG5hbWU9
-IlRoZW1lTmFtZSIgdHlwZT0ic3RyaW5nIiB2YWx1ZT0iQWR3YWl0YSIvPgotKyAgICA8cHJvcGVy
-dHkgbmFtZT0iSWNvblRoZW1lTmFtZSIgdHlwZT0ic3RyaW5nIiB2YWx1ZT0iQWR3YWl0YSIvPgot
-ICAgICA8cHJvcGVydHkgbmFtZT0iRG91YmxlQ2xpY2tUaW1lIiB0eXBlPSJpbnQiIHZhbHVlPSI0
-MDAiLz4KLSAgICAgPHByb3BlcnR5IG5hbWU9IkRvdWJsZUNsaWNrRGlzdGFuY2UiIHR5cGU9Imlu
-dCIgdmFsdWU9IjUiLz4KLSAgICAgPHByb3BlcnR5IG5hbWU9IkRuZERyYWdUaHJlc2hvbGQiIHR5
-cGU9ImludCIgdmFsdWU9IjgiLz4KLS0tIAotMi4xLjAKLQpkaWZmIC0tZ2l0IGEvbWV0YS14ZmNl
-L3JlY2lwZXMteGZjZS94ZmNlNC1zZXR0aW5ncy94ZmNlNC1zZXR0aW5nc180LjE4LjIuYmIgYi9t
-ZXRhLXhmY2UvcmVjaXBlcy14ZmNlL3hmY2U0LXNldHRpbmdzL3hmY2U0LXNldHRpbmdzXzQuMTku
-MC5iYgpzaW1pbGFyaXR5IGluZGV4IDg4JQpyZW5hbWUgZnJvbSBtZXRhLXhmY2UvcmVjaXBlcy14
-ZmNlL3hmY2U0LXNldHRpbmdzL3hmY2U0LXNldHRpbmdzXzQuMTguMi5iYgpyZW5hbWUgdG8gbWV0
-YS14ZmNlL3JlY2lwZXMteGZjZS94ZmNlNC1zZXR0aW5ncy94ZmNlNC1zZXR0aW5nc180LjE5LjAu
-YmIKaW5kZXggMGExODIyNzNiLi5iYjE0MjM2ZDkgMTAwNjQ0Ci0tLSBhL21ldGEteGZjZS9yZWNp
-cGVzLXhmY2UveGZjZTQtc2V0dGluZ3MveGZjZTQtc2V0dGluZ3NfNC4xOC4yLmJiCisrKyBiL21l
-dGEteGZjZS9yZWNpcGVzLXhmY2UveGZjZTQtc2V0dGluZ3MveGZjZTQtc2V0dGluZ3NfNC4xOS4w
-LmJiCkBAIC04LDggKzgsNyBAQCBpbmhlcml0IHhmY2UgZmVhdHVyZXNfY2hlY2sgbWltZS14ZGcK
-IAogUkVRVUlSRURfRElTVFJPX0ZFQVRVUkVTID0gIngxMSIKIAotU1JDX1VSSSArPSAiZmlsZTov
-LzAwMDEteHNldHRpbmdzLnhtbC1TZXQtZGVmYXVsdC10aGVtZXMucGF0Y2giCi1TUkNfVVJJW3No
-YTI1NnN1bV0gPSAiNDY2MTM2MTA4N2ZhYWU1N2VmYjQ5NzQxZmZjZjkwYmY5MDc4NzYwZTE2M2Ji
-ZGVmNjNiOTI0MDgzYmRjNGYyMiIKK1NSQ19VUklbc2hhMjU2c3VtXSA9ICIxOTNlMDBhZWU5NzY2
-MGQ5OTc0MmRmMTQ2Y2EyZTU0NWZiYjE1ZTIyMzNmZDgzYjE5YzczNzFkYjRhOTcwNDUzIgogCiBF
-WFRSQV9PRUNPTkYgKz0gIi0tZW5hYmxlLW1haW50YWluZXItbW9kZSAtLWRpc2FibGUtZGVidWci
-CiAKLS0gCjIuMzkuMgoK
-
---===============5216636588746280189==
+--===============5249886068511809393==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="bitbake-output-qemux86-64.txt"
 
-NOTE: Reconnecting to bitbake server...
-Loading cache...done.
-Loaded 4957 entries from dependency cache.
-Parsing recipes...done.
-Parsing of 3055 .bb files complete (3054 cached, 1 parsed). 4886 targets, 92 skipped, 0 masked, 0 errors.
-Removing 1 recipes from the core2-64 sysroot...done.
-Removing 1 recipes from the qemux86_64 sysroot...done.
-NOTE: Resolving any missing task queue dependencies
+Hello,
 
-Build Configuration:
-BB_VERSION           = "2.6.0"
-BUILD_SYS            = "x86_64-linux"
-NATIVELSBSTRING      = "universal"
-TARGET_SYS           = "x86_64-poky-linux"
-MACHINE              = "qemux86-64"
-DISTRO               = "poky"
-DISTRO_VERSION       = "4.3+snapshot-e575f59b82eae78fb1ac8df7198eaa4a7a963259"
-TUNE_FEATURES        = "m64 core2"
-TARGET_FPU           = ""
-meta                 
-meta-poky            
-meta-yocto-bsp       
-workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
-meta-oe              
-meta-python          
-meta-perl            
-meta-networking      
-meta-multimedia      
-meta-gnome           
-meta-xfce            
-meta-filesystems     
-meta-initramfs       
-meta-webserver       = "tmp-auh-upgrades:69deda615a0ea7b205b9369e07f361ed7ac647f0"
+this email is a notification from the Auto Upgrade Helper
+that the automatic attempt to upgrade the recipe *xfce4-mailwatch-plugin* to *1.3.1* has Succeeded.
 
-Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
-done.
-Sstate summary: Wanted 699 Local 690 Mirrors 0 Missed 9 Current 742 (98% match, 99% complete)
-NOTE: Executing Tasks
-NOTE: Running setscene task 751 of 1441 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-oe/recipes-multimedia/sound-themes/sound-theme-freedesktop_0.8.bb:do_create_spdx_setscene)
-NOTE: Running setscene task 752 of 1441 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-apps/xfce4-datetime-setter/xfce4-datetime-setter_3.32.2.bb:do_create_spdx_setscene)
-NOTE: Running setscene task 754 of 1441 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-gnome/recipes-gnome/libxklavier/libxklavier_5.4.bb:do_create_spdx_setscene)
-NOTE: Running setscene task 755 of 1441 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-oe/recipes-support/libcanberra/libcanberra_0.30.bb:do_create_spdx_setscene)
-NOTE: Running setscene task 756 of 1441 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/exo/exo_4.18.0.bb:do_create_spdx_setscene)
-NOTE: Running setscene task 757 of 1441 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/garcon/garcon_4.18.1.bb:do_create_spdx_setscene)
-NOTE: Running setscene task 764 of 1441 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.19.0.bb:do_populate_lic_setscene)
-NOTE: Running setscene task 766 of 1441 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.19.0.bb:do_deploy_source_date_epoch_setscene)
-NOTE: Running setscene task 828 of 1441 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-gnome/libnotify/libnotify_0.8.2.bb:do_create_spdx_setscene)
-NOTE: recipe sound-theme-freedesktop-0.8-r0: task do_create_spdx_setscene: Started
-NOTE: recipe libxklavier-5.4-r0: task do_create_spdx_setscene: Started
-NOTE: recipe libcanberra-0.30-r0: task do_create_spdx_setscene: Started
-NOTE: recipe xfce4-datetime-setter-3.32.2-r0: task do_create_spdx_setscene: Started
-NOTE: recipe xfce4-settings-4.19.0-r0: task do_populate_lic_setscene: Started
-NOTE: recipe xfce4-settings-4.19.0-r0: task do_deploy_source_date_epoch_setscene: Started
-NOTE: recipe exo-4.18.0-r0: task do_create_spdx_setscene: Started
-NOTE: recipe garcon-4.18.1-r0: task do_create_spdx_setscene: Started
-NOTE: recipe libnotify-0.8.2-r0: task do_create_spdx_setscene: Started
-NOTE: recipe xfce4-settings-4.19.0-r0: task do_deploy_source_date_epoch_setscene: Succeeded
-NOTE: recipe libxklavier-5.4-r0: task do_create_spdx_setscene: Succeeded
-NOTE: recipe garcon-4.18.1-r0: task do_create_spdx_setscene: Succeeded
-NOTE: recipe libcanberra-0.30-r0: task do_create_spdx_setscene: Succeeded
-NOTE: recipe xfce4-settings-4.19.0-r0: task do_populate_lic_setscene: Succeeded
-NOTE: recipe sound-theme-freedesktop-0.8-r0: task do_create_spdx_setscene: Succeeded
-NOTE: Running setscene task 1098 of 1441 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.19.0.bb:do_recipe_qa_setscene)
-NOTE: recipe libnotify-0.8.2-r0: task do_create_spdx_setscene: Succeeded
-NOTE: Running setscene task 1113 of 1441 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-graphics/xorg-lib/libxcursor_1.2.1.bb:do_create_spdx_setscene)
-NOTE: recipe exo-4.18.0-r0: task do_create_spdx_setscene: Succeeded
-NOTE: recipe xfce4-datetime-setter-3.32.2-r0: task do_create_spdx_setscene: Succeeded
-NOTE: Running setscene task 1150 of 1441 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/desktop-file-utils/desktop-file-utils_0.26.bb:do_create_spdx_setscene)
-NOTE: Running setscene task 1189 of 1441 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-graphics/xorg-app/xrandr_1.5.2.bb:do_create_spdx_setscene)
-NOTE: Running setscene task 1269 of 1441 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-graphics/xorg-lib/libxi_1.8.1.bb:do_create_spdx_setscene)
-NOTE: recipe libxcursor-1_1.2.1-r0: task do_create_spdx_setscene: Started
-NOTE: recipe xfce4-settings-4.19.0-r0: task do_recipe_qa_setscene: Started
-NOTE: recipe desktop-file-utils-0.26-r0: task do_create_spdx_setscene: Started
-NOTE: recipe xrandr-1_1.5.2-r0: task do_create_spdx_setscene: Started
-NOTE: recipe libxi-1_1.8.1-r0: task do_create_spdx_setscene: Started
-NOTE: recipe xfce4-settings-4.19.0-r0: task do_recipe_qa_setscene: Succeeded
-NOTE: recipe libxcursor-1_1.2.1-r0: task do_create_spdx_setscene: Succeeded
-NOTE: recipe xrandr-1_1.5.2-r0: task do_create_spdx_setscene: Succeeded
-NOTE: recipe desktop-file-utils-0.26-r0: task do_create_spdx_setscene: Succeeded
-NOTE: recipe libxi-1_1.8.1-r0: task do_create_spdx_setscene: Succeeded
-NOTE: Setscene tasks completed
-NOTE: Running task 3492 of 3891 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.19.0.bb:do_fetch)
-NOTE: recipe xfce4-settings-4.19.0-r0: task do_fetch: Started
-NOTE: recipe xfce4-settings-4.19.0-r0: task do_fetch: Succeeded
-NOTE: Running task 3873 of 3891 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.19.0.bb:do_unpack)
-NOTE: Running task 3874 of 3891 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.19.0.bb:do_prepare_recipe_sysroot)
-NOTE: recipe xfce4-settings-4.19.0-r0: task do_unpack: Started
-NOTE: recipe xfce4-settings-4.19.0-r0: task do_prepare_recipe_sysroot: Started
-NOTE: recipe xfce4-settings-4.19.0-r0: task do_unpack: Succeeded
-NOTE: Running task 3875 of 3891 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.19.0.bb:do_patch)
-NOTE: Running task 3876 of 3891 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.19.0.bb:do_collect_spdx_deps)
-NOTE: recipe xfce4-settings-4.19.0-r0: task do_patch: Started
-NOTE: recipe xfce4-settings-4.19.0-r0: task do_collect_spdx_deps: Started
-NOTE: recipe xfce4-settings-4.19.0-r0: task do_prepare_recipe_sysroot: Succeeded
-NOTE: recipe xfce4-settings-4.19.0-r0: task do_collect_spdx_deps: Succeeded
-NOTE: recipe xfce4-settings-4.19.0-r0: task do_patch: Succeeded
-NOTE: Running task 3878 of 3891 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.19.0.bb:do_configure)
-NOTE: recipe xfce4-settings-4.19.0-r0: task do_configure: Started
-Log data follows:
-| DEBUG: Executing python function extend_recipe_sysroot
-| NOTE: Direct dependencies are ['/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-gnome/recipes-gnome/libxklavier/libxklavier_5.4.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-oe/recipes-support/libcanberra/libcanberra_0.30.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-oe/recipes-support/upower/upower_0.99.17.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/exo/exo_4.18.0.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/garcon/garcon_4.18.1.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/glibc/glibc_2.38.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/desktop-file-utils/desktop-file-utils_0.26.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/
- auh-meta-oe/build/meta/recipes-devtools/gcc/gcc-cross_13.2.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/gcc/gcc-runtime_13.2.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/libtool/libtool-cross_2.4.7.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/libtool/libtool-native_2.4.7.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/quilt/quilt-native_0.67.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-gnome/gdk-pixbuf/gdk-pixbuf_2.42.10.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-gnome/gtk+/gtk+3_3.24.38.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-gnome/hicolor-icon-theme/hicolor-icon-theme_0.17.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-gn
- ome/libnotify/libnotify_0.8.2.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-graphics/xorg-app/xrandr_1.5.2.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-graphics/xorg-lib/libx11_1.8.7.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-graphics/xorg-lib/libxcursor_1.2.1.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-graphics/xorg-lib/libxi_1.8.1.bb:do_populate_sysroot', 'virtual:native:/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/gettext/gettext_0.22.bb:do_populate_sysroot', 'virtual:native:/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/autoconf/autoconf_2.72c.bb:do_populate_sysroot', 'virtual:native:/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/automake/automake_1.16.5.bb:do_populate_sysroot', 'virtual:native:/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes
- -devtools/intltool/intltool_0.51.0.bb:do_populate_sysroot', 'virtual:native:/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/patch/patch_2.7.6.bb:do_populate_sysroot', 'virtual:native:/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/pkgconfig/pkgconfig_git.bb:do_populate_sysroot', 'virtual:native:/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/pseudo/pseudo_git.bb:do_populate_sysroot', 'virtual:native:/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-gnome/gtk+/gtk+3_3.24.38.bb:do_populate_sysroot']
-| NOTE: Installed into sysroot: []
-| NOTE: Skipping as already exists in sysroot: ['libxklavier', 'libcanberra', 'upower', 'exo', 'garcon', 'glibc', 'desktop-file-utils', 'gcc-cross-x86_64', 'gcc-runtime', 'libtool-cross', 'libtool-native', 'quilt-native', 'gdk-pixbuf', 'gtk+3', 'hicolor-icon-theme', 'libnotify', 'xrandr', 'libx11', 'libxcursor', 'libxi', 'gettext-native', 'autoconf-native', 'automake-native', 'intltool-native', 'patch-native', 'pkgconfig-native', 'pseudo-native', 'gtk+3-native', 'm4-native', 'gnu-config-native', 'texinfo-dummy-native', 'zlib-native', 'gmp-native', 'zstd-native', 'mpfr-native', 'binutils-cross-x86_64', 'xz-native', 'libmpc-native', 'linux-libc-headers', 'flex-native', 'libxfce4ui', 'cairo', 'libxml-parser-perl-native', 'gobject-introspection', 'glib-2.0', 'libvorbis', 'pulseaudio', 'alsa-lib', 'libtool', 'gtk+', 'libxrender', 'libxrandr', 'wayland-protocols', 'libxfixes', 'wayland', 'libxkbcommon', 'libxdamage', 'libxcomposite', 'libpng', 'opkg-utils', 'fontconfig', 'libxext', 'libepo
- xy', 'pango', 'mesa', 'libjpeg-turbo', 'at-spi2-core', 'util-macros', 'xorgproto', 'iso-codes', 'libxml2', 'xkbcomp', 'shared-mime-info', 'fontconfig-native', 'libxi-native', 'gettext-minimal-native', 'libpng-native', 'libxrandr-native', 'libxfixes-native', 'at-spi2-core-native', 'cairo-native', 'pango-native', 'libjpeg-turbo-native', 'python3-native', 'libxcomposite-native', 'libxdamage-native', 'libxcursor-native', 'libxext-native', 'libx11-native', 'libxrender-native', 'gobject-introspection-native', 'glib-2.0-native', 'gdk-pixbuf-native', 'libgudev', 'dbus-glib', 'systemd', 'libusb1', 'libxcb', 'xtrans', 'attr-native', 'libgcc', 'xfconf', 'xfce4-dev-tools', 'libsm', 'libxfce4util', 'startup-notification', 'libice', 'zlib', 'pixman', 'perl-native', 'expat-native', 'libffi', 'python3', 'bash-completion', 'libpcre2', 'util-linux', 'libogg', 'sbc', 'speexdsp', 'libsndfile1', 'base-passwd', 'bluez5', 'libcap', 'dbus', 'shadow-sysroot', 'ofono', 'base-files', 'avahi', 'libxtst', 'liba
- tomic-ops', 'shadow', 'shadow-native', 'expat', 'xkeyboard-config', 'freetype', 'harfbuzz', 'fribidi', 'libxft', 'vulkan-headers', 'libxshmfence', 'libxxf86vm', 'libdrm', 'vulkan-loader', 'libxkbfile', 'util-linux-native', 'freetype-native', 'xorgproto-native', 'util-macros-native', 'dbus-native', 'libxml2-native', 'libxtst-native', 'pixman-native', 'libxcb-native', 'libsm-native', 'harfbuzz-native', 'libxft-native', 'fribidi-native', 'cmake-native', 'gdbm-native', 'openssl-native', 'ncurses-native', 'libffi-native', 'libtirpc-native', 'sqlite3-native', 'util-linux-libuuid-native', 'bzip2-native', 'libedit-native', 'libnsl2-native', 'xtrans-native', 'libpcre2-native', 'shared-mime-info-native', 'libpam', 'zstd', 'acl', 'kmod', 'update-rc.d', 'initscripts', 'libseccomp', 'libxau', 'libxdmcp', 'libpthread-stubs', 'xcb-proto', 'vala', 'perl', 'xcb-util', 'make-native', 'libedit', 'util-linux-libuuid', 'libtirpc', 'xz', 'openssl', 'sqlite3', 'gdbm', 'ncurses', 'libxcrypt', 'libnsl2', 'b
- zip2', 'libcap-ng', 'flac', 'readline', 'libical', 'mobile-broadband-provider-info', 'ell', 'libdaemon', 'attr', 'icu', 'libpciaccess', 'libcap-ng-native', 'libxau-native', 'libpthread-stubs-native', 'libxdmcp-native', 'xcb-proto-native', 'libice-native', 'icu-native', 'itstool-native', 'cracklib', 'unzip-native']
-| DEBUG: Python function extend_recipe_sysroot finished
-| DEBUG: Executing shell function autotools_preconfigure
-| DEBUG: Shell function autotools_preconfigure finished
-| DEBUG: Executing python function autotools_aclocals
-| DEBUG: SITE files ['endian-little', 'common-linux', 'common-glibc', 'bit-64', 'x86_64-linux', 'common']
-| DEBUG: Python function autotools_aclocals finished
-| DEBUG: Executing shell function do_configure
-| automake (GNU automake) 1.16.5
-| Copyright (C) 2021 Free Software Foundation, Inc.
-| License GPLv2+: GNU GPL version 2 or later <https://gnu.org/licenses/gpl-2.0.html>
-| This is free software: you are free to change and redistribute it.
-| There is NO WARRANTY, to the extent permitted by law.
-| 
-| Written by Tom Tromey <tromey@redhat.com>
-|        and Alexandre Duret-Lutz <adl@gnu.org>.
-| AUTOV is 1.16
-| NOTE: Executing ACLOCAL="aclocal --system-acdir=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/recipe-sysroot/usr/share/aclocal/ --automake-acdir=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/recipe-sysroot-native/usr/share/aclocal-1.16" autoreconf -Wcross --verbose --install --force --exclude=autopoint --exclude=gtkdocize -I /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/xfce4-settings-4.19.0/m4/ -I /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/recipe-sysroot-native/usr/share/aclocal/
-| autoreconf: export WARNINGS=cross,no-obsolete
-| autoreconf: Entering directory '.'
-| autoreconf: running: aclocal --system-acdir=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/recipe-sysroot/usr/share/aclocal/ --automake-acdir=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/recipe-sysroot-native/usr/share/aclocal-1.16 -I /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/xfce4-settings-4.19.0/m4/ -I /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/recipe-sysroot-native/usr/share/aclocal/ --force -I m4 ${ACLOCAL_FLAGS}
-| autoreconf: configure.ac: tracing
-| autoreconf: running: libtoolize --copy --force
-| libtoolize: putting auxiliary files in '.'.
-| libtoolize: copying file './ltmain.sh'
-| libtoolize: putting macros in AC_CONFIG_MACRO_DIRS, 'm4'.
-| libtoolize: copying file 'm4/libtool.m4'
-| libtoolize: copying file 'm4/ltoptions.m4'
-| libtoolize: copying file 'm4/ltsugar.m4'
-| libtoolize: copying file 'm4/ltversion.m4'
-| libtoolize: copying file 'm4/lt~obsolete.m4'
-| autoreconf: configure.ac: not using Intltool
-| autoreconf: configure.ac: not using Gtkdoc
-| autoreconf: running: aclocal --system-acdir=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/recipe-sysroot/usr/share/aclocal/ --automake-acdir=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/recipe-sysroot-native/usr/share/aclocal-1.16 -I /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/xfce4-settings-4.19.0/m4/ -I /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/recipe-sysroot-native/usr/share/aclocal/ --force -I m4 ${ACLOCAL_FLAGS}
-| autoreconf: running: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/recipe-sysroot-native/usr/bin/autoconf --include=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/xfce4-settings-4.19.0/m4/ --include=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/recipe-sysroot-native/usr/share/aclocal/ --force
-| autoreconf: running: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/recipe-sysroot-native/usr/bin/autoheader --include=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/xfce4-settings-4.19.0/m4/ --include=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/recipe-sysroot-native/usr/share/aclocal/ --force
-| autoreconf: running: automake --add-missing --copy --force-missing
-| configure.ac:66: installing './compile'
-| configure.ac:58: installing './missing'
-| common/Makefile.am: installing './depcomp'
-| autoreconf: './config.sub' is updated
-| autoreconf: './config.guess' is updated
-| autoreconf: Leaving directory '.'
-| NOTE: Running ../xfce4-settings-4.19.0/configure  --build=x86_64-linux 		  --host=x86_64-poky-linux 		  --target=x86_64-poky-linux 		  --prefix=/usr 		  --exec_prefix=/usr 		  --bindir=/usr/bin 		  --sbindir=/usr/sbin 		  --libexecdir=/usr/libexec 		  --datadir=/usr/share 		  --sysconfdir=/etc 		  --sharedstatedir=/com 		  --localstatedir=/var 		  --libdir=/usr/lib 		  --includedir=/usr/include 		  --oldincludedir=/usr/include 		  --infodir=/usr/share/info 		  --mandir=/usr/share/man 		  --disable-silent-rules 		  --disable-dependency-tracking 		  --with-libtool-sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/recipe-sysroot  --enable-maintainer-mode --disable-debug --disable-static  --enable-libnotify --enable-sound-settings --enable-nls
-| configure: loading site script /home/pokybuild/yocto-worker/auh-meta-oe/build/meta/site/endian-little
-| configure: loading site script /home/pokybuild/yocto-worker/auh-meta-oe/build/meta/site/common-linux
-| configure: loading site script /home/pokybuild/yocto-worker/auh-meta-oe/build/meta/site/common-glibc
-| configure: loading site script /home/pokybuild/yocto-worker/auh-meta-oe/build/meta/site/x86_64-linux
-| configure: loading site script /home/pokybuild/yocto-worker/auh-meta-oe/build/meta/site/common
-| configure: loading site script /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/recipe-sysroot/usr/share/x86_64-poky-linux_config_site.d/ncurses_config
-| checking for a BSD-compatible install... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools/install -c
-| checking whether build environment is sane... yes
-| checking for x86_64-poky-linux-strip... x86_64-poky-linux-strip
-| checking for a race-free mkdir -p... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools/mkdir -p
-| checking for gawk... gawk
-| checking whether make sets $(MAKE)... yes
-| checking whether make supports nested variables... yes
-| checking whether UID '6000' is supported by ustar format... yes
-| checking whether GID '6000' is supported by ustar format... yes
-| checking how to create a ustar tar archive... gnutar
-| checking whether to enable maintainer-specific portions of Makefiles... yes
-| checking whether make supports nested variables... (cached) yes
-| checking whether make supports the include directive... yes (GNU style)
-| checking for x86_64-poky-linux-gcc... x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/recipe-sysroot
-| checking whether the C compiler works... yes
-| checking for C compiler default output file name... a.out
-| checking for suffix of executables...
-| checking whether we are cross compiling... yes
-| checking for suffix of object files... o
-| checking whether the compiler supports GNU C... yes
-| checking whether x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/recipe-sysroot accepts -g... yes
-| checking for x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/recipe-sysroot option to enable C11 features... none needed
-| checking whether x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/recipe-sysroot understands -c and -o together... yes
-| checking dependency style of x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/recipe-sysroot... none
-| checking for stdio.h... (cached) yes
-| checking for stdlib.h... (cached) yes
-| checking for string.h... (cached) yes
-| checking for inttypes.h... (cached) yes
-| checking for stdint.h... (cached) yes
-| checking for strings.h... (cached) yes
-| checking for sys/stat.h... (cached) yes
-| checking for sys/types.h... (cached) yes
-| checking for unistd.h... (cached) yes
-| checking for wchar.h... yes
-| checking for minix/config.h... no
-| checking whether it is safe to define __EXTENSIONS__... yes
-| checking whether _XOPEN_SOURCE should be defined... no
-| checking for library containing strerror... none required
-| checking for x86_64-poky-linux-gcc... (cached) x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/recipe-sysroot
-| checking whether the compiler supports GNU C... (cached) yes
-| checking whether x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/recipe-sysroot accepts -g... (cached) yes
-| checking for x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/recipe-sysroot option to enable C11 features... (cached) none needed
-| checking whether x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/recipe-sysroot understands -c and -o together... (cached) yes
-| checking dependency style of x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/recipe-sysroot... (cached) none
-| checking build system type... x86_64-pc-linux-gnu
-| checking host system type... x86_64-poky-linux-gnu
-| checking for a sed that does not truncate output... (cached) sed
-| checking for grep that handles long lines and -e... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools/grep
-| checking for egrep... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools/grep -E
-| checking for fgrep... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools/grep -F
-| checking how to print strings... printf
-| checking for ld used by x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/recipe-sysroot... x86_64-poky-linux-ld --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/recipe-sysroot
-| checking if the linker (x86_64-poky-linux-ld --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/recipe-sysroot  ) is GNU ld... yes
-| checking for a sed that does not truncate output... (cached) sed
-| checking for xmllint... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/recipe-sysroot-native/usr/bin/xmllint
-| ../xfce4-settings-4.19.0/configure: line 6789: syntax error near unexpected token `GDBUS_CODEGEN,'
-| ../xfce4-settings-4.19.0/configure: line 6789: `XDT_CHECK_PACKAGE_BINARY(GDBUS_CODEGEN, gio-2.0, gdbus_codegen, gdbus-codegen)'
-| NOTE: The following config.log files may provide further information.
-| NOTE: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/build/config.log
-| ERROR: configure failed
-| WARNING: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/temp/run.do_configure.2591384:286 exit 1 from 'exit 1'
-| WARNING: Backtrace (BB generated script):
-| 	#1: bbfatal_log, /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/temp/run.do_configure.2591384, line 286
-| 	#2: oe_runconf, /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/temp/run.do_configure.2591384, line 262
-| 	#3: autotools_do_configure, /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/temp/run.do_configure.2591384, line 232
-| 	#4: do_configure, /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/temp/run.do_configure.2591384, line 152
-| 	#5: main, /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/temp/run.do_configure.2591384, line 290
-NOTE: recipe xfce4-settings-4.19.0-r0: task do_configure: Failed
-NOTE: Tasks Summary: Attempted 3879 tasks of which 3873 didn't need to be rerun and 1 failed.
-NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 4 seconds
-NOTE: The errors for this build are stored in /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231104065430.txt
-You can send the errors to a reports server by running:
-  send-error-report /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231104065430.txt [-s server]
-NOTE: The contents of these logs will be posted in public if you use the above command with the default server. Please ensure you remove any identifying or proprietary information when prompted before sending.
+Next steps:
+    - apply the patch: git am 0001-xfce4-mailwatch-plugin-upgrade-1.3.0-1.3.1.patch
+    - check the changes to upstream patches and summarize them in the commit message,
+    - compile an image that contains the package
+    - perform some basic sanity tests
+    - amend the patch and sign it off: git commit -s --reset-author --amend
+    - send it to the appropriate mailing list
 
-Summary: 1 task failed:
-  /home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.19.0.bb:do_configure
-Summary: There were 2 ERROR messages, returning a non-zero exit code.
-ERROR: xfce4-settings-4.19.0-r0 do_configure: configure failed
-ERROR: xfce4-settings-4.19.0-r0 do_configure: ExecutionError('/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/temp/run.do_configure.2591384', 1, None, None)
-ERROR: Logfile of failure stored in: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-settings/4.19.0/temp/log.do_configure.2591384
-ERROR: Task (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_4.19.0.bb:do_configure) failed with exit code '1'
+Alternatively, if you believe the recipe should not be upgraded at this time,
+you can fill RECIPE_NO_UPDATE_REASON in respective recipe file so that
+automatic upgrades would no longer be attempted.
 
---===============5216636588746280189==
+Please review the attached files for further information and build/update failures.
+Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi?product=Automated%20Update%20Handler
+
+Regards,
+The Upgrade Helper
+
+-- >8 --
+From c116594a68f42ad1c76fb7d50b5e53f1003206d4 Mon Sep 17 00:00:00 2001
+From: Upgrade Helper <auh@yoctoproject.org>
+Date: Sat, 4 Nov 2023 06:24:02 +0000
+Subject: [PATCH] xfce4-mailwatch-plugin: upgrade 1.3.0 -> 1.3.1
+
+---
+ .../mailwatch/xfce4-mailwatch-plugin_1.3.0.bb |  13 --
+ .../mailwatch/xfce4-mailwatch-plugin_1.3.1.bb | 143 ++++++++++++++++++
+ 2 files changed, 143 insertions(+), 13 deletions(-)
+ delete mode 100644 meta-xfce/recipes-panel-plugins/mailwatch/xfce4-mailwatch-plugin_1.3.0.bb
+ create mode 100644 meta-xfce/recipes-panel-plugins/mailwatch/xfce4-mailwatch-plugin_1.3.1.bb
+
+diff --git a/meta-xfce/recipes-panel-plugins/mailwatch/xfce4-mailwatch-plugin_1.3.0.bb b/meta-xfce/recipes-panel-plugins/mailwatch/xfce4-mailwatch-plugin_1.3.0.bb
+deleted file mode 100644
+index a5c98efc1..000000000
+--- a/meta-xfce/recipes-panel-plugins/mailwatch/xfce4-mailwatch-plugin_1.3.0.bb
++++ /dev/null
+@@ -1,13 +0,0 @@
+-SUMMARY = "Multi-protocol, multi-mailbox mail watcher for the Xfce4 panel"
+-HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-mailwatch-plugin"
+-LICENSE = "GPL-2.0-only"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+-
+-inherit xfce-panel-plugin
+-
+-DEPENDS += "gnutls"
+-
+-SRC_URI[sha256sum] = "20f91ebefd2880b27f421f773115b3740f67de2bf60feace3841bfd1a09cbe2e"
+-
+-PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)}"
+-PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
+diff --git a/meta-xfce/recipes-panel-plugins/mailwatch/xfce4-mailwatch-plugin_1.3.1.bb b/meta-xfce/recipes-panel-plugins/mailwatch/xfce4-mailwatch-plugin_1.3.1.bb
+new file mode 100644
+index 000000000..42e5ece14
+--- /dev/null
++++ b/meta-xfce/recipes-panel-plugins/mailwatch/xfce4-mailwatch-plugin_1.3.1.bb
+@@ -0,0 +1,143 @@
++# FIXME: the LIC_FILES_CHKSUM values have been updated by 'devtool upgrade'.
++# The following is the difference between the old and the new license text.
++# Please update the LICENSE value if needed, and summarize the changes in
++# the commit message via 'License-Update:' tag.
++# (example: 'License-Update: copyright years updated.')
++#
++# The changes:
++#
++# --- COPYING
++# +++ COPYING
++# @@ -1,12 +1,12 @@
++# -		    GNU GENERAL PUBLIC LICENSE
++# -		       Version 2, June 1991
++# -
++# - Copyright (C) 1989, 1991 Free Software Foundation, Inc.
++# -     59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++# +                    GNU GENERAL PUBLIC LICENSE
++# +                       Version 2, June 1991
++# +
++# + Copyright (C) 1989, 1991 Free Software Foundation, Inc.,
++# + 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
++#   Everyone is permitted to copy and distribute verbatim copies
++#   of this license document, but changing it is not allowed.
++#  
++# -			    Preamble
++# +                            Preamble
++#  
++#    The licenses for most software are designed to take away your
++#  freedom to share and change it.  By contrast, the GNU General Public
++# @@ -15,7 +15,7 @@
++#  General Public License applies to most of the Free Software
++#  Foundation's software and to any other program whose authors commit to
++#  using it.  (Some other Free Software Foundation software is covered by
++# -the GNU Library General Public License instead.)  You can apply it to
++# +the GNU Lesser General Public License instead.)  You can apply it to
++#  your programs, too.
++#  
++#    When we speak of free software, we are referring to freedom, not
++# @@ -55,8 +55,8 @@
++#  
++#    The precise terms and conditions for copying, distribution and
++#  modification follow.
++# -
++# -		    GNU GENERAL PUBLIC LICENSE
++# +
++# +                    GNU GENERAL PUBLIC LICENSE
++#     TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
++#  
++#    0. This License applies to any program or other work which contains
++# @@ -110,7 +110,7 @@
++#      License.  (Exception: if the Program itself is interactive but
++#      does not normally print such an announcement, your work based on
++#      the Program is not required to print an announcement.)
++# -
++# +
++#  These requirements apply to the modified work as a whole.  If
++#  identifiable sections of that work are not derived from the Program,
++#  and can be reasonably considered independent and separate works in
++# @@ -168,7 +168,7 @@
++#  access to copy the source code from the same place counts as
++#  distribution of the source code, even though third parties are not
++#  compelled to copy the source along with the object code.
++# -
++# +
++#    4. You may not copy, modify, sublicense, or distribute the Program
++#  except as expressly provided under this License.  Any attempt
++#  otherwise to copy, modify, sublicense or distribute the Program is
++# @@ -225,7 +225,7 @@
++#  
++#  This section is intended to make thoroughly clear what is believed to
++#  be a consequence of the rest of this License.
++# -
++# +
++#    8. If the distribution and/or use of the Program is restricted in
++#  certain countries either by patents or by copyrighted interfaces, the
++#  original copyright holder who places the Program under this License
++# @@ -255,7 +255,7 @@
++#  of preserving the free status of all derivatives of our free software and
++#  of promoting the sharing and reuse of software generally.
++#  
++# -			    NO WARRANTY
++# +                            NO WARRANTY
++#  
++#    11. BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
++#  FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW.  EXCEPT WHEN
++# @@ -277,9 +277,9 @@
++#  PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE
++#  POSSIBILITY OF SUCH DAMAGES.
++#  
++# -		     END OF TERMS AND CONDITIONS
++# -
++# -	    How to Apply These Terms to Your New Programs
++# +                     END OF TERMS AND CONDITIONS
++# +
++# +            How to Apply These Terms to Your New Programs
++#  
++#    If you develop a new program, and you want it to be of the greatest
++#  possible use to the public, the best way to achieve this is to make it
++# @@ -303,17 +303,16 @@
++#      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++#      GNU General Public License for more details.
++#  
++# -    You should have received a copy of the GNU General Public License
++# -    along with this program; if not, write to the Free Software
++# -    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++# -
++# +    You should have received a copy of the GNU General Public License along
++# +    with this program; if not, write to the Free Software Foundation, Inc.,
++# +    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
++#  
++#  Also add information on how to contact you by electronic and paper mail.
++#  
++#  If the program is interactive, make it output a short notice like this
++#  when it starts in an interactive mode:
++#  
++# -    Gnomovision version 69, Copyright (C) year  name of author
++# +    Gnomovision version 69, Copyright (C) year name of author
++#      Gnomovision comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
++#      This is free software, and you are welcome to redistribute it
++#      under certain conditions; type `show c' for details.
++# @@ -336,5 +335,5 @@
++#  This General Public License does not permit incorporating your program into
++#  proprietary programs.  If your program is a subroutine library, you may
++#  consider it more useful to permit linking proprietary applications with the
++# -library.  If this is what you want to do, use the GNU Library General
++# +library.  If this is what you want to do, use the GNU Lesser General
++#  Public License instead of this License.
++# 
++#
++
++SUMMARY = "Multi-protocol, multi-mailbox mail watcher for the Xfce4 panel"
++HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-mailwatch-plugin"
++LICENSE = "GPL-2.0-only"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++
++inherit xfce-panel-plugin
++
++DEPENDS += "gnutls"
++
++SRC_URI[sha256sum] = "054964e9fe4ca668486400991ce1ea01d07aac7ba235f4b14d4a8f7d9800046a"
++
++PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)}"
++PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
+-- 
+2.39.2
+
+
+--===============5249886068511809393==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="buildhistory-diff-full.txt"
+
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin: SRC_URI changed from "http://archive.xfce.org/src/panel-plugins/xfce4-mailwatch-plugin/1.3/xfce4-mailwatch-plugin-1.3.0.tar.bz2" to "http://archive.xfce.org/src/panel-plugins/xfce4-mailwatch-plugin/1.3/xfce4-mailwatch-plugin-1.3.1.tar.bz2"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-dbg: PKGSIZE changed from 393560 to 400728 (+2%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-dbg: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-dbg: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-dev: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-dev: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-doc: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-doc: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ar: PKGSIZE changed from 14055 to 13679 (-3%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ar: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ar: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ast: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ast: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-be: PKGSIZE changed from 15211 to 15349 (+1%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-be: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-be: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-bg: PKGSIZE changed from 15973 to 16025 (+0%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-bg: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-bg: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ca: PKGSIZE changed from 12298 to 12381 (+1%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ca: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ca: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-cs: PKGSIZE changed from 12803 to 12717 (-1%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-cs: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-cs: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-da: PKGSIZE changed from 11861 to 11759 (-1%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-da: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-da: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-de: PKGSIZE changed from 12418 to 12499 (+1%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-de: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-de: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-el: PKGSIZE changed from 16565 to 16254 (-2%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-el: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-el: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-en-au: PKGSIZE changed from 11279 to 11066 (-2%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-en-au: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-en-au: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-en-gb: PKGSIZE changed from 10294 to 10101 (-2%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-en-gb: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-en-gb: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-es: PKGSIZE changed from 12730 to 12677 (-0%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-es: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-es: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-eu: PKGSIZE changed from 10797 to 11867 (+10%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-eu: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-eu: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-fi: PKGSIZE changed from 11901 to 11671 (-2%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-fi: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-fi: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-fr: PKGSIZE changed from 13099 to 13090 (-0%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-fr: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-fr: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-gl: PKGSIZE changed from 12601 to 12499 (-1%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-gl: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-gl: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-he: PKGSIZE changed from 13415 to 13457 (+0%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-he: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-he: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-hr: PKGSIZE changed from 12002 to 11984 (-0%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-hr: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-hr: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-hu: PKGSIZE changed from 12487 to 12264 (-2%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-hu: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-hu: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-id: PKGSIZE changed from 11636 to 11699 (+1%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-id: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-id: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ie: PKGSIZE changed from 4758 to 4844 (+2%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ie: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ie: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-is: PKGSIZE changed from 6895 to 6904 (+0%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-is: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-is: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-it: PKGSIZE changed from 12219 to 12370 (+1%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-it: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-it: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ja: PKGSIZE changed from 13999 to 13908 (-1%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ja: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ja: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ko: PKGSIZE changed from 12681 to 12782 (+1%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ko: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ko: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-lt: PKGSIZE changed from 12265 to 12382 (+1%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-lt: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-lt: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-lv: PKGSIZE changed from 10874 to 10501 (-3%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-lv: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-lv: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ms: PKGSIZE changed from 11490 to 11572 (+1%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ms: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ms: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-nb: PKGSIZE changed from 11632 to 11511 (-1%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-nb: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-nb: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-nl: PKGSIZE changed from 12056 to 12138 (+1%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-nl: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-nl: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-oc: PKGSIZE changed from 12652 to 12676 (+0%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-oc: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-oc: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-pl: PKGSIZE changed from 12255 to 12291 (+0%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-pl: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-pl: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-pt-br: PKGSIZE changed from 12455 to 12568 (+1%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-pt-br: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-pt-br: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-pt: PKGSIZE changed from 12080 to 12226 (+1%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-pt: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-pt: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ru: PKGSIZE changed from 15118 to 15165 (+0%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ru: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ru: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-sk: PKGSIZE changed from 12677 to 12801 (+1%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-sk: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-sk: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-sl: PKGSIZE changed from 11963 to 12064 (+1%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-sl: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-sl: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-sq: PKGSIZE changed from 12490 to 12537 (+0%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-sq: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-sq: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-sr: PKGSIZE changed from 15648 to 15614 (-0%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-sr: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-sr: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-sv: PKGSIZE changed from 11606 to 11665 (+1%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-sv: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-sv: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-th: PKGSIZE changed from 17474 to 17566 (+1%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-th: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-th: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-tr: PKGSIZE changed from 12073 to 11918 (-1%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-tr: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-tr: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ug: PKGSIZE changed from 14170 to 13684 (-3%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ug: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ug: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-uk: PKGSIZE changed from 15595 to 15750 (+1%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-uk: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-uk: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ur-pk: PKGSIZE changed from 12939 to 12476 (-4%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ur-pk: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ur-pk: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ur: PKGSIZE changed from 12922 to 12459 (-4%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ur: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-ur: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-vi: PKGSIZE changed from 11021 to 10799 (-2%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-vi: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-vi: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-zh-cn: PKGSIZE changed from 11269 to 11165 (-1%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-zh-cn: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-zh-cn: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-zh-tw: PKGSIZE changed from 11566 to 11464 (-1%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-zh-tw: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-locale-zh-tw: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-src: PKGSIZE changed from 303602 to 306168 (+1%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-src: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-src: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-staticdev: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin-staticdev: PV changed from "1.3.0" to "1.3.1"
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin: PKGSIZE changed from 144784 to 144779 (-0%)
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin: PKGV changed from 1.3.0 [default] to 1.3.1 [default]
+packages/core2-64-poky-linux/xfce4-mailwatch-plugin/xfce4-mailwatch-plugin: PV changed from "1.3.0" to "1.3.1"
+
+--===============5249886068511809393==
 Content-Type: application/octet-stream
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment;
- filename="0001-xfce4-settings-upgrade-4.18.2-4.19.0.patch"
+ filename="0001-xfce4-mailwatch-plugin-upgrade-1.3.0-1.3.1.patch"
 
-RnJvbSA1NTAzN2MwMGJjNWJjYTZjMTViMTliOTBiOTUyODIyZjZlZDg1YWI5IE1vbiBTZXAgMTcg
+RnJvbSBjMTE2NTk0YTY4ZjQyYWQxYzc2ZmI3ZDUwYjVlNTNmMTAwMzIwNmQ0IE1vbiBTZXAgMTcg
 MDA6MDA6MDAgMjAwMQpGcm9tOiBVcGdyYWRlIEhlbHBlciA8YXVoQHlvY3RvcHJvamVjdC5vcmc+
-CkRhdGU6IFNhdCwgNCBOb3YgMjAyMyAwNjo1NTowMiArMDAwMApTdWJqZWN0OiBbUEFUQ0hdIHhm
-Y2U0LXNldHRpbmdzOiB1cGdyYWRlIDQuMTguMiAtPiA0LjE5LjAKCi0tLQogLi4uMDAxLXhzZXR0
-aW5ncy54bWwtU2V0LWRlZmF1bHQtdGhlbWVzLnBhdGNoIHwgNDEgLS0tLS0tLS0tLS0tLS0tLS0t
-LQogLi4ubmdzXzQuMTguMi5iYiA9PiB4ZmNlNC1zZXR0aW5nc180LjE5LjAuYmJ9IHwgIDMgKy0K
-IDIgZmlsZXMgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDQzIGRlbGV0aW9ucygtKQogZGVsZXRl
-IG1vZGUgMTAwNjQ0IG1ldGEteGZjZS9yZWNpcGVzLXhmY2UveGZjZTQtc2V0dGluZ3MvZmlsZXMv
-MDAwMS14c2V0dGluZ3MueG1sLVNldC1kZWZhdWx0LXRoZW1lcy5wYXRjaAogcmVuYW1lIG1ldGEt
-eGZjZS9yZWNpcGVzLXhmY2UveGZjZTQtc2V0dGluZ3Mve3hmY2U0LXNldHRpbmdzXzQuMTguMi5i
-YiA9PiB4ZmNlNC1zZXR0aW5nc180LjE5LjAuYmJ9ICg4OCUpCgpkaWZmIC0tZ2l0IGEvbWV0YS14
-ZmNlL3JlY2lwZXMteGZjZS94ZmNlNC1zZXR0aW5ncy9maWxlcy8wMDAxLXhzZXR0aW5ncy54bWwt
-U2V0LWRlZmF1bHQtdGhlbWVzLnBhdGNoIGIvbWV0YS14ZmNlL3JlY2lwZXMteGZjZS94ZmNlNC1z
-ZXR0aW5ncy9maWxlcy8wMDAxLXhzZXR0aW5ncy54bWwtU2V0LWRlZmF1bHQtdGhlbWVzLnBhdGNo
-CmRlbGV0ZWQgZmlsZSBtb2RlIDEwMDY0NAppbmRleCAzYTRjMDA5MTMuLjAwMDAwMDAwMAotLS0g
-YS9tZXRhLXhmY2UvcmVjaXBlcy14ZmNlL3hmY2U0LXNldHRpbmdzL2ZpbGVzLzAwMDEteHNldHRp
-bmdzLnhtbC1TZXQtZGVmYXVsdC10aGVtZXMucGF0Y2gKKysrIC9kZXYvbnVsbApAQCAtMSw0MSAr
-MCwwIEBACi1Gcm9tIDIyMThiYThhMjFlOWY1NzE1YjY1MmM2NDE2YzJkZGI1NTI2ODZiMTQgTW9u
-IFNlcCAxNyAwMDowMDowMCAyMDAxCi1Gcm9tOiA9P1VURi04P3E/QW5kcmVhcz0yME09QzM9QkNs
-bGVyPz0gPHNjaG5pdHplbHRvbnlAZ29vZ2xlbWFpbC5jb20+Ci1EYXRlOiBTdW4sIDIwIE1heSAy
-MDEyIDE1OjIyOjA5ICswMjAwCi1TdWJqZWN0OiBbUEFUQ0hdIHhzZXR0aW5ncy54bWw6IFNldCBk
-ZWZhdWx0IHRoZW1lcwotTUlNRS1WZXJzaW9uOiAxLjAKLUNvbnRlbnQtVHlwZTogdGV4dC9wbGFp
-bjsgY2hhcnNldD1VVEYtOAotQ29udGVudC1UcmFuc2Zlci1FbmNvZGluZzogOGJpdAotCi1VcHN0
-cmVhbS1TdGF0dXM6IEluYXBwcm9wcmlhdGUgW2NvbmZpZ3VyYXRpb25dCi0KLVNpZ25lZC1vZmYt
-Ynk6IEFuZHJlYXMgTcO8bGxlciA8c2Nobml0emVsdG9ueUBnb29nbGVtYWlsLmNvbT4KLQotVGhl
-bWUgWGZjZSBkb2Vzbid0IHdvcmsgYXMgZXhwZWN0ZWQuIEZvciBleGFtcGxlLCBubyBsYXlvdXQg
-aW4gc3RhcnQKLW1lbnUgYW5kIGFwcGxpY2F0aW9ucycgbWVudSBiYXIuIEFuZCBHdGtDb2xvckJ1
-dHRvbiBpcyBibGFuayBpbiBjb25maWcKLXRhYiBwYWdlIGZyb20geGZjZTQtdGVybWluYWwgLT4g
-RWRpdCAtPiBQcmVmZXJlbmNlIC0+IENvbG9ycy4KLQotU28gdXNlIEFkd2FpdGEgYXMgZGVmYXVs
-dCB0aGVtZSBpbnN0ZWFkLgotCi1TaWduZWQtb2ZmLWJ5OiBLYWkgS2FuZyA8a2FpLmthbmdAd2lu
-ZHJpdmVyLmNvbT4KLS0tLQotIHhmc2V0dGluZ3NkL3hzZXR0aW5ncy54bWwgfCA0ICsrLS0KLSAx
-IGZpbGUgY2hhbmdlZCwgMiBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQotCi1kaWZmIC0t
-Z2l0IGEveGZzZXR0aW5nc2QveHNldHRpbmdzLnhtbCBiL3hmc2V0dGluZ3NkL3hzZXR0aW5ncy54
-bWwKLWluZGV4IGQ4ZmUyYWMuLjBmNTI0NmIgMTAwNjQ0Ci0tLS0gYS94ZnNldHRpbmdzZC94c2V0
-dGluZ3MueG1sCi0rKysgYi94ZnNldHRpbmdzZC94c2V0dGluZ3MueG1sCi1AQCAtNiw4ICs2LDgg
-QEAKLSAKLSA8Y2hhbm5lbCBuYW1lPSJ4c2V0dGluZ3MiIHZlcnNpb249IjEuMCI+Ci0gICA8cHJv
-cGVydHkgbmFtZT0iTmV0IiB0eXBlPSJlbXB0eSI+Ci0tICAgIDxwcm9wZXJ0eSBuYW1lPSJUaGVt
-ZU5hbWUiIHR5cGU9ImVtcHR5Ii8+Ci0tICAgIDxwcm9wZXJ0eSBuYW1lPSJJY29uVGhlbWVOYW1l
-IiB0eXBlPSJlbXB0eSIvPgotKyAgICA8cHJvcGVydHkgbmFtZT0iVGhlbWVOYW1lIiB0eXBlPSJz
-dHJpbmciIHZhbHVlPSJBZHdhaXRhIi8+Ci0rICAgIDxwcm9wZXJ0eSBuYW1lPSJJY29uVGhlbWVO
-YW1lIiB0eXBlPSJzdHJpbmciIHZhbHVlPSJBZHdhaXRhIi8+Ci0gICAgIDxwcm9wZXJ0eSBuYW1l
-PSJEb3VibGVDbGlja1RpbWUiIHR5cGU9ImludCIgdmFsdWU9IjQwMCIvPgotICAgICA8cHJvcGVy
-dHkgbmFtZT0iRG91YmxlQ2xpY2tEaXN0YW5jZSIgdHlwZT0iaW50IiB2YWx1ZT0iNSIvPgotICAg
-ICA8cHJvcGVydHkgbmFtZT0iRG5kRHJhZ1RocmVzaG9sZCIgdHlwZT0iaW50IiB2YWx1ZT0iOCIv
-PgotLS0gCi0yLjEuMAotCmRpZmYgLS1naXQgYS9tZXRhLXhmY2UvcmVjaXBlcy14ZmNlL3hmY2U0
-LXNldHRpbmdzL3hmY2U0LXNldHRpbmdzXzQuMTguMi5iYiBiL21ldGEteGZjZS9yZWNpcGVzLXhm
-Y2UveGZjZTQtc2V0dGluZ3MveGZjZTQtc2V0dGluZ3NfNC4xOS4wLmJiCnNpbWlsYXJpdHkgaW5k
-ZXggODglCnJlbmFtZSBmcm9tIG1ldGEteGZjZS9yZWNpcGVzLXhmY2UveGZjZTQtc2V0dGluZ3Mv
-eGZjZTQtc2V0dGluZ3NfNC4xOC4yLmJiCnJlbmFtZSB0byBtZXRhLXhmY2UvcmVjaXBlcy14ZmNl
-L3hmY2U0LXNldHRpbmdzL3hmY2U0LXNldHRpbmdzXzQuMTkuMC5iYgppbmRleCAwYTE4MjI3M2Iu
-LmJiMTQyMzZkOSAxMDA2NDQKLS0tIGEvbWV0YS14ZmNlL3JlY2lwZXMteGZjZS94ZmNlNC1zZXR0
-aW5ncy94ZmNlNC1zZXR0aW5nc180LjE4LjIuYmIKKysrIGIvbWV0YS14ZmNlL3JlY2lwZXMteGZj
-ZS94ZmNlNC1zZXR0aW5ncy94ZmNlNC1zZXR0aW5nc180LjE5LjAuYmIKQEAgLTgsOCArOCw3IEBA
-IGluaGVyaXQgeGZjZSBmZWF0dXJlc19jaGVjayBtaW1lLXhkZwogCiBSRVFVSVJFRF9ESVNUUk9f
-RkVBVFVSRVMgPSAieDExIgogCi1TUkNfVVJJICs9ICJmaWxlOi8vMDAwMS14c2V0dGluZ3MueG1s
-LVNldC1kZWZhdWx0LXRoZW1lcy5wYXRjaCIKLVNSQ19VUklbc2hhMjU2c3VtXSA9ICI0NjYxMzYx
-MDg3ZmFhZTU3ZWZiNDk3NDFmZmNmOTBiZjkwNzg3NjBlMTYzYmJkZWY2M2I5MjQwODNiZGM0ZjIy
-IgorU1JDX1VSSVtzaGEyNTZzdW1dID0gIjE5M2UwMGFlZTk3NjYwZDk5NzQyZGYxNDZjYTJlNTQ1
-ZmJiMTVlMjIzM2ZkODNiMTljNzM3MWRiNGE5NzA0NTMiCiAKIEVYVFJBX09FQ09ORiArPSAiLS1l
-bmFibGUtbWFpbnRhaW5lci1tb2RlIC0tZGlzYWJsZS1kZWJ1ZyIKIAotLSAKMi4zOS4yCgo=
+CkRhdGU6IFNhdCwgNCBOb3YgMjAyMyAwNjoyNDowMiArMDAwMApTdWJqZWN0OiBbUEFUQ0hdIHhm
+Y2U0LW1haWx3YXRjaC1wbHVnaW46IHVwZ3JhZGUgMS4zLjAgLT4gMS4zLjEKCi0tLQogLi4uL21h
+aWx3YXRjaC94ZmNlNC1tYWlsd2F0Y2gtcGx1Z2luXzEuMy4wLmJiIHwgIDEzIC0tCiAuLi4vbWFp
+bHdhdGNoL3hmY2U0LW1haWx3YXRjaC1wbHVnaW5fMS4zLjEuYmIgfCAxNDMgKysrKysrKysrKysr
+KysrKysrCiAyIGZpbGVzIGNoYW5nZWQsIDE0MyBpbnNlcnRpb25zKCspLCAxMyBkZWxldGlvbnMo
+LSkKIGRlbGV0ZSBtb2RlIDEwMDY0NCBtZXRhLXhmY2UvcmVjaXBlcy1wYW5lbC1wbHVnaW5zL21h
+aWx3YXRjaC94ZmNlNC1tYWlsd2F0Y2gtcGx1Z2luXzEuMy4wLmJiCiBjcmVhdGUgbW9kZSAxMDA2
+NDQgbWV0YS14ZmNlL3JlY2lwZXMtcGFuZWwtcGx1Z2lucy9tYWlsd2F0Y2gveGZjZTQtbWFpbHdh
+dGNoLXBsdWdpbl8xLjMuMS5iYgoKZGlmZiAtLWdpdCBhL21ldGEteGZjZS9yZWNpcGVzLXBhbmVs
+LXBsdWdpbnMvbWFpbHdhdGNoL3hmY2U0LW1haWx3YXRjaC1wbHVnaW5fMS4zLjAuYmIgYi9tZXRh
+LXhmY2UvcmVjaXBlcy1wYW5lbC1wbHVnaW5zL21haWx3YXRjaC94ZmNlNC1tYWlsd2F0Y2gtcGx1
+Z2luXzEuMy4wLmJiCmRlbGV0ZWQgZmlsZSBtb2RlIDEwMDY0NAppbmRleCBhNWM5OGVmYzEuLjAw
+MDAwMDAwMAotLS0gYS9tZXRhLXhmY2UvcmVjaXBlcy1wYW5lbC1wbHVnaW5zL21haWx3YXRjaC94
+ZmNlNC1tYWlsd2F0Y2gtcGx1Z2luXzEuMy4wLmJiCisrKyAvZGV2L251bGwKQEAgLTEsMTMgKzAs
+MCBAQAotU1VNTUFSWSA9ICJNdWx0aS1wcm90b2NvbCwgbXVsdGktbWFpbGJveCBtYWlsIHdhdGNo
+ZXIgZm9yIHRoZSBYZmNlNCBwYW5lbCIKLUhPTUVQQUdFID0gImh0dHA6Ly9nb29kaWVzLnhmY2Uu
+b3JnL3Byb2plY3RzL3BhbmVsLXBsdWdpbnMveGZjZTQtbWFpbHdhdGNoLXBsdWdpbiIKLUxJQ0VO
+U0UgPSAiR1BMLTIuMC1vbmx5IgotTElDX0ZJTEVTX0NIS1NVTSA9ICJmaWxlOi8vQ09QWUlORztt
+ZDU9OTRkNTVkNTEyYTliYTM2Y2FhOWI3ZGYwNzliYWUxOWYiCi0KLWluaGVyaXQgeGZjZS1wYW5l
+bC1wbHVnaW4KLQotREVQRU5EUyArPSAiZ251dGxzIgotCi1TUkNfVVJJW3NoYTI1NnN1bV0gPSAi
+MjBmOTFlYmVmZDI4ODBiMjdmNDIxZjc3MzExNWIzNzQwZjY3ZGUyYmY2MGZlYWNlMzg0MWJmZDFh
+MDljYmUyZSIKLQotUEFDS0FHRUNPTkZJRyA/Pz0gIiR7QGJiLnV0aWxzLmZpbHRlcignRElTVFJP
+X0ZFQVRVUkVTJywgJ2lwdjYnLCBkKX0iCi1QQUNLQUdFQ09ORklHW2lwdjZdID0gIi0tZW5hYmxl
+LWlwdjYsLS1kaXNhYmxlLWlwdjYsIgpkaWZmIC0tZ2l0IGEvbWV0YS14ZmNlL3JlY2lwZXMtcGFu
+ZWwtcGx1Z2lucy9tYWlsd2F0Y2gveGZjZTQtbWFpbHdhdGNoLXBsdWdpbl8xLjMuMS5iYiBiL21l
+dGEteGZjZS9yZWNpcGVzLXBhbmVsLXBsdWdpbnMvbWFpbHdhdGNoL3hmY2U0LW1haWx3YXRjaC1w
+bHVnaW5fMS4zLjEuYmIKbmV3IGZpbGUgbW9kZSAxMDA2NDQKaW5kZXggMDAwMDAwMDAwLi40MmU1
+ZWNlMTQKLS0tIC9kZXYvbnVsbAorKysgYi9tZXRhLXhmY2UvcmVjaXBlcy1wYW5lbC1wbHVnaW5z
+L21haWx3YXRjaC94ZmNlNC1tYWlsd2F0Y2gtcGx1Z2luXzEuMy4xLmJiCkBAIC0wLDAgKzEsMTQz
+IEBACisjIEZJWE1FOiB0aGUgTElDX0ZJTEVTX0NIS1NVTSB2YWx1ZXMgaGF2ZSBiZWVuIHVwZGF0
+ZWQgYnkgJ2RldnRvb2wgdXBncmFkZScuCisjIFRoZSBmb2xsb3dpbmcgaXMgdGhlIGRpZmZlcmVu
+Y2UgYmV0d2VlbiB0aGUgb2xkIGFuZCB0aGUgbmV3IGxpY2Vuc2UgdGV4dC4KKyMgUGxlYXNlIHVw
+ZGF0ZSB0aGUgTElDRU5TRSB2YWx1ZSBpZiBuZWVkZWQsIGFuZCBzdW1tYXJpemUgdGhlIGNoYW5n
+ZXMgaW4KKyMgdGhlIGNvbW1pdCBtZXNzYWdlIHZpYSAnTGljZW5zZS1VcGRhdGU6JyB0YWcuCisj
+IChleGFtcGxlOiAnTGljZW5zZS1VcGRhdGU6IGNvcHlyaWdodCB5ZWFycyB1cGRhdGVkLicpCisj
+CisjIFRoZSBjaGFuZ2VzOgorIworIyAtLS0gQ09QWUlORworIyArKysgQ09QWUlORworIyBAQCAt
+MSwxMiArMSwxMiBAQAorIyAtCQkgICAgR05VIEdFTkVSQUwgUFVCTElDIExJQ0VOU0UKKyMgLQkJ
+ICAgICAgIFZlcnNpb24gMiwgSnVuZSAxOTkxCisjIC0KKyMgLSBDb3B5cmlnaHQgKEMpIDE5ODks
+IDE5OTEgRnJlZSBTb2Z0d2FyZSBGb3VuZGF0aW9uLCBJbmMuCisjIC0gICAgIDU5IFRlbXBsZSBQ
+bGFjZSwgU3VpdGUgMzMwLCBCb3N0b24sIE1BICAwMjExMS0xMzA3ICBVU0EKKyMgKyAgICAgICAg
+ICAgICAgICAgICAgR05VIEdFTkVSQUwgUFVCTElDIExJQ0VOU0UKKyMgKyAgICAgICAgICAgICAg
+ICAgICAgICAgVmVyc2lvbiAyLCBKdW5lIDE5OTEKKyMgKworIyArIENvcHlyaWdodCAoQykgMTk4
+OSwgMTk5MSBGcmVlIFNvZnR3YXJlIEZvdW5kYXRpb24sIEluYy4sCisjICsgNTEgRnJhbmtsaW4g
+U3RyZWV0LCBGaWZ0aCBGbG9vciwgQm9zdG9uLCBNQSAwMjExMC0xMzAxIFVTQQorIyAgIEV2ZXJ5
+b25lIGlzIHBlcm1pdHRlZCB0byBjb3B5IGFuZCBkaXN0cmlidXRlIHZlcmJhdGltIGNvcGllcwor
+IyAgIG9mIHRoaXMgbGljZW5zZSBkb2N1bWVudCwgYnV0IGNoYW5naW5nIGl0IGlzIG5vdCBhbGxv
+d2VkLgorIyAgCisjIC0JCQkgICAgUHJlYW1ibGUKKyMgKyAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBQcmVhbWJsZQorIyAgCisjICAgIFRoZSBsaWNlbnNlcyBmb3IgbW9zdCBzb2Z0d2FyZSBh
+cmUgZGVzaWduZWQgdG8gdGFrZSBhd2F5IHlvdXIKKyMgIGZyZWVkb20gdG8gc2hhcmUgYW5kIGNo
+YW5nZSBpdC4gIEJ5IGNvbnRyYXN0LCB0aGUgR05VIEdlbmVyYWwgUHVibGljCisjIEBAIC0xNSw3
+ICsxNSw3IEBACisjICBHZW5lcmFsIFB1YmxpYyBMaWNlbnNlIGFwcGxpZXMgdG8gbW9zdCBvZiB0
+aGUgRnJlZSBTb2Z0d2FyZQorIyAgRm91bmRhdGlvbidzIHNvZnR3YXJlIGFuZCB0byBhbnkgb3Ro
+ZXIgcHJvZ3JhbSB3aG9zZSBhdXRob3JzIGNvbW1pdCB0bworIyAgdXNpbmcgaXQuICAoU29tZSBv
+dGhlciBGcmVlIFNvZnR3YXJlIEZvdW5kYXRpb24gc29mdHdhcmUgaXMgY292ZXJlZCBieQorIyAt
+dGhlIEdOVSBMaWJyYXJ5IEdlbmVyYWwgUHVibGljIExpY2Vuc2UgaW5zdGVhZC4pICBZb3UgY2Fu
+IGFwcGx5IGl0IHRvCisjICt0aGUgR05VIExlc3NlciBHZW5lcmFsIFB1YmxpYyBMaWNlbnNlIGlu
+c3RlYWQuKSAgWW91IGNhbiBhcHBseSBpdCB0bworIyAgeW91ciBwcm9ncmFtcywgdG9vLgorIyAg
+CisjICAgIFdoZW4gd2Ugc3BlYWsgb2YgZnJlZSBzb2Z0d2FyZSwgd2UgYXJlIHJlZmVycmluZyB0
+byBmcmVlZG9tLCBub3QKKyMgQEAgLTU1LDggKzU1LDggQEAKKyMgIAorIyAgICBUaGUgcHJlY2lz
+ZSB0ZXJtcyBhbmQgY29uZGl0aW9ucyBmb3IgY29weWluZywgZGlzdHJpYnV0aW9uIGFuZAorIyAg
+bW9kaWZpY2F0aW9uIGZvbGxvdy4KKyMgLQwKKyMgLQkJICAgIEdOVSBHRU5FUkFMIFBVQkxJQyBM
+SUNFTlNFCisjICsKKyMgKyAgICAgICAgICAgICAgICAgICAgR05VIEdFTkVSQUwgUFVCTElDIExJ
+Q0VOU0UKKyMgICAgIFRFUk1TIEFORCBDT05ESVRJT05TIEZPUiBDT1BZSU5HLCBESVNUUklCVVRJ
+T04gQU5EIE1PRElGSUNBVElPTgorIyAgCisjICAgIDAuIFRoaXMgTGljZW5zZSBhcHBsaWVzIHRv
+IGFueSBwcm9ncmFtIG9yIG90aGVyIHdvcmsgd2hpY2ggY29udGFpbnMKKyMgQEAgLTExMCw3ICsx
+MTAsNyBAQAorIyAgICAgIExpY2Vuc2UuICAoRXhjZXB0aW9uOiBpZiB0aGUgUHJvZ3JhbSBpdHNl
+bGYgaXMgaW50ZXJhY3RpdmUgYnV0CisjICAgICAgZG9lcyBub3Qgbm9ybWFsbHkgcHJpbnQgc3Vj
+aCBhbiBhbm5vdW5jZW1lbnQsIHlvdXIgd29yayBiYXNlZCBvbgorIyAgICAgIHRoZSBQcm9ncmFt
+IGlzIG5vdCByZXF1aXJlZCB0byBwcmludCBhbiBhbm5vdW5jZW1lbnQuKQorIyAtDAorIyArCisj
+ICBUaGVzZSByZXF1aXJlbWVudHMgYXBwbHkgdG8gdGhlIG1vZGlmaWVkIHdvcmsgYXMgYSB3aG9s
+ZS4gIElmCisjICBpZGVudGlmaWFibGUgc2VjdGlvbnMgb2YgdGhhdCB3b3JrIGFyZSBub3QgZGVy
+aXZlZCBmcm9tIHRoZSBQcm9ncmFtLAorIyAgYW5kIGNhbiBiZSByZWFzb25hYmx5IGNvbnNpZGVy
+ZWQgaW5kZXBlbmRlbnQgYW5kIHNlcGFyYXRlIHdvcmtzIGluCisjIEBAIC0xNjgsNyArMTY4LDcg
+QEAKKyMgIGFjY2VzcyB0byBjb3B5IHRoZSBzb3VyY2UgY29kZSBmcm9tIHRoZSBzYW1lIHBsYWNl
+IGNvdW50cyBhcworIyAgZGlzdHJpYnV0aW9uIG9mIHRoZSBzb3VyY2UgY29kZSwgZXZlbiB0aG91
+Z2ggdGhpcmQgcGFydGllcyBhcmUgbm90CisjICBjb21wZWxsZWQgdG8gY29weSB0aGUgc291cmNl
+IGFsb25nIHdpdGggdGhlIG9iamVjdCBjb2RlLgorIyAtDAorIyArCisjICAgIDQuIFlvdSBtYXkg
+bm90IGNvcHksIG1vZGlmeSwgc3VibGljZW5zZSwgb3IgZGlzdHJpYnV0ZSB0aGUgUHJvZ3JhbQor
+IyAgZXhjZXB0IGFzIGV4cHJlc3NseSBwcm92aWRlZCB1bmRlciB0aGlzIExpY2Vuc2UuICBBbnkg
+YXR0ZW1wdAorIyAgb3RoZXJ3aXNlIHRvIGNvcHksIG1vZGlmeSwgc3VibGljZW5zZSBvciBkaXN0
+cmlidXRlIHRoZSBQcm9ncmFtIGlzCisjIEBAIC0yMjUsNyArMjI1LDcgQEAKKyMgIAorIyAgVGhp
+cyBzZWN0aW9uIGlzIGludGVuZGVkIHRvIG1ha2UgdGhvcm91Z2hseSBjbGVhciB3aGF0IGlzIGJl
+bGlldmVkIHRvCisjICBiZSBhIGNvbnNlcXVlbmNlIG9mIHRoZSByZXN0IG9mIHRoaXMgTGljZW5z
+ZS4KKyMgLQwKKyMgKworIyAgICA4LiBJZiB0aGUgZGlzdHJpYnV0aW9uIGFuZC9vciB1c2Ugb2Yg
+dGhlIFByb2dyYW0gaXMgcmVzdHJpY3RlZCBpbgorIyAgY2VydGFpbiBjb3VudHJpZXMgZWl0aGVy
+IGJ5IHBhdGVudHMgb3IgYnkgY29weXJpZ2h0ZWQgaW50ZXJmYWNlcywgdGhlCisjICBvcmlnaW5h
+bCBjb3B5cmlnaHQgaG9sZGVyIHdobyBwbGFjZXMgdGhlIFByb2dyYW0gdW5kZXIgdGhpcyBMaWNl
+bnNlCisjIEBAIC0yNTUsNyArMjU1LDcgQEAKKyMgIG9mIHByZXNlcnZpbmcgdGhlIGZyZWUgc3Rh
+dHVzIG9mIGFsbCBkZXJpdmF0aXZlcyBvZiBvdXIgZnJlZSBzb2Z0d2FyZSBhbmQKKyMgIG9mIHBy
+b21vdGluZyB0aGUgc2hhcmluZyBhbmQgcmV1c2Ugb2Ygc29mdHdhcmUgZ2VuZXJhbGx5LgorIyAg
+CisjIC0JCQkgICAgTk8gV0FSUkFOVFkKKyMgKyAgICAgICAgICAgICAgICAgICAgICAgICAgICBO
+TyBXQVJSQU5UWQorIyAgCisjICAgIDExLiBCRUNBVVNFIFRIRSBQUk9HUkFNIElTIExJQ0VOU0VE
+IEZSRUUgT0YgQ0hBUkdFLCBUSEVSRSBJUyBOTyBXQVJSQU5UWQorIyAgRk9SIFRIRSBQUk9HUkFN
+LCBUTyBUSEUgRVhURU5UIFBFUk1JVFRFRCBCWSBBUFBMSUNBQkxFIExBVy4gIEVYQ0VQVCBXSEVO
+CisjIEBAIC0yNzcsOSArMjc3LDkgQEAKKyMgIFBST0dSQU1TKSwgRVZFTiBJRiBTVUNIIEhPTERF
+UiBPUiBPVEhFUiBQQVJUWSBIQVMgQkVFTiBBRFZJU0VEIE9GIFRIRQorIyAgUE9TU0lCSUxJVFkg
+T0YgU1VDSCBEQU1BR0VTLgorIyAgCisjIC0JCSAgICAgRU5EIE9GIFRFUk1TIEFORCBDT05ESVRJ
+T05TCisjIC0MCisjIC0JICAgIEhvdyB0byBBcHBseSBUaGVzZSBUZXJtcyB0byBZb3VyIE5ldyBQ
+cm9ncmFtcworIyArICAgICAgICAgICAgICAgICAgICAgRU5EIE9GIFRFUk1TIEFORCBDT05ESVRJ
+T05TCisjICsKKyMgKyAgICAgICAgICAgIEhvdyB0byBBcHBseSBUaGVzZSBUZXJtcyB0byBZb3Vy
+IE5ldyBQcm9ncmFtcworIyAgCisjICAgIElmIHlvdSBkZXZlbG9wIGEgbmV3IHByb2dyYW0sIGFu
+ZCB5b3Ugd2FudCBpdCB0byBiZSBvZiB0aGUgZ3JlYXRlc3QKKyMgIHBvc3NpYmxlIHVzZSB0byB0
+aGUgcHVibGljLCB0aGUgYmVzdCB3YXkgdG8gYWNoaWV2ZSB0aGlzIGlzIHRvIG1ha2UgaXQKKyMg
+QEAgLTMwMywxNyArMzAzLDE2IEBACisjICAgICAgTUVSQ0hBTlRBQklMSVRZIG9yIEZJVE5FU1Mg
+Rk9SIEEgUEFSVElDVUxBUiBQVVJQT1NFLiAgU2VlIHRoZQorIyAgICAgIEdOVSBHZW5lcmFsIFB1
+YmxpYyBMaWNlbnNlIGZvciBtb3JlIGRldGFpbHMuCisjICAKKyMgLSAgICBZb3Ugc2hvdWxkIGhh
+dmUgcmVjZWl2ZWQgYSBjb3B5IG9mIHRoZSBHTlUgR2VuZXJhbCBQdWJsaWMgTGljZW5zZQorIyAt
+ICAgIGFsb25nIHdpdGggdGhpcyBwcm9ncmFtOyBpZiBub3QsIHdyaXRlIHRvIHRoZSBGcmVlIFNv
+ZnR3YXJlCisjIC0gICAgRm91bmRhdGlvbiwgSW5jLiwgNTkgVGVtcGxlIFBsYWNlLCBTdWl0ZSAz
+MzAsIEJvc3RvbiwgTUEgIDAyMTExLTEzMDcgIFVTQQorIyAtCisjICsgICAgWW91IHNob3VsZCBo
+YXZlIHJlY2VpdmVkIGEgY29weSBvZiB0aGUgR05VIEdlbmVyYWwgUHVibGljIExpY2Vuc2UgYWxv
+bmcKKyMgKyAgICB3aXRoIHRoaXMgcHJvZ3JhbTsgaWYgbm90LCB3cml0ZSB0byB0aGUgRnJlZSBT
+b2Z0d2FyZSBGb3VuZGF0aW9uLCBJbmMuLAorIyArICAgIDUxIEZyYW5rbGluIFN0cmVldCwgRmlm
+dGggRmxvb3IsIEJvc3RvbiwgTUEgMDIxMTAtMTMwMSBVU0EuCisjICAKKyMgIEFsc28gYWRkIGlu
+Zm9ybWF0aW9uIG9uIGhvdyB0byBjb250YWN0IHlvdSBieSBlbGVjdHJvbmljIGFuZCBwYXBlciBt
+YWlsLgorIyAgCisjICBJZiB0aGUgcHJvZ3JhbSBpcyBpbnRlcmFjdGl2ZSwgbWFrZSBpdCBvdXRw
+dXQgYSBzaG9ydCBub3RpY2UgbGlrZSB0aGlzCisjICB3aGVuIGl0IHN0YXJ0cyBpbiBhbiBpbnRl
+cmFjdGl2ZSBtb2RlOgorIyAgCisjIC0gICAgR25vbW92aXNpb24gdmVyc2lvbiA2OSwgQ29weXJp
+Z2h0IChDKSB5ZWFyICBuYW1lIG9mIGF1dGhvcgorIyArICAgIEdub21vdmlzaW9uIHZlcnNpb24g
+NjksIENvcHlyaWdodCAoQykgeWVhciBuYW1lIG9mIGF1dGhvcgorIyAgICAgIEdub21vdmlzaW9u
+IGNvbWVzIHdpdGggQUJTT0xVVEVMWSBOTyBXQVJSQU5UWTsgZm9yIGRldGFpbHMgdHlwZSBgc2hv
+dyB3Jy4KKyMgICAgICBUaGlzIGlzIGZyZWUgc29mdHdhcmUsIGFuZCB5b3UgYXJlIHdlbGNvbWUg
+dG8gcmVkaXN0cmlidXRlIGl0CisjICAgICAgdW5kZXIgY2VydGFpbiBjb25kaXRpb25zOyB0eXBl
+IGBzaG93IGMnIGZvciBkZXRhaWxzLgorIyBAQCAtMzM2LDUgKzMzNSw1IEBACisjICBUaGlzIEdl
+bmVyYWwgUHVibGljIExpY2Vuc2UgZG9lcyBub3QgcGVybWl0IGluY29ycG9yYXRpbmcgeW91ciBw
+cm9ncmFtIGludG8KKyMgIHByb3ByaWV0YXJ5IHByb2dyYW1zLiAgSWYgeW91ciBwcm9ncmFtIGlz
+IGEgc3Vicm91dGluZSBsaWJyYXJ5LCB5b3UgbWF5CisjICBjb25zaWRlciBpdCBtb3JlIHVzZWZ1
+bCB0byBwZXJtaXQgbGlua2luZyBwcm9wcmlldGFyeSBhcHBsaWNhdGlvbnMgd2l0aCB0aGUKKyMg
+LWxpYnJhcnkuICBJZiB0aGlzIGlzIHdoYXQgeW91IHdhbnQgdG8gZG8sIHVzZSB0aGUgR05VIExp
+YnJhcnkgR2VuZXJhbAorIyArbGlicmFyeS4gIElmIHRoaXMgaXMgd2hhdCB5b3Ugd2FudCB0byBk
+bywgdXNlIHRoZSBHTlUgTGVzc2VyIEdlbmVyYWwKKyMgIFB1YmxpYyBMaWNlbnNlIGluc3RlYWQg
+b2YgdGhpcyBMaWNlbnNlLgorIyAKKyMKKworU1VNTUFSWSA9ICJNdWx0aS1wcm90b2NvbCwgbXVs
+dGktbWFpbGJveCBtYWlsIHdhdGNoZXIgZm9yIHRoZSBYZmNlNCBwYW5lbCIKK0hPTUVQQUdFID0g
+Imh0dHA6Ly9nb29kaWVzLnhmY2Uub3JnL3Byb2plY3RzL3BhbmVsLXBsdWdpbnMveGZjZTQtbWFp
+bHdhdGNoLXBsdWdpbiIKK0xJQ0VOU0UgPSAiR1BMLTIuMC1vbmx5IgorTElDX0ZJTEVTX0NIS1NV
+TSA9ICJmaWxlOi8vQ09QWUlORzttZDU9YjIzNGVlNGQ2OWY1ZmNlNDQ4NmE4MGZkYWY0YTQyNjMi
+CisKK2luaGVyaXQgeGZjZS1wYW5lbC1wbHVnaW4KKworREVQRU5EUyArPSAiZ251dGxzIgorCitT
+UkNfVVJJW3NoYTI1NnN1bV0gPSAiMDU0OTY0ZTlmZTRjYTY2ODQ4NjQwMDk5MWNlMWVhMDFkMDdh
+YWM3YmEyMzVmNGIxNGQ0YThmN2Q5ODAwMDQ2YSIKKworUEFDS0FHRUNPTkZJRyA/Pz0gIiR7QGJi
+LnV0aWxzLmZpbHRlcignRElTVFJPX0ZFQVRVUkVTJywgJ2lwdjYnLCBkKX0iCitQQUNLQUdFQ09O
+RklHW2lwdjZdID0gIi0tZW5hYmxlLWlwdjYsLS1kaXNhYmxlLWlwdjYsIgotLSAKMi4zOS4yCgo=
 
---===============5216636588746280189==--
+--===============5249886068511809393==--
 
