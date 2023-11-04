@@ -2,39 +2,39 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BEA39C001B2
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B6C96C0018C
 	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 07:31:00 +0000 (UTC)
 Received: from a27-33.smtp-out.us-west-2.amazonses.com (a27-33.smtp-out.us-west-2.amazonses.com [54.240.27.33])
- by mx.groups.io with SMTP id smtpd.web10.5514.1699083060114412560
+ by mx.groups.io with SMTP id smtpd.web11.5392.1699083060095099105
  for <openembedded-devel@lists.openembedded.org>;
  Sat, 04 Nov 2023 00:31:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=KWAL0Ctj;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=hQ0q6+ex;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.33, mailfrom: 0101018b993dffae-2833d150-6718-4539-8519-861521acb341-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=eqKKbIzi;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=po2JHDCw;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.33, mailfrom: 0101018b993e0010-f4761dd7-748e-46b7-9532-0249280bedfb-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
 	t=1699083059;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=50XMXP9J2JR1GxLxRQk6krKAiji3Xp20NzWj2jNFepg=;
-	b=KWAL0Ctj1YaZcdNqxtnqwd/dqdDMhLkYm4TmNnEohvwlc0mzGPc1if2l+obPsraR
-	FFbCPUA0OTZvg+nsxwB689qwox6PtAP0m2Fa2gnv50nYjaB7eE86t1JjKxZD0pU+sG7
-	erh+GzJFOlpfkJpcafwKE8zW3T2SpVlP0oyfrbg4=
+	bh=zNfsMrCE6xpJvvgvOQi4X0ndGR8bZ+xFB2rrPr/ZnAM=;
+	b=eqKKbIzi40fNl3TfFBRPBTr1hmz1M+LHT5EQXZ58aQkKHkIX5gwKIdIjMounStrY
+	/n+gCImoBuI8mzryfpZJLJuLZ5+9jfctz9EOwcojVqI4cXPxsD2gjfAiw+sfFcREXd6
+	ZLP7Z/TMcKzNYI2vxb2RP5pqBTw8KW/aemIm8Mdw=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699083059;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=50XMXP9J2JR1GxLxRQk6krKAiji3Xp20NzWj2jNFepg=;
-	b=hQ0q6+exXqom/b9Dmx0Ot7jgO3eJZG1Zf+LD3PYpABqblS4U5P2osrGgjqwZJvMD
-	XypTdltuEwv9cWUPdQjf+57Os5sgukLl7O+2e4/+Klt+tg8hygQk6TZzlj040XS3mIs
-	MWDhKG0dFdtpHIpuDQUjsUFtS2YbLC8HzmoP3fcI=
-Content-Type: multipart/mixed; boundary="===============8798499552729539859=="
+	bh=zNfsMrCE6xpJvvgvOQi4X0ndGR8bZ+xFB2rrPr/ZnAM=;
+	b=po2JHDCw+vwPwXHt55z5EdYn+CcqxBdgMmH24XX2Oglfzb12Bn1SYxeUN34UPZwu
+	dD6R5FEkz6TsO5cdyFRY5Q+trPKNU0CaTw9ESGcFMMd0aPU8tzMdWi1Y3Nsra+ocTJM
+	eGOcejHwUwZA2d6S4CUoM5uw79bBP7wN5Pk2y2C4=
+Content-Type: multipart/mixed; boundary="===============6613551155577859309=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] menulibre: upgrading to 2.3.2 SUCCEEDED
-Message-ID: <0101018b993dffae-2833d150-6718-4539-8519-861521acb341-000000@us-west-2.amazonses.com>
+Subject: [AUH] parole: upgrading to 4.18.0 SUCCEEDED
+Message-ID: <0101018b993e0010-f4761dd7-748e-46b7-9532-0249280bedfb-000000@us-west-2.amazonses.com>
 Date: Sat, 4 Nov 2023 07:30:59 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
 X-SES-Outgoing: 2023.11.04-54.240.27.33
@@ -42,9 +42,9 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 07:31:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106305
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106304
 
---===============8798499552729539859==
+--===============6613551155577859309==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,10 +52,10 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *menulibre* to *2.3.2* has Succeeded.
+that the automatic attempt to upgrade the recipe *parole* to *4.18.0* has Succeeded.
 
 Next steps:
-    - apply the patch: git am 0001-menulibre-upgrade-2.2.3-2.3.2.patch
+    - apply the patch: git am 0001-parole-upgrade-4.16.0-4.18.0.patch
     - check the changes to upstream patches and summarize them in the commit message,
     - compile an image that contains the package
     - perform some basic sanity tests
@@ -73,340 +73,234 @@ Regards,
 The Upgrade Helper
 
 -- >8 --
-From a5ca988ce3d6e3eb07f11fb0947c5653c3cf4d4e Mon Sep 17 00:00:00 2001
+From c9ce4478d6e93d52ac788bde79986c995d421b8c Mon Sep 17 00:00:00 2001
 From: Upgrade Helper <auh@yoctoproject.org>
-Date: Sat, 4 Nov 2023 05:29:58 +0000
-Subject: [PATCH] menulibre: upgrade 2.2.3 -> 2.3.2
+Date: Sat, 4 Nov 2023 05:40:13 +0000
+Subject: [PATCH] parole: upgrade 4.16.0 -> 4.18.0
 
 ---
- .../menulibre/{menulibre_2.2.3.bb => menulibre_2.3.2.bb}        | 2 +-
+ .../parole/{parole_4.16.0.bb => parole_4.18.0.bb}               | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-xfce/recipes-apps/menulibre/{menulibre_2.2.3.bb => menulibre_2.3.2.bb} (94%)
+ rename meta-xfce/recipes-multimedia/parole/{parole_4.16.0.bb => parole_4.18.0.bb} (90%)
 
-diff --git a/meta-xfce/recipes-apps/menulibre/menulibre_2.2.3.bb b/meta-xfce/recipes-apps/menulibre/menulibre_2.3.2.bb
-similarity index 94%
-rename from meta-xfce/recipes-apps/menulibre/menulibre_2.2.3.bb
-rename to meta-xfce/recipes-apps/menulibre/menulibre_2.3.2.bb
-index 609caf346..7491b509c 100644
---- a/meta-xfce/recipes-apps/menulibre/menulibre_2.2.3.bb
-+++ b/meta-xfce/recipes-apps/menulibre/menulibre_2.3.2.bb
-@@ -13,7 +13,7 @@ inherit setuptools3_legacy gtk-icon-cache features_check
- REQUIRED_DISTRO_FEATURES = "x11 gobject-introspection-data"
+diff --git a/meta-xfce/recipes-multimedia/parole/parole_4.16.0.bb b/meta-xfce/recipes-multimedia/parole/parole_4.18.0.bb
+similarity index 90%
+rename from meta-xfce/recipes-multimedia/parole/parole_4.16.0.bb
+rename to meta-xfce/recipes-multimedia/parole/parole_4.18.0.bb
+index 04aabe0c7..e2c7a012c 100644
+--- a/meta-xfce/recipes-multimedia/parole/parole_4.16.0.bb
++++ b/meta-xfce/recipes-multimedia/parole/parole_4.18.0.bb
+@@ -16,7 +16,7 @@ DEPENDS += " \
+     taglib \
+ "
  
- SRC_URI = "git://github.com/bluesabre/menulibre.git;protocol=https;branch=master"
--SRCREV = "86ee9ad7568128fe9555e54799933b2d3762331a"
-+SRCREV = "94bef4060714fa65c7246c25b87410b52a149f94"
- S = "${WORKDIR}/git"
+-SRC_URI[sha256sum] = "0d305ad8ccd3974d6b632f74325b1b8a39304c905c6b405b70f52c4cfd55a7e7"
++SRC_URI[sha256sum] = "bbe52fbc4d3abe30f6c79fc7ac57bd9de9cf74ce1a79b508a1d7de83dc4f3771"
  
- do_compile[noexec] = "1"
+ RDEPENDS:${PN} += "gstreamer1.0-plugins-good"
+ 
 -- 
 2.39.2
 
 
---===============8798499552729539859==
+--===============6613551155577859309==
 Content-Type: application/octet-stream
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment;
- filename="0001-menulibre-upgrade-2.2.3-2.3.2.patch"
+ filename="0001-parole-upgrade-4.16.0-4.18.0.patch"
 
-RnJvbSBhNWNhOTg4Y2UzZDZlM2ViMDdmMTFmYjA5NDdjNTY1M2MzY2Y0ZDRlIE1vbiBTZXAgMTcg
+RnJvbSBjOWNlNDQ3OGQ2ZTkzZDUyYWM3ODhiZGU3OTk4NmM5OTVkNDIxYjhjIE1vbiBTZXAgMTcg
 MDA6MDA6MDAgMjAwMQpGcm9tOiBVcGdyYWRlIEhlbHBlciA8YXVoQHlvY3RvcHJvamVjdC5vcmc+
-CkRhdGU6IFNhdCwgNCBOb3YgMjAyMyAwNToyOTo1OCArMDAwMApTdWJqZWN0OiBbUEFUQ0hdIG1l
-bnVsaWJyZTogdXBncmFkZSAyLjIuMyAtPiAyLjMuMgoKLS0tCiAuLi4vbWVudWxpYnJlL3ttZW51
-bGlicmVfMi4yLjMuYmIgPT4gbWVudWxpYnJlXzIuMy4yLmJifSAgICAgICAgfCAyICstCiAxIGZp
-bGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkKIHJlbmFtZSBtZXRhLXhm
-Y2UvcmVjaXBlcy1hcHBzL21lbnVsaWJyZS97bWVudWxpYnJlXzIuMi4zLmJiID0+IG1lbnVsaWJy
-ZV8yLjMuMi5iYn0gKDk0JSkKCmRpZmYgLS1naXQgYS9tZXRhLXhmY2UvcmVjaXBlcy1hcHBzL21l
-bnVsaWJyZS9tZW51bGlicmVfMi4yLjMuYmIgYi9tZXRhLXhmY2UvcmVjaXBlcy1hcHBzL21lbnVs
-aWJyZS9tZW51bGlicmVfMi4zLjIuYmIKc2ltaWxhcml0eSBpbmRleCA5NCUKcmVuYW1lIGZyb20g
-bWV0YS14ZmNlL3JlY2lwZXMtYXBwcy9tZW51bGlicmUvbWVudWxpYnJlXzIuMi4zLmJiCnJlbmFt
-ZSB0byBtZXRhLXhmY2UvcmVjaXBlcy1hcHBzL21lbnVsaWJyZS9tZW51bGlicmVfMi4zLjIuYmIK
-aW5kZXggNjA5Y2FmMzQ2Li43NDkxYjUwOWMgMTAwNjQ0Ci0tLSBhL21ldGEteGZjZS9yZWNpcGVz
-LWFwcHMvbWVudWxpYnJlL21lbnVsaWJyZV8yLjIuMy5iYgorKysgYi9tZXRhLXhmY2UvcmVjaXBl
-cy1hcHBzL21lbnVsaWJyZS9tZW51bGlicmVfMi4zLjIuYmIKQEAgLTEzLDcgKzEzLDcgQEAgaW5o
-ZXJpdCBzZXR1cHRvb2xzM19sZWdhY3kgZ3RrLWljb24tY2FjaGUgZmVhdHVyZXNfY2hlY2sKIFJF
-UVVJUkVEX0RJU1RST19GRUFUVVJFUyA9ICJ4MTEgZ29iamVjdC1pbnRyb3NwZWN0aW9uLWRhdGEi
-CiAKIFNSQ19VUkkgPSAiZ2l0Oi8vZ2l0aHViLmNvbS9ibHVlc2FicmUvbWVudWxpYnJlLmdpdDtw
-cm90b2NvbD1odHRwczticmFuY2g9bWFzdGVyIgotU1JDUkVWID0gIjg2ZWU5YWQ3NTY4MTI4ZmU5
-NTU1ZTU0Nzk5OTMzYjJkMzc2MjMzMWEiCitTUkNSRVYgPSAiOTRiZWY0MDYwNzE0ZmE2NWM3MjQ2
-YzI1Yjg3NDEwYjUyYTE0OWY5NCIKIFMgPSAiJHtXT1JLRElSfS9naXQiCiAKIGRvX2NvbXBpbGVb
-bm9leGVjXSA9ICIxIgotLSAKMi4zOS4yCgo=
+CkRhdGU6IFNhdCwgNCBOb3YgMjAyMyAwNTo0MDoxMyArMDAwMApTdWJqZWN0OiBbUEFUQ0hdIHBh
+cm9sZTogdXBncmFkZSA0LjE2LjAgLT4gNC4xOC4wCgotLS0KIC4uLi9wYXJvbGUve3Bhcm9sZV80
+LjE2LjAuYmIgPT4gcGFyb2xlXzQuMTguMC5iYn0gICAgICAgICAgICAgICB8IDIgKy0KIDEgZmls
+ZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQogcmVuYW1lIG1ldGEteGZj
+ZS9yZWNpcGVzLW11bHRpbWVkaWEvcGFyb2xlL3twYXJvbGVfNC4xNi4wLmJiID0+IHBhcm9sZV80
+LjE4LjAuYmJ9ICg5MCUpCgpkaWZmIC0tZ2l0IGEvbWV0YS14ZmNlL3JlY2lwZXMtbXVsdGltZWRp
+YS9wYXJvbGUvcGFyb2xlXzQuMTYuMC5iYiBiL21ldGEteGZjZS9yZWNpcGVzLW11bHRpbWVkaWEv
+cGFyb2xlL3Bhcm9sZV80LjE4LjAuYmIKc2ltaWxhcml0eSBpbmRleCA5MCUKcmVuYW1lIGZyb20g
+bWV0YS14ZmNlL3JlY2lwZXMtbXVsdGltZWRpYS9wYXJvbGUvcGFyb2xlXzQuMTYuMC5iYgpyZW5h
+bWUgdG8gbWV0YS14ZmNlL3JlY2lwZXMtbXVsdGltZWRpYS9wYXJvbGUvcGFyb2xlXzQuMTguMC5i
+YgppbmRleCAwNGFhYmUwYzcuLmUyYzdhMDEyYyAxMDA2NDQKLS0tIGEvbWV0YS14ZmNlL3JlY2lw
+ZXMtbXVsdGltZWRpYS9wYXJvbGUvcGFyb2xlXzQuMTYuMC5iYgorKysgYi9tZXRhLXhmY2UvcmVj
+aXBlcy1tdWx0aW1lZGlhL3Bhcm9sZS9wYXJvbGVfNC4xOC4wLmJiCkBAIC0xNiw3ICsxNiw3IEBA
+IERFUEVORFMgKz0gIiBcCiAgICAgdGFnbGliIFwKICIKIAotU1JDX1VSSVtzaGEyNTZzdW1dID0g
+IjBkMzA1YWQ4Y2NkMzk3NGQ2YjYzMmY3NDMyNWIxYjhhMzkzMDRjOTA1YzZiNDA1YjcwZjUyYzRj
+ZmQ1NWE3ZTciCitTUkNfVVJJW3NoYTI1NnN1bV0gPSAiYmJlNTJmYmM0ZDNhYmUzMGY2Yzc5ZmM3
+YWM1N2JkOWRlOWNmNzRjZTFhNzliNTA4YTFkN2RlODNkYzRmMzc3MSIKIAogUkRFUEVORFM6JHtQ
+Tn0gKz0gImdzdHJlYW1lcjEuMC1wbHVnaW5zLWdvb2QiCiAKLS0gCjIuMzkuMgoK
 
---===============8798499552729539859==
+--===============6613551155577859309==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment; filename="buildhistory-diff-full.txt"
 
-packages/core2-64-poky-linux/menulibre: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-dbg: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-dbg: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-dev: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-dev: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-doc: PKGSIZE changed from 13894 to 17638 (+27%)
-packages/core2-64-poky-linux/menulibre/menulibre-doc: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-doc: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-ar: PKGSIZE changed from 18849 to 18846 (-0%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-ar: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-ar: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-br: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-br: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-ca: PKGSIZE changed from 18969 to 20107 (+6%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-ca: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-ca: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-cs: PKGSIZE changed from 12595 to 12592 (-0%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-cs: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-cs: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-da: PKGSIZE changed from 15860 to 15857 (-0%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-da: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-da: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-de: PKGSIZE changed from 17322 to 17319 (-0%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-de: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-de: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-el: PKGSIZE changed from 17229 to 17226 (-0%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-el: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-el: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-en-au: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-en-au: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-en-gb: PKGSIZE changed from 14807 to 14801 (-0%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-en-gb: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-en-gb: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-eo: PKGSIZE changed from 3251 to 3248 (-0%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-eo: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-eo: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-es: PKGSIZE changed from 19102 to 20309 (+6%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-es: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-es: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-eu: PKGSIZE changed from 8032 to 8029 (-0%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-eu: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-eu: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-fi: PKGSIZE changed from 14963 to 19561 (+31%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-fi: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-fi: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-fr: PKGSIZE changed from 16248 to 19527 (+20%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-fr: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-fr: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-fy: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-fy: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-gl: PKGSIZE changed from 15138 to 15135 (-0%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-gl: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-gl: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-he: PKGSIZE changed from 8080 to 8077 (-0%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-he: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-he: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-hr: PKGSIZE changed from 8374 to 8371 (-0%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-hr: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-hr: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-is: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-is: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-it: PKGSIZE changed from 12588 to 19890 (+58%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-it: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-it: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-ja: PKGSIZE changed from 17122 to 17119 (-0%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-ja: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-ja: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-kk: PKGSIZE changed from 9257 to 9254 (-0%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-kk: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-kk: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-ko: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-ko: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-lt: PKGSIZE changed from 18907 to 26901 (+42%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-lt: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-lt: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-ml: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-ml: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-ms+arab: PKGSIZE changed from 22279 to 31265 (+40%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-ms+arab: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-ms+arab: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-ms: PKGSIZE changed from 18493 to 25988 (+41%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-ms: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-ms: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-nb: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-nb: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-nl: PKGSIZE changed from 18610 to 26162 (+41%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-nl: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-nl: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-pl: PKGSIZE changed from 16867 to 26370 (+56%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-pl: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-pl: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-pt-br: PKGSIZE changed from 6451 to 9997 (+55%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-pt-br: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-pt-br: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-pt-pt: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-pt-pt: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-pt: PKGSIZE changed from 12914 to 12911 (-0%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-pt: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-pt: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-ru: PKGSIZE changed from 20065 to 25895 (+29%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-ru: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-ru: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-si: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-si: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-sk: PKGSIZE changed from 12969 to 12966 (-0%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-sk: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-sk: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-sl: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-sl: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-sr: PKGSIZE changed from 19420 to 19417 (-0%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-sr: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-sr: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-sv: PKGSIZE changed from 12840 to 26542 (+107%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-sv: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-sv: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-tr: PKGSIZE changed from 15466 to 19805 (+28%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-tr: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-tr: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-uk: PKGSIZE changed from 19172 to 19169 (-0%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-uk: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-uk: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-zh-cn: PKGSIZE changed from 15760 to 15757 (-0%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-zh-cn: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-zh-cn: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-zh-hk: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-zh-hk: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-locale-zh-tw: PKGSIZE changed from 6576 to 6573 (-0%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-zh-tw: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-locale-zh-tw: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-src: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-src: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre-staticdev: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre-staticdev: PV changed from "2.2.3" to "2.3.2"
-packages/core2-64-poky-linux/menulibre/menulibre: PKGSIZE changed from 1211152 to 1374213 (+13%)
-packages/core2-64-poky-linux/menulibre/menulibre: FILELIST: directory renamed /usr/lib/python3.11/site-packages/menulibre-2.2.3-py3.11.egg-info -> /usr/lib/python3.11/site-packages/menulibre-2.3.2-py3.11.egg-info, removed "/usr/share/menulibre/ui/MenulibreWindow.ui /usr/lib/python3.11/site-packages/menulibre/MenulibreIconSelection.py /usr/share/menulibre/metainfo/menulibre.appdata.xml.in /usr/lib/python3.11/site-packages/menulibre/MenulibreLog.py /usr/lib/python3.11/site-packages/menulibre/__pycache__/MenulibreIconSelection.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/__pycache__/MenulibreLog.cpython-311.pyc", added "/usr/lib/python3.11/site-packages/menulibre/ApplicationEditor.py /usr/lib/python3.11/site-packages/menulibre/SwitchEntry.py /usr/lib/python3.11/site-packages/menulibre/Section.py /usr/lib/python3.11/site-packages/menulibre/__pycache__/ParsingErrorsDialog.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/FilenameLabel.py /usr/lib/python3.11/site-p
- ackages/menulibre/PathEntry.py /usr/lib/python3.11/site-packages/menulibre/TextEntry.py /usr/lib/python3.11/site-packages/menulibre/IconEntry.py /usr/lib/python3.11/site-packages/menulibre/__pycache__/Toolbar.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/StartupWmClassEntry.py /usr/lib/python3.11/site-packages/menulibre/CommandEditor.py /usr/lib/python3.11/site-packages/menulibre/AdvancedPage.py /usr/lib/python3.11/site-packages/__pycache__/uninstall.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/__pycache__/IconEntry.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/__pycache__/StartupWmClassEntry.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/__pycache__/ApplicationEditor.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/__pycache__/CategoryEditor.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/Toolbar.py /usr/lib/python3.11/site-packages/uninstall.py /usr/lib/python3.11/site-packages/menulibre/__pycache__/Sec
- tion.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/TextEntryButton.py /usr/lib/python3.11/site-packages/menulibre/__pycache__/ActionEditor.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/CategoryEditor.py /usr/lib/python3.11/site-packages/menulibre/Headerbar.py /usr/lib/python3.11/site-packages/menulibre/__pycache__/PathEntry.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/__pycache__/LabelWithHidingButton.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/__pycache__/FilenameLabel.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/FileHandler.py /usr/lib/python3.11/site-packages/menulibre/__pycache__/FieldLabel.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/ActionEditor.py /usr/lib/python3.11/site-packages/menulibre/__pycache__/Headerbar.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/__pycache__/TextEntryButton.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/__pycache__/AdvancedPage.cpytho
- n-311.pyc /usr/lib/python3.11/site-packages/menulibre/LabelWithHidingButton.py /usr/lib/python3.11/site-packages/menulibre/FieldLabel.py /usr/lib/python3.11/site-packages/menulibre/__pycache__/SwitchEntry.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/ParsingErrorsDialog.py /usr/lib/python3.11/site-packages/menulibre/__pycache__/TextEntry.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/__pycache__/FileHandler.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/__pycache__/CommandEditor.cpython-311.pyc"
-packages/core2-64-poky-linux/menulibre/menulibre: PKGV changed from 2.2.3 [default] to 2.3.2 [default]
-packages/core2-64-poky-linux/menulibre/menulibre: PV changed from "2.2.3" to "2.3.2"
-Changes to packages/core2-64-poky-linux/menulibre (sysroot):
-  /usr/lib/python3.11/site-packages/menulibre-2.2.3-py3.11.egg-info moved to /usr/lib/python3.11/site-packages/menulibre-2.3.2-py3.11.egg-info
-  /usr/lib/python3.11/site-packages/menulibre/ActionEditor.py was added
-  /usr/lib/python3.11/site-packages/menulibre/AdvancedPage.py was added
-  /usr/lib/python3.11/site-packages/menulibre/ApplicationEditor.py was added
-  /usr/lib/python3.11/site-packages/menulibre/CategoryEditor.py was added
-  /usr/lib/python3.11/site-packages/menulibre/CommandEditor.py was added
-  /usr/lib/python3.11/site-packages/menulibre/FieldLabel.py was added
-  /usr/lib/python3.11/site-packages/menulibre/FileHandler.py was added
-  /usr/lib/python3.11/site-packages/menulibre/FilenameLabel.py was added
-  /usr/lib/python3.11/site-packages/menulibre/Headerbar.py was added
-  /usr/lib/python3.11/site-packages/menulibre/IconEntry.py was added
-  /usr/lib/python3.11/site-packages/menulibre/LabelWithHidingButton.py was added
-  /usr/lib/python3.11/site-packages/menulibre/ParsingErrorsDialog.py was added
-  /usr/lib/python3.11/site-packages/menulibre/PathEntry.py was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/ActionEditor.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/AdvancedPage.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/ApplicationEditor.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/CategoryEditor.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/CommandEditor.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/FieldLabel.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/FileHandler.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/FilenameLabel.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/Headerbar.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/IconEntry.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/LabelWithHidingButton.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/ParsingErrorsDialog.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/PathEntry.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/Section.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/StartupWmClassEntry.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/SwitchEntry.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/TextEntryButton.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/TextEntry.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/Toolbar.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/Section.py was added
-  /usr/lib/python3.11/site-packages/menulibre/StartupWmClassEntry.py was added
-  /usr/lib/python3.11/site-packages/menulibre/SwitchEntry.py was added
-  /usr/lib/python3.11/site-packages/menulibre/TextEntryButton.py was added
-  /usr/lib/python3.11/site-packages/menulibre/TextEntry.py was added
-  /usr/lib/python3.11/site-packages/menulibre/Toolbar.py was added
-  /usr/lib/python3.11/site-packages/__pycache__ was added
-  /usr/lib/python3.11/site-packages/__pycache__/uninstall.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/uninstall.py was added
-  /usr/lib/python3.11/site-packages/menulibre/MenulibreIconSelection.py was removed
-  /usr/lib/python3.11/site-packages/menulibre/MenulibreLog.py was removed
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/MenulibreIconSelection.cpython-311.pyc was removed
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/MenulibreLog.cpython-311.pyc was removed
-  /usr/share/menulibre/metainfo was removed
-  /usr/share/menulibre/metainfo/menulibre.appdata.xml.in was removed
-  /usr/share/menulibre/ui was removed
-  /usr/share/menulibre/ui/MenulibreWindow.ui was removed
+packages/core2-64-poky-linux/parole: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole: SRC_URI changed from "http://archive.xfce.org/src/apps/parole/4.16/parole-4.16.0.tar.bz2" to "http://archive.xfce.org/src/apps/parole/4.18/parole-4.18.0.tar.bz2"
+packages/core2-64-poky-linux/parole/parole-dbg: PKGSIZE changed from 1418544 to 1421128 (+0%)
+packages/core2-64-poky-linux/parole/parole-dbg: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-dbg: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-dev: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-dev: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-doc: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-doc: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-ar: PKGSIZE changed from 17999 to 17105 (-5%)
+packages/core2-64-poky-linux/parole/parole-locale-ar: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-ar: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-ast: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-ast: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-be: PKGSIZE changed from 30454 to 30969 (+2%)
+packages/core2-64-poky-linux/parole/parole-locale-be: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-be: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-bg: PKGSIZE changed from 30098 to 31742 (+5%)
+packages/core2-64-poky-linux/parole/parole-locale-bg: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-bg: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-ca: PKGSIZE changed from 24697 to 24699 (+0%)
+packages/core2-64-poky-linux/parole/parole-locale-ca: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-ca: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-cs: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-cs: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-da: PKGSIZE changed from 22701 to 23530 (+4%)
+packages/core2-64-poky-linux/parole/parole-locale-da: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-da: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-de: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-de: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-el: PKGSIZE changed from 24339 to 32391 (+33%)
+packages/core2-64-poky-linux/parole/parole-locale-el: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-el: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-en-au: PKGSIZE changed from 21272 to 20567 (-3%)
+packages/core2-64-poky-linux/parole/parole-locale-en-au: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-en-au: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-en-gb: PKGSIZE changed from 21786 to 21031 (-3%)
+packages/core2-64-poky-linux/parole/parole-locale-en-gb: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-en-gb: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-es: PKGSIZE changed from 25289 to 25307 (+0%)
+packages/core2-64-poky-linux/parole/parole-locale-es: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-es: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-et: PKGSIZE changed from 23174 to 24166 (+4%)
+packages/core2-64-poky-linux/parole/parole-locale-et: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-et: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-eu: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-eu: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-fi: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-fi: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-fr: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-fr: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-gl: PKGSIZE changed from 23586 to 24782 (+5%)
+packages/core2-64-poky-linux/parole/parole-locale-gl: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-gl: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-he: PKGSIZE changed from 26336 to 26351 (+0%)
+packages/core2-64-poky-linux/parole/parole-locale-he: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-he: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-hr: PKGSIZE changed from 23070 to 22459 (-3%)
+packages/core2-64-poky-linux/parole/parole-locale-hr: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-hr: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-hu: PKGSIZE changed from 23737 to 22999 (-3%)
+packages/core2-64-poky-linux/parole/parole-locale-hu: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-hu: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-hy-am: PKGSIZE changed from 29352 to 28450 (-3%)
+packages/core2-64-poky-linux/parole/parole-locale-hy-am: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-hy-am: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-hye: PKGSIZE changed from 29346 to 28432 (-3%)
+packages/core2-64-poky-linux/parole/parole-locale-hye: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-hye: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-id: PKGSIZE changed from 22624 to 23478 (+4%)
+packages/core2-64-poky-linux/parole/parole-locale-id: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-id: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-ie: PKGSIZE changed from 18836 to 18108 (-4%)
+packages/core2-64-poky-linux/parole/parole-locale-ie: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-ie: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-is: PKGSIZE changed from 22830 to 22054 (-3%)
+packages/core2-64-poky-linux/parole/parole-locale-is: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-is: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-it: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-it: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-ja: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-ja: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-kk: PKGSIZE changed from 16952 to 18199 (+7%)
+packages/core2-64-poky-linux/parole/parole-locale-kk: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-kk: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-ko: PKGSIZE changed from 24014 to 25114 (+5%)
+packages/core2-64-poky-linux/parole/parole-locale-ko: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-ko: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-lt: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-lt: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-lv: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-lv: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-ms: PKGSIZE changed from 22391 to 23285 (+4%)
+packages/core2-64-poky-linux/parole/parole-locale-ms: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-ms: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-nb: PKGSIZE changed from 23346 to 23335 (-0%)
+packages/core2-64-poky-linux/parole/parole-locale-nb: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-nb: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-nl: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-nl: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-nn: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-nn: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-oc: PKGSIZE changed from 15472 to 15073 (-3%)
+packages/core2-64-poky-linux/parole/parole-locale-oc: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-oc: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-pl: PKGSIZE changed from 24153 to 25103 (+4%)
+packages/core2-64-poky-linux/parole/parole-locale-pl: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-pl: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-pt-br: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-pt-br: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-pt: PKGSIZE changed from 24336 to 24341 (+0%)
+packages/core2-64-poky-linux/parole/parole-locale-pt: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-pt: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-ru: PKGSIZE changed from 29808 to 31938 (+7%)
+packages/core2-64-poky-linux/parole/parole-locale-ru: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-ru: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-sk: PKGSIZE changed from 22118 to 22025 (-0%)
+packages/core2-64-poky-linux/parole/parole-locale-sk: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-sk: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-sl: PKGSIZE changed from 22784 to 23647 (+4%)
+packages/core2-64-poky-linux/parole/parole-locale-sl: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-sl: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-sq: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-sq: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-sr: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-sr: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-sv: PKGSIZE changed from 22273 to 23427 (+5%)
+packages/core2-64-poky-linux/parole/parole-locale-sv: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-sv: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-te: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-te: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-th: PKGSIZE changed from 32877 to 34350 (+4%)
+packages/core2-64-poky-linux/parole/parole-locale-th: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-th: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-tr: PKGSIZE changed from 23709 to 23702 (-0%)
+packages/core2-64-poky-linux/parole/parole-locale-tr: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-tr: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-ug: PKGSIZE changed from 12501 to 11865 (-5%)
+packages/core2-64-poky-linux/parole/parole-locale-ug: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-ug: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-uk: PKGSIZE changed from 28786 to 30547 (+6%)
+packages/core2-64-poky-linux/parole/parole-locale-uk: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-uk: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-zh-cn: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-zh-cn: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-locale-zh-tw: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-locale-zh-tw: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-src: PKGSIZE changed from 922062 to 922749 (+0%)
+packages/core2-64-poky-linux/parole/parole-src: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-src: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole-staticdev: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole-staticdev: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
+packages/core2-64-poky-linux/parole/parole: PKGSIZE changed from 850609 to 867361 (+2%)
+packages/core2-64-poky-linux/parole/parole: PV changed from "4.16.0" to "4.18.0"
+packages/core2-64-poky-linux/parole/parole: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
 
---===============8798499552729539859==
+--===============6613551155577859309==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment; filename="buildhistory-diff.txt"
 
-packages/core2-64-poky-linux/menulibre/menulibre-doc: PKGSIZE changed from 13894 to 17638 (+27%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-fi: PKGSIZE changed from 14963 to 19561 (+31%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-fr: PKGSIZE changed from 16248 to 19527 (+20%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-it: PKGSIZE changed from 12588 to 19890 (+58%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-lt: PKGSIZE changed from 18907 to 26901 (+42%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-ms+arab: PKGSIZE changed from 22279 to 31265 (+40%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-ms: PKGSIZE changed from 18493 to 25988 (+41%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-nl: PKGSIZE changed from 18610 to 26162 (+41%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-pl: PKGSIZE changed from 16867 to 26370 (+56%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-pt-br: PKGSIZE changed from 6451 to 9997 (+55%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-ru: PKGSIZE changed from 20065 to 25895 (+29%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-sv: PKGSIZE changed from 12840 to 26542 (+107%)
-packages/core2-64-poky-linux/menulibre/menulibre-locale-tr: PKGSIZE changed from 15466 to 19805 (+28%)
-packages/core2-64-poky-linux/menulibre/menulibre: PKGSIZE changed from 1211152 to 1374213 (+13%)
-packages/core2-64-poky-linux/menulibre/menulibre: FILELIST: directory renamed /usr/lib/python3.11/site-packages/menulibre-2.2.3-py3.11.egg-info -> /usr/lib/python3.11/site-packages/menulibre-2.3.2-py3.11.egg-info, removed "/usr/lib/python3.11/site-packages/menulibre/MenulibreLog.py /usr/share/menulibre/metainfo/menulibre.appdata.xml.in /usr/share/menulibre/ui/MenulibreWindow.ui /usr/lib/python3.11/site-packages/menulibre/MenulibreIconSelection.py /usr/lib/python3.11/site-packages/menulibre/__pycache__/MenulibreLog.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/__pycache__/MenulibreIconSelection.cpython-311.pyc", added "/usr/lib/python3.11/site-packages/menulibre/__pycache__/IconEntry.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/IconEntry.py /usr/lib/python3.11/site-packages/menulibre/PathEntry.py /usr/lib/python3.11/site-packages/menulibre/TextEntry.py /usr/lib/python3.11/site-packages/menulibre/__pycache__/Section.cpython-311.pyc /usr/lib/python3.11/site-
- packages/menulibre/__pycache__/Toolbar.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/__pycache__/PathEntry.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/ApplicationEditor.py /usr/lib/python3.11/site-packages/menulibre/Section.py /usr/lib/python3.11/site-packages/menulibre/__pycache__/CommandEditor.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/__pycache__/ParsingErrorsDialog.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/__pycache__/FilenameLabel.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/ActionEditor.py /usr/lib/python3.11/site-packages/menulibre/Headerbar.py /usr/lib/python3.11/site-packages/menulibre/__pycache__/Headerbar.cpython-311.pyc /usr/lib/python3.11/site-packages/__pycache__/uninstall.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/TextEntryButton.py /usr/lib/python3.11/site-packages/menulibre/__pycache__/TextEntryButton.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/Toolbar.py
-  /usr/lib/python3.11/site-packages/menulibre/FilenameLabel.py /usr/lib/python3.11/site-packages/menulibre/SwitchEntry.py /usr/lib/python3.11/site-packages/menulibre/__pycache__/TextEntry.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/FieldLabel.py /usr/lib/python3.11/site-packages/menulibre/__pycache__/LabelWithHidingButton.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/CategoryEditor.py /usr/lib/python3.11/site-packages/menulibre/__pycache__/ApplicationEditor.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/__pycache__/SwitchEntry.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/__pycache__/ActionEditor.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/__pycache__/StartupWmClassEntry.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/__pycache__/FileHandler.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/CommandEditor.py /usr/lib/python3.11/site-packages/menulibre/StartupWmClassEntry.py /usr/lib/python3.
- 11/site-packages/menulibre/AdvancedPage.py /usr/lib/python3.11/site-packages/menulibre/__pycache__/FieldLabel.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/LabelWithHidingButton.py /usr/lib/python3.11/site-packages/menulibre/__pycache__/CategoryEditor.cpython-311.pyc /usr/lib/python3.11/site-packages/menulibre/ParsingErrorsDialog.py /usr/lib/python3.11/site-packages/menulibre/__pycache__/AdvancedPage.cpython-311.pyc /usr/lib/python3.11/site-packages/uninstall.py /usr/lib/python3.11/site-packages/menulibre/FileHandler.py"
-Changes to packages/core2-64-poky-linux/menulibre (sysroot):
-  /usr/lib/python3.11/site-packages/menulibre-2.2.3-py3.11.egg-info moved to /usr/lib/python3.11/site-packages/menulibre-2.3.2-py3.11.egg-info
-  /usr/lib/python3.11/site-packages/menulibre/ActionEditor.py was added
-  /usr/lib/python3.11/site-packages/menulibre/AdvancedPage.py was added
-  /usr/lib/python3.11/site-packages/menulibre/ApplicationEditor.py was added
-  /usr/lib/python3.11/site-packages/menulibre/CategoryEditor.py was added
-  /usr/lib/python3.11/site-packages/menulibre/CommandEditor.py was added
-  /usr/lib/python3.11/site-packages/menulibre/FieldLabel.py was added
-  /usr/lib/python3.11/site-packages/menulibre/FileHandler.py was added
-  /usr/lib/python3.11/site-packages/menulibre/FilenameLabel.py was added
-  /usr/lib/python3.11/site-packages/menulibre/Headerbar.py was added
-  /usr/lib/python3.11/site-packages/menulibre/IconEntry.py was added
-  /usr/lib/python3.11/site-packages/menulibre/LabelWithHidingButton.py was added
-  /usr/lib/python3.11/site-packages/menulibre/ParsingErrorsDialog.py was added
-  /usr/lib/python3.11/site-packages/menulibre/PathEntry.py was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/ActionEditor.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/AdvancedPage.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/ApplicationEditor.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/CategoryEditor.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/CommandEditor.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/FieldLabel.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/FileHandler.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/FilenameLabel.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/Headerbar.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/IconEntry.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/LabelWithHidingButton.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/ParsingErrorsDialog.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/PathEntry.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/Section.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/StartupWmClassEntry.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/SwitchEntry.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/TextEntryButton.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/TextEntry.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/Toolbar.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/menulibre/Section.py was added
-  /usr/lib/python3.11/site-packages/menulibre/StartupWmClassEntry.py was added
-  /usr/lib/python3.11/site-packages/menulibre/SwitchEntry.py was added
-  /usr/lib/python3.11/site-packages/menulibre/TextEntryButton.py was added
-  /usr/lib/python3.11/site-packages/menulibre/TextEntry.py was added
-  /usr/lib/python3.11/site-packages/menulibre/Toolbar.py was added
-  /usr/lib/python3.11/site-packages/__pycache__ was added
-  /usr/lib/python3.11/site-packages/__pycache__/uninstall.cpython-311.pyc was added
-  /usr/lib/python3.11/site-packages/uninstall.py was added
-  /usr/lib/python3.11/site-packages/menulibre/MenulibreIconSelection.py was removed
-  /usr/lib/python3.11/site-packages/menulibre/MenulibreLog.py was removed
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/MenulibreIconSelection.cpython-311.pyc was removed
-  /usr/lib/python3.11/site-packages/menulibre/__pycache__/MenulibreLog.cpython-311.pyc was removed
-  /usr/share/menulibre/metainfo was removed
-  /usr/share/menulibre/metainfo/menulibre.appdata.xml.in was removed
-  /usr/share/menulibre/ui was removed
-  /usr/share/menulibre/ui/MenulibreWindow.ui was removed
+packages/core2-64-poky-linux/parole/parole-locale-el: PKGSIZE changed from 24339 to 32391 (+33%)
 
---===============8798499552729539859==--
+--===============6613551155577859309==--
 
