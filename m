@@ -2,35 +2,35 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B36A6C4332F
-	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 15:51:55 +0000 (UTC)
-Received: from mailout04.t-online.de (mailout04.t-online.de [194.25.134.18])
- by mx.groups.io with SMTP id smtpd.web10.12206.1699113106074479551
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BFE7AC4332F
+	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 15:57:05 +0000 (UTC)
+Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
+ by mx.groups.io with SMTP id smtpd.web10.12327.1699113417500172955
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 04 Nov 2023 08:51:46 -0700
+ Sat, 04 Nov 2023 08:56:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.18, mailfrom: f_l_k@t-online.de)
-Received: from fwd85.aul.t-online.de (fwd85.aul.t-online.de [10.223.144.111])
-	by mailout04.t-online.de (Postfix) with SMTP id C8C421E108
-	for <openembedded-devel@lists.openembedded.org>; Sat,  4 Nov 2023 16:51:42 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.163.35.165]) by fwd85.t-online.de
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
+Received: from fwd70.aul.t-online.de (fwd70.aul.t-online.de [10.223.144.96])
+	by mailout03.t-online.de (Postfix) with SMTP id 91D401E45F
+	for <openembedded-devel@lists.openembedded.org>; Sat,  4 Nov 2023 16:56:55 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.163.35.165]) by fwd70.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1qzIw0-1lkzJJ0; Sat, 4 Nov 2023 16:51:40 +0100
+	esmtp id 1qzJ13-0YfXJB0; Sat, 4 Nov 2023 16:56:53 +0100
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH] openal-soft: Upgrade 1.20.1 -> 1.23.1
-Date: Sat,  4 Nov 2023 16:52:00 +0100
-Message-ID: <20231104155200.397142-1-f_l_k@t-online.de>
+Subject: [meta-multimedia][PATCHv2] openal-soft: Upgrade 1.20.1 -> 1.23.1
+Date: Sat,  4 Nov 2023 16:57:16 +0100
+Message-ID: <20231104155716.414203-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1699113100-D64C6D18-B16CE3AE/0/0 CLEAN NORMAL
-X-TOI-MSGID: 95e3bf97-84c8-4c91-a43c-d4da061311cc
+X-TOI-EXPURGATEID: 150726::1699113413-F894633D-B287220D/0/0 CLEAN NORMAL
+X-TOI-MSGID: ef319845-1e27-4af5-a986-6d70337a0830
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 15:51:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106374
+ <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 15:57:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106375
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
@@ -83,7 +83,7 @@ v"
 diff --git a/meta-multimedia/recipes-multimedia/openal/openal-soft_1.23.1=
 .bb b/meta-multimedia/recipes-multimedia/openal/openal-soft_1.23.1.bb
 new file mode 100644
-index 000000000..46c3c5610
+index 000000000..83745703f
 --- /dev/null
 +++ b/meta-multimedia/recipes-multimedia/openal/openal-soft_1.23.1.bb
 @@ -0,0 +1,23 @@
@@ -114,7 +114,7 @@ _BACKEND_PULSEAUDIO=3DOFF,pulseaudio"
 +PACKAGECONFIG[pipewire] =3D "-DALSOFT_BACKEND_PIPEWIRE=3DON,-DALSOFT_BAC=
 KEND_PIPEWIRE=3DOFF,pipewire"
 +PACKAGECONFIG[examples] =3D "-DALSOFT_EXAMPLES=3DON,-DALSOFT_EXAMPLES=3D=
-OFF,libsdl2 ffmpeg"
+OFF"
 +PACKAGECONFIG[sdl2] =3D "-DALSOFT_BACKEND_SDL2=3DON,-DALSOFT_BACKEND_SDL=
 2=3DOFF,libsdl2 ffmpeg"
 +
