@@ -2,49 +2,49 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5E4D7C4167D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8A2BBC001B0
 	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 01:38:19 +0000 (UTC)
-Received: from a27-191.smtp-out.us-west-2.amazonses.com (a27-191.smtp-out.us-west-2.amazonses.com [54.240.27.191])
- by mx.groups.io with SMTP id smtpd.web11.2194.1699061893058992672
+Received: from a27-23.smtp-out.us-west-2.amazonses.com (a27-23.smtp-out.us-west-2.amazonses.com [54.240.27.23])
+ by mx.groups.io with SMTP id smtpd.web11.2211.1699061896970147969
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Nov 2023 18:38:13 -0700
+ Fri, 03 Nov 2023 18:38:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=b/c3Nogy;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=IauSNf0C;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.191, mailfrom: 0101018b97fb040d-465e94cb-3bcf-49c7-887f-9bb29a003edb-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=B8KnZA/z;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=pJFnS8zv;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.23, mailfrom: 0101018b97fb1c9f-eb3a3715-a498-47fa-819e-139543c05875-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
-	t=1699061892;
+	t=1699061898;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=W0/lUMh0JW2E3QDAzPDdDHjGVWMIk3/EjKeKtRBWAMM=;
-	b=b/c3Nogy4iMypIfXah7U+jMUSv0tLdGf9Bs3CJGetg/xq5MDtLBTJEO3iR7Z4qLt
-	X1O63dzLSKYjRw30WV9aIEyY2kuLbRPECNwQrg3xJAhi77iORnK8I1wvb4Rdihf2xSF
-	cn5kBPFAODS4HIdPkl+NUYHXqc95PP6h+qT1naeI=
+	bh=wj2ETIwCeAmeM1zMpgbHLnIHrQ4wfibRwX0O1Gm483w=;
+	b=B8KnZA/zGF49pHNmEH5xttNdREU/2KnpGp1ByFClTGDkhj2ndwPcbfOM1Wrok53j
+	qIkljZI0enY4WZuSnhgfmeCcqSJpcWL1CKyOQjYp1yPv2M/yRQVOqz8fKYZ803hIMOB
+	9guwlwfzHeYtz0FOJg1fdbYNAkqWQAD+qXTTOLjI=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699061892;
+	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699061898;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=W0/lUMh0JW2E3QDAzPDdDHjGVWMIk3/EjKeKtRBWAMM=;
-	b=IauSNf0CJJ/PU/4QVr3vOiAczy3Z8yUPnrx4MlV1g5eVRMO+Qu3MWUYYiEngMVRL
-	0HKBchXVrfxry6tZBZM+i5ee4UdIlb7Hy4piSca7xI1mWoXJatFHo2Uz6Wv/Inj+MZ0
-	4NGh5JSAzdLq4apbDF9IX6snUCYV9ltY1i9U4WKA=
-Content-Type: multipart/mixed; boundary="===============4638337308860830844=="
+	bh=wj2ETIwCeAmeM1zMpgbHLnIHrQ4wfibRwX0O1Gm483w=;
+	b=pJFnS8zv9yCLcD2cCm5AYoybq3Cq6MFZQlNwY6SdYTjHm/d4Hy/JkrnAnaiGAXgx
+	01nF8xxiKbfBZvHLhPMnVuh0NbpRJ3N9MObUFxCj57kqgXzbxaPVKqYJUg0GaT03ObC
+	o1AoPQV8vCd5IbzM/Fius5bsnA+4ttCSeAbal2P0=
+Content-Type: multipart/mixed; boundary="===============2958814859717804649=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] python3-alembic: upgrading to 1.12.1 SUCCEEDED
-Message-ID: <0101018b97fb040d-465e94cb-3bcf-49c7-887f-9bb29a003edb-000000@us-west-2.amazonses.com>
-Date: Sat, 4 Nov 2023 01:38:12 +0000
+Subject: [AUH] python3-werkzeug: upgrading to 3.0.1 FAILED
+Message-ID: <0101018b97fb1c9f-eb3a3715-a498-47fa-819e-139543c05875-000000@us-west-2.amazonses.com>
+Date: Sat, 4 Nov 2023 01:38:18 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
-X-SES-Outgoing: 2023.11.04-54.240.27.191
+X-SES-Outgoing: 2023.11.04-54.240.27.23
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 01:38:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106094
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106175
 
---===============4638337308860830844==
+--===============2958814859717804649==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,123 +52,106 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *python3-alembic* to *1.12.1* has Succeeded.
+that the automatic attempt to upgrade the recipe *python3-werkzeug* to *3.0.1* has Failed (devtool error).
 
-Next steps:
-    - apply the patch: git am 0001-python3-alembic-upgrade-1.12.0-1.12.1.patch
-    - check the changes to upstream patches and summarize them in the commit message,
-    - compile an image that contains the package
-    - perform some basic sanity tests
-    - amend the patch and sign it off: git commit -s --reset-author --amend
-    - send it to the appropriate mailing list
+Detailed error information:
 
-Alternatively, if you believe the recipe should not be upgraded at this time,
-you can fill RECIPE_NO_UPDATE_REASON in respective recipe file so that
-automatic upgrades would no longer be attempted.
+The following devtool command failed:  upgrade python3-werkzeug -V 3.0.1
+NOTE: Reconnecting to bitbake server...
+Loading cache...done.
+Loaded 5116 entries from dependency cache.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.6.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "x86_64-poky-linux"
+MACHINE              = "qemux86-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.3+snapshot-e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+TUNE_FEATURES        = "m64 core2"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       
+workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+meta-oe              
+meta-python          
+meta-perl            
+meta-networking      
+meta-multimedia      
+meta-gnome           
+meta-xfce            
+meta-filesystems     
+meta-initramfs       
+meta-webserver       = "tmp-auh-upgrades:bd817382bf586a0bf5891142eeb230ccdf1194b4"
+
+Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
+done.
+Sstate summary: Wanted 10 Local 10 Mirrors 0 Missed 0 Current 20 (100% match, 100% complete)
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 103 tasks of which 100 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 8 seconds
+Loading cache...done.
+Loaded 5116 entries from dependency cache.
+Parsing recipes...done.
+Parsing of 3056 .bb files complete (3054 cached, 2 parsed). 4887 targets, 92 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.6.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "x86_64-poky-linux"
+MACHINE              = "qemux86-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.3+snapshot-e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+TUNE_FEATURES        = "m64 core2"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       
+workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+meta-oe              
+meta-python          
+meta-perl            
+meta-networking      
+meta-multimedia      
+meta-gnome           
+meta-xfce            
+meta-filesystems     
+meta-initramfs       
+meta-webserver       = "tmp-auh-upgrades:bd817382bf586a0bf5891142eeb230ccdf1194b4"
+
+Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
+done.
+Sstate summary: Wanted 1 Local 0 Mirrors 0 Missed 1 Current 0 (0% match, 0% complete)
+NOTE: Executing Tasks
+WARNING: Failed to fetch URL https://files.pythonhosted.org/packages/source/W/Werkzeug/Werkzeug-3.0.1.tar.gz;downloadfilename=Werkzeug-3.0.1.tar.gz, attempting MIRRORS if available
+NOTE: Tasks Summary: Attempted 2 tasks of which 0 didn't need to be rerun and 1 failed.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 7 seconds
+NOTE: The errors for this build are stored in /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231104011613.txt
+You can send the errors to a reports server by running:
+  send-error-report /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231104011613.txt [-s server]
+NOTE: The contents of these logs will be posted in public if you use the above command with the default server. Please ensure you remove any identifying or proprietary information when prompted before sending.
+
+INFO: Extracting current version source...
+INFO: Extracting upgraded version source...
+INFO: Fetching https://files.pythonhosted.org/packages/source/W/Werkzeug/Werkzeug-3.0.1.tar.gz;downloadfilename=Werkzeug-3.0.1.tar.gz...
+ERROR: Fetcher failure: Fetch command export PSEUDO_DISABLED=1; export SSL_CERT_FILE="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export GIT_SSL_CAINFO="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export ftp_proxy="http://proxy.yocto.io:5187/"; export FTP_PROXY="http://proxy.yocto.io:5187/"; export PATH="/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/sysroots-uninative/x86_64-linux/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-3tnjhf8f/work/recipe-sysroot-native/usr/bin/x86_64-poky-linux:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-3tnjhf8f/work/recipe-sysroot/usr/bin/crossscripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-3tnjhf8f/work/recipe-sysroot-native/usr/sbin:/hom
+ e/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-3tnjhf8f/work/recipe-sysroot-native/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-3tnjhf8f/work/recipe-sysroot-native/sbin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-3tnjhf8f/work/recipe-sysroot-native/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/bitbake/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools"; export HOME="/home/pokybuild"; /usr/bin/env wget -t 2 -T 30 --passive-ftp -O /srv/autobuilder/autobuilder.yocto.io/current_sources/Werkzeug-3.0.1.tar.gz.tmp -P /srv/autobuilder/autobuilder.yocto.io/current_sources 'https://files.pythonhosted.org/packages/source/W/Werkzeug/Werkzeug-3.0.1.tar.gz' --progress=dot -v failed with exit code 8, no output
+ERROR: Bitbake Fetcher Error: FetchError('Unable to fetch URL from any source.', 'https://files.pythonhosted.org/packages/source/W/Werkzeug/Werkzeug-3.0.1.tar.gz;downloadfilename=Werkzeug-3.0.1.tar.gz')
+ERROR: Logfile of failure stored in: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-3tnjhf8f/work/temp/log.do_fetch.138173
+ERROR: Failed to fetch URL https://files.pythonhosted.org/packages/source/W/Werkzeug/Werkzeug-3.0.1.tar.gz;downloadfilename=Werkzeug-3.0.1.tar.gz
+
 
 Please review the attached files for further information and build/update failures.
 Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi?product=Automated%20Update%20Handler
 
 Regards,
 The Upgrade Helper
-
--- >8 --
-From bc2820cc155b9de62ab06b0e1e979d9ec38e5a2e Mon Sep 17 00:00:00 2001
-From: Upgrade Helper <auh@yoctoproject.org>
-Date: Fri, 3 Nov 2023 19:57:51 +0000
-Subject: [PATCH] python3-alembic: upgrade 1.12.0 -> 1.12.1
-
----
- .../{python3-alembic_1.12.0.bb => python3-alembic_1.12.1.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-alembic_1.12.0.bb => python3-alembic_1.12.1.bb} (81%)
-
-diff --git a/meta-python/recipes-devtools/python/python3-alembic_1.12.0.bb b/meta-python/recipes-devtools/python/python3-alembic_1.12.1.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-alembic_1.12.0.bb
-rename to meta-python/recipes-devtools/python/python3-alembic_1.12.1.bb
-index 78b888e9f..107546dbf 100644
---- a/meta-python/recipes-devtools/python/python3-alembic_1.12.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-alembic_1.12.1.bb
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e3023b042cb6002cb398344b51c67093"
- 
- inherit pypi setuptools3
- 
--SRC_URI[sha256sum] = "8e7645c32e4f200675e69f0745415335eb59a3663f5feb487abfa0b30c45888b"
-+SRC_URI[sha256sum] = "bca5877e9678b454706347bc10b97cb7d67f300320fa5c3a94423e8266e2823f"
- 
- PYPI_PACKAGE = "alembic"
- 
--- 
-2.39.2
-
-
---===============4638337308860830844==
-Content-Type: application/octet-stream
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment;
- filename="0001-python3-alembic-upgrade-1.12.0-1.12.1.patch"
-
-RnJvbSBiYzI4MjBjYzE1NWI5ZGU2MmFiMDZiMGUxZTk3OWQ5ZWMzOGU1YTJlIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBVcGdyYWRlIEhlbHBlciA8YXVoQHlvY3RvcHJvamVjdC5vcmc+
-CkRhdGU6IEZyaSwgMyBOb3YgMjAyMyAxOTo1Nzo1MSArMDAwMApTdWJqZWN0OiBbUEFUQ0hdIHB5
-dGhvbjMtYWxlbWJpYzogdXBncmFkZSAxLjEyLjAgLT4gMS4xMi4xCgotLS0KIC4uLi97cHl0aG9u
-My1hbGVtYmljXzEuMTIuMC5iYiA9PiBweXRob24zLWFsZW1iaWNfMS4xMi4xLmJifSAgICB8IDIg
-Ky0KIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQogcmVuYW1l
-IG1ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9uL3tweXRob24zLWFsZW1iaWNfMS4x
-Mi4wLmJiID0+IHB5dGhvbjMtYWxlbWJpY18xLjEyLjEuYmJ9ICg4MSUpCgpkaWZmIC0tZ2l0IGEv
-bWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9uMy1hbGVtYmljXzEuMTIu
-MC5iYiBiL21ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9uL3B5dGhvbjMtYWxlbWJp
-Y18xLjEyLjEuYmIKc2ltaWxhcml0eSBpbmRleCA4MSUKcmVuYW1lIGZyb20gbWV0YS1weXRob24v
-cmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9uMy1hbGVtYmljXzEuMTIuMC5iYgpyZW5hbWUg
-dG8gbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9uMy1hbGVtYmljXzEu
-MTIuMS5iYgppbmRleCA3OGI4ODhlOWYuLjEwNzU0NmRiZiAxMDA2NDQKLS0tIGEvbWV0YS1weXRo
-b24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9uMy1hbGVtYmljXzEuMTIuMC5iYgorKysg
-Yi9tZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24zLWFsZW1iaWNfMS4x
-Mi4xLmJiCkBAIC00LDcgKzQsNyBAQCBMSUNfRklMRVNfQ0hLU1VNID0gImZpbGU6Ly9MSUNFTlNF
-O21kNT1lMzAyM2IwNDJjYjYwMDJjYjM5ODM0NGI1MWM2NzA5MyIKIAogaW5oZXJpdCBweXBpIHNl
-dHVwdG9vbHMzCiAKLVNSQ19VUklbc2hhMjU2c3VtXSA9ICI4ZTc2NDVjMzJlNGYyMDA2NzVlNjlm
-MDc0NTQxNTMzNWViNTlhMzY2M2Y1ZmViNDg3YWJmYTBiMzBjNDU4ODhiIgorU1JDX1VSSVtzaGEy
-NTZzdW1dID0gImJjYTU4NzdlOTY3OGI0NTQ3MDYzNDdiYzEwYjk3Y2I3ZDY3ZjMwMDMyMGZhNWMz
-YTk0NDIzZTgyNjZlMjgyM2YiCiAKIFBZUElfUEFDS0FHRSA9ICJhbGVtYmljIgogCi0tIAoyLjM5
-LjIKCg==
-
---===============4638337308860830844==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="buildhistory-diff-full.txt"
-
-packages/core2-64-poky-linux/python3-alembic: PV changed from "1.12.0" to "1.12.1"
-packages/core2-64-poky-linux/python3-alembic: SRC_URI changed from "https://files.pythonhosted.org/packages/source/a/alembic/alembic-1.12.0.tar.gz;downloadfilename=alembic-1.12.0.tar.gz" to "https://files.pythonhosted.org/packages/source/a/alembic/alembic-1.12.1.tar.gz;downloadfilename=alembic-1.12.1.tar.gz"
-packages/core2-64-poky-linux/python3-alembic: PKGV changed from 1.12.0 [default] to 1.12.1 [default]
-packages/core2-64-poky-linux/python3-alembic/python3-alembic-dbg: PV changed from "1.12.0" to "1.12.1"
-packages/core2-64-poky-linux/python3-alembic/python3-alembic-dbg: PKGV changed from 1.12.0 [default] to 1.12.1 [default]
-packages/core2-64-poky-linux/python3-alembic/python3-alembic-dev: PV changed from "1.12.0" to "1.12.1"
-packages/core2-64-poky-linux/python3-alembic/python3-alembic-dev: PKGV changed from 1.12.0 [default] to 1.12.1 [default]
-packages/core2-64-poky-linux/python3-alembic/python3-alembic-doc: PV changed from "1.12.0" to "1.12.1"
-packages/core2-64-poky-linux/python3-alembic/python3-alembic-doc: PKGV changed from 1.12.0 [default] to 1.12.1 [default]
-packages/core2-64-poky-linux/python3-alembic/python3-alembic-locale: PV changed from "1.12.0" to "1.12.1"
-packages/core2-64-poky-linux/python3-alembic/python3-alembic-locale: PKGV changed from 1.12.0 [default] to 1.12.1 [default]
-packages/core2-64-poky-linux/python3-alembic/python3-alembic-src: PV changed from "1.12.0" to "1.12.1"
-packages/core2-64-poky-linux/python3-alembic/python3-alembic-src: PKGV changed from 1.12.0 [default] to 1.12.1 [default]
-packages/core2-64-poky-linux/python3-alembic/python3-alembic-staticdev: PV changed from "1.12.0" to "1.12.1"
-packages/core2-64-poky-linux/python3-alembic/python3-alembic-staticdev: PKGV changed from 1.12.0 [default] to 1.12.1 [default]
-packages/core2-64-poky-linux/python3-alembic/python3-alembic: PV changed from "1.12.0" to "1.12.1"
-packages/core2-64-poky-linux/python3-alembic/python3-alembic: PKGSIZE changed from 2030279 to 2036297 (+0%)
-packages/core2-64-poky-linux/python3-alembic/python3-alembic: PKGV changed from 1.12.0 [default] to 1.12.1 [default]
-Changes to packages/core2-64-poky-linux/python3-alembic (sysroot):
-  /usr/lib/python3.11/site-packages/alembic-1.12.0.dist-info moved to /usr/lib/python3.11/site-packages/alembic-1.12.1.dist-info
-
---===============4638337308860830844==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="buildhistory-diff.txt"
-
-Changes to packages/core2-64-poky-linux/python3-alembic (sysroot):
-  /usr/lib/python3.11/site-packages/alembic-1.12.0.dist-info moved to /usr/lib/python3.11/site-packages/alembic-1.12.1.dist-info
-
---===============4638337308860830844==--
+--===============2958814859717804649==--
 
