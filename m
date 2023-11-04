@@ -2,49 +2,49 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5A121C04A92
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5B401C3DA6E
 	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 05:12:29 +0000 (UTC)
-Received: from a27-30.smtp-out.us-west-2.amazonses.com (a27-30.smtp-out.us-west-2.amazonses.com [54.240.27.30])
- by mx.groups.io with SMTP id smtpd.web10.4712.1699074742541115713
+Received: from a27-192.smtp-out.us-west-2.amazonses.com (a27-192.smtp-out.us-west-2.amazonses.com [54.240.27.192])
+ by mx.groups.io with SMTP id smtpd.web11.4510.1699074741979792779
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 03 Nov 2023 22:12:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=Mq/mtigL;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=Mom72hZ2;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.30, mailfrom: 0101018b98bf16c0-3891fc83-1ff1-42ca-8efc-276960f9e9af-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=L+Ye/JgY;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=dOdgzmFU;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.192, mailfrom: 0101018b98bf1445-77170357-6623-4cdb-95f7-ef1684fd58a6-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
-	t=1699074742;
+	t=1699074741;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=lUzjGkXZbNra4pHC+Yd8QpvxV1GgNcVIkfogK61pnUI=;
-	b=Mq/mtigLTjKAE7Ua3bi+2V0gfzo421XZaiVfFYvrsQjHqUZhABGNBilctYcDoVjJ
-	vuzEmy55otn18ts3OcqrtExRXBkjLsPoEK0M98SUk+j70eehjkPSOgpwFSR6nrExzip
-	8VSYpCaK/UUc7AVOsj2zDblYth/ICgzrjo305Ryc=
+	bh=42GUaEroltEUnkqBy5c4vPVy5j4Z1q1AbkXbOz61vxs=;
+	b=L+Ye/JgYkJSLywuL+a80ohydZdFwseppAUhdIlpr4bLiu8PzgIQjA2Dz5Ey29zU3
+	hTwnLaIc3x6It+nPWcRsX8weZ1Y1mBW5mEUt4p5QGYZS8vN2ikFbZIY/aPwoFxWnB51
+	FLNovrMKHChCHAtMQJvqMtLIm/vpCdgbl8RUjWiQ=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699074742;
+	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699074741;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=lUzjGkXZbNra4pHC+Yd8QpvxV1GgNcVIkfogK61pnUI=;
-	b=Mom72hZ2i0Kld1qFtdPZsZmL5emgwao17IsEkOyJiCDRr0RsalgopTnoefyYQt4P
-	czKtfEgJuERkQ837nA6XjIQhPP/VLjtusa2/saOkr88hFiUtCuKsNPBHVfdbsjoWqc/
-	Sk7UrwPs/7oak0Hg2i9KWq0WhoA8sWKgHGENqEZU=
-Content-Type: multipart/mixed; boundary="===============1809471728562423680=="
+	bh=42GUaEroltEUnkqBy5c4vPVy5j4Z1q1AbkXbOz61vxs=;
+	b=dOdgzmFUbxbHfloHdTBC5OkFcCWkQDOeQB8WIyQYm79L6V/8UwdPBzOuDVk2hbpV
+	tyaKjEm1ERMxsU5cnUx0p/GQpMnnkmKpHzEip2STnP+rwzgRdENFYxJyKlzJ0Gi1xul
+	d4ZR2VPj23FSGGou/P0zQSMQUdkEJiKU0/6UDLrQ=
+Content-Type: multipart/mixed; boundary="===============5761490510873616155=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] libwacom: upgrading to 2.8.0 SUCCEEDED
-Message-ID: <0101018b98bf16c0-3891fc83-1ff1-42ca-8efc-276960f9e9af-000000@us-west-2.amazonses.com>
+Subject: [AUH] gtksourceview3: upgrading to 5.10.0 FAILED
+Message-ID: <0101018b98bf1445-77170357-6623-4cdb-95f7-ef1684fd58a6-000000@us-west-2.amazonses.com>
 Date: Sat, 4 Nov 2023 05:12:21 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
-X-SES-Outgoing: 2023.11.04-54.240.27.30
+X-SES-Outgoing: 2023.11.04-54.240.27.192
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 05:12:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106285
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106276
 
---===============1809471728562423680==
+--===============5761490510873616155==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,156 +52,106 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *libwacom* to *2.8.0* has Succeeded.
+that the automatic attempt to upgrade the recipe *gtksourceview3* to *5.10.0* has Failed (devtool error).
 
-Next steps:
-    - apply the patch: git am 0001-libwacom-upgrade-2.6.0-2.8.0.patch
-    - check the changes to upstream patches and summarize them in the commit message,
-    - compile an image that contains the package
-    - perform some basic sanity tests
-    - amend the patch and sign it off: git commit -s --reset-author --amend
-    - send it to the appropriate mailing list
+Detailed error information:
 
-Alternatively, if you believe the recipe should not be upgraded at this time,
-you can fill RECIPE_NO_UPDATE_REASON in respective recipe file so that
-automatic upgrades would no longer be attempted.
+The following devtool command failed:  upgrade gtksourceview3 -V 5.10.0
+NOTE: Reconnecting to bitbake server...
+Loading cache...done.
+Loaded 4892 entries from dependency cache.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.6.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "x86_64-poky-linux"
+MACHINE              = "qemux86-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.3+snapshot-e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+TUNE_FEATURES        = "m64 core2"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       
+workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+meta-oe              
+meta-python          
+meta-perl            
+meta-networking      
+meta-multimedia      
+meta-gnome           
+meta-xfce            
+meta-filesystems     
+meta-initramfs       
+meta-webserver       = "tmp-auh-upgrades:c725b43eb12749f3247a5bdddcc98f94e1cd1287"
+
+Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
+done.
+Sstate summary: Wanted 11 Local 11 Mirrors 0 Missed 0 Current 22 (100% match, 100% complete)
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 113 tasks of which 110 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 4 seconds
+Loading cache...done.
+Loaded 4892 entries from dependency cache.
+Parsing recipes...done.
+Parsing of 3056 .bb files complete (3054 cached, 2 parsed). 4887 targets, 92 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.6.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "x86_64-poky-linux"
+MACHINE              = "qemux86-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.3+snapshot-e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+TUNE_FEATURES        = "m64 core2"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       
+workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+meta-oe              
+meta-python          
+meta-perl            
+meta-networking      
+meta-multimedia      
+meta-gnome           
+meta-xfce            
+meta-filesystems     
+meta-initramfs       
+meta-webserver       = "tmp-auh-upgrades:c725b43eb12749f3247a5bdddcc98f94e1cd1287"
+
+Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
+done.
+Sstate summary: Wanted 10 Local 9 Mirrors 0 Missed 1 Current 18 (90% match, 96% complete)
+NOTE: Executing Tasks
+WARNING: Failed to fetch URL http://ftp.gnome.org/pub/gnome/sources/gtksourceview/3.24/gtksourceview-5.10.0.tar.xz, attempting MIRRORS if available
+NOTE: Tasks Summary: Attempted 92 tasks of which 90 didn't need to be rerun and 1 failed.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 4 seconds
+NOTE: The errors for this build are stored in /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231104043405.txt
+You can send the errors to a reports server by running:
+  send-error-report /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231104043405.txt [-s server]
+NOTE: The contents of these logs will be posted in public if you use the above command with the default server. Please ensure you remove any identifying or proprietary information when prompted before sending.
+
+INFO: Extracting current version source...
+INFO: Extracting upgraded version source...
+INFO: Fetching http://ftp.gnome.org/pub/gnome/sources/gtksourceview/3.24/gtksourceview-5.10.0.tar.xz...
+ERROR: Fetcher failure: Fetch command export PSEUDO_DISABLED=1; export SSL_CERT_FILE="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export GIT_SSL_CAINFO="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export ftp_proxy="http://proxy.yocto.io:5187/"; export FTP_PROXY="http://proxy.yocto.io:5187/"; export PATH="/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/sysroots-uninative/x86_64-linux/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-zcqthy2u/work/recipe-sysroot-native/usr/bin/x86_64-poky-linux:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-zcqthy2u/work/recipe-sysroot/usr/bin/crossscripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-zcqthy2u/work/recipe-sysroot-native/usr/sbin:/hom
+ e/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-zcqthy2u/work/recipe-sysroot-native/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-zcqthy2u/work/recipe-sysroot-native/sbin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-zcqthy2u/work/recipe-sysroot-native/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/bitbake/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools"; export HOME="/home/pokybuild"; /usr/bin/env wget -t 2 -T 30 --passive-ftp -O /srv/autobuilder/autobuilder.yocto.io/current_sources/gtksourceview-5.10.0.tar.xz.tmp -P /srv/autobuilder/autobuilder.yocto.io/current_sources 'http://ftp.gnome.org/pub/gnome/sources/gtksourceview/3.24/gtksourceview-5.10.0.tar.xz' --progress=dot -v failed with exit code 8, no output
+ERROR: Bitbake Fetcher Error: FetchError('Unable to fetch URL from any source.', 'http://ftp.gnome.org/pub/gnome/sources/gtksourceview/3.24/gtksourceview-5.10.0.tar.xz')
+ERROR: Logfile of failure stored in: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-zcqthy2u/work/temp/log.do_fetch.1449728
+ERROR: Failed to fetch URL http://ftp.gnome.org/pub/gnome/sources/gtksourceview/3.24/gtksourceview-5.10.0.tar.xz
+
 
 Please review the attached files for further information and build/update failures.
 Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi?product=Automated%20Update%20Handler
 
 Regards,
 The Upgrade Helper
-
--- >8 --
-From 8d506f9a534986c982a8babb2aa34529f0018876 Mon Sep 17 00:00:00 2001
-From: Upgrade Helper <auh@yoctoproject.org>
-Date: Sat, 4 Nov 2023 04:49:38 +0000
-Subject: [PATCH] libwacom: upgrade 2.6.0 -> 2.8.0
-
----
- .../libwacom/{libwacom_2.6.0.bb => libwacom_2.8.0.bb}           | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-support/libwacom/{libwacom_2.6.0.bb => libwacom_2.8.0.bb} (93%)
-
-diff --git a/meta-gnome/recipes-support/libwacom/libwacom_2.6.0.bb b/meta-gnome/recipes-support/libwacom/libwacom_2.8.0.bb
-similarity index 93%
-rename from meta-gnome/recipes-support/libwacom/libwacom_2.6.0.bb
-rename to meta-gnome/recipes-support/libwacom/libwacom_2.8.0.bb
-index d96026241..8f45221ad 100644
---- a/meta-gnome/recipes-support/libwacom/libwacom_2.6.0.bb
-+++ b/meta-gnome/recipes-support/libwacom/libwacom_2.8.0.bb
-@@ -8,7 +8,7 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=40a21fffb367c82f39fd91a3b137c36e"
- 
- SRC_URI = "git://github.com/linuxwacom/libwacom.git;branch=master;protocol=https"
--SRCREV = "cb36c462763a321454d5c08fe974a3d7dec4ed1a"
-+SRCREV = "f5b92814320d0a5745b50b7b36103843ad23e299"
- 
- DEPENDS = " \
-     libxml2-native \
--- 
-2.39.2
-
-
---===============1809471728562423680==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="buildhistory-diff-full.txt"
-
-packages/core2-64-poky-linux/libwacom: PKGV changed from 2.6.0 [default] to 2.8.0 [default]
-packages/core2-64-poky-linux/libwacom: PV changed from "2.6.0" to "2.8.0"
-packages/core2-64-poky-linux/libwacom/libwacom-dbg: PKGV changed from 2.6.0 [default] to 2.8.0 [default]
-packages/core2-64-poky-linux/libwacom/libwacom-dbg: PV changed from "2.6.0" to "2.8.0"
-packages/core2-64-poky-linux/libwacom/libwacom-dbg: PKGSIZE changed from 169608 to 170632 (+1%)
-packages/core2-64-poky-linux/libwacom/libwacom-dev: PKGV changed from 2.6.0 [default] to 2.8.0 [default]
-packages/core2-64-poky-linux/libwacom/libwacom-dev: PV changed from "2.6.0" to "2.8.0"
-packages/core2-64-poky-linux/libwacom/libwacom-doc: PKGV changed from 2.6.0 [default] to 2.8.0 [default]
-packages/core2-64-poky-linux/libwacom/libwacom-doc: PV changed from "2.6.0" to "2.8.0"
-packages/core2-64-poky-linux/libwacom/libwacom-locale: PKGV changed from 2.6.0 [default] to 2.8.0 [default]
-packages/core2-64-poky-linux/libwacom/libwacom-locale: PV changed from "2.6.0" to "2.8.0"
-packages/core2-64-poky-linux/libwacom/libwacom-src: PKGV changed from 2.6.0 [default] to 2.8.0 [default]
-packages/core2-64-poky-linux/libwacom/libwacom-src: PV changed from "2.6.0" to "2.8.0"
-packages/core2-64-poky-linux/libwacom/libwacom-src: PKGSIZE changed from 115462 to 115993 (+0%)
-packages/core2-64-poky-linux/libwacom/libwacom-staticdev: PKGV changed from 2.6.0 [default] to 2.8.0 [default]
-packages/core2-64-poky-linux/libwacom/libwacom-staticdev: PV changed from "2.6.0" to "2.8.0"
-packages/core2-64-poky-linux/libwacom/libwacom: PKGV changed from 2.6.0 [default] to 2.8.0 [default]
-packages/core2-64-poky-linux/libwacom/libwacom: PV changed from "2.6.0" to "2.8.0"
-packages/core2-64-poky-linux/libwacom/libwacom: PKGSIZE changed from 690910 to 710188 (+3%)
-packages/core2-64-poky-linux/libwacom/libwacom: FILELIST: added "/usr/share/libwacom/wacom-one-pen-m.tablet /usr/share/libwacom/wacom-one-pen-s.tablet /usr/share/libwacom/layouts/xp-pen-deco-pro-s-m-sw-mw.svg /usr/share/libwacom/elan-2d55.tablet /usr/share/libwacom/elan-22f7.tablet /usr/share/libwacom/isdv4-52d3.tablet /usr/share/libwacom/isdv4-52d5.tablet /usr/share/libwacom/elan-2c1b.tablet /usr/share/libwacom/layouts/xp-pen-deco-mw.svg /usr/share/libwacom/wacom-one-12.tablet /usr/share/libwacom/wacom-one-13.tablet /usr/share/libwacom/isdv4-2d1f-0040.tablet /usr/share/libwacom/xp-pen-deco-mw.tablet /usr/share/libwacom/xp-pen-deco-pro-sw.tablet /usr/share/libwacom/xp-pen-deco-mini7.tablet /usr/share/libwacom/xp-pen-deco-pro-mw.tablet /usr/share/libwacom/isdv4-121a.tablet"
-Changes to packages/core2-64-poky-linux/libwacom (sysroot):
-  /usr/share/libwacom/elan-22f7.tablet was added
-  /usr/share/libwacom/elan-2c1b.tablet was added
-  /usr/share/libwacom/elan-2d55.tablet was added
-  /usr/share/libwacom/isdv4-121a.tablet was added
-  /usr/share/libwacom/isdv4-2d1f-0040.tablet was added
-  /usr/share/libwacom/isdv4-52d3.tablet was added
-  /usr/share/libwacom/isdv4-52d5.tablet was added
-  /usr/share/libwacom/layouts/xp-pen-deco-mw.svg was added
-  /usr/share/libwacom/layouts/xp-pen-deco-pro-s-m-sw-mw.svg was added
-  /usr/share/libwacom/wacom-one-12.tablet was added
-  /usr/share/libwacom/wacom-one-13.tablet was added
-  /usr/share/libwacom/wacom-one-pen-m.tablet was added
-  /usr/share/libwacom/wacom-one-pen-s.tablet was added
-  /usr/share/libwacom/xp-pen-deco-mini7.tablet was added
-  /usr/share/libwacom/xp-pen-deco-mw.tablet was added
-  /usr/share/libwacom/xp-pen-deco-pro-mw.tablet was added
-  /usr/share/libwacom/xp-pen-deco-pro-sw.tablet was added
-
---===============1809471728562423680==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="buildhistory-diff.txt"
-
-packages/core2-64-poky-linux/libwacom/libwacom: FILELIST: added "/usr/share/libwacom/elan-22f7.tablet /usr/share/libwacom/elan-2c1b.tablet /usr/share/libwacom/elan-2d55.tablet /usr/share/libwacom/layouts/xp-pen-deco-mw.svg /usr/share/libwacom/wacom-one-pen-m.tablet /usr/share/libwacom/wacom-one-pen-s.tablet /usr/share/libwacom/layouts/xp-pen-deco-pro-s-m-sw-mw.svg /usr/share/libwacom/xp-pen-deco-mini7.tablet /usr/share/libwacom/xp-pen-deco-pro-mw.tablet /usr/share/libwacom/xp-pen-deco-pro-sw.tablet /usr/share/libwacom/isdv4-52d5.tablet /usr/share/libwacom/isdv4-52d3.tablet /usr/share/libwacom/isdv4-2d1f-0040.tablet /usr/share/libwacom/wacom-one-12.tablet /usr/share/libwacom/isdv4-121a.tablet /usr/share/libwacom/wacom-one-13.tablet /usr/share/libwacom/xp-pen-deco-mw.tablet"
-Changes to packages/core2-64-poky-linux/libwacom (sysroot):
-  /usr/share/libwacom/elan-22f7.tablet was added
-  /usr/share/libwacom/elan-2c1b.tablet was added
-  /usr/share/libwacom/elan-2d55.tablet was added
-  /usr/share/libwacom/isdv4-121a.tablet was added
-  /usr/share/libwacom/isdv4-2d1f-0040.tablet was added
-  /usr/share/libwacom/isdv4-52d3.tablet was added
-  /usr/share/libwacom/isdv4-52d5.tablet was added
-  /usr/share/libwacom/layouts/xp-pen-deco-mw.svg was added
-  /usr/share/libwacom/layouts/xp-pen-deco-pro-s-m-sw-mw.svg was added
-  /usr/share/libwacom/wacom-one-12.tablet was added
-  /usr/share/libwacom/wacom-one-13.tablet was added
-  /usr/share/libwacom/wacom-one-pen-m.tablet was added
-  /usr/share/libwacom/wacom-one-pen-s.tablet was added
-  /usr/share/libwacom/xp-pen-deco-mini7.tablet was added
-  /usr/share/libwacom/xp-pen-deco-mw.tablet was added
-  /usr/share/libwacom/xp-pen-deco-pro-mw.tablet was added
-  /usr/share/libwacom/xp-pen-deco-pro-sw.tablet was added
-
---===============1809471728562423680==
-Content-Type: application/octet-stream
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment;
- filename="0001-libwacom-upgrade-2.6.0-2.8.0.patch"
-
-RnJvbSA4ZDUwNmY5YTUzNDk4NmM5ODJhOGJhYmIyYWEzNDUyOWYwMDE4ODc2IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBVcGdyYWRlIEhlbHBlciA8YXVoQHlvY3RvcHJvamVjdC5vcmc+
-CkRhdGU6IFNhdCwgNCBOb3YgMjAyMyAwNDo0OTozOCArMDAwMApTdWJqZWN0OiBbUEFUQ0hdIGxp
-YndhY29tOiB1cGdyYWRlIDIuNi4wIC0+IDIuOC4wCgotLS0KIC4uLi9saWJ3YWNvbS97bGlid2Fj
-b21fMi42LjAuYmIgPT4gbGlid2Fjb21fMi44LjAuYmJ9ICAgICAgICAgICB8IDIgKy0KIDEgZmls
-ZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQogcmVuYW1lIG1ldGEtZ25v
-bWUvcmVjaXBlcy1zdXBwb3J0L2xpYndhY29tL3tsaWJ3YWNvbV8yLjYuMC5iYiA9PiBsaWJ3YWNv
-bV8yLjguMC5iYn0gKDkzJSkKCmRpZmYgLS1naXQgYS9tZXRhLWdub21lL3JlY2lwZXMtc3VwcG9y
-dC9saWJ3YWNvbS9saWJ3YWNvbV8yLjYuMC5iYiBiL21ldGEtZ25vbWUvcmVjaXBlcy1zdXBwb3J0
-L2xpYndhY29tL2xpYndhY29tXzIuOC4wLmJiCnNpbWlsYXJpdHkgaW5kZXggOTMlCnJlbmFtZSBm
-cm9tIG1ldGEtZ25vbWUvcmVjaXBlcy1zdXBwb3J0L2xpYndhY29tL2xpYndhY29tXzIuNi4wLmJi
-CnJlbmFtZSB0byBtZXRhLWdub21lL3JlY2lwZXMtc3VwcG9ydC9saWJ3YWNvbS9saWJ3YWNvbV8y
-LjguMC5iYgppbmRleCBkOTYwMjYyNDEuLjhmNDUyMjFhZCAxMDA2NDQKLS0tIGEvbWV0YS1nbm9t
-ZS9yZWNpcGVzLXN1cHBvcnQvbGlid2Fjb20vbGlid2Fjb21fMi42LjAuYmIKKysrIGIvbWV0YS1n
-bm9tZS9yZWNpcGVzLXN1cHBvcnQvbGlid2Fjb20vbGlid2Fjb21fMi44LjAuYmIKQEAgLTgsNyAr
-OCw3IEBAIExJQ0VOU0UgPSAiTUlUIgogTElDX0ZJTEVTX0NIS1NVTSA9ICJmaWxlOi8vQ09QWUlO
-RzttZDU9NDBhMjFmZmZiMzY3YzgyZjM5ZmQ5MWEzYjEzN2MzNmUiCiAKIFNSQ19VUkkgPSAiZ2l0
-Oi8vZ2l0aHViLmNvbS9saW51eHdhY29tL2xpYndhY29tLmdpdDticmFuY2g9bWFzdGVyO3Byb3Rv
-Y29sPWh0dHBzIgotU1JDUkVWID0gImNiMzZjNDYyNzYzYTMyMTQ1NGQ1YzA4ZmU5NzRhM2Q3ZGVj
-NGVkMWEiCitTUkNSRVYgPSAiZjViOTI4MTQzMjBkMGE1NzQ1YjUwYjdiMzYxMDM4NDNhZDIzZTI5
-OSIKIAogREVQRU5EUyA9ICIgXAogICAgIGxpYnhtbDItbmF0aXZlIFwKLS0gCjIuMzkuMgoK
-
---===============1809471728562423680==--
+--===============5761490510873616155==--
 
