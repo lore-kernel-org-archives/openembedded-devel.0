@@ -2,49 +2,49 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B6C96C0018C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DDCF6C001DD
 	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 07:31:00 +0000 (UTC)
-Received: from a27-33.smtp-out.us-west-2.amazonses.com (a27-33.smtp-out.us-west-2.amazonses.com [54.240.27.33])
- by mx.groups.io with SMTP id smtpd.web11.5392.1699083060095099105
+Received: from a27-23.smtp-out.us-west-2.amazonses.com (a27-23.smtp-out.us-west-2.amazonses.com [54.240.27.23])
+ by mx.groups.io with SMTP id smtpd.web11.5393.1699083060403949600
  for <openembedded-devel@lists.openembedded.org>;
  Sat, 04 Nov 2023 00:31:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=eqKKbIzi;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=po2JHDCw;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.33, mailfrom: 0101018b993e0010-f4761dd7-748e-46b7-9532-0249280bedfb-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=CqxXZcPo;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=WTktxWf8;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.23, mailfrom: 0101018b993e017d-f3e738a2-8908-4fbb-87a9-8f7884d0bf89-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
 	t=1699083059;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=zNfsMrCE6xpJvvgvOQi4X0ndGR8bZ+xFB2rrPr/ZnAM=;
-	b=eqKKbIzi40fNl3TfFBRPBTr1hmz1M+LHT5EQXZ58aQkKHkIX5gwKIdIjMounStrY
-	/n+gCImoBuI8mzryfpZJLJuLZ5+9jfctz9EOwcojVqI4cXPxsD2gjfAiw+sfFcREXd6
-	ZLP7Z/TMcKzNYI2vxb2RP5pqBTw8KW/aemIm8Mdw=
+	bh=vXwxMWdP3cJixGatvXX6jXgxjZInrQb5uTnjiEpqQZ0=;
+	b=CqxXZcPoS8LSRdENSBT/s4+B7ivqgINQBWg1agia436vkAfQMrFdKFgVTHUgQw9P
+	na8/X2PPBV7rfxBiKpWMczLwbCAH4ZkT/44YhGdpc6TNf8xP9EpfR0+Rw52AzUHbEty
+	PWtY2abMFYZRTDpKoDSKFuKeecpRQaFF/8OY8MMA=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699083059;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=zNfsMrCE6xpJvvgvOQi4X0ndGR8bZ+xFB2rrPr/ZnAM=;
-	b=po2JHDCw+vwPwXHt55z5EdYn+CcqxBdgMmH24XX2Oglfzb12Bn1SYxeUN34UPZwu
-	dD6R5FEkz6TsO5cdyFRY5Q+trPKNU0CaTw9ESGcFMMd0aPU8tzMdWi1Y3Nsra+ocTJM
-	eGOcejHwUwZA2d6S4CUoM5uw79bBP7wN5Pk2y2C4=
-Content-Type: multipart/mixed; boundary="===============6613551155577859309=="
+	bh=vXwxMWdP3cJixGatvXX6jXgxjZInrQb5uTnjiEpqQZ0=;
+	b=WTktxWf8fqgs58eJS+QWVy+d2tynjTBhxLiPGYyTO2k1QZ7lqvfHoKBkMmre1sOe
+	wfQihLF5UWUrntflkurDqT9NV6pog956n3ctGpXfHJ7aoAM+UTkc/LhvbLpW8BPW62w
+	wpAAx1A35ZoEoOrBMk7XNq+RypNIIw+nor+4heyc=
+Content-Type: multipart/mixed; boundary="===============1775144048222684818=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] parole: upgrading to 4.18.0 SUCCEEDED
-Message-ID: <0101018b993e0010-f4761dd7-748e-46b7-9532-0249280bedfb-000000@us-west-2.amazonses.com>
+Subject: [AUH] xfce4-clipman-plugin: upgrading to 1.6.5 FAILED
+Message-ID: <0101018b993e017d-f3e738a2-8908-4fbb-87a9-8f7884d0bf89-000000@us-west-2.amazonses.com>
 Date: Sat, 4 Nov 2023 07:30:59 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
-X-SES-Outgoing: 2023.11.04-54.240.27.33
+X-SES-Outgoing: 2023.11.04-54.240.27.23
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 07:31:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106304
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106308
 
---===============6613551155577859309==
+--===============1775144048222684818==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,10 +52,16 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *parole* to *4.18.0* has Succeeded.
+that the automatic attempt to upgrade the recipe *xfce4-clipman-plugin* to *1.6.5* has Failed(do_compile).
+
+Detailed error information:
+
+do_compile failed
+
+
 
 Next steps:
-    - apply the patch: git am 0001-parole-upgrade-4.16.0-4.18.0.patch
+    - apply the patch: git am 0001-xfce4-clipman-plugin-upgrade-1.6.2-1.6.5.patch
     - check the changes to upstream patches and summarize them in the commit message,
     - compile an image that contains the package
     - perform some basic sanity tests
@@ -73,234 +79,241 @@ Regards,
 The Upgrade Helper
 
 -- >8 --
-From c9ce4478d6e93d52ac788bde79986c995d421b8c Mon Sep 17 00:00:00 2001
+From 98f5a5fe158ffbe6e0da2ca8180320a3e66928f8 Mon Sep 17 00:00:00 2001
 From: Upgrade Helper <auh@yoctoproject.org>
-Date: Sat, 4 Nov 2023 05:40:13 +0000
-Subject: [PATCH] parole: upgrade 4.16.0 -> 4.18.0
+Date: Sat, 4 Nov 2023 06:07:20 +0000
+Subject: [PATCH] xfce4-clipman-plugin: upgrade 1.6.2 -> 1.6.5
 
 ---
- .../parole/{parole_4.16.0.bb => parole_4.18.0.bb}               | 2 +-
+ ...e4-clipman-plugin_1.6.2.bb => xfce4-clipman-plugin_1.6.5.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-xfce/recipes-multimedia/parole/{parole_4.16.0.bb => parole_4.18.0.bb} (90%)
+ rename meta-xfce/recipes-panel-plugins/clipman/{xfce4-clipman-plugin_1.6.2.bb => xfce4-clipman-plugin_1.6.5.bb} (84%)
 
-diff --git a/meta-xfce/recipes-multimedia/parole/parole_4.16.0.bb b/meta-xfce/recipes-multimedia/parole/parole_4.18.0.bb
-similarity index 90%
-rename from meta-xfce/recipes-multimedia/parole/parole_4.16.0.bb
-rename to meta-xfce/recipes-multimedia/parole/parole_4.18.0.bb
-index 04aabe0c7..e2c7a012c 100644
---- a/meta-xfce/recipes-multimedia/parole/parole_4.16.0.bb
-+++ b/meta-xfce/recipes-multimedia/parole/parole_4.18.0.bb
-@@ -16,7 +16,7 @@ DEPENDS += " \
-     taglib \
- "
+diff --git a/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.2.bb b/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.5.bb
+similarity index 84%
+rename from meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.2.bb
+rename to meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.5.bb
+index 39a8f2edf..865a34bd5 100644
+--- a/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.2.bb
++++ b/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.5.bb
+@@ -8,7 +8,7 @@ inherit xfce-panel-plugin
  
--SRC_URI[sha256sum] = "0d305ad8ccd3974d6b632f74325b1b8a39304c905c6b405b70f52c4cfd55a7e7"
-+SRC_URI[sha256sum] = "bbe52fbc4d3abe30f6c79fc7ac57bd9de9cf74ce1a79b508a1d7de83dc4f3771"
+ DEPENDS += "xfconf xorgproto libxtst"
  
- RDEPENDS:${PN} += "gstreamer1.0-plugins-good"
+-SRC_URI[sha256sum] = "ab8a5fe6f68fb1789190e498243a1d1385de3f64e984f470cbd3d1eb779399b8"
++SRC_URI[sha256sum] = "73156d66c1f866d2af0c20526c5ce58aedbce511b89bb436ba9bc6413fac5190"
  
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[qrencode] = "--enable-libqrencode,--disable-libqrencode,qrencode"
 -- 
 2.39.2
 
 
---===============6613551155577859309==
+--===============1775144048222684818==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="bitbake-output-qemux86-64.txt"
+
+NOTE: Reconnecting to bitbake server...
+Loading cache...done.
+Loaded 4920 entries from dependency cache.
+Parsing recipes...done.
+Parsing of 3055 .bb files complete (3054 cached, 1 parsed). 4886 targets, 92 skipped, 0 masked, 0 errors.
+Removing 1 recipes from the core2-64 sysroot...done.
+Removing 1 recipes from the qemux86_64 sysroot...done.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.6.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "x86_64-poky-linux"
+MACHINE              = "qemux86-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.3+snapshot-e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+TUNE_FEATURES        = "m64 core2"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       
+workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+meta-oe              
+meta-python          
+meta-perl            
+meta-networking      
+meta-multimedia      
+meta-gnome           
+meta-xfce            
+meta-filesystems     
+meta-initramfs       
+meta-webserver       = "tmp-auh-upgrades:cb22fc1708e5e465748e9beb053a64b46e996209"
+
+Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
+done.
+Sstate summary: Wanted 593 Local 584 Mirrors 0 Missed 9 Current 618 (98% match, 99% complete)
+NOTE: Executing Tasks
+NOTE: Running setscene task 627 of 1211 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.5.bb:do_populate_lic_setscene)
+NOTE: Running setscene task 629 of 1211 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.5.bb:do_deploy_source_date_epoch_setscene)
+NOTE: Running setscene task 630 of 1211 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.18.3.bb:do_create_spdx_setscene)
+NOTE: recipe xfce4-clipman-plugin-1.6.5-r0: task do_deploy_source_date_epoch_setscene: Started
+NOTE: recipe xfce4-clipman-plugin-1.6.5-r0: task do_populate_lic_setscene: Started
+NOTE: recipe xfce4-panel-4.18.3-r0: task do_create_spdx_setscene: Started
+NOTE: recipe xfce4-clipman-plugin-1.6.5-r0: task do_deploy_source_date_epoch_setscene: Succeeded
+NOTE: recipe xfce4-clipman-plugin-1.6.5-r0: task do_populate_lic_setscene: Succeeded
+NOTE: Running setscene task 812 of 1211 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.5.bb:do_recipe_qa_setscene)
+NOTE: recipe xfce4-panel-4.18.3-r0: task do_create_spdx_setscene: Succeeded
+NOTE: Running setscene task 822 of 1211 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.18.3.bb:do_create_spdx_setscene)
+NOTE: recipe xfce4-clipman-plugin-1.6.5-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe libxfce4ui-4.18.3-r0: task do_create_spdx_setscene: Started
+NOTE: recipe xfce4-clipman-plugin-1.6.5-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running task 584 of 3313 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.5.bb:do_fetch)
+NOTE: recipe libxfce4ui-4.18.3-r0: task do_create_spdx_setscene: Succeeded
+NOTE: Running setscene task 840 of 1211 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/xfconf/xfconf_4.18.0.bb:do_create_spdx_setscene)
+NOTE: recipe xfce4-clipman-plugin-1.6.5-r0: task do_fetch: Started
+NOTE: recipe xfce4-clipman-plugin-1.6.5-r0: task do_fetch: Succeeded
+NOTE: Running task 592 of 3313 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.5.bb:do_unpack)
+NOTE: recipe xfconf-4.18.0-r0: task do_create_spdx_setscene: Started
+NOTE: recipe xfce4-clipman-plugin-1.6.5-r0: task do_unpack: Started
+NOTE: recipe xfconf-4.18.0-r0: task do_create_spdx_setscene: Succeeded
+NOTE: Running setscene task 847 of 1211 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/libxfce4util/libxfce4util_4.18.1.bb:do_create_spdx_setscene)
+NOTE: recipe xfce4-clipman-plugin-1.6.5-r0: task do_unpack: Succeeded
+NOTE: recipe libxfce4util-4.18.1-r0: task do_create_spdx_setscene: Started
+NOTE: recipe libxfce4util-4.18.1-r0: task do_create_spdx_setscene: Succeeded
+NOTE: Running setscene task 863 of 1211 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-gnome/gtk+/gtk+3_3.24.38.bb:do_create_spdx_setscene)
+NOTE: Running setscene task 864 of 1211 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-gnome/hicolor-icon-theme/hicolor-icon-theme_0.17.bb:do_create_spdx_setscene)
+NOTE: recipe hicolor-icon-theme-0.17-r0: task do_create_spdx_setscene: Started
+NOTE: recipe gtk+3-3.24.38-r0: task do_create_spdx_setscene: Started
+NOTE: recipe hicolor-icon-theme-0.17-r0: task do_create_spdx_setscene: Succeeded
+NOTE: recipe gtk+3-3.24.38-r0: task do_create_spdx_setscene: Succeeded
+NOTE: Running setscene task 867 of 1211 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-gnome/gdk-pixbuf/gdk-pixbuf_2.42.10.bb:do_create_spdx_setscene)
+NOTE: Running setscene task 974 of 1211 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-graphics/xorg-lib/libxtst_1.2.4.bb:do_create_spdx_setscene)
+NOTE: recipe gdk-pixbuf-2.42.10-r0: task do_create_spdx_setscene: Started
+NOTE: recipe libxtst-1_1.2.4-r0: task do_create_spdx_setscene: Started
+NOTE: recipe gdk-pixbuf-2.42.10-r0: task do_create_spdx_setscene: Succeeded
+NOTE: recipe libxtst-1_1.2.4-r0: task do_create_spdx_setscene: Succeeded
+NOTE: Running setscene task 1100 of 1211 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-graphics/xorg-proto/xorgproto_2023.2.bb:do_create_spdx_setscene)
+NOTE: Running setscene task 1131 of 1211 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/libtool/libtool-cross_2.4.7.bb:do_create_spdx_setscene)
+NOTE: Running setscene task 1133 of 1211 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/libtool/libtool-cross_2.4.7.bb:do_populate_sysroot_setscene)
+NOTE: recipe libtool-cross-2.4.7-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libtool-cross-2.4.7-r0: task do_create_spdx_setscene: Started
+NOTE: recipe xorgproto-2023.2-r0: task do_create_spdx_setscene: Started
+NOTE: recipe libtool-cross-2.4.7-r0: task do_create_spdx_setscene: Succeeded
+NOTE: recipe xorgproto-2023.2-r0: task do_create_spdx_setscene: Succeeded
+NOTE: Running setscene task 1161 of 1211 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/gcc/gcc-runtime_13.2.bb:do_create_spdx_setscene)
+NOTE: recipe libtool-cross-2.4.7-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 1165 of 1211 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/libtool/libtool-cross_2.4.7.bb:do_recipe_qa_setscene)
+NOTE: recipe libtool-cross-2.4.7-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe gcc-runtime-13.2.0-r0: task do_create_spdx_setscene: Started
+NOTE: recipe libtool-cross-2.4.7-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe gcc-runtime-13.2.0-r0: task do_create_spdx_setscene: Succeeded
+NOTE: Running setscene task 1169 of 1211 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/glibc/glibc_2.38.bb:do_create_spdx_setscene)
+NOTE: recipe glibc-2.38+git-r0: task do_create_spdx_setscene: Started
+NOTE: recipe glibc-2.38+git-r0: task do_create_spdx_setscene: Succeeded
+NOTE: Running setscene task 1176 of 1211 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/gcc/gcc-cross_13.2.bb:do_create_spdx_setscene)
+NOTE: Running setscene task 1178 of 1211 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/gcc/gcc-cross_13.2.bb:do_populate_sysroot_setscene)
+NOTE: recipe gcc-cross-x86_64-13.2.0-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe gcc-cross-x86_64-13.2.0-r0: task do_create_spdx_setscene: Started
+NOTE: recipe gcc-cross-x86_64-13.2.0-r0: task do_create_spdx_setscene: Succeeded
+NOTE: Running task 2270 of 3313 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.5.bb:do_patch)
+NOTE: recipe xfce4-clipman-plugin-1.6.5-r0: task do_patch: Started
+NOTE: recipe xfce4-clipman-plugin-1.6.5-r0: task do_patch: Succeeded
+NOTE: recipe gcc-cross-x86_64-13.2.0-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 1206 of 1211 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/binutils/binutils-cross_2.41.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 1208 of 1211 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/gcc/gcc-cross_13.2.bb:do_recipe_qa_setscene)
+NOTE: recipe gcc-cross-x86_64-13.2.0-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe binutils-cross-x86_64-2.41-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe gcc-cross-x86_64-13.2.0-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe binutils-cross-x86_64-2.41-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 1211 of 1211 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/binutils/binutils-cross_2.41.bb:do_recipe_qa_setscene)
+NOTE: recipe binutils-cross-x86_64-2.41-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe binutils-cross-x86_64-2.41-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Setscene tasks completed
+NOTE: Running task 3275 of 3313 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.5.bb:do_prepare_recipe_sysroot)
+NOTE: Running task 3300 of 3313 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.5.bb:do_collect_spdx_deps)
+NOTE: recipe xfce4-clipman-plugin-1.6.5-r0: task do_prepare_recipe_sysroot: Started
+NOTE: recipe xfce4-clipman-plugin-1.6.5-r0: task do_collect_spdx_deps: Started
+NOTE: recipe xfce4-clipman-plugin-1.6.5-r0: task do_prepare_recipe_sysroot: Succeeded
+NOTE: recipe xfce4-clipman-plugin-1.6.5-r0: task do_collect_spdx_deps: Succeeded
+NOTE: Running task 3301 of 3313 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.5.bb:do_configure)
+NOTE: recipe xfce4-clipman-plugin-1.6.5-r0: task do_configure: Started
+NOTE: recipe xfce4-clipman-plugin-1.6.5-r0: task do_configure: Succeeded
+NOTE: Running task 3302 of 3313 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.5.bb:do_compile)
+NOTE: recipe xfce4-clipman-plugin-1.6.5-r0: task do_compile: Started
+Log data follows:
+| DEBUG: Executing python function autotools_aclocals
+| DEBUG: SITE files ['endian-little', 'common-linux', 'common-glibc', 'bit-64', 'x86_64-linux', 'common']
+| DEBUG: Python function autotools_aclocals finished
+| DEBUG: Executing shell function do_compile
+| NOTE: make -j 16 -l 52
+| make  all-recursive
+| make[1]: Entering directory '/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-clipman-plugin/1.6.5/build'
+| Making all in protocols
+| make[2]: Entering directory '/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-clipman-plugin/1.6.5/build/protocols'
+| wayland-scanner client-header ../../xfce4-clipman-plugin-1.6.5/protocols/wlr-data-control-unstable-v1.xml wlr-data-control-unstable-v1-client.h
+| /bin/bash: wayland-scanner: command not found
+| make[2]: *** [Makefile:733: wlr-data-control-unstable-v1-client.h] Error 127
+| make[2]: Leaving directory '/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-clipman-plugin/1.6.5/build/protocols'
+| make[1]: Leaving directory '/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-clipman-plugin/1.6.5/build'
+| make[1]: *** [Makefile:502: all-recursive] Error 1
+| make: *** [Makefile:434: all] Error 2
+| ERROR: oe_runmake failed
+| WARNING: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-clipman-plugin/1.6.5/temp/run.do_compile.2216142:183 exit 1 from 'exit 1'
+| WARNING: Backtrace (BB generated script):
+| 	#1: bbfatal_log, /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-clipman-plugin/1.6.5/temp/run.do_compile.2216142, line 183
+| 	#2: die, /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-clipman-plugin/1.6.5/temp/run.do_compile.2216142, line 167
+| 	#3: oe_runmake, /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-clipman-plugin/1.6.5/temp/run.do_compile.2216142, line 162
+| 	#4: autotools_do_compile, /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-clipman-plugin/1.6.5/temp/run.do_compile.2216142, line 157
+| 	#5: do_compile, /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-clipman-plugin/1.6.5/temp/run.do_compile.2216142, line 152
+| 	#6: main, /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-clipman-plugin/1.6.5/temp/run.do_compile.2216142, line 196
+NOTE: recipe xfce4-clipman-plugin-1.6.5-r0: task do_compile: Failed
+NOTE: Tasks Summary: Attempted 3302 tasks of which 3295 didn't need to be rerun and 1 failed.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 4 seconds
+NOTE: The errors for this build are stored in /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231104060646.txt
+You can send the errors to a reports server by running:
+  send-error-report /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231104060646.txt [-s server]
+NOTE: The contents of these logs will be posted in public if you use the above command with the default server. Please ensure you remove any identifying or proprietary information when prompted before sending.
+
+Summary: 1 task failed:
+  /home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.5.bb:do_compile
+Summary: There were 2 ERROR messages, returning a non-zero exit code.
+ERROR: xfce4-clipman-plugin-1.6.5-r0 do_compile: oe_runmake failed
+ERROR: xfce4-clipman-plugin-1.6.5-r0 do_compile: ExecutionError('/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-clipman-plugin/1.6.5/temp/run.do_compile.2216142', 1, None, None)
+ERROR: Logfile of failure stored in: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-clipman-plugin/1.6.5/temp/log.do_compile.2216142
+ERROR: Task (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.5.bb:do_compile) failed with exit code '1'
+
+--===============1775144048222684818==
 Content-Type: application/octet-stream
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment;
- filename="0001-parole-upgrade-4.16.0-4.18.0.patch"
+ filename="0001-xfce4-clipman-plugin-upgrade-1.6.2-1.6.5.patch"
 
-RnJvbSBjOWNlNDQ3OGQ2ZTkzZDUyYWM3ODhiZGU3OTk4NmM5OTVkNDIxYjhjIE1vbiBTZXAgMTcg
+RnJvbSA5OGY1YTVmZTE1OGZmYmU2ZTBkYTJjYTgxODAzMjBhM2U2NjkyOGY4IE1vbiBTZXAgMTcg
 MDA6MDA6MDAgMjAwMQpGcm9tOiBVcGdyYWRlIEhlbHBlciA8YXVoQHlvY3RvcHJvamVjdC5vcmc+
-CkRhdGU6IFNhdCwgNCBOb3YgMjAyMyAwNTo0MDoxMyArMDAwMApTdWJqZWN0OiBbUEFUQ0hdIHBh
-cm9sZTogdXBncmFkZSA0LjE2LjAgLT4gNC4xOC4wCgotLS0KIC4uLi9wYXJvbGUve3Bhcm9sZV80
-LjE2LjAuYmIgPT4gcGFyb2xlXzQuMTguMC5iYn0gICAgICAgICAgICAgICB8IDIgKy0KIDEgZmls
-ZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQogcmVuYW1lIG1ldGEteGZj
-ZS9yZWNpcGVzLW11bHRpbWVkaWEvcGFyb2xlL3twYXJvbGVfNC4xNi4wLmJiID0+IHBhcm9sZV80
-LjE4LjAuYmJ9ICg5MCUpCgpkaWZmIC0tZ2l0IGEvbWV0YS14ZmNlL3JlY2lwZXMtbXVsdGltZWRp
-YS9wYXJvbGUvcGFyb2xlXzQuMTYuMC5iYiBiL21ldGEteGZjZS9yZWNpcGVzLW11bHRpbWVkaWEv
-cGFyb2xlL3Bhcm9sZV80LjE4LjAuYmIKc2ltaWxhcml0eSBpbmRleCA5MCUKcmVuYW1lIGZyb20g
-bWV0YS14ZmNlL3JlY2lwZXMtbXVsdGltZWRpYS9wYXJvbGUvcGFyb2xlXzQuMTYuMC5iYgpyZW5h
-bWUgdG8gbWV0YS14ZmNlL3JlY2lwZXMtbXVsdGltZWRpYS9wYXJvbGUvcGFyb2xlXzQuMTguMC5i
-YgppbmRleCAwNGFhYmUwYzcuLmUyYzdhMDEyYyAxMDA2NDQKLS0tIGEvbWV0YS14ZmNlL3JlY2lw
-ZXMtbXVsdGltZWRpYS9wYXJvbGUvcGFyb2xlXzQuMTYuMC5iYgorKysgYi9tZXRhLXhmY2UvcmVj
-aXBlcy1tdWx0aW1lZGlhL3Bhcm9sZS9wYXJvbGVfNC4xOC4wLmJiCkBAIC0xNiw3ICsxNiw3IEBA
-IERFUEVORFMgKz0gIiBcCiAgICAgdGFnbGliIFwKICIKIAotU1JDX1VSSVtzaGEyNTZzdW1dID0g
-IjBkMzA1YWQ4Y2NkMzk3NGQ2YjYzMmY3NDMyNWIxYjhhMzkzMDRjOTA1YzZiNDA1YjcwZjUyYzRj
-ZmQ1NWE3ZTciCitTUkNfVVJJW3NoYTI1NnN1bV0gPSAiYmJlNTJmYmM0ZDNhYmUzMGY2Yzc5ZmM3
-YWM1N2JkOWRlOWNmNzRjZTFhNzliNTA4YTFkN2RlODNkYzRmMzc3MSIKIAogUkRFUEVORFM6JHtQ
-Tn0gKz0gImdzdHJlYW1lcjEuMC1wbHVnaW5zLWdvb2QiCiAKLS0gCjIuMzkuMgoK
+CkRhdGU6IFNhdCwgNCBOb3YgMjAyMyAwNjowNzoyMCArMDAwMApTdWJqZWN0OiBbUEFUQ0hdIHhm
+Y2U0LWNsaXBtYW4tcGx1Z2luOiB1cGdyYWRlIDEuNi4yIC0+IDEuNi41CgotLS0KIC4uLmU0LWNs
+aXBtYW4tcGx1Z2luXzEuNi4yLmJiID0+IHhmY2U0LWNsaXBtYW4tcGx1Z2luXzEuNi41LmJifSB8
+IDIgKy0KIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQogcmVu
+YW1lIG1ldGEteGZjZS9yZWNpcGVzLXBhbmVsLXBsdWdpbnMvY2xpcG1hbi97eGZjZTQtY2xpcG1h
+bi1wbHVnaW5fMS42LjIuYmIgPT4geGZjZTQtY2xpcG1hbi1wbHVnaW5fMS42LjUuYmJ9ICg4NCUp
+CgpkaWZmIC0tZ2l0IGEvbWV0YS14ZmNlL3JlY2lwZXMtcGFuZWwtcGx1Z2lucy9jbGlwbWFuL3hm
+Y2U0LWNsaXBtYW4tcGx1Z2luXzEuNi4yLmJiIGIvbWV0YS14ZmNlL3JlY2lwZXMtcGFuZWwtcGx1
+Z2lucy9jbGlwbWFuL3hmY2U0LWNsaXBtYW4tcGx1Z2luXzEuNi41LmJiCnNpbWlsYXJpdHkgaW5k
+ZXggODQlCnJlbmFtZSBmcm9tIG1ldGEteGZjZS9yZWNpcGVzLXBhbmVsLXBsdWdpbnMvY2xpcG1h
+bi94ZmNlNC1jbGlwbWFuLXBsdWdpbl8xLjYuMi5iYgpyZW5hbWUgdG8gbWV0YS14ZmNlL3JlY2lw
+ZXMtcGFuZWwtcGx1Z2lucy9jbGlwbWFuL3hmY2U0LWNsaXBtYW4tcGx1Z2luXzEuNi41LmJiCmlu
+ZGV4IDM5YThmMmVkZi4uODY1YTM0YmQ1IDEwMDY0NAotLS0gYS9tZXRhLXhmY2UvcmVjaXBlcy1w
+YW5lbC1wbHVnaW5zL2NsaXBtYW4veGZjZTQtY2xpcG1hbi1wbHVnaW5fMS42LjIuYmIKKysrIGIv
+bWV0YS14ZmNlL3JlY2lwZXMtcGFuZWwtcGx1Z2lucy9jbGlwbWFuL3hmY2U0LWNsaXBtYW4tcGx1
+Z2luXzEuNi41LmJiCkBAIC04LDcgKzgsNyBAQCBpbmhlcml0IHhmY2UtcGFuZWwtcGx1Z2luCiAK
+IERFUEVORFMgKz0gInhmY29uZiB4b3JncHJvdG8gbGlieHRzdCIKIAotU1JDX1VSSVtzaGEyNTZz
+dW1dID0gImFiOGE1ZmU2ZjY4ZmIxNzg5MTkwZTQ5ODI0M2ExZDEzODVkZTNmNjRlOTg0ZjQ3MGNi
+ZDNkMWViNzc5Mzk5YjgiCitTUkNfVVJJW3NoYTI1NnN1bV0gPSAiNzMxNTZkNjZjMWY4NjZkMmFm
+MGMyMDUyNmM1Y2U1OGFlZGJjZTUxMWI4OWJiNDM2YmE5YmM2NDEzZmFjNTE5MCIKIAogUEFDS0FH
+RUNPTkZJRyA/Pz0gIiIKIFBBQ0tBR0VDT05GSUdbcXJlbmNvZGVdID0gIi0tZW5hYmxlLWxpYnFy
+ZW5jb2RlLC0tZGlzYWJsZS1saWJxcmVuY29kZSxxcmVuY29kZSIKLS0gCjIuMzkuMgoK
 
---===============6613551155577859309==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="buildhistory-diff-full.txt"
-
-packages/core2-64-poky-linux/parole: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole: SRC_URI changed from "http://archive.xfce.org/src/apps/parole/4.16/parole-4.16.0.tar.bz2" to "http://archive.xfce.org/src/apps/parole/4.18/parole-4.18.0.tar.bz2"
-packages/core2-64-poky-linux/parole/parole-dbg: PKGSIZE changed from 1418544 to 1421128 (+0%)
-packages/core2-64-poky-linux/parole/parole-dbg: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-dbg: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-dev: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-dev: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-doc: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-doc: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-ar: PKGSIZE changed from 17999 to 17105 (-5%)
-packages/core2-64-poky-linux/parole/parole-locale-ar: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-ar: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-ast: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-ast: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-be: PKGSIZE changed from 30454 to 30969 (+2%)
-packages/core2-64-poky-linux/parole/parole-locale-be: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-be: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-bg: PKGSIZE changed from 30098 to 31742 (+5%)
-packages/core2-64-poky-linux/parole/parole-locale-bg: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-bg: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-ca: PKGSIZE changed from 24697 to 24699 (+0%)
-packages/core2-64-poky-linux/parole/parole-locale-ca: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-ca: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-cs: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-cs: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-da: PKGSIZE changed from 22701 to 23530 (+4%)
-packages/core2-64-poky-linux/parole/parole-locale-da: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-da: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-de: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-de: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-el: PKGSIZE changed from 24339 to 32391 (+33%)
-packages/core2-64-poky-linux/parole/parole-locale-el: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-el: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-en-au: PKGSIZE changed from 21272 to 20567 (-3%)
-packages/core2-64-poky-linux/parole/parole-locale-en-au: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-en-au: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-en-gb: PKGSIZE changed from 21786 to 21031 (-3%)
-packages/core2-64-poky-linux/parole/parole-locale-en-gb: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-en-gb: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-es: PKGSIZE changed from 25289 to 25307 (+0%)
-packages/core2-64-poky-linux/parole/parole-locale-es: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-es: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-et: PKGSIZE changed from 23174 to 24166 (+4%)
-packages/core2-64-poky-linux/parole/parole-locale-et: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-et: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-eu: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-eu: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-fi: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-fi: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-fr: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-fr: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-gl: PKGSIZE changed from 23586 to 24782 (+5%)
-packages/core2-64-poky-linux/parole/parole-locale-gl: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-gl: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-he: PKGSIZE changed from 26336 to 26351 (+0%)
-packages/core2-64-poky-linux/parole/parole-locale-he: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-he: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-hr: PKGSIZE changed from 23070 to 22459 (-3%)
-packages/core2-64-poky-linux/parole/parole-locale-hr: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-hr: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-hu: PKGSIZE changed from 23737 to 22999 (-3%)
-packages/core2-64-poky-linux/parole/parole-locale-hu: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-hu: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-hy-am: PKGSIZE changed from 29352 to 28450 (-3%)
-packages/core2-64-poky-linux/parole/parole-locale-hy-am: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-hy-am: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-hye: PKGSIZE changed from 29346 to 28432 (-3%)
-packages/core2-64-poky-linux/parole/parole-locale-hye: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-hye: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-id: PKGSIZE changed from 22624 to 23478 (+4%)
-packages/core2-64-poky-linux/parole/parole-locale-id: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-id: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-ie: PKGSIZE changed from 18836 to 18108 (-4%)
-packages/core2-64-poky-linux/parole/parole-locale-ie: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-ie: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-is: PKGSIZE changed from 22830 to 22054 (-3%)
-packages/core2-64-poky-linux/parole/parole-locale-is: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-is: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-it: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-it: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-ja: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-ja: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-kk: PKGSIZE changed from 16952 to 18199 (+7%)
-packages/core2-64-poky-linux/parole/parole-locale-kk: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-kk: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-ko: PKGSIZE changed from 24014 to 25114 (+5%)
-packages/core2-64-poky-linux/parole/parole-locale-ko: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-ko: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-lt: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-lt: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-lv: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-lv: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-ms: PKGSIZE changed from 22391 to 23285 (+4%)
-packages/core2-64-poky-linux/parole/parole-locale-ms: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-ms: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-nb: PKGSIZE changed from 23346 to 23335 (-0%)
-packages/core2-64-poky-linux/parole/parole-locale-nb: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-nb: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-nl: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-nl: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-nn: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-nn: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-oc: PKGSIZE changed from 15472 to 15073 (-3%)
-packages/core2-64-poky-linux/parole/parole-locale-oc: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-oc: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-pl: PKGSIZE changed from 24153 to 25103 (+4%)
-packages/core2-64-poky-linux/parole/parole-locale-pl: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-pl: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-pt-br: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-pt-br: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-pt: PKGSIZE changed from 24336 to 24341 (+0%)
-packages/core2-64-poky-linux/parole/parole-locale-pt: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-pt: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-ru: PKGSIZE changed from 29808 to 31938 (+7%)
-packages/core2-64-poky-linux/parole/parole-locale-ru: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-ru: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-sk: PKGSIZE changed from 22118 to 22025 (-0%)
-packages/core2-64-poky-linux/parole/parole-locale-sk: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-sk: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-sl: PKGSIZE changed from 22784 to 23647 (+4%)
-packages/core2-64-poky-linux/parole/parole-locale-sl: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-sl: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-sq: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-sq: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-sr: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-sr: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-sv: PKGSIZE changed from 22273 to 23427 (+5%)
-packages/core2-64-poky-linux/parole/parole-locale-sv: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-sv: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-te: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-te: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-th: PKGSIZE changed from 32877 to 34350 (+4%)
-packages/core2-64-poky-linux/parole/parole-locale-th: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-th: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-tr: PKGSIZE changed from 23709 to 23702 (-0%)
-packages/core2-64-poky-linux/parole/parole-locale-tr: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-tr: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-ug: PKGSIZE changed from 12501 to 11865 (-5%)
-packages/core2-64-poky-linux/parole/parole-locale-ug: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-ug: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-uk: PKGSIZE changed from 28786 to 30547 (+6%)
-packages/core2-64-poky-linux/parole/parole-locale-uk: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-uk: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-zh-cn: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-zh-cn: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-locale-zh-tw: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-locale-zh-tw: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-src: PKGSIZE changed from 922062 to 922749 (+0%)
-packages/core2-64-poky-linux/parole/parole-src: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-src: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole-staticdev: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole-staticdev: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-packages/core2-64-poky-linux/parole/parole: PKGSIZE changed from 850609 to 867361 (+2%)
-packages/core2-64-poky-linux/parole/parole: PV changed from "4.16.0" to "4.18.0"
-packages/core2-64-poky-linux/parole/parole: PKGV changed from 4.16.0 [default] to 4.18.0 [default]
-
---===============6613551155577859309==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="buildhistory-diff.txt"
-
-packages/core2-64-poky-linux/parole/parole-locale-el: PKGSIZE changed from 24339 to 32391 (+33%)
-
---===============6613551155577859309==--
+--===============1775144048222684818==--
 
