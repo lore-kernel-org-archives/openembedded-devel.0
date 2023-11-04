@@ -1,88 +1,148 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D683C0018A
-	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 07:33:32 +0000 (UTC)
-Received: from mailout10.t-online.de (mailout10.t-online.de [194.25.134.21])
- by mx.groups.io with SMTP id smtpd.web11.5418.1699083208717443799
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DC08DC4167B
+	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 07:48:12 +0000 (UTC)
+Received: from a27-31.smtp-out.us-west-2.amazonses.com (a27-31.smtp-out.us-west-2.amazonses.com [54.240.27.31])
+ by mx.groups.io with SMTP id smtpd.web10.5664.1699084092086559620
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 04 Nov 2023 00:33:29 -0700
+ Sat, 04 Nov 2023 00:48:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.21, mailfrom: f_l_k@t-online.de)
-Received: from fwd81.aul.t-online.de (fwd81.aul.t-online.de [10.223.144.107])
-	by mailout10.t-online.de (Postfix) with SMTP id 7EF4633077
-	for <openembedded-devel@lists.openembedded.org>; Sat,  4 Nov 2023 08:33:26 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.163.35.165]) by fwd81.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1qzB9p-1L3atA0; Sat, 4 Nov 2023 08:33:25 +0100
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH 4/5] dconf-editor: Upgrade 43 -> 45.0.1
-Date: Sat,  4 Nov 2023 08:33:47 +0100
-Message-ID: <20231104073348.132975-4-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20231104073348.132975-1-f_l_k@t-online.de>
-References: <20231104073348.132975-1-f_l_k@t-online.de>
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=cEKhk+O9;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=LRAEdLXK;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.31, mailfrom: 0101018b994dbf37-23af550c-7185-4196-8fe7-b5155aecdd5a-000000@us-west-2.amazonses.com)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
+	t=1699084091;
+	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
+	bh=by2DJSGKUBi8xKi4YJQIr4YKLxD8lgF5hBGS70Si32M=;
+	b=cEKhk+O9/1jrNGiCk5hoDdqu2c+CLJFma4W8885p4HIihKz6mN1Gc4N8VoejCdXC
+	cmZbrY9xcs8WR4FgRbbTtvJjnUf98Uy1uiQu10qZdJG0CYDDpjO/OxC0Yjr/izjbB+S
+	GlKOpwqzT6t9WBqAz7DquYRmbInjqzhq5b8ey5ms=
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699084091;
+	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
+	bh=by2DJSGKUBi8xKi4YJQIr4YKLxD8lgF5hBGS70Si32M=;
+	b=LRAEdLXKe7OkXcJiyOJd8cuv0jPvJPLZH/BJGMPnKlPqpaTXO/o85vFRfw/pnrCs
+	nKlWtKYAxq0HcUULgA51H7+YLkwrAImyP84kdUd9ZaIqPuJ+BQ4PAZ6JT4YemSc4bPm
+	nt58YWF2wWC7FuCASwu4i3BTRrabfYbNDvvrwVoY=
+Content-Type: multipart/mixed; boundary="===============5157719027109496715=="
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1699083205-CF573E93-F0379FC9/0/0 CLEAN NORMAL
-X-TOI-MSGID: 293002a7-431c-463e-8709-056d15b06a74
-Content-Transfer-Encoding: quoted-printable
+From: auh@yoctoproject.org
+To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
+	for@yoctoproject.org, AUH@yoctoproject.org
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [AUH] ufs-utils: upgrading to
+ faf0fe153547f5d02315fa82159f925f0c9daef8 SUCCEEDED
+Message-ID: <0101018b994dbf37-23af550c-7185-4196-8fe7-b5155aecdd5a-000000@us-west-2.amazonses.com>
+Date: Sat, 4 Nov 2023 07:48:11 +0000
+Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
+X-SES-Outgoing: 2023.11.04-54.240.27.31
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 07:33:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106353
+ <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 07:48:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106355
 
-dconf-editor 45.0.1
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+--===============5157719027109496715==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
 
-Fix string freeze break
+Hello,
 
-dconf-editor 45.0
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+this email is a notification from the Auto Upgrade Helper
+that the automatic attempt to upgrade the recipe *ufs-utils* to *faf0fe153547f5d02315fa82159f925f0c9daef8* has Succeeded.
 
-Fix UI not displaying with latest GTK
-Misc fixes and translation updates
+Next steps:
+    - apply the patch: git am 0001-ufs-utils-upgrade-to-latest-revision.patch
+    - check the changes to upstream patches and summarize them in the commit message,
+    - compile an image that contains the package
+    - perform some basic sanity tests
+    - amend the patch and sign it off: git commit -s --reset-author --amend
+    - send it to the appropriate mailing list
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Alternatively, if you believe the recipe should not be upgraded at this time,
+you can fill RECIPE_NO_UPDATE_REASON in respective recipe file so that
+automatic upgrades would no longer be attempted.
+
+Please review the attached files for further information and build/update failures.
+Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi?product=Automated%20Update%20Handler
+
+Regards,
+The Upgrade Helper
+
+-- >8 --
+From 9a3b2ab404657299eea25ddc48f80f2d3c6513d6 Mon Sep 17 00:00:00 2001
+From: Upgrade Helper <auh@yoctoproject.org>
+Date: Sat, 4 Nov 2023 07:32:13 +0000
+Subject: [PATCH] ufs-utils: upgrade to latest revision
+
 ---
- .../dconf/{dconf-editor_43.0.bb =3D> dconf-editor_45.0.1.bb}    | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/dconf/{dconf-editor_43.0.bb =3D> dconf-e=
-ditor_45.0.1.bb} (63%)
+ meta-filesystems/recipes-utils/ufs-utils/ufs-utils_3.12.3.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/dconf/dconf-editor_43.0.bb b/meta-g=
-nome/recipes-gnome/dconf/dconf-editor_45.0.1.bb
-similarity index 63%
-rename from meta-gnome/recipes-gnome/dconf/dconf-editor_43.0.bb
-rename to meta-gnome/recipes-gnome/dconf/dconf-editor_45.0.1.bb
-index 5b3764560..31226ef44 100644
---- a/meta-gnome/recipes-gnome/dconf/dconf-editor_43.0.bb
-+++ b/meta-gnome/recipes-gnome/dconf/dconf-editor_45.0.1.bb
-@@ -6,6 +6,7 @@ GNOMEBASEBUILDCLASS =3D "meson"
-=20
- DEPENDS =3D " \
-     dconf \
-+    desktop-file-utils-native \
-     gtk+3 \
-     glib-2.0 \
-     libhandy\
-@@ -13,7 +14,8 @@ DEPENDS =3D " \
-=20
- inherit gnomebase vala gsettings bash-completion pkgconfig gtk-icon-cach=
-e
-=20
--SRC_URI[archive.sha256sum] =3D "935a3c2dd76cc2a93cd5aee9a54d3947fb111eb3=
-96f4b63dc5f0ba8f8d099136"
-+SRC_URI =3D "${GNOME_MIRROR}/${GNOMEBN}/45/${GNOMEBN}-${PV}.tar.${GNOME_=
-COMPRESS_TYPE};name=3Darchive"
-+SRC_URI[archive.sha256sum] =3D "1180297678eedae6217cc514a2638c187d2f1d1e=
-f2720cb9079b740c429941dd"
-=20
- FILES:${PN} +=3D " \
-     ${datadir}/dbus-1 \
---=20
-2.42.0
+diff --git a/meta-filesystems/recipes-utils/ufs-utils/ufs-utils_3.12.3.bb b/meta-filesystems/recipes-utils/ufs-utils/ufs-utils_3.12.3.bb
+index 342661c9a..86709145e 100644
+--- a/meta-filesystems/recipes-utils/ufs-utils/ufs-utils_3.12.3.bb
++++ b/meta-filesystems/recipes-utils/ufs-utils/ufs-utils_3.12.3.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+ 
+ BRANCH ?= "dev"
+ 
+-SRCREV = "40c0bdfa7f4e922a4bcdf431ef72b321648d2d9f"
++SRCREV = "faf0fe153547f5d02315fa82159f925f0c9daef8"
+ 
+ SRC_URI = "git://github.com/westerndigitalcorporation/ufs-utils.git;protocol=https;branch=${BRANCH} \
+           "
+-- 
+2.39.2
 
+
+--===============5157719027109496715==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="buildhistory-diff-full.txt"
+
+packages/core2-64-poky-linux/ufs-utils/ufs-utils-dbg: PKGSIZE changed from 257200 to 259320 (+1%)
+packages/core2-64-poky-linux/ufs-utils/ufs-utils-src: PKGSIZE changed from 245033 to 254616 (+4%)
+packages/core2-64-poky-linux/ufs-utils/ufs-utils: PKGSIZE changed from 117864 to 136840 (+16%)
+
+--===============5157719027109496715==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="buildhistory-diff.txt"
+
+packages/core2-64-poky-linux/ufs-utils/ufs-utils: PKGSIZE changed from 117864 to 136840 (+16%)
+
+--===============5157719027109496715==
+Content-Type: application/octet-stream
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+ filename="0001-ufs-utils-upgrade-to-latest-revision.patch"
+
+RnJvbSA5YTNiMmFiNDA0NjU3Mjk5ZWVhMjVkZGM0OGY4MGYyZDNjNjUxM2Q2IE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBVcGdyYWRlIEhlbHBlciA8YXVoQHlvY3RvcHJvamVjdC5vcmc+
+CkRhdGU6IFNhdCwgNCBOb3YgMjAyMyAwNzozMjoxMyArMDAwMApTdWJqZWN0OiBbUEFUQ0hdIHVm
+cy11dGlsczogdXBncmFkZSB0byBsYXRlc3QgcmV2aXNpb24KCi0tLQogbWV0YS1maWxlc3lzdGVt
+cy9yZWNpcGVzLXV0aWxzL3Vmcy11dGlscy91ZnMtdXRpbHNfMy4xMi4zLmJiIHwgMiArLQogMSBm
+aWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pCgpkaWZmIC0tZ2l0IGEv
+bWV0YS1maWxlc3lzdGVtcy9yZWNpcGVzLXV0aWxzL3Vmcy11dGlscy91ZnMtdXRpbHNfMy4xMi4z
+LmJiIGIvbWV0YS1maWxlc3lzdGVtcy9yZWNpcGVzLXV0aWxzL3Vmcy11dGlscy91ZnMtdXRpbHNf
+My4xMi4zLmJiCmluZGV4IDM0MjY2MWM5YS4uODY3MDkxNDVlIDEwMDY0NAotLS0gYS9tZXRhLWZp
+bGVzeXN0ZW1zL3JlY2lwZXMtdXRpbHMvdWZzLXV0aWxzL3Vmcy11dGlsc18zLjEyLjMuYmIKKysr
+IGIvbWV0YS1maWxlc3lzdGVtcy9yZWNpcGVzLXV0aWxzL3Vmcy11dGlscy91ZnMtdXRpbHNfMy4x
+Mi4zLmJiCkBAIC00LDcgKzQsNyBAQCBMSUNfRklMRVNfQ0hLU1VNID0gImZpbGU6Ly9DT1BZSU5H
+O21kNT01OTUzMGJkZjMzNjU5YjI5ZTczZDRhZGI5ZjlmNjU1MiIKIAogQlJBTkNIID89ICJkZXYi
+CiAKLVNSQ1JFViA9ICI0MGMwYmRmYTdmNGU5MjJhNGJjZGY0MzFlZjcyYjMyMTY0OGQyZDlmIgor
+U1JDUkVWID0gImZhZjBmZTE1MzU0N2Y1ZDAyMzE1ZmE4MjE1OWY5MjVmMGM5ZGFlZjgiCiAKIFNS
+Q19VUkkgPSAiZ2l0Oi8vZ2l0aHViLmNvbS93ZXN0ZXJuZGlnaXRhbGNvcnBvcmF0aW9uL3Vmcy11
+dGlscy5naXQ7cHJvdG9jb2w9aHR0cHM7YnJhbmNoPSR7QlJBTkNIfSBcCiAgICAgICAgICAgIgot
+LSAKMi4zOS4yCgo=
+
+--===============5157719027109496715==--
 
