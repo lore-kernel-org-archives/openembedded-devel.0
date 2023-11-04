@@ -2,49 +2,49 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9C30BC04E83
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A8B2DC04E88
 	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 04:20:57 +0000 (UTC)
-Received: from a27-193.smtp-out.us-west-2.amazonses.com (a27-193.smtp-out.us-west-2.amazonses.com [54.240.27.193])
- by mx.groups.io with SMTP id smtpd.web11.4051.1699071647343479667
+Received: from a27-33.smtp-out.us-west-2.amazonses.com (a27-33.smtp-out.us-west-2.amazonses.com [54.240.27.33])
+ by mx.groups.io with SMTP id smtpd.web11.4059.1699071647810795761
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 03 Nov 2023 21:20:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=bxG59QKf;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=W2S6nq5x;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.193, mailfrom: 0101018b988fdb4d-c9cc7e86-87c3-4abc-bdfb-0b38d8a61c25-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=G1XOnrHv;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=b5DDIwN8;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.33, mailfrom: 0101018b988fdde0-a8a2db2b-e538-4330-8ebc-885f3ac6bb41-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
-	t=1699071646;
+	t=1699071647;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=ttyedS3itsMoykLTKzt1ucz/GNENshnCmpH//g74Jwo=;
-	b=bxG59QKf37NMK/gjheIiXGWXRUd1iN4xuzo2f4KZxgpCKjOMMYqFpxY4+SJSnfew
-	4fnXlcJ70gstR04xDRWs8GzvnSpuvltpaMRqgBbZjYJzHuWQCjjQONSxaT1Myiajnpd
-	9Q+5E7Gjt0jqKmsCHuQEbzZgaNQagLuyOGgqMmfQ=
+	bh=hioGk0UgMpdK9r2DSmirAoETcr5cZylO2r8YAAL4dU0=;
+	b=G1XOnrHv/oa0lrh9IATHM6ghGb5HxjEGyLvo5ErDrojH4feqxJXnQ5oHpQPY28cH
+	BTOu7HGHa3y04h7zWFtqO+QfyIZRuzC2bx2ESbbJyD8bXn35Cond/y5uHQ5v8pefbPW
+	8COKl6P2gLRKZbpu7nu/qBle/3dmIoDM0g1YkHCo=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699071646;
+	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699071647;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=ttyedS3itsMoykLTKzt1ucz/GNENshnCmpH//g74Jwo=;
-	b=W2S6nq5xxu0SwDrz8yyx+RqP6P13mOG08znePyY3MshN8wSeEkY7mK2c4E/E27Fl
-	KvvWBMnn04CtLBShD3aUlGtGSLTTKz4tjtXi9Qf/L63CEjPl3uSoauVRKm1fJfaJurl
-	Njph1zPLdegx78WK3o44M0BbBBo5y78CEryDg9OQ=
-Content-Type: multipart/mixed; boundary="===============0042376248853398949=="
+	bh=hioGk0UgMpdK9r2DSmirAoETcr5cZylO2r8YAAL4dU0=;
+	b=b5DDIwN8e00tl0LKCSofGwXWBKqzvV/leZk+aoXZvSlai0DGC6HdXVS2pGq0XEKL
+	3ZLctIyIoWMxSHq8uL8paP8LI+PnFBbptt2Cgtn+cCxmSggS00uy2RvXW3qQSkIGnfn
+	kHtL2dAqhIXEaYW4rk0hWQVhIdPiN5uKwQBcPa8Q=
+Content-Type: multipart/mixed; boundary="===============8104602707751473450=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] gupnp-tools: upgrading to 0.12.1 FAILED
-Message-ID: <0101018b988fdb4d-c9cc7e86-87c3-4abc-bdfb-0b38d8a61c25-000000@us-west-2.amazonses.com>
-Date: Sat, 4 Nov 2023 04:20:46 +0000
+Subject: [AUH] opencore-amr: upgrading to 0.1.6 FAILED
+Message-ID: <0101018b988fdde0-a8a2db2b-e538-4330-8ebc-885f3ac6bb41-000000@us-west-2.amazonses.com>
+Date: Sat, 4 Nov 2023 04:20:47 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
-X-SES-Outgoing: 2023.11.04-54.240.27.193
+X-SES-Outgoing: 2023.11.04-54.240.27.33
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 04:20:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106246
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106264
 
---===============0042376248853398949==
+--===============8104602707751473450==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,14 +52,14 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *gupnp-tools* to *0.12.1* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *opencore-amr* to *0.1.6* has Failed (devtool error).
 
 Detailed error information:
 
-The following devtool command failed:  upgrade gupnp-tools -V 0.12.1
+The following devtool command failed:  upgrade opencore-amr -V 0.1.6
 NOTE: Reconnecting to bitbake server...
 Loading cache...done.
-Loaded 4895 entries from dependency cache.
+Loaded 4908 entries from dependency cache.
 NOTE: Resolving any missing task queue dependencies
 
 Build Configuration:
@@ -85,17 +85,17 @@ meta-gnome
 meta-xfce            
 meta-filesystems     
 meta-initramfs       
-meta-webserver       = "tmp-auh-upgrades:359b9c5bcfe5129549e4abfc339533fb3cbc6eb7"
+meta-webserver       = "tmp-auh-upgrades:4dfc7c0e4c772c176b474b9e9a78e8c52e89f9dd"
 
 Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
 done.
-Sstate summary: Wanted 11 Local 11 Mirrors 0 Missed 0 Current 22 (100% match, 100% complete)
+Sstate summary: Wanted 10 Local 10 Mirrors 0 Missed 0 Current 20 (100% match, 100% complete)
 NOTE: Executing Tasks
-NOTE: Tasks Summary: Attempted 113 tasks of which 110 didn't need to be rerun and all succeeded.
+NOTE: Tasks Summary: Attempted 103 tasks of which 100 didn't need to be rerun and all succeeded.
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 4 seconds
 Loading cache...done.
-Loaded 4895 entries from dependency cache.
+Loaded 4908 entries from dependency cache.
 Parsing recipes...done.
 Parsing of 3056 .bb files complete (3054 cached, 2 parsed). 4887 targets, 92 skipped, 0 masked, 0 errors.
 NOTE: Resolving any missing task queue dependencies
@@ -123,29 +123,38 @@ meta-gnome
 meta-xfce            
 meta-filesystems     
 meta-initramfs       
-meta-webserver       = "tmp-auh-upgrades:359b9c5bcfe5129549e4abfc339533fb3cbc6eb7"
+meta-webserver       = "tmp-auh-upgrades:4dfc7c0e4c772c176b474b9e9a78e8c52e89f9dd"
 
 Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
 done.
-Sstate summary: Wanted 10 Local 9 Mirrors 0 Missed 1 Current 18 (90% match, 96% complete)
+Sstate summary: Wanted 1 Local 0 Mirrors 0 Missed 1 Current 0 (0% match, 0% complete)
 NOTE: Executing Tasks
-WARNING: Failed to fetch URL http://download.gnome.org/sources/gupnp-tools/0.10/gupnp-tools-0.12.1.tar.xz, attempting MIRRORS if available
-NOTE: Tasks Summary: Attempted 92 tasks of which 90 didn't need to be rerun and 1 failed.
+NOTE: Tasks Summary: Attempted 3 tasks of which 0 didn't need to be rerun and all succeeded.
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 4 seconds
-NOTE: The errors for this build are stored in /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231104033523.txt
-You can send the errors to a reports server by running:
-  send-error-report /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231104033523.txt [-s server]
-NOTE: The contents of these logs will be posted in public if you use the above command with the default server. Please ensure you remove any identifying or proprietary information when prompted before sending.
+DEBUG 5 [Errno 25] Inappropriate ioctl for device
+Adding changed files:   0% |                                   | ETA:  --:--:--
+Adding changed files:   0% |                                   | ETA:  --:--:--
+Adding changed files: 100% |####################################| Time: 0:00:00
 
 INFO: Extracting current version source...
 INFO: Extracting upgraded version source...
-INFO: Fetching http://download.gnome.org/sources/gupnp-tools/0.10/gupnp-tools-0.12.1.tar.xz...
-ERROR: Fetcher failure: Fetch command export PSEUDO_DISABLED=1; export SSL_CERT_FILE="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export GIT_SSL_CAINFO="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export ftp_proxy="http://proxy.yocto.io:5187/"; export FTP_PROXY="http://proxy.yocto.io:5187/"; export PATH="/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/sysroots-uninative/x86_64-linux/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-fypg_3xn/work/recipe-sysroot-native/usr/bin/x86_64-poky-linux:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-fypg_3xn/work/recipe-sysroot/usr/bin/crossscripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-fypg_3xn/work/recipe-sysroot-native/usr/sbin:/hom
- e/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-fypg_3xn/work/recipe-sysroot-native/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-fypg_3xn/work/recipe-sysroot-native/sbin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-fypg_3xn/work/recipe-sysroot-native/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/bitbake/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools"; export HOME="/home/pokybuild"; /usr/bin/env wget -t 2 -T 30 --passive-ftp -O /srv/autobuilder/autobuilder.yocto.io/current_sources/gupnp-tools-0.12.1.tar.xz.tmp -P /srv/autobuilder/autobuilder.yocto.io/current_sources 'http://download.gnome.org/sources/gupnp-tools/0.10/gupnp-tools-0.12.1.tar.xz' --progress=dot -v failed with exit code 8, no output
-ERROR: Bitbake Fetcher Error: FetchError('Unable to fetch URL from any source.', 'http://download.gnome.org/sources/gupnp-tools/0.10/gupnp-tools-0.12.1.tar.xz')
-ERROR: Logfile of failure stored in: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-fypg_3xn/work/temp/log.do_fetch.1009667
-ERROR: Failed to fetch URL http://download.gnome.org/sources/gupnp-tools/0.10/gupnp-tools-0.12.1.tar.xz
+INFO: Fetching https://downloads.sourceforge.net/opencore-amr/opencore-amr-0.1.6.tar.gz...
+INFO: Rebasing devtool onto 3c8fd96e3864c7936f21c86c1e264a6f948d4b1f
+Traceback (most recent call last):
+  File "/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts/devtool", line 349, in <module>
+    ret = main()
+          ^^^^^^
+  File "/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts/devtool", line 336, in main
+    ret = args.func(args, config, basepath, workspace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts/lib/devtool/upgrade.py", line 568, in upgrade
+    new_licenses = _extract_licenses(srctree_s, (rd.getVar('LIC_FILES_CHKSUM') or ""))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts/lib/devtool/upgrade.py", line 476, in _extract_licenses
+    with open(os.path.join(srcpath, path), 'rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/sources/opencore-amr/COPYING'
 
 
 Please review the attached files for further information and build/update failures.
@@ -153,5 +162,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============0042376248853398949==--
+--===============8104602707751473450==--
 
