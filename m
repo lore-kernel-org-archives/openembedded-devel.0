@@ -2,214 +2,159 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3FAD4C4167B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 48C6DC0018A
 	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 08:02:03 +0000 (UTC)
-Received: from a27-191.smtp-out.us-west-2.amazonses.com (a27-191.smtp-out.us-west-2.amazonses.com [54.240.27.191])
- by mx.groups.io with SMTP id smtpd.web10.5774.1699084915135623076
+Received: from a27-193.smtp-out.us-west-2.amazonses.com (a27-193.smtp-out.us-west-2.amazonses.com [54.240.27.193])
+ by mx.groups.io with SMTP id smtpd.web11.5647.1699084915361143837
  for <openembedded-devel@lists.openembedded.org>;
  Sat, 04 Nov 2023 01:01:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=CxXmpDTB;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=GAL18UjX;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.191, mailfrom: 0101018b995a4e99-e035e8fe-cf0f-4396-8622-32d3f796f02f-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=EbouRyfH;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=oZavwb2k;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.193, mailfrom: 0101018b995a4f1f-21fd4fb6-e820-403d-ba7f-14c1cd336602-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
 	t=1699084914;
-	h=Content-Type:MIME-Version:From:To:Subject:Message-Id:Date;
-	bh=EKFQ0wnnjBRe7dqIYPv5EsAxRPEWGXJdyLNEr8PojIw=;
-	b=CxXmpDTBQplU08Y1PBjF8o+zaGFLUTUgVTPKjFSZjON0Iu1SRCvN0VrBa84x7Uic
-	LuCSWoV9rhys+bDEZTMKS2XSWdJTOzd0DS0NMICOtQXJL49L6BaCq9LfByVHM9I5eUd
-	QPOaywjeLvQAQoZIWTDbWL9qb8Ih2gwLRuCw6e9s=
+	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
+	bh=Em95aw2+9l8fxgLWIyqA3QewHs/zt/jPpyBcNSUdUvc=;
+	b=EbouRyfH1VhdUXmWEdUMpPdMcm0mJeu2zPiqOxonaexuFq9A4pzQfU8rjUsuGxe8
+	JQzhXvZP1FgEZ8/6ZxbD7B4ae/cFHMJNmSffrAm2EuzTwowm3wOd4BYLTJHNf7u3mt8
+	PeiEBiS7YeJ7vDwUEtUtEMt7ERwsLfzlGqMkVpns=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699084914;
-	h=Content-Type:MIME-Version:From:To:Subject:Message-Id:Date:Feedback-ID;
-	bh=EKFQ0wnnjBRe7dqIYPv5EsAxRPEWGXJdyLNEr8PojIw=;
-	b=GAL18UjXcxsBG/5mlQN1uxxF5eTn2XmEhRORt3Fi0S0qOxbUAS3qkCVooEpw4j8q
-	5BvoYfegw8Bnv9uhfmuzhHQeFJpIIV0WEhg/Y6Ti8FC2enrTgG/BK84pbjyAk330XVH
-	Q7d1tmwcmYaiDIT1dxnh7HKVhSF0khexODkLgbTE=
-Content-Type: multipart/mixed; boundary="===============3442616632557532734=="
+	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
+	bh=Em95aw2+9l8fxgLWIyqA3QewHs/zt/jPpyBcNSUdUvc=;
+	b=oZavwb2kATF+GjPE53fKTn+Kh3fN/7uNbFF4YpsuofB7x/3s9Cne1kmM7ToA+1To
+	GNK8TVVpIFU+D5pSIL21F5opVRIiIX9Z2FhxyRte0czEUZ03zRQA5qT8c8QPeGmSlwm
+	r8K4iN1WAHXhrGAFthub95lHajby2RpBdufpmbcA=
+Content-Type: multipart/mixed; boundary="===============8719520393894035876=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
-To: openembedded-devel@lists.openembedded.org
-Subject: [AUH] Upgrade status meta-webserver: 2023-11-04
-Message-ID: <0101018b995a4e99-e035e8fe-cf0f-4396-8622-32d3f796f02f-000000@us-west-2.amazonses.com>
+To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
+	for@yoctoproject.org, AUH@yoctoproject.org
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [AUH] nginx: upgrading to 1.25.3 FAILED
+Message-ID: <0101018b995a4f1f-21fd4fb6-e820-403d-ba7f-14c1cd336602-000000@us-west-2.amazonses.com>
 Date: Sat, 4 Nov 2023 08:01:54 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
-X-SES-Outgoing: 2023.11.04-54.240.27.191
+X-SES-Outgoing: 2023.11.04-54.240.27.193
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 08:02:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106368
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106369
 
---===============3442616632557532734==
+--===============8719520393894035876==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 
-AUH finished upgrade batch the result patches/logs can be found at:
-https://autobuilder.yocto.io/pub/auh/20231104074835, next are the statistics:
+Hello,
 
-Recipe upgrade statistics:
+this email is a notification from the Auto Upgrade Helper
+that the automatic attempt to upgrade the recipe *nginx* to *1.25.3* has Failed(other errors).
 
-    * Failed(do_compile): 1
-        apache2, 2.4.58, Forced maintainer for AUH
-    * Failed (devtool error): 1
-        monkey, 1.7.2, Forced maintainer for AUH
-    * Failed(other errors): 1
-        nginx, 1.25.3, Forced maintainer for AUH
+Detailed error information:
 
-    TOTAL: attempted=3 succeeded=0(0.00%) failed=3(100.00%)
+Failed(unknown error)
+Traceback (most recent call last):
+  File "/home/pokybuild/yocto-worker/auh-meta-oe/build/build/../auto-upgrade-helper/upgrade-helper.py", line 497, in run
+    step(self.devtool, self.bb, self.git, self.opts, pkg_ctx)
+  File "/home/pokybuild/yocto-worker/auh-meta-oe/build/auto-upgrade-helper/modules/steps.py", line 39, in load_env
+    os.mkdir(pkg_ctx['workdir'])
+FileExistsError: [Errno 17] File exists: '/home/pokybuild/yocto-worker/auh-meta-oe/build/build/upgrade-helper/meta-webserver/20231104074835/all/nginx'
 
-Recipe upgrade statistics per Maintainer:
 
-    Forced maintainer for AUH: attempted=3 succeeded=0(0.00%) failed=3(100.00%)
 
---===============3442616632557532734==
+
+Please review the attached files for further information and build/update failures.
+Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi?product=Automated%20Update%20Handler
+
+Regards,
+The Upgrade Helper
+
+-- >8 --
+From 13880814a7e0d1daac1b6ecd8c2fa5ced3792c34 Mon Sep 17 00:00:00 2001
+From: Upgrade Helper <auh@yoctoproject.org>
+Date: Sat, 4 Nov 2023 07:56:22 +0000
+Subject: [PATCH] nginx: upgrade 1.25.2 -> 1.25.3
+
+---
+ .../recipes-httpd/nginx/{nginx_1.25.2.bb => nginx_1.25.3.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-webserver/recipes-httpd/nginx/{nginx_1.25.2.bb => nginx_1.25.3.bb} (51%)
+
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.25.2.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.25.3.bb
+similarity index 51%
+rename from meta-webserver/recipes-httpd/nginx/nginx_1.25.2.bb
+rename to meta-webserver/recipes-httpd/nginx/nginx_1.25.3.bb
+index 66eef2389..8aa9fa026 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.25.2.bb
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.25.3.bb
+@@ -2,5 +2,5 @@ require nginx.inc
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=79ad2eb837299421c4435dedc8897b3d"
+ 
+-SRC_URI[sha256sum] = "05dd6d9356d66a74e61035f2a42162f8c754c97cf1ba64e7a801ba158d6c0711"
++SRC_URI[sha256sum] = "64c5b975ca287939e828303fa857d22f142b251f17808dfe41733512d9cded86"
+ 
+-- 
+2.39.2
+
+
+--===============8719520393894035876==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="buildhistory-diff-full.txt"
+
+packages/core2-64-poky-linux/nginx: SRC_URI changed from "http://nginx.org/download/nginx-1.25.2.tar.gz file://nginx-cross.patch file://0001-Allow-the-overriding-of-the-endianness-via-the-confi.patch file://nginx.conf file://default_server.site file://proxy_params file://nginx.init file://nginx-volatile.conf file://nginx.service file://nginx-fix-pidfile.patch file://0001-configure-libxslt-conf.patch" to "http://nginx.org/download/nginx-1.25.3.tar.gz file://nginx-cross.patch file://0001-Allow-the-overriding-of-the-endianness-via-the-confi.patch file://nginx.conf file://default_server.site file://proxy_params file://nginx.init file://nginx-volatile.conf file://nginx.service file://nginx-fix-pidfile.patch file://0001-configure-libxslt-conf.patch"
+packages/core2-64-poky-linux/nginx: PKGV changed from 1.25.2 [default] to 1.25.3 [default]
+packages/core2-64-poky-linux/nginx: PV changed from "1.25.2" to "1.25.3"
+packages/core2-64-poky-linux/nginx/nginx-dbg: PKGSIZE changed from 3832984 to 3834072 (+0%)
+packages/core2-64-poky-linux/nginx/nginx-dbg: PKGV changed from 1.25.2 [default] to 1.25.3 [default]
+packages/core2-64-poky-linux/nginx/nginx-dbg: PV changed from "1.25.2" to "1.25.3"
+packages/core2-64-poky-linux/nginx/nginx-dev: PKGV changed from 1.25.2 [default] to 1.25.3 [default]
+packages/core2-64-poky-linux/nginx/nginx-dev: PV changed from "1.25.2" to "1.25.3"
+packages/core2-64-poky-linux/nginx/nginx-doc: PKGV changed from 1.25.2 [default] to 1.25.3 [default]
+packages/core2-64-poky-linux/nginx/nginx-doc: PV changed from "1.25.2" to "1.25.3"
+packages/core2-64-poky-linux/nginx/nginx-locale: PKGV changed from 1.25.2 [default] to 1.25.3 [default]
+packages/core2-64-poky-linux/nginx/nginx-locale: PV changed from "1.25.2" to "1.25.3"
+packages/core2-64-poky-linux/nginx/nginx-src: PKGSIZE changed from 3380993 to 3381800 (+0%)
+packages/core2-64-poky-linux/nginx/nginx-src: PKGV changed from 1.25.2 [default] to 1.25.3 [default]
+packages/core2-64-poky-linux/nginx/nginx-src: PV changed from "1.25.2" to "1.25.3"
+packages/core2-64-poky-linux/nginx/nginx-staticdev: PKGV changed from 1.25.2 [default] to 1.25.3 [default]
+packages/core2-64-poky-linux/nginx/nginx-staticdev: PV changed from "1.25.2" to "1.25.3"
+packages/core2-64-poky-linux/nginx/nginx: PKGV changed from 1.25.2 [default] to 1.25.3 [default]
+packages/core2-64-poky-linux/nginx/nginx: PV changed from "1.25.2" to "1.25.3"
+
+--===============8719520393894035876==
 Content-Type: application/octet-stream
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="20231104074835.tar.gz"
+Content-Disposition: attachment;
+ filename="0001-nginx-upgrade-1.25.2-1.25.3.patch"
 
-H4sIACb5RWUAA+xdeXfbRpL33/gUPdpkJUUEiJsAM/aYluhYL7KspyN5s44fXwNokFiDAIJDRzL5
-7lvdDfASKYGHZM0OkZgHgK6uruNX1dVsSJVVTVFkXW7plmY0Xz3FIcPRMgx4VzTDlCfeR8crRTdU
-RWtphqq9gsuqrr9CxpNwM3MUWY5ThF4l8dc7pwhCb8F9j13/Nz3Uaf1nhesS4m3WDpbXv24ara3+
-n+OY0T8Ow81jwBL611VNp/qH/7f6f45jjv5xgt0BUTdnB8voX9dN0L8BAWCr/+c4HtC/E+QO/krE
-uMiTIhd/J8Pi1jJFU5fy23yZPqiCTQjo8/WvmaqujfQP/17Jqmq0tFdIfqpBTx7/4fo//XTZbaNz
-4sZRRNw8iPooj1GpepSR9JqkkiQJJzH26EWX2gac8OKI8LPEQ7plWYhEeRqQDPlpPEQeSUjkkci9
-K1sIZzjNKIGUuEFCshGJ6nzsI002DCQ5DvKDEAi58TAJSU7QHlzQOR2vgRSUQBPi7Uu0XxOB+vok
-zxrIVlH2NUgSepOMhjj7yj+RNI3TTBLOyTC+pl0pFROc13xAoK+UqGDaKLvL0jjOR+w91Kj0iN6c
-ZpVYszhkrXF0h4ZBxkaaA2fo94IUZCwmEJwgvKPmhQ7jyA/6RYrzII7awrt3vV+65xfHn07R+HiN
-dlTJlOQd4d3V8clR7+KfF2j6MudLDIOouN0RTjuXx790Ty7eXVyeH5/+NLqriALQb4bDHeGyc/5T
-93KG0pgQNf+K2sfO4Yfj0y5CM32OEWJHODqGrj6he/dQOtXVmYHBVV3SDrIIJ9kgzkVitAzfsB1L
-JZi0LN9RsGt5fkuxLYKxjlvYNjXVsIH3q9Nu7323c3l13r2Y6GwImmGaHQ3v/dnVND87wpDkGM0e
-7Cwb9P2zd7Gbx6KTJdXZmzj9mgFokpmxggnmJG3XHwcjH0+RGbFylw/i6N5Zkob3741ITlmitjZx
-dliEeTAkXoAnz/ajeEjuUbj1pwfDzzK3vIMxDbOJs0EU5Cke+tnUvTfE4eAxFkc+TERcDMQi6acA
-G1kbO5Doa66nKa6hYd/xfcj7DN82dZVojmaZcsvWLdfaEYRj6CTAYTByIAog3MkuwRObSRq78EKy
-rEhJhR842s2RQ8BxsSdRvwJ4KygBhuPoJgCRFjkaxkA8TumFioLAvfgCYgPgT1YMhzi9a6NfcZQD
-3GmWgk5iF4dIM230MWD4AkDzERwcLisqOizSFPAQEM1Ce7b5PaBR7g4AoqzvR7C2X4JE95a4BQPe
-SzquCjqKKKLnMoA2l0SEo4amyhQoTctGe80BaK45CktNbpZU8SRtUjmX1tTkl/k3gBsydIgHqN2c
-1lOzhDdxkOeJN0oCyveeKumSYQE4t724x2/t/Y57FXv7j7BtrMP2iDXqy01qb5mbBkmeTX7uKZJc
-sueCwnPSyxLvtjaD9uYYLBIPuhdTV/ImP/dkyVqdQW0zEvTIdR7HYdakyMFeeoakWWuITt+QbrMi
-SeI0B4NL6T8RXCIEnZqStjpr2ma0WrEWBk4CXFTvPUvSjdWZM8eufB2keYHDdgQx/5q0v6FnrzIO
-9QWOAxKrML7rZXGRuqRHfbBHktgd1ByUMYEH6w+qvo0ncVKETAE8n6zLrv6k7D5g948yzGmhCRwU
-AQfFVG5z1hfYXBtdQF4PwXaazATei4D3q5IpTUbkJjNF5X5oW0CDYqfIsXNVNkp5ilSeqw+Fm5HI
-zGhdgXCjmSeXFYZVErs3uoU2szJzj3r7Y8IrSd+X4bK8rmDnvOK+AUufT2hZW5+hUgEOx/qWRnFG
-sQ3tm+afPoFsen89Z1okrWXdaYG8ZgDa1DaUX/IqzXWQ3zWpMLMsrN57mqSAkFaN4wbMlTeWApPb
-BOf8FTRnrJFeGq21ZjyLQi9E3VYtYW0Ugx720KXBt57ptbQXmJ8tnkE+DlvM+58g9tQTJ8z9v02q
-9ajImLuJzN3WziZWCojzzbuEJ5HB0zqMMZddmsAiNW7SK+on+MtWTgxLfwY+p9Cwbkpfw0MfzCXs
-l5FLFBGc/bq/VnK/Kq7Xnmws6dqLc5vaPjSfxGPw+viA5pu5uaEi0qi8BYzSD9W76KZxljHFt1ZO
-RUy19dxM1vXFpTF26bkCd5Oa2tTMzQoqTr72GZZOfuzJgKvqMincY7Gttjuu6NmL3XLE0qx31p5/
-TmGroRtjbH05Sd9D07alEGUhOI3diCmltdZc/jF6S6QvY6sVmdU+XX62lOE9ZsUPZdorm22tNNvU
-rOfOex7Nr1e0h0VZ8fIWUVNym1n0GIFv33XpPzEtIrp+3FO0ZVB3HaesN159M6WVJaLyo5YyIS6R
-iWutCdlCL6sdrx5TwhKBb1l25lv/agKqaQ8bTj6o/YMA4W3Dpr9caKMiW8+WliZSU96byYpZ3bAP
-PLr8FTxOq7MqWVkUbSPSNgf9IF9VRMtTqScjYzO11XuYzLGpplku4u0J/GUub3UnM6PGYvnbs/XM
-vg65ZVPDNVhcNxdbfeb2UDVGUTXtJU4ZpqszsyzrL6KClOCJac00i5qivESpJilJcEqqCFQaff36
-HhvxynPj+aWE2s3nM795coszl3XQpF68sDYcL5wg4uWT6sM4q1XW++mJaT1X+Hg0654eW6UfOsQn
-x/raCfTKxOZb4waGXNMgNzyprGGQm9J3bd2sQ29GiheT0hvvZFgdKh+M3Tb/tdqLizKL46KtqS8i
-dLtxGBI350maR5Js6WX/OqFw3or+bMebIbFqclmN4mEzm8y3Xo6ZueV+meV/sjFqubzwS4G9x0G4
-ws85JvqdkTjbAgBnyw0HnTwnw4TuOWDS52gCOrgZBO6AOr6BvMCj2xwioMJ2btHtDmkRIRxBI+Qz
-Bqv9SL+mQT7a/zAIsjxO7x64BPRiAB8dggGw7FVbE+iGC76nCvlxinK4u9xRAXkUoi2BlSBCS9oE
-f82HSTOM+03WgQi5GS3Xsi89/qU33rFoqJpF9yIK/4wLutsD+IRB52P2QB4Y8WZZuZcNOXco5Wbd
-FhBrIU729Xxco89ixdSXCcmCpHMS5UzNMJSMICCcoZsgDKlykzjLuXiTwgkDFwU+uoPhF3AjHTl2
-4mtKBAwo4ltc2GmP+LgI82pDHzoLCYYWJGL7ZSiBlG50I2yjWuABA4F/x7blpShJ4yQNYNRgEUEE
-Kh+yrWlghCSiF7mBOgSuECZQaCcJwsiIFW743BSp0L91TBqzBgIHnm9wBkx2z88/naMhyTLcJw2Q
-R16kDP0wiuJI/IOkMSK3QQ7C9YgksNvb9zFiAh06SRIyIbLvaFeWFVmsGnixGMW5CHoDewk5VsB9
-AxHEKPZJ1MtJlvfcAU4l1nwXgcj5XkfweRgy89Ddlc2V3tKstj1ObO8byY+PqMmEWg5vVzgcel1q
-1nu7vwOlHIkie0/d1f2mLiNcy2KZwpbw2iS526xYSIpssNtAcgPtZrkXFzCLO2OSX0vwCOANh3QP
-2R1oOwkD4v2IgJL7lfpNSl2KbXsF6xYE6Bfcvo129ysDOYn79BJ1Z+oBxSREtp9eajR+UGiSKrOU
-NFkxNU2v+KMR5wWUT0p44Ig1cjO0q+wK33qL9P/r44H9/2QIKumVmx/X6ePh/f+Kqsjm9PMfVFlR
-tvv/n+W4jCGLjVMXXA/UHeXwD5Ikmtd1rj4I9Oqkm9MJPAnfhpAfZtLkBSlO+xBWnf+FuNRGn6Ht
-lyo0thHf8Fs+WoD7PnrfOT7pHgmQ4MJNQ5rwrAiG5W5icUDCBG6bwaFVH2/xzLxQNxgFqIoKk1Sr
-DL08FgnCBxKGcUMQWNbNPJTFJ0hRIGMLXJ6ZjZ5Q0ClA4lecHvrAuIKWOOepIlykqZyLMJ9mUPWU
-nbMbygnNDyVjP9DrP3B2fkADSJr49GePTWmGCXzeh7zvCEbNoJzlv5MZY1sQxreWgC/AcUpA4JDW
-whRWoHvFRRZn7xgPZSrVh4CAh6i2nDgZHqXZ8x0GOOqTjI8wyyGaDzlpOEcTZY5ywR9s4EOaXvOn
-QgyH0HGVE1ZUywHAhCMYwnnEJErzdnCerOTa/QpXygYgdSoDlNGt9g7OQOIZjoIcRgipRlaNeVjN
-XnjawdgK+tBJDsmDz2VQcgQzBxGyl4zkImhxAGIWRda+pMUmQgFTKNN0wnN4upmdmgx1RerDgtAJ
-c5LyVCq8a1STCYdAlnM9ZQTZIC5ghgdmRmchpehhxpfz+R9dyW8Id+U8zKeTlfPu4fFZt3f6qXd1
-dtS57PbOu52LT6dUtsB5wraxjMizFCmLmSiFsWFWjwpAN2XvMBkCPaaUB1zNjcHmyulMSq4DcsOH
-zIAFOOTPAqCA5hcpXJmySCbkynfpno0qR8skoQMzIRCbE4I9JJw+4xJDgz4dOM1tsnYTfL//BwwY
-SwwjoAkFQQqITYA1kvbguuT2g3/AFa9w89cdPjzifa/KV6xX+PABOAnBO4Vz0seplzUEOhmccV1B
-FNEbC3QtvKcervvE9zzVkm2b2MRzTNPQTVt2DKKoGvGJJauK3iI2+ggjvSAJUlrgQW32P1LBlRiZ
-9kwv6O8Ab29nx/JGOAJG2+gC5w2ko9P4GlE8Q3KrbWhtWUMHNJZPhICzzuXh/SBAOP63kPimjAR0
-UKKAJEniZRFbGupix/NEjpriaK4jAv4GZUr+L6QpIIZ7B6PT/HMqz6S/2kGv36B7yedfCOgoMjqA
-gzZVq+dGMKzwGqgFpgJcUEPJ9g72G0jTYSIdEn5C3Bf4N/ApmqoqLMlByyTCgPuKIkLrAvoVh+Cm
-JGWbvGrKQQCLj8Dv63VaWyz0iRX7gNWB74OQGfQuld+vOyzkPGt3Atcih4pJXQpB5JFbZGPXdXzF
-wpI0el4ZNdpnlooAZoqakIA1oyIMhbdvkag0wA0O5IaM3r4VRIYJhmurRsvHmq5phu9bmt9yZcWw
-FNe3DUg/FLmlYh0ccCEmiBwUfsEARwFGZyRPwdn/fs2/Swn7/jZLIFHMg1vw2uEbQeTgcFmQBlIs
-1ElSjg6K0dYsAAhgUqVCuwcPP6BSIM1SIM2xQNoIJAJTeSaS3YmiRx4LIrimGxYeC5YDGreATi8l
-N2kA/khTowg7rPIpCuJVGfHFixznBSSa7yA8s2Lf5wrDs+tI4npiwE3DyLX7D/r2mgaVDDz+v6sP
-rxVbtlVd+UJpU9ARHxgEQIzBEOYAblO4iY0AxpgGGEpv2ukWk3UeuCiI3HANA9st7Ni2JkktRZWd
-lmo7rcq4xdKEHyBDLe7hjpgV6g0THcCrooAdos5Z5/BDt/fx09HVSXevgPGB5hqIti6f85WS3wua
-+LBsDK6LNBug2etIxwHJGoj+N4wzkNs0SRwGOFtIkAqQsIfvjB9XRJ8YlpcU70i2f49kaTgNlMJI
-aYoGaHB1fgJ9RAFbOgUNjRjKaXsQDhgdzd/Qzu133Noq+9tBf6MPzorinR9pLhLBvTQt+68pG6UF
-+wyNa02D8q7O2Xmvc3R0+Wnv+PTw5Oqoe9FAn8Xj377bg3jcY7kKSGm/WVaOgZcDP4AXNqaHmmap
-yxp+B1xQp+m5/CFFX/hwJiQCvvmh9/749PjiA8M5AXJr1ZAAGlaPCRNBZzl0HwcmIQuGQQhZek7r
-0AyZze+FMgKyKc9qDFUkwHhWZIxzI8u+hTHWFUnyiWtpGvaVCWdbWWBC6Yar8cY81GxY4KFmQ1Gp
-h16cH/auzo/pM7m++7NS+zEtB/7Fy71l0fe7P89++UvKwTidP1T0mzD5RDDqXICbEAot8X1wy55E
-BrCT5TCtnQ5fRZaKThCVoX0RFbv6bT5M724zKYhoOdYlIiT/OZCjhBwi0oT/TgQ0p0sMDxOEUAuz
-+x65Zas/Er75ysq+9HtGRHBLVvQdERHnEVkvi5kiuiMczO1hjbr0b/NI0udGzL9S9XMdU+IhYfn2
-g7dKdHSBS+bfVNHJJFnvlS1m7twRkFBZW5sKMPLaboizTCwXMsACFylwPclQq1etRgsdaCq8jo2+
-JhuM85PjQ4DBk+5F7/DDzxdXH+l9JX9wqXt60f1x6BmvHVoA83zsWrKjuja2LBWyAw88w3F0xdV2
-IO/hnX/OBlg1zKwYfqG0PAcSS0vHhNgGkeGf5zuOpRCDOLZquq6n6sTEHjYMz/UszcXEdVRTJQbk
-crqnYrCp+YR9rJge5Hlyy1IVGRu6q7c8z3CIr/qWYzsWlhXP1iGNwYaiG5ptmI5GXAAqlWDdNbje
-OD78+un856PjChk4JtDrNC6okmZLqiBsS/T/tscGipKP9vFw/R8mJIo58/xfDb5u6//PcWwLSdtC
-0raQtC0kbQtJ20LStpC0LSRtC0nbQtK2kLQtJG0LSdtC0vMXkr71bPg/75hT/4n6QXS7yb8Ct8Lf
-/1K2f//xeY6F+p/cCMQmE6IPs8Vl//QXOx6p/+mGPqF/RaN//0ttKdv633Mc5S8Vs7l7CZgltEdp
-Xjnd5CnyDoVxCGDsHjbX9eKbKIyxx0+JCk31VZb19f+owjG/xDbYliF2MtHqhGF8w1KqGJKhNKC/
-GRZjn52h+4pwFBEIttcBZqdYCjVNhnPDEpLyTLnzqVfufMrolKm8lKTx7V0PpnR4mE0TYMnPFMvT
-yc7UzVVyM3W/T1PZwKPn5gx0tAMQBO3cZmHOzvAbd+j8oZ50ta10l5auUMfiz37+6Zdpc+fWjD6X
-A/5ClcR1MD5Xj/QM4R1OmWudU6zDYykIz+kzbi+O/6c7TVezNNW2dEoWPgK+q2jvQP5+f3naTyOJ
-qU42KxNy/Qx8s042y3fsPgPfrJON8h3SP4VGnp71UT8b5T5L3UUepNEFMY15kGYpliwv60EV7ScV
-C+9kszLJ6a/vn8WPJrva5BienPOa/H7r/O6xY2H+zyIp11G19s/HV6Ue9db+6fFI/q8q+uz+P9Uw
-t+v/z3KwtT5FsyzZUnTcIrKneBi7imMS17Nc1ceGSzytZauupj/1+r/ZVtVF6/+l01Wr/6Uvi29K
-Dx6v/s8UtLk1/8neeuWchC9YT5zS+Co+XccHBoDO7AKbMl5gYwv4ymj9ni3f11k9X4KRPUNZbt18
-ApcmSD9S6r/XSJu7NgK81F8bmctI3XWR+QxxLkyTEF/VLFuSLIxtH8uqucSayHy+aqyHzOeJVYUb
-BjqgL/CFrhsGKUHV/MZdourbsrGnEsfSWqpt66ri6rpmeMRzLctuOZrHaqTzy7Oy4XmmZwOYeqaJ
-WzoxFVkzfBUDGVP1Lbdl6K7dcn3FwaZOWv/X3rX+Jo4k8fnsv8KT0YlESzx+YAyR9iTCkrloEjIK
-sKPTaBQZu52ggM1hyOO/36p+8LAxBtYht5quD8Fpd3dVd/Wryt2/dms6PBl2za96umMYmX7fasWz
-+3XH9lyz5tStOqmZNUu3ArdmO75pBkbF7Ju2ERgOjBt+QCqGY1m2Yfp1mMr9WlX6df8plDn/F3b6
-P9//B20n4f91nIop5/9D0Bue/1+Zsfnpf77cfr/T/3nO7YOKsd0a+30O/VOx2JF/JszKkf+InqRm
-MFu5h/55mln4GEbPIYtyonQnrkf6YG2px7gXBhnjZhuw8Yfq0I2nJwgGcIGrsKO9dAIrQSzsaUI3
-q/9q49ejsgrGHVErdadMD6fPQvoFFwEJjmMyDDSOWllW6X/9Pn+AdRl/isa4KWj8eH/nTV9O9hV7
-nbRiyxRFR1gS1qpTWdEhfEfCJypwFGujR38wOeaC/CghKwgo/TxRUKLWC/Zbit8EfRR+Q+iQzk8m
-LaEvz/ZElNqvA5QQ/eEXPbwvbS5pc0mbS9pcb2ZzbWd0rRmaR1H4SF4L3ACyx/4Py7Tk/o9DULb+
-izMAc+w/29CdNP6b9P8ehN7Q/mPtKGUAOrCEWGf/vY+Zw4QUdg7ItmzmqMd86c9tljxDR+Bll0Qy
-zrFEK5SzZBwTyMy3RFztzqqJg9MJvF5NU64iVocePVuiaX4UEhYKwlRqdV2FamRIpFhDPsHdqST0
-XnmKOaM4Gj5RWFtYIo8GcTwH+P7fjMzIIiFkpSjnFNe5yTdU8HKen9/92brtXN60lza6wgxmalVN
-P1LOe5dXf9x1/ttRV19zQH36Je1IaTe6l3+2rjrnne7tZfvLPNYsHECJY3d4pHQbt19a3UROi4wW
-3+WOlOtG8z+X7ZaqJnguUP2OlD8ugdWNmoqD+Yi3iYLB24pm/RaH7jh+wE3ftmMHdr1fM4lLnFrQ
-N1wP5mLHqNeI68Ja3q1XLdOug+y9duvuotXo9m5bnSVmo2pFpV8W58W7+NZbledIwdWRmiQaSgud
-DmU2Wj8ei1A01+IxGNiJso7AsCaTs+3LwY29taK8Th+gQyZDyWSYjhuSKYqEbW0pdDQbInCcP3CX
-Q+9DxMlL5vASrBaGhS6O5sRLobjBaOKOgngl7ny5uaiO6Wh8iiatwJk7g5mpUveqdc+s+33dc307
-qPaNik5qfs0KbDvQLTPQDVggKpfAZODCUCg6UAy9coHjjfufPPhDYgqxzU+EuojVTjHaXV/DfgUd
-fjbHXafot9FsimPEAE8vIXY0z0FhHb6DH8wJxyuEwfW7G1J4eF29wu0R+HA9YOjn+BTjASRdbbIT
-OmD1qcewgP8XjPVT76Gs0mdxO4XAz2+9EG9GByKKRp+LTK9bKWB6MFE34dKjiycWyPdFgdNfti9u
-UHjQPBtG+bEkFYcTnDniaAbzHI6lLGrDpwMq3VbCX3I1gbzxxJtOyFLspYzn6IdZOd8SRHmEmGIe
-AD1Hql03Hd2v6X2vCq3J043ANNCWMCyv7ruOU/UCq2/3deV747YNQ+IZtA8G415Cc3SCmZKtcynN
-Addxojwdkck9StS8hmnlis7fiJzfvGlfgGHUVY857vzJmXoNUSkOfTAceFN0MyUSUbx9CkgvtDuh
-s8oiUYypookPfQ3eigZGJ15eeaKqeqIuuQIIq2aW7V6uqPnQ95llGfMFLWfYJs9iJobFxd/kwO1W
-sWRmP/RWWWrr/jrOrfdexkrakxL2X8I7PozuC+CRg/9tOFYlYf9XgaT9dwgauq8w8CTWR7//Gw0S
-HNnUHyV2eI6+jbxHMi2VVR5m4mMAA4j4fZ64Y3x+GLjPLthi+Lya9SlFTD6FBQB9R8dLfIL1IQw3
-NAH7MrD8wLfk3U+i2fh0NT/6+mE8enX90SDE/2Bgfg5PhVTxlLoU8RHS8CgvPoGRr/RTybe61M7j
-YCzgnJOe1GTNqMcxxQWAleU1OtDLqSXI76quGZpZhonzJRV6spkbFmkbDnhiN82Bhm7BAVW4xKXX
-/tq++d6+O7+9+dpqr2NHv4IlmBlQHD2HmWgj2xTJgPpJF4mG5nDJan1bcdX0NSXLKxdvyTvVoaFV
-rDXM2p8bOcw29Iy3K+Giv23DA93+RooLDc3hs+jJ25WlqtlrSgOheXzYGLFd3zKdNaVhwTls2Piz
-Y7uo2fs0CzbA7cSKXkOZwerTgqhpi+4/hpbB5ghm3s2tok/LpCRkKwucoDIHcOK/tXK2G7KMcqQz
-YrNHmeq4XmaexY25bG2ApVjRqajMP4DyX2t3iffM5tPfIEWlLjyc4O49Dzc3oMclVunkxgyMxDvK
-fOE3y4vlTkZ3o1k8VNRGt9u6/tZVvzWaXxtfWqrxGRLPYbt66UtAlt4K7yYJnwaTKESXMBNxHoO7
-W1Z9ACjEj9JC2NLPRKpsj2xOvGAQDuKHZDR29cNaH8BqrSXSpa+9SFYM4T7xj3hhFL2T4jMahpgC
-P0nH9G499wkSI0DM3tfr7XtDyZK81O/O76EQ12qslrbjPolLLEDOOaTFgS940ZTu4goPcX0e2OFk
-wr0LQYQHItmNG9Fw4L3ipbeLqz+WXN5UD1q6hZvYwsVnjl7qM8fiXWbzFhF2at0iUU7jzo+W/VVi
-njhT2yJCO5o+8EKzaB8X725CtT9xQ2gHSUerEiaTlVXhIEa/m+oNiRsq6Sq3sMr5vpREjdMtKeJd
-Zo3z9ztVOE+TU99ZsVaGEh5px4GEp2rifTYpR+iO+YoBeyWdGIQ6vWaz1elc9K4+ijsiERPl4zxi
-ZnsQZ8Xft++zzSBv3/MrBTVDuTVSbo3M2hqZ7Jv/nwsEKuTWw8O62YK/KmCy6LDLZ/negenGrQ1v
-GPkLgX9d6lRCMfHW1j523UPoRCBCYKVv4/9LaJTN/0WC/3zYZ/9XpeLYcv/XIWi9/gUKYDE8dtd/
-FYOk/g9Am/W/8Y7MrXnk7P9b0T/Ff7fgB/Rv7Ht75y4VIPW/Qf/F7AHdRf9s/6ej6/Zm/Re2O1Xq
-f4P+9UKugNi9/9t6Naf/FyPZB6n/tfoPC4WA3GP/f9WU8/9BaJP+i4KA3Gn8R/xHy4IVwPr+X6xk
-H6T+N+i/KAigned/0D6e/8nWf1GSfZD636D/otZYu6//IHbG+q9wcAqp/zX6L/YI4B7zv+M4cv4/
-BG3Uf0HdbC/7L2P8L/xw4i+uf0mSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEmSJEnSP5/+
-AoMINGQA8AAA
+RnJvbSAxMzg4MDgxNGE3ZTBkMWRhYWMxYjZlY2Q4YzJmYTVjZWQzNzkyYzM0IE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBVcGdyYWRlIEhlbHBlciA8YXVoQHlvY3RvcHJvamVjdC5vcmc+
+CkRhdGU6IFNhdCwgNCBOb3YgMjAyMyAwNzo1NjoyMiArMDAwMApTdWJqZWN0OiBbUEFUQ0hdIG5n
+aW54OiB1cGdyYWRlIDEuMjUuMiAtPiAxLjI1LjMKCi0tLQogLi4uL3JlY2lwZXMtaHR0cGQvbmdp
+bngve25naW54XzEuMjUuMi5iYiA9PiBuZ2lueF8xLjI1LjMuYmJ9ICAgIHwgMiArLQogMSBmaWxl
+IGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pCiByZW5hbWUgbWV0YS13ZWJz
+ZXJ2ZXIvcmVjaXBlcy1odHRwZC9uZ2lueC97bmdpbnhfMS4yNS4yLmJiID0+IG5naW54XzEuMjUu
+My5iYn0gKDUxJSkKCmRpZmYgLS1naXQgYS9tZXRhLXdlYnNlcnZlci9yZWNpcGVzLWh0dHBkL25n
+aW54L25naW54XzEuMjUuMi5iYiBiL21ldGEtd2Vic2VydmVyL3JlY2lwZXMtaHR0cGQvbmdpbngv
+bmdpbnhfMS4yNS4zLmJiCnNpbWlsYXJpdHkgaW5kZXggNTElCnJlbmFtZSBmcm9tIG1ldGEtd2Vi
+c2VydmVyL3JlY2lwZXMtaHR0cGQvbmdpbngvbmdpbnhfMS4yNS4yLmJiCnJlbmFtZSB0byBtZXRh
+LXdlYnNlcnZlci9yZWNpcGVzLWh0dHBkL25naW54L25naW54XzEuMjUuMy5iYgppbmRleCA2NmVl
+ZjIzODkuLjhhYTlmYTAyNiAxMDA2NDQKLS0tIGEvbWV0YS13ZWJzZXJ2ZXIvcmVjaXBlcy1odHRw
+ZC9uZ2lueC9uZ2lueF8xLjI1LjIuYmIKKysrIGIvbWV0YS13ZWJzZXJ2ZXIvcmVjaXBlcy1odHRw
+ZC9uZ2lueC9uZ2lueF8xLjI1LjMuYmIKQEAgLTIsNSArMiw1IEBAIHJlcXVpcmUgbmdpbnguaW5j
+CiAKIExJQ19GSUxFU19DSEtTVU0gPSAiZmlsZTovL0xJQ0VOU0U7bWQ1PTc5YWQyZWI4MzcyOTk0
+MjFjNDQzNWRlZGM4ODk3YjNkIgogCi1TUkNfVVJJW3NoYTI1NnN1bV0gPSAiMDVkZDZkOTM1NmQ2
+NmE3NGU2MTAzNWYyYTQyMTYyZjhjNzU0Yzk3Y2YxYmE2NGU3YTgwMWJhMTU4ZDZjMDcxMSIKK1NS
+Q19VUklbc2hhMjU2c3VtXSA9ICI2NGM1Yjk3NWNhMjg3OTM5ZTgyODMwM2ZhODU3ZDIyZjE0MmIy
+NTFmMTc4MDhkZmU0MTczMzUxMmQ5Y2RlZDg2IgogCi0tIAoyLjM5LjIKCg==
 
---===============3442616632557532734==--
+--===============8719520393894035876==--
 
