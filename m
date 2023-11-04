@@ -2,49 +2,49 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ED792C00A5A
-	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 07:31:00 +0000 (UTC)
-Received: from a27-191.smtp-out.us-west-2.amazonses.com (a27-191.smtp-out.us-west-2.amazonses.com [54.240.27.191])
- by mx.groups.io with SMTP id smtpd.web11.5394.1699083060427429542
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 045F8C04A68
+	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 07:31:01 +0000 (UTC)
+Received: from a27-23.smtp-out.us-west-2.amazonses.com (a27-23.smtp-out.us-west-2.amazonses.com [54.240.27.23])
+ by mx.groups.io with SMTP id smtpd.web10.5516.1699083060412012216
  for <openembedded-devel@lists.openembedded.org>;
  Sat, 04 Nov 2023 00:31:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=TJIhGLze;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=CDK6jcZE;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.191, mailfrom: 0101018b993e0180-0d5fb547-637a-4229-b782-37efbde96a14-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=gn3MgplO;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=KNWNQDrP;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.23, mailfrom: 0101018b993e01ef-e16400bc-b17b-452b-9dc7-73227403c94d-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
 	t=1699083059;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=VXOnJWnH8LR2ZyHWtpxxUP1rLPmi7Vi5VUnJ9Rdel6E=;
-	b=TJIhGLzemwSTF/mOn2g4x55NXYrkUFIDXs6iFS4p13OeiHNfdOGhmA5c3IcV9Dqz
-	PTLUyMYqtjFHbDoOuxFJe4xtnxAonzAboV3SULO/ds3YHS2SR9xpmpkbdk3wGN5O6Xs
-	8XSlyO5PdTGguM/615cQmoB9N/ZQD7Ey13KXIP5c=
+	bh=0fZEUsMvqWF7VkxP3BGaHS71rQfU5J4RHb0uwKe4RQw=;
+	b=gn3MgplOuc+ss7e2M+qDHpYX4uWbq0fi7Msy/2zsGqkCfQCELjT0iydADk6n10Iw
+	1mvuW0D5m8nw78/+v/iH7zhzH+ZsSeL5zt15iAAZqpaU+Df2XkXUk0iDlDB0ds5DV8i
+	ENgD1BQzU+DnEkGdQjlTODlrMWCuyVKxTNR/Q64U=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699083059;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=VXOnJWnH8LR2ZyHWtpxxUP1rLPmi7Vi5VUnJ9Rdel6E=;
-	b=CDK6jcZEdW1iwGGU1LG12TusByIB25IzbH/q4FZ2IR+fG0v/v3IWHFX7dNo4d0E1
-	Yigq+jryruVzrgLsqjXa6IKJtigmmFXg4Ot3fbWX4XWpt/GmGnVB4wZCWjUvcHwyy20
-	5+BVNQKlPvTQe3qL01/eJwII0YlSvt7Wy8yws/JI=
-Content-Type: multipart/mixed; boundary="===============1591732492506452718=="
+	bh=0fZEUsMvqWF7VkxP3BGaHS71rQfU5J4RHb0uwKe4RQw=;
+	b=KNWNQDrPWj9cqzeVBQPsU/UaVWvM6gIT4fPcFB0hdh6xEAn3hznsoprVCLAD8nFw
+	cGxdUuTx2pSxgjSFtlLcybiT/+w1sN0roVZGkGTZBkwTnjo/vAQ69jMW/Lj6e5Otk6P
+	dJuVhtnDJuuMGm5FOBJnK85CCSaE7ETy942VIET8=
+Content-Type: multipart/mixed; boundary="===============6169007149672238884=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] xarchiver: upgrading to 0.5.4.21 SUCCEEDED
-Message-ID: <0101018b993e0180-0d5fb547-637a-4229-b782-37efbde96a14-000000@us-west-2.amazonses.com>
+Subject: [AUH] xfce4-battery-plugin: upgrading to 1.1.5 SUCCEEDED
+Message-ID: <0101018b993e01ef-e16400bc-b17b-452b-9dc7-73227403c94d-000000@us-west-2.amazonses.com>
 Date: Sat, 4 Nov 2023 07:30:59 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
-X-SES-Outgoing: 2023.11.04-54.240.27.191
+X-SES-Outgoing: 2023.11.04-54.240.27.23
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 07:31:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106310
+ <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 07:31:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106311
 
---===============1591732492506452718==
+--===============6169007149672238884==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,10 +52,10 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *xarchiver* to *0.5.4.21* has Succeeded.
+that the automatic attempt to upgrade the recipe *xfce4-battery-plugin* to *1.1.5* has Succeeded.
 
 Next steps:
-    - apply the patch: git am 0001-xarchiver-upgrade-0.5.4.17-0.5.4.21.patch
+    - apply the patch: git am 0001-xfce4-battery-plugin-upgrade-1.1.4-1.1.5.patch
     - check the changes to upstream patches and summarize them in the commit message,
     - compile an image that contains the package
     - perform some basic sanity tests
@@ -73,287 +73,530 @@ Regards,
 The Upgrade Helper
 
 -- >8 --
-From 7405e65f21725850c6eb93484bc0c4d1ded2ef59 Mon Sep 17 00:00:00 2001
+From 1a28853c189752a2deaab06d62e3c95b06ed55dd Mon Sep 17 00:00:00 2001
 From: Upgrade Helper <auh@yoctoproject.org>
-Date: Sat, 4 Nov 2023 05:55:29 +0000
-Subject: [PATCH] xarchiver: upgrade 0.5.4.17 -> 0.5.4.21
+Date: Sat, 4 Nov 2023 06:01:35 +0000
+Subject: [PATCH] xfce4-battery-plugin: upgrade 1.1.4 -> 1.1.5
 
 ---
- meta-xfce/recipes-apps/xarchiver/xarchiver_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../battery/xfce4-battery-plugin_1.1.4.bb     |   8 -
+ .../battery/xfce4-battery-plugin_1.1.5.bb     | 138 ++++++++++++++++++
+ 2 files changed, 138 insertions(+), 8 deletions(-)
+ delete mode 100644 meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.4.bb
+ create mode 100644 meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.5.bb
 
-diff --git a/meta-xfce/recipes-apps/xarchiver/xarchiver_git.bb b/meta-xfce/recipes-apps/xarchiver/xarchiver_git.bb
-index ea7e8005e..e325e5d02 100644
---- a/meta-xfce/recipes-apps/xarchiver/xarchiver_git.bb
-+++ b/meta-xfce/recipes-apps/xarchiver/xarchiver_git.bb
-@@ -8,8 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- DEPENDS = "gtk+3 glib-2.0 xfce4-dev-tools-native intltool-native"
- 
- SRC_URI = "git://github.com/ib/xarchiver.git;branch=master;protocol=https"
--SRCREV = "2f6c91e756678f0723305d8636e8e393c1eef32c"
--PV = "0.5.4.17"
-+SRCREV = "55f923ebc623bcc8f53368543847350a23688189"
-+PV = "0.5.4.21"
- S = "${WORKDIR}/git"
- 
- inherit gettext pkgconfig autotools gtk-icon-cache features_check mime-xdg
+diff --git a/meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.4.bb b/meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.4.bb
+deleted file mode 100644
+index 0f8489b18..000000000
+--- a/meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.4.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-SUMMARY = "A battery monitor panel plugin for Xfce4, compatible with APM and ACP"
+-HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-battery-plugin"
+-LICENSE = "GPL-2.0-only"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+-
+-inherit xfce-panel-plugin
+-
+-SRC_URI[sha256sum] = "107df2a837156c010e1eab5430bab90c77f0a3dc699b5937678c8a9c5e64c222"
+diff --git a/meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.5.bb b/meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.5.bb
+new file mode 100644
+index 000000000..447b2981c
+--- /dev/null
++++ b/meta-xfce/recipes-panel-plugins/battery/xfce4-battery-plugin_1.1.5.bb
+@@ -0,0 +1,138 @@
++# FIXME: the LIC_FILES_CHKSUM values have been updated by 'devtool upgrade'.
++# The following is the difference between the old and the new license text.
++# Please update the LICENSE value if needed, and summarize the changes in
++# the commit message via 'License-Update:' tag.
++# (example: 'License-Update: copyright years updated.')
++#
++# The changes:
++#
++# --- COPYING
++# +++ COPYING
++# @@ -1,12 +1,12 @@
++# -		    GNU GENERAL PUBLIC LICENSE
++# -		       Version 2, June 1991
++# -
++# - Copyright (C) 1989, 1991 Free Software Foundation, Inc.
++# -     59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++# +                    GNU GENERAL PUBLIC LICENSE
++# +                       Version 2, June 1991
++# +
++# + Copyright (C) 1989, 1991 Free Software Foundation, Inc.,
++# + 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
++#   Everyone is permitted to copy and distribute verbatim copies
++#   of this license document, but changing it is not allowed.
++#  
++# -			    Preamble
++# +                            Preamble
++#  
++#    The licenses for most software are designed to take away your
++#  freedom to share and change it.  By contrast, the GNU General Public
++# @@ -15,7 +15,7 @@
++#  General Public License applies to most of the Free Software
++#  Foundation's software and to any other program whose authors commit to
++#  using it.  (Some other Free Software Foundation software is covered by
++# -the GNU Library General Public License instead.)  You can apply it to
++# +the GNU Lesser General Public License instead.)  You can apply it to
++#  your programs, too.
++#  
++#    When we speak of free software, we are referring to freedom, not
++# @@ -55,8 +55,8 @@
++#  
++#    The precise terms and conditions for copying, distribution and
++#  modification follow.
++# -
++# -		    GNU GENERAL PUBLIC LICENSE
++# +
++# +                    GNU GENERAL PUBLIC LICENSE
++#     TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
++#  
++#    0. This License applies to any program or other work which contains
++# @@ -110,7 +110,7 @@
++#      License.  (Exception: if the Program itself is interactive but
++#      does not normally print such an announcement, your work based on
++#      the Program is not required to print an announcement.)
++# -
++# +
++#  These requirements apply to the modified work as a whole.  If
++#  identifiable sections of that work are not derived from the Program,
++#  and can be reasonably considered independent and separate works in
++# @@ -168,7 +168,7 @@
++#  access to copy the source code from the same place counts as
++#  distribution of the source code, even though third parties are not
++#  compelled to copy the source along with the object code.
++# -
++# +
++#    4. You may not copy, modify, sublicense, or distribute the Program
++#  except as expressly provided under this License.  Any attempt
++#  otherwise to copy, modify, sublicense or distribute the Program is
++# @@ -225,7 +225,7 @@
++#  
++#  This section is intended to make thoroughly clear what is believed to
++#  be a consequence of the rest of this License.
++# -
++# +
++#    8. If the distribution and/or use of the Program is restricted in
++#  certain countries either by patents or by copyrighted interfaces, the
++#  original copyright holder who places the Program under this License
++# @@ -255,7 +255,7 @@
++#  of preserving the free status of all derivatives of our free software and
++#  of promoting the sharing and reuse of software generally.
++#  
++# -			    NO WARRANTY
++# +                            NO WARRANTY
++#  
++#    11. BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
++#  FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW.  EXCEPT WHEN
++# @@ -277,9 +277,9 @@
++#  PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE
++#  POSSIBILITY OF SUCH DAMAGES.
++#  
++# -		     END OF TERMS AND CONDITIONS
++# -
++# -	    How to Apply These Terms to Your New Programs
++# +                     END OF TERMS AND CONDITIONS
++# +
++# +            How to Apply These Terms to Your New Programs
++#  
++#    If you develop a new program, and you want it to be of the greatest
++#  possible use to the public, the best way to achieve this is to make it
++# @@ -303,17 +303,16 @@
++#      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++#      GNU General Public License for more details.
++#  
++# -    You should have received a copy of the GNU General Public License
++# -    along with this program; if not, write to the Free Software
++# -    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
++# -
++# +    You should have received a copy of the GNU General Public License along
++# +    with this program; if not, write to the Free Software Foundation, Inc.,
++# +    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
++#  
++#  Also add information on how to contact you by electronic and paper mail.
++#  
++#  If the program is interactive, make it output a short notice like this
++#  when it starts in an interactive mode:
++#  
++# -    Gnomovision version 69, Copyright (C) year  name of author
++# +    Gnomovision version 69, Copyright (C) year name of author
++#      Gnomovision comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
++#      This is free software, and you are welcome to redistribute it
++#      under certain conditions; type `show c' for details.
++# @@ -336,5 +335,5 @@
++#  This General Public License does not permit incorporating your program into
++#  proprietary programs.  If your program is a subroutine library, you may
++#  consider it more useful to permit linking proprietary applications with the
++# -library.  If this is what you want to do, use the GNU Library General
++# +library.  If this is what you want to do, use the GNU Lesser General
++#  Public License instead of this License.
++# 
++#
++
++SUMMARY = "A battery monitor panel plugin for Xfce4, compatible with APM and ACP"
++HOMEPAGE = "https://goodies.xfce.org/projects/panel-plugins/xfce4-battery-plugin"
++LICENSE = "GPL-2.0-only"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++
++inherit xfce-panel-plugin
++
++SRC_URI[sha256sum] = "752233bfb320ee1e26104a656cbb868299f562733063e2b9a18f0966585ce213"
 -- 
 2.39.2
 
 
---===============1591732492506452718==
+--===============6169007149672238884==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment; filename="buildhistory-diff-full.txt"
 
-packages/core2-64-poky-linux/xarchiver: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver: PV changed from "0.5.4.17" to "0.5.4.21"
-Changes to packages/core2-64-poky-linux/xarchiver (sysroot):
-  /usr/share/icons/hicolor/32x32 was added
-  /usr/share/icons/hicolor/32x32/apps was added
-  /usr/share/icons/hicolor/32x32/apps/xarchiver.png was added
-packages/core2-64-poky-linux/xarchiver/xarchiver-dbg: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-dbg: PKGSIZE changed from 870832 to 918264 (+5%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-dbg: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-dev: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-dev: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-doc: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-doc: PKGSIZE changed from 1981 to 2201 (+11%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-doc: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ar: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ar: PKGSIZE changed from 20531 to 18091 (-12%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ar: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ast: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ast: PKGSIZE changed from 18835 to 16363 (-13%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ast: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-bg: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-bg: PKGSIZE changed from 24785 to 33473 (+35%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-bg: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ca: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ca: PKGSIZE changed from 18556 to 16296 (-12%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ca: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-cs: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-cs: PKGSIZE changed from 18522 to 16088 (-13%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-cs: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-da: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-da: PKGSIZE changed from 17848 to 15639 (-12%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-da: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-de: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-de: PKGSIZE changed from 26148 to 27661 (+6%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-de: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-dz: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-dz: PKGSIZE changed from 12205 to 10358 (-15%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-dz: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-el: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-el: PKGSIZE changed from 25064 to 21951 (-12%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-el: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-en-gb: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-en-gb: PKGSIZE changed from 23844 to 25324 (+6%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-en-gb: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-es: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-es: PKGSIZE changed from 26034 to 27276 (+5%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-es: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-eu: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-eu: PKGSIZE changed from 25047 to 23049 (-8%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-eu: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-fi: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-fi: PKGSIZE changed from 17447 to 15375 (-12%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-fi: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-fr: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-fr: PKGSIZE changed from 25641 to 27272 (+6%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-fr: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-gl: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-gl: PKGSIZE changed from 18681 to 16289 (-13%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-gl: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-he: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-he: PKGSIZE changed from 20620 to 17876 (-13%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-he: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-hr: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-hr: PKGSIZE changed from 14828 to 13083 (-12%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-hr: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-hu: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-hu: PKGSIZE changed from 18986 to 16510 (-13%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-hu: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-id: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-id: PKGSIZE changed from 17904 to 15616 (-13%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-id: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-it: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-it: PKGSIZE changed from 18880 to 26939 (+43%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-it: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ja: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ja: PKGSIZE changed from 20825 to 18351 (-12%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ja: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-kk: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-kk: PKGSIZE changed from 14439 to 13497 (-7%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-kk: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ku: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ku: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-lt: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-lt: PKGSIZE changed from 25560 to 27131 (+6%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-lt: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-lv: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-lv: PKGSIZE changed from 18327 to 16067 (-12%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-lv: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ms: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ms: PKGSIZE changed from 15595 to 13372 (-14%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ms: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-nb: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-nb: PKGSIZE changed from 17411 to 15287 (-12%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-nb: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-nl: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-nl: PKGSIZE changed from 18460 to 26984 (+46%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-nl: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-pa: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-pa: PKGSIZE changed from 5751 to 5303 (-8%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-pa: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-pl: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-pl: PKGSIZE changed from 18707 to 26815 (+43%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-pl: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-pt-br: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-pt-br: PKGSIZE changed from 24051 to 21516 (-11%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-pt-br: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-pt-pt: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-pt-pt: PKGSIZE changed from 18455 to 26804 (+45%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-pt-pt: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ro: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ro: PKGSIZE changed from 18743 to 16458 (-12%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ro: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ru: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ru: PKGSIZE changed from 31119 to 33235 (+7%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ru: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-si: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-si: PKGSIZE changed from 26732 to 23397 (-12%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-si: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-sk: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-sk: PKGSIZE changed from 18744 to 16309 (-13%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-sk: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-sq: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-sq: PKGSIZE changed from 17147 to 14854 (-13%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-sq: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-sr: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-sr: PKGSIZE changed from 20732 to 17782 (-14%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-sr: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-sv: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-sv: PKGSIZE changed from 18118 to 15883 (-12%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-sv: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-te: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-te: PKGSIZE changed from 9015 to 8828 (-2%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-te: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-th: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-th: PKGSIZE changed from 23587 to 20059 (-15%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-th: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-tr: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-tr: PKGSIZE changed from 18191 to 26183 (+44%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-tr: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ug: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ug: PKGSIZE changed from 19457 to 17163 (-12%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ug: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-uk: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-uk: PKGSIZE changed from 31194 to 28242 (-9%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-uk: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ur: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ur: PKGSIZE changed from 21415 to 18672 (-13%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ur: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-vi: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-vi: PKGSIZE changed from 16953 to 14567 (-14%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-vi: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-zh-cn: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-zh-cn: PKGSIZE changed from 17719 to 17773 (+0%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-zh-cn: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-zh-tw: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-zh-tw: PKGSIZE changed from 17356 to 15219 (-12%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-zh-tw: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-src: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-src: FILELIST: directory renamed /usr/src/debug/xarchiver/0.5.4.17-r0/src/xdgmime -> /usr/src/debug/xarchiver/0.5.4.21-r0/src/xdgmime, removed "/usr/src/debug/xarchiver/0.5.4.17-r0/src/utf8-fnmatch.c /usr/src/debug/xarchiver/0.5.4.17-r0/src/rpm.h /usr/src/debug/xarchiver/0.5.4.17-r0/src/lha.c /usr/src/debug/xarchiver/0.5.4.17-r0/src/arj.c /usr/src/debug/xarchiver/0.5.4.17-r0/src/arj.h /usr/src/debug/xarchiver/0.5.4.17-r0/src/lha.h /usr/src/debug/xarchiver/0.5.4.17-r0/src/rpm.c /usr/src/debug/xarchiver/0.5.4.17-r0/src/utf8-fnmatch.h /usr/src/debug/xarchiver/0.5.4.17-r0/src/date_utils.h /usr/src/debug/xarchiver/0.5.4.17-r0/src/mime.h /usr/src/debug/xarchiver/0.5.4.17-r0/src/new_dialog.c /usr/src/debug/xarchiver/0.5.4.17-r0/src/add_dialog.c /usr/src/debug/xarchiver/0.5.4.17-r0/src/pref_dialog.h /usr/src/debug/xarchiver/0.5.4.17-r0/src/date_utils.c /usr/src/debug/xarchiver/0.5.4.17-r0/src/new_dialog.h /usr/src/debug/xarchiver/0.5.4.17-r0/s
- rc/pref_dialog.c /usr/src/debug/xarchiver/0.5.4.17-r0/src/add_dialog.h /usr/src/debug/xarchiver/0.5.4.17-r0/src/mime.c /usr/src/debug/xarchiver/0.5.4.17-r0/src/archive.c /usr/src/debug/xarchiver/0.5.4.17-r0/src/interface.c /usr/src/debug/xarchiver/0.5.4.17-r0/src/rar.c /usr/src/debug/xarchiver/0.5.4.17-r0/src/interface.h /usr/src/debug/xarchiver/0.5.4.17-r0/src/archive.h /usr/src/debug/xarchiver/0.5.4.17-r0/src/support.h /usr/src/debug/xarchiver/0.5.4.17-r0/src/rar.h /usr/src/debug/xarchiver/0.5.4.17-r0/src/extract_dialog.h /usr/src/debug/xarchiver/0.5.4.17-r0/src/main.h /usr/src/debug/xarchiver/0.5.4.17-r0/src/gzip_et_al.h /usr/src/debug/xarchiver/0.5.4.17-r0/src/extract_dialog.c /usr/src/debug/xarchiver/0.5.4.17-r0/src/gzip_et_al.c /usr/src/debug/xarchiver/0.5.4.17-r0/src/main.c /usr/src/debug/xarchiver/0.5.4.17-r0/src/ar.h /usr/src/debug/xarchiver/0.5.4.17-r0/src/ar.c /usr/src/debug/xarchiver/0.5.4.17-r0/src/unar.h /usr/src/debug/xarchiver/0.5.4.17-r0/src/cpio.c /usr/src/debug/xa
- rchiver/0.5.4.17-r0/src/7zip.c /usr/src/debug/xarchiver/0.5.4.17-r0/src/socket.h /usr/src/debug/xarchiver/0.5.4.17-r0/src/tar.c /usr/src/debug/xarchiver/0.5.4.17-r0/src/window.h /usr/src/debug/xarchiver/0.5.4.17-r0/src/unar.c /usr/src/debug/xarchiver/0.5.4.17-r0/src/tar.h /usr/src/debug/xarchiver/0.5.4.17-r0/src/7zip.h /usr/src/debug/xarchiver/0.5.4.17-r0/src/cpio.h /usr/src/debug/xarchiver/0.5.4.17-r0/src/socket.c /usr/src/debug/xarchiver/0.5.4.17-r0/src/window.c /usr/src/debug/xarchiver/0.5.4.17-r0/src/open-with-dlg.c /usr/src/debug/xarchiver/0.5.4.17-r0/src/string_utils.c /usr/src/debug/xarchiver/0.5.4.17-r0/src/exe.h /usr/src/debug/xarchiver/0.5.4.17-r0/src/zip.c /usr/src/debug/xarchiver/0.5.4.17-r0/src/open-with-dlg.h /usr/src/debug/xarchiver/0.5.4.17-r0/src/zip.h /usr/src/debug/xarchiver/0.5.4.17-r0/src/exe.c /usr/src/debug/xarchiver/0.5.4.17-r0/src/string_utils.h", added "/usr/src/debug/xarchiver/0.5.4.21-r0/src/gzip_et_al.c /usr/src/debug/xarchiver/0.5.4.21-r0/src/iso.h /usr
- /src/debug/xarchiver/0.5.4.21-r0/src/socket.c /usr/src/debug/xarchiver/0.5.4.21-r0/src/extract_dialog.c /usr/src/debug/xarchiver/0.5.4.21-r0/src/string_utils.c /usr/src/debug/xarchiver/0.5.4.21-r0/src/gzip_et_al.h /usr/src/debug/xarchiver/0.5.4.21-r0/src/utf8-fnmatch.h /usr/src/debug/xarchiver/0.5.4.21-r0/src/window.c /usr/src/debug/xarchiver/0.5.4.21-r0/src/extract_dialog.h /usr/src/debug/xarchiver/0.5.4.21-r0/src/socket.h /usr/src/debug/xarchiver/0.5.4.21-r0/src/iso.c /usr/src/debug/xarchiver/0.5.4.21-r0/src/string_utils.h /usr/src/debug/xarchiver/0.5.4.21-r0/src/utf8-fnmatch.c /usr/src/debug/xarchiver/0.5.4.21-r0/src/add_dialog.h /usr/src/debug/xarchiver/0.5.4.21-r0/src/new_dialog.h /usr/src/debug/xarchiver/0.5.4.21-r0/src/window.h /usr/src/debug/xarchiver/0.5.4.21-r0/src/add_dialog.c /usr/src/debug/xarchiver/0.5.4.21-r0/src/new_dialog.c /usr/src/debug/xarchiver/0.5.4.21-r0/src/ar.c /usr/src/debug/xarchiver/0.5.4.21-r0/src/zpaq.h /usr/src/debug/xarchiver/0.5.4.21-r0/src/archive.c
-  /usr/src/debug/xarchiver/0.5.4.21-r0/src/exe.c /usr/src/debug/xarchiver/0.5.4.21-r0/src/archive.h /usr/src/debug/xarchiver/0.5.4.21-r0/src/support.h /usr/src/debug/xarchiver/0.5.4.21-r0/src/ar.h /usr/src/debug/xarchiver/0.5.4.21-r0/src/zpaq.c /usr/src/debug/xarchiver/0.5.4.21-r0/src/exe.h /usr/src/debug/xarchiver/0.5.4.21-r0/src/pref_dialog.c /usr/src/debug/xarchiver/0.5.4.21-r0/src/pref_dialog.h /usr/src/debug/xarchiver/0.5.4.21-r0/src/unar.h /usr/src/debug/xarchiver/0.5.4.21-r0/src/date_utils.h /usr/src/debug/xarchiver/0.5.4.21-r0/src/rar.c /usr/src/debug/xarchiver/0.5.4.21-r0/src/lha.h /usr/src/debug/xarchiver/0.5.4.21-r0/src/open-with-dlg.h /usr/src/debug/xarchiver/0.5.4.21-r0/src/rar.h /usr/src/debug/xarchiver/0.5.4.21-r0/src/date_utils.c /usr/src/debug/xarchiver/0.5.4.21-r0/src/squashfs.c /usr/src/debug/xarchiver/0.5.4.21-r0/src/unar.c /usr/src/debug/xarchiver/0.5.4.21-r0/src/open-with-dlg.c /usr/src/debug/xarchiver/0.5.4.21-r0/src/lha.c /usr/src/debug/xarchiver/0.5.4.21-r0/s
- rc/squashfs.h /usr/src/debug/xarchiver/0.5.4.21-r0/src/tar.h /usr/src/debug/xarchiver/0.5.4.21-r0/src/main.h /usr/src/debug/xarchiver/0.5.4.21-r0/src/rpm.c /usr/src/debug/xarchiver/0.5.4.21-r0/src/tar.c /usr/src/debug/xarchiver/0.5.4.21-r0/src/main.c /usr/src/debug/xarchiver/0.5.4.21-r0/src/rpm.h /usr/src/debug/xarchiver/0.5.4.21-r0/src/zip.c /usr/src/debug/xarchiver/0.5.4.21-r0/src/interface.c /usr/src/debug/xarchiver/0.5.4.21-r0/src/arj.c /usr/src/debug/xarchiver/0.5.4.21-r0/src/cpio.c /usr/src/debug/xarchiver/0.5.4.21-r0/src/mime.c /usr/src/debug/xarchiver/0.5.4.21-r0/src/zip.h /usr/src/debug/xarchiver/0.5.4.21-r0/src/mime.h /usr/src/debug/xarchiver/0.5.4.21-r0/src/cpio.h /usr/src/debug/xarchiver/0.5.4.21-r0/src/arj.h /usr/src/debug/xarchiver/0.5.4.21-r0/src/interface.h /usr/src/debug/xarchiver/0.5.4.21-r0/src/7zip.h /usr/src/debug/xarchiver/0.5.4.21-r0/src/7zip.c"
-packages/core2-64-poky-linux/xarchiver/xarchiver-src: PKGSIZE changed from 668686 to 709950 (+6%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-src: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver-staticdev: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver-staticdev: PV changed from "0.5.4.17" to "0.5.4.21"
-packages/core2-64-poky-linux/xarchiver/xarchiver: PKGV changed from 0.5.4.17 [default] to 0.5.4.21 [default]
-packages/core2-64-poky-linux/xarchiver/xarchiver: FILELIST: added "/usr/share/icons/hicolor/32x32/apps/xarchiver.png /usr/share/pixmaps/xarchiver/xarchiver-select.png"
-packages/core2-64-poky-linux/xarchiver/xarchiver: PKGSIZE changed from 312701 to 339259 (+8%)
-packages/core2-64-poky-linux/xarchiver/xarchiver: PV changed from "0.5.4.17" to "0.5.4.21"
+packages/core2-64-poky-linux/xfce4-battery-plugin: SRC_URI changed from "http://archive.xfce.org/src/panel-plugins/xfce4-battery-plugin/1.1/xfce4-battery-plugin-1.1.4.tar.bz2" to "http://archive.xfce.org/src/panel-plugins/xfce4-battery-plugin/1.1/xfce4-battery-plugin-1.1.5.tar.bz2"
+packages/core2-64-poky-linux/xfce4-battery-plugin: PACKAGES: added "xfce4-battery-plugin-locale-ga"
+packages/core2-64-poky-linux/xfce4-battery-plugin: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-dbg: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-dbg: PKGSIZE changed from 94024 to 93864 (-0%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-dbg: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-dev: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-dev: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-doc: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-doc: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ar: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ar: PKGSIZE changed from 3823 to 3785 (-1%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ar: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ast: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ast: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-be: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-be: PKGSIZE changed from 4703 to 4562 (-3%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-be: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-bg: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-bg: PKGSIZE changed from 4342 to 4217 (-3%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-bg: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ca: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ca: PKGSIZE changed from 3652 to 3549 (-3%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ca: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-cs: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-cs: PKGSIZE changed from 3781 to 3675 (-3%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-cs: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-da: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-da: PKGSIZE changed from 3540 to 3425 (-3%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-da: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-de: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-de: PKGSIZE changed from 3758 to 3650 (-3%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-de: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-el: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-el: PKGSIZE changed from 4645 to 4531 (-2%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-el: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-en-au: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-en-au: PKGSIZE changed from 3420 to 3312 (-3%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-en-au: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-en-ca: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-en-ca: PKGSIZE changed from 3400 to 3294 (-3%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-en-ca: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-en-gb: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-en-gb: PKGSIZE changed from 3311 to 3306 (-0%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-en-gb: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-es: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-es: PKGSIZE changed from 3583 to 3568 (-0%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-es: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-et: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-et: PKGSIZE changed from 3562 to 3463 (-3%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-et: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-eu: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-eu: PKGSIZE changed from 3468 to 3385 (-2%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-eu: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-fi: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-fi: PKGSIZE changed from 3531 to 3457 (-2%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-fi: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-fr: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-fr: PKGSIZE changed from 3700 to 3684 (-0%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-fr: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-gl: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-gl: PKGSIZE changed from 3651 to 3543 (-3%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-gl: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-he: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-he: PKGSIZE changed from 3896 to 3811 (-2%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-he: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-hr: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-hr: PKGSIZE changed from 3617 to 3516 (-3%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-hr: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-hu: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-hu: PKGSIZE changed from 3784 to 3685 (-3%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-hu: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-hy-am: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-hy-am: PKGSIZE changed from 4311 to 4159 (-4%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-hy-am: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-hye: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-hye: PKGSIZE changed from 4303 to 4151 (-4%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-hye: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-id: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-id: PKGSIZE changed from 3512 to 3408 (-3%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-id: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ie: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ie: PKGSIZE changed from 3486 to 3392 (-3%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ie: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-is: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-is: PKGSIZE changed from 3700 to 3596 (-3%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-is: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-it: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-it: PKGSIZE changed from 3630 to 3584 (-1%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-it: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ja: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ja: PKGSIZE changed from 3914 to 3818 (-2%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ja: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-kk: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-kk: PKGSIZE changed from 4476 to 4375 (-2%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-kk: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ko: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ko: PKGSIZE changed from 3596 to 3493 (-3%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ko: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-lt: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-lt: PKGSIZE changed from 3760 to 3659 (-3%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-lt: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-lv: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-lv: PKGSIZE changed from 3026 to 2972 (-2%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-lv: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ms: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ms: PKGSIZE changed from 3463 to 3373 (-3%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ms: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-nb: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-nb: PKGSIZE changed from 3453 to 3334 (-3%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-nb: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-nl: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-nl: PKGSIZE changed from 3595 to 3488 (-3%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-nl: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-nn: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-nn: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-oc: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-oc: PKGSIZE changed from 3512 to 3487 (-1%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-oc: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-pa: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-pa: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-pl: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-pl: PKGSIZE changed from 3832 to 3709 (-3%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-pl: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-pt-br: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-pt-br: PKGSIZE changed from 3647 to 3586 (-2%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-pt-br: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-pt: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-pt: PKGSIZE changed from 3515 to 3461 (-2%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-pt: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ru: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ru: PKGSIZE changed from 4582 to 4463 (-3%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ru: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-sk: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-sk: PKGSIZE changed from 3815 to 3719 (-3%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-sk: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-sl: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-sl: PKGSIZE changed from 3671 to 3566 (-3%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-sl: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-sq: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-sq: PKGSIZE changed from 3606 to 3507 (-3%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-sq: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-sr: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-sr: PKGSIZE changed from 4538 to 4414 (-3%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-sr: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-sv: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-sv: PKGSIZE changed from 3637 to 3531 (-3%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-sv: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-th: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-th: PKGSIZE changed from 5055 to 4937 (-2%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-th: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-tr: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-tr: PKGSIZE changed from 3483 to 3373 (-3%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-tr: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ug: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ug: PKGSIZE changed from 4228 to 4188 (-1%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ug: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-uk: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-uk: PKGSIZE changed from 4717 to 4617 (-2%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-uk: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ur-pk: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ur-pk: PKGSIZE changed from 3376 to 3318 (-2%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ur-pk: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ur: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ur: PKGSIZE changed from 3359 to 3301 (-2%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-ur: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-uz+latn: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-uz+latn: PKGSIZE changed from 3622 to 3582 (-1%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-uz+latn: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-uz: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-uz: PKGSIZE changed from 3604 to 3564 (-1%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-uz: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-vi: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-vi: PKGSIZE changed from 2977 to 2920 (-2%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-vi: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-zh-cn: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-zh-cn: PKGSIZE changed from 3452 to 3346 (-3%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-zh-cn: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-zh-tw: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-zh-tw: PKGSIZE changed from 3386 to 3279 (-3%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-locale-zh-tw: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-src: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-src: PKGSIZE changed from 78302 to 78311 (+0%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-src: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-staticdev: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin-staticdev: PV changed from "1.1.4" to "1.1.5"
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin: PKGV changed from 1.1.4 [default] to 1.1.5 [default]
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin: PKGSIZE changed from 273129 to 273224 (+0%)
+packages/core2-64-poky-linux/xfce4-battery-plugin/xfce4-battery-plugin: PV changed from "1.1.4" to "1.1.5"
 
---===============1591732492506452718==
+--===============6169007149672238884==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment; filename="buildhistory-diff.txt"
 
-Changes to packages/core2-64-poky-linux/xarchiver (sysroot):
-  /usr/share/icons/hicolor/32x32 was added
-  /usr/share/icons/hicolor/32x32/apps was added
-  /usr/share/icons/hicolor/32x32/apps/xarchiver.png was added
-packages/core2-64-poky-linux/xarchiver/xarchiver-doc: PKGSIZE changed from 1981 to 2201 (+11%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ar: PKGSIZE changed from 20531 to 18091 (-12%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ast: PKGSIZE changed from 18835 to 16363 (-13%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-bg: PKGSIZE changed from 24785 to 33473 (+35%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ca: PKGSIZE changed from 18556 to 16296 (-12%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-cs: PKGSIZE changed from 18522 to 16088 (-13%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-da: PKGSIZE changed from 17848 to 15639 (-12%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-dz: PKGSIZE changed from 12205 to 10358 (-15%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-el: PKGSIZE changed from 25064 to 21951 (-12%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-fi: PKGSIZE changed from 17447 to 15375 (-12%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-gl: PKGSIZE changed from 18681 to 16289 (-13%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-he: PKGSIZE changed from 20620 to 17876 (-13%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-hr: PKGSIZE changed from 14828 to 13083 (-12%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-hu: PKGSIZE changed from 18986 to 16510 (-13%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-id: PKGSIZE changed from 17904 to 15616 (-13%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-it: PKGSIZE changed from 18880 to 26939 (+43%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ja: PKGSIZE changed from 20825 to 18351 (-12%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-lv: PKGSIZE changed from 18327 to 16067 (-12%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ms: PKGSIZE changed from 15595 to 13372 (-14%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-nb: PKGSIZE changed from 17411 to 15287 (-12%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-nl: PKGSIZE changed from 18460 to 26984 (+46%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-pl: PKGSIZE changed from 18707 to 26815 (+43%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-pt-br: PKGSIZE changed from 24051 to 21516 (-11%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-pt-pt: PKGSIZE changed from 18455 to 26804 (+45%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ro: PKGSIZE changed from 18743 to 16458 (-12%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-si: PKGSIZE changed from 26732 to 23397 (-12%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-sk: PKGSIZE changed from 18744 to 16309 (-13%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-sq: PKGSIZE changed from 17147 to 14854 (-13%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-sr: PKGSIZE changed from 20732 to 17782 (-14%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-sv: PKGSIZE changed from 18118 to 15883 (-12%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-th: PKGSIZE changed from 23587 to 20059 (-15%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-tr: PKGSIZE changed from 18191 to 26183 (+44%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ug: PKGSIZE changed from 19457 to 17163 (-12%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-ur: PKGSIZE changed from 21415 to 18672 (-13%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-vi: PKGSIZE changed from 16953 to 14567 (-14%)
-packages/core2-64-poky-linux/xarchiver/xarchiver-locale-zh-tw: PKGSIZE changed from 17356 to 15219 (-12%)
-packages/core2-64-poky-linux/xarchiver/xarchiver: FILELIST: added "/usr/share/icons/hicolor/32x32/apps/xarchiver.png /usr/share/pixmaps/xarchiver/xarchiver-select.png"
+packages/core2-64-poky-linux/xfce4-battery-plugin: PACKAGES: added "xfce4-battery-plugin-locale-ga"
 
---===============1591732492506452718==
+--===============6169007149672238884==
 Content-Type: application/octet-stream
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment;
- filename="0001-xarchiver-upgrade-0.5.4.17-0.5.4.21.patch"
+ filename="0001-xfce4-battery-plugin-upgrade-1.1.4-1.1.5.patch"
 
-RnJvbSA3NDA1ZTY1ZjIxNzI1ODUwYzZlYjkzNDg0YmMwYzRkMWRlZDJlZjU5IE1vbiBTZXAgMTcg
+RnJvbSAxYTI4ODUzYzE4OTc1MmEyZGVhYWIwNmQ2MmUzYzk1YjA2ZWQ1NWRkIE1vbiBTZXAgMTcg
 MDA6MDA6MDAgMjAwMQpGcm9tOiBVcGdyYWRlIEhlbHBlciA8YXVoQHlvY3RvcHJvamVjdC5vcmc+
-CkRhdGU6IFNhdCwgNCBOb3YgMjAyMyAwNTo1NToyOSArMDAwMApTdWJqZWN0OiBbUEFUQ0hdIHhh
-cmNoaXZlcjogdXBncmFkZSAwLjUuNC4xNyAtPiAwLjUuNC4yMQoKLS0tCiBtZXRhLXhmY2UvcmVj
-aXBlcy1hcHBzL3hhcmNoaXZlci94YXJjaGl2ZXJfZ2l0LmJiIHwgNCArKy0tCiAxIGZpbGUgY2hh
-bmdlZCwgMiBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL21ldGEt
-eGZjZS9yZWNpcGVzLWFwcHMveGFyY2hpdmVyL3hhcmNoaXZlcl9naXQuYmIgYi9tZXRhLXhmY2Uv
-cmVjaXBlcy1hcHBzL3hhcmNoaXZlci94YXJjaGl2ZXJfZ2l0LmJiCmluZGV4IGVhN2U4MDA1ZS4u
-ZTMyNWU1ZDAyIDEwMDY0NAotLS0gYS9tZXRhLXhmY2UvcmVjaXBlcy1hcHBzL3hhcmNoaXZlci94
-YXJjaGl2ZXJfZ2l0LmJiCisrKyBiL21ldGEteGZjZS9yZWNpcGVzLWFwcHMveGFyY2hpdmVyL3hh
-cmNoaXZlcl9naXQuYmIKQEAgLTgsOCArOCw4IEBAIExJQ19GSUxFU19DSEtTVU0gPSAiZmlsZTov
-L0NPUFlJTkc7bWQ1PWIyMzRlZTRkNjlmNWZjZTQ0ODZhODBmZGFmNGE0MjYzIgogREVQRU5EUyA9
-ICJndGsrMyBnbGliLTIuMCB4ZmNlNC1kZXYtdG9vbHMtbmF0aXZlIGludGx0b29sLW5hdGl2ZSIK
-IAogU1JDX1VSSSA9ICJnaXQ6Ly9naXRodWIuY29tL2liL3hhcmNoaXZlci5naXQ7YnJhbmNoPW1h
-c3Rlcjtwcm90b2NvbD1odHRwcyIKLVNSQ1JFViA9ICIyZjZjOTFlNzU2Njc4ZjA3MjMzMDVkODYz
-NmU4ZTM5M2MxZWVmMzJjIgotUFYgPSAiMC41LjQuMTciCitTUkNSRVYgPSAiNTVmOTIzZWJjNjIz
-YmNjOGY1MzM2ODU0Mzg0NzM1MGEyMzY4ODE4OSIKK1BWID0gIjAuNS40LjIxIgogUyA9ICIke1dP
-UktESVJ9L2dpdCIKIAogaW5oZXJpdCBnZXR0ZXh0IHBrZ2NvbmZpZyBhdXRvdG9vbHMgZ3RrLWlj
-b24tY2FjaGUgZmVhdHVyZXNfY2hlY2sgbWltZS14ZGcKLS0gCjIuMzkuMgoK
+CkRhdGU6IFNhdCwgNCBOb3YgMjAyMyAwNjowMTozNSArMDAwMApTdWJqZWN0OiBbUEFUQ0hdIHhm
+Y2U0LWJhdHRlcnktcGx1Z2luOiB1cGdyYWRlIDEuMS40IC0+IDEuMS41CgotLS0KIC4uLi9iYXR0
+ZXJ5L3hmY2U0LWJhdHRlcnktcGx1Z2luXzEuMS40LmJiICAgICB8ICAgOCAtCiAuLi4vYmF0dGVy
+eS94ZmNlNC1iYXR0ZXJ5LXBsdWdpbl8xLjEuNS5iYiAgICAgfCAxMzggKysrKysrKysrKysrKysr
+KysrCiAyIGZpbGVzIGNoYW5nZWQsIDEzOCBpbnNlcnRpb25zKCspLCA4IGRlbGV0aW9ucygtKQog
+ZGVsZXRlIG1vZGUgMTAwNjQ0IG1ldGEteGZjZS9yZWNpcGVzLXBhbmVsLXBsdWdpbnMvYmF0dGVy
+eS94ZmNlNC1iYXR0ZXJ5LXBsdWdpbl8xLjEuNC5iYgogY3JlYXRlIG1vZGUgMTAwNjQ0IG1ldGEt
+eGZjZS9yZWNpcGVzLXBhbmVsLXBsdWdpbnMvYmF0dGVyeS94ZmNlNC1iYXR0ZXJ5LXBsdWdpbl8x
+LjEuNS5iYgoKZGlmZiAtLWdpdCBhL21ldGEteGZjZS9yZWNpcGVzLXBhbmVsLXBsdWdpbnMvYmF0
+dGVyeS94ZmNlNC1iYXR0ZXJ5LXBsdWdpbl8xLjEuNC5iYiBiL21ldGEteGZjZS9yZWNpcGVzLXBh
+bmVsLXBsdWdpbnMvYmF0dGVyeS94ZmNlNC1iYXR0ZXJ5LXBsdWdpbl8xLjEuNC5iYgpkZWxldGVk
+IGZpbGUgbW9kZSAxMDA2NDQKaW5kZXggMGY4NDg5YjE4Li4wMDAwMDAwMDAKLS0tIGEvbWV0YS14
+ZmNlL3JlY2lwZXMtcGFuZWwtcGx1Z2lucy9iYXR0ZXJ5L3hmY2U0LWJhdHRlcnktcGx1Z2luXzEu
+MS40LmJiCisrKyAvZGV2L251bGwKQEAgLTEsOCArMCwwIEBACi1TVU1NQVJZID0gIkEgYmF0dGVy
+eSBtb25pdG9yIHBhbmVsIHBsdWdpbiBmb3IgWGZjZTQsIGNvbXBhdGlibGUgd2l0aCBBUE0gYW5k
+IEFDUCIKLUhPTUVQQUdFID0gImh0dHBzOi8vZ29vZGllcy54ZmNlLm9yZy9wcm9qZWN0cy9wYW5l
+bC1wbHVnaW5zL3hmY2U0LWJhdHRlcnktcGx1Z2luIgotTElDRU5TRSA9ICJHUEwtMi4wLW9ubHki
+Ci1MSUNfRklMRVNfQ0hLU1VNID0gImZpbGU6Ly9DT1BZSU5HO21kNT05NGQ1NWQ1MTJhOWJhMzZj
+YWE5YjdkZjA3OWJhZTE5ZiIKLQotaW5oZXJpdCB4ZmNlLXBhbmVsLXBsdWdpbgotCi1TUkNfVVJJ
+W3NoYTI1NnN1bV0gPSAiMTA3ZGYyYTgzNzE1NmMwMTBlMWVhYjU0MzBiYWI5MGM3N2YwYTNkYzY5
+OWI1OTM3Njc4YzhhOWM1ZTY0YzIyMiIKZGlmZiAtLWdpdCBhL21ldGEteGZjZS9yZWNpcGVzLXBh
+bmVsLXBsdWdpbnMvYmF0dGVyeS94ZmNlNC1iYXR0ZXJ5LXBsdWdpbl8xLjEuNS5iYiBiL21ldGEt
+eGZjZS9yZWNpcGVzLXBhbmVsLXBsdWdpbnMvYmF0dGVyeS94ZmNlNC1iYXR0ZXJ5LXBsdWdpbl8x
+LjEuNS5iYgpuZXcgZmlsZSBtb2RlIDEwMDY0NAppbmRleCAwMDAwMDAwMDAuLjQ0N2IyOTgxYwot
+LS0gL2Rldi9udWxsCisrKyBiL21ldGEteGZjZS9yZWNpcGVzLXBhbmVsLXBsdWdpbnMvYmF0dGVy
+eS94ZmNlNC1iYXR0ZXJ5LXBsdWdpbl8xLjEuNS5iYgpAQCAtMCwwICsxLDEzOCBAQAorIyBGSVhN
+RTogdGhlIExJQ19GSUxFU19DSEtTVU0gdmFsdWVzIGhhdmUgYmVlbiB1cGRhdGVkIGJ5ICdkZXZ0
+b29sIHVwZ3JhZGUnLgorIyBUaGUgZm9sbG93aW5nIGlzIHRoZSBkaWZmZXJlbmNlIGJldHdlZW4g
+dGhlIG9sZCBhbmQgdGhlIG5ldyBsaWNlbnNlIHRleHQuCisjIFBsZWFzZSB1cGRhdGUgdGhlIExJ
+Q0VOU0UgdmFsdWUgaWYgbmVlZGVkLCBhbmQgc3VtbWFyaXplIHRoZSBjaGFuZ2VzIGluCisjIHRo
+ZSBjb21taXQgbWVzc2FnZSB2aWEgJ0xpY2Vuc2UtVXBkYXRlOicgdGFnLgorIyAoZXhhbXBsZTog
+J0xpY2Vuc2UtVXBkYXRlOiBjb3B5cmlnaHQgeWVhcnMgdXBkYXRlZC4nKQorIworIyBUaGUgY2hh
+bmdlczoKKyMKKyMgLS0tIENPUFlJTkcKKyMgKysrIENPUFlJTkcKKyMgQEAgLTEsMTIgKzEsMTIg
+QEAKKyMgLQkJICAgIEdOVSBHRU5FUkFMIFBVQkxJQyBMSUNFTlNFCisjIC0JCSAgICAgICBWZXJz
+aW9uIDIsIEp1bmUgMTk5MQorIyAtCisjIC0gQ29weXJpZ2h0IChDKSAxOTg5LCAxOTkxIEZyZWUg
+U29mdHdhcmUgRm91bmRhdGlvbiwgSW5jLgorIyAtICAgICA1OSBUZW1wbGUgUGxhY2UsIFN1aXRl
+IDMzMCwgQm9zdG9uLCBNQSAgMDIxMTEtMTMwNyAgVVNBCisjICsgICAgICAgICAgICAgICAgICAg
+IEdOVSBHRU5FUkFMIFBVQkxJQyBMSUNFTlNFCisjICsgICAgICAgICAgICAgICAgICAgICAgIFZl
+cnNpb24gMiwgSnVuZSAxOTkxCisjICsKKyMgKyBDb3B5cmlnaHQgKEMpIDE5ODksIDE5OTEgRnJl
+ZSBTb2Z0d2FyZSBGb3VuZGF0aW9uLCBJbmMuLAorIyArIDUxIEZyYW5rbGluIFN0cmVldCwgRmlm
+dGggRmxvb3IsIEJvc3RvbiwgTUEgMDIxMTAtMTMwMSBVU0EKKyMgICBFdmVyeW9uZSBpcyBwZXJt
+aXR0ZWQgdG8gY29weSBhbmQgZGlzdHJpYnV0ZSB2ZXJiYXRpbSBjb3BpZXMKKyMgICBvZiB0aGlz
+IGxpY2Vuc2UgZG9jdW1lbnQsIGJ1dCBjaGFuZ2luZyBpdCBpcyBub3QgYWxsb3dlZC4KKyMgIAor
+IyAtCQkJICAgIFByZWFtYmxlCisjICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgUHJlYW1i
+bGUKKyMgIAorIyAgICBUaGUgbGljZW5zZXMgZm9yIG1vc3Qgc29mdHdhcmUgYXJlIGRlc2lnbmVk
+IHRvIHRha2UgYXdheSB5b3VyCisjICBmcmVlZG9tIHRvIHNoYXJlIGFuZCBjaGFuZ2UgaXQuICBC
+eSBjb250cmFzdCwgdGhlIEdOVSBHZW5lcmFsIFB1YmxpYworIyBAQCAtMTUsNyArMTUsNyBAQAor
+IyAgR2VuZXJhbCBQdWJsaWMgTGljZW5zZSBhcHBsaWVzIHRvIG1vc3Qgb2YgdGhlIEZyZWUgU29m
+dHdhcmUKKyMgIEZvdW5kYXRpb24ncyBzb2Z0d2FyZSBhbmQgdG8gYW55IG90aGVyIHByb2dyYW0g
+d2hvc2UgYXV0aG9ycyBjb21taXQgdG8KKyMgIHVzaW5nIGl0LiAgKFNvbWUgb3RoZXIgRnJlZSBT
+b2Z0d2FyZSBGb3VuZGF0aW9uIHNvZnR3YXJlIGlzIGNvdmVyZWQgYnkKKyMgLXRoZSBHTlUgTGli
+cmFyeSBHZW5lcmFsIFB1YmxpYyBMaWNlbnNlIGluc3RlYWQuKSAgWW91IGNhbiBhcHBseSBpdCB0
+bworIyArdGhlIEdOVSBMZXNzZXIgR2VuZXJhbCBQdWJsaWMgTGljZW5zZSBpbnN0ZWFkLikgIFlv
+dSBjYW4gYXBwbHkgaXQgdG8KKyMgIHlvdXIgcHJvZ3JhbXMsIHRvby4KKyMgIAorIyAgICBXaGVu
+IHdlIHNwZWFrIG9mIGZyZWUgc29mdHdhcmUsIHdlIGFyZSByZWZlcnJpbmcgdG8gZnJlZWRvbSwg
+bm90CisjIEBAIC01NSw4ICs1NSw4IEBACisjICAKKyMgICAgVGhlIHByZWNpc2UgdGVybXMgYW5k
+IGNvbmRpdGlvbnMgZm9yIGNvcHlpbmcsIGRpc3RyaWJ1dGlvbiBhbmQKKyMgIG1vZGlmaWNhdGlv
+biBmb2xsb3cuCisjIC0MCisjIC0JCSAgICBHTlUgR0VORVJBTCBQVUJMSUMgTElDRU5TRQorIyAr
+CisjICsgICAgICAgICAgICAgICAgICAgIEdOVSBHRU5FUkFMIFBVQkxJQyBMSUNFTlNFCisjICAg
+ICBURVJNUyBBTkQgQ09ORElUSU9OUyBGT1IgQ09QWUlORywgRElTVFJJQlVUSU9OIEFORCBNT0RJ
+RklDQVRJT04KKyMgIAorIyAgICAwLiBUaGlzIExpY2Vuc2UgYXBwbGllcyB0byBhbnkgcHJvZ3Jh
+bSBvciBvdGhlciB3b3JrIHdoaWNoIGNvbnRhaW5zCisjIEBAIC0xMTAsNyArMTEwLDcgQEAKKyMg
+ICAgICBMaWNlbnNlLiAgKEV4Y2VwdGlvbjogaWYgdGhlIFByb2dyYW0gaXRzZWxmIGlzIGludGVy
+YWN0aXZlIGJ1dAorIyAgICAgIGRvZXMgbm90IG5vcm1hbGx5IHByaW50IHN1Y2ggYW4gYW5ub3Vu
+Y2VtZW50LCB5b3VyIHdvcmsgYmFzZWQgb24KKyMgICAgICB0aGUgUHJvZ3JhbSBpcyBub3QgcmVx
+dWlyZWQgdG8gcHJpbnQgYW4gYW5ub3VuY2VtZW50LikKKyMgLQwKKyMgKworIyAgVGhlc2UgcmVx
+dWlyZW1lbnRzIGFwcGx5IHRvIHRoZSBtb2RpZmllZCB3b3JrIGFzIGEgd2hvbGUuICBJZgorIyAg
+aWRlbnRpZmlhYmxlIHNlY3Rpb25zIG9mIHRoYXQgd29yayBhcmUgbm90IGRlcml2ZWQgZnJvbSB0
+aGUgUHJvZ3JhbSwKKyMgIGFuZCBjYW4gYmUgcmVhc29uYWJseSBjb25zaWRlcmVkIGluZGVwZW5k
+ZW50IGFuZCBzZXBhcmF0ZSB3b3JrcyBpbgorIyBAQCAtMTY4LDcgKzE2OCw3IEBACisjICBhY2Nl
+c3MgdG8gY29weSB0aGUgc291cmNlIGNvZGUgZnJvbSB0aGUgc2FtZSBwbGFjZSBjb3VudHMgYXMK
+KyMgIGRpc3RyaWJ1dGlvbiBvZiB0aGUgc291cmNlIGNvZGUsIGV2ZW4gdGhvdWdoIHRoaXJkIHBh
+cnRpZXMgYXJlIG5vdAorIyAgY29tcGVsbGVkIHRvIGNvcHkgdGhlIHNvdXJjZSBhbG9uZyB3aXRo
+IHRoZSBvYmplY3QgY29kZS4KKyMgLQwKKyMgKworIyAgICA0LiBZb3UgbWF5IG5vdCBjb3B5LCBt
+b2RpZnksIHN1YmxpY2Vuc2UsIG9yIGRpc3RyaWJ1dGUgdGhlIFByb2dyYW0KKyMgIGV4Y2VwdCBh
+cyBleHByZXNzbHkgcHJvdmlkZWQgdW5kZXIgdGhpcyBMaWNlbnNlLiAgQW55IGF0dGVtcHQKKyMg
+IG90aGVyd2lzZSB0byBjb3B5LCBtb2RpZnksIHN1YmxpY2Vuc2Ugb3IgZGlzdHJpYnV0ZSB0aGUg
+UHJvZ3JhbSBpcworIyBAQCAtMjI1LDcgKzIyNSw3IEBACisjICAKKyMgIFRoaXMgc2VjdGlvbiBp
+cyBpbnRlbmRlZCB0byBtYWtlIHRob3JvdWdobHkgY2xlYXIgd2hhdCBpcyBiZWxpZXZlZCB0bwor
+IyAgYmUgYSBjb25zZXF1ZW5jZSBvZiB0aGUgcmVzdCBvZiB0aGlzIExpY2Vuc2UuCisjIC0MCisj
+ICsKKyMgICAgOC4gSWYgdGhlIGRpc3RyaWJ1dGlvbiBhbmQvb3IgdXNlIG9mIHRoZSBQcm9ncmFt
+IGlzIHJlc3RyaWN0ZWQgaW4KKyMgIGNlcnRhaW4gY291bnRyaWVzIGVpdGhlciBieSBwYXRlbnRz
+IG9yIGJ5IGNvcHlyaWdodGVkIGludGVyZmFjZXMsIHRoZQorIyAgb3JpZ2luYWwgY29weXJpZ2h0
+IGhvbGRlciB3aG8gcGxhY2VzIHRoZSBQcm9ncmFtIHVuZGVyIHRoaXMgTGljZW5zZQorIyBAQCAt
+MjU1LDcgKzI1NSw3IEBACisjICBvZiBwcmVzZXJ2aW5nIHRoZSBmcmVlIHN0YXR1cyBvZiBhbGwg
+ZGVyaXZhdGl2ZXMgb2Ygb3VyIGZyZWUgc29mdHdhcmUgYW5kCisjICBvZiBwcm9tb3RpbmcgdGhl
+IHNoYXJpbmcgYW5kIHJldXNlIG9mIHNvZnR3YXJlIGdlbmVyYWxseS4KKyMgIAorIyAtCQkJICAg
+IE5PIFdBUlJBTlRZCisjICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgTk8gV0FSUkFOVFkK
+KyMgIAorIyAgICAxMS4gQkVDQVVTRSBUSEUgUFJPR1JBTSBJUyBMSUNFTlNFRCBGUkVFIE9GIENI
+QVJHRSwgVEhFUkUgSVMgTk8gV0FSUkFOVFkKKyMgIEZPUiBUSEUgUFJPR1JBTSwgVE8gVEhFIEVY
+VEVOVCBQRVJNSVRURUQgQlkgQVBQTElDQUJMRSBMQVcuICBFWENFUFQgV0hFTgorIyBAQCAtMjc3
+LDkgKzI3Nyw5IEBACisjICBQUk9HUkFNUyksIEVWRU4gSUYgU1VDSCBIT0xERVIgT1IgT1RIRVIg
+UEFSVFkgSEFTIEJFRU4gQURWSVNFRCBPRiBUSEUKKyMgIFBPU1NJQklMSVRZIE9GIFNVQ0ggREFN
+QUdFUy4KKyMgIAorIyAtCQkgICAgIEVORCBPRiBURVJNUyBBTkQgQ09ORElUSU9OUworIyAtDAor
+IyAtCSAgICBIb3cgdG8gQXBwbHkgVGhlc2UgVGVybXMgdG8gWW91ciBOZXcgUHJvZ3JhbXMKKyMg
+KyAgICAgICAgICAgICAgICAgICAgIEVORCBPRiBURVJNUyBBTkQgQ09ORElUSU9OUworIyArCisj
+ICsgICAgICAgICAgICBIb3cgdG8gQXBwbHkgVGhlc2UgVGVybXMgdG8gWW91ciBOZXcgUHJvZ3Jh
+bXMKKyMgIAorIyAgICBJZiB5b3UgZGV2ZWxvcCBhIG5ldyBwcm9ncmFtLCBhbmQgeW91IHdhbnQg
+aXQgdG8gYmUgb2YgdGhlIGdyZWF0ZXN0CisjICBwb3NzaWJsZSB1c2UgdG8gdGhlIHB1YmxpYywg
+dGhlIGJlc3Qgd2F5IHRvIGFjaGlldmUgdGhpcyBpcyB0byBtYWtlIGl0CisjIEBAIC0zMDMsMTcg
+KzMwMywxNiBAQAorIyAgICAgIE1FUkNIQU5UQUJJTElUWSBvciBGSVRORVNTIEZPUiBBIFBBUlRJ
+Q1VMQVIgUFVSUE9TRS4gIFNlZSB0aGUKKyMgICAgICBHTlUgR2VuZXJhbCBQdWJsaWMgTGljZW5z
+ZSBmb3IgbW9yZSBkZXRhaWxzLgorIyAgCisjIC0gICAgWW91IHNob3VsZCBoYXZlIHJlY2VpdmVk
+IGEgY29weSBvZiB0aGUgR05VIEdlbmVyYWwgUHVibGljIExpY2Vuc2UKKyMgLSAgICBhbG9uZyB3
+aXRoIHRoaXMgcHJvZ3JhbTsgaWYgbm90LCB3cml0ZSB0byB0aGUgRnJlZSBTb2Z0d2FyZQorIyAt
+ICAgIEZvdW5kYXRpb24sIEluYy4sIDU5IFRlbXBsZSBQbGFjZSwgU3VpdGUgMzMwLCBCb3N0b24s
+IE1BICAwMjExMS0xMzA3ICBVU0EKKyMgLQorIyArICAgIFlvdSBzaG91bGQgaGF2ZSByZWNlaXZl
+ZCBhIGNvcHkgb2YgdGhlIEdOVSBHZW5lcmFsIFB1YmxpYyBMaWNlbnNlIGFsb25nCisjICsgICAg
+d2l0aCB0aGlzIHByb2dyYW07IGlmIG5vdCwgd3JpdGUgdG8gdGhlIEZyZWUgU29mdHdhcmUgRm91
+bmRhdGlvbiwgSW5jLiwKKyMgKyAgICA1MSBGcmFua2xpbiBTdHJlZXQsIEZpZnRoIEZsb29yLCBC
+b3N0b24sIE1BIDAyMTEwLTEzMDEgVVNBLgorIyAgCisjICBBbHNvIGFkZCBpbmZvcm1hdGlvbiBv
+biBob3cgdG8gY29udGFjdCB5b3UgYnkgZWxlY3Ryb25pYyBhbmQgcGFwZXIgbWFpbC4KKyMgIAor
+IyAgSWYgdGhlIHByb2dyYW0gaXMgaW50ZXJhY3RpdmUsIG1ha2UgaXQgb3V0cHV0IGEgc2hvcnQg
+bm90aWNlIGxpa2UgdGhpcworIyAgd2hlbiBpdCBzdGFydHMgaW4gYW4gaW50ZXJhY3RpdmUgbW9k
+ZToKKyMgIAorIyAtICAgIEdub21vdmlzaW9uIHZlcnNpb24gNjksIENvcHlyaWdodCAoQykgeWVh
+ciAgbmFtZSBvZiBhdXRob3IKKyMgKyAgICBHbm9tb3Zpc2lvbiB2ZXJzaW9uIDY5LCBDb3B5cmln
+aHQgKEMpIHllYXIgbmFtZSBvZiBhdXRob3IKKyMgICAgICBHbm9tb3Zpc2lvbiBjb21lcyB3aXRo
+IEFCU09MVVRFTFkgTk8gV0FSUkFOVFk7IGZvciBkZXRhaWxzIHR5cGUgYHNob3cgdycuCisjICAg
+ICAgVGhpcyBpcyBmcmVlIHNvZnR3YXJlLCBhbmQgeW91IGFyZSB3ZWxjb21lIHRvIHJlZGlzdHJp
+YnV0ZSBpdAorIyAgICAgIHVuZGVyIGNlcnRhaW4gY29uZGl0aW9uczsgdHlwZSBgc2hvdyBjJyBm
+b3IgZGV0YWlscy4KKyMgQEAgLTMzNiw1ICszMzUsNSBAQAorIyAgVGhpcyBHZW5lcmFsIFB1Ymxp
+YyBMaWNlbnNlIGRvZXMgbm90IHBlcm1pdCBpbmNvcnBvcmF0aW5nIHlvdXIgcHJvZ3JhbSBpbnRv
+CisjICBwcm9wcmlldGFyeSBwcm9ncmFtcy4gIElmIHlvdXIgcHJvZ3JhbSBpcyBhIHN1YnJvdXRp
+bmUgbGlicmFyeSwgeW91IG1heQorIyAgY29uc2lkZXIgaXQgbW9yZSB1c2VmdWwgdG8gcGVybWl0
+IGxpbmtpbmcgcHJvcHJpZXRhcnkgYXBwbGljYXRpb25zIHdpdGggdGhlCisjIC1saWJyYXJ5LiAg
+SWYgdGhpcyBpcyB3aGF0IHlvdSB3YW50IHRvIGRvLCB1c2UgdGhlIEdOVSBMaWJyYXJ5IEdlbmVy
+YWwKKyMgK2xpYnJhcnkuICBJZiB0aGlzIGlzIHdoYXQgeW91IHdhbnQgdG8gZG8sIHVzZSB0aGUg
+R05VIExlc3NlciBHZW5lcmFsCisjICBQdWJsaWMgTGljZW5zZSBpbnN0ZWFkIG9mIHRoaXMgTGlj
+ZW5zZS4KKyMgCisjCisKK1NVTU1BUlkgPSAiQSBiYXR0ZXJ5IG1vbml0b3IgcGFuZWwgcGx1Z2lu
+IGZvciBYZmNlNCwgY29tcGF0aWJsZSB3aXRoIEFQTSBhbmQgQUNQIgorSE9NRVBBR0UgPSAiaHR0
+cHM6Ly9nb29kaWVzLnhmY2Uub3JnL3Byb2plY3RzL3BhbmVsLXBsdWdpbnMveGZjZTQtYmF0dGVy
+eS1wbHVnaW4iCitMSUNFTlNFID0gIkdQTC0yLjAtb25seSIKK0xJQ19GSUxFU19DSEtTVU0gPSAi
+ZmlsZTovL0NPUFlJTkc7bWQ1PWIyMzRlZTRkNjlmNWZjZTQ0ODZhODBmZGFmNGE0MjYzIgorCitp
+bmhlcml0IHhmY2UtcGFuZWwtcGx1Z2luCisKK1NSQ19VUklbc2hhMjU2c3VtXSA9ICI3NTIyMzNi
+ZmIzMjBlZTFlMjYxMDRhNjU2Y2JiODY4Mjk5ZjU2MjczMzA2M2UyYjlhMThmMDk2NjU4NWNlMjEz
+IgotLSAKMi4zOS4yCgo=
 
---===============1591732492506452718==--
+--===============6169007149672238884==--
 
