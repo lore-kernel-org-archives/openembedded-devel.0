@@ -2,49 +2,49 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D3779C05027
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DEB30C05031
 	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 04:20:57 +0000 (UTC)
-Received: from a27-193.smtp-out.us-west-2.amazonses.com (a27-193.smtp-out.us-west-2.amazonses.com [54.240.27.193])
- by mx.groups.io with SMTP id smtpd.web11.4050.1699071647337298754
+Received: from a27-29.smtp-out.us-west-2.amazonses.com (a27-29.smtp-out.us-west-2.amazonses.com [54.240.27.29])
+ by mx.groups.io with SMTP id smtpd.web10.4226.1699071646866019542
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Nov 2023 21:20:47 -0700
+ Fri, 03 Nov 2023 21:20:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=EqgPW9Fq;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=p0hg4dlJ;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.193, mailfrom: 0101018b988fdbbe-1902d89d-063a-4234-b667-dfea7bfe7d4e-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=G7Eu09aj;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=HBd/syDv;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.29, mailfrom: 0101018b988fd9ff-e1abd81e-42dd-44bf-bed9-331d5922a88d-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
 	t=1699071646;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=ABBFk3wDMRLqRomv3UHHKua9+VGImP18AG2QNwRGWEA=;
-	b=EqgPW9FqgT7i0I6KL6PgtPTs9pr5R1+s8k2TtByhwiyxpx2nzww4l9QQKBJWp2K4
-	ApD+W7d4PLNV/GO8oLsM19u5GEZFXHOJ7WkRJ0y5t3jSrmps4eKW6debIl5x09sEfx3
-	B6pXqeiHtAyZ7su3wsyVoUfDI80fKHy+QKo61wBE=
+	bh=wjBcaO9w2EgCxxI0Auu9OlYYU75/xtwn5t+M9Fl+4jo=;
+	b=G7Eu09ajrKUSYBfq+OQA32hLEc7cWeyStU6nuyOpBGe+O8fYcOx3BP181sgtLtkv
+	+z0a+vLqwsh4EsR8hfFPb/Aupa1qjM1+pUGTEaLTnNB+rkdv+nkuMRZ9X7Y3VvVQsNQ
+	ltgNNskpL7z/Av1R0ukpSgTbQpRs09lK4z/pwqUM=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699071646;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=ABBFk3wDMRLqRomv3UHHKua9+VGImP18AG2QNwRGWEA=;
-	b=p0hg4dlJCz71qKmT1Wcg8iUFB911Awz4Roj8eZaHuvtHaIS5BubRsxP6MkIwI2B7
-	j1DF0Sl7YJ7Eu8q9SHnkRFEKX3tN6YYHIFKNrTQuq/OApntMI4izDF0OUbtc03ilJES
-	lBP/W9PYYSGSxw5NpChscuGLeoiw+BVrkTHK6WSo=
-Content-Type: multipart/mixed; boundary="===============6910735349139758112=="
+	bh=wjBcaO9w2EgCxxI0Auu9OlYYU75/xtwn5t+M9Fl+4jo=;
+	b=HBd/syDvVHxRTw1SCrKNHLA/6b58gehZPPSNOglQQYrBrULokva82Lzfpj87BNKz
+	oZwpyTYOwCLiCUAdJ3TEFb35k954PMwo6cGP5HdJ6s5AjVikpIJDkzxLVrgIfgbrW/f
+	mk/V++/kZoyCFcOfVCnZQQoRp+Zip718OpSTDPnQ=
+Content-Type: multipart/mixed; boundary="===============6731803354740703228=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] gst-shark: upgrading to 0.8.1 SUCCEEDED
-Message-ID: <0101018b988fdbbe-1902d89d-063a-4234-b667-dfea7bfe7d4e-000000@us-west-2.amazonses.com>
+Subject: [AUH] gssdp: upgrading to 1.6.3 FAILED
+Message-ID: <0101018b988fd9ff-e1abd81e-42dd-44bf-bed9-331d5922a88d-000000@us-west-2.amazonses.com>
 Date: Sat, 4 Nov 2023 04:20:46 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
-X-SES-Outgoing: 2023.11.04-54.240.27.193
+X-SES-Outgoing: 2023.11.04-54.240.27.29
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 04:20:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106247
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106238
 
---===============6910735349139758112==
+--===============6731803354740703228==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,104 +52,106 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *gst-shark* to *0.8.1* has Succeeded.
+that the automatic attempt to upgrade the recipe *gssdp* to *1.6.3* has Failed (devtool error).
 
-Next steps:
-    - apply the patch: git am 0001-gst-shark-upgrade-0.7.3.1-0.8.1.patch
-    - check the changes to upstream patches and summarize them in the commit message,
-    - compile an image that contains the package
-    - perform some basic sanity tests
-    - amend the patch and sign it off: git commit -s --reset-author --amend
-    - send it to the appropriate mailing list
+Detailed error information:
 
-Alternatively, if you believe the recipe should not be upgraded at this time,
-you can fill RECIPE_NO_UPDATE_REASON in respective recipe file so that
-automatic upgrades would no longer be attempted.
+The following devtool command failed:  upgrade gssdp -V 1.6.3
+NOTE: Reconnecting to bitbake server...
+Loading cache...done.
+Loaded 4890 entries from dependency cache.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.6.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "x86_64-poky-linux"
+MACHINE              = "qemux86-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.3+snapshot-e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+TUNE_FEATURES        = "m64 core2"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       
+workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+meta-oe              
+meta-python          
+meta-perl            
+meta-networking      
+meta-multimedia      
+meta-gnome           
+meta-xfce            
+meta-filesystems     
+meta-initramfs       
+meta-webserver       = "tmp-auh-upgrades:18bafc1ef23d5907e57d6492371ec7fe7dc44f0a"
+
+Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
+done.
+Sstate summary: Wanted 11 Local 11 Mirrors 0 Missed 0 Current 22 (100% match, 100% complete)
+NOTE: Executing Tasks
+NOTE: Tasks Summary: Attempted 113 tasks of which 110 didn't need to be rerun and all succeeded.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 4 seconds
+Loading cache...done.
+Loaded 4890 entries from dependency cache.
+Parsing recipes...done.
+Parsing of 3056 .bb files complete (3054 cached, 2 parsed). 4887 targets, 92 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.6.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "x86_64-poky-linux"
+MACHINE              = "qemux86-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.3+snapshot-e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+TUNE_FEATURES        = "m64 core2"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       
+workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+meta-oe              
+meta-python          
+meta-perl            
+meta-networking      
+meta-multimedia      
+meta-gnome           
+meta-xfce            
+meta-filesystems     
+meta-initramfs       
+meta-webserver       = "tmp-auh-upgrades:18bafc1ef23d5907e57d6492371ec7fe7dc44f0a"
+
+Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
+done.
+Sstate summary: Wanted 10 Local 9 Mirrors 0 Missed 1 Current 18 (90% match, 96% complete)
+NOTE: Executing Tasks
+WARNING: Failed to fetch URL https://download.gnome.org/sources//gssdp/1.4/gssdp-1.6.3.tar.xz, attempting MIRRORS if available
+NOTE: Tasks Summary: Attempted 92 tasks of which 90 didn't need to be rerun and 1 failed.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 4 seconds
+NOTE: The errors for this build are stored in /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231104032350.txt
+You can send the errors to a reports server by running:
+  send-error-report /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231104032350.txt [-s server]
+NOTE: The contents of these logs will be posted in public if you use the above command with the default server. Please ensure you remove any identifying or proprietary information when prompted before sending.
+
+INFO: Extracting current version source...
+INFO: Extracting upgraded version source...
+INFO: Fetching https://download.gnome.org/sources//gssdp/1.4/gssdp-1.6.3.tar.xz...
+ERROR: Fetcher failure: Fetch command export PSEUDO_DISABLED=1; export SSL_CERT_FILE="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export GIT_SSL_CAINFO="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export ftp_proxy="http://proxy.yocto.io:5187/"; export FTP_PROXY="http://proxy.yocto.io:5187/"; export PATH="/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/sysroots-uninative/x86_64-linux/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-d_b1lpty/work/recipe-sysroot-native/usr/bin/x86_64-poky-linux:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-d_b1lpty/work/recipe-sysroot/usr/bin/crossscripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-d_b1lpty/work/recipe-sysroot-native/usr/sbin:/hom
+ e/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-d_b1lpty/work/recipe-sysroot-native/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-d_b1lpty/work/recipe-sysroot-native/sbin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-d_b1lpty/work/recipe-sysroot-native/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/bitbake/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools"; export HOME="/home/pokybuild"; /usr/bin/env wget -t 2 -T 30 --passive-ftp -O /srv/autobuilder/autobuilder.yocto.io/current_sources/gssdp-1.6.3.tar.xz.tmp -P /srv/autobuilder/autobuilder.yocto.io/current_sources 'https://download.gnome.org/sources//gssdp/1.4/gssdp-1.6.3.tar.xz' --progress=dot -v failed with exit code 8, no output
+ERROR: Bitbake Fetcher Error: FetchError('Unable to fetch URL from any source.', 'https://download.gnome.org/sources//gssdp/1.4/gssdp-1.6.3.tar.xz')
+ERROR: Logfile of failure stored in: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-d_b1lpty/work/temp/log.do_fetch.918467
+ERROR: Failed to fetch URL https://download.gnome.org/sources//gssdp/1.4/gssdp-1.6.3.tar.xz
+
 
 Please review the attached files for further information and build/update failures.
 Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi?product=Automated%20Update%20Handler
 
 Regards,
 The Upgrade Helper
-
--- >8 --
-From 48647e18fb2b027738b45720e8650b6aef3803d5 Mon Sep 17 00:00:00 2001
-From: Upgrade Helper <auh@yoctoproject.org>
-Date: Sat, 4 Nov 2023 03:26:17 +0000
-Subject: [PATCH] gst-shark: upgrade 0.7.3.1 -> 0.8.1
-
----
- .../recipes-multimedia/gstreamer-1.0/gst-shark_git.bb          | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_git.bb b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_git.bb
-index 4e50897de..c75d0965d 100644
---- a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_git.bb
-+++ b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gst-shark_git.bb
-@@ -10,8 +10,9 @@ DEPENDS = "gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad "
- 
- SRCBRANCH ?= "master"
- 
--PV = "0.7.3.1"
-+PV = "0.8.1"
- 
-+SRCREV = "09ba05865dacd2824b5b40ab75a4b9545fcc1366"
- SRCREV_base = "5413ef5475e5b70476c2480a75ca3746d91d4caf"
- SRCREV_common = "b64f03f6090245624608beb5d2fff335e23a01c0"
- SRCREV_FORMAT = "base_common"
--- 
-2.39.2
-
-
---===============6910735349139758112==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="buildhistory-diff-full.txt"
-
-packages/core2-64-poky-linux/gst-shark/gst-shark-dbg: PV changed from "0.7.3.1" to "0.8.1"
-packages/core2-64-poky-linux/gst-shark/gst-shark-dbg: PKGSIZE changed from 359240 to 359208 (-0%)
-packages/core2-64-poky-linux/gst-shark/gst-shark-dbg: PKGV changed from 0.7.3.1 [default] to 0.8.1 [default]
-packages/core2-64-poky-linux/gst-shark/gst-shark-dev: PV changed from "0.7.3.1" to "0.8.1"
-packages/core2-64-poky-linux/gst-shark/gst-shark-dev: PKGV changed from 0.7.3.1 [default] to 0.8.1 [default]
-packages/core2-64-poky-linux/gst-shark/gst-shark-doc: PV changed from "0.7.3.1" to "0.8.1"
-packages/core2-64-poky-linux/gst-shark/gst-shark-doc: PKGV changed from 0.7.3.1 [default] to 0.8.1 [default]
-packages/core2-64-poky-linux/gst-shark/gst-shark-locale: PV changed from "0.7.3.1" to "0.8.1"
-packages/core2-64-poky-linux/gst-shark/gst-shark-locale: PKGV changed from 0.7.3.1 [default] to 0.8.1 [default]
-packages/core2-64-poky-linux/gst-shark/gst-shark-src: PV changed from "0.7.3.1" to "0.8.1"
-packages/core2-64-poky-linux/gst-shark/gst-shark-src: PKGV changed from 0.7.3.1 [default] to 0.8.1 [default]
-packages/core2-64-poky-linux/gst-shark/gst-shark-staticdev: PV changed from "0.7.3.1" to "0.8.1"
-packages/core2-64-poky-linux/gst-shark/gst-shark-staticdev: PKGV changed from 0.7.3.1 [default] to 0.8.1 [default]
-packages/core2-64-poky-linux/gst-shark/gst-shark: PV changed from "0.7.3.1" to "0.8.1"
-packages/core2-64-poky-linux/gst-shark/gst-shark: PKGV changed from 0.7.3.1 [default] to 0.8.1 [default]
-packages/core2-64-poky-linux/gst-shark: PV changed from "0.7.3.1" to "0.8.1"
-packages/core2-64-poky-linux/gst-shark: PKGV changed from 0.7.3.1 [default] to 0.8.1 [default]
-
---===============6910735349139758112==
-Content-Type: application/octet-stream
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment;
- filename="0001-gst-shark-upgrade-0.7.3.1-0.8.1.patch"
-
-RnJvbSA0ODY0N2UxOGZiMmIwMjc3MzhiNDU3MjBlODY1MGI2YWVmMzgwM2Q1IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBVcGdyYWRlIEhlbHBlciA8YXVoQHlvY3RvcHJvamVjdC5vcmc+
-CkRhdGU6IFNhdCwgNCBOb3YgMjAyMyAwMzoyNjoxNyArMDAwMApTdWJqZWN0OiBbUEFUQ0hdIGdz
-dC1zaGFyazogdXBncmFkZSAwLjcuMy4xIC0+IDAuOC4xCgotLS0KIC4uLi9yZWNpcGVzLW11bHRp
-bWVkaWEvZ3N0cmVhbWVyLTEuMC9nc3Qtc2hhcmtfZ2l0LmJiICAgICAgICAgIHwgMyArKy0KIDEg
-ZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKyksIDEgZGVsZXRpb24oLSkKCmRpZmYgLS1naXQg
-YS9tZXRhLW11bHRpbWVkaWEvcmVjaXBlcy1tdWx0aW1lZGlhL2dzdHJlYW1lci0xLjAvZ3N0LXNo
-YXJrX2dpdC5iYiBiL21ldGEtbXVsdGltZWRpYS9yZWNpcGVzLW11bHRpbWVkaWEvZ3N0cmVhbWVy
-LTEuMC9nc3Qtc2hhcmtfZ2l0LmJiCmluZGV4IDRlNTA4OTdkZS4uYzc1ZDA5NjVkIDEwMDY0NAot
-LS0gYS9tZXRhLW11bHRpbWVkaWEvcmVjaXBlcy1tdWx0aW1lZGlhL2dzdHJlYW1lci0xLjAvZ3N0
-LXNoYXJrX2dpdC5iYgorKysgYi9tZXRhLW11bHRpbWVkaWEvcmVjaXBlcy1tdWx0aW1lZGlhL2dz
-dHJlYW1lci0xLjAvZ3N0LXNoYXJrX2dpdC5iYgpAQCAtMTAsOCArMTAsOSBAQCBERVBFTkRTID0g
-ImdzdHJlYW1lcjEuMCBnc3RyZWFtZXIxLjAtcGx1Z2lucy1iYXNlIGdzdHJlYW1lcjEuMC1wbHVn
-aW5zLWJhZCAiCiAKIFNSQ0JSQU5DSCA/PSAibWFzdGVyIgogCi1QViA9ICIwLjcuMy4xIgorUFYg
-PSAiMC44LjEiCiAKK1NSQ1JFViA9ICIwOWJhMDU4NjVkYWNkMjgyNGI1YjQwYWI3NWE0Yjk1NDVm
-Y2MxMzY2IgogU1JDUkVWX2Jhc2UgPSAiNTQxM2VmNTQ3NWU1YjcwNDc2YzI0ODBhNzVjYTM3NDZk
-OTFkNGNhZiIKIFNSQ1JFVl9jb21tb24gPSAiYjY0ZjAzZjYwOTAyNDU2MjQ2MDhiZWI1ZDJmZmYz
-MzVlMjNhMDFjMCIKIFNSQ1JFVl9GT1JNQVQgPSAiYmFzZV9jb21tb24iCi0tIAoyLjM5LjIKCg==
-
---===============6910735349139758112==--
+--===============6731803354740703228==--
 
