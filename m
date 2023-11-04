@@ -2,49 +2,49 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D4EACC4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E6211C41535
 	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 04:20:56 +0000 (UTC)
-Received: from a27-29.smtp-out.us-west-2.amazonses.com (a27-29.smtp-out.us-west-2.amazonses.com [54.240.27.29])
- by mx.groups.io with SMTP id smtpd.web10.4222.1699071646585601274
+Received: from a27-31.smtp-out.us-west-2.amazonses.com (a27-31.smtp-out.us-west-2.amazonses.com [54.240.27.31])
+ by mx.groups.io with SMTP id smtpd.web10.4225.1699071646726897414
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 03 Nov 2023 21:20:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=UUDYZLHL;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=fmccTkpS;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.29, mailfrom: 0101018b988fd7c0-ac435caa-c249-4407-80e7-435681ef926d-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=E420ELkE;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=W9qOX3Ol;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.31, mailfrom: 0101018b988fd8e7-40198b50-dfaf-4c81-8858-92d5bece2a22-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
-	t=1699071645;
+	t=1699071646;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=V1hb7xZOUzhjPMtVWctDyjhpbeE0r9kJlEbdMpHvf0w=;
-	b=UUDYZLHLHKXl1D6o2cGzsF+wd/2LE7rgFzlFtlxqT6c/jnTjzf5m9VW5SVZS7dr9
-	0q35Di1jrl/12fNYq85Kgyd4nYO0omEmHzCBy1ILrwHh8xNHaC7+95qvAcXWWCKHogU
-	HLAFWfyxP76evprPvho9aRVupFMCHUXXiJL25Qj4=
+	bh=J45s4UllY86sXvzi/e38o1G3VU3+BXVlR061Yd4mqT4=;
+	b=E420ELkEZpOL8KtKqPPQdEIMYY/lPuJm4rnPanAzkWZ1a0Q3lR4aDo8GP+d3QaA5
+	JP/84Zwm+nNZRa7dhIDj3ngBSOzlSyqpV4/v+oFz9SBxd5sRuDtKylc2FlCflAfEfwh
+	NvfHL4fCe17zQ1uKWOScsMfA2sQwnlWiqOIMy9DY=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699071645;
+	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699071646;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=V1hb7xZOUzhjPMtVWctDyjhpbeE0r9kJlEbdMpHvf0w=;
-	b=fmccTkpSmVdhYmvH/MqHKDNWWlg5qwpQhKdOtWeaZUMlDsW7MLEkuH6Pc1p1w4DM
-	55cWFF6qFiB5M8RUat7ip1oo/OXvBB7xwMebk/i7MQes/o5khiADuAZvokxGKZbr1Ek
-	c0iGfrutCVtqkJRsT1jwABk98gt6eSpVMxCEs8As=
-Content-Type: multipart/mixed; boundary="===============4210389854051852555=="
+	bh=J45s4UllY86sXvzi/e38o1G3VU3+BXVlR061Yd4mqT4=;
+	b=W9qOX3Oly7gRSFWYW8/MzFWWaiYchcTfgFNvgRaY/0lePhzwpu57CbGSzC4sc1yw
+	FUhaDHo1tEn0fAkVMySJ2g0nvsEF/2BXUMMsOHn3jiBIW+swkN1uG1vyP9k7/AEXBT6
+	sFHsLO4Z7gyWa+7YJP6pAn9r6XuB3voxQqAgySe4=
+Content-Type: multipart/mixed; boundary="===============6670046778040613309=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] aom: upgrading to 3.7.0 SUCCEEDED
-Message-ID: <0101018b988fd7c0-ac435caa-c249-4407-80e7-435681ef926d-000000@us-west-2.amazonses.com>
+Subject: [AUH] dav1d: upgrading to 1.3.0 SUCCEEDED
+Message-ID: <0101018b988fd8e7-40198b50-dfaf-4c81-8858-92d5bece2a22-000000@us-west-2.amazonses.com>
 Date: Sat, 4 Nov 2023 04:20:45 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
-X-SES-Outgoing: 2023.11.04-54.240.27.29
+X-SES-Outgoing: 2023.11.04-54.240.27.31
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 04:20:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106235
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106236
 
---===============4210389854051852555==
+--===============6670046778040613309==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,10 +52,10 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *aom* to *3.7.0* has Succeeded.
+that the automatic attempt to upgrade the recipe *dav1d* to *1.3.0* has Succeeded.
 
 Next steps:
-    - apply the patch: git am 0001-aom-upgrade-3.6.1-3.7.0.patch
+    - apply the patch: git am 0001-dav1d-upgrade-1.2.0-1.3.0.patch
     - check the changes to upstream patches and summarize them in the commit message,
     - compile an image that contains the package
     - perform some basic sanity tests
@@ -73,148 +73,119 @@ Regards,
 The Upgrade Helper
 
 -- >8 --
-From d7f75a678b2c6d873d33b4f34881b76058f1f6af Mon Sep 17 00:00:00 2001
+From 07809d72eb71ce79ad3ae9ff7be7e3418b72c0c3 Mon Sep 17 00:00:00 2001
 From: Upgrade Helper <auh@yoctoproject.org>
-Date: Sat, 4 Nov 2023 03:12:11 +0000
-Subject: [PATCH] aom: upgrade 3.6.1 -> 3.7.0
+Date: Sat, 4 Nov 2023 03:15:56 +0000
+Subject: [PATCH] dav1d: upgrade 1.2.0 -> 1.3.0
 
 ---
- .../recipes-multimedia/aom/{aom_3.6.1.bb => aom_3.7.0.bb}       | 2 +-
+ .../recipes-multimedia/dav1d/{dav1d_1.2.0.bb => dav1d_1.3.0.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-multimedia/recipes-multimedia/aom/{aom_3.6.1.bb => aom_3.7.0.bb} (95%)
+ rename meta-multimedia/recipes-multimedia/dav1d/{dav1d_1.2.0.bb => dav1d_1.3.0.bb} (89%)
 
-diff --git a/meta-multimedia/recipes-multimedia/aom/aom_3.6.1.bb b/meta-multimedia/recipes-multimedia/aom/aom_3.7.0.bb
-similarity index 95%
-rename from meta-multimedia/recipes-multimedia/aom/aom_3.6.1.bb
-rename to meta-multimedia/recipes-multimedia/aom/aom_3.7.0.bb
-index 45dd487f3..7e5af5039 100644
---- a/meta-multimedia/recipes-multimedia/aom/aom_3.6.1.bb
-+++ b/meta-multimedia/recipes-multimedia/aom/aom_3.7.0.bb
-@@ -5,7 +5,7 @@ LICENSE = "BSD-2-Clause & AOM-Patent-License-1.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=6ea91368c1bbdf877159435572b931f5 \
-                     file://PATENTS;md5=a111d47497d3bb49e04eef71377eb8ba \
-                    "
--SRCREV = "7ade96172b95adc91a5d85bf80c90989cd543ee8"
-+SRCREV = "6054fae218eda6e53e1e3b4f7ef0fff4877c7bf1"
- SRC_URI = "git://aomedia.googlesource.com/aom;protocol=https;branch=main \
-            file://0001-subpel_variance_neon-Provide-prototypes-for-missing-.patch"
+diff --git a/meta-multimedia/recipes-multimedia/dav1d/dav1d_1.2.0.bb b/meta-multimedia/recipes-multimedia/dav1d/dav1d_1.3.0.bb
+similarity index 89%
+rename from meta-multimedia/recipes-multimedia/dav1d/dav1d_1.2.0.bb
+rename to meta-multimedia/recipes-multimedia/dav1d/dav1d_1.3.0.bb
+index 5d43921b0..2d5049b9a 100644
+--- a/meta-multimedia/recipes-multimedia/dav1d/dav1d_1.2.0.bb
++++ b/meta-multimedia/recipes-multimedia/dav1d/dav1d_1.3.0.bb
+@@ -7,7 +7,7 @@ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=c8055cfe7548dfdaa3a6dc45d8793669"
+ 
+ SRC_URI = "git://code.videolan.org/videolan/dav1d.git;protocol=https;branch=master"
+-SRCREV = "676a864a11af2c0522e1f992e770589543894686"
++SRCREV = "48035599cdd4e4415732e408c407e0c1cd1c7444"
+ 
+ S = "${WORKDIR}/git"
  
 -- 
 2.39.2
 
 
---===============4210389854051852555==
-Content-Type: application/octet-stream
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="0001-aom-upgrade-3.6.1-3.7.0.patch"
-
-RnJvbSBkN2Y3NWE2NzhiMmM2ZDg3M2QzM2I0ZjM0ODgxYjc2MDU4ZjFmNmFmIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBVcGdyYWRlIEhlbHBlciA8YXVoQHlvY3RvcHJvamVjdC5vcmc+
-CkRhdGU6IFNhdCwgNCBOb3YgMjAyMyAwMzoxMjoxMSArMDAwMApTdWJqZWN0OiBbUEFUQ0hdIGFv
-bTogdXBncmFkZSAzLjYuMSAtPiAzLjcuMAoKLS0tCiAuLi4vcmVjaXBlcy1tdWx0aW1lZGlhL2Fv
-bS97YW9tXzMuNi4xLmJiID0+IGFvbV8zLjcuMC5iYn0gICAgICAgfCAyICstCiAxIGZpbGUgY2hh
-bmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkKIHJlbmFtZSBtZXRhLW11bHRpbWVk
-aWEvcmVjaXBlcy1tdWx0aW1lZGlhL2FvbS97YW9tXzMuNi4xLmJiID0+IGFvbV8zLjcuMC5iYn0g
-KDk1JSkKCmRpZmYgLS1naXQgYS9tZXRhLW11bHRpbWVkaWEvcmVjaXBlcy1tdWx0aW1lZGlhL2Fv
-bS9hb21fMy42LjEuYmIgYi9tZXRhLW11bHRpbWVkaWEvcmVjaXBlcy1tdWx0aW1lZGlhL2FvbS9h
-b21fMy43LjAuYmIKc2ltaWxhcml0eSBpbmRleCA5NSUKcmVuYW1lIGZyb20gbWV0YS1tdWx0aW1l
-ZGlhL3JlY2lwZXMtbXVsdGltZWRpYS9hb20vYW9tXzMuNi4xLmJiCnJlbmFtZSB0byBtZXRhLW11
-bHRpbWVkaWEvcmVjaXBlcy1tdWx0aW1lZGlhL2FvbS9hb21fMy43LjAuYmIKaW5kZXggNDVkZDQ4
-N2YzLi43ZTVhZjUwMzkgMTAwNjQ0Ci0tLSBhL21ldGEtbXVsdGltZWRpYS9yZWNpcGVzLW11bHRp
-bWVkaWEvYW9tL2FvbV8zLjYuMS5iYgorKysgYi9tZXRhLW11bHRpbWVkaWEvcmVjaXBlcy1tdWx0
-aW1lZGlhL2FvbS9hb21fMy43LjAuYmIKQEAgLTUsNyArNSw3IEBAIExJQ0VOU0UgPSAiQlNELTIt
-Q2xhdXNlICYgQU9NLVBhdGVudC1MaWNlbnNlLTEuMCIKIExJQ19GSUxFU19DSEtTVU0gPSAiZmls
-ZTovL0xJQ0VOU0U7bWQ1PTZlYTkxMzY4YzFiYmRmODc3MTU5NDM1NTcyYjkzMWY1IFwKICAgICAg
-ICAgICAgICAgICAgICAgZmlsZTovL1BBVEVOVFM7bWQ1PWExMTFkNDc0OTdkM2JiNDllMDRlZWY3
-MTM3N2ViOGJhIFwKICAgICAgICAgICAgICAgICAgICAiCi1TUkNSRVYgPSAiN2FkZTk2MTcyYjk1
-YWRjOTFhNWQ4NWJmODBjOTA5ODljZDU0M2VlOCIKK1NSQ1JFViA9ICI2MDU0ZmFlMjE4ZWRhNmU1
-M2UxZTNiNGY3ZWYwZmZmNDg3N2M3YmYxIgogU1JDX1VSSSA9ICJnaXQ6Ly9hb21lZGlhLmdvb2ds
-ZXNvdXJjZS5jb20vYW9tO3Byb3RvY29sPWh0dHBzO2JyYW5jaD1tYWluIFwKICAgICAgICAgICAg
-ZmlsZTovLzAwMDEtc3VicGVsX3ZhcmlhbmNlX25lb24tUHJvdmlkZS1wcm90b3R5cGVzLWZvci1t
-aXNzaW5nLS5wYXRjaCIKIAotLSAKMi4zOS4yCgo=
-
---===============4210389854051852555==
+--===============6670046778040613309==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment; filename="buildhistory-diff-full.txt"
 
-packages/core2-64-poky-linux/aom/aom-dbg: PV changed from "3.6.1" to "3.7.0"
-packages/core2-64-poky-linux/aom/aom-dbg: PKGV changed from 3.6.1 [default] to 3.7.0 [default]
-packages/core2-64-poky-linux/aom/aom-dbg: PKGSIZE changed from 45030336 to 45247704 (+0%)
-packages/core2-64-poky-linux/aom/aom-dbg: FILELIST: removed "/usr/lib/.debug/libaom.so.3.6.1", added "/usr/lib/.debug/libaom.so.3.7.0"
-packages/core2-64-poky-linux/aom/aom-dev: PV changed from "3.6.1" to "3.7.0"
-packages/core2-64-poky-linux/aom/aom-dev: PKGV changed from 3.6.1 [default] to 3.7.0 [default]
-packages/core2-64-poky-linux/aom/aom-dev: PKGSIZE changed from 205603 to 208820 (+2%)
-packages/core2-64-poky-linux/aom/aom-doc: PV changed from "3.6.1" to "3.7.0"
-packages/core2-64-poky-linux/aom/aom-doc: PKGV changed from 3.6.1 [default] to 3.7.0 [default]
-packages/core2-64-poky-linux/aom/aom-locale: PV changed from "3.6.1" to "3.7.0"
-packages/core2-64-poky-linux/aom/aom-locale: PKGV changed from 3.6.1 [default] to 3.7.0 [default]
-packages/core2-64-poky-linux/aom/aom-src: PV changed from "3.6.1" to "3.7.0"
-packages/core2-64-poky-linux/aom/aom-src: PKGV changed from 3.6.1 [default] to 3.7.0 [default]
-packages/core2-64-poky-linux/aom/aom-src: PKGSIZE changed from 17776657 to 17929980 (+1%)
-packages/core2-64-poky-linux/aom/aom-src: FILELIST: directory renamed /usr/src/debug/aom/3.6.1-r0/aom_ports -> /usr/src/debug/aom/3.7.0-r0/aom_ports, directory renamed /usr/src/debug/aom/3.6.1-r0/aom_mem -> /usr/src/debug/aom/3.7.0-r0/aom_mem, directory renamed /usr/src/debug/aom/3.6.1-r0/third_party/SVT-AV1 -> /usr/src/debug/aom/3.7.0-r0/third_party/SVT-AV1, directory renamed /usr/src/debug/aom/3.6.1-r0/av1/common -> /usr/src/debug/aom/3.7.0-r0/av1/common, directory renamed /usr/src/debug/aom/3.6.1-r0/third_party/fastfeat -> /usr/src/debug/aom/3.7.0-r0/third_party/fastfeat, directory renamed /usr/src/debug/aom/3.6.1-r0/aom_scale/generic -> /usr/src/debug/aom/3.7.0-r0/aom_scale/generic, directory renamed /usr/src/debug/aom/3.6.1-r0/aom_dsp/simd -> /usr/src/debug/aom/3.7.0-r0/aom_dsp/simd, directory renamed /usr/src/debug/aom/3.6.1-r0/aom/internal -> /usr/src/debug/aom/3.7.0-r0/aom/internal, directory renamed /usr/src/debug/aom/3.6.1-r0/apps -> /usr/src/debug/aom/3.7.0-r0/apps, direct
- ory renamed /usr/src/debug/aom/3.6.1-r0/aom -> /usr/src/debug/aom/3.7.0-r0/aom, directory renamed /usr/src/debug/aom/3.6.1-r0/third_party/libwebm/mkvparser -> /usr/src/debug/aom/3.7.0-r0/third_party/libwebm/mkvparser, directory renamed /usr/src/debug/aom/3.6.1-r0/av1/encoder/x86 -> /usr/src/debug/aom/3.7.0-r0/av1/encoder/x86, directory renamed /usr/src/debug/aom/3.6.1-r0/third_party/vector -> /usr/src/debug/aom/3.7.0-r0/third_party/vector, directory renamed /usr/src/debug/aom/3.6.1-r0/third_party/libwebm/common -> /usr/src/debug/aom/3.7.0-r0/third_party/libwebm/common, directory renamed /usr/src/debug/aom/3.6.1-r0/aom_scale -> /usr/src/debug/aom/3.7.0-r0/aom_scale, directory renamed /usr/src/debug/aom/3.6.1-r0/common -> /usr/src/debug/aom/3.7.0-r0/common, directory renamed /usr/src/debug/aom/3.6.1-r0/third_party/libyuv/include/libyuv -> /usr/src/debug/aom/3.7.0-r0/third_party/libyuv/include/libyuv, directory renamed /usr/src/debug/aom/3.6.1-r0/av1/decoder -> /usr/src/debug/aom/3.7.0
- -r0/av1/decoder, directory renamed /usr/src/debug/aom/3.6.1-r0/av1/common/x86 -> /usr/src/debug/aom/3.7.0-r0/av1/common/x86, directory renamed /usr/src/debug/aom/3.6.1-r0/aom/src -> /usr/src/debug/aom/3.7.0-r0/aom/src, directory renamed /usr/src/debug/aom/3.6.1-r0/third_party/libyuv/source -> /usr/src/debug/aom/3.7.0-r0/third_party/libyuv/source, directory renamed /usr/src/debug/aom/3.6.1-r0/stats -> /usr/src/debug/aom/3.7.0-r0/stats, directory renamed /usr/src/debug/aom/3.6.1-r0/third_party/libwebm/mkvmuxer -> /usr/src/debug/aom/3.7.0-r0/third_party/libwebm/mkvmuxer, directory renamed /usr/src/debug/aom/3.6.1-r0/config -> /usr/src/debug/aom/3.7.0-r0/config, directory renamed /usr/src/debug/aom/3.6.1-r0/examples -> /usr/src/debug/aom/3.7.0-r0/examples, directory renamed /usr/src/debug/aom/3.6.1-r0/av1 -> /usr/src/debug/aom/3.7.0-r0/av1, directory renamed /usr/src/debug/aom/3.6.1-r0/aom_dsp/flow_estimation -> /usr/src/debug/aom/3.7.0-r0/aom_dsp/flow_estimation, removed "/usr/src/debu
- g/aom/3.6.1-r0/av1/encoder/segmentation.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/convolve_avx2.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/segmentation.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/highbd_loopfilter_sse2.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/intrapred_common.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/obmc_sad_avx2.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/motion_search_facade.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/masked_sad_intrin_avx2.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/fft.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/sad.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/sse.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/avg.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/encodemv.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/variance_sse2.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/motion_search_facade.c /usr/src/debug/aom/3.6.1-r0/aom_util/debug_util.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/blend_mask_sse4.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/odintrin.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/fwd_txf
- m_sse2.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/highbd_convolve_avx2.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/av1_ml_partition_models.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/odintrin.c /usr/src/debug/aom/3.6.1-r0/gen_src/aom_dsp_dummy.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/entdec.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/bitwriter.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/quantize_avx2.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/entdec.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/txfm_common.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/bitwriter.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/fft_avx2.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/fft_sse2.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/encodetxb.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/tokenize.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/interp_search.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/rdopt_data_defs.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/av1_fwd_txfm2d.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/tokenize.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/e
- ncodetxb.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/txfm_common_avx2.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/binary_codes_reader.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/txfm_common_sse2.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/interp_search.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/mem_sse2.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/ratectrl.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/binary_codes_reader.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/quantize.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/ratectrl.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/rc_utils.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/bitreader_buffer.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/intrapred_ssse3.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/convolve_sse2.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/av1_noise_estimate.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/lookahead.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/bitreader_buffer.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/convolve_ssse3.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/av1_noise_e
- stimate.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/intrapred_utils.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/lookahead.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/av1_fwd_txfm1d.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/blend_a64_hmask.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/partition_strategy.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/intrapred.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/global_motion_facade.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/txb_rdopt.h /usr/src/debug/aom/3.6.1-r0/aom_util/aom_thread.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/convolve_sse4_1.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/av1_fwd_txfm1d.h /usr/src/debug/aom/3.6.1-r0/aom_util/aom_thread.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/txb_rdopt.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/adaptive_quantize_sse2.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/obmc_variance_avx2.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/hybrid_fwd_txfm.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/hybrid_fwd_txfm.h /usr/src/debug/aom/3.6.1-r0/av1/e
- ncoder/cnn.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/hash_motion.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/transpose_sse2.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/sorting_network.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/superres_scale.c /usr/src/debug/aom/3.6.1-r0/gen_src/aom_av1_dummy.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/fwd_txfm.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/cnn.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/hash_motion.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/superres_scale.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/pass2_strategy.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/highbd_sad_avx2.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/highbd_quantize_intrin_avx2.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/pass2_strategy.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/highbd_variance_avx2.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/mcomp_structs.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/grain_table.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/variance_impl_avx2.c /usr/src/debug/aom/3.6.1-r0/av
- 1/encoder/thirdpass.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/grain_table.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/variance_avx2.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/thirdpass.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/fft_common.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/lpf_common_sse2.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/aom_subpixel_8t_intrin_avx2.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/block.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/rdopt_utils.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/blend_a64_hmask_sse4.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/blend_a64_vmask_sse4.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/sad_avx2.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/sse_avx2.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/sse_sse4.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/subtract.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/reconinter_enc.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/synonyms.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/reconinter_enc.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/encoder
- _alloc.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/extend.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/grain_params.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/extend.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/aom_convolve_copy_avx2.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/psnr.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/speed_features.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/ssim.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/masked_sad4d_ssse3.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/partition_strategy.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/recenter.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/context_tree.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/noise_util.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/encoder_utils.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/speed_features.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/prob.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/psnr.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/noise_util.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/rect.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/jnt_sad_ssse3.c /usr/src/de
- bug/aom/3.6.1-r0/av1/encoder/context_tree.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/bitdepth_conversion_avx2.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/bitdepth_conversion_sse2.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/encode_strategy.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/encoder_utils.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/masked_sad_intrin_ssse3.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/bitstream.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/bitwriter_buffer.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/obmc_sad_sse4.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/encode_strategy.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/bitwriter_buffer.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/quantize_ssse3.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/intrapred_x86.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/masked_sad_intrin_ssse3.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/bitstream.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/rdopt.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/blend_a64_mask_avx2.c /usr/src/debug/aom/3.6
- .1-r0/aom_dsp/aom_filter.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/noise_model.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/flow_estimation/x86/corner_match_sse4.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/rdopt.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/noise_model.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/loopfilter.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/aom_subpixel_8t_intrin_sse2.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/encodeframe_utils.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/highbd_variance_sse2.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/obmc_intrinsic_ssse3.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/flow_estimation/x86/corner_match_avx2.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/encodeframe_utils.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/blend_a64_mask_sse4.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/enc_enums.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/highbd_convolve_ssse3.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/obmc_intrinsic_sse4.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/sad4d_avx2.c /usr/src/deb
- ug/aom/3.6.1-r0/aom_dsp/entcode.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/mcomp.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/av1_quantize.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/rd.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/entcode.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/mcomp.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/aom_dsp_rtcd.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/highbd_variance_sse4.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/av1_quantize.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/rd.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/dwt.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/synonyms_avx2.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/firstpass.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/firstpass.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/sad_impl_avx2.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/subtract_avx2.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/av1_fwd_txfm1d_cfg.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/dwt.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/txb_rdopt_utils.h /usr/src/debug/aom/3.6.1
- -r0/av1/encoder/svc_layercontext.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/adaptive_quantize_avx2.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/nonrd_opt.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/bitreader.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/svc_layercontext.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/bitreader.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/misc_model_weights.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/variance_impl_ssse3.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/binary_codes_writer.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/encodeframe.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/aom_quantize_avx.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/aq_cyclicrefresh.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/tx_search.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/highbd_convolve_sse2.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/nonrd_pickmode.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/wedge_utils.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/sad_av1.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/aq_cyclicrefresh.c /usr/s
- rc/debug/aom/3.6.1-r0/av1/encoder/tx_search.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/binary_codes_writer.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/encodeframe.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/partition_model_weights.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/k_means_template.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/hash.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/aq_variance.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/partition_search.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/highbd_adaptive_quantize_sse2.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/ml.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/blend_a64_mask.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/aq_variance.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/hash.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/partition_search.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/highbd_intrapred_sse2.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/highbd_loopfilter_avx2.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/jnt_variance_ssse3.c /usr/src/debug/aom/3.6.1-r0/av1/en
- coder/mode_prune_model_weights.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/highbd_quantize_intrin_sse2.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/temporal_filter.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/tpl_model.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/tx_prune_model_weights.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/obmc_variance_sse4.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/temporal_filter.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/tpl_model.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/encoder.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/allintra_vis.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/ethread.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/gop_structure.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/pickcdef.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/allintra_vis.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/encoder.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/ethread.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/grain_test_vectors.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/gop_structure.c /usr/src/debug
- /aom/3.6.1-r0/av1/encoder/pickcdef.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/intrapred_sse4.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/entenc.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/variance.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/variance.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/entenc.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/model_rd.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/random.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/blk_sse_sum.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/sum_squares.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/level.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/intrapred_sse2.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/var_based_part.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/level.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/var_based_part.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/fwd_txfm_impl_sse2.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/external_partition.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/global_motion.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/global_motion_facade.h /usr/src/de
- bug/aom/3.6.1-r0/aom_dsp/x86/masked_variance_intrin_ssse3.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/aom_convolve.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/intra_mode_search.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/convolve_common_intrin.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/intra_mode_search_utils.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/global_motion.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/external_partition.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/loopfilter_avx2.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/loopfilter_sse2.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/quantize_x86.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/avg_intrin_avx2.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/avg_intrin_sse2.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/avg_intrin_sse4.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/blend_sse4.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/highbd_adaptive_quantize_avx2.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/masked_variance_intrin_ssse3.h /usr/src/debug/aom/3.6.1-r0/av1/encod
- er/intra_mode_search.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/intrapred_avx2.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/blk_sse_sum_avx2.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/blk_sse_sum_sse2.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/cost.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/compound_type.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/cost.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/aom_convolve_copy_sse2.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/aom_dsp_common.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/highbd_subtract_sse2.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/compound_type.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/palette.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/picklpf.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/aom_asm_stubs.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/sum_squares_sse2.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/pickrst.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/aq_complexity.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/partition_cnn_weights.h /usr/src/debug/aom/3.6.1-r0
- /av1/encoder/palette.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/picklpf.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/mathutils.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/aq_complexity.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/sum_squares_avx2.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/sum_squares_sse2.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/pickrst.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/ml.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/mv_prec.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/pustats.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/quantize.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/encodemb.h /usr/src/debug/aom/3.6.1-r0/av1/encoder/encodemv.h /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/quantize_sse2.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/x86/aom_subpixel_8t_intrin_ssse3.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/mv_prec.c /usr/src/debug/aom/3.6.1-r0/aom_dsp/blend_a64_vmask.c /usr/src/debug/aom/3.6.1-r0/av1/encoder/encodemb.c", added "/usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/obmc_sad_avx2.c /usr/src/de
- bug/aom/3.7.0-r0/aom_dsp/x86/fwd_txfm_sse2.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/odintrin.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/odintrin.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/encodetxb.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/encodetxb.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/txfm_common_avx2.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/txfm_common_sse2.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/ratectrl.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/ratectrl.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/intrapred_ssse3.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/convolve_sse2.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/av1_noise_estimate.h /usr/src/debug/aom/3.7.0-r0/gen_src/aom_av1_no_op.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/av1_noise_estimate.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/intrapred_utils.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/av1_fwd_txfm1d.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/blend_a64_vmask.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/intrapred.c /usr/src/debug/aom/3.7.0-r0/a
- om_dsp/x86/convolve_sse4_1.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/av1_fwd_txfm1d.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/adaptive_quantize_sse2.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/highbd_sad_avx2.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/highbd_variance_avx2.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/grain_table.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/thirdpass.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/grain_table.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/thirdpass.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/fft_common.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/aom_subpixel_8t_intrin_avx2.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/rdopt_utils.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/partition_strategy.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/context_tree.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/noise_util.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/noise_util.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/context_tree.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/partition_strategy.h /usr/src/debug/aom
- /3.7.0-r0/aom_dsp/x86/bitdepth_conversion_avx2.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/bitdepth_conversion_sse2.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/bitstream.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/bitstream.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/aom_filter.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/loopfilter.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/blend_a64_mask_sse4.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/highbd_convolve_ssse3.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/av1_quantize.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/av1_quantize.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/subtract_avx2.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/av1_fwd_txfm1d_cfg.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/txb_rdopt_utils.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/adaptive_quantize_avx2.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/pyramid.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/highbd_convolve_sse2.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/pyramid.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/aq_varia
- nce.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/blend_a64_mask.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/aq_variance.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/pickcdef.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/pickcdef.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/intrapred_sse4.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/variance.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/variance.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/random.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/blk_sse_sum.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/intrapred_sse2.c /usr/src/debug/aom/3.7.0-r0/gen_src/aom_dsp_no_op.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/global_motion_facade.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/aom_convolve.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/convolve_common_intrin.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/global_motion_facade.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/quantize_x86.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/avg_intrin_avx2.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/avg_intrin_sse2.c /usr/src/d
- ebug/aom/3.7.0-r0/aom_dsp/x86/avg_intrin_sse4.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/highbd_adaptive_quantize_avx2.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/aom_dsp_common.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/aom_asm_stubs.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/sum_squares_sse2.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/aq_complexity.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/pustats.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/mathutils.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/aq_complexity.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/sum_squares_avx2.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/sum_squares_sse2.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/mv_prec.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/mv_prec.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/blend_sse4.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/avg.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/fft.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/sad.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/sse.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/blend_mask_sse4.h /u
- sr/src/debug/aom/3.7.0-r0/av1/encoder/av1_ml_partition_models.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/quantize_avx2.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/mem_sse2.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/rc_utils.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/bitreader_buffer.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/bitreader_buffer.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/hash_motion.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/sorting_network.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/superres_scale.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/hash_motion.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/superres_scale.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/pass2_strategy.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/highbd_quantize_intrin_avx2.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/pass2_strategy.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/variance_impl_avx2.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/block.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/reconinter_enc.h /usr/src/debug/aom/3.7.0-r0/av1/enc
- oder/reconinter_enc.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/masked_sad_intrin_ssse3.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/masked_sad_intrin_ssse3.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/rdopt.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/rdopt.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/obmc_intrinsic_sse4.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/entcode.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/entcode.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/aom_dsp_rtcd.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/firstpass.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/firstpass.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/svc_layercontext.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/svc_layercontext.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/encodeframe.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/aom_quantize_avx.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/wedge_utils.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/nonrd_pickmode.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/encodeframe.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/ha
- sh.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/highbd_adaptive_quantize_sse2.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/hash.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/encoder.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/gop_structure.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/encoder.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/gop_structure.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/model_rd.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/level.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/level.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/fwd_txfm_impl_sse2.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/external_partition.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/masked_variance_intrin_ssse3.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/intra_mode_search.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/intra_mode_search_utils.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/external_partition.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/intra_mode_search.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/masked_variance_intrin_ssse3.h /us
- r/src/debug/aom/3.7.0-r0/aom_dsp/x86/highbd_subtract_sse2.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/partition_cnn_weights.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/quantize.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/encodemb.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/encodemv.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/encodemv.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/quantize.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/encodemb.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/convolve_avx2.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/motion_search_facade.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/variance_sse2.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/motion_search_facade.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/entdec.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/bitwriter.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/entdec.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/bitwriter.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/rdopt_data_defs.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/av1_fwd_txfm2d.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/
- binary_codes_reader.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/binary_codes_reader.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/lookahead.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/convolve_ssse3.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/lookahead.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/txb_rdopt.h /usr/src/debug/aom/3.7.0-r0/aom_util/aom_thread.h /usr/src/debug/aom/3.7.0-r0/aom_util/aom_thread.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/txb_rdopt.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/obmc_variance_avx2.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/fwd_txfm.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/mcomp_structs.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/blend_a64_hmask_sse4.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/blend_a64_vmask_sse4.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/sse_avx2.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/sse_sse4.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/subtract.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/grain_params.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/masked_sad4d_ssse3.c /
- usr/src/debug/aom/3.7.0-r0/av1/encoder/speed_features.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/encoder_utils.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/speed_features.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/encoder_utils.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/encode_strategy.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/obmc_sad_sse4.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/encode_strategy.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/obmc_intrinsic_ssse3.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/enc_enums.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/sad4d_avx2.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/rd.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/rd.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/synonyms_avx2.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/sad_impl_avx2.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/aq_cyclicrefresh.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/aq_cyclicrefresh.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/jnt_variance_ssse3.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/highbd_quan
- tize_intrin_sse2.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/tx_prune_model_weights.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/ethread.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/ethread.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/grain_test_vectors.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/var_based_part.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/var_based_part.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/intrapred_avx2.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/aom_convolve_copy_sse2.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/palette.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/picklpf.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/pickrst.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/palette.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/picklpf.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/pickrst.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/quantize_sse2.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/segmentation.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/segmentation.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/intrapred_comm
- on.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/highbd_loopfilter_sse2.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/flow_estimation/x86/disflow_sse4.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/masked_sad_intrin_avx2.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/highbd_convolve_avx2.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/txfm_common.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/fft_avx2.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/fft_sse2.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/tokenize.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/interp_search.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/tokenize.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/interp_search.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/hybrid_fwd_txfm.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/hybrid_fwd_txfm.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/cnn.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/transpose_sse2.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/cnn.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/variance_avx2.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/l
- pf_common_sse2.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/sad_avx2.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/synonyms.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/encoder_alloc.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/extend.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/extend.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/aom_convolve_copy_avx2.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/psnr.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/ssim.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/recenter.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/rect.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/prob.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/psnr.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/bitwriter_buffer.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/bitwriter_buffer.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/quantize_ssse3.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/intrapred_x86.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/blend_a64_mask_avx2.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/noise_model.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/flow_estimation/x86/corner
- _match_sse4.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/noise_model.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/aom_subpixel_8t_intrin_sse2.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/encodeframe_utils.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/highbd_variance_sse2.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/flow_estimation/x86/corner_match_avx2.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/encodeframe_utils.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/mcomp.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/mcomp.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/highbd_variance_sse4.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/dwt.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/dwt.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/nonrd_opt.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/bitreader.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/bitreader.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/misc_model_weights.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/variance_impl_ssse3.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/nonrd_opt.c /usr/src/debug/aom/3.7.0-r0/ao
- m_dsp/binary_codes_writer.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/jnt_sad_sse2.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/tx_search.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/sad_av1.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/tx_search.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/binary_codes_writer.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/partition_model_weights.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/k_means_template.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/partition_search.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/partition_search.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/highbd_intrapred_sse2.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/highbd_loopfilter_avx2.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/mode_prune_model_weights.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/temporal_filter.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/tpl_model.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/obmc_variance_sse4.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/temporal_filter.c /usr/src/debug/aom/3.7.0-r0/av1/encode
- r/tpl_model.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/allintra_vis.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/allintra_vis.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/entenc.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/entenc.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/sum_squares.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/global_motion.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/global_motion.h /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/loopfilter_avx2.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/loopfilter_sse2.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/blk_sse_sum_avx2.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/blk_sse_sum_sse2.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/cost.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/compound_type.h /usr/src/debug/aom/3.7.0-r0/av1/encoder/cost.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/compound_type.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/ml.c /usr/src/debug/aom/3.7.0-r0/aom_dsp/x86/aom_subpixel_8t_intrin_ssse3.c /usr/src/debug/aom/3.7.0-r0/av1/encoder/ml.h /usr/src/debug/aom/3
- .7.0-r0/aom_dsp/blend_a64_hmask.c"
-packages/core2-64-poky-linux/aom/aom-staticdev: PV changed from "3.6.1" to "3.7.0"
-packages/core2-64-poky-linux/aom/aom-staticdev: PKGV changed from 3.6.1 [default] to 3.7.0 [default]
-packages/core2-64-poky-linux/aom/aom-staticdev: PKGSIZE changed from 62930850 to 63332950 (+1%)
-packages/core2-64-poky-linux/aom/aom: PV changed from "3.6.1" to "3.7.0"
-packages/core2-64-poky-linux/aom/aom: PKGV changed from 3.6.1 [default] to 3.7.0 [default]
-packages/core2-64-poky-linux/aom/aom: PKGSIZE changed from 6444687 to 6440623 (-0%)
-packages/core2-64-poky-linux/aom/aom: FILELIST: removed "/usr/lib/libaom.so.3.6.1", added "/usr/lib/libaom.so.3.7.0"
-packages/core2-64-poky-linux/aom: PV changed from "3.6.1" to "3.7.0"
-packages/core2-64-poky-linux/aom: PKGV changed from 3.6.1 [default] to 3.7.0 [default]
-Changes to packages/core2-64-poky-linux/aom (sysroot):
-  /usr/lib/libaom.so.3 changed symlink target from libaom.so.3.6.1 to libaom.so.3.7.0
-  /usr/lib/libaom.so.3.6.1 moved to /usr/lib/libaom.so.3.7.0
+packages/core2-64-poky-linux/dav1d/dav1d-dbg: PKGSIZE changed from 3234744 to 3238440 (+0%)
+packages/core2-64-poky-linux/dav1d/dav1d-dbg: PV changed from "1.2.0" to "1.3.0"
+packages/core2-64-poky-linux/dav1d/dav1d-dbg: FILELIST: removed "/usr/lib/.debug/libdav1d.so.6.9.0", added "/usr/lib/.debug/libdav1d.so.7.0.0"
+packages/core2-64-poky-linux/dav1d/dav1d-dbg: PKGV changed from 1.2.0 [default] to 1.3.0 [default]
+packages/core2-64-poky-linux/dav1d/dav1d-dev: PKGSIZE changed from 41439 to 42876 (+3%)
+packages/core2-64-poky-linux/dav1d/dav1d-dev: PV changed from "1.2.0" to "1.3.0"
+packages/core2-64-poky-linux/dav1d/dav1d-dev: PKGV changed from 1.2.0 [default] to 1.3.0 [default]
+packages/core2-64-poky-linux/dav1d/dav1d-doc: PV changed from "1.2.0" to "1.3.0"
+packages/core2-64-poky-linux/dav1d/dav1d-doc: PKGV changed from 1.2.0 [default] to 1.3.0 [default]
+packages/core2-64-poky-linux/dav1d/dav1d-locale: PV changed from "1.2.0" to "1.3.0"
+packages/core2-64-poky-linux/dav1d/dav1d-locale: PKGV changed from 1.2.0 [default] to 1.3.0 [default]
+packages/core2-64-poky-linux/dav1d/dav1d-src: PKGSIZE changed from 1714975 to 1730553 (+1%)
+packages/core2-64-poky-linux/dav1d/dav1d-src: PV changed from "1.2.0" to "1.3.0"
+packages/core2-64-poky-linux/dav1d/dav1d-src: FILELIST: directory renamed /usr/src/debug/dav1d/1.2.0-r0/tools -> /usr/src/debug/dav1d/1.3.0-r0/tools, directory renamed /usr/src/debug/dav1d/1.2.0-r0/tools/input -> /usr/src/debug/dav1d/1.3.0-r0/tools/input, directory renamed /usr/src/debug/dav1d/1.2.0-r0/include/common -> /usr/src/debug/dav1d/1.3.0-r0/include/common, directory renamed /usr/src/debug/dav1d/1.2.0-r0/tools/output -> /usr/src/debug/dav1d/1.3.0-r0/tools/output, directory renamed /usr/src/debug/dav1d/1.2.0-r0/include/dav1d -> /usr/src/debug/dav1d/1.3.0-r0/include/dav1d, removed "/usr/src/debug/dav1d/1.2.0-r0/src/intra_edge.h /usr/src/debug/dav1d/1.2.0-r0/src/x86/looprestoration.h /usr/src/debug/dav1d/1.2.0-r0/src/lf_mask.c /usr/src/debug/dav1d/1.2.0-r0/src/cdef_tmpl.c /usr/src/debug/dav1d/1.2.0-r0/src/lf_mask.h /usr/src/debug/dav1d/1.2.0-r0/src/lib.c /usr/src/debug/dav1d/1.2.0-r0/src/cdef_apply.h /usr/src/debug/dav1d/1.2.0-r0/src/picture.h /usr/src/debug/dav1d/1.2.0-r0/src/p
+ icture.c /usr/src/debug/dav1d/1.2.0-r0/src/x86/itx.h /usr/src/debug/dav1d/1.2.0-r0/src/scan.h /usr/src/debug/dav1d/1.2.0-r0/src/scan.c /usr/src/debug/dav1d/1.2.0-r0/src/ref.c /usr/src/debug/dav1d/1.2.0-r0/src/mc.h /usr/src/debug/dav1d/1.2.0-r0/src/ref.h /usr/src/debug/dav1d/1.2.0-r0/src/x86/msac.h /usr/src/debug/dav1d/1.2.0-r0/src/looprestoration.h /usr/src/debug/dav1d/1.2.0-r0/src/decode.h /usr/src/debug/dav1d/1.2.0-r0/src/itx_1d.h /usr/src/debug/dav1d/1.2.0-r0/src/levels.h /usr/src/debug/dav1d/1.2.0-r0/src/data.h /usr/src/debug/dav1d/1.2.0-r0/src/refmvs.h /usr/src/debug/dav1d/1.2.0-r0/src/tables.h /usr/src/debug/dav1d/1.2.0-r0/src/thread.h /usr/src/debug/dav1d/1.2.0-r0/src/warpmv.h /usr/src/debug/dav1d/1.2.0-r0/src/x86/mc.h /usr/src/debug/dav1d/1.2.0-r0/src/decode.c /usr/src/debug/dav1d/1.2.0-r0/src/itx_1d.c /usr/src/debug/dav1d/1.2.0-r0/src/refmvs.c /usr/src/debug/dav1d/1.2.0-r0/src/tables.c /usr/src/debug/dav1d/1.2.0-r0/src/warpmv.c /usr/src/debug/dav1d/1.2.0-r0/src/data.c /usr/
+ src/debug/dav1d/1.2.0-r0/src/log.h /usr/src/debug/dav1d/1.2.0-r0/src/log.c /usr/src/debug/dav1d/1.2.0-r0/src/env.h /usr/src/debug/dav1d/1.2.0-r0/src/thread_data.h /usr/src/debug/dav1d/1.2.0-r0/src/x86/filmgrain.h /usr/src/debug/dav1d/1.2.0-r0/src/fg_apply_tmpl.c /usr/src/debug/dav1d/1.2.0-r0/src/lf_apply_tmpl.c /usr/src/debug/dav1d/1.2.0-r0/src/lr_apply_tmpl.c /usr/src/debug/dav1d/1.2.0-r0/src/ipred_prepare.h /usr/src/debug/dav1d/1.2.0-r0/src/msac.h /usr/src/debug/dav1d/1.2.0-r0/src/msac.c /usr/src/debug/dav1d/1.2.0-r0/src/internal.h /usr/src/debug/dav1d/1.2.0-r0/src/loopfilter_tmpl.c /usr/src/debug/dav1d/1.2.0-r0/src/wedge.h /usr/src/debug/dav1d/1.2.0-r0/src/ipred.h /usr/src/debug/dav1d/1.2.0-r0/src/recon.h /usr/src/debug/dav1d/1.2.0-r0/src/filmgrain_tmpl.c /usr/src/debug/dav1d/1.2.0-r0/src/wedge.c /usr/src/debug/dav1d/1.2.0-r0/src/ctx.h /usr/src/debug/dav1d/1.2.0-r0/src/x86/refmvs.h /usr/src/debug/dav1d/1.2.0-r0/src/x86/loopfilter.h /usr/src/debug/dav1d/1.2.0-r0/src/filmgrain.h /u
+ sr/src/debug/dav1d/1.2.0-r0/src/x86/ipred.h /usr/src/debug/dav1d/1.2.0-r0/src/dequant_tables.c /usr/src/debug/dav1d/1.2.0-r0/src/getbits.h /usr/src/debug/dav1d/1.2.0-r0/src/getbits.c /usr/src/debug/dav1d/1.2.0-r0/src/dequant_tables.h /usr/src/debug/dav1d/1.2.0-r0/src/cpu.c /usr/src/debug/dav1d/1.2.0-r0/src/looprestoration_tmpl.c /usr/src/debug/dav1d/1.2.0-r0/src/cpu.h /usr/src/debug/dav1d/1.2.0-r0/src/cdef.h /usr/src/debug/dav1d/1.2.0-r0/src/cdef_apply_tmpl.c /usr/src/debug/dav1d/1.2.0-r0/src/ipred_tmpl.c /usr/src/debug/dav1d/1.2.0-r0/src/recon_tmpl.c /usr/src/debug/dav1d/1.2.0-r0/src/mem.h /usr/src/debug/dav1d/1.2.0-r0/src/itx_tmpl.c /usr/src/debug/dav1d/1.2.0-r0/src/mem.c /usr/src/debug/dav1d/1.2.0-r0/src/mc_tmpl.c /usr/src/debug/dav1d/1.2.0-r0/src/fg_apply.h /usr/src/debug/dav1d/1.2.0-r0/src/lf_apply.h /usr/src/debug/dav1d/1.2.0-r0/src/lr_apply.h /usr/src/debug/dav1d/1.2.0-r0/src/obu.h /usr/src/debug/dav1d/1.2.0-r0/src/obu.c /usr/src/debug/dav1d/1.2.0-r0/src/qm.h /usr/src/debug/d
+ av1d/1.2.0-r0/src/x86/cdef.h /usr/src/debug/dav1d/1.2.0-r0/src/ipred_prepare_tmpl.c /usr/src/debug/dav1d/1.2.0-r0/src/qm.c /usr/src/debug/dav1d/1.2.0-r0/src/itx.h /usr/src/debug/dav1d/1.2.0-r0/src/thread_task.h /usr/src/debug/dav1d/1.2.0-r0/src/cdf.h /usr/src/debug/dav1d/1.2.0-r0/src/thread_task.c /usr/src/debug/dav1d/1.2.0-r0/src/cdf.c /usr/src/debug/dav1d/1.2.0-r0/src/intra_edge.c /usr/src/debug/dav1d/1.2.0-r0/src/x86/cpu.h /usr/src/debug/dav1d/1.2.0-r0/src/loopfilter.h /usr/src/debug/dav1d/1.2.0-r0/src/x86/cpu.c", added "/usr/src/debug/dav1d/1.3.0-r0/src/intra_edge.h /usr/src/debug/dav1d/1.3.0-r0/src/x86/looprestoration.h /usr/src/debug/dav1d/1.3.0-r0/src/lf_mask.c /usr/src/debug/dav1d/1.3.0-r0/src/cdef_tmpl.c /usr/src/debug/dav1d/1.3.0-r0/src/lf_mask.h /usr/src/debug/dav1d/1.3.0-r0/src/pal.h /usr/src/debug/dav1d/1.3.0-r0/src/lib.c /usr/src/debug/dav1d/1.3.0-r0/src/pal.c /usr/src/debug/dav1d/1.3.0-r0/src/cdef_apply.h /usr/src/debug/dav1d/1.3.0-r0/src/picture.h /usr/src/debug/dav1
+ d/1.3.0-r0/src/picture.c /usr/src/debug/dav1d/1.3.0-r0/src/x86/itx.h /usr/src/debug/dav1d/1.3.0-r0/src/scan.h /usr/src/debug/dav1d/1.3.0-r0/src/scan.c /usr/src/debug/dav1d/1.3.0-r0/src/ref.c /usr/src/debug/dav1d/1.3.0-r0/src/mc.h /usr/src/debug/dav1d/1.3.0-r0/src/ref.h /usr/src/debug/dav1d/1.3.0-r0/src/x86/msac.h /usr/src/debug/dav1d/1.3.0-r0/src/looprestoration.h /usr/src/debug/dav1d/1.3.0-r0/src/decode.h /usr/src/debug/dav1d/1.3.0-r0/src/itx_1d.h /usr/src/debug/dav1d/1.3.0-r0/src/levels.h /usr/src/debug/dav1d/1.3.0-r0/src/data.h /usr/src/debug/dav1d/1.3.0-r0/src/refmvs.h /usr/src/debug/dav1d/1.3.0-r0/src/tables.h /usr/src/debug/dav1d/1.3.0-r0/src/thread.h /usr/src/debug/dav1d/1.3.0-r0/src/warpmv.h /usr/src/debug/dav1d/1.3.0-r0/src/x86/mc.h /usr/src/debug/dav1d/1.3.0-r0/src/decode.c /usr/src/debug/dav1d/1.3.0-r0/src/itx_1d.c /usr/src/debug/dav1d/1.3.0-r0/src/refmvs.c /usr/src/debug/dav1d/1.3.0-r0/src/tables.c /usr/src/debug/dav1d/1.3.0-r0/src/warpmv.c /usr/src/debug/dav1d/1.3.0-r0/
+ src/data.c /usr/src/debug/dav1d/1.3.0-r0/src/log.h /usr/src/debug/dav1d/1.3.0-r0/src/log.c /usr/src/debug/dav1d/1.3.0-r0/src/env.h /usr/src/debug/dav1d/1.3.0-r0/src/thread_data.h /usr/src/debug/dav1d/1.3.0-r0/src/x86/filmgrain.h /usr/src/debug/dav1d/1.3.0-r0/src/fg_apply_tmpl.c /usr/src/debug/dav1d/1.3.0-r0/src/lf_apply_tmpl.c /usr/src/debug/dav1d/1.3.0-r0/src/lr_apply_tmpl.c /usr/src/debug/dav1d/1.3.0-r0/src/ipred_prepare.h /usr/src/debug/dav1d/1.3.0-r0/src/msac.h /usr/src/debug/dav1d/1.3.0-r0/src/msac.c /usr/src/debug/dav1d/1.3.0-r0/src/internal.h /usr/src/debug/dav1d/1.3.0-r0/src/loopfilter_tmpl.c /usr/src/debug/dav1d/1.3.0-r0/src/ipred.h /usr/src/debug/dav1d/1.3.0-r0/src/recon.h /usr/src/debug/dav1d/1.3.0-r0/src/wedge.h /usr/src/debug/dav1d/1.3.0-r0/src/filmgrain_tmpl.c /usr/src/debug/dav1d/1.3.0-r0/src/wedge.c /usr/src/debug/dav1d/1.3.0-r0/src/ctx.h /usr/src/debug/dav1d/1.3.0-r0/src/x86/refmvs.h /usr/src/debug/dav1d/1.3.0-r0/src/x86/loopfilter.h /usr/src/debug/dav1d/1.3.0-r0/sr
+ c/filmgrain.h /usr/src/debug/dav1d/1.3.0-r0/src/x86/ipred.h /usr/src/debug/dav1d/1.3.0-r0/src/dequant_tables.c /usr/src/debug/dav1d/1.3.0-r0/src/getbits.h /usr/src/debug/dav1d/1.3.0-r0/src/getbits.c /usr/src/debug/dav1d/1.3.0-r0/src/dequant_tables.h /usr/src/debug/dav1d/1.3.0-r0/src/cpu.c /usr/src/debug/dav1d/1.3.0-r0/src/looprestoration_tmpl.c /usr/src/debug/dav1d/1.3.0-r0/src/cpu.h /usr/src/debug/dav1d/1.3.0-r0/src/cdef.h /usr/src/debug/dav1d/1.3.0-r0/src/cdef_apply_tmpl.c /usr/src/debug/dav1d/1.3.0-r0/src/ipred_tmpl.c /usr/src/debug/dav1d/1.3.0-r0/src/recon_tmpl.c /usr/src/debug/dav1d/1.3.0-r0/src/mem.h /usr/src/debug/dav1d/1.3.0-r0/src/itx_tmpl.c /usr/src/debug/dav1d/1.3.0-r0/src/mem.c /usr/src/debug/dav1d/1.3.0-r0/src/mc_tmpl.c /usr/src/debug/dav1d/1.3.0-r0/src/fg_apply.h /usr/src/debug/dav1d/1.3.0-r0/src/lf_apply.h /usr/src/debug/dav1d/1.3.0-r0/src/lr_apply.h /usr/src/debug/dav1d/1.3.0-r0/src/x86/pal.h /usr/src/debug/dav1d/1.3.0-r0/src/obu.h /usr/src/debug/dav1d/1.3.0-r0/src/o
+ bu.c /usr/src/debug/dav1d/1.3.0-r0/src/qm.h /usr/src/debug/dav1d/1.3.0-r0/src/x86/cdef.h /usr/src/debug/dav1d/1.3.0-r0/src/ipred_prepare_tmpl.c /usr/src/debug/dav1d/1.3.0-r0/src/qm.c /usr/src/debug/dav1d/1.3.0-r0/src/itx.h /usr/src/debug/dav1d/1.3.0-r0/src/thread_task.h /usr/src/debug/dav1d/1.3.0-r0/src/cdf.h /usr/src/debug/dav1d/1.3.0-r0/src/thread_task.c /usr/src/debug/dav1d/1.3.0-r0/src/cdf.c /usr/src/debug/dav1d/1.3.0-r0/src/intra_edge.c /usr/src/debug/dav1d/1.3.0-r0/src/x86/cpu.h /usr/src/debug/dav1d/1.3.0-r0/src/loopfilter.h /usr/src/debug/dav1d/1.3.0-r0/src/x86/cpu.c"
+packages/core2-64-poky-linux/dav1d/dav1d-src: PKGV changed from 1.2.0 [default] to 1.3.0 [default]
+packages/core2-64-poky-linux/dav1d/dav1d-staticdev: PV changed from "1.2.0" to "1.3.0"
+packages/core2-64-poky-linux/dav1d/dav1d-staticdev: PKGV changed from 1.2.0 [default] to 1.3.0 [default]
+packages/core2-64-poky-linux/dav1d/dav1d: PKGSIZE changed from 1763433 to 1757225 (-0%)
+packages/core2-64-poky-linux/dav1d/dav1d: PV changed from "1.2.0" to "1.3.0"
+packages/core2-64-poky-linux/dav1d/dav1d: FILELIST: removed "/usr/lib/libdav1d.so.6.9.0 /usr/lib/libdav1d.so.6", added "/usr/lib/libdav1d.so.7.0.0 /usr/lib/libdav1d.so.7"
+packages/core2-64-poky-linux/dav1d/dav1d: PKGV changed from 1.2.0 [default] to 1.3.0 [default]
+packages/core2-64-poky-linux/dav1d: PV changed from "1.2.0" to "1.3.0"
+packages/core2-64-poky-linux/dav1d: PKGV changed from 1.2.0 [default] to 1.3.0 [default]
+Changes to packages/core2-64-poky-linux/dav1d (sysroot):
+  /usr/lib/libdav1d.so changed symlink target from libdav1d.so.6 to libdav1d.so.7
+  /usr/lib/libdav1d.so.6.9.0 moved to /usr/lib/libdav1d.so.7.0.0
+  /usr/lib/libdav1d.so.6 moved to /usr/lib/libdav1d.so.7
 
---===============4210389854051852555==
+--===============6670046778040613309==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment; filename="buildhistory-diff.txt"
 
-packages/core2-64-poky-linux/aom/aom: FILELIST: removed "/usr/lib/libaom.so.3.6.1", added "/usr/lib/libaom.so.3.7.0"
-Changes to packages/core2-64-poky-linux/aom (sysroot):
-  /usr/lib/libaom.so.3 changed symlink target from libaom.so.3.6.1 to libaom.so.3.7.0
-  /usr/lib/libaom.so.3.6.1 moved to /usr/lib/libaom.so.3.7.0
+packages/core2-64-poky-linux/dav1d/dav1d: FILELIST: removed "/usr/lib/libdav1d.so.6 /usr/lib/libdav1d.so.6.9.0", added "/usr/lib/libdav1d.so.7 /usr/lib/libdav1d.so.7.0.0"
+Changes to packages/core2-64-poky-linux/dav1d (sysroot):
+  /usr/lib/libdav1d.so changed symlink target from libdav1d.so.6 to libdav1d.so.7
+  /usr/lib/libdav1d.so.6.9.0 moved to /usr/lib/libdav1d.so.7.0.0
+  /usr/lib/libdav1d.so.6 moved to /usr/lib/libdav1d.so.7
 
---===============4210389854051852555==--
+--===============6670046778040613309==
+Content-Type: application/octet-stream
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+ filename="0001-dav1d-upgrade-1.2.0-1.3.0.patch"
+
+RnJvbSAwNzgwOWQ3MmViNzFjZTc5YWQzYWU5ZmY3YmU3ZTM0MThiNzJjMGMzIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBVcGdyYWRlIEhlbHBlciA8YXVoQHlvY3RvcHJvamVjdC5vcmc+
+CkRhdGU6IFNhdCwgNCBOb3YgMjAyMyAwMzoxNTo1NiArMDAwMApTdWJqZWN0OiBbUEFUQ0hdIGRh
+djFkOiB1cGdyYWRlIDEuMi4wIC0+IDEuMy4wCgotLS0KIC4uLi9yZWNpcGVzLW11bHRpbWVkaWEv
+ZGF2MWQve2RhdjFkXzEuMi4wLmJiID0+IGRhdjFkXzEuMy4wLmJifSB8IDIgKy0KIDEgZmlsZSBj
+aGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQogcmVuYW1lIG1ldGEtbXVsdGlt
+ZWRpYS9yZWNpcGVzLW11bHRpbWVkaWEvZGF2MWQve2RhdjFkXzEuMi4wLmJiID0+IGRhdjFkXzEu
+My4wLmJifSAoODklKQoKZGlmZiAtLWdpdCBhL21ldGEtbXVsdGltZWRpYS9yZWNpcGVzLW11bHRp
+bWVkaWEvZGF2MWQvZGF2MWRfMS4yLjAuYmIgYi9tZXRhLW11bHRpbWVkaWEvcmVjaXBlcy1tdWx0
+aW1lZGlhL2RhdjFkL2RhdjFkXzEuMy4wLmJiCnNpbWlsYXJpdHkgaW5kZXggODklCnJlbmFtZSBm
+cm9tIG1ldGEtbXVsdGltZWRpYS9yZWNpcGVzLW11bHRpbWVkaWEvZGF2MWQvZGF2MWRfMS4yLjAu
+YmIKcmVuYW1lIHRvIG1ldGEtbXVsdGltZWRpYS9yZWNpcGVzLW11bHRpbWVkaWEvZGF2MWQvZGF2
+MWRfMS4zLjAuYmIKaW5kZXggNWQ0MzkyMWIwLi4yZDUwNDliOWEgMTAwNjQ0Ci0tLSBhL21ldGEt
+bXVsdGltZWRpYS9yZWNpcGVzLW11bHRpbWVkaWEvZGF2MWQvZGF2MWRfMS4yLjAuYmIKKysrIGIv
+bWV0YS1tdWx0aW1lZGlhL3JlY2lwZXMtbXVsdGltZWRpYS9kYXYxZC9kYXYxZF8xLjMuMC5iYgpA
+QCAtNyw3ICs3LDcgQEAgTElDRU5TRSA9ICJCU0QtMi1DbGF1c2UiCiBMSUNfRklMRVNfQ0hLU1VN
+ID0gImZpbGU6Ly9DT1BZSU5HO21kNT1jODA1NWNmZTc1NDhkZmRhYTNhNmRjNDVkODc5MzY2OSIK
+IAogU1JDX1VSSSA9ICJnaXQ6Ly9jb2RlLnZpZGVvbGFuLm9yZy92aWRlb2xhbi9kYXYxZC5naXQ7
+cHJvdG9jb2w9aHR0cHM7YnJhbmNoPW1hc3RlciIKLVNSQ1JFViA9ICI2NzZhODY0YTExYWYyYzA1
+MjJlMWY5OTJlNzcwNTg5NTQzODk0Njg2IgorU1JDUkVWID0gIjQ4MDM1NTk5Y2RkNGU0NDE1NzMy
+ZTQwOGM0MDdlMGMxY2QxYzc0NDQiCiAKIFMgPSAiJHtXT1JLRElSfS9naXQiCiAKLS0gCjIuMzku
+MgoK
+
+--===============6670046778040613309==--
 
