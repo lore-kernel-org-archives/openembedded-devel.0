@@ -2,39 +2,39 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E53DC0729B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 35EADC072DD
 	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 04:20:58 +0000 (UTC)
 Received: from a27-30.smtp-out.us-west-2.amazonses.com (a27-30.smtp-out.us-west-2.amazonses.com [54.240.27.30])
- by mx.groups.io with SMTP id smtpd.web11.4053.1699071647515424795
+ by mx.groups.io with SMTP id smtpd.web11.4047.1699071647212744198
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 03 Nov 2023 21:20:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=gNE9iWCK;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=Hsna9n8d;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.30, mailfrom: 0101018b988fdbfe-3d09549b-714b-47bc-84f2-55e7c2e32509-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=JQ1/zE2h;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=XR4msG8A;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.30, mailfrom: 0101018b988fda11-2482f284-8046-4889-86cd-f4aa42c6aad7-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
 	t=1699071646;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=gU0vEqsVcNMDSRTBqDtoVlMMJe7uG+f9dkyqgsM75ms=;
-	b=gNE9iWCKW07wenybSpjrkoPGzEU0+m7IeTubhHCo+oxvPfEvEMTOF+Z2QQhebq1O
-	dnD4YNcaWsIWpN1CEovtZi/UEkTPg+BUTdY/TALgCyl2gKAotpYjhzJBHuVlZisvtOw
-	RoA8fECywNEPazxs9CA7d/Iulo31L7O/3IXdl/rg=
+	bh=7x1tKVY58wU+LEE9ykA7R6ySbjFnv74Fo0b6U398K7A=;
+	b=JQ1/zE2h1WMXl4ylujNzBIbI8VaWnOZBfd2XMotq+LO6v5qkwHHMBe9Mclccjr7O
+	xCeUyE0mbcWhEuKrNUM1eWS1ga9oCoeWj+SR8Ud+QjA2PjQP4tPSSS5TdtxQj8EYkhi
+	je1oVIlFiJZQaZqr7YB0TUSQWhNxxEc6hjJXbBm0=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699071646;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=gU0vEqsVcNMDSRTBqDtoVlMMJe7uG+f9dkyqgsM75ms=;
-	b=Hsna9n8dKC0qM5ftQX2SEMNY+MLAFBb30XiHZrYHS1PUZhHFIr7DrA/ViTLa6nc9
-	eSIbLj1h/Etw5HV73VfT420ZNBkXaQ/l/3ORNw6e3QJoiUU4fvWzNEzUgtxWMIBThwJ
-	0li0sCT7DHKHTinyCI98SQDgyfGNAA1Qswwnw5dE=
-Content-Type: multipart/mixed; boundary="===============3586090048377736888=="
+	bh=7x1tKVY58wU+LEE9ykA7R6ySbjFnv74Fo0b6U398K7A=;
+	b=XR4msG8AJ1SwQJQE6QD38nNFzzigXo/CjWNmH+mYoh89AX80BMzu8IJP78NI0cAj
+	bTPiJD+YK+fApECzatl0eJJViGX8IVRZ5m8h1GZyY2XwlfxWYBxzSnL33HaXGO9EkPo
+	YpLv5hHWnOLsXtMHFIYuTcFW+0iRcv3yzKytBbHU=
+Content-Type: multipart/mixed; boundary="===============6555193636681151884=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] libdc1394: upgrading to 2.2.7 SUCCEEDED
-Message-ID: <0101018b988fdbfe-3d09549b-714b-47bc-84f2-55e7c2e32509-000000@us-west-2.amazonses.com>
+Subject: [AUH] fluidsynth: upgrading to 2.3.4 SUCCEEDED
+Message-ID: <0101018b988fda11-2482f284-8046-4889-86cd-f4aa42c6aad7-000000@us-west-2.amazonses.com>
 Date: Sat, 4 Nov 2023 04:20:46 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
 X-SES-Outgoing: 2023.11.04-54.240.27.30
@@ -42,9 +42,9 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 04:20:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106250
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106241
 
---===============3586090048377736888==
+--===============6555193636681151884==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,10 +52,10 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *libdc1394* to *2.2.7* has Succeeded.
+that the automatic attempt to upgrade the recipe *fluidsynth* to *2.3.4* has Succeeded.
 
 Next steps:
-    - apply the patch: git am 0001-libdc1394-upgrade-2.2.6-2.2.7.patch
+    - apply the patch: git am 0001-fluidsynth-upgrade-2.3.2-2.3.4.patch
     - check the changes to upstream patches and summarize them in the commit message,
     - compile an image that contains the package
     - perform some basic sanity tests
@@ -73,113 +73,104 @@ Regards,
 The Upgrade Helper
 
 -- >8 --
-From c39953877b11281855403b4ba72a504f597ccdc8 Mon Sep 17 00:00:00 2001
+From 2e941af8bb8af145b0b28f548755276d235ac963 Mon Sep 17 00:00:00 2001
 From: Upgrade Helper <auh@yoctoproject.org>
-Date: Sat, 4 Nov 2023 03:40:09 +0000
-Subject: [PATCH] libdc1394: upgrade 2.2.6 -> 2.2.7
+Date: Sat, 4 Nov 2023 03:19:59 +0000
+Subject: [PATCH] fluidsynth: upgrade 2.3.2 -> 2.3.4
 
 ---
- .../libdc1394/{libdc1394_2.2.6.bb => libdc1394_2.2.7.bb}       | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-multimedia/recipes-multimedia/libdc1394/{libdc1394_2.2.6.bb => libdc1394_2.2.7.bb} (84%)
+ .../recipes-multimedia/fluidsynth/fluidsynth_git.bb           | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/libdc1394/libdc1394_2.2.6.bb b/meta-multimedia/recipes-multimedia/libdc1394/libdc1394_2.2.7.bb
-similarity index 84%
-rename from meta-multimedia/recipes-multimedia/libdc1394/libdc1394_2.2.6.bb
-rename to meta-multimedia/recipes-multimedia/libdc1394/libdc1394_2.2.7.bb
-index 952ba603b..8cac780d6 100755
---- a/meta-multimedia/recipes-multimedia/libdc1394/libdc1394_2.2.6.bb
-+++ b/meta-multimedia/recipes-multimedia/libdc1394/libdc1394_2.2.7.bb
-@@ -14,8 +14,7 @@ DEPENDS += "libusb1 libraw1394 libsdl \
- SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
-            file://install_examples.patch \
-           "
--SRC_URI[md5sum] = "9fad67bbff08fe2818d5ec81802ec89f"
--SRC_URI[sha256sum] = "2b905fc9aa4eec6bdcf6a2ae5f5ba021232739f5be047dec8fe8dd6049c10fed"
-+SRC_URI[sha256sum] = "537ceb78dd3cef271a183f4a176191d1cecf85f025520e6bd3758b0e19e6609f"
- inherit autotools pkgconfig
+diff --git a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_git.bb b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_git.bb
+index a1083af56..26b199943 100644
+--- a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_git.bb
++++ b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_git.bb
+@@ -5,9 +5,9 @@ LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=fc178bcd425090939a8b634d1d6a9594"
  
- EXTRA_OECONF += "--disable-doxygen-doc --disable-examples"
+ SRC_URI = "git://github.com/FluidSynth/fluidsynth.git;branch=master;protocol=https"
+-SRCREV = "4d8fe638e1a48660a4c843d493f69a86579e12f0"
++SRCREV = "5ecdc4568e45123216c6888892caad07918ef127"
+ S = "${WORKDIR}/git"
+-PV = "2.3.2"
++PV = "2.3.4"
+ 
+ inherit cmake pkgconfig lib_package
+ 
 -- 
 2.39.2
 
 
---===============3586090048377736888==
+--===============6555193636681151884==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment; filename="buildhistory-diff-full.txt"
 
-packages/core2-64-poky-linux/libdc1394: PKGV changed from 2.2.6 [default] to 2.2.7 [default]
-packages/core2-64-poky-linux/libdc1394: SRC_URI changed from "https://downloads.sourceforge.net/libdc1394/libdc1394-2.2.6.tar.gz file://install_examples.patch" to "https://downloads.sourceforge.net/libdc1394/libdc1394-2.2.7.tar.gz file://install_examples.patch"
-packages/core2-64-poky-linux/libdc1394: PV changed from "2.2.6" to "2.2.7"
-packages/core2-64-poky-linux/libdc1394/libdc1394-dbg: PKGV changed from 2.2.6 [default] to 2.2.7 [default]
-packages/core2-64-poky-linux/libdc1394/libdc1394-dbg: PV changed from "2.2.6" to "2.2.7"
-packages/core2-64-poky-linux/libdc1394/libdc1394-dbg: FILELIST: removed "/usr/lib/.debug/libdc1394.so.25.0.0", added "/usr/lib/.debug/libdc1394.so.26.0.1"
-packages/core2-64-poky-linux/libdc1394/libdc1394-dev: PKGV changed from 2.2.6 [default] to 2.2.7 [default]
-packages/core2-64-poky-linux/libdc1394/libdc1394-dev: PV changed from "2.2.6" to "2.2.7"
-packages/core2-64-poky-linux/libdc1394/libdc1394-doc: PKGV changed from 2.2.6 [default] to 2.2.7 [default]
-packages/core2-64-poky-linux/libdc1394/libdc1394-doc: PV changed from "2.2.6" to "2.2.7"
-packages/core2-64-poky-linux/libdc1394/libdc1394-locale: PKGV changed from 2.2.6 [default] to 2.2.7 [default]
-packages/core2-64-poky-linux/libdc1394/libdc1394-locale: PV changed from "2.2.6" to "2.2.7"
-packages/core2-64-poky-linux/libdc1394/libdc1394-src: PKGV changed from 2.2.6 [default] to 2.2.7 [default]
-packages/core2-64-poky-linux/libdc1394/libdc1394-src: PV changed from "2.2.6" to "2.2.7"
-packages/core2-64-poky-linux/libdc1394/libdc1394-staticdev: PKGV changed from 2.2.6 [default] to 2.2.7 [default]
-packages/core2-64-poky-linux/libdc1394/libdc1394-staticdev: PV changed from "2.2.6" to "2.2.7"
-packages/core2-64-poky-linux/libdc1394/libdc1394: PKG changed from libdc1394-25 to libdc1394-26
-packages/core2-64-poky-linux/libdc1394/libdc1394: PKGV changed from 2.2.6 [default] to 2.2.7 [default]
-packages/core2-64-poky-linux/libdc1394/libdc1394: PV changed from "2.2.6" to "2.2.7"
-packages/core2-64-poky-linux/libdc1394/libdc1394: FILELIST: removed "/usr/lib/libdc1394.so.25 /usr/lib/libdc1394.so.25.0.0", added "/usr/lib/libdc1394.so.26 /usr/lib/libdc1394.so.26.0.1"
-Changes to packages/core2-64-poky-linux/libdc1394 (sysroot):
-  /usr/lib/libdc1394.so changed symlink target from libdc1394.so.25.0.0 to libdc1394.so.26.0.1
-  /usr/lib/libdc1394.so.25.0.0 moved to /usr/lib/libdc1394.so.26.0.1
-  /usr/lib/libdc1394.so.25 moved to /usr/lib/libdc1394.so.26
+packages/core2-64-poky-linux/fluidsynth/fluidsynth-bin: PKGV changed from 2.3.2 [default] to 2.3.4 [default]
+packages/core2-64-poky-linux/fluidsynth/fluidsynth-bin: PV changed from "2.3.2" to "2.3.4"
+packages/core2-64-poky-linux/fluidsynth/fluidsynth-dbg: PKGV changed from 2.3.2 [default] to 2.3.4 [default]
+packages/core2-64-poky-linux/fluidsynth/fluidsynth-dbg: FILELIST: removed "/usr/lib/.debug/libfluidsynth.so.3.2.0", added "/usr/lib/.debug/libfluidsynth.so.3.2.2"
+packages/core2-64-poky-linux/fluidsynth/fluidsynth-dbg: PV changed from "2.3.2" to "2.3.4"
+packages/core2-64-poky-linux/fluidsynth/fluidsynth-dbg: PKGSIZE changed from 1315568 to 1318640 (+0%)
+packages/core2-64-poky-linux/fluidsynth/fluidsynth-dev: PKGV changed from 2.3.2 [default] to 2.3.4 [default]
+packages/core2-64-poky-linux/fluidsynth/fluidsynth-dev: PV changed from "2.3.2" to "2.3.4"
+packages/core2-64-poky-linux/fluidsynth/fluidsynth-doc: PKGV changed from 2.3.2 [default] to 2.3.4 [default]
+packages/core2-64-poky-linux/fluidsynth/fluidsynth-doc: PV changed from "2.3.2" to "2.3.4"
+packages/core2-64-poky-linux/fluidsynth/fluidsynth-locale: PKGV changed from 2.3.2 [default] to 2.3.4 [default]
+packages/core2-64-poky-linux/fluidsynth/fluidsynth-locale: PV changed from "2.3.2" to "2.3.4"
+packages/core2-64-poky-linux/fluidsynth/fluidsynth-src: PKGV changed from 2.3.2 [default] to 2.3.4 [default]
+packages/core2-64-poky-linux/fluidsynth/fluidsynth-src: PV changed from "2.3.2" to "2.3.4"
+packages/core2-64-poky-linux/fluidsynth/fluidsynth-src: PKGSIZE changed from 2101876 to 2105062 (+0%)
+packages/core2-64-poky-linux/fluidsynth/fluidsynth-staticdev: PKGV changed from 2.3.2 [default] to 2.3.4 [default]
+packages/core2-64-poky-linux/fluidsynth/fluidsynth-staticdev: PV changed from "2.3.2" to "2.3.4"
+packages/core2-64-poky-linux/fluidsynth/fluidsynth: PKGV changed from 2.3.2 [default] to 2.3.4 [default]
+packages/core2-64-poky-linux/fluidsynth/fluidsynth: FILELIST: removed "/usr/lib/libfluidsynth.so.3.2.0", added "/usr/lib/libfluidsynth.so.3.2.2"
+packages/core2-64-poky-linux/fluidsynth/fluidsynth: PV changed from "2.3.2" to "2.3.4"
+packages/core2-64-poky-linux/fluidsynth: PKGV changed from 2.3.2 [default] to 2.3.4 [default]
+packages/core2-64-poky-linux/fluidsynth: PV changed from "2.3.2" to "2.3.4"
+Changes to packages/core2-64-poky-linux/fluidsynth (sysroot):
+  /usr/lib/libfluidsynth.so.3 changed symlink target from libfluidsynth.so.3.2.0 to libfluidsynth.so.3.2.2
+  /usr/lib/libfluidsynth.so.3.2.0 moved to /usr/lib/libfluidsynth.so.3.2.2
 
---===============3586090048377736888==
+--===============6555193636681151884==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment; filename="buildhistory-diff.txt"
 
-packages/core2-64-poky-linux/libdc1394/libdc1394: FILELIST: removed "/usr/lib/libdc1394.so.25.0.0 /usr/lib/libdc1394.so.25", added "/usr/lib/libdc1394.so.26.0.1 /usr/lib/libdc1394.so.26"
-packages/core2-64-poky-linux/libdc1394/libdc1394: PKG changed from libdc1394-25 to libdc1394-26
-Changes to packages/core2-64-poky-linux/libdc1394 (sysroot):
-  /usr/lib/libdc1394.so changed symlink target from libdc1394.so.25.0.0 to libdc1394.so.26.0.1
-  /usr/lib/libdc1394.so.25.0.0 moved to /usr/lib/libdc1394.so.26.0.1
-  /usr/lib/libdc1394.so.25 moved to /usr/lib/libdc1394.so.26
+packages/core2-64-poky-linux/fluidsynth/fluidsynth: FILELIST: removed "/usr/lib/libfluidsynth.so.3.2.0", added "/usr/lib/libfluidsynth.so.3.2.2"
+Changes to packages/core2-64-poky-linux/fluidsynth (sysroot):
+  /usr/lib/libfluidsynth.so.3 changed symlink target from libfluidsynth.so.3.2.0 to libfluidsynth.so.3.2.2
+  /usr/lib/libfluidsynth.so.3.2.0 moved to /usr/lib/libfluidsynth.so.3.2.2
 
---===============3586090048377736888==
+--===============6555193636681151884==
 Content-Type: application/octet-stream
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment;
- filename="0001-libdc1394-upgrade-2.2.6-2.2.7.patch"
+ filename="0001-fluidsynth-upgrade-2.3.2-2.3.4.patch"
 
-RnJvbSBjMzk5NTM4NzdiMTEyODE4NTU0MDNiNGJhNzJhNTA0ZjU5N2NjZGM4IE1vbiBTZXAgMTcg
+RnJvbSAyZTk0MWFmOGJiOGFmMTQ1YjBiMjhmNTQ4NzU1Mjc2ZDIzNWFjOTYzIE1vbiBTZXAgMTcg
 MDA6MDA6MDAgMjAwMQpGcm9tOiBVcGdyYWRlIEhlbHBlciA8YXVoQHlvY3RvcHJvamVjdC5vcmc+
-CkRhdGU6IFNhdCwgNCBOb3YgMjAyMyAwMzo0MDowOSArMDAwMApTdWJqZWN0OiBbUEFUQ0hdIGxp
-YmRjMTM5NDogdXBncmFkZSAyLjIuNiAtPiAyLjIuNwoKLS0tCiAuLi4vbGliZGMxMzk0L3tsaWJk
-YzEzOTRfMi4yLjYuYmIgPT4gbGliZGMxMzk0XzIuMi43LmJifSAgICAgICB8IDMgKy0tCiAxIGZp
-bGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDIgZGVsZXRpb25zKC0pCiByZW5hbWUgbWV0YS1t
-dWx0aW1lZGlhL3JlY2lwZXMtbXVsdGltZWRpYS9saWJkYzEzOTQve2xpYmRjMTM5NF8yLjIuNi5i
-YiA9PiBsaWJkYzEzOTRfMi4yLjcuYmJ9ICg4NCUpCgpkaWZmIC0tZ2l0IGEvbWV0YS1tdWx0aW1l
-ZGlhL3JlY2lwZXMtbXVsdGltZWRpYS9saWJkYzEzOTQvbGliZGMxMzk0XzIuMi42LmJiIGIvbWV0
-YS1tdWx0aW1lZGlhL3JlY2lwZXMtbXVsdGltZWRpYS9saWJkYzEzOTQvbGliZGMxMzk0XzIuMi43
-LmJiCnNpbWlsYXJpdHkgaW5kZXggODQlCnJlbmFtZSBmcm9tIG1ldGEtbXVsdGltZWRpYS9yZWNp
-cGVzLW11bHRpbWVkaWEvbGliZGMxMzk0L2xpYmRjMTM5NF8yLjIuNi5iYgpyZW5hbWUgdG8gbWV0
-YS1tdWx0aW1lZGlhL3JlY2lwZXMtbXVsdGltZWRpYS9saWJkYzEzOTQvbGliZGMxMzk0XzIuMi43
-LmJiCmluZGV4IDk1MmJhNjAzYi4uOGNhYzc4MGQ2IDEwMDc1NQotLS0gYS9tZXRhLW11bHRpbWVk
-aWEvcmVjaXBlcy1tdWx0aW1lZGlhL2xpYmRjMTM5NC9saWJkYzEzOTRfMi4yLjYuYmIKKysrIGIv
-bWV0YS1tdWx0aW1lZGlhL3JlY2lwZXMtbXVsdGltZWRpYS9saWJkYzEzOTQvbGliZGMxMzk0XzIu
-Mi43LmJiCkBAIC0xNCw4ICsxNCw3IEBAIERFUEVORFMgKz0gImxpYnVzYjEgbGlicmF3MTM5NCBs
-aWJzZGwgXAogU1JDX1VSSSA9ICIke1NPVVJDRUZPUkdFX01JUlJPUn0vJHtCUE59LyR7QlB9LnRh
-ci5neiBcCiAgICAgICAgICAgIGZpbGU6Ly9pbnN0YWxsX2V4YW1wbGVzLnBhdGNoIFwKICAgICAg
-ICAgICAiCi1TUkNfVVJJW21kNXN1bV0gPSAiOWZhZDY3YmJmZjA4ZmUyODE4ZDVlYzgxODAyZWM4
-OWYiCi1TUkNfVVJJW3NoYTI1NnN1bV0gPSAiMmI5MDVmYzlhYTRlZWM2YmRjZjZhMmFlNWY1YmEw
-MjEyMzI3MzlmNWJlMDQ3ZGVjOGZlOGRkNjA0OWMxMGZlZCIKK1NSQ19VUklbc2hhMjU2c3VtXSA9
-ICI1MzdjZWI3OGRkM2NlZjI3MWExODNmNGExNzYxOTFkMWNlY2Y4NWYwMjU1MjBlNmJkMzc1OGIw
-ZTE5ZTY2MDlmIgogaW5oZXJpdCBhdXRvdG9vbHMgcGtnY29uZmlnCiAKIEVYVFJBX09FQ09ORiAr
-PSAiLS1kaXNhYmxlLWRveHlnZW4tZG9jIC0tZGlzYWJsZS1leGFtcGxlcyIKLS0gCjIuMzkuMgoK
+CkRhdGU6IFNhdCwgNCBOb3YgMjAyMyAwMzoxOTo1OSArMDAwMApTdWJqZWN0OiBbUEFUQ0hdIGZs
+dWlkc3ludGg6IHVwZ3JhZGUgMi4zLjIgLT4gMi4zLjQKCi0tLQogLi4uL3JlY2lwZXMtbXVsdGlt
+ZWRpYS9mbHVpZHN5bnRoL2ZsdWlkc3ludGhfZ2l0LmJiICAgICAgICAgICB8IDQgKystLQogMSBm
+aWxlIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQg
+YS9tZXRhLW11bHRpbWVkaWEvcmVjaXBlcy1tdWx0aW1lZGlhL2ZsdWlkc3ludGgvZmx1aWRzeW50
+aF9naXQuYmIgYi9tZXRhLW11bHRpbWVkaWEvcmVjaXBlcy1tdWx0aW1lZGlhL2ZsdWlkc3ludGgv
+Zmx1aWRzeW50aF9naXQuYmIKaW5kZXggYTEwODNhZjU2Li4yNmIxOTk5NDMgMTAwNjQ0Ci0tLSBh
+L21ldGEtbXVsdGltZWRpYS9yZWNpcGVzLW11bHRpbWVkaWEvZmx1aWRzeW50aC9mbHVpZHN5bnRo
+X2dpdC5iYgorKysgYi9tZXRhLW11bHRpbWVkaWEvcmVjaXBlcy1tdWx0aW1lZGlhL2ZsdWlkc3lu
+dGgvZmx1aWRzeW50aF9naXQuYmIKQEAgLTUsOSArNSw5IEBAIExJQ0VOU0UgPSAiTEdQTC0yLjEt
+b25seSIKIExJQ19GSUxFU19DSEtTVU0gPSAiZmlsZTovL0xJQ0VOU0U7bWQ1PWZjMTc4YmNkNDI1
+MDkwOTM5YThiNjM0ZDFkNmE5NTk0IgogCiBTUkNfVVJJID0gImdpdDovL2dpdGh1Yi5jb20vRmx1
+aWRTeW50aC9mbHVpZHN5bnRoLmdpdDticmFuY2g9bWFzdGVyO3Byb3RvY29sPWh0dHBzIgotU1JD
+UkVWID0gIjRkOGZlNjM4ZTFhNDg2NjBhNGM4NDNkNDkzZjY5YTg2NTc5ZTEyZjAiCitTUkNSRVYg
+PSAiNWVjZGM0NTY4ZTQ1MTIzMjE2YzY4ODg4OTJjYWFkMDc5MThlZjEyNyIKIFMgPSAiJHtXT1JL
+RElSfS9naXQiCi1QViA9ICIyLjMuMiIKK1BWID0gIjIuMy40IgogCiBpbmhlcml0IGNtYWtlIHBr
+Z2NvbmZpZyBsaWJfcGFja2FnZQogCi0tIAoyLjM5LjIKCg==
 
---===============3586090048377736888==--
+--===============6555193636681151884==--
 
