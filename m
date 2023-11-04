@@ -2,49 +2,50 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ED261C4167D
-	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 07:48:12 +0000 (UTC)
-Received: from a27-31.smtp-out.us-west-2.amazonses.com (a27-31.smtp-out.us-west-2.amazonses.com [54.240.27.31])
- by mx.groups.io with SMTP id smtpd.web11.5511.1699084092451523673
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 199B3C0018C
+	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 07:48:13 +0000 (UTC)
+Received: from a27-192.smtp-out.us-west-2.amazonses.com (a27-192.smtp-out.us-west-2.amazonses.com [54.240.27.192])
+ by mx.groups.io with SMTP id smtpd.web10.5666.1699084092496405105
  for <openembedded-devel@lists.openembedded.org>;
  Sat, 04 Nov 2023 00:48:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=gYTNvhQq;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=dpKDcOTb;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.31, mailfrom: 0101018b994dc112-68b18ad4-f431-4c01-a44b-7e5029c23619-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=g/jDuENv;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=HjtIEnxu;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.192, mailfrom: 0101018b994dc125-a8e8e284-cac9-4617-adff-2c376e298eaf-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
 	t=1699084091;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=WHfO1D/MhsoXCrugWrWD9XS31bhWgvi4s0i+UPQ4LLs=;
-	b=gYTNvhQqRZsC4uqHOXg5bI2aFK8dYlM9Zije5ft6PM+I6gSfso6k2WstUJ+tWWtN
-	+e/v72UkOvIjv4dpVq6L6XK8uAO3msKqAxVBZHkBdAoDA3KToHUyxQYSsLIKyHodBKK
-	4v9WoibtNbHoAsBhYPOW0D3qQXp2nKPnAcK2OSYY=
+	bh=cVyDliIc17LXyIgXORdg4ZnlkT85qVmCoHRA4qRRpeE=;
+	b=g/jDuENvOHL9ZVMO85/bwDhsOL+UGsDptTwpQMC+QmwO+AauixlBReytwl4UGSx+
+	fl/FA5qoKNpPiE5iGw6H8ZZD9RR1/4ZDWeH2T4ooZHBOOiMEQ41AJ+PvZ9SxJfTEKG4
+	Fo+X7O3XHxIYRPHQRm0WXVPEKbhCgW5ivVySZIQI=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699084091;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=WHfO1D/MhsoXCrugWrWD9XS31bhWgvi4s0i+UPQ4LLs=;
-	b=dpKDcOTbKbNp6BAVWk9dYTX7cp81beikQnciPjq5UM3ezQQI9r8odzqMUDjJvEJ3
-	dQUIQoKN+Pry4tbTaKOHk0BIce/fuzScUP6e4Tv3MubwfdU5EoRGXNCpic8nmzyyna9
-	go9W06iIPAlbQtGEc388h+2Gwx6U72VFi098JA28=
-Content-Type: multipart/mixed; boundary="===============8302202563831552789=="
+	bh=cVyDliIc17LXyIgXORdg4ZnlkT85qVmCoHRA4qRRpeE=;
+	b=HjtIEnxu1o371cBXWAYQqJOQIfhZI3k2lAa+inQvuUa7SL1z9Dh1+bk7JoeS3BM2
+	pFCzN33+2Gi/GL4DQ3bebiKybhz9WrtLw5LULOOOXdSiyTKAgfOJpjp6tgym5p2IBUn
+	KB5zAhfWIhF5Epk7JizzJBCLx9jRTwg1WfCjTmYA=
+Content-Type: multipart/mixed; boundary="===============6830664651685522569=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] xfsprogs: upgrading to 6.5.0 SUCCEEDED
-Message-ID: <0101018b994dc112-68b18ad4-f431-4c01-a44b-7e5029c23619-000000@us-west-2.amazonses.com>
+Subject: [AUH] yaffs2-utils: upgrading to
+ 613a901a229e8a701c18f003dd0aee18453e0670 FAILED
+Message-ID: <0101018b994dc125-a8e8e284-cac9-4617-adff-2c376e298eaf-000000@us-west-2.amazonses.com>
 Date: Sat, 4 Nov 2023 07:48:11 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
-X-SES-Outgoing: 2023.11.04-54.240.27.31
+X-SES-Outgoing: 2023.11.04-54.240.27.192
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 07:48:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106357
+ <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 07:48:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106359
 
---===============8302202563831552789==
+--===============6830664651685522569==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,10 +53,16 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *xfsprogs* to *6.5.0* has Succeeded.
+that the automatic attempt to upgrade the recipe *yaffs2-utils* to *613a901a229e8a701c18f003dd0aee18453e0670* has Failed(do_compile).
+
+Detailed error information:
+
+do_compile failed
+
+
 
 Next steps:
-    - apply the patch: git am 0001-xfsprogs-upgrade-6.1.1-6.5.0.patch
+    - apply the patch: git am 0001-yaffs2-utils-upgrade-to-latest-revision.patch
     - check the changes to upstream patches and summarize them in the commit message,
     - compile an image that contains the package
     - perform some basic sanity tests
@@ -73,139 +80,296 @@ Regards,
 The Upgrade Helper
 
 -- >8 --
-From c12c9adcb2389a03606a695b1e7f52326fabf6a7 Mon Sep 17 00:00:00 2001
+From a19aadf841bf21188a2a6d3f859890a5632c7979 Mon Sep 17 00:00:00 2001
 From: Upgrade Helper <auh@yoctoproject.org>
-Date: Sat, 4 Nov 2023 07:35:36 +0000
-Subject: [PATCH] xfsprogs: upgrade 6.1.1 -> 6.5.0
+Date: Sat, 4 Nov 2023 07:41:28 +0000
+Subject: [PATCH] yaffs2-utils: upgrade to latest revision
 
 ---
- .../xfsprogs/{xfsprogs_6.1.1.bb => xfsprogs_6.5.0.bb}           | 2 +-
+ meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-filesystems/recipes-utils/xfsprogs/{xfsprogs_6.1.1.bb => xfsprogs_6.5.0.bb} (96%)
 
-diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_6.1.1.bb b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_6.5.0.bb
-similarity index 96%
-rename from meta-filesystems/recipes-utils/xfsprogs/xfsprogs_6.1.1.bb
-rename to meta-filesystems/recipes-utils/xfsprogs/xfsprogs_6.5.0.bb
-index 6267fd9a1..fd2797982 100644
---- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_6.1.1.bb
-+++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_6.5.0.bb
-@@ -13,7 +13,7 @@ SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
-            file://0004-configure-Use-AC_SYS_LARGERFILE-autoconf-macro.patch \
-            file://0005-Replace-off64_t-stat64-with-off_t-stat.patch \
+diff --git a/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb b/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb
+index 6bf321e23..21cd299ca 100644
+--- a/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb
++++ b/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb
+@@ -19,7 +19,7 @@ SRC_URI = "git://www.aleph1.co.uk/yaffs2;protocol=git;branch=master \
+            file://0001-define-loff_t-if-not-already-defined.patch \
             "
--SRC_URI[sha256sum] = "05e8a137870db1d6182df72dda98ab7a7100deb376947e854b9d59c914c2c7bb"
-+SRC_URI[sha256sum] = "8db81712b32756b97d89dd9a681ac5e325bbb75e585382cd4863fab7f9d021c6"
- inherit autotools-brokensep pkgconfig
  
- PACKAGES =+ "${PN}-fsck ${PN}-mkfs ${PN}-repair libhandle"
+-SRCREV = "9a6f486e56f927eeb8dc7e4e0d84f6bb95eeaa0f"
++SRCREV = "613a901a229e8a701c18f003dd0aee18453e0670"
+ 
+ UPSTREAM_CHECK_COMMITS = "1"
+ 
 -- 
 2.39.2
 
 
---===============8302202563831552789==
+--===============6830664651685522569==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="buildhistory-diff-full.txt"
+Content-Disposition: attachment; filename="bitbake-output-qemux86-64.txt"
 
-packages/core2-64-poky-linux/xfsprogs: SRC_URI changed from "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/xfsprogs-6.1.1.tar.xz file://remove_flags_from_build_flags.patch file://0002-include-include-xfs-linux.h-after-sys-mman.h.patch file://0001-support-usrmerge.patch file://0004-configure-Use-AC_SYS_LARGERFILE-autoconf-macro.patch file://0005-Replace-off64_t-stat64-with-off_t-stat.patch" to "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/xfsprogs-6.5.0.tar.xz file://remove_flags_from_build_flags.patch file://0002-include-include-xfs-linux.h-after-sys-mman.h.patch file://0001-support-usrmerge.patch file://0004-configure-Use-AC_SYS_LARGERFILE-autoconf-macro.patch file://0005-Replace-off64_t-stat64-with-off_t-stat.patch"
-packages/core2-64-poky-linux/xfsprogs: PV changed from "6.1.1" to "6.5.0"
-packages/core2-64-poky-linux/xfsprogs: PKGV changed from 6.1.1 [default] to 6.5.0 [default]
-packages/core2-64-poky-linux/xfsprogs/libhandle: PV changed from "6.1.1" to "6.5.0"
-packages/core2-64-poky-linux/xfsprogs/libhandle: PKGV changed from 6.1.1 [default] to 6.5.0 [default]
-Changes to packages/core2-64-poky-linux/xfsprogs (sysroot):
-  /usr/share/xfsprogs/mkfs/lts_6.6.conf was added
-packages/core2-64-poky-linux/xfsprogs/xfsprogs-dbg: PV changed from "6.1.1" to "6.5.0"
-packages/core2-64-poky-linux/xfsprogs/xfsprogs-dbg: PKGSIZE changed from 19616352 to 20120576 (+3%)
-packages/core2-64-poky-linux/xfsprogs/xfsprogs-dbg: PKGV changed from 6.1.1 [default] to 6.5.0 [default]
-packages/core2-64-poky-linux/xfsprogs/xfsprogs-dev: PV changed from "6.1.1" to "6.5.0"
-packages/core2-64-poky-linux/xfsprogs/xfsprogs-dev: PKGSIZE changed from 192616 to 195871 (+2%)
-packages/core2-64-poky-linux/xfsprogs/xfsprogs-dev: PKGV changed from 6.1.1 [default] to 6.5.0 [default]
-packages/core2-64-poky-linux/xfsprogs/xfsprogs-doc: PV changed from "6.1.1" to "6.5.0"
-packages/core2-64-poky-linux/xfsprogs/xfsprogs-doc: PKGSIZE changed from 143289 to 144907 (+1%)
-packages/core2-64-poky-linux/xfsprogs/xfsprogs-doc: PKGV changed from 6.1.1 [default] to 6.5.0 [default]
-packages/core2-64-poky-linux/xfsprogs/xfsprogs-fsck: PV changed from "6.1.1" to "6.5.0"
-packages/core2-64-poky-linux/xfsprogs/xfsprogs-fsck: PKGV changed from 6.1.1 [default] to 6.5.0 [default]
-packages/core2-64-poky-linux/xfsprogs/xfsprogs-locale: PV changed from "6.1.1" to "6.5.0"
-packages/core2-64-poky-linux/xfsprogs/xfsprogs-locale: PKGV changed from 6.1.1 [default] to 6.5.0 [default]
-packages/core2-64-poky-linux/xfsprogs/xfsprogs-mkfs: PV changed from "6.1.1" to "6.5.0"
-packages/core2-64-poky-linux/xfsprogs/xfsprogs-mkfs: PKGSIZE changed from 528456 to 543688 (+3%)
-packages/core2-64-poky-linux/xfsprogs/xfsprogs-mkfs: PKGV changed from 6.1.1 [default] to 6.5.0 [default]
-packages/core2-64-poky-linux/xfsprogs/xfsprogs-repair: PV changed from "6.1.1" to "6.5.0"
-packages/core2-64-poky-linux/xfsprogs/xfsprogs-repair: PKGSIZE changed from 728392 to 736584 (+1%)
-packages/core2-64-poky-linux/xfsprogs/xfsprogs-repair: PKGV changed from 6.1.1 [default] to 6.5.0 [default]
-packages/core2-64-poky-linux/xfsprogs/xfsprogs-src: FILELIST: directory renamed /usr/src/debug/xfsprogs/6.1.1-r0/copy -> /usr/src/debug/xfsprogs/6.5.0-r0/copy, directory renamed /usr/src/debug/xfsprogs/6.1.1-r0/fsr -> /usr/src/debug/xfsprogs/6.5.0-r0/fsr, directory renamed /usr/src/debug/xfsprogs/6.1.1-r0/include -> /usr/src/debug/xfsprogs/6.5.0-r0/include, directory renamed /usr/src/debug/xfsprogs/6.1.1-r0/mkfs -> /usr/src/debug/xfsprogs/6.5.0-r0/mkfs, directory renamed /usr/src/debug/xfsprogs/6.1.1-r0/growfs -> /usr/src/debug/xfsprogs/6.5.0-r0/growfs, directory renamed /usr/src/debug/xfsprogs/6.1.1-r0/repair -> /usr/src/debug/xfsprogs/6.5.0-r0/repair, directory renamed /usr/src/debug/xfsprogs/6.1.1-r0/libhandle -> /usr/src/debug/xfsprogs/6.5.0-r0/libhandle, directory renamed /usr/src/debug/xfsprogs/6.1.1-r0/estimate -> /usr/src/debug/xfsprogs/6.5.0-r0/estimate, directory renamed /usr/src/debug/xfsprogs/6.1.1-r0/spaceman -> /usr/src/debug/xfsprogs/6.5.0-r0/spaceman, directory rename
- d /usr/src/debug/xfsprogs/6.1.1-r0/libxlog -> /usr/src/debug/xfsprogs/6.5.0-r0/libxlog, directory renamed /usr/src/debug/xfsprogs/6.1.1-r0/logprint -> /usr/src/debug/xfsprogs/6.5.0-r0/logprint, directory renamed /usr/src/debug/xfsprogs/6.1.1-r0/mdrestore -> /usr/src/debug/xfsprogs/6.5.0-r0/mdrestore, directory renamed /usr/src/debug/xfsprogs/6.1.1-r0/libxfs -> /usr/src/debug/xfsprogs/6.5.0-r0/libxfs, directory renamed /usr/src/debug/xfsprogs/6.1.1-r0/quota -> /usr/src/debug/xfsprogs/6.5.0-r0/quota, directory renamed /usr/src/debug/xfsprogs/6.1.1-r0/rtcp -> /usr/src/debug/xfsprogs/6.5.0-r0/rtcp, directory renamed /usr/src/debug/xfsprogs/6.1.1-r0/libxcmd -> /usr/src/debug/xfsprogs/6.5.0-r0/libxcmd, removed "/usr/src/debug/xfsprogs/6.1.1-r0/libfrog/projects.h /usr/src/debug/xfsprogs/6.1.1-r0/io/cowextsize.c /usr/src/debug/xfsprogs/6.1.1-r0/libfrog/linux.c /usr/src/debug/xfsprogs/6.1.1-r0/libfrog/projects.c /usr/src/debug/xfsprogs/6.1.1-r0/db/attrshort.c /usr/src/debug/xfsprogs/6.1.1-r0
- /libfrog/logging.c /usr/src/debug/xfsprogs/6.1.1-r0/db/attrshort.h /usr/src/debug/xfsprogs/6.1.1-r0/libfrog/logging.h /usr/src/debug/xfsprogs/6.1.1-r0/db/btheight.c /usr/src/debug/xfsprogs/6.1.1-r0/db/btblock.h /usr/src/debug/xfsprogs/6.1.1-r0/io/resblks.c /usr/src/debug/xfsprogs/6.1.1-r0/libfrog/paths.c /usr/src/debug/xfsprogs/6.1.1-r0/db/bmroot.h /usr/src/debug/xfsprogs/6.1.1-r0/io/io.h /usr/src/debug/xfsprogs/6.1.1-r0/libfrog/paths.h /usr/src/debug/xfsprogs/6.1.1-r0/db/btblock.c /usr/src/debug/xfsprogs/6.1.1-r0/io/pwrite.c /usr/src/debug/xfsprogs/6.1.1-r0/db/bmroot.c /usr/src/debug/xfsprogs/6.1.1-r0/db/output.c /usr/src/debug/xfsprogs/6.1.1-r0/db/output.h /usr/src/debug/xfsprogs/6.1.1-r0/libfrog/workqueue.c /usr/src/debug/xfsprogs/6.1.1-r0/io/copy_file_range.c /usr/src/debug/xfsprogs/6.1.1-r0/io/readdir.c /usr/src/debug/xfsprogs/6.1.1-r0/io/sync_file_range.c /usr/src/debug/xfsprogs/6.1.1-r0/db/logformat.h /usr/src/debug/xfsprogs/6.1.1-r0/io/fsmap.c /usr/src/debug/xfsprogs/6.1.1-r
- 0/io/swapext.c /usr/src/debug/xfsprogs/6.1.1-r0/db/logformat.c /usr/src/debug/xfsprogs/6.1.1-r0/io/pread.c /usr/src/debug/xfsprogs/6.1.1-r0/io/shutdown.c /usr/src/debug/xfsprogs/6.1.1-r0/io/reflink.c /usr/src/debug/xfsprogs/6.1.1-r0/io/encrypt.c /usr/src/debug/xfsprogs/6.1.1-r0/io/crc32cselftest.c /usr/src/debug/xfsprogs/6.1.1-r0/db/timelimit.c /usr/src/debug/xfsprogs/6.1.1-r0/io/parent.c /usr/src/debug/xfsprogs/6.1.1-r0/db/io.c /usr/src/debug/xfsprogs/6.1.1-r0/libfrog/bitmap.h /usr/src/debug/xfsprogs/6.1.1-r0/libfrog/fsgeom.h /usr/src/debug/xfsprogs/6.1.1-r0/io/mincore.c /usr/src/debug/xfsprogs/6.1.1-r0/db/io.h /usr/src/debug/xfsprogs/6.1.1-r0/libfrog/bitmap.c /usr/src/debug/xfsprogs/6.1.1-r0/libfrog/fsgeom.c /usr/src/debug/xfsprogs/6.1.1-r0/io/bulkstat.c /usr/src/debug/xfsprogs/6.1.1-r0/db/dir2sf.c /usr/src/debug/xfsprogs/6.1.1-r0/db/dir2sf.h /usr/src/debug/xfsprogs/6.1.1-r0/io/init.c /usr/src/debug/xfsprogs/6.1.1-r0/io/link.c /usr/src/debug/xfsprogs/6.1.1-r0/io/mmap.c /usr/src/de
- bug/xfsprogs/6.1.1-r0/db/quit.c /usr/src/debug/xfsprogs/6.1.1-r0/db/text.c /usr/src/debug/xfsprogs/6.1.1-r0/db/type.c /usr/src/debug/xfsprogs/6.1.1-r0/db/echo.c /usr/src/debug/xfsprogs/6.1.1-r0/db/frag.c /usr/src/debug/xfsprogs/6.1.1-r0/db/agfl.c /usr/src/debug/xfsprogs/6.1.1-r0/db/addr.c /usr/src/debug/xfsprogs/6.1.1-r0/db/attr.c /usr/src/debug/xfsprogs/6.1.1-r0/db/inode.c /usr/src/debug/xfsprogs/6.1.1-r0/db/write.c /usr/src/debug/xfsprogs/6.1.1-r0/db/fuzz.c /usr/src/debug/xfsprogs/6.1.1-r0/db/hash.c /usr/src/debug/xfsprogs/6.1.1-r0/db/help.c /usr/src/debug/xfsprogs/6.1.1-r0/db/info.c /usr/src/debug/xfsprogs/6.1.1-r0/db/init.c /usr/src/debug/xfsprogs/6.1.1-r0/db/bmap.c /usr/src/debug/xfsprogs/6.1.1-r0/db/dir2.c /usr/src/debug/xfsprogs/6.1.1-r0/db/dir2.h /usr/src/debug/xfsprogs/6.1.1-r0/db/attr.h /usr/src/debug/xfsprogs/6.1.1-r0/db/bmap.h /usr/src/debug/xfsprogs/6.1.1-r0/db/write.h /usr/src/debug/xfsprogs/6.1.1-r0/libfrog/workqueue.h /usr/src/debug/xfsprogs/6.1.1-r0/db/fuzz.h /usr/s
- rc/debug/xfsprogs/6.1.1-r0/db/hash.h /usr/src/debug/xfsprogs/6.1.1-r0/db/help.h /usr/src/debug/xfsprogs/6.1.1-r0/db/init.h /usr/src/debug/xfsprogs/6.1.1-r0/db/inode.h /usr/src/debug/xfsprogs/6.1.1-r0/db/command.h /usr/src/debug/xfsprogs/6.1.1-r0/db/debug.c /usr/src/debug/xfsprogs/6.1.1-r0/db/addr.h /usr/src/debug/xfsprogs/6.1.1-r0/db/agfl.h /usr/src/debug/xfsprogs/6.1.1-r0/db/echo.h /usr/src/debug/xfsprogs/6.1.1-r0/db/frag.h /usr/src/debug/xfsprogs/6.1.1-r0/db/command.c /usr/src/debug/xfsprogs/6.1.1-r0/db/quit.h /usr/src/debug/xfsprogs/6.1.1-r0/db/debug.h /usr/src/debug/xfsprogs/6.1.1-r0/db/text.h /usr/src/debug/xfsprogs/6.1.1-r0/db/type.h /usr/src/debug/xfsprogs/6.1.1-r0/io/truncate.c /usr/src/debug/xfsprogs/6.1.1-r0/libfrog/avl64.c /usr/src/debug/xfsprogs/6.1.1-r0/libfrog/crc32table.h /usr/src/debug/xfsprogs/6.1.1-r0/db/faddr.c /usr/src/debug/xfsprogs/6.1.1-r0/io/fsync.c /usr/src/debug/xfsprogs/6.1.1-r0/libfrog/avl64.h /usr/src/debug/xfsprogs/6.1.1-r0/db/faddr.h /usr/src/debug/xfs
- progs/6.1.1-r0/io/sendfile.c /usr/src/debug/xfsprogs/6.1.1-r0/io/inject.c /usr/src/debug/xfsprogs/6.1.1-r0/libfrog/convert.c /usr/src/debug/xfsprogs/6.1.1-r0/libfrog/convert.h /usr/src/debug/xfsprogs/6.1.1-r0/io/freeze.c /usr/src/debug/xfsprogs/6.1.1-r0/io/getrusage.c /usr/src/debug/xfsprogs/6.1.1-r0/db/dquot.c /usr/src/debug/xfsprogs/6.1.1-r0/db/flist.c /usr/src/debug/xfsprogs/6.1.1-r0/db/input.c /usr/src/debug/xfsprogs/6.1.1-r0/db/print.c /usr/src/debug/xfsprogs/6.1.1-r0/db/dquot.h /usr/src/debug/xfsprogs/6.1.1-r0/db/flist.h /usr/src/debug/xfsprogs/6.1.1-r0/db/input.h /usr/src/debug/xfsprogs/6.1.1-r0/db/print.h /usr/src/debug/xfsprogs/6.1.1-r0/io/utimes.c /usr/src/debug/xfsprogs/6.1.1-r0/db/fsmap.c /usr/src/debug/xfsprogs/6.1.1-r0/libfrog/platform.h /usr/src/debug/xfsprogs/6.1.1-r0/db/fsmap.h /usr/src/debug/xfsprogs/6.1.1-r0/db/convert.c /usr/src/debug/xfsprogs/6.1.1-r0/db/field.c /usr/src/debug/xfsprogs/6.1.1-r0/db/symlink.h /usr/src/debug/xfsprogs/6.1.1-r0/libfrog/bulkstat.c /us
- r/src/debug/xfsprogs/6.1.1-r0/libfrog/bulkstat.h /usr/src/debug/xfsprogs/6.1.1-r0/db/field.h /usr/src/debug/xfsprogs/6.1.1-r0/db/symlink.c /usr/src/debug/xfsprogs/6.1.1-r0/io/scrub.c /usr/src/debug/xfsprogs/6.1.1-r0/db/attrset.h /usr/src/debug/xfsprogs/6.1.1-r0/io/fiemap.c /usr/src/debug/xfsprogs/6.1.1-r0/io/prealloc.c /usr/src/debug/xfsprogs/6.1.1-r0/db/malloc.c /usr/src/debug/xfsprogs/6.1.1-r0/libfrog/crc32cselftest.h /usr/src/debug/xfsprogs/6.1.1-r0/db/attrset.c /usr/src/debug/xfsprogs/6.1.1-r0/db/malloc.h /usr/src/debug/xfsprogs/6.1.1-r0/libfrog/util.c /usr/src/debug/xfsprogs/6.1.1-r0/io/label.c /usr/src/debug/xfsprogs/6.1.1-r0/libfrog/util.h /usr/src/debug/xfsprogs/6.1.1-r0/db/sb.c /usr/src/debug/xfsprogs/6.1.1-r0/db/sb.h /usr/src/debug/xfsprogs/6.1.1-r0/libfrog/crc32.c /usr/src/debug/xfsprogs/6.1.1-r0/io/fadvise.c /usr/src/debug/xfsprogs/6.1.1-r0/io/madvise.c /usr/src/debug/xfsprogs/6.1.1-r0/db/strvec.c /usr/src/debug/xfsprogs/6.1.1-r0/db/fprint.c /usr/src/debug/xfsprogs/6.1.1
- -r0/libfrog/crc32c.h /usr/src/debug/xfsprogs/6.1.1-r0/db/fprint.h /usr/src/debug/xfsprogs/6.1.1-r0/db/strvec.h /usr/src/debug/xfsprogs/6.1.1-r0/libfrog/list_sort.c /usr/src/debug/xfsprogs/6.1.1-r0/db/agf.c /usr/src/debug/xfsprogs/6.1.1-r0/db/agi.c /usr/src/debug/xfsprogs/6.1.1-r0/db/bit.c /usr/src/debug/xfsprogs/6.1.1-r0/db/crc.c /usr/src/debug/xfsprogs/6.1.1-r0/db/sig.c /usr/src/debug/xfsprogs/6.1.1-r0/db/agf.h /usr/src/debug/xfsprogs/6.1.1-r0/db/agi.h /usr/src/debug/xfsprogs/6.1.1-r0/db/bit.h /usr/src/debug/xfsprogs/6.1.1-r0/db/crc.h /usr/src/debug/xfsprogs/6.1.1-r0/db/sig.h /usr/src/debug/xfsprogs/6.1.1-r0/db/namei.c /usr/src/debug/xfsprogs/6.1.1-r0/libfrog/scrub.c /usr/src/debug/xfsprogs/6.1.1-r0/libfrog/scrub.h /usr/src/debug/xfsprogs/6.1.1-r0/db/block.c /usr/src/debug/xfsprogs/6.1.1-r0/db/check.c /usr/src/debug/xfsprogs/6.1.1-r0/libfrog/radix-tree.c /usr/src/debug/xfsprogs/6.1.1-r0/io/open.c /usr/src/debug/xfsprogs/6.1.1-r0/io/seek.c /usr/src/debug/xfsprogs/6.1.1-r0/io/stat.c 
- /usr/src/debug/xfsprogs/6.1.1-r0/io/sync.c /usr/src/debug/xfsprogs/6.1.1-r0/io/attr.c /usr/src/debug/xfsprogs/6.1.1-r0/io/bmap.c /usr/src/debug/xfsprogs/6.1.1-r0/io/file.c /usr/src/debug/xfsprogs/6.1.1-r0/db/block.h /usr/src/debug/xfsprogs/6.1.1-r0/db/check.h /usr/src/debug/xfsprogs/6.1.1-r0/io/imap.c /usr/src/debug/xfsprogs/6.1.1-r0/io/init.h /usr/src/debug/xfsprogs/6.1.1-r0/libfrog/radix-tree.h /usr/src/debug/xfsprogs/6.1.1-r0/db/metadump.c /usr/src/debug/xfsprogs/6.1.1-r0/db/freesp.h /usr/src/debug/xfsprogs/6.1.1-r0/db/btdump.c /usr/src/debug/xfsprogs/6.1.1-r0/db/freesp.c /usr/src/debug/xfsprogs/6.1.1-r0/db/metadump.h", added "/usr/src/debug/xfsprogs/6.5.0-r0/libfrog/projects.h /usr/src/debug/xfsprogs/6.5.0-r0/io/cowextsize.c /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/linux.c /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/projects.c /usr/src/debug/xfsprogs/6.5.0-r0/db/attrshort.c /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/logging.c /usr/src/debug/xfsprogs/6.5.0-r0/db/attrshort.h /usr/src/d
- ebug/xfsprogs/6.5.0-r0/libfrog/bitmask.h /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/logging.h /usr/src/debug/xfsprogs/6.5.0-r0/db/btheight.c /usr/src/debug/xfsprogs/6.5.0-r0/db/btblock.h /usr/src/debug/xfsprogs/6.5.0-r0/io/resblks.c /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/paths.c /usr/src/debug/xfsprogs/6.5.0-r0/db/bmroot.h /usr/src/debug/xfsprogs/6.5.0-r0/io/io.h /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/paths.h /usr/src/debug/xfsprogs/6.5.0-r0/db/btblock.c /usr/src/debug/xfsprogs/6.5.0-r0/db/bmroot.c /usr/src/debug/xfsprogs/6.5.0-r0/io/pwrite.c /usr/src/debug/xfsprogs/6.5.0-r0/db/output.c /usr/src/debug/xfsprogs/6.5.0-r0/db/output.h /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/workqueue.c /usr/src/debug/xfsprogs/6.5.0-r0/io/copy_file_range.c /usr/src/debug/xfsprogs/6.5.0-r0/io/readdir.c /usr/src/debug/xfsprogs/6.5.0-r0/io/sync_file_range.c /usr/src/debug/xfsprogs/6.5.0-r0/db/logformat.h /usr/src/debug/xfsprogs/6.5.0-r0/io/fsmap.c /usr/src/debug/xfsprogs/6.5.0-r0/io/swapext.c /usr/src/de
- bug/xfsprogs/6.5.0-r0/db/logformat.c /usr/src/debug/xfsprogs/6.5.0-r0/io/pread.c /usr/src/debug/xfsprogs/6.5.0-r0/io/shutdown.c /usr/src/debug/xfsprogs/6.5.0-r0/io/reflink.c /usr/src/debug/xfsprogs/6.5.0-r0/db/btdump.c /usr/src/debug/xfsprogs/6.5.0-r0/io/encrypt.c /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/dahashselftest.h /usr/src/debug/xfsprogs/6.5.0-r0/io/crc32cselftest.c /usr/src/debug/xfsprogs/6.5.0-r0/db/timelimit.c /usr/src/debug/xfsprogs/6.5.0-r0/io/parent.c /usr/src/debug/xfsprogs/6.5.0-r0/db/io.c /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/bitmap.h /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/fsgeom.h /usr/src/debug/xfsprogs/6.5.0-r0/io/mincore.c /usr/src/debug/xfsprogs/6.5.0-r0/db/io.h /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/bitmap.c /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/fsgeom.c /usr/src/debug/xfsprogs/6.5.0-r0/io/bulkstat.c /usr/src/debug/xfsprogs/6.5.0-r0/db/dir2sf.c /usr/src/debug/xfsprogs/6.5.0-r0/db/dir2sf.h /usr/src/debug/xfsprogs/6.5.0-r0/io/init.c /usr/src/debug/xfspr
- ogs/6.5.0-r0/io/link.c /usr/src/debug/xfsprogs/6.5.0-r0/io/mmap.c /usr/src/debug/xfsprogs/6.5.0-r0/db/type.c /usr/src/debug/xfsprogs/6.5.0-r0/db/echo.c /usr/src/debug/xfsprogs/6.5.0-r0/db/frag.c /usr/src/debug/xfsprogs/6.5.0-r0/db/agfl.c /usr/src/debug/xfsprogs/6.5.0-r0/db/addr.c /usr/src/debug/xfsprogs/6.5.0-r0/db/attr.c /usr/src/debug/xfsprogs/6.5.0-r0/db/inode.c /usr/src/debug/xfsprogs/6.5.0-r0/db/write.c /usr/src/debug/xfsprogs/6.5.0-r0/db/fuzz.c /usr/src/debug/xfsprogs/6.5.0-r0/db/hash.c /usr/src/debug/xfsprogs/6.5.0-r0/db/help.c /usr/src/debug/xfsprogs/6.5.0-r0/db/info.c /usr/src/debug/xfsprogs/6.5.0-r0/db/init.c /usr/src/debug/xfsprogs/6.5.0-r0/db/bmap.c /usr/src/debug/xfsprogs/6.5.0-r0/db/dir2.c /usr/src/debug/xfsprogs/6.5.0-r0/db/attr.h /usr/src/debug/xfsprogs/6.5.0-r0/db/quit.c /usr/src/debug/xfsprogs/6.5.0-r0/db/text.c /usr/src/debug/xfsprogs/6.5.0-r0/db/write.h /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/workqueue.h /usr/src/debug/xfsprogs/6.5.0-r0/db/fuzz.h /usr/src/debug/
- xfsprogs/6.5.0-r0/db/hash.h /usr/src/debug/xfsprogs/6.5.0-r0/db/help.h /usr/src/debug/xfsprogs/6.5.0-r0/db/init.h /usr/src/debug/xfsprogs/6.5.0-r0/db/inode.h /usr/src/debug/xfsprogs/6.5.0-r0/db/command.h /usr/src/debug/xfsprogs/6.5.0-r0/db/debug.c /usr/src/debug/xfsprogs/6.5.0-r0/db/addr.h /usr/src/debug/xfsprogs/6.5.0-r0/db/agfl.h /usr/src/debug/xfsprogs/6.5.0-r0/db/bmap.h /usr/src/debug/xfsprogs/6.5.0-r0/db/dir2.h /usr/src/debug/xfsprogs/6.5.0-r0/db/echo.h /usr/src/debug/xfsprogs/6.5.0-r0/db/frag.h /usr/src/debug/xfsprogs/6.5.0-r0/db/command.c /usr/src/debug/xfsprogs/6.5.0-r0/db/quit.h /usr/src/debug/xfsprogs/6.5.0-r0/db/debug.h /usr/src/debug/xfsprogs/6.5.0-r0/db/text.h /usr/src/debug/xfsprogs/6.5.0-r0/io/truncate.c /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/avl64.c /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/crc32table.h /usr/src/debug/xfsprogs/6.5.0-r0/db/faddr.c /usr/src/debug/xfsprogs/6.5.0-r0/io/fsync.c /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/avl64.h /usr/src/debug/xfsprogs/6.5.
- 0-r0/db/faddr.h /usr/src/debug/xfsprogs/6.5.0-r0/io/sendfile.c /usr/src/debug/xfsprogs/6.5.0-r0/io/inject.c /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/convert.c /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/convert.h /usr/src/debug/xfsprogs/6.5.0-r0/io/freeze.c /usr/src/debug/xfsprogs/6.5.0-r0/io/getrusage.c /usr/src/debug/xfsprogs/6.5.0-r0/db/dquot.c /usr/src/debug/xfsprogs/6.5.0-r0/db/flist.c /usr/src/debug/xfsprogs/6.5.0-r0/db/input.c /usr/src/debug/xfsprogs/6.5.0-r0/db/print.c /usr/src/debug/xfsprogs/6.5.0-r0/db/dquot.h /usr/src/debug/xfsprogs/6.5.0-r0/db/flist.h /usr/src/debug/xfsprogs/6.5.0-r0/db/input.h /usr/src/debug/xfsprogs/6.5.0-r0/db/print.h /usr/src/debug/xfsprogs/6.5.0-r0/io/utimes.c /usr/src/debug/xfsprogs/6.5.0-r0/db/obfuscate.c /usr/src/debug/xfsprogs/6.5.0-r0/db/obfuscate.h /usr/src/debug/xfsprogs/6.5.0-r0/db/type.h /usr/src/debug/xfsprogs/6.5.0-r0/db/fsmap.c /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/randbytes.c /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/platform.h /usr/src/
- debug/xfsprogs/6.5.0-r0/db/fsmap.h /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/randbytes.h /usr/src/debug/xfsprogs/6.5.0-r0/db/convert.c /usr/src/debug/xfsprogs/6.5.0-r0/db/field.c /usr/src/debug/xfsprogs/6.5.0-r0/db/symlink.h /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/bulkstat.c /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/bulkstat.h /usr/src/debug/xfsprogs/6.5.0-r0/db/field.h /usr/src/debug/xfsprogs/6.5.0-r0/db/iunlink.c /usr/src/debug/xfsprogs/6.5.0-r0/db/symlink.c /usr/src/debug/xfsprogs/6.5.0-r0/io/scrub.c /usr/src/debug/xfsprogs/6.5.0-r0/db/attrset.h /usr/src/debug/xfsprogs/6.5.0-r0/io/fiemap.c /usr/src/debug/xfsprogs/6.5.0-r0/io/prealloc.c /usr/src/debug/xfsprogs/6.5.0-r0/db/malloc.c /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/crc32cselftest.h /usr/src/debug/xfsprogs/6.5.0-r0/db/attrset.c /usr/src/debug/xfsprogs/6.5.0-r0/db/malloc.h /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/util.c /usr/src/debug/xfsprogs/6.5.0-r0/io/label.c /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/util.h /usr/src/debug/xf
- sprogs/6.5.0-r0/db/sb.c /usr/src/debug/xfsprogs/6.5.0-r0/db/sb.h /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/crc32.c /usr/src/debug/xfsprogs/6.5.0-r0/io/fadvise.c /usr/src/debug/xfsprogs/6.5.0-r0/io/madvise.c /usr/src/debug/xfsprogs/6.5.0-r0/db/strvec.c /usr/src/debug/xfsprogs/6.5.0-r0/db/fprint.c /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/crc32c.h /usr/src/debug/xfsprogs/6.5.0-r0/db/fprint.h /usr/src/debug/xfsprogs/6.5.0-r0/db/strvec.h /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/list_sort.c /usr/src/debug/xfsprogs/6.5.0-r0/db/agf.c /usr/src/debug/xfsprogs/6.5.0-r0/db/agi.c /usr/src/debug/xfsprogs/6.5.0-r0/db/bit.c /usr/src/debug/xfsprogs/6.5.0-r0/db/crc.c /usr/src/debug/xfsprogs/6.5.0-r0/db/sig.c /usr/src/debug/xfsprogs/6.5.0-r0/db/agf.h /usr/src/debug/xfsprogs/6.5.0-r0/db/agi.h /usr/src/debug/xfsprogs/6.5.0-r0/db/bit.h /usr/src/debug/xfsprogs/6.5.0-r0/db/crc.h /usr/src/debug/xfsprogs/6.5.0-r0/db/sig.h /usr/src/debug/xfsprogs/6.5.0-r0/db/namei.c /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/scr
- ub.c /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/scrub.h /usr/src/debug/xfsprogs/6.5.0-r0/db/block.c /usr/src/debug/xfsprogs/6.5.0-r0/db/check.c /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/radix-tree.c /usr/src/debug/xfsprogs/6.5.0-r0/io/open.c /usr/src/debug/xfsprogs/6.5.0-r0/io/seek.c /usr/src/debug/xfsprogs/6.5.0-r0/io/stat.c /usr/src/debug/xfsprogs/6.5.0-r0/io/sync.c /usr/src/debug/xfsprogs/6.5.0-r0/io/attr.c /usr/src/debug/xfsprogs/6.5.0-r0/io/bmap.c /usr/src/debug/xfsprogs/6.5.0-r0/io/file.c /usr/src/debug/xfsprogs/6.5.0-r0/db/block.h /usr/src/debug/xfsprogs/6.5.0-r0/db/check.h /usr/src/debug/xfsprogs/6.5.0-r0/io/imap.c /usr/src/debug/xfsprogs/6.5.0-r0/io/init.h /usr/src/debug/xfsprogs/6.5.0-r0/libfrog/radix-tree.h /usr/src/debug/xfsprogs/6.5.0-r0/db/metadump.c /usr/src/debug/xfsprogs/6.5.0-r0/db/freesp.h /usr/src/debug/xfsprogs/6.5.0-r0/io/fsuuid.c /usr/src/debug/xfsprogs/6.5.0-r0/db/freesp.c /usr/src/debug/xfsprogs/6.5.0-r0/db/metadump.h"
-packages/core2-64-poky-linux/xfsprogs/xfsprogs-src: PV changed from "6.1.1" to "6.5.0"
-packages/core2-64-poky-linux/xfsprogs/xfsprogs-src: PKGSIZE changed from 4500024 to 4591346 (+2%)
-packages/core2-64-poky-linux/xfsprogs/xfsprogs-src: PKGV changed from 6.1.1 [default] to 6.5.0 [default]
-packages/core2-64-poky-linux/xfsprogs/xfsprogs-staticdev: PV changed from "6.1.1" to "6.5.0"
-packages/core2-64-poky-linux/xfsprogs/xfsprogs-staticdev: PKGV changed from 6.1.1 [default] to 6.5.0 [default]
-packages/core2-64-poky-linux/xfsprogs/xfsprogs: FILELIST: added "/usr/share/xfsprogs/mkfs/lts_6.6.conf"
-packages/core2-64-poky-linux/xfsprogs/xfsprogs: PV changed from "6.1.1" to "6.5.0"
-packages/core2-64-poky-linux/xfsprogs/xfsprogs: PKGSIZE changed from 3096185 to 3146445 (+2%)
-packages/core2-64-poky-linux/xfsprogs/xfsprogs: PKGV changed from 6.1.1 [default] to 6.5.0 [default]
+NOTE: Reconnecting to bitbake server...
+Loading cache...done.
+Loaded 4893 entries from dependency cache.
+Parsing recipes...done.
+Parsing of 3055 .bb files complete (3054 cached, 1 parsed). 4886 targets, 92 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
 
---===============8302202563831552789==
+Build Configuration:
+BB_VERSION           = "2.6.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "x86_64-poky-linux"
+MACHINE              = "qemux86-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.3+snapshot-e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+TUNE_FEATURES        = "m64 core2"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       
+workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+meta-oe              
+meta-python          
+meta-perl            
+meta-networking      
+meta-multimedia      
+meta-gnome           
+meta-xfce            
+meta-filesystems     
+meta-initramfs       
+meta-webserver       = "tmp-auh-upgrades:59e27d4b8bfd5df634ce47dc6630194370d65b5b"
+
+Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
+done.
+Sstate summary: Wanted 202 Local 193 Mirrors 0 Missed 9 Current 208 (95% match, 97% complete)
+NOTE: Executing Tasks
+NOTE: Running setscene task 217 of 410 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb:do_populate_lic_setscene)
+NOTE: Running setscene task 219 of 410 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb:do_deploy_source_date_epoch_setscene)
+NOTE: Running setscene task 226 of 410 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/mtd/mtd-utils_git.bb:do_create_spdx_setscene)
+NOTE: recipe yaffs2-utils-0.0+git-r0: task do_deploy_source_date_epoch_setscene: Started
+NOTE: recipe yaffs2-utils-0.0+git-r0: task do_populate_lic_setscene: Started
+NOTE: recipe mtd-utils-2.1.6-r0: task do_create_spdx_setscene: Started
+NOTE: recipe yaffs2-utils-0.0+git-r0: task do_populate_lic_setscene: Succeeded
+NOTE: recipe yaffs2-utils-0.0+git-r0: task do_deploy_source_date_epoch_setscene: Succeeded
+NOTE: Running setscene task 308 of 410 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb:do_recipe_qa_setscene)
+NOTE: recipe mtd-utils-2.1.6-r0: task do_create_spdx_setscene: Succeeded
+NOTE: Running setscene task 352 of 410 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/gcc/gcc-runtime_13.2.bb:do_create_spdx_setscene)
+NOTE: recipe yaffs2-utils-0.0+git-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe gcc-runtime-13.2.0-r0: task do_create_spdx_setscene: Started
+NOTE: recipe yaffs2-utils-0.0+git-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Running task 341 of 1181 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb:do_fetch)
+NOTE: recipe yaffs2-utils-0.0+git-r0: task do_fetch: Started
+NOTE: recipe gcc-runtime-13.2.0-r0: task do_create_spdx_setscene: Succeeded
+NOTE: Running setscene task 368 of 410 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/glibc/glibc_2.38.bb:do_create_spdx_setscene)
+NOTE: recipe yaffs2-utils-0.0+git-r0: task do_fetch: Succeeded
+NOTE: Running task 344 of 1181 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb:do_unpack)
+NOTE: recipe glibc-2.38+git-r0: task do_create_spdx_setscene: Started
+NOTE: recipe yaffs2-utils-0.0+git-r0: task do_unpack: Started
+NOTE: recipe glibc-2.38+git-r0: task do_create_spdx_setscene: Succeeded
+NOTE: Running setscene task 375 of 410 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/gcc/gcc-cross_13.2.bb:do_create_spdx_setscene)
+NOTE: Running setscene task 377 of 410 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/gcc/gcc-cross_13.2.bb:do_populate_sysroot_setscene)
+NOTE: recipe gcc-cross-x86_64-13.2.0-r0: task do_create_spdx_setscene: Started
+NOTE: recipe gcc-cross-x86_64-13.2.0-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe gcc-cross-x86_64-13.2.0-r0: task do_create_spdx_setscene: Succeeded
+NOTE: recipe yaffs2-utils-0.0+git-r0: task do_unpack: Succeeded
+NOTE: Running task 930 of 1181 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb:do_patch)
+NOTE: recipe yaffs2-utils-0.0+git-r0: task do_patch: Started
+NOTE: recipe yaffs2-utils-0.0+git-r0: task do_patch: Succeeded
+NOTE: recipe gcc-cross-x86_64-13.2.0-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 405 of 410 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/binutils/binutils-cross_2.41.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 407 of 410 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/gcc/gcc-cross_13.2.bb:do_recipe_qa_setscene)
+NOTE: recipe binutils-cross-x86_64-2.41-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe gcc-cross-x86_64-13.2.0-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe gcc-cross-x86_64-13.2.0-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe binutils-cross-x86_64-2.41-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 410 of 410 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/binutils/binutils-cross_2.41.bb:do_recipe_qa_setscene)
+NOTE: recipe binutils-cross-x86_64-2.41-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe binutils-cross-x86_64-2.41-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Setscene tasks completed
+NOTE: Running task 1139 of 1181 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb:do_prepare_recipe_sysroot)
+NOTE: Running task 1168 of 1181 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb:do_collect_spdx_deps)
+NOTE: recipe yaffs2-utils-0.0+git-r0: task do_prepare_recipe_sysroot: Started
+NOTE: recipe yaffs2-utils-0.0+git-r0: task do_collect_spdx_deps: Started
+NOTE: recipe yaffs2-utils-0.0+git-r0: task do_prepare_recipe_sysroot: Succeeded
+NOTE: recipe yaffs2-utils-0.0+git-r0: task do_collect_spdx_deps: Succeeded
+NOTE: Running task 1169 of 1181 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb:do_configure)
+NOTE: recipe yaffs2-utils-0.0+git-r0: task do_configure: Started
+NOTE: recipe yaffs2-utils-0.0+git-r0: task do_configure: Succeeded
+NOTE: Running task 1170 of 1181 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb:do_compile)
+NOTE: recipe yaffs2-utils-0.0+git-r0: task do_compile: Started
+Log data follows:
+| DEBUG: Executing shell function do_compile
+| NOTE: make -j 16 -l 52 -e MAKEFLAGS=
+| ln -s ../yaffs_packedtags2.c yaffs_packedtags2.c
+| ln -s ../yaffs_ecc.c yaffs_ecc.c
+| ln -s ../yaffs_ecc.h yaffs_ecc.h
+| ln -s ../yaffs_guts.h yaffs_guts.h
+| ln -s ../yaffs_packedtags2.h yaffs_packedtags2.h
+| ln -s ../yaffs_trace.h yaffs_trace.h
+| ln -s ../yaffs_endian.h yaffs_endian.h
+| ln -s ../direct/yaffs_hweight.c yaffs_hweight.c
+| ln -s ../direct/yportenv.h yportenv.h
+| ln -s ../direct/yaffs_hweight.h yaffs_hweight.h
+| ln -s ../direct/yaffs_list.h yaffs_list.h
+| x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/recipe-sysroot -c  -O2 -pipe -g -feliminate-unused-debug-types -fcanon-prefix-map  -fmacro-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/git=/usr/src/debug/yaffs2-utils/0.0+git-r0  -fdebug-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/git=/usr/src/debug/yaffs2-utils/0.0+git-r0  -fmacro-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/git=/usr/src/debug/yaffs2-utils/0.0+git-r0  -fdebug-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/git=/
+ usr/src/debug/yaffs2-utils/0.0+git-r0  -fdebug-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/recipe-sysroot=  -fmacro-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/recipe-sysroot=  -fdebug-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/recipe-sysroot-native=  -I.. -DCONFIG_YAFFS_UTIL -DCONFIG_YAFFS_DEFINES_TYPES mkyaffsimage.c -o mkyaffsimage.o
+| x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/recipe-sysroot -c  -O2 -pipe -g -feliminate-unused-debug-types -fcanon-prefix-map  -fmacro-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/git=/usr/src/debug/yaffs2-utils/0.0+git-r0  -fdebug-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/git=/usr/src/debug/yaffs2-utils/0.0+git-r0  -fmacro-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/git=/usr/src/debug/yaffs2-utils/0.0+git-r0  -fdebug-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/git=/
+ usr/src/debug/yaffs2-utils/0.0+git-r0  -fdebug-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/recipe-sysroot=  -fmacro-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/recipe-sysroot=  -fdebug-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/recipe-sysroot-native=  -I.. -DCONFIG_YAFFS_UTIL -DCONFIG_YAFFS_DEFINES_TYPES yaffs_hweight.c -o yaffs_hweight.o
+| x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/recipe-sysroot -c  -O2 -pipe -g -feliminate-unused-debug-types -fcanon-prefix-map  -fmacro-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/git=/usr/src/debug/yaffs2-utils/0.0+git-r0  -fdebug-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/git=/usr/src/debug/yaffs2-utils/0.0+git-r0  -fmacro-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/git=/usr/src/debug/yaffs2-utils/0.0+git-r0  -fdebug-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/git=/
+ usr/src/debug/yaffs2-utils/0.0+git-r0  -fdebug-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/recipe-sysroot=  -fmacro-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/recipe-sysroot=  -fdebug-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/recipe-sysroot-native=  -I.. -DCONFIG_YAFFS_UTIL -DCONFIG_YAFFS_DEFINES_TYPES yaffs_ecc.c -o yaffs_ecc.o
+| x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/recipe-sysroot -c  -O2 -pipe -g -feliminate-unused-debug-types -fcanon-prefix-map  -fmacro-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/git=/usr/src/debug/yaffs2-utils/0.0+git-r0  -fdebug-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/git=/usr/src/debug/yaffs2-utils/0.0+git-r0  -fmacro-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/git=/usr/src/debug/yaffs2-utils/0.0+git-r0  -fdebug-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/git=/
+ usr/src/debug/yaffs2-utils/0.0+git-r0  -fdebug-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/recipe-sysroot=  -fmacro-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/recipe-sysroot=  -fdebug-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/recipe-sysroot-native=  -I.. -DCONFIG_YAFFS_UTIL -DCONFIG_YAFFS_DEFINES_TYPES mkyaffs2image.c -o mkyaffs2image.o
+| x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/recipe-sysroot -c  -O2 -pipe -g -feliminate-unused-debug-types -fcanon-prefix-map  -fmacro-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/git=/usr/src/debug/yaffs2-utils/0.0+git-r0  -fdebug-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/git=/usr/src/debug/yaffs2-utils/0.0+git-r0  -fmacro-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/git=/usr/src/debug/yaffs2-utils/0.0+git-r0  -fdebug-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/git=/
+ usr/src/debug/yaffs2-utils/0.0+git-r0  -fdebug-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/recipe-sysroot=  -fmacro-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/recipe-sysroot=  -fdebug-prefix-map=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/recipe-sysroot-native=  -I.. -DCONFIG_YAFFS_UTIL -DCONFIG_YAFFS_DEFINES_TYPES yaffs_packedtags2.c -o yaffs_packedtags2.o
+| In file included from yaffs_packedtags2.h:20,
+|                  from yaffs_packedtags2.c:13:
+| yaffs_guts.h:501:9: error: unknown type name 'YTIME_T'
+|   501 |         YTIME_T yst_uid;
+|       |         ^~~~~~~
+| yaffs_guts.h:502:9: error: unknown type name 'YTIME_T'
+|   502 |         YTIME_T yst_gid;
+|       |         ^~~~~~~
+| yaffs_guts.h:503:9: error: unknown type name 'YTIME_T'
+|   503 |         YTIME_T yst_atime;
+|       |         ^~~~~~~
+| yaffs_guts.h:504:9: error: unknown type name 'YTIME_T'
+|   504 |         YTIME_T yst_mtime;
+|       |         ^~~~~~~
+| yaffs_guts.h:505:9: error: unknown type name 'YTIME_T'
+|   505 |         YTIME_T yst_ctime;
+|       |         ^~~~~~~
+| yaffs_guts.h:1080:1: error: unknown type name 'YTIME_T'
+|  1080 | YTIME_T yaffs_oh_ctime_fetch(struct yaffs_obj_hdr *oh);
+|       | ^~~~~~~
+| yaffs_guts.h:1081:1: error: unknown type name 'YTIME_T'
+|  1081 | YTIME_T yaffs_oh_mtime_fetch(struct yaffs_obj_hdr *oh);
+|       | ^~~~~~~
+| yaffs_guts.h:1082:1: error: unknown type name 'YTIME_T'
+|  1082 | YTIME_T yaffs_oh_atime_fetch(struct yaffs_obj_hdr *oh);
+|       | ^~~~~~~
+| In file included from yaffs_packedtags2.c:16:
+| yaffs_endian.h:40:15: error: unknown type name 'YTIME_T'
+|    40 | static inline YTIME_T swap_ytime_t(YTIME_T val)
+|       |               ^~~~~~~
+| yaffs_endian.h:40:36: error: unknown type name 'YTIME_T'
+|    40 | static inline YTIME_T swap_ytime_t(YTIME_T val)
+|       |                                    ^~~~~~~
+| make: *** [Makefile:56: yaffs_packedtags2.o] Error 1
+| make: *** Waiting for unfinished jobs....
+| In file included from mkyaffsimage.c:30:
+| yaffs_guts.h:501:9: error: unknown type name 'YTIME_T'
+|   501 |         YTIME_T yst_uid;
+|       |         ^~~~~~~
+| yaffs_guts.h:502:9: error: unknown type name 'YTIME_T'
+|   502 |         YTIME_T yst_gid;
+|       |         ^~~~~~~
+| yaffs_guts.h:503:9: error: unknown type name 'YTIME_T'
+|   503 |         YTIME_T yst_atime;
+|       |         ^~~~~~~
+| yaffs_guts.h:504:9: error: unknown type name 'YTIME_T'
+|   504 |         YTIME_T yst_mtime;
+|       |         ^~~~~~~
+| yaffs_guts.h:505:9: error: unknown type name 'YTIME_T'
+|   505 |         YTIME_T yst_ctime;
+|       |         ^~~~~~~
+| yaffs_guts.h:1080:1: error: unknown type name 'YTIME_T'
+|  1080 | YTIME_T yaffs_oh_ctime_fetch(struct yaffs_obj_hdr *oh);
+|       | ^~~~~~~
+| yaffs_guts.h:1081:1: error: unknown type name 'YTIME_T'
+|  1081 | YTIME_T yaffs_oh_mtime_fetch(struct yaffs_obj_hdr *oh);
+|       | ^~~~~~~
+| yaffs_guts.h:1082:1: error: unknown type name 'YTIME_T'
+|  1082 | YTIME_T yaffs_oh_atime_fetch(struct yaffs_obj_hdr *oh);
+|       | ^~~~~~~
+| In file included from mkyaffs2image.c:34:
+| yaffs_guts.h:501:9: error: unknown type name 'YTIME_T'
+|   501 |         YTIME_T yst_uid;
+|       |         ^~~~~~~
+| yaffs_guts.h:502:9: error: unknown type name 'YTIME_T'
+|   502 |         YTIME_T yst_gid;
+|       |         ^~~~~~~
+| yaffs_guts.h:503:9: error: unknown type name 'YTIME_T'
+|   503 |         YTIME_T yst_atime;
+|       |         ^~~~~~~
+| yaffs_guts.h:504:9: error: unknown type name 'YTIME_T'
+|   504 |         YTIME_T yst_mtime;
+|       |         ^~~~~~~
+| yaffs_guts.h:505:9: error: unknown type name 'YTIME_T'
+|   505 |         YTIME_T yst_ctime;
+|       |         ^~~~~~~
+| yaffs_guts.h:1080:1: error: unknown type name 'YTIME_T'
+|  1080 | YTIME_T yaffs_oh_ctime_fetch(struct yaffs_obj_hdr *oh);
+|       | ^~~~~~~
+| yaffs_guts.h:1081:1: error: unknown type name 'YTIME_T'
+|  1081 | YTIME_T yaffs_oh_mtime_fetch(struct yaffs_obj_hdr *oh);
+|       | ^~~~~~~
+| yaffs_guts.h:1082:1: error: unknown type name 'YTIME_T'
+|  1082 | YTIME_T yaffs_oh_atime_fetch(struct yaffs_obj_hdr *oh);
+|       | ^~~~~~~
+| In file included from mkyaffs2image.c:35:
+| yaffs_endian.h:40:15: error: unknown type name 'YTIME_T'
+|    40 | static inline YTIME_T swap_ytime_t(YTIME_T val)
+|       |               ^~~~~~~
+| yaffs_endian.h:40:36: error: unknown type name 'YTIME_T'
+|    40 | static inline YTIME_T swap_ytime_t(YTIME_T val)
+|       |                                    ^~~~~~~
+| make: *** [Makefile:56: mkyaffsimage.o] Error 1
+| make: *** [Makefile:56: mkyaffs2image.o] Error 1
+| ERROR: oe_runmake failed
+| WARNING: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/temp/run.do_compile.2966168:167 exit 1 from 'exit 1'
+| WARNING: Backtrace (BB generated script):
+| 	#1: bbfatal_log, /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/temp/run.do_compile.2966168, line 167
+| 	#2: die, /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/temp/run.do_compile.2966168, line 151
+| 	#3: oe_runmake, /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/temp/run.do_compile.2966168, line 146
+| 	#4: do_compile, /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/temp/run.do_compile.2966168, line 141
+| 	#5: main, /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/temp/run.do_compile.2966168, line 180
+NOTE: recipe yaffs2-utils-0.0+git-r0: task do_compile: Failed
+NOTE: Tasks Summary: Attempted 1170 tasks of which 1163 didn't need to be rerun and 1 failed.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 4 seconds
+NOTE: The errors for this build are stored in /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231104074106.txt
+You can send the errors to a reports server by running:
+  send-error-report /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231104074106.txt [-s server]
+NOTE: The contents of these logs will be posted in public if you use the above command with the default server. Please ensure you remove any identifying or proprietary information when prompted before sending.
+
+Summary: 1 task failed:
+  /home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb:do_compile
+Summary: There were 2 ERROR messages, returning a non-zero exit code.
+ERROR: yaffs2-utils-0.0+git-r0 do_compile: oe_runmake failed
+ERROR: yaffs2-utils-0.0+git-r0 do_compile: ExecutionError('/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/temp/run.do_compile.2966168', 1, None, None)
+ERROR: Logfile of failure stored in: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/yaffs2-utils/0.0+git/temp/log.do_compile.2966168
+ERROR: Task (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb:do_compile) failed with exit code '1'
+
+--===============6830664651685522569==
 Content-Type: application/octet-stream
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment;
- filename="0001-xfsprogs-upgrade-6.1.1-6.5.0.patch"
+ filename="0001-yaffs2-utils-upgrade-to-latest-revision.patch"
 
-RnJvbSBjMTJjOWFkY2IyMzg5YTAzNjA2YTY5NWIxZTdmNTIzMjZmYWJmNmE3IE1vbiBTZXAgMTcg
+RnJvbSBhMTlhYWRmODQxYmYyMTE4OGEyYTZkM2Y4NTk4OTBhNTYzMmM3OTc5IE1vbiBTZXAgMTcg
 MDA6MDA6MDAgMjAwMQpGcm9tOiBVcGdyYWRlIEhlbHBlciA8YXVoQHlvY3RvcHJvamVjdC5vcmc+
-CkRhdGU6IFNhdCwgNCBOb3YgMjAyMyAwNzozNTozNiArMDAwMApTdWJqZWN0OiBbUEFUQ0hdIHhm
-c3Byb2dzOiB1cGdyYWRlIDYuMS4xIC0+IDYuNS4wCgotLS0KIC4uLi94ZnNwcm9ncy97eGZzcHJv
-Z3NfNi4xLjEuYmIgPT4geGZzcHJvZ3NfNi41LjAuYmJ9ICAgICAgICAgICB8IDIgKy0KIDEgZmls
-ZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQogcmVuYW1lIG1ldGEtZmls
-ZXN5c3RlbXMvcmVjaXBlcy11dGlscy94ZnNwcm9ncy97eGZzcHJvZ3NfNi4xLjEuYmIgPT4geGZz
-cHJvZ3NfNi41LjAuYmJ9ICg5NiUpCgpkaWZmIC0tZ2l0IGEvbWV0YS1maWxlc3lzdGVtcy9yZWNp
-cGVzLXV0aWxzL3hmc3Byb2dzL3hmc3Byb2dzXzYuMS4xLmJiIGIvbWV0YS1maWxlc3lzdGVtcy9y
-ZWNpcGVzLXV0aWxzL3hmc3Byb2dzL3hmc3Byb2dzXzYuNS4wLmJiCnNpbWlsYXJpdHkgaW5kZXgg
-OTYlCnJlbmFtZSBmcm9tIG1ldGEtZmlsZXN5c3RlbXMvcmVjaXBlcy11dGlscy94ZnNwcm9ncy94
-ZnNwcm9nc182LjEuMS5iYgpyZW5hbWUgdG8gbWV0YS1maWxlc3lzdGVtcy9yZWNpcGVzLXV0aWxz
-L3hmc3Byb2dzL3hmc3Byb2dzXzYuNS4wLmJiCmluZGV4IDYyNjdmZDlhMS4uZmQyNzk3OTgyIDEw
-MDY0NAotLS0gYS9tZXRhLWZpbGVzeXN0ZW1zL3JlY2lwZXMtdXRpbHMveGZzcHJvZ3MveGZzcHJv
-Z3NfNi4xLjEuYmIKKysrIGIvbWV0YS1maWxlc3lzdGVtcy9yZWNpcGVzLXV0aWxzL3hmc3Byb2dz
-L3hmc3Byb2dzXzYuNS4wLmJiCkBAIC0xMyw3ICsxMyw3IEBAIFNSQ19VUkkgPSAiaHR0cHM6Ly93
-d3cua2VybmVsLm9yZy9wdWIvbGludXgvdXRpbHMvZnMveGZzL3hmc3Byb2dzLyR7QlB9LnRhci54
-eiBcCiAgICAgICAgICAgIGZpbGU6Ly8wMDA0LWNvbmZpZ3VyZS1Vc2UtQUNfU1lTX0xBUkdFUkZJ
-TEUtYXV0b2NvbmYtbWFjcm8ucGF0Y2ggXAogICAgICAgICAgICBmaWxlOi8vMDAwNS1SZXBsYWNl
-LW9mZjY0X3Qtc3RhdDY0LXdpdGgtb2ZmX3Qtc3RhdC5wYXRjaCBcCiAgICAgICAgICAgICIKLVNS
-Q19VUklbc2hhMjU2c3VtXSA9ICIwNWU4YTEzNzg3MGRiMWQ2MTgyZGY3MmRkYTk4YWI3YTcxMDBk
-ZWIzNzY5NDdlODU0YjlkNTljOTE0YzJjN2JiIgorU1JDX1VSSVtzaGEyNTZzdW1dID0gIjhkYjgx
-NzEyYjMyNzU2Yjk3ZDg5ZGQ5YTY4MWFjNWUzMjViYmI3NWU1ODUzODJjZDQ4NjNmYWI3ZjlkMDIx
-YzYiCiBpbmhlcml0IGF1dG90b29scy1icm9rZW5zZXAgcGtnY29uZmlnCiAKIFBBQ0tBR0VTID0r
-ICIke1BOfS1mc2NrICR7UE59LW1rZnMgJHtQTn0tcmVwYWlyIGxpYmhhbmRsZSIKLS0gCjIuMzku
-MgoK
+CkRhdGU6IFNhdCwgNCBOb3YgMjAyMyAwNzo0MToyOCArMDAwMApTdWJqZWN0OiBbUEFUQ0hdIHlh
+ZmZzMi11dGlsczogdXBncmFkZSB0byBsYXRlc3QgcmV2aXNpb24KCi0tLQogbWV0YS1maWxlc3lz
+dGVtcy9yZWNpcGVzLWZpbGVzeXN0ZW1zL3lhZmZzMi95YWZmczItdXRpbHNfZ2l0LmJiIHwgMiAr
+LQogMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pCgpkaWZmIC0t
+Z2l0IGEvbWV0YS1maWxlc3lzdGVtcy9yZWNpcGVzLWZpbGVzeXN0ZW1zL3lhZmZzMi95YWZmczIt
+dXRpbHNfZ2l0LmJiIGIvbWV0YS1maWxlc3lzdGVtcy9yZWNpcGVzLWZpbGVzeXN0ZW1zL3lhZmZz
+Mi95YWZmczItdXRpbHNfZ2l0LmJiCmluZGV4IDZiZjMyMWUyMy4uMjFjZDI5OWNhIDEwMDY0NAot
+LS0gYS9tZXRhLWZpbGVzeXN0ZW1zL3JlY2lwZXMtZmlsZXN5c3RlbXMveWFmZnMyL3lhZmZzMi11
+dGlsc19naXQuYmIKKysrIGIvbWV0YS1maWxlc3lzdGVtcy9yZWNpcGVzLWZpbGVzeXN0ZW1zL3lh
+ZmZzMi95YWZmczItdXRpbHNfZ2l0LmJiCkBAIC0xOSw3ICsxOSw3IEBAIFNSQ19VUkkgPSAiZ2l0
+Oi8vd3d3LmFsZXBoMS5jby51ay95YWZmczI7cHJvdG9jb2w9Z2l0O2JyYW5jaD1tYXN0ZXIgXAog
+ICAgICAgICAgICBmaWxlOi8vMDAwMS1kZWZpbmUtbG9mZl90LWlmLW5vdC1hbHJlYWR5LWRlZmlu
+ZWQucGF0Y2ggXAogICAgICAgICAgICAiCiAKLVNSQ1JFViA9ICI5YTZmNDg2ZTU2ZjkyN2VlYjhk
+YzdlNGUwZDg0ZjZiYjk1ZWVhYTBmIgorU1JDUkVWID0gIjYxM2E5MDFhMjI5ZThhNzAxYzE4ZjAw
+M2RkMGFlZTE4NDUzZTA2NzAiCiAKIFVQU1RSRUFNX0NIRUNLX0NPTU1JVFMgPSAiMSIKIAotLSAK
+Mi4zOS4yCgo=
 
---===============8302202563831552789==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="buildhistory-diff.txt"
-
-Changes to packages/core2-64-poky-linux/xfsprogs (sysroot):
-  /usr/share/xfsprogs/mkfs/lts_6.6.conf was added
-packages/core2-64-poky-linux/xfsprogs/xfsprogs: FILELIST: added "/usr/share/xfsprogs/mkfs/lts_6.6.conf"
-
---===============8302202563831552789==--
+--===============6830664651685522569==--
 
