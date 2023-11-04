@@ -2,49 +2,49 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 83E21C001B2
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6F044C0018C
 	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 07:31:11 +0000 (UTC)
-Received: from a27-29.smtp-out.us-west-2.amazonses.com (a27-29.smtp-out.us-west-2.amazonses.com [54.240.27.29])
- by mx.groups.io with SMTP id smtpd.web10.5536.1699083061219299202
+Received: from a27-193.smtp-out.us-west-2.amazonses.com (a27-193.smtp-out.us-west-2.amazonses.com [54.240.27.193])
+ by mx.groups.io with SMTP id smtpd.web10.5535.1699083061205639465
  for <openembedded-devel@lists.openembedded.org>;
  Sat, 04 Nov 2023 00:31:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=ByNTteox;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=Uxamnb9I;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.29, mailfrom: 0101018b993e0541-1598f90d-8669-4190-b539-5835bfa6b28c-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=UPtnsZB2;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=qMmTSHY4;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.193, mailfrom: 0101018b993e0540-b19eddbf-3a27-4121-818c-7115ffa54ef7-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
 	t=1699083060;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=E3hI/g1pEKatbp9Y8DycISWDq41Tp0SLTj3NkqiYLFU=;
-	b=ByNTteoxu6DonZEA9ySRza4AfqemRIgaq8/U+sQnJXe5L43blYnTgdz/pQ9JH9eb
-	h793xzbJksXjO4IXeV5Zw5UTJAjJ2B3losx5y8Eztr2gtQjAPIT7ONL0/tVJKs5IZVA
-	ttNm1K2PFmOqPZg6Ret5hzEfUhrxUdUcLlAv1tr0=
+	bh=C6BWHXq5n0AtJfrwZcaEK0zZV4rm2ZBVdpFM1oycZH8=;
+	b=UPtnsZB2Ha7S+ZfC8kAUhWdHlZiw/XesW6p+dQ3IyJZT6smXqVLdgmher4oTfWBv
+	6wbcvRiYv+7X3daW12cKUvT0OA6lQSZdUKg8py2zQEm84nos99esckMN4bQBUiiDuKm
+	VUUJydgUORfVJf/AcSqSmeXAZYHrPpR1yvy0Qz/o=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699083060;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=E3hI/g1pEKatbp9Y8DycISWDq41Tp0SLTj3NkqiYLFU=;
-	b=Uxamnb9IGZxVtz2jVowQ1MO8HHkvMjEwzYipVKzoKjokweVJ2ybkuxa4b2hydXNl
-	XV8x85geWQCMD6kVscgX+TzVQ0eiFSrauVw0yo8XebP9hN7vh0UHqLfOiYEjelOe1Iz
-	t4zN1zPgGZzFzc9n+m2umnAEy2exzX3g6IreRePI=
-Content-Type: multipart/mixed; boundary="===============1491661641590178033=="
+	bh=C6BWHXq5n0AtJfrwZcaEK0zZV4rm2ZBVdpFM1oycZH8=;
+	b=qMmTSHY4YHDQ6rW417HNzgeWx2van8zu8Lc97FD9PdUGlG3S3bsK7q88uoCtwRDu
+	E80JnEEGZqdvyyVkqbxKJGx9gqLgTzm1wKPwgtxEkeccNcMJwx6dYET3VdxCRf6QH5v
+	NEXjUahnJgBeVbdfgiEyJdcmjPRU8/6Zj9qK4YlY=
+Content-Type: multipart/mixed; boundary="===============5492167414261802249=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] xfce4-verve-plugin: upgrading to 2.0.3 SUCCEEDED
-Message-ID: <0101018b993e0541-1598f90d-8669-4190-b539-5835bfa6b28c-000000@us-west-2.amazonses.com>
+Subject: [AUH] xfce4-terminal: upgrading to 1.1.1 FAILED
+Message-ID: <0101018b993e0540-b19eddbf-3a27-4121-818c-7115ffa54ef7-000000@us-west-2.amazonses.com>
 Date: Sat, 4 Nov 2023 07:31:00 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
-X-SES-Outgoing: 2023.11.04-54.240.27.29
+X-SES-Outgoing: 2023.11.04-54.240.27.193
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 07:31:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106344
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106345
 
---===============1491661641590178033==
+--===============5492167414261802249==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,10 +52,16 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *xfce4-verve-plugin* to *2.0.3* has Succeeded.
+that the automatic attempt to upgrade the recipe *xfce4-terminal* to *1.1.1* has Failed(do_compile).
+
+Detailed error information:
+
+do_compile failed
+
+
 
 Next steps:
-    - apply the patch: git am 0001-xfce4-verve-plugin-upgrade-2.0.1-2.0.3.patch
+    - apply the patch: git am 0001-xfce4-terminal-upgrade-1.0.4-1.1.1.patch
     - check the changes to upstream patches and summarize them in the commit message,
     - compile an image that contains the package
     - perform some basic sanity tests
@@ -73,524 +79,385 @@ Regards,
 The Upgrade Helper
 
 -- >8 --
-From 36a9e8e4ec1611c47de69b71979695cb4df9f84a Mon Sep 17 00:00:00 2001
+From 96408c9358718d4557613a3d86ce83120592594a Mon Sep 17 00:00:00 2001
 From: Upgrade Helper <auh@yoctoproject.org>
-Date: Sat, 4 Nov 2023 07:11:10 +0000
-Subject: [PATCH] xfce4-verve-plugin: upgrade 2.0.1 -> 2.0.3
+Date: Sat, 4 Nov 2023 07:02:52 +0000
+Subject: [PATCH] xfce4-terminal: upgrade 1.0.4 -> 1.1.1
 
 ---
- .../verve/xfce4-verve-plugin_2.0.1.bb         |   9 --
- .../verve/xfce4-verve-plugin_2.0.3.bb         | 139 ++++++++++++++++++
- 2 files changed, 139 insertions(+), 9 deletions(-)
- delete mode 100644 meta-xfce/recipes-panel-plugins/verve/xfce4-verve-plugin_2.0.1.bb
- create mode 100644 meta-xfce/recipes-panel-plugins/verve/xfce4-verve-plugin_2.0.3.bb
+ .../{xfce4-terminal_1.0.4.bb => xfce4-terminal_1.1.1.bb}        | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-xfce/recipes-apps/xfce4-terminal/{xfce4-terminal_1.0.4.bb => xfce4-terminal_1.1.1.bb} (80%)
 
-diff --git a/meta-xfce/recipes-panel-plugins/verve/xfce4-verve-plugin_2.0.1.bb b/meta-xfce/recipes-panel-plugins/verve/xfce4-verve-plugin_2.0.1.bb
-deleted file mode 100644
-index eefe3322b..000000000
---- a/meta-xfce/recipes-panel-plugins/verve/xfce4-verve-plugin_2.0.1.bb
-+++ /dev/null
-@@ -1,9 +0,0 @@
--SUMMARY = "Verve panel plugin is a comfortable command line plugin for the Xfce panel"
--HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-verve-plugin"
--LICENSE = "GPL-2.0-only"
--LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
--
--inherit xfce-panel-plugin
--
--SRC_URI[sha256sum] = "ebda5e5eb62d6e42afdc6f121d2f1cbd4d9d3c2b16a5e3ed8192b1b224b8f825"
--DEPENDS += "libpcre"
-diff --git a/meta-xfce/recipes-panel-plugins/verve/xfce4-verve-plugin_2.0.3.bb b/meta-xfce/recipes-panel-plugins/verve/xfce4-verve-plugin_2.0.3.bb
-new file mode 100644
-index 000000000..d70be1342
---- /dev/null
-+++ b/meta-xfce/recipes-panel-plugins/verve/xfce4-verve-plugin_2.0.3.bb
-@@ -0,0 +1,139 @@
-+# FIXME: the LIC_FILES_CHKSUM values have been updated by 'devtool upgrade'.
-+# The following is the difference between the old and the new license text.
-+# Please update the LICENSE value if needed, and summarize the changes in
-+# the commit message via 'License-Update:' tag.
-+# (example: 'License-Update: copyright years updated.')
-+#
-+# The changes:
-+#
-+# --- COPYING
-+# +++ COPYING
-+# @@ -1,12 +1,12 @@
-+# -		    GNU GENERAL PUBLIC LICENSE
-+# -		       Version 2, June 1991
-+# -
-+# - Copyright (C) 1989, 1991 Free Software Foundation, Inc.
-+# -     59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-+# +                    GNU GENERAL PUBLIC LICENSE
-+# +                       Version 2, June 1991
-+# +
-+# + Copyright (C) 1989, 1991 Free Software Foundation, Inc.,
-+# + 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
-+#   Everyone is permitted to copy and distribute verbatim copies
-+#   of this license document, but changing it is not allowed.
-+#  
-+# -			    Preamble
-+# +                            Preamble
-+#  
-+#    The licenses for most software are designed to take away your
-+#  freedom to share and change it.  By contrast, the GNU General Public
-+# @@ -15,7 +15,7 @@
-+#  General Public License applies to most of the Free Software
-+#  Foundation's software and to any other program whose authors commit to
-+#  using it.  (Some other Free Software Foundation software is covered by
-+# -the GNU Library General Public License instead.)  You can apply it to
-+# +the GNU Lesser General Public License instead.)  You can apply it to
-+#  your programs, too.
-+#  
-+#    When we speak of free software, we are referring to freedom, not
-+# @@ -55,8 +55,8 @@
-+#  
-+#    The precise terms and conditions for copying, distribution and
-+#  modification follow.
-+# -
-+# -		    GNU GENERAL PUBLIC LICENSE
-+# +
-+# +                    GNU GENERAL PUBLIC LICENSE
-+#     TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
-+#  
-+#    0. This License applies to any program or other work which contains
-+# @@ -110,7 +110,7 @@
-+#      License.  (Exception: if the Program itself is interactive but
-+#      does not normally print such an announcement, your work based on
-+#      the Program is not required to print an announcement.)
-+# -
-+# +
-+#  These requirements apply to the modified work as a whole.  If
-+#  identifiable sections of that work are not derived from the Program,
-+#  and can be reasonably considered independent and separate works in
-+# @@ -168,7 +168,7 @@
-+#  access to copy the source code from the same place counts as
-+#  distribution of the source code, even though third parties are not
-+#  compelled to copy the source along with the object code.
-+# -
-+# +
-+#    4. You may not copy, modify, sublicense, or distribute the Program
-+#  except as expressly provided under this License.  Any attempt
-+#  otherwise to copy, modify, sublicense or distribute the Program is
-+# @@ -225,7 +225,7 @@
-+#  
-+#  This section is intended to make thoroughly clear what is believed to
-+#  be a consequence of the rest of this License.
-+# -
-+# +
-+#    8. If the distribution and/or use of the Program is restricted in
-+#  certain countries either by patents or by copyrighted interfaces, the
-+#  original copyright holder who places the Program under this License
-+# @@ -255,7 +255,7 @@
-+#  of preserving the free status of all derivatives of our free software and
-+#  of promoting the sharing and reuse of software generally.
-+#  
-+# -			    NO WARRANTY
-+# +                            NO WARRANTY
-+#  
-+#    11. BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
-+#  FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW.  EXCEPT WHEN
-+# @@ -277,9 +277,9 @@
-+#  PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE
-+#  POSSIBILITY OF SUCH DAMAGES.
-+#  
-+# -		     END OF TERMS AND CONDITIONS
-+# -
-+# -	    How to Apply These Terms to Your New Programs
-+# +                     END OF TERMS AND CONDITIONS
-+# +
-+# +            How to Apply These Terms to Your New Programs
-+#  
-+#    If you develop a new program, and you want it to be of the greatest
-+#  possible use to the public, the best way to achieve this is to make it
-+# @@ -303,17 +303,16 @@
-+#      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+#      GNU General Public License for more details.
-+#  
-+# -    You should have received a copy of the GNU General Public License
-+# -    along with this program; if not, write to the Free Software
-+# -    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-+# -
-+# +    You should have received a copy of the GNU General Public License along
-+# +    with this program; if not, write to the Free Software Foundation, Inc.,
-+# +    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-+#  
-+#  Also add information on how to contact you by electronic and paper mail.
-+#  
-+#  If the program is interactive, make it output a short notice like this
-+#  when it starts in an interactive mode:
-+#  
-+# -    Gnomovision version 69, Copyright (C) year  name of author
-+# +    Gnomovision version 69, Copyright (C) year name of author
-+#      Gnomovision comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
-+#      This is free software, and you are welcome to redistribute it
-+#      under certain conditions; type `show c' for details.
-+# @@ -336,5 +335,5 @@
-+#  This General Public License does not permit incorporating your program into
-+#  proprietary programs.  If your program is a subroutine library, you may
-+#  consider it more useful to permit linking proprietary applications with the
-+# -library.  If this is what you want to do, use the GNU Library General
-+# +library.  If this is what you want to do, use the GNU Lesser General
-+#  Public License instead of this License.
-+# 
-+#
-+
-+SUMMARY = "Verve panel plugin is a comfortable command line plugin for the Xfce panel"
-+HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-verve-plugin"
-+LICENSE = "GPL-2.0-only"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+
-+inherit xfce-panel-plugin
-+
-+SRC_URI[sha256sum] = "e1bf121f1bf9cf2a199bf5c0f3aa802f503df9bea50724741e7a92fe6d9fe09e"
-+DEPENDS += "libpcre"
+diff --git a/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_1.0.4.bb b/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_1.1.1.bb
+similarity index 80%
+rename from meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_1.0.4.bb
+rename to meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_1.1.1.bb
+index edb0c614e..d6d2d4ad5 100644
+--- a/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_1.0.4.bb
++++ b/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_1.1.1.bb
+@@ -10,6 +10,6 @@ FILES:${PN} += " \
+     ${datadir}/gnome-control-center \
+ "
+ 
+-SRC_URI[sha256sum] = "78e55957af7c6fc1f283e90be33988661593a4da98383da1b0b54fdf6554baf4"
++SRC_URI[sha256sum] = "5ab5c9b49c00be29f0be4eee5ccfa5073b16f2456185270265a9324549080aa6"
+ 
+ RRECOMMENDS:${PN} += "vte-prompt"
 -- 
 2.39.2
 
 
---===============1491661641590178033==
+--===============5492167414261802249==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="buildhistory-diff-full.txt"
+Content-Disposition: attachment; filename="bitbake-output-qemux86-64.txt"
 
-packages/core2-64-poky-linux/xfce4-verve-plugin: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin: PACKAGES: added "xfce4-verve-plugin-locale-et"
-packages/core2-64-poky-linux/xfce4-verve-plugin: SRC_URI changed from "http://archive.xfce.org/src/panel-plugins/xfce4-verve-plugin/2.0/xfce4-verve-plugin-2.0.1.tar.bz2" to "http://archive.xfce.org/src/panel-plugins/xfce4-verve-plugin/2.0/xfce4-verve-plugin-2.0.3.tar.bz2"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-dbg: RRECOMMENDS: removed "libpcre-dbg", added "libpcre2-dbg"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-dbg: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-dbg: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-dbg: PKGSIZE changed from 117304 to 116064 (-1%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-dev: RRECOMMENDS: added "libpcre2-dev"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-dev: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-dev: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-doc: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-doc: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-ar: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-ar: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-ast: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-ast: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-be: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-be: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-be: PKGSIZE changed from 2918 to 2972 (+2%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-bg: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-bg: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-bg: PKGSIZE changed from 2798 to 2866 (+2%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-ca: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-ca: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-ca: PKGSIZE changed from 2392 to 2456 (+3%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-cs: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-cs: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-cs: PKGSIZE changed from 2452 to 2515 (+3%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-da: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-da: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-da: PKGSIZE changed from 2275 to 2298 (+1%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-de: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-de: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-de: PKGSIZE changed from 2404 to 2452 (+2%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-el: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-el: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-el: PKGSIZE changed from 2806 to 2866 (+2%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-en-au: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-en-au: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-en-au: PKGSIZE changed from 2263 to 2312 (+2%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-en-ca: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-en-ca: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-en-ca: PKGSIZE changed from 2268 to 2294 (+1%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-en-gb: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-en-gb: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-en-gb: PKGSIZE changed from 1173 to 2307 (+97%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-eo: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-eo: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-es: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-es: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-es: PKGSIZE changed from 2398 to 2479 (+3%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-eu: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-eu: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-eu: PKGSIZE changed from 1238 to 2354 (+90%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-fi: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-fi: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-fi: PKGSIZE changed from 1851 to 1924 (+4%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-fr: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-fr: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-fr: PKGSIZE changed from 2466 to 2568 (+4%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-gl: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-gl: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-gl: PKGSIZE changed from 2364 to 2416 (+2%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-he: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-he: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-he: PKGSIZE changed from 2614 to 2668 (+2%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-hr: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-hr: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-hr: PKGSIZE changed from 2376 to 2429 (+2%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-hu: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-hu: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-hu: PKGSIZE changed from 2368 to 2419 (+2%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-hy-am: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-hy-am: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-hy-am: PKGSIZE changed from 2897 to 2944 (+2%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-hye: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-hye: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-hye: PKGSIZE changed from 2891 to 2938 (+2%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-id: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-id: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-id: PKGSIZE changed from 2293 to 2329 (+2%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-ie: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-ie: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-ie: PKGSIZE changed from 2236 to 2263 (+1%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-is: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-is: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-is: PKGSIZE changed from 2327 to 2382 (+2%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-it: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-it: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-it: PKGSIZE changed from 2384 to 2483 (+4%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-ja: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-ja: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-ja: PKGSIZE changed from 2483 to 2537 (+2%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-ko: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-ko: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-ko: PKGSIZE changed from 2311 to 2367 (+2%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-lt: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-lt: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-lt: PKGSIZE changed from 2485 to 2503 (+1%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-lv: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-lv: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-ms: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-ms: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-ms: PKGSIZE changed from 2288 to 2335 (+2%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-nb: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-nb: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-nb: PKGSIZE changed from 2309 to 2346 (+2%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-nl: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-nl: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-nl: PKGSIZE changed from 2349 to 2399 (+2%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-oc: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-oc: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-oc: PKGSIZE changed from 2277 to 2435 (+7%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-pa: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-pa: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-pl: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-pl: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-pl: PKGSIZE changed from 2472 to 2528 (+2%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-pt-br: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-pt-br: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-pt-br: PKGSIZE changed from 2390 to 2489 (+4%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-pt: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-pt: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-pt: PKGSIZE changed from 2332 to 2433 (+4%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-ro: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-ro: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-ru: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-ru: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-ru: PKGSIZE changed from 2946 to 2989 (+1%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-sk: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-sk: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-sk: PKGSIZE changed from 2436 to 2477 (+2%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-sl: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-sl: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-sl: PKGSIZE changed from 2349 to 2393 (+2%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-sq: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-sq: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-sq: PKGSIZE changed from 2329 to 2386 (+2%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-sr: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-sr: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-sr: PKGSIZE changed from 2899 to 2955 (+2%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-sv: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-sv: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-sv: PKGSIZE changed from 2294 to 2340 (+2%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-th: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-th: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-th: PKGSIZE changed from 3188 to 3251 (+2%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-tr: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-tr: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-tr: PKGSIZE changed from 2377 to 2420 (+2%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-ug: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-ug: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-uk: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-uk: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-uk: PKGSIZE changed from 3030 to 3090 (+2%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-ur-pk: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-ur-pk: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-ur: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-ur: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-vi: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-vi: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-zh-cn: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-zh-cn: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-zh-cn: PKGSIZE changed from 2205 to 2259 (+2%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-zh-tw: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-zh-tw: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-zh-tw: PKGSIZE changed from 2203 to 2254 (+2%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-src: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-src: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-src: PKGSIZE changed from 78989 to 78334 (-1%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-staticdev: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-staticdev: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin: RDEPENDS: removed "libpcre (['>= 8.45'])", added "libpcre2 (['>= 10.42'])"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin: PV changed from "2.0.1" to "2.0.3"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin: PKGV changed from 2.0.1 [default] to 2.0.3 [default]
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin: PKGSIZE changed from 54537 to 54642 (+0%)
+NOTE: Reconnecting to bitbake server...
+Loading cache...done.
+Loaded 4963 entries from dependency cache.
+Parsing recipes...done.
+Parsing of 3055 .bb files complete (3054 cached, 1 parsed). 4886 targets, 92 skipped, 0 masked, 0 errors.
+Removing 1 recipes from the core2-64 sysroot...done.
+Removing 1 recipes from the qemux86_64 sysroot...done.
+NOTE: Resolving any missing task queue dependencies
 
---===============1491661641590178033==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="buildhistory-diff.txt"
+Build Configuration:
+BB_VERSION           = "2.6.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "x86_64-poky-linux"
+MACHINE              = "qemux86-64"
+DISTRO               = "poky"
+DISTRO_VERSION       = "4.3+snapshot-e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+TUNE_FEATURES        = "m64 core2"
+TARGET_FPU           = ""
+meta                 
+meta-poky            
+meta-yocto-bsp       
+workspace            = "master:e575f59b82eae78fb1ac8df7198eaa4a7a963259"
+meta-oe              
+meta-python          
+meta-perl            
+meta-networking      
+meta-multimedia      
+meta-gnome           
+meta-xfce            
+meta-filesystems     
+meta-initramfs       
+meta-webserver       = "tmp-auh-upgrades:727a04dfa36d95e444f0159cbd66ccad2dbdf2c7"
 
-packages/core2-64-poky-linux/xfce4-verve-plugin: PACKAGES: added "xfce4-verve-plugin-locale-et"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-dbg: RRECOMMENDS: removed "libpcre-dbg", added "libpcre2-dbg"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-dev: RRECOMMENDS: added "libpcre2-dev"
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-en-gb: PKGSIZE changed from 1173 to 2307 (+97%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin-locale-eu: PKGSIZE changed from 1238 to 2354 (+90%)
-packages/core2-64-poky-linux/xfce4-verve-plugin/xfce4-verve-plugin: RDEPENDS: removed "libpcre (['>= 8.45'])", added "libpcre2 (['>= 10.42'])"
+Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
+done.
+Sstate summary: Wanted 595 Local 586 Mirrors 0 Missed 9 Current 621 (98% match, 99% complete)
+NOTE: Executing Tasks
+NOTE: Running setscene task 630 of 1216 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_1.1.1.bb:do_populate_lic_setscene)
+NOTE: Running setscene task 632 of 1216 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_1.1.1.bb:do_deploy_source_date_epoch_setscene)
+NOTE: Running setscene task 633 of 1216 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.18.3.bb:do_create_spdx_setscene)
+NOTE: Running setscene task 644 of 1216 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-support/vte/vte_0.72.2.bb:do_create_spdx_setscene)
+NOTE: recipe xfce4-terminal-1.1.1-r0: task do_deploy_source_date_epoch_setscene: Started
+NOTE: recipe xfce4-terminal-1.1.1-r0: task do_populate_lic_setscene: Started
+NOTE: recipe libxfce4ui-4.18.3-r0: task do_create_spdx_setscene: Started
+NOTE: recipe vte-0.72.2-r0: task do_create_spdx_setscene: Started
+NOTE: recipe xfce4-terminal-1.1.1-r0: task do_deploy_source_date_epoch_setscene: Succeeded
+NOTE: recipe xfce4-terminal-1.1.1-r0: task do_populate_lic_setscene: Succeeded
+NOTE: Running setscene task 815 of 1216 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_1.1.1.bb:do_recipe_qa_setscene)
+NOTE: recipe libxfce4ui-4.18.3-r0: task do_create_spdx_setscene: Succeeded
+NOTE: Running setscene task 833 of 1216 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-gnome/hicolor-icon-theme/hicolor-icon-theme_0.17.bb:do_create_spdx_setscene)
+NOTE: recipe vte-0.72.2-r0: task do_create_spdx_setscene: Succeeded
+NOTE: Running setscene task 849 of 1216 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-gnome/gtk+/gtk+3_3.24.38.bb:do_create_spdx_setscene)
+NOTE: recipe hicolor-icon-theme-0.17-r0: task do_create_spdx_setscene: Started
+NOTE: recipe xfce4-terminal-1.1.1-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe gtk+3-3.24.38-r0: task do_create_spdx_setscene: Started
+NOTE: recipe xfce4-terminal-1.1.1-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe hicolor-icon-theme-0.17-r0: task do_create_spdx_setscene: Succeeded
+NOTE: Running task 614 of 3324 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_1.1.1.bb:do_fetch)
+NOTE: recipe gtk+3-3.24.38-r0: task do_create_spdx_setscene: Succeeded
+NOTE: Running setscene task 872 of 1216 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-gnome/gdk-pixbuf/gdk-pixbuf_2.42.10.bb:do_create_spdx_setscene)
+NOTE: recipe xfce4-terminal-1.1.1-r0: task do_fetch: Started
+NOTE: recipe xfce4-terminal-1.1.1-r0: task do_fetch: Succeeded
+NOTE: Running task 743 of 3324 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_1.1.1.bb:do_unpack)
+NOTE: recipe gdk-pixbuf-2.42.10-r0: task do_create_spdx_setscene: Started
+NOTE: recipe xfce4-terminal-1.1.1-r0: task do_unpack: Started
+NOTE: recipe gdk-pixbuf-2.42.10-r0: task do_create_spdx_setscene: Succeeded
+NOTE: Running setscene task 1067 of 1216 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/glib-2.0/glib-2.0_2.78.0.bb:do_create_spdx_setscene)
+NOTE: recipe glib-2.0-1_2.78.0-r0: task do_create_spdx_setscene: Started
+NOTE: recipe xfce4-terminal-1.1.1-r0: task do_unpack: Succeeded
+NOTE: recipe glib-2.0-1_2.78.0-r0: task do_create_spdx_setscene: Succeeded
+NOTE: Running setscene task 1154 of 1216 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/libtool/libtool-cross_2.4.7.bb:do_create_spdx_setscene)
+NOTE: Running setscene task 1161 of 1216 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/libtool/libtool-cross_2.4.7.bb:do_populate_sysroot_setscene)
+NOTE: recipe libtool-cross-2.4.7-r0: task do_create_spdx_setscene: Started
+NOTE: recipe libtool-cross-2.4.7-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe libtool-cross-2.4.7-r0: task do_create_spdx_setscene: Succeeded
+NOTE: Running setscene task 1168 of 1216 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/gcc/gcc-runtime_13.2.bb:do_create_spdx_setscene)
+NOTE: recipe libtool-cross-2.4.7-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 1170 of 1216 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/libtool/libtool-cross_2.4.7.bb:do_recipe_qa_setscene)
+NOTE: recipe gcc-runtime-13.2.0-r0: task do_create_spdx_setscene: Started
+NOTE: recipe libtool-cross-2.4.7-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe gcc-runtime-13.2.0-r0: task do_create_spdx_setscene: Succeeded
+NOTE: Running setscene task 1174 of 1216 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/glibc/glibc_2.38.bb:do_create_spdx_setscene)
+NOTE: recipe libtool-cross-2.4.7-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe glibc-2.38+git-r0: task do_create_spdx_setscene: Started
+NOTE: recipe glibc-2.38+git-r0: task do_create_spdx_setscene: Succeeded
+NOTE: Running setscene task 1181 of 1216 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/gcc/gcc-cross_13.2.bb:do_create_spdx_setscene)
+NOTE: Running setscene task 1183 of 1216 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/gcc/gcc-cross_13.2.bb:do_populate_sysroot_setscene)
+NOTE: recipe gcc-cross-x86_64-13.2.0-r0: task do_create_spdx_setscene: Started
+NOTE: recipe gcc-cross-x86_64-13.2.0-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe gcc-cross-x86_64-13.2.0-r0: task do_create_spdx_setscene: Succeeded
+NOTE: Running task 2217 of 3324 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_1.1.1.bb:do_patch)
+NOTE: recipe xfce4-terminal-1.1.1-r0: task do_patch: Started
+NOTE: recipe xfce4-terminal-1.1.1-r0: task do_patch: Succeeded
+NOTE: recipe gcc-cross-x86_64-13.2.0-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 1211 of 1216 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/binutils/binutils-cross_2.41.bb:do_populate_sysroot_setscene)
+NOTE: Running setscene task 1213 of 1216 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/gcc/gcc-cross_13.2.bb:do_recipe_qa_setscene)
+NOTE: recipe binutils-cross-x86_64-2.41-r0: task do_populate_sysroot_setscene: Started
+NOTE: recipe gcc-cross-x86_64-13.2.0-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe gcc-cross-x86_64-13.2.0-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: recipe binutils-cross-x86_64-2.41-r0: task do_populate_sysroot_setscene: Succeeded
+NOTE: Running setscene task 1216 of 1216 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/binutils/binutils-cross_2.41.bb:do_recipe_qa_setscene)
+NOTE: recipe binutils-cross-x86_64-2.41-r0: task do_recipe_qa_setscene: Started
+NOTE: recipe binutils-cross-x86_64-2.41-r0: task do_recipe_qa_setscene: Succeeded
+NOTE: Setscene tasks completed
+NOTE: Running task 3277 of 3324 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_1.1.1.bb:do_prepare_recipe_sysroot)
+NOTE: Running task 3308 of 3324 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_1.1.1.bb:do_collect_spdx_deps)
+NOTE: recipe xfce4-terminal-1.1.1-r0: task do_prepare_recipe_sysroot: Started
+NOTE: recipe xfce4-terminal-1.1.1-r0: task do_collect_spdx_deps: Started
+NOTE: recipe xfce4-terminal-1.1.1-r0: task do_prepare_recipe_sysroot: Succeeded
+NOTE: recipe xfce4-terminal-1.1.1-r0: task do_collect_spdx_deps: Succeeded
+NOTE: Running task 3312 of 3324 (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_1.1.1.bb:do_configure)
+NOTE: recipe xfce4-terminal-1.1.1-r0: task do_configure: Started
+Log data follows:
+| DEBUG: Executing python function extend_recipe_sysroot
+| NOTE: Direct dependencies are ['/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.18.3.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/glib-2.0/glib-2.0_2.78.0.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/glibc/glibc_2.38.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/gcc/gcc-cross_13.2.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/gcc/gcc-runtime_13.2.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/libtool/libtool-cross_2.4.7.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/libtool/libtool-native_2.4.7.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/quilt/quilt-native_0.67.bb:do_populate_sysroot', '/
+ home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-gnome/gdk-pixbuf/gdk-pixbuf_2.42.10.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-gnome/gtk+/gtk+3_3.24.38.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-gnome/hicolor-icon-theme/hicolor-icon-theme_0.17.bb:do_populate_sysroot', '/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-support/vte/vte_0.72.2.bb:do_populate_sysroot', 'virtual:native:/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-core/gettext/gettext_0.22.bb:do_populate_sysroot', 'virtual:native:/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/autoconf/autoconf_2.72c.bb:do_populate_sysroot', 'virtual:native:/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/automake/automake_1.16.5.bb:do_populate_sysroot', 'virtual:native:/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/intltool/intltool_0.51.0.bb:do_populate_s
+ ysroot', 'virtual:native:/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/patch/patch_2.7.6.bb:do_populate_sysroot', 'virtual:native:/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/pkgconfig/pkgconfig_git.bb:do_populate_sysroot', 'virtual:native:/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-devtools/pseudo/pseudo_git.bb:do_populate_sysroot', 'virtual:native:/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-gnome/gtk+/gtk+3_3.24.38.bb:do_populate_sysroot', 'virtual:native:/home/pokybuild/yocto-worker/auh-meta-oe/build/meta/recipes-gnome/gtk-doc/gtk-doc_1.33.2.bb:do_populate_sysroot']
+| NOTE: Installed into sysroot: []
+| NOTE: Skipping as already exists in sysroot: ['libxfce4ui', 'glib-2.0', 'glibc', 'gcc-cross-x86_64', 'gcc-runtime', 'libtool-cross', 'libtool-native', 'quilt-native', 'gdk-pixbuf', 'gtk+3', 'hicolor-icon-theme', 'vte', 'gettext-native', 'autoconf-native', 'automake-native', 'intltool-native', 'patch-native', 'pkgconfig-native', 'pseudo-native', 'gtk+3-native', 'gtk-doc-native', 'libgcc', 'linux-libc-headers', 'gnu-config-native', 'texinfo-dummy-native', 'zlib-native', 'zstd-native', 'libmpc-native', 'binutils-cross-x86_64', 'xz-native', 'flex-native', 'mpfr-native', 'gmp-native', 'gettext-minimal-native', 'libpcre2', 'icu', 'gobject-introspection', 'gnutls', 'libxfce4util', 'libice', 'xfce4-dev-tools', 'startup-notification', 'xfconf', 'libsm', 'libepoxy', 'm4-native', 'libxml-parser-perl-native', 'attr-native', 'libxext-native', 'at-spi2-core-native', 'libjpeg-turbo-native', 'gdk-pixbuf-native', 'libxdamage-native', 'libxcursor-native', 'libxi-native', 'libxrandr-native', 'libxfix
+ es-native', 'glib-2.0-native', 'libxcomposite-native', 'gobject-introspection-native', 'pango-native', 'cairo-native', 'fontconfig-native', 'libx11-native', 'python3-native', 'libpng-native', 'libxrender-native', 'zlib', 'util-linux', 'libffi', 'bash-completion', 'libpng', 'shared-mime-info', 'libjpeg-turbo', 'cairo', 'libx11', 'pango', 'libxfixes', 'wayland', 'fontconfig', 'wayland-protocols', 'libxkbcommon', 'mesa', 'libxi', 'libxcursor', 'libxdamage', 'libxrandr', 'libxcomposite', 'libxrender', 'libxext', 'at-spi2-core', 'opkg-utils', 'bzip2', 'python3', 'nettle', 'libtasn1', 'libidn2', 'libunistring', 'gmp', 'libseccomp', 'vala', 'xorgproto', 'xtrans', 'util-macros', 'xcb-util', 'perl', 'perl-native', 'expat-native', 'xorgproto-native', 'util-macros-native', 'libxtst-native', 'dbus-native', 'libxml2-native', 'cmake-native', 'shared-mime-info-native', 'libffi-native', 'util-linux-native', 'libpcre2-native', 'freetype-native', 'harfbuzz-native', 'libxft-native', 'fribidi-native', 
+ 'libxcb-native', 'libsm-native', 'pixman-native', 'xtrans-native', 'libedit-native', 'libnsl2-native', 'gdbm-native', 'bzip2-native', 'openssl-native', 'util-linux-libuuid-native', 'ncurses-native', 'libtirpc-native', 'sqlite3-native', 'ncurses', 'libcap-ng', 'util-linux-libuuid', 'libxcrypt', 'libpam', 'libxml2', 'pixman', 'libxcb', 'libxft', 'fribidi', 'harfbuzz', 'freetype', 'expat', 'xkeyboard-config', 'vulkan-headers', 'xrandr', 'libdrm', 'libxshmfence', 'libxxf86vm', 'vulkan-loader', 'libxtst', 'dbus', 'libtirpc', 'xz', 'openssl', 'libnsl2', 'sqlite3', 'gdbm', 'libedit', 'make-native', 'itstool-native', 'libcap-ng-native', 'icu-native', 'libxau-native', 'libpthread-stubs-native', 'libxdmcp-native', 'xcb-proto-native', 'libice-native', 'cracklib', 'libxdmcp', 'libpthread-stubs', 'libxau', 'xcb-proto', 'libpciaccess', 'systemd', 'shadow', 'shadow-sysroot', 'base-passwd', 'initscripts', 'shadow-native', 'update-rc.d', 'base-files', 'unzip-native', 'acl', 'zstd', 'libcap', 'kmod',
+  'attr']
+| DEBUG: Python function extend_recipe_sysroot finished
+| DEBUG: Executing shell function autotools_preconfigure
+| DEBUG: Shell function autotools_preconfigure finished
+| DEBUG: Executing python function autotools_aclocals
+| DEBUG: SITE files ['endian-little', 'common-linux', 'common-glibc', 'bit-64', 'x86_64-linux', 'common']
+| DEBUG: Python function autotools_aclocals finished
+| DEBUG: Executing shell function do_configure
+| automake (GNU automake) 1.16.5
+| Copyright (C) 2021 Free Software Foundation, Inc.
+| License GPLv2+: GNU GPL version 2 or later <https://gnu.org/licenses/gpl-2.0.html>
+| This is free software: you are free to change and redistribute it.
+| There is NO WARRANTY, to the extent permitted by law.
+| 
+| Written by Tom Tromey <tromey@redhat.com>
+|        and Alexandre Duret-Lutz <adl@gnu.org>.
+| AUTOV is 1.16
+| NOTE: Executing ACLOCAL="aclocal --system-acdir=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot/usr/share/aclocal/ --automake-acdir=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot-native/usr/share/aclocal-1.16" autoreconf -Wcross --verbose --install --force --exclude=autopoint --exclude=gtkdocize -I /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/xfce4-terminal-1.1.1/m4/ -I /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot-native/usr/share/aclocal/
+| autoreconf: export WARNINGS=cross,no-obsolete
+| autoreconf: Entering directory '.'
+| autoreconf: configure.ac: not using Gettext
+| autoreconf: running: aclocal --system-acdir=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot/usr/share/aclocal/ --automake-acdir=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot-native/usr/share/aclocal-1.16 -I /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/xfce4-terminal-1.1.1/m4/ -I /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot-native/usr/share/aclocal/ --force -I m4 ${ACLOCAL_FLAGS}
+| autoreconf: configure.ac: tracing
+| autoreconf: running: libtoolize --copy --force
+| libtoolize: putting auxiliary files in '.'.
+| libtoolize: copying file './ltmain.sh'
+| libtoolize: putting macros in AC_CONFIG_MACRO_DIRS, 'm4'.
+| libtoolize: copying file 'm4/libtool.m4'
+| libtoolize: copying file 'm4/ltoptions.m4'
+| libtoolize: copying file 'm4/ltsugar.m4'
+| libtoolize: copying file 'm4/ltversion.m4'
+| libtoolize: copying file 'm4/lt~obsolete.m4'
+| autoreconf: running: intltoolize --copy --force
+| autoreconf: running: aclocal --system-acdir=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot/usr/share/aclocal/ --automake-acdir=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot-native/usr/share/aclocal-1.16 -I /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/xfce4-terminal-1.1.1/m4/ -I /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot-native/usr/share/aclocal/ --force -I m4 ${ACLOCAL_FLAGS}
+| autoreconf: running: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot-native/usr/bin/autoconf --include=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/xfce4-terminal-1.1.1/m4/ --include=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot-native/usr/share/aclocal/ --force
+| autoreconf: running: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot-native/usr/bin/autoheader --include=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/xfce4-terminal-1.1.1/m4/ --include=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot-native/usr/share/aclocal/ --force
+| autoreconf: running: automake --add-missing --copy --force-missing
+| configure.ac:77: installing './compile'
+| configure.ac:62: installing './missing'
+| terminal/Makefile.am: installing './depcomp'
+| autoreconf: './config.sub' is updated
+| autoreconf: './config.guess' is updated
+| autoreconf: Leaving directory '.'
+| NOTE: Running ../xfce4-terminal-1.1.1/configure  --build=x86_64-linux 		  --host=x86_64-poky-linux 		  --target=x86_64-poky-linux 		  --prefix=/usr 		  --exec_prefix=/usr 		  --bindir=/usr/bin 		  --sbindir=/usr/sbin 		  --libexecdir=/usr/libexec 		  --datadir=/usr/share 		  --sysconfdir=/etc 		  --sharedstatedir=/com 		  --localstatedir=/var 		  --libdir=/usr/lib 		  --includedir=/usr/include 		  --oldincludedir=/usr/include 		  --infodir=/usr/share/info 		  --mandir=/usr/share/man 		  --disable-silent-rules 		  --disable-dependency-tracking 		  --with-libtool-sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot  --disable-static  --enable-nls
+| configure: loading site script /home/pokybuild/yocto-worker/auh-meta-oe/build/meta/site/endian-little
+| configure: loading site script /home/pokybuild/yocto-worker/auh-meta-oe/build/meta/site/common-linux
+| configure: loading site script /home/pokybuild/yocto-worker/auh-meta-oe/build/meta/site/common-glibc
+| configure: loading site script /home/pokybuild/yocto-worker/auh-meta-oe/build/meta/site/x86_64-linux
+| configure: loading site script /home/pokybuild/yocto-worker/auh-meta-oe/build/meta/site/common
+| configure: loading site script /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot/usr/share/x86_64-poky-linux_config_site.d/ncurses_config
+| checking for a BSD-compatible install... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools/install -c
+| checking whether build environment is sane... yes
+| checking for x86_64-poky-linux-strip... x86_64-poky-linux-strip
+| checking for a race-free mkdir -p... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools/mkdir -p
+| checking for gawk... gawk
+| checking whether make sets $(MAKE)... yes
+| checking whether make supports nested variables... yes
+| checking whether UID '6000' is supported by ustar format... yes
+| checking whether GID '6000' is supported by ustar format... yes
+| checking how to create a ustar tar archive... gnutar
+| checking whether to enable maintainer-specific portions of Makefiles... no
+| checking whether make supports nested variables... (cached) yes
+| checking whether make supports the include directive... yes (GNU style)
+| checking for x86_64-poky-linux-gcc... x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot
+| checking whether the C compiler works... yes
+| checking for C compiler default output file name... a.out
+| checking for suffix of executables...
+| checking whether we are cross compiling... yes
+| checking for suffix of object files... o
+| checking whether the compiler supports GNU C... yes
+| checking whether x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot accepts -g... yes
+| checking for x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot option to enable C11 features... none needed
+| checking whether x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot understands -c and -o together... yes
+| checking dependency style of x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot... none
+| checking for stdio.h... (cached) yes
+| checking for stdlib.h... (cached) yes
+| checking for string.h... (cached) yes
+| checking for inttypes.h... (cached) yes
+| checking for stdint.h... (cached) yes
+| checking for strings.h... (cached) yes
+| checking for sys/stat.h... (cached) yes
+| checking for sys/types.h... (cached) yes
+| checking for unistd.h... (cached) yes
+| checking for wchar.h... yes
+| checking for minix/config.h... no
+| checking whether it is safe to define __EXTENSIONS__... yes
+| checking whether _XOPEN_SOURCE should be defined... no
+| checking for x86_64-poky-linux-gcc... (cached) x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot
+| checking whether the compiler supports GNU C... (cached) yes
+| checking whether x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot accepts -g... (cached) yes
+| checking for x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot option to enable C11 features... (cached) none needed
+| checking whether x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot understands -c and -o together... (cached) yes
+| checking dependency style of x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot... (cached) none
+| checking whether NLS is requested... yes
+| checking for intltool >= 0.35... 0.51.0 found
+| checking for intltool-update... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot-native/usr/bin/intltool-update
+| checking for intltool-merge... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot-native/usr/bin/intltool-merge
+| checking for intltool-extract... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot-native/usr/bin/intltool-extract
+| checking for xgettext... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot-native/usr/bin/xgettext
+| checking for msgmerge... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot-native/usr/bin/msgmerge
+| checking for msgfmt... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot-native/usr/bin/msgfmt
+| checking for gmsgfmt... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot-native/usr/bin/msgfmt
+| checking build system type... x86_64-pc-linux-gnu
+| checking host system type... x86_64-poky-linux-gnu
+| checking how to print strings... printf
+| checking for a sed that does not truncate output... (cached) sed
+| checking for grep that handles long lines and -e... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools/grep
+| checking for egrep... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools/grep -E
+| checking for fgrep... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools/grep -F
+| checking for ld used by x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot... x86_64-poky-linux-ld --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot
+| checking if the linker (x86_64-poky-linux-ld --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot  ) is GNU ld... yes
+| checking for BSD- or MS-compatible name lister (nm)... x86_64-poky-linux-gcc-nm
+| checking the name lister (x86_64-poky-linux-gcc-nm) interface... BSD nm
+| checking whether ln -s works... yes
+| checking the maximum length of command line arguments... 1572864
+| checking how to convert x86_64-pc-linux-gnu file names to x86_64-poky-linux-gnu format... func_convert_file_noop
+| checking how to convert x86_64-pc-linux-gnu file names to toolchain format... func_convert_file_noop
+| checking for x86_64-poky-linux-ld --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot   option to reload object files... -r
+| checking for x86_64-poky-linux-file... no
+| checking for file... file
+| configure: WARNING: using cross tools not prefixed with host triplet
+| checking for x86_64-poky-linux-objdump... x86_64-poky-linux-objdump
+| checking how to recognize dependent libraries... pass_all
+| checking for x86_64-poky-linux-dlltool... no
+| checking for dlltool... no
+| checking how to associate runtime and link libraries... printf %s\n
+| checking for x86_64-poky-linux-ar... x86_64-poky-linux-gcc-ar
+| checking for archiver @FILE support... @
+| checking for x86_64-poky-linux-strip... (cached) x86_64-poky-linux-strip
+| checking for x86_64-poky-linux-ranlib... x86_64-poky-linux-gcc-ranlib
+| checking command to parse x86_64-poky-linux-gcc-nm output from x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot object... ok
+| checking for sysroot... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot
+| checking for a working dd... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools/dd
+| checking how to truncate binary pipes... /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools/dd bs=4096 count=1
+| checking for x86_64-poky-linux-mt... no
+| checking for mt... no
+| checking if : is a manifest tool... no
+| checking for dlfcn.h... yes
+| checking for objdir... .libs
+| checking if x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot supports -fno-rtti -fno-exceptions... no
+| checking for x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot option to produce PIC... -fPIC -DPIC
+| checking if x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot PIC flag -fPIC -DPIC works... yes
+| checking if x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot static flag -static works... yes
+| checking if x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot supports -c -o file.o... yes
+| checking if x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot supports -c -o file.o... (cached) yes
+| checking whether the x86_64-poky-linux-gcc  -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot linker (x86_64-poky-linux-ld --sysroot=/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/recipe-sysroot   -m elf_x86_64) supports shared libraries... yes
+| checking whether -lc should be explicitly linked in... no
+| checking dynamic linker characteristics... GNU/Linux ld.so
+| checking how to hardcode library paths into programs... immediate
+| checking whether stripping libraries is possible... yes
+| checking if libtool supports shared libraries... yes
+| checking whether to build shared libraries... yes
+| checking whether to build static libraries... no
+| checking for ctype.h... yes
+| checking for errno.h... yes
+| checking for limits.h... yes
+| checking for pwd.h... yes
+| checking for signal.h... yes
+| checking for time.h... yes
+| checking for unistd.h... (cached) yes
+| checking for locale.h... yes
+| checking for stdlib.h... (cached) yes
+| checking for bind_textdomain_codeset... yes
+| checking for locales directory... ${prefix}/share/locale
+| ../xfce4-terminal-1.1.1/configure: line 14748: syntax error near unexpected token `X11,'
+| ../xfce4-terminal-1.1.1/configure: line 14748: `XDT_CHECK_OPTIONAL_FEATURE(X11,'
+| NOTE: The following config.log files may provide further information.
+| NOTE: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/build/config.log
+| ERROR: configure failed
+| WARNING: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/temp/run.do_configure.2652797:286 exit 1 from 'exit 1'
+| WARNING: Backtrace (BB generated script):
+| 	#1: bbfatal_log, /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/temp/run.do_configure.2652797, line 286
+| 	#2: oe_runconf, /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/temp/run.do_configure.2652797, line 262
+| 	#3: autotools_do_configure, /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/temp/run.do_configure.2652797, line 232
+| 	#4: do_configure, /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/temp/run.do_configure.2652797, line 152
+| 	#5: main, /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/temp/run.do_configure.2652797, line 290
+NOTE: recipe xfce4-terminal-1.1.1-r0: task do_configure: Failed
+NOTE: Tasks Summary: Attempted 3312 tasks of which 3306 didn't need to be rerun and 1 failed.
+NOTE: Writing buildhistory
+NOTE: Writing buildhistory took: 4 seconds
+NOTE: The errors for this build are stored in /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231104070220.txt
+You can send the errors to a reports server by running:
+  send-error-report /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231104070220.txt [-s server]
+NOTE: The contents of these logs will be posted in public if you use the above command with the default server. Please ensure you remove any identifying or proprietary information when prompted before sending.
 
---===============1491661641590178033==
+Summary: 1 task failed:
+  /home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_1.1.1.bb:do_configure
+Summary: There were 2 ERROR messages, returning a non-zero exit code.
+ERROR: xfce4-terminal-1.1.1-r0 do_configure: configure failed
+ERROR: xfce4-terminal-1.1.1-r0 do_configure: ExecutionError('/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/temp/run.do_configure.2652797', 1, None, None)
+ERROR: Logfile of failure stored in: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/core2-64-poky-linux/xfce4-terminal/1.1.1/temp/log.do_configure.2652797
+ERROR: Task (/home/pokybuild/yocto-worker/auh-meta-oe/build/meta-openembedded/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_1.1.1.bb:do_configure) failed with exit code '1'
+
+--===============5492167414261802249==
 Content-Type: application/octet-stream
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment;
- filename="0001-xfce4-verve-plugin-upgrade-2.0.1-2.0.3.patch"
+ filename="0001-xfce4-terminal-upgrade-1.0.4-1.1.1.patch"
 
-RnJvbSAzNmE5ZThlNGVjMTYxMWM0N2RlNjliNzE5Nzk2OTVjYjRkZjlmODRhIE1vbiBTZXAgMTcg
+RnJvbSA5NjQwOGM5MzU4NzE4ZDQ1NTc2MTNhM2Q4NmNlODMxMjA1OTI1OTRhIE1vbiBTZXAgMTcg
 MDA6MDA6MDAgMjAwMQpGcm9tOiBVcGdyYWRlIEhlbHBlciA8YXVoQHlvY3RvcHJvamVjdC5vcmc+
-CkRhdGU6IFNhdCwgNCBOb3YgMjAyMyAwNzoxMToxMCArMDAwMApTdWJqZWN0OiBbUEFUQ0hdIHhm
-Y2U0LXZlcnZlLXBsdWdpbjogdXBncmFkZSAyLjAuMSAtPiAyLjAuMwoKLS0tCiAuLi4vdmVydmUv
-eGZjZTQtdmVydmUtcGx1Z2luXzIuMC4xLmJiICAgICAgICAgfCAgIDkgLS0KIC4uLi92ZXJ2ZS94
-ZmNlNC12ZXJ2ZS1wbHVnaW5fMi4wLjMuYmIgICAgICAgICB8IDEzOSArKysrKysrKysrKysrKysr
-KysKIDIgZmlsZXMgY2hhbmdlZCwgMTM5IGluc2VydGlvbnMoKyksIDkgZGVsZXRpb25zKC0pCiBk
-ZWxldGUgbW9kZSAxMDA2NDQgbWV0YS14ZmNlL3JlY2lwZXMtcGFuZWwtcGx1Z2lucy92ZXJ2ZS94
-ZmNlNC12ZXJ2ZS1wbHVnaW5fMi4wLjEuYmIKIGNyZWF0ZSBtb2RlIDEwMDY0NCBtZXRhLXhmY2Uv
-cmVjaXBlcy1wYW5lbC1wbHVnaW5zL3ZlcnZlL3hmY2U0LXZlcnZlLXBsdWdpbl8yLjAuMy5iYgoK
-ZGlmZiAtLWdpdCBhL21ldGEteGZjZS9yZWNpcGVzLXBhbmVsLXBsdWdpbnMvdmVydmUveGZjZTQt
-dmVydmUtcGx1Z2luXzIuMC4xLmJiIGIvbWV0YS14ZmNlL3JlY2lwZXMtcGFuZWwtcGx1Z2lucy92
-ZXJ2ZS94ZmNlNC12ZXJ2ZS1wbHVnaW5fMi4wLjEuYmIKZGVsZXRlZCBmaWxlIG1vZGUgMTAwNjQ0
-CmluZGV4IGVlZmUzMzIyYi4uMDAwMDAwMDAwCi0tLSBhL21ldGEteGZjZS9yZWNpcGVzLXBhbmVs
-LXBsdWdpbnMvdmVydmUveGZjZTQtdmVydmUtcGx1Z2luXzIuMC4xLmJiCisrKyAvZGV2L251bGwK
-QEAgLTEsOSArMCwwIEBACi1TVU1NQVJZID0gIlZlcnZlIHBhbmVsIHBsdWdpbiBpcyBhIGNvbWZv
-cnRhYmxlIGNvbW1hbmQgbGluZSBwbHVnaW4gZm9yIHRoZSBYZmNlIHBhbmVsIgotSE9NRVBBR0Ug
-PSAiaHR0cDovL2dvb2RpZXMueGZjZS5vcmcvcHJvamVjdHMvcGFuZWwtcGx1Z2lucy94ZmNlNC12
-ZXJ2ZS1wbHVnaW4iCi1MSUNFTlNFID0gIkdQTC0yLjAtb25seSIKLUxJQ19GSUxFU19DSEtTVU0g
-PSAiZmlsZTovL0NPUFlJTkc7bWQ1PTk0ZDU1ZDUxMmE5YmEzNmNhYTliN2RmMDc5YmFlMTlmIgot
-Ci1pbmhlcml0IHhmY2UtcGFuZWwtcGx1Z2luCi0KLVNSQ19VUklbc2hhMjU2c3VtXSA9ICJlYmRh
-NWU1ZWI2MmQ2ZTQyYWZkYzZmMTIxZDJmMWNiZDRkOWQzYzJiMTZhNWUzZWQ4MTkyYjFiMjI0Yjhm
-ODI1IgotREVQRU5EUyArPSAibGlicGNyZSIKZGlmZiAtLWdpdCBhL21ldGEteGZjZS9yZWNpcGVz
-LXBhbmVsLXBsdWdpbnMvdmVydmUveGZjZTQtdmVydmUtcGx1Z2luXzIuMC4zLmJiIGIvbWV0YS14
-ZmNlL3JlY2lwZXMtcGFuZWwtcGx1Z2lucy92ZXJ2ZS94ZmNlNC12ZXJ2ZS1wbHVnaW5fMi4wLjMu
-YmIKbmV3IGZpbGUgbW9kZSAxMDA2NDQKaW5kZXggMDAwMDAwMDAwLi5kNzBiZTEzNDIKLS0tIC9k
-ZXYvbnVsbAorKysgYi9tZXRhLXhmY2UvcmVjaXBlcy1wYW5lbC1wbHVnaW5zL3ZlcnZlL3hmY2U0
-LXZlcnZlLXBsdWdpbl8yLjAuMy5iYgpAQCAtMCwwICsxLDEzOSBAQAorIyBGSVhNRTogdGhlIExJ
-Q19GSUxFU19DSEtTVU0gdmFsdWVzIGhhdmUgYmVlbiB1cGRhdGVkIGJ5ICdkZXZ0b29sIHVwZ3Jh
-ZGUnLgorIyBUaGUgZm9sbG93aW5nIGlzIHRoZSBkaWZmZXJlbmNlIGJldHdlZW4gdGhlIG9sZCBh
-bmQgdGhlIG5ldyBsaWNlbnNlIHRleHQuCisjIFBsZWFzZSB1cGRhdGUgdGhlIExJQ0VOU0UgdmFs
-dWUgaWYgbmVlZGVkLCBhbmQgc3VtbWFyaXplIHRoZSBjaGFuZ2VzIGluCisjIHRoZSBjb21taXQg
-bWVzc2FnZSB2aWEgJ0xpY2Vuc2UtVXBkYXRlOicgdGFnLgorIyAoZXhhbXBsZTogJ0xpY2Vuc2Ut
-VXBkYXRlOiBjb3B5cmlnaHQgeWVhcnMgdXBkYXRlZC4nKQorIworIyBUaGUgY2hhbmdlczoKKyMK
-KyMgLS0tIENPUFlJTkcKKyMgKysrIENPUFlJTkcKKyMgQEAgLTEsMTIgKzEsMTIgQEAKKyMgLQkJ
-ICAgIEdOVSBHRU5FUkFMIFBVQkxJQyBMSUNFTlNFCisjIC0JCSAgICAgICBWZXJzaW9uIDIsIEp1
-bmUgMTk5MQorIyAtCisjIC0gQ29weXJpZ2h0IChDKSAxOTg5LCAxOTkxIEZyZWUgU29mdHdhcmUg
-Rm91bmRhdGlvbiwgSW5jLgorIyAtICAgICA1OSBUZW1wbGUgUGxhY2UsIFN1aXRlIDMzMCwgQm9z
-dG9uLCBNQSAgMDIxMTEtMTMwNyAgVVNBCisjICsgICAgICAgICAgICAgICAgICAgIEdOVSBHRU5F
-UkFMIFBVQkxJQyBMSUNFTlNFCisjICsgICAgICAgICAgICAgICAgICAgICAgIFZlcnNpb24gMiwg
-SnVuZSAxOTkxCisjICsKKyMgKyBDb3B5cmlnaHQgKEMpIDE5ODksIDE5OTEgRnJlZSBTb2Z0d2Fy
-ZSBGb3VuZGF0aW9uLCBJbmMuLAorIyArIDUxIEZyYW5rbGluIFN0cmVldCwgRmlmdGggRmxvb3Is
-IEJvc3RvbiwgTUEgMDIxMTAtMTMwMSBVU0EKKyMgICBFdmVyeW9uZSBpcyBwZXJtaXR0ZWQgdG8g
-Y29weSBhbmQgZGlzdHJpYnV0ZSB2ZXJiYXRpbSBjb3BpZXMKKyMgICBvZiB0aGlzIGxpY2Vuc2Ug
-ZG9jdW1lbnQsIGJ1dCBjaGFuZ2luZyBpdCBpcyBub3QgYWxsb3dlZC4KKyMgIAorIyAtCQkJICAg
-IFByZWFtYmxlCisjICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgUHJlYW1ibGUKKyMgIAor
-IyAgICBUaGUgbGljZW5zZXMgZm9yIG1vc3Qgc29mdHdhcmUgYXJlIGRlc2lnbmVkIHRvIHRha2Ug
-YXdheSB5b3VyCisjICBmcmVlZG9tIHRvIHNoYXJlIGFuZCBjaGFuZ2UgaXQuICBCeSBjb250cmFz
-dCwgdGhlIEdOVSBHZW5lcmFsIFB1YmxpYworIyBAQCAtMTUsNyArMTUsNyBAQAorIyAgR2VuZXJh
-bCBQdWJsaWMgTGljZW5zZSBhcHBsaWVzIHRvIG1vc3Qgb2YgdGhlIEZyZWUgU29mdHdhcmUKKyMg
-IEZvdW5kYXRpb24ncyBzb2Z0d2FyZSBhbmQgdG8gYW55IG90aGVyIHByb2dyYW0gd2hvc2UgYXV0
-aG9ycyBjb21taXQgdG8KKyMgIHVzaW5nIGl0LiAgKFNvbWUgb3RoZXIgRnJlZSBTb2Z0d2FyZSBG
-b3VuZGF0aW9uIHNvZnR3YXJlIGlzIGNvdmVyZWQgYnkKKyMgLXRoZSBHTlUgTGlicmFyeSBHZW5l
-cmFsIFB1YmxpYyBMaWNlbnNlIGluc3RlYWQuKSAgWW91IGNhbiBhcHBseSBpdCB0bworIyArdGhl
-IEdOVSBMZXNzZXIgR2VuZXJhbCBQdWJsaWMgTGljZW5zZSBpbnN0ZWFkLikgIFlvdSBjYW4gYXBw
-bHkgaXQgdG8KKyMgIHlvdXIgcHJvZ3JhbXMsIHRvby4KKyMgIAorIyAgICBXaGVuIHdlIHNwZWFr
-IG9mIGZyZWUgc29mdHdhcmUsIHdlIGFyZSByZWZlcnJpbmcgdG8gZnJlZWRvbSwgbm90CisjIEBA
-IC01NSw4ICs1NSw4IEBACisjICAKKyMgICAgVGhlIHByZWNpc2UgdGVybXMgYW5kIGNvbmRpdGlv
-bnMgZm9yIGNvcHlpbmcsIGRpc3RyaWJ1dGlvbiBhbmQKKyMgIG1vZGlmaWNhdGlvbiBmb2xsb3cu
-CisjIC0MCisjIC0JCSAgICBHTlUgR0VORVJBTCBQVUJMSUMgTElDRU5TRQorIyArCisjICsgICAg
-ICAgICAgICAgICAgICAgIEdOVSBHRU5FUkFMIFBVQkxJQyBMSUNFTlNFCisjICAgICBURVJNUyBB
-TkQgQ09ORElUSU9OUyBGT1IgQ09QWUlORywgRElTVFJJQlVUSU9OIEFORCBNT0RJRklDQVRJT04K
-KyMgIAorIyAgICAwLiBUaGlzIExpY2Vuc2UgYXBwbGllcyB0byBhbnkgcHJvZ3JhbSBvciBvdGhl
-ciB3b3JrIHdoaWNoIGNvbnRhaW5zCisjIEBAIC0xMTAsNyArMTEwLDcgQEAKKyMgICAgICBMaWNl
-bnNlLiAgKEV4Y2VwdGlvbjogaWYgdGhlIFByb2dyYW0gaXRzZWxmIGlzIGludGVyYWN0aXZlIGJ1
-dAorIyAgICAgIGRvZXMgbm90IG5vcm1hbGx5IHByaW50IHN1Y2ggYW4gYW5ub3VuY2VtZW50LCB5
-b3VyIHdvcmsgYmFzZWQgb24KKyMgICAgICB0aGUgUHJvZ3JhbSBpcyBub3QgcmVxdWlyZWQgdG8g
-cHJpbnQgYW4gYW5ub3VuY2VtZW50LikKKyMgLQwKKyMgKworIyAgVGhlc2UgcmVxdWlyZW1lbnRz
-IGFwcGx5IHRvIHRoZSBtb2RpZmllZCB3b3JrIGFzIGEgd2hvbGUuICBJZgorIyAgaWRlbnRpZmlh
-YmxlIHNlY3Rpb25zIG9mIHRoYXQgd29yayBhcmUgbm90IGRlcml2ZWQgZnJvbSB0aGUgUHJvZ3Jh
-bSwKKyMgIGFuZCBjYW4gYmUgcmVhc29uYWJseSBjb25zaWRlcmVkIGluZGVwZW5kZW50IGFuZCBz
-ZXBhcmF0ZSB3b3JrcyBpbgorIyBAQCAtMTY4LDcgKzE2OCw3IEBACisjICBhY2Nlc3MgdG8gY29w
-eSB0aGUgc291cmNlIGNvZGUgZnJvbSB0aGUgc2FtZSBwbGFjZSBjb3VudHMgYXMKKyMgIGRpc3Ry
-aWJ1dGlvbiBvZiB0aGUgc291cmNlIGNvZGUsIGV2ZW4gdGhvdWdoIHRoaXJkIHBhcnRpZXMgYXJl
-IG5vdAorIyAgY29tcGVsbGVkIHRvIGNvcHkgdGhlIHNvdXJjZSBhbG9uZyB3aXRoIHRoZSBvYmpl
-Y3QgY29kZS4KKyMgLQwKKyMgKworIyAgICA0LiBZb3UgbWF5IG5vdCBjb3B5LCBtb2RpZnksIHN1
-YmxpY2Vuc2UsIG9yIGRpc3RyaWJ1dGUgdGhlIFByb2dyYW0KKyMgIGV4Y2VwdCBhcyBleHByZXNz
-bHkgcHJvdmlkZWQgdW5kZXIgdGhpcyBMaWNlbnNlLiAgQW55IGF0dGVtcHQKKyMgIG90aGVyd2lz
-ZSB0byBjb3B5LCBtb2RpZnksIHN1YmxpY2Vuc2Ugb3IgZGlzdHJpYnV0ZSB0aGUgUHJvZ3JhbSBp
-cworIyBAQCAtMjI1LDcgKzIyNSw3IEBACisjICAKKyMgIFRoaXMgc2VjdGlvbiBpcyBpbnRlbmRl
-ZCB0byBtYWtlIHRob3JvdWdobHkgY2xlYXIgd2hhdCBpcyBiZWxpZXZlZCB0bworIyAgYmUgYSBj
-b25zZXF1ZW5jZSBvZiB0aGUgcmVzdCBvZiB0aGlzIExpY2Vuc2UuCisjIC0MCisjICsKKyMgICAg
-OC4gSWYgdGhlIGRpc3RyaWJ1dGlvbiBhbmQvb3IgdXNlIG9mIHRoZSBQcm9ncmFtIGlzIHJlc3Ry
-aWN0ZWQgaW4KKyMgIGNlcnRhaW4gY291bnRyaWVzIGVpdGhlciBieSBwYXRlbnRzIG9yIGJ5IGNv
-cHlyaWdodGVkIGludGVyZmFjZXMsIHRoZQorIyAgb3JpZ2luYWwgY29weXJpZ2h0IGhvbGRlciB3
-aG8gcGxhY2VzIHRoZSBQcm9ncmFtIHVuZGVyIHRoaXMgTGljZW5zZQorIyBAQCAtMjU1LDcgKzI1
-NSw3IEBACisjICBvZiBwcmVzZXJ2aW5nIHRoZSBmcmVlIHN0YXR1cyBvZiBhbGwgZGVyaXZhdGl2
-ZXMgb2Ygb3VyIGZyZWUgc29mdHdhcmUgYW5kCisjICBvZiBwcm9tb3RpbmcgdGhlIHNoYXJpbmcg
-YW5kIHJldXNlIG9mIHNvZnR3YXJlIGdlbmVyYWxseS4KKyMgIAorIyAtCQkJICAgIE5PIFdBUlJB
-TlRZCisjICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgTk8gV0FSUkFOVFkKKyMgIAorIyAg
-ICAxMS4gQkVDQVVTRSBUSEUgUFJPR1JBTSBJUyBMSUNFTlNFRCBGUkVFIE9GIENIQVJHRSwgVEhF
-UkUgSVMgTk8gV0FSUkFOVFkKKyMgIEZPUiBUSEUgUFJPR1JBTSwgVE8gVEhFIEVYVEVOVCBQRVJN
-SVRURUQgQlkgQVBQTElDQUJMRSBMQVcuICBFWENFUFQgV0hFTgorIyBAQCAtMjc3LDkgKzI3Nyw5
-IEBACisjICBQUk9HUkFNUyksIEVWRU4gSUYgU1VDSCBIT0xERVIgT1IgT1RIRVIgUEFSVFkgSEFT
-IEJFRU4gQURWSVNFRCBPRiBUSEUKKyMgIFBPU1NJQklMSVRZIE9GIFNVQ0ggREFNQUdFUy4KKyMg
-IAorIyAtCQkgICAgIEVORCBPRiBURVJNUyBBTkQgQ09ORElUSU9OUworIyAtDAorIyAtCSAgICBI
-b3cgdG8gQXBwbHkgVGhlc2UgVGVybXMgdG8gWW91ciBOZXcgUHJvZ3JhbXMKKyMgKyAgICAgICAg
-ICAgICAgICAgICAgIEVORCBPRiBURVJNUyBBTkQgQ09ORElUSU9OUworIyArCisjICsgICAgICAg
-ICAgICBIb3cgdG8gQXBwbHkgVGhlc2UgVGVybXMgdG8gWW91ciBOZXcgUHJvZ3JhbXMKKyMgIAor
-IyAgICBJZiB5b3UgZGV2ZWxvcCBhIG5ldyBwcm9ncmFtLCBhbmQgeW91IHdhbnQgaXQgdG8gYmUg
-b2YgdGhlIGdyZWF0ZXN0CisjICBwb3NzaWJsZSB1c2UgdG8gdGhlIHB1YmxpYywgdGhlIGJlc3Qg
-d2F5IHRvIGFjaGlldmUgdGhpcyBpcyB0byBtYWtlIGl0CisjIEBAIC0zMDMsMTcgKzMwMywxNiBA
-QAorIyAgICAgIE1FUkNIQU5UQUJJTElUWSBvciBGSVRORVNTIEZPUiBBIFBBUlRJQ1VMQVIgUFVS
-UE9TRS4gIFNlZSB0aGUKKyMgICAgICBHTlUgR2VuZXJhbCBQdWJsaWMgTGljZW5zZSBmb3IgbW9y
-ZSBkZXRhaWxzLgorIyAgCisjIC0gICAgWW91IHNob3VsZCBoYXZlIHJlY2VpdmVkIGEgY29weSBv
-ZiB0aGUgR05VIEdlbmVyYWwgUHVibGljIExpY2Vuc2UKKyMgLSAgICBhbG9uZyB3aXRoIHRoaXMg
-cHJvZ3JhbTsgaWYgbm90LCB3cml0ZSB0byB0aGUgRnJlZSBTb2Z0d2FyZQorIyAtICAgIEZvdW5k
-YXRpb24sIEluYy4sIDU5IFRlbXBsZSBQbGFjZSwgU3VpdGUgMzMwLCBCb3N0b24sIE1BICAwMjEx
-MS0xMzA3ICBVU0EKKyMgLQorIyArICAgIFlvdSBzaG91bGQgaGF2ZSByZWNlaXZlZCBhIGNvcHkg
-b2YgdGhlIEdOVSBHZW5lcmFsIFB1YmxpYyBMaWNlbnNlIGFsb25nCisjICsgICAgd2l0aCB0aGlz
-IHByb2dyYW07IGlmIG5vdCwgd3JpdGUgdG8gdGhlIEZyZWUgU29mdHdhcmUgRm91bmRhdGlvbiwg
-SW5jLiwKKyMgKyAgICA1MSBGcmFua2xpbiBTdHJlZXQsIEZpZnRoIEZsb29yLCBCb3N0b24sIE1B
-IDAyMTEwLTEzMDEgVVNBLgorIyAgCisjICBBbHNvIGFkZCBpbmZvcm1hdGlvbiBvbiBob3cgdG8g
-Y29udGFjdCB5b3UgYnkgZWxlY3Ryb25pYyBhbmQgcGFwZXIgbWFpbC4KKyMgIAorIyAgSWYgdGhl
-IHByb2dyYW0gaXMgaW50ZXJhY3RpdmUsIG1ha2UgaXQgb3V0cHV0IGEgc2hvcnQgbm90aWNlIGxp
-a2UgdGhpcworIyAgd2hlbiBpdCBzdGFydHMgaW4gYW4gaW50ZXJhY3RpdmUgbW9kZToKKyMgIAor
-IyAtICAgIEdub21vdmlzaW9uIHZlcnNpb24gNjksIENvcHlyaWdodCAoQykgeWVhciAgbmFtZSBv
-ZiBhdXRob3IKKyMgKyAgICBHbm9tb3Zpc2lvbiB2ZXJzaW9uIDY5LCBDb3B5cmlnaHQgKEMpIHll
-YXIgbmFtZSBvZiBhdXRob3IKKyMgICAgICBHbm9tb3Zpc2lvbiBjb21lcyB3aXRoIEFCU09MVVRF
-TFkgTk8gV0FSUkFOVFk7IGZvciBkZXRhaWxzIHR5cGUgYHNob3cgdycuCisjICAgICAgVGhpcyBp
-cyBmcmVlIHNvZnR3YXJlLCBhbmQgeW91IGFyZSB3ZWxjb21lIHRvIHJlZGlzdHJpYnV0ZSBpdAor
-IyAgICAgIHVuZGVyIGNlcnRhaW4gY29uZGl0aW9uczsgdHlwZSBgc2hvdyBjJyBmb3IgZGV0YWls
-cy4KKyMgQEAgLTMzNiw1ICszMzUsNSBAQAorIyAgVGhpcyBHZW5lcmFsIFB1YmxpYyBMaWNlbnNl
-IGRvZXMgbm90IHBlcm1pdCBpbmNvcnBvcmF0aW5nIHlvdXIgcHJvZ3JhbSBpbnRvCisjICBwcm9w
-cmlldGFyeSBwcm9ncmFtcy4gIElmIHlvdXIgcHJvZ3JhbSBpcyBhIHN1YnJvdXRpbmUgbGlicmFy
-eSwgeW91IG1heQorIyAgY29uc2lkZXIgaXQgbW9yZSB1c2VmdWwgdG8gcGVybWl0IGxpbmtpbmcg
-cHJvcHJpZXRhcnkgYXBwbGljYXRpb25zIHdpdGggdGhlCisjIC1saWJyYXJ5LiAgSWYgdGhpcyBp
-cyB3aGF0IHlvdSB3YW50IHRvIGRvLCB1c2UgdGhlIEdOVSBMaWJyYXJ5IEdlbmVyYWwKKyMgK2xp
-YnJhcnkuICBJZiB0aGlzIGlzIHdoYXQgeW91IHdhbnQgdG8gZG8sIHVzZSB0aGUgR05VIExlc3Nl
-ciBHZW5lcmFsCisjICBQdWJsaWMgTGljZW5zZSBpbnN0ZWFkIG9mIHRoaXMgTGljZW5zZS4KKyMg
-CisjCisKK1NVTU1BUlkgPSAiVmVydmUgcGFuZWwgcGx1Z2luIGlzIGEgY29tZm9ydGFibGUgY29t
-bWFuZCBsaW5lIHBsdWdpbiBmb3IgdGhlIFhmY2UgcGFuZWwiCitIT01FUEFHRSA9ICJodHRwOi8v
-Z29vZGllcy54ZmNlLm9yZy9wcm9qZWN0cy9wYW5lbC1wbHVnaW5zL3hmY2U0LXZlcnZlLXBsdWdp
-biIKK0xJQ0VOU0UgPSAiR1BMLTIuMC1vbmx5IgorTElDX0ZJTEVTX0NIS1NVTSA9ICJmaWxlOi8v
-Q09QWUlORzttZDU9YjIzNGVlNGQ2OWY1ZmNlNDQ4NmE4MGZkYWY0YTQyNjMiCisKK2luaGVyaXQg
-eGZjZS1wYW5lbC1wbHVnaW4KKworU1JDX1VSSVtzaGEyNTZzdW1dID0gImUxYmYxMjFmMWJmOWNm
-MmExOTliZjVjMGYzYWE4MDJmNTAzZGY5YmVhNTA3MjQ3NDFlN2E5MmZlNmQ5ZmUwOWUiCitERVBF
-TkRTICs9ICJsaWJwY3JlIgotLSAKMi4zOS4yCgo=
+CkRhdGU6IFNhdCwgNCBOb3YgMjAyMyAwNzowMjo1MiArMDAwMApTdWJqZWN0OiBbUEFUQ0hdIHhm
+Y2U0LXRlcm1pbmFsOiB1cGdyYWRlIDEuMC40IC0+IDEuMS4xCgotLS0KIC4uLi97eGZjZTQtdGVy
+bWluYWxfMS4wLjQuYmIgPT4geGZjZTQtdGVybWluYWxfMS4xLjEuYmJ9ICAgICAgICB8IDIgKy0K
+IDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQogcmVuYW1lIG1l
+dGEteGZjZS9yZWNpcGVzLWFwcHMveGZjZTQtdGVybWluYWwve3hmY2U0LXRlcm1pbmFsXzEuMC40
+LmJiID0+IHhmY2U0LXRlcm1pbmFsXzEuMS4xLmJifSAoODAlKQoKZGlmZiAtLWdpdCBhL21ldGEt
+eGZjZS9yZWNpcGVzLWFwcHMveGZjZTQtdGVybWluYWwveGZjZTQtdGVybWluYWxfMS4wLjQuYmIg
+Yi9tZXRhLXhmY2UvcmVjaXBlcy1hcHBzL3hmY2U0LXRlcm1pbmFsL3hmY2U0LXRlcm1pbmFsXzEu
+MS4xLmJiCnNpbWlsYXJpdHkgaW5kZXggODAlCnJlbmFtZSBmcm9tIG1ldGEteGZjZS9yZWNpcGVz
+LWFwcHMveGZjZTQtdGVybWluYWwveGZjZTQtdGVybWluYWxfMS4wLjQuYmIKcmVuYW1lIHRvIG1l
+dGEteGZjZS9yZWNpcGVzLWFwcHMveGZjZTQtdGVybWluYWwveGZjZTQtdGVybWluYWxfMS4xLjEu
+YmIKaW5kZXggZWRiMGM2MTRlLi5kNmQyZDRhZDUgMTAwNjQ0Ci0tLSBhL21ldGEteGZjZS9yZWNp
+cGVzLWFwcHMveGZjZTQtdGVybWluYWwveGZjZTQtdGVybWluYWxfMS4wLjQuYmIKKysrIGIvbWV0
+YS14ZmNlL3JlY2lwZXMtYXBwcy94ZmNlNC10ZXJtaW5hbC94ZmNlNC10ZXJtaW5hbF8xLjEuMS5i
+YgpAQCAtMTAsNiArMTAsNiBAQCBGSUxFUzoke1BOfSArPSAiIFwKICAgICAke2RhdGFkaXJ9L2du
+b21lLWNvbnRyb2wtY2VudGVyIFwKICIKIAotU1JDX1VSSVtzaGEyNTZzdW1dID0gIjc4ZTU1OTU3
+YWY3YzZmYzFmMjgzZTkwYmUzMzk4ODY2MTU5M2E0ZGE5ODM4M2RhMWIwYjU0ZmRmNjU1NGJhZjQi
+CitTUkNfVVJJW3NoYTI1NnN1bV0gPSAiNWFiNWM5YjQ5YzAwYmUyOWYwYmU0ZWVlNWNjZmE1MDcz
+YjE2ZjI0NTYxODUyNzAyNjVhOTMyNDU0OTA4MGFhNiIKIAogUlJFQ09NTUVORFM6JHtQTn0gKz0g
+InZ0ZS1wcm9tcHQiCi0tIAoyLjM5LjIKCg==
 
---===============1491661641590178033==--
+--===============5492167414261802249==--
 
