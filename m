@@ -1,243 +1,91 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A51B6C4332F
-	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 15:58:05 +0000 (UTC)
-Received: from mailout02.t-online.de (mailout02.t-online.de [194.25.134.17])
- by mx.groups.io with SMTP id smtpd.web11.12135.1699113485008577378
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 78864C4167D
+	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 20:13:37 +0000 (UTC)
+Received: from mail-oa1-f49.google.com (mail-oa1-f49.google.com [209.85.160.49])
+ by mx.groups.io with SMTP id smtpd.web11.17256.1699128810949470738
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 04 Nov 2023 08:58:05 -0700
+ Sat, 04 Nov 2023 13:13:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.17, mailfrom: f_l_k@t-online.de)
-Received: from fwd74.aul.t-online.de (fwd74.aul.t-online.de [10.223.144.100])
-	by mailout02.t-online.de (Postfix) with SMTP id CEB456947
-	for <openembedded-devel@lists.openembedded.org>; Sat,  4 Nov 2023 16:58:02 +0100 (CET)
-Received: from [192.168.178.62] ([84.163.35.165]) by fwd74.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1qzJ29-1Y6am00; Sat, 4 Nov 2023 16:58:01 +0100
-Date: Sat, 04 Nov 2023 16:58:24 +0100
-From: Markus Volk <f_l_k@t-online.de>
-Subject: Re: [oe] [meta-multimedia][PATCHv2] openal-soft: Upgrade 1.20.1 ->
- 1.23.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Mftluuda;
+ spf=pass (domain: gmail.com, ip: 209.85.160.49, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f49.google.com with SMTP id 586e51a60fabf-1dd71c0a41fso1969616fac.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 13:13:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1699128810; x=1699733610; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=bwDhSpE4MKm5ndU8B0MUWc9VIJCoRzarZXSe5Q3iLLg=;
+        b=MftluudaDhaRvAtBBzyOyRUsoLIeIKdukDja8eKh7nkcne8Q7SDZBtc2yMj9XMO4M+
+         uDj9TlOrkV4HYoyXRgwaEyw1oe8nbRgIt6WZDjNjOS24FTIUonakL1aEoQ6FTHELLJF6
+         VBOExgWoGhCPJdVZ7QG3V5qOtZ4bWbGm/5/XMzTrAKzo64MnFlljlWjN6MYrWqxnD1wy
+         KLe8VglUOhZomMPrzKm5YG55eHvrkG07YGGKYw0gqkkbCTPxneMkGTtv//mImN9O1Cgi
+         Qx5N8p6N6xCrVWQ8kyWa4cQ+1sJmFUrq4USFGEcTFYYfydumzdj/y+93FbCJ+juAYzqF
+         hp1Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1699128810; x=1699733610;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=bwDhSpE4MKm5ndU8B0MUWc9VIJCoRzarZXSe5Q3iLLg=;
+        b=FthvCRoE95zKYsSwBQ+fuOXdva0oH8wmeh4YDw0CjhY0BrJIgLUzygiAi0+6ETpAEW
+         LAxPc8xHEGYamAH6oK80JG4BJLAOpXb0oML2ZqVtvxkfG2X2PcUqa8ZXye20fn+2wrq4
+         AKUL+ZmlGAleNyxFXemvOwmTsYHs4u0L+Q5d7KrXRBdqA2/9xBxM08arQ/9dM0TnuOCI
+         X/AN/x1gmq+mA8wFSoMoyzHfDdWxcSEvb1mda2lU1QFBvIHmObNY2HOsP3b4rdSm81R+
+         HWXxN56YFpuFnnROcwR6gzda8pK+TjsSZ8zIEz++HasZOMcz0MahJoKLVGwkwTex4X6M
+         bXlg==
+X-Gm-Message-State: AOJu0YxcEbWJYNP+TgBr7R94leO35uWELkAACsHtRWh0eR7FbJQDnpkI
+	+O4zTVMYlrBwW62/EURHyPO39NrvRUDkHg==
+X-Google-Smtp-Source: AGHT+IFHyF5JISD8w/oMzjv4paJWxnNiaRsKaq88oru6MWPorx4mC/LzXxifmfwhoVM1uHg31guoGQ==
+X-Received: by 2002:a05:6871:2b04:b0:1e9:beae:947d with SMTP id dr4-20020a0568712b0400b001e9beae947dmr30676741oac.19.1699128809842;
+        Sat, 04 Nov 2023 13:13:29 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9100:2cb0::46eb])
+        by smtp.gmail.com with ESMTPSA id l4-20020a63ba44000000b0059b782e8541sm2782446pgu.28.2023.11.04.13.13.29
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 04 Nov 2023 13:13:29 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-Id: <CDWL3S.0449NE6UN53Q@t-online.de>
-In-Reply-To: <179476A6C0B9A837.26468@lists.openembedded.org>
-References: <179476A6C0B9A837.26468@lists.openembedded.org>
-X-Mailer: geary/44.1
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] xmlsec1: Fix the key name in verify2 test
+Date: Sat,  4 Nov 2023 13:13:27 -0700
+Message-ID: <20231104201327.3539044-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.42.1
 MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-3jS4ifsigxuTpIVhE/Uu"
-X-TOI-EXPURGATEID: 150726::1699113481-4D288D65-B4ABDCA2/0/0 CLEAN NORMAL
-X-TOI-MSGID: 866f672b-9feb-48ed-8f5f-f75e48687ebb
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 15:58:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106376
+ <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 20:13:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106377
 
---=-3jS4ifsigxuTpIVhE/Uu
-Content-Type: text/plain; charset=us-ascii; format=flowed
+This is a typo when compared to examples/Makefile check target
+Fixes
+Failed ptests:
+{'xmlsec1': ['verify-keys-manager']}
 
-v2 removes unneeded dependencies for examples
-
-On Sat, Nov 4 2023 at 04:57:16 PM +01:00:00, Markus Volk 
-<f_l_k@t-online.de> wrote:
-> Signed-off-by: Markus Volk <f_l_k@t-online.de 
-> <mailto:f_l_k@t-online.de>>
-> ---
->  .../openal/openal-soft_1.20.1.bb              | 24 
-> -------------------
->  .../openal/openal-soft_1.23.1.bb              | 23 ++++++++++++++++++
->  2 files changed, 23 insertions(+), 24 deletions(-)
->  delete mode 100644 
-> meta-multimedia/recipes-multimedia/openal/openal-soft_1.20.1.bb
->  create mode 100644 
-> meta-multimedia/recipes-multimedia/openal/openal-soft_1.23.1.bb
-> 
-> diff --git 
-> a/meta-multimedia/recipes-multimedia/openal/openal-soft_1.20.1.bb 
-> b/meta-multimedia/recipes-multimedia/openal/openal-soft_1.20.1.bb
-> deleted file mode 100644
-> index ad7000572..000000000
-> --- a/meta-multimedia/recipes-multimedia/openal/openal-soft_1.20.1.bb
-> +++ /dev/null
-> @@ -1,24 +0,0 @@
-> -SUMMARY = "OpenAL is a cross-platform 3D audio API"
-> -HOMEPAGE = "<http://kcat.strangesoft.net/openal.html>"
-> -LICENSE = "GPL-2.0-only"
-> -LIC_FILES_CHKSUM = 
-> "file://COPYING;md5=0f159f19f9377e1895fbb477d5a7953e" 
-> <file://copying;md5=0f159f19f9377e1895fbb477d5a7953e/>
-> -
-> -inherit cmake pkgconfig
-> -
-> -SRCREV = "f5e0eef34db3a3ab94b61a2f99f84f078ba947e7"
-> -SRC_URI = 
-> "git://github.com/kcat/openal-soft;branch=master;protocol=https \
-> -           file://0001-Use-BUILD_CC-to-compile-native-tools.patch 
-> <file://0001-use-build_cc-to-compile-native-tools.patch/> \
-> -           file://0002-makehrtf-Disable-Wstringop-truncation.patch 
-> <file://0002-makehrtf-disable-wstringop-truncation.patch/> \
-> -           "
-> -
-> -S = "${WORKDIR}/git"
-> -
-> -PACKAGECONFIG ?= "${@bb.utils.filter 
-> <mailto:${@bb.utils.filter>('DISTRO_FEATURES', 'alsa pulseaudio', d)}"
-> -PACKAGECONFIG[alsa] = "-DALSA=TRUE, -DALSA=FALSE, alsa-lib"
-> -PACKAGECONFIG[pulseaudio] = "-DPULSEAUDIO=TRUE, -DPULSEAUDIO=FALSE, 
-> pulseaudio"
-> -# currently doesn't work with libav-9
-> -# PKG_CHECK_MODULES(FFMPEG libavcodec>=53.61.100 
-> libavformat>=53.32.100 libavutil>=51.35.100)
-> -# but alffmpeg.c:418:44: error: 'AV_CH_LAYOUT_MONO' undeclared 
-> (first use in this function)
-> -PACKAGECONFIG[examples] = "-DEXAMPLES=TRUE, -DEXAMPLES=FALSE, libav"
-> -
-> -FILES:${PN} += "${datadir}/openal"
-> diff --git 
-> a/meta-multimedia/recipes-multimedia/openal/openal-soft_1.23.1.bb 
-> b/meta-multimedia/recipes-multimedia/openal/openal-soft_1.23.1.bb
-> new file mode 100644
-> index 000000000..83745703f
-> --- /dev/null
-> +++ b/meta-multimedia/recipes-multimedia/openal/openal-soft_1.23.1.bb
-> @@ -0,0 +1,23 @@
-> +SUMMARY = "OpenAL is a cross-platform 3D audio API"
-> +HOMEPAGE = "<http://kcat.strangesoft.net/openal.html>"
-> +LICENSE = "GPL-2.0-only"
-> +LIC_FILES_CHKSUM = 
-> "file://COPYING;md5=0f159f19f9377e1895fbb477d5a7953e" 
-> <file://copying;md5=0f159f19f9377e1895fbb477d5a7953e/>
-> +
-> +inherit cmake pkgconfig
-> +
-> +DEPENDS = "zlib libsndfile1"
-> +
-> +SRCREV = "d3875f333fb6abe2f39d82caca329414871ae53b"
-> +SRC_URI = 
-> "git://github.com/kcat/openal-soft.git;protocol=https;branch=master"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +PACKAGECONFIG ?= "${@bb.utils.filter 
-> <mailto:${@bb.utils.filter>('DISTRO_FEATURES', 'alsa pipewire 
-> pulseaudio', d)}"
-> +PACKAGECONFIG[alsa] = 
-> "-DALSOFT_BACKEND_ALSA=ON,-DALSOFT_BACKEND_ALSA=OFF,alsa-lib"
-> +PACKAGECONFIG[oss] = 
-> "-DALSOFT_BACKEND_OSS=ON,-DALSOFT_BACKEND_OSS=OFF"
-> +PACKAGECONFIG[pulseaudio] = 
-> "-DALSOFT_BACKEND_PULSEAUDIO=ON,-DALSOFT_BACKEND_PULSEAUDIO=OFF,pulseaudio"
-> +PACKAGECONFIG[pipewire] = 
-> "-DALSOFT_BACKEND_PIPEWIRE=ON,-DALSOFT_BACKEND_PIPEWIRE=OFF,pipewire"
-> +PACKAGECONFIG[examples] = 
-> "-DALSOFT_EXAMPLES=ON,-DALSOFT_EXAMPLES=OFF"
-> +PACKAGECONFIG[sdl2] = 
-> "-DALSOFT_BACKEND_SDL2=ON,-DALSOFT_BACKEND_SDL2=OFF,libsdl2 ffmpeg"
-> +
-> +FILES:${PN} += "${datadir}"
-> --
-> 2.42.0
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#106375): 
-> <https://lists.openembedded.org/g/openembedded-devel/message/106375>
-> Mute This Topic: <https://lists.openembedded.org/mt/102385826/3618223>
-> Group Owner: openembedded-devel+owner@lists.openembedded.org 
-> <mailto:openembedded-devel+owner@lists.openembedded.org>
-> Unsubscribe: 
-> <https://lists.openembedded.org/g/openembedded-devel/unsub> 
-> [f_l_k@t-online.de <mailto:f_l_k@t-online.de>]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
-
-
---=-3jS4ifsigxuTpIVhE/Uu
-Content-Type: text/html; charset=us-ascii
-
-<div id="geary-body" dir="auto"><div>v2 removes unneeded dependencies for examples</div></div><div id="geary-quote" dir="auto"><br>On Sat, Nov 4 2023 at 04:57:16 PM +01:00:00, Markus Volk &lt;f_l_k@t-online.de&gt; wrote:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">Signed-off-by: Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../openal/openal-soft_1.20.1.bb              | 24 -------------------
- .../openal/openal-soft_1.23.1.bb              | 23 ++++++++++++++++++
- 2 files changed, 23 insertions(+), 24 deletions(-)
- delete mode 100644 meta-multimedia/recipes-multimedia/openal/openal-soft_1.20.1.bb
- create mode 100644 meta-multimedia/recipes-multimedia/openal/openal-soft_1.23.1.bb
+ meta-oe/recipes-support/xmlsec1/xmlsec1/run-ptest | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/openal/openal-soft_1.20.1.bb b/meta-multimedia/recipes-multimedia/openal/openal-soft_1.20.1.bb
-deleted file mode 100644
-index ad7000572..000000000
---- a/meta-multimedia/recipes-multimedia/openal/openal-soft_1.20.1.bb
-+++ /dev/null
-@@ -1,24 +0,0 @@
--SUMMARY = "OpenAL is a cross-platform 3D audio API"
--HOMEPAGE = "<a href="http://kcat.strangesoft.net/openal.html">http://kcat.strangesoft.net/openal.html</a>"
--LICENSE = "GPL-2.0-only"
--LIC_FILES_CHKSUM = "<a href="file://COPYING;md5=0f159f19f9377e1895fbb477d5a7953e" "="">file://COPYING;md5=0f159f19f9377e1895fbb477d5a7953e"</a>
--
--inherit cmake pkgconfig
--
--SRCREV = "f5e0eef34db3a3ab94b61a2f99f84f078ba947e7"
--SRC_URI = "git://github.com/kcat/openal-soft;branch=master;protocol=https \
--           <a href="file://0001-Use-BUILD_CC-to-compile-native-tools.patch">file://0001-Use-BUILD_CC-to-compile-native-tools.patch</a> \
--           <a href="file://0002-makehrtf-Disable-Wstringop-truncation.patch">file://0002-makehrtf-Disable-Wstringop-truncation.patch</a> \
--           "
--
--S = "${WORKDIR}/git"
--
--PACKAGECONFIG ?= "<a href="mailto:${@bb.utils.filter">${@bb.utils.filter</a>('DISTRO_FEATURES', 'alsa pulseaudio', d)}"
--PACKAGECONFIG[alsa] = "-DALSA=TRUE, -DALSA=FALSE, alsa-lib"
--PACKAGECONFIG[pulseaudio] = "-DPULSEAUDIO=TRUE, -DPULSEAUDIO=FALSE, pulseaudio"
--# currently doesn't work with libav-9
--# PKG_CHECK_MODULES(FFMPEG libavcodec&gt;=53.61.100 libavformat&gt;=53.32.100 libavutil&gt;=51.35.100)
--# but alffmpeg.c:418:44: error: 'AV_CH_LAYOUT_MONO' undeclared (first use in this function)
--PACKAGECONFIG[examples] = "-DEXAMPLES=TRUE, -DEXAMPLES=FALSE, libav"
--
--FILES:${PN} += "${datadir}/openal"
-diff --git a/meta-multimedia/recipes-multimedia/openal/openal-soft_1.23.1.bb b/meta-multimedia/recipes-multimedia/openal/openal-soft_1.23.1.bb
-new file mode 100644
-index 000000000..83745703f
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/openal/openal-soft_1.23.1.bb
-@@ -0,0 +1,23 @@
-+SUMMARY = "OpenAL is a cross-platform 3D audio API"
-+HOMEPAGE = "<a href="http://kcat.strangesoft.net/openal.html">http://kcat.strangesoft.net/openal.html</a>"
-+LICENSE = "GPL-2.0-only"
-+LIC_FILES_CHKSUM = "<a href="file://COPYING;md5=0f159f19f9377e1895fbb477d5a7953e" "="">file://COPYING;md5=0f159f19f9377e1895fbb477d5a7953e"</a>
-+
-+inherit cmake pkgconfig
-+
-+DEPENDS = "zlib libsndfile1"
-+
-+SRCREV = "d3875f333fb6abe2f39d82caca329414871ae53b"
-+SRC_URI = "git://github.com/kcat/openal-soft.git;protocol=https;branch=master"
-+
-+S = "${WORKDIR}/git"
-+
-+PACKAGECONFIG ?= "<a href="mailto:${@bb.utils.filter">${@bb.utils.filter</a>('DISTRO_FEATURES', 'alsa pipewire pulseaudio', d)}"
-+PACKAGECONFIG[alsa] = "-DALSOFT_BACKEND_ALSA=ON,-DALSOFT_BACKEND_ALSA=OFF,alsa-lib"
-+PACKAGECONFIG[oss] = "-DALSOFT_BACKEND_OSS=ON,-DALSOFT_BACKEND_OSS=OFF"
-+PACKAGECONFIG[pulseaudio] = "-DALSOFT_BACKEND_PULSEAUDIO=ON,-DALSOFT_BACKEND_PULSEAUDIO=OFF,pulseaudio"
-+PACKAGECONFIG[pipewire] = "-DALSOFT_BACKEND_PIPEWIRE=ON,-DALSOFT_BACKEND_PIPEWIRE=OFF,pipewire"
-+PACKAGECONFIG[examples] = "-DALSOFT_EXAMPLES=ON,-DALSOFT_EXAMPLES=OFF"
-+PACKAGECONFIG[sdl2] = "-DALSOFT_BACKEND_SDL2=ON,-DALSOFT_BACKEND_SDL2=OFF,libsdl2 ffmpeg"
-+
-+FILES:${PN} += "${datadir}"
-<div>-- 
-</div>2.42.0
-
-</div><div class="plaintext" style="white-space: break-spaces;">
--=-=-=-=-=-=-=-=-=-=-=-
-Links: You receive all messages sent to this group.
-View/Reply Online (#106375): <a href="https://lists.openembedded.org/g/openembedded-devel/message/106375">https://lists.openembedded.org/g/openembedded-devel/message/106375</a>
-Mute This Topic: <a href="https://lists.openembedded.org/mt/102385826/3618223">https://lists.openembedded.org/mt/102385826/3618223</a>
-Group Owner: <a href="mailto:openembedded-devel+owner@lists.openembedded.org">openembedded-devel+owner@lists.openembedded.org</a>
-Unsubscribe: <a href="https://lists.openembedded.org/g/openembedded-devel/unsub">https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>]
--=-=-=-=-=-=-=-=-=-=-=-
-
-</div></blockquote></div>
---=-3jS4ifsigxuTpIVhE/Uu--
+diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1/run-ptest b/meta-oe/recipes-support/xmlsec1/xmlsec1/run-ptest
+index a203c38f27..afd8c69853 100755
+--- a/meta-oe/recipes-support/xmlsec1/xmlsec1/run-ptest
++++ b/meta-oe/recipes-support/xmlsec1/xmlsec1/run-ptest
+@@ -34,8 +34,8 @@ check_return verify-single-key
+ 
+ echo "---------------------------------------------------"
+ echo "Verifying a signature with keys manager..."
+-./verify2 sign1-res.xml rsapub.pem
+-./verify2 sign2-res.xml rsapub.pem
++./verify2 sign1-res.xml rsakey.pem
++./verify2 sign2-res.xml rsakey.pem
+ check_return verify-keys-manager
+ 
+ echo "---------------------------------------------------"
+-- 
+2.42.1
 
 
