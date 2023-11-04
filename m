@@ -2,166 +2,255 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 797B3C001B0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C880C001DB
 	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 02:05:13 +0000 (UTC)
-Received: from a27-193.smtp-out.us-west-2.amazonses.com (a27-193.smtp-out.us-west-2.amazonses.com [54.240.27.193])
- by mx.groups.io with SMTP id smtpd.web10.2730.1699063504763694677
+Received: from a27-33.smtp-out.us-west-2.amazonses.com (a27-33.smtp-out.us-west-2.amazonses.com [54.240.27.33])
+ by mx.groups.io with SMTP id smtpd.web11.2620.1699063505472314922
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Nov 2023 19:05:04 -0700
+ Fri, 03 Nov 2023 19:05:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=HulPi45Y;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=NtlQfCZW;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.193, mailfrom: 0101018b98139c65-67cba931-1bf1-4272-8236-4c80eddf5d40-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=QYJXYXaH;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=nUntbLIh;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.33, mailfrom: 0101018b98139d1a-e1fcf940-ce1d-42ed-b4ab-e89f21a1fd84-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
 	t=1699063504;
-	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=j/rY/A6C0pQNjp2awmq/vU8FozKe3c7VdIxE4QLYvB4=;
-	b=HulPi45YOPhNviEUmv0PXjjBPScCbcCV1S7fsedOxjstnC7q6fJIB6QEqH+Sk+bo
-	Ihn1PHtx7T8FVURnFQnWJCNpVlC72iLhQIzsyB0WyIbvf+lNnWVv2Rtvf1q601C1XXM
-	T5lO6JESWpb1HsQqfdkr9FwDTFcydBvCfe127ECs=
+	h=Content-Type:MIME-Version:From:To:Subject:Message-Id:Date;
+	bh=4FNo+x1OwC9cKrwca28FSYIxEblAqN7cmq9VYN3AL6E=;
+	b=QYJXYXaHgdtt2zKCQ9mTxKCN6jaxMYi3wEdoh0m1lfDKCxbjD+ZWnjY09BbINwa9
+	WYDdAED1/9IWUY/5K2BbuJ3M5ah++RUuQobqzJZaE4HwrNIuZ+YfKvViJSx2vlRbM7l
+	CaMuhL+0eNHajoR7pE/+0FoI3zZoQhPFgUjtKhwU=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699063504;
-	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=j/rY/A6C0pQNjp2awmq/vU8FozKe3c7VdIxE4QLYvB4=;
-	b=NtlQfCZWPvJB+SXQIB37EiisljzyD5YadPI1bLy5OuYE4riQPZI7PaD+RvDnC+dT
-	y0AluZzpZ1tOXvCXqfG5S0CKSpaBTVGDWdeeoC/XaCov7GdWeeA5WlbGE/5qr8z/VcO
-	Li2bZOeVKDgpq2P6Q3/jONjc0Rm/XEZ5lfnHNEJw=
-Content-Type: multipart/mixed; boundary="===============5182058933356236724=="
+	h=Content-Type:MIME-Version:From:To:Subject:Message-Id:Date:Feedback-ID;
+	bh=4FNo+x1OwC9cKrwca28FSYIxEblAqN7cmq9VYN3AL6E=;
+	b=nUntbLIhjvbP2ZDLw00lRffc3jULoAXeOBButHusaTzRrVs2HY7EdT17vi2fcPf9
+	E/+yWDptOwaipGQhgplohloCJSvyRFrbfefC3OqDrX8vLDLq8IppC3NPqA/2WId5tZm
+	7b/rz8Ya3r37R4fDAZNorDb/ay7QkQdowEkBY0PQ=
+Content-Type: multipart/mixed; boundary="===============2741434686260985650=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
-To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
-	for@yoctoproject.org, AUH@yoctoproject.org
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] libtest-harness-perl: upgrading to 3.48 SUCCEEDED
-Message-ID: <0101018b98139c65-67cba931-1bf1-4272-8236-4c80eddf5d40-000000@us-west-2.amazonses.com>
-Date: Sat, 4 Nov 2023 02:05:03 +0000
+To: openembedded-devel@lists.openembedded.org
+Subject: [AUH] Upgrade status meta-perl: 2023-11-04
+Message-ID: <0101018b98139d1a-e1fcf940-ce1d-42ed-b4ab-e89f21a1fd84-000000@us-west-2.amazonses.com>
+Date: Sat, 4 Nov 2023 02:05:04 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
-X-SES-Outgoing: 2023.11.04-54.240.27.193
+X-SES-Outgoing: 2023.11.04-54.240.27.33
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 02:05:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106190
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106193
 
---===============5182058933356236724==
+--===============2741434686260985650==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 
-Hello,
+AUH finished upgrade batch the result patches/logs can be found at:
+https://autobuilder.yocto.io/pub/auh/20231104013318, next are the statistics:
 
-this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *libtest-harness-perl* to *3.48* has Succeeded.
+Recipe upgrade statistics:
 
-Next steps:
-    - apply the patch: git am 0001-libtest-harness-perl-upgrade-3.47-3.48.patch
-    - check the changes to upstream patches and summarize them in the commit message,
-    - compile an image that contains the package
-    - perform some basic sanity tests
-    - amend the patch and sign it off: git commit -s --reset-author --amend
-    - send it to the appropriate mailing list
+    * Succeeded: 5
+        libcgi-perl, 4.60, Forced maintainer for AUH
+        libconfig-tiny-perl, 2.30, Forced maintainer for AUH
+        libdbd-sqlite-perl, 1.74, Forced maintainer for AUH
+        libmodule-build-tiny-perl, 0.047, Forced maintainer for AUH
+        libtest-harness-perl, 3.48, Forced maintainer for AUH
+    * Failed (devtool error): 2
+        libcurses-perl, 1.44, Forced maintainer for AUH
+        libxml-libxml-perl, 2.0209, Forced maintainer for AUH
 
-Alternatively, if you believe the recipe should not be upgraded at this time,
-you can fill RECIPE_NO_UPDATE_REASON in respective recipe file so that
-automatic upgrades would no longer be attempted.
+    TOTAL: attempted=7 succeeded=5(71.43%) failed=2(28.57%)
 
-Please review the attached files for further information and build/update failures.
-Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi?product=Automated%20Update%20Handler
+Recipe upgrade statistics per Maintainer:
 
-Regards,
-The Upgrade Helper
+    Forced maintainer for AUH: attempted=7 succeeded=5(71.43%) failed=2(28.57%)
 
--- >8 --
-From de56778f71de1f6632a05f03def4e84d89d7e14a Mon Sep 17 00:00:00 2001
-From: Upgrade Helper <auh@yoctoproject.org>
-Date: Sat, 4 Nov 2023 01:57:13 +0000
-Subject: [PATCH] libtest-harness-perl: upgrade 3.47 -> 3.48
-
----
- ...ibtest-harness-perl_3.47.bb => libtest-harness-perl_3.48.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-perl/recipes-perl/libtest/{libtest-harness-perl_3.47.bb => libtest-harness-perl_3.48.bb} (98%)
-
-diff --git a/meta-perl/recipes-perl/libtest/libtest-harness-perl_3.47.bb b/meta-perl/recipes-perl/libtest/libtest-harness-perl_3.48.bb
-similarity index 98%
-rename from meta-perl/recipes-perl/libtest/libtest-harness-perl_3.47.bb
-rename to meta-perl/recipes-perl/libtest/libtest-harness-perl_3.48.bb
-index 836c9662b..b14fc95f1 100644
---- a/meta-perl/recipes-perl/libtest/libtest-harness-perl_3.47.bb
-+++ b/meta-perl/recipes-perl/libtest/libtest-harness-perl_3.48.bb
-@@ -26,7 +26,7 @@ LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
- LIC_FILES_CHKSUM = "file://README;beginline=29;endline=30;md5=d41d8cd98f00b204e9800998ecf8427e"
- 
- SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEONT/Test-Harness-${PV}.tar.gz"
--SRC_URI[sha256sum] = "bb31cd4aa90ad4e15f32b08476fb5123b4f19ed0cd28a3291242e8858bf986b5"
-+SRC_URI[sha256sum] = "e73ff89c81c1a53f6baeef6816841b89d3384403ad97422a7da9d1eeb20ef9c5"
- 
- UPSTREAM_CHECK_REGEX = "Test\-Harness\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
- 
--- 
-2.39.2
-
-
---===============5182058933356236724==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="buildhistory-diff-full.txt"
-
-packages/core2-64-poky-linux/libtest-harness-perl: PV changed from "3.47" to "3.48"
-packages/core2-64-poky-linux/libtest-harness-perl: PKGV changed from 3.47 [default] to 3.48 [default]
-packages/core2-64-poky-linux/libtest-harness-perl: SRC_URI changed from "https://search.cpan.org/CPAN/authors/id/L/LE/LEONT/Test-Harness-3.47.tar.gz file://ptest-perl/run-ptest" to "https://search.cpan.org/CPAN/authors/id/L/LE/LEONT/Test-Harness-3.48.tar.gz file://ptest-perl/run-ptest"
-packages/core2-64-poky-linux/libtest-harness-perl/libtest-harness-perl-dbg: PV changed from "3.47" to "3.48"
-packages/core2-64-poky-linux/libtest-harness-perl/libtest-harness-perl-dbg: PKGV changed from 3.47 [default] to 3.48 [default]
-packages/core2-64-poky-linux/libtest-harness-perl/libtest-harness-perl-dev: PV changed from "3.47" to "3.48"
-packages/core2-64-poky-linux/libtest-harness-perl/libtest-harness-perl-dev: PKGV changed from 3.47 [default] to 3.48 [default]
-packages/core2-64-poky-linux/libtest-harness-perl/libtest-harness-perl-doc: PV changed from "3.47" to "3.48"
-packages/core2-64-poky-linux/libtest-harness-perl/libtest-harness-perl-doc: PKGV changed from 3.47 [default] to 3.48 [default]
-packages/core2-64-poky-linux/libtest-harness-perl/libtest-harness-perl-locale: PV changed from "3.47" to "3.48"
-packages/core2-64-poky-linux/libtest-harness-perl/libtest-harness-perl-locale: PKGV changed from 3.47 [default] to 3.48 [default]
-packages/core2-64-poky-linux/libtest-harness-perl/libtest-harness-perl-ptest: PV changed from "3.47" to "3.48"
-packages/core2-64-poky-linux/libtest-harness-perl/libtest-harness-perl-ptest: PKGV changed from 3.47 [default] to 3.48 [default]
-packages/core2-64-poky-linux/libtest-harness-perl/libtest-harness-perl-src: PV changed from "3.47" to "3.48"
-packages/core2-64-poky-linux/libtest-harness-perl/libtest-harness-perl-src: PKGV changed from 3.47 [default] to 3.48 [default]
-packages/core2-64-poky-linux/libtest-harness-perl/libtest-harness-perl-staticdev: PV changed from "3.47" to "3.48"
-packages/core2-64-poky-linux/libtest-harness-perl/libtest-harness-perl-staticdev: PKGV changed from 3.47 [default] to 3.48 [default]
-packages/core2-64-poky-linux/libtest-harness-perl/libtest-harness-perl: PV changed from "3.47" to "3.48"
-packages/core2-64-poky-linux/libtest-harness-perl/libtest-harness-perl: PKGSIZE changed from 360428 to 360580 (+0%)
-packages/core2-64-poky-linux/libtest-harness-perl/libtest-harness-perl: PKGV changed from 3.47 [default] to 3.48 [default]
-
---===============5182058933356236724==
+--===============2741434686260985650==
 Content-Type: application/octet-stream
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
-Content-Disposition: attachment;
- filename="0001-libtest-harness-perl-upgrade-3.47-3.48.patch"
+Content-Disposition: attachment; filename="20231104013318.tar.gz"
 
-RnJvbSBkZTU2Nzc4ZjcxZGUxZjY2MzJhMDVmMDNkZWY0ZTg0ZDg5ZDdlMTRhIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBVcGdyYWRlIEhlbHBlciA8YXVoQHlvY3RvcHJvamVjdC5vcmc+
-CkRhdGU6IFNhdCwgNCBOb3YgMjAyMyAwMTo1NzoxMyArMDAwMApTdWJqZWN0OiBbUEFUQ0hdIGxp
-YnRlc3QtaGFybmVzcy1wZXJsOiB1cGdyYWRlIDMuNDcgLT4gMy40OAoKLS0tCiAuLi5pYnRlc3Qt
-aGFybmVzcy1wZXJsXzMuNDcuYmIgPT4gbGlidGVzdC1oYXJuZXNzLXBlcmxfMy40OC5iYn0gfCAy
-ICstCiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkKIHJlbmFt
-ZSBtZXRhLXBlcmwvcmVjaXBlcy1wZXJsL2xpYnRlc3Qve2xpYnRlc3QtaGFybmVzcy1wZXJsXzMu
-NDcuYmIgPT4gbGlidGVzdC1oYXJuZXNzLXBlcmxfMy40OC5iYn0gKDk4JSkKCmRpZmYgLS1naXQg
-YS9tZXRhLXBlcmwvcmVjaXBlcy1wZXJsL2xpYnRlc3QvbGlidGVzdC1oYXJuZXNzLXBlcmxfMy40
-Ny5iYiBiL21ldGEtcGVybC9yZWNpcGVzLXBlcmwvbGlidGVzdC9saWJ0ZXN0LWhhcm5lc3MtcGVy
-bF8zLjQ4LmJiCnNpbWlsYXJpdHkgaW5kZXggOTglCnJlbmFtZSBmcm9tIG1ldGEtcGVybC9yZWNp
-cGVzLXBlcmwvbGlidGVzdC9saWJ0ZXN0LWhhcm5lc3MtcGVybF8zLjQ3LmJiCnJlbmFtZSB0byBt
-ZXRhLXBlcmwvcmVjaXBlcy1wZXJsL2xpYnRlc3QvbGlidGVzdC1oYXJuZXNzLXBlcmxfMy40OC5i
-YgppbmRleCA4MzZjOTY2MmIuLmIxNGZjOTVmMSAxMDA2NDQKLS0tIGEvbWV0YS1wZXJsL3JlY2lw
-ZXMtcGVybC9saWJ0ZXN0L2xpYnRlc3QtaGFybmVzcy1wZXJsXzMuNDcuYmIKKysrIGIvbWV0YS1w
-ZXJsL3JlY2lwZXMtcGVybC9saWJ0ZXN0L2xpYnRlc3QtaGFybmVzcy1wZXJsXzMuNDguYmIKQEAg
-LTI2LDcgKzI2LDcgQEAgTElDRU5TRSA9ICJBcnRpc3RpYy0xLjAgfCBHUEwtMS4wLW9yLWxhdGVy
-IgogTElDX0ZJTEVTX0NIS1NVTSA9ICJmaWxlOi8vUkVBRE1FO2JlZ2lubGluZT0yOTtlbmRsaW5l
-PTMwO21kNT1kNDFkOGNkOThmMDBiMjA0ZTk4MDA5OThlY2Y4NDI3ZSIKIAogU1JDX1VSSSA9ICIk
-e0NQQU5fTUlSUk9SfS9hdXRob3JzL2lkL0wvTEUvTEVPTlQvVGVzdC1IYXJuZXNzLSR7UFZ9LnRh
-ci5neiIKLVNSQ19VUklbc2hhMjU2c3VtXSA9ICJiYjMxY2Q0YWE5MGFkNGUxNWYzMmIwODQ3NmZi
-NTEyM2I0ZjE5ZWQwY2QyOGEzMjkxMjQyZTg4NThiZjk4NmI1IgorU1JDX1VSSVtzaGEyNTZzdW1d
-ID0gImU3M2ZmODljODFjMWE1M2Y2YmFlZWY2ODE2ODQxYjg5ZDMzODQ0MDNhZDk3NDIyYTdkYTlk
-MWVlYjIwZWY5YzUiCiAKIFVQU1RSRUFNX0NIRUNLX1JFR0VYID0gIlRlc3RcLUhhcm5lc3NcLSg/
-UDxwdmVyPihcZCtcLlxkKykpKD8hX1xkKykudGFyIgogCi0tIAoyLjM5LjIKCg==
+H4sIAISlRWUAA+xde3fbNpbP3/oUmOzMiVObEvEgSKrTNB5bSbx1Eq/tdGe36fEBCdDWRK+VqCRu
+t/vZ9wKkZFsmJUqWqCYhTiJLInlfAC6Ae3+AiE0oxjazMaXYazzaRLGhuI4DfzF1uH3r77Q8wswh
+mGLXofwRXCaUPkLORqSZKeNRLIYIPRr0P1wH43ZH5ty36PoXWsjd+h+Nw1Apud52ULz+CeE2g/pn
+HJpBVf8llJz677SDWI1i60oMe2o0sgZq2Fm5USxd/8R2baeq/zLKMvVv1L9qj+L+8NqS7SiyonGn
+U48/x/N56ArmjOXVP+MundY/JfC9bgXkEbLLMMA3Xv8DEX4Ql2rUCPtDRSzOLK2o1Wn3xp8zW0ET
+nfyMwivRu1QSRcN+Fz2mdeY+RnHfvPMe11ah+dPLGaqaKPpFqkiMO/GvmromfvPNKlzOTg8u3p0e
+zYh/FceDUbPRGCkxDK/q4UD06v3hZePgZP9NQ4zjq/5w1GjLxnHjuAX/3r45b5xr2q9S2lrSOjSi
++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
+m9SkJjWpSU1qUpOa1KQm/Tjpf9Wu6qIAkAEA
 
---===============5182058933356236724==--
+--===============2741434686260985650==--
 
