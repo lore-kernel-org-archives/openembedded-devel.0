@@ -2,49 +2,49 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A57C3C05027
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AC39DC05020
 	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 05:12:29 +0000 (UTC)
-Received: from a27-30.smtp-out.us-west-2.amazonses.com (a27-30.smtp-out.us-west-2.amazonses.com [54.240.27.30])
- by mx.groups.io with SMTP id smtpd.web11.4511.1699074742345376524
+Received: from a27-23.smtp-out.us-west-2.amazonses.com (a27-23.smtp-out.us-west-2.amazonses.com [54.240.27.23])
+ by mx.groups.io with SMTP id smtpd.web11.4512.1699074742369154643
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 03 Nov 2023 22:12:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=fYH3mJJF;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=rK9MsuLG;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.30, mailfrom: 0101018b98bf15e0-3a9216c6-7f84-493b-89ba-366d07b658d0-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=VazibzLu;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=QUUo33CQ;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.23, mailfrom: 0101018b98bf1378-aa6116b9-8a04-4be7-ae11-a8b7c252f0b1-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
 	t=1699074741;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=WrW3zjDaYbcHEkVnsgt4RLO4mzmQp2gN1tR2Z91B7is=;
-	b=fYH3mJJF3KbIiyYP0z0Q7tEEZ7XVVusn/ZympXsHQOSQjiGeOoOfe36/ALoU+ZKW
-	kE0gfXkFayYyUKIBKfSq8XI/J0psS8A5ue5xAV1L3V0x+R6jL85ETtsGXxfvwGvDAoF
-	/NulL3lXbHCGSwRB8KEkH0vHoGU51hG6TqujrcyI=
+	bh=dchxZqrhgpMXJAcLYxWXdU0P6xfGoRx3o4eEkqE8VSo=;
+	b=VazibzLuooCo3WcCn20CHCuFqrtaIf7FlwgGY1RCIAgLGNjP6ERlqYZL2ACzRAYa
+	rERFnRXoH9kjjEfzHjQ/B8tO1fUU58lMH6lOtyVvKnSY7lF55sHS8WHtv6T314mo4tZ
+	MTxl3bfHCOXbMFmrajQ1dsemq0T8BmKTb/J4gJ9I=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699074741;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=WrW3zjDaYbcHEkVnsgt4RLO4mzmQp2gN1tR2Z91B7is=;
-	b=rK9MsuLGdVpSWrt0/euqxL7JXNLYvwLI1ovSmVj1EORLaOIaiOyL7BalPwVjEktL
-	T91N5J1Qa5VRN1hCzO9rl57EEvJAkXK9bTG2ii14TdO1LDaXOdnuYcaBO8p61HH9o18
-	2Ba9bJUZUChQSfijM0NVCnEOFlOXW9XD+kl+WVNQ=
-Content-Type: multipart/mixed; boundary="===============2175560617415732164=="
+	bh=dchxZqrhgpMXJAcLYxWXdU0P6xfGoRx3o4eEkqE8VSo=;
+	b=QUUo33CQoGgXXzrcvPgDlwAL+AAhkQu1Ua5uTUn9AtIMO1gXXb7PPC7GZ4jQEUiv
+	VWpAzQjOuTzD0g0D6qaLvnPvS9+Yju4W2OkANXZRi6PpVgo/7En5qdkfsq8ajQY6y5U
+	4XlDTCwbOJcd0VkIH19YWCv8uB74RQL6pVWA5/dM=
+Content-Type: multipart/mixed; boundary="===============3286509053943518160=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] ibus: upgrading to 20080901 FAILED
-Message-ID: <0101018b98bf15e0-3a9216c6-7f84-493b-89ba-366d07b658d0-000000@us-west-2.amazonses.com>
+Subject: [AUH] gnome-terminal: upgrading to 3.50.1 FAILED
+Message-ID: <0101018b98bf1378-aa6116b9-8a04-4be7-ae11-a8b7c252f0b1-000000@us-west-2.amazonses.com>
 Date: Sat, 4 Nov 2023 05:12:21 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
-X-SES-Outgoing: 2023.11.04-54.240.27.30
+X-SES-Outgoing: 2023.11.04-54.240.27.23
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 05:12:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106278
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106279
 
---===============2175560617415732164==
+--===============3286509053943518160==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,14 +52,14 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *ibus* to *20080901* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *gnome-terminal* to *3.50.1* has Failed (devtool error).
 
 Detailed error information:
 
-Running 'devtool upgrade' for recipe ibus failed.
+Running 'devtool upgrade' for recipe gnome-terminal failed.
 NOTE: Reconnecting to bitbake server...
 Loading cache...done.
-Loaded 4897 entries from dependency cache.
+Loaded 4890 entries from dependency cache.
 NOTE: Resolving any missing task queue dependencies
 
 Build Configuration:
@@ -85,7 +85,7 @@ meta-gnome
 meta-xfce            
 meta-filesystems     
 meta-initramfs       
-meta-webserver       = "tmp-auh-upgrades:ed1b0105db76a9c757124e20a25aaf29cd608970"
+meta-webserver       = "tmp-auh-upgrades:d8ae9d2c02db278d7bd467d448053e847d2dd564"
 
 Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
 done.
@@ -96,16 +96,14 @@ NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 4 seconds
 INFO: Extracting current version source...
 INFO: Extracting upgraded version source...
-INFO: Rebasing devtool onto 17eeeb8dd2ba385b1a9e67beb386abc83852a7c1
-WARNING: Command 'git rebase 17eeeb8dd2ba385b1a9e67beb386abc83852a7c1' failed:
-Auto-merging util/IMdkit/Xi18n.h
-Auto-merging util/IMdkit/i18nX.c
-CONFLICT (content): Merge conflict in util/IMdkit/i18nX.c
+INFO: Rebasing devtool onto 5ac3b8e4bd6fa02651b3c23cedb0a7e1cd769655
+WARNING: Command 'git rebase 5ac3b8e4bd6fa02651b3c23cedb0a7e1cd769655' failed:
+Auto-merging meson.build
+CONFLICT (content): Merge conflict in meson.build
 
 You will need to resolve conflicts in order to complete the upgrade.
-INFO: Using source tree as build directory since recipe inherits autotools-brokensep
-INFO: Upgraded source extracted to /home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/sources/ibus
-INFO: New recipe is /home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/recipes/ibus/ibus.bb
+INFO: Upgraded source extracted to /home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/sources/gnome-terminal
+INFO: New recipe is /home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/recipes/gnome-terminal/gnome-terminal_3.50.1.bb
 
 
 
@@ -114,5 +112,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============2175560617415732164==--
+--===============3286509053943518160==--
 
