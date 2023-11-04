@@ -2,49 +2,49 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BE3ACC070C3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F014AC072A0
 	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 03:13:05 +0000 (UTC)
-Received: from a27-31.smtp-out.us-west-2.amazonses.com (a27-31.smtp-out.us-west-2.amazonses.com [54.240.27.31])
- by mx.groups.io with SMTP id smtpd.web11.3430.1699067574874174283
+Received: from a27-191.smtp-out.us-west-2.amazonses.com (a27-191.smtp-out.us-west-2.amazonses.com [54.240.27.191])
+ by mx.groups.io with SMTP id smtpd.web11.3428.1699067574658689794
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 03 Nov 2023 20:12:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=cV8Gsj3t;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=UWSkW294;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.31, mailfrom: 0101018b9851b837-d82b29b2-d4aa-4089-8f20-41e8b91417dd-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=akkNPMx0;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=UnyHtQxO;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.191, mailfrom: 0101018b9851b6bc-f60a07ea-2391-41ba-8397-656bf0589f6a-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
 	t=1699067574;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=5v2io+FNPdLkvahjEQMMkFv6Drr8JZUdEqW8SOylRKY=;
-	b=cV8Gsj3t4VNdQ3GfKZBYMEIBe+xZWydCfJD0+LLtpK9UxAZsl+ksaiNQkKs3k1uE
-	ajXdc2D5egp1Zks9GCUO5xdX2MMeAi1GFBm0iYXkho7Dm6UB7rsns1OG5S4wH+B2GLm
-	UaN4pt63EahPf1ok3T6mksW5Yvs0W+fnySCbVRTI=
+	bh=ejbxuyvXMj4SgdOBq7X9wfF3A09ABXiFV8+PkDz1Prw=;
+	b=akkNPMx02h3KAeTttW7ARH2Os2HBxyla8oSDpI3wRH/+LxycdMjMLdXrSEqWlPS+
+	CqsFA0qOndRq5XnxGc5/HCszxGvWkI+MgYPYWkJ2az1saw7loTkcOTGIkF0uKqSxzuY
+	24uo2BWW9t0P2QmAl89W/bMaHfROh8ueJx/QgD80=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699067574;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=5v2io+FNPdLkvahjEQMMkFv6Drr8JZUdEqW8SOylRKY=;
-	b=UWSkW294UgembHi0awRGtBbi2V+l3Q7aJ6UL4/HvlwZ2dXrc7YHmIVVS4EPqD8vm
-	VpaC0JUNY1yjyiBcZihzMpOSYsJsqbgRoNCBNIXhqhKOSVFRBfZ3gXzVa/HMgDMoNtu
-	SowTuK557Q/kcFDAmsPKq3w8lIxvsm5eKqiJTm4A=
-Content-Type: multipart/mixed; boundary="===============0378928769143632978=="
+	bh=ejbxuyvXMj4SgdOBq7X9wfF3A09ABXiFV8+PkDz1Prw=;
+	b=UnyHtQxOhg3iC7KXvSQLk4bSfsVTqibNTCwKjcB2hN5jKMsVSyYL4CBx2kdjKQQc
+	sF5szo7bHGIb4sDcav3qqQM9QXcTzLRQp4XkWyhoDOrbhr1u1jqjhlDcPDEE5zkpWg9
+	kg1ScCKJUqEd2k+323puT13wHoDdwbXT79XZ0nO4=
+Content-Type: multipart/mixed; boundary="===============6432832273585308772=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] nopoll: upgrading to 429 FAILED
-Message-ID: <0101018b9851b837-d82b29b2-d4aa-4089-8f20-41e8b91417dd-000000@us-west-2.amazonses.com>
-Date: Sat, 4 Nov 2023 03:12:54 +0000
+Subject: [AUH] miniupnpd: upgrading to 20091010 FAILED
+Message-ID: <0101018b9851b6bc-f60a07ea-2391-41ba-8397-656bf0589f6a-000000@us-west-2.amazonses.com>
+Date: Sat, 4 Nov 2023 03:12:53 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
-X-SES-Outgoing: 2023.11.04-54.240.27.31
+X-SES-Outgoing: 2023.11.04-54.240.27.191
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 03:13:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106210
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106205
 
---===============0378928769143632978==
+--===============6432832273585308772==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,14 +52,14 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *nopoll* to *429* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *miniupnpd* to *20091010* has Failed (devtool error).
 
 Detailed error information:
 
-The following devtool command failed:  upgrade nopoll -V 429
+Running 'devtool upgrade' for recipe miniupnpd failed.
 NOTE: Reconnecting to bitbake server...
 Loading cache...done.
-Loaded 4904 entries from dependency cache.
+Loaded 4897 entries from dependency cache.
 NOTE: Resolving any missing task queue dependencies
 
 Build Configuration:
@@ -85,7 +85,7 @@ meta-gnome
 meta-xfce            
 meta-filesystems     
 meta-initramfs       
-meta-webserver       = "tmp-auh-upgrades:f156fc86085c5283a45725269ff38e8ffe707802"
+meta-webserver       = "tmp-auh-upgrades:94f9a00138770904008444e59a3bfffd77f05d31"
 
 Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
 done.
@@ -95,7 +95,7 @@ NOTE: Tasks Summary: Attempted 103 tasks of which 100 didn't need to be rerun an
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 3 seconds
 Loading cache...done.
-Loaded 4904 entries from dependency cache.
+Loaded 4897 entries from dependency cache.
 Parsing recipes...done.
 Parsing of 3056 .bb files complete (3054 cached, 2 parsed). 4887 targets, 92 skipped, 0 masked, 0 errors.
 NOTE: Resolving any missing task queue dependencies
@@ -123,29 +123,33 @@ meta-gnome
 meta-xfce            
 meta-filesystems     
 meta-initramfs       
-meta-webserver       = "tmp-auh-upgrades:f156fc86085c5283a45725269ff38e8ffe707802"
+meta-webserver       = "tmp-auh-upgrades:94f9a00138770904008444e59a3bfffd77f05d31"
 
 Initialising tasks...NOTE: The /proc/pressure files can't be read. Continuing build without monitoring pressure
 done.
 Sstate summary: Wanted 1 Local 0 Mirrors 0 Missed 1 Current 0 (0% match, 0% complete)
 NOTE: Executing Tasks
-WARNING: Failed to fetch URL http://www.aspl.es/nopoll/downloads/nopoll-429.tar.gz, attempting MIRRORS if available
-NOTE: Tasks Summary: Attempted 2 tasks of which 0 didn't need to be rerun and 1 failed.
+NOTE: Tasks Summary: Attempted 3 tasks of which 0 didn't need to be rerun and all succeeded.
 NOTE: Writing buildhistory
 NOTE: Writing buildhistory took: 3 seconds
-NOTE: The errors for this build are stored in /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231104023655.txt
-You can send the errors to a reports server by running:
-  send-error-report /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/log/error-report/error_report_20231104023655.txt [-s server]
-NOTE: The contents of these logs will be posted in public if you use the above command with the default server. Please ensure you remove any identifying or proprietary information when prompted before sending.
-
+DEBUG 5 [Errno 25] Inappropriate ioctl for device
+Adding changed files:   0% |                                   | ETA:  --:--:--
+Adding changed files:   0% |                                   | ETA:  --:--:--
+Adding changed files:  60% |#####################               | ETA:  0:00:00
+Adding changed files: 100% |####################################| Time: 0:00:00
 INFO: Extracting current version source...
+INFO: Adding local source files to srctree...
 INFO: Extracting upgraded version source...
-INFO: Fetching http://www.aspl.es/nopoll/downloads/nopoll-429.tar.gz...
-ERROR: Fetcher failure: Fetch command export PSEUDO_DISABLED=1; export SSL_CERT_FILE="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export GIT_SSL_CAINFO="/home/pokybuild/yocto-worker/auh-meta-oe/build/buildtools/sysroots/x86_64-pokysdk-linux/etc/ssl/certs/ca-certificates.crt"; export ftp_proxy="http://proxy.yocto.io:5187/"; export FTP_PROXY="http://proxy.yocto.io:5187/"; export PATH="/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/sysroots-uninative/x86_64-linux/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/scripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-umrlym40/work/recipe-sysroot-native/usr/bin/x86_64-poky-linux:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-umrlym40/work/recipe-sysroot/usr/bin/crossscripts:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-umrlym40/work/recipe-sysroot-native/usr/sbin:/hom
- e/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-umrlym40/work/recipe-sysroot-native/usr/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-umrlym40/work/recipe-sysroot-native/sbin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-umrlym40/work/recipe-sysroot-native/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/bitbake/bin:/home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/hosttools"; export HOME="/home/pokybuild"; /usr/bin/env wget -t 2 -T 30 --passive-ftp -O /srv/autobuilder/autobuilder.yocto.io/current_sources/nopoll-429.tar.gz.tmp -P /srv/autobuilder/autobuilder.yocto.io/current_sources 'http://www.aspl.es/nopoll/downloads/nopoll-429.tar.gz' --progress=dot -v failed with exit code 8, no output
-ERROR: Bitbake Fetcher Error: FetchError('Unable to fetch URL from any source.', 'http://www.aspl.es/nopoll/downloads/nopoll-429.tar.gz')
-ERROR: Logfile of failure stored in: /home/pokybuild/yocto-worker/auh-meta-oe/build/build/tmp/work/recipetool-umrlym40/work/temp/log.do_fetch.610151
-ERROR: Failed to fetch URL http://www.aspl.es/nopoll/downloads/nopoll-429.tar.gz
+INFO: Fetching http://miniupnp.tuxfamily.org/files/download.php?file=miniupnpd-20091010.tar.gz;downloadfilename=miniupnpd-20091010.tar.gz...
+INFO: Rebasing devtool onto 976ca45b0cd5e507f52ed241479c3b6b7353dcb6
+WARNING: Command 'git rebase 976ca45b0cd5e507f52ed241479c3b6b7353dcb6' failed:
+Auto-merging genconfig.sh
+CONFLICT (content): Merge conflict in genconfig.sh
+
+You will need to resolve conflicts in order to complete the upgrade.
+INFO: Upgraded source extracted to /home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/sources/miniupnpd
+INFO: New recipe is /home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/recipes/miniupnpd/miniupnpd_20091010.bb
+
 
 
 Please review the attached files for further information and build/update failures.
@@ -153,5 +157,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============0378928769143632978==--
+--===============6432832273585308772==--
 
