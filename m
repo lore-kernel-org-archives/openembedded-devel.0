@@ -2,39 +2,39 @@ Return-Path: <auh@yoctoproject.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 025C1C4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 035F3C4167B
 	for <webhook@archiver.kernel.org>; Sat,  4 Nov 2023 03:12:54 +0000 (UTC)
 Received: from a27-29.smtp-out.us-west-2.amazonses.com (a27-29.smtp-out.us-west-2.amazonses.com [54.240.27.29])
- by mx.groups.io with SMTP id smtpd.web11.3424.1699067573478079919
+ by mx.groups.io with SMTP id smtpd.web11.3425.1699067573648469004
  for <openembedded-devel@lists.openembedded.org>;
  Fri, 03 Nov 2023 20:12:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=IIGqv9/T;
- dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=oBwlFI/T;
- spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.29, mailfrom: 0101018b9851b206-b744b31e-354e-41a5-91ab-e46be2a80f71-000000@us-west-2.amazonses.com)
+ dkim=pass header.i=@yoctoproject.org header.s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky header.b=c15hL1v6;
+ dkim=pass header.i=@amazonses.com header.s=hsbnp7p3ensaochzwyq5wwmceodymuwv header.b=G8Fxg4+U;
+ spf=pass (domain: us-west-2.amazonses.com, ip: 54.240.27.29, mailfrom: 0101018b9851b22a-b44410a6-26fe-4d03-815d-11b42902625e-000000@us-west-2.amazonses.com)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
 	s=lvjh2tk576v2ro5mi6k4dt3mc6wpqbky; d=yoctoproject.org;
-	t=1699067572;
+	t=1699067573;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date;
-	bh=tDhvVQ8Nc6Pmj5All6AtYLN6ILb7IcrKGn6vPi6q66Y=;
-	b=IIGqv9/TwXCk9MpmEaN5s0gwkvt5i2TA87ClRh0JZcLceLXXPibaZwqKATeHxJFi
-	sDGAdPkvHiVpbqQElKfj/IVjL4W9XFSC2fWxbelYrLOBblCOcbvfPqWDYIWtM8pK9gH
-	ScYHGWLvXfKY0wovPKoxiRlRDssyw3PPNRw2U/bg=
+	bh=aoF826OdMn671PL9YdoZuBIAqy0Hd6wOcVkGxd1FUU8=;
+	b=c15hL1v6VsRQ5D9jZy8rlmLrIFAdHwIh1EFGTuSFF5ivoBTdha2qangWY02KC2vC
+	ExQ/b0z6Ci6eqTBVnmRThPq47J2saoqRdQ3n0/I44GwSqZZ9jFPfo20HpGe3c/ebOy0
+	8WbvGod0FR/mczP93qY6alCp0/WMWgjZuhdXUlnk=
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699067572;
+	s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1699067573;
 	h=Content-Type:MIME-Version:From:To:Cc:Subject:Message-Id:Date:Feedback-ID;
-	bh=tDhvVQ8Nc6Pmj5All6AtYLN6ILb7IcrKGn6vPi6q66Y=;
-	b=oBwlFI/TxVrSTJbwH1XGCIk6XSUFvQ19ZVm7+p6YRES144K3Urh3PkPJSY2sIOhU
-	hzd3QMuUdel8Y/SClmiZhLh2jIVJeWIiAk9fdbhEVxwSR9fKMSXBJCt6gMa9JJgcAgl
-	lICRlRC+HfbLOM+MdaNJ/2/vf6wLhT073mDQw2dE=
-Content-Type: multipart/mixed; boundary="===============0483301155024225712=="
+	bh=aoF826OdMn671PL9YdoZuBIAqy0Hd6wOcVkGxd1FUU8=;
+	b=G8Fxg4+UZArefapUufZxys1v76o71lghS1jjhT8h88MMX02dQA6yNxX4brmu3n1L
+	NvgQay57gBXeIqVkM/DMjf2Gh7DgNJ9JbSeCJpw+QGZynSceqf8ve8pXwZkdXAIe/Tj
+	iS9jnZUta7MuTSURjpUM85ZzYcBwGsonzhqCBc0E=
+Content-Type: multipart/mixed; boundary="===============8547948137407908590=="
 MIME-Version: 1.0
 From: auh@yoctoproject.org
 To: Forced@yoctoproject.org, maintainer@yoctoproject.org, 
 	for@yoctoproject.org, AUH@yoctoproject.org
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [AUH] cannelloni: upgrading to 20170601 FAILED
-Message-ID: <0101018b9851b206-b744b31e-354e-41a5-91ab-e46be2a80f71-000000@us-west-2.amazonses.com>
+Subject: [AUH] celt051: upgrading to 0.11.3 FAILED
+Message-ID: <0101018b9851b22a-b44410a6-26fe-4d03-815d-11b42902625e-000000@us-west-2.amazonses.com>
 Date: Sat, 4 Nov 2023 03:12:52 +0000
 Feedback-ID: 1.us-west-2.9np3MYPs3fEaOBysGKSlUD4KtcmPijcmS9Az2Hwf7iQ=:AmazonSES
 X-SES-Outgoing: 2023.11.04-54.240.27.29
@@ -42,9 +42,9 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sat, 04 Nov 2023 03:12:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106194
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106195
 
---===============0483301155024225712==
+--===============8547948137407908590==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -52,11 +52,11 @@ Content-Transfer-Encoding: 7bit
 Hello,
 
 this email is a notification from the Auto Upgrade Helper
-that the automatic attempt to upgrade the recipe *cannelloni* to *20170601* has Failed (devtool error).
+that the automatic attempt to upgrade the recipe *celt051* to *0.11.3* has Failed (devtool error).
 
 Detailed error information:
 
-The following devtool command failed:  upgrade cannelloni -V 20170601 -S dabaa0228892bfed8a20d049c76ab44db17cdee3
+Running 'devtool upgrade' for recipe celt051 failed.
 NOTE: Reconnecting to bitbake server...
 Loading cache...done.
 Loaded 4886 entries from dependency cache.
@@ -93,13 +93,45 @@ Sstate summary: Wanted 10 Local 10 Mirrors 0 Missed 0 Current 20 (100% match, 10
 NOTE: Executing Tasks
 NOTE: Tasks Summary: Attempted 103 tasks of which 100 didn't need to be rerun and all succeeded.
 NOTE: Writing buildhistory
-NOTE: Writing buildhistory took: 3 seconds
-
+NOTE: Writing buildhistory took: 4 seconds
 INFO: Extracting current version source...
 INFO: Extracting upgraded version source...
-ERROR: Revision dabaa0228892bfed8a20d049c76ab44db17cdee3 was found on multiple branches: 
-  
-Please provide the correct branch in the devtool command with "--srcbranch" or "-B" option.
+INFO: Rebasing devtool onto 6c28805c56d562bec56cc0b31c0d5905ebb5a6ac
+WARNING: Command 'git rebase 6c28805c56d562bec56cc0b31c0d5905ebb5a6ac' failed:
+Auto-merging configure.ac
+CONFLICT (content): Merge conflict in configure.ac
+Auto-merging libcelt/Makefile.am
+CONFLICT (content): Merge conflict in libcelt/Makefile.am
+Auto-merging libcelt/celt.c
+CONFLICT (content): Merge conflict in libcelt/celt.c
+Auto-merging libcelt/celt.h
+CONFLICT (content): Merge conflict in libcelt/celt.h
+Auto-merging libcelt/celt_header.h
+CONFLICT (content): Merge conflict in libcelt/celt_header.h
+Auto-merging libcelt/dump_modes.c
+CONFLICT (content): Merge conflict in libcelt/dump_modes.c
+Auto-merging libcelt/header.c
+CONFLICT (content): Merge conflict in libcelt/header.c
+Auto-merging libcelt/modes.c
+CONFLICT (content): Merge conflict in libcelt/modes.c
+Auto-merging libcelt/testcelt.c
+CONFLICT (content): Merge conflict in libcelt/testcelt.c
+Auto-merging tests/Makefile.am
+CONFLICT (content): Merge conflict in tests/Makefile.am
+Auto-merging tools/Makefile.am
+CONFLICT (content): Merge conflict in tools/Makefile.am
+Auto-merging tools/celtclient.c
+CONFLICT (content): Merge conflict in tools/celtclient.c
+Auto-merging tools/celtdec.c
+CONFLICT (content): Merge conflict in tools/celtdec.c
+Auto-merging tools/celtenc.c
+CONFLICT (content): Merge conflict in tools/celtenc.c
+
+You will need to resolve conflicts in order to complete the upgrade.
+INFO: Using source tree as build directory since recipe inherits autotools-brokensep
+INFO: Upgraded source extracted to /home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/sources/celt051
+INFO: New recipe is /home/pokybuild/yocto-worker/auh-meta-oe/build/build/workspace/recipes/celt051/celt051_git.bb
+
 
 
 Please review the attached files for further information and build/update failures.
@@ -107,5 +139,5 @@ Any problem please file a bug at https://bugzilla.yoctoproject.org/enter_bug.cgi
 
 Regards,
 The Upgrade Helper
---===============0483301155024225712==--
+--===============8547948137407908590==--
 
