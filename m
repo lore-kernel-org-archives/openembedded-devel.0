@@ -2,109 +2,95 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C306CC4167D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C625BC41535
 	for <webhook@archiver.kernel.org>; Sun,  5 Nov 2023 20:05:34 +0000 (UTC)
-Received: from mailout08.t-online.de (mailout08.t-online.de [194.25.134.20])
- by mx.groups.io with SMTP id smtpd.web11.37469.1699214729360035548
+Received: from mailout04.t-online.de (mailout04.t-online.de [194.25.134.18])
+ by mx.groups.io with SMTP id smtpd.web11.37468.1699214726143351927
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 05 Nov 2023 12:05:29 -0800
+ Sun, 05 Nov 2023 12:05:27 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.20, mailfrom: f_l_k@t-online.de)
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.18, mailfrom: f_l_k@t-online.de)
 Received: from fwd88.aul.t-online.de (fwd88.aul.t-online.de [10.223.144.114])
-	by mailout08.t-online.de (Postfix) with SMTP id C1B25D194
-	for <openembedded-devel@lists.openembedded.org>; Sun,  5 Nov 2023 21:05:26 +0100 (CET)
+	by mailout04.t-online.de (Postfix) with SMTP id B6E6424334
+	for <openembedded-devel@lists.openembedded.org>; Sun,  5 Nov 2023 21:05:23 +0100 (CET)
 Received: from intel-corei7-64.fritz.box ([84.163.36.196]) by fwd88.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1qzjN8-4A7hMQ0; Sun, 5 Nov 2023 21:05:26 +0100
+	esmtp id 1qzjN3-4A7hMP0; Sun, 5 Nov 2023 21:05:21 +0100
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH 2/4] mutter: Upgrade 45.0 -> 45.1
-Date: Sun,  5 Nov 2023 21:05:40 +0100
-Message-ID: <20231105200542.13519-2-f_l_k@t-online.de>
+Subject: [meta-gnome][PATCH 1/4] gnome-shell: Upgrade 45.0 -> 45.1
+Date: Sun,  5 Nov 2023 21:05:39 +0100
+Message-ID: <20231105200542.13519-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20231105200542.13519-1-f_l_k@t-online.de>
-References: <20231105200542.13519-1-f_l_k@t-online.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-X-TOI-EXPURGATEID: 150726::1699214726-EF7FDDD2-2EF003B6/0/0 CLEAN NORMAL
-X-TOI-MSGID: d479aa1e-7249-4f4a-8b06-a4071133c027
+X-TOI-EXPURGATEID: 150726::1699214721-EEFFADD2-D9C93C7A/0/0 CLEAN NORMAL
+X-TOI-MSGID: 71201cdb-b6de-4f61-afb6-12b1c7152fbe
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 05 Nov 2023 20:05:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106386
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106385
 
 45.1
 =3D=3D=3D=3D
-* Fix filtering keybinding events in presence of grabs [Sebastian K.; !30=
-54]
-* Fix direct scanout support when using integer scaling [Daniel; !3290]
-* Fix capitalization of some keys when caps lock is on [Carlos; !3306]
-* Fix vsync regression [Robert; !3286]
-* Fix visibility of software cursors when using direct scanout [Robert; !=
-3302]
-* Fix artifacts at the bottom of some surfaces [Robert; !3310]
-* Discard monitor configs with fractional scale when unusable [Jonas =C3=85=
-.; !3299]
-* Apply track point settings [Rohan; !3089]
-* xwayland: Enable XDG portal only when not nested [Olivier; !3303]
-* Inhibit real-time scheduling when mode setting [Ray; !3324]
-* Don't delay frame updates after idle period [Michel; !3174]
-* Fix running Xwayland in headless setup with nvidia driver [Olivier; !33=
-20]
-* wayland: Send keyboard modifiers after the enter event  [Alexandros; !3=
-341]
-* Fixed crashes [Carlos, Jonas D., Robert, Sebastian W., Jonas =C3=85.; !=
-3287, !3283,
-  !3311, !3322, !3318]
-* Misc. bug fixes and cleanups [Daniel, Corentin, Carlos, Jonas =C3=85., =
-Ivan,
-  Michel, Sebastian W., Robert, Barnab=C3=A1s, Peter; !3212, !3298, !3267=
-, !3297,
-  !3313, !3316, !3317, !3323, !3325, !3326, !3328, !3330, !3332, !3319]
+* Fix scroll handling on sliders [Carlos; !2967]
+* overview: Handle unredirection as part of the state transition [Robert;=
+ !2970]
+* Handle DESKTOP windows during workspace animations [Sundeep; !2865]
+* Fix unexpected focus changes with multi-window apps [Florian; !2959]
+* Improve recording indicator in light style [Georges; !2983]
+* Fix calendar popup shrinking on date changes [Sebastian; !2989]
+* Fixed crashes [Daniel, Sebastian; !2975, !2974]
+* Misc. bug fixes and cleanups [Florian, Martin, Alessandro, Sebastian; !=
+2966,
+  !2978, !2987, !3000, #6763]
 
 Contributors:
-  Jonas =C3=85dahl, Michel D=C3=A4nzer, Jonas Dre=C3=9Fler, Olivier Fourd=
-an,
-  Alexandros Frantzis, Carlos Garnacho, Peter Hutterer, Rohan Hendrik Jot=
-z-Lean,
-  Sebastian Keller, Robert Mader, Ivan Molodetskikh, Florian M=C3=BCllner=
-,
-  Corentin No=C3=ABl, Barnab=C3=A1s P=C5=91cze, Ray Strode, Daniel van Vu=
-gt, Sebastian Wick
+  Alessandro Bono, Carlos Garnacho, Sebastian Keller, Sundeep Mediratta,
+  Florian M=C3=BCllner, Georges Basile Stavracas Neto, robert.mader@colla=
+bora.com,
+  Daniel van Vugt, Martin Zurowietz
 
 Translators:
-  Kristjan SCHMIDT [eo], Rafael Fontenelle [pt_BR], Guillaume Bernard [fr=
-],
-  Jordi Mas i Hernandez [ca], Florentina Mu=C8=99at [ro]
+  Jordi Mas [ca], Fabio Tomat [fur], Ekaterine Papava [ka], Sabri =C3=9Cn=
+al [tr],
+  Cheng-Chia Tseng [zh_TW], Changwoo Ryu [ko], Florentina Mu=C8=99at [ro]=
+,
+  Brage Fuglseth [nb], Evangelos Skarmoutsos [el], Efstathios Iosifidis [=
+el],
+  =D0=9C=D0=B0=D1=80=D0=BA=D0=BE =D0=9A=D0=BE=D1=81=D1=82=D0=B8=D1=9B [sr=
+], Hugo Carvalho [pt]
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../recipes-gnome/mutter/{mutter_45.0.bb =3D> mutter_45.1.bb}     | 2 +-
+ .../gnome-shell/{gnome-shell_45.0.bb =3D> gnome-shell_45.1.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/mutter/{mutter_45.0.bb =3D> mutter_45.1.=
-bb} (97%)
+ rename meta-gnome/recipes-gnome/gnome-shell/{gnome-shell_45.0.bb =3D> gn=
+ome-shell_45.1.bb} (95%)
 
-diff --git a/meta-gnome/recipes-gnome/mutter/mutter_45.0.bb b/meta-gnome/=
-recipes-gnome/mutter/mutter_45.1.bb
-similarity index 97%
-rename from meta-gnome/recipes-gnome/mutter/mutter_45.0.bb
-rename to meta-gnome/recipes-gnome/mutter/mutter_45.1.bb
-index 87d61c266..541991ba8 100644
---- a/meta-gnome/recipes-gnome/mutter/mutter_45.0.bb
-+++ b/meta-gnome/recipes-gnome/mutter/mutter_45.1.bb
-@@ -26,7 +26,7 @@ GNOMEBASEBUILDCLASS =3D "meson"
+diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_45.0.bb b/m=
+eta-gnome/recipes-gnome/gnome-shell/gnome-shell_45.1.bb
+similarity index 95%
+rename from meta-gnome/recipes-gnome/gnome-shell/gnome-shell_45.0.bb
+rename to meta-gnome/recipes-gnome/gnome-shell/gnome-shell_45.1.bb
+index 8dc4d8317..472c3bdb8 100644
+--- a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_45.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_45.1.bb
+@@ -33,7 +33,7 @@ GIR_MESON_OPTION =3D ""
+ # gobject-introspection is mandatory and cannot be configured
+ REQUIRED_DISTRO_FEATURES +=3D "gobject-introspection-data"
 =20
- inherit gnomebase gsettings gobject-introspection gettext features_check
+-SRC_URI[archive.sha256sum] =3D "3cabe40bdd4e379c7082b39ffa45b8bef5c9cf86=
+408fb0d836e1571c443217cd"
++SRC_URI[archive.sha256sum] =3D "15fca4bd6129a8b3f990197fbd1ee58d74b64151=
+0afaaf0882a7fa36634fc5f2"
+ SRC_URI +=3D "file://0001-Introduce-options-gjs_path-to-optionally-set-p=
+ath-to.patch"
 =20
--SRC_URI[archive.sha256sum] =3D "8fbc963019eda9ba52fca2f6c4c477efbc6e36eb=
-4fa93f23174f02ff6b907715"
-+SRC_URI[archive.sha256sum] =3D "2cd3c5efb22db76c79311cb1889a1aab2feb35b4=
-a4dd03f3822aab7999da212c"
-=20
- # x11 is still manadatory - see meson.build
- REQUIRED_DISTRO_FEATURES =3D "wayland x11 polkit"
+ PACKAGECONFIG ??=3D "bluetooth nm ${@bb.utils.filter('DISTRO_FEATURES', =
+'systemd', d)}"
 --=20
 2.42.0
 
