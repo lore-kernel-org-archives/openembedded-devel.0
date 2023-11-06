@@ -1,142 +1,93 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <mingli.yu@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 99EAEC4332F
-	for <webhook@archiver.kernel.org>; Mon,  6 Nov 2023 05:16:47 +0000 (UTC)
-Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
- by mx.groups.io with SMTP id smtpd.web11.47682.1699247806924070211
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CA3DEC4332F
+	for <webhook@archiver.kernel.org>; Mon,  6 Nov 2023 05:46:17 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.47904.1699249569546210414
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 05 Nov 2023 21:16:46 -0800
+ Sun, 05 Nov 2023 21:46:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=YspGvXrY;
- spf=pass (domain: gmail.com, ip: 209.85.214.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f182.google.com with SMTP id d9443c01a7336-1cc1ee2d8dfso36788485ad.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Nov 2023 21:16:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699247806; x=1699852606; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ru3TPq9t4nI+bGIbdWzxGNZedoOTPLQlt1aFVlJIfH8=;
-        b=YspGvXrYuL17hH1vue9WAYLcp6RjZQEw2jN2hZen2KV5gZGCWLKlrnW9ILV2EPkBwZ
-         iVa5SNf3+6CAShNKRw81wp4SpStieZDKMRBDV3Std50SlODF1fy/0hsRJUlQ1hRFF7Ed
-         HYL1dAxh5Z7E+mAhh9SAH8Uo3AhEM2o+hMN82OrJijyix1OVdsoG4xy561TKtEA6jxV6
-         GDTMKdfA0S4IeDrhpqkDLDFd0ZXK4xPsY/335tZc0r3A3FLMaG3gvK2QEXCsZxF83kr6
-         /YLximR+1fSzmJXt5Vf4tyEQHFVOn9ggnUrH7zNGe2MobhUk7OuEUyxNsraL0QA/lKaL
-         L4XA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699247806; x=1699852606;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ru3TPq9t4nI+bGIbdWzxGNZedoOTPLQlt1aFVlJIfH8=;
-        b=HqyUvddgEJ6bot+Ql2F259zrNds7f+drGTIRgZV8tK7FAFLmmBdotkuQWZT7QJ3YrA
-         FjXcZVwENyWaJ2AxQkuS0MXrSh4TuJRCf1RJVbXHgg0ZHH8aZexU8+4tdFU+Fdij7TLM
-         iF+cT3y7Zb9lb1yitqtsW9yTLw3wFBWrH+V0MzFH2ttfOCUAJgh/TbI2/TG3mXu8K+8b
-         lRZew0UMzGL1Tgn4q65IifhIEJ7+5ku2M5MhfLkkemv+9E8epsXzebOiCqMZJJC5gmRE
-         TeE1VfVnYP/dpdfqO8TNU71FmcoK1czGx4urIwJ7KpgzcM8YyVMFx5UgC3g+JDf1wrv8
-         iJpw==
-X-Gm-Message-State: AOJu0YzpYo1HhuSWB9/TTruzxIU1A67HC3WUAXWJt27iBD2Cefu/g6sN
-	1kpXKDFffSte+HsAEuqojKEV1ScqlVdRlQ==
-X-Google-Smtp-Source: AGHT+IFwt5wKXvA5MTqjEyIEtTsTLwQRNqV0gdViL/6mdHhtt4mDvZ8n/+PiflFu4ora8US9e3G4/w==
-X-Received: by 2002:a17:90b:1014:b0:280:c4be:3c85 with SMTP id gm20-20020a17090b101400b00280c4be3c85mr13018226pjb.23.1699247805693;
-        Sun, 05 Nov 2023 21:16:45 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9100:2cb0::38be])
-        by smtp.gmail.com with ESMTPSA id mr22-20020a17090b239600b0028012be0764sm4761416pjb.20.2023.11.05.21.16.45
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 05 Nov 2023 21:16:45 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] libsodium: Fix build with clang on aarch64
-Date: Sun,  5 Nov 2023 21:16:43 -0800
-Message-ID: <20231106051643.1492659-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.42.1
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=q1wK20um;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=9674bb5424=mingli.yu@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 3A65Q8NL024446
+	for <openembedded-devel@lists.openembedded.org>; Sun, 5 Nov 2023 21:46:09 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding:content-type; s=
+	PPS06212021; bh=ggFMaanInLPYNdGqlI3Mm0pIjhWSr2UqM068xc6jw2o=; b=
+	q1wK20umVA2jiT8gxmCQBM8iVc9f3GZyJECmp3xbDKVtNdz/0TEMyRlw/DyVYd+v
+	AE7ZyZ36az3GadxT52xX2FuzsG1JX8jz2yGCrN924+CNRbG8bkvjBYiW/MdJCoyv
+	InJDwPOaZWQL/UD4GfKJnZN7lg45iO/6Bdj71RpjojuuAWfPLxkT0EwDArgMqUn1
+	KbI6oeAFOTucd3vTotRaVSNwipqTMoyvproj864YXDwd7OMuDY5q9DMuJlRukuG3
+	UeP+8tZGLfbu8+WihO0zQoHZjJj7L6v5zDTNxsKm/D3lbJzHajYQQy55w6iOPf16
+	KJRw2bv9WooGSeISzLiutw==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3u5nffrynk-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Sun, 05 Nov 2023 21:46:09 -0800 (PST)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.34; Sun, 5 Nov 2023 21:46:08 -0800
+Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.34 via Frontend Transport; Sun, 5 Nov 2023 21:46:08 -0800
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH v4] vboxguestdrivers: Remove the buildpath
+Date: Mon, 6 Nov 2023 13:46:04 +0800
+Message-ID: <20231106054604.4133994-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <CAMKF1spOjpT3ZCVatbuObYJKaH8=FNRprvGuJqJo_krByXWrdQ@mail.gmail.com>
+References: <CAMKF1spOjpT3ZCVatbuObYJKaH8=FNRprvGuJqJo_krByXWrdQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-GUID: Z_KRExWGtm-D-Ug-adWlgMDescZMa7e6
+X-Proofpoint-ORIG-GUID: Z_KRExWGtm-D-Ug-adWlgMDescZMa7e6
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-11-06_03,2023-11-02_03,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxlogscore=885
+ priorityscore=1501 spamscore=0 suspectscore=0 impostorscore=0
+ clxscore=1015 malwarescore=0 bulkscore=0 phishscore=0 lowpriorityscore=0
+ adultscore=0 mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2310240000 definitions=main-2311060048
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 06 Nov 2023 05:16:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106394
+ <openembedded-devel@lists.openembedded.org>; Mon, 06 Nov 2023 05:46:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106395
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+From: Mingli Yu <mingli.yu@windriver.com>
+
+Fixes:
+  WARNING: vboxguestdrivers-7.0.10-r0 do_package_qa: QA Issue: File /usr/lib/modules/6.1.51-yocto-standard/kernel/misc/vboxsf.ko in package kernel-module-vboxsf-6.1.51-yocto-standard contains reference to TMPDIR [buildpaths]
+  WARNING: vboxguestdrivers-7.0.10-r0 do_package_qa: QA Issue: File /usr/lib/modules/6.1.51-yocto-standard/kernel/misc/vboxguest.ko in package kernel-module-vboxguest-6.1.51-yocto-standard contains reference to TMPDIR [buildpaths]
+  WARNING: vboxguestdrivers-7.0.10-r0 do_package_qa: QA Issue: File /usr/lib/modules/6.1.51-yocto-standard/kernel/misc/vboxvideo.ko in package kernel-module-vboxvideo-6.1.51-yocto-standard contains reference to TMPDIR [buildpaths]
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- ...-target-pragma-after-arm_neon.h-incl.patch | 49 +++++++++++++++++++
- .../libsodium/libsodium_1.0.19.bb             |  3 +-
- 2 files changed, 51 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-crypto/libsodium/libsodium/0001-fix-aarch64-Move-target-pragma-after-arm_neon.h-incl.patch
+ .../recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.12.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-crypto/libsodium/libsodium/0001-fix-aarch64-Move-target-pragma-after-arm_neon.h-incl.patch b/meta-oe/recipes-crypto/libsodium/libsodium/0001-fix-aarch64-Move-target-pragma-after-arm_neon.h-incl.patch
-new file mode 100644
-index 0000000000..7a6fae7997
---- /dev/null
-+++ b/meta-oe/recipes-crypto/libsodium/libsodium/0001-fix-aarch64-Move-target-pragma-after-arm_neon.h-incl.patch
-@@ -0,0 +1,49 @@
-+From d3253310f7c0fc0f1aad6864e3b57958ea1bb9c5 Mon Sep 17 00:00:00 2001
-+From: tux3 <barrdetwix@gmail.com>
-+Date: Mon, 16 Oct 2023 16:42:04 +0200
-+Subject: [PATCH] fix(aarch64): Move target #pragma after arm_neon.h include
-+
-+Fix per https://github.com/android/ndk/issues/1945
-+
-+If the pragma is done before the header include,
-+in NDK 26 the attribute may apply to the functions in arm_neon.h
-+
-+Upstream-Status: Backport [https://github.com/jedisct1/libsodium/pull/1321]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ .../aes256gcm/armcrypto/aead_aes256gcm_armcrypto.c   | 12 ++++++------
-+ 1 file changed, 6 insertions(+), 6 deletions(-)
-+
-+diff --git a/src/libsodium/crypto_aead/aes256gcm/armcrypto/aead_aes256gcm_armcrypto.c b/src/libsodium/crypto_aead/aes256gcm/armcrypto/aead_aes256gcm_armcrypto.c
-+index 0a5a128..aa76f5c 100644
-+--- a/src/libsodium/crypto_aead/aes256gcm/armcrypto/aead_aes256gcm_armcrypto.c
-++++ b/src/libsodium/crypto_aead/aes256gcm/armcrypto/aead_aes256gcm_armcrypto.c
-+@@ -19,12 +19,6 @@
-+ #define __vectorcall
-+ #endif
-+ 
-+-#ifdef __clang__
-+-#pragma clang attribute push(__attribute__((target("neon,crypto,aes"))), apply_to = function)
-+-#elif defined(__GNUC__)
-+-#pragma GCC target("+simd+crypto")
-+-#endif
-+-
-+ #ifndef __ARM_FEATURE_CRYPTO
-+ #define __ARM_FEATURE_CRYPTO 1
-+ #endif
-+@@ -34,6 +28,12 @@
-+ 
-+ #include <arm_neon.h>
-+ 
-++#ifdef __clang__
-++#pragma clang attribute push(__attribute__((target("neon,crypto,aes"))), apply_to = function)
-++#elif defined(__GNUC__)
-++#pragma GCC target("+simd+crypto")
-++#endif
-++
-+ #define ABYTES    crypto_aead_aes256gcm_ABYTES
-+ #define NPUBBYTES crypto_aead_aes256gcm_NPUBBYTES
-+ #define KEYBYTES  crypto_aead_aes256gcm_KEYBYTES
-+-- 
-+2.42.1
-+
-diff --git a/meta-oe/recipes-crypto/libsodium/libsodium_1.0.19.bb b/meta-oe/recipes-crypto/libsodium/libsodium_1.0.19.bb
-index 824ac45c87..2e678f3f0f 100644
---- a/meta-oe/recipes-crypto/libsodium/libsodium_1.0.19.bb
-+++ b/meta-oe/recipes-crypto/libsodium/libsodium_1.0.19.bb
-@@ -4,7 +4,8 @@ BUGTRACKER = "https://github.com/jedisct1/libsodium/issues"
- LICENSE = "ISC"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=49ce3b426e6a002e23a1387248e6dbe9"
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.12.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.12.bb
+index 5574cdb2a..6b493de7c 100644
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.12.bb
++++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.12.bb
+@@ -23,7 +23,7 @@ S:task-patch = "${WORKDIR}/${VBOX_NAME}"
+ export VBOX_KBUILD_TARGET_ARCH="${ARCH}"
+ export VBOX_KBUILD_TARGET_ARCH:x86-64="amd64"
  
--SRC_URI = "https://download.libsodium.org/libsodium/releases/${BPN}-${PV}.tar.gz"
-+SRC_URI = "https://download.libsodium.org/libsodium/releases/${BPN}-${PV}.tar.gz \
-+           file://0001-fix-aarch64-Move-target-pragma-after-arm_neon.h-incl.patch"
- SRC_URI[sha256sum] = "018d79fe0a045cca07331d37bd0cb57b2e838c51bc48fd837a1472e50068bbea"
+-EXTRA_OEMAKE += "KERN_DIR='${WORKDIR}/${KERNEL_VERSION}/build' KBUILD_VERBOSE=1"
++EXTRA_OEMAKE += "KERN_DIR='${WORKDIR}/${KERNEL_VERSION}/build' KBUILD_VERBOSE=1 CC='${CC} ${DEBUG_PREFIX_MAP} -fdebug-prefix-map=${STAGING_KERNEL_DIR}=${KERNEL_SRC_PATH} -fdebug-prefix-map=${STAGING_KERNEL_BUILDDIR}=${KERNEL_SRC_PATH}'"
  
- inherit autotools
+ # otherwise 5.2.22 builds just vboxguest
+ MAKE_TARGETS = "all"
 -- 
-2.42.1
+2.25.1
 
 
