@@ -1,80 +1,92 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E01DC4332F
-	for <webhook@archiver.kernel.org>; Mon,  6 Nov 2023 10:24:09 +0000 (UTC)
-Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
- by mx.groups.io with SMTP id smtpd.web10.51193.1699266240689798090
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5730FC4332F
+	for <webhook@archiver.kernel.org>; Mon,  6 Nov 2023 10:29:49 +0000 (UTC)
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+ by mx.groups.io with SMTP id smtpd.web11.50724.1699266587612277333
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Nov 2023 02:24:01 -0800
+ Mon, 06 Nov 2023 02:29:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
-Received: from fwd78.aul.t-online.de (fwd78.aul.t-online.de [10.223.144.104])
-	by mailout03.t-online.de (Postfix) with SMTP id DAE123C991
-	for <openembedded-devel@lists.openembedded.org>; Mon,  6 Nov 2023 11:23:49 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([79.219.229.73]) by fwd78.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1qzwlo-0ZPSTa0; Mon, 6 Nov 2023 11:23:48 +0100
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH 2/2] libchamplain: Upgrade 0.12.20 -> 0.12.21
-Date: Mon,  6 Nov 2023 11:24:11 +0100
-Message-ID: <20231106102411.58424-2-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20231106102411.58424-1-f_l_k@t-online.de>
-References: <20231106102411.58424-1-f_l_k@t-online.de>
+ dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=Tlf/wQxc;
+ spf=pass (domain: smile.fr, ip: 209.85.221.44, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-32deb2809daso2576518f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Nov 2023 02:29:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1699266586; x=1699871386; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:organization:from:references
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=ZUuMv6r1W2O1GwZ6D53gNXY/1Ipz2cpmL77xzeCRARk=;
+        b=Tlf/wQxcrgWwO9MqxBcaw4Yu37Jym/KWvVj2lUdrvx7hZu2tsw8TYTwymm/z0XzFrL
+         uiTaUy78ot68LeYIkyuz9I656cOureCg4UsAdKrFq6L7RlplY7DVET+A4f3wAqWmokza
+         th1rUnNW+Biqj4gkkRgwtD/anXR+hcJlywQKsuc34I7ry8/tQhIe9B696ARl3S4ABNZY
+         rgOBFaIX+Xt1WOTwo7IlJhv1sVJGysFrb0twDss3n+SxuMt90gcTrNu6dpoGzBJvf2Oo
+         JxlfzY7t6o/QI8OUaKjD9wWgYTAxw7aNRXriuQfwVHpJAhrsXKTlDuRQsx2Xgfc4q5db
+         oFhQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1699266586; x=1699871386;
+        h=content-transfer-encoding:in-reply-to:organization:from:references
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=ZUuMv6r1W2O1GwZ6D53gNXY/1Ipz2cpmL77xzeCRARk=;
+        b=RKOBzmVdOeCn2qWdAxzskhlQ0lUR0kh4pO0zfW8GUp0jB8MmC45XvyQrWtvrtSb43U
+         aJlWbOoOEwvPNvAuDGE8m0ydxZxa3u6Dqp6h5GGgkxVaLx+NFVYUbXdFwT8DX2sJ8z1X
+         8UiuvGglQgmWbmHjLIHRZVYxdOo4qUUwIK9x5A8YF20k/pp9SjPu+N2ZneWI3YN07qcf
+         zC1f3lS9WJGG+aXrPaCjVU90z4NGZbgA93YQuXafZzRe7bwwTSqr0R3johT3g3DEbUvk
+         tNmieCbU//cpByht77vEuljjRtHXqhyew5gnGezcslnaZfMDfVmO7ikwWpz5EkZkGEJD
+         YsQg==
+X-Gm-Message-State: AOJu0YwgAZQKapvIrM0isAbPQW5NWyIDaheqm9cp5yIwCXQIPhOCPAnn
+	7iJ1/hEIVTuC1hKW09E3ToO2Ig==
+X-Google-Smtp-Source: AGHT+IGEYP3kFbU2BXJ8l/rI/nlsjaWmQXGc2w1563WPi1nlGEZAwRGbZ7i0rZz4/7Ii0lAT1EQRZA==
+X-Received: by 2002:a5d:6789:0:b0:32f:ace2:15ac with SMTP id v9-20020a5d6789000000b0032face215acmr7596896wru.59.1699266585675;
+        Mon, 06 Nov 2023 02:29:45 -0800 (PST)
+Received: from [192.168.0.23] ([89.159.1.53])
+        by smtp.gmail.com with ESMTPSA id f1-20020a056000128100b0032d88e370basm9021465wrx.34.2023.11.06.02.29.45
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 06 Nov 2023 02:29:45 -0800 (PST)
+Message-ID: <25a84986-1752-41ab-bfce-cbbf48012c43@smile.fr>
+Date: Mon, 6 Nov 2023 11:29:44 +0100
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1699266228-1FFFCEA2-334C832F/0/0 CLEAN NORMAL
-X-TOI-MSGID: f85c7041-d71d-4444-98b5-f8ed130c5b96
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-gnome][PATCH 2/2] libchamplain: Upgrade 0.12.20 ->
+ 0.12.21
+Content-Language: en-US
+To: Markus Volk <f_l_k@t-online.de>, openembedded-devel@lists.openembedded.org
+References: <20231106102411.58424-1-f_l_k@t-online.de>
+ <20231106102411.58424-2-f_l_k@t-online.de>
+From: Yoann Congal <yoann.congal@smile.fr>
+Organization: Smile ECS
+In-Reply-To: <20231106102411.58424-2-f_l_k@t-online.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 06 Nov 2023 10:24:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106408
+ <openembedded-devel@lists.openembedded.org>; Mon, 06 Nov 2023 10:29:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106409
 
-- switch to soup3
-- build vapi
+Hi Markus,
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- .../{libchamplain_0.12.20.bb =3D> libchamplain_0.12.21.bb}    | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-gnome/recipes-gnome/libchamplain/{libchamplain_0.12.20.bb =3D=
-> libchamplain_0.12.21.bb} (61%)
+Le 06/11/2023 à 11:24, Markus Volk a écrit :
+> - switch to soup3
+> - build vapi
+> 
+> Signed-off-by: Markus Volk <f_l_k@t-online.de>
+> ---
+>  .../{libchamplain_0.12.20.bb => libchamplain_0.12.21.bb}    | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>  rename meta-gnome/recipes-gnome/libchamplain/{libchamplain_0.12.20.bb => libchamplain_0.12.21.bb} (61%)
 
-diff --git a/meta-gnome/recipes-gnome/libchamplain/libchamplain_0.12.20.b=
-b b/meta-gnome/recipes-gnome/libchamplain/libchamplain_0.12.21.bb
-similarity index 61%
-rename from meta-gnome/recipes-gnome/libchamplain/libchamplain_0.12.20.bb
-rename to meta-gnome/recipes-gnome/libchamplain/libchamplain_0.12.21.bb
-index 859eab916..a89ab8cc7 100644
---- a/meta-gnome/recipes-gnome/libchamplain/libchamplain_0.12.20.bb
-+++ b/meta-gnome/recipes-gnome/libchamplain/libchamplain_0.12.21.bb
-@@ -1,13 +1,13 @@
- SUMMARY =3D "libchamplain is a Gtk widget displaying zoomable and pannab=
-le maps"
- LICENSE =3D "LGPL-2.1-only"
- LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D2d5025d4aa3495befef8f17206a5b=
-0a1"
--DEPENDS =3D "glib-2.0 gtk+3 gdk-pixbuf clutter-1.0 clutter-gtk-1.0 libso=
-up-2.4"
-+DEPENDS =3D "glib-2.0 gtk+3 clutter-1.0 clutter-gtk-1.0 libsoup-3.0 cair=
-o sqlite3"
-=20
--inherit features_check gobject-introspection meson pkgconfig
-+inherit features_check gobject-introspection meson pkgconfig vala
-=20
- REQUIRED_DISTRO_FEATURES =3D "opengl"
-=20
--SRCREV =3D "145e417f32e507b63c21ad4e915b808a6174099e"
-+SRCREV =3D "941560af497148588783db991e8135f52a82574d"
- SRC_URI =3D "git://github.com/gnome/libchamplain.git;branch=3Dmaster;pro=
-tocol=3Dhttps"
-=20
- S =3D "${WORKDIR}/git"
---=20
-2.42.0
 
+I see you send a lot of meta-oe upgrade patches (Thanks!)
+
+Just by curiosity, do you use the auto upgrade helper (AUH) output to do this?
+
+Regards,
+
+-- 
+Yoann Congal
+Smile ECS - Tech Expert
 
