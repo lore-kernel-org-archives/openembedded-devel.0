@@ -1,111 +1,111 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <festevam@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9505EC4332F
-	for <webhook@archiver.kernel.org>; Mon,  6 Nov 2023 01:53:56 +0000 (UTC)
-Received: from esa5.hc1455-7.c3s2.iphmx.com (esa5.hc1455-7.c3s2.iphmx.com [68.232.139.130])
- by mx.groups.io with SMTP id smtpd.web10.45757.1699235628122334733
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 07239C4332F
+	for <webhook@archiver.kernel.org>; Mon,  6 Nov 2023 03:13:57 +0000 (UTC)
+Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com [209.85.128.178])
+ by mx.groups.io with SMTP id smtpd.web11.46311.1699240431300276469
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 05 Nov 2023 17:53:49 -0800
+ Sun, 05 Nov 2023 19:13:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 68.232.139.130, mailfrom: wangmy@fujitsu.com)
-X-IronPort-AV: E=McAfee;i="6600,9927,10885"; a="138101625"
-X-IronPort-AV: E=Sophos;i="6.03,279,1694703600"; 
-   d="scan'208";a="138101625"
-Received: from unknown (HELO yto-r1.gw.nic.fujitsu.com) ([218.44.52.217])
-  by esa5.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Nov 2023 10:53:46 +0900
-Received: from yto-m1.gw.nic.fujitsu.com (yto-nat-yto-m1.gw.nic.fujitsu.com [192.168.83.64])
-	by yto-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id D6964D687F
-	for <openembedded-devel@lists.openembedded.org>; Mon,  6 Nov 2023 10:53:42 +0900 (JST)
-Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
-	by yto-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id 1BB7FCFB6D
-	for <openembedded-devel@lists.openembedded.org>; Mon,  6 Nov 2023 10:53:42 +0900 (JST)
-Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.79])
-	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 4B1832E462;
-	Mon,  6 Nov 2023 10:53:41 +0900 (JST)
-From: wangmy@fujitsu.com
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=F8BJob6+;
+ spf=pass (domain: gmail.com, ip: 209.85.128.178, mailfrom: festevam@gmail.com)
+Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-5b31ca2428bso4114627b3.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Nov 2023 19:13:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1699240430; x=1699845230; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=bTQ/UZXHouQI1Z5R8P4t2UrjHj8BBHGuwLJqaSuLeXo=;
+        b=F8BJob6++ttX8kE3nFYbE8/SGTGkBwnVqJsme2VMWx2AGdQlmA9KPisQkrIlDMP60S
+         t+YkSWRxPr9tBpphrBlgkrvRkjiN5Dn0IS6SNx700WXdvYGQPw0ZS/TQND78BTYvC8xS
+         oisicv+95y/4Gy4OzVBQmx6GlEQwz+kY1vbXxUQYZd1/SrN5xhF8VgN5r4+UGV3yeT8Q
+         0PQbbSeMMRSEFD7gPzv4umXnN3f3u3dUvlmon+dAi8PdY+gvy7+wFpQvryVTzsVILaEu
+         3XA7uKWjRMzcj+baFPMHhnKSeZ2wrNsnyPLvfYzYRHA9i0+vGGDxdPCh9Xm7ANqo2I2G
+         qH5Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1699240430; x=1699845230;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=bTQ/UZXHouQI1Z5R8P4t2UrjHj8BBHGuwLJqaSuLeXo=;
+        b=S4BI+FBUQ+KJ1dZIlEFw2aoDMwZOVZjPc7OyDiso9HYUqlaCEJj4QrZQCwaea+aJqd
+         EYD4oAS43ege9oPHaQIPgpf5a5MN/0kZb2f3eQV8xXIWuvlt2SZ05xJ4TKb5zNCazdi2
+         uo5MSSarmAeGFEvB2JfFCA4VI17VSLIkT+82oNmjz6beHt+2yGWfNR7sm+UHUcv1+8Qf
+         0IyzNTKFHHDC6GLnypJwLY+3fQp+9D8umeweshv15INvpmT+7mOCUIXtNRYakVBTcfH/
+         y1j+/Z8AEUQyDGq+Tn+hJ3VWOH+lppT2BVIfCg8T3wQOrgKdXg/jiDrCRf0MxfCQtuFY
+         20Mw==
+X-Gm-Message-State: AOJu0YzQhreu5MmsnhPSsctbmsyMbZBEzPh1pYofBpqyLbF7x1CUijoU
+	C/21XD09y3Ao9geYF6u3wnav3aQZhzE=
+X-Google-Smtp-Source: AGHT+IHDs+8RntY4o2ggknMr0WApLOFyHWwPTtwbh+UAyKB+JSWuoBGSjzP3IvXmqfgJ3E3m1LwQNg==
+X-Received: by 2002:a05:690c:2b0a:b0:5ad:4d0c:475a with SMTP id em10-20020a05690c2b0a00b005ad4d0c475amr17626296ywb.4.1699240429981;
+        Sun, 05 Nov 2023 19:13:49 -0800 (PST)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:8534:1594:3c83:6ff2])
+        by smtp.gmail.com with ESMTPSA id i203-20020a0ddfd4000000b005af5ef0687fsm3825870ywe.6.2023.11.05.19.13.47
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 05 Nov 2023 19:13:49 -0800 (PST)
+From: Fabio Estevam <festevam@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] hdf5: Fix install conflict when enable multilib.
-Date: Mon,  6 Nov 2023 09:53:10 +0800
-Message-Id: <1699235590-22268-1-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-X-TM-AS-GCONF: 00
-X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-27980.003
-X-TM-AS-User-Approved-Sender: Yes
-X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-27980.003
-X-TMASE-Result: 10--1.769500-10.000000
-X-TMASE-MatchedRID: sxNSNugZwuiMPz8Goa6fXdl0i+WyI+91WvaFnGMIvOqysPB8dBBorXKn
-	6DBj/gsEIvrftAIhWmLy9zcRSkKatbFC4KFlyR6Xuce7gFxhKa3zndiJkHFMhAKJcjtscVQFrC5
-	+trvtRFJ9Ersr6kKi+jKHYLsR4q0LHxPMjOKY7A9qHXONfTwSQsRB0bsfrpPIcSqbxBgG0w7Iq/
-	xYatGAlNGzwJBxP2QZ2nW4fomj0esnDa2+Tt1ew2B+HAfHgGnqWVsgyvKcah/DzV9T9e084t0CQ
-	FqlAo8WtxmcyL8IlP2CvqWrFsheUcLe0zBjeZrbFQOP52BRBXJMTsKj18q/fA==
-X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
+Cc: Fabio Estevam <festevam@denx.de>
+Subject: [PATCH] crucible: Upgrade to 2023.11.02
+Date: Mon,  6 Nov 2023 00:13:13 -0300
+Message-Id: <20231106031313.2347218-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 06 Nov 2023 01:53:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106390
+ <openembedded-devel@lists.openembedded.org>; Mon, 06 Nov 2023 03:13:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106391
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Fabio Estevam <festevam@denx.de>
 
-Error: Transaction test error:
-  file /usr/bin/h5cc conflicts between attempted installs of lib32-hdf5-1.14.2-r0.armv7ahf_neon and hdf5-1.14.2-r0.cortexa57
-  file /usr/bin/h5hlcc conflicts between attempted installs of lib32-hdf5-1.14.2-r0.armv7ahf_neon and hdf5-1.14.2-r0.cortexa57
+Upgrade to 2023.11.02, which contanins the following
+new commits:
 
-The differences of h5cc are as follows:
-@@ -44,7 +44,7 @@
-       exit $status
-       ;;
-     *)
--      /usr/bin/arm-pokymllib32-linux-gnueabi/arm-pokymllib32-linux-gnueabi-clang $@ `pkg-config --define-variable=prefix=$dir --cflags --libs hdf5`
-+      /usr/bin/aarch64-poky-linux/aarch64-poky-linux-clang $@ `pkg-config --define-variable=prefix=$dir --cflags --libs hdf5`
-       status=$?
-       exit $status
-       ;;
+fix MAC address fuse naming
+Merge pull request #21 from Lionizers/master
+fusemaps: Add support for second MAC address for i.MX7D
+move to BSD style license
+tidying
+Merge pull request #18 from DAVEEmbeddedSystems/extend-imx8mp-uniqueid-to-128-bit
+fusemaps: imx8mp: add UNIQUE_ID upper 64 bit
 
-The differences of h5hlcc are as follows:
-@@ -44,7 +44,7 @@
-       exit $status
-       ;;
-     *)
--      /usr/bin/arm-pokymllib32-linux-gnueabi/arm-pokymllib32-linux-gnueabi-clang $@ `pkg-config --define-variable=prefix=$dir --cflags --libs hdf5_hl`
-+      /usr/bin/aarch64-poky-linux/aarch64-poky-linux-clang $@ `pkg-config --define-variable=prefix=$dir --cflags --libs hdf5_hl`
-       status=$?
-       exit $status
-       ;;
+The license has changed to BSD-3-Clause, so adjust it accordingly.
 
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Fabio Estevam <festevam@denx.de>
 ---
- meta-oe/recipes-support/hdf5/hdf5_1.14.2.bb | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ .../{crucible_2023.04.12.bb => crucible_2023.11.02.bb}      | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-support/crucible/{crucible_2023.04.12.bb => crucible_2023.11.02.bb} (74%)
 
-diff --git a/meta-oe/recipes-support/hdf5/hdf5_1.14.2.bb b/meta-oe/recipes-support/hdf5/hdf5_1.14.2.bb
-index 68b91c0b0c..e716430673 100644
---- a/meta-oe/recipes-support/hdf5/hdf5_1.14.2.bb
-+++ b/meta-oe/recipes-support/hdf5/hdf5_1.14.2.bb
-@@ -7,7 +7,7 @@ SECTION = "libs"
- LICENSE = "HDF5"
- LIC_FILES_CHKSUM = "file://COPYING;md5=9ba0f3d878ab6c2403c86e9b0362d998"
+diff --git a/meta-oe/recipes-support/crucible/crucible_2023.04.12.bb b/meta-oe/recipes-support/crucible/crucible_2023.11.02.bb
+similarity index 74%
+rename from meta-oe/recipes-support/crucible/crucible_2023.04.12.bb
+rename to meta-oe/recipes-support/crucible/crucible_2023.11.02.bb
+index 4830acff1db0..339bb35f2dc7 100644
+--- a/meta-oe/recipes-support/crucible/crucible_2023.04.12.bb
++++ b/meta-oe/recipes-support/crucible/crucible_2023.11.02.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "Utility that provides userspace support for reading and writing to the i.MX fuses"
+-LICENSE = "GPL-3.0-only"
+-LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=a64ced9463b8c81d08335d41966e0592"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=201414b6610203caed355323b1ab3116"
  
--inherit cmake siteinfo qemu multilib_header
-+inherit cmake siteinfo qemu multilib_header multilib_script
+ GO_IMPORT = "github.com/usbarmory/crucible"
+ SRC_URI = "git://${GO_IMPORT}.git;protocol=https;branch=master"
+@@ -9,7 +9,7 @@ GO_INSTALL = "\
+     ${GO_IMPORT}/cmd/crucible \
+     ${GO_IMPORT}/cmd/habtool \
+ "
+-SRCREV = "269c90b0067e469c20b11e7fc5f4681ad5f0af7e"
++SRCREV = "358b5e7adb7f101f870f2b42fe5371460a3cccb6"
  
- DEPENDS += "qemu-native zlib"
- 
-@@ -40,6 +40,10 @@ EOF
- 
- do_unpack[postfuncs] += "gen_emu"
- 
-+MULTILIB_SCRIPTS += "${PN}:${bindir}/h5cc \
-+                     ${PN}:${bindir}/h5hlcc \
-+"
-+
- do_install:append() {
-     # Used for generating config files on target
-     install -m 755 ${B}/bin/H5detect ${D}${bindir}
+ # Workaround for network access issue during compile step.
+ # This needs to be fixed in the recipes buildsystem so that
 -- 
 2.34.1
 
