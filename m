@@ -1,111 +1,89 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F3F39C4167B
-	for <webhook@archiver.kernel.org>; Mon,  6 Nov 2023 13:46:30 +0000 (UTC)
-Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
- by mx.groups.io with SMTP id smtpd.web11.54090.1699278388853058015
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 36B3BC4332F
+	for <webhook@archiver.kernel.org>; Mon,  6 Nov 2023 15:05:41 +0000 (UTC)
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.web10.56867.1699283139226681727
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 Nov 2023 05:46:29 -0800
+ Mon, 06 Nov 2023 07:05:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=YaxdPnyt;
- spf=pass (domain: konsulko.com, ip: 209.85.208.52, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ed1-f52.google.com with SMTP id 4fb4d7f45d1cf-53e07db272cso7652497a12.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Nov 2023 05:46:28 -0800 (PST)
+ dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=OsEkc+eH;
+ spf=pass (domain: smile.fr, ip: 209.85.128.49, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-40850b244beso35238255e9.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 06 Nov 2023 07:05:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1699278387; x=1699883187; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=uxRHeiYtaJ7yoKlmRJEk7Qq7fFEV9KmR06igXT2eC7g=;
-        b=YaxdPnytKqgFVZXbq5ytgyEYU6j35Ia7KU46lMVTsdugBO78GbzWFkwoAZM5GcJEsV
-         eEkrX5PBkl3OcwBu/8fsF/i7SW2DwdxutiMjKfCLhArZKDYTNEOZe3pq5yMVyeD5x+Lj
-         /C1gQpmKml7xTjw88OyaMTceiadHVb0wVDMtc=
+        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1699283137; x=1699887937; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:organization:from:references
+         :cc:to:content-language:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=AGxcxvwuYjgaMyG5wFLKTzMFErA1FK/KpvitbDmvudg=;
+        b=OsEkc+eHKAb0ToYDx8OTxhTE9y96DZNn7W5vxD+qcgyoUYBhfonceRRltyorDN5Lug
+         Dz3vxdFKoEsHBdtDBM3b999c0DOM7hKz4Ga+v1px9Btg2akSaDhiguYMGe3L3w1zwzDz
+         jmfMJJMIyo8/BwZeuJ0PRrGdQ732/8c1PzuLVJvSRaKKk1GNk7QXAcVow1JTrlhfkSL0
+         +eIxC3IOU7cU2hmPiE9jU2TgTCnee+VxlgnShCmPuIaXuu7oILcj28ZCyWuryJhGqrUM
+         A0vWvIhl7OA7aU83R2ipgatzgV90ymmWFoy0YgTjIPwooIz99KzAoRGKoCKX2XrDfU0Q
+         lUpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699278387; x=1699883187;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=uxRHeiYtaJ7yoKlmRJEk7Qq7fFEV9KmR06igXT2eC7g=;
-        b=cAoqr75KBkReXSVK1flxxk1jqtM49ChrvNSnxm/JpBOc8I1xlLxTKKMZTPW2dzKNQW
-         C4nGWTF4CBAOf3qlfeUEOmF+1dEBtwZEBezsfXX61kXnPje9XxAHFbeYFOXMjosOqR7c
-         05BVQeFMmC2W5Oy1XKVaMmsqDu7jvhvMYouAvYchm+SsL6VvacE12y2OKQHCTV7E3nB9
-         RjkcWzryXMMbLhhpmE44VVfPY0Behh1seUZP9iaOmagyYoEwtMn4HiQcNjDhMnwlaeEO
-         hyxr0MTjy2adTCjgN088ItczS4fvUz0VCHvSgqo0v9mo54rohRSHnfR6STfoqIYex8TJ
-         2p7w==
-X-Gm-Message-State: AOJu0YwAg8uHcCMbnBUpoiRfjZdDk6efwbCic1Jlex/0eWSGKUQoIaG6
-	78g+cXzGB/mgK1QQ8SJhcDwrBFbMiEq00qaoCB8=
-X-Google-Smtp-Source: AGHT+IEzR8eMoedvF1gp2QGV7xwepmD03O8dazTXaegI/1yWX3ZgQtmHRKc0kVlmgcEznybnFJ47dw==
-X-Received: by 2002:a50:bb0e:0:b0:542:f328:5671 with SMTP id y14-20020a50bb0e000000b00542f3285671mr19201315ede.31.1699278386998;
-        Mon, 06 Nov 2023 05:46:26 -0800 (PST)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id ba26-20020a0564021ada00b00533dad8a9c5sm4324013edb.38.2023.11.06.05.46.26
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 06 Nov 2023 05:46:26 -0800 (PST)
-From: Leon Anavi <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/3] python3-pyppmd: add recipe
-Date: Mon,  6 Nov 2023 15:46:22 +0200
-Message-Id: <20231106134623.11522-2-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20231106134623.11522-1-leon.anavi@konsulko.com>
-References: <20231106134623.11522-1-leon.anavi@konsulko.com>
+        d=1e100.net; s=20230601; t=1699283137; x=1699887937;
+        h=content-transfer-encoding:in-reply-to:organization:from:references
+         :cc:to:content-language:subject:user-agent:mime-version:date
+         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=AGxcxvwuYjgaMyG5wFLKTzMFErA1FK/KpvitbDmvudg=;
+        b=gN5vGV0V8rC2J8jMLZGIHFMYm9t+ZZ72ESi6/cYg1LQfxdXF/1KHK49fJfviOmQkfP
+         MHr8ZEW+y1aiLDWZwDwKuoKD8pyAt8TVeOAP4KPyTIViZsPlXGMFBVd4zxEXss6KPKat
+         vwsmG/R95vKMiv9SU8avtl6f8i0g8exQpWrDnAsgAHdGk/to20g4UFX6EvYA+gb2Vix9
+         oOLYx35QXk1ThqeRvQ5Yjvg45gUgBw+qF1lTBp9jKnV+QsYm+M6LdMQKgQ4ysMec2DY6
+         VKZ1/8YB3p8rX1M2D1ZtfRVebWV5QRdL50dPNowt8Zb/4i6oM6VqSjFJ5jk7G8Mge/Sq
+         8pkA==
+X-Gm-Message-State: AOJu0YxJJwyma/AvY92Cn3An38fOZv90Rj83lA3hXav9tABCGGfEM3Df
+	TcGkk4irZgsoyeyYXXFcVsEm2g==
+X-Google-Smtp-Source: AGHT+IHCEayAQLZ7KxCu/nUzkOXfCSpKlNilqctnaYqvnVci1o7s326tPlmLTnSUFkuZgwDjXVkNEw==
+X-Received: by 2002:a05:600c:4f89:b0:408:fc62:f825 with SMTP id n9-20020a05600c4f8900b00408fc62f825mr26141776wmq.21.1699283137343;
+        Mon, 06 Nov 2023 07:05:37 -0800 (PST)
+Received: from [192.168.0.23] ([89.159.1.53])
+        by smtp.gmail.com with ESMTPSA id v9-20020a05600c470900b003feea62440bsm12361436wmo.43.2023.11.06.07.05.37
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 06 Nov 2023 07:05:37 -0800 (PST)
+Message-ID: <ad58afbe-072e-4350-ac4e-87b5078b93fc@smile.fr>
+Date: Mon, 6 Nov 2023 16:05:36 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-gnome][PATCH 2/2] libchamplain: Upgrade 0.12.20 ->
+ 0.12.21
+Content-Language: en-US
+To: Markus Volk <f_l_k@t-online.de>
+Cc: openembedded-devel@lists.openembedded.org
+References: <20231106102411.58424-1-f_l_k@t-online.de>
+ <20231106102411.58424-2-f_l_k@t-online.de>
+ <25a84986-1752-41ab-bfce-cbbf48012c43@smile.fr>
+ <N67P3S.FPIQZBXVEJXA1@t-online.de>
+From: Yoann Congal <yoann.congal@smile.fr>
+Organization: Smile ECS
+In-Reply-To: <N67P3S.FPIQZBXVEJXA1@t-online.de>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 06 Nov 2023 13:46:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106413
+ <openembedded-devel@lists.openembedded.org>; Mon, 06 Nov 2023 15:05:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106415
 
-Add pyppmd, a PPMd compression/decompression library.
-Version 1.1.0 provides:
+Le 06/11/2023 à 11:44, Markus Volk a écrit :
+> On Mon, Nov 6 2023 at 11:29:44 AM +01:00:00, Yoann Congal <yoann.congal@smile.fr> wrote:
+>> Just by curiosity, do you use the auto upgrade helper (AUH) output to do this?
+> 
+> Hi Yoann,
+> I'm not doing automated updates because I always want to have a look at the NEWS file and possible changes in the buildsystem . Usually I also verify that updates don't break runtime for me before sending them out.
+> But I found the AUHupdate report quite useful to see what needs to be done.
 
-- Add Python 3.12 support
-- Minimum required python to be 3.8
-- Export PPMD8_RESTORE_METHOD* constants
-- Drop setup.cfg
-- Drop github actions workflows
-- README: Add SPDX identifier
-- CI run on python 3.10, 3.11 and 3.12
+Yes, unattended upgrade does not seem realistic...
+Glad to see the AUH used :-)
 
-This work was sponsored by GOVCERT.LU.
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- .../python/python3-pyppmd_1.1.0.bb            | 20 +++++++++++++++++++
- 1 file changed, 20 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-pyppmd_1.1.0.bb
-
-diff --git a/meta-python/recipes-devtools/python/python3-pyppmd_1.1.0.bb b/meta-python/recipes-devtools/python/python3-pyppmd_1.1.0.bb
-new file mode 100644
-index 000000000..053c9adab
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pyppmd_1.1.0.bb
-@@ -0,0 +1,20 @@
-+SUMMARY = "PPMd compression/decompression library"
-+HOMEPAGE = "https://pyppmd.readthedocs.io/en/latest/"
-+LICENSE = "LGPL-2.1-or-later"
-+SECTION = "devel/python"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=4fbd65380cdd255951079008b364516c"
-+
-+inherit pypi python_setuptools_build_meta
-+
-+SRC_URI[sha256sum] = "1d38ce2e4b7eb84b53bc8a52380b94f66ba6c39328b8800b30c2b5bf31693973"
-+
-+DEPENDS += " \
-+    ${PYTHON_PN}-setuptools-scm-native \
-+    ${PYTHON_PN}-toml-native \
-+    ${PYTHON_PN}-wheel-native \
-+"
-+
-+RDEPENDS:${PN} += "\
-+    ${PYTHON_PN}-email \
-+    ${PYTHON_PN}-importlib-metadata \
-+"
+Thanks!
 -- 
-2.39.2
-
+Yoann Congal
+Smile ECS - Tech Expert
 
