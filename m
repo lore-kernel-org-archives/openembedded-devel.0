@@ -1,123 +1,101 @@
-Return-Path: <archana.polampalli@windriver.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D91BCC4332F
-	for <webhook@archiver.kernel.org>; Tue,  7 Nov 2023 10:05:42 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.6968.1699351538925290063
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3DF9CC4167B
+	for <webhook@archiver.kernel.org>; Tue,  7 Nov 2023 11:09:03 +0000 (UTC)
+Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
+ by mx.groups.io with SMTP id smtpd.web10.8050.1699355333176400348
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 07 Nov 2023 02:05:39 -0800
+ Tue, 07 Nov 2023 03:08:53 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=BMoksXLG;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=9675e4824b=archana.polampalli@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 3A79MYXx008132
-	for <openembedded-devel@lists.openembedded.org>; Tue, 7 Nov 2023 10:05:38 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=1vVHo
-	nBqlsZx70kvfdgPLbgTUEBKd4zZNzNqNaUnRas=; b=BMoksXLGePufBHObqIEzA
-	B4JKtYZFJi68F9Yu9TSXzI+Ne15EYrd/eiu4NjcJY0g3Bh+kyOWh2jA9RBZpGC/k
-	FbTWP1qbWVCKEqRy+SmZOGGFZ5/nxfYtrbKpskd9iUfsXR2oPNNpBnAWyspx93Q/
-	ZKWYsavmNQ76GEYq4FZLnXdvWokqCuuHOjC4O0lxeOWa2EaxAVnIbwrN+LVKdBDz
-	/g6e8sqIWLbE5CKKx4/Uki6Vq2Ak1xTHcKZXjWhsLahRUZK1pcyRq5hzHAaYTBeo
-	QYt7zJPY1jIjvqS1K7vEHOG7+8UHhqnXys8JQntsuaOcyinqs5vnH9L2ABLpzqFX
-	g==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3u5b5x2mm0-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 07 Nov 2023 10:05:37 +0000 (GMT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.34; Tue, 7 Nov 2023 02:05:38 -0800
-From: apolampa <archana.polampalli@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][mickledore][PATCH 1/1] nodejs: Upgrade 18.17.1 -> 18.18.2
-Date: Tue, 7 Nov 2023 10:05:19 +0000
-Message-ID: <20231107100519.3582169-1-archana.polampalli@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@konsulko.com header.s=google header.b=IB86V4rH;
+ spf=pass (domain: konsulko.com, ip: 209.85.208.41, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ed1-f41.google.com with SMTP id 4fb4d7f45d1cf-5440f25dcc7so7212857a12.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 07 Nov 2023 03:08:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google; t=1699355331; x=1699960131; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=UVvMPqeGIdip8dUHf+Kk0mbKpe8WcqtZdAEgDsxUP9s=;
+        b=IB86V4rHBIRSQtOLt51MNRZd5BFp0uzf6WYULZuIeqTy4n3BFNCA4/vIBtNAxeiTHG
+         PHYYEAjz1anP4TkPmWzfZBcvt+qw6t7PTp6oCyMT7onm7bfAzCyDxsHceVa7S3eF3hYJ
+         apgAIWyLhiTV5JEFoiNQVDdO9Ev0oTB4o03Kg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1699355331; x=1699960131;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=UVvMPqeGIdip8dUHf+Kk0mbKpe8WcqtZdAEgDsxUP9s=;
+        b=sL2B3AV3T6Ee7xJB+WKRsH/VH7SoTWKtX4fdW2TInSZmSVt+gxhHYgmB+CFGcwBffx
+         bwMIpDkxtwnm/qSTV/LggCU8bsK89BR4qFk9JdtcEQY5peD0zGEFEKQx5/Xr9x7tkTCU
+         TvrP2dl4GODqzuqyWtIN1dhV+PwORqBVWeM+5MqB8i6iKMENHe5KthQyQ1oVsrn7UMxU
+         +LqjwTlm115SvUI+Uz6Pm+nNdVfVTLRjHkzplJM6H3vijFEppLFcA+qw7Xd/kUXc2JMJ
+         vVFhaNSUmSpVG84AlysX8LPEKTB+uKzOY45RuAcXXQxTUtaj/eLLhWRxt6WK9B7m+LmZ
+         kG7A==
+X-Gm-Message-State: AOJu0Yx/f+ZYVeT31OuuCdlgoFGbB1chwN2f/jKRU2wUVjKGauc2hKSZ
+	prr3Spsa+yaZpKXP/ka/CH6oJn2HDKGRuPBqBWk=
+X-Google-Smtp-Source: AGHT+IEfb+H/Lvg8ElLrixIyvTFF93zWU68sfCBozZeHd5ZZQ+JC0YwHQ/Xj09cB13zyzgyTYwg1Uw==
+X-Received: by 2002:a50:bb2f:0:b0:542:f28e:2947 with SMTP id y44-20020a50bb2f000000b00542f28e2947mr20933358ede.26.1699355331164;
+        Tue, 07 Nov 2023 03:08:51 -0800 (PST)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id 29-20020a508e5d000000b0052ffc2e82f1sm5515763edx.4.2023.11.07.03.08.50
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 07 Nov 2023 03:08:50 -0800 (PST)
+From: Leon Anavi <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/4] python3-wand: add recipe
+Date: Tue,  7 Nov 2023 13:08:45 +0200
+Message-Id: <20231107110848.1610779-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-GUID: NoyF-Xxdyeb8ayMODOBARzneQzgO5GDe
-X-Proofpoint-ORIG-GUID: NoyF-Xxdyeb8ayMODOBARzneQzgO5GDe
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-11-06_15,2023-11-02_03,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0
- lowpriorityscore=0 mlxscore=0 priorityscore=1501 spamscore=0 adultscore=0
- suspectscore=0 bulkscore=0 malwarescore=0 mlxlogscore=688 clxscore=1015
- phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2310240000 definitions=main-2311070083
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 07 Nov 2023 10:05:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106445
+ <openembedded-devel@lists.openembedded.org>; Tue, 07 Nov 2023 11:09:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106446
 
-From: Archana Polampalli <archana.polampalli@windriver.com>
+Add Wand, a ctypes-based simple MagickWand API binding for Python.
+Versions 0.6.13 and 0.6.12 provide:
 
-Update to latest release of latest LTS 18 release
+- Hotfix release to remove a "work-in-progress" pyproject.toml
+- Fixed behavior when passing zero to Image.chop()
+- Fixed libmagick yield MagickCore library on Linux
+- Fixed removing mask when passing None to Image.write_mask() method
+- Added new COMPOSITE_OPERATORS operators
 
-The following CVEs are fixed in this release:
-    CVE-2023-44487
-    CVE-2023-45143
-    CVE-2023-38552
-    CVE-2023-39333
+This work was sponsored by GOVCERT.LU.
 
-License-Update: [1] [2]
- [1] https://github.com/nodejs/node/commit/06513585dc9bad6e9deb00d5f30bf3af0930295d
- [2] https://github.com/nodejs/node/commit/fbe89e632005e06ecafa7a34f75a0ac01ad3b885
-
-Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../oe-npm-cache                                              | 0
- ...-cache-native_18.17.bb => nodejs-oe-cache-native_18.18.bb} | 0
- .../nodejs/{nodejs_18.17.1.bb => nodejs_18.18.2.bb}           | 4 ++--
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-18.17 => nodejs-oe-cache-18.18}/oe-npm-cache (100%)
- rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-native_18.17.bb => nodejs-oe-cache-native_18.18.bb} (100%)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_18.17.1.bb => nodejs_18.18.2.bb} (97%)
+ .../python/python3-wand_0.6.13.bb                 | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-wand_0.6.13.bb
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-18.17/oe-npm-cache b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-18.18/oe-npm-cache
-similarity index 100%
-rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-18.17/oe-npm-cache
-rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-18.18/oe-npm-cache
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_18.17.bb b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_18.18.bb
-similarity index 100%
-rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_18.17.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_18.18.bb
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_18.17.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_18.18.2.bb
-similarity index 97%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_18.17.1.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_18.18.2.bb
-index 402cf5671..512e66a62 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_18.17.1.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_18.18.2.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
- HOMEPAGE = "http://nodejs.org"
- LICENSE = "MIT & ISC & BSD-2-Clause & BSD-3-Clause & Artistic-2.0 & Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=bc1f9ebe76be76f163e3b675303ad9cd"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=059ecf3a6f87111685e51b611b9563e5"
- 
- CVE_PRODUCT = "nodejs node.js"
- 
-@@ -39,7 +39,7 @@ SRC_URI:append:toolchain-clang:x86 = " \
- SRC_URI:append:toolchain-clang:powerpc64le = " \
-            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
-            "
--SRC_URI[sha256sum] = "f215cf03d0f00f07ac0b674c6819f804c1542e16f152da04980022aeccf5e65a"
-+SRC_URI[sha256sum] = "7249e2f0af943ec38599504f4b2a2bd31fb938787291b6ccca6c8badf01e3b56"
- 
- S = "${WORKDIR}/node-v${PV}"
- 
+diff --git a/meta-python/recipes-devtools/python/python3-wand_0.6.13.bb b/meta-python/recipes-devtools/python/python3-wand_0.6.13.bb
+new file mode 100644
+index 000000000..85e05ad97
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-wand_0.6.13.bb
+@@ -0,0 +1,15 @@
++SUMMARY = "Ctypes-based simple MagickWand API binding for Python"
++HOMEPAGE = "https://docs.wand-py.org/"
++LICENSE = "MIT"
++SECTION = "devel/python"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=0bf19e5c00d047fee994ae332db3aab6"
++
++SRC_URI[sha256sum] = "f5013484eaf7a20eb22d1821aaefe60b50cc329722372b5f8565d46d4aaafcca"
++
++inherit pypi setuptools3
++
++PYPI_PACKAGE="Wand"
++
++FILES:${PN}-doc += "${datadir}/README.rst"
++
++BBCLASSEXTEND = "native nativesdk"
 -- 
-2.40.0
+2.39.2
 
 
