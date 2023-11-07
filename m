@@ -1,247 +1,123 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <archana.polampalli@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BF450C4332F
-	for <webhook@archiver.kernel.org>; Tue,  7 Nov 2023 10:02:32 +0000 (UTC)
-Received: from mailout01.t-online.de (mailout01.t-online.de [194.25.134.80])
- by mx.groups.io with SMTP id smtpd.web11.6920.1699351343685728149
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D91BCC4332F
+	for <webhook@archiver.kernel.org>; Tue,  7 Nov 2023 10:05:42 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.6968.1699351538925290063
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 07 Nov 2023 02:02:24 -0800
+ Tue, 07 Nov 2023 02:05:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.80, mailfrom: f_l_k@t-online.de)
-Received: from fwd80.aul.t-online.de (fwd80.aul.t-online.de [10.223.144.106])
-	by mailout01.t-online.de (Postfix) with SMTP id 00AEFDB63
-	for <openembedded-devel@lists.openembedded.org>; Tue,  7 Nov 2023 11:02:21 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.154.173.54]) by fwd80.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1r0Iua-15Lsht0; Tue, 7 Nov 2023 11:02:20 +0100
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][RFC][PATCH] Adjust vala build according to changes in vala.bbclass
-Date: Tue,  7 Nov 2023 11:02:42 +0100
-Message-ID: <20231107100242.1048673-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.42.0
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=BMoksXLG;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=9675e4824b=archana.polampalli@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 3A79MYXx008132
+	for <openembedded-devel@lists.openembedded.org>; Tue, 7 Nov 2023 10:05:38 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=1vVHo
+	nBqlsZx70kvfdgPLbgTUEBKd4zZNzNqNaUnRas=; b=BMoksXLGePufBHObqIEzA
+	B4JKtYZFJi68F9Yu9TSXzI+Ne15EYrd/eiu4NjcJY0g3Bh+kyOWh2jA9RBZpGC/k
+	FbTWP1qbWVCKEqRy+SmZOGGFZ5/nxfYtrbKpskd9iUfsXR2oPNNpBnAWyspx93Q/
+	ZKWYsavmNQ76GEYq4FZLnXdvWokqCuuHOjC4O0lxeOWa2EaxAVnIbwrN+LVKdBDz
+	/g6e8sqIWLbE5CKKx4/Uki6Vq2Ak1xTHcKZXjWhsLahRUZK1pcyRq5hzHAaYTBeo
+	QYt7zJPY1jIjvqS1K7vEHOG7+8UHhqnXys8JQntsuaOcyinqs5vnH9L2ABLpzqFX
+	g==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3u5b5x2mm0-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 07 Nov 2023 10:05:37 +0000 (GMT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.34; Tue, 7 Nov 2023 02:05:38 -0800
+From: apolampa <archana.polampalli@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][mickledore][PATCH 1/1] nodejs: Upgrade 18.17.1 -> 18.18.2
+Date: Tue, 7 Nov 2023 10:05:19 +0000
+Message-ID: <20231107100519.3582169-1-archana.polampalli@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1699351340-4B7FDED2-4AC4950E/0/0 CLEAN NORMAL
-X-TOI-MSGID: 91a0a228-d459-42c1-8da6-647926792596
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-GUID: NoyF-Xxdyeb8ayMODOBARzneQzgO5GDe
+X-Proofpoint-ORIG-GUID: NoyF-Xxdyeb8ayMODOBARzneQzgO5GDe
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-11-06_15,2023-11-02_03,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0
+ lowpriorityscore=0 mlxscore=0 priorityscore=1501 spamscore=0 adultscore=0
+ suspectscore=0 bulkscore=0 malwarescore=0 mlxlogscore=688 clxscore=1015
+ phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2310240000 definitions=main-2311070083
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 07 Nov 2023 10:02:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106444
+ <openembedded-devel@lists.openembedded.org>; Tue, 07 Nov 2023 10:05:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106445
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+From: Archana Polampalli <archana.polampalli@windriver.com>
+
+Update to latest release of latest LTS 18 release
+
+The following CVEs are fixed in this release:
+    CVE-2023-44487
+    CVE-2023-45143
+    CVE-2023-38552
+    CVE-2023-39333
+
+License-Update: [1] [2]
+ [1] https://github.com/nodejs/node/commit/06513585dc9bad6e9deb00d5f30bf3af0930295d
+ [2] https://github.com/nodejs/node/commit/fbe89e632005e06ecafa7a34f75a0ac01ad3b885
+
+Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
 ---
- .../recipes-gnome/gnome-boxes/gnome-boxes_45.0.bb             | 1 +
- meta-gnome/recipes-connectivity/gtk-vnc/gtk-vnc_1.3.1.bb      | 3 +++
- meta-gnome/recipes-gnome/gjs/gjs_1.78.0.bb                    | 2 +-
- .../recipes-gnome/gnome-calculator/gnome-calculator_45.0.2.bb | 1 +
- meta-gnome/recipes-gnome/gsound/gsound_1.0.3.bb               | 2 ++
- meta-gnome/recipes-gnome/libgweather/libgweather4_4.4.0.bb    | 1 +
- meta-gnome/recipes-gnome/rest/rest_0.9.1.bb                   | 2 --
- meta-gnome/recipes-gnome/tracker/tracker-miners_3.6.2.bb      | 2 +-
- .../libcloudproviders/libcloudproviders_0.3.4.bb              | 1 +
- meta-oe/recipes-gnome/gcr/gcr3_3.41.1.bb                      | 3 +++
- meta-oe/recipes-support/libosinfo/libosinfo_1.11.0.bb         | 4 +++-
- 11 files changed, 17 insertions(+), 5 deletions(-)
+ .../oe-npm-cache                                              | 0
+ ...-cache-native_18.17.bb => nodejs-oe-cache-native_18.18.bb} | 0
+ .../nodejs/{nodejs_18.17.1.bb => nodejs_18.18.2.bb}           | 4 ++--
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-18.17 => nodejs-oe-cache-18.18}/oe-npm-cache (100%)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-native_18.17.bb => nodejs-oe-cache-native_18.18.bb} (100%)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_18.17.1.bb => nodejs_18.18.2.bb} (97%)
 
-diff --git a/meta-gnome/dynamic-layers/meta-virtualization/recipes-gnome/=
-gnome-boxes/gnome-boxes_45.0.bb b/meta-gnome/dynamic-layers/meta-virtuali=
-zation/recipes-gnome/gnome-boxes/gnome-boxes_45.0.bb
-index f2aeb8878..fc1235109 100644
---- a/meta-gnome/dynamic-layers/meta-virtualization/recipes-gnome/gnome-b=
-oxes/gnome-boxes_45.0.bb
-+++ b/meta-gnome/dynamic-layers/meta-virtualization/recipes-gnome/gnome-b=
-oxes/gnome-boxes_45.0.bb
-@@ -33,6 +33,7 @@ inherit gnomebase gsettings pkgconfig mime-xdg gtk-icon=
--cache gobject-introspect
- SRC_URI[archive.sha256sum] =3D "cc63080eefa147a8472ab1a5ff087b97a27ab723=
-a4ee005ed41e8c9dd7798e41"
-=20
- GIR_MESON_OPTION =3D ""
-+VALA_MESON_OPTION =3D ""
-=20
- FILES:${PN} +=3D "${datadir}"
-=20
-diff --git a/meta-gnome/recipes-connectivity/gtk-vnc/gtk-vnc_1.3.1.bb b/m=
-eta-gnome/recipes-connectivity/gtk-vnc/gtk-vnc_1.3.1.bb
-index 36eb8ca19..8737b6d7e 100644
---- a/meta-gnome/recipes-connectivity/gtk-vnc/gtk-vnc_1.3.1.bb
-+++ b/meta-gnome/recipes-connectivity/gtk-vnc/gtk-vnc_1.3.1.bb
-@@ -15,6 +15,9 @@ DEPENDS =3D " \
- GNOMEBASEBUILDCLASS =3D "meson"
- REQUIRED_DISTRO_FEATURES =3D "gobject-introspection-data"
- GIR_MESON_OPTION =3D ""
-+VALA_MESON_OPTION =3D "with-vala"
-+VALA_MESON_ENABLE_FLAG ?=3D 'enabled'
-+VALA_MESON_DISABLE_FLAG ?=3D 'disabled'
-=20
- PACKAGECONFIG[pulseaudio] =3D "-Dpulseaudio=3Denabled,-Dpulseaudio=3Ddis=
-abled,pulseaudio"
- PACKAGECONFIG[sasl] =3D "-Dsasl=3Denabled,-Dsasl=3Ddisabled,cyrus-sasl"
-diff --git a/meta-gnome/recipes-gnome/gjs/gjs_1.78.0.bb b/meta-gnome/reci=
-pes-gnome/gjs/gjs_1.78.0.bb
-index 0af9f5600..e91fa1bc6 100644
---- a/meta-gnome/recipes-gnome/gjs/gjs_1.78.0.bb
-+++ b/meta-gnome/recipes-gnome/gjs/gjs_1.78.0.bb
-@@ -6,7 +6,7 @@ GNOMEBASEBUILDCLASS =3D "meson"
-=20
- DEPENDS =3D "mozjs-115 cairo"
-=20
--inherit gnomebase gsettings gobject-introspection vala gettext features_=
-check upstream-version-is-even pkgconfig
-+inherit gnomebase gsettings gobject-introspection gettext features_check=
- upstream-version-is-even pkgconfig
-=20
- SRC_URI[archive.sha256sum] =3D "fbaa20e0917668830800f92951688f9fc08f0129=
-6affd5cdb4b35f750be27dc9"
- SRC_URI +=3D " \
-diff --git a/meta-gnome/recipes-gnome/gnome-calculator/gnome-calculator_4=
-5.0.2.bb b/meta-gnome/recipes-gnome/gnome-calculator/gnome-calculator_45.=
-0.2.bb
-index cde2e1d3c..3482f76a5 100644
---- a/meta-gnome/recipes-gnome/gnome-calculator/gnome-calculator_45.0.2.b=
-b
-+++ b/meta-gnome/recipes-gnome/gnome-calculator/gnome-calculator_45.0.2.b=
-b
-@@ -18,6 +18,7 @@ DEPENDS =3D " \
- GIR_MESON_OPTION =3D 'disable-introspection'
- GIR_MESON_ENABLE_FLAG =3D 'false'
- GIR_MESON_DISABLE_FLAG =3D 'true'
-+VALA_MESON_OPTION =3D ''
-=20
- GNOMEBASEBUILDCLASS =3D "meson"
- GTKIC_VERSION =3D '4'
-diff --git a/meta-gnome/recipes-gnome/gsound/gsound_1.0.3.bb b/meta-gnome=
-/recipes-gnome/gsound/gsound_1.0.3.bb
-index bdef603f0..d01067eb1 100644
---- a/meta-gnome/recipes-gnome/gsound/gsound_1.0.3.bb
-+++ b/meta-gnome/recipes-gnome/gsound/gsound_1.0.3.bb
-@@ -9,6 +9,8 @@ DEPENDS =3D " \
-=20
- GNOMEBASEBUILDCLASS =3D "meson"
-=20
-+VALA_MESON_OPTION =3D "enable_vala"
-+
- inherit gnomebase gettext gobject-introspection vala
-=20
- SRC_URI[archive.sha256sum] =3D "ca2d039e1ebd148647017a7f548862350bc9af01=
-986d39f10cfdc8e95f07881a"
-diff --git a/meta-gnome/recipes-gnome/libgweather/libgweather4_4.4.0.bb b=
-/meta-gnome/recipes-gnome/libgweather/libgweather4_4.4.0.bb
-index 81ae8317d..06353efab 100644
---- a/meta-gnome/recipes-gnome/libgweather/libgweather4_4.4.0.bb
-+++ b/meta-gnome/recipes-gnome/libgweather/libgweather4_4.4.0.bb
-@@ -15,6 +15,7 @@ SRC_URI +=3D "file://0001-Allow-building-gir-in-cross-e=
-nvironments.patch"
- SRC_URI[archive.sha256sum] =3D "366e866ff2a708b894cfea9475b8e8ff54cb3e2b=
-477ea72a8ade0dabee5f48a4"
-=20
- GTKDOC_MESON_OPTION =3D "gtk_doc"
-+VALA_MESON_OPTION =3D "enable_vala"
-=20
- DEPENDS =3D " \
-     geocode-glib \
-diff --git a/meta-gnome/recipes-gnome/rest/rest_0.9.1.bb b/meta-gnome/rec=
-ipes-gnome/rest/rest_0.9.1.bb
-index 3a81a58f6..e46cbfc69 100644
---- a/meta-gnome/recipes-gnome/rest/rest_0.9.1.bb
-+++ b/meta-gnome/recipes-gnome/rest/rest_0.9.1.bb
-@@ -17,8 +17,6 @@ DEPENDS =3D " \
-=20
- inherit gnomebase gobject-introspection vala pkgconfig gi-docgen
-=20
--EXTRA_OEMESON =3D "${@bb.utils.contains('GI_DATA_ENABLED', 'True', '-Dva=
-pi=3Dtrue', '-Dvapi=3Dfalse', d)}"
--
- PACKAGECONFIG ?=3D ""
- PACKAGECONFIG[examples] =3D "-Dexamples=3Dtrue,-Dexamples=3Dfalse"
- PACKAGECONFIG[tests] =3D "-Dtests=3Dtrue,-Dtests=3Dfalse"
-diff --git a/meta-gnome/recipes-gnome/tracker/tracker-miners_3.6.2.bb b/m=
-eta-gnome/recipes-gnome/tracker/tracker-miners_3.6.2.bb
-index a0a41d7f8..684291605 100644
---- a/meta-gnome/recipes-gnome/tracker/tracker-miners_3.6.2.bb
-+++ b/meta-gnome/recipes-gnome/tracker/tracker-miners_3.6.2.bb
-@@ -14,7 +14,7 @@ DEPENDS =3D " \
-=20
- GNOMEBASEBUILDCLASS =3D "meson"
-=20
--inherit gnomebase gsettings gobject-introspection vala bash-completion f=
-eatures_check
-+inherit gnomebase gsettings gobject-introspection bash-completion featur=
-es_check
-=20
- SRC_URI:append =3D " \
- 	file://0001-fix-reproducibility.patch \
-diff --git a/meta-gnome/recipes-support/libcloudproviders/libcloudprovide=
-rs_0.3.4.bb b/meta-gnome/recipes-support/libcloudproviders/libcloudprovid=
-ers_0.3.4.bb
-index 36089238f..21fe4d119 100644
---- a/meta-gnome/recipes-support/libcloudproviders/libcloudproviders_0.3.=
-4.bb
-+++ b/meta-gnome/recipes-support/libcloudproviders/libcloudproviders_0.3.=
-4.bb
-@@ -3,6 +3,7 @@ LICENSE=3D"LGPL-3.0-or-later"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3De6a600fd5e1d9cbde2d983680233a=
-d02"
-=20
- GNOMEBASEBUILDCLASS =3D "meson"
-+VALA_MESON_OPTION ?=3D 'vapigen'
-=20
- DEPENDS =3D "glib-2.0"
-=20
-diff --git a/meta-oe/recipes-gnome/gcr/gcr3_3.41.1.bb b/meta-oe/recipes-g=
-nome/gcr/gcr3_3.41.1.bb
-index ba5660a5e..a5bb868bb 100644
---- a/meta-oe/recipes-gnome/gcr/gcr3_3.41.1.bb
-+++ b/meta-oe/recipes-gnome/gcr/gcr3_3.41.1.bb
-@@ -17,6 +17,8 @@ CFLAGS +=3D "-D_GNU_SOURCE"
-=20
- GNOMEBASEBUILDCLASS =3D "meson"
- GTKDOC_MESON_OPTION =3D "gtk_doc"
-+VALA_MESON_OPTION ?=3D ''
-+
- inherit gnomebase gtk-icon-cache gi-docgen features_check upstream-versi=
-on-is-even vala gobject-introspection gettext mime mime-xdg
- UPSTREAM_CHECK_REGEX =3D "[^\d\.](?P<pver>3.(?!9\d+)\d+(\.\d+)+)\.tar"
-=20
-@@ -39,6 +41,7 @@ PACKAGECONFIG[systemd] =3D "-Dsystemd=3Denabled,-Dsyste=
-md=3Ddisabled,systemd"
- FILES:${PN} +=3D " \
-     ${datadir}/dbus-1 \
-     ${datadir}/gcr-3 \
-+    ${datadir}/vala \
-     ${systemd_user_unitdir}/gcr-ssh-agent.socket \
-     ${systemd_user_unitdir}/gcr-ssh-agent.service \
- "
-diff --git a/meta-oe/recipes-support/libosinfo/libosinfo_1.11.0.bb b/meta=
--oe/recipes-support/libosinfo/libosinfo_1.11.0.bb
-index 16e0cf8f7..ca6f9ba3f 100644
---- a/meta-oe/recipes-support/libosinfo/libosinfo_1.11.0.bb
-+++ b/meta-oe/recipes-support/libosinfo/libosinfo_1.11.0.bb
-@@ -18,6 +18,9 @@ inherit meson pkgconfig gtk-doc gobject-introspection v=
-ala
-=20
- DEPENDS =3D "glib-2.0 libsoup libxslt"
-=20
-+VALA_MESON_OPTION =3D 'enable-vala'
-+VALA_MESON_ENABLE_FLAG =3D 'enabled'
-+VALA_MESON_DISABLE_FLAG =3D 'disabled'
- GIR_MESON_OPTION =3D "enable-introspection"
- GIR_MESON_ENABLE_FLAG =3D 'enabled'
- GIR_MESON_DISABLE_FLAG =3D 'disabled'
-@@ -26,7 +29,6 @@ GTKDOC_MESON_OPTION =3D "enable-gtk-doc"
- EXTRA_OEMESON +=3D " \
- 	-Dwith-pci-ids-path=3D${datadir}/pci.ids \
- 	-Dwith-usb-ids-path=3D${datadir}/usb.ids \
--	${@bb.utils.contains('GI_DATA_ENABLED', 'True', '-Denable-vala=3Denable=
-d', '-Denable-vala=3Ddisabled', d)} \
- "
-=20
- RDEPENDS:${PN} =3D "pciutils-ids usbids"
---=20
-2.42.0
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-18.17/oe-npm-cache b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-18.18/oe-npm-cache
+similarity index 100%
+rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-18.17/oe-npm-cache
+rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-18.18/oe-npm-cache
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_18.17.bb b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_18.18.bb
+similarity index 100%
+rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_18.17.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_18.18.bb
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_18.17.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_18.18.2.bb
+similarity index 97%
+rename from meta-oe/recipes-devtools/nodejs/nodejs_18.17.1.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs_18.18.2.bb
+index 402cf5671..512e66a62 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_18.17.1.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_18.18.2.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
+ HOMEPAGE = "http://nodejs.org"
+ LICENSE = "MIT & ISC & BSD-2-Clause & BSD-3-Clause & Artistic-2.0 & Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=bc1f9ebe76be76f163e3b675303ad9cd"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=059ecf3a6f87111685e51b611b9563e5"
+ 
+ CVE_PRODUCT = "nodejs node.js"
+ 
+@@ -39,7 +39,7 @@ SRC_URI:append:toolchain-clang:x86 = " \
+ SRC_URI:append:toolchain-clang:powerpc64le = " \
+            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
+            "
+-SRC_URI[sha256sum] = "f215cf03d0f00f07ac0b674c6819f804c1542e16f152da04980022aeccf5e65a"
++SRC_URI[sha256sum] = "7249e2f0af943ec38599504f4b2a2bd31fb938787291b6ccca6c8badf01e3b56"
+ 
+ S = "${WORKDIR}/node-v${PV}"
+ 
+-- 
+2.40.0
 
 
