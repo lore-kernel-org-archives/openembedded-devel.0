@@ -1,264 +1,150 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <Joakim.Tjernlund@infinera.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B3256C4332F
-	for <webhook@archiver.kernel.org>; Tue,  7 Nov 2023 19:33:10 +0000 (UTC)
-Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
- by mx.groups.io with SMTP id smtpd.web11.4040.1699385589405553777
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F21EBC4332F
+	for <webhook@archiver.kernel.org>; Tue,  7 Nov 2023 20:25:00 +0000 (UTC)
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (NAM10-DM6-obe.outbound.protection.outlook.com [40.107.93.54])
+ by mx.groups.io with SMTP id smtpd.web10.5323.1699388699042445099
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 07 Nov 2023 11:33:09 -0800
+ Tue, 07 Nov 2023 12:24:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
-Received: from fwd70.aul.t-online.de (fwd70.aul.t-online.de [10.223.144.96])
-	by mailout03.t-online.de (Postfix) with SMTP id 4C1A215E8F
-	for <openembedded-devel@lists.openembedded.org>; Tue,  7 Nov 2023 20:33:05 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.154.173.54]) by fwd70.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1r0Roq-2YHZPF0; Tue, 7 Nov 2023 20:33:00 +0100
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][RFC][PATCHv2] Adjust vala build according to changes in vala.bbclass
-Date: Tue,  7 Nov 2023 20:33:03 +0100
-Message-ID: <20231107193303.796921-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.42.0
+ dkim=fail reason="dkim: body hash did not verify" header.i=@infinera.com header.s=selector1 header.b=j24/a3CG;
+ spf=pass (domain: infinera.com, ip: 40.107.93.54, mailfrom: joakim.tjernlund@infinera.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=IqAu0UweOWyXfWK6Q1IyGy/3g0xQdj1M/z+NXJ+Y/SuO3bVCEvZdrWvloZLtcS4Jsdscwgh5qjr+4C1mKG8EkbEKbCLC6WzutPfDErzo2d63/jFoWR95w1Hjaw4xa8jAW3b66i8ajm/AwhmY+WnEMwAMbbdqf7/fbMXUXaon5Jg6l+1PuZ7yFwppH5bwd65D+uei61I86qI6dBOkqOjtWS+p2KHnH7nC8B5uRnfp1VpZ1W1ij5/IraomiJ54FM3EL8SKnW1knQuQztLJ4Sxz3xlCCGCWOtj+pOhBI+sKzq1tcXT4nwyZ7z1eUsL8W13cMXS8LGhsm2DDwuC+4PGhqQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=llcnqHZGaryn8eBCn4VYuB57uy9SnZssi3sPkIEApYY=;
+ b=Q2AJ1GUHIXN6u6b54HFeQaO6/PcE53rblWyeoyyiPo0FE2V3pX4rSiXHL02Leb5REi94vJBd5KzojZnj89OmF3ex+iKTR8g1UTvKKw77GX0ptp7ysDsRq/8twTW73MmejFlOsfmhoJACRMy53iS1tTfXz4RuyyKwQvZQQHpP0wkPbVbWQTp8vjczw7Gw7A/O2J/yjnsEO1AElKWoN0k0lqqJLb1svBn6cyAh+m025RqFx2xDNF29iGL439VaYTHgnf5rPktok6px92QSB3t8lUpOsMk/vH+pDq2lIaXZfpRud0OS/of2cgNjF21/1bXvnbZR3fYiGUfwoWFxxZClzQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 8.4.225.30) smtp.rcpttodomain=lists.openembedded.org
+ smtp.mailfrom=infinera.com; dmarc=pass (p=quarantine sp=quarantine pct=100)
+ action=none header.from=infinera.com; dkim=none (message not signed);
+ arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=infinera.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=llcnqHZGaryn8eBCn4VYuB57uy9SnZssi3sPkIEApYY=;
+ b=j24/a3CGR78BAU4ZXolufZj+it6qZqzfl76L4XQIyLKOq/qbgB5DfL09Far+Ca6lXdeIv4tO1jf8YxTFc7BqshXDl3JMJqaejBbgcjjaOtj1L7kvuylfE3+9qtYBk3ULuh+K/cWAI2CDtWbdf7BcQEXUCxbTOY3aMJvKz/KdnYys4HXqu+vbZCFRbmKdrgiJb+WUvK/sde3+CBf6afA8gw+k44tLQfnGWxeuO3kIR3lAlGPbXCP0ZFCHv1nrIwawwXTbhWgASaALk/EMCd5R9wXjFll/Sk6WbEUmzX6wQSCHgbN3xCcd5zND0QrcYJL45F5wfWrw0jFCFJ9n5g3JiQ==
+Received: from BLAPR03CA0103.namprd03.prod.outlook.com (2603:10b6:208:32a::18)
+ by SN4PR10MB5560.namprd10.prod.outlook.com (2603:10b6:806:203::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.25; Tue, 7 Nov
+ 2023 20:24:57 +0000
+Received: from MN1PEPF0000ECD9.namprd02.prod.outlook.com
+ (2603:10b6:208:32a:cafe::93) by BLAPR03CA0103.outlook.office365.com
+ (2603:10b6:208:32a::18) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6977.18 via Frontend
+ Transport; Tue, 7 Nov 2023 20:24:56 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 8.4.225.30)
+ smtp.mailfrom=infinera.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=infinera.com;
+Received-SPF: Pass (protection.outlook.com: domain of infinera.com designates
+ 8.4.225.30 as permitted sender) receiver=protection.outlook.com;
+ client-ip=8.4.225.30; helo=owa.infinera.com; pr=C
+Received: from owa.infinera.com (8.4.225.30) by
+ MN1PEPF0000ECD9.mail.protection.outlook.com (10.167.242.138) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6977.16 via Frontend Transport; Tue, 7 Nov 2023 20:24:56 +0000
+Received: from sv-ex16-prd.infinera.com (10.100.96.229) by
+ sv-ex16-prd.infinera.com (10.100.96.229) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2176.14; Tue, 7 Nov 2023 12:24:43 -0800
+Received: from sv-smtp-prod3.infinera.com (10.100.98.58) by
+ sv-ex16-prd.infinera.com (10.100.96.229) with Microsoft SMTP Server id
+ 15.1.2176.14 via Frontend Transport; Tue, 7 Nov 2023 12:24:42 -0800
+Received: from se-metroit-prd1.infinera.com ([10.210.32.58]) by sv-smtp-prod3.infinera.com with Microsoft SMTPSVC(8.5.9600.16384);
+	 Tue, 7 Nov 2023 12:24:42 -0800
+Received: from gentoo-jocke.infinera.com (gentoo-jocke.infinera.com [10.210.71.73])
+	by se-metroit-prd1.infinera.com (Postfix) with ESMTP id 0B2212C06D81
+	for <openembedded-devel@lists.openembedded.org>; Tue,  7 Nov 2023 21:24:42 +0100 (CET)
+Received: by gentoo-jocke.infinera.com (Postfix, from userid 1001)
+	id 03A8D401154E; Tue,  7 Nov 2023 21:24:42 +0100 (CET)
+From: Joakim Tjernlund <joakim.tjernlund@infinera.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Joakim Tjernlund <joakim.tjernlund@infinera.com>
+Subject: [PATCH] [meta classes] sed -i destroys symlinks
+Date: Tue, 7 Nov 2023 21:24:12 +0100
+Message-ID: <20231107202439.2647261-1-joakim.tjernlund@infinera.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1699385580-F914733D-F264C3A7/0/0 CLEAN NORMAL
-X-TOI-MSGID: a73c8485-bada-41f2-b076-dbfd3f5980df
 Content-Transfer-Encoding: quoted-printable
+X-OriginalArrivalTime: 07 Nov 2023 20:24:42.0988 (UTC) FILETIME=[7117A2C0:01DA11B8]
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MN1PEPF0000ECD9:EE_|SN4PR10MB5560:EE_
+X-MS-Office365-Filtering-Correlation-Id: e7454ba1-2161-4025-33a0-08dbdfcf9b7c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	RyG4KSeShIida1nkGSUHbb82m7+HRmqRKer25GbPSMXe7bF1rpxRC8heMqn34RBZUjjT+Sx/jkIR02cT+IXw1JWRtJUdRt+U/nfbSZrJCasdlPWLn1h6dEWTvKN9D05X81HCa+uOStu+V4YJ6ivtf8jkGkjRbBm0gFjaLB/b4JsZ7ieboORiGTV0xt2MDLg9P+CYQ9O5L5Oi4KIQjck9X3wtWVYZJ3fMPMRG5mh9NNupINWzVeN5qHEn9aFCv/T7SdVo94D704kxjGTbMqD8QJnSyThAWCkozCcchQOLg4yqUH+ZsZop0BJWSN8gSn+O7FbMDFA4Vb04NyUbxtJYuVV+yYuKAFDQMlP3PC2zRy7AqW+UBs97m7qzp8ZFtbKUhfAlPjBd1ZrLdJnlODgEnMkCtSCFmrGMbpkHhXxv9ztGElTnCOFKphUxfElGIucDFfgyqofeclFh2UGYpBCAtW+oHAzdKaBRKoGJrl3W1PsqUDZCuYqipAzFNFMOctCsCl2evC+C52MViq9oUz26m990+j3TgQqcNumGEPomKilJRsNQgTVBdZyKf1dIA1dqKuefZw1eQDefaNruo5GczAMFHkV1PtSU5DgLaSMCFPMoVAu+9chmhWUHf1cogxtWOtvQ6wxEHHrK8Me6SklwHcWT1xGEfvAGw5u32G+aifrijm/nCQ95lQarrgSKJbivfChZ+HQvIHPc5nlPVuUVgnSp6Z5I+IV1sfI/KW33a6F5NobybJdWpfWqfxfSChC9
+X-Forefront-Antispam-Report: 
+	CIP:8.4.225.30;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:owa.infinera.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(346002)(39860400002)(396003)(136003)(376002)(230922051799003)(82310400011)(186009)(1800799009)(64100799003)(451199024)(36840700001)(46966006)(5660300002)(336012)(6266002)(2616005)(44832011)(86362001)(426003)(2906002)(4326008)(8676002)(478600001)(83380400001)(40480700001)(8936002)(36860700001)(6666004)(47076005)(41300700001)(81166007)(107886003)(70206006)(36756003)(42186006)(82740400003)(316002)(356005)(1076003)(26005)(70586007)(6916009)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: infinera.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Nov 2023 20:24:56.1327
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e7454ba1-2161-4025-33a0-08dbdfcf9b7c
+X-MS-Exchange-CrossTenant-Id: 285643de-5f5b-4b03-a153-0ae2dc8aaf77
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=285643de-5f5b-4b03-a153-0ae2dc8aaf77;Ip=[8.4.225.30];Helo=[owa.infinera.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	MN1PEPF0000ECD9.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN4PR10MB5560
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 07 Nov 2023 19:33:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106460
+ <openembedded-devel@lists.openembedded.org>; Tue, 07 Nov 2023 20:25:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106461
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+In /etc/passwd is a symlink, sed -i on same file will replace the
+symlink with a new file. Prevent that by expanding the file with realpath
+before giving it to sed.
 ---
- .../recipes-gnome/gnome-boxes/gnome-boxes_45.0.bb             | 1 +
- meta-gnome/recipes-connectivity/gtk-vnc/gtk-vnc_1.3.1.bb      | 3 +++
- meta-gnome/recipes-gnome/gedit/gedit_46.1.bb                  | 2 +-
- meta-gnome/recipes-gnome/gjs/gjs_1.78.0.bb                    | 2 +-
- .../recipes-gnome/gnome-calculator/gnome-calculator_45.0.2.bb | 1 +
- meta-gnome/recipes-gnome/gsound/gsound_1.0.3.bb               | 2 ++
- meta-gnome/recipes-gnome/libgweather/libgweather4_4.4.0.bb    | 1 +
- meta-gnome/recipes-gnome/rest/rest_0.9.1.bb                   | 2 --
- meta-gnome/recipes-gnome/tracker/tracker-miners_3.6.2.bb      | 1 +
- .../libcloudproviders/libcloudproviders_0.3.4.bb              | 1 +
- meta-oe/recipes-gnome/gcr/gcr3_3.41.1.bb                      | 3 +++
- meta-oe/recipes-support/libosinfo/libosinfo_1.11.0.bb         | 4 +++-
- 12 files changed, 18 insertions(+), 5 deletions(-)
+ meta/classes/rootfs-postcommands.bbclass | 4 ++--
+ meta/classes/useradd_base.bbclass        | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-gnome/dynamic-layers/meta-virtualization/recipes-gnome/=
-gnome-boxes/gnome-boxes_45.0.bb b/meta-gnome/dynamic-layers/meta-virtuali=
-zation/recipes-gnome/gnome-boxes/gnome-boxes_45.0.bb
-index f2aeb8878..fc1235109 100644
---- a/meta-gnome/dynamic-layers/meta-virtualization/recipes-gnome/gnome-b=
-oxes/gnome-boxes_45.0.bb
-+++ b/meta-gnome/dynamic-layers/meta-virtualization/recipes-gnome/gnome-b=
-oxes/gnome-boxes_45.0.bb
-@@ -33,6 +33,7 @@ inherit gnomebase gsettings pkgconfig mime-xdg gtk-icon=
--cache gobject-introspect
- SRC_URI[archive.sha256sum] =3D "cc63080eefa147a8472ab1a5ff087b97a27ab723=
-a4ee005ed41e8c9dd7798e41"
+diff --git a/meta/classes/rootfs-postcommands.bbclass b/meta/classes/rootfs=
+-postcommands.bbclass
+index 5c0b3ec37c..55cc863dbf 100644
+--- a/meta/classes/rootfs-postcommands.bbclass
++++ b/meta/classes/rootfs-postcommands.bbclass
+@@ -148,10 +148,10 @@ read_only_rootfs_hook () {
+ #
+ zap_empty_root_password () {
+ 	if [ -e ${IMAGE_ROOTFS}/etc/shadow ]; then
+-		sed -i 's%^root::%root:*:%' ${IMAGE_ROOTFS}/etc/shadow
++		sed -i 's%^root::%root:*:%' $(realpath ${IMAGE_ROOTFS}/etc/shadow)
+         fi
+ 	if [ -e ${IMAGE_ROOTFS}/etc/passwd ]; then
+-		sed -i 's%^root::%root:*:%' ${IMAGE_ROOTFS}/etc/passwd
++		sed -i 's%^root::%root:*:%' $(realpath ${IMAGE_ROOTFS}/etc/passwd)
+ 	fi
+ }
 =20
- GIR_MESON_OPTION =3D ""
-+VALA_MESON_OPTION =3D ""
-=20
- FILES:${PN} +=3D "${datadir}"
-=20
-diff --git a/meta-gnome/recipes-connectivity/gtk-vnc/gtk-vnc_1.3.1.bb b/m=
-eta-gnome/recipes-connectivity/gtk-vnc/gtk-vnc_1.3.1.bb
-index 36eb8ca19..8737b6d7e 100644
---- a/meta-gnome/recipes-connectivity/gtk-vnc/gtk-vnc_1.3.1.bb
-+++ b/meta-gnome/recipes-connectivity/gtk-vnc/gtk-vnc_1.3.1.bb
-@@ -15,6 +15,9 @@ DEPENDS =3D " \
- GNOMEBASEBUILDCLASS =3D "meson"
- REQUIRED_DISTRO_FEATURES =3D "gobject-introspection-data"
- GIR_MESON_OPTION =3D ""
-+VALA_MESON_OPTION =3D "with-vala"
-+VALA_MESON_ENABLE_FLAG ?=3D 'enabled'
-+VALA_MESON_DISABLE_FLAG ?=3D 'disabled'
-=20
- PACKAGECONFIG[pulseaudio] =3D "-Dpulseaudio=3Denabled,-Dpulseaudio=3Ddis=
-abled,pulseaudio"
- PACKAGECONFIG[sasl] =3D "-Dsasl=3Denabled,-Dsasl=3Ddisabled,cyrus-sasl"
-diff --git a/meta-gnome/recipes-gnome/gedit/gedit_46.1.bb b/meta-gnome/re=
-cipes-gnome/gedit/gedit_46.1.bb
-index 01d7a072a..0014b512a 100644
---- a/meta-gnome/recipes-gnome/gedit/gedit_46.1.bb
-+++ b/meta-gnome/recipes-gnome/gedit/gedit_46.1.bb
-@@ -19,7 +19,7 @@ DEPENDS =3D " \
-     tepl \
- "
-=20
--inherit gnomebase gsettings itstool gnome-help gobject-introspection gtk=
--doc vala gettext features_check mime-xdg gtk-icon-cache python3targetcon=
-fig
-+inherit gnomebase gsettings itstool gnome-help gobject-introspection gtk=
--doc gettext features_check mime-xdg gtk-icon-cache python3targetconfig
-=20
- def gnome_verdir(v):
-     return oe.utils.trim_version(v, 1)
-diff --git a/meta-gnome/recipes-gnome/gjs/gjs_1.78.0.bb b/meta-gnome/reci=
-pes-gnome/gjs/gjs_1.78.0.bb
-index 0af9f5600..e91fa1bc6 100644
---- a/meta-gnome/recipes-gnome/gjs/gjs_1.78.0.bb
-+++ b/meta-gnome/recipes-gnome/gjs/gjs_1.78.0.bb
-@@ -6,7 +6,7 @@ GNOMEBASEBUILDCLASS =3D "meson"
-=20
- DEPENDS =3D "mozjs-115 cairo"
-=20
--inherit gnomebase gsettings gobject-introspection vala gettext features_=
-check upstream-version-is-even pkgconfig
-+inherit gnomebase gsettings gobject-introspection gettext features_check=
- upstream-version-is-even pkgconfig
-=20
- SRC_URI[archive.sha256sum] =3D "fbaa20e0917668830800f92951688f9fc08f0129=
-6affd5cdb4b35f750be27dc9"
- SRC_URI +=3D " \
-diff --git a/meta-gnome/recipes-gnome/gnome-calculator/gnome-calculator_4=
-5.0.2.bb b/meta-gnome/recipes-gnome/gnome-calculator/gnome-calculator_45.=
-0.2.bb
-index cde2e1d3c..3482f76a5 100644
---- a/meta-gnome/recipes-gnome/gnome-calculator/gnome-calculator_45.0.2.b=
-b
-+++ b/meta-gnome/recipes-gnome/gnome-calculator/gnome-calculator_45.0.2.b=
-b
-@@ -18,6 +18,7 @@ DEPENDS =3D " \
- GIR_MESON_OPTION =3D 'disable-introspection'
- GIR_MESON_ENABLE_FLAG =3D 'false'
- GIR_MESON_DISABLE_FLAG =3D 'true'
-+VALA_MESON_OPTION =3D ''
-=20
- GNOMEBASEBUILDCLASS =3D "meson"
- GTKIC_VERSION =3D '4'
-diff --git a/meta-gnome/recipes-gnome/gsound/gsound_1.0.3.bb b/meta-gnome=
-/recipes-gnome/gsound/gsound_1.0.3.bb
-index bdef603f0..d01067eb1 100644
---- a/meta-gnome/recipes-gnome/gsound/gsound_1.0.3.bb
-+++ b/meta-gnome/recipes-gnome/gsound/gsound_1.0.3.bb
-@@ -9,6 +9,8 @@ DEPENDS =3D " \
-=20
- GNOMEBASEBUILDCLASS =3D "meson"
-=20
-+VALA_MESON_OPTION =3D "enable_vala"
-+
- inherit gnomebase gettext gobject-introspection vala
-=20
- SRC_URI[archive.sha256sum] =3D "ca2d039e1ebd148647017a7f548862350bc9af01=
-986d39f10cfdc8e95f07881a"
-diff --git a/meta-gnome/recipes-gnome/libgweather/libgweather4_4.4.0.bb b=
-/meta-gnome/recipes-gnome/libgweather/libgweather4_4.4.0.bb
-index 81ae8317d..06353efab 100644
---- a/meta-gnome/recipes-gnome/libgweather/libgweather4_4.4.0.bb
-+++ b/meta-gnome/recipes-gnome/libgweather/libgweather4_4.4.0.bb
-@@ -15,6 +15,7 @@ SRC_URI +=3D "file://0001-Allow-building-gir-in-cross-e=
-nvironments.patch"
- SRC_URI[archive.sha256sum] =3D "366e866ff2a708b894cfea9475b8e8ff54cb3e2b=
-477ea72a8ade0dabee5f48a4"
-=20
- GTKDOC_MESON_OPTION =3D "gtk_doc"
-+VALA_MESON_OPTION =3D "enable_vala"
-=20
- DEPENDS =3D " \
-     geocode-glib \
-diff --git a/meta-gnome/recipes-gnome/rest/rest_0.9.1.bb b/meta-gnome/rec=
-ipes-gnome/rest/rest_0.9.1.bb
-index 3a81a58f6..e46cbfc69 100644
---- a/meta-gnome/recipes-gnome/rest/rest_0.9.1.bb
-+++ b/meta-gnome/recipes-gnome/rest/rest_0.9.1.bb
-@@ -17,8 +17,6 @@ DEPENDS =3D " \
-=20
- inherit gnomebase gobject-introspection vala pkgconfig gi-docgen
-=20
--EXTRA_OEMESON =3D "${@bb.utils.contains('GI_DATA_ENABLED', 'True', '-Dva=
-pi=3Dtrue', '-Dvapi=3Dfalse', d)}"
--
- PACKAGECONFIG ?=3D ""
- PACKAGECONFIG[examples] =3D "-Dexamples=3Dtrue,-Dexamples=3Dfalse"
- PACKAGECONFIG[tests] =3D "-Dtests=3Dtrue,-Dtests=3Dfalse"
-diff --git a/meta-gnome/recipes-gnome/tracker/tracker-miners_3.6.2.bb b/m=
-eta-gnome/recipes-gnome/tracker/tracker-miners_3.6.2.bb
-index a0a41d7f8..426082bd5 100644
---- a/meta-gnome/recipes-gnome/tracker/tracker-miners_3.6.2.bb
-+++ b/meta-gnome/recipes-gnome/tracker/tracker-miners_3.6.2.bb
-@@ -25,6 +25,7 @@ SRC_URI[archive.sha256sum] =3D "0ad722f3d532c21d757cf48=
-8f942960679ea8f457925efa976
- # gobject-introspection is mandatory and cannot be configured
- REQUIRED_DISTRO_FEATURES =3D "gobject-introspection-data"
- GIR_MESON_OPTION =3D ""
-+VALA_MESON_OPTION =3D ""
-=20
- PACKAGECONFIG ??=3D " \
-     ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "ffmpeg=
-", "", d)} \
-diff --git a/meta-gnome/recipes-support/libcloudproviders/libcloudprovide=
-rs_0.3.4.bb b/meta-gnome/recipes-support/libcloudproviders/libcloudprovid=
-ers_0.3.4.bb
-index 36089238f..21fe4d119 100644
---- a/meta-gnome/recipes-support/libcloudproviders/libcloudproviders_0.3.=
-4.bb
-+++ b/meta-gnome/recipes-support/libcloudproviders/libcloudproviders_0.3.=
-4.bb
-@@ -3,6 +3,7 @@ LICENSE=3D"LGPL-3.0-or-later"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3De6a600fd5e1d9cbde2d983680233a=
-d02"
-=20
- GNOMEBASEBUILDCLASS =3D "meson"
-+VALA_MESON_OPTION ?=3D 'vapigen'
-=20
- DEPENDS =3D "glib-2.0"
-=20
-diff --git a/meta-oe/recipes-gnome/gcr/gcr3_3.41.1.bb b/meta-oe/recipes-g=
-nome/gcr/gcr3_3.41.1.bb
-index ba5660a5e..a5bb868bb 100644
---- a/meta-oe/recipes-gnome/gcr/gcr3_3.41.1.bb
-+++ b/meta-oe/recipes-gnome/gcr/gcr3_3.41.1.bb
-@@ -17,6 +17,8 @@ CFLAGS +=3D "-D_GNU_SOURCE"
-=20
- GNOMEBASEBUILDCLASS =3D "meson"
- GTKDOC_MESON_OPTION =3D "gtk_doc"
-+VALA_MESON_OPTION ?=3D ''
-+
- inherit gnomebase gtk-icon-cache gi-docgen features_check upstream-versi=
-on-is-even vala gobject-introspection gettext mime mime-xdg
- UPSTREAM_CHECK_REGEX =3D "[^\d\.](?P<pver>3.(?!9\d+)\d+(\.\d+)+)\.tar"
-=20
-@@ -39,6 +41,7 @@ PACKAGECONFIG[systemd] =3D "-Dsystemd=3Denabled,-Dsyste=
-md=3Ddisabled,systemd"
- FILES:${PN} +=3D " \
-     ${datadir}/dbus-1 \
-     ${datadir}/gcr-3 \
-+    ${datadir}/vala \
-     ${systemd_user_unitdir}/gcr-ssh-agent.socket \
-     ${systemd_user_unitdir}/gcr-ssh-agent.service \
- "
-diff --git a/meta-oe/recipes-support/libosinfo/libosinfo_1.11.0.bb b/meta=
--oe/recipes-support/libosinfo/libosinfo_1.11.0.bb
-index 16e0cf8f7..ca6f9ba3f 100644
---- a/meta-oe/recipes-support/libosinfo/libosinfo_1.11.0.bb
-+++ b/meta-oe/recipes-support/libosinfo/libosinfo_1.11.0.bb
-@@ -18,6 +18,9 @@ inherit meson pkgconfig gtk-doc gobject-introspection v=
-ala
-=20
- DEPENDS =3D "glib-2.0 libsoup libxslt"
-=20
-+VALA_MESON_OPTION =3D 'enable-vala'
-+VALA_MESON_ENABLE_FLAG =3D 'enabled'
-+VALA_MESON_DISABLE_FLAG =3D 'disabled'
- GIR_MESON_OPTION =3D "enable-introspection"
- GIR_MESON_ENABLE_FLAG =3D 'enabled'
- GIR_MESON_DISABLE_FLAG =3D 'disabled'
-@@ -26,7 +29,6 @@ GTKDOC_MESON_OPTION =3D "enable-gtk-doc"
- EXTRA_OEMESON +=3D " \
- 	-Dwith-pci-ids-path=3D${datadir}/pci.ids \
- 	-Dwith-usb-ids-path=3D${datadir}/usb.ids \
--	${@bb.utils.contains('GI_DATA_ENABLED', 'True', '-Denable-vala=3Denable=
-d', '-Denable-vala=3Ddisabled', d)} \
- "
-=20
- RDEPENDS:${PN} =3D "pciutils-ids usbids"
+diff --git a/meta/classes/useradd_base.bbclass b/meta/classes/useradd_base.=
+bbclass
+index 7f5b9b7219..72732a4d57 100644
+--- a/meta/classes/useradd_base.bbclass
++++ b/meta/classes/useradd_base.bbclass
+@@ -154,7 +154,7 @@ perform_passwd_expire () {
+ 	local username=3D`echo "$opts" | awk '{ print $NF }'`
+ 	local user_exists=3D"`grep "^$username:" $rootdir/etc/passwd || true`"
+ 	if test "x$user_exists" !=3D "x"; then
+-		eval flock -x $rootdir${sysconfdir} -c \"$PSEUDO sed -i \''s/^\('$userna=
+me':[^:]*\):[^:]*:/\1:0:/'\' $rootdir/etc/shadow \" || true
++		eval flock -x $rootdir${sysconfdir} -c \"$PSEUDO sed -i \''s/^\('$userna=
+me':[^:]*\):[^:]*:/\1:0:/'\' $(realpath $rootdir/etc/shadow) \" || true
+ 		local passwd_lastchanged=3D"`grep "^$username:" $rootdir/etc/shadow | cu=
+t -d: -f3`"
+ 		if test "x$passwd_lastchanged" !=3D "x0"; then
+ 			bbfatal "${PN}: passwd --expire operation did not succeed."
 --=20
-2.42.0
+2.41.0
 
 
