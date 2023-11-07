@@ -2,39 +2,39 @@ Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D3DFEC0018C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E0297C41535
 	for <webhook@archiver.kernel.org>; Tue,  7 Nov 2023 07:13:11 +0000 (UTC)
-Received: from EUR02-DB5-obe.outbound.protection.outlook.com (EUR02-DB5-obe.outbound.protection.outlook.com [40.107.249.89])
- by mx.groups.io with SMTP id smtpd.web10.5517.1699341186214402313
+Received: from EUR02-DB5-obe.outbound.protection.outlook.com (EUR02-DB5-obe.outbound.protection.outlook.com [40.107.249.52])
+ by mx.groups.io with SMTP id smtpd.web10.5516.1699341186047242654
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 06 Nov 2023 23:13:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@axis.com header.s=selector1 header.b=ftp9B/sD;
- spf=pass (domain: axis.com, ip: 40.107.249.89, mailfrom: peter.kjellerstedt@axis.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@axis.com header.s=selector1 header.b=QbSd7Qe+;
+ spf=pass (domain: axis.com, ip: 40.107.249.52, mailfrom: peter.kjellerstedt@axis.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=cvNPA8hKRiAymWyzfTLaUnGkwOXOGcrRnZO7RaLKZz8ml0PJhBGCdfXhAPlMJr5A1TeeV86QaVAJL1Os5IXnL0daiUxLcwffmQmnZSow22iT4+WHEPWm9juytr+ZoZUF0RDzJqzTGf0TPmFqAghVN2VAKZZTP32JxJb0RUKnP8UKFoW7ntkzpQiKuXYSfF8zJanthNV/M53uagguauM5i18KCPVanPHmKLu5hp0GU1BI/IykxSiitksyWARjMXEZUA6v8Rr8wtsPpvPR8df4bS2AnUAd2Aw16zmCj9NzR2UL8fLzu0v7FUmrJmjZBr17TEUVnnPDuR1PmUac/E/Ilg==
+ b=RhSqFBo05S9LAeUiGao7GwCZI4P3aU/QOWcBlYVvhLw9NpjsPelnjumaMGvlPmj7Tg71QoYhIjqmdkK1NCc5d+FbtZDGJ1dyZyFo3SGe50xD+IVA86jNCxU2Y1JQNq6Th1Cle3hXx29dr869mrpo5apQBu+iUudz/CKCMlyQopLL/qw6edulRUPlKqEzSwvoRBWAJV4eAh8Q/iyFuNALOqgbZEh2WGC6zklIsEqeFeS1Y5yyxD/0JoOPvk8KNrMcHJkHam7NOdTv0P2hUdaDivdn562ZmKMHY3WCAwygdcUbAagHizts7Sz+kEp0wf7gAEsk26csY5q4CatGNlOFwA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=n5qvE7R2qERhLDXs74qTDVh6cmqU1CZmocO1+Dh4Yzo=;
- b=CCOZTDeZbrIvA8K7om2+IYb+Yqnp5C6WGeW9aCFE4m8ErBUwm7qSzVNqREyWk424k9nswt2NM3L4zrCkHhBXiktbVz6UtjcvgfCL3ZvBgAnjSu6ewErT3WTBAcrQXFGQPRsnPA1px+eXKTuDPXduINulAmfTLlzX1MNqaVQ6+IjC8oZJoRnAvwB2YkuuPM64bqMS6/qQs+rSM5ZIpp3i8oM43ycsgm9wUjH2exzzHUSJkDLhOJHFR3tPaqQ7OQOZ554RVpBoQILnJXeV/tXopbG7kB8NwX+k9FKMC84zAosTodbmJejsThO9zS3g0PLaNqxbDKgAiJtvT4o38efGFQ==
+ bh=CL3kmt2dneDuGFMWW+REso9Iaj2QKbJr6SOzksT2k1o=;
+ b=dJLdfm9mWkhNHQ17mzdL59X0GggHBgh7YGSbzHEH11Gn3t/8a8sthT/8E35P2CcSfbScyzw3HPt8QFFGA44dcz2ZqblNko6CpVYl3Px74Xn2ZG1AXNawbGlQL4ssIFyLfuBzDS2ypdACv/i6U8ppIE6vV0j0YPIW7hSgLHuNs1Jfo+OhT9S47/9JGlhR64Wi9qW0nWyyiNoxcl/w8PT66iMBCWbewQY0MiGIBAFvYDUvBGnXwdSo1GUQuyOWwDE9JsOyA36LI+en9sxAkgZ4c5TJVYIBagImYb/negGNQ82c3+V51phiwSgBo5P6VmcR5gsRVEhI529Yha8sjQ3jyA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
  195.60.68.100) smtp.rcpttodomain=lists.openembedded.org
  smtp.mailfrom=axis.com; dmarc=fail (p=none sp=none pct=100) action=none
  header.from=axis.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axis.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=n5qvE7R2qERhLDXs74qTDVh6cmqU1CZmocO1+Dh4Yzo=;
- b=ftp9B/sDiB6/rHKINnGtfzS9nIvVmzGD+2E/ilSqiVTRkfxgNauFefWoDrvk7tTVM7uQeHj+apbhVasAkxbE9gWjbzjx3+RFcAukvQvpEAKdPaQ+pxbWZLyKrvU/pz8CAUf8erntP9IE+bAZZ85iu8Dd/TSBDOcnprQ0YKQArfs=
-Received: from AS9PR06CA0699.eurprd06.prod.outlook.com (2603:10a6:20b:49f::20)
- by PA6PR02MB10522.eurprd02.prod.outlook.com (2603:10a6:102:3cd::20) with
+ bh=CL3kmt2dneDuGFMWW+REso9Iaj2QKbJr6SOzksT2k1o=;
+ b=QbSd7Qe+wvBj7THQk6olAj2Q3FWqetezL4j30JqnUUjPkCninjwLiQjWj6Q3G2RYhOhSnaj7udb1Vp2OE7Aq8eWsAZXppjYwW1YAwXO3Ul8zP/gg3AVRtWjVYbGF0M1bKKlsdzP+L1ACGWRcqJl36Lc9Pa4Za38q/VY0sGICZRU=
+Received: from AS9PR06CA0692.eurprd06.prod.outlook.com (2603:10a6:20b:49f::22)
+ by DB9PR02MB7211.eurprd02.prod.outlook.com (2603:10a6:10:241::22) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.27; Tue, 7 Nov
- 2023 07:13:04 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.29; Tue, 7 Nov
+ 2023 07:13:03 +0000
 Received: from AM4PEPF00027A64.eurprd04.prod.outlook.com
- (2603:10a6:20b:49f:cafe::a) by AS9PR06CA0699.outlook.office365.com
- (2603:10a6:20b:49f::20) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.29 via Frontend
+ (2603:10a6:20b:49f:cafe::fb) by AS9PR06CA0692.outlook.office365.com
+ (2603:10a6:20b:49f::22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.28 via Frontend
  Transport; Tue, 7 Nov 2023 07:13:03 +0000
 X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 195.60.68.100)
  smtp.mailfrom=axis.com; dkim=none (message not signed)
@@ -46,32 +46,32 @@ Received: from mail.axis.com (195.60.68.100) by
  AM4PEPF00027A64.mail.protection.outlook.com (10.167.16.75) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
  15.20.6977.16 via Frontend Transport; Tue, 7 Nov 2023 07:13:03 +0000
-Received: from SE-MAILARCH01W.axis.com (10.20.40.15) by se-mail02w.axis.com
+Received: from SE-MAIL21W.axis.com (10.20.40.16) by se-mail02w.axis.com
  (10.20.40.8) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Tue, 7 Nov
- 2023 08:12:51 +0100
-Received: from se-mail02w.axis.com (10.20.40.8) by SE-MAILARCH01W.axis.com
- (10.20.40.15) with Microsoft SMTP Server (version=TLS1_2,
+ 2023 08:12:50 +0100
+Received: from se-mail01w.axis.com (10.20.40.7) by SE-MAIL21W.axis.com
+ (10.20.40.16) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Tue, 7 Nov
  2023 08:12:50 +0100
-Received: from se-intmail01x.se.axis.com (10.0.5.60) by se-mail02w.axis.com
- (10.20.40.8) with Microsoft SMTP Server id 15.1.2375.34 via Frontend
+Received: from se-intmail02x.se.axis.com (10.0.5.60) by se-mail01w.axis.com
+ (10.20.40.7) with Microsoft SMTP Server id 15.1.2375.34 via Frontend
  Transport; Tue, 7 Nov 2023 08:12:50 +0100
 Received: from saur (saur.se.axis.com [10.92.3.10])
-	by se-intmail01x.se.axis.com (Postfix) with ESMTP id E19B2FBD
+	by se-intmail02x.se.axis.com (Postfix) with ESMTP id AB8EF2974
 	for <openembedded-devel@lists.openembedded.org>; Tue,  7 Nov 2023 08:12:50 +0100 (CET)
 Received: from saur.se.axis.com (localhost [127.0.0.1])
-	by saur (8.17.1/8.15.2) with ESMTPS id 3A77CosV1519756
+	by saur (8.17.1/8.15.2) with ESMTPS id 3A77Coki1519748
 	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
 	for <openembedded-devel@lists.openembedded.org>; Tue, 7 Nov 2023 08:12:50 +0100
 Received: (from pkj@localhost)
-	by saur.se.axis.com (8.17.1/8.17.1/Submit) id 3A77Co9l1519755
+	by saur.se.axis.com (8.17.1/8.17.1/Submit) id 3A77CojK1519747
 	for openembedded-devel@lists.openembedded.org; Tue, 7 Nov 2023 08:12:50 +0100
 From: Peter Kjellerstedt <pkj@axis.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-python][PATCH 15/16] python3-pylint: Only set SRCREV once
-Date: Tue, 7 Nov 2023 08:12:39 +0100
-Message-ID: <20231107071240.1519631-15-pkj@axis.com>
+Subject: [meta-python][PATCH 13/16] python3-kivy: Move a comment so it makes more sense
+Date: Tue, 7 Nov 2023 08:12:37 +0100
+Message-ID: <20231107071240.1519631-13-pkj@axis.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231107071240.1519631-1-pkj@axis.com>
 References: <20231107071240.1519631-1-pkj@axis.com>
@@ -80,57 +80,61 @@ Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM4PEPF00027A64:EE_|PA6PR02MB10522:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3ab45865-549d-4bbc-f15a-08dbdf60fbe5
+X-MS-TrafficTypeDiagnostic: AM4PEPF00027A64:EE_|DB9PR02MB7211:EE_
+X-MS-Office365-Filtering-Correlation-Id: b9939dc2-c63a-48ea-06f0-08dbdf60fbbb
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	8CbOA13nCO598BvdcnpwnQSIxULjqz2bX0qXyVW/SoH96rAf0oztBL7bfvkmtrp8wkmHmz/616LMTQiHx0V8fn/cthFCk/nLIas+MS8lJl+cfrx+QRE2UcT003WJw7j8R/Pk5Zn+ExAGr8Dc1yLAr+g//u1mHdjT3rdQzEJXkAddLBOUI/Hor6hg2tFmD79cfA6ktq9GDuolt/krQzd9yiXTJlHrWKmo46p+ZtS2dk5oSoTnZYga1AH1fRel1WSgD7LlmVeBiFH/wShR3d7OEuWPpd/4qsc9JIn8bIuRl6MrawEONdnHcDWVchRuhBdnt1v1u0YUYxlGpJAoja0/oWzSnC1hvBlRJs7lro9PzVGJkAC+Wee6Syx0mhmSamfT6lZpDObfw5SKreEm4gNptT5ExnRRx7YEMTs74Z/npVV2p/VtrqyhXzMa/eNB8vZLg2w5CZWp10JCfTX5HjbLhT/QmrljPdgd8idRfbfhIri5QUbM81Wa7NzC9Cij8QZ5AZZuFZNN/jtwhjfb8HVw8t8Xh8im94xQi+mhallSupEwut98wHFempVVrpCyKMe7+aEmjDFQ6jAWdYnwOBoBuQndAqqWF+z9YkN3cyAuhK//w+D9aqJlqqjnlxO7Uf2FagVC/6mFw2dS2qRBcnJ9r76gy+PclZKEMBPssxpFtci8D84tglaFpEvNRu7W9lO/rUHQhT0ejDra4UDjpkhpA4EUOuhD8C1y6nD05XABsUxDPUrdAnEsoIgJj5kbBenVfElNGfNq2R0L0vrm/nlYmg==
+	QSfth/zeLP/2WIDba7dDqdSOhi/FXdghDqIaJk2nI0PH+Uk2jb2R280oaqESUzyyJ731WDTUF6oPKK2lPyOLS5mAL3WS/3doV1x5tXNt+ruuEjAF4h7+i1CAORZ5bH/xms61A3rT63e0Y9ys9VXy/cgN/avmq/PWYlAC4XiTud8KL8ErWB68o7htNk0evUyMEr9bU780/PgxRxQI5PKI4patJFeg+QMvOkGns514s7ySPIhDp+uvONfiy6q3JKeTT5vQz5U2fI0S0rMZ9SBk83cFbTh3aiKUNXzgeSbJi7tTQPeUlyHxvtegRq9GVszzUb+NgnprvAELBJYLQd6JzDEB+1pds7W8j8AD4/hS04fJyo1xVqCAZUO0QIX8q8PEEN+ILZl7AboWYo0Bf5abUlvTCR6Vjr7g3GRCZYlLKmtX3q4+7mcIR80GECdAOnEq3Gb+MnaZzwHe5c9S+4y/g3ZkYcTzatNdN6vo+VBFhOyR9n8alSdv+nVzHw7hUpzqHf0sr52CNa95WsolOv20BsptxaS5yFO4GNsQ5tR/z4eOf/SWU/AKqDOmZUgvJ44PJNR7b1Dz23HDFGRPKPcmf+0F/Qv3kP0YUVo+XZsSTOCRJ+JfV/aEcxufr6SLeE8hRSN1YbrM5YZYCyKNNFAX1+23oBFwZZDcvFT9JtQHrbGyxZHpI7ib0yg3WxwAZ92mgm+Zq6XOxKwF9wWLD3x8NbdmRnQZrWK6UUQgtQcdBceH1OhtpI83J0PFReEoZZICdPnGK1XPUlbiE9huQMwbBA==
 X-Forefront-Antispam-Report: 
-	CIP:195.60.68.100;CTRY:SE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.axis.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(376002)(346002)(39860400002)(396003)(136003)(230922051799003)(82310400011)(64100799003)(1800799009)(186009)(451199024)(46966006)(40470700004)(36840700001)(41300700001)(478600001)(47076005)(2616005)(6666004)(5660300002)(26005)(426003)(336012)(8936002)(8676002)(83380400001)(70206006)(2906002)(36860700001)(4744005)(1076003)(42186006)(316002)(6916009)(70586007)(356005)(82740400003)(81166007)(40480700001)(36756003)(40460700003)(36900700001);DIR:OUT;SFP:1101;
+	CIP:195.60.68.100;CTRY:SE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.axis.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(136003)(376002)(346002)(396003)(39860400002)(230922051799003)(64100799003)(451199024)(186009)(1800799009)(82310400011)(40470700004)(36840700001)(46966006)(40480700001)(40460700003)(478600001)(47076005)(36756003)(82740400003)(81166007)(356005)(36860700001)(83380400001)(2616005)(41300700001)(1076003)(70206006)(70586007)(6666004)(26005)(426003)(336012)(42186006)(5660300002)(6916009)(8936002)(316002)(8676002)(2906002)(36900700001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: axis.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Nov 2023 07:13:03.8750
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Nov 2023 07:13:03.5937
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3ab45865-549d-4bbc-f15a-08dbdf60fbe5
+X-MS-Exchange-CrossTenant-Network-Message-Id: b9939dc2-c63a-48ea-06f0-08dbdf60fbbb
 X-MS-Exchange-CrossTenant-Id: 78703d3c-b907-432f-b066-88f7af9ca3af
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=78703d3c-b907-432f-b066-88f7af9ca3af;Ip=[195.60.68.100];Helo=[mail.axis.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
 	AM4PEPF00027A64.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA6PR02MB10522
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR02MB7211
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 07 Nov 2023 07:13:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106436
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106433
 
 Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 ---
- meta-python/recipes-devtools/python/python3-pylint_3.0.2.bb | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ meta-python/recipes-devtools/python/python3-kivy_2.2.1.bb | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pylint_3.0.2.bb b/=
-meta-python/recipes-devtools/python/python3-pylint_3.0.2.bb
-index 03e878b2b..8af74b7cb 100644
---- a/meta-python/recipes-devtools/python/python3-pylint_3.0.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-pylint_3.0.2.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dc107cf754550e657=
-55c42985a5d4e9c9"
- SRC_URI +=3D "git://github.com/pylint-dev/pylint;branch=3Dmaintenance/3.0.=
-x;protocol=3Dhttps \
-            file://run-ptest \
+diff --git a/meta-python/recipes-devtools/python/python3-kivy_2.2.1.bb b/me=
+ta-python/recipes-devtools/python/python3-kivy_2.2.1.bb
+index 67ab9a017..a72ee14f6 100644
+--- a/meta-python/recipes-devtools/python/python3-kivy_2.2.1.bb
++++ b/meta-python/recipes-devtools/python/python3-kivy_2.2.1.bb
+@@ -7,14 +7,14 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Ded5cd0f2cfda42=
+852c332e3b88c85fea"
+ inherit setuptools3 pkgconfig features_check
+ PIP_INSTALL_PACKAGE =3D "Kivy"
+=20
++# Kivy's setup files only look for GLES libraries for Android, iOS, RPi,
++# and mali-based OS's. We need to patch the setup file to tell Kivy setup
++# that our machine has GLES libaries installed as well
++# Also, if using SDL2 as backend, SDL2 needs to be configured with gles
+ SRC_URI =3D "git://github.com/kivy/kivy.git;protocol=3Dhttps;branch=3Dstab=
+le \
+            file://0001-add-support-for-glesv2.patch \
             "
--SRCREV ?=3D "f2cded41f7f3d4b45236cbe107b366b6caf84bde"
-+SRCREV =3D "efee9618894795cc8847727108522aa79431ee25"
 =20
- inherit python_setuptools_build_meta ptest
+-# Kivy's setup files only look for GLES libraries for Android, iOS, RPi,
+-# and mali-based OS's. We need to patch the setup file to tell Kivy setup
+-# that our machine has GLES libaries installed as well
+-# Also, if using SDL2 as backend, SDL2 needs to be configured wth gles
+ SRCREV =3D "344768bfefd2e8f5302cc9dfb8ca41991ce6f7e7"
 =20
-@@ -49,5 +49,3 @@ do_install_ptest() {
- }
-=20
- BBCLASSEXTEND =3D "native nativesdk"
--
--SRCREV =3D "efee9618894795cc8847727108522aa79431ee25"
+ S =3D "${WORKDIR}/git"
 
