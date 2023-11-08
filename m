@@ -1,209 +1,279 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E7BBCC4167B
-	for <webhook@archiver.kernel.org>; Wed,  8 Nov 2023 07:11:14 +0000 (UTC)
-Received: from mail-oa1-f44.google.com (mail-oa1-f44.google.com [209.85.160.44])
- by mx.groups.io with SMTP id smtpd.web10.8574.1699427474003384901
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C396C4332F
+	for <webhook@archiver.kernel.org>; Wed,  8 Nov 2023 08:03:05 +0000 (UTC)
+Received: from mailout08.t-online.de (mailout08.t-online.de [194.25.134.20])
+ by mx.groups.io with SMTP id smtpd.web11.9074.1699430578384200503
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 07 Nov 2023 23:11:14 -0800
+ Wed, 08 Nov 2023 00:02:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=CPYBXWXg;
- spf=pass (domain: gmail.com, ip: 209.85.160.44, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f44.google.com with SMTP id 586e51a60fabf-1ef36a04931so3815117fac.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 07 Nov 2023 23:11:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699427473; x=1700032273; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=x9hXsrCSlxQWpgBWox7+hIVNxQmhxaejeskt6AHgPsY=;
-        b=CPYBXWXgUYgi+z+iaaLiYPxDW3kykUETBEF/EXEPDxrcDf0oZwOtyau4wQvnJxWJDl
-         9idLFR6/N8SvTY+9ZVbRxyNXQVnQbLeyeV2hC+A+8xrFRmdnxG/UPmuRjbyYoFi50E6Q
-         jnTIaGR0Pn3Bit3MJImX3lVyWEJDJw+Hf98fvSF1oRGrOb3PD+Y8pLSjvFbamrRwOOG3
-         d6DpTDBAtl7wz/oUOkqZqGEtLRkDnK6tJ1DCJEIbUTbUZeKVaYJ+Yovvq83SDXedrPHp
-         dczoW7heAxNTibEZ/RhSc3jI45/yw0gznh6mx7kbTwit8fCj1Gcgwd1hpb6Jwc8m4OzF
-         F6QA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699427473; x=1700032273;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=x9hXsrCSlxQWpgBWox7+hIVNxQmhxaejeskt6AHgPsY=;
-        b=dVouRB+XqVZuhfPR3InJVBPoUrH2pqWVO3vOLQprR2Id5Ia5XzNrdx6HdofF8UG2/1
-         p0Jo92VJoC92vhu//01Nw3PNVhT22zeSwc+rak9iSchwefZcbez5Kk4srbcegABzx7Yu
-         b05u5ZPhNDw5/0wX/7DRD+20qOHTP26/eDAUN3rab97HwKXhLts5EyWCR3e4Df76FUnx
-         R9fqXPPl37FjuuIcbjxkLIlXCgdL4OHSUOsfykaopgGeF1UjmxKJ0/bVJEBZVtw9YLT8
-         rHUfXZci4Nq7DJvjUpbYiMEzteHIHmqrIr7XOkq7xlQjgzOH3cHNgiM47056WabIfKm7
-         iVnA==
-X-Gm-Message-State: AOJu0YyNl0knrmVr/cBxEXR8/lXfsGwdMRPkYFpyVBUt/JvzXb+Dlo8L
-	d64ZbK6+t5y/qVKbNYZCXTSJgWj94+ntfFy6iRsU8j5HYrdDlg==
-X-Google-Smtp-Source: AGHT+IEkGcfvVseOzjgSz5MDmQn+U91SSezJYcu1vi0BVoJh+uXRhKjGtQ/d7niH2KIQyqLAKH3ASiV/3GDq+jJN5tM=
-X-Received: by 2002:a05:6870:1242:b0:1e9:c252:4853 with SMTP id
- 2-20020a056870124200b001e9c2524853mr1019270oao.5.1699427473016; Tue, 07 Nov
- 2023 23:11:13 -0800 (PST)
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.20, mailfrom: f_l_k@t-online.de)
+Received: from fwd74.aul.t-online.de (fwd74.aul.t-online.de [10.223.144.100])
+	by mailout08.t-online.de (Postfix) with SMTP id E1D6128ABC
+	for <openembedded-devel@lists.openembedded.org>; Wed,  8 Nov 2023 09:02:55 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.163.33.167]) by fwd74.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1r0dWY-2SLMv30; Wed, 8 Nov 2023 09:02:54 +0100
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-gnome][RFC][PATCHv3] Adjust vala build according to changes in vala.bbclass
+Date: Wed,  8 Nov 2023 09:03:22 +0100
+Message-ID: <20231108080322.30661-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
-References: <20231107071240.1519631-1-pkj@axis.com> <20231107071240.1519631-12-pkj@axis.com>
-In-Reply-To: <20231107071240.1519631-12-pkj@axis.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 7 Nov 2023 23:10:47 -0800
-Message-ID: <CAMKF1spsaOrfWFLpiOC_1+sVmD1OB9CeiVi+L7f0hYxyTiExYg@mail.gmail.com>
-Subject: Re: [oe] [meta-filesystems][PATCH 12/16] xfstests: Update to
- 2023.10.29 properly
-To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+X-TOI-EXPURGATEID: 150726::1699430574-4D288D65-55D68A5D/0/0 CLEAN NORMAL
+X-TOI-MSGID: 55e2ef6f-465d-4229-ba9b-c561f0b33f38
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 08 Nov 2023 07:11:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106466
+ <openembedded-devel@lists.openembedded.org>; Wed, 08 Nov 2023 08:03:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106467
 
-this seems to fail a QA check
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ .../recipes-gnome/gnome-boxes/gnome-boxes_45.0.bb             | 1 +
+ meta-gnome/recipes-connectivity/gtk-vnc/gtk-vnc_1.3.1.bb      | 3 +++
+ meta-gnome/recipes-gimp/babl/babl_0.1.106.bb                  | 1 +
+ meta-gnome/recipes-gnome/gedit/gedit_46.1.bb                  | 2 +-
+ meta-gnome/recipes-gnome/gjs/gjs_1.78.0.bb                    | 2 +-
+ .../recipes-gnome/gnome-calculator/gnome-calculator_45.0.2.bb | 1 +
+ meta-gnome/recipes-gnome/gsound/gsound_1.0.3.bb               | 2 ++
+ meta-gnome/recipes-gnome/libgweather/libgweather4_4.4.0.bb    | 1 +
+ meta-gnome/recipes-gnome/rest/rest_0.9.1.bb                   | 2 --
+ meta-gnome/recipes-gnome/tracker/tracker-miners_3.6.2.bb      | 1 +
+ .../libcloudproviders/libcloudproviders_0.3.4.bb              | 1 +
+ meta-oe/recipes-gnome/gcr/gcr3_3.41.1.bb                      | 3 +++
+ meta-oe/recipes-support/libosinfo/libosinfo_1.11.0.bb         | 4 +++-
+ 13 files changed, 19 insertions(+), 5 deletions(-)
 
-ERROR: xfstests-2023.10.29-r0 do_package_qa: QA Issue:
-/usr/xfstests/src/soak_duration.awk contained in package xfstests
-requires /usr/bin/awk, but no providers found in RDEPENDS:xfstests?
-[file-rdeps]
-ERROR: xfstests-2023.10.29-r0 do_package_qa: Fatal QA errors were
-found, failing task.
+diff --git a/meta-gnome/dynamic-layers/meta-virtualization/recipes-gnome/=
+gnome-boxes/gnome-boxes_45.0.bb b/meta-gnome/dynamic-layers/meta-virtuali=
+zation/recipes-gnome/gnome-boxes/gnome-boxes_45.0.bb
+index f2aeb8878..fc1235109 100644
+--- a/meta-gnome/dynamic-layers/meta-virtualization/recipes-gnome/gnome-b=
+oxes/gnome-boxes_45.0.bb
++++ b/meta-gnome/dynamic-layers/meta-virtualization/recipes-gnome/gnome-b=
+oxes/gnome-boxes_45.0.bb
+@@ -33,6 +33,7 @@ inherit gnomebase gsettings pkgconfig mime-xdg gtk-icon=
+-cache gobject-introspect
+ SRC_URI[archive.sha256sum] =3D "cc63080eefa147a8472ab1a5ff087b97a27ab723=
+a4ee005ed41e8c9dd7798e41"
+=20
+ GIR_MESON_OPTION =3D ""
++VALA_MESON_OPTION =3D ""
+=20
+ FILES:${PN} +=3D "${datadir}"
+=20
+diff --git a/meta-gnome/recipes-connectivity/gtk-vnc/gtk-vnc_1.3.1.bb b/m=
+eta-gnome/recipes-connectivity/gtk-vnc/gtk-vnc_1.3.1.bb
+index 36eb8ca19..8737b6d7e 100644
+--- a/meta-gnome/recipes-connectivity/gtk-vnc/gtk-vnc_1.3.1.bb
++++ b/meta-gnome/recipes-connectivity/gtk-vnc/gtk-vnc_1.3.1.bb
+@@ -15,6 +15,9 @@ DEPENDS =3D " \
+ GNOMEBASEBUILDCLASS =3D "meson"
+ REQUIRED_DISTRO_FEATURES =3D "gobject-introspection-data"
+ GIR_MESON_OPTION =3D ""
++VALA_MESON_OPTION =3D "with-vala"
++VALA_MESON_ENABLE_FLAG ?=3D 'enabled'
++VALA_MESON_DISABLE_FLAG ?=3D 'disabled'
+=20
+ PACKAGECONFIG[pulseaudio] =3D "-Dpulseaudio=3Denabled,-Dpulseaudio=3Ddis=
+abled,pulseaudio"
+ PACKAGECONFIG[sasl] =3D "-Dsasl=3Denabled,-Dsasl=3Ddisabled,cyrus-sasl"
+diff --git a/meta-gnome/recipes-gimp/babl/babl_0.1.106.bb b/meta-gnome/re=
+cipes-gimp/babl/babl_0.1.106.bb
+index 5a5f4f5e7..5d656adb0 100644
+--- a/meta-gnome/recipes-gimp/babl/babl_0.1.106.bb
++++ b/meta-gnome/recipes-gimp/babl/babl_0.1.106.bb
+@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D6a6a8e020838b2=
+3406c81b19c1d46df6"
+ GNOMEBASEBUILDCLASS =3D "meson"
+=20
+ GIR_MESON_OPTION =3D "enable-gir"
++VALA_MESON_OPTION =3D "enable-vapi"
+=20
+ inherit setuptools3 gnomebase gobject-introspection vala
+=20
+diff --git a/meta-gnome/recipes-gnome/gedit/gedit_46.1.bb b/meta-gnome/re=
+cipes-gnome/gedit/gedit_46.1.bb
+index 01d7a072a..0014b512a 100644
+--- a/meta-gnome/recipes-gnome/gedit/gedit_46.1.bb
++++ b/meta-gnome/recipes-gnome/gedit/gedit_46.1.bb
+@@ -19,7 +19,7 @@ DEPENDS =3D " \
+     tepl \
+ "
+=20
+-inherit gnomebase gsettings itstool gnome-help gobject-introspection gtk=
+-doc vala gettext features_check mime-xdg gtk-icon-cache python3targetcon=
+fig
++inherit gnomebase gsettings itstool gnome-help gobject-introspection gtk=
+-doc gettext features_check mime-xdg gtk-icon-cache python3targetconfig
+=20
+ def gnome_verdir(v):
+     return oe.utils.trim_version(v, 1)
+diff --git a/meta-gnome/recipes-gnome/gjs/gjs_1.78.0.bb b/meta-gnome/reci=
+pes-gnome/gjs/gjs_1.78.0.bb
+index 0af9f5600..e91fa1bc6 100644
+--- a/meta-gnome/recipes-gnome/gjs/gjs_1.78.0.bb
++++ b/meta-gnome/recipes-gnome/gjs/gjs_1.78.0.bb
+@@ -6,7 +6,7 @@ GNOMEBASEBUILDCLASS =3D "meson"
+=20
+ DEPENDS =3D "mozjs-115 cairo"
+=20
+-inherit gnomebase gsettings gobject-introspection vala gettext features_=
+check upstream-version-is-even pkgconfig
++inherit gnomebase gsettings gobject-introspection gettext features_check=
+ upstream-version-is-even pkgconfig
+=20
+ SRC_URI[archive.sha256sum] =3D "fbaa20e0917668830800f92951688f9fc08f0129=
+6affd5cdb4b35f750be27dc9"
+ SRC_URI +=3D " \
+diff --git a/meta-gnome/recipes-gnome/gnome-calculator/gnome-calculator_4=
+5.0.2.bb b/meta-gnome/recipes-gnome/gnome-calculator/gnome-calculator_45.=
+0.2.bb
+index cde2e1d3c..3482f76a5 100644
+--- a/meta-gnome/recipes-gnome/gnome-calculator/gnome-calculator_45.0.2.b=
+b
++++ b/meta-gnome/recipes-gnome/gnome-calculator/gnome-calculator_45.0.2.b=
+b
+@@ -18,6 +18,7 @@ DEPENDS =3D " \
+ GIR_MESON_OPTION =3D 'disable-introspection'
+ GIR_MESON_ENABLE_FLAG =3D 'false'
+ GIR_MESON_DISABLE_FLAG =3D 'true'
++VALA_MESON_OPTION =3D ''
+=20
+ GNOMEBASEBUILDCLASS =3D "meson"
+ GTKIC_VERSION =3D '4'
+diff --git a/meta-gnome/recipes-gnome/gsound/gsound_1.0.3.bb b/meta-gnome=
+/recipes-gnome/gsound/gsound_1.0.3.bb
+index bdef603f0..d01067eb1 100644
+--- a/meta-gnome/recipes-gnome/gsound/gsound_1.0.3.bb
++++ b/meta-gnome/recipes-gnome/gsound/gsound_1.0.3.bb
+@@ -9,6 +9,8 @@ DEPENDS =3D " \
+=20
+ GNOMEBASEBUILDCLASS =3D "meson"
+=20
++VALA_MESON_OPTION =3D "enable_vala"
++
+ inherit gnomebase gettext gobject-introspection vala
+=20
+ SRC_URI[archive.sha256sum] =3D "ca2d039e1ebd148647017a7f548862350bc9af01=
+986d39f10cfdc8e95f07881a"
+diff --git a/meta-gnome/recipes-gnome/libgweather/libgweather4_4.4.0.bb b=
+/meta-gnome/recipes-gnome/libgweather/libgweather4_4.4.0.bb
+index 81ae8317d..06353efab 100644
+--- a/meta-gnome/recipes-gnome/libgweather/libgweather4_4.4.0.bb
++++ b/meta-gnome/recipes-gnome/libgweather/libgweather4_4.4.0.bb
+@@ -15,6 +15,7 @@ SRC_URI +=3D "file://0001-Allow-building-gir-in-cross-e=
+nvironments.patch"
+ SRC_URI[archive.sha256sum] =3D "366e866ff2a708b894cfea9475b8e8ff54cb3e2b=
+477ea72a8ade0dabee5f48a4"
+=20
+ GTKDOC_MESON_OPTION =3D "gtk_doc"
++VALA_MESON_OPTION =3D "enable_vala"
+=20
+ DEPENDS =3D " \
+     geocode-glib \
+diff --git a/meta-gnome/recipes-gnome/rest/rest_0.9.1.bb b/meta-gnome/rec=
+ipes-gnome/rest/rest_0.9.1.bb
+index 3a81a58f6..e46cbfc69 100644
+--- a/meta-gnome/recipes-gnome/rest/rest_0.9.1.bb
++++ b/meta-gnome/recipes-gnome/rest/rest_0.9.1.bb
+@@ -17,8 +17,6 @@ DEPENDS =3D " \
+=20
+ inherit gnomebase gobject-introspection vala pkgconfig gi-docgen
+=20
+-EXTRA_OEMESON =3D "${@bb.utils.contains('GI_DATA_ENABLED', 'True', '-Dva=
+pi=3Dtrue', '-Dvapi=3Dfalse', d)}"
+-
+ PACKAGECONFIG ?=3D ""
+ PACKAGECONFIG[examples] =3D "-Dexamples=3Dtrue,-Dexamples=3Dfalse"
+ PACKAGECONFIG[tests] =3D "-Dtests=3Dtrue,-Dtests=3Dfalse"
+diff --git a/meta-gnome/recipes-gnome/tracker/tracker-miners_3.6.2.bb b/m=
+eta-gnome/recipes-gnome/tracker/tracker-miners_3.6.2.bb
+index a0a41d7f8..426082bd5 100644
+--- a/meta-gnome/recipes-gnome/tracker/tracker-miners_3.6.2.bb
++++ b/meta-gnome/recipes-gnome/tracker/tracker-miners_3.6.2.bb
+@@ -25,6 +25,7 @@ SRC_URI[archive.sha256sum] =3D "0ad722f3d532c21d757cf48=
+8f942960679ea8f457925efa976
+ # gobject-introspection is mandatory and cannot be configured
+ REQUIRED_DISTRO_FEATURES =3D "gobject-introspection-data"
+ GIR_MESON_OPTION =3D ""
++VALA_MESON_OPTION =3D ""
+=20
+ PACKAGECONFIG ??=3D " \
+     ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "ffmpeg=
+", "", d)} \
+diff --git a/meta-gnome/recipes-support/libcloudproviders/libcloudprovide=
+rs_0.3.4.bb b/meta-gnome/recipes-support/libcloudproviders/libcloudprovid=
+ers_0.3.4.bb
+index 36089238f..21fe4d119 100644
+--- a/meta-gnome/recipes-support/libcloudproviders/libcloudproviders_0.3.=
+4.bb
++++ b/meta-gnome/recipes-support/libcloudproviders/libcloudproviders_0.3.=
+4.bb
+@@ -3,6 +3,7 @@ LICENSE=3D"LGPL-3.0-or-later"
+ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3De6a600fd5e1d9cbde2d983680233a=
+d02"
+=20
+ GNOMEBASEBUILDCLASS =3D "meson"
++VALA_MESON_OPTION ?=3D 'vapigen'
+=20
+ DEPENDS =3D "glib-2.0"
+=20
+diff --git a/meta-oe/recipes-gnome/gcr/gcr3_3.41.1.bb b/meta-oe/recipes-g=
+nome/gcr/gcr3_3.41.1.bb
+index ba5660a5e..a5bb868bb 100644
+--- a/meta-oe/recipes-gnome/gcr/gcr3_3.41.1.bb
++++ b/meta-oe/recipes-gnome/gcr/gcr3_3.41.1.bb
+@@ -17,6 +17,8 @@ CFLAGS +=3D "-D_GNU_SOURCE"
+=20
+ GNOMEBASEBUILDCLASS =3D "meson"
+ GTKDOC_MESON_OPTION =3D "gtk_doc"
++VALA_MESON_OPTION ?=3D ''
++
+ inherit gnomebase gtk-icon-cache gi-docgen features_check upstream-versi=
+on-is-even vala gobject-introspection gettext mime mime-xdg
+ UPSTREAM_CHECK_REGEX =3D "[^\d\.](?P<pver>3.(?!9\d+)\d+(\.\d+)+)\.tar"
+=20
+@@ -39,6 +41,7 @@ PACKAGECONFIG[systemd] =3D "-Dsystemd=3Denabled,-Dsyste=
+md=3Ddisabled,systemd"
+ FILES:${PN} +=3D " \
+     ${datadir}/dbus-1 \
+     ${datadir}/gcr-3 \
++    ${datadir}/vala \
+     ${systemd_user_unitdir}/gcr-ssh-agent.socket \
+     ${systemd_user_unitdir}/gcr-ssh-agent.service \
+ "
+diff --git a/meta-oe/recipes-support/libosinfo/libosinfo_1.11.0.bb b/meta=
+-oe/recipes-support/libosinfo/libosinfo_1.11.0.bb
+index 16e0cf8f7..ca6f9ba3f 100644
+--- a/meta-oe/recipes-support/libosinfo/libosinfo_1.11.0.bb
++++ b/meta-oe/recipes-support/libosinfo/libosinfo_1.11.0.bb
+@@ -18,6 +18,9 @@ inherit meson pkgconfig gtk-doc gobject-introspection v=
+ala
+=20
+ DEPENDS =3D "glib-2.0 libsoup libxslt"
+=20
++VALA_MESON_OPTION =3D 'enable-vala'
++VALA_MESON_ENABLE_FLAG =3D 'enabled'
++VALA_MESON_DISABLE_FLAG =3D 'disabled'
+ GIR_MESON_OPTION =3D "enable-introspection"
+ GIR_MESON_ENABLE_FLAG =3D 'enabled'
+ GIR_MESON_DISABLE_FLAG =3D 'disabled'
+@@ -26,7 +29,6 @@ GTKDOC_MESON_OPTION =3D "enable-gtk-doc"
+ EXTRA_OEMESON +=3D " \
+ 	-Dwith-pci-ids-path=3D${datadir}/pci.ids \
+ 	-Dwith-usb-ids-path=3D${datadir}/usb.ids \
+-	${@bb.utils.contains('GI_DATA_ENABLED', 'True', '-Denable-vala=3Denable=
+d', '-Denable-vala=3Ddisabled', d)} \
+ "
+=20
+ RDEPENDS:${PN} =3D "pciutils-ids usbids"
+--=20
+2.42.0
 
-On Mon, Nov 6, 2023 at 11:13=E2=80=AFPM Peter Kjellerstedt
-<peter.kjellerstedt@axis.com> wrote:
->
-> The "update" in commit 2af7d3f63e added a SRCREV rather than updating
-> SRCREV_xfstests. Change the recipe to actually use SRCREV so that it is
-> compatible with future AUH updates.
->
-> Also replace "/usr" with "${prefix}".
->
-> Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-> ---
->
-> I wonder if this recipe really should have been updated to 2023.10.29,
-> since that tag is on the "for-next" branch, which I assume means it is
-> not released yet. But I cannot find a way to make devtool upgrade only
-> look for revisions that are available from a specific branch.
->
->  ...itly-use-int-for-return-type-for-aio.patch | 30 -------------------
->  .../xfstests/xfstests_2023.10.29.bb           | 17 +++++------
->  2 files changed, 7 insertions(+), 40 deletions(-)
->  delete mode 100644 meta-filesystems/recipes-utils/xfstests/xfstests/0001=
--ltp-fsx.h-Explicitly-use-int-for-return-type-for-aio.patch
->
-> diff --git a/meta-filesystems/recipes-utils/xfstests/xfstests/0001-ltp-fs=
-x.h-Explicitly-use-int-for-return-type-for-aio.patch b/meta-filesystems/rec=
-ipes-utils/xfstests/xfstests/0001-ltp-fsx.h-Explicitly-use-int-for-return-t=
-ype-for-aio.patch
-> deleted file mode 100644
-> index 5e9e9d9a7..000000000
-> --- a/meta-filesystems/recipes-utils/xfstests/xfstests/0001-ltp-fsx.h-Exp=
-licitly-use-int-for-return-type-for-aio.patch
-> +++ /dev/null
-> @@ -1,30 +0,0 @@
-> -From 0927d0def968ea7e19905c7e39182f65961c11cf Mon Sep 17 00:00:00 2001
-> -From: Khem Raj <raj.khem@gmail.com>
-> -Date: Sun, 5 Nov 2023 01:17:52 -0700
-> -Subject: [PATCH] ltp/fsx.h: Explicitly use int for return type for aio_r=
-w()
-> -
-> -Fixes build with clang-17+
-> -error: type specifier missing, defaults to 'int'; ISO C99 and later do n=
-ot support implicit int [-Wimplicit-int]
-> -
-> -Upstream-Status: Submitted [https://marc.info/?l=3Dfstests&m=3D169917222=
-008646&w=3D2]
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ----
-> - ltp/fsx.c | 2 +-
-> - 1 file changed, 1 insertion(+), 1 deletion(-)
-> -
-> -diff --git a/ltp/fsx.c b/ltp/fsx.c
-> -index ee4b8fe4..c0aec23f 100644
-> ---- a/ltp/fsx.c
-> -+++ b/ltp/fsx.c
-> -@@ -2581,7 +2581,7 @@ out_error:
-> -       return -1;
-> - }
-> - #else
-> --aio_rw(int rw, int fd, char *buf, unsigned len, unsigned offset)
-> -+int aio_rw(int rw, int fd, char *buf, unsigned len, unsigned offset)
-> - {
-> -       fprintf(stderr, "io_rw: need AIO support!\n");
-> -       exit(111);
-> ---
-> -2.42.1
-> -
-> diff --git a/meta-filesystems/recipes-utils/xfstests/xfstests_2023.10.29.=
-bb b/meta-filesystems/recipes-utils/xfstests/xfstests_2023.10.29.bb
-> index 4e8e31840..be7c2d473 100644
-> --- a/meta-filesystems/recipes-utils/xfstests/xfstests_2023.10.29.bb
-> +++ b/meta-filesystems/recipes-utils/xfstests/xfstests_2023.10.29.bb
-> @@ -3,18 +3,15 @@ LICENSE =3D "GPL-2.0-only"
->  LIC_FILES_CHKSUM =3D "file://LICENSES/GPL-2.0;md5=3D74274e8a218423e49eef=
-dea80bc55038"
->
->  SRCREV =3D "11914614784735c504f43b5b6baabaa713375984"
-> -SRCREV_FORMAT =3D "xfstests_unionmount"
-> +SRCREV_unionmount =3D "e3825b16b46f4c4574a1a69909944c059835f914"
-> +SRCREV_FORMAT =3D "default_unionmount"
->
-> -SRC_URI =3D "git://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git;branch=
-=3Dfor-next;name=3Dxfstests \
-> +SRC_URI =3D "git://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git;branch=
-=3Dfor-next \
->             git://github.com/amir73il/unionmount-testsuite.git;branch=3Dm=
-aster;protocol=3Dhttps;name=3Dunionmount;destsuffix=3Dunionmount-testsuite =
-\
-> -           file://0001-ltp-fsx.h-Explicitly-use-int-for-return-type-for-=
-aio.patch \
->             file://0002-Drop-detached_mounts_propagation-and-remove-sys-m=
-oun.patch \
->             file://0001-add-missing-FTW_-macros-when-not-available-in-lib=
-c.patch \
->             "
->
-> -SRCREV_xfstests =3D "f7765774a1b5cb98c2f21a892e82b3421f40e791"
-> -SRCREV_unionmount =3D "e3825b16b46f4c4574a1a69909944c059835f914"
-> -
->  S =3D "${WORKDIR}/git"
->
->  inherit autotools-brokensep useradd
-> @@ -53,14 +50,14 @@ do_configure:prepend() {
->  }
->
->  do_install:append() {
-> -    unionmount_target_dir=3D${D}/usr/xfstests/unionmount-testsuite
-> -    install -d ${D}/usr/xfstests/unionmount-testsuite/tests
-> -    install -D ${WORKDIR}/unionmount-testsuite/tests/* -t $unionmount_ta=
-rget_dir/tests
-> +    unionmount_target_dir=3D${D}${prefix}/xfstests/unionmount-testsuite
-> +    install -d $unionmount_target_dir/tests
-> +    install ${WORKDIR}/unionmount-testsuite/tests/* $unionmount_target_d=
-ir/tests
->      install ${WORKDIR}/unionmount-testsuite/*.py -t $unionmount_target_d=
-ir
->      install ${WORKDIR}/unionmount-testsuite/run -t $unionmount_target_di=
-r
->      install ${WORKDIR}/unionmount-testsuite/README -t $unionmount_target=
-_dir
->  }
->
->  FILES:${PN} +=3D "\
-> -    /usr/xfstests \
-> +    ${prefix}/xfstests \
->  "
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#106427): https://lists.openembedded.org/g/openembedde=
-d-devel/message/106427
-> Mute This Topic: https://lists.openembedded.org/mt/102438671/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
 
