@@ -1,346 +1,144 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <Joakim.Tjernlund@infinera.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D4AEAC4332F
-	for <webhook@archiver.kernel.org>; Wed,  8 Nov 2023 10:53:15 +0000 (UTC)
-Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
- by mx.groups.io with SMTP id smtpd.web11.10881.1699440794663883533
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 04156C4167B
+	for <webhook@archiver.kernel.org>; Wed,  8 Nov 2023 11:00:56 +0000 (UTC)
+Received: from NAM02-DM3-obe.outbound.protection.outlook.com (NAM02-DM3-obe.outbound.protection.outlook.com [40.107.95.64])
+ by mx.groups.io with SMTP id smtpd.web10.10908.1699441254029605974
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Nov 2023 02:53:15 -0800
+ Wed, 08 Nov 2023 03:00:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=fKruxq6O;
- spf=pass (domain: konsulko.com, ip: 209.85.218.51, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-9dd6dc9c00cso759546866b.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 08 Nov 2023 02:53:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1699440793; x=1700045593; darn=lists.openembedded.org;
-        h=in-reply-to:from:content-language:references:cc:to:subject
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=42zt1k1E6M4x1Jm8WOBqW3Z0HRb3hzvCedEWi8wFKk8=;
-        b=fKruxq6OUB5UmdVUcdTlX7tADqVqSome6M7acXn9IsdFQ4bjYMo+tR6yGTRzfiRyxg
-         M5pIhPjwg+U8X8xqBU1kxtW0BtJYWIEqnbDqgUtx2EyBauAkvl0a26+3px7AIPCvJAVl
-         m1bftnOl3RIgP/d+6axPIt32H0FcxuHjqrOSg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699440793; x=1700045593;
-        h=in-reply-to:from:content-language:references:cc:to:subject
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=42zt1k1E6M4x1Jm8WOBqW3Z0HRb3hzvCedEWi8wFKk8=;
-        b=gW2f7brOdfu7LLI9qSjxVP50XBtCAafirtRZmQ6Uw/+VFuvLMuq2tS9dbEaQ9029rv
-         ujEKGvkHODwCy1gD1abh2IlS3L3gt6gCFvskJQNwULsE9F21rN/QYDOt0qCQGhmx6iIj
-         plv629/yB5ohqOHSE9aYK5lPOo2+/g9nLlCJeiQeZD1n42z/4EUhBlNW9StZaYzJHG97
-         SjeCdLcbQez/PRaIHBRQn7yiSSgocKcsbj4vHPLqCj7IYEy0QQMY4PR5XXbbTuHjUtiR
-         yjvzcnO955qL74XWkZ9VbEJ3t+oiVorpwrCTiLFnY/wPjtjn1q43CiFBSLomjrdL/MH1
-         um0Q==
-X-Gm-Message-State: AOJu0YwIbl+hhfOh7GxGfhNJFxPEO1mNpXNz5QvrL0mtSD5lB0adSvnH
-	xM854CtpknFlvvfdPeEIV0QEhg==
-X-Google-Smtp-Source: AGHT+IGJ/NqsL5vSAFTsH/bNa5EOo7t5Ij3NwZuLKPVz3RsoXykp+bwxCduAY5dDV84fjmPFToYKow==
-X-Received: by 2002:a17:907:94d5:b0:9bf:2f84:5de7 with SMTP id dn21-20020a17090794d500b009bf2f845de7mr1168205ejc.4.1699440792481;
-        Wed, 08 Nov 2023 02:53:12 -0800 (PST)
-Received: from [192.168.5.224] ([46.55.231.62])
-        by smtp.gmail.com with ESMTPSA id cd18-20020a170906b35200b009c4cb1553edsm858778ejb.95.2023.11.08.02.53.11
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 08 Nov 2023 02:53:12 -0800 (PST)
-Content-Type: multipart/alternative;
- boundary="------------L0hFx4hDv4oskwJOP0s19Tr7"
-Message-ID: <e028935a-e1e5-4724-9839-140cee0adf67@konsulko.com>
-Date: Wed, 8 Nov 2023 12:53:10 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][PATCH 2/3] qpdf: Update 10.6.3 -> 11.6.3
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-References: <20231107152239.2219002-1-leon.anavi@konsulko.com>
- <20231107152239.2219002-2-leon.anavi@konsulko.com>
- <CAMKF1sqvRNDFV7gi9Z1N_EeOJHX6MQJLxQYHpQ_DkV5b6D+c-A@mail.gmail.com>
+ dkim=pass header.i=@infinera.com header.s=selector1 header.b=SorSMLJ1;
+ spf=pass (domain: infinera.com, ip: 40.107.95.64, mailfrom: joakim.tjernlund@infinera.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=UU/xIm1AL0zbsOW7mKtxJBD5y2swpVn8xTAoI+nbbeAobqD7cb5c7BRXcFO6rSMZj/R2E4ojZV9zygfkVLIbBbevmSkEC9RRkpJ8Oos8bTLRX1T3d6A3QItNOyHbR3aQozoSQRqAw9TnaAlA6TR8eCKaBzArN5niiNfFu8dOlkzdlvESCFboK1U0VKdUjlXgPULnpQUXZJLTaynsI4jZYW8i1o0PbcfxKBju96ZQkgk5P9YUeYZUOt1KUAVIBkaaWDzzh0ciUk/pck+N4orIBkp+Z1cyyoj0wE0i3gFEKundtPAlkDq6QUBGUymQqIAmAvmAXU+1lg6HsrGHXvAiBQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=fTFTasvklq0cv2US9pGwXHtY9cfA1rKUTJCoDVaDn4I=;
+ b=LumW0J/ovd5Qp+MXU7n5+LxWBvv1vlPt5oeTjqdZxh9izz7xPIZsFysflezQpFJvrtrJI0DwehFPzIHWk9ud9o5bGDXXaqNdFU3/2AcMmyCITrjzl5sAsJH0KNeUV3e2FBrO77QFYolzn4wHqAaSv+JGpkfd6dOKLu/m75GULQTu9vJCmm493xuN9RaDR16yFUhyLcYZPpuSOXIAcq53sHBrBY3NsJYO25h+tde7bCvHwCg3FZfdCsK2gP2oDQvq70Lppv2x6ttY9mrQzH8VAK1so7qAQBnNNc6JZcknjb/OL7UjNheRSWGVc3Wwx0m8Q39/cedw/R14y+xllKAWWA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=infinera.com; dmarc=pass action=none header.from=infinera.com;
+ dkim=pass header.d=infinera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=infinera.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=fTFTasvklq0cv2US9pGwXHtY9cfA1rKUTJCoDVaDn4I=;
+ b=SorSMLJ1jwP18jL416OaUB+oSu+yw+cYJxK1M2OoL4nfzypNzGGQUflrGGI/Sf2Zoo/5wNmRshH05aREfjuroVhufuvl5ay7cy4M2NrkdWrt0sbtbkuWEIImze3Ip3ak0vIP8XTtoBMhbiEqi4297AuRVxcoXgIwcEmrWsifv4v+b3Z7A1m1wRPkzRzSxsMjbj8JIHmeRONeTWChnpnO/HEOWcngEPl2WDFBQAoxVfUveo+P8wDxQS7rk4yaz4Oo5qgtS223kKvSYpBv0Tza2N61Wcp2A7WBYL3vlZFxQdNE97yMQPRKZuVFpl02GGSUuZMXUKDL2lcLngHoUxo/Yw==
+Received: from PH0PR10MB4615.namprd10.prod.outlook.com (2603:10b6:510:36::24)
+ by BLAPR10MB4913.namprd10.prod.outlook.com (2603:10b6:208:307::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6954.29; Wed, 8 Nov
+ 2023 11:00:51 +0000
+Received: from PH0PR10MB4615.namprd10.prod.outlook.com
+ ([fe80::86e6:23e4:41ae:35c5]) by PH0PR10MB4615.namprd10.prod.outlook.com
+ ([fe80::86e6:23e4:41ae:35c5%6]) with mapi id 15.20.6977.018; Wed, 8 Nov 2023
+ 11:00:51 +0000
+From: Joakim Tjernlund <Joakim.Tjernlund@infinera.com>
+To: "joerg.sommer@navimatix.de" <joerg.sommer@navimatix.de>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] [PATCH] [meta classes] sed -i destroys symlinks
+Thread-Topic: [oe] [PATCH] [meta classes] sed -i destroys symlinks
+Thread-Index: AQHaEbhzR/sp9kL3u0GeKyalP756yrBwPnQAgAADxgA=
+Date: Wed, 8 Nov 2023 11:00:51 +0000
+Message-ID: <5d002bb0556f030ce6746dc9783b2e525a77b3be.camel@infinera.com>
+References: <20231107202439.2647261-1-joakim.tjernlund@infinera.com>
+	 <37d34916-b09b-4fee-a57f-6d7b01eacd3a@navimatix.de>
+In-Reply-To: <37d34916-b09b-4fee-a57f-6d7b01eacd3a@navimatix.de>
+Accept-Language: en-GB, en-US
 Content-Language: en-US
-From: Leon Anavi <leon.anavi@konsulko.com>
-In-Reply-To: <CAMKF1sqvRNDFV7gi9Z1N_EeOJHX6MQJLxQYHpQ_DkV5b6D+c-A@mail.gmail.com>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Evolution 3.50.1 
+autocrypt: addr=joakim.tjernlund@infinera.com; prefer-encrypt=mutual;
+ keydata=mQENBFp0f28BCADPn4XzN2HEzkY4BZKE6/T/S4M/Qjlf01K6gmECJZi5LQgOt0jOUAdvsXVd8yKYeqCq+eWvlfrLU9OXPGoCqwj95P2YjMsttqaPBEAnf4XyBs67Snz2wHyBDONoRxGoyq2Ondy+TPicWEm0mh404h9EzKxRNxwrRyKhsjWoVeaucuybAiGbJvqQj0CLmuMCl4PUBYDmXFzt3yx0g54z8E9/8ON+z0J7yZbA0aftZAjFLv6nn0Th/2dpD8d3vWtkJw4yBjLX2KFvlzJfQqkd6RI4Cn1OP9sguXDob123dMiMk/5XbjXz+0C21QFxejxt3HGisvKes+8swplyni7KdiDtABEBAAG0MEpvYWtpbSBUamVybmx1bmQgPGpvYWtpbS50amVybmx1bmRAaW5maW5lcmEuY29tPokBVAQTAQgAPhYhBFtMG/jmfqy7x0aBp4VMQ6CbDpcaBQJadH9vAhsDBQkDwmcABQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEIVMQ6CbDpcasFAH/j64dpHpjY55tVoUg5yK8hcmxS/buKQQP9H3e2DdHeYrK0qeQ97AXiWTh63UvzvEXchiKjua6kYhUUkDObaltmwkKgPv0qb9lP6yfFBzvllriS6LrdIMCOLgtnQW2x28m5mC1hYT08jlqEXluYDoj2dTll9HGMsqn0JkhRjBsuzTXq8VyJjjnNLpzsAlTOGEQoAi7SqtDHs9PSNyOAKH5jRjATdNbPAsTKuI1veJf7Zzyc98yG0ya43Hqal1scoa+9GJZXNQPRaMVkyxKGbEEncdtnQl9e/DUMH4SUQ5vbM/+U4WvkX5Cvc+KwI6JAm1PhrAaVHSkDNAU5LqUqEbbHY=
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=infinera.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PH0PR10MB4615:EE_|BLAPR10MB4913:EE_
+x-ms-office365-filtering-correlation-id: aad52744-d560-4581-789e-08dbe049f8ea
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 
+ Bnzxe3hfse3bfLVQVDCy94SCgidYKJuSniLYhLPghA16a91xxbmLZCVrsYHUBGLpYsBSHnDXQN9xl39MVb9tbNL09zv69pWWcDSqvLbN8NaqFknlmfztRCgEqQJX63iQxzj1ER036efJzqkdqNjIwED08s69x7Qi93FPuivb9UsmLpX+V8HncD6AQ1fQI+wei2TCY4zmXZlfM2HpfGRFI8axiDSrUpdLtULYPfKv9qHzDmiWDgiTBcPyS6jXlF1orqclm0jXTmMzY5zIqHp5uRmqKMsau/B4UnZQgyvUryzyu47ug/AxxLBcaa3wd/xdJQrlh5NSNkQ3pHXTKq2Is7YuYW/qJvyQ0nk5wDpx616su3sSi7rtj+/+sMCljOQgLnYMAun1m89Nr1tLPVnBXmG6HiX0aD/6avP4USzU+coDMCAtANNbrgnEV07FBihqF25TSkqCf2xM5bHT/6nsgSg8ooReqKfxHqABjZ3B/0g/baqpdih/v4OA8g5BipxU/dNBIOYQl/NN43PbKLtkzgxIr94VzNVlapBaqX6ix3G6mtAbz6mn/9hiAoc+76AOWR+9frQOJL8dZkR5RElgqByo7yidXLx/ikgIm/jKVjnP039CHMPnDnfu08KChq+a
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH0PR10MB4615.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(366004)(346002)(39850400004)(396003)(136003)(376002)(230922051799003)(1800799009)(186009)(451199024)(64100799003)(6486002)(71200400001)(86362001)(478600001)(6512007)(53546011)(6506007)(316002)(91956017)(66556008)(76116006)(66446008)(66476007)(64756008)(110136005)(5660300002)(66946007)(38100700002)(122000001)(36756003)(8936002)(4744005)(8676002)(2906002)(2616005)(38070700009)(41300700001);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?utf-8?B?bmFUUDhkZ0pzM3ZjZzFuL0c3YjRicElremViT0VYL3FmVEdIRmJ1L29MazBx?=
+ =?utf-8?B?SXkya2JzUWdIVm8xYk9vbG45NG1oU3EvYmd5VnJjZDA2VXJObmlJR0pnaloz?=
+ =?utf-8?B?akIwTHlMRGMwbmFrSUI3QnFBdmRvaDMvRUlOS1B0a3JCSzlaMDVvMkE3SmpR?=
+ =?utf-8?B?MHlYdGlQcFJOaUE3Vzg3R1d0VWJwakFCWHgwZ0huRVJ1YitJWGVsRFUxVUVS?=
+ =?utf-8?B?VitQbGE0NkZGdmd0cUdGUDhVY3RMdUV5c2FNVm9hZFJ6aXg1Qm03SEFaenB0?=
+ =?utf-8?B?Qkx3Vi9iMXJuVmp2cndETDhyV2pSR09UekNBSzkxWE9CdGdyeVdyMHVUbFcz?=
+ =?utf-8?B?eE40bWlCT1UxeHhEN21SMkFaM3BFMnZvWjF6VUN1L1VvMm82R1BTdEZOUWJO?=
+ =?utf-8?B?UWV5MjgxRTg0bTlvQ0pGeGtLRHRBbkUrWS9LNEY3QzZ0c3RmNTgxQWRuMkQv?=
+ =?utf-8?B?d1dQWTZsTjdYRW1JU1RHSFllekxvMGtXUjZ2eS9FYzZiQy9KckhJUVJ6Vzlr?=
+ =?utf-8?B?SWo0V0thb0ZqRU9PbVM0R1hEb2NVeG1oKzhyc1lGNFZZZFdGQWN3bGpqSzhp?=
+ =?utf-8?B?TFpaNUJ2WXRJWWV6YXVBVDRLdVF3bUhZRDlLSTJLTEoxWVhWMHlHUFg1Rm5u?=
+ =?utf-8?B?eUQyZCtoaXNkWnQ0bUpiYkFjaUg3dVE5MjRQRHQ4dlMxYTJIeFVTTlR5TzVY?=
+ =?utf-8?B?MzRUYXhsV0dIamtmdHBjTXlLN1FRS3orZXlSZ1Q5N3lVWGM2SmtWZDVFNU4v?=
+ =?utf-8?B?QnVSTDBOUWdSdG9PMDRaRlYvMTdXa0EwWjh1cFpLR3NkWjJZcVRQYlNBVlhp?=
+ =?utf-8?B?QUZaTTVwaU4rSXkwQXRXbTFsZ05IS0FEalc4SlVTMWJoVjllVFk3bjJ6ZkVz?=
+ =?utf-8?B?UHpKTnl5OE5yTnhDOXRpaGI4ckkxL0dIVTlTZ0tCeGVtaGgwSThVeklWZE5L?=
+ =?utf-8?B?bnBmZS9UQk5FUndHN0J1Wm5iTThzK1Q0eGxYMzhlYVZKVGVhY2pmaVpDSlVu?=
+ =?utf-8?B?VStnd2VRRUFQdWJBREVXNXhwUHl0ZU0xaWltWGowNjNJSGF4NDlzRGo5UGRC?=
+ =?utf-8?B?T2N6aGZsS1NhMVZHNWZkYytjQnVlaFdzbWdMblZxV0tjT1gvZW42bzRiazg0?=
+ =?utf-8?B?Mmxnb0VqTDZ5L3pYZUYxc2FkN2Y3R0hYZE5RNTZxZEVwMUlkeW9USWoxSWFj?=
+ =?utf-8?B?b0tyb1MzRHFwVTJnNFAyYnFjbTJnSUd6UCtPR2I1UVV5YTNudE01LzF3Q25D?=
+ =?utf-8?B?SlpLVDRNWEJ1N08yVXExMWVPUzYxZmpQcUV3ZXhpRzAxSmNpNGFvU0k2dTBC?=
+ =?utf-8?B?U2VYc1YyaCtFbVBEOTdqaTdoVzZCbENOL3VYTVJORldCS3NEYmdxREhua04x?=
+ =?utf-8?B?d0lsM0VHNVA0cWpIQmJQQkdBUmJNMFovdHZYSjF0dmZIY1kxVGJSQUZISndm?=
+ =?utf-8?B?UTNUZEdLTllMRGppSGc1bW1MUW1CMnE0M1l3ZTZ3N1pPRnhYcnhoSXQ0bEZS?=
+ =?utf-8?B?LzNuTis2YU5ITTltQTh2T2dXNTZpTk1NNU5YV2F3Q2w5NFpIY2lERERqL2oz?=
+ =?utf-8?B?b2p3VnRrNnl4OXN5VVMrS3l4U09XS2ZXNVB5V1hNT1IyK3AyZU1iR0w3NjFQ?=
+ =?utf-8?B?KzM1aWFYUkVkejFBQnlZWWJiUGw4NnJ1OHdnbG5xVzBrL2dXbEdXNDgxdDlZ?=
+ =?utf-8?B?by9WSDM0bUFwWHk3Z1FhcnRVUUxqeVJOcGp4eVZCTjQxM3hVdjYvYXpmVWl1?=
+ =?utf-8?B?Sm82RVJYT1FqTVNWcTY2T1Z1di8ydW1QQzZMS1lRUjJFUEVsU2ZlT1ZOajh2?=
+ =?utf-8?B?VUo2MnE4SUozUUJQWUtnZDFLVXAya3g2cElobnhCVGlKQ0hCRmNoSVpHVjJE?=
+ =?utf-8?B?MUsxZ1BLeWpYYnZKQmhoYlltaklGdExKVVl5aWV4T0xoTHhhODlwc3hjdUt4?=
+ =?utf-8?B?bzRnZUV0ZkN2QlJWUlJETjdJUzlDa1lZYWJjSHZtNGVFeXcwTTlqNzllUGVD?=
+ =?utf-8?B?QnRDUjQ4cVJINHJMVVRmNXFHUmJWZzBQZ0tUNjM2cXFKZGdYMVl2Ym9QMndW?=
+ =?utf-8?B?Q2RsSkltSko2amlVWkhCWTNkZk9PRmZ0Rno2WDBmNmVqc3p0Z1ZEc1FVVjZT?=
+ =?utf-8?B?TlMxOXAzSTdiWDAvYWd2d21jQ0VwaTNNZmp6dHBFTVpvdkpDSUY1VzBlRHVm?=
+ =?utf-8?Q?sWsU0a7B3i3nw5css1ltikgyVpkbDKj0SO455skyoUqA?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <9B95066CEA78854A9D254F141F6AD74F@namprd10.prod.outlook.com>
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-OriginatorOrg: infinera.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PH0PR10MB4615.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: aad52744-d560-4581-789e-08dbe049f8ea
+X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Nov 2023 11:00:51.6374
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 285643de-5f5b-4b03-a153-0ae2dc8aaf77
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: U+e7lywS38uOUxdVBGaPWhNttuYbfXbDCLq9bdgcMl6K12L6IhW14fefWGzm2vcduflvYCZZihDXQujYesEzfg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BLAPR10MB4913
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 08 Nov 2023 10:53:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106472
+ <openembedded-devel@lists.openembedded.org>; Wed, 08 Nov 2023 11:00:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106473
 
-This is a multi-part message in MIME format.
---------------L0hFx4hDv4oskwJOP0s19Tr7
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-
-Hi Khem,
-
-Thank you for the feedback.
-
-On 8.11.23 г. 9:08 ч., Khem Raj wrote:
-> seeing this error
->
-> WARNING: qpdf-11.6.3-r0 do_package_qa: QA Issue: File
-> /usr/lib/cmake/qpdf/libqpdfTargets.cmake in package qpdf-dev contains
-> reference to TMPDIR [bu
-> ildpaths]
-
-The sed command in do_install:append should fix this warning. I also 
-inspected to /usr/lib/cmake/qpdf/libqpdfTargets.cmake on the booted 
-target device and the paths look OK. I am wondering why does this 
-warning appear on your build setup?
-
-> ERROR: qpdf-11.6.3-r0 do_package_qa: QA Issue:
-> /usr/lib/libqpdf.so.29.6.3 contained in package libqpdf requires
-> libgnutls.so.30(GNUTLS_3_4)(64bit),
->   but no providers found in RDEPENDS:libqpdf? [file-rdeps]
-> ERROR: qpdf-11.6.3-r0 do_package_qa: QA Issue:
-> /usr/lib/libqpdf.so.29.6.3 contained in package libqpdf requires
-> libgnutls.so.30()(64bit), but no pr
-> oviders found in RDEPENDS:libqpdf? [file-rdeps]
-
-I can't reproduce these errors on my side. Could you please provide any 
-hints how to reproduce them?
-
-Best regards,
-Leon
-
-> ERROR: qpdf-11.6.3-r0 do_package_qa: Fatal QA errors were found, failing task.
-> ERROR: Logfile of failure stored in:
-> /mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux/qpdf/11.6.3/temp/log.do_package_qa.3501227
->
-> On Tue, Nov 7, 2023 at 7:22 AM Leon Anavi<leon.anavi@konsulko.com>  wrote:
->> Update to version 11.6.3:
->>
->> - Fix a bug in which qpdf could potentially discard a character
->>    in a binary string if that character was preceded by an octal
->>    escaped string with fewer than three digits. This bug was
->>    introduced in the 11.0.0 release. The bug would not apply to
->>    content streams with default settings.
->> - The linearization specification precludes linearized files that
->>    require offets past the 4 GB mark. A bug in qpdf was preventing
->>    it from working when offsets had to pass the 2 GB mark. This has
->>    been corrected.
->>
->> Switch to cmake. Use /dev/random to perform encryption securely.
->> Change the fully defined path on the target to about buildpaths
->> QA issues with libqpdfTargets.cmake.
->>
->> This work was sponsored by GOVCERT.LU.
->>
->> Signed-off-by: Leon Anavi<leon.anavi@konsulko.com>
->> ---
->>   .../qpdf/{qpdf_10.6.3.bb => qpdf_11.6.3.bb}         | 13 ++++++++++---
->>   1 file changed, 10 insertions(+), 3 deletions(-)
->>   rename meta-oe/recipes-printing/qpdf/{qpdf_10.6.3.bb => qpdf_11.6.3.bb} (67%)
->>
->> diff --git a/meta-oe/recipes-printing/qpdf/qpdf_10.6.3.bb b/meta-oe/recipes-printing/qpdf/qpdf_11.6.3.bb
->> similarity index 67%
->> rename from meta-oe/recipes-printing/qpdf/qpdf_10.6.3.bb
->> rename to meta-oe/recipes-printing/qpdf/qpdf_11.6.3.bb
->> index fa33daf52..17a65acc6 100644
->> --- a/meta-oe/recipes-printing/qpdf/qpdf_10.6.3.bb
->> +++ b/meta-oe/recipes-printing/qpdf/qpdf_11.6.3.bb
->> @@ -2,14 +2,14 @@ DESCRIPTION = "PDF transformation/inspection software"
->>   HOMEPAGE ="http://qpdf.sourceforge.net"
->>   LICENSE = "Artistic-2.0"
->>   SECTION = "libs"
->> -DEPENDS = "libpcre zlib libjpeg-turbo"
->> +DEPENDS = "libpcre zlib libjpeg-turbo openssl"
->>
->>   SRC_URI = "${SOURCEFORGE_MIRROR}/qpdf/qpdf-${PV}.tar.gz"
->> -SRC_URI[sha256sum] = "e8fc23b2a584ea68c963a897515d3eb3129186741dd19d13c86d31fa33493811"
->> +SRC_URI[sha256sum] = "c394b1b0cff4cd9d13b0f5e16bdf3cf54da424dc434f9d40264b7fe67acd90bc"
->>
->>   LIC_FILES_CHKSUM ="file://Artistic-2.0;md5=7806296b9fae874361e6fb10072b7ee3"
->>
->> -inherit autotools-brokensep gettext
->> +inherit cmake gettext
->>
->>   # disable random file detection for cross-compile
->>   EXTRA_OECONF = "--without-random \
->> @@ -17,11 +17,18 @@ EXTRA_OECONF = "--without-random \
->>                   --disable-check-autofiles \
->>                   "
->>
->> +EXTRA_OECMAKE = '-DRANDOM_DEVICE="/dev/random"'
->> +
->>   LDFLAGS:append:mipsarch = " -latomic"
->>   LDFLAGS:append:riscv32 = " -latomic"
->>
->>   S="${WORKDIR}/${BPN}-${PV}"
->>
->> +do_install:append() {
->> +    # Change the fully defined path on the target
->> +    sed -i -e 's|${STAGING_LIBDIR}|${libdir}|g' ${D}${libdir}/cmake/${BPN}/libqpdfTargets.cmake
->> +}
->> +
->>   # avoid Makefile returning error on 'make clean' before configure was run
->>   CLEANBROKEN = "1"
->>
->> --
->> 2.39.2
->>
->>
->>
->>
->>
->> -=-=-=-=-=-=-=-=-=-=-=-
->> Links: You receive all messages sent to this group.
->> View/Reply Online (#106465):https://lists.openembedded.org/g/openembedded-devel/message/106465
->> Mute This Topic:https://lists.openembedded.org/mt/102444518/2167311
->> Group Owner:openembedded-devel+owner@lists.openembedded.org
->> Unsubscribe:https://lists.openembedded.org/g/openembedded-devel/unsub  [leon.anavi@konsulko.com]
->> -=-=-=-=-=-=-=-=-=-=-=-
->>
---------------L0hFx4hDv4oskwJOP0s19Tr7
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p>Hi Khem,<br>
-      <br>
-      Thank you for the feedback.<br>
-    </p>
-    <div class="moz-cite-prefix">On 8.11.23 г. 9:08 ч., Khem Raj wrote:<br>
-    </div>
-    <blockquote type="cite"
-cite="mid:CAMKF1sqvRNDFV7gi9Z1N_EeOJHX6MQJLxQYHpQ_DkV5b6D+c-A@mail.gmail.com">
-      <pre class="moz-quote-pre" wrap="">seeing this error
-
-WARNING: qpdf-11.6.3-r0 do_package_qa: QA Issue: File
-/usr/lib/cmake/qpdf/libqpdfTargets.cmake in package qpdf-dev contains
-reference to TMPDIR [bu
-ildpaths]</pre>
-    </blockquote>
-    <br>
-    The sed command in do_install:append should fix this warning. I also
-    inspected to <span style="white-space: pre-wrap">/usr/lib/cmake/qpdf/libqpdfTargets.cmake</span>
-    on the booted target device and the paths look OK. I am wondering
-    why does this warning appear on your build setup?<br>
-    <br>
-    <blockquote type="cite"
-cite="mid:CAMKF1sqvRNDFV7gi9Z1N_EeOJHX6MQJLxQYHpQ_DkV5b6D+c-A@mail.gmail.com">
-      <pre class="moz-quote-pre" wrap="">
-ERROR: qpdf-11.6.3-r0 do_package_qa: QA Issue:
-/usr/lib/libqpdf.so.29.6.3 contained in package libqpdf requires
-libgnutls.so.30(GNUTLS_3_4)(64bit),
- but no providers found in RDEPENDS:libqpdf? [file-rdeps]
-ERROR: qpdf-11.6.3-r0 do_package_qa: QA Issue:
-/usr/lib/libqpdf.so.29.6.3 contained in package libqpdf requires
-libgnutls.so.30()(64bit), but no pr
-oviders found in RDEPENDS:libqpdf? [file-rdeps]</pre>
-    </blockquote>
-    <br>
-    I can't reproduce these errors on my side. Could you please provide
-    any hints how to reproduce them?<br>
-    <br>
-    Best regards,<br>
-    Leon<br>
-    <br>
-    <blockquote type="cite"
-cite="mid:CAMKF1sqvRNDFV7gi9Z1N_EeOJHX6MQJLxQYHpQ_DkV5b6D+c-A@mail.gmail.com">
-      <pre class="moz-quote-pre" wrap="">
-ERROR: qpdf-11.6.3-r0 do_package_qa: Fatal QA errors were found, failing task.
-ERROR: Logfile of failure stored in:
-/mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux/qpdf/11.6.3/temp/log.do_package_qa.3501227
-
-On Tue, Nov 7, 2023 at 7:22 AM Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a> wrote:
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">
-Update to version 11.6.3:
-
-- Fix a bug in which qpdf could potentially discard a character
-  in a binary string if that character was preceded by an octal
-  escaped string with fewer than three digits. This bug was
-  introduced in the 11.0.0 release. The bug would not apply to
-  content streams with default settings.
-- The linearization specification precludes linearized files that
-  require offets past the 4 GB mark. A bug in qpdf was preventing
-  it from working when offsets had to pass the 2 GB mark. This has
-  been corrected.
-
-Switch to cmake. Use /dev/random to perform encryption securely.
-Change the fully defined path on the target to about buildpaths
-QA issues with libqpdfTargets.cmake.
-
-This work was sponsored by GOVCERT.LU.
-
-Signed-off-by: Leon Anavi <a class="moz-txt-link-rfc2396E" href="mailto:leon.anavi@konsulko.com">&lt;leon.anavi@konsulko.com&gt;</a>
----
- .../qpdf/{qpdf_10.6.3.bb =&gt; qpdf_11.6.3.bb}         | 13 ++++++++++---
- 1 file changed, 10 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-printing/qpdf/{qpdf_10.6.3.bb =&gt; qpdf_11.6.3.bb} (67%)
-
-diff --git a/meta-oe/recipes-printing/qpdf/qpdf_10.6.3.bb b/meta-oe/recipes-printing/qpdf/qpdf_11.6.3.bb
-similarity index 67%
-rename from meta-oe/recipes-printing/qpdf/qpdf_10.6.3.bb
-rename to meta-oe/recipes-printing/qpdf/qpdf_11.6.3.bb
-index fa33daf52..17a65acc6 100644
---- a/meta-oe/recipes-printing/qpdf/qpdf_10.6.3.bb
-+++ b/meta-oe/recipes-printing/qpdf/qpdf_11.6.3.bb
-@@ -2,14 +2,14 @@ DESCRIPTION = "PDF transformation/inspection software"
- HOMEPAGE = <a class="moz-txt-link-rfc2396E" href="http://qpdf.sourceforge.net">"http://qpdf.sourceforge.net"</a>
- LICENSE = "Artistic-2.0"
- SECTION = "libs"
--DEPENDS = "libpcre zlib libjpeg-turbo"
-+DEPENDS = "libpcre zlib libjpeg-turbo openssl"
-
- SRC_URI = "${SOURCEFORGE_MIRROR}/qpdf/qpdf-${PV}.tar.gz"
--SRC_URI[sha256sum] = "e8fc23b2a584ea68c963a897515d3eb3129186741dd19d13c86d31fa33493811"
-+SRC_URI[sha256sum] = "c394b1b0cff4cd9d13b0f5e16bdf3cf54da424dc434f9d40264b7fe67acd90bc"
-
- LIC_FILES_CHKSUM = <a class="moz-txt-link-rfc2396E" href="file://Artistic-2.0;md5=7806296b9fae874361e6fb10072b7ee3">"file://Artistic-2.0;md5=7806296b9fae874361e6fb10072b7ee3"</a>
-
--inherit autotools-brokensep gettext
-+inherit cmake gettext
-
- # disable random file detection for cross-compile
- EXTRA_OECONF = "--without-random \
-@@ -17,11 +17,18 @@ EXTRA_OECONF = "--without-random \
-                 --disable-check-autofiles \
-                 "
-
-+EXTRA_OECMAKE = '-DRANDOM_DEVICE="/dev/random"'
-+
- LDFLAGS:append:mipsarch = " -latomic"
- LDFLAGS:append:riscv32 = " -latomic"
-
- S="${WORKDIR}/${BPN}-${PV}"
-
-+do_install:append() {
-+    # Change the fully defined path on the target
-+    sed -i -e 's|${STAGING_LIBDIR}|${libdir}|g' ${D}${libdir}/cmake/${BPN}/libqpdfTargets.cmake
-+}
-+
- # avoid Makefile returning error on 'make clean' before configure was run
- CLEANBROKEN = "1"
-
---
-2.39.2
-
-
-
-
-</pre>
-        <br>
-        <fieldset class="moz-mime-attachment-header"></fieldset>
-        <pre class="moz-quote-pre" wrap="">
--=-=-=-=-=-=-=-=-=-=-=-
-Links: You receive all messages sent to this group.
-View/Reply Online (#106465): <a class="moz-txt-link-freetext" href="https://lists.openembedded.org/g/openembedded-devel/message/106465">https://lists.openembedded.org/g/openembedded-devel/message/106465</a>
-Mute This Topic: <a class="moz-txt-link-freetext" href="https://lists.openembedded.org/mt/102444518/2167311">https://lists.openembedded.org/mt/102444518/2167311</a>
-Group Owner: <a class="moz-txt-link-abbreviated" href="mailto:openembedded-devel+owner@lists.openembedded.org">openembedded-devel+owner@lists.openembedded.org</a>
-Unsubscribe: <a class="moz-txt-link-freetext" href="https://lists.openembedded.org/g/openembedded-devel/unsub">https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a class="moz-txt-link-abbreviated" href="mailto:leon.anavi@konsulko.com">leon.anavi@konsulko.com</a>]
--=-=-=-=-=-=-=-=-=-=-=-
-
-</pre>
-      </blockquote>
-    </blockquote>
-  </body>
-</html>
-
---------------L0hFx4hDv4oskwJOP0s19Tr7--
+T24gV2VkLCAyMDIzLTExLTA4IGF0IDExOjQ3ICswMTAwLCBKw7ZyZyBTb21tZXIgd3JvdGU6DQo+
+IE9uIDA3LjExLjIzIDIxOjI0LCBKb2FraW0gVGplcm5sdW5kIHZpYSBsaXN0cy5vcGVuZW1iZWRk
+ZWQub3JnIHdyb3RlOg0KPiA+IEluIC9ldGMvcGFzc3dkIGlzIGEgc3ltbGluaywgc2VkIC1pIG9u
+IHNhbWUgZmlsZSB3aWxsIHJlcGxhY2UgdGhlDQo+IA0KPiBJIHN1c3BlY3QgdGhlIMK7SW7CqyBz
+aG91bGQgYmUgYW4gwrtJZsKrDQoNClllcyA6KQ0KDQo+IA0KPiA+IHN5bWxpbmsgd2l0aCBhIG5l
+dyBmaWxlLiBQcmV2ZW50IHRoYXQgYnkgZXhwYW5kaW5nIHRoZSBmaWxlIHdpdGggcmVhbHBhdGgN
+Cj4gPiBiZWZvcmUgZ2l2aW5nIGl0IHRvIHNlZC4NCj4gDQo+IFVzaW5nIGBzZWQgLWlgIGNvdWxk
+IGJlIHVzZWQgaW4gbWFueSBwbGFjZXM7IGUuZy4gL2V0Yy9ob3N0cy4gTWF5YmUgdGhlDQoNClll
+cywgdGhlcmUgYXJlIG1vcmUgcGxhY2VzIGJ1dCBJIGRvbid0IGludGVuZCB0byBmaXggdGhlbSBh
+bGwgaGVyZS4NCg0KPiByZXBsYWNlbWVudCB3aXRoIGEgc3ltbGluayBzaG91bGQgaGFwcGVuIGFm
+dGVyIGFsbCBvdGhlciBzY3JpcHRzIGFyZQ0KPiBkb25lLiBXb3VsZCB0aGlzIGJlIHBvc3NpYmxl
+Pw0KDQpJIGRvbid0IHNlZSBob3csIHRoZSBzeW1saW5rIG5lZWRzIHRvIGJlIGluIHBsYWNlIHdo
+ZW4gYnVpbGRpbmcgcGtncyBhZGRpbmcgdXNlcnMvZ3JvdXBzIGV0Yy4NCg0KQW55aG93LCBJIGhh
+dmUgcmVkaXJlY3RlZCB0aGlzIHRvIG9lLWNvcmUgYXMgaW5zdHJ1Y3RlZCwgcGxlYXNlIG1vdmUg
+ZnVyaGVyIGNvbW1lbnRzIHRoZXJlLg0KDQogIEpvYWtpbQ0K
 
