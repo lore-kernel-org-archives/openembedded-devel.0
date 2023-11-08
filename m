@@ -2,172 +2,205 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D8DEDC4332F
-	for <webhook@archiver.kernel.org>; Wed,  8 Nov 2023 07:08:44 +0000 (UTC)
-Received: from mail-oo1-f51.google.com (mail-oo1-f51.google.com [209.85.161.51])
- by mx.groups.io with SMTP id smtpd.web11.8636.1699427318675235004
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E7BBCC4167B
+	for <webhook@archiver.kernel.org>; Wed,  8 Nov 2023 07:11:14 +0000 (UTC)
+Received: from mail-oa1-f44.google.com (mail-oa1-f44.google.com [209.85.160.44])
+ by mx.groups.io with SMTP id smtpd.web10.8574.1699427474003384901
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 07 Nov 2023 23:08:38 -0800
+ Tue, 07 Nov 2023 23:11:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=eTve7ZVh;
- spf=pass (domain: gmail.com, ip: 209.85.161.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f51.google.com with SMTP id 006d021491bc7-5872b8323faso3570891eaf.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 07 Nov 2023 23:08:38 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=CPYBXWXg;
+ spf=pass (domain: gmail.com, ip: 209.85.160.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f44.google.com with SMTP id 586e51a60fabf-1ef36a04931so3815117fac.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 07 Nov 2023 23:11:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699427318; x=1700032118; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1699427473; x=1700032273; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=J7VzRaE8nyxMdmXDKZ2HtWfD42WiZAPmDaBofWDRReA=;
-        b=eTve7ZVhWIr9oND3BtUoIc+k2EANnr0s3+ZkI+EGg2LmnapeWLwgdpYdJfiuf522W5
-         3cJ0iuqPrqXw/chWqNnTW8fY5kxXeFiUnmPP46RuEwFDIx4Xmqr2FoMEA8E4W6E0DHD8
-         KXxTvv6Oy8eXCMQxh3CyfJjikZ1JexLWWCylrgY/HwkA3rVfxuLk8uCDe+NpZUZbvu+3
-         jJesqccFV/bQGBkdR+fcUst+S+OVZaZ1B3Uhmp+q+q2gwFDy3IQjiN6B4/MWkUGFMUqa
-         TFe+ECRJdMNIXbInYVjWUsnlS1J4uc5BiYH+VgMHZNt33yiZqXPsyKKTxalkC/LhF2r+
-         YjlA==
+        bh=x9hXsrCSlxQWpgBWox7+hIVNxQmhxaejeskt6AHgPsY=;
+        b=CPYBXWXgUYgi+z+iaaLiYPxDW3kykUETBEF/EXEPDxrcDf0oZwOtyau4wQvnJxWJDl
+         9idLFR6/N8SvTY+9ZVbRxyNXQVnQbLeyeV2hC+A+8xrFRmdnxG/UPmuRjbyYoFi50E6Q
+         jnTIaGR0Pn3Bit3MJImX3lVyWEJDJw+Hf98fvSF1oRGrOb3PD+Y8pLSjvFbamrRwOOG3
+         d6DpTDBAtl7wz/oUOkqZqGEtLRkDnK6tJ1DCJEIbUTbUZeKVaYJ+Yovvq83SDXedrPHp
+         dczoW7heAxNTibEZ/RhSc3jI45/yw0gznh6mx7kbTwit8fCj1Gcgwd1hpb6Jwc8m4OzF
+         F6QA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699427318; x=1700032118;
+        d=1e100.net; s=20230601; t=1699427473; x=1700032273;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=J7VzRaE8nyxMdmXDKZ2HtWfD42WiZAPmDaBofWDRReA=;
-        b=CehpinQs8l9bbQHZxBK/RUmXybkCgILJz+6wCLbXsuu3SsO/GnYxaMC2EOaKUlIwO6
-         hGYpUg/WEUDeijIbsJikZesn6NtgKtn9r88kzHusO+ahduC0dcEvWG8uiJx+oHIa43IH
-         IWWGro3PaAn0wW2mQjzQrU+U8+0CHapaIHGkhoRBquXoVmh2RZObNEwgzxUU1W9aP8jx
-         zOAxoF0ZRxPqNJGDpxi3CZFYr17TwUjvfYclQOasGAEdK1uVnApNwaxgbKp8/8i4hbBi
-         DWD6oj5i8XV3xDpKLyr5U4ybo3dtNeWwivqgGOnGi4Z5h+49a/y9g3Kh/WEigQ/s0n8L
-         lugg==
-X-Gm-Message-State: AOJu0Yx7uBfYlR9KhxPTghMpshICiaNW2GczSzpnMEVMt0uCSTHJBK/a
-	I0TaxCS2Dl3h+5o3aIc77CqiBSLXpLbD/PzzA5flhQvmktmTSg==
-X-Google-Smtp-Source: AGHT+IGrLIO+ZkFYBOtunrpaeB9wyzwf1UMnuZH5r4S/uhRc//B07IZsBQmiPZJn2VouW5J0Pj4Lmh+nBC6H+WSl32k=
-X-Received: by 2002:a05:6871:e70c:b0:1d6:5b09:1584 with SMTP id
- qa12-20020a056871e70c00b001d65b091584mr1375096oac.5.1699427317726; Tue, 07
- Nov 2023 23:08:37 -0800 (PST)
+        bh=x9hXsrCSlxQWpgBWox7+hIVNxQmhxaejeskt6AHgPsY=;
+        b=dVouRB+XqVZuhfPR3InJVBPoUrH2pqWVO3vOLQprR2Id5Ia5XzNrdx6HdofF8UG2/1
+         p0Jo92VJoC92vhu//01Nw3PNVhT22zeSwc+rak9iSchwefZcbez5Kk4srbcegABzx7Yu
+         b05u5ZPhNDw5/0wX/7DRD+20qOHTP26/eDAUN3rab97HwKXhLts5EyWCR3e4Df76FUnx
+         R9fqXPPl37FjuuIcbjxkLIlXCgdL4OHSUOsfykaopgGeF1UjmxKJ0/bVJEBZVtw9YLT8
+         rHUfXZci4Nq7DJvjUpbYiMEzteHIHmqrIr7XOkq7xlQjgzOH3cHNgiM47056WabIfKm7
+         iVnA==
+X-Gm-Message-State: AOJu0YyNl0knrmVr/cBxEXR8/lXfsGwdMRPkYFpyVBUt/JvzXb+Dlo8L
+	d64ZbK6+t5y/qVKbNYZCXTSJgWj94+ntfFy6iRsU8j5HYrdDlg==
+X-Google-Smtp-Source: AGHT+IEkGcfvVseOzjgSz5MDmQn+U91SSezJYcu1vi0BVoJh+uXRhKjGtQ/d7niH2KIQyqLAKH3ASiV/3GDq+jJN5tM=
+X-Received: by 2002:a05:6870:1242:b0:1e9:c252:4853 with SMTP id
+ 2-20020a056870124200b001e9c2524853mr1019270oao.5.1699427473016; Tue, 07 Nov
+ 2023 23:11:13 -0800 (PST)
 MIME-Version: 1.0
-References: <20231107152239.2219002-1-leon.anavi@konsulko.com> <20231107152239.2219002-2-leon.anavi@konsulko.com>
-In-Reply-To: <20231107152239.2219002-2-leon.anavi@konsulko.com>
+References: <20231107071240.1519631-1-pkj@axis.com> <20231107071240.1519631-12-pkj@axis.com>
+In-Reply-To: <20231107071240.1519631-12-pkj@axis.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 7 Nov 2023 23:08:11 -0800
-Message-ID: <CAMKF1sqvRNDFV7gi9Z1N_EeOJHX6MQJLxQYHpQ_DkV5b6D+c-A@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 2/3] qpdf: Update 10.6.3 -> 11.6.3
-To: Leon Anavi <leon.anavi@konsulko.com>
+Date: Tue, 7 Nov 2023 23:10:47 -0800
+Message-ID: <CAMKF1spsaOrfWFLpiOC_1+sVmD1OB9CeiVi+L7f0hYxyTiExYg@mail.gmail.com>
+Subject: Re: [oe] [meta-filesystems][PATCH 12/16] xfstests: Update to
+ 2023.10.29 properly
+To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 08 Nov 2023 07:08:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106465
+ <openembedded-devel@lists.openembedded.org>; Wed, 08 Nov 2023 07:11:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106466
 
-seeing this error
+this seems to fail a QA check
 
-WARNING: qpdf-11.6.3-r0 do_package_qa: QA Issue: File
-/usr/lib/cmake/qpdf/libqpdfTargets.cmake in package qpdf-dev contains
-reference to TMPDIR [bu
-ildpaths]
-ERROR: qpdf-11.6.3-r0 do_package_qa: QA Issue:
-/usr/lib/libqpdf.so.29.6.3 contained in package libqpdf requires
-libgnutls.so.30(GNUTLS_3_4)(64bit),
- but no providers found in RDEPENDS:libqpdf? [file-rdeps]
-ERROR: qpdf-11.6.3-r0 do_package_qa: QA Issue:
-/usr/lib/libqpdf.so.29.6.3 contained in package libqpdf requires
-libgnutls.so.30()(64bit), but no pr
-oviders found in RDEPENDS:libqpdf? [file-rdeps]
-ERROR: qpdf-11.6.3-r0 do_package_qa: Fatal QA errors were found, failing ta=
-sk.
-ERROR: Logfile of failure stored in:
-/mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux/qpdf/11.6.3/temp/log.do=
-_package_qa.3501227
+ERROR: xfstests-2023.10.29-r0 do_package_qa: QA Issue:
+/usr/xfstests/src/soak_duration.awk contained in package xfstests
+requires /usr/bin/awk, but no providers found in RDEPENDS:xfstests?
+[file-rdeps]
+ERROR: xfstests-2023.10.29-r0 do_package_qa: Fatal QA errors were
+found, failing task.
 
-On Tue, Nov 7, 2023 at 7:22=E2=80=AFAM Leon Anavi <leon.anavi@konsulko.com>=
- wrote:
+On Mon, Nov 6, 2023 at 11:13=E2=80=AFPM Peter Kjellerstedt
+<peter.kjellerstedt@axis.com> wrote:
 >
-> Update to version 11.6.3:
+> The "update" in commit 2af7d3f63e added a SRCREV rather than updating
+> SRCREV_xfstests. Change the recipe to actually use SRCREV so that it is
+> compatible with future AUH updates.
 >
-> - Fix a bug in which qpdf could potentially discard a character
->   in a binary string if that character was preceded by an octal
->   escaped string with fewer than three digits. This bug was
->   introduced in the 11.0.0 release. The bug would not apply to
->   content streams with default settings.
-> - The linearization specification precludes linearized files that
->   require offets past the 4 GB mark. A bug in qpdf was preventing
->   it from working when offsets had to pass the 2 GB mark. This has
->   been corrected.
+> Also replace "/usr" with "${prefix}".
 >
-> Switch to cmake. Use /dev/random to perform encryption securely.
-> Change the fully defined path on the target to about buildpaths
-> QA issues with libqpdfTargets.cmake.
->
-> This work was sponsored by GOVCERT.LU.
->
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+> Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 > ---
->  .../qpdf/{qpdf_10.6.3.bb =3D> qpdf_11.6.3.bb}         | 13 ++++++++++---
->  1 file changed, 10 insertions(+), 3 deletions(-)
->  rename meta-oe/recipes-printing/qpdf/{qpdf_10.6.3.bb =3D> qpdf_11.6.3.bb=
-} (67%)
 >
-> diff --git a/meta-oe/recipes-printing/qpdf/qpdf_10.6.3.bb b/meta-oe/recip=
-es-printing/qpdf/qpdf_11.6.3.bb
-> similarity index 67%
-> rename from meta-oe/recipes-printing/qpdf/qpdf_10.6.3.bb
-> rename to meta-oe/recipes-printing/qpdf/qpdf_11.6.3.bb
-> index fa33daf52..17a65acc6 100644
-> --- a/meta-oe/recipes-printing/qpdf/qpdf_10.6.3.bb
-> +++ b/meta-oe/recipes-printing/qpdf/qpdf_11.6.3.bb
-> @@ -2,14 +2,14 @@ DESCRIPTION =3D "PDF transformation/inspection software=
-"
->  HOMEPAGE =3D "http://qpdf.sourceforge.net"
->  LICENSE =3D "Artistic-2.0"
->  SECTION =3D "libs"
-> -DEPENDS =3D "libpcre zlib libjpeg-turbo"
-> +DEPENDS =3D "libpcre zlib libjpeg-turbo openssl"
+> I wonder if this recipe really should have been updated to 2023.10.29,
+> since that tag is on the "for-next" branch, which I assume means it is
+> not released yet. But I cannot find a way to make devtool upgrade only
+> look for revisions that are available from a specific branch.
 >
->  SRC_URI =3D "${SOURCEFORGE_MIRROR}/qpdf/qpdf-${PV}.tar.gz"
-> -SRC_URI[sha256sum] =3D "e8fc23b2a584ea68c963a897515d3eb3129186741dd19d13=
-c86d31fa33493811"
-> +SRC_URI[sha256sum] =3D "c394b1b0cff4cd9d13b0f5e16bdf3cf54da424dc434f9d40=
-264b7fe67acd90bc"
+>  ...itly-use-int-for-return-type-for-aio.patch | 30 -------------------
+>  .../xfstests/xfstests_2023.10.29.bb           | 17 +++++------
+>  2 files changed, 7 insertions(+), 40 deletions(-)
+>  delete mode 100644 meta-filesystems/recipes-utils/xfstests/xfstests/0001=
+-ltp-fsx.h-Explicitly-use-int-for-return-type-for-aio.patch
 >
->  LIC_FILES_CHKSUM =3D "file://Artistic-2.0;md5=3D7806296b9fae874361e6fb10=
-072b7ee3"
+> diff --git a/meta-filesystems/recipes-utils/xfstests/xfstests/0001-ltp-fs=
+x.h-Explicitly-use-int-for-return-type-for-aio.patch b/meta-filesystems/rec=
+ipes-utils/xfstests/xfstests/0001-ltp-fsx.h-Explicitly-use-int-for-return-t=
+ype-for-aio.patch
+> deleted file mode 100644
+> index 5e9e9d9a7..000000000
+> --- a/meta-filesystems/recipes-utils/xfstests/xfstests/0001-ltp-fsx.h-Exp=
+licitly-use-int-for-return-type-for-aio.patch
+> +++ /dev/null
+> @@ -1,30 +0,0 @@
+> -From 0927d0def968ea7e19905c7e39182f65961c11cf Mon Sep 17 00:00:00 2001
+> -From: Khem Raj <raj.khem@gmail.com>
+> -Date: Sun, 5 Nov 2023 01:17:52 -0700
+> -Subject: [PATCH] ltp/fsx.h: Explicitly use int for return type for aio_r=
+w()
+> -
+> -Fixes build with clang-17+
+> -error: type specifier missing, defaults to 'int'; ISO C99 and later do n=
+ot support implicit int [-Wimplicit-int]
+> -
+> -Upstream-Status: Submitted [https://marc.info/?l=3Dfstests&m=3D169917222=
+008646&w=3D2]
+> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ----
+> - ltp/fsx.c | 2 +-
+> - 1 file changed, 1 insertion(+), 1 deletion(-)
+> -
+> -diff --git a/ltp/fsx.c b/ltp/fsx.c
+> -index ee4b8fe4..c0aec23f 100644
+> ---- a/ltp/fsx.c
+> -+++ b/ltp/fsx.c
+> -@@ -2581,7 +2581,7 @@ out_error:
+> -       return -1;
+> - }
+> - #else
+> --aio_rw(int rw, int fd, char *buf, unsigned len, unsigned offset)
+> -+int aio_rw(int rw, int fd, char *buf, unsigned len, unsigned offset)
+> - {
+> -       fprintf(stderr, "io_rw: need AIO support!\n");
+> -       exit(111);
+> ---
+> -2.42.1
+> -
+> diff --git a/meta-filesystems/recipes-utils/xfstests/xfstests_2023.10.29.=
+bb b/meta-filesystems/recipes-utils/xfstests/xfstests_2023.10.29.bb
+> index 4e8e31840..be7c2d473 100644
+> --- a/meta-filesystems/recipes-utils/xfstests/xfstests_2023.10.29.bb
+> +++ b/meta-filesystems/recipes-utils/xfstests/xfstests_2023.10.29.bb
+> @@ -3,18 +3,15 @@ LICENSE =3D "GPL-2.0-only"
+>  LIC_FILES_CHKSUM =3D "file://LICENSES/GPL-2.0;md5=3D74274e8a218423e49eef=
+dea80bc55038"
 >
-> -inherit autotools-brokensep gettext
-> +inherit cmake gettext
+>  SRCREV =3D "11914614784735c504f43b5b6baabaa713375984"
+> -SRCREV_FORMAT =3D "xfstests_unionmount"
+> +SRCREV_unionmount =3D "e3825b16b46f4c4574a1a69909944c059835f914"
+> +SRCREV_FORMAT =3D "default_unionmount"
 >
->  # disable random file detection for cross-compile
->  EXTRA_OECONF =3D "--without-random \
-> @@ -17,11 +17,18 @@ EXTRA_OECONF =3D "--without-random \
->                  --disable-check-autofiles \
->                  "
+> -SRC_URI =3D "git://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git;branch=
+=3Dfor-next;name=3Dxfstests \
+> +SRC_URI =3D "git://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git;branch=
+=3Dfor-next \
+>             git://github.com/amir73il/unionmount-testsuite.git;branch=3Dm=
+aster;protocol=3Dhttps;name=3Dunionmount;destsuffix=3Dunionmount-testsuite =
+\
+> -           file://0001-ltp-fsx.h-Explicitly-use-int-for-return-type-for-=
+aio.patch \
+>             file://0002-Drop-detached_mounts_propagation-and-remove-sys-m=
+oun.patch \
+>             file://0001-add-missing-FTW_-macros-when-not-available-in-lib=
+c.patch \
+>             "
 >
-> +EXTRA_OECMAKE =3D '-DRANDOM_DEVICE=3D"/dev/random"'
-> +
->  LDFLAGS:append:mipsarch =3D " -latomic"
->  LDFLAGS:append:riscv32 =3D " -latomic"
+> -SRCREV_xfstests =3D "f7765774a1b5cb98c2f21a892e82b3421f40e791"
+> -SRCREV_unionmount =3D "e3825b16b46f4c4574a1a69909944c059835f914"
+> -
+>  S =3D "${WORKDIR}/git"
 >
->  S=3D"${WORKDIR}/${BPN}-${PV}"
+>  inherit autotools-brokensep useradd
+> @@ -53,14 +50,14 @@ do_configure:prepend() {
+>  }
 >
-> +do_install:append() {
-> +    # Change the fully defined path on the target
-> +    sed -i -e 's|${STAGING_LIBDIR}|${libdir}|g' ${D}${libdir}/cmake/${BP=
-N}/libqpdfTargets.cmake
-> +}
-> +
->  # avoid Makefile returning error on 'make clean' before configure was ru=
-n
->  CLEANBROKEN =3D "1"
+>  do_install:append() {
+> -    unionmount_target_dir=3D${D}/usr/xfstests/unionmount-testsuite
+> -    install -d ${D}/usr/xfstests/unionmount-testsuite/tests
+> -    install -D ${WORKDIR}/unionmount-testsuite/tests/* -t $unionmount_ta=
+rget_dir/tests
+> +    unionmount_target_dir=3D${D}${prefix}/xfstests/unionmount-testsuite
+> +    install -d $unionmount_target_dir/tests
+> +    install ${WORKDIR}/unionmount-testsuite/tests/* $unionmount_target_d=
+ir/tests
+>      install ${WORKDIR}/unionmount-testsuite/*.py -t $unionmount_target_d=
+ir
+>      install ${WORKDIR}/unionmount-testsuite/run -t $unionmount_target_di=
+r
+>      install ${WORKDIR}/unionmount-testsuite/README -t $unionmount_target=
+_dir
+>  }
 >
-> --
-> 2.39.2
->
+>  FILES:${PN} +=3D "\
+> -    /usr/xfstests \
+> +    ${prefix}/xfstests \
+>  "
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#106455): https://lists.openembedded.org/g/openembedde=
-d-devel/message/106455
-> Mute This Topic: https://lists.openembedded.org/mt/102444518/1997914
+> View/Reply Online (#106427): https://lists.openembedded.org/g/openembedde=
+d-devel/message/106427
+> Mute This Topic: https://lists.openembedded.org/mt/102438671/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
 aj.khem@gmail.com]
