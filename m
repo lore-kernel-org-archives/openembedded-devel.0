@@ -1,179 +1,113 @@
-Return-Path: <samuli.piippo@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 200FAC4332F
-	for <webhook@archiver.kernel.org>; Wed,  8 Nov 2023 18:39:29 +0000 (UTC)
-Received: from mail-lf1-f51.google.com (mail-lf1-f51.google.com [209.85.167.51])
- by mx.groups.io with SMTP id smtpd.web11.22629.1699468763086275056
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0EEB7C4167B
+	for <webhook@archiver.kernel.org>; Wed,  8 Nov 2023 21:39:40 +0000 (UTC)
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+ by mx.groups.io with SMTP id smtpd.web10.104748.1699479497578375533
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Nov 2023 10:39:23 -0800
+ Wed, 08 Nov 2023 13:38:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=UuxMITW2;
- spf=pass (domain: gmail.com, ip: 209.85.167.51, mailfrom: samuli.piippo@gmail.com)
-Received: by mail-lf1-f51.google.com with SMTP id 2adb3069b0e04-50930f126b1so9037104e87.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 08 Nov 2023 10:39:22 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=bpUDHiJ3;
+ spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: mklntf@gmail.com)
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-40837ebba42so791195e9.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 08 Nov 2023 13:38:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699468761; x=1700073561; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=cUx6ytUovN2gPL5RL+i515ooDKGEtjRLR/o3WxP3gIE=;
-        b=UuxMITW2WuV8oYeMu8f7NuNDwkUb0dCP9JCr5uvGss427KsPSlFnxn3Ap0oFotPIoS
-         QIxKWTpCbv5piqpRIDfF8ctCgodCjbKbrKAf0gaE6749hNhs/1Zr9axxmh9huIfnpzq1
-         azeBsxwD0/O4++G/ZGUK6ZC1XIAz/GgtDF8q0hU/pwGZ9T63AbK8bgCXp0KRD3NyjT0D
-         i7ws0kTvg8vOv/Oo0k4ZM8mfYfmfWkHyPDHb5GNv7I7eiSEGI3KuihKPqrUBtJksYNHH
-         ODAKAe+Mltv2jjJN2gOtJ+g9JjKhcNVPUBmpoTsyTyDaO9yhRSz0J1LWcCOpKPUBATCo
-         BIyw==
+        d=gmail.com; s=20230601; t=1699479496; x=1700084296; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=RoJFOjXByyRKL9E/FhOGo9wTJ5IffMGii7ow4o5LZM4=;
+        b=bpUDHiJ3eNMyo3X+7l4XsMm1blBBo3tL9xVkojhTYg9W8C/60ghzcgh+PTze1CHTUa
+         aIJ7k3Dv51viFIgt+YNUhMogGa01BzOflHjV+uQmGujKcuD7/X4Rh1S6h89SvEhIwIkp
+         cZellxyfMmjyR57j68qEhCWVkgps4xPMOYijDefPkhaYODbwmf+C2KGPW6RuqJrqMFNR
+         HMg67+7JCerpeuziCPjK/riQKjzRSBS5e8s9bs13hAgCztCOyXHpsF9UnyZlUfZzPH8G
+         Z9bH9qzTXNOTgNC5AdAY3Hf5oskUELZTHK6thU6Uu94ojoYfIZFosRIvBpgWgdlOAI2f
+         jUhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699468761; x=1700073561;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=cUx6ytUovN2gPL5RL+i515ooDKGEtjRLR/o3WxP3gIE=;
-        b=Y2Bs93rGg3nETCGoMU6IklRxH6TXK1cQjpyN1ThdzYYQXDdfFrZDET+ngnt131qwhU
-         yjH2RXtL0MnemkfbPJPNu7XJtfep3RPxHD2S8DjhOGyUNEVt+WUlxAf7I/ZOQxtvC5xn
-         wgXWXU2MTUIzU9fe89Z4nTn30ZS5IwniE7R+k7ssB4UNgGi7mqtY1IRdLV+W6gXKa/ML
-         kCqxDKu9siEVhSp/wNFLggrICmNLCOXdw3O5Fe9mSDHgVmmPzdy0BsfMmS/imofn64Gn
-         RLTG9jHUkj9epieWA49F9nBcVFAnV84LlQrpPYhdXM2JDTBtstS7cX/A7qShTBVQVgwK
-         nOKw==
-X-Gm-Message-State: AOJu0YwRg87U/AyNVSc+Bmu3oiJIs8FZp1gW5ZvBpEyJB+8Bgx2DpFPh
-	po40FZya5h+MkwmPCjiI5647NHl77q7Huw==
-X-Google-Smtp-Source: AGHT+IF2XtWqFlrpnxmO7aMUlBXZ+NhleW9CpTWp3BvV/mislRRIaAnfUVXXaZu+guKbIx/GU5K9gQ==
-X-Received: by 2002:a05:6512:3a86:b0:509:11fa:a208 with SMTP id q6-20020a0565123a8600b0050911faa208mr2442757lfu.43.1699468760756;
-        Wed, 08 Nov 2023 10:39:20 -0800 (PST)
-Received: from dcbuildsrv.ci.qt.io ([192.89.120.62])
-        by smtp.gmail.com with ESMTPSA id t7-20020ac243a7000000b005041ce44bbdsm740154lfl.5.2023.11.08.10.39.20
+        d=1e100.net; s=20230601; t=1699479496; x=1700084296;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=RoJFOjXByyRKL9E/FhOGo9wTJ5IffMGii7ow4o5LZM4=;
+        b=LbuJ3AnDEWU96hJEG9cT0yT1G6g0omrDgkA+kURY+MEUiC/dtmgT8QACansdG6U0zd
+         2KIi+zMJPKg9q8D6eAQPwNfjiNK2powcLLBwpO+dVM/retfs5W1SbEgoIoZ6zWT0sEWx
+         FGOvtQjoC+EwB9bRGhAoeoV8JPjt2mJA4EyebmEpfNgUK0UlQtAsRRWVqf8DDY6T0ppM
+         gvO7QsLPQcvW3Ftio+RrnQGDt2bxzTk6WDLK5HP60IRNI1mezMyRXJACjDTIwAlwCHdE
+         b+PasLgEWMU/7eci4oeX//auHkuK3jWasB6+qOokrlWRk+5fBkSfHCDd/LUWSGRjYL9w
+         hIvw==
+X-Gm-Message-State: AOJu0Ywqk6c6oIsSRQRB9tv6aRX6qISe5fPJKDMJrKV6mfIFTI8asHQH
+	urUJ5W2oeIXo3RSAvLy9VH89Clsc7vmiJw==
+X-Google-Smtp-Source: AGHT+IFuPAQQe9r+vEqGhPmD2k0rK7F895vzauHdFpK4fr5daXxs4uD4ss+wY9rfhlfxR1UUygSZXg==
+X-Received: by 2002:a05:6000:18c5:b0:32d:b9c5:82fc with SMTP id w5-20020a05600018c500b0032db9c582fcmr2175670wrq.36.1699479495842;
+        Wed, 08 Nov 2023 13:38:15 -0800 (PST)
+Received: from nbmf.example ([2a02:810d:6e40:708:d1f8:a4c2:4c8d:975e])
+        by smtp.gmail.com with ESMTPSA id j3-20020adfe503000000b0032db8cccd3asm5814919wrm.114.2023.11.08.13.38.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 08 Nov 2023 10:39:20 -0800 (PST)
-From: Samuli Piippo <samuli.piippo@gmail.com>
-X-Google-Original-From: Samuli Piippo <samuli.piippo@qt.io>
+        Wed, 08 Nov 2023 13:38:15 -0800 (PST)
+From: "Markus Fuchs" <mklntf@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: jpewhacker@gmail.com
-Subject: [meta-oe][PATCHv2] abseil-cpp: fix mingw build
-Date: Wed,  8 Nov 2023 18:39:06 +0000
-Message-Id: <20231108183906.1614800-1-samuli.piippo@qt.io>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <1795AFB3210438F8.15940@lists.openembedded.org>
-References: <1795AFB3210438F8.15940@lists.openembedded.org>
+Cc: Markus Fuchs <mklntf@gmail.com>
+Subject: [meta-oe][PATCH] remove unused AUTHOR variable
+Date: Wed,  8 Nov 2023 22:38:03 +0100
+Message-ID: <20231108213803.16953-1-mklntf@gmail.com>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 08 Nov 2023 18:39:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106486
+ <openembedded-devel@lists.openembedded.org>; Wed, 08 Nov 2023 21:39:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106488
 
-Add patch to fix mingw build of abseil-cpp
+From: Markus Fuchs <mklntf@gmail.com>
 
-  undefined reference to `absl::lts_20230802::synchronization_internal::Win32Waiter::Poke()'
-  undefined reference to `absl::lts_20230802::synchronization_internal::Win32Waiter::Win32Waiter()'
-  undefined reference to `absl::lts_20230802::synchronization_internal::Win32Waiter::Post()'
-  undefined reference to `absl::lts_20230802::synchronization_internal::Win32Waiter::Poke()'
+No longer used in generating packages
+Also creates a possible confusion with the recipe maintainer
+name.
 
-and include bindir to recipe sysroot to fix protobuf build.
-
-|   The imported target "absl::log_severity" references the file
-|
-|      "../nativesdk-protobuf/4.23.4/recipe-sysroot/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/bin/libabsl_log_severity.dll"
-|
-|   but this file does not exist.
-
-Signed-off-by: Samuli Piippo <samuli.piippo@qt.io>
+Signed-off-by: Markus Fuchs <mklntf@gmail.com>
 ---
- ...-Win32Waiter-and-PthreadWaiter-on-Mi.patch | 62 +++++++++++++++++++
- .../abseil-cpp/abseil-cpp_git.bb              |  3 +
- 2 files changed, 65 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0004-Avoid-using-both-Win32Waiter-and-PthreadWaiter-on-Mi.patch
+ meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.84.bb   | 1 -
+ .../recipes-multimedia/wireplumber/wireplumber_0.4.15.bb         | 1 -
+ meta-oe/recipes-test/shunit2/shunit2_2.1.8.bb                    | 1 -
+ 3 files changed, 3 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0004-Avoid-using-both-Win32Waiter-and-PthreadWaiter-on-Mi.patch b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0004-Avoid-using-both-Win32Waiter-and-PthreadWaiter-on-Mi.patch
-new file mode 100644
-index 000000000..db559bb16
---- /dev/null
-+++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0004-Avoid-using-both-Win32Waiter-and-PthreadWaiter-on-Mi.patch
-@@ -0,0 +1,62 @@
-+From cb7665f39e23e95e2466390c60ee5a410780a3ed Mon Sep 17 00:00:00 2001
-+From: Derek Mauro <dmauro@google.com>
-+Date: Wed, 8 Nov 2023 09:55:31 -0800
-+Subject: [PATCH] Avoid using both Win32Waiter and PthreadWaiter on MinGW, and
-+ use StdcppWaiter instead.
-+
-+There are various flavors of MinGW, some of which support pthread,
-+and some of which support Win32. Instead of figuring out which
-+platform is being used, just use the generic implementation.
-+
-+PiperOrigin-RevId: 580565507
-+Change-Id: Ia85fd7496f1e6ebdeadb95202f0039e844826118
-+Upstream-Status: Backport
-+---
-+ absl/synchronization/internal/pthread_waiter.h | 4 ++--
-+ absl/synchronization/internal/win32_waiter.h   | 6 ++++--
-+ 2 files changed, 6 insertions(+), 4 deletions(-)
-+
-+diff --git a/absl/synchronization/internal/pthread_waiter.h b/absl/synchronization/internal/pthread_waiter.h
-+index 206aefa4..23db76ad 100644
-+--- a/absl/synchronization/internal/pthread_waiter.h
-++++ b/absl/synchronization/internal/pthread_waiter.h
-+@@ -16,7 +16,7 @@
-+ #ifndef ABSL_SYNCHRONIZATION_INTERNAL_PTHREAD_WAITER_H_
-+ #define ABSL_SYNCHRONIZATION_INTERNAL_PTHREAD_WAITER_H_
-+ 
-+-#ifndef _WIN32
-++#if !defined(_WIN32) && !defined(__MINGW32__)
-+ #include <pthread.h>
-+ 
-+ #include "absl/base/config.h"
-+@@ -55,6 +55,6 @@ class PthreadWaiter : public WaiterCrtp<PthreadWaiter> {
-+ ABSL_NAMESPACE_END
-+ }  // namespace absl
-+ 
-+-#endif  // ndef _WIN32
-++#endif  // !defined(_WIN32) && !defined(__MINGW32__)
-+ 
-+ #endif  // ABSL_SYNCHRONIZATION_INTERNAL_PTHREAD_WAITER_H_
-+diff --git a/absl/synchronization/internal/win32_waiter.h b/absl/synchronization/internal/win32_waiter.h
-+index 87eb617c..fdab264e 100644
-+--- a/absl/synchronization/internal/win32_waiter.h
-++++ b/absl/synchronization/internal/win32_waiter.h
-+@@ -20,7 +20,8 @@
-+ #include <sdkddkver.h>
-+ #endif
-+ 
-+-#if defined(_WIN32) && _WIN32_WINNT >= _WIN32_WINNT_VISTA
-++#if defined(_WIN32) && !defined(__MINGW32__) && \
-++    _WIN32_WINNT >= _WIN32_WINNT_VISTA
-+ 
-+ #include "absl/base/config.h"
-+ #include "absl/synchronization/internal/kernel_timeout.h"
-+@@ -65,6 +66,7 @@ class Win32Waiter : public WaiterCrtp<Win32Waiter> {
-+ ABSL_NAMESPACE_END
-+ }  // namespace absl
-+ 
-+-#endif  // defined(_WIN32) && _WIN32_WINNT >= _WIN32_WINNT_VISTA
-++#endif  // defined(_WIN32) && !defined(__MINGW32__) &&
-++        // _WIN32_WINNT >= _WIN32_WINNT_VISTA
-+ 
-+ #endif  // ABSL_SYNCHRONIZATION_INTERNAL_WIN32_WAITER_H_
-diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-index 5003187d0..65ecab7d0 100644
---- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-+++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-@@ -15,6 +15,7 @@ SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH};protocol=https \
-            file://0002-Remove-maes-option-from-cross-compilation.patch \
-            file://abseil-ppc-fixes.patch \
-            file://0003-Remove-neon-option-from-cross-compilation.patch \
-+           file://0004-Avoid-using-both-Win32Waiter-and-PthreadWaiter-on-Mi.patch \
-           "
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.84.bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.84.bb
+index 34c4a68ee..25d4762c8 100644
+--- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.84.bb
++++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.84.bb
+@@ -2,7 +2,6 @@ SUMMARY     = "Multimedia processing server for Linux"
+ DESCRIPTION = "Linux server for handling and routing audio and video streams between applications and multimedia I/O devices"
+ HOMEPAGE    = "https://pipewire.org/"
+ BUGTRACKER  = "https://gitlab.freedesktop.org/pipewire/pipewire/issues"
+-AUTHOR      = "Wim Taymans <wtaymans@redhat.com>"
+ SECTION     = "multimedia"
  
- S = "${WORKDIR}/git"
-@@ -32,4 +33,6 @@ EXTRA_OECMAKE = "-DBUILD_SHARED_LIBS=ON \
+ LICENSE = "MIT & LGPL-2.1-or-later & GPL-2.0-only"
+diff --git a/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.4.15.bb b/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.4.15.bb
+index 679921922..5a180d1e0 100644
+--- a/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.4.15.bb
++++ b/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.4.15.bb
+@@ -1,7 +1,6 @@
+ SUMMARY    = "Session / policy manager implementation for PipeWire"
+ HOMEPAGE   = "https://gitlab.freedesktop.org/pipewire/wireplumber"
+ BUGTRACKER = "https://gitlab.freedesktop.org/pipewire/wireplumber/issues"
+-AUTHOR     = "George Kiagiadakis <george.kiagiadakis@collabora.com>"
+ SECTION    = "multimedia"
  
- BBCLASSEXTEND = "native nativesdk"
- 
-+SYSROOT_DIRS:append:class-nativesdk:mingw32 = " ${bindir}"
-+
- FILES:${PN}-dev += "${includedir} ${libdir}/cmake ${libdir}/pkgconfig"
+ LICENSE = "MIT"
+diff --git a/meta-oe/recipes-test/shunit2/shunit2_2.1.8.bb b/meta-oe/recipes-test/shunit2/shunit2_2.1.8.bb
+index 0ac06c361..683600f71 100644
+--- a/meta-oe/recipes-test/shunit2/shunit2_2.1.8.bb
++++ b/meta-oe/recipes-test/shunit2/shunit2_2.1.8.bb
+@@ -1,5 +1,4 @@
+ SUMMARY = "shUnit2 is a xUnit based unit test framework for Bourne based shell scripts"
+-AUTHOR = "Kate Ward <kate.ward@forestent.com>"
+ HOMEPAGE = "https://github.com/kward/shunit2"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=e3fc50a88d0a364313df4b21ef20c29e"
 -- 
-2.25.1
+2.42.0
 
 
