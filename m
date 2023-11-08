@@ -1,142 +1,135 @@
-Return-Path: <samuli.piippo@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 95369C4332F
-	for <webhook@archiver.kernel.org>; Wed,  8 Nov 2023 14:23:47 +0000 (UTC)
-Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com [209.85.167.48])
- by mx.groups.io with SMTP id smtpd.web10.14862.1699453417909454261
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B6EAEC4332F
+	for <webhook@archiver.kernel.org>; Wed,  8 Nov 2023 14:48:27 +0000 (UTC)
+Received: from mail-oa1-f45.google.com (mail-oa1-f45.google.com [209.85.160.45])
+ by mx.groups.io with SMTP id smtpd.web10.15600.1699454901882011567
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Nov 2023 06:23:38 -0800
+ Wed, 08 Nov 2023 06:48:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=AcGEjbvo;
- spf=pass (domain: gmail.com, ip: 209.85.167.48, mailfrom: samuli.piippo@gmail.com)
-Received: by mail-lf1-f48.google.com with SMTP id 2adb3069b0e04-50970c2115eso4780270e87.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 08 Nov 2023 06:23:37 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=bBm45mWi;
+ spf=pass (domain: gmail.com, ip: 209.85.160.45, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f45.google.com with SMTP id 586e51a60fabf-1efabc436e4so4010450fac.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 08 Nov 2023 06:48:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699453416; x=1700058216; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=5TQ/Ht0ZjEWeVg715ONi5dlHQoWRLpFtQtNLgUvRofk=;
-        b=AcGEjbvo7UwPphwGGv+hMMihuj8XQvPUIKDxTcqKwb+M1qHFu6XG+0qBBd6OLeFY1K
-         hLuoInjQL09ofHeKP3z72poTOXKyL45wlD8dmEZOANE4ecGL9lwr3e83FU2FQVQ+p9Or
-         tBVyZ+bZgmN8OmHlpgR5Sj3QminkHmhCxIDX2nfVROe6kmW0mGd+461Qno3VlwQtEvNQ
-         Ejx9AwD9qD7bBtxuv0DlYWUQLanLyJz8J3sKv2zCWxfj10cm75eaOsAUba61ruD2+EmD
-         7xb06a8zETeyX2sLbn5saWY49CphDKXxZn1qpxoyteZlloDKQ1nHWYGsKWqXOAp8T/Iy
-         wvSA==
+        d=gmail.com; s=20230601; t=1699454901; x=1700059701; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=byuW2r1VfCxTzr4bVjyq+z8Y2HkUZ91jC/aSTvcydDM=;
+        b=bBm45mWiYedlZDXQM4Rs66DqVUexixkUcsBPuv7b+370Bj/WGG9D8KZSKIjh4/mXaz
+         02GWa74l1kWM1ah1qr1+ylH0MdumA4Cy8swGpxHTlkVvQjDTBl6C6dLcc5FEY3AWhr3Z
+         e7xKeIi9divT53dRrNYxW6cY3xKkhyDdKNKNNWKoxI3AWp0iPSS+r3O+Nj9XQFmxkc73
+         2Go3i5/xeViR4RX15aatGgFgHy/kht/Q2C5LFSKzBhRY4IioXFBn0HMoMD48VJSm5vas
+         awfTm6CldgD9yF2Chu89uMNhZZH8T/s4xd6kkq7BjTlFARsw9BwjvN5TPqcrB4ZK5sr0
+         9nnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699453416; x=1700058216;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=5TQ/Ht0ZjEWeVg715ONi5dlHQoWRLpFtQtNLgUvRofk=;
-        b=ELP3Oc1UTh7PiS1h+uiN21u/KWCCUk6k8DxOxbm4qglbIqWUrsgAZvZeowrLG0cPwt
-         VDL5+9z1nzhZ6/BXclxBHS+a13b/E3pZcMgrCaHsmyjG0Y0mUjMGuNgeTFlMSzoJyXf6
-         sJVXu7RxFSSERBgXHHG3rA35RU/L2SNRMjTBUqVlsiAmxzLNpdET8gqJ40dwDjO3z1rf
-         TtFYPKUpi/xqXOS8qGMpdiS8mdjYHaA1aS7lnqDHj4tfo1DS3gnsX2ABREXQXlLAfVKw
-         Fc4EE/jCB7M4mJHRw6ATkZ3caiX1EZJNGhxBQNO/DUau/qhqiQxvrUVVNxxk9JWdcdq/
-         //Eg==
-X-Gm-Message-State: AOJu0Yy3pPdm4uzgU/WuSfkUsO+Pbf/MSzzdOH07no13B+k2Fj8h8D84
-	oINN1LbYcSDhJ3mJ9/N1ZELdU5QTSyOXOg==
-X-Google-Smtp-Source: AGHT+IELEKBQ0lJ275KJvl/PNS8C3ID+8fh3mGeQqBJ4VC9wwBIyi9eifIard/+3fPr2Je/k5N+U8Q==
-X-Received: by 2002:a05:6512:310c:b0:507:bc6b:38a6 with SMTP id n12-20020a056512310c00b00507bc6b38a6mr1269318lfb.33.1699453415360;
-        Wed, 08 Nov 2023 06:23:35 -0800 (PST)
-Received: from dcbuildsrv.ci.qt.io ([192.89.120.62])
-        by smtp.gmail.com with ESMTPSA id x11-20020a056512130b00b00502fd9110ffsm683098lfu.294.2023.11.08.06.23.34
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 08 Nov 2023 06:23:34 -0800 (PST)
-From: Samuli Piippo <samuli.piippo@gmail.com>
-X-Google-Original-From: Samuli Piippo <samuli.piippo@qt.io>
-To: openembedded-devel@lists.openembedded.org
-Cc: jpewhacker@gmail.com
-Subject: [meta-oe][PATCH] abseil-cpp: fix mingw build
-Date: Wed,  8 Nov 2023 14:23:07 +0000
-Message-Id: <20231108142307.1528148-1-samuli.piippo@qt.io>
-X-Mailer: git-send-email 2.25.1
+        d=1e100.net; s=20230601; t=1699454901; x=1700059701;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=byuW2r1VfCxTzr4bVjyq+z8Y2HkUZ91jC/aSTvcydDM=;
+        b=CEBl0vCeqlSD9pTteZqJdmv23/ymgE/hEo7IK7g3W2mitxBZRIBvjksoFgUMsFDRja
+         xon51hloXfftIT6Dg6PK4wFRslJICjtY+LtunbmMywKSXhupkFGJ6IFIudtNSlOFIHk+
+         J/T5GP0jSPWZIFsU+6ihh1kaz2klw1hkpTb/1LuG7vfutA+cDmrr4OINvnnf9aUn9Kiu
+         ohJ3a2R0Dsamg8h7AiPgpn/m3aa3lBIXaiIhFw7/XzQomEJa31RZKlh2/rPcrSF2tSNM
+         zpKCZLxkWh/CaUTObSgt0is23HLKZAO2z+GiSs8mE7eIlXjKsp2u5/y4pwqc3+EWCKXK
+         v2YQ==
+X-Gm-Message-State: AOJu0YyPoJ6az+MoedRFGur/SARWfIos0KRUbon8ESbYs4UW1DQ26me0
+	gc3yLQhWWYQs9qD8zIaRJJIBqdt8Skh7PWZiy28=
+X-Google-Smtp-Source: AGHT+IFAt+zdEF4l4XCrfq7+bXo4Q7xp8azqVzkkoNJEUKL3bQGPsvFmWgYbpB+1UQqExjXWpqfor+P05q+w4b7JSO8=
+X-Received: by 2002:a05:6870:50:b0:1ea:c913:3494 with SMTP id
+ 16-20020a056870005000b001eac9133494mr1719614oaz.6.1699454900863; Wed, 08 Nov
+ 2023 06:48:20 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <05f768c6-fb99-4da3-87af-0ab94e216edf@gmail.com>
+In-Reply-To: <05f768c6-fb99-4da3-87af-0ab94e216edf@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 8 Nov 2023 06:47:54 -0800
+Message-ID: <CAMKF1sqDTEc0QrxpWNeMCn-i320LFysEXFFLAkTDbCGXtywjTg@mail.gmail.com>
+Subject: Re: kirkstone merge request: Nov 8th
+To: akuster808 <akuster808@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 08 Nov 2023 14:23:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106477
+ <openembedded-devel@lists.openembedded.org>; Wed, 08 Nov 2023 14:48:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106478
 
-Add patch to fix mingw build of abseil-cpp
+merged thanks Armin
 
-  undefined reference to `absl::lts_20230802::synchronization_internal::Win32Waiter::Poke()'
-  undefined reference to `absl::lts_20230802::synchronization_internal::Win32Waiter::Win32Waiter()'
-  undefined reference to `absl::lts_20230802::synchronization_internal::Win32Waiter::Post()'
-  undefined reference to `absl::lts_20230802::synchronization_internal::Win32Waiter::Poke()'
-
-and include bindir to recipe sysroot to fix protobuf build.
-
-|   The imported target "absl::log_severity" references the file
-|
-|      "../nativesdk-protobuf/4.23.4/recipe-sysroot/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/bin/libabsl_log_severity.dll"
-|
-|   but this file does not exist.
-
-Signed-off-by: Samuli Piippo <samuli.piippo@qt.io>
----
- ...workaround-for-MinGW64-build-failure.patch | 28 +++++++++++++++++++
- .../abseil-cpp/abseil-cpp_git.bb              |  3 ++
- 2 files changed, 31 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0004-Add-workaround-for-MinGW64-build-failure.patch
-
-diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0004-Add-workaround-for-MinGW64-build-failure.patch b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0004-Add-workaround-for-MinGW64-build-failure.patch
-new file mode 100644
-index 000000000..79c2ba7d7
---- /dev/null
-+++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0004-Add-workaround-for-MinGW64-build-failure.patch
-@@ -0,0 +1,28 @@
-+From 2f198d4fd8e0e66a2cd7ef53f62c8c9acf356803 Mon Sep 17 00:00:00 2001
-+From: Samuli Piippo <samuli.piippo@qt.io>
-+Date: Wed, 8 Nov 2023 07:18:37 +0000
-+Subject: [PATCH] Add workaround for MinGW64 build failure
-+
-+Add extra include so that _WIN32_WINNT is defined to correct
-+version when building with MinGW.
-+
-+Fixes #1510
-+
-+Signed-off-by: Samuli Piippo <samuli.piippo@qt.io>
-+Upstream-Status: Submitted [https://github.com/abseil/abseil-cpp/pull/1564]
-+---
-+ absl/synchronization/internal/win32_waiter.h | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/absl/synchronization/internal/win32_waiter.h b/absl/synchronization/internal/win32_waiter.h
-+index 87eb617c..517829e6 100644
-+--- a/absl/synchronization/internal/win32_waiter.h
-++++ b/absl/synchronization/internal/win32_waiter.h
-+@@ -17,6 +17,7 @@
-+ #define ABSL_SYNCHRONIZATION_INTERNAL_WIN32_WAITER_H_
-+ 
-+ #ifdef _WIN32
-++#include <windows.h>
-+ #include <sdkddkver.h>
-+ #endif
-+ 
-diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-index 5003187d0..3e4820642 100644
---- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-+++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-@@ -15,6 +15,7 @@ SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH};protocol=https \
-            file://0002-Remove-maes-option-from-cross-compilation.patch \
-            file://abseil-ppc-fixes.patch \
-            file://0003-Remove-neon-option-from-cross-compilation.patch \
-+           file://0004-Add-workaround-for-MinGW64-build-failure.patch \
-           "
- 
- S = "${WORKDIR}/git"
-@@ -32,4 +33,6 @@ EXTRA_OECMAKE = "-DBUILD_SHARED_LIBS=ON \
- 
- BBCLASSEXTEND = "native nativesdk"
- 
-+SYSROOT_DIRS:append:class-nativesdk:mingw32 = "${bindir}"
-+
- FILES:${PN}-dev += "${includedir} ${libdir}/cmake ${libdir}/pkgconfig"
--- 
-2.25.1
-
+On Wed, Nov 8, 2023 at 5:57=E2=80=AFAM akuster808 <akuster808@gmail.com> wr=
+ote:
+>
+> The following changes since commit 79a6f60dabad9e5b0e041efa91379447ef0304=
+82:
+>
+>    mbedtls: upgrade 2.28.2 -> 2.28.5 (2023-10-17 09:07:38 -0400)
+>
+> are available in the Git repository at:
+>
+>    https://git.openembedded.org/meta-openembedded kirkstone-next
+>
+> for you to fetch changes up to 7da6cb848bc42b3e6bd5d2b37b52ba75510a6ca0:
+>
+>    indent: fix CVE-2023-40305 (2023-11-03 10:52:59 -0400)
+>
+> ----------------------------------------------------------------
+> Beniamin Sandu (1):
+>        mbedtls: upgrade 3.4.0 -> 3.5.0
+>
+> Martin Jansa (1):
+>        packagegroup-meta-multimedia: restore x11 restriction for projucer
+>
+> Omkar Patil (1):
+>        ntfs-3g-ntfsprogs: Upgrade 2022.5.17 to 2022.10.3
+>
+> Richard Purdie (3):
+>        grubby: Update branchname to match upstream
+>        python-blivet: Adapt to upstream branch name changes
+>        suiteparse: Adapt to upstream branch name changes
+>
+> Yogita Urade (1):
+>        indent: fix CVE-2023-40305
+>
+>   ...3g-ntfsprogs_2022.5.17.bb =3D> ntfs-3g-ntfsprogs_2022.10.3.bb} |    =
+2 +-
+>   meta-initramfs/recipes-devtools/grubby/grubby_git.bb |    2 +-
+>   .../packagegroups/packagegroup-meta-multimedia.bb |    2 +-
+>   ...1-AES-NI-use-target-attributes-for-x86-32-bit-intrinsi.patch | 87 +
+>   ...1-aesce-do-not-specify-an-arch-version-when-enabling-c.patch | 33 -
+>   ...2-aesce-use-correct-target-attribute-when-building-wit.patch | 34 -
+>   .../mbedtls/{mbedtls_3.4.0.bb =3D> mbedtls_3.5.0.bb} |   10 +-
+>   meta-oe/recipes-devtools/suitesparse/suitesparse_5.10.1.bb |    2 +-
+>   .../recipes-extended/indent/indent/CVE-2023-40305_0001.patch    | 4196
+> ++++++++++++++++++++++++++
+>   .../recipes-extended/indent/indent/CVE-2023-40305_0002.patch    | 4254
+> +++++++++++++++++++++++++++
+>   meta-oe/recipes-extended/indent/indent_2.2.12.bb |    2 +
+>   .../recipes-extended/python-blivet/python3-blivetgui_2.3.0.bb |    2 +-
+>   12 files changed, 8546 insertions(+), 80 deletions(-)
+>   rename
+> meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/{ntfs-3g-ntfsprogs=
+_2022.5.17.bb
+> =3D> ntfs-3g-ntfsprogs_2022.10.3.bb} (95%)
+>   create mode 100644
+> meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-AES-NI-use-targ=
+et-attributes-for-x86-32-bit-intrinsi.patch
+>   delete mode 100644
+> meta-networking/recipes-connectivity/mbedtls/mbedtls/0001-aesce-do-not-sp=
+ecify-an-arch-version-when-enabling-c.patch
+>   delete mode 100644
+> meta-networking/recipes-connectivity/mbedtls/mbedtls/0002-aesce-use-corre=
+ct-target-attribute-when-building-wit.patch
+>   rename meta-networking/recipes-connectivity/mbedtls/{mbedtls_3.4.0.bb
+> =3D> mbedtls_3.5.0.bb} (87%)
+>   create mode 100644
+> meta-oe/recipes-extended/indent/indent/CVE-2023-40305_0001.patch
+>   create mode 100644
+> meta-oe/recipes-extended/indent/indent/CVE-2023-40305_0002.patch
+>
 
