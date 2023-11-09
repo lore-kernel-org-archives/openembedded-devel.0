@@ -1,86 +1,75 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E193FC4332F
-	for <webhook@archiver.kernel.org>; Thu,  9 Nov 2023 02:18:41 +0000 (UTC)
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
- by mx.groups.io with SMTP id smtpd.web11.112997.1699496314751374846
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 68F02C4332F
+	for <webhook@archiver.kernel.org>; Thu,  9 Nov 2023 03:43:22 +0000 (UTC)
+Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
+ by mx.groups.io with SMTP id smtpd.web11.114303.1699501391977436816
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Nov 2023 18:18:34 -0800
+ Wed, 08 Nov 2023 19:43:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=OOXWRxfH;
- spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-1cc1ee2d8dfso3003425ad.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 08 Nov 2023 18:18:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699496314; x=1700101114; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=TTTOqVBCKZR24o/q7M5+xe4ujVWSLN4yysjHd00ARNc=;
-        b=OOXWRxfHXy8lKJ3oaO4LCUyUBDRBUuuRFd3yaRTF6lajIm41Qt33OnjUawJvkFiyPw
-         jJWhMqskj43un5Iicx6FjmaN9/EKw2lu2KFPJMBCEOXZbE4bzfnwZ4Stsara6FtqfnJc
-         OiX8ykoKB/wYodRfWFYARL5/xGxgx3WyQPuagJRaEPtu29gZTJrVKCroo54LIKAvdz56
-         J/rVNAae/uDbFOHSsM394ms85iXrg4I/eC+tTsXfToH7H47DwlY3LgsD+TxF1zB1qcnV
-         iqMMKtPD8y0tX+qzWs6rNUSV+wJAs+a4HYhUYdnV8iNKPgS4zZ/eoLszcStj2noyUdOD
-         8yQw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699496314; x=1700101114;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=TTTOqVBCKZR24o/q7M5+xe4ujVWSLN4yysjHd00ARNc=;
-        b=FCsnvDchcLgMA+7nn0DRB7AxGd2OhRX6o0ahzvlNJl53fN90XShdZgRnQ8ADaPFt1V
-         ryFM2AUCjTqZCI6U4uCSOlTZqyaGmAeW7CcfSkOF5lEYmlhf49G6sOgap3r8XkWgS6TS
-         tNP4jAP9iHE9DeS0/vqGinI0zfFjy93RBfAeVueEVd98sRCCNXJA5q39GnxgNQ+tj8Ii
-         A5h3I9DXe3JqC4kUn8Kr1otA7tKDwz+6KCNv1UAldh2szP4He4vL44VbYX+ml/8LVuFV
-         wZHM62jmeDaU8e4BlPxeKk8V3gCcrSroPYNscYAjWY9ABDHZvnKgDdxFYV3WjaYSAGGF
-         LnEw==
-X-Gm-Message-State: AOJu0Yz7pYlhE8TDO83HDlnnPB6McyqU6a7v8W9T3uMgWiJxCNX53Ygh
-	bVm5uM13n2JLwKiyyRFEGUNgaQAiwSeJ3A==
-X-Google-Smtp-Source: AGHT+IHNuruBltFL7DuybkDQ6GjO4k6eTwQI4S2DvsnkU8Nloo8j5fNOWD31p4o3IFoGqqcSrBz+1g==
-X-Received: by 2002:a17:903:4281:b0:1cc:68c1:cab5 with SMTP id ju1-20020a170903428100b001cc68c1cab5mr3655881plb.14.1699496313752;
-        Wed, 08 Nov 2023 18:18:33 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9100:2cb0::71b7])
-        by smtp.gmail.com with ESMTPSA id bj7-20020a170902850700b001cc3fae08basm2336211plb.52.2023.11.08.18.18.33
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 08 Nov 2023 18:18:33 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+ dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10888"; a="118434327"
+X-IronPort-AV: E=Sophos;i="6.03,288,1694703600"; 
+   d="scan'208";a="118434327"
+Received: from unknown (HELO oym-r3.gw.nic.fujitsu.com) ([210.162.30.91])
+  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Nov 2023 12:43:09 +0900
+Received: from oym-m3.gw.nic.fujitsu.com (oym-nat-oym-m3.gw.nic.fujitsu.com [192.168.87.60])
+	by oym-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 433CFD64AD
+	for <openembedded-devel@lists.openembedded.org>; Thu,  9 Nov 2023 12:43:07 +0900 (JST)
+Received: from aks-ab2.gw.nic.fujitsu.com (aks-ab2.gw.nic.fujitsu.com [192.51.207.12])
+	by oym-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 66356D9470
+	for <openembedded-devel@lists.openembedded.org>; Thu,  9 Nov 2023 12:43:06 +0900 (JST)
+Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.79])
+	by aks-ab2.gw.nic.fujitsu.com (Postfix) with ESMTP id 2ED7F88193;
+	Thu,  9 Nov 2023 12:43:05 +0900 (JST)
+From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] emlog: Drop SRCPV
-Date: Wed,  8 Nov 2023 18:18:31 -0800
-Message-ID: <20231109021831.1279673-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.42.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] dnf-plugin-tui: Recover BBCLASSEXTEND variants
+Date: Thu,  9 Nov 2023 11:42:33 +0800
+Message-Id: <1699501353-15757-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1408-9.0.0.1002-27986.002
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1408-9.0.1002-27986.002
+X-TMASE-Result: 10--1.589000-10.000000
+X-TMASE-MatchedRID: CU7qri9lc2NS0bd+i8J5ed5x7RpGJf1aYjDXdM/x2VP+Aw16GgqpO+xl
+	/JBXgQ0mgwnjjN8Rx/vGKIf6hBf7VaGGOyqBK41vEXjPIvKd74BUENBIMyKD0Zsoi2XrUn/Js98
+	n9dYnJNNQSFbL1bvQASdET58jp62SmwG9/2g66Q47Tun3ApISnJNV/HKuPVvOyMJbFSdBxJSieX
+	+nZO89JiNSDiNUj0r7SF9kATfPl3uhMeuiTJAw37LCMDqW5iQIS7+RMq/2CK6rA4c7UV2fQpvi2
+	PQO/FFQiz2ujrPVx9yEIU1NtMkm0Q==
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 09 Nov 2023 02:18:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106490
+ <openembedded-devel@lists.openembedded.org>; Thu, 09 Nov 2023 03:43:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106491
 
-Its not needed anymore.
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+dnf-plugin-tui must work on nativesdk environment.
+Now there's no warning when run the command "bitbake universe -c fetch".
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- meta-oe/recipes-core/emlog/emlog.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-core/emlog/emlog.inc b/meta-oe/recipes-core/emlog/emlog.inc
-index 160a5a9f87..631e52f388 100644
---- a/meta-oe/recipes-core/emlog/emlog.inc
-+++ b/meta-oe/recipes-core/emlog/emlog.inc
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- 
- SRC_URI = "git://github.com/nicupavel/emlog.git;protocol=https;branch=master"
- SRCREV = "a9bbf324fde131ff4cf064e32674086c4ced4dca"
--PV = "0.70+git${SRCPV}"
-+PV = "0.70+git"
- S = "${WORKDIR}/git"
- 
- EXTRA_OEMAKE += " \
+diff --git a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
+index a5d614961a..8db456b99c 100644
+--- a/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
++++ b/meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb
+@@ -42,4 +42,6 @@ RDEPENDS:${PN} += " \
+     dnf \
+     libnewt-python \
+ "
++BBCLASSEXTEND = "nativesdk"
++
+ SKIP_RECIPE[dnf-plugin-tui] ?= "${@bb.utils.contains('PACKAGE_CLASSES', 'package_rpm', '', 'does not build correctly without package_rpm in PACKAGE_CLASSES', d)}"
 -- 
-2.42.1
+2.34.1
 
 
