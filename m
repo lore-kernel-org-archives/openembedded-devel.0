@@ -1,152 +1,87 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <mingli.yu@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 510E5C4332F
-	for <webhook@archiver.kernel.org>; Thu,  9 Nov 2023 06:49:43 +0000 (UTC)
-Received: from mail-oa1-f54.google.com (mail-oa1-f54.google.com [209.85.160.54])
- by mx.groups.io with SMTP id smtpd.web10.116049.1699512573283061849
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 08F7BC41535
+	for <webhook@archiver.kernel.org>; Thu,  9 Nov 2023 09:15:34 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.117287.1699521330753747560
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 Nov 2023 22:49:33 -0800
+ Thu, 09 Nov 2023 01:15:30 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=II+Sulzq;
- spf=pass (domain: gmail.com, ip: 209.85.160.54, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f54.google.com with SMTP id 586e51a60fabf-1f00b95dc43so291631fac.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 08 Nov 2023 22:49:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699512572; x=1700117372; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=6Wo+BQ2nhG1C+4Ch5UcPnscJnGyDyGu+xV0LOphyHU8=;
-        b=II+SulzqCWejmxwrAsb/5bTky4IRl3vxCya/cy2mBOJj3zZrHcqIJxj1Di7xpNrwhR
-         BuhRGfkfAcStTF93WUf+fD211CpXYorLcf+MpWmg2wiwRmi+M3MnUUspRbpt7WBMiMY4
-         gMw0JWvtZChJlJteU91QtgSJ+1Pkc87KnoIJUUmnSytFTIM8rNBrqiW8dXZen2w2Uzpv
-         5Ft11WB6aKuHIUL63XvvuXdPK+OpwPj/2KLAH/3mm79Z7mXkuRovW6SjaBf9fV7AqEKg
-         GoiNKGtCofkb4Qw6cdRlWPaAkHAmkYSFowttnWN+zUR2n+8jIsh4KNn+BTJ1F5+2eaUH
-         5sYg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699512572; x=1700117372;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=6Wo+BQ2nhG1C+4Ch5UcPnscJnGyDyGu+xV0LOphyHU8=;
-        b=bSVhRlkaHqIwU4PCGv9Aze3H7JpK9h/Sc0a79jRF5wu+rGwhdtIRQsBQlv6gaAIcqg
-         yTOhVYlsH/cdHXOnYOQZ8DnFg/I5SmjXbjW66THEikilq+CfksfQ3NREpF0UjVNuYrBs
-         ECGun/htibxlSjq9f/wPvfHq1ojiFBhxvAvN9lp0sOsO5OYJi5oj0g0kP2Pq8wb0jzo9
-         TBNAHHUrrnck9xZf48bq2atUOPHfm1+Fwd5LaeeDN1LtNVqECXYywCEhwT9GMo5rMjlb
-         941Sbg/eHPR7Q+G5QFJAC59fAhwB6tvDwwt4O+Qvam3bzaBhZTO/ysAcmcEbU/zXvlOW
-         /pMQ==
-X-Gm-Message-State: AOJu0YzBIA4mPFDXduZnaHv90FijXcjctxKrazbnhe1MFk7K/AuIYQRo
-	LY7xOUMkk7+RPdHQbRzxYEWUcqG3v8Dqomr1OUE=
-X-Google-Smtp-Source: AGHT+IEr8+ei3P1+jPErLD8gxyBbRI3PqOu1FGI6sisj0wh+6/jMNmhOxTUI2LmwSnxbqBcBxxfITXhHSDyc4wuMfCg=
-X-Received: by 2002:a05:6870:128a:b0:1f0:8706:4c4a with SMTP id
- 10-20020a056870128a00b001f087064c4amr3438326oal.29.1699512572492; Wed, 08 Nov
- 2023 22:49:32 -0800 (PST)
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=EpXMW7eZ;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=96774aeeec=mingli.yu@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 3A97hVbe011074
+	for <openembedded-devel@lists.openembedded.org>; Thu, 9 Nov 2023 09:15:30 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding:content-type; s=
+	PPS06212021; bh=uomjQs3GrXL+KVBcZSSmThU32QTdw9CdTa312sQR1r0=; b=
+	EpXMW7eZ1fmS0/atQXSAozqsVGbJ46oXxMzf5rIQcCpGXRiSHpis/a3gsqjjfo+d
+	qLxzCqPYZM2RV2KJe7WjJAPXqmNM4ZTIq/xyJJcHuPfXeVl7loYPsnRaQ0mbBA+u
+	muaL/lkqZv6XPzxv38d5VQvEBNjKauvXxNmfmvq3tt1+vSQOPVR+nz+Ky57uGukp
+	LMknKZ9+xt/fVnnHc7mkoceAw7j1Buj3cW/F2REv3zLrHMX5jSZrlO1y7rhMn12O
+	0CWvg9aXA+kVIYSvYtih/pSNYm0LJVdTlSX/UaL2bzCN62ZInHXeb16IPcxrMBiJ
+	EGHMNOcahUpip0ffjjCSdA==
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3u7w3y1nwp-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 09 Nov 2023 09:15:29 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.34; Thu, 9 Nov 2023 01:15:32 -0800
+Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.34 via Frontend Transport; Thu, 9 Nov 2023 01:15:31 -0800
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH 2/2] ptest-packagelists-meta-oe.inc: Add nlohmann-json
+Date: Thu, 9 Nov 2023 17:15:26 +0800
+Message-ID: <20231109091526.484831-2-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20231109091526.484831-1-mingli.yu@windriver.com>
+References: <20231109091526.484831-1-mingli.yu@windriver.com>
 MIME-Version: 1.0
-References: <0101018b96bec5d9-30e827d0-67b7-4918-bdd1-1e4d2879dd24-000000@us-west-2.amazonses.com>
- <3cf2e8c7-f517-4284-a136-9584d53298bc@gmail.com>
-In-Reply-To: <3cf2e8c7-f517-4284-a136-9584d53298bc@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 8 Nov 2023 22:49:06 -0800
-Message-ID: <CAMKF1srkSAQRKyeYpg8budJ070gWi2nRdR3nTgiTpu+um8ampA@mail.gmail.com>
-Subject: Re: [oe] [AUH] geos: upgrading to 3.12.0beta2 SUCCEEDED
-To: Zoltan Boszormenyi <zboszor@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-GUID: 9-Pu5E9vzN3EcAiuGmX9AgUgivYrBU3E
+X-Proofpoint-ORIG-GUID: 9-Pu5E9vzN3EcAiuGmX9AgUgivYrBU3E
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-11-09_07,2023-11-08_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0 adultscore=0
+ mlxscore=0 spamscore=0 impostorscore=0 suspectscore=0 mlxlogscore=753
+ malwarescore=0 phishscore=0 clxscore=1015 priorityscore=1501
+ lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2311060001 definitions=main-2311090073
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 09 Nov 2023 06:49:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106510
+ <openembedded-devel@lists.openembedded.org>; Thu, 09 Nov 2023 09:15:34 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106512
 
-On Wed, Nov 8, 2023 at 10:32=E2=80=AFPM Zoltan Boszormenyi <zboszor@gmail.c=
-om> wrote:
->
-> Something went wrong here.
-> Final 3.12.0 was "upgraded" to 3.12.0beta2.
+From: Mingli Yu <mingli.yu@windriver.com>
 
-yes, We need to correct the upgrade regex. I will revert this for now.
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+---
+ meta-oe/conf/include/ptest-packagelists-meta-oe.inc | 1 +
+ 1 file changed, 1 insertion(+)
 
->
-> 2023. 11. 03. 20:52 keltez=C3=A9ssel, Auto Upgrade Helper =C3=ADrta:
-> > Hello,
-> >
-> > this email is a notification from the Auto Upgrade Helper
-> > that the automatic attempt to upgrade the recipe *geos* to *3.12.0beta2=
-* has Succeeded.
-> >
-> > Next steps:
-> >      - apply the patch: git am 0001-geos-upgrade-3.12.0-3.12.0beta2.pat=
-ch
-> >      - check the changes to upstream patches and summarize them in the =
-commit message,
-> >      - compile an image that contains the package
-> >      - perform some basic sanity tests
-> >      - amend the patch and sign it off: git commit -s --reset-author --=
-amend
-> >      - send it to the appropriate mailing list
-> >
-> > Alternatively, if you believe the recipe should not be upgraded at this=
- time,
-> > you can fill RECIPE_NO_UPDATE_REASON in respective recipe file so that
-> > automatic upgrades would no longer be attempted.
-> >
-> > Please review the attached files for further information and build/upda=
-te failures.
-> > Any problem please file a bug at https://bugzilla.yoctoproject.org/ente=
-r_bug.cgi?product=3DAutomated%20Update%20Handler
-> >
-> > Regards,
-> > The Upgrade Helper
-> >
-> > -- >8 --
-> > >From 44935dbd8ea98c3846fad098e6f6632a20713ac0 Mon Sep 17 00:00:00 2001
-> > From: Upgrade Helper <auh@yoctoproject.org>
-> > Date: Fri, 3 Nov 2023 12:37:48 +0000
-> > Subject: [PATCH] geos: upgrade 3.12.0 -> 3.12.0beta2
-> >
-> > ---
-> >   .../geos/{geos_3.12.0.bb =3D> geos_3.12.0beta2.bb}                | 2=
- +-
-> >   1 file changed, 1 insertion(+), 1 deletion(-)
-> >   rename meta-oe/recipes-navigation/geos/{geos_3.12.0.bb =3D> geos_3.12=
-.0beta2.bb} (88%)
-> >
-> > diff --git a/meta-oe/recipes-navigation/geos/geos_3.12.0.bb b/meta-oe/r=
-ecipes-navigation/geos/geos_3.12.0beta2.bb
-> > similarity index 88%
-> > rename from meta-oe/recipes-navigation/geos/geos_3.12.0.bb
-> > rename to meta-oe/recipes-navigation/geos/geos_3.12.0beta2.bb
-> > index 95cb29775..e4e1b9db2 100644
-> > --- a/meta-oe/recipes-navigation/geos/geos_3.12.0.bb
-> > +++ b/meta-oe/recipes-navigation/geos/geos_3.12.0beta2.bb
-> > @@ -6,7 +6,7 @@ LICENSE =3D "LGPL-2.1-or-later"
-> >   LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd255951079008b3=
-64516c"
-> >
-> >   SRC_URI =3D "http://download.osgeo.org/${BPN}/${BP}.tar.bz2"
-> > -SRC_URI[sha256sum] =3D "d96db96011259178a35555a0f6d6e75a739e52a495a6b2=
-aa5efb3d75390fbc39"
-> > +SRC_URI[sha256sum] =3D "249c63c6f07ec827377e94a90b99a97d39e655aff180cf=
-a71b50381d8e209382"
-> >
-> >   inherit cmake pkgconfig binconfig
-> >
-> >
-> >
-> >
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#106509): https://lists.openembedded.org/g/openembedde=
-d-devel/message/106509
-> Mute This Topic: https://lists.openembedded.org/mt/102372013/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
+index bab9d4372..33aff7f44 100644
+--- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
++++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
+@@ -28,6 +28,7 @@ PTESTS_FAST_META_OE = "\
+     lmdb \
+     minicoredumper \
+     neon \
++    nlohmann-json \
+     nodejs \
+     onig \
+     poco \
+-- 
+2.25.1
+
 
