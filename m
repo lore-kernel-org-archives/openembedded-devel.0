@@ -1,239 +1,151 @@
-Return-Path: <uvv.mail@gmail.com>
+Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 06D9DC4167B
-	for <webhook@archiver.kernel.org>; Thu,  9 Nov 2023 15:05:26 +0000 (UTC)
-Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
- by mx.groups.io with SMTP id smtpd.web11.123927.1699542318677859539
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 71789C4332F
+	for <webhook@archiver.kernel.org>; Thu,  9 Nov 2023 20:47:59 +0000 (UTC)
+Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com [209.85.167.53])
+ by mx.groups.io with SMTP id smtpd.web11.9326.1699562876459836243
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Nov 2023 07:05:19 -0800
+ Thu, 09 Nov 2023 12:47:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=lW33CGX3;
- spf=pass (domain: gmail.com, ip: 209.85.208.41, mailfrom: uvv.mail@gmail.com)
-Received: by mail-ed1-f41.google.com with SMTP id 4fb4d7f45d1cf-53de0d1dc46so1573380a12.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Nov 2023 07:05:18 -0800 (PST)
+ dkim=pass header.i=@bgdev-pl.20230601.gappssmtp.com header.s=20230601 header.b=aUfCn7gg;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.167.53, mailfrom: brgl@bgdev.pl)
+Received: by mail-lf1-f53.google.com with SMTP id 2adb3069b0e04-507e85ebf50so1653086e87.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Nov 2023 12:47:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699542317; x=1700147117; darn=lists.openembedded.org;
-        h=in-reply-to:from:references:cc:to:content-language:subject
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=OH4fWJaGJLuepmnRZTcS87sHbNsGU1tyloS8kHfa/9o=;
-        b=lW33CGX3bkTGWCj5cqzK7tPTk8XkJV3hg6PiSh0cO3jv3VNWctzlZUylGeDtv/QQjK
-         YFTD0mmOmWoaEHqrUSiNipylEqpl3gpfVjhncUOUY2iyYEoPar6ISUoHFfQw0kZwq2CH
-         /JoKSkSNYEnBvWgPXTBi54+VLo6qzC/Ei1p1xlv8zz76JEY9XzhXv6fiKWZElgF719AJ
-         jlr3n2trwJ86d7EJm8xnq9O6Cy7j9AQfQzefOIS9iUqtTKqTnxcO/sF/08sl1G5GEjMR
-         I2mNZiGCoNvHmsJERB8Dd9OjIRAIQUbr78IqrPNQ/Dcghsp1m7xdpA7yYGT8+THTnZ7c
-         6HKA==
+        d=bgdev-pl.20230601.gappssmtp.com; s=20230601; t=1699562874; x=1700167674; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=ZmiZ6ca0gnMjZ9K1+XwQRE0gSKb3132pAtC1FMi4sxY=;
+        b=aUfCn7ggsuHgXjmZzilUJGFyxDFlze0wlmRq5Zh9zIa2jzH95HCJOXulYSXRr8GQGy
+         tkUlmC7vgmW0rtq6/4ohJTRGbjlGXbN9UXeO12VjviIbbRHX8cEkgDvT0zgrfoktr0W/
+         6kA8sBp3IPYDuw6qu61pwAAYB6yKlIlpSPTR6PVzXEem983zEA8BCKPKPp4CB7IV8qOV
+         Sq9ezCvXLw80KyKrbSBBAXkHjdSF8oZqH0p5W3MeHetF4KDSAfjuvwmpM9QKAjCJ5xme
+         4mZYuBn93xMf6lD3gZTIk6pSWftOC/QujUZRvHdIOet7+Pqv+EVN3LB2vJ7Ul2/RPNNQ
+         +rig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699542317; x=1700147117;
-        h=in-reply-to:from:references:cc:to:content-language:subject
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=OH4fWJaGJLuepmnRZTcS87sHbNsGU1tyloS8kHfa/9o=;
-        b=dj7deOt9WrbPVD7fDTdm5nobPjXz13IeyeoR1mSERRdMl4YMT5hPV2Z7qc9Cp75SVr
-         AMcBz0f7d2VqdgkDGs33OeiKIcwOaHwV6JfNpARV+sntIACmUfygh0vtNEcwpO3lCj0H
-         lMu4UUhPOODBRzTwGnYorf+hLklzx5x8rRBi1N+IJ9MAw+f7OOqIisv0DtvVOc1qjLNW
-         CsdqXC0ZWAPELB8dsq/HuKZMxbPD3RNYLb9+fYkK8nSvv5c062Y3fSVYv/KQUL8T3/Ni
-         jz1byNvZI6xvvBBQ9KMxiJ2+I3wNB4/txkYCukJUk7H/eBHYrQOHc1wR/wn+tUO1jGjM
-         GQLQ==
-X-Gm-Message-State: AOJu0YzJUCddMrdriGqnjr/DRem2C1YnIUwgPlIwmlztKEka5lKpjmRG
-	vHMyU46v4VF0HVNq4k2CC4c=
-X-Google-Smtp-Source: AGHT+IFVMv5XqUTzEYCZiVqVc++H3nN5zP7u+jommxv3VstyJRESRC5Rp32Au+xzRXC++3sAMHmwsQ==
-X-Received: by 2002:a17:906:fe41:b0:9d5:ecf9:e6b5 with SMTP id wz1-20020a170906fe4100b009d5ecf9e6b5mr3930241ejb.59.1699542316693;
-        Thu, 09 Nov 2023 07:05:16 -0800 (PST)
-Received: from [10.134.43.36] ([89.249.73.138])
-        by smtp.gmail.com with ESMTPSA id kj3-20020a170907764300b009bf7a4d591csm2704204ejc.11.2023.11.09.07.05.16
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 09 Nov 2023 07:05:16 -0800 (PST)
-Content-Type: multipart/alternative;
- boundary="------------w6iRibVyWvPmb3dn04HPNG07"
-Message-ID: <23c9a4cc-87c0-4bb8-a1ce-0c920f442600@gmail.com>
-Date: Thu, 9 Nov 2023 16:05:15 +0100
+        d=1e100.net; s=20230601; t=1699562874; x=1700167674;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=ZmiZ6ca0gnMjZ9K1+XwQRE0gSKb3132pAtC1FMi4sxY=;
+        b=riy1HfV8MA/xmeiSTgkcs4iQH7y9ogzdSBAYVvNfjm0nf96eeT6z0gGFm/jdarvVQV
+         c5zAMF2NoXOtHji/aw3brwGI0G9VYIGASKyzeQ2OAD1dQzYqgGj8i57axPW+2lyDKg8t
+         J5SeuJINB2aGFcsceTq78toSxkB84ByNmew8SJOXiKnX4VHNgHVbvmJ0j8sRmV6vXQwz
+         0yrpUHvagbnybzTDciVLAlwDlyP0OB2+5gZ5m2zmJWxTeGQE+kNxkKSXbVg1yO7T5+ql
+         eYX6pV1GWbSWEVdyBCmrzPqlvMkHKITsI8ksQrjUWSoyuq7bQYsDzI4UPasb3sJbB8rr
+         9i8w==
+X-Gm-Message-State: AOJu0Yz/Stg75z3qbx2bZM5NpPdeyk0TxdPqSrWtnQnBcNlTKn6nut37
+	SqLePBRTAOyn3YOraWKUO9qQ5g==
+X-Google-Smtp-Source: AGHT+IEk/SsFwWnjas4R1rW4AenYHhcCkkFdowBU6YdR8WOCGUk9VrcTFeGaI1NuatThMw4T/Jv0jg==
+X-Received: by 2002:ac2:4aca:0:b0:50a:40b6:2d37 with SMTP id m10-20020ac24aca000000b0050a40b62d37mr213706lfp.40.1699562874282;
+        Thu, 09 Nov 2023 12:47:54 -0800 (PST)
+Received: from brgl-uxlite.home ([2a01:cb1d:334:ac00:51dd:d4a3:ac1:10ae])
+        by smtp.gmail.com with ESMTPSA id f1-20020a5d50c1000000b0032f7eaa6e43sm437931wrt.79.2023.11.09.12.47.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 09 Nov 2023 12:47:53 -0800 (PST)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>,
+	Bruce Ashfield <bruce.ashfield@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Subject: [meta-python][PATCH] python3-gpiod: update to v2.1.3
+Date: Thu,  9 Nov 2023 21:47:47 +0100
+Message-Id: <20231109204747.44268-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [PATCH] Revert "protobuf: stage protoc binary to sysroot"
-Content-Language: en-US
-To: Samuli Piippo <samuli.piippo@gmail.com>
-Cc: =?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>,
- Martin Jansa <martin.jansa@gmail.com>, Khem Raj <raj.khem@gmail.com>,
- Ross Burton <ross.burton@arm.com>,
- openembedded-devel <openembedded-devel@lists.openembedded.org>
-References: <20230930173003.3210-1-peron.clem@gmail.com>
- <CAJiuCcd=uZ+eUt8Brj-y48Gewy3=gzmDTOLdKrkhvZebZsSD2w@mail.gmail.com>
- <CA+chaQez2kfNHw4f3NK0ft4kagtfqsQTkoO=2DRQA63j2Kdn3A@mail.gmail.com>
- <178A5713556C6E82.9230@lists.openembedded.org>
- <9714b98c-66b5-48bc-a00a-69e1634b0307@gmail.com>
- <CABXoSoVp=45ccqwzQXFF1y=fjcwCGjXh0HiuLBAE-UssDzf5Yg@mail.gmail.com>
- <babbfd71-062b-4ad5-9ef9-00acc52ae090@gmail.com>
- <CABXoSoVkvT7py3ZEtZc5gKYuLKzJYesWvi=65zRA5osHQa87tQ@mail.gmail.com>
- <CA+chaQc6XzqXXnFpaN_7f21GBpYvZx4Cv_fw3WwHwVOzGyBPTQ@mail.gmail.com>
- <5d7628e8-4fe7-4cfa-841f-879ebee31b6d@gmail.com>
- <CAJiuCccMuUTK=-6_hBONEdhWW8UzkOx3Ag=uJTbNyiwnqBNgXA@mail.gmail.com>
- <17910E05B5C0179B.11247@lists.openembedded.org>
- <CABXoSoVoDRWoSEsWTYHTjfuyGTNnhpBhEvf+V-bxq-70xL11iw@mail.gmail.com>
- <CAJiuCcf9TKKaiLGALDE0Cx5hE+i8c-gLM0Y=D9vfy8Hg71-rug@mail.gmail.com>
- <fb860d6d-99d4-494c-80d5-7023bb106782@gmail.com>
- <CABXoSoXoy4FhkTiuyOO9_idW_yjAU5xmW4D5p3e12XOzF5cLcg@mail.gmail.com>
-From: Vyacheslav Yurkov <uvv.mail@gmail.com>
-In-Reply-To: <CABXoSoXoy4FhkTiuyOO9_idW_yjAU5xmW4D5p3e12XOzF5cLcg@mail.gmail.com>
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 09 Nov 2023 15:05:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106519
+ <openembedded-devel@lists.openembedded.org>; Thu, 09 Nov 2023 20:47:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106520
 
-This is a multi-part message in MIME format.
---------------w6iRibVyWvPmb3dn04HPNG07
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 
-Thanks for the explanation, that was the missing piece for me to get an 
-understanding of the problem :)
+The python bindings for libgpiod have undergone several significant
+changes that make them easier to use for users of pip. The libgpiod
+sources are now vendored with the python3-gpiod as the biggest complaint
+by far was the fact that if the system doesn't provide the correct
+version of libgpiod, the python bindings won't build.
 
-I think it's not only me, but also others, were confused by the fact 
-that we are talking about native(sdk), but try to fix something with a 
-non-native variable.
+This is however irrelevant for the meta-python recipe as we use the
+provided switch to keep linking against the libgpiod provided by
+meta-openembedded.
 
-I've just gave it a try and have two suggestions how this can be addressed.
+We have changed the way the tests are built, they are now generated by a
+separate build script and no longer by setup.py. The package now
+correctly build with the preferred pep517 method so change the inherited
+classes.
 
-1. Recipe based solution:
-SYSROOT_DIRS:append:class-nativesdk = " $bindir}"
+We have also gained control over the gpiod module on pypi (which
+previously hosted a pure python GPIO library) so the location of the
+sources has changed.
 
-2. oe-core based solution:
---- a/meta/classes-global/staging.bbclass
-+++ b/meta/classes-global/staging.bbclass
-@@ -26,6 +26,7 @@ SYSROOT_DIRS_NATIVE = " \
-      ${localstatedir} \
-  "
-  SYSROOT_DIRS:append:class-native = " ${SYSROOT_DIRS_NATIVE}"
-+SYSROOT_DIRS:append:class-nativesdk = " ${SYSROOT_DIRS_NATIVE}"
-  SYSROOT_DIRS:append:class-cross = " ${SYSROOT_DIRS_NATIVE}"
-  SYSROOT_DIRS:append:class-crosssdk = " ${SYSROOT_DIRS_NATIVE}"
+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+---
+ ...-gpiod_2.0.1.bb => python3-gpiod_2.1.3.bb} | 25 ++++++++++++-------
+ 1 file changed, 16 insertions(+), 9 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-gpiod_2.0.1.bb => python3-gpiod_2.1.3.bb} (54%)
 
-The second one will invalidate nativesdk sstate, but might cover not 
-only grpc issue (I would assume gdbus-codegen or any other generator has 
-the same issue when used for SDK build).
+diff --git a/meta-python/recipes-devtools/python/python3-gpiod_2.0.1.bb b/meta-python/recipes-devtools/python/python3-gpiod_2.1.3.bb
+similarity index 54%
+rename from meta-python/recipes-devtools/python/python3-gpiod_2.0.1.bb
+rename to meta-python/recipes-devtools/python/python3-gpiod_2.1.3.bb
+index ea8c18562..ef2f01fd4 100644
+--- a/meta-python/recipes-devtools/python/python3-gpiod_2.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-gpiod_2.1.3.bb
+@@ -3,17 +3,18 @@ SUMMARY = "Python bindings for libgpiod."
+ LICENSE = "GPL-2.0-or-later & LGPL-2.1-or-later & CC-BY-SA-4.0"
+ # The actual license files live in the upstream libgpiod from which the pypi
+ # package is spun out.
+-LIC_FILES_CHKSUM = "file://setup.py;beginline=57;endline=57;md5=120334ed83ec0cb248605e775bd13b87"
++LIC_FILES_CHKSUM = "file://setup.py;beginline=237;endline=237;md5=f5ddb56912b7f20bf94aa4d1bdcd3533"
+ 
+ SRC_URI += "file://run-ptest"
+ 
+-SRC_URI[sha256sum] = "d5c0f9502e97e7359b9dd601e29f15d668983ce50f5c13323f3302845f790fa6"
++SRC_URI[sha256sum] = "a33193d6cab79d252329f71666a35a3668e04f1f82bf9b93ee2c9ae852398b20"
+ 
+-inherit setuptools3 ptest pypi
++inherit setuptools3-base python_pep517 ptest pypi
+ 
+-PYPI_PACKAGE = "libgpiod"
+-
+-DEPENDS += "libgpiod"
++DEPENDS += " \
++    libgpiod \
++    python3-setuptools-native \
++"
+ RDEPENDS:${PN} += " \
+     libgpiod (>= 2.0) \
+     python3-datetime \
+@@ -24,14 +25,20 @@ RDEPENDS:${PN}-ptest += " \
+     python3-setuptools \
+ "
+ 
+-export GPIOD_WITH_TESTS = "${@bb.utils.contains("PTEST_ENABLED", "1", "1", "0", d)}"
++export LINK_SYSTEM_LIBGPIOD = "1"
++
++do_compile_ptest() {
++    ${STAGING_BINDIR_NATIVE}/python3-native/python3 build_tests.py
++}
+ 
+ do_install_ptest() {
+     install -d ${D}${PTEST_PATH}/gpiod-test/gpiosim
+     install -d ${D}${PTEST_PATH}/gpiod-test/procname
+     install -m 0644 ${S}/tests/*.py ${D}${PTEST_PATH}/gpiod-test/
+-    install -m 0644 ${B}/build/lib*/tests/gpiosim/_ext* ${D}${PTEST_PATH}/gpiod-test/gpiosim
++    install -m 0644 ${B}/tests/gpiosim/_ext* ${D}${PTEST_PATH}/gpiod-test/gpiosim
+     install -m 0644 ${S}/tests/gpiosim/*.py ${D}${PTEST_PATH}/gpiod-test/gpiosim
+-    install -m 0644 ${B}/build/lib*/tests/procname/_ext* ${D}${PTEST_PATH}/gpiod-test/procname
++    install -m 0644 ${B}/tests/procname/_ext* ${D}${PTEST_PATH}/gpiod-test/procname
+     install -m 0644 ${S}/tests/procname/*.py ${D}${PTEST_PATH}/gpiod-test/procname
+ }
++
++INSANE_SKIP:${PN}-ptest += "buildpaths"
+-- 
+2.40.1
 
-What are your thoughs?
-
-Thanks,
-Slava
-
-On 09.11.2023 14:35, Samuli Piippo wrote:
-> DEPENDS += "protobuf" is enough to have dependencies resolved.
->
-> Problem is that bitbake's do_populate_sysroot does not take anything 
-> from bindir.
-> This leads to nativesdk-(qt)grpc's do_prepare_recipe_sysroot to not 
-> get the protoc binary into the recipe_sysroot as expected by CMake.
->
-> This can be fixed with SYSROOT_DIRS.
->
-> On Thu, 9 Nov 2023 at 12:19, Vyacheslav Yurkov <uvv.mail@gmail.com> wrote:
->
->     Hi Clément,
->     No, the issue is when you just build nativesdk recipe (we are not
->     at the stage to use the SDK yet).
->
->     And that was exactly my question how to propagate the dependency
->     correctly for nativesdk build.
->
->     Regards,
->     Slava
->
-
---------------w6iRibVyWvPmb3dn04HPNG07
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <div class="moz-cite-prefix">Thanks for the explanation, that was
-      the missing piece for me to get an understanding of the problem :)<br>
-      <br>
-      I think it's not only me, but also others, were confused by the
-      fact that we are talking about native(sdk), but try to fix
-      something with a non-native variable.<br>
-      <br>
-      I've just gave it a try and have two suggestions how this can be
-      addressed.<br>
-      <br>
-      1. Recipe based solution:<br>
-      SYSROOT_DIRS:append:class-nativesdk = " $bindir}"<br>
-      <br>
-      2. oe-core based solution:<br>
-      --- a/meta/classes-global/staging.bbclass<br>
-      +++ b/meta/classes-global/staging.bbclass<br>
-      @@ -26,6 +26,7 @@ SYSROOT_DIRS_NATIVE = " \<br>
-           ${localstatedir} \<br>
-       "<br>
-       SYSROOT_DIRS:append:class-native = " ${SYSROOT_DIRS_NATIVE}"<br>
-      +SYSROOT_DIRS:append:class-nativesdk = " ${SYSROOT_DIRS_NATIVE}"<br>
-       SYSROOT_DIRS:append:class-cross = " ${SYSROOT_DIRS_NATIVE}"<br>
-       SYSROOT_DIRS:append:class-crosssdk = " ${SYSROOT_DIRS_NATIVE}"<br>
-      <br>
-      The second one will invalidate nativesdk sstate, but might cover
-      not only grpc issue (I would assume gdbus-codegen or any other
-      generator has the same issue when used for SDK build).<br>
-      <br>
-      What are your thoughs?<br>
-      <br>
-      Thanks,<br>
-      Slava<br>
-      <br>
-      On 09.11.2023 14:35, Samuli Piippo wrote:<br>
-    </div>
-    <blockquote type="cite"
-cite="mid:CABXoSoXoy4FhkTiuyOO9_idW_yjAU5xmW4D5p3e12XOzF5cLcg@mail.gmail.com">
-      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-      <div dir="ltr">
-        <div>DEPENDS += "protobuf" is enough to have dependencies
-          resolved.</div>
-        <div><br>
-        </div>
-        <div>Problem is that bitbake's do_populate_sysroot does not take
-          anything from bindir.</div>
-        <div>This leads to nativesdk-(qt)grpc's
-          do_prepare_recipe_sysroot to not get the protoc binary into
-          the recipe_sysroot as expected by CMake.<br>
-        </div>
-        <div><br>
-        </div>
-        <div>This can be fixed with SYSROOT_DIRS.<br>
-        </div>
-      </div>
-      <br>
-      <div class="gmail_quote">
-        <div dir="ltr" class="gmail_attr">On Thu, 9 Nov 2023 at 12:19,
-          Vyacheslav Yurkov &lt;<a href="mailto:uvv.mail@gmail.com"
-            moz-do-not-send="true" class="moz-txt-link-freetext">uvv.mail@gmail.com</a>&gt;
-          wrote:<br>
-        </div>
-        <blockquote class="gmail_quote"
-style="margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-          <div>
-            <div>Hi <span>Clément,<br>
-                No, the issue is when you just build nativesdk recipe
-                (we are not at the stage to use the SDK yet).<br>
-                <br>
-                And that was exactly my question how to propagate the
-                dependency correctly for nativesdk build.<br>
-                <br>
-                Regards,<br>
-                Slava<br>
-              </span></div>
-          </div>
-        </blockquote>
-      </div>
-    </blockquote>
-    <br>
-  </body>
-</html>
-
---------------w6iRibVyWvPmb3dn04HPNG07--
 
