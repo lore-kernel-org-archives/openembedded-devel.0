@@ -1,112 +1,132 @@
-Return-Path: <daiane.angolini@foundries.io>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 39AAEC4332F
-	for <webhook@archiver.kernel.org>; Thu,  9 Nov 2023 12:05:15 +0000 (UTC)
-Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
- by mx.groups.io with SMTP id smtpd.web11.119976.1699531509171251442
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 440ADC4332F
+	for <webhook@archiver.kernel.org>; Thu,  9 Nov 2023 12:37:55 +0000 (UTC)
+Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
+ by mx.groups.io with SMTP id smtpd.web11.120434.1699533472603113858
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Nov 2023 04:05:09 -0800
+ Thu, 09 Nov 2023 04:37:53 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@foundries.io header.s=google header.b=OIYcEXMF;
- spf=pass (domain: foundries.io, ip: 209.85.210.170, mailfrom: daiane.angolini@foundries.io)
-Received: by mail-pf1-f170.google.com with SMTP id d2e1a72fcca58-6c431b91b2aso740194b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Nov 2023 04:05:09 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=o+8EvJC+;
+ spf=pass (domain: konsulko.com, ip: 209.85.218.47, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-9be02fcf268so125279866b.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Nov 2023 04:37:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=foundries.io; s=google; t=1699531508; x=1700136308; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1699533471; x=1700138271; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=rGjwpUfM4J6hB7ZtFHNqFFHi6912vlAvXU/WfRHZkJU=;
-        b=OIYcEXMFgnI4G7vctH0730hPF+V8PiIkcPBcDzIq9uwy5uvFZ8lkRXtKEpHv4HysJH
-         WJ68wpVwLbm0Fk6kuhjWTRI3IClurKpyGv9Qsud4TSdtJeLQSI7I1Zz68x9geKZvz0BB
-         r2Y9dBuCyw/MlOnDyuZTpmsPrLnSU5JEsmQMRO4iXkno7NkymkECTrm53Foxe8z7Zptk
-         Q0DI4n2mnYXQXvhoJ6xrpkuhJ1gl72bn9tvaVxKsNF8jGRUYNWbPCeEId+2w4l+nvnWV
-         wRiQ2UrWbDQNbH+Ids+YOexOAFYD1bHa565PCphhvZJ+iip7dTqvAtFvee+uIOU9BWMN
-         wEHg==
+        bh=zD19iKR9DQS2lqBrSbfqqiHbCkEQt/P3HvmTvGo7nb4=;
+        b=o+8EvJC+W8AtwW0sqJzCoU2yITE40ug8unD6HpHj+7MLq2yqQ3rMXvnvbG/SSpK4IO
+         UWQhePePe2dk6dI+HOX10gr2SAWkLl4hD+1K+u1oxIK0JC5PJ60C6hAaN52RKDD3V50G
+         oDjl4yYAWy22IQaBwMWeuCIFJOTQ5pjjtxYHc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699531508; x=1700136308;
+        d=1e100.net; s=20230601; t=1699533471; x=1700138271;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=rGjwpUfM4J6hB7ZtFHNqFFHi6912vlAvXU/WfRHZkJU=;
-        b=D+kIGo7TaSC6sOD4Eiudrik1q5A8PTXG4eEcmXcyX0DSb4eY2bjdNZSF+SwT3zI2+n
-         cuShE41BAQF6kzSlV3LB9+MJdZTCO/OD4eBA6bblaAhqs7vJ74iZkRGEEbX3VKfxtTzm
-         nvHtNkQOxtcx4FgfMSgB34oCZ6jzl1x4ZSBNjoCvw05Qjn5594P7gweyDaY0zhON+gRW
-         b7UHl7/dZFHfCewnOLtJGVuMLyZiPAv0vYRXe+Hhg674yrsUBjwp5ECuLnTCvaU9yazu
-         LYbOPZYLDk9yjuOusiOW7H6QLcE9SSCjwwmDiSc9sLYturDAkK7E8wsZLl2p7iHXN0OR
-         +/OA==
-X-Gm-Message-State: AOJu0Yy0ADY+FDyGjYJS52uss1FS1FWBGpi0Rv6egbLoj+ZBZ9Xk9qFu
-	ZrtylPdvHTYhHWnnVxg8YYbiiK9nLgZZB6ND+uo=
-X-Google-Smtp-Source: AGHT+IHdG1Tcx84FcHunTgiDf4lyLdp0kDZ8cKOzz2qGkfc/QMLfktMXEvDqZg/PTuJP5Pm0Mex8JQ==
-X-Received: by 2002:a05:6a20:9d8e:b0:181:2f76:f9f6 with SMTP id mu14-20020a056a209d8e00b001812f76f9f6mr5579306pzb.44.1699531508230;
-        Thu, 09 Nov 2023 04:05:08 -0800 (PST)
-Received: from nina.lan ([189.55.42.196])
-        by smtp.gmail.com with ESMTPSA id j8-20020a17090276c800b001bb97e51ab4sm3385621plt.98.2023.11.09.04.05.06
+        bh=zD19iKR9DQS2lqBrSbfqqiHbCkEQt/P3HvmTvGo7nb4=;
+        b=NcmBdI9lnSMtrm8DpjtnY7bkXJMDzwWa5UCFb186tYhtf23ViiBfuxhtkKcG6GllB/
+         cZwGncBCI4WLqgZum99c76FlbCz4eWsZZA+eZ/y/UzIpO6Jtj0GZElkge+krptSttEOs
+         M3bqEoxnZPXPxGZvJSYq99lLitNrjhz0DMqpavUn2FdFRcQPF/ta1T6BVI5DctrJsOvc
+         UXBA6ItFhG7UpoNy+lclAIEIp6G4NF1J3lQl8cg3mNPPfsVpV4WMwJpZenp6AQ0KKvl4
+         SFnUFog3blsPCm2DUq79Pl7n6gJ4nc8y/xaW2W2cVD/Jl3nEipfZpTxnBAEOeumrQFLy
+         uAhA==
+X-Gm-Message-State: AOJu0YypSJlmowsE7uRgmzlRfjk+EFKk6R2XxjwfDqS/992D/v2hV9mP
+	9r44BfefmeWQoHVAKNstckXVsYLnV9AXSk0HBsc=
+X-Google-Smtp-Source: AGHT+IERFwltRmzF5fnpn1hdeX7faGGzW0uy74HlEzhO6pyPJJqOLq3tRKL6PcB5RHAK7aZUDpfIqA==
+X-Received: by 2002:a17:906:f8d3:b0:9e5:cef:6ff with SMTP id lh19-20020a170906f8d300b009e50cef06ffmr916339ejb.33.1699533470589;
+        Thu, 09 Nov 2023 04:37:50 -0800 (PST)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id w24-20020a170906185800b009cc1227f443sm2468207eje.104.2023.11.09.04.37.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 09 Nov 2023 04:05:08 -0800 (PST)
-From: Daiane Angolini <daiane.angolini@foundries.io>
+        Thu, 09 Nov 2023 04:37:50 -0800 (PST)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Daiane Angolini <daiane.angolini@foundries.io>
-Subject: [meta-networking][PATCH v2] wireguard-tools: Use PACKAGECONFIG to select wg-quick and bash-completion
-Date: Thu,  9 Nov 2023 09:04:35 -0300
-Message-Id: <20231109120435.1961221-1-daiane.angolini@foundries.io>
-X-Mailer: git-send-email 2.34.1
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-oe][PATCHv2] qpdf: Update 10.6.3 -> 11.6.3
+Date: Thu,  9 Nov 2023 14:37:48 +0200
+Message-Id: <20231109123748.3161295-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 09 Nov 2023 12:05:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106516
+ <openembedded-devel@lists.openembedded.org>; Thu, 09 Nov 2023 12:37:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106517
 
-Condition the creation of some files and their consequences to a
-PACKAGECONFIG, which can be overridden outside the meta layer.
+Update to version 11.6.3:
 
-It removes the sub package wireguard-tools-wg-quick as PACKAGECONFIG is
-supposed to work to configure a package only, and not deal with
-sub packages.
+- Fix a bug in which qpdf could potentially discard a character
+  in a binary string if that character was preceded by an octal
+  escaped string with fewer than three digits. This bug was
+  introduced in the 11.0.0 release. The bug would not apply to
+  content streams with default settings.
+- The linearization specification precludes linearized files that
+  require offets past the 4 GB mark. A bug in qpdf was preventing
+  it from working when offsets had to pass the 2 GB mark. This has
+  been corrected.
 
-Signed-off-by: Daiane Angolini <daiane.angolini@foundries.io>
+Switch to cmake. Use /dev/random to perform encryption securely.
+Change the fully defined path on the target to fix buildpaths
+QA issues with libqpdfTargets.cmake. Add openssl and gnutls as
+dependencies. Tested with usermerge distro feature and clang.
+
+This work was sponsored by GOVCERT.LU.
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../wireguard/wireguard-tools_1.0.20210914.bb        | 12 +++++-------
- 1 file changed, 5 insertions(+), 7 deletions(-)
+ .../qpdf/{qpdf_10.6.3.bb => qpdf_11.6.3.bb}         | 13 ++++++++++---
+ 1 file changed, 10 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-printing/qpdf/{qpdf_10.6.3.bb => qpdf_11.6.3.bb} (67%)
 
-diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20210914.bb b/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20210914.bb
-index 20435338c..8def54ece 100644
---- a/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20210914.bb
-+++ b/meta-networking/recipes-kernel/wireguard/wireguard-tools_1.0.20210914.bb
-@@ -11,24 +11,22 @@ do_install () {
-     oe_runmake DESTDIR="${D}" PREFIX="${prefix}" SYSCONFDIR="${sysconfdir}" \
-         SYSTEMDUNITDIR="${systemd_system_unitdir}" \
-         WITH_SYSTEMDUNITS=${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'yes', '', d)} \
--        WITH_BASHCOMPLETION=yes \
--        WITH_WGQUICK=yes \
-+        ${PACKAGECONFIG_CONFARGS} \
-         install
- }
+diff --git a/meta-oe/recipes-printing/qpdf/qpdf_10.6.3.bb b/meta-oe/recipes-printing/qpdf/qpdf_11.6.3.bb
+similarity index 67%
+rename from meta-oe/recipes-printing/qpdf/qpdf_10.6.3.bb
+rename to meta-oe/recipes-printing/qpdf/qpdf_11.6.3.bb
+index fa33daf52..b56f8a822 100644
+--- a/meta-oe/recipes-printing/qpdf/qpdf_10.6.3.bb
++++ b/meta-oe/recipes-printing/qpdf/qpdf_11.6.3.bb
+@@ -2,14 +2,14 @@ DESCRIPTION = "PDF transformation/inspection software"
+ HOMEPAGE = "http://qpdf.sourceforge.net"
+ LICENSE = "Artistic-2.0"
+ SECTION = "libs"
+-DEPENDS = "libpcre zlib libjpeg-turbo"
++DEPENDS = "libpcre zlib libjpeg-turbo openssl gnutls"
  
--PACKAGES += "${PN}-wg-quick"
-+PACKAGECONFIG ??= "bash-completion wg-quick"
+ SRC_URI = "${SOURCEFORGE_MIRROR}/qpdf/qpdf-${PV}.tar.gz"
+-SRC_URI[sha256sum] = "e8fc23b2a584ea68c963a897515d3eb3129186741dd19d13c86d31fa33493811"
++SRC_URI[sha256sum] = "c394b1b0cff4cd9d13b0f5e16bdf3cf54da424dc434f9d40264b7fe67acd90bc"
+ 
+ LIC_FILES_CHKSUM = "file://Artistic-2.0;md5=7806296b9fae874361e6fb10072b7ee3"
+ 
+-inherit autotools-brokensep gettext
++inherit cmake gettext
+ 
+ # disable random file detection for cross-compile
+ EXTRA_OECONF = "--without-random \
+@@ -17,11 +17,18 @@ EXTRA_OECONF = "--without-random \
+                 --disable-check-autofiles \
+                 "
+ 
++EXTRA_OECMAKE = '-DRANDOM_DEVICE="/dev/random"'
 +
-+PACKAGECONFIG[bash-completion] = "WITH_BASHCOMPLETION=yes,WITH_BASHCOMPLETION=no,,bash,,"
-+PACKAGECONFIG[wg-quick]        = "WITH_WGQUICK=yes,WITH_WGQUICK=no,,bash,,"
+ LDFLAGS:append:mipsarch = " -latomic"
+ LDFLAGS:append:riscv32 = " -latomic"
  
- FILES:${PN} = " \
-     ${bindir}/wg \
-     ${sysconfdir} \
--"
--FILES:${PN}-wg-quick = " \
-     ${bindir}/wg-quick \
-     ${systemd_system_unitdir} \
- "
+ S="${WORKDIR}/${BPN}-${PV}"
  
--RDEPENDS:${PN}-wg-quick = "${PN} bash"
- RRECOMMENDS:${PN} = " \
-     kernel-module-wireguard \
--    ${PN}-wg-quick \
-     "
++do_install:append() {
++    # Change the fully defined path on the target
++    sed -i -e 's|${STAGING_LIBDIR}|${libdir}|g' ${D}${libdir}/cmake/${BPN}/libqpdfTargets.cmake
++}
++
+ # avoid Makefile returning error on 'make clean' before configure was run
+ CLEANBROKEN = "1"
+ 
 -- 
-2.34.1
+2.39.2
 
 
