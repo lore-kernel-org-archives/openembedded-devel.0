@@ -1,243 +1,126 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <jeffrey.pautler@ni.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7291AC4167B
-	for <webhook@archiver.kernel.org>; Fri, 10 Nov 2023 13:23:45 +0000 (UTC)
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
- by mx.groups.io with SMTP id smtpd.web10.26886.1699622624122037939
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D924C4167D
+	for <webhook@archiver.kernel.org>; Fri, 10 Nov 2023 16:14:36 +0000 (UTC)
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (NAM10-MW2-obe.outbound.protection.outlook.com [40.107.94.106])
+ by mx.groups.io with SMTP id smtpd.web11.31623.1699632873897755915
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 10 Nov 2023 05:23:44 -0800
+ Fri, 10 Nov 2023 08:14:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=kvqAtRa+;
- spf=pass (domain: gmail.com, ip: 209.85.221.54, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-32fa7d15f4eso1294802f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 10 Nov 2023 05:23:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699622622; x=1700227422; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=n5C9Xvjm7iJ2vYSLJJWK9IZ2UVEhFy1eEleRah2nQX4=;
-        b=kvqAtRa+BMT05AlX+qU6htpY5cw21tFCbDxm6WeclhhXhBiFBFYljJYXZEnfbJHYYI
-         MuEe50a5DfayhC5Pve9WEbVJWrjPIzVUfm5SLraPDtK2b+82zF7g2kigK2mPGdvzcQSh
-         Es1MoLBs4b6kZ6ZSgsluptJEUcD48UM8gWDdAc0xrUJ+wC8ESN6FYaq2FeKkrmosU9aS
-         jOuR8q8iNButZ2Wczre5mcCZ8KHSQgLBsy+JsskJFf60/NAqpPW7NSRVQckPTd7QEEuA
-         voDcJf0mqJCIRUAi+oNMluMFpWi9I6MKHGYqCEdIu01O2MQs5sk/o2Hcf6E581fTAexG
-         HOkA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699622622; x=1700227422;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=n5C9Xvjm7iJ2vYSLJJWK9IZ2UVEhFy1eEleRah2nQX4=;
-        b=q/wjHZ9EgDlFjNDjfMKtDKjhzAni9muiLRq3og45kILAy73bLnEaf1zwGBZYIi4x/L
-         rYo+MoLkIhXheHANEP6U/k3/oTm6F1qYs+awVb3oLE9Ofzeoz5UsBdoYAepmnmyRh9OJ
-         taDE6tdaLCVclTnqmA0U5m95/ZWY0CuKBYoD7g9iRcyg9pLz4sFjUrhTxCezefhIB4+O
-         jRjK5RqixFeX2EGJJ/Kb8j4KD+JsER2lGhlYEJ3VJetx/0tI4+wPzu3bn1EBk5jRniZw
-         /HN4lP3hfxcWJF98bX0wwVkHY75KJshvCtnim9Vi38SLTpSUgC2SgqsTmtvrQDqBQQ8s
-         f/Yw==
-X-Gm-Message-State: AOJu0YwsoJHKFRoiGDV+wJXpjbHx3pMC07CU2x7pGBOa9DFJIVLalZ9G
-	3dKeCQm/Vj8zJIH0ApasKuIhhLCo0Yo/L/1/OLpw2c3SpLs=
-X-Google-Smtp-Source: AGHT+IHb4xR50R6yptoBANYepx6Yrmb+bEZYYvJbboiiT6cD0LX6TzattYKyrBZaqhlXWn7dA13ksFp1gLxVoTJtm9I=
-X-Received: by 2002:a05:6000:4c:b0:31a:b3aa:d19b with SMTP id
- k12-20020a056000004c00b0031ab3aad19bmr6144735wrx.23.1699622622369; Fri, 10
- Nov 2023 05:23:42 -0800 (PST)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ni.com header.s=selector1 header.b=AHaxGNJB;
+ spf=pass (domain: ni.com, ip: 40.107.94.106, mailfrom: jeffrey.pautler@ni.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=T+6IjNLan36jnxGr+OB5dgpFhdiuRNz1lnFdtz45qHjwfJJtoxzv7918MltE+sqVBJrJXtViJxLenszqGG8CaQhf3C3Kr/WJExBz+30lwCnAguIPIfpF9JXySzJ94CrxPNOCAVWMNvkBzt7Jx+lGKH6G2ZRDB0dIQ2pu+JB04W1G+SOoezJzkmHJ9u+9fbTVwUsiuHh8o/twWXJBlgBms63YVx2vZuZRUsb+86+VHS79nnmsY54QFQLyp0QdMEP+k2Wz9hRUwXFTVT0g2UUEHPQIMPFdHUJflQPm3suMA4GHCkKLwmJFQmzCM+xXk5reaF0qwpovhHgAQ4KIEWOhdw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=FiMqkf179pjxmCnW0hcPa0GAajJS+kYolfBNIu39+4o=;
+ b=L/XSfUv9V5QtkGqUPMrRpTcMjpor/Pvbcb+MQGHw4xKjGSHHxwRGl+za2NH9RKKrhfA6L2FmEryigtaT3q3P0BNdG9K6ERnAdjO4B+H9vAuFPWGeOoAFN8V5B5gN/jdmo+wfJ+HiM+zkn8tk8/F264bDdSGmA2Gc7wVTjqPvtSGw8+BLf82bANMsx5GPCmXQY7tJ54NQ+ndFhm62Z+U9jKWD5f3HYUiI+jFzzHZFLSiEjacnbIdO9sTzN92jC/N5rAK14J5mKcYLudrRG35E3Y7DXxA7G9EorEwlNzJqRlv6lw1VRLnY8QwPbmtMRr6FU75spO2GjPYULhT5jWOJwA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 130.164.94.74) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=ni.com;
+ dmarc=pass (p=none sp=none pct=100) action=none header.from=ni.com; dkim=none
+ (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ni.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=FiMqkf179pjxmCnW0hcPa0GAajJS+kYolfBNIu39+4o=;
+ b=AHaxGNJBMr4yCXWn3mdEsKNrXEe5JSuWnuL+Z4Ov2i0bHtFw+cj50km/z+fOXJgVYhdG765Mc5Osrk8cuIkugzywcL4b4CY7FkMUVR12BzTTr+1XQlfUeCMK+wYLQV4Q3MA6ReTcyk2Q7M9ItOxqZ8lM5nKhZc5UbzbXQMf13AI=
+Received: from DM6PR10CA0032.namprd10.prod.outlook.com (2603:10b6:5:60::45) by
+ BL0PR04MB6577.namprd04.prod.outlook.com (2603:10b6:208:1c4::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6977.18; Fri, 10 Nov
+ 2023 16:14:30 +0000
+Received: from DS1PEPF0001708F.namprd03.prod.outlook.com
+ (2603:10b6:5:60:cafe::78) by DM6PR10CA0032.outlook.office365.com
+ (2603:10b6:5:60::45) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6977.21 via Frontend
+ Transport; Fri, 10 Nov 2023 16:14:30 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 130.164.94.74)
+ smtp.mailfrom=ni.com; dkim=none (message not signed) header.d=none;dmarc=pass
+ action=none header.from=ni.com;
+Received-SPF: Pass (protection.outlook.com: domain of ni.com designates
+ 130.164.94.74 as permitted sender) receiver=protection.outlook.com;
+ client-ip=130.164.94.74; helo=us-aus-excas-p2.ni.corp.natinst.com; pr=C
+Received: from us-aus-excas-p2.ni.corp.natinst.com (130.164.94.74) by
+ DS1PEPF0001708F.mail.protection.outlook.com (10.167.17.139) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6977.16 via Frontend Transport; Fri, 10 Nov 2023 16:14:28 +0000
+Received: from us-aus-excas-p2.ni.corp.natinst.com (130.164.68.18) by
+ us-aus-excas-p2.ni.corp.natinst.com (130.164.68.18) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1258.25; Fri, 10 Nov 2023 10:14:28 -0600
+Received: from jeff-mint.natinst.com (172.18.68.32) by
+ us-aus-excas-p2.ni.corp.natinst.com (130.164.68.18) with Microsoft SMTP
+ Server id 15.2.1258.25 via Frontend Transport; Fri, 10 Nov 2023 10:14:28
+ -0600
+From: Jeffrey Pautler <jeffrey.pautler@ni.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Jeffrey Pautler <jeffrey.pautler@ni.com>
+Subject: [meta-webserver][PATCH] apache2: add vendor to product name used for CVE checking
+Date: Fri, 10 Nov 2023 10:14:04 -0600
+Message-ID: <20231110161404.2362635-1-jeffrey.pautler@ni.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <9B6z.1699621499757734697.wXhd@lists.openembedded.org> <CA+chaQdP_-pf+TEhZyeabdV4-Q6Qd2t4+aYyL25ZTxvS7h=qNQ@mail.gmail.com>
-In-Reply-To: <CA+chaQdP_-pf+TEhZyeabdV4-Q6Qd2t4+aYyL25ZTxvS7h=qNQ@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Fri, 10 Nov 2023 14:23:29 +0100
-Message-ID: <CA+chaQdAEMeAfpyx4B5GnT+tgsMk+gHhCunEmXa8TEMT0ok1dg@mail.gmail.com>
-Subject: Re: [oe] [master][PATCH] SRC_URI master branch is deprecated and main
- is the new master branch
-To: ashwin.naik@sasken.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000a89b070609cc3ae2"
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS1PEPF0001708F:EE_|BL0PR04MB6577:EE_
+X-MS-Office365-Filtering-Correlation-Id: f79c4872-e163-40a2-dd99-08dbe2081d87
+x-ni-monitor: EOP Exclude NI Domains ETR True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	j4tbvr0hhvdG/TnrFvvdm3ALLN5vYz26MAkQs2ZiqcfNidu0mlblf+xWIfzltUDnTP3cTFqksNVwJrYfvZ3W1OjaO012XYIzFapj3Y5zdv3gXDu9O9b6HOwfvejuWfq6tGt47ORtLc0MK6f1YFs+0Q4Bxpn34FgChahoKEBmX4LI7Mv7PdhSpjY7X5q0yXhD/JsJUwF8SY93SGjFBCXNufPEfBknM5g8LlMuhrjyvi7C0FzU68wOuoIahT01cahMpSyud5cPebXuHWhIhkGlGLVWjlmD2kNwOnrTGIK36LqnbYoZqtKrG9KRfTPflIvZPDIdttiZbapKCet051cOhAsRjVjQY9kaikHhEyYfotlj3H3DwO0nIGKu0wEBhlhnRsiah1OSn9yTkxrFL2wYFcg0CDMOnZiv2H76LSqrxjASB4E7UrKtjEM2uBd3F4cV0NC6xIIa4YQGukJYqu9di1cVhpkDPsrKR00UeXkRc7nmcV6ubf8E30vndICuMgbN59ezuBdkbrrm9NCnqQJbGvfqgjm7ToB5aUqnJ6Q6YqkadcvXzypDx+06SEcDChHj/HmRZ2P+u3fxR/gh889VUYjV3Z0UM9XOCi9Ew+QiuU2mKHQKJ+SNogJRm003EZV+y8HXOEJuS+O7FLvrPBXpsU4VGEvsLGxv1VRWWhTJvGgv8rieFVh3cCxgjP3hHmEAZ747J0p7Gn5Sts08CKIPW4M7b2S4NLthpHt1OzaedYwVRzOBvVvWdhqSli8+IhCZ9ITs5Zrb0ViK5ZQRyIrsMw==
+X-Forefront-Antispam-Report: 
+	CIP:130.164.94.74;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:us-aus-excas-p2.ni.corp.natinst.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230031)(4636009)(346002)(39850400004)(136003)(376002)(396003)(230922051799003)(64100799003)(451199024)(82310400011)(186009)(1800799009)(36840700001)(40470700004)(46966006)(356005)(316002)(478600001)(70206006)(4326008)(8936002)(8676002)(6666004)(47076005)(70586007)(5660300002)(44832011)(83380400001)(41300700001)(36860700001)(6916009)(26005)(2906002)(336012)(2616005)(82740400003)(86362001)(36756003)(40480700001)(81166007)(1076003)(40460700003)(36900700001);DIR:OUT;SFP:1102;
+X-OriginatorOrg: ni.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Nov 2023 16:14:28.5334
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: f79c4872-e163-40a2-dd99-08dbe2081d87
+X-MS-Exchange-CrossTenant-Id: 87ba1f9a-44cd-43a6-b008-6fdb45a5204e
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=87ba1f9a-44cd-43a6-b008-6fdb45a5204e;Ip=[130.164.94.74];Helo=[us-aus-excas-p2.ni.corp.natinst.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	DS1PEPF0001708F.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL0PR04MB6577
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 10 Nov 2023 13:23:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106548
+ <openembedded-devel@lists.openembedded.org>; Fri, 10 Nov 2023 16:14:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106549
 
---000000000000a89b070609cc3ae2
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+This recipe sets the product name used for CVE checking to
+"http_server". However, the cve-check logic matches that name to all
+products in the CVE database regardless of vendor. Currently, it is
+matching to products from vendors other than apache. As a result,
+CVE checking incorrectly reports CVEs for those vendors' products for
+this package.
 
-And even dunfell already has it since 6 months ago:
-https://git.openembedded.org/meta-openembedded/commit/?id=3D29e3a918ac80f98=
-f3bad70eec50a9ada1a47fc41
+Signed-off-by: Jeffrey Pautler <jeffrey.pautler@ni.com>
+---
+ meta-webserver/recipes-httpd/apache2/apache2_2.4.57.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-so maybe you're on some even older release which isn't supported anymore.
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.57.bb b/meta-=
+webserver/recipes-httpd/apache2/apache2_2.4.57.bb
+index 00f8aaa41..bbc1c6c48 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.57.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.57.bb
+@@ -36,7 +36,7 @@ inherit autotools update-rc.d pkgconfig systemd update-al=
+ternatives
+=20
+ DEPENDS =3D "openssl expat pcre apr apr-util apache2-native "
+=20
+-CVE_PRODUCT =3D "http_server"
++CVE_PRODUCT =3D "apache:http_server"
+=20
+ SSTATE_SCAN_FILES +=3D "apxs config_vars.mk config.nice"
+=20
+--=20
+2.34.1
 
-On Fri, Nov 10, 2023 at 2:22=E2=80=AFPM Martin Jansa <martin.jansa@gmail.co=
-m> wrote:
-
-> This surely isn't for master where it was fixed 2 years ago:
->
-> https://git.openembedded.org/meta-openembedded/commit/?id=3Deab5e822a91ad=
-95cf0e7d2406ba3ab5304748713
->
-> If you need this fix in some other branch, then send the cherry-pick of
-> this with correct e-mail subject indicating the branch.
->
-> On Fri, Nov 10, 2023 at 2:05=E2=80=AFPM ashwin.naik via lists.openembedde=
-d.org
-> <ashwin.naik=3Dsasken.com@lists.openembedded.org> wrote:
->
->> From 23c3517e62158e390617686abd1a5525d27fa223 Mon Sep 17 00:00:00 2001
->> From: "ashwin.naik" <ashwin.naik@sasken.com>
->> Date: Fri, 3 Nov 2023 15:24:24 +0530
->> Subject: [PATCH] SRC_URI master branch is deprecated and main is the new
->>  master branch
->>
->> Below failure log is observed while using master branch to fetch.
->>
->> ERROR: googletest-1.10.0-r0 do_fetch: Fetcher failure:
->> Unable to find revision 703bd9caab50b139428cea1aaff9974ebee5742e
->> in branch master even from upstream
->> ERROR: googletest-1.10.0-r0 do_fetch: Bitbake Fetcher Error:
->> FetchError('Unable to fetch URL from any source.',
->> 'git://github.com/google/googletest.git;branch=3Dmaster;protocol=3Dhttps=
-')
->>
->> Signed-off-by: ashwin.naik <ashwin.naik@sasken.com>
->> ---
->>  meta-oe/recipes-test/googletest/googletest_git.bb | 2 +-
->>  1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/meta-oe/recipes-test/googletest/googletest_git.bb
->> b/meta-oe/recipes-test/googletest/googletest_git.bb
->> index 898f23faf..35fe1bed0 100644
->> --- a/meta-oe/recipes-test/googletest/googletest_git.bb
->> +++ b/meta-oe/recipes-test/googletest/googletest_git.bb
->> @@ -11,7 +11,7 @@ PROVIDES +=3D "gmock gtest"
->>
->>  S =3D "${WORKDIR}/git"
->>  SRCREV =3D "703bd9caab50b139428cea1aaff9974ebee5742e"
->> -SRC_URI =3D "git://
->> github.com/google/googletest.git;branch=3Dmaster;protocol=3Dhttps"
->> +SRC_URI =3D "git://
->> github.com/google/googletest.git;branch=3Dmain;protocol=3Dhttps"
->>
->>  inherit cmake
->>
->> --
->> 2.25.1
->>
->>
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->> Links: You receive all messages sent to this group.
->> View/Reply Online (#106546):
->> https://lists.openembedded.org/g/openembedded-devel/message/106546
->> Mute This Topic: https://lists.openembedded.org/mt/102505851/3617156
->> Group Owner: openembedded-devel+owner@lists.openembedded.org
->> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
->> martin.jansa@gmail.com]
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->>
->>
-
---000000000000a89b070609cc3ae2
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">And even dunfell already has it since 6 months ago:<div><a=
- href=3D"https://git.openembedded.org/meta-openembedded/commit/?id=3D29e3a9=
-18ac80f98f3bad70eec50a9ada1a47fc41">https://git.openembedded.org/meta-opene=
-mbedded/commit/?id=3D29e3a918ac80f98f3bad70eec50a9ada1a47fc41</a><br></div>=
-<div><br></div><div>so maybe you&#39;re on some even older release which is=
-n&#39;t supported anymore.</div></div><br><div class=3D"gmail_quote"><div d=
-ir=3D"ltr" class=3D"gmail_attr">On Fri, Nov 10, 2023 at 2:22=E2=80=AFPM Mar=
-tin Jansa &lt;<a href=3D"mailto:martin.jansa@gmail.com">martin.jansa@gmail.=
-com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"marg=
-in:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1e=
-x"><div dir=3D"ltr">This surely isn&#39;t for master where it was fixed 2 y=
-ears ago:<div><a href=3D"https://git.openembedded.org/meta-openembedded/com=
-mit/?id=3Deab5e822a91ad95cf0e7d2406ba3ab5304748713" target=3D"_blank">https=
-://git.openembedded.org/meta-openembedded/commit/?id=3Deab5e822a91ad95cf0e7=
-d2406ba3ab5304748713</a><br></div><div><br></div><div>If you need this fix =
-in some other branch, then send the cherry-pick of this with correct e-mail=
- subject indicating the branch.</div></div><br><div class=3D"gmail_quote"><=
-div dir=3D"ltr" class=3D"gmail_attr">On Fri, Nov 10, 2023 at 2:05=E2=80=AFP=
-M ashwin.naik via <a href=3D"http://lists.openembedded.org" target=3D"_blan=
-k">lists.openembedded.org</a> &lt;ashwin.naik=3D<a href=3D"mailto:sasken.co=
-m@lists.openembedded.org" target=3D"_blank">sasken.com@lists.openembedded.o=
-rg</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margi=
-n:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex=
-"><div>From 23c3517e62158e390617686abd1a5525d27fa223 Mon Sep 17 00:00:00 20=
-01</div>
-<div>From: &quot;ashwin.naik&quot; &lt;<a href=3D"mailto:ashwin.naik@sasken=
-.com" target=3D"_blank">ashwin.naik@sasken.com</a>&gt;</div>
-<div>Date: Fri, 3 Nov 2023 15:24:24 +0530</div>
-<div>Subject: [PATCH] SRC_URI master branch is deprecated and main is the n=
-ew</div>
-<div>=C2=A0master branch</div>
-<div>=C2=A0</div>
-<div>Below failure log is observed while using master branch to fetch.</div=
->
-<div>=C2=A0</div>
-<div>ERROR: googletest-1.10.0-r0 do_fetch: Fetcher failure:</div>
-<div>Unable to find revision 703bd9caab50b139428cea1aaff9974ebee5742e</div>
-<div>in branch master even from upstream</div>
-<div>ERROR: googletest-1.10.0-r0 do_fetch: Bitbake Fetcher Error:</div>
-<div>FetchError(&#39;Unable to fetch URL from any source.&#39;,</div>
-<div>&#39;git://<a href=3D"http://github.com/google/googletest.git;branch=
-=3Dmaster;protocol=3Dhttps" target=3D"_blank">github.com/google/googletest.=
-git;branch=3Dmaster;protocol=3Dhttps</a>&#39;)</div>
-<div>=C2=A0</div>
-<div>Signed-off-by: ashwin.naik &lt;<a href=3D"mailto:ashwin.naik@sasken.co=
-m" target=3D"_blank">ashwin.naik@sasken.com</a>&gt;</div>
-<div>---</div>
-<div>=C2=A0meta-oe/recipes-test/googletest/<a href=3D"http://googletest_git=
-.bb" target=3D"_blank">googletest_git.bb</a> | 2 +-</div>
-<div>=C2=A01 file changed, 1 insertion(+), 1 deletion(-)</div>
-<div>=C2=A0</div>
-<div>diff --git a/meta-oe/recipes-test/googletest/<a href=3D"http://googlet=
-est_git.bb" target=3D"_blank">googletest_git.bb</a> b/meta-oe/recipes-test/=
-googletest/<a href=3D"http://googletest_git.bb" target=3D"_blank">googletes=
-t_git.bb</a></div>
-<div>index 898f23faf..35fe1bed0 100644</div>
-<div>--- a/meta-oe/recipes-test/googletest/<a href=3D"http://googletest_git=
-.bb" target=3D"_blank">googletest_git.bb</a></div>
-<div>+++ b/meta-oe/recipes-test/googletest/<a href=3D"http://googletest_git=
-.bb" target=3D"_blank">googletest_git.bb</a></div>
-<div>@@ -11,7 +11,7 @@ PROVIDES +=3D &quot;gmock gtest&quot;</div>
-<div>=C2=A0</div>
-<div>=C2=A0S =3D &quot;${WORKDIR}/git&quot;</div>
-<div>=C2=A0SRCREV =3D &quot;703bd9caab50b139428cea1aaff9974ebee5742e&quot;<=
-/div>
-<div>-SRC_URI =3D &quot;git://<a href=3D"http://github.com/google/googletes=
-t.git;branch=3Dmaster;protocol=3Dhttps" target=3D"_blank">github.com/google=
-/googletest.git;branch=3Dmaster;protocol=3Dhttps</a>&quot;</div>
-<div>+SRC_URI =3D &quot;git://<a href=3D"http://github.com/google/googletes=
-t.git;branch=3Dmain;protocol=3Dhttps" target=3D"_blank">github.com/google/g=
-oogletest.git;branch=3Dmain;protocol=3Dhttps</a>&quot;</div>
-<div>=C2=A0</div>
-<div>=C2=A0inherit cmake</div>
-<div>=C2=A0</div>
-<div>--=C2=A0</div>
-<div>2.25.1</div>
-<div>=C2=A0</div>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#106546): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/106546" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/106546</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/102505851/361=
-7156" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/102505851/3617156</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:martin.jansa@gmail.com" =
-target=3D"_blank">martin.jansa@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div>
-</blockquote></div>
-
---000000000000a89b070609cc3ae2--
 
