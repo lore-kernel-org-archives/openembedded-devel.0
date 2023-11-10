@@ -1,380 +1,68 @@
-Return-Path: <uvv.mail@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D8148C4167D
-	for <webhook@archiver.kernel.org>; Fri, 10 Nov 2023 06:40:12 +0000 (UTC)
-Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
- by mx.groups.io with SMTP id smtpd.web11.22821.1699598406253759113
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D4D07C4332F
+	for <webhook@archiver.kernel.org>; Fri, 10 Nov 2023 06:51:22 +0000 (UTC)
+Received: from mailout06.t-online.de (mailout06.t-online.de [194.25.134.19])
+ by mx.groups.io with SMTP id smtpd.web10.22645.1699599072409678232
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 Nov 2023 22:40:06 -0800
+ Thu, 09 Nov 2023 22:51:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=agJstJq0;
- spf=pass (domain: gmail.com, ip: 209.85.218.50, mailfrom: uvv.mail@gmail.com)
-Received: by mail-ej1-f50.google.com with SMTP id a640c23a62f3a-9e623356e59so49002666b.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 09 Nov 2023 22:40:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699598405; x=1700203205; darn=lists.openembedded.org;
-        h=in-reply-to:from:references:cc:to:content-language:subject
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=cALikKZjw8XQFNrjggge2D1em3fcbBQORxF2yY5e9jk=;
-        b=agJstJq0PATcrTfkU1dodJhaTmiL2OeKB5eTnTh3nRD7/4Ss2VyKAuHrYAx2xUf50F
-         r5aA+VaXgUz3/kAKBJNM9FljVxtDGgkzYFLhixXETxwXAHdYdPGGiW+dNx4G/dqHwBIk
-         pwpaUYCkInnHXYD+wlJofbsWobpYl+8tThvIXReUOXP6N/r80NGyMZ5yGvX8tWzuBTeF
-         Vplk6D1Z114KI90KVdFc1b4d9ktJ626uC3pKIgiF93ZH/QgGWVvdeBlmbEvCrpwbKaPB
-         a7Gp3bT3FYBfuj3aZdXVs6T8TJceRivr48+x6zbFIq65hPUWW3uuLu8LyU6F4xuBsZiV
-         zIjA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699598405; x=1700203205;
-        h=in-reply-to:from:references:cc:to:content-language:subject
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=cALikKZjw8XQFNrjggge2D1em3fcbBQORxF2yY5e9jk=;
-        b=Io4u/1G1OSr4AakI5o6JipAcfFqfV9JCsf4pXrQRIaRz2a82W/qugzmP2NUNgzc/Hq
-         S57989mrfj/Oc1X4UHzIxZKKIvDqHaMwPc4vYLe6Sef2kdvC8tAhG67Ibo4wNK02+szh
-         yeMnPzv0Qanm+KoRWcUiMF+bIn/hWTNPn7QJuNg0Di+Ak0VWUDc8XW7xdJENLLtwvUAT
-         aOJUf3nASQnX0RB13B+jYCrVnkdFKAB3Fq110kw6jmk9YBOQvm1OPZIEvXNrs2cj7uGX
-         gauxkJmN1HOh0rTz1tSwqTKQg3NW8yS3kJuQWwiqbsUhfHFAq32gjYr/ymv/NU7sqWpH
-         REFw==
-X-Gm-Message-State: AOJu0YwdsPz8pihI52rHIQrXDc00KnmlL+YAPXI5Spyd0/MGQFYJuXGY
-	BN8lpPRPIGKU2DKx/a6ohl8=
-X-Google-Smtp-Source: AGHT+IGZcTufVFIAIyknEtZBWvLFCRw6rM0pglY8UmkquUDDyzhKeq/0f2B8KmUOlKIoNnxe1OD6DQ==
-X-Received: by 2002:a17:907:dac:b0:9d5:7c41:ccf6 with SMTP id go44-20020a1709070dac00b009d57c41ccf6mr6974980ejc.26.1699598404419;
-        Thu, 09 Nov 2023 22:40:04 -0800 (PST)
-Received: from [10.134.50.201] ([89.249.73.142])
-        by smtp.gmail.com with ESMTPSA id h16-20020a170906719000b009adce1c97ccsm3487822ejk.53.2023.11.09.22.40.03
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 09 Nov 2023 22:40:04 -0800 (PST)
-Content-Type: multipart/alternative;
- boundary="------------E7x2rV6LrVgG430MD1Jz94ya"
-Message-ID: <1d41118c-a5f9-45c0-8c77-236815e22f3f@gmail.com>
-Date: Fri, 10 Nov 2023 07:40:03 +0100
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.19, mailfrom: f_l_k@t-online.de)
+Received: from fwd74.aul.t-online.de (fwd74.aul.t-online.de [10.223.144.100])
+	by mailout06.t-online.de (Postfix) with SMTP id 03226188C1
+	for <openembedded-devel@lists.openembedded.org>; Fri, 10 Nov 2023 07:51:10 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.163.32.113]) by fwd74.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1r1LMD-3847zV0; Fri, 10 Nov 2023 07:51:09 +0100
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-multimedia][PATCH] gssdp: Fix build with api-documentation enabled
+Date: Fri, 10 Nov 2023 07:51:32 +0100
+Message-ID: <20231110065132.393404-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [PATCH] Revert "protobuf: stage protoc binary to sysroot"
-Content-Language: en-US
-To: =?UTF-8?B?Q2zDqW1lbnQgUMOpcm9u?= <peron.clem@gmail.com>
-Cc: Samuli Piippo <samuli.piippo@gmail.com>,
- Martin Jansa <martin.jansa@gmail.com>, Khem Raj <raj.khem@gmail.com>,
- Ross Burton <ross.burton@arm.com>,
- openembedded-devel <openembedded-devel@lists.openembedded.org>
-References: <20230930173003.3210-1-peron.clem@gmail.com>
- <178A5713556C6E82.9230@lists.openembedded.org>
- <9714b98c-66b5-48bc-a00a-69e1634b0307@gmail.com>
- <CABXoSoVp=45ccqwzQXFF1y=fjcwCGjXh0HiuLBAE-UssDzf5Yg@mail.gmail.com>
- <babbfd71-062b-4ad5-9ef9-00acc52ae090@gmail.com>
- <CABXoSoVkvT7py3ZEtZc5gKYuLKzJYesWvi=65zRA5osHQa87tQ@mail.gmail.com>
- <CA+chaQc6XzqXXnFpaN_7f21GBpYvZx4Cv_fw3WwHwVOzGyBPTQ@mail.gmail.com>
- <5d7628e8-4fe7-4cfa-841f-879ebee31b6d@gmail.com>
- <CAJiuCccMuUTK=-6_hBONEdhWW8UzkOx3Ag=uJTbNyiwnqBNgXA@mail.gmail.com>
- <17910E05B5C0179B.11247@lists.openembedded.org>
- <CABXoSoVoDRWoSEsWTYHTjfuyGTNnhpBhEvf+V-bxq-70xL11iw@mail.gmail.com>
- <CAJiuCcf9TKKaiLGALDE0Cx5hE+i8c-gLM0Y=D9vfy8Hg71-rug@mail.gmail.com>
- <fb860d6d-99d4-494c-80d5-7023bb106782@gmail.com>
- <CABXoSoXoy4FhkTiuyOO9_idW_yjAU5xmW4D5p3e12XOzF5cLcg@mail.gmail.com>
- <23c9a4cc-87c0-4bb8-a1ce-0c920f442600@gmail.com>
- <CAJiuCcfkMzMFJhqfBKrwmxx5XA+3uRHipC-=8C2YOgwJe3Mzdw@mail.gmail.com>
- <17962EA21B11FB58.7380@lists.openembedded.org>
-From: Vyacheslav Yurkov <uvv.mail@gmail.com>
-In-Reply-To: <17962EA21B11FB58.7380@lists.openembedded.org>
+X-TOI-EXPURGATEID: 150726::1699599069-D7FFC93F-2DB8E90F/0/0 CLEAN NORMAL
+X-TOI-MSGID: f57e91d4-8042-44df-a66b-de1e7e644a1e
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 10 Nov 2023 06:40:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106525
+ <openembedded-devel@lists.openembedded.org>; Fri, 10 Nov 2023 06:51:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106526
 
-This is a multi-part message in MIME format.
---------------E7x2rV6LrVgG430MD1Jz94ya
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+This fixes:
+| Run-time dependency gi-docgen found: YES 2023.1
+| Program gi-docgen found: NO
+|
+| ../gssdp-1.4.0.1/doc/meson.build:4:11: ERROR: Program 'gi-docgen' not f=
+ound or
+not executable
 
-FTR, I suggested oe-core solution in the corresponding mailing list.
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ meta-multimedia/recipes-connectivity/gupnp/gssdp_1.4.0.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Slava
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.4.0.1.bb =
+b/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.4.0.1.bb
+index ad99bbffa..be1f865de 100644
+--- a/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.4.0.1.bb
++++ b/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.4.0.1.bb
+@@ -16,7 +16,7 @@ DEPENDS =3D " \
+     libsoup-2.4 \
+ "
+=20
+-inherit meson pkgconfig gobject-introspection vala gtk-doc features_chec=
+k
++inherit meson pkgconfig gobject-introspection vala gi-docgen features_ch=
+eck
+=20
+ SNIFFER =3D "${@bb.utils.contains("BBFILE_COLLECTIONS", "gnome-layer", "=
+sniffer", "", d)}"
+=20
+--=20
+2.42.0
 
-On 10.11.2023 07:19, Vyacheslav Yurkov via lists.openembedded.org wrote:
-> On 10.11.2023 02:23, Clément Péron wrote:
->> Hi Samuli,
->>
->> Le ven. 10 nov. 2023, 00:05, Vyacheslav Yurkov <uvv.mail@gmail.com> a 
->> écrit :
->>
->>     Thanks for the explanation, that was the missing piece for me to
->>     get an understanding of the problem :)
->>
->>     I think it's not only me, but also others, were confused by the
->>     fact that we are talking about native(sdk), but try to fix
->>     something with a non-native variable.
->>
->>     I've just gave it a try and have two suggestions how this can be
->>     addressed.
->>
->>     1. Recipe based solution:
->>     SYSROOT_DIRS:append:class-nativesdk = " $bindir}"
->>
->>
->> Is it not just missing something like
->>
->> DEPENDS:append:class-nativesdk= " protobuf-native "
->> Regards
->> Clement
->
-> This is already implicit by DEPENDS += "protobuf". Take a look at my 
-> second suggestion. You can see that ${bindir} is staged for native 
-> recipes, but not for nativesdk.
->
->>
->>     2. oe-core based solution:
->>     --- a/meta/classes-global/staging.bbclass
->>     +++ b/meta/classes-global/staging.bbclass
->>     @@ -26,6 +26,7 @@ SYSROOT_DIRS_NATIVE = " \
->>          ${localstatedir} \
->>      "
->>      SYSROOT_DIRS:append:class-native = " ${SYSROOT_DIRS_NATIVE}"
->>     +SYSROOT_DIRS:append:class-nativesdk = " ${SYSROOT_DIRS_NATIVE}"
->>      SYSROOT_DIRS:append:class-cross = " ${SYSROOT_DIRS_NATIVE}"
->>      SYSROOT_DIRS:append:class-crosssdk = " ${SYSROOT_DIRS_NATIVE}"
->>
->>     The second one will invalidate nativesdk sstate, but might cover
->>     not only grpc issue (I would assume gdbus-codegen or any other
->>     generator has the same issue when used for SDK build).
->>
->>     What are your thoughs?
->>
->>     Thanks,
->>     Slava
->>
->>     On 09.11.2023 14:35, Samuli Piippo wrote:
->>>     DEPENDS += "protobuf" is enough to have dependencies resolved.
->>>
->>>     Problem is that bitbake's do_populate_sysroot does not take
->>>     anything from bindir.
->>>     This leads to nativesdk-(qt)grpc's do_prepare_recipe_sysroot to
->>>     not get the protoc binary into the recipe_sysroot as expected by
->>>     CMake.
->>>
->>>     This can be fixed with SYSROOT_DIRS.
->>>
->>>     On Thu, 9 Nov 2023 at 12:19, Vyacheslav Yurkov
->>>     <uvv.mail@gmail.com> wrote:
->>>
->>>         Hi Clément,
->>>         No, the issue is when you just build nativesdk recipe (we
->>>         are not at the stage to use the SDK yet).
->>>
->>>         And that was exactly my question how to propagate the
->>>         dependency correctly for nativesdk build.
->>>
->>>         Regards,
->>>         Slava
->>>
->>
-
---------------E7x2rV6LrVgG430MD1Jz94ya
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <div class="moz-cite-prefix">FTR, I suggested oe-core solution in
-      the corresponding mailing list.<br>
-      <br>
-      Slava<br>
-      <br>
-      On 10.11.2023 07:19, Vyacheslav Yurkov via lists.openembedded.org
-      wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:17962EA21B11FB58.7380@lists.openembedded.org">
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <div class="moz-cite-prefix">On 10.11.2023 02:23, Clément Péron
-        wrote:<br>
-      </div>
-      <blockquote type="cite"
-cite="mid:CAJiuCcfkMzMFJhqfBKrwmxx5XA+3uRHipC-=8C2YOgwJe3Mzdw@mail.gmail.com">
-        <meta http-equiv="content-type"
-          content="text/html; charset=UTF-8">
-        <div dir="auto">
-          <div>Hi Samuli,<br>
-            <br>
-            <div class="gmail_quote">
-              <div dir="ltr" class="gmail_attr">Le ven. 10 nov. 2023,
-                00:05, Vyacheslav Yurkov &lt;<a
-                  href="mailto:uvv.mail@gmail.com"
-                  moz-do-not-send="true" class="moz-txt-link-freetext">uvv.mail@gmail.com</a>&gt;
-                a écrit :<br>
-              </div>
-              <blockquote class="gmail_quote"
-style="margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
-                <div>
-                  <div>Thanks for the explanation, that was the missing
-                    piece for me to get an understanding of the problem
-                    :)<br>
-                    <br>
-                    I think it's not only me, but also others, were
-                    confused by the fact that we are talking about
-                    native(sdk), but try to fix something with a
-                    non-native variable.<br>
-                    <br>
-                    I've just gave it a try and have two suggestions how
-                    this can be addressed.<br>
-                    <br>
-                    1. Recipe based solution:<br>
-                    SYSROOT_DIRS:append:class-nativesdk = " $bindir}"<br>
-                  </div>
-                </div>
-              </blockquote>
-            </div>
-          </div>
-          <div dir="auto"><br>
-          </div>
-          <div dir="auto">Is it not just missing something like</div>
-          <div dir="auto"><br>
-          </div>
-          <div dir="auto">
-            <pre
-style="padding:0px;margin-top:0px;margin-bottom:0px;font-size:13.3333px"><span
-style="color:rgb(51,102,153);background-color:rgb(255,255,255)">DEPENDS:append:class</span><font
-            color="#000000"><span
-            style="background-color:rgb(255,255,255)">-</span></font><span
-style="color:rgb(51,102,153);background-color:rgb(255,255,255)">nativesdk</span><font
-            color="#000000"><span
-            style="background-color:rgb(255,255,255)"> = </span></font><span
-style="color:rgb(221,34,0);background-color:rgb(255,240,240)">" protobuf-native "</span><font
-            color="#000000"><span
-            style="background-color:rgb(255,255,255)"> </span></font></pre>
-            <pre
-style="padding:0px;margin-top:0px;margin-bottom:0px;font-size:13.3333px"><font
-            color="#000000"><span
-            style="background-color:rgb(255,255,255)">
-</span></font></pre>
-            <pre
-style="padding:0px;margin-top:0px;margin-bottom:0px;font-size:13.3333px"><font
-            color="#000000"><span
-            style="background-color:rgb(255,255,255)">Regards</span></font></pre>
-            <pre
-style="padding:0px;margin-top:0px;margin-bottom:0px;font-size:13.3333px"><font
-            color="#000000"><span
-            style="background-color:rgb(255,255,255)">Clement </span></font></pre>
-            <pre
-style="padding:0px;margin-top:0px;margin-bottom:0px;font-size:13.3333px"><font
-            color="#000000"><span
-            style="background-color:rgb(255,255,255)">
-</span></font></pre>
-          </div>
-        </div>
-      </blockquote>
-      <br>
-      This is already implicit by DEPENDS += "protobuf". Take a look at
-      my second suggestion. You can see that ${bindir} is staged for
-      native recipes, but not for nativesdk.<br>
-      <br>
-      <blockquote type="cite"
-cite="mid:CAJiuCcfkMzMFJhqfBKrwmxx5XA+3uRHipC-=8C2YOgwJe3Mzdw@mail.gmail.com">
-        <div dir="auto">
-          <div dir="auto">
-            <pre
-style="padding:0px;margin-top:0px;margin-bottom:0px;font-size:13.3333px"><font
-            color="#000000"><span
-            style="background-color:rgb(255,255,255)">
-</span></font></pre>
-          </div>
-          <div dir="auto">
-            <div class="gmail_quote">
-              <blockquote class="gmail_quote"
-style="margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
-                <div>
-                  <div> <br>
-                    2. oe-core based solution:<br>
-                    --- a/meta/classes-global/staging.bbclass<br>
-                    +++ b/meta/classes-global/staging.bbclass<br>
-                    @@ -26,6 +26,7 @@ SYSROOT_DIRS_NATIVE = " \<br>
-                         ${localstatedir} \<br>
-                     "<br>
-                     SYSROOT_DIRS:append:class-native = "
-                    ${SYSROOT_DIRS_NATIVE}"<br>
-                    +SYSROOT_DIRS:append:class-nativesdk = "
-                    ${SYSROOT_DIRS_NATIVE}"<br>
-                     SYSROOT_DIRS:append:class-cross = "
-                    ${SYSROOT_DIRS_NATIVE}"<br>
-                     SYSROOT_DIRS:append:class-crosssdk = "
-                    ${SYSROOT_DIRS_NATIVE}"<br>
-                    <br>
-                    The second one will invalidate nativesdk sstate, but
-                    might cover not only grpc issue (I would assume
-                    gdbus-codegen or any other generator has the same
-                    issue when used for SDK build).<br>
-                    <br>
-                    What are your thoughs?<br>
-                    <br>
-                    Thanks,<br>
-                    Slava<br>
-                    <br>
-                    On 09.11.2023 14:35, Samuli Piippo wrote:<br>
-                  </div>
-                  <blockquote type="cite">
-                    <div dir="ltr">
-                      <div>DEPENDS += "protobuf" is enough to have
-                        dependencies resolved.</div>
-                      <div><br>
-                      </div>
-                      <div>Problem is that bitbake's do_populate_sysroot
-                        does not take anything from bindir.</div>
-                      <div>This leads to nativesdk-(qt)grpc's
-                        do_prepare_recipe_sysroot to not get the protoc
-                        binary into the recipe_sysroot as expected by
-                        CMake.<br>
-                      </div>
-                      <div><br>
-                      </div>
-                      <div>This can be fixed with SYSROOT_DIRS.<br>
-                      </div>
-                    </div>
-                    <br>
-                    <div class="gmail_quote">
-                      <div dir="ltr" class="gmail_attr">On Thu, 9 Nov
-                        2023 at 12:19, Vyacheslav Yurkov &lt;<a
-                          href="mailto:uvv.mail@gmail.com"
-                          target="_blank" rel="noreferrer"
-                          moz-do-not-send="true"
-                          class="moz-txt-link-freetext">uvv.mail@gmail.com</a>&gt;
-                        wrote:<br>
-                      </div>
-                      <blockquote class="gmail_quote"
-style="margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-                        <div>
-                          <div>Hi <span>Clément,<br>
-                              No, the issue is when you just build
-                              nativesdk recipe (we are not at the stage
-                              to use the SDK yet).<br>
-                              <br>
-                              And that was exactly my question how to
-                              propagate the dependency correctly for
-                              nativesdk build.<br>
-                              <br>
-                              Regards,<br>
-                              Slava<br>
-                            </span></div>
-                        </div>
-                      </blockquote>
-                    </div>
-                  </blockquote>
-                  <br>
-                </div>
-              </blockquote>
-            </div>
-          </div>
-        </div>
-      </blockquote>
-    </blockquote>
-    <br>
-  </body>
-</html>
-
---------------E7x2rV6LrVgG430MD1Jz94ya--
 
