@@ -2,177 +2,248 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A1B77C4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AE9D0C4167B
 	for <webhook@archiver.kernel.org>; Fri, 10 Nov 2023 11:46:24 +0000 (UTC)
 Received: from mailout09.t-online.de (mailout09.t-online.de [194.25.134.84])
- by mx.groups.io with SMTP id smtpd.web11.25591.1699616779728558213
+ by mx.groups.io with SMTP id smtpd.web10.25363.1699616780680322521
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 10 Nov 2023 03:46:20 -0800
+ Fri, 10 Nov 2023 03:46:21 -0800
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.84, mailfrom: f_l_k@t-online.de)
 Received: from fwd89.aul.t-online.de (fwd89.aul.t-online.de [10.223.144.115])
-	by mailout09.t-online.de (Postfix) with SMTP id 432C15A94
+	by mailout09.t-online.de (Postfix) with SMTP id 30223617AC
 	for <openembedded-devel@lists.openembedded.org>; Fri, 10 Nov 2023 12:45:32 +0100 (CET)
 Received: from intel-corei7-64.fritz.box ([84.163.32.113]) by fwd89.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1r1Px4-21NTYw0; Fri, 10 Nov 2023 12:45:30 +0100
+	esmtp id 1r1Px1-21NTYv0; Fri, 10 Nov 2023 12:45:27 +0100
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH 2/4] Gupnp-tools upgrade 0.10.2 -> 0.12.1
-Date: Fri, 10 Nov 2023 12:45:44 +0100
-Message-ID: <20231110114546.306710-2-f_l_k@t-online.de>
+Subject: [meta-multimedia][PATCH 1/4] gupnp: Upgrade 0.10.2 -> 0.12.1
+Date: Fri, 10 Nov 2023 12:45:43 +0100
+Message-ID: <20231110114546.306710-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20231110114546.306710-1-f_l_k@t-online.de>
-References: <20231110114546.306710-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1699616730-4A220820-E82F4BF0/0/0 CLEAN NORMAL
-X-TOI-MSGID: 1f1d4539-43cc-4b0b-b417-a467a52b253c
+X-TOI-EXPURGATEID: 150726::1699616727-317F9820-B921A49B/0/0 CLEAN NORMAL
+X-TOI-MSGID: f65fcf23-fde5-409c-b2d7-95fb88f477b7
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 10 Nov 2023 11:46:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106540
-
-- switch to soup-3.0
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106541
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../0001-build-Fix-wrap-file-syntax.patch     | 56 -------------------
- .../gupnp/gupnp-tools_0.10.2.bb               | 17 ------
- .../gupnp/gupnp-tools_0.12.1.bb               | 19 +++++++
- 3 files changed, 19 insertions(+), 73 deletions(-)
- delete mode 100644 meta-multimedia/recipes-connectivity/gupnp/gupnp-tool=
-s/0001-build-Fix-wrap-file-syntax.patch
- delete mode 100644 meta-multimedia/recipes-connectivity/gupnp/gupnp-tool=
-s_0.10.2.bb
- create mode 100644 meta-multimedia/recipes-connectivity/gupnp/gupnp-tool=
-s_0.12.1.bb
+ .../0001-all-Drop-xmlRecoverMemory.patch      | 107 ------------------
+ ...roperly-spell-provide-in-.wrap-files.patch |  25 ----
+ .../gupnp/{gupnp_1.4.1.bb =3D> gupnp_1.6.6.bb}  |  10 +-
+ 3 files changed, 3 insertions(+), 139 deletions(-)
+ delete mode 100644 meta-multimedia/recipes-connectivity/gupnp/gupnp/0001=
+-all-Drop-xmlRecoverMemory.patch
+ delete mode 100644 meta-multimedia/recipes-connectivity/gupnp/gupnp/0001=
+-build-properly-spell-provide-in-.wrap-files.patch
+ rename meta-multimedia/recipes-connectivity/gupnp/{gupnp_1.4.1.bb =3D> g=
+upnp_1.6.6.bb} (68%)
 
-diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp-tools/0001-=
-build-Fix-wrap-file-syntax.patch b/meta-multimedia/recipes-connectivity/g=
-upnp/gupnp-tools/0001-build-Fix-wrap-file-syntax.patch
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp/0001-all-Dr=
+op-xmlRecoverMemory.patch b/meta-multimedia/recipes-connectivity/gupnp/gu=
+pnp/0001-all-Drop-xmlRecoverMemory.patch
 deleted file mode 100644
-index 5c13ce0bd..000000000
---- a/meta-multimedia/recipes-connectivity/gupnp/gupnp-tools/0001-build-F=
-ix-wrap-file-syntax.patch
+index a3941f345..000000000
+--- a/meta-multimedia/recipes-connectivity/gupnp/gupnp/0001-all-Drop-xmlR=
+ecoverMemory.patch
 +++ /dev/null
-@@ -1,56 +0,0 @@
--From 4c86f814fbe17eb5774055d69102408bbfc1cd63 Mon Sep 17 00:00:00 2001
+@@ -1,107 +0,0 @@
+-From 46f13d9929c81ec2340a1a5d48f596b1892c5a81 Mon Sep 17 00:00:00 2001
 -From: Jens Georg <mail@jensge.org>
--Date: Sun, 9 Jul 2023 21:47:48 +0200
--Subject: [PATCH] build: Fix wrap file syntax
+-Date: Thu, 4 May 2023 19:14:29 +0200
+-Subject: [PATCH] all: Drop xmlRecoverMemory
 -
--No idea why it worked in the first place
+-use xmlReadMemory, also use NONET flat
 -
--Fixes #26
+-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+-Upstream-Status: Backport [https://github.com/GNOME/gupnp/commit/80e6899=
+5b745a5900eaaa1d0c424d3a9d354e42d]
+----
+- libgupnp/gupnp-control-point.c        | 7 +++++--
+- libgupnp/gupnp-service-info.c         | 7 +++++--
+- libgupnp/gupnp-service-proxy-action.c | 7 +++++--
+- libgupnp/gupnp-service-proxy.c        | 7 +++++--
+- libgupnp/gupnp-service.c              | 7 +++++--
+- 5 files changed, 25 insertions(+), 10 deletions(-)
+-
+-diff --git a/libgupnp/gupnp-control-point.c b/libgupnp/gupnp-control-poi=
+nt.c
+-index dc04732..99ebda5 100644
+---- a/libgupnp/gupnp-control-point.c
+-+++ b/libgupnp/gupnp-control-point.c
+-@@ -608,8 +608,11 @@ got_description_url (SoupSession           *session=
+,
+-                 xmlDoc *xml_doc;
+-=20
+-                 /* Parse response */
+--                xml_doc =3D xmlRecoverMemory (msg->response_body->data,
+--                                            msg->response_body->length)=
+;
+-+                xml_doc =3D xmlReadMemory (msg->response_body->data,
+-+                                         msg->response_body->length,
+-+                                         NULL,
+-+                                         NULL,
+-+                                         XML_PARSE_NONET | XML_PARSE_RE=
+COVER);
+-                 if (xml_doc) {
+-                         doc =3D gupnp_xml_doc_new (xml_doc);
+-=20
+-diff --git a/libgupnp/gupnp-service-info.c b/libgupnp/gupnp-service-info=
+.c
+-index 9a9f4de..d468801 100644
+---- a/libgupnp/gupnp-service-info.c
+-+++ b/libgupnp/gupnp-service-info.c
+-@@ -592,8 +592,11 @@ got_scpd_url (G_GNUC_UNUSED SoupSession *session,
+-         if (SOUP_STATUS_IS_SUCCESSFUL (msg->status_code)) {
+-                 xmlDoc *scpd;
+-=20
+--                scpd =3D xmlRecoverMemory (msg->response_body->data,
+--                                         msg->response_body->length);
+-+                scpd =3D xmlReadMemory (msg->response_body->data,
+-+                                      msg->response_body->length,
+-+                                      NULL,
+-+                                      NULL,
+-+                                      XML_PARSE_NONET | XML_PARSE_RECOV=
+ER);
+-                 if (scpd) {
+-                         introspection =3D gupnp_service_introspection_n=
+ew (scpd);
+-=20
+-diff --git a/libgupnp/gupnp-service-proxy-action.c b/libgupnp/gupnp-serv=
+ice-proxy-action.c
+-index 4d9336c..ef8a808 100644
+---- a/libgupnp/gupnp-service-proxy-action.c
+-+++ b/libgupnp/gupnp-service-proxy-action.c
+-@@ -86,8 +86,11 @@ check_action_response (G_GNUC_UNUSED GUPnPServiceProx=
+y *proxy,
+-         }
+-=20
+-         /* Parse response */
+--        response =3D xmlRecoverMemory (action->msg->response_body->data=
+,
+--                                     action->msg->response_body->length=
+);
+-+        response =3D xmlReadMemory (action->msg->response_body->data,
+-+                                  action->msg->response_body->length,
+-+                                  NULL,
+-+                                  NULL,
+-+                                  XML_PARSE_NONET | XML_PARSE_RECOVER);
+-=20
+-         if (!response) {
+-                 if (action->msg->status_code =3D=3D SOUP_STATUS_OK) {
+-diff --git a/libgupnp/gupnp-service-proxy.c b/libgupnp/gupnp-service-pro=
+xy.c
+-index 25d5ef6..af2fd46 100644
+---- a/libgupnp/gupnp-service-proxy.c
+-+++ b/libgupnp/gupnp-service-proxy.c
+-@@ -1560,8 +1560,11 @@ server_handler (G_GNUC_UNUSED SoupServer        *=
+soup_server,
+-         }
+-=20
+-         /* Parse the actual XML message content */
+--        doc =3D xmlRecoverMemory (msg->request_body->data,
+--                                msg->request_body->length);
+-+        doc =3D xmlReadMemory (msg->request_body->data,
+-+                             msg->request_body->length,
+-+                             NULL,
+-+                             NULL,
+-+                             XML_PARSE_NONET | XML_PARSE_RECOVER);
+-         if (doc =3D=3D NULL) {
+-                 /* Failed */
+-                 g_warning ("Failed to parse NOTIFY message body");
+-diff --git a/libgupnp/gupnp-service.c b/libgupnp/gupnp-service.c
+-index 67b3d43..0ebfb26 100644
+---- a/libgupnp/gupnp-service.c
+-+++ b/libgupnp/gupnp-service.c
+-@@ -985,8 +985,11 @@ control_server_handler (SoupServer                 =
+     *server,
+-                 *end =3D '\0';
+-=20
+-         /* Parse action_node */
+--        doc =3D xmlRecoverMemory (msg->request_body->data,
+--                                msg->request_body->length);
+-+        doc =3D xmlReadMemory (msg->request_body->data,
+-+                             msg->request_body->length,
+-+                             NULL,
+-+                             NULL,
+-+                             XML_PARSE_NONET | XML_PARSE_RECOVER);
+-         if (doc =3D=3D NULL) {
+-                 soup_message_set_status (msg, SOUP_STATUS_BAD_REQUEST);
+-=20
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp/0001-build-=
+properly-spell-provide-in-.wrap-files.patch b/meta-multimedia/recipes-con=
+nectivity/gupnp/gupnp/0001-build-properly-spell-provide-in-.wrap-files.pa=
+tch
+deleted file mode 100644
+index 66f07094c..000000000
+--- a/meta-multimedia/recipes-connectivity/gupnp/gupnp/0001-build-properl=
+y-spell-provide-in-.wrap-files.patch
++++ /dev/null
+@@ -1,25 +0,0 @@
+-From 7a4515a356a3d5eb2af1f602c77a42a544e71efa Mon Sep 17 00:00:00 2001
+-From: Jan Beich <jbeich@FreeBSD.org>
+-Date: Sun, 9 Jul 2023 03:30:47 +0000
+-Subject: [PATCH] build: properly spell [provide] in *.wrap files
+-
+-meson.build:1:0: ERROR: Unexpected "[provides]" section, did you mean "[=
+provide]"?
 -
 -Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
--Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gupnp-tools/-/=
-commit/1372f9ebe45180d58cefb6c0475fafe77de37ef2]
+-Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gupnp/-/commit=
+/884639bd29323cbb8fbd36bc69d08097a2ae2cd1]
 ----
-- subprojects/gssdp-1.2.wrap    | 4 ++--
-- subprojects/gupnp-1.2.wrap    | 4 ++--
-- subprojects/gupnp-av-1.0.wrap | 4 ++--
-- 3 files changed, 6 insertions(+), 6 deletions(-)
+- subprojects/gssdp-1.2.wrap | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
 -
 -diff --git a/subprojects/gssdp-1.2.wrap b/subprojects/gssdp-1.2.wrap
--index 34d9b0b..f78d2fa 100644
+-index 469c75d..466b83b 100644
 ---- a/subprojects/gssdp-1.2.wrap
 -+++ b/subprojects/gssdp-1.2.wrap
 -@@ -3,6 +3,6 @@ url =3D https://gitlab.gnome.org/GNOME/gssdp.git
-- revision =3D master
+- revision =3D gssdp-1.4
 - depth =3D 1
 - =20
 --[provides]
---dependency_name =3D gssdp-1.2
 -+[provide]
--+dependency_names =3D gssdp-1.2
+- dependency_name =3D gssdp-1.2
 -=20
--diff --git a/subprojects/gupnp-1.2.wrap b/subprojects/gupnp-1.2.wrap
--index c345910..f92c055 100644
----- a/subprojects/gupnp-1.2.wrap
--+++ b/subprojects/gupnp-1.2.wrap
--@@ -3,6 +3,6 @@ url =3D https://gitlab.gnome.org/GNOME/gupnp.git
-- revision =3D master
-- depth =3D 1
-- =20
---[provides]
---dependency_name =3D gupnp-1.2
--+[provide]
--+dependency_names =3D gupnp-1.2
--=20
--diff --git a/subprojects/gupnp-av-1.0.wrap b/subprojects/gupnp-av-1.0.wr=
-ap
--index 967e6d3..8c3b490 100644
----- a/subprojects/gupnp-av-1.0.wrap
--+++ b/subprojects/gupnp-av-1.0.wrap
--@@ -3,6 +3,6 @@ url =3D https://gitlab.gnome.org/GNOME/gupnp-av.git
-- revision =3D master
-- depth =3D 1
-- =20
---[provides]
---dependency_name =3D gupnp-av-1.0
--+[provide]
--+dependency_names =3D gupnp-av-1.0
--=20
-diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp-tools_0.10.=
-2.bb b/meta-multimedia/recipes-connectivity/gupnp/gupnp-tools_0.10.2.bb
-deleted file mode 100644
-index 9731ede27..000000000
---- a/meta-multimedia/recipes-connectivity/gupnp/gupnp-tools_0.10.2.bb
-+++ /dev/null
-@@ -1,17 +0,0 @@
--SUMMARY =3D "Tools for GUPnP"
--LICENSE =3D "GPL-2.0-or-later"
--LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954499f7abaabaa882=
-bbe \
--                    file://src/network-light/main.c;beginline=3D1;endlin=
-e=3D21;md5=3D2c39b3a000495dabd4932f231c7efed8"
--
--DEPENDS =3D "gupnp gupnp-av gtk+3 glib-2.0-native intltool-native"
--
--inherit features_check meson pkgconfig gettext gtk-icon-cache
--
--REQUIRED_DISTRO_FEATURES =3D "x11"
--
--SRC_URI =3D "http://download.gnome.org/sources/${BPN}/0.10/${BPN}-${PV}.=
-tar.xz \
--    file://0001-build-Fix-wrap-file-syntax.patch \
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.4.1.bb b/=
+meta-multimedia/recipes-connectivity/gupnp/gupnp_1.6.6.bb
+similarity index 68%
+rename from meta-multimedia/recipes-connectivity/gupnp/gupnp_1.4.1.bb
+rename to meta-multimedia/recipes-connectivity/gupnp/gupnp_1.6.6.bb
+index efeb66f28..c6738923a 100644
+--- a/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.4.1.bb
++++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.6.6.bb
+@@ -3,15 +3,11 @@ DESCRIPTION =3D "GUPnP is an elegant, object-oriented o=
+pen source framework for cr
+ LICENSE =3D "LGPL-2.1-or-later"
+ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd255951079008b3645=
+16c"
+=20
+-DEPENDS =3D "e2fsprogs gssdp libsoup-2.4 libxml2"
++DEPENDS =3D "e2fsprogs gssdp libsoup-3.0 libxml2"
+=20
+-inherit meson pkgconfig vala gobject-introspection
++inherit gnomebase pkgconfig vala gobject-introspection
+=20
+-SRC_URI =3D "${GNOME_MIRROR}/${BPN}/1.4/${BPN}-${PV}.tar.xz \
+-    file://0001-all-Drop-xmlRecoverMemory.patch \
+-    file://0001-build-properly-spell-provide-in-.wrap-files.patch \
 -"
--SRC_URI[sha256sum] =3D "6de49ef4b375b8a164f74b766168b1184e0d28196b6b07a4=
-f5341f08dfd85d6c"
--
--RRECOMMENDS:${PN} =3D "adwaita-icon-theme"
-diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp-tools_0.12.=
-1.bb b/meta-multimedia/recipes-connectivity/gupnp/gupnp-tools_0.12.1.bb
-new file mode 100644
-index 000000000..4f6ff3fb9
---- /dev/null
-+++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp-tools_0.12.1.bb
-@@ -0,0 +1,19 @@
-+SUMMARY =3D "Tools for GUPnP"
-+LICENSE =3D "GPL-2.0-or-later"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954499f7abaabaa882=
-bbe"
-+
-+DEPENDS =3D "gupnp gssdp  gtk+3 libsoup-3.0 libxml2 glib-2.0 "
-+
-+inherit gnomebase features_check pkgconfig gettext gtk-icon-cache
-+
-+ANY_OF_DISTRO_FEATURES =3D "x11 wayland"
-+
-+SRC_URI[archive.sha256sum] =3D "53cf93123f397e8f8f0b8e9e4364c86a7502a533=
-4f4c0be2e054a824478bd5ba"
-+
-+PACKAGECONFIG ??=3D "av-tools"
-+PACKAGECONFIG[av-tools] =3D "-Dav-tools=3Dtrue,-Dav-tools=3Dfalse,gupnp-=
-av"
-+PACKAGECONFIG[gtksourceview] =3D ",,gtksourceview4"
-+
-+CFLAGS +=3D "-Wno-deprecated-declarations"
-+
-+RRECOMMENDS:${PN} =3D "adwaita-icon-theme"
+-SRC_URI[sha256sum] =3D "899196b5e66f03b8e25f046a7a658cd2a6851becb83f2d55=
+345ab3281655dc0c"
++SRC_URI[archive.sha256sum] =3D "c9dc50e8c78b3792d1b0e6c5c5f52c93e9345d3d=
+ae2891e311a993a574f5a04f"
+=20
+ SYSROOT_PREPROCESS_FUNCS +=3D "gupnp_sysroot_preprocess"
+=20
 --=20
 2.42.0
 
