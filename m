@@ -1,88 +1,73 @@
-Return-Path: <alperyasinak1@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DCE0BC4332F
-	for <webhook@archiver.kernel.org>; Sat, 11 Nov 2023 19:46:26 +0000 (UTC)
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
- by mx.groups.io with SMTP id smtpd.web11.2713.1699731980397895342
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F3B9BC4167B
+	for <webhook@archiver.kernel.org>; Sat, 11 Nov 2023 20:12:26 +0000 (UTC)
+Received: from mailout09.t-online.de (mailout09.t-online.de [194.25.134.84])
+ by mx.groups.io with SMTP id smtpd.web10.3091.1699733540148973640
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 11 Nov 2023 11:46:20 -0800
+ Sat, 11 Nov 2023 12:12:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ENo0tkJV;
- spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-40891d38e3fso22645625e9.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 11 Nov 2023 11:46:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699731978; x=1700336778; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=vGcmXYSDMmo52lK3mxESfzWmP2cqAKmMjZ+Q6nddYpU=;
-        b=ENo0tkJV4Ay6o2wqQOt8mUJtFMKn6q6w7mtSYRRvueGFyw+cILQ5DkPPfM1tWCVwHg
-         9dPrLx4JhUiAjIdaU+M6KS5J52BjNn06SWDmAFiK5eqd08CX4zHHgifdS7dqG1QWVsP7
-         fJsg//SbFaE96cFb5buOuHCMKwSDpN5eVYuqbZ/cteR/eaGHlnUqlt8c2RNpSj7hZ2rc
-         MijDCPPQuQjl7aTLADagqQsWQgmqQQRwrQ/p9invxLGrhs/3GGKPTzTNHcSmyEFnJsVC
-         AFX8JH2LravRhYBFJs4qFYWjrz3r+oZSUMbk6+UpRn5HzZXL5ff2bszexeqWlWDB0WkO
-         MUDQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699731978; x=1700336778;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=vGcmXYSDMmo52lK3mxESfzWmP2cqAKmMjZ+Q6nddYpU=;
-        b=R8ZXov+Fh9HorE9aVnKoUolONTKa2TntePVY6cnm6TPVBSmFOBd8oxm5Sx26JHKwlq
-         /VPC61EFV/v4eRTOrihO0foT/g6SekgNAp06YfTxqwOrJiJYPRyRdxXC9bkYw8buT6H8
-         GlsfWZ2idqyd5o5/H96Q1Q+8m7FuAB6g1quVSBQ+ZBLkc2GENCWhMjTUQmiDKHOw9Iv2
-         tvI0Fj6V8saXdM3vswhl387niwKb5ymNDdCJHiv5CaLieG13LXEv1OytkFIq3SFgpoZW
-         beYrc4v9WerlBr4vhX17erNrevb0tMTYmXOaI32t4hycUvqoRfW75hf6s0CcerD/qn2e
-         cfbA==
-X-Gm-Message-State: AOJu0YzdGK69pQnDpn5CBm2VnjNc1aWNtP+hvxTxQCZF9yfC0oSRXZmx
-	A6aSX3L/yog6s4LrFlZPUjcsWIgr20jXng==
-X-Google-Smtp-Source: AGHT+IEqpUAzQne3H25FcFg3ah1hmoQ5nvK9DYDYwazc1CU9V9zEcOuKBR/CyJS//GA9dxto7HuG4A==
-X-Received: by 2002:a05:600c:1988:b0:401:c338:ab94 with SMTP id t8-20020a05600c198800b00401c338ab94mr2214620wmq.29.1699731977982;
-        Sat, 11 Nov 2023 11:46:17 -0800 (PST)
-Received: from localhost.localdomain ([176.33.65.238])
-        by smtp.gmail.com with ESMTPSA id fm14-20020a05600c0c0e00b003fee8793911sm2953447wmb.44.2023.11.11.11.46.17
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 11 Nov 2023 11:46:17 -0800 (PST)
-From: alperak <alperyasinak1@gmail.com>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.84, mailfrom: f_l_k@t-online.de)
+Received: from fwd72.aul.t-online.de (fwd72.aul.t-online.de [10.223.144.98])
+	by mailout09.t-online.de (Postfix) with SMTP id 80BFE6588E
+	for <openembedded-devel@lists.openembedded.org>; Sat, 11 Nov 2023 21:12:18 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.163.34.215]) by fwd72.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1r1uL2-1i7E9q0; Sat, 11 Nov 2023 21:12:16 +0100
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-python][PATCHv2] tuna: upgrade 0.18 -> 0.19
-Date: Sat, 11 Nov 2023 22:46:10 +0300
-Message-Id: <20231111194610.3426754-1-alperyasinak1@gmail.com>
-X-Mailer: git-send-email 2.25.1
+Subject: [meta-gnome][PATCH 2/2] vte9: Fix build with api-documentation enabled
+Date: Sat, 11 Nov 2023 21:12:24 +0100
+Message-ID: <20231111201224.879226-2-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.42.0
+In-Reply-To: <20231111201224.879226-1-f_l_k@t-online.de>
+References: <20231111201224.879226-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1699733536-3BFFC95D-CC703F16/0/0 CLEAN NORMAL
+X-TOI-MSGID: d04bb95d-3e25-4ce5-905d-75f679bb0a1a
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 11 Nov 2023 19:46:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106569
+ <openembedded-devel@lists.openembedded.org>; Sat, 11 Nov 2023 20:12:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106571
 
-Signed-off-by: alperak <alperyasinak1@gmail.com>
+This fixes:
+| Program gi-docgen found: NO
+|
+| ../vte-0.74.1/doc/reference/meson.build:18:11: ERROR: Program 'gi-docge=
+n' not
+found or not executable
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-python/recipes-extended/tuna/{tuna_git.bb => tuna_0.19.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-extended/tuna/{tuna_git.bb => tuna_0.19.bb} (91%)
+ meta-oe/recipes-gnome/vte9/vte9_0.74.1.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-python/recipes-extended/tuna/tuna_git.bb b/meta-python/recipes-extended/tuna/tuna_0.19.bb
-similarity index 91%
-rename from meta-python/recipes-extended/tuna/tuna_git.bb
-rename to meta-python/recipes-extended/tuna/tuna_0.19.bb
-index a49341240..ea0f15792 100644
---- a/meta-python/recipes-extended/tuna/tuna_git.bb
-+++ b/meta-python/recipes-extended/tuna/tuna_0.19.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0-only;md5=801f80980d171d
- 
- SRC_URI = "git://git.kernel.org/pub/scm/utils/tuna/tuna.git;branch=main"
- 
--SRCREV = "0681906e75e1c8166126bbfc2f3055e7507bfcb5"
-+SRCREV = "b972b8ce386c29bcbcd45029a617db3db9e5b6ca"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.25.1
+diff --git a/meta-oe/recipes-gnome/vte9/vte9_0.74.1.bb b/meta-oe/recipes-=
+gnome/vte9/vte9_0.74.1.bb
+index 30319ddd6..098c84ba5 100644
+--- a/meta-oe/recipes-gnome/vte9/vte9_0.74.1.bb
++++ b/meta-oe/recipes-gnome/vte9/vte9_0.74.1.bb
+@@ -11,10 +11,10 @@ S =3D "${WORKDIR}/vte-${PV}"
+=20
+ SRC_URI[archive.sha256sum] =3D "2328c3f1c998350a18e0e513348e9fc581d57ea4=
+e7b89aedf11e0e3c65042b4f"
+=20
+-inherit gnomebase gtk-doc gobject-introspection features_check systemd u=
+pstream-version-is-even vala
++inherit gnomebase gi-docgen gobject-introspection features_check systemd=
+ upstream-version-is-even vala
+ ANY_OF_DISTRO_FEATURES =3D "${GTK2DISTROFEATURES}"
+ GIR_MESON_OPTION =3D "gir"
+-GTKDOC_MESON_OPTION =3D "docs"
++GIDOCGEN_MESON_OPTION =3D "docs"
+=20
+ PACKAGECONFIG ?=3D "gnutls"
+ PACKAGECONFIG[gnutls] =3D "-Dgnutls=3Dtrue,-Dgnutls=3Dfalse,gnutls"
+--=20
+2.42.0
 
 
