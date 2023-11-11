@@ -1,161 +1,104 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EC181C4332F
-	for <webhook@archiver.kernel.org>; Sat, 11 Nov 2023 17:17:24 +0000 (UTC)
-Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
- by mx.groups.io with SMTP id smtpd.web10.55685.1699723035219223195
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EC4BDC4332F
+	for <webhook@archiver.kernel.org>; Sat, 11 Nov 2023 17:17:34 +0000 (UTC)
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+ by mx.groups.io with SMTP id smtpd.web10.55694.1699723053911846175
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 11 Nov 2023 09:17:15 -0800
+ Sat, 11 Nov 2023 09:17:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=CiaOx5Ce;
- spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-1cc131e52f1so31144765ad.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 11 Nov 2023 09:17:15 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=fzpIO4xE;
+ spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-40907b82ab9so24070015e9.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 11 Nov 2023 09:17:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699723034; x=1700327834; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=JQUg5xtbI0M4WmMaMl1vHg07wWMqVEBG43rie2ELmls=;
-        b=CiaOx5Cenk8CuNL6xLeNvJNXAyg2DeoI4dvtPfcDJgzURMpuggjRd2KbfMRpK8rHmE
-         qp9XxdBIX1BdK22rGE/NxAr1Imz0OM3Gu34sRqSXy48C++70Gug5NQ7/XNJeBpsSpIkp
-         04PYP7lQu0YJgidDJdeYHCOHIwBedc8UmOwYA+qQ6AI2xIwtVnccehqDL46gxVJwZTkZ
-         9sRLuJyqHVY1jMpZj/RYGEsxj6V4QVdTscIs5ir5yv3gcKCPwEfuZKYZRhWp3y7u1+/Y
-         1AsGHV4K1+wcTfqXed9KzVzXdkouhNhjnthMoEAg+QVoznCjWeNC7gPjfXJHftN2Zrin
-         UF/w==
+        d=gmail.com; s=20230601; t=1699723052; x=1700327852; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=OtgD8poY1PtSp8/0Nbd2I2yMSn/N2LU9ps99pEM6FXw=;
+        b=fzpIO4xEozivpI9qi8R/EJcKo/FVSRNGLOTYCdt8lo1a211LsK+fVQ6EP3ict2+XKa
+         XJAvRSlc2VVq4GpNx2rciB9ocWBq2PN2gN19BiXeqCp5C9fzq4jEbUekNlyysMGbFmsk
+         XQwyrOUB1Ni2gcXTyRBG3TU0kU+kwhT4TcGe8z7yr19WhgvgTeyXq4P+rTvt+nF++JhV
+         VJTF5+qb+7kzpEuYzUFJZ+1rkflZbUE174BOztSLJjlVVb4ZOmUm0XSy56BIXuFELJey
+         ouTJKuiwMskCmPhf+Os80j/ogJOEsQZdLNWehIS2jeB7IXhzbL/4JPaQ/vcQIu/bpw05
+         qHdg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699723034; x=1700327834;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=JQUg5xtbI0M4WmMaMl1vHg07wWMqVEBG43rie2ELmls=;
-        b=SNQRnYWoBFQI6xo5pZTb1hSSpVpRbffMy2uMuMTXtIY4mUcEYO9pJM1Quz484bBcl2
-         tNhz4zdtFenDUXfaAT3oIlrwnI1i44ydVOWBu2yfgANY4QqjttLIC68lwCcxH8OG9K1S
-         8TlG0Xg8Br94RL8Kc5/lvwraQhkB64sRXm/OaFD/f3Y/tsABtR+BHTkAG0mYBS8987oY
-         DwdypDeCEIDt+S3YETXri7y35Jd2aypx3QkzdiJO8aPA3AFxdqMEkM6lGx8XlVE9+7hy
-         PW5bm8rEa4jMzQm+ibaeVRxGRnSQOB/qq7YlAYThorSP7UoNLygre4Naa4WU2QxKUTri
-         3unQ==
-X-Gm-Message-State: AOJu0YwKq9gCarQeqqg3sQi8V3wtNOKwjnWuku/gqKSAvBbgxxNr0zul
-	xF/+1e3jMPF0oz9yHBJ0XaJX8OQtmE/bAg==
-X-Google-Smtp-Source: AGHT+IGm0qdvCi9ZdhD6tLsg/WfSBoaW+rf1JmNzZ5ruOwHYC4kZ/FSKjhGL3hCffRTryxSxsxW2hw==
-X-Received: by 2002:a17:90a:ad8f:b0:280:4a23:3c84 with SMTP id s15-20020a17090aad8f00b002804a233c84mr8412520pjq.22.1699723034156;
-        Sat, 11 Nov 2023 09:17:14 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9100:2cb0::62f8])
-        by smtp.gmail.com with ESMTPSA id 23-20020a17090a1a1700b0027ced921e80sm3716010pjk.38.2023.11.11.09.17.13
+        d=1e100.net; s=20230601; t=1699723052; x=1700327852;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=OtgD8poY1PtSp8/0Nbd2I2yMSn/N2LU9ps99pEM6FXw=;
+        b=C38eek/T/iqEyVQImBTexOvB75BOZD78s6XIqdyRWgtLFu+laENr4pLcD9vkiw8qQ/
+         OJPbnll8RkK0PhNYqL3iGNqBf0crZFzVvDKfi5Yv0IL/W+MMpYGvCHJvUmrsfE5Jvl4C
+         YjGud/2cCHwUcCNjavvkSkbKdoUoSlw/QZl8oOzNly/BuNcz/rTrLnwLqkchGgnC8gGc
+         S4Eq9P7W9MwPgNkeLCzROtGtbUAn42jTzJnPy6IpcpY2iuCZoE01OMKm3J5e7r09u+QS
+         TYogY/UK/y3kBPWQVhAJ7FdaAptSQAfNWWlkT7YJsfRwqpyAiYjHPxBTFxO4ox5XHlJE
+         eXHw==
+X-Gm-Message-State: AOJu0YyfKr29tVZ3gT+P6fRASL3FB+jr8uxzzR4pJw6bbAVw2dz2l7Ny
+	BLI00OwvZAUqihVa8fjYOOIh43vdfJMqRA==
+X-Google-Smtp-Source: AGHT+IGu/+sB7EaDL3vcWXVKFyUweiq0mtpYY7I2FPMp+BH+JZHKn/+0pX6SMF7IiWRpQ7zFf58cEg==
+X-Received: by 2002:a05:600c:548b:b0:407:3e94:bcca with SMTP id iv11-20020a05600c548b00b004073e94bccamr2182323wmb.1.1699723051558;
+        Sat, 11 Nov 2023 09:17:31 -0800 (PST)
+Received: from localhost.localdomain ([176.33.65.238])
+        by smtp.gmail.com with ESMTPSA id bi15-20020a05600c3d8f00b004095874f6d3sm2693937wmb.28.2023.11.11.09.17.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 11 Nov 2023 09:17:13 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+        Sat, 11 Nov 2023 09:17:31 -0800 (PST)
+From: alperak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/2] vte9: Upgrade to 0.74.1
-Date: Sat, 11 Nov 2023 09:17:09 -0800
-Message-ID: <20231111171709.649035-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.42.1
-In-Reply-To: <20231111171709.649035-1-raj.khem@gmail.com>
-References: <20231111171709.649035-1-raj.khem@gmail.com>
+Cc: alperak <alperyasinak1@gmail.com>
+Subject: [meta-webserver][PATCHv2] xdebug: upgrade 3.2.0 -> 3.2.2
+Date: Sat, 11 Nov 2023 20:17:21 +0300
+Message-Id: <20231111171721.3393293-1-alperyasinak1@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 11 Nov 2023 17:17:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106557
+ <openembedded-devel@lists.openembedded.org>; Sat, 11 Nov 2023 17:17:34 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106558
 
-License-Update: Switch to LGPL-3 license
+Changelog:
 
-* Switch to using meson build system
-* Merge inc file into single recipe
+[2023-07-14] — Xdebug 3.2.2
+    -Fixed bug #2175: Crash with EXC_BAD_ACCESS in xdebug_str_create
+    -Fixed bug #2180: Crash on extended SplFixedArray
+    -Fixed bug #2182: Segfault with ArrayObject on stack
+    -Fixed bug #2186: Segfault with trampoline functions and debugger activation
+[2023-03-21] — Xdebug 3.2.1
+    -Fixed bug #2144: Xdebug 3.2.0 ignores xdebug.mode and enables all features
+    -Fixed bug #2145: Xdebug 3.2.0 crash PHP on Windows if xdebug.mode = off
+    -Fixed bug #2146: apache2 segfaulting with version 3.2.0 on PHP 8.0
+    -Fixed bug #2148: Icon for link to docs in xdebug_info() HTML output does not always render correctly
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: alperak <alperyasinak1@gmail.com>
 ---
- meta-oe/recipes-gnome/vte9/vte9.inc       | 18 --------------
- meta-oe/recipes-gnome/vte9/vte9_0.28.2.bb | 12 ----------
- meta-oe/recipes-gnome/vte9/vte9_0.74.1.bb | 29 +++++++++++++++++++++++
- 3 files changed, 29 insertions(+), 30 deletions(-)
- delete mode 100644 meta-oe/recipes-gnome/vte9/vte9.inc
- delete mode 100644 meta-oe/recipes-gnome/vte9/vte9_0.28.2.bb
- create mode 100644 meta-oe/recipes-gnome/vte9/vte9_0.74.1.bb
+ The only difference from v1 is that the forgotten whitespace in the changelog has been deleted.
 
-diff --git a/meta-oe/recipes-gnome/vte9/vte9.inc b/meta-oe/recipes-gnome/vte9/vte9.inc
-deleted file mode 100644
-index 2a165391b6..0000000000
---- a/meta-oe/recipes-gnome/vte9/vte9.inc
-+++ /dev/null
-@@ -1,18 +0,0 @@
--SUMMARY = "Virtual terminal emulator GTK+ widget library"
--BUGTRACKER = "https://bugzilla.gnome.org/buglist.cgi?product=vte"
--LICENSE = "LGPL-2.0-only"
--DEPENDS = "glib-2.0-native glib-2.0 gtk+ intltool-native gnome-common-native ncurses"
--RDEPENDS:libvte = "vte-termcap"
--
--# help gnomebase get the SRC_URI correct
--GNOMEBN = "vte"
--S = "${WORKDIR}/vte-${PV}"
--
--inherit gnomebase gtk-doc features_check upstream-version-is-even gobject-introspection
--ANY_OF_DISTRO_FEATURES = "${GTK2DISTROFEATURES}"
--
--EXTRA_OECONF = "--disable-python"
--
--PACKAGES =+ "libvte9 vte9-termcap"
--FILES:libvte9 = "${libdir}/*.so.* ${libexecdir}/gnome-pty-helper"
--FILES:vte9-termcap = "${datadir}/vte/termcap-0.0"
-diff --git a/meta-oe/recipes-gnome/vte9/vte9_0.28.2.bb b/meta-oe/recipes-gnome/vte9/vte9_0.28.2.bb
-deleted file mode 100644
-index 72bc9ec39b..0000000000
---- a/meta-oe/recipes-gnome/vte9/vte9_0.28.2.bb
-+++ /dev/null
-@@ -1,12 +0,0 @@
--require vte9.inc
--
--LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7"
--
--SRC_URI += "file://obsolete_automake_macros.patch \
--            file://cve-2012-2738.patch \
--           "
--
--CFLAGS += "-D_GNU_SOURCE"
--
--SRC_URI[archive.md5sum] = "497f26e457308649e6ece32b3bb142ff"
--SRC_URI[archive.sha256sum] = "86cf0b81aa023fa93ed415653d51c96767f20b2d7334c893caba71e42654b0ae"
-diff --git a/meta-oe/recipes-gnome/vte9/vte9_0.74.1.bb b/meta-oe/recipes-gnome/vte9/vte9_0.74.1.bb
-new file mode 100644
-index 0000000000..30319ddd65
---- /dev/null
-+++ b/meta-oe/recipes-gnome/vte9/vte9_0.74.1.bb
-@@ -0,0 +1,29 @@
-+SUMMARY = "Virtual terminal emulator GTK+ widget library"
-+BUGTRACKER = "https://bugzilla.gnome.org/buglist.cgi?product=vte"
-+LICENSE = "LGPL-3.0-only"
-+LIC_FILES_CHKSUM = "file://COPYING.LGPL3;md5=b52f2d57d10c4f7ee67a7eb9615d5d24"
-+
-+DEPENDS = "glib-2.0-native glib-2.0 gnutls gtk+3 gtk4 intltool-native gnome-common-native ncurses"
-+
-+# help gnomebase get the SRC_URI correct
-+GNOMEBN = "vte"
-+S = "${WORKDIR}/vte-${PV}"
-+
-+SRC_URI[archive.sha256sum] = "2328c3f1c998350a18e0e513348e9fc581d57ea4e7b89aedf11e0e3c65042b4f"
-+
-+inherit gnomebase gtk-doc gobject-introspection features_check systemd upstream-version-is-even vala
-+ANY_OF_DISTRO_FEATURES = "${GTK2DISTROFEATURES}"
-+GIR_MESON_OPTION = "gir"
-+GTKDOC_MESON_OPTION = "docs"
-+
-+PACKAGECONFIG ?= "gnutls"
-+PACKAGECONFIG[gnutls] = "-Dgnutls=true,-Dgnutls=false,gnutls"
-+PACKAGECONFIG[fribidi] = "-Dfribidi=true,-Dfribidi=false,fribidi"
-+
-+CFLAGS += "-D_GNU_SOURCE"
-+
-+PACKAGES =+ "libvte9 vte9-termcap"
-+FILES:libvte9 = "${libdir}/*.so.* ${libexecdir}/gnome-pty-helper ${datadir}/glade ${systemd_user_unitdir}"
-+FILES:vte9-termcap = "${datadir}/vte/termcap-0.0"
-+
-+RDEPENDS:libvte = "vte-termcap"
+ .../recipes-php/xdebug/{xdebug_3.2.0.bb => xdebug_3.2.2.bb}     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-webserver/recipes-php/xdebug/{xdebug_3.2.0.bb => xdebug_3.2.2.bb} (91%)
+
+diff --git a/meta-webserver/recipes-php/xdebug/xdebug_3.2.0.bb b/meta-webserver/recipes-php/xdebug/xdebug_3.2.2.bb
+similarity index 91%
+rename from meta-webserver/recipes-php/xdebug/xdebug_3.2.0.bb
+rename to meta-webserver/recipes-php/xdebug/xdebug_3.2.2.bb
+index fe6fc5bf9..8ad588d29 100644
+--- a/meta-webserver/recipes-php/xdebug/xdebug_3.2.0.bb
++++ b/meta-webserver/recipes-php/xdebug/xdebug_3.2.2.bb
+@@ -6,7 +6,7 @@ DEPENDS = "php re2c-native"
+ 
+ SRC_URI = "http://xdebug.org/files/xdebug-${PV}.tgz"
+ 
+-SRC_URI[sha256sum] = "7769b20eecdadf5fbe9f582512c10b394fb575b6f7a8c3a3a82db6883e0032b7"
++SRC_URI[sha256sum] = "f48777371f90cbb315ea4ea082a1ede6765bcfb35d7d6356ab8f71fd6dfcc157"
+ 
+ UPSTREAM_CHECK_REGEX = "xdebug-(?P<pver>\d+(\.\d+)+)\.tgz"
+ 
 -- 
-2.42.1
+2.25.1
 
 
