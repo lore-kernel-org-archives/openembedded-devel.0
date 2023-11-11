@@ -1,102 +1,83 @@
-Return-Path: <alperyasinak1@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AD231C4332F
-	for <webhook@archiver.kernel.org>; Sat, 11 Nov 2023 15:57:04 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.web11.54453.1699718223090138320
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E733DC4332F
+	for <webhook@archiver.kernel.org>; Sat, 11 Nov 2023 17:17:14 +0000 (UTC)
+Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
+ by mx.groups.io with SMTP id smtpd.web10.55684.1699723033843648367
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 11 Nov 2023 07:57:03 -0800
+ Sat, 11 Nov 2023 09:17:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=VgyWXqS7;
- spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4084de32db5so24698045e9.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 11 Nov 2023 07:57:02 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=jAtPgclG;
+ spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f48.google.com with SMTP id 98e67ed59e1d1-280165bba25so2573177a91.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 11 Nov 2023 09:17:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699718221; x=1700323021; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1699723033; x=1700327833; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=eH2XCtRffBDYg3pWWT4+AhU75wVopUxOxCvVdUclG6o=;
-        b=VgyWXqS7JbAAvgbMEJ7NQ3TJyNHqhE+QL7azcdVTPsOa9X748X7BvvkcsxVKSbmuvX
-         hqkTSaWBb3c9OkMvtYtAj6XHQ4j1HZ8n1DO92AgMAPrm/JF1Kxlb2oq4+aY6WqcLWKgo
-         W/LElx4bVh7AhgKEDpkIkZTGcmd+7d2TwK6dJBO5u0SgNGGajeMnU6G3JibDX5ToFmxr
-         pR6TFnmEq4po/oImuyVFJ4B/jeLLANAPwbAMNSvA2l1r9h7bR/lkkW0U/+BVhW7e7+Md
-         1z3rKiS3uSzyRwmHMUrdFbeirTfXat9F7SADWvYCUoGrTcINy//o9bbxPTaBbW8wyyj5
-         3Efw==
+        bh=l6dI4yVMbK0YHiPbEwAU3Hx8kn1GxPC8QWVv4UeoyrA=;
+        b=jAtPgclGnYs3KEs78N2vSmozbqGRQsOr7WhaJapcN+Ja7vgA3GfUlMNaYrwQOajqBn
+         G9JTvHBKj+r4fvIWc4D4w0xLC5vIXYfVkOVfFAVJF31io+4ZMtL8kHZkD4IJ744ZB42i
+         KHp3QeNnc7V/HTsvwZRq+NK3R64lbWFapgxZ6ZlgmeY+2/7uSqhU7fLCweOUZe+8woLu
+         qXv0Hu/2FL6Nkcb4TPx9V76H1splPy0aUkw6JjZimuD7plJ1cAnX1vucE1rF/Mc/c5Pb
+         Xf6s3AOUlCXKFcMIqaa8MTFhFToaq+zuTNsJSlPboqD1hnX9SfJ1y7o/dtaOmcvdtOwX
+         JgqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699718221; x=1700323021;
+        d=1e100.net; s=20230601; t=1699723033; x=1700327833;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=eH2XCtRffBDYg3pWWT4+AhU75wVopUxOxCvVdUclG6o=;
-        b=VTVXe9Me6G2u8AImD3qiadECNbQknu2LT7SofibC+/s9NbeSr75OV8cQn6HCy14xZz
-         SM4NJ/Iuru2OPZFmcTuwcxWyFXeRSn3TFT9090B2fbhDX3MuQbShiVWpKG95XFcwGJ0d
-         xeYq2B5YvvjM4U3zkY8OAEqeYGroIbhjoCgtb5vScmDfQpBwX3kGRenX6MitAJT1FpJj
-         z79SWglyItL/YFGjq0O/0gexvpkx35zzgh+fZkqK5VchT4+RIG22/GI17ZjNUnJjSWgl
-         s50bd3JmOzYMWnNp5aoCSldofa8j5KZw+dID1/WQBb+E/aEbMq4luiSczfh/vQ75Cygu
-         8uzA==
-X-Gm-Message-State: AOJu0YydwrBXOxc2a25aM2adQYqMUwkNAlav1JON1KktaZWHETysSGvg
-	oCMg7ncNJdFUGCy9SozRGpJbN+fnQ7qvtA==
-X-Google-Smtp-Source: AGHT+IEou0T8ZO+OkQuLpwBMznpvnEwOPFZVvCRajyiCAcLU2lhQ/IddPooHz3PtQ44t41izPHI8Pg==
-X-Received: by 2002:a05:600c:1c25:b0:408:543d:5536 with SMTP id j37-20020a05600c1c2500b00408543d5536mr1965878wms.4.1699718220089;
-        Sat, 11 Nov 2023 07:57:00 -0800 (PST)
-Received: from localhost.localdomain ([176.33.65.238])
-        by smtp.gmail.com with ESMTPSA id l37-20020a05600c1d2500b004030e8ff964sm8424960wms.34.2023.11.11.07.56.58
+        bh=l6dI4yVMbK0YHiPbEwAU3Hx8kn1GxPC8QWVv4UeoyrA=;
+        b=FMBLytDgkvyPK1i44YJoqWZl4usoV0V5Qt4G7dkS0ppSmOhQXDlxE430g987MLbETo
+         bdeEkwFr6kpXZsJ7EwZ9JyH6i0JMl1T2i8rXCaKMRdTY1QBJO0g/dCFNsuN/aYgeXMqI
+         GLsbojS9whdeXsRzvul33cJ1qX6NAsTNNDTLFvh7XtQPBMWarN8yEL2vC1G2Gvb2qDfT
+         JMPPpD8zoU+Aglm0cr8pAWglj5RAZVsqSKPRhWGJvay6yYvMLViyV97k8QJdTa4mHW3o
+         X1pZK6HmeuPBJO44XYmt+ughLht0t+KM0VKhSLeT5xfuwvpjcvbtyeZ/cVFj4xDCheLr
+         SCrw==
+X-Gm-Message-State: AOJu0YxmYYo/X7rEBrVunSu+YHEo4V/dMrQPn3YGdtD+6aD/Iv4kMoF1
+	I2rkd7vlc9SeNH8hOh8MrUvp0++vHIPW6g==
+X-Google-Smtp-Source: AGHT+IEHpQMdWn4iainVtGHl6ly6vWiNggtxXlaGe5z7X0Jb7oINQ+0xLC/Remm2QmE71SjojuNVHQ==
+X-Received: by 2002:a17:90a:191a:b0:280:1689:4aac with SMTP id 26-20020a17090a191a00b0028016894aacmr1771386pjg.2.1699723032954;
+        Sat, 11 Nov 2023 09:17:12 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9100:2cb0::62f8])
+        by smtp.gmail.com with ESMTPSA id 23-20020a17090a1a1700b0027ced921e80sm3716010pjk.38.2023.11.11.09.17.12
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 11 Nov 2023 07:56:59 -0800 (PST)
-From: alperak <alperyasinak1@gmail.com>
+        Sat, 11 Nov 2023 09:17:12 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-webserver][PATCH] xdebug: upgrade 3.2.0 -> 3.2.2
-Date: Sat, 11 Nov 2023 18:56:10 +0300
-Message-Id: <20231111155610.3381685-1-alperyasinak1@gmail.com>
-X-Mailer: git-send-email 2.25.1
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-multimedia][PATCH 1/2] gupnp: Add missing rdep on python3-core
+Date: Sat, 11 Nov 2023 09:17:08 -0800
+Message-ID: <20231111171709.649035-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.42.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 11 Nov 2023 15:57:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106555
+ <openembedded-devel@lists.openembedded.org>; Sat, 11 Nov 2023 17:17:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106556
 
-Changelog:
+python3-core is needed to provide /usr/bin/python3
 
-[2023-07-14] — Xdebug 3.2.2
-	-Fixed bug #2175: Crash with EXC_BAD_ACCESS in xdebug_str_create
-    -Fixed bug #2180: Crash on extended SplFixedArray
-    -Fixed bug #2182: Segfault with ArrayObject on stack
-    -Fixed bug #2186: Segfault with trampoline functions and debugger activation
-[2023-03-21] — Xdebug 3.2.1
-    -Fixed bug #2144: Xdebug 3.2.0 ignores xdebug.mode and enables all features
-    -Fixed bug #2145: Xdebug 3.2.0 crash PHP on Windows if xdebug.mode = off
-    -Fixed bug #2146: apache2 segfaulting with version 3.2.0 on PHP 8.0
-    -Fixed bug #2148: Icon for link to docs in xdebug_info() HTML output does not always render correctly
-
-Signed-off-by: alperak <alperyasinak1@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-php/xdebug/{xdebug_3.2.0.bb => xdebug_3.2.2.bb}     | 2 +-
+ meta-multimedia/recipes-connectivity/gupnp/gupnp_1.6.6.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-webserver/recipes-php/xdebug/{xdebug_3.2.0.bb => xdebug_3.2.2.bb} (91%)
 
-diff --git a/meta-webserver/recipes-php/xdebug/xdebug_3.2.0.bb b/meta-webserver/recipes-php/xdebug/xdebug_3.2.2.bb
-similarity index 91%
-rename from meta-webserver/recipes-php/xdebug/xdebug_3.2.0.bb
-rename to meta-webserver/recipes-php/xdebug/xdebug_3.2.2.bb
-index fe6fc5bf9..8ad588d29 100644
---- a/meta-webserver/recipes-php/xdebug/xdebug_3.2.0.bb
-+++ b/meta-webserver/recipes-php/xdebug/xdebug_3.2.2.bb
-@@ -6,7 +6,7 @@ DEPENDS = "php re2c-native"
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.6.6.bb b/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.6.6.bb
+index c6738923ac..f1628d82ee 100644
+--- a/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.6.6.bb
++++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.6.6.bb
+@@ -18,4 +18,4 @@ gupnp_sysroot_preprocess () {
  
- SRC_URI = "http://xdebug.org/files/xdebug-${PV}.tgz"
+ FILES:${PN}-dev += "${bindir}/gupnp-binding-tool*"
  
--SRC_URI[sha256sum] = "7769b20eecdadf5fbe9f582512c10b394fb575b6f7a8c3a3a82db6883e0032b7"
-+SRC_URI[sha256sum] = "f48777371f90cbb315ea4ea082a1ede6765bcfb35d7d6356ab8f71fd6dfcc157"
- 
- UPSTREAM_CHECK_REGEX = "xdebug-(?P<pver>\d+(\.\d+)+)\.tgz"
- 
+-RDEPENDS:${PN}-dev = "python3 python3-xml"
++RDEPENDS:${PN}-dev += "python3-core python3-xml"
 -- 
-2.25.1
+2.42.1
 
 
