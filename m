@@ -2,141 +2,108 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 819BCC4332F
-	for <webhook@archiver.kernel.org>; Sat, 11 Nov 2023 19:01:46 +0000 (UTC)
-Received: from mail-oo1-f44.google.com (mail-oo1-f44.google.com [209.85.161.44])
- by mx.groups.io with SMTP id smtpd.web11.1879.1699729300318727451
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AFE07C4332F
+	for <webhook@archiver.kernel.org>; Sat, 11 Nov 2023 19:12:16 +0000 (UTC)
+Received: from mail-oa1-f47.google.com (mail-oa1-f47.google.com [209.85.160.47])
+ by mx.groups.io with SMTP id smtpd.web11.2083.1699729929999237257
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 11 Nov 2023 11:01:40 -0800
+ Sat, 11 Nov 2023 11:12:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=EEeOt+Rs;
- spf=pass (domain: gmail.com, ip: 209.85.161.44, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f44.google.com with SMTP id 006d021491bc7-5845a94dae1so1590079eaf.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 11 Nov 2023 11:01:40 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ihq+OxKd;
+ spf=pass (domain: gmail.com, ip: 209.85.160.47, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f47.google.com with SMTP id 586e51a60fabf-1ef370c2e1aso1866130fac.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 11 Nov 2023 11:12:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699729299; x=1700334099; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1699729929; x=1700334729; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=EMh979ke0vYGXbmy+EnzRM46BBD1WmU5LJE6maNhsZw=;
-        b=EEeOt+RsjrnUb8z8R2cdR4ogvaSB8EBGTJQsO9UrVpqTNe6Qb4HUurR7NQvxYR+ewg
-         Bn3Fc5DcVxmQjWygsmBLY7DUqoQ08nkv/TEdli0IMznRGh8Z5r999i6OlQEXu9J5M2XB
-         FQ9IZ0W6RSlfEKd2HAKps0Py+ov2mv7AE+ObU50Jsxv+2OIL45FphfNTOeRfN7ol+Obs
-         QDdGcGpQqAj7C8GQZtd4BfvyZWPBbNhg4IPnjIgIziorypZq6JghEf0P/torFnKSFdSL
-         C4x+kyB5USpkZcp67TGd6oUZmSbRCCppjSIUJ7qISZzjiS8TiuwQ4A44bodquiZG3H69
-         EAoQ==
+        bh=eNH6K90R5tqdz4wOjCcAymUPBQnGfAYq7aIrIX/ToyI=;
+        b=ihq+OxKdoBOqJvQ+Q+R3FVKf4lYfBeCh7I4MDg9q5HgoqDqqU0VGkeEEN/2meFNva1
+         xpDxJG0XdqQ2OiWQNG7yABRQfK0S9kBTVDhL32QPcNSnGoOkhHJSwN6gXIjcKvxMEFCZ
+         Gqz4yGH661yWNpNnN/s6noEN6ScU7BvOuF96UdfhqiPCHpl5ZjXcL3ro4J0G4mBwRDnE
+         WfHYmrPVGjl3wHv6I/aIGr/Wl7L8nutTPBB4diWGYk9k5mY7vpGNv3GjIKTSSBBjtCZj
+         GLhQsj5mvsnCSsmSZiE/BxpFCepR6mNpC93bMwN7CfA7iDOTlCENpF172bmAjhTWRgkC
+         v64A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699729299; x=1700334099;
+        d=1e100.net; s=20230601; t=1699729929; x=1700334729;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=EMh979ke0vYGXbmy+EnzRM46BBD1WmU5LJE6maNhsZw=;
-        b=R6dbGePqLuEsLbfvP4O54agKlFNf0Kk6/AAXtB/R6APwI7H+HJ8vKhXgfqsGuiJ/LV
-         w9RqAcpiOWPZTOS5qr4dMD/fUGhVCW1H9ht3hXWrT4jiSEz4XNlblSIU2GSWIL+Tz7KL
-         QDWgOVVipDAQFqYtra+xITHDd9LLhDQFGYeS5dGmOlZCUKHpUW50rus5QuHnzBSl+KBF
-         5A1HteGLkopG/7HvEyfDvsl5tJTHhMmSHTzllIzZCqItrGn1izepYOBcwepidSUNzQiG
-         +xaaEqS8ZR969hbfNkjHvK+irB1BqKUREwcVPlq9qnPetshbrfGbnX1HOgUo+8QHB35I
-         5uNg==
-X-Gm-Message-State: AOJu0Yz68m3s2G2nmAOiXzedbFdpwypozftjoG+p6YqqmOlyhLVYYrRL
-	v9q4RTNmTP2+y8clMuZV2iSch0XstyQb/kEIIqDjlwTURms=
-X-Google-Smtp-Source: AGHT+IHJoIVbnoVwZ0whbVBG1j5+B/PY7c3eFiTMS9+/Rzo/Sjn37Et+1TvwrIpoNLPUEyKhZ4KAuv4Id4AchdCjLDM=
-X-Received: by 2002:a05:6870:d86:b0:1ef:b0b6:7e14 with SMTP id
- mj6-20020a0568700d8600b001efb0b67e14mr1295906oab.10.1699729299534; Sat, 11
- Nov 2023 11:01:39 -0800 (PST)
+        bh=eNH6K90R5tqdz4wOjCcAymUPBQnGfAYq7aIrIX/ToyI=;
+        b=REcYxAJZEsCaYIU2x+oIubl80TFPsbsaSLIhMjFW78xBmVOcG/Y7oVs+gheTJmfB9O
+         AU7UyCjZv57GPzwkF3Kbo3yMkT4tM75cVtXcGMbPg7MvE9olHBLNPK3OWrGxuzVBfj0q
+         j575jRvG1/SvF+jrP/PWgNbyBLqX25NTj42ZAsTn9HvtxKrGJfOQh80/DdE0Fg+T9ZXg
+         4hWozrnPURtC+U6nZrUpM6hymHUjlThZSUcUJ4DDA4BPz7asNKxSW+6rX72knujnJBj0
+         W/lG3uXeq6yRqO6wALLHNSz5vMXacwh/GVhTChF9ewOZCOM0ok+qlXn61c1j4DzxK24y
+         vsxg==
+X-Gm-Message-State: AOJu0YzjYzmmLm62Bga0NVjRwRgbxpXJ1LgN/N3zvbosZ9/GHNIPXKWV
+	HfA6l28F4oiaRwDSYCqHVa0l2Ehr7socyRLBHyM=
+X-Google-Smtp-Source: AGHT+IESZ/p6RnN8LENpY+Zt85eu6yuA2wnun26gkBeqUvmfzoSosooLTIwXz15uqQ/8mh4tMvL5jCZxbihz7S5+CxA=
+X-Received: by 2002:a05:6871:6185:b0:1e9:a770:61eb with SMTP id
+ rb5-20020a056871618500b001e9a77061ebmr3197877oab.29.1699729929260; Sat, 11
+ Nov 2023 11:12:09 -0800 (PST)
 MIME-Version: 1.0
-References: <73831758-7C17-4540-AD08-572959D92E0E@getmailspring.com> <10AB6CF7-A6FF-435A-A35A-A2A35560F6BD@getmailspring.com>
-In-Reply-To: <10AB6CF7-A6FF-435A-A35A-A2A35560F6BD@getmailspring.com>
+References: <20231111185745.3414221-1-alperyasinak1@gmail.com>
+In-Reply-To: <20231111185745.3414221-1-alperyasinak1@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 11 Nov 2023 11:01:13 -0800
-Message-ID: <CAMKF1sq718EwKbfEdWgGfZQq+2kRJCPaepp4aY9XsMXKckHQjw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] recipes-support: Add btop
-To: =?UTF-8?B?SmFuIENsYXXDn2Vu?= <jan.claussen10@web.de>
-Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Date: Sat, 11 Nov 2023 11:11:43 -0800
+Message-ID: <CAMKF1sp7DCehayBBsqcb0kYMNwFiBW5790wGq_bowMkZ1mis3A@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH] tuna: upgrade 0.18 -> 0.19
+To: Alper Ak <alperyasinak1@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 11 Nov 2023 19:01:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106566
+ <openembedded-devel@lists.openembedded.org>; Sat, 11 Nov 2023 19:12:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106567
 
-On Sat, Nov 11, 2023 at 10:38=E2=80=AFAM Jan Clau=C3=9Fen <jan.claussen10@w=
-eb.de> wrote:
+On Sat, Nov 11, 2023 at 10:58=E2=80=AFAM Alper Ak <alperyasinak1@gmail.com>=
+ wrote:
 >
-> It also needs a utf-8 locale to work. Else you have to force utf-8 mode w=
-ith a flag. I haven't included this as dependency at this point.
+> Signed-off-by: alperak <alperyasinak1@gmail.com>
+> ---
+>  meta-python/recipes-extended/tuna/tuna_git.bb | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
+>
+> diff --git a/meta-python/recipes-extended/tuna/tuna_git.bb b/meta-python/=
+recipes-extended/tuna/tuna_git.bb
+> index a49341240..0d71a3124 100644
+> --- a/meta-python/recipes-extended/tuna/tuna_git.bb
+> +++ b/meta-python/recipes-extended/tuna/tuna_git.bb
+> @@ -3,9 +3,11 @@ HOMEPAGE =3D "https://rt.wiki.kernel.org/index.php/Tuna"
+>  LICENSE =3D "GPL-2.0-only"
+>  LIC_FILES_CHKSUM =3D "file://${COMMON_LICENSE_DIR}/GPL-2.0-only;md5=3D80=
+1f80980d171dd6425610833a22dbe6"
+>
+> +PV =3D "0.19"
+> +
 
-you want to express all that is needed to get it running amicably.
-keeping in mind that we have glibc and musl based systems to service
-it will be good to check it on musl too.
+Perhaps its better to rename recipe to reflect the PV like this
+rename tuna_git.bb -> tuna_0.19.bb
 
+>  SRC_URI =3D "git://git.kernel.org/pub/scm/utils/tuna/tuna.git;branch=3Dm=
+ain"
 >
-> On Nov. 11 2023, at 7:35 pm, Jan Clau=C3=9Fen <jan.claussen10@web.de> wro=
-te:
+> -SRCREV =3D "0681906e75e1c8166126bbfc2f3055e7507bfcb5"
+> +SRCREV =3D "b972b8ce386c29bcbcd45029a617db3db9e5b6ca"
 >
-> Glad that it arrived now! This is a really great resource monitor. It is =
-building from the git repository. Do you think it is better to use the rele=
-ase instead?
+>  S =3D "${WORKDIR}/git"
 >
-> On Nov. 11 2023, at 7:30 pm, Khem Raj <raj.khem@gmail.com> wrote:
+> --
+> 2.25.1
 >
-> Thanks for your contribution Jan
 >
-> On Sat, Nov 11, 2023 at 10:26=E2=80=AFAM Jan Clau=C3=9Fen <jan.claussen10=
-@web.de> wrote:
-> >
-> > ---
-> > meta-oe/recipes-support/btop/btop_1.2.13.bb | 23 +++++++++++++++++++++
-> > 1 file changed, 23 insertions(+)
-> > create mode 100644 meta-oe/recipes-support/btop/btop_1.2.13.bb
-> >
-> > diff --git a/meta-oe/recipes-support/btop/btop_1.2.13.bb b/meta-oe/reci=
-pes-support/btop/btop_1.2.13.bb
-> > new file mode 100644
-> > index 000000000..f780a993a
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-support/btop/btop_1.2.13.bb
-> > @@ -0,0 +1,23 @@
-> > +SUMMARY =3D "Resource monitor that shows usage and stats for processor=
-, memory, disks, network and processes."
-> > +HOMEPAGE =3D "https://github.com/aristocratos/btop"
-> > +LICENSE =3D "Apache-2.0"
-> > +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D3b83ef96387f14655fc854ddc3c=
-6bd57"
-> > +SECTION =3D "console/utils"
-> > +
-> > +SRC_URI =3D "git://github.com/aristocratos/btop.git;protocol=3Dhttps;b=
-ranch=3Dmain"
-> > +SRCREV =3D "2a864f6f2ea60df16b3f015885eb3c18a48b9b78"
-> > +
-> > +S =3D "${WORKDIR}/git"
-> > +
-> > +inherit cmake
-> > +
-> > +FILES:${PN} +=3D " \
-> > + /usr/share/icons \
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#106564): https://lists.openembedded.org/g/openembedde=
+d-devel/message/106564
+> Mute This Topic: https://lists.openembedded.org/mt/102530913/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
-> Lets use ${datadir} instead of hardcoded /usr/share
->
-> > + /usr/share/icons/hicolor \
-> > + /usr/share/icons/hicolor/48x48 \
-> > + /usr/share/icons/hicolor/scalable \
-> > + /usr/share/icons/hicolor/48x48/apps \
-> > + /usr/share/icons/hicolor/48x48/apps/btop.png \
-> > + /usr/share/icons/hicolor/scalable/apps \
-> > + /usr/share/icons/hicolor/scalable/apps/btop.svg \
-> > +"
-> > --
-> > 2.42.0
-> >
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#106559): https://lists.openembedded.org/g/openembed=
-ded-devel/message/106559
-> > Mute This Topic: https://lists.openembedded.org/mt/102530478/1997914
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[raj.khem@gmail.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
 
