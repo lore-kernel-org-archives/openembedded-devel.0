@@ -1,174 +1,106 @@
-Return-Path: <alperyasinak1@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D6FFC41535
-	for <webhook@archiver.kernel.org>; Sat, 11 Nov 2023 11:18:03 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
- by mx.groups.io with SMTP id smtpd.web10.49886.1699701473062999541
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 56A4CC4332F
+	for <webhook@archiver.kernel.org>; Sat, 11 Nov 2023 12:01:03 +0000 (UTC)
+Received: from mailout06.t-online.de (mailout06.t-online.de [194.25.134.19])
+ by mx.groups.io with SMTP id smtpd.web11.50604.1699704054377412882
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 11 Nov 2023 03:17:53 -0800
+ Sat, 11 Nov 2023 04:00:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Kvg0EXG/;
- spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-32fb1c35fe0so1607991f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 11 Nov 2023 03:17:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699701471; x=1700306271; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=3fl6cWA/ZDnS6OfI+A49z9vWwMkSqyG/Xv7ZUdTcLwM=;
-        b=Kvg0EXG/Q+ViYTgZReS3cV5kdbZ33uDkK8wcIOT+RkD9GBgzGVCP9pT9E6ftPWqmpT
-         z7YIwMPImMctUW3IQ1o0jmgiIgWD7Ym+ihi3QDJijI+jecasM+7rVD/xZmtzrIE12fN9
-         MUEP6N9DrPiPXkG4PCmqF4Q0iuz1HguX80+K3cbnMY0s5vcZ6J/QE20z1dQ4tOpfZBYN
-         kq9nEZUJUXNWf3Z4E2twc+KNJd6INBoEt13l1ajAnPTt8Brm2tQiNiqlYo2d4PALNSfG
-         2ghbO5NHhCcXIrmvAmXKiuJLJfqZA09ueJ8GL7WnmjpMgA73ZBPaTxlUTCHe6WvwXOPD
-         MXgw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699701471; x=1700306271;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=3fl6cWA/ZDnS6OfI+A49z9vWwMkSqyG/Xv7ZUdTcLwM=;
-        b=fMmRj34o9CgJO7oaRu43VO5NNN1wxh/QV4Pipi+ns0sxuck50hefQEazG4KKfDUSzM
-         MRLg/fOX12MSw2uvNJrsz/u6iOWAi/6anMPexMEXRrAkVYM9g2ZoT9pDn0gfz6GcOzXr
-         94Kg1bcLGcBxI1ZARwilJXbtxg2phX9HR1x4ljRKWLAx7pxfdP+iDN2s9K3BLMuH7eC+
-         VDEWe1JtFCLEnUBNtNIdjJgeKdVpYHY6/MK1mKxaHcw1/Z2jh/YHwgHWDLz12AMZOt21
-         3jteCet3LAd4bYSpRww3OFvNo10TWS6/2jdS63LoxRSGH0u4dKsUQ7tohxcCPIqynryC
-         QyUQ==
-X-Gm-Message-State: AOJu0YwUsZBGhHoetOQE0sprt6nxUzyZ6qQEqn5yBLvM4nkNdri3qQEX
-	i33Y7IyHtY9VbetSNs2J+bLZXH9doDrhdQ==
-X-Google-Smtp-Source: AGHT+IE7XyddyAzR6miJz1AaILmX6wKKp/BjpK9wWwcxTvfbMcA83GtUvi8VMk1e88V+JDKW5/c7/A==
-X-Received: by 2002:a5d:64af:0:b0:32f:7cba:9624 with SMTP id m15-20020a5d64af000000b0032f7cba9624mr1352421wrp.54.1699701470434;
-        Sat, 11 Nov 2023 03:17:50 -0800 (PST)
-Received: from localhost.localdomain ([176.33.65.238])
-        by smtp.gmail.com with ESMTPSA id i20-20020a5d5234000000b0032f7cfac0fesm1285684wra.51.2023.11.11.03.17.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 11 Nov 2023 03:17:49 -0800 (PST)
-From: Alper Ak <alperyasinak1@gmail.com>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.19, mailfrom: f_l_k@t-online.de)
+Received: from fwd75.aul.t-online.de (fwd75.aul.t-online.de [10.223.144.101])
+	by mailout06.t-online.de (Postfix) with SMTP id 38F0E1EDFE
+	for <openembedded-devel@lists.openembedded.org>; Sat, 11 Nov 2023 13:00:52 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.163.34.215]) by fwd75.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1r1mfR-4DuoAz0; Sat, 11 Nov 2023 13:00:49 +0100
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Alper Ak <alperyasinak1@gmail.com>
-Subject: [meta-filesystems][PATCH] unionfs-fuse: upgrade 2.2 --> 3.4
-Date: Sat, 11 Nov 2023 14:17:39 +0300
-Message-Id: <20231111111739.13432-1-alperyasinak1@gmail.com>
-X-Mailer: git-send-email 2.25.1
+Subject: [meta-gnome][PATCH] ghex: Upgrade 3.18.4 -> 45.0
+Date: Sat, 11 Nov 2023 13:01:16 +0100
+Message-ID: <20231111120116.31517-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1699704049-FB7FD850-F36DE1BE/0/0 CLEAN NORMAL
+X-TOI-MSGID: 4b8332d1-7c24-422a-940c-461283d74151
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 11 Nov 2023 11:18:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106551
+ <openembedded-devel@lists.openembedded.org>; Sat, 11 Nov 2023 12:01:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106552
 
-- DEPENDS fuse --> fuse3 because CMake throwing "No package 'fuse3' found" error.
+- enable gi,vapi,api-documentation
+- switch to gtk4
 
-- Updated patch because CMakeLists.txt path has been changed.
-
-- Bash added to RDEPENDS, accordingly this error --> ERROR: unionfs-fuse-3.4-r0 do_package_qa: QA Issue: /usr/sbin/mount.unionfs contained in package unionfs-fuse requires /bin/bash, but no providers found in RDEPENDS:unionfs-fuse? [file-rdeps]
-
-Changelog:
-
-3.4
-- default to fuse2 api on macos when compiling
-
-3.3
-- fixed fortified compilation
-- disabled logging to file since it had some unresolved locking issues
-- add support for direct_io
-
-3.2
-- various nfs fixes
-- various race condition fixes
-
-3.1
-- just fixes version mess (in manual file, cmake, etc.)
-
-3.0
-- libfuse3 support (and use is as new default)
-- add branch-preserving logic
-- make it compile under MacOS again
-- minor fixes
-
-Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../files/0001-support-cross-compiling.patch  | 33 +++++++++----------
- ...nionfs-fuse_2.2.bb => unionfs-fuse_3.4.bb} |  5 +--
- 2 files changed, 18 insertions(+), 20 deletions(-)
- rename meta-filesystems/recipes-filesystems/unionfs-fuse/{unionfs-fuse_2.2.bb => unionfs-fuse_3.4.bb} (84%)
+ meta-gnome/recipes-gnome/ghex/ghex_3.18.4.bb | 17 -----------------
+ meta-gnome/recipes-gnome/ghex/ghex_45.0.bb   | 20 ++++++++++++++++++++
+ 2 files changed, 20 insertions(+), 17 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gnome/ghex/ghex_3.18.4.bb
+ create mode 100644 meta-gnome/recipes-gnome/ghex/ghex_45.0.bb
 
-diff --git a/meta-filesystems/recipes-filesystems/unionfs-fuse/files/0001-support-cross-compiling.patch b/meta-filesystems/recipes-filesystems/unionfs-fuse/files/0001-support-cross-compiling.patch
-index bf363ca1b..13e782fa7 100644
---- a/meta-filesystems/recipes-filesystems/unionfs-fuse/files/0001-support-cross-compiling.patch
-+++ b/meta-filesystems/recipes-filesystems/unionfs-fuse/files/0001-support-cross-compiling.patch
-@@ -1,32 +1,29 @@
--From 449cec34c123b86b792627553c6ec7471d2ee7ed Mon Sep 17 00:00:00 2001
--From: Hongxu Jia <hongxu.jia@windriver.com>
--Date: Fri, 30 Jun 2017 14:46:51 +0800
-+From 6e794a36564a2639a07d8720260e33d7c9435aa4 Mon Sep 17 00:00:00 2001
-+From: Alper Ak <alperyasinak1@gmail.com>
-+Date: Fri, 10 Nov 2023 20:50:48 +0300
- Subject: [PATCH] support cross compiling
- 
- Do not override OE CMAKE variables
- 
--Upstream-Status: Pending
+diff --git a/meta-gnome/recipes-gnome/ghex/ghex_3.18.4.bb b/meta-gnome/re=
+cipes-gnome/ghex/ghex_3.18.4.bb
+deleted file mode 100644
+index 08e50409e..000000000
+--- a/meta-gnome/recipes-gnome/ghex/ghex_3.18.4.bb
++++ /dev/null
+@@ -1,17 +0,0 @@
+-SUMMARY =3D "GHex - a hex editor for GNOME"
+-LICENSE =3D "GPL-2.0-only"
+-LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4=
+263"
 -
- Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
- ---
-- CMakeLists.txt | 4 ++--
-+ src/CMakeLists.txt | 4 ++--
-  1 file changed, 2 insertions(+), 2 deletions(-)
- 
--diff --git a/CMakeLists.txt b/CMakeLists.txt
----- a/CMakeLists.txt
--+++ b/CMakeLists.txt
--@@ -10,9 +10,9 @@ IF(NOT CMAKE_CONFIGURATION_TYPES AND NOT CMAKE_BUILD_TYPE)
-- ENDIF(NOT CMAKE_CONFIGURATION_TYPES AND NOT CMAKE_BUILD_TYPE)
-+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-+index f549496..ab71fb2 100644
-+--- a/src/CMakeLists.txt
-++++ b/src/CMakeLists.txt
-+@@ -4,9 +4,9 @@ set(UNIONFS_SRCS unionfs.c opts.c debug.c findbranch.c readdir.c
-+     fuse_ops.c)
-+ set(UNIONFSCTL_SRCS unionfsctl.c)
-  
-- # Select flags.
---SET(CMAKE_C_FLAGS "-pipe -W -Wall -DFORTIFY_SOURCE=2")
--+SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pipe -W -Wall -DFORTIFY_SOURCE=2")
-+-SET(CMAKE_C_FLAGS "-pipe -W -Wall -D_FORTIFY_SOURCE=2")
-++SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pipe -W -Wall -D_FORTIFY_SOURCE=2")
-  SET(CMAKE_C_FLAGS_RELWITHDEBINFO "-O2 -g")
- -SET(CMAKE_C_FLAGS_RELEASE "-O2")
- +SET(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -O2")
-  SET(CMAKE_C_FLAGS_DEBUG "-O0 -g -DDEBUG")
-  
-- if (UNIX AND APPLE)
---- 
--2.8.1
+-GNOMEBASEBUILDCLASS =3D "meson"
 -
-+ add_executable(unionfs ${UNIONFS_SRCS} ${HASHTABLE_SRCS})
-diff --git a/meta-filesystems/recipes-filesystems/unionfs-fuse/unionfs-fuse_2.2.bb b/meta-filesystems/recipes-filesystems/unionfs-fuse/unionfs-fuse_3.4.bb
-similarity index 84%
-rename from meta-filesystems/recipes-filesystems/unionfs-fuse/unionfs-fuse_2.2.bb
-rename to meta-filesystems/recipes-filesystems/unionfs-fuse/unionfs-fuse_3.4.bb
-index 03ae418a4..e8fda0536 100644
---- a/meta-filesystems/recipes-filesystems/unionfs-fuse/unionfs-fuse_2.2.bb
-+++ b/meta-filesystems/recipes-filesystems/unionfs-fuse/unionfs-fuse_3.4.bb
-@@ -9,9 +9,10 @@ LIC_FILES_CHKSUM = "file://src/unionfs.c;beginline=3;endline=8;md5=30fa8de70fd8a
- SRC_URI = "git://github.com/rpodgorny/${BPN}.git;branch=master;protocol=https \
-            file://0001-support-cross-compiling.patch \
-            "
--SRCREV = "b0e3805d3d84d44ddf3e4e5238ae0332145d8157"
-+SRCREV = "773f1853b043eeb64b7459f903a2c65bd096f9d9"
- 
--DEPENDS = "fuse"
-+DEPENDS = "fuse3"
-+RDEPENDS:${PN} = "bash"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.25.1
+-DEPENDS =3D " \
+-    glib-2.0-native \
+-    gtk+3 \
+-"
+-
+-inherit gnomebase gsettings gtk-icon-cache gnome-help gettext upstream-v=
+ersion-is-even
+-
+-SRC_URI[archive.md5sum] =3D "7e6ed808766bc18285bdc6999bdf0f15"
+-SRC_URI[archive.sha256sum] =3D "c2d9c191ff5bce836618779865bee4059db81a3a=
+0dff38bda3cc7a9e729637c0"
+-
+-FILES:${PN} +=3D "${datadir}/metainfo"
+diff --git a/meta-gnome/recipes-gnome/ghex/ghex_45.0.bb b/meta-gnome/reci=
+pes-gnome/ghex/ghex_45.0.bb
+new file mode 100644
+index 000000000..6d3e9b978
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/ghex/ghex_45.0.bb
+@@ -0,0 +1,20 @@
++SUMMARY =3D "GHex - a hex editor for GNOME"
++LICENSE =3D "GPL-2.0-only"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4=
+263"
++
++
++DEPENDS =3D " \
++    desktop-file-utils-native  \
++    glib-2.0-native \
++    gtk4 \
++    libadwaita \
++"
++
++GIR_MESON_ENABLE_FLAG =3D 'enabled'
++GIR_MESON_DISABLE_FLAG =3D 'disabled'
++
++inherit gnomebase gsettings gtk-icon-cache gnome-help gettext gobject-in=
+trospection vala gi-docgen
++
++SRC_URI[archive.sha256sum] =3D "05cecc4561ca40b257c5db31da9f68d696133efc=
+0ae427ed82fb985a986e840e"
++
++FILES:${PN} +=3D "${libdir} ${datadir}/metainfo"
+--=20
+2.42.0
 
 
