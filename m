@@ -1,104 +1,137 @@
-Return-Path: <alperyasinak1@gmail.com>
+Return-Path: <jan.claussen10@web.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EC4BDC4332F
-	for <webhook@archiver.kernel.org>; Sat, 11 Nov 2023 17:17:34 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
- by mx.groups.io with SMTP id smtpd.web10.55694.1699723053911846175
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 70DEBC4332F
+	for <webhook@archiver.kernel.org>; Sat, 11 Nov 2023 18:26:16 +0000 (UTC)
+Received: from mout.web.de (mout.web.de [212.227.15.14])
+ by mx.groups.io with SMTP id smtpd.web10.1181.1699727175683380979
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 11 Nov 2023 09:17:34 -0800
+ Sat, 11 Nov 2023 10:26:16 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=fzpIO4xE;
- spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-40907b82ab9so24070015e9.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 11 Nov 2023 09:17:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699723052; x=1700327852; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=OtgD8poY1PtSp8/0Nbd2I2yMSn/N2LU9ps99pEM6FXw=;
-        b=fzpIO4xEozivpI9qi8R/EJcKo/FVSRNGLOTYCdt8lo1a211LsK+fVQ6EP3ict2+XKa
-         XJAvRSlc2VVq4GpNx2rciB9ocWBq2PN2gN19BiXeqCp5C9fzq4jEbUekNlyysMGbFmsk
-         XQwyrOUB1Ni2gcXTyRBG3TU0kU+kwhT4TcGe8z7yr19WhgvgTeyXq4P+rTvt+nF++JhV
-         VJTF5+qb+7kzpEuYzUFJZ+1rkflZbUE174BOztSLJjlVVb4ZOmUm0XSy56BIXuFELJey
-         ouTJKuiwMskCmPhf+Os80j/ogJOEsQZdLNWehIS2jeB7IXhzbL/4JPaQ/vcQIu/bpw05
-         qHdg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699723052; x=1700327852;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=OtgD8poY1PtSp8/0Nbd2I2yMSn/N2LU9ps99pEM6FXw=;
-        b=C38eek/T/iqEyVQImBTexOvB75BOZD78s6XIqdyRWgtLFu+laENr4pLcD9vkiw8qQ/
-         OJPbnll8RkK0PhNYqL3iGNqBf0crZFzVvDKfi5Yv0IL/W+MMpYGvCHJvUmrsfE5Jvl4C
-         YjGud/2cCHwUcCNjavvkSkbKdoUoSlw/QZl8oOzNly/BuNcz/rTrLnwLqkchGgnC8gGc
-         S4Eq9P7W9MwPgNkeLCzROtGtbUAn42jTzJnPy6IpcpY2iuCZoE01OMKm3J5e7r09u+QS
-         TYogY/UK/y3kBPWQVhAJ7FdaAptSQAfNWWlkT7YJsfRwqpyAiYjHPxBTFxO4ox5XHlJE
-         eXHw==
-X-Gm-Message-State: AOJu0YyfKr29tVZ3gT+P6fRASL3FB+jr8uxzzR4pJw6bbAVw2dz2l7Ny
-	BLI00OwvZAUqihVa8fjYOOIh43vdfJMqRA==
-X-Google-Smtp-Source: AGHT+IGu/+sB7EaDL3vcWXVKFyUweiq0mtpYY7I2FPMp+BH+JZHKn/+0pX6SMF7IiWRpQ7zFf58cEg==
-X-Received: by 2002:a05:600c:548b:b0:407:3e94:bcca with SMTP id iv11-20020a05600c548b00b004073e94bccamr2182323wmb.1.1699723051558;
-        Sat, 11 Nov 2023 09:17:31 -0800 (PST)
-Received: from localhost.localdomain ([176.33.65.238])
-        by smtp.gmail.com with ESMTPSA id bi15-20020a05600c3d8f00b004095874f6d3sm2693937wmb.28.2023.11.11.09.17.30
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 11 Nov 2023 09:17:31 -0800 (PST)
-From: alperak <alperyasinak1@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-webserver][PATCHv2] xdebug: upgrade 3.2.0 -> 3.2.2
-Date: Sat, 11 Nov 2023 20:17:21 +0300
-Message-Id: <20231111171721.3393293-1-alperyasinak1@gmail.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=jan.claussen10@web.de header.s=s29768273 header.b=egJ3DHUj;
+ spf=pass (domain: web.de, ip: 212.227.15.14, mailfrom: jan.claussen10@web.de)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de; s=s29768273;
+	t=1699727174; x=1700331974; i=jan.claussen10@web.de;
+	bh=yY6VExiCzuTcFmiRcXT/Q8MlSLqDtwm98Q9IxOKuRdg=;
+	h=X-UI-Sender-Class:Date:From:To:References:Subject;
+	b=egJ3DHUjckz1YW/T020EePYQynziPDeawrSj8hYfKZ97xZUcLr6QwHLSCRyxI3q7
+	 Bbyja7G3+LqcPe9kU0ovGtorEtmw5MNRJkRzoDGMLQq2bfwE8pHrcP1twVX86GaUA
+	 5UIYFDmNtnCusW4gmyB4zKF2YhP26xWwZxzNMRfUbQ9VnvxYEc0Cf00EsdjJ+lCQM
+	 fLIOmsAOmWiOj+B7rg4hmcLNhOxSicDgI+Dtrec68nILoDTuJRTN9DMT+GKUltl2k
+	 zPD/c845ORBn7hcWbet94Mumk3DSPAxAffLOumIITrlnfJZIMIElUTYD98k9KBXme
+	 MncZ+YFfsuJ3lKo33A==
+X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
+Received: from precision5810 ([192.119.63.182]) by smtp.web.de (mrweb006
+ [213.165.67.108]) with ESMTPSA (Nemesis) id 1N4NDG-1rQS3M0fTy-011JjE for
+ <openembedded-devel@lists.openembedded.org>; Sat, 11 Nov 2023 19:26:14 +0100
+Date: Sat, 11 Nov 2023 19:26:13 +0100
+From: =?utf-8?Q?Jan_Clau=C3=9Fen?= <jan.claussen10@web.de>
+To: "=?utf-8?Q?openembedded-devel=40lists.openembedded.org?="
+ <openembedded-devel@lists.openembedded.org>
+Message-ID: <F8BE072F-A616-447C-8AAF-DB9E1D08D13B@getmailspring.com>
+References: <20231015183007.385143-1-jan.claussen10@web.de>
+Subject: [meta-oe][PATCH] recipes-support: Add btop
+X-Mailer: Mailspring
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/alternative; boundary="654fc745_4b019d0c_12072"
+X-Provags-ID: V03:K1:G++XjjDyeqjTBC8RLNr8NMXCT2jynXkAWpR8d8IbLUsbUdFyFJz
+ TdJ+y1uEUScspV5khH4bnSYN0AnXXE3Fk8vTLUr4SVyxH8MuzHvD3ShUM0PNrwb3EAGpAKO
+ FoKo3OJDlYr3BWHgZ5FXG51pugPZBPJqtPrmXwrE2VeoXFUXiflaKnH6+9i2lI99VOgjiWq
+ M75qWitANYSA2uTUqrj+Q==
+UI-OutboundReport: notjunk:1;M01:P0:r3zyyXDIaoc=;cWCtBFkyrRD7GSR5Sri5cQ4V83T
+ XxDhiBTBrQdPd/xtNRktvhif2kwkoBDoy9Jh+ukvhnkyIy+N9E8e5ZbsVEeI9aUcw2hLLLNlC
+ 0SdMS7rg19+MoaiwTpnDp6xVVPO0j/3Gwyk+0T7kSyepPgeyPf1w9ABHeZKDSvPszksfod541
+ Bz9/hYqCB53lajkc2lM39uxcAodrEexCbXvZi5aiVJOQy6YQgxDknvMlqZZwgkhiBwvQ7EhLa
+ CHeamXWB90ztM19D2Uu8pcMx0tFiJpLZZt0sw+ojO1q3qV8ESVr+BBbM/1AlWHm7ccPTp5psV
+ MeNT2FZrZO3iawVxE8y/CF/fX0TiYv4NvbWw2Q4AqnLI2uA+egVNzXN/BupsIjlPaurz/C3rE
+ PCrmdDsg87+7Kx0sE/Ksh6+8Eg4OcSOMgewWg3QIQb3SJiKmoW6Q98shJmiqyyB1HIQgG0e/6
+ sDcqF9rxMGdM9iU2OaN/rQ6vw1P+kaZJJq4Xd0G+gA+0pl/iWCzUUBia8cnfMAN7+eOJHy0bX
+ YEyBppkoQ5AG38y+alp8tt1VIARsyE47NDzOYkeLJRzT3/q8lgPN4Umn+K877xuQWRoihZ4jY
+ kBEm3fz4q/PY/D3KMXdKkFJrPeQ/Zwos1r74Qm0VZ5cDJNyC/86YvK5j8f442KD1zcV7KxjSz
+ TZnhMYbY8U+XULRbHk5YBTE9ozhfMHv2IPAZyNAXYKcesF7UE14Y6xyI0ul6BXYGppwhJOrhZ
+ JNNPjr5Jjb6dawuvn2tKNRbYNUA8SImeF8SPkKmwubdHRTlT+WUW6uhzj5oHuR5PlFgXzT8ob
+ 0km+0Si6f1yGDeXWAogVvsRYd0Y7u900GdqJTBQqSqFkxxI3ysX/ErfyguVxSXb2dmhYVPB8T
+ m20GgG9gWetOdv5d0kG0wo6BwRIiNafZ4NwhyCe1+O8vLYnhT+E72E5+4yIZUc6hhZ5AW1oD7
+ 4rtFY1FUgGCZzxdFogRPCXnw9j4=
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 11 Nov 2023 17:17:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106558
+ <openembedded-devel@lists.openembedded.org>; Sat, 11 Nov 2023 18:26:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106559
 
-Changelog:
+--654fc745_4b019d0c_12072
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-[2023-07-14] — Xdebug 3.2.2
-    -Fixed bug #2175: Crash with EXC_BAD_ACCESS in xdebug_str_create
-    -Fixed bug #2180: Crash on extended SplFixedArray
-    -Fixed bug #2182: Segfault with ArrayObject on stack
-    -Fixed bug #2186: Segfault with trampoline functions and debugger activation
-[2023-03-21] — Xdebug 3.2.1
-    -Fixed bug #2144: Xdebug 3.2.0 ignores xdebug.mode and enables all features
-    -Fixed bug #2145: Xdebug 3.2.0 crash PHP on Windows if xdebug.mode = off
-    -Fixed bug #2146: apache2 segfaulting with version 3.2.0 on PHP 8.0
-    -Fixed bug #2148: Icon for link to docs in xdebug_info() HTML output does not always render correctly
-
-Signed-off-by: alperak <alperyasinak1@gmail.com>
 ---
- The only difference from v1 is that the forgotten whitespace in the changelog has been deleted.
+meta-oe/recipes-support/btop/btop_1.2.13.bb | 23 +++++++++++++++++++++
+1 file changed, 23 insertions(+)
+create mode 100644 meta-oe/recipes-support/btop/btop_1.2.13.bb
 
- .../recipes-php/xdebug/{xdebug_3.2.0.bb => xdebug_3.2.2.bb}     | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-webserver/recipes-php/xdebug/{xdebug_3.2.0.bb => xdebug_3.2.2.bb} (91%)
+diff --git a/meta-oe/recipes-support/btop/btop_1.2.13.bb b/meta-oe/recipes-support/btop/btop_1.2.13.bb
+new file mode 100644
+index 000000000..f780a993a
+--- /dev/null
++++ b/meta-oe/recipes-support/btop/btop_1.2.13.bb
+@@ -0,0 +1,23 @@
++SUMMARY = "Resource monitor that shows usage and stats for processor, memory, disks, network and processes."
++HOMEPAGE = "https://github.com/aristocratos/btop"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
++SECTION = "console/utils"
++
++SRC_URI = "git://github.com/aristocratos/btop.git;protocol=https;branch=main"
++SRCREV = "2a864f6f2ea60df16b3f015885eb3c18a48b9b78"
++
++S = "${WORKDIR}/git"
++
++inherit cmake
++
++FILES:${PN} += " \
++ /usr/share/icons \
++ /usr/share/icons/hicolor \
++ /usr/share/icons/hicolor/48x48 \
++ /usr/share/icons/hicolor/scalable \
++ /usr/share/icons/hicolor/48x48/apps \
++ /usr/share/icons/hicolor/48x48/apps/btop.png \
++ /usr/share/icons/hicolor/scalable/apps \
++ /usr/share/icons/hicolor/scalable/apps/btop.svg \
++"
+--
+2.42.0
 
-diff --git a/meta-webserver/recipes-php/xdebug/xdebug_3.2.0.bb b/meta-webserver/recipes-php/xdebug/xdebug_3.2.2.bb
-similarity index 91%
-rename from meta-webserver/recipes-php/xdebug/xdebug_3.2.0.bb
-rename to meta-webserver/recipes-php/xdebug/xdebug_3.2.2.bb
-index fe6fc5bf9..8ad588d29 100644
---- a/meta-webserver/recipes-php/xdebug/xdebug_3.2.0.bb
-+++ b/meta-webserver/recipes-php/xdebug/xdebug_3.2.2.bb
-@@ -6,7 +6,7 @@ DEPENDS = "php re2c-native"
- 
- SRC_URI = "http://xdebug.org/files/xdebug-${PV}.tgz"
- 
--SRC_URI[sha256sum] = "7769b20eecdadf5fbe9f582512c10b394fb575b6f7a8c3a3a82db6883e0032b7"
-+SRC_URI[sha256sum] = "f48777371f90cbb315ea4ea082a1ede6765bcfb35d7d6356ab8f71fd6dfcc157"
- 
- UPSTREAM_CHECK_REGEX = "xdebug-(?P<pver>\d+(\.\d+)+)\.tgz"
- 
--- 
-2.25.1
+
+--654fc745_4b019d0c_12072
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+<div>---</div><div class=3D=22gmail=5Fquote=22><div><div>meta-oe/recipes-=
+support/btop/btop=5F1.2.13.bb =7C 23 +++++++++++++++++++++</div><div>1 fi=
+le changed, 23 insertions(+)</div><div>create mode 100644 meta-oe/recipes=
+-support/btop/btop=5F1.2.13.bb</div><br><div>diff --git a/meta-oe/recipes=
+-support/btop/btop=5F1.2.13.bb b/meta-oe/recipes-support/btop/btop=5F1.2.=
+13.bb</div><div>new file mode 100644</div><div>index 000000000..f780a993a=
+</div><div>--- /dev/null</div><div>+++ b/meta-oe/recipes-support/btop/bto=
+p=5F1.2.13.bb</div><div>=40=40 -0,0 +1,23 =40=40</div><div>+SUMMARY =3D =22=
+Resource monitor that shows usage and stats for processor, memory, disks,=
+ network and processes.=22</div><div>+HOMEPAGE =3D =22https://github.com/=
+aristocratos/btop=22</div><div>+LICENSE =3D =22Apache-2.0=22</div><div>+L=
+IC=5F=46ILES=5FCHKSUM =3D =22file://LICENSE;md5=3D3b83ef96387f14655fc854d=
+dc3c6bd57=22</div><div>+SECTION =3D =22console/utils=22</div><div>+</div>=
+<div>+SRC=5FURI =3D =22git://github.com/aristocratos/btop.git;protocol=3D=
+https;branch=3Dmain=22</div><div>+SRCREV =3D =222a864f6f2ea60df16b3f01588=
+5eb3c18a48b9b78=22</div><div>+</div><div>+S =3D =22=24=7BWORKDIR=7D/git=22=
+</div><div>+</div><div>+inherit cmake</div><div>+</div><div>+=46ILES:=24=7B=
+PN=7D +=3D =22 =5C</div><div>+ /usr/share/icons =5C</div><div>+ /usr/shar=
+e/icons/hicolor =5C</div><div>+ /usr/share/icons/hicolor/48x48 =5C</div><=
+div>+ /usr/share/icons/hicolor/scalable =5C</div><div>+ /usr/share/icons/=
+hicolor/48x48/apps =5C</div><div>+ /usr/share/icons/hicolor/48x48/apps/bt=
+op.png =5C</div><div>+ /usr/share/icons/hicolor/scalable/apps =5C</div><d=
+iv>+ /usr/share/icons/hicolor/scalable/apps/btop.svg =5C</div><div>+=22</=
+div><div>--</div><div>2.42.0</div></div></div>
+--654fc745_4b019d0c_12072--
 
 
