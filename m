@@ -2,183 +2,212 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0628BC072AB
-	for <webhook@archiver.kernel.org>; Sun, 12 Nov 2023 20:18:04 +0000 (UTC)
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
- by mx.groups.io with SMTP id smtpd.web10.22516.1699820275387050511
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C560C4332F
+	for <webhook@archiver.kernel.org>; Sun, 12 Nov 2023 20:22:04 +0000 (UTC)
+Received: from mail-oa1-f46.google.com (mail-oa1-f46.google.com [209.85.160.46])
+ by mx.groups.io with SMTP id smtpd.web10.22615.1699820522363093017
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 12 Nov 2023 12:17:55 -0800
+ Sun, 12 Nov 2023 12:22:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Sw86+MzN;
- spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-6c3363a2b93so3787987b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Nov 2023 12:17:55 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=bTzU4/+z;
+ spf=pass (domain: gmail.com, ip: 209.85.160.46, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f46.google.com with SMTP id 586e51a60fabf-1f06931e4f7so2502624fac.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Nov 2023 12:22:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699820275; x=1700425075; darn=lists.openembedded.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Vo80vlky9BCPRc0BNvuHfYaHDe9bCJvHsdExdjsT+4Y=;
-        b=Sw86+MzNdeHZnSnoYR0pJhR19iMHVW/VdrM/8ajAEZmxIEKGn8Ki0spYW87aoPBmK7
-         oVBEF8+ELrIdnwcQpzCGLk8lsx/XWvWv2h0W2fGESkWU/uZCmt/S68DMsma5pkS836OZ
-         jR2WS3C9KSYz+pl4JFfRjART0+iUm+SvdnhGqJeDAltAJySn+rM7+m4L+20oWDdwU9/W
-         e6hsjZMVH60MFFQJ4rrQ3bgbM+gcWGKgrFdvbRuAiFb4QGGFfqgtSrxYfCeRCeX3kxXc
-         OWRlb4Q9wPj/2BiZ1N6TDJlJlYiwR/cwzw9TV/o40xgdJ6IAvn4jS42xrQYNgzHr0+lM
-         yAhA==
+        d=gmail.com; s=20230601; t=1699820521; x=1700425321; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=l4zaRYFg7drnnHxSqk9eBRdT119enWMIL14MfRXvPk4=;
+        b=bTzU4/+zz5esxAqvMncQGeTqI3B9Tdr00W6jvLsE6xccFULML5o8b1O5UGenJqFHJB
+         3mQYLV/Aue93n8VsTuMKqbwvOL37CVPkBcrBP8j6PifAiwbO9UWerI6wtNfl4DvSo7zl
+         k8lrdmFzkst2NPAWzU8WMNWboxP62wllCo27GcBqt7XZg05ZlY8iy4l5a9Ya5/jEeNlC
+         NY2+a+Id1AUnKyqJdo7Ioiqg5Onb+j9pD6BiqZfQkgDhtm1MjTrKmA9UExnWluStBnaQ
+         iGyAuKEETbyLXlpAVYO6weNpBihkYOLDcreCoIWQR7wFTz/akYSe7HQYTWy0HLDWx/Tk
+         +Sew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699820275; x=1700425075;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1699820521; x=1700425321;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Vo80vlky9BCPRc0BNvuHfYaHDe9bCJvHsdExdjsT+4Y=;
-        b=sHFrTTKSwNOYEKzoGD0MZFuffFVFWf1VXYMUjbz6nd0Zq9vuzlXpj4iWQ9JfYuNu27
-         h+20qNXCdugZUrntQrXuHEoITj2KpkSayW0rdROUC4KF1pW9D670ZXrXrTZk59cbdh/Z
-         eK6n8/bPXdbV++NDyaG2CwNZ9HnEMKu5SVIAzSQ/OH/JFjzxRPCFltbhsxjzN5ki5P1p
-         agv3ZM+hF4weJMJuVOYk8ndkgsdtVml2QWUyj6p+RWiKzrXIu6758Zwrzg0UfFg2qrDB
-         IibBhmtV1POvEEqnMNH5RSD0N0k1DIzIZcJf6jkkIDjEEdeiOkbhckxK3CFURViY0aBj
-         CRvg==
-X-Gm-Message-State: AOJu0YxS6s3DLlDc//C04Fy/xogLpSRhKcFC2ecAmilRATdPherZ8XC0
-	9KOlhQKNaZgWrf4KouJl9Vsi7+zqurGV7w==
-X-Google-Smtp-Source: AGHT+IF2UVWgtyyNPOBFgrIlpxgVgFRQSXbPsPA97H4D7yz3dxf+CevLNJaJEFcVAlvgYIBtB5l/PA==
-X-Received: by 2002:a05:6a21:1197:b0:181:3129:363 with SMTP id oj23-20020a056a21119700b0018131290363mr6073794pzb.58.1699820274662;
-        Sun, 12 Nov 2023 12:17:54 -0800 (PST)
-Received: from apollo.localdomain ([2601:646:9100:2cb0::62f8])
-        by smtp.gmail.com with ESMTPSA id u8-20020a63df08000000b005ac384b71cbsm2954892pgg.60.2023.11.12.12.17.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 12 Nov 2023 12:17:54 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 12 Nov 2023 12:17:51 -0800
-Subject: [PATCH v2 4/5] loudmouth: Upgrade to 1.5.4
+        bh=l4zaRYFg7drnnHxSqk9eBRdT119enWMIL14MfRXvPk4=;
+        b=R/Lb/A6deQ/PhQ/v4YvAsYuDMELfz7txr0wLe4qDNKF9mK2nbmI4gp/5TAAxpevXy7
+         lOZFlMsBrbolQok6yRVhwb60EAvMAqLzC2FBiKsb0Pixds6ChyYmA/tqsMThKpcbxns4
+         NXtrEFArulka73gYT4WaQu5pRcsTc22NMviP6Ujz9vF8kFk4pqigP2j+X0VE8WYQXB/j
+         gqLP3SyBI0ptiqVfcgiOGYe7teod2OTUBd5KLJeN+xKyW/VqmgyC8ZNGDBxeDNcOvlhj
+         GiYPLyfDsRISXUmad+ttwENjJUIRmQhmoRDb9IZYpsQIWIsBTX5yx3iwBTXFSuzMKZ7n
+         OgkA==
+X-Gm-Message-State: AOJu0YwZnaLCvpreDGna7XsV7It8QO0JoGcsbQsfwRz16Kgmm8sQOMXy
+	iy/I/lNiToC8jRHAf8xuuvxd0fer7gwxjNu/n35c1/FMhcw=
+X-Google-Smtp-Source: AGHT+IGObh3BHUOdFc7VOkx8iKbiKgZ8w6XEknGB3jBK2fwhIE8ikuKwpgDygmwWcT+ochpPkH7Ssfa2EM9bILmKuwQ=
+X-Received: by 2002:a05:6870:9d99:b0:1f0:5248:c6a6 with SMTP id
+ pv25-20020a0568709d9900b001f05248c6a6mr7400991oab.51.1699820521522; Sun, 12
+ Nov 2023 12:22:01 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20231112-kraj-pu-v2-4-f38d4f960d44@gmail.com>
-References: <20231112-kraj-pu-v2-0-f38d4f960d44@gmail.com>
-In-Reply-To: <20231112-kraj-pu-v2-0-f38d4f960d44@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-X-Mailer: b4 0.12.4
+References: <CAMKF1spiKW6E=AzH7gbhSzva_qCT_4nBiQexA2sGvr09gyfs0g@mail.gmail.com>
+ <FA9B6E4D-2A1D-4EF4-A672-198CC3ED0021@getmailspring.com>
+In-Reply-To: <FA9B6E4D-2A1D-4EF4-A672-198CC3ED0021@getmailspring.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 12 Nov 2023 12:21:35 -0800
+Message-ID: <CAMKF1sqd83q-=EjZHya7PWoWRO=X10X6rbJTvZJGCNtJ4n=iPg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] recipes-support: Add btop
+To: =?UTF-8?B?SmFuIENsYXXDn2Vu?= <jan.claussen10@web.de>
+Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 12 Nov 2023 20:18:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106608
+ <openembedded-devel@lists.openembedded.org>; Sun, 12 Nov 2023 20:22:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106610
 
-License-Update: Update the postal address of the FSF [1]
+On Sun, Nov 12, 2023 at 10:51=E2=80=AFAM Jan Clau=C3=9Fen <jan.claussen10@w=
+eb.de> wrote:
+>
+> No, it is an issue I have with images for the Pi Zero. I haven't build an=
+ything for musl at all, although it would probably a good choice for the Pi=
+ Zero.
+>
+> I have no issues using Raspberry Pi OS or other distros btw, so the devic=
+e is not the issue
 
-Drop patches not needed anymore.
+As one point I have pi0 running fine perhaps something has regressed
+in meta-raspberrypi :( these things need TLC to keep going.
 
-[1] https://github.com/mcabber/loudmouth/commit/c1f7ffdeb1f9f78eeb377bd28c7be8c146161327
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../04-use-pkg-config-for-gnutls.patch             | 25 ----------------------
- .../loudmouth/loudmouth-1.4.3/glib-2.32.patch      | 12 -----------
- .../loudmouth/loudmouth_1.4.3.bb                   | 22 -------------------
- .../loudmouth/loudmouth_1.5.4.bb                   | 16 ++++++++++++++
- 4 files changed, 16 insertions(+), 59 deletions(-)
-
-diff --git a/meta-oe/recipes-connectivity/loudmouth/loudmouth-1.4.3/04-use-pkg-config-for-gnutls.patch b/meta-oe/recipes-connectivity/loudmouth/loudmouth-1.4.3/04-use-pkg-config-for-gnutls.patch
-deleted file mode 100644
-index 0fc87abd09..0000000000
---- a/meta-oe/recipes-connectivity/loudmouth/loudmouth-1.4.3/04-use-pkg-config-for-gnutls.patch
-+++ /dev/null
-@@ -1,25 +0,0 @@
--Upstream-Status: Pending
--
--Description: use pkg-config to detect gnutls
--Debian: http://bugs.debian.org/529835
--Origin: http://groups.google.com/group/loudmouth-dev/browse_thread/thread/3f78255837048daf#
--
----- a/configure.ac.orig	2009-08-16 20:29:36.000000000 +0200
--+++ b/configure.ac	2009-08-16 20:30:43.000000000 +0200
--@@ -146,10 +146,12 @@ AC_ARG_WITH(openssl-libs,
-- enable_ssl=no
-- if test "x$ac_ssl" = "xgnutls"; then
--   dnl Look for GnuTLS
---  AM_PATH_LM_LIBGNUTLS($GNUTLS_REQUIRED, have_libgnutls=yes, have_libgnutls=no)
---  if test "x$have_libgnutls" = "xyes"; then
---    CFLAGS="$CFLAGS $LIBGNUTLS_CFLAGS"
---    LIBS="$LIBS $LIBGNUTLS_LIBS"
--+  PKG_CHECK_MODULES(GNUTLS, gnutls >= $GNUTLS_REQUIRED, have_gnutls=yes, have_gnutls=no)
--+  if test "x$have_gnutls" = "xyes"; then 
--+    AC_SUBST(ASYNCNS_CFLAGS)
--+    AC_SUBST(ASYNCNS_LIBS)
--+    CFLAGS="$CFLAGS $GNUTLS_CFLAGS"
--+    LIBS="$LIBS $GNUTLS_LIBS"
--     AC_DEFINE(HAVE_GNUTLS, 1, [whether to use GnuTSL support.])
--     enable_ssl=GnuTLS
--   else
-diff --git a/meta-oe/recipes-connectivity/loudmouth/loudmouth-1.4.3/glib-2.32.patch b/meta-oe/recipes-connectivity/loudmouth/loudmouth-1.4.3/glib-2.32.patch
-deleted file mode 100644
-index 921aded943..0000000000
---- a/meta-oe/recipes-connectivity/loudmouth/loudmouth-1.4.3/glib-2.32.patch
-+++ /dev/null
-@@ -1,12 +0,0 @@
--Upstream-Status: Pending
--
----- loudmouth-1.4.3.orig/loudmouth/lm-error.c	2008-10-29 21:48:15.000000000 +0100
--+++ loudmouth-1.4.3/loudmouth/lm-error.c	2012-05-06 08:27:07.455739440 +0200
--@@ -19,7 +19,6 @@
--  */
-- 
-- #include <config.h>
---#include <glib/gerror.h>
-- #include "lm-error.h"
-- 
-- /**
-diff --git a/meta-oe/recipes-connectivity/loudmouth/loudmouth_1.4.3.bb b/meta-oe/recipes-connectivity/loudmouth/loudmouth_1.4.3.bb
-deleted file mode 100644
-index 0593469a45..0000000000
---- a/meta-oe/recipes-connectivity/loudmouth/loudmouth_1.4.3.bb
-+++ /dev/null
-@@ -1,22 +0,0 @@
--DESCRIPTION = "Loudmouth is a lightweight and easy-to-use C library for programming with the Jabber protocol."
--HOMEPAGE = "http://www.loudmouth-project.org/"
--
--LICENSE = "LGPL-2.1-only"
--LIC_FILES_CHKSUM = "file://COPYING;md5=c4f38aef94828f6b280e00d1173be689"
--
--DEPENDS = "glib-2.0 libcheck openssl libidn"
--
--GNOMEBASEBUILDCLASS = "autotools"
--inherit gnomebase gtk-doc
--
--PR = "r2"
--
--SRC_URI += "file://04-use-pkg-config-for-gnutls.patch \
--            file://glib-2.32.patch"
--
--SRC_URI[archive.md5sum] = "55339ca42494690c3942ee1465a96937"
--SRC_URI[archive.sha256sum] = "95a93f5d009b71ea8193d994aa11f311bc330a3efe1b7cd74dc48f11c7f929e3"
--GNOME_COMPRESS_TYPE="bz2"
--
--EXTRA_OECONF = "--with-ssl=openssl"
--
-diff --git a/meta-oe/recipes-connectivity/loudmouth/loudmouth_1.5.4.bb b/meta-oe/recipes-connectivity/loudmouth/loudmouth_1.5.4.bb
-new file mode 100644
-index 0000000000..f67c46b428
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/loudmouth/loudmouth_1.5.4.bb
-@@ -0,0 +1,16 @@
-+DESCRIPTION = "Loudmouth is a lightweight and easy-to-use C library for programming with the Jabber protocol."
-+HOMEPAGE = "http://www.loudmouth-project.org/"
-+
-+LICENSE = "LGPL-2.1-only"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
-+
-+DEPENDS = "glib-2.0 libcheck openssl libidn"
-+
-+GNOMEBASEBUILDCLASS = "autotools"
-+
-+inherit gnomebase gtk-doc
-+
-+SRC_URI = "https://github.com/mcabber/${BPN}/releases/download/${PV}/${BP}.tar.bz2"
-+SRC_URI[sha256sum] = "31cbc91c1fddcc5346b3373b8fb45594e9ea9cc7fe36d0595e8912c47ad94d0d"
-+
-+EXTRA_OECONF = "--with-ssl=openssl --with-compile-warnings=no"
-
--- 
-2.42.1
-
+> On Nov. 12 2023, at 7:49 pm, Khem Raj <raj.khem@gmail.com> wrote:
+>
+> hmm is that just seen with musl and works ok with glibc based images ?
+>
+> TCLIBC=3Dmusl bitbake core-image-base
+>
+> eg. will produce a musl based image which is expected to work
+>
+> On Sun, Nov 12, 2023 at 10:23=E2=80=AFAM Jan Clau=C3=9Fen <jan.claussen10=
+@web.de> wrote:
+> >
+> > Unfortunately I can't test it unless this gets solved (or I buy a diffe=
+rent Raspberry Pi)
+> >
+> > https://github.com/agherzan/meta-raspberrypi/issues/1229
+> >
+> > On Nov. 12 2023, at 6:43 pm, Khem Raj <raj.khem@gmail.com> wrote:
+> >
+> > TCLIBC=3Dmusl bitbake <recipe>
+> >
+> > On Sun, Nov 12, 2023 at 9:24=E2=80=AFAM Jan Clau=C3=9Fen <jan.claussen1=
+0@web.de> wrote:
+> > >
+> > > How to test it against musl btw? Build a musl-based system for Raspbe=
+rry Pi and see if it runs?
+> > >
+> > > On Nov. 12 2023, at 6:23 pm, Jan Clau=C3=9Fen <jan.claussen10@web.de>=
+ wrote:
+> > >
+> > > Yes, the CMake support was added two months ago and the release is fr=
+om 2022. Cmake is also not supported by the main developer who seems to fav=
+or an advanced Makefile. In any case, it is easier to fix than the Makefile=
+. I will go with the git version for now then until there is a new release.
+> > >
+> > > On Nov. 12 2023, at 6:20 pm, Khem Raj <raj.khem@gmail.com> wrote:
+> > >
+> > > On Sun, Nov 12, 2023 at 8:25=E2=80=AFAM Jan Clau=C3=9Fen <jan.clausse=
+n10@web.de> wrote:
+> > > >
+> > > > I am trying with the tarball but it is quite hard, since it doesn't=
+ come with a CMakeLists.txt.
+> > > > There is a recipe here, but it involves a lot of patching which cou=
+ld potentially be painful to maintain
+> > > >
+> > > > https://github.com/aristocratos/btop/issues/330#issuecomment-112368=
+5779
+> > > >
+> > >
+> > > is it because cmake support was added later ? in that case maybe usin=
+g
+> > > git version is ok
+> > >
+> > > > On Nov. 11 2023, at 8:01 pm, Khem Raj <raj.khem@gmail.com> wrote:
+> > > >
+> > > > On Sat, Nov 11, 2023 at 10:38=E2=80=AFAM Jan Clau=C3=9Fen <jan.clau=
+ssen10@web.de> wrote:
+> > > > >
+> > > > > It also needs a utf-8 locale to work. Else you have to force utf-=
+8 mode with a flag. I haven't included this as dependency at this point.
+> > > >
+> > > > you want to express all that is needed to get it running amicably.
+> > > > keeping in mind that we have glibc and musl based systems to servic=
+e
+> > > > it will be good to check it on musl too.
+> > > >
+> > > > >
+> > > > > On Nov. 11 2023, at 7:35 pm, Jan Clau=C3=9Fen <jan.claussen10@web=
+.de> wrote:
+> > > > >
+> > > > > Glad that it arrived now! This is a really great resource monitor=
+. It is building from the git repository. Do you think it is better to use =
+the release instead?
+> > > > >
+> > > > > On Nov. 11 2023, at 7:30 pm, Khem Raj <raj.khem@gmail.com> wrote:
+> > > > >
+> > > > > Thanks for your contribution Jan
+> > > > >
+> > > > > On Sat, Nov 11, 2023 at 10:26=E2=80=AFAM Jan Clau=C3=9Fen <jan.cl=
+aussen10@web.de> wrote:
+> > > > > >
+> > > > > > ---
+> > > > > > meta-oe/recipes-support/btop/btop_1.2.13.bb | 23 ++++++++++++++=
++++++++
+> > > > > > 1 file changed, 23 insertions(+)
+> > > > > > create mode 100644 meta-oe/recipes-support/btop/btop_1.2.13.bb
+> > > > > >
+> > > > > > diff --git a/meta-oe/recipes-support/btop/btop_1.2.13.bb b/meta=
+-oe/recipes-support/btop/btop_1.2.13.bb
+> > > > > > new file mode 100644
+> > > > > > index 000000000..f780a993a
+> > > > > > --- /dev/null
+> > > > > > +++ b/meta-oe/recipes-support/btop/btop_1.2.13.bb
+> > > > > > @@ -0,0 +1,23 @@
+> > > > > > +SUMMARY =3D "Resource monitor that shows usage and stats for p=
+rocessor, memory, disks, network and processes."
+> > > > > > +HOMEPAGE =3D "https://github.com/aristocratos/btop"
+> > > > > > +LICENSE =3D "Apache-2.0"
+> > > > > > +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D3b83ef96387f14655fc=
+854ddc3c6bd57"
+> > > > > > +SECTION =3D "console/utils"
+> > > > > > +
+> > > > > > +SRC_URI =3D "git://github.com/aristocratos/btop.git;protocol=
+=3Dhttps;branch=3Dmain"
+> > > > > > +SRCREV =3D "2a864f6f2ea60df16b3f015885eb3c18a48b9b78"
+> > > > > > +
+> > > > > > +S =3D "${WORKDIR}/git"
+> > > > > > +
+> > > > > > +inherit cmake
+> > > > > > +
+> > > > > > +FILES:${PN} +=3D " \
+> > > > > > + /usr/share/icons \
+> > > > >
+> > > > > Lets use ${datadir} instead of hardcoded /usr/share
+> > > > >
+> > > > > > + /usr/share/icons/hicolor \
+> > > > > > + /usr/share/icons/hicolor/48x48 \
+> > > > > > + /usr/share/icons/hicolor/scalable \
+> > > > > > + /usr/share/icons/hicolor/48x48/apps \
+> > > > > > + /usr/share/icons/hicolor/48x48/apps/btop.png \
+> > > > > > + /usr/share/icons/hicolor/scalable/apps \
+> > > > > > + /usr/share/icons/hicolor/scalable/apps/btop.svg \
+> > > > > > +"
+> > > > > > --
+> > > > > > 2.42.0
+> > > > > >
+> > > > > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > > > > > Links: You receive all messages sent to this group.
+> > > > > > View/Reply Online (#106559): https://lists.openembedded.org/g/o=
+penembedded-devel/message/106559
+> > > > > > Mute This Topic: https://lists.openembedded.org/mt/102530478/19=
+97914
+> > > > > > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > > > > > Unsubscribe: https://lists.openembedded.org/g/openembedded-deve=
+l/unsub [raj.khem@gmail.com]
+> > > > > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > > > > >
 
