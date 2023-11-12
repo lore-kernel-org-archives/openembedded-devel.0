@@ -2,101 +2,99 @@ Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 88600C4332F
-	for <webhook@archiver.kernel.org>; Sun, 12 Nov 2023 14:53:12 +0000 (UTC)
-Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com [209.85.208.54])
- by mx.groups.io with SMTP id smtpd.web11.16301.1699800786573847064
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 883CCC4332F
+	for <webhook@archiver.kernel.org>; Sun, 12 Nov 2023 15:19:12 +0000 (UTC)
+Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com [209.85.208.50])
+ by mx.groups.io with SMTP id smtpd.web11.16761.1699802347634273444
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 12 Nov 2023 06:53:06 -0800
+ Sun, 12 Nov 2023 07:19:07 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=OBGmuRD4;
- spf=pass (domain: gmail.com, ip: 209.85.208.54, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-ed1-f54.google.com with SMTP id 4fb4d7f45d1cf-53de8fc1ad8so5546247a12.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Nov 2023 06:53:06 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ckcyxWB6;
+ spf=pass (domain: gmail.com, ip: 209.85.208.50, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-ed1-f50.google.com with SMTP id 4fb4d7f45d1cf-53d9f001b35so5536050a12.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Nov 2023 07:19:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699800785; x=1700405585; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1699802345; x=1700407145; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Ne7vVatU+ciQnyTrYIcJoMjnNdgMlj6tuL2i4VH17V4=;
-        b=OBGmuRD4bmDPiKwv33fmrYoWOrVUuK2MdKP2RNCvdkYlGG+YllP3ht8Ih48emljDh9
-         YUWSONQ8G0WXQ/pxGWw28GDFjiLjsD4eesV2qKZOEX2ojNnMh76Ky4Eti05ZwBa//v7t
-         IXkusWCCBveZgVzGi6m3XeeyU+Naas9Bs1jNEJAtjkn8LEp0YhW31rzlfWqPKzY3exR2
-         /x+2pXrAJOCLHKUo0lF2JBNX/yyrhZR2kUeyN3V2nyxmnv1/k/ANFoQ1uk1AjkMO0vvK
-         1NkiILYPZlFExcm7FRjMbECZEBvuNOLqo8keH1Ab+3NUOayX2JQwLV5fuzWaG8vZpdnS
-         RPQg==
+        bh=XYgP8xngvaKW7rzZawsaRgYO6rmE2EpQSQsCJABlsbA=;
+        b=ckcyxWB6Go29pfVw+tZ0TGxNxOb8Dp7wXFVWGfliBrfE+lCGaI38WEZAEVLfImlUdn
+         fsSIb4uj3Rl3aSXga1BvuOTwzcOOKPryzRx4LTb92YZCEXYjlXbDscXEdp5lCnYMbKJG
+         r7xhSkTRmFTI8UeaRA6jjLwhS+zDTOg5dN8K2ZQs/TEChSAIJLvl9EehNPL1rG84HDYD
+         URartVqcEj8Yt0hXV4q/Kyn23UCC9FscgTbtZ1Ub/9HA+PaMByd4HshpHfO3JtsRxaZD
+         PBDjI9yThSCjLwCr6fL0jtsQWqs3k4oUJdRBI0Xz6lr5x9ogFojXtUkW+SaxncuGU/oj
+         meYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699800785; x=1700405585;
+        d=1e100.net; s=20230601; t=1699802345; x=1700407145;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Ne7vVatU+ciQnyTrYIcJoMjnNdgMlj6tuL2i4VH17V4=;
-        b=WeK7aESkyEbikNTGNM13RaekMCWwMCusXWJcYJbMaZ2LaNvlTTWD8cdeEvHdvGBflE
-         QecLZ5l0zb4/TKGacs7Jl4sfQYGWbLNi2/KArv/fllbY8/B6BdBVbgDhi7KC09PkWntZ
-         nd+pmOThdAggaE0wO5gIKEQ2MDFqER+5TkNFDgy1eyq1Saha/PgbpE/wTnHBCuBWMOO/
-         ZNMS4oee8i9dv9lx0vli1T1RpnMDaVLL+T46xd0t5LGDo5GSfB/Hi5HmyatnzSt2TI4J
-         mbj/cInu8/ZME6BSLsROtceh+ljwHiXt+65iXU+jjm2a4iQsMHMCFcZEMIGhjcIsRM7D
-         QCxw==
-X-Gm-Message-State: AOJu0Yz9jmucxqEmufulvicHD2+4v7MzRgJfzXgxFlj53eyv5U44dBmZ
-	pXCBhcp+JwHTM81xqDtX2XAv/7RBKb8KKg==
-X-Google-Smtp-Source: AGHT+IFXiNlI+XtyOz0SK9ITzekCzWNU4EvjzDGlr2Ts0FeT+aRuefmNJ10aakQD9SqDrvfPkS436w==
-X-Received: by 2002:aa7:d805:0:b0:543:5852:2f1d with SMTP id v5-20020aa7d805000000b0054358522f1dmr3206039edq.37.1699800784467;
-        Sun, 12 Nov 2023 06:53:04 -0800 (PST)
+        bh=XYgP8xngvaKW7rzZawsaRgYO6rmE2EpQSQsCJABlsbA=;
+        b=O/0P3ADEZ5m2mdffpih5pG0fR7hZZ2oVmpHbm6lYfunvOR304veuuuJa++EkHjdFWQ
+         pnTnlZMRBw6Y5C9Z4sXR7hK6XcfPgBBHbW9Kc5dJ4D3GIcmWn5zzw0wBoHKzaTs4HSzD
+         db4FZXL96RlnX+Glo9QFV2vOy/B/558TBBzeBtFefhMrsBXZe7G88ZxyXZzHG1dyNNxN
+         zSyyQ6pErH6W7qR9dLteBNoXFua2XcBpVI/TXU/3FGcxF8yw1WJJd78teE3OyGuRH/JN
+         ydNNm/x4joOg73ebt/MVI8U3jMX2ZgIfJPpZ6ZMn4rcUD1MUUSQc0KcZDZkLDNwbdTPv
+         ibzQ==
+X-Gm-Message-State: AOJu0YyjMbsRZTv8OxrJyHzKfMjWe21aEdPfgtPahZtqcuR6rR8TbJ25
+	nF8+dsqswPzuU9I49YNjIK6J2sN1fb6Umw==
+X-Google-Smtp-Source: AGHT+IHH6ADCJynFgh1HHV1k6iF78A90Z53e1m28nKefI/Hzs0mdJb1OWViFB/deJ+LLP6lEjwyS1Q==
+X-Received: by 2002:a17:906:770d:b0:9e3:b513:7004 with SMTP id q13-20020a170906770d00b009e3b5137004mr3292864ejm.47.1699802345418;
+        Sun, 12 Nov 2023 07:19:05 -0800 (PST)
 Received: from localhost.localdomain ([176.33.65.238])
-        by smtp.gmail.com with ESMTPSA id r25-20020a50c019000000b0053dec545c8fsm2427042edb.3.2023.11.12.06.53.03
+        by smtp.gmail.com with ESMTPSA id j14-20020a170906278e00b009b9977867fbsm2688089ejc.109.2023.11.12.07.19.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 12 Nov 2023 06:53:03 -0800 (PST)
+        Sun, 12 Nov 2023 07:19:04 -0800 (PST)
 From: alperak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-multimedia][PATCH] libde265: upgrade 1.0.5 -> 1.0.12
-Date: Sun, 12 Nov 2023 17:52:54 +0300
-Message-Id: <20231112145254.314910-1-alperyasinak1@gmail.com>
+Subject: [meta-multimedia][PATCH] libopenmpt: upgrade 0.6.2 -> 0.7.3
+Date: Sun, 12 Nov 2023 18:18:49 +0300
+Message-Id: <20231112151849.414772-1-alperyasinak1@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 12 Nov 2023 14:53:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106589
+ <openembedded-devel@lists.openembedded.org>; Sun, 12 Nov 2023 15:19:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106590
 
 Changelog:
 
-- security fixes
-- fixed generation of pkgconfig file with autotools
-- fixed crashes recently detected by fuzzing
-- read HDR parameters from VUI header
-- fix reading matrix_coeffs from VUI header
-- build fixes for vcpkg
-- add API to read VUI color information from bitstream
-- fix race in static mutex initialization
-- fix missing headers to install in CMakeLists.txt
+https://github.com/OpenMPT/openmpt/blob/de9e591419eb5f5534f06da2876515fe7af18039/doc/libopenmpt/changelog.md
 
 Signed-off-by: alperak <alperyasinak1@gmail.com>
 ---
- .../libde265/{libde265_1.0.5.bb => libde265_1.0.12.bb}      | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
- rename meta-multimedia/recipes-multimedia/libde265/{libde265_1.0.5.bb => libde265_1.0.12.bb} (74%)
+ .../libopenmpt/{libopenmpt_0.6.2.bb => libopenmpt_0.7.3.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-multimedia/recipes-multimedia/libopenmpt/{libopenmpt_0.6.2.bb => libopenmpt_0.7.3.bb} (93%)
 
-diff --git a/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.5.bb b/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.12.bb
-similarity index 74%
-rename from meta-multimedia/recipes-multimedia/libde265/libde265_1.0.5.bb
-rename to meta-multimedia/recipes-multimedia/libde265/libde265_1.0.12.bb
-index d0ecd04f1..3c9f89949 100644
---- a/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.5.bb
-+++ b/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.12.bb
-@@ -8,8 +8,10 @@ LICENSE = "LGPL-3.0-only & MIT"
- LICENSE_FLAGS = "commercial"
- LIC_FILES_CHKSUM = "file://COPYING;md5=695b556799abb2435c97a113cdca512f"
+diff --git a/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.6.2.bb b/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.7.3.bb
+similarity index 93%
+rename from meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.6.2.bb
+rename to meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.7.3.bb
+index 47173d71d..58fc8278e 100644
+--- a/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.6.2.bb
++++ b/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.7.3.bb
+@@ -7,15 +7,15 @@ HOMEPAGE = "https://lib.openmpt.org/libopenmpt/"
+ SECTION = "libs"
  
--SRC_URI = "https://github.com/strukturag/libde265/releases/download/v${PV}/${BPN}-${PV}.tar.gz"
--SRC_URI[sha256sum] = "e3f277d8903408615a5cc34718b391b83c97c646faea4f41da93bac5ee08a87f"
-+SRC_URI = "git://github.com/strukturag/libde265.git;branch=master;protocol=https"
-+SRCREV = "a267c84707ab264928fa9b86de2ee749c48c318c"
-+
-+S = "${WORKDIR}/git"
+ LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=ae09d6164bdecb499183479fd32b66fb"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=59f6e21f42e49919617267ff13a0b232"
  
- EXTRA_OECONF = "--disable-sherlock265 --disable-dec265"
+ DEPENDS = "virtual/libiconv"
+ 
+ SRC_URI = "https://lib.openmpt.org/files/libopenmpt/src/libopenmpt-${PV}+release.autotools.tar.gz \
+            file://run-ptest \
+           "
+-SRC_URI[md5sum] = "d21fb799695cbe10a1e9aeaea23ed708"
+-SRC_URI[sha256sum] = "50c0d62ff2d9afefa36cce9f29042cb1fb8d4f0b386b81a0fc7734f35e21e6b6"
++SRC_URI[md5sum] = "ffd572d817a090554f55adf97c1997c2"
++SRC_URI[sha256sum] = "2cf8369b7916b09264f3f14b9fb6cef35a6e9bee0328dec4f49d98211ccfd722"
+ 
+ S = "${WORKDIR}/libopenmpt-${PV}+release.autotools"
  
 -- 
 2.25.1
