@@ -2,106 +2,91 @@ Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1DFA5C4332F
-	for <webhook@archiver.kernel.org>; Sun, 12 Nov 2023 09:55:21 +0000 (UTC)
-Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
- by mx.groups.io with SMTP id smtpd.web11.12882.1699782917367404967
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 431E1C4332F
+	for <webhook@archiver.kernel.org>; Sun, 12 Nov 2023 10:29:21 +0000 (UTC)
+Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
+ by mx.groups.io with SMTP id smtpd.web10.12829.1699784956746313495
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 12 Nov 2023 01:55:17 -0800
+ Sun, 12 Nov 2023 02:29:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=lJglULUo;
- spf=pass (domain: gmail.com, ip: 209.85.218.48, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-9e623356e59so305043666b.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Nov 2023 01:55:17 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=U2UWYD7p;
+ spf=pass (domain: gmail.com, ip: 209.85.218.50, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-ej1-f50.google.com with SMTP id a640c23a62f3a-9e2838bcb5eso525520766b.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Nov 2023 02:29:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699782915; x=1700387715; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1699784954; x=1700389754; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=qdVkoDaykABmnyStCzZ3UvCTeVVNk8jcfoROituD/A0=;
-        b=lJglULUoTqWvfATJO47Hf5nv7wbaQZONBYB9q8mlzdHyy4G29qevbMLZWvHMKVfhsL
-         ng6LnVN1a1TqrABCOsHdAqgh8WtFs58KtKT0YBE/mNk/SI40e7yR2VXx9qa8WdU+WC6+
-         SkiLMNfSOkTZavWIadqpvKnl9xMiG5Iz+QTTc4y0si8h9eomjZRHPof+/E1NUoz3XUGw
-         OG7F1qbqTjtTRl15ScHjbIUCPCx6rBoVZAVaKWNuQjD0pRmv8stvIgWWLfvelxKb6/ZR
-         bqOXsyiZLkzuUJn+IBLHuuZmiho7g9MQy7FxB7GTb9QgDTr9K3jIudnfnLTYgZLwZA+O
-         U7ag==
+        bh=DQfiwawX/9YuTutY5VZW18SiByIYM8L8yY/t6NUT2eo=;
+        b=U2UWYD7p3ZLG1/5ULNGmWfvL4ajAJBcuejv/2cpcM+6JELDmVdm3N6n9RAxDSwymJa
+         ySIK/AovyfdxhUF5V4J2I2JsIhGT94ZZW94Rxh67mhm6M6fUgJcIuBR1ybUg+2dWmKWW
+         /JdQhR9Sl9JgKTI2GYSFcbcgB7hcFgijz/t05g/kKUJDHsufrkV0zMmiul3WexMbUXM5
+         eqyPmmUvSxxGdKoop/wKrXTZHPZ9Y9JC6xaX5nqQJkqDqTdmIWjjfZQKlUwqAW6rOc6Q
+         Yn5HiO2+46004aN7YcQK/CjwPZtbo6DpuIdDR8lwjhFYD/tM+9zRNLveQ8kzS6sR+AgZ
+         4bfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699782915; x=1700387715;
+        d=1e100.net; s=20230601; t=1699784954; x=1700389754;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=qdVkoDaykABmnyStCzZ3UvCTeVVNk8jcfoROituD/A0=;
-        b=pPTEE2MSx/5uBUC0pvs3JompJapWeIwv+IXrQwqvOJpMFZufFmtQHsbqGhdjVX0imH
-         tgtDc3HbAbrml2zI/EYYsAwF2ZkZyjPBBb8BzWhNxByrwQzIu9Kd/1cAlpHLnfSn7/yp
-         t1Gr3LI6GbNzncFqwu0UIGuX5GVd/Fwjf3zAm7MVd0P1a84OQAvAPlapxIQswyIcMFYX
-         Y4om0/wBgC01nXwaD0pqoyhDbOk/0W6S/BidzPKUwAzya4XLHKYlruUGLdcP/ycwJjNS
-         VcwgtJlKih4QLAPPaAdAgQn1xroLcsKCdEH4Ne2p+tplSlj4+TCQkmMxSQ8XHqYCIuY7
-         cleA==
-X-Gm-Message-State: AOJu0YyniTvLB7fYqogsoxwt5E5aGgUHqkeDGB7bYwEeoABVq+le2feA
-	SWBLljUPbMq8Oe998loh2gsJaTcysohwaw==
-X-Google-Smtp-Source: AGHT+IHk/zC2ocT9eoYAS+6hSs2YOKkzVboU8bAim66tsmuAKaCRdJFaTHQtqrmcxeZCS7C4HbinoA==
-X-Received: by 2002:a17:906:1d0b:b0:9be:aebc:d480 with SMTP id n11-20020a1709061d0b00b009beaebcd480mr3110847ejh.24.1699782914982;
-        Sun, 12 Nov 2023 01:55:14 -0800 (PST)
+        bh=DQfiwawX/9YuTutY5VZW18SiByIYM8L8yY/t6NUT2eo=;
+        b=K94is2cWY5WOWBHaq976W0KHRrOq/S/7kdWbsNdNyQh0TxclMFLAXMxqvXxZoXgl61
+         Nqq6GzSDd1RsWxZ2oxDzKUemyRIIye6ZntOLfp0etg6ThXjX/3jpUDwfWykwvFz8A8gQ
+         M2j4exSvzOB109kU8R2Qrbf0TUc4RrZiH6YOGfo63zcU0Q/q6NlWDM3ajWS9zSWvgU20
+         meHxKh2CwPIOhQTzSizyL+/kdAaK7XKDbkPqodm+NZZlBU/BzvYBImG/9tIM1D59Tulz
+         EJNyPuoKH6zifUPgGvT4VyubyX5OpJ4I9pcaBsBuqg6bB4LGYDq1Vb20ufZttweYCJ6i
+         8sKQ==
+X-Gm-Message-State: AOJu0YyciPP3bgEtbuEDbbF7DZT6OgPWSx69I1ifhxkZsi6oym0K7CHY
+	ujA67aycneYI22DfDoDtUc8Q1tQ7h+Q3lQ==
+X-Google-Smtp-Source: AGHT+IF7l0v4K+tT3xzQiStUNudfMcVtQrmBsVioX3vCXbKhjJIpRoYbU8tVuXj9x36IZ1nQLS615A==
+X-Received: by 2002:a17:906:d297:b0:9e6:b18c:15dd with SMTP id ay23-20020a170906d29700b009e6b18c15ddmr2744294ejb.13.1699784954388;
+        Sun, 12 Nov 2023 02:29:14 -0800 (PST)
 Received: from localhost.localdomain ([176.33.65.238])
-        by smtp.gmail.com with ESMTPSA id le5-20020a170907170500b00988f168811bsm2308318ejc.135.2023.11.12.01.55.13
+        by smtp.gmail.com with ESMTPSA id t2-20020a17090616c200b009ddaf5ebb6fsm2370673ejd.177.2023.11.12.02.29.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 12 Nov 2023 01:55:14 -0800 (PST)
+        Sun, 12 Nov 2023 02:29:13 -0800 (PST)
 From: alperak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-filesystems][PATCH] fuse-exfat: upgrade 1.3.0 -> 1.4.0
-Date: Sun, 12 Nov 2023 12:54:52 +0300
-Message-Id: <20231112095452.118629-1-alperyasinak1@gmail.com>
+Subject: [meta-filesystems][PATCH] fuse3: upgrade 3.15.1 -> 3.16.2
+Date: Sun, 12 Nov 2023 13:28:57 +0300
+Message-Id: <20231112102857.135199-1-alperyasinak1@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 12 Nov 2023 09:55:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106582
+ <openembedded-devel@lists.openembedded.org>; Sun, 12 Nov 2023 10:29:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106583
 
 Changelog:
 
-* Added exfatattrib utility which prints or changes file attributes [Will
-Thompson].
-* Added FUSE 3 support. FUSE 2 continues to be supported.
-* Added support for timezone offsets [Nathan Hunsperger].
-* Fixed device opening error being reported as FS error.
-* Fixed possible data leakage when uninitialized clusters were allocated using
-NtSetInformationFile() call under Windows and FS was not unmounted correctly.
-* Improved compatibility with autoconf 2.70.
-* Fixed disk size reading on NetBSD [Dave Vasilevsky].
-* Fixed "automounted" option handling on FreeBSD [Iouri V. Ivliev].
-* Allowed to specify the "nonempty" mount option.
-* Fixed file data contiguity handling bug which could cause performance
-degradation [noctis].
-* Fixed possible crashes on invalid UTF-8 sequences.
-* Fixed a situation when FS could be erroneously marked as dirty (not cleanly
-unmounted).
+- Various minor bugfixes and improvements.
+- Readdir kernel cache can be enabled from high-level API.
 
 Signed-off-by: alperak <alperyasinak1@gmail.com>
 ---
- .../fuse-exfat/{fuse-exfat_1.3.0.bb => fuse-exfat_1.4.0.bb}   | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-filesystems/recipes-filesystems/fuse-exfat/{fuse-exfat_1.3.0.bb => fuse-exfat_1.4.0.bb} (83%)
+ .../recipes-support/fuse/{fuse3_3.15.1.bb => fuse3_3.16.2.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-filesystems/recipes-support/fuse/{fuse3_3.15.1.bb => fuse3_3.16.2.bb} (96%)
 
-diff --git a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.3.0.bb b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.4.0.bb
-similarity index 83%
-rename from meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.3.0.bb
-rename to meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.4.0.bb
-index ac18fe90f..2f5b1a333 100644
---- a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.3.0.bb
-+++ b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.4.0.bb
-@@ -16,7 +16,7 @@ RRECOMMENDS:${PN} = "util-linux-mount"
+diff --git a/meta-filesystems/recipes-support/fuse/fuse3_3.15.1.bb b/meta-filesystems/recipes-support/fuse/fuse3_3.16.2.bb
+similarity index 96%
+rename from meta-filesystems/recipes-support/fuse/fuse3_3.15.1.bb
+rename to meta-filesystems/recipes-support/fuse/fuse3_3.16.2.bb
+index de2996db1..66c35010b 100644
+--- a/meta-filesystems/recipes-support/fuse/fuse3_3.15.1.bb
++++ b/meta-filesystems/recipes-support/fuse/fuse3_3.16.2.bb
+@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = "file://GPL2.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
  
- inherit autotools pkgconfig
+ SRC_URI = "https://github.com/libfuse/libfuse/releases/download/fuse-${PV}/fuse-${PV}.tar.gz \
+ "
+-SRC_URI[sha256sum] = "13ef77cda531a21c2131f9576042970e98035c0a5f019abf661506efd2d38a4e"
++SRC_URI[sha256sum] = "f797055d9296b275e981f5f62d4e32e089614fc253d1ef2985851025b8a0ce87"
  
--SRC_URI[md5sum] = "846b8c36bfa4684719f9e08e9d3a6bff"
--SRC_URI[sha256sum] = "07652136064da5e4d32df5555f88c138ffa4835a23b88a5bae2015f21006e0d3"
-+SRC_URI[md5sum] = "765bf2484d48e5c253d0d8cb8de4f8c0"
-+SRC_URI[sha256sum] = "a1cfedc55e0e7a12c184605aa0f0bf44b24a3fb272449b20b2c8bbe6edb3001e"
+ S = "${WORKDIR}/fuse-${PV}"
  
- EXTRA_OECONF += "sbindir=${base_sbindir}"
 -- 
 2.25.1
 
