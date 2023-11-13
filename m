@@ -2,58 +2,58 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 08271C07CA9
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 12FAAC07CB1
 	for <webhook@archiver.kernel.org>; Mon, 13 Nov 2023 18:34:02 +0000 (UTC)
-Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
- by mx.groups.io with SMTP id smtpd.web11.3219.1699900435081960298
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
+ by mx.groups.io with SMTP id smtpd.web11.3218.1699900433903248161
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Nov 2023 10:33:55 -0800
+ Mon, 13 Nov 2023 10:33:53 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=D9/YTKgv;
- spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f171.google.com with SMTP id d2e1a72fcca58-692c02adeefso4171260b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 10:33:55 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=NMv+jxbc;
+ spf=pass (domain: gmail.com, ip: 209.85.215.171, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f171.google.com with SMTP id 41be03b00d2f7-5bddf66ed63so3449362a12.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 10:33:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699900434; x=1700505234; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1699900433; x=1700505233; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=S33IW6Rd6R23SNlqpsTaZJpNNjZLYDyqplI2hmNln3w=;
-        b=D9/YTKgvZ9O9fQO/78Ak2LAZMY6D3OLJKwBGN13u1hQgTTKQUiJVHwAWS3p+3c/hIx
-         6dV7CKg4h3zCM7ndv3+Z2To6UroNpldklSCeDtrPkw35wOQDlruiWT6LiPYHIU7n8C5E
-         VLZe9OgtLtGwV1oXncdX69Rvga6Npp3UDGAHwhYaLM06boV1nF/Z2/htCh1K2eQtSMJZ
-         3U2k3BtuOLu0SbE2kknQMgfvnavvGshxQK6rQmc9lkgT4ME48M2M8Wb1h7Nceldxu589
-         yV9heNZomO7Oz5wTvv1uUIpmX9R6wZ78IiM5oxxEOH4S/yBi/Plv3084LvbA7KXKtE+M
-         nerw==
+        bh=zZM11ZZCRg+4hzJsiYJUymEUkh+LVHJyugU+MTmU3eU=;
+        b=NMv+jxbcuqmiwpB0bPS8mlnRENAXb5SAp7WZhtGc24PtaFAWRaiH4R54nPH32T7Jb7
+         4GOpOemR64CIEtXC5pGpGKgj/aHTW/6qKX/WyfF8Fcfv4e45kSVkpy2aJeih0/Kk1Oys
+         2pE9yWBAuLR0zbZKBggMoRWCGxOFIejD1ApYWlhpv4hg3dbERo+/VWG5+4MAQ5weIQRe
+         wQorTtxssWi11NPX6UnlijXztRyphIWGiEvdUo4TgUsxbONjEZ23rxs3camuU6on8gyT
+         rWfAnoK+sP/uD8EKdRZiNeVJL2kxk1eArKjoR4XQhnRvyQXeAfGlImhvR5tlnKSKacQy
+         Pzrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699900434; x=1700505234;
+        d=1e100.net; s=20230601; t=1699900433; x=1700505233;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=S33IW6Rd6R23SNlqpsTaZJpNNjZLYDyqplI2hmNln3w=;
-        b=lFGHAq48nEkztxzW3Rj3rUaAyerAiFRlfpR6hf6cdr41fUpfpdAiWVayGvWiSOxsxa
-         SWebdgXRc8iRkAbePTtlpwTL9SXL0EOyBp3jyJbUdB88A4ol1JfzvX+S+MZMa8SodL+G
-         JT5onwQawMY3glgT7y9jo3J7uWK414b0DU72qSjoLlzFXWFAhzpiL1TMESzY+jQPapI7
-         /m9g6gabd5A+2iENh6GOxg8nduhjqmczag/imHeimOtRDCkSBozVUhVmmxSKaMK8CVTb
-         OFsxEOmnWDajY1dBmX0DyvbYbVhjfeK8ikfGkNTXfe7fqZ1myExX3dYewE/Rkhswu4Wa
-         /+Iw==
-X-Gm-Message-State: AOJu0YzszVdurvQ6Y96QM8p4YQky5enPHGTo7mWkP9/wfRUSa7RUK0Ll
-	0c8MSVtfUSXAAv7iqVynaeWUjCfEB2haBA==
-X-Google-Smtp-Source: AGHT+IGiEOwVlAepZezeDGnCOBz5bqAHwn22AgflaDCjDFRbYP8aytw+gjMxwzxbtNAzv5apso5bcw==
-X-Received: by 2002:a05:6a20:9383:b0:186:736f:7759 with SMTP id x3-20020a056a20938300b00186736f7759mr3174859pzh.62.1699900434362;
-        Mon, 13 Nov 2023 10:33:54 -0800 (PST)
-Received: from apollo.localdomain ([2601:646:9100:2cb0::62f8])
-        by smtp.gmail.com with ESMTPSA id m11-20020a62f20b000000b006c1221bc58bsm4063471pfh.115.2023.11.13.10.33.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        bh=zZM11ZZCRg+4hzJsiYJUymEUkh+LVHJyugU+MTmU3eU=;
+        b=KrFVmA6MmLwzybcAGTLQpkZElikUAFaNTN/JpjQ3JBnMByEsdZJBg3VSFCSf5F6Box
+         Kifzf0tfsanyTL6kaMsgwklGsvj3s/0NAkJw1qs9qpk/CNyuQuNMHCUOYtX57QByB90s
+         LdwPit+nTaUqYXLbnF23VkDnhv79sVCCYmUJq3bXadfhzOuuos+iejKnkqXM42pLR9AD
+         rjCREBlFWMwl+hBccQ53CUH6txNCkJeBi9fCbIPx7sYmSXXFd/T2SuPa9BEtUVK8SP9w
+         M8nYRMOMOJA0AZdbsDE8y5RlFWSexmXS7Vd7PVhXqndPr3a0wQ5p9iHyHtcDX2o2LX38
+         QZmQ==
+X-Gm-Message-State: AOJu0YzbU6j0TBiHOGXe/zV/b2Wee7jaCmIXPuspvAiNJcnkLVVPlD05
+	19vRF6AKU5c8uf0F6zeuk33LhSR6eOvADw==
+X-Google-Smtp-Source: AGHT+IH9CW7gDMWJMTb6o8naDCLt46K2Fc4nW3HT+xQ6gn56yqK/aM93JDMrFUGVzdfFhZP0ftIokQ==
+X-Received: by 2002:a05:6a20:7da0:b0:185:9de4:fd31 with SMTP id v32-20020a056a207da000b001859de4fd31mr423366pzj.18.1699900433043;
         Mon, 13 Nov 2023 10:33:53 -0800 (PST)
+Received: from apollo.localdomain ([2601:646:9100:2cb0::62f8])
+        by smtp.gmail.com with ESMTPSA id m11-20020a62f20b000000b006c1221bc58bsm4063471pfh.115.2023.11.13.10.33.51
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 13 Nov 2023 10:33:52 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org, 
  alperak <alperyasinak1@gmail.com>
-In-Reply-To: <20231112102857.135199-1-alperyasinak1@gmail.com>
-References: <20231112102857.135199-1-alperyasinak1@gmail.com>
-Subject: Re: [meta-filesystems][PATCH] fuse3: upgrade 3.15.1 -> 3.16.2
-Message-Id: <169990043317.4418.2030077164207280754.b4-ty@gmail.com>
-Date: Mon, 13 Nov 2023 10:33:53 -0800
+In-Reply-To: <20231112095452.118629-1-alperyasinak1@gmail.com>
+References: <20231112095452.118629-1-alperyasinak1@gmail.com>
+Subject: Re: [meta-filesystems][PATCH] fuse-exfat: upgrade 1.3.0 -> 1.4.0
+Message-Id: <169990043191.4418.5906234252517769300.b4-ty@gmail.com>
+Date: Mon, 13 Nov 2023 10:33:51 -0800
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -62,21 +62,35 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 18:34:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106657
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106656
 
 
-On Sun, 12 Nov 2023 13:28:57 +0300, alperak wrote:
+On Sun, 12 Nov 2023 12:54:52 +0300, alperak wrote:
 > Changelog:
 > 
-> - Various minor bugfixes and improvements.
-> - Readdir kernel cache can be enabled from high-level API.
+> * Added exfatattrib utility which prints or changes file attributes [Will
+> Thompson].
+> * Added FUSE 3 support. FUSE 2 continues to be supported.
+> * Added support for timezone offsets [Nathan Hunsperger].
+> * Fixed device opening error being reported as FS error.
+> * Fixed possible data leakage when uninitialized clusters were allocated using
+> NtSetInformationFile() call under Windows and FS was not unmounted correctly.
+> * Improved compatibility with autoconf 2.70.
+> * Fixed disk size reading on NetBSD [Dave Vasilevsky].
+> * Fixed "automounted" option handling on FreeBSD [Iouri V. Ivliev].
+> * Allowed to specify the "nonempty" mount option.
+> * Fixed file data contiguity handling bug which could cause performance
+> degradation [noctis].
+> * Fixed possible crashes on invalid UTF-8 sequences.
+> * Fixed a situation when FS could be erroneously marked as dirty (not cleanly
+> unmounted).
 > 
-> 
+> [...]
 
 Applied, thanks!
 
-[1/1] fuse3: upgrade 3.15.1 -> 3.16.2
-      commit: 59c4f115ad8678a782ad59d36afc0a33f8fc4635
+[1/1] fuse-exfat: upgrade 1.3.0 -> 1.4.0
+      commit: 12bd7824d245db95f7d8c9f815549884496b15ec
 
 Best regards,
 -- 
