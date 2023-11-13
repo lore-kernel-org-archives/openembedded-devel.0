@@ -1,121 +1,123 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 28740C4167B
-	for <webhook@archiver.kernel.org>; Mon, 13 Nov 2023 00:09:45 +0000 (UTC)
-Received: from mail-oi1-f178.google.com (mail-oi1-f178.google.com [209.85.167.178])
- by mx.groups.io with SMTP id smtpd.web11.26870.1699834178517872532
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C07F9C4332F
+	for <webhook@archiver.kernel.org>; Mon, 13 Nov 2023 01:13:25 +0000 (UTC)
+Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
+ by mx.groups.io with SMTP id smtpd.web11.28060.1699838000906204896
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 12 Nov 2023 16:09:38 -0800
+ Sun, 12 Nov 2023 17:13:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=MYyU41M/;
- spf=pass (domain: gmail.com, ip: 209.85.167.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f178.google.com with SMTP id 5614622812f47-3b56b618217so2355223b6e.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Nov 2023 16:09:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699834178; x=1700438978; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=51pwPX4Znr0uGjiGv2PXhZZg1IdzMuUf4HlNCWRYH1w=;
-        b=MYyU41M/iaJ8V659NDHmw9MIet1yZAHaiL3PKcIAgbG9ulCEtkO6T4RkCs1TBnpHJK
-         6g/mC2THoCuaRA3qxYc6jr8rtuD45gVBik50P4ksfKKmy/lrxsVf8DOl2baBy8AFeV2H
-         XQOfNKoFIMZmCaQuDJZBp0jHQbJ/bcB3mSe8x3b1abYwfbipCfQeGiLCiuKJeEEQEnEV
-         ZJx2TMOkEmJyrzFE8tCKWEGASu+XX0FnDYb7t2AAAj0fsW+dguydgV4P+BmLduEFrxsg
-         Wi9kspW0UxWFyA0M1qXG9EtlF2cLIp4SyAZqj1QbJt4tXJnzkGDmkACRGD/s7ZG0ZevR
-         2W3Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699834178; x=1700438978;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=51pwPX4Znr0uGjiGv2PXhZZg1IdzMuUf4HlNCWRYH1w=;
-        b=H9eePInMuiHTGiOo8CfM62AhxsCZ2QagyerF6V5TTm9P3sMT836h2Auv0r+BlLS/nS
-         0Jz6ujJ+mI+tP4JVjPdPU7FboRTv1wVKT8xVnG/fqZvIFF3PY+VSkbAxOUOWNwEzrRvc
-         hpfCpL3t67jD26iTE4rRjSAkc3oiKDY0F5H7hwxbjFdDUg2jg3ZbYQej/pDPdjxSMkq5
-         UmyVrF1ED2YzL6/ErStcMpcYdmhtMxeXquNT589LDT6TD0Zvjbf14dM0XsvZ39YtsbT+
-         2oYuEKFtTnD+32j6Vf49v6y5Gohe1yw1OaGr2/ck32sCJGqRedOwr531X9xd19fv7lFd
-         0JJA==
-X-Gm-Message-State: AOJu0YwWX6dkINxsOY3rgZCzA6sg74DqPsXdz4baeMsBUJkvwUYvNAAm
-	tfycugujWkOfDqQ5bXvrJDDtVS6RyNSUoMg49udmVux4rRVdsw==
-X-Google-Smtp-Source: AGHT+IHbIz9ynQu5v0mmn+1g4AVVx+lep5qsfdkCUxzLPKlPYFYgxmSMJNVAHCK3VJ+SSNDqxJJOjr0KFrLTwXzHvfw=
-X-Received: by 2002:a05:6870:fb9e:b0:1bf:787c:411b with SMTP id
- kv30-20020a056870fb9e00b001bf787c411bmr7193793oab.10.1699834177751; Sun, 12
- Nov 2023 16:09:37 -0800 (PST)
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
+Received: from fwd74.aul.t-online.de (fwd74.aul.t-online.de [10.223.144.100])
+	by mailout05.t-online.de (Postfix) with SMTP id BB8D9ADA4
+	for <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 02:13:18 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.163.34.200]) by fwd74.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1r2LVs-25JNwX0; Mon, 13 Nov 2023 02:13:16 +0100
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH 1/2] ghex: backport patch to fix build for clang
+Date: Mon, 13 Nov 2023 02:13:35 +0100
+Message-ID: <20231113011336.2843244-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
-References: <20231112191146.595362-1-alperyasinak1@gmail.com>
-In-Reply-To: <20231112191146.595362-1-alperyasinak1@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 12 Nov 2023 16:09:11 -0800
-Message-ID: <CAMKF1sr8WAv+H+4Ko6M+s9gw1_2CFrvkcOoAoQDKH7hpKrTXwg@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH] cannelloni: upgrade 1.0.0 -> 1.1.0
-To: Alper Ak <alperyasinak1@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+X-TOI-EXPURGATEID: 150726::1699837996-E4E0893F-3DBA8D03/0/0 CLEAN NORMAL
+X-TOI-MSGID: f56daf7f-5adb-47d6-82be-9f2cf532fe0a
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 00:09:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106620
+ <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 01:13:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106621
 
-fails to build
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ ...iables-in-switch-statement-should-be.patch | 50 +++++++++++++++++++
+ meta-gnome/recipes-gnome/ghex/ghex_45.0.bb    |  1 +
+ 2 files changed, 51 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/ghex/ghex/0001-gtkhex-Local-=
+variables-in-switch-statement-should-be.patch
 
-http://sprunge.us/3yQKcq
+diff --git a/meta-gnome/recipes-gnome/ghex/ghex/0001-gtkhex-Local-variabl=
+es-in-switch-statement-should-be.patch b/meta-gnome/recipes-gnome/ghex/gh=
+ex/0001-gtkhex-Local-variables-in-switch-statement-should-be.patch
+new file mode 100644
+index 000000000..61cd3b180
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/ghex/ghex/0001-gtkhex-Local-variables-in-s=
+witch-statement-should-be.patch
+@@ -0,0 +1,50 @@
++From b00b8332ab19e41c75ce143f45ab4585502c020b Mon Sep 17 00:00:00 2001
++From: Logan Rathbone <poprocks@gmail.com>
++Date: Tue, 24 Oct 2023 14:06:04 -0400
++Subject: [PATCH] gtkhex: Local variables in switch statement should be i=
+n own
++ scope
++
++Fixes: #74
++
++Thanks to: David C. Manuelda
++
++Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/ghex/-/commit/=
+b00b8332ab19e41c75ce143f45ab4585502c020b]
++---
++ src/gtkhex.c | 4 ++++
++ 1 file changed, 4 insertions(+)
++
++diff --git a/src/gtkhex.c b/src/gtkhex.c
++index b401cd9..18e0433 100644
++--- a/src/gtkhex.c
+++++ b/src/gtkhex.c
++@@ -1941,6 +1941,7 @@ key_press_cb (GtkEventControllerKey *controller,
++ 			break;
++=20
++ 		case GDK_KEY_Home:
+++		{
++ 			gint64 line_beg =3D self->cursor_pos;
++=20
++ 			while (line_beg % self->cpl !=3D 0)
++@@ -1948,9 +1949,11 @@ key_press_cb (GtkEventControllerKey *controller,
++=20
++ 			hex_widget_set_cursor (self, line_beg);
++ 			ret =3D GDK_EVENT_STOP;
+++		}
++ 			break;
++=20
++ 		case GDK_KEY_End:
+++		{
++ 			gint64 line_end =3D self->cursor_pos;
++=20
++ 			while (line_end % self->cpl !=3D self->cpl - 1)
++@@ -1958,6 +1961,7 @@ key_press_cb (GtkEventControllerKey *controller,
++=20
++ 			hex_widget_set_cursor (self, MIN (line_end, payload_size));
++ 			ret =3D GDK_EVENT_STOP;
+++		}
++ 			break;
++=20
++ 		default:
++--=20
++2.42.0
++
+diff --git a/meta-gnome/recipes-gnome/ghex/ghex_45.0.bb b/meta-gnome/reci=
+pes-gnome/ghex/ghex_45.0.bb
+index 6d3e9b978..42c53471b 100644
+--- a/meta-gnome/recipes-gnome/ghex/ghex_45.0.bb
++++ b/meta-gnome/recipes-gnome/ghex/ghex_45.0.bb
+@@ -15,6 +15,7 @@ GIR_MESON_DISABLE_FLAG =3D 'disabled'
+=20
+ inherit gnomebase gsettings gtk-icon-cache gnome-help gettext gobject-in=
+trospection vala gi-docgen
+=20
++SRC_URI +=3D "file://0001-gtkhex-Local-variables-in-switch-statement-sho=
+uld-be.patch"
+ SRC_URI[archive.sha256sum] =3D "05cecc4561ca40b257c5db31da9f68d696133efc=
+0ae427ed82fb985a986e840e"
+=20
+ FILES:${PN} +=3D "${libdir} ${datadir}/metainfo"
+--=20
+2.42.0
 
-On Sun, Nov 12, 2023 at 11:12=E2=80=AFAM Alper Ak <alperyasinak1@gmail.com>=
- wrote:
->
-> Changelog:
->
-> - Typo fix in cannelloni.h
-> - workflows: add nix-test.yml
-> - Add TCP mode
-> - No peer checking
-> - Add -Wall switch and fix all warnings
->
-> Signed-off-by: alperak <alperyasinak1@gmail.com>
-> ---
->  .../cannelloni/{cannelloni_1.0.0.bb =3D> cannelloni_1.1.0.bb}     | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-networking/recipes-connectivity/cannelloni/{cannelloni_1.0.0=
-.bb =3D> cannelloni_1.1.0.bb} (89%)
->
-> diff --git a/meta-networking/recipes-connectivity/cannelloni/cannelloni_1=
-.0.0.bb b/meta-networking/recipes-connectivity/cannelloni/cannelloni_1.1.0.=
-bb
-> similarity index 89%
-> rename from meta-networking/recipes-connectivity/cannelloni/cannelloni_1.=
-0.0.bb
-> rename to meta-networking/recipes-connectivity/cannelloni/cannelloni_1.1.=
-0.bb
-> index f34c73c17..fb457dc03 100644
-> --- a/meta-networking/recipes-connectivity/cannelloni/cannelloni_1.0.0.bb
-> +++ b/meta-networking/recipes-connectivity/cannelloni/cannelloni_1.1.0.bb
-> @@ -3,7 +3,7 @@ HOMEPAGE =3D "https://github.com/mguentner/cannelloni"
->  LICENSE =3D "GPL-2.0-only"
->
->  SRC_URI =3D "git://github.com/mguentner/cannelloni.git;protocol=3Dhttps;=
-branch=3Dmaster"
-> -SRCREV =3D "0bd7e27db35bdef361226882ae04205504f7b2f4"
-> +SRCREV =3D "3d4fb8c8b07f6d7c62b2bdad7e5a94de61c9a29b"
->
->  LIC_FILES_CHKSUM =3D "file://gpl-2.0.txt;md5=3Db234ee4d69f5fce4486a80fda=
-f4a4263"
->
-> --
-> 2.25.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#106602): https://lists.openembedded.org/g/openembedde=
-d-devel/message/106602
-> Mute This Topic: https://lists.openembedded.org/mt/102547840/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
 
