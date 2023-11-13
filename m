@@ -2,58 +2,59 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 12FAAC07CB1
-	for <webhook@archiver.kernel.org>; Mon, 13 Nov 2023 18:34:02 +0000 (UTC)
-Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
- by mx.groups.io with SMTP id smtpd.web11.3218.1699900433903248161
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 16DE1C4167D
+	for <webhook@archiver.kernel.org>; Mon, 13 Nov 2023 18:34:12 +0000 (UTC)
+Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
+ by mx.groups.io with SMTP id smtpd.web11.3234.1699900446348065664
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Nov 2023 10:33:53 -0800
+ Mon, 13 Nov 2023 10:34:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=NMv+jxbc;
- spf=pass (domain: gmail.com, ip: 209.85.215.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f171.google.com with SMTP id 41be03b00d2f7-5bddf66ed63so3449362a12.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 10:33:53 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=JcUdQDvb;
+ spf=pass (domain: gmail.com, ip: 209.85.210.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f181.google.com with SMTP id d2e1a72fcca58-6c320a821c4so3993701b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 10:34:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699900433; x=1700505233; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1699900445; x=1700505245; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=zZM11ZZCRg+4hzJsiYJUymEUkh+LVHJyugU+MTmU3eU=;
-        b=NMv+jxbcuqmiwpB0bPS8mlnRENAXb5SAp7WZhtGc24PtaFAWRaiH4R54nPH32T7Jb7
-         4GOpOemR64CIEtXC5pGpGKgj/aHTW/6qKX/WyfF8Fcfv4e45kSVkpy2aJeih0/Kk1Oys
-         2pE9yWBAuLR0zbZKBggMoRWCGxOFIejD1ApYWlhpv4hg3dbERo+/VWG5+4MAQ5weIQRe
-         wQorTtxssWi11NPX6UnlijXztRyphIWGiEvdUo4TgUsxbONjEZ23rxs3camuU6on8gyT
-         rWfAnoK+sP/uD8EKdRZiNeVJL2kxk1eArKjoR4XQhnRvyQXeAfGlImhvR5tlnKSKacQy
-         Pzrw==
+        bh=e7jxKOc4Rg1kVPOgQqPCLS9XZnKROajb2amAJNEVzx0=;
+        b=JcUdQDvbQurx7k39IclrW4YdaKIakRLOZS/ZsYodES0OGC+hvPUOaIpfcCraBlrvkD
+         Y7LZzLPKW5eS4t4Db5vMYRExPJ2otqouXE3KW5um4VVxlOhlDXywzZfstqy8ULOKSWkK
+         fgwAIhL73WEhD9wj6NZj1pH9G6ZlU3ry/zOrbvP9fAf99gnL4PzcWdg57Fr1AtlgBT+4
+         vM3Y08W9u+cEiL+xRf7JtdPOnE8J6mNYlkX8xOAn+UK5Wr5ERuo9IxEweZ0xcum0Lb/6
+         Y4/AJGJFy2MHibtHHPqBr6lUBDc9HBVKQTOH4As2NLwaaccMSVomSO+LHWJh1328Bs19
+         gjNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699900433; x=1700505233;
+        d=1e100.net; s=20230601; t=1699900445; x=1700505245;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=zZM11ZZCRg+4hzJsiYJUymEUkh+LVHJyugU+MTmU3eU=;
-        b=KrFVmA6MmLwzybcAGTLQpkZElikUAFaNTN/JpjQ3JBnMByEsdZJBg3VSFCSf5F6Box
-         Kifzf0tfsanyTL6kaMsgwklGsvj3s/0NAkJw1qs9qpk/CNyuQuNMHCUOYtX57QByB90s
-         LdwPit+nTaUqYXLbnF23VkDnhv79sVCCYmUJq3bXadfhzOuuos+iejKnkqXM42pLR9AD
-         rjCREBlFWMwl+hBccQ53CUH6txNCkJeBi9fCbIPx7sYmSXXFd/T2SuPa9BEtUVK8SP9w
-         M8nYRMOMOJA0AZdbsDE8y5RlFWSexmXS7Vd7PVhXqndPr3a0wQ5p9iHyHtcDX2o2LX38
-         QZmQ==
-X-Gm-Message-State: AOJu0YzbU6j0TBiHOGXe/zV/b2Wee7jaCmIXPuspvAiNJcnkLVVPlD05
-	19vRF6AKU5c8uf0F6zeuk33LhSR6eOvADw==
-X-Google-Smtp-Source: AGHT+IH9CW7gDMWJMTb6o8naDCLt46K2Fc4nW3HT+xQ6gn56yqK/aM93JDMrFUGVzdfFhZP0ftIokQ==
-X-Received: by 2002:a05:6a20:7da0:b0:185:9de4:fd31 with SMTP id v32-20020a056a207da000b001859de4fd31mr423366pzj.18.1699900433043;
-        Mon, 13 Nov 2023 10:33:53 -0800 (PST)
+        bh=e7jxKOc4Rg1kVPOgQqPCLS9XZnKROajb2amAJNEVzx0=;
+        b=Uklt02HnXVV6i30VM/fFIquKFcMObXCZMHbgAQUABvBDP/2thRTUfqC/849PERWF8p
+         fbyC6PvBnroe0MxV7LpYd1LlPUG1slLjUU7FhJaz1x9pEpLLYWFKRN6rFOMM1Ony2gy+
+         JPhil17/5XDhvXhrZ/17+v4XsWhgwdEP+hgUnx/9CoCdWy+taf+7OX7vhhh07n+vd/cR
+         4BKBOOPOng28nwN3kjnOhWsoUuFtfQx4LxuuQ+H93bj/6RRivc4snVMnlbYL520DkQwQ
+         njn4z+0QKEFcc0Z/sOBQqTWX1TlO4R0OByT4ebZ4RNWpqoLSt9d/tH3TROQQJrogwiVz
+         2HRg==
+X-Gm-Message-State: AOJu0YwtKLuBjZAJG96e9G8TxeM0G6p2Kjr3NZvBpNl3tWH8pu4F4Uy7
+	WHfv7QGieT/WPXd6EGl0Dl8T/W7uk7ATew==
+X-Google-Smtp-Source: AGHT+IGyW+eI6KiAVL5kB9c8XLnv4OeueUsEurX3t9DDghB2w/HBU+c1gyf8hv1xOCdj2IJxnw4xOw==
+X-Received: by 2002:a05:6a20:442a:b0:186:7842:ad46 with SMTP id ce42-20020a056a20442a00b001867842ad46mr3373862pzb.34.1699900445565;
+        Mon, 13 Nov 2023 10:34:05 -0800 (PST)
 Received: from apollo.localdomain ([2601:646:9100:2cb0::62f8])
-        by smtp.gmail.com with ESMTPSA id m11-20020a62f20b000000b006c1221bc58bsm4063471pfh.115.2023.11.13.10.33.51
+        by smtp.gmail.com with ESMTPSA id m11-20020a62f20b000000b006c1221bc58bsm4063471pfh.115.2023.11.13.10.34.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 13 Nov 2023 10:33:52 -0800 (PST)
+        Mon, 13 Nov 2023 10:34:05 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org, 
  alperak <alperyasinak1@gmail.com>
-In-Reply-To: <20231112095452.118629-1-alperyasinak1@gmail.com>
-References: <20231112095452.118629-1-alperyasinak1@gmail.com>
-Subject: Re: [meta-filesystems][PATCH] fuse-exfat: upgrade 1.3.0 -> 1.4.0
-Message-Id: <169990043191.4418.5906234252517769300.b4-ty@gmail.com>
-Date: Mon, 13 Nov 2023 10:33:51 -0800
+In-Reply-To: <20231112204408.652490-1-alperyasinak1@gmail.com>
+References: <20231112204408.652490-1-alperyasinak1@gmail.com>
+Subject: Re: [meta-networking][PATCH] openfortivpn: upgrade 1.20.5 ->
+ 1.21.0
+Message-Id: <169990044488.4418.12509621823544961426.b4-ty@gmail.com>
+Date: Mon, 13 Nov 2023 10:34:04 -0800
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -61,36 +62,24 @@ X-Mailer: b4 0.12.4
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 18:34:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106656
+ <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 18:34:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106670
 
 
-On Sun, 12 Nov 2023 12:54:52 +0300, alperak wrote:
+On Sun, 12 Nov 2023 23:44:08 +0300, alperak wrote:
 > Changelog:
 > 
-> * Added exfatattrib utility which prints or changes file attributes [Will
-> Thompson].
-> * Added FUSE 3 support. FUSE 2 continues to be supported.
-> * Added support for timezone offsets [Nathan Hunsperger].
-> * Fixed device opening error being reported as FS error.
-> * Fixed possible data leakage when uninitialized clusters were allocated using
-> NtSetInformationFile() call under Windows and FS was not unmounted correctly.
-> * Improved compatibility with autoconf 2.70.
-> * Fixed disk size reading on NetBSD [Dave Vasilevsky].
-> * Fixed "automounted" option handling on FreeBSD [Iouri V. Ivliev].
-> * Allowed to specify the "nonempty" mount option.
-> * Fixed file data contiguity handling bug which could cause performance
-> degradation [noctis].
-> * Fixed possible crashes on invalid UTF-8 sequences.
-> * Fixed a situation when FS could be erroneously marked as dirty (not cleanly
-> unmounted).
+> * fix "Peer refused to agree to his IP address" message, again
+> * deprecate option --plugin
+> * better masking of password in logs
+> * break on reading 0 from ppp pty, for non-Linux systems
 > 
 > [...]
 
 Applied, thanks!
 
-[1/1] fuse-exfat: upgrade 1.3.0 -> 1.4.0
-      commit: 12bd7824d245db95f7d8c9f815549884496b15ec
+[1/1] openfortivpn: upgrade 1.20.5 -> 1.21.0
+      commit: f13b5120ab030620d001ab36b0d1b822aa247556
 
 Best regards,
 -- 
