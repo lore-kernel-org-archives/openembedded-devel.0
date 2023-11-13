@@ -1,120 +1,93 @@
-Return-Path: <dbaryshkov@gmail.com>
+Return-Path: <joe.slater@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EB54AC4332F
-	for <webhook@archiver.kernel.org>; Mon, 13 Nov 2023 22:04:44 +0000 (UTC)
-Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
- by mx.groups.io with SMTP id smtpd.web10.4555.1699913080882211398
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 05328C4332F
+	for <webhook@archiver.kernel.org>; Mon, 13 Nov 2023 22:09:35 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.4675.1699913365823339589
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Nov 2023 14:04:41 -0800
+ Mon, 13 Nov 2023 14:09:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=HBjA5Ftr;
- spf=pass (domain: gmail.com, ip: 209.85.208.46, mailfrom: dbaryshkov@gmail.com)
-Received: by mail-ed1-f46.google.com with SMTP id 4fb4d7f45d1cf-5441305cbd1so7613282a12.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 14:04:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699913079; x=1700517879; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=NMnBeg/6bQcjtF+GAtZUiSkXKY9bY+KLUJSR1eOVppg=;
-        b=HBjA5FtrtNtj62SkPV7IoGlbIa1/oJkJHYgt5+jrVIKalVvvQ0nraEuSq6uaeZwhDf
-         ytQq2mSUTToFXN+O6EDCDCgNokP+tyHuDsZM9CeA7MTgcYCJQ+Xf6QNGo/MiZiuE4ZuN
-         nOvVn1tKI8T1688wJRZf2hwdL5aiSTzucf8o1OZG1PHAFu8Cya24BSwDqpZBZVDT4C1f
-         nMdv3TFeMX/971mN7+3ZQNiQdDLBBd37vIbpGnsoFXFw2MwBntsERvvHjtPXVMy94EvO
-         UtARTnM7kb0Bl4CAWffx/OdxXz5XBmq68Y8ObFSgwvRRWxbv/UGA1IuqXTB9D7g1Xvgt
-         aJKA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699913079; x=1700517879;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=NMnBeg/6bQcjtF+GAtZUiSkXKY9bY+KLUJSR1eOVppg=;
-        b=K+IdJqOeTnllGllFQBH8UWmd336CmmeMOOdGoUnuDwwMYxN3SnNFingRM0/7y3km+e
-         Fx4jWMsbK05W8mT329C87+ekfcyOJVZbSTh6f4P/76AnktkYVUs9KJZ8ITtR1vneqdJD
-         Tl5V45rdeNZiMjThS0vhn+0/j9TSekYy/WoaQLIKIYdAHfpM/TF0B2JVv75AZ4MskGaE
-         y3UQSJvOK/t5JSpqxOPmOKMRWB7Q58joKZf3ilTWqjIrZ1yWHGcM7yMq95jduYpz5NE0
-         ErP6mvrVmoeoNskjI9dCdqjIsy0PO8UR34gzn6qXmsAdbhvvCBasBXBe2Qb07vjkb8D8
-         fmZA==
-X-Gm-Message-State: AOJu0YzPqPmka+YMdpJ2HlnN0MXds5Siy2fbgwzthaucYwqiXx+x/Rqg
-	kgDd5d3ZHTj6Yill50/J2gBoFK57UJzGoXHUn20=
-X-Google-Smtp-Source: AGHT+IE1AWL/28NOJvabll4tYFDlYwAG7sQUIZx6E5zNiwh3dhme+FszU0NVi4Ia56BCwQVUARjFgymdtlRqA1sQXjE=
-X-Received: by 2002:a05:6402:1a48:b0:547:b04:db3a with SMTP id
- bf8-20020a0564021a4800b005470b04db3amr5588633edb.21.1699913079024; Mon, 13
- Nov 2023 14:04:39 -0800 (PST)
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=gRh4IkXr;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=9681bd899c=joe.slater@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 3ADKf4ou026674
+	for <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 14:09:25 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=jO0pA
+	oyXr7kr5hqloF/aVddzbZtddzYNTeHrjxETzCo=; b=gRh4IkXrChE7bwXohz+5V
+	uHZaT0EfztJtkQ4DvAwKNmh0r8RT97q9nPljbRR9VqCcJBcrDNxz/RmRYgnf6Q8B
+	Ufb7UtB/YfTmjvzDQ8glwlDi40/+rityMqTz22FOmmj0GG7kwAoT4rOm2P1GiKT4
+	YgKW5v+kWsBugPDwUQFymjQS3qiqBuqpbPwDo2wj5GUE+WvPowP9DX5/a181JwKP
+	3GTfjNcU/LLY9QwwL/bhzBLk0QBrOhVGuF9KgdZaM7gg1fzlqr3EZz2TElqbsXDI
+	LA9GRnktEkk2zcVtfQ9OI1kaMq9IWJHt7TPd4hPxAKZ9Gqh6ItmDX/R3ZBmRu5W+
+	Q==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3uaa0khr18-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 14:09:25 -0800 (PST)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.34; Mon, 13 Nov 2023 14:09:29 -0800
+Received: from ala-jslater-lx2.corp.ad.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.34 via Frontend Transport; Mon, 13 Nov 2023 14:09:29 -0800
+From: <joe.slater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <joe.slater@windriver.com>, <randy.macleod@windriver.com>
+Subject: [mickledore][meta-python][PATCH 1/1] python3-pynacl: add RCONFLICTS with python3-nacl
+Date: Mon, 13 Nov 2023 14:09:24 -0800
+Message-ID: <20231113220924.2770520-1-joe.slater@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20231113201013.736234-1-dmitry.baryshkov@linaro.org> <CAMKF1sp2VL370_i+2R9bnXrcLmEyd2_Fpmz5nMURHNPTJ5CPeA@mail.gmail.com>
-In-Reply-To: <CAMKF1sp2VL370_i+2R9bnXrcLmEyd2_Fpmz5nMURHNPTJ5CPeA@mail.gmail.com>
-From: Dmitry Baryshkov <dbaryshkov@gmail.com>
-Date: Tue, 14 Nov 2023 00:04:27 +0200
-Message-ID: <CALT56yPzY1eeV8LUwjCun=6cDBJ1o5oasqgHB-Dzg1NxKKdFHQ@mail.gmail.com>
-Subject: Re: [oe] [meta-gnome][PATCH] gnome-menus: tell gnomebase to use
- autotools build system
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: UOT13zgjO3ZYu5ALsYy2Bb2lkv52J21E
+X-Proofpoint-GUID: UOT13zgjO3ZYu5ALsYy2Bb2lkv52J21E
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-11-13_12,2023-11-09_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
+ phishscore=0 mlxlogscore=647 lowpriorityscore=0 adultscore=0 mlxscore=0
+ impostorscore=0 spamscore=0 suspectscore=0 malwarescore=0 bulkscore=0
+ clxscore=1011 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2311060001 definitions=main-2311130171
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 22:04:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106685
+ <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 22:09:35 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106686
 
-On Tue, 14 Nov 2023 at 00:03, Khem Raj <raj.khem@gmail.com> wrote:
->
-> already part of -
-> https://git.openembedded.org/meta-openembedded/commit/?id=3D84f88138586a6=
-4da397e0d940f39e039823b0306
+From: Joe Slater <joe.slater@windriver.com>
 
-Ack, thank you!
+python3-nacl is in the meta-virtualization layer.
 
->
-> On Mon, Nov 13, 2023 at 12:10=E2=80=AFPM Dmitry Baryshkov <dbaryshkov@gma=
-il.com> wrote:
-> >
-> > gnome-menus source does not provide meson.build, so switch it back to
-> > using autotools.
-> >
-> > Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-> > ---
-> >  meta-gnome/recipes-gnome/gnome-menus/gnome-menus_3.36.0.bb | 2 ++
-> >  1 file changed, 2 insertions(+)
-> >
-> > diff --git a/meta-gnome/recipes-gnome/gnome-menus/gnome-menus_3.36.0.bb=
- b/meta-gnome/recipes-gnome/gnome-menus/gnome-menus_3.36.0.bb
-> > index fa162510cb99..d5e5e8575ab1 100644
-> > --- a/meta-gnome/recipes-gnome/gnome-menus/gnome-menus_3.36.0.bb
-> > +++ b/meta-gnome/recipes-gnome/gnome-menus/gnome-menus_3.36.0.bb
-> > @@ -6,6 +6,8 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5=
-fce4486a80fdaf4a4263 \
-> >
-> >  DEPENDS =3D "glib-2.0"
-> >
-> > +GNOMEBASEBUILDCLASS =3D "autotools"
-> > +
-> >  inherit gnomebase gettext pkgconfig gobject-introspection upstream-ver=
-sion-is-even
-> >
-> >  SRC_URI[archive.md5sum] =3D "a8fd71fcf31a87fc799d80396a526829"
-> > --
-> > 2.39.2
-> >
-> >
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#106682): https://lists.openembedded.org/g/openembed=
-ded-devel/message/106682
-> > Mute This Topic: https://lists.openembedded.org/mt/102569883/1997914
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[raj.khem@gmail.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 74e31e51ffbd52b8864fed4debe7711e3ef4d739)
+---
+ meta-python/recipes-devtools/python/python3-pynacl_1.5.0.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
+diff --git a/meta-python/recipes-devtools/python/python3-pynacl_1.5.0.bb b/meta-python/recipes-devtools/python/python3-pynacl_1.5.0.bb
+index 6e53461979..5a8ed131af 100644
+--- a/meta-python/recipes-devtools/python/python3-pynacl_1.5.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pynacl_1.5.0.bb
+@@ -10,6 +10,10 @@ PYPI_PACKAGE = "PyNaCl"
+ 
+ inherit pypi python_setuptools_build_meta
+ 
++# in meta-virtualization layer
++#
++RCONFLICTS:${PN} = "python3-nacl"
++
+ DEPENDS += "\
+     ${PYTHON_PN}-cffi-native \
+     libsodium \
+-- 
+2.25.1
 
-
---=20
-With best wishes
-Dmitry
 
