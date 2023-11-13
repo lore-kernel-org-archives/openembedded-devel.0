@@ -1,151 +1,88 @@
-Return-Path: <alperyasinak1@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 99DAEC4332F
-	for <webhook@archiver.kernel.org>; Mon, 13 Nov 2023 16:29:30 +0000 (UTC)
-Received: from mail-lf1-f42.google.com (mail-lf1-f42.google.com [209.85.167.42])
- by mx.groups.io with SMTP id smtpd.web10.41347.1699892962105227094
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4944AC072A2
+	for <webhook@archiver.kernel.org>; Mon, 13 Nov 2023 18:33:51 +0000 (UTC)
+Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
+ by mx.groups.io with SMTP id smtpd.web10.3139.1699900422273432305
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Nov 2023 08:29:22 -0800
+ Mon, 13 Nov 2023 10:33:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=cMb4NUts;
- spf=pass (domain: gmail.com, ip: 209.85.167.42, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-lf1-f42.google.com with SMTP id 2adb3069b0e04-507adc3381cso6136886e87.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 08:29:21 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=MWg60A77;
+ spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f176.google.com with SMTP id d2e1a72fcca58-6c33ab26dddso4049715b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 10:33:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699892960; x=1700497760; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ScQnyiquAELEsuQFAnxUwQtzXFnMLrXl+GM0HZ4Z3So=;
-        b=cMb4NUts+JR5tb9+eIbTy5t0jSQ0BzHnNIYVOop6RK5UbVH+XfI26CojmYmHeDBtBm
-         awEHzHgqFNzeDFqq389NVQl/xuKcV31/Ma8rCDTo0Ghi35OqegfW/IVYcCX6yKnvpWUl
-         19OYzvpvPssdgJxttfMhZna7adZgc7ZSkiRis4ZueoiXrN6O2WcbIzZgiFbbPUC2VWW2
-         UDry05Mt09meFtr6XSChAzgVvid6Hfw/zcmqUzknxfXpnnVDHXJq5u+83Tn71gyr2bEa
-         xUg3/hXQa0GFkjK8HTKK0pwSszk7jD9t1XQylIX9LBCPvIcPCiATvuWW4ciFxyKWTjUk
-         g9jg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699892960; x=1700497760;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=gmail.com; s=20230601; t=1699900421; x=1700505221; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:date:message-id:subject
+         :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=ScQnyiquAELEsuQFAnxUwQtzXFnMLrXl+GM0HZ4Z3So=;
-        b=p6SWrMRgodo9u1vsbA0ya03hAxHWA4Fly/z7g4cFJnq1Em6EvEW6chlZcKeGStE36K
-         kiplATL6j7kcePK61rAt0qM6sf5vcRxte0vYuU7OQ4F9v6UiR1FgI4VafFtygni1H3Gj
-         M36kS7qabLRwFu28Nog0ivvku9ZNvnq0UZ+8EIIMiu6FH5n0N0d1dwW70EE81c5z+E6f
-         pkBh1K8TBm3fDn7nNhXvnlE4DVopAkqZMUpGUbsvP6Dl+IQMFNSiRNqA1F1Y2Fn3eLRX
-         Cel09dPdmuxMnu3T5JmN/dz+hYGDWiXZJXE++BsEQ6/pJ1jFmo/xMvLg7xtAHhC2VuI4
-         DZ/w==
-X-Gm-Message-State: AOJu0YzLu3gOH7KT8rcFCDoAuPDngHmG1NKUuQDcaunIORKHnTlAt/DB
-	/VT3DXsC4NKNcaMyi86NrDcosq2g0EVZmw==
-X-Google-Smtp-Source: AGHT+IHB1TAoFyEtUOiGaX/ofOvyJEQDJ0nTGcnQ1ggF1EmKzpNboYEGASvqBZge03GUbDCHNDIvmg==
-X-Received: by 2002:a19:385b:0:b0:509:44fb:eb63 with SMTP id d27-20020a19385b000000b0050944fbeb63mr4128728lfj.26.1699892959331;
-        Mon, 13 Nov 2023 08:29:19 -0800 (PST)
-Received: from localhost.localdomain ([176.33.65.238])
-        by smtp.gmail.com with ESMTPSA id c4-20020a056402120400b0053f9578ec97sm3909087edw.56.2023.11.13.08.29.18
+        bh=W5mIglP3O/vjOvfseXruUgZTAa+XoEJjJUm9Daat8GM=;
+        b=MWg60A77OxyRVRubMzYi3Vc06Z5SOmFCH+5LsT5qut50f/kGMYV1YnGQZ4MA5+Utqq
+         sH5k9PO58zRSaleCHhc0p3MKx81ExXVnM+nPrew40CBuVf30AZLq4YDkY6gRcrO4c283
+         CXPXGHQ93xd1afVF9R8woIxZO1xwPt14oBIsBmLpqsdXtdAb/A4itAlt/pSM2mPGiZO4
+         A4VMPsI79QqqQ6NOifaj6Yg0leAebfq10wtXWk9KcrGm1cL34DfydfU1Rm38HgRympTZ
+         4n5+3e9SZdxDdWj7PgFQbl36sAOG/DsCTfBUT25EkTLHE97g9wUV4VsOf2fTaEnGKXnD
+         di9A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1699900421; x=1700505221;
+        h=content-transfer-encoding:mime-version:date:message-id:subject
+         :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=W5mIglP3O/vjOvfseXruUgZTAa+XoEJjJUm9Daat8GM=;
+        b=mv+kF3eTEDTqc4zdHo0u8VDJxCY+rECsD0PCAjEPOeuPiRak8ISqi/+o2/WoXwuOsy
+         0Owh93jUuWSEKNpDlyP8d8oBIeoFGK5y9lGt1MB0AKF9T5GZOpkalB6kcPWU+GQe/i6S
+         hAODUfilVJ4wV8Wo3p8nnCKm0fvO7V6BPayda0yW7mjeiwwpoWgc5qvc4DVflNNI3QAV
+         ZDpiydLidVHL7DMZDWctRaIfbCjZL24yAS2o9prcXkvSgdTV4a50pkqyFxRUE2DbVhus
+         v4fpKOl1OpAFekgEbnXkeT8yHnbdREQZV1eRN8AlCIor5e582YNNpYtKwOzcBanPkWs/
+         J4dw==
+X-Gm-Message-State: AOJu0YxBaBArLhrCCjwRkQjU/dg0hHIAUIpX8Rv4GscAarI2mNXeuy0A
+	Z6jfDgS0sZxTIvKwbWUCteFARAJQcgaMtQ==
+X-Google-Smtp-Source: AGHT+IFV3XDf13LngSCxGgd2XX1NEul+lWLUfuvcvQ9aJlf2vLpMkceJBxzMk1J+81jJXH1E39G+sA==
+X-Received: by 2002:a62:fb0e:0:b0:68b:bf33:2957 with SMTP id x14-20020a62fb0e000000b0068bbf332957mr4660764pfm.22.1699900421236;
+        Mon, 13 Nov 2023 10:33:41 -0800 (PST)
+Received: from apollo.localdomain ([2601:646:9100:2cb0::62f8])
+        by smtp.gmail.com with ESMTPSA id m11-20020a62f20b000000b006c1221bc58bsm4063471pfh.115.2023.11.13.10.33.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 13 Nov 2023 08:29:18 -0800 (PST)
-From: alperak <alperyasinak1@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: alperak <alperyasinak1@gmail.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCHv2] libupnp: upgrade 1.14.6 -> 1.14.18
-Date: Mon, 13 Nov 2023 19:28:45 +0300
-Message-Id: <20231113162845.286974-1-alperyasinak1@gmail.com>
-X-Mailer: git-send-email 2.25.1
+        Mon, 13 Nov 2023 10:33:40 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org, 
+ alperak <alperyasinak1@gmail.com>
+In-Reply-To: <20231111193458.3422863-1-alperyasinak1@gmail.com>
+References: <20231111193458.3422863-1-alperyasinak1@gmail.com>
+Subject: Re: [meta-oe][PATCH] catch2: upgrade 2.13.7 -> 2.13.10
+Message-Id: <169990042066.4418.4772222719713372473.b4-ty@gmail.com>
+Date: Mon, 13 Nov 2023 10:33:40 -0800
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.12.4
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 16:29:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106645
+ <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 18:33:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106646
 
-- In the new version, build succeeds on musl systems so patch is deleted.
 
-Changelog:
+On Sat, 11 Nov 2023 22:34:58 +0300, alperak wrote:
+> v2.13.10:
+>     Fixes:
+> 
+>         -Fixed issue with catch_discover_tests when there is multiple of 256 tests (#2401, #2503)
+>         -Catch2-provided main and wmain are explicitly marked as __cdecl when compiled with MSVC (#2486, #2487)
+>         -Improved break-into-debugger behaviour for ARM Macs. It should now be possible to step execution after the break (#2422)
+>         -Replaced deprecated std::aligned_storage (#2419, #2420)
+> 
+> [...]
 
-github.com/pupnp/pupnp/blob/branch-1.14.x/ChangeLog
+Applied, thanks!
 
-Signed-off-by: alperak <alperyasinak1@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- As far as I have researched, people say that it will be enough to define TCLIBC = "musl" in local.conf so that I can test it on musl systems.
- I did it this way and I was able to build successfully without patch.
+[1/1] catch2: upgrade 2.13.7 -> 2.13.10
+      commit: 1bdab916b1fd70ce9196aedac319df5dd8b6dd15
 
- ...ead_mutexattr_gettype-pthread_mutexa.patch | 42 -------------------
- .../{libupnp_1.14.6.bb => libupnp_1.14.18.bb} |  3 +-
- 2 files changed, 1 insertion(+), 44 deletions(-)
- delete mode 100644 meta-multimedia/recipes-connectivity/libupnp/libupnp/0001-ithread-Use-pthread_mutexattr_gettype-pthread_mutexa.patch
- rename meta-multimedia/recipes-connectivity/libupnp/{libupnp_1.14.6.bb => libupnp_1.14.18.bb} (87%)
-
-diff --git a/meta-multimedia/recipes-connectivity/libupnp/libupnp/0001-ithread-Use-pthread_mutexattr_gettype-pthread_mutexa.patch b/meta-multimedia/recipes-connectivity/libupnp/libupnp/0001-ithread-Use-pthread_mutexattr_gettype-pthread_mutexa.patch
-deleted file mode 100644
-index ee7819677..000000000
---- a/meta-multimedia/recipes-connectivity/libupnp/libupnp/0001-ithread-Use-pthread_mutexattr_gettype-pthread_mutexa.patch
-+++ /dev/null
-@@ -1,42 +0,0 @@
--From 343a3b724225d3c87af0b268da14d3acb7a5b9a1 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sun, 9 May 2021 15:38:43 -0700
--Subject: [PATCH] ithread: Use
-- pthread_mutexattr_gettype/pthread_mutexattr_settype on linux
--
--_np variants are not recommended anymore, and glibc 2.34+ will have
--these removed
--
--Upstream-Status: Pending
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- upnp/inc/ithread.h | 6 ++++--
-- 1 file changed, 4 insertions(+), 2 deletions(-)
--
--diff --git a/upnp/inc/ithread.h b/upnp/inc/ithread.h
--index f6800ea9..1d0f9dba 100644
----- a/upnp/inc/ithread.h
--+++ b/upnp/inc/ithread.h
--@@ -304,7 +304,8 @@ static UPNP_INLINE int ithread_cleanup_thread(void)
--  *      Returns EINVAL if the kind is not supported.
--  *      See man page for pthread_mutexattr_setkind_np
--  *****************************************************************************/
---#if defined(PTHREAD_MUTEX_RECURSIVE) || defined(__DragonFly__)
--+#if defined(PTHREAD_MUTEX_RECURSIVE) || defined(__DragonFly__) \
--+    || defined (__linux__)
-- 	#define ithread_mutexattr_setkind_np pthread_mutexattr_settype
-- #else
-- 	#define ithread_mutexattr_setkind_np pthread_mutexattr_setkind_np
--@@ -329,7 +330,8 @@ static UPNP_INLINE int ithread_cleanup_thread(void)
--  *      Always returns 0.
--  *      See man page for pthread_mutexattr_getkind_np
--  *****************************************************************************/
---#if defined(PTHREAD_MUTEX_RECURSIVE) || defined(__DragonFly__)
--+#if defined(PTHREAD_MUTEX_RECURSIVE) || defined(__DragonFly__) \
--+    || defined (__linux__)
-- 	#define ithread_mutexattr_getkind_np pthread_mutexattr_gettype
-- #else
-- 	#define ithread_mutexattr_getkind_np pthread_mutexattr_getkind_np
---- 
--2.31.1
--
-diff --git a/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.6.bb b/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.18.bb
-similarity index 87%
-rename from meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.6.bb
-rename to meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.18.bb
-index 81b42da41..5b15d1809 100644
---- a/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.6.bb
-+++ b/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.18.bb
-@@ -8,9 +8,8 @@ HOMEPAGE = "http://pupnp.sourceforge.net/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://COPYING;md5=394a0f17b97f33426275571e15920434"
- 
--SRCREV = "cef2b23fb36baac091b0c7d41136b4c1d9549c6d"
-+SRCREV = "c540ce2431bdeac73359029d4592b45790e1d154"
- SRC_URI = "git://github.com/pupnp/pupnp.git;protocol=https;branch=branch-1.14.x \
--           file://0001-ithread-Use-pthread_mutexattr_gettype-pthread_mutexa.patch \
-           "
- 
- S="${WORKDIR}/git"
+Best regards,
 -- 
-2.25.1
+Khem Raj <raj.khem@gmail.com>
 
 
