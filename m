@@ -2,59 +2,58 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 16DE1C4167D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 091F4C4332F
 	for <webhook@archiver.kernel.org>; Mon, 13 Nov 2023 18:34:12 +0000 (UTC)
-Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
- by mx.groups.io with SMTP id smtpd.web11.3234.1699900446348065664
+Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
+ by mx.groups.io with SMTP id smtpd.web10.3158.1699900442039761390
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Nov 2023 10:34:06 -0800
+ Mon, 13 Nov 2023 10:34:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=JcUdQDvb;
- spf=pass (domain: gmail.com, ip: 209.85.210.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f181.google.com with SMTP id d2e1a72fcca58-6c320a821c4so3993701b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 10:34:06 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=MPQGrgG+;
+ spf=pass (domain: gmail.com, ip: 209.85.210.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-6c33ab26dddso4050092b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 10:34:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699900445; x=1700505245; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1699900441; x=1700505241; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=e7jxKOc4Rg1kVPOgQqPCLS9XZnKROajb2amAJNEVzx0=;
-        b=JcUdQDvbQurx7k39IclrW4YdaKIakRLOZS/ZsYodES0OGC+hvPUOaIpfcCraBlrvkD
-         Y7LZzLPKW5eS4t4Db5vMYRExPJ2otqouXE3KW5um4VVxlOhlDXywzZfstqy8ULOKSWkK
-         fgwAIhL73WEhD9wj6NZj1pH9G6ZlU3ry/zOrbvP9fAf99gnL4PzcWdg57Fr1AtlgBT+4
-         vM3Y08W9u+cEiL+xRf7JtdPOnE8J6mNYlkX8xOAn+UK5Wr5ERuo9IxEweZ0xcum0Lb/6
-         Y4/AJGJFy2MHibtHHPqBr6lUBDc9HBVKQTOH4As2NLwaaccMSVomSO+LHWJh1328Bs19
-         gjNA==
+        bh=AN7FQdgC6SzUSTzRdun8HcFdrhE5+Wgz8ahjDZ7XcYk=;
+        b=MPQGrgG+jSHGjPpD1h8cUbxOI5C7APUMUfLh9C3brUzpLx/fFATd1t55KcOVURGOSH
+         OhFz90cjBELOIhnRxTD55hbjkdX/c8OnO+Q6V74DUyLyWy36JrbI7Q3XAHtatZzKoNQP
+         cz4vTayMBOAb8gQdJqTCdjNxQ1Htd0upL9y4gpq+0gp/0QOOlN0mlvR0f947mg9YJV5B
+         xnimNHmJ5u3IKeVYbTH6D6hPxLrWytjNH9FTHLYbtOenwRGS0/SXEqUlxh2yvcd46aet
+         FvWZ1U0nYYtu84G5FikOeztxwSIoazZ3c6OxU8RVc97shQibQRf8vAcyANRIdIFSbuOd
+         qqiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699900445; x=1700505245;
+        d=1e100.net; s=20230601; t=1699900441; x=1700505241;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=e7jxKOc4Rg1kVPOgQqPCLS9XZnKROajb2amAJNEVzx0=;
-        b=Uklt02HnXVV6i30VM/fFIquKFcMObXCZMHbgAQUABvBDP/2thRTUfqC/849PERWF8p
-         fbyC6PvBnroe0MxV7LpYd1LlPUG1slLjUU7FhJaz1x9pEpLLYWFKRN6rFOMM1Ony2gy+
-         JPhil17/5XDhvXhrZ/17+v4XsWhgwdEP+hgUnx/9CoCdWy+taf+7OX7vhhh07n+vd/cR
-         4BKBOOPOng28nwN3kjnOhWsoUuFtfQx4LxuuQ+H93bj/6RRivc4snVMnlbYL520DkQwQ
-         njn4z+0QKEFcc0Z/sOBQqTWX1TlO4R0OByT4ebZ4RNWpqoLSt9d/tH3TROQQJrogwiVz
-         2HRg==
-X-Gm-Message-State: AOJu0YwtKLuBjZAJG96e9G8TxeM0G6p2Kjr3NZvBpNl3tWH8pu4F4Uy7
-	WHfv7QGieT/WPXd6EGl0Dl8T/W7uk7ATew==
-X-Google-Smtp-Source: AGHT+IGyW+eI6KiAVL5kB9c8XLnv4OeueUsEurX3t9DDghB2w/HBU+c1gyf8hv1xOCdj2IJxnw4xOw==
-X-Received: by 2002:a05:6a20:442a:b0:186:7842:ad46 with SMTP id ce42-20020a056a20442a00b001867842ad46mr3373862pzb.34.1699900445565;
-        Mon, 13 Nov 2023 10:34:05 -0800 (PST)
+        bh=AN7FQdgC6SzUSTzRdun8HcFdrhE5+Wgz8ahjDZ7XcYk=;
+        b=KUAMvhCDYCOFoQHiAynuLH2sfz0Oqy+3iM6DgdOtxxjDnvFDcB+4uF6wZLGts1fiFh
+         hz4A5gLT7WEgJD2gGueKwT+62F58rX9O+wFlIRJnSySzbn7YaZcabW85nN766CgeGvVr
+         UNVECK7PzViNQ/E0VtIiCh00vsx41YrUO0Fu7ZdIP0da+jjVdpdR1Zlw6IZV6UbbubwR
+         vOxynWQG7VyFSKOfbhdT2kIt2XmEnF6R1+0oW42+fCMFofyREuEo/qMvEdoyjdbqLqxC
+         7RB5EpoUDuBaeexhe4cXZkpUwRdMl5uNt01FAnXWEuIOSDLXfRGutQdYsB3IH945+V8K
+         8ZLA==
+X-Gm-Message-State: AOJu0YxLrEs+2dw8EPe5IawDD6kgt/sRAMUTtG5Bzadw4QUom67aJ9j3
+	BD4HJTHLRbZxkWhpnjdx4uIaLLg/cYTQhQ==
+X-Google-Smtp-Source: AGHT+IHUTdoZYg9sJLHgtFzuaTVK7zLEY7rnW2Tm1MHOfg4q1loSKd+fOVaUVL641OU+tSfKe57JYQ==
+X-Received: by 2002:a05:6a20:8408:b0:14d:e075:fc5d with SMTP id c8-20020a056a20840800b0014de075fc5dmr5916371pzd.40.1699900441227;
+        Mon, 13 Nov 2023 10:34:01 -0800 (PST)
 Received: from apollo.localdomain ([2601:646:9100:2cb0::62f8])
-        by smtp.gmail.com with ESMTPSA id m11-20020a62f20b000000b006c1221bc58bsm4063471pfh.115.2023.11.13.10.34.04
+        by smtp.gmail.com with ESMTPSA id m11-20020a62f20b000000b006c1221bc58bsm4063471pfh.115.2023.11.13.10.34.00
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 13 Nov 2023 10:34:05 -0800 (PST)
+        Mon, 13 Nov 2023 10:34:00 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org, 
  alperak <alperyasinak1@gmail.com>
-In-Reply-To: <20231112204408.652490-1-alperyasinak1@gmail.com>
-References: <20231112204408.652490-1-alperyasinak1@gmail.com>
-Subject: Re: [meta-networking][PATCH] openfortivpn: upgrade 1.20.5 ->
- 1.21.0
-Message-Id: <169990044488.4418.12509621823544961426.b4-ty@gmail.com>
-Date: Mon, 13 Nov 2023 10:34:04 -0800
+In-Reply-To: <20231112161657.553436-1-alperyasinak1@gmail.com>
+References: <20231112161657.553436-1-alperyasinak1@gmail.com>
+Subject: Re: [meta-multimedia][PATCH] opencore-amr: upgrade 0.1.3 -> 0.1.6
+Message-Id: <169990044058.4418.737529801780206589.b4-ty@gmail.com>
+Date: Mon, 13 Nov 2023 10:34:00 -0800
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -63,23 +62,25 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 18:34:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106670
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106665
 
 
-On Sun, 12 Nov 2023 23:44:08 +0300, alperak wrote:
+On Sun, 12 Nov 2023 19:16:57 +0300, alperak wrote:
 > Changelog:
 > 
-> * fix "Peer refused to agree to his IP address" message, again
-> * deprecate option --plugin
-> * better masking of password in logs
-> * break on reading 0 from ppp pty, for non-Linux systems
+> 0.1.6
+>  - Fixed an infinite loop when decoding some AMR-NB samples
+>  - Fixed noise spikes when decoding non-voice frames for both AMR-NB and AMR-WB
+> 
+> 0.1.5
+>  - Fix an autotools issue with cross compiling from the 0.1.4 release
 > 
 > [...]
 
 Applied, thanks!
 
-[1/1] openfortivpn: upgrade 1.20.5 -> 1.21.0
-      commit: f13b5120ab030620d001ab36b0d1b822aa247556
+[1/1] opencore-amr: upgrade 0.1.3 -> 0.1.6
+      commit: 55274f650e304074783d171a406454748b2d456e
 
 Best regards,
 -- 
