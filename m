@@ -2,53 +2,53 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C4BCC4167B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0F428C4167D
 	for <webhook@archiver.kernel.org>; Mon, 13 Nov 2023 14:29:20 +0000 (UTC)
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
- by mx.groups.io with SMTP id smtpd.web10.37966.1699885755421888041
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
+ by mx.groups.io with SMTP id smtpd.web10.37965.1699885754330175785
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Nov 2023 06:29:15 -0800
+ Mon, 13 Nov 2023 06:29:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=iGkmrG+G;
- spf=pass (domain: konsulko.com, ip: 209.85.221.42, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-32deb2809daso2649251f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 06:29:15 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=ADqNMbjF;
+ spf=pass (domain: konsulko.com, ip: 209.85.221.52, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-32f70391608so2553743f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 06:29:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1699885753; x=1700490553; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1699885752; x=1700490552; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=U1+0XxbZzKlpDbA7GsVEViwAcnmHRpA4Wvri4/y9NqQ=;
-        b=iGkmrG+GhUgWZ1V4RhHIj4N4ItziTJid9m1Bf8xBLuSDMR9w4/P4bRU1W2gyqpY8NU
-         Y7HSRFsiE9KjyJJrcznbFrNeVAD+nUe0lFtuSNMMTyTCsBXEcDXOrXyYoQmxzzy1XuyG
-         YHCHbEfR95RJpaGPBO/YZ8wSYGvsOKvyC05yI=
+        bh=DKvDryGaPwdR5A7/h2qfnI9/FpKKnbN5VQwulP92NfA=;
+        b=ADqNMbjFieXqJ4KCP2MicCg1SB9nHtUDXNkIB0svgWayRRCokDJTkdq48Mjm8Mpkq0
+         1mw83NciNfF8u/1mINc9n5Z3UetD68rFJeIvPb0TpKmuqiyEy6qsGEH7L0TUKFJmPLZs
+         vhuQVojCTDFn6xAVkNpx2fyqxUBVrJHz9Gjn0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699885753; x=1700490553;
+        d=1e100.net; s=20230601; t=1699885752; x=1700490552;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=U1+0XxbZzKlpDbA7GsVEViwAcnmHRpA4Wvri4/y9NqQ=;
-        b=l7+g2z+S3m89fG3fTDMEztmmRd14HY4KOMPhYT14v6m2kVDwI+uxIrcEDUS3fz9NMA
-         Nx7S90HuNJ0/14NcBqS4YoDFLVV6q9VWn8fi/F77j8eNu6mNsoEEaR0PS/jdLb6HSNR2
-         i65nJVKcbWDP6onJ6P7ViEPeEYxA0Cf90hFIu3rFJhZ24DRRUc107XhUj9U7sWXUgdla
-         g5Et/9DJmHMeAvRuqLtxXFkp4cB9Jj0/UUv44y8bV7c1rhGbKU+xSKLW+w6cscJAAvrW
-         XLJQ8QB3yBYaY/phbVsM9gFEBX9SKxN/nRKEs+X2r7kyT4I4MmdmcolSQeySYnWn6oGF
-         SV0w==
-X-Gm-Message-State: AOJu0Yy09xVDZv+iRH6EJcap9g/t1rcV3S6JKZhHqlMakDdEYnhqpx0Z
-	FaPExlD6rqZY1cFRpIe6FPa98v4atYjaDcCm3N4=
-X-Google-Smtp-Source: AGHT+IEDUvRrJdSPEc+v7qprHBcaozczjF2NcvE5UgjQtEn6nUmINnaIQzdAaZmBwiN5OUlgcaHE0w==
-X-Received: by 2002:a5d:6d8f:0:b0:32d:806f:d080 with SMTP id l15-20020a5d6d8f000000b0032d806fd080mr5661566wrs.50.1699885753618;
-        Mon, 13 Nov 2023 06:29:13 -0800 (PST)
+        bh=DKvDryGaPwdR5A7/h2qfnI9/FpKKnbN5VQwulP92NfA=;
+        b=JiBrpx5WELpwf3vMcJWTPd4MfAoQ9RGnd59MWkk1AnVbKgX0X3Kll2kDxPhUf5I1ZT
+         Jw9a/lGztfL7j9vDT/EDktwt/rsXV1Mmb8ITfwFmU3irsKq6oZIBCSoARWPtfRUHdwtk
+         pF0+F3chZRgnH0RMht8a/ax3RkuBzhiB8JhjtS5kvQwo96gJKGT3GPMrnzb0/Yd9Omql
+         jvOZLIo/7N3MbecGNBgbRZCFBJlBRj6BuBPqpbQ9Fkn8N4ALsSYGNH/26WACVFVyoQ3y
+         4MX5o2qQfiBzE18I0PoP39/hK7LQPIGHiFaDgakVCyX1IN//+Md0qqhlNUcHBX8i6m33
+         G4Fw==
+X-Gm-Message-State: AOJu0YxM3LaGydvZcSzwwERECj2DkVb8sRdRVzsgUUnwm+wA9zbXma9Z
+	l872ZhFf5lnTp0RKzRIba00m/Q8unilUkJZd3c0=
+X-Google-Smtp-Source: AGHT+IGlgJvYj3eNdgRuFMh4CqVCYlJbemG61logAlJXeRt7szRbBESuuKXAZ/9d/piuUr9HyxGW1w==
+X-Received: by 2002:adf:f191:0:b0:327:e073:d5fe with SMTP id h17-20020adff191000000b00327e073d5femr4639072wro.38.1699885752651;
+        Mon, 13 Nov 2023 06:29:12 -0800 (PST)
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id a15-20020a5d456f000000b0032ddf2804ccsm5535042wrc.83.2023.11.13.06.29.12
+        by smtp.gmail.com with ESMTPSA id a15-20020a5d456f000000b0032ddf2804ccsm5535042wrc.83.2023.11.13.06.29.11
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 13 Nov 2023 06:29:13 -0800 (PST)
+        Mon, 13 Nov 2023 06:29:12 -0800 (PST)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/3] python3-bitarray: Upgrade 2.8.2 -> 2.8.3
-Date: Mon, 13 Nov 2023 16:29:09 +0200
-Message-Id: <20231113142909.3093632-3-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/3] python3-wrapt: Upgrade 1.15.0 -> 1.16.0
+Date: Mon, 13 Nov 2023 16:29:08 +0200
+Message-Id: <20231113142909.3093632-2-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231113142909.3093632-1-leon.anavi@konsulko.com>
 References: <20231113142909.3093632-1-leon.anavi@konsulko.com>
@@ -58,40 +58,45 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 14:29:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106644
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106643
 
-Upgrade to version 2.8.3:
+Upgrade to version 1.16.0:
 
-- Ensure readonly attribute is set correctly when creating new
-  objects
-- Optimize sparse bitarray compression for raw block type
-- Improve hash functions in Bloom filter example
+- The patch_function_wrapper() decorator now accepts an enabled
+  argument which can be a literal boolean value, object that
+  evaluates as boolean, or a callable object which returns a
+  boolean.
+- The import hook loader and finder objects are now implemented
+  as transparent object proxies so they properly proxy pass access
+  to attributes/functions of the wrapped loader or finder.
+- Code files in the implementation have been reorganized such that
+  the pure Python version of the ObjectProxy class is directly
+  available even if the C extension variant is being used.
+- Bug fix: it was not possible to update the __class__ attribute
+  through the transparent object proxy when relying on the C
+  implementation.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../{python3-bitarray_2.8.2.bb => python3-bitarray_2.8.3.bb} | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-bitarray_2.8.2.bb => python3-bitarray_2.8.3.bb} (50%)
+ .../python/{python3-wrapt_1.15.0.bb => python3-wrapt_1.16.0.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-wrapt_1.15.0.bb => python3-wrapt_1.16.0.bb} (81%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-bitarray_2.8.2.bb b/meta-python/recipes-devtools/python/python3-bitarray_2.8.3.bb
-similarity index 50%
-rename from meta-python/recipes-devtools/python/python3-bitarray_2.8.2.bb
-rename to meta-python/recipes-devtools/python/python3-bitarray_2.8.3.bb
-index 39d2b6a71..acacdab6d 100644
---- a/meta-python/recipes-devtools/python/python3-bitarray_2.8.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-bitarray_2.8.3.bb
-@@ -1,9 +1,10 @@
--SUMMARY = "A high-level Python efficient arrays of booleans -- C extension"
-+SUMMARY = "efficient arrays of booleans -- C extension"
-+DESCRIPTION = "A high-level Python efficient arrays of booleans -- C extension"
- HOMEPAGE = "https://github.com/ilanschnell/bitarray"
- LICENSE = "PSF-2.0"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=2ad702cdcd49e8d2ac01d7e7d0810d2d"
+diff --git a/meta-python/recipes-devtools/python/python3-wrapt_1.15.0.bb b/meta-python/recipes-devtools/python/python3-wrapt_1.16.0.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-wrapt_1.15.0.bb
+rename to meta-python/recipes-devtools/python/python3-wrapt_1.16.0.bb
+index e35e1f7a7..f99b552c6 100644
+--- a/meta-python/recipes-devtools/python/python3-wrapt_1.15.0.bb
++++ b/meta-python/recipes-devtools/python/python3-wrapt_1.16.0.bb
+@@ -4,7 +4,7 @@ LICENSE = "BSD-2-Clause"
+ SECTION = "devel/python"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=dc34cbad60bc961452eb7ade801d25f7"
  
--SRC_URI[sha256sum] = "f90b2f44b5b23364d5fbade2c34652e15b1fcfe813c46f828e008f68a709160f"
-+SRC_URI[sha256sum] = "e15587b2bdf18d32eb3ba25f5f5a51bedd0dc06b3112a4c53dab5e7753bc6588"
+-SRC_URI[sha256sum] = "d06730c6aed78cee4126234cf2d071e01b44b915e725a6cb439a879ec9754a3a"
++SRC_URI[sha256sum] = "5f370f952971e7d17c7d1ead40e49f32345a7f7a5373571ef44d800d06b1899d"
  
- inherit setuptools3 pypi
+ inherit pypi setuptools3 
  
 -- 
 2.39.2
