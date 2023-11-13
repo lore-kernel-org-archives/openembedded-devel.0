@@ -1,146 +1,177 @@
-Return-Path: <changqing.li@eng.windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 19F44C4332F
-	for <webhook@archiver.kernel.org>; Mon, 13 Nov 2023 06:17:47 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.31680.1699856258300890832
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7C7B5C4332F
+	for <webhook@archiver.kernel.org>; Mon, 13 Nov 2023 07:18:07 +0000 (UTC)
+Received: from mail-oa1-f42.google.com (mail-oa1-f42.google.com [209.85.160.42])
+ by mx.groups.io with SMTP id smtpd.web11.32190.1699859885638044797
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 12 Nov 2023 22:17:38 -0800
+ Sun, 12 Nov 2023 23:18:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=py3bH72S;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=968118e1c1=changqing.li@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 3AD5jagm001729
-	for <openembedded-devel@lists.openembedded.org>; Sun, 12 Nov 2023 22:17:38 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=VCI42
-	1pUY3dPDypc06Elk78Bg5E4CVn93Q52xfnh/6s=; b=py3bH72SjiPDgJ6uIACd1
-	bxQKo3sSkfT2T9Fj+JlPMNEi6r9XYerQc8MH+trAaQbQNsD4Pe6l0xSU5vkOofFd
-	LxU91dJg5xEYo4cYZAh5sUSt9BcLgKBefgTxtY8KrYqF24LH8elOVVZchzQKtGXR
-	uAg9vFehWdhA/7w4GUVp1237Wp64hTmOonrb1F9tfIx9ppgEO10DyvoLBnFkxmzo
-	WJ1hGGILVRIICjB/dYysQKIm2C13W7nwI2P4Gf9Wr6LCAe4pZz1yCBXN62rdeDhR
-	M2uGml7YgqXayU7qJ3hNlM8mc/ZDDhszBPKXKhfvtrgYrU4kz0//HNzMU2a+OUpT
-	g==
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3uaa0kh1kf-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Sun, 12 Nov 2023 22:17:37 -0800 (PST)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.34; Sun, 12 Nov 2023 22:17:41 -0800
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.34 via Frontend Transport; Sun, 12 Nov 2023 22:17:40 -0800
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [mickledore][master][meta-oe][PATCH] cpuid: fix do_install
-Date: Mon, 13 Nov 2023 14:17:35 +0800
-Message-ID: <20231113061735.2639794-1-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ULw7pYf6;
+ spf=pass (domain: gmail.com, ip: 209.85.160.42, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f42.google.com with SMTP id 586e51a60fabf-1f04c5ed8d7so2643258fac.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Nov 2023 23:18:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1699859885; x=1700464685; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=LBeSEKF7bT8WgA2kVu5T02DdLvNZIjvTNIvZybRmfEM=;
+        b=ULw7pYf6C/YLvEsAWtiN3c6Gt5u7OyB0VWZCQxuzSN7nVGoTBSAlZunic5E5o6m/im
+         rU1XLkRIujvaM/Aa5/prUBA1T+o6SVzY9csNwGhWEUGQnaTX0taB08d39C+PDzhTYEI7
+         BQDI0wW/wtcwbmRrN7AgfMPTkToO0/Mcl6Q9nTrQRM/MF5TOCf8ZKVLSHqvYQfu1bOzS
+         gM+pLrmO1VdTnHFInrOlTDSo5JfV7cvJVhCyX/rz0MFLONBUS6JDjC+cYrf97DY7TMJX
+         usBGbwRnVwrnI32ry32VS9XmCutw7+M+EmoobwGRDdAUJIxLHlEQxANRFE/beK9Hzjku
+         2Zpw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1699859885; x=1700464685;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=LBeSEKF7bT8WgA2kVu5T02DdLvNZIjvTNIvZybRmfEM=;
+        b=CQjkQJ8PoeOG6MHzsd+qr0UEAr0WrLeycKIOPlapgfF4Xt0Uwh85lKI8SRv9HjglCl
+         4ADCYo61Qo+6p3ASGOWtDJpE+G/iXx7ZUlao3L/Sf9f05O++mqXvY+XdR7PGQmKvqHAZ
+         jCL9qTs2CgQTR4eVuWt8DBB+LmYonOd83B0oSAb9rwiDXqtTRd7UbS8tUqN7dZexgF0n
+         ALXHoGGGuuN9u75Gcb6nEUB/vi9gyj1PUCrWI9WaTHiQCb8sqZh240YBuWTbPyTd+rWT
+         dr39O77Im6YBVYP/cw9XJ6pkX5b2RB/0KUksHwktXeaqEf5K6Ii9FvQWZdWBgse14/3y
+         nnCQ==
+X-Gm-Message-State: AOJu0YxgiUI4X5JXq6OaYEuESz48K/nbPiTZnhLE4gVyxi1b9JJElsMb
+	F5vaG3f2WIRd60nHkOE2s92xSBKp6sBywE1nI2g=
+X-Google-Smtp-Source: AGHT+IF1c62yr7DapOtKdKa+uXnqiiqrJw49fVxw4Q+a/VHtXw3u4275XVKFfcEvUiYeUowW269WhJygZNllE2vsvmg=
+X-Received: by 2002:a05:6870:219b:b0:1e9:97eb:15a with SMTP id
+ l27-20020a056870219b00b001e997eb015amr7586855oae.36.1699859884607; Sun, 12
+ Nov 2023 23:18:04 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: ZjksW6o4sU0Lbf-fZNHCCNYnJ-6sNVeK
-X-Proofpoint-GUID: ZjksW6o4sU0Lbf-fZNHCCNYnJ-6sNVeK
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-11-12_24,2023-11-09_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- phishscore=0 mlxlogscore=821 lowpriorityscore=0 adultscore=0 mlxscore=0
- impostorscore=0 spamscore=0 suspectscore=0 malwarescore=0 bulkscore=0
- clxscore=1011 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2311060001 definitions=main-2311130053
+References: <20231111120116.31517-1-f_l_k@t-online.de> <CAMKF1sp5DBN7c02-bHiJnLUYi0k-sHS18C75k2WVHqz3KKGQ9A@mail.gmail.com>
+ <ROD14S.K1IV2J4GEO803@t-online.de>
+In-Reply-To: <ROD14S.K1IV2J4GEO803@t-online.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 12 Nov 2023 23:17:38 -0800
+Message-ID: <CAMKF1sqCNLn_-4Z0miDouY=3ofsxX8wived+mO3EhzaBn7rn1g@mail.gmail.com>
+Subject: Re: [oe] [meta-gnome][PATCH] ghex: Upgrade 3.18.4 -> 45.0
+To: Markus Volk <f_l_k@t-online.de>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 06:17:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106624
+ <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 07:18:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106625
 
-From: Changqing Li <changqing.li@windriver.com>
+On Sun, Nov 12, 2023 at 4:36=E2=80=AFPM Markus Volk <f_l_k@t-online.de> wro=
+te:
+>
+> Hi Khem,
+>
+> I guess this issue has already been fixed upstream:
+> https://gitlab.gnome.org/GNOME/ghex/-/issues/72
+>
+> Is it ok to send it as follow up ?
 
-Fix do_install to make cpuid-doc installed correctly
+Yes please do.
 
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
----
- .../recipes-devtools/cpuid/cpuid_20211129.bb  | 10 +++---
- ...e-the-hardcode-path-to-bindir-mandir.patch | 36 +++++++++++++++++++
- 2 files changed, 42 insertions(+), 4 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/cpuid/files/0001-Makefile-update-the-hardcode-path-to-bindir-mandir.patch
-
-diff --git a/meta-oe/recipes-devtools/cpuid/cpuid_20211129.bb b/meta-oe/recipes-devtools/cpuid/cpuid_20211129.bb
-index 3218ba652a..9eb01f6872 100644
---- a/meta-oe/recipes-devtools/cpuid/cpuid_20211129.bb
-+++ b/meta-oe/recipes-devtools/cpuid/cpuid_20211129.bb
-@@ -8,6 +8,7 @@ LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
- SRC_URI = "http://www.etallen.com/${BPN}/${BP}.src.tar.gz \
-+           file://0001-Makefile-update-the-hardcode-path-to-bindir-mandir.patch \
-            "
- SRC_URI[sha256sum] = "230772bb88c44732e68a42d2eff43bcff46d893bf4ea6e04151d4cb6e8c88e2f"
- 
-@@ -15,9 +16,10 @@ COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
- 
- inherit perlnative
- 
--# The install rule from the Makefile has hardcoded paths, so we duplicate
--# the actions to accommodate different paths.
- do_install () {
--    install -D -m 0755 ${B}/cpuid ${D}/${bindir}/cpuid
--    install -D -m 0444 ${B}/cpuid.man.gz ${D}/${mandir}
-+    oe_runmake DESTDIR=${D} bindir=${bindir} mandir=${mandir} install
- }
-+
-+RDEPENDS:${PN} = "perl"
-+
-+INSANE_SKIP:${PN} += "already-stripped"
-diff --git a/meta-oe/recipes-devtools/cpuid/files/0001-Makefile-update-the-hardcode-path-to-bindir-mandir.patch b/meta-oe/recipes-devtools/cpuid/files/0001-Makefile-update-the-hardcode-path-to-bindir-mandir.patch
-new file mode 100644
-index 0000000000..43486338a7
---- /dev/null
-+++ b/meta-oe/recipes-devtools/cpuid/files/0001-Makefile-update-the-hardcode-path-to-bindir-mandir.patch
-@@ -0,0 +1,36 @@
-+From 1339348c5b69b32378a638d65b16297d29c5fa22 Mon Sep 17 00:00:00 2001
-+From: Changqing Li <changqing.li@windriver.com>
-+Date: Tue, 7 Nov 2023 16:06:49 +0800
-+Subject: [PATCH] Makefile: update the hardcode path to bindir/mandir
-+
-+Update the hardcode path to bindir/mandir
-+
-+Upstream-Status: pending
-+
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+---
-+ Makefile | 8 ++++----
-+ 1 file changed, 4 insertions(+), 4 deletions(-)
-+
-+diff --git a/Makefile b/Makefile
-+index 828d2b1..365e26d 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -55,10 +55,10 @@ cpuinfo2cpuid.man.gz: cpuinfo2cpuid.man
-+ 	gzip < $< > $@
-+ 
-+ install: $(PROG) $(PROG).man.gz cpuinfo2cpuid cpuinfo2cpuid.man.gz
-+-	install -D $(INSTALL_STRIP) -m 755 $(PROG) $(BUILDROOT)/usr/bin/$(PROG)
-+-	install -D -m 444 $(PROG).man.gz       $(BUILDROOT)/usr/share/man/man1/$(PROG).1.gz
-+-	install -D -m 755 cpuinfo2cpuid        $(BUILDROOT)/usr/bin/cpuinfo2cpuid
-+-	install -D -m 444 cpuinfo2cpuid.man.gz $(BUILDROOT)/usr/share/man/man1/cpuinfo2cpuid.1.gz
-++	install -D $(INSTALL_STRIP) -m 755 $(PROG) $(BUILDROOT)${bindir}/$(PROG)
-++	install -D -m 444 $(PROG).man.gz       $(BUILDROOT)${mandir}/man1/$(PROG).1.gz
-++	install -D -m 755 cpuinfo2cpuid        $(BUILDROOT)${bindir}/cpuinfo2cpuid
-++	install -D -m 444 cpuinfo2cpuid.man.gz $(BUILDROOT)${mandir}/man1/cpuinfo2cpuid.1.gz
-+ 
-+ clean:
-+ 	rm -f $(PROG) $(PROG).i386 $(PROG).x86_64
-+-- 
-+2.25.1
-+
--- 
-2.25.1
-
+>
+> On Sun, Nov 12 2023 at 04:06:15 PM -08:00:00, Khem Raj <raj.khem@gmail.co=
+m> wrote:
+>
+> Markus I am seeing a build failure with clang but I doubt its related to =
+compiler type. | x86_64-yoe-linux-clang -target x86_64-yoe-linux -m64 -marc=
+h=3Dcore2 -mtune=3Dcore2 -msse3 -mfpmath=3Dsse -mlittle-endian --dyld-prefi=
+x=3D/usr -Qunused-arguments -fstack-protector-strong -O2 -D_FORTIFY_SOURCE=
+=3D2 -Wformat -Wformat- security -Werror=3Dformat-security --sysroot=3D/mnt=
+/b/yoe/master/build/tmp/work/core2-64-yoe-linux/ghex/45.0/recipe-sysroot -I=
+src/libgtkhex-4.so.1.4.0.p -Isrc -I../ghex-45.0/src -I. -I../ghex-45.0 -I/m=
+nt/b/yoe/master/build/tmp /work/core2-64-yoe-linux/ghex/45.0/recipe-sysroot=
+/usr/include/glib-2.0 -I/mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux=
+/ghex/45.0/recipe-sysroot/usr/lib/glib-2.0/include -I/mnt/b/yoe/master/buil=
+d/tmp/work/core2-64-yoe -linux/ghex/45.0/recipe-sysroot/usr/include/libmoun=
+t -I/mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux/ghex/45.0/recipe-sy=
+sroot/usr/include/blkid -I/mnt/b/yoe/master/build/tmp/work/core2-64-yoe-lin=
+ux/ghex/45.0/recipe-s ysroot/usr/include/gtk-4.0 -I/mnt/b/yoe/master/build/=
+tmp/work/core2-64-yoe-linux/ghex/45.0/recipe-sysroot/usr/include/pango-1.0 =
+-I/mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux/ghex/45.0/recipe-sysr=
+oot/usr/include/har fbuzz -I/mnt/b/yoe/master/build/tmp/work/core2-64-yoe-l=
+inux/ghex/45.0/recipe-sysroot/usr/include/fribidi -I/mnt/b/yoe/master/build=
+/tmp/work/core2-64-yoe-linux/ghex/45.0/recipe-sysroot/usr/include/gdk-pixbu=
+f-2.0 -I/mnt/b/yo e/master/build/tmp/work/core2-64-yoe-linux/ghex/45.0/reci=
+pe-sysroot/usr/include/cairo -I/mnt/b/yoe/master/build/tmp/work/core2-64-yo=
+e-linux/ghex/45.0/recipe-sysroot/usr/include/pixman-1 -I/mnt/b/yoe/master/b=
+uild/tmp/work/c ore2-64-yoe-linux/ghex/45.0/recipe-sysroot/usr/include/free=
+type2 -I/mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux/ghex/45.0/recip=
+e-sysroot/usr/include/libdrm -I/mnt/b/yoe/master/build/tmp/work/core2-64-yo=
+e-linux/ghex/ 45.0/recipe-sysroot/usr/include/libpng16 -I/mnt/b/yoe/master/=
+build/tmp/work/core2-64-yoe-linux/ghex/45.0/recipe-sysroot/usr/include/grap=
+hene-1.0 -I/mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux/ghex/45.0/re=
+cipe-sysroo t/usr/lib/graphene-1.0/include -fcolor-diagnostics -D_FILE_OFFS=
+ET_BITS=3D64 -Wall -Winvalid-pch -Wno-unused-variable -Wno-unused-parameter=
+ -Werror=3Dimplicit -Wformat=3D2 -O2 -pipe -g -feliminate-unused-debug-type=
+s -fmacro-prefi x-map=3D/mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux=
+/ghex/45.0/ghex-45.0=3D/usr/src/debug/ghex/45.0-r0 -fdebug-prefix-map=3D/mn=
+t/b/yoe/master/build/tmp/work/core2-64-yoe-linux/ghex/45.0/ghex-45.0=3D/usr=
+/src/debug/ghex/45.0- r0 -fmacro-prefix-map=3D/mnt/b/yoe/master/build/tmp/w=
+ork/core2-64-yoe-linux/ghex/45.0/build=3D/usr/src/debug/ghex/45.0-r0 -fdebu=
+g-prefix-map=3D/mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux/ghex/45.=
+0/build=3D/usr/src/debug/gh ex/45.0-r0 -fdebug-prefix-map=3D/mnt/b/yoe/mast=
+er/build/tmp/work/core2-64-yoe-linux/ghex/45.0/recipe-sysroot=3D -fmacro-pr=
+efix-map=3D/mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux/ghex/45.0/re=
+cipe-sysroot=3D -fdebug-prefix-ma p=3D/mnt/b/yoe/master/build/tmp/work/core=
+2-64-yoe-linux/ghex/45.0/recipe-sysroot-native=3D -fPIC -mfpmath=3Dsse -mss=
+e -msse2 -pthread '-DG_LOG_DOMAIN=3D"gtkhex-4"' -MD -MQ src/libgtkhex-4.so.=
+1.4.0.p/gtkhex.c.o -MF src/libgtkhex-4. so.1.4.0.p/gtkhex.c.o.d -o src/libg=
+tkhex-4.so.1.4.0.p/gtkhex.c.o -c ../ghex-45.0/src/gtkhex.c | ../ghex-45.0/s=
+rc/gtkhex.c:1944:4: error: expected expression | 1944 | gint64 line_beg =3D=
+ self->cursor_pos; | | ^ | ../ghex-45.0/src/gtkhex.c:1946:11: error: use of=
+ undeclared identifier 'line_beg' | 1946 | while (line_beg % self->cpl !=3D=
+ 0) | | ^ | ../ghex-45.0/src/gtkhex.c:1947:7: error: use of undeclared iden=
+tifier 'line_beg' | 1947 | --line_beg; | | ^ | ../ghex-45.0/src/gtkhex.c:19=
+49:33: error: use of undeclared identifier 'line_beg' | 1949 | hex_widget_s=
+et_cursor (self, line_beg); | | ^ | ../ghex-45.0/src/gtkhex.c:1954:4: error=
+: expected expression | 1954 | gint64 line_end =3D self->cursor_pos; | | ^ =
+| ../ghex-45.0/src/gtkhex.c:1956:11: error: use of undeclared identifier 'l=
+ine_end' | 1956 | while (line_end % self->cpl !=3D self->cpl - 1) | | ^ | .=
+./ghex-45.0/src/gtkhex.c:1957:7: error: use of undeclared identifier 'line_=
+end' | 1957 | ++line_end; | | ^ | ../ghex-45.0/src/gtkhex.c:1959:38: error:=
+ use of undeclared identifier 'line_end' | 1959 | hex_widget_set_cursor (se=
+lf, MIN (line_end, payload_size)); | | ^ | ../ghex-45.0/src/gtkhex.c:1959:3=
+8: error: use of undeclared identifier 'line_end' | 9 errors generated. On =
+Sat, Nov 11, 2023 at 4:00=E2=80=AFAM Markus Volk <f_l_k@t-online.de> wrote:
+>
+> - enable gi,vapi,api-documentation - switch to gtk4 Signed-off-by: Markus=
+ Volk <f_l_k@t-online.de> --- meta-gnome/recipes-gnome/ghex/ghex_3.18.4.bb =
+| 17 ----------------- meta-gnome/recipes-gnome/ghex/ghex_45.0.bb | 20 ++++=
+++++++++++++++++ 2 files changed, 20 insertions(+), 17 deletions(-) delete =
+mode 100644 meta-gnome/recipes-gnome/ghex/ghex_3.18.4.bb create mode 100644=
+ meta-gnome/recipes-gnome/ghex/ghex_45.0.bb diff --git a/meta-gnome/recipes=
+-gnome/ghex/ghex_3.18.4.bb b/meta-gnome/recipes-gnome/ghex/ghex_3.18.4.bb d=
+eleted file mode 100644 index 08e50409e..000000000 --- a/meta-gnome/recipes=
+-gnome/ghex/ghex_3.18.4.bb +++ /dev/null @@ -1,17 +0,0 @@ -SUMMARY =3D "GHe=
+x - a hex editor for GNOME" -LICENSE =3D "GPL-2.0-only" -LIC_FILES_CHKSUM =
+=3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4263" - -GNOMEBASEBUI=
+LDCLASS =3D "meson" - -DEPENDS =3D " \ - glib-2.0-native \ - gtk+3 \ -" - -=
+inherit gnomebase gsettings gtk-icon-cache gnome-help gettext upstream-vers=
+ion-is-even - -SRC_URI[archive.md5sum] =3D "7e6ed808766bc18285bdc6999bdf0f1=
+5" -SRC_URI[archive.sha256sum] =3D "c2d9c191ff5bce836618779865bee4059db81a3=
+a0dff38bda3cc7a9e729637c0" - -FILES:${PN} +=3D "${datadir}/metainfo" diff -=
+-git a/meta-gnome/recipes-gnome/ghex/ghex_45.0.bb b/meta-gnome/recipes-gnom=
+e/ghex/ghex_45.0.bb new file mode 100644 index 000000000..6d3e9b978 --- /de=
+v/null +++ b/meta-gnome/recipes-gnome/ghex/ghex_45.0.bb @@ -0,0 +1,20 @@ +S=
+UMMARY =3D "GHex - a hex editor for GNOME" +LICENSE =3D "GPL-2.0-only" +LIC=
+_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4263" +=
+ + +DEPENDS =3D " \ + desktop-file-utils-native \ + glib-2.0-native \ + gtk=
+4 \ + libadwaita \ +" + +GIR_MESON_ENABLE_FLAG =3D 'enabled' +GIR_MESON_DIS=
+ABLE_FLAG =3D 'disabled' + +inherit gnomebase gsettings gtk-icon-cache gnom=
+e-help gettext gobject-introspection vala gi-docgen + +SRC_URI[archive.sha2=
+56sum] =3D "05cecc4561ca40b257c5db31da9f68d696133efc0ae427ed82fb985a986e840=
+e" + +FILES:${PN} +=3D "${libdir} ${datadir}/metainfo" -- 2.42.0
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D- Links: You receive all mess=
+ages sent to this group. View/Reply Online (#106618): https://lists.openemb=
+edded.org/g/openembedded-devel/message/106618 Mute This Topic: https://list=
+s.openembedded.org/mt/102524551/3618223 Group Owner: openembedded-devel+own=
+er@lists.openembedded.org Unsubscribe: https://lists.openembedded.org/g/ope=
+nembedded-devel/unsub [f_l_k@t-online.de] -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=
+=3D-=3D-=3D-
 
