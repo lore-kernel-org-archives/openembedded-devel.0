@@ -2,57 +2,57 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C4B45C41535
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BF608C072AB
 	for <webhook@archiver.kernel.org>; Mon, 13 Nov 2023 07:34:57 +0000 (UTC)
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.web11.32317.1699860890132952154
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
+ by mx.groups.io with SMTP id smtpd.web11.32319.1699860893592054037
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 12 Nov 2023 23:34:50 -0800
+ Sun, 12 Nov 2023 23:34:53 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=msdvYKxf;
- spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-1cc58219376so36713095ad.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Nov 2023 23:34:50 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=bz0nnwWF;
+ spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-1cc7077d34aso28856605ad.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 12 Nov 2023 23:34:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699860889; x=1700465689; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1699860893; x=1700465693; darn=lists.openembedded.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=EIpojbFOruoJj/hclyWzTrTuwlBxWfUp9Eayw/4WTjI=;
-        b=msdvYKxfkGUEaCY3ch3k6ssP7dPX3U5h3SrQgMnewcMlYu5cRI05D6HMYkl+fYGJTq
-         L5fPh0Sx8og3so4lnUXtjcFiWiH/HfvVOi6UQtURyPrWhb5xs5oHBR9V0FInHnQDmSwk
-         EBog4Jpjfxh1O2Gx/d3XzUcp/d9Gu1l+YkcKvfov5EEbKKl70XgdyMNJGZs6ULUMEYLV
-         VrXdhOVr34Q1h/6X1TpaYOMupDD8qbcg/o662mWjpTDTPM4s9Q/KbWHozJV6Qns67tNu
-         iiUx6+YQicwGflMyWB9XgoLZ3JRLzEK5bEB1ea591D3CGNKfKy1Fg+fsTFcEvG0FjiQ3
-         ffSg==
+        bh=Vo80vlky9BCPRc0BNvuHfYaHDe9bCJvHsdExdjsT+4Y=;
+        b=bz0nnwWFgNuVenfQS1J8ovlIAcGaLnBdWzVUrFgdPE3A01UHoAVTOHILzNtNaljNmZ
+         gafiBOZ1w9T5kUyR3xM+cS4Rc1aaoyZVk6w8tJ2ESyhNCSV83FljOhgo7Hexeo2cG4Ev
+         ATnIwcEP07p929WMP6t5uYAjUmi+DJQ+z3vTNB6sVM24zDtdattgXPQXJKrRqTI9/Eal
+         xxFS03B8LKYbz0D6uzrebKf9CJfFftVMPSnjFJ2xrfUjEYSTJz20ZR+S7593rQQ208QA
+         hg7vBXl21qlD+JoN+MfGxL2OXIj5lz0bTtAHEk9Fkcc+IFb0UBH+PvfJhQwCBOuMGgEL
+         UKQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699860889; x=1700465689;
+        d=1e100.net; s=20230601; t=1699860893; x=1700465693;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=EIpojbFOruoJj/hclyWzTrTuwlBxWfUp9Eayw/4WTjI=;
-        b=VAcvwaf01u6vcQowzi43B3KJQsrarBJeIdiZRqafkIyaCa5ZWoj/RcZ3iZhaRR63On
-         UKbrAggPTnmSwkQXAdogrPr6Err920NACUl+5Ks06sRRI5Z6C0DV9AyrjoWIu5Jg1CAV
-         GOoPC58XbTUOH6YWzKs1NtE9J71dbTl/WeHzsBarTQw6HCWFKO/9W6naa/YqDqaZgcSl
-         QMG74Jljwgt6ydlKjzNAzBYDRGMRMqv6wBwz7jfy0j8tsCKEbel7/DrqRJHN0/EQQuar
-         3EoCZ4FXC0ir1jBT4tKdybHFF5IR/npE8Wa1BI6ulyfG0qT3wTbkZKLqCCYLSSoZAcA9
-         kgPQ==
-X-Gm-Message-State: AOJu0YzrTr+bZ2endIYrXd2jmARMdNdqeQr6I4/AGzx+d1GbtfP2wQu4
-	tO6yO1hi/mSQ1MFtTiK8a5/zr7AS7H62FA==
-X-Google-Smtp-Source: AGHT+IEHX1Pl8wCUdxqJSTlTHOzcyRIiaNY2gu4TTTRzkkTK+c0yeupNIf+BMo7aO8D5+1uTg3bBsA==
-X-Received: by 2002:a17:903:230a:b0:1cc:569b:1df4 with SMTP id d10-20020a170903230a00b001cc569b1df4mr7375787plh.1.1699860889200;
-        Sun, 12 Nov 2023 23:34:49 -0800 (PST)
+        bh=Vo80vlky9BCPRc0BNvuHfYaHDe9bCJvHsdExdjsT+4Y=;
+        b=DUdwIRpci4hTvU0SiFLtf0iZi9zV7Xoimw9mdZX5FRPWkv65+y9uDNIvBKc5k4fdKy
+         vYnQuG4gVrbJtpUYGeiiyTN0Nlfe/4zYbgQ0wMyeklSOhynZCKyvwf0xQPYDbnia4YCN
+         PR0knotIgjn9MIAe6UYbbAQoSFvdstIVISHc6n4v9BVIOzDmlWmR6/q5KA4hnqyIFNET
+         YL8rULXhj+mUBgLlqe8H7430FS6WFisKtUhro1gOyIuG13pidffEJQF7l89IpsPnSTty
+         mUYD0VnKxfjvjKWSB3dnUQhYv5Tdk+jiVYTpd7VutPiWfpVgEpWuPWocGcKc+DPWL3zW
+         QpMQ==
+X-Gm-Message-State: AOJu0YwAjBJ3CEWIeWtvQg+4JmFXQE9LuX+mtyw7O2zjKGUzBhMueoLf
+	PbXYl238/SzlGHN6cYqcJIEQfKj70aMSZg==
+X-Google-Smtp-Source: AGHT+IHeWMGaG/7vETSYH5VSLW346ymqAv5gVyUODl84g34VeI/HefpZyr5+LiuPbFUvbjB7djvEXg==
+X-Received: by 2002:a17:902:8c86:b0:1cc:6cc7:e29f with SMTP id t6-20020a1709028c8600b001cc6cc7e29fmr3858990plo.43.1699860892591;
+        Sun, 12 Nov 2023 23:34:52 -0800 (PST)
 Received: from apollo.localdomain ([2601:646:9100:2cb0::62f8])
-        by smtp.gmail.com with ESMTPSA id q9-20020a170902dac900b001cc50f67fbasm3509691plx.281.2023.11.12.23.34.48
+        by smtp.gmail.com with ESMTPSA id q9-20020a170902dac900b001cc50f67fbasm3509691plx.281.2023.11.12.23.34.51
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 12 Nov 2023 23:34:48 -0800 (PST)
+        Sun, 12 Nov 2023 23:34:51 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 12 Nov 2023 23:34:45 -0800
-Subject: [PATCH v3 1/6] meta-networking: Use autotools make system
+Date: Sun, 12 Nov 2023 23:34:48 -0800
+Subject: [PATCH v3 4/6] loudmouth: Upgrade to 1.5.4
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20231112-kraj-pu-v3-1-51f4c8091bc8@gmail.com>
+Message-Id: <20231112-kraj-pu-v3-4-51f4c8091bc8@gmail.com>
 References: <20231112-kraj-pu-v3-0-51f4c8091bc8@gmail.com>
 In-Reply-To: <20231112-kraj-pu-v3-0-51f4c8091bc8@gmail.com>
 To: openembedded-devel@lists.openembedded.org
@@ -62,53 +62,121 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 07:34:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106627
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106630
 
-OE-core is switching to default to meson for gnome recipes
+License-Update: Update the postal address of the FSF [1]
+
+Drop patches not needed anymore.
+
+[1] https://github.com/mcabber/loudmouth/commit/c1f7ffdeb1f9f78eeb377bd28c7be8c146161327
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../networkmanager/networkmanager-fortisslvpn_1.4.0.bb                   | 1 +
- .../networkmanager/networkmanager-openconnect_1.2.8.bb                   | 1 +
- .../recipes-connectivity/networkmanager/networkmanager-openvpn_1.10.2.bb | 1 +
- 3 files changed, 3 insertions(+)
+ .../04-use-pkg-config-for-gnutls.patch             | 25 ----------------------
+ .../loudmouth/loudmouth-1.4.3/glib-2.32.patch      | 12 -----------
+ .../loudmouth/loudmouth_1.4.3.bb                   | 22 -------------------
+ .../loudmouth/loudmouth_1.5.4.bb                   | 16 ++++++++++++++
+ 4 files changed, 16 insertions(+), 59 deletions(-)
 
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager-fortisslvpn_1.4.0.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager-fortisslvpn_1.4.0.bb
-index a251e8bf3d..a15c69b601 100644
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager-fortisslvpn_1.4.0.bb
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager-fortisslvpn_1.4.0.bb
-@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
- 
- DEPENDS = "glib-2.0-native libxml2-native networkmanager ppp"
- 
+diff --git a/meta-oe/recipes-connectivity/loudmouth/loudmouth-1.4.3/04-use-pkg-config-for-gnutls.patch b/meta-oe/recipes-connectivity/loudmouth/loudmouth-1.4.3/04-use-pkg-config-for-gnutls.patch
+deleted file mode 100644
+index 0fc87abd09..0000000000
+--- a/meta-oe/recipes-connectivity/loudmouth/loudmouth-1.4.3/04-use-pkg-config-for-gnutls.patch
++++ /dev/null
+@@ -1,25 +0,0 @@
+-Upstream-Status: Pending
+-
+-Description: use pkg-config to detect gnutls
+-Debian: http://bugs.debian.org/529835
+-Origin: http://groups.google.com/group/loudmouth-dev/browse_thread/thread/3f78255837048daf#
+-
+---- a/configure.ac.orig	2009-08-16 20:29:36.000000000 +0200
+-+++ b/configure.ac	2009-08-16 20:30:43.000000000 +0200
+-@@ -146,10 +146,12 @@ AC_ARG_WITH(openssl-libs,
+- enable_ssl=no
+- if test "x$ac_ssl" = "xgnutls"; then
+-   dnl Look for GnuTLS
+--  AM_PATH_LM_LIBGNUTLS($GNUTLS_REQUIRED, have_libgnutls=yes, have_libgnutls=no)
+--  if test "x$have_libgnutls" = "xyes"; then
+--    CFLAGS="$CFLAGS $LIBGNUTLS_CFLAGS"
+--    LIBS="$LIBS $LIBGNUTLS_LIBS"
+-+  PKG_CHECK_MODULES(GNUTLS, gnutls >= $GNUTLS_REQUIRED, have_gnutls=yes, have_gnutls=no)
+-+  if test "x$have_gnutls" = "xyes"; then 
+-+    AC_SUBST(ASYNCNS_CFLAGS)
+-+    AC_SUBST(ASYNCNS_LIBS)
+-+    CFLAGS="$CFLAGS $GNUTLS_CFLAGS"
+-+    LIBS="$LIBS $GNUTLS_LIBS"
+-     AC_DEFINE(HAVE_GNUTLS, 1, [whether to use GnuTSL support.])
+-     enable_ssl=GnuTLS
+-   else
+diff --git a/meta-oe/recipes-connectivity/loudmouth/loudmouth-1.4.3/glib-2.32.patch b/meta-oe/recipes-connectivity/loudmouth/loudmouth-1.4.3/glib-2.32.patch
+deleted file mode 100644
+index 921aded943..0000000000
+--- a/meta-oe/recipes-connectivity/loudmouth/loudmouth-1.4.3/glib-2.32.patch
++++ /dev/null
+@@ -1,12 +0,0 @@
+-Upstream-Status: Pending
+-
+---- loudmouth-1.4.3.orig/loudmouth/lm-error.c	2008-10-29 21:48:15.000000000 +0100
+-+++ loudmouth-1.4.3/loudmouth/lm-error.c	2012-05-06 08:27:07.455739440 +0200
+-@@ -19,7 +19,6 @@
+-  */
+- 
+- #include <config.h>
+--#include <glib/gerror.h>
+- #include "lm-error.h"
+- 
+- /**
+diff --git a/meta-oe/recipes-connectivity/loudmouth/loudmouth_1.4.3.bb b/meta-oe/recipes-connectivity/loudmouth/loudmouth_1.4.3.bb
+deleted file mode 100644
+index 0593469a45..0000000000
+--- a/meta-oe/recipes-connectivity/loudmouth/loudmouth_1.4.3.bb
++++ /dev/null
+@@ -1,22 +0,0 @@
+-DESCRIPTION = "Loudmouth is a lightweight and easy-to-use C library for programming with the Jabber protocol."
+-HOMEPAGE = "http://www.loudmouth-project.org/"
+-
+-LICENSE = "LGPL-2.1-only"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=c4f38aef94828f6b280e00d1173be689"
+-
+-DEPENDS = "glib-2.0 libcheck openssl libidn"
+-
+-GNOMEBASEBUILDCLASS = "autotools"
+-inherit gnomebase gtk-doc
+-
+-PR = "r2"
+-
+-SRC_URI += "file://04-use-pkg-config-for-gnutls.patch \
+-            file://glib-2.32.patch"
+-
+-SRC_URI[archive.md5sum] = "55339ca42494690c3942ee1465a96937"
+-SRC_URI[archive.sha256sum] = "95a93f5d009b71ea8193d994aa11f311bc330a3efe1b7cd74dc48f11c7f929e3"
+-GNOME_COMPRESS_TYPE="bz2"
+-
+-EXTRA_OECONF = "--with-ssl=openssl"
+-
+diff --git a/meta-oe/recipes-connectivity/loudmouth/loudmouth_1.5.4.bb b/meta-oe/recipes-connectivity/loudmouth/loudmouth_1.5.4.bb
+new file mode 100644
+index 0000000000..f67c46b428
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/loudmouth/loudmouth_1.5.4.bb
+@@ -0,0 +1,16 @@
++DESCRIPTION = "Loudmouth is a lightweight and easy-to-use C library for programming with the Jabber protocol."
++HOMEPAGE = "http://www.loudmouth-project.org/"
++
++LICENSE = "LGPL-2.1-only"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
++
++DEPENDS = "glib-2.0 libcheck openssl libidn"
++
 +GNOMEBASEBUILDCLASS = "autotools"
- inherit gnomebase gettext useradd
- 
- SRC_URI = " \
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager-openconnect_1.2.8.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager-openconnect_1.2.8.bb
-index c978defbbf..ee19afbd11 100644
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager-openconnect_1.2.8.bb
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager-openconnect_1.2.8.bb
-@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=186e8b54342da4f753a62b7748c947db"
- 
- DEPENDS = "glib-2.0-native intltool-native libxml2 networkmanager openconnect"
- 
-+GNOMEBASEBUILDCLASS = "autotools"
- inherit gnomebase useradd
- 
- SRC_URI = "${GNOME_MIRROR}/NetworkManager-openconnect/${@gnome_verdir("${PV}")}/NetworkManager-openconnect-${PV}.tar.xz"
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.10.2.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.10.2.bb
-index a9afe3a7e4..cdef11c89c 100644
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.10.2.bb
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.10.2.bb
-@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=100d5a599bead70ddcd70dcd73f2e29c"
- 
- DEPENDS = "dbus dbus-glib networkmanager openvpn intltool-native glib-2.0-native"
- 
-+GNOMEBASEBUILDCLASS = "autotools"
- inherit gnomebase useradd gettext systemd
- 
- SRC_URI = "${GNOME_MIRROR}/NetworkManager-openvpn/${@gnome_verdir("${PV}")}/NetworkManager-openvpn-${PV}.tar.xz"
++
++inherit gnomebase gtk-doc
++
++SRC_URI = "https://github.com/mcabber/${BPN}/releases/download/${PV}/${BP}.tar.bz2"
++SRC_URI[sha256sum] = "31cbc91c1fddcc5346b3373b8fb45594e9ea9cc7fe36d0595e8912c47ad94d0d"
++
++EXTRA_OECONF = "--with-ssl=openssl --with-compile-warnings=no"
 
 -- 
 2.42.1
