@@ -1,130 +1,109 @@
-Return-Path: <costamagna.gianfranco@gmail.com>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B157C4332F
-	for <webhook@archiver.kernel.org>; Mon, 13 Nov 2023 11:39:59 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
- by mx.groups.io with SMTP id smtpd.web10.34868.1699875589756096749
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4989CC4332F
+	for <webhook@archiver.kernel.org>; Mon, 13 Nov 2023 11:52:19 +0000 (UTC)
+Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
+ by mx.groups.io with SMTP id smtpd.web10.35029.1699876332985402532
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Nov 2023 03:39:50 -0800
+ Mon, 13 Nov 2023 03:52:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=LvXylw5U;
- spf=pass (domain: gmail.com, ip: 209.85.128.45, mailfrom: costamagna.gianfranco@gmail.com)
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-407da05f05aso32069455e9.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 03:39:49 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=C5zgJStN;
+ spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-9c603e235d1so658982866b.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 03:52:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699875588; x=1700480388; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1699876331; x=1700481131; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=NcDkm77filFSbrAuUmdvFLDB8ATLSEa9uPxufhKPDm4=;
-        b=LvXylw5U0vvYSUexXqssgkxbewVNJ+8tdCbt4FI3SYsDCz1GuIPj1Fr3g1I2yjPC6w
-         Az/7sk3No+k91thuwiZ9VcSpYzh4x39YSmbv3/KVV+3iexn8j3LpHlzAWl4zm+B5b+cU
-         Rb4g5J9vdQjseF9ur2Fj2IOc/lE/7czpoNiZwr6BJpAPYj8qXwDKVUd7y2adzOV4FwCt
-         ZEEzyuLWMPAfe9Xig6M/AjRLfOJ+eeU++tRoD3dCjx/LgNJJQFD4eJn91x4tf22ayuan
-         N9EMRsvf3rqEHzpLbOnOOdt8UNAoicFmXL072WPSxylUUIYPGMEAyCOspJiOYQZh2nVd
-         hiHw==
+        bh=+JOXimje2eP0//L0Zn6c/pi8Qa41mrp1ibzFIhdw2pA=;
+        b=C5zgJStNOmYbw3WkREnLASq+4Ycf7z7to6CvWkSQoruWS/ekuh03dbjQUE5odM4ahC
+         JzBF7a1R98JKLLTCAfzdXnQC0Z512VdgT1X7j0SRyee2La3y4WfCEGR68pcMgwXjjU4E
+         5PQrzcvei1c1Q3Uv7i57LGSvJGKRTbreKJrGxh0wkPzUyrBwB29Rd2tJDiQJZ7kUIl+a
+         2zaS8pj2i+6dhdEbFWBn9jaheWIxLswEA4tRVMnaXCLVvx/W0fIIwKDA1LyPrFdWtbWq
+         LvDicf6uCHnfGMuuJ3nVAXUXKzFudXnr+WYKRwlDHVwz1tShy3wVYs3DJlJ4qXiM8mCf
+         A8KA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699875588; x=1700480388;
+        d=1e100.net; s=20230601; t=1699876331; x=1700481131;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=NcDkm77filFSbrAuUmdvFLDB8ATLSEa9uPxufhKPDm4=;
-        b=jrO/PSghCokeTWFHnFiZ0qwgsLzLMa52GjbMa3D/1RW4LPtmCKtOgnMvnneXbQ4NDC
-         V7Yv+D84FoXA4TLZzJwQT2Cvcocm/N5HsLLKwhTXoMbdhrjV3TRmmALMqarr0zcaSqiy
-         D9IofUY/bht/tq72bNmc0equ/vFu0PgpVbCOBx70MZ0AxGkwU91THneKdZh48wWowQ6g
-         lpOqdRYfrqHshNIKOWOUBzSMPOtccpaCIiUUagZiIkAnSk890P+JpWdlkB6rmive8uqi
-         qIN1ZwAxVWL2CQV177BD36fgOxh6gyWMDuc69FZ2bKM9JzR9fN7sCIlCcQd0fqky/6Fi
-         S3ow==
-X-Gm-Message-State: AOJu0Yzhh9a2E1Bt1i26NjxxOooR9TOSG069IVztDsjOxoSi1Nv6hygs
-	JOlvkKkg8J2bzaUJJgFxTUMYIJcCFRM=
-X-Google-Smtp-Source: AGHT+IEcpCVcJoAciz314iQ7SaOvD62Ail5sf/KytJ04riFm5AlzPcCCGqGmXypHtkX6nLvU3AGMFg==
-X-Received: by 2002:a05:600c:3151:b0:402:f55c:faee with SMTP id h17-20020a05600c315100b00402f55cfaeemr5049703wmo.26.1699875587374;
-        Mon, 13 Nov 2023 03:39:47 -0800 (PST)
-Received: from Unimatrix08-Jammy.lan ([151.58.174.15])
-        by smtp.gmail.com with ESMTPSA id n15-20020a1c720f000000b0040a44179a88sm10547200wmc.42.2023.11.13.03.39.45
+        bh=+JOXimje2eP0//L0Zn6c/pi8Qa41mrp1ibzFIhdw2pA=;
+        b=h/fKbxB4LCzdlOogjV1oJbc6oy6rTT/4XaxNh7dIAfBjvZ81ajqxxRQ0CYpPN0eaGQ
+         /OyHEkK3g/7TlBUazZua9ovEVd9wiYF/Y3cslur11wMyEaFapfv/EhexY4ufWghO0MHp
+         00vosTwY2C4OGUJIuy95XN/C4+EyP1/OfCH/gjaDf4/AOI9I1XMNhUf+vTAfTfNkcylM
+         qgdnT/+ztupKGwRB/pJiRHOgxgLkrklfkit6nKEP4qNDkQ/N9QVfi7kRDEnYbAMWHqrJ
+         S9xnvbnb5SKfOEayl6J/kQE7OrX0WkDLd2PFD59QbWpc5Cs8aCbbaYa54wpFtbS1yZEu
+         Lt0g==
+X-Gm-Message-State: AOJu0YxiO60wpoX2vow1dPnNYwJES3kpqA+QqVrHXDDRGDc6Bmhkayop
+	wmf5RBPF7InlR/mtenyQg2RNTpecnayBZA==
+X-Google-Smtp-Source: AGHT+IFmfjVTXNLHg1T1FtH4K0TEFUyeMMg7l5c9FpJY41Gv1JG5xIgkLHbjnHbCyPr+MJ7fgwfBag==
+X-Received: by 2002:a17:906:5ad4:b0:9df:254d:3e45 with SMTP id x20-20020a1709065ad400b009df254d3e45mr4229529ejs.24.1699876330872;
+        Mon, 13 Nov 2023 03:52:10 -0800 (PST)
+Received: from localhost.localdomain ([176.33.65.238])
+        by smtp.gmail.com with ESMTPSA id n6-20020a170906118600b009e689685196sm3969349eja.142.2023.11.13.03.52.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 13 Nov 2023 03:39:46 -0800 (PST)
-From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+        Mon, 13 Nov 2023 03:52:10 -0800 (PST)
+From: alperak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
-	Gianfranco Costamagna <locutusofborg@debian.org>
-Subject: [meta-oe][PATCH] dlt-daemon: cherry-pick another upstream-proposed patch
-Date: Mon, 13 Nov 2023 12:39:42 +0100
-Message-Id: <20231113113942.112938-1-costamagnagianfranco@yahoo.it>
-X-Mailer: git-send-email 2.34.1
+Cc: alperak <alperyasinak1@gmail.com>
+Subject: [meta-filesystems][PATCHv2] fuse-exfat: upgrade 1.3.0 -> 1.4.0
+Date: Mon, 13 Nov 2023 14:51:59 +0300
+Message-Id: <20231113115159.73164-1-alperyasinak1@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 11:39:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106638
+ <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 11:52:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106639
 
-Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
+Changelog:
+
+* Added exfatattrib utility which prints or changes file attributes [Will
+Thompson].
+* Added FUSE 3 support. FUSE 2 continues to be supported.
+* Added support for timezone offsets [Nathan Hunsperger].
+* Fixed device opening error being reported as FS error.
+* Fixed possible data leakage when uninitialized clusters were allocated using
+NtSetInformationFile() call under Windows and FS was not unmounted correctly.
+* Improved compatibility with autoconf 2.70.
+* Fixed disk size reading on NetBSD [Dave Vasilevsky].
+* Fixed "automounted" option handling on FreeBSD [Iouri V. Ivliev].
+* Allowed to specify the "nonempty" mount option.
+* Fixed file data contiguity handling bug which could cause performance
+degradation [noctis].
+* Fixed possible crashes on invalid UTF-8 sequences.
+* Fixed a situation when FS could be erroneously marked as dirty (not cleanly
+unmounted).
+
+Signed-off-by: alperak <alperyasinak1@gmail.com>
 ---
- .../dlt-daemon/dlt-daemon/567.patch           | 36 +++++++++++++++++++
- .../dlt-daemon/dlt-daemon_2.18.10.bb          |  1 +
- 2 files changed, 37 insertions(+)
- create mode 100644 meta-oe/recipes-extended/dlt-daemon/dlt-daemon/567.patch
+ Dropped md5sum, no need anymore.
 
-diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/567.patch b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/567.patch
-new file mode 100644
-index 000000000..fd3648045
---- /dev/null
-+++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/567.patch
-@@ -0,0 +1,36 @@
-+Upstream-Status: Submitted [https://github.com/COVESA/dlt-daemon/pull/567]
-+
-+From c84e48f6986054cf8b9459e608235b7bd1635746 Mon Sep 17 00:00:00 2001
-+From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-+Date: Mon, 13 Nov 2023 12:37:23 +0100
-+Subject: [PATCH] dlt_cdh:
-+
-+Make sure on 64 bit we read an ELF64 structure.
-+Otherwise we get a read error, and the context file is missing some good
-+to know information
-+---
-+ src/core_dump_handler/dlt_cdh.h | 7 +++++++
-+ 1 file changed, 7 insertions(+)
-+
-+diff --git a/src/core_dump_handler/dlt_cdh.h b/src/core_dump_handler/dlt_cdh.h
-+index 8608c6c4..3dac480a 100644
-+--- a/src/core_dump_handler/dlt_cdh.h
-++++ b/src/core_dump_handler/dlt_cdh.h
-+@@ -45,10 +45,17 @@
-+ #define CORE_FILE_PATTERN           "%s/core.%d.%s.%d.gz"
-+ #define CONTEXT_FILE_PATTERN        "%s/context.%d.%s.%d.txt"
-+ 
-++#if ((__SIZEOF_POINTER) == 4)
-+ #define ELF_Ehdr    Elf32_Ehdr
-+ #define ELF_Phdr    Elf32_Phdr
-+ #define ELF_Shdr    Elf32_Shdr
-+ #define ELF_Nhdr    Elf32_Nhdr
-++#else
-++#define ELF_Ehdr    Elf64_Ehdr
-++#define ELF_Phdr    Elf64_Phdr
-++#define ELF_Shdr    Elf64_Shdr
-++#define ELF_Nhdr    Elf64_Nhdr
-++#endif
-+ 
-+ typedef struct
-+ {
-diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.10.bb b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.10.bb
-index 410fffa24..3d2e4a73f 100644
---- a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.10.bb
-+++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.10.bb
-@@ -18,6 +18,7 @@ SRC_URI = "git://github.com/COVESA/${BPN}.git;protocol=https;branch=master \
-            file://0002-Don-t-execute-processes-as-a-specific-user.patch \
-            file://0004-Modify-systemd-config-directory.patch \
-            file://544.patch \
-+           file://567.patch \
-            "
- SRCREV = "0f2d4cfffada6f8448a2cb27995b38eb4271044f"
+ .../fuse-exfat/{fuse-exfat_1.3.0.bb => fuse-exfat_1.4.0.bb}    | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+ rename meta-filesystems/recipes-filesystems/fuse-exfat/{fuse-exfat_1.3.0.bb => fuse-exfat_1.4.0.bb} (83%)
+
+diff --git a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.3.0.bb b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.4.0.bb
+similarity index 83%
+rename from meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.3.0.bb
+rename to meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.4.0.bb
+index ac18fe90f..48e3d7af5 100644
+--- a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.3.0.bb
++++ b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.4.0.bb
+@@ -16,7 +16,6 @@ RRECOMMENDS:${PN} = "util-linux-mount"
  
+ inherit autotools pkgconfig
+ 
+-SRC_URI[md5sum] = "846b8c36bfa4684719f9e08e9d3a6bff"
+-SRC_URI[sha256sum] = "07652136064da5e4d32df5555f88c138ffa4835a23b88a5bae2015f21006e0d3"
++SRC_URI[sha256sum] = "a1cfedc55e0e7a12c184605aa0f0bf44b24a3fb272449b20b2c8bbe6edb3001e"
+ 
+ EXTRA_OECONF += "sbindir=${base_sbindir}"
 -- 
-2.34.1
+2.25.1
 
 
