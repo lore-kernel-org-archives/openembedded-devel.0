@@ -1,82 +1,91 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 20DDCC4167B
-	for <webhook@archiver.kernel.org>; Tue, 14 Nov 2023 09:24:10 +0000 (UTC)
-Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
- by mx.groups.io with SMTP id smtpd.web10.9142.1699953841591655004
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4E6CFC4332F
+	for <webhook@archiver.kernel.org>; Tue, 14 Nov 2023 10:07:20 +0000 (UTC)
+Received: from mail-lj1-f178.google.com (mail-lj1-f178.google.com [209.85.208.178])
+ by mx.groups.io with SMTP id smtpd.web11.9659.1699956438370385557
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Nov 2023 01:24:01 -0800
+ Tue, 14 Nov 2023 02:07:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
-Received: from fwd78.aul.t-online.de (fwd78.aul.t-online.de [10.223.144.104])
-	by mailout03.t-online.de (Postfix) with SMTP id DEA98B8D1
-	for <openembedded-devel@lists.openembedded.org>; Tue, 14 Nov 2023 10:23:57 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.154.170.36]) by fwd78.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1r2peH-1HVKiH0; Tue, 14 Nov 2023 10:23:57 +0100
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=bFZUNAel;
+ spf=pass (domain: smile.fr, ip: 209.85.208.178, mailfrom: yoann.congal@smile.fr)
+Received: by mail-lj1-f178.google.com with SMTP id 38308e7fff4ca-2c504a5e1deso73915421fa.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Nov 2023 02:07:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1699956435; x=1700561235; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=9vL58IEFBGIamS6mZtDM4vNTufljQtPTlnJsapDEGtw=;
+        b=bFZUNAelaPjLdrxYmx/t8W7bvRmOAPD4EvsXQPiCR2y1SF+NBiOlmNYFw1srDX0OEX
+         7HPhrFVIdLqIGJINrlzvu+YtqxzDkfrQX1vz9vj9vY7iknrPH0/24UL1c/QGQiOq0Gg+
+         SdsWtFN8G9sWe14AGZwORQ4q39gTu3iRP94ABgBiyM+a2qx42xzP1KIh4dPIYrSJ2Jv1
+         e2Hz6GYFZgtSCHoQcFJliF+dcs00k/nLPb9m0DIWrMkrYRqbld8EATgdJOCSXAth74OQ
+         Ncd/sjjxF7Bjeee4PBJXvCvv7Mw30vCEimoGAgniT/LQhEhOnhHa7hHCbJeVmKLHz9+O
+         pwSw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1699956435; x=1700561235;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=9vL58IEFBGIamS6mZtDM4vNTufljQtPTlnJsapDEGtw=;
+        b=Vqi76stI8WnqQKg5rk3or8cWOyV4WruistI7xQwW8yolGjAIGjR9YM9Lw2UXXnTeMH
+         lX5oxxmXJ6Nwd55NemWqfMmm2IxE42sxVnagm9e40tJJ/sfL4RhxKa81rxbpFLzE1DoW
+         qf+CW0zEv+rgk13048fkHTWWUCzNKlZ2opYVyiPqrgXKTWMBXutrHuLLuDk/cJMjkFdr
+         tn8I4m5btDewfIIZxmevufl1fw/uzAKlkqcRUaySeYBDDX+Mgb1ranhnqGPHdeMExMHf
+         5PWFrqUSFkX6utJsAcbx1muIIvuqx8xliRD5A98z0+jkN8/GvqImnMSA4hwlMFemPtJa
+         G+tA==
+X-Gm-Message-State: AOJu0YxzPRc5WdGfRexrWMicdB3noVjmEAJhsOZ3Jsq458J6aCEqtlqv
+	2Y368hdblyQkQvhN3J+OxpYqgAL1Kck1vDfiGVE=
+X-Google-Smtp-Source: AGHT+IFXBdYwD3Y5hVotOPo/nBu/HLrkVq+zhmi/5k/8j0IOYRT54XyCiR7BEDnwZyClrqfpgIVc/A==
+X-Received: by 2002:a2e:9b17:0:b0:2c5:582:fd8d with SMTP id u23-20020a2e9b17000000b002c50582fd8dmr1377930lji.30.1699956435587;
+        Tue, 14 Nov 2023 02:07:15 -0800 (PST)
+Received: from P-ASN-ECS-830T8C3.numericable.fr ([89.159.1.53])
+        by smtp.gmail.com with ESMTPSA id m15-20020a05600c4f4f00b004083bc9ac90sm10862562wmq.24.2023.11.14.02.07.15
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 14 Nov 2023 02:07:15 -0800 (PST)
+From: Yoann Congal <yoann.congal@smile.fr>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH] gtksourceview4: Upgrade 4.8.2 -> 4.8.4
-Date: Tue, 14 Nov 2023 10:24:16 +0100
-Message-ID: <20231114092417.1842461-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.42.0
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Yoann Congal <yoann.congal@smile.fr>
+Subject: [meta-oe][kirkstone][PATCH 1/2] emlog: Add PV
+Date: Tue, 14 Nov 2023 11:06:59 +0100
+Message-Id: <20231114100700.3273936-1-yoann.congal@smile.fr>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1699953837-44FF6979-D00FAB16/0/0 CLEAN NORMAL
-X-TOI-MSGID: 91249977-ded7-4b6a-8537-14a6789f2b30
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 14 Nov 2023 09:24:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106702
+ <openembedded-devel@lists.openembedded.org>; Tue, 14 Nov 2023 10:07:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106703
 
-News in 4.8.4, 2022-11-03
--------------------------
-* Style updates to kate, classic, tango
-* Language updates to vala, python3, c, cuda, latex
-* Add unit tests for language specs
-* Translation updates
+From: Khem Raj <raj.khem@gmail.com>
 
-News in 4.8.3, 2022-03-18
--------------------------
+This is 0.70 release with few more commits on top.
 
-* Adds support for more Pango font-variants
-* Style updates to solarized-dark, solarized-light
-* Language updates to lean, rst, c, gtk-doc, javascript, and json
-* Translation updates
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit 08edc0b6ace0d04688a5617cf05546a7b8ba6cca)
+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
 ---
- .../{gtksourceview4_4.8.2.bb =3D> gtksourceview4_4.8.4.bb}        | 2 +-
+ meta-oe/recipes-core/emlog/emlog.inc | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/gtksourceview/{gtksourceview4_4.8.2.bb =3D=
-> gtksourceview4_4.8.4.bb} (93%)
 
-diff --git a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.8.2.=
-bb b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.8.4.bb
-similarity index 93%
-rename from meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.8.2.b=
-b
-rename to meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.8.4.bb
-index b10a317fa..6acd00324 100644
---- a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.8.2.bb
-+++ b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview4_4.8.4.bb
-@@ -16,7 +16,7 @@ inherit gnomebase lib_package gettext features_check gt=
-k-doc gobject-introspecti
- ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"
-=20
- SRC_URI =3D "https://download.gnome.org/sources/gtksourceview/4.8/${PNAM=
-E}-${PV}.tar.xz"
--SRC_URI[sha256sum] =3D "842de7e5cb52000fd810e4be39cd9fe29ffa87477f15da85=
-c18f7b82d45637cc"
-+SRC_URI[sha256sum] =3D "7ec9d18fb283d1f84a3a3eff3b7a72b09a10c9c006597b3f=
-babbb5958420a87d"
-=20
- GIR_MESON_OPTION =3D 'gir'
- GTKDOC_MESON_OPTION =3D "gtk_doc"
---=20
-2.42.0
+diff --git a/meta-oe/recipes-core/emlog/emlog.inc b/meta-oe/recipes-core/emlog/emlog.inc
+index 824787083..9d48e9cba 100644
+--- a/meta-oe/recipes-core/emlog/emlog.inc
++++ b/meta-oe/recipes-core/emlog/emlog.inc
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ 
+ SRC_URI = "git://github.com/nicupavel/emlog.git;protocol=http;branch=master;protocol=https"
+ SRCREV = "aee53e8dee862f35291242ba41b0ca88010f6c71"
+-
++PV = "0.70+git${SRCPV}"
+ S = "${WORKDIR}/git"
+ 
+ EXTRA_OEMAKE += " \
+-- 
+2.30.2
 
 
