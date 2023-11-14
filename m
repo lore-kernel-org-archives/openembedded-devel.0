@@ -1,85 +1,143 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DFA83C4332F
-	for <webhook@archiver.kernel.org>; Tue, 14 Nov 2023 11:16:20 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
- by mx.groups.io with SMTP id smtpd.web11.10454.1699960576865076885
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2366CC4332F
+	for <webhook@archiver.kernel.org>; Tue, 14 Nov 2023 12:09:51 +0000 (UTC)
+Received: from mail-lf1-f46.google.com (mail-lf1-f46.google.com [209.85.167.46])
+ by mx.groups.io with SMTP id smtpd.web10.11094.1699963790281460364
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Nov 2023 03:16:17 -0800
+ Tue, 14 Nov 2023 04:09:50 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=BRB/15YB;
- spf=pass (domain: smile.fr, ip: 209.85.128.45, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-4083f61322fso42811355e9.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Nov 2023 03:16:16 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=VYMKBDiU;
+ spf=pass (domain: konsulko.com, ip: 209.85.167.46, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-lf1-f46.google.com with SMTP id 2adb3069b0e04-5099184f8a3so7532674e87.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Nov 2023 04:09:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1699960575; x=1700565375; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=VWTHmpLbsnclEDoP368aIv4RKPFOTc2iTDaThlARPGo=;
-        b=BRB/15YBddU0M4lloLXArpsrpZRLS8NkCnorKWSuKPhSjNMWFZB7J6DwTqIU34XXB+
-         jSzVkt3L7dCLJthL+9OtfIWk5EJvRPzIg0rhgiD0IF11fL99qG5YVpfk/tPKo6uklNIu
-         HbxDn/HlzFAOhQ9aN1ZlIg3tdhblwUvBLmeJVbnWUnZkGqLZ6+XWi6rkNCD4Bal3wn65
-         h5MfEWXLRY4F/coo0ZckDn4rbQEIXUJ+n/GCL0sTP1qBdo+3J8T2SscgRdVDopEjl4gO
-         mqZSi32ZJl9kjucqH0Z8c6wFhTOLQOI0BQ53Pr1ZruQ4rFFGBtI3k97YUWusDVSAVRn6
-         fI6A==
+        d=konsulko.com; s=google; t=1699963788; x=1700568588; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=oHcQHtnsfQ7mWf8lTBOSd3VxRlNQptKmhUT2A3ESjiE=;
+        b=VYMKBDiUIXJ7nq7TUwe2kYhKCHX/lgT6q6vZicsPDPt6ww2QsYvYW43LX2GmoQw5aV
+         zUVOP36E6dhJ+EQVPcaJvDNLxAmAPO5hdga1+BYtMcJNl6gd+iLGZ+1IDf+2Ai0acX9J
+         BQ5K9pPSPPEvEtImCoAtev0W/P7HMtLiBtW5c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699960575; x=1700565375;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=VWTHmpLbsnclEDoP368aIv4RKPFOTc2iTDaThlARPGo=;
-        b=Q9jxT7xGyFjWTSo6EkoTs57W5GOsxWJn16+iWOu9GP7lMa7alK+g2IEnnaBYohnYAq
-         R1idrvrkLC1TdRMFCujK8M9LH/c1ETJfpqu+R9WrCLAsm66iSv5Q1Gcdv6ldbtAgnULm
-         Q5k3aBVO65i64/yHVaFV80ju2E3sfRQGcKzyp2LKBtn8zCDXIX8AEtoHz8/UDgXKrJfq
-         MXmSd1rOZ4R/o8Quq+6FQCbe9qtRHWQ2txgIf/dmiRvejfR4waQO8o+LD2lRSzvNDnS4
-         VSt8PH57MiYdNzUn+PV0H4cI0kA75s7DEM6QyuWZe8zUUOdmkzJICkmYW+wzwJUJ+ZYB
-         6GvQ==
-X-Gm-Message-State: AOJu0Yy8mMErgqFHe1NwhuR82Dz3/C6dIxf94eGLp5UE8gCZOdrrpaKt
-	FFroQ8zg3hfaOneOqllozBpjAYQ+cCVPVgxF1pQ=
-X-Google-Smtp-Source: AGHT+IGYBkrFF8SvW14uF++gesTxUFWtypq5leaYTNFZ1FbTvT0r026F8H/Bn1XkzQz7LaOQjtvn0g==
-X-Received: by 2002:adf:e78d:0:b0:32f:b1ea:db78 with SMTP id n13-20020adfe78d000000b0032fb1eadb78mr7076579wrm.59.1699960574957;
-        Tue, 14 Nov 2023 03:16:14 -0800 (PST)
-Received: from P-ASN-ECS-830T8C3.numericable.fr ([89.159.1.53])
-        by smtp.gmail.com with ESMTPSA id w10-20020a5d4b4a000000b003313426f136sm7474714wrs.39.2023.11.14.03.16.14
+        d=1e100.net; s=20230601; t=1699963788; x=1700568588;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=oHcQHtnsfQ7mWf8lTBOSd3VxRlNQptKmhUT2A3ESjiE=;
+        b=CIz3eM3CvXOYAk4p09Hxbrvt19Jv36C8D+dCPjGumrFkkC9n8WKIOpNsfSBfB+HoM/
+         zD5brhVsUyfhzyPAaWIWXAE2wZ9p99YGGDYQ/+Nx2UMG/rQpY3xg0712uHV6d/kCEa0V
+         WXs+ZiLZqbk3gHbKQ+zSpNgmoP4caZBpChCIuDuKEbRyMAuY9RDotpntPVPQikrRXWLJ
+         rPt0By6H6Y35qpEG8cenqld3IRFU0dakbi5IjqroX5p19yvQ8dA4SLVkKTpBjLhM1oGE
+         3datet7OhwoL0ngi810uMcvNj96hHUwvNf382ogoF/6UXhEOtuMvNVecaRaONmaZKFcg
+         6iig==
+X-Gm-Message-State: AOJu0Yzl8R6RAZYVf4orwPKzli4EIWjs7kNzggqlHD5wij22tLyx02T7
+	SOKzc9lb2a5rXm5MCPVv7MI8V1ZbOXwEgtMiBXk=
+X-Google-Smtp-Source: AGHT+IFIPDT86lLeU8EFquSYr4dFvO3YX8cGnDr04XAPBF7NBLhY3w1M77z4OSuWXI03L58N5znhaQ==
+X-Received: by 2002:a05:6512:468:b0:507:976d:89aa with SMTP id x8-20020a056512046800b00507976d89aamr5796947lfd.67.1699963787933;
+        Tue, 14 Nov 2023 04:09:47 -0800 (PST)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id o5-20020aa7c505000000b00532eba07773sm4946958edq.25.2023.11.14.04.09.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Nov 2023 03:16:14 -0800 (PST)
-From: Yoann Congal <yoann.congal@smile.fr>
+        Tue, 14 Nov 2023 04:09:47 -0800 (PST)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Yoann Congal <yoann.congal@smile.fr>
-Subject: [meta-oe][dunfell][PATCH] libusbmuxd: Add PV
-Date: Tue, 14 Nov 2023 12:16:05 +0100
-Message-Id: <20231114111605.3284710-1-yoann.congal@smile.fr>
-X-Mailer: git-send-email 2.30.2
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 2/5] python3-polyline: upgrade 1.4.0 -> 2.0.1
+Date: Tue, 14 Nov 2023 14:09:41 +0200
+Message-Id: <20231114120944.3741068-2-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20231114120944.3741068-1-leon.anavi@konsulko.com>
+References: <20231114120944.3741068-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 14 Nov 2023 11:16:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106708
+ <openembedded-devel@lists.openembedded.org>; Tue, 14 Nov 2023 12:09:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106710
 
-This is 1.0.10 release with few more commits on top.
+Upgrade to version 2.0.1:
 
-Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+- Relax setuptools version number
+
+License-Update: Copyright years changed
+
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-oe/recipes-extended/libimobiledevice/libusbmuxd_git.bb | 1 +
- 1 file changed, 1 insertion(+)
+ .../python/python3-polyline_1.4.0.bb          | 26 -------------------
+ .../python/python3-polyline_2.0.1.bb          | 25 ++++++++++++++++++
+ 2 files changed, 25 insertions(+), 26 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-polyline_1.4.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-polyline_2.0.1.bb
 
-diff --git a/meta-oe/recipes-extended/libimobiledevice/libusbmuxd_git.bb b/meta-oe/recipes-extended/libimobiledevice/libusbmuxd_git.bb
-index e9c58bf58..590105784 100644
---- a/meta-oe/recipes-extended/libimobiledevice/libusbmuxd_git.bb
-+++ b/meta-oe/recipes-extended/libimobiledevice/libusbmuxd_git.bb
-@@ -7,6 +7,7 @@ DEPENDS = "udev libusb1 libplist"
- inherit autotools pkgconfig gitpkgv
- 
- PKGV = "${GITPKGVTAG}"
-+PV = "1.0.10+git${SRCPV}"
- 
- SRCREV = "78df9be5fc8222ed53846cb553de9b5d24c85c6c"
- SRC_URI = "git://github.com/libimobiledevice/libusbmuxd;protocol=https;branch=master"
+diff --git a/meta-python/recipes-devtools/python/python3-polyline_1.4.0.bb b/meta-python/recipes-devtools/python/python3-polyline_1.4.0.bb
+deleted file mode 100644
+index 486e70c8f..000000000
+--- a/meta-python/recipes-devtools/python/python3-polyline_1.4.0.bb
++++ /dev/null
+@@ -1,26 +0,0 @@
+-SUMMARY = "A Python implementation of Google's Encoded Polyline Algorithm Format"
+-HOMEPAGE = "https://pypi.org/project/polyline/"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=0fbd13500cabd06dd751ba6b2be304c6"
+-
+-SRC_URI[md5sum] = "b97c57378605c4a856c437569f95a0cb"
+-SRC_URI[sha256sum] = "7c7f89d09a09c7b6161bdbfb4fd304b186fc7a2060fa4f31cb3f61c646a5c074"
+-
+-inherit pypi setuptools3 ptest
+-
+-RDEPENDS:${PN} += "python3-six"
+-
+-BBCLASSEXTEND = "native nativesdk"
+-
+-SRC_URI += " \
+-	file://run-ptest \
+-"
+-
+-RDEPENDS:${PN}-ptest += " \
+-	${PYTHON_PN}-pytest \
+-"
+-
+-do_install_ptest() {
+-	install -d ${D}${PTEST_PATH}/test
+-	cp -rf ${S}/test/* ${D}${PTEST_PATH}/test/
+-}
+diff --git a/meta-python/recipes-devtools/python/python3-polyline_2.0.1.bb b/meta-python/recipes-devtools/python/python3-polyline_2.0.1.bb
+new file mode 100644
+index 000000000..2eae0caf9
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-polyline_2.0.1.bb
+@@ -0,0 +1,25 @@
++SUMMARY = "A Python implementation of Google's Encoded Polyline Algorithm Format"
++HOMEPAGE = "https://github.com/frederickjansen/polyline"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=1fb8d1dc685695195bb3c1e48adfef48"
++
++SRC_URI[sha256sum] = "74cb5cea098dddf09d1a5a1f17af9184d371cbf3e9723de0194e530ec39ca1f6"
++
++inherit pypi python_setuptools_build_meta ptest
++
++RDEPENDS:${PN} += "python3-six"
++
++BBCLASSEXTEND = "native nativesdk"
++
++SRC_URI += " \
++	file://run-ptest \
++"
++
++RDEPENDS:${PN}-ptest += " \
++	${PYTHON_PN}-pytest \
++"
++
++do_install_ptest() {
++	install -d ${D}${PTEST_PATH}/test
++	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/test/
++}
 -- 
-2.30.2
+2.39.2
 
 
