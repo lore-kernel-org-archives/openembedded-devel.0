@@ -1,93 +1,149 @@
-Return-Path: <joe.slater@windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 05328C4332F
-	for <webhook@archiver.kernel.org>; Mon, 13 Nov 2023 22:09:35 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.4675.1699913365823339589
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EDF9AC4332F
+	for <webhook@archiver.kernel.org>; Tue, 14 Nov 2023 03:08:17 +0000 (UTC)
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com [209.85.214.177])
+ by mx.groups.io with SMTP id smtpd.web11.5390.1699931297540152946
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Nov 2023 14:09:25 -0800
+ Mon, 13 Nov 2023 19:08:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=gRh4IkXr;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=9681bd899c=joe.slater@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 3ADKf4ou026674
-	for <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 14:09:25 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=jO0pA
-	oyXr7kr5hqloF/aVddzbZtddzYNTeHrjxETzCo=; b=gRh4IkXrChE7bwXohz+5V
-	uHZaT0EfztJtkQ4DvAwKNmh0r8RT97q9nPljbRR9VqCcJBcrDNxz/RmRYgnf6Q8B
-	Ufb7UtB/YfTmjvzDQ8glwlDi40/+rityMqTz22FOmmj0GG7kwAoT4rOm2P1GiKT4
-	YgKW5v+kWsBugPDwUQFymjQS3qiqBuqpbPwDo2wj5GUE+WvPowP9DX5/a181JwKP
-	3GTfjNcU/LLY9QwwL/bhzBLk0QBrOhVGuF9KgdZaM7gg1fzlqr3EZz2TElqbsXDI
-	LA9GRnktEkk2zcVtfQ9OI1kaMq9IWJHt7TPd4hPxAKZ9Gqh6ItmDX/R3ZBmRu5W+
-	Q==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3uaa0khr18-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 14:09:25 -0800 (PST)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.34; Mon, 13 Nov 2023 14:09:29 -0800
-Received: from ala-jslater-lx2.corp.ad.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.34 via Frontend Transport; Mon, 13 Nov 2023 14:09:29 -0800
-From: <joe.slater@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <joe.slater@windriver.com>, <randy.macleod@windriver.com>
-Subject: [mickledore][meta-python][PATCH 1/1] python3-pynacl: add RCONFLICTS with python3-nacl
-Date: Mon, 13 Nov 2023 14:09:24 -0800
-Message-ID: <20231113220924.2770520-1-joe.slater@windriver.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=m59rAfRx;
+ spf=pass (domain: gmail.com, ip: 209.85.214.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f177.google.com with SMTP id d9443c01a7336-1cc9b626a96so37831485ad.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 19:08:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1699931297; x=1700536097; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=8Lmnyh/uCu85UefCKk5WfJ+0djZrltMqO856a0CL4Jg=;
+        b=m59rAfRxDC1zoQr+Pif0plmduDw+GRL6TDM9xVq+ecbub9cX/lDznrVoGzIdRy9CLS
+         JqqkT9Ojut1WEJwoJ1SWDZs+JNYe8Qu5gXGC4wTb56lhfidjWO9sfOr55+E7Bchz98QP
+         UGCcmBFbYQF3xwpFGx3jfNYmliI3jAf71Ssi6ZmYnLDAPlbYs8bPPeXG4rEBM4D/4BXc
+         1vsZBPSpK3qG+XUeRzVpi6/wOLT6nt01t2kOFvOIJv0n887zWrGXQjoKMd/JZ4danSHw
+         MyN1tpm6kkpjiq6QgL0VQdryOakBotDPxwcBHeMWGyaOE9PByH5Cxh3BcOkYQciDwJnP
+         p3Aw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1699931297; x=1700536097;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=8Lmnyh/uCu85UefCKk5WfJ+0djZrltMqO856a0CL4Jg=;
+        b=TQgU2EhJ/6tYn6+u3MGUmlLmvM7gmnkGos/QQzyTN3AXM9amcRLEDa9VJqDbr/hR1Y
+         ntGzZQ05b3htx2zBDvRLaI4XfRj+XWOCP9MjqH+ekZMG00TgxGCI2cb9vuXZ9DRruAka
+         cMQBkni1GuDbhSxwoR31UurgJZ8hdOnLwF/G3lq3Mn85rKWX6GH4GatntwOsBvGnTk+M
+         hKX+E9SDsBNy3gkCMWcLMzdmNL/8F7adsb7wbeexwti+0BUQt60dGEj05QHt3O5c8kvM
+         ks+GAM+x0f8WRn0QVlpH4oKoKbsc1B6RQNrBxwh6tV2xelor0KghTGIdAmGoWlG9Va41
+         R3wg==
+X-Gm-Message-State: AOJu0Ywyjv8myasdGUwbjzrRMjtjRo71yZT52748dofi299RpgZDYNeX
+	zZkYXg3HpcUh+gYLOy4cqc59+vO5YqsN5g==
+X-Google-Smtp-Source: AGHT+IGPdcu11g66Y1YuycQf8+hpUZ1cBJ9F5a8D9KUlc4Q+PCIu4uap8LF4Iwt3pWtSdfTVXvP0Ag==
+X-Received: by 2002:a17:903:244d:b0:1cc:4625:74ed with SMTP id l13-20020a170903244d00b001cc462574edmr1273966pls.53.1699931294358;
+        Mon, 13 Nov 2023 19:08:14 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9100:2cb0::62f8])
+        by smtp.gmail.com with ESMTPSA id n2-20020a1709026a8200b001c44dbc92a2sm4687978plk.184.2023.11.13.19.08.13
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 13 Nov 2023 19:08:14 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 01/10] cannelloni: Fix build with clang and libc++ runtime
+Date: Mon, 13 Nov 2023 19:08:02 -0800
+Message-ID: <20231113-gnomebaseclass-switch-to-meson-v1-1-111dd5d0fe68@gmail.com>
+X-Mailer: git-send-email 2.42.1
+In-Reply-To: <20231113-gnomebaseclass-switch-to-meson-v1-0-111dd5d0fe68@gmail.com>
+References: <20231113-gnomebaseclass-switch-to-meson-v1-0-111dd5d0fe68@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: UOT13zgjO3ZYu5ALsYy2Bb2lkv52J21E
-X-Proofpoint-GUID: UOT13zgjO3ZYu5ALsYy2Bb2lkv52J21E
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-11-13_12,2023-11-09_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- phishscore=0 mlxlogscore=647 lowpriorityscore=0 adultscore=0 mlxscore=0
- impostorscore=0 spamscore=0 suspectscore=0 malwarescore=0 bulkscore=0
- clxscore=1011 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2311060001 definitions=main-2311130171
+Content-Type: text/plain; charset="utf-8"
+X-Mailer: b4 0.12.4
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 22:09:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106686
+ <openembedded-devel@lists.openembedded.org>; Tue, 14 Nov 2023 03:08:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106688
 
-From: Joe Slater <joe.slater@windriver.com>
-
-python3-nacl is in the meta-virtualization layer.
-
-Signed-off-by: Joe Slater <joe.slater@windriver.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 74e31e51ffbd52b8864fed4debe7711e3ef4d739)
----
- meta-python/recipes-devtools/python/python3-pynacl_1.5.0.bb | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/meta-python/recipes-devtools/python/python3-pynacl_1.5.0.bb b/meta-python/recipes-devtools/python/python3-pynacl_1.5.0.bb
-index 6e53461979..5a8ed131af 100644
---- a/meta-python/recipes-devtools/python/python3-pynacl_1.5.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pynacl_1.5.0.bb
-@@ -10,6 +10,10 @@ PYPI_PACKAGE = "PyNaCl"
- 
- inherit pypi python_setuptools_build_meta
- 
-+# in meta-virtualization layer
-+#
-+RCONFLICTS:${PN} = "python3-nacl"
-+
- DEPENDS += "\
-     ${PYTHON_PN}-cffi-native \
-     libsodium \
--- 
-2.25.1
-
+Signed-off-by: Khem Raj <raj.khem@gmail.com>=0D
+---=0D
+ ...lude-bits-stdc-.h-only-when-using-libstdc.patch | 37 ++++++++++++++++++=
+++++=0D
+ .../cannelloni/cannelloni_1.1.0.bb                 |  4 ++-=0D
+ 2 files changed, 40 insertions(+), 1 deletion(-)=0D
+=0D
+diff --git a/meta-networking/recipes-connectivity/cannelloni/cannelloni/000=
+1-include-bits-stdc-.h-only-when-using-libstdc.patch b/meta-networking/reci=
+pes-connectivity/cannelloni/cannelloni/0001-include-bits-stdc-.h-only-when-=
+using-libstdc.patch=0D
+new file mode 100644=0D
+index 0000000000..71f447c94b=0D
+--- /dev/null=0D
++++ b/meta-networking/recipes-connectivity/cannelloni/cannelloni/0001-inclu=
+de-bits-stdc-.h-only-when-using-libstdc.patch=0D
+@@ -0,0 +1,37 @@=0D
++From 7aed36765ae44b41ede7e139da0a11b3696f2e06 Mon Sep 17 00:00:00 2001=0D
++From: Khem Raj <raj.khem@gmail.com>=0D
++Date: Mon, 13 Nov 2023 00:07:23 -0800=0D
++Subject: [PATCH] include bits/stdc++.h only when using libstdc++=0D
++=0D
++We have other c++ runtime implementations e.g. llvm's libc++ which does=0D
++not provide this header bits/stdc++.h, therefore make sure that this=0D
++header is only included when using libstdc++=0D
++=0D
++Fixes=0D
++| /mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux/cannelloni/1.1.0/git=
+/tcpthread.cpp:27:10: fatal error: 'bits/stdc++.h' file not found=0D
++|    27 | #include <bits/stdc++.h>=0D
++|       |          ^~~~~~~~~~~~~~~=0D
++=0D
++Upstream-Status: Submitted [https://github.com/mguentner/cannelloni/pull/5=
+6]=0D
++Signed-off-by: Khem Raj <raj.khem@gmail.com>=0D
++---=0D
++ tcpthread.cpp | 2 ++=0D
++ 1 file changed, 2 insertions(+)=0D
++=0D
++diff --git a/tcpthread.cpp b/tcpthread.cpp=0D
++index a1b3047..bb5a7b2 100644=0D
++--- a/tcpthread.cpp=0D
+++++ b/tcpthread.cpp=0D
++@@ -24,7 +24,9 @@=0D
++ #include <cstdint>=0D
++ #include <cstdio>=0D
++ =0D
+++#ifdef __GLIBCXX__=0D
++ #include <bits/stdc++.h>=0D
+++#endif=0D
++ =0D
++ #include <linux/can.h>=0D
++ #include <string.h>=0D
++-- =0D
++2.42.1=0D
++=0D
+diff --git a/meta-networking/recipes-connectivity/cannelloni/cannelloni_1.1=
+.0.bb b/meta-networking/recipes-connectivity/cannelloni/cannelloni_1.1.0.bb=
+=0D
+index fb457dc03b..dfa7437ba8 100644=0D
+--- a/meta-networking/recipes-connectivity/cannelloni/cannelloni_1.1.0.bb=0D
++++ b/meta-networking/recipes-connectivity/cannelloni/cannelloni_1.1.0.bb=0D
+@@ -2,7 +2,9 @@ SUMMARY =3D "a SocketCAN over Ethernet tunnel"=0D
+ HOMEPAGE =3D "https://github.com/mguentner/cannelloni"=0D
+ LICENSE =3D "GPL-2.0-only"=0D
+ =0D
+-SRC_URI =3D "git://github.com/mguentner/cannelloni.git;protocol=3Dhttps;br=
+anch=3Dmaster"=0D
++SRC_URI =3D "git://github.com/mguentner/cannelloni.git;protocol=3Dhttps;br=
+anch=3Dmaster \=0D
++           file://0001-include-bits-stdc-.h-only-when-using-libstdc.patch =
+\=0D
++          "=0D
+ SRCREV =3D "3d4fb8c8b07f6d7c62b2bdad7e5a94de61c9a29b"=0D
+ =0D
+ LIC_FILES_CHKSUM =3D "file://gpl-2.0.txt;md5=3Db234ee4d69f5fce4486a80fdaf4=
+a4263"=0D
+=0D
+-- =0D
+2.42.1=0D
+=0D
 
