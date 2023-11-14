@@ -2,53 +2,53 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0AA5DC4167B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0AA1FC4332F
 	for <webhook@archiver.kernel.org>; Tue, 14 Nov 2023 12:10:01 +0000 (UTC)
-Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com [209.85.167.45])
- by mx.groups.io with SMTP id smtpd.web11.11211.1699963792173561066
+Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com [209.85.208.43])
+ by mx.groups.io with SMTP id smtpd.web11.11210.1699963790968274927
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Nov 2023 04:09:52 -0800
+ Tue, 14 Nov 2023 04:09:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=ZFi0fywn;
- spf=pass (domain: konsulko.com, ip: 209.85.167.45, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-lf1-f45.google.com with SMTP id 2adb3069b0e04-50797cf5b69so7563097e87.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Nov 2023 04:09:51 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=qhC9lqLY;
+ spf=pass (domain: konsulko.com, ip: 209.85.208.43, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ed1-f43.google.com with SMTP id 4fb4d7f45d1cf-543923af573so8519858a12.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Nov 2023 04:09:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1699963790; x=1700568590; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1699963789; x=1700568589; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=IvEm173SS6BlJnvieVrQoDQLBl5Gz2XPNrKJB1wNHCI=;
-        b=ZFi0fywneBhyhGEoGznOoAZF3rVkDMyaAuJxefFNaseOP899RoLu2G5cWcTs+H07Jc
-         44NKUGQCkBQMzRp09PgqNJlil+gw8JgOkTHfOxcLOU9p3ccHaA7ZpwjrOoCxwODsDDMJ
-         AyoTOzrS6U3sGagb6VsNTsfZH62/DrjeZAhLM=
+        bh=cjv+5LaCEZdrxYQxvRYKXNCnkLqAiDxaIz3zJTqrnW0=;
+        b=qhC9lqLYMwsSZ4Cd0ch5HElz5Be4j1s2UwAp5MlpWx8hJbg8hwdViN3gYGNXqrBYkC
+         yKup2W3IgEhLCJcSm+uHhOuv5ZdGO4OYFiRRgr6Rp7YrYakQpXLY06L1f51hC8Htw5UP
+         qC5km0LNZ+ey0p1EvM8Anjt5jAkwVDNIYUo+w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699963790; x=1700568590;
+        d=1e100.net; s=20230601; t=1699963789; x=1700568589;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=IvEm173SS6BlJnvieVrQoDQLBl5Gz2XPNrKJB1wNHCI=;
-        b=dldQb4ICkeBU7pG/cn35zBX7gUEoh1VVavHVnBx+rlxWcVs0xM3xERaz4dabIsjtPz
-         ZdoDZ0eEJYmxpjkurt77F3gaoEeMiscCLYbiTW7QfPrXxNKcS6/KriHbW5oUqjDc2mhj
-         X8FA5EmZWLFmMsrKz4B8lqIgdQzbZQLPUVwojd4nKfoaAcj6/KoanyylT8waKFCwKwY0
-         sEuI+Mmn8/Nuic6hNLxAJs8oi7HLuBbVNFs6E1mhu0f95MalETk5KOIPvKnBPux9m6CN
-         7J2RBMVnWS/hdtep4QD7Z+FjoFrHXI1QoiUwYTIwdB8ALalz6K9SPVQEf/qMu/htJv+M
-         Zdpw==
-X-Gm-Message-State: AOJu0Yzlj6+Ceh+sEVk7W0v8eJoJ3zrmYE09r2gLnjiHMlKsTy/SlgOq
-	Yn3K6YebJPYvZafuoqZYmfaTivEL84SqdxkIvFE=
-X-Google-Smtp-Source: AGHT+IFuHwgGAgXPHSw56oimMNtWpEbUjeysp44YhSw0u7MEfEv9uoqvlaYOW2wCEHpTfdj6SObgfg==
-X-Received: by 2002:ac2:596d:0:b0:50a:6fbb:6eb3 with SMTP id h13-20020ac2596d000000b0050a6fbb6eb3mr6690847lfp.11.1699963790193;
-        Tue, 14 Nov 2023 04:09:50 -0800 (PST)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id o5-20020aa7c505000000b00532eba07773sm4946958edq.25.2023.11.14.04.09.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        bh=cjv+5LaCEZdrxYQxvRYKXNCnkLqAiDxaIz3zJTqrnW0=;
+        b=ABaSCq3D76u8KCVIoWdA+mdPf9ZRRZRvFan6e3VPlKUfpu2tuUW+3ALbgjpQ1ZUuLV
+         e/moDnxP+1Yl1xsH6ijEa3giGo7ZtS1C0uixLsRdSMzAtRDWKxzbuszvkJrmronH6bEO
+         qSBBE3rn2u6nlXRb/jVGjxOtdnxrDmmUKebjImN7hd2qJKfPn+t8gtsw8wt7fpBgaDsT
+         XA/P90V73O/ilcErxUsyF0/qNv8GXEtNdo6dbcDNMV5RXpEr5ZeaUQ7q0eqrcfJqFU++
+         m+30Bn5817OPFqsIQSPq1SD09TKy+GEuWb1/O98NSt1hCuvhSpBpS1V958l/EqPNONY8
+         li7Q==
+X-Gm-Message-State: AOJu0YxIUvckzIxBpN9IdMrtw+8DHUN2S1x4wATt2RDw/96ySU2kpE1n
+	RBf8GvIxubv11p0GKaIBUszyID5U/9DR5X49R8o=
+X-Google-Smtp-Source: AGHT+IG5ZaT69GyZ+yrL4+rQcUNOOcUNBMiQiFk9ZhhAhTjv87mJrC7PmI8eqTsBs2N9jjvOWdNyGg==
+X-Received: by 2002:a05:6402:34f:b0:540:7a88:ac7c with SMTP id r15-20020a056402034f00b005407a88ac7cmr7032328edw.21.1699963789018;
         Tue, 14 Nov 2023 04:09:49 -0800 (PST)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id o5-20020aa7c505000000b00532eba07773sm4946958edq.25.2023.11.14.04.09.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 14 Nov 2023 04:09:48 -0800 (PST)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/5] python3-zeroconf: upgrade 0.120.0 -> 0.126.0
-Date: Tue, 14 Nov 2023 14:09:43 +0200
-Message-Id: <20231114120944.3741068-4-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 3/5] python3-py7zr: Upgrade 0.20.7 -> 0.20.8
+Date: Tue, 14 Nov 2023 14:09:42 +0200
+Message-Id: <20231114120944.3741068-3-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231114120944.3741068-1-leon.anavi@konsulko.com>
 References: <20231114120944.3741068-1-leon.anavi@konsulko.com>
@@ -58,34 +58,38 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 14 Nov 2023 12:10:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106712
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106711
 
-Upgrade to release 0.126.0:
+Upgrade to release 0.20.8:
 
-- Speed up outgoing packet writer
-- Speed up writing name compression for outgoing packets
+- Detect brotli import error
+- refactor: hardening SevenZipFile constructor
+- refactor: improve type safe functions
+- chore: add git export configuration
+
+This work was sponsored by GOVCERT.LU.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- ...{python3-zeroconf_0.120.0.bb => python3-zeroconf_0.126.0.bb} | 2 +-
+ .../python/{python3-py7zr_0.20.7.bb => python3-py7zr_0.20.8.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-zeroconf_0.120.0.bb => python3-zeroconf_0.126.0.bb} (82%)
+ rename meta-python/recipes-devtools/python/{python3-py7zr_0.20.7.bb => python3-py7zr_0.20.8.bb} (89%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-zeroconf_0.120.0.bb b/meta-python/recipes-devtools/python/python3-zeroconf_0.126.0.bb
-similarity index 82%
-rename from meta-python/recipes-devtools/python/python3-zeroconf_0.120.0.bb
-rename to meta-python/recipes-devtools/python/python3-zeroconf_0.126.0.bb
-index 7d5077e30..91adf43b1 100644
---- a/meta-python/recipes-devtools/python/python3-zeroconf_0.120.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-zeroconf_0.126.0.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/jstasiak/python-zeroconf"
- LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=6;endline=6;md5=6517bdc8f2416f27ab725d4702f7aac3"
+diff --git a/meta-python/recipes-devtools/python/python3-py7zr_0.20.7.bb b/meta-python/recipes-devtools/python/python3-py7zr_0.20.8.bb
+similarity index 89%
+rename from meta-python/recipes-devtools/python/python3-py7zr_0.20.7.bb
+rename to meta-python/recipes-devtools/python/python3-py7zr_0.20.8.bb
+index d919c4a0d..f9e6820ce 100644
+--- a/meta-python/recipes-devtools/python/python3-py7zr_0.20.7.bb
++++ b/meta-python/recipes-devtools/python/python3-py7zr_0.20.8.bb
+@@ -4,7 +4,7 @@ LICENSE = "LGPL-2.1-or-later"
+ SECTION = "devel/python"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=4fbd65380cdd255951079008b364516c"
  
--SRC_URI[sha256sum] = "52b25a4ed92de21d10d768c92ab5a9765a88a2ed43dea1260d67bf22734dc951"
-+SRC_URI[sha256sum] = "875afbebc25bab002610091ecfdccaeebc185ce69f07a3525e4b86680693ea71"
+-SRC_URI[sha256sum] = "55aa587fb4586c920437f5d6e6595f228beddb321bfee3f5146bb15c2e8e74d5"
++SRC_URI[sha256sum] = "2a6b0db0441e63a2dd74cbd18f5d9ae7e08dc0e54685aa486361d0db6a0b4f78"
  
- inherit pypi setuptools3
+ inherit pypi python_setuptools_build_meta
  
 -- 
 2.39.2
