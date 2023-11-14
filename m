@@ -2,141 +2,125 @@ Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2366CC4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 25914C4167B
 	for <webhook@archiver.kernel.org>; Tue, 14 Nov 2023 12:09:51 +0000 (UTC)
-Received: from mail-lf1-f46.google.com (mail-lf1-f46.google.com [209.85.167.46])
- by mx.groups.io with SMTP id smtpd.web10.11094.1699963790281460364
+Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com [209.85.167.45])
+ by mx.groups.io with SMTP id smtpd.web10.11093.1699963789019452556
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Nov 2023 04:09:50 -0800
+ Tue, 14 Nov 2023 04:09:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=VYMKBDiU;
- spf=pass (domain: konsulko.com, ip: 209.85.167.46, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-lf1-f46.google.com with SMTP id 2adb3069b0e04-5099184f8a3so7532674e87.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Nov 2023 04:09:49 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=D+ngx03l;
+ spf=pass (domain: konsulko.com, ip: 209.85.167.45, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-lf1-f45.google.com with SMTP id 2adb3069b0e04-5098e423ba2so7929795e87.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Nov 2023 04:09:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1699963788; x=1700568588; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=oHcQHtnsfQ7mWf8lTBOSd3VxRlNQptKmhUT2A3ESjiE=;
-        b=VYMKBDiUIXJ7nq7TUwe2kYhKCHX/lgT6q6vZicsPDPt6ww2QsYvYW43LX2GmoQw5aV
-         zUVOP36E6dhJ+EQVPcaJvDNLxAmAPO5hdga1+BYtMcJNl6gd+iLGZ+1IDf+2Ai0acX9J
-         BQ5K9pPSPPEvEtImCoAtev0W/P7HMtLiBtW5c=
+        d=konsulko.com; s=google; t=1699963787; x=1700568587; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=6ktc6o8sFyKTum8H6hXTAsW3agISEEZ282rsjoV5bmI=;
+        b=D+ngx03lx80ug4kIQPVPykiIgN9cEvPZRWSez4kUc7PLsKRU4nJiws+MTAoMi6GZdY
+         g1YG20fKaubqr1/kGfaqqzcty0f2ZVDJLQ8pZURiIWMcbJlOJxdweEsoEfP9AuQDfS+N
+         /eWPt3O/XfQwHlU1Pw0ZFj80Cz06hW+Oh0y8M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699963788; x=1700568588;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=oHcQHtnsfQ7mWf8lTBOSd3VxRlNQptKmhUT2A3ESjiE=;
-        b=CIz3eM3CvXOYAk4p09Hxbrvt19Jv36C8D+dCPjGumrFkkC9n8WKIOpNsfSBfB+HoM/
-         zD5brhVsUyfhzyPAaWIWXAE2wZ9p99YGGDYQ/+Nx2UMG/rQpY3xg0712uHV6d/kCEa0V
-         WXs+ZiLZqbk3gHbKQ+zSpNgmoP4caZBpChCIuDuKEbRyMAuY9RDotpntPVPQikrRXWLJ
-         rPt0By6H6Y35qpEG8cenqld3IRFU0dakbi5IjqroX5p19yvQ8dA4SLVkKTpBjLhM1oGE
-         3datet7OhwoL0ngi810uMcvNj96hHUwvNf382ogoF/6UXhEOtuMvNVecaRaONmaZKFcg
-         6iig==
-X-Gm-Message-State: AOJu0Yzl8R6RAZYVf4orwPKzli4EIWjs7kNzggqlHD5wij22tLyx02T7
-	SOKzc9lb2a5rXm5MCPVv7MI8V1ZbOXwEgtMiBXk=
-X-Google-Smtp-Source: AGHT+IFIPDT86lLeU8EFquSYr4dFvO3YX8cGnDr04XAPBF7NBLhY3w1M77z4OSuWXI03L58N5znhaQ==
-X-Received: by 2002:a05:6512:468:b0:507:976d:89aa with SMTP id x8-20020a056512046800b00507976d89aamr5796947lfd.67.1699963787933;
-        Tue, 14 Nov 2023 04:09:47 -0800 (PST)
+        d=1e100.net; s=20230601; t=1699963787; x=1700568587;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=6ktc6o8sFyKTum8H6hXTAsW3agISEEZ282rsjoV5bmI=;
+        b=sJKEkB17xatYY9zTXeH/Mbdus9vgIixV1ERnW4gzFr2tAPWQlz2IKr2HvU2MXxjEbO
+         P7BH2lc8satQJWTwFiuSRZ3XLcYLOFYd5+/6Xc6oPnI+pUxVBZdp1tAgktNRbZNmvVI4
+         T75u1Pe2ac24bul9HYlbRcGdnV/hOrGL7+cDcoLc8Q3oUpqOMj7QSQF2vKO6IUGIHjZK
+         0yUI2WKRwURdDcnF2ndagHLfmfnzsHQJ1KOd+bv8ftbQchq8kqVBYhB+ivUVOpzY+AzU
+         hOR+G0yE1AkOATU38zesSHtv6NP7nN4ogjJrYMlNtLToGf1cMNIMzH+15sddc1zVfmHy
+         Klqg==
+X-Gm-Message-State: AOJu0YwlHeQkbCIidGX19X2zL0u8+jRWAJjj6wF9fq7lXLKuhlbg+b4x
+	AzVzIx0PoLkrpx7897f1cJBhfC/8GXr90MeRsAU=
+X-Google-Smtp-Source: AGHT+IFfv6PicMg5qPnHPO925oCV/pAxqSdo0mpMrA6U36sSCeV1/sg4HwgZcS6zer1o3srGEKFndA==
+X-Received: by 2002:a05:6512:3044:b0:50a:77bf:1efe with SMTP id b4-20020a056512304400b0050a77bf1efemr7190571lfb.27.1699963786811;
+        Tue, 14 Nov 2023 04:09:46 -0800 (PST)
 Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id o5-20020aa7c505000000b00532eba07773sm4946958edq.25.2023.11.14.04.09.46
+        by smtp.gmail.com with ESMTPSA id o5-20020aa7c505000000b00532eba07773sm4946958edq.25.2023.11.14.04.09.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Nov 2023 04:09:47 -0800 (PST)
+        Tue, 14 Nov 2023 04:09:46 -0800 (PST)
 From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 2/5] python3-polyline: upgrade 1.4.0 -> 2.0.1
-Date: Tue, 14 Nov 2023 14:09:41 +0200
-Message-Id: <20231114120944.3741068-2-leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/5] python3-pillow: Upgrade 10.0.1 -> 10.1.0
+Date: Tue, 14 Nov 2023 14:09:40 +0200
+Message-Id: <20231114120944.3741068-1-leon.anavi@konsulko.com>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20231114120944.3741068-1-leon.anavi@konsulko.com>
-References: <20231114120944.3741068-1-leon.anavi@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 14 Nov 2023 12:09:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106710
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106709
 
-Upgrade to version 2.0.1:
+Upgrade to release 10.1.0:
 
-- Relax setuptools version number
+- Added TrueType default font to allow for different sizes
+- Fixed invalid argument warning
+- Added ImageOps cover method
+- Catch struct.error from truncated EXIF when reading JPEG DPI
+- Consider default image when selecting mode for PNG save_all
+- Support BGR;15, BGR;16 and BGR;24 access, unpacking and putdata
+- Added CMYK to RGB unpacker
+- Improved flexibility of XMP parsing
+- Support reading 8-bit YCbCr TIFF images
+- Allow saving I;16B images as PNG
+- Corrected drawing I;16 points and writing I;16 text
+- Set blue channel to 128 for BC5S
+- Increase flexibility when reading IPTC fields
+- Set C palette to be empty by default
+- Added gs_binary to control Ghostscript use on all platforms
+- Read bounding box information from the trailer of EPS files if
+  specified
+- Added reading 8-bit color DDS images
+- Added has_transparency_data
+- Fixed bug when reading BC5S DDS images
+- Prevent TIFF orientation from being applied more than once
+- Use previous pixel alpha for QOI_OP_RGB
+- Added BC5U reading
+- Allow getpixel() to accept a list
+- Allow GaussianBlur and BoxBlur to accept a sequence of x and y
+  radii
+- Expand JPEG buffer size when saving optimized or progressive
+- Added session type check for Linux in ImageGrab.grabclipboard()
+- Allow "loop=None" when saving GIF images
+- Fixed transparency when saving P mode images to PDF
+- Added saving LA images as PDFs
+- Set SMaskInData to 1 for PDFs with alpha
+- Changed Image mode property to be read-only by default
+- Silence exceptions in _repr_jpeg_ and _repr_png_
+- Do not use transparency when saving GIF if it has been removed
+  when normalizing mode
+- Fix missing symbols when libtiff depends on libjpeg
 
-License-Update: Copyright years changed
+This work was sponsored by GOVCERT.LU.
 
 Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/python3-polyline_1.4.0.bb          | 26 -------------------
- .../python/python3-polyline_2.0.1.bb          | 25 ++++++++++++++++++
- 2 files changed, 25 insertions(+), 26 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-polyline_1.4.0.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-polyline_2.0.1.bb
+ .../{python3-pillow_10.0.1.bb => python3-pillow_10.1.0.bb}      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-pillow_10.0.1.bb => python3-pillow_10.1.0.bb} (96%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-polyline_1.4.0.bb b/meta-python/recipes-devtools/python/python3-polyline_1.4.0.bb
-deleted file mode 100644
-index 486e70c8f..000000000
---- a/meta-python/recipes-devtools/python/python3-polyline_1.4.0.bb
-+++ /dev/null
-@@ -1,26 +0,0 @@
--SUMMARY = "A Python implementation of Google's Encoded Polyline Algorithm Format"
--HOMEPAGE = "https://pypi.org/project/polyline/"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=0fbd13500cabd06dd751ba6b2be304c6"
--
--SRC_URI[md5sum] = "b97c57378605c4a856c437569f95a0cb"
--SRC_URI[sha256sum] = "7c7f89d09a09c7b6161bdbfb4fd304b186fc7a2060fa4f31cb3f61c646a5c074"
--
--inherit pypi setuptools3 ptest
--
--RDEPENDS:${PN} += "python3-six"
--
--BBCLASSEXTEND = "native nativesdk"
--
--SRC_URI += " \
--	file://run-ptest \
--"
--
--RDEPENDS:${PN}-ptest += " \
--	${PYTHON_PN}-pytest \
--"
--
--do_install_ptest() {
--	install -d ${D}${PTEST_PATH}/test
--	cp -rf ${S}/test/* ${D}${PTEST_PATH}/test/
--}
-diff --git a/meta-python/recipes-devtools/python/python3-polyline_2.0.1.bb b/meta-python/recipes-devtools/python/python3-polyline_2.0.1.bb
-new file mode 100644
-index 000000000..2eae0caf9
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-polyline_2.0.1.bb
-@@ -0,0 +1,25 @@
-+SUMMARY = "A Python implementation of Google's Encoded Polyline Algorithm Format"
-+HOMEPAGE = "https://github.com/frederickjansen/polyline"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=1fb8d1dc685695195bb3c1e48adfef48"
-+
-+SRC_URI[sha256sum] = "74cb5cea098dddf09d1a5a1f17af9184d371cbf3e9723de0194e530ec39ca1f6"
-+
-+inherit pypi python_setuptools_build_meta ptest
-+
-+RDEPENDS:${PN} += "python3-six"
-+
-+BBCLASSEXTEND = "native nativesdk"
-+
-+SRC_URI += " \
-+	file://run-ptest \
-+"
-+
-+RDEPENDS:${PN}-ptest += " \
-+	${PYTHON_PN}-pytest \
-+"
-+
-+do_install_ptest() {
-+	install -d ${D}${PTEST_PATH}/test
-+	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/test/
-+}
+diff --git a/meta-python/recipes-devtools/python/python3-pillow_10.0.1.bb b/meta-python/recipes-devtools/python/python3-pillow_10.1.0.bb
+similarity index 96%
+rename from meta-python/recipes-devtools/python/python3-pillow_10.0.1.bb
+rename to meta-python/recipes-devtools/python/python3-pillow_10.1.0.bb
+index 055b41bfa..322c90eda 100644
+--- a/meta-python/recipes-devtools/python/python3-pillow_10.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pillow_10.1.0.bb
+@@ -10,7 +10,7 @@ SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=10.0.x;protocol=http
+            file://0001-explicitly-set-compile-options.patch \
+            file://run-ptest \
+            "
+-SRCREV ?= "82541b6dec8452cb612067fcebba1c5a1a2bfdc8"
++SRCREV ?= "da59ad000d1405eaecd557175e29083a87d19f7c"
+ 
+ inherit setuptools3 ptest
+ 
 -- 
 2.39.2
 
