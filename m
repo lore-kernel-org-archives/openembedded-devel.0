@@ -2,41 +2,41 @@ Return-Path: <archana.polampalli@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E7B59C4332F
-	for <webhook@archiver.kernel.org>; Tue, 14 Nov 2023 05:50:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0D5B8C4332F
+	for <webhook@archiver.kernel.org>; Tue, 14 Nov 2023 05:51:39 +0000 (UTC)
 Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.7247.1699941026412610036
+ by mx.groups.io with SMTP id smtpd.web11.7257.1699941091182285215
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Nov 2023 21:50:26 -0800
+ Mon, 13 Nov 2023 21:51:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=l6FbQXNi;
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=djGmZntA;
  spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=96829e2cb8=archana.polampalli@windriver.com)
 Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 3AE5gI7l017484
-	for <openembedded-devel@lists.openembedded.org>; Tue, 14 Nov 2023 05:50:25 GMT
+	by mx0a-0064b401.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id 3AE5gI7n017484
+	for <openembedded-devel@lists.openembedded.org>; Tue, 14 Nov 2023 05:51:30 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
 	 h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=B/5Wy
-	eHOVdayj4+1ut+LwZuhxPG1ezSMX2oV34WXO0c=; b=l6FbQXNiOECbcAxBabFmy
-	TjeyIaVZCdfuXAaSG1o/eIzihesovRZr3XXqhytLo8fMKR14FecUbMxQpMEZDzVX
-	VILV6vYhD+kTx9o/PBht8f7xplH8Frf/C0oRD3gLhSF9qzoZkMCVsL4SSYg25GsQ
-	UVrcL2kcrdrBpQ/v9yitKRyTXW2S2F6lqUPCxsJU4cb1/kc0YbK9pXeazLkaMGDi
-	r5S5OWhrSHdxVZujhgJhLR0J+yXwXnpxN9BX58nZSSiGhLF9ABVL2KrPn4wgjnsB
-	66M4GHjsjqNT8eBoa/LnK/pU6wmtd0r4C4NuKhaKGSg3+ZpTqTHtFhBMhNf8LHMO
-	g==
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=tL4DI
+	QG1FSh2U6SlN7hhyTRoUE3gUDC6fsHII5ByUCo=; b=djGmZntAGHPCe7+dCXkDA
+	SI74PlNUcW2IxBxvff+fHZoaEAsSFLYg8H2KxC/s1ECBfRvVuGwHX54DoSGoOcOA
+	o7ch0xBDLeS2QLBXZ8hl8wlhyxTwKpB5EynyTxXlSblQy1G9Aw2OHUY5RfSLXy4N
+	Wwq/UH/vVfLChpcLmyZI0PCXz8/VnZTt9zz2eT1QIVEcAPQt77MEJRdlYP5EbcZz
+	pUBQXB3JbpxfzEoNvJhRBfQbHc3IGea2iUfXO7gKi4mbCX7oc+Ft6nmn0kimelLh
+	J94/nxOtUU/W6HxD343SSKNAWK9fA7bbzszkp8ZHU9kZncWeY2YAU/n6DmkQfw+c
+	w==
 Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3ua0k6a8g6-1
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3ua0k6a8gu-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 14 Nov 2023 05:50:25 +0000 (GMT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 14 Nov 2023 05:51:30 +0000 (GMT)
 Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.34; Mon, 13 Nov 2023 21:50:27 -0800
+ 15.1.2507.34; Mon, 13 Nov 2023 21:51:32 -0800
 From: <archana.polampalli@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-networking][kirkstone][PATCH 1/1] open-vm-tools: fix CVE-2023-34058
-Date: Tue, 14 Nov 2023 05:50:09 +0000
-Message-ID: <20231114055009.729827-1-archana.polampalli@windriver.com>
+Subject: [oe][meta-oe][dunfell][PATCH 1/1] open-vm-tools: fix CVE-2023-34058
+Date: Tue, 14 Nov 2023 05:50:58 +0000
+Message-ID: <20231114055058.729958-1-archana.polampalli@windriver.com>
 X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -44,8 +44,8 @@ Content-Type: text/plain
 X-Originating-IP: [147.11.136.210]
 X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
  ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-GUID: RTi38-rnoMSXIBjdpu1Z86FgmjoOiMOK
-X-Proofpoint-ORIG-GUID: RTi38-rnoMSXIBjdpu1Z86FgmjoOiMOK
+X-Proofpoint-GUID: RCmcHnGi2ZIKfDq7gDBbksnx0dRBgzGB
+X-Proofpoint-ORIG-GUID: RCmcHnGi2ZIKfDq7gDBbksnx0dRBgzGB
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2023-11-14_04,2023-11-09_01,2023-05-22_02
@@ -57,8 +57,8 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxlogs
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 14 Nov 2023 05:50:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106700
+ <openembedded-devel@lists.openembedded.org>; Tue, 14 Nov 2023 05:51:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106701
 
 From: Archana Polampalli <archana.polampalli@windriver.com>
 
@@ -73,15 +73,15 @@ https://nvd.nist.gov/vuln/detail/CVE-2023-34058
 Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
 ---
  .../open-vm-tools/CVE-2023-34058.patch        | 241 ++++++++++++++++++
- .../open-vm-tools/open-vm-tools_11.3.5.bb     |   1 +
+ .../open-vm-tools/open-vm-tools_11.0.1.bb     |   1 +
  2 files changed, 242 insertions(+)
- create mode 100644 meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2023-34058.patch
+ create mode 100644 meta-oe/recipes-support/open-vm-tools/open-vm-tools/CVE-2023-34058.patch
 
-diff --git a/meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2023-34058.patch b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2023-34058.patch
+diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools/CVE-2023-34058.patch b/meta-oe/recipes-support/open-vm-tools/open-vm-tools/CVE-2023-34058.patch
 new file mode 100644
 index 000000000..d24dd3695
 --- /dev/null
-+++ b/meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2023-34058.patch
++++ b/meta-oe/recipes-support/open-vm-tools/open-vm-tools/CVE-2023-34058.patch
 @@ -0,0 +1,241 @@
 +From 6822b5a84f8cfa60d46479d6b8f1c63eb85eac87 Mon Sep 17 00:00:00 2001
 +From: John Wolfe <jwolfe@vmware.com>
@@ -324,18 +324,18 @@ index 000000000..d24dd3695
 +    subj.name = *subjNameOut;
 +--
 +2.40.0
-diff --git a/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.3.5.bb b/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.3.5.bb
-index c80827a99..eb4fdec49 100644
---- a/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.3.5.bb
-+++ b/meta-networking/recipes-support/open-vm-tools/open-vm-tools_11.3.5.bb
-@@ -46,6 +46,7 @@ SRC_URI = "git://github.com/vmware/open-vm-tools.git;protocol=https;branch=maste
-            file://0001-open-vm-tools-Correct-include-path-for-poll.h.patch;patchdir=.. \
-            file://0001-Properly-check-authorization-on-incoming-guestOps-re.patch;patchdir=.. \
-            file://CVE-2023-20867.patch;patchdir=.. \
-+           file://CVE-2023-34058.patch;patchdir=.. \
-            "
+diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools_11.0.1.bb b/meta-oe/recipes-support/open-vm-tools/open-vm-tools_11.0.1.bb
+index e3b15e35b..a85c728ae 100644
+--- a/meta-oe/recipes-support/open-vm-tools/open-vm-tools_11.0.1.bb
++++ b/meta-oe/recipes-support/open-vm-tools/open-vm-tools_11.0.1.bb
+@@ -45,6 +45,7 @@ SRC_URI = "git://github.com/vmware/open-vm-tools.git;protocol=https;branch=maste
+     file://0001-hgfsmounter-Makefile.am-support-usrmerge.patch;patchdir=.. \
+     file://0001-Properly-check-authorization-on-incoming-guestOps-re.patch;patchdir=.. \
+     file://0001-Allow-only-X509-certs-to-verify-the-SAML-token-signa.patch;patchdir=.. \
++    file://CVE-2023-34058.patch;patchdir=.. \
+ "
  
- UPSTREAM_CHECK_GITTAGREGEX = "stable-(?P<pver>\d+(\.\d+)+)"
+ SRCREV = "d3edfd142a81096f9f58aff17d84219b457f4987"
 -- 
 2.40.0
 
