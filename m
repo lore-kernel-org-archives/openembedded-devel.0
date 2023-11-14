@@ -1,140 +1,183 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <hprajapati@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 263C0C074FD
-	for <webhook@archiver.kernel.org>; Tue, 14 Nov 2023 03:08:28 +0000 (UTC)
-Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
- by mx.groups.io with SMTP id smtpd.web11.5393.1699931301321753477
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 088A4C4332F
+	for <webhook@archiver.kernel.org>; Tue, 14 Nov 2023 05:44:29 +0000 (UTC)
+Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com [209.85.128.172])
+ by mx.groups.io with SMTP id smtpd.web11.7181.1699940664367648012
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 Nov 2023 19:08:21 -0800
+ Mon, 13 Nov 2023 21:44:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=klcrZAgO;
- spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-1cc921a4632so46889885ad.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 19:08:21 -0800 (PST)
+ dkim=pass header.i=@mvista.com header.s=google header.b=bffTR1g4;
+ spf=pass (domain: mvista.com, ip: 209.85.128.172, mailfrom: hprajapati@mvista.com)
+Received: by mail-yw1-f172.google.com with SMTP id 00721157ae682-5a7af52ee31so60803747b3.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 13 Nov 2023 21:44:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1699931300; x=1700536100; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=OZfSdMooxMNQ0O6RroQJjFeTaJB9nJipPM8woiifvYQ=;
-        b=klcrZAgOckUbWqUSk5fyDzii78GLLocac3d6IF8yxFN/BVyoPEYlMYjeKsWs9ybwb9
-         Xl3F/HPqwXQnzrrTlgvM6zB+ywrs+U94iHTPgo9HRiMo5GIVEwtzb3ix7HyqrM5HyhLA
-         3+tcH8v49pBYWMfKXNRroXiYMqowVOqVQCc723kR8itA2gOcpypOxM6E/9/f2wXd71z/
-         /ZhNk7BzkYBeP/bv/yvaoHvzXSWwAtlddGP/QAaun6Syu3dWkSepF2TW5Bflpt0OxvBH
-         tPIJRDow84wnFPd1mjz5ILDCBbMdVpD1Oj+yUcbKVdlgciT6ysbsgq1vZh0xd5TDjPMP
-         0JLg==
+        d=mvista.com; s=google; t=1699940663; x=1700545463; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=fsyYyg+XI5wKvovy4d/eLzEvb+LKaNQZP0XmnS3gNR0=;
+        b=bffTR1g413gL8vxBmYXM7dF7imAZJSmZS7GrqUPqZQ37jHw6+25+PBZrXPaGSVDjHw
+         yvdBb62hZGAykHSOcSblhUrOhu1i9Wt46F5CLuI4WuhBwoIfehMZkHZ7S4OoYI9Qrrqj
+         35geo8Q2UthaYmFF0HWg/BwkZ+iPjrXP4Xi4E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699931300; x=1700536100;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=OZfSdMooxMNQ0O6RroQJjFeTaJB9nJipPM8woiifvYQ=;
-        b=iZBNShnOn6DtZ6YhyvyYGVvcDFsVlYszt6ibm0XdwTaBdM0eH1vRyMR1gDfTaeUbyF
-         RQSuYcnx+Bg/eqdssuKsY+awcCiqqGYYcjnFx9gixBUKbk9wr5CNhnWYji1l+ieMzx4B
-         tyPh9brKUzRv6pBoyQVkQyIS0JwuKyvbjs8M+QXxCN81Xhqe2GmWdRRbBb5iwAg8TUNN
-         0D0nKXFlNvJ2pKZfOxb2lbs9HoU4gRlLp22RUMOF7I+wrpwue1GkPzMC+ffjHBUyR7EV
-         fwmAo5iM022FnTRsI/j3ZMraWEyeXiRuVfq0OOANrVyQ5Ee97hBfT69YeA3X4OJtiIG6
-         l2dA==
-X-Gm-Message-State: AOJu0YyCM2aR6YqDtDKn3er693TlArapx7gRDOtE8HsgSL5b1xIT9HpN
-	3hpjotgrU0jPTU86Yahh75zY8/8nK6ChmA==
-X-Google-Smtp-Source: AGHT+IHLlWEZNZIApi+a9mq3vmdiWCCfzd+rH7X2aaZjvhgdsKFjrxxboFfVyZr68AJkgLcKE+cYqQ==
-X-Received: by 2002:a17:903:1207:b0:1cc:1dde:8680 with SMTP id l7-20020a170903120700b001cc1dde8680mr1324585plh.45.1699931300391;
-        Mon, 13 Nov 2023 19:08:20 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9100:2cb0::62f8])
-        by smtp.gmail.com with ESMTPSA id n2-20020a1709026a8200b001c44dbc92a2sm4687978plk.184.2023.11.13.19.08.19
+        d=1e100.net; s=20230601; t=1699940663; x=1700545463;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=fsyYyg+XI5wKvovy4d/eLzEvb+LKaNQZP0XmnS3gNR0=;
+        b=Vz1dDbvEWOjRT3bLS9MlLwrkuNGCKbzVPO7L40lo0tc1Y6NNDLMRFnXFjKm4t2dPWv
+         0yY2UJOI2vTTiPNJC/ZCQ74cbvyMZuB+U625k24z4Z8wbR++D7AUyI7tzKN5nW5iWwYq
+         gaDCMSbWI1bFiT+0lI2rFO5wsE5RaTpUF254A5X7whM9Z5MCdvWVzF/rUH1xYB2B+lot
+         dN3rRMKkLuKFVsYmtF61QZcqt8Hc3Mu3InRcCozQITz6saGBgJPFsNr5Q00PIDUXvVIh
+         +5y5guRameba2CMqFDP3ry5rsVOtMw5pKaKSMTuboFDWlwT4HZMuVBJKJtbyEwIkMjYQ
+         5Ulg==
+X-Gm-Message-State: AOJu0YxzJvdhNYsWuFBOXfcuwjNc3wLeUwDLJn6mJ3jClIFEZrZhMOxk
+	g+SZ/31W1xFot1wtwgeL4+dArkJxGD34QnXWCCmX2Q==
+X-Google-Smtp-Source: AGHT+IGb9rFNK4uCuaWXtmMaM5bfvzy2w6PNcH4A7VyPU2zdByI9zDKGHpQbvcbX6C1cboiYuqw+6Q==
+X-Received: by 2002:a0d:e986:0:b0:5b3:4195:a259 with SMTP id s128-20020a0de986000000b005b34195a259mr7567264ywe.25.1699940663152;
+        Mon, 13 Nov 2023 21:44:23 -0800 (PST)
+Received: from MVIN00016.mvista.com ([103.250.136.221])
+        by smtp.gmail.com with ESMTPSA id fh42-20020a056a00392a00b006c4d128b71esm473549pfb.98.2023.11.13.21.44.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 13 Nov 2023 19:08:20 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+        Mon, 13 Nov 2023 21:44:22 -0800 (PST)
+From: Hitendra Prajapati <hprajapati@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH 05/10] dleyna: Skip all dleyna recipes, slated for removal
-Date: Mon, 13 Nov 2023 19:08:06 -0800
-Message-ID: <20231113-gnomebaseclass-switch-to-meson-v1-5-111dd5d0fe68@gmail.com>
-X-Mailer: git-send-email 2.42.1
-In-Reply-To: <20231113-gnomebaseclass-switch-to-meson-v1-0-111dd5d0fe68@gmail.com>
-References: <20231113-gnomebaseclass-switch-to-meson-v1-0-111dd5d0fe68@gmail.com>
+Cc: Hitendra Prajapati <hprajapati@mvista.com>
+Subject: [meta-networking][dunfell][PATCH] wireshark: Fix CVE-2022-0585-CVE-2023-2879
+Date: Tue, 14 Nov 2023 11:14:16 +0530
+Message-Id: <20231114054416.7376-1-hprajapati@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-X-Mailer: b4 0.12.4
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 14 Nov 2023 03:08:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106692
+ <openembedded-devel@lists.openembedded.org>; Tue, 14 Nov 2023 05:44:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106698
 
-Upstream has marked it unsupported [1] and no development is going on=0D
-=0D
-[1] https://github.com/intel/dleyna-core/commit/47638f14fdd0f1a1d3c0c0bd1ce=
-31aa64c66025f=0D
-=0D
-Signed-off-by: Khem Raj <raj.khem@gmail.com>=0D
----=0D
- .../recipes-multimedia/dleyna/dleyna-connector-dbus_0.3.0.bb            | =
-2 ++=0D
- meta-multimedia/recipes-multimedia/dleyna/dleyna-core_0.6.0.bb          | =
-2 ++=0D
- meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb      | =
-2 ++=0D
- meta-multimedia/recipes-multimedia/dleyna/dleyna-server_0.6.0.bb        | =
-2 ++=0D
- 4 files changed, 8 insertions(+)=0D
-=0D
-diff --git a/meta-multimedia/recipes-multimedia/dleyna/dleyna-connector-dbu=
-s_0.3.0.bb b/meta-multimedia/recipes-multimedia/dleyna/dleyna-connector-dbu=
-s_0.3.0.bb=0D
-index 033854f19e..bed5af9bf3 100644=0D
---- a/meta-multimedia/recipes-multimedia/dleyna/dleyna-connector-dbus_0.3.0=
-.bb=0D
-+++ b/meta-multimedia/recipes-multimedia/dleyna/dleyna-connector-dbus_0.3.0=
-.bb=0D
-@@ -16,3 +16,5 @@ inherit autotools pkgconfig=0D
- FILES:${PN} +=3D "${libdir}/dleyna-1.0/connectors/*.so"=0D
- FILES:${PN}-dev +=3D "${libdir}/dleyna-1.0/connectors/*.la"=0D
- FILES:${PN}-dbg +=3D "${libdir}/dleyna-1.0/connectors/.debug/*.so"=0D
-+=0D
-+SKIP_RECIPE[dleyna-connector-dbus] ?=3D "Upstream is dead moreover needs p=
-orting to work with latest gupnp >=3D 1.2"=0D
-diff --git a/meta-multimedia/recipes-multimedia/dleyna/dleyna-core_0.6.0.bb=
- b/meta-multimedia/recipes-multimedia/dleyna/dleyna-core_0.6.0.bb=0D
-index 20a54b1bd7..8aaab7893e 100644=0D
---- a/meta-multimedia/recipes-multimedia/dleyna/dleyna-core_0.6.0.bb=0D
-+++ b/meta-multimedia/recipes-multimedia/dleyna/dleyna-core_0.6.0.bb=0D
-@@ -18,3 +18,5 @@ SRCREV =3D "1c6853f5bc697dc0a8774fd70dbc915c4dbe7c5b"=0D
- S =3D "${WORKDIR}/git"=0D
- =0D
- inherit autotools pkgconfig=0D
-+=0D
-+SKIP_RECIPE[dleyna-core] ?=3D "Upstream is dead moreover needs porting to =
-work with latest gupnp >=3D 1.2"=0D
-diff --git a/meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer_0.6.=
-0.bb b/meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb=0D
-index e7f918333a..a385a50de7 100644=0D
---- a/meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb=0D
-+++ b/meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb=0D
-@@ -23,3 +23,5 @@ CFLAGS +=3D " -I${S}"=0D
- =0D
- FILES:${PN} +=3D "${datadir}/dbus-1"=0D
- FILES:${PN}-dev +=3D "${libdir}/${BPN}/*.so"=0D
-+=0D
-+SKIP_RECIPE[dleyna-renderer] ?=3D "Upstream is dead moreover needs porting=
- to work with latest gupnp >=3D 1.2"=0D
-diff --git a/meta-multimedia/recipes-multimedia/dleyna/dleyna-server_0.6.0.=
-bb b/meta-multimedia/recipes-multimedia/dleyna/dleyna-server_0.6.0.bb=0D
-index 071379758c..719aecede1 100644=0D
---- a/meta-multimedia/recipes-multimedia/dleyna/dleyna-server_0.6.0.bb=0D
-+++ b/meta-multimedia/recipes-multimedia/dleyna/dleyna-server_0.6.0.bb=0D
-@@ -20,3 +20,5 @@ inherit autotools pkgconfig=0D
- =0D
- FILES:${PN} +=3D "${datadir}/dbus-1"=0D
- FILES:${PN}-dev +=3D "${libdir}/${BPN}/*.so"=0D
-+=0D
-+SKIP_RECIPE[dleyna-server] ?=3D "Upstream is dead moreover needs porting t=
-o work with latest gupnp >=3D 1.2"=0D
-=0D
--- =0D
-2.42.1=0D
-=0D
+Upstream-Status: Backport from https://gitlab.com/wireshark/wireshark/-/commit/8d3c2177793e900cfc7cfaac776a2807e4ea289f && https://gitlab.com/wireshark/wireshark/-/commit/118815ca7c9f82c1f83f8f64d9e0e54673f31677
+
+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
+---
+ .../files/CVE-2022-0585-CVE-2023-2879.patch   | 93 +++++++++++++++++++
+ .../wireshark/wireshark_3.2.18.bb             |  1 +
+ 2 files changed, 94 insertions(+)
+ create mode 100644 meta-networking/recipes-support/wireshark/files/CVE-2022-0585-CVE-2023-2879.patch
+
+diff --git a/meta-networking/recipes-support/wireshark/files/CVE-2022-0585-CVE-2023-2879.patch b/meta-networking/recipes-support/wireshark/files/CVE-2022-0585-CVE-2023-2879.patch
+new file mode 100644
+index 000000000..1fc4a5fe3
+--- /dev/null
++++ b/meta-networking/recipes-support/wireshark/files/CVE-2022-0585-CVE-2023-2879.patch
+@@ -0,0 +1,93 @@
++From 5a7a80e139396c07d45e70d63c6d3974c50ae5e8 Mon Sep 17 00:00:00 2001
++From: John Thacker <johnthacker@gmail.com>
++Date: Sat, 13 May 2023 21:45:16 -0400
++Subject: GDSDB: Make sure our offset advances.
++
++add_uint_string() returns the next offset to use, not the number
++of bytes consumed. So to consume all the bytes and make sure the
++offset advances, return the entire reported tvb length, not the
++number of bytes remaining.
++
++Fixup 8d3c2177793e900cfc7cfaac776a2807e4ea289f
++
++Fixes #19068
++
++Upstream-Status: Backport [https://gitlab.com/wireshark/wireshark/-/commit/8d3c2177793e900cfc7cfaac776a2807e4ea289f && https://gitlab.com/wireshark/wireshark/-/commit/118815ca7c9f82c1f83f8f64d9e0e54673f31677]
++CVE: CVE-2022-0585 & CVE-2023-2879
++Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
++---
++ epan/dissectors/packet-gdsdb.c | 23 ++++++++++++++++++++++-
++ 1 file changed, 22 insertions(+), 1 deletion(-)
++
++diff --git a/epan/dissectors/packet-gdsdb.c b/epan/dissectors/packet-gdsdb.c
++index 95fed7e..950d68f 100644
++--- a/epan/dissectors/packet-gdsdb.c
+++++ b/epan/dissectors/packet-gdsdb.c
++@@ -15,6 +15,7 @@
++ #include "config.h"
++ 
++ #include <epan/packet.h>
+++#include <epan/expert.h>
++ 
++ void proto_register_gdsdb(void);
++ void proto_reg_handoff_gdsdb(void);
++@@ -182,6 +183,8 @@ static int hf_gdsdb_cursor_type = -1;
++ static int hf_gdsdb_sqlresponse_messages = -1;
++ #endif
++ 
+++static expert_field ei_gdsdb_invalid_length = EI_INIT;
+++
++ enum
++ {
++ 	op_void                   = 0,
++@@ -474,7 +477,12 @@ static int add_uint_string(proto_tree *tree, int hf_string, tvbuff_t *tvb, int o
++ 						offset, 4, ENC_ASCII|ENC_BIG_ENDIAN);
++ 	length = dword_align(tvb_get_ntohl(tvb, offset))+4;
++ 	proto_item_set_len(ti, length);
++-	return offset + length;
+++	int ret_offset = offset + length;
+++	if (length < 4 || ret_offset < offset) {
+++		expert_add_info_format(NULL, ti, &ei_gdsdb_invalid_length, "Invalid length: %d", length);
+++		return tvb_reported_length(tvb);
+++	}
+++	return ret_offset;
++ }
++ 
++ static int add_byte_array(proto_tree *tree, int hf_len, int hf_byte, tvbuff_t *tvb, int offset)
++@@ -1407,7 +1415,12 @@ dissect_gdsdb(tvbuff_t *tvb, packet_info *pinfo, proto_tree *tree, void *data _U
++ 								offset, 4, ENC_BIG_ENDIAN);
++ 
++ 		/* opcode < op_max */
+++		int old_offset = offset;
++ 		offset = gdsdb_handle_opcode[opcode](tvb, pinfo, gdsdb_tree, offset+4);
+++		if (offset <= old_offset) {
+++			expert_add_info(NULL, ti, &ei_gdsdb_invalid_length);
+++			return tvb_reported_length_remaining(tvb, old_offset);
+++		}
++ 		if (offset < 0)
++ 		{
++ 			/* But at this moment we don't know how much we will need */
++@@ -2022,12 +2035,20 @@ proto_register_gdsdb(void)
++ 		&ett_gdsdb_connect_pref
++ 	};
++ 
+++/* Expert info */
+++	static ei_register_info ei[] = {
+++		{ &ei_gdsdb_invalid_length, { "gdsdb.invalid_length", PI_MALFORMED, PI_ERROR,
+++			"Invalid length", EXPFILL }},
+++	};
+++
++ 	proto_gdsdb = proto_register_protocol(
++ 		"Firebird SQL Database Remote Protocol",
++ 		"FB/IB GDS DB", "gdsdb");
++ 
++ 	proto_register_field_array(proto_gdsdb, hf, array_length(hf));
++ 	proto_register_subtree_array(ett, array_length(ett));
+++	expert_module_t *expert_gdsdb = expert_register_protocol(proto_gdsdb);
+++	expert_register_field_array(expert_gdsdb, ei, array_length(ei));
++ }
++ 
++ void
++-- 
++2.25.1
++
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb b/meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb
+index b4425cb66..b35c24328 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb
+@@ -19,6 +19,7 @@ SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz
+            file://CVE-2023-0668.patch \
+            file://CVE-2023-2906.patch \
+            file://CVE-2023-3649.patch \
++           file://CVE-2022-0585-CVE-2023-2879.patch \
+            "
+ UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
+ 
+-- 
+2.25.1
+
 
