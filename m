@@ -1,270 +1,121 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C16AC48BD7
-	for <webhook@archiver.kernel.org>; Wed, 15 Nov 2023 13:46:20 +0000 (UTC)
-Received: from mail-yw1-f179.google.com (mail-yw1-f179.google.com [209.85.128.179])
- by mx.groups.io with SMTP id smtpd.web11.13473.1700055977402765609
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5FE32C4332F
+	for <webhook@archiver.kernel.org>; Wed, 15 Nov 2023 14:36:40 +0000 (UTC)
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+ by mx.groups.io with SMTP id smtpd.web10.14606.1700058994590714323
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 Nov 2023 05:46:17 -0800
+ Wed, 15 Nov 2023 06:36:35 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=FSaFHEcQ;
- spf=pass (domain: gmail.com, ip: 209.85.128.179, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f179.google.com with SMTP id 00721157ae682-5a7c011e113so79241217b3.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Nov 2023 05:46:17 -0800 (PST)
+ dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=gbmhw/n3;
+ spf=pass (domain: smile.fr, ip: 209.85.128.45, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-4079ed65582so53347175e9.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Nov 2023 06:36:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1700055976; x=1700660776; darn=lists.openembedded.org;
+        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1700058992; x=1700663792; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=FVc64hHjvchIIlOtbDOC2HEzARxeNyf/ksilzyJRXUY=;
-        b=FSaFHEcQn5t7wZqGPP5+uQP5/HBmBSDYREkWdwejueQ63riUBONu+spuIuJdGGToUb
-         kSjVnDDnnlwF2qrspFMCyN8QcRcbtAWk/aoCSfAlXcNEPmYYiz+k5DX25TYI5IQoL3HI
-         qjKc/2BRYaBsGPIIBxreOfYw3nGx4f8WXgEgW8AO7SrE+5Xm3fx+pVE5/5NWmxmNFfHy
-         iojSqDLjJeF8TMmltZZGo5sXdg2NTQ/LdZ4W2HKnex7HQuCi22Lg9Fy13gyAGOl8h/0Y
-         zAVcNtOI3lPGSGxwKxS7rvh3qcw8p1tBMCUcO/3N7dvS8VoUoZZn6A174kLXOcBur4vH
-         LTaA==
+        bh=GkCtfRc9wzSPc7mMZo1v/gjhpNxwrUMkU3Bp0ZTluAs=;
+        b=gbmhw/n3zsztKtLH5DFoSj2WysyE7jZXBCuLyrO3/ZU5NK9lp3T2FAQlrMBSFPQ5/V
+         2FiQYySPhxgBXc010bnLqFtLb3naJgZC3GdmV0PXyeEhbTnt0+xA+YppqkqsTxKcV1qg
+         YO/IsrIQgWrrDg+8tQeX5muj8tW3K9w6LAx/PThka+zccUHbof+8nfcSEacTuOrmewQI
+         NT/ZmxDJSbGMxM2r1t4JgNcMaUDo9BM6x/hL3H/zuC96ER7XM6TpriUszq1ikkYQBr7H
+         nVJ0K0zyMdh+YJGiaLrKFNsCRhE8JF0l/yO1NblguoVztt3w6pOpBc2EeJY1XDPbBLnl
+         3zCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700055976; x=1700660776;
+        d=1e100.net; s=20230601; t=1700058992; x=1700663792;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=FVc64hHjvchIIlOtbDOC2HEzARxeNyf/ksilzyJRXUY=;
-        b=KhltHakAk5B6IfmubvNxvxnnslM+DO+fZ9G6j6QsIZpVTEL39C1s84TJT3x9YUpZ/e
-         v/DCSSR9ngOEBFIYE76QAxA42EiCdAETeqU99JaFPPAU0iKpsTo+Y03xlvq6by/fy/v3
-         hZGnYyRikyxOuK92aDMa1nJHD1fXRCK0BlB/TRx6/rOoNiTFAMatSu+WSDKqSmqSiOa6
-         3eejSbkSGe+83zmjrSOxwVtwnt/59/891gyIr5+xO3WMDLPNUB1kV+84C9MhzMH2YeeU
-         M62WE3qFPKkhpYZYD1t7pepNQoRMqI8PAYJGyarWyjFrDT8Ay47k4ioBYSZP3/Fn3vCg
-         ZVYQ==
-X-Gm-Message-State: AOJu0YxhWp1WFS82OpcoOQuq09WRkMST6GbwJfMu+HcOVPI9mwegCaUl
-	3EIxbziIqaP5s84rI8VMF9zRoEhJPWo=
-X-Google-Smtp-Source: AGHT+IHAyckEfbSQGMG5oiSLY/gD8cfAzX/BdKXkBQx1FxYcDo8uS61v1UvG/kmEbp33XJG592Di6w==
-X-Received: by 2002:a81:a18b:0:b0:5b3:2ebc:30e3 with SMTP id y133-20020a81a18b000000b005b32ebc30e3mr13356896ywg.14.1700055976064;
-        Wed, 15 Nov 2023 05:46:16 -0800 (PST)
-Received: from keaua.. ([12.110.163.194])
-        by smtp.gmail.com with ESMTPSA id x190-20020a0deec7000000b0057d24f8278bsm366569ywe.104.2023.11.15.05.46.14
+        bh=GkCtfRc9wzSPc7mMZo1v/gjhpNxwrUMkU3Bp0ZTluAs=;
+        b=sSeGav2geQWYsjJcVL9IzTje1k2fpIGhKVORfDv4vuJtk+i0MpM41zZ8ZWKY4e7cpO
+         MaBNnM7HZJZYZ9XFT+z5ePRDXwPENc0+Zh+bBHSFTUNUYeAiZGsScm4hcsuok6kOViji
+         LL4XHUhbSNvTnbnMqVN7HKiOee8qhgvC+l7vc7SW54PI+lkqZlWaC5alZ7Vp5fSGsxFL
+         WjsESWZBhuEqHIHPauOKnkSwFOHM4rWaaSlZiJzNCzXNWZ8QscHVP0IQ742jn2bypo+0
+         4KZiI6BwEu/B4/09wCHaKqXkOjFi25B6qnbicSVpuX9o5RJD4vyW5wkFplIZ+rLA0KUb
+         sujA==
+X-Gm-Message-State: AOJu0YztstmTVOnP6OAG1mpv5N4Mhi4C3rtccro3AVLLkduFpFZqgWLY
+	tr2bTTuhwT5baUrk6AXv0cL4Ry2XolKmsd1SMwc=
+X-Google-Smtp-Source: AGHT+IHCbDrPbCJBKjw3JIPdLw74Y35Pd+73/m8/B1iMiUVzlfPCNUs/UuC3mUl7/TwLO/yxmzs6oQ==
+X-Received: by 2002:a05:600c:1516:b0:408:fe93:a2f7 with SMTP id b22-20020a05600c151600b00408fe93a2f7mr10580312wmg.37.1700058992317;
+        Wed, 15 Nov 2023 06:36:32 -0800 (PST)
+Received: from P-ASN-ECS-830T8C3.idf.intranet (static-css-ccs-204145.business.bouyguestelecom.com. [176.157.204.145])
+        by smtp.gmail.com with ESMTPSA id w10-20020a5d680a000000b0032d893d8dc8sm10790709wru.2.2023.11.15.06.36.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 15 Nov 2023 05:46:15 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
+        Wed, 15 Nov 2023 06:36:32 -0800 (PST)
+From: Yoann Congal <yoann.congal@smile.fr>
 To: openembedded-devel@lists.openembedded.org
-Cc: Mingli Yu <mingli.yu@windriver.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][mickledore][PATCH] nlohmann-json: Add ptest support
-Date: Wed, 15 Nov 2023 08:46:14 -0500
-Message-Id: <20231115134614.17521-1-akuster808@gmail.com>
-X-Mailer: git-send-email 2.34.1
+Cc: Yoann Congal <yoann.congal@smile.fr>
+Subject: [meta-multimedia][PATCH] juce/projucer: Backport a fix for the compilation under recent GCC
+Date: Wed, 15 Nov 2023 15:35:19 +0100
+Message-Id: <20231115143519.643477-1-yoann.congal@smile.fr>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 15 Nov 2023 13:46:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106761
+ <openembedded-devel@lists.openembedded.org>; Wed, 15 Nov 2023 14:36:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106762
 
-From: Mingli Yu <mingli.yu@windriver.com>
+This backport fixes this error:
+  note: 'std::exchange' is defined in header '<utility>'; did you forget to '#include <utility>'?
 
-* Backport 2 patches [1] [2] to fix the build failure under tests dir.
+Note: The fix is on version >= 7.0.0
 
-* Fetch the test data during do_fetch phase to avoid internet access
-during test as some tests need test data.
- # ./run-ptest
-PASS: test-algorithms_cpp11
-PASS: test-allocator_cpp11
-PASS: test-alt-string_cpp11
-PASS: test-assert_macro_cpp11
-PASS: test-binary_formats_cpp11
-[snip]
-PASS: test-unicode5_cpp11
-PASS: test-user_defined_input_cpp11
-PASS: test-windows_h_cpp11
-PASS: test-wstring_cpp11
-
-[1] https://github.com/nlohmann/json/commit/6cec5aefc97ad219b6fd5a4132f88f7c8f6800ee
-[2] https://github.com/nlohmann/json/commit/660d0b58565073975d6f5d94365d6cbf150a4cf8
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 013b4d50432a3eba08a9cb54b9edf6b25a6378a8)
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
 ---
- ...tors-define-missing-rebind-type-3895.patch | 61 +++++++++++++++++++
- ...tors2-use-std-ranges-equals-for-rang.patch | 31 ++++++++++
- .../nlohmann-json/files/run-ptest             | 12 ++++
- .../nlohmann-json/nlohmann-json_3.11.2.bb     | 22 ++++++-
- 4 files changed, 123 insertions(+), 3 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/nlohmann-json/files/0001-custom-allocators-define-missing-rebind-type-3895.patch
- create mode 100644 meta-oe/recipes-devtools/nlohmann-json/files/0001-tests-unit-iterators2-use-std-ranges-equals-for-rang.patch
- create mode 100755 meta-oe/recipes-devtools/nlohmann-json/files/run-ptest
+ .../recipes-multimedia/juce/projucer.inc      |  3 ++-
+ ...nclude-utility-for-GCC-12-compatibil.patch | 23 +++++++++++++++++++
+ 2 files changed, 25 insertions(+), 1 deletion(-)
+ create mode 100644 meta-multimedia/recipes-multimedia/juce/projucer/0001-StandardHeader-Include-utility-for-GCC-12-compatibil.patch
 
-diff --git a/meta-oe/recipes-devtools/nlohmann-json/files/0001-custom-allocators-define-missing-rebind-type-3895.patch b/meta-oe/recipes-devtools/nlohmann-json/files/0001-custom-allocators-define-missing-rebind-type-3895.patch
-new file mode 100644
-index 0000000000..d964586c1c
---- /dev/null
-+++ b/meta-oe/recipes-devtools/nlohmann-json/files/0001-custom-allocators-define-missing-rebind-type-3895.patch
-@@ -0,0 +1,61 @@
-+From 6cec5aefc97ad219b6fd5a4132f88f7c8f6800ee Mon Sep 17 00:00:00 2001
-+From: Sergei Trofimovich <slyich@gmail.com>
-+Date: Wed, 8 Mar 2023 11:31:56 +0000
-+Subject: [PATCH] custom allocators: define missing 'rebind' type (#3895)
-+
-+Upstream-Status: Backport [https://github.com/nlohmann/json/commit/6cec5aefc97ad219b6fd5a4132f88f7c8f6800ee]
-+
-+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-+---
-+ tests/src/unit-allocator.cpp   | 9 +++++++++
-+ tests/src/unit-regression2.cpp | 9 +++++++++
-+ 2 files changed, 18 insertions(+)
-+
-+diff --git a/tests/src/unit-allocator.cpp b/tests/src/unit-allocator.cpp
-+index 76e3b03f..f2e63552 100644
-+--- a/tests/src/unit-allocator.cpp
-++++ b/tests/src/unit-allocator.cpp
-+@@ -20,11 +20,20 @@ struct bad_allocator : std::allocator<T>
-+ {
-+     using std::allocator<T>::allocator;
-+ 
-++    bad_allocator() = default;
-++    template<class U> bad_allocator(const bad_allocator<U>& /*unused*/) { }
-++
-+     template<class... Args>
-+     void construct(T* /*unused*/, Args&& ... /*unused*/)
-+     {
-+         throw std::bad_alloc();
-+     }
-++
-++    template <class U>
-++    struct rebind
-++    {
-++        using other = bad_allocator<U>;
-++    };
-+ };
-+ } // namespace
-+ 
-+diff --git a/tests/src/unit-regression2.cpp b/tests/src/unit-regression2.cpp
-+index 2bb9b32e..dbafb436 100644
-+--- a/tests/src/unit-regression2.cpp
-++++ b/tests/src/unit-regression2.cpp
-+@@ -189,6 +189,15 @@ class my_allocator : public std::allocator<T>
-+ {
-+   public:
-+     using std::allocator<T>::allocator;
-++
-++    my_allocator() = default;
-++    template<class U> my_allocator(const my_allocator<U>& /*unused*/) { }
-++
-++    template <class U>
-++    struct rebind
-++    {
-++        using other = my_allocator<U>;
-++    };
-+ };
-+ 
-+ /////////////////////////////////////////////////////////////////////
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-devtools/nlohmann-json/files/0001-tests-unit-iterators2-use-std-ranges-equals-for-rang.patch b/meta-oe/recipes-devtools/nlohmann-json/files/0001-tests-unit-iterators2-use-std-ranges-equals-for-rang.patch
-new file mode 100644
-index 0000000000..463912e4b6
---- /dev/null
-+++ b/meta-oe/recipes-devtools/nlohmann-json/files/0001-tests-unit-iterators2-use-std-ranges-equals-for-rang.patch
-@@ -0,0 +1,31 @@
-+From 660d0b58565073975d6f5d94365d6cbf150a4cf8 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Arsen=20Arsenovi=C4=87?= <arsen@aarsen.me>
-+Date: Sun, 5 Mar 2023 14:11:22 +0100
-+Subject: [PATCH] tests/unit-iterators2: use std::ranges::equals for range
-+ comparisons (#3950)
-+
-+Closes https://github.com/nlohmann/json/issues/3927
-+
-+Upstream-Status: Backport [https://github.com/nlohmann/json/commit/660d0b58565073975d6f5d94365d6cbf150a4cf8]
-+
-+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-+---
-+ tests/src/unit-iterators2.cpp | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/tests/src/unit-iterators2.cpp b/tests/src/unit-iterators2.cpp
-+index 27926084..72a5d9dc 100644
-+--- a/tests/src/unit-iterators2.cpp
-++++ b/tests/src/unit-iterators2.cpp
-+@@ -943,7 +943,7 @@ TEST_CASE("iterators 2")
-+                 json j_expected{5, 4, 3, 2, 1};
-+ 
-+                 auto reversed = j | std::views::reverse;
-+-                CHECK(reversed == j_expected);
-++                CHECK(std::ranges::equal(reversed, j_expected));
-+             }
-+ 
-+             SECTION("transform")
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-devtools/nlohmann-json/files/run-ptest b/meta-oe/recipes-devtools/nlohmann-json/files/run-ptest
-new file mode 100755
-index 0000000000..2f00267d50
---- /dev/null
-+++ b/meta-oe/recipes-devtools/nlohmann-json/files/run-ptest
-@@ -0,0 +1,12 @@
-+#!/bin/sh
-+
-+cd tests
-+for atest in test-* ; do
-+    rm -rf tests.log
-+    ./${atest} > tests.log 2>&1
-+    if [ $? = 0 ] ; then
-+        echo "PASS: ${atest}"
-+    else
-+        echo "FAIL: ${atest}"
-+    fi
-+done
-diff --git a/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.11.2.bb b/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.11.2.bb
-index 74e40942a5..694d632cb1 100644
---- a/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.11.2.bb
-+++ b/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.11.2.bb
-@@ -7,22 +7,38 @@ LIC_FILES_CHKSUM = "file://LICENSE.MIT;md5=f969127d7b7ed0a8a63c2bbeae002588"
- CVE_PRODUCT = "json-for-modern-cpp"
- 
- SRC_URI = "git://github.com/nlohmann/json.git;branch=develop;protocol=https \
--           "
-+           git://github.com/nlohmann/json_test_data.git;destsuffix=git/json_test_data;name=json-test-data;branch=master;protocol=https \
-+           file://0001-custom-allocators-define-missing-rebind-type-3895.patch \
-+           file://0001-tests-unit-iterators2-use-std-ranges-equals-for-rang.patch \
-+           file://run-ptest \
-+"
- 
- SRCREV = "bc889afb4c5bf1c0d8ee29ef35eaaf4c8bef8a5d"
-+SRCREV_json-test-data = "a1375cea09d27cc1c4cadb8d00470375b421ac37"
-+
-+SRCREV_FORMAT = "json-test-data"
+diff --git a/meta-multimedia/recipes-multimedia/juce/projucer.inc b/meta-multimedia/recipes-multimedia/juce/projucer.inc
+index feb356463..b60cba1dd 100644
+--- a/meta-multimedia/recipes-multimedia/juce/projucer.inc
++++ b/meta-multimedia/recipes-multimedia/juce/projucer.inc
+@@ -18,7 +18,8 @@ DEPENDS:append:libc-musl = " libexecinfo"
+ SRCREV = "2f980209cc4091a4490bb1bafc5d530f16834e58"
+ BRANCH = "master"
+ SRC_URI = "git://github.com/WeAreROLI/JUCE.git;protocol=https;branch=${BRANCH} \
+-"
++           file://0001-StandardHeader-Include-utility-for-GCC-12-compatibil.patch \
++           "
  
  S = "${WORKDIR}/git"
- 
--inherit cmake
-+inherit cmake ptest
- 
--EXTRA_OECMAKE += "-DJSON_BuildTests=OFF"
-+EXTRA_OECMAKE += "${@bb.utils.contains('PTEST_ENABLED', '1', '-DJSON_BuildTests=ON -DJSON_TestDataDirectory=${PTEST_PATH}/json_test_data', '-DJSON_BuildTests=OFF', d)}"
- 
- # nlohmann-json is a header only C++ library, so the main package will be empty.
- ALLOW_EMPTY:${PN} = "1"
- RDEPENDS:${PN}-dev = ""
-+RDEPENDS:${PN}-ptest = "perl"
- 
- BBCLASSEXTEND = "native nativesdk"
- 
+ PV = "6.1.6"
+diff --git a/meta-multimedia/recipes-multimedia/juce/projucer/0001-StandardHeader-Include-utility-for-GCC-12-compatibil.patch b/meta-multimedia/recipes-multimedia/juce/projucer/0001-StandardHeader-Include-utility-for-GCC-12-compatibil.patch
+new file mode 100644
+index 000000000..ae77aeef1
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/juce/projucer/0001-StandardHeader-Include-utility-for-GCC-12-compatibil.patch
+@@ -0,0 +1,23 @@
++From 85822fcb87dd531d5e8ed1c8230c67bddb56f66d Mon Sep 17 00:00:00 2001
++From: reuk <reuk@users.noreply.github.com>
++Date: Wed, 6 Apr 2022 15:43:09 +0100
++Subject: [PATCH] StandardHeader:  Include <utility> for GCC 12 compatibility
 +
-+do_install_ptest () {
-+    install -d ${D}${PTEST_PATH}/tests
-+    cp -r ${S}/json_test_data/ ${D}${PTEST_PATH}/
-+    cp -r ${B}/tests/test-* ${D}${PTEST_PATH}/tests
-+}
++Upstream-Status: Backport [https://github.com/juce-framework/JUCE/commit/ce8aff22c31c4d932a8414bc6f6185381dc970db]
++Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
++---
++ modules/juce_core/system/juce_StandardHeader.h | 1 +
++ 1 file changed, 1 insertion(+)
 +
-+
- # other packages commonly reference the file directly as "json.hpp"
- # create symlink to allow this usage
- do_install:append() {
++diff --git a/modules/juce_core/system/juce_StandardHeader.h b/modules/juce_core/system/juce_StandardHeader.h
++index fe164cdd3..cda6bbe86 100644
++--- a/modules/juce_core/system/juce_StandardHeader.h
+++++ b/modules/juce_core/system/juce_StandardHeader.h
++@@ -64,6 +64,7 @@
++ #include <typeindex>
++ #include <unordered_map>
++ #include <unordered_set>
+++#include <utility>
++ #include <vector>
++ #include <set>
++ 
 -- 
-2.34.1
+2.30.2
 
 
