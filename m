@@ -2,84 +2,122 @@ Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A734BC07548
-	for <webhook@archiver.kernel.org>; Wed, 15 Nov 2023 06:33:57 +0000 (UTC)
-Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com [209.85.208.48])
- by mx.groups.io with SMTP id smtpd.web11.7654.1700030035512936256
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CD13DC47072
+	for <webhook@archiver.kernel.org>; Wed, 15 Nov 2023 07:08:17 +0000 (UTC)
+Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
+ by mx.groups.io with SMTP id smtpd.web11.7974.1700032094497185933
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Nov 2023 22:33:55 -0800
+ Tue, 14 Nov 2023 23:08:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=bA+0rBTR;
- spf=pass (domain: gmail.com, ip: 209.85.208.48, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-ed1-f48.google.com with SMTP id 4fb4d7f45d1cf-54394328f65so9835940a12.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Nov 2023 22:33:55 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=A9QYFZhI;
+ spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-9e4675c7a5fso913359566b.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Nov 2023 23:08:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1700030033; x=1700634833; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1700032092; x=1700636892; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=QW7s4nSuN2c22uUk4UK6P+0P2rjuDs2aRP+JM1s4XVE=;
-        b=bA+0rBTRGp4I3FYBiM5gUVqozDR6x0ZpDfY91Fur998k1la6DLZvISrYHSfLXURGjB
-         w0LVhmiHbRjg5j7F15vgSrH3COMueiOoEMSovxOO8zH/xkhCGxJV9rVMLwiEubix01ei
-         L9PSHHTu2HMoA0iECkq+J+d9vM7FsOI6ob3Ag1atCf1LbYc9ROggcwfinB48Jd6TiCsW
-         lUtv4OFC6UdtcalAgiV4hIMEq8BsYWfymITq1l9ZTCtgM4HC35NQKcld10FyYtJVvR8n
-         QjpM/3I59La55fogpwErs+1nF+XVn2rQYjxxGXbgMUFBpEoegLYU7KGWzG4rIeRaq6Ei
-         AHNw==
+        bh=FR7Mw1HFwHsnAOd6UKpB1HABKcKSqTNvIi9cvTxMnh0=;
+        b=A9QYFZhISbzRWWxJX7gvtlB+alfkCrNm2Ie44MEoA70NmRI3PIOSxZWHOhcmUQFJrN
+         5NoeboizRILNduKSn1e529Iex8fVeoJ1+mGCd0H6QwNXdCWf3aKGdcPUpWPgIzmqhZ5e
+         VQ2pXvBkeFPwLKrZcgTWAaEy/O7T8BXumM6yLQgNZHii2pNVAPDtpLdUWgrNxbRsPUJO
+         f7a572iQY5aRneO9eDxqUNnItktMJpLQNy2K34S6VoXwbmf8Iuyq7NojrUdcUr19ek9c
+         d9ICrAb+54gzOl0treo8MgsXdcAW9rwaO/7I51fWbRMttIeu2vGS1Szc2t4WXelq3/1q
+         OojQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700030033; x=1700634833;
+        d=1e100.net; s=20230601; t=1700032092; x=1700636892;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=QW7s4nSuN2c22uUk4UK6P+0P2rjuDs2aRP+JM1s4XVE=;
-        b=srPz6R9TbZi6z4nwJvZ7Gp4BrsxeLejLMakKciK8dRygOtF60mznUBKUcOVRgp82t1
-         DEEpbY80GorblZC5SsbgOHYWLSKwOlSzDlNVQD0ggrkNDHnBuXeKO9PVDqhNzzv7xFAu
-         JG6eZoh8BOQUwK3wpVhruTbw91E8D2lFN/HWin96JVq03F8wxtQxAwPqrdsjnFCBNZrH
-         8OVl2F0bCUS7yqW0ilXHhvZB4nZA/2zgVnu+t6BFGBOjsaWKWDGmYWl0K7TF9UjZ9g4S
-         MyWfKD0IyHyWJhyBAFt06R3HONgoZa3wmzHuFuevliJ4db3uQ6PlehyramPhzD7kVlRL
-         YirQ==
-X-Gm-Message-State: AOJu0YwFAC/9JizzaUoKkjfLIq0TFn5i0oDgnuSYIr/TDgNqVx7AXllQ
-	rU7SfEpDbwM19vDn6UGw9mJ3Ox2db7+XvQ==
-X-Google-Smtp-Source: AGHT+IHlEVJ9e/JJdKiAAC4Mzv5Z4Zd0eawcNoyZt4ASGPZH+hZxz9ZyUtPFOlZpin8sXkP9H8Obyw==
-X-Received: by 2002:a17:907:36c5:b0:9e7:c1cd:a4dc with SMTP id bj5-20020a17090736c500b009e7c1cda4dcmr7924750ejc.6.1700030032976;
-        Tue, 14 Nov 2023 22:33:52 -0800 (PST)
+        bh=FR7Mw1HFwHsnAOd6UKpB1HABKcKSqTNvIi9cvTxMnh0=;
+        b=ImWowgrvTZmk8W9eAeH0qgIIe23KdlKp+cDKLpOKGY9zsnc77l9GwMWlhX5B2OeYsp
+         VVRaiGhXTr5ZawE6Fd/jKjpQz4g3stndqFOyWopGkNPqzQXGw8Bfk0pADeAFVXHYBLh4
+         eJOtYPj/y9ndlUVpmLSCvuZ9MK8ZeVX5ukstMPC00uy4UmXdSov87c6ZLn3O9UVDn1Ee
+         LHjNiTB2b9KVaPoSZ/UBz7Mo2nBnhVv60VGvn6SDYmU4WGRumX4rtHLo/sE3YOmLDK/n
+         Sh7p3jylrLkjypKUkeivVLXb1UnRdu+u9syU2F9AT++fD+1gkZ2EY8bJ5PhA0RSi5dOD
+         ONqQ==
+X-Gm-Message-State: AOJu0YxS9t1cLd8gr13HgJHnus8gTmmm0xTcYcIRw+dVIi7tFPZxDFX3
+	nBtWb/41UB5fSP9FQvaS7twq+wCHxjWZ7g==
+X-Google-Smtp-Source: AGHT+IF4GtA1eplc2+IzT2coWXFey03kWFtgqdz/cnYIVLGlpaFlHek0wzUVqb5WHFbEF4jm2YjOvw==
+X-Received: by 2002:a17:907:111a:b0:9bf:2673:7371 with SMTP id qu26-20020a170907111a00b009bf26737371mr10665606ejb.13.1700032092163;
+        Tue, 14 Nov 2023 23:08:12 -0800 (PST)
 Received: from localhost.localdomain ([176.33.65.238])
-        by smtp.gmail.com with ESMTPSA id y10-20020a170906070a00b009a168ab6ee2sm6544988ejb.164.2023.11.14.22.33.52
+        by smtp.gmail.com with ESMTPSA id y10-20020a1709064b0a00b009dd7bc622fbsm6612704eju.113.2023.11.14.23.08.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Nov 2023 22:33:52 -0800 (PST)
+        Tue, 14 Nov 2023 23:08:11 -0800 (PST)
 From: alperak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-multimedia][master][PATCHv3] libopenmpt: Added license change reason and dropped md5sum
-Date: Wed, 15 Nov 2023 09:32:43 +0300
-Message-Id: <20231115063243.181768-1-alperyasinak1@gmail.com>
+Cc: alperak <alperyasinak1@gmail.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-networking][master][PATCHv3] civetweb: Added license change reason
+Date: Wed, 15 Nov 2023 10:07:33 +0300
+Message-Id: <20231115070733.186462-1-alperyasinak1@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 15 Nov 2023 06:33:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106733
+ <openembedded-devel@lists.openembedded.org>; Wed, 15 Nov 2023 07:08:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106734
 
-License-Update: Copyright years changed
+License-Update:
+
+- Copyright years changed
+- Added additional components Copyright
+- The website keplerproject.org seems to no longer exist. So, the source URL used was changed
+=========================
+- Added "-DCIVETWEB_SSL_OPENSSL_API_3_0=ON" because of following error:
+
+civetweb.c:1561:2: error: #error "Please define OPENSSL_API_#_# or USE_MBEDTLS"
+
+You may also want to check out the available CMake options here:
+
+https://github.com/civetweb/civetweb/blob/d7ba35bbb649209c66e582d5a0244ba988a15159/CMakeLists.txt
+=========================
+
+Changelog:
+
+https://github.com/civetweb/civetweb/blob/d7ba35bbb649209c66e582d5a0244ba988a15159/RELEASE_NOTES.md
 
 Signed-off-by: alperak <alperyasinak1@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-multimedia/libopenmpt/libopenmpt_0.7.3.bb           | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.7.3.bb b/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.7.3.bb
-index 58fc8278e..92f33da89 100644
---- a/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.7.3.bb
-+++ b/meta-multimedia/recipes-multimedia/libopenmpt/libopenmpt_0.7.3.bb
-@@ -14,7 +14,7 @@ DEPENDS = "virtual/libiconv"
- SRC_URI = "https://lib.openmpt.org/files/libopenmpt/src/libopenmpt-${PV}+release.autotools.tar.gz \
-            file://run-ptest \
-           "
--SRC_URI[md5sum] = "ffd572d817a090554f55adf97c1997c2"
-+
- SRC_URI[sha256sum] = "2cf8369b7916b09264f3f14b9fb6cef35a6e9bee0328dec4f49d98211ccfd722"
+ Added explanation about why the license was updated.
  
- S = "${WORKDIR}/libopenmpt-${PV}+release.autotools"
+ .../civetweb/{civetweb_git.bb => civetweb_1.16.bb}         | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-connectivity/civetweb/{civetweb_git.bb => civetweb_1.16.bb} (91%)
+
+diff --git a/meta-networking/recipes-connectivity/civetweb/civetweb_git.bb b/meta-networking/recipes-connectivity/civetweb/civetweb_1.16.bb
+similarity index 91%
+rename from meta-networking/recipes-connectivity/civetweb/civetweb_git.bb
+rename to meta-networking/recipes-connectivity/civetweb/civetweb_1.16.bb
+index e9c205618..0a654a10f 100644
+--- a/meta-networking/recipes-connectivity/civetweb/civetweb_git.bb
++++ b/meta-networking/recipes-connectivity/civetweb/civetweb_1.16.bb
+@@ -2,10 +2,10 @@ SUMMARY = "Civetweb embedded web server"
+ HOMEPAGE = "https://github.com/civetweb/civetweb"
+ 
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE.md;md5=50bd1d7f135b50d7e218996ba28d0d88"
++LIC_FILES_CHKSUM = "file://LICENSE.md;md5=ce6ce6eb1b2fd59ee6bab219470442a3"
++
++SRCREV = "d7ba35bbb649209c66e582d5a0244ba988a15159"
+ 
+-SRCREV = "4b440a339979852d5a51fb11a822952712231c23"
+-PV = "1.12+git${SRCPV}"
+ SRC_URI = "git://github.com/civetweb/civetweb.git;branch=master;protocol=https \
+            file://0001-Unittest-Link-librt-and-libm-using-l-option.patch \
+            "
+@@ -23,6 +23,7 @@ EXTRA_OECMAKE = " \
+     -DCIVETWEB_ENABLE_LUA=OFF \
+     -DCIVETWEB_ENABLE_ASAN=OFF \
+     -DCIVETWEB_BUILD_TESTING=OFF \
++    -DCIVETWEB_SSL_OPENSSL_API_3_0=ON \
+ "
+ 
+ # Building with ninja fails on missing third_party/lib/libcheck.a (which
 -- 
 2.25.1
 
