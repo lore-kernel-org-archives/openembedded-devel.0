@@ -2,90 +2,103 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B59FC47074
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 18072C07548
 	for <webhook@archiver.kernel.org>; Wed, 15 Nov 2023 07:37:08 +0000 (UTC)
-Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
- by mx.groups.io with SMTP id smtpd.web11.8235.1700033823954431970
+Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
+ by mx.groups.io with SMTP id smtpd.web10.8222.1700033825844105563
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Nov 2023 23:37:04 -0800
+ Tue, 14 Nov 2023 23:37:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=bJo8w8Oa;
- spf=pass (domain: gmail.com, ip: 209.85.215.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f171.google.com with SMTP id 41be03b00d2f7-5aa481d53e5so4494978a12.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Nov 2023 23:37:03 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=jnzKQPTa;
+ spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f181.google.com with SMTP id 41be03b00d2f7-5bd33abbb90so4327662a12.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Nov 2023 23:37:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1700033823; x=1700638623; darn=lists.openembedded.org;
-        h=to:content-transfer-encoding:mime-version:message-id:date:subject
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=A11w3AGo7zgWVq7Ag5jZghYoBoNNPdfTFe5k5xKcRMQ=;
-        b=bJo8w8OayY7uTwXt7aDtH0KOJ45cZeMt2IigLd9DoKsNVsM0KtTqgO2I/tKQ3k/rbq
-         CzI3KdRi112OPd65E7dTRCJYqGkCSNoy8SgxDTkzUY0XEdz4hk/RDD0PNshAu7A35r0x
-         0Yjdq/CsQ9VXhBfGC8/xcrT5k2cg4loJMFwfh/PFhclBoXGz2tTuxH/xdbRxwqF52gBw
-         I5jpsT9ky73vcEFMVg5P1iyfdle17hj/902xXDbKc8g4TmoyIG1x0AXpYF8ro2KiD8WZ
-         Rh0hokYKOXOEa+et14ABmH7OFDXRq7WSCTuorrGzkEQWKI5VOOqWU/hzPYE8uR80+kee
-         eNYg==
+        d=gmail.com; s=20230601; t=1700033825; x=1700638625; darn=lists.openembedded.org;
+        h=to:in-reply-to:references:message-id:content-transfer-encoding
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=83z/mog91KQUOiISznoZ+Z+yCE4MCSLVm7lqZPjnJtA=;
+        b=jnzKQPTaiE3NbDkbOOQl9X2bPf/C6O53TGEh0uT5+bqf4Fn28fw0KFuZI075VbnZ/4
+         jAF9/P9dFVaayyFRhqlDClY2/rhhlBYbqRVilvR+WvH8Xv5GbMwsV/J3fNnQtiZOVe2M
+         vP8qHBYCqgJeHLW3/4BECQ1TG4XVuGip0SucRQo3k9lJUuwxGHr9iL96+RcRhJVdpg8l
+         DbRY/T/GC0cZNPDUtqvp+CQsp2U/dkS1fww6AtYHk0/emrAjmlM1IvKERWnofAMZ1IeG
+         DR1ni9t2+L6ISJ8tTGZrbFFHL5IgolNdmcUqnHeJUyNKKwSAeT3DajUMIyQBQLxyKtTI
+         gHRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700033823; x=1700638623;
-        h=to:content-transfer-encoding:mime-version:message-id:date:subject
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=A11w3AGo7zgWVq7Ag5jZghYoBoNNPdfTFe5k5xKcRMQ=;
-        b=CJytYhk3rT7NsfrCWmVFRKWveUlvEcfcvqgvNLrYRXk6Dzu65/eRCkWTGd7LmnW0cL
-         uJA6yUxGdGTeQMvbzqj9pQmKaS9p+jF5pSk24owSG4bL52CKv5k+UdMPK4fGdaNVbRgi
-         QIJcVhTfq9rmriHk3MXMYzczp8CP9A642WZigZEzZKwLX1fOAy7EwDKwp5aTIRChT6Zz
-         esPzpPNOBXFUsYpHyjEhcbQ7QX5Y4WLsW40WkGdLa5atuQWF9vAcWMIcMymS6n4e1RtJ
-         fY/YZlgk043gW8q8tL6l7X5KgHV9oqC1ArhApQg1GOHbtbWchhm+U4AyyK63slO4RfoS
-         FlZQ==
-X-Gm-Message-State: AOJu0YyO+pqLk27y8+6Wu1RQFXbntlTeD0KHjsFrh0SJHN3gJEjMohBv
-	hRpKQdeHrKdEquHOmDGlvih0aR3F5uZpXA==
-X-Google-Smtp-Source: AGHT+IGKi73i9HnNxReizhXpE1YHSBNBF1dUhV6dIHSQP6+eB+HHppL+UNWAjLqPXYP5z3wKGcqcmw==
-X-Received: by 2002:a17:90b:1bc2:b0:281:5550:ce3d with SMTP id oa2-20020a17090b1bc200b002815550ce3dmr10271434pjb.31.1700033822630;
-        Tue, 14 Nov 2023 23:37:02 -0800 (PST)
+        d=1e100.net; s=20230601; t=1700033825; x=1700638625;
+        h=to:in-reply-to:references:message-id:content-transfer-encoding
+         :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=83z/mog91KQUOiISznoZ+Z+yCE4MCSLVm7lqZPjnJtA=;
+        b=tzwDYhwYkch791NPHTLC8hOwkTEUAF/s1PwUoc7zqnGLDKRnYC0tzn04nWdR/1UV1o
+         7Ef5f+fRxgpdt5RqydRscfUKfe8Crw4eaGU0ne8LoXrTykBXgRXxtipuhe6ybeTfgEBo
+         HcNqq8j2lGxv5JmgX1UTtCMca+nIqvNld+idYtbYIRT5em8FtwOZWPrSoo73UAw5KlpT
+         iGzKQkMGxSRme9l8wCHh1ngeyaXphDwg+6T1YUdd4XEQmWnsqQQnO1L3UXUbx9tw4Hko
+         NCXfG2rCic5U9HbRDUYrLhFIhKSGMxMbHJNfPjBpD96zRLmTcmniGb28lMeV04NJ6q4F
+         gKGg==
+X-Gm-Message-State: AOJu0YzfEm/YISU9/9yecToe7noB8I9kIgdZ3/3wLYzzwLFbyHP+1Na1
+	kR5tit3t1gbUzxUBKThUSgN2ExJ6ae7gsg==
+X-Google-Smtp-Source: AGHT+IHFG6PuvnO5LxeZjz0dETznZz9a8XZs/ihINzIUx+0FbwwmQNt7FMf6gLCCHipmVqSHArYlUA==
+X-Received: by 2002:a17:90a:404f:b0:283:1da8:3636 with SMTP id k15-20020a17090a404f00b002831da83636mr10729194pjg.23.1700033824936;
+        Tue, 14 Nov 2023 23:37:04 -0800 (PST)
 Received: from apollo.localdomain ([2601:646:9100:2cb0::62f8])
-        by smtp.gmail.com with ESMTPSA id l23-20020a17090a599700b00274922d4b38sm6312074pji.27.2023.11.14.23.37.02
+        by smtp.gmail.com with ESMTPSA id l23-20020a17090a599700b00274922d4b38sm6312074pji.27.2023.11.14.23.37.04
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Nov 2023 23:37:02 -0800 (PST)
+        Tue, 14 Nov 2023 23:37:04 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Subject: [PATCH 0/3] Delete vte9 recipe
-Date: Tue, 14 Nov 2023 23:36:51 -0800
-Message-Id: <20231114-remove-vte9-v1-0-720f287a1da3@gmail.com>
+Date: Tue, 14 Nov 2023 23:36:54 -0800
+Subject: [PATCH 3/3] libxml++-5.0: Make use of gnomebase bbclass
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIABN1VGUC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI2NDQ0MT3aLU3PyyVN2yklRLXaNUs7TklJQ0A0uTFCWgjoKi1LTMCrBp0bG
- 1tQCHMGYzXQAAAA==
+Message-Id: <20231114-remove-vte9-v1-3-720f287a1da3@gmail.com>
+References: <20231114-remove-vte9-v1-0-720f287a1da3@gmail.com>
+In-Reply-To: <20231114-remove-vte9-v1-0-720f287a1da3@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-Mailer: b4 0.12.4
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 15 Nov 2023 07:37:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106745
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106748
 
-Use gnomebase in libxml++5 recipe
+Simplify the recipe a bit and makes ptests pass.
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
-Khem Raj (3):
-      gnome-console,gnome-terminal: Depend on vte from core layer
-      vte9: Drop recipe
-      libxml++-5.0: Make use of gnomebase bbclass
+ meta-oe/recipes-core/libxml/libxml++-5.0_5.0.1.bb | 13 ++++++-------
+ 1 file changed, 6 insertions(+), 7 deletions(-)
 
- .../gnome-console/gnome-console_45.0.bb            |   2 +-
- .../gnome-terminal/gnome-terminal_3.50.1.bb        |   2 +-
- meta-oe/recipes-core/libxml/libxml++-5.0_5.0.1.bb  |  13 +-
- .../packagegroups/packagegroup-meta-oe.bb          |   1 -
- .../recipes-gnome/vte9/vte9/cve-2012-2738.patch    | 136 ---------------------
- .../vte9/vte9/obsolete_automake_macros.patch       |  14 ---
- meta-oe/recipes-gnome/vte9/vte9_0.74.1.bb          |  30 -----
- 7 files changed, 8 insertions(+), 190 deletions(-)
----
-base-commit: 5f344ed2dd36f43b8d7fa59b774f29b08313e7f4
-change-id: 20231114-remove-vte9-2e6fcddf094d
+diff --git a/meta-oe/recipes-core/libxml/libxml++-5.0_5.0.1.bb b/meta-oe/recipes-core/libxml/libxml++-5.0_5.0.1.bb
+index c0f0b2e130..ada0199476 100644
+--- a/meta-oe/recipes-core/libxml/libxml++-5.0_5.0.1.bb
++++ b/meta-oe/recipes-core/libxml/libxml++-5.0_5.0.1.bb
+@@ -6,15 +6,14 @@ SECTION = "libs"
+ LICENSE = "LGPL-2.1-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34 "
+ 
+-SHRT_VER = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
+-SRC_URI = "${GNOME_MIRROR}/libxml++/${SHRT_VER}/libxml++-${PV}.tar.xz \
+-"
+-SRC_URI[sha256sum] = "15c38307a964fa6199f4da6683a599eb7e63cc89198545b36349b87cf9aa0098"
++DEPENDS = "libxml2 glibmm"
++
++GNOMEBN = "libxml++"
++inherit gnomebase ptest
+ 
+ S = "${WORKDIR}/libxml++-${PV}"
+-DEPENDS = "libxml2 glibmm"
+ 
+-inherit meson pkgconfig ptest
++SRC_URI[archive.sha256sum] = "15c38307a964fa6199f4da6683a599eb7e63cc89198545b36349b87cf9aa0098"
+ 
+ FILES:${PN}-doc += "${datadir}/devhelp"
+-FILES:${PN}-dev += "${libdir}/libxml++-${SHRT_VER}/include/libxml++config.h"
++FILES:${PN}-dev += "${libdir}/libxml++-${@gnome_verdir("${PV}")}/include/libxml++config.h"
 
-Best regards,
 -- 
-Khem Raj <raj.khem@gmail.com>
+2.42.1
 
 
