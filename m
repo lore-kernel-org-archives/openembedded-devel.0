@@ -1,292 +1,437 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C6E2C47075
-	for <webhook@archiver.kernel.org>; Wed, 15 Nov 2023 07:37:08 +0000 (UTC)
-Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com [209.85.215.177])
- by mx.groups.io with SMTP id smtpd.web10.8218.1700033825373726360
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9052DC07548
+	for <webhook@archiver.kernel.org>; Wed, 15 Nov 2023 08:48:08 +0000 (UTC)
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
+ by mx.groups.io with SMTP id smtpd.web10.9100.1700038082401155887
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Nov 2023 23:37:05 -0800
+ Wed, 15 Nov 2023 00:48:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=TxWI7BZr;
- spf=pass (domain: gmail.com, ip: 209.85.215.177, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f177.google.com with SMTP id 41be03b00d2f7-5bd099e3d3cso4117606a12.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Nov 2023 23:37:05 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=mq2zsAtk;
+ spf=pass (domain: gmail.com, ip: 209.85.221.46, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-32faea0fa1fso317704f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 15 Nov 2023 00:48:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1700033824; x=1700638624; darn=lists.openembedded.org;
-        h=to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=bs7BpDg+0hfaJVeP2cztN9Qsco/7s6inB2s4kP2PsEw=;
-        b=TxWI7BZrl6Vm4UFJg/MX9HI4PY+Biq4pzhbxF91sCvzAXR4OR1A3/cVehObICA/UcE
-         nLMOdPnuauoZUtEoJHanNv+5XfSbEC7DpRGdfB0suJ5/XIBsNPnczYE02QG6MH1nu9+A
-         y1xukbCSj3CDbLZ2W8YS/GZPsy3LyTTvz1GeJQeA3G0BVLY2PVIsIRvKYQHNPdf7FBo9
-         im/nq85kzjQ0wRvM/2MbM71gFwCFr4UE0gWMCKo/mj59G384YBmHGFTqbmEr3snbOJn9
-         a9ujcQ+AzGUJpZNuz+hnXEkEG+6/LPot24Sv/05zLZS+brejcgPtpX5xI0h++FLhugQd
-         HKVw==
+        d=gmail.com; s=20230601; t=1700038081; x=1700642881; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=9g6IJgd1I3P46xDUC0WEbmEh7lutEaWr/Bi5UAU+xr8=;
+        b=mq2zsAtk705YD9Lkvojp3m5eC8SLWc5LlaH0hagHvwDaTHhadACOh6/vqJYbwv+6kL
+         NyDjsip6yI5PMDJ6u5dgqsAb87DSb77sKXlFFx22mVknIxHTlrtedNIFCtvWOaG5sBIQ
+         weVzmJiZffwu4xqj0VdK+2FhqiHb1x4NmYYEAz69wyv0f9SIY21yjEvgmDtCSErqqmjf
+         qI9GzR7EFYEg4rDKXiWD35SnYVS1pNW9ImtkwJBNrjLjoDvZ6+vFk4iMvs/J7/SAbpqL
+         A7gZ0Zi60ZAtJVjoxFV1Fp9Z3HBsRGwA+61ZjgE0/3pPWSqUZNLRycsahPifCsMfGFlk
+         /PVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700033824; x=1700638624;
-        h=to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=bs7BpDg+0hfaJVeP2cztN9Qsco/7s6inB2s4kP2PsEw=;
-        b=k35ppwh9QKV/kH/o6UUfI1u1OjwJ9i3A7x5wqaY/0ogDl6v9n8XY72laMcd2IEIR6y
-         VUdwJseB4cI24zErJ7XmOD56DZlZlVpYUnyQJhigFjB7X/U5TfJGLHQ4jjUH5ZZ4+8kk
-         MbO/ctGeJWb/LDduIz5WLKyBFmGWu7CCcYFxsl3PTiJuPqnppv52FpnixCIBRYEVj6u1
-         BZT1QMdhjTTyOFy6Z+NRRnaVsfNJTBAMCoenQ3HYC6ri4cXQ6+v1uUYoV4w5J/hw/vtf
-         RFZyy6L9Yyx0/vo65WElmqgtNlR5pj9flc5gfr0lM/NCF8+Gc5piHh6kZx0hQ767on8A
-         nTrw==
-X-Gm-Message-State: AOJu0YzJSc9Q+C4pIeWJq+/jB64rBzYsBjxrIaaOfpsErHO3D34JVdr7
-	c2o6/K0G1Grejxt7bcSKKw2tiWOHhSZWmQ==
-X-Google-Smtp-Source: AGHT+IE30ZWsIoKjOX7pX2pjt3U7RcmPKW5jxrdULsGFtWjqHT2mGBH+Q55SeBGPA4/KiJr8ubvqJQ==
-X-Received: by 2002:a05:6a21:6d8b:b0:186:b5d2:5da4 with SMTP id wl11-20020a056a216d8b00b00186b5d25da4mr6621923pzb.36.1700033824094;
-        Tue, 14 Nov 2023 23:37:04 -0800 (PST)
-Received: from apollo.localdomain ([2601:646:9100:2cb0::62f8])
-        by smtp.gmail.com with ESMTPSA id l23-20020a17090a599700b00274922d4b38sm6312074pji.27.2023.11.14.23.37.03
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Nov 2023 23:37:03 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 14 Nov 2023 23:36:53 -0800
-Subject: [PATCH 2/3] vte9: Drop recipe
+        d=1e100.net; s=20230601; t=1700038081; x=1700642881;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=9g6IJgd1I3P46xDUC0WEbmEh7lutEaWr/Bi5UAU+xr8=;
+        b=YYvr1uPNqPodEW6rQPhUyajfbsbzpItBlnVr58jWDEi/Aqy4pjY8xrQlYsghcw5LO7
+         U+cV2kCi7TLlfbXjDPM2ns7S03ZAaq/k8pltrsRvSUXOursIiZ1/pTK6Y1DYjD23Yz4u
+         94EEaJX8N/C64StXBbkydtf1l71nndfJT+SayePMRA7L/ktoqpSWOD5sw/3xEPUnzzbf
+         swbPfLVrl6ymXO8gcN4YZn5W3qXxtJs2R7sdOm4zc2ZnD19GqrsQKJOT2aDPOYNDu4nJ
+         yWDjmRzRoe30AYpAPIPgocXBYNyEyoLEwVSYF1/OvK8dNbPXGV5vT0UjQD1UG8mjXl6a
+         cOSw==
+X-Gm-Message-State: AOJu0YyLy7i5Y6IcaV8DCgzHCRRr2ySQCm95kNay7lGOz2O4Vil+aZ5p
+	Oc/1YAE+qtReXa1k1zkXKgjDxXY40U+NMkQHVso=
+X-Google-Smtp-Source: AGHT+IFFosT5nOnrUHF4QcGC64gwqSjSkvTaqFH6FWOrlzK3CDgpFbSk7yGLNo3NbblXZZA6DhrbPn9QJmiCzymt+f0=
+X-Received: by 2002:a5d:6c6d:0:b0:32f:99f4:ebd9 with SMTP id
+ r13-20020a5d6c6d000000b0032f99f4ebd9mr3863756wrz.29.1700038080703; Wed, 15
+ Nov 2023 00:48:00 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20231114-remove-vte9-v1-2-720f287a1da3@gmail.com>
-References: <20231114-remove-vte9-v1-0-720f287a1da3@gmail.com>
-In-Reply-To: <20231114-remove-vte9-v1-0-720f287a1da3@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Mailer: b4 0.12.4
+References: <20231109204747.44268-1-brgl@bgdev.pl>
+In-Reply-To: <20231109204747.44268-1-brgl@bgdev.pl>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 15 Nov 2023 09:47:48 +0100
+Message-ID: <CA+chaQeFe0GG3d5zXtUeEaXHda1Zeiq+pRbxZR27wUMKnwGkMw@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH] python3-gpiod: update to v2.1.3
+To: Bartosz Golaszewski <brgl@bgdev.pl>
+Cc: Khem Raj <raj.khem@gmail.com>, Bruce Ashfield <bruce.ashfield@gmail.com>, 
+	openembedded-devel@lists.openembedded.org, 
+	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Content-Type: multipart/alternative; boundary="000000000000e7b12d060a2cf5ba"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 15 Nov 2023 07:37:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106747
+ <openembedded-devel@lists.openembedded.org>; Wed, 15 Nov 2023 08:48:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106749
 
-The version from core layer is good for meta-gnome as well these days
-packages needing older version are gone.
+--000000000000e7b12d060a2cf5ba
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../packagegroups/packagegroup-meta-oe.bb          |   1 -
- .../recipes-gnome/vte9/vte9/cve-2012-2738.patch    | 136 ---------------------
- .../vte9/vte9/obsolete_automake_macros.patch       |  14 ---
- meta-oe/recipes-gnome/vte9/vte9_0.74.1.bb          |  30 -----
- 4 files changed, 181 deletions(-)
+This seems to be mixing native python headers in target build causing
+do_compile_ptest_base failure in some builds (seen in multilib builds but
+maybe it can be reproduced in regular 32bit target on 64bit build host):
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 0f01356129..1a588eb29c 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -466,7 +466,6 @@ RDEPENDS:packagegroup-meta-oe-gnome ="\
-     gtkmm \
-     ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data", "libpeas", "", d)} \
-     pyxdg \
--    vte9 \
-     gnome-theme-adwaita \
- "
- 
-diff --git a/meta-oe/recipes-gnome/vte9/vte9/cve-2012-2738.patch b/meta-oe/recipes-gnome/vte9/vte9/cve-2012-2738.patch
-deleted file mode 100644
-index 9b9980397a..0000000000
---- a/meta-oe/recipes-gnome/vte9/vte9/cve-2012-2738.patch
-+++ /dev/null
-@@ -1,136 +0,0 @@
--Upstream-Status: Backport
--CVE: CVE-2012-2738
--Signed-off-by: Ross Burton <ross.burton@intel.com>
--
--From e524b0b3bd8fad844ffa73927c199545b892cdbd Mon Sep 17 00:00:00 2001
--From: Christian Persch <chpe@gnome.org>
--Date: Sat, 19 May 2012 19:36:09 +0200
--Subject: [PATCH 1/2] emulation: Limit integer arguments to 65535
--
--To guard against malicious sequences containing excessively big numbers,
--limit all parsed numbers to 16 bit range. Doing this here in the parsing
--routine is a catch-all guard; this doesn't preclude enforcing
--more stringent limits in the handlers themselves.
--
--https://bugzilla.gnome.org/show_bug.cgi?id=676090
-----
-- src/table.c  | 2 +-
-- src/vteseq.c | 2 +-
-- 2 files changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/src/table.c b/src/table.c
--index 140e8c8..85cf631 100644
----- a/src/table.c
--+++ b/src/table.c
--@@ -550,7 +550,7 @@ _vte_table_extract_numbers(GValueArray **array,
-- 		if (G_UNLIKELY (*array == NULL)) {
-- 			*array = g_value_array_new(1);
-- 		}
---		g_value_set_long(&value, total);
--+		g_value_set_long(&value, CLAMP (total, 0, G_MAXUSHORT));
-- 		g_value_array_append(*array, &value);
-- 	} while (i++ < arginfo->length);
-- 	g_value_unset(&value);
--diff --git a/src/vteseq.c b/src/vteseq.c
--index 7ef4c8c..10991db 100644
----- a/src/vteseq.c
--+++ b/src/vteseq.c
--@@ -557,7 +557,7 @@ vte_sequence_handler_multiple(VteTerminal *terminal,
--                               GValueArray *params,
--                               VteTerminalSequenceHandler handler)
-- {
---        vte_sequence_handler_multiple_limited(terminal, params, handler, G_MAXLONG);
--+        vte_sequence_handler_multiple_limited(terminal, params, handler, G_MAXUSHORT);
-- }
-- 
-- static void
---- 
--2.4.9 (Apple Git-60)
--
--
--From cf1ad453a8def873c49cf6d88162593402f32bb2 Mon Sep 17 00:00:00 2001
--From: Christian Persch <chpe@gnome.org>
--Date: Sat, 19 May 2012 20:04:12 +0200
--Subject: [PATCH 2/2] emulation: Limit repetitions
--
--Don't allow malicious sequences to cause excessive repetitions.
--
--https://bugzilla.gnome.org/show_bug.cgi?id=676090
-----
-- src/vteseq.c | 25 ++++++++++++++++++-------
-- 1 file changed, 18 insertions(+), 7 deletions(-)
--
--diff --git a/src/vteseq.c b/src/vteseq.c
--index 10991db..209522f 100644
----- a/src/vteseq.c
--+++ b/src/vteseq.c
--@@ -1392,7 +1392,7 @@ vte_sequence_handler_dc (VteTerminal *terminal, GValueArray *params)
-- static void
-- vte_sequence_handler_DC (VteTerminal *terminal, GValueArray *params)
-- {
---	vte_sequence_handler_multiple(terminal, params, vte_sequence_handler_dc);
--+	vte_sequence_handler_multiple_r(terminal, params, vte_sequence_handler_dc);
-- }
-- 
-- /* Delete a line at the current cursor position. */
--@@ -1785,7 +1785,7 @@ vte_sequence_handler_reverse_index (VteTerminal *terminal, GValueArray *params)
-- static void
-- vte_sequence_handler_RI (VteTerminal *terminal, GValueArray *params)
-- {
---	vte_sequence_handler_multiple(terminal, params, vte_sequence_handler_nd);
--+	vte_sequence_handler_multiple_r(terminal, params, vte_sequence_handler_nd);
-- }
-- 
-- /* Save cursor (position). */
--@@ -2777,8 +2777,7 @@ vte_sequence_handler_insert_lines (VteTerminal *terminal, GValueArray *params)
-- {
-- 	GValue *value;
-- 	VteScreen *screen;
---	long param, end, row;
---	int i;
--+	long param, end, row, i, limit;
-- 	screen = terminal->pvt->screen;
-- 	/* The default is one. */
-- 	param = 1;
--@@ -2796,7 +2795,13 @@ vte_sequence_handler_insert_lines (VteTerminal *terminal, GValueArray *params)
-- 	} else {
-- 		end = screen->insert_delta + terminal->row_count - 1;
-- 	}
---	/* Insert the new lines at the cursor. */
--+
--+	/* Only allow to insert as many lines as there are between this row
--+         * and the end of the scrolling region. See bug #676090.
--+         */
--+        limit = end - row + 1;
--+        param = MIN (param, limit);
--+
-- 	for (i = 0; i < param; i++) {
-- 		/* Clear a line off the end of the region and add one to the
-- 		 * top of the region. */
--@@ -2817,8 +2822,7 @@ vte_sequence_handler_delete_lines (VteTerminal *terminal, GValueArray *params)
-- {
-- 	GValue *value;
-- 	VteScreen *screen;
---	long param, end, row;
---	int i;
--+	long param, end, row, i, limit;
-- 
-- 	screen = terminal->pvt->screen;
-- 	/* The default is one. */
--@@ -2837,6 +2841,13 @@ vte_sequence_handler_delete_lines (VteTerminal *terminal, GValueArray *params)
-- 	} else {
-- 		end = screen->insert_delta + terminal->row_count - 1;
-- 	}
--+
--+        /* Only allow to delete as many lines as there are between this row
--+         * and the end of the scrolling region. See bug #676090.
--+         */
--+        limit = end - row + 1;
--+        param = MIN (param, limit);
--+
-- 	/* Clear them from below the current cursor. */
-- 	for (i = 0; i < param; i++) {
-- 		/* Insert a line at the end of the region and remove one from
---- 
--2.4.9 (Apple Git-60)
--
-diff --git a/meta-oe/recipes-gnome/vte9/vte9/obsolete_automake_macros.patch b/meta-oe/recipes-gnome/vte9/vte9/obsolete_automake_macros.patch
-deleted file mode 100644
-index 6763d37540..0000000000
---- a/meta-oe/recipes-gnome/vte9/vte9/obsolete_automake_macros.patch
-+++ /dev/null
-@@ -1,14 +0,0 @@
--Upstream-Status: Submitted [https://bugzilla.gnome.org/show_bug.cgi?id=691545]
--
--Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
--diff -Nurd vte-0.28.2/gnome-pty-helper/configure.in vte-0.28.2/gnome-pty-helper/configure.in
----- vte-0.28.2/gnome-pty-helper/configure.in	2010-07-15 20:08:44.000000000 +0300
--+++ vte-0.28.2/gnome-pty-helper/configure.in	2013-01-11 14:50:34.971027440 +0200
--@@ -8,7 +8,6 @@
-- AC_ISC_POSIX
-- AC_PROG_CC
-- AC_STDC_HEADERS
---AM_PROG_CC_STDC
--
-- if test -z "$enable_maintainer_mode"; then
--   enable_maintainer_mode=yes
-diff --git a/meta-oe/recipes-gnome/vte9/vte9_0.74.1.bb b/meta-oe/recipes-gnome/vte9/vte9_0.74.1.bb
-deleted file mode 100644
-index a10b917394..0000000000
---- a/meta-oe/recipes-gnome/vte9/vte9_0.74.1.bb
-+++ /dev/null
-@@ -1,30 +0,0 @@
--SUMMARY = "Virtual terminal emulator GTK+ widget library"
--BUGTRACKER = "https://bugzilla.gnome.org/buglist.cgi?product=vte"
--LICENSE = "LGPL-3.0-only"
--LIC_FILES_CHKSUM = "file://COPYING.LGPL3;md5=b52f2d57d10c4f7ee67a7eb9615d5d24"
--
--DEPENDS = "glib-2.0-native glib-2.0 gnutls gtk+3 gtk4 intltool-native gnome-common-native ncurses"
--
--# help gnomebase get the SRC_URI correct
--GNOMEBN = "vte"
--S = "${WORKDIR}/vte-${PV}"
--
--SRC_URI[archive.sha256sum] = "2328c3f1c998350a18e0e513348e9fc581d57ea4e7b89aedf11e0e3c65042b4f"
--
--inherit gnomebase gi-docgen gobject-introspection features_check systemd upstream-version-is-even vala
--ANY_OF_DISTRO_FEATURES = "${GTK2DISTROFEATURES}"
--GIR_MESON_OPTION = "gir"
--GIDOCGEN_MESON_OPTION = "docs"
--
--PACKAGECONFIG ?= "gnutls ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
--PACKAGECONFIG[gnutls] = "-Dgnutls=true,-Dgnutls=false,gnutls"
--PACKAGECONFIG[fribidi] = "-Dfribidi=true,-Dfribidi=false,fribidi"
--PACKAGECONFIG[systemd] = "-D_systemd=true,-D_systemd=false,"
--
--CFLAGS += "-D_GNU_SOURCE"
--
--PACKAGES =+ "libvte9 vte9-termcap"
--FILES:libvte9 = "${libdir}/*.so.* ${libexecdir}/gnome-pty-helper ${datadir}/glade ${systemd_user_unitdir}"
--FILES:vte9-termcap = "${datadir}/vte/termcap-0.0"
--
--RDEPENDS:libvte = "vte-termcap"
+building 'tests.gpiosim._ext' extension
+creating /tmp/libgpiod-5k0x8gv3/tests
+creating /tmp/libgpiod-5k0x8gv3/tests/gpiosim
+ccache arm-oemllib32-linux-gnueabi-gcc -mthumb -mfpu=3Dneon
+-mfloat-abi=3Dsoftfp -mcpu=3Dcortex-a9 -mtune=3Dcortex-a9
+-fstack-protector-strong -O2 -D_FORTIFY_SOURCE=3D2 -Wformat -Wformat-securi=
+ty
+-Werror=3Dformat-security -Werror=3Dreturn-type -funwind-tables -D_TIME_BIT=
+S=3D64
+-D_FILE_OFFSET_BITS=3D64
+--sysroot=3DTOPDIR/BUILD/work/mach-oemllib32-linux-gnueabi/lib32-python3-gp=
+iod/2.1.3/lib32-recipe-sysroot
+-DNDEBUG -g -O3 -Wall
+-isystemTOPDIR/BUILD/work/mach-oemllib32-linux-gnueabi/lib32-python3-gpiod/=
+2.1.3/recipe-sysroot-native/usr/include
+-O2 -pipe
+-isystemTOPDIR/BUILD/work/mach-oemllib32-linux-gnueabi/lib32-python3-gpiod/=
+2.1.3/recipe-sysroot-native/usr/include
+-O2 -pipe -O2 -pipe -g -feliminate-unused-debug-types -fcanon-prefix-map
+-fmacro-prefix-map=3DTOPDIR/BUILD/work/mach-oemllib32-linux-gnueabi/lib32-p=
+ython3-gpiod/2.1.3/gpiod-2.1.3=3D/usr/src/debug/lib32-python3-gpiod/2.1.3-r=
+0
+-fdebug-prefix-map=3DTOPDIR/BUILD/work/mach-oemllib32-linux-gnueabi/lib32-p=
+ython3-gpiod/2.1.3/gpiod-2.1.3=3D/usr/src/debug/lib32-python3-gpiod/2.1.3-r=
+0
+-fmacro-prefix-map=3DTOPDIR/BUILD/work/mach-oemllib32-linux-gnueabi/lib32-p=
+ython3-gpiod/2.1.3/gpiod-2.1.3=3D/usr/src/debug/lib32-python3-gpiod/2.1.3-r=
+0
+-fdebug-prefix-map=3DTOPDIR/BUILD/work/mach-oemllib32-linux-gnueabi/lib32-p=
+ython3-gpiod/2.1.3/gpiod-2.1.3=3D/usr/src/debug/lib32-python3-gpiod/2.1.3-r=
+0
+-fdebug-prefix-map=3DTOPDIR/BUILD/work/mach-oemllib32-linux-gnueabi/lib32-p=
+ython3-gpiod/2.1.3/lib32-recipe-sysroot=3D
+-fmacro-prefix-map=3DTOPDIR/BUILD/work/mach-oemllib32-linux-gnueabi/lib32-p=
+ython3-gpiod/2.1.3/lib32-recipe-sysroot=3D
+-fdebug-prefix-map=3DTOPDIR/BUILD/work/mach-oemllib32-linux-gnueabi/lib32-p=
+ython3-gpiod/2.1.3/recipe-sysroot-native=3D
+-fPIC -D_GNU_SOURCE=3D1 -I../../include -I../../tests/gpiosim
+-ITOPDIR/BUILD/work/mach-oemllib32-linux-gnueabi/lib32-python3-gpiod/2.1.3/=
+recipe-sysroot-native/usr/include/python3.11
+-c tests/gpiosim/ext.c -o /tmp/libgpiod-5k0x8gv3/tests/gpiosim/ext.o -Wall
+-Wextra
+In file included from
+TOPDIR/BUILD/work/mach-oemllib32-linux-gnueabi/lib32-python3-gpiod/2.1.3/re=
+cipe-sysroot-native/usr/include/python3.11/Python.h:38,
+                 from tests/gpiosim/ext.c:5:
+TOPDIR/BUILD/work/mach-oemllib32-linux-gnueabi/lib32-python3-gpiod/2.1.3/re=
+cipe-sysroot-native/usr/include/python3.11/pyport.h:601:2:
+error: #error "LONG_BIT definition appears wrong for platform (bad
+gcc/glibc config?)."
+  601 | #error "LONG_BIT definition appears wrong for platform (bad
+gcc/glibc config?)."
+      |  ^~~~~
 
--- 
-2.42.1
+On Thu, Nov 9, 2023 at 9:47=E2=80=AFPM Bartosz Golaszewski <brgl@bgdev.pl> =
+wrote:
 
+> From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+>
+> The python bindings for libgpiod have undergone several significant
+> changes that make them easier to use for users of pip. The libgpiod
+> sources are now vendored with the python3-gpiod as the biggest complaint
+> by far was the fact that if the system doesn't provide the correct
+> version of libgpiod, the python bindings won't build.
+>
+> This is however irrelevant for the meta-python recipe as we use the
+> provided switch to keep linking against the libgpiod provided by
+> meta-openembedded.
+>
+> We have changed the way the tests are built, they are now generated by a
+> separate build script and no longer by setup.py. The package now
+> correctly build with the preferred pep517 method so change the inherited
+> classes.
+>
+> We have also gained control over the gpiod module on pypi (which
+> previously hosted a pure python GPIO library) so the location of the
+> sources has changed.
+>
+> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+> ---
+>  ...-gpiod_2.0.1.bb =3D> python3-gpiod_2.1.3.bb} | 25 ++++++++++++-------
+>  1 file changed, 16 insertions(+), 9 deletions(-)
+>  rename meta-python/recipes-devtools/python/{python3-gpiod_2.0.1.bb =3D>
+> python3-gpiod_2.1.3.bb} (54%)
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-gpiod_2.0.1.bb
+> b/meta-python/recipes-devtools/python/python3-gpiod_2.1.3.bb
+> similarity index 54%
+> rename from meta-python/recipes-devtools/python/python3-gpiod_2.0.1.bb
+> rename to meta-python/recipes-devtools/python/python3-gpiod_2.1.3.bb
+> index ea8c18562..ef2f01fd4 100644
+> --- a/meta-python/recipes-devtools/python/python3-gpiod_2.0.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-gpiod_2.1.3.bb
+> @@ -3,17 +3,18 @@ SUMMARY =3D "Python bindings for libgpiod."
+>  LICENSE =3D "GPL-2.0-or-later & LGPL-2.1-or-later & CC-BY-SA-4.0"
+>  # The actual license files live in the upstream libgpiod from which the
+> pypi
+>  # package is spun out.
+> -LIC_FILES_CHKSUM =3D
+> "file://setup.py;beginline=3D57;endline=3D57;md5=3D120334ed83ec0cb248605e=
+775bd13b87"
+> +LIC_FILES_CHKSUM =3D
+> "file://setup.py;beginline=3D237;endline=3D237;md5=3Df5ddb56912b7f20bf94a=
+a4d1bdcd3533"
+>
+>  SRC_URI +=3D "file://run-ptest"
+>
+> -SRC_URI[sha256sum] =3D
+> "d5c0f9502e97e7359b9dd601e29f15d668983ce50f5c13323f3302845f790fa6"
+> +SRC_URI[sha256sum] =3D
+> "a33193d6cab79d252329f71666a35a3668e04f1f82bf9b93ee2c9ae852398b20"
+>
+> -inherit setuptools3 ptest pypi
+> +inherit setuptools3-base python_pep517 ptest pypi
+>
+> -PYPI_PACKAGE =3D "libgpiod"
+> -
+> -DEPENDS +=3D "libgpiod"
+> +DEPENDS +=3D " \
+> +    libgpiod \
+> +    python3-setuptools-native \
+> +"
+>  RDEPENDS:${PN} +=3D " \
+>      libgpiod (>=3D 2.0) \
+>      python3-datetime \
+> @@ -24,14 +25,20 @@ RDEPENDS:${PN}-ptest +=3D " \
+>      python3-setuptools \
+>  "
+>
+> -export GPIOD_WITH_TESTS =3D "${@bb.utils.contains("PTEST_ENABLED", "1",
+> "1", "0", d)}"
+> +export LINK_SYSTEM_LIBGPIOD =3D "1"
+> +
+> +do_compile_ptest() {
+> +    ${STAGING_BINDIR_NATIVE}/python3-native/python3 build_tests.py
+> +}
+>
+>  do_install_ptest() {
+>      install -d ${D}${PTEST_PATH}/gpiod-test/gpiosim
+>      install -d ${D}${PTEST_PATH}/gpiod-test/procname
+>      install -m 0644 ${S}/tests/*.py ${D}${PTEST_PATH}/gpiod-test/
+> -    install -m 0644 ${B}/build/lib*/tests/gpiosim/_ext*
+> ${D}${PTEST_PATH}/gpiod-test/gpiosim
+> +    install -m 0644 ${B}/tests/gpiosim/_ext*
+> ${D}${PTEST_PATH}/gpiod-test/gpiosim
+>      install -m 0644 ${S}/tests/gpiosim/*.py
+> ${D}${PTEST_PATH}/gpiod-test/gpiosim
+> -    install -m 0644 ${B}/build/lib*/tests/procname/_ext*
+> ${D}${PTEST_PATH}/gpiod-test/procname
+> +    install -m 0644 ${B}/tests/procname/_ext*
+> ${D}${PTEST_PATH}/gpiod-test/procname
+>      install -m 0644 ${S}/tests/procname/*.py
+> ${D}${PTEST_PATH}/gpiod-test/procname
+>  }
+> +
+> +INSANE_SKIP:${PN}-ptest +=3D "buildpaths"
+> --
+> 2.40.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#106520):
+> https://lists.openembedded.org/g/openembedded-devel/message/106520
+> Mute This Topic: https://lists.openembedded.org/mt/102494202/3617156
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> martin.jansa@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--000000000000e7b12d060a2cf5ba
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">This seems to be mixing native python headers in target bu=
+ild causing do_compile_ptest_base failure in some builds (seen in multilib =
+builds but maybe it can be reproduced in regular 32bit target on 64bit buil=
+d host):<div><br></div><div>building &#39;tests.gpiosim._ext&#39; extension=
+<br>creating /tmp/libgpiod-5k0x8gv3/tests<br>creating /tmp/libgpiod-5k0x8gv=
+3/tests/gpiosim<br>ccache arm-oemllib32-linux-gnueabi-gcc -mthumb -mfpu=3Dn=
+eon -mfloat-abi=3Dsoftfp -mcpu=3Dcortex-a9 -mtune=3Dcortex-a9 -fstack-prote=
+ctor-strong -O2 -D_FORTIFY_SOURCE=3D2 -Wformat -Wformat-security -Werror=3D=
+format-security -Werror=3Dreturn-type -funwind-tables -D_TIME_BITS=3D64 -D_=
+FILE_OFFSET_BITS=3D64 --sysroot=3DTOPDIR/BUILD/work/mach-oemllib32-linux-gn=
+ueabi/lib32-python3-gpiod/2.1.3/lib32-recipe-sysroot -DNDEBUG -g -O3 -Wall =
+-isystemTOPDIR/BUILD/work/mach-oemllib32-linux-gnueabi/lib32-python3-gpiod/=
+2.1.3/recipe-sysroot-native/usr/include -O2 -pipe -isystemTOPDIR/BUILD/work=
+/mach-oemllib32-linux-gnueabi/lib32-python3-gpiod/2.1.3/recipe-sysroot-nati=
+ve/usr/include -O2 -pipe -O2 -pipe -g -feliminate-unused-debug-types -fcano=
+n-prefix-map -fmacro-prefix-map=3DTOPDIR/BUILD/work/mach-oemllib32-linux-gn=
+ueabi/lib32-python3-gpiod/2.1.3/gpiod-2.1.3=3D/usr/src/debug/lib32-python3-=
+gpiod/2.1.3-r0 -fdebug-prefix-map=3DTOPDIR/BUILD/work/mach-oemllib32-linux-=
+gnueabi/lib32-python3-gpiod/2.1.3/gpiod-2.1.3=3D/usr/src/debug/lib32-python=
+3-gpiod/2.1.3-r0 -fmacro-prefix-map=3DTOPDIR/BUILD/work/mach-oemllib32-linu=
+x-gnueabi/lib32-python3-gpiod/2.1.3/gpiod-2.1.3=3D/usr/src/debug/lib32-pyth=
+on3-gpiod/2.1.3-r0 -fdebug-prefix-map=3DTOPDIR/BUILD/work/mach-oemllib32-li=
+nux-gnueabi/lib32-python3-gpiod/2.1.3/gpiod-2.1.3=3D/usr/src/debug/lib32-py=
+thon3-gpiod/2.1.3-r0 -fdebug-prefix-map=3DTOPDIR/BUILD/work/mach-oemllib32-=
+linux-gnueabi/lib32-python3-gpiod/2.1.3/lib32-recipe-sysroot=3D -fmacro-pre=
+fix-map=3DTOPDIR/BUILD/work/mach-oemllib32-linux-gnueabi/lib32-python3-gpio=
+d/2.1.3/lib32-recipe-sysroot=3D -fdebug-prefix-map=3DTOPDIR/BUILD/work/mach=
+-oemllib32-linux-gnueabi/lib32-python3-gpiod/2.1.3/recipe-sysroot-native=3D=
+ -fPIC -D_GNU_SOURCE=3D1 -I../../include -I../../tests/gpiosim -ITOPDIR/BUI=
+LD/work/mach-oemllib32-linux-gnueabi/lib32-python3-gpiod/2.1.3/recipe-sysro=
+ot-native/usr/include/python3.11 -c tests/gpiosim/ext.c -o /tmp/libgpiod-5k=
+0x8gv3/tests/gpiosim/ext.o -Wall -Wextra<br>In file included from TOPDIR/BU=
+ILD/work/mach-oemllib32-linux-gnueabi/lib32-python3-gpiod/2.1.3/recipe-sysr=
+oot-native/usr/include/python3.11/Python.h:38,<br>=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0from tests/gpiosim/ext.c:5:<br>TOPDIR=
+/BUILD/work/mach-oemllib32-linux-gnueabi/lib32-python3-gpiod/2.1.3/recipe-s=
+ysroot-native/usr/include/python3.11/pyport.h:601:2: error: #error &quot;LO=
+NG_BIT definition appears wrong for platform (bad gcc/glibc config?).&quot;=
+<br>=C2=A0 601 | #error &quot;LONG_BIT definition appears wrong for platfor=
+m (bad gcc/glibc config?).&quot;<br>=C2=A0 =C2=A0 =C2=A0 | =C2=A0^~~~~<br><=
+/div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_a=
+ttr">On Thu, Nov 9, 2023 at 9:47=E2=80=AFPM Bartosz Golaszewski &lt;<a href=
+=3D"mailto:brgl@bgdev.pl">brgl@bgdev.pl</a>&gt; wrote:<br></div><blockquote=
+ class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px so=
+lid rgb(204,204,204);padding-left:1ex">From: Bartosz Golaszewski &lt;<a hre=
+f=3D"mailto:bartosz.golaszewski@linaro.org" target=3D"_blank">bartosz.golas=
+zewski@linaro.org</a>&gt;<br>
+<br>
+The python bindings for libgpiod have undergone several significant<br>
+changes that make them easier to use for users of pip. The libgpiod<br>
+sources are now vendored with the python3-gpiod as the biggest complaint<br=
+>
+by far was the fact that if the system doesn&#39;t provide the correct<br>
+version of libgpiod, the python bindings won&#39;t build.<br>
+<br>
+This is however irrelevant for the meta-python recipe as we use the<br>
+provided switch to keep linking against the libgpiod provided by<br>
+meta-openembedded.<br>
+<br>
+We have changed the way the tests are built, they are now generated by a<br=
+>
+separate build script and no longer by setup.py. The package now<br>
+correctly build with the preferred pep517 method so change the inherited<br=
+>
+classes.<br>
+<br>
+We have also gained control over the gpiod module on pypi (which<br>
+previously hosted a pure python GPIO library) so the location of the<br>
+sources has changed.<br>
+<br>
+Signed-off-by: Bartosz Golaszewski &lt;<a href=3D"mailto:bartosz.golaszewsk=
+i@linaro.org" target=3D"_blank">bartosz.golaszewski@linaro.org</a>&gt;<br>
+---<br>
+=C2=A0...-<a href=3D"http://gpiod_2.0.1.bb" rel=3D"noreferrer" target=3D"_b=
+lank">gpiod_2.0.1.bb</a> =3D&gt; <a href=3D"http://python3-gpiod_2.1.3.bb" =
+rel=3D"noreferrer" target=3D"_blank">python3-gpiod_2.1.3.bb</a>} | 25 +++++=
++++++++-------<br>
+=C2=A01 file changed, 16 insertions(+), 9 deletions(-)<br>
+=C2=A0rename meta-python/recipes-devtools/python/{<a href=3D"http://python3=
+-gpiod_2.0.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-gpiod_2.0.1.b=
+b</a> =3D&gt; <a href=3D"http://python3-gpiod_2.1.3.bb" rel=3D"noreferrer" =
+target=3D"_blank">python3-gpiod_2.1.3.bb</a>} (54%)<br>
+<br>
+diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
+gpiod_2.0.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-gpiod_2.0.1.bb=
+</a> b/meta-python/recipes-devtools/python/<a href=3D"http://python3-gpiod_=
+2.1.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-gpiod_2.1.3.bb</a><b=
+r>
+similarity index 54%<br>
+rename from meta-python/recipes-devtools/python/<a href=3D"http://python3-g=
+piod_2.0.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-gpiod_2.0.1.bb<=
+/a><br>
+rename to meta-python/recipes-devtools/python/<a href=3D"http://python3-gpi=
+od_2.1.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-gpiod_2.1.3.bb</a=
+><br>
+index ea8c18562..ef2f01fd4 100644<br>
+--- a/meta-python/recipes-devtools/python/<a href=3D"http://python3-gpiod_2=
+.0.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-gpiod_2.0.1.bb</a><br=
+>
++++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-gpiod_2=
+.1.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-gpiod_2.1.3.bb</a><br=
+>
+@@ -3,17 +3,18 @@ SUMMARY =3D &quot;Python bindings for libgpiod.&quot;<br>
+=C2=A0LICENSE =3D &quot;GPL-2.0-or-later &amp; LGPL-2.1-or-later &amp; CC-B=
+Y-SA-4.0&quot;<br>
+=C2=A0# The actual license files live in the upstream libgpiod from which t=
+he pypi<br>
+=C2=A0# package is spun out.<br>
+-LIC_FILES_CHKSUM =3D &quot;file://setup.py;beginline=3D57;endline=3D57;md5=
+=3D120334ed83ec0cb248605e775bd13b87&quot;<br>
++LIC_FILES_CHKSUM =3D &quot;file://setup.py;beginline=3D237;endline=3D237;m=
+d5=3Df5ddb56912b7f20bf94aa4d1bdcd3533&quot;<br>
+<br>
+=C2=A0SRC_URI +=3D &quot;file://run-ptest&quot;<br>
+<br>
+-SRC_URI[sha256sum] =3D &quot;d5c0f9502e97e7359b9dd601e29f15d668983ce50f5c1=
+3323f3302845f790fa6&quot;<br>
++SRC_URI[sha256sum] =3D &quot;a33193d6cab79d252329f71666a35a3668e04f1f82bf9=
+b93ee2c9ae852398b20&quot;<br>
+<br>
+-inherit setuptools3 ptest pypi<br>
++inherit setuptools3-base python_pep517 ptest pypi<br>
+<br>
+-PYPI_PACKAGE =3D &quot;libgpiod&quot;<br>
+-<br>
+-DEPENDS +=3D &quot;libgpiod&quot;<br>
++DEPENDS +=3D &quot; \<br>
++=C2=A0 =C2=A0 libgpiod \<br>
++=C2=A0 =C2=A0 python3-setuptools-native \<br>
++&quot;<br>
+=C2=A0RDEPENDS:${PN} +=3D &quot; \<br>
+=C2=A0 =C2=A0 =C2=A0libgpiod (&gt;=3D 2.0) \<br>
+=C2=A0 =C2=A0 =C2=A0python3-datetime \<br>
+@@ -24,14 +25,20 @@ RDEPENDS:${PN}-ptest +=3D &quot; \<br>
+=C2=A0 =C2=A0 =C2=A0python3-setuptools \<br>
+=C2=A0&quot;<br>
+<br>
+-export GPIOD_WITH_TESTS =3D &quot;${@bb.utils.contains(&quot;PTEST_ENABLED=
+&quot;, &quot;1&quot;, &quot;1&quot;, &quot;0&quot;, d)}&quot;<br>
++export LINK_SYSTEM_LIBGPIOD =3D &quot;1&quot;<br>
++<br>
++do_compile_ptest() {<br>
++=C2=A0 =C2=A0 ${STAGING_BINDIR_NATIVE}/python3-native/python3 build_tests.=
+py<br>
++}<br>
+<br>
+=C2=A0do_install_ptest() {<br>
+=C2=A0 =C2=A0 =C2=A0install -d ${D}${PTEST_PATH}/gpiod-test/gpiosim<br>
+=C2=A0 =C2=A0 =C2=A0install -d ${D}${PTEST_PATH}/gpiod-test/procname<br>
+=C2=A0 =C2=A0 =C2=A0install -m 0644 ${S}/tests/*.py ${D}${PTEST_PATH}/gpiod=
+-test/<br>
+-=C2=A0 =C2=A0 install -m 0644 ${B}/build/lib*/tests/gpiosim/_ext* ${D}${PT=
+EST_PATH}/gpiod-test/gpiosim<br>
++=C2=A0 =C2=A0 install -m 0644 ${B}/tests/gpiosim/_ext* ${D}${PTEST_PATH}/g=
+piod-test/gpiosim<br>
+=C2=A0 =C2=A0 =C2=A0install -m 0644 ${S}/tests/gpiosim/*.py ${D}${PTEST_PAT=
+H}/gpiod-test/gpiosim<br>
+-=C2=A0 =C2=A0 install -m 0644 ${B}/build/lib*/tests/procname/_ext* ${D}${P=
+TEST_PATH}/gpiod-test/procname<br>
++=C2=A0 =C2=A0 install -m 0644 ${B}/tests/procname/_ext* ${D}${PTEST_PATH}/=
+gpiod-test/procname<br>
+=C2=A0 =C2=A0 =C2=A0install -m 0644 ${S}/tests/procname/*.py ${D}${PTEST_PA=
+TH}/gpiod-test/procname<br>
+=C2=A0}<br>
++<br>
++INSANE_SKIP:${PN}-ptest +=3D &quot;buildpaths&quot;<br>
+-- <br>
+2.40.1<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#106520): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/106520" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/106520</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/102494202/361=
+7156" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/102494202/3617156</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:martin.jansa@gmail.com" =
+target=3D"_blank">martin.jansa@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div>
+
+--000000000000e7b12d060a2cf5ba--
 
