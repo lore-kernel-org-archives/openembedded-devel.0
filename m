@@ -1,129 +1,150 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E7143C47076
-	for <webhook@archiver.kernel.org>; Wed, 15 Nov 2023 07:19:47 +0000 (UTC)
-Received: from mail-ot1-f47.google.com (mail-ot1-f47.google.com [209.85.210.47])
- by mx.groups.io with SMTP id smtpd.web11.8082.1700032780531938724
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 08659C07548
+	for <webhook@archiver.kernel.org>; Wed, 15 Nov 2023 07:22:08 +0000 (UTC)
+Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
+ by mx.groups.io with SMTP id smtpd.web11.8105.1700032926416903912
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 Nov 2023 23:19:40 -0800
+ Tue, 14 Nov 2023 23:22:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=UQQ2tSOL;
- spf=pass (domain: gmail.com, ip: 209.85.210.47, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f47.google.com with SMTP id 46e09a7af769-6ce2de8da87so3971080a34.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Nov 2023 23:19:40 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=nEiocTrr;
+ spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-9bf86b77a2aso947782766b.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 14 Nov 2023 23:22:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1700032779; x=1700637579; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:date:message-id:subject
-         :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=+OSHLHdWy0D0QkAxfe+j0IraCxnFYbRaXzJxva3Yk/Y=;
-        b=UQQ2tSOL0yjsCu1FfI+gHNGIJ4AM445sA9ZB3ymXspBswFOjOK/GCb5P5TlbxBiBsL
-         f9Br5DolkaI2Y9mLkXm/44XHC9OYH2GEUZun8IX6hDKOz0U2f+lg6hb16PMdTbdiDPWV
-         EZmZXmrSSTxMj4PURLmoCdGF71/0FvC88Ds4bV9LDeoxodRPsc+TUf+NulBRXfTFYBUY
-         HB7Z+TJKwKFIV/TozlQTDvj5H5zslxpn4fQYuK1NZZpVK+F5URo/7boRJqSMGikq0I3n
-         HU+bAtHrBfgR5KOvWPwAlSWJTOPrfgd8MnN0AxPuzf5LpXENvaTzghHx5jTyyOV6HOJr
-         +o5A==
+        d=gmail.com; s=20230601; t=1700032924; x=1700637724; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=YqA0UaKj2beH/Tkd55qufKzvzLg/1kNUheq5xjnHBPI=;
+        b=nEiocTrrcjjwvuMB/zrVqPBqS69l3+BuOnxaJlGspSniBgGigBdi5/xCrGgolAIpBv
+         hZR4pyQUzm5JNCgxmbX7OZQBScr31T92tZoD6smkPLxuFgmJcBeuL5dMyOMWzTkJY64a
+         xScVlVur1VBIkoTNMYWU9beTsry9ml/1f9eyb+UspnueU+TkCWh3mJt+5MES/wVohBqA
+         JR4Pvdo5Zv+ru3kq+zloJPi7/0Q+pX/UAs/EnEAAXmxLnAc1GQjKXrGZ9xO0FP4ngHlf
+         mX65jCgV7h32FZcwXDiJfp8fm+pz48KRxzBGKQntpdfM45c58nrTvXCLbprUHSk+Gghx
+         8wgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700032779; x=1700637579;
-        h=content-transfer-encoding:mime-version:date:message-id:subject
-         :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=+OSHLHdWy0D0QkAxfe+j0IraCxnFYbRaXzJxva3Yk/Y=;
-        b=cUu5Ah4mWc8jClqZx17PyaLKXn1TiZ5IOOEsB/lYmHURzZCVNCOPxYHPrFZgzCQDxM
-         lXxejtoWLER7/m3tSCAdTYM65gCnj5qxOkhNHWvowpomYycFXQE1kO2ovsx6b/xTDFI6
-         shQjiM4CccAdIOeV+IPswNt0kjQRQa7xlXW88SKeeViWAsdEsu/SHOOd5DYvRcTrw/XS
-         VLjFVg7ZbwC3ZeXsydN1ZvRJJ7USZzL+Z46lC0DrTqSko22NTzp5gBc3nnHOs7D2EwHG
-         wOhsDRXIT8TFIMIk3GXh/f8xnkcoNeCpQBaRYNCMzZetlgVB6iiAbIg/d619C29gJSpk
-         3Gug==
-X-Gm-Message-State: AOJu0YztGYb3OZHnQpphCga3vZYi2oJsFEJPhrw1gWPpx19BuqLnX37v
-	/p9sJ8OGu6ZWL2d5GYebBXqAEy05YCAxIw==
-X-Google-Smtp-Source: AGHT+IE4oA9zWhGheZiqPO5ui0d6yp5WCnfXQ6bKl5eSwI9f5rjz/6ba1b+7WQEQAWIHhV+RC6TAAg==
-X-Received: by 2002:a05:6870:4994:b0:1e9:c224:bb91 with SMTP id ho20-20020a056870499400b001e9c224bb91mr15490451oab.38.1700032779371;
-        Tue, 14 Nov 2023 23:19:39 -0800 (PST)
-Received: from apollo.localdomain ([2601:646:9100:2cb0::62f8])
-        by smtp.gmail.com with ESMTPSA id e3-20020aa78c43000000b006c4d4d5a197sm2310492pfd.171.2023.11.14.23.19.38
+        d=1e100.net; s=20230601; t=1700032924; x=1700637724;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=YqA0UaKj2beH/Tkd55qufKzvzLg/1kNUheq5xjnHBPI=;
+        b=HZ522/ZQGQb1MNadirW363sIHeUl3muis/PKj+kR7RtRI0iMHIYJMy9oOK2cklPKmQ
+         y3K5OpO9XMf3TNLkuf2yCCkY9OZDWlAOxk5pCDqDdUDJQtgunFIUVx+KC2IksZGfszDl
+         dg9z8psPe0g1ZP9ceUvLsH37OA2+DR3b+ubphNN3xcdYE+zMXuv3JmFwcuTW7oJ1hjec
+         rz+nusjdHds1JPs7yKyUTfek7814F8nw7L9zkuZC1soDAU+53hVvjSXHE094s43v53Ql
+         fnO+7xsoo+fmvvHNgeJxUP4W5QndVh6HhVBkq2miTtQ+/e7WPiu2JilJfzPTSq74CU+F
+         WlNw==
+X-Gm-Message-State: AOJu0YyW2tR2FNux/Z7zhRwRUS0JVJqtV1xzz382OR432uAHDdiDCzJx
+	LGnABsdPKBYqhF6d+wbfn/DAJZwei3m/gA==
+X-Google-Smtp-Source: AGHT+IG8xiPupG0YQNTfssmsYo87NPdtwDBBObYdS6K1D8ZR3IjNC174O28s9C1swJa6JBmAT4EEnw==
+X-Received: by 2002:a17:906:260a:b0:9dd:ba33:cd39 with SMTP id h10-20020a170906260a00b009ddba33cd39mr8597343ejc.48.1700032923965;
+        Tue, 14 Nov 2023 23:22:03 -0800 (PST)
+Received: from localhost.localdomain ([176.33.65.238])
+        by smtp.gmail.com with ESMTPSA id s1-20020a50d481000000b0053e5f67d637sm6283926edi.9.2023.11.14.23.22.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Nov 2023 23:19:38 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org, 
- Leon Anavi <leon.anavi@konsulko.com>
-In-Reply-To: <20231114120944.3741068-1-leon.anavi@konsulko.com>
-References: <20231114120944.3741068-1-leon.anavi@konsulko.com>
-Subject: Re: [meta-python][PATCH 1/5] python3-pillow: Upgrade 10.0.1 ->
- 10.1.0
-Message-Id: <170003277820.3928366.10282174909595836055.b4-ty@gmail.com>
-Date: Tue, 14 Nov 2023 23:19:38 -0800
+        Tue, 14 Nov 2023 23:22:03 -0800 (PST)
+From: alperak <alperyasinak1@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: alperak <alperyasinak1@gmail.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-multimedia][master][PATCHv3] libupnp: upgrade 1.14.6 -> 1.14.18
+Date: Wed, 15 Nov 2023 10:21:51 +0300
+Message-Id: <20231115072151.188435-1-alperyasinak1@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.12.4
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 15 Nov 2023 07:19:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106740
+ <openembedded-devel@lists.openembedded.org>; Wed, 15 Nov 2023 07:22:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106743
 
+- In the new version, build succeeds on musl systems so patch is deleted.
 
-On Tue, 14 Nov 2023 14:09:40 +0200, Leon Anavi wrote:
-> Upgrade to release 10.1.0:
-> 
-> - Added TrueType default font to allow for different sizes
-> - Fixed invalid argument warning
-> - Added ImageOps cover method
-> - Catch struct.error from truncated EXIF when reading JPEG DPI
-> - Consider default image when selecting mode for PNG save_all
-> - Support BGR;15, BGR;16 and BGR;24 access, unpacking and putdata
-> - Added CMYK to RGB unpacker
-> - Improved flexibility of XMP parsing
-> - Support reading 8-bit YCbCr TIFF images
-> - Allow saving I;16B images as PNG
-> - Corrected drawing I;16 points and writing I;16 text
-> - Set blue channel to 128 for BC5S
-> - Increase flexibility when reading IPTC fields
-> - Set C palette to be empty by default
-> - Added gs_binary to control Ghostscript use on all platforms
-> - Read bounding box information from the trailer of EPS files if
->   specified
-> - Added reading 8-bit color DDS images
-> - Added has_transparency_data
-> - Fixed bug when reading BC5S DDS images
-> - Prevent TIFF orientation from being applied more than once
-> - Use previous pixel alpha for QOI_OP_RGB
-> - Added BC5U reading
-> - Allow getpixel() to accept a list
-> - Allow GaussianBlur and BoxBlur to accept a sequence of x and y
->   radii
-> - Expand JPEG buffer size when saving optimized or progressive
-> - Added session type check for Linux in ImageGrab.grabclipboard()
-> - Allow "loop=None" when saving GIF images
-> - Fixed transparency when saving P mode images to PDF
-> - Added saving LA images as PDFs
-> - Set SMaskInData to 1 for PDFs with alpha
-> - Changed Image mode property to be read-only by default
-> - Silence exceptions in _repr_jpeg_ and _repr_png_
-> - Do not use transparency when saving GIF if it has been removed
->   when normalizing mode
-> - Fix missing symbols when libtiff depends on libjpeg
-> 
-> [...]
+Changelog:
 
-Applied, thanks!
+github.com/pupnp/pupnp/blob/branch-1.14.x/ChangeLog
 
-[1/5] python3-pillow: Upgrade 10.0.1 -> 10.1.0
-      commit: a0473439e9eb8a928c8d1185426ddea88ea8b064
-[2/5] python3-polyline: upgrade 1.4.0 -> 2.0.1
-      commit: 5eec5c33289f8035b16af2743321550ae3415d9d
-[3/5] python3-py7zr: Upgrade 0.20.7 -> 0.20.8
-      commit: b3b68ce89cfb8d014fcd3070ca8dff5623bc5df5
-[4/5] python3-zeroconf: upgrade 0.120.0 -> 0.126.0
-      commit: 1c43e700f12eefc6819204c921a1c84661594592
-[5/5] python3-pystemd: upgrade 0.10.0 -> 0.13.2
-      commit: 8d78812fc8cf14e3242533a102a2228c898b445d
+Signed-off-by: alperak <alperyasinak1@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ The difference with v2 is that only the commit message changes.
 
-Best regards,
+ ...ead_mutexattr_gettype-pthread_mutexa.patch | 42 -------------------
+ .../{libupnp_1.14.6.bb => libupnp_1.14.18.bb} |  3 +-
+ 2 files changed, 1 insertion(+), 44 deletions(-)
+ delete mode 100644 meta-multimedia/recipes-connectivity/libupnp/libupnp/0001-ithread-Use-pthread_mutexattr_gettype-pthread_mutexa.patch
+ rename meta-multimedia/recipes-connectivity/libupnp/{libupnp_1.14.6.bb => libupnp_1.14.18.bb} (87%)
+
+diff --git a/meta-multimedia/recipes-connectivity/libupnp/libupnp/0001-ithread-Use-pthread_mutexattr_gettype-pthread_mutexa.patch b/meta-multimedia/recipes-connectivity/libupnp/libupnp/0001-ithread-Use-pthread_mutexattr_gettype-pthread_mutexa.patch
+deleted file mode 100644
+index ee7819677..000000000
+--- a/meta-multimedia/recipes-connectivity/libupnp/libupnp/0001-ithread-Use-pthread_mutexattr_gettype-pthread_mutexa.patch
++++ /dev/null
+@@ -1,42 +0,0 @@
+-From 343a3b724225d3c87af0b268da14d3acb7a5b9a1 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sun, 9 May 2021 15:38:43 -0700
+-Subject: [PATCH] ithread: Use
+- pthread_mutexattr_gettype/pthread_mutexattr_settype on linux
+-
+-_np variants are not recommended anymore, and glibc 2.34+ will have
+-these removed
+-
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- upnp/inc/ithread.h | 6 ++++--
+- 1 file changed, 4 insertions(+), 2 deletions(-)
+-
+-diff --git a/upnp/inc/ithread.h b/upnp/inc/ithread.h
+-index f6800ea9..1d0f9dba 100644
+---- a/upnp/inc/ithread.h
+-+++ b/upnp/inc/ithread.h
+-@@ -304,7 +304,8 @@ static UPNP_INLINE int ithread_cleanup_thread(void)
+-  *      Returns EINVAL if the kind is not supported.
+-  *      See man page for pthread_mutexattr_setkind_np
+-  *****************************************************************************/
+--#if defined(PTHREAD_MUTEX_RECURSIVE) || defined(__DragonFly__)
+-+#if defined(PTHREAD_MUTEX_RECURSIVE) || defined(__DragonFly__) \
+-+    || defined (__linux__)
+- 	#define ithread_mutexattr_setkind_np pthread_mutexattr_settype
+- #else
+- 	#define ithread_mutexattr_setkind_np pthread_mutexattr_setkind_np
+-@@ -329,7 +330,8 @@ static UPNP_INLINE int ithread_cleanup_thread(void)
+-  *      Always returns 0.
+-  *      See man page for pthread_mutexattr_getkind_np
+-  *****************************************************************************/
+--#if defined(PTHREAD_MUTEX_RECURSIVE) || defined(__DragonFly__)
+-+#if defined(PTHREAD_MUTEX_RECURSIVE) || defined(__DragonFly__) \
+-+    || defined (__linux__)
+- 	#define ithread_mutexattr_getkind_np pthread_mutexattr_gettype
+- #else
+- 	#define ithread_mutexattr_getkind_np pthread_mutexattr_getkind_np
+--- 
+-2.31.1
+-
+diff --git a/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.6.bb b/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.18.bb
+similarity index 87%
+rename from meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.6.bb
+rename to meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.18.bb
+index 81b42da41..5b15d1809 100644
+--- a/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.6.bb
++++ b/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.14.18.bb
+@@ -8,9 +8,8 @@ HOMEPAGE = "http://pupnp.sourceforge.net/"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=394a0f17b97f33426275571e15920434"
+ 
+-SRCREV = "cef2b23fb36baac091b0c7d41136b4c1d9549c6d"
++SRCREV = "c540ce2431bdeac73359029d4592b45790e1d154"
+ SRC_URI = "git://github.com/pupnp/pupnp.git;protocol=https;branch=branch-1.14.x \
+-           file://0001-ithread-Use-pthread_mutexattr_gettype-pthread_mutexa.patch \
+           "
+ 
+ S="${WORKDIR}/git"
 -- 
-Khem Raj <raj.khem@gmail.com>
+2.25.1
 
 
