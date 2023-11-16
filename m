@@ -2,135 +2,93 @@ Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 28C96C197A0
-	for <webhook@archiver.kernel.org>; Thu, 16 Nov 2023 09:57:37 +0000 (UTC)
-Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
- by mx.groups.io with SMTP id smtpd.web10.3683.1700128650508711996
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 67CBDC197A0
+	for <webhook@archiver.kernel.org>; Thu, 16 Nov 2023 10:54:17 +0000 (UTC)
+Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com [209.85.208.49])
+ by mx.groups.io with SMTP id smtpd.web10.4264.1700132054130274178
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Nov 2023 01:57:30 -0800
+ Thu, 16 Nov 2023 02:54:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=QB5oXegR;
- spf=pass (domain: gmail.com, ip: 209.85.218.54, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-9e62f903e88so78676466b.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Nov 2023 01:57:30 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=dLqBtjFM;
+ spf=pass (domain: gmail.com, ip: 209.85.208.49, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-ed1-f49.google.com with SMTP id 4fb4d7f45d1cf-5441305cbd1so930536a12.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Nov 2023 02:54:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1700128648; x=1700733448; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1700132052; x=1700736852; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Ir0YRZlTgNVFr7XTaQf8e07ru1lNTi1NIeMPxM+TYCM=;
-        b=QB5oXegRsRmAcmeDuFhP1feiUGIQrKQ09FIvG1wUqLb2Q02OAg5Baxb4dEhcpxcofG
-         7yT2H5iLA0MSwgQLw1OzC3rvTMYZ63Fl8PMIpcs+wl/VpEfeSIsZzKCz8zMtqpeQmZ7+
-         qtV/Kcxh5lOhrxJufsZCyDw8IqJlcn+j/CvyA0geOPbZ28deFjd64BE8TfX+UtPd2uDR
-         RKT8u9FwOD4cdiJG67kzmzxbtD9Y2OBx5kN6v849WABHdNmITTk+kZ723us6x6BR2ZSU
-         TldrWZ4a3X9eBdyd2nqjEuvhuV4RtjaWdNLwyittWFeopcybkAMLki/2Tto7r5304dNw
-         S53Q==
+        bh=HV5054mOjXPysgzLzAHBZv684t7YWG4P8qLQ4tHTVvo=;
+        b=dLqBtjFMBQSDGZQj1nf0DOSrLg2eQXa6HsvgXr727V6CmIeI5A/RfGQn14CliuOQrn
+         QKftlVNevMWyLEa3w5fBR50OFYhHGlMfC4PTiKE5tRUF1l7S53WCfsMlYYQTTE6h2gLG
+         ML2CidJrgymbgvs6Vo4B82xhbNfsuGyPVO4cc56zVAG0G7m+DAXuF0z+N5AcIlg6kpQz
+         j7/Bh8v6Tg/8lwgFwmqKHTIh2kikiHiCyrFwV45eHuipqaka6G/tLAewMdq4qR4VEST5
+         ecvMuCp3nHtM4BpHCnFNPaDS5pKAjmVg8nOM6y6DuA1Ojqt9nGtEhXQsPwWl2+M01QO0
+         daWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700128648; x=1700733448;
+        d=1e100.net; s=20230601; t=1700132052; x=1700736852;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Ir0YRZlTgNVFr7XTaQf8e07ru1lNTi1NIeMPxM+TYCM=;
-        b=eHVn/TTOSjqxhbSgJvbwxeu557gWizfZR0WgYHaIP/KTBRJRO72wABBKARFTtYIFU7
-         g2h1QRYN6nVTl3XkeZm8UCnuOuj4mVfaDuniXX20w0W+cYPRzdpXKPeCrRTWDrk27if9
-         NBnt5lmfnOkcJwjgW2Kl7Trxiy4A8nbpl5EE1Z+O+YhFgyrpWfRXpTt75GvgOveGSz3+
-         LmRFabG50gB08Jmh4YOJ2iwpBE/jxg9xLiGt3vHV4qNcQXWGZzj8GfMYpC0c0s/ANAaZ
-         j+bdsgLcjVO0RPXoyL954hFEjjUjX0aaPFNebzpHO4WkXRTRkMwznMtNgD8FOULdtQjT
-         NKEg==
-X-Gm-Message-State: AOJu0YyaCJf9m/ej5qh4EYxL62TcGNYgZPegkRjvRnWRBPg/rwq3DKGK
-	4jcotJtR8dcwaJi/pk8f38sXcVWtMfVbeQ==
-X-Google-Smtp-Source: AGHT+IH1iocYxbWOHr2ucuirBuYEB3VEG4WUugxyuU/5z3d1q9z275eDqbvh8NPrvAx4rN1h7vxmUw==
-X-Received: by 2002:a17:906:2e8f:b0:9df:bc8d:fbc8 with SMTP id o15-20020a1709062e8f00b009dfbc8dfbc8mr11386881eji.37.1700128648129;
-        Thu, 16 Nov 2023 01:57:28 -0800 (PST)
+        bh=HV5054mOjXPysgzLzAHBZv684t7YWG4P8qLQ4tHTVvo=;
+        b=vl8VjBhbvRekAr5SPrrwxleVFayaznoKQfnA0ET/ugmOuiWLOKtU7A3VeWZowzS21k
+         in/5wTl46/V15zNJiROBgyk3aoKGCb7rWFeW+jYmBB95JD9vBt2B1lbh8wUE44AMUyM3
+         gpBSvniot/0UKEKv4MeoxuhKUk0RJt4bEgra/ih2gea3TZiRJVLEul+82UcVPlZG8CVU
+         uGI0jx2w1aoNqnRebdiWKPv44ftGBb33m039msJSNjsOwO2tDPEikDcV3VDezYudcZWN
+         s5JLi8rRjh8J1XXm102/TPIn/TqABfwAO7ouiegAlBhAgDgG1SVHo++vSFGO/I1nEOJj
+         hdzw==
+X-Gm-Message-State: AOJu0Ywnq6QgS0/qK+jCwJnT1QA7E6JEwPbRM9Hk6ug7BtRNvxhjuvrL
+	GkTdCl0MVGa7qAqxkvQf1cqfZfFj+wUFVg==
+X-Google-Smtp-Source: AGHT+IH2jD/NOLBd2FGQRjGKBw657ePpcs+HjIFf3EM7HFJxa2Vl08F/I6fgqsT1xJJR/2xZDCllSw==
+X-Received: by 2002:aa7:d49a:0:b0:533:97c:8414 with SMTP id b26-20020aa7d49a000000b00533097c8414mr12665617edr.7.1700132051796;
+        Thu, 16 Nov 2023 02:54:11 -0800 (PST)
 Received: from localhost.localdomain ([176.33.65.238])
-        by smtp.gmail.com with ESMTPSA id fy15-20020a170906b7cf00b009e5e1710ae7sm8247470ejb.191.2023.11.16.01.57.27
+        by smtp.gmail.com with ESMTPSA id n16-20020a5099d0000000b005454b6d4e22sm7653301edb.64.2023.11.16.02.54.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Nov 2023 01:57:27 -0800 (PST)
+        Thu, 16 Nov 2023 02:54:11 -0800 (PST)
 From: alperak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-oe][PATCH] libmtp: upgrade 1.1.20 -> 1.1.21
-Date: Thu, 16 Nov 2023 12:57:16 +0300
-Message-Id: <20231116095716.181552-1-alperyasinak1@gmail.com>
+Subject: [meta-oe][PATCH] libsigc++-2.0: upgrade 2.10.7 -> 2.12.1
+Date: Thu, 16 Nov 2023 13:54:02 +0300
+Message-Id: <20231116105402.650329-1-alperyasinak1@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 16 Nov 2023 09:57:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106810
+ <openembedded-devel@lists.openembedded.org>; Thu, 16 Nov 2023 10:54:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106811
 
 Changelog:
 
-Bugs fixed:
-
-- Fix LIBMTP_STORAGE_SORTBY_MAXSPACE not working (copy-paste mistake)
-- fix warnings regarding mismatched parameter docs
-- fix comment above sort_storage_bysort_storage_by
-- Revert "ptp_pack_string: check string length for no iconv situation"
-- remove dependency on ptp.h
-- fixed paste error vendor/product id
-- libusb-glue: check return value of ptp_init_send_memory_handler
-- ptp_pack_string: check string length for no iconv situation
-- ptp-pack: fix ucs2str overflow
-
-Features:
-
-- add a LIBMTP_FreeMemory function that wraps free()
-- added functions to get device by serial number
-- added serial number of device to output of 'mtp-files'
-- added optional serial number parameter to 'mtp-getfile'
-- added optional serial number parameter to 'mtp-delfile'
-- feat: Add LIBMTP_Get_Children() to read the list of raw IDs of a folder.
-- merge a patch from google https://source.chromium.org/chromiumos/chromiumos/codesearch/+/main:src/third_party/chromiumos-overlay/media-libs/libmtp/files/libmtp-1.1.20-10_remove_nexus_s_from_device_list.patch
-
-New devices:
-
-- add Garmin Forerunner 955 + mtp-detect log
-- added SHARP S7-SH https://sourceforge.net/p/libmtp/bugs/1914/
-- added another Lenovo Tab TB-X306F id fixes #116
-- added tolino vsiion 6 reader https://sourceforge.net/p/libmtp/bugs/1921/
-- added FLIR C5 camera
-- added iBasso DX170 DAP, fixes #125
-- added Lenovo Tab P11 fixes #127
-- aded Sony NW-A105 fixes //github.com//issues/130
-- added Honor Any-NX1 #135
-- added gopro hero11 black #136
-- removed a dup of a Mediatek MT65xx devices https://sourceforge.net/p/libmtp/bugs/1922/
-- rename some LG devices to match reality better
-- rename 3 blackberry to correct vendor/product names
-- added realme Phone
-- updated some mediatek id names, removed some duplicates
-- adjusted various id names https://sourceforge.net/p/libmtp/bugs/1926/
-- fixed order, https://sourceforge.net/p/libmtp/bugs/1931/
-- some more brand renames. https://sourceforge.net/p/libmtp/bugs/1930/
-- adjust some device naming https://sourceforge.net/p/libmtp/bugs/1932/
-- added Vivo V19 (fixes #143)
-- added Garmin Forerunner 255S Music
-- rename and merge, also reshuffle to sorting ... fixes https://sourceforge.net/p/libmtp/bugs/1933/
-- added Garmin Forerunner 255M smartwatch, fixes #150
+https://ftp.icm.edu.pl/pub/Linux/GNOME/sources/libsigc++/2.10/libsigc++-2.10.8.changes
+https://ftp.icm.edu.pl/pub/Linux/GNOME/sources/libsigc++/2.12/libsigc++-2.12.0.changes
+https://ftp.fau.de/gnome/sources/libsigc++/2.12/libsigc++-2.12.1.changes
 
 Signed-off-by: alperak <alperyasinak1@gmail.com>
 ---
- .../libmtp/{libmtp_1.1.20.bb => libmtp_1.1.21.bb}               | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-connectivity/libmtp/{libmtp_1.1.20.bb => libmtp_1.1.21.bb} (95%)
+ .../{libsigc++-2.0_2.10.7.bb => libsigc++-2.0_2.12.1.bb}      | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-core/libsigc++-2.0/{libsigc++-2.0_2.10.7.bb => libsigc++-2.0_2.12.1.bb} (73%)
 
-diff --git a/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.20.bb b/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.21.bb
-similarity index 95%
-rename from meta-oe/recipes-connectivity/libmtp/libmtp_1.1.20.bb
-rename to meta-oe/recipes-connectivity/libmtp/libmtp_1.1.21.bb
-index 41fc46c31..94cbef8fc 100644
---- a/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.20.bb
-+++ b/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.21.bb
-@@ -19,7 +19,7 @@ DEPENDS:append:class-target = " ${BPN}-native"
+diff --git a/meta-oe/recipes-core/libsigc++-2.0/libsigc++-2.0_2.10.7.bb b/meta-oe/recipes-core/libsigc++-2.0/libsigc++-2.0_2.12.1.bb
+similarity index 73%
+rename from meta-oe/recipes-core/libsigc++-2.0/libsigc++-2.0_2.10.7.bb
+rename to meta-oe/recipes-core/libsigc++-2.0/libsigc++-2.0_2.12.1.bb
+index 84494b8ac..b2eb5dd09 100644
+--- a/meta-oe/recipes-core/libsigc++-2.0/libsigc++-2.0_2.10.7.bb
++++ b/meta-oe/recipes-core/libsigc++-2.0/libsigc++-2.0_2.12.1.bb
+@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499"
  
- SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/v${PV}/${BP}.tar.gz"
- SRC_URI:append:class-target = " file://0001-Use-native-mtp-hotplug.patch"
--SRC_URI[sha256sum] = "c9191dac2f5744cf402e08641610b271f73ac21a3c802734ec2cedb2c6bc56d0"
-+SRC_URI[sha256sum] = "f4c1ceb3df020a6cb851110f620c14fe399518c494ed252039cbfb4e34335135"
+ DEPENDS = "mm-common"
  
- inherit autotools pkgconfig lib_package
+-SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/libsigc++/2.10/libsigc++-${PV}.tar.xz"
+-SRC_URI[sha256sum] = "d082a2ce72c750f66b1a415abe3e852df2eae1e8af53010f4ac2ea261a478832"
++SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/libsigc++/2.12/libsigc++-${PV}.tar.xz"
++SRC_URI[sha256sum] = "a9dbee323351d109b7aee074a9cb89ca3e7bcf8ad8edef1851f4cf359bd50843"
+ 
+ S = "${WORKDIR}/libsigc++-${PV}"
  
 -- 
 2.25.1
