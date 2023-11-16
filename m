@@ -1,120 +1,92 @@
-Return-Path: <ceggers@arri.de>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7C8A1C197A0
-	for <webhook@archiver.kernel.org>; Thu, 16 Nov 2023 16:57:39 +0000 (UTC)
-Received: from EUR01-DB5-obe.outbound.protection.outlook.com (EUR01-DB5-obe.outbound.protection.outlook.com [40.107.15.109])
- by mx.groups.io with SMTP id smtpd.web10.11849.1700153847175942992
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8ADECC197A0
+	for <webhook@archiver.kernel.org>; Thu, 16 Nov 2023 17:05:39 +0000 (UTC)
+Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com [209.85.167.52])
+ by mx.groups.io with SMTP id smtpd.web11.12164.1700154338837260225
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Nov 2023 08:57:30 -0800
+ Thu, 16 Nov 2023 09:05:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@arrigroup.onmicrosoft.com header.s=selector1-arrigroup-onmicrosoft-com header.b=jnogKi/8;
- spf=pass (domain: arri.de, ip: 40.107.15.109, mailfrom: ceggers@arri.de)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=oZQ424RBNBW9qOQQOVxBPKGUUl2g6a8qcBtD70mOa8H4uR+omc7EUG/Xg9dLGzOtDH6/kLDcjDaXED6NlrqOmbRvO5fWHdrQNfQy1avDFBtz+AHMY3gzTpfEAQuxtLFRu9SwEIVgBr+7Z9376clLZPJIzSlhZLGhCkaE4ZSoTLlLRLq/n7b4w9I/i0eg/rqIwhNJYXEUc4f4idLMHzMr3viS2iyrtWCwhVkEwEB7UAF6jSnrtnYHNiPij5w9kiTBLaw61h4bX0gBJzGZNA4RkMAfV+yoXhFNpzJW7K9dxmzNenTpo7hVYvIdsTX+SdnDN32e4OoazhoYfJZyIcS+iQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=g81zHPyARHJgwxCKbY2TiX+rjYX14UYr7+aewXjYMms=;
- b=QWcW7vOxUTa3IuQUzQmQXMDUttrIUIFIn9/5Pu5oTHq5IHoW07xZqByeaUTWmgv3aLQpcHc7HRke5cLK2sev+j23ODCwOqnfMPky3D1A5i1l8BG+qIfTlguMsH9WS75PpRjh0EfgcshBRhTK+V9F5nWRiAwJI3GBTfLMV4AbvlJIjfBrBY1ZgFUFbYbZ7Bk0SKxeHsVEM0ANmY8txk/hbSnX2e5exUh1D/OPldY56wWy1a9o2YIN8Zx1G/Lbbg9qngsWZzNusitR0wgcUBH7a1sX0p8FvWSKWYkAQca/SLrFtK8bDzkujICvr+BeHBJHuxaqfhAc82SyEOfZizjWWA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 217.111.95.7) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=arri.de;
- dmarc=none action=none header.from=arri.de; dkim=none (message not signed);
- arc=none (0)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=CUplLY/9;
+ spf=pass (domain: gmail.com, ip: 209.85.167.52, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-lf1-f52.google.com with SMTP id 2adb3069b0e04-50970c2115eso1591454e87.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Nov 2023 09:05:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=arrigroup.onmicrosoft.com; s=selector1-arrigroup-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=g81zHPyARHJgwxCKbY2TiX+rjYX14UYr7+aewXjYMms=;
- b=jnogKi/8Ap8ootzd87eVkJZPo9//y/bzxkOgJT/effxEwOuTUJ/hXN4zIfMkd/X7/4L6GS0AdfEpWDOSF5r/P0zaCu8E+3mdQvKUQe9SY+166KDo3FhwUqDxpgHtkhzCzNbZd1BiJlXLRnJAwveWJul64s1p25J1xL2kga/kLY4=
-Received: from DB8PR06CA0064.eurprd06.prod.outlook.com (2603:10a6:10:120::38)
- by AM8PR07MB7491.eurprd07.prod.outlook.com (2603:10a6:20b:24b::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7002.23; Thu, 16 Nov
- 2023 16:57:23 +0000
-Received: from DB5PEPF00014B90.eurprd02.prod.outlook.com
- (2603:10a6:10:120:cafe::8c) by DB8PR06CA0064.outlook.office365.com
- (2603:10a6:10:120::38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7002.21 via Frontend
- Transport; Thu, 16 Nov 2023 16:57:23 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 217.111.95.7)
- smtp.mailfrom=arri.de; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arri.de;
-Received-SPF: Fail (protection.outlook.com: domain of arri.de does not
- designate 217.111.95.7 as permitted sender) receiver=protection.outlook.com;
- client-ip=217.111.95.7; helo=mta.arri.de;
-Received: from mta.arri.de (217.111.95.7) by
- DB5PEPF00014B90.mail.protection.outlook.com (10.167.8.228) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7002.20 via Frontend Transport; Thu, 16 Nov 2023 16:57:22 +0000
-Received: from N95HX1G2.arri.de (192.168.54.27) by mta.arri.de (10.10.18.5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Thu, 16 Nov
- 2023 17:57:22 +0100
-From: Christian Eggers <ceggers@arri.de>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Christian Eggers <ceggers@arri.de>
-Subject: [meta-python][PATCH] python3-gcovr: switch to main branch
-Date: Thu, 16 Nov 2023 17:57:15 +0100
-Message-ID: <20231116165715.18848-1-ceggers@arri.de>
-X-Mailer: git-send-email 2.35.3
+        d=gmail.com; s=20230601; t=1700154336; x=1700759136; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=J8U77mnmyrbW8hnYp09hqvk1hnjFudWZqt3glVI1Aj4=;
+        b=CUplLY/9FiqCsZg0nzMv+HZjnOJ+NhBWoHE9tnD0SY0rRrMjjOIKRQR3RikZoZ1kPi
+         RdL2xYU9W4t0d/qt6EXlMnF6PrHB5qaUQEsVMpZoj6j4kwAL9Xgth3lFHU9jLMNtyT7p
+         YJDPhLnkrrPAxWOFqw0A79bwwjH5a3kpViEFDA3g3dvOMipKR1lz+rpfVMaUK2U/cqXY
+         UxNIYe58lqXOyqREszedHcQzZ3OXDJvsdgXJBFHjWP0Fzg0evqges01U8qYeKmzt5ifD
+         PlqzF1kdHgQt2J+Lv+MRgiDa28Xon8Uvf1BRWPYKg50xHwfqIVRwWx72EUHiDN6OqNql
+         uALg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1700154336; x=1700759136;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=J8U77mnmyrbW8hnYp09hqvk1hnjFudWZqt3glVI1Aj4=;
+        b=NjT2q4kdKD+cqBqrz5tPISdrSRaYu1snqsmVmnMZRo4PwDR64yLnSe4YQuzuRuhvJT
+         OyUMa4sFI0437Dod/2eNGw0ZLmf02zH2yWp5tbK87xz/Uj53ko4U39XDBYg1iInCKlQy
+         kvU/Lpkczd0SPNR8fve3p0Z8vmtRdeZH7X9sHBUVK2pzPj5AzPIDUBD2D3Oefl2qoyUs
+         qagfga6+nEjz8ci86Nb4cg9o2J5fEvJ3B3I1a+8RCawrrzGgv+9LC6XDoCujA3TIjdz/
+         gAgBcwQYNXNDOeO9JRzPlxe/uIVx9zlHhbY4/PCK9NCGxdC6R41ZLkBC5FvgEAd7yoKn
+         V+4g==
+X-Gm-Message-State: AOJu0YwGe86p4ERRoGYTgdWEXpemi9YroEu+XVXpA9htRfqIITz7JrB7
+	FOnWwRXR4HyCH65/Z8MQQhjXbix8/kkt8w==
+X-Google-Smtp-Source: AGHT+IG73Nd1GVTIX5mtXRB1ETi8TRLX0iRVyRfbs94X84Kjrsjnw2n0lnezN6ENkjpYgh7mbQ3JqQ==
+X-Received: by 2002:a05:6512:1593:b0:50a:77c5:12b5 with SMTP id bp19-20020a056512159300b0050a77c512b5mr13364277lfb.23.1700154335998;
+        Thu, 16 Nov 2023 09:05:35 -0800 (PST)
+Received: from localhost.localdomain ([176.33.67.108])
+        by smtp.gmail.com with ESMTPSA id n16-20020a5099d0000000b005454b6d4e22sm8033264edb.64.2023.11.16.09.05.34
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 16 Nov 2023 09:05:35 -0800 (PST)
+From: alperak <alperyasinak1@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: alperak <alperyasinak1@gmail.com>
+Subject: [meta-oe][PATCH] cpuid: upgrade 20211129 -> 20230614
+Date: Thu, 16 Nov 2023 20:05:23 +0300
+Message-Id: <20231116170523.1202934-1-alperyasinak1@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-Originating-IP: [192.168.54.27]
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB5PEPF00014B90:EE_|AM8PR07MB7491:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6cb76aa2-65aa-4345-4f0a-08dbe6c51a80
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	+LeegfEHN7Uc4oiEdgfUz7BUh8yO8bDFslwSLODhbdZMQTsQOJk06lsmk2j6+yYB4ljBZgZeyT7mR31vTIXR9mtA+whBLb0Ocg49atRqovclFC8kOyJvewpNjPms+/QJmFVuSw0g+KkohULfraVEOB9LVRjDZgRGX1+kvcN/XtVlY5G0t5Fhm06pUsy/i1W40YUAsJ1ucbatf5G+ZxcOhIursy3jRKYEQHFnaC5tHWnOQLlpt9klZk5qyVXCoex/+DuPIatUxJLM1Es5dHorjFz1/0tEj+L1iwiy+oY4+rQ3hw8tSPlD2tdrz1i2rtcdQ9IE8AdE1BLlxGoBISqob4m2DOzQ8CulPd9xZRVmDtkmuPr5nJIeQ+RB+FhaF5P0S9+7TOPbLY4IP6EQMxaP9MPEuMdAKt7pq2OhoSRG6+B9RfiMH8i/ruu3PAxgZR33Fg+I8ZTg5aa7Mz9zZF6AVYmUQSMSuROT8SoqbjpTVPGj9giQH6DPEm+qxGDMmnij3z2lRu6Jak8YZPxEijTiChV1gNQXUuOd8X9BMTiwzArcSnbIQendOCDgK9N74IlQoXjdIqDDgHrVJSM4jBOmeH6wfsbsYYJfi29WamtbcwOkyP6JVAkFy4SRixObjbkp9FhYj3AgsXEKKLy0ivD7D/kbEXIwF9xUG71LrMDxbi45mFtL9S0Na7ZGi8t1sPPGmisUyrR0YDtL0n2BHoFHd19f+hH6+6LsPkw0LKKEURGhEVrEOMAJ333NQORptqLq8SV6NVgj0OQMqQUueF8sNLodlBkAU41wVy44OmPnve2V9kL6JQXTx7Jzu+/aqQTj
-X-Forefront-Antispam-Report: 
-	CIP:217.111.95.7;CTRY:DE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mta.arri.de;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(396003)(136003)(346002)(39860400002)(376002)(230922051799003)(186009)(1800799009)(451199024)(82310400011)(64100799003)(46966006)(40470700004)(36840700001)(83380400001)(41300700001)(40460700003)(47076005)(81166007)(356005)(336012)(426003)(82740400003)(107886003)(1076003)(36756003)(7696005)(2616005)(6666004)(26005)(16526019)(478600001)(6916009)(40480700001)(316002)(70206006)(70586007)(8936002)(8676002)(4326008)(4744005)(2906002)(86362001)(36860700001)(5660300002)(36900700001);DIR:OUT;SFP:1102;
-X-OriginatorOrg: arri.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Nov 2023 16:57:22.9994
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6cb76aa2-65aa-4345-4f0a-08dbe6c51a80
-X-MS-Exchange-CrossTenant-Id: e6a73a5a-614d-4c51-b3e3-53b660a9433a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e6a73a5a-614d-4c51-b3e3-53b660a9433a;Ip=[217.111.95.7];Helo=[mta.arri.de]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	DB5PEPF00014B90.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR07MB7491
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 16 Nov 2023 16:57:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106819
+ <openembedded-devel@lists.openembedded.org>; Thu, 16 Nov 2023 17:05:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106820
 
-Branch "master" has been renamed to "main".
+Changelog:
 
-Signed-off-by: Christian Eggers <ceggers@arri.de>
+https://fossies.org/linux/cpuid/ChangeLog
+
+Signed-off-by: alperak <alperyasinak1@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-gcovr_6.0.bb | 2 +-
+ .../cpuid/{cpuid_20211129.bb => cpuid_20230614.bb}              | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/cpuid/{cpuid_20211129.bb => cpuid_20230614.bb} (90%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-gcovr_6.0.bb b/met=
-a-python/recipes-devtools/python/python3-gcovr_6.0.bb
-index 21c36687e263..bfb0aaf5e79b 100644
---- a/meta-python/recipes-devtools/python/python3-gcovr_6.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-gcovr_6.0.bb
-@@ -4,7 +4,7 @@ SECTION =3D "devel/python"
- LICENSE =3D "BSD-3-Clause"
- LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D6542fc4ce5904ffb741ef56f8fe=
-33452"
-=20
--SRC_URI =3D "git://github.com/gcovr/gcovr.git;branch=3Dmaster;protocol=3Dh=
-ttps"
-+SRC_URI =3D "git://github.com/gcovr/gcovr.git;branch=3Dmain;protocol=3Dhtt=
-ps"
- SRCREV =3D "1221ef62ff0de15bbeaf79e68e08a65d62c73ff4"
-=20
- S =3D "${WORKDIR}/git"
---=20
-2.35.3
+diff --git a/meta-oe/recipes-devtools/cpuid/cpuid_20211129.bb b/meta-oe/recipes-devtools/cpuid/cpuid_20230614.bb
+similarity index 90%
+rename from meta-oe/recipes-devtools/cpuid/cpuid_20211129.bb
+rename to meta-oe/recipes-devtools/cpuid/cpuid_20230614.bb
+index 3218ba652..a88042ba6 100644
+--- a/meta-oe/recipes-devtools/cpuid/cpuid_20211129.bb
++++ b/meta-oe/recipes-devtools/cpuid/cpuid_20230614.bb
+@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+ SRC_URI = "http://www.etallen.com/${BPN}/${BP}.src.tar.gz \
+            "
+-SRC_URI[sha256sum] = "230772bb88c44732e68a42d2eff43bcff46d893bf4ea6e04151d4cb6e8c88e2f"
++SRC_URI[sha256sum] = "b1c83045efc26076307751e0662d580277f5f9bf89cf027231a7812003c3a4e8"
+ 
+ COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
+ 
+-- 
+2.25.1
 
 
