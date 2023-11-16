@@ -1,81 +1,169 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 98B03C197A0
-	for <webhook@archiver.kernel.org>; Thu, 16 Nov 2023 08:30:16 +0000 (UTC)
-Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
- by mx.groups.io with SMTP id smtpd.web10.2843.1700123406154158986
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9E1DFC197A0
+	for <webhook@archiver.kernel.org>; Thu, 16 Nov 2023 08:31:06 +0000 (UTC)
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
+ by mx.groups.io with SMTP id smtpd.web11.2809.1700123463692680616
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Nov 2023 00:30:06 -0800
+ Thu, 16 Nov 2023 00:31:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: wangmy@fujitsu.com)
-X-IronPort-AV: E=McAfee;i="6600,9927,10895"; a="119254317"
-X-IronPort-AV: E=Sophos;i="6.03,307,1694703600"; 
-   d="scan'208";a="119254317"
-Received: from unknown (HELO yto-r4.gw.nic.fujitsu.com) ([218.44.52.220])
-  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Nov 2023 17:30:03 +0900
-Received: from yto-m2.gw.nic.fujitsu.com (yto-nat-yto-m2.gw.nic.fujitsu.com [192.168.83.65])
-	by yto-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id D475CE05A9
-	for <openembedded-devel@lists.openembedded.org>; Thu, 16 Nov 2023 17:30:01 +0900 (JST)
-Received: from aks-ab2.gw.nic.fujitsu.com (aks-ab2.gw.nic.fujitsu.com [192.51.207.12])
-	by yto-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 1682514FA6
-	for <openembedded-devel@lists.openembedded.org>; Thu, 16 Nov 2023 17:30:01 +0900 (JST)
-Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.79])
-	by aks-ab2.gw.nic.fujitsu.com (Postfix) with ESMTP id C81D988599;
-	Thu, 16 Nov 2023 17:29:59 +0900 (JST)
-From: wangmy@fujitsu.com
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=nmINmPjQ;
+ spf=pass (domain: gmail.com, ip: 209.85.218.48, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-9e1021dbd28so74937766b.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Nov 2023 00:31:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1700123461; x=1700728261; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=QfANcZAMCKBs0KqIdPB9Q3FlkVGI2ENPZymthRLeKJI=;
+        b=nmINmPjQ7fL8AZIAmCq463MBMsXQJ77NSuZScSU6W3aKtrGV7eA4btotcaq1vY5/Nw
+         lyEazoBtWGxKbh6ntQxSsWwFgXYDEXOd2vv+s+6rV1Q5NRUxRN3zx3hkNhoLY0mLpM1u
+         G9mZa4lEWUpX5IzOvsMy3lcGTPTyUqymTBOXnTbq8B1B6Z+L8awbbUxbLQwkP7bcLcRt
+         0SjlVEx70Z7YxlxgTZi3aO0BF/3URnpadeBVZ8DP3UOinsRyNluPRuHxpngloHw3ihUF
+         VqR1AEPyPz919+OD8+Hlzm3PCsDmMmf7NBp/do0umxqDzen3m3I4bPaeT/09/eY/PBUU
+         4MjQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1700123461; x=1700728261;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=QfANcZAMCKBs0KqIdPB9Q3FlkVGI2ENPZymthRLeKJI=;
+        b=K56GG6/RgSY4aS3l5y9IKLLLNCwqbtVFjXBOxt4MqkHdmgCEOj4GNFhSlmAZMhpkWJ
+         wAVpJc75sdPmxaUEb/v/CB0luu8Tn4REz4Lxh2IKBd1EDw0E5ipKXfJ2ywVrbVgMu9DJ
+         pL13gMVBB22mLU5oZB4uVT399hY4gJLXbIrJokxlv0rIHRaQU1vy7J35mBmAG1KYj4FG
+         8mVh6ND3qwabvxwaNF4ZlpZQwyK2H3OulPwVzMUgjmf8Ih6VWq8J4cQmq4QahGr36Hoa
+         njS/uJKuVnaquuPhP0dBA10LLs5RcULInGqMhFwwytyHYR0RNrTIRP9NOjvOLXp/KepV
+         BP2A==
+X-Gm-Message-State: AOJu0YxeS5TEcUhgF+J3KhaVfqdaMfOCUTykU+3m38JWjwFij3RcXUWR
+	HKfKpDIuDJMphzWBUYzZFQbIvpNHNEKPsw==
+X-Google-Smtp-Source: AGHT+IHYswIX0azPvBRZEliX9BW8ZkuUFBXXZa/EVIDsTPxSuDwht4rUesMQfAXPmwirYjSi8OvDJA==
+X-Received: by 2002:a17:906:3754:b0:9c8:f128:2fdb with SMTP id e20-20020a170906375400b009c8f1282fdbmr12255872ejc.13.1700123461195;
+        Thu, 16 Nov 2023 00:31:01 -0800 (PST)
+Received: from localhost.localdomain ([176.33.65.238])
+        by smtp.gmail.com with ESMTPSA id g13-20020a170906348d00b009a1dbf55665sm7984801ejb.161.2023.11.16.00.30.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 16 Nov 2023 00:31:00 -0800 (PST)
+From: alperak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-pydantic: upgrade 2.4.2 -> 2.5.0
-Date: Thu, 16 Nov 2023 16:29:25 +0800
-Message-Id: <1700123365-22385-1-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-X-TM-AS-GCONF: 00
-X-TM-AS-Product-Ver: IMSS-9.1.0.1408-9.0.0.1002-28000.003
-X-TM-AS-User-Approved-Sender: Yes
-X-TMASE-Version: IMSS-9.1.0.1408-9.0.1002-28000.003
-X-TMASE-Result: 10-0.899700-10.000000
-X-TMASE-MatchedRID: S9L8qTrmXfGjz0nOeth/yUIIxwDaU5mr+KgiyLtJrSCOD/YpR7I+Ir6p
-	xbTOjavy+7QcRaVoa8nGKIf6hBf7VaGGOyqBK41vEXjPIvKd74AQhNjZQYyI3FCedixYXzOrmZ6
-	gkALoFaixfbhqGxLk+4Ay6p60ZV62yA7duzCw6dLdB/CxWTRRu+rAZ8KTspSzRIX37B7WP2+Qbp
-	OP8gpCLiJf2ZxtLkvGlrnxOmLss0KxDvkTweBy1UUioDL8gkwjZncj0oTE7fJaw9pteEwnYtwTz
-	VKZaH5DiB6mlDKe1V7S/yytHeCN9GXv4CQeNUk7G6qTOwq/n71+3BndfXUhXQ==
-X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
+Cc: alperak <alperyasinak1@gmail.com>
+Subject: [meta-oe][PATCH] ledmon: upgrade 0.93 -> 0.97
+Date: Thu, 16 Nov 2023 11:30:50 +0300
+Message-Id: <20231116083050.132470-1-alperyasinak1@gmail.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 16 Nov 2023 08:30:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106796
+ <openembedded-devel@lists.openembedded.org>; Thu, 16 Nov 2023 08:31:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106797
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+* License changed GPL-2.0-only -> LGPL-2.0-only
+
+  - LIC_FILES_CHKSUM changed COPYING -> COPYING.LIB for LGPL-2.0-only
+  - Changed license headers in required source files.
+  - Changed copyright years to 2022 in modified files.
+
+* 0001-Don-t-build-with-Werror-to-fix-compile-error.patch removed because fixed in the new version.
+
+* libpci was added as depends following this error -> configure: error: Package requirements (libpci) were not met: No package 'libpci' found
+
+* pkgconfig added as inherit following this error -> PKG_PROG_PKG_CONFIG: command not found
 
 Changelog:
- https://docs.pydantic.dev/latest/changelog/
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+It can be followed here: https://github.com/intel/ledmon/releases
+
+Signed-off-by: alperak <alperyasinak1@gmail.com>
 ---
- .../{python3-pydantic_2.4.2.bb => python3-pydantic_2.5.0.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pydantic_2.4.2.bb => python3-pydantic_2.5.0.bb} (86%)
+ ...ild-with-Werror-to-fix-compile-error.patch | 30 -------------------
+ .../ledmon/{ledmon_git.bb => ledmon_0.97.bb}  | 17 +++++------
+ 2 files changed, 7 insertions(+), 40 deletions(-)
+ delete mode 100644 meta-oe/recipes-bsp/ledmon/ledmon/0001-Don-t-build-with-Werror-to-fix-compile-error.patch
+ rename meta-oe/recipes-bsp/ledmon/{ledmon_git.bb => ledmon_0.97.bb} (71%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pydantic_2.4.2.bb b/meta-python/recipes-devtools/python/python3-pydantic_2.5.0.bb
-similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-pydantic_2.4.2.bb
-rename to meta-python/recipes-devtools/python/python3-pydantic_2.5.0.bb
-index a83789d97..21be58e08 100644
---- a/meta-python/recipes-devtools/python/python3-pydantic_2.4.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-pydantic_2.5.0.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=09280955509d1c4ca14bae02f21d49a6"
+diff --git a/meta-oe/recipes-bsp/ledmon/ledmon/0001-Don-t-build-with-Werror-to-fix-compile-error.patch b/meta-oe/recipes-bsp/ledmon/ledmon/0001-Don-t-build-with-Werror-to-fix-compile-error.patch
+deleted file mode 100644
+index 09f4993a2..000000000
+--- a/meta-oe/recipes-bsp/ledmon/ledmon/0001-Don-t-build-with-Werror-to-fix-compile-error.patch
++++ /dev/null
+@@ -1,30 +0,0 @@
+-Subject: [PATCH] Don't build with -Werror to fix compile error.
+-
+-|   550 |  _dump_sgpio_amd(&amd_reg->amd);
+-|       |                  ^~~~~~~~~~~~~
+-| amd_sgpio.c: In function '_write_amd_register':
+-| amd_sgpio.c:558:18: error: taking address of packed member of 'struct amd_register' may result in an unaligned pointer value [-Werror=address-of-packed-member]
+-
+-Upstream-Status: Submitted
+-https://github.com/intel/ledmon/pull/48/commits
+-
+-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+----
+- configure.ac | 1 -
+- 1 file changed, 1 deletion(-)
+-
+-diff --git a/configure.ac b/configure.ac
+-index 7bc20f8..7e01bd5 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -22,7 +22,6 @@ AX_AM_CFLAGS_ADD([-Werror=format-truncation=1])
+- AX_AM_CFLAGS_ADD([-Werror=shift-negative-value])
+- AX_AM_CFLAGS_ADD([-Werror=alloca])
+- AX_AM_CFLAGS_ADD([-Werror=missing-field-initializers])
+--AX_AM_CFLAGS_ADD([-Werror])
+- AX_AM_CFLAGS_ADD([-Werror=format-signedness])
+- 
+- AC_SUBST([AM_CFLAGS])
+--- 
+-2.7.4
+-
+diff --git a/meta-oe/recipes-bsp/ledmon/ledmon_git.bb b/meta-oe/recipes-bsp/ledmon/ledmon_0.97.bb
+similarity index 71%
+rename from meta-oe/recipes-bsp/ledmon/ledmon_git.bb
+rename to meta-oe/recipes-bsp/ledmon/ledmon_0.97.bb
+index dbfd1e7bc..158342dbc 100644
+--- a/meta-oe/recipes-bsp/ledmon/ledmon_git.bb
++++ b/meta-oe/recipes-bsp/ledmon/ledmon_0.97.bb
+@@ -5,28 +5,25 @@ DESCRIPTION = "The utilities are designed primarily to be used on storage server
+ "
+ HOMEPAGE = "https://github.com/intel/ledmon"
  
- inherit pypi python_hatchling
+-LICENSE = "GPL-2.0-only"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
+-"
++LICENSE = "LGPL-2.0-only"
++LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c"
  
--SRC_URI[sha256sum] = "94f336138093a5d7f426aac732dcfe7ab4eb4da243c88f891d65deb4a2556ee7"
-+SRC_URI[sha256sum] = "69bd6fb62d2d04b7055f59a396993486a2ee586c43a0b89231ce0000de07627c"
+-DEPENDS = "sg3-utils udev"
++DEPENDS = "sg3-utils udev pciutils"
  
- DEPENDS += "python3-hatch-fancy-pypi-readme-native"
+-inherit autotools systemd
++inherit autotools systemd pkgconfig
  
+ SYSTEMD_SERVICE:${PN} = "ledmon.service"
+ 
+-# 0.93
+ SRC_URI = "git://github.com/intel/ledmon;branch=master;protocol=https \
+-           file://0002-include-sys-select.h-and-sys-types.h.patch \
+-           file://0001-Don-t-build-with-Werror-to-fix-compile-error.patch \
+-          "
++	   file://0002-include-sys-select.h-and-sys-types.h.patch"
+ 
+-SRCREV = "1d72f9cb5c9163b2ecdf19709935720e65f5b90e"
++SRCREV = "b0edae14e8660b80ffe0384354038a9f62e2978d"
+ 
+ COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
+ COMPATIBLE_HOST:libc-musl = "null"
+ 
+ S = "${WORKDIR}/git"
++
+ EXTRA_OEMAKE = "CC='${CC}' LDFLAGS='${LDFLAGS}' CFLAGS='${CFLAGS}'"
+ 
+ # The ledmon sources include headers in ${S}/config to build but not in CFLAGS. 
 -- 
-2.34.1
+2.25.1
 
 
