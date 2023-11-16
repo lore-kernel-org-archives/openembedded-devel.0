@@ -2,109 +2,88 @@ Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BA10BC54FB9
-	for <webhook@archiver.kernel.org>; Thu, 16 Nov 2023 14:06:58 +0000 (UTC)
-Received: from mail-lf1-f43.google.com (mail-lf1-f43.google.com [209.85.167.43])
- by mx.groups.io with SMTP id smtpd.web11.7282.1700143610983541612
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 64657C197A0
+	for <webhook@archiver.kernel.org>; Thu, 16 Nov 2023 16:37:49 +0000 (UTC)
+Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com [209.85.208.49])
+ by mx.groups.io with SMTP id smtpd.web11.11366.1700152660955090811
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Nov 2023 06:06:51 -0800
+ Thu, 16 Nov 2023 08:37:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=WAVJLwt4;
- spf=pass (domain: gmail.com, ip: 209.85.167.43, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-lf1-f43.google.com with SMTP id 2adb3069b0e04-507a3b8b113so1207693e87.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Nov 2023 06:06:50 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=gAhSVtRu;
+ spf=pass (domain: gmail.com, ip: 209.85.208.49, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-ed1-f49.google.com with SMTP id 4fb4d7f45d1cf-53df747cfe5so1576065a12.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Nov 2023 08:37:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1700143608; x=1700748408; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1700152659; x=1700757459; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=PQR7iesMeA2MEm484bQd65xjxAtiQRKsUvRKwnZpg74=;
-        b=WAVJLwt4b22VveXSa8EqGWNQsV2RaAmm8NEehAVHaF6EGQh1fRaVcxIBthrvUJeUjk
-         ket5IxRG6A3LMMmQ4uxs7eOFbHtNDs8p8g3g23b0a8jKnsMQEazQNCF3pVAwus+RXffJ
-         cjNNhdxpheeVKQ0TR4mDHNZ6zFJfIgJMNnuvJXiDku4Vi5r3lu9cwVjjGn4pmHzYUrtM
-         kdQmw6uuhsBOSCBXKiAyIr9U7fwaaSLUJjdS0Wi7ZZn737XzZpwXbD61+TAwHguqQAMT
-         sigMxVpcpuBw4RywfEAnyjtOb8gPlgeLPwVxZ8GZ1jRscLIejFJm45NQEZILQFEUADBS
-         9jbg==
+        bh=WKJ/dhKkP9gxmjXbUVQt54892mHSInBgW5NUyRYo7No=;
+        b=gAhSVtRuw98EQvtgQsj0BJWfBiZpw+KXEjQJyqdo5dHf/e3bO5sQk7zcP8rZmWKtzn
+         1oKq0Q1QgvPnzZTrnxvAN4L5SHhsAb7FF1tt5vJfsN/RxMkjzXRCN8rgxqzFJa1KnYIl
+         UzVEHHQ8XxYSpbRwjznC/UJFibWytGrwuFfQE3A2wYMR9MaBU/YVReG67wr7d2Wn63zG
+         uQDix0ugiaeLcmb91uhD0uturdIvk16DJUE6UuFQymcBEt2J2SU/ZDjnPKzym7O9qQB4
+         GXdarMUGrJBfx+pkum6syCuIYOFktXLxDEKBC/AmBhazWPPNsGGcMTLhpEFx80U6aIHo
+         JuIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700143608; x=1700748408;
+        d=1e100.net; s=20230601; t=1700152659; x=1700757459;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=PQR7iesMeA2MEm484bQd65xjxAtiQRKsUvRKwnZpg74=;
-        b=qcZ6KFyCP5esJ1JP63ftdRaYBMokJ/vKLYv2oQryvXXkzZPFa4plX6OUePuhx8gIUO
-         BEuxDVMg+Nv8TXmKRmSNYwoY20buerJJwq9pVQc70klvoTuMLO6HF8O9AKBaqK7H+XhY
-         56po6tPbUOoMFCp8krKdkAduTk4uBCPHpyUAXofLzqtINfcaYxpXo+OiOpUojBNNoo1m
-         3pO6YcGhrkwuTNfPiihFfqBQckm8dYc2FYCA6JM3OFrsk4nBC61Wbi3b0gHCIfrq0Ogn
-         b2VacrvH/5Qd+fTXHP4RPFFAu/D2z3Zpm6zTH6f9SbmcCU5XqI3q0bf25VTEynTNhTvP
-         JR2g==
-X-Gm-Message-State: AOJu0Yw/yaQXmUSvOZDamumw9GHO8pZ4BhfdF/UcGGYKOyCHZS33gn8a
-	JnEfvQ/7oRJtshLDc7omM5pMTS74qL8IjQ==
-X-Google-Smtp-Source: AGHT+IHI4EYJJUCOsKjGVIAplKZq4Oecuwfey+wZTwQEKhMwfMOfNcS1gj9ZD62CZV3E5PLups7F+A==
-X-Received: by 2002:a05:6512:70d:b0:503:3787:f75a with SMTP id b13-20020a056512070d00b005033787f75amr10521428lfs.62.1700143608194;
-        Thu, 16 Nov 2023 06:06:48 -0800 (PST)
-Received: from localhost.localdomain ([176.33.65.238])
-        by smtp.gmail.com with ESMTPSA id d2-20020a50f682000000b00546cf67c348sm8037298edn.59.2023.11.16.06.06.46
+        bh=WKJ/dhKkP9gxmjXbUVQt54892mHSInBgW5NUyRYo7No=;
+        b=KwuYLCLj7t6lXkfxEEZVF/qWmHEMwAdFOxemxu2vxhgaMNOXZa+XFee53OVndZoVf3
+         ojDXInrOyNvlyv6pPqlEGnQKHr3bugKW7eI4erHne80qOqx1twl6VItoj2y0bMnAh6wz
+         GnB2bYznYmPz64ZOreuK1O9ce1ZmvvOt1AFbKrHedi1gwXgtbhRjB8/PrMH0O92D4nfj
+         aZXfQUEAPH47hCSJFqLdah1PBHXN2WwReq5Il8zwPg+Tz1swoBFSAI1ClEwN/r9GqWYj
+         us5trB3LNK2vAag+VOYZ48HdOsv4CAz/k3B6Ude5AivTKkVrQTgVuBS1wYazUz5T4HM4
+         klAQ==
+X-Gm-Message-State: AOJu0YxEZ7ReK+VaK4b7MDXRMs81whWSDQUeSd95dwNL/iR9HCOnOVdj
+	uYWXVNWSHIp9zXFrcvmMZ4vdUtrUCdyF/Q==
+X-Google-Smtp-Source: AGHT+IEL2DdKitxNVWz28+Iv10KDlng/3pZlYKlMWWKoA333xm43mxrALIPsk6pHuNfNzZswXnC35Q==
+X-Received: by 2002:a17:906:7c4e:b0:9ae:4776:5a3a with SMTP id g14-20020a1709067c4e00b009ae47765a3amr11627470ejp.39.1700152658406;
+        Thu, 16 Nov 2023 08:37:38 -0800 (PST)
+Received: from localhost.localdomain ([176.33.67.108])
+        by smtp.gmail.com with ESMTPSA id kf2-20020a17090776c200b009dda52b1147sm8597427ejc.126.2023.11.16.08.37.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Nov 2023 06:06:47 -0800 (PST)
+        Thu, 16 Nov 2023 08:37:37 -0800 (PST)
 From: alperak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-oe][PATCH] botan: upgrade 2.19.3 -> 3.2.0
-Date: Thu, 16 Nov 2023 17:06:03 +0300
-Message-Id: <20231116140603.1063254-1-alperyasinak1@gmail.com>
+Subject: [meta-oe][PATCH] capnproto: upgrade 0.10.4 -> 1.0.1
+Date: Thu, 16 Nov 2023 19:35:24 +0300
+Message-Id: <20231116163524.1095372-1-alperyasinak1@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 16 Nov 2023 14:06:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106816
-
-License-Update: Copyright year updated.
-
-Changelog:
-
-https://botan.randombit.net/news.html#version-3-0-0-2023-04-11
-https://botan.randombit.net/news.html#version-3-1-0-2023-07-11
-https://botan.randombit.net/news.html#version-3-1-1-2023-07-13
-https://botan.randombit.net/news.html#version-3-2-0-2023-10-09
+ <openembedded-devel@lists.openembedded.org>; Thu, 16 Nov 2023 16:37:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106817
 
 Signed-off-by: alperak <alperyasinak1@gmail.com>
 ---
- .../botan/{botan_2.19.3.bb => botan_3.2.0.bb}               | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-crypto/botan/{botan_2.19.3.bb => botan_3.2.0.bb} (83%)
+ .../capnproto/{capnproto_0.10.4.bb => capnproto_1.0.1.bb}     | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/capnproto/{capnproto_0.10.4.bb => capnproto_1.0.1.bb} (90%)
 
-diff --git a/meta-oe/recipes-crypto/botan/botan_2.19.3.bb b/meta-oe/recipes-crypto/botan/botan_3.2.0.bb
-similarity index 83%
-rename from meta-oe/recipes-crypto/botan/botan_2.19.3.bb
-rename to meta-oe/recipes-crypto/botan/botan_3.2.0.bb
-index 8d9d423ce..5eff2d383 100644
---- a/meta-oe/recipes-crypto/botan/botan_2.19.3.bb
-+++ b/meta-oe/recipes-crypto/botan/botan_3.2.0.bb
-@@ -1,11 +1,11 @@
- SUMMARY = "Crypto and TLS for C++11"
- HOMEPAGE = "https://botan.randombit.net"
- LICENSE = "BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://license.txt;md5=f4ce98476c07c34e1793daa036960fad"
-+LIC_FILES_CHKSUM = "file://license.txt;md5=f5254d3abe90ec5bb82c5694ff751546"
- SECTION = "libs"
+diff --git a/meta-oe/recipes-devtools/capnproto/capnproto_0.10.4.bb b/meta-oe/recipes-devtools/capnproto/capnproto_1.0.1.bb
+similarity index 90%
+rename from meta-oe/recipes-devtools/capnproto/capnproto_0.10.4.bb
+rename to meta-oe/recipes-devtools/capnproto/capnproto_1.0.1.bb
+index bbdc3b597..99a76d454 100644
+--- a/meta-oe/recipes-devtools/capnproto/capnproto_0.10.4.bb
++++ b/meta-oe/recipes-devtools/capnproto/capnproto_1.0.1.bb
+@@ -5,8 +5,8 @@ SECTION = "console/tools"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://../LICENSE;md5=a05663ae6cca874123bf667a60dca8c9"
  
- SRC_URI = "https://botan.randombit.net/releases/Botan-${PV}.tar.xz"
--SRC_URI[sha256sum] = "dae047f399c5a47f087db5d3d9d9e8f11ae4985d14c928d71da1aff801802d55"
-+SRC_URI[sha256sum] = "049c847835fcf6ef3a9e206b33de05dd38999c325e247482772a5598d9e5ece3"
+-SRC_URI = "git://github.com/sandstorm-io/capnproto.git;branch=release-0.10.4;protocol=https"
+-SRCREV = "a91ec65323c2577732224d0cf6f5bf1e79d3a724"
++SRC_URI = "git://github.com/sandstorm-io/capnproto.git;branch=release-${PV};protocol=https"
++SRCREV = "c7f810a76ca88ff28613fa165927e0269255aab0"
  
- S = "${WORKDIR}/Botan-${PV}"
+ S = "${WORKDIR}/git/c++"
  
-@@ -40,7 +40,7 @@ do_compile() {
- }
- do_install() {
- 	oe_runmake install
--	sed -i -e "s|${D}||g" ${D}${libdir}/pkgconfig/botan-2.pc
-+	sed -i -e "s|${D}||g" ${D}${libdir}/pkgconfig/botan-3.pc
- }
- 
- PACKAGES += "${PN}-python3"
 -- 
 2.25.1
 
