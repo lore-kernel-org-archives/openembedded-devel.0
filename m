@@ -1,92 +1,124 @@
-Return-Path: <alperyasinak1@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8ADECC197A0
-	for <webhook@archiver.kernel.org>; Thu, 16 Nov 2023 17:05:39 +0000 (UTC)
-Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com [209.85.167.52])
- by mx.groups.io with SMTP id smtpd.web11.12164.1700154338837260225
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A9B06C47071
+	for <webhook@archiver.kernel.org>; Thu, 16 Nov 2023 17:34:49 +0000 (UTC)
+Received: from mailout01.t-online.de (mailout01.t-online.de [194.25.134.80])
+ by mx.groups.io with SMTP id smtpd.web11.12936.1700156084478261822
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Nov 2023 09:05:39 -0800
+ Thu, 16 Nov 2023 09:34:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=CUplLY/9;
- spf=pass (domain: gmail.com, ip: 209.85.167.52, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-lf1-f52.google.com with SMTP id 2adb3069b0e04-50970c2115eso1591454e87.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 16 Nov 2023 09:05:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1700154336; x=1700759136; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=J8U77mnmyrbW8hnYp09hqvk1hnjFudWZqt3glVI1Aj4=;
-        b=CUplLY/9FiqCsZg0nzMv+HZjnOJ+NhBWoHE9tnD0SY0rRrMjjOIKRQR3RikZoZ1kPi
-         RdL2xYU9W4t0d/qt6EXlMnF6PrHB5qaUQEsVMpZoj6j4kwAL9Xgth3lFHU9jLMNtyT7p
-         YJDPhLnkrrPAxWOFqw0A79bwwjH5a3kpViEFDA3g3dvOMipKR1lz+rpfVMaUK2U/cqXY
-         UxNIYe58lqXOyqREszedHcQzZ3OXDJvsdgXJBFHjWP0Fzg0evqges01U8qYeKmzt5ifD
-         PlqzF1kdHgQt2J+Lv+MRgiDa28Xon8Uvf1BRWPYKg50xHwfqIVRwWx72EUHiDN6OqNql
-         uALg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700154336; x=1700759136;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=J8U77mnmyrbW8hnYp09hqvk1hnjFudWZqt3glVI1Aj4=;
-        b=NjT2q4kdKD+cqBqrz5tPISdrSRaYu1snqsmVmnMZRo4PwDR64yLnSe4YQuzuRuhvJT
-         OyUMa4sFI0437Dod/2eNGw0ZLmf02zH2yWp5tbK87xz/Uj53ko4U39XDBYg1iInCKlQy
-         kvU/Lpkczd0SPNR8fve3p0Z8vmtRdeZH7X9sHBUVK2pzPj5AzPIDUBD2D3Oefl2qoyUs
-         qagfga6+nEjz8ci86Nb4cg9o2J5fEvJ3B3I1a+8RCawrrzGgv+9LC6XDoCujA3TIjdz/
-         gAgBcwQYNXNDOeO9JRzPlxe/uIVx9zlHhbY4/PCK9NCGxdC6R41ZLkBC5FvgEAd7yoKn
-         V+4g==
-X-Gm-Message-State: AOJu0YwGe86p4ERRoGYTgdWEXpemi9YroEu+XVXpA9htRfqIITz7JrB7
-	FOnWwRXR4HyCH65/Z8MQQhjXbix8/kkt8w==
-X-Google-Smtp-Source: AGHT+IG73Nd1GVTIX5mtXRB1ETi8TRLX0iRVyRfbs94X84Kjrsjnw2n0lnezN6ENkjpYgh7mbQ3JqQ==
-X-Received: by 2002:a05:6512:1593:b0:50a:77c5:12b5 with SMTP id bp19-20020a056512159300b0050a77c512b5mr13364277lfb.23.1700154335998;
-        Thu, 16 Nov 2023 09:05:35 -0800 (PST)
-Received: from localhost.localdomain ([176.33.67.108])
-        by smtp.gmail.com with ESMTPSA id n16-20020a5099d0000000b005454b6d4e22sm8033264edb.64.2023.11.16.09.05.34
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Nov 2023 09:05:35 -0800 (PST)
-From: alperak <alperyasinak1@gmail.com>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.80, mailfrom: f_l_k@t-online.de)
+Received: from fwd85.aul.t-online.de (fwd85.aul.t-online.de [10.223.144.111])
+	by mailout01.t-online.de (Postfix) with SMTP id B1D4934C44
+	for <openembedded-devel@lists.openembedded.org>; Thu, 16 Nov 2023 18:34:42 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.154.171.151]) by fwd85.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1r3gGF-0NcHQn0; Thu, 16 Nov 2023 18:34:39 +0100
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-oe][PATCH] cpuid: upgrade 20211129 -> 20230614
-Date: Thu, 16 Nov 2023 20:05:23 +0300
-Message-Id: <20231116170523.1202934-1-alperyasinak1@gmail.com>
-X-Mailer: git-send-email 2.25.1
+Subject: [meta-multimedia][PATCH] pipewire: Upgrade 0.3.84 -> 0.3.85
+Date: Thu, 16 Nov 2023 18:35:11 +0100
+Message-ID: <20231116173511.113526-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1700156079-AA7FB9F9-1E77B819/0/0 CLEAN NORMAL
+X-TOI-MSGID: 000c8ed7-f856-4d79-a150-20547cf0c632
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 16 Nov 2023 17:05:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106820
+ <openembedded-devel@lists.openembedded.org>; Thu, 16 Nov 2023 17:34:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106821
 
-Changelog:
+PipeWire 0.3.85 (2023-11-16)
 
-https://fossies.org/linux/cpuid/ChangeLog
+This is the fifth (and last) 1.0 release candidate that is API and ABI
+compatible with previous 0.3.x releases.
 
-Signed-off-by: alperak <alperyasinak1@gmail.com>
+Highlights
+  - Fix an issue where a link could end up paused while not negotiated.
+  - Fix an infinite recursion issue when finding runnable nodes.
+  - Support XDG base directories when loading ACP config.
+  - Fix MIDI event recording preview in Ardour.
+  - Many more small fixes, cleanups and improvements.
+
+PipeWire
+  - Fix an issue where a link could end up paused while not negotiated.
+    (#3619)
+  - Fix an infinite recursion issue when finding runnable nodes by stoppi=
+ng
+    the scan on feedback links around the driver. (#3621)
+  - The system service now has better socket permissions.
+
+Modules
+  - Add support for uclamp. This allows the scheduler to make better info=
+rmed
+    decisions about where tasks should be placed, and what pstate to set
+    for the CPU it is running on.
+  - Emit warnings when applications are not doing the right locking inste=
+ad
+    of crashing.
+  - Improve media.name for RAOP sinks. (#3801)
+  - Support pause/resume in pipe-tunnel. (#3197)
+  - Remove time rlimit when probing for realtime to avoid SIGXCPU.
+
+SPA
+  - Fix a bug where the resampler would be activated even when there is a=
+n
+    ALSA pitch element. (#3628)
+  - Improve resume from suspend in ALSA. (#3646)
+  - Add option to expose ALSA controls as prop params.
+  - Support XDG base directories when loading ACP config. This makes it p=
+ossible
+    to override the ACP config files.
+
+Bluetooth
+  - Schedule nodes in the same ISO group together.
+  - More BAP fixes and cleanups.
+
+JACK
+  - Fix MIDI events from peer ports. This makes the MIDI event recording =
+preview
+    of Ardour work correctly.
+
+GStreamer
+  - Fix some error handling in the source and sink.
+
+ALSA plugin
+  - Improve poll descriptor handling. (#3648)
+
+Docs
+  - Many improvements to the layout and organization.
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../cpuid/{cpuid_20211129.bb => cpuid_20230614.bb}              | 2 +-
+ .../pipewire/{pipewire_0.3.84.bb =3D> pipewire_0.3.85.bb}         | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/cpuid/{cpuid_20211129.bb => cpuid_20230614.bb} (90%)
+ rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_0.3.84.bb =3D=
+> pipewire_0.3.85.bb} (99%)
 
-diff --git a/meta-oe/recipes-devtools/cpuid/cpuid_20211129.bb b/meta-oe/recipes-devtools/cpuid/cpuid_20230614.bb
-similarity index 90%
-rename from meta-oe/recipes-devtools/cpuid/cpuid_20211129.bb
-rename to meta-oe/recipes-devtools/cpuid/cpuid_20230614.bb
-index 3218ba652..a88042ba6 100644
---- a/meta-oe/recipes-devtools/cpuid/cpuid_20211129.bb
-+++ b/meta-oe/recipes-devtools/cpuid/cpuid_20230614.bb
-@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
- SRC_URI = "http://www.etallen.com/${BPN}/${BP}.src.tar.gz \
-            "
--SRC_URI[sha256sum] = "230772bb88c44732e68a42d2eff43bcff46d893bf4ea6e04151d4cb6e8c88e2f"
-+SRC_URI[sha256sum] = "b1c83045efc26076307751e0662d580277f5f9bf89cf027231a7812003c3a4e8"
- 
- COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
- 
--- 
-2.25.1
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.84.=
+bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.85.bb
+similarity index 99%
+rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.84.b=
+b
+rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.85.bb
+index 25d4762c8..883d02d51 100644
+--- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.84.bb
++++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.85.bb
+@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM =3D " \
+=20
+ DEPENDS =3D "dbus ncurses"
+=20
+-SRCREV =3D "cf46c4f5af6fc026881dbd4e837e71d8e507beef"
++SRCREV =3D "7db1e7f643a454056327999b2d8e35d8097b5593"
+ SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
+master;protocol=3Dhttps"
+=20
+ S =3D "${WORKDIR}/git"
+--=20
+2.42.0
 
 
