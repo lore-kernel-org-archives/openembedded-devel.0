@@ -2,54 +2,54 @@ Return-Path: <nirpradh@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D43FC072A2
-	for <webhook@archiver.kernel.org>; Fri, 17 Nov 2023 04:54:11 +0000 (UTC)
-Received: from rcdn-iport-2.cisco.com (rcdn-iport-2.cisco.com [173.37.86.73])
- by mx.groups.io with SMTP id smtpd.web10.5630.1700196845956189201
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 18F3AC072A2
+	for <webhook@archiver.kernel.org>; Fri, 17 Nov 2023 05:00:21 +0000 (UTC)
+Received: from rcdn-iport-8.cisco.com (rcdn-iport-8.cisco.com [173.37.86.79])
+ by mx.groups.io with SMTP id smtpd.web10.5685.1700197213083568465
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Nov 2023 20:54:06 -0800
+ Thu, 16 Nov 2023 21:00:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport header.b=kR/KUCGr;
- spf=pass (domain: cisco.com, ip: 173.37.86.73, mailfrom: nirpradh@cisco.com)
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport header.b=EyqRNirq;
+ spf=pass (domain: cisco.com, ip: 173.37.86.79, mailfrom: nirpradh@cisco.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=cisco.com; i=@cisco.com; l=4140; q=dns/txt; s=iport;
-  t=1700196846; x=1701406446;
+  d=cisco.com; i=@cisco.com; l=4097; q=dns/txt; s=iport;
+  t=1700197214; x=1701406814;
   h=from:to:cc:subject:date:message-id:mime-version:
    content-transfer-encoding;
-  bh=riUTjamurHHcHWAdqg2Qr7XBdcxcMNYfJlDx9E8trcc=;
-  b=kR/KUCGrK5YJD4nnaQjNyDKfARLSiY8rSO5RWregyG3rJI+ERj99NhiH
-   Jd4i6TyqqzAdbxvCD6/htycJSxDO8SB+qLQ2KfYeVm6h9/6R/ua36y+uD
-   ZtGrj73qISBoUNT5WPCTEc3SKa1fEt2CNpc9o+CjQyZ3sywYxG+H0UUk3
-   4=;
-X-CSE-ConnectionGUID: JTf60fOiT6+2BlFahCSl8Q==
-X-CSE-MsgGUID: hIxxv5hpT8KVYQZkVkT0PA==
+  bh=7UxlnwUQ8j3pb+Fs/drz7mdkCy2J7Wy84hswkTE1sqg=;
+  b=EyqRNirqi1uVR+zWgF1kzzZDkfYRDDanlmxOdqdlr4Episy8GzNdt1W9
+   WDt8Da9I4QHjphTtH9pi5SwjkifcbgEXls/Jx+MWCrZa9XzoDmeDpop5Z
+   6ZyDIDV5akeIGzufroxyia+2Srntjzexx9/QBuW2+/Y6BwUi0mep5OybQ
+   8=;
+X-CSE-ConnectionGUID: yPumShxBT5CF3+1oy4warQ==
+X-CSE-MsgGUID: Izr04IYzQDORGp5cXz+IUA==
 X-IronPort-AV: E=Sophos;i="6.04,206,1695686400"; 
-   d="scan'208";a="140911604"
-Received: from rcdn-core-6.cisco.com ([173.37.93.157])
-  by rcdn-iport-2.cisco.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 Nov 2023 04:54:05 +0000
+   d="scan'208";a="133225545"
+Received: from rcdn-core-4.cisco.com ([173.37.93.155])
+  by rcdn-iport-8.cisco.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 Nov 2023 05:00:13 +0000
 Received: from sjc-ads-3546.cisco.com (sjc-ads-3546.cisco.com [171.68.249.244])
-	by rcdn-core-6.cisco.com (8.15.2/8.15.2) with ESMTPS id 3AH4s4n8026756
+	by rcdn-core-4.cisco.com (8.15.2/8.15.2) with ESMTPS id 3AH504ML010976
 	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
-	Fri, 17 Nov 2023 04:54:05 GMT
+	Fri, 17 Nov 2023 05:00:05 GMT
 Received: by sjc-ads-3546.cisco.com (Postfix, from userid 1806890)
-	id AA183CC1261; Thu, 16 Nov 2023 20:54:04 -0800 (PST)
+	id D4514CC1261; Thu, 16 Nov 2023 21:00:03 -0800 (PST)
 From: Niranjan Pradhan <nirpradh@cisco.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: xe-linux-external@cisco.com, Niranjan Pradhan <nirpradh@cisco.com>
-Subject: [OE-core][mickledore][PATCH] qemu 7.2.0: Fix CVE-2023-1544
-Date: Thu, 16 Nov 2023 20:53:49 -0800
-Message-Id: <20231117045349.2182445-1-nirpradh@cisco.com>
+Subject: [OE-core][kirkstone][PATCH] qemu 6.2.0: Fix CVE-2023-1544
+Date: Thu, 16 Nov 2023 20:59:55 -0800
+Message-Id: <20231117045955.2183952-1-nirpradh@cisco.com>
 X-Mailer: git-send-email 2.35.6
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Auto-Response-Suppress: DR, OOF, AutoReply
 X-Outbound-SMTP-Client: 171.68.249.244, sjc-ads-3546.cisco.com
-X-Outbound-Node: rcdn-core-6.cisco.com
+X-Outbound-Node: rcdn-core-4.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 Nov 2023 04:54:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106846
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 Nov 2023 05:00:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106847
 
 Upstream Repository: https://gitlab.com/qemu-project/qemu.git
 
@@ -67,13 +67,13 @@ Signed-off-by: Niranjan Pradhan <nirpradh@cisco.com>
  create mode 100644 meta/recipes-devtools/qemu/qemu/CVE-2023-1544.patch
 
 diff --git a/meta/recipes-devtools/qemu/qemu.inc b/meta/recipes-devtools/qemu/qemu.inc
-index 80b5d966e4..2488edd6e6 100644
+index 83bd5d7e67..c8e4e2e6f3 100644
 --- a/meta/recipes-devtools/qemu/qemu.inc
 +++ b/meta/recipes-devtools/qemu/qemu.inc
-@@ -44,6 +44,7 @@ SRC_URI = "https://download.qemu.org/${BPN}-${PV}.tar.xz \
+@@ -101,6 +101,7 @@ SRC_URI = "https://download.qemu.org/${BPN}-${PV}.tar.xz \
+ 	   file://CVE-2023-3354.patch \
  	   file://CVE-2023-3180.patch \
- 	   file://CVE-2023-42467.patch \
- 	   file://0001-target-i386-fix-avx2-instructions-vzeroall-and-vperm.patch \
+ 	   file://CVE-2021-3638.patch \
 +	   file://CVE-2023-1544.patch \
             "
  UPSTREAM_CHECK_REGEX = "qemu-(?P<pver>\d+(\.\d+)+)\.tar"
