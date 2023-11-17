@@ -2,94 +2,119 @@ Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F943C54FB9
-	for <webhook@archiver.kernel.org>; Fri, 17 Nov 2023 23:13:37 +0000 (UTC)
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
- by mx.groups.io with SMTP id smtpd.web11.10451.1700262810667963943
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B444C54FB9
+	for <webhook@archiver.kernel.org>; Fri, 17 Nov 2023 23:18:47 +0000 (UTC)
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+ by mx.groups.io with SMTP id smtpd.web11.10584.1700263123406279124
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 Nov 2023 15:13:31 -0800
+ Fri, 17 Nov 2023 15:18:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=u0BjsD1M;
- spf=pass (domain: smile.fr, ip: 209.85.128.49, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-40a46ea95f0so20754205e9.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Nov 2023 15:13:30 -0800 (PST)
+ dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=XEGzSSZl;
+ spf=pass (domain: smile.fr, ip: 209.85.221.47, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-32fadd4ad09so1825582f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Nov 2023 15:18:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1700262808; x=1700867608; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=S3Igc/vqj0sf+BQjb3hK+T7aUHuyenlKZIl8pwOPWQI=;
-        b=u0BjsD1Mf+ks9/zFWH4cgVBilvzwDFEejUsmDJudsMIFW8wr/E/TbHYvNbraFkEfUh
-         rM0CIPaGaGkv/3dxEorICn7lGxBE+vZb3brCaLzyI0BX+cnyACnp6T/ymMYnoUIKAoGg
-         CGbEP8XWaDcKEptoEWoQWGyswkWjjWC9aMfRyHzYl1DGLa7ZBy+h3XU4dMhe26jCVapQ
-         aZWZcSaCE8mbO/OKpq2oObsgg9k1xnFQgGLwhRrzwDq5mljmaKanYtmFVk7uif0DD4hh
-         X7GxLJEasSREdPvplIFDBO5uqYI6Yf20Pcof/xhzrD/WShoww19DIkCvaXi9WJwLv/bi
-         4eIA==
+        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1700263121; x=1700867921; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:organization:references:to
+         :from:content-language:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=NQK85QyrEqUQlT25EXdnu/mgfPLNU/bNLlqurZX/FIM=;
+        b=XEGzSSZlUsoJmp9jb/7Y6gwv8TY4dFZG/hd4ZCcaxEKINEJe6FwYr6AejVRC3GsEjl
+         HgVCDxMQqeRzAScxy7oBMeAfACcr8Q5G2nETniixD2NA4HzDytr6es2TR/qOURbUaAam
+         2YSxBmvmxlOJqoZYOq96yn/+P7+c+h0dXozdXR7nlLs9Il7bumttuC4DYQTiJ2TWey7E
+         wPFQ9qjkKMwtvmfg9h66nf2qIJ9u9/lkjsyrDV1SZm9ZZMCqmhgs3Arjo61Oc6cHeCcK
+         BBYMR17PfbJD/P7QM5qrZBBrs6e6cLV+XW0+tbQyfL0ZT56vk48rJ8hefGyMud5pubLS
+         WD/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700262808; x=1700867608;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1700263121; x=1700867921;
+        h=content-transfer-encoding:in-reply-to:organization:references:to
+         :from:content-language:subject:user-agent:mime-version:date
+         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=S3Igc/vqj0sf+BQjb3hK+T7aUHuyenlKZIl8pwOPWQI=;
-        b=piCWtDnfee9/YDzHLpYt5DHRpkQzFe3I3tr6/xH3AHCxfZEYMyOCqiyeLUc1TiCFMo
-         xSy5K5T+VQBAvhHUV8sFHSH/OVySBYEcWiDXW2Lo7xUFkQ7JrXXxsTKVibey5BcaS+AQ
-         FvUi/TGxQOK59f9aC32BjfcjQYIBAgsba8a84AkEAnEEMgZHe7GWiJ0Fx395X2TtQalg
-         82HTYy6+Y8J/J+oLT8VR4X+/jCeY2RcjLMucUifmyzpTmIxB3g/XS5OPn3U5D0i5YLfv
-         9mHwviOykKfi8pm4XI4A8HjupSpHBeWrxNq9Q82zAJ+v0qKyxu0SJ8IO6v4oGaAUimV6
-         /G1Q==
-X-Gm-Message-State: AOJu0Yxw3tixUilzi/OvkhoYzuljt6mAErqmojmyrnO1Lxg2gVSJhgva
-	amAcdIZeq2NrQt3lJyXHO9bb1z2Au3yuZ04oJR0=
-X-Google-Smtp-Source: AGHT+IEkTq6YTxU8xGcOSk1Bj/zFpWe6a9SEg8DcJElKSlVOU65IkMQLAr7J9eNTJnB+WWNslRL9lw==
-X-Received: by 2002:a05:600c:46cd:b0:405:3a65:1b4c with SMTP id q13-20020a05600c46cd00b004053a651b4cmr394020wmo.6.1700262808524;
-        Fri, 17 Nov 2023 15:13:28 -0800 (PST)
-Received: from P-ASN-ECS-830T8C3.local ([89.159.1.53])
-        by smtp.gmail.com with ESMTPSA id g18-20020a05600c4ed200b004068e09a70bsm4388899wmq.31.2023.11.17.15.13.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 17 Nov 2023 15:13:28 -0800 (PST)
+        bh=NQK85QyrEqUQlT25EXdnu/mgfPLNU/bNLlqurZX/FIM=;
+        b=NuK7wGmpOPqSa+nw9RzBu3PrcWrGvGrcSW4d5wTMI1M7Lkyf5/JnlMLnEYsNmDtQmh
+         54bxBnXBbsobvmLKQvOvXqxG3XhWnPV/NZ4/2Dspi8weaVnv/6e5sNNwHR7jfQPtQVxg
+         M/ayUf2+JthlhTU6XJ0q75dnR5jnRnWB0oCpNyv1EWb0/qA8v4OOEbbFRf9dNk2bznx1
+         yHjrm5sOpzFfUMwS1NN7McudgnaY6RGm5vRwUHASC9aDRYag0wbX19QYOWU2QM1k8JTQ
+         2ZH4B5SWHahAFlft5ESD9CHq8I9MC5rBgp7/rCRPyq+WKLnTEiB4YAsuYnT6uhTQnLnd
+         OWFw==
+X-Gm-Message-State: AOJu0YzcWfTWT3z0/SEIeeefzWgxdJCurecOYqoPgoPENIJpjoXIXJ3B
+	YlLoGzR/9m/K96hnSdrcb9ckAEIblWd3EwUMV8c=
+X-Google-Smtp-Source: AGHT+IFfO8bJf66ZJWfS9AAmTpEaVIAdZSCTrhKXDpCwFTGZctJa/ZCoPtc2x6atINCOOAac1PYFkg==
+X-Received: by 2002:a05:6000:1086:b0:32f:b17c:65e0 with SMTP id y6-20020a056000108600b0032fb17c65e0mr373516wrw.17.1700263121020;
+        Fri, 17 Nov 2023 15:18:41 -0800 (PST)
+Received: from [192.168.0.20] ([89.159.1.53])
+        by smtp.gmail.com with ESMTPSA id d19-20020adf9b93000000b003316eb9db40sm1184245wrc.51.2023.11.17.15.18.40
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 17 Nov 2023 15:18:40 -0800 (PST)
+Message-ID: <16f5f05b-a310-41e0-8b0d-e7e5a2fd712d@smile.fr>
+Date: Sat, 18 Nov 2023 00:18:40 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [meta-python][kirkstone][PATCH 1/2] python3-cson: fix DEPENDS on
+ python3-native
+Content-Language: en-US
 From: Yoann Congal <yoann.congal@smile.fr>
 To: openembedded-devel@lists.openembedded.org
-Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>,
-	Khem Raj <raj.khem@gmail.com>,
-	Yoann Congal <yoann.congal@smile.fr>
-Subject: [meta-python][kirkstone][PATCH] python3-cson: fix run-time dependencies
-Date: Sat, 18 Nov 2023 00:13:21 +0100
-Message-Id: <20231117231321.605621-1-yoann.congal@smile.fr>
-X-Mailer: git-send-email 2.30.2
-MIME-Version: 1.0
+References: <20231117091824.450741-1-yoann.congal@smile.fr>
+ <dc8c58c0-bc7c-4cf3-975b-4f0803b7c915@smile.fr>
+Organization: Smile ECS
+In-Reply-To: <dc8c58c0-bc7c-4cf3-975b-4f0803b7c915@smile.fr>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 Nov 2023 23:13:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106881
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 Nov 2023 23:18:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106882
 
-From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Le 18/11/2023 à 00:07, Yoann Congal a écrit :
+> Le 17/11/2023 à 10:18, Yoann Congal a écrit :
+>> python-native is not provided by meta-python anymore and this is clearly
+>> a python3 recipe.
+>>
+>> Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+>> ---
+>>  meta-python/recipes-extended/python-cson/python3-cson_git.bb | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/meta-python/recipes-extended/python-cson/python3-cson_git.bb b/meta-python/recipes-extended/python-cson/python3-cson_git.bb
+>> index c4fcc61ec..da174ad55 100644
+>> --- a/meta-python/recipes-extended/python-cson/python3-cson_git.bb
+>> +++ b/meta-python/recipes-extended/python-cson/python3-cson_git.bb
+>> @@ -13,7 +13,7 @@ SRC_URI = "git://github.com/gt3389b/python-cson.git;branch=master;protocol=https
+>>  S = "${WORKDIR}/git"
+>>  
+>>  RDEPENDS:${PN}:class-native = ""
+>> -DEPENDS:append:class-native = " python-native "
+>> +DEPENDS:append:class-native = " python3-native "
+>>  
+>>  inherit setuptools3
+>>  
+> 
+> It would be better to backport https://git.openembedded.org/meta-openembedded/commit/?id=40b4cf5a83098a5f1be873be5c29f26380bc7993 instead of this patch
+> In the current state :
+> root@qemux86-64:~# python-cson
+> Traceback (most recent call last):
+>   File "/usr/bin/python-cson", line 5, in <module>
+>     from cson import main
+>   File "/usr/lib/python3.10/site-packages/cson.py", line 11, in <module>
+>     import argparse, copy, json, sys
+> ModuleNotFoundError: No module named 'json'
+> 
+> I'll send the backport.
+Here it is :
+[meta-python][kirkstone][PATCH] python3-cson: fix run-time dependencies
+https://lists.openembedded.org/g/openembedded-devel/message/106881
 
-Add the missing run-time dependency on python3-json. As a result we no
-longer need to pull python3 native and can drop other *DEPENDS.
+With the backport the python-cson tool does start so this patch should definitely be dropped in favor of the backport.
+root@qemux86-64:~# python-cson 
+usage: python-cson [-h] -f OUTPUT_FILE [-v] input_file
+python-cson: error: the following arguments are required: -f/--file, input_file
 
-Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 40b4cf5a83098a5f1be873be5c29f26380bc7993)
-Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
----
- meta-python/recipes-extended/python-cson/python3-cson_git.bb | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
-
-diff --git a/meta-python/recipes-extended/python-cson/python3-cson_git.bb b/meta-python/recipes-extended/python-cson/python3-cson_git.bb
-index c4fcc61ec..1187d12af 100644
---- a/meta-python/recipes-extended/python-cson/python3-cson_git.bb
-+++ b/meta-python/recipes-extended/python-cson/python3-cson_git.bb
-@@ -12,8 +12,7 @@ SRC_URI = "git://github.com/gt3389b/python-cson.git;branch=master;protocol=https
- 
- S = "${WORKDIR}/git"
- 
--RDEPENDS:${PN}:class-native = ""
--DEPENDS:append:class-native = " python-native "
-+RDEPENDS:${PN} = "python3-json"
- 
- inherit setuptools3
- 
+Regards,
 -- 
-2.30.2
-
+Yoann Congal
+Smile ECS - Tech Expert
 
