@@ -1,74 +1,84 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A39BEC197A0
-	for <webhook@archiver.kernel.org>; Fri, 17 Nov 2023 06:50:01 +0000 (UTC)
-Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
- by mx.groups.io with SMTP id smtpd.web10.6628.1700203791465274979
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 49A26C072A2
+	for <webhook@archiver.kernel.org>; Fri, 17 Nov 2023 08:52:02 +0000 (UTC)
+Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com [209.85.208.49])
+ by mx.groups.io with SMTP id smtpd.web10.7698.1700211112370434913
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 Nov 2023 22:49:52 -0800
+ Fri, 17 Nov 2023 00:51:52 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: wangmy@fujitsu.com)
-X-IronPort-AV: E=McAfee;i="6600,9927,10896"; a="119375179"
-X-IronPort-AV: E=Sophos;i="6.04,206,1695654000"; 
-   d="scan'208";a="119375179"
-Received: from unknown (HELO oym-r3.gw.nic.fujitsu.com) ([210.162.30.91])
-  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 Nov 2023 15:49:48 +0900
-Received: from oym-m1.gw.nic.fujitsu.com (oym-nat-oym-m1.gw.nic.fujitsu.com [192.168.87.58])
-	by oym-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 7CDB1D64B1
-	for <openembedded-devel@lists.openembedded.org>; Fri, 17 Nov 2023 15:49:46 +0900 (JST)
-Received: from aks-ab1.gw.nic.fujitsu.com (aks-ab1.gw.nic.fujitsu.com [192.51.207.11])
-	by oym-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id AC797D88D2
-	for <openembedded-devel@lists.openembedded.org>; Fri, 17 Nov 2023 15:49:45 +0900 (JST)
-Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.79])
-	by aks-ab1.gw.nic.fujitsu.com (Postfix) with ESMTP id 57FC42FC174A;
-	Fri, 17 Nov 2023 15:49:44 +0900 (JST)
-From: wangmy@fujitsu.com
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=LwKkgaXs;
+ spf=pass (domain: gmail.com, ip: 209.85.208.49, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f49.google.com with SMTP id 4fb4d7f45d1cf-53f9af41444so2476986a12.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Nov 2023 00:51:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1700211111; x=1700815911; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=2Kbik1r/Hk5bNogqPj7XUc5ih6+Q4avsSYS/yLKiEwA=;
+        b=LwKkgaXsLrL8r2NB6vgwIWMb7U3GG02RWLsATPN721CB3887Tf5ByZAZMIDpJ70rwl
+         37fSc6GrPrDczzG5oTIfCy+glyaTuigsjhrv7GS3M8Q3t4dDsZHvBs6+WGHja2oPW1Ji
+         WjSgIYtImxk+lueZYndo0qnxG3zoS0uyvLjmuiRMXGXGdZ1KW4RlhYJnn7dKLkwz98gI
+         7odzpWzx8pS6XXJ1jD8SCiDlLtsv70bcyrsfSB/8Q73vxzNo6rS4NBlVKk64NcU91w4Y
+         FTaNLkKOZKLahAjHvnB08wfzWnoZBTYY/nSDFV4zNSMuC07L1Y4usoKedPOyrQr6L2jU
+         9ZwQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1700211111; x=1700815911;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=2Kbik1r/Hk5bNogqPj7XUc5ih6+Q4avsSYS/yLKiEwA=;
+        b=VyLsdxJkGAaSM6jMeDWubJNbGMzcaNpxE6yegDEBp/sY9aoY5hM+OwguPvUW5nk3Xk
+         ZxiAXF+/0y1HFrfarwSw1Oq84S4BkjK0GRrmcmW8yNL8tjHVDuvfKulloVv6Hyb7mO6L
+         MkMYPloQhap4CBXig4xkAXR4WL79W77Sq/CjGlegXStOZxSk5R5XWneFpktCrEtnxdR4
+         PpCK3I5n2ZyzZAk/Ekjj1w6HaQgeth67HzSoMnLlHPDe3EtBRtiindalPYqiLvRMAKXq
+         Rx8NMazVyBJb1NUrQiIEFhhvLTLgjIjBxcUZSixDmPtFFZRUD8PI1gkX4KMf5PSVtF5A
+         yBzQ==
+X-Gm-Message-State: AOJu0YzvdZax8A5AsxHizztzlkmWJfz+C/i4DDOW3+F9CyO3zeAq5VEq
+	1F32XcvYlgIN2QB6l9xWYF0nrUWO9VY=
+X-Google-Smtp-Source: AGHT+IH28JfIZtdrCHeTrLFkEgwqzNqkOrfcgRR8YLVUIBCg3+Iv5EtTezB7r4eIPvLUWCrLraIbbw==
+X-Received: by 2002:a05:6402:1111:b0:543:6ce3:f091 with SMTP id u17-20020a056402111100b005436ce3f091mr14473594edv.7.1700211110584;
+        Fri, 17 Nov 2023 00:51:50 -0800 (PST)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id x25-20020aa7cd99000000b0054386466f56sm509626edv.60.2023.11.17.00.51.50
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 17 Nov 2023 00:51:50 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] imlib2: delete non-existent file
-Date: Fri, 17 Nov 2023 14:49:11 +0800
-Message-Id: <1700203751-30723-1-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-X-TM-AS-GCONF: 00
-X-TM-AS-Product-Ver: IMSS-9.1.0.1408-9.0.0.1002-28002.004
-X-TM-AS-User-Approved-Sender: Yes
-X-TMASE-Version: IMSS-9.1.0.1408-9.0.1002-28002.004
-X-TMASE-Result: 10-0.626100-10.000000
-X-TMASE-MatchedRID: LQTCmOBQxsnHt8FegNoXIfLeH1FBnhK0wTlc9CcHMZerwqxtE531VNnf
-	JrUSEbFDu+U+TVUiqnWAMuqetGVetiVvu9chHp+mavP8b9lJtWr6C0ePs7A07Q2y0JeZ/zsc6Fa
-	ZYpXGK2DzbEKG9GVE/3s6FQO0FWhrl1ivJvjpR6Fy7tNyLyIc0BCQcn+vLk2XsenC85dLpQnYLk
-	/lrdRQxHsLGOMiJ6iL8gwWDQic4+rPmACeZqO85TioKJ2WPUxTLS4AEOLjtwA=
-X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: [meta-oe][PATCH 1/8] android-tools: drop ${PE}, ${PR} from /usr/src/debug paths
+Date: Fri, 17 Nov 2023 09:51:36 +0100
+Message-ID: <20231117085143.3813216-1-martin.jansa@gmail.com>
+X-Mailer: git-send-email 2.42.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 Nov 2023 06:50:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106849
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 Nov 2023 08:52:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106850
 
-From: Wang Mingyu <wangmy@fujitsu.com>
-
-/usr/bin/imlib2-config was deleted from upstream, so delete it from bb
-file.
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 ---
- meta-oe/recipes-graphics/imlib2/imlib2_git.bb | 3 ---
- 1 file changed, 3 deletions(-)
+ .../recipes-devtools/android-tools/android-tools_5.1.1.r37.bb   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/imlib2/imlib2_git.bb b/meta-oe/recipes-graphics/imlib2/imlib2_git.bb
-index ceb14301e..113b8666a 100644
---- a/meta-oe/recipes-graphics/imlib2/imlib2_git.bb
-+++ b/meta-oe/recipes-graphics/imlib2/imlib2_git.bb
-@@ -36,6 +36,3 @@ PACKAGES =+ "${BPN}-loaders ${BPN}-filters ${BPN}-data"
- FILES:${PN}-data = "${datadir}"
- FILES:imlib2-loaders = "${libdir}/imlib2/loaders/*.so"
- FILES:imlib2-filters = "${libdir}/imlib2/filters/*.so"
--
--inherit multilib_script
--MULTILIB_SCRIPTS = "${PN}-bin:${bindir}/imlib2-config"
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
+index 9278146702..1c66ea4997 100644
+--- a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
++++ b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
+@@ -92,7 +92,7 @@ do_compile() {
+ 
+     # Setting both variables below causing our makefiles to not work with
+     # implicit make rules
+-    CFLAGS="-ffile-prefix-map=${S}=/usr/src/debug/${PN}/${EXTENDPE}${PV}-${PR}"
++    CFLAGS="-ffile-prefix-map=${S}=${TARGET_DBGSRC_DIR}"
+     unset CPPFLAGS
+ 
+     export SRCDIR=${S}
 -- 
-2.34.1
+2.42.1
 
 
