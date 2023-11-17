@@ -2,114 +2,204 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D978DC54FB9
-	for <webhook@archiver.kernel.org>; Fri, 17 Nov 2023 18:02:15 +0000 (UTC)
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
- by mx.groups.io with SMTP id smtpd.web11.2322.1700244132354721226
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D8286C54FB9
+	for <webhook@archiver.kernel.org>; Fri, 17 Nov 2023 18:12:35 +0000 (UTC)
+Received: from mail-oa1-f45.google.com (mail-oa1-f45.google.com [209.85.160.45])
+ by mx.groups.io with SMTP id smtpd.web11.2597.1700244746425655113
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 Nov 2023 10:02:12 -0800
+ Fri, 17 Nov 2023 10:12:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=SFD9Cde0;
- spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-6c4eb5fda3cso2266771b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Nov 2023 10:02:12 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=OOcED30w;
+ spf=pass (domain: gmail.com, ip: 209.85.160.45, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f45.google.com with SMTP id 586e51a60fabf-1f03db0a410so1184284fac.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Nov 2023 10:12:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1700244131; x=1700848931; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=uTLLwNYpWAI77Al10sK50UNoJ14uGYlZwaV3uGuTmws=;
-        b=SFD9Cde0AeFVlTz8xBtjSjE/3yec/UcWd53hkwk3TsJYTa5fnRA4l4eJR+wdB6OPp3
-         evsros3bvTC+I+KRCIbVcz7n1Z7Ne2vxUfHb6s3rrUL7XhvpFt3R8V0Sc02I7U+cEcqB
-         9KrIHD/kgqngba8A1WIlQ5Jalr0FNOi/0Zve0CLvhI7jyRI0rf6hvaufiZZc3967B2r+
-         TenGy3UEB4w9LRWpjFwYAWkx2HHs0QrYNfkYIMlw+Kgy44rzYAWD/ZQ8jKq66ny7T4nf
-         NgXA8Lht4s6LqDlfqyw4jQMMr6rkP+V5+UUVUHDZ/4hEjqZKZixfeTvy1XvrLacoWYPD
-         TcpA==
+        d=gmail.com; s=20230601; t=1700244745; x=1700849545; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=7gQlvWLxl9t8zEJ4YSgaWKSMlIVR/WKrAlRegbg7MqA=;
+        b=OOcED30wV0nWTrryD9DuaS9PW2pe/C3MQYspzGvICP7pND2/JCiWag1cWopQ5c+udl
+         7gbbowJGkp8TnGMpnmb1Q98+hQwCBxfRoiGoNqSN+/R7SMWaORgVlMdof8tuQRztJ+Wg
+         cf3RN2Le460bN8s5pzIyG+0dVOQiDUB7Gy0lPl31OzpbMcok8c8i7NuIqOlvMJ22TkQg
+         qvxXjEapSOsTb5TLTOO3JuwerhToJOQtL5vFLyvIYNs3eMUUWrghXVVYgAJWgCqS3OLL
+         oqzSrQTNssPxE2+krMuxG3UVqlrpYx4zLb2qJdNeXpXUAO6RJkkLQnue8dLUI+PupFCz
+         uBkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700244131; x=1700848931;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=uTLLwNYpWAI77Al10sK50UNoJ14uGYlZwaV3uGuTmws=;
-        b=vhx/RcfFUmgm6pJM2sChjismff0PwbsyuaMWssXoMDTPZtBPG49oLRJAeipweN3hhG
-         p/aGpEG4SoQdoXkVmXSb27j8Cq2t2MEiScpZ3CJrE0HCN+H2Fh7VxvepnKQEhgrgdUrQ
-         e0auCawrXI//RssL6VkGg4EYi2dFlX1uvC6JdGmXK99EViT02km79kK0Q18DvldDSne+
-         j5LfgW6EJbZXoW4YccBT97RbsTq8lM0prW/n+skZGau7JPub/HqIFC8cDkTB454UJWrs
-         EHvMuWa3I4pUXYDbwrTTaI9xr1RI60HsroCOO5vfkDgungtZ6Ww3dxMWI3zAB9m469eQ
-         3N4g==
-X-Gm-Message-State: AOJu0Yxx/D+8+bRgyN8N/NbkN7zLnE84OIXey3kd4Ti8BH+S0bFTmonE
-	LdYd9kAABAMCZoPuyPLlepviqklHrL/Wtw==
-X-Google-Smtp-Source: AGHT+IGXFZXC2CCWhodnt4tm3zeI+QerdHDM6+KvDhXVg5dN/SIT/Hhhopxr1J/kg4Nt1qXTIum/gw==
-X-Received: by 2002:a05:6a00:8c5:b0:6be:4e6e:2a85 with SMTP id s5-20020a056a0008c500b006be4e6e2a85mr170815pfu.30.1700244131085;
-        Fri, 17 Nov 2023 10:02:11 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9100:2cb0::62f8])
-        by smtp.gmail.com with ESMTPSA id b6-20020aa78106000000b006c0685422e0sm1664614pfi.214.2023.11.17.10.02.10
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 17 Nov 2023 10:02:10 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Yoann Congal <yoann.congal@smile.fr>
-Subject: [meta-multimedia][PATCH] projucer: Refresh patch to apply cleanly
-Date: Fri, 17 Nov 2023 10:02:08 -0800
-Message-ID: <20231117180208.401854-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.42.1
+        d=1e100.net; s=20230601; t=1700244745; x=1700849545;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=7gQlvWLxl9t8zEJ4YSgaWKSMlIVR/WKrAlRegbg7MqA=;
+        b=giILhN6I1VuxPDZnEz8eeIkRnZbpVsEOysnOXyFyvljx5tZcfLsPx/AOMr0tzP8WPx
+         X8PTJlZRBOhewqKMPGayPhPTwRKbMTrxOdD97W0nUwpqHIPEekC29nwDrjs0I8Kgnr5+
+         6/vxt+l6YniNIwfzXSVUiPK71iBDcqCnNZtgn0VGiIDVqi+2LgIGp1IKFAxTL0p/WX/8
+         UXJlj/VX5xWgppXHtEskMA5VfIU8Fu4IGHpNsI044nAzA4wvO3kTBlDj4ETSoQsygNpW
+         SqoAtZjRPlm5RPezIa2Aca+7orCR1EzCTfR+ZCCOxWB9oHvsePtSMXM2OeN6CKQ7xa1D
+         FTFg==
+X-Gm-Message-State: AOJu0Yxql5tOL8lw+vsUfaP0gd7j7enGjKzLxTKasgc4K6Vb35NeKc/v
+	zPAXyqcDEhOOSTSgwUhyHSyhTCgDEsbyiwB6oJ4=
+X-Google-Smtp-Source: AGHT+IHGbUrihpPDCBurv1mTHt6gwrX7e4e6yulaUbQPEiumSjGMWWIhS84/PIMU6JR9/CyIDimEUpH6FDWIFiSGTKY=
+X-Received: by 2002:a05:6871:460a:b0:1ef:c082:ecbe with SMTP id
+ nf10-20020a056871460a00b001efc082ecbemr26526334oab.55.1700244745486; Fri, 17
+ Nov 2023 10:12:25 -0800 (PST)
 MIME-Version: 1.0
+References: <20231116083050.132470-1-alperyasinak1@gmail.com>
+In-Reply-To: <20231116083050.132470-1-alperyasinak1@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 17 Nov 2023 10:11:59 -0800
+Message-ID: <CAMKF1sqB1zNV68uamtdNSaZdMt_spUr-55TwUAKzPLNZVbDUtg@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] ledmon: upgrade 0.93 -> 0.97
+To: Alper Ak <alperyasinak1@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 Nov 2023 18:02:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106872
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 Nov 2023 18:12:35 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106873
 
-This was resulting on rejects on master
+This fails to build with clang for 32bit x86 e.g. qemux86
 
-patching file modules/juce_core/system/juce_StandardHeader.h
-Hunk #1 FAILED at 64 (different line endings).
-1 out of 1 hunk FAILED -- rejects in file modules/juce_core/system/juce_Sta=
-ndardHeader.h
-Patch 0001-StandardHeader-Include-utility-for-GCC-12-compatibil.patch does =
-not apply (enforce with -f)
+https://errors.yoctoproject.org/Errors/Details/742597/
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Yoann Congal <yoann.congal@smile.fr>
----
- ...r-Include-utility-for-GCC-12-compatibil.patch | 16 +++++++---------
- 1 file changed, 7 insertions(+), 9 deletions(-)
-
-diff --git a/meta-multimedia/recipes-multimedia/juce/projucer/0001-Standard=
-Header-Include-utility-for-GCC-12-compatibil.patch b/meta-multimedia/recipe=
-s-multimedia/juce/projucer/0001-StandardHeader-Include-utility-for-GCC-12-c=
-ompatibil.patch
-index ae77aeef10..3efef247ae 100644
---- a/meta-multimedia/recipes-multimedia/juce/projucer/0001-StandardHeader-=
-Include-utility-for-GCC-12-compatibil.patch
-+++ b/meta-multimedia/recipes-multimedia/juce/projucer/0001-StandardHeader-=
-Include-utility-for-GCC-12-compatibil.patch
-@@ -9,15 +9,13 @@ Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
-  modules/juce_core/system/juce_StandardHeader.h | 1 +
-  1 file changed, 1 insertion(+)
-=20
--diff --git a/modules/juce_core/system/juce_StandardHeader.h b/modules/juce=
-_core/system/juce_StandardHeader.h
--index fe164cdd3..cda6bbe86 100644
- --- a/modules/juce_core/system/juce_StandardHeader.h
- +++ b/modules/juce_core/system/juce_StandardHeader.h
- @@ -64,6 +64,7 @@
-- #include <typeindex>
-- #include <unordered_map>
-- #include <unordered_set>
--+#include <utility>
-- #include <vector>
-- #include <set>
--=20
-+ #include <typeindex>=0D
-+ #include <unordered_map>=0D
-+ #include <unordered_set>=0D
-++#include <utility>=0D
-+ #include <vector>=0D
-+ #include <set>=0D
-+ =0D
---=20
-2.42.1
-
+On Thu, Nov 16, 2023 at 12:31=E2=80=AFAM Alper Ak <alperyasinak1@gmail.com>=
+ wrote:
+>
+> * License changed GPL-2.0-only -> LGPL-2.0-only
+>
+>   - LIC_FILES_CHKSUM changed COPYING -> COPYING.LIB for LGPL-2.0-only
+>   - Changed license headers in required source files.
+>   - Changed copyright years to 2022 in modified files.
+>
+> * 0001-Don-t-build-with-Werror-to-fix-compile-error.patch removed because=
+ fixed in the new version.
+>
+> * libpci was added as depends following this error -> configure: error: P=
+ackage requirements (libpci) were not met: No package 'libpci' found
+>
+> * pkgconfig added as inherit following this error -> PKG_PROG_PKG_CONFIG:=
+ command not found
+>
+> Changelog:
+>
+> It can be followed here: https://github.com/intel/ledmon/releases
+>
+> Signed-off-by: alperak <alperyasinak1@gmail.com>
+> ---
+>  ...ild-with-Werror-to-fix-compile-error.patch | 30 -------------------
+>  .../ledmon/{ledmon_git.bb =3D> ledmon_0.97.bb}  | 17 +++++------
+>  2 files changed, 7 insertions(+), 40 deletions(-)
+>  delete mode 100644 meta-oe/recipes-bsp/ledmon/ledmon/0001-Don-t-build-wi=
+th-Werror-to-fix-compile-error.patch
+>  rename meta-oe/recipes-bsp/ledmon/{ledmon_git.bb =3D> ledmon_0.97.bb} (7=
+1%)
+>
+> diff --git a/meta-oe/recipes-bsp/ledmon/ledmon/0001-Don-t-build-with-Werr=
+or-to-fix-compile-error.patch b/meta-oe/recipes-bsp/ledmon/ledmon/0001-Don-=
+t-build-with-Werror-to-fix-compile-error.patch
+> deleted file mode 100644
+> index 09f4993a2..000000000
+> --- a/meta-oe/recipes-bsp/ledmon/ledmon/0001-Don-t-build-with-Werror-to-f=
+ix-compile-error.patch
+> +++ /dev/null
+> @@ -1,30 +0,0 @@
+> -Subject: [PATCH] Don't build with -Werror to fix compile error.
+> -
+> -|   550 |  _dump_sgpio_amd(&amd_reg->amd);
+> -|       |                  ^~~~~~~~~~~~~
+> -| amd_sgpio.c: In function '_write_amd_register':
+> -| amd_sgpio.c:558:18: error: taking address of packed member of 'struct =
+amd_register' may result in an unaligned pointer value [-Werror=3Daddress-o=
+f-packed-member]
+> -
+> -Upstream-Status: Submitted
+> -https://github.com/intel/ledmon/pull/48/commits
+> -
+> -Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> ----
+> - configure.ac | 1 -
+> - 1 file changed, 1 deletion(-)
+> -
+> -diff --git a/configure.ac b/configure.ac
+> -index 7bc20f8..7e01bd5 100644
+> ---- a/configure.ac
+> -+++ b/configure.ac
+> -@@ -22,7 +22,6 @@ AX_AM_CFLAGS_ADD([-Werror=3Dformat-truncation=3D1])
+> - AX_AM_CFLAGS_ADD([-Werror=3Dshift-negative-value])
+> - AX_AM_CFLAGS_ADD([-Werror=3Dalloca])
+> - AX_AM_CFLAGS_ADD([-Werror=3Dmissing-field-initializers])
+> --AX_AM_CFLAGS_ADD([-Werror])
+> - AX_AM_CFLAGS_ADD([-Werror=3Dformat-signedness])
+> -
+> - AC_SUBST([AM_CFLAGS])
+> ---
+> -2.7.4
+> -
+> diff --git a/meta-oe/recipes-bsp/ledmon/ledmon_git.bb b/meta-oe/recipes-b=
+sp/ledmon/ledmon_0.97.bb
+> similarity index 71%
+> rename from meta-oe/recipes-bsp/ledmon/ledmon_git.bb
+> rename to meta-oe/recipes-bsp/ledmon/ledmon_0.97.bb
+> index dbfd1e7bc..158342dbc 100644
+> --- a/meta-oe/recipes-bsp/ledmon/ledmon_git.bb
+> +++ b/meta-oe/recipes-bsp/ledmon/ledmon_0.97.bb
+> @@ -5,28 +5,25 @@ DESCRIPTION =3D "The utilities are designed primarily t=
+o be used on storage server
+>  "
+>  HOMEPAGE =3D "https://github.com/intel/ledmon"
+>
+> -LICENSE =3D "GPL-2.0-only"
+> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D0636e73ff0215e8d672dc4c32c317=
+bb3 \
+> -"
+> +LICENSE =3D "LGPL-2.0-only"
+> +LIC_FILES_CHKSUM =3D "file://COPYING.LIB;md5=3D4fbd65380cdd255951079008b=
+364516c"
+>
+> -DEPENDS =3D "sg3-utils udev"
+> +DEPENDS =3D "sg3-utils udev pciutils"
+>
+> -inherit autotools systemd
+> +inherit autotools systemd pkgconfig
+>
+>  SYSTEMD_SERVICE:${PN} =3D "ledmon.service"
+>
+> -# 0.93
+>  SRC_URI =3D "git://github.com/intel/ledmon;branch=3Dmaster;protocol=3Dht=
+tps \
+> -           file://0002-include-sys-select.h-and-sys-types.h.patch \
+> -           file://0001-Don-t-build-with-Werror-to-fix-compile-error.patc=
+h \
+> -          "
+> +          file://0002-include-sys-select.h-and-sys-types.h.patch"
+>
+> -SRCREV =3D "1d72f9cb5c9163b2ecdf19709935720e65f5b90e"
+> +SRCREV =3D "b0edae14e8660b80ffe0384354038a9f62e2978d"
+>
+>  COMPATIBLE_HOST =3D "(i.86|x86_64).*-linux"
+>  COMPATIBLE_HOST:libc-musl =3D "null"
+>
+>  S =3D "${WORKDIR}/git"
+> +
+>  EXTRA_OEMAKE =3D "CC=3D'${CC}' LDFLAGS=3D'${LDFLAGS}' CFLAGS=3D'${CFLAGS=
+}'"
+>
+>  # The ledmon sources include headers in ${S}/config to build but not in =
+CFLAGS.
+> --
+> 2.25.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#106797): https://lists.openembedded.org/g/openembedde=
+d-devel/message/106797
+> Mute This Topic: https://lists.openembedded.org/mt/102623591/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
