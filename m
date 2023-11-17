@@ -2,107 +2,85 @@ Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B5460C54FB9
-	for <webhook@archiver.kernel.org>; Fri, 17 Nov 2023 09:18:02 +0000 (UTC)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.web11.8260.1700212678484886015
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AFB1BC197A0
+	for <webhook@archiver.kernel.org>; Fri, 17 Nov 2023 09:18:42 +0000 (UTC)
+Received: from mail-lj1-f173.google.com (mail-lj1-f173.google.com [209.85.208.173])
+ by mx.groups.io with SMTP id smtpd.web11.8271.1700212718199587410
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 Nov 2023 01:17:58 -0800
+ Fri, 17 Nov 2023 01:18:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=h6RuAnyH;
- spf=pass (domain: smile.fr, ip: 209.85.128.47, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-40907b82ab9so17162995e9.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Nov 2023 01:17:58 -0800 (PST)
+ dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=c/6voFCb;
+ spf=pass (domain: smile.fr, ip: 209.85.208.173, mailfrom: yoann.congal@smile.fr)
+Received: by mail-lj1-f173.google.com with SMTP id 38308e7fff4ca-2c501bd6ff1so22158691fa.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Nov 2023 01:18:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1700212676; x=1700817476; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=DmV3yRZJ7CvmeWdB7uVktj+hwYIoZ5TvjipVSzeO6fc=;
-        b=h6RuAnyHVR1HU5wioZdMGjB+LmNyW7oGA8ALA4x5q+F7kL/t8ufypQAlRnD4D/CVVm
-         BOlCkVtPct3h6DuL8vTmUkkpZU18Ad5Qz6bQMaHAS4T3v32Z2BdOzFd9OIpUCwFrLY2P
-         OXP7lo00fBO7vGgRLrnsvKPQ1ZEuxSIp2D+wFZsYHL5wrqNxUXndZ6ugYezef9A5s1Od
-         MyXrimKu6Od61Fy9qXwlzNJmDeTwGMtwHkgNlgRrIGX4lzmNwIaXnzM0BVZbTewfUf5f
-         Y+jfb6gRSm5GDDVQPOAT3O/D0/sW2D3JLZBanbvL7gYJtHF1ZGuP0boK6mw6mPDAs7wr
-         XQAg==
+        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1700212716; x=1700817516; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=EFkUYmWo2sOAYFvHwONd4DTmsEPoReMf3ZjHzurE+LY=;
+        b=c/6voFCbSIIf1hdv8JPtJK5XbDzjpxp9shchmXLsQV96bCuPdtx5hWe+huVjQuWrJd
+         /CVF+Nh6e/y+SXDSegwx64C2MpCEj3vLgIa84xwpTQYZCrVOtfhrjyFzT0un5L05cqRM
+         RM31xOFgnm/8YlN43CGBCYHTJytlEcqSVuhPchyWWjWX0URblwr5ck0QRRntzB+9S0hA
+         uomRHrkW35EsQfAm/xnClvfLAnmoKYLNiq+gjZlABqlLd1HXskC1mmCRlmbnExhZiFfB
+         yZddA440jc7oLvAI/0MsrgtdwPzGe/lJmh/rX42qm8E85PahaWPNambUqwiIkn88Kw2A
+         wkPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700212676; x=1700817476;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=DmV3yRZJ7CvmeWdB7uVktj+hwYIoZ5TvjipVSzeO6fc=;
-        b=p2wp2GREFJO2iK52XSwPlghYb3FihqrTsTLrSCiGlTHhg9Xx0RyNFDDc35OXb339IT
-         gm/JneqpnPqeYZUqBeRUlgM6+sLPGP7/i3PW5C8IhGmRlWsqUZZi9T9GGOQ5iRsdOhD1
-         DaXMA1EVznPqTGRxu8kfJAY9znXgP1UeUy5KcoJ10c0H7oiFnhS+fvsG+pJl4DhyISeP
-         66Wjhv/i7YLdi75YSvzD7KLmWE9wrtJBr3sCMDTLt3MHWRqAHKxV5v5wa8KFOD3Kso1t
-         v8KZ4O16NY1LQPnqKW6pLX/qiegrT4WEYeMW94dsRB5/oWxFkf0jmxrl0wvDrOgU97Og
-         Ubkw==
-X-Gm-Message-State: AOJu0YxgQhQRlISh3A3GxUknV5+VN2QndLGCIsMw/k+8gEq9v29i+DIA
-	cvl7vMGU/t3W4FqkTYZgh5vdvn0TO3KwF2Gcmak=
-X-Google-Smtp-Source: AGHT+IFJ6c7rKmMF1FSAl3RsBETwpd8+p05lTbarXxSqpE/nFGBAr1ZY8GOGSH18i9ECJVgdCR/kgA==
-X-Received: by 2002:a5d:648d:0:b0:32f:76f4:b2b with SMTP id o13-20020a5d648d000000b0032f76f40b2bmr3879525wri.11.1700212676315;
-        Fri, 17 Nov 2023 01:17:56 -0800 (PST)
+        d=1e100.net; s=20230601; t=1700212716; x=1700817516;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=EFkUYmWo2sOAYFvHwONd4DTmsEPoReMf3ZjHzurE+LY=;
+        b=qGXmh0Bf8/xTr972cZgNTzoSgJXKjJqeHCkwlxaiVY/5czWTw0IzKzd9kT68sQDJ/1
+         FNwgR3cnq0YqSdaWVSiL9wkzwuxCR7Rkpc+PzjlxAB54D36gAcYDRrXRgxTROf1mEtPF
+         0Q3K3OjecQb/9hwIj/HGBmrkxijuhwBO9gjmd/F2rJpSSX7NIxpiKqtmTvHQas1x2Cl/
+         nzOKLFh18qRWH0DgnflNj7zBI0XNr/z7/DjQDYDdtFO4RTrVdZw1gidJLsALQnA99lhY
+         wv5NWqxU3I5TWCRjcHErchVFv/ArgJU1g+Ug5u++VPbVERPgxcV6hajsTg/evno6hGB9
+         j8cg==
+X-Gm-Message-State: AOJu0YwZRJpZwBZcfwTeCnZFD93123/RWkwkVdKW4bN62bnZMQkq70A/
+	zYEazpiiXVulDmAPERZ5JuynF3RgkOMX0hQz5Hc=
+X-Google-Smtp-Source: AGHT+IEcfjNCnXuFXYjscqfnVb54lZcd/WfcaCdpxT8GYqJvIWCAdp/oMtzKTjEqq7hKcGifnwfxWA==
+X-Received: by 2002:a2e:890c:0:b0:2c5:3492:5d96 with SMTP id d12-20020a2e890c000000b002c534925d96mr8054881lji.12.1700212715783;
+        Fri, 17 Nov 2023 01:18:35 -0800 (PST)
 Received: from P-ASN-ECS-830T8C3.numericable.fr ([89.159.1.53])
-        by smtp.gmail.com with ESMTPSA id f12-20020adff44c000000b003313e4dddecsm1679132wrp.108.2023.11.17.01.17.56
+        by smtp.gmail.com with ESMTPSA id u25-20020a7bcb19000000b00405391f485fsm1965649wmj.41.2023.11.17.01.18.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 17 Nov 2023 01:17:56 -0800 (PST)
+        Fri, 17 Nov 2023 01:18:35 -0800 (PST)
 From: Yoann Congal <yoann.congal@smile.fr>
 To: openembedded-devel@lists.openembedded.org
-Cc: Peter Kjellerstedt <pkj@axis.com>,
-	Peter Kjellerstedt <peter.kjellerstedt@axis.com>,
-	Khem Raj <raj.khem@gmail.com>,
-	Yoann Congal <yoann.congal@smile.fr>
-Subject: [meta-oe][kirkstone][PATCH 2/3] libwebsockets: Support building for native
-Date: Fri, 17 Nov 2023 10:17:32 +0100
-Message-Id: <20231117091733.450572-2-yoann.congal@smile.fr>
+Cc: Yoann Congal <yoann.congal@smile.fr>
+Subject: [meta-python][kirkstone][PATCH 1/2] python3-cson: fix DEPENDS on python3-native
+Date: Fri, 17 Nov 2023 10:18:23 +0100
+Message-Id: <20231117091824.450741-1-yoann.congal@smile.fr>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20231117091733.450572-1-yoann.congal@smile.fr>
-References: <20231117091733.450572-1-yoann.congal@smile.fr>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 Nov 2023 09:18:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106862
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 Nov 2023 09:18:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106864
 
-From: Peter Kjellerstedt <pkj@axis.com>
+python-native is not provided by meta-python anymore and this is clearly
+a python3 recipe.
 
-This is needed to be able to build mosquitto-native.
-
-The dependency on libcap when building for native is needed because
-cmake will pick up the existence of libcap from the host, but then the
-build fails if it is not available in the sysroot. Unfortunately, there
-does not seem to be any way to explicitly tell cmake to not build with
-libcap.
-
-Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit c083e0569ad80d11b4f5cfdfa89acdd4264d8152)
-Backported: Updated paths to follow PV changes.
 Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
 ---
- .../recipes-connectivity/libwebsockets/libwebsockets_4.2.2.bb  | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-python/recipes-extended/python-cson/python3-cson_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.2.2.bb b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.2.2.bb
-index 2a3a4ebd0..24b9e9a07 100644
---- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.2.2.bb
-+++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.2.2.bb
-@@ -4,6 +4,7 @@ LICENSE = "MIT & Zlib & BSD-3-Clause & Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=c8bea43a2eb5d713c338819a0be07797"
- 
- DEPENDS = "zlib"
-+DEPENDS:append:class-native = " libcap-native"
- 
+diff --git a/meta-python/recipes-extended/python-cson/python3-cson_git.bb b/meta-python/recipes-extended/python-cson/python3-cson_git.bb
+index c4fcc61ec..da174ad55 100644
+--- a/meta-python/recipes-extended/python-cson/python3-cson_git.bb
++++ b/meta-python/recipes-extended/python-cson/python3-cson_git.bb
+@@ -13,7 +13,7 @@ SRC_URI = "git://github.com/gt3389b/python-cson.git;branch=master;protocol=https
  S = "${WORKDIR}/git"
- SRCREV = "8d605f0649ed1ab6d27a443c7688598ea21fdb75"
-@@ -44,3 +45,5 @@ RDEPENDS:${PN}-dev += " ${@bb.utils.contains('PACKAGECONFIG', 'static', '${PN}-s
  
- # Avoid absolute paths to end up in the sysroot.
- SSTATE_SCAN_FILES += "*.cmake"
-+
-+BBCLASSEXTEND = "native"
+ RDEPENDS:${PN}:class-native = ""
+-DEPENDS:append:class-native = " python-native "
++DEPENDS:append:class-native = " python3-native "
+ 
+ inherit setuptools3
+ 
 -- 
 2.30.2
 
