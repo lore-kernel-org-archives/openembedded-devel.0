@@ -2,59 +2,60 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 23C08C197A0
-	for <webhook@archiver.kernel.org>; Fri, 17 Nov 2023 15:33:35 +0000 (UTC)
-Received: from mail-yw1-f176.google.com (mail-yw1-f176.google.com [209.85.128.176])
- by mx.groups.io with SMTP id smtpd.web11.14231.1700235212393261844
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2DA49C072A2
+	for <webhook@archiver.kernel.org>; Fri, 17 Nov 2023 15:41:25 +0000 (UTC)
+Received: from mail-yw1-f181.google.com (mail-yw1-f181.google.com [209.85.128.181])
+ by mx.groups.io with SMTP id smtpd.web10.14197.1700235682857979071
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 Nov 2023 07:33:32 -0800
+ Fri, 17 Nov 2023 07:41:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=AmMR5G0j;
- spf=pass (domain: gmail.com, ip: 209.85.128.176, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f176.google.com with SMTP id 00721157ae682-5a7b3d33663so23651167b3.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Nov 2023 07:33:32 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=nWrqpJ1+;
+ spf=pass (domain: gmail.com, ip: 209.85.128.181, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f181.google.com with SMTP id 00721157ae682-5c5b9c142e8so14724067b3.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Nov 2023 07:41:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1700235211; x=1700840011; darn=lists.openembedded.org;
-        h=content-transfer-encoding:autocrypt:subject:from:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=ijF0a9ZN15VPqKi5itnsnC+7TaqV7yriJTwevis+mMQ=;
-        b=AmMR5G0jKH7N7caxcntw8lxpIgV5odfQc9sDLBHNPVe1z1E6XHPxVtt/SdVqcxRMqR
-         SFDYoplDD9wsZnpC6hprQGYK1euF1lSH/S+wGuoy8Qxf3eyIyQ/v8Lg76xfsE99FFeFq
-         +HvUYyHkm6LKxB4r6gMgjXdqFW7LqZTanfQ1ale6SNnzSTT2l3QrRZOpWskbSJmdv0At
-         oMfZ3aIXKX+sYfrZPGD+9N4EWdCUYQ7aJ2nNtSeIoScrrzwE4AyjtCtONsihl/DQg7AJ
-         XCIjs8KckU/I5AkYI6jhku200R6JAcFbljaVX6tiFTw36UPolKVWlKczgzKfkZBvgJmH
-         QluA==
+        d=gmail.com; s=20230601; t=1700235682; x=1700840482; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=qK8p2lMnzQI6nCJAzTQqmLkV1eoYHkdemvfwbz13dL8=;
+        b=nWrqpJ1+3hrK5sdV69alxJW9YCLlkrf1rnNgOCXM151NgDx042/a0CP1oVfje4DCDK
+         gmF94BRzuOZ8kCJuWmFEqSrus9nJsdL+KGsgY5MfLhVbBuJ+nA6m08jgXxvQbVzW9OiO
+         7JB5oIUWDWpUp8PS4ZpCuE9XG4+CCwJ4ECZIv8BwyOp27XKS7bDSWmwepG3KmtUJkkpM
+         yjV2SCTRURBO67bxwR+HRDpmHnPU65tBN+8Dh6aEYQ+U7E8fF7OAsmpEXyyNKEHwLXiF
+         fF6Z2rzVbAO7G+JqFHYs26QdAU0+sAXx9lhXZog34yn8fGcdVHhSTPFazs5zy4AZ7J+J
+         +yvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700235211; x=1700840011;
-        h=content-transfer-encoding:autocrypt:subject:from:to
-         :content-language:user-agent:mime-version:date:message-id
+        d=1e100.net; s=20230601; t=1700235682; x=1700840482;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=ijF0a9ZN15VPqKi5itnsnC+7TaqV7yriJTwevis+mMQ=;
-        b=BFWwfPofiteWCDJ5oPcgbNLzdAO8kLKHEQXZ7PbaT19xDlqX+nVltXU4XshgsmeahG
-         bVXKRLQQEnZNJ5akdyy+pUL17NZg8oK8fPE6cewqFO7n2LkdKMSF/UBdo8pwUQBXUVwB
-         7xQ9t8uK3B6ylAppx24L+1IUVU9ABMdB9mXnXF5tYw1+e4C/+NqhFRlyZRKpzYcRWsbN
-         sLb48J4eqHfCkL4YTUjCKPFAO0WlulF8jTdkxmfF2sJmcKGymHa3NJqO9+ygH1/XKolL
-         aLc0iH5+HaQ/0PJIlLCxYKgNZFpcvQ1o33w5j3PriRLpq2m3k59NCJNowA2EScxW3rG5
-         f7PQ==
-X-Gm-Message-State: AOJu0YxkiXZMBBJ7ZButaoGkSlebcxOMS37BWjmnz8T6s2ioTIhIOZsJ
-	CN20S/UmCKkfnKK+TEoM7ZA=
-X-Google-Smtp-Source: AGHT+IEV7Q4mB5i63+GNEdTTYG+hba68FvNeo6bsv5O6Pb16/Hw9ukd13YZSve11pQcRi/QwntHmGw==
-X-Received: by 2002:a0d:d204:0:b0:5a7:b560:12df with SMTP id u4-20020a0dd204000000b005a7b56012dfmr19481021ywd.8.1700235211475;
-        Fri, 17 Nov 2023 07:33:31 -0800 (PST)
+        bh=qK8p2lMnzQI6nCJAzTQqmLkV1eoYHkdemvfwbz13dL8=;
+        b=WprPWexBw3gxHG+LdC2DjVQj6M0j9siIE01PxEDimsZEFX/8RW6iRtyFmIoRyJivrN
+         t5waRJNECe0R47QEwVaZuvAcYnpnAC02eju+LvwJJvfQRKc400WDKwlY4RRsbJJWUKXQ
+         UxH4X7GpdCIpriaXkMwDQj48xS5bjCxRGrVyBnluyHh83dgDCPKVomIFKklFIMQ0VMIt
+         aTQah0l+n1oIF+p66GHIHHlhDNsnGwHTp+4uY3mLszNuy5nHyAUdkiW3Ms2VKKdUOpn3
+         7giuGImxWFJVY8ve3teOEJAGxtkU+/xB2zuqh9LskD92lfwGE8ObwN1z7uDX5p3Mpik0
+         RxSA==
+X-Gm-Message-State: AOJu0Yz3HzWMtnxB5YW+Bpbm+ss14cSQln0+ExKH6F4zqO1CHp589sVY
+	XjJNaSEvyHglpTUahdFDbuMuKsPpD6Q=
+X-Google-Smtp-Source: AGHT+IHYQsIOfdN+PakKHS1QXcz9692/mdkSOqUN0jCaNy0srk7DhF2K6Pr/0um35K3IKO+y/T8R1g==
+X-Received: by 2002:a81:498c:0:b0:5a8:dd5f:dbf with SMTP id w134-20020a81498c000000b005a8dd5f0dbfmr21389100ywa.34.1700235682016;
+        Fri, 17 Nov 2023 07:41:22 -0800 (PST)
 Received: from [10.52.31.114] ([209.198.250.118])
-        by smtp.gmail.com with ESMTPSA id u123-20020a818481000000b005a8dbe385d1sm539096ywf.12.2023.11.17.07.33.29
+        by smtp.gmail.com with ESMTPSA id b1-20020a0dc001000000b0059f766f9750sm545710ywd.124.2023.11.17.07.41.20
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 17 Nov 2023 07:33:31 -0800 (PST)
-Message-ID: <5cd95dd6-6410-4f51-be8e-40b3a01f6191@gmail.com>
-Date: Fri, 17 Nov 2023 10:33:22 -0500
+        Fri, 17 Nov 2023 07:41:21 -0800 (PST)
+Message-ID: <54505227-7b8f-477f-82b5-35ec4ab15452@gmail.com>
+Date: Fri, 17 Nov 2023 10:41:08 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [OE-core][kirkstone][PATCH] qemu 6.2.0: Fix CVE-2023-1544
 Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+To: nirpradh@cisco.com, openembedded-devel@lists.openembedded.org
+Cc: xe-linux-external@cisco.com
+References: <20231117045955.2183952-1-nirpradh@cisco.com>
 From: akuster808 <akuster808@gmail.com>
-Subject: mickeldore merge request: Nov 17th.
 Autocrypt: addr=akuster808@gmail.com; keydata=
  xsDNBGNNaZMBDAC6/Mhpw3EGOOTPtIpcUHT4lI974zN/QqccMPxH4oyBPRJbjVImYs9avXwV
  Ae9xoWKMM/vocEZWm6SOESZSGf+7l05Eo6MxU50cIQh0/bcOcdDAtFRDk4pZIL6X7vGzvFe6
@@ -89,97 +90,132 @@ Autocrypt: addr=akuster808@gmail.com; keydata=
  itDSpYIEGrZObj82rX1wvxf/ZQ8VXS+owIR2F4yeeqPH/CyrPA1ASdtt+Am28/dJ2krr72at
  J++uLxA0cein1kjcosFDpQscnDcPzohnGyyjgEd6VwelZboIS1jt4lIa1badtV+cWMGMgM8W
  ApZ86eOP
+In-Reply-To: <20231117045955.2183952-1-nirpradh@cisco.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 Nov 2023 15:33:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106869
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 Nov 2023 15:41:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106870
 
-The following changes since commit 39968837196cb48209b71e8852dd04a2f8ccdca8:
+Wrong mailing list. Please try openembedded-core@lists.openembedded.org
 
-   nginx: add configure option (2023-10-15 19:09:42 -0400)
+br,
+Armin
 
-are available in the Git repository at:
-
-   https://git.openembedded.org/meta-openembedded mickledore-next
-
-for you to fetch changes up to aa5e8edabbc414d8ec1b2ad63c8743c7baf99626:
-
-   nlohmann-json: Add ptest support (2023-11-16 21:49:15 -0500)
-
-----------------------------------------------------------------
-Archana Polampalli (2):
-       nodejs: Upgrade 18.17.1 -> 18.18.2
-       open-vm-tools: fix CVE-2023-34058
-
-Changqing Li (1):
-       cpuid: fix do_install
-
-Joe Slater (1):
-       python3-pynacl: add RCONFLICTS with python3-nacl
-
-Mingli Yu (1):
-       nlohmann-json: Add ptest support
-
-Narpat Mali (1):
-       traceroute: upgrade 2.1.2 -> 2.1.3
-
-Sourav Pramanik (1):
-       nlohmann-json: Avoid usage of nobranch=1
-
-Wang Mingyu (1):
-       postgresql: upgrade 15.3 -> 15.4
-
-Yi Zhao (2):
-       mbedtls: upgrade 2.28.3 -> 2.28.5
-       libssh: upgrade 0.10.4 -> 0.10.5
-
-  .../mbedtls/{mbedtls_2.28.3.bb => mbedtls_2.28.5.bb} |   2 +-
-  .../open-vm-tools/open-vm-tools/CVE-2023-34058.patch            | 241 
-++++++++++++++++++++++++++++
-  .../recipes-support/open-vm-tools/open-vm-tools_12.1.5.bb       | 1 +
-  .../traceroute/{traceroute_2.1.2.bb => traceroute_2.1.3.bb} |   2 +-
-  .../0001-configure.ac-bypass-autoconf-2.69-version-check.patch  | 8 +-
-  .../postgresql/{postgresql_15.3.bb => postgresql_15.4.bb} |   2 +-
-  meta-oe/recipes-devtools/cpuid/cpuid_20211129.bb                | 10 +-
-  ...001-Makefile-update-the-hardcode-path-to-bindir-mandir.patch | 36 +++++
-  ...0001-custom-allocators-define-missing-rebind-type-3895.patch | 61 
-+++++++
-  ...1-tests-unit-iterators2-use-std-ranges-equals-for-rang.patch | 31 ++++
-  meta-oe/recipes-devtools/nlohmann-json/files/run-ptest          | 12 ++
-  meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.11.2.bb  | 24 ++-
-  .../oe-npm-cache                                                | 0
-  ...oe-cache-native_18.17.bb => nodejs-oe-cache-native_18.18.bb} |   0
-  .../nodejs/{nodejs_18.17.1.bb => nodejs_18.18.2.bb} |   4 +-
-  meta-oe/recipes-support/libssh/libssh/run-ptest                 | 42 +----
-  .../libssh/{libssh_0.10.4.bb => libssh_0.10.5.bb} |   5 +-
-  meta-python/recipes-devtools/python/python3-pynacl_1.5.0.bb     | 4 +
-  18 files changed, 429 insertions(+), 56 deletions(-)
-  rename meta-networking/recipes-connectivity/mbedtls/{mbedtls_2.28.3.bb 
-=> mbedtls_2.28.5.bb} (98%)
-  create mode 100644 
-meta-networking/recipes-support/open-vm-tools/open-vm-tools/CVE-2023-34058.patch
-  rename meta-networking/recipes-support/traceroute/{traceroute_2.1.2.bb 
-=> traceroute_2.1.3.bb} (94%)
-  rename meta-oe/recipes-dbs/postgresql/{postgresql_15.3.bb => 
-postgresql_15.4.bb} (84%)
-  create mode 100644 
-meta-oe/recipes-devtools/cpuid/files/0001-Makefile-update-the-hardcode-path-to-bindir-mandir.patch
-  create mode 100644 
-meta-oe/recipes-devtools/nlohmann-json/files/0001-custom-allocators-define-missing-rebind-type-3895.patch
-  create mode 100644 
-meta-oe/recipes-devtools/nlohmann-json/files/0001-tests-unit-iterators2-use-std-ranges-equals-for-rang.patch
-  create mode 100755 meta-oe/recipes-devtools/nlohmann-json/files/run-ptest
-  rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-18.17 => 
-nodejs-oe-cache-18.18}/oe-npm-cache (100%)
-  rename 
-meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-native_18.17.bb => 
-nodejs-oe-cache-native_18.18.bb} (100%)
-  rename meta-oe/recipes-devtools/nodejs/{nodejs_18.17.1.bb => 
-nodejs_18.18.2.bb} (97%)
-  rename meta-oe/recipes-support/libssh/{libssh_0.10.4.bb => 
-libssh_0.10.5.bb} (85%)
+On 11/16/23 11:59 PM, Niranjan Pradhan via lists.openembedded.org wrote:
+> Upstream Repository: https://gitlab.com/qemu-project/qemu.git
+>
+> Bug Details: https://nvd.nist.gov/vuln/detail/CVE-2023-1544
+> Type: Security Fix
+> CVE: CVE-2023-1544
+> Score: 6.3
+> Patch: https://gitlab.com/qemu-project/qemu/-/commit/85fc35afa93c
+>
+> Signed-off-by: Niranjan Pradhan <nirpradh@cisco.com>
+> ---
+>   meta/recipes-devtools/qemu/qemu.inc           |  1 +
+>   .../qemu/qemu/CVE-2023-1544.patch             | 70 +++++++++++++++++++
+>   2 files changed, 71 insertions(+)
+>   create mode 100644 meta/recipes-devtools/qemu/qemu/CVE-2023-1544.patch
+>
+> diff --git a/meta/recipes-devtools/qemu/qemu.inc b/meta/recipes-devtools/qemu/qemu.inc
+> index 83bd5d7e67..c8e4e2e6f3 100644
+> --- a/meta/recipes-devtools/qemu/qemu.inc
+> +++ b/meta/recipes-devtools/qemu/qemu.inc
+> @@ -101,6 +101,7 @@ SRC_URI = "https://download.qemu.org/${BPN}-${PV}.tar.xz \
+>   	   file://CVE-2023-3354.patch \
+>   	   file://CVE-2023-3180.patch \
+>   	   file://CVE-2021-3638.patch \
+> +	   file://CVE-2023-1544.patch \
+>              "
+>   UPSTREAM_CHECK_REGEX = "qemu-(?P<pver>\d+(\.\d+)+)\.tar"
+>   
+> diff --git a/meta/recipes-devtools/qemu/qemu/CVE-2023-1544.patch b/meta/recipes-devtools/qemu/qemu/CVE-2023-1544.patch
+> new file mode 100644
+> index 0000000000..b4781e1c18
+> --- /dev/null
+> +++ b/meta/recipes-devtools/qemu/qemu/CVE-2023-1544.patch
+> @@ -0,0 +1,70 @@
+> +From e7d6e37675e422cfab2fe8c6bd411d2097228760 Mon Sep 17 00:00:00 2001
+> +From: Yuval Shaia <yuval.shaia.ml@gmail.com>
+> +Date: Wed, 1 Mar 2023 16:29:26 +0200
+> +Subject: [PATCH] hw/pvrdma: Protect against buggy or malicious guest driver
+> +
+> +Guest driver allocates and initialize page tables to be used as a ring
+> +of descriptors for CQ and async events.
+> +The page table that represents the ring, along with the number of pages
+> +in the page table is passed to the device.
+> +Currently our device supports only one page table for a ring.
+> +
+> +Let's make sure that the number of page table entries the driver
+> +reports, do not exceeds the one page table size.
+> +
+> +CVE: CVE-2023-1544
+> +Upstream-Status: Backport [https://gitlab.com/qemu-project/qemu/-/commit/85fc35afa93c]
+> +
+> +Reported-by: Soul Chen <soulchen8650@gmail.com>
+> +Signed-off-by: Yuval Shaia <yuval.shaia.ml@gmail.com>
+> +Fixes: CVE-2023-1544
+> +Message-ID: <20230301142926.18686-1-yuval.shaia.ml@gmail.com>
+> +Signed-off-by: Thomas Huth <thuth@redhat.com>
+> +(cherry picked from commit 85fc35afa93c7320d1641d344d0c5dfbe341d087)
+> +Signed-off-by: Niranjan Pradhan <nirpradh@cisco.com>
+> +---
+> + hw/rdma/vmw/pvrdma_main.c | 16 +++++++++++++++-
+> + 1 file changed, 15 insertions(+), 1 deletion(-)
+> +
+> +diff --git a/hw/rdma/vmw/pvrdma_main.c b/hw/rdma/vmw/pvrdma_main.c
+> +index 4fc6712025..55b338046e 100644
+> +--- a/hw/rdma/vmw/pvrdma_main.c
+> ++++ b/hw/rdma/vmw/pvrdma_main.c
+> +@@ -91,19 +91,33 @@ static int init_dev_ring(PvrdmaRing *ring, PvrdmaRingState **ring_state,
+> +                          dma_addr_t dir_addr, uint32_t num_pages)
+> + {
+> +     uint64_t *dir, *tbl;
+> +-    int rc = 0;
+> ++    int max_pages, rc = 0;
+> +
+> +     if (!num_pages) {
+> +         rdma_error_report("Ring pages count must be strictly positive");
+> +         return -EINVAL;
+> +     }
+> +
+> ++    /*
+> ++     * Make sure we can satisfy the requested number of pages in a single
+> ++     * TARGET_PAGE_SIZE sized page table (taking into account that first entry
+> ++     * is reserved for ring-state)
+> ++     */
+> ++    max_pages = TARGET_PAGE_SIZE / sizeof(dma_addr_t) - 1;
+> ++    if (num_pages > max_pages) {
+> ++        rdma_error_report("Maximum pages on a single directory must not exceed %d\n",
+> ++                          max_pages);
+> ++        return -EINVAL;
+> ++    }
+> ++
+> +     dir = rdma_pci_dma_map(pci_dev, dir_addr, TARGET_PAGE_SIZE);
+> +     if (!dir) {
+> +         rdma_error_report("Failed to map to page directory (ring %s)", name);
+> +         rc = -ENOMEM;
+> +         goto out;
+> +     }
+> ++
+> ++    /* We support only one page table for a ring */
+> +     tbl = rdma_pci_dma_map(pci_dev, dir[0], TARGET_PAGE_SIZE);
+> +     if (!tbl) {
+> +         rdma_error_report("Failed to map to page table (ring %s)", name);
+> +--
+> +2.35.6
+> +
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#106847): https://lists.openembedded.org/g/openembedded-devel/message/106847
+> Mute This Topic: https://lists.openembedded.org/mt/102642225/3616698
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
 
