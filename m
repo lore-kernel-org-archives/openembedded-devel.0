@@ -1,294 +1,315 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AA4BFC2BB3F
-	for <webhook@archiver.kernel.org>; Sat, 18 Nov 2023 16:44:24 +0000 (UTC)
-Received: from mailout08.t-online.de (mailout08.t-online.de [194.25.134.20])
- by mx.groups.io with SMTP id smtpd.web10.11985.1700325855930454073
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A99D9C2BB3F
+	for <webhook@archiver.kernel.org>; Sat, 18 Nov 2023 16:45:34 +0000 (UTC)
+Received: from mail-oa1-f54.google.com (mail-oa1-f54.google.com [209.85.160.54])
+ by mx.groups.io with SMTP id smtpd.web10.12020.1700325927209367733
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 18 Nov 2023 08:44:16 -0800
+ Sat, 18 Nov 2023 08:45:27 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.20, mailfrom: f_l_k@t-online.de)
-Received: from fwd88.aul.t-online.de (fwd88.aul.t-online.de [10.223.144.114])
-	by mailout08.t-online.de (Postfix) with SMTP id 592E146AB
-	for <openembedded-devel@lists.openembedded.org>; Sat, 18 Nov 2023 17:43:47 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.154.170.27]) by fwd88.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1r4OQ6-1BsehN0; Sat, 18 Nov 2023 17:43:46 +0100
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCHv2] flatpak: Upgrade 1.15.4 -> 1.15.6
-Date: Sat, 18 Nov 2023 17:44:20 +0100
-Message-ID: <20231118164420.3110-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.42.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=cdATKvUy;
+ spf=pass (domain: gmail.com, ip: 209.85.160.54, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f54.google.com with SMTP id 586e51a60fabf-1ef36a04931so1762339fac.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Nov 2023 08:45:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1700325926; x=1700930726; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=cdcVe4GTrkF9DB9CaK3GgcMuiJQr4r27TG4zPC3xKa8=;
+        b=cdATKvUygAPvtTBEBJ+ljHqLyNM7IxCcXcB0wjP3E6UN3h3YV0nUYhWQSK4szsW6nj
+         P0j2lnJnXXJkiX+OA3ewLvzJiFp/19wM55anMM1wHuzbsVvc/qrj3YpK9+84vYe9wgMz
+         hrZd8d0BIDzTYt3GZuFEobdQzTO88tKPRTvIQPQrobw48so/D0aS+nxuh5yEqCNYF3Oi
+         hjb4FnzuFE3RAfbrulrcEq1hlyaA9YVrARds3cx/YkbxKtZ/TI7XgwhKoTQu14VHfoN2
+         413PAf+nXrg7SwZ+Ffnw+RHBMhhUF+mikrwwPKZEDKV10o9LLfz1UN3kQIBRv/Gf9zi4
+         cgZA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1700325926; x=1700930726;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=cdcVe4GTrkF9DB9CaK3GgcMuiJQr4r27TG4zPC3xKa8=;
+        b=C/ipUPhqm4xadhTNCEm0Gwwt8PGy0sbbWfyMmOYExPVRIdvnZEj7czWOo+qJr4o44s
+         Ldk6VUXphxFDciRIOQ0e6eXRHr6cWjyMzEsi7j9K4ry+PoJna8K48aMRGhh8s7D+dJ+w
+         vu8D11OQxIOrcUGfvLUfB9Dsi0vX2a0b65yDVdvmcDi2OpUuEwcnrtq7iGKGWP5OIF82
+         yTKjjnQvew4gNpd6f64YYTmqDGNMe8bwIzFLid0gQMpKWGIyQQMjwYAdx8uhfdU+sORp
+         pV/IjG2lIlgNcmD3wUbEHx8I7judxUctSQ2gGdoqFwRpIZ98gcrPEj/QXaDqdBgleF6I
+         s0tg==
+X-Gm-Message-State: AOJu0YwSvCwA8KP7bydt6x29uDUNDnhi+Wqd95+102XFqLQ1bJ1pjoFQ
+	RKGJMWjyLi5rqv4AV9lVVyJqp27wUkdFhuVFczY=
+X-Google-Smtp-Source: AGHT+IGDhr0wD9mLhAJkd9pdQ0RcmShtqPdMKL98fC7I9wCZ/qY010GWBEXEfBuaREzzpjyC53U5Dp2GAmUM3euoSj0=
+X-Received: by 2002:a05:6870:1681:b0:1ef:aba0:1e34 with SMTP id
+ j1-20020a056870168100b001efaba01e34mr2938104oae.29.1700325926320; Sat, 18 Nov
+ 2023 08:45:26 -0800 (PST)
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1700325826-2FFFC958-5AF0DD52/0/0 CLEAN NORMAL
-X-TOI-MSGID: 34f5a0b2-d02e-426b-83b5-97710ab3cd84
+References: <CAMKF1spC66qx=abKfbYuJoP_5pu_WmGxpr3+S5gq4ttKzsSyRg@mail.gmail.com>
+ <D5F6E8F4-14B1-4CFF-A966-2215804A8D87@getmailspring.com>
+In-Reply-To: <D5F6E8F4-14B1-4CFF-A966-2215804A8D87@getmailspring.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 18 Nov 2023 08:45:00 -0800
+Message-ID: <CAMKF1sp9-aAaTxtYYcrBQh=sthmdRSaErMB5weXYGd1sbar1BA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] recipes-support: Add btop
+To: =?UTF-8?B?SmFuIENsYXXDn2Vu?= <jan.claussen10@web.de>
+Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 18 Nov 2023 16:44:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106887
+ <openembedded-devel@lists.openembedded.org>; Sat, 18 Nov 2023 16:45:34 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106888
 
-- add a patch to fix build for the newly added wayland_security_context f=
-eature
-- build wayland_security_context according to wayland distro_feature
-- add GIR_MESON_OPTION
-- add packageconfigs for selinux and http_backend
+thats fine and thanks for update. However, if you can resend it via
+git format-patch && git  send-email then tools I use will capture the
+v2 properly.
 
-Dependencies:
-
-    In distributions that compile Flatpak to use a separate bubblewrap (b=
-wrap)
-    executable, version 0.8.0 is now required.
-
-    Enabling the optional Wayland security context feature requires
-    libwayland-client, wayland-scanner >=3D 1.15 and wayland-protocols >=3D=
- 1.32.
-
-    Ubuntu 18.04 is no longer routinely tested. Support for dependency
-    versions included in Ubuntu 18.04 should be considered "at risk".
-
-Features:
-
-    Add --device=3Dinput, for access to evdev devices in /dev/input (#548=
-1)
-
-    Update bundled copy of bubblewrap to version 0.8.0, and rely on its
-    features:
-        Improve error message if seccomp is disabled in kernel config
-        Security hardening: set user namespace limit to 0, to prevent cre=
-ation
-        of nested user namespaces in a more robust way (#5084)
-
-    For subsandboxes started by flatpak-portal, inherit environment
-    variables from the flatpak run that started the original instance
-    rather than from flatpak-portal, fixing behaviour of FLATPAK_GL_DRIVE=
-RS
-    and similar features (#5278)
-
-    Stop http transfers if a download in progress becomes very slow (#551=
-9)
-
-    Make it easier to configure extra languages, by picking them up from
-    AccountsService if configured there (#5006)
-
-    Add new flatpak_transaction_add_rebase_and_uninstall() API,
-    allowing end-of-life apps to be replaced by their intended replacemen=
-t
-    more reliably (#3991)
-
-    Create a private Wayland socket with the "security context" extension
-    if available, allowing the compositor to identify connections from
-    sandboxed apps as belonging to the sandbox (#4920, #5507, #5558)
-
-    Update libglnx to 2023-08-29
-        Use features of newer GLib versions if available
-        Turn off system-level crash reporting infrastructure during
-        some unit tests that involve intentional assertion failures
-
-    Add anchors to link to sections of flatpak-metadata documentation (#5=
-582)
-
-    New translations: ka, nl.
-
-Bug fixes:
-
-    Avoid warnings processing symbolic links with GLib >=3D 2.77.0, and
-    with GLib 2.76.0 (GLib 2.76.1 or later silences these warnings)
-
-    Bypass page cache for backend requests in revokefs, fixing installati=
-on
-    errors with libostree 2023.4 (#5452)
-
-    Show AppStream metadata in flatpak remote-info as intended
-    (#5523; regression in 1.9.1)
-
-    Don't let Flatpak apps inherit VK_DRIVER_FILES or VK_ICD_FILENAMES
-    from the host system, which would be wrong for the sandbox (#5553)
-
-    Fix build failure with prereleases of libappstream 0.17.x (#5472)
-
-    Forward-compatibility with libappstream 1.0 (#5563)
-
-    Fix installation with Meson if configured with -Dauto_sideloading=3Dt=
-rue
-    (#5495)
-
-    Fix a memory leak (#5329)
-
-    Fix compiler warnings (#5362, #5366)
-
-    Make the tests fail more comprehensibly if a required tool is missing
-    (#5020)
-
-    Clean up /var/tmp/flatpak-cache-* directories on boot (#1119)
-
-    Don't force GIO_USE_VFS=3Dlocal for programs launched via flatpak-spa=
-wn
-    (#5567)
-
-    Clarify documentation for D-Bus name ownership (#5582)
-
-    Translation updates: id, tr, zh_CN
-    (#5332, #5565)
-
-Internal changes:
-
-    Split up large source files into smaller modules, reducing internal
-    circular dependencies (#5410, #5411, #5415, #5419, #5416, #5414)
-
-    Re-synchronize code backported from GLib with the version in GLib
-    (#5410)
-
-    Make the flags used to apply "extra data" clearer (#5466)
-
-    Use glnx_opendirat() where possible (#5527)
-
-    CI improvements (#5374, #5381)
-
-(There was never a 1.15.5 release, I got our versioning convention mixed =
-up and
-thought we avoided releasing odd micro versions.)
----
- .../0001-flatpak-pc-add-pc_sysrootdir.patch   |  2 +-
- ...d-require-for-native-wayland-scanner.patch | 28 +++++++++++++++++++
- .../{flatpak_1.15.4.bb =3D> flatpak_1.15.6.bb}  | 14 ++++++++--
- 3 files changed, 40 insertions(+), 4 deletions(-)
- create mode 100644 meta-oe/recipes-extended/flatpak/flatpak/0001-meson.b=
-uild-require-for-native-wayland-scanner.patch
- rename meta-oe/recipes-extended/flatpak/{flatpak_1.15.4.bb =3D> flatpak_=
-1.15.6.bb} (73%)
-
-diff --git a/meta-oe/recipes-extended/flatpak/flatpak/0001-flatpak-pc-add=
--pc_sysrootdir.patch b/meta-oe/recipes-extended/flatpak/flatpak/0001-flat=
-pak-pc-add-pc_sysrootdir.patch
-index c1f2cca5c..08d5625fa 100644
---- a/meta-oe/recipes-extended/flatpak/flatpak/0001-flatpak-pc-add-pc_sys=
-rootdir.patch
-+++ b/meta-oe/recipes-extended/flatpak/flatpak/0001-flatpak-pc-add-pc_sys=
-rootdir.patch
-@@ -5,7 +5,7 @@ Subject: [PATCH] flatpak.pc: add pc_sysrootdir
-=20
- Signed-off-by: Markus Volk <f_l_k@t-online.de>
- ---
--Upstream-Status: Pending
-+Upstream-Status: Inappropriate [oe-specific]
-=20
-  meson.build | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
-diff --git a/meta-oe/recipes-extended/flatpak/flatpak/0001-meson.build-re=
-quire-for-native-wayland-scanner.patch b/meta-oe/recipes-extended/flatpak=
-/flatpak/0001-meson.build-require-for-native-wayland-scanner.patch
-new file mode 100644
-index 000000000..b076a3fff
---- /dev/null
-+++ b/meta-oe/recipes-extended/flatpak/flatpak/0001-meson.build-require-f=
-or-native-wayland-scanner.patch
-@@ -0,0 +1,28 @@
-+From ced2e933cf647874da4baff002e0987b9bfe5fac Mon Sep 17 00:00:00 2001
-+From: Markus Volk <f_l_k@t-online.de>
-+Date: Sat, 18 Nov 2023 15:07:49 +0100
-+Subject: [PATCH] meson.build: require for native wayland-scanner
-+
-+Signed-off-by: Markus Volk <f_l_k@t-online.de>
-+
-+Upstream-Status: Submitted [https://github.com/flatpak/flatpak/pull/5596=
-]
-+---
-+ meson.build | 4 ++--
-+ 1 file changed, 1 insertions(+), 1 deletions(-)
-+
-+diff --git a/meson.build b/meson.build
-+index f4e5b3a3..5d2f9eba 100644
-+--- a/meson.build
-++++ b/meson.build
-+@@ -207,7 +207,7 @@ gtkdoc_dep =3D dependency('gtk-doc', required : get_=
-option('gtkdoc'))
-+ build_gtk_doc =3D gtkdoc_dep.found()
-+=20
-+ wayland_client =3D dependency('wayland-client', required : get_option('=
-wayland_security_context'))
-+-wayland_scanner =3D dependency('wayland-scanner', version : '>=3D 1.15'=
-, required : get_option('wayland_security_context'))
-++wayland_scanner =3D dependency('wayland-scanner', version : '>=3D 1.15'=
-, required : get_option('wayland_security_context'), native : true)
-+ wayland_protocols =3D dependency('wayland-protocols', version : '>=3D 1=
-.32', required : get_option('wayland_security_context'))
-+ build_wayland_security_context =3D wayland_client.found() and wayland_s=
-canner.found() and wayland_protocols.found()
-+=20
-+--=20
-+2.42.0
-+
-diff --git a/meta-oe/recipes-extended/flatpak/flatpak_1.15.4.bb b/meta-oe=
-/recipes-extended/flatpak/flatpak_1.15.6.bb
-similarity index 73%
-rename from meta-oe/recipes-extended/flatpak/flatpak_1.15.4.bb
-rename to meta-oe/recipes-extended/flatpak/flatpak_1.15.6.bb
-index ca0f0e82c..9f2835a5d 100644
---- a/meta-oe/recipes-extended/flatpak/flatpak_1.15.4.bb
-+++ b/meta-oe/recipes-extended/flatpak/flatpak_1.15.6.bb
-@@ -6,9 +6,10 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd2=
-55951079008b364516c"
- SRC_URI =3D " \
-     gitsm://github.com/flatpak/flatpak;protocol=3Dhttps;branch=3Dmain \
-     file://0001-flatpak-pc-add-pc_sysrootdir.patch \
-+    file://0001-meson.build-require-for-native-wayland-scanner.patch \
- "
-=20
--SRCREV =3D "e936e3100d406c50ba49f3ad6a0ecae455345ec0"
-+SRCREV =3D "27b11b93c2a80a91c9461bc6c7f5e9a201406041"
-=20
- S =3D "${WORKDIR}/git"
-=20
-@@ -19,7 +20,6 @@ REQUIRED_DISTRO_FEATURES =3D "polkit"
- DEPENDS =3D " \
-     appstream \
-     bison-native \
--    curl \
-     dconf \
-     fuse3 \
-     gdk-pixbuf \
-@@ -47,18 +47,26 @@ RDEPENDS:${PN} =3D " \
-=20
- EXTRA_OEMESON +=3D "-Dsystem_dbus_proxy=3D${bindir}/xdg-dbus-proxy -Dsys=
-tem_bubblewrap=3D${bindir}/bwrap"
-=20
--GIR_MESON_OPTION =3D ""
-+GIR_MESON_OPTION =3D "gir"
-+GIR_MESON_ENABLE_FLAG =3D 'enabled'
-+GIR_MESON_DISABLE_FLAG =3D 'disabled'
- GTKDOC_MESON_OPTION =3D 'gtkdoc'
- GTKDOC_MESON_ENABLE_FLAG =3D 'enabled'
- GTKDOC_MESON_DISABLE_FLAG =3D 'disabled'
-=20
-+PACKAGECONFIG[curl] =3D "-Dhttp_backend=3Dcurl,,curl"
-+PACKAGECONFIG[soup] =3D "-Dhttp_backend=3Dsoup,,libsoup-2.4"
- PACKAGECONFIG[tests] =3D "-Dtests=3Dtrue,-Dtests=3Dfalse,xauth socat-nat=
-ive"
- PACKAGECONFIG[xauth] =3D "-Dxauth=3Denabled,-Dxauth=3Ddisabled,xauth"
- PACKAGECONFIG[seccomp] =3D "-Dseccomp=3Denabled,-Dseccomp=3Ddisabled,lib=
-seccomp"
-+PACKAGECONFIG[selinux] =3D "-Dselinux_module=3Denabled,-Dselinux_module=3D=
-disabled,libselinux"
-+PACKAGECONFIG[wayland-security-context] =3D "-Dwayland_security_context=3D=
-enabled,-Dwayland_security_context=3Ddisabled,wayland wayland-native wayl=
-and-protocols"
-=20
- PACKAGECONFIG ?=3D " \
-+    curl \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xauth', '', d)} \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'seccomp', 'seccomp', '', d)=
-} \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland-security=
--context', '', d)} \
- "
-=20
- FILES:${PN} +=3D "${libdir} ${datadir}"
---=20
-2.42.0
-
+On Sat, Nov 18, 2023 at 5:51=E2=80=AFAM Jan Clau=C3=9Fen <jan.claussen10@we=
+b.de> wrote:
+>
+> So in this case it shoule be alright like this. The developer will have t=
+o take care to set its proper locale, but apart from that everything works.
+>
+> From b242979231f4f32243b99cb8312fe4de07b0d87b Mon Sep 17 00:00:00 2001
+> From: =3D?UTF-8?q?Jan=3D20Clau=3DC3=3D9Fen?=3D <jan.claussen10@web.de>
+> Date: Sat, 18 Nov 2023 14:45:27 +0100
+> Subject: [PATCH] meta-oe: recipes-support: Add btop
+> MIME-Version: 1.0
+> Content-Type: text/plain; charset=3DUTF-8
+> Content-Transfer-Encoding: 8bit
+>
+> Adds btop, the shell-based resource monitor that shows usage and stats fo=
+r processor, memory, disks, network and processes.
+>
+> Signed-off-by: Jan Clau=C3=9Fen <jan.claussen10@web.de>
+> ---
+>  meta-oe/recipes-support/btop/btop_1.2.13.bb | 23 +++++++++++++++++++++
+>  1 file changed, 23 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/btop/btop_1.2.13.bb
+>
+> diff --git a/meta-oe/recipes-support/btop/btop_1.2.13.bb b/meta-oe/recipe=
+s-support/btop/btop_1.2.13.bb
+> new file mode 100644
+> index 000000000..a944fe7b5
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/btop/btop_1.2.13.bb
+> @@ -0,0 +1,23 @@
+> +SUMMARY =3D "Resource monitor that shows usage and stats for processor, =
+memory, disks, network and processes."
+> +HOMEPAGE =3D "https://github.com/aristocratos/btop"
+> +LICENSE =3D "Apache-2.0"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D3b83ef96387f14655fc854ddc3c6b=
+d57"
+> +SECTION =3D "console/utils"
+> +
+> +SRC_URI =3D "git://github.com/aristocratos/btop.git;protocol=3Dhttps;bra=
+nch=3Dmain"
+> +SRCREV =3D "9edbf27f1b6d5844a97325fcda732762ba086a99"
+> +
+> +S =3D "${WORKDIR}/git"
+> +
+> +inherit cmake
+> +
+> +FILES:${PN} +=3D " \
+> +    ${datadir}/icons \
+> +    ${datadir}/icons/hicolor \
+> +    ${datadir}/icons/hicolor/48x48 \
+> +    ${datadir}/icons/hicolor/scalable \
+> +    ${datadir}/icons/hicolor/48x48/apps \
+> +    ${datadir}/icons/hicolor/48x48/apps/btop.png \
+> +    ${datadir}/icons/hicolor/scalable/apps \
+> +    ${datadir}/icons/hicolor/scalable/apps/btop.svg \
+> +"
+> --
+> 2.42.1
+>
+> On Nov. 14 2023, at 9:43 pm, Khem Raj <raj.khem@gmail.com> wrote:
+>
+> On Tue, Nov 14, 2023 at 12:38=E2=80=AFPM Jan Clau=C3=9Fen <jan.claussen10=
+@web.de> wrote:
+> >
+> > So I have just tested btop on musl succesfully.
+> >
+>
+> OK
+>
+> > I am questioning the need for the locales though. You can run btop with=
+ the --utf-force flag and it will work well. If you want to run it without =
+this flag, you'll need to not only install the locales, but also add
+> >
+> > LC_ALL=3Den_US.UTF-8
+> > LANG=3Den_US.UTF-8
+> >
+>
+> yeah if it can work without it, that would be great
+>
+> > to /etc/profile as a minimum. This would force the user to use these lo=
+cales. It would also require a .bbappend on base-files and I don't think th=
+at this is a good idea.
+> >
+> > On Nov. 12 2023, at 9:24 pm, Jan Clau=C3=9Fen <jan.claussen10@web.de> w=
+rote:
+> >
+> > How did you build it? I have sent you a PM on IRC
+> >
+> > On Nov. 12 2023, at 9:21 pm, Khem Raj <raj.khem@gmail.com> wrote:
+> >
+> > On Sun, Nov 12, 2023 at 10:51=E2=80=AFAM Jan Clau=C3=9Fen <jan.claussen=
+10@web.de> wrote:
+> > >
+> > > No, it is an issue I have with images for the Pi Zero. I haven't buil=
+d anything for musl at all, although it would probably a good choice for th=
+e Pi Zero.
+> > >
+> > > I have no issues using Raspberry Pi OS or other distros btw, so the d=
+evice is not the issue
+> >
+> > As one point I have pi0 running fine perhaps something has regressed
+> > in meta-raspberrypi :( these things need TLC to keep going.
+> >
+> > > On Nov. 12 2023, at 7:49 pm, Khem Raj <raj.khem@gmail.com> wrote:
+> > >
+> > > hmm is that just seen with musl and works ok with glibc based images =
+?
+> > >
+> > > TCLIBC=3Dmusl bitbake core-image-base
+> > >
+> > > eg. will produce a musl based image which is expected to work
+> > >
+> > > On Sun, Nov 12, 2023 at 10:23=E2=80=AFAM Jan Clau=C3=9Fen <jan.clauss=
+en10@web.de> wrote:
+> > > >
+> > > > Unfortunately I can't test it unless this gets solved (or I buy a d=
+ifferent Raspberry Pi)
+> > > >
+> > > > https://github.com/agherzan/meta-raspberrypi/issues/1229
+> > > >
+> > > > On Nov. 12 2023, at 6:43 pm, Khem Raj <raj.khem@gmail.com> wrote:
+> > > >
+> > > > TCLIBC=3Dmusl bitbake <recipe>
+> > > >
+> > > > On Sun, Nov 12, 2023 at 9:24=E2=80=AFAM Jan Clau=C3=9Fen <jan.claus=
+sen10@web.de> wrote:
+> > > > >
+> > > > > How to test it against musl btw? Build a musl-based system for Ra=
+spberry Pi and see if it runs?
+> > > > >
+> > > > > On Nov. 12 2023, at 6:23 pm, Jan Clau=C3=9Fen <jan.claussen10@web=
+.de> wrote:
+> > > > >
+> > > > > Yes, the CMake support was added two months ago and the release i=
+s from 2022. Cmake is also not supported by the main developer who seems to=
+ favor an advanced Makefile. In any case, it is easier to fix than the Make=
+file. I will go with the git version for now then until there is a new rele=
+ase.
+> > > > >
+> > > > > On Nov. 12 2023, at 6:20 pm, Khem Raj <raj.khem@gmail.com> wrote:
+> > > > >
+> > > > > On Sun, Nov 12, 2023 at 8:25=E2=80=AFAM Jan Clau=C3=9Fen <jan.cla=
+ussen10@web.de> wrote:
+> > > > > >
+> > > > > > I am trying with the tarball but it is quite hard, since it doe=
+sn't come with a CMakeLists.txt.
+> > > > > > There is a recipe here, but it involves a lot of patching which=
+ could potentially be painful to maintain
+> > > > > >
+> > > > > > https://github.com/aristocratos/btop/issues/330#issuecomment-11=
+23685779
+> > > > > >
+> > > > >
+> > > > > is it because cmake support was added later ? in that case maybe =
+using
+> > > > > git version is ok
+> > > > >
+> > > > > > On Nov. 11 2023, at 8:01 pm, Khem Raj <raj.khem@gmail.com> wrot=
+e:
+> > > > > >
+> > > > > > On Sat, Nov 11, 2023 at 10:38=E2=80=AFAM Jan Clau=C3=9Fen <jan.=
+claussen10@web.de> wrote:
+> > > > > > >
+> > > > > > > It also needs a utf-8 locale to work. Else you have to force =
+utf-8 mode with a flag. I haven't included this as dependency at this point=
+.
+> > > > > >
+> > > > > > you want to express all that is needed to get it running amicab=
+ly.
+> > > > > > keeping in mind that we have glibc and musl based systems to se=
+rvice
+> > > > > > it will be good to check it on musl too.
+> > > > > >
+> > > > > > >
+> > > > > > > On Nov. 11 2023, at 7:35 pm, Jan Clau=C3=9Fen <jan.claussen10=
+@web.de> wrote:
+> > > > > > >
+> > > > > > > Glad that it arrived now! This is a really great resource mon=
+itor. It is building from the git repository. Do you think it is better to =
+use the release instead?
+> > > > > > >
+> > > > > > > On Nov. 11 2023, at 7:30 pm, Khem Raj <raj.khem@gmail.com> wr=
+ote:
+> > > > > > >
+> > > > > > > Thanks for your contribution Jan
+> > > > > > >
+> > > > > > > On Sat, Nov 11, 2023 at 10:26=E2=80=AFAM Jan Clau=C3=9Fen <ja=
+n.claussen10@web.de> wrote:
+> > > > > > > >
+> > > > > > > > ---
+> > > > > > > > meta-oe/recipes-support/btop/btop_1.2.13.bb | 23 ++++++++++=
++++++++++++
+> > > > > > > > 1 file changed, 23 insertions(+)
+> > > > > > > > create mode 100644 meta-oe/recipes-support/btop/btop_1.2.13=
+.bb
+> > > > > > > >
+> > > > > > > > diff --git a/meta-oe/recipes-support/btop/btop_1.2.13.bb b/=
+meta-oe/recipes-support/btop/btop_1.2.13.bb
+> > > > > > > > new file mode 100644
+> > > > > > > > index 000000000..f780a993a
+> > > > > > > > --- /dev/null
+> > > > > > > > +++ b/meta-oe/recipes-support/btop/btop_1.2.13.bb
+> > > > > > > > @@ -0,0 +1,23 @@
+> > > > > > > > +SUMMARY =3D "Resource monitor that shows usage and stats f=
+or processor, memory, disks, network and processes."
+> > > > > > > > +HOMEPAGE =3D "https://github.com/aristocratos/btop"
+> > > > > > > > +LICENSE =3D "Apache-2.0"
+> > > > > > > > +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D3b83ef96387f146=
+55fc854ddc3c6bd57"
+> > > > > > > > +SECTION =3D "console/utils"
+> > > > > > > > +
+> > > > > > > > +SRC_URI =3D "git://github.com/aristocratos/btop.git;protoc=
+ol=3Dhttps;branch=3Dmain"
+> > > > > > > > +SRCREV =3D "2a864f6f2ea60df16b3f015885eb3c18a48b9b78"
+> > > > > > > > +
+> > > > > > > > +S =3D "${WORKDIR}/git"
+> > > > > > > > +
+> > > > > > > > +inherit cmake
+> > > > > > > > +
+> > > > > > > > +FILES:${PN} +=3D " \
+> > > > > > > > + /usr/share/icons \
+> > > > > > >
+> > > > > > > Lets use ${datadir} instead of hardcoded /usr/share
+> > > > > > >
+> > > > > > > > + /usr/share/icons/hicolor \
+> > > > > > > > + /usr/share/icons/hicolor/48x48 \
+> > > > > > > > + /usr/share/icons/hicolor/scalable \
+> > > > > > > > + /usr/share/icons/hicolor/48x48/apps \
+> > > > > > > > + /usr/share/icons/hicolor/48x48/apps/btop.png \
+> > > > > > > > + /usr/share/icons/hicolor/scalable/apps \
+> > > > > > > > + /usr/share/icons/hicolor/scalable/apps/btop.svg \
+> > > > > > > > +"
+> > > > > > > > --
+> > > > > > > > 2.42.0
+> > > > > > > >
+> > > > > > > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > > > > > > > Links: You receive all messages sent to this group.
+> > > > > > > > View/Reply Online (#106559): https://lists.openembedded.org=
+/g/openembedded-devel/message/106559
+> > > > > > > > Mute This Topic: https://lists.openembedded.org/mt/10253047=
+8/1997914
+> > > > > > > > Group Owner: openembedded-devel+owner@lists.openembedded.or=
+g
+> > > > > > > > Unsubscribe: https://lists.openembedded.org/g/openembedded-=
+devel/unsub [raj.khem@gmail.com]
+> > > > > > > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > > > > > > >
 
