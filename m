@@ -1,120 +1,270 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B444C54FB9
-	for <webhook@archiver.kernel.org>; Fri, 17 Nov 2023 23:18:47 +0000 (UTC)
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
- by mx.groups.io with SMTP id smtpd.web11.10584.1700263123406279124
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B8D56C2BB3F
+	for <webhook@archiver.kernel.org>; Sat, 18 Nov 2023 09:52:52 +0000 (UTC)
+Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com [209.85.208.49])
+ by mx.groups.io with SMTP id smtpd.web11.5850.1700301170794627526
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 Nov 2023 15:18:43 -0800
+ Sat, 18 Nov 2023 01:52:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=XEGzSSZl;
- spf=pass (domain: smile.fr, ip: 209.85.221.47, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-32fadd4ad09so1825582f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 17 Nov 2023 15:18:43 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=MNasOH1F;
+ spf=pass (domain: gmail.com, ip: 209.85.208.49, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-ed1-f49.google.com with SMTP id 4fb4d7f45d1cf-5401bab7525so3963985a12.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 18 Nov 2023 01:52:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1700263121; x=1700867921; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:organization:references:to
-         :from:content-language:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=NQK85QyrEqUQlT25EXdnu/mgfPLNU/bNLlqurZX/FIM=;
-        b=XEGzSSZlUsoJmp9jb/7Y6gwv8TY4dFZG/hd4ZCcaxEKINEJe6FwYr6AejVRC3GsEjl
-         HgVCDxMQqeRzAScxy7oBMeAfACcr8Q5G2nETniixD2NA4HzDytr6es2TR/qOURbUaAam
-         2YSxBmvmxlOJqoZYOq96yn/+P7+c+h0dXozdXR7nlLs9Il7bumttuC4DYQTiJ2TWey7E
-         wPFQ9qjkKMwtvmfg9h66nf2qIJ9u9/lkjsyrDV1SZm9ZZMCqmhgs3Arjo61Oc6cHeCcK
-         BBYMR17PfbJD/P7QM5qrZBBrs6e6cLV+XW0+tbQyfL0ZT56vk48rJ8hefGyMud5pubLS
-         WD/g==
+        d=gmail.com; s=20230601; t=1700301169; x=1700905969; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=HS/esOZh1v3erYsUurhrQaLjkxPnfsUb48CmCn+kP6I=;
+        b=MNasOH1FYnn3Smh3RN+GupDSL5KlM1gyqHAGKh80W/yQADzH2ajM6q9FXX5sPh6xru
+         3VT5ZGl1GKEYFaL0+v6LZAq7fnbgCKQ3bcrZ95Gn00J97LN6lWIhRFYcc2z3TCiKLEm+
+         NGRivF86DYrFhWnl5l6yIvqoHF8Y/2C5VdIh/ue91lWT+Z8UL6k3o5ePMsGi6lpWAX9h
+         LLJzHXJZye002tpVh0yRC6VYN8yqKKXXrKxUDoIO6IYdNl/5Mf667d7AfAFtRESSzZmJ
+         0SRImzNgmIK8lN3L2gdvE1vAOVBdiw4rEvDV7lqUywpqJqR5g4h/816D3NTTXcNld92P
+         G0uA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700263121; x=1700867921;
-        h=content-transfer-encoding:in-reply-to:organization:references:to
-         :from:content-language:subject:user-agent:mime-version:date
-         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1700301169; x=1700905969;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=NQK85QyrEqUQlT25EXdnu/mgfPLNU/bNLlqurZX/FIM=;
-        b=NuK7wGmpOPqSa+nw9RzBu3PrcWrGvGrcSW4d5wTMI1M7Lkyf5/JnlMLnEYsNmDtQmh
-         54bxBnXBbsobvmLKQvOvXqxG3XhWnPV/NZ4/2Dspi8weaVnv/6e5sNNwHR7jfQPtQVxg
-         M/ayUf2+JthlhTU6XJ0q75dnR5jnRnWB0oCpNyv1EWb0/qA8v4OOEbbFRf9dNk2bznx1
-         yHjrm5sOpzFfUMwS1NN7McudgnaY6RGm5vRwUHASC9aDRYag0wbX19QYOWU2QM1k8JTQ
-         2ZH4B5SWHahAFlft5ESD9CHq8I9MC5rBgp7/rCRPyq+WKLnTEiB4YAsuYnT6uhTQnLnd
-         OWFw==
-X-Gm-Message-State: AOJu0YzcWfTWT3z0/SEIeeefzWgxdJCurecOYqoPgoPENIJpjoXIXJ3B
-	YlLoGzR/9m/K96hnSdrcb9ckAEIblWd3EwUMV8c=
-X-Google-Smtp-Source: AGHT+IFfO8bJf66ZJWfS9AAmTpEaVIAdZSCTrhKXDpCwFTGZctJa/ZCoPtc2x6atINCOOAac1PYFkg==
-X-Received: by 2002:a05:6000:1086:b0:32f:b17c:65e0 with SMTP id y6-20020a056000108600b0032fb17c65e0mr373516wrw.17.1700263121020;
-        Fri, 17 Nov 2023 15:18:41 -0800 (PST)
-Received: from [192.168.0.20] ([89.159.1.53])
-        by smtp.gmail.com with ESMTPSA id d19-20020adf9b93000000b003316eb9db40sm1184245wrc.51.2023.11.17.15.18.40
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 17 Nov 2023 15:18:40 -0800 (PST)
-Message-ID: <16f5f05b-a310-41e0-8b0d-e7e5a2fd712d@smile.fr>
-Date: Sat, 18 Nov 2023 00:18:40 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [meta-python][kirkstone][PATCH 1/2] python3-cson: fix DEPENDS on
- python3-native
-Content-Language: en-US
-From: Yoann Congal <yoann.congal@smile.fr>
+        bh=HS/esOZh1v3erYsUurhrQaLjkxPnfsUb48CmCn+kP6I=;
+        b=QDHWud2EpDpZI4k5lE6jwSE63pe96y5vA5K7QeobCL57OwC2bWyQri/T8gfjzSHpra
+         OGiEkeBqkKLVpp94C7AWgVQe1uNh1yuKBD1ZtM6ukPgYXs7j6OHRyebCuhWM40f/+p6w
+         fFzhlp7jqFWnoYE/Md1muOo7jDgOI8zO/zt1IeujpVdJLaiMDAE2JPtZo+cvhMnynigQ
+         AybaIQfBFHRg+GhWrpgBkOhzKVjvjnfiwPmv1jQzlHT8BQww2ITCl+NH/wQxcYjfJgKz
+         t0iYCdFdXjEKCM9pUoj7z5T0ihUlrLtzYPC65ZlJ+KmcvtjmVqTplF44/DvhReC9aj3V
+         2Ogw==
+X-Gm-Message-State: AOJu0Yxxvq0rrUDb7tfRemZBOkpVSXAnvGydKKk/VkDBqP0P249XNZb3
+	cJ5XVfUXlBv/RnjZtsmnYoVxCxktW8VASA==
+X-Google-Smtp-Source: AGHT+IGsiPceqIIK5B0e8dqJ+C7suGNYZkT5H9LKkXFVhwX1pjwJMrMfNycD6/auQhL0bLuT6uVYtg==
+X-Received: by 2002:aa7:d409:0:b0:543:caf4:e5bc with SMTP id z9-20020aa7d409000000b00543caf4e5bcmr1299416edq.1.1700301168304;
+        Sat, 18 Nov 2023 01:52:48 -0800 (PST)
+Received: from localhost.localdomain ([176.33.67.108])
+        by smtp.gmail.com with ESMTPSA id t8-20020a05640203c800b005402748cf29sm1537553edw.50.2023.11.18.01.52.47
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 18 Nov 2023 01:52:47 -0800 (PST)
+From: alperak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <20231117091824.450741-1-yoann.congal@smile.fr>
- <dc8c58c0-bc7c-4cf3-975b-4f0803b7c915@smile.fr>
-Organization: Smile ECS
-In-Reply-To: <dc8c58c0-bc7c-4cf3-975b-4f0803b7c915@smile.fr>
-Content-Type: text/plain; charset=UTF-8
+Cc: alperak <alperyasinak1@gmail.com>
+Subject: [meta-oe][PATCHv2] ledmon: upgrade 0.93 -> 0.97
+Date: Sat, 18 Nov 2023 12:52:25 +0300
+Message-Id: <20231118095225.222275-1-alperyasinak1@gmail.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 Nov 2023 23:18:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106882
+ <openembedded-devel@lists.openembedded.org>; Sat, 18 Nov 2023 09:52:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106883
 
-Le 18/11/2023 à 00:07, Yoann Congal a écrit :
-> Le 17/11/2023 à 10:18, Yoann Congal a écrit :
->> python-native is not provided by meta-python anymore and this is clearly
->> a python3 recipe.
->>
->> Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
->> ---
->>  meta-python/recipes-extended/python-cson/python3-cson_git.bb | 2 +-
->>  1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/meta-python/recipes-extended/python-cson/python3-cson_git.bb b/meta-python/recipes-extended/python-cson/python3-cson_git.bb
->> index c4fcc61ec..da174ad55 100644
->> --- a/meta-python/recipes-extended/python-cson/python3-cson_git.bb
->> +++ b/meta-python/recipes-extended/python-cson/python3-cson_git.bb
->> @@ -13,7 +13,7 @@ SRC_URI = "git://github.com/gt3389b/python-cson.git;branch=master;protocol=https
->>  S = "${WORKDIR}/git"
->>  
->>  RDEPENDS:${PN}:class-native = ""
->> -DEPENDS:append:class-native = " python-native "
->> +DEPENDS:append:class-native = " python3-native "
->>  
->>  inherit setuptools3
->>  
-> 
-> It would be better to backport https://git.openembedded.org/meta-openembedded/commit/?id=40b4cf5a83098a5f1be873be5c29f26380bc7993 instead of this patch
-> In the current state :
-> root@qemux86-64:~# python-cson
-> Traceback (most recent call last):
->   File "/usr/bin/python-cson", line 5, in <module>
->     from cson import main
->   File "/usr/lib/python3.10/site-packages/cson.py", line 11, in <module>
->     import argparse, copy, json, sys
-> ModuleNotFoundError: No module named 'json'
-> 
-> I'll send the backport.
-Here it is :
-[meta-python][kirkstone][PATCH] python3-cson: fix run-time dependencies
-https://lists.openembedded.org/g/openembedded-devel/message/106881
+* Added 0001-fix-build-with-clang.patch to fix build error caused by missing 'value' initializer
 
-With the backport the python-cson tool does start so this patch should definitely be dropped in favor of the backport.
-root@qemux86-64:~# python-cson 
-usage: python-cson [-h] -f OUTPUT_FILE [-v] input_file
-python-cson: error: the following arguments are required: -f/--file, input_file
+* License changed GPL-2.0-only -> LGPL-2.0-only
 
-Regards,
+  - LIC_FILES_CHKSUM changed COPYING -> COPYING.LIB for LGPL-2.0-only
+  - Changed license headers in required source files.
+  - Changed copyright years to 2022 in modified files.
+
+* 0001-Don-t-build-with-Werror-to-fix-compile-error.patch removed because fixed in the new version.
+
+* libpci was added as depends following this error -> configure: error: Package requirements (libpci) were not met: No package 'libpci' found
+
+* pkgconfig added as inherit following this error -> PKG_PROG_PKG_CONFIG: command not found
+
+Changelog:
+
+It can be followed here: https://github.com/intel/ledmon/releases
+
+Signed-off-by: alperak <alperyasinak1@gmail.com>
+---
+ ...ild-with-Werror-to-fix-compile-error.patch | 30 -------
+ .../ledmon/0001-fix-build-with-clang.patch    | 90 +++++++++++++++++++
+ .../ledmon/{ledmon_git.bb => ledmon_0.97.bb}  | 18 ++--
+ 3 files changed, 98 insertions(+), 40 deletions(-)
+ delete mode 100644 meta-oe/recipes-bsp/ledmon/ledmon/0001-Don-t-build-with-Werror-to-fix-compile-error.patch
+ create mode 100644 meta-oe/recipes-bsp/ledmon/ledmon/0001-fix-build-with-clang.patch
+ rename meta-oe/recipes-bsp/ledmon/{ledmon_git.bb => ledmon_0.97.bb} (71%)
+
+diff --git a/meta-oe/recipes-bsp/ledmon/ledmon/0001-Don-t-build-with-Werror-to-fix-compile-error.patch b/meta-oe/recipes-bsp/ledmon/ledmon/0001-Don-t-build-with-Werror-to-fix-compile-error.patch
+deleted file mode 100644
+index 09f4993a2..000000000
+--- a/meta-oe/recipes-bsp/ledmon/ledmon/0001-Don-t-build-with-Werror-to-fix-compile-error.patch
++++ /dev/null
+@@ -1,30 +0,0 @@
+-Subject: [PATCH] Don't build with -Werror to fix compile error.
+-
+-|   550 |  _dump_sgpio_amd(&amd_reg->amd);
+-|       |                  ^~~~~~~~~~~~~
+-| amd_sgpio.c: In function '_write_amd_register':
+-| amd_sgpio.c:558:18: error: taking address of packed member of 'struct amd_register' may result in an unaligned pointer value [-Werror=address-of-packed-member]
+-
+-Upstream-Status: Submitted
+-https://github.com/intel/ledmon/pull/48/commits
+-
+-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+----
+- configure.ac | 1 -
+- 1 file changed, 1 deletion(-)
+-
+-diff --git a/configure.ac b/configure.ac
+-index 7bc20f8..7e01bd5 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -22,7 +22,6 @@ AX_AM_CFLAGS_ADD([-Werror=format-truncation=1])
+- AX_AM_CFLAGS_ADD([-Werror=shift-negative-value])
+- AX_AM_CFLAGS_ADD([-Werror=alloca])
+- AX_AM_CFLAGS_ADD([-Werror=missing-field-initializers])
+--AX_AM_CFLAGS_ADD([-Werror])
+- AX_AM_CFLAGS_ADD([-Werror=format-signedness])
+- 
+- AC_SUBST([AM_CFLAGS])
+--- 
+-2.7.4
+-
+diff --git a/meta-oe/recipes-bsp/ledmon/ledmon/0001-fix-build-with-clang.patch b/meta-oe/recipes-bsp/ledmon/ledmon/0001-fix-build-with-clang.patch
+new file mode 100644
+index 000000000..f1e1d6f78
+--- /dev/null
++++ b/meta-oe/recipes-bsp/ledmon/ledmon/0001-fix-build-with-clang.patch
+@@ -0,0 +1,90 @@
++From 28fd86fb4e18af181174176530a80672de4449d2 Mon Sep 17 00:00:00 2001
++From: alperak <alperyasinak1@gmail.com>
++Date: Sat, 18 Nov 2023 12:27:17 +0300
++Subject: [PATCH] fix build with clang
++
++struct ibpi2value is a structure which contains 2 unsigned integers.  In
++a number of cases the code was not initializing a value for the last value
++in the pair in struct ibpi2value ibpi_to_attention.  This was raised when
++using clang compiler.
++
++vmdssd.c:49:27: error: missing field 'value' initializer
++[-Werror,-Wmissing-field-initializers]
++        {LED_IBPI_PATTERN_UNKNOWN}
++
++dellssd.c:74:27: error: missing field 'value' initializer
++[-Werror,-Wmissing-field-initializers]
++        {LED_IBPI_PATTERN_UNKNOWN}
++
++amd_ipmi.c:57:27: error: missing field 'value'
++initializer [-Werror,-Wmissing-field-initializers]
++        {LED_IBPI_PATTERN_UNKNOWN}
++
++npem.c:76:27: error: missing field 'value'
++initializer [-Werror,-Wmissing-field-initializers]
++        {LED_IBPI_PATTERN_UNKNOWN}
++
++Upstream-Status: Submitted [https://github.com/intel/ledmon/pull/179]
++Signed-off-by: alperak <alperyasinak1@gmail.com>
++---
++ src/amd_ipmi.c | 2 +-
++ src/dellssd.c  | 2 +-
++ src/npem.c     | 2 +-
++ src/vmdssd.c   | 2 +-
++ 4 files changed, 4 insertions(+), 4 deletions(-)
++
++diff --git a/src/amd_ipmi.c b/src/amd_ipmi.c
++index 726f77d..ad36e9e 100644
++--- a/src/amd_ipmi.c
+++++ b/src/amd_ipmi.c
++@@ -53,7 +53,7 @@ const struct ibpi2value ibpi2amd_ipmi[] = {
++ 	{IBPI_PATTERN_FAILED_ARRAY, 0x45},
++ 	{IBPI_PATTERN_REBUILD, 0x46},
++ 	{IBPI_PATTERN_HOTSPARE, 0x47},
++-	{IBPI_PATTERN_UNKNOWN}
+++	{IBPI_PATTERN_UNKNOWN, 0}
++ };
++ 
++ #define MG9098_CHIP_ID_REG	0x63
++diff --git a/src/dellssd.c b/src/dellssd.c
++index 3c10ec7..7f02ea1 100644
++--- a/src/dellssd.c
+++++ b/src/dellssd.c
++@@ -71,7 +71,7 @@ static const struct ibpi2value ibpi2ssd[] = {
++ 	{IBPI_PATTERN_FAILED_DRIVE, BP_FAULT | BP_ONLINE},
++ 	{IBPI_PATTERN_LOCATE, BP_IDENTIFY | BP_ONLINE},
++ 	{IBPI_PATTERN_LOCATE_OFF, BP_ONLINE},
++-	{IBPI_PATTERN_UNKNOWN}
+++	{IBPI_PATTERN_UNKNOWN, 0}
++ };
++ 
++ #define DELL_OEM_NETFN                      0x30
++diff --git a/src/npem.c b/src/npem.c
++index c21276d..3499169 100644
++--- a/src/npem.c
+++++ b/src/npem.c
++@@ -72,7 +72,7 @@ const struct ibpi2value ibpi_to_npem_capability[] = {
++ 	{IBPI_PATTERN_FAILED_DRIVE, PCI_NPEM_FAIL_CAP},
++ 	{IBPI_PATTERN_LOCATE, PCI_NPEM_LOCATE_CAP},
++ 	{IBPI_PATTERN_LOCATE_OFF, PCI_NPEM_OK_CAP},
++-	{IBPI_PATTERN_UNKNOWN}
+++	{IBPI_PATTERN_UNKNOWN, 0}
++ };
++ 
++ static struct pci_access *get_pci_access()
++diff --git a/src/vmdssd.c b/src/vmdssd.c
++index 51af591..9c63d90 100644
++--- a/src/vmdssd.c
+++++ b/src/vmdssd.c
++@@ -45,7 +45,7 @@ struct ibpi2value ibpi_to_attention[] = {
++ 	{IBPI_PATTERN_REBUILD, ATTENTION_REBUILD},
++ 	{IBPI_PATTERN_LOCATE_OFF, ATTENTION_OFF},
++ 	{IBPI_PATTERN_ONESHOT_NORMAL, ATTENTION_OFF},
++-	{IBPI_PATTERN_UNKNOWN}
+++	{IBPI_PATTERN_UNKNOWN, 0}
++ };
++ 
++ #define SYSFS_PCIEHP         "/sys/module/pciehp"
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-bsp/ledmon/ledmon_git.bb b/meta-oe/recipes-bsp/ledmon/ledmon_0.97.bb
+similarity index 71%
+rename from meta-oe/recipes-bsp/ledmon/ledmon_git.bb
+rename to meta-oe/recipes-bsp/ledmon/ledmon_0.97.bb
+index dbfd1e7bc..d431fd9a8 100644
+--- a/meta-oe/recipes-bsp/ledmon/ledmon_git.bb
++++ b/meta-oe/recipes-bsp/ledmon/ledmon_0.97.bb
+@@ -5,28 +5,26 @@ DESCRIPTION = "The utilities are designed primarily to be used on storage server
+ "
+ HOMEPAGE = "https://github.com/intel/ledmon"
+ 
+-LICENSE = "GPL-2.0-only"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
+-"
++LICENSE = "LGPL-2.0-only"
++LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c"
+ 
+-DEPENDS = "sg3-utils udev"
++DEPENDS = "sg3-utils udev pciutils"
+ 
+-inherit autotools systemd
++inherit autotools systemd pkgconfig
+ 
+ SYSTEMD_SERVICE:${PN} = "ledmon.service"
+ 
+-# 0.93
+ SRC_URI = "git://github.com/intel/ledmon;branch=master;protocol=https \
+-           file://0002-include-sys-select.h-and-sys-types.h.patch \
+-           file://0001-Don-t-build-with-Werror-to-fix-compile-error.patch \
+-          "
++	   file://0002-include-sys-select.h-and-sys-types.h.patch \
++	   file://0001-fix-build-with-clang.patch"
+ 
+-SRCREV = "1d72f9cb5c9163b2ecdf19709935720e65f5b90e"
++SRCREV = "b0edae14e8660b80ffe0384354038a9f62e2978d"
+ 
+ COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
+ COMPATIBLE_HOST:libc-musl = "null"
+ 
+ S = "${WORKDIR}/git"
++
+ EXTRA_OEMAKE = "CC='${CC}' LDFLAGS='${LDFLAGS}' CFLAGS='${CFLAGS}'"
+ 
+ # The ledmon sources include headers in ${S}/config to build but not in CFLAGS. 
 -- 
-Yoann Congal
-Smile ECS - Tech Expert
+2.25.1
+
 
