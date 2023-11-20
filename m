@@ -2,58 +2,58 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A68EAC5B55F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BB2CDC5B562
 	for <webhook@archiver.kernel.org>; Mon, 20 Nov 2023 03:51:15 +0000 (UTC)
-Received: from mail-oi1-f178.google.com (mail-oi1-f178.google.com [209.85.167.178])
- by mx.groups.io with SMTP id smtpd.web11.43608.1700452270215236784
+Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
+ by mx.groups.io with SMTP id smtpd.web11.43606.1700452267832626268
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 19 Nov 2023 19:51:10 -0800
+ Sun, 19 Nov 2023 19:51:07 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=DSzht+oT;
- spf=pass (domain: gmail.com, ip: 209.85.167.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f178.google.com with SMTP id 5614622812f47-3b5ff072fc4so2615133b6e.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 19 Nov 2023 19:51:10 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Y66HS4xQ;
+ spf=pass (domain: gmail.com, ip: 209.85.210.182, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f182.google.com with SMTP id d2e1a72fcca58-6cb7951d713so530489b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 19 Nov 2023 19:51:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1700452269; x=1701057069; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1700452267; x=1701057067; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=NvGNRE+GIYm2VfVqp0UU9TC8viAL37GMvfRtrcn9MRM=;
-        b=DSzht+oTxFVJMbM3xp7L0+ORR8ojm4bnA7maBSa2Jtl+u5EdUh6lx8PxQwtliAsX9p
-         Y1y8huekTTDV7GCdYXD9J49wd/nRWA19aygn2ofShrJwAjEavsT+NyIAGtQXZOjuVxYB
-         itG/IF3WJlPbZZq/Uxbl9OHleKj8zrytlSiurtgkrHSjFFb8MZup0JiZNsEOYuH+PghC
-         HLYxajmbU9v/8Z+umBPE3nxf5JBLO/MfdemWlNhpAa3iicH1P0KkTvbtb87Crb/AvVpn
-         Llo2aiXF9TdntAus4xZJpp3+uDFVrkGhyDAkA252IfQOx0hdNPim2egOeNnn8T5KmhgT
-         diSA==
+        bh=3fN1t2OmPRVLQiTbYz8m/+b7dk+0YUCTEK9FDauokf0=;
+        b=Y66HS4xQVb48/Mj5YppHsEIIyp4dFicguPXN5hmqYaCCAMCI3jfi8VyytYPLR285ko
+         9urZ3LMlp0dGpeVYMvKJUE97XsI+nmYMRS1V6d2sxfhfvCljzVK5HbNt1Vle1TfKNL3M
+         IXF/7oB2L7hVY7ETRO597Tzux3VuDvYbVUA/LRByAmvYUMetj20qJUlVDSWH3NErWp0o
+         zZ1zVbJgQtLsjPcxY1TuMgxqyLvbgVrsXEvarim+oMhnl2oSp92YDEeQG6ew616pCYD0
+         aCJ+bbqlBJsVNL1+P0uaYXTU8lpVGan6Blk+cLOK2BbVveal7YLqITJemC3zUD5J9DaE
+         LDIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700452269; x=1701057069;
+        d=1e100.net; s=20230601; t=1700452267; x=1701057067;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=NvGNRE+GIYm2VfVqp0UU9TC8viAL37GMvfRtrcn9MRM=;
-        b=V6+HeBIS/BAJWlzhXfCPzmP7HmXwUc3uFzS4hAcnHfwkiZoVv0lrROmXDI4pYcHOX3
-         UERcII4iHT63GmgyNyjN7fWReorhXcU7mPsuvfTIHtsSLc5o5ZqMuzktXk82Gkin2JNV
-         QJiXk7CtldT8eCmf7wbHhx4XYsEmRKkBlB0H7pHyU2uBlkH+e23u5qZUmqpPzYty29UX
-         CIayHZ2tuMnI/lFNPrTPHp4eyGz3e/EdLeJn8VjOABYBBKhqahGj6K5rWqD/wCtnY8sa
-         b9Tpk+6hQ6Y3g0q1zLtLc+fcbhV8cF+Ht3rFqsxrTYJSI9v6DevfGFSsB0ZCiRdU6LRF
-         V+yQ==
-X-Gm-Message-State: AOJu0YyO6TcuV6pbmtkMLJc8iVHG6yQEccUbLHN3oyzdLtzSAZuYuIbr
-	NNatPupSFRHnjwra6zI3c8E=
-X-Google-Smtp-Source: AGHT+IETMh+hmxS6el4ErC/3MLr5VpL+Tq54UjLEUGFMltfLaDsreIYGDz/wBwGR+B3oQ+EqQzYsVA==
-X-Received: by 2002:a05:6808:140e:b0:3ae:4cad:91a0 with SMTP id w14-20020a056808140e00b003ae4cad91a0mr1166861oiv.6.1700452269517;
-        Sun, 19 Nov 2023 19:51:09 -0800 (PST)
+        bh=3fN1t2OmPRVLQiTbYz8m/+b7dk+0YUCTEK9FDauokf0=;
+        b=FWO7s/bu+eLAmS5bjx0iQrJoO8MduaDqv6D5PsNrf9tt96KSeeBE/QSrFoCAQfFE1B
+         /nuaG9wtYX39Ki4+to7mEF0LhnaPcZgNkvBLf6u4/95Hvhnc0kJS0LmefshpSxi2lP+D
+         IsTZR0JEFLZtYrc/yuQOJwL+/XP683oy3wfGlZ0hDdeB5OeJCE1Zxng7h9vtcrhqUpVq
+         BzvWf6BDJtOHd5gl75upzq2vOC98lxl5hBbPnSGJzQTIFbSlbehthV/aLwlyVgyZMaXK
+         KcYv3CisMifaC44rfDPWDYhxYbCgWU5e6FckZaCuUkMpCbCGVCY/94hdxFS+4+CMBaIK
+         5+sA==
+X-Gm-Message-State: AOJu0Yyq6LjfEZN+mpN5F1kRGEzrQ/ib6mIA9NHdtpHlieAkLPwIj7H9
+	OnLaWaLNh5fmgKsRirh2EBFOtvdYVyYyHQ==
+X-Google-Smtp-Source: AGHT+IF4NuPSMKFXqFgld368THdcSyYlG6EFfq2SkJDLynARNu+2eDToRgSNnVKEWUUL7cNPiCmSLg==
+X-Received: by 2002:aa7:888e:0:b0:6cb:a28f:85c2 with SMTP id z14-20020aa7888e000000b006cba28f85c2mr2309023pfe.16.1700452267229;
+        Sun, 19 Nov 2023 19:51:07 -0800 (PST)
 Received: from apollo.localdomain ([2601:646:9100:2cb0::b319])
-        by smtp.gmail.com with ESMTPSA id a34-20020a056a0011e200b006be0fb89ac2sm4954381pfu.197.2023.11.19.19.51.08
+        by smtp.gmail.com with ESMTPSA id a34-20020a056a0011e200b006be0fb89ac2sm4954381pfu.197.2023.11.19.19.51.06
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 19 Nov 2023 19:51:08 -0800 (PST)
+        Sun, 19 Nov 2023 19:51:06 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org, wangmy@fujitsu.com
-In-Reply-To: <1700123891-22651-1-git-send-email-wangmy@fujitsu.com>
-References: <1700123891-22651-1-git-send-email-wangmy@fujitsu.com>
-Subject: Re: [oe] [meta-python] [PATCH] python3-web3: upgrade 6.11.2 ->
- 6.11.3
-Message-Id: <170045226835.1416826.2205978344106973795.b4-ty@gmail.com>
-Date: Sun, 19 Nov 2023 19:51:08 -0800
+In-Reply-To: <1700123588-22554-1-git-send-email-wangmy@fujitsu.com>
+References: <1700123588-22554-1-git-send-email-wangmy@fujitsu.com>
+Subject: Re: [oe] [meta-python] [PATCH] python3-tomlkit: upgrade 0.12.2 ->
+ 0.12.3
+Message-Id: <170045226622.1416826.319484842468114301.b4-ty@gmail.com>
+Date: Sun, 19 Nov 2023 19:51:06 -0800
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -62,29 +62,21 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 20 Nov 2023 03:51:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106925
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106923
 
 
-On Thu, 16 Nov 2023 16:38:11 +0800, wangmy@fujitsu.com wrote:
+On Thu, 16 Nov 2023 16:33:08 +0800, wangmy@fujitsu.com wrote:
 > Changelog:
-> ============
-> -When coming back through the middleware onion after a request is made, we have
->  the response id. Use it to match to the cached request information and process
->  the response accordingly.
-> -Adds Discord bot template repo to Resources page
-> -Additional contract abi documentation to make it a clear requirement for
->  contract instances.
-> -Fix type annotations for web3 constants.
-> -Add upper pin to deprecated dependency lru-dict whose new minor version release
->  introduced a typing issue with CI lint builds.
-> -Recompile test contracts with new Solidity version v0.8.23 to ensure compatibility.
+> ==========
+> -Improve the performance when parsing a table with nested dotted keys.
+> -Keep the newlines when replacing a table.
 > 
-> [...]
+> 
 
 Applied, thanks!
 
-[1/1] python3-web3: upgrade 6.11.2 -> 6.11.3
-      commit: b48841d0776c5c8ac66130c082d3071c01d92343
+[1/1] python3-tomlkit: upgrade 0.12.2 -> 0.12.3
+      commit: 17735e0224727e4c8c2a52f520d720ededdaeabf
 
 Best regards,
 -- 
