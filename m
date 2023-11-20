@@ -2,58 +2,58 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B4569C5B563
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C2624C5B564
 	for <webhook@archiver.kernel.org>; Mon, 20 Nov 2023 03:51:15 +0000 (UTC)
-Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com [209.85.128.178])
- by mx.groups.io with SMTP id smtpd.web11.43607.1700452269158972428
+Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com [209.85.128.172])
+ by mx.groups.io with SMTP id smtpd.web10.43638.1700452267230246839
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 19 Nov 2023 19:51:09 -0800
+ Sun, 19 Nov 2023 19:51:07 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=GXIXfQ2I;
- spf=pass (domain: gmail.com, ip: 209.85.128.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-5af6c445e9eso43335317b3.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 19 Nov 2023 19:51:09 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=cwEzL7uq;
+ spf=pass (domain: gmail.com, ip: 209.85.128.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f172.google.com with SMTP id 00721157ae682-5a86b6391e9so44442107b3.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 19 Nov 2023 19:51:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1700452268; x=1701057068; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1700452266; x=1701057066; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=l4uBtDyUb2rNr6P0jOcNCGh8Db1p75gGTJT8CY0lhIo=;
-        b=GXIXfQ2IrEyMvAZZ5p0WeohbH7+sznEYKxQkqnqr/NkvC2tUQ2jlz1qMHUJy8ZL4mb
-         s+egR7UK0ITXDL0KGfngwmWSzEQFn6rmx7uHJLihDHAnnroG3gU6NALNgCijPbgFTYAT
-         sPdBa69jAw/Z49sDi/FvAoQtcxTlDav5LdmcllhmVEfN5njGrK6Huf6tyshwjt+OyS9q
-         5sJsw4MKHTfaLf9eHQbEXP+sZXgO954mpQlz2gQcYwVzOSb3NFKlrtecb5b1a3CIng+N
-         jelqgn5rjH5hde8RDfVqnDE0dIyKC7zzUJ71qveu4gjrytpTvt60Fwu0MCMOwBtH1tjG
-         eeSg==
+        bh=AQgkmVOx0onLe9Y6wkzVfxs00hOjqasPLLYqqyY2FXQ=;
+        b=cwEzL7uqdBWfqF9gBIZopumMgWB2JcOlHkfPzwEnB8NLE58zeIVP0+OOUXa80JEH/j
+         jAH4cHLViJIc0ellug4VapLx24e5vHlglL6E7lR3CZonIgk2Ts67GGL3z54YS5tBXkOx
+         cfVTXuRuDSPOLhoUjOTlMG+Y56kmpdlfZ6iVc/fRrPcUG7enabHyBqVE/9Vq3lXUaEly
+         wToBGBaTiz8D7tw/al1kX8LgCvji9KDFT4Rgcwjm/HOHnVGjJp/TvNkLGN7pHp7/7eFn
+         wR4SCvHAKUWF2OHm5c2IfVol6k5ai65iuT6hLVVKMxdvAaIJ8fEBF2/hPBthu0f+8ttW
+         Eoig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700452268; x=1701057068;
+        d=1e100.net; s=20230601; t=1700452266; x=1701057066;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=l4uBtDyUb2rNr6P0jOcNCGh8Db1p75gGTJT8CY0lhIo=;
-        b=gny4NujVngioYVjghcNZYfhslTN+Kqmon67UPPeVgAl1x6B6E5zAz2Sq+GeSLzqUfe
-         /IX24coLQdqKlA2g2n78TLArljp1Oc86Y9r7lFhK+o6aPrUOHxCEZNHGFKLcIIlLGK9N
-         kavdY4KSJS737LyL2mHUfP+EIVkAoPJU2N+u/Yv2OrCZWJLGJEtrHJMMdSwtk8ZAUU+I
-         8skEcbDgwopLNjiPnybDlZqZ8lKE890tbqOEiyQQmDT94d8gdf4BM25bbS7LVEWHyfaZ
-         Pfkqr62PPWCav75xQr0nWf4d74hHSDVmM5X7ANDMMiviZJNfQPf3vYJZu4g/3whHKQpA
-         C1ww==
-X-Gm-Message-State: AOJu0YxkjcBhgTh+tC4B3gn353H1KN5o5ym60YCGN1n0oB3GCgOUCReu
-	XQtrBFVESMgY81hdsQpCv3k=
-X-Google-Smtp-Source: AGHT+IHRiGjHVPSV5YtBEnGTmoC+KSZAkTu1/KSHEFnA44RBIbGRHobf+Z5z26fKoJKCAiRCNpSyHw==
-X-Received: by 2002:a81:7cc6:0:b0:5a7:afcc:80fe with SMTP id x189-20020a817cc6000000b005a7afcc80femr6153749ywc.3.1700452268157;
-        Sun, 19 Nov 2023 19:51:08 -0800 (PST)
+        bh=AQgkmVOx0onLe9Y6wkzVfxs00hOjqasPLLYqqyY2FXQ=;
+        b=rtbgy4isxiz5a8a6vvP9tAmO19AX20tHa0SoygqLvfqsxXhbeu/fcsuJIoa02yyGiv
+         mjh0ZiYD4Irb2IaT1xz0PZ8dNdzCxw/IfnczLtTNyG/vlBbxP3pxdJCPkUBo2mo+51PI
+         QVH7i5/H6lwtJmxOcmUPZr3bb6/kgDvh8VcfPE82IPHeWR79tBwyM2Sbx0KT0wTy2DIC
+         1pihOeq1kjXwB6u1IpHUgryvIxcOBevYaoAFJYEubWPrLTVLzrzhkZQsjVcb0VK1NSD/
+         yKDkUH3ksVmW5uAyRSzI/0qaBZlPDgREX9mUUbtF88IGQ6ai8G2JomGoMiViCBC+N94x
+         DZlw==
+X-Gm-Message-State: AOJu0YwDlHjDSD/POO3AgwA1elr2zxkmf02O55HM8qYH9QeLFH2GHR6S
+	/uPsriCAfhe7QvUv2xefET0=
+X-Google-Smtp-Source: AGHT+IHKSPqPcbKK+QwF78B4eKGu1xC4gl2Rv7Nh5F8AG9PwmPUECT60grFTIK9Nk4RF3ZpZll0xnA==
+X-Received: by 2002:a81:4f02:0:b0:5be:7046:b2fa with SMTP id d2-20020a814f02000000b005be7046b2famr7029314ywb.12.1700452266026;
+        Sun, 19 Nov 2023 19:51:06 -0800 (PST)
 Received: from apollo.localdomain ([2601:646:9100:2cb0::b319])
-        by smtp.gmail.com with ESMTPSA id a34-20020a056a0011e200b006be0fb89ac2sm4954381pfu.197.2023.11.19.19.51.07
+        by smtp.gmail.com with ESMTPSA id a34-20020a056a0011e200b006be0fb89ac2sm4954381pfu.197.2023.11.19.19.51.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 19 Nov 2023 19:51:07 -0800 (PST)
+        Sun, 19 Nov 2023 19:51:05 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org, wangmy@fujitsu.com
-In-Reply-To: <1700123856-22615-1-git-send-email-wangmy@fujitsu.com>
-References: <1700123856-22615-1-git-send-email-wangmy@fujitsu.com>
-Subject: Re: [oe] [meta-python] [PATCH] python3-types-setuptools: upgrade
- 68.2.0.0 -> 68.2.0.1
-Message-Id: <170045226738.1416826.11752033982410460471.b4-ty@gmail.com>
-Date: Sun, 19 Nov 2023 19:51:07 -0800
+In-Reply-To: <1700123524-22496-1-git-send-email-wangmy@fujitsu.com>
+References: <1700123524-22496-1-git-send-email-wangmy@fujitsu.com>
+Subject: Re: [oe] [meta-python] [PATCH] python3-sentry-sdk: upgrade 1.34.0
+ -> 1.35.0
+Message-Id: <170045226496.1416826.5000867431740886399.b4-ty@gmail.com>
+Date: Sun, 19 Nov 2023 19:51:04 -0800
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -62,19 +62,29 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 20 Nov 2023 03:51:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106924
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106922
 
 
-On Thu, 16 Nov 2023 16:37:36 +0800, wangmy@fujitsu.com wrote:
+On Thu, 16 Nov 2023 16:32:04 +0800, wangmy@fujitsu.com wrote:
 > Changelog:
->  Bump flake8-pyi to 23.11.0
+> ==========
+> -Updated gRPC integration: Asyncio interceptors and easier setup
+> -Python 3.12: Replace deprecated datetime functions
+> -Metrics: Unify datetime format
+> -Celery: Set correct data in check_ins
+> -Celery: Read timezone for Crons monitors from celery_schedule if existing
+> -Django: Removing redundant code in Django tests
+> -Django: Make reading the request body work in Django ASGI apps.
+> -FastAPI: Use wraps on fastapi request call wrapper
+> -Fix: Probe for psycopg2 and psycopg3 parameters function.
+> -Fix: Remove unnecessary TYPE_CHECKING alias
 > 
-> 
+> [...]
 
 Applied, thanks!
 
-[1/1] python3-types-setuptools: upgrade 68.2.0.0 -> 68.2.0.1
-      commit: d5d19962b2ffd0b54e9b8f426556775a29e0d68c
+[1/1] python3-sentry-sdk: upgrade 1.34.0 -> 1.35.0
+      commit: 88d7d576d7827deb40a814fe27df82721c3d17cc
 
 Best regards,
 -- 
