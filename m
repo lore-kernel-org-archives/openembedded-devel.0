@@ -2,58 +2,59 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 53C38C5B564
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 61E3CC5B563
 	for <webhook@archiver.kernel.org>; Mon, 20 Nov 2023 03:51:36 +0000 (UTC)
-Received: from mail-oi1-f178.google.com (mail-oi1-f178.google.com [209.85.167.178])
- by mx.groups.io with SMTP id smtpd.web11.43621.1700452287725382176
+Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com [209.85.128.178])
+ by mx.groups.io with SMTP id smtpd.web10.43653.1700452295941579430
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 19 Nov 2023 19:51:27 -0800
+ Sun, 19 Nov 2023 19:51:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=XE3B+NEV;
- spf=pass (domain: gmail.com, ip: 209.85.167.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f178.google.com with SMTP id 5614622812f47-3b2df2fb611so2959547b6e.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 19 Nov 2023 19:51:27 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=H/FSGGoR;
+ spf=pass (domain: gmail.com, ip: 209.85.128.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-5ca369acbb3so5567887b3.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 19 Nov 2023 19:51:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1700452287; x=1701057087; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1700452295; x=1701057095; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=IWMt3El9ZjuRRch0MaoJd1jFiv6mOX7v6UEe/IYxIcI=;
-        b=XE3B+NEV0iOMrcCeQW0RSyMda0cjeZG6OIMpJfB6MZWEPTT5wKhWganU4Nd/V5k3by
-         lX2M4HqQhfJ/HKpffaGaBJxBa966pakunxp3r7IQenWsjD69mQ0rG5RsQTwwTjnhHBI9
-         lt7oyijALEotdpuvzPXgZ4uNvUwuvP0anupfBqm/T8GAAykY2gPcgNE9Wy9zK8uXqqN/
-         BmbMdp5c/Hp7SiMuBtBLuX/V620ZNUAJcw6J9hIdg0MotQuhug2UYjFCPXtD9NM71oQf
-         Jo3vfAgkTTguk0NhLD/iWU42WKZCPILJzcK0FsxD9AAHDbu4ERIFb7K/FCe8xvNpOT4V
-         nlsQ==
+        bh=xG0R1RoLr2pjKLw8fatRFRUZy4nQYLQQPGL0peln+7Y=;
+        b=H/FSGGoRPusiQp2b/Y71x+h/5NKPhu3OAaTp8plsVynw3rBBSg24d/Et2FLcqwxqom
+         dlQbiL4O6RZQEuVIv3zsCVLwV4XtzJDGzN+nugOcmACpYLYCZdjSHNqmpfYLl4zb1P1/
+         Z6GPVUU/WfrDRe/3yvTumqzSi/QZOm0sm++B37OCVQ16mie9LKpfmfCaFvutbMRxrZ1H
+         q/wa+FCK06zpFYEGZrEe/FSN0IH7trPCxQl0HPiSXjDkN5aHXSyt6foRT+WLoW0cIP8W
+         s2kEgtrThPhokm3Le4hUBX8MOW1VJwt7/Gb35a7sdk7/Hn6oyokEmutsaw1Dwf6ExGks
+         lS8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700452287; x=1701057087;
+        d=1e100.net; s=20230601; t=1700452295; x=1701057095;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=IWMt3El9ZjuRRch0MaoJd1jFiv6mOX7v6UEe/IYxIcI=;
-        b=YkQ8rPG9PBcrcA606VIZXL9y74foJptjQxrIayR4T0UnYFKKiqxQzwX/7o8GwSvXQU
-         UWfUtDA1SA5E4uw9tBG9SNLh7Obt9lTvdajBNj5D1G8Colek5L7w8SOUHQ7n6Iai19we
-         vyIiJEDKDfEqZCyfGgsyZ6uEJ4rBb+fcdFa6K5NQAdab5vyfJKhI/3RxAt2yBJCwvgZ8
-         MJvc+1GdliMDsq7pSEnF+2mLowP0Dhf7xDeamK7cQbRDuGABnayYSaGE253/O5Qc+W8Y
-         ST6FAwXmRwYPTDEAAB9c8yxPou4Hopi53DGeVFxtD840vtsbPx9uBm+eS1Ejypicw7Kf
-         lwlg==
-X-Gm-Message-State: AOJu0YyWzgG9m+VFBRfUFvu9/RQc+4DbW+XnjlddyLd5UYOgsKv9deH7
-	i2WdiDr75cizJ+3uQLTuoQY=
-X-Google-Smtp-Source: AGHT+IGlOGhyYH6AUXKANN+5tRs4Z3+am8dxb0csGli70cVrGO1az2uaLLo87jtnvlO98OyBgmBCUQ==
-X-Received: by 2002:a05:6808:150d:b0:3b6:da98:4381 with SMTP id u13-20020a056808150d00b003b6da984381mr10313144oiw.33.1700452286969;
-        Sun, 19 Nov 2023 19:51:26 -0800 (PST)
+        bh=xG0R1RoLr2pjKLw8fatRFRUZy4nQYLQQPGL0peln+7Y=;
+        b=tawB0W9IRWm5ud0GcxLlmmgk1iWJM+Vm9m/YhrO9DRhfL84N7SWmHbufB9SuJ1/fQg
+         r3QfK+93zMDYDajNukBzfbSje26orFRgIqkLuHe2S3J/LB6LHbFioTKzvq8fePMZnJYr
+         35jnJsdORXS1TDgt2+oyOszhJOtI8XXF3OxuP7vvOmeDxVpJRLDbia1tMfU2Ddgywa2A
+         MmQwGCAtZ4yRQj5E4DcVdPUxL5CVefVzIN4AhM+/utU7c7JJeCw3hLgC1+8enGooJRz4
+         xUPVp37kerIyDS9UPMSkcT17AjJw2h7NusSxIOYd79l0W2/zc2JS6Z78mmkRPYd+VqwS
+         aJ6w==
+X-Gm-Message-State: AOJu0YwBT5Ut/K1jZKJ1dBxGzYWEZHIREfg2AK5SPZt4zNIznJ1fxITF
+	Ih6xFQfQc8/S2Dc6a17W85em3FH5F+7xiQ==
+X-Google-Smtp-Source: AGHT+IEDxubSWFYEQ7k/GS28rmohQiEUHRP8xGXtA4Ox1e+9z1N98Dw32BUYGi3wZRTKTthLnDr4AA==
+X-Received: by 2002:a81:be12:0:b0:5ca:151:1cf5 with SMTP id i18-20020a81be12000000b005ca01511cf5mr2810363ywn.15.1700452294878;
+        Sun, 19 Nov 2023 19:51:34 -0800 (PST)
 Received: from apollo.localdomain ([2601:646:9100:2cb0::b319])
-        by smtp.gmail.com with ESMTPSA id a34-20020a056a0011e200b006be0fb89ac2sm4954381pfu.197.2023.11.19.19.51.26
+        by smtp.gmail.com with ESMTPSA id a34-20020a056a0011e200b006be0fb89ac2sm4954381pfu.197.2023.11.19.19.51.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 19 Nov 2023 19:51:26 -0800 (PST)
+        Sun, 19 Nov 2023 19:51:34 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org, 
- Markus Volk <f_l_k@t-online.de>
-In-Reply-To: <20231116173511.113526-1-f_l_k@t-online.de>
-References: <20231116173511.113526-1-f_l_k@t-online.de>
-Subject: Re: [meta-multimedia][PATCH] pipewire: Upgrade 0.3.84 -> 0.3.85
-Message-Id: <170045228597.1416826.16804559128613380199.b4-ty@gmail.com>
-Date: Sun, 19 Nov 2023 19:51:25 -0800
+ Yoann Congal <yoann.congal@smile.fr>
+In-Reply-To: <20231116223001.425992-1-yoann.congal@smile.fr>
+References: <20231116223001.425992-1-yoann.congal@smile.fr>
+Subject: Re: [meta-python][PATCH] python3-soupsieve: Break circular
+ dependency with beautifulsoup4
+Message-Id: <170045229399.1416826.13672294286875886141.b4-ty@gmail.com>
+Date: Sun, 19 Nov 2023 19:51:33 -0800
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -62,28 +63,19 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 20 Nov 2023 03:51:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106942
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106950
 
 
-On Thu, 16 Nov 2023 18:35:11 +0100, Markus Volk wrote:
-> PipeWire 0.3.85 (2023-11-16)
+On Thu, 16 Nov 2023 23:30:01 +0100, Yoann Congal wrote:
+> python3-beautifulsoup4 does depend on python3-soupsieve but
+> python3-soupsieve does not depend on python3-beautifulsoup4.
 > 
-> This is the fifth (and last) 1.0 release candidate that is API and ABI
-> compatible with previous 0.3.x releases.
 > 
-> Highlights
->   - Fix an issue where a link could end up paused while not negotiated.
->   - Fix an infinite recursion issue when finding runnable nodes.
->   - Support XDG base directories when loading ACP config.
->   - Fix MIDI event recording preview in Ardour.
->   - Many more small fixes, cleanups and improvements.
-> 
-> [...]
 
 Applied, thanks!
 
-[1/1] pipewire: Upgrade 0.3.84 -> 0.3.85
-      commit: 87c8466fd6c0a8820b605739e30aedf2f0b1bab8
+[1/1] python3-soupsieve: Break circular dependency with beautifulsoup4
+      commit: 9d695a1f261e5d5f6aa9aa4cb3eafe54d45eedce
 
 Best regards,
 -- 
