@@ -2,65 +2,65 @@ Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 44382C197A0
-	for <webhook@archiver.kernel.org>; Mon, 20 Nov 2023 22:30:45 +0000 (UTC)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.web10.18246.1700519436819007884
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C4DEC2BB3F
+	for <webhook@archiver.kernel.org>; Mon, 20 Nov 2023 22:31:25 +0000 (UTC)
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+ by mx.groups.io with SMTP id smtpd.web10.18273.1700519481675463271
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 Nov 2023 14:30:37 -0800
+ Mon, 20 Nov 2023 14:31:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=SSzBXLO+;
- spf=pass (domain: smile.fr, ip: 209.85.128.47, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-4083740f92dso20251235e9.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Nov 2023 14:30:36 -0800 (PST)
+ dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=zj9caUlv;
+ spf=pass (domain: smile.fr, ip: 209.85.128.53, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-4083ac51d8aso20652745e9.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 20 Nov 2023 14:31:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1700519434; x=1701124234; darn=lists.openembedded.org;
+        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1700519479; x=1701124279; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=CiOw+AuCx5Zcnbj8pQjlef+HuXnY7clpK6IKaHhXIro=;
-        b=SSzBXLO+lNf7QrOQcIB5KstM7zxpaqmK2uHrbP3V569re+VoKdkY7nfEywHQpqR+Qi
-         IbXP14Od1svrU8Vrwht7/9a8r7faefmGnm2b1dtKVh8/9Efcr0J8VUS8gQew+xqa8qND
-         /weGsRXNFMeCjWJZnfQd+qwPFjc1Qb11nF7JcPvchsPfDlsOO6zhGiZAG10KkOCtMov7
-         LMMOmRnNiaJC6PkdpZ7tpbyJbcGs8tikm7K1zeyrs9j0NuSOb3dNmD6DLCWUm2C4FnNe
-         BYRvrX4GpvGT3vd2kcaknVJzeLpRyTPD4hqp9AnJudvPjRxKikgtEMkKMHHQpMk7vNuz
-         gfqw==
+        bh=mOn3xrJs8GqYoMz3iVOeq5OPbtBQMR0DT8EscCD5Sdo=;
+        b=zj9caUlvmZ2qmM2njULCVe+ZWHhTGFH7oWwz7mDylqyqFRc63fZV7SlXnKnld6f4EF
+         lsI1PWxzS/zJBwhs4sN3E0AZXVe5RWzV18AsD02Q34Np2wy7YejLjz+U7lRd87ar8p88
+         ONqiO6LeIqnWC4WGcemZFofjECph0+BGNdM4uLwguze5gzqY3ZIlk4M+GcSTwmNoI5R8
+         xG9OMYhei5g804ilz0sUzNM6v2AQwec2664JYgFa5aFNXW+kqRzLc0by+FjXHIWPq3BQ
+         zGbfYKSLspoGI9PYASnl+2K1GbF0yojPIGLBkJCiKFxsZT1iR3FKRaGOqlWI+vS00AXZ
+         4gKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700519434; x=1701124234;
+        d=1e100.net; s=20230601; t=1700519479; x=1701124279;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=CiOw+AuCx5Zcnbj8pQjlef+HuXnY7clpK6IKaHhXIro=;
-        b=v9fU9wxHk740BrsbP3RE7fZvMzkWriR4CpYVdeN83BSMMfu4AzPWEVAsC3+ke+4uWB
-         0SvlQ8hfmQzTwl+fWcjHo9O5n44I+hGwaeF7voWYoy/WQGahH4z15f7PVRlxGso3eEAi
-         O+x7LWnMi88tJc00J8PHgUOUGYhGghEOFNGectSKz8Y5ajlhniC1hfo0DA/ZUMMKcO/2
-         4gUadOkFBZH7FFCoPKzg2P5bzqE1AkBXsK7TH9mecJcP+mFP56StENFyiKBf+wUhbbGv
-         Z7NAGdQf3mVLB61zN0Ocj01REK7CJccmX2xSSPQQ9VJU4gnEFzvhMS8Xw2Bn4ig+qQmM
-         FanQ==
-X-Gm-Message-State: AOJu0YxaiYrBVL4qSpJ00Tj0Q8t6yzuSxDhPvQgJ3N2QZ/tSrHS96Wn3
-	w1MT/0AInIYQKFfQEoUjz1WPYD5Q/pZGKo3wrSM=
-X-Google-Smtp-Source: AGHT+IER+N8hL0O0UhfMtLT7WdP8qWKzoKcESLEAGMIzhOQ0wx8Ea7mUpKTjGWCzI0Av1ginJ5Qr1w==
-X-Received: by 2002:a05:600c:3ca8:b0:407:462a:7e9f with SMTP id bg40-20020a05600c3ca800b00407462a7e9fmr6614785wmb.27.1700519434051;
-        Mon, 20 Nov 2023 14:30:34 -0800 (PST)
+        bh=mOn3xrJs8GqYoMz3iVOeq5OPbtBQMR0DT8EscCD5Sdo=;
+        b=nvH/GA34bbquix4/teQSLQVZljXW/16RSlwxr71xtPYTWUgotGJ/IEjhL5SOb3HfK+
+         fGB47BvxpMktUwL1DwcfafCC4WxHaC5YNY4SFoll+jZ7eBk8xb3bwH4U3UhWYj+Y5JV8
+         5cswN8eQfQMC+GkrkMH/niAzxNbM62Al2M3hCAQzjWw4LUUedDVUgF2+8cRI8MyOij6y
+         91Vzr9G0QCI5zXUHYrDLo6j2/dFutxUC3wEGuNdxGF2h2kvC16Hy+JF6ngVd4CkAlSAH
+         dI6lKScmuEoNKmN8tguC3PP52/nphmzxaBqirC1SZxPGGGmLcvbeQi9yAdYgQ50brMFz
+         igJA==
+X-Gm-Message-State: AOJu0Yx6jKV/iAypHRO6YpB3meFlbY+d7fBXCWcnD54WqRvzIma4z53D
+	m34VY6WBN9XstVoc+3HzG9e+zkpwTfcpHn6Jpfo=
+X-Google-Smtp-Source: AGHT+IGyUJ02M9CouJoC5pyQTocjjp68BOCJVmE5j4aWA0dhch3QJ/+dC4hyjLTZ+6Syv4Tbw0e3mg==
+X-Received: by 2002:a05:600c:4445:b0:407:8e85:899f with SMTP id v5-20020a05600c444500b004078e85899fmr7559288wmn.16.1700519479331;
+        Mon, 20 Nov 2023 14:31:19 -0800 (PST)
 Received: from P-ASN-ECS-830T8C3.numericable.fr ([89.159.1.53])
-        by smtp.gmail.com with ESMTPSA id n21-20020a7bc5d5000000b003fbe4cecc3bsm18803749wmk.16.2023.11.20.14.30.33
+        by smtp.gmail.com with ESMTPSA id x7-20020a1c7c07000000b0040684abb623sm18831181wmc.24.2023.11.20.14.31.19
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 20 Nov 2023 14:30:33 -0800 (PST)
+        Mon, 20 Nov 2023 14:31:19 -0800 (PST)
 From: Yoann Congal <yoann.congal@smile.fr>
 To: openembedded-devel@lists.openembedded.org
 Cc: Richard Purdie <richard.purdie@linuxfoundation.org>,
 	Khem Raj <raj.khem@gmail.com>,
 	Yoann Congal <yoann.congal@smile.fr>
-Subject: [meta-oe][dunfell][PATCH] meta-oe: Drop broken BBCLASSEXTEND variants
-Date: Mon, 20 Nov 2023 23:30:13 +0100
-Message-Id: <20231120223013.2396753-1-yoann.congal@smile.fr>
+Subject: [meta-perl][dunfell][PATCH] meta-perl: Drop broken BBCLASSEXTEND variants
+Date: Mon, 20 Nov 2023 23:31:10 +0100
+Message-Id: <20231120223110.2396876-1-yoann.congal@smile.fr>
 X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 20 Nov 2023 22:30:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106967
+ <openembedded-devel@lists.openembedded.org>; Mon, 20 Nov 2023 22:31:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106968
 
 From: Richard Purdie <richard.purdie@linuxfoundation.org>
 
@@ -79,129 +79,69 @@ ensures we're not carrying or fixing things nobody uses.
 
 Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 9962d57f7c235873de0a0bb192b5f56747762fc7)
-Backport:
-* Updated paths to follow PV changes
+(cherry picked from commit 79e0a9d237343ad0af0a40128494155ccaa131ec)
+Backported:
+* Adapted paths to follow PV changes
 * Adapted modified recipes to the ones generating warnings
-* NB: cups-filter needs poppler-native but its not available. To fix
-  this, 5fa0188b8c could be backported.
 Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
 ---
- .../meta-python/recipes-support/smem/smem_1.5.bb          | 2 --
- meta-oe/recipes-connectivity/ser2net/ser2net_4.1.8.bb     | 2 --
- meta-oe/recipes-connectivity/zeromq/czmq_4.2.0.bb         | 3 ---
- meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb           | 2 +-
- meta-oe/recipes-graphics/xorg-app/xgamma_1.0.6.bb         | 2 --
- meta-oe/recipes-graphics/xorg-app/xkbutils_1.0.4.bb       | 2 --
- meta-oe/recipes-graphics/xorg-app/xsetroot_1.1.2.bb       | 1 -
- meta-oe/recipes-printing/cups/cups-filters.inc            | 8 --------
- 8 files changed, 1 insertion(+), 21 deletions(-)
+ .../recipes-perl/libconfig/libconfig-autoconf-perl_0.318.bb     | 2 +-
+ meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.068.bb     | 2 --
+ meta-perl/recipes-perl/libnet/libnet-dns-perl_1.24.bb           | 2 --
+ meta-perl/recipes-perl/libnet/libnet-ldap-perl_0.66.bb          | 2 --
+ meta-perl/recipes-perl/libstatgrab/libunix-statgrab_0.112.bb    | 2 --
+ 5 files changed, 1 insertion(+), 9 deletions(-)
 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-support/smem/smem_1.5.bb b/meta-oe/dynamic-layers/meta-python/recipes-support/smem/smem_1.5.bb
-index 90db9c3f3..fa1bad021 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-support/smem/smem_1.5.bb
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-support/smem/smem_1.5.bb
-@@ -39,5 +39,3 @@ RRECOMMENDS_${PN} = "python3-matplotlib python3-numpy"
- PACKAGE_BEFORE_PN = "smemcap"
+diff --git a/meta-perl/recipes-perl/libconfig/libconfig-autoconf-perl_0.318.bb b/meta-perl/recipes-perl/libconfig/libconfig-autoconf-perl_0.318.bb
+index afd26fa1c..40bb58644 100644
+--- a/meta-perl/recipes-perl/libconfig/libconfig-autoconf-perl_0.318.bb
++++ b/meta-perl/recipes-perl/libconfig/libconfig-autoconf-perl_0.318.bb
+@@ -38,4 +38,4 @@ S = "${WORKDIR}/Config-AutoConf-${PV}"
  
- FILES_smemcap = "${bindir}/smemcap"
+ inherit cpan ptest-perl
+ 
+-BBCLASSEXTEND = "native nativesdk"
++BBCLASSEXTEND = "native"
+diff --git a/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.068.bb b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.068.bb
+index fc9786bec..9322db408 100644
+--- a/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.068.bb
++++ b/meta-perl/recipes-perl/libio/libio-socket-ssl-perl_2.068.bb
+@@ -43,5 +43,3 @@ do_install_ptest () {
+     cp -r ${B}/t ${D}${PTEST_PATH}
+     cp -r ${B}/certs ${D}${PTEST_PATH}
+ }
 -
 -BBCLASSEXTEND = "native"
-diff --git a/meta-oe/recipes-connectivity/ser2net/ser2net_4.1.8.bb b/meta-oe/recipes-connectivity/ser2net/ser2net_4.1.8.bb
-index 4a91fa4f4..ae93ff561 100644
---- a/meta-oe/recipes-connectivity/ser2net/ser2net_4.1.8.bb
-+++ b/meta-oe/recipes-connectivity/ser2net/ser2net_4.1.8.bb
-@@ -14,5 +14,3 @@ SRC_URI[sha256sum] = "cffb5147021202b064eb0a9389d0db63d1bb2dcde5a896f7785f97b1b5
- UPSTREAM_CHECK_URI = "http://sourceforge.net/projects/ser2net/files/ser2net"
- 
- inherit autotools pkgconfig
+diff --git a/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.24.bb b/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.24.bb
+index 8994f692b..6d300ea9f 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.24.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-dns-perl_1.24.bb
+@@ -62,5 +62,3 @@ python __anonymous () {
+        raise bb.parse.SkipRecipe("incompatible with %s C library" %
+                                    d.getVar('TCLIBC'))
+ }
 -
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-oe/recipes-connectivity/zeromq/czmq_4.2.0.bb b/meta-oe/recipes-connectivity/zeromq/czmq_4.2.0.bb
-index 7c9a33e8c..75d534ea6 100644
---- a/meta-oe/recipes-connectivity/zeromq/czmq_4.2.0.bb
-+++ b/meta-oe/recipes-connectivity/zeromq/czmq_4.2.0.bb
-@@ -27,6 +27,3 @@ PACKAGECONFIG[lz4] = ",-DCMAKE_DISABLE_FIND_PACKAGE_lz4=TRUE,lz4"
- PACKAGECONFIG[uuid] = ",-DCMAKE_DISABLE_FIND_PACKAGE_uuid=TRUE,util-linux"
- PACKAGECONFIG[curl] = ",-DCMAKE_DISABLE_FIND_PACKAGE_libcurl=TRUE,curl"
- PACKAGECONFIG[systemd] = ",-DCMAKE_DISABLE_FIND_PACKAGE_systemd=TRUE,systemd"
--
--BBCLASSEXTEND = "nativesdk"
--
-diff --git a/meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb b/meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb
-index 5b1e2dfbf..9de6f8c99 100644
---- a/meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb
-+++ b/meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb
-@@ -25,6 +25,6 @@ RDEPENDS_${PN} += "\
-    protobuf-compiler \
+-BBCLASSEXTEND = "native"
+diff --git a/meta-perl/recipes-perl/libnet/libnet-ldap-perl_0.66.bb b/meta-perl/recipes-perl/libnet/libnet-ldap-perl_0.66.bb
+index 26c7c389d..77c91c86c 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-ldap-perl_0.66.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-ldap-perl_0.66.bb
+@@ -41,5 +41,3 @@ RDEPENDS_${PN}-ptest += " \
+     perl-module-perlio \
+     perl-module-test-more \
  "
- 
--BBCLASSEXTEND = "native nativesdk"
-+BBCLASSEXTEND = "nativesdk"
- 
- PNBLACKLIST[nanopb] = "Needs forward porting to use python3"
-diff --git a/meta-oe/recipes-graphics/xorg-app/xgamma_1.0.6.bb b/meta-oe/recipes-graphics/xorg-app/xgamma_1.0.6.bb
-index 4949616dd..df5979a09 100644
---- a/meta-oe/recipes-graphics/xorg-app/xgamma_1.0.6.bb
-+++ b/meta-oe/recipes-graphics/xorg-app/xgamma_1.0.6.bb
-@@ -9,7 +9,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=ac9801b8423fd7a7699ccbd45cf134d8"
- 
- DEPENDS += "libxxf86vm"
- 
--BBCLASSEXTEND = "native"
--
- SRC_URI[md5sum] = "90b4305157c2b966d5180e2ee61262be"
- SRC_URI[sha256sum] = "0ef1c35b5c18b1b22317f455c8df13c0a471a8efad63c89c98ae3ce8c2b222d3"
-diff --git a/meta-oe/recipes-graphics/xorg-app/xkbutils_1.0.4.bb b/meta-oe/recipes-graphics/xorg-app/xkbutils_1.0.4.bb
-index 6a05e98e3..d394b33de 100644
---- a/meta-oe/recipes-graphics/xorg-app/xkbutils_1.0.4.bb
-+++ b/meta-oe/recipes-graphics/xorg-app/xkbutils_1.0.4.bb
-@@ -13,7 +13,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=64322fab5239f5c8d97cf6e0e14f1c62"
- 
- DEPENDS += "libxaw libxkbfile"
- 
--BBCLASSEXTEND = "native"
--
- SRC_URI[md5sum] = "502b14843f610af977dffc6cbf2102d5"
- SRC_URI[sha256sum] = "d2a18ab90275e8bca028773c44264d2266dab70853db4321bdbc18da75148130"
-diff --git a/meta-oe/recipes-graphics/xorg-app/xsetroot_1.1.2.bb b/meta-oe/recipes-graphics/xorg-app/xsetroot_1.1.2.bb
-index 30a1e089e..a9a8acf05 100644
---- a/meta-oe/recipes-graphics/xorg-app/xsetroot_1.1.2.bb
-+++ b/meta-oe/recipes-graphics/xorg-app/xsetroot_1.1.2.bb
-@@ -8,7 +8,6 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=6ea29dbee22324787c061f039e0529de"
- 
- DEPENDS += "xbitmaps libxcursor"
--BBCLASSEXTEND = "native"
- 
- SRC_URI[md5sum] = "5fe769c8777a6e873ed1305e4ce2c353"
- SRC_URI[sha256sum] = "10c442ba23591fb5470cea477a0aa5f679371f4f879c8387a1d9d05637ae417c"
-diff --git a/meta-oe/recipes-printing/cups/cups-filters.inc b/meta-oe/recipes-printing/cups/cups-filters.inc
-index 589bb90e6..ff1b9ec87 100644
---- a/meta-oe/recipes-printing/cups/cups-filters.inc
-+++ b/meta-oe/recipes-printing/cups/cups-filters.inc
-@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=516215fd57564996d70327db19b368ff"
- SECTION = "console/utils"
- 
- DEPENDS = "cups glib-2.0 glib-2.0-native dbus dbus-glib lcms ghostscript poppler qpdf libpng"
--DEPENDS_class-native = "poppler-native glib-2.0-native dbus-native pkgconfig-native gettext-native libpng-native"
- 
- SRC_URI = "http://openprinting.org/download/cups-filters/cups-filters-${PV}.tar.gz"
- 
-@@ -23,13 +22,6 @@ EXTRA_OECONF += " --enable-ghostscript --disable-ldap \
-                        --with-rcdir=no \
-                        --without-php"
- 
--EXTRA_OECONF_class-native += " --with-pdftops=pdftops \
--                                    --disable-avahi --disable-ghostscript \
--                                    --disable-ldap \
--                                    --with-png --without-jpeg --without-tiff"
 -
 -BBCLASSEXTEND = "native"
+diff --git a/meta-perl/recipes-perl/libstatgrab/libunix-statgrab_0.112.bb b/meta-perl/recipes-perl/libstatgrab/libunix-statgrab_0.112.bb
+index a1bb4a399..c281dfa5f 100644
+--- a/meta-perl/recipes-perl/libstatgrab/libunix-statgrab_0.112.bb
++++ b/meta-perl/recipes-perl/libstatgrab/libunix-statgrab_0.112.bb
+@@ -34,5 +34,3 @@ SRC_URI[sha256sum] = "16a29f7acaeec081bf0e7303ba5ee24fda1d21a1104669b837745f3ea6
+ S = "${WORKDIR}/Unix-Statgrab-${PV}"
+ 
+ inherit cpan pkgconfig ptest-perl
 -
- PACKAGECONFIG[jpeg] = "--with-jpeg,--without-jpeg,jpeg"
- PACKAGECONFIG[png] = "--with-png,--without-png,libpng"
- PACKAGECONFIG[tiff] = "--with-tiff,--without-tiff,tiff"
+-BBCLASSEXTEND = "native"
 -- 
 2.30.2
 
