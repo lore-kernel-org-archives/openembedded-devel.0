@@ -2,44 +2,44 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B8BCC61D97
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 17011C61D9B
 	for <webhook@archiver.kernel.org>; Wed, 22 Nov 2023 12:59:59 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.126])
- by mx.groups.io with SMTP id smtpd.web10.15900.1700647219396651195
+Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.31])
+ by mx.groups.io with SMTP id smtpd.web10.11889.1700624066579353772
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Nov 2023 02:00:19 -0800
+ Tue, 21 Nov 2023 19:34:27 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@intel.com header.s=Intel header.b=DFnxuiy4;
- spf=pass (domain: intel.com, ip: 134.134.136.126, mailfrom: wen.yan.tan@intel.com)
+ dkim=pass header.i=@intel.com header.s=Intel header.b=Z/a79wnG;
+ spf=pass (domain: intel.com, ip: 134.134.136.31, mailfrom: wen.yan.tan@intel.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1700647219; x=1732183219;
+  t=1700624066; x=1732160066;
   h=from:to:subject:date:message-id:mime-version:
    content-transfer-encoding;
-  bh=EX6q+F+Ixk51k+/KT2ysCmoBbVTihImD65451KxPCLY=;
-  b=DFnxuiy4RtxL/0Mw68el3gQNlAnyJYOx704QZ4EuTyGRNnLe1MupEZB8
-   oI3G0tV/SQCpXB7RL1Uhkxar+hslj3vy1OnOMqQzNWSR5Mh2Jz20POBpr
-   73BrvWA0n08wVQ8nrDibJH4TbgP6BiYXxFrxqGeE5Ku5hstXBvYo89bHl
-   pmnDABj9dMDP1cixEfy37n6tvaBy4K4U0xdgDwGq302sT9rrWTNUR+QU6
-   z+OqHf3G2pZs5JLui+DO/dDg2i+6TnEYpV9VgecC/IQNQTawLIGZEB+8r
-   tETEHwdjKFdslfNs44/F/sTWjDupyH1AgFVGL007YiRsLDNORGZngKm9Y
+  bh=ThmkaVhYC6AHLAp0LM8CYmgVGUmqpG7j/mriJkVckwI=;
+  b=Z/a79wnGa8kypA5fTWHpS0ea0uxcojV2jO6GNYJPTpen5ZCUplRgXeBb
+   4UklsGyy5P97fVwChyEi0CLFqoWn273Mb37WXFD0AsudKXjnwyVd6lhqd
+   T7+eJMpPkhG7Vfk9mdbdjt1Oop1onSpk4T7BPZk1xxnddByh4o6q5onFZ
+   qQMnqUoGlmX6gteuKNCcI+x9U29OoxkZn8kOBZvyhwFC9LOq2Uy3aNX2f
+   ZjqyhVIoUSdLrIx0RuBDHln/vc9j0WXB1RcMmgtNwUPJww8e8KH37WbOt
+   cVFDY840e2XdkF6KiuDaXpVJLYW1o3XpTe2SexNkjMNU26RAl8wgFdHZu
    A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10901"; a="377053292"
-X-IronPort-AV: E=Sophos;i="6.04,218,1695711600"; 
-   d="scan'208";a="377053292"
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
-  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Nov 2023 02:00:18 -0800
+X-IronPort-AV: E=McAfee;i="6600,9927,10901"; a="456304224"
+X-IronPort-AV: E=Sophos;i="6.04,217,1695711600"; 
+   d="scan'208";a="456304224"
+Received: from orsmga006.jf.intel.com ([10.7.209.51])
+  by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Nov 2023 19:34:26 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10901"; a="1098342502"
-X-IronPort-AV: E=Sophos;i="6.04,218,1695711600"; 
-   d="scan'208";a="1098342502"
+X-IronPort-AV: E=McAfee;i="6600,9927,10901"; a="743246784"
+X-IronPort-AV: E=Sophos;i="6.04,217,1695711600"; 
+   d="scan'208";a="743246784"
 Received: from andromeda02.png.intel.com ([10.221.253.198])
-  by fmsmga005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Nov 2023 02:00:17 -0800
+  by orsmga006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Nov 2023 19:34:25 -0800
 From: "Tan Wen Yan" <wen.yan.tan@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [mickledore][meta-oe][PATCH] gattlib: Upgrade to latest tip of trunk
-Date: Wed, 22 Nov 2023 17:40:26 +0800
-Message-Id: <20231122094026.2377479-1-wen.yan.tan@intel.com>
+Subject: [mickledore][meta-oe][PATCH] libvpx: upgrade 1.13.0 -> 1.13.1
+Date: Wed, 22 Nov 2023 11:14:24 +0800
+Message-Id: <20231122031424.2640910-1-wen.yan.tan@intel.com>
 X-Mailer: git-send-email 2.37.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -47,60 +47,46 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 22 Nov 2023 12:59:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107011
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107009
 
-From: Khem Raj <raj.khem@gmail.com>
+From: Benjamin Bara <benjamin.bara@skidata.com>
 
-License-Update: Year changed [1]
+Changelog:
+=========
+This release contains two security related fixes. One each for VP8 and
+VP9.
 
-Remove build directory from include directives in generated sourcecode
-via gdbus-codegen
+- Upgrading:
+  This release is ABI compatible with the previous release.
 
-Upgrade includes fix for CVE-2019-6498
+- Bug fixes:
+  https://crbug.com/1486441 (CVE-2023-5217)
+  Fix to a crash related to VP9 encoding (#1642)
 
-[1] https://github.com/labapart/gattlib/commit/5c87eda925c597e72107b5026c6b8d490ce76d62
-
+Signed-off-by: Benjamin Bara <benjamin.bara@skidata.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Tan Wen Yan <wen.yan.tan@intel.com>
 ---
- meta-oe/recipes-connectivity/gattlib/gattlib_git.bb | 11 +++++++++--
- 1 file changed, 9 insertions(+), 2 deletions(-)
+ .../webm/{libvpx_1.13.0.bb => libvpx_1.13.1.bb}                 | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-multimedia/webm/{libvpx_1.13.0.bb => libvpx_1.13.1.bb} (96%)
 
-diff --git a/meta-oe/recipes-connectivity/gattlib/gattlib_git.bb b/meta-oe/recipes-connectivity/gattlib/gattlib_git.bb
-index 1ba7dd4af..aec41edf7 100644
---- a/meta-oe/recipes-connectivity/gattlib/gattlib_git.bb
-+++ b/meta-oe/recipes-connectivity/gattlib/gattlib_git.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "Bluetooth library with attribute support"
- SECTION = "libs/network"
+diff --git a/meta-oe/recipes-multimedia/webm/libvpx_1.13.0.bb b/meta-oe/recipes-multimedia/webm/libvpx_1.13.1.bb
+similarity index 96%
+rename from meta-oe/recipes-multimedia/webm/libvpx_1.13.0.bb
+rename to meta-oe/recipes-multimedia/webm/libvpx_1.13.1.bb
+index 79b330c31..ffcc8f1c9 100644
+--- a/meta-oe/recipes-multimedia/webm/libvpx_1.13.0.bb
++++ b/meta-oe/recipes-multimedia/webm/libvpx_1.13.1.bb
+@@ -7,7 +7,7 @@ LICENSE = "BSD-3-Clause"
  
- LICENSE = "GPL-2.0-or-later | BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://CMakeLists.txt;beginline=1;endline=6;md5=71fdd2be76b4e95fe28324a70d4981c5"
-+LIC_FILES_CHKSUM = "file://CMakeLists.txt;beginline=1;endline=6;md5=a87ee154f005a6f035b8b34ac2191f3b"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d5b04755015be901744a78cc30d390d4"
  
- DEPENDS = "bluez5 glib-2.0"
- DEPENDS += "glib-2.0-native"
-@@ -14,7 +14,7 @@ SRC_URI = "git://github.com/labapart/gattlib.git;branch=master;protocol=https \
+-SRCREV = "d6eb9696aa72473c1a11d34d928d35a3acc0c9a9"
++SRCREV = "10b9492dcf05b652e2e4b370e205bd605d421972"
+ SRC_URI += "git://chromium.googlesource.com/webm/libvpx;protocol=https;branch=main \
+            file://libvpx-configure-support-blank-prefix.patch \
             "
- 
- SRCBRANCH = "master"
--SRCREV = "fa54ae42ccb3d8f911e00b02ed1e581537e47f79"
-+SRCREV = "33a8a275928b186381bb0aea0f9778e330e57ec3"
- 
- S = "${WORKDIR}/git"
- 
-@@ -28,5 +28,12 @@ EXTRA_OECMAKE += "-DGATTLIB_BUILD_DOCS=OFF"
- 
- inherit pkgconfig cmake
- 
-+do_compile:append() {
-+    for f in org-bluez-gattdescriptor1.c org-bluez-battery1.c org-bluez-adaptater1.c \
-+        org-bluez-device1.c org-bluez-gattservice1.c org-bluez-gattcharacteristic1.c; do
-+        sed -i -e 's|${B}/dbus/||g' ${B}/dbus/$f
-+    done
-+}
-+
- FILES:${PN} = "${libdir}/*"
- FILES:${PN}-dev = "${includedir}/* ${libdir}/pkgconfig"
 -- 
 2.37.3
 
