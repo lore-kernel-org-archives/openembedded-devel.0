@@ -1,1162 +1,658 @@
-Return-Path: <archana.polampalli@windriver.com>
+Return-Path: <jonas.gorski@bisdn.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 98874C61D92
-	for <webhook@archiver.kernel.org>; Wed, 22 Nov 2023 08:57:16 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.15119.1700643429735627787
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DDA6EC61D9C
+	for <webhook@archiver.kernel.org>; Wed, 22 Nov 2023 09:39:46 +0000 (UTC)
+Received: from mail-lf1-f47.google.com (mail-lf1-f47.google.com [209.85.167.47])
+ by mx.groups.io with SMTP id smtpd.web11.15700.1700645981311659295
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Nov 2023 00:57:09 -0800
+ Wed, 22 Nov 2023 01:39:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=UuwBD63a;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=9690644334=archana.polampalli@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 3AM8FBbI026179
-	for <openembedded-devel@lists.openembedded.org>; Wed, 22 Nov 2023 00:57:09 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:references:in-reply-to
-	:content-type:mime-version; s=PPS06212021; bh=0LRahgxVFnH67HStl5
-	mWgcEBX23AfrzVM4RgOmm1VkA=; b=UuwBD63ai2wnih7NGh2drJ4TyCmmMLSTMp
-	HJwWrYRUnZoWacAzftR21RZik+RL+sPDZaxG8/zeqBc4R/YkSxd2vOekxlib3gjH
-	ASSX4Cezs6D1S3Eg/8d3o/Vao3Vn83+eSGG46bdqk7vd07+LkUwvsYrbsrPyb3D6
-	QqqBuXKPAsE8Y0NNi81/3H+L2tnXQZ/bU4DuHBSMO9SeArWgPQ87N7P9x1MKWRDU
-	Ql3nU9aQ3TByBQlnPMHtS3n197xGmVB5SqPa3B1FNEk5BD0hxlLvKd4DW9ZlEcQP
-	DZZT/rZ8OBs8NWEwh2VYmiJ3SY9CmMxUNOQKCuQJLUn7+bbpSpLg==
-Received: from pps.reinject (localhost [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3uewnku1c3-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 22 Nov 2023 00:57:08 -0800 (PST)
-Received: from m0250809.ppops.net (m0250809.ppops.net [127.0.0.1])
-	by pps.reinject (8.17.1.24/8.17.1.24) with ESMTP id 3AM8v8OO002341;
-	Wed, 22 Nov 2023 00:57:08 -0800
-Received: from nam10-dm6-obe.outbound.protection.outlook.com (mail-dm6nam10lp2101.outbound.protection.outlook.com [104.47.58.101])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3uewnku1c0-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 22 Nov 2023 00:57:08 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Dn97tM81b4ovCadfPqOLCzYP3KY1dnJddvsn/kUdKhYJb9AkDehfEn5M1wKo0J2q69sRA/7KdcsCDcZD1GxbBD5AluAtKAc7YgUlPwMdITvfazjOQpKnHaOcQFzBnR9rxjeucVnI5cvqlV6gLNx0q20HesJIMOfMni33myVGa/wsYbEPEwTMEPKoRv0IK47Q9NLu3ZNk11l4Ie/JwSmh+jN6e6ACj+2QFr6o5j72+M4RrwSsbBcssfsGqkcFQ8SHeMSDRrRAaPj6Z4sA1je8IbNOanM6PbYxOWTpIqUlm8KXL+jpD4JCu7APDNuWkWCDCYARGFOXCx9D3JFHMa+fPQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0LRahgxVFnH67HStl5mWgcEBX23AfrzVM4RgOmm1VkA=;
- b=YkBFpp90K6fE3hXIWldFqtVAaSaQIZurEcDCfolq54LEm1lY/tVF+zXP518MOiW3xeqLzYjgmcUc983SEFcAdNtPoW/yhUGMyKdVetzgzvCf3DqK2Yvb7MZQ0Wt0b+QFCl2v93fs7/h8gPb1zbbGHoyI2X7hTxoC9Isw8uSS0ND1jZsfGhB/p8Hv/3doQs6BMTO9/0gEmU56PTZ9F6ycN12PR5SA0v74+156VoylhLAVa+bPX5KzH3H8vKpZIWdUdGbBIzjXRtIlU7mgVWWKtwxx3bv7JzCBqsm3d4JSzhmBD4UQWj9e/1vg4L0Qax2hATiEEBGNNo63tRESDtSvHg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from MW4PR11MB5822.namprd11.prod.outlook.com (2603:10b6:303:185::9)
- by SA2PR11MB5146.namprd11.prod.outlook.com (2603:10b6:806:116::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7002.28; Wed, 22 Nov
- 2023 08:57:04 +0000
-Received: from MW4PR11MB5822.namprd11.prod.outlook.com
- ([fe80::d836:9049:e781:2391]) by MW4PR11MB5822.namprd11.prod.outlook.com
- ([fe80::d836:9049:e781:2391%5]) with mapi id 15.20.7025.017; Wed, 22 Nov 2023
- 08:57:03 +0000
-From: "Polampalli, Archana" <Archana.Polampalli@windriver.com>
-To: "Mittal, Anuj" <anuj.mittal@intel.com>,
-        "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe][meta-networking][kirkstone][PATCH 1/2] samba: fix
- CVE-2023-4091
-Thread-Topic: [oe][meta-networking][kirkstone][PATCH 1/2] samba: fix
- CVE-2023-4091
-Thread-Index: AQHaHQAw/hzJVzbIQE6MvlvhssOYZrCF18QAgAAxDog=
-Date: Wed, 22 Nov 2023 08:57:03 +0000
-Message-ID: 
- <MW4PR11MB5822FD2504A1F5D34E19DFA984BAA@MW4PR11MB5822.namprd11.prod.outlook.com>
-References: <20231122045524.53871-1-archana.polampalli@windriver.com>
- <a860322667c2a74eb4f256dee0e303bb67b47878.camel@intel.com>
-In-Reply-To: <a860322667c2a74eb4f256dee0e303bb67b47878.camel@intel.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: 
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: MW4PR11MB5822:EE_|SA2PR11MB5146:EE_
-x-ms-office365-filtering-correlation-id: 4fef762e-06f4-44b4-5823-08dbeb38ff69
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- 2ZM49DruyVbPlQ9kzKK/XIl57bLncD70w58evQKCOq+93g4RpyW1Tzm9MMerO1org/zfa9fnorcZlHBgLNyUBuGLbM8+592wPh24QwIdAcPZFqY6ooh3Denx5IEjfRBU7fCW1lsWjNdAFgrP1IYcMf2oh+4HzGL3u263+W7TIzEf8NqpByFSNprgajLI7zdvFdsmlTj1nF1xlYLzZMqHYdKwMPo3LF9E4lXjReXTeKRU7W1iIuZz8HPD7jkOY9DApNijyN+8DgevL+zBgCol5CmahA4XrwBMHxLVJDU1No133v7Rt8IvmavM64+ECycF4txdFvsAMwy8iWOgMjEavtGMPTQVLZCiqvssKg3arZTNTZcJnzzC9PCYukz9vT7sStWJPkH+Z984fkks2wyprPAxJdeTg7TAzIbBoi2LFX2C4PbSgKdSDR1hUZmiVryOWfV9fYmBceBRoTi5vv0oiq264Pd0ulT4bV8dnTP8wQpHa9tq6muUM/obuLwHSuKL1b6fWNZ0pzQ2PFEuBy9tyQAMcPFP6CAd3fVEFtGv8ddyoQ3N6lfbjwMv9PvFkA6YANXeEg8EjOBwXym7cmBNndXmRj7OWhFonV/CxDQy7tnXlfxdDZ6frvjWVG4qbvuv3/2tY++TL+qzUUxldUR4fNQdnzVkpzoJ0jDwmWqpaQ31EBfQgowCMMJ+GYOhQk7E
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MW4PR11MB5822.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(366004)(136003)(346002)(396003)(39850400004)(376002)(230922051799003)(230173577357003)(230273577357003)(186009)(1800799012)(64100799003)(451199024)(55016003)(38070700009)(19627405001)(86362001)(66899024)(71200400001)(7696005)(110136005)(316002)(91956017)(966005)(66946007)(64756008)(1015004)(66476007)(66556008)(122000001)(33656002)(166002)(9686003)(66446008)(4001150100001)(83380400001)(26005)(53546011)(30864003)(2906002)(5660300002)(41300700001)(52536014)(6506007)(21615005)(8936002)(478600001)(76116006)(38100700002)(8676002);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?iso-8859-1?Q?LQrahg2aE7mU7qIXoxfBuInLCikHHAah8+XESKF6/m3XnTM3qRW+SSci9z?=
- =?iso-8859-1?Q?lGo/uu8d3EFl1XmX6zVQFX7/ROakXOEVFOjSyDKfeGbSL7gjzRkLARW8aV?=
- =?iso-8859-1?Q?G9AO3jLk7HmLVcy98Pizj7J90oX1cW5fjzrelkDsur6I9S5fGqChFChExC?=
- =?iso-8859-1?Q?uGpImgG4bw0aQd4pno+vK9WkU9Ockq7g/spcNUZN+TrvItnTa+SJysDRL/?=
- =?iso-8859-1?Q?7MWv6KTCkpVrIuNU2p9MwJF7VTB4wJxms7yADaojJPM8DMyZsDHxLe9OgP?=
- =?iso-8859-1?Q?IhoUS0lwlIg9kvlopgSBoo2LtOwebaeQb987FwapIaNXsWyUi5Y/b0L/kj?=
- =?iso-8859-1?Q?YRXg5Xk6iVxnDPq1UyQ50jNvoBcUr7iTih1j5/9kAL1do5PdNf71mPqtBR?=
- =?iso-8859-1?Q?EYSk+tMZw6i+QJcf7ipin7LrOuMOcwYOSiq1FHBhuRh4KCFqUFOvIpyhD3?=
- =?iso-8859-1?Q?2+KTo++LS/YAKFLNFh2Q9IrPOT5EkU9HLQBIQLE7pvWhAvse3lXr3jESd+?=
- =?iso-8859-1?Q?jg2vmRLb5eIha60+n1A9nA0lJqyp/0gOQgOtTYBdIzYCy48hollhJ6vzM0?=
- =?iso-8859-1?Q?ENclf8cMfaGySBTstw3UvdnYeNq/KTbugPts+7LUB2NenKjYzTcNeShFRV?=
- =?iso-8859-1?Q?0R0mq57C8pMmLJTFIRq1DKuO2ycnRy7ZblrzC8SQCBKFu1fSDSOM9gQ2Jf?=
- =?iso-8859-1?Q?lA1NLxLQ4tQaXDXcPpd4wLJiA2MUHPZbUJUA8Ya1tRkj9UBd08NlFjgj0R?=
- =?iso-8859-1?Q?NlztJ1n730wU/lpl+FiPxTGlXzy7gW52kjcfOzDFCfhcjn6JBYRPoDvVbu?=
- =?iso-8859-1?Q?bgJWgE8pBVytn014FyvkT377dM7V+pf+NLVj0C4vb/5HI/RviWzWyX0U+V?=
- =?iso-8859-1?Q?kcNeWaJQRKas+vbQiKQXt2QI6/tncG82ty5OTOb7SFyparbIX0npu8Vaq+?=
- =?iso-8859-1?Q?wdTDiGT7kZ4Ls6E0B8VYD32l8AUi5fCQmJc6RTG4VNOixWaEwmtCvvRChR?=
- =?iso-8859-1?Q?7U1QxuyZO6QaAR2jLCIrqXN/FgG2emGRk9zqCOzFsIl/A0H6lA1sNPVnF3?=
- =?iso-8859-1?Q?TjWD6wluiBwJ5zIYD/nEDWy08xN3CQl2HJPfU/jUTSksSgbQKJ4Mih3LIk?=
- =?iso-8859-1?Q?BTU3FAjckMFk8d1P0+VrSdCJF7LrHep1vofMG9yHg39EBpp/mVaUJEC4wg?=
- =?iso-8859-1?Q?t75iY4T7Ni1jhBuAwk6yhxVUhw4Yg1UiqJdPiQ761fWdIRj+5U1e+iMf88?=
- =?iso-8859-1?Q?OybnP12gqATfupCbL9i+4qjXb7eW0DysX2ubWofBYTdFLTOyNSEkGWy20A?=
- =?iso-8859-1?Q?EQRK80rlFGdCTBPZGGVvxTBzS/xgFD/v516RfWWmRG/KNFm/fwn7jPF1lJ?=
- =?iso-8859-1?Q?wmOmmMlYAmZN6/ukl+9i70hlztKz9xZhz1QaGza4nt+jouYQMxjasndeUf?=
- =?iso-8859-1?Q?f8iNXcNQuR6rxKBnlaSMxf1YnhmSeIe/Ye4qRLTxIltPMK4zgz7yk+4XAd?=
- =?iso-8859-1?Q?QQsdqVuZVEjZO3lGgu/3Slu3zH+Br2QB5q+MSwZdyJBIvpT0fmoYW0IPO6?=
- =?iso-8859-1?Q?P3WGQM35PCe5Lz1/0PFTq13k6ZzWE1VY0GPjIo6f+XjF0rJcchz3eX/3T1?=
- =?iso-8859-1?Q?kemIfH+uOlk5lbUb6vRVzU9mL1cssuUFrMKBKvGiSWGpqiigYaT5g4IA?=
- =?iso-8859-1?Q?=3D=3D?=
-Content-Type: multipart/alternative;
-	boundary="_000_MW4PR11MB5822FD2504A1F5D34E19DFA984BAAMW4PR11MB5822namp_"
+ dkim=pass header.i=@bisdn-de.20230601.gappssmtp.com header.s=20230601 header.b=h9VnS++n;
+ spf=none, err=SPF record not found (domain: bisdn.de, ip: 209.85.167.47, mailfrom: jonas.gorski@bisdn.de)
+Received: by mail-lf1-f47.google.com with SMTP id 2adb3069b0e04-5079f6efd64so8616113e87.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Nov 2023 01:39:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bisdn-de.20230601.gappssmtp.com; s=20230601; t=1700645979; x=1701250779; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=G/fxqf6OasAYLN3i8Yol5dWj320ps3B+1f1zanX4R7E=;
+        b=h9VnS++nTmKcxcAhW1fHziDZzF09kCX6wevSEzb/UsvJvMxMe/+MrSURc0cRJD8T7W
+         dyxnd+y/L4hllrj5XjYCAdFlFvX+gY8++KI7Ps0UYEm4Vorf3PNndx68apOE+2Zv4r1G
+         uyUSFaClx0qNzwCX+ZESQtft85kMy4/8KyPkb8VMdVgeFW3bBIoqi395jhKENIcevAQN
+         Z30yHTtIR/aNooGTyjlAGvniwv96wi4GfVpMrIl3UPID7rvRKS+K14wUrd9JNm0idE+H
+         fSpRh6Y4a+moM7+LiCyVsRShvv8e9dxA9QvlbLVbk2K4g8ut9EoROYyiN6Sx5DWOwBfn
+         EkZg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1700645979; x=1701250779;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=G/fxqf6OasAYLN3i8Yol5dWj320ps3B+1f1zanX4R7E=;
+        b=Qx2b/4OAuUVgjuJy8kThD8fxpnW/NVcDsp3KbX5Sr7uczVhTNFeljd+RsdYy87y13Y
+         amsBde+YrOoO5Tug7OJ9Ophuqt43krPRbE7DiAz5D4aPjfPyZYAg/7DEplrOxSzC+YlN
+         z+aSFWk2uniJ2jfmsh3KZvfsJdwccEKa1UciIanERzcN9CCjqshDUuavCr9TeW0dlOja
+         AxUF3DHHQFSyJp8Taf0mqMWEabn5/uCNfk6AVzswvkTo2R8zACsIcub+N0oxibsamuGp
+         16VU2eLfQ/EzTFKBVYmBpLU7UO0NSakLGaIBgdy5tjxGCKvi1Tna9ZzWsCjITlHJY3ZY
+         RHOA==
+X-Gm-Message-State: AOJu0Yyf9IoENKkAW5IL3EBsPLYt5k4F1NOY8UjJgO74ikRuXX4FtiKG
+	jv0oz3Z8/LMYovm1APeMa8ndz3g34JhT8nvS12MxvsJbZeiEooCDc63byCqsIw98n61CKvDQa4W
+	o76tzgV7SUVZogMX2mvzd41g3bmZ1pTKY/X8TPu+sMubU6pRf
+X-Google-Smtp-Source: AGHT+IGTrnEH5N4wQM6tXSXXvE5CHqh9SttO03vHupWTEqlpt55WGc9gTNpf++t45DMa59ZKYB6n4w==
+X-Received: by 2002:a19:911a:0:b0:500:b53f:fbc2 with SMTP id t26-20020a19911a000000b00500b53ffbc2mr1258434lfd.26.1700645978563;
+        Wed, 22 Nov 2023 01:39:38 -0800 (PST)
+Received: from localhost (dslb-002-205-020-122.002.205.pools.vodafone-ip.de. [2.205.20.122])
+        by smtp.gmail.com with ESMTPSA id hn34-20020a05600ca3a200b00405959bbf4fsm1588095wmb.19.2023.11.22.01.39.36
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 22 Nov 2023 01:39:37 -0800 (PST)
+From: Jonas Gorski <jonas.gorski@bisdn.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-networking][PATCH] frr: fix CVEs CVE-2023-4675{2,3} and CVE-2023-4723{4,5}
+Date: Wed, 22 Nov 2023 10:39:34 +0100
+Message-ID: <20231122093934.117102-1-jonas.gorski@bisdn.de>
+X-Mailer: git-send-email 2.42.1
 MIME-Version: 1.0
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: MW4PR11MB5822.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4fef762e-06f4-44b4-5823-08dbeb38ff69
-X-MS-Exchange-CrossTenant-originalarrivaltime: 22 Nov 2023 08:57:03.8734
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: fdwNu6sPKoi/yclyd0WbmOLHGJnrTF4+jdnN12Q/EyHJTfNAeMEfkIQeOdh6D0sQB8bwsM85dsjLAIdvriCXDYpOwCoQi5W/iVnO+cPQfN8Do5MrqnUGLxjNHrwQnU62
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA2PR11MB5146
-X-Proofpoint-ORIG-GUID: neQXVBnMHe7DpLZ9wM6kFrbB6Y2lYPMV
-X-Proofpoint-GUID: Cmrr3oTj6EiMJ0OOUiXs7qTkrWWkVXGB
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-11-16_25,2023-11-16_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 phishscore=0
- priorityscore=1501 malwarescore=0 mlxlogscore=999 spamscore=0
- suspectscore=0 lowpriorityscore=0 clxscore=1015 bulkscore=0 adultscore=0
- impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2311060001 definitions=main-2311220062
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="ISO-8859-1"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 22 Nov 2023 08:57:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107007
+ <openembedded-devel@lists.openembedded.org>; Wed, 22 Nov 2023 09:39:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107008
 
---_000_MW4PR11MB5822FD2504A1F5D34E19DFA984BAAMW4PR11MB5822namp_
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Add patches fixing CVE CVE-2023-46752, CVE-2023-46753, CVE-2023-47234,
+and CVE-2023-47235 to FRR 9.0.
 
-It affects all versions of Samba, Sent V2.
-https://www.samba.org/samba/security/CVE-2023-4091.html
+Patch order is commit order, not CVE numerical order, to avoid fuzz /
+need for rebasing of the patches.
 
-Thank you,
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2023-46752
+https://nvd.nist.gov/vuln/detail/CVE-2023-46753
+https://nvd.nist.gov/vuln/detail/CVE-2023-47234
+https://nvd.nist.gov/vuln/detail/CVE-2023-47235
 
-Regards,
-Archana
+Signed-off-by: Jonas Gorski <jonas.gorski@bisdn.de>
+---
+ .../frr/frr/CVE-2023-46752.patch              | 125 ++++++++++++++++++
+ .../frr/frr/CVE-2023-46753.patch              | 117 ++++++++++++++++
+ .../frr/frr/CVE-2023-47234.patch              |  95 +++++++++++++
+ .../frr/frr/CVE-2023-47235.patch              | 112 ++++++++++++++++
+ .../recipes-protocols/frr/frr_9.0.1.bb        |   6 +
+ 5 files changed, 455 insertions(+)
+ create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2023-4675=
+2.patch
+ create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2023-4675=
+3.patch
+ create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2023-4723=
+4.patch
+ create mode 100644 meta-networking/recipes-protocols/frr/frr/CVE-2023-4723=
+5.patch
 
-________________________________
-From: Mittal, Anuj <anuj.mittal@intel.com>s
-Sent: Wednesday, November 22, 2023 11:28
-To: Polampalli, Archana <Archana.Polampalli@windriver.com>; openembedded-de=
-vel@lists.openembedded.org <openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe][meta-networking][kirkstone][PATCH 1/2] samba: fix CVE-202=
-3-4091
+diff --git a/meta-networking/recipes-protocols/frr/frr/CVE-2023-46752.patch=
+ b/meta-networking/recipes-protocols/frr/frr/CVE-2023-46752.patch
+new file mode 100644
+index 000000000000..e1f30248caab
+--- /dev/null
++++ b/meta-networking/recipes-protocols/frr/frr/CVE-2023-46752.patch
+@@ -0,0 +1,125 @@
++From b08afc81c60607a4f736f418f2e3eb06087f1a35 Mon Sep 17 00:00:00 2001
++From: Donatas Abraitis <donatas@opensourcerouting.org>
++Date: Fri, 20 Oct 2023 17:49:18 +0300
++Subject: [PATCH] bgpd: Handle MP_REACH_NLRI malformed packets with session
++ reset
++
++Avoid crashing bgpd.
++
++```
++(gdb)
++bgp_mp_reach_parse (args=3D<optimized out>, mp_update=3D0x7fffffffe140) at=
+ bgpd/bgp_attr.c:2341
++2341			stream_get(&attr->mp_nexthop_global, s, IPV6_MAX_BYTELEN);
++(gdb)
++stream_get (dst=3D0x7fffffffe1ac, s=3D0x7ffff0006e80, size=3D16) at lib/st=
+ream.c:320
++320	{
++(gdb)
++321		STREAM_VERIFY_SANE(s);
++(gdb)
++323		if (STREAM_READABLE(s) < size) {
++(gdb)
++34	  return __builtin___memcpy_chk (__dest, __src, __len, __bos0 (__dest))=
+;
++(gdb)
++
++Thread 1 "bgpd" received signal SIGSEGV, Segmentation fault.
++0x00005555556e37be in route_set_aspath_prepend (rule=3D0x555555aac0d0, pre=
+fix=3D0x7fffffffe050,
++    object=3D0x7fffffffdb00) at bgpd/bgp_routemap.c:2282
++2282		if (path->attr->aspath->refcnt)
++(gdb)
++```
++
++With the configuration:
++
++```
++ neighbor 127.0.0.1 remote-as external
++ neighbor 127.0.0.1 passive
++ neighbor 127.0.0.1 ebgp-multihop
++ neighbor 127.0.0.1 disable-connected-check
++ neighbor 127.0.0.1 update-source 127.0.0.2
++ neighbor 127.0.0.1 timers 3 90
++ neighbor 127.0.0.1 timers connect 1
++ address-family ipv4 unicast
++  redistribute connected
++  neighbor 127.0.0.1 default-originate
++  neighbor 127.0.0.1 route-map RM_IN in
++ exit-address-family
++!
++route-map RM_IN permit 10
++ set as-path prepend 200
++exit
++```
++
++Reported-by: Iggy Frankovic <iggyfran@amazon.com>
++Signed-off-by: Donatas Abraitis <donatas@opensourcerouting.org>
++Upstream-Status: Backport [https://github.com/FRRouting/frr/commit/b08afc8=
+1c60607a4f736f418f2e3eb06087f1a35]
++CVE: CVE-2023-46752
++Signed-off-by: Jonas Gorski <jonas.gorski@bisdn.de>
++---
++ bgpd/bgp_attr.c   | 6 +-----
++ bgpd/bgp_attr.h   | 1 -
++ bgpd/bgp_packet.c | 6 +-----
++ 3 files changed, 2 insertions(+), 11 deletions(-)
++
++diff --git a/bgpd/bgp_attr.c b/bgpd/bgp_attr.c
++index 6925aff727e2..e7bb42a5d989 100644
++--- a/bgpd/bgp_attr.c
+++++ b/bgpd/bgp_attr.c
++@@ -2421,7 +2421,7 @@ int bgp_mp_reach_parse(struct bgp_attr_parser_args *=
+args,
++=20
++ 		mp_update->afi =3D afi;
++ 		mp_update->safi =3D safi;
++-		return BGP_ATTR_PARSE_EOR;
+++		return bgp_attr_malformed(args, BGP_NOTIFY_UPDATE_MAL_ATTR, 0);
++ 	}
++=20
++ 	mp_update->afi =3D afi;
++@@ -3759,10 +3759,6 @@ enum bgp_attr_parse_ret bgp_attr_parse(struct peer =
+*peer, struct attr *attr,
++ 			goto done;
++ 		}
++=20
++-		if (ret =3D=3D BGP_ATTR_PARSE_EOR) {
++-			goto done;
++-		}
++-
++ 		if (ret =3D=3D BGP_ATTR_PARSE_ERROR) {
++ 			flog_warn(EC_BGP_ATTRIBUTE_PARSE_ERROR,
++ 				  "%s: Attribute %s, parse error", peer->host,
++diff --git a/bgpd/bgp_attr.h b/bgpd/bgp_attr.h
++index 961e5f122470..fc347e7a1b4b 100644
++--- a/bgpd/bgp_attr.h
+++++ b/bgpd/bgp_attr.h
++@@ -364,7 +364,6 @@ enum bgp_attr_parse_ret {
++ 	/* only used internally, send notify + convert to BGP_ATTR_PARSE_ERROR
++ 	 */
++ 	BGP_ATTR_PARSE_ERROR_NOTIFYPLS =3D -3,
++-	BGP_ATTR_PARSE_EOR =3D -4,
++ };
++=20
++ struct bpacket_attr_vec_arr;
++diff --git a/bgpd/bgp_packet.c b/bgpd/bgp_packet.c
++index b585591e2f69..5ecf343b6657 100644
++--- a/bgpd/bgp_packet.c
+++++ b/bgpd/bgp_packet.c
++@@ -2397,8 +2397,7 @@ static int bgp_update_receive(struct peer_connection=
+ *connection,
++ 	 * Non-MP IPv4/Unicast EoR is a completely empty UPDATE
++ 	 * and MP EoR should have only an empty MP_UNREACH
++ 	 */
++-	if ((!update_len && !withdraw_len && nlris[NLRI_MP_UPDATE].length =3D=3D=
+ 0)
++-	    || (attr_parse_ret =3D=3D BGP_ATTR_PARSE_EOR)) {
+++	if (!update_len && !withdraw_len && nlris[NLRI_MP_UPDATE].length =3D=3D =
+0) {
++ 		afi_t afi =3D 0;
++ 		safi_t safi;
++ 		struct graceful_restart_info *gr_info;
++@@ -2419,9 +2418,6 @@ static int bgp_update_receive(struct peer_connection=
+ *connection,
++ 			   && nlris[NLRI_MP_WITHDRAW].length =3D=3D 0) {
++ 			afi =3D nlris[NLRI_MP_WITHDRAW].afi;
++ 			safi =3D nlris[NLRI_MP_WITHDRAW].safi;
++-		} else if (attr_parse_ret =3D=3D BGP_ATTR_PARSE_EOR) {
++-			afi =3D nlris[NLRI_MP_UPDATE].afi;
++-			safi =3D nlris[NLRI_MP_UPDATE].safi;
++ 		}
++=20
++ 		if (afi && peer->afc[afi][safi]) {
++--=20
++2.42.1
++
+diff --git a/meta-networking/recipes-protocols/frr/frr/CVE-2023-46753.patch=
+ b/meta-networking/recipes-protocols/frr/frr/CVE-2023-46753.patch
+new file mode 100644
+index 000000000000..6bf159aba8d0
+--- /dev/null
++++ b/meta-networking/recipes-protocols/frr/frr/CVE-2023-46753.patch
+@@ -0,0 +1,117 @@
++From d8482bf011cb2b173e85b65b4bf3d5061250cdb9 Mon Sep 17 00:00:00 2001
++From: Donatas Abraitis <donatas@opensourcerouting.org>
++Date: Mon, 23 Oct 2023 23:34:10 +0300
++Subject: [PATCH] bgpd: Check mandatory attributes more carefully for UPDAT=
+E
++ message
++
++If we send a crafted BGP UPDATE message without mandatory attributes, we d=
+o
++not check if the length of the path attributes is zero or not. We only che=
+ck
++if attr->flag is at least set or not. Imagine we send only unknown transit
++attribute, then attr->flag is always 0. Also, this is true only if gracefu=
+l-restart
++capability is received.
++
++A crash:
++
++```
++bgpd[7834]: [TJ23Y-GY0RH] 127.0.0.1 Unknown attribute is received (type 31=
+, length 16)
++bgpd[7834]: [PCFFM-WMARW] 127.0.0.1(donatas-pc) rcvd UPDATE wlen 0 attrlen=
+ 20 alen 17
++BGP[7834]: Received signal 11 at 1698089639 (si_addr 0x0, PC 0x55eefd375b4=
+a); aborting...
++BGP[7834]: /usr/local/lib/libfrr.so.0(zlog_backtrace_sigsafe+0x6d) [0x7f32=
+05ca939d]
++BGP[7834]: /usr/local/lib/libfrr.so.0(zlog_signal+0xf3) [0x7f3205ca9593]
++BGP[7834]: /usr/local/lib/libfrr.so.0(+0xf5181) [0x7f3205cdd181]
++BGP[7834]: /lib/x86_64-linux-gnu/libpthread.so.0(+0x12980) [0x7f3204ff3980=
+]
++BGP[7834]: /usr/lib/frr/bgpd(+0x18ab4a) [0x55eefd375b4a]
++BGP[7834]: /usr/local/lib/libfrr.so.0(route_map_apply_ext+0x310) [0x7f3205=
+cd1290]
++BGP[7834]: /usr/lib/frr/bgpd(+0x163610) [0x55eefd34e610]
++BGP[7834]: /usr/lib/frr/bgpd(bgp_update+0x9a5) [0x55eefd35c1d5]
++BGP[7834]: /usr/lib/frr/bgpd(bgp_nlri_parse_ip+0xb7) [0x55eefd35e867]
++BGP[7834]: /usr/lib/frr/bgpd(+0x1555e6) [0x55eefd3405e6]
++BGP[7834]: /usr/lib/frr/bgpd(bgp_process_packet+0x747) [0x55eefd345597]
++BGP[7834]: /usr/local/lib/libfrr.so.0(event_call+0x83) [0x7f3205cef4a3]
++BGP[7834]: /usr/local/lib/libfrr.so.0(frr_run+0xc0) [0x7f3205ca10a0]
++BGP[7834]: /usr/lib/frr/bgpd(main+0x409) [0x55eefd2dc979]
++```
++
++Sending:
++
++```
++import socket
++import time
++
++OPEN =3D (b"\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff"
++b"\xff\xff\x00\x62\x01\x04\xfd\xea\x00\x5a\x0a\x00\x00\x01\x45\x02"
++b"\x06\x01\x04\x00\x01\x00\x01\x02\x02\x02\x00\x02\x02\x46\x00\x02"
++b"\x06\x41\x04\x00\x00\xfd\xea\x02\x02\x06\x00\x02\x06\x45\x04\x00"
++b"\x01\x01\x03\x02\x0e\x49\x0c\x0a\x64\x6f\x6e\x61\x74\x61\x73\x2d"
++b"\x70\x63\x00\x02\x04\x40\x02\x00\x78\x02\x09\x47\x07\x00\x01\x01"
++b"\x80\x00\x00\x00")
++
++KEEPALIVE =3D (b"\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff"
++b"\xff\xff\xff\xff\xff\xff\x00\x13\x04")
++
++UPDATE =3D bytearray.fromhex("ffffffffffffffffffffffffffffffff003c02000000=
+14ff1f001000040146464646460004464646464646664646f50d05800100010200ffff00000=
+0")
++
++s =3D socket.socket(socket.AF_INET, socket.SOCK_STREAM)
++s.connect(('127.0.0.2', 179))
++s.send(OPEN)
++data =3D s.recv(1024)
++s.send(KEEPALIVE)
++data =3D s.recv(1024)
++s.send(UPDATE)
++data =3D s.recv(1024)
++time.sleep(1000)
++s.close()
++```
++
++Reported-by: Iggy Frankovic <iggyfran@amazon.com>
++Signed-off-by: Donatas Abraitis <donatas@opensourcerouting.org>
++Upstream-Status: Backport [https://github.com/FRRouting/frr/commit/d8482bf=
+011cb2b173e85b65b4bf3d5061250cdb9]
++CVE: CVE-2023-46753
++Signed-off-by: Jonas Gorski <jonas.gorski@bisdn.de>
++---
++ bgpd/bgp_attr.c | 10 ++++++----
++ 1 file changed, 6 insertions(+), 4 deletions(-)
++
++diff --git a/bgpd/bgp_attr.c b/bgpd/bgp_attr.c
++index e7bb42a5d989..cf2dbe65b805 100644
++--- a/bgpd/bgp_attr.c
+++++ b/bgpd/bgp_attr.c
++@@ -3385,13 +3385,15 @@ bgp_attr_unknown(struct bgp_attr_parser_args *args=
+)
++ }
++=20
++ /* Well-known attribute check. */
++-static int bgp_attr_check(struct peer *peer, struct attr *attr)
+++static int bgp_attr_check(struct peer *peer, struct attr *attr,
+++			  bgp_size_t length)
++ {
++ 	uint8_t type =3D 0;
++=20
++ 	/* BGP Graceful-Restart End-of-RIB for IPv4 unicast is signaled as an
++ 	 * empty UPDATE.  */
++-	if (CHECK_FLAG(peer->cap, PEER_CAP_RESTART_RCV) && !attr->flag)
+++	if (CHECK_FLAG(peer->cap, PEER_CAP_RESTART_RCV) && !attr->flag &&
+++	    !length)
++ 		return BGP_ATTR_PARSE_PROCEED;
++=20
++ 	/* "An UPDATE message that contains the MP_UNREACH_NLRI is not required
++@@ -3443,7 +3445,7 @@ enum bgp_attr_parse_ret bgp_attr_parse(struct peer *=
+peer, struct attr *attr,
++ 	enum bgp_attr_parse_ret ret;
++ 	uint8_t flag =3D 0;
++ 	uint8_t type =3D 0;
++-	bgp_size_t length;
+++	bgp_size_t length =3D 0;
++ 	uint8_t *startp, *endp;
++ 	uint8_t *attr_endp;
++ 	uint8_t seen[BGP_ATTR_BITMAP_SIZE];
++@@ -3831,7 +3833,7 @@ enum bgp_attr_parse_ret bgp_attr_parse(struct peer *=
+peer, struct attr *attr,
++ 	}
++=20
++ 	/* Check all mandatory well-known attributes are present */
++-	ret =3D bgp_attr_check(peer, attr);
+++	ret =3D bgp_attr_check(peer, attr, length);
++ 	if (ret < 0)
++ 		goto done;
++=20
++--=20
++2.42.1
++
+diff --git a/meta-networking/recipes-protocols/frr/frr/CVE-2023-47234.patch=
+ b/meta-networking/recipes-protocols/frr/frr/CVE-2023-47234.patch
+new file mode 100644
+index 000000000000..754f9345a024
+--- /dev/null
++++ b/meta-networking/recipes-protocols/frr/frr/CVE-2023-47234.patch
+@@ -0,0 +1,95 @@
++From c37119df45bbf4ef713bc10475af2ee06e12f3bf Mon Sep 17 00:00:00 2001
++From: Donatas Abraitis <donatas@opensourcerouting.org>
++Date: Sun, 29 Oct 2023 22:44:45 +0200
++Subject: [PATCH] bgpd: Ignore handling NLRIs if we received MP_UNREACH_NLR=
+I
++
++If we receive MP_UNREACH_NLRI, we should stop handling remaining NLRIs if
++no mandatory path attributes received.
++
++In other words, if MP_UNREACH_NLRI received, the remaining NLRIs should be=
+ handled
++as a new data, but without mandatory attributes, it's a malformed packet.
++
++In normal case, this MUST not happen at all, but to avoid crashing bgpd, w=
+e MUST
++handle that.
++
++Reported-by: Iggy Frankovic <iggyfran@amazon.com>
++Signed-off-by: Donatas Abraitis <donatas@opensourcerouting.org>
++Upstream-Status: Backport [https://github.com/FRRouting/frr/commit/c37119d=
+f45bbf4ef713bc10475af2ee06e12f3bf]
++CVE: CVE-2023-47234
++Signed-off-by: Jonas Gorski <jonas.gorski@bisdn.de>
++---
++ bgpd/bgp_attr.c   | 19 ++++++++++---------
++ bgpd/bgp_attr.h   |  1 +
++ bgpd/bgp_packet.c |  7 ++++++-
++ 3 files changed, 17 insertions(+), 10 deletions(-)
++
++diff --git a/bgpd/bgp_attr.c b/bgpd/bgp_attr.c
++index 1473dc772502..75aa2ac7cce6 100644
++--- a/bgpd/bgp_attr.c
+++++ b/bgpd/bgp_attr.c
++@@ -3399,15 +3399,6 @@ static int bgp_attr_check(struct peer *peer, struct=
+ attr *attr,
++ 	    !length)
++ 		return BGP_ATTR_PARSE_WITHDRAW;
++=20
++-	/* "An UPDATE message that contains the MP_UNREACH_NLRI is not required
++-	   to carry any other path attributes.", though if MP_REACH_NLRI or NLRI
++-	   are present, it should.  Check for any other attribute being present
++-	   instead.
++-	 */
++-	if ((!CHECK_FLAG(attr->flag, ATTR_FLAG_BIT(BGP_ATTR_MP_REACH_NLRI)) &&
++-	     CHECK_FLAG(attr->flag, ATTR_FLAG_BIT(BGP_ATTR_MP_UNREACH_NLRI))))
++-		return BGP_ATTR_PARSE_PROCEED;
++-
++ 	if (!CHECK_FLAG(attr->flag, ATTR_FLAG_BIT(BGP_ATTR_ORIGIN)))
++ 		type =3D BGP_ATTR_ORIGIN;
++=20
++@@ -3426,6 +3417,16 @@ static int bgp_attr_check(struct peer *peer, struct=
+ attr *attr,
++ 	    && !CHECK_FLAG(attr->flag, ATTR_FLAG_BIT(BGP_ATTR_LOCAL_PREF)))
++ 		type =3D BGP_ATTR_LOCAL_PREF;
++=20
+++	/* An UPDATE message that contains the MP_UNREACH_NLRI is not required
+++	 * to carry any other path attributes. Though if MP_REACH_NLRI or NLRI
+++	 * are present, it should. Check for any other attribute being present
+++	 * instead.
+++	 */
+++	if (!CHECK_FLAG(attr->flag, ATTR_FLAG_BIT(BGP_ATTR_MP_REACH_NLRI)) &&
+++	    CHECK_FLAG(attr->flag, ATTR_FLAG_BIT(BGP_ATTR_MP_UNREACH_NLRI)))
+++		return type ? BGP_ATTR_PARSE_MISSING_MANDATORY
+++			    : BGP_ATTR_PARSE_PROCEED;
+++
++ 	/* If any of the well-known mandatory attributes are not present
++ 	 * in an UPDATE message, then "treat-as-withdraw" MUST be used.
++ 	 */
++diff --git a/bgpd/bgp_attr.h b/bgpd/bgp_attr.h
++index fc347e7a1b4b..d30155e6dba0 100644
++--- a/bgpd/bgp_attr.h
+++++ b/bgpd/bgp_attr.h
++@@ -364,6 +364,7 @@ enum bgp_attr_parse_ret {
++ 	/* only used internally, send notify + convert to BGP_ATTR_PARSE_ERROR
++ 	 */
++ 	BGP_ATTR_PARSE_ERROR_NOTIFYPLS =3D -3,
+++	BGP_ATTR_PARSE_MISSING_MANDATORY =3D -4,
++ };
++=20
++ struct bpacket_attr_vec_arr;
++diff --git a/bgpd/bgp_packet.c b/bgpd/bgp_packet.c
++index a7514a26aa64..5dc35157ebf6 100644
++--- a/bgpd/bgp_packet.c
+++++ b/bgpd/bgp_packet.c
++@@ -2359,7 +2359,12 @@ static int bgp_update_receive(struct peer_connectio=
+n *connection,
++ 	/* Network Layer Reachability Information. */
++ 	update_len =3D end - stream_pnt(s);
++=20
++-	if (update_len && attribute_len) {
+++	/* If we received MP_UNREACH_NLRI attribute, but also NLRIs, then
+++	 * NLRIs should be handled as a new data. Though, if we received
+++	 * NLRIs without mandatory attributes, they should be ignored.
+++	 */
+++	if (update_len && attribute_len &&
+++	    attr_parse_ret !=3D BGP_ATTR_PARSE_MISSING_MANDATORY) {
++ 		/* Set NLRI portion to structure. */
++ 		nlris[NLRI_UPDATE].afi =3D AFI_IP;
++ 		nlris[NLRI_UPDATE].safi =3D SAFI_UNICAST;
++--=20
++2.42.1
++
+diff --git a/meta-networking/recipes-protocols/frr/frr/CVE-2023-47235.patch=
+ b/meta-networking/recipes-protocols/frr/frr/CVE-2023-47235.patch
+new file mode 100644
+index 000000000000..b06ba94a3420
+--- /dev/null
++++ b/meta-networking/recipes-protocols/frr/frr/CVE-2023-47235.patch
+@@ -0,0 +1,112 @@
++From 6814f2e0138a6ea5e1f83bdd9085d9a77999900b Mon Sep 17 00:00:00 2001
++From: Donatas Abraitis <donatas@opensourcerouting.org>
++Date: Fri, 27 Oct 2023 11:56:45 +0300
++Subject: [PATCH] bgpd: Treat EOR as withdrawn to avoid unwanted handling o=
+f
++ malformed attrs
++
++Treat-as-withdraw, otherwise if we just ignore it, we will pass it to be
++processed as a normal UPDATE without mandatory attributes, that could lead
++to harmful behavior. In this case, a crash for route-maps with the configu=
+ration
++such as:
++
++```
++router bgp 65001
++ no bgp ebgp-requires-policy
++ neighbor 127.0.0.1 remote-as external
++ neighbor 127.0.0.1 passive
++ neighbor 127.0.0.1 ebgp-multihop
++ neighbor 127.0.0.1 disable-connected-check
++ neighbor 127.0.0.1 update-source 127.0.0.2
++ neighbor 127.0.0.1 timers 3 90
++ neighbor 127.0.0.1 timers connect 1
++ !
++ address-family ipv4 unicast
++  neighbor 127.0.0.1 addpath-tx-all-paths
++  neighbor 127.0.0.1 default-originate
++  neighbor 127.0.0.1 route-map RM_IN in
++ exit-address-family
++exit
++!
++route-map RM_IN permit 10
++ set as-path prepend 200
++exit
++```
++
++Send a malformed optional transitive attribute:
++
++```
++import socket
++import time
++
++OPEN =3D (b"\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff"
++b"\xff\xff\x00\x62\x01\x04\xfd\xea\x00\x5a\x0a\x00\x00\x01\x45\x02"
++b"\x06\x01\x04\x00\x01\x00\x01\x02\x02\x02\x00\x02\x02\x46\x00\x02"
++b"\x06\x41\x04\x00\x00\xfd\xea\x02\x02\x06\x00\x02\x06\x45\x04\x00"
++b"\x01\x01\x03\x02\x0e\x49\x0c\x0a\x64\x6f\x6e\x61\x74\x61\x73\x2d"
++b"\x70\x63\x00\x02\x04\x40\x02\x00\x78\x02\x09\x47\x07\x00\x01\x01"
++b"\x80\x00\x00\x00")
++
++KEEPALIVE =3D (b"\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff"
++b"\xff\xff\xff\xff\xff\xff\x00\x13\x04")
++
++UPDATE =3D bytearray.fromhex("ffffffffffffffffffffffffffffffff002b02000000=
+03c0ff00010100eb00ac100b0b001ad908ac100b0b")
++
++s =3D socket.socket(socket.AF_INET, socket.SOCK_STREAM)
++s.connect(('127.0.0.2', 179))
++s.send(OPEN)
++data =3D s.recv(1024)
++s.send(KEEPALIVE)
++data =3D s.recv(1024)
++s.send(UPDATE)
++data =3D s.recv(1024)
++time.sleep(100)
++s.close()
++```
++
++Reported-by: Iggy Frankovic <iggyfran@amazon.com>
++Signed-off-by: Donatas Abraitis <donatas@opensourcerouting.org>
++Upstream-Status: Backport [https://github.com/FRRouting/frr/commit/6814f2e=
+0138a6ea5e1f83bdd9085d9a77999900b]
++CVE: CVE-2023-47235
++Signed-off-by: Jonas Gorski <jonas.gorski@bisdn.de>
++---
++ bgpd/bgp_attr.c | 15 ++++++++++++---
++ 1 file changed, 12 insertions(+), 3 deletions(-)
++
++diff --git a/bgpd/bgp_attr.c b/bgpd/bgp_attr.c
++index cf2dbe65b805..1473dc772502 100644
++--- a/bgpd/bgp_attr.c
+++++ b/bgpd/bgp_attr.c
++@@ -3391,10 +3391,13 @@ static int bgp_attr_check(struct peer *peer, struc=
+t attr *attr,
++ 	uint8_t type =3D 0;
++=20
++ 	/* BGP Graceful-Restart End-of-RIB for IPv4 unicast is signaled as an
++-	 * empty UPDATE.  */
+++	 * empty UPDATE. Treat-as-withdraw, otherwise if we just ignore it,
+++	 * we will pass it to be processed as a normal UPDATE without mandatory
+++	 * attributes, that could lead to harmful behavior.
+++	 */
++ 	if (CHECK_FLAG(peer->cap, PEER_CAP_RESTART_RCV) && !attr->flag &&
++ 	    !length)
++-		return BGP_ATTR_PARSE_PROCEED;
+++		return BGP_ATTR_PARSE_WITHDRAW;
++=20
++ 	/* "An UPDATE message that contains the MP_UNREACH_NLRI is not required
++ 	   to carry any other path attributes.", though if MP_REACH_NLRI or NLRI
++@@ -3889,7 +3892,13 @@ done:
++ 	aspath_unintern(&as4_path);
++=20
++ 	transit =3D bgp_attr_get_transit(attr);
++-	if (ret !=3D BGP_ATTR_PARSE_ERROR) {
+++	/* If we received an UPDATE with mandatory attributes, then
+++	 * the unrecognized transitive optional attribute of that
+++	 * path MUST be passed. Otherwise, it's an error, and from
+++	 * security perspective it might be very harmful if we continue
+++	 * here with the unrecognized attributes.
+++	 */
+++	if (ret =3D=3D BGP_ATTR_PARSE_PROCEED) {
++ 		/* Finally intern unknown attribute. */
++ 		if (transit)
++ 			bgp_attr_set_transit(attr, transit_intern(transit));
++--=20
++2.42.1
++
+diff --git a/meta-networking/recipes-protocols/frr/frr_9.0.1.bb b/meta-netw=
+orking/recipes-protocols/frr/frr_9.0.1.bb
+index bddc08aebbaa..c447df0512c5 100644
+--- a/meta-networking/recipes-protocols/frr/frr_9.0.1.bb
++++ b/meta-networking/recipes-protocols/frr/frr_9.0.1.bb
+@@ -9,9 +9,15 @@ LICENSE =3D "GPL-2.0-only & LGPL-2.1-only"
+ LIC_FILES_CHKSUM =3D "file://doc/licenses/GPL-2.0;md5=3Db234ee4d69f5fce448=
+6a80fdaf4a4263 \
+                     file://doc/licenses/LGPL-2.1;md5=3D4fbd65380cdd2559510=
+79008b364516c"
+=20
++PR =3D "r1"
++
+ SRC_URI =3D "git://github.com/FRRouting/frr.git;protocol=3Dhttps;branch=3D=
+stable/9.0 \
+            file://frr.pam \
+            file://0001-tools-make-quiet-actually-suppress-output.patch \
++           file://CVE-2023-46752.patch \
++           file://CVE-2023-46753.patch \
++           file://CVE-2023-47235.patch \
++           file://CVE-2023-47234.patch \
+            "
+=20
+ SRCREV =3D "31ed3dd753d62b5d8916998bc32814007e91364b"
+--=20
+2.42.1
 
-CAUTION: This email comes from a non Wind River email account!
-Do not click links or open attachments unless you recognize the sender and =
-know the content is safe.
 
-On Wed, 2023-11-22 at 04:55 +0000, Polampalli, Archana via
-lists.openembedded.org wrote:
-> From: Archana Polampalli <archana.polampalli@windriver.com>
->
-> A vulnerability was discovered in Samba, where the flaw allows SMB
-> clients to
-> truncate files, even with read-only permissions when the Samba VFS
-> module
-> "acl_xattr" is configured with "acl_xattr:ignore system acls =3D yes".
-> The SMB
-> protocol allows opening files when the client requests read-only
-> access but
-> then implicitly truncates the opened file to 0 bytes if the client
-> specifies
-> a separate OVERWRITE create disposition request. The issue arises in
-> configurations
-> that bypass kernel file system permissions checks, relying solely on
-> Samba's permissions.
->
-> References:
-> https://nvd.nist.gov/vuln/detail/CVE-2023-4091
->
-> Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
-> ---
->  .../samba/samba/CVE-2023-4091-0001.patch      |  40 ++++
->  .../samba/samba/CVE-2023-4091-0002.patch      | 193
-> ++++++++++++++++++
->  .../samba/samba_4.14.14.bb                    |   2 +
->  3 files changed, 235 insertions(+)
->  create mode 100644 meta-networking/recipes-
-> connectivity/samba/samba/CVE-2023-4091-0001.patch
->  create mode 100644 meta-networking/recipes-
-> connectivity/samba/samba/CVE-2023-4091-0002.patch
->
-> diff --git a/meta-networking/recipes-connectivity/samba/samba/CVE-
-> 2023-4091-0001.patch b/meta-networking/recipes-
-> connectivity/samba/samba/CVE-2023-4091-0001.patch
-> new file mode 100644
-> index 000000000..ff80e9377
-> --- /dev/null
-> +++ b/meta-networking/recipes-connectivity/samba/samba/CVE-2023-4091-
-> 0001.patch
-> @@ -0,0 +1,40 @@
-> +From 8b26f634372f11edcbea33dfd68a3d57889dfcc5 Mon Sep 17 00:00:00
-> 2001
-> +From: Ralph Boehme <slow@samba.org>
-> +Date: Tue, 1 Aug 2023 13:04:36 +0200
-> +Subject: [PATCH] CVE-2023-4091: smbd: use open_access_mask for
-> access check in
-> +  open_file()
-> +
-> +If the client requested FILE_OVERWRITE[_IF], we're implicitly adding
-> +FILE_WRITE_DATA to the open_access_mask in open_file_ntcreate(), but
-> for the
-> +access check we're using access_mask which doesn't contain the
-> additional
-> +right, which means we can end up truncating a file for which the
-> user has
-> +only read-only access via an SD.
-> +
-> +BUG: https://bugzilla.samba.org/show_bug.cgi?id=3D15439
-> +
-> +Signed-off-by: Ralph Boehme <slow@samba.org>
-> +
-> +CVE: CVE-2023-4091
-> +
-> +Upstream-Status: Backport
-> [https://github.com/samba-team/samba/commit/8b26f634372f11edcbea33dfd
-> 68a3d57889dfcc5]
-
-The changes in this patch are different from what is being patched here
-in this commit. Different function call so do these changes apply to
-4.14 as well? And, it seems you have missed one function call as well.
-
-Thanks,
-
-Anuj
-
-> +
-> +Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
-> +---
-> + source3/smbd/open.c | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/source3/smbd/open.c b/source3/smbd/open.c
-> +index 2c3bf9e..2b19aae 100644
-> +--- a/source3/smbd/open.c
-> ++++ b/source3/smbd/open.c
-> +@@ -1402,7 +1402,7 @@ static NTSTATUS open_file(files_struct *fsp,
-> +                                               conn->cwd_fsp,
-> +                                               smb_fname,
-> +                                               false,
-> +-                                              access_mask);
-> ++                                              open_access_mask);
-> +
-> +                               if (!NT_STATUS_IS_OK(status)) {
-> +                                       DEBUG(10, ("open_file: "
-> +--
-> +2.40.0
-> diff --git a/meta-networking/recipes-connectivity/samba/samba/CVE-
-> 2023-4091-0002.patch b/meta-networking/recipes-
-> connectivity/samba/samba/CVE-2023-4091-0002.patch
-> new file mode 100644
-> index 000000000..908ab85ba
-> --- /dev/null
-> +++ b/meta-networking/recipes-connectivity/samba/samba/CVE-2023-4091-
-> 0002.patch
-> @@ -0,0 +1,193 @@
-> +From b08a60160e6ab8d982d31844bcbf7ab67ff3a8de Mon Sep 17 00:00:00
-> 2001
-> +From: Ralph Boehme <slow@samba.org>
-> +Date: Tue, 1 Aug 2023 12:30:00 +0200
-> +Subject: [PATCH 2/2] CVE-2023-4091: smbtorture: test overwrite
-> dispositions on
-> + read-only file
-> +
-> +BUG: https://bugzilla.samba.org/show_bug.cgi?id=3D15439
-> +
-> +Signed-off-by: Ralph Boehme <slow@samba.org>
-> +
-> +CVE: CVE-2023-4091
-> +
-> +Upstream-Status: Backport
-> [https://github.com/samba-team/samba/commit/b08a60160e6ab8d982d31844b
-> cbf7ab67ff3a8de]
-> +
-> +Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
-> +---
-> + selftest/knownfail.d/samba3.smb2.acls |   1 +
-> + source4/torture/smb2/acls.c           | 145
-> ++++++++++++++++++++++++++
-> + 2 files changed, 146 insertions(+)
-> + create mode 100644 selftest/knownfail.d/samba3.smb2.acls
-> +
-> +diff --git a/selftest/knownfail.d/samba3.smb2.acls
-> b/selftest/knownfail.d/samba3.smb2.acls
-> +new file mode 100644
-> +index 0000000..18df260
-> +--- /dev/null
-> ++++ b/selftest/knownfail.d/samba3.smb2.acls
-> +@@ -0,0 +1 @@
-> ++^samba3.smb2.acls.OVERWRITE_READ_ONLY_FILE
-> +diff --git a/source4/torture/smb2/acls.c
-> b/source4/torture/smb2/acls.c
-> +index 4f4538b..d26caeb 100644
-> +--- a/source4/torture/smb2/acls.c
-> ++++ b/source4/torture/smb2/acls.c
-> +@@ -3023,6 +3023,149 @@ done:
-> +       return ret;
-> + }
-> +
-> ++static bool test_overwrite_read_only_file(struct torture_context
-> *tctx,
-> ++                                        struct smb2_tree *tree)
-> ++{
-> ++      NTSTATUS status;
-> ++      struct smb2_create c;
-> ++      const char *fname =3D BASEDIR
-> "\\test_overwrite_read_only_file.txt<file://\\test_overwrite_read_only_fi=
-le.txt>";
-> ++      struct smb2_handle handle =3D {{0}};
-> ++      union smb_fileinfo q;
-> ++      union smb_setfileinfo set;
-> ++      struct security_descriptor *sd =3D NULL, *sd_orig =3D NULL;
-> ++      const char *owner_sid =3D NULL;
-> ++      int i;
-> ++      bool ret =3D true;
-> ++
-> ++      struct tcase {
-> ++              int disposition;
-> ++              const char *disposition_string;
-> ++              NTSTATUS expected_status;
-> ++      } tcases[] =3D {
-> ++#define TCASE(d, s) {                         \
-> ++              .disposition =3D d,               \
-> ++              .disposition_string =3D #d,       \
-> ++              .expected_status =3D s,           \
-> ++      }
-> ++              TCASE(NTCREATEX_DISP_OPEN, NT_STATUS_OK),
-> ++              TCASE(NTCREATEX_DISP_SUPERSEDE,
-> NT_STATUS_ACCESS_DENIED),
-> ++              TCASE(NTCREATEX_DISP_OVERWRITE,
-> NT_STATUS_ACCESS_DENIED),
-> ++              TCASE(NTCREATEX_DISP_OVERWRITE_IF,
-> NT_STATUS_ACCESS_DENIED),
-> ++      };
-> ++#undef TCASE
-> ++
-> ++      ret =3D smb2_util_setup_dir(tctx, tree, BASEDIR);
-> ++      torture_assert_goto(tctx, ret, ret, done,
-> "smb2_util_setup_dir not ok");
-> ++
-> ++      c =3D (struct smb2_create) {
-> ++              .in.desired_access =3D SEC_STD_READ_CONTROL |
-> ++                      SEC_STD_WRITE_DAC |
-> ++                      SEC_STD_WRITE_OWNER,
-> ++              .in.file_attributes =3D FILE_ATTRIBUTE_NORMAL,
-> ++              .in.share_access =3D NTCREATEX_SHARE_ACCESS_READ |
-> ++                      NTCREATEX_SHARE_ACCESS_WRITE,
-> ++              .in.create_disposition =3D NTCREATEX_DISP_OPEN_IF,
-> ++              .in.impersonation_level =3D
-> NTCREATEX_IMPERSONATION_ANONYMOUS,
-> ++              .in.fname =3D fname,
-> ++      };
-> ++
-> ++      status =3D smb2_create(tree, tctx, &c);
-> ++      torture_assert_ntstatus_ok_goto(tctx, status, ret, done,
-> ++                                      "smb2_create failed\n");
-> ++      handle =3D c.out.file.handle;
-> ++
-> ++      torture_comment(tctx, "get the original sd\n");
-> ++
-> ++      ZERO_STRUCT(q);
-> ++      q.query_secdesc.level =3D RAW_FILEINFO_SEC_DESC;
-> ++      q.query_secdesc.in.file.handle =3D handle;
-> ++      q.query_secdesc.in.secinfo_flags =3D SECINFO_DACL |
-> SECINFO_OWNER;
-> ++
-> ++      status =3D smb2_getinfo_file(tree, tctx, &q);
-> ++      torture_assert_ntstatus_ok_goto(tctx, status, ret, done,
-> ++                                      "smb2_getinfo_file
-> failed\n");
-> ++      sd_orig =3D q.query_secdesc.out.sd;
-> ++
-> ++      owner_sid =3D dom_sid_string(tctx, sd_orig->owner_sid);
-> ++
-> ++      sd =3D security_descriptor_dacl_create(tctx,
-> ++                                      0, NULL, NULL,
-> ++                                      owner_sid,
-> ++                                      SEC_ACE_TYPE_ACCESS_ALLOWED,
-> ++                                      SEC_FILE_READ_DATA,
-> ++                                      0,
-> ++                                      NULL);
-> ++
-> ++      ZERO_STRUCT(set);
-> ++      set.set_secdesc.level =3D RAW_SFILEINFO_SEC_DESC;
-> ++      set.set_secdesc.in.file.handle =3D handle;
-> ++      set.set_secdesc.in.secinfo_flags =3D SECINFO_DACL;
-> ++      set.set_secdesc.in.sd =3D sd;
-> ++
-> ++      status =3D smb2_setinfo_file(tree, &set);
-> ++      torture_assert_ntstatus_ok_goto(tctx, status, ret, done,
-> ++                                      "smb2_setinfo_file
-> failed\n");
-> ++
-> ++      smb2_util_close(tree, handle);
-> ++      ZERO_STRUCT(handle);
-> ++
-> ++      for (i =3D 0; i < ARRAY_SIZE(tcases); i++) {
-> ++              torture_comment(tctx, "Verify open with %s
-> dispostion\n",
-> ++                              tcases[i].disposition_string);
-> ++
-> ++              c =3D (struct smb2_create) {
-> ++                      .in.create_disposition =3D
-> tcases[i].disposition,
-> ++                      .in.desired_access =3D SEC_FILE_READ_DATA,
-> ++                      .in.file_attributes =3D FILE_ATTRIBUTE_NORMAL,
-> ++                      .in.share_access =3D
-> NTCREATEX_SHARE_ACCESS_MASK,
-> ++                      .in.impersonation_level =3D
-> NTCREATEX_IMPERSONATION_ANONYMOUS,
-> ++                      .in.fname =3D fname,
-> ++              };
-> ++
-> ++              status =3D smb2_create(tree, tctx, &c);
-> ++              smb2_util_close(tree, c.out.file.handle);
-> ++              torture_assert_ntstatus_equal_goto(
-> ++                      tctx, status, tcases[i].expected_status, ret,
-> done,
-> ++                      "smb2_create failed\n");
-> ++      };
-> ++
-> ++      torture_comment(tctx, "put back original sd\n");
-> ++
-> ++      c =3D (struct smb2_create) {
-> ++              .in.desired_access =3D SEC_STD_WRITE_DAC,
-> ++              .in.file_attributes =3D FILE_ATTRIBUTE_NORMAL,
-> ++              .in.share_access =3D NTCREATEX_SHARE_ACCESS_MASK,
-> ++              .in.create_disposition =3D NTCREATEX_DISP_OPEN_IF,
-> ++              .in.impersonation_level =3D
-> NTCREATEX_IMPERSONATION_ANONYMOUS,
-> ++              .in.fname =3D fname,
-> ++      };
-> ++
-> ++      status =3D smb2_create(tree, tctx, &c);
-> ++      torture_assert_ntstatus_ok_goto(tctx, status, ret, done,
-> ++                                      "smb2_create failed\n");
-> ++      handle =3D c.out.file.handle;
-> ++
-> ++      ZERO_STRUCT(set);
-> ++      set.set_secdesc.level =3D RAW_SFILEINFO_SEC_DESC;
-> ++      set.set_secdesc.in.file.handle =3D handle;
-> ++      set.set_secdesc.in.secinfo_flags =3D SECINFO_DACL;
-> ++      set.set_secdesc.in.sd =3D sd_orig;
-> ++
-> ++      status =3D smb2_setinfo_file(tree, &set);
-> ++      torture_assert_ntstatus_ok_goto(tctx, status, ret, done,
-> ++                                      "smb2_setinfo_file
-> failed\n");
-> ++
-> ++      smb2_util_close(tree, handle);
-> ++      ZERO_STRUCT(handle);
-> ++
-> ++done:
-> ++      smb2_util_close(tree, handle);
-> ++      smb2_util_unlink(tree, fname);
-> ++      smb2_deltree(tree, BASEDIR);
-> ++      return ret;
-> ++}
-> ++
-> ++
-> + /*
-> +    basic testing of SMB2 ACLs
-> + */
-> +@@ -3051,6 +3194,8 @@ struct torture_suite
-> *torture_smb2_acls_init(TALLOC_CTX *ctx)
-> +                       test_deny1);
-> +       torture_suite_add_1smb2_test(suite, "MXAC-NOT-GRANTED",
-> +                       test_mxac_not_granted);
-> ++      torture_suite_add_1smb2_test(suite,
-> "OVERWRITE_READ_ONLY_FILE",
-> ++                      test_overwrite_read_only_file);
-> +
-> +       suite->description =3D talloc_strdup(suite, "SMB2-ACLS tests");
-> +
-> +--
-> +2.40.0
-> diff --git a/meta-networking/recipes-
-> connectivity/samba/samba_4.14.14.bb b/meta-networking/recipes-
-> connectivity/samba/samba_4.14.14.bb
-> index aa27592cb..dcb4d8137 100644
-> --- a/meta-networking/recipes-connectivity/samba/samba_4.14.14.bb
-> +++ b/meta-networking/recipes-connectivity/samba/samba_4.14.14.bb
-> @@ -49,6 +49,8 @@ SRC_URI =3D "${SAMBA_MIRROR}/stable/samba-
-> ${PV}.tar.gz \
->             file://CVE-2023-34968_0009.patch \
->             file://CVE-2023-34968_0010.patch \
->             file://CVE-2023-34968_0011.patch \
-> +           file://CVE-2023-4091-0001.patch \
-> +           file://CVE-2023-4091-0002.patch \
->             "
->
->  SRC_URI:append:libc-musl =3D " \
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#106987):
-> https://lists.openembedded.org/g/openembedded-devel/message/106987
-> Mute This Topic: https://lists.openembedded.org/mt/102743948/3616702
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe:
-> https://lists.openembedded.org/g/openembedded-devel/unsub [
-> anuj.mittal@intel.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+--=20
+BISDN GmbH
+K=F6rnerstra=DFe 7-10
+10785 Berlin
+Germany
 
 
---_000_MW4PR11MB5822FD2504A1F5D34E19DFA984BAAMW4PR11MB5822namp_
-Content-Type: text/html; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Phone:=20
++49-30-6108-1-6100
 
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
-1">
-<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
-ttom:0;} </style>
-</head>
-<body dir=3D"ltr">
-<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
-nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
-olor: rgb(0, 0, 0);">
-It affects all versions of Samba, Sent V2.</div>
-<div class=3D"elementToProof"><span style=3D"font-family: Aptos, Aptos_Embe=
-ddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 1=
-2pt; color: rgb(0, 0, 0);"><a href=3D"https://www.samba.org/samba/security/=
-CVE-2023-4091.html" id=3D"LPlnk531387">https://www.samba.org/samba/security=
-/CVE-2023-4091.html</a></span></div>
-<div class=3D"elementToProof"><br>
-</div>
-<div class=3D"elementToProof"><span style=3D"font-family: Aptos, Aptos_Embe=
-ddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 1=
-2pt; color: rgb(0, 0, 0);">Thank you,</span></div>
-<div class=3D"elementToProof"><span style=3D"font-family: Aptos, Aptos_Embe=
-ddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 1=
-2pt; color: rgb(0, 0, 0);"><br>
-</span></div>
-<div class=3D"elementToProof"><span style=3D"font-family: Aptos, Aptos_Embe=
-ddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 1=
-2pt; color: rgb(0, 0, 0);">Regards,</span></div>
-<div class=3D"elementToProof">Archana<span style=3D"font-family: Aptos, Apt=
-os_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-=
-size: 12pt; color: rgb(0, 0, 0);"><br>
-</span></div>
-<div id=3D"appendonsend"></div>
-<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
-Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);">
-<br>
-</div>
-<hr style=3D"display: inline-block; width: 98%;">
-<div id=3D"divRplyFwdMsg" dir=3D"ltr"><span style=3D"font-family: Calibri, =
-sans-serif; font-size: 11pt; color: rgb(0, 0, 0);"><b>From:</b>&nbsp;Mittal=
-, Anuj &lt;anuj.mittal@intel.com&gt;s<br>
-<b>Sent:</b>&nbsp;Wednesday, November 22, 2023 11:28<br>
-<b>To:</b>&nbsp;Polampalli, Archana &lt;Archana.Polampalli@windriver.com&gt=
-;; openembedded-devel@lists.openembedded.org &lt;openembedded-devel@lists.o=
-penembedded.org&gt;<br>
-<b>Subject:</b>&nbsp;Re: [oe][meta-networking][kirkstone][PATCH 1/2] samba:=
- fix CVE-2023-4091</span>
-<div>&nbsp;</div>
-</div>
-<div><span style=3D"font-size: 11pt;">CAUTION: This email comes from a non =
-Wind River email account!<br>
-Do not click links or open attachments unless you recognize the sender and =
-know the content is safe.<br>
-<br>
-On Wed, 2023-11-22 at 04:55 +0000, Polampalli, Archana via<br>
-lists.openembedded.org wrote:<br>
-&gt; From: Archana Polampalli &lt;archana.polampalli@windriver.com&gt;<br>
-&gt;<br>
-&gt; A vulnerability was discovered in Samba, where the flaw allows SMB<br>
-&gt; clients to<br>
-&gt; truncate files, even with read-only permissions when the Samba VFS<br>
-&gt; module<br>
-&gt; &quot;acl_xattr&quot; is configured with &quot;acl_xattr:ignore system=
- acls =3D yes&quot;.<br>
-&gt; The SMB<br>
-&gt; protocol allows opening files when the client requests read-only<br>
-&gt; access but<br>
-&gt; then implicitly truncates the opened file to 0 bytes if the client<br>
-&gt; specifies<br>
-&gt; a separate OVERWRITE create disposition request. The issue arises in<b=
-r>
-&gt; configurations<br>
-&gt; that bypass kernel file system permissions checks, relying solely on<b=
-r>
-&gt; Samba's permissions.<br>
-&gt;<br>
-&gt; References:<br>
-&gt; <a href=3D"https://nvd.nist.gov/vuln/detail/CVE-2023-4091" id=3D"OWAa1=
-46b88e-720a-a3c8-86c9-10b7ab879b78" class=3D"OWAAutoLink" data-auth=3D"NotA=
-pplicable" data-loopstyle=3D"linkonly">
-https://nvd.nist.gov/vuln/detail/CVE-2023-4091</a><br>
-&gt;<br>
-&gt; Signed-off-by: Archana Polampalli &lt;archana.polampalli@windriver.com=
-&gt;<br>
-&gt; ---<br>
-&gt;&nbsp; .../samba/samba/CVE-2023-4091-0001.patch&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp; |&nbsp; 40 ++++<br>
-&gt;&nbsp; .../samba/samba/CVE-2023-4091-0002.patch&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp; | 193<br>
-&gt; ++++++++++++++++++<br>
-&gt;&nbsp; .../samba/samba_4.14.14.bb&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-; |&nbsp;&nbsp; 2 +<br>
-&gt;&nbsp; 3 files changed, 235 insertions(+)<br>
-&gt;&nbsp; create mode 100644 meta-networking/recipes-<br>
-&gt; connectivity/samba/samba/CVE-2023-4091-0001.patch<br>
-&gt;&nbsp; create mode 100644 meta-networking/recipes-<br>
-&gt; connectivity/samba/samba/CVE-2023-4091-0002.patch<br>
-&gt;<br>
-&gt; diff --git a/meta-networking/recipes-connectivity/samba/samba/CVE-<br>
-&gt; 2023-4091-0001.patch b/meta-networking/recipes-<br>
-&gt; connectivity/samba/samba/CVE-2023-4091-0001.patch<br>
-&gt; new file mode 100644<br>
-&gt; index 000000000..ff80e9377<br>
-&gt; --- /dev/null<br>
-&gt; +++ b/meta-networking/recipes-connectivity/samba/samba/CVE-2023-4091-<=
-br>
-&gt; 0001.patch<br>
-&gt; @@ -0,0 +1,40 @@<br>
-&gt; +From 8b26f634372f11edcbea33dfd68a3d57889dfcc5 Mon Sep 17 00:00:00<br>
-&gt; 2001<br>
-&gt; +From: Ralph Boehme &lt;slow@samba.org&gt;<br>
-&gt; +Date: Tue, 1 Aug 2023 13:04:36 +0200<br>
-&gt; +Subject: [PATCH] CVE-2023-4091: smbd: use open_access_mask for<br>
-&gt; access check in<br>
-&gt; +&nbsp; open_file()<br>
-&gt; +<br>
-&gt; +If the client requested FILE_OVERWRITE[_IF], we're implicitly adding<=
-br>
-&gt; +FILE_WRITE_DATA to the open_access_mask in open_file_ntcreate(), but<=
-br>
-&gt; for the<br>
-&gt; +access check we're using access_mask which doesn't contain the<br>
-&gt; additional<br>
-&gt; +right, which means we can end up truncating a file for which the<br>
-&gt; user has<br>
-&gt; +only read-only access via an SD.<br>
-&gt; +<br>
-&gt; +BUG: <a href=3D"https://bugzilla.samba.org/show_bug.cgi?id=3D15439" i=
-d=3D"OWAd8ce1971-c2ff-1597-dd9d-50f94d32b676" class=3D"OWAAutoLink" data-au=
-th=3D"NotApplicable" data-loopstyle=3D"linkonly">
-https://bugzilla.samba.org/show_bug.cgi?id=3D15439</a><br>
-&gt; +<br>
-&gt; +Signed-off-by: Ralph Boehme &lt;slow@samba.org&gt;<br>
-&gt; +<br>
-&gt; +CVE: CVE-2023-4091<br>
-&gt; +<br>
-&gt; +Upstream-Status: Backport<br>
-&gt; [https://github.com/samba-team/samba/commit/8b26f634372f11edcbea33dfd<=
-br>
-&gt; 68a3d57889dfcc5]<br>
-<br>
-The changes in this patch are different from what is being patched here<br>
-in this commit. Different function call so do these changes apply to<br>
-4.14 as well? And, it seems you have missed one function call as well.<br>
-<br>
-Thanks,<br>
-<br>
-Anuj<br>
-<br>
-&gt; +<br>
-&gt; +Signed-off-by: Archana Polampalli &lt;archana.polampalli@windriver.co=
-m&gt;<br>
-&gt; +---<br>
-&gt; + source3/smbd/open.c | 2 +-<br>
-&gt; + 1 file changed, 1 insertion(+), 1 deletion(-)<br>
-&gt; +<br>
-&gt; +diff --git a/source3/smbd/open.c b/source3/smbd/open.c<br>
-&gt; +index 2c3bf9e..2b19aae 100644<br>
-&gt; +--- a/source3/smbd/open.c<br>
-&gt; ++++ b/source3/smbd/open.c<br>
-&gt; +@@ -1402,7 +1402,7 @@ static NTSTATUS open_file(files_struct *fsp,<br=
->
-&gt; +&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; conn-&gt;cwd_fsp,=
-<br>
-&gt; +&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; smb_fname,<br>
-&gt; +&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; false,<br>
-&gt; +-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; access_mask);<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; open_access_mask);<br>
-&gt; +<br>
-&gt; +&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (!NT_STATUS_IS_OK(status)) {<br>
-&gt; +&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp; DEBUG(10, (&quot;open_file: &quot;<br>
-&gt; +--<br>
-&gt; +2.40.0<br>
-&gt; diff --git a/meta-networking/recipes-connectivity/samba/samba/CVE-<br>
-&gt; 2023-4091-0002.patch b/meta-networking/recipes-<br>
-&gt; connectivity/samba/samba/CVE-2023-4091-0002.patch<br>
-&gt; new file mode 100644<br>
-&gt; index 000000000..908ab85ba<br>
-&gt; --- /dev/null<br>
-&gt; +++ b/meta-networking/recipes-connectivity/samba/samba/CVE-2023-4091-<=
-br>
-&gt; 0002.patch<br>
-&gt; @@ -0,0 +1,193 @@<br>
-&gt; +From b08a60160e6ab8d982d31844bcbf7ab67ff3a8de Mon Sep 17 00:00:00<br>
-&gt; 2001<br>
-&gt; +From: Ralph Boehme &lt;slow@samba.org&gt;<br>
-&gt; +Date: Tue, 1 Aug 2023 12:30:00 +0200<br>
-&gt; +Subject: [PATCH 2/2] CVE-2023-4091: smbtorture: test overwrite<br>
-&gt; dispositions on<br>
-&gt; + read-only file<br>
-&gt; +<br>
-&gt; +BUG: <a href=3D"https://bugzilla.samba.org/show_bug.cgi?id=3D15439" i=
-d=3D"OWAeb9a5e02-3c3f-b7fb-ef61-11213547ba75" class=3D"OWAAutoLink" data-au=
-th=3D"NotApplicable" data-loopstyle=3D"linkonly">
-https://bugzilla.samba.org/show_bug.cgi?id=3D15439</a><br>
-&gt; +<br>
-&gt; +Signed-off-by: Ralph Boehme &lt;slow@samba.org&gt;<br>
-&gt; +<br>
-&gt; +CVE: CVE-2023-4091<br>
-&gt; +<br>
-&gt; +Upstream-Status: Backport<br>
-&gt; [https://github.com/samba-team/samba/commit/b08a60160e6ab8d982d31844b<=
-br>
-&gt; cbf7ab67ff3a8de]<br>
-&gt; +<br>
-&gt; +Signed-off-by: Archana Polampalli &lt;archana.polampalli@windriver.co=
-m&gt;<br>
-&gt; +---<br>
-&gt; + selftest/knownfail.d/samba3.smb2.acls |&nbsp;&nbsp; 1 +<br>
-&gt; + source4/torture/smb2/acls.c&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp; | 145<br>
-&gt; ++++++++++++++++++++++++++<br>
-&gt; + 2 files changed, 146 insertions(+)<br>
-&gt; + create mode 100644 selftest/knownfail.d/samba3.smb2.acls<br>
-&gt; +<br>
-&gt; +diff --git a/selftest/knownfail.d/samba3.smb2.acls<br>
-&gt; b/selftest/knownfail.d/samba3.smb2.acls<br>
-&gt; +new file mode 100644<br>
-&gt; +index 0000000..18df260<br>
-&gt; +--- /dev/null<br>
-&gt; ++++ b/selftest/knownfail.d/samba3.smb2.acls<br>
-&gt; +@@ -0,0 +1 @@<br>
-&gt; ++^samba3.smb2.acls.OVERWRITE_READ_ONLY_FILE<br>
-&gt; +diff --git a/source4/torture/smb2/acls.c<br>
-&gt; b/source4/torture/smb2/acls.c<br>
-&gt; +index 4f4538b..d26caeb 100644<br>
-&gt; +--- a/source4/torture/smb2/acls.c<br>
-&gt; ++++ b/source4/torture/smb2/acls.c<br>
-&gt; +@@ -3023,6 +3023,149 @@ done:<br>
-&gt; +&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return ret;<br>
-&gt; + }<br>
-&gt; +<br>
-&gt; ++static bool test_overwrite_read_only_file(struct torture_context<br>
-&gt; *tctx,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp; struct smb2_tree *tree)<br>
-&gt; ++{<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NTSTATUS status;<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; struct smb2_create c;<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; const char *fname =3D BASEDIR<br>
-&gt; &quot;<a href=3D"file://\\test_overwrite_read_only_file.txt" id=3D"OWA=
-f4b8a7a1-8f9b-cb5c-a423-7dbabe042811" class=3D"OWAAutoLink" data-auth=3D"No=
-tApplicable" data-loopstyle=3D"linkonly">\\test_overwrite_read_only_file.tx=
-t</a>&quot;;<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; struct smb2_handle handle =3D {{0}};<=
-br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; union smb_fileinfo q;<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; union smb_setfileinfo set;<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; struct security_descriptor *sd =3D NU=
-LL, *sd_orig =3D NULL;<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; const char *owner_sid =3D NULL;<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int i;<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bool ret =3D true;<br>
-&gt; ++<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; struct tcase {<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; int disposition;<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; const char *disposition_string;<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; NTSTATUS expected_status;<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } tcases[] =3D {<br>
-&gt; ++#define TCASE(d, s) {&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;\<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; .disposition =3D d,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; .disposition_string =3D #d,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; =
-\<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; .expected_status =3D s,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp; \<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; TCASE(NTCREATEX_DISP_OPEN, NT_STATUS_OK),<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; TCASE(NTCREATEX_DISP_SUPERSEDE,<br>
-&gt; NT_STATUS_ACCESS_DENIED),<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; TCASE(NTCREATEX_DISP_OVERWRITE,<br>
-&gt; NT_STATUS_ACCESS_DENIED),<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; TCASE(NTCREATEX_DISP_OVERWRITE_IF,<br>
-&gt; NT_STATUS_ACCESS_DENIED),<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; };<br>
-&gt; ++#undef TCASE<br>
-&gt; ++<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ret =3D smb2_util_setup_dir(tctx, tre=
-e, BASEDIR);<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; torture_assert_goto(tctx, ret, ret, d=
-one,<br>
-&gt; &quot;smb2_util_setup_dir not ok&quot;);<br>
-&gt; ++<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c =3D (struct smb2_create) {<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; .in.desired_access =3D SEC_STD_READ_CONTROL |<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SEC_STD_WRITE_DA=
-C |<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SEC_STD_WRITE_OW=
-NER,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; .in.file_attributes =3D FILE_ATTRIBUTE_NORMAL,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; .in.share_access =3D NTCREATEX_SHARE_ACCESS_READ |<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NTCREATEX_SHARE_=
-ACCESS_WRITE,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; .in.create_disposition =3D NTCREATEX_DISP_OPEN_IF,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; .in.impersonation_level =3D<br>
-&gt; NTCREATEX_IMPERSONATION_ANONYMOUS,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; .in.fname =3D fname,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; };<br>
-&gt; ++<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; status =3D smb2_create(tree, tctx, &a=
-mp;c);<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; torture_assert_ntstatus_ok_goto(tctx,=
- status, ret, done,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp; &quot;smb2_create failed\n&quot;);<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; handle =3D c.out.file.handle;<br>
-&gt; ++<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; torture_comment(tctx, &quot;get the o=
-riginal sd\n&quot;);<br>
-&gt; ++<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ZERO_STRUCT(q);<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; q.query_secdesc.level =3D RAW_FILEINF=
-O_SEC_DESC;<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; q.query_secdesc.in.file.handle =3D ha=
-ndle;<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; q.query_secdesc.in.secinfo_flags =3D =
-SECINFO_DACL |<br>
-&gt; SECINFO_OWNER;<br>
-&gt; ++<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; status =3D smb2_getinfo_file(tree, tc=
-tx, &amp;q);<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; torture_assert_ntstatus_ok_goto(tctx,=
- status, ret, done,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp; &quot;smb2_getinfo_file<br>
-&gt; failed\n&quot;);<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sd_orig =3D q.query_secdesc.out.sd;<b=
-r>
-&gt; ++<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; owner_sid =3D dom_sid_string(tctx, sd=
-_orig-&gt;owner_sid);<br>
-&gt; ++<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sd =3D security_descriptor_dacl_creat=
-e(tctx,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp; 0, NULL, NULL,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp; owner_sid,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp; SEC_ACE_TYPE_ACCESS_ALLOWED,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp; SEC_FILE_READ_DATA,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp; 0,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp; NULL);<br>
-&gt; ++<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ZERO_STRUCT(set);<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; set.set_secdesc.level =3D RAW_SFILEIN=
-FO_SEC_DESC;<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; set.set_secdesc.in.file.handle =3D ha=
-ndle;<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; set.set_secdesc.in.secinfo_flags =3D =
-SECINFO_DACL;<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; set.set_secdesc.in.sd =3D sd;<br>
-&gt; ++<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; status =3D smb2_setinfo_file(tree, &a=
-mp;set);<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; torture_assert_ntstatus_ok_goto(tctx,=
- status, ret, done,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp; &quot;smb2_setinfo_file<br>
-&gt; failed\n&quot;);<br>
-&gt; ++<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; smb2_util_close(tree, handle);<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ZERO_STRUCT(handle);<br>
-&gt; ++<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (i =3D 0; i &lt; ARRAY_SIZE(tcase=
-s); i++) {<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; torture_comment(tctx, &quot;Verify open with %s<br>
-&gt; dispostion\n&quot;,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; tcases[i].disposition_string);<br>
-&gt; ++<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; c =3D (struct smb2_create) {<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .in.create_dispo=
-sition =3D<br>
-&gt; tcases[i].disposition,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .in.desired_acce=
-ss =3D SEC_FILE_READ_DATA,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .in.file_attribu=
-tes =3D FILE_ATTRIBUTE_NORMAL,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .in.share_access=
- =3D<br>
-&gt; NTCREATEX_SHARE_ACCESS_MASK,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .in.impersonatio=
-n_level =3D<br>
-&gt; NTCREATEX_IMPERSONATION_ANONYMOUS,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .in.fname =3D fn=
-ame,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; };<br>
-&gt; ++<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; status =3D smb2_create(tree, tctx, &amp;c);<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; smb2_util_close(tree, c.out.file.handle);<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; torture_assert_ntstatus_equal_goto(<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; tctx, status, tc=
-ases[i].expected_status, ret,<br>
-&gt; done,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;smb2_creat=
-e failed\n&quot;);<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; };<br>
-&gt; ++<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; torture_comment(tctx, &quot;put back =
-original sd\n&quot;);<br>
-&gt; ++<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c =3D (struct smb2_create) {<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; .in.desired_access =3D SEC_STD_WRITE_DAC,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; .in.file_attributes =3D FILE_ATTRIBUTE_NORMAL,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; .in.share_access =3D NTCREATEX_SHARE_ACCESS_MASK,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; .in.create_disposition =3D NTCREATEX_DISP_OPEN_IF,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; .in.impersonation_level =3D<br>
-&gt; NTCREATEX_IMPERSONATION_ANONYMOUS,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp; .in.fname =3D fname,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; };<br>
-&gt; ++<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; status =3D smb2_create(tree, tctx, &a=
-mp;c);<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; torture_assert_ntstatus_ok_goto(tctx,=
- status, ret, done,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp; &quot;smb2_create failed\n&quot;);<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; handle =3D c.out.file.handle;<br>
-&gt; ++<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ZERO_STRUCT(set);<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; set.set_secdesc.level =3D RAW_SFILEIN=
-FO_SEC_DESC;<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; set.set_secdesc.in.file.handle =3D ha=
-ndle;<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; set.set_secdesc.in.secinfo_flags =3D =
-SECINFO_DACL;<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; set.set_secdesc.in.sd =3D sd_orig;<br=
->
-&gt; ++<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; status =3D smb2_setinfo_file(tree, &a=
-mp;set);<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; torture_assert_ntstatus_ok_goto(tctx,=
- status, ret, done,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp; &quot;smb2_setinfo_file<br>
-&gt; failed\n&quot;);<br>
-&gt; ++<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; smb2_util_close(tree, handle);<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ZERO_STRUCT(handle);<br>
-&gt; ++<br>
-&gt; ++done:<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; smb2_util_close(tree, handle);<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; smb2_util_unlink(tree, fname);<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; smb2_deltree(tree, BASEDIR);<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return ret;<br>
-&gt; ++}<br>
-&gt; ++<br>
-&gt; ++<br>
-&gt; + /*<br>
-&gt; +&nbsp;&nbsp;&nbsp; basic testing of SMB2 ACLs<br>
-&gt; + */<br>
-&gt; +@@ -3051,6 +3194,8 @@ struct torture_suite<br>
-&gt; *torture_smb2_acls_init(TALLOC_CTX *ctx)<br>
-&gt; +&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; test_deny1)=
-;<br>
-&gt; +&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; torture_suite_add_1smb2_test(sui=
-te, &quot;MXAC-NOT-GRANTED&quot;,<br>
-&gt; +&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; test_mxac_n=
-ot_granted);<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; torture_suite_add_1smb2_test(suite,<b=
-r>
-&gt; &quot;OVERWRITE_READ_ONLY_FILE&quot;,<br>
-&gt; ++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; test_overwrite_r=
-ead_only_file);<br>
-&gt; +<br>
-&gt; +&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; suite-&gt;description =3D talloc=
-_strdup(suite, &quot;SMB2-ACLS tests&quot;);<br>
-&gt; +<br>
-&gt; +--<br>
-&gt; +2.40.0<br>
-&gt; diff --git a/meta-networking/recipes-<br>
-&gt; connectivity/samba/samba_4.14.14.bb b/meta-networking/recipes-<br>
-&gt; connectivity/samba/samba_4.14.14.bb<br>
-&gt; index aa27592cb..dcb4d8137 100644<br>
-&gt; --- a/meta-networking/recipes-connectivity/samba/samba_4.14.14.bb<br>
-&gt; +++ b/meta-networking/recipes-connectivity/samba/samba_4.14.14.bb<br>
-&gt; @@ -49,6 +49,8 @@ SRC_URI =3D &quot;${SAMBA_MIRROR}/stable/samba-<br>
-&gt; ${PV}.tar.gz \<br>
-&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-; <a href=3D"file://CVE-2023-34968_0009.patch" id=3D"OWAc39142b4-3218-cd1a-=
-5e2f-6f0199d5531e" class=3D"OWAAutoLink" data-auth=3D"NotApplicable" data-l=
-oopstyle=3D"linkonly">
-file://CVE-2023-34968_0009.patch</a>&nbsp;\<br>
-&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-; <a href=3D"file://CVE-2023-34968_0010.patch" id=3D"OWAfc492423-713c-a49e-=
-a1ac-edf58d94284e" class=3D"OWAAutoLink" data-auth=3D"NotApplicable" data-l=
-oopstyle=3D"linkonly">
-file://CVE-2023-34968_0010.patch</a>&nbsp;\<br>
-&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-; <a href=3D"file://CVE-2023-34968_0011.patch" id=3D"OWAdd461c65-07da-d5f5-=
-12eb-b5429d9a57f2" class=3D"OWAAutoLink" data-auth=3D"NotApplicable" data-l=
-oopstyle=3D"linkonly">
-file://CVE-2023-34968_0011.patch</a>&nbsp;\<br>
-&gt; +&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href=
-=3D"file://CVE-2023-4091-0001.patch" id=3D"OWA06ef5b65-5e8c-3856-6050-e2cc1=
-9c6984c" class=3D"OWAAutoLink" data-auth=3D"NotApplicable" data-loopstyle=
-=3D"linkonly">
-file://CVE-2023-4091-0001.patch</a>&nbsp;\<br>
-&gt; +&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href=
-=3D"file://CVE-2023-4091-0002.patch" id=3D"OWAb87ad223-c62d-f33f-364d-45366=
-c46a0cd" class=3D"OWAAutoLink" data-auth=3D"NotApplicable" data-loopstyle=
-=3D"linkonly">
-file://CVE-2023-4091-0002.patch</a>&nbsp;\<br>
-&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-; &quot;<br>
-&gt;<br>
-&gt;&nbsp; SRC_URI:append:libc-musl =3D &quot; \<br>
-&gt;<br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt; Links: You receive all messages sent to this group.<br>
-&gt; View/Reply Online (#106987):<br>
-&gt; <a href=3D"https://lists.openembedded.org/g/openembedded-devel/message=
-/106987" id=3D"OWAcdce99ff-5565-bd52-9b02-39e52ea7458e" class=3D"OWAAutoLin=
-k" data-auth=3D"NotApplicable" data-loopstyle=3D"linkonly">
-https://lists.openembedded.org/g/openembedded-devel/message/106987</a><br>
-&gt; Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/10274394=
-8/3616702" id=3D"OWAcfe32cf2-7f8c-70dd-c820-03c82d896263" class=3D"OWAAutoL=
-ink" data-auth=3D"NotApplicable" data-loopstyle=3D"linkonly">
-https://lists.openembedded.org/mt/102743948/3616702</a><br>
-&gt; Group Owner: openembedded-devel+owner@lists.openembedded.org<br>
-&gt; Unsubscribe:<br>
-&gt; <a href=3D"https://lists.openembedded.org/g/openembedded-devel/unsub" =
-id=3D"OWA1fe0ca32-5247-846c-fb2c-c0dda8a03cf2" class=3D"OWAAutoLink" data-a=
-uth=3D"NotApplicable" data-loopstyle=3D"linkonly">
-https://lists.openembedded.org/g/openembedded-devel/unsub</a>&nbsp;[<br>
-&gt; anuj.mittal@intel.com]<br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt;<br>
-<br>
-</span></div>
-</body>
-</html>
 
---_000_MW4PR11MB5822FD2504A1F5D34E19DFA984BAAMW4PR11MB5822namp_--
+Managing Directors:=A0
+Dr.-Ing. Hagen Woesner, Andreas=20
+K=F6psel
+
+
+Commercial register:=A0
+Amtsgericht Berlin-Charlottenburg HRB 141569=20
+B
+VAT ID No:=A0DE283257294
+
 
