@@ -2,199 +2,341 @@ Return-Path: <archana.polampalli@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7EC40C61D92
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7DF4FC072A2
 	for <webhook@archiver.kernel.org>; Wed, 22 Nov 2023 04:55:45 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.12893.1700628942529146762
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.12892.1700628941893658006
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 21 Nov 2023 20:55:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=PnFTeYlA;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=9690644334=archana.polampalli@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 3AM4rnlb015805
-	for <openembedded-devel@lists.openembedded.org>; Tue, 21 Nov 2023 20:55:42 -0800
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=MYMQ73WU;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=9690644334=archana.polampalli@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 3AM4swqI002507
+	for <openembedded-devel@lists.openembedded.org>; Wed, 22 Nov 2023 04:55:41 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding:content-type; s=
-	PPS06212021; bh=mrhG+EbeGU6Kfrr3XqA4mR+EiWSoSTTwV3TeWgQCQ44=; b=
-	PnFTeYlA+Vi76NGHAwQbah+u9ij1ZozOKghCIzWxLlX4IElan+cGIJpb35+y4k7d
-	i6LSH2tc2gPHh/QxyJhCEXs4GF97VxAx921aj2F0qaCeFFwQvfTwJ01ADxM5GIrA
-	Q0fSoeILrjmloprMrqrqDTZC7G1B7FirnWkPRt0V3XeLJot80nf6jO21BPmLfmW8
-	m56clHFBtTUAhLSAAhn2bgpC+9dFUUzu6eawtkKGzYn6rsxqvNft/p+ckKSGAIHZ
-	bW5b5RAA4/HoEjVFrjDHueTfz1fcANebL+llArrrxq8Q3TfRX9Wp81frV1pUAWa8
-	ynTDfu1Htoff4uyBi6ppZA==
+	 h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=Aqe29
+	6WW8ufOM6OrjhyitM0S9bNfsBao5kuI1US/PcI=; b=MYMQ73WUNvPVW/aXOwDwx
+	BiwWVDbZFs0oaTYBMkS5K5CSW8VRaCYUVwj0mvHjirn8/h6kQaQHTQNft6HQU/PW
+	9OKBD1TzJUIH9FhUB5uoTqZP3vpMDfheH/o7mPYVvD4507hJe1zd5n/o+ogp1Ba5
+	9g2Q9Lh4Q37P6p7Q5ufX09KEOFSRFwJZLA32JrRvF0JZe0A+TUjV+pPhjBwCFC96
+	ETapcd5qHeQ6JxLDA8lVbH3/eau0G9s96lzszy9zkCl0Wx9aB2MZzfOsL/ejuufR
+	gDcitZvBlbODJTugmPU4aABwvgGh02rtF9xQqlbTZ7KnRVLGwf1DPVFEQK1X+wD6
+	A==
 Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3uese430y1-1
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3uejfwu5qe-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 21 Nov 2023 20:55:41 -0800 (PST)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 22 Nov 2023 04:55:40 +0000 (GMT)
 Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.34; Tue, 21 Nov 2023 20:55:46 -0800
+ 15.1.2507.34; Tue, 21 Nov 2023 20:55:44 -0800
 From: <archana.polampalli@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-networking][kirkstone][PATCH 2/2] samba: fix CVE-2023-42669
-Date: Wed, 22 Nov 2023 04:55:24 +0000
-Message-ID: <20231122045524.53871-2-archana.polampalli@windriver.com>
+Subject: [oe][meta-networking][kirkstone][PATCH 1/2] samba: fix CVE-2023-4091
+Date: Wed, 22 Nov 2023 04:55:23 +0000
+Message-ID: <20231122045524.53871-1-archana.polampalli@windriver.com>
 X-Mailer: git-send-email 2.40.0
-In-Reply-To: <20231122045524.53871-1-archana.polampalli@windriver.com>
-References: <20231122045524.53871-1-archana.polampalli@windriver.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [147.11.136.210]
 X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
  ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-GUID: o8m2tqRQiRPGToKGS1xEwCXJlZqXrwVc
-X-Proofpoint-ORIG-GUID: o8m2tqRQiRPGToKGS1xEwCXJlZqXrwVc
+X-Proofpoint-GUID: ah25wB37mO89i8lEEoKd6auk7EfUlWAL
+X-Proofpoint-ORIG-GUID: ah25wB37mO89i8lEEoKd6auk7EfUlWAL
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2023-11-16_25,2023-11-16_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0
- malwarescore=0 phishscore=0 mlxlogscore=999 suspectscore=0
- lowpriorityscore=0 mlxscore=0 spamscore=0 clxscore=1015 adultscore=0
- bulkscore=0 priorityscore=1501 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.19.0-2311060001 definitions=main-2311220035
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 mlxlogscore=999
+ bulkscore=0 lowpriorityscore=0 clxscore=1011 mlxscore=0 impostorscore=0
+ priorityscore=1501 adultscore=0 phishscore=0 malwarescore=0 suspectscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2311060001
+ definitions=main-2311220034
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 22 Nov 2023 04:55:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106988
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106987
 
 From: Archana Polampalli <archana.polampalli@windriver.com>
 
-A vulnerability was found in Samba's "rpcecho" development server, a non-Windows
-RPC server used to test Samba's DCE/RPC stack elements. This vulnerability stems
-from an RPC function that can be blocked indefinitely. The issue arises because
-the "rpcecho" service operates with only one worker in the main RPC task, allowing
-calls to the "rpcecho" server to be blocked for a specified time, causing service
-disruptions. This disruption is triggered by a "sleep()" call in the "dcesrv_echo_TestSleep()"
-function under specific conditions. Authenticated users or attackers can exploit this
-vulnerability to make calls to the "rpcecho" server, requesting it to block for a
-specified duration, effectively disrupting most services and leading to a complete
-denial of service on the AD DC. The DoS affects all other services as "rpcecho" runs
-in the main RPC task.
+A vulnerability was discovered in Samba, where the flaw allows SMB clients to
+truncate files, even with read-only permissions when the Samba VFS module
+"acl_xattr" is configured with "acl_xattr:ignore system acls = yes". The SMB
+protocol allows opening files when the client requests read-only access but
+then implicitly truncates the opened file to 0 bytes if the client specifies
+a separate OVERWRITE create disposition request. The issue arises in configurations
+that bypass kernel file system permissions checks, relying solely on Samba's permissions.
 
 References:
-https://nvd.nist.gov/vuln/detail/CVE-2023-42669
+https://nvd.nist.gov/vuln/detail/CVE-2023-4091
 
 Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
 ---
- .../samba/samba/CVE-2023-42669.patch          | 94 +++++++++++++++++++
- .../samba/samba_4.14.14.bb                    |  1 +
- 2 files changed, 95 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/samba/samba/CVE-2023-42669.patch
+ .../samba/samba/CVE-2023-4091-0001.patch      |  40 ++++
+ .../samba/samba/CVE-2023-4091-0002.patch      | 193 ++++++++++++++++++
+ .../samba/samba_4.14.14.bb                    |   2 +
+ 3 files changed, 235 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/samba/samba/CVE-2023-4091-0001.patch
+ create mode 100644 meta-networking/recipes-connectivity/samba/samba/CVE-2023-4091-0002.patch
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba/CVE-2023-42669.patch b/meta-networking/recipes-connectivity/samba/samba/CVE-2023-42669.patch
+diff --git a/meta-networking/recipes-connectivity/samba/samba/CVE-2023-4091-0001.patch b/meta-networking/recipes-connectivity/samba/samba/CVE-2023-4091-0001.patch
 new file mode 100644
-index 000000000..dfa6aeb02
+index 000000000..ff80e9377
 --- /dev/null
-+++ b/meta-networking/recipes-connectivity/samba/samba/CVE-2023-42669.patch
-@@ -0,0 +1,94 @@
-+From 9989568b20c8f804140c22f51548d766a18ed887 Mon Sep 17 00:00:00 2001
-+From: Andrew Bartlett <abartlet@samba.org>
-+Date: Tue, 12 Sep 2023 18:59:44 +1200
-+Subject: [PATCH] CVE-2023-42669 s4-rpc_server: Disable rpcecho server by
-+ default
++++ b/meta-networking/recipes-connectivity/samba/samba/CVE-2023-4091-0001.patch
+@@ -0,0 +1,40 @@
++From 8b26f634372f11edcbea33dfd68a3d57889dfcc5 Mon Sep 17 00:00:00 2001
++From: Ralph Boehme <slow@samba.org>
++Date: Tue, 1 Aug 2023 13:04:36 +0200
++Subject: [PATCH] CVE-2023-4091: smbd: use open_access_mask for access check in
++  open_file()
 +
-+The rpcecho server is useful in development and testing, but should never
-+have been allowed into production, as it includes the facility to
-+do a blocking sleep() in the single-threaded rpc worker.
++If the client requested FILE_OVERWRITE[_IF], we're implicitly adding
++FILE_WRITE_DATA to the open_access_mask in open_file_ntcreate(), but for the
++access check we're using access_mask which doesn't contain the additional
++right, which means we can end up truncating a file for which the user has
++only read-only access via an SD.
 +
-+BUG: https://bugzilla.samba.org/show_bug.cgi?id=15474
++BUG: https://bugzilla.samba.org/show_bug.cgi?id=15439
 +
-+Signed-off-by: Andrew Bartlett <abartlet@samba.org>
++Signed-off-by: Ralph Boehme <slow@samba.org>
 +
-+CVE: CVE-2023-42669
++CVE: CVE-2023-4091
 +
-+Upstream-Status: Backport [https://github.com/samba-team/samba/commit/9989568b20c8f804140c22f51548d766a18ed887]
++Upstream-Status: Backport [https://github.com/samba-team/samba/commit/8b26f634372f11edcbea33dfd68a3d57889dfcc5]
 +
 +Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
 +---
-+ docs-xml/smbdotconf/protocol/dcerpcendpointservers.xml | 2 +-
-+ lib/param/loadparm.c                                   | 2 +-
-+ selftest/target/Samba4.pm                              | 2 +-
-+ source3/param/loadparm.c                               | 2 +-
-+ source4/rpc_server/wscript_build                       | 3 ++-
-+ 5 files changed, 6 insertions(+), 5 deletions(-)
++ source3/smbd/open.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/docs-xml/smbdotconf/protocol/dcerpcendpointservers.xml b/docs-xml/smbdotconf/protocol/dcerpcendpointservers.xml
-+index 8a217cc..c6642b7 100644
-+--- a/docs-xml/smbdotconf/protocol/dcerpcendpointservers.xml
-++++ b/docs-xml/smbdotconf/protocol/dcerpcendpointservers.xml
-+@@ -6,6 +6,6 @@
-+	<para>Specifies which DCE/RPC endpoint servers should be run.</para>
-+ </description>
++diff --git a/source3/smbd/open.c b/source3/smbd/open.c
++index 2c3bf9e..2b19aae 100644
++--- a/source3/smbd/open.c
+++++ b/source3/smbd/open.c
++@@ -1402,7 +1402,7 @@ static NTSTATUS open_file(files_struct *fsp,
++						conn->cwd_fsp,
++						smb_fname,
++						false,
++-						access_mask);
+++						open_access_mask);
 +
-+-<value type="default">epmapper, wkssvc, rpcecho, samr, netlogon, lsarpc, drsuapi, dssetup, unixinfo, browser, eventlog6, backupkey, dnsserver</value>
-++<value type="default">epmapper, wkssvc, samr, netlogon, lsarpc, drsuapi, dssetup, unixinfo, browser, eventlog6, backupkey, dnsserver</value>
-+ <value type="example">rpcecho</value>
-+ </samba:parameter>
-+diff --git a/lib/param/loadparm.c b/lib/param/loadparm.c
-+index eedfa00..75687f5 100644
-+--- a/lib/param/loadparm.c
-++++ b/lib/param/loadparm.c
-+@@ -2717,7 +2717,7 @@ struct loadparm_context *loadparm_init(TALLOC_CTX *mem_ctx)
-+	lpcfg_do_global_parameter(lp_ctx, "ntvfs handler", "unixuid default");
-+	lpcfg_do_global_parameter(lp_ctx, "max connections", "0");
++				if (!NT_STATUS_IS_OK(status)) {
++					DEBUG(10, ("open_file: "
++--
++2.40.0
+diff --git a/meta-networking/recipes-connectivity/samba/samba/CVE-2023-4091-0002.patch b/meta-networking/recipes-connectivity/samba/samba/CVE-2023-4091-0002.patch
+new file mode 100644
+index 000000000..908ab85ba
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/samba/samba/CVE-2023-4091-0002.patch
+@@ -0,0 +1,193 @@
++From b08a60160e6ab8d982d31844bcbf7ab67ff3a8de Mon Sep 17 00:00:00 2001
++From: Ralph Boehme <slow@samba.org>
++Date: Tue, 1 Aug 2023 12:30:00 +0200
++Subject: [PATCH 2/2] CVE-2023-4091: smbtorture: test overwrite dispositions on
++ read-only file
 +
-+-	lpcfg_do_global_parameter(lp_ctx, "dcerpc endpoint servers", "epmapper wkssvc rpcecho samr netlogon lsarpc drsuapi dssetup unixinfo browser eventlog6 backupkey dnsserver");
-++	lpcfg_do_global_parameter(lp_ctx, "dcerpc endpoint servers", "epmapper wkssvc  samr netlogon lsarpc drsuapi dssetup unixinfo browser eventlog6 backupkey dnsserver");
-+	lpcfg_do_global_parameter(lp_ctx, "server services", "s3fs rpc nbt wrepl ldap cldap kdc drepl winbindd ntp_signd kcc dnsupdate dns");
-+	lpcfg_do_global_parameter(lp_ctx, "kccsrv:samba_kcc", "true");
-+	/* the winbind method for domain controllers is for both RODC
-+diff --git a/selftest/target/Samba4.pm b/selftest/target/Samba4.pm
-+index 651faa7..c7b33d2 100755
-+--- a/selftest/target/Samba4.pm
-++++ b/selftest/target/Samba4.pm
-+@@ -773,7 +773,7 @@ sub provision_raw_step1($$)
-+	wins support = yes
-+	server role = $ctx->{server_role}
-+	server services = +echo $services
-+-        dcerpc endpoint servers = +winreg +srvsvc
-++        dcerpc endpoint servers = +winreg +srvsvc +rpcecho
-+	notify:inotify = false
-+	ldb:nosync = true
-+	ldap server require strong auth = yes
-+diff --git a/source3/param/loadparm.c b/source3/param/loadparm.c
-+index 8bcd35f..a99ab35 100644
-+--- a/source3/param/loadparm.c
-++++ b/source3/param/loadparm.c
-+@@ -879,7 +879,7 @@ static void init_globals(struct loadparm_context *lp_ctx, bool reinit_globals)
++BUG: https://bugzilla.samba.org/show_bug.cgi?id=15439
 +
-+	Globals.server_services = str_list_make_v3_const(NULL, "s3fs rpc nbt wrepl ldap cldap kdc drepl winbindd ntp_signd kcc dnsupdate dns", NULL);
++Signed-off-by: Ralph Boehme <slow@samba.org>
 +
-+-	Globals.dcerpc_endpoint_servers = str_list_make_v3_const(NULL, "epmapper wkssvc rpcecho samr netlogon lsarpc drsuapi dssetup unixinfo browser eventlog6 backupkey dnsserver", NULL);
-++	Globals.dcerpc_endpoint_servers = str_list_make_v3_const(NULL, "epmapper wkssvc  samr netlogon lsarpc drsuapi dssetup unixinfo browser eventlog6 backupkey dnsserver", NULL);
++CVE: CVE-2023-4091
 +
-+	Globals.tls_enabled = true;
-+	Globals.tls_verify_peer = TLS_VERIFY_PEER_AS_STRICT_AS_POSSIBLE;
-+diff --git a/source4/rpc_server/wscript_build b/source4/rpc_server/wscript_build
-+index 8c75672..a2520da 100644
-+--- a/source4/rpc_server/wscript_build
-++++ b/source4/rpc_server/wscript_build
-+@@ -29,7 +29,8 @@ bld.SAMBA_MODULE('dcerpc_rpcecho',
-+	source='echo/rpc_echo.c',
-+	subsystem='dcerpc_server',
-+	init_function='dcerpc_server_rpcecho_init',
-+-	deps='ndr-standard events'
-++    deps='ndr-standard events',
-++    enabled=bld.CONFIG_GET('ENABLE_SELFTEST')
-+	)
++Upstream-Status: Backport [https://github.com/samba-team/samba/commit/b08a60160e6ab8d982d31844bcbf7ab67ff3a8de]
 +
++Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
++---
++ selftest/knownfail.d/samba3.smb2.acls |   1 +
++ source4/torture/smb2/acls.c           | 145 ++++++++++++++++++++++++++
++ 2 files changed, 146 insertions(+)
++ create mode 100644 selftest/knownfail.d/samba3.smb2.acls
++
++diff --git a/selftest/knownfail.d/samba3.smb2.acls b/selftest/knownfail.d/samba3.smb2.acls
++new file mode 100644
++index 0000000..18df260
++--- /dev/null
+++++ b/selftest/knownfail.d/samba3.smb2.acls
++@@ -0,0 +1 @@
+++^samba3.smb2.acls.OVERWRITE_READ_ONLY_FILE
++diff --git a/source4/torture/smb2/acls.c b/source4/torture/smb2/acls.c
++index 4f4538b..d26caeb 100644
++--- a/source4/torture/smb2/acls.c
+++++ b/source4/torture/smb2/acls.c
++@@ -3023,6 +3023,149 @@ done:
++	return ret;
++ }
++
+++static bool test_overwrite_read_only_file(struct torture_context *tctx,
+++					  struct smb2_tree *tree)
+++{
+++	NTSTATUS status;
+++	struct smb2_create c;
+++	const char *fname = BASEDIR "\\test_overwrite_read_only_file.txt";
+++	struct smb2_handle handle = {{0}};
+++	union smb_fileinfo q;
+++	union smb_setfileinfo set;
+++	struct security_descriptor *sd = NULL, *sd_orig = NULL;
+++	const char *owner_sid = NULL;
+++	int i;
+++	bool ret = true;
+++
+++	struct tcase {
+++		int disposition;
+++		const char *disposition_string;
+++		NTSTATUS expected_status;
+++	} tcases[] = {
+++#define TCASE(d, s) {				\
+++		.disposition = d,		\
+++		.disposition_string = #d,	\
+++		.expected_status = s,		\
+++	}
+++		TCASE(NTCREATEX_DISP_OPEN, NT_STATUS_OK),
+++		TCASE(NTCREATEX_DISP_SUPERSEDE, NT_STATUS_ACCESS_DENIED),
+++		TCASE(NTCREATEX_DISP_OVERWRITE, NT_STATUS_ACCESS_DENIED),
+++		TCASE(NTCREATEX_DISP_OVERWRITE_IF, NT_STATUS_ACCESS_DENIED),
+++	};
+++#undef TCASE
+++
+++	ret = smb2_util_setup_dir(tctx, tree, BASEDIR);
+++	torture_assert_goto(tctx, ret, ret, done, "smb2_util_setup_dir not ok");
+++
+++	c = (struct smb2_create) {
+++		.in.desired_access = SEC_STD_READ_CONTROL |
+++			SEC_STD_WRITE_DAC |
+++			SEC_STD_WRITE_OWNER,
+++		.in.file_attributes = FILE_ATTRIBUTE_NORMAL,
+++		.in.share_access = NTCREATEX_SHARE_ACCESS_READ |
+++			NTCREATEX_SHARE_ACCESS_WRITE,
+++		.in.create_disposition = NTCREATEX_DISP_OPEN_IF,
+++		.in.impersonation_level = NTCREATEX_IMPERSONATION_ANONYMOUS,
+++		.in.fname = fname,
+++	};
+++
+++	status = smb2_create(tree, tctx, &c);
+++	torture_assert_ntstatus_ok_goto(tctx, status, ret, done,
+++					"smb2_create failed\n");
+++	handle = c.out.file.handle;
+++
+++	torture_comment(tctx, "get the original sd\n");
+++
+++	ZERO_STRUCT(q);
+++	q.query_secdesc.level = RAW_FILEINFO_SEC_DESC;
+++	q.query_secdesc.in.file.handle = handle;
+++	q.query_secdesc.in.secinfo_flags = SECINFO_DACL | SECINFO_OWNER;
+++
+++	status = smb2_getinfo_file(tree, tctx, &q);
+++	torture_assert_ntstatus_ok_goto(tctx, status, ret, done,
+++					"smb2_getinfo_file failed\n");
+++	sd_orig = q.query_secdesc.out.sd;
+++
+++	owner_sid = dom_sid_string(tctx, sd_orig->owner_sid);
+++
+++	sd = security_descriptor_dacl_create(tctx,
+++					0, NULL, NULL,
+++					owner_sid,
+++					SEC_ACE_TYPE_ACCESS_ALLOWED,
+++					SEC_FILE_READ_DATA,
+++					0,
+++					NULL);
+++
+++	ZERO_STRUCT(set);
+++	set.set_secdesc.level = RAW_SFILEINFO_SEC_DESC;
+++	set.set_secdesc.in.file.handle = handle;
+++	set.set_secdesc.in.secinfo_flags = SECINFO_DACL;
+++	set.set_secdesc.in.sd = sd;
+++
+++	status = smb2_setinfo_file(tree, &set);
+++	torture_assert_ntstatus_ok_goto(tctx, status, ret, done,
+++					"smb2_setinfo_file failed\n");
+++
+++	smb2_util_close(tree, handle);
+++	ZERO_STRUCT(handle);
+++
+++	for (i = 0; i < ARRAY_SIZE(tcases); i++) {
+++		torture_comment(tctx, "Verify open with %s dispostion\n",
+++				tcases[i].disposition_string);
+++
+++		c = (struct smb2_create) {
+++			.in.create_disposition = tcases[i].disposition,
+++			.in.desired_access = SEC_FILE_READ_DATA,
+++			.in.file_attributes = FILE_ATTRIBUTE_NORMAL,
+++			.in.share_access = NTCREATEX_SHARE_ACCESS_MASK,
+++			.in.impersonation_level = NTCREATEX_IMPERSONATION_ANONYMOUS,
+++			.in.fname = fname,
+++		};
+++
+++		status = smb2_create(tree, tctx, &c);
+++		smb2_util_close(tree, c.out.file.handle);
+++		torture_assert_ntstatus_equal_goto(
+++			tctx, status, tcases[i].expected_status, ret, done,
+++			"smb2_create failed\n");
+++	};
+++
+++	torture_comment(tctx, "put back original sd\n");
+++
+++	c = (struct smb2_create) {
+++		.in.desired_access = SEC_STD_WRITE_DAC,
+++		.in.file_attributes = FILE_ATTRIBUTE_NORMAL,
+++		.in.share_access = NTCREATEX_SHARE_ACCESS_MASK,
+++		.in.create_disposition = NTCREATEX_DISP_OPEN_IF,
+++		.in.impersonation_level = NTCREATEX_IMPERSONATION_ANONYMOUS,
+++		.in.fname = fname,
+++	};
+++
+++	status = smb2_create(tree, tctx, &c);
+++	torture_assert_ntstatus_ok_goto(tctx, status, ret, done,
+++					"smb2_create failed\n");
+++	handle = c.out.file.handle;
+++
+++	ZERO_STRUCT(set);
+++	set.set_secdesc.level = RAW_SFILEINFO_SEC_DESC;
+++	set.set_secdesc.in.file.handle = handle;
+++	set.set_secdesc.in.secinfo_flags = SECINFO_DACL;
+++	set.set_secdesc.in.sd = sd_orig;
+++
+++	status = smb2_setinfo_file(tree, &set);
+++	torture_assert_ntstatus_ok_goto(tctx, status, ret, done,
+++					"smb2_setinfo_file failed\n");
+++
+++	smb2_util_close(tree, handle);
+++	ZERO_STRUCT(handle);
+++
+++done:
+++	smb2_util_close(tree, handle);
+++	smb2_util_unlink(tree, fname);
+++	smb2_deltree(tree, BASEDIR);
+++	return ret;
+++}
+++
+++
++ /*
++    basic testing of SMB2 ACLs
++ */
++@@ -3051,6 +3194,8 @@ struct torture_suite *torture_smb2_acls_init(TALLOC_CTX *ctx)
++			test_deny1);
++	torture_suite_add_1smb2_test(suite, "MXAC-NOT-GRANTED",
++			test_mxac_not_granted);
+++	torture_suite_add_1smb2_test(suite, "OVERWRITE_READ_ONLY_FILE",
+++			test_overwrite_read_only_file);
++
++	suite->description = talloc_strdup(suite, "SMB2-ACLS tests");
 +
 +--
 +2.40.0
 diff --git a/meta-networking/recipes-connectivity/samba/samba_4.14.14.bb b/meta-networking/recipes-connectivity/samba/samba_4.14.14.bb
-index dcb4d8137..17d12e439 100644
+index aa27592cb..dcb4d8137 100644
 --- a/meta-networking/recipes-connectivity/samba/samba_4.14.14.bb
 +++ b/meta-networking/recipes-connectivity/samba/samba_4.14.14.bb
-@@ -51,6 +51,7 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
+@@ -49,6 +49,8 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
+            file://CVE-2023-34968_0009.patch \
+            file://CVE-2023-34968_0010.patch \
             file://CVE-2023-34968_0011.patch \
-            file://CVE-2023-4091-0001.patch \
-            file://CVE-2023-4091-0002.patch \
-+           file://CVE-2023-42669.patch \
++           file://CVE-2023-4091-0001.patch \
++           file://CVE-2023-4091-0002.patch \
             "
  
  SRC_URI:append:libc-musl = " \
