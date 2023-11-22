@@ -1,85 +1,172 @@
-Return-Path: <aj.bagwell@gmail.com>
+Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5451EC61D97
-	for <webhook@archiver.kernel.org>; Wed, 22 Nov 2023 13:58:39 +0000 (UTC)
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
- by mx.groups.io with SMTP id smtpd.web11.19804.1700661518675758997
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8466FC61D9B
+	for <webhook@archiver.kernel.org>; Wed, 22 Nov 2023 18:25:31 +0000 (UTC)
+Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com [209.85.128.178])
+ by mx.groups.io with SMTP id smtpd.web11.29096.1700677522137578146
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Nov 2023 05:58:38 -0800
+ Wed, 22 Nov 2023 10:25:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=RtW2C9Cu;
- spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: aj.bagwell@gmail.com)
-Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-3316a4bc37dso3579420f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Nov 2023 05:58:38 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Af0bZpr3;
+ spf=pass (domain: gmail.com, ip: 209.85.128.178, mailfrom: ticotimo@gmail.com)
+Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-5cce5075bd6so1163817b3.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Nov 2023 10:25:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1700661517; x=1701266317; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=nr8Jy6v91E25EcfH+QDFg1Gdes4kT+JB2+Iyqep9SSQ=;
-        b=RtW2C9CuPMPRdFqZc/2TqBkFyG4W+qsiJkW/Y1zec+F7aV9yafUKlEiHiqXK+r3q86
-         xJDoUTNmICBXaZQKrRji6Z5mi6SEH7Cavm9KRO5ixk7Fpxgx6T2lzA8JcjJ/dUHgCy4w
-         BpPz8Kgyfp5SQOQg8qS/JyDgJd6TJo+NPk51IXsjZExiIOve2MRzIfZKqTLAOrZ2Qjdh
-         4+n3ICDpL1EFcBj43DP3ABKPwdATZS+fY9PIoyBIs//P/btypYc1gNLdF+x7sazSVKBY
-         w4AmzISy9HxPGbtKaNxRnJwvxtxc2bY/2+V8Ut5kYr2bBWHYNh+5P0jqSRrIT3OWpQZP
-         oQgA==
+        d=gmail.com; s=20230601; t=1700677521; x=1701282321; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=+IbHGCi+8Z/JUNX34LWA6rjoqPRTPXEEE48sytnaShs=;
+        b=Af0bZpr3IqxuyUs4NIXmuzPBLZLMkaw4s0nGIgwSTpbaYprML6xtYal/a9xoScF7ql
+         BW3qIxcYD+jcsz4wPor1Z2KBeBdqvBDRjrantecn7cvbcPmibhZ21UCGOH1tFm+TJwHd
+         GkZ7zG1ZiLkL/lt4GmCefy3CrQlDe7a4718lo1sob08pvKSZX3yAqtDxagj161PV/tn8
+         PLFtcRtNzGyPhNgmk6opk11SlmmwJ7fLwjfVvYRq4v51OAwGo1EK50QWLGq0A5nYEjQm
+         VvW0MVH5RsCsUvVIB71lhRKYfJ03UEL+zwHDaJL6hZAl4cqOiMQRC3u2vDNIG+bvMp0H
+         mmNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700661517; x=1701266317;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1700677521; x=1701282321;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=nr8Jy6v91E25EcfH+QDFg1Gdes4kT+JB2+Iyqep9SSQ=;
-        b=Ra+TLNrO+iIiSsyUoIpKmvn/1TBf8OCnPOlt9MwF7CjJ1AsTsyrEXpxYTVr5YbO1bz
-         20glDRsrSnBWPva+A7Y6I93wM5r5uhS87Zb1vKG4uVC+NL84DLrPE4Qchw8UPWdYB83e
-         cqi9OBj5rcOf6zLJn09yQPAyAdxGlyfEl5SfTjnG/PMXUPn3DNUwYGxe0ESvOrGcogac
-         Wx39r/9h/5Z0Tk3l4BoQAGk6m+LZx/L+QMsZxjL0RlW6Hmt2YfBWen4r53BNTJOG+N9A
-         ydIvxJ30b9m8iZsFUx6GIA43eJZodJ8sGwa8kqdQu3sl8LsuVdTTE3zU6RnKar4U/x7M
-         HC2g==
-X-Gm-Message-State: AOJu0YyNj9wBwgALcblDifjBWkN1DNUrVs1pdAFkWru1zS7JxrOKRfZo
-	Ht83qf8FSyWYQcPmJg+KbSNWueVLQeMIYQ==
-X-Google-Smtp-Source: AGHT+IEbS8CEutlLIG0V/hvFuSfk2m6ffDprjA+Mw89Zl2bJYanW+eqsa18lCKb3d1bn5C8BJ+3y0A==
-X-Received: by 2002:a05:6000:2c3:b0:331:3c88:6fcd with SMTP id o3-20020a05600002c300b003313c886fcdmr2075594wry.53.1700661516448;
-        Wed, 22 Nov 2023 05:58:36 -0800 (PST)
-Received: from CMM-M72QQGW76M.cable.virginm.net (cpc92720-cmbg20-2-0-cust203.5-4.cable.virginm.net. [82.21.82.204])
-        by smtp.gmail.com with ESMTPSA id d4-20020a5d4f84000000b0032d96dd703bsm17264736wru.70.2023.11.22.05.58.35
-        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
-        Wed, 22 Nov 2023 05:58:36 -0800 (PST)
-From: AJ Bagwell <aj.bagwell@gmail.com>
-X-Google-Original-From: AJ Bagwell <anthony.bagwell@hivehome.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: AJ Bagwell <anthony.bagwell@hivehome.com>
-Subject: [meta-java][PATCH] layer.conf: Mark as compatible with nanbield
-Date: Wed, 22 Nov 2023 13:58:14 +0000
-Message-Id: <20231122135814.73695-1-anthony.bagwell@hivehome.com>
-X-Mailer: git-send-email 2.39.3 (Apple Git-145)
+        bh=+IbHGCi+8Z/JUNX34LWA6rjoqPRTPXEEE48sytnaShs=;
+        b=UEJmzMeKyY9BGP2kAjCgfhKVZ/rx58KcVIxlk+Q+U9OAS/ULnp6bSVcuchqzcPFDex
+         MH7nIYV3Av2Mv5X/IMm3ADMtxCFnP7U+IAIf4dB16h2c27YdIh4dZFEN5bU2LRokfllY
+         YGLnZs295/tN8KJ/EnM/7I4PrVCQS8eMHHk3zSLxsF1XCskE+LLCwZT80j5MyggXsdrK
+         Lw7EzLIrDHxTYnnmChp6w+OQRN0Ot09gku0xYOY6N6AhuJ2e8MVzGozq98i8Pif0mAVj
+         GxBfGSo4gvo1j8XzL7LnUatoN24S3TaDOiarqJA19jk+YLViYMz03mpVezyaUoWcDAn5
+         jpbQ==
+X-Gm-Message-State: AOJu0YxVmqZ1YZ366NCn2q1LM4F8YmA2Remc03TgAuseWL54egwDWV7U
+	JI/MbQdAAcnCY+owxHhfaTbteFjbpoiDDLEAn7Q=
+X-Google-Smtp-Source: AGHT+IFFXUT36HsuQRo7g9qjoilcjS0DzMwbXTbKt7Qv3UJomsbXwa1znhmNFSe0I7XElKeh4jVduTvaxqgsj/YgrtM=
+X-Received: by 2002:a0d:e6cc:0:b0:5cc:d88c:ea19 with SMTP id
+ p195-20020a0de6cc000000b005ccd88cea19mr315236ywe.6.1700677521160; Wed, 22 Nov
+ 2023 10:25:21 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20231122135814.73695-1-anthony.bagwell@hivehome.com>
+In-Reply-To: <20231122135814.73695-1-anthony.bagwell@hivehome.com>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Wed, 22 Nov 2023 10:25:10 -0800
+Message-ID: <CANx9H-DF-2QzOrFsQWg-wo4eBJNFJUQo=k+myTsYvbT6ppuHnA@mail.gmail.com>
+Subject: Re: [oe] [meta-java][PATCH] layer.conf: Mark as compatible with nanbield
+To: Anthony Bagwell <aj.bagwell@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org, 
+	AJ Bagwell <anthony.bagwell@hivehome.com>
+Content-Type: multipart/alternative; boundary="00000000000086beb2060ac1d7ee"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 22 Nov 2023 13:58:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107012
+ <openembedded-devel@lists.openembedded.org>; Wed, 22 Nov 2023 18:25:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107013
 
-Signed-off-by: AJ Bagwell <anthony.bagwell@hivehome.com>
----
- conf/layer.conf | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+--00000000000086beb2060ac1d7ee
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/conf/layer.conf b/conf/layer.conf
-index c571df5..fb8590e 100644
---- a/conf/layer.conf
-+++ b/conf/layer.conf
-@@ -7,7 +7,7 @@ BBFILES += "${LAYERDIR}/recipes*/*/*.bb ${LAYERDIR}/recipes*/*/*.bbappend"
- BBFILE_COLLECTIONS += "meta-java"
- BBFILE_PATTERN_meta-java := "^${LAYERDIR}/"
- BBFILE_PRIORITY_meta-java = "10"
--LAYERSERIES_COMPAT_meta-java = "mickledore"
-+LAYERSERIES_COMPAT_meta-java = "mickledore nanbield"
- LAYERDEPENDS_meta-java += "openembedded-layer"
- 
- LICENSE_PATH += "${LAYERDIR}/licenses"
--- 
-2.39.3 (Apple Git-145)
+I have created the mickledore branches on git.yoctoproject.org,
+github.com/meta-java and gitlab.com/meta-java
 
+I will edit in place to drop mickledore and replace with nanbield for
+"master" branches
+
+Thank you for the contribution.
+
+On Wed, Nov 22, 2023 at 5:58=E2=80=AFAM Anthony Bagwell <aj.bagwell@gmail.c=
+om>
+wrote:
+
+> Signed-off-by: AJ Bagwell <anthony.bagwell@hivehome.com>
+> ---
+>  conf/layer.conf | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/conf/layer.conf b/conf/layer.conf
+> index c571df5..fb8590e 100644
+> --- a/conf/layer.conf
+> +++ b/conf/layer.conf
+> @@ -7,7 +7,7 @@ BBFILES +=3D "${LAYERDIR}/recipes*/*/*.bb
+> ${LAYERDIR}/recipes*/*/*.bbappend"
+>  BBFILE_COLLECTIONS +=3D "meta-java"
+>  BBFILE_PATTERN_meta-java :=3D "^${LAYERDIR}/"
+>  BBFILE_PRIORITY_meta-java =3D "10"
+> -LAYERSERIES_COMPAT_meta-java =3D "mickledore"
+> +LAYERSERIES_COMPAT_meta-java =3D "mickledore nanbield"
+>  LAYERDEPENDS_meta-java +=3D "openembedded-layer"
+>
+>  LICENSE_PATH +=3D "${LAYERDIR}/licenses"
+> --
+> 2.39.3 (Apple Git-145)
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#107012):
+> https://lists.openembedded.org/g/openembedded-devel/message/107012
+> Mute This Topic: https://lists.openembedded.org/mt/102748646/924729
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> ticotimo@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--00000000000086beb2060ac1d7ee
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>I have created the mickledore branches on <a href=3D"=
+http://git.yoctoproject.org">git.yoctoproject.org</a>, <a href=3D"http://gi=
+thub.com/meta-java">github.com/meta-java</a> and <a href=3D"http://gitlab.c=
+om/meta-java">gitlab.com/meta-java</a></div><div><br></div><div>I will edit=
+ in place to drop mickledore and replace with nanbield for &quot;master&quo=
+t; branches</div><div><br></div><div>Thank you for the contribution.</div><=
+br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Wed,=
+ Nov 22, 2023 at 5:58=E2=80=AFAM Anthony Bagwell &lt;<a href=3D"mailto:aj.b=
+agwell@gmail.com">aj.bagwell@gmail.com</a>&gt; wrote:<br></div><blockquote =
+class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px sol=
+id rgb(204,204,204);padding-left:1ex">Signed-off-by: AJ Bagwell &lt;<a href=
+=3D"mailto:anthony.bagwell@hivehome.com" target=3D"_blank">anthony.bagwell@=
+hivehome.com</a>&gt;<br>
+---<br>
+=C2=A0conf/layer.conf | 2 +-<br>
+=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
+<br>
+diff --git a/conf/layer.conf b/conf/layer.conf<br>
+index c571df5..fb8590e 100644<br>
+--- a/conf/layer.conf<br>
++++ b/conf/layer.conf<br>
+@@ -7,7 +7,7 @@ BBFILES +=3D &quot;${LAYERDIR}/recipes*/*/*.bb ${LAYERDIR}/=
+recipes*/*/*.bbappend&quot;<br>
+=C2=A0BBFILE_COLLECTIONS +=3D &quot;meta-java&quot;<br>
+=C2=A0BBFILE_PATTERN_meta-java :=3D &quot;^${LAYERDIR}/&quot;<br>
+=C2=A0BBFILE_PRIORITY_meta-java =3D &quot;10&quot;<br>
+-LAYERSERIES_COMPAT_meta-java =3D &quot;mickledore&quot;<br>
++LAYERSERIES_COMPAT_meta-java =3D &quot;mickledore nanbield&quot;<br>
+=C2=A0LAYERDEPENDS_meta-java +=3D &quot;openembedded-layer&quot;<br>
+<br>
+=C2=A0LICENSE_PATH +=3D &quot;${LAYERDIR}/licenses&quot;<br>
+-- <br>
+2.39.3 (Apple Git-145)<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#107012): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/107012" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/107012</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/102748646/924=
+729" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
+/102748646/924729</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
+et=3D"_blank">ticotimo@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
+
+--00000000000086beb2060ac1d7ee--
 
