@@ -1,256 +1,204 @@
-Return-Path: <peter.kjellerstedt@axis.com>
+Return-Path: <archana.polampalli@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DDE0DC61D97
-	for <webhook@archiver.kernel.org>; Wed, 22 Nov 2023 00:50:53 +0000 (UTC)
-Received: from EUR02-AM0-obe.outbound.protection.outlook.com (EUR02-AM0-obe.outbound.protection.outlook.com [40.107.247.77])
- by mx.groups.io with SMTP id smtpd.web11.8931.1700614251893269363
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7EC40C61D92
+	for <webhook@archiver.kernel.org>; Wed, 22 Nov 2023 04:55:45 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.12893.1700628942529146762
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 21 Nov 2023 16:50:52 -0800
+ Tue, 21 Nov 2023 20:55:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@axis.com header.s=selector1 header.b=QIRF5E3/;
- spf=pass (domain: axis.com, ip: 40.107.247.77, mailfrom: peter.kjellerstedt@axis.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=CE0kRwTBsiMIrVbzH7pr1gfQU8PP2hDKhQDS5+6ioIK5dMB72lXYzkoIZXvdn4cwm+XS4HOVUCA8D8j9+F7O0H3PWR0S3wwWhqBgW6qEFAn3n3dwEuPGbb3GIjZ/Ghf6y/F8xLBZYXI+d/BkA9R5peXUSx4VfL9NV7/u5mmxIvS2wmlahGvZt/vDtdE/byZX+CAhKxXN9eKGB7gk9LmcAuW3i347g1St4WA2Jozw1YoQtgxN/y7eBlSThroNVlCzwr6fdMiUwgA8gcnq7FstJV35hAeNX3Yr78XL9wRFVotSBkZsWBZ7HEo7gF4WBlERu3cJgS1wfudMvHNJmrCPow==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bZfd86i386tRjbP4Uqagz9s4dNKPR6WFhFQ/U5jop8I=;
- b=fE6iATIr5dzU5h70ELBc23/TInofeL6jTc/6PQSWBTGqwM2/tLplmLCwGUiW34HTEN4Tk5G1DQgfoH1bF2TRH2qDKRn3i4h/5rZY0NX7/W4YTrwtTb0lcMWyym0NzjX2Sq2qmy9A3/KIZ7s8MD5U6iyqW3T2q7msHNvWvimL7PUzd/RrnBitP6uyo8fPtLz9+HJQ2XL8RWIu27RR9JuAFd6OZdWQiHWQNiX0A8i9/WUHYFyX9DiSd28/O3424lvUpAZmAMLZzT1bhDR2E3DBVKhuD6jHrJ56nuiXNExA6jT2F9SDm+laZwXSZttaif3ln20qOPoyocL7VFV8kqWGGA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 195.60.68.100) smtp.rcpttodomain=lists.openembedded.org
- smtp.mailfrom=axis.com; dmarc=fail (p=none sp=none pct=100) action=none
- header.from=axis.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axis.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bZfd86i386tRjbP4Uqagz9s4dNKPR6WFhFQ/U5jop8I=;
- b=QIRF5E3/S7shM83upNYUQL/Btrx84KlRGvRMp3m32fQEjpecQyzaw52XAz0uvERWliN4etTheTo9UQNe7nn6PftxqYAaUZvTmkFEoBxcOjYb7YfW0lys//FKoT9WbOFd6+/uJdn7HtajB0OPEvTTPJqzvTuVWs3opn6KgESeccw=
-Received: from AM6P192CA0007.EURP192.PROD.OUTLOOK.COM (2603:10a6:209:83::20)
- by GV1PR02MB8491.eurprd02.prod.outlook.com (2603:10a6:150:9d::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7002.28; Wed, 22 Nov
- 2023 00:50:46 +0000
-Received: from AMS0EPF000001A1.eurprd05.prod.outlook.com
- (2603:10a6:209:83:cafe::f9) by AM6P192CA0007.outlook.office365.com
- (2603:10a6:209:83::20) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7002.27 via Frontend
- Transport; Wed, 22 Nov 2023 00:50:46 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 195.60.68.100)
- smtp.mailfrom=axis.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=axis.com;
-Received-SPF: Fail (protection.outlook.com: domain of axis.com does not
- designate 195.60.68.100 as permitted sender) receiver=protection.outlook.com;
- client-ip=195.60.68.100; helo=mail.axis.com;
-Received: from mail.axis.com (195.60.68.100) by
- AMS0EPF000001A1.mail.protection.outlook.com (10.167.16.231) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7025.13 via Frontend Transport; Wed, 22 Nov 2023 00:50:45 +0000
-Received: from SE-MAIL21W.axis.com (10.20.40.16) by se-mail01w.axis.com
- (10.20.40.7) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Wed, 22 Nov
- 2023 01:50:45 +0100
-Received: from se-mail01w.axis.com (10.20.40.7) by SE-MAIL21W.axis.com
- (10.20.40.16) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Wed, 22 Nov
- 2023 01:50:45 +0100
-Received: from se-intmail01x.se.axis.com (10.0.5.60) by se-mail01w.axis.com
- (10.20.40.7) with Microsoft SMTP Server id 15.1.2375.34 via Frontend
- Transport; Wed, 22 Nov 2023 01:50:45 +0100
-Received: from saur (saur.se.axis.com [10.92.3.10])
-	by se-intmail01x.se.axis.com (Postfix) with ESMTP id 35D6AE606
-	for <openembedded-devel@lists.openembedded.org>; Wed, 22 Nov 2023 01:50:45 +0100 (CET)
-Received: from saur.se.axis.com (localhost [127.0.0.1])
-	by saur (8.17.1/8.15.2) with ESMTPS id 3AM0ojdb2445643
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 22 Nov 2023 01:50:45 +0100
-Received: (from pkj@localhost)
-	by saur.se.axis.com (8.17.1/8.17.1/Submit) id 3AM0oijV2445640
-	for openembedded-devel@lists.openembedded.org; Wed, 22 Nov 2023 01:50:44 +0100
-From: Peter Kjellerstedt <pkj@axis.com>
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=PnFTeYlA;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=9690644334=archana.polampalli@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 3AM4rnlb015805
+	for <openembedded-devel@lists.openembedded.org>; Tue, 21 Nov 2023 20:55:42 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding:content-type; s=
+	PPS06212021; bh=mrhG+EbeGU6Kfrr3XqA4mR+EiWSoSTTwV3TeWgQCQ44=; b=
+	PnFTeYlA+Vi76NGHAwQbah+u9ij1ZozOKghCIzWxLlX4IElan+cGIJpb35+y4k7d
+	i6LSH2tc2gPHh/QxyJhCEXs4GF97VxAx921aj2F0qaCeFFwQvfTwJ01ADxM5GIrA
+	Q0fSoeILrjmloprMrqrqDTZC7G1B7FirnWkPRt0V3XeLJot80nf6jO21BPmLfmW8
+	m56clHFBtTUAhLSAAhn2bgpC+9dFUUzu6eawtkKGzYn6rsxqvNft/p+ckKSGAIHZ
+	bW5b5RAA4/HoEjVFrjDHueTfz1fcANebL+llArrrxq8Q3TfRX9Wp81frV1pUAWa8
+	ynTDfu1Htoff4uyBi6ppZA==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3uese430y1-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 21 Nov 2023 20:55:41 -0800 (PST)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.34; Tue, 21 Nov 2023 20:55:46 -0800
+From: <archana.polampalli@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] zeromq: Update to 4.3.5
-Date: Wed, 22 Nov 2023 01:50:42 +0100
-Message-ID: <20231122005042.2445624-1-pkj@axis.com>
-X-Mailer: git-send-email 2.40.1
+Subject: [oe][meta-networking][kirkstone][PATCH 2/2] samba: fix CVE-2023-42669
+Date: Wed, 22 Nov 2023 04:55:24 +0000
+Message-ID: <20231122045524.53871-2-archana.polampalli@windriver.com>
+X-Mailer: git-send-email 2.40.0
+In-Reply-To: <20231122045524.53871-1-archana.polampalli@windriver.com>
+References: <20231122045524.53871-1-archana.polampalli@windriver.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS0EPF000001A1:EE_|GV1PR02MB8491:EE_
-X-MS-Office365-Filtering-Correlation-Id: e58daf93-28e9-4477-db3a-08dbeaf50fe5
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	4EusmlT1MjNpYtR3rvxJb08hB7Cq238SvQbb93ibrTIar6M38qd65p4G8/wLWJphxuTHAg1bE8BQ1jmv4mDucvxGEUOGnbJpA7xtnMfLbHtBMJp+teHzeudhp0xOVawMo/HmiDe5bgq6irHddPSR18R1Kz5OCJr19Y5G3jpst7teUYzpzF4otA/2L7jktMa5OvdVx+/jvSk4tR/lhQrTLfqYjxVjiLMrkJKrkb6mDOOKLnFo10bWwpr8NrzOr9dTUbxGmJXoYvtBwm4nDQAZbYghOugi3VW1yEPbuAmmfM9Rk9Rf0osT2Hv4Hqfk2dwsOlaHImyblbhDK+GBL0JzosINHzH7tOiCqPuD8OV2kQ1L6gqOUZWMJT73UJhOl5wgBvQ9OOq4WaZWX9lHsab7LcOLJ1CzbmhUsJM0H9LvOgaQDGUs6KQx9Gi7LVoumy7+8dzivPH7kxt9JR9owEYjMEmkc8304/txvIeo6SaxZMIg6BHhrPXNrlyPhxFExOqLgGCIvjxCwTRqLeuI1DnMBVf5GZK+QqarTM9ILfYdN9bbu5g1d0PwqvXUIQxiXpUEmJGu1sSPU7Tuca8IBbIDu5uHlVVpBakc5lcD4+VX0tfGFHa0twdxxgOxaj5SG3VJMghlrvu3sM2Nzi+pnn/VJEDD8r3tAAlH3aWw3bvwnPpuVeuQOX44ZJspwY0SleHajE2GvQ24UVGxyOX4Xdu2qAK+OZM1xuH17yxSvipNgRxWvzOsQZS2EKqTtXQagqhY
-X-Forefront-Antispam-Report: 
-	CIP:195.60.68.100;CTRY:SE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.axis.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(4636009)(396003)(376002)(39860400002)(136003)(346002)(230922051799003)(1800799012)(82310400011)(451199024)(64100799003)(186009)(46966006)(36840700001)(40470700004)(2906002)(40480700001)(8936002)(41300700001)(8676002)(5660300002)(15650500001)(316002)(42186006)(6916009)(40460700003)(70586007)(47076005)(36756003)(478600001)(1076003)(26005)(70206006)(2616005)(336012)(426003)(81166007)(356005)(966005)(83380400001)(36860700001)(82740400003)(36900700001);DIR:OUT;SFP:1101;
-X-OriginatorOrg: axis.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Nov 2023 00:50:45.7353
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e58daf93-28e9-4477-db3a-08dbeaf50fe5
-X-MS-Exchange-CrossTenant-Id: 78703d3c-b907-432f-b066-88f7af9ca3af
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=78703d3c-b907-432f-b066-88f7af9ca3af;Ip=[195.60.68.100];Helo=[mail.axis.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	AMS0EPF000001A1.eurprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR02MB8491
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-GUID: o8m2tqRQiRPGToKGS1xEwCXJlZqXrwVc
+X-Proofpoint-ORIG-GUID: o8m2tqRQiRPGToKGS1xEwCXJlZqXrwVc
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-11-16_25,2023-11-16_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0
+ malwarescore=0 phishscore=0 mlxlogscore=999 suspectscore=0
+ lowpriorityscore=0 mlxscore=0 spamscore=0 clxscore=1015 adultscore=0
+ bulkscore=0 priorityscore=1501 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.19.0-2311060001 definitions=main-2311220035
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 22 Nov 2023 00:50:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106986
+ <openembedded-devel@lists.openembedded.org>; Wed, 22 Nov 2023 04:55:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/106988
 
-A backported patch has been removed as it is no longer needed.
+From: Archana Polampalli <archana.polampalli@windriver.com>
 
-License-Update: Relicensed as MPL-2.0
-Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+A vulnerability was found in Samba's "rpcecho" development server, a non-Windows
+RPC server used to test Samba's DCE/RPC stack elements. This vulnerability stems
+from an RPC function that can be blocked indefinitely. The issue arises because
+the "rpcecho" service operates with only one worker in the main RPC task, allowing
+calls to the "rpcecho" server to be blocked for a specified time, causing service
+disruptions. This disruption is triggered by a "sleep()" call in the "dcesrv_echo_TestSleep()"
+function under specific conditions. Authenticated users or attackers can exploit this
+vulnerability to make calls to the "rpcecho" server, requesting it to block for a
+specified duration, effectively disrupting most services and leading to a complete
+denial of service on the AD DC. The DoS affects all other services as "rpcecho" runs
+in the main RPC task.
+
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2023-42669
+
+Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
 ---
- ...cator.hpp-define-missing-rebind-type.patch | 64 -------------------
- .../{zeromq_4.3.4.bb =3D> zeromq_4.3.5.bb}      |  8 +--
- 2 files changed, 3 insertions(+), 69 deletions(-)
- delete mode 100644 meta-oe/recipes-connectivity/zeromq/files/0001-src-secu=
-re_allocator.hpp-define-missing-rebind-type.patch
- rename meta-oe/recipes-connectivity/zeromq/{zeromq_4.3.4.bb =3D> zeromq_4.=
-3.5.bb} (71%)
+ .../samba/samba/CVE-2023-42669.patch          | 94 +++++++++++++++++++
+ .../samba/samba_4.14.14.bb                    |  1 +
+ 2 files changed, 95 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/samba/samba/CVE-2023-42669.patch
 
-diff --git a/meta-oe/recipes-connectivity/zeromq/files/0001-src-secure_allo=
-cator.hpp-define-missing-rebind-type.patch b/meta-oe/recipes-connectivity/z=
-eromq/files/0001-src-secure_allocator.hpp-define-missing-rebind-type.patch
-deleted file mode 100644
-index d32190818..000000000
---- a/meta-oe/recipes-connectivity/zeromq/files/0001-src-secure_allocator.h=
-pp-define-missing-rebind-type.patch
-+++ /dev/null
-@@ -1,64 +0,0 @@
--From 66e72389cc90625ed74e8ba1ea3a65234bdb06b5 Mon Sep 17 00:00:00 2001
--From: Sergei Trofimovich <slyich@gmail.com>
--Date: Tue, 20 Dec 2022 21:45:16 +0000
--Subject: [PATCH] src/secure_allocator.hpp: define missing 'rebind' type
--
--`gcc-13` added an assert to standard headers to make sure custom
--allocators have intended implementation of rebind type instead
--of inherited rebind. gcc change:
--    https://gcc.gnu.org/git/?p=3Dgcc.git;a=3Dcommitdiff;h=3D64c986b49558a7
--
--Without the fix build fails on this week's `gcc-13` as:
--
--    [ 92%] Building CXX object tests/CMakeFiles/test_security_curve.dir/te=
-st_security_curve.cpp.o
--    In file included from /<<NIX>>/gcc-13.0.0/include/c++/13.0.0/ext/alloc=
-_traits.h:34,
--                     from /<<NIX>>/gcc-13.0.0/include/c++/13.0.0/bits/stl_=
-uninitialized.h:64,
--                     from /<<NIX>>/gcc-13.0.0/include/c++/13.0.0/memory:69=
-,
--                     from tests/../src/secure_allocator.hpp:42,
--                     from tests/../src/curve_client_tools.hpp:49,
--                     from tests/test_security_curve.cpp:53:
--    /<<NIX>>/gcc-13.0.0/include/c++/13.0.0/bits/alloc_traits.h: In instant=
-iation of 'struct std::__allocator_traits_base::__rebind<zmq::secure_alloca=
-tor_t<unsigned char>, unsigned char, void>':
--    /<<NIX>>/gcc-13.0.0/include/c++/13.0.0/bits/alloc_traits.h:94:11:   re=
-quired by substitution of 'template<class _Alloc, class _Up> using std::__a=
-lloc_rebind =3D typename std::__allocator_traits_base::__rebind<_Alloc, _Up=
->::type [with _Alloc =3D zmq::secure_allocator_t<unsigned char>; _Up =3D un=
-signed char]'
--    /<<NIX>>/gcc-13.0.0/include/c++/13.0.0/bits/alloc_traits.h:228:8:   re=
-quired by substitution of 'template<class _Alloc> template<class _Tp> using=
- std::allocator_traits< <template-parameter-1-1> >::rebind_alloc =3D std::_=
-_alloc_rebind<_Alloc, _Tp> [with _Tp =3D unsigned char; _Alloc =3D zmq::sec=
-ure_allocator_t<unsigned char>]'
--    /<<NIX>>/gcc-13.0.0/include/c++/13.0.0/ext/alloc_traits.h:126:65:   re=
-quired from 'struct __gnu_cxx::__alloc_traits<zmq::secure_allocator_t<unsig=
-ned char>, unsigned char>::rebind<unsigned char>'
--    /<<NIX>>/gcc-13.0.0/include/c++/13.0.0/bits/stl_vector.h:88:21:   requ=
-ired from 'struct std::_Vector_base<unsigned char, zmq::secure_allocator_t<=
-unsigned char> >'
--    /<<NIX>>/gcc-13.0.0/include/c++/13.0.0/bits/stl_vector.h:423:11:   req=
-uired from 'class std::vector<unsigned char, zmq::secure_allocator_t<unsign=
-ed char> >'
--    tests/../src/curve_client_tools.hpp:64:76:   required from here
--    /<<NIX>>/gcc-13.0.0/include/c++/13.0.0/bits/alloc_traits.h:70:31: erro=
-r: static assertion failed: allocator_traits<A>::rebind_alloc<A::value_type=
-> must be A
--       70 |                         _Tp>::value,
--          |                               ^~~~~
--
--The change adds trivial `rebind` definition with expected return type
--and satisfies conversion requirements.
--
--Upstream-Status: Backport [https://github.com/zeromq/libzmq/commit/438d5d8=
-8]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/secure_allocator.hpp | 11 +++++++++++
-- 1 file changed, 11 insertions(+)
--
--diff --git a/src/secure_allocator.hpp b/src/secure_allocator.hpp
--index 0d37e7ed..5b8de9e2 100644
----- a/src/secure_allocator.hpp
--+++ b/src/secure_allocator.hpp
--@@ -95,6 +95,17 @@ bool operator!=3D (const secure_allocator_t<T> &, const=
- secure_allocator_t<U> &)
-- #else
-- template <typename T> struct secure_allocator_t : std::allocator<T>
-- {
--+    secure_allocator_t () ZMQ_DEFAULT;
--+
--+    template <class U>
--+    secure_allocator_t (const secure_allocator_t<U> &) ZMQ_NOEXCEPT
--+    {
--+    }
--+
--+    template <class U> struct rebind
--+    {
--+        typedef secure_allocator_t<U> other;
--+    };
-- };
-- #endif
-- }
----=20
--2.39.1
--
-diff --git a/meta-oe/recipes-connectivity/zeromq/zeromq_4.3.4.bb b/meta-oe/=
-recipes-connectivity/zeromq/zeromq_4.3.5.bb
-similarity index 71%
-rename from meta-oe/recipes-connectivity/zeromq/zeromq_4.3.4.bb
-rename to meta-oe/recipes-connectivity/zeromq/zeromq_4.3.5.bb
-index cd319b5d3..555458217 100644
---- a/meta-oe/recipes-connectivity/zeromq/zeromq_4.3.4.bb
-+++ b/meta-oe/recipes-connectivity/zeromq/zeromq_4.3.5.bb
-@@ -1,18 +1,16 @@
- DESCRIPTION =3D "ZeroMQ looks like an embeddable networking library but ac=
-ts like a concurrency framework"
- HOMEPAGE =3D "http://www.zeromq.org"
--LICENSE =3D "LGPL-3.0-with-zeromq-exception"
--LIC_FILES_CHKSUM =3D "file://COPYING.LESSER;md5=3Dd5311495d952062e0e4fbba3=
-9cbf3de1"
-+LICENSE =3D "MPL-2.0"
-+LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D9741c346eef56131163e13b9db1241b=
-3"
-=20
- PACKAGECONFIG ??=3D "libsodium"
- PACKAGECONFIG[libsodium] =3D "-DWITH_LIBSODIUM=3DON,-DWITH_LIBSODIUM=3DOFF=
-, libsodium"
-=20
- SRC_URI =3D "http://github.com/zeromq/libzmq/releases/download/v${PV}/zero=
-mq-${PV}.tar.gz \
-     file://0001-CMakeLists-txt-Avoid-host-specific-path-to-libsodium.patch=
- \
--    file://0001-src-secure_allocator.hpp-define-missing-rebind-type.patch =
-\
-     file://run-ptest \
- "
--SRC_URI[md5sum] =3D "c897d4005a3f0b8276b00b7921412379"
--SRC_URI[sha256sum] =3D "c593001a89f5a85dd2ddf564805deb860e02471171b3f20494=
-4857336295c3e5"
-+SRC_URI[sha256sum] =3D "6653ef5910f17954861fe72332e68b03ca6e4d9c7160eb3a8d=
-e5a5a913bfab43"
-=20
- UPSTREAM_CHECK_URI =3D "https://github.com/${BPN}/libzmq/releases"
-=20
+diff --git a/meta-networking/recipes-connectivity/samba/samba/CVE-2023-42669.patch b/meta-networking/recipes-connectivity/samba/samba/CVE-2023-42669.patch
+new file mode 100644
+index 000000000..dfa6aeb02
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/samba/samba/CVE-2023-42669.patch
+@@ -0,0 +1,94 @@
++From 9989568b20c8f804140c22f51548d766a18ed887 Mon Sep 17 00:00:00 2001
++From: Andrew Bartlett <abartlet@samba.org>
++Date: Tue, 12 Sep 2023 18:59:44 +1200
++Subject: [PATCH] CVE-2023-42669 s4-rpc_server: Disable rpcecho server by
++ default
++
++The rpcecho server is useful in development and testing, but should never
++have been allowed into production, as it includes the facility to
++do a blocking sleep() in the single-threaded rpc worker.
++
++BUG: https://bugzilla.samba.org/show_bug.cgi?id=15474
++
++Signed-off-by: Andrew Bartlett <abartlet@samba.org>
++
++CVE: CVE-2023-42669
++
++Upstream-Status: Backport [https://github.com/samba-team/samba/commit/9989568b20c8f804140c22f51548d766a18ed887]
++
++Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
++---
++ docs-xml/smbdotconf/protocol/dcerpcendpointservers.xml | 2 +-
++ lib/param/loadparm.c                                   | 2 +-
++ selftest/target/Samba4.pm                              | 2 +-
++ source3/param/loadparm.c                               | 2 +-
++ source4/rpc_server/wscript_build                       | 3 ++-
++ 5 files changed, 6 insertions(+), 5 deletions(-)
++
++diff --git a/docs-xml/smbdotconf/protocol/dcerpcendpointservers.xml b/docs-xml/smbdotconf/protocol/dcerpcendpointservers.xml
++index 8a217cc..c6642b7 100644
++--- a/docs-xml/smbdotconf/protocol/dcerpcendpointservers.xml
+++++ b/docs-xml/smbdotconf/protocol/dcerpcendpointservers.xml
++@@ -6,6 +6,6 @@
++	<para>Specifies which DCE/RPC endpoint servers should be run.</para>
++ </description>
++
++-<value type="default">epmapper, wkssvc, rpcecho, samr, netlogon, lsarpc, drsuapi, dssetup, unixinfo, browser, eventlog6, backupkey, dnsserver</value>
+++<value type="default">epmapper, wkssvc, samr, netlogon, lsarpc, drsuapi, dssetup, unixinfo, browser, eventlog6, backupkey, dnsserver</value>
++ <value type="example">rpcecho</value>
++ </samba:parameter>
++diff --git a/lib/param/loadparm.c b/lib/param/loadparm.c
++index eedfa00..75687f5 100644
++--- a/lib/param/loadparm.c
+++++ b/lib/param/loadparm.c
++@@ -2717,7 +2717,7 @@ struct loadparm_context *loadparm_init(TALLOC_CTX *mem_ctx)
++	lpcfg_do_global_parameter(lp_ctx, "ntvfs handler", "unixuid default");
++	lpcfg_do_global_parameter(lp_ctx, "max connections", "0");
++
++-	lpcfg_do_global_parameter(lp_ctx, "dcerpc endpoint servers", "epmapper wkssvc rpcecho samr netlogon lsarpc drsuapi dssetup unixinfo browser eventlog6 backupkey dnsserver");
+++	lpcfg_do_global_parameter(lp_ctx, "dcerpc endpoint servers", "epmapper wkssvc  samr netlogon lsarpc drsuapi dssetup unixinfo browser eventlog6 backupkey dnsserver");
++	lpcfg_do_global_parameter(lp_ctx, "server services", "s3fs rpc nbt wrepl ldap cldap kdc drepl winbindd ntp_signd kcc dnsupdate dns");
++	lpcfg_do_global_parameter(lp_ctx, "kccsrv:samba_kcc", "true");
++	/* the winbind method for domain controllers is for both RODC
++diff --git a/selftest/target/Samba4.pm b/selftest/target/Samba4.pm
++index 651faa7..c7b33d2 100755
++--- a/selftest/target/Samba4.pm
+++++ b/selftest/target/Samba4.pm
++@@ -773,7 +773,7 @@ sub provision_raw_step1($$)
++	wins support = yes
++	server role = $ctx->{server_role}
++	server services = +echo $services
++-        dcerpc endpoint servers = +winreg +srvsvc
+++        dcerpc endpoint servers = +winreg +srvsvc +rpcecho
++	notify:inotify = false
++	ldb:nosync = true
++	ldap server require strong auth = yes
++diff --git a/source3/param/loadparm.c b/source3/param/loadparm.c
++index 8bcd35f..a99ab35 100644
++--- a/source3/param/loadparm.c
+++++ b/source3/param/loadparm.c
++@@ -879,7 +879,7 @@ static void init_globals(struct loadparm_context *lp_ctx, bool reinit_globals)
++
++	Globals.server_services = str_list_make_v3_const(NULL, "s3fs rpc nbt wrepl ldap cldap kdc drepl winbindd ntp_signd kcc dnsupdate dns", NULL);
++
++-	Globals.dcerpc_endpoint_servers = str_list_make_v3_const(NULL, "epmapper wkssvc rpcecho samr netlogon lsarpc drsuapi dssetup unixinfo browser eventlog6 backupkey dnsserver", NULL);
+++	Globals.dcerpc_endpoint_servers = str_list_make_v3_const(NULL, "epmapper wkssvc  samr netlogon lsarpc drsuapi dssetup unixinfo browser eventlog6 backupkey dnsserver", NULL);
++
++	Globals.tls_enabled = true;
++	Globals.tls_verify_peer = TLS_VERIFY_PEER_AS_STRICT_AS_POSSIBLE;
++diff --git a/source4/rpc_server/wscript_build b/source4/rpc_server/wscript_build
++index 8c75672..a2520da 100644
++--- a/source4/rpc_server/wscript_build
+++++ b/source4/rpc_server/wscript_build
++@@ -29,7 +29,8 @@ bld.SAMBA_MODULE('dcerpc_rpcecho',
++	source='echo/rpc_echo.c',
++	subsystem='dcerpc_server',
++	init_function='dcerpc_server_rpcecho_init',
++-	deps='ndr-standard events'
+++    deps='ndr-standard events',
+++    enabled=bld.CONFIG_GET('ENABLE_SELFTEST')
++	)
++
++
++--
++2.40.0
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.14.14.bb b/meta-networking/recipes-connectivity/samba/samba_4.14.14.bb
+index dcb4d8137..17d12e439 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.14.14.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.14.14.bb
+@@ -51,6 +51,7 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
+            file://CVE-2023-34968_0011.patch \
+            file://CVE-2023-4091-0001.patch \
+            file://CVE-2023-4091-0002.patch \
++           file://CVE-2023-42669.patch \
+            "
+ 
+ SRC_URI:append:libc-musl = " \
+-- 
+2.40.0
+
 
