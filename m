@@ -1,96 +1,374 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <archana.polampalli@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A44E6C61D85
-	for <webhook@archiver.kernel.org>; Thu, 23 Nov 2023 04:21:54 +0000 (UTC)
-Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
- by mx.groups.io with SMTP id smtpd.web10.84595.1700713306918421745
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 32421C5AD4C
+	for <webhook@archiver.kernel.org>; Thu, 23 Nov 2023 06:13:25 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.85870.1700720004363881086
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 Nov 2023 20:21:46 -0800
+ Wed, 22 Nov 2023 22:13:24 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=dYg9px0w;
- spf=pass (domain: gmail.com, ip: 209.85.210.170, mailfrom: ticotimo@gmail.com)
-Received: by mail-pf1-f170.google.com with SMTP id d2e1a72fcca58-6c33ab26dddso443993b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 22 Nov 2023 20:21:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1700713306; x=1701318106; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=s4auh5UlVZTEMASMX011K23AhH8P9rHjPq5gOf9SaIA=;
-        b=dYg9px0w6S0DBSIhSPt/GtOabWz6Pt80GWCBXx5Oas7dz0TR1mnGO+Iq5oqadVF2wP
-         IjvC0OV5BY5rxl9bL1TJgMMIbeNZdXCbRDHIEbeEUT3Ztn5LD3+oK87YJOK8XLV8UMVK
-         ZvU2y/wLkqURuf2KJD+yc2izYaZqguDWWm3bUaajI68SSQuhBeJOIEAhTouvCDFslsmm
-         jiE8t0et+LsH6IxC4hrYNqvVd71MzOxcM4mwwBAkAK+BrIcxqZfdmlHITantscovN35s
-         UvUyfAij78mLXEPgAgxLJNGW6HVSU34GsUOIEi8lfyuQTkpgiUAvI3WWSf+JQcwE8H7g
-         QYyw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700713306; x=1701318106;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=s4auh5UlVZTEMASMX011K23AhH8P9rHjPq5gOf9SaIA=;
-        b=MxJ1Y2Izx3op80aqBZBsnuWvZscgFs083gisIT78+njSbO1ZFH+rzjInvnV+XnxRX1
-         Bvv1tsXhA7j8mTvtUTY8Gq+KaI/MjxxgLFz8QlGolswGfnZnAQhM3H9l85PgIN6CJtdi
-         BPhRKDLNlgGBgezXIpe24fKGOlm1iiT/f94K170XQqcjwkf91QfjLrEjIaO+R1aycHUP
-         qDzPKEnEZ9txmUtenkinXEU+U9wouQWB+wKnkWUTwDQgJy6AZLTWHhnBdLEl4MMFAzB+
-         Q2sRC9AZ6/P8Fy9DV87bhEctk1SqbZt7TjFMgZUTJ+ULm/EDtXWofJ9rIsmRRRdIXghb
-         JyVQ==
-X-Gm-Message-State: AOJu0YzPbZBQXrAhQuKP+7Lerv+QPUrqVIQtFx3ISQSUdRGKqpvkeusJ
-	pmFKGhESlxVFrFjYGkBF29IyMhJu5mqoHQ==
-X-Google-Smtp-Source: AGHT+IHBcxsZMp/wpeJ1Xx4yr/sDo3oI/scPKPLZL2WTuauFTOiVV1BXIlR9Wo/yyFYSYIl46uIE1Q==
-X-Received: by 2002:a05:6a20:72a5:b0:187:8bd4:e1ba with SMTP id o37-20020a056a2072a500b001878bd4e1bamr4961701pzk.37.1700713305824;
-        Wed, 22 Nov 2023 20:21:45 -0800 (PST)
-Received: from chiron.hsd1.or.comcast.net ([2601:1c0:ca00:cea0::b328])
-        by smtp.gmail.com with ESMTPSA id c10-20020a170902c1ca00b001cf570b10dasm244743plc.65.2023.11.22.20.21.45
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Nov 2023 20:21:45 -0800 (PST)
-From: Tim Orling <ticotimo@gmail.com>
-X-Google-Original-From: Tim Orling <tim.orling@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Tim Orling <tim.orling@konsulko.com>
-Subject: [meta-java][PATCH v2] commons-collections3: update SRC_URI
-Date: Wed, 22 Nov 2023 20:20:57 -0800
-Message-Id: <20231123042056.947943-1-tim.orling@konsulko.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=WIaHBkHx;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=96911f4787=archana.polampalli@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 3AN5bXYq019962
+	for <openembedded-devel@lists.openembedded.org>; Wed, 22 Nov 2023 22:13:24 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=OhUtd
+	oIZ3xPPzDewKU5bGf99FpNgIe15t2Q28fsBfWI=; b=WIaHBkHxRuHhzbTDE/w83
+	TbPr1JgvTl/+qm+ScjsbHN4UGDuQZZkU5JaF8JoaagRcqWrApXcomFl1v1jPlTnx
+	/uujumMneDYMMZZJQ5YA/8FxBwfOST1KJignxkryap8PbNQ/Me5IJy0GMElJNs1u
+	csqzbGzpKd0gLW3i9FyMtjlrKkdr0bzYUInxP7hVNmb/EhYeCdej7IbNZHbvjRvK
+	zz5uQUBA6yRW9C0KuK20PuSkJS5whRULtN0EYAdhfdMmqmwZwghXHeP18skwzzh9
+	W0XVYcltfFvopeOV1lhZ5n7eaiUDOhfKpNEnboT4dDanhUo3QsqWsf86G2i75jDV
+	g==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3uewnkuy5s-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 22 Nov 2023 22:13:23 -0800 (PST)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.35; Wed, 22 Nov 2023 22:13:28 -0800
+From: <archana.polampalli@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-networking][kirkstone][PATCH V3 1/1] samba: fix CVE-2023-4091
+Date: Thu, 23 Nov 2023 06:13:07 +0000
+Message-ID: <20231123061307.953418-1-archana.polampalli@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-ORIG-GUID: k-lbEuue15-Ak9Wgp9bZuYLVJBVZUpjS
+X-Proofpoint-GUID: k-lbEuue15-Ak9Wgp9bZuYLVJBVZUpjS
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-11-16_25,2023-11-16_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 phishscore=0
+ priorityscore=1501 malwarescore=0 mlxlogscore=999 spamscore=0
+ suspectscore=0 lowpriorityscore=0 clxscore=1015 bulkscore=0 adultscore=0
+ impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2311060001 definitions=main-2311230042
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 23 Nov 2023 04:21:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107019
+ <openembedded-devel@lists.openembedded.org>; Thu, 23 Nov 2023 06:13:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107020
 
-Older tarballs have been moved to archive:
-https://archive.apache.org/dist/commons/collections/source/
+From: Archana Polampalli <archana.polampalli@windriver.com>
 
-Also drop obsolete SRC_URI[md5sum]
+A vulnerability was discovered in Samba, where the flaw allows SMB clients to
+truncate files, even with read-only permissions when the Samba VFS module
+"acl_xattr" is configured with "acl_xattr:ignore system acls = yes". The SMB
+protocol allows opening files when the client requests read-only access but
+then implicitly truncates the opened file to 0 bytes if the client specifies
+a separate OVERWRITE create disposition request. The issue arises in configurations
+that bypass kernel file system permissions checks, relying solely on Samba's permissions.
 
-Signed-off-by: Tim Orling <tim.orling@konsulko.com>
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2023-4091
+
+Fix is patched to the function call smbd_check_access_rights_fsp() of open_file(),
+But in samba_4.14.14 smbd_check_access_rights() is used, from samba_4.15.0 onwards
+smbd_check_access_rights() was replaced with smbd_check_access_rights_fsp() and
+samba_4.14.14 is still vulnerable through smbd_check_access_rights().
+
+Ref:
+https://github.com/samba-team/samba/commit/3f61369d153419158c0f223e6f81c0bb07275833
+https://github.com/samba-team/samba/commit/26dc10bdb2cff3eece4a2874931b4058f9f87d68
+
+Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
 ---
-Changes in v2:
-  Fix parse error by adding closing " to SRC_URI
+ .../samba/samba/CVE-2023-4091-0001.patch      | 193 ++++++++++++++++++
+ .../samba/samba/CVE-2023-4091-0002.patch      |  59 ++++++
+ .../samba/samba_4.14.14.bb                    |   2 +
+ 3 files changed, 254 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/samba/samba/CVE-2023-4091-0001.patch
+ create mode 100644 meta-networking/recipes-connectivity/samba/samba/CVE-2023-4091-0002.patch
 
- recipes-core/jakarta-commons/commons-collections3_3.2.2.bb | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
-
-diff --git a/recipes-core/jakarta-commons/commons-collections3_3.2.2.bb b/recipes-core/jakarta-commons/commons-collections3_3.2.2.bb
-index 0a53d09..0539403 100644
---- a/recipes-core/jakarta-commons/commons-collections3_3.2.2.bb
-+++ b/recipes-core/jakarta-commons/commons-collections3_3.2.2.bb
-@@ -5,10 +5,9 @@ PR = "${INC_PR}.1"
+diff --git a/meta-networking/recipes-connectivity/samba/samba/CVE-2023-4091-0001.patch b/meta-networking/recipes-connectivity/samba/samba/CVE-2023-4091-0001.patch
+new file mode 100644
+index 000000000..908ab85ba
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/samba/samba/CVE-2023-4091-0001.patch
+@@ -0,0 +1,193 @@
++From b08a60160e6ab8d982d31844bcbf7ab67ff3a8de Mon Sep 17 00:00:00 2001
++From: Ralph Boehme <slow@samba.org>
++Date: Tue, 1 Aug 2023 12:30:00 +0200
++Subject: [PATCH 2/2] CVE-2023-4091: smbtorture: test overwrite dispositions on
++ read-only file
++
++BUG: https://bugzilla.samba.org/show_bug.cgi?id=15439
++
++Signed-off-by: Ralph Boehme <slow@samba.org>
++
++CVE: CVE-2023-4091
++
++Upstream-Status: Backport [https://github.com/samba-team/samba/commit/b08a60160e6ab8d982d31844bcbf7ab67ff3a8de]
++
++Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
++---
++ selftest/knownfail.d/samba3.smb2.acls |   1 +
++ source4/torture/smb2/acls.c           | 145 ++++++++++++++++++++++++++
++ 2 files changed, 146 insertions(+)
++ create mode 100644 selftest/knownfail.d/samba3.smb2.acls
++
++diff --git a/selftest/knownfail.d/samba3.smb2.acls b/selftest/knownfail.d/samba3.smb2.acls
++new file mode 100644
++index 0000000..18df260
++--- /dev/null
+++++ b/selftest/knownfail.d/samba3.smb2.acls
++@@ -0,0 +1 @@
+++^samba3.smb2.acls.OVERWRITE_READ_ONLY_FILE
++diff --git a/source4/torture/smb2/acls.c b/source4/torture/smb2/acls.c
++index 4f4538b..d26caeb 100644
++--- a/source4/torture/smb2/acls.c
+++++ b/source4/torture/smb2/acls.c
++@@ -3023,6 +3023,149 @@ done:
++	return ret;
++ }
++
+++static bool test_overwrite_read_only_file(struct torture_context *tctx,
+++					  struct smb2_tree *tree)
+++{
+++	NTSTATUS status;
+++	struct smb2_create c;
+++	const char *fname = BASEDIR "\\test_overwrite_read_only_file.txt";
+++	struct smb2_handle handle = {{0}};
+++	union smb_fileinfo q;
+++	union smb_setfileinfo set;
+++	struct security_descriptor *sd = NULL, *sd_orig = NULL;
+++	const char *owner_sid = NULL;
+++	int i;
+++	bool ret = true;
+++
+++	struct tcase {
+++		int disposition;
+++		const char *disposition_string;
+++		NTSTATUS expected_status;
+++	} tcases[] = {
+++#define TCASE(d, s) {				\
+++		.disposition = d,		\
+++		.disposition_string = #d,	\
+++		.expected_status = s,		\
+++	}
+++		TCASE(NTCREATEX_DISP_OPEN, NT_STATUS_OK),
+++		TCASE(NTCREATEX_DISP_SUPERSEDE, NT_STATUS_ACCESS_DENIED),
+++		TCASE(NTCREATEX_DISP_OVERWRITE, NT_STATUS_ACCESS_DENIED),
+++		TCASE(NTCREATEX_DISP_OVERWRITE_IF, NT_STATUS_ACCESS_DENIED),
+++	};
+++#undef TCASE
+++
+++	ret = smb2_util_setup_dir(tctx, tree, BASEDIR);
+++	torture_assert_goto(tctx, ret, ret, done, "smb2_util_setup_dir not ok");
+++
+++	c = (struct smb2_create) {
+++		.in.desired_access = SEC_STD_READ_CONTROL |
+++			SEC_STD_WRITE_DAC |
+++			SEC_STD_WRITE_OWNER,
+++		.in.file_attributes = FILE_ATTRIBUTE_NORMAL,
+++		.in.share_access = NTCREATEX_SHARE_ACCESS_READ |
+++			NTCREATEX_SHARE_ACCESS_WRITE,
+++		.in.create_disposition = NTCREATEX_DISP_OPEN_IF,
+++		.in.impersonation_level = NTCREATEX_IMPERSONATION_ANONYMOUS,
+++		.in.fname = fname,
+++	};
+++
+++	status = smb2_create(tree, tctx, &c);
+++	torture_assert_ntstatus_ok_goto(tctx, status, ret, done,
+++					"smb2_create failed\n");
+++	handle = c.out.file.handle;
+++
+++	torture_comment(tctx, "get the original sd\n");
+++
+++	ZERO_STRUCT(q);
+++	q.query_secdesc.level = RAW_FILEINFO_SEC_DESC;
+++	q.query_secdesc.in.file.handle = handle;
+++	q.query_secdesc.in.secinfo_flags = SECINFO_DACL | SECINFO_OWNER;
+++
+++	status = smb2_getinfo_file(tree, tctx, &q);
+++	torture_assert_ntstatus_ok_goto(tctx, status, ret, done,
+++					"smb2_getinfo_file failed\n");
+++	sd_orig = q.query_secdesc.out.sd;
+++
+++	owner_sid = dom_sid_string(tctx, sd_orig->owner_sid);
+++
+++	sd = security_descriptor_dacl_create(tctx,
+++					0, NULL, NULL,
+++					owner_sid,
+++					SEC_ACE_TYPE_ACCESS_ALLOWED,
+++					SEC_FILE_READ_DATA,
+++					0,
+++					NULL);
+++
+++	ZERO_STRUCT(set);
+++	set.set_secdesc.level = RAW_SFILEINFO_SEC_DESC;
+++	set.set_secdesc.in.file.handle = handle;
+++	set.set_secdesc.in.secinfo_flags = SECINFO_DACL;
+++	set.set_secdesc.in.sd = sd;
+++
+++	status = smb2_setinfo_file(tree, &set);
+++	torture_assert_ntstatus_ok_goto(tctx, status, ret, done,
+++					"smb2_setinfo_file failed\n");
+++
+++	smb2_util_close(tree, handle);
+++	ZERO_STRUCT(handle);
+++
+++	for (i = 0; i < ARRAY_SIZE(tcases); i++) {
+++		torture_comment(tctx, "Verify open with %s dispostion\n",
+++				tcases[i].disposition_string);
+++
+++		c = (struct smb2_create) {
+++			.in.create_disposition = tcases[i].disposition,
+++			.in.desired_access = SEC_FILE_READ_DATA,
+++			.in.file_attributes = FILE_ATTRIBUTE_NORMAL,
+++			.in.share_access = NTCREATEX_SHARE_ACCESS_MASK,
+++			.in.impersonation_level = NTCREATEX_IMPERSONATION_ANONYMOUS,
+++			.in.fname = fname,
+++		};
+++
+++		status = smb2_create(tree, tctx, &c);
+++		smb2_util_close(tree, c.out.file.handle);
+++		torture_assert_ntstatus_equal_goto(
+++			tctx, status, tcases[i].expected_status, ret, done,
+++			"smb2_create failed\n");
+++	};
+++
+++	torture_comment(tctx, "put back original sd\n");
+++
+++	c = (struct smb2_create) {
+++		.in.desired_access = SEC_STD_WRITE_DAC,
+++		.in.file_attributes = FILE_ATTRIBUTE_NORMAL,
+++		.in.share_access = NTCREATEX_SHARE_ACCESS_MASK,
+++		.in.create_disposition = NTCREATEX_DISP_OPEN_IF,
+++		.in.impersonation_level = NTCREATEX_IMPERSONATION_ANONYMOUS,
+++		.in.fname = fname,
+++	};
+++
+++	status = smb2_create(tree, tctx, &c);
+++	torture_assert_ntstatus_ok_goto(tctx, status, ret, done,
+++					"smb2_create failed\n");
+++	handle = c.out.file.handle;
+++
+++	ZERO_STRUCT(set);
+++	set.set_secdesc.level = RAW_SFILEINFO_SEC_DESC;
+++	set.set_secdesc.in.file.handle = handle;
+++	set.set_secdesc.in.secinfo_flags = SECINFO_DACL;
+++	set.set_secdesc.in.sd = sd_orig;
+++
+++	status = smb2_setinfo_file(tree, &set);
+++	torture_assert_ntstatus_ok_goto(tctx, status, ret, done,
+++					"smb2_setinfo_file failed\n");
+++
+++	smb2_util_close(tree, handle);
+++	ZERO_STRUCT(handle);
+++
+++done:
+++	smb2_util_close(tree, handle);
+++	smb2_util_unlink(tree, fname);
+++	smb2_deltree(tree, BASEDIR);
+++	return ret;
+++}
+++
+++
++ /*
++    basic testing of SMB2 ACLs
++ */
++@@ -3051,6 +3194,8 @@ struct torture_suite *torture_smb2_acls_init(TALLOC_CTX *ctx)
++			test_deny1);
++	torture_suite_add_1smb2_test(suite, "MXAC-NOT-GRANTED",
++			test_mxac_not_granted);
+++	torture_suite_add_1smb2_test(suite, "OVERWRITE_READ_ONLY_FILE",
+++			test_overwrite_read_only_file);
++
++	suite->description = talloc_strdup(suite, "SMB2-ACLS tests");
++
++--
++2.40.0
+diff --git a/meta-networking/recipes-connectivity/samba/samba/CVE-2023-4091-0002.patch b/meta-networking/recipes-connectivity/samba/samba/CVE-2023-4091-0002.patch
+new file mode 100644
+index 000000000..43d3b4929
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/samba/samba/CVE-2023-4091-0002.patch
+@@ -0,0 +1,59 @@
++From 8b26f634372f11edcbea33dfd68a3d57889dfcc5 Mon Sep 17 00:00:00 2001
++From: Ralph Boehme <slow@samba.org>
++Date: Tue, 1 Aug 2023 13:04:36 +0200
++Subject: [PATCH] CVE-2023-4091: smbd: use open_access_mask for access check in
++    open_file()
++
++If the client requested FILE_OVERWRITE[_IF], we're implicitly adding
++FILE_WRITE_DATA to the open_access_mask in open_file_ntcreate(), but for the
++access check we're using access_mask which doesn't contain the additional
++right, which means we can end up truncating a file for which the user has
++only read-only access via an SD.
++
++BUG: https://bugzilla.samba.org/show_bug.cgi?id=15439
++
++Signed-off-by: Ralph Boehme <slow@samba.org>
++
++CVE: CVE-2023-4091
++
++Upstream-Status: Backport [https://github.com/samba-team/samba/commit/8b26f634372f11edcbea33dfd68a3d57889dfcc5]
++
++Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
++---
++ selftest/knownfail.d/samba3.smb2.acls | 1 -
++ source3/smbd/open.c                   | 4 ++--
++ 2 files changed, 2 insertions(+), 3 deletions(-)
++ delete mode 100644 selftest/knownfail.d/samba3.smb2.acls
++
++diff --git a/selftest/knownfail.d/samba3.smb2.acls b/selftest/knownfail.d/samba3.smb2.acls
++deleted file mode 100644
++index 18df260..0000000
++--- a/selftest/knownfail.d/samba3.smb2.acls
+++++ /dev/null
++@@ -1 +0,0 @@
++-^samba3.smb2.acls.OVERWRITE_READ_ONLY_FILE
++diff --git a/source3/smbd/open.c b/source3/smbd/open.c
++index 2c3bf9e..4bec5cb 100644
++--- a/source3/smbd/open.c
+++++ b/source3/smbd/open.c
++@@ -1402,7 +1402,7 @@ static NTSTATUS open_file(files_struct *fsp,
++ 						conn->cwd_fsp,
++ 						smb_fname,
++ 						false,
++-						access_mask);
+++						open_access_mask);
++ 
++ 				if (!NT_STATUS_IS_OK(status)) {
++ 					DEBUG(10, ("open_file: "
++@@ -1585,7 +1585,7 @@ static NTSTATUS open_file(files_struct *fsp,
++ 				conn->cwd_fsp,
++ 				smb_fname,
++ 				false,
++-				access_mask);
+++				open_access_mask);
++ 
++ 		if (NT_STATUS_EQUAL(status, NT_STATUS_OBJECT_NAME_NOT_FOUND) &&
++ 				(fsp->posix_flags & FSP_POSIX_FLAGS_OPEN) &&
++-- 
++2.40.0
++
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.14.14.bb b/meta-networking/recipes-connectivity/samba/samba_4.14.14.bb
+index aa27592cb..dcb4d8137 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.14.14.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.14.14.bb
+@@ -49,6 +49,8 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
+            file://CVE-2023-34968_0009.patch \
+            file://CVE-2023-34968_0010.patch \
+            file://CVE-2023-34968_0011.patch \
++           file://CVE-2023-4091-0001.patch \
++           file://CVE-2023-4091-0002.patch \
+            "
  
- DESCRIPTION = "A set of abstract data type interfaces and implementations that offer a wealth of useful functionality and a solid foundation for extending that functionality"
- 
--SRC_URI = "http://www.apache.org/dist/commons/collections/source/commons-collections-${PV}-src.tar.gz"
-+SRC_URI = "https://archive.apache.org/dist/commons/collections/source/commons-collections-${PV}-src.tar.gz"
- 
- S = "${WORKDIR}/commons-collections-${PV}-src"
- 
- 
--SRC_URI[md5sum] = "776b51a51312c1854ad8f6d344a47cda"
- SRC_URI[sha256sum] = "070d94fe77969d8949bd129a618e6a7bee6b83b5b5db3ef3f983395a5428b914"
+ SRC_URI:append:libc-musl = " \
 -- 
-2.34.1
+2.40.0
 
 
