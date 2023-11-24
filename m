@@ -2,58 +2,57 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 227F5C636CB
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 23467C636D3
 	for <webhook@archiver.kernel.org>; Fri, 24 Nov 2023 00:01:02 +0000 (UTC)
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
- by mx.groups.io with SMTP id smtpd.web11.121180.1700784061605589286
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
+ by mx.groups.io with SMTP id smtpd.web10.120983.1700784059487121801
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 23 Nov 2023 16:01:01 -0800
+ Thu, 23 Nov 2023 16:00:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=SiiPxDQF;
- spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-1cf8720c6b7so10425625ad.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 23 Nov 2023 16:01:01 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=AC+zsgcA;
+ spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f180.google.com with SMTP id 41be03b00d2f7-5c27ee9c36bso946531a12.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 23 Nov 2023 16:00:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1700784061; x=1701388861; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1700784059; x=1701388859; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=M1YtRWzYk1xSACJVvSBxU5AtlxZNY064lkr6Tjm7o80=;
-        b=SiiPxDQF43ZAOG8Tsb1rkvcMoMUBWNc2P9QQnS+QArAWrF7rCocn8pfsmoD9lFbhpo
-         Mld5oG0DNKxFVcmY7HGw1JOz/ceng0Eifd55M6HTZv1r1Lh4VtmEKVjs5KVgJrZRpZ2l
-         5Ncbj92KlsliCN1yTU9EQQC3bFF56RFP8o7zUNlYXSaA7BtDzMeWhunsOmigxT8zpf5K
-         I5YuFMz9HFVnNyyfRdZBbYgmoiL7uFE1UzMhL5O1+HKo83BZOeDHON2foUg1d12Ef63I
-         gyuRfegh+olLFSl6i+JnPLYpIGogMJkXJLZ3Lnq6BfwxNO3VosnNhlssPziQAGf2/Sw5
-         Arow==
+        bh=YAINmwdkuA1a+C8bJEkFI8M/kdWZE1c+dYEw2vDgUyo=;
+        b=AC+zsgcAZqftHWOq16hBQSDjU7h7u9iPZl4rn8qhlbNlb42Vfcja9Y+v01jbfFjkpF
+         KlJPIQbMMzIgLI65H+ygbvvnLvCmjRgkG0aaG0pYqBdxvmpWm5zruZI8A+CZvm9Z0pxx
+         T6E9T7sd5Hkt7CIDUPDjbo120o11CdcKEAD0ksWSKhlGsivV9EVbaY5TIK6tuvIITgDd
+         8DGVDe5bnI/Bvb7nouNi+rTU8mPdgI8X8dZ8v8xftAzMSwmtvRGibY1Y20QftgcSBtED
+         t3Lc0Fzq6P8b2k8SQ+1eiaPqQCnBFlmS6kSn8Eo8edQYDVxs9VGxyZhGG42A97+XLvQV
+         b/kA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700784061; x=1701388861;
+        d=1e100.net; s=20230601; t=1700784059; x=1701388859;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=M1YtRWzYk1xSACJVvSBxU5AtlxZNY064lkr6Tjm7o80=;
-        b=rgYMxOKj1MNhiEa/K2D4tR/LkOmGGu8za2FZZFF+lDXHD7Dpd5n+BGzswZ8ySf0pIN
-         n93f1R9V10RB8hUsHWhR1infjmGj0/nyz9bcVMETce2ajraAx3Nbi7UzueAe3yOQbWpO
-         XoDK/R6k/xCPD0GYMDXbqhUco5C9Kxui1sUyqkmhrCHQs8A8MfcFAwChWYbZNPDVu57+
-         vLwEpMyB8pQEFFMemV7PH0BUAXOG5Z2HsAecJB1LNQBbjZsyjo3kUh5VC9Y9rEPAfTnC
-         XKR9kS9WXPda1N8sgVK6JWoh1TLT6QG9e32bgrx6CBv0K6mwkqY2bmQHczMjVB1U5wA+
-         knXQ==
-X-Gm-Message-State: AOJu0Yy5bk5IqTClOcRklzLjtAIrbrqrfUlCLkJEzDX3+b44v/XZwsWV
-	y+wL6K+lXNc6IPkraJMCSwXEoCXHNUB1tg==
-X-Google-Smtp-Source: AGHT+IFv86hUei0kVhV2K5gtqaxA4OYwupyS/aLsBxZvNXxanP6xc227IYZgSkiepFWuuoFmmh6rPA==
-X-Received: by 2002:a17:903:44d:b0:1cf:7a4b:9dc6 with SMTP id iw13-20020a170903044d00b001cf7a4b9dc6mr827767plb.61.1700784060581;
-        Thu, 23 Nov 2023 16:01:00 -0800 (PST)
+        bh=YAINmwdkuA1a+C8bJEkFI8M/kdWZE1c+dYEw2vDgUyo=;
+        b=bbvXqRvpnM5QjizHEbcm9xAuGxCVVTTwcr3YOXRi6ItWEqCasnMtjYuGHe5/wxYNI6
+         A8gB1xmo3Wbnao96l9d0z/aEdbJXx5/TK9Su2t0YYMnjxJWUhAaOJa7e5lZndzOHc+6B
+         MGCY7aBrI0zlxFWW/VYz4d9nYBMm+K0M/FYPOLxYyA9IClQ4Wn4hH9TYgE4U8Q0ashEc
+         7Px57djRCdmOtoRBsa0qIPOe26wiBvLIn8FqF6SSzZ+9e+czyi+jfu3VihXENwF+oyFv
+         yS3zc+lOk5qVQbphn2zkqylnov0NpTfQePyIyiWUVDlG60t4CPWR9vhAIZatfz/YoWu4
+         99dw==
+X-Gm-Message-State: AOJu0Yz5PQ4QM8A8q3J+H9LH2etQPjO13SIz9VK90gNYh3FfLHWdI1Zy
+	ss80EmZShCWHJo0vp7IhEeJVpSRVK/xeCA==
+X-Google-Smtp-Source: AGHT+IFmVFvFECxYCxUOxtsD5SooZNK+Nc6JM9c7+TFgKcrKMKDntMN1GgtUa+NdKwV2qcRAGK1Nlw==
+X-Received: by 2002:a17:902:7584:b0:1ca:abe:a08b with SMTP id j4-20020a170902758400b001ca0abea08bmr869508pll.68.1700784058613;
+        Thu, 23 Nov 2023 16:00:58 -0800 (PST)
 Received: from apollo.localdomain ([2601:646:9100:2cb0::2c3f])
-        by smtp.gmail.com with ESMTPSA id p12-20020a170902e74c00b001cc3c521affsm1903239plf.300.2023.11.23.16.00.59
+        by smtp.gmail.com with ESMTPSA id p12-20020a170902e74c00b001cc3c521affsm1903239plf.300.2023.11.23.16.00.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Nov 2023 16:01:00 -0800 (PST)
+        Thu, 23 Nov 2023 16:00:58 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org, wangmy@fujitsu.com
-In-Reply-To: <1700633942-7833-1-git-send-email-wangmy@fujitsu.com>
-References: <1700633942-7833-1-git-send-email-wangmy@fujitsu.com>
-Subject: Re: [oe] [meta-perl] [PATCH] libextutils-cppguess-perl: upgrade
- 0.26 -> 0.27
-Message-Id: <170078405970.3118595.2047112430132886596.b4-ty@gmail.com>
-Date: Thu, 23 Nov 2023 16:00:59 -0800
+In-Reply-To: <1700633783-7740-1-git-send-email-wangmy@fujitsu.com>
+References: <1700633783-7740-1-git-send-email-wangmy@fujitsu.com>
+Subject: Re: [oe] [meta-oe] [PATCH] exiftool: upgrade 12.69 -> 12.70
+Message-Id: <170078405796.3118595.13139224589591303781.b4-ty@gmail.com>
+Date: Thu, 23 Nov 2023 16:00:57 -0800
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -62,19 +61,44 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 24 Nov 2023 00:01:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107030
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107028
 
 
-On Wed, 22 Nov 2023 14:19:02 +0800, wangmy@fujitsu.com wrote:
+On Wed, 22 Nov 2023 14:16:23 +0800, wangmy@fujitsu.com wrote:
 > Changelog:
->  support C++20 and C++23 standards, and vendored version output
+> ===========
+>   - This marks the 20th anniversary of the initial ExifTool release!
+>   - Added ability to read/delete C2PA CAI JUMBF metadata from TIFF-based images
+>     (eg. DNG), QuickTime-based files (eg. MP4) and WebP images, and read JUMBF
+>     from other RIFF-based files (eg. WAV, AVI), GIF images and ID3v2 metadata
+>   - Added read/write support for JPH images
+>   - Added ability to read Leica Q3 maker notes
+>   - Added ability to recognize and write FujiFilm M-RAW RAF images (multiple raw
+>     images in a single file) and the ability to read preview-less RAF images
+>   - Added support for reading a number of obscure Microsoft EXIF tags
+>   - Added a few new Sony lenses and support for the ILCE-9M3
+>   - Added a couple of new Panasonic Leica lenses
+>   - Added a couple of new Canon RF lenses
+>   - Added a number of new CPUType values for ELF executables
+>   - Added some new Olympus CameraType values
+>   - Decode a few more ID3v2.2 tags (github #142)
+>   - Decode a few new Canon G5X Mark II tags
+>   - Decode WB_RGGBLevels for a few more Nikon cameras
+>   - Extract information from FujiFilm M-RAW header
+>   - Improved decoding of a few Nikon Z tags
+>   - Marked misspelt XMP-drone-dji:GPSLongtitude tag to Avoid when writing
+>   - Changed RIFF MaxDataRate conversion to use SI prefixes by default
+>   - Fixed decoding of unknown ColorBalance information for some Nikon models
+>   - Fixed an incorrect Nikon Z LensID
+>   - API Changes:
+>       - Added ByteUnit option
 > 
-> 
+> [...]
 
 Applied, thanks!
 
-[1/1] libextutils-cppguess-perl: upgrade 0.26 -> 0.27
-      commit: fdb279bc33c1dff36678bc822da22666a4c9ab18
+[1/1] exiftool: upgrade 12.69 -> 12.70
+      commit: 8f83be7d83a500fe506a2ea55d9752ecef4b3c8a
 
 Best regards,
 -- 
