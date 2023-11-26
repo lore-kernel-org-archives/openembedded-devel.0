@@ -1,82 +1,149 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B50AC07D59
-	for <webhook@archiver.kernel.org>; Sun, 26 Nov 2023 18:39:42 +0000 (UTC)
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
- by mx.groups.io with SMTP id smtpd.web11.61832.1701023981398807685
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1464FC4167B
+	for <webhook@archiver.kernel.org>; Sun, 26 Nov 2023 20:23:13 +0000 (UTC)
+Received: from mailout07.t-online.de (mailout07.t-online.de [194.25.134.83])
+ by mx.groups.io with SMTP id smtpd.web10.65284.1701030191804774508
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 26 Nov 2023 10:39:41 -0800
+ Sun, 26 Nov 2023 12:23:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=DF9+ysn+;
- spf=pass (domain: gmail.com, ip: 209.85.210.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f182.google.com with SMTP id d2e1a72fcca58-6cc2027f7a2so708513b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 26 Nov 2023 10:39:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1701023981; x=1701628781; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:date:message-id:subject
-         :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=q6li3glKRnN9KJYzkPpMLP8g7CvnVcnupdJHmBPgS/g=;
-        b=DF9+ysn+hG7dORFbcv7tGiijdLDJmbDyfw/H3TB881kKvRlOpXV2SslrPt8iWN4E3/
-         purJFN3/RyYo7riWYvaSAnnqCAH4IFv+kap9X4QB2H1d9iqX5wEnCKFsAaYZPYspkFKE
-         uO46rSNZ5HQgw6AWWSb6gBHvriH/jBoeMLlDuVWfvpK1Oj8aISfJv0SAu7Gjcwq2/YjG
-         vCxzgMGp1aHVUuAQnjh70Ul1xC7611yBBazmRVrMupJGsp4A0a+xlSqGJfLd5QDdRzgz
-         HaJfWKgww/1+Mxjt8MUTKOD7lyKZGOSSe4iAaRlkwLrNwpbTusEgVR21NY4I/oHcFkRc
-         EdTA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701023981; x=1701628781;
-        h=content-transfer-encoding:mime-version:date:message-id:subject
-         :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=q6li3glKRnN9KJYzkPpMLP8g7CvnVcnupdJHmBPgS/g=;
-        b=WYxgA2l+a+RuXUctsxOVzYmT4jJjL16xbpCPh49cOr9tos2z7WCUcFWvcZ93Pw0ctl
-         dzGKN3lJvo8evzveNIH8RT6OyICzia3EI5+NrrZ/ZoMv6+v8gHfsuyj2XwyikigSK+Kr
-         Hh1RJy28sA1ppWZgSQZvWHlykbdIHlPuWKckWayozYGVejBwnLMZflOChNrCw1poJYPA
-         xuZnGZtYUVIILfsr4QBiphmNSf9p6Y+PFlejjADSbcSanJL29VYXpyg6E6KtQhQpKhdk
-         6jlA3sqFzJ9ADGV8k2qypVIzM81T2EXYojKg2WGO3f9vUFvjLa/AAhY81Q2dM/Qe/7y+
-         fWIA==
-X-Gm-Message-State: AOJu0YwRf1kBiU6NecGQvStVCVj03yPhZrA/DWoRVcQHA++xsTYgOJ3r
-	TAzlxoNwH73I/TxveZGZuxFK5Ince79qvw==
-X-Google-Smtp-Source: AGHT+IHIkMmvePdlCZk4NljymkIFEiw890R31WvAqizPGwcOuxm3JA52uHScw6XMYs5Ce0cBS5cY3A==
-X-Received: by 2002:a05:6a20:54a8:b0:18c:3511:665f with SMTP id i40-20020a056a2054a800b0018c3511665fmr5776429pzk.51.1701023980751;
-        Sun, 26 Nov 2023 10:39:40 -0800 (PST)
-Received: from apollo.localdomain ([2601:646:9100:2cb0::2c3f])
-        by smtp.gmail.com with ESMTPSA id ei44-20020a056a0080ec00b006c988fda657sm6157448pfb.177.2023.11.26.10.39.39
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 26 Nov 2023 10:39:40 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org, 
- Markus Volk <f_l_k@t-online.de>
-In-Reply-To: <20231125140317.12111-1-f_l_k@t-online.de>
-References: <20231125140317.12111-1-f_l_k@t-online.de>
-Subject: Re: [meta-networking][PATCH] system-config-printer: Add
- packageconfig for polkit
-Message-Id: <170102397977.3308314.5825464739197840614.b4-ty@gmail.com>
-Date: Sun, 26 Nov 2023 10:39:39 -0800
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.83, mailfrom: f_l_k@t-online.de)
+Received: from fwd87.aul.t-online.de (fwd87.aul.t-online.de [10.223.144.113])
+	by mailout07.t-online.de (Postfix) with SMTP id 0FCFD5058C
+	for <openembedded-devel@lists.openembedded.org>; Sun, 26 Nov 2023 21:23:09 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.154.162.199]) by fwd87.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1r7Lem-461L7Z0; Sun, 26 Nov 2023 21:23:08 +0100
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-multimedia][PATCH] pipewire: upgrade 0.3.85 > 1.0.0
+Date: Sun, 26 Nov 2023 21:23:33 +0100
+Message-ID: <20231126202333.890649-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.42.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.12.4
+Content-Type: text/plain; charset=UTF-8
+X-TOI-EXPURGATEID: 150726::1701030188-66FFA968-8F291895/0/0 CLEAN NORMAL
+X-TOI-MSGID: 2b0cf833-f703-46f7-a316-c91936529ce3
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 26 Nov 2023 18:39:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107053
+ <openembedded-devel@lists.openembedded.org>; Sun, 26 Nov 2023 20:23:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107054
 
+The PipeWire project is immensely proud to announce the 1.0 release
+of PipeWire.
 
-On Sat, 25 Nov 2023 15:03:17 +0100, Markus Volk wrote:
-> 
+It is API and ABI compatible with previous 0.3.x releases.
 
+ "PipeWire represents the next evolution of audio handling for Linux, tak=
+ing
+ the best of both pro-audio (JACK) and desktop audio servers (PulseAudio)=
+ and
+ linking them into a single, seamless, powerful new system."
+    - Paul Davis, JACK and Ardour author
 
-Applied, thanks!
+ "What exciting times! PipeWire 1.0 is the culmination of 15 years of
+ Linux audio expertise, blending lessons from PulseAudio into a high-perf=
+ormance,
+ flexible, and user-friendly foundation for audio and multimedia on Linux=
+.
+ I'm looking forward to the next decade of progress in the free software
+ consumer and professional audio space!."
+    - Arun Raghavan, PulseAudio developer/maintainer.
 
-[1/1] system-config-printer: Add packageconfig for polkit
-      commit: 092502feedc45d3bf9b9a84dacfb9665d6322db1
+ "I'm thrilled to witness the first stable release of PipeWire after five=
+ years
+ of collaboration with its remarkable community, pushing the boundaries o=
+f
+ multimedia integration in the Linux ecosystem one step further.=E2=80=9D
+    - George Kiagiadakis, WirePlumber author
 
-Best regards,
--- 
-Khem Raj <raj.khem@gmail.com>
+ "From the beginning of the libcamera project, we have always seen
+ PipeWire as the solution to handle desktop and mobile integration and
+ give a seemless multimedia integration to users while providing security
+ features and resource sharing between applications."
+    - Kieran Bingham, libcamera author
+
+Happy Holidays!
+
+Highlights
+  - Fix a memfd/dmabuf leak when uploading buffers while shutting down.
+  - Handle concurrent jack_port_get_buffer() calls because ardour seems t=
+o
+    be doing this.
+  - Improve time reporting (less jitter) in ALSA when using IRQ.
+  - Many doc improvements.
+
+PipeWire
+  - Respect PIPEWIRE_DLCLOSE everywhere, remove pw_in_valgrind().
+  - Remove a warning when a client tries to change ignored properties.
+
+Modules
+  - Fix a memfd/dmabuf leak when uploading buffers while shutting down.
+  - Fix a potential segfault when copying mix structures. (#3658)
+  - Avoid races in setrlimit in module-rt.
+  - Fix a memory leak in filter-chain.
+  - Set rtp.ptime on senders, not receivers.
+  - The ROC modules were ported to ROC 0.3
+
+SPA
+  - Improve time reporting (less jitter) in ALSA when using IRQ. (#3657)
+  - Add latency param query in libcamera.
+  - Fix some compiler warnings.
+  - The EVL plugin was updated.
+
+Bluetooth
+  - LC3 codec and compatibility improvements.
+
+Pulse server
+  - Fix emission of events when a sink/source state changes. (#3660)
+
+JACK
+  - Improve transport and time handling. Use unique ids to make consisten=
+t
+    snapshots of the current time and transport.
+  - Avoid enumerating port params that we are not going to use.
+  - Optimize buffer reuse.
+  - Handle concurrent jack_port_get_buffer() calls because ardour seems t=
+o
+    be doing this. (#3632)
+
+Docs
+  - Many doc improvements.
+  - Add man pages for pw-dump, pw-loopback, modules, pipewire-pulse.
+  - Manpages are now made with Doxygen.
+  - Add docs for pulse-modules
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ .../pipewire/{pipewire_0.3.85.bb =3D> pipewire_1.0.0.bb}          | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_0.3.85.bb =3D=
+> pipewire_1.0.0.bb} (99%)
+
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.85.=
+bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.0.0.bb
+similarity index 99%
+rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.85.b=
+b
+rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_1.0.0.bb
+index 883d02d51..b4da781f0 100644
+--- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_0.3.85.bb
++++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.0.0.bb
+@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM =3D " \
+=20
+ DEPENDS =3D "dbus ncurses"
+=20
+-SRCREV =3D "7db1e7f643a454056327999b2d8e35d8097b5593"
++SRCREV =3D "4debdcd40b055b3eaa83a8f4443aa990ea566bfe"
+ SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
+master;protocol=3Dhttps"
+=20
+ S =3D "${WORKDIR}/git"
+--=20
+2.42.1
 
 
