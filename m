@@ -1,102 +1,211 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <jasper@fancydomain.eu>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7C20BC4167B
-	for <webhook@archiver.kernel.org>; Sun, 26 Nov 2023 22:19:53 +0000 (UTC)
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
- by mx.groups.io with SMTP id smtpd.web10.69716.1701037193135676326
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E665EC4167B
+	for <webhook@archiver.kernel.org>; Sun, 26 Nov 2023 23:55:13 +0000 (UTC)
+Received: from mx.walter.deinstapel.de (mx.walter.deinstapel.de [62.176.232.100])
+ by mx.groups.io with SMTP id smtpd.web11.78254.1701042904691735027
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 26 Nov 2023 14:19:53 -0800
+ Sun, 26 Nov 2023 15:55:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Dvfrq5Jp;
- spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-1cfc3f50504so3771755ad.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 26 Nov 2023 14:19:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1701037192; x=1701641992; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=dvEiud8Hztov7AqHVuISAupWkCVCRzzNAHnq9B9KOvM=;
-        b=Dvfrq5JpyTXlzI1KZEyulKVj6dB+kjOXscRMFDGXhmrWjolCRLGAa327/VXUfo+y6s
-         sRLzqcyB6wUlcjgfgS1M6R4jPzpid5wTpdOJfpxBi7SAs1NeKGrwsECPpJMCgHDSM1GT
-         PyKvPpRXBd7W+kePJBcjZZvFIv4pUNR1yHZ4U3SFNx6ItUQYTZnQYryJTQ/Ub6Zo1wf+
-         z+89i68oAQeWuSK74kmMhq9SEZwptUKqPg271oorhimHe3g5FrNuiGVodoLOm4+H6JfZ
-         1QWFWnrWLQOwWreRAji4WaOEtA7yIVsBSn4KM31u6IlI+Dt1ptyi0FMtbNRZjOxvWwGW
-         83pA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701037192; x=1701641992;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=dvEiud8Hztov7AqHVuISAupWkCVCRzzNAHnq9B9KOvM=;
-        b=ebpmm8bSHahjclihZlkrekb2OAY9+eBmgiM8eIQKkW1hOYWk53wK8C3lmuFfpfjwch
-         /jfyhKZht1kZBFpU+Regh6da8DvBBAVzHyMZBL8oAysLC2zwpR4ViCIh+rhIl/U/zMQl
-         NIDqKUqAJ9ts4gtoHpTJZbJfwhbnJFF1nSux4/48i+N03bYkUTWU0UvRLmygRbGPBVX7
-         EbJylxAcGJexBORefiGvaOfaM01AIQwh2Nba49L44jvYe1HhdAAeARfCIxJ0AmN8poIp
-         fGMdnrlnIVaoAsbLebj0FcCNtdz45xZGU2zOqK2MP9hXW+kgX4v62fkmyLYaa6G7tteZ
-         5ZEQ==
-X-Gm-Message-State: AOJu0YyHNC4o469lGrYpGabw6vAhs+73NRHl1mzonFNj8l7IqRsfA5i/
-	VyufL+Nvy/Dyg3TYL0rmg60sp45krNDXeQ==
-X-Google-Smtp-Source: AGHT+IHWmV4G7a2OwS3tVhgWk4kCgyPZvsM8ms/GLAP68OjH1RZG4IYqYWLzafysmXX3a1btMsnefA==
-X-Received: by 2002:a17:90b:4c4d:b0:285:90df:1781 with SMTP id np13-20020a17090b4c4d00b0028590df1781mr7454867pjb.0.1701037192143;
-        Sun, 26 Nov 2023 14:19:52 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9100:2cb0::2c3f])
-        by smtp.gmail.com with ESMTPSA id j3-20020a17090a94c300b00285994cf711sm3577952pjw.33.2023.11.26.14.19.51
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 26 Nov 2023 14:19:51 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@fancydomain.eu header.s=mail header.b=V7Z47Q4O;
+ spf=pass (domain: fancydomain.eu, ip: 62.176.232.100, mailfrom: jasper@fancydomain.eu)
+From: jasper@fancydomain.eu
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=fancydomain.eu;
+	s=mail; t=1701042901;
+	bh=yrkhyQF982XEu3rM+gX9/TznVnVSr2A1WtuRQxC6Tv8=;
+	h=From:To:Cc:Subject;
+	b=V7Z47Q4O2D3VstdqVwBB8z/6fnn6Sy8RQ54qOqh7CPqskH1cAzDfHBshjPQHsvv8H
+	 JR6UuSs8S3vYno7jm1ibOeqfsvpQV9bYcry+Xh0bCszBdcC3/conMzRIGoKQUE6DVt
+	 6+gmln5S4+6HymfbEDjrnZfxQL6whKK0Ges4S2kNyJsLvJo5U1KYtBbeLXisEDlzm0
+	 BYh6yabpih6JwSe/vrrdYBwOX9SUNeBVy6eD3PFGkll/tCtPWW/Zd3qUMuZPOHtPvQ
+	 XUHY85X/t3Y6pvDtUOBOu3xB7f6ivFr6Xm7MJxnHAQVuLkufN6ygxs5/p+K/xfvPbw
+	 h05gHjXEOOFSQ==
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [PATCH] nlohmann-json: Fix SRCREV_FORMAT and do not package git metadata into ptests
-Date: Sun, 26 Nov 2023 14:19:48 -0800
-Message-ID: <20231126221948.3343737-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.43.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Jasper Orschulko <jasper@fancydomain.eu>
+Subject: [meta-webserver][kirkstone][PATCH] nginx: Mitigate HTTP/2 Stream Resets Flood impact
+Date: Mon, 27 Nov 2023 00:54:30 +0100
+Message-ID: <20231126235430.18393-1-jasper@fancydomain.eu>
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 26 Nov 2023 22:19:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107055
+ <openembedded-devel@lists.openembedded.org>; Sun, 26 Nov 2023 23:55:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107056
 
-SRCREV_FORMAT should append to default for considering both git
-repositories.
+From: Jasper Orschulko <jasper@fancydomain.eu>
 
-the git hook scripts require shell to be installed on target and
-it may want it from /usr/bin/sh and distro may not provide /usr/bin/sh
-since its not having usrmerge distro feature.
+Reduces the impact of HTTP/2 Stream Reset flooding in the nginx product
+(CVE-2023-44487).
 
-Fixes
-ERROR: nlohmann-json-3.11.2-r0 do_package_qa: QA Issue: /usr/lib/nlohmann-json/ptest/json_test_data/.git/hooks/update.sample contained in package nlohmann-json-ptest requires /usr/bin/sh, but no providers found in RDEPENDS:nlohmann-json-ptest? [file-rdeps]
+See: https://www.nginx.com/blog/http-2-rapid-reset-attack-impacting-f5-ng=
+inx-products/
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+This patch only reduces the impact and does not completely mitigate the C=
+VE
+in question, the latter being due to a design flaw in the HTTP/2 protocol
+itself. For transparancy reasons I therefore opted to not mark the
+CVE as resolved, so that integrators can decide for themselves, wheither =
+to
+enable HTTP/2 support or allow HTTP/1.1 connections only.
+
+Signed-off-by: Jasper Orschulko <jasper@fancydomain.eu>
 ---
- meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.11.2.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ ...-per-iteration-stream-handling-limit.patch | 92 +++++++++++++++++++
+ .../recipes-httpd/nginx/nginx_1.20.1.bb       |  1 +
+ .../recipes-httpd/nginx/nginx_1.21.1.bb       |  2 +
+ 3 files changed, 95 insertions(+)
+ create mode 100644 meta-webserver/recipes-httpd/nginx/files/0001-HTTP-2-=
+per-iteration-stream-handling-limit.patch
 
-diff --git a/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.11.2.bb b/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.11.2.bb
-index 694d632cb1..350932388c 100644
---- a/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.11.2.bb
-+++ b/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.11.2.bb
-@@ -16,7 +16,7 @@ SRC_URI = "git://github.com/nlohmann/json.git;branch=develop;protocol=https \
- SRCREV = "bc889afb4c5bf1c0d8ee29ef35eaaf4c8bef8a5d"
- SRCREV_json-test-data = "a1375cea09d27cc1c4cadb8d00470375b421ac37"
- 
--SRCREV_FORMAT = "json-test-data"
-+SRCREV_FORMAT .= "_json-test-data"
- 
- S = "${WORKDIR}/git"
- 
-@@ -36,6 +36,7 @@ do_install_ptest () {
-     install -d ${D}${PTEST_PATH}/tests
-     cp -r ${S}/json_test_data/ ${D}${PTEST_PATH}/
-     cp -r ${B}/tests/test-* ${D}${PTEST_PATH}/tests
-+    rm -rf ${D}${PTEST_PATH}/json_test_data/.git
- }
- 
- 
--- 
-2.43.0
+diff --git a/meta-webserver/recipes-httpd/nginx/files/0001-HTTP-2-per-ite=
+ration-stream-handling-limit.patch b/meta-webserver/recipes-httpd/nginx/f=
+iles/0001-HTTP-2-per-iteration-stream-handling-limit.patch
+new file mode 100644
+index 000000000..7dd1e721c
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/nginx/files/0001-HTTP-2-per-iteration-=
+stream-handling-limit.patch
+@@ -0,0 +1,92 @@
++From 2b9667f36551406169e3e2a6a774466ac70a83c0 Mon Sep 17 00:00:00 2001
++From: Maxim Dounin <mdounin@mdounin.ru>
++Date: Tue, 10 Oct 2023 15:13:39 +0300
++Subject: [PATCH] HTTP/2: per-iteration stream handling limit.
++
++To ensure that attempts to flood servers with many streams are detected
++early, a limit of no more than 2 * max_concurrent_streams new streams pe=
+r one
++event loop iteration was introduced.  This limit is applied even if
++max_concurrent_streams is not yet reached - for example, if correspondin=
+g
++streams are handled synchronously or reset.
++
++Further, refused streams are now limited to maximum of max_concurrent_st=
+reams
++and 100, similarly to priority_limit initial value, providing some toler=
+ance
++to clients trying to open several streams at the connection start, yet
++low tolerance to flooding attempts.
++
++Upstream-Status: Backport
++[https://github.com/nginx/nginx/commit/6ceef192e7af1c507826ac38a2d43f08b=
+f265fb9]
++
++Reduces the impact of HTTP/2 Stream Reset flooding in the nginx product
++(CVE-2023-44487).
++
++See: https://www.nginx.com/blog/http-2-rapid-reset-attack-impacting-f5-n=
+ginx-products/
++
++This patch only reduces the impact and does not completely mitigate the =
+CVE
++in question, the latter being due to a design flaw in the HTTP/2 protoco=
+l
++itself. For transparancy reasons I therefore opted to not mark the
++CVE as resolved, so that integrators can decide for themselves, wheither=
+ to
++enable HTTP/2 support or allow HTTP/1.1 connections only.
++
++Signed-off-by: Jasper Orschulko <jasper@fancydomain.eu>
++---
++ src/http/v2/ngx_http_v2.c | 15 +++++++++++++++
++ src/http/v2/ngx_http_v2.h |  2 ++
++ 2 files changed, 17 insertions(+)
++
++diff --git a/src/http/v2/ngx_http_v2.c b/src/http/v2/ngx_http_v2.c
++index 3611a2e50..291677aca 100644
++--- a/src/http/v2/ngx_http_v2.c
+++++ b/src/http/v2/ngx_http_v2.c
++@@ -361,6 +361,7 @@ ngx_http_v2_read_handler(ngx_event_t *rev)
++     ngx_log_debug0(NGX_LOG_DEBUG_HTTP, c->log, 0, "http2 read handler")=
+;
++=20
++     h2c->blocked =3D 1;
+++    h2c->new_streams =3D 0;
++=20
++     if (c->close) {
++         c->close =3D 0;
++@@ -1320,6 +1321,14 @@ ngx_http_v2_state_headers(ngx_http_v2_connection_=
+t *h2c, u_char *pos,
++         goto rst_stream;
++     }
++=20
+++    if (h2c->new_streams++ >=3D 2 * h2scf->concurrent_streams) {
+++        ngx_log_error(NGX_LOG_INFO, h2c->connection->log, 0,
+++                      "client sent too many streams at once");
+++
+++        status =3D NGX_HTTP_V2_REFUSED_STREAM;
+++        goto rst_stream;
+++    }
+++
++     if (!h2c->settings_ack
++         && !(h2c->state.flags & NGX_HTTP_V2_END_STREAM_FLAG)
++         && h2scf->preread_size < NGX_HTTP_V2_DEFAULT_WINDOW)
++@@ -1385,6 +1394,12 @@ ngx_http_v2_state_headers(ngx_http_v2_connection_=
+t *h2c, u_char *pos,
++=20
++ rst_stream:
++=20
+++    if (h2c->refused_streams++ > ngx_max(h2scf->concurrent_streams, 100=
+)) {
+++        ngx_log_error(NGX_LOG_INFO, h2c->connection->log, 0,
+++                      "client sent too many refused streams");
+++        return ngx_http_v2_connection_error(h2c, NGX_HTTP_V2_NO_ERROR);
+++    }
+++
++     if (ngx_http_v2_send_rst_stream(h2c, h2c->state.sid, status) !=3D N=
+GX_OK) {
++         return ngx_http_v2_connection_error(h2c, NGX_HTTP_V2_INTERNAL_E=
+RROR);
++     }
++diff --git a/src/http/v2/ngx_http_v2.h b/src/http/v2/ngx_http_v2.h
++index 349229711..6a7aaa62c 100644
++--- a/src/http/v2/ngx_http_v2.h
+++++ b/src/http/v2/ngx_http_v2.h
++@@ -125,6 +125,8 @@ struct ngx_http_v2_connection_s {
++     ngx_uint_t                       processing;
++     ngx_uint_t                       frames;
++     ngx_uint_t                       idle;
+++    ngx_uint_t                       new_streams;
+++    ngx_uint_t                       refused_streams;
++     ngx_uint_t                       priority_limit;
++=20
++     ngx_uint_t                       pushing;
++--=20
++2.42.1
++
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.20.1.bb b/meta-we=
+bserver/recipes-httpd/nginx/nginx_1.20.1.bb
+index 09a1b4559..8bed04d6d 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.20.1.bb
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.20.1.bb
+@@ -2,6 +2,7 @@ require nginx.inc
+=20
+ SRC_URI +=3D "file://CVE-2021-3618.patch \
+             file://CVE-2022-41741-CVE-2022-41742.patch \
++            file://0001-HTTP-2-per-iteration-stream-handling-limit.patch=
+ \
+            "
+=20
+ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D206629dc7c7b3e87acb31162363ae=
+505"
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.21.1.bb b/meta-we=
+bserver/recipes-httpd/nginx/nginx_1.21.1.bb
+index b69fd7dab..73b5c93c9 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.21.1.bb
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.21.1.bb
+@@ -1,5 +1,7 @@
+ require nginx.inc
+=20
++SRC_URI +=3D "file://0001-HTTP-2-per-iteration-stream-handling-limit.pat=
+ch"
++
+ # 1.20.x branch is the current stable branch, the recommended default
+ # 1.21.x is the current mainline branches containing all new features
+ DEFAULT_PREFERENCE =3D "-1"
+--=20
+2.42.1
 
 
