@@ -2,38 +2,38 @@ Return-Path: <jasper@fancydomain.eu>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E665EC4167B
-	for <webhook@archiver.kernel.org>; Sun, 26 Nov 2023 23:55:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A443C4167B
+	for <webhook@archiver.kernel.org>; Mon, 27 Nov 2023 00:04:34 +0000 (UTC)
 Received: from mx.walter.deinstapel.de (mx.walter.deinstapel.de [62.176.232.100])
- by mx.groups.io with SMTP id smtpd.web11.78254.1701042904691735027
+ by mx.groups.io with SMTP id smtpd.web10.81810.1701043468285207312
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 26 Nov 2023 15:55:06 -0800
+ Sun, 26 Nov 2023 16:04:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@fancydomain.eu header.s=mail header.b=V7Z47Q4O;
+ dkim=fail reason="dkim: body hash did not verify" header.i=@fancydomain.eu header.s=mail header.b=Um0tOWN9;
  spf=pass (domain: fancydomain.eu, ip: 62.176.232.100, mailfrom: jasper@fancydomain.eu)
 From: jasper@fancydomain.eu
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=fancydomain.eu;
-	s=mail; t=1701042901;
-	bh=yrkhyQF982XEu3rM+gX9/TznVnVSr2A1WtuRQxC6Tv8=;
+	s=mail; t=1701043465;
+	bh=ENRMhcdbq8/UotzZ03ooFw43VfRRsXARAadgfOim4nk=;
 	h=From:To:Cc:Subject;
-	b=V7Z47Q4O2D3VstdqVwBB8z/6fnn6Sy8RQ54qOqh7CPqskH1cAzDfHBshjPQHsvv8H
-	 JR6UuSs8S3vYno7jm1ibOeqfsvpQV9bYcry+Xh0bCszBdcC3/conMzRIGoKQUE6DVt
-	 6+gmln5S4+6HymfbEDjrnZfxQL6whKK0Ges4S2kNyJsLvJo5U1KYtBbeLXisEDlzm0
-	 BYh6yabpih6JwSe/vrrdYBwOX9SUNeBVy6eD3PFGkll/tCtPWW/Zd3qUMuZPOHtPvQ
-	 XUHY85X/t3Y6pvDtUOBOu3xB7f6ivFr6Xm7MJxnHAQVuLkufN6ygxs5/p+K/xfvPbw
-	 h05gHjXEOOFSQ==
+	b=Um0tOWN95l9zbKcvo74Ii9i8I9fIe3WRaRH5vUxch4TShZN9PR/ByuNHPm8gux31S
+	 QCcM+ll2CZ91WqT4lqZwNv1DCF4kekHv1kzN1IVYAzovyoMHG+bY96N4pGDqtCIer4
+	 qMXAvrDxePIVtGaGe5cBdQhN29D392qTR57UZ3DxZ6cSgy9jhO5TWuni+F82c5mBu3
+	 xLYyuZg7CyWsuKloWob9Tq2X4iuXA5RcuvRSKKlHzy6fCTV737YSh2qjXXACwfCElD
+	 sq3DuTEVZxeDt5DX9n1+vhCx8BNjR8MKa5/iHaFgry0+qQ/+FqOedPeSAyoQGiHn5v
+	 nV2YoSnWu4BKw==
 To: openembedded-devel@lists.openembedded.org
 Cc: Jasper Orschulko <jasper@fancydomain.eu>
-Subject: [meta-webserver][kirkstone][PATCH] nginx: Mitigate HTTP/2 Stream Resets Flood impact
-Date: Mon, 27 Nov 2023 00:54:30 +0100
-Message-ID: <20231126235430.18393-1-jasper@fancydomain.eu>
+Subject: [meta-webserver][dunfell][PATCH] nginx: Mitigate HTTP/2 Stream Resets Flood impact
+Date: Mon, 27 Nov 2023 01:04:17 +0100
+Message-ID: <20231127000417.21555-1-jasper@fancydomain.eu>
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 26 Nov 2023 23:55:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107056
+ <openembedded-devel@lists.openembedded.org>; Mon, 27 Nov 2023 00:04:34 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107057
 
 From: Jasper Orschulko <jasper@fancydomain.eu>
 
@@ -54,8 +54,8 @@ enable HTTP/2 support or allow HTTP/1.1 connections only.
 Signed-off-by: Jasper Orschulko <jasper@fancydomain.eu>
 ---
  ...-per-iteration-stream-handling-limit.patch | 92 +++++++++++++++++++
- .../recipes-httpd/nginx/nginx_1.20.1.bb       |  1 +
- .../recipes-httpd/nginx/nginx_1.21.1.bb       |  2 +
+ .../recipes-httpd/nginx/nginx_1.16.1.bb       |  1 +
+ .../recipes-httpd/nginx/nginx_1.17.8.bb       |  2 +
  3 files changed, 95 insertions(+)
  create mode 100644 meta-webserver/recipes-httpd/nginx/files/0001-HTTP-2-=
 per-iteration-stream-handling-limit.patch
@@ -176,35 +176,33 @@ RROR);
 +--=20
 +2.42.1
 +
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.20.1.bb b/meta-we=
-bserver/recipes-httpd/nginx/nginx_1.20.1.bb
-index 09a1b4559..8bed04d6d 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx_1.20.1.bb
-+++ b/meta-webserver/recipes-httpd/nginx/nginx_1.20.1.bb
-@@ -2,6 +2,7 @@ require nginx.inc
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.16.1.bb b/meta-we=
+bserver/recipes-httpd/nginx/nginx_1.16.1.bb
+index 07e9f6ddb..39cfd3a67 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.16.1.bb
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.16.1.bb
+@@ -7,4 +7,5 @@ SRC_URI[sha256sum] =3D "f11c2a6dd1d3515736f0324857957db2d=
+e98be862461b5a542a3ac6188
 =20
- SRC_URI +=3D "file://CVE-2021-3618.patch \
+ SRC_URI +=3D "file://CVE-2019-20372.patch \
              file://CVE-2022-41741-CVE-2022-41742.patch \
 +            file://0001-HTTP-2-per-iteration-stream-handling-limit.patch=
  \
             "
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.17.8.bb b/meta-we=
+bserver/recipes-httpd/nginx/nginx_1.17.8.bb
+index 3d2a5edd2..9fd6d7342 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.17.8.bb
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.17.8.bb
+@@ -8,3 +8,5 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D52e384aaac868b=
+755b93ad5535e2d075"
 =20
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D206629dc7c7b3e87acb31162363ae=
-505"
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.21.1.bb b/meta-we=
-bserver/recipes-httpd/nginx/nginx_1.21.1.bb
-index b69fd7dab..73b5c93c9 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx_1.21.1.bb
-+++ b/meta-webserver/recipes-httpd/nginx/nginx_1.21.1.bb
-@@ -1,5 +1,7 @@
- require nginx.inc
-=20
+ SRC_URI[md5sum] =3D "29cd861a13aae69a058cbabaae86177b"
+ SRC_URI[sha256sum] =3D "97d23ecf6d5150b30e284b40e8a6f7e3bb5be6b601e373a4=
+d013768d5a25965b"
++
 +SRC_URI +=3D "file://0001-HTTP-2-per-iteration-stream-handling-limit.pat=
 ch"
-+
- # 1.20.x branch is the current stable branch, the recommended default
- # 1.21.x is the current mainline branches containing all new features
- DEFAULT_PREFERENCE =3D "-1"
 --=20
 2.42.1
 
