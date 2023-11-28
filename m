@@ -2,85 +2,83 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B8006C07CA9
-	for <webhook@archiver.kernel.org>; Tue, 28 Nov 2023 08:26:04 +0000 (UTC)
-Received: from esa5.hc1455-7.c3s2.iphmx.com (esa5.hc1455-7.c3s2.iphmx.com [68.232.139.130])
- by mx.groups.io with SMTP id smtpd.web10.28278.1701159958863671962
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DDF83C4167B
+	for <webhook@archiver.kernel.org>; Tue, 28 Nov 2023 08:29:14 +0000 (UTC)
+Received: from esa11.hc1455-7.c3s2.iphmx.com (esa11.hc1455-7.c3s2.iphmx.com [207.54.90.137])
+ by mx.groups.io with SMTP id smtpd.web11.28368.1701160147047663387
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 28 Nov 2023 00:25:59 -0800
+ Tue, 28 Nov 2023 00:29:07 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 68.232.139.130, mailfrom: wangmy@fujitsu.com)
-X-IronPort-AV: E=McAfee;i="6600,9927,10907"; a="140701761"
+ dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 207.54.90.137, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10907"; a="120643072"
 X-IronPort-AV: E=Sophos;i="6.04,233,1695654000"; 
-   d="scan'208";a="140701761"
+   d="scan'208";a="120643072"
 Received: from unknown (HELO yto-r4.gw.nic.fujitsu.com) ([218.44.52.220])
-  by esa5.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Nov 2023 17:25:56 +0900
-Received: from yto-m2.gw.nic.fujitsu.com (yto-nat-yto-m2.gw.nic.fujitsu.com [192.168.83.65])
-	by yto-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 38014D772B
-	for <openembedded-devel@lists.openembedded.org>; Tue, 28 Nov 2023 17:25:54 +0900 (JST)
+  by esa11.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Nov 2023 17:29:05 +0900
+Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
+	by yto-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 45F29D772E
+	for <openembedded-devel@lists.openembedded.org>; Tue, 28 Nov 2023 17:29:02 +0900 (JST)
 Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by yto-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 74775D5E9F
-	for <openembedded-devel@lists.openembedded.org>; Tue, 28 Nov 2023 17:25:53 +0900 (JST)
+	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 813ABF931
+	for <openembedded-devel@lists.openembedded.org>; Tue, 28 Nov 2023 17:29:01 +0900 (JST)
 Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.149])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id A50CD2005019B;
-	Tue, 28 Nov 2023 17:25:52 +0900 (JST)
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id B4EAB2005019B;
+	Tue, 28 Nov 2023 17:29:00 +0900 (JST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-aiohttp: upgrade 3.9.0 -> 3.9.1
-Date: Tue, 28 Nov 2023 16:25:01 +0800
-Message-Id: <1701159901-28014-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-bitstring: upgrade 4.1.2 -> 4.1.3
+Date: Tue, 28 Nov 2023 16:25:53 +0800
+Message-Id: <1701159953-28050-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28024.006
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28024.006
-X-TMASE-Result: 10--4.709000-10.000000
-X-TMASE-MatchedRID: /gZnudouedqjz0nOeth/yUIIxwDaU5mr5sPqcQkI8psAIXlMppp3XyMO
-	uGtF4L1EEK5M1jLAU5rKy9u8e12hg7MqLhXt9oHXA9lly13c/gHVy4hHC3/gyLKw8Hx0EGitcqf
-	oMGP+CwQi+t+0AiFaYgB/8cibO8IY5gZGm/RVVHG5x7uAXGEprQFA6pSxaDHmAhn751acftuem2
-	vw+cenKeLzNWBegCW2wgn7iDBesS0nRE+fI6etkq675pM1hO8RGKatBxOKHNzaGraoLBZDAyhH/
-	e4DgYoSH1vkDajUsRxiE0y7RPr1cA6Dw9aQXwtEaU8U0OsMD1q4inUq4QbrlUu/kTKv9giuqwOH
-	O1Fdn0Kb4tj0DvxRUIs9ro6z1cfchCFNTbTJJtE=
+X-TMASE-Result: 10-2.208900-10.000000
+X-TMASE-MatchedRID: dhm/lGuWeZijz0nOeth/yUIIxwDaU5mrMVx/3ZYby786FHRWx2FGsL3+
+	LeooTp2MayDsErw/KBg+wIF4H6NKm8RBLZ5x+SkXP0HVIeixJdA3l2plwgrtWCD1HdXyqDnEvwU
+	evDt+uW6vBQc3bCgEsLnNnmjezCQeOwTo9ZXISSzdCok3ibXlQX0tCKdnhB58I/9UW5M5dRNp7q
+	EhmmPgy46HM5rqDwqtU1jw8wzbuCr77QHi6RIod4uulEvwTpgOVzTLT9M1LKK2LFcFlr0sC/SgL
+	C/RENpjFGwcYr40JILoekCsinRNpjk03k/QHQngHSbhGbmGylXFJK7yLnZRGZdO3Q67ImL8gi4R
+	Uz90EQwG2MApbv6odw==
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 28 Nov 2023 08:26:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107077
+ <openembedded-devel@lists.openembedded.org>; Tue, 28 Nov 2023 08:29:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107078
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
 ===========
--Fixed importing aiohttp under PyPy on Windows.
--Fixed async concurrency safety in websocket compressor.
--Fixed ClientResponse.close() releasing the connection instead of closing.
--Fixed a regression where connection may get closed during upgrade.
--Fixed messages being reported as upgraded without an Upgrade header in Python parser. 
+-Removed a couple of files that accidentally got included in the previous release.
+-The 8-bit float formats have been renamed 'e4m3float' and 'e5m2float'.
+-Some refactoring and performance optimizations.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-aiohttp_3.9.0.bb => python3-aiohttp_3.9.1.bb}      | 2 +-
+ .../{python3-bitstring_4.1.2.bb => python3-bitstring_4.1.3.bb}  | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-aiohttp_3.9.0.bb => python3-aiohttp_3.9.1.bb} (89%)
+ rename meta-python/recipes-devtools/python/{python3-bitstring_4.1.2.bb => python3-bitstring_4.1.3.bb} (83%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.9.0.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.9.1.bb
-similarity index 89%
-rename from meta-python/recipes-devtools/python/python3-aiohttp_3.9.0.bb
-rename to meta-python/recipes-devtools/python/python3-aiohttp_3.9.1.bb
-index d71f3df00..566417047 100644
---- a/meta-python/recipes-devtools/python/python3-aiohttp_3.9.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.9.1.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/aio-libs/aiohttp"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=748073912af33aa59430d3702aa32d41"
+diff --git a/meta-python/recipes-devtools/python/python3-bitstring_4.1.2.bb b/meta-python/recipes-devtools/python/python3-bitstring_4.1.3.bb
+similarity index 83%
+rename from meta-python/recipes-devtools/python/python3-bitstring_4.1.2.bb
+rename to meta-python/recipes-devtools/python/python3-bitstring_4.1.3.bb
+index 7a049733b..8831d84cb 100644
+--- a/meta-python/recipes-devtools/python/python3-bitstring_4.1.2.bb
++++ b/meta-python/recipes-devtools/python/python3-bitstring_4.1.3.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/scott-griffiths/bitstring"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=661f450e2c0aef39b4b15597333444a7"
  
--SRC_URI[sha256sum] = "09f23292d29135025e19e8ff4f0a68df078fe4ee013bca0105b2e803989de92d"
-+SRC_URI[sha256sum] = "8fc49a87ac269d4529da45871e2ffb6874e87779c3d0e2ccd813c0899221239d"
+-SRC_URI[sha256sum] = "c22283d60fd3e1a8f386ccd4f1915d7fe13481d6349db39711421e24d4a9cccf"
++SRC_URI[sha256sum] = "1b47c84644a961ba8503db2bba8a5965ab53e81474becdf0a18383b5b5f3f795"
  
- PYPI_PACKAGE = "aiohttp"
- inherit python_setuptools_build_meta pypi
+ PYPI_PACKAGE = "bitstring"
+ 
 -- 
 2.34.1
 
