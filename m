@@ -1,94 +1,202 @@
-Return-Path: <joe.slater@windriver.com>
+Return-Path: <sjolley.yp.pm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F1C0AC4167B
-	for <webhook@archiver.kernel.org>; Mon, 27 Nov 2023 20:25:10 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.108110.1701116706500611430
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0CA99C4167B
+	for <webhook@archiver.kernel.org>; Tue, 28 Nov 2023 01:55:13 +0000 (UTC)
+Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
+ by mx.groups.io with SMTP id smtpd.web10.18405.1701136509596181581
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 Nov 2023 12:25:06 -0800
+ Mon, 27 Nov 2023 17:55:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=Ru6XIWYz;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=969563b60f=joe.slater@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 3ARJIWBQ031738
-	for <openembedded-devel@lists.openembedded.org>; Mon, 27 Nov 2023 12:25:06 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=ugWWZ
-	+cboSsjiWOMr0+VLF0xL7iEHu8OJiOxX6lCZLE=; b=Ru6XIWYzH/kF32//klGOR
-	QZGUF6LsB3JQUv6KaFOBiA04zrtcAz1gvvDObfDqVVkPLsqQucgaAHbD2YyK+PGt
-	61rmrdZc0x/uifHOKsf6k9u5S4z9bfh1bGerPK7H9W75VDt0P9kvZ2pZ6mOwHKWR
-	zLUq6OQPQPSMP2FRk8/bPmW0hp2FAH9CIfDAEGNHjXcWFxdUJ85AiDYYAdP1cU5b
-	vPlzq+icXuClcRikqlgL/OK5MByt/0KDfRR5eotl/isLPB3A7Lr6JeV1W9Xf5QrG
-	S8ttf+sLDOAECbtCR3emm/JlKq8sNu4B4nQWnIcuVnqWcKB7CXAFSDtpDOrdDL5+
-	A==
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3ukham1q4k-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 27 Nov 2023 12:24:37 -0800 (PST)
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.34; Mon, 27 Nov 2023 12:24:12 -0800
-Received: from ala-jslater-lx2.corp.ad.wrs.com (147.11.136.210) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
- 15.1.2507.34 via Frontend Transport; Mon, 27 Nov 2023 12:24:11 -0800
-From: <joe.slater@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <joe.slater@windriver.com>, <randy.macleod@windriver.com>
-Subject: [mickledore][meta-python][PATCH 1/1] python3-django: move to version 4.2.7
-Date: Mon, 27 Nov 2023 12:24:04 -0800
-Message-ID: <20231127202404.1492180-1-joe.slater@windriver.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Yf5MWCEG;
+ spf=pass (domain: gmail.com, ip: 209.85.218.50, mailfrom: sjolley.yp.pm@gmail.com)
+Received: by mail-ej1-f50.google.com with SMTP id a640c23a62f3a-a03a900956dso932313166b.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 27 Nov 2023 17:55:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1701136508; x=1701741308; darn=lists.openembedded.org;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=qSPg/MfBLUTyOkeC0cjVa0ko7aSUi6w1j1WkH74JAaA=;
+        b=Yf5MWCEG47Dxbs59VmTIqY/K5c1mwVCTgFu+Vij6LiXIYO6cGdKLev4Nck1XEvrEBx
+         VxCMk5KQd4FFcZaIRT0ZGZ8LLZE7aQyNGppjhfNq7FxA2BK3GnJ6ia7I/Lsjl+Wbl5iO
+         RKarqr9zKz8UJjXibnbPCXIMpG3OhsBppGA0kn78G3WVqw4VfFvnnKdeVVaGDS72sUE9
+         J9Mn4b5cgsYmSDdVLzaytQUt1G7Fdc8oWCm/y0+Fog/BaIqEkzAqQLK3mKJSXXPesVQb
+         V7c0eaz3jNF8djKOSIEqAvgeGdsGk2BPoOCdJ/AU0DF2gSVTc1VF9bSocV+uIf2/OulQ
+         Ly8A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1701136508; x=1701741308;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=qSPg/MfBLUTyOkeC0cjVa0ko7aSUi6w1j1WkH74JAaA=;
+        b=GlKBrj7PjD9mlJEwbkEiCzL8hwDLVflihPOhSAEi94Jc44gMwoc/AzEoFBUQhNvijJ
+         5Xrmo4dxJCUkRJCRCmGIQl52AYZOeXCu3oHE/f/Xkak/ES+RFP8oj9/94Bq1QNb7e1av
+         8LQCqAgokVzd5xIxmqFVRWngEQANp9MPTsBeU13b/Ra7TT9VVHmnTq7uW+KXF52xqmxY
+         6ncf+gJ4rntqucWFkClRbK4J39g0omWSwdgtTHOQX37HViTP8DPMHxQTxdbZxZUIoto7
+         XUdo0iJC+wEHEa6d0jBFC0f3TM5G7URi/0GirvXaQXxqWs6OcSzK5+iBPzcj05ZP3KYx
+         kcgQ==
+X-Gm-Message-State: AOJu0Yw3+u4mTW5fKwKoMtfOO8ukDVkaJn8l8kxp2DcrXXp1E/cTbU99
+	KrFLbK4+si2b84VPO+vH11UGy8xqiR1iN3hgHhDsaCdax6U=
+X-Google-Smtp-Source: AGHT+IFO1gan5hFMQzK2OTXdrbFu/KQ2J2/2PFUB32ZDzKCrRl+L+qcUAVAu0QNXge1Rkb0xjNgTLOlaOgcatGXJLsE=
+X-Received: by 2002:a17:906:2c0f:b0:a04:837e:87ad with SMTP id
+ e15-20020a1709062c0f00b00a04837e87admr14994232ejh.16.1701136507509; Mon, 27
+ Nov 2023 17:55:07 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: 4gN61bIARUdHgsmrpERM7QsI7UUYVYdZ
-X-Proofpoint-GUID: 4gN61bIARUdHgsmrpERM7QsI7UUYVYdZ
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-11-16_25,2023-11-16_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0
- lowpriorityscore=0 spamscore=0 mlxlogscore=872 impostorscore=0
- adultscore=0 malwarescore=0 bulkscore=0 phishscore=0 mlxscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2311060001
- definitions=main-2311270141
+From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
+Date: Mon, 27 Nov 2023 18:54:56 -0700
+Message-ID: <CAK5yBb8SD+ij0phUHWhQhCban=M1h9LzaeR1LaEANt53WL6_1A@mail.gmail.com>
+Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
+To: openembedded-devel@lists.openembedded.org, 
+	Yocto-mailing-list <yocto@lists.yoctoproject.org>
+Content-Type: multipart/alternative; boundary="0000000000003e9de3060b2cb584"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 27 Nov 2023 20:25:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107062
+ <openembedded-devel@lists.openembedded.org>; Tue, 28 Nov 2023 01:55:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107063
 
-From: Joe Slater <joe.slater@windriver.com>
+--0000000000003e9de3060b2cb584
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Version 4.2.5 fixes CVE-2023-36053 and CVE-2023-41164.
-Version 4.2.7 fixes CVE-2023-46695 and CVE-2023-43665.
+All,
 
-Signed-off-by: Joe Slater <joe.slater@windriver.com>
----
- .../python/{python3-django_4.2.1.bb => python3-django_4.2.7.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-django_4.2.1.bb => python3-django_4.2.7.bb} (58%)
+The triage team is starting to try and collect up and classify bugs which a
+newcomer to the project would be able to work on in a way which means
+people can find them. They're being listed on the triage page under the
+appropriate heading:
+https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
+review:
+https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
+how to create a bugzilla account at:
+https://bugzilla.yoctoproject.org/createaccount.cgi
 
-diff --git a/meta-python/recipes-devtools/python/python3-django_4.2.1.bb b/meta-python/recipes-devtools/python/python3-django_4.2.7.bb
-similarity index 58%
-rename from meta-python/recipes-devtools/python/python3-django_4.2.1.bb
-rename to meta-python/recipes-devtools/python/python3-django_4.2.7.bb
-index b1474cf054..100db9bd71 100644
---- a/meta-python/recipes-devtools/python/python3-django_4.2.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-django_4.2.7.bb
-@@ -1,7 +1,7 @@
- require python-django.inc
- inherit setuptools3
- 
--SRC_URI[sha256sum] = "7efa6b1f781a6119a10ac94b4794ded90db8accbe7802281cd26f8664ffed59c"
-+SRC_URI[sha256sum] = "8e0f1c2c2786b5c0e39fe1afce24c926040fad47c8ea8ad30aaf1188df29fc41"
- 
- RDEPENDS:${PN} += "\
-     ${PYTHON_PN}-sqlparse \
--- 
-2.25.1
+The idea is these bugs should be straight forward for a person to help work
+on who doesn't have deep experience with the project. If anyone can help,
+please take ownership of the bug and send patches! If anyone needs
+help/advice there are people on irc who can likely do so, or some of the
+more experienced contributors will likely be happy to help too.
 
+Also, the triage team meets weekly and does its best to handle the bugs
+reported into the Bugzilla. The number of people attending that meeting has
+fallen, as have the number of people available to help fix bugs. One of the
+things we hear users report is they don't know how to help. We (the triage
+team) are therefore going to start reporting out the currently 416
+unassigned or newcomer bugs.
+
+We're hoping people may be able to spare some time now and again to help
+out with these. Bugs are split into two types, "true bugs" where things
+don't work as they should and "enhancements" which are features we'd want
+to add to the system. There are also roughly four different "priority"
+classes right now, =E2=80=9C5.0=E2=80=9D, =E2=80=9C5.1=E2=80=9D, "5.99" and=
+ "Future", the more
+pressing/urgent issues being in "5.0" and then =E2=80=9C5.1=E2=80=9D.
+
+Please review this link and if a bug is something you would be able to help
+with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
+an e-mail with the bug number you would like and I will assign it to you
+(please make sure you have a Bugzilla account). The list is at:
+https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
+r_Bugs
+
+Thanks,
+
+
+
+*Stephen K. Jolley*
+
+*Yocto Project Program Manager*
+
+(    *Cell*:                (208) 244-4460
+
+* *Email*:                 *s
+<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
+*
+
+--0000000000003e9de3060b2cb584
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><span style=3D"font-size:11pt;font-family:Calibri,Arial">A=
+ll,<br><br>The triage team is starting to try and collect up and classify b=
+ugs which a newcomer to the project would be able to work on in a way which=
+ means people can find them. They&#39;re being listed on the triage page un=
+der the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/wiki/=
+Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage#New=
+comer_Bugs</a>  Also please review: <a href=3D"https://www.openembedded.org=
+/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.org/w=
+iki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugzilla =
+account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount.cgi"=
+>https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The idea is=
+ these bugs should be straight forward for a person to help work on who doe=
+sn&#39;t have deep experience with the project.  If anyone can help, please=
+ take ownership of the bug and send patches!  If anyone needs help/advice t=
+here are people on irc who can likely do so, or some of the more experience=
+d contributors will likely be happy to help too.<br><br>Also, the triage te=
+am meets weekly and does its best to handle the bugs reported into the Bugz=
+illa. The number of people attending that meeting has fallen, as have the n=
+umber of people available to help fix bugs. One of the things we hear users=
+ report is they don&#39;t know how to help. We (the triage team) are theref=
+ore going to start reporting out the currently 416 unassigned or newcomer b=
+ugs.<br><br>We&#39;re hoping people may be able to spare some time now and =
+again to help out with these.  Bugs are split into two types, &quot;true bu=
+gs&quot; where things don&#39;t work as they should and &quot;enhancements&=
+quot; which are features we&#39;d want to add to the system.  There are als=
+o roughly four different &quot;priority&quot; classes right now, =E2=80=9C5=
+.0=E2=80=9D, =E2=80=9C5.1=E2=80=9D, &quot;5.99&quot; and &quot;Future&quot;=
+, the more pressing/urgent issues being in &quot;5.0&quot; and then =E2=80=
+=9C5.1=E2=80=9D.<br><br>Please review this link and if a bug is something y=
+ou would be able to help with either take ownership of the bug, or send me =
+(<a href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>) an=
+ e-mail with the bug number you would like and I will assign it to you (ple=
+ase make sure you have a Bugzilla account).  The list is at: <a href=3D"htt=
+ps://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcomer_B=
+ugs">https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Ne=
+wcomer_Bugs</a></span><br><div dir=3D"ltr" class=3D"gmail_signature" data-s=
+martmail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p class=3D"=
+MsoNormal" style=3D"background-image:initial;background-position:initial;ba=
+ckground-repeat:initial"><span style=3D"font-size:12pt;font-family:Arial,sa=
+ns-serif">Thanks,<span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
+ily:Arial,sans-serif">=C2=A0<span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
+lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
+ont-family:Arial,sans-serif"><span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
+amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
+an></b></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
+ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
+&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
+<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
+:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
+s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
+-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
+><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
+/span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
+ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
+t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
+=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
+color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
+uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
+ lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
+erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
+phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
+.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
+u></p></div></div></div></div>
+
+--0000000000003e9de3060b2cb584--
 
