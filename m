@@ -1,78 +1,134 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D512CC4167B
-	for <webhook@archiver.kernel.org>; Tue, 28 Nov 2023 08:53:04 +0000 (UTC)
-Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
- by mx.groups.io with SMTP id smtpd.web11.28698.1701161581607735491
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A6EFC46CA3
+	for <webhook@archiver.kernel.org>; Tue, 28 Nov 2023 09:55:25 +0000 (UTC)
+Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
+ by mx.groups.io with SMTP id smtpd.web10.29269.1701165321781929621
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 28 Nov 2023 00:53:02 -0800
+ Tue, 28 Nov 2023 01:55:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
-X-IronPort-AV: E=McAfee;i="6600,9927,10907"; a="129591709"
-X-IronPort-AV: E=Sophos;i="6.04,233,1695654000"; 
-   d="scan'208";a="129591709"
-Received: from unknown (HELO yto-r2.gw.nic.fujitsu.com) ([218.44.52.218])
-  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Nov 2023 17:52:58 +0900
-Received: from yto-m1.gw.nic.fujitsu.com (yto-nat-yto-m1.gw.nic.fujitsu.com [192.168.83.64])
-	by yto-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id DC291D6186
-	for <openembedded-devel@lists.openembedded.org>; Tue, 28 Nov 2023 17:52:56 +0900 (JST)
-Received: from aks-ab2.gw.nic.fujitsu.com (aks-ab2.gw.nic.fujitsu.com [192.51.207.12])
-	by yto-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id 2BB03CFAAD
-	for <openembedded-devel@lists.openembedded.org>; Tue, 28 Nov 2023 17:52:56 +0900 (JST)
-Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.149])
-	by aks-ab2.gw.nic.fujitsu.com (Postfix) with ESMTP id 09BBF8859E;
-	Tue, 28 Nov 2023 17:52:54 +0900 (JST)
-From: wangmy@fujitsu.com
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=kp0l5F9H;
+ spf=pass (domain: gmail.com, ip: 209.85.218.46, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-a02c48a0420so722866766b.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 28 Nov 2023 01:55:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1701165320; x=1701770120; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=WTOmT8KwH0tYPmAuH8DTkSPKm/KAJubVN8+EyIYpIQc=;
+        b=kp0l5F9Hzu90wtzPTBkBYJLaEy+SRUZgh8cNGpXFi2PUigUqyK9ljkb9tFNx98Pufk
+         383ac+0xQ4wDgczgfGkEJ/DxtwaFSPIqxmn3YKcJk/zIBW9+U7OL+viCoC7Ja5E/MvU6
+         jvkcTplxjAv/1xhVrSwEqmkcQaGxd112B+3ViSkczXpekScZWs3siH+TRVv8RUQ5JJE9
+         6sJc05IxrUzCJwktmVL/5FV/YskwqNwnFJVdWrNfR24v+XlfyQBd2zO9LslnqXAJa5Vq
+         jJ9jJomvhN/o6VXD/7hEgRS1VT1pfViSRerAu32i+pzrycN7W9mSj8pOAPGccFrrlRRA
+         OAmw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1701165320; x=1701770120;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=WTOmT8KwH0tYPmAuH8DTkSPKm/KAJubVN8+EyIYpIQc=;
+        b=jxADIaCQxzeAxgtc69mB+Itni+xgO9am9t2UG1CZKgMSb50c4Xg/XfObjI7w+f0oGm
+         7mASJrRSMqiLBHHO5s+a1QbcvlGUu5j8hTtmczydgCtcUYZuRn83cAjo+xYcrYtNEwe+
+         LBK8hBsNlZv0Rzvbu+Amdi0EOkm/JLRDyP3qg7XCRGmVNtdRRYGg1YhejpGG6VV9+een
+         QWops0DI9uaMt2BVXXjFBeYPMJFqwBJPOrGFjwu7GdGhFK1dIS0Yesxzihp3R/k/2a+9
+         ATDT5w5CYo6UHitNx3SYRgoXgori/fSAKgZrxulGMLwfRKS6iloDYYAHL7LRIagnCbOe
+         L+uA==
+X-Gm-Message-State: AOJu0YwnqKGNKPz7U4om1+1qy5giZbIz54Avcg+Zl5h4hay4tfsVwPSk
+	wb6MglF6zrAD8Wl/wLEu5DorVVU+TnTAmw==
+X-Google-Smtp-Source: AGHT+IFDng+INKChL0Kl354I8QDs7HqPrj9x7BCEfdaOE85N5Y01Ql9Zv/T0sb3aZaAncJA1kgWadw==
+X-Received: by 2002:a17:906:29e:b0:9fe:3d74:2b62 with SMTP id 30-20020a170906029e00b009fe3d742b62mr10347104ejf.12.1701165319587;
+        Tue, 28 Nov 2023 01:55:19 -0800 (PST)
+Received: from localhost.localdomain ([176.33.70.43])
+        by smtp.gmail.com with ESMTPSA id f10-20020a170906048a00b009c921a8aae2sm6577914eja.7.2023.11.28.01.55.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 28 Nov 2023 01:55:19 -0800 (PST)
+From: alperak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] thingsboard-gateway: upgrade 3.4.2 -> 3.4.3.1
-Date: Tue, 28 Nov 2023 16:51:55 +0800
-Message-Id: <1701161515-28771-1-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-X-TM-AS-GCONF: 00
-X-TM-AS-Product-Ver: IMSS-9.1.0.1408-9.0.0.1002-28024.006
-X-TM-AS-User-Approved-Sender: Yes
-X-TMASE-Version: IMSS-9.1.0.1408-9.0.1002-28024.006
-X-TMASE-Result: 10--3.378900-10.000000
-X-TMASE-MatchedRID: S9L8qTrmXfGjz0nOeth/yQPZZctd3P4Bgl+ryMS6Q9gH8UzOewTxw+79
-	DJRUi35pTQ0JkPG287/mn3xyPJAJorNUVnqixiMOMKPrF7dK57NuTKBinxl/umAN6i+va16uBqd
-	FRjHdIbixfbhqGxLk+4Ay6p60ZV62yA7duzCw6dLdB/CxWTRRu+rAZ8KTspSzehSYQzY2vKWcjB
-	J3RyD9eCjK5IugIyEderTA0ZqZByU1405ofLp9RADQOZwo0DHC63KXGHXaWpg1cVQ43nhNajDV8
-	UMylLCTiB6mlDKe1V7S/yytHeCN9GXv4CQeNUk7G6qTOwq/n71+3BndfXUhXQ==
-X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
+Cc: alperak <alperyasinak1@gmail.com>
+Subject: [meta-oe][PATCH] tmate: Fix finding msgpack 6+
+Date: Tue, 28 Nov 2023 12:55:02 +0300
+Message-Id: <20231128095502.33820-1-alperyasinak1@gmail.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 28 Nov 2023 08:53:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107094
+ <openembedded-devel@lists.openembedded.org>; Tue, 28 Nov 2023 09:55:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107095
 
-From: Wang Mingyu <wangmy@fujitsu.com>
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: alperak <alperyasinak1@gmail.com>
 ---
- ...ngsboard-gateway_3.4.2.bb => thingsboard-gateway_3.4.3.1.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/{thingsboard-gateway_3.4.2.bb => thingsboard-gateway_3.4.3.1.bb} (95%)
+ .../files/0001-fix-finding-msgpack.patch      | 43 +++++++++++++++++++
+ meta-oe/recipes-extended/tmate/tmate_2.4.0.bb |  1 +
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/tmate/files/0001-fix-finding-msgpack.patch
 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway_3.4.2.bb b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway_3.4.3.1.bb
-similarity index 95%
-rename from meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway_3.4.2.bb
-rename to meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway_3.4.3.1.bb
-index 52bcffe71..868887a47 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway_3.4.2.bb
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/thingsboard-gateway/thingsboard-gateway_3.4.3.1.bb
-@@ -7,7 +7,7 @@ HOMEPAGE = "https://thingsboard.io/"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
+diff --git a/meta-oe/recipes-extended/tmate/files/0001-fix-finding-msgpack.patch b/meta-oe/recipes-extended/tmate/files/0001-fix-finding-msgpack.patch
+new file mode 100644
+index 000000000..46463abbc
+--- /dev/null
++++ b/meta-oe/recipes-extended/tmate/files/0001-fix-finding-msgpack.patch
+@@ -0,0 +1,43 @@
++From 26a5aa6f70a0b98962884559668b3879dfe6fd02 Mon Sep 17 00:00:00 2001
++From: Carlo Cabrera <30379873+carlocab@users.noreply.github.com>
++Date: Tue, 28 Nov 2023 12:32:51 +0300
++Subject: [PATCH] Fix finding msgpack 6+
++
++msgpack.pc was renamed to msgpack-c.pc upstream in msgpack/msgpack-c#1053.
++
++Upstream-Status: Submitted [https://github.com/tmate-io/tmate/pull/281]
++
++Co-authored-by: Sam James <sam@gentoo.org>
++Signed-off-by: alperak <alperyasinak1@gmail.com>
++---
++ configure.ac | 14 +++++++++++++-
++ 1 file changed, 13 insertions(+), 1 deletion(-)
++
++diff --git a/configure.ac b/configure.ac
++index 028d5559..3badf9e2 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -207,7 +207,19 @@ PKG_CHECK_MODULES(
++     LIBS="$MSGPACK_LIBS $LIBS"
++     found_msgpack=yes
++   ],
++-  found_msgpack=no
+++  [
+++    # msgpack.pc was renamed to msgpack-c.pc in 6.0.0.
+++    PKG_CHECK_MODULES(
+++      MSGPACKC,
+++      msgpack-c >= 1.1.0,
+++      [
+++        CPPFLAGS="$MSGPACKC_CFLAGS $CPPFLAGS"
+++        LIBS="$MSGPACKC_LIBS $LIBS"
+++        found_msgpack=yes
+++      ],
+++      found_msgpack=no
+++    )
+++  ]
++ )
++ if test "x$found_msgpack" = xno; then
++   AC_MSG_ERROR("msgpack >= 1.1.0 not found")
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-extended/tmate/tmate_2.4.0.bb b/meta-oe/recipes-extended/tmate/tmate_2.4.0.bb
+index 53030f277..4e66d8d05 100644
+--- a/meta-oe/recipes-extended/tmate/tmate_2.4.0.bb
++++ b/meta-oe/recipes-extended/tmate/tmate_2.4.0.bb
+@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=f7d9aab84ec6567139a4755c48d147fb"
+ DEPENDS:append = " libevent libssh msgpack-c ncurses"
+ SRC_URI = "\
+     git://github.com/tmate-io/tmate.git;protocol=https;branch=master \
++    file://0001-fix-finding-msgpack.patch \
+ "
  
--SRC_URI[sha256sum] = "a54953c53c0ee72a1aa270bc018db7cc853f56ca29e2c98938ff4138109fd41a"
-+SRC_URI[sha256sum] = "52e9aa97b39a3309ba5f3a2e0dc127ebe04cadfefc8eb57222a9ebd32e8faa16"
- 
- inherit pypi setuptools3
- 
+ SRCREV = "5e00bfa5e137e76c81888727712ced2b3fd99f5b"
 -- 
-2.34.1
+2.25.1
 
 
