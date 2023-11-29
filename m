@@ -1,655 +1,152 @@
-Return-Path: <Yogita.Urade@windriver.com>
+Return-Path: <wentao.zhang@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BE110C07E97
-	for <webhook@archiver.kernel.org>; Wed, 29 Nov 2023 07:19:01 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.26281.1701242332075474259
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2AAB0C4167B
+	for <webhook@archiver.kernel.org>; Wed, 29 Nov 2023 09:25:52 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.28361.1701249942074598426
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 28 Nov 2023 23:18:52 -0800
+ Wed, 29 Nov 2023 01:25:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=pY8+7mUT;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=069737c2c0=yogita.urade@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 3AT6SRSA001420
-	for <openembedded-devel@lists.openembedded.org>; Tue, 28 Nov 2023 23:18:51 -0800
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=AhrWeFPA;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=0697b54c63=wentao.zhang@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 3AT9P0lI029081
+	for <openembedded-devel@lists.openembedded.org>; Wed, 29 Nov 2023 09:25:41 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=Nw8o+
-	lFYkKrQY4KqlKDBB4FbnRxhv+SmwjzUO4pLSa4=; b=pY8+7mUT1x5yxqkiI+6/W
-	1POFtjsqkJbYu9pmjRhQLxUgncRsN/T/qfIT5yZxAWzJcOp9//Or8CEyVD6h2bxm
-	ph2Yc6KrjrJyIjWKxeuEX3VUJpmFOyrNTGdrbLpZFR37IIVQHTL6RJHhOde4UhPE
-	iO2yMQ0x589doJBGR2ANd9zgQ2yUKsvkFzYRg9YiLGqBxCrnpgR3DH2DlQ8HzYKs
-	OivTRUsUDLgZWXiGXFCVW5AVdar1l3jYYJUjI9UbF847carQaKJPog4Ynden5kTk
-	1hNvVKJYAaPBr4AomIdIK4lqu+EOwam+1+Sh23CgI0CNo32wxwS1dmTAiSU/neAe
-	g==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3unve1r5ea-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 28 Nov 2023 23:18:51 -0800 (PST)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Tue, 28 Nov 2023 23:18:56 -0800
-From: yurade <yogita.urade@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [OE][meta-oe][kirkstone][PATCH 1/1] postgresql: fix CVE-2023-5868 CVE-2023-5869 CVE-2023-5870
-Date: Wed, 29 Nov 2023 07:18:31 +0000
-Message-ID: <20231129071831.2933829-1-yogita.urade@windriver.com>
-X-Mailer: git-send-email 2.40.0
-MIME-Version: 1.0
+	 h=from:to:subject:date:message-id:content-transfer-encoding
+	:content-type:mime-version; s=PPS06212021; bh=3UeLfWmMSSCJOF21Ek
+	Fp95wOlbqTR7NeMAWQGcX8Yr0=; b=AhrWeFPAhnu6gNp0A/Lg5BuGUyWerKBI6S
+	FH8PJgzxVwT5j8RTzrEgpbmCy465GHnE542Oy6dt6naOulHbmA5BUra4UUoJk09/
+	i+Pv2eTD0wHOukuIuvToGeud0xiYYziLJpdkbHvZ7n4EewSaj9c/YmRGxgdybKBN
+	ZunPtgiCM6+Qie6Y4HCocTIHEu605FMi91LoC5Z8vR8Hobwdi3jAvoVQjbRpr5S+
+	JZYuPB5WKgE0oI3KHRPM8+TjmcCBYc04cZ2FUE6lUj1jVOqosSZaBsVpED37GAn6
+	xim/ZwzPkTUohP0yEpWhvRRr2gv/SRUqJjWGhiBIRJ3+lE0fHysw==
+Received: from nam11-bn8-obe.outbound.protection.outlook.com (mail-bn8nam11lp2169.outbound.protection.outlook.com [104.47.58.169])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3unvm5885h-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 29 Nov 2023 09:25:41 +0000 (GMT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=l6j71WOqP1/r1w1GYF+Hsfud9g9mYL1IO4sbEsIgQU9FK53WzZIB14e6lSwN+p0cSZNad3/OZD3sjhKL5pJuZ9mSkqvQO2mrufhUS60Utj8EL8IA8lDlLZmMKBVJ/2GmtZ+coJUKnfpMjC/zbiV31QPEpMnBEbYVs+r9b9x0aweTHu0WgIuShGhWqbXagNUExy64eut9V67u75bZfYVPJHSws0b4ixmZoFtvNw9B48ck2TSUKYZbG5WFqlIuC9XFbxrbnda/6dGB2KELnyLpt/r85OLkSv0NwUIW/jzn974WiftLwwYB8DkQIUxFozt/qisIM4JHt3/kYJePsvxycQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=3UeLfWmMSSCJOF21EkFp95wOlbqTR7NeMAWQGcX8Yr0=;
+ b=G7UBgnf3Boa9Js9DCPyrMhFYhNCFN0Nw3wuwwZ7nQLjnGHVwr9AWIyjEpfPfyJ1SM3D+AEtdibpVFacAzpJ9U6gCoI9QQoBUu1yG01YMGHL+06e0QFXrE9b2Z9ZXj5T/s8Q0lsktUlFktlWSqNBfQa/8fNpIdyjkWVtn2xY4vAyNevVPz3m90r80uzfcocGdoD98uFymst0xWt9+qrrOoXist8Y4eM0JUhacnpL3QtPyVKTLSs4/G/bahyX/8Ldz8ocHeQFymaFE2YCBIgJXe/OuppJRC7qNE/USIQedqUGRZSHuN9nV7F6LORckz9aKmFifz/A7raokNSEGPCk92g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from SJ0PR11MB7155.namprd11.prod.outlook.com (2603:10b6:a03:48d::6)
+ by PH0PR11MB7447.namprd11.prod.outlook.com (2603:10b6:510:28b::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7025.29; Wed, 29 Nov
+ 2023 09:25:37 +0000
+Received: from SJ0PR11MB7155.namprd11.prod.outlook.com
+ ([fe80::9faf:5e6f:eaf4:7374]) by SJ0PR11MB7155.namprd11.prod.outlook.com
+ ([fe80::9faf:5e6f:eaf4:7374%4]) with mapi id 15.20.7046.023; Wed, 29 Nov 2023
+ 09:25:37 +0000
+From: Wentao Zhang <wentao.zhang@windriver.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] libbytesize: update github branch to 'main'
+Date: Wed, 29 Nov 2023 17:25:25 +0800
+Message-Id: <20231129092525.37981-1-wentao.zhang@windriver.com>
+X-Mailer: git-send-email 2.25.1
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-GUID: osAyQ8vWfBGXNDUMbyGDuWzDLjQ7IJwV
-X-Proofpoint-ORIG-GUID: osAyQ8vWfBGXNDUMbyGDuWzDLjQ7IJwV
+X-ClientProxiedBy: SGXP274CA0020.SGPP274.PROD.OUTLOOK.COM (2603:1096:4:b8::32)
+ To SJ0PR11MB7155.namprd11.prod.outlook.com (2603:10b6:a03:48d::6)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ0PR11MB7155:EE_|PH0PR11MB7447:EE_
+X-MS-Office365-Filtering-Correlation-Id: de244c10-194f-464f-8ffa-08dbf0bd2536
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	KYNkpQCH2/1dy292oTE8KR7fuq9iBaLqnnO0gHRKGC7T/j9mOqR7cmTB0O9m4f/wPsCEjMZXkSwIyzz1CZOQ3hChjYtDaVt+1VS9DWcoqVjtkqkmjsgBXLssuMl/eTdG8i4Xm83WKCIxnzYVZN6tQ0WZzBoj1zVC4ih5E9p6X1moeUKtHLKLz3N5mavX4dIDdtviA2fMWNaZLb6c3NMc3mpFnDNegI+DGYTVv/kwNOhZyVyi5Pmt9THDJspHqdIqprYrSKHdyacxFPXUKX4bPURUZdYEFv1OHOjbq9EZizSsmcXdEagbEy7iQHmtte56NYah7UmA0/1OqDZmSp+YD4F17GY6vlYbLrn1nXQBawvueMwaMMEcyizgrSXNriuaDPEOYY7POuTEA98TXXU/Js29uTTY0mbxyLV3grHFVJrUwzV3iu4ZQF2rAMXoPziVvNm7ElpG+jAGtIvMopvo+ULXpQYm6ZqMhu7zX0OguHHDluQN2uc9ImjaueA4ntPX68ElmgRCpgxfF73m66Jljaf2y6I7VsDYCqQpWTO9Gh3pCkioSNrZu0O13BzAZzPYAYnyzTr/5HrGI/WS2qRu6ON0DOsYq12Z4Iq6Nmy4y+1qZCp5bKgRM+n/3WhAptEyD/Zy+xqDG+blOv5MTGy3PPfPdbA6IOn96i3eWQflDaM=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ0PR11MB7155.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(396003)(346002)(136003)(366004)(39850400004)(376002)(230922051799003)(451199024)(1800799012)(64100799003)(186009)(5660300002)(6666004)(2906002)(52116002)(4744005)(86362001)(8676002)(1076003)(2616005)(26005)(66556008)(316002)(6916009)(66946007)(66476007)(6512007)(6486002)(8936002)(6506007)(478600001)(36756003)(38100700002)(83380400001)(38350700005)(44832011)(41300700001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?d+xf+axwAKRHgn5R4r9maaO5MawjWZoOyGcORfp273cQWfNltl4s1CyhxIaY?=
+ =?us-ascii?Q?1b8/KRZpHS5ldyLbtuRiHkqvOOLDJuXDP35QPKgSrIvok/f2z61ERNlkOjXX?=
+ =?us-ascii?Q?7ZD8GqICj+zeiNiE5GXu2mdsytRL4pzF8mn5iIc6xO88oFosHIA0BmWM9a2t?=
+ =?us-ascii?Q?/9IFApckWIyqNFtRKkFSHTRqg29zffXHdPLrGIUj1bmtG6bt33IdhD98rDyU?=
+ =?us-ascii?Q?kT9cxeuhgziFPhILbZaWdsPneY21Xvy97p3JsUkvQcup87QNrInV0vNwTOgM?=
+ =?us-ascii?Q?GLRmP0AAyLa2pWeW5VyzN4YzDnF//r1Eclbf2G4MK2bTuFRKRfdT17Jt1qT6?=
+ =?us-ascii?Q?j9cHdFhuULh+AjbzGQbL7T40lVEe3TRiclPaVlCivGduhQD0m2mrUgqogGVa?=
+ =?us-ascii?Q?9RQybuxISxUaV4A3NujdHD7oSLpW/Yc3WsR6l/FOKPSfehueZeIvMugS8VqN?=
+ =?us-ascii?Q?0BnCk8uwnvtQozdT+xFFLejc3MUlbhKJSF7brcNNFzM6BI6LHQ241S2C1+Yp?=
+ =?us-ascii?Q?B5hyPkdjYcFE5zpoecY7UsQOMpSQ77l+8jdtMSjZ1CttEl/jAs3YVEJQYm5t?=
+ =?us-ascii?Q?T/7QCUUregt2ApyA2KAB06wiJcldc6hZ8Ah83C3+8Qy3PAvXDdB3ZsnoW9YY?=
+ =?us-ascii?Q?icS0AvYHyaBodoPGmEzhjuyFtH0pEKba4S9BT6b45QlwkvCaTqzebPAeFpAO?=
+ =?us-ascii?Q?WBo77OFGNpxnxB7YkhLGOuX2bOT8ty8A5Z9tkkQJEHw/F8Y5xyVwWWy2l3/M?=
+ =?us-ascii?Q?WkBkgSDFmNVW9jzRTRkmaoP22O8ickdArxc8YMw56aYwwvA93zbgz8tg3Byi?=
+ =?us-ascii?Q?Yl2gIUOiR7nDg2M8nEL3J2mzBGCr2D/ydSEpbygl1pSIkC+/gocGWXuXmlaa?=
+ =?us-ascii?Q?l44ykYQ8mnty+cb40cni1fxWUZKL5V/Vo82ntFQDNDUnwOHIk+lX9Gk9vVxv?=
+ =?us-ascii?Q?emQ7CrTi4D9CAJFNZZrgJY/CqjXWp2ACoqpqkdLH7q7ceQ/o9kMT4/e4X4L9?=
+ =?us-ascii?Q?YvMs0W/pZiBZcIImSTYfVUHT4jxa415FwwI5lwviQkCCW6YVHxYm9x/Tm7D9?=
+ =?us-ascii?Q?BSZ8fJgA+pqlnVZ0jkOshnaKz2Ns3JdFb/xYoWAQqAmRst2Ww7AnadIPBGi7?=
+ =?us-ascii?Q?j4lUbOT0o5NzGQ0jxo3RJqfv6+DmqDA05WyXonGa4Lr8OHeueVJzofFLcV91?=
+ =?us-ascii?Q?F54K3t9IV61Lw+cQP8zoHjFB/iExt6WzYGf0CHGsba7sA1+M+vTEIoBowdRP?=
+ =?us-ascii?Q?5jXJxDNLmHcwKl3LYR0UzFColRJkYUhckNCRPAqb7TtecVGAtjwuBMVk418m?=
+ =?us-ascii?Q?O7TgRki7QpO4pg2h7cfhBWWl9tP1SbmMbvmZtKDSBEM5qJ6zcn8KJMcbRsPA?=
+ =?us-ascii?Q?A+tJWm0K1h2MB1O6CEp1u2VgF2SuhOwpHuxUm03bD+YLDt5plrvjPyISMqDK?=
+ =?us-ascii?Q?q+CEVsn5+U/62mIMFp1QTcACvbM6revIpMuwrsU8rKX48n6W9II56F1fTUz0?=
+ =?us-ascii?Q?YiAGUHf11R3Aqi10n8pHaMpYvcrtAP+Eqdcd+eXVdojum3D3fdVZuEr4kSXi?=
+ =?us-ascii?Q?9oL1GRplTKjVTQjiMT+wm43tmE3WQDL65GqETJMQuSZWA0GPOXhWFcX+tQjJ?=
+ =?us-ascii?Q?2w=3D=3D?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: de244c10-194f-464f-8ffa-08dbf0bd2536
+X-MS-Exchange-CrossTenant-AuthSource: SJ0PR11MB7155.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Nov 2023 09:25:36.9749
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: mIarps2SX3Yo1Uo+Pv809I5YNuxwoRJjlL88V9wQbGyu44uoarKqlIY7Nv2HY2vhMjl4TqRFX80CRMYce1+LXzdzRp8eft9MBOGpdLDl/M0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR11MB7447
+X-Proofpoint-GUID: tUSQmhVkrD4SKFHSoEMC2yOVa8toWYsi
+X-Proofpoint-ORIG-GUID: tUSQmhVkrD4SKFHSoEMC2yOVa8toWYsi
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2023-11-16_25,2023-11-16_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxlogscore=999
- impostorscore=0 malwarescore=0 bulkscore=0 clxscore=1011 spamscore=0
- lowpriorityscore=0 priorityscore=1501 mlxscore=0 adultscore=0 phishscore=0
- suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2311060001 definitions=main-2311290052
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
+ priorityscore=1501 phishscore=0 mlxlogscore=737 clxscore=1011
+ impostorscore=0 bulkscore=0 suspectscore=0 spamscore=0 adultscore=0
+ malwarescore=0 mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2311060001 definitions=main-2311290069
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 29 Nov 2023 07:19:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107132
+ <openembedded-devel@lists.openembedded.org>; Wed, 29 Nov 2023 09:25:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107133
 
-From: Yogita Urade <yogita.urade@windriver.com>
+the repo of libbytesize doesn't have a branch named master. Change
+the branch from master to main.
 
-CVE-2023-5868:
-postgresql: Compute aggregate argument types correctly in
-transformAggregateCall()
-
-CVE-2023-5869:
-postgresql: Detect integer overflow while computing new
-array dimensions
-
-CVE-2023-5870:
-postgresql: Ban role pg_signal_backend from more superuser
-backend types.
-
-References:
-https://nvd.nist.gov/vuln/detail/CVE-2023-5868
-https://nvd.nist.gov/vuln/detail/CVE-2023-5869
-https://nvd.nist.gov/vuln/detail/CVE-2023-5870
-
-Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
+Signed-off-by: Zhang Xiao <xiao.zhang@windriver.com>
+Signed-off-by: Wentao Zhang <wentao.zhang@windriver.com>
 ---
- .../postgresql/files/CVE-2023-5868.patch      | 125 ++++++++
- .../postgresql/files/CVE-2023-5869.patch      | 294 ++++++++++++++++++
- .../postgresql/files/CVE-2023-5870.patch      | 108 +++++++
- .../recipes-dbs/postgresql/postgresql_14.9.bb |   3 +
- 4 files changed, 530 insertions(+)
- create mode 100644 meta-oe/recipes-dbs/postgresql/files/CVE-2023-5868.patch
- create mode 100644 meta-oe/recipes-dbs/postgresql/files/CVE-2023-5869.patch
- create mode 100644 meta-oe/recipes-dbs/postgresql/files/CVE-2023-5870.patch
+ meta-oe/recipes-support/libbytesize/libbytesize_2.8.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-dbs/postgresql/files/CVE-2023-5868.patch b/meta-oe/recipes-dbs/postgresql/files/CVE-2023-5868.patch
-new file mode 100644
-index 0000000000..50953f49b2
---- /dev/null
-+++ b/meta-oe/recipes-dbs/postgresql/files/CVE-2023-5868.patch
-@@ -0,0 +1,125 @@
-+From 3b0776fde56763c549df35ce9750f3399bc710b2 Mon Sep 17 00:00:00 2001
-+From: Tom Lane <tgl@sss.pgh.pa.us>
-+Date: Tue, 21 Nov 2023 11:37:27 +0000
-+Subject: [PATCH] Compute aggregate argument types correctly in
-+
-+ transformAggregateCall().
-+
-+transformAggregateCall() captures the datatypes of the aggregate's
-+arguments immediately to construct the Aggref.aggargtypes list.
-+This seems reasonable because the arguments have already been
-+transformed --- but there is an edge case where they haven't been.
-+Specifically, if we have an unknown-type literal in an ANY argument
-+position, nothing will have been done with it earlier.  But if we
-+also have DISTINCT, then addTargetToGroupList() converts the literal
-+to "text" type, resulting in the aggargtypes list not matching the
-+actual runtime type of the argument.  The end result is that the
-+aggregate tries to interpret a "text" value as being of type
-+"unknown", that is a zero-terminated C string.  If the text value
-+contains no zero bytes, this could result in disclosure of server
-+memory following the text literal value.
-+
-+To fix, move the collection of the aggargtypes list to the end
-+of transformAggregateCall(), after DISTINCT has been handled.
-+This requires slightly more code, but not a great deal.
-+
-+Our thanks to Jingzhou Fu for reporting this problem.
-+
-+Security: CVE-2023-5868
-+
-+CVE: CVE-2023-5868
-+Upstream-Status: Backport [https://github.com/postgres/postgres/commit/3b0776fde56763c549df35ce9750f3399bc710b2]
-+
-+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
-+
-+---
-+ src/backend/parser/parse_agg.c      | 35 +++++++++++++++++++----------
-+ src/test/regress/expected/jsonb.out |  7 ++++++
-+ src/test/regress/sql/jsonb.sql      |  3 +++
-+ 3 files changed, 33 insertions(+), 12 deletions(-)
-+
-+diff --git a/src/backend/parser/parse_agg.c b/src/backend/parser/parse_agg.c
-+index 828cd99..90cf150 100644
-+--- a/src/backend/parser/parse_agg.c
-++++ b/src/backend/parser/parse_agg.c
-+@@ -110,18 +110,6 @@ transformAggregateCall(ParseState *pstate, Aggref *agg,
-+ 	int			save_next_resno;
-+ 	ListCell   *lc;
-+ 
-+-	/*
-+-	 * Before separating the args into direct and aggregated args, make a list
-+-	 * of their data type OIDs for use later.
-+-	 */
-+-	foreach(lc, args)
-+-	{
-+-		Expr	   *arg = (Expr *) lfirst(lc);
-+-
-+-		argtypes = lappend_oid(argtypes, exprType((Node *) arg));
-+-	}
-+-	agg->aggargtypes = argtypes;
-+-
-+ 	if (AGGKIND_IS_ORDERED_SET(agg->aggkind))
-+ 	{
-+ 		/*
-+@@ -233,6 +221,29 @@ transformAggregateCall(ParseState *pstate, Aggref *agg,
-+ 	agg->aggorder = torder;
-+ 	agg->aggdistinct = tdistinct;
-+ 
-++	/*
-++	 * Now build the aggargtypes list with the type OIDs of the direct and
-++	 * aggregated args, ignoring any resjunk entries that might have been
-++	 * added by ORDER BY/DISTINCT processing.  We can't do this earlier
-++	 * because said processing can modify some args' data types, in particular
-++	 * by resolving previously-unresolved "unknown" literals.
-++	 */
-++	foreach(lc, agg->aggdirectargs)
-++	{
-++		Expr	   *arg = (Expr *) lfirst(lc);
-++
-++		argtypes = lappend_oid(argtypes, exprType((Node *) arg));
-++	}
-++	foreach(lc, tlist)
-++	{
-++		TargetEntry *tle = (TargetEntry *) lfirst(lc);
-++
-++		if (tle->resjunk)
-++			continue;			/* ignore junk */
-++		argtypes = lappend_oid(argtypes, exprType((Node *) tle->expr));
-++	}
-++	agg->aggargtypes = argtypes;
-++
-+ 	check_agglevels_and_constraints(pstate, (Node *) agg);
-+ }
-+ 
-+diff --git a/src/test/regress/expected/jsonb.out b/src/test/regress/expected/jsonb.out
-+index bec355d..eb7f410 100644
-+--- a/src/test/regress/expected/jsonb.out
-++++ b/src/test/regress/expected/jsonb.out
-+@@ -1558,6 +1558,13 @@ SELECT jsonb_object_agg(name, type) FROM foo;
-+ INSERT INTO foo VALUES (999999, NULL, 'bar');
-+ SELECT jsonb_object_agg(name, type) FROM foo;
-+ ERROR:  field name must not be null
-++-- edge case for parser
-++SELECT jsonb_object_agg(DISTINCT 'a', 'abc');
-++ jsonb_object_agg
-++------------------
-++ {"a": "abc"}
-++(1 row)
-++
-+ -- jsonb_object
-+ -- empty object, one dimension
-+ SELECT jsonb_object('{}');
-+diff --git a/src/test/regress/sql/jsonb.sql b/src/test/regress/sql/jsonb.sql
-+index f8d5960..040e1ba 100644
-+--- a/src/test/regress/sql/jsonb.sql
-++++ b/src/test/regress/sql/jsonb.sql
-+@@ -397,6 +397,9 @@ SELECT jsonb_object_agg(name, type) FROM foo;
-+ INSERT INTO foo VALUES (999999, NULL, 'bar');
-+ SELECT jsonb_object_agg(name, type) FROM foo;
-+ 
-++-- edge case for parser
-++SELECT jsonb_object_agg(DISTINCT 'a', 'abc');
-++
-+ -- jsonb_object
-+ 
-+ -- empty object, one dimension
-diff --git a/meta-oe/recipes-dbs/postgresql/files/CVE-2023-5869.patch b/meta-oe/recipes-dbs/postgresql/files/CVE-2023-5869.patch
-new file mode 100644
-index 0000000000..cef2ab2253
---- /dev/null
-+++ b/meta-oe/recipes-dbs/postgresql/files/CVE-2023-5869.patch
-@@ -0,0 +1,294 @@
-+From 18b585155a891784ca8985f595ebc0dde94e0d43 Mon Sep 17 00:00:00 2001
-+From: Tom Lane <tgl@sss.pgh.pa.us>
-+Date: Tue, 21 Nov 2023 11:43:00 +0000
-+Subject: [PATCH] Detect integer overflow while computing new array dimensions.
-+
-+array_set_element() and related functions allow an array to be
-+enlarged by assigning to subscripts outside the current array bounds.
-+While these places were careful to check that the new bounds are
-+allowable, they neglected to consider the risk of integer overflow
-+in computing the new bounds.  In edge cases, we could compute new
-+bounds that are invalid but get past the subsequent checks,
-+allowing bad things to happen.  Memory stomps that are potentially
-+exploitable for arbitrary code execution are possible, and so is
-+disclosure of server memory.
-+
-+To fix, perform the hazardous computations using overflow-detecting
-+arithmetic routines, which fortunately exist in all still-supported
-+branches.
-+
-+The test cases added for this generate (after patching) errors that
-+mention the value of MaxArraySize, which is platform-dependent.
-+Rather than introduce multiple expected-files, use psql's VERBOSITY
-+parameter to suppress the printing of the message text.  v11 psql
-+lacks that parameter, so omit the tests in that branch.
-+
-+Our thanks to Pedro Gallegos for reporting this problem.
-+
-+Security: CVE-2023-5869
-+
-+CVE: CVE-2023-5869
-+Upstream-Status: Backport [https://github.com/postgres/postgres/commit/18b585155a891784ca8985f595ebc0dde94e0d43]
-+
-+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
-+
-+---
-+ src/backend/utils/adt/arrayfuncs.c   | 85 ++++++++++++++++++++++------
-+ src/backend/utils/adt/arrayutils.c   |  6 --
-+ src/include/utils/array.h            |  7 +++
-+ src/test/regress/expected/arrays.out | 17 ++++++
-+ src/test/regress/sql/arrays.sql      | 19 +++++++
-+ 5 files changed, 110 insertions(+), 24 deletions(-)
-+
-+diff --git a/src/backend/utils/adt/arrayfuncs.c b/src/backend/utils/adt/arrayfuncs.c
-+index 949737d..0071f7d 100644
-+--- a/src/backend/utils/adt/arrayfuncs.c
-++++ b/src/backend/utils/adt/arrayfuncs.c
-+@@ -19,6 +19,7 @@
-+ 
-+ #include "access/htup_details.h"
-+ #include "catalog/pg_type.h"
-++#include "common/int.h"
-+ #include "funcapi.h"
-+ #include "libpq/pqformat.h"
-+ #include "nodes/nodeFuncs.h"
-+@@ -2334,22 +2335,38 @@ array_set_element(Datum arraydatum,
-+ 	addedbefore = addedafter = 0;
-+ 
-+ 	/*
-+-	 * Check subscripts
-++	 * Check subscripts.  We assume the existing subscripts passed
-++	 * ArrayCheckBounds, so that dim[i] + lb[i] can be computed without
-++	 * overflow.  But we must beware of other overflows in our calculations of
-++	 * new dim[] values.
-+ 	 */
-+ 	if (ndim == 1)
-+ 	{
-+ 		if (indx[0] < lb[0])
-+ 		{
-+-			addedbefore = lb[0] - indx[0];
-+-			dim[0] += addedbefore;
-++			/* addedbefore = lb[0] - indx[0]; */
-++			/* dim[0] += addedbefore; */
-++			if (pg_sub_s32_overflow(lb[0], indx[0], &addedbefore) ||
-++				pg_add_s32_overflow(dim[0], addedbefore, &dim[0]))
-++				ereport(ERROR,
-++						(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++						 errmsg("array size exceeds the maximum allowed (%d)",
-++								(int) MaxArraySize)));
-+ 			lb[0] = indx[0];
-+ 			if (addedbefore > 1)
-+ 				newhasnulls = true; /* will insert nulls */
-+ 		}
-+ 		if (indx[0] >= (dim[0] + lb[0]))
-+ 		{
-+-			addedafter = indx[0] - (dim[0] + lb[0]) + 1;
-+-			dim[0] += addedafter;
-++			/* addedafter = indx[0] - (dim[0] + lb[0]) + 1; */
-++			/* dim[0] += addedafter; */
-++			if (pg_sub_s32_overflow(indx[0], dim[0] + lb[0], &addedafter) ||
-++				pg_add_s32_overflow(addedafter, 1, &addedafter) ||
-++				pg_add_s32_overflow(dim[0], addedafter, &dim[0]))
-++				ereport(ERROR,
-++						(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++						 errmsg("array size exceeds the maximum allowed (%d)",
-++								(int) MaxArraySize)));
-+ 			if (addedafter > 1)
-+ 				newhasnulls = true; /* will insert nulls */
-+ 		}
-+@@ -2595,14 +2612,23 @@ array_set_element_expanded(Datum arraydatum,
-+ 	addedbefore = addedafter = 0;
-+ 
-+ 	/*
-+-	 * Check subscripts (this logic matches original array_set_element)
-++	 * Check subscripts (this logic must match array_set_element).  We assume
-++	 * the existing subscripts passed ArrayCheckBounds, so that dim[i] + lb[i]
-++	 * can be computed without overflow.  But we must beware of other
-++	 * overflows in our calculations of new dim[] values.
-+ 	 */
-+ 	if (ndim == 1)
-+ 	{
-+ 		if (indx[0] < lb[0])
-+ 		{
-+-			addedbefore = lb[0] - indx[0];
-+-			dim[0] += addedbefore;
-++			/* addedbefore = lb[0] - indx[0]; */
-++			/* dim[0] += addedbefore; */
-++			if (pg_sub_s32_overflow(lb[0], indx[0], &addedbefore) ||
-++				pg_add_s32_overflow(dim[0], addedbefore, &dim[0]))
-++				ereport(ERROR,
-++						(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++						 errmsg("array size exceeds the maximum allowed (%d)",
-++								(int) MaxArraySize)));
-+ 			lb[0] = indx[0];
-+ 			dimschanged = true;
-+ 			if (addedbefore > 1)
-+@@ -2610,8 +2636,15 @@ array_set_element_expanded(Datum arraydatum,
-+ 		}
-+ 		if (indx[0] >= (dim[0] + lb[0]))
-+ 		{
-+-			addedafter = indx[0] - (dim[0] + lb[0]) + 1;
-+-			dim[0] += addedafter;
-++			/* addedafter = indx[0] - (dim[0] + lb[0]) + 1; */
-++			/* dim[0] += addedafter; */
-++			if (pg_sub_s32_overflow(indx[0], dim[0] + lb[0], &addedafter) ||
-++				pg_add_s32_overflow(addedafter, 1, &addedafter) ||
-++				pg_add_s32_overflow(dim[0], addedafter, &dim[0]))
-++				ereport(ERROR,
-++						(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++						 errmsg("array size exceeds the maximum allowed (%d)",
-++								(int) MaxArraySize)));
-+ 			dimschanged = true;
-+ 			if (addedafter > 1)
-+ 				newhasnulls = true; /* will insert nulls */
-+@@ -2894,7 +2927,10 @@ array_set_slice(Datum arraydatum,
-+ 	addedbefore = addedafter = 0;
-+ 
-+ 	/*
-+-	 * Check subscripts
-++	 * Check subscripts.  We assume the existing subscripts passed
-++	 * ArrayCheckBounds, so that dim[i] + lb[i] can be computed without
-++	 * overflow.  But we must beware of other overflows in our calculations of
-++	 * new dim[] values.
-+ 	 */
-+ 	if (ndim == 1)
-+ 	{
-+@@ -2909,18 +2945,31 @@ array_set_slice(Datum arraydatum,
-+ 					 errmsg("upper bound cannot be less than lower bound")));
-+ 		if (lowerIndx[0] < lb[0])
-+ 		{
-+-			if (upperIndx[0] < lb[0] - 1)
-+-				newhasnulls = true; /* will insert nulls */
-+-			addedbefore = lb[0] - lowerIndx[0];
-+-			dim[0] += addedbefore;
-++			/* addedbefore = lb[0] - lowerIndx[0]; */
-++			/* dim[0] += addedbefore; */
-++			if (pg_sub_s32_overflow(lb[0], lowerIndx[0], &addedbefore) ||
-++				pg_add_s32_overflow(dim[0], addedbefore, &dim[0]))
-++				ereport(ERROR,
-++						(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++						 errmsg("array size exceeds the maximum allowed (%d)",
-++								(int) MaxArraySize)));
-+ 			lb[0] = lowerIndx[0];
-++			if (addedbefore > 1)
-++				newhasnulls = true; /* will insert nulls */
-+ 		}
-+ 		if (upperIndx[0] >= (dim[0] + lb[0]))
-+ 		{
-+-			if (lowerIndx[0] > (dim[0] + lb[0]))
-++			/* addedafter = upperIndx[0] - (dim[0] + lb[0]) + 1; */
-++			/* dim[0] += addedafter; */
-++			if (pg_sub_s32_overflow(upperIndx[0], dim[0] + lb[0], &addedafter) ||
-++				pg_add_s32_overflow(addedafter, 1, &addedafter) ||
-++				pg_add_s32_overflow(dim[0], addedafter, &dim[0]))
-++				ereport(ERROR,
-++						(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
-++						 errmsg("array size exceeds the maximum allowed (%d)",
-++								(int) MaxArraySize)));
-++			if (addedafter > 1)
-+ 				newhasnulls = true; /* will insert nulls */
-+-			addedafter = upperIndx[0] - (dim[0] + lb[0]) + 1;
-+-			dim[0] += addedafter;
-+ 		}
-+ 	}
-+ 	else
-+diff --git a/src/backend/utils/adt/arrayutils.c b/src/backend/utils/adt/arrayutils.c
-+index 6988edd..fdaf712 100644
-+--- a/src/backend/utils/adt/arrayutils.c
-++++ b/src/backend/utils/adt/arrayutils.c
-+@@ -64,10 +64,6 @@ ArrayGetOffset0(int n, const int *tup, const int *scale)
-+  * This must do overflow checking, since it is used to validate that a user
-+  * dimensionality request doesn't overflow what we can handle.
-+  *
-+- * We limit array sizes to at most about a quarter billion elements,
-+- * so that it's not necessary to check for overflow in quite so many
-+- * places --- for instance when palloc'ing Datum arrays.
-+- *
-+  * The multiplication overflow check only works on machines that have int64
-+  * arithmetic, but that is nearly all platforms these days, and doing check
-+  * divides for those that don't seems way too expensive.
-+@@ -78,8 +74,6 @@ ArrayGetNItems(int ndim, const int *dims)
-+ 	int32		ret;
-+ 	int			i;
-+ 
-+-#define MaxArraySize ((Size) (MaxAllocSize / sizeof(Datum)))
-+-
-+ 	if (ndim <= 0)
-+ 		return 0;
-+ 	ret = 1;
-+diff --git a/src/include/utils/array.h b/src/include/utils/array.h
-+index 4ae6c3b..0d6db51 100644
-+--- a/src/include/utils/array.h
-++++ b/src/include/utils/array.h
-+@@ -74,6 +74,13 @@ struct ExprContext;
-+  */
-+ #define MAXDIM 6
-+ 
-++/*
-++ * Maximum number of elements in an array.  We limit this to at most about a
-++ * quarter billion elements, so that it's not necessary to check for overflow
-++ * in quite so many places --- for instance when palloc'ing Datum arrays.
-++ */
-++#define MaxArraySize ((Size) (MaxAllocSize / sizeof(Datum)))
-++
-+ /*
-+  * Arrays are varlena objects, so must meet the varlena convention that
-+  * the first int32 of the object contains the total object size in bytes.
-+diff --git a/src/test/regress/expected/arrays.out b/src/test/regress/expected/arrays.out
-+index 4923cf3..7f9b693 100644
-+--- a/src/test/regress/expected/arrays.out
-++++ b/src/test/regress/expected/arrays.out
-+@@ -1380,6 +1380,23 @@ insert into arr_pk_tbl(pk, f1[1:2]) values (1, '{6,7,8}') on conflict (pk)
-+ -- then you didn't get an indexscan plan, and something is busted.
-+ reset enable_seqscan;
-+ reset enable_bitmapscan;
-++-- test subscript overflow detection
-++-- The normal error message includes a platform-dependent limit,
-++-- so suppress it to avoid needing multiple expected-files.
-++\set VERBOSITY sqlstate
-++insert into arr_pk_tbl values(10, '[-2147483648:-2147483647]={1,2}');
-++update arr_pk_tbl set f1[2147483647] = 42 where pk = 10;
-++ERROR:  54000
-++update arr_pk_tbl set f1[2147483646:2147483647] = array[4,2] where pk = 10;
-++ERROR:  54000
-++-- also exercise the expanded-array case
-++do $$ declare a int[];
-++begin
-++  a := '[-2147483648:-2147483647]={1,2}'::int[];
-++  a[2147483647] := 42;
-++end $$;
-++ERROR:  54000
-++\set VERBOSITY default
-+ -- test [not] (like|ilike) (any|all) (...)
-+ select 'foo' like any (array['%a', '%o']); -- t
-+  ?column? 
-+diff --git a/src/test/regress/sql/arrays.sql b/src/test/regress/sql/arrays.sql
-+index 5eedc4c..3ad8bdf 100644
-+--- a/src/test/regress/sql/arrays.sql
-++++ b/src/test/regress/sql/arrays.sql
-+@@ -415,6 +415,25 @@ insert into arr_pk_tbl(pk, f1[1:2]) values (1, '{6,7,8}') on conflict (pk)
-+ reset enable_seqscan;
-+ reset enable_bitmapscan;
-+ 
-++-- test subscript overflow detection
-++
-++-- The normal error message includes a platform-dependent limit,
-++-- so suppress it to avoid needing multiple expected-files.
-++\set VERBOSITY sqlstate
-++
-++insert into arr_pk_tbl values(10, '[-2147483648:-2147483647]={1,2}');
-++update arr_pk_tbl set f1[2147483647] = 42 where pk = 10;
-++update arr_pk_tbl set f1[2147483646:2147483647] = array[4,2] where pk = 10;
-++
-++-- also exercise the expanded-array case
-++do $$ declare a int[];
-++begin
-++  a := '[-2147483648:-2147483647]={1,2}'::int[];
-++  a[2147483647] := 42;
-++end $$;
-++
-++\set VERBOSITY default
-++
-+ -- test [not] (like|ilike) (any|all) (...)
-+ select 'foo' like any (array['%a', '%o']); -- t
-+ select 'foo' like any (array['%a', '%b']); -- f
-diff --git a/meta-oe/recipes-dbs/postgresql/files/CVE-2023-5870.patch b/meta-oe/recipes-dbs/postgresql/files/CVE-2023-5870.patch
-new file mode 100644
-index 0000000000..b1a16e4660
---- /dev/null
-+++ b/meta-oe/recipes-dbs/postgresql/files/CVE-2023-5870.patch
-@@ -0,0 +1,108 @@
-+From  3a9b18b3095366cd0c4305441d426d04572d88c1 Mon Sep 17 00:00:00 2001
-+From: Noah Misch <noah@leadboat.com>
-+Date: Tue, 21 Nov 2023 11:49:50 +0000
-+Subject: [PATCH] Ban role pg_signal_backend from more superuser backend types.
-+
-+Documentation says it cannot signal "a backend owned by a superuser".
-+On the contrary, it could signal background workers, including the
-+logical replication launcher.  It could signal autovacuum workers and
-+the autovacuum launcher.  Block all that.  Signaling autovacuum workers
-+and those two launchers doesn't stall progress beyond what one could
-+achieve other ways.  If a cluster uses a non-core extension with a
-+background worker that does not auto-restart, this could create a denial
-+of service with respect to that background worker.  A background worker
-+with bugs in its code for responding to terminations or cancellations
-+could experience those bugs at a time the pg_signal_backend member
-+chooses.  Back-patch to v11 (all supported versions).
-+
-+Reviewed by Jelte Fennema-Nio.  Reported by Hemanth Sandrana and
-+Mahendrakar Srinivasarao.
-+
-+Security: CVE-2023-5870
-+
-+CVE: CVE-2023-5870
-+Upstream-Status: Backport [https://github.com/postgres/postgres/commit/3a9b18b3095366cd0c4305441d426d04572d88c1]
-+
-+Signed-off-by: Yogita Urade <yogita.urade@windriver.com>
-+
-+---
-+ src/backend/storage/ipc/signalfuncs.c    |  9 +++++++--
-+ src/test/regress/expected/privileges.out | 18 ++++++++++++++++++
-+ src/test/regress/sql/privileges.sql      | 15 +++++++++++++++
-+ 3 files changed, 40 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/backend/storage/ipc/signalfuncs.c b/src/backend/storage/ipc/signalfuncs.c
-+index de69d60..b6ff412 100644
-+--- a/src/backend/storage/ipc/signalfuncs.c
-++++ b/src/backend/storage/ipc/signalfuncs.c
-+@@ -69,8 +69,13 @@ pg_signal_backend(int pid, int sig)
-+ 		return SIGNAL_BACKEND_ERROR;
-+ 	}
-+ 
-+-	/* Only allow superusers to signal superuser-owned backends. */
-+-	if (superuser_arg(proc->roleId) && !superuser())
-++	/*
-++	 * Only allow superusers to signal superuser-owned backends.  Any process
-++	 * not advertising a role might have the importance of a superuser-owned
-++	 * backend, so treat it that way.
-++	 */
-++	if ((!OidIsValid(proc->roleId) || superuser_arg(proc->roleId)) &&
-++		!superuser())
-+ 		return SIGNAL_BACKEND_NOSUPERUSER;
-+ 
-+ 	/* Users can signal backends they have role membership in. */
-+diff --git a/src/test/regress/expected/privileges.out b/src/test/regress/expected/privileges.out
-+index b3c3b25..90e70f9 100644
-+--- a/src/test/regress/expected/privileges.out
-++++ b/src/test/regress/expected/privileges.out
-+@@ -1846,6 +1846,24 @@ SELECT * FROM pg_largeobject LIMIT 0;
-+ SET SESSION AUTHORIZATION regress_priv_user1;
-+ SELECT * FROM pg_largeobject LIMIT 0;			-- to be denied
-+ ERROR:  permission denied for table pg_largeobject
-++-- pg_signal_backend can't signal superusers
-++RESET SESSION AUTHORIZATION;
-++BEGIN;
-++CREATE OR REPLACE FUNCTION terminate_nothrow(pid int) RETURNS bool
-++	LANGUAGE plpgsql SECURITY DEFINER SET client_min_messages = error AS $$
-++BEGIN
-++	RETURN pg_terminate_backend($1);
-++EXCEPTION WHEN OTHERS THEN
-++	RETURN false;
-++END$$;
-++ALTER FUNCTION terminate_nothrow OWNER TO pg_signal_backend;
-++SELECT backend_type FROM pg_stat_activity
-++WHERE CASE WHEN COALESCE(usesysid, 10) = 10 THEN terminate_nothrow(pid) END;
-++ backend_type
-++--------------
-++(0 rows)
-++
-++ROLLBACK;
-+ -- test pg_database_owner
-+ RESET SESSION AUTHORIZATION;
-+ GRANT pg_database_owner TO regress_priv_user1;
-+diff --git a/src/test/regress/sql/privileges.sql b/src/test/regress/sql/privileges.sql
-+index af05f95..f96143e 100644
-+--- a/src/test/regress/sql/privileges.sql
-++++ b/src/test/regress/sql/privileges.sql
-+@@ -1133,6 +1133,21 @@ SELECT * FROM pg_largeobject LIMIT 0;
-+ SET SESSION AUTHORIZATION regress_priv_user1;
-+ SELECT * FROM pg_largeobject LIMIT 0;			-- to be denied
-+ 
-++-- pg_signal_backend can't signal superusers
-++RESET SESSION AUTHORIZATION;
-++BEGIN;
-++CREATE OR REPLACE FUNCTION terminate_nothrow(pid int) RETURNS bool
-++	LANGUAGE plpgsql SECURITY DEFINER SET client_min_messages = error AS $$
-++BEGIN
-++	RETURN pg_terminate_backend($1);
-++EXCEPTION WHEN OTHERS THEN
-++	RETURN false;
-++END$$;
-++ALTER FUNCTION terminate_nothrow OWNER TO pg_signal_backend;
-++SELECT backend_type FROM pg_stat_activity
-++WHERE CASE WHEN COALESCE(usesysid, 10) = 10 THEN terminate_nothrow(pid) END;
-++ROLLBACK;
-++
-+ -- test pg_database_owner
-+ RESET SESSION AUTHORIZATION;
-+ GRANT pg_database_owner TO regress_priv_user1;
-diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_14.9.bb b/meta-oe/recipes-dbs/postgresql/postgresql_14.9.bb
-index f779ea7abd..a879de20cc 100644
---- a/meta-oe/recipes-dbs/postgresql/postgresql_14.9.bb
-+++ b/meta-oe/recipes-dbs/postgresql/postgresql_14.9.bb
-@@ -9,6 +9,9 @@ SRC_URI += "\
-    file://0001-configure.ac-bypass-autoconf-2.69-version-check.patch \
-    file://0001-config_info.c-not-expose-build-info.patch \
-    file://0001-postgresql-fix-ptest-failure-of-sysviews.patch \
-+   file://CVE-2023-5868.patch \
-+   file://CVE-2023-5869.patch \
-+   file://CVE-2023-5870.patch \
- "
+diff --git a/meta-oe/recipes-support/libbytesize/libbytesize_2.8.bb b/meta-oe/recipes-support/libbytesize/libbytesize_2.8.bb
+index 0afe8a6c0..58ae52cc6 100644
+--- a/meta-oe/recipes-support/libbytesize/libbytesize_2.8.bb
++++ b/meta-oe/recipes-support/libbytesize/libbytesize_2.8.bb
+@@ -10,7 +10,7 @@ S = "${WORKDIR}/git"
+ B = "${S}"
  
- SRC_URI[sha256sum] = "b1fe3ba9b1a7f3a9637dd1656dfdad2889016073fd4d35f13b50143cbbb6a8ef"
+ SRCREV = "12b8e6bff611eecb0343ee8a765151e7d9d3547b"
+-SRC_URI = "git://github.com/rhinstaller/libbytesize;branch=master;protocol=https"
++SRC_URI = "git://github.com/rhinstaller/libbytesize;branch=main;protocol=https"
+ 
+ inherit gettext autotools pkgconfig python3native
+ 
 -- 
-2.40.0
+2.25.1
 
 
