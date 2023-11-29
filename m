@@ -2,56 +2,56 @@ Return-Path: <alex.kanavin@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 84A3EC07CB1
-	for <webhook@archiver.kernel.org>; Wed, 29 Nov 2023 13:22:53 +0000 (UTC)
-Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
- by mx.groups.io with SMTP id smtpd.web10.32649.1701264168001156436
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A749C4167B
+	for <webhook@archiver.kernel.org>; Wed, 29 Nov 2023 13:24:33 +0000 (UTC)
+Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com [209.85.208.48])
+ by mx.groups.io with SMTP id smtpd.web11.32672.1701264271158077145
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Nov 2023 05:22:48 -0800
+ Wed, 29 Nov 2023 05:24:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZcfS37w8;
- spf=pass (domain: gmail.com, ip: 209.85.208.46, mailfrom: alex.kanavin@gmail.com)
-Received: by mail-ed1-f46.google.com with SMTP id 4fb4d7f45d1cf-54bd7e5182cso801850a12.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Nov 2023 05:22:47 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=gwPFuLhr;
+ spf=pass (domain: gmail.com, ip: 209.85.208.48, mailfrom: alex.kanavin@gmail.com)
+Received: by mail-ed1-f48.google.com with SMTP id 4fb4d7f45d1cf-54b0310f536so1743129a12.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Nov 2023 05:24:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1701264166; x=1701868966; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1701264269; x=1701869069; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=IBFYPIMJmdh9YK0n04N8MpKp8DA5H8DUQXGXESwWv+0=;
-        b=ZcfS37w8KoHo2A0srNfKJzE5G/HWEVX1GJWOUQpNpYp4rEC7M4TorSrb0pSvU2vPiT
-         ECSypc6rBPydOTgkYnJeKjsZupaqc27vhsoE/gQmrwDa4DKf2lTCbk1VoTgY9M4bbkZk
-         C0Y5MKeKUgL6HiYzr6J44GoV6OIQ9BQApzB/yd6ZhwNBPpfazvpV8Gyszz2/QQ1dXKzh
-         UlEfFDXP+XqVevcAllKxGLjUdcIM51e3FS4KJu09i1thKa8DIpqEHRmPLicidc8q1cl7
-         tHwvNoGNNOlA5S7XfUsbgpvGwD6w8CUtVl0FU06gtSBU4SDf3jW97/K27ctdNQiK37/f
-         91Lw==
+        bh=g6tCqEeZYOcWmqmv2fafJdu/A8TQTwFSLmTMrqLkbqw=;
+        b=gwPFuLhrKVWnzmS0H7KvCWoR5RHeIkhX5z1sT3hWp+mV6umMXvlivMK42crgFRdVsp
+         yX1IwBhmaga/0oKBMT5iphoAZWPDRWb2OLOjP4KJ3oNcu8YPOxUVKR4PacSZoY+zCxjf
+         EObgUDmZOo1P6eE9S24SPfJEFtiZdYjZUV6SYx1TIPlwKscd8LnMhn1HziVwBnAoraeo
+         +tnAf0LXlzux0DgoggP3BRKLTuv1D1Uc2CIbnwbwCGY/23QfdqgMle5h7DI7FqKPYhLZ
+         humxo49rfqix9GGDbpk3Yy4HwYd9NUYLyMuibqyBH8S1rW8MBfa2qrxV1GlC/srqmIxB
+         0dfg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701264166; x=1701868966;
+        d=1e100.net; s=20230601; t=1701264269; x=1701869069;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=IBFYPIMJmdh9YK0n04N8MpKp8DA5H8DUQXGXESwWv+0=;
-        b=d1LydzbJLsr/p/n/q9CYr9tXAPbsaoJ3Iq17X+FEYGF8e0L0lMEh6JGzMPceqFkTbS
-         ZFb7DvRX6fC02iJOstWflRt2Bdzi6lC3BFOvAQoHqPIM0zJjQwDhiZmGnDBYjwIjRBUl
-         LHPyL1sKzzTtw7Qtj1vGocGZMVfd0wR+rnKrZBW1SWgOh5vHIcdZzik1Plj1iZCFmSQA
-         wj7CTv6hnZ/spyTM66UdG8ouMnNPp0DC8fFsfN5upDp2Sh4lBar9n+79m0eEG5lNS4Uk
-         gw/gfjiS2gGqC4t6yeWyr8it9GcWM6dBHxKl9D9nnyS5v1DShQQjIIedW14iHOhUktrT
-         1pPA==
-X-Gm-Message-State: AOJu0Yyds9l0fAjzggMuEdyGW9LkOvWYCs8TZ/B66Mp9NceTEK8Hmmv5
-	Lyb+cz7IG8UDbGsnQCq8/uC28ils3y0=
-X-Google-Smtp-Source: AGHT+IEbRxHkfVjmqkk15NpmQLw5bxeGIhpMvOfMjoTTD3WmWXgxwtcW931q2WInSleTCqI3Z0L6ag==
-X-Received: by 2002:a17:906:74cd:b0:a17:8797:8a9f with SMTP id z13-20020a17090674cd00b00a1787978a9fmr1020862ejl.58.1701264164429;
-        Wed, 29 Nov 2023 05:22:44 -0800 (PST)
+        bh=g6tCqEeZYOcWmqmv2fafJdu/A8TQTwFSLmTMrqLkbqw=;
+        b=HfTvD91o4wC9BGBnrdc+wrGh+Bp+kbSyN3h4X5J7uPC8PNQoY796bO8iWLUIRvCn6Y
+         Rp0aj7gHlBrqpavr06484NtXejixA/V+agzD/uaQgbFUVqRryCh9gR47IP6dtYmKQDwo
+         D+8/FvSfLGg3PWRyhus5IPH4T8uDktrEnkBeM2jfe8T9oyuaKollVFMdonT1wo+Hss8l
+         Vwt0ljQIazMXdimQco7jx96dMBUDmmmrpLN/DWt61GhwR8BgmoEKCa6gozwt7Al2XphI
+         Kd5l1R1HGwmusXJpkgXZ1GzshJK3vqQ3MydDisEQtYnN632/Ldo2kjqWkikz7P2xCKe5
+         xqYg==
+X-Gm-Message-State: AOJu0YwSA8LNmXyzbUB8PtOROtZu5qZwlmBaQS6HXk0mFJRai+2z9ehF
+	yFgwm0PwEPwCUd9O7Mjy0nTXTDughMs=
+X-Google-Smtp-Source: AGHT+IEnE6J8mw9HMuyqshTkKpYV3QahxudjcLPWN/BPNHjSbmE7rmACPzjHwRR5ddRpZ4jnkHBCpA==
+X-Received: by 2002:a05:6402:517b:b0:54b:1ca8:8521 with SMTP id d27-20020a056402517b00b0054b1ca88521mr12688797ede.1.1701264268230;
+        Wed, 29 Nov 2023 05:24:28 -0800 (PST)
 Received: from Zen2.lab.linutronix.de. (drugstore.linutronix.de. [80.153.143.164])
-        by smtp.gmail.com with ESMTPSA id w1-20020a170906b18100b00a046a773175sm7834854ejy.122.2023.11.29.05.22.43
+        by smtp.gmail.com with ESMTPSA id cf11-20020a0564020b8b00b0054afcab0af2sm6177306edb.59.2023.11.29.05.24.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 29 Nov 2023 05:22:43 -0800 (PST)
+        Wed, 29 Nov 2023 05:24:27 -0800 (PST)
 From: Alexander Kanavin <alex.kanavin@gmail.com>
 X-Google-Original-From: Alexander Kanavin <alex@linutronix.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Alexander Kanavin <alex@linutronix.de>
 Subject: [PATCH] fio: revert "fio: upgrade 3.32 -> 2022"
-Date: Wed, 29 Nov 2023 14:22:35 +0100
-Message-Id: <20231129132235.2819941-1-alex@linutronix.de>
+Date: Wed, 29 Nov 2023 14:24:24 +0100
+Message-Id: <20231129132424.2996980-1-alex@linutronix.de>
 X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -59,10 +59,12 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 29 Nov 2023 13:22:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107136
+ <openembedded-devel@lists.openembedded.org>; Wed, 29 Nov 2023 13:24:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107137
 
 This was a bogus update (from AUH I believe) and should be reverted.
+
+Signed-off-by: Alexander Kanavin <alex@linutronix.de>
 ---
  .../fio/fio/0001-Fio-3.31.patch               |  23 -
  ...-__fill_random_buf-using-the-multi-r.patch | 136 ---
