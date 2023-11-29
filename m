@@ -1,141 +1,233 @@
-Return-Path: <dylantdmt@gmail.com>
+Return-Path: <asharma@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3FCB7C07CB1
-	for <webhook@archiver.kernel.org>; Wed, 29 Nov 2023 16:11:54 +0000 (UTC)
-Received: from mail-oa1-f46.google.com (mail-oa1-f46.google.com [209.85.160.46])
- by mx.groups.io with SMTP id smtpd.web10.40818.1701274307448456984
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B762CC4167B
+	for <webhook@archiver.kernel.org>; Wed, 29 Nov 2023 17:39:34 +0000 (UTC)
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
+ by mx.groups.io with SMTP id smtpd.web10.44550.1701279571131826001
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Nov 2023 08:11:47 -0800
+ Wed, 29 Nov 2023 09:39:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=V40cU1Wd;
- spf=pass (domain: gmail.com, ip: 209.85.160.46, mailfrom: dylantdmt@gmail.com)
-Received: by mail-oa1-f46.google.com with SMTP id 586e51a60fabf-1efb9571b13so4042502fac.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Nov 2023 08:11:47 -0800 (PST)
+ dkim=pass header.i=@mvista.com header.s=google header.b=BB8aH5LY;
+ spf=pass (domain: mvista.com, ip: 209.85.214.171, mailfrom: asharma@mvista.com)
+Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-1cf7a8ab047so206805ad.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Nov 2023 09:39:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1701274306; x=1701879106; darn=lists.openembedded.org;
+        d=mvista.com; s=google; t=1701279570; x=1701884370; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=oNM1tcfywowIfT6GQo20gi3P4AtiFs+EpMsiIJZeh4c=;
-        b=V40cU1WdEyqNA3ZK4vtpU6OiUk7kJLBI9ijn/d6owBwEbjsj4uzV7pmQAhVtIm0F78
-         n08m0epOGjuxkEnEWKuB5VZ+n6/53H1SgoN8G7grhvvF6TpziZ1UGaf7nyOTuRNRGf/9
-         CDhDrGdXdehJ7sUoAaTvtJY+pJJytIegCkuoUHPWLNy6o61T3/CqAkiCUmippLYYDVQs
-         g28S0ii/NLLeczGmwaMVWNoOhBqo5Gw6AQnn3oXYEtIhCbBMqxVYSS/8zsFn5IcYb3Bn
-         LOguISXNk3u1pSXnZMHcIcwvTLXHd8ufskGF3Y6kuj2zcYgJ6giMC2G0fY5lSy8lEelt
-         2F4g==
+        bh=EuM+E3JRqqxR9PGj1DMKSVhONBONidkwfNJ8KJDp1fM=;
+        b=BB8aH5LYsZzwxFPrdmg7Wq4KawMcNmpEz/q+/Y7E1eDFPxxWkTSfVJiiLR0rvzrZOt
+         cE7/lKon559KMNkpwDhNjkpOWUvLnfCs/xv+bDM0wiDNsvbsaweLk2tuN3kk4SEUbySz
+         2OH6AJKZC1qBhk9UHicOjzy8vnJ3fujiEXY6E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701274306; x=1701879106;
+        d=1e100.net; s=20230601; t=1701279570; x=1701884370;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=oNM1tcfywowIfT6GQo20gi3P4AtiFs+EpMsiIJZeh4c=;
-        b=KYQq2YtlUBMc5psQAcpzJFMbMjUSf9o6jwljAsKC8lO8K9R/5Ja3PNhgmAHqBLwdBx
-         6m9KwOufgUiFiA9rLt9wZvM+pMbu/OmWdh8DEJd7+qwckmzWgqSUTijsc3siZ3IJyxnx
-         n78qIP9z2BG48WoidmbjZ5TROGNxnCfZMYsQm9R40aFZR8OKxhGNCqqpbP22ZX8KrJir
-         r1rfccr0jhR0RBfiKE/SIoNgSVj5PT8A+2NJsDp7XwZe6pWsOnH938ARem6s8YDf76Xk
-         muIHLqpluTJJVtYrADa/hnHiKMgyYMWeRi1iV412GGDblzWJRTUBzFgj924EjHSuDD50
-         NzMQ==
-X-Gm-Message-State: AOJu0Yz0VDv1+/FulrgsVFWWCiSs2KaLNTiE3SO0VwtPcHbNDb9mPN7a
-	EXlttqIjg9pM0oGjRLUjLUcOZaMBzznozg==
-X-Google-Smtp-Source: AGHT+IFNz4TPLjVgUi15NAvx+R/3t9sJh/T9+txNjg1W4sMmNpCWQo64LpTjdmjEBjuYVEG4VfOp1w==
-X-Received: by 2002:a05:6870:568d:b0:1fa:26b3:4411 with SMTP id p13-20020a056870568d00b001fa26b34411mr18340693oao.7.1701274306493;
-        Wed, 29 Nov 2023 08:11:46 -0800 (PST)
-Received: from dturner-linux-box.ni.corp.natinst.com ([130.164.62.208])
-        by smtp.gmail.com with ESMTPSA id hx15-20020a056871530f00b001fa1db68eecsm2571882oac.4.2023.11.29.08.11.46
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 29 Nov 2023 08:11:46 -0800 (PST)
-From: Dylan Turner <dylantdmt@gmail.com>
-X-Google-Original-From: Dylan Turner <dylan.turner@ni.com>
+        bh=EuM+E3JRqqxR9PGj1DMKSVhONBONidkwfNJ8KJDp1fM=;
+        b=d0VJKVsgrXp9EVFUZnsF89I0fw3wucwEL0IIsXyWGqsHfUr3zgndLaykCDOJ7q3uj6
+         g7wV1xh7+ULm5ckQcOXZYkBdKosyY+kHdnlSyB/ACVD+sk02kFBP7yrPQvy3cG6RywMh
+         yxr5Okq8AF2+PpkW49Bf/P1ww5QjRM99vhrtdy0iSzubSv8Di7j/oS8RGcWbpw6t6PnU
+         PAeN6+i/BGBWOcEnm3Vune0hcgtQQhUPGeGV87CVIdKJFIMuEoL2sYhsoAn3E4csrq3k
+         iEJHnUZAEGFv8ywoF8BTSyzXTUZF9rQeWisS0R9VWeaPrxHg8iW6B50OFVBLdkrCjSOQ
+         CXmw==
+X-Gm-Message-State: AOJu0YzNgDiEQ5IZg9Rlmg9Drtx6TkJnQpNYzxReNc4kNpUFYy3wjkBL
+	ctyQXxK+BJmajhLgBkl5ka0sEVO8JlGqZnaRtS4=
+X-Google-Smtp-Source: AGHT+IHi+ayeJCP9KHL3fg6MZJnqY9kMBtJDPIfpMyUV+tAGTQuzaQdZXS+x9h7qLIOV3C4D6JRyng==
+X-Received: by 2002:a17:902:e552:b0:1cf:fe32:6319 with SMTP id n18-20020a170902e55200b001cffe326319mr6354269plf.53.1701279570094;
+        Wed, 29 Nov 2023 09:39:30 -0800 (PST)
+Received: from asharma-Latitude-3400 ([2401:4900:1c67:437e:28ba:2f41:61a3:5be2])
+        by smtp.gmail.com with ESMTPSA id o10-20020a170902d4ca00b001cfacc54674sm9849968plg.106.2023.11.29.09.39.27
+        (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+        Wed, 29 Nov 2023 09:39:29 -0800 (PST)
+Received: by asharma-Latitude-3400 (sSMTP sendmail emulation); Wed, 29 Nov 2023 23:09:24 +0530
+From: Ashish Sharma <asharma@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Dylan Turner <dylan.turner@ni.com>
-Subject: [meta-oe][PATCH] apache2: v2.4.57 to v2.4.58 to fix CVE-2023-43622
-Date: Wed, 29 Nov 2023 10:11:42 -0600
-Message-ID: <20231129161142.1957158-1-dylan.turner@ni.com>
-X-Mailer: git-send-email 2.41.0
+Cc: Ashish Sharma <asharma@mvista.com>
+Subject: [oe][meta-webserver][dunfell][PATCH V2] apache2: Backport fix for CVE-2023-45802
+Date: Wed, 29 Nov 2023 23:09:01 +0530
+Message-Id: <20231129173901.7816-1-asharma@mvista.com>
+X-Mailer: git-send-email 2.24.4
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 29 Nov 2023 16:11:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107142
+ <openembedded-devel@lists.openembedded.org>; Wed, 29 Nov 2023 17:39:34 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107143
 
-Note that patch 0011-modules-mappers-config9.m4-Add-server... is no
-longer needed as it's included within the upgrade as well.
+Upstream-Status: Backport from [https://github.com/apache/httpd/commit/decce82a706abd78dfc32821a03ad93841d7758a]
+CVE: CVE-2023-45802
 
-CVE: CVE-2023-43622
-
-Signed-off-by: Dylan Turner <dylan.turner@ni.com>
+Signed-off-by: Ashish Sharma <asharma@mvista.com>
 ---
- ...config9.m4-Add-server-directory-to-i.patch | 31 -------------------
- .../{apache2_2.4.57.bb => apache2_2.4.58.bb}  |  3 +-
- 2 files changed, 1 insertion(+), 33 deletions(-)
- delete mode 100644 meta-webserver/recipes-httpd/apache2/apache2/0011-modules-mappers-config9.m4-Add-server-directory-to-i.patch
- rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.57.bb => apache2_2.4.58.bb} (98%)
+ .../apache2/apache2/CVE-2023-45802.patch      | 141 ++++++++++++++++++
+ .../recipes-httpd/apache2/apache2_2.4.57.bb   |   1 +
+ 2 files changed, 142 insertions(+)
+ create mode 100644 meta-webserver/recipes-httpd/apache2/apache2/CVE-2023-45802.patch
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2/0011-modules-mappers-config9.m4-Add-server-directory-to-i.patch b/meta-webserver/recipes-httpd/apache2/apache2/0011-modules-mappers-config9.m4-Add-server-directory-to-i.patch
-deleted file mode 100644
-index 996eabf58..000000000
---- a/meta-webserver/recipes-httpd/apache2/apache2/0011-modules-mappers-config9.m4-Add-server-directory-to-i.patch
-+++ /dev/null
-@@ -1,31 +0,0 @@
--From 5c9257fa34335ff83f7c01581cf953111072a457 Mon Sep 17 00:00:00 2001
--From: Valeria Petrov <valeria.petrov@spinetix.com>
--Date: Tue, 18 Apr 2023 15:38:53 +0200
--Subject: [PATCH] * modules/mappers/config9.m4: Add 'server' directory to
-- include path if mod_rewrite is enabled.
--
--Upstream-Status: Accepted [https://svn.apache.org/viewvc?view=revision&revision=1909241]
--
-----
-- modules/mappers/config9.m4 | 5 +++++
-- 1 file changed, 5 insertions(+)
--
--diff --git a/modules/mappers/config9.m4 b/modules/mappers/config9.m4
--index 55a97ab993..7120b729b7 100644
----- a/modules/mappers/config9.m4
--+++ b/modules/mappers/config9.m4
--@@ -14,6 +14,11 @@ APACHE_MODULE(userdir, mapping of requests to user-specific directories, , , mos
-- APACHE_MODULE(alias, mapping of requests to different filesystem parts, , , yes)
-- APACHE_MODULE(rewrite, rule based URL manipulation, , , most)
-- 
--+if test "x$enable_rewrite" != "xno"; then
--+    # mod_rewrite needs test_char.h
--+    APR_ADDTO(INCLUDES, [-I\$(top_builddir)/server])
--+fi
--+
-- APR_ADDTO(INCLUDES, [-I\$(top_srcdir)/$modpath_current])
-- 
-- APACHE_MODPATH_FINISH
---- 
--2.25.1
--
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.57.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.58.bb
-similarity index 98%
-rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.57.bb
-rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.58.bb
-index 9ffdf3265..749c7e073 100644
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2/CVE-2023-45802.patch b/meta-webserver/recipes-httpd/apache2/apache2/CVE-2023-45802.patch
+new file mode 100644
+index 000000000..ee26e701f
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/apache2/apache2/CVE-2023-45802.patch
+@@ -0,0 +1,141 @@
++From decce82a706abd78dfc32821a03ad93841d7758a Mon Sep 17 00:00:00 2001
++From: Stefan Eissing <icing@apache.org>
++Date: Mon, 16 Oct 2023 09:05:00 +0000
++Subject: [PATCH] Merge of /httpd/httpd/trunk:r1912999
++
++ * mod_http2: improved early cleanup of streams.
++
++
++
++git-svn-id: https://svn.apache.org/repos/asf/httpd/httpd/branches/2.4.x@1913000 13f79535-47bb-0310-9956-ffa450edef68
++---
++Upstream-Status: Backport from [https://github.com/apache/httpd/commit/decce82a706abd78dfc32821a03ad93841d7758a]
++CVE: CVE-2023-45802
++Signed-off-by: Ashish Sharma <asharma@mvista.com>
++ changes-entries/h2_cleanup.txt |  2 ++
++ modules/http2/h2_mplx.c        | 26 ++++++++++++++++++++++----
++ modules/http2/h2_mplx.h        |  3 ++-
++ modules/http2/h2_session.c     | 18 +++++++++++++++++-
++ modules/http2/h2_stream.c      |  2 +-
++ 5 files changed, 44 insertions(+), 7 deletions(-)
++ create mode 100644 changes-entries/h2_cleanup.txt
++
++diff --git a/changes-entries/h2_cleanup.txt b/changes-entries/h2_cleanup.txt
++new file mode 100644
++index 00000000000..5366b4adfc6
++--- /dev/null
+++++ b/changes-entries/h2_cleanup.txt
++@@ -0,0 +1,2 @@
+++ * mod_http2: improved early cleanup of streams.
+++   [Stefan Eissing]
++diff --git a/modules/http2/h2_mplx.c b/modules/http2/h2_mplx.c
++index 4637a5f66ef..2aeea42b5df 100644
++--- a/modules/http2/h2_mplx.c
+++++ b/modules/http2/h2_mplx.c
++@@ -1119,14 +1119,32 @@ static int reset_is_acceptable(h2_stream *stream)
++     return 1; /* otherwise, be forgiving */
++ }
++ 
++-apr_status_t h2_mplx_c1_client_rst(h2_mplx *m, int stream_id)
+++apr_status_t h2_mplx_c1_client_rst(h2_mplx *m, int stream_id, h2_stream *stream)
++ {
++-    h2_stream *stream;
++     apr_status_t status = APR_SUCCESS;
+++    int registered;
++ 
++     H2_MPLX_ENTER_ALWAYS(m);
++-    stream = h2_ihash_get(m->streams, stream_id);
++-    if (stream && !reset_is_acceptable(stream)) {
+++    registered = (h2_ihash_get(m->streams, stream_id) != NULL);
+++    if (!stream) {
+++      /* a RST might arrive so late, we have already forgotten
+++       * about it. Seems ok. */
+++      ap_log_cerror(APLOG_MARK, APLOG_DEBUG, 0, m->c1,
+++                    H2_MPLX_MSG(m, "RST on unknown stream %d"), stream_id);
+++      AP_DEBUG_ASSERT(!registered);
+++    }
+++    else if (!registered) {
+++      /* a RST on a stream that mplx has not been told about, but
+++       * which the session knows. Very early and annoying. */
+++      ap_log_cerror(APLOG_MARK, APLOG_DEBUG, 0, m->c1,
+++                    H2_STRM_MSG(stream, "very early RST, drop"));
+++      h2_stream_set_monitor(stream, NULL);
+++      h2_stream_rst(stream, H2_ERR_STREAM_CLOSED);
+++      h2_stream_dispatch(stream, H2_SEV_EOS_SENT);
+++      m_stream_cleanup(m, stream);
+++      m_be_annoyed(m);
+++    }
+++    else if (!reset_is_acceptable(stream)) {
++         m_be_annoyed(m);
++     }
++     H2_MPLX_LEAVE(m);
++diff --git a/modules/http2/h2_mplx.h b/modules/http2/h2_mplx.h
++index a2e73d9d7c3..860f9160397 100644
++--- a/modules/http2/h2_mplx.h
+++++ b/modules/http2/h2_mplx.h
++@@ -201,7 +201,8 @@ int h2_mplx_c1_all_streams_want_send_data(h2_mplx *m);
++  * any processing going on and remove from processing
++  * queue.
++  */
++-apr_status_t h2_mplx_c1_client_rst(h2_mplx *m, int stream_id);
+++apr_status_t h2_mplx_c1_client_rst(h2_mplx *m, int stream_id,
+++                                   struct h2_stream *stream);
++ 
++ /**
++  * Get readonly access to a stream for a secondary connection.
++diff --git a/modules/http2/h2_session.c b/modules/http2/h2_session.c
++index 066c73ad98b..b6f6e7c01fb 100644
++--- a/modules/http2/h2_session.c
+++++ b/modules/http2/h2_session.c
++@@ -402,6 +402,10 @@ static int on_frame_recv_cb(nghttp2_session *ng2s,
++                           H2_SSSN_STRM_MSG(session, frame->hd.stream_id,
++                           "RST_STREAM by client, error=%d"),
++                           (int)frame->rst_stream.error_code);
+++            if (stream) {
+++                rv = h2_stream_recv_frame(stream, NGHTTP2_RST_STREAM, frame->hd.flags,
+++                    frame->hd.length + H2_FRAME_HDR_LEN);
+++            }
++             if (stream && stream->initiated_on) {
++                 /* A stream reset on a request we sent it. Normal, when the
++                  * client does not want it. */
++@@ -410,7 +414,8 @@ static int on_frame_recv_cb(nghttp2_session *ng2s,
++             else {
++                 /* A stream reset on a request it sent us. Could happen in a browser
++                  * when the user navigates away or cancels loading - maybe. */
++-                h2_mplx_c1_client_rst(session->mplx, frame->hd.stream_id);
+++                h2_mplx_c1_client_rst(session->mplx, frame->hd.stream_id,
+++                                      stream);
++             }
++             ++session->streams_reset;
++             break;
++@@ -812,6 +817,17 @@ static apr_status_t session_cleanup(h2_session *session, const char *trigger)
++                       "goodbye, clients will be confused, should not happen"));
++     }
++ 
+++    if (!h2_iq_empty(session->ready_to_process)) {
+++        int sid;
+++        ap_log_cerror(APLOG_MARK, APLOG_DEBUG, 0, c,
+++                      H2_SSSN_LOG(APLOGNO(), session,
+++                      "cleanup, resetting %d streams in ready-to-process"),
+++                      h2_iq_count(session->ready_to_process));
+++        while ((sid = h2_iq_shift(session->ready_to_process)) > 0) {
+++          h2_mplx_c1_client_rst(session->mplx, sid, get_stream(session, sid));
+++        }
+++    }
+++
++     transit(session, trigger, H2_SESSION_ST_CLEANUP);
++     h2_mplx_c1_destroy(session->mplx);
++     session->mplx = NULL;
++diff --git a/modules/http2/h2_stream.c b/modules/http2/h2_stream.c
++index c419e2d8591..f6c92024519 100644
++--- a/modules/http2/h2_stream.c
+++++ b/modules/http2/h2_stream.c
++@@ -125,7 +125,7 @@ static int trans_on_event[][H2_SS_MAX] = {
++ { S_XXX, S_ERR,  S_ERR,  S_CL_L, S_CLS,  S_XXX,  S_XXX,  S_XXX, },/* EV_CLOSED_L*/
++ { S_ERR, S_ERR,  S_ERR,  S_CL_R, S_ERR,  S_CLS,  S_NOP,  S_NOP, },/* EV_CLOSED_R*/
++ { S_CLS, S_CLS,  S_CLS,  S_CLS,  S_CLS,  S_CLS,  S_NOP,  S_NOP, },/* EV_CANCELLED*/
++-{ S_NOP, S_XXX,  S_XXX,  S_XXX,  S_XXX,  S_CLS,  S_CLN,  S_XXX, },/* EV_EOS_SENT*/
+++{ S_NOP, S_XXX,  S_XXX,  S_XXX,  S_XXX,  S_CLS,  S_CLN,  S_NOP, },/* EV_EOS_SENT*/
++ { S_NOP, S_XXX,  S_CLS,  S_XXX,  S_XXX,  S_CLS,  S_XXX,  S_XXX, },/* EV_IN_ERROR*/
++ };
++ 
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.57.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.57.bb
+index 36d78942c..06b00859a 100644
 --- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.57.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.58.bb
-@@ -16,7 +16,6 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.57.bb
+@@ -17,6 +17,7 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
             file://0008-Fix-perl-install-directory-to-usr-bin.patch \
             file://0009-support-apxs.in-force-destdir-to-be-empty-string.patch \
-            file://0001-make_exports.awk-not-expose-the-path.patch \
--           file://0011-modules-mappers-config9.m4-Add-server-directory-to-i.patch \
+            file://0011-modules-mappers-config9.m4-Add-server-directory-to-i.patch \
++           file://CVE-2023-45802.patch \
            "
  
  SRC_URI:append:class-target = " \
-@@ -28,7 +27,7 @@ SRC_URI:append:class-target = " \
-            "
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
--SRC_URI[sha256sum] = "dbccb84aee95e095edfbb81e5eb926ccd24e6ada55dcd83caecb262e5cf94d2a"
-+SRC_URI[sha256sum] = "fa16d72a078210a54c47dd5bef2f8b9b8a01d94909a51453956b3ec6442ea4c5"
- 
- S = "${WORKDIR}/httpd-${PV}"
- 
 -- 
-2.41.0
+2.24.4
 
 
