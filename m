@@ -1,152 +1,113 @@
-Return-Path: <naveen.kumar.saini@intel.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A8E3C4167B
-	for <webhook@archiver.kernel.org>; Thu, 30 Nov 2023 05:39:51 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.100])
- by mx.groups.io with SMTP id smtpd.web10.66183.1701322788877841745
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F476C4167B
+	for <webhook@archiver.kernel.org>; Thu, 30 Nov 2023 06:16:41 +0000 (UTC)
+Received: from mail-oa1-f45.google.com (mail-oa1-f45.google.com [209.85.160.45])
+ by mx.groups.io with SMTP id smtpd.web11.66471.1701324996651398209
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 29 Nov 2023 21:39:49 -0800
+ Wed, 29 Nov 2023 22:16:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@intel.com header.s=Intel header.b=MVizix9O;
- spf=pass (domain: intel.com, ip: 134.134.136.100, mailfrom: naveen.kumar.saini@intel.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1701322789; x=1732858789;
-  h=from:to:subject:date:message-id:in-reply-to:references:
-   mime-version:content-transfer-encoding;
-  bh=l2umRTPVqX0xdelQTeac/eDHYuvuYEr7IogAGLZbcMg=;
-  b=MVizix9ODgygVLd7eM2LyLYEIWBZAfmmAxZyEPm7wi8TXfPyVv7oh/ml
-   8g2CVqD+HwAdV8EWwkDFTGzPyhbOgacqbQwbYyY7JWv2iCL8/go+X44HH
-   HxdMO+mk+Xhp8BAZ7g3bMqs7SzaSSJZTy3x7GZ2xyhM+dcVxgFq1BuuK0
-   Tq28DKR0FXfCabF0CsVXHhnBrOouX3zDDzqRkzqUFhKYvEYWTq+Gq7y+l
-   i+YtZ6Xt53eOOtfzQhQBOj33fOC1mb2UPUljAvaE4AgAY9nzTI/w7UkDj
-   rUEyYV2nSV8YXHVzlIiR2hTPYCYGN23uA3gPnwlHGqkOQ/bpcgANBB9LK
-   w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10909"; a="459764570"
-X-IronPort-AV: E=Sophos;i="6.04,237,1695711600"; 
-   d="scan'208";a="459764570"
-Received: from orsmga006.jf.intel.com ([10.7.209.51])
-  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Nov 2023 21:39:49 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10909"; a="745510324"
-X-IronPort-AV: E=Sophos;i="6.04,237,1695711600"; 
-   d="scan'208";a="745510324"
-Received: from andromeda02.png.intel.com ([10.221.253.198])
-  by orsmga006.jf.intel.com with ESMTP; 29 Nov 2023 21:39:48 -0800
-From: Naveen Saini <naveen.kumar.saini@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 2/2] tbb: enable NUMA/Hybrid CPU support
-Date: Thu, 30 Nov 2023 13:20:07 +0800
-Message-Id: <20231130052007.2573333-2-naveen.kumar.saini@intel.com>
-X-Mailer: git-send-email 2.37.3
-In-Reply-To: <20231130052007.2573333-1-naveen.kumar.saini@intel.com>
-References: <20231130052007.2573333-1-naveen.kumar.saini@intel.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=QxjxmfCB;
+ spf=pass (domain: gmail.com, ip: 209.85.160.45, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f45.google.com with SMTP id 586e51a60fabf-1f5d34235dbso281432fac.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 29 Nov 2023 22:16:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1701324996; x=1701929796; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=sKZF/hWMdY033PwLj22FALUYlxQStdbuCxb4vcUo8K8=;
+        b=QxjxmfCB2t+P1ZrpBCpION5uNtF3lcST04Z/BTKo1qcbnKZzoHJBhyLOycuFJCUkYs
+         gKUd9TAc8Oi4cH4I5Acix03vxoscjRe7x1EoB8IXXbb8BOIHa2VA/Dkm1LRWWxKt0Tqz
+         HjjDioVMWc1qa0AY8aExamD+5HsAQ20tMfvjNLL4eXWpXhOyOAx5W4Yo7lxW4zwIB/P6
+         zkUomZXHlOSA7HtAjeKUAO6Ulrzs4fgqpcp5e2Hx9bQpkd3JxamxjTN9ztCiwJgWT6C9
+         qEP8vQtYsuuN82CdX4cPvsvlAqrlwM7QL3FUCAXpWSaHhLYvJ2cR8pVSCVnl01UtapA3
+         qY4w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1701324996; x=1701929796;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=sKZF/hWMdY033PwLj22FALUYlxQStdbuCxb4vcUo8K8=;
+        b=ma5Koz4Bcyz/FcmVlAdFyZTEWqggR4yBYref1ApAJxgRnAMB2QYitlU44Fnt+xD5R7
+         gUbAbfvvlf3fhoAn/VkRovWWmepxWW8mVNso049FEl8I8MkZoGbkDuQc7bNf1zHH8bGl
+         TlisTjBpEHI+YvgHhntyoVgkUUFss37M5cNUROi2JXO0PxlUD6IrQmUDyQWILe4SxkID
+         X8P2g/EDvJMqw8jLNg6k4mpGDhtlaYf0k/mlntxSp+9JHZzVQ4+Y/unuUl82MrMm/gGS
+         HqLebNfrqDcU11ZZTcFcxXJkt4A0kDtRLuERtjV7c3INsdq6x/MCOM0/dMkeKJufGmh/
+         v4tg==
+X-Gm-Message-State: AOJu0YzrjBmvfT8QaljhPDKxc7jjQD7EjAoFr4a724cl8FyU3YMweXhZ
+	e6nx/X/nJ6HN+6JNovzHXVKp7fQfQTPWW5N0CuI=
+X-Google-Smtp-Source: AGHT+IGEqEGg6oVW7znax31y/ejOk07DeNwkux5zzLQNkyiq2IyFK+XI+mr+Sl1HGLBxfj7ws1gGg++UorLSXtOYQMA=
+X-Received: by 2002:a05:6870:d3cd:b0:1e9:7912:3bd9 with SMTP id
+ l13-20020a056870d3cd00b001e979123bd9mr11435150oag.9.1701324995825; Wed, 29
+ Nov 2023 22:16:35 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20231121132937.933820-1-ppjadhav456@gmail.com>
+In-Reply-To: <20231121132937.933820-1-ppjadhav456@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 29 Nov 2023 22:16:09 -0800
+Message-ID: <CAMKF1srCfrFBP7qupDvK2zJpbSBRVphRCUukEgyOquKHxvcC5g@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][master][PATCH] sdbus-c++: Update ptest path
+To: Poonam Jadhav <ppjadhav456@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org, poonam.jadhav@kpit.com, 
+	ranjitsinh.rathod@kpit.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 30 Nov 2023 05:39:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107164
+ <openembedded-devel@lists.openembedded.org>; Thu, 30 Nov 2023 06:16:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107165
 
-oneTBB relies on HWLOC* to identify the underlying topology
-of the system to optimize thread scheduling and memory allocation.
+why do we need this change ? I am seeing it copying tests to ptest
+folder but the real test is already installed under tests folder and
+run-ptest script runs that test not the one copied by this patch.
 
-Ref:
-https://oneapi-src.github.io/oneTBB/GSG/next_steps.html#hybrid-cpu-and-numa-support
-
-Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
----
- ....cmake-remove-cross-compiation-check.patch | 33 +++++++++++++++++++
- meta-oe/recipes-support/tbb/tbb_2021.11.0.bb  | 12 ++++++-
- 2 files changed, 44 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/tbb/tbb/0001-hwloc_detection.cmake-remove-cross-compiation-check.patch
-
-diff --git a/meta-oe/recipes-support/tbb/tbb/0001-hwloc_detection.cmake-remove-cross-compiation-check.patch b/meta-oe/recipes-support/tbb/tbb/0001-hwloc_detection.cmake-remove-cross-compiation-check.patch
-new file mode 100644
-index 000000000..640b13170
---- /dev/null
-+++ b/meta-oe/recipes-support/tbb/tbb/0001-hwloc_detection.cmake-remove-cross-compiation-check.patch
-@@ -0,0 +1,33 @@
-+From 7ffc1eba8596544d6e3af0fd5f4004fff6d56f84 Mon Sep 17 00:00:00 2001
-+From: Naveen Saini <naveen.kumar.saini@intel.com>
-+Date: Wed, 29 Nov 2023 15:48:57 +0800
-+Subject: [PATCH] hwloc_detection.cmake: remove cross-compiation check
-+
-+This check is preventing pkgconfig to
-+search for hwloc under cross-compilation.
-+
-+pkgconfig able to find hwloc pkg from sysroot.
-+
-+Upstream-Status: Inappropriate
-+
-+Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
-+---
-+ cmake/hwloc_detection.cmake | 2 --
-+ 1 file changed, 2 deletions(-)
-+
-+diff --git a/cmake/hwloc_detection.cmake b/cmake/hwloc_detection.cmake
-+index 47233b17..5a7e84c3 100644
-+--- a/cmake/hwloc_detection.cmake
-++++ b/cmake/hwloc_detection.cmake
-+@@ -46,8 +46,6 @@ endforeach()
-+ unset(HWLOC_TARGET_NAME)
-+ 
-+ if (NOT HWLOC_TARGET_EXPLICITLY_DEFINED AND
-+-    # No hwloc auto detection for cross compilation
-+-    NOT CMAKE_CROSSCOMPILING AND
-+     NOT TBB_DISABLE_HWLOC_AUTOMATIC_SEARCH
-+ )
-+     find_package(PkgConfig QUIET)
-+-- 
-+2.37.3
-+
-diff --git a/meta-oe/recipes-support/tbb/tbb_2021.11.0.bb b/meta-oe/recipes-support/tbb/tbb_2021.11.0.bb
-index 1a1d9988b..f834726bd 100644
---- a/meta-oe/recipes-support/tbb/tbb_2021.11.0.bb
-+++ b/meta-oe/recipes-support/tbb/tbb_2021.11.0.bb
-@@ -8,22 +8,25 @@ LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=86d3f3a95c324c9479bd8986968f4327"
- 
- DEPENDS:append:libc-musl = " libucontext"
-+DEPENDS:append:class-target = " hwloc"
- 
- PE = "1"
- 
- BRANCH = "onetbb_2021"
- SRCREV = "8b829acc65569019edb896c5150d427f288e8aba"
- SRC_URI = "git://github.com/oneapi-src/oneTBB.git;protocol=https;branch=${BRANCH} \
-+            file://0001-hwloc_detection.cmake-remove-cross-compiation-check.patch \
- "
- S = "${WORKDIR}/git"
- 
--inherit cmake
-+inherit cmake pkgconfig
- 
- # test build fails, error: 'mallinfo mallinfo()' is deprecated
- EXTRA_OECMAKE += " \
-                     -DTBB_TEST=OFF \
-                     -DCMAKE_BUILD_TYPE=Release \
-                 "
-+
- # Hard-float 'd' ABI can't be used for a target that doesn't support the D instruction set extension (ignoring target-abi)
- # tmp-glibc/work/riscv64-oe-linux/tbb/1_2021.7.0-r0/recipe-sysroot-native/usr/bin/riscv64-oe-linux/riscv64-oe-linux-ld: /tmp/lto-llvm-264bc2.o: can't link soft-float modules with double-float modules
- # tmp-glibc/work/riscv64-oe-linux/tbb/1_2021.7.0-r0/recipe-sysroot-native/usr/bin/riscv64-oe-linux/riscv64-oe-linux-ld: failed to merge target specific data of file /tmp/lto-llvm-264bc2.o
-@@ -49,4 +52,11 @@ LDFLAGS:append:libc-musl = " -lucontext"
- # The latest version of oneTBB does not support PPC
- COMPATIBLE_MACHINE:powerpc = "(!.*ppc).*"
- 
-+
-+do_install:append:class-target() {
-+    # fix for qa check buildpaths
-+    sed -i "s#${RECIPE_SYSROOT}##g" ${D}${libdir}/cmake/TBB/TBBTargets.cmake
-+}
-+
-+
- BBCLASSEXTEND = "native nativesdk"
--- 
-2.37.3
-
+On Tue, Nov 21, 2023 at 5:29=E2=80=AFAM Poonam Jadhav <ppjadhav456@gmail.co=
+m> wrote:
+>
+> From: Poonam Jadhav <poonam.jadhav@kpit.com>
+>
+> Update ptest path to run sdbus-c++ ptest
+>
+> Signed-off-by: Poonam Jadhav <poonam.jadhav@kpit.com>
+> ---
+>  meta-oe/recipes-core/sdbus-c++/sdbus-c++_1.4.0.bb | 7 ++++++-
+>  1 file changed, 6 insertions(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++_1.4.0.bb b/meta-oe/=
+recipes-core/sdbus-c++/sdbus-c++_1.4.0.bb
+> index faf281485..869bfa951 100644
+> --- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++_1.4.0.bb
+> +++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++_1.4.0.bb
+> @@ -39,7 +39,12 @@ do_install:append() {
+>      fi
+>  }
+>
+> -PTEST_PATH =3D "${libdir}/${BPN}/tests"
+> +PTEST_PATH =3D "${libdir}/${BPN}/ptest"
+> +do_install_ptest() {
+> +    install -d ${D}${PTEST_PATH}
+> +    cp -r ${B}/tests/sdbus-c++-unit-tests  ${D}${PTEST_PATH}
+> +}
+> +
+>  FILES:${PN}-ptest =3D+ "${sysconfdir}/dbus-1/system.d/"
+>  FILES:${PN}-dev +=3D "${bindir}/sdbus-c++-xml2cpp"
+>
+> --
+> 2.25.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#106980): https://lists.openembedded.org/g/openembedde=
+d-devel/message/106980
+> Mute This Topic: https://lists.openembedded.org/mt/102728032/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
