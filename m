@@ -1,161 +1,117 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <narpat.mali@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F1245C10DC1
-	for <webhook@archiver.kernel.org>; Thu, 30 Nov 2023 12:18:12 +0000 (UTC)
-Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com [209.85.208.45])
- by mx.groups.io with SMTP id smtpd.web10.70825.1701346683843991004
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 08AABC46CA0
+	for <webhook@archiver.kernel.org>; Thu, 30 Nov 2023 12:24:13 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.70932.1701347045935600850
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 Nov 2023 04:18:04 -0800
+ Thu, 30 Nov 2023 04:24:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=dnB9YNQt;
- spf=pass (domain: gmail.com, ip: 209.85.208.45, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f45.google.com with SMTP id 4fb4d7f45d1cf-54bf73788a8so874328a12.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 30 Nov 2023 04:18:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1701346682; x=1701951482; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=IB1hRIajkgJqPNl/GwkWr1I+DvdpPToZaznFHgNyPBs=;
-        b=dnB9YNQt7ZqUYwGMYz3W34mu8tXoO0TQX9DMerXKqdWdmLyktiH5z3XhFrN/F+0zwC
-         RXNKh8UvvpFrZZUAGKao5mWun+F7Lf2pO0oLZV4K7XI/VgC6lxyW7zSuU9WdU36F/Jlb
-         e8NUP+6+9f75TmsGdFsm/7JjAv2MdcuXlAKURtOMnB83LUgsxDOGolihGEw7Kntto7Ru
-         EEANnEzzArrK58U2HRqZeyuJwWjFatvHP/ARt9VKR/MN8UIZ2g+0wL8J5bV82lg8Qtdn
-         G9uINooPSw21cgZItGkCVbyDlMFxsKz/ni13g5NM21PNaNhxPmfHxR9MRL+Up17GLW5M
-         4dAA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701346682; x=1701951482;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=IB1hRIajkgJqPNl/GwkWr1I+DvdpPToZaznFHgNyPBs=;
-        b=xJmXHP5AhjPRiP1FElEDozdaHYE+EaQjS2BMqZW4wu3X8JUEzAarQt6gNJVlo7nFuV
-         IbzEjGVFquHWiKLT4O0dHT1+6b34yR75M5xglsUgcQphRx8reWXGR3sKTPj5wWmIabBy
-         gQgRl+Nmh+RCV9mPl24tzFL6XEGJuhl4ys4dq6acKmMC7nxUA0t7vbAXYO2304cOl/Oj
-         vG5GoD0veHJEmAmDjVElUpDIjVA6Y15zkXMVY+S03zP91u73+UbQJYP5auxMZpmDjaxO
-         PCog1X/j5ti2/ZDxm8J523Rfzp/sLdr7SY2DlQvMA0AT+aSNorwhQT2wDk2PcLL/168e
-         aIvA==
-X-Gm-Message-State: AOJu0Yw5gcpkJlTlx6k5tbxTT0ToH7roGjotz7egycnTbzktg5933/OB
-	lX9GtQyNMObBJAGKWm4hhknWBsKYtco=
-X-Google-Smtp-Source: AGHT+IHu67AawqzpxT2we4wIPMN6PCSg9rg2l8HQdvnoes01zS1GiB0+vqvmh7PmxE6OvEm1Wbxdxw==
-X-Received: by 2002:a05:6402:50d3:b0:54b:532b:1f15 with SMTP id h19-20020a05640250d300b0054b532b1f15mr12017424edb.33.1701346681881;
-        Thu, 30 Nov 2023 04:18:01 -0800 (PST)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id n21-20020aa7c695000000b0054af73f3c72sm489476edq.11.2023.11.30.04.18.01
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 30 Nov 2023 04:18:01 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][kirkstone][PATCH] glmark2: inherit python3native to fix build with python-3.12 on build host
-Date: Thu, 30 Nov 2023 13:17:54 +0100
-Message-ID: <20231130121754.335429-1-martin.jansa@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=C1uulelA;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=0698061647=narpat.mali@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 3AU8qqe2005932;
+	Thu, 30 Nov 2023 12:24:04 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding:content-type; s=
+	PPS06212021; bh=cLh0JmuOQHakWHoO8Vv2BP2oKMh/i5xM7O0NAIb5KIU=; b=
+	C1uulelANdYZh8lNe3776r8j5HRizxtNXFZggT5g3FmMvoaLjQyTIHw7MhIoqwK1
+	1mSfp8dchgEVud5ZRNK5qwMr2WlYKRdYGvEO8g5MXzgpO/6xOL45HADTRLqpd6yM
+	WFM7IaGFriHevt71wsvOrXZxlO2xXuIyFKdtE/MOhCQf8PIXxUC6UDGq0uQQNnGx
+	OR+DtP3UcuhzSDmKnT+yJrGKZJddCYsMCz6+QiC03w2cqx2AH7cfNMWqraR9u0yy
+	Ia2WFfVT7ivymL4NIC3amGjpdsUBwbhgK5KC3/UC70mCxw0E9AJ3StAPKfFTNlOi
+	tcUl5R8/rw+jgc9cVH7ARA==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3uph0w8g88-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
+	Thu, 30 Nov 2023 12:24:04 +0000 (GMT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.35; Thu, 30 Nov 2023 04:24:09 -0800
+From: nmali <narpat.mali@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <akuster808@gmail.com>
+Subject: [meta-python][kirkstone][PATCH 2/3] python3-django: upgrade 3.2.21 -> 3.2.23
+Date: Thu, 30 Nov 2023 12:23:38 +0000
+Message-ID: <20231130122339.363700-2-narpat.mali@windriver.com>
+X-Mailer: git-send-email 2.40.0
+In-Reply-To: <20231130122339.363700-1-narpat.mali@windriver.com>
+References: <20231130122339.363700-1-narpat.mali@windriver.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-ORIG-GUID: N7ZISndSVWVdJ19gBhlTBwAdedC64h2o
+X-Proofpoint-GUID: N7ZISndSVWVdJ19gBhlTBwAdedC64h2o
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-11-16_25,2023-11-16_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
+ malwarescore=0 spamscore=0 mlxlogscore=999 impostorscore=0 bulkscore=0
+ phishscore=0 clxscore=1015 suspectscore=0 adultscore=0 lowpriorityscore=0
+ mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2311060001 definitions=main-2311300092
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 30 Nov 2023 12:18:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107172
+ <openembedded-devel@lists.openembedded.org>; Thu, 30 Nov 2023 12:24:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107174
 
-* fixes:
-| WARNING: Unable to execute waf --version, exit code 1. Assuming waf version without bindir/libdir support.
-| DEBUG: Python function waf_preconfigure finished
-| DEBUG: Executing shell function do_configure
-| Traceback (most recent call last):
-|   File "/OE/build/luneos-kirkstone/tmp-glibc/work/core2-64-webos-linux/glmark2/2021.12-r0/git/./waf", line 163, in <module>
-|     from waflib import Scripting
-|   File "/OE/build/luneos-kirkstone/tmp-glibc/work/core2-64-webos-linux/glmark2/2021.12-r0/git/waflib/Scripting.py", line 6, in <module>
-|     from waflib import Utils,Configure,Logs,Options,ConfigSet,Context,Errors,Build,Node
-|   File "/OE/build/luneos-kirkstone/tmp-glibc/work/core2-64-webos-linux/glmark2/2021.12-r0/git/waflib/Configure.py", line 6, in <module>
-|     from waflib import ConfigSet,Utils,Options,Logs,Context,Build,Errors
-|   File "/OE/build/luneos-kirkstone/tmp-glibc/work/core2-64-webos-linux/glmark2/2021.12-r0/git/waflib/Options.py", line 6, in <module>
-|     from waflib import Logs,Utils,Context,Errors
-|   File "/OE/build/luneos-kirkstone/tmp-glibc/work/core2-64-webos-linux/glmark2/2021.12-r0/git/waflib/Context.py", line 5, in <module>
-|     import os,re,imp,sys
-| ModuleNotFoundError: No module named 'imp'
-| WARNING: /OE/build/luneos-kirkstone/tmp-glibc/work/core2-64-webos-linux/glmark2/2021.12-r0/temp/run.do_configure.1263276:146 exit 1 from 'waf_do_configure'
+From: Narpat Mali <narpat.mali@windriver.com>
 
-* this first issue can be fixed easily by backporting:
-  https://gitlab.com/ita1024/waf/-/commit/d2060dfd8af4edb5824153ff24e207b39ecd67a2
+The delta between 3.2.21 and 3.2.23 contains the fixes for
+CVE-2023-43665, CVE-2023-46695 and other bugfixes.
 
-* but then it still fails a bit later, because of SyntaxWarning in waf --version
-  output:
+git log --oneline 3.2.21..3.2.23 shows:
 
-ERROR: glmark2-2021.12-r0 do_configure: Error executing a python function in exec_func_python() autogenerated:
+60e648a7ae (tag: 3.2.23) [3.2.x] Bumped version for 3.2.23 release.
+f9a7fb8466 [3.2.x] Fixed CVE-2023-46695 -- Fixed potential DoS in UsernameField on Windows.
+e6d2591d9e [3.2.x] Added stub release notes for 3.2.23.
+3c04b74293 [3.2.x] Added CVE-2023-43665 to security archive.
+86a14d653f [3.2.x] Post release version bump.
+3106e94e52 (tag: 3.2.22) [3.2.x] Bumped version for 3.2.22 release.
+ccdade1a02 [3.2.x] Fixed CVE-2023-43665 -- Mitigated potential DoS in django.utils.text.Truncator when truncating HTML text.
+6caf7b313d [3.2.x] Added stub release notes for 3.2.22.
+9e814c3a5e [3.2.x] Added CVE-2023-41164 to security archive.
+4b439dcd05 [3.2.x] Post-release version bump.
 
-The stack trace of python calls that resulted in this exception/failure was:
-File: 'exec_func_python() autogenerated', lineno: 2, function: <module>
-     0001:
- *** 0002:waf_preconfigure(d)
-     0003:
-File: '/OE/build/luneos-kirkstone/openembedded-core/meta/classes/waf.bbclass', lineno: 52, function: waf_preconfigure
-     0048:    wafbin = os.path.join(subsrcdir, 'waf')
-     0049:    try:
-     0050:        result = subprocess.check_output([python, wafbin, '--version'], cwd=subsrcdir, stderr=subprocess.STDOUT)
-     0051:        version = result.decode('utf-8').split()[1]
- *** 0052:        if bb.utils.vercmp_string_op(version, "1.8.7", ">="):
-     0053:            d.setVar("WAF_EXTRA_CONF", "--bindir=${bindir} --libdir=${libdir}")
-     0054:    except subprocess.CalledProcessError as e:
-     0055:        bb.warn("Unable to execute waf --version, exit code %d. Assuming waf version without bindir/libdir support." % e.returncode)
-     0056:    except FileNotFoundError:
-File: '/OE/build/luneos-kirkstone/bitbake/lib/bb/utils.py', lineno: 148, function: vercmp_string_op
-     0144:    Compare two versions and check if the specified comparison operator matches the result of the comparison.
-     0145:    This function is fairly liberal about what operators it will accept since there are a variety of styles
-     0146:    depending on the context.
-     0147:    """
- *** 0148:    res = vercmp_string(a, b)
-     0149:    if op in ('=', '=='):
-     0150:        return res == 0
-     0151:    elif op == '<=':
-     0152:        return res <= 0
-File: '/OE/build/luneos-kirkstone/bitbake/lib/bb/utils.py', lineno: 138, function: vercmp_string
-     0134:    return r
-     0135:
-     0136:def vercmp_string(a, b):
-     0137:    """ Split version strings and compare them """
- *** 0138:    ta = split_version(a)
-     0139:    tb = split_version(b)
-     0140:    return vercmp(ta, tb)
-     0141:
-     0142:def vercmp_string_op(a, b, op):
-File: '/OE/build/luneos-kirkstone/bitbake/lib/bb/utils.py', lineno: 89, function: split_version
-     0085:    """Split a version string into its constituent parts (PE, PV, PR)"""
-     0086:    s = s.strip(" <>=")
-     0087:    e = 0
-     0088:    if s.count(':'):
- *** 0089:        e = int(s.split(":")[0])
-     0090:        s = s.split(":")[1]
-     0091:    r = ""
-     0092:    if s.count('-'):
-     0093:        r = s.rsplit("-", 1)[1]
-Exception: ValueError: invalid literal for int() with base 10: 'SyntaxWarning'
+Release Notes: https://docs.djangoproject.com/en/dev/releases/3.2.23/
 
-ERROR: Logfile of failure stored in: /OE/build/luneos-kirkstone/tmp-glibc/work/core2-64-webos-linux/glmark2/2021.12-r0/temp/log.do_configure.1264918
-
-  so it's safer to just use python3-native everywhere, instead of more patches for waf
-
-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
 ---
- meta-oe/recipes-benchmark/glmark2/glmark2_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../{python3-django_3.2.21.bb => python3-django_3.2.23.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-django_3.2.21.bb => python3-django_3.2.23.bb} (61%)
 
-diff --git a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
-index 188d4e5bdf..68c42b329a 100644
---- a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
-+++ b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
-@@ -24,7 +24,7 @@ SRCREV = "0858b450cd88c84a15b99dda9698d44e7f7e8c70"
+diff --git a/meta-python/recipes-devtools/python/python3-django_3.2.21.bb b/meta-python/recipes-devtools/python/python3-django_3.2.23.bb
+similarity index 61%
+rename from meta-python/recipes-devtools/python/python3-django_3.2.21.bb
+rename to meta-python/recipes-devtools/python/python3-django_3.2.23.bb
+index 1148669860..beecaa607c 100644
+--- a/meta-python/recipes-devtools/python/python3-django_3.2.21.bb
++++ b/meta-python/recipes-devtools/python/python3-django_3.2.23.bb
+@@ -1,7 +1,7 @@
+ require python-django.inc
+ inherit setuptools3
  
- S = "${WORKDIR}/git"
+-SRC_URI[sha256sum] = "a5de4c484e7b7418e6d3e52a5b8794f0e6b9f9e4ce3c037018cf1c489fa87f3c"
++SRC_URI[sha256sum] = "82968f3640e29ef4a773af2c28448f5f7a08d001c6ac05b32d02aeee6509508b"
  
--inherit waf pkgconfig features_check
-+inherit waf pkgconfig features_check python3native
+ RDEPENDS:${PN} += "\
+     ${PYTHON_PN}-sqlparse \
+@@ -9,5 +9,5 @@ RDEPENDS:${PN} += "\
  
- ANY_OF_DISTRO_FEATURES = "opengl dispmanx"
- 
+ # Set DEFAULT_PREFERENCE so that the LTS version of django is built by
+ # default. To build the 3.x branch, 
+-# PREFERRED_VERSION_python3-django = "3.2.21" can be added to local.conf
++# PREFERRED_VERSION_python3-django = "3.2.23" can be added to local.conf
+ DEFAULT_PREFERENCE = "-1"
 -- 
-2.43.0
+2.40.0
 
 
