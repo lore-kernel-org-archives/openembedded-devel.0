@@ -1,170 +1,218 @@
-Return-Path: <ross.burton@arm.com>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A3C16C4167B
-	for <webhook@archiver.kernel.org>; Fri,  1 Dec 2023 13:09:26 +0000 (UTC)
-Received: from EUR04-HE1-obe.outbound.protection.outlook.com (EUR04-HE1-obe.outbound.protection.outlook.com [40.107.7.79])
- by mx.groups.io with SMTP id smtpd.web10.22195.1701436164434987155
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 48F5CC4167B
+	for <webhook@archiver.kernel.org>; Fri,  1 Dec 2023 16:03:30 +0000 (UTC)
+Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com [209.85.208.44])
+ by mx.groups.io with SMTP id smtpd.web10.3201.1701446609188275514
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 01 Dec 2023 05:09:25 -0800
+ Fri, 01 Dec 2023 08:03:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@armh.onmicrosoft.com header.s=selector2-armh-onmicrosoft-com header.b=Duu4bAks;
- dkim=pass header.i=@armh.onmicrosoft.com header.s=selector2-armh-onmicrosoft-com header.b=Duu4bAks;
- spf=pass (domain: arm.com, ip: 40.107.7.79, mailfrom: ross.burton@arm.com)
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=pass;
- b=FW7r/ZnV/pL7AgkkkcwhNRdq+EGJBE+hUPcEGrWUmh86VZDJ4lnM/jWpDyPNgCUmuNLZg2bndiZEPsP6O3yPjHSZUpXopblEe4D8ZS6m/x7o+kg1xEw55q3uo5jmks+oikt1JTYYUW1Xdz3cKryLrANUfHP3nmMVpuys1z1wm3utMjJP48pHNQl//PNyF4oVAIKnxHJh5Fae9/NPq7J0fes6FBcBIORxtXIWnYNs5sMGNOoIu1xO4FDBMFGFVsxF7O+1vZ1Gs76J2f+K9cOhQbf/V+a0OGENfFOOJPMehcIqF/3PA+FXewB+cjNTOfyRU7YXfNvZmHicLGu3vyJSPw==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MeqHDWzObd1Vycl95jJtmYpOH5nO7g+vWu62phPuN4k=;
- b=VM3FjQ7j1h9LyGSs0heoXk0bTeGQokdQbsItArqTzacsQDwe/I3FId9bCQwLNWyLhFNRDij7Be36mABrMOQW69DcamzrEnv8kAkxglVEn0UA+W6PGDtTx+QTEIS2e06V/boAShwcxwTcPx5OD2MqR3wq0dX7ORu+RiYclJIo86ZQiKlWzKhLODT29HqahiRAIRkbpIr/tmNos1iRXAUD4uvEvHctOvo/YIKp2eD4Ml38p5PR6vLGYvUYwWJ3ot0AsDv4KAgQ5x5Gp1lfe6crX7tzyO1am8vPa1VOWkwmEa+ax7HchUv7dUCmpIQA2eKLdJfLKJ66Obtb7FP2bljuTw==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 63.35.35.123) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=arm.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
- dkim=pass (signature was verified) header.d=armh.onmicrosoft.com; arc=pass (0
- oda=1 ltdi=1 spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
- dmarc=[1,1,header.from=arm.com])
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MeqHDWzObd1Vycl95jJtmYpOH5nO7g+vWu62phPuN4k=;
- b=Duu4bAksjjL3r0U7m/2efHm6mPonYTlBj5pJm0qfKv/nNYoCA4/s58fwAnQMenxuYhFiigrNlWJ01BY5tSF2SUsE4PxQtiXu/CniOXfJl2ZJkv6kjFpWosj3MQiFSKlhWKat8SD/RL0U3fR0EbRopWAIYhBY/DbqdD9djO7aHzg=
-Received: from AS4P195CA0011.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:5e2::15)
- by DU2PR08MB10037.eurprd08.prod.outlook.com (2603:10a6:10:49a::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7046.27; Fri, 1 Dec
- 2023 13:09:19 +0000
-Received: from AM3PEPF0000A79B.eurprd04.prod.outlook.com
- (2603:10a6:20b:5e2:cafe::64) by AS4P195CA0011.outlook.office365.com
- (2603:10a6:20b:5e2::15) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7046.24 via Frontend
- Transport; Fri, 1 Dec 2023 13:09:19 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
- client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
- pr=C
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- AM3PEPF0000A79B.mail.protection.outlook.com (10.167.16.106) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7046.17 via Frontend Transport; Fri, 1 Dec 2023 13:09:19 +0000
-Received: ("Tessian outbound e243565b0037:v228"); Fri, 01 Dec 2023 13:09:19 +0000
-X-CheckRecipientChecked: true
-X-CR-MTA-CID: e57111da5afee1c8
-X-CR-MTA-TID: 64aa7808
-Received: from 4cc7c8cb2dec.1
-	by 64aa7808-outbound-1.mta.getcheckrecipient.com id 36542511-6B00-4CB2-BA58-345648CFCF03.1;
-	Fri, 01 Dec 2023 13:09:13 +0000
-Received: from EUR04-HE1-obe.outbound.protection.outlook.com
-    by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 4cc7c8cb2dec.1
-    (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
-    Fri, 01 Dec 2023 13:09:13 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=QxVySE8ibLaCAch2hCa8kDZQqlUx7dnH/AWmBz9MlFaWH/bsCZwQf/iWyK0rHQLjuEtcW0LR3LUiO2n8Nq69/NFjisJgZ51KbTu9sEmoQ7adXDuigb5gIJrKWFxApLJYYppYqgLtsEL0M1T0NXhS910lDUli/fknhQy6doNleCDuiniq1iQSCYWGTSZnF6CfANnCcEqUTSzXSg01AoFHI+4M/WcpswFMR6CBWlFa/2R2Vgy03RLxx/9tKicdeULfHO7YYb8uYbZVbGZse/DL/W1weEWeCaQWrU5U3wJ9fEOGZBPHRLiz/Y9nCzG0lQZXIiA8ctcAstk1Hmqwzwxw/Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MeqHDWzObd1Vycl95jJtmYpOH5nO7g+vWu62phPuN4k=;
- b=gWX4pewELTKvYelv/CJ35br85K54o62u11MGm9STt1d1Flu1MriUccgpv0jz0SltRPMB2Y/kzViYMAfV8GpONoR9dLeYnPFGle+7gYjJ+K2ClZCfQpQmtw3DfOOpzvk56y6JYQeLi++7KtVuU6h6WChKlXvSgeFh9S+z7n7bBJGN6wZCvW7ynr3ZWBwRx9kCL7CHS4kdm5BnaCXBkuVbTezz6DYOHAQwyV162HGo+otTDFHvv1AxQqaForSN0ZHmAUM1bPk6IMsl0gdr6Db4W2ufZZHiw70mlIt9xWPpmV6KHf4ChfO6oppSXThRfraPdXXbBR3nvfj5ZoZGHCxKXA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MeqHDWzObd1Vycl95jJtmYpOH5nO7g+vWu62phPuN4k=;
- b=Duu4bAksjjL3r0U7m/2efHm6mPonYTlBj5pJm0qfKv/nNYoCA4/s58fwAnQMenxuYhFiigrNlWJ01BY5tSF2SUsE4PxQtiXu/CniOXfJl2ZJkv6kjFpWosj3MQiFSKlhWKat8SD/RL0U3fR0EbRopWAIYhBY/DbqdD9djO7aHzg=
-Received: from PA4PR08MB7411.eurprd08.prod.outlook.com (2603:10a6:102:2a3::12)
- by PA4PR08MB6095.eurprd08.prod.outlook.com (2603:10a6:102:ec::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7046.26; Fri, 1 Dec
- 2023 13:09:10 +0000
-Received: from PA4PR08MB7411.eurprd08.prod.outlook.com
- ([fe80::ef47:2c42:1ef6:fe5c]) by PA4PR08MB7411.eurprd08.prod.outlook.com
- ([fe80::ef47:2c42:1ef6:fe5c%6]) with mapi id 15.20.7046.024; Fri, 1 Dec 2023
- 13:09:10 +0000
-From: Ross Burton <Ross.Burton@arm.com>
-To: "alperyasinak1@gmail.com" <alperyasinak1@gmail.com>
-CC: Khem Raj <raj.khem@gmail.com>, openembedded-devel
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-oe][PATCH] libpwquality: upgrade 1.4.4 -> 1.4.5
-Thread-Topic: [oe] [meta-oe][PATCH] libpwquality: upgrade 1.4.4 -> 1.4.5
-Thread-Index: AQHaI9NNO1SfPA97Mkexc3KiRONXcLCTnV+AgACXjICAADKGgA==
-Date: Fri, 1 Dec 2023 13:09:10 +0000
-Message-ID: <B81FA7E6-F572-4B7B-847C-6B6B1BCFBEF7@arm.com>
-References: <20231130212143.3192153-1-alperyasinak1@gmail.com>
- <CAMKF1spC5zOVEkhbk6fUqw33zeWTHVMXgMX5eY1wkx+eNYOPSQ@mail.gmail.com>
- <CAGpma=4FFBa0hLYhxg3W3aPk-D5kO9ODSAHwtbFL0=rZOyEvsA@mail.gmail.com>
-In-Reply-To: 
- <CAGpma=4FFBa0hLYhxg3W3aPk-D5kO9ODSAHwtbFL0=rZOyEvsA@mail.gmail.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-mailer: Apple Mail (2.3774.200.91.1.1)
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-x-ms-traffictypediagnostic: 
-	PA4PR08MB7411:EE_|PA4PR08MB6095:EE_|AM3PEPF0000A79B:EE_|DU2PR08MB10037:EE_
-X-MS-Office365-Filtering-Correlation-Id: ca6007ad-21e1-4c01-d31b-08dbf26eba85
-x-checkrecipientrouted: true
-nodisclaimer: true
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;
-X-Microsoft-Antispam-Message-Info-Original: 
- MRR/X/mH5Rlbi8NI+n1CNcQ0OmkOrURLOgl+p8s0cNkJw9tH/VGfcInL3B/Kys1TbZKePjm/rNZD5+TRASbnar4hoogxmcP+m1pxCPC44tF3YwWwrI0UjzM1f0AQx3lEutWaDOO9Vvht9m6B+XeUOUoOjGcXqHiajrLWIzvb9cwG+6rawPJ+UBjIjGvHhiX73QkQzrWhEY4f7Ua3OuB7qcULHI3wAhmWFjETPzd9Dt1B4F8jfk7ANJy2SLWTtd2mgg08/aXbr84DXxtT4UH1YdFmRjgDQBaQrnHdeVBmZU61/2iccn5yRGC89utiwY6uPZQCauPBW1G+1Y/HEGRXczYbQYouY0WtvwRS1vqBUoMmhzzg1DKS0Q8iCyHGB3R0FX0gvP1tHUee5wdIazwcdNCDnczs0/iNo41PLkVlVTYs9S5FogHnB7ouuk0EQCsVR33+jZmIXyufznCoUhhHqpehPvPAwUbyYwOvgAjWdylpU4OYUryb5ORmPToavhjpPDJzm6nwmyqNRgB+v5r7P1wOANqU4zoZOokIyvac3Ue9RJnmoHrEPzRs+TWUxW/iyAU/lTExJryUx+NHR2y9ch6w4LdFIs+OeSljNtPd56HSV1ZeIpzI9++7M3v25+2DJ1axcDdF0JUsVdDMKIFsFI2cCFEBQ5rI7H16HSAM0M0=
-X-Forefront-Antispam-Report-Untrusted: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA4PR08MB7411.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(366004)(136003)(376002)(396003)(346002)(39860400002)(230922051799003)(451199024)(64100799003)(186009)(1800799012)(6512007)(5660300002)(4744005)(38100700002)(86362001)(36756003)(33656002)(2906002)(41300700001)(2616005)(4326008)(966005)(26005)(6486002)(53546011)(71200400001)(8936002)(8676002)(478600001)(6506007)(66556008)(66446008)(64756008)(76116006)(66946007)(66476007)(54906003)(91956017)(316002)(6916009)(122000001)(38070700009)(10126625003)(45980500001);DIR:OUT;SFP:1101;
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <9CC6D6D76E0C034D9F4A1B5A04D42A40@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=TBCCD0b/;
+ spf=pass (domain: gmail.com, ip: 209.85.208.44, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-ed1-f44.google.com with SMTP id 4fb4d7f45d1cf-54c109ed07aso3349932a12.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 01 Dec 2023 08:03:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1701446607; x=1702051407; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=B1V7fb00TzBQN7opVZBspe3U/n3Tmu3lxUTqIejQAgo=;
+        b=TBCCD0b/IZx2hbn4vEzoQmgChDA9mVuoapFdOdt9RcBuLSaVzOVS7Lz7iC/Pq6kA4i
+         m2hlCT0Yic1v55ESuXYWq+rurGyZQJaaAa3Uh+lakgsl+lfZVmQeJejscCUopj5TkWeC
+         cZiEvjuhFsEBEwvbEwOgNPIjQbsQJXEOtRrL5YVhfkpktefzHgroiG6sgSdsauy1bqDa
+         n3u84r5fgDB4bserD8B0HWrRGNy68v1iQh232OCuEGXiQhoxXzz0vdZfSontqvbGPTRW
+         nOi0hi4t+MHCkDov2Lz0X0tnpUvwE5aZrG37z73tE8X4j6WWeGJF+3Xmz5WyYkhaDxY3
+         euvw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1701446607; x=1702051407;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=B1V7fb00TzBQN7opVZBspe3U/n3Tmu3lxUTqIejQAgo=;
+        b=mDOBSDudCqT7dELLQknisBsAUS+PkOq7peHjjVuLSYfazg2vtxUso6w7oubf7OmeO4
+         A4F76LCcFzEqYVf+jXFqIvFpmsKphfhVhadk7N97niVg+XKaE2Fy+e5Id0cnUpUJqs1T
+         CCjzopo7pv0K7n1L+a170sYXJfq7nvGFaHlJ7hjmqtJIplZit+ZmSax2M/RSuSLtVuxX
+         lX5bxcmygKNcfvgRsnOxRYXHWDis4hg2pqNR/s3+BQwd98VlX1m3q7+JyW5a8yXAPjh/
+         d+F2sEB8BGYbnuoFBY4RqPJRWi1jAcXcAhW5RgAYj86NpjBJz+CxSgWH4a/XfR8bjPQP
+         ZxUA==
+X-Gm-Message-State: AOJu0YyGD58sPGsRd/p8n2O9lK4eWpSKdQEezyf391PpFZlxFJ3KKygj
+	1SfTMxYvKC/4E1mLdnh94LHC8iwg+qATzQ==
+X-Google-Smtp-Source: AGHT+IHk5ki/VyFW4o0tjUkxMcGhnu5ut5uxXIqR7zB1Hvida6m3VZudqc594fIP7QfgrR1V8mIQwg==
+X-Received: by 2002:a17:906:9e:b0:a1a:5480:a153 with SMTP id 30-20020a170906009e00b00a1a5480a153mr119151ejc.15.1701446606903;
+        Fri, 01 Dec 2023 08:03:26 -0800 (PST)
+Received: from localhost.localdomain ([176.33.70.43])
+        by smtp.gmail.com with ESMTPSA id gv11-20020a170906f10b00b00a0ac350f807sm2008348ejb.212.2023.12.01.08.03.25
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 01 Dec 2023 08:03:26 -0800 (PST)
+From: alperak <alperyasinak1@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: alperak <alperyasinak1@gmail.com>
+Subject: [meta-oe][PATCHv2] libpwquality: upgrade 1.4.4 -> 1.4.5
+Date: Fri,  1 Dec 2023 19:03:09 +0300
+Message-Id: <20231201160309.93540-1-alperyasinak1@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR08MB6095
-Original-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: 
- AM3PEPF0000A79B.eurprd04.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: 
-	372c5bfc-2e1d-4429-aa7b-08dbf26eb51f
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	1eUA20/XmzEjLrhkoW3fqjxcoCFjJKUkPjHFmob3dXE/SMKOoMR95pSn0aLmt7OHwd8TJ47h0YB7DgmXNKTrGVAeDDRjkV0wXoJrSSHKjpndAb1I9LwzrMTFRVDsLHEZ7TtLdWKVRbvkh9ZGd2850hPok8Pc2xyheOs7J5JzeyeEbtK7A8FV2U0eZblL4pB2JQt7cHAb3Vxx07C9ETX4ZPtcSJGxsgv+XWYsyNA298NFsdbV2XMK66vtPQt1gy7T23XQ8bNc7iIfLWFuiQLt15k9Cv6bwbViCqKSnF7WP/OFVjykqMZS8SzlpiGt7cq6sx5LpwjsVLODREPg3eYKLYOKApy3izw15ZeGXF7wwADiboSjepTQi5FhjAkXcKn3sSnlbiFx/GfMQiSfzETWOloqZKibYRDUskLuT7rOuQksTmyYBP7RDeBcSQZDreV51ssy5Hpv21NtpvaWvBUKDcQ6ydoZbaZgaGis3RHmTaqREh9ZoXVegjijmtkPpB8yUZ/7+JaIt9EiVvaqK1QY/LTcJgvAr2rErpRcnrk6S56SSKm/6MlLKObRwadrS6ZJ0N3hIpe4FEcVUeo0KSUu3XlobT0Bx/7E6qg64LDnm2ru3fl0b1nUKlFWUGjI4UakK9sH3qjYJEYoszs2mdHnZOQ+uMzM8yKJVvKhQMAL7pUULkMoFBhhk0DADW9s5+m1i09Sum1f+cxHAmUkOf33nYZjp82sUJAXYeC2DKANRpU=
-X-Forefront-Antispam-Report: 
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230031)(4636009)(136003)(39850400004)(346002)(396003)(376002)(230922051799003)(186009)(1800799012)(82310400011)(451199024)(64100799003)(36840700001)(46966006)(4744005)(36860700001)(54906003)(70206006)(316002)(86362001)(6512007)(41300700001)(2906002)(40480700001)(356005)(81166007)(82740400003)(5660300002)(47076005)(33656002)(70586007)(336012)(26005)(966005)(6486002)(2616005)(36756003)(478600001)(6506007)(53546011)(8936002)(6862004)(8676002)(4326008)(10126625003);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Dec 2023 13:09:19.2088
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ca6007ad-21e1-4c01-d31b-08dbf26eba85
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	AM3PEPF0000A79B.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR08MB10037
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 01 Dec 2023 13:09:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107188
+ <openembedded-devel@lists.openembedded.org>; Fri, 01 Dec 2023 16:03:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107189
 
-DQoNCj4gT24gMSBEZWMgMjAyMywgYXQgMTA6MDgsIEFscGVyIEFrIHZpYSBsaXN0cy5vcGVuZW1i
-ZWRkZWQub3JnIDxhbHBlcnlhc2luYWsxPWdtYWlsLmNvbUBsaXN0cy5vcGVuZW1iZWRkZWQub3Jn
-PiB3cm90ZToNCj4gDQo+PiBJ4oCZZCBhbHNvIHRyeSB3aXRob3V0IC1icm9rZW5zZXAgYW5kIHNl
-ZWluZyBpZiBpdCB3b3JrcyBub3cuIElmIGl0IHN0aWxsIGRvZXNu4oCZdCB0aGVuIGZpbGluZyBh
-IGJ1ZyB1cHN0cmVhbSB3b3VsZCBiZSBzZW5zaWJsZS4NCj4gDQo+IFRyaWVkIHdpdGhvdXQgLWJy
-b2tlbnNlcCBidXQgaXQgZGlkbid0IHdvcmsgLT4gaHR0cHM6Ly9wYXN0ZWJpbi5jb20va1NwTWMx
-SjkNCj4gSXQgaXMgbG9va2luZyBmb3IgdGhlICIuLi9zcmMvcHdxdWFsaXR5LmgiIGZpbGUgaW4g
-YnVpbGQgZGlyZWN0b3J5IGJ1dA0KPiBjYW4ndCBmaW5kIGl0LiAicHdxdWFsaXR5LmgiIGlzIGxv
-Y2F0ZWQgYXQgc291cmNlIGRpcmVjdG9yeS4gQiA9DQo+ICIuLi9idWlsZCIsIFMgPSAiLi4vZ2l0
-IiBzbyBpZiB3ZSBkbyBCID0gIiR7U30iIChpLmUuIGJyb2tlbnNlcCksIEkNCj4gaW50ZXJwcmV0
-ZWQgdGhhdCBpdCBzb2x2ZXMgdGhlIHByb2JsZW0uDQoNClBsZWFzZSBmaWxlIGEgYnVnIHVwc3Ry
-ZWFtLCB0aGF04oCZcyBqdXN0IGEgc2lsbHkgbWlzdGFrZSBpbiB0aGVpciBtYWtlZmlsZS4NCg0K
-Um9zcw==
+* 0001-fix-musl-build.patch removed because fixed in the new version. -> https://github.com/libpwquality/libpwquality/pull/53
+* Copied ABOUT-NLS from native sysroot's gettext manually because of following error -> error: required file './ABOUT-NLS' not found
+
+Building from sources need additional steps. Gettextize would have produced this file properly. But, we don't run it as part of autotools bbclass's autoreconf step
+Instead of creating an empty ABOUT-NLS file, copied it from native sysroot's gettext manually.
+
+Changelog:
+
+* Translation updates
+* Minor bug fixes and documentation enhancements
+
+Signed-off-by: alperak <alperyasinak1@gmail.com>
+---
+ .../files/0001-fix-musl-build.patch           | 72 -------------------
+ ...quality_1.4.4.bb => libpwquality_1.4.5.bb} | 27 ++++---
+ 2 files changed, 12 insertions(+), 87 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/libpwquality/files/0001-fix-musl-build.patch
+ rename meta-oe/recipes-extended/libpwquality/{libpwquality_1.4.4.bb => libpwquality_1.4.5.bb} (61%)
+
+diff --git a/meta-oe/recipes-extended/libpwquality/files/0001-fix-musl-build.patch b/meta-oe/recipes-extended/libpwquality/files/0001-fix-musl-build.patch
+deleted file mode 100644
+index 2cbdd6c74..000000000
+--- a/meta-oe/recipes-extended/libpwquality/files/0001-fix-musl-build.patch
++++ /dev/null
+@@ -1,72 +0,0 @@
+-Do not use fgetpwent_r
+-
+-fgetpwent_r does not exist on musl
+-
+-Source: https://git.alpinelinux.org/aports/tree/community/libpwquality/0001-fix-musl-build.patch
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---- a/src/pam_pwquality.c
+-+++ b/src/pam_pwquality.c
+-@@ -19,6 +19,7 @@
+- #include <stdio.h>
+- #include <pwd.h>
+- #include <errno.h>
+-+#include <security/pam_modutil.h>
+- #include "pwquality.h"
+- 
+- /*
+-@@ -43,8 +44,6 @@ struct module_options {
+- 
+- #define CO_RETRY_TIMES  1
+- 
+--#define PATH_PASSWD "/etc/passwd"
+--
+- static int
+- _pam_parse (pam_handle_t *pamh, struct module_options *opt,
+-             int argc, const char **argv)
+-@@ -98,44 +97,7 @@ static int
+- check_local_user (pam_handle_t *pamh,
+-                   const char *user)
+- {
+--        struct passwd pw, *pwp;
+--        char buf[4096];
+--        int found = 0;
+--        FILE *fp;
+--        int errn;
+--
+--        fp = fopen(PATH_PASSWD, "r");
+--        if (fp == NULL) {
+--                pam_syslog(pamh, LOG_ERR, "unable to open %s: %s",
+--                           PATH_PASSWD, pam_strerror(pamh, errno));
+--                return -1;
+--        }
+--
+--        for (;;) {
+--                errn = fgetpwent_r(fp, &pw, buf, sizeof (buf), &pwp);
+--                if (errn == ERANGE) {
+--                        pam_syslog(pamh, LOG_WARNING, "%s contains very long lines; corrupted?",
+--                                   PATH_PASSWD);
+--                        /* we can continue here as next call will read further */
+--                        continue;
+--                }
+--                if (errn != 0)
+--                        break;
+--                if (strcmp(pwp->pw_name, user) == 0) {
+--                        found = 1;
+--                        break;
+--                }
+--        }
+--
+--        fclose (fp);
+--
+--        if (errn != 0 && errn != ENOENT) {
+--                pam_syslog(pamh, LOG_ERR, "unable to enumerate local accounts: %s",
+--                           pam_strerror(pamh, errn));
+--                return -1;
+--        } else {
+--                return found;
+--        }
+-+	return pam_modutil_check_user_in_passwd(pamh, user, NULL) == PAM_SUCCESS;
+- }
+- 
+- PAM_EXTERN int
+diff --git a/meta-oe/recipes-extended/libpwquality/libpwquality_1.4.4.bb b/meta-oe/recipes-extended/libpwquality/libpwquality_1.4.5.bb
+similarity index 61%
+rename from meta-oe/recipes-extended/libpwquality/libpwquality_1.4.4.bb
+rename to meta-oe/recipes-extended/libpwquality/libpwquality_1.4.5.bb
+index b50c0f7de..5287430c4 100644
+--- a/meta-oe/recipes-extended/libpwquality/libpwquality_1.4.4.bb
++++ b/meta-oe/recipes-extended/libpwquality/libpwquality_1.4.5.bb
+@@ -1,27 +1,24 @@
+ DESCRIPTION = "Library for password quality checking and generating random passwords"
+ HOMEPAGE = "https://github.com/libpwquality/libpwquality"
+ SECTION = "devel/lib"
+-LICENSE = "GPL-2.0-only"
++
++LICENSE = "GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=6bd2f1386df813a459a0c34fde676fc2"
+ 
+-SRCNAME = "libpwquality"
+-SRC_URI = "https://github.com/${SRCNAME}/${SRCNAME}/releases/download/${SRCNAME}-${PV}/${SRCNAME}-${PV}.tar.bz2 \
++DEPENDS = "cracklib"
++
++SRC_URI = "git://github.com/libpwquality/libpwquality;branch=master;protocol=https \
+            file://add-missing-python-include-dir-for-cross.patch \
+ "
+-SRC_URI:append:libc-musl = " file://0001-fix-musl-build.patch "
+-
+-SRC_URI[md5sum] = "1fe43f6641dbf1e1766e2a02cf68a9c3"
+-SRC_URI[sha256sum] = "d43baf23dc6887fe8f8e9b75cabaabc5f4bbbaa0f9eff44278d276141752a545"
+-
+-UPSTREAM_CHECK_URI = "https://github.com/libpwquality/libpwquality/releases"
+-
+-S = "${WORKDIR}/${SRCNAME}-${PV}"
++SRCREV = "5490e96a3dd6ed7371435ca5b3ccef98bdb48b5a"
+ 
+-DEPENDS = "cracklib virtual/gettext"
++S = "${WORKDIR}/git"
+ 
+-inherit autotools setuptools3-base gettext
++inherit autotools-brokensep gettext setuptools3-base
+ 
+-B = "${S}"
++do_configure:prepend() {
++    cp ${STAGING_DATADIR_NATIVE}/gettext/ABOUT-NLS ${AUTOTOOLS_AUXDIR}/
++}
+ 
+ export PYTHON_DIR
+ export BUILD_SYS
+@@ -35,7 +32,7 @@ EXTRA_OECONF += "--with-python-rev=${PYTHON_BASEVERSION} \
+ "
+ 
+ PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
+-PACKAGECONFIG[pam] = "--enable-pam, --disable-pam, libpam"
++PACKAGECONFIG[pam] = "--enable-pam,--disable-pam,libpam"
+ 
+ FILES:${PN} += "${base_libdir}/security/pam_pwquality.so"
+ FILES:${PN}-dbg += "${base_libdir}/security/.debug"
+-- 
+2.25.1
+
 
