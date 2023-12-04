@@ -1,80 +1,95 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <kai.kang@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9DD82C4167B
-	for <webhook@archiver.kernel.org>; Sun,  3 Dec 2023 08:02:02 +0000 (UTC)
-Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
- by mx.groups.io with SMTP id smtpd.web11.35310.1701590520848108013
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A289EC10F13
+	for <webhook@archiver.kernel.org>; Mon,  4 Dec 2023 06:54:59 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.64008.1701672896623937468
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 03 Dec 2023 00:02:01 -0800
+ Sun, 03 Dec 2023 22:54:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
-Received: from fwd89.aul.t-online.de (fwd89.aul.t-online.de [10.223.144.115])
-	by mailout03.t-online.de (Postfix) with SMTP id 1AE7514F62
-	for <openembedded-devel@lists.openembedded.org>; Sun,  3 Dec 2023 09:01:59 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.163.46.197]) by fwd89.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1r9hQK-18pT3B0; Sun, 3 Dec 2023 09:01:56 +0100
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH] xdg-desktop-portal-gnome: upgrade 45.0 -> 45.1
-Date: Sun,  3 Dec 2023 09:02:31 +0100
-Message-ID: <20231203080231.1477715-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.42.1
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=kGZidQqc;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=0702f83593=kai.kang@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 3B46joMC003378
+	for <openembedded-devel@lists.openembedded.org>; Sun, 3 Dec 2023 22:54:56 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=XFzDv
+	ViDK6p5lQHBsn5bqGMJQ6NwBV2TGwQEBrTHrco=; b=kGZidQqc+B0wEYJJ74pxb
+	duIqne96nHoqHPrCbhtJVlx7kK/7UC093g8YpbRjuFXpi7N528DcuF3fCMzNKuti
+	/6Zm/RSLjNmeDT7nExKUEp9o1uw1McA8UcI3/78SlLG5LvJNGxrsNJBv1A0vSHBm
+	K3Ju3j80IrF6TGSONGnsb2T1xZZnyDrsnprfhXBI1qfYr83sSKzzVIvzdhtBz/l7
+	pK5NsOLka2Rfo4ACueq+hULeEhmgSPhSvMfrrnw7TxJ9nRelIdRFQYkxQwqn5bKg
+	pgkb/IdCVbWxnUXUP2nv1L8/l+pEddXe5nQL7o+Yl/udRuc52QupuaqpStRE+Kji
+	w==
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3ur4ym12hn-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Sun, 03 Dec 2023 22:54:56 -0800 (PST)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.35; Sun, 3 Dec 2023 22:54:58 -0800
+Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.35 via Frontend Transport; Sun, 3 Dec 2023 22:54:57 -0800
+From: <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-gnome][PATCH] libnma: remove conflict xml file
+Date: Mon, 4 Dec 2023 14:54:52 +0800
+Message-ID: <20231204065452.2829159-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1701590516-489CB820-778BDDC4/0/0 CLEAN NORMAL
-X-TOI-MSGID: b738fc71-9df1-49f7-aa8f-d09410828607
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-GUID: DGRhKnYbBbRnmSPe3AeFQ_wPLk3lbQZa
+X-Proofpoint-ORIG-GUID: DGRhKnYbBbRnmSPe3AeFQ_wPLk3lbQZa
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-11-16_25,2023-11-16_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 mlxscore=0
+ lowpriorityscore=0 bulkscore=0 phishscore=0 malwarescore=0 suspectscore=0
+ adultscore=0 clxscore=1011 priorityscore=1501 mlxlogscore=755
+ impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2311060001 definitions=main-2312040051
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 03 Dec 2023 08:02:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107198
+ <openembedded-devel@lists.openembedded.org>; Mon, 04 Dec 2023 06:54:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107199
 
-Changes in 45.1
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+From: Kai Kang <kai.kang@windriver.com>
 
-- accountdialog: Fix crash when pressing Escape
-- Send remote file URIs as local FUSE URIs
-- Various fixes to screencast and input capture
-- Expose org.gnome.desktop.calendar through the Settings portal
-- Put dialogs in separate window groups
-- Translation updates
+The file org.gnome.nm-applet.gschema.xml conflicts with the one
+provided by network-manager-applet, so remove it from libnma and use the
+one from network-manager-applet.
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+| Error: Transaction test error:
+|   file /usr/share/glib-2.0/schemas/org.gnome.nm-applet.gschema.xml conflicts
+    between attempted installs of network-manager-applet-1.34.0-r0.core2_ 64
+    and libnma-1.10.6-r0.core2_64
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- ...op-portal-gnome_45.0.bb =3D> xdg-desktop-portal-gnome_45.1.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-gnome/recipes-support/xdg-desktop-portal/{xdg-desktop-portal=
--gnome_45.0.bb =3D> xdg-desktop-portal-gnome_45.1.bb} (89%)
+ meta-gnome/recipes-connectivity/libnma/libnma_1.10.6.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/meta-gnome/recipes-support/xdg-desktop-portal/xdg-desktop-po=
-rtal-gnome_45.0.bb b/meta-gnome/recipes-support/xdg-desktop-portal/xdg-de=
-sktop-portal-gnome_45.1.bb
-similarity index 89%
-rename from meta-gnome/recipes-support/xdg-desktop-portal/xdg-desktop-por=
-tal-gnome_45.0.bb
-rename to meta-gnome/recipes-support/xdg-desktop-portal/xdg-desktop-porta=
-l-gnome_45.1.bb
-index 6cf706a92..a5477301b 100644
---- a/meta-gnome/recipes-support/xdg-desktop-portal/xdg-desktop-portal-gn=
-ome_45.0.bb
-+++ b/meta-gnome/recipes-support/xdg-desktop-portal/xdg-desktop-portal-gn=
-ome_45.1.bb
-@@ -21,7 +21,7 @@ inherit gnomebase pkgconfig gsettings features_check
-=20
- REQUIRED_DISTRO_FEATURES =3D "polkit"
-=20
--SRC_URI[archive.sha256sum] =3D "949598861c80000febf18cc12b3721c95c1bb1d1=
-9371fc2156dc4f33def5aff0"
-+SRC_URI[archive.sha256sum] =3D "3e9ca821044005fb37bd68ebe4ad196fc3d07283=
-5581467a22a4879dac7b5fdd"
-=20
- PACKAGECONFIG ?=3D "screenshot screencast ${@bb.utils.filter('DISTRO_FEA=
-TURES', 'wayland', d)}"
- PACKAGECONFIG[wayland] =3D ",,wayland-native"
---=20
-2.42.1
+diff --git a/meta-gnome/recipes-connectivity/libnma/libnma_1.10.6.bb b/meta-gnome/recipes-connectivity/libnma/libnma_1.10.6.bb
+index bff9a3360..75b0418c3 100644
+--- a/meta-gnome/recipes-connectivity/libnma/libnma_1.10.6.bb
++++ b/meta-gnome/recipes-connectivity/libnma/libnma_1.10.6.bb
+@@ -27,3 +27,8 @@ EXTRA_OEMESON:append:riscv32 = " -Dvapi=false"
+ EXTRA_OEMESON:append:powerpc64le = " -Dvapi=false"
+ 
+ GTKDOC_MESON_OPTION = "gtk_doc"
++
++do_install:append() {
++    # conflicts with the file provided by network-manager-applet
++    rm -f ${D}${datadir}/glib-2.0/schemas/org.gnome.nm-applet.gschema.xml
++}
+-- 
+2.34.1
 
 
