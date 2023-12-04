@@ -1,152 +1,155 @@
-Return-Path: <narpat.mali@windriver.com>
+Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 99410C4167B
-	for <webhook@archiver.kernel.org>; Mon,  4 Dec 2023 15:51:02 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.72128.1701705052674723431
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 33B14C4167B
+	for <webhook@archiver.kernel.org>; Mon,  4 Dec 2023 16:30:23 +0000 (UTC)
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com (EUR05-DB8-obe.outbound.protection.outlook.com [40.107.20.64])
+ by mx.groups.io with SMTP id smtpd.web11.73353.1701707417100714550
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 04 Dec 2023 07:50:52 -0800
+ Mon, 04 Dec 2023 08:30:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=j21SPtFV;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=07023930c9=narpat.mali@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 3B4Bn4IG005859;
-	Mon, 4 Dec 2023 15:50:51 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=gg945
-	x5eyw7bGZCQ1qhrzHjsFWS37AOa0lE835dFDNQ=; b=j21SPtFV1piw3RwyedjR8
-	H9esECF/BNk8I/7FH579VOtFGtXjrY/4jlE+7a8rThaZ+SeEaCBY4EdUSkytKkiT
-	3+DtmiNNj19vuNL6Sr6M76Zn8iWDpBjsNT/SGutZ7gQ5nAEtmvHmz6vE//hj4xdX
-	3L/QHyj8EJAV5onQdYcuZZ+Jpp3AbHVcXC6zhDLzNei5kBjIbm2Cno7sTMsGV5rZ
-	0CBtG4kKyDyevRrtuF1IgInOPfzKcYbE/tru/pwcUeFtARCXz6aqhVHT0XI1FgFk
-	3PS6N1EiRHCvMJjHDVSJuSYQ2eppABafc45JrPYd1hjeAEO+BZzRcy8RFY5O/JtT
-	g==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3us4d5gns8-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
-	Mon, 04 Dec 2023 15:50:50 +0000 (GMT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Mon, 4 Dec 2023 07:50:51 -0800
-From: nmali <narpat.mali@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <akuster808@gmail.com>
-Subject: [meta-oe][kirkstone][PATCH 1/1] apache2: upgrade 2.4.57 -> 2.4.58
-Date: Mon, 4 Dec 2023 15:48:47 +0000
-Message-ID: <20231204154847.1422638-1-narpat.mali@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@axis.com header.s=selector1 header.b=Yt8cGVmR;
+ spf=pass (domain: axis.com, ip: 40.107.20.64, mailfrom: peter.kjellerstedt@axis.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=EoDqsG4wI/ySMQO4Jyjo+rDOxpgwNobUbzJbVIz5opTH0oVNL823s++SCabQ/omh2nVdiecBljUFLP0rFdSm066u7G7vu+ckoiSZu8mPWKAg0SX2u45gS+MObi+t9nUPuEd15zXPPYzuHVtTQ5h8XSUV+bvy75h9cB+xDSKDDW7PXMiqpNGM0SBtr7OE8Xbfm3q7IrtA5E/DGkAVqymrRcLMR9g178hC2ImyLpxs7fEwC6+aPuvrJ1vY5bDYGM0ZFG3N8BnKv3J6NlbreGSwHO9apHOiU+8MMrK+oFsvp1vVdMZ6pXaSFGr4MT8+p7db70H8ejU+SZuO+HMHstJAEQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=532RWAKjkPaKgHIO5h+rO6ysU8hohsn3LoTJYc4u8Zg=;
+ b=oNU7uFsS7cvwY7thnUt4JU4X8QKgME+jpe3fcl4ndirrwFITRkfFN5Q83r9Fx7QYvstKMHJurwvSA3qTQXYuBBvU3ONhJbpzYfNaK2FJnBWnKBRZl3hPZPTFsyHmVBwrK8NRRIBvBKMRYNZFzRQVHpSXV5p1iPAajo8gKKf5FdNYXPfjQNCbRvoaCJDqN6MbgnJ6IskRmkjpf67dVMhsUfSC+2uI1GxRaJIOtoF5exwPZiXVutH7N92AcAu2RGEBZBEddsR6KFpEzksEr9CPysShycH9J5/7O2Ii58nOKGCQhFCJEYPQyMgc0hxcs2xN90VU8eC81XLBskvtT0Xxwg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=axis.com; dmarc=pass action=none header.from=axis.com;
+ dkim=pass header.d=axis.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axis.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=532RWAKjkPaKgHIO5h+rO6ysU8hohsn3LoTJYc4u8Zg=;
+ b=Yt8cGVmRXTylaXHdst7GdPk75ZkKCyM8xKkH3DE+vBiSCzuNKLCNmp2krntEhXhrULd92JisPSA9aRlWJHiI5o3Ek9ODsWjO502sRj5OqfUG9iPxak6Csp1wHrphCk4yVE2TjIYB0WhGX4qKqM8nmQaGgkTFoxCw9YvCDr6Dzho=
+Received: from DB5PR02MB10213.eurprd02.prod.outlook.com (2603:10a6:10:4a8::17)
+ by PAWPR02MB9053.eurprd02.prod.outlook.com (2603:10a6:102:336::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7046.33; Mon, 4 Dec
+ 2023 16:30:12 +0000
+Received: from DB5PR02MB10213.eurprd02.prod.outlook.com
+ ([fe80::7d13:15f0:2292:6962]) by DB5PR02MB10213.eurprd02.prod.outlook.com
+ ([fe80::7d13:15f0:2292:6962%6]) with mapi id 15.20.7046.033; Mon, 4 Dec 2023
+ 16:30:12 +0000
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: Khem Raj <raj.khem@gmail.com>, "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: RE: [oe] [meta-oe][PATCH 1/2] basu: Update to latest master
+Thread-Topic: [oe] [meta-oe][PATCH 1/2] basu: Update to latest master
+Thread-Index: AQHaJC38ESSyeTYptUWt/9sycJy5I7CZVaIg
+Date: Mon, 4 Dec 2023 16:30:12 +0000
+Message-ID: 
+ <DB5PR02MB1021315669766EA6DD45585ECEF86A@DB5PR02MB10213.eurprd02.prod.outlook.com>
+References: <20231201081117.569210-1-raj.khem@gmail.com>
+In-Reply-To: <20231201081117.569210-1-raj.khem@gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=axis.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DB5PR02MB10213:EE_|PAWPR02MB9053:EE_
+x-ms-office365-filtering-correlation-id: 6a05edc9-ce44-4367-7835-08dbf4e64a3a
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 
+ 4JSfJsrX7YQ9sUUicTdasO+KbYWWDkNz5oqMC6KwiajQ58qDd+n33KOzvGMhY6DqoVefUhL7hHhqe5hUMbzZRg2OxWIwoMMT1d2rrYkGV6FsvYmTyS24gPA84MufJ4sn8IKaOPegmBXQggeFWYPM7/VfYI+7LdCcyHT0luvBEDJsxkB5HXn1jRQHnszINXUClHHHD3IqigE2unXXc5T2cfm3DPxU90C60TYmONzlnIPpTFqt1dyfWbLfnmCmQtaK2qvxONmOUgz2lRpPAtMBCvEvvaCjPY3gBbdBabMfUkzOMGsRYOVJJKHEGs6CMF8jcqopLYvesKFxnYaBpd1Ves+KQCstD0s2775oFkUa6DJcaWfwwXdfU4PTfnmiECIPWMy8ivo+eiqYA8Ecsdg15lGnD0Htpj8SIlDzYejAT5NBd4txgk6iqajKESwDE6wXHc1R/tb8AZUaapTnJzCdeZt1dBZ6fLXv8WuT3cTXdKa739rSePB0fIpMXMO8OKkrsTbtcfsjcD+iKazmprrxUZx/kN9hMbtia7Jmi6MEs+i5SMbvw27LYPS5JZ7QGEQegh26yAxPpeGbApjTteuHat7733yynf6unphNdb1y6TY=
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB5PR02MB10213.eurprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(366004)(39860400002)(396003)(136003)(376002)(346002)(230922051799003)(64100799003)(186009)(1800799012)(451199024)(122000001)(478600001)(9686003)(8936002)(8676002)(38100700002)(66946007)(64756008)(66446008)(110136005)(76116006)(66476007)(316002)(66556008)(26005)(83380400001)(966005)(55016003)(7696005)(71200400001)(53546011)(6506007)(44832011)(86362001)(52536014)(5660300002)(15650500001)(2906002)(41300700001)(38070700009)(33656002);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?us-ascii?Q?9JQMNLJG5NZoNR/5GWenyZnnvGSFSaH+J4ACx6ia0sJPjilkUVCs5QY6PARB?=
+ =?us-ascii?Q?jPGYDHKQIpH68kSKQ5/l1L7habRXgRKQZyr0qn3GD3ifYHpB16n6LW3D6gp/?=
+ =?us-ascii?Q?FvK5oJ8kaeDevTLXVPYLC4K/InowKQgXxkYZhwIVufIn2mluhEdIvJasEicL?=
+ =?us-ascii?Q?+pIUIgROmjsWBH2y8aTx8XQce0kvDoLtU33dm7dsS3ydEF99DLcFSS6Gc1tM?=
+ =?us-ascii?Q?WU0d8lXspNn1dTKaN3zR/CxJKQ0iA0F+9xdVHO1EwX9mS5W2aBhu4YfqmW39?=
+ =?us-ascii?Q?ieUaRbv4ndKRyGZsNWQE6meJ2gNqL2rQ0d7ZHog2Ocf1fZP36g0nfb/XHBPP?=
+ =?us-ascii?Q?DQBgB2DYsnppOHd4/EFaFNpzlMPqoCAz21h6ipJHL2TX7GQaqyJgi4k/8T0Q?=
+ =?us-ascii?Q?76uUYWMp88fszhew+Up164pP1VXKbq64hv2EHVAS0fy5Jcqtl/O3/xTYMBKI?=
+ =?us-ascii?Q?LZclgIJOIIAWlkCB+/2zUiq5gGEcvSRXAZ8ROhqBjpDVs/gNvXRb+0TkPbb0?=
+ =?us-ascii?Q?J9IINyWA8fqriTFQuJNWQjuWOFLrnnpABrNuqh4PxmnPBaZnhFCE0NWhcdI6?=
+ =?us-ascii?Q?Y2a/KbsZUnFZo6HvSXnnpYrP6+Cf9k3Yvn0M429qh1ry3bFwgo3GVwrwvd2p?=
+ =?us-ascii?Q?MIKBQNvCUJ31tEydAdMSRkYzIYgJTYXO2d5EspG1IXltnIfpiMyKJqOwI3q7?=
+ =?us-ascii?Q?5qmIWZJYn/nbGqZnGrS8TwUxRqUJ7ZvDJKD8mvlaGryCDVhZYsJjsyPFajvB?=
+ =?us-ascii?Q?wPUul4Bx9ij/hlOszJJ2i3zhYbWjnELL2ebbyKybSTdF9K0ZMbR6QbwGxibT?=
+ =?us-ascii?Q?dtnUH4O+79DuH9ZTEW3/KKL+/nIO7iuo/voCtqVElIrjCpEXn83AujDFBUtZ?=
+ =?us-ascii?Q?FYwFVzY+ccbC5DEQxef03qAObUZM+RBmkrlD2OZE1DVUOXkFFEuLB9WimSZd?=
+ =?us-ascii?Q?YgurSoJ3dBnSBxjNq8EWVcb9EwMVof1P2VM8wu5x/RhTPajc+KKTGOYSpsiT?=
+ =?us-ascii?Q?TAjL8fMAC588X631cX9NtsF97nd00BNUOXSzKuwmelQkoLZvV90RsTMpT1Dm?=
+ =?us-ascii?Q?adBHt7pCsmKpFsPWA4Qtr8PvbqftrlssNLyVR4eD/8Swrcvt3+gyRYLfafxs?=
+ =?us-ascii?Q?s3hj48rToaeIG4WaiaxeG20UKBElgDQaRJsxqlhJJn2APg1zhsyGBdAqD6ZO?=
+ =?us-ascii?Q?iY8TKFNSOXFfKlPrjb0SizXXQ050CL3kKqk0y3yzbgy1J0dlTfxqPmbfdV6K?=
+ =?us-ascii?Q?a/G8pZD495tOHrNy3VJ64JvgWeTZR1ir2piFMVL4iHfPtuIjM7lEQ31Hs/bC?=
+ =?us-ascii?Q?nZcSf8RycPMJhGUOS1iz29uoTW12jhMTpvYr1mQCgFN/viili+Gn5npWClW6?=
+ =?us-ascii?Q?Ea6XVuiU2z+5kA7eTj2zD6WBqXrvTNbCF+idUFyuTs5GlpYLYgUQfzs7kM6E?=
+ =?us-ascii?Q?rYnOleTWKtr1PUPJsHgnejYENWzpo/KqWO9cTRgeEAQpa1hB+hfjA0OFEu4N?=
+ =?us-ascii?Q?E777e4P3guEJoowqsDwoxS77g8DUcWmpgXVQ7o45S15CnQGBVg0dka2DAJPH?=
+ =?us-ascii?Q?FB/R4SXYUcgOIv28hKc=3D?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-ORIG-GUID: sE9nhA2vBXMknT3twKlaZo1cOoAvuTd7
-X-Proofpoint-GUID: sE9nhA2vBXMknT3twKlaZo1cOoAvuTd7
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-11-16_25,2023-11-16_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0
- priorityscore=1501 impostorscore=0 phishscore=0 malwarescore=0
- mlxlogscore=999 lowpriorityscore=0 spamscore=0 bulkscore=0 suspectscore=0
- mlxscore=0 clxscore=1011 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2311060001 definitions=main-2312040118
+X-OriginatorOrg: axis.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DB5PR02MB10213.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6a05edc9-ce44-4367-7835-08dbf4e64a3a
+X-MS-Exchange-CrossTenant-originalarrivaltime: 04 Dec 2023 16:30:12.7787
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 78703d3c-b907-432f-b066-88f7af9ca3af
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: IvAQwShhqdlbEs5fceDSbE04ybi6SEGdlfh4LBt8BcdtFoWnV2zC1B3hU5CSScgN
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR02MB9053
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 04 Dec 2023 15:51:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107208
+ <openembedded-devel@lists.openembedded.org>; Mon, 04 Dec 2023 16:30:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107209
 
-From: Narpat Mali <narpat.mali@windriver.com>
+> -----Original Message-----
+> From: openembedded-devel@lists.openembedded.org <openembedded-
+> devel@lists.openembedded.org> On Behalf Of Khem Raj
+> Sent: den 1 december 2023 09:11
+> To: openembedded-devel@lists.openembedded.org
+> Cc: Khem Raj <raj.khem@gmail.com>
+> Subject: [oe] [meta-oe][PATCH 1/2] basu: Update to latest master
+>=20
+> There is only one commit after 0.2.1 release which is to fix build with
+> lld.
+>=20
+> https://git.sr.ht/~emersion/basu/commit/a08cf5a575325435040d35710dbac3d0c=
+32b1676
+>=20
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  meta-oe/recipes-core/basu/basu_0.2.1.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/meta-oe/recipes-core/basu/basu_0.2.1.bb b/meta-oe/recipes-
+> core/basu/basu_0.2.1.bb
+> index 500408e11e..56c25f5f1b 100644
+> --- a/meta-oe/recipes-core/basu/basu_0.2.1.bb
+> +++ b/meta-oe/recipes-core/basu/basu_0.2.1.bb
+> @@ -9,7 +9,7 @@ SRC_URI =3D
+> "git://git.sr.ht/~emersion/basu;protocol=3Dhttps;branch=3Dmaster"
+>  DEPENDS +=3D "gperf-native"
+>=20
+>  S =3D "${WORKDIR}/git"
+> -PV =3D "0.2.1"
+> +PV =3D "0.2.1+git"
+>  SRCREV =3D "684a41d68cfbb05e38aacb60a8548e21ddfbecdb"
 
-This upgrade incorporates the CVE-2023-31122, CVE-2023-43622 &
-CVE-2023-45802 fixes and other bugfixes.
+You forgot to update the SRCREV...
 
-The "0011-modules-mappers-config9.m4-Add-server-directory-to-i.patch"
-is no longer needed as it's included in this upgrade.
+>=20
+>  inherit meson pkgconfig
+> --
+> 2.43.0
 
-Changelog:
-https://downloads.apache.org/httpd/CHANGES_2.4.58
-
-References:
-https://httpd.apache.org/security/vulnerabilities_24.html
-https://security-tracker.debian.org/tracker/CVE-2023-31122
-https://security-tracker.debian.org/tracker/CVE-2023-43622
-https://security-tracker.debian.org/tracker/CVE-2023-45802
-
-Signed-off-by: Narpat Mali <narpat.mali@windriver.com>
----
- ...config9.m4-Add-server-directory-to-i.patch | 31 -------------------
- .../{apache2_2.4.57.bb => apache2_2.4.58.bb}  |  3 +-
- 2 files changed, 1 insertion(+), 33 deletions(-)
- delete mode 100644 meta-webserver/recipes-httpd/apache2/apache2/0011-modules-mappers-config9.m4-Add-server-directory-to-i.patch
- rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.57.bb => apache2_2.4.58.bb} (98%)
-
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2/0011-modules-mappers-config9.m4-Add-server-directory-to-i.patch b/meta-webserver/recipes-httpd/apache2/apache2/0011-modules-mappers-config9.m4-Add-server-directory-to-i.patch
-deleted file mode 100644
-index 996eabf586..0000000000
---- a/meta-webserver/recipes-httpd/apache2/apache2/0011-modules-mappers-config9.m4-Add-server-directory-to-i.patch
-+++ /dev/null
-@@ -1,31 +0,0 @@
--From 5c9257fa34335ff83f7c01581cf953111072a457 Mon Sep 17 00:00:00 2001
--From: Valeria Petrov <valeria.petrov@spinetix.com>
--Date: Tue, 18 Apr 2023 15:38:53 +0200
--Subject: [PATCH] * modules/mappers/config9.m4: Add 'server' directory to
-- include path if mod_rewrite is enabled.
--
--Upstream-Status: Accepted [https://svn.apache.org/viewvc?view=revision&revision=1909241]
--
-----
-- modules/mappers/config9.m4 | 5 +++++
-- 1 file changed, 5 insertions(+)
--
--diff --git a/modules/mappers/config9.m4 b/modules/mappers/config9.m4
--index 55a97ab993..7120b729b7 100644
----- a/modules/mappers/config9.m4
--+++ b/modules/mappers/config9.m4
--@@ -14,6 +14,11 @@ APACHE_MODULE(userdir, mapping of requests to user-specific directories, , , mos
-- APACHE_MODULE(alias, mapping of requests to different filesystem parts, , , yes)
-- APACHE_MODULE(rewrite, rule based URL manipulation, , , most)
-- 
--+if test "x$enable_rewrite" != "xno"; then
--+    # mod_rewrite needs test_char.h
--+    APR_ADDTO(INCLUDES, [-I\$(top_builddir)/server])
--+fi
--+
-- APR_ADDTO(INCLUDES, [-I\$(top_srcdir)/$modpath_current])
-- 
-- APACHE_MODPATH_FINISH
---- 
--2.25.1
--
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.57.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.58.bb
-similarity index 98%
-rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.57.bb
-rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.58.bb
-index 00f8aaa415..f7376fc58a 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.57.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.58.bb
-@@ -16,7 +16,6 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
-            file://0008-Fix-perl-install-directory-to-usr-bin.patch \
-            file://0009-support-apxs.in-force-destdir-to-be-empty-string.patch \
-            file://0001-make_exports.awk-not-expose-the-path.patch \
--           file://0011-modules-mappers-config9.m4-Add-server-directory-to-i.patch \
-           "
- 
- SRC_URI:append:class-target = " \
-@@ -28,7 +27,7 @@ SRC_URI:append:class-target = " \
-            "
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=bddeddfac80b2c9a882241d008bb41c3"
--SRC_URI[sha256sum] = "dbccb84aee95e095edfbb81e5eb926ccd24e6ada55dcd83caecb262e5cf94d2a"
-+SRC_URI[sha256sum] = "fa16d72a078210a54c47dd5bef2f8b9b8a01d94909a51453956b3ec6442ea4c5"
- 
- S = "${WORKDIR}/httpd-${PV}"
- 
--- 
-2.40.0
+//Peter
 
 
