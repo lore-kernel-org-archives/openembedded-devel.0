@@ -1,106 +1,137 @@
-Return-Path: <alperyasinak1@gmail.com>
+Return-Path: <vkumbhar@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F814C4167B
-	for <webhook@archiver.kernel.org>; Mon,  4 Dec 2023 12:47:31 +0000 (UTC)
-Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com [209.85.208.54])
- by mx.groups.io with SMTP id smtpd.web10.68476.1701694043495969640
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AD376C10DCE
+	for <webhook@archiver.kernel.org>; Mon,  4 Dec 2023 14:07:01 +0000 (UTC)
+Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
+ by mx.groups.io with SMTP id smtpd.web10.70082.1701698821230045858
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 04 Dec 2023 04:47:23 -0800
+ Mon, 04 Dec 2023 06:07:01 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=N1oz/cT7;
- spf=pass (domain: gmail.com, ip: 209.85.208.54, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-ed1-f54.google.com with SMTP id 4fb4d7f45d1cf-54cfb03f1a8so140263a12.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 04 Dec 2023 04:47:23 -0800 (PST)
+ dkim=pass header.i=@mvista.com header.s=google header.b=HsPug2UM;
+ spf=pass (domain: mvista.com, ip: 209.85.210.182, mailfrom: vkumbhar@mvista.com)
+Received: by mail-pf1-f182.google.com with SMTP id d2e1a72fcca58-6ce46470647so566279b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 04 Dec 2023 06:07:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1701694041; x=1702298841; darn=lists.openembedded.org;
+        d=mvista.com; s=google; t=1701698820; x=1702303620; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=OZePV0hU4Z2hdkASBjV2BHEZXVJm2URPZWo8zMex0Ok=;
-        b=N1oz/cT73JnGJa27cH0IUtLyFvfarcayooT4OJ34YpaHA58grIR7XVP9SbhsrM6vcy
-         H+0dHVvLZPQeHPiS43GeHMoN+CzInVSa4Ruebppg8YeBhCAiku6wh+Y0F8q16eKaUgI2
-         wl34Px/MDxeKjfznH+4SEtbedNQwDio97Fe7veRqyS5/25C1UHHBS+knGxunZZ1u0pGe
-         4EN3VZQOe8n271HnSr19xm5At+STJc3pRTnkaEV2aHN7T5XXBtomipHSigiyb+HlvEUz
-         WQSwjZVWgnLciYt76gyQIEGPtRgGGE2jopaDe7vxMZM2Rmovj2m9MR6hUf1xGeenyU7N
-         tjPg==
+        bh=iHf+3fdh4GoZ3gamdJxiiLTPRW0lczo6wUtFMMdPHSE=;
+        b=HsPug2UMwloJZ6sOnNKGWbB0xvekh3hGtxNan7R1zu5PwFwypWXpexj4imcxtZlL/m
+         AVtyEualP0tA1AyryUkIYlRMykEtVR9M9P4PxkfDhJVY/wEmjIL8AYxYjNK+x5cJlQlU
+         tXNDo0V8YFfRLT4Gg6k4WRSQ7reOQ0uIxXHSU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701694041; x=1702298841;
+        d=1e100.net; s=20230601; t=1701698820; x=1702303620;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=OZePV0hU4Z2hdkASBjV2BHEZXVJm2URPZWo8zMex0Ok=;
-        b=uT6MBlgYJrHqCERTdPzaVCj/Pr6FlemUn3DJtL3pmsY7EAJr19OiXtZ3fJOHEoEQaZ
-         Ui4L5R+B4hnGDNSftYSbdW4ajqx6FjvoD4QZAepAvKk+S+JeJTKapzzJ0K/Vv1jDK+PB
-         7mGgsfyBwVPNhoviZgHq/N/zZPbBBUeYhrSnJIZUy3yWLtKyvD5gR6HSmJP0nUU2LjZH
-         fYvhWYUXUQU3FXxYRtGFW/dPt7uRqCDWVVxPAusLXfmZ1dKG4ATa4/wCl2ld7jbZ9o4r
-         nnzUefL7clpZS8qopJoIboVBMiscLUgGii1jFvMSJoCTyAWfkh+DE6oIbpYLAyJPzvhw
-         FrQA==
-X-Gm-Message-State: AOJu0YyodazeqthNeXMHOYsmQNcV5aIJzBAIuHwoZKfTukM4omk1Mim6
-	yvYc6kkLhGxj7LG+Q0T/r8m93XFvPhFvdg==
-X-Google-Smtp-Source: AGHT+IGiaxbtSb4KbCriTbABLfsr464ssDIs/95+FzId74DZB7cN9xcRl2BNuWAobcVQabK8D7HVvw==
-X-Received: by 2002:a50:8e09:0:b0:54c:4837:758e with SMTP id 9-20020a508e09000000b0054c4837758emr3594619edw.58.1701694041191;
-        Mon, 04 Dec 2023 04:47:21 -0800 (PST)
-Received: from localhost.localdomain ([176.33.70.43])
-        by smtp.gmail.com with ESMTPSA id b17-20020a0564021f1100b0054cc6be8b0bsm1400378edb.32.2023.12.04.04.47.20
+        bh=iHf+3fdh4GoZ3gamdJxiiLTPRW0lczo6wUtFMMdPHSE=;
+        b=C+pkNedp6i1jpv4KwbRD84efG5zFUnYf24B3BQi2IGMy6B6DNQM5hbFoVWJuzN5nf2
+         MDfDQtMzB8xxhrTzgrSVUdnpFOm2mVmhYl8Hp33FYt7Y88iY7bWRiT3RqaQutKlSktZk
+         6OzCe6PsD9yK/OaAB8564kCS/qVhcCNlvJsxPu7JpUI6SknNWND7QDRQCqQfwB27YAdY
+         gVwwAFYSG7VGZEXSbvU4AiF1xDtd72SNbUionHHu260cYWf47S80bFTVCk2q3nJvL02J
+         FdPZk+3hOlIypeW1fofZQevxjXIEEq27L98p/p+fOWVmZTnrBGBo8kxLYJ+BaXYKeCPl
+         jzOw==
+X-Gm-Message-State: AOJu0YxLmbnyr0SfhaqQUEJU40V0CTivbmlPiD8oipung61nJ+CERhlE
+	TXipuNpy0KS6BpmpiShybpF3BKwCuwmFEdyO6z0=
+X-Google-Smtp-Source: AGHT+IG18OjDrwhoA4khnmTUwzMRMAyUNfKobZ3I4jUaZrqmI2qPh5rK21gzeBTK5XGmi/jlXhN6+w==
+X-Received: by 2002:a05:6a20:4315:b0:18f:97c:8236 with SMTP id h21-20020a056a20431500b0018f097c8236mr2036456pzk.64.1701698819955;
+        Mon, 04 Dec 2023 06:06:59 -0800 (PST)
+Received: from vkumbhar-Latitude-3400.. ([116.75.29.203])
+        by smtp.googlemail.com with ESMTPSA id p22-20020a63e656000000b005bd980cca56sm7588310pgj.29.2023.12.04.06.06.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 04 Dec 2023 04:47:20 -0800 (PST)
-From: alperak <alperyasinak1@gmail.com>
+        Mon, 04 Dec 2023 06:06:59 -0800 (PST)
+From: Vivek Kumbhar <vkumbhar@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-oe][PATCH] gtkwave: upgrade 3.3.111 -> 3.3.117
-Date: Mon,  4 Dec 2023 15:47:17 +0300
-Message-Id: <20231204124717.347203-1-alperyasinak1@gmail.com>
-X-Mailer: git-send-email 2.25.1
+Cc: Vivek Kumbhar <vkumbhar@mvista.com>
+Subject: [meta-oe][dunfell][PATCH] squid: fix CVE-2023-46847 Denial of Service in HTTP Digest Authentication
+Date: Mon,  4 Dec 2023 19:36:48 +0530
+Message-Id: <20231204140648.904102-1-vkumbhar@mvista.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 04 Dec 2023 12:47:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107202
+ <openembedded-devel@lists.openembedded.org>; Mon, 04 Dec 2023 14:07:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107203
 
-Changelog:
+Upstream-Status: Backport from https://github.com/squid-cache/squid/commit/052cf082b0faaef4eaaa4e94119d7a1437aac4a3
 
-* Bugfix-only release.
-* VCD reader fixes for unnamed Icarus begin blocks.
-* String data type crash fix in fst.c.
-* Dummy release to keep in sync with gtk3 version.
-* Buffer overflow fixes in FST reader.
-* Fix VZT reader with -fstrict-aliasing.
-* Fix use_multi_state condition in vzt_write.c.
-* Fix for UNDEF vs strings at start of a vzt file.
-* Fix sleep() time scaling redefine for mingw.
-* Use MapViewOfFileEx for mmap on Windows (fstapi).
-* Define FST_DO_MISALIGNED_OPS on AArch64 (fstapi).
-* Fixed attrbegin short length problem.
-* Fix manpage/odt for vcd2fst command switch documentation for zlibpack.
-* Changed sprintf to snprintf in fstapi.c.
-* Fix stems reader processing code broken in 3.3.114.
-
-Signed-off-by: alperak <alperyasinak1@gmail.com>
+Signed-off-by: Vivek Kumbhar <vkumbhar@mvista.com>
 ---
- .../gtkwave/{gtkwave_3.3.111.bb => gtkwave_3.3.117.bb}          | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-graphics/gtkwave/{gtkwave_3.3.111.bb => gtkwave_3.3.117.bb} (94%)
+ .../squid/files/CVE-2023-46847.patch          | 47 +++++++++++++++++++
+ .../recipes-daemons/squid/squid_4.9.bb        |  1 +
+ 2 files changed, 48 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/squid/files/CVE-2023-46847.patch
 
-diff --git a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.111.bb b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.117.bb
-similarity index 94%
-rename from meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.111.bb
-rename to meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.117.bb
-index eee9de749..d23d89f2b 100644
---- a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.111.bb
-+++ b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.117.bb
-@@ -6,7 +6,7 @@ LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=75859989545e37968a99b631ef42722e"
+diff --git a/meta-networking/recipes-daemons/squid/files/CVE-2023-46847.patch b/meta-networking/recipes-daemons/squid/files/CVE-2023-46847.patch
+new file mode 100644
+index 0000000000..d9f29569d1
+--- /dev/null
++++ b/meta-networking/recipes-daemons/squid/files/CVE-2023-46847.patch
+@@ -0,0 +1,47 @@
++From 052cf082b0faaef4eaaa4e94119d7a1437aac4a3 Mon Sep 17 00:00:00 2001
++From: squidadm <squidadm@users.noreply.github.com>
++Date: Wed, 18 Oct 2023 04:50:56 +1300
++Subject: [PATCH] Fix stack buffer overflow when parsing Digest Authorization
++ (#1517)
++
++The bug was discovered and detailed by Joshua Rogers at
++https://megamansec.github.io/Squid-Security-Audit/digest-overflow.html
++where it was filed as "Stack Buffer Overflow in Digest Authentication".
++
++---------
++
++Co-authored-by: Alex Bason <nonsleepr@gmail.com>
++Co-authored-by: Amos Jeffries <yadij@users.noreply.github.com>
++
++Upstream-Status: Backport [https://github.com/squid-cache/squid/commit/052cf082b0faaef4eaaa4e94119d7a1437aac4a3]
++CVE: CVE-2023-46847
++Signed-off-by: Vivek Kumbhar <vkumbhar@mvista.com>
++---
++ src/auth/digest/Config.cc | 10 +++++++---
++ 1 file changed, 7 insertions(+), 3 deletions(-)
++
++diff --git a/src/auth/digest/Config.cc b/src/auth/digest/Config.cc
++index 2d25fee..4c206e1 100644
++--- a/src/auth/digest/Config.cc
+++++ b/src/auth/digest/Config.cc
++@@ -862,11 +862,15 @@ Auth::Digest::Config::decode(char const *proxy_auth, const char *aRequestRealm)
++             break;
++
++         case DIGEST_NC:
++-            if (value.size() != 8) {
+++            if (value.size() == 8) {
+++                // for historical reasons, the nc value MUST be exactly 8 bytes
+++                static_assert(sizeof(digest_request->nc) == 8 + 1, "bad nc buffer size");
+++                xstrncpy(digest_request->nc, value.rawBuf(), value.size() + 1);
+++                debugs(29, 9, "Found noncecount '" << digest_request->nc << "'");
+++            } else {
++                 debugs(29, 9, "Invalid nc '" << value << "' in '" << temp << "'");
+++                digest_request->nc[0] = 0;
++             }
++-            xstrncpy(digest_request->nc, value.rawBuf(), value.size() + 1);
++-            debugs(29, 9, "Found noncecount '" << digest_request->nc << "'");
++             break;
++
++         case DIGEST_CNONCE:
++--
++2.40.1
+diff --git a/meta-networking/recipes-daemons/squid/squid_4.9.bb b/meta-networking/recipes-daemons/squid/squid_4.9.bb
+index 19949acd84..c9a92772d1 100644
+--- a/meta-networking/recipes-daemons/squid/squid_4.9.bb
++++ b/meta-networking/recipes-daemons/squid/squid_4.9.bb
+@@ -24,6 +24,7 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${BPN}-${PV}.tar.bz2
+            file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch \
+            file://0001-tools.cc-fixed-unused-result-warning.patch \
+            file://0001-splay.cc-fix-bind-is-not-a-member-of-std.patch \
++           file://CVE-2023-46847.patch \
+            "
  
- SRC_URI = "http://gtkwave.sourceforge.net/gtkwave-gtk3-${PV}.tar.gz"
--SRC_URI[sha256sum] = "b4e1c2f718fb3c4b4f412a220876b9da599fe11745fb6f7eb4aed107b1106233"
-+SRC_URI[sha256sum] = "3cf1537586a911cbb0601af8fa18cf6da708c8a14a71f69ce3cb9118e8571db9"
- S = "${WORKDIR}/${BPN}-gtk3-${PV}"
- 
- DEPENDS = " \
+ SRC_URI_remove_toolchain-clang = "file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch"
 -- 
-2.25.1
+2.40.1
 
 
