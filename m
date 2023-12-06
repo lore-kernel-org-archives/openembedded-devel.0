@@ -2,236 +2,419 @@ Return-Path: <kai.kang@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5F40AC4167B
-	for <webhook@archiver.kernel.org>; Wed,  6 Dec 2023 01:38:04 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.19013.1701826684027602363
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 96FA0C4167B
+	for <webhook@archiver.kernel.org>; Wed,  6 Dec 2023 02:24:54 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.22376.1701829492088390492
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Dec 2023 17:38:04 -0800
+ Tue, 05 Dec 2023 18:24:52 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@windriver.com header.s=PPS06212021 header.b=MOJCtN9X;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=07047bf378=kai.kang@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 3B6114O8001284
-	for <openembedded-devel@lists.openembedded.org>; Tue, 5 Dec 2023 17:38:03 -0800
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=YP/4ED74;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=07047bf378=kai.kang@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 3B611uwM029219;
+	Wed, 6 Dec 2023 02:24:51 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=message-id:date:subject:to:references:from:in-reply-to
-	:content-type:content-transfer-encoding:mime-version; s=
-	PPS06212021; bh=aKIlehEmEWM66u5OhWE9N5HR2NinFS+I/DcP0chOlQM=; b=
-	MOJCtN9XxmjvXRoeOZkeFG/FlIptyrRNfdNm974DRcfY4PNdt5lW8F4K8EkTrtyv
-	ToumxB+FeXtbV/SbTrRMGpYlZUHw/zqxgEfhqZ83B3nFL95E9hNb/WSKs1vScDch
-	+pZ2VmTdW1prpSzrpGg0E1NDQeyAv6KT55qhjZSRADd4L7gxkYKDoyUqe8Hf96/3
-	f6eOKqhi3mDmjc4MpZEUUXbjkmEJqoT6v25k/glfl4PZQABj986laKZuT7/ylPXP
-	cl3b1dT8cKxRqZ2iEAtaqaClXrZNlxn4K1g3oOCbIM7JdFgmBOpTY+VEHWN/PeBU
-	yLYjr0wEeRjCuYcIwwGtsQ==
-Received: from pps.reinject (localhost [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3utd2r037b-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 05 Dec 2023 17:38:03 -0800 (PST)
-Received: from m0250810.ppops.net (m0250810.ppops.net [127.0.0.1])
-	by pps.reinject (8.17.1.24/8.17.1.24) with ESMTP id 3B61c2pX009938;
-	Tue, 5 Dec 2023 17:38:02 -0800
-Received: from nam11-co1-obe.outbound.protection.outlook.com (mail-co1nam11lp2169.outbound.protection.outlook.com [104.47.56.169])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3utd2r037a-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Tue, 05 Dec 2023 17:38:02 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ByhpprBSMfc2gvc4+P09zNBH8whgzBgOSHExbFKEc8Q9rXUoyAK+L6vyH6P5Puk5/otA4TOrMgluwx7S4WIGy3/RgPrJyyEr0RxDUyzYxPK7nHCDdwjgxai8wd3umsLHkV57FhDU6dNHF2W7rm2EsAHhDqLKSG+NL1FJg2woixk9d74UW7JQ44qAQEWVXEHobjgcJYi5pqGJlm0Q2ZhK+IlnOc65DNET9h4a3bG5O2J6OSXvY9vAwyQImB/ORyJNv+PV5G9wJupj/Vk8xcxlkC5Oeh1yXnuRMg5edpBWZnzw5xAokfy8NoQSbxJTJsNcKhp2RLF+/XaJj+NG9NTaGA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=aKIlehEmEWM66u5OhWE9N5HR2NinFS+I/DcP0chOlQM=;
- b=bXHM4JRER/o01TbruCgCvVV9iS5/MbJUDko/rq6CvNsHaZtABqU73SdbSERTM6856eQVHUiqO4Un8QfjZDH0NBjb+7B0NZUMpjtdSSKJFoOoluRgCg5TPQExqEIlHrlYdJcwc6HvrlByMnXcrLittyxdlJDZAb9h9aPRWD9ygBWCaY7OOy6GhY3cIKFbQv8v1lly0XlEdOApuuBhCeZmxJsCPAoIEEYdJLj152z/cnyyFanxMWs09ofVRNypvsCKikUBXvNVO6IF2RP+4jNTLIo0FJRJD9gLIDC9ypbF6nyxttq6qnghKXfXfSJhbUWso37JLzvjIzTwcjStdZQuvg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from DS7PR11MB6064.namprd11.prod.outlook.com (2603:10b6:8:77::14) by
- PH8PR11MB7117.namprd11.prod.outlook.com (2603:10b6:510:217::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7046.22; Wed, 6 Dec
- 2023 01:37:59 +0000
-Received: from DS7PR11MB6064.namprd11.prod.outlook.com
- ([fe80::dca9:26e2:b46:2372]) by DS7PR11MB6064.namprd11.prod.outlook.com
- ([fe80::dca9:26e2:b46:2372%3]) with mapi id 15.20.7046.034; Wed, 6 Dec 2023
- 01:37:59 +0000
-Message-ID: <809220be-f0c6-c8f4-2d8e-20e67145397e@windriver.com>
-Date: Wed, 6 Dec 2023 09:37:47 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
-Subject: Re: [oe] [meta-python][PATCH 1/2] python3-pyudev: provide native
-Content-Language: en-US
-To: Yoann Congal <yoann.congal@smile.fr>,
-        Kai Kang <kai.kang@eng.windriver.com>,
-        openembedded-devel@lists.openembedded.org
-References: <20231205145032.1116030-1-kai.kang@windriver.com>
- <f506e187-e533-416a-b4d7-4fce48ffc494@smile.fr>
-From: Kai <kai.kang@windriver.com>
-In-Reply-To: <f506e187-e533-416a-b4d7-4fce48ffc494@smile.fr>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-X-ClientProxiedBy: TYCP286CA0136.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:400:31b::20) To DS7PR11MB6064.namprd11.prod.outlook.com
- (2603:10b6:8:77::14)
+	 h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=W1+Lz
+	Vp9RfJXAE655DJZFgUHJbZbm9bgS8Lk4gglqRk=; b=YP/4ED74I5pmq8CxRTpWQ
+	LofvAfKl+FuofR+o7k04LB4cButsYXTKcUGYJlnCl+dpX3+Hg6XU7sGd8Omf/mG+
+	3aYs8wHrF1DOu89sB9FHj8B5vd3ZM5SRPiE4I5LteAWkiSpK1rHzZ+MphEqyAkpc
+	iggC1t9V7adEQ3Fvl3gFqWpHJ8dd/8KSxckNB2oJRiyEDvayT4mXhhYces31bLsI
+	P2HbsXwEXahauLX6gPxZrNoAGtOQ1KsopIYkVXeLkEU0IDX31TodH8igAkRd/JvD
+	nmK/nC//4gM6N3YV8wbloztg056EuqTxL9pkd+wFCF+dQghP6S6bGxlGaxD+oKFj
+	A==
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3utd53g422-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
+	Wed, 06 Dec 2023 02:24:51 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.35; Tue, 5 Dec 2023 18:24:53 -0800
+Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.35 via Frontend Transport; Tue, 5 Dec 2023 18:24:52 -0800
+From: <kai.kang@windriver.com>
+To: <yoann.congal@smile.fr>
+CC: <openembedded-devel@lists.openembedded.org>
+Subject: [PATCH v2] lvm2: 2.03.16 -> 2.03.22
+Date: Wed, 6 Dec 2023 10:24:46 +0800
+Message-ID: <20231206022446.3725327-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS7PR11MB6064:EE_|PH8PR11MB7117:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3ad22718-8e8c-44c8-a437-08dbf5fbfa4a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	eOhOoPVJzJN8acbFk6/iqetqqrMQ86SzfRwIA4+3wfAV0VOv+v5S4IqQ6kRY2pVv2RqlPWYQO0YnWqWahQt3Wu3oNCX838/Xj24+8mymBYaZB6k+YpyY4lznCkbpkWfS8eMklYEiUIm4gPhqjAWefYRQSGvxy7wQrn9wNnho4VWXo+SfTx/rV4FDjly08qdoBYiI6/iIDKOQBt1OHhtiPlARwPCKqOo99ezlkgcJdERYwOdpWx13RsKkbVaZbkeu13Bvcm3/L/Q9wnikXDlVzeoEknl5E0tTDxHi4W++WhwvVmBga2wH+nOWVBnmPhYfKXggDPkVT8WH/gKIlZKPRVxSkZQ88Ete874FcL35nmYWWa4PrldHOHT2IwQVtNzeu3a1f85uzQVQUMwoARuoWwDgRBDeHKBpgAnENeX/zG/F3NqaFntyPD2tzLxfXWjDmzqYe3Fn1THxsMh8N04Ai9uc6SGxM+JAXgRo46yQCBShs0BES+ZvpU34AVQIJL06qbsjOgANYuFjSbNagPgAy8HS1+eKNn7sAzhIw4CmcUEWOGfS4fTZP4uuXKX9e97x/VouM5H0B9VRgYbBd49vKWJynMIS14eFCvCjdERNtD+7HFCXRfVMIUuXeR6ROvRM5igr2FDDotw/2OozUW/JLA==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR11MB6064.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(39850400004)(396003)(376002)(136003)(346002)(366004)(230922051799003)(451199024)(64100799003)(186009)(1800799012)(5660300002)(2906002)(31686004)(6666004)(53546011)(6512007)(6486002)(966005)(36756003)(8676002)(41300700001)(38100700002)(6506007)(66476007)(8936002)(478600001)(86362001)(26005)(2616005)(110136005)(83380400001)(66556008)(66946007)(31696002)(316002)(66574015)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?ZXpPdWt1NE5YS3FLQTZod1d2TytKQ0xJbGFzVmhWSG5hNHZ3MHZuQ0w0WG1D?=
- =?utf-8?B?NG9DaWMzT1orOHB6OHVMRmlGV1IrOERCenMwaVFza083NlkzZGRxUWlXVmM2?=
- =?utf-8?B?U1hKK1o4YWMwUWd1VW55M3prSnRkeVdnckliZGkzem1kSDVoK0l0WXE5dVpR?=
- =?utf-8?B?NFdmUERYcVNKbDh2M0wvejVaRE1JdUpNNU91SXhtUktPZ2dXcmtINTVxTEZu?=
- =?utf-8?B?eWRUZzZrOU9kbjlrNFlBRW5neENvVGExWDNldnozUWdHQkJHcGNJa3lTUlg0?=
- =?utf-8?B?bnRlMGgxdFpEREpsQ2ZNMGJmeWNYVUxqR0NiOTg1djNmOGgyeDRGV21nSzFx?=
- =?utf-8?B?TkpYbldwYjVLeGJaQkNlMEw2cWJGZ2s0NGsxSVlWemdhcUp4WndZV0pSaEtI?=
- =?utf-8?B?ZEcvWXR1eTlMK1p1bm5lWG1Ha1VaMFpGK25KQUxSd2k2SUJiNjI1YmhVaSsr?=
- =?utf-8?B?OExRSFR3N1VYRjJpRFovVXhjRkFLendyUTlmUXluQm9JRU5seVhNOGFtaXN0?=
- =?utf-8?B?M3Vvb0hJM0VRYzdMK1ZuMUEyNmxLdWJ5ZjJieUpaRmRqTTAyY1FlTEROVXRI?=
- =?utf-8?B?ZGZyMVc0REpsVG5uOFVkaENuSEtUMU5USllwOVVvdHU0Vm9MY1VjK2ZsVzhU?=
- =?utf-8?B?ZUxvK1I1MEhzOVJ0MnBQMS9rSENLdjdqMkdzWHcrSjVYNHpzbWFSaXJ1Y1cv?=
- =?utf-8?B?SUllVlZwc2NaRlRJV3BzTlVZeEROTDZZMldzUXNNZndrcldnTmd2WmJQR0s0?=
- =?utf-8?B?VW9SNnZDbUFGSDBFTW1tcVhFQklzQXQyRStBRHFuOEt3MnRhaWh6Q3pnV2Mw?=
- =?utf-8?B?V1N6RlFJT3pQNTZ3OGpVeERnZUdpQlFkL2lrNTdKVUhSclZiL2Y4Ti9WT1Ru?=
- =?utf-8?B?ZHo2NHZ6V0dHUlRyUUpZamJNaUtFZ3gzRERkd0NRNUxWUTFvVWRaQzc1STc4?=
- =?utf-8?B?ODY1cWtBSjFZL1R1c01NN1F0R0hBTHFzVlRXakZWRUk0QlRHOGdPUlVhZ3FR?=
- =?utf-8?B?NGdIQWlLSTFmSzdudUZ4UjBtZllIZlBuL0JaQ3FsL0FXWk5xYkNZL0YwSzNI?=
- =?utf-8?B?dHQ2Y1dVcWtheFJwa1RaV1FLMUJrMnZrV3NGVlZQWTdZL01FZ05ucWE2eFdS?=
- =?utf-8?B?bWJIcnFPK2hTbko4a25SckhXbXp4SmNsbWxLZEh5K3MzcnUvcmVuRmFpNkwx?=
- =?utf-8?B?QVQ0RGIvNDNmREhCZjRBdG5aQ1ovRnF5UlB3NkpmYmRWU29KeCszSnRSTE1t?=
- =?utf-8?B?UTEvcUxVbXlQTExNczJTY0oxYks1YWVnK0VyYXBiSmE1OFNDd25YbjRVZThR?=
- =?utf-8?B?SHlJSG00ZVpHVUQ5NWtNOWRyNDhueHAyb1plcmU0dUc5UUhEUUlCQ2w5V1RU?=
- =?utf-8?B?cG9XK05FV09nbEg0RjM4MnJncHVCRUtkK0NKY09PbjMzYlVaNnM4Unk5aFla?=
- =?utf-8?B?NkpML1dreGJQNDIvY2o5aWFCSWNGb0dXam1vTU42dkt1RXd5bzVjNE1BQUJQ?=
- =?utf-8?B?cDY2S09yTnpac0NkSE9sb0k1dVFMM2NDOFh5ckp6bE42cGJZbUxjYkhyOVF4?=
- =?utf-8?B?T1VHMHNaUnBWaUFPSW1DaXN0K3JtQWx1Yml0TmNPNEpUSnVieHFJc3VWSEVK?=
- =?utf-8?B?dHJIMGc4SEhkbEtTZlN1VWxxWnNRdHo2MHByT0M4TDFQaEp5RWpPOEtWYU92?=
- =?utf-8?B?Skw2MDR1ZnV2aUNOOHZ1ME1NY0poT0NiYzEveTRteTV4QlNoYlhLSjhRMlhq?=
- =?utf-8?B?VG5CWVEwZE90WE4rQW9oQUNGcmhsMmJpUko2Q1laVGdob256dFdGMkprZ2FL?=
- =?utf-8?B?WUd5RHloVmhzTFlxOW9iSUdoWU9aYTFRN1NRV2tlYkNaRWlEenB3SmJNN2lw?=
- =?utf-8?B?N0Y0eFJSTWo1SnBodFNDMTNWNm4rMmFYMmRtRFFnckxCQi9iTjNZaGJpKzVN?=
- =?utf-8?B?Q3Y3K1ppbWlpaSs3WjdrQ3pKaENINFdGMktoSmErZ3pOMS9BTi9IRDkwZTNl?=
- =?utf-8?B?L1ZDdTZMS2F3aXFXd1UwK295cGo0UDFmeUEwTDY4bW8wc1ozWHNSM0RlUmxG?=
- =?utf-8?B?STZIbHE1bTZ1S25ZYU1PYlVWMXlnekhlcVUzZzI4S1lQaWFzU2phdUxNbit0?=
- =?utf-8?Q?Z+Djgxqr2ShPzyAT2IN/TznnS?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3ad22718-8e8c-44c8-a437-08dbf5fbfa4a
-X-MS-Exchange-CrossTenant-AuthSource: DS7PR11MB6064.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Dec 2023 01:37:59.0620
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: tIEhM492bvfciIIkorMNz0k2hooP979vuMo3jjSg1qjeCyPHMcv5KdJgIY4WlwqWi+nkf7qDSrQ37RLhfOyuHg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR11MB7117
-X-Proofpoint-ORIG-GUID: R7fufq3-V6sCoCKMs55QvfpigqO81Drg
-X-Proofpoint-GUID: z_STnzYUN2ywXf5HZLrU9qbcf9f5gm9k
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: G5KfNKohkiIshD8WQVWgpkA5xtaefKgj
+X-Proofpoint-GUID: G5KfNKohkiIshD8WQVWgpkA5xtaefKgj
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2023-11-16_25,2023-11-16_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 phishscore=0
- priorityscore=1501 clxscore=1015 bulkscore=0 adultscore=0 spamscore=0
- suspectscore=0 lowpriorityscore=0 malwarescore=0 mlxlogscore=999
- impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2311290000 definitions=main-2312060012
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 3B6114O8001284
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 adultscore=0
+ malwarescore=0 bulkscore=0 spamscore=0 mlxlogscore=999 mlxscore=0
+ lowpriorityscore=0 impostorscore=0 priorityscore=1501 clxscore=1015
+ suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2311290000 definitions=main-2312060018
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 06 Dec 2023 01:38:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107232
+ <openembedded-devel@lists.openembedded.org>; Wed, 06 Dec 2023 02:24:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107233
 
-On 12/5/23 23:39, Yoann Congal wrote:
-> Hi,
->
-> Le 05/12/2023 =C3=A0 15:50, Kai Kang a =C3=A9crit=C2=A0:
->> From: Kai Kang <kai.kang@windriver.com>
->>
->> Add 'native' to BBCLASSEXTEND to provides python3-pyudev-native which =
-is
->> required by lvm2 when package config 'dbus' is enabled.
->>
->> Signed-off-by: Kai Kang <kai.kang@windriver.com>
->> ---
->>   meta-python/recipes-devtools/python/python3-pyudev_0.24.1.bb | 2 ++
->>   1 file changed, 2 insertions(+)
->>
->> diff --git a/meta-python/recipes-devtools/python/python3-pyudev_0.24.1=
-.bb b/meta-python/recipes-devtools/python/python3-pyudev_0.24.1.bb
->> index 6fcf346bc..8bc3afdb5 100644
->> --- a/meta-python/recipes-devtools/python/python3-pyudev_0.24.1.bb
->> +++ b/meta-python/recipes-devtools/python/python3-pyudev_0.24.1.bb
->> @@ -20,3 +20,5 @@ RDEPENDS:${PN} =3D "\
->>       ${PYTHON_PN}-fcntl \
->>       libudev \
->>   "
->> +
->> +BBCLASSEXTEND =3D "native"
->>
->>
-> On my setup, this fails with:
->   $ bitbake python3-pyudev-native
-> Loading cache: 100% |##################################################=
-#########################################################################=
-###############################| Time: 0:00:00
-> Loaded 4996 entries from dependency cache.
-> Parsing recipes: 100% |################################################=
-#########################################################################=
-###############################| Time: 0:00:59
-> Parsing of 3129 .bb files complete (98 cached, 3031 parsed). 4997 targe=
-ts, 140 skipped, 0 masked, 0 errors.
-> NOTE: Resolving any missing task queue dependencies
-> ERROR: Nothing RPROVIDES 'libudev-native' (but virtual:native:/.../yoct=
-o/poky/meta-openembedded/meta-python/recipes-devtools/python/python3-pyud=
-ev_0.24.1.bb RDEPENDS on or otherwise requires it)
-> NOTE: Runtime target 'libudev-native' is unbuildable, removing...
-> Missing or unbuildable dependency chain was: ['libudev-native']
-> ERROR: Required build target 'python3-pyudev-native' has no buildable p=
-roviders.
-> Missing or unbuildable dependency chain was: ['python3-pyudev-native', =
-'libudev-native']
->
-> FYI, the native support was removed precisely to avoid this error on th=
-e autobuilder.
-> See:
-> https://git.openembedded.org/meta-openembedded/commit/?id=3Dd4aa17dc436=
-beb96a804860bc6d18cf72283709e
->
-> In this case, I suppose, we would need to either add -native support fo=
-r libudev or somehow cut the dependency python3-pyudev->libudev.
->
-> Maybe this is something you have locally and not pushed yet?
+From: Kai Kang <kai.kang@windriver.com>
 
-Hi Yoann,
+Update lvm2 from 2.03.16 to 2.03.22.
 
-I am using 'systemd' as init manager and it RPROVIDES libudev-native. I=20
-haven't finger out the reason, but I'll try to remove this dependency cha=
-in.
+* remove 0002-Guard-use-of-mallinfo-with-__GLIBC__.patch which has done
+  in upstream already
+* add patch to check egrep & grep
+* rebase patches
+* add package config 'dbus' and fix errors about it
 
-$ bitbake libudev-native -e >be
-ERROR: Nothing PROVIDES 'libudev-native'. Close matches:
- =C2=A0 libdnet-native
-libev-native
- =C2=A0 libuv-native
- =C2=A0 systemd RPROVIDES libudev-native
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+v2:
+* remove check python modules in configure.ac and add them as runtime
+  dependencies in package config 'dbus' setting
 
-Regards,
-Kai
+ .../files/0001-configure.ac-check-egrep.patch | 33 +++++++++++
+ ...Guard-use-of-mallinfo-with-__GLIBC__.patch | 29 ----------
+ ...tweak-MODPROBE_CMD-for-cross-compile.patch | 10 ++--
+ ...per_2.03.16.bb => libdevmapper_2.03.22.bb} |  0
+ meta-oe/recipes-support/lvm2/lvm2.inc         |  4 +-
+ ...findmnt-bin-lsblk-bin-sort-not-found.patch | 12 ++--
+ ...1-lvmdbusd-create-dirs-for-lock-file.patch | 29 ++++++++++
+ .../lvm2/lvm2/tweak-for-lvmdbusd.patch        | 55 +++++++++++++++++++
+ .../lvm2/{lvm2_2.03.16.bb => lvm2_2.03.22.bb} | 19 ++++++-
+ 9 files changed, 147 insertions(+), 44 deletions(-)
+ create mode 100644 meta-oe/recipes-support/lvm2/files/0001-configure.ac-check-egrep.patch
+ delete mode 100644 meta-oe/recipes-support/lvm2/files/0002-Guard-use-of-mallinfo-with-__GLIBC__.patch
+ rename meta-oe/recipes-support/lvm2/{libdevmapper_2.03.16.bb => libdevmapper_2.03.22.bb} (100%)
+ create mode 100644 meta-oe/recipes-support/lvm2/lvm2/0001-lvmdbusd-create-dirs-for-lock-file.patch
+ create mode 100644 meta-oe/recipes-support/lvm2/lvm2/tweak-for-lvmdbusd.patch
+ rename meta-oe/recipes-support/lvm2/{lvm2_2.03.16.bb => lvm2_2.03.22.bb} (79%)
 
->
-> Regards,
-
-
---=20
-Kai Kang
-Wind River Linux
+diff --git a/meta-oe/recipes-support/lvm2/files/0001-configure.ac-check-egrep.patch b/meta-oe/recipes-support/lvm2/files/0001-configure.ac-check-egrep.patch
+new file mode 100644
+index 000000000..474c2f8ac
+--- /dev/null
++++ b/meta-oe/recipes-support/lvm2/files/0001-configure.ac-check-egrep.patch
+@@ -0,0 +1,33 @@
++configure.ac: check egrep
++
++The macro AC_HEADER_STDC which requires AC_PROG_EGREP has been removed
++from configure.ac, then it fails to substitute '@EGREP@':
++
++|     [GEN] command-lines-input.h
++| /bin/bash: line 2: @EGREP@: command not found
++|     [GEN] command-count.h
++
++Call AC_PROG_EGREP to fix the error.
++
++Upstream-Status: Submitted [https://gitlab.com/lvmteam/lvm2/-/merge_requests/4]
++
++Signed-off-by: Kai Kang <kai.kang@windriver.com>
++---
++ configure.ac | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/configure.ac b/configure.ac
++index 2e52498f9..d9462e22c 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -78,6 +78,7 @@ AC_PROG_LN_S
++ AC_PROG_MAKE_SET
++ AC_PROG_MKDIR_P
++ AC_PROG_RANLIB
+++AC_PROG_EGREP
++ AC_CHECK_TOOL([READELF], [readelf])
++ AC_CHECK_TOOL(AR, ar)
++ AC_PATH_TOOL(CFLOW_CMD, cflow)
++-- 
++2.34.1
++
+diff --git a/meta-oe/recipes-support/lvm2/files/0002-Guard-use-of-mallinfo-with-__GLIBC__.patch b/meta-oe/recipes-support/lvm2/files/0002-Guard-use-of-mallinfo-with-__GLIBC__.patch
+deleted file mode 100644
+index 1fbaf0c9a..000000000
+--- a/meta-oe/recipes-support/lvm2/files/0002-Guard-use-of-mallinfo-with-__GLIBC__.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-From 3ae9c0b607ec33fb07f32a41e9d28cc9068dd39a Mon Sep 17 00:00:00 2001
+-From: Dengke Du <dengke.du@windriver.com>
+-Date: Tue, 25 Oct 2016 11:52:44 +0000
+-Subject: [PATCH] Guard use of mallinfo() with __GLIBC__
+-
+-This API is glibc-only
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-Signed-off-by: Dengke Du <dengke.du@windriver.com>
+-
+----
+-Upstream-Status: Pending
+-
+- lib/mm/memlock.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-Index: LVM2.2.02.177/lib/mm/memlock.c
+-===================================================================
+---- LVM2.2.02.177.orig/lib/mm/memlock.c
+-+++ LVM2.2.02.177/lib/mm/memlock.c
+-@@ -151,7 +151,7 @@ static void _touch_memory(void *mem, siz
+- 
+- static void _allocate_memory(void)
+- {
+--#ifndef VALGRIND_POOL
+-+#if !defined(VALGRIND_POOL) && defined(__GLIBC__)
+- 	void *stack_mem;
+- 	struct rlimit limit;
+- 	int i, area = 0, missing = _size_malloc_tmp, max_areas = 32, hblks;
+diff --git a/meta-oe/recipes-support/lvm2/files/0004-tweak-MODPROBE_CMD-for-cross-compile.patch b/meta-oe/recipes-support/lvm2/files/0004-tweak-MODPROBE_CMD-for-cross-compile.patch
+index 517b9a5f2..ed9972a5f 100644
+--- a/meta-oe/recipes-support/lvm2/files/0004-tweak-MODPROBE_CMD-for-cross-compile.patch
++++ b/meta-oe/recipes-support/lvm2/files/0004-tweak-MODPROBE_CMD-for-cross-compile.patch
+@@ -21,18 +21,18 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+  1 file changed, 2 deletions(-)
+ 
+ diff --git a/configure.ac b/configure.ac
+-index e427708..aa374ea 100644
++index b43d8b9be..efe3062c1 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -1791,8 +1791,6 @@ if test "$BUILD_DMFILEMAPD" = yes; then
+- fi
++@@ -1646,8 +1646,6 @@ AS_IF([test "$BUILD_DMFILEMAPD" = "yes"], [
++ ])
+  
+  ################################################################################
+ -AC_PATH_TOOL(MODPROBE_CMD, modprobe, [], [$PATH_SBIN])
+ -
+- if test -n "$MODPROBE_CMD"; then
++ AS_IF([test -n "$MODPROBE_CMD"], [
+  	AC_DEFINE_UNQUOTED([MODPROBE_CMD], ["$MODPROBE_CMD"], [The path to 'modprobe', if available.])
+- fi
++ ])
+ -- 
+ 2.7.4
+ 
+diff --git a/meta-oe/recipes-support/lvm2/libdevmapper_2.03.16.bb b/meta-oe/recipes-support/lvm2/libdevmapper_2.03.22.bb
+similarity index 100%
+rename from meta-oe/recipes-support/lvm2/libdevmapper_2.03.16.bb
+rename to meta-oe/recipes-support/lvm2/libdevmapper_2.03.22.bb
+diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
+index 277e76f0d..c96989bfa 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2.inc
++++ b/meta-oe/recipes-support/lvm2/lvm2.inc
+@@ -10,15 +10,15 @@ DEPENDS += "libaio"
+ SRC_URI = "git://sourceware.org/git/lvm2.git;branch=main \
+            file://lvm.conf \
+            file://0001-implement-libc-specific-reopen_stream.patch \
+-           file://0002-Guard-use-of-mallinfo-with-__GLIBC__.patch \
+            file://0004-tweak-MODPROBE_CMD-for-cross-compile.patch \
+            file://0001-Avoid-bashisms-in-init-scripts.patch \
+            file://0005-do-not-build-manual.patch \
+            file://0006-start-lvm2-monitor.service-after-tmp.mount.patch \
+            file://reproducible-build.patch \
++           file://0001-configure.ac-check-egrep.patch \
+            "
+ 
+-SRCREV = "6d1e894a867681af7a811ed63bc435f3aa55fec8"
++SRCREV = "016e469caf856f1eb8dde39df0d1aa2e74225aed"
+ S = "${WORKDIR}/git"
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\_\d+)+)"
+diff --git a/meta-oe/recipes-support/lvm2/lvm2/0001-fix-command-bin-findmnt-bin-lsblk-bin-sort-not-found.patch b/meta-oe/recipes-support/lvm2/lvm2/0001-fix-command-bin-findmnt-bin-lsblk-bin-sort-not-found.patch
+index 34e0620a1..c0cf836ce 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2/0001-fix-command-bin-findmnt-bin-lsblk-bin-sort-not-found.patch
++++ b/meta-oe/recipes-support/lvm2/lvm2/0001-fix-command-bin-findmnt-bin-lsblk-bin-sort-not-found.patch
+@@ -15,10 +15,10 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+  2 files changed, 7 insertions(+), 3 deletions(-)
+ 
+ diff --git a/configure.ac b/configure.ac
+-index 4811d4a3d..137b31a82 100644
++index 991a0cf85..e59c82472 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+-@@ -1611,6 +1611,8 @@ fi
++@@ -1660,6 +1660,8 @@ AS_IF([test -n "$MODPROBE_CMD"], [
+  
+  SYSCONFDIR="$(eval echo $(eval echo $sysconfdir))"
+  
+@@ -27,10 +27,10 @@ index 4811d4a3d..137b31a82 100644
+  SBINDIR="$(eval echo $(eval echo $sbindir))"
+  LVM_PATH="$SBINDIR/lvm"
+  AC_DEFINE_UNQUOTED(LVM_PATH, ["$LVM_PATH"], [Path to lvm binary.])
+-@@ -1829,6 +1831,7 @@ AC_SUBST(SACKPT_CFLAGS)
+- AC_SUBST(SACKPT_LIBS)
+- AC_SUBST(SALCK_CFLAGS)
+- AC_SUBST(SALCK_LIBS)
++@@ -1886,6 +1888,7 @@ AC_SUBST(PYTHON2DIR)
++ AC_SUBST(PYTHON3)
++ AC_SUBST(PYTHON3DIR)
++ AC_SUBST(RT_LIBS)
+ +AC_SUBST(BINDIR)
+  AC_SUBST(SBINDIR)
+  AC_SUBST(SELINUX_LIBS)
+diff --git a/meta-oe/recipes-support/lvm2/lvm2/0001-lvmdbusd-create-dirs-for-lock-file.patch b/meta-oe/recipes-support/lvm2/lvm2/0001-lvmdbusd-create-dirs-for-lock-file.patch
+new file mode 100644
+index 000000000..f6b293553
+--- /dev/null
++++ b/meta-oe/recipes-support/lvm2/lvm2/0001-lvmdbusd-create-dirs-for-lock-file.patch
+@@ -0,0 +1,29 @@
++lvmdbusd: create dirs for lock file
++
++Create leading dirs for lvmdbusd lock file, otherwise it fails to start:
++
++| systemd[1]: Starting LVM2 D-Bus service...
++| lvmdbusd[1602]: [1602]: Error during creation of lock file(/var/lock/lvm/lvmdbusd): errno(2), exiting!
++
++Upstream-Status: Submitted [https://gitlab.com/lvmteam/lvm2/-/merge_requests/7]
++
++Signed-off-by: Kai Kang <kai.kang@windriver.com>
++---
++ daemons/lvmdbusd/utils.py | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/daemons/lvmdbusd/utils.py b/daemons/lvmdbusd/utils.py
++index d479175f6..830648659 100644
++--- a/daemons/lvmdbusd/utils.py
+++++ b/daemons/lvmdbusd/utils.py
++@@ -778,6 +778,7 @@ class LockFile(object):
++ 
++ 	def __enter__(self):
++ 		try:
+++			os.makedirs(os.path.dirname(self.lock_file))
++ 			self.fd = os.open(self.lock_file, os.O_CREAT | os.O_RDWR, stat.S_IRUSR | stat.S_IWUSR)
++ 
++ 			# Get and set the close on exec and lock the file
++-- 
++2.34.1
++
+diff --git a/meta-oe/recipes-support/lvm2/lvm2/tweak-for-lvmdbusd.patch b/meta-oe/recipes-support/lvm2/lvm2/tweak-for-lvmdbusd.patch
+new file mode 100644
+index 000000000..3b85a17b6
+--- /dev/null
++++ b/meta-oe/recipes-support/lvm2/lvm2/tweak-for-lvmdbusd.patch
+@@ -0,0 +1,55 @@
++Not check python modules pyudev and dbus during configure that they are runtime
++dependencies. Deal with them in the package config setting in the recipe.
++
++Remove $(DESTDIR) from install destination that it is not suitable for oe. And
++no generate python cache files too.
++
++Upstream-Status: Pending [oe specific]
++
++Signed-off-by: Kai Kang <kai.kang@windriver.com>
++---
++ configure.ac                 | 4 ++--
++ daemons/lvmdbusd/Makefile.in | 6 ++----
++ 2 files changed, 4 insertions(+), 6 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index ee088b3f5..b94ef4e56 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -1262,8 +1262,8 @@ AS_IF([test "$BUILD_LVMDBUSD" = "yes"], [
++ 	AS_IF([test "$PYTHON3_BINDINGS" = "yes"], [PYTHON_BINDINGS="yes"])
++ 
++ 	# To get this macro, install autoconf-archive package then run autoreconf
++-	AX_PYTHON_MODULE([pyudev], [Required], python3)
++-	AX_PYTHON_MODULE([dbus], [Required], python3)
+++	# AX_PYTHON_MODULE([pyudev], [Required], python3)
+++	# AX_PYTHON_MODULE([dbus], [Required], python3)
++ ])
++ 
++ ################################################################################
++diff --git a/daemons/lvmdbusd/Makefile.in b/daemons/lvmdbusd/Makefile.in
++index 9c2629279..a79daabf7 100644
++--- a/daemons/lvmdbusd/Makefile.in
+++++ b/daemons/lvmdbusd/Makefile.in
++@@ -16,7 +16,7 @@ top_srcdir = @top_srcdir@
++ top_builddir = @top_builddir@
++ 
++ lvmdbuspydir = $(python3dir)/lvmdbusd
++-lvmdbusdir = $(DESTDIR)$(lvmdbuspydir)
+++lvmdbusdir = $(lvmdbuspydir)
++ 
++ LVMDBUS_SRCDIR_FILES = \
++ 	automatedproperties.py \
++@@ -55,11 +55,9 @@ install_lvmdbusd: $(LVMDBUSD)
++ 	@echo "    [INSTALL] $<"
++ 	$(Q) $(INSTALL_DIR) $(sbindir)
++ 	$(Q) $(INSTALL_SCRIPT) $(LVMDBUSD) $(sbindir)
++-	$(Q) $(INSTALL_DIR) $(lvmdbusdir) $(lvmdbusdir)/__pycache__
+++	$(Q) $(INSTALL_DIR) $(lvmdbusdir)
++ 	$(Q) (cd $(srcdir); $(INSTALL_DATA) $(LVMDBUS_SRCDIR_FILES) $(lvmdbusdir))
++ 	$(Q) $(INSTALL_DATA) $(LVMDBUS_BUILDDIR_FILES) $(lvmdbusdir)
++-	$(Q) PYTHON=$(PYTHON3) $(PYCOMPILE) --destdir "$(DESTDIR)" --basedir "$(lvmdbuspydir)" $(LVMDBUS_SRCDIR_FILES) $(LVMDBUS_BUILDDIR_FILES)
++-	$(Q) $(CHMOD) 444 $(lvmdbusdir)/__pycache__/*.py[co]
++ 
++ install_lvm2: install_lvmdbusd
++ 
+diff --git a/meta-oe/recipes-support/lvm2/lvm2_2.03.16.bb b/meta-oe/recipes-support/lvm2/lvm2_2.03.22.bb
+similarity index 79%
+rename from meta-oe/recipes-support/lvm2/lvm2_2.03.16.bb
+rename to meta-oe/recipes-support/lvm2/lvm2_2.03.22.bb
+index 6a6cdc7ce..c675d3ded 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2_2.03.16.bb
++++ b/meta-oe/recipes-support/lvm2/lvm2_2.03.22.bb
+@@ -2,11 +2,13 @@ require lvm2.inc
+ 
+ SRC_URI += " \
+             file://0001-fix-command-bin-findmnt-bin-lsblk-bin-sort-not-found.patch \
++            file://tweak-for-lvmdbusd.patch \
++            file://0001-lvmdbusd-create-dirs-for-lock-file.patch \
+            "
+ 
+ DEPENDS += "autoconf-archive-native"
+ 
+-inherit multilib_script
++inherit multilib_script python3native
+ 
+ MULTILIB_SCRIPTS = "${PN}:${sysconfdir}/lvm/lvm.conf"
+ 
+@@ -28,13 +30,22 @@ do_install:append() {
+             rm -rf ${D}${sysconfdir}/rc.d
+         fi
+     fi
++
++    # following files only exist when package config `dbus` enabled
++    sed -i -e '1s,#!.*python.*,#!${USRBINPATH}/env python3,' \
++        ${D}${sbindir}/lvmdbusd \
++        ${D}${PYTHON_SITEPACKAGES_DIR}/lvmdbusd/lvmdb.py \
++        ${D}${PYTHON_SITEPACKAGES_DIR}/lvmdbusd/lvm_shell_proxy.py \
++    || true
+ }
+ 
+ PACKAGE_BEFORE_PN = "${PN}-scripts ${PN}-udevrules"
+ 
+ SYSTEMD_PACKAGES = "${PN}"
+ SYSTEMD_SERVICE:${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'dmeventd', 'lvm2-monitor.service dm-event.socket dm-event.service', '', d)} \
+-                         blk-availability.service"
++                         ${@bb.utils.contains('PACKAGECONFIG', 'dbus', 'lvm2-lvmdbusd.service', '', d)} \
++                         blk-availability.service \
++                         "
+ SYSTEMD_AUTO_ENABLE = "disable"
+ 
+ TARGET_CC_ARCH += "${LDFLAGS}"
+@@ -45,6 +56,8 @@ DEPENDS += "util-linux"
+ LVM2_PACKAGECONFIG:append:class-target = " \
+     udev \
+ "
++
++PACKAGECONFIG[dbus] = "--enable-dbus-service,--disable-dbus-service,,python3-dbus python3-pyudev"
+ PACKAGECONFIG[udev] = "--enable-udev_sync --enable-udev_rules --with-udevdir=${nonarch_base_libdir}/udev/rules.d,--disable-udev_sync --disable-udev_rules,udev,${PN}-udevrules"
+ 
+ PACKAGES =+ "libdevmapper"
+@@ -57,6 +70,8 @@ FILES:libdevmapper = " \
+ FILES:${PN} += " \
+     ${libdir}/device-mapper/*.so \
+     ${systemd_system_unitdir}/lvm2-pvscan@.service \
++    ${PYTHON_SITEPACKAGES_DIR}/lvmdbusd \
++    ${datadir}/dbus-1/system-services/com.redhat.lvmdbus1.service \
+ "
+ 
+ FILES:${PN}-scripts = " \
+-- 
+2.34.1
 
 
