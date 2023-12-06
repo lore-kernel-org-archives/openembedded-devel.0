@@ -1,156 +1,126 @@
-Return-Path: <frederic.martinsons@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CCED0C4167B
-	for <webhook@archiver.kernel.org>; Wed,  6 Dec 2023 18:26:59 +0000 (UTC)
-Received: from mail-qv1-f52.google.com (mail-qv1-f52.google.com [209.85.219.52])
- by mx.groups.io with SMTP id smtpd.web11.40514.1701887215594853362
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F1529C10DCE
+	for <webhook@archiver.kernel.org>; Wed,  6 Dec 2023 19:01:19 +0000 (UTC)
+Received: from mailout12.t-online.de (mailout12.t-online.de [194.25.134.22])
+ by mx.groups.io with SMTP id smtpd.web10.41748.1701889276808244532
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Dec 2023 10:26:55 -0800
+ Wed, 06 Dec 2023 11:01:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Wm1M7HBb;
- spf=pass (domain: gmail.com, ip: 209.85.219.52, mailfrom: frederic.martinsons@gmail.com)
-Received: by mail-qv1-f52.google.com with SMTP id 6a1803df08f44-67a894ccb4eso679016d6.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Dec 2023 10:26:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1701887214; x=1702492014; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=vQ/iCwPSHBrYFBmHtpgH97ftUpbKL9NUqpJKEVaT9A4=;
-        b=Wm1M7HBbRzs/dSqx/Gf04aJwr7dOu4Cz2mjUD49sLBkYvV3401XPtK9USKFM9xuSA4
-         zwClt4yhasR/9LCMkIzjmYDdZNio9mw2xWQGXnq8qnQQ0E5pGahaZntMbrCfwOvuufmn
-         wne1J1IeSRUcK6GtQQqXRWasDR8LhMXFJv2dtDGNiKXllnQ9pbAZPAV2BZmnSps3YW79
-         nURRUJwRCLXNVqOoYlqQTh+ZuM9nOU72UfFg9A0rqXbarywvDuo+i1b6Iy9Tqqf2FzBe
-         q78ghPcNk6txez3q15ayuQxWRwijP+ScJsfwxMy48piuSAf5EB8tt8xSYSZm1/KqbAAb
-         ypLw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701887214; x=1702492014;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=vQ/iCwPSHBrYFBmHtpgH97ftUpbKL9NUqpJKEVaT9A4=;
-        b=ZTM1godtr0DucTAhdLLe9tIi09OdmVVdn1e25XT0lxwMEkzkS9pSuZ8hDFfmfP7bGk
-         VTqFyA+mgA4+hJUgSjjpgm1vdIObH1dYb0mAaYyvLKYqW50cMVXDVUaEDV7gE2BIzahS
-         9SdwwxTwa4PIWfsv46B5MgefndD5HGXYUvuxjaPdBq1WQIKkftchGEGHb1XpjgtulvIo
-         pHuwjnir5cRyJOGNb6WLH3rbKRz95c8PtHzgnUrNlKInlDM2RUkbORw/u70NyeWmDGpx
-         27K8VRDsgAX85U9TwcOi60YqVHIzKH8FEndd0ssmdQwNJGDSXbW+K7LVHHMXKoZvZHqx
-         nUDQ==
-X-Gm-Message-State: AOJu0YxEm1kXX4JJprmTR7hvSjwJ5sbx+q71Xzif62Gno1Mmt+m131VX
-	e4xkzpqb8WrDmuZ8zGhGlEzCYMEbhG16vkcfcK8za5y7
-X-Google-Smtp-Source: AGHT+IEiw7Ol4xpBi7XVAmUJe2C+If8qPszTzmypm1PRLgM4iMmwBKQZxOPDm2jyi0/vC6JklwEVmPAIUDQune9hpuE=
-X-Received: by 2002:a0c:e892:0:b0:67a:a721:830f with SMTP id
- b18-20020a0ce892000000b0067aa721830fmr1195638qvo.105.1701887214631; Wed, 06
- Dec 2023 10:26:54 -0800 (PST)
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.22, mailfrom: f_l_k@t-online.de)
+Received: from fwd81.aul.t-online.de (fwd81.aul.t-online.de [10.223.144.107])
+	by mailout12.t-online.de (Postfix) with SMTP id 958F719366
+	for <openembedded-devel@lists.openembedded.org>; Wed,  6 Dec 2023 20:00:30 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.154.172.74]) by fwd81.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1rAx8I-057sXJ0; Wed, 6 Dec 2023 20:00:30 +0100
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-multimedia][PATCH] wireplumber: update 0.4.15 -> 0.4.17
+Date: Wed,  6 Dec 2023 20:01:08 +0100
+Message-ID: <20231206190108.60409-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.42.1
 MIME-Version: 1.0
-References: <CA+cAkeqg51T1u1DuPM_5vx+2gAn-6KxWYfY0GYuXdqvM_mbF4A@mail.gmail.com>
- <CAMKF1soZHS40B7x+YvNF_EvnCk=E1+tcSrmEMXY1MVOUgd6CEw@mail.gmail.com>
-In-Reply-To: <CAMKF1soZHS40B7x+YvNF_EvnCk=E1+tcSrmEMXY1MVOUgd6CEw@mail.gmail.com>
-From: =?UTF-8?B?RnLDqWTDqXJpYyBNYXJ0aW5zb25z?= <frederic.martinsons@gmail.com>
-Date: Wed, 6 Dec 2023 19:26:43 +0100
-Message-ID: <CA+cAkerDPsrxPe0GeG1J8yZoCidtWdg8Z3toMUVXp5=sjEEVPA@mail.gmail.com>
-Subject: Re: Crash cross canadian?
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000e04332060bdb7e11"
+X-TOI-EXPURGATEID: 150726::1701889230-FE303990-671A2B99/0/0 CLEAN NORMAL
+X-TOI-MSGID: 79d79772-ac0e-47c4-bba8-c1518edd4f07
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 06 Dec 2023 18:26:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107263
+ <openembedded-devel@lists.openembedded.org>; Wed, 06 Dec 2023 19:01:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107264
 
---000000000000e04332060bdb7e11
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+WirePlumber 0.4.17
 
-Ok great, I'll rebase these on master on the coming days. The problem is
-that my hardware (pretty specifics) just have been upgraded with Kirkstone
-and since I will not be able to test those on master branch. At least I can
-make it compile, have you some advices to non regressed crash utility
-(without involving real target test)?
+Fixes:
+Fixed a reference counting issue in the object managers that could cause
+crashes due to memory corruption (#534)
+Fixed an issue with filters linking to wrong targets, often with two sets
+of links (#536)
+Fixed a crash in the endpoints policy that would show up when log message=
+s
+were enabled at level 3 or higher
 
-Le mer. 6 d=C3=A9c. 2023, 19:11, Khem Raj <raj.khem@gmail.com> a =C3=A9crit=
- :
+WirePlumber 0.4.16
 
->
->
-> On Wed, Dec 6, 2023 at 10:02=E2=80=AFAM Fr=C3=A9d=C3=A9ric Martinsons <
-> frederic.martinsons@gmail.com> wrote:
->
->> Hello list,
->>
->> Since some times (back to warrior branch I think), I have in my custom
->> layer a cross canadian version from the crash tool, I personnally used i=
-t
->> for analysing vmcore from an arm target (cortex a53) offline within the =
-sdk.
->>
->> I recently upgraded to kirsktone and the update of this version was a
->> little tricky (must have played with LDFLAGS, gdb target build and host =
-and
->> so on...)
->>
->> I finally managed to get crash working for all my hardware (both include
->> aarch64 and x86-64 arch).
->>
->> I would like to know if it would be acceptable to have a cross canadian
->> arch in meta-openembedded (from what I see, there is only native and tar=
-get
->> flavor)?
->>
->
-> It=E2=80=99s fine. I guess there were no such recipe needing it so far. P=
-lease
-> submit your patches
->
->
->> If you think it is accurate, I'll work to push some patches against
->> master.
->>
->> Please tell me, thanks!
->>
->
+Additions:
+Added a new "sm-objects" script that allows loading objects on demand
+via metadata entries that describe the object to load; this can be used t=
+o
+load pipewire modules, such as filters or network sources/sinks, on deman=
+d
+Added a mechanism to override device profile priorities in the configurat=
+ion,
+mainly as a way to re-prioritize Bluetooth codecs, but this also can be u=
+sed
+for other devices
+Added a mechanism in the endpoints policy to allow connecting filters
+between a certain endpoint's virtual sink and the device sink; this is
+specifically intended to allow plugging a filter-chain to act as equalize=
+r
+on the Multimedia endpoint
+Added wp_core_get_own_bound_id() method in WpCore
 
---000000000000e04332060bdb7e11
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Changes:
+PipeWire 0.3.68 is now required
+policy-dsp now has the ability to hide hardware nodes behind the DSP sink
+to prevent hardware misuse or damage
+JSON parsing in Lua now allows keys inside objects to be without quotes
+Added optional argument in the Lua JSON parse() method to limit recursion=
+s,
+making it possible to partially parse a JSON object
+It is now possible to pass nil in Lua object constructors that expect an
+optional properties object; previously, omitting the argument was the onl=
+y
+way to skip the properties
+The endpoints policy now marks the endpoint nodes as "passive" instead of
+marking their links, adjusting for the behavior change in PipeWire 0.3.68
+Removed the "passive" property from si-standard-link, since only nodes ar=
+e
+marked as passive now
 
-<div dir=3D"auto">Ok great, I&#39;ll rebase these on master on the coming d=
-ays. The problem is that my hardware (pretty specifics) just have been upgr=
-aded with Kirkstone and since I will not be able to test those on master br=
-anch. At least I can make it compile, have you some advices to non regresse=
-d crash utility (without involving real target test)?=C2=A0</div><br><div c=
-lass=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">Le mer. 6 d=C3=
-=A9c. 2023, 19:11, Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com">raj.k=
-hem@gmail.com</a>&gt; a =C3=A9crit=C2=A0:<br></div><blockquote class=3D"gma=
-il_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-lef=
-t:1ex"><div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" =
-class=3D"gmail_attr">On Wed, Dec 6, 2023 at 10:02=E2=80=AFAM Fr=C3=A9d=C3=
-=A9ric Martinsons &lt;<a href=3D"mailto:frederic.martinsons@gmail.com" targ=
-et=3D"_blank" rel=3D"noreferrer">frederic.martinsons@gmail.com</a>&gt; wrot=
-e:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;bo=
-rder-left:1px #ccc solid;padding-left:1ex"><div dir=3D"auto">Hello list,<di=
-v dir=3D"auto"><br></div><div dir=3D"auto">Since some times (back to warrio=
-r branch I think), I have in my custom layer a cross canadian version from =
-the crash tool, I personnally used it for analysing vmcore from an arm targ=
-et (cortex a53) offline within the sdk.</div><div dir=3D"auto"><br></div><d=
-iv dir=3D"auto">I recently upgraded to kirsktone and the update of this ver=
-sion was a little tricky (must have played with LDFLAGS, gdb target build a=
-nd host and so on...)=C2=A0</div><div dir=3D"auto"><br></div><div dir=3D"au=
-to">I finally managed to get crash working for all my hardware (both includ=
-e aarch64 and x86-64 arch).</div><div dir=3D"auto"><br></div><div dir=3D"au=
-to">I would like to know if it would be acceptable to have a cross canadian=
- arch in meta-openembedded (from what I see, there is only native and targe=
-t flavor)?=C2=A0</div><div dir=3D"auto"></div></div></blockquote><div dir=
-=3D"auto"><br></div><div dir=3D"auto">It=E2=80=99s fine. I guess there were=
- no such recipe needing it so far. Please submit your patches</div><div dir=
-=3D"auto"><br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0=
- .8ex;border-left:1px #ccc solid;padding-left:1ex"><div dir=3D"auto"><div d=
-ir=3D"auto"><br></div><div dir=3D"auto">If you think it is accurate, I&#39;=
-ll work to push some patches against master.</div><div dir=3D"auto"><br></d=
-iv><div dir=3D"auto">Please tell me, thanks!=C2=A0</div></div>
-</blockquote></div></div>
-</blockquote></div>
+Fixes:
+Fixed the wpctl clear-default command to completely clear all the
+default nodes state instead of only the last set default
+Reduced the amount of globals that initially match the interest in the
+object manager
+Used an idle callback instead of pw_core_sync() in the object manager to
+expose tmp globals
 
---000000000000e04332060bdb7e11--
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ .../{wireplumber_0.4.15.bb =3D> wireplumber_0.4.17.bb}            | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-multimedia/recipes-multimedia/wireplumber/{wireplumber_0.4.1=
+5.bb =3D> wireplumber_0.4.17.bb} (99%)
+
+diff --git a/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0=
+.4.15.bb b/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.4=
+.17.bb
+similarity index 99%
+rename from meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.=
+4.15.bb
+rename to meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.4.=
+17.bb
+index 5a180d1e0..3959cd7f8 100644
+--- a/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.4.15.b=
+b
++++ b/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.4.17.b=
+b
+@@ -10,7 +10,7 @@ DEPENDS =3D "glib-2.0 glib-2.0-native lua pipewire \
+     ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data"=
+, "python3-native python3-lxml-native doxygen-native", "", d)} \
+ "
+=20
+-SRCREV =3D "d67b48e595cb4612fd7fd47f97df6b8883ef7f60"
++SRCREV =3D "d3eb77b292655cef333a8f4cab4e861415bc37c2"
+ SRC_URI =3D " \
+     git://gitlab.freedesktop.org/pipewire/wireplumber.git;branch=3Dmaste=
+r;protocol=3Dhttps \
+     file://90-OE-disable-session-dbus-dependent-features.lua \
+--=20
+2.42.1
+
 
