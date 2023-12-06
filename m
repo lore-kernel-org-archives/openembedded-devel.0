@@ -1,327 +1,237 @@
-Return-Path: <patrick.wicki@subset.ch>
+Return-Path: <kai.kang@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AF430C4167B
-	for <webhook@archiver.kernel.org>; Wed,  6 Dec 2023 00:12:44 +0000 (UTC)
-Received: from st43p00im-zteg10061901.me.com (st43p00im-zteg10061901.me.com [17.58.63.168])
- by mx.groups.io with SMTP id smtpd.web11.17211.1701821558218962113
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5F40AC4167B
+	for <webhook@archiver.kernel.org>; Wed,  6 Dec 2023 01:38:04 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.19013.1701826684027602363
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Dec 2023 16:12:39 -0800
+ Tue, 05 Dec 2023 17:38:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@subset.ch header.s=sig1 header.b=LCR0JJrU;
- spf=pass (domain: subset.ch, ip: 17.58.63.168, mailfrom: patrick.wicki@subset.ch)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=subset.ch; s=sig1;
-	t=1701821557; bh=YGHAFzIJScmy2VCPMeoeMlkb4ukA8esCGig7JB4ZBTs=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=LCR0JJrUFWPzECwi0cGSccwFwOS+9SEZ31wgUUVd/yk7z/Hn0Fan4v9YNE5gG8KZK
-	 rdXjBnez0cBTRwja9+PAKM76JBV69kZsOAjEH8zyv3cTcBkgdCbVAazwXq+wCgJDuG
-	 HnRnvtmAILKi89f25CSG3ayNYJ9GH2Yb41+4M1ZvqI9A48FqUaVCy3sZdTLUc772b0
-	 epLpDJXgqTfd7wY+Fp9HYObnXOE7p0Zo8dSGE85OLVXjC6iAtak6ZTjZjOxiuRwgfJ
-	 cACLrvyiLKNhBoRE+slIAiTWLr1WZCxVP26ISF5XJlp+VoHC3QlTwKWD5ab65cBsOy
-	 rwYlHYyBtrrmQ==
-Received: from localhost.localdomain (st43p00im-dlb-asmtp-mailmevip.me.com [17.42.251.41])
-	by st43p00im-zteg10061901.me.com (Postfix) with ESMTPSA id 79DA554022D;
-	Wed,  6 Dec 2023 00:12:36 +0000 (UTC)
-From: patrick.wicki@subset.ch
-To: openembedded-devel@lists.openembedded.org
-Cc: Patrick Wicki <patrick.wicki@siemens.com>
-Subject: [oe][meta-oe][PATCH] poco: upgrade 1.12.4 -> 1.12.5p2
-Date: Wed,  6 Dec 2023 01:12:25 +0100
-Message-ID: <6f09a824716c262caac9c85f0f33d80eb2032367.1701821246.git.patrick.wicki@siemens.com>
-X-Mailer: git-send-email 2.43.0
+ dkim=fail reason="dkim: body hash did not verify" header.i=@windriver.com header.s=PPS06212021 header.b=MOJCtN9X;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=07047bf378=kai.kang@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 3B6114O8001284
+	for <openembedded-devel@lists.openembedded.org>; Tue, 5 Dec 2023 17:38:03 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=message-id:date:subject:to:references:from:in-reply-to
+	:content-type:content-transfer-encoding:mime-version; s=
+	PPS06212021; bh=aKIlehEmEWM66u5OhWE9N5HR2NinFS+I/DcP0chOlQM=; b=
+	MOJCtN9XxmjvXRoeOZkeFG/FlIptyrRNfdNm974DRcfY4PNdt5lW8F4K8EkTrtyv
+	ToumxB+FeXtbV/SbTrRMGpYlZUHw/zqxgEfhqZ83B3nFL95E9hNb/WSKs1vScDch
+	+pZ2VmTdW1prpSzrpGg0E1NDQeyAv6KT55qhjZSRADd4L7gxkYKDoyUqe8Hf96/3
+	f6eOKqhi3mDmjc4MpZEUUXbjkmEJqoT6v25k/glfl4PZQABj986laKZuT7/ylPXP
+	cl3b1dT8cKxRqZ2iEAtaqaClXrZNlxn4K1g3oOCbIM7JdFgmBOpTY+VEHWN/PeBU
+	yLYjr0wEeRjCuYcIwwGtsQ==
+Received: from pps.reinject (localhost [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3utd2r037b-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 05 Dec 2023 17:38:03 -0800 (PST)
+Received: from m0250810.ppops.net (m0250810.ppops.net [127.0.0.1])
+	by pps.reinject (8.17.1.24/8.17.1.24) with ESMTP id 3B61c2pX009938;
+	Tue, 5 Dec 2023 17:38:02 -0800
+Received: from nam11-co1-obe.outbound.protection.outlook.com (mail-co1nam11lp2169.outbound.protection.outlook.com [104.47.56.169])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3utd2r037a-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Tue, 05 Dec 2023 17:38:02 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=ByhpprBSMfc2gvc4+P09zNBH8whgzBgOSHExbFKEc8Q9rXUoyAK+L6vyH6P5Puk5/otA4TOrMgluwx7S4WIGy3/RgPrJyyEr0RxDUyzYxPK7nHCDdwjgxai8wd3umsLHkV57FhDU6dNHF2W7rm2EsAHhDqLKSG+NL1FJg2woixk9d74UW7JQ44qAQEWVXEHobjgcJYi5pqGJlm0Q2ZhK+IlnOc65DNET9h4a3bG5O2J6OSXvY9vAwyQImB/ORyJNv+PV5G9wJupj/Vk8xcxlkC5Oeh1yXnuRMg5edpBWZnzw5xAokfy8NoQSbxJTJsNcKhp2RLF+/XaJj+NG9NTaGA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=aKIlehEmEWM66u5OhWE9N5HR2NinFS+I/DcP0chOlQM=;
+ b=bXHM4JRER/o01TbruCgCvVV9iS5/MbJUDko/rq6CvNsHaZtABqU73SdbSERTM6856eQVHUiqO4Un8QfjZDH0NBjb+7B0NZUMpjtdSSKJFoOoluRgCg5TPQExqEIlHrlYdJcwc6HvrlByMnXcrLittyxdlJDZAb9h9aPRWD9ygBWCaY7OOy6GhY3cIKFbQv8v1lly0XlEdOApuuBhCeZmxJsCPAoIEEYdJLj152z/cnyyFanxMWs09ofVRNypvsCKikUBXvNVO6IF2RP+4jNTLIo0FJRJD9gLIDC9ypbF6nyxttq6qnghKXfXfSJhbUWso37JLzvjIzTwcjStdZQuvg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from DS7PR11MB6064.namprd11.prod.outlook.com (2603:10b6:8:77::14) by
+ PH8PR11MB7117.namprd11.prod.outlook.com (2603:10b6:510:217::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7046.22; Wed, 6 Dec
+ 2023 01:37:59 +0000
+Received: from DS7PR11MB6064.namprd11.prod.outlook.com
+ ([fe80::dca9:26e2:b46:2372]) by DS7PR11MB6064.namprd11.prod.outlook.com
+ ([fe80::dca9:26e2:b46:2372%3]) with mapi id 15.20.7046.034; Wed, 6 Dec 2023
+ 01:37:59 +0000
+Message-ID: <809220be-f0c6-c8f4-2d8e-20e67145397e@windriver.com>
+Date: Wed, 6 Dec 2023 09:37:47 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.2
+Subject: Re: [oe] [meta-python][PATCH 1/2] python3-pyudev: provide native
+Content-Language: en-US
+To: Yoann Congal <yoann.congal@smile.fr>,
+        Kai Kang <kai.kang@eng.windriver.com>,
+        openembedded-devel@lists.openembedded.org
+References: <20231205145032.1116030-1-kai.kang@windriver.com>
+ <f506e187-e533-416a-b4d7-4fce48ffc494@smile.fr>
+From: Kai <kai.kang@windriver.com>
+In-Reply-To: <f506e187-e533-416a-b4d7-4fce48ffc494@smile.fr>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+X-ClientProxiedBy: TYCP286CA0136.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:400:31b::20) To DS7PR11MB6064.namprd11.prod.outlook.com
+ (2603:10b6:8:77::14)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-X-Proofpoint-ORIG-GUID: ueh6nw_CjpW9x5ZtD77YE2TcbgnWztCX
-X-Proofpoint-GUID: ueh6nw_CjpW9x5ZtD77YE2TcbgnWztCX
-X-Proofpoint-Virus-Version: =?UTF-8?Q?vendor=3Dfsecure_engine=3D1.1.170-22c6f66c430a71ce266a39bfe25bc?=
- =?UTF-8?Q?2903e8d5c8f:6.0.573,18.0.957,17.11.170.22.0000000_definitions?=
- =?UTF-8?Q?=3D2023-05-18=5F15:2023-05-17=5F02,2023-05-18=5F15,2023-02-09?=
- =?UTF-8?Q?=5F01_signatures=3D0?=
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0 spamscore=0
- mlxlogscore=999 adultscore=0 clxscore=1030 bulkscore=0 suspectscore=0
- mlxscore=0 phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2308100000 definitions=main-2312050188
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS7PR11MB6064:EE_|PH8PR11MB7117:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3ad22718-8e8c-44c8-a437-08dbf5fbfa4a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	eOhOoPVJzJN8acbFk6/iqetqqrMQ86SzfRwIA4+3wfAV0VOv+v5S4IqQ6kRY2pVv2RqlPWYQO0YnWqWahQt3Wu3oNCX838/Xj24+8mymBYaZB6k+YpyY4lznCkbpkWfS8eMklYEiUIm4gPhqjAWefYRQSGvxy7wQrn9wNnho4VWXo+SfTx/rV4FDjly08qdoBYiI6/iIDKOQBt1OHhtiPlARwPCKqOo99ezlkgcJdERYwOdpWx13RsKkbVaZbkeu13Bvcm3/L/Q9wnikXDlVzeoEknl5E0tTDxHi4W++WhwvVmBga2wH+nOWVBnmPhYfKXggDPkVT8WH/gKIlZKPRVxSkZQ88Ete874FcL35nmYWWa4PrldHOHT2IwQVtNzeu3a1f85uzQVQUMwoARuoWwDgRBDeHKBpgAnENeX/zG/F3NqaFntyPD2tzLxfXWjDmzqYe3Fn1THxsMh8N04Ai9uc6SGxM+JAXgRo46yQCBShs0BES+ZvpU34AVQIJL06qbsjOgANYuFjSbNagPgAy8HS1+eKNn7sAzhIw4CmcUEWOGfS4fTZP4uuXKX9e97x/VouM5H0B9VRgYbBd49vKWJynMIS14eFCvCjdERNtD+7HFCXRfVMIUuXeR6ROvRM5igr2FDDotw/2OozUW/JLA==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR11MB6064.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(39850400004)(396003)(376002)(136003)(346002)(366004)(230922051799003)(451199024)(64100799003)(186009)(1800799012)(5660300002)(2906002)(31686004)(6666004)(53546011)(6512007)(6486002)(966005)(36756003)(8676002)(41300700001)(38100700002)(6506007)(66476007)(8936002)(478600001)(86362001)(26005)(2616005)(110136005)(83380400001)(66556008)(66946007)(31696002)(316002)(66574015)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?ZXpPdWt1NE5YS3FLQTZod1d2TytKQ0xJbGFzVmhWSG5hNHZ3MHZuQ0w0WG1D?=
+ =?utf-8?B?NG9DaWMzT1orOHB6OHVMRmlGV1IrOERCenMwaVFza083NlkzZGRxUWlXVmM2?=
+ =?utf-8?B?U1hKK1o4YWMwUWd1VW55M3prSnRkeVdnckliZGkzem1kSDVoK0l0WXE5dVpR?=
+ =?utf-8?B?NFdmUERYcVNKbDh2M0wvejVaRE1JdUpNNU91SXhtUktPZ2dXcmtINTVxTEZu?=
+ =?utf-8?B?eWRUZzZrOU9kbjlrNFlBRW5neENvVGExWDNldnozUWdHQkJHcGNJa3lTUlg0?=
+ =?utf-8?B?bnRlMGgxdFpEREpsQ2ZNMGJmeWNYVUxqR0NiOTg1djNmOGgyeDRGV21nSzFx?=
+ =?utf-8?B?TkpYbldwYjVLeGJaQkNlMEw2cWJGZ2s0NGsxSVlWemdhcUp4WndZV0pSaEtI?=
+ =?utf-8?B?ZEcvWXR1eTlMK1p1bm5lWG1Ha1VaMFpGK25KQUxSd2k2SUJiNjI1YmhVaSsr?=
+ =?utf-8?B?OExRSFR3N1VYRjJpRFovVXhjRkFLendyUTlmUXluQm9JRU5seVhNOGFtaXN0?=
+ =?utf-8?B?M3Vvb0hJM0VRYzdMK1ZuMUEyNmxLdWJ5ZjJieUpaRmRqTTAyY1FlTEROVXRI?=
+ =?utf-8?B?ZGZyMVc0REpsVG5uOFVkaENuSEtUMU5USllwOVVvdHU0Vm9MY1VjK2ZsVzhU?=
+ =?utf-8?B?ZUxvK1I1MEhzOVJ0MnBQMS9rSENLdjdqMkdzWHcrSjVYNHpzbWFSaXJ1Y1cv?=
+ =?utf-8?B?SUllVlZwc2NaRlRJV3BzTlVZeEROTDZZMldzUXNNZndrcldnTmd2WmJQR0s0?=
+ =?utf-8?B?VW9SNnZDbUFGSDBFTW1tcVhFQklzQXQyRStBRHFuOEt3MnRhaWh6Q3pnV2Mw?=
+ =?utf-8?B?V1N6RlFJT3pQNTZ3OGpVeERnZUdpQlFkL2lrNTdKVUhSclZiL2Y4Ti9WT1Ru?=
+ =?utf-8?B?ZHo2NHZ6V0dHUlRyUUpZamJNaUtFZ3gzRERkd0NRNUxWUTFvVWRaQzc1STc4?=
+ =?utf-8?B?ODY1cWtBSjFZL1R1c01NN1F0R0hBTHFzVlRXakZWRUk0QlRHOGdPUlVhZ3FR?=
+ =?utf-8?B?NGdIQWlLSTFmSzdudUZ4UjBtZllIZlBuL0JaQ3FsL0FXWk5xYkNZL0YwSzNI?=
+ =?utf-8?B?dHQ2Y1dVcWtheFJwa1RaV1FLMUJrMnZrV3NGVlZQWTdZL01FZ05ucWE2eFdS?=
+ =?utf-8?B?bWJIcnFPK2hTbko4a25SckhXbXp4SmNsbWxLZEh5K3MzcnUvcmVuRmFpNkwx?=
+ =?utf-8?B?QVQ0RGIvNDNmREhCZjRBdG5aQ1ovRnF5UlB3NkpmYmRWU29KeCszSnRSTE1t?=
+ =?utf-8?B?UTEvcUxVbXlQTExNczJTY0oxYks1YWVnK0VyYXBiSmE1OFNDd25YbjRVZThR?=
+ =?utf-8?B?SHlJSG00ZVpHVUQ5NWtNOWRyNDhueHAyb1plcmU0dUc5UUhEUUlCQ2w5V1RU?=
+ =?utf-8?B?cG9XK05FV09nbEg0RjM4MnJncHVCRUtkK0NKY09PbjMzYlVaNnM4Unk5aFla?=
+ =?utf-8?B?NkpML1dreGJQNDIvY2o5aWFCSWNGb0dXam1vTU42dkt1RXd5bzVjNE1BQUJQ?=
+ =?utf-8?B?cDY2S09yTnpac0NkSE9sb0k1dVFMM2NDOFh5ckp6bE42cGJZbUxjYkhyOVF4?=
+ =?utf-8?B?T1VHMHNaUnBWaUFPSW1DaXN0K3JtQWx1Yml0TmNPNEpUSnVieHFJc3VWSEVK?=
+ =?utf-8?B?dHJIMGc4SEhkbEtTZlN1VWxxWnNRdHo2MHByT0M4TDFQaEp5RWpPOEtWYU92?=
+ =?utf-8?B?Skw2MDR1ZnV2aUNOOHZ1ME1NY0poT0NiYzEveTRteTV4QlNoYlhLSjhRMlhq?=
+ =?utf-8?B?VG5CWVEwZE90WE4rQW9oQUNGcmhsMmJpUko2Q1laVGdob256dFdGMkprZ2FL?=
+ =?utf-8?B?WUd5RHloVmhzTFlxOW9iSUdoWU9aYTFRN1NRV2tlYkNaRWlEenB3SmJNN2lw?=
+ =?utf-8?B?N0Y0eFJSTWo1SnBodFNDMTNWNm4rMmFYMmRtRFFnckxCQi9iTjNZaGJpKzVN?=
+ =?utf-8?B?Q3Y3K1ppbWlpaSs3WjdrQ3pKaENINFdGMktoSmErZ3pOMS9BTi9IRDkwZTNl?=
+ =?utf-8?B?L1ZDdTZMS2F3aXFXd1UwK295cGo0UDFmeUEwTDY4bW8wc1ozWHNSM0RlUmxG?=
+ =?utf-8?B?STZIbHE1bTZ1S25ZYU1PYlVWMXlnekhlcVUzZzI4S1lQaWFzU2phdUxNbit0?=
+ =?utf-8?Q?Z+Djgxqr2ShPzyAT2IN/TznnS?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3ad22718-8e8c-44c8-a437-08dbf5fbfa4a
+X-MS-Exchange-CrossTenant-AuthSource: DS7PR11MB6064.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Dec 2023 01:37:59.0620
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: tIEhM492bvfciIIkorMNz0k2hooP979vuMo3jjSg1qjeCyPHMcv5KdJgIY4WlwqWi+nkf7qDSrQ37RLhfOyuHg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR11MB7117
+X-Proofpoint-ORIG-GUID: R7fufq3-V6sCoCKMs55QvfpigqO81Drg
+X-Proofpoint-GUID: z_STnzYUN2ywXf5HZLrU9qbcf9f5gm9k
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-11-16_25,2023-11-16_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 phishscore=0
+ priorityscore=1501 clxscore=1015 bulkscore=0 adultscore=0 spamscore=0
+ suspectscore=0 lowpriorityscore=0 malwarescore=0 mlxlogscore=999
+ impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2311290000 definitions=main-2312060012
 Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 3B6114O8001284
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 06 Dec 2023 00:12:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107231
+ <openembedded-devel@lists.openembedded.org>; Wed, 06 Dec 2023 01:38:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107232
 
-From: Patrick Wicki <patrick.wicki@siemens.com>
+On 12/5/23 23:39, Yoann Congal wrote:
+> Hi,
+>
+> Le 05/12/2023 =C3=A0 15:50, Kai Kang a =C3=A9crit=C2=A0:
+>> From: Kai Kang <kai.kang@windriver.com>
+>>
+>> Add 'native' to BBCLASSEXTEND to provides python3-pyudev-native which =
+is
+>> required by lvm2 when package config 'dbus' is enabled.
+>>
+>> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+>> ---
+>>   meta-python/recipes-devtools/python/python3-pyudev_0.24.1.bb | 2 ++
+>>   1 file changed, 2 insertions(+)
+>>
+>> diff --git a/meta-python/recipes-devtools/python/python3-pyudev_0.24.1=
+.bb b/meta-python/recipes-devtools/python/python3-pyudev_0.24.1.bb
+>> index 6fcf346bc..8bc3afdb5 100644
+>> --- a/meta-python/recipes-devtools/python/python3-pyudev_0.24.1.bb
+>> +++ b/meta-python/recipes-devtools/python/python3-pyudev_0.24.1.bb
+>> @@ -20,3 +20,5 @@ RDEPENDS:${PN} =3D "\
+>>       ${PYTHON_PN}-fcntl \
+>>       libudev \
+>>   "
+>> +
+>> +BBCLASSEXTEND =3D "native"
+>>
+>>
+> On my setup, this fails with:
+>   $ bitbake python3-pyudev-native
+> Loading cache: 100% |##################################################=
+#########################################################################=
+###############################| Time: 0:00:00
+> Loaded 4996 entries from dependency cache.
+> Parsing recipes: 100% |################################################=
+#########################################################################=
+###############################| Time: 0:00:59
+> Parsing of 3129 .bb files complete (98 cached, 3031 parsed). 4997 targe=
+ts, 140 skipped, 0 masked, 0 errors.
+> NOTE: Resolving any missing task queue dependencies
+> ERROR: Nothing RPROVIDES 'libudev-native' (but virtual:native:/.../yoct=
+o/poky/meta-openembedded/meta-python/recipes-devtools/python/python3-pyud=
+ev_0.24.1.bb RDEPENDS on or otherwise requires it)
+> NOTE: Runtime target 'libudev-native' is unbuildable, removing...
+> Missing or unbuildable dependency chain was: ['libudev-native']
+> ERROR: Required build target 'python3-pyudev-native' has no buildable p=
+roviders.
+> Missing or unbuildable dependency chain was: ['python3-pyudev-native', =
+'libudev-native']
+>
+> FYI, the native support was removed precisely to avoid this error on th=
+e autobuilder.
+> See:
+> https://git.openembedded.org/meta-openembedded/commit/?id=3Dd4aa17dc436=
+beb96a804860bc6d18cf72283709e
+>
+> In this case, I suppose, we would need to either add -native support fo=
+r libudev or somehow cut the dependency python3-pyudev->libudev.
+>
+> Maybe this is something you have locally and not pushed yet?
 
-Update to latest (patch) release.
+Hi Yoann,
 
-This fixes Integer overflow in Poco::UTF32Encoding, which is a security
-vulnerability (see https://github.com/pocoproject/poco/issues/4320).
+I am using 'systemd' as init manager and it RPROVIDES libudev-native. I=20
+haven't finger out the reason, but I'll try to remove this dependency cha=
+in.
 
-Drop POSIX thread creation patch since it's now fixed upstream.
+$ bitbake libudev-native -e >be
+ERROR: Nothing PROVIDES 'libudev-native'. Close matches:
+ =C2=A0 libdnet-native
+libev-native
+ =C2=A0 libuv-native
+ =C2=A0 systemd RPROVIDES libudev-native
 
-Refresh ccpignore.lnx patch.
+Regards,
+Kai
 
-Add patch backporting https://github.com/pocoproject/poco/pull/4227.
+>
+> Regards,
 
-Changelog
-=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-- GH #4320: Integer overflow in Poco::UTF32Encoding
-- GH #4241: Poco::FileInputStream broken in 1.12.5 and 1.11.8
-- GH #4219 Make POSIX event thread safe
-- GH #4215 Remove SocketReactor dependency on Poco::Thread for sleeping
-- GH #4197 ODBC::Binder UUID new/free mismatch
-- GH #4194 PollSet filters out some events
-- GH #4189 Use after free warnings
-- GH #4180 receiveResponse() may not return response body stream
-- GH #4177 Upgrade bundled pcre2 to 10.42
-- GH #4147 missing \r\n when setting trailer header in chunked response
-- GH #4134 Initialisation of _socketIndex in SSLManager (OpenSSL)
-- GH #3867 Add options to disable STDIO in child process
-- GH #3832 pthread_getname_np' was not declared in this scope
-- GH #3786 FileChannel::setRotation overflow
-- GH #2776 Shutdown TLS1.3 connection
-- GH #4176 PCRE2 10.40 version has security vulnerabilities=EF=BC=88CVE-2=
-022-41409=EF=BC=89, when is the plan to fix it third-party
-- GH #4150 Use Poco format instead of sprintf in Util
-- GH #4116 Logging should evaluate only if the logging level is active
-- GH #4071 PageCompiler: add referrerPolicy to page directive feature
-- GH #4057 ODBC: SQL Anywhere Support
-- GH #4031 Classes with virtual functions missing virtual destructors (co=
-mpilation issues)
-- GH #4023 CPPParser: Losing data if parameter std::function<void(bool)> =
-is used
-- GH #4014 wrong string offset in HTTPCredentials::isNTLMCredentials
-- GH #4005 On UNIX platform, Poco::Path::getExtension() returns name of t=
-he hidden file if no extension is present
-- GH #3986 Fix dead lock on Timer destructor
-- GH #3968 Poco::Net::SocketConnector constructor should take SocketAddre=
-ss by const reference
-- GH #3935 The extractor in postgresql drops milliseconds
-- GH #3926 CppParser throws exception when return value is specified to b=
-e in global namespace
-- GH #3921 Deadlock in Timer when one sync and one async cancel requests =
-are issued
-- GH #3918 Static FastMutex fails to lock when issued from another thread=
- on linux
-- GH #3880 NetSSL_OpenSSL: Support session resumption with TLSv1.3
-- GH #3876 Replace sprintf with snprintf in Environment and NumberFormatt=
-er to avoid deprecation warnings
-- GH #3859 zlib headers not updated
-- GH #3806 HTTPClientSession::receiveResponse() gives NoMessage instead o=
-f Timeout exception for SSL connection on Windows when using OpenSSL 3.0.=
-x
-- GH #3723 DateTimeFormatter creates invalid ISO8601 string
-- GH #3147 Reading from request stream hangs when "Transfer-Encoding: chu=
-nked" is used
-- GH #4218 Upgrade double-conversion to 3.3.0
-- PR #4210 Fix pthread_setname not declared
-- PR #4072 optimize checkUpperLimit and checkLowerLimit in VarHolder.h  e=
-nhancement
-- PR #4050 rename arc -> poco_arc
-- PR #4038 Fixed Poco::format specifier for error code  bug platform_spec=
-ific
-- PR #4011 fix #4005 Poco::Path::getExtension()
-- PR #3999 Fix hang in destructor
-- PR #3992 Fix thread counter leak
-- PR #3987 Fix dead lock on Timer destructor
-- PR #3971 Fix error handling with OpenSSL 3.0 in SecureSocketImpl.cpp (f=
-ixes #3806)
-- PR #3943 Fix build for QNX  platform_specific
-- PR #3942 Fix data race when create POSIX thread
-- PR #3912 Fixed compile error for OpenSSL 1.0 systems (#3739)
-- PR #3883 Added system_error header to SockerProactor for std::error_cod=
-e
-- PR #3855 Fix epollfd validity checks when compiling with wepoll
-- PR #3809 improve Windows OpenSSL 3.0.x error handling #3806
-- PR #3769 Fixed converting/correcting pre-gregorian dates (#3723)
-
-Signed-off-by: Patrick Wicki <patrick.wicki@siemens.com>
----
- ...x-data-race-when-create-POSIX-thread.patch | 33 -----------------
- ...nx-Ignore-PKCS12-and-testLaunch-test.patch | 35 ++++++++++---------
- ...l-cmake-files-with-resolved-ENABLE_J.patch | 32 +++++++++++++++++
- .../poco/{poco_1.12.4.bb =3D> poco_1.12.5p2.bb} |  4 +--
- 4 files changed, 53 insertions(+), 51 deletions(-)
- delete mode 100644 meta-oe/recipes-support/poco/poco/0001-Fix-data-race-=
-when-create-POSIX-thread.patch
- create mode 100644 meta-oe/recipes-support/poco/poco/0002-fix-build-Inst=
-all-cmake-files-with-resolved-ENABLE_J.patch
- rename meta-oe/recipes-support/poco/{poco_1.12.4.bb =3D> poco_1.12.5p2.b=
-b} (97%)
-
-diff --git a/meta-oe/recipes-support/poco/poco/0001-Fix-data-race-when-cr=
-eate-POSIX-thread.patch b/meta-oe/recipes-support/poco/poco/0001-Fix-data=
--race-when-create-POSIX-thread.patch
-deleted file mode 100644
-index 1a7f4dcdc..000000000
---- a/meta-oe/recipes-support/poco/poco/0001-Fix-data-race-when-create-PO=
-SIX-thread.patch
-+++ /dev/null
-@@ -1,33 +0,0 @@
--From 03b68fc924b24e12c87512d790d37fc6ddc352ac Mon Sep 17 00:00:00 2001
--From: Dawid Drozd <drozddawid@gmail.com>
--Date: Sat, 11 Feb 2023 14:48:39 +0400
--Subject: [PATCH] Fix data race when create POSIX thread
--
--When creating thread using pthread_create() `_pData->thread` will be set=
-.
--It could lead to data race as in runnableEntry() we refer to that variab=
-le.
--
--Instead use pthread_self().
--getName() is already under mutex.
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--Upstream-Status: Backport [https://github.com/pocoproject/poco/pull/3942=
-/commits/9c8a79b994a367f626c5551e0f38c27d0d8431f1]
-----
-- Foundation/src/Thread_POSIX.cpp | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/Foundation/src/Thread_POSIX.cpp b/Foundation/src/Thread_POS=
-IX.cpp
--index ceab76e82..3e52cd31f 100644
----- a/Foundation/src/Thread_POSIX.cpp
--+++ b/Foundation/src/Thread_POSIX.cpp
--@@ -351,7 +351,7 @@ void* ThreadImpl::runnableEntry(void* pThread)
-- #endif
--=20
-- 	ThreadImpl* pThreadImpl =3D reinterpret_cast<ThreadImpl*>(pThread);
---	setThreadName(pThreadImpl->_pData->thread, reinterpret_cast<Thread*>(p=
-Thread)->getName());
--+	setThreadName(pthread_self(), reinterpret_cast<Thread*>(pThread)->getN=
-ame());
-- 	AutoPtr<ThreadData> pData =3D pThreadImpl->_pData;
-- 	try
-- 	{
----=20
--2.42.0
--
-diff --git a/meta-oe/recipes-support/poco/poco/0001-cppignore.lnx-Ignore-=
-PKCS12-and-testLaunch-test.patch b/meta-oe/recipes-support/poco/poco/0001=
--cppignore.lnx-Ignore-PKCS12-and-testLaunch-test.patch
-index 25934d61b..f70e8bcc7 100644
---- a/meta-oe/recipes-support/poco/poco/0001-cppignore.lnx-Ignore-PKCS12-=
-and-testLaunch-test.patch
-+++ b/meta-oe/recipes-support/poco/poco/0001-cppignore.lnx-Ignore-PKCS12-=
-and-testLaunch-test.patch
-@@ -1,4 +1,4 @@
--From ac0f06e20bdfaca74c8ab786be8ff8fc96b5a689 Mon Sep 17 00:00:00 2001
-+From 879ddb725823c78c9510cfd39786adb16f3726c8 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Sat, 16 Sep 2023 19:52:56 -0700
- Subject: [PATCH] cppignore.lnx: Ignore PKCS12 and testLaunch test
-@@ -42,22 +42,25 @@ There were 4 failures:
-=20
- Upstream-Status: Inappropriate [OE specific]
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+Signed-off-by: Patrick Wicki <patrick.wicki@siemens.com>
- ---
-- cppignore.lnx | 8 ++++++++
-- 1 file changed, 8 insertions(+)
-+ cppignore.lnx | 9 +++++++++
-+ 1 file changed, 9 insertions(+)
-=20
-+diff --git a/cppignore.lnx b/cppignore.lnx
-+index 2c2376526..65df4af08 100644
- --- a/cppignore.lnx
- +++ b/cppignore.lnx
--@@ -26,3 +26,12 @@ N7CppUnit10TestCallerI9TimerTestEE.testS
-- N7CppUnit10TestCallerI9TimerTestEE.testScheduleIntervalClock
-- N7CppUnit10TestCallerI9TimerTestEE.testScheduleIntervalTimestamp
-- N7CppUnit10TestCallerI9TimerTestEE.testTimer
--+N7CppUnit10TestCallerI11ProcessTestEE.testLaunch
--+N7CppUnit10TestCallerI11ProcessTestEE.testLaunchRedirectIn
--+N7CppUnit10TestCallerI11ProcessTestEE.testLaunchRedirectOut
--+N7CppUnit10TestCallerI11ProcessTestEE.testLaunchEnv
--+N7CppUnit10TestCallerI7EVPTestEE.testRSAEVPKeyFromPKCS12
--+N7CppUnit10TestCallerI19PKCS12ContainerTestEE.testFullPKCS12
--+N7CppUnit10TestCallerI19PKCS12ContainerTestEE.testCertsOnlyPKCS12
--+N7CppUnit10TestCallerI19PKCS12ContainerTestEE.testPEMReadWrite
--+N7CppUnit10TestCallerI11MongoDBTestEE.testArray
-+@@ -28,3 +28,12 @@ CppUnit::TestCaller<HTTPSClientSessionTest>.testProxy
-+ CppUnit::TestCaller<HTTPSStreamFactoryTest>.testProxy
-+ CppUnit::TestCaller<DNSTest>.testHostByAddress
-+ CppUnit::TestCaller<DNSTest>.testHostByName
-++CppUnit::TestCaller<ProcessTest>.testLaunch
-++CppUnit::TestCaller<ProcessTest>.testLaunchRedirectIn
-++CppUnit::TestCaller<ProcessTest>.testLaunchRedirectOut
-++CppUnit::TestCaller<ProcessTest>.testLaunchEnv
-++CppUnit::TestCaller<EVPTest>.testRSAEVPKeyFromPKCS12
-++CppUnit::TestCaller<PKCS12ContainerTest>.testFullPKCS12
-++CppUnit::TestCaller<PKCS12ContainerTest>.testCertsOnlyPKCS12
-++CppUnit::TestCaller<PKCS12ContainerTest>.testPEMReadWrite
-++CppUnit::TestCaller<MongoDBTest>.testArray
-diff --git a/meta-oe/recipes-support/poco/poco/0002-fix-build-Install-cma=
-ke-files-with-resolved-ENABLE_J.patch b/meta-oe/recipes-support/poco/poco=
-/0002-fix-build-Install-cmake-files-with-resolved-ENABLE_J.patch
-new file mode 100644
-index 000000000..427cb9723
---- /dev/null
-+++ b/meta-oe/recipes-support/poco/poco/0002-fix-build-Install-cmake-file=
-s-with-resolved-ENABLE_J.patch
-@@ -0,0 +1,32 @@
-+From e54478c936493c0ed87e875f04127bd13642de44 Mon Sep 17 00:00:00 2001
-+From: tyler92 <tyler92@inbox.ru>
-+Date: Tue, 21 Nov 2023 05:07:24 +0300
-+Subject: [PATCH] fix(build): Install cmake files with resolved ENABLE_JS=
-ON and
-+ ENABLE_XML (#4227)
-+
-+Upstream-Status: Backport [https://github.com/pocoproject/poco/pull/4227=
-]
-+Signed-off-by: Adrian Freihofer <adrian.freihofer@siemens.com>
-+
-+---
-+ Util/cmake/PocoUtilConfig.cmake | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/Util/cmake/PocoUtilConfig.cmake b/Util/cmake/PocoUtilConfig=
-.cmake
-+index 90c1eab1c..8186435e1 100644
-+--- a/Util/cmake/PocoUtilConfig.cmake
-++++ b/Util/cmake/PocoUtilConfig.cmake
-+@@ -1,9 +1,9 @@
-+ include(CMakeFindDependencyMacro)
-+ find_dependency(PocoFoundation)
-+-if(ENABLE_XML)
-++if(@ENABLE_XML@)
-+ 	find_dependency(PocoXML)
-+ endif()
-+-if(ENABLE_JSON)
-++if(@ENABLE_JSON@)
-+ 	find_dependency(PocoJSON)
-+ endif()
-+ include("${CMAKE_CURRENT_LIST_DIR}/PocoUtilTargets.cmake")
-+--=20
-+2.43.0
-+
-diff --git a/meta-oe/recipes-support/poco/poco_1.12.4.bb b/meta-oe/recipe=
-s-support/poco/poco_1.12.5p2.bb
-similarity index 97%
-rename from meta-oe/recipes-support/poco/poco_1.12.4.bb
-rename to meta-oe/recipes-support/poco/poco_1.12.5p2.bb
-index 12532e4ef..a0bb0b5d9 100644
---- a/meta-oe/recipes-support/poco/poco_1.12.4.bb
-+++ b/meta-oe/recipes-support/poco/poco_1.12.5p2.bb
-@@ -11,10 +11,10 @@ DEPENDS =3D "libpcre2 zlib"
- SRC_URI =3D "git://github.com/pocoproject/poco.git;branch=3Dmaster;proto=
-col=3Dhttps \
-            file://0001-Use-std-atomic-int-instead-of-std-atomic-bool.pat=
-ch \
-            file://0001-cppignore.lnx-Ignore-PKCS12-and-testLaunch-test.p=
-atch \
--           file://0001-Fix-data-race-when-create-POSIX-thread.patch \
-            file://run-ptest \
-+           file://0002-fix-build-Install-cmake-files-with-resolved-ENABL=
-E_J.patch \
-            "
--SRCREV =3D "1211613642269b7d53bea58b02de7fcd25ece3b9"
-+SRCREV =3D "1d6fb3e1383e559cacbada5e3f861c0dafaf5d30"
-=20
- UPSTREAM_CHECK_GITTAGREGEX =3D "poco-(?P<pver>\d+(\.\d+)+)"
-=20
 --=20
-2.43.0
+Kai Kang
+Wind River Linux
 
 
