@@ -1,119 +1,109 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F682C4167B
-	for <webhook@archiver.kernel.org>; Thu,  7 Dec 2023 02:18:43 +0000 (UTC)
-Received: from mail-ot1-f42.google.com (mail-ot1-f42.google.com [209.85.210.42])
- by mx.groups.io with SMTP id smtpd.web11.74145.1701915520011377635
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DB440C4167B
+	for <webhook@archiver.kernel.org>; Thu,  7 Dec 2023 07:45:24 +0000 (UTC)
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
+ by mx.groups.io with SMTP id smtpd.web10.78971.1701935123792985777
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Dec 2023 18:18:40 -0800
+ Wed, 06 Dec 2023 23:45:24 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=VvtY2iUe;
- spf=pass (domain: gmail.com, ip: 209.85.210.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f42.google.com with SMTP id 46e09a7af769-6d9d1962bbbso289943a34.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Dec 2023 18:18:39 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=B+eTEglA;
+ spf=pass (domain: gmail.com, ip: 209.85.221.43, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-3332e351670so587294f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Dec 2023 23:45:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1701915519; x=1702520319; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=IW3BoLvcgydo8+vQe6JkS503gyTwHCUXAs0FFLKyrLQ=;
-        b=VvtY2iUehCKHqsVo5p8kfZLvV5HKy6FjEr5ieLc4Yi/hWUuIaax2wI53tdMUYwtyYR
-         F8ATY0TfnIp4bJdLXTclVJzQp+CEHmlx/+F+X+A9zKymCokK+rkQribyo7HVK2qwzEKw
-         RNjufVRndp3pDRBdR2C0DNTvl31tHAAVLW2yhXCp+7AZKwVSOLjv5JEuTq8TLhhLx9LE
-         DIJIWpdM0q8FhE+gjVnpvEoJzxe5F3yt4HEaSSwnP+sCxpIyQn4uCSVoPIQCST6cxlkb
-         SvotKfelOWlaMntsVKCy6Z6Y4F+g4cL20SNlxcykQlgDFw8Vsm7tCtt8BluzCCqyWm/x
-         6FWg==
+        d=gmail.com; s=20230601; t=1701935122; x=1702539922; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=2Kk3X/8Z2gTwqmqdwtybPYPb+9gLXQN/7N5/VF/S8C8=;
+        b=B+eTEglAd2Xsi1TmaGhHtXedB1PfEPviRWa6IqEeT42MmJYoop/4/cyY6axngsPr1e
+         CF0I1bmdE/xGCaE/o6It2Yc28urt5KHs9glKxLEU5CU3crpAYgnchJ2JXou/15Mij/0I
+         h165JBW1XE8fqrpecxsIwTXbeipSc/vl5D5XrfhuCd4l2wgVZGdsL4zDhoGxLZIZNIbO
+         3NpNP3urAwc4ofLOLCQKIDna9iP15aLoEW05143EeIGikQrGb5xZzOEfCynKdnug2WrL
+         7LWFoSzUHPjAvThtiyg1hUIC7YEJ3mAg5DwIrhCGc65zouQeuFJgFq3p3j/STKXTY5Ro
+         +1RA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701915519; x=1702520319;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=IW3BoLvcgydo8+vQe6JkS503gyTwHCUXAs0FFLKyrLQ=;
-        b=L6npTDlkiHGl6fBrzq+FHiDIGutzzwcDiMYfPSWbCJJltOFDtvwVdrYs+ux5KjA7jt
-         7lyX+2jEOAi4F6AXTo5+aF/7m99L5xaOAVCtcXVdlaAEDd80paaRIcFoxwAR+gyF1E4w
-         UGpFH7j611rMeVvL6S+bWA6SEANkECZ5aNRyD9B2Bxi0ere7yfN1UsUdchPxVbMa2ERC
-         94W7mGWqZEZvI+WLkmvOEX9rAy0xGTVIcZ6fM4uaNqJralM/y49PcKcyYEl+VqEHA5/b
-         fNoO5Hh2xNw3naXYavBAt9noTcReRZDRqPl0ysoxuJ8Mkuh52WDo5eIQAMJhBkV7L+og
-         obWA==
-X-Gm-Message-State: AOJu0YyBj0PgK/cfQnrytF91LFuBtyIYMJuLR4BR9/L6Ygo7WBzeRowA
-	ShiSHrTn/42mvnM1iVfHx6A4QZ5Ryc7eMldlHM1Tp/sR
-X-Google-Smtp-Source: AGHT+IF/Jl4oIgzGqUnMVB/VAp1p8cIJODCU+AM4o1qBzrK4h6NZAXbLYOMRTN34s1CsANBofAJZdz7aWrtLUv2Tfcc=
-X-Received: by 2002:a05:6870:2193:b0:1f5:ce81:c06 with SMTP id
- l19-20020a056870219300b001f5ce810c06mr1931862oae.46.1701915519034; Wed, 06
- Dec 2023 18:18:39 -0800 (PST)
+        d=1e100.net; s=20230601; t=1701935122; x=1702539922;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=2Kk3X/8Z2gTwqmqdwtybPYPb+9gLXQN/7N5/VF/S8C8=;
+        b=m0m06FU/yOswou7UBlSMFMPVia4GnJm3wZPRpklBVKPdzxPWqI2bnvNrlXLEFcGxHf
+         gfUHiaNYtI/5vgncidqIBYvFu2hBk2FIHClipn+IAoKV6nMqtBlgWdcWEh0tXvEGOqeN
+         ok8FLTurCMzUnvuHbsm8W3bewOY/+FIdr4vkULoOSNv8VdIMsiMxPYK1JnM65XhRhQ6M
+         MTJbupQD29pdsL4JtTuMJB+GlASY6Ti4cszOGCMctgEe7B7sCZxduDdLRD/tpIUy37jr
+         WDSwcDQLCm4mbaYM/+QUTcqSTL4L3ddJOdWp8B8PG0cFLCk3zkNOj+wbrAYBfBhkEY1n
+         ivXw==
+X-Gm-Message-State: AOJu0YyWTKG8m8Dd/QEX1hmaDDMQvmipK3apvyJO3/H60tZG3j2CXiY4
+	ObrREXUM6KXHnzMD9PqwkbMVKtExYmmeyQ==
+X-Google-Smtp-Source: AGHT+IFuKSfmVIhgVr8u1uPlfKjdB5DzpgusEpIyA9ZyPLORM2RffRYX8KrqPbXQKDSvCBFcM8bmkw==
+X-Received: by 2002:adf:e708:0:b0:332:cea3:ac7d with SMTP id c8-20020adfe708000000b00332cea3ac7dmr615074wrm.2.1701935121527;
+        Wed, 06 Dec 2023 23:45:21 -0800 (PST)
+Received: from localhost.localdomain ([176.33.71.251])
+        by smtp.gmail.com with ESMTPSA id t11-20020adfe10b000000b0033363342041sm707592wrz.23.2023.12.06.23.45.19
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 06 Dec 2023 23:45:20 -0800 (PST)
+From: alperak <alperyasinak1@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: alperak <alperyasinak1@gmail.com>
+Subject: [meta-oe][PATCH] xorg-sgml-doctools: update summary depends and inc file
+Date: Thu,  7 Dec 2023 10:45:08 +0300
+Message-Id: <20231207074508.18228-1-alperyasinak1@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <179DF70836C36579.24600@lists.openembedded.org> <d587fb36-527a-b31a-f412-8c296321bc67@windriver.com>
-In-Reply-To: <d587fb36-527a-b31a-f412-8c296321bc67@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 6 Dec 2023 18:18:12 -0800
-Message-ID: <CAMKF1srz4O_kFTx-GiR6GucaG4dGvOomjrQn1qbfdzSbL5nGbA@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH 1/2] python3-pyudev: provide native
-To: Kai <kai.kang@windriver.com>
-Cc: Kai Kang <kai.kang@eng.windriver.com>, openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 07 Dec 2023 02:18:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107269
+ <openembedded-devel@lists.openembedded.org>; Thu, 07 Dec 2023 07:45:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107270
 
-On Wed, Dec 6, 2023 at 6:16=E2=80=AFPM Kai <kai.kang@windriver.com> wrote:
->
-> On 12/5/23 22:50, Kai Kang wrote:
-> > From: Kai Kang <kai.kang@windriver.com>
-> >
-> > Add 'native' to BBCLASSEXTEND to provides python3-pyudev-native which i=
-s
-> > required by lvm2 when package config 'dbus' is enabled.
->
-> Hi Khem,
->
-> It seems this patch is still in branch master-next, but it has been
-> dropped in the v2 review request.
+Signed-off-by: alperak <alperyasinak1@gmail.com>
+---
+ meta-oe/recipes-graphics/xorg-doc/xorg-doc-common.inc    | 9 +++++----
+ .../recipes-graphics/xorg-doc/xorg-sgml-doctools_1.12.bb | 5 ++---
+ 2 files changed, 7 insertions(+), 7 deletions(-)
 
-yeah I know, but right now I can not access my machine, so it will be
-dropped once I do.
-Thanks for notifying me.
+diff --git a/meta-oe/recipes-graphics/xorg-doc/xorg-doc-common.inc b/meta-oe/recipes-graphics/xorg-doc/xorg-doc-common.inc
+index aa4795edc..042db48ac 100644
+--- a/meta-oe/recipes-graphics/xorg-doc/xorg-doc-common.inc
++++ b/meta-oe/recipes-graphics/xorg-doc/xorg-doc-common.inc
+@@ -3,10 +3,11 @@ HOMEPAGE = "http://www.x.org"
+ SECTION = "x11/docs"
+ LICENSE = "MIT"
+ 
+-SRC_URI = "${XORG_MIRROR}/individual/doc/${BPN}-${PV}.tar.bz2"
++DEPENDS = "util-macros-native"
+ 
+-S = "${WORKDIR}/${BPN}-${PV}"
+-
+-INC_PR = "r1"
++SRC_URI_EXT = "bz2"
++SRC_URI = "${XORG_MIRROR}/individual/doc/${BPN}-${PV}.tar.${SRC_URI_EXT}"
+ 
+ inherit autotools pkgconfig
++
++
+diff --git a/meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.12.bb b/meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.12.bb
+index 050cb2982..eef02a43e 100644
+--- a/meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.12.bb
++++ b/meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.12.bb
+@@ -1,10 +1,9 @@
+ require xorg-doc-common.inc
+-PE = "1"
+ 
+-DEPENDS += "util-macros"
++SUMMARY = "SGML entities and XML/CSS stylesheets used in X.Org docs"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=c8c6c808cd3c797a07b24e443af1c449"
+ 
+ SRC_URI[sha256sum] = "65a9fdddedc17bd5e9c0b00d904960f03f047c3a62de5458989d493c29fec806"
+ 
+-FILES:${PN} += " /usr/share/sgml/X11"
++FILES:${PN} += "${datadir}/sgml/X11"
+-- 
+2.25.1
 
->
-> Regards,
-> Kai
->
->
-> >
-> > Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> > ---
-> >   meta-python/recipes-devtools/python/python3-pyudev_0.24.1.bb | 2 ++
-> >   1 file changed, 2 insertions(+)
-> >
-> > diff --git a/meta-python/recipes-devtools/python/python3-pyudev_0.24.1.=
-bb b/meta-python/recipes-devtools/python/python3-pyudev_0.24.1.bb
-> > index 6fcf346bc..8bc3afdb5 100644
-> > --- a/meta-python/recipes-devtools/python/python3-pyudev_0.24.1.bb
-> > +++ b/meta-python/recipes-devtools/python/python3-pyudev_0.24.1.bb
-> > @@ -20,3 +20,5 @@ RDEPENDS:${PN} =3D "\
-> >       ${PYTHON_PN}-fcntl \
-> >       libudev \
-> >   "
-> > +
-> > +BBCLASSEXTEND =3D "native"
-> >
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#107225): https://lists.openembedded.org/g/openembed=
-ded-devel/message/107225
-> > Mute This Topic: https://lists.openembedded.org/mt/102992734/3616933
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[kai.kang@eng.windriver.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
->
-> --
-> Kai Kang
-> Wind River Linux
->
 
