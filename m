@@ -2,56 +2,56 @@ Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DB61AC4167B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F1C2CC10DC3
 	for <webhook@archiver.kernel.org>; Thu,  7 Dec 2023 23:24:41 +0000 (UTC)
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.web11.113090.1701991478384421756
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
+ by mx.groups.io with SMTP id smtpd.web11.113089.1701991476592222096
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 07 Dec 2023 15:24:38 -0800
+ Thu, 07 Dec 2023 15:24:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=XeSKmPyi;
- spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: ticotimo@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id d2e1a72fcca58-6ceb93fb381so777974b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 07 Dec 2023 15:24:38 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=JNVsT8Oz;
+ spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: ticotimo@gmail.com)
+Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-6ce9e897aeaso1120143b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 07 Dec 2023 15:24:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1701991477; x=1702596277; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1701991476; x=1702596276; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=fHnPkPRXriCDZCeZ6Wj3sz6iuBttUS+ioa0gHxs/7F8=;
-        b=XeSKmPyiDrHgPXLQWJskjEXgCH9yOeBUAOeKqx+DP2G0t0XNP95cX0GV39GQ1+4AUi
-         n25wILRmSRYFzKoZyo1N/l0wAV/mraAYHCfXWpigQcIoSZqDPfSdnsCynmv8Zu168jaC
-         KionutP3q4kyjrA0aLsSx8cpdeUU6q0etXbnUcRPpdqrqpIRHY4yaDiXslUA+3Oh1+I4
-         0mpxo9HiSLLwPgvFA5DBycOAMeO1C6D8wkzvZvur10IAGRF0E5CeOwdTW91lIYz0l9aH
-         +5jyCGgE5h2eq+V2nbT+HazTs8rzDobjGrmX3ri5rmfEonSi5zg5DaeOvBnt1V54DOvw
-         pykQ==
+        bh=dqqIxKUNV5aK7/bdXWYdR62qoIryRqWEcKsqipH0GN0=;
+        b=JNVsT8OzHekM4u5CtB0YW8Py8ZWDeFH3QdsuiQy5v945cGckCXptTWV39gpUIGWZpC
+         OT1tnuEGFvvAlkjQSjMJkxniPJRM64mkseXpAjrVATMfvAcpTmITbBYhvbRR6BOSVHfk
+         c5uLsPCfGpJmMWr4tpy3vjNbidhY3FWSlPX0tanHSrtnYgnwzFLxVvYX+EkJl+wMd5BN
+         q2h/ycgHyqExdKR3YLV5sxxzFUXYLBQzTAsu3TAQW/qX8LKjrHd/HKZveqW/AnrV69T5
+         66MQKOS1nkSOpqhlagFoiothcHF2ec2vWXjrX51FYN/d5mo+Q0eMzLHThviH57/ExvF2
+         sZ5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701991477; x=1702596277;
+        d=1e100.net; s=20230601; t=1701991476; x=1702596276;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=fHnPkPRXriCDZCeZ6Wj3sz6iuBttUS+ioa0gHxs/7F8=;
-        b=KRAll0juPY5q3isXpbb18XsD0Q3g+OAdv60s/SbgFp/ZgF6Ca6EnwXzSlsF1yAbhTt
-         ZFBnb79tzGtpIHXSOhtyU4GyKc6qeJVWoIl1j8iT3Lp15eC/udDLJa+41Q1E1pWGRTBk
-         qgC25vxNNn9zjHZmdaYgAd26mcFcVslxdNodUf1gt0gk4FH+PIc9aQgYMvnSlaRUzDeV
-         0v9CvmW31bZ7/1g7ayC9ftFMkq67k8Rd6cxb4m2hlvuD/B/b2qV4JAZAGwUNz6iC6EHn
-         4aTwvRcpCxSTPLCnJItIyZvxsNveijdA7nSWdyhnxLmEkErBPr7i9/hJ3Ltf/NiE6Yxu
-         4yVA==
-X-Gm-Message-State: AOJu0Yzs7zpBnuL+VRZ/rTpf96baqslRxNlHe0pEbq/5BZ6qf6D3aNr/
-	Kfkuqit24v9iNZ6N0wbWJGMJMO32cSw=
-X-Google-Smtp-Source: AGHT+IE2Ir7XrRPEn3K3WC21qxUWD4g6SViBM7FRmDvF1ecD9MSRG7wOD5yZsHMbUqJoYVgYIoHsCQ==
-X-Received: by 2002:a05:6a00:cc9:b0:6ce:2731:47b4 with SMTP id b9-20020a056a000cc900b006ce273147b4mr3539pfv.20.1701991477251;
-        Thu, 07 Dec 2023 15:24:37 -0800 (PST)
+        bh=dqqIxKUNV5aK7/bdXWYdR62qoIryRqWEcKsqipH0GN0=;
+        b=pdnJyPrLmN/G5YWTUr1ymuCFSD++AYya9Ko9Naam1iY4rjnAKfC0X0+oEfvS/NteQa
+         JWZQcoHzlj6wG2JGuNP26Ldru3NnVYMZqg5xsS9u8br2/s7yKvxnnWxwxZAjwcinq0sS
+         Z2mEkICXbuT/N42rnTcwZUifnkwHBXu1WjMUAk5mG/LtNBbumGMjWdlEmE/BIDHGeifC
+         TRYNg60GbRq2GpAu9HPc5r0Rk2wGS7MZYjTWnBW+m/jjP19N1064iHe23wPwGMmwQ+j6
+         balIAb+XODV9P+FYYr7JU5R9I1UJIjI9Y4FT7/4saZjbzfNJex5+5R81cLsWsYfvBbjw
+         GPZw==
+X-Gm-Message-State: AOJu0Yz5x2PD2WpKtMzRrQTccFfM4cEeR1vO5gvQULGVhqpPjsVDmsPW
+	sKVN3lPW7BkD6Dn7Xp6QJtwCFP+Calc=
+X-Google-Smtp-Source: AGHT+IGvlkSvDlN6qXu0RnuBzgWzd2+P9v5e4wGeG0sIwe4MV0rJsuUDlZCXwHyQoE4spiGiGa0xQQ==
+X-Received: by 2002:a05:6a20:8429:b0:189:fd93:c969 with SMTP id c41-20020a056a20842900b00189fd93c969mr4294781pzd.26.1701991475727;
+        Thu, 07 Dec 2023 15:24:35 -0800 (PST)
 Received: from chiron.hsd1.or.comcast.net ([2601:1c0:ca00:cea0:f523:dc1d:b135:87b9])
-        by smtp.gmail.com with ESMTPSA id ff16-20020a056a002f5000b006ce742b6b1fsm324266pfb.63.2023.12.07.15.24.36
+        by smtp.gmail.com with ESMTPSA id ff16-20020a056a002f5000b006ce742b6b1fsm324266pfb.63.2023.12.07.15.24.35
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 07 Dec 2023 15:24:36 -0800 (PST)
+        Thu, 07 Dec 2023 15:24:35 -0800 (PST)
 From: Tim Orling <ticotimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 7/7] python3-pydantic: enable ptest
-Date: Thu,  7 Dec 2023 15:23:57 -0800
-Message-Id: <7d6f92c65d843ad7f4db15a43be065759fe8e7eb.1701991044.git.ticotimo@gmail.com>
+Subject: [meta-python][PATCH 6/7] python3-cloudpickle: add v3.0.0
+Date: Thu,  7 Dec 2023 15:23:56 -0800
+Message-Id: <da9af2cf72b017ca4d06523c3d3839dd9e19ec43.1701991044.git.ticotimo@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1701991044.git.ticotimo@gmail.com>
 References: <cover.1701991044.git.ticotimo@gmail.com>
@@ -61,69 +61,50 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 07 Dec 2023 23:24:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107299
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107298
 
-* Add to ptest-packelists-meta-python.inc "FAST" under 30 s
+Dependency for python3-pydantic ptests.
+
+"""
+cloudpickle makes it possible to serialize Python constructs not
+supported by the default pickle module from the Python standard
+library.
+
+cloudpickle is especially useful for cluster computing where Python
+code is shipped over the network to execute on remote hosts, possibly
+close to the data.
+"""
 
 Signed-off-by: Tim Orling <ticotimo@gmail.com>
 ---
- .../ptest-packagelists-meta-python.inc        |  1 +
- .../python/python3-pydantic/run-ptest         |  3 +++
- .../python/python3-pydantic_2.5.2.bb          | 22 +++++++++++++++++++
- 3 files changed, 26 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-pydantic/run-ptest
+ .../python/python3-cloudpickle_3.0.0.bb        | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-cloudpickle_3.0.0.bb
 
-diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-index 13dcb621d..f6ae86a1f 100644
---- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
-+++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-@@ -27,6 +27,7 @@ PTESTS_FAST_META_PYTHON = "\
-     python3-polyline \
-     python3-precise-runner \
-     python3-prettytable \
-+    python3-pydantic \
-     python3-pydantic-core \
-     python3-pylint \
-     python3-ptyprocess \
-diff --git a/meta-python/recipes-devtools/python/python3-pydantic/run-ptest b/meta-python/recipes-devtools/python/python3-pydantic/run-ptest
+diff --git a/meta-python/recipes-devtools/python/python3-cloudpickle_3.0.0.bb b/meta-python/recipes-devtools/python/python3-cloudpickle_3.0.0.bb
 new file mode 100644
-index 000000000..8d2017d39
+index 000000000..25c379590
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pydantic/run-ptest
-@@ -0,0 +1,3 @@
-+#!/bin/sh
++++ b/meta-python/recipes-devtools/python/python3-cloudpickle_3.0.0.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "Pickler class to extend the standard pickle.Pickler functionality"
++DESCRIPTION = "cloudpickle makes it possible to serialize Python constructs \
++not supported by the default pickle module from the Python standard library.\
++\
++cloudpickle is especially useful for cluster computing where Python code is \
++shipped over the network to execute on remote hosts, possibly close to the \
++data."
++HOMEPAGE = "https://github.com/cloudpipe/cloudpickle"
 +
-+pytest --automake
-diff --git a/meta-python/recipes-devtools/python/python3-pydantic_2.5.2.bb b/meta-python/recipes-devtools/python/python3-pydantic_2.5.2.bb
-index 226c58e87..8fc59aa93 100644
---- a/meta-python/recipes-devtools/python/python3-pydantic_2.5.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-pydantic_2.5.2.bb
-@@ -29,3 +29,25 @@ RDEPENDS:${PN} += "\
-     python3-pydantic-core \
-     python3-typing-extensions \
- "
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE.cloudpickle;md5=b4d59aa5e2cc777722aac17841237931"
 +
-+inherit ptest
-+SRC_URI += "file://run-ptest"
-+RDEPENDS:${PN}-ptest += "\
-+    python3-cloudpickle \
-+    python3-dirty-equals \
-+    python3-pytest \
-+    python3-pytest-mock \
-+    python3-unittest-automake-output \
-+"
++inherit pypi python_flit_core
 +
-+do_install_ptest() {
-+    cp -rf ${S}/tests/ ${D}${PTEST_PATH}/
-+    # Requires 'ruff' (python3-ruff) which we cannot build
-+    # until we have Rust 1.71+ in oe-core
-+    rm -f ${D}${PTEST_PATH}/tests/test_docs.py
-+    # We are not trying to support mypy
-+    rm -f ${D}${PTEST_PATH}/tests/test_mypy.py
-+    # We are not trying to run benchmarks
-+    rm -rf ${D}${PTEST_PATH}/tests/benchmarks
-+}
++SRC_URI += "https://raw.githubusercontent.com/cloudpipe/cloudpickle/v${PV}/LICENSE;downloadfilename=LICENSE.cloudpickle;name=license"
 +
++SRC_URI[sha256sum] = "996d9a482c6fb4f33c1a35335cf8afd065d2a56e973270364840712d9131a882"
++SRC_URI[license.sha256sum] = "3029ea34173e9fdc233ad315dc6b100bd1ea71f529b1c1af97664a272fdc55f5"
 -- 
 2.34.1
 
