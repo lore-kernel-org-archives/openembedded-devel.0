@@ -1,134 +1,109 @@
-Return-Path: <zboszor@gmail.com>
+Return-Path: <alex.kanavin@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 10FE6C4167B
-	for <webhook@archiver.kernel.org>; Thu,  7 Dec 2023 15:34:09 +0000 (UTC)
-Received: from mail-lj1-f177.google.com (mail-lj1-f177.google.com [209.85.208.177])
- by mx.groups.io with SMTP id smtpd.web10.87312.1701963245438788895
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 44295C4167B
+	for <webhook@archiver.kernel.org>; Thu,  7 Dec 2023 15:53:19 +0000 (UTC)
+Received: from mail-lj1-f172.google.com (mail-lj1-f172.google.com [209.85.208.172])
+ by mx.groups.io with SMTP id smtpd.web10.87821.1701964394732502649
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 07 Dec 2023 07:34:05 -0800
+ Thu, 07 Dec 2023 07:53:15 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=GzKju+7B;
- spf=pass (domain: gmail.com, ip: 209.85.208.177, mailfrom: zboszor@gmail.com)
-Received: by mail-lj1-f177.google.com with SMTP id 38308e7fff4ca-2ca0d14976aso11045911fa.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 07 Dec 2023 07:34:05 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=NIUfThox;
+ spf=pass (domain: gmail.com, ip: 209.85.208.172, mailfrom: alex.kanavin@gmail.com)
+Received: by mail-lj1-f172.google.com with SMTP id 38308e7fff4ca-2c9fe0b5b28so12012491fa.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 07 Dec 2023 07:53:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1701963243; x=1702568043; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=+J6d006faMuVeoRFVWCIfe79d0zDv9WB7rq780pweuM=;
-        b=GzKju+7B/WbYkFK3ImdK00Y/uvISIWCA4Wze7jXlnOSyFwAlogcYU0hZz8wnEcG9uK
-         WR1p7j1Z+AHAWxqfsY2zr6ymnk6t2w2IXrKkm28bVIwIaeRHHBDM1e5JCrE831XI9cUq
-         H1D0HtwclINK8yP9A2re7RiO+gupyi+4nHJs4umnE1VyAetcgrRRHDa+Fi77HB35l4JX
-         Osk1rwa3JkOYtXTLgCBWOjvXj1/qWW0TtwZtEKGGI5n59N10DLebKdSMVqav+4UXqZWq
-         WOxiHAZRJ0B44oqCtWZ/LjMmEiBnKxKX+99yS34bwqIajcAN/SqaLjq51ZNOKYL8Gy1/
-         awSQ==
+        d=gmail.com; s=20230601; t=1701964393; x=1702569193; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=+qEth149O/F1YWt0rdcHBPO3zUGILhA4PtNadjRYJUk=;
+        b=NIUfThoxtPhqN8nW9QtdM+AuVRnIMcO8mczvZ+gRursRz53n5oUBJN6Q+WO4PIH5K9
+         QhXn7mPJwyzzwiLXEO8H7W6+/6XgRI8AlVX0mVOu3MJPzUpFkLgCLKqj2jsmvAEqkB5u
+         KTxTrOQRpzBB6GSuiRQKecGSS+iFJxUerEsCs0qigvhHvsFjY7ct/RezIlcoOZGH0c4r
+         EHg7ot08zb3eS23VUAilrG1+1M6zz1qDurjJEM/gCX1BL3SlT7bJWvbRBhlBVd2/yjvg
+         zCPTAKLcv21VkUFB4DtSpIJsSeBfQeLWISlh4vambwWPE3nPJ3pGpbNrcwD5w7Kpw68U
+         lCyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701963243; x=1702568043;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=+J6d006faMuVeoRFVWCIfe79d0zDv9WB7rq780pweuM=;
-        b=EMF+0k7on2jRL+M5M1GeTAxFb8rlJhkc9urth8h/J+Anq6ZMfMq+mI3vlA9gOiANYm
-         zHngy3Gdkw48HgO6wemJLnCD1M0WKi2YZMW4huQNo6/zqy8JURg6ZL5P9bQpGat30piZ
-         tjSLW60iYTBtyky26nYqd/rFddDjkH1Bjd5SvasmGP30tsL3U8NmIpbg0pO61RjLEhjO
-         /CYzb3U1T2dwWY0hG4hAQunavesg8uqvCo9YKEAzzXXpbtyST7pGYylyLvibVMkxnZgs
-         XFTwC0sI/lYBxmmtMP2Pz7ZZBvenvNATwsj7T0Gl1q/VT1HcDK9FVOWzukGdhGqoLvK9
-         w8IA==
-X-Gm-Message-State: AOJu0Yy4kB5eWO6wN14IJPIyi+S+B8agznHysATE+Ai+nS06QAfjmv9X
-	Npc9VyHIbUZnv/IClH6VXT7qCzVKY4U=
-X-Google-Smtp-Source: AGHT+IEwpFH5y0S53ACmMXLOlnoHm8zMnoCnlciK9dqqbcGjaqfWJ6SHvaH2D1IAMJ8/g8aRDiFykw==
-X-Received: by 2002:a2e:740d:0:b0:2c9:fc6e:5832 with SMTP id p13-20020a2e740d000000b002c9fc6e5832mr1579662ljc.59.1701963243176;
-        Thu, 07 Dec 2023 07:34:03 -0800 (PST)
-Received: from localhost.lan (dsl51B7D2F9.fixip.t-online.hu. [81.183.210.249])
-        by smtp.gmail.com with ESMTPSA id x7-20020a170906710700b00a1cd0794696sm965496ejj.53.2023.12.07.07.34.02
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 07 Dec 2023 07:34:02 -0800 (PST)
-From: =?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>,
-	=?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
-Subject: [meta-gnome][PATCH v2] mutter: Make gnome-desktop and libcanberra dependencies optional
-Date: Thu,  7 Dec 2023 16:33:54 +0100
-Message-ID: <20231207153354.273551-1-zboszor@gmail.com>
-X-Mailer: git-send-email 2.43.0
+        d=1e100.net; s=20230601; t=1701964393; x=1702569193;
+        h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=+qEth149O/F1YWt0rdcHBPO3zUGILhA4PtNadjRYJUk=;
+        b=mc4xsqywVQPdXG73UnTAb8fj+NTTsb2UzJNaZ5qdR27TGlJiX5TUkQ3i169cGb3uDg
+         bqZLpdY+/J3U66uqo6QY0XHTmy5GZ3hs8Mqn28eD+qFA+Dx2NBxLhGJD+TESWhIZEwAy
+         bjKRzTFXKpIvw1kBkwIKNecho+jO0q/fScd/1B92k+2K9JmLvO+nsnv6/ZShfao8QUbQ
+         HornACWh55SIZmmAC5kIt1QdRF5dth/uZL1hmmg8mDbfIUVp/HQTphIkq12oh4YoXMWm
+         sk6V0yhJwVGaLqGYw8ZqRvAl3pZMNSX0AZb2FiWrMlRuQ0vEdCtN+Zt2rRIFFHj9Jdy6
+         xgag==
+X-Gm-Message-State: AOJu0Yz3/tP0sI5Er+u2AEz+maPYBqT+IWDKoAoI7JMjSGBfpyDjKfNy
+	7ZgOX3fHjWJ/fckuB1dc1+8b4aiOzsy4DuP8ZATifWOCC2Q=
+X-Google-Smtp-Source: AGHT+IH1nqZ5Nuc/ggChdwyrrRw8FUg9jlOAczN+TJomddifFBkpY/hFWsvYPi7QSxIen1FlUpmzbruKyI0sQaBTF/E=
+X-Received: by 2002:a2e:6a19:0:b0:2c9:fee0:5743 with SMTP id
+ f25-20020a2e6a19000000b002c9fee05743mr1726844ljc.99.1701964392682; Thu, 07
+ Dec 2023 07:53:12 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+From: Alexander Kanavin <alex.kanavin@gmail.com>
+Date: Thu, 7 Dec 2023 16:53:01 +0100
+Message-ID: <CANNYZj_RSUUieQcKPkmrVft7fGmVHzR4yjL0wFGDBLx_wBghig@mail.gmail.com>
+Subject: python 3.12 - help needed in fixing meta-oe failures
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: Tim Orling <tim.orling@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 07 Dec 2023 15:34:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107282
+ <openembedded-devel@lists.openembedded.org>; Thu, 07 Dec 2023 15:53:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107283
 
-mutter may be used as a standalone compositor and even an X11 WM
-without the complete GNOME desktop environment. Make this optional
-and add the new control knob to PACKAGECONFIG by default.
+Hello all,
 
-The built-in sound player functionality depends on libcanberra
-which is considered outdated. Make this optional.
+I've been working on updating python to 3.12.0 in oe-core, and here's
+the current situation:
 
-Add the colord build dependency explicitly because mutter does
-not build when PACKAGECONFIG = "gnome-desktop" is not used.
+1. oe-core patchset is ready and tested against a-full on the AB. Get it here:
 
-Add the gsettings-desktop-schemas runtime dependency explicitly,
-so mutter may work without PACKAGECONFIG = "gnome-desktop".
+https://git.yoctoproject.org/poky-contrib/log/?h=akanavin/py3.12
 
-This change allows mutter in kiosk-like scenarios.
+2. meta-oe patchset is half-done. I've fixed quite a few items, and
+the collected patches are here:
 
-Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
----
- meta-gnome/recipes-gnome/mutter/mutter_45.1.bb | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+https://github.com/kanavin/meta-openembedded/commits/akanavin/py3.12
 
-diff --git a/meta-gnome/recipes-gnome/mutter/mutter_45.1.bb b/meta-gnome/recipes-gnome/mutter/mutter_45.1.bb
-index 60347aa49..6093a0fe9 100644
---- a/meta-gnome/recipes-gnome/mutter/mutter_45.1.bb
-+++ b/meta-gnome/recipes-gnome/mutter/mutter_45.1.bb
-@@ -6,6 +6,7 @@ DEPENDS = " \
-     xserver-xorg-cvt-native \
-     wayland-native \
-     virtual/libx11 \
-+    colord \
-     graphene \
-     gtk4 \
-     gdk-pixbuf \
-@@ -13,8 +14,6 @@ DEPENDS = " \
-     pango \
-     gsettings-desktop-schemas \
-     json-glib \
--    gnome-desktop \
--    gnome-settings-daemon \
-     libei \
-     libxtst \
-     libxkbfile \
-@@ -41,6 +40,7 @@ PACKAGECONFIG ??= " \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'opengl x11', 'opengl glx', '', d)} \
-     sm \
-     startup-notification \
-+    gnome-desktop \
- "
- 
- EXTRA_OEMESON += " \
-@@ -57,7 +57,9 @@ PACKAGECONFIG[libdisplay-info] = "-Dlibdisplay_info=true, -Dlibdisplay_info=fals
- PACKAGECONFIG[libwacom] = "-Dlibwacom=true, -Dlibwacom=false, libwacom"
- # Remove depending on pipewire-0.2 when mutter is upgraded to 3.36+
- PACKAGECONFIG[remote-desktop] = "-Dremote_desktop=true, -Dremote_desktop=false, pipewire"
-+PACKAGECONFIG[gnome-desktop] = "-Dlibgnome_desktop=true, -Dlibgnome_desktop=false, gnome-desktop gnome-settings-daemon"
- PACKAGECONFIG[sm] = "-Dsm=true, -Dsm=false, libsm"
-+PACKAGECONFIG[sound-player] = "-Dsound_player=true, -Dsound_player=false, libcanberra"
- PACKAGECONFIG[profiler] = "-Dprofiler=true,-Dprofiler=false,sysprof"
- PACKAGECONFIG[startup-notification] = "-Dstartup_notification=true, -Dstartup_notification=false, startup-notification, startup-notification"
- 
-@@ -102,5 +104,5 @@ FILES:${PN}-dev += " \
-     ${libdir}/${MUTTER_API_NAME}/lib*.so \
- "
- 
--RDEPENDS:${PN} += "zenity ${PN}-gsettings"
-+RDEPENDS:${PN} += "zenity ${PN}-gsettings gsettings-desktop-schemas"
- 
--- 
-2.43.0
+There are still some 27 recipes failing, here's the list:
 
+  /srv/work/alex/meta-openembedded/meta-python/recipes-devtools/python/python3-dominate_2.8.0.bb:do_compile
+  /srv/work/alex/meta-openembedded/meta-python/recipes-devtools/python/python3-yappi_1.4.0.bb:do_compile
+  /srv/work/alex/meta-openembedded/meta-oe/recipes-extended/mozjs/mozjs-115_115.2.0.bb:do_configure
+  /srv/work/alex/meta-openembedded/meta-oe/recipes-extended/volume_key/volume-key_0.3.12.bb:do_compile
+  /srv/work/alex/meta-openembedded/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_1.0.1.bb:do_install
+  /srv/work/alex/meta-openembedded/meta-python/recipes-devtools/python/python3-constantly_15.1.0.bb:do_compile
+  /srv/work/alex/meta-openembedded/meta-python/recipes-devtools/python/python3-xmlrunner_1.7.7.bb:do_compile
+  /srv/work/alex/meta-openembedded/meta-python/recipes-devtools/python/python3-custom-inherit_2.4.1.bb:do_compile
+  /srv/work/alex/meta-openembedded/meta-python/recipes-devtools/python/python3-oslash_0.6.3.bb:do_compile
+  /srv/work/alex/meta-openembedded/meta-python/recipes-devtools/python/python3-click-spinner_0.1.10.bb:do_compile
+  /srv/work/alex/meta-openembedded/meta-python/recipes-devtools/python/python3-gmpy2_2.1.5.bb:do_compile
+  /srv/work/alex/meta-openembedded/meta-oe/recipes-security/nmap/nmap_7.80.bb:do_compile
+  virtual:native:/srv/work/alex/meta-openembedded/meta-networking/recipes-support/wireshark/wireshark_4.0.10.bb:do_configure
+  /srv/work/alex/meta-openembedded/meta-oe/recipes-extended/mozjs/mozjs-102_102.15.1.bb:do_configure
+  /srv/work/alex/meta-openembedded/meta-oe/recipes-extended/sigrok/sigrok-cli_0.7.2.bb:do_compile
+  /srv/work/alex/meta-openembedded/meta-python/recipes-devtools/python/python3-ninja_1.11.1.bb:do_compile
+  /srv/work/alex/meta-openembedded/meta-networking/recipes-support/openipmi/openipmi_2.0.32.bb:do_configure
+  /srv/work/alex/meta-openembedded/meta-oe/recipes-extended/hplip/hplip_3.22.10.bb:do_compile
+  /srv/work/alex/meta-openembedded/meta-oe/recipes-security/audit/audit_3.1.2.bb:do_compile
+  /srv/work/alex/meta-openembedded/meta-oe/recipes-extended/libpwquality/libpwquality_1.4.5.bb:do_compile
+  /srv/work/alex/meta-openembedded/meta-oe/dynamic-layers/meta-python/recipes-dbs/mongodb/mongodb_git.bb:do_compile
+  /srv/work/alex/meta-openembedded/meta-networking/dynamic-layers/meta-python/recipes-printing/system-config-printer/system-config-printer_1.5.18.bb:do_compile
+  /srv/work/alex/meta-openembedded/meta-python/recipes-devtools/python/python3-cmake_3.27.7.bb:do_compile
+  /srv/work/alex/meta-openembedded/meta-oe/recipes-devtools/mercurial/mercurial_6.5.bb:do_install
+  /srv/work/alex/meta-openembedded/meta-python/recipes-devtools/python/python3-grpcio-tools_1.56.0.bb:do_compile
+  /srv/work/alex/meta-openembedded/meta-oe/dynamic-layers/meta-python/recipes-bsp/rwmem/rwmem_1.2.bb:do_package
+  /srv/work/alex/meta-openembedded/meta-oe/recipes-extended/upm/upm_git.bb:do_package
+
+So if you could take these two branches of mine, and fix some of the
+remaining issues, I'd appreciate. The branches contain some typical
+examples of what becomes broken, and several possibilities of how to
+fix that.
+
+Thanks,
+Alex
 
