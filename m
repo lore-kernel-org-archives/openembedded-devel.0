@@ -2,56 +2,56 @@ Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F1C2CC10DC3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E424CC10DCE
 	for <webhook@archiver.kernel.org>; Thu,  7 Dec 2023 23:24:41 +0000 (UTC)
-Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
- by mx.groups.io with SMTP id smtpd.web11.113089.1701991476592222096
+Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
+ by mx.groups.io with SMTP id smtpd.web10.113519.1701991473666410144
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 07 Dec 2023 15:24:36 -0800
+ Thu, 07 Dec 2023 15:24:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=JNVsT8Oz;
- spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: ticotimo@gmail.com)
-Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-6ce9e897aeaso1120143b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 07 Dec 2023 15:24:36 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Wm//hefx;
+ spf=pass (domain: gmail.com, ip: 209.85.215.182, mailfrom: ticotimo@gmail.com)
+Received: by mail-pg1-f182.google.com with SMTP id 41be03b00d2f7-5c66e7eafabso1240120a12.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 07 Dec 2023 15:24:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1701991476; x=1702596276; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1701991473; x=1702596273; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=dqqIxKUNV5aK7/bdXWYdR62qoIryRqWEcKsqipH0GN0=;
-        b=JNVsT8OzHekM4u5CtB0YW8Py8ZWDeFH3QdsuiQy5v945cGckCXptTWV39gpUIGWZpC
-         OT1tnuEGFvvAlkjQSjMJkxniPJRM64mkseXpAjrVATMfvAcpTmITbBYhvbRR6BOSVHfk
-         c5uLsPCfGpJmMWr4tpy3vjNbidhY3FWSlPX0tanHSrtnYgnwzFLxVvYX+EkJl+wMd5BN
-         q2h/ycgHyqExdKR3YLV5sxxzFUXYLBQzTAsu3TAQW/qX8LKjrHd/HKZveqW/AnrV69T5
-         66MQKOS1nkSOpqhlagFoiothcHF2ec2vWXjrX51FYN/d5mo+Q0eMzLHThviH57/ExvF2
-         sZ5w==
+        bh=AlNVGRp7Zy/trSzm/rrOJNdUukYY6sE4+X1IX26iL5w=;
+        b=Wm//hefx+jl2yjeNx/iWJS+HIsh8czjVffD1oq+FthRbCsLvig7zqq5PChGgjJQXWc
+         Y6QyOM/xYGs09JFYv/T9h6tW9xLUgHH4Ycyzlc5QxY3zRgRfK4z+BeiIi/jIaEXFuK+b
+         LEnYJXyFi9skIC18Wxe+ZVy6NSbJRvnzrrdlsPFLu8puJWk0EYty89E9JiuPONyMZVB9
+         CY+xmT4cAVU5h7bmUbLULCX8Ij5/y7Ym69JWoiFPEA8bl6IubXI45vGcDlDjc53iNxor
+         7ThX/Egs+z8Dr6zSHsLSLutnob/dMKV4UyQB+Esyuj0RgyIdbFBeOtYTr/rFiwsdQ1l2
+         fdnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1701991476; x=1702596276;
+        d=1e100.net; s=20230601; t=1701991473; x=1702596273;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=dqqIxKUNV5aK7/bdXWYdR62qoIryRqWEcKsqipH0GN0=;
-        b=pdnJyPrLmN/G5YWTUr1ymuCFSD++AYya9Ko9Naam1iY4rjnAKfC0X0+oEfvS/NteQa
-         JWZQcoHzlj6wG2JGuNP26Ldru3NnVYMZqg5xsS9u8br2/s7yKvxnnWxwxZAjwcinq0sS
-         Z2mEkICXbuT/N42rnTcwZUifnkwHBXu1WjMUAk5mG/LtNBbumGMjWdlEmE/BIDHGeifC
-         TRYNg60GbRq2GpAu9HPc5r0Rk2wGS7MZYjTWnBW+m/jjP19N1064iHe23wPwGMmwQ+j6
-         balIAb+XODV9P+FYYr7JU5R9I1UJIjI9Y4FT7/4saZjbzfNJex5+5R81cLsWsYfvBbjw
-         GPZw==
-X-Gm-Message-State: AOJu0Yz5x2PD2WpKtMzRrQTccFfM4cEeR1vO5gvQULGVhqpPjsVDmsPW
-	sKVN3lPW7BkD6Dn7Xp6QJtwCFP+Calc=
-X-Google-Smtp-Source: AGHT+IGvlkSvDlN6qXu0RnuBzgWzd2+P9v5e4wGeG0sIwe4MV0rJsuUDlZCXwHyQoE4spiGiGa0xQQ==
-X-Received: by 2002:a05:6a20:8429:b0:189:fd93:c969 with SMTP id c41-20020a056a20842900b00189fd93c969mr4294781pzd.26.1701991475727;
-        Thu, 07 Dec 2023 15:24:35 -0800 (PST)
+        bh=AlNVGRp7Zy/trSzm/rrOJNdUukYY6sE4+X1IX26iL5w=;
+        b=nFoIeANAwr/AwgXsKOQ14KtXGgjWgILZFr2NYqL4sH+JgCNp+yYx0heNajikFO3Ths
+         x9x4EiNaLGb/a7xcwSNtpal56CJACNJQD5KdoACxCw6d/7wV4GHLjpr44BnDG5fbUSpj
+         LpOWqYJrABIwOFevH4CcTNea9KntNxLaJ3agXszBXUsZenfknxYEZUxdV9DGp7PIjKSX
+         jRcJM0eFtVk79IeE0b6qwE6uarCrQ/F1/QXX2ckjBiP2mRD/TOG/xQkC8vLn1j1Rh5Kx
+         /+wr9PT3TvAfBgT6nYbw2PXtFPWMzJYaGEuGfjHXLWMU2cmlqx5fVC68Oae1JSO7Anyz
+         rc9Q==
+X-Gm-Message-State: AOJu0YyiLqjEr4cPj/CztySEBtouJFfuORoYDzBJMzcUlz2LHHQ0pJlh
+	Cq1E05dDdujH4fuB3C3L/QwkXccRs4U=
+X-Google-Smtp-Source: AGHT+IEAoiDoY43PWQII5Zg6xt8hj87iFg2ICcHzBSFnrRvDiPT/Day4CwqYZPibf124GAgCQlSCtA==
+X-Received: by 2002:a05:6a20:43a7:b0:18f:bf91:2938 with SMTP id i39-20020a056a2043a700b0018fbf912938mr4203654pzl.125.1701991472683;
+        Thu, 07 Dec 2023 15:24:32 -0800 (PST)
 Received: from chiron.hsd1.or.comcast.net ([2601:1c0:ca00:cea0:f523:dc1d:b135:87b9])
-        by smtp.gmail.com with ESMTPSA id ff16-20020a056a002f5000b006ce742b6b1fsm324266pfb.63.2023.12.07.15.24.35
+        by smtp.gmail.com with ESMTPSA id ff16-20020a056a002f5000b006ce742b6b1fsm324266pfb.63.2023.12.07.15.24.32
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 07 Dec 2023 15:24:35 -0800 (PST)
+        Thu, 07 Dec 2023 15:24:32 -0800 (PST)
 From: Tim Orling <ticotimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 6/7] python3-cloudpickle: add v3.0.0
-Date: Thu,  7 Dec 2023 15:23:56 -0800
-Message-Id: <da9af2cf72b017ca4d06523c3d3839dd9e19ec43.1701991044.git.ticotimo@gmail.com>
+Subject: [meta-python][PATCH 4/7] python3-dirty-equals: add v0.7.1
+Date: Thu,  7 Dec 2023 15:23:54 -0800
+Message-Id: <e6ebdfcb815cafccc8faf3d3722ea0e1ae6eea30.1701991044.git.ticotimo@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1701991044.git.ticotimo@gmail.com>
 References: <cover.1701991044.git.ticotimo@gmail.com>
@@ -61,50 +61,52 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 07 Dec 2023 23:24:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107298
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107296
 
-Dependency for python3-pydantic ptests.
+Dependency for python3-pydantic-core ptests.
 
 """
-cloudpickle makes it possible to serialize Python constructs not
-supported by the default pickle module from the Python standard
-library.
+dirty-equals is a python library that (mis)uses the __eq__ method to make
+python code (generally unit tests) more declarative and therefore easier
+to read and write.
 
-cloudpickle is especially useful for cluster computing where Python
-code is shipped over the network to execute on remote hosts, possibly
-close to the data.
-"""
+dirty-equals can be used in whatever context you like, but it comes into
+its own when writing unit tests for applications where you're commonly
+checking the response to API calls and the contents of a database.
 
 Signed-off-by: Tim Orling <ticotimo@gmail.com>
 ---
- .../python/python3-cloudpickle_3.0.0.bb        | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-cloudpickle_3.0.0.bb
+ .../python/python3-dirty-equals_0.7.1.bb      | 21 +++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-dirty-equals_0.7.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-cloudpickle_3.0.0.bb b/meta-python/recipes-devtools/python/python3-cloudpickle_3.0.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-dirty-equals_0.7.1.bb b/meta-python/recipes-devtools/python/python3-dirty-equals_0.7.1.bb
 new file mode 100644
-index 000000000..25c379590
+index 000000000..ea9303b17
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-cloudpickle_3.0.0.bb
-@@ -0,0 +1,18 @@
-+SUMMARY = "Pickler class to extend the standard pickle.Pickler functionality"
-+DESCRIPTION = "cloudpickle makes it possible to serialize Python constructs \
-+not supported by the default pickle module from the Python standard library.\
++++ b/meta-python/recipes-devtools/python/python3-dirty-equals_0.7.1.bb
+@@ -0,0 +1,21 @@
++SUMMARY = "Doing dirty (but extremely useful) things with equals."
++DESCRIPTION = "dirty-equals is a python library that (mis)uses the \
++__eq__ method to make python code (generally unit tests) more \
++declarative and therefore easier to read and write.\
 +\
-+cloudpickle is especially useful for cluster computing where Python code is \
-+shipped over the network to execute on remote hosts, possibly close to the \
-+data."
-+HOMEPAGE = "https://github.com/cloudpipe/cloudpickle"
++dirty-equals can be used in whatever context you like, but it comes \
++into its own when writing unit tests for applications where you're \
++commonly checking the response to API calls and the contents of a database."
++HOMEPAGE = "https://github.com/samuelcolvin/dirty-equals"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=ab599c188b4a314d2856b3a55030c75c"
 +
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE.cloudpickle;md5=b4d59aa5e2cc777722aac17841237931"
++SRC_URI[sha256sum] = "a580513f3285e93656a770a04e428f8bfc513848877bf278282dbfbb907fdbb4"
 +
-+inherit pypi python_flit_core
++S = "${WORKDIR}/dirty_equals-${PV}"
 +
-+SRC_URI += "https://raw.githubusercontent.com/cloudpipe/cloudpickle/v${PV}/LICENSE;downloadfilename=LICENSE.cloudpickle;name=license"
++inherit pypi python_hatchling
 +
-+SRC_URI[sha256sum] = "996d9a482c6fb4f33c1a35335cf8afd065d2a56e973270364840712d9131a882"
-+SRC_URI[license.sha256sum] = "3029ea34173e9fdc233ad315dc6b100bd1ea71f529b1c1af97664a272fdc55f5"
++PYPI_PACKAGE = "dirty_equals"
++
++RDEPENDS:${PN} += "python3-pytz"
 -- 
 2.34.1
 
