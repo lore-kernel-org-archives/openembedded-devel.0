@@ -1,111 +1,173 @@
-Return-Path: <alperyasinak1@gmail.com>
+Return-Path: <jean-marc.bouche@foss.st.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A2F6C4167B
-	for <webhook@archiver.kernel.org>; Fri,  8 Dec 2023 12:56:43 +0000 (UTC)
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
- by mx.groups.io with SMTP id smtpd.web11.34497.1702040202925604593
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D83BC4167B
+	for <webhook@archiver.kernel.org>; Fri,  8 Dec 2023 12:58:53 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com [91.207.212.93])
+ by mx.groups.io with SMTP id smtpd.web10.34855.1702040323893899141
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 08 Dec 2023 04:56:43 -0800
+ Fri, 08 Dec 2023 04:58:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=fdMMuGx/;
- spf=pass (domain: gmail.com, ip: 209.85.128.51, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-40c2d50bfbfso7635885e9.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 08 Dec 2023 04:56:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1702040200; x=1702645000; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=oqElpNW26sSUCj2JBfiXOIMeFMgqTuCURcOlkNEWvN4=;
-        b=fdMMuGx/raUDH+x0UCspnchEeysJsjbjj09uuSowvAZ96xR3bGkfHbyglIkejSZTgi
-         Ql+Xalsx/0IwI8BO6T5mt/CFTSm+QhRxjceTR99muSJMtMrhpnbwe0tqVQi1nOKxuR4t
-         li4ZVmXL24hvdKEJUgeG8nz06Pu85pMDCWZP1/LCUP/al3E4VHAS1gyJgdOciSkJo0Sm
-         Uqu5gstO1ppgiqF5rasICd16vQNEWv/sr46EMe2d//KBJ+agjX81Q2CGrROPc4cif/YG
-         SDZa9nyrYJKyLv4RepWzUjGuN38rg2OrkrLcLcKmU5/w99pecofCQ+3Rko7b5VLe03RC
-         LqnQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702040200; x=1702645000;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=oqElpNW26sSUCj2JBfiXOIMeFMgqTuCURcOlkNEWvN4=;
-        b=OzVzw553RL4n22CCLNC0rp668Yx2zkgw4F1HXVMHGy0j+3mVIcIHv/fmNEFFqmh5kx
-         MSazw3EgT++GX9kujjEGzXS8pU6iVXdXpkIgx7ayKAKuMLb4H6yUirEqPzMEqB6Vapa7
-         K4YbEjlB1W2Ht3T011ee676VMA4qhSdeBAn8w4WS15ooGSY3V3IksXdQuTsRZtm86KMW
-         4o42FXIqG+HwxqB4BCESRsW/K9iHGoMLzwVZSHtMaK78hDHMLZt4OG17A0Ji4r0wN32G
-         XMA9z6ObUpVarFuraLxLWwp8Wq6mGm8PVCvIbO5Ex9A8TwTwWsR59P/5UPEy/OLlD0Rs
-         bROg==
-X-Gm-Message-State: AOJu0Yyjhg6Hywk0WuSxjD4FDJX2Bj/Cy7GbW5bX1dZ/fQU/HkrHc3B+
-	E5WZSC31jmFiC1G8OgcDHeCzTTcsnAKH3A==
-X-Google-Smtp-Source: AGHT+IFmHcx36oA6zdXpkP7WqoOPAdQsRLpIEnE/LbkkmyeOe/Gml4jBCXssFQhiH6UXXD3m9JFMfQ==
-X-Received: by 2002:a05:600c:3056:b0:40b:5e1f:c37f with SMTP id n22-20020a05600c305600b0040b5e1fc37fmr41629wmh.21.1702040200039;
-        Fri, 08 Dec 2023 04:56:40 -0800 (PST)
-Received: from localhost.localdomain ([176.33.71.251])
-        by smtp.gmail.com with ESMTPSA id he15-20020a05600c540f00b0040b5517ae31sm5133664wmb.6.2023.12.08.04.56.38
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 08 Dec 2023 04:56:39 -0800 (PST)
-From: alperak <alperyasinak1@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-oe][PATCHv4] xsetroot: upgrade 1.1.2 -> 1.1.3
-Date: Fri,  8 Dec 2023 15:56:33 +0300
-Message-Id: <20231208125633.336439-1-alperyasinak1@gmail.com>
+ dkim=pass header.i=@foss.st.com header.s=selector1 header.b=hAJBbCgJ;
+ spf=pass (domain: foss.st.com, ip: 91.207.212.93, mailfrom: prvs=07069b75d9=jean-marc.bouche@foss.st.com)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+	by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 3B88IC6S017759
+	for <openembedded-devel@lists.openembedded.org>; Fri, 8 Dec 2023 13:58:42 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+	from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=selector1; bh=Ys11+kb
+	tuiLOqDtRF7YhYcW+SiFhv0KaMt9I7tzgabM=; b=hAJBbCgJxpmLaV128MRaJq0
+	DIJKgeznLMh0mTFdPciK1aVuZ2d0CikMyt4QCOzHfJNTpovdv4oUkq9Ye7Md6uBb
+	A8KD47loAco6jLWk043+bt8YWFeaCw36zVbUFCBwsCoUyipnV70idTq/KvCbqHnH
+	tiMUAHFvza0d6D30p+778pnD2k0eIoNXY2PKTF/qu4MheZToVwgTP3FHXZxkbBGM
+	8yy0occyFmbh441gX0hA+zloZm2NUX8VpovW5PrjwVhAOT/xXMeClq+uwEslZvjN
+	GI9HrucB9ZXKewf8wdJ0/jEr7VLoZCWHgxpVWw1ldmVemZE19ip61iDCO8bM7UQ=
+	=
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+	by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3utd2jmjsu-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 08 Dec 2023 13:58:42 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+	by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 297B5100056
+	for <openembedded-devel@lists.openembedded.org>; Fri,  8 Dec 2023 13:58:40 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+	by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 89F0421F0AB
+	for <openembedded-devel@lists.openembedded.org>; Fri,  8 Dec 2023 13:58:40 +0100 (CET)
+Received: from localhost (10.129.178.205) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 8 Dec
+ 2023 13:58:40 +0100
+From: Jean-Marc BOUCHE <jean-marc.bouche@foss.st.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Jean-Marc BOUCHE <jean-marc.bouche@foss.st.com>
+Subject: [oe][meta-oe][PATCHv3] terminus-font: build compressed archives with -n
+Date: Fri, 8 Dec 2023 13:58:38 +0100
+Message-ID: <20231208125838.1723058-1-jean-marc.bouche@foss.st.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.129.178.205]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-12-08_07,2023-12-07_01,2023-05-22_02
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 08 Dec 2023 12:56:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107308
+ <openembedded-devel@lists.openembedded.org>; Fri, 08 Dec 2023 12:58:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107309
 
-By default, xsetroot depends on libxmu and xbitmaps
+When building this recipe, internal archives are compressed with
+gzip. The compressed archives contain a header with the field
+MTIME (Modification Time) which is initialized from the built
+date. As a consequence, two builds of this recipe always generate
+packages whose checksum differs.
+Adding the -n option to gzip while compressing the archive does
+not save the original time stamp by default hence making
+reproducible package.
 
-xsetroot dependencies -> https://gitlab.freedesktop.org/xorg/app/xsetroot/-/blob/master/configure.ac?ref_type=heads#L41
+Signed-off-by: Jean-Marc BOUCHE <jean-marc.bouche@foss.st.com>
 
-xbitmaps has no dependency on libxmu but it was added as a dependency in version 1.1.2. When upgrading xbitmaps to version 1.1.3, libxmu removed from the dependencies
-Since xsetroot depends on xbitmaps, and libxmu was removed from xbitmaps dependencies, encountered missing libxmu dependencies error.
-
-xbitmaps dependencies -> https://gitlab.freedesktop.org/xorg/data/bitmaps/-/blob/master/configure.ac?ref_type=heads
-xbitmaps upgrade 1.1.2 to 1.1.3 -> https://github.com/openembedded/meta-openembedded/commit/5430b16813c87dc5d69a2ae21bc6d5f2b73cd8d5
-
-So, added libxmu as a dependency to xsetroot for fixing build issue.
-
-Changelog:
-
-* gitlab CI: stop requiring Signed-off-by in commits
-* Handle -Wsign-compare warnings
-* Variable scope reductions as recommended by cppcheck
-* Build xz tarballs instead of bzip2
-* CI: add a basic build test
-* Update configure.ac bug URL for gitlab migration
-* Update README for gitlab migration
-
-Signed-off-by: alperak <alperyasinak1@gmail.com>
 ---
- .../xorg-app/{xsetroot_1.1.2.bb => xsetroot_1.1.3.bb}       | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-graphics/xorg-app/{xsetroot_1.1.2.bb => xsetroot_1.1.3.bb} (66%)
 
-diff --git a/meta-oe/recipes-graphics/xorg-app/xsetroot_1.1.2.bb b/meta-oe/recipes-graphics/xorg-app/xsetroot_1.1.3.bb
-similarity index 66%
-rename from meta-oe/recipes-graphics/xorg-app/xsetroot_1.1.2.bb
-rename to meta-oe/recipes-graphics/xorg-app/xsetroot_1.1.3.bb
-index a9a8acf05..7e909f90c 100644
---- a/meta-oe/recipes-graphics/xorg-app/xsetroot_1.1.2.bb
-+++ b/meta-oe/recipes-graphics/xorg-app/xsetroot_1.1.3.bb
-@@ -7,7 +7,7 @@ SECTION = "x11/app"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=6ea29dbee22324787c061f039e0529de"
+Missing the Upstream-status in use-no-name-option-for-gzip.patch
+hence this v3 to fix it
+---
+ .../use-no-name-option-for-gzip.patch         | 66 +++++++++++++++++++
+ .../terminus-font/terminus-font_4.49.1.bb     |  4 +-
+ 2 files changed, 69 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-graphics/terminus-font/terminus-font/use-no-name-option-for-gzip.patch
+
+diff --git a/meta-oe/recipes-graphics/terminus-font/terminus-font/use-no-name-option-for-gzip.patch b/meta-oe/recipes-graphics/terminus-font/terminus-font/use-no-name-option-for-gzip.patch
+new file mode 100644
+index 000000000..97213c07d
+--- /dev/null
++++ b/meta-oe/recipes-graphics/terminus-font/terminus-font/use-no-name-option-for-gzip.patch
+@@ -0,0 +1,66 @@
++Build compressed archives with -n
++
++The compressed archives contain a header with the field MTIME
++(Modification Time) which is initialized from the built date.
++As a consequence, two separate builds generate compressed archives
++whose checksum differs. Such behavior prevents reproducible builds.
++
++Adding the -n option to gzip while compressing the archive does
++not save the original time stamp by default hence making
++reproducible build.
++
++Upstream-Status: Inappropriate
++
++Signed-off-by: Jean-Marc BOUCHE <jean-marc.bouche@foss.st.com>
++Index: terminus-font-4.49.1/Makefile
++===================================================================
++--- terminus-font-4.49.1.orig/Makefile
+++++ terminus-font-4.49.1/Makefile
++@@ -92,9 +92,9 @@ otbdir  = $(prefix)/share/fonts/terminus
++ 
++ install: $(PSF) $(PCF)
++ 	mkdir -p $(DESTDIR)$(psfdir)
++-	for i in $(PSF) ; do gzip -c $$i > $(DESTDIR)$(psfdir)/$$i.gz ; done
+++	for i in $(PSF) ; do gzip -c -n $$i > $(DESTDIR)$(psfdir)/$$i.gz ; done
++ 	mkdir -p $(DESTDIR)$(x11dir)
++-	for i in $(PCF) ; do gzip -c $$i > $(DESTDIR)$(x11dir)/$$i.gz ; done
+++	for i in $(PCF) ; do gzip -c -n $$i > $(DESTDIR)$(x11dir)/$$i.gz ; done
++ 
++ uninstall:
++ 	for i in $(PSF) ; do rm -f $(DESTDIR)$(psfdir)/$$i.gz ; done
++@@ -193,7 +193,7 @@ psf: $(PSF)
++ 
++ install-psf: $(PSF)
++ 	mkdir -p $(DESTDIR)$(psfdir)
++-	for i in $(PSF) ; do gzip -c $$i > $(DESTDIR)$(psfdir)/$$i.gz ; done
+++	for i in $(PSF) ; do gzip -c -n $$i > $(DESTDIR)$(psfdir)/$$i.gz ; done
++ 
++ uninstall-psf:
++ 	for i in $(PSF) ; do rm -f $(DESTDIR)$(psfdir)/$$i.gz ; done
++@@ -202,7 +202,7 @@ psf-vgaw: $(PSF_VGAW)
++ 
++ install-psf-vgaw: $(PSF_VGAW)
++ 	mkdir -p $(DESTDIR)$(psfdir)
++-	for i in $(PSF_VGAW) ; do gzip -c $$i > $(DESTDIR)$(psfdir)/$$i.gz ; done
+++	for i in $(PSF_VGAW) ; do gzip -c -n $$i > $(DESTDIR)$(psfdir)/$$i.gz ; done
++ 
++ uninstall-psf-vgaw:
++ 	for i in $(PSF_VGAW) ; do rm -f $(DESTDIR)$(psfdir)/$$i.gz ; done
++@@ -279,7 +279,7 @@ pcf: $(PCF)
++ 
++ install-pcf: $(PCF)
++ 	mkdir -p $(DESTDIR)$(x11dir)
++-	for i in $(PCF) ; do gzip -c $$i > $(DESTDIR)$(x11dir)/$$i.gz ; done
+++	for i in $(PCF) ; do gzip -c -n $$i > $(DESTDIR)$(x11dir)/$$i.gz ; done
++ 
++ uninstall-pcf:
++ 	for i in $(PCF) ; do rm -f $(DESTDIR)$(x11dir)/$$i.gz ; done
++@@ -288,7 +288,7 @@ pcf-8bit: $(PCF_8BIT)
++ 
++ install-pcf-8bit: $(PCF_8BIT)
++ 	mkdir -p $(DESTDIR)$(x11dir)
++-	for i in $(PCF_8BIT) ; do gzip -c $$i > $(DESTDIR)$(x11dir)/$$i.gz ; done
+++	for i in $(PCF_8BIT) ; do gzip -c -n $$i > $(DESTDIR)$(x11dir)/$$i.gz ; done
++ 
++ uninstall-pcf-8bit:
++ 	for i in $(PCF_8BIT) ; do rm -f $(DESTDIR)$(x11dir)/$$i.gz ; done
+diff --git a/meta-oe/recipes-graphics/terminus-font/terminus-font_4.49.1.bb b/meta-oe/recipes-graphics/terminus-font/terminus-font_4.49.1.bb
+index 65cafab9e..1fabe2e29 100644
+--- a/meta-oe/recipes-graphics/terminus-font/terminus-font_4.49.1.bb
++++ b/meta-oe/recipes-graphics/terminus-font/terminus-font_4.49.1.bb
+@@ -9,7 +9,9 @@ LIC_FILES_CHKSUM = "file://OFL.TXT;md5=f57e6cca943dbc6ef83dc14f1855bdcc"
  
--DEPENDS += "xbitmaps libxcursor"
-+DEPENDS += "xbitmaps libxcursor libxmu"
+ DEPENDS = "hostperl-runtime-native gzip-native bdftopcf-native"
  
--SRC_URI[md5sum] = "5fe769c8777a6e873ed1305e4ce2c353"
--SRC_URI[sha256sum] = "10c442ba23591fb5470cea477a0aa5f679371f4f879c8387a1d9d05637ae417c"
-+SRC_URI_EXT = "xz"
-+SRC_URI[sha256sum] = "6081b45a9eb4426e045d259d1e144b32417fb635e5b96aa90647365ac96638d1"
+-SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz"
++SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz \
++          file://use-no-name-option-for-gzip.patch \
++          "
+ SRC_URI[md5sum] = "1b6acbd221957e33c8a792ebfaf3a659"
+ SRC_URI[sha256sum] = "d961c1b781627bf417f9b340693d64fc219e0113ad3a3af1a3424c7aa373ef79"
+ 
 -- 
 2.25.1
 
