@@ -1,254 +1,151 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <vkumbhar@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EF9B4C10F04
-	for <webhook@archiver.kernel.org>; Fri,  8 Dec 2023 02:42:09 +0000 (UTC)
-Received: from mail-oa1-f47.google.com (mail-oa1-f47.google.com [209.85.160.47])
- by mx.groups.io with SMTP id smtpd.web10.11430.1702003322314968204
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B74CC4167B
+	for <webhook@archiver.kernel.org>; Fri,  8 Dec 2023 04:38:20 +0000 (UTC)
+Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
+ by mx.groups.io with SMTP id smtpd.web10.13354.1702010298259002745
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 07 Dec 2023 18:42:02 -0800
+ Thu, 07 Dec 2023 20:38:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=krMI2oaS;
- spf=pass (domain: gmail.com, ip: 209.85.160.47, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f47.google.com with SMTP id 586e51a60fabf-1fa37df6da8so1003016fac.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 07 Dec 2023 18:42:02 -0800 (PST)
+ dkim=pass header.i=@mvista.com header.s=google header.b=JEvWeWrF;
+ spf=pass (domain: mvista.com, ip: 209.85.216.53, mailfrom: vkumbhar@mvista.com)
+Received: by mail-pj1-f53.google.com with SMTP id 98e67ed59e1d1-2886579d59fso1730550a91.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 07 Dec 2023 20:38:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1702003321; x=1702608121; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=fSqMSLkdxyW+RRM1FqLqMs0td1P6E0fvIU3IT+/yUps=;
-        b=krMI2oaSP2Stjn7T+QgGznUHzSGQqmBYNgJ5m7Qe/T8e5e/orl9G4RZHsIc/9pmKBi
-         iiaIB7nbIzKwas6Hsn6KB9sm7OkIAc18p+ZbW7/Hr7+Y2seaBLeb4aoKJEz8OOXNcG5o
-         UplLYWizH7FyhT25KgHd4lyClVIpCcVDSXt5MPyXMLTpTOmVqdkIpWNWDwvpawS3Xrex
-         nfo1Ytnz7Tn7hVlhLWHwWsoluvWP1V1MfM3PzVYHV7q6wYdUEzL7ZQ+/psdZAUcE4y4p
-         DxU5iSQLuubM1r1uQAEZ6MrBDhXLP9Ilb2orkOGMCyJhYRF0BSlIvdrOmHGlsn+PROdt
-         CvTA==
+        d=mvista.com; s=google; t=1702010297; x=1702615097; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=D7fPNvCg13xruoTtb3RO2iDKtPfmLCbe1WsxFOr2FJ0=;
+        b=JEvWeWrF9vN2AlowIU0Ymt+xVRDTT0IDpEOHNOPzrFnqjrrC9bBbzJDO4/HYCj0IsX
+         qc0SRgrXSNvAKFKEc0GZjYuR3FnfV5KMAJfzxAxUXsI/HTnSiVh70qKNEkj4B2vB/7LS
+         FQrVcehNi/1fdvmKnFEfsct862GGmihsybL6Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702003321; x=1702608121;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=fSqMSLkdxyW+RRM1FqLqMs0td1P6E0fvIU3IT+/yUps=;
-        b=ONgD2xZKqIfCCGHao11/PJ4PIvtR5IuT8LIrriBsCQHn8wheYNDukntYUhds5rWagU
-         XTACbhZgrehC1foGCLgixVl7mym4EuokCh4GWVu0H9vra8uktLvA+weHDIY/DZMtKFi8
-         2zAQIydV4GyeuPRlIDQhl2Z9+8zkPvS4vuKXe9VNefPk+c33ll8H1SPpy8BG/YJrs1Ym
-         p54KhKs7wj4E1V/ufVCzPdxyZIZtRIkAtH+ytYZnHyQNub989cVrwTRZMTEfmZI+Hz4G
-         xyUwEUXAEGiWmlg94usVEcfc8CRDCNi/7rCIgsVIKbMjcEVdvhoAoD/JkhtRwu54QehZ
-         ipgw==
-X-Gm-Message-State: AOJu0Yws9w/P8nE6TDvajoNyQPwPFGr14EUdR0misFdiDAA7fHx4Kg/D
-	musQndl/IVJirhqhFLsnvYctAZXFveWbbEfyjY3mZ3JehnU=
-X-Google-Smtp-Source: AGHT+IGvVsLJkYJ1ehFiZViLc5r0lPOydDRfUmOC5efNnDEi1PRdLjtz1w3MkVuPwL9rS2udG56No5aNDksaG805L6o=
-X-Received: by 2002:a05:6870:724e:b0:1fb:220f:4ec5 with SMTP id
- y14-20020a056870724e00b001fb220f4ec5mr4421100oaf.31.1702003321387; Thu, 07
- Dec 2023 18:42:01 -0800 (PST)
+        d=1e100.net; s=20230601; t=1702010297; x=1702615097;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=D7fPNvCg13xruoTtb3RO2iDKtPfmLCbe1WsxFOr2FJ0=;
+        b=EHIk8VISL5MVWpLlQZyIKUaTmeBKmnyRHKsAF4eReY/L9HJjkWHJdxG/28vmat2oHK
+         pxlN/rhP1C/AWadlTWvc3JPI1nK5IyshDOpPdsDRB7g7APYLhEusd6XI5J02P0JDyQFn
+         +lM/O0Xd4/bDSh1u2Ds000ON2iBriIPhUy7AENCxGe/9p8pD1A3uXYXI8WTVcmI4HvGU
+         ozbmsxr/2x3LQGSmQAXhmUthYQysu3vCT0xZMjFpEScX+FNcApUlLrPr3VygXFdP+YU3
+         PF38SZj0916MwtEOLJcNreMyBeIYZzY4kHaIpk1890JEykmix/lIbsG7oUCp2ftIFh4T
+         gE2Q==
+X-Gm-Message-State: AOJu0YxUAFTzQQAbo0oTFBSSMc/M2ZT427RCdzruSl9fW4ZA8RRhhWjD
+	dlGVNXAGgs3BNoB1DhOLEh8rMfD4vnMHly7vwbE=
+X-Google-Smtp-Source: AGHT+IHRNMtGTMdE5sFKU2yWB6B6eG4LvvwXmrWGbEv0ibb1bJSNE9rtw14P9yloAoGM8oJXcBusLw==
+X-Received: by 2002:a17:90b:3506:b0:285:8673:450d with SMTP id ls6-20020a17090b350600b002858673450dmr3246309pjb.40.1702010296770;
+        Thu, 07 Dec 2023 20:38:16 -0800 (PST)
+Received: from vkumbhar-Latitude-3400.. ([116.74.189.161])
+        by smtp.googlemail.com with ESMTPSA id dj14-20020a17090ad2ce00b00286e8fe03c1sm774018pjb.22.2023.12.07.20.38.15
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 07 Dec 2023 20:38:16 -0800 (PST)
+From: Vivek Kumbhar <vkumbhar@mvista.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Vivek Kumbhar <vkumbhar@mvista.com>
+Subject: [meta-oe][kirkstone][PATCH] wireshark: fix CVE-2023-1992 RPCoRDMA dissector crash
+Date: Fri,  8 Dec 2023 10:08:06 +0530
+Message-Id: <20231208043806.554858-1-vkumbhar@mvista.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-References: <20231204075356.26863-1-alperyasinak1@gmail.com>
- <CAMKF1spxo2r=UkzddHjOvNC2Y1n9JY8MRMteAHSqLOoZ9RKG=Q@mail.gmail.com> <CAGpma=7jgcvruz31dJF8KPY1VC-u=v6HRTYo215mKgYXGt-kxg@mail.gmail.com>
-In-Reply-To: <CAGpma=7jgcvruz31dJF8KPY1VC-u=v6HRTYo215mKgYXGt-kxg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 7 Dec 2023 18:41:35 -0800
-Message-ID: <CAMKF1spgsHHDo7uQLKs6EWOSmoHtWvoqf7VYSUo9JNk9kgXN=A@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] snappy: upgrade 1.1.9 -> 1.1.10
-To: alper ak <alperyasinak1@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 08 Dec 2023 02:42:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107300
+ <openembedded-devel@lists.openembedded.org>; Fri, 08 Dec 2023 04:38:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107301
 
-On Tue, Dec 5, 2023 at 11:09=E2=80=AFAM alper ak <alperyasinak1@gmail.com> =
-wrote:
->
-> I think, I found the issue but I don't know how to solve it. Btw,
-> works on arm64.
->
-> When I looked at the errors, I saw lines like:
->
-> error: use of undeclared identifier 'vminvq_u8'; did you mean 'vmvnq_u8'?
-> error: use of undeclared identifier 'vmaxvq_u8'
-> error: use of undeclared identifier 'vqtbl1q_u8'; did you mean 'vtbl1_u8'=
-?
-> error: cannot initialize a parameter of type 'uint8x8_t' (vector of 8
-> 'uint8_t' values) with an lvalue of type 'V128' (aka 'uint8x16_t')
->
-> When I checked the intrinsics from ARM, I saw that the supported
-> architecture is A64.
+Upstream-Status: Backport from https://gitlab.com/colin.mcinnes/wireshark/-/commit/3c8be14c827f1587da3c2b3bb0d9c04faff5741
 
-Please bring this patch along
-https://github.com/google/snappy/pull/169
+Signed-off-by: Vivek Kumbhar <vkumbhar@mvista.com>
+---
+ .../wireshark/files/CVE-2023-1992.patch       | 61 +++++++++++++++++++
+ .../wireshark/wireshark_3.4.12.bb             |  1 +
+ 2 files changed, 62 insertions(+)
+ create mode 100644 meta-networking/recipes-support/wireshark/files/CVE-2023-1992.patch
 
-Which should help fix the 32 bit arm build failure.
+diff --git a/meta-networking/recipes-support/wireshark/files/CVE-2023-1992.patch b/meta-networking/recipes-support/wireshark/files/CVE-2023-1992.patch
+new file mode 100644
+index 0000000000..6bddf975d0
+--- /dev/null
++++ b/meta-networking/recipes-support/wireshark/files/CVE-2023-1992.patch
+@@ -0,0 +1,61 @@
++From 3c8be14c827f1587da3c2b3bb0d9c04faff57413 Mon Sep 17 00:00:00 2001
++From: John Thacker <johnthacker@gmail.com>
++Date: Sun, 19 Mar 2023 15:16:39 -0400
++Subject: [PATCH] RPCoRDMA: Frame end cleanup for global write offsets
++
++Add a frame end routine for a global which is assigned to packet
++scoped memory. It really should be made proto data, but is used
++in a function in the header (that doesn't take the packet info
++struct as an argument) and this fix needs to be made in stable
++branches.
++
++Fix #18852
++
++Upstream-Status: Backport [https://gitlab.com/colin.mcinnes/wireshark/-/commit/3c8be14c827f1587da3c2b3bb0d9c04faff5741]
++CVE: CVE-2023-1992
++Signed-off-by: Vivek Kumbhar <vkumbhar@mvista.com>
++---
++ epan/dissectors/packet-rpcrdma.c | 14 ++++++++++++++
++ 1 file changed, 14 insertions(+)
++
++diff --git a/epan/dissectors/packet-rpcrdma.c b/epan/dissectors/packet-rpcrdma.c
++index 76085c7..9d57bae 100644
++--- a/epan/dissectors/packet-rpcrdma.c
+++++ b/epan/dissectors/packet-rpcrdma.c
++@@ -24,6 +24,7 @@
++ #include <epan/addr_resolv.h>
++
++ #include "packet-rpcrdma.h"
+++#include "packet-frame.h"
++ #include "packet-infiniband.h"
++ #include "packet-iwarp-ddp-rdmap.h"
++
++@@ -270,6 +271,18 @@ void rpcrdma_insert_offset(gint offset)
++     wmem_array_append_one(gp_rdma_write_offsets, offset);
++ }
++
+++/*
+++ * Reset the array of write offsets at the end of the frame. These
+++ * are packet scoped, so they don't need to be freed, but we want
+++ * to ensure that the global doesn't point to no longer allocated
+++ * memory in a later packet.
+++ */
+++static void
+++reset_write_offsets(void)
+++{
+++    gp_rdma_write_offsets = NULL;
+++}
+++
++ /* Get conversation state, it is created if it does not exist */
++ static rdma_conv_info_t *get_rdma_conv_info(packet_info *pinfo)
++ {
++@@ -1392,6 +1405,7 @@ dissect_rpcrdma(tvbuff_t *tvb, packet_info *pinfo, proto_tree *tree, void* data
++             if (write_size > 0 && !pinfo->fd->visited) {
++                 /* Initialize array of write chunk offsets */
++                 gp_rdma_write_offsets = wmem_array_new(wmem_packet_scope(), sizeof(gint));
+++                register_frame_end_routine(pinfo, reset_write_offsets);
++                 TRY {
++                     /*
++                      * Call the upper layer dissector to get a list of offsets
++--
++2.40.1
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb b/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
+index 19489a8bcb..f233b42532 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
+@@ -25,6 +25,7 @@ SRC_URI += " \
+     file://CVE-2023-0667.patch \
+     file://CVE-2023-0668.patch \
+     file://CVE-2023-2906.patch \
++    file://CVE-2023-1992.patch \
+ "
+ 
+ UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
+-- 
+2.40.1
 
->
-> https://arm-software.github.io/acle/neon_intrinsics/advsimd.html
->
-> Khem Raj <raj.khem@gmail.com>, 5 Ara 2023 Sal, 21:06 tarihinde =C5=9Funu =
-yazd=C4=B1:
-> >
-> > this fails on arm
-> > https://errors.yoctoproject.org/Errors/Details/745647/
-> >
-> > On Sun, Dec 3, 2023 at 11:54=E2=80=AFPM Alper Ak <alperyasinak1@gmail.c=
-om> wrote:
-> > >
-> > > * 0001-Add-inline-with-SNAPPY_ATTRIBUTE_ALWAYS_INLINE.patch removed b=
-ecause fixed in the new version
-> > >
-> > > Changelog:
-> > >
-> > > * Performance improvements
-> > > * Compilation fixes for various environments
-> > >
-> > > Signed-off-by: alperak <alperyasinak1@gmail.com>
-> > > ---
-> > >  ...-with-SNAPPY_ATTRIBUTE_ALWAYS_INLINE.patch | 71 -----------------=
---
-> > >  .../{snappy_1.1.9.bb =3D> snappy_1.1.10.bb}     |  8 +--
-> > >  2 files changed, 3 insertions(+), 76 deletions(-)
-> > >  delete mode 100644 meta-oe/recipes-extended/snappy/snappy/0001-Add-i=
-nline-with-SNAPPY_ATTRIBUTE_ALWAYS_INLINE.patch
-> > >  rename meta-oe/recipes-extended/snappy/{snappy_1.1.9.bb =3D> snappy_=
-1.1.10.bb} (85%)
-> > >
-> > > diff --git a/meta-oe/recipes-extended/snappy/snappy/0001-Add-inline-w=
-ith-SNAPPY_ATTRIBUTE_ALWAYS_INLINE.patch b/meta-oe/recipes-extended/snappy/=
-snappy/0001-Add-inline-with-SNAPPY_ATTRIBUTE_ALWAYS_INLINE.patch
-> > > deleted file mode 100644
-> > > index 27357d88a..000000000
-> > > --- a/meta-oe/recipes-extended/snappy/snappy/0001-Add-inline-with-SNA=
-PPY_ATTRIBUTE_ALWAYS_INLINE.patch
-> > > +++ /dev/null
-> > > @@ -1,71 +0,0 @@
-> > > -From 4728803cc8687431449c8c9fbfabb1da04943400 Mon Sep 17 00:00:00 20=
-01
-> > > -From: "Georgi D. Sotirov" <gdsotirov@gmail.com>
-> > > -Date: Wed, 5 May 2021 14:16:46 +0300
-> > > -Subject: [PATCH] Add inline with SNAPPY_ATTRIBUTE_ALWAYS_INLINE
-> > > -
-> > > -Add inline with SNAPPY_ATTRIBUTE_ALWAYS_INLINE on AdvanceToNextTag t=
-o
-> > > -fix the following compilation errors and a warning with GCC:
-> > > -
-> > > -[  2%] Building CXX object CMakeFiles/snappy.dir/snappy.cc.o
-> > > -/usr/bin/c++   -DHAVE_CONFIG_H -Dsnappy_EXPORTS
-> > > --I/tmp/snappy-1.1.9/build -I/tmp/snappy-1.1.9  -O3
-> > > --march=3Di586 -mtune=3Di686 -Wall -Wextra -fno-exceptions -fno-rtti =
--O3
-> > > --DNDEBUG -fPIC   -std=3Dc++11 -o CMakeFiles/snappy.dir/snappy.cc.o -=
-c
-> > > -/tmp/snappy-1.1.9/snappy.cc
-> > > -/tmp/snappy-1.1.9/snappy.cc:1017:8: warning: always_inline
-> > > -function might not be inlinable [-Wattributes]
-> > > - size_t AdvanceToNextTag(const uint8_t** ip_p, size_t* tag) {
-> > > -        ^
-> > > -/tmp/snappy-1.1.9/snappy.cc: In function 'std::pair<const
-> > > -unsigned char*, int> snappy::DecompressBranchless(const uint8_t*, co=
-nst
-> > > -uint8_t*, ptrdiff_t, T, ptrdiff_t) [with T =3D char*; uint8_t =3D un=
-signed
-> > > -char; ptrdiff_t =3D int]':
-> > > -/tmp/snappy-1.1.9/snappy.cc:1017:8: error: inlining failed in
-> > > -call to always_inline 'size_t snappy::AdvanceToNextTag(const uint8_t=
-**,
-> > > -size_t*)': function body can be overwritten at link time
-> > > -/tmp/snappy-1.1.9/snappy.cc:1097:53: error: called from here
-> > > -         size_t tag_type =3D AdvanceToNextTag(&ip, &tag);
-> > > -                                                     ^
-> > > -/tmp/snappy-1.1.9/snappy.cc:1017:8: error: inlining failed in
-> > > -call to always_inline 'size_t snappy::AdvanceToNextTag(const uint8_t=
-**,
-> > > -size_t*)': function body can be overwritten at link time
-> > > - size_t AdvanceToNextTag(const uint8_t** ip_p, size_t* tag) {
-> > > -        ^
-> > > -/tmp/snappy-1.1.9/snappy.cc:1097:53: error: called from here
-> > > -         size_t tag_type =3D AdvanceToNextTag(&ip, &tag);
-> > > -                                                     ^
-> > > -/tmp/snappy-1.1.9/snappy.cc:1017:8: error: inlining failed in
-> > > -call to always_inline 'size_t snappy::AdvanceToNextTag(const uint8_t=
-**,
-> > > -size_t*)': function body can be overwritten at link time
-> > > - size_t AdvanceToNextTag(const uint8_t** ip_p, size_t* tag) {
-> > > -        ^
-> > > -/tmp/snappy-1.1.9/snappy.cc:1097:53: error: called from here
-> > > -         size_t tag_type =3D AdvanceToNextTag(&ip, &tag);
-> > > -                                                     ^
-> > > -CMakeFiles/snappy.dir/build.make:137: recipe for target
-> > > -'CMakeFiles/snappy.dir/snappy.cc.o' failed
-> > > -
-> > > -Just like with other functions using SNAPPY_ATTRIBUTE_ALWAYS_INLINE
-> > > -macro (i.e. __attribute__((always_inline)) ) it is necessary to use =
-C++
-> > > -inline specifier.
-> > > -
-> > > -Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > > -
-> > > -Upstream-Status: Submitted [https://github.com/google/snappy/pull/12=
-8]
-> > > ----
-> > > - snappy.cc | 2 +-
-> > > - 1 file changed, 1 insertion(+), 1 deletion(-)
-> > > -
-> > > -diff --git a/snappy.cc b/snappy.cc
-> > > -index 79dc0e8..51157be 100644
-> > > ---- a/snappy.cc
-> > > -+++ b/snappy.cc
-> > > -@@ -1014,7 +1014,7 @@ void MemMove(ptrdiff_t dst, const void* src, s=
-ize_t size) {
-> > > - }
-> > > -
-> > > - SNAPPY_ATTRIBUTE_ALWAYS_INLINE
-> > > --size_t AdvanceToNextTag(const uint8_t** ip_p, size_t* tag) {
-> > > -+inline size_t AdvanceToNextTag(const uint8_t** ip_p, size_t* tag) {
-> > > -   const uint8_t*& ip =3D *ip_p;
-> > > -   // This section is crucial for the throughput of the decompressio=
-n loop.
-> > > -   // The latency of an iteration is fundamentally constrained by th=
-e
-> > > diff --git a/meta-oe/recipes-extended/snappy/snappy_1.1.9.bb b/meta-o=
-e/recipes-extended/snappy/snappy_1.1.10.bb
-> > > similarity index 85%
-> > > rename from meta-oe/recipes-extended/snappy/snappy_1.1.9.bb
-> > > rename to meta-oe/recipes-extended/snappy/snappy_1.1.10.bb
-> > > index 9e0e43ce8..7baf9c647 100644
-> > > --- a/meta-oe/recipes-extended/snappy/snappy_1.1.9.bb
-> > > +++ b/meta-oe/recipes-extended/snappy/snappy_1.1.10.bb
-> > > @@ -10,12 +10,10 @@ compression ratio."
-> > >  LICENSE =3D "BSD-3-Clause"
-> > >  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Df62f3080324a97b3159a7a7e6=
-1812d0c"
-> > >
-> > > -SRC_URI =3D "gitsm://github.com/google/snappy.git;protocol=3Dhttps;b=
-ranch=3Dmain \
-> > > -    file://0001-Add-inline-with-SNAPPY_ATTRIBUTE_ALWAYS_INLINE.patch=
- \
-> > > -"
-> > > -SRCREV =3D "2b63814b15a2aaae54b7943f0cd935892fae628f"
-> > > -S =3D "${WORKDIR}/git"
-> > > +SRC_URI =3D "gitsm://github.com/google/snappy.git;protocol=3Dhttps;b=
-ranch=3Dmain"
-> > > +SRCREV =3D "dc05e026488865bc69313a68bcc03ef2e4ea8e83"
-> > >
-> > > +S =3D "${WORKDIR}/git"
-> > >
-> > >  inherit cmake pkgconfig
-> > >
-> > > --
-> > > 2.25.1
-> > >
-> > >
-> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > > Links: You receive all messages sent to this group.
-> > > View/Reply Online (#107200): https://lists.openembedded.org/g/openemb=
-edded-devel/message/107200
-> > > Mute This Topic: https://lists.openembedded.org/mt/102966758/1997914
-> > > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsu=
-b [raj.khem@gmail.com]
-> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > >
 
