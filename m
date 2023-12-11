@@ -1,370 +1,165 @@
-Return-Path: <vkumbhar@mvista.com>
+Return-Path: <ross.burton@arm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0DD3FC4167B
-	for <webhook@archiver.kernel.org>; Mon, 11 Dec 2023 09:25:32 +0000 (UTC)
-Received: from mail-oo1-f43.google.com (mail-oo1-f43.google.com [209.85.161.43])
- by mx.groups.io with SMTP id smtpd.web10.4600.1702286722688546371
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5AB2EC4167B
+	for <webhook@archiver.kernel.org>; Mon, 11 Dec 2023 10:20:52 +0000 (UTC)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com (EUR05-VI1-obe.outbound.protection.outlook.com [40.107.21.83])
+ by mx.groups.io with SMTP id smtpd.web10.5405.1702290047127730520
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 11 Dec 2023 01:25:22 -0800
+ Mon, 11 Dec 2023 02:20:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=OwiZvCZU;
- spf=pass (domain: mvista.com, ip: 209.85.161.43, mailfrom: vkumbhar@mvista.com)
-Received: by mail-oo1-f43.google.com with SMTP id 006d021491bc7-5910b21896eso154733eaf.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 11 Dec 2023 01:25:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1702286721; x=1702891521; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=XHsCdnJg99ikFMuNm16OdZtVNXoA03COBblsSaUUjEc=;
-        b=OwiZvCZUZv4e+rcIf6n1f7KKwm+6TzWPHg4Fj/AuQHU0Ize34XGLDZ0RRt9Y32I9/F
-         GnnxrSjPIx3bDLPOCjUW6YIGPEFcYTe38EFCey5vg54CEsCa5PyOKT6+62NzoB6m6hmS
-         B2TyBO25DD4o/3A+/e0XP3flM3vT7v7BRiAdM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702286721; x=1702891521;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=XHsCdnJg99ikFMuNm16OdZtVNXoA03COBblsSaUUjEc=;
-        b=CLdJRL84+yMSRA3flUegfF+dL/supOwCW0ietXixfX7cqcRSU/fSJGRFhCVb95c/tX
-         anlgGIFp4Gq+pTZuSNH2z0CuOPXQ49thgD5qA/jgaCv1LYBFeVYxFU1TjxcFj2YB8kSH
-         tpVV7PHj7iJl3nj0FDNpFB9qvE2cEG78yb//NNCoqbJojf3m26M/APvtkQTRvoh2F1D4
-         8QgXPPqvSAvHQSQpL12fhDh1vhHOCDuZSE/tPcQSQJgf4Zd14/Nw29deb7QICI2aDSEh
-         3ztCe979KcKO+MksecLtb+u3doBf51tq1greQRbLy+PB9rqMf37EP5N6tsivx9LnmmIb
-         3Chw==
-X-Gm-Message-State: AOJu0YzeEF5wA+CNMBskeD6BoErhuxEKr09gkeM6k2mTddspu37i0G94
-	7fmeBpWwoxDKCeKEXP2rSrwVgvE8sZfS2VlOVpk=
-X-Google-Smtp-Source: AGHT+IHgKXnubiJqzyE9WZLjvYRs2I8XzTbqrkgBh3fcsF5uynpbt0sm+Imh126r3wikYjcMPEhnSw==
-X-Received: by 2002:a05:6359:29d:b0:170:17eb:1df with SMTP id ek29-20020a056359029d00b0017017eb01dfmr1537198rwb.34.1702286721318;
-        Mon, 11 Dec 2023 01:25:21 -0800 (PST)
-Received: from vkumbhar-Latitude-3400.. ([116.75.30.146])
-        by smtp.gmail.com with ESMTPSA id d17-20020a056a00245100b006ce66144e91sm5777024pfj.114.2023.12.11.01.25.19
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 11 Dec 2023 01:25:20 -0800 (PST)
-From: Vivek Kumbhar <vkumbhar@mvista.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Vivek Kumbhar <vkumbhar@mvista.com>
-Subject: [meta-oe][dunfell][PATCH] proftpd: fix CVE-2020-9273 Use-after-free vulnerability in memory pools during data transfer
-Date: Mon, 11 Dec 2023 14:55:11 +0530
-Message-Id: <20231211092511.5887-1-vkumbhar@mvista.com>
-X-Mailer: git-send-email 2.40.1
+ dkim=pass header.i=@armh.onmicrosoft.com header.s=selector2-armh-onmicrosoft-com header.b=0u2Me0h4;
+ dkim=pass header.i=@armh.onmicrosoft.com header.s=selector2-armh-onmicrosoft-com header.b=0u2Me0h4;
+ spf=pass (domain: arm.com, ip: 40.107.21.83, mailfrom: ross.burton@arm.com)
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=pass;
+ b=ZgtLoHqD5SB32tl6wiAPz9+1u4VJsrW4jVGm1hLm4SE/oAN+YPT1RcZTFtqdcCSeYWi67KBrHGsq9398qNVy+cuY7ZNrJkPxlTx165dw4d8lH48ZpWbFupHc48p/emK1XYSRPIwdyH38ntn/JwUxTn910yewymoF/F20s7ZnP1WO8DC7yvpl+3t9W3UTomFNkXfr7FBudsb99xknu2qlAjspuO6u1PrQ0VjWzHBj6JuBX1Ss2zPGyLvwAiKD7udZm022N+GblDFYZix0Q7zpoY/DGj80OLzaCJKxAwOJhG/TEzPwnASOE+CSsNVakXT/gIuaWyJ24EEnQ+IpzXVA8Q==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=eKd3/HLuSHkI9U64arJ6UwOH/0NVLTh0TXNQe6BiAYg=;
+ b=cuTyq5+37/E6jHhJq3jrHeuYCaqbReNfcjJiAvgqsu6wGt4AOaB8n49nskJDucnpMJ4lPP8S3/RzpA+2ee8414Gt4/KeRJJyHrikpcsRkRPzQMlh1Q+2jGK/Fa0xQQ8sECgUWw0nuY8PI6xtXQDcmQvAcan3qtNZai/Z0WujQ+w5NhuNKvKrQJ+tJbf805yEvfXLzSBucsHogARqGJO3sGV464XdfHVt5BZ10+RRcpPYpb7KbDCRYTF1e5y3LESJqBhJyhx9Ru/ezdu0xmg33aFtvXc5vRkGzb2dgyN3RqulS3goQhvzQOG7JLHu/8mxZ5ZNbTXFbSt7AzDmxr2v3A==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 63.35.35.123) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=arm.com;
+ dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
+ dkim=pass (signature was verified) header.d=armh.onmicrosoft.com; arc=pass (0
+ oda=1 ltdi=1 spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=eKd3/HLuSHkI9U64arJ6UwOH/0NVLTh0TXNQe6BiAYg=;
+ b=0u2Me0h4Ns1Nn/9gJ84KbWYsEWn4ro2JTEksd7jqA2JqujB0ZgGK7TQjRLg3Dd0lqC9f9ulwlAj9IMdd9bMPHCui9ZDEXy+whbus9vRNui7cExI7CXHRahAICYm1lQjLRSueX/Qy8i3gfPgSA7ZDAesfJFwsYg5lwqffBqgO6xo=
+Received: from DB3PR06CA0025.eurprd06.prod.outlook.com (2603:10a6:8:1::38) by
+ AS2PR08MB9974.eurprd08.prod.outlook.com (2603:10a6:20b:643::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7046.34; Mon, 11 Dec
+ 2023 10:20:41 +0000
+Received: from DU2PEPF0001E9C6.eurprd03.prod.outlook.com
+ (2603:10a6:8:1:cafe::a0) by DB3PR06CA0025.outlook.office365.com
+ (2603:10a6:8:1::38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7068.32 via Frontend
+ Transport; Mon, 11 Dec 2023 10:20:39 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
+ client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+ pr=C
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ DU2PEPF0001E9C6.mail.protection.outlook.com (10.167.8.75) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7091.20 via Frontend Transport; Mon, 11 Dec 2023 10:20:39 +0000
+Received: ("Tessian outbound 5d213238733f:v228"); Mon, 11 Dec 2023 10:20:39 +0000
+X-CheckRecipientChecked: true
+X-CR-MTA-CID: 8dfe7d2b9b851cac
+X-CR-MTA-TID: 64aa7808
+Received: from f2783f2f2592.1
+	by 64aa7808-outbound-1.mta.getcheckrecipient.com id 627D8481-8FC3-4F1C-AB89-B54428D30175.1;
+	Mon, 11 Dec 2023 10:20:33 +0000
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com
+    by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id f2783f2f2592.1
+    (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+    Mon, 11 Dec 2023 10:20:33 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Nrp5lXoX5BOJ3VM8fEfZrKwO4rxiJtQbWGDkzifysVHyuEqxwdXHTW2YUroMkyISncAGfTafXvb8lGROEWqj3IWfLI17iqF9OVueC18j/wyQfFG0qdgz++625SWmizq0OjbUTwjdd3ONV7wfnHlqb30c1VRL/cmFN6eBFniU+V1S4w+Sk2TdTpDWxKnRogX61uY3GbWXP54mTNFNJ7aaOPu1YT6WDLEFr59JasiIdHV3tLX1vRd0OOm09OdoiaXeROOnijzTThwkP7naq7Gd0w1KYykS1KnAkPnMwnlRFh8c7P/ufRiWi9SN4V/lcvDL7D56IVBHB4PqDFzYJ3dg1Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=eKd3/HLuSHkI9U64arJ6UwOH/0NVLTh0TXNQe6BiAYg=;
+ b=BCdanlWWV29PN6fzMFIvStYmQSiTROWdkwshHgstz6+b3RX8Z8uuNBkhIvsDmtRe7AnM92ujtYTnLaOFzagmmJGyWQHymlOH4IxEw+/y7iKlV/SwyRVDnVAXafDtWKt4MNqFJEPvN2+IxNYUaYZLrG3DDUA4x4ersPwkwww/35XdujdijNCf0GLzuvuDURAcvztc/NBQdkJjoV+jw+U0YBDhQje97eKdjl+0OeloxAkPoHAlBxf+CCFEIqQ6lPutuMJD+8mHDYDWrXfQCi2VmERvIZ2fxHubZOzYZL5nWupgQouhUusXrwFpLJZ3dQg7yC8JTAOpVDHt+xw9BD17/g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=eKd3/HLuSHkI9U64arJ6UwOH/0NVLTh0TXNQe6BiAYg=;
+ b=0u2Me0h4Ns1Nn/9gJ84KbWYsEWn4ro2JTEksd7jqA2JqujB0ZgGK7TQjRLg3Dd0lqC9f9ulwlAj9IMdd9bMPHCui9ZDEXy+whbus9vRNui7cExI7CXHRahAICYm1lQjLRSueX/Qy8i3gfPgSA7ZDAesfJFwsYg5lwqffBqgO6xo=
+Received: from PA4PR08MB7411.eurprd08.prod.outlook.com (2603:10a6:102:2a3::12)
+ by DB8PR08MB5516.eurprd08.prod.outlook.com (2603:10a6:10:f9::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7068.32; Mon, 11 Dec
+ 2023 10:20:29 +0000
+Received: from PA4PR08MB7411.eurprd08.prod.outlook.com
+ ([fe80::ef47:2c42:1ef6:fe5c]) by PA4PR08MB7411.eurprd08.prod.outlook.com
+ ([fe80::ef47:2c42:1ef6:fe5c%6]) with mapi id 15.20.7068.031; Mon, 11 Dec 2023
+ 10:20:29 +0000
+From: Ross Burton <Ross.Burton@arm.com>
+To: "f_l_k@t-online.de" <f_l_k@t-online.de>
+CC: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] [meta-gnome][PATCH] tracker: dont inherit gsettings
+Thread-Topic: [oe] [meta-gnome][PATCH] tracker: dont inherit gsettings
+Thread-Index: AQHaKsJm2TClAixLWEG+tTxcg5gjDLCj4cIA
+Date: Mon, 11 Dec 2023 10:20:29 +0000
+Message-ID: <135B2975-FC8C-4280-BA48-1C8644375621@arm.com>
+References: <20231209170903.672584-1-f_l_k@t-online.de>
+In-Reply-To: <20231209170903.672584-1-f_l_k@t-online.de>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-mailer: Apple Mail (2.3774.200.91.1.1)
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+x-ms-traffictypediagnostic: 
+	PA4PR08MB7411:EE_|DB8PR08MB5516:EE_|DU2PEPF0001E9C6:EE_|AS2PR08MB9974:EE_
+X-MS-Office365-Filtering-Correlation-Id: 10b526ce-0e25-4672-d11a-08dbfa32d2fb
+x-checkrecipientrouted: true
+nodisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original: 
+ V4ysxHyDt6bWnIZVYzKBd9HIZ+q/r25GYNYCaJ+qgkhhPwjuPVMvejQIxn8BYTxkBIgb6YwyDTlhzURiM95hvDBEAdHX2iMl5Q+xf1iDBG3/68muExYz/5eRftA+91kFLwt4ikKD0UQAfi/p6ex1WIHYPNaM4KjxCLkrebPuFuj7aEGW8xga1owVnR4bY0HMIUi0xVu4aDroNMScY3dW1/WtF0NyZe9T29Xe+tZzHY4ENSgNsne4092IUV0yDBY9EJ46QnDWjkGLuyy6X6NiYdnFLkwKrwQ3tfrZ/4P0WHOoWnZYbYTF1YMiU0t7NTMLa529geioi7c3mTWVdT6+Q5qXKZkC64Do9Vdk3Ye+Ziw7VwYJU7ectsVYYC5pmLkJPWgF+XOKtUpdGj6ZBgBlq/c3S/592xXVemofvB0wAl1HhUd/x7lKto/FouXsq5QgfZ7gVUxnLc7SMSD0NTUyUeumKiTx5ahgGVWtdtO7ZLNQikuKrjRXEbIwA+w9YDDa0vaG0BQTeEi7xAJ2Zy1rg5HXXZhIAiLqcnN+w9l2yVX1TF+nacse4JGOSV7BJHz4PxOqFmVTpjyqELHv/uzeBtADuRONO/+3OyuJBMQYYiiobCXyEMSUM+6lZKq8H/6a3hBRdxLdztbLOs0MmeWtEBkEgMjVTr6lYVn1N5TLvRnPdOIAg86eA6qgM3SmX+Vf
+X-Forefront-Antispam-Report-Untrusted: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA4PR08MB7411.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(136003)(396003)(39860400002)(376002)(346002)(366004)(230922051799003)(1800799012)(64100799003)(186009)(451199024)(26005)(2616005)(122000001)(36756003)(38100700002)(33656002)(86362001)(38070700009)(83380400001)(5660300002)(6512007)(71200400001)(53546011)(6506007)(8936002)(8676002)(91956017)(76116006)(66946007)(6486002)(66446008)(66556008)(66476007)(316002)(64756008)(6916009)(2906002)(4744005)(41300700001)(478600001)(4326008)(192303002)(45980500001);DIR:OUT;SFP:1101;
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <F0AA659EF02A7547AEECE7F2972433E2@eurprd08.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR08MB5516
+Original-Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: 
+ DU2PEPF0001E9C6.eurprd03.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 
+	f3f60404-8d98-473a-00ec-08dbfa32cca5
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	/ySCXm5huZBFGJqq/bcS74kyby+1kAKZGu9mKGBkvkPU4xDNUb59R1BLbLmN94dRRYsmMzf/eSJu+ziy0HZTvqjuOQN3P4uc4+jySHPqRvjUPCWuHxlMlHOHboAG7pLmAoCsrXXCvk75AxSNbR/XkZfebAdexbyOmXiwI95J2P/JFbCGpjHeufoEuHg48tMd0Qagh/0F+/sNfF2KjlPKw+UdSJORSi2AFD4ExmdR61+Z2RJLtfg7ZpDsMXD713MvrSz28dp09VvVhTcqn9b8u8TegOp1oymYn74PnuVdlFjRzKjE0rebkOgu7pb7sH8WO8ElIzknXUUDCsFrmXlbbWqbkFB/3E0ShP6M7DTEbnXAHK5pscF/ji2zhkG7oBYUGB9Yq0SVAtTjDv+MTSmPsTPGtfXo4NGmC9bB7BbOwoiVOdw/yJIN3rnhf+mt/GBBZopx69b86SOTNLVxnJXsOMGfO01caz6AyzC6ofu4/yKchVTelX8cK5KaWpcSasbojVaVRpiEQixZsiEt5YfMLZPRXIPOWiH8wsEZVnH81T3Q9Ia4QsHyFQimhXqyyrO3q0Bv5Z7tu6JHWkDlWMbh/oQ7lLZB8T6TaX0LegeZN0uszZ+5iPhHlHSoVmTclYxrRVgv025rJ8FAstQyLwoi7nOz863/qtZ8ByIG45MMFdCfgp5bksnJUgM8eVlWKw0pX2aiJvypn9GHp4wjD+iK6WjfeUOcH4qztvC5jWbhkj6hOcWP0GzSmxDwhu6kURdoFl0CPRJ5f5hUhy5XoZq2VA==
+X-Forefront-Antispam-Report: 
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230031)(4636009)(39860400002)(346002)(136003)(376002)(396003)(230922051799003)(1800799012)(451199024)(186009)(64100799003)(82310400011)(40470700004)(36840700001)(46966006)(2906002)(4744005)(40460700003)(6486002)(70206006)(6512007)(8936002)(8676002)(4326008)(6862004)(478600001)(5660300002)(86362001)(316002)(70586007)(81166007)(47076005)(83380400001)(33656002)(40480700001)(36860700001)(26005)(82740400003)(36756003)(336012)(356005)(41300700001)(2616005)(53546011)(6506007)(192303002);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Dec 2023 10:20:39.8084
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 10b526ce-0e25-4672-d11a-08dbfa32d2fb
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	DU2PEPF0001E9C6.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR08MB9974
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 11 Dec 2023 09:25:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107321
+ <openembedded-devel@lists.openembedded.org>; Mon, 11 Dec 2023 10:20:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107322
 
-Upstream-Status: Backport from https://github.com/proftpd/proftpd/commit/e845abc1bd86eebec7a0342fded908a1b0f1996b
-
-Signed-off-by: Vivek Kumbhar <vkumbhar@mvista.com>
----
- .../proftpd/files/CVE-2020-9273.patch         | 280 ++++++++++++++++++
- .../recipes-daemons/proftpd/proftpd_1.3.6.bb  |   1 +
- 2 files changed, 281 insertions(+)
- create mode 100644 meta-networking/recipes-daemons/proftpd/files/CVE-2020-9273.patch
-
-diff --git a/meta-networking/recipes-daemons/proftpd/files/CVE-2020-9273.patch b/meta-networking/recipes-daemons/proftpd/files/CVE-2020-9273.patch
-new file mode 100644
-index 0000000000..fcec958e23
---- /dev/null
-+++ b/meta-networking/recipes-daemons/proftpd/files/CVE-2020-9273.patch
-@@ -0,0 +1,280 @@
-+From e845abc1bd86eebec7a0342fded908a1b0f1996b Mon Sep 17 00:00:00 2001
-+From: TJ Saunders <tj@castaglia.org>
-+Date: Tue, 18 Feb 2020 09:48:18 -0800
-+Subject: [PATCH] Issue #903: Ensure that we do not reuse already-destroyed
-+ memory pools during data transfers.
-+
-+Upstream-Status: Backport [https://github.com/proftpd/proftpd/commit/e845abc1bd86eebec7a0342fded908a1b0f1996b]
-+CVE: CVE-2020-9273
-+Signed-off-by: Vivek Kumbhar <vkumbhar@mvista.com>
-+---
-+ src/data.c           | 27 +++++++++++++-----
-+ src/main.c           |  6 ++--
-+ src/response.c       | 12 ++++++++
-+ tests/api/data.c     | 68 ++++++++++++++++++++++++++++++++++++++++++++
-+ tests/api/response.c | 10 +++++++
-+ 5 files changed, 114 insertions(+), 9 deletions(-)
-+
-+diff --git a/src/data.c b/src/data.c
-+index 05b3a34..1c050cf 100644
-+--- a/src/data.c
-++++ b/src/data.c
-+@@ -2,7 +2,7 @@
-+  * ProFTPD - FTP server daemon
-+  * Copyright (c) 1997, 1998 Public Flood Software
-+  * Copyright (c) 1999, 2000 MacGyver aka Habeeb J. Dihu <macgyver@tos.net>
-+- * Copyright (c) 2001-2016 The ProFTPD Project team
-++ * Copyright (c) 2001-2020 The ProFTPD Project team
-+  *
-+  * This program is free software; you can redistribute it and/or modify
-+  * it under the terms of the GNU General Public License as published by
-+@@ -684,7 +684,7 @@ void pr_data_close(int quiet) {
-+  */
-+ void pr_data_cleanup(void) {
-+   /* sanity check */
-+-  if (session.d) {
-++  if (session.d != NULL) {
-+     pr_inet_lingering_close(session.pool, session.d, timeout_linger);
-+     session.d = NULL;
-+   }
-+@@ -711,7 +711,7 @@ void pr_data_abort(int err, int quiet) {
-+     strerror(err), err, quiet ? "true" : "false",
-+     true_abort ? "true" : "false");
-+ 
-+-  if (session.d) {
-++  if (session.d != NULL) {
-+     if (true_abort == FALSE) {
-+       pr_inet_lingering_close(session.pool, session.d, timeout_linger);
-+ 
-+@@ -893,6 +893,11 @@ void pr_data_abort(int err, int quiet) {
-+     if (true_abort == FALSE) {
-+       pr_response_add_err(respcode, _("Transfer aborted. %s"), msg ? msg : "");
-+     }
-++
-++    /* Forcibly clear the data-transfer instigating command pool from the
-++     * Response API.
-++     */
-++    pr_response_set_pool(NULL);
-+   }
-+ 
-+   if (true_abort) {
-+@@ -925,6 +930,7 @@ static void poll_ctrl(void) {
-+     res = pr_cmd_read(&cmd);
-+     if (res < 0) {
-+       int xerrno;
-++
-+ #if defined(ECONNABORTED)
-+       xerrno = ECONNABORTED;
-+ #elif defined(ENOTCONN)
-+@@ -993,8 +999,8 @@ static void poll_ctrl(void) {
-+ 
-+         pr_response_flush(&resp_err_list);
-+ 
-+-        destroy_pool(cmd->pool);
-+         pr_response_set_pool(resp_pool);
-++        destroy_pool(cmd->pool);
-+ 
-+       /* We don't want to actually dispatch the NOOP command, since that
-+        * would overwrite the scoreboard with the NOOP state; admins probably
-+@@ -1019,13 +1025,14 @@ static void poll_ctrl(void) {
-+ 
-+         pr_response_flush(&resp_list);
-+ 
-+-        destroy_pool(cmd->pool);
-+         pr_response_set_pool(resp_pool);
-++        destroy_pool(cmd->pool);
-+ 
-+       } else {
-+         char *title_buf = NULL;
-+-        int title_len = -1;
-+-        const char *sce_cmd = NULL, *sce_cmd_arg = NULL;
-++        int curr_cmd_id = 0, title_len = -1;
-++        const char *curr_cmd = NULL, *sce_cmd = NULL, *sce_cmd_arg = NULL;
-++        cmd_rec *curr_cmd_rec = NULL;
-+ 
-+         pr_trace_msg(trace_channel, 5,
-+           "client sent '%s' command during data transfer, dispatching",
-+@@ -1037,6 +1044,9 @@ static void poll_ctrl(void) {
-+           pr_proctitle_get(title_buf, title_len + 1); 
-+         }
-+ 
-++        curr_cmd = session.curr_cmd;
-++        curr_cmd_id = session.curr_cmd_id;
-++        curr_cmd_rec = session.curr_cmd_rec;
-+         sce_cmd = pr_scoreboard_entry_get(PR_SCORE_CMD);
-+         sce_cmd_arg = pr_scoreboard_entry_get(PR_SCORE_CMD_ARG);
-+ 
-+@@ -1052,6 +1062,9 @@ static void poll_ctrl(void) {
-+         }
-+ 
-+         destroy_pool(cmd->pool);
-++        session.curr_cmd = curr_cmd;
-++        session.curr_cmd_id = curr_cmd_id;
-++        session.curr_cmd_rec = curr_cmd_rec;
-+       }
-+ 
-+     } else {
-+diff --git a/src/main.c b/src/main.c
-+index 1ead27f..8138c2a 100644
-+--- a/src/main.c
-++++ b/src/main.c
-+@@ -892,8 +892,7 @@ static void cmd_loop(server_rec *server, conn_t *c) {
-+       pr_timer_reset(PR_TIMER_IDLE, ANY_MODULE);
-+     }
-+ 
-+-    if (cmd) {
-+-
-++    if (cmd != NULL) {
-+       /* Detect known commands for other protocols; if found, drop the
-+        * connection, lest we be used as part of an attack on a different
-+        * protocol server (Bug#4143).
-+@@ -909,6 +908,9 @@ static void cmd_loop(server_rec *server, conn_t *c) {
-+  
-+       pr_cmd_dispatch(cmd);
-+       destroy_pool(cmd->pool);
-++      session.curr_cmd = NULL;
-++      session.curr_cmd_id = 0;
-++      session.curr_cmd_rec = NULL;
-+ 
-+     } else {
-+       pr_event_generate("core.invalid-command", NULL);
-+diff --git a/src/response.c b/src/response.c
-+index 9b4395f..93d31e2 100644
-+--- a/src/response.c
-++++ b/src/response.c
-+@@ -219,6 +219,12 @@ void pr_response_add_err(const char *numeric, const char *fmt, ...) {
-+     return;
-+   }
-+ 
-++  if (resp_pool == NULL) {
-++    pr_trace_msg(trace_channel, 1,
-++      "no response pool set, ignoring added %s error response", numeric);
-++    return;
-++  }
-++
-+   va_start(msg, fmt);
-+   res = vsnprintf(resp_buf, sizeof(resp_buf), fmt, msg);
-+   va_end(msg);
-+@@ -272,6 +278,12 @@ void pr_response_add(const char *numeric, const char *fmt, ...) {
-+     return;
-+   }
-+ 
-++  if (resp_pool == NULL) {
-++    pr_trace_msg(trace_channel, 1,
-++      "no response pool set, ignoring added %s response", numeric);
-++    return;
-++  }
-++
-+   va_start(msg, fmt);
-+   res = vsnprintf(resp_buf, sizeof(resp_buf), fmt, msg);
-+   va_end(msg);
-+diff --git a/tests/api/data.c b/tests/api/data.c
-+index e4442ab..38fae3e 100644
-+--- a/tests/api/data.c
-++++ b/tests/api/data.c
-+@@ -152,6 +152,74 @@ START_TEST (data_ignore_ascii_test) {
-+ }
-+ END_TEST
-+ 
-++START_TEST (response_add_test) {
-++  int res;
-++  const char *last_resp_code = NULL, *last_resp_msg = NULL;
-++  char *resp_code = R_200, *resp_msg = "OK";
-++
-++  pr_response_set_pool(NULL);
-++
-++  mark_point();
-++  pr_response_add(resp_code, "%s", resp_msg);
-++
-++  pr_response_set_pool(p);
-++
-++  mark_point();
-++  pr_response_add(NULL, NULL);
-++
-++  mark_point();
-++  pr_response_add(NULL, "%s", resp_msg);
-++
-++  mark_point();
-++  pr_response_add(resp_code, "%s", resp_msg);
-++  pr_response_add(NULL, "%s", resp_msg);
-++
-++  res = pr_response_get_last(p, &last_resp_code, &last_resp_msg);
-++  fail_unless(res == 0, "Failed to get last values: %d (%s)", errno,
-++    strerror(errno));
-++
-++  fail_unless(last_resp_code != NULL, "Last response code unexpectedly null");
-++  fail_unless(strcmp(last_resp_code, resp_code) == 0,
-++    "Expected response code '%s', got '%s'", resp_code, last_resp_code);
-++  
-++  fail_unless(last_resp_msg != NULL, "Last response message unexpectedly null");
-++  fail_unless(strcmp(last_resp_msg, resp_msg) == 0,
-++    "Expected response message '%s', got '%s'", resp_msg, last_resp_msg);
-++}
-++END_TEST
-++
-++START_TEST (response_add_err_test) {
-++  int res;
-++  const char *last_resp_code = NULL, *last_resp_msg = NULL;
-++  char *resp_code = R_450, *resp_msg = "Busy";
-++
-++  pr_response_set_pool(NULL);
-++
-++  mark_point();
-++  pr_response_add(resp_code, "%s", resp_msg);
-++
-++  pr_response_set_pool(p);
-++
-++  mark_point();
-++  pr_response_add_err(NULL, NULL);
-++
-++  mark_point();
-++  pr_response_add_err(resp_code, "%s", resp_msg);
-++
-++  res = pr_response_get_last(p, &last_resp_code, &last_resp_msg);
-++  fail_unless(res == 0, "Failed to get last values: %d (%s)", errno,
-++    strerror(errno));
-++
-++  fail_unless(last_resp_code != NULL, "Last response code unexpectedly null");
-++  fail_unless(strcmp(last_resp_code, resp_code) == 0,
-++    "Expected response code '%s', got '%s'", resp_code, last_resp_code);
-++
-++  fail_unless(last_resp_msg != NULL, "Last response message unexpectedly null");
-++  fail_unless(strcmp(last_resp_msg, resp_msg) == 0,
-++    "Expected response message '%s', got '%s'", resp_msg, last_resp_msg);
-++}
-++END_TEST
-++
-+ static int data_close_cb(pr_netio_stream_t *nstrm) {
-+   return 0;
-+ }
-+diff --git a/tests/api/response.c b/tests/api/response.c
-+index 0d95069..9a04774 100644
-+--- a/tests/api/response.c
-++++ b/tests/api/response.c
-+@@ -87,6 +87,11 @@ START_TEST (response_add_test) {
-+   const char *last_resp_code = NULL, *last_resp_msg = NULL;
-+   char *resp_code = R_200, *resp_msg = "OK";
-+ 
-++  pr_response_set_pool(NULL);
-++
-++  mark_point();
-++  pr_response_add(resp_code, "%s", resp_msg);
-++
-+   pr_response_set_pool(p);
-+ 
-+   mark_point();
-+@@ -118,6 +123,11 @@ START_TEST (response_add_err_test) {
-+   const char *last_resp_code = NULL, *last_resp_msg = NULL;
-+   char *resp_code = R_450, *resp_msg = "Busy";
-+ 
-++  pr_response_set_pool(NULL);
-++
-++  mark_point();
-++  pr_response_add(resp_code, "%s", resp_msg);
-++
-+   pr_response_set_pool(p);
-+ 
-+   mark_point();
-+-- 
-+2.40.1
-+
-diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb
-index 9ec97b9237..f30a8d4011 100644
---- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb
-+++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb
-@@ -13,6 +13,7 @@ SRC_URI = "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
-            file://build_fixup.patch \
-            file://proftpd.service \
-            file://CVE-2021-46854.patch \
-+           file://CVE-2020-9273.patch \
-            "
- SRC_URI[md5sum] = "13270911c42aac842435f18205546a1b"
- SRC_URI[sha256sum] = "91ef74b143495d5ff97c4d4770c6804072a8c8eb1ad1ecc8cc541b40e152ecaf"
--- 
-2.40.1
-
+T24gOSBEZWMgMjAyMywgYXQgMTc6MDksIE1hcmt1cyBWb2xrIHZpYSBsaXN0cy5vcGVuZW1iZWRk
+ZWQub3JnIDxmX2xfaz10LW9ubGluZS5kZUBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPiB3cm90ZToN
+Cj4gDQo+IHRoaXMgZml4ZXMgYW4gaXNzdWUgSSBlbmNvdW50ZXJlZCBvbiByYXNwYmVycnlwaTQt
+NjQgYXQgZG9fcm9vdGZzOg0KPiBFUlJPUjogaHlwcmxhbmQtaW1hZ2UtMS4wLXIwIGRvX3Jvb3Rm
+czogUG9zdGluc3RhbGwgc2NyaXB0bGV0cyBvZiBbJ3RyYWNrZXInXSBoYXZlIGZhaWxlZC4gSWYg
+dGhlIGludGVudGlvbiBpcyB0byBkZWZlciB0aGVtIHRvIGZpcnN0IGJvb3QsDQo+IHRoZW4gcGxl
+YXNlIHBsYWNlIHRoZW0gaW50byBwa2dfcG9zdGluc3Rfb250YXJnZXQ6JHtQTn0gKCkuDQo+IERl
+ZmVycmluZyB0byBmaXJzdCBib290IHZpYSAnZXhpdCAxJyBpcyBubyBsb25nZXIgc3VwcG9ydGVk
+Lg0KDQpEaWQgeW91IGNvbmZpcm0gdGhhdCB0cmFja2VyIGRvZXNu4oCZdCBpbnN0YWxsIGdzZXR0
+aW5ncyBzY2hlbWFzPyAgVGhpcyBzbWVsbHMgbGlrZSBhIHdvcmthcm91bmQgdGhhdCBoYXMgY29s
+bGF0ZXJhbCBkYW1hZ2UuDQoNClJvc3MNCg0K
 
