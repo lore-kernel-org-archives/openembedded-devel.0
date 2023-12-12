@@ -1,119 +1,85 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C7475C4332F
-	for <webhook@archiver.kernel.org>; Tue, 12 Dec 2023 19:44:35 +0000 (UTC)
-Received: from mail-oa1-f46.google.com (mail-oa1-f46.google.com [209.85.160.46])
- by mx.groups.io with SMTP id smtpd.web10.5893.1702410272973481585
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2ED4AC4332F
+	for <webhook@archiver.kernel.org>; Tue, 12 Dec 2023 20:35:26 +0000 (UTC)
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+ by mx.groups.io with SMTP id smtpd.web10.7213.1702413320250605106
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Dec 2023 11:44:33 -0800
+ Tue, 12 Dec 2023 12:35:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=GymeXP8B;
- spf=pass (domain: gmail.com, ip: 209.85.160.46, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f46.google.com with SMTP id 586e51a60fabf-203198c9aa5so84455fac.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 12 Dec 2023 11:44:32 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=WUoe/z+b;
+ spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-40c3f68b69aso33932005e9.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 12 Dec 2023 12:35:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1702410272; x=1703015072; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=dJc26VqXL8zinvUheULT+8efBwTurMcOKMIuXXiGB+A=;
-        b=GymeXP8BKWiOL/0pUlj9eVKxLZiQuK/YgWiBHGF9JW8sy07TbwneXJEH6NoE5nUGG+
-         SK7JvNjb1ApAFN4SjMjJI4/socB2dyo4QfNB8UPDPCuSZfDmgsocW5dCay6rUwiGzMUl
-         CB4gzcK7ZppBOBFSFmYItNBkvI8ngeNXSwae65P4Nzx0D4pO2CqgoFeTmpotvUnBNMLg
-         +1+aOSLUqEme1Q5Cr7baUUt8TAEISn77xl/6cw6LT8CiefIzidYboXp1MnMk5Gu1gPzS
-         9i8kkZvnwRK9LvCC2s2E6VD7Wm7tAh/AOHXWPQsBxZ7Wgkn6A/KDhIJ4wsPcLdYxfElX
-         u8MA==
+        d=gmail.com; s=20230601; t=1702413318; x=1703018118; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=7zl2CTwBl/xf5oBgB4yXrrJaR4MfwktyacW0H2eBQ14=;
+        b=WUoe/z+bLjHaUtOGKDcvAiiWL1S3KcdYhGiWWBS6JIRSpsyJZO1R+kzTD5eecOuYEi
+         vt3nWp4G7RKA09KuCQ52aKGYH4OIs6lNXsBwG4EaYdk395etva/+4J2lcnLxGiyzmH7P
+         eCEkq6XqJn2jlVnjDs46i3x3MwEAyQn5xTivvYR7kAq8G0oD0TFqAsxu9T2aMaeNYcKL
+         tXHGvuxwcOTCRQW3BjRJXRoSLovby+JEh2zlwyIjtRku3vbpJtsXHA3svZJc68O3vCen
+         7RLUElTotmTvN0G0ocdTLcHyUFJYKx/dLykEJAeIDa+4MY8qxXAklyo+7izBk0YBbXZi
+         dhTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702410272; x=1703015072;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=dJc26VqXL8zinvUheULT+8efBwTurMcOKMIuXXiGB+A=;
-        b=rb1QbhmNq6f+1CnB5xCm9eIeFEZHnssOqnWQqX1GNg2eaz4dQHLQnX/GjnkJKa5fZz
-         WZc+AzpQCwX/Jlk8hrm4SJzpRJb7+JIRzW8avPaL2D6AVk2MOkVPqhrnIRk1ZBzSOchx
-         wSyhy0ca9Y6gl+HplSUjvnBNkycCnRgd5ELom9VHGvUPVHU5byfIkVICGXhxOt0HZPTT
-         b8UuBKigNK/DWFJZnenDnWYdd7mAA9Yku50F+3OpcOOWx5RS+5zdu3lYsRUj7prDcAUB
-         VkBUMJywWTpAJedQEYkDx7ueKbjmP3/wJSQhn8OiokSSUVmw4+vGU5YvkXGpH3+jOCoP
-         58AA==
-X-Gm-Message-State: AOJu0YydtE1fo57NkY/mlMWWm0o9gRn7Rb9beOWSaRa014eQ31lSu4nF
-	nJiMZ193wSYGepLOBh8VfnS0bbfqavipNiCxzkGhPQoy
-X-Google-Smtp-Source: AGHT+IHVrVifEMndKisKv0/Qw0K2pJcd+phyQueIkZpZskIUAPAO3ykVqK8RnfoEwBzDJxSET3FlytJWUmAG7aBcMX0=
-X-Received: by 2002:a05:6871:459a:b0:1ef:b591:5733 with SMTP id
- nl26-20020a056871459a00b001efb5915733mr9048854oab.15.1702410272245; Tue, 12
- Dec 2023 11:44:32 -0800 (PST)
+        d=1e100.net; s=20230601; t=1702413318; x=1703018118;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=7zl2CTwBl/xf5oBgB4yXrrJaR4MfwktyacW0H2eBQ14=;
+        b=TbWTztnXweLuNrBI+kk0BR5njba+bbzxCs84g8UzedGeeXfNKN7wPd04Yf5pqdiUAm
+         uEriu7JoU+f2ZAeaBhCCd48lWeGhsbT7wCw1ojD5H1LZkErqGk7gjMH6/OWGcHZekdP8
+         3i+TGjHFaD80Q/dNZIeDP+Re7IdVlCTZ/HF3HX+wk230NaB9YZo/YQqrhMw/GRk/WN3T
+         dcuY12COlcZNMqo9eUw6KP0BIu796OoNLYLd2WD3bHwPKdIjfK44KqYmNuI+cV/oMrTf
+         20kb9vhKZtB02e2Fg0iEemYYtTr+jnO+tgdNOEP4lJtChETFDYBCGVQgfW/Q0pRG24Sh
+         bCOQ==
+X-Gm-Message-State: AOJu0YxeRIM6PL5t0a+WEbJX4Iz5Eb/6ijFJL0rEwtlhXIMFfB+5urNq
+	71sEk8rj+1QhNX1rYdeOoMLCdtVLEq7/jA==
+X-Google-Smtp-Source: AGHT+IHuFFfen6nq5ZuAdwt4vWRKUIORfD1F5h7dFGF6izx6f94vQuXnKh+zeykrPTnY6u7vjeUq/A==
+X-Received: by 2002:a05:600c:4f87:b0:40c:3e9f:c777 with SMTP id n7-20020a05600c4f8700b0040c3e9fc777mr3457206wmq.62.1702413317944;
+        Tue, 12 Dec 2023 12:35:17 -0800 (PST)
+Received: from localhost.localdomain ([176.88.106.122])
+        by smtp.gmail.com with ESMTPSA id t9-20020a05600c198900b0040c490db950sm7554730wmq.47.2023.12.12.12.35.16
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 12 Dec 2023 12:35:17 -0800 (PST)
+From: alperak <alperyasinak1@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: alperak <alperyasinak1@gmail.com>
+Subject: [meta-oe][PATCH 1/4] libbytesize: Removed unnecessary setting of B 
+Date: Tue, 12 Dec 2023 23:35:06 +0300
+Message-Id: <20231212203509.902175-1-alperyasinak1@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20231211200926.1365050-1-William.Lyu@windriver.com>
-In-Reply-To: <20231211200926.1365050-1-William.Lyu@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 12 Dec 2023 11:44:06 -0800
-Message-ID: <CAMKF1so2bn7KT+-B1uKquph2BkX5=3YNq_x80rnF-+qsxdrAhw@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH] networkmanager: Improved SUMMARY
- and added DESCRIPTION
-To: william.lyu@windriver.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 12 Dec 2023 19:44:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107340
+ <openembedded-devel@lists.openembedded.org>; Tue, 12 Dec 2023 20:35:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107341
 
-On Tue, Dec 12, 2023 at 11:43=E2=80=AFAM william.lyu via
-lists.openembedded.org
-<william.lyu=3Dwindriver.com@lists.openembedded.org> wrote:
->
-> From: William Lyu <William.Lyu@windriver.com>
->
-> The SUMMARY and DESCRIPTION are taken from Arch Linux wiki page:
-> https://wiki.archlinux.org/title/NetworkManager
->
-> Signed-off-by: William Lyu <William.Lyu@windriver.com>
-> ---
->  .../networkmanager/networkmanager_1.44.0.bb                   | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
->
-> diff --git a/meta-networking/recipes-connectivity/networkmanager/networkm=
-anager_1.44.0.bb b/meta-networking/recipes-connectivity/networkmanager/netw=
-orkmanager_1.44.0.bb
-> index d213ef650..0857d63b1 100644
-> --- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_=
-1.44.0.bb
-> +++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_=
-1.44.0.bb
-> @@ -1,4 +1,6 @@
-> -SUMMARY =3D "NetworkManager"
-> +SUMMARY =3D "NetworkManager is a program for providing detection and con=
-figuration for systems to automatically connect to networks."
-> +DESCRIPTION =3D "NetworkManager is a program for providing detection and=
- configuration for systems to automatically connect to networks. NetworkMan=
-ager's functionality can be useful for both wireless and wired networks. Fo=
-r wireless networks, NetworkManager prefers known wireless networks and has=
- the ability to switch to the most reliable network. NetworkManager-aware a=
-pplications can switch from online and offline mode. NetworkManager also pr=
-efers wired connections over wireless ones, has support for modem connectio=
-ns and certain types of VPN."
-> +
+Supports out of tree builds
 
-maybe add some line breaks here
+Signed-off-by: alperak <alperyasinak1@gmail.com>
+---
+ meta-oe/recipes-support/libbytesize/libbytesize_2.10.bb | 1 -
+ 1 file changed, 1 deletion(-)
 
->  HOMEPAGE =3D "https://wiki.gnome.org/Projects/NetworkManager"
->  SECTION =3D "net/misc"
->
-> --
-> 2.25.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#107339): https://lists.openembedded.org/g/openembedde=
-d-devel/message/107339
-> Mute This Topic: https://lists.openembedded.org/mt/103136589/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+diff --git a/meta-oe/recipes-support/libbytesize/libbytesize_2.10.bb b/meta-oe/recipes-support/libbytesize/libbytesize_2.10.bb
+index 28e40f66e..daa01bfc3 100644
+--- a/meta-oe/recipes-support/libbytesize/libbytesize_2.10.bb
++++ b/meta-oe/recipes-support/libbytesize/libbytesize_2.10.bb
+@@ -7,7 +7,6 @@ SECTION = "devel/lib"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=c07cb499d259452f324bb90c3067d85c"
+ 
+ S = "${WORKDIR}/git"
+-B = "${S}"
+ 
+ SRCREV = "6e83cc6f6dff4f126fc79284e0c3c1c50123380d"
+ SRC_URI = "git://github.com/storaged-project/libbytesize;branch=main;protocol=https"
+-- 
+2.25.1
+
 
