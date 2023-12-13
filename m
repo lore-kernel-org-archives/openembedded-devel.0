@@ -2,58 +2,57 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9BE95C4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AFBCFC41535
 	for <webhook@archiver.kernel.org>; Wed, 13 Dec 2023 07:07:19 +0000 (UTC)
-Received: from mail-oa1-f51.google.com (mail-oa1-f51.google.com [209.85.160.51])
- by mx.groups.io with SMTP id smtpd.web11.30689.1702451234088843329
+Received: from mail-oa1-f49.google.com (mail-oa1-f49.google.com [209.85.160.49])
+ by mx.groups.io with SMTP id smtpd.web11.30691.1702451236088423279
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Dec 2023 23:07:14 -0800
+ Tue, 12 Dec 2023 23:07:16 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Jb/hpUNB;
- spf=pass (domain: gmail.com, ip: 209.85.160.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f51.google.com with SMTP id 586e51a60fabf-2030fbc2417so750272fac.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 12 Dec 2023 23:07:14 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=PXESKNYt;
+ spf=pass (domain: gmail.com, ip: 209.85.160.49, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f49.google.com with SMTP id 586e51a60fabf-20316647099so541978fac.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 12 Dec 2023 23:07:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1702451233; x=1703056033; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1702451235; x=1703056035; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Y+ZSxYaEaMNMpK1WukvP8ktUK5iZ+gxFU7wMLEkbIx8=;
-        b=Jb/hpUNB6mr7pls5JTHveMe077x7SemmcODWa8SQSl0oV5Zmh34m3f82RXGWqYcDoW
-         jjoNX4YSWRwc8B2NumGqWH0Q6MyvPpcxbMPg7BT+R3rvsCFCpXLUT3hpr1cvo8Pc2Tsl
-         k0NA1MuU9unKkHMPtUyYL8UXGqkXGU1NNUlUl6cu4vYd2peX53eHrwiMy2NfsC1MQ9kc
-         iB+AWL6AGyr9Hnl5jbI0ePOJHqLRBbNBUJUuY2QrUpszc6F/R6NrrF0zJnG71auJzN7q
-         RBahvq2N0+M8309ZAjofiMOSGH59yxMpaadDFyB3jbHyiiv5MTuFJX+a/jIYDuFRWPNA
-         UHfA==
+        bh=CqDk462bnED2biFlzXlGHpD+uTctIgBQBRMlYVrBFfs=;
+        b=PXESKNYtgE/zJJME1k6TKoZZzG2OvaSX3rU6tCdKiz1FVwxlFs0ljfrAPr7H7q9d9j
+         d1Ej8TyGzIZ7LZ+88+PIdRD0Sredq99PuIf0vTl1aE7autdAC4FAzXkV2+c5PWjtnU/g
+         hcBO585xYO2wfol5zTVfb1VOea5Nv7G3c98hcUkGv4C4VHOqn/HDFKAaiLKcpBKrRxwA
+         kjD0ggwaiwIh4ilrenlodForpG2IAvQbm08IKXgl0zRCmmKgGbEfvMnVgubqxdHM12w8
+         7K1PMlf9h+9j6Pi02YMZLaUH8YQEZLqYhwaAtwjw9GBIlk9peYSZqrJKF0oKhtVbjCdg
+         bk5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702451233; x=1703056033;
+        d=1e100.net; s=20230601; t=1702451235; x=1703056035;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Y+ZSxYaEaMNMpK1WukvP8ktUK5iZ+gxFU7wMLEkbIx8=;
-        b=m1jGgZP5v6BGUpA8Tc3OY3FzSi3M6GGSdLCXj6IhCw/E761yB/9kPkBMQmx5D/MnbW
-         q3UJE600DNv5e7pwDK8nyq6vCoTf2rHGWP/Txk2TotyqjjEEndLZp7QATMKhvg+Xlve7
-         zbwMwydESlerM/xi1j6n/ZdWeyROEJs8FXmiz5c837IBeySTFCupw7cbJQEpyebkwUDA
-         So7xNS4DNnsmcOw2JzuP/4tBiLGN4GkrZZj7tawpUVBSKNDSJ4THDOpcjVLQZ3idVSxy
-         /9Jpy2OsWMh5Z2rYxTOJ36j93BsUoTT16Gky9xczUeCGR9ap/iGRpzzrYTQzzLv/TzbN
-         QjQA==
-X-Gm-Message-State: AOJu0Yw49KTNqZWtj9XJBos28FV4I+/Fgok8/l/3nStqJk9M3vtd1WTR
-	AJ6cwNEXhq4DOu/kRT3T3p66okXgvao=
-X-Google-Smtp-Source: AGHT+IGwO/6T4Thtk3qd61WVXLcBOfRnvZDlGxaz3rTKjwpTTe4SE7w/5vy1hyiljHHSTFE79ZQunw==
-X-Received: by 2002:a05:6870:e256:b0:1fa:f230:4c63 with SMTP id d22-20020a056870e25600b001faf2304c63mr9113465oac.30.1702451232886;
-        Tue, 12 Dec 2023 23:07:12 -0800 (PST)
+        bh=CqDk462bnED2biFlzXlGHpD+uTctIgBQBRMlYVrBFfs=;
+        b=jRwYOgbPPzb6fb4z0nQke9xTiwSZ8okkZzCOKasnkVZumuNzPsJKrq+MOKmfuYFM13
+         D5b8rjumPEAhfB0OR6G1fHdq8HrN200jaPQQSIqxPN9JwSfLj3PdANTANDvMwrv4mFrf
+         NNVFM66uFFJAgJ4sbZK5p7KQ/Nt4BiDamuxUxuj2Idg5sOcoitQ1yFSJjx/Koth2BOYx
+         NJ1Sfn6NSaglY1x+qBy3CrxOiBjN+R7UbTY6leLaUIt6cWiBW05wVmI33gpeP73LVhbi
+         c/3W+RywaDLi02feEUuXpYc5tOtMaAcoEhz6r2mIQiGqrfSTmBKChH0RFCcxbv2ePPlB
+         s4Hg==
+X-Gm-Message-State: AOJu0Yx+F4I8HrARYZ3sm/WEx5i6F+GnXd6bnccwSEpOQuZ0sG7ILHx9
+	7C7fUi+zpnzGrU5ewjENaKAnCkWR4A0=
+X-Google-Smtp-Source: AGHT+IHXIeQOlUlUtbFl44HQzoZmBZtvQCzyPVjPiiUuTvuI35dbw/T/u4T7gE/AIcYokLLe3bSrvA==
+X-Received: by 2002:a05:6870:9f14:b0:1fb:75a:de6f with SMTP id xl20-20020a0568709f1400b001fb075ade6fmr9708532oab.93.1702451234919;
+        Tue, 12 Dec 2023 23:07:14 -0800 (PST)
 Received: from apollo.localdomain ([2601:646:9d80:4380::4b6f])
-        by smtp.gmail.com with ESMTPSA id v29-20020a63481d000000b005c19c586cb7sm9218151pga.33.2023.12.12.23.07.12
+        by smtp.gmail.com with ESMTPSA id v29-20020a63481d000000b005c19c586cb7sm9218151pga.33.2023.12.12.23.07.14
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 12 Dec 2023 23:07:12 -0800 (PST)
+        Tue, 12 Dec 2023 23:07:14 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org, 
- alperak <alperyasinak1@gmail.com>
-In-Reply-To: <20231204075356.26863-1-alperyasinak1@gmail.com>
-References: <20231204075356.26863-1-alperyasinak1@gmail.com>
-Subject: Re: [meta-oe][PATCH] snappy: upgrade 1.1.9 -> 1.1.10
-Message-Id: <170245123213.133993.15838022858933941353.b4-ty@gmail.com>
-Date: Tue, 12 Dec 2023 23:07:12 -0800
+To: openembedded-devel@lists.openembedded.org, kai.kang@windriver.com
+In-Reply-To: <20231205145032.1116030-1-kai.kang@windriver.com>
+References: <20231205145032.1116030-1-kai.kang@windriver.com>
+Subject: Re: [meta-python][PATCH 1/2] python3-pyudev: provide native
+Message-Id: <170245123409.133993.13195774594233702101.b4-ty@gmail.com>
+Date: Tue, 12 Dec 2023 23:07:14 -0800
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -62,23 +61,21 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 13 Dec 2023 07:07:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107349
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107351
 
 
-On Mon, 04 Dec 2023 10:53:56 +0300, alperak wrote:
-> * 0001-Add-inline-with-SNAPPY_ATTRIBUTE_ALWAYS_INLINE.patch removed because fixed in the new version
+On Tue, 05 Dec 2023 22:50:31 +0800, kai.kang@windriver.com wrote:
+> Add 'native' to BBCLASSEXTEND to provides python3-pyudev-native which is
+> required by lvm2 when package config 'dbus' is enabled.
 > 
-> Changelog:
 > 
-> * Performance improvements
-> * Compilation fixes for various environments
-> 
-> [...]
 
 Applied, thanks!
 
-[1/1] snappy: upgrade 1.1.9 -> 1.1.10
-      commit: 0f0c4c96d90d0eaf78ef6fa93a150dd5fa8fa182
+[1/2] python3-pyudev: provide native
+      (no commit info)
+[2/2] lvm2: 2.03.16 -> 2.03.22
+      commit: 02f460c5e379b3b0980374b3f89d55bc195d03d3
 
 Best regards,
 -- 
