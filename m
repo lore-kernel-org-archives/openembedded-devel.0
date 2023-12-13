@@ -1,169 +1,75 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <derek@asterius.io>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B4BEAC4332F
-	for <webhook@archiver.kernel.org>; Wed, 13 Dec 2023 18:49:34 +0000 (UTC)
-Received: from mail-oa1-f46.google.com (mail-oa1-f46.google.com [209.85.160.46])
- by mx.groups.io with SMTP id smtpd.web11.44527.1702493367745433923
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 16D3CC4332F
+	for <webhook@archiver.kernel.org>; Wed, 13 Dec 2023 19:58:15 +0000 (UTC)
+Received: from mail-il1-f170.google.com (mail-il1-f170.google.com [209.85.166.170])
+ by mx.groups.io with SMTP id smtpd.web11.46207.1702497487427830460
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 13 Dec 2023 10:49:27 -0800
+ Wed, 13 Dec 2023 11:58:07 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Ct1h/D4w;
- spf=pass (domain: gmail.com, ip: 209.85.160.46, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f46.google.com with SMTP id 586e51a60fabf-1f060e059a3so5411367fac.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 13 Dec 2023 10:49:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1702493367; x=1703098167; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=pp06zmztX0kWWmcO3HXjOqpchHO2qojhFob68+j3o+A=;
-        b=Ct1h/D4wPl9JfkcSsT2rgR6x21xA2KtdwDF0j7xsvq6JAVDbqsHBDkCYJfhatZ6JbX
-         LW7PpWWDWnutho4ZZlQukXRfKWokR4YgSRBumRNnT3F8D8rNH6SbzxXYBPOIqPyHvltt
-         5/Cvw7u3CMQWTyKOXFUwCskjaYKLHscp8HKV8AQGcNVj5xHwrJ+2GlvRHx2O0KAiWE3j
-         oP5uyw6SW5TJZIXZ4Dm3XDV7rga+cB8Q/gpXx3W6K0N2LJ7tw2C3EObPmixl+lEwX2QG
-         m9tMW4O3uKNnAMdCeysobN8gVLINzLOfTk45T3dhVDW8nV/Ba3jk5LYsiPAHoP+d3adq
-         O3Cw==
+ dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.166.170, mailfrom: straka.derek@gmail.com)
+Received: by mail-il1-f170.google.com with SMTP id e9e14a558f8ab-35da85e543eso27074385ab.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 13 Dec 2023 11:58:07 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702493367; x=1703098167;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=pp06zmztX0kWWmcO3HXjOqpchHO2qojhFob68+j3o+A=;
-        b=iZTwBznZg+vgC/5xGCgbpGY4DDTyDNga0/DYX2R8WyMAg0dFZFEz3XXnSq9xle2anT
-         PjqXU5FnfkPft5li3R1b6TSRyrZlkyDp3t/0XO+M4b/Qii2mCuSSTBlCcaDRUnVqJLUx
-         JOyKRPFYrT2HPX+1XEa7pmSpMrQOUTZc9Hbb8B9FX+w0MjkSwch4/8Ky/SLU+4LxED9i
-         gR4mp6xIMHmV9vUJMX204p0sWKlV1zm3BArBClI77IEt35Ovto5YWCTSwNvTSwn4OFQb
-         jGFTLiVbk2dweo1gXPqCjFkzeaTIb9Som1mvU+z7sP2yB2tkBBVIl1TLHO+uDamSZI5w
-         fPog==
-X-Gm-Message-State: AOJu0YwDwDMLRrkvCCEnu+lxMGCzQKwxuF75ECTjS1iJJ99DiAhsxl6/
-	8qcpZuUwFJgzdGb5LJnh8jqW4/m2Wk/HeqN+FkNAIRAf
-X-Google-Smtp-Source: AGHT+IE+yij87NSyoC8aLKxWRWZs9ZNFGE0XHG6QeeT6JLnUaDUrY2PSIHlAdR4MvHHBYhNUROUx2FRgFOvRtHNnJ0I=
-X-Received: by 2002:a05:6870:2305:b0:1fb:335e:a4b6 with SMTP id
- w5-20020a056870230500b001fb335ea4b6mr11073410oao.14.1702493366886; Wed, 13
- Dec 2023 10:49:26 -0800 (PST)
+        d=1e100.net; s=20230601; t=1702497486; x=1703102286;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=DxU6cbgDuMqIGu14NyVO1dpxNTMOAN3EnEkV1pHOkB4=;
+        b=mPJIlAz3PKAJVDqQvBytaVup3FSCh/4W7Wc2xs2bu1gGqJiWB9WxkY9VoyfpwU3yQe
+         F+5WN8KdxysgSOu7QMV1IUZjPVYZ0aQTWcQhQgpaKu2VixbWq1iGG5/ZT8kk+4U5glqd
+         SEdhEFmmaCkwYOdZx4Juz8UqGLDaedyBkZ5fxX8HXpycA9JvYPFMCM4O6FCg7ZKlaHhh
+         6j7Z29P+8GaVyvsHyn7QeWjh73p89stkcuop67Qh0WHz5Q5qlfcOKPmI8X7Q7LpkLwxW
+         vcl/a0LakeMXr1xuw4YRmeCoVkRrhc434i/5AgM1Xrcfq3ptIrAzXCpIaFNNbiyz1th5
+         uy/g==
+X-Gm-Message-State: AOJu0YxOJkhZi4rIf/ItjjJD7ca1xdwIGW74+VE1GFKJJV5rcmknn5EM
+	BKo/pCYGFwkTswh10iJSAjIY8dgt9+jhUA==
+X-Google-Smtp-Source: AGHT+IFv0IfKI0RGYHYkNUiHW+xVUEO7tT4T9zdCh9u4qbZHOGe2E9Qt5aJS+zXwv5eNVm9ulDdumg==
+X-Received: by 2002:a05:6e02:174a:b0:35d:7054:3dd6 with SMTP id y10-20020a056e02174a00b0035d70543dd6mr12146854ill.6.1702497485596;
+        Wed, 13 Dec 2023 11:58:05 -0800 (PST)
+Received: from sparta.internal.asterius.io (c-73-228-213-122.hsd1.mn.comcast.net. [73.228.213.122])
+        by smtp.gmail.com with ESMTPSA id r6-20020a92d986000000b0035f76aac36csm355604iln.21.2023.12.13.11.58.04
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 13 Dec 2023 11:58:05 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Cc: Derek Straka <derek@asterius.io>
+Subject: [meta-python][PATCH] python3-greenlet: update to version 3.0.2
+Date: Wed, 13 Dec 2023 19:57:41 +0000
+Message-Id: <20231213195741.1107961-1-derek@asterius.io>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <70658be6-8b04-4cfa-9682-ab87086c274e@gmail.com>
-In-Reply-To: <70658be6-8b04-4cfa-9682-ab87086c274e@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 13 Dec 2023 10:49:00 -0800
-Message-ID: <CAMKF1sqpAqk3qMgokvTfeysEbmo2Eag=Y45eDanU78WitvMatg@mail.gmail.com>
-Subject: Re: kirkstone merge request: Dec 13th
-To: akuster808 <akuster808@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 13 Dec 2023 18:49:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107397
+ <openembedded-devel@lists.openembedded.org>; Wed, 13 Dec 2023 19:58:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107398
 
-Applied
-Thanks Armin.
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ .../{python3-greenlet_3.0.1.bb => python3-greenlet_3.0.2.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-greenlet_3.0.1.bb => python3-greenlet_3.0.2.bb} (78%)
 
-On Wed, Dec 13, 2023 at 10:40=E2=80=AFAM akuster808 <akuster808@gmail.com> =
-wrote:
->
-> The following changes since commit 8a75c61cce2aa1d6e5a3597ab8fc5a7e6aeae1=
-e4:
->
->    nginx: upgrade to 1.24.0 release (2023-11-18 10:03:19 -0500)
->
-> are available in the Git repository at:
->
->    https://git.openembedded.org/meta-openembedded kirkstone-next
->
-> for you to fetch changes up to 402affcc073db39f782c1ebfd718edd5f11eed4c:
->
->    squid: fix CVE-2023-46847 Denial of Service in HTTP Digest
-> Authentication (2023-12-13 13:35:51 -0500)
->
-> ----------------------------------------------------------------
-> Archana Polampalli (1):
->        samba: fix CVE-2023-4091
->
-> Christian Eggers (1):
->        python3-gcovr: switch to main branch
->
-> Jasper Orschulko (1):
->        nginx: Mitigate HTTP/2 Stream Resets Flood impact
->
-> Narpat Mali (1):
->        frr: Fix for multiple CVE's
->
-> Poonam Jadhav (1):
->        sdbus-c++: Update ptest path
->
-> Yogita Urade (1):
->        postgresql: fix CVE-2023-5868 CVE-2023-5869 CVE-2023-5870
->
-> vkumbhar (1):
->        squid: fix CVE-2023-46847 Denial of Service in HTTP Digest
-> Authentication
->
->   .../recipes-connectivity/samba/samba/CVE-2023-4091-0001.patch   | 193
-> ++++++++++++++++++
->   .../recipes-connectivity/samba/samba/CVE-2023-4091-0002.patch   | 59
-> ++++++
->   meta-networking/recipes-connectivity/samba/samba_4.14.14.bb     | 2 +
->   .../recipes-daemons/squid/files/CVE-2023-46847.patch            | 47 ++=
-+++
->   meta-networking/recipes-daemons/squid/squid_4.15.bb             | 1 +
->   meta-networking/recipes-protocols/frr/frr/CVE-2023-38406.patch  | 42 ++=
-++
->   meta-networking/recipes-protocols/frr/frr/CVE-2023-38407.patch  | 63
-> ++++++
->   meta-networking/recipes-protocols/frr/frr/CVE-2023-46752.patch  | 127
-> ++++++++++++
->   meta-networking/recipes-protocols/frr/frr/CVE-2023-46753.patch  | 119
-> +++++++++++
->   meta-networking/recipes-protocols/frr/frr/CVE-2023-47234.patch  | 98
-> ++++++++++
->   meta-networking/recipes-protocols/frr/frr/CVE-2023-47235.patch  | 114
-> +++++++++++
->   meta-networking/recipes-protocols/frr/frr_8.2.2.bb              | 6 +
->   meta-oe/recipes-core/sdbus-c++/sdbus-c++_1.0.0.bb               | 7 +-
->   meta-oe/recipes-dbs/postgresql/files/CVE-2023-5868.patch        | 125
-> ++++++++++++
->   meta-oe/recipes-dbs/postgresql/files/CVE-2023-5869.patch        | 294
-> ++++++++++++++++++++++++++++
->   meta-oe/recipes-dbs/postgresql/files/CVE-2023-5870.patch        | 108
-> ++++++++++
->   meta-oe/recipes-dbs/postgresql/postgresql_14.9.bb               | 3 +
->   meta-python/recipes-devtools/python/python3-gcovr_5.1.bb        | 2 +-
->   .../files/0001-HTTP-2-per-iteration-stream-handling-limit.patch | 92
-> +++++++++
->   meta-webserver/recipes-httpd/nginx/nginx_1.20.1.bb              | 1 +
->   meta-webserver/recipes-httpd/nginx/nginx_1.21.1.bb              | 2 +
->   21 files changed, 1503 insertions(+), 2 deletions(-)
->   create mode 100644
-> meta-networking/recipes-connectivity/samba/samba/CVE-2023-4091-0001.patch
->   create mode 100644
-> meta-networking/recipes-connectivity/samba/samba/CVE-2023-4091-0002.patch
->   create mode 100644
-> meta-networking/recipes-daemons/squid/files/CVE-2023-46847.patch
->   create mode 100644
-> meta-networking/recipes-protocols/frr/frr/CVE-2023-38406.patch
->   create mode 100644
-> meta-networking/recipes-protocols/frr/frr/CVE-2023-38407.patch
->   create mode 100644
-> meta-networking/recipes-protocols/frr/frr/CVE-2023-46752.patch
->   create mode 100644
-> meta-networking/recipes-protocols/frr/frr/CVE-2023-46753.patch
->   create mode 100644
-> meta-networking/recipes-protocols/frr/frr/CVE-2023-47234.patch
->   create mode 100644
-> meta-networking/recipes-protocols/frr/frr/CVE-2023-47235.patch
->   create mode 100644
-> meta-oe/recipes-dbs/postgresql/files/CVE-2023-5868.patch
->   create mode 100644
-> meta-oe/recipes-dbs/postgresql/files/CVE-2023-5869.patch
->   create mode 100644
-> meta-oe/recipes-dbs/postgresql/files/CVE-2023-5870.patch
->   create mode 100644
-> meta-webserver/recipes-httpd/nginx/files/0001-HTTP-2-per-iteration-stream=
--handling-limit.patch
->
+diff --git a/meta-python/recipes-devtools/python/python3-greenlet_3.0.1.bb b/meta-python/recipes-devtools/python/python3-greenlet_3.0.2.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python3-greenlet_3.0.1.bb
+rename to meta-python/recipes-devtools/python/python3-greenlet_3.0.2.bb
+index 523c2b6b2..337bd95a6 100644
+--- a/meta-python/recipes-devtools/python/python3-greenlet_3.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-greenlet_3.0.2.bb
+@@ -4,6 +4,6 @@ LICENSE = "MIT & PSF-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=e95668d68e4329085c7ab3535e6a7aee \
+                     file://LICENSE.PSF;md5=c106931d9429eda0492617f037b8f69a"
+ 
+-SRC_URI[sha256sum] = "816bd9488a94cba78d93e1abb58000e8266fa9cc2aa9ccdd6eb0696acb24005b"
++SRC_URI[sha256sum] = "1c1129bc47266d83444c85a8e990ae22688cf05fb20d7951fd2866007c2ba9bc"
+ 
+ inherit pypi setuptools3
+-- 
+2.34.1
+
 
