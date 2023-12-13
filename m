@@ -1,142 +1,137 @@
-Return-Path: <vkumbhar@mvista.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A2BBC4332F
-	for <webhook@archiver.kernel.org>; Wed, 13 Dec 2023 11:55:32 +0000 (UTC)
-Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
- by mx.groups.io with SMTP id smtpd.web11.33988.1702468527655509188
- for <openembedded-devel@lists.openembedded.org>;
- Wed, 13 Dec 2023 03:55:27 -0800
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 91C5FC4332F
+	for <webhook@archiver.kernel.org>; Wed, 13 Dec 2023 15:56:13 +0000 (UTC)
+Received: from mail-oa1-f44.google.com (mail-oa1-f44.google.com [209.85.160.44])
+ by mx.groups.io with SMTP id smtpd.web10.39743.1702482965692418080
+ for <Openembedded-devel@lists.openembedded.org>;
+ Wed, 13 Dec 2023 07:56:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=ZUJ3Qh/v;
- spf=pass (domain: mvista.com, ip: 209.85.210.171, mailfrom: vkumbhar@mvista.com)
-Received: by mail-pf1-f171.google.com with SMTP id d2e1a72fcca58-6ce72faf1e8so4160275b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 13 Dec 2023 03:55:27 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=nPO4p8Pn;
+ spf=pass (domain: gmail.com, ip: 209.85.160.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f44.google.com with SMTP id 586e51a60fabf-1f0f94943d9so2700609fac.2
+        for <Openembedded-devel@lists.openembedded.org>; Wed, 13 Dec 2023 07:56:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1702468526; x=1703073326; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Wf3V800qKhWGg3UT9cT/ZYNmp/fjpYXAmSl9VOH4VmA=;
-        b=ZUJ3Qh/v7Qax3djjLyfiQ/kY3BTdnq4CiclE29atytaeaqBNZMXEGxeJbP+beVaf+g
-         5IgjfBtAnGpGx4+kNvDY9h60rQ9pNIMsERMN+fOkiHLzMsKmfHvXrh4B92L0v/RZWwDJ
-         rDxiKLqGLdM0+t1Noyt3xSLsZq14zzDb1iqdY=
+        d=gmail.com; s=20230601; t=1702482965; x=1703087765; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=CD7cr85X2YHWtITfGYc7qfQLP6mGd3WsOT8lR6R76hU=;
+        b=nPO4p8PnRmKj+UygFd1Li7dcNbsspcyDXznZJSLtBfwJfUwA6IggaM4Q7anlN6UPiy
+         ZkR444jkwGxPX84UuN7CODqr8g4OkLIU0feH/nrFTTcQ2HcVGAPAQJBi+DIMjAiyRKud
+         dWPx81UM1s5dNYHaicrG6sIVqN8LMlxN0kbk5LZB7c930RkuYVGZlO4pEJgqc1f6xkbX
+         1Wedvlp8SSNc9xr/4tjuxuzwoNRDjpA71R9eBN80hgnX0o2cLvw8jXDKObBD2zrxJfA2
+         Qj4VxrGQQW4/XxG57yR6ypp2tiIBEwRnqtBv+HqXKjK6beHWJMhfAU4KudLp43ujhkcS
+         4rMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702468526; x=1703073326;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1702482965; x=1703087765;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Wf3V800qKhWGg3UT9cT/ZYNmp/fjpYXAmSl9VOH4VmA=;
-        b=apl6X5LbJqDHbPQhnJo15A8sBPk+JUNtRKgy4PCsGtanYolbOFKsyCCI+LE2j8RpSa
-         aAAcsXdsWWGECEb8ZdDK2a1R3ncTIkyvg514BDw9m7iC+lmKPV9NixokshTmIJPvrnU7
-         wXszAw4W+DIIGPODVye5I1o3CGqDwmuDfPp0McpeYuOmAVppELu9K8Jz9qOGI44tfXEo
-         g65+jEDnNq4ysRK8Inpho4enU1ZpqChee7Jb/UVGrrCU2X+0WgbnMWU17erGmNGganpd
-         vm+Zx5spR6tjmS7ncBss5wDGAiMUY7LWIP3revMIcCTlcfRf+mMbgxBcZ8LwfMizUOWY
-         wGeg==
-X-Gm-Message-State: AOJu0YwGUu2JAFWleMqOqk6oaV94SXGRNbVSrk/uNZcTU2qlrxSvnkGo
-	maHjmGxfVSQtA91dakj0w72+ITCFNSynILStDOg=
-X-Google-Smtp-Source: AGHT+IE9tvPk/I5K5dPR9/+MElEzDu0xsEcF+Ojbyu5RgLVvi26dVjz7MNsTSWu5MemM0WtDhl3Lbg==
-X-Received: by 2002:a05:6a00:4b13:b0:6d0:93a7:dc09 with SMTP id kq19-20020a056a004b1300b006d093a7dc09mr2711328pfb.9.1702468526076;
-        Wed, 13 Dec 2023 03:55:26 -0800 (PST)
-Received: from vkumbhar-Latitude-3400.. ([116.74.239.230])
-        by smtp.gmail.com with ESMTPSA id ff16-20020a056a002f5000b006ce65bf5376sm9832224pfb.75.2023.12.13.03.55.24
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 13 Dec 2023 03:55:25 -0800 (PST)
-From: Vivek Kumbhar <vkumbhar@mvista.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Vivek Kumbhar <vkumbhar@mvista.com>
-Subject: [meta-oe][dunfell][PATCH] wireshark: fix CVE-2022-4345 multiple (BPv6, OpenFlow, and Kafka protocol) dissector infinite loops
-Date: Wed, 13 Dec 2023 17:25:03 +0530
-Message-Id: <20231213115503.1678810-1-vkumbhar@mvista.com>
-X-Mailer: git-send-email 2.40.1
+        bh=CD7cr85X2YHWtITfGYc7qfQLP6mGd3WsOT8lR6R76hU=;
+        b=sdFTC3g5L5znPteXNdzr4/YSz2kX8AKJWIczIg6yxjlK5vajLrjwFlWnyimwiywD4Q
+         u3QJdDq5w0/iEIbWpS3XZeEH0Mm4kZivj4qsNaPGZyVudBPy7h+z9ApAif9Frvxwo/cA
+         y5rgeuNjGaMuV1W5u7pN3wKOhWkYLWYBVQSei2oK3iFP6tBljkzjD+F14/2yJuwxVs21
+         D6hbkB7qibyUcMxjS8KKjITOwA9ECPJ3+WHHPmm0ba966mQhHOsscgcuxQ/PZz/te++S
+         +rOi+BLl3Zelo6i0/ZXMi5V5eKjHT3yympPcG7Etjf9prI2wa0nISB7cBZ7Vup88bgqc
+         kSdA==
+X-Gm-Message-State: AOJu0Yw0rBFHibYluga4FULDlZoallgC8kZqQzngTpVarsg9aBVJEDfz
+	/51wc4DI++NBrMzyG57zUhCVLPBcGxv3LYTb3Mm+Tcpu
+X-Google-Smtp-Source: AGHT+IFBP1qyXd3yr2/pqqCq7uZqVzA4yt8RRMPEoIZZxjpw7V/mWSs2654baSeqlRoMQVhl+Mx2W1G1SnSPA3MaDac=
+X-Received: by 2002:a05:6870:806:b0:1fb:851:bc2b with SMTP id
+ fw6-20020a056870080600b001fb0851bc2bmr6391377oab.57.1702482964598; Wed, 13
+ Dec 2023 07:56:04 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20231212093804.1012506-1-liezhi.yang@windriver.com>
+ <170245126382.133993.15578168101766633828.b4-ty@gmail.com> <45C353E1-7C45-4BC4-A5A4-1697BA14E6E4@arm.com>
+In-Reply-To: <45C353E1-7C45-4BC4-A5A4-1697BA14E6E4@arm.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 13 Dec 2023 07:55:53 -0800
+Message-ID: <CAMKF1sr=8nggCC00K7_5KnHLy40zp+Zebr92WRxVDV9S09v95g@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH] minifi-cpp: Fix do_configure error builder aarch64
+To: Ross Burton <ross.burton@arm.com>
+Cc: "liezhi.yang@windriver.com" <liezhi.yang@windriver.com>, 
+	openembedded-devel <Openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="0000000000005751cc060c6634dd"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 13 Dec 2023 11:55:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107393
+ <openembedded-devel@lists.openembedded.org>; Wed, 13 Dec 2023 15:56:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107394
 
-Upstream-Status: Backport from https://gitlab.com/wireshark/wireshark/-/commit/39db474f80af87449ce0f034522dccc80ed4153f
+--0000000000005751cc060c6634dd
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Vivek Kumbhar <vkumbhar@mvista.com>
----
- .../wireshark/files/CVE-2022-4345.patch       | 52 +++++++++++++++++++
- .../wireshark/wireshark_3.2.18.bb             |  1 +
- 2 files changed, 53 insertions(+)
- create mode 100644 meta-networking/recipes-support/wireshark/files/CVE-2022-4345.patch
+On Wed, Dec 13, 2023 at 3:31=E2=80=AFAM Ross Burton <Ross.Burton@arm.com> w=
+rote:
 
-diff --git a/meta-networking/recipes-support/wireshark/files/CVE-2022-4345.patch b/meta-networking/recipes-support/wireshark/files/CVE-2022-4345.patch
-new file mode 100644
-index 0000000000..938b7cf772
---- /dev/null
-+++ b/meta-networking/recipes-support/wireshark/files/CVE-2022-4345.patch
-@@ -0,0 +1,52 @@
-+From 39db474f80af87449ce0f034522dccc80ed4153f Mon Sep 17 00:00:00 2001
-+From: John Thacker <johnthacker@gmail.com>
-+Date: Thu, 1 Dec 2022 20:46:15 -0500
-+Subject: [PATCH] openflow_v6: Prevent infinite loops in too short ofp_stats
-+
-+The ofp_stats struct length field includes the fixed 4 bytes.
-+If the length is smaller than that, report the length error
-+and break out. In particular, a value of zero can cause
-+infinite loops if this isn't done.
-+
-+
-+(cherry picked from commit 13823bb1059cf70f401892ba1b1eaa2400cdf3db)
-+
-+Upstream-Status: Backport [https://gitlab.com/wireshark/wireshark/-/commit/39db474f80af87449ce0f034522dccc80ed4153f]
-+CVE: CVE-2022-4345
-+Signed-off-by: Vivek Kumbhar <vkumbhar@mvista.com>
-+---
-+ epan/dissectors/packet-openflow_v6.c | 8 +++++++-
-+ 1 file changed, 7 insertions(+), 1 deletion(-)
-+
-+diff --git a/epan/dissectors/packet-openflow_v6.c b/epan/dissectors/packet-openflow_v6.c
-+index f3bd0ef..96a3233 100644
-+--- a/epan/dissectors/packet-openflow_v6.c
-++++ b/epan/dissectors/packet-openflow_v6.c
-+@@ -1118,17 +1118,23 @@ dissect_openflow_v6_oxs(tvbuff_t *tvb, packet_info *pinfo _U_, proto_tree *tree,
-+ static int
-+ dissect_openflow_stats_v6(tvbuff_t *tvb, packet_info *pinfo _U_, proto_tree *tree, int offset, guint16 length _U_)
-+ {
-++    proto_item *ti;
-+     guint32 stats_length;
-+     int oxs_end;
-+     guint32 padding;
-+ 
-+     proto_tree_add_item(tree, hf_openflow_v6_stats_reserved, tvb, offset, 2, ENC_NA);
-+ 
-+-    proto_tree_add_item_ret_uint(tree, hf_openflow_v6_stats_length, tvb, offset+2, 2, ENC_BIG_ENDIAN, &stats_length);
-++    ti = proto_tree_add_item_ret_uint(tree, hf_openflow_v6_stats_length, tvb, offset+2, 2, ENC_BIG_ENDIAN, &stats_length);
-+ 
-+     oxs_end = offset + stats_length;
-+     offset+=4;
-+ 
-++    if (stats_length < 4) {
-++        expert_add_info(pinfo, ti, &ei_openflow_v6_length_too_short);
-++        return offset;
-++    }
-++
-+     while (offset < oxs_end) {
-+         offset = dissect_openflow_v6_oxs(tvb, pinfo, tree, offset, oxs_end - offset);
-+     }
-+-- 
-+2.40.1
-+
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb b/meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb
-index b35c243284..7d99a1438b 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb
-@@ -20,6 +20,7 @@ SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz
-            file://CVE-2023-2906.patch \
-            file://CVE-2023-3649.patch \
-            file://CVE-2022-0585-CVE-2023-2879.patch \
-+           file://CVE-2022-4345.patch \
-            "
- UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
- 
--- 
-2.40.1
+> On 13 Dec 2023, at 07:07, Khem Raj via lists.openembedded.org <raj.khem=
+=3D
+> gmail.com@lists.openembedded.org> wrote:
+> >
+> >
+> > On Tue, 12 Dec 2023 17:38:04 +0800, liezhi.yang@windriver.com wrote:
+> >> Fixed do_configure error when build on aarch64 host:
+> >> error: cannot guess build type; you must specify one
+> >>
+> >>
+> >
+> > Applied, thanks!
+> >
+> > [1/1] minifi-cpp: Fix do_configure error builder aarch64
+> >      commit: adecc463a3c090e5a9c54875a42047a427384f71
+>
+> I stand by my comment that patching the config.guess is the wrong thing
+> when we explicitly have a command whose job is to install updated
+> config.guess files.
 
+
+This is vendored code but I think overwriting config.guess might be better
+way still.
+
+
+>
+> Ross
+
+--0000000000005751cc060c6634dd
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Wed, Dec 13, 2023 at 3:31=E2=80=AFAM Ross Burton &lt;<a =
+href=3D"mailto:Ross.Burton@arm.com">Ross.Burton@arm.com</a>&gt; wrote:<br><=
+/div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-le=
+ft:1px #ccc solid;padding-left:1ex" dir=3D"auto">On 13 Dec 2023, at 07:07, =
+Khem Raj via <a href=3D"http://lists.openembedded.org" rel=3D"noreferrer" t=
+arget=3D"_blank">lists.openembedded.org</a> &lt;raj.khem=3D<a href=3D"mailt=
+o:gmail.com@lists.openembedded.org" target=3D"_blank">gmail.com@lists.opene=
+mbedded.org</a>&gt; wrote:<br>
+&gt; <br>
+&gt; <br>
+&gt; On Tue, 12 Dec 2023 17:38:04 +0800, <a href=3D"mailto:liezhi.yang@wind=
+river.com" target=3D"_blank">liezhi.yang@windriver.com</a> wrote:<br>
+&gt;&gt; Fixed do_configure error when build on aarch64 host:<br>
+&gt;&gt; error: cannot guess build type; you must specify one<br>
+&gt;&gt; <br>
+&gt;&gt; <br>
+&gt; <br>
+&gt; Applied, thanks!<br>
+&gt; <br>
+&gt; [1/1] minifi-cpp: Fix do_configure error builder aarch64<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 commit: adecc463a3c090e5a9c54875a42047a427384f71<b=
+r>
+<br>
+I stand by my comment that patching the config.guess is the wrong thing whe=
+n we explicitly have a command whose job is to install updated config.guess=
+ files.</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">This is v=
+endored code but I think overwriting config.guess might be better way still=
+.</div><div dir=3D"auto"><br></div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex" dir=3D"a=
+uto"><br>
+<br>
+Ross</blockquote></div></div>
+
+--0000000000005751cc060c6634dd--
 
