@@ -1,196 +1,114 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AF1E0C4332F
-	for <webhook@archiver.kernel.org>; Wed, 13 Dec 2023 18:40:54 +0000 (UTC)
-Received: from mail-yb1-f171.google.com (mail-yb1-f171.google.com [209.85.219.171])
- by mx.groups.io with SMTP id smtpd.web10.44578.1702492847255350657
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B24F0C4332F
+	for <webhook@archiver.kernel.org>; Wed, 13 Dec 2023 18:47:04 +0000 (UTC)
+Received: from mail-ot1-f51.google.com (mail-ot1-f51.google.com [209.85.210.51])
+ by mx.groups.io with SMTP id smtpd.web10.44748.1702493221529896704
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 13 Dec 2023 10:40:47 -0800
+ Wed, 13 Dec 2023 10:47:01 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=f3Dj8MQ2;
- spf=pass (domain: gmail.com, ip: 209.85.219.171, mailfrom: akuster808@gmail.com)
-Received: by mail-yb1-f171.google.com with SMTP id 3f1490d57ef6-dbcae1e53bcso3096252276.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 13 Dec 2023 10:40:47 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=TD0vdCv4;
+ spf=pass (domain: gmail.com, ip: 209.85.210.51, mailfrom: raj.khem@gmail.com)
+Received: by mail-ot1-f51.google.com with SMTP id 46e09a7af769-6d9d209c9bbso5838728a34.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 13 Dec 2023 10:47:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1702492846; x=1703097646; darn=lists.openembedded.org;
-        h=content-transfer-encoding:autocrypt:subject:from:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=G2GT5M/XpHwc9iDLW6FJHMWpts8ejuzVQNwgkL1oEkU=;
-        b=f3Dj8MQ2G5WEH+psjqD07Ur9DngqF9NcZ6iGbRKI6YFjoB1o/oly3WFle/z7bCih/e
-         5/MUH+FuBu/mh+FLVQb/KGgEOem3Vs8rlJoRsMLgqYx61Adn3weVvVhRZaZyngVGe8DP
-         p3an86t2uWF1pZ6PEUU1cH4qwXjjlLdKPMEz8cAcd5vMmWA1OxV9c0rSxNgp3zl0/I+o
-         i/O+mMAV4c3ybkcsAp2GLSsCyMISZFv5eDFSqDzfcSxR9L1rRURSBRB3gCixiu+bBrkx
-         fxFh0s8XhfNGvOeUcEYmhhu34L3W4vK1Rnhn51CY0Y/wls3TilIrk9vQt/p4CNbtb07z
-         M7Yg==
+        d=gmail.com; s=20230601; t=1702493221; x=1703098021; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=JyQjkU5OjPRj6gt3Q1aD1bQk5qiHuBIpocxRpMCyahU=;
+        b=TD0vdCv4E9PFhW2/MKlBKfvfLJ0L2YnBWeVrA1y8drpq+H/bqol7S+GLMdpGv72PUS
+         eRRS0zm87v8F8GpMENzIFfY1gSBD7MCCeH+vrSWTVPUSHU+8MMgwGFcjBadrBEfOmkWL
+         B9nBp8OhDJPxWNF+ppOkwMYI/56SKUVMvWFMqC6u8tsB+dSH2HMfoErljxPcTF/BQm20
+         4HSzb4hDVgxyHayopMkyd5f/4+kjhNax1VjemPj95jpTG29pnmn4/1tWuoAWqDVFXpjD
+         ZX9ETDmmsqav8ExvvgnLo8pcqO5setrEXEVkcMabuOruQnEtqNHGNmUcFa7QrIUEQM/5
+         8WoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702492846; x=1703097646;
-        h=content-transfer-encoding:autocrypt:subject:from:to
-         :content-language:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=G2GT5M/XpHwc9iDLW6FJHMWpts8ejuzVQNwgkL1oEkU=;
-        b=IFZEDe3CTmuqA6joRo0+4dpqt3/F0Xz5kTY6tRBxVa32PdCGOB2Ddb7tJondWpzJA/
-         PpHeIt2sbl3INbXcvDT39UQHAJZ6jSyODIPmFNKmg4eScBskqYSIMZemsDY09TNsGWeN
-         tyaTpUZooz4oa0ZAEQPtCEJZwqOSORoF1KxA1/EefZrdCZmPM9Xw2fj/5hqm7h+gztgh
-         mDvtrgwJEH9z3qjNDFkisgtGMGNH+BQoQfhTkQa670tPFSdm+wyYOtsaWvt4vLoa0dZB
-         tQ9aRODUHLpoc1HYIjXxfNuOZywWm5Ko0QDmGKoqe1kS5u0zESf9biBrCr1sdN+4Wggc
-         OvZQ==
-X-Gm-Message-State: AOJu0YylMBvv/Rmo0rD/JzG5c8qMIDahqPTcKA1EBWbIhC/fqqzZ2aWI
-	oRcT0Uvn6gPGIBz5sxOR0apCJetgUmugkw==
-X-Google-Smtp-Source: AGHT+IGzafEBsemKECZyIImiK6iUZcorYdpen3p9Zi6xmLmoon0uX5iaGVzt6nX2KScUdyKnYY8HMQ==
-X-Received: by 2002:a5b:151:0:b0:dbc:692e:b08 with SMTP id c17-20020a5b0151000000b00dbc692e0b08mr5233408ybp.80.1702492846397;
-        Wed, 13 Dec 2023 10:40:46 -0800 (PST)
-Received: from ?IPV6:2600:1700:9190:ba10:51d0:97cc:dfc5:1a02? ([2600:1700:9190:ba10:51d0:97cc:dfc5:1a02])
-        by smtp.gmail.com with ESMTPSA id h5-20020a255f45000000b00dbcb57c64fbsm330000ybm.8.2023.12.13.10.40.45
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 13 Dec 2023 10:40:45 -0800 (PST)
-Message-ID: <70658be6-8b04-4cfa-9682-ab87086c274e@gmail.com>
-Date: Wed, 13 Dec 2023 13:40:45 -0500
+        d=1e100.net; s=20230601; t=1702493221; x=1703098021;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=JyQjkU5OjPRj6gt3Q1aD1bQk5qiHuBIpocxRpMCyahU=;
+        b=BStIIEhEVJdUCc/r35o4480lyVwQhB8fBvjLrdtgeI9B/iqX6CwsDQjFk6nCCcsc3a
+         xm1WlwH34Xl/wgK5u/BTa7P/SxzFVULBT6J7WhtBv6QMVs3m8njLdLOEj0znHKeqEtgR
+         m1A0RMVhcYdAmynHH88EP4TPnZDQJcT7gccE9+wYS9nkPb9IDeaj+8wg9PDze26tKDqN
+         w8JsCDJ+XI3pB6Bqx3oxkE3qvDoPLMKljQQsntGpSj7HikLMntJOAljt5NHiaUVMmN3U
+         4ywdFqTMcLQiC4BljtHiIE+jZtf6Wf8pfvM0H+t7nSmWyhRI82EghBhJqkCML61Cx2g+
+         sw2A==
+X-Gm-Message-State: AOJu0YwlX8mANV54B3bRW9k+eJ4QU19Bli8nxW1Rh9wbdusU0W3wCYs/
+	oKMbN9EMLD8jvPvbu2FsX0JihRPHEGim+cpJ3O4=
+X-Google-Smtp-Source: AGHT+IGI60E43UP+m0Jj+PPp6grJ75SvxoqPqvR489izUorvWUhUE02GuVpLTYE9pZX6cmsJLc6BmsRCSpcNIXq4MCA=
+X-Received: by 2002:a05:6870:9f14:b0:1fb:75a:de6f with SMTP id
+ xl20-20020a0568709f1400b001fb075ade6fmr11031020oab.93.1702493220678; Wed, 13
+ Dec 2023 10:47:00 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-From: akuster808 <akuster808@gmail.com>
-Subject: kirkstone merge request: Dec 13th
-Autocrypt: addr=akuster808@gmail.com; keydata=
- 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
- ApZ86eOP
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <20231211131938.127747-1-alexandre.belloni@bootlin.com>
+In-Reply-To: <20231211131938.127747-1-alexandre.belloni@bootlin.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 13 Dec 2023 10:46:34 -0800
+Message-ID: <CAMKF1souk89CZBBCjM3W=-cZYYmyvyrtV-U8t2i0Zs26fwJOcA@mail.gmail.com>
+Subject: Re: [meta-oe][PATCH] poco: fix branch
+To: alexandre.belloni@bootlin.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 13 Dec 2023 18:40:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107395
+ <openembedded-devel@lists.openembedded.org>; Wed, 13 Dec 2023 18:47:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107396
 
-The following changes since commit 8a75c61cce2aa1d6e5a3597ab8fc5a7e6aeae1e4:
+Hi Alex,
 
-   nginx: upgrade to 1.24.0 release (2023-11-18 10:03:19 -0500)
+Thanks for the patch. I did not take it since there already was
+another upgrade patch [1] proposed which fixed this issue as well.
+Please report if this issue still persists
 
-are available in the Git repository at:
+[1] https://git.openembedded.org/meta-openembedded/commit/?id=3Dbcc76585519=
+c98a753cf90fa16b497be2c11f2d1
 
-   https://git.openembedded.org/meta-openembedded kirkstone-next
-
-for you to fetch changes up to 402affcc073db39f782c1ebfd718edd5f11eed4c:
-
-   squid: fix CVE-2023-46847 Denial of Service in HTTP Digest 
-Authentication (2023-12-13 13:35:51 -0500)
-
-----------------------------------------------------------------
-Archana Polampalli (1):
-       samba: fix CVE-2023-4091
-
-Christian Eggers (1):
-       python3-gcovr: switch to main branch
-
-Jasper Orschulko (1):
-       nginx: Mitigate HTTP/2 Stream Resets Flood impact
-
-Narpat Mali (1):
-       frr: Fix for multiple CVE's
-
-Poonam Jadhav (1):
-       sdbus-c++: Update ptest path
-
-Yogita Urade (1):
-       postgresql: fix CVE-2023-5868 CVE-2023-5869 CVE-2023-5870
-
-vkumbhar (1):
-       squid: fix CVE-2023-46847 Denial of Service in HTTP Digest 
-Authentication
-
-  .../recipes-connectivity/samba/samba/CVE-2023-4091-0001.patch   | 193 
-++++++++++++++++++
-  .../recipes-connectivity/samba/samba/CVE-2023-4091-0002.patch   | 59 
-++++++
-  meta-networking/recipes-connectivity/samba/samba_4.14.14.bb     | 2 +
-  .../recipes-daemons/squid/files/CVE-2023-46847.patch            | 47 +++++
-  meta-networking/recipes-daemons/squid/squid_4.15.bb             | 1 +
-  meta-networking/recipes-protocols/frr/frr/CVE-2023-38406.patch  | 42 ++++
-  meta-networking/recipes-protocols/frr/frr/CVE-2023-38407.patch  | 63 
-++++++
-  meta-networking/recipes-protocols/frr/frr/CVE-2023-46752.patch  | 127 
-++++++++++++
-  meta-networking/recipes-protocols/frr/frr/CVE-2023-46753.patch  | 119 
-+++++++++++
-  meta-networking/recipes-protocols/frr/frr/CVE-2023-47234.patch  | 98 
-++++++++++
-  meta-networking/recipes-protocols/frr/frr/CVE-2023-47235.patch  | 114 
-+++++++++++
-  meta-networking/recipes-protocols/frr/frr_8.2.2.bb              | 6 +
-  meta-oe/recipes-core/sdbus-c++/sdbus-c++_1.0.0.bb               | 7 +-
-  meta-oe/recipes-dbs/postgresql/files/CVE-2023-5868.patch        | 125 
-++++++++++++
-  meta-oe/recipes-dbs/postgresql/files/CVE-2023-5869.patch        | 294 
-++++++++++++++++++++++++++++
-  meta-oe/recipes-dbs/postgresql/files/CVE-2023-5870.patch        | 108 
-++++++++++
-  meta-oe/recipes-dbs/postgresql/postgresql_14.9.bb               | 3 +
-  meta-python/recipes-devtools/python/python3-gcovr_5.1.bb        | 2 +-
-  .../files/0001-HTTP-2-per-iteration-stream-handling-limit.patch | 92 
-+++++++++
-  meta-webserver/recipes-httpd/nginx/nginx_1.20.1.bb              | 1 +
-  meta-webserver/recipes-httpd/nginx/nginx_1.21.1.bb              | 2 +
-  21 files changed, 1503 insertions(+), 2 deletions(-)
-  create mode 100644 
-meta-networking/recipes-connectivity/samba/samba/CVE-2023-4091-0001.patch
-  create mode 100644 
-meta-networking/recipes-connectivity/samba/samba/CVE-2023-4091-0002.patch
-  create mode 100644 
-meta-networking/recipes-daemons/squid/files/CVE-2023-46847.patch
-  create mode 100644 
-meta-networking/recipes-protocols/frr/frr/CVE-2023-38406.patch
-  create mode 100644 
-meta-networking/recipes-protocols/frr/frr/CVE-2023-38407.patch
-  create mode 100644 
-meta-networking/recipes-protocols/frr/frr/CVE-2023-46752.patch
-  create mode 100644 
-meta-networking/recipes-protocols/frr/frr/CVE-2023-46753.patch
-  create mode 100644 
-meta-networking/recipes-protocols/frr/frr/CVE-2023-47234.patch
-  create mode 100644 
-meta-networking/recipes-protocols/frr/frr/CVE-2023-47235.patch
-  create mode 100644 
-meta-oe/recipes-dbs/postgresql/files/CVE-2023-5868.patch
-  create mode 100644 
-meta-oe/recipes-dbs/postgresql/files/CVE-2023-5869.patch
-  create mode 100644 
-meta-oe/recipes-dbs/postgresql/files/CVE-2023-5870.patch
-  create mode 100644 
-meta-webserver/recipes-httpd/nginx/files/0001-HTTP-2-per-iteration-stream-handling-limit.patch
-
+On Mon, Dec 11, 2023 at 5:19=E2=80=AFAM <alexandre.belloni@bootlin.com> wro=
+te:
+>
+> From: Alexandre Belloni <alexandre.belloni@bootlin.com>
+>
+> The current SRCREV is not on any branch anymore, switch to the 1.12.4
+> branch HEAD which is similar and the only change is irrelevant.
+>
+> Signed-off-by: Alexandre Belloni <alexandre.belloni@bootlin.com>
+> ---
+>  meta-oe/recipes-support/poco/poco_1.12.4.bb | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-oe/recipes-support/poco/poco_1.12.4.bb b/meta-oe/recipe=
+s-support/poco/poco_1.12.4.bb
+> index 12532e4ef1b8..96817c140e76 100644
+> --- a/meta-oe/recipes-support/poco/poco_1.12.4.bb
+> +++ b/meta-oe/recipes-support/poco/poco_1.12.4.bb
+> @@ -8,13 +8,13 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D4267f48fc738=
+f50380cbeeb76f95cebc"
+>  # These dependencies are required by Foundation
+>  DEPENDS =3D "libpcre2 zlib"
+>
+> -SRC_URI =3D "git://github.com/pocoproject/poco.git;branch=3Dmaster;proto=
+col=3Dhttps \
+> +SRC_URI =3D "git://github.com/pocoproject/poco.git;branch=3D1.12.4;proto=
+col=3Dhttps \
+>             file://0001-Use-std-atomic-int-instead-of-std-atomic-bool.pat=
+ch \
+>             file://0001-cppignore.lnx-Ignore-PKCS12-and-testLaunch-test.p=
+atch \
+>             file://0001-Fix-data-race-when-create-POSIX-thread.patch \
+>             file://run-ptest \
+>             "
+> -SRCREV =3D "1211613642269b7d53bea58b02de7fcd25ece3b9"
+> +SRCREV =3D "3572a1fb981672e2cd1d2533ffd836da7db0f414"
+>
+>  UPSTREAM_CHECK_GITTAGREGEX =3D "poco-(?P<pver>\d+(\.\d+)+)"
+>
+> --
+> 2.43.0
+>
 
