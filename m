@@ -2,58 +2,59 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 62145C46CA2
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 35318C41535
 	for <webhook@archiver.kernel.org>; Wed, 13 Dec 2023 07:07:40 +0000 (UTC)
-Received: from mail-oo1-f54.google.com (mail-oo1-f54.google.com [209.85.161.54])
- by mx.groups.io with SMTP id smtpd.web11.30703.1702451253135646300
+Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com [209.85.210.170])
+ by mx.groups.io with SMTP id smtpd.web10.31075.1702451258022718905
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Dec 2023 23:07:33 -0800
+ Tue, 12 Dec 2023 23:07:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=LdwFYSk5;
- spf=pass (domain: gmail.com, ip: 209.85.161.54, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f54.google.com with SMTP id 006d021491bc7-5906988ab8dso2779953eaf.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 12 Dec 2023 23:07:33 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=MQz/Ltoy;
+ spf=pass (domain: gmail.com, ip: 209.85.210.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f170.google.com with SMTP id d2e1a72fcca58-6ce72730548so5849582b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 12 Dec 2023 23:07:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1702451252; x=1703056052; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1702451257; x=1703056057; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=nEU7puFR2czlm5twSaycV2KqdEcWO9/s8FRUYdcjtPM=;
-        b=LdwFYSk5Jg5VXC47tMgh4YYNUpc58zJH45ViM7EI2pS4uxD3nm09EOK0JuExCP9kvq
-         fKnT8jniLhBaozE+pDrM2/juvEnKDDCl783gvkKpcMEeeke02Q3TUrWx/oAAJBa0V1YE
-         ZdRlYAMRw7DWZC2J8qIoWvN3pq2hXQBvCri7juPOktraoxCHswZVWCkUX4HbbdhPFzfd
-         XU9qucUYDN4wBeTx7Ec4a3bH2kI/Q8KLqcAXgCtIPsAuLUxdG0SPpvj1GhEgZ64zQtb0
-         x449UlNSUla+NJFIDg+9eaIB68CRmcy98GClyef0hzfBTKrf0E91Fff+LFQLfnDtxywh
-         C3vQ==
+        bh=dqcMWDKIgc5Pr7ld8CCddftIiKaO3pJN8B742eK0sfE=;
+        b=MQz/Ltoyquy6UD3RJT/OWfb1tWSjYRBoaL39+d9TGlIqXG2zF5EmFAPPvyydXiNx4H
+         nI5cpXYb0j9b4J+McqZ0O8kEoSzTCOFcouHZCobN+dSWBpSU7lbxeyKjTX/1dYRrnT2j
+         pNxJPGCQig+FTabg3ZSJJFloanLoOgrnViPjy+iuxP/7OvnWEkF4mAuF5FLf3UEhYOHZ
+         yjUT4IGl/+sI0HMCNukPnv2PZeS93MhfsINzs+HfxE6jkvGig+uxjQTfsnk7WBDuf9bJ
+         sZVE0MEborGkZAzn2ybiWPIGdUNuPD7WlMWC6aTjC2MDSNukBFOxitkACI5i+f+TDoVZ
+         MH0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702451252; x=1703056052;
+        d=1e100.net; s=20230601; t=1702451257; x=1703056057;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=nEU7puFR2czlm5twSaycV2KqdEcWO9/s8FRUYdcjtPM=;
-        b=mVUtkRdhP81SgBntAI20kk/10g8VDhs6Ey7X6ZWmf7xEmupUad0tQ77Gje66i75VIs
-         0uJdUq7x3/nxZ9aeBDdxc3GpB7KMVL7Zr+rvV98vPoWLcgITnMeFHXhisX8WDW2mN/CY
-         BJh83YMvdFeebWHwgZIAo1O1ExZeKgrm9QZfWfM/KBgcu2uq7fXh7EVNkJVkAjevv6Ra
-         uSn0m5RL9EHFUs2C7IfBDOZbC9Ha+iq7XyF+xbtdMFFKqMqC0z+BaaDuUWrUqiPWJoO/
-         sePPwCdaVz0yO0tLd9tW2UX5dPTW3O5/2q2AIEstkaEX3mqjm7pAP+GkdDjOrbthT1tx
-         N+/w==
-X-Gm-Message-State: AOJu0YwAo1GNmgW9zBQlS9jn37Rn/BW5sAt0cdsyCM3dsH40crJ79etS
-	0Hqkfia6x3P2nmd3WljOWtVMOFht1Q0=
-X-Google-Smtp-Source: AGHT+IFC4fx75OoM57itUDNKCNzysDMNDHfPnlDIpK6c50As+EPupfE0k6gGVAX33GOGbPYUohMn9A==
-X-Received: by 2002:a05:6871:60f:b0:1fa:fcb4:2771 with SMTP id w15-20020a056871060f00b001fafcb42771mr4642858oan.32.1702451252153;
-        Tue, 12 Dec 2023 23:07:32 -0800 (PST)
+        bh=dqcMWDKIgc5Pr7ld8CCddftIiKaO3pJN8B742eK0sfE=;
+        b=B5fzYarKO1fK2a4HNJxzSmaXu59EbxvLHDKkW83zM08tdU2TZ/L0pJPqKgkztTLRBS
+         jsIvJHHziUoo45iOqS/Ps4iHCywF+7WHnQTaNlgJeGK1LP4IBS+HhTbVdHfc2XEBPtPs
+         84EFkICY/vGeFm0RyRonSudHwdeaM8tYbfJGiei4E1gWqwOM0JiMcuzNjCxbROPfwwnx
+         fX4TK/MgpnR7oqrj56iPezc/nk51hkGxZLEVLMpeDw510/epi1df0jr6T5BtVK9SPImp
+         ELlQ/umDwEt7G+Az9xW0lK2jmOdwEI/PcxxbrU6xlfZ2n2AQIAee+lqA5pXz5kK7JzbG
+         FNOg==
+X-Gm-Message-State: AOJu0YxlAT53d2YWAVjKaL2vo/IxRqo/oNkR01pnZkGQHJSkrG2TtN9d
+	IZY2IOqtW/I8CC/Yz7JWDmUBXdVRKAc=
+X-Google-Smtp-Source: AGHT+IENe4DHnRAnOAZnpruO/0ewcm1oiOb5Hu7t3N/jeg5+jM/rAQmwRfwSQoHY5y+mVHK1uL7iHQ==
+X-Received: by 2002:a05:6a00:1acc:b0:6ce:4a30:853 with SMTP id f12-20020a056a001acc00b006ce4a300853mr9060811pfv.29.1702451257234;
+        Tue, 12 Dec 2023 23:07:37 -0800 (PST)
 Received: from apollo.localdomain ([2601:646:9d80:4380::4b6f])
-        by smtp.gmail.com with ESMTPSA id v29-20020a63481d000000b005c19c586cb7sm9218151pga.33.2023.12.12.23.07.31
+        by smtp.gmail.com with ESMTPSA id v29-20020a63481d000000b005c19c586cb7sm9218151pga.33.2023.12.12.23.07.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 12 Dec 2023 23:07:31 -0800 (PST)
+        Tue, 12 Dec 2023 23:07:36 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org, 
- alperak <alperyasinak1@gmail.com>
-In-Reply-To: <20231207125614.1390970-1-alperyasinak1@gmail.com>
-References: <20231207125614.1390970-1-alperyasinak1@gmail.com>
-Subject: Re: [meta-oe][PATCH] libxaw: upgrade 1.0.14 -> 1.0.15
-Message-Id: <170245125147.133993.1190559839983954399.b4-ty@gmail.com>
-Date: Tue, 12 Dec 2023 23:07:31 -0800
+ Petr Chernikov <p.chernikov@yadro.com>
+In-Reply-To: <20231208054757.1466187-1-p.chernikov@yadro.com>
+References: <20231208054757.1466187-1-p.chernikov@yadro.com>
+Subject: Re: [PATCH] abseil-cpp: remove -Dcmake_cxx_standard=14 flag from
+ extra_oecmake
+Message-Id: <170245125660.133993.1006521853362378038.b4-ty@gmail.com>
+Date: Tue, 12 Dec 2023 23:07:36 -0800
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -62,32 +63,20 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 13 Dec 2023 07:07:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107371
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107376
 
 
-On Thu, 07 Dec 2023 15:56:14 +0300, alperak wrote:
-> XORG_EXT tar.bz2 removed because not supported in the new version. The default value defined in xorg-lib-common.inc will be used, i.e. tar.xz
+On Fri, 08 Dec 2023 08:47:57 +0300, Petr Chernikov wrote:
+> Old versions of abseil-cpp could not be compiled using C++ Standard 17.
+> For now this cmake flag is not needed.
+> Mosh compilation fixed by specifying c++17 standard.
 > 
-> Changelog:
 > 
-> * configure: Use LT_INIT from libtool 2 instead of deprecated AC_PROG_LIBTOOL
-> * Replace calls to index() with strchr()
-> * Add .git-blame-ignore-revs to hide whitespace commits from git blame
-> * Remove "All rights reserved" from Oracle copyright notices
-> * fix typo in XawMax parameter in GetBlockBoundaries
-> * Stop memory leak in error paths in XawTextSinkConvertPropertyList()
-> * Stop memory leak in GetResourcePixmapPath()
-> * Fix ctype(3) users.
-> * Fix spelling/wording issues
-> * gitlab CI: add a basic build test
-> * Build xz tarballs instead of bzip2
-> 
-> [...]
 
 Applied, thanks!
 
-[1/1] libxaw: upgrade 1.0.14 -> 1.0.15
-      commit: 97f91bdbb0cd1a52f56ad9d3a6ada15e6f47a213
+[1/1] abseil-cpp: remove -Dcmake_cxx_standard=14 flag from extra_oecmake
+      commit: 190f7b50ac3d7d30cf9d31167fb74f7146c3c8ff
 
 Best regards,
 -- 
