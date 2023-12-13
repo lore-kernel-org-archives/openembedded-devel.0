@@ -1,814 +1,780 @@
-Return-Path: <hprajapati@mvista.com>
+Return-Path: <anuj.mittal@intel.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 58049C4332F
-	for <webhook@archiver.kernel.org>; Wed, 13 Dec 2023 06:07:59 +0000 (UTC)
-Received: from mail-oi1-f182.google.com (mail-oi1-f182.google.com [209.85.167.182])
- by mx.groups.io with SMTP id smtpd.web11.30083.1702447677072788708
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B0BCC4332F
+	for <webhook@archiver.kernel.org>; Wed, 13 Dec 2023 06:33:39 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.88])
+ by mx.groups.io with SMTP id smtpd.web10.30679.1702449217101098656
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Dec 2023 22:07:57 -0800
+ Tue, 12 Dec 2023 22:33:37 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=hnw6GkPJ;
- spf=pass (domain: mvista.com, ip: 209.85.167.182, mailfrom: hprajapati@mvista.com)
-Received: by mail-oi1-f182.google.com with SMTP id 5614622812f47-3ba14203a34so1933110b6e.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 12 Dec 2023 22:07:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1702447676; x=1703052476; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=T7ximV3K/e/QVoJxlDueDg4cVlnoHrhoZIb5NrFAGzc=;
-        b=hnw6GkPJroZ2gKbpfzbBCWrhx1dMR4AepKcRe15T4chb03IxZIQkJBI/e7k6D9IYgT
-         mLRrDU3o5g6c4tEBwTuXAVja+oNndQZJJI8lnp5Y4RLX+VxyPT0wdnD+TXgwYfaqiX6B
-         apcQjRLLxg3MyLniW7NN/zr25LvuqbwDySVeQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702447676; x=1703052476;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=T7ximV3K/e/QVoJxlDueDg4cVlnoHrhoZIb5NrFAGzc=;
-        b=HDBYJvmUFXCfI1kQfMCtuiq2faywK3z7+2ygl2jknNY5TT6cqn5s5ITb3saOzxp2fK
-         VcTztWOQ4Mz0x9XFFmg3lsyWoqpZuDd2x9se+fmnSl70z2UsrSHsY4zsHD+EUb9NG3bZ
-         Aj+0LoonRuaZ8+Klw2/MLYVxkDLHTYoTxwUchjLxlSNg2c6JrgUNZ731GnLZUWIEh9oW
-         inHI2xd10hkyh1COqlxjMEETm/DOZibMMSqhpSoGyj6pE1gNuy7NfuZLSW7K1+RK+vzr
-         vuiaObN4C2vfqzO4egeyOBmZ6T2jTQU2MDb+dbe8ztGot6qcgdCum195/UXgNMCwJWCP
-         874g==
-X-Gm-Message-State: AOJu0Yw5uZctkaq8SN4vemMpAPzytdLQeftaZbCs1kxHnD2ejycQL67u
-	s0G+WeJzl4grNpoqrD1mo9gdtRSPr3Dr45B7II8=
-X-Google-Smtp-Source: AGHT+IEJIXRp0HUUMsqWExWTPCDqtsQUGq1CvPNxCdiJTG8Jgph9cHfBONS8hYm+1BeOhJBadoDvsQ==
-X-Received: by 2002:a05:6808:22a4:b0:3b8:44e3:dfda with SMTP id bo36-20020a05680822a400b003b844e3dfdamr8609648oib.3.1702447675744;
-        Tue, 12 Dec 2023 22:07:55 -0800 (PST)
-Received: from MVIN00016.mvista.com ([27.121.101.74])
-        by smtp.gmail.com with ESMTPSA id g4-20020a056a000b8400b006ce5bb61a60sm9057953pfj.35.2023.12.12.22.07.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 12 Dec 2023 22:07:55 -0800 (PST)
-From: Hitendra Prajapati <hprajapati@mvista.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Hitendra Prajapati <hprajapati@mvista.com>
-Subject: [meta-oe][kirkstone][PATCH] libssh: fix CVE-2023-1667 NULL pointer dereference
-Date: Wed, 13 Dec 2023 11:37:49 +0530
-Message-Id: <20231213060749.19619-1-hprajapati@mvista.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@intel.com header.s=Intel header.b=ZFCNB8KK;
+ spf=pass (domain: intel.com, ip: 192.55.52.88, mailfrom: anuj.mittal@intel.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1702449217; x=1733985217;
+  h=from:to:subject:date:message-id:references:in-reply-to:
+   content-id:content-transfer-encoding:mime-version;
+  bh=/PFZgqCBUKBLaPqLihILk04JdD/vMa6jsMZqu9yFNyw=;
+  b=ZFCNB8KKy+XxV0uPLgkwa/GHL9gXSUwaD7nZwkveFA4UMZipIyTlrxhi
+   19fOSlO94703rw/YcZCko6WG/4CYrFYp4zNn/fZigWdvvv1zyL0TAu7Vu
+   EKNtvXRZESnj1Wm5UxtZqt7JNKlPViao5Y6Z1FhgqCzJ1EFuNH/MAtnSk
+   nTuGiS+qKzN5dfR8eF/vNpW+NIq7EPreiMJvUl46U3yfvxN/a/j0OFFXo
+   +isVQTCAUdY0JMFF7+thbL3QI4SAfzuT9+J65Yjtaaqv8FpevmmMrctds
+   +xx3H/0FgV2Iv1bh6h4AO7gyi5grGMwjSdHhKprTVoz9CQ/cJ9XwCU50T
+   g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10922"; a="426045273"
+X-IronPort-AV: E=Sophos;i="6.04,272,1695711600"; 
+   d="scan'208";a="426045273"
+Received: from orsmga007.jf.intel.com ([10.7.209.58])
+  by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Dec 2023 22:33:36 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10922"; a="767101656"
+X-IronPort-AV: E=Sophos;i="6.04,272,1695711600"; 
+   d="scan'208";a="767101656"
+Received: from orsmsx603.amr.corp.intel.com ([10.22.229.16])
+  by orsmga007.jf.intel.com with ESMTP/TLS/AES256-GCM-SHA384; 12 Dec 2023 22:33:36 -0800
+Received: from orsmsx611.amr.corp.intel.com (10.22.229.24) by
+ ORSMSX603.amr.corp.intel.com (10.22.229.16) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.35; Tue, 12 Dec 2023 22:33:35 -0800
+Received: from orsmsx610.amr.corp.intel.com (10.22.229.23) by
+ ORSMSX611.amr.corp.intel.com (10.22.229.24) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.35; Tue, 12 Dec 2023 22:33:35 -0800
+Received: from ORSEDG601.ED.cps.intel.com (10.7.248.6) by
+ orsmsx610.amr.corp.intel.com (10.22.229.23) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.35 via Frontend Transport; Tue, 12 Dec 2023 22:33:35 -0800
+Received: from NAM02-BN1-obe.outbound.protection.outlook.com (104.47.51.41) by
+ edgegateway.intel.com (134.134.137.102) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2507.35; Tue, 12 Dec 2023 22:33:34 -0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Wp9drwYp5eZggkBgJf0KYJQQmsuelXAt4fmWwRlGu8JkBWxlzwibnfC2Y9yecQ8gF3RhYSzPsMfG8UyXGvg3mO5eZUyVm/rGWc0mENVhrhYd4MiCsd1zgDxCddfMSkjk5bMRHgaosrd06cIdjmgiRMMKqipvHnGnq7Mkg5TnK1Tp0zXYwvrICzH4aKkIYZcZZEswY+4u6eLUgFFNEiw0TStBUN2ikP5yBJah6mURwVCc8wmpPsOfhPzZLqhxNtnTDv8tcwUv1TJPlKXcG0WZw3VSTKPMjtdojpzgnU0ZjZox6BbPYLviujZVMLBrqP498GfolpS+P3jodYHsPpWlkg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=/PFZgqCBUKBLaPqLihILk04JdD/vMa6jsMZqu9yFNyw=;
+ b=Nghg4CJldS57fpnWBO8KDoAkh/aq0N/RTqPd0zlaPY31dFV2NAVfIWvUcpkLPbVHLYJoT545gUXqBoD3igYu17wcozGWkx/WXS9LRBRZgvm77Kp4UwjtX6ScOstGXzNT8POWS1yl6MiUxgT0iflqmKxnTdExYg/E+hOCaOgGk7wf9mmJxkDa/P85mJg0wENZ491HY5kV9TDkXw9a7tBt0srIvaovnHkW6SZMAdLhOaFM/YEVTKTujmtiOxWZ4syHl348Be0dYIH9Bz0V0vZAZgUvrknKuEAX1SHZhcM/nCbqcQjgQWEP6ms3Ldw6VQPnaD7sgzAhSUmT5QPdHrQQDg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Received: from IA1PR11MB6418.namprd11.prod.outlook.com (2603:10b6:208:3aa::18)
+ by MW4PR11MB7077.namprd11.prod.outlook.com (2603:10b6:303:223::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7068.32; Wed, 13 Dec
+ 2023 06:33:29 +0000
+Received: from IA1PR11MB6418.namprd11.prod.outlook.com
+ ([fe80::775f:2197:89f9:105d]) by IA1PR11MB6418.namprd11.prod.outlook.com
+ ([fe80::775f:2197:89f9:105d%3]) with mapi id 15.20.7091.022; Wed, 13 Dec 2023
+ 06:33:29 +0000
+From: "Mittal, Anuj" <anuj.mittal@intel.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, "hprajapati@mvista.com"
+	<hprajapati@mvista.com>
+Subject: Re: [oe] [meta-oe][kirkstone][PATCH] libssh: fix CVE-2023-1667 NULL
+ pointer dereference
+Thread-Topic: [oe] [meta-oe][kirkstone][PATCH] libssh: fix CVE-2023-1667 NULL
+ pointer dereference
+Thread-Index: AQHaLYrCFobKrt4y8kK97NGfhNrOjbCmwXmA
+Date: Wed, 13 Dec 2023 06:33:29 +0000
+Message-ID: <587a83c510550012e31abf2f6d01d06f2b551d77.camel@intel.com>
+References: <20231213060749.19619-1-hprajapati@mvista.com>
+In-Reply-To: <20231213060749.19619-1-hprajapati@mvista.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Evolution 3.48.4 (3.48.4-1.fc38) 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=intel.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: IA1PR11MB6418:EE_|MW4PR11MB7077:EE_
+x-ms-office365-filtering-correlation-id: 35f1117d-08c8-45aa-4726-08dbfba56b69
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: F2UNK3MdDnIAABrSU3bmB3PvJmt6XgSirVZygmy+D+jdLR0A3Xc2mtXrzpck5h4WDvsLYz4Z8i+vmY3rz7NSWGwZ3EMMs+QbZLGg99ZYEpoQszcqjwXy1z/pfkcj3two0Rm9Vv8kHN8pcGu1sWzuM7qGDZ+oxwwYYbVjxR23Jf1s4igU8fe7YzzWVOebrm/5AeVkxj+Is/k6KnCvNXOSQbM2Lf5cRtkG2LTxDRZIguHMe1Ab4NRb+QPAkVVgpynn1PfNhbRNfp91VqLOiioy7JA+CfttW5lN7pxTZXfIfJG0YtPXifrqxR5olMnYhfkuO7l5rv/z6wRZFKXW+lXFuFKN3gn060D/8qwRfCgUhgHnGDHGab48xacKEuLQNn7K1i2IOutHZ0foqfUDOkFuu5JdBuIyVZL6jAOF3hR1N/cpIZrwBXmpUd92/HxzrkQprHI3+nSfaCq9UpHDgaOxxVYlLDmKxG6c7AbNOdRIaqJO4GXIVe8YIazSrjxw+3cW6S0Y/fli2Ke8FKJqySg3HhyHEqCNrcoNNDuP9hm3tl1cryOXOBmYgnIAZUGVpo726MvMXwKnvdlJlMo5ULm6I/2IveH+tozcRDa+aj021cb59Xiima47RC7wUWJZpt1MzWK+DAagdHahzBLIgYcLNiskm4GotZ1BLzsmM6diZtRw12URMK6mAs9oB4ul1pNL
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA1PR11MB6418.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(39860400002)(346002)(396003)(366004)(136003)(376002)(230273577357003)(230922051799003)(230173577357003)(64100799003)(451199024)(1800799012)(186009)(66899024)(2616005)(6512007)(478600001)(26005)(6506007)(71200400001)(82960400001)(38100700002)(122000001)(36756003)(86362001)(66946007)(2906002)(76116006)(41300700001)(5660300002)(110136005)(66446008)(91956017)(4001150100001)(6486002)(30864003)(66476007)(83380400001)(66556008)(38070700009)(8936002)(8676002)(316002)(966005)(64756008)(559001)(579004);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?dE5STE1DaVdNb2tUZXRnaDdBSEJJVGJ4U0FMeENjWmRJcWZxRmtyQ0I4WVhT?=
+ =?utf-8?B?OFg0dmFGMGNFcGoxdGxxTnNQeFFnMzFuZWErTS9nZ1d5ZFNJWFNzbVJjSXht?=
+ =?utf-8?B?aW1LelhlR3EzQzdOaXM2ak40VVdTOW9tM2Q2QkZNM0NKU0VGenFqS2hHS3pM?=
+ =?utf-8?B?ZUFlVWt4elJJbHNxNnhIMUF4cm9tQlNWak56OEtpUEo0Z0IzZlVFZndET0Nj?=
+ =?utf-8?B?aFU3NTJlaU9kYzltL0Q3NDlwT3lpK3NQMHIrVWFrVGJ5eEw5RUhZaHhHdWdK?=
+ =?utf-8?B?Ylo0NVZUdFQvbHE4SndsTys5Q3I0Nzd6K1VjbU5QUVljc1A3M0UvZUpmak9D?=
+ =?utf-8?B?Y0xFTE9CdjJkWkp0UUUrdWIvSGFUZEhiMjdLczFPZFZ0aXJ5TGNNS3JHaFpG?=
+ =?utf-8?B?dkQyOUpqVUc4a1BsRk5DK05NcmxtdkJNWUdST0dpL3NUdnVodDJoZEJzTDg5?=
+ =?utf-8?B?aDlIejFSTVFqa2haazV1ZVpjNUFGWHV4L2luTy8rN3Y1RHZEWSt1djRYNHRu?=
+ =?utf-8?B?ZDNIdXpodC9wZlRTOXBnTi92RVN5OE4yRGh1bVY4RnBUbE9hbnM0NDU1Z3RF?=
+ =?utf-8?B?TFBwZGFaSUNYc1hhREo5V05XRGlydml5N0pXR1U0ck5KOFpaYVFkb2I3SGRQ?=
+ =?utf-8?B?RUxtdmtTb09IUGVHYVV2MGIwNENRV29WeC9QS2tBTmpId2xGaE9JZHpNbWR3?=
+ =?utf-8?B?cGFHZE5jalpRTkRxemdoVUt1ZlQ3NmUxZzBnUGI5TFEyZC9HV1BkR0NMb3gy?=
+ =?utf-8?B?bWdXWjZMUzhrVWRQb2hqVXQ5dmNyeHdTb0V0RWNma1FnS0J1cnJXWU1hd09U?=
+ =?utf-8?B?dkZBTGdBT0JiS1hlTG96ckJ5aXEwU1RpNkRCbWM5NlZLaGhBUFREaTJON21j?=
+ =?utf-8?B?Ym1ybWVzT2tER2ZiNVZucHRxVVJSeHVpeDA5V3JVOHhLbUFjWUtKbGhXVmhT?=
+ =?utf-8?B?dXJpNzRNcnFpRnZhNGpuQUsxRzh6Z3lLZGNXaER1WGNmeTZKYVRuYkRZbmpC?=
+ =?utf-8?B?K2theWUyalIrY3NyOGlxdWpyelVZQjR2Z29EU1gxQU5zc08xMHlKMmVnaGox?=
+ =?utf-8?B?Nm1lTnNVUmZGVUhUcXNjeG1FcU01R0pLQ00vRHEycy95bkxFMW1YVnpjQWlG?=
+ =?utf-8?B?ay8xLzVFMjBoZHlQRDN2Ly9pU1M2eW85RDd5NHpxeTlsdnBqTkdpVk13aW5S?=
+ =?utf-8?B?cXFLQWR0WlJxWDZIY0ZYZ0lydHAwcnRtVGF0Zm0vR0JldHZXMEhkSld1a1ha?=
+ =?utf-8?B?V0krZ3NLOGJ1S3IxbUhyeVFBMU82R1VYbHk2ckczblZXNUpKSzdHQ1V2NGsw?=
+ =?utf-8?B?TjBhbFU5RkJLOTBKTTh5dmU1SUNENUdHK3Q0czkwWTYwREtaTTZhczFRalNQ?=
+ =?utf-8?B?WVNJQU92eE9oU2tBZFFNRncvUU5sMjlGUDRUZFFKWHh6N2diTkw1MGh2TElF?=
+ =?utf-8?B?dFRUSVczVXNBUkxHR3pPYVlBQ1NnK29NUnQ2SUh0ZVlZcWVwM0svc3pvZFlH?=
+ =?utf-8?B?Y0R6SS9HcHBzNFdRY293bGNIMVBSTW0vek1oSnRGWjZBaFNkVXB1UjloNEtN?=
+ =?utf-8?B?ZzMxd3lscXJkM29JRnJ4VXhPc2hRRHhPeEtrK1JuL2tQYVpGMTc1d0pFWngx?=
+ =?utf-8?B?VWpKME9GNExKdzc2THpvVjlTSUNWRHFVYSt2SHdvdWJlUmFSOGxhaGZMN0Rh?=
+ =?utf-8?B?UHN0Y2VYL3psMlBaRUtyQkpiRGYrT1hkNTVLT1V1L0VlY2pZSFFObFBjNnBm?=
+ =?utf-8?B?OUF4ekM0RUlJZ2pOQWpINWpLVFV3RExrZjQ4S205NzcyNTNxeHJKV0lCVEwz?=
+ =?utf-8?B?anJFcDFxcGxZRE5FMk1id3BpYXlTQjdoOWZOQ0pacitIdFkyYTkrUHg0Z2Vy?=
+ =?utf-8?B?U3hlQVNRdWJwMFlrWHptL3hMQUg1cmdZYnpWQXRRZkxqcEdtL0lJc2s5dUFR?=
+ =?utf-8?B?YnhYNTd6N1VMVVFqbzNxb21Eam9jcm13aVBUQUppcjRuOXowZmNhd2tRQkhk?=
+ =?utf-8?B?L29GekdnZ0tkZWZ6eVIza1A3enRBVm1BR0ZDSHVZODFOZmFyeXBMbFFmTDVN?=
+ =?utf-8?B?b2JJSHd1eDE4U01iNG1FU0M1dTNLZVZrVXlQeGlQQTN1d3RKSFJvdXNGL2xs?=
+ =?utf-8?B?bGJGbHMvR1VRVGsxNVRhMGR2aVhBRitEZ25Fd24wZHZGeldlV3JpRGZ2NVI2?=
+ =?utf-8?B?bnc9PQ==?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <44022008115D8545BE974EF4FED7D99F@namprd11.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: IA1PR11MB6418.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 35f1117d-08c8-45aa-4726-08dbfba56b69
+X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Dec 2023 06:33:29.2724
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: ftms64ncAbj/z6Du7PWVyW9ZcM53oCeHjCiMFNkEfESa3gY+/X91PtRwtZwIr+WvAqeQnX9gBZHeX+0h5lmqhg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR11MB7077
+X-OriginatorOrg: intel.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 13 Dec 2023 06:07:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107345
+ <openembedded-devel@lists.openembedded.org>; Wed, 13 Dec 2023 06:33:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107346
 
-Upstream-Status: Backport from https://packages.debian.org/buster/libssh-dev/libssh_0.8.7-1+deb10u2.debian.tar.xz
-
-Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
----
- .../libssh/libssh/CVE-2023-1667.patch         | 724 ++++++++++++++++++
- .../recipes-support/libssh/libssh_0.8.9.bb    |   1 +
- 2 files changed, 725 insertions(+)
- create mode 100644 meta-oe/recipes-support/libssh/libssh/CVE-2023-1667.patch
-
-diff --git a/meta-oe/recipes-support/libssh/libssh/CVE-2023-1667.patch b/meta-oe/recipes-support/libssh/libssh/CVE-2023-1667.patch
-new file mode 100644
-index 0000000000..dcf4874312
---- /dev/null
-+++ b/meta-oe/recipes-support/libssh/libssh/CVE-2023-1667.patch
-@@ -0,0 +1,724 @@
-+commit b733df6ddca80b11c2548ca88821b1c353480901
-+Author: Jakub Jelen <jjelen@redhat.com>
-+Date: Fri Mar 17 14:09:14 2023 +0100
-+Subject: [PATCH] libssh: A NULL pointer dereference was found In libssh
-+during re-keying with algorithm guessing. This issue may allow an authenticated
-+client to cause a denial of service.
-+
-+Origin: See below commits ids, adapted for buster.
-+
-+Upstream-Status: Backport [https://packages.debian.org/buster/libssh-dev/libssh_0.8.7-1+deb10u2.debian.tar.xz]
-+CVE: CVE-2023-1667
-+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
-+---
-+ include/libssh/curve25519.h |   1 +
-+ include/libssh/dh.h         |   3 +
-+ include/libssh/ecdh.h       |   1 +
-+ include/libssh/kex.h        |   2 +-
-+ include/libssh/session.h    |  19 ++-
-+ src/client.c                |  18 ++-
-+ src/curve25519.c            |   5 +
-+ src/dh.c                    |  32 +----
-+ src/ecdh.c                  |   5 +
-+ src/kex.c                   | 270 +++++++++++++++++++++++++++++-------
-+ src/packet.c                |   5 +
-+ src/server.c                |   8 +-
-+ 12 files changed, 278 insertions(+), 91 deletions(-)
-+
-+diff --git a/include/libssh/curve25519.h b/include/libssh/curve25519.h
-+index 0406b9ee..9a896c06 100644
-+--- a/include/libssh/curve25519.h
-++++ b/include/libssh/curve25519.h
-+@@ -48,6 +48,7 @@ typedef unsigned char ssh_curve25519_privkey[CURVE25519_PRIVKEY_SIZE];
-+ 
-+ 
-+ int ssh_client_curve25519_init(ssh_session session);
-++void ssh_client_curve25519_remove_callbacks(ssh_session session);
-+ int ssh_client_curve25519_reply(ssh_session session, ssh_buffer packet);
-+ 
-+ #ifdef WITH_SERVER
-+diff --git a/include/libssh/dh.h b/include/libssh/dh.h
-+index cfdcfeec..ad6d22db 100644
-+--- a/include/libssh/dh.h
-++++ b/include/libssh/dh.h
-+@@ -41,8 +41,11 @@ int ssh_dh_import_e(ssh_session session, ssh_string e_string);
-+ int ssh_dh_import_pubkey_blob(ssh_session session, ssh_string pubkey_blob);
-+ int ssh_dh_import_next_pubkey_blob(ssh_session session, ssh_string pubkey_blob);
-+ 
-++int dh_handshake(ssh_session session);
-++
-+ int ssh_dh_build_k(ssh_session session);
-+ int ssh_client_dh_init(ssh_session session);
-++void ssh_client_dh_remove_callbacks(ssh_session session);
-+ int ssh_client_dh_reply(ssh_session session, ssh_buffer packet);
-+ 
-+ ssh_key ssh_dh_get_current_server_publickey(ssh_session session);
-+diff --git a/include/libssh/ecdh.h b/include/libssh/ecdh.h
-+index 66659b85..3f9d6014 100644
-+--- a/include/libssh/ecdh.h
-++++ b/include/libssh/ecdh.h
-+@@ -46,6 +46,7 @@ int ssh_client_ecdh_reply(ssh_session session, ssh_buffer packet);
-+ 
-+ /* Backend-specific functions.  */
-+ int ssh_client_ecdh_init(ssh_session session);
-++void ssh_client_ecdh_remove_callbacks(ssh_session session);
-+ int ecdh_build_k(ssh_session session);
-+ 
-+ #ifdef WITH_SERVER
-+diff --git a/include/libssh/kex.h b/include/libssh/kex.h
-+index a626d105..8c1302a0 100644
-+--- a/include/libssh/kex.h
-++++ b/include/libssh/kex.h
-+@@ -33,7 +33,7 @@ struct ssh_kex_struct {
-+ 
-+ SSH_PACKET_CALLBACK(ssh_packet_kexinit);
-+ 
-+-int ssh_send_kex(ssh_session session, int server_kex);
-++int ssh_send_kex(ssh_session session);
-+ void ssh_list_kex(struct ssh_kex_struct *kex);
-+ int ssh_set_client_kex(ssh_session session);
-+ int ssh_kex_select_methods(ssh_session session);
-+diff --git a/include/libssh/session.h b/include/libssh/session.h
-+index 23633cc2..3e681c2d 100644
-+--- a/include/libssh/session.h
-++++ b/include/libssh/session.h
-+@@ -27,6 +27,7 @@
-+ #include "libssh/auth.h"
-+ #include "libssh/channels.h"
-+ #include "libssh/poll.h"
-++#include <stdbool.h>
-+ 
-+ /* These are the different states a SSH session can be into its life */
-+ enum ssh_session_state_e {
-+@@ -69,6 +70,11 @@ enum ssh_pending_call_e {
-+ /* Client successfully authenticated */
-+ #define SSH_SESSION_FLAG_AUTHENTICATED 2
-+ 
-++/* The KEXINIT message can be sent first by either of the parties so this flag
-++ * indicates that the message was already sent to make sure it is sent and avoid
-++ * sending it twice during key exchange to simplify the state machine. */
-++#define SSH_SESSION_FLAG_KEXINIT_SENT 4
-++
-+ /* codes to use with ssh_handle_packets*() */
-+ /* Infinite timeout */
-+ #define SSH_TIMEOUT_INFINITE -1
-+@@ -149,14 +155,21 @@ struct ssh_session_struct {
-+         uint32_t current_method;
-+     } auth;
-+ 
-++    /* Sending this flag before key exchange to save one round trip during the
-++     * key exchange. This might make sense on high-latency connections.
-++     * So far internal only for testing. Usable only on the client side --
-++     * there is no key exchange method that would start with server message */
-++    bool send_first_kex_follows;
-+     /*
-+      * RFC 4253, 7.1: if the first_kex_packet_follows flag was set in
-+      * the received SSH_MSG_KEXINIT, but the guess was wrong, this
-+      * field will be set such that the following guessed packet will
-+-     * be ignored.  Once that packet has been received and ignored,
-+-     * this field is cleared.
-++     * be ignored on the receiving side.  Once that packet has been received and
-++     * ignored, this field is cleared.
-++     * On the sending side, this is set after we got peer KEXINIT message and we
-++     * need to resend the initial message of the negotiated KEX algorithm.
-+      */
-+-    int first_kex_follows_guess_wrong;
-++    bool first_kex_follows_guess_wrong;
-+ 
-+     ssh_buffer in_hashbuf;
-+     ssh_buffer out_hashbuf;
-+diff --git a/src/client.c b/src/client.c
-+index 1132c0a0..9c640364 100644
-+--- a/src/client.c
-++++ b/src/client.c
-+@@ -241,10 +241,13 @@ end:
-+  * @warning this function returning is no proof that DH handshake is
-+  * completed
-+  */
-+-static int dh_handshake(ssh_session session) {
-+-
-++int dh_handshake(ssh_session session)
-++{
-+   int rc = SSH_AGAIN;
-+ 
-++  SSH_LOG(SSH_LOG_TRACE, "dh_handshake_state = %d, kex_type = %d",
-++          session->dh_handshake_state,  session->next_crypto->kex_type);
-++
-+   switch (session->dh_handshake_state) {
-+     case DH_STATE_INIT:
-+       switch(session->next_crypto->kex_type){
-+@@ -380,6 +383,8 @@ pending:
-+ static void ssh_client_connection_callback(ssh_session session)
-+ {
-+     int rc;
-++    
-++    SSH_LOG(SSH_LOG_DEBUG, "session_state=%d", session->session_state);
-+ 
-+     switch(session->session_state) {
-+         case SSH_SESSION_STATE_NONE:
-+@@ -415,7 +420,7 @@ static void ssh_client_connection_callback(ssh_session session)
-+             if (rc != SSH_OK) {
-+                 goto error;
-+             }
-+-            rc = ssh_send_kex(session, 0);
-++            rc = ssh_send_kex(session);
-+             if (rc < 0) {
-+                 goto error;
-+             }
-+@@ -428,13 +433,13 @@ static void ssh_client_connection_callback(ssh_session session)
-+         case SSH_SESSION_STATE_KEXINIT_RECEIVED:
-+             set_status(session,0.6f);
-+             ssh_list_kex(&session->next_crypto->server_kex);
-+-            if (session->next_crypto->client_kex.methods[0] == NULL) {
-++            if ((session->flags & SSH_SESSION_FLAG_KEXINIT_SENT) == 0) {
-+                 /* in rekeying state if next_crypto client_kex is empty */
-+                 rc = ssh_set_client_kex(session);
-+                 if (rc != SSH_OK) {
-+                     goto error;
-+                 }
-+-                rc = ssh_send_kex(session, 0);
-++                rc = ssh_send_kex(session);
-+                 if (rc < 0) {
-+                     goto error;
-+                 }
-+@@ -443,6 +448,9 @@ static void ssh_client_connection_callback(ssh_session session)
-+                 goto error;
-+             set_status(session,0.8f);
-+             session->session_state=SSH_SESSION_STATE_DH;
-++
-++            /* If the init packet was already sent in previous step, this will be no
-++             * operation */
-+             if (dh_handshake(session) == SSH_ERROR) {
-+                 goto error;
-+             }
-+diff --git a/src/curve25519.c b/src/curve25519.c
-+index 167209f4..837bc1d9 100644
-+--- a/src/curve25519.c
-++++ b/src/curve25519.c
-+@@ -70,6 +70,11 @@ int ssh_client_curve25519_init(ssh_session session){
-+   return rc;
-+ }
-+ 
-++void ssh_client_curve25519_remove_callbacks(ssh_session session)
-++{
-++    // ssh_packet_remove_callbacks(session, &ssh_curve25519_client_callbacks);
-++}
-++
-+ static int ssh_curve25519_build_k(ssh_session session) {
-+   ssh_curve25519_pubkey k;
-+ 
-+diff --git a/src/dh.c b/src/dh.c
-+index cc12fd46..a2ceac3c 100644
-+--- a/src/dh.c
-++++ b/src/dh.c
-+@@ -691,6 +691,11 @@ int ssh_client_dh_init(ssh_session session){
-+   return SSH_ERROR;
-+ }
-+ 
-++void ssh_client_dh_remove_callbacks(ssh_session session)
-++{
-++    //ssh_packet_remove_callbacks(session, &ssh_dh_client_callbacks);
-++}
-++
-+ int ssh_client_dh_reply(ssh_session session, ssh_buffer packet){
-+   ssh_string f;
-+   ssh_string pubkey_blob = NULL;
-+@@ -775,33 +780,6 @@ int ssh_make_sessionid(ssh_session session) {
-+         client_hash = session->in_hashbuf;
-+     }
-+ 
-+-    /*
-+-     * Handle the two final fields for the KEXINIT message (RFC 4253 7.1):
-+-     *
-+-     *      boolean      first_kex_packet_follows
-+-     *      uint32       0 (reserved for future extension)
-+-     */
-+-    rc = ssh_buffer_add_u8(server_hash, 0);
-+-    if (rc < 0) {
-+-        goto error;
-+-    }
-+-    rc = ssh_buffer_add_u32(server_hash, 0);
-+-    if (rc < 0) {
-+-        goto error;
-+-    }
-+-
-+-    /* These fields are handled for the server case in ssh_packet_kexinit. */
-+-    if (session->client) {
-+-        rc = ssh_buffer_add_u8(client_hash, 0);
-+-        if (rc < 0) {
-+-            goto error;
-+-        }
-+-        rc = ssh_buffer_add_u32(client_hash, 0);
-+-        if (rc < 0) {
-+-            goto error;
-+-        }
-+-    }
-+-
-+     rc = ssh_dh_get_next_server_publickey_blob(session, &server_pubkey_blob);
-+     if (rc != SSH_OK) {
-+         goto error;
-+diff --git a/src/ecdh.c b/src/ecdh.c
-+index f7fcaf13..7c568db4 100644
-+--- a/src/ecdh.c
-++++ b/src/ecdh.c
-+@@ -30,6 +30,11 @@
-+ 
-+ #ifdef HAVE_ECDH
-+ 
-++void ssh_client_ecdh_remove_callbacks(ssh_session session)
-++{
-++    //ssh_packet_remove_callbacks(session, &ssh_ecdh_client_callbacks);
-++}
-++
-+ /** @internal
-+  * @brief parses a SSH_MSG_KEX_ECDH_REPLY packet and sends back
-+  * a SSH_MSG_NEWKEYS
-+diff --git a/src/kex.c b/src/kex.c
-+index 82686e4b..0695c643 100644
-+--- a/src/kex.c
-++++ b/src/kex.c
-+@@ -28,6 +28,7 @@
-+ #include <stdio.h>
-+ #include <stdbool.h>
-+ 
-++#include "libssh/libssh.h"
-+ #include "libssh/priv.h"
-+ #include "libssh/buffer.h"
-+ #include "libssh/dh.h"
-+@@ -416,7 +417,10 @@ out:
-+     return is_wrong;
-+ }
-+ 
-++extern int server_set_kex(ssh_session session);
-++
-+ SSH_PACKET_CALLBACK(ssh_packet_kexinit){
-++    struct ssh_crypto_struct *crypto = session->next_crypto;
-+     int i, ok;
-+     int server_kex=session->server;
-+     ssh_string str = NULL;
-+@@ -429,15 +433,32 @@ SSH_PACKET_CALLBACK(ssh_packet_kexinit){
-+ 
-+     (void)type;
-+     (void)user;
-++    
-++    SSH_LOG(SSH_LOG_TRACE, "KEXINIT received");
-+ 
-+     if (session->session_state == SSH_SESSION_STATE_AUTHENTICATED){
-+         SSH_LOG(SSH_LOG_WARNING, "Other side initiating key re-exchange");
-++        if (session->dh_handshake_state == DH_STATE_FINISHED) {
-++            SSH_LOG(SSH_LOG_DEBUG, "Peer initiated key re-exchange");
-++            /* Reset the sent flag if the re-kex was initiated by the peer */
-++            session->flags &= ~SSH_SESSION_FLAG_KEXINIT_SENT;
-++        } else if (session->flags & SSH_SESSION_FLAG_KEXINIT_SENT &&
-++                   session->dh_handshake_state == DH_STATE_INIT_SENT) {
-++            /* This happens only when we are sending our-guessed first kex
-++             * packet right after our KEXINIT packet. */
-++            SSH_LOG(SSH_LOG_DEBUG, "Received peer kexinit answer.");
-++        } else if (session->session_state != SSH_SESSION_STATE_INITIAL_KEX) {
-++            ssh_set_error(session, SSH_FATAL,
-++                          "SSH_KEXINIT received in wrong state");
-++            goto error;
-++        }
-+     } else if(session->session_state != SSH_SESSION_STATE_INITIAL_KEX){
-+         ssh_set_error(session,SSH_FATAL,"SSH_KEXINIT received in wrong state");
-+         goto error;
-+     }
-+ 
-+     if (server_kex) {
-++#ifdef WITH_SERVER
-+         rc = ssh_buffer_get_data(packet,session->next_crypto->client_kex.cookie, 16);
-+         if (rc != 16) {
-+             ssh_set_error(session, SSH_FATAL, "ssh_packet_kexinit: no cookie in packet");
-+@@ -449,6 +470,12 @@ SSH_PACKET_CALLBACK(ssh_packet_kexinit){
-+             ssh_set_error(session, SSH_FATAL, "ssh_packet_kexinit: adding cookie failed");
-+             goto error;
-+         }
-++
-++        ok = server_set_kex(session);
-++        if (ok == SSH_ERROR) {
-++            goto error;
-++        }
-++#endif
-+     } else {
-+         rc = ssh_buffer_get_data(packet,session->next_crypto->server_kex.cookie, 16);
-+         if (rc != 16) {
-+@@ -461,6 +488,11 @@ SSH_PACKET_CALLBACK(ssh_packet_kexinit){
-+             ssh_set_error(session, SSH_FATAL, "ssh_packet_kexinit: adding cookie failed");
-+             goto error;
-+         }
-++
-++        ok = ssh_set_client_kex(session);
-++        if (ok == SSH_ERROR) {
-++            goto error;
-++        }
-+     }
-+ 
-+     for (i = 0; i < KEX_METHODS_SIZE; i++) {
-+@@ -505,22 +537,40 @@ SSH_PACKET_CALLBACK(ssh_packet_kexinit){
-+      * that its value is included when computing the session ID (see
-+      * 'make_sessionid').
-+      */
-+-    if (server_kex) {
-+-        rc = ssh_buffer_get_u8(packet, &first_kex_packet_follows);
-+-        if (rc != 1) {
-+-            goto error;
-+-        }
-++    rc = ssh_buffer_get_u8(packet, &first_kex_packet_follows);
-++    if (rc != 1) {
-++        goto error;
-++    }
-+ 
-+-        rc = ssh_buffer_add_u8(session->in_hashbuf, first_kex_packet_follows);
-+-        if (rc < 0) {
-+-            goto error;
-+-        }
-++    rc = ssh_buffer_add_u8(session->in_hashbuf, first_kex_packet_follows);
-++    if (rc < 0) {
-++        goto error;
-++    }
-+ 
-+-        rc = ssh_buffer_add_u32(session->in_hashbuf, kexinit_reserved);
-+-        if (rc < 0) {
-+-            goto error;
-+-        }
-++    rc = ssh_buffer_add_u32(session->in_hashbuf, kexinit_reserved);
-++    if (rc < 0) {
-++        goto error;
-++    }
-+ 
-++    /*
-++     * Remember whether 'first_kex_packet_follows' was set and the client
-++     * guess was wrong: in this case the next SSH_MSG_KEXDH_INIT message
-++     * must be ignored on the server side.
-++     * Client needs to start the Key exchange over with the correct method
-++     */
-++    if (first_kex_packet_follows || session->send_first_kex_follows) {
-++        char **client_methods = crypto->client_kex.methods;
-++        char **server_methods = crypto->server_kex.methods;
-++        session->first_kex_follows_guess_wrong =
-++            cmp_first_kex_algo(client_methods[SSH_KEX],
-++                               server_methods[SSH_KEX]) ||
-++            cmp_first_kex_algo(client_methods[SSH_HOSTKEYS],
-++                               server_methods[SSH_HOSTKEYS]);
-++            SSH_LOG(SSH_LOG_DEBUG, "The initial guess was %s.",
-++                    session->first_kex_follows_guess_wrong ? "wrong" : "right");
-++    }
-++
-++    if (server_kex) {
-+         /*
-+          * If client sent a ext-info-c message in the kex list, it supports
-+          * RFC 8308 extension negotiation.
-+@@ -575,23 +625,15 @@ SSH_PACKET_CALLBACK(ssh_packet_kexinit){
-+                     session->extensions & SSH_EXT_SIG_RSA_SHA256 ? "SHA256" : "",
-+                     session->extensions & SSH_EXT_SIG_RSA_SHA512 ? " SHA512" : "");
-+         }
-+-
-+-        /*
-+-         * Remember whether 'first_kex_packet_follows' was set and the client
-+-         * guess was wrong: in this case the next SSH_MSG_KEXDH_INIT message
-+-         * must be ignored.
-+-         */
-+-        if (first_kex_packet_follows) {
-+-          session->first_kex_follows_guess_wrong =
-+-            cmp_first_kex_algo(session->next_crypto->client_kex.methods[SSH_KEX],
-+-                               session->next_crypto->server_kex.methods[SSH_KEX]) ||
-+-            cmp_first_kex_algo(session->next_crypto->client_kex.methods[SSH_HOSTKEYS],
-+-                               session->next_crypto->server_kex.methods[SSH_HOSTKEYS]);
-+-        }
-+     }
-+ 
-+     session->session_state = SSH_SESSION_STATE_KEXINIT_RECEIVED;
-+-    session->dh_handshake_state = DH_STATE_INIT;
-++    /* if we already sent our initial key exchange packet, do not reset the
-++     * DH state. We will know if we were right with our guess only in
-++     * dh_handshake_state() */
-++    if (session->send_first_kex_follows == false) {
-++        session->dh_handshake_state = DH_STATE_INIT;
-++    }
-+     session->ssh_connection_callback(session);
-+     return SSH_PACKET_USED;
-+ 
-+@@ -747,6 +789,12 @@ int ssh_set_client_kex(ssh_session session)
-+     int ok;
-+     int i;
-+     size_t kex_len, len;
-++    
-++    /* Skip if already set, for example for the rekey or when we do the guessing
-++     * it could have been already used to make some protocol decisions. */
-++    if (client->methods[0] != NULL) {
-++        return SSH_OK;
-++    }
-+ 
-+     ok = ssh_get_random(client->cookie, 16, 0);
-+     if (!ok) {
-+@@ -798,15 +846,89 @@ int ssh_set_client_kex(ssh_session session)
-+     return SSH_OK;
-+ }
-+ 
-++static enum ssh_key_exchange_e
-++kex_select_kex_type(const char *kex)
-++{
-++    if (strcmp(kex, "diffie-hellman-group1-sha1") == 0) {
-++        return SSH_KEX_DH_GROUP1_SHA1;
-++    } else if (strcmp(kex, "diffie-hellman-group14-sha1") == 0) {
-++        return SSH_KEX_DH_GROUP14_SHA1;
-++//    } else if (strcmp(kex, "diffie-hellman-group14-sha256") == 0) {
-++//        return SSH_KEX_DH_GROUP14_SHA256;
-++    } else if (strcmp(kex, "diffie-hellman-group16-sha512") == 0) {
-++        return SSH_KEX_DH_GROUP16_SHA512;
-++    } else if (strcmp(kex, "diffie-hellman-group18-sha512") == 0) {
-++        return SSH_KEX_DH_GROUP18_SHA512;
-++#ifdef WITH_GEX
-++    } else if (strcmp(kex, "diffie-hellman-group-exchange-sha1") == 0) {
-++        return SSH_KEX_DH_GEX_SHA1;
-++    } else if (strcmp(kex, "diffie-hellman-group-exchange-sha256") == 0) {
-++        return SSH_KEX_DH_GEX_SHA256;
-++#endif /* WITH_GEX */
-++    } else if (strcmp(kex, "ecdh-sha2-nistp256") == 0) {
-++        return SSH_KEX_ECDH_SHA2_NISTP256;
-++    } else if (strcmp(kex, "ecdh-sha2-nistp384") == 0) {
-++        return SSH_KEX_ECDH_SHA2_NISTP384;
-++    } else if (strcmp(kex, "ecdh-sha2-nistp521") == 0) {
-++        return SSH_KEX_ECDH_SHA2_NISTP521;
-++    } else if (strcmp(kex, "curve25519-sha256@libssh.org") == 0) {
-++        return SSH_KEX_CURVE25519_SHA256_LIBSSH_ORG;
-++    } else if (strcmp(kex, "curve25519-sha256") == 0) {
-++        return SSH_KEX_CURVE25519_SHA256;
-++    }
-++    /* should not happen. We should be getting only valid names at this stage */
-++    return 0;
-++}
-++
-++
-++/** @internal
-++ * @brief Reverts guessed callbacks set during the dh_handshake()
-++ * @param session session handle
-++ * @returns void
-++ */
-++static void revert_kex_callbacks(ssh_session session)
-++{
-++    switch (session->next_crypto->kex_type) {
-++    case SSH_KEX_DH_GROUP1_SHA1:
-++    case SSH_KEX_DH_GROUP14_SHA1:
-++//    case SSH_KEX_DH_GROUP14_SHA256:
-++    case SSH_KEX_DH_GROUP16_SHA512:
-++    case SSH_KEX_DH_GROUP18_SHA512:
-++        ssh_client_dh_remove_callbacks(session);
-++        break;
-++#ifdef WITH_GEX
-++    case SSH_KEX_DH_GEX_SHA1:
-++    case SSH_KEX_DH_GEX_SHA256:
-++        ssh_client_dhgex_remove_callbacks(session);
-++        break;
-++#endif /* WITH_GEX */
-++#ifdef HAVE_ECDH
-++    case SSH_KEX_ECDH_SHA2_NISTP256:
-++    case SSH_KEX_ECDH_SHA2_NISTP384:
-++    case SSH_KEX_ECDH_SHA2_NISTP521:
-++        ssh_client_ecdh_remove_callbacks(session);
-++        break;
-++#endif
-++#ifdef HAVE_CURVE25519
-++    case SSH_KEX_CURVE25519_SHA256:
-++    case SSH_KEX_CURVE25519_SHA256_LIBSSH_ORG:
-++        ssh_client_curve25519_remove_callbacks(session);
-++        break;
-++#endif
-++    }
-++}
-++
-+ /** @brief Select the different methods on basis of client's and
-+  * server's kex messages, and watches out if a match is possible.
-+  */
-+ int ssh_kex_select_methods (ssh_session session){
-+-    struct ssh_kex_struct *server = &session->next_crypto->server_kex;
-++     struct ssh_crypto_struct *crypto = session->next_crypto;
-++     struct ssh_kex_struct *server = &session->next_crypto->server_kex;
-+     struct ssh_kex_struct *client = &session->next_crypto->client_kex;
-+     char *ext_start = NULL;
-+     int i;
-+-
-++    enum ssh_key_exchange_e kex_type;
-++    
-+     /* Here we should drop the  ext-info-c  from the list so we avoid matching.
-+      * it. We added it to the end, so we can just truncate the string here */
-+     ext_start = strstr(client->methods[SSH_KEX], ","KEX_EXTENSION_CLIENT);
-+@@ -825,25 +947,21 @@ int ssh_kex_select_methods (ssh_session session){
-+             session->next_crypto->kex_methods[i] = strdup("");
-+         }
-+     }
-+-    if(strcmp(session->next_crypto->kex_methods[SSH_KEX], "diffie-hellman-group1-sha1") == 0){
-+-      session->next_crypto->kex_type=SSH_KEX_DH_GROUP1_SHA1;
-+-    } else if(strcmp(session->next_crypto->kex_methods[SSH_KEX], "diffie-hellman-group14-sha1") == 0){
-+-      session->next_crypto->kex_type=SSH_KEX_DH_GROUP14_SHA1;
-+-    } else if(strcmp(session->next_crypto->kex_methods[SSH_KEX], "diffie-hellman-group16-sha512") == 0){
-+-      session->next_crypto->kex_type=SSH_KEX_DH_GROUP16_SHA512;
-+-    } else if(strcmp(session->next_crypto->kex_methods[SSH_KEX], "diffie-hellman-group18-sha512") == 0){
-+-      session->next_crypto->kex_type=SSH_KEX_DH_GROUP18_SHA512;
-+-    } else if(strcmp(session->next_crypto->kex_methods[SSH_KEX], "ecdh-sha2-nistp256") == 0){
-+-      session->next_crypto->kex_type=SSH_KEX_ECDH_SHA2_NISTP256;
-+-    } else if(strcmp(session->next_crypto->kex_methods[SSH_KEX], "ecdh-sha2-nistp384") == 0){
-+-      session->next_crypto->kex_type=SSH_KEX_ECDH_SHA2_NISTP384;
-+-    } else if(strcmp(session->next_crypto->kex_methods[SSH_KEX], "ecdh-sha2-nistp521") == 0){
-+-      session->next_crypto->kex_type=SSH_KEX_ECDH_SHA2_NISTP521;
-+-    } else if(strcmp(session->next_crypto->kex_methods[SSH_KEX], "curve25519-sha256@libssh.org") == 0){
-+-      session->next_crypto->kex_type=SSH_KEX_CURVE25519_SHA256_LIBSSH_ORG;
-+-    } else if(strcmp(session->next_crypto->kex_methods[SSH_KEX], "curve25519-sha256") == 0){
-+-      session->next_crypto->kex_type=SSH_KEX_CURVE25519_SHA256;
-+-    }
-++
-++    /* We can not set this value directly as the old value is needed to revert
-++     * callbacks if we are client */
-++    kex_type = kex_select_kex_type(crypto->kex_methods[SSH_KEX]);
-++    if (session->client && session->first_kex_follows_guess_wrong) {
-++        SSH_LOG(SSH_LOG_DEBUG, "Our guess was wrong. Restarting the KEX");
-++        /* We need to remove the wrong callbacks and start kex again */
-++        revert_kex_callbacks(session);
-++        session->dh_handshake_state = DH_STATE_INIT;
-++        session->first_kex_follows_guess_wrong = false;
-++     }
-++    crypto->kex_type = kex_type;
-++
-++
-++
-+     SSH_LOG(SSH_LOG_INFO, "Negotiated %s,%s,%s,%s,%s,%s,%s,%s,%s,%s",
-+             session->next_crypto->kex_methods[SSH_KEX],
-+             session->next_crypto->kex_methods[SSH_HOSTKEYS],
-+@@ -861,13 +979,26 @@ int ssh_kex_select_methods (ssh_session session){
-+ 
-+ 
-+ /* this function only sends the predefined set of kex methods */
-+-int ssh_send_kex(ssh_session session, int server_kex) {
-+-  struct ssh_kex_struct *kex = (server_kex ? &session->next_crypto->server_kex :
-++int ssh_send_kex(ssh_session session) {
-++  struct ssh_kex_struct *kex = (session->server ? &session->next_crypto->server_kex :
-+       &session->next_crypto->client_kex);
-+   ssh_string str = NULL;
-+   int i;
-+   int rc;
-++  int first_kex_packet_follows = 0;
-++
-++  /* Only client can initiate the handshake methods we implement. If we
-++   * already received the peer mechanisms, there is no point in guessing */
-++  if (session->client &&
-++      session->session_state != SSH_SESSION_STATE_KEXINIT_RECEIVED &&
-++      session->send_first_kex_follows) {
-++      first_kex_packet_follows = 1;
-++  }
-+ 
-++  SSH_LOG(SSH_LOG_TRACE,
-++          "Sending KEXINIT packet, first_kex_packet_follows = %d",
-++          first_kex_packet_follows);
-++ 
-+   rc = ssh_buffer_pack(session->out_buffer,
-+                        "bP",
-+                        SSH2_MSG_KEXINIT,
-+@@ -899,15 +1030,52 @@ int ssh_send_kex(ssh_session session, int server_kex) {
-+ 
-+   rc = ssh_buffer_pack(session->out_buffer,
-+                        "bd",
-+-                       0,
-++                       first_kex_packet_follows,
-+                        0);
-+   if (rc != SSH_OK) {
-+     goto error;
-+   }
-++  
-++  /* Prepare also the first_kex_packet_follows and reserved to 0 */
-++  rc = ssh_buffer_add_u8(session->out_hashbuf, first_kex_packet_follows);
-++  if (rc < 0) {
-++      goto error;
-++  }
-++  rc = ssh_buffer_add_u32(session->out_hashbuf, 0);
-++  if (rc < 0) {
-++      goto error;
-++  }
-+ 
-+   if (ssh_packet_send(session) == SSH_ERROR) {
-+     return -1;
-+   }
-++  
-++  session->flags |= SSH_SESSION_FLAG_KEXINIT_SENT;
-++  SSH_LOG(SSH_LOG_PACKET, "SSH_MSG_KEXINIT sent");
-++
-++  /* If we indicated that we are sending the guessed key exchange packet,
-++   * do it now. The packet is simple, but we need to do some preparations */
-++  if (first_kex_packet_follows) {
-++      char *list = kex->methods[SSH_KEX];
-++      char *colon = strchr(list, ',');
-++      size_t kex_name_len = colon ? (size_t)(colon - list) : strlen(list);
-++      char *kex_name = calloc(kex_name_len + 1, 1);
-++      if (kex_name == NULL) {
-++          ssh_set_error_oom(session);
-++          goto error;
-++      }
-++      snprintf(kex_name, kex_name_len + 1, "%.*s", (int)kex_name_len, list);
-++      SSH_LOG(SSH_LOG_TRACE, "Sending the first kex packet for %s", kex_name);
-++
-++      session->next_crypto->kex_type = kex_select_kex_type(kex_name);
-++       free(kex_name);
-++
-++      /* run the first step of the DH handshake */
-++      session->dh_handshake_state = DH_STATE_INIT;
-++      if (dh_handshake(session) == SSH_ERROR) {
-++          goto error;
-++      }
-++  }
-+ 
-+   return 0;
-+ error:
-+diff --git a/src/packet.c b/src/packet.c
-+index 61a44237..932ef7ba 100644
-+--- a/src/packet.c
-++++ b/src/packet.c
-+@@ -362,6 +362,11 @@ static enum ssh_packet_filter_result_e ssh_packet_incoming_filter(ssh_session se
-+          * - session->dh_handhsake_state = DH_STATE_NEWKEYS_SENT
-+          * */
-+ 
-++        if (!session->server) {
-++            rc = SSH_PACKET_DENIED;
-++            break;
-++        }
-++
-+         if (session->session_state != SSH_SESSION_STATE_DH) {
-+             rc = SSH_PACKET_DENIED;
-+             break;
-+diff --git a/src/server.c b/src/server.c
-+index bc98da4f..68b25a97 100644
-+--- a/src/server.c
-++++ b/src/server.c
-+@@ -82,7 +82,7 @@ static int dh_handshake_server(ssh_session session);
-+  * options that are currently set in the given ssh_session structure.
-+  */
-+ 
-+-static int server_set_kex(ssh_session session) {
-++int server_set_kex(ssh_session session) {
-+   struct ssh_kex_struct *server = &session->next_crypto->server_kex;
-+   int i, j, rc;
-+   const char *wanted;
-+@@ -458,7 +458,7 @@ static void ssh_server_connection_callback(ssh_session session){
-+             ssh_packet_set_default_callbacks(session);
-+             set_status(session, 0.5f);
-+             session->session_state=SSH_SESSION_STATE_INITIAL_KEX;
-+-            if (ssh_send_kex(session, 1) < 0) {
-++            if (ssh_send_kex(session) < 0) {
-+                 goto error;
-+             }
-+             break;
-+@@ -467,11 +467,11 @@ static void ssh_server_connection_callback(ssh_session session){
-+             break;
-+         case SSH_SESSION_STATE_KEXINIT_RECEIVED:
-+             set_status(session,0.6f);
-+-            if(session->next_crypto->server_kex.methods[0]==NULL){
-++            if ((session->flags & SSH_SESSION_FLAG_KEXINIT_SENT) == 0) {
-+                 if(server_set_kex(session) == SSH_ERROR)
-+                     goto error;
-+                 /* We are in a rekeying, so we need to send the server kex */
-+-                if(ssh_send_kex(session, 1) < 0)
-++                if(ssh_send_kex(session) < 0)
-+                     goto error;
-+             }
-+             ssh_list_kex(&session->next_crypto->client_kex); // log client kex
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-support/libssh/libssh_0.8.9.bb b/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
-index 061f13912f..cad552e78a 100644
---- a/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
-+++ b/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
-@@ -8,6 +8,7 @@ DEPENDS = "zlib openssl"
- 
- SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable-0.8 \
-            file://CVE-2020-16135.patch \
-+           file://CVE-2023-1667.patch \
-           "
- SRCREV = "04685a74df9ce1db1bc116a83a0da78b4f4fa1f8"
- 
--- 
-2.25.1
-
+T24gV2VkLCAyMDIzLTEyLTEzIGF0IDExOjM3ICswNTMwLCBIaXRlbmRyYSBQcmFqYXBhdGkgdmlh
+Cmxpc3RzLm9wZW5lbWJlZGRlZC5vcmcgd3JvdGU6Cj4gVXBzdHJlYW0tU3RhdHVzOiBCYWNrcG9y
+dCBmcm9tCj4gaHR0cHM6Ly9wYWNrYWdlcy5kZWJpYW4ub3JnL2J1c3Rlci9saWJzc2gtZGV2L2xp
+YnNzaF8wLjguNy0xK2RlYjEwdTIuZGViaWFuLnRhci54ego+IAo+IFNpZ25lZC1vZmYtYnk6IEhp
+dGVuZHJhIFByYWphcGF0aSA8aHByYWphcGF0aUBtdmlzdGEuY29tPgo+IC0tLQo+IMKgLi4uL2xp
+YnNzaC9saWJzc2gvQ1ZFLTIwMjMtMTY2Ny5wYXRjaMKgwqDCoMKgwqDCoMKgwqAgfCA3MjQKPiAr
+KysrKysrKysrKysrKysrKysKPiDCoC4uLi9yZWNpcGVzLXN1cHBvcnQvbGlic3NoL2xpYnNzaF8w
+LjguOS5iYsKgwqDCoCB8wqDCoCAxICsKPiDCoDIgZmlsZXMgY2hhbmdlZCwgNzI1IGluc2VydGlv
+bnMoKykKPiDCoGNyZWF0ZSBtb2RlIDEwMDY0NCBtZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9saWJz
+c2gvbGlic3NoL0NWRS0yMDIzLQo+IDE2NjcucGF0Y2gKPiAKPiBkaWZmIC0tZ2l0IGEvbWV0YS1v
+ZS9yZWNpcGVzLXN1cHBvcnQvbGlic3NoL2xpYnNzaC9DVkUtMjAyMy0KPiAxNjY3LnBhdGNoIGIv
+bWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvbGlic3NoL2xpYnNzaC9DVkUtMjAyMy0KPiAxNjY3LnBh
+dGNoCj4gbmV3IGZpbGUgbW9kZSAxMDA2NDQKPiBpbmRleCAwMDAwMDAwMDAwLi5kY2Y0ODc0MzEy
+Cj4gLS0tIC9kZXYvbnVsbAo+ICsrKyBiL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2xpYnNzaC9s
+aWJzc2gvQ1ZFLTIwMjMtMTY2Ny5wYXRjaAo+IEBAIC0wLDAgKzEsNzI0IEBACj4gK2NvbW1pdCBi
+NzMzZGY2ZGRjYTgwYjExYzI1NDhjYTg4ODIxYjFjMzUzNDgwOTAxCj4gK0F1dGhvcjogSmFrdWIg
+SmVsZW4gPGpqZWxlbkByZWRoYXQuY29tPgo+ICtEYXRlOiBGcmkgTWFyIDE3IDE0OjA5OjE0IDIw
+MjMgKzAxMDAKPiArU3ViamVjdDogW1BBVENIXSBsaWJzc2g6IEEgTlVMTCBwb2ludGVyIGRlcmVm
+ZXJlbmNlIHdhcyBmb3VuZCBJbgo+IGxpYnNzaAo+ICtkdXJpbmcgcmUta2V5aW5nIHdpdGggYWxn
+b3JpdGhtIGd1ZXNzaW5nLiBUaGlzIGlzc3VlIG1heSBhbGxvdyBhbgo+IGF1dGhlbnRpY2F0ZWQK
+PiArY2xpZW50IHRvIGNhdXNlIGEgZGVuaWFsIG9mIHNlcnZpY2UuCj4gKwo+ICtPcmlnaW46IFNl
+ZSBiZWxvdyBjb21taXRzIGlkcywgYWRhcHRlZCBmb3IgYnVzdGVyLgo+ICsKPiArVXBzdHJlYW0t
+U3RhdHVzOiBCYWNrcG9ydAo+IFtodHRwczovL3BhY2thZ2VzLmRlYmlhbi5vcmcvYnVzdGVyL2xp
+YnNzaC1kZXYvbGlic3NoXzAuOC43LTErZGViMTB1Mgo+IC5kZWJpYW4udGFyLnh6XQoKVGhpcyBs
+aW5rIGlzbid0IGFjY2Vzc2libGUuCgpEZWJpYW4gYWxzbyBpc24ndCB0aGUgdXBzdHJlYW0gZm9y
+IGxpYnNzaC4gUGxlYXNlIGJhY2twb3J0LCBtZW50aW9uIHRoZQp1cHN0cmVhbSBwYXRjaGVzLgoK
+aHR0cHM6Ly9naXQubGlic3NoLm9yZy9wcm9qZWN0cy9saWJzc2guZ2l0L2xvZy8/cXQ9Z3JlcCZx
+PWN2ZS0yMDIzLTE2NjcKCj4gK0NWRTogQ1ZFLTIwMjMtMTY2Nwo+ICtTaWduZWQtb2ZmLWJ5OiBI
+aXRlbmRyYSBQcmFqYXBhdGkgPGhwcmFqYXBhdGlAbXZpc3RhLmNvbT4KPiArLS0tCj4gKyBpbmNs
+dWRlL2xpYnNzaC9jdXJ2ZTI1NTE5LmggfMKgwqAgMSArCj4gKyBpbmNsdWRlL2xpYnNzaC9kaC5o
+wqDCoMKgwqDCoMKgwqDCoCB8wqDCoCAzICsKPiArIGluY2x1ZGUvbGlic3NoL2VjZGguaMKgwqDC
+oMKgwqDCoCB8wqDCoCAxICsKPiArIGluY2x1ZGUvbGlic3NoL2tleC5owqDCoMKgwqDCoMKgwqAg
+fMKgwqAgMiArLQo+ICsgaW5jbHVkZS9saWJzc2gvc2Vzc2lvbi5owqDCoMKgIHzCoCAxOSArKy0K
+PiArIHNyYy9jbGllbnQuY8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgMTggKyst
+Cj4gKyBzcmMvY3VydmUyNTUxOS5jwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDCoCA1ICsKPiAr
+IHNyYy9kaC5jwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgIDMyICst
+LS0tCj4gKyBzcmMvZWNkaC5jwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDC
+oCA1ICsKPiArIHNyYy9rZXguY8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8
+IDI3MCArKysrKysrKysrKysrKysrKysrKysrKysrKysrKy0tLS0KPiAtLS0KPiArIHNyYy9wYWNr
+ZXQuY8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDCoCA1ICsKPiArIHNyYy9zZXJ2
+ZXIuY8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDCoCA4ICstCj4gKyAxMiBmaWxl
+cyBjaGFuZ2VkLCAyNzggaW5zZXJ0aW9ucygrKSwgOTEgZGVsZXRpb25zKC0pCj4gKwo+ICtkaWZm
+IC0tZ2l0IGEvaW5jbHVkZS9saWJzc2gvY3VydmUyNTUxOS5oCj4gYi9pbmNsdWRlL2xpYnNzaC9j
+dXJ2ZTI1NTE5LmgKPiAraW5kZXggMDQwNmI5ZWUuLjlhODk2YzA2IDEwMDY0NAo+ICstLS0gYS9p
+bmNsdWRlL2xpYnNzaC9jdXJ2ZTI1NTE5LmgKPiArKysrIGIvaW5jbHVkZS9saWJzc2gvY3VydmUy
+NTUxOS5oCj4gK0BAIC00OCw2ICs0OCw3IEBAIHR5cGVkZWYgdW5zaWduZWQgY2hhcgo+IHNzaF9j
+dXJ2ZTI1NTE5X3ByaXZrZXlbQ1VSVkUyNTUxOV9QUklWS0VZX1NJWkVdOwo+ICsgCj4gKyAKPiAr
+IGludCBzc2hfY2xpZW50X2N1cnZlMjU1MTlfaW5pdChzc2hfc2Vzc2lvbiBzZXNzaW9uKTsKPiAr
+K3ZvaWQgc3NoX2NsaWVudF9jdXJ2ZTI1NTE5X3JlbW92ZV9jYWxsYmFja3Moc3NoX3Nlc3Npb24g
+c2Vzc2lvbik7Cj4gKyBpbnQgc3NoX2NsaWVudF9jdXJ2ZTI1NTE5X3JlcGx5KHNzaF9zZXNzaW9u
+IHNlc3Npb24sIHNzaF9idWZmZXIKPiBwYWNrZXQpOwo+ICsgCj4gKyAjaWZkZWYgV0lUSF9TRVJW
+RVIKPiArZGlmZiAtLWdpdCBhL2luY2x1ZGUvbGlic3NoL2RoLmggYi9pbmNsdWRlL2xpYnNzaC9k
+aC5oCj4gK2luZGV4IGNmZGNmZWVjLi5hZDZkMjJkYiAxMDA2NDQKPiArLS0tIGEvaW5jbHVkZS9s
+aWJzc2gvZGguaAo+ICsrKysgYi9pbmNsdWRlL2xpYnNzaC9kaC5oCj4gK0BAIC00MSw4ICs0MSwx
+MSBAQCBpbnQgc3NoX2RoX2ltcG9ydF9lKHNzaF9zZXNzaW9uIHNlc3Npb24sCj4gc3NoX3N0cmlu
+ZyBlX3N0cmluZyk7Cj4gKyBpbnQgc3NoX2RoX2ltcG9ydF9wdWJrZXlfYmxvYihzc2hfc2Vzc2lv
+biBzZXNzaW9uLCBzc2hfc3RyaW5nCj4gcHVia2V5X2Jsb2IpOwo+ICsgaW50IHNzaF9kaF9pbXBv
+cnRfbmV4dF9wdWJrZXlfYmxvYihzc2hfc2Vzc2lvbiBzZXNzaW9uLCBzc2hfc3RyaW5nCj4gcHVi
+a2V5X2Jsb2IpOwo+ICsgCj4gKytpbnQgZGhfaGFuZHNoYWtlKHNzaF9zZXNzaW9uIHNlc3Npb24p
+Owo+ICsrCj4gKyBpbnQgc3NoX2RoX2J1aWxkX2soc3NoX3Nlc3Npb24gc2Vzc2lvbik7Cj4gKyBp
+bnQgc3NoX2NsaWVudF9kaF9pbml0KHNzaF9zZXNzaW9uIHNlc3Npb24pOwo+ICsrdm9pZCBzc2hf
+Y2xpZW50X2RoX3JlbW92ZV9jYWxsYmFja3Moc3NoX3Nlc3Npb24gc2Vzc2lvbik7Cj4gKyBpbnQg
+c3NoX2NsaWVudF9kaF9yZXBseShzc2hfc2Vzc2lvbiBzZXNzaW9uLCBzc2hfYnVmZmVyIHBhY2tl
+dCk7Cj4gKyAKPiArIHNzaF9rZXkgc3NoX2RoX2dldF9jdXJyZW50X3NlcnZlcl9wdWJsaWNrZXko
+c3NoX3Nlc3Npb24gc2Vzc2lvbik7Cj4gK2RpZmYgLS1naXQgYS9pbmNsdWRlL2xpYnNzaC9lY2Ro
+LmggYi9pbmNsdWRlL2xpYnNzaC9lY2RoLmgKPiAraW5kZXggNjY2NTliODUuLjNmOWQ2MDE0IDEw
+MDY0NAo+ICstLS0gYS9pbmNsdWRlL2xpYnNzaC9lY2RoLmgKPiArKysrIGIvaW5jbHVkZS9saWJz
+c2gvZWNkaC5oCj4gK0BAIC00Niw2ICs0Niw3IEBAIGludCBzc2hfY2xpZW50X2VjZGhfcmVwbHko
+c3NoX3Nlc3Npb24gc2Vzc2lvbiwKPiBzc2hfYnVmZmVyIHBhY2tldCk7Cj4gKyAKPiArIC8qIEJh
+Y2tlbmQtc3BlY2lmaWMgZnVuY3Rpb25zLsKgICovCj4gKyBpbnQgc3NoX2NsaWVudF9lY2RoX2lu
+aXQoc3NoX3Nlc3Npb24gc2Vzc2lvbik7Cj4gKyt2b2lkIHNzaF9jbGllbnRfZWNkaF9yZW1vdmVf
+Y2FsbGJhY2tzKHNzaF9zZXNzaW9uIHNlc3Npb24pOwo+ICsgaW50IGVjZGhfYnVpbGRfayhzc2hf
+c2Vzc2lvbiBzZXNzaW9uKTsKPiArIAo+ICsgI2lmZGVmIFdJVEhfU0VSVkVSCj4gK2RpZmYgLS1n
+aXQgYS9pbmNsdWRlL2xpYnNzaC9rZXguaCBiL2luY2x1ZGUvbGlic3NoL2tleC5oCj4gK2luZGV4
+IGE2MjZkMTA1Li44YzEzMDJhMCAxMDA2NDQKPiArLS0tIGEvaW5jbHVkZS9saWJzc2gva2V4LmgK
+PiArKysrIGIvaW5jbHVkZS9saWJzc2gva2V4LmgKPiArQEAgLTMzLDcgKzMzLDcgQEAgc3RydWN0
+IHNzaF9rZXhfc3RydWN0IHsKPiArIAo+ICsgU1NIX1BBQ0tFVF9DQUxMQkFDSyhzc2hfcGFja2V0
+X2tleGluaXQpOwo+ICsgCj4gKy1pbnQgc3NoX3NlbmRfa2V4KHNzaF9zZXNzaW9uIHNlc3Npb24s
+IGludCBzZXJ2ZXJfa2V4KTsKPiArK2ludCBzc2hfc2VuZF9rZXgoc3NoX3Nlc3Npb24gc2Vzc2lv
+bik7Cj4gKyB2b2lkIHNzaF9saXN0X2tleChzdHJ1Y3Qgc3NoX2tleF9zdHJ1Y3QgKmtleCk7Cj4g
+KyBpbnQgc3NoX3NldF9jbGllbnRfa2V4KHNzaF9zZXNzaW9uIHNlc3Npb24pOwo+ICsgaW50IHNz
+aF9rZXhfc2VsZWN0X21ldGhvZHMoc3NoX3Nlc3Npb24gc2Vzc2lvbik7Cj4gK2RpZmYgLS1naXQg
+YS9pbmNsdWRlL2xpYnNzaC9zZXNzaW9uLmggYi9pbmNsdWRlL2xpYnNzaC9zZXNzaW9uLmgKPiAr
+aW5kZXggMjM2MzNjYzIuLjNlNjgxYzJkIDEwMDY0NAo+ICstLS0gYS9pbmNsdWRlL2xpYnNzaC9z
+ZXNzaW9uLmgKPiArKysrIGIvaW5jbHVkZS9saWJzc2gvc2Vzc2lvbi5oCj4gK0BAIC0yNyw2ICsy
+Nyw3IEBACj4gKyAjaW5jbHVkZSAibGlic3NoL2F1dGguaCIKPiArICNpbmNsdWRlICJsaWJzc2gv
+Y2hhbm5lbHMuaCIKPiArICNpbmNsdWRlICJsaWJzc2gvcG9sbC5oIgo+ICsrI2luY2x1ZGUgPHN0
+ZGJvb2wuaD4KPiArIAo+ICsgLyogVGhlc2UgYXJlIHRoZSBkaWZmZXJlbnQgc3RhdGVzIGEgU1NI
+IHNlc3Npb24gY2FuIGJlIGludG8gaXRzCj4gbGlmZSAqLwo+ICsgZW51bSBzc2hfc2Vzc2lvbl9z
+dGF0ZV9lIHsKPiArQEAgLTY5LDYgKzcwLDExIEBAIGVudW0gc3NoX3BlbmRpbmdfY2FsbF9lIHsK
+PiArIC8qIENsaWVudCBzdWNjZXNzZnVsbHkgYXV0aGVudGljYXRlZCAqLwo+ICsgI2RlZmluZSBT
+U0hfU0VTU0lPTl9GTEFHX0FVVEhFTlRJQ0FURUQgMgo+ICsgCj4gKysvKiBUaGUgS0VYSU5JVCBt
+ZXNzYWdlIGNhbiBiZSBzZW50IGZpcnN0IGJ5IGVpdGhlciBvZiB0aGUgcGFydGllcwo+IHNvIHRo
+aXMgZmxhZwo+ICsrICogaW5kaWNhdGVzIHRoYXQgdGhlIG1lc3NhZ2Ugd2FzIGFscmVhZHkgc2Vu
+dCB0byBtYWtlIHN1cmUgaXQgaXMKPiBzZW50IGFuZCBhdm9pZAo+ICsrICogc2VuZGluZyBpdCB0
+d2ljZSBkdXJpbmcga2V5IGV4Y2hhbmdlIHRvIHNpbXBsaWZ5IHRoZSBzdGF0ZQo+IG1hY2hpbmUu
+ICovCj4gKysjZGVmaW5lIFNTSF9TRVNTSU9OX0ZMQUdfS0VYSU5JVF9TRU5UIDQKPiArKwo+ICsg
+LyogY29kZXMgdG8gdXNlIHdpdGggc3NoX2hhbmRsZV9wYWNrZXRzKigpICovCj4gKyAvKiBJbmZp
+bml0ZSB0aW1lb3V0ICovCj4gKyAjZGVmaW5lIFNTSF9USU1FT1VUX0lORklOSVRFIC0xCj4gK0BA
+IC0xNDksMTQgKzE1NSwyMSBAQCBzdHJ1Y3Qgc3NoX3Nlc3Npb25fc3RydWN0IHsKPiArwqDCoMKg
+wqDCoMKgwqDCoCB1aW50MzJfdCBjdXJyZW50X21ldGhvZDsKPiArwqDCoMKgwqAgfSBhdXRoOwo+
+ICsgCj4gKyvCoMKgwqAgLyogU2VuZGluZyB0aGlzIGZsYWcgYmVmb3JlIGtleSBleGNoYW5nZSB0
+byBzYXZlIG9uZSByb3VuZCB0cmlwCj4gZHVyaW5nIHRoZQo+ICsrwqDCoMKgwqAgKiBrZXkgZXhj
+aGFuZ2UuIFRoaXMgbWlnaHQgbWFrZSBzZW5zZSBvbiBoaWdoLWxhdGVuY3kKPiBjb25uZWN0aW9u
+cy4KPiArK8KgwqDCoMKgICogU28gZmFyIGludGVybmFsIG9ubHkgZm9yIHRlc3RpbmcuIFVzYWJs
+ZSBvbmx5IG9uIHRoZSBjbGllbnQKPiBzaWRlIC0tCj4gKyvCoMKgwqDCoCAqIHRoZXJlIGlzIG5v
+IGtleSBleGNoYW5nZSBtZXRob2QgdGhhdCB3b3VsZCBzdGFydCB3aXRoIHNlcnZlcgo+IG1lc3Nh
+Z2UgKi8KPiArK8KgwqDCoCBib29sIHNlbmRfZmlyc3Rfa2V4X2ZvbGxvd3M7Cj4gK8KgwqDCoMKg
+IC8qCj4gK8KgwqDCoMKgwqAgKiBSRkMgNDI1MywgNy4xOiBpZiB0aGUgZmlyc3Rfa2V4X3BhY2tl
+dF9mb2xsb3dzIGZsYWcgd2FzIHNldAo+IGluCj4gK8KgwqDCoMKgwqAgKiB0aGUgcmVjZWl2ZWQg
+U1NIX01TR19LRVhJTklULCBidXQgdGhlIGd1ZXNzIHdhcyB3cm9uZywgdGhpcwo+ICvCoMKgwqDC
+oMKgICogZmllbGQgd2lsbCBiZSBzZXQgc3VjaCB0aGF0IHRoZSBmb2xsb3dpbmcgZ3Vlc3NlZCBw
+YWNrZXQKPiB3aWxsCj4gKy3CoMKgwqDCoCAqIGJlIGlnbm9yZWQuwqAgT25jZSB0aGF0IHBhY2tl
+dCBoYXMgYmVlbiByZWNlaXZlZCBhbmQgaWdub3JlZCwKPiArLcKgwqDCoMKgICogdGhpcyBmaWVs
+ZCBpcyBjbGVhcmVkLgo+ICsrwqDCoMKgwqAgKiBiZSBpZ25vcmVkIG9uIHRoZSByZWNlaXZpbmcg
+c2lkZS7CoCBPbmNlIHRoYXQgcGFja2V0IGhhcyBiZWVuCj4gcmVjZWl2ZWQgYW5kCj4gKyvCoMKg
+wqDCoCAqIGlnbm9yZWQsIHRoaXMgZmllbGQgaXMgY2xlYXJlZC4KPiArK8KgwqDCoMKgICogT24g
+dGhlIHNlbmRpbmcgc2lkZSwgdGhpcyBpcyBzZXQgYWZ0ZXIgd2UgZ290IHBlZXIgS0VYSU5JVAo+
+IG1lc3NhZ2UgYW5kIHdlCj4gKyvCoMKgwqDCoCAqIG5lZWQgdG8gcmVzZW5kIHRoZSBpbml0aWFs
+IG1lc3NhZ2Ugb2YgdGhlIG5lZ290aWF0ZWQgS0VYCj4gYWxnb3JpdGhtLgo+ICvCoMKgwqDCoMKg
+ICovCj4gKy3CoMKgwqAgaW50IGZpcnN0X2tleF9mb2xsb3dzX2d1ZXNzX3dyb25nOwo+ICsrwqDC
+oMKgIGJvb2wgZmlyc3Rfa2V4X2ZvbGxvd3NfZ3Vlc3Nfd3Jvbmc7Cj4gKyAKPiArwqDCoMKgwqAg
+c3NoX2J1ZmZlciBpbl9oYXNoYnVmOwo+ICvCoMKgwqDCoCBzc2hfYnVmZmVyIG91dF9oYXNoYnVm
+Owo+ICtkaWZmIC0tZ2l0IGEvc3JjL2NsaWVudC5jIGIvc3JjL2NsaWVudC5jCj4gK2luZGV4IDEx
+MzJjMGEwLi45YzY0MDM2NCAxMDA2NDQKPiArLS0tIGEvc3JjL2NsaWVudC5jCj4gKysrKyBiL3Ny
+Yy9jbGllbnQuYwo+ICtAQCAtMjQxLDEwICsyNDEsMTMgQEAgZW5kOgo+ICvCoCAqIEB3YXJuaW5n
+IHRoaXMgZnVuY3Rpb24gcmV0dXJuaW5nIGlzIG5vIHByb29mIHRoYXQgREggaGFuZHNoYWtlCj4g
+aXMKPiArwqAgKiBjb21wbGV0ZWQKPiArwqAgKi8KPiArLXN0YXRpYyBpbnQgZGhfaGFuZHNoYWtl
+KHNzaF9zZXNzaW9uIHNlc3Npb24pIHsKPiArLQo+ICsraW50IGRoX2hhbmRzaGFrZShzc2hfc2Vz
+c2lvbiBzZXNzaW9uKQo+ICsrewo+ICvCoMKgIGludCByYyA9IFNTSF9BR0FJTjsKPiArIAo+ICsr
+wqAgU1NIX0xPRyhTU0hfTE9HX1RSQUNFLCAiZGhfaGFuZHNoYWtlX3N0YXRlID0gJWQsIGtleF90
+eXBlID0gJWQiLAo+ICsrwqDCoMKgwqDCoMKgwqDCoMKgIHNlc3Npb24tPmRoX2hhbmRzaGFrZV9z
+dGF0ZSzCoCBzZXNzaW9uLT5uZXh0X2NyeXB0by0KPiA+a2V4X3R5cGUpOwo+ICsrCj4gK8KgwqAg
+c3dpdGNoIChzZXNzaW9uLT5kaF9oYW5kc2hha2Vfc3RhdGUpIHsKPiArwqDCoMKgwqAgY2FzZSBE
+SF9TVEFURV9JTklUOgo+ICvCoMKgwqDCoMKgwqAgc3dpdGNoKHNlc3Npb24tPm5leHRfY3J5cHRv
+LT5rZXhfdHlwZSl7Cj4gK0BAIC0zODAsNiArMzgzLDggQEAgcGVuZGluZzoKPiArIHN0YXRpYyB2
+b2lkIHNzaF9jbGllbnRfY29ubmVjdGlvbl9jYWxsYmFjayhzc2hfc2Vzc2lvbiBzZXNzaW9uKQo+
+ICsgewo+ICvCoMKgwqDCoCBpbnQgcmM7Cj4gKyvCoMKgwqAgCj4gKyvCoMKgwqAgU1NIX0xPRyhT
+U0hfTE9HX0RFQlVHLCAic2Vzc2lvbl9zdGF0ZT0lZCIsIHNlc3Npb24tCj4gPnNlc3Npb25fc3Rh
+dGUpOwo+ICsgCj4gK8KgwqDCoMKgIHN3aXRjaChzZXNzaW9uLT5zZXNzaW9uX3N0YXRlKSB7Cj4g
+K8KgwqDCoMKgwqDCoMKgwqAgY2FzZSBTU0hfU0VTU0lPTl9TVEFURV9OT05FOgo+ICtAQCAtNDE1
+LDcgKzQyMCw3IEBAIHN0YXRpYyB2b2lkCj4gc3NoX2NsaWVudF9jb25uZWN0aW9uX2NhbGxiYWNr
+KHNzaF9zZXNzaW9uIHNlc3Npb24pCj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpZiAocmMg
+IT0gU1NIX09LKSB7Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGdvdG8gZXJy
+b3I7Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB9Cj4gKy3CoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgIHJjID0gc3NoX3NlbmRfa2V4KHNlc3Npb24sIDApOwo+ICsrwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoCByYyA9IHNzaF9zZW5kX2tleChzZXNzaW9uKTsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgIGlmIChyYyA8IDApIHsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZ290
+byBlcnJvcjsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIH0KPiArQEAgLTQyOCwxMyArNDMz
+LDEzIEBAIHN0YXRpYyB2b2lkCj4gc3NoX2NsaWVudF9jb25uZWN0aW9uX2NhbGxiYWNrKHNzaF9z
+ZXNzaW9uIHNlc3Npb24pCj4gK8KgwqDCoMKgwqDCoMKgwqAgY2FzZSBTU0hfU0VTU0lPTl9TVEFU
+RV9LRVhJTklUX1JFQ0VJVkVEOgo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc2V0X3N0YXR1
+cyhzZXNzaW9uLDAuNmYpOwo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc3NoX2xpc3Rfa2V4
+KCZzZXNzaW9uLT5uZXh0X2NyeXB0by0+c2VydmVyX2tleCk7Cj4gKy3CoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgIGlmIChzZXNzaW9uLT5uZXh0X2NyeXB0by0+Y2xpZW50X2tleC5tZXRob2RzWzBdID09
+Cj4gTlVMTCkgewo+ICsrwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpZiAoKHNlc3Npb24tPmZsYWdz
+ICYgU1NIX1NFU1NJT05fRkxBR19LRVhJTklUX1NFTlQpID09Cj4gMCkgewo+ICvCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAvKiBpbiByZWtleWluZyBzdGF0ZSBpZiBuZXh0X2NyeXB0
+byBjbGllbnRfa2V4IGlzCj4gZW1wdHkgKi8KPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqAgcmMgPSBzc2hfc2V0X2NsaWVudF9rZXgoc2Vzc2lvbik7Cj4gK8KgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgIGlmIChyYyAhPSBTU0hfT0spIHsKPiArwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBnb3RvIGVycm9yOwo+ICvCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoCB9Cj4gKy3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcmMg
+PSBzc2hfc2VuZF9rZXgoc2Vzc2lvbiwgMCk7Cj4gKyvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqAgcmMgPSBzc2hfc2VuZF9rZXgoc2Vzc2lvbik7Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgIGlmIChyYyA8IDApIHsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoCBnb3RvIGVycm9yOwo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoCB9Cj4gK0BAIC00NDMsNiArNDQ4LDkgQEAgc3RhdGljIHZvaWQKPiBzc2hfY2xpZW50X2Nv
+bm5lY3Rpb25fY2FsbGJhY2soc3NoX3Nlc3Npb24gc2Vzc2lvbikKPiArwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqAgZ290byBlcnJvcjsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+IHNldF9zdGF0dXMoc2Vzc2lvbiwwLjhmKTsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHNl
+c3Npb24tPnNlc3Npb25fc3RhdGU9U1NIX1NFU1NJT05fU1RBVEVfREg7Cj4gKysKPiArK8KgwqDC
+oMKgwqDCoMKgwqDCoMKgwqAgLyogSWYgdGhlIGluaXQgcGFja2V0IHdhcyBhbHJlYWR5IHNlbnQg
+aW4gcHJldmlvdXMKPiBzdGVwLCB0aGlzIHdpbGwgYmUgbm8KPiArK8KgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoCAqIG9wZXJhdGlvbiAqLwo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaWYgKGRo
+X2hhbmRzaGFrZShzZXNzaW9uKSA9PSBTU0hfRVJST1IpIHsKPiArwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqAgZ290byBlcnJvcjsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIH0K
+PiArZGlmZiAtLWdpdCBhL3NyYy9jdXJ2ZTI1NTE5LmMgYi9zcmMvY3VydmUyNTUxOS5jCj4gK2lu
+ZGV4IDE2NzIwOWY0Li44MzdiYzFkOSAxMDA2NDQKPiArLS0tIGEvc3JjL2N1cnZlMjU1MTkuYwo+
+ICsrKysgYi9zcmMvY3VydmUyNTUxOS5jCj4gK0BAIC03MCw2ICs3MCwxMSBAQCBpbnQgc3NoX2Ns
+aWVudF9jdXJ2ZTI1NTE5X2luaXQoc3NoX3Nlc3Npb24KPiBzZXNzaW9uKXsKPiArwqDCoCByZXR1
+cm4gcmM7Cj4gKyB9Cj4gKyAKPiArK3ZvaWQgc3NoX2NsaWVudF9jdXJ2ZTI1NTE5X3JlbW92ZV9j
+YWxsYmFja3Moc3NoX3Nlc3Npb24gc2Vzc2lvbikKPiArK3sKPiArK8KgwqDCoCAvLyBzc2hfcGFj
+a2V0X3JlbW92ZV9jYWxsYmFja3Moc2Vzc2lvbiwKPiAmc3NoX2N1cnZlMjU1MTlfY2xpZW50X2Nh
+bGxiYWNrcyk7Cj4gKyt9Cj4gKysKPiArIHN0YXRpYyBpbnQgc3NoX2N1cnZlMjU1MTlfYnVpbGRf
+ayhzc2hfc2Vzc2lvbiBzZXNzaW9uKSB7Cj4gK8KgwqAgc3NoX2N1cnZlMjU1MTlfcHVia2V5IGs7
+Cj4gKyAKPiArZGlmZiAtLWdpdCBhL3NyYy9kaC5jIGIvc3JjL2RoLmMKPiAraW5kZXggY2MxMmZk
+NDYuLmEyY2VhYzNjIDEwMDY0NAo+ICstLS0gYS9zcmMvZGguYwo+ICsrKysgYi9zcmMvZGguYwo+
+ICtAQCAtNjkxLDYgKzY5MSwxMSBAQCBpbnQgc3NoX2NsaWVudF9kaF9pbml0KHNzaF9zZXNzaW9u
+IHNlc3Npb24pewo+ICvCoMKgIHJldHVybiBTU0hfRVJST1I7Cj4gKyB9Cj4gKyAKPiArK3ZvaWQg
+c3NoX2NsaWVudF9kaF9yZW1vdmVfY2FsbGJhY2tzKHNzaF9zZXNzaW9uIHNlc3Npb24pCj4gKyt7
+Cj4gKyvCoMKgwqAgLy9zc2hfcGFja2V0X3JlbW92ZV9jYWxsYmFja3Moc2Vzc2lvbiwKPiAmc3No
+X2RoX2NsaWVudF9jYWxsYmFja3MpOwo+ICsrfQo+ICsrCj4gKyBpbnQgc3NoX2NsaWVudF9kaF9y
+ZXBseShzc2hfc2Vzc2lvbiBzZXNzaW9uLCBzc2hfYnVmZmVyIHBhY2tldCl7Cj4gK8KgwqAgc3No
+X3N0cmluZyBmOwo+ICvCoMKgIHNzaF9zdHJpbmcgcHVia2V5X2Jsb2IgPSBOVUxMOwo+ICtAQCAt
+Nzc1LDMzICs3ODAsNiBAQCBpbnQgc3NoX21ha2Vfc2Vzc2lvbmlkKHNzaF9zZXNzaW9uIHNlc3Np
+b24pIHsKPiArwqDCoMKgwqDCoMKgwqDCoCBjbGllbnRfaGFzaCA9IHNlc3Npb24tPmluX2hhc2hi
+dWY7Cj4gK8KgwqDCoMKgIH0KPiArIAo+ICstwqDCoMKgIC8qCj4gKy3CoMKgwqDCoCAqIEhhbmRs
+ZSB0aGUgdHdvIGZpbmFsIGZpZWxkcyBmb3IgdGhlIEtFWElOSVQgbWVzc2FnZSAoUkZDCj4gNDI1
+MyA3LjEpOgo+ICstwqDCoMKgwqAgKgo+ICstwqDCoMKgwqAgKsKgwqDCoMKgwqAgYm9vbGVhbsKg
+wqDCoMKgwqAgZmlyc3Rfa2V4X3BhY2tldF9mb2xsb3dzCj4gKy3CoMKgwqDCoCAqwqDCoMKgwqDC
+oCB1aW50MzLCoMKgwqDCoMKgwqAgMCAocmVzZXJ2ZWQgZm9yIGZ1dHVyZSBleHRlbnNpb24pCj4g
+Ky3CoMKgwqDCoCAqLwo+ICstwqDCoMKgIHJjID0gc3NoX2J1ZmZlcl9hZGRfdTgoc2VydmVyX2hh
+c2gsIDApOwo+ICstwqDCoMKgIGlmIChyYyA8IDApIHsKPiArLcKgwqDCoMKgwqDCoMKgIGdvdG8g
+ZXJyb3I7Cj4gKy3CoMKgwqAgfQo+ICstwqDCoMKgIHJjID0gc3NoX2J1ZmZlcl9hZGRfdTMyKHNl
+cnZlcl9oYXNoLCAwKTsKPiArLcKgwqDCoCBpZiAocmMgPCAwKSB7Cj4gKy3CoMKgwqDCoMKgwqDC
+oCBnb3RvIGVycm9yOwo+ICstwqDCoMKgIH0KPiArLQo+ICstwqDCoMKgIC8qIFRoZXNlIGZpZWxk
+cyBhcmUgaGFuZGxlZCBmb3IgdGhlIHNlcnZlciBjYXNlIGluCj4gc3NoX3BhY2tldF9rZXhpbml0
+LiAqLwo+ICstwqDCoMKgIGlmIChzZXNzaW9uLT5jbGllbnQpIHsKPiArLcKgwqDCoMKgwqDCoMKg
+IHJjID0gc3NoX2J1ZmZlcl9hZGRfdTgoY2xpZW50X2hhc2gsIDApOwo+ICstwqDCoMKgwqDCoMKg
+wqAgaWYgKHJjIDwgMCkgewo+ICstwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBnb3RvIGVycm9yOwo+
+ICstwqDCoMKgwqDCoMKgwqAgfQo+ICstwqDCoMKgwqDCoMKgwqAgcmMgPSBzc2hfYnVmZmVyX2Fk
+ZF91MzIoY2xpZW50X2hhc2gsIDApOwo+ICstwqDCoMKgwqDCoMKgwqAgaWYgKHJjIDwgMCkgewo+
+ICstwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBnb3RvIGVycm9yOwo+ICstwqDCoMKgwqDCoMKgwqAg
+fQo+ICstwqDCoMKgIH0KPiArLQo+ICvCoMKgwqDCoCByYyA9IHNzaF9kaF9nZXRfbmV4dF9zZXJ2
+ZXJfcHVibGlja2V5X2Jsb2Ioc2Vzc2lvbiwKPiAmc2VydmVyX3B1YmtleV9ibG9iKTsKPiArwqDC
+oMKgwqAgaWYgKHJjICE9IFNTSF9PSykgewo+ICvCoMKgwqDCoMKgwqDCoMKgIGdvdG8gZXJyb3I7
+Cj4gK2RpZmYgLS1naXQgYS9zcmMvZWNkaC5jIGIvc3JjL2VjZGguYwo+ICtpbmRleCBmN2ZjYWYx
+My4uN2M1NjhkYjQgMTAwNjQ0Cj4gKy0tLSBhL3NyYy9lY2RoLmMKPiArKysrIGIvc3JjL2VjZGgu
+Ywo+ICtAQCAtMzAsNiArMzAsMTEgQEAKPiArIAo+ICsgI2lmZGVmIEhBVkVfRUNESAo+ICsgCj4g
+Kyt2b2lkIHNzaF9jbGllbnRfZWNkaF9yZW1vdmVfY2FsbGJhY2tzKHNzaF9zZXNzaW9uIHNlc3Np
+b24pCj4gKyt7Cj4gKyvCoMKgwqAgLy9zc2hfcGFja2V0X3JlbW92ZV9jYWxsYmFja3Moc2Vzc2lv
+biwKPiAmc3NoX2VjZGhfY2xpZW50X2NhbGxiYWNrcyk7Cj4gKyt9Cj4gKysKPiArIC8qKiBAaW50
+ZXJuYWwKPiArwqAgKiBAYnJpZWYgcGFyc2VzIGEgU1NIX01TR19LRVhfRUNESF9SRVBMWSBwYWNr
+ZXQgYW5kIHNlbmRzIGJhY2sKPiArwqAgKiBhIFNTSF9NU0dfTkVXS0VZUwo+ICtkaWZmIC0tZ2l0
+IGEvc3JjL2tleC5jIGIvc3JjL2tleC5jCj4gK2luZGV4IDgyNjg2ZTRiLi4wNjk1YzY0MyAxMDA2
+NDQKPiArLS0tIGEvc3JjL2tleC5jCj4gKysrKyBiL3NyYy9rZXguYwo+ICtAQCAtMjgsNiArMjgs
+NyBAQAo+ICsgI2luY2x1ZGUgPHN0ZGlvLmg+Cj4gKyAjaW5jbHVkZSA8c3RkYm9vbC5oPgo+ICsg
+Cj4gKysjaW5jbHVkZSAibGlic3NoL2xpYnNzaC5oIgo+ICsgI2luY2x1ZGUgImxpYnNzaC9wcml2
+LmgiCj4gKyAjaW5jbHVkZSAibGlic3NoL2J1ZmZlci5oIgo+ICsgI2luY2x1ZGUgImxpYnNzaC9k
+aC5oIgo+ICtAQCAtNDE2LDcgKzQxNywxMCBAQCBvdXQ6Cj4gK8KgwqDCoMKgIHJldHVybiBpc193
+cm9uZzsKPiArIH0KPiArIAo+ICsrZXh0ZXJuIGludCBzZXJ2ZXJfc2V0X2tleChzc2hfc2Vzc2lv
+biBzZXNzaW9uKTsKPiArKwo+ICsgU1NIX1BBQ0tFVF9DQUxMQkFDSyhzc2hfcGFja2V0X2tleGlu
+aXQpewo+ICsrwqDCoMKgIHN0cnVjdCBzc2hfY3J5cHRvX3N0cnVjdCAqY3J5cHRvID0gc2Vzc2lv
+bi0+bmV4dF9jcnlwdG87Cj4gK8KgwqDCoMKgIGludCBpLCBvazsKPiArwqDCoMKgwqAgaW50IHNl
+cnZlcl9rZXg9c2Vzc2lvbi0+c2VydmVyOwo+ICvCoMKgwqDCoCBzc2hfc3RyaW5nIHN0ciA9IE5V
+TEw7Cj4gK0BAIC00MjksMTUgKzQzMywzMiBAQCBTU0hfUEFDS0VUX0NBTExCQUNLKHNzaF9wYWNr
+ZXRfa2V4aW5pdCl7Cj4gKyAKPiArwqDCoMKgwqAgKHZvaWQpdHlwZTsKPiArwqDCoMKgwqAgKHZv
+aWQpdXNlcjsKPiArK8KgwqDCoCAKPiArK8KgwqDCoCBTU0hfTE9HKFNTSF9MT0dfVFJBQ0UsICJL
+RVhJTklUIHJlY2VpdmVkIik7Cj4gKyAKPiArwqDCoMKgwqAgaWYgKHNlc3Npb24tPnNlc3Npb25f
+c3RhdGUgPT0gU1NIX1NFU1NJT05fU1RBVEVfQVVUSEVOVElDQVRFRCl7Cj4gK8KgwqDCoMKgwqDC
+oMKgwqAgU1NIX0xPRyhTU0hfTE9HX1dBUk5JTkcsICJPdGhlciBzaWRlIGluaXRpYXRpbmcga2V5
+IHJlLQo+IGV4Y2hhbmdlIik7Cj4gKyvCoMKgwqDCoMKgwqDCoCBpZiAoc2Vzc2lvbi0+ZGhfaGFu
+ZHNoYWtlX3N0YXRlID09IERIX1NUQVRFX0ZJTklTSEVEKSB7Cj4gKyvCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgIFNTSF9MT0coU1NIX0xPR19ERUJVRywgIlBlZXIgaW5pdGlhdGVkIGtleSByZS0KPiBl
+eGNoYW5nZSIpOwo+ICsrwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAvKiBSZXNldCB0aGUgc2VudCBm
+bGFnIGlmIHRoZSByZS1rZXggd2FzIGluaXRpYXRlZCBieQo+IHRoZSBwZWVyICovCj4gKyvCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgIHNlc3Npb24tPmZsYWdzICY9IH5TU0hfU0VTU0lPTl9GTEFHX0tF
+WElOSVRfU0VOVDsKPiArK8KgwqDCoMKgwqDCoMKgIH0gZWxzZSBpZiAoc2Vzc2lvbi0+ZmxhZ3Mg
+JiBTU0hfU0VTU0lPTl9GTEFHX0tFWElOSVRfU0VOVAo+ICYmCj4gKyvCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqAgc2Vzc2lvbi0+ZGhfaGFuZHNoYWtlX3N0YXRlID09Cj4gREhf
+U1RBVEVfSU5JVF9TRU5UKSB7Cj4gKyvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIC8qIFRoaXMgaGFw
+cGVucyBvbmx5IHdoZW4gd2UgYXJlIHNlbmRpbmcgb3VyLWd1ZXNzZWQKPiBmaXJzdCBrZXgKPiAr
+K8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAqIHBhY2tldCByaWdodCBhZnRlciBvdXIgS0VYSU5J
+VCBwYWNrZXQuICovCj4gKyvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIFNTSF9MT0coU1NIX0xPR19E
+RUJVRywgIlJlY2VpdmVkIHBlZXIga2V4aW5pdAo+IGFuc3dlci4iKTsKPiArK8KgwqDCoMKgwqDC
+oMKgIH0gZWxzZSBpZiAoc2Vzc2lvbi0+c2Vzc2lvbl9zdGF0ZSAhPQo+IFNTSF9TRVNTSU9OX1NU
+QVRFX0lOSVRJQUxfS0VYKSB7Cj4gKyvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHNzaF9zZXRfZXJy
+b3Ioc2Vzc2lvbiwgU1NIX0ZBVEFMLAo+ICsrwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqAgIlNTSF9LRVhJTklUIHJlY2VpdmVkIGluIHdyb25nIHN0YXRl
+Iik7Cj4gKyvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGdvdG8gZXJyb3I7Cj4gKyvCoMKgwqDCoMKg
+wqDCoCB9Cj4gK8KgwqDCoMKgIH0gZWxzZSBpZihzZXNzaW9uLT5zZXNzaW9uX3N0YXRlICE9Cj4g
+U1NIX1NFU1NJT05fU1RBVEVfSU5JVElBTF9LRVgpewo+ICvCoMKgwqDCoMKgwqDCoMKgIHNzaF9z
+ZXRfZXJyb3Ioc2Vzc2lvbixTU0hfRkFUQUwsIlNTSF9LRVhJTklUIHJlY2VpdmVkIGluCj4gd3Jv
+bmcgc3RhdGUiKTsKPiArwqDCoMKgwqDCoMKgwqDCoCBnb3RvIGVycm9yOwo+ICvCoMKgwqDCoCB9
+Cj4gKyAKPiArwqDCoMKgwqAgaWYgKHNlcnZlcl9rZXgpIHsKPiArKyNpZmRlZiBXSVRIX1NFUlZF
+Ugo+ICvCoMKgwqDCoMKgwqDCoMKgIHJjID0gc3NoX2J1ZmZlcl9nZXRfZGF0YShwYWNrZXQsc2Vz
+c2lvbi0+bmV4dF9jcnlwdG8tCj4gPmNsaWVudF9rZXguY29va2llLCAxNik7Cj4gK8KgwqDCoMKg
+wqDCoMKgwqAgaWYgKHJjICE9IDE2KSB7Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBzc2hf
+c2V0X2Vycm9yKHNlc3Npb24sIFNTSF9GQVRBTCwgInNzaF9wYWNrZXRfa2V4aW5pdDoKPiBubyBj
+b29raWUgaW4gcGFja2V0Iik7Cj4gK0BAIC00NDksNiArNDcwLDEyIEBAIFNTSF9QQUNLRVRfQ0FM
+TEJBQ0soc3NoX3BhY2tldF9rZXhpbml0KXsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHNz
+aF9zZXRfZXJyb3Ioc2Vzc2lvbiwgU1NIX0ZBVEFMLCAic3NoX3BhY2tldF9rZXhpbml0Ogo+IGFk
+ZGluZyBjb29raWUgZmFpbGVkIik7Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBnb3RvIGVy
+cm9yOwo+ICvCoMKgwqDCoMKgwqDCoMKgIH0KPiArKwo+ICsrwqDCoMKgwqDCoMKgwqAgb2sgPSBz
+ZXJ2ZXJfc2V0X2tleChzZXNzaW9uKTsKPiArK8KgwqDCoMKgwqDCoMKgIGlmIChvayA9PSBTU0hf
+RVJST1IpIHsKPiArK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZ290byBlcnJvcjsKPiArK8KgwqDC
+oMKgwqDCoMKgIH0KPiArKyNlbmRpZgo+ICvCoMKgwqDCoCB9IGVsc2Ugewo+ICvCoMKgwqDCoMKg
+wqDCoMKgIHJjID0gc3NoX2J1ZmZlcl9nZXRfZGF0YShwYWNrZXQsc2Vzc2lvbi0+bmV4dF9jcnlw
+dG8tCj4gPnNlcnZlcl9rZXguY29va2llLCAxNik7Cj4gK8KgwqDCoMKgwqDCoMKgwqAgaWYgKHJj
+ICE9IDE2KSB7Cj4gK0BAIC00NjEsNiArNDg4LDExIEBAIFNTSF9QQUNLRVRfQ0FMTEJBQ0soc3No
+X3BhY2tldF9rZXhpbml0KXsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHNzaF9zZXRfZXJy
+b3Ioc2Vzc2lvbiwgU1NIX0ZBVEFMLCAic3NoX3BhY2tldF9rZXhpbml0Ogo+IGFkZGluZyBjb29r
+aWUgZmFpbGVkIik7Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBnb3RvIGVycm9yOwo+ICvC
+oMKgwqDCoMKgwqDCoMKgIH0KPiArKwo+ICsrwqDCoMKgwqDCoMKgwqAgb2sgPSBzc2hfc2V0X2Ns
+aWVudF9rZXgoc2Vzc2lvbik7Cj4gKyvCoMKgwqDCoMKgwqDCoCBpZiAob2sgPT0gU1NIX0VSUk9S
+KSB7Cj4gKyvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGdvdG8gZXJyb3I7Cj4gKyvCoMKgwqDCoMKg
+wqDCoCB9Cj4gK8KgwqDCoMKgIH0KPiArIAo+ICvCoMKgwqDCoCBmb3IgKGkgPSAwOyBpIDwgS0VY
+X01FVEhPRFNfU0laRTsgaSsrKSB7Cj4gK0BAIC01MDUsMjIgKzUzNyw0MCBAQCBTU0hfUEFDS0VU
+X0NBTExCQUNLKHNzaF9wYWNrZXRfa2V4aW5pdCl7Cj4gK8KgwqDCoMKgwqAgKiB0aGF0IGl0cyB2
+YWx1ZSBpcyBpbmNsdWRlZCB3aGVuIGNvbXB1dGluZyB0aGUgc2Vzc2lvbiBJRAo+IChzZWUKPiAr
+wqDCoMKgwqDCoCAqICdtYWtlX3Nlc3Npb25pZCcpLgo+ICvCoMKgwqDCoMKgICovCj4gKy3CoMKg
+wqAgaWYgKHNlcnZlcl9rZXgpIHsKPiArLcKgwqDCoMKgwqDCoMKgIHJjID0gc3NoX2J1ZmZlcl9n
+ZXRfdTgocGFja2V0LCAmZmlyc3Rfa2V4X3BhY2tldF9mb2xsb3dzKTsKPiArLcKgwqDCoMKgwqDC
+oMKgIGlmIChyYyAhPSAxKSB7Cj4gKy3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGdvdG8gZXJyb3I7
+Cj4gKy3CoMKgwqDCoMKgwqDCoCB9Cj4gKyvCoMKgwqAgcmMgPSBzc2hfYnVmZmVyX2dldF91OChw
+YWNrZXQsICZmaXJzdF9rZXhfcGFja2V0X2ZvbGxvd3MpOwo+ICsrwqDCoMKgIGlmIChyYyAhPSAx
+KSB7Cj4gKyvCoMKgwqDCoMKgwqDCoCBnb3RvIGVycm9yOwo+ICsrwqDCoMKgIH0KPiArIAo+ICst
+wqDCoMKgwqDCoMKgwqAgcmMgPSBzc2hfYnVmZmVyX2FkZF91OChzZXNzaW9uLT5pbl9oYXNoYnVm
+LAo+IGZpcnN0X2tleF9wYWNrZXRfZm9sbG93cyk7Cj4gKy3CoMKgwqDCoMKgwqDCoCBpZiAocmMg
+PCAwKSB7Cj4gKy3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGdvdG8gZXJyb3I7Cj4gKy3CoMKgwqDC
+oMKgwqDCoCB9Cj4gKyvCoMKgwqAgcmMgPSBzc2hfYnVmZmVyX2FkZF91OChzZXNzaW9uLT5pbl9o
+YXNoYnVmLAo+IGZpcnN0X2tleF9wYWNrZXRfZm9sbG93cyk7Cj4gKyvCoMKgwqAgaWYgKHJjIDwg
+MCkgewo+ICsrwqDCoMKgwqDCoMKgwqAgZ290byBlcnJvcjsKPiArK8KgwqDCoCB9Cj4gKyAKPiAr
+LcKgwqDCoMKgwqDCoMKgIHJjID0gc3NoX2J1ZmZlcl9hZGRfdTMyKHNlc3Npb24tPmluX2hhc2hi
+dWYsCj4ga2V4aW5pdF9yZXNlcnZlZCk7Cj4gKy3CoMKgwqDCoMKgwqDCoCBpZiAocmMgPCAwKSB7
+Cj4gKy3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGdvdG8gZXJyb3I7Cj4gKy3CoMKgwqDCoMKgwqDC
+oCB9Cj4gKyvCoMKgwqAgcmMgPSBzc2hfYnVmZmVyX2FkZF91MzIoc2Vzc2lvbi0+aW5faGFzaGJ1
+Ziwga2V4aW5pdF9yZXNlcnZlZCk7Cj4gKyvCoMKgwqAgaWYgKHJjIDwgMCkgewo+ICsrwqDCoMKg
+wqDCoMKgwqAgZ290byBlcnJvcjsKPiArK8KgwqDCoCB9Cj4gKyAKPiArK8KgwqDCoCAvKgo+ICsr
+wqDCoMKgwqAgKiBSZW1lbWJlciB3aGV0aGVyICdmaXJzdF9rZXhfcGFja2V0X2ZvbGxvd3MnIHdh
+cyBzZXQgYW5kIHRoZQo+IGNsaWVudAo+ICsrwqDCoMKgwqAgKiBndWVzcyB3YXMgd3Jvbmc6IGlu
+IHRoaXMgY2FzZSB0aGUgbmV4dCBTU0hfTVNHX0tFWERIX0lOSVQKPiBtZXNzYWdlCj4gKyvCoMKg
+wqDCoCAqIG11c3QgYmUgaWdub3JlZCBvbiB0aGUgc2VydmVyIHNpZGUuCj4gKyvCoMKgwqDCoCAq
+IENsaWVudCBuZWVkcyB0byBzdGFydCB0aGUgS2V5IGV4Y2hhbmdlIG92ZXIgd2l0aCB0aGUgY29y
+cmVjdAo+IG1ldGhvZAo+ICsrwqDCoMKgwqAgKi8KPiArK8KgwqDCoCBpZiAoZmlyc3Rfa2V4X3Bh
+Y2tldF9mb2xsb3dzIHx8IHNlc3Npb24tCj4gPnNlbmRfZmlyc3Rfa2V4X2ZvbGxvd3MpIHsKPiAr
+K8KgwqDCoMKgwqDCoMKgIGNoYXIgKipjbGllbnRfbWV0aG9kcyA9IGNyeXB0by0+Y2xpZW50X2tl
+eC5tZXRob2RzOwo+ICsrwqDCoMKgwqDCoMKgwqAgY2hhciAqKnNlcnZlcl9tZXRob2RzID0gY3J5
+cHRvLT5zZXJ2ZXJfa2V4Lm1ldGhvZHM7Cj4gKyvCoMKgwqDCoMKgwqDCoCBzZXNzaW9uLT5maXJz
+dF9rZXhfZm9sbG93c19ndWVzc193cm9uZyA9Cj4gKyvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGNt
+cF9maXJzdF9rZXhfYWxnbyhjbGllbnRfbWV0aG9kc1tTU0hfS0VYXSwKPiArK8KgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBzZXJ2ZXJf
+bWV0aG9kc1tTU0hfS0VYXSkgfHwKPiArK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgY21wX2ZpcnN0
+X2tleF9hbGdvKGNsaWVudF9tZXRob2RzW1NTSF9IT1NUS0VZU10sCj4gKyvCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc2VydmVyX21l
+dGhvZHNbU1NIX0hPU1RLRVlTXSk7Cj4gKyvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIFNTSF9MT0co
+U1NIX0xPR19ERUJVRywgIlRoZSBpbml0aWFsIGd1ZXNzIHdhcyAlcy4iLAo+ICsrwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc2Vzc2lvbi0+Zmlyc3Rfa2V4X2ZvbGxvd3Nf
+Z3Vlc3Nfd3JvbmcgPwo+ICJ3cm9uZyIgOiAicmlnaHQiKTsKPiArK8KgwqDCoCB9Cj4gKysKPiAr
+K8KgwqDCoCBpZiAoc2VydmVyX2tleCkgewo+ICvCoMKgwqDCoMKgwqDCoMKgIC8qCj4gK8KgwqDC
+oMKgwqDCoMKgwqDCoCAqIElmIGNsaWVudCBzZW50IGEgZXh0LWluZm8tYyBtZXNzYWdlIGluIHRo
+ZSBrZXggbGlzdCwgaXQKPiBzdXBwb3J0cwo+ICvCoMKgwqDCoMKgwqDCoMKgwqAgKiBSRkMgODMw
+OCBleHRlbnNpb24gbmVnb3RpYXRpb24uCj4gK0BAIC01NzUsMjMgKzYyNSwxNSBAQCBTU0hfUEFD
+S0VUX0NBTExCQUNLKHNzaF9wYWNrZXRfa2V4aW5pdCl7Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqAgc2Vzc2lvbi0+ZXh0ZW5zaW9ucyAmIFNTSF9FWFRfU0lHX1JT
+QV9TSEEyNTYgPwo+ICJTSEEyNTYiIDogIiIsCj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqAgc2Vzc2lvbi0+ZXh0ZW5zaW9ucyAmIFNTSF9FWFRfU0lHX1JTQV9TSEE1
+MTIgPwo+ICIgU0hBNTEyIiA6ICIiKTsKPiArwqDCoMKgwqDCoMKgwqDCoCB9Cj4gKy0KPiArLcKg
+wqDCoMKgwqDCoMKgIC8qCj4gKy3CoMKgwqDCoMKgwqDCoMKgICogUmVtZW1iZXIgd2hldGhlciAn
+Zmlyc3Rfa2V4X3BhY2tldF9mb2xsb3dzJyB3YXMgc2V0IGFuZAo+IHRoZSBjbGllbnQKPiArLcKg
+wqDCoMKgwqDCoMKgwqAgKiBndWVzcyB3YXMgd3Jvbmc6IGluIHRoaXMgY2FzZSB0aGUgbmV4dAo+
+IFNTSF9NU0dfS0VYREhfSU5JVCBtZXNzYWdlCj4gKy3CoMKgwqDCoMKgwqDCoMKgICogbXVzdCBi
+ZSBpZ25vcmVkLgo+ICstwqDCoMKgwqDCoMKgwqDCoCAqLwo+ICstwqDCoMKgwqDCoMKgwqAgaWYg
+KGZpcnN0X2tleF9wYWNrZXRfZm9sbG93cykgewo+ICstwqDCoMKgwqDCoMKgwqDCoMKgIHNlc3Np
+b24tPmZpcnN0X2tleF9mb2xsb3dzX2d1ZXNzX3dyb25nID0KPiArLcKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqAgY21wX2ZpcnN0X2tleF9hbGdvKHNlc3Npb24tPm5leHRfY3J5cHRvLQo+ID5jbGllbnRf
+a2V4Lm1ldGhvZHNbU1NIX0tFWF0sCj4gKy3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc2Vzc2lvbi0+bmV4dF9jcnlwdG8tCj4gPnNl
+cnZlcl9rZXgubWV0aG9kc1tTU0hfS0VYXSkgfHwKPiArLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
+Y21wX2ZpcnN0X2tleF9hbGdvKHNlc3Npb24tPm5leHRfY3J5cHRvLQo+ID5jbGllbnRfa2V4Lm1l
+dGhvZHNbU1NIX0hPU1RLRVlTXSwKPiArLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBzZXNzaW9uLT5uZXh0X2NyeXB0by0KPiA+c2Vy
+dmVyX2tleC5tZXRob2RzW1NTSF9IT1NUS0VZU10pOwo+ICstwqDCoMKgwqDCoMKgwqAgfQo+ICvC
+oMKgwqDCoCB9Cj4gKyAKPiArwqDCoMKgwqAgc2Vzc2lvbi0+c2Vzc2lvbl9zdGF0ZSA9IFNTSF9T
+RVNTSU9OX1NUQVRFX0tFWElOSVRfUkVDRUlWRUQ7Cj4gKy3CoMKgwqAgc2Vzc2lvbi0+ZGhfaGFu
+ZHNoYWtlX3N0YXRlID0gREhfU1RBVEVfSU5JVDsKPiArK8KgwqDCoCAvKiBpZiB3ZSBhbHJlYWR5
+IHNlbnQgb3VyIGluaXRpYWwga2V5IGV4Y2hhbmdlIHBhY2tldCwgZG8gbm90Cj4gcmVzZXQgdGhl
+Cj4gKyvCoMKgwqDCoCAqIERIIHN0YXRlLiBXZSB3aWxsIGtub3cgaWYgd2Ugd2VyZSByaWdodCB3
+aXRoIG91ciBndWVzcyBvbmx5Cj4gaW4KPiArK8KgwqDCoMKgICogZGhfaGFuZHNoYWtlX3N0YXRl
+KCkgKi8KPiArK8KgwqDCoCBpZiAoc2Vzc2lvbi0+c2VuZF9maXJzdF9rZXhfZm9sbG93cyA9PSBm
+YWxzZSkgewo+ICsrwqDCoMKgwqDCoMKgwqAgc2Vzc2lvbi0+ZGhfaGFuZHNoYWtlX3N0YXRlID0g
+REhfU1RBVEVfSU5JVDsKPiArK8KgwqDCoCB9Cj4gK8KgwqDCoMKgIHNlc3Npb24tPnNzaF9jb25u
+ZWN0aW9uX2NhbGxiYWNrKHNlc3Npb24pOwo+ICvCoMKgwqDCoCByZXR1cm4gU1NIX1BBQ0tFVF9V
+U0VEOwo+ICsgCj4gK0BAIC03NDcsNiArNzg5LDEyIEBAIGludCBzc2hfc2V0X2NsaWVudF9rZXgo
+c3NoX3Nlc3Npb24gc2Vzc2lvbikKPiArwqDCoMKgwqAgaW50IG9rOwo+ICvCoMKgwqDCoCBpbnQg
+aTsKPiArwqDCoMKgwqAgc2l6ZV90IGtleF9sZW4sIGxlbjsKPiArK8KgwqDCoCAKPiArK8KgwqDC
+oCAvKiBTa2lwIGlmIGFscmVhZHkgc2V0LCBmb3IgZXhhbXBsZSBmb3IgdGhlIHJla2V5IG9yIHdo
+ZW4gd2UgZG8KPiB0aGUgZ3Vlc3NpbmcKPiArK8KgwqDCoMKgICogaXQgY291bGQgaGF2ZSBiZWVu
+IGFscmVhZHkgdXNlZCB0byBtYWtlIHNvbWUgcHJvdG9jb2wKPiBkZWNpc2lvbnMuICovCj4gKyvC
+oMKgwqAgaWYgKGNsaWVudC0+bWV0aG9kc1swXSAhPSBOVUxMKSB7Cj4gKyvCoMKgwqDCoMKgwqDC
+oCByZXR1cm4gU1NIX09LOwo+ICsrwqDCoMKgIH0KPiArIAo+ICvCoMKgwqDCoCBvayA9IHNzaF9n
+ZXRfcmFuZG9tKGNsaWVudC0+Y29va2llLCAxNiwgMCk7Cj4gK8KgwqDCoMKgIGlmICghb2spIHsK
+PiArQEAgLTc5OCwxNSArODQ2LDg5IEBAIGludCBzc2hfc2V0X2NsaWVudF9rZXgoc3NoX3Nlc3Np
+b24gc2Vzc2lvbikKPiArwqDCoMKgwqAgcmV0dXJuIFNTSF9PSzsKPiArIH0KPiArIAo+ICsrc3Rh
+dGljIGVudW0gc3NoX2tleV9leGNoYW5nZV9lCj4gKytrZXhfc2VsZWN0X2tleF90eXBlKGNvbnN0
+IGNoYXIgKmtleCkKPiArK3sKPiArK8KgwqDCoCBpZiAoc3RyY21wKGtleCwgImRpZmZpZS1oZWxs
+bWFuLWdyb3VwMS1zaGExIikgPT0gMCkgewo+ICsrwqDCoMKgwqDCoMKgwqAgcmV0dXJuIFNTSF9L
+RVhfREhfR1JPVVAxX1NIQTE7Cj4gKyvCoMKgwqAgfSBlbHNlIGlmIChzdHJjbXAoa2V4LCAiZGlm
+ZmllLWhlbGxtYW4tZ3JvdXAxNC1zaGExIikgPT0gMCkgewo+ICsrwqDCoMKgwqDCoMKgwqAgcmV0
+dXJuIFNTSF9LRVhfREhfR1JPVVAxNF9TSEExOwo+ICsrLy/CoMKgwqAgfSBlbHNlIGlmIChzdHJj
+bXAoa2V4LCAiZGlmZmllLWhlbGxtYW4tZ3JvdXAxNC1zaGEyNTYiKSA9PSAwKQo+IHsKPiArKy8v
+wqDCoMKgwqDCoMKgwqAgcmV0dXJuIFNTSF9LRVhfREhfR1JPVVAxNF9TSEEyNTY7Cj4gKyvCoMKg
+wqAgfSBlbHNlIGlmIChzdHJjbXAoa2V4LCAiZGlmZmllLWhlbGxtYW4tZ3JvdXAxNi1zaGE1MTIi
+KSA9PSAwKSB7Cj4gKyvCoMKgwqDCoMKgwqDCoCByZXR1cm4gU1NIX0tFWF9ESF9HUk9VUDE2X1NI
+QTUxMjsKPiArK8KgwqDCoCB9IGVsc2UgaWYgKHN0cmNtcChrZXgsICJkaWZmaWUtaGVsbG1hbi1n
+cm91cDE4LXNoYTUxMiIpID09IDApIHsKPiArK8KgwqDCoMKgwqDCoMKgIHJldHVybiBTU0hfS0VY
+X0RIX0dST1VQMThfU0hBNTEyOwo+ICsrI2lmZGVmIFdJVEhfR0VYCj4gKyvCoMKgwqAgfSBlbHNl
+IGlmIChzdHJjbXAoa2V4LCAiZGlmZmllLWhlbGxtYW4tZ3JvdXAtZXhjaGFuZ2Utc2hhMSIpID09
+Cj4gMCkgewo+ICsrwqDCoMKgwqDCoMKgwqAgcmV0dXJuIFNTSF9LRVhfREhfR0VYX1NIQTE7Cj4g
+KyvCoMKgwqAgfSBlbHNlIGlmIChzdHJjbXAoa2V4LCAiZGlmZmllLWhlbGxtYW4tZ3JvdXAtZXhj
+aGFuZ2Utc2hhMjU2IikKPiA9PSAwKSB7Cj4gKyvCoMKgwqDCoMKgwqDCoCByZXR1cm4gU1NIX0tF
+WF9ESF9HRVhfU0hBMjU2Owo+ICsrI2VuZGlmIC8qIFdJVEhfR0VYICovCj4gKyvCoMKgwqAgfSBl
+bHNlIGlmIChzdHJjbXAoa2V4LCAiZWNkaC1zaGEyLW5pc3RwMjU2IikgPT0gMCkgewo+ICsrwqDC
+oMKgwqDCoMKgwqAgcmV0dXJuIFNTSF9LRVhfRUNESF9TSEEyX05JU1RQMjU2Owo+ICsrwqDCoMKg
+IH0gZWxzZSBpZiAoc3RyY21wKGtleCwgImVjZGgtc2hhMi1uaXN0cDM4NCIpID09IDApIHsKPiAr
+K8KgwqDCoMKgwqDCoMKgIHJldHVybiBTU0hfS0VYX0VDREhfU0hBMl9OSVNUUDM4NDsKPiArK8Kg
+wqDCoCB9IGVsc2UgaWYgKHN0cmNtcChrZXgsICJlY2RoLXNoYTItbmlzdHA1MjEiKSA9PSAwKSB7
+Cj4gKyvCoMKgwqDCoMKgwqDCoCByZXR1cm4gU1NIX0tFWF9FQ0RIX1NIQTJfTklTVFA1MjE7Cj4g
+KyvCoMKgwqAgfSBlbHNlIGlmIChzdHJjbXAoa2V4LCAiY3VydmUyNTUxOS1zaGEyNTZAbGlic3No
+Lm9yZyIpID09IDApIHsKPiArK8KgwqDCoMKgwqDCoMKgIHJldHVybiBTU0hfS0VYX0NVUlZFMjU1
+MTlfU0hBMjU2X0xJQlNTSF9PUkc7Cj4gKyvCoMKgwqAgfSBlbHNlIGlmIChzdHJjbXAoa2V4LCAi
+Y3VydmUyNTUxOS1zaGEyNTYiKSA9PSAwKSB7Cj4gKyvCoMKgwqDCoMKgwqDCoCByZXR1cm4gU1NI
+X0tFWF9DVVJWRTI1NTE5X1NIQTI1NjsKPiArK8KgwqDCoCB9Cj4gKyvCoMKgwqAgLyogc2hvdWxk
+IG5vdCBoYXBwZW4uIFdlIHNob3VsZCBiZSBnZXR0aW5nIG9ubHkgdmFsaWQgbmFtZXMgYXQKPiB0
+aGlzIHN0YWdlICovCj4gKyvCoMKgwqAgcmV0dXJuIDA7Cj4gKyt9Cj4gKysKPiArKwo+ICsrLyoq
+IEBpbnRlcm5hbAo+ICsrICogQGJyaWVmIFJldmVydHMgZ3Vlc3NlZCBjYWxsYmFja3Mgc2V0IGR1
+cmluZyB0aGUgZGhfaGFuZHNoYWtlKCkKPiArKyAqIEBwYXJhbSBzZXNzaW9uIHNlc3Npb24gaGFu
+ZGxlCj4gKysgKiBAcmV0dXJucyB2b2lkCj4gKysgKi8KPiArK3N0YXRpYyB2b2lkIHJldmVydF9r
+ZXhfY2FsbGJhY2tzKHNzaF9zZXNzaW9uIHNlc3Npb24pCj4gKyt7Cj4gKyvCoMKgwqAgc3dpdGNo
+IChzZXNzaW9uLT5uZXh0X2NyeXB0by0+a2V4X3R5cGUpIHsKPiArK8KgwqDCoCBjYXNlIFNTSF9L
+RVhfREhfR1JPVVAxX1NIQTE6Cj4gKyvCoMKgwqAgY2FzZSBTU0hfS0VYX0RIX0dST1VQMTRfU0hB
+MToKPiArKy8vwqDCoMKgIGNhc2UgU1NIX0tFWF9ESF9HUk9VUDE0X1NIQTI1NjoKPiArK8KgwqDC
+oCBjYXNlIFNTSF9LRVhfREhfR1JPVVAxNl9TSEE1MTI6Cj4gKyvCoMKgwqAgY2FzZSBTU0hfS0VY
+X0RIX0dST1VQMThfU0hBNTEyOgo+ICsrwqDCoMKgwqDCoMKgwqAgc3NoX2NsaWVudF9kaF9yZW1v
+dmVfY2FsbGJhY2tzKHNlc3Npb24pOwo+ICsrwqDCoMKgwqDCoMKgwqAgYnJlYWs7Cj4gKysjaWZk
+ZWYgV0lUSF9HRVgKPiArK8KgwqDCoCBjYXNlIFNTSF9LRVhfREhfR0VYX1NIQTE6Cj4gKyvCoMKg
+wqAgY2FzZSBTU0hfS0VYX0RIX0dFWF9TSEEyNTY6Cj4gKyvCoMKgwqDCoMKgwqDCoCBzc2hfY2xp
+ZW50X2RoZ2V4X3JlbW92ZV9jYWxsYmFja3Moc2Vzc2lvbik7Cj4gKyvCoMKgwqDCoMKgwqDCoCBi
+cmVhazsKPiArKyNlbmRpZiAvKiBXSVRIX0dFWCAqLwo+ICsrI2lmZGVmIEhBVkVfRUNESAo+ICsr
+wqDCoMKgIGNhc2UgU1NIX0tFWF9FQ0RIX1NIQTJfTklTVFAyNTY6Cj4gKyvCoMKgwqAgY2FzZSBT
+U0hfS0VYX0VDREhfU0hBMl9OSVNUUDM4NDoKPiArK8KgwqDCoCBjYXNlIFNTSF9LRVhfRUNESF9T
+SEEyX05JU1RQNTIxOgo+ICsrwqDCoMKgwqDCoMKgwqAgc3NoX2NsaWVudF9lY2RoX3JlbW92ZV9j
+YWxsYmFja3Moc2Vzc2lvbik7Cj4gKyvCoMKgwqDCoMKgwqDCoCBicmVhazsKPiArKyNlbmRpZgo+
+ICsrI2lmZGVmIEhBVkVfQ1VSVkUyNTUxOQo+ICsrwqDCoMKgIGNhc2UgU1NIX0tFWF9DVVJWRTI1
+NTE5X1NIQTI1NjoKPiArK8KgwqDCoCBjYXNlIFNTSF9LRVhfQ1VSVkUyNTUxOV9TSEEyNTZfTElC
+U1NIX09SRzoKPiArK8KgwqDCoMKgwqDCoMKgIHNzaF9jbGllbnRfY3VydmUyNTUxOV9yZW1vdmVf
+Y2FsbGJhY2tzKHNlc3Npb24pOwo+ICsrwqDCoMKgwqDCoMKgwqAgYnJlYWs7Cj4gKysjZW5kaWYK
+PiArK8KgwqDCoCB9Cj4gKyt9Cj4gKysKPiArIC8qKiBAYnJpZWYgU2VsZWN0IHRoZSBkaWZmZXJl
+bnQgbWV0aG9kcyBvbiBiYXNpcyBvZiBjbGllbnQncyBhbmQKPiArwqAgKiBzZXJ2ZXIncyBrZXgg
+bWVzc2FnZXMsIGFuZCB3YXRjaGVzIG91dCBpZiBhIG1hdGNoIGlzIHBvc3NpYmxlLgo+ICvCoCAq
+Lwo+ICsgaW50IHNzaF9rZXhfc2VsZWN0X21ldGhvZHMgKHNzaF9zZXNzaW9uIHNlc3Npb24pewo+
+ICstwqDCoMKgIHN0cnVjdCBzc2hfa2V4X3N0cnVjdCAqc2VydmVyID0gJnNlc3Npb24tPm5leHRf
+Y3J5cHRvLQo+ID5zZXJ2ZXJfa2V4Owo+ICsrwqDCoMKgwqAgc3RydWN0IHNzaF9jcnlwdG9fc3Ry
+dWN0ICpjcnlwdG8gPSBzZXNzaW9uLT5uZXh0X2NyeXB0bzsKPiArK8KgwqDCoMKgIHN0cnVjdCBz
+c2hfa2V4X3N0cnVjdCAqc2VydmVyID0gJnNlc3Npb24tPm5leHRfY3J5cHRvLQo+ID5zZXJ2ZXJf
+a2V4Owo+ICvCoMKgwqDCoCBzdHJ1Y3Qgc3NoX2tleF9zdHJ1Y3QgKmNsaWVudCA9ICZzZXNzaW9u
+LT5uZXh0X2NyeXB0by0KPiA+Y2xpZW50X2tleDsKPiArwqDCoMKgwqAgY2hhciAqZXh0X3N0YXJ0
+ID0gTlVMTDsKPiArwqDCoMKgwqAgaW50IGk7Cj4gKy0KPiArK8KgwqDCoCBlbnVtIHNzaF9rZXlf
+ZXhjaGFuZ2VfZSBrZXhfdHlwZTsKPiArK8KgwqDCoCAKPiArwqDCoMKgwqAgLyogSGVyZSB3ZSBz
+aG91bGQgZHJvcCB0aGXCoCBleHQtaW5mby1jwqAgZnJvbSB0aGUgbGlzdCBzbyB3ZQo+IGF2b2lk
+IG1hdGNoaW5nLgo+ICvCoMKgwqDCoMKgICogaXQuIFdlIGFkZGVkIGl0IHRvIHRoZSBlbmQsIHNv
+IHdlIGNhbiBqdXN0IHRydW5jYXRlIHRoZQo+IHN0cmluZyBoZXJlICovCj4gK8KgwqDCoMKgIGV4
+dF9zdGFydCA9IHN0cnN0cihjbGllbnQtPm1ldGhvZHNbU1NIX0tFWF0sCj4gIiwiS0VYX0VYVEVO
+U0lPTl9DTElFTlQpOwo+ICtAQCAtODI1LDI1ICs5NDcsMjEgQEAgaW50IHNzaF9rZXhfc2VsZWN0
+X21ldGhvZHMgKHNzaF9zZXNzaW9uCj4gc2Vzc2lvbil7Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoCBzZXNzaW9uLT5uZXh0X2NyeXB0by0+a2V4X21ldGhvZHNbaV0gPSBzdHJkdXAoIiIpOwo+
+ICvCoMKgwqDCoMKgwqDCoMKgIH0KPiArwqDCoMKgwqAgfQo+ICstwqDCoMKgIGlmKHN0cmNtcChz
+ZXNzaW9uLT5uZXh0X2NyeXB0by0+a2V4X21ldGhvZHNbU1NIX0tFWF0sICJkaWZmaWUtCj4gaGVs
+bG1hbi1ncm91cDEtc2hhMSIpID09IDApewo+ICstwqDCoMKgwqDCoCBzZXNzaW9uLT5uZXh0X2Ny
+eXB0by0+a2V4X3R5cGU9U1NIX0tFWF9ESF9HUk9VUDFfU0hBMTsKPiArLcKgwqDCoCB9IGVsc2Ug
+aWYoc3RyY21wKHNlc3Npb24tPm5leHRfY3J5cHRvLT5rZXhfbWV0aG9kc1tTU0hfS0VYXSwKPiAi
+ZGlmZmllLWhlbGxtYW4tZ3JvdXAxNC1zaGExIikgPT0gMCl7Cj4gKy3CoMKgwqDCoMKgIHNlc3Np
+b24tPm5leHRfY3J5cHRvLT5rZXhfdHlwZT1TU0hfS0VYX0RIX0dST1VQMTRfU0hBMTsKPiArLcKg
+wqDCoCB9IGVsc2UgaWYoc3RyY21wKHNlc3Npb24tPm5leHRfY3J5cHRvLT5rZXhfbWV0aG9kc1tT
+U0hfS0VYXSwKPiAiZGlmZmllLWhlbGxtYW4tZ3JvdXAxNi1zaGE1MTIiKSA9PSAwKXsKPiArLcKg
+wqDCoMKgwqAgc2Vzc2lvbi0+bmV4dF9jcnlwdG8tPmtleF90eXBlPVNTSF9LRVhfREhfR1JPVVAx
+Nl9TSEE1MTI7Cj4gKy3CoMKgwqAgfSBlbHNlIGlmKHN0cmNtcChzZXNzaW9uLT5uZXh0X2NyeXB0
+by0+a2V4X21ldGhvZHNbU1NIX0tFWF0sCj4gImRpZmZpZS1oZWxsbWFuLWdyb3VwMTgtc2hhNTEy
+IikgPT0gMCl7Cj4gKy3CoMKgwqDCoMKgIHNlc3Npb24tPm5leHRfY3J5cHRvLT5rZXhfdHlwZT1T
+U0hfS0VYX0RIX0dST1VQMThfU0hBNTEyOwo+ICstwqDCoMKgIH0gZWxzZSBpZihzdHJjbXAoc2Vz
+c2lvbi0+bmV4dF9jcnlwdG8tPmtleF9tZXRob2RzW1NTSF9LRVhdLAo+ICJlY2RoLXNoYTItbmlz
+dHAyNTYiKSA9PSAwKXsKPiArLcKgwqDCoMKgwqAgc2Vzc2lvbi0+bmV4dF9jcnlwdG8tPmtleF90
+eXBlPVNTSF9LRVhfRUNESF9TSEEyX05JU1RQMjU2Owo+ICstwqDCoMKgIH0gZWxzZSBpZihzdHJj
+bXAoc2Vzc2lvbi0+bmV4dF9jcnlwdG8tPmtleF9tZXRob2RzW1NTSF9LRVhdLAo+ICJlY2RoLXNo
+YTItbmlzdHAzODQiKSA9PSAwKXsKPiArLcKgwqDCoMKgwqAgc2Vzc2lvbi0+bmV4dF9jcnlwdG8t
+PmtleF90eXBlPVNTSF9LRVhfRUNESF9TSEEyX05JU1RQMzg0Owo+ICstwqDCoMKgIH0gZWxzZSBp
+ZihzdHJjbXAoc2Vzc2lvbi0+bmV4dF9jcnlwdG8tPmtleF9tZXRob2RzW1NTSF9LRVhdLAo+ICJl
+Y2RoLXNoYTItbmlzdHA1MjEiKSA9PSAwKXsKPiArLcKgwqDCoMKgwqAgc2Vzc2lvbi0+bmV4dF9j
+cnlwdG8tPmtleF90eXBlPVNTSF9LRVhfRUNESF9TSEEyX05JU1RQNTIxOwo+ICstwqDCoMKgIH0g
+ZWxzZSBpZihzdHJjbXAoc2Vzc2lvbi0+bmV4dF9jcnlwdG8tPmtleF9tZXRob2RzW1NTSF9LRVhd
+LAo+ICJjdXJ2ZTI1NTE5LXNoYTI1NkBsaWJzc2gub3JnIikgPT0gMCl7Cj4gKy3CoMKgwqDCoMKg
+IHNlc3Npb24tPm5leHRfY3J5cHRvLQo+ID5rZXhfdHlwZT1TU0hfS0VYX0NVUlZFMjU1MTlfU0hB
+MjU2X0xJQlNTSF9PUkc7Cj4gKy3CoMKgwqAgfSBlbHNlIGlmKHN0cmNtcChzZXNzaW9uLT5uZXh0
+X2NyeXB0by0+a2V4X21ldGhvZHNbU1NIX0tFWF0sCj4gImN1cnZlMjU1MTktc2hhMjU2IikgPT0g
+MCl7Cj4gKy3CoMKgwqDCoMKgIHNlc3Npb24tPm5leHRfY3J5cHRvLT5rZXhfdHlwZT1TU0hfS0VY
+X0NVUlZFMjU1MTlfU0hBMjU2Owo+ICstwqDCoMKgIH0KPiArKwo+ICsrwqDCoMKgIC8qIFdlIGNh
+biBub3Qgc2V0IHRoaXMgdmFsdWUgZGlyZWN0bHkgYXMgdGhlIG9sZCB2YWx1ZSBpcwo+IG5lZWRl
+ZCB0byByZXZlcnQKPiArK8KgwqDCoMKgICogY2FsbGJhY2tzIGlmIHdlIGFyZSBjbGllbnQgKi8K
+PiArK8KgwqDCoCBrZXhfdHlwZSA9IGtleF9zZWxlY3Rfa2V4X3R5cGUoY3J5cHRvLT5rZXhfbWV0
+aG9kc1tTU0hfS0VYXSk7Cj4gKyvCoMKgwqAgaWYgKHNlc3Npb24tPmNsaWVudCAmJiBzZXNzaW9u
+LT5maXJzdF9rZXhfZm9sbG93c19ndWVzc193cm9uZykKPiB7Cj4gKyvCoMKgwqDCoMKgwqDCoCBT
+U0hfTE9HKFNTSF9MT0dfREVCVUcsICJPdXIgZ3Vlc3Mgd2FzIHdyb25nLiBSZXN0YXJ0aW5nIHRo
+ZQo+IEtFWCIpOwo+ICsrwqDCoMKgwqDCoMKgwqAgLyogV2UgbmVlZCB0byByZW1vdmUgdGhlIHdy
+b25nIGNhbGxiYWNrcyBhbmQgc3RhcnQga2V4Cj4gYWdhaW4gKi8KPiArK8KgwqDCoMKgwqDCoMKg
+IHJldmVydF9rZXhfY2FsbGJhY2tzKHNlc3Npb24pOwo+ICsrwqDCoMKgwqDCoMKgwqAgc2Vzc2lv
+bi0+ZGhfaGFuZHNoYWtlX3N0YXRlID0gREhfU1RBVEVfSU5JVDsKPiArK8KgwqDCoMKgwqDCoMKg
+IHNlc3Npb24tPmZpcnN0X2tleF9mb2xsb3dzX2d1ZXNzX3dyb25nID0gZmFsc2U7Cj4gKyvCoMKg
+wqDCoCB9Cj4gKyvCoMKgwqAgY3J5cHRvLT5rZXhfdHlwZSA9IGtleF90eXBlOwo+ICsrCj4gKysK
+PiArKwo+ICvCoMKgwqDCoCBTU0hfTE9HKFNTSF9MT0dfSU5GTywgIk5lZ290aWF0ZWQKPiAlcywl
+cywlcywlcywlcywlcywlcywlcywlcywlcyIsCj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBz
+ZXNzaW9uLT5uZXh0X2NyeXB0by0+a2V4X21ldGhvZHNbU1NIX0tFWF0sCj4gK8KgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoCBzZXNzaW9uLT5uZXh0X2NyeXB0by0+a2V4X21ldGhvZHNbU1NIX0hPU1RL
+RVlTXSwKPiArQEAgLTg2MSwxMyArOTc5LDI2IEBAIGludCBzc2hfa2V4X3NlbGVjdF9tZXRob2Rz
+IChzc2hfc2Vzc2lvbgo+IHNlc3Npb24pewo+ICsgCj4gKyAKPiArIC8qIHRoaXMgZnVuY3Rpb24g
+b25seSBzZW5kcyB0aGUgcHJlZGVmaW5lZCBzZXQgb2Yga2V4IG1ldGhvZHMgKi8KPiArLWludCBz
+c2hfc2VuZF9rZXgoc3NoX3Nlc3Npb24gc2Vzc2lvbiwgaW50IHNlcnZlcl9rZXgpIHsKPiArLcKg
+IHN0cnVjdCBzc2hfa2V4X3N0cnVjdCAqa2V4ID0gKHNlcnZlcl9rZXggPyAmc2Vzc2lvbi0+bmV4
+dF9jcnlwdG8tCj4gPnNlcnZlcl9rZXggOgo+ICsraW50IHNzaF9zZW5kX2tleChzc2hfc2Vzc2lv
+biBzZXNzaW9uKSB7Cj4gKyvCoCBzdHJ1Y3Qgc3NoX2tleF9zdHJ1Y3QgKmtleCA9IChzZXNzaW9u
+LT5zZXJ2ZXIgPyAmc2Vzc2lvbi0KPiA+bmV4dF9jcnlwdG8tPnNlcnZlcl9rZXggOgo+ICvCoMKg
+wqDCoMKgwqAgJnNlc3Npb24tPm5leHRfY3J5cHRvLT5jbGllbnRfa2V4KTsKPiArwqDCoCBzc2hf
+c3RyaW5nIHN0ciA9IE5VTEw7Cj4gK8KgwqAgaW50IGk7Cj4gK8KgwqAgaW50IHJjOwo+ICsrwqAg
+aW50IGZpcnN0X2tleF9wYWNrZXRfZm9sbG93cyA9IDA7Cj4gKysKPiArK8KgIC8qIE9ubHkgY2xp
+ZW50IGNhbiBpbml0aWF0ZSB0aGUgaGFuZHNoYWtlIG1ldGhvZHMgd2UgaW1wbGVtZW50Lgo+IElm
+IHdlCj4gKyvCoMKgICogYWxyZWFkeSByZWNlaXZlZCB0aGUgcGVlciBtZWNoYW5pc21zLCB0aGVy
+ZSBpcyBubyBwb2ludCBpbgo+IGd1ZXNzaW5nICovCj4gKyvCoCBpZiAoc2Vzc2lvbi0+Y2xpZW50
+ICYmCj4gKyvCoMKgwqDCoMKgIHNlc3Npb24tPnNlc3Npb25fc3RhdGUgIT0gU1NIX1NFU1NJT05f
+U1RBVEVfS0VYSU5JVF9SRUNFSVZFRAo+ICYmCj4gKyvCoMKgwqDCoMKgIHNlc3Npb24tPnNlbmRf
+Zmlyc3Rfa2V4X2ZvbGxvd3MpIHsKPiArK8KgwqDCoMKgwqAgZmlyc3Rfa2V4X3BhY2tldF9mb2xs
+b3dzID0gMTsKPiArK8KgIH0KPiArIAo+ICsrwqAgU1NIX0xPRyhTU0hfTE9HX1RSQUNFLAo+ICsr
+wqDCoMKgwqDCoMKgwqDCoMKgICJTZW5kaW5nIEtFWElOSVQgcGFja2V0LCBmaXJzdF9rZXhfcGFj
+a2V0X2ZvbGxvd3MgPSAlZCIsCj4gKyvCoMKgwqDCoMKgwqDCoMKgwqAgZmlyc3Rfa2V4X3BhY2tl
+dF9mb2xsb3dzKTsKPiArKyAKPiArwqDCoCByYyA9IHNzaF9idWZmZXJfcGFjayhzZXNzaW9uLT5v
+dXRfYnVmZmVyLAo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgICJiUCIsCj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqAgU1NIMl9NU0dfS0VYSU5JVCwKPiArQEAgLTg5OSwxNSArMTAzMCw1MiBAQCBpbnQgc3NoX3Nl
+bmRfa2V4KHNzaF9zZXNzaW9uIHNlc3Npb24sIGludAo+IHNlcnZlcl9rZXgpIHsKPiArIAo+ICvC
+oMKgIHJjID0gc3NoX2J1ZmZlcl9wYWNrKHNlc3Npb24tPm91dF9idWZmZXIsCj4gK8KgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgImJkIiwKPiArLcKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIDAsCj4gKyvCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBmaXJzdF9rZXhfcGFja2V0X2ZvbGxvd3Ms
+Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgMCk7Cj4g
+K8KgwqAgaWYgKHJjICE9IFNTSF9PSykgewo+ICvCoMKgwqDCoCBnb3RvIGVycm9yOwo+ICvCoMKg
+IH0KPiArK8KgIAo+ICsrwqAgLyogUHJlcGFyZSBhbHNvIHRoZSBmaXJzdF9rZXhfcGFja2V0X2Zv
+bGxvd3MgYW5kIHJlc2VydmVkIHRvIDAgKi8KPiArK8KgIHJjID0gc3NoX2J1ZmZlcl9hZGRfdTgo
+c2Vzc2lvbi0+b3V0X2hhc2hidWYsCj4gZmlyc3Rfa2V4X3BhY2tldF9mb2xsb3dzKTsKPiArK8Kg
+IGlmIChyYyA8IDApIHsKPiArK8KgwqDCoMKgwqAgZ290byBlcnJvcjsKPiArK8KgIH0KPiArK8Kg
+IHJjID0gc3NoX2J1ZmZlcl9hZGRfdTMyKHNlc3Npb24tPm91dF9oYXNoYnVmLCAwKTsKPiArK8Kg
+IGlmIChyYyA8IDApIHsKPiArK8KgwqDCoMKgwqAgZ290byBlcnJvcjsKPiArK8KgIH0KPiArIAo+
+ICvCoMKgIGlmIChzc2hfcGFja2V0X3NlbmQoc2Vzc2lvbikgPT0gU1NIX0VSUk9SKSB7Cj4gK8Kg
+wqDCoMKgIHJldHVybiAtMTsKPiArwqDCoCB9Cj4gKyvCoCAKPiArK8KgIHNlc3Npb24tPmZsYWdz
+IHw9IFNTSF9TRVNTSU9OX0ZMQUdfS0VYSU5JVF9TRU5UOwo+ICsrwqAgU1NIX0xPRyhTU0hfTE9H
+X1BBQ0tFVCwgIlNTSF9NU0dfS0VYSU5JVCBzZW50Iik7Cj4gKysKPiArK8KgIC8qIElmIHdlIGlu
+ZGljYXRlZCB0aGF0IHdlIGFyZSBzZW5kaW5nIHRoZSBndWVzc2VkIGtleSBleGNoYW5nZQo+IHBh
+Y2tldCwKPiArK8KgwqAgKiBkbyBpdCBub3cuIFRoZSBwYWNrZXQgaXMgc2ltcGxlLCBidXQgd2Ug
+bmVlZCB0byBkbyBzb21lCj4gcHJlcGFyYXRpb25zICovCj4gKyvCoCBpZiAoZmlyc3Rfa2V4X3Bh
+Y2tldF9mb2xsb3dzKSB7Cj4gKyvCoMKgwqDCoMKgIGNoYXIgKmxpc3QgPSBrZXgtPm1ldGhvZHNb
+U1NIX0tFWF07Cj4gKyvCoMKgwqDCoMKgIGNoYXIgKmNvbG9uID0gc3RyY2hyKGxpc3QsICcsJyk7
+Cj4gKyvCoMKgwqDCoMKgIHNpemVfdCBrZXhfbmFtZV9sZW4gPSBjb2xvbiA/IChzaXplX3QpKGNv
+bG9uIC0gbGlzdCkgOgo+IHN0cmxlbihsaXN0KTsKPiArK8KgwqDCoMKgwqAgY2hhciAqa2V4X25h
+bWUgPSBjYWxsb2Moa2V4X25hbWVfbGVuICsgMSwgMSk7Cj4gKyvCoMKgwqDCoMKgIGlmIChrZXhf
+bmFtZSA9PSBOVUxMKSB7Cj4gKyvCoMKgwqDCoMKgwqDCoMKgwqAgc3NoX3NldF9lcnJvcl9vb20o
+c2Vzc2lvbik7Cj4gKyvCoMKgwqDCoMKgwqDCoMKgwqAgZ290byBlcnJvcjsKPiArK8KgwqDCoMKg
+wqAgfQo+ICsrwqDCoMKgwqDCoCBzbnByaW50ZihrZXhfbmFtZSwga2V4X25hbWVfbGVuICsgMSwg
+IiUuKnMiLAo+IChpbnQpa2V4X25hbWVfbGVuLCBsaXN0KTsKPiArK8KgwqDCoMKgwqAgU1NIX0xP
+RyhTU0hfTE9HX1RSQUNFLCAiU2VuZGluZyB0aGUgZmlyc3Qga2V4IHBhY2tldCBmb3IgJXMiLAo+
+IGtleF9uYW1lKTsKPiArKwo+ICsrwqDCoMKgwqDCoCBzZXNzaW9uLT5uZXh0X2NyeXB0by0+a2V4
+X3R5cGUgPQo+IGtleF9zZWxlY3Rfa2V4X3R5cGUoa2V4X25hbWUpOwo+ICsrwqDCoMKgwqDCoMKg
+IGZyZWUoa2V4X25hbWUpOwo+ICsrCj4gKyvCoMKgwqDCoMKgIC8qIHJ1biB0aGUgZmlyc3Qgc3Rl
+cCBvZiB0aGUgREggaGFuZHNoYWtlICovCj4gKyvCoMKgwqDCoMKgIHNlc3Npb24tPmRoX2hhbmRz
+aGFrZV9zdGF0ZSA9IERIX1NUQVRFX0lOSVQ7Cj4gKyvCoMKgwqDCoMKgIGlmIChkaF9oYW5kc2hh
+a2Uoc2Vzc2lvbikgPT0gU1NIX0VSUk9SKSB7Cj4gKyvCoMKgwqDCoMKgwqDCoMKgwqAgZ290byBl
+cnJvcjsKPiArK8KgwqDCoMKgwqAgfQo+ICsrwqAgfQo+ICsgCj4gK8KgwqAgcmV0dXJuIDA7Cj4g
+KyBlcnJvcjoKPiArZGlmZiAtLWdpdCBhL3NyYy9wYWNrZXQuYyBiL3NyYy9wYWNrZXQuYwo+ICtp
+bmRleCA2MWE0NDIzNy4uOTMyZWY3YmEgMTAwNjQ0Cj4gKy0tLSBhL3NyYy9wYWNrZXQuYwo+ICsr
+KysgYi9zcmMvcGFja2V0LmMKPiArQEAgLTM2Miw2ICszNjIsMTEgQEAgc3RhdGljIGVudW0gc3No
+X3BhY2tldF9maWx0ZXJfcmVzdWx0X2UKPiBzc2hfcGFja2V0X2luY29taW5nX2ZpbHRlcihzc2hf
+c2Vzc2lvbiBzZQo+ICvCoMKgwqDCoMKgwqDCoMKgwqAgKiAtIHNlc3Npb24tPmRoX2hhbmRoc2Fr
+ZV9zdGF0ZSA9IERIX1NUQVRFX05FV0tFWVNfU0VOVAo+ICvCoMKgwqDCoMKgwqDCoMKgwqAgKiAq
+Lwo+ICsgCj4gKyvCoMKgwqDCoMKgwqDCoCBpZiAoIXNlc3Npb24tPnNlcnZlcikgewo+ICsrwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoCByYyA9IFNTSF9QQUNLRVRfREVOSUVEOwo+ICsrwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoCBicmVhazsKPiArK8KgwqDCoMKgwqDCoMKgIH0KPiArKwo+ICvCoMKgwqDC
+oMKgwqDCoMKgIGlmIChzZXNzaW9uLT5zZXNzaW9uX3N0YXRlICE9IFNTSF9TRVNTSU9OX1NUQVRF
+X0RIKSB7Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCByYyA9IFNTSF9QQUNLRVRfREVOSUVE
+Owo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgYnJlYWs7Cj4gK2RpZmYgLS1naXQgYS9zcmMv
+c2VydmVyLmMgYi9zcmMvc2VydmVyLmMKPiAraW5kZXggYmM5OGRhNGYuLjY4YjI1YTk3IDEwMDY0
+NAo+ICstLS0gYS9zcmMvc2VydmVyLmMKPiArKysrIGIvc3JjL3NlcnZlci5jCj4gK0BAIC04Miw3
+ICs4Miw3IEBAIHN0YXRpYyBpbnQgZGhfaGFuZHNoYWtlX3NlcnZlcihzc2hfc2Vzc2lvbgo+IHNl
+c3Npb24pOwo+ICvCoCAqIG9wdGlvbnMgdGhhdCBhcmUgY3VycmVudGx5IHNldCBpbiB0aGUgZ2l2
+ZW4gc3NoX3Nlc3Npb24KPiBzdHJ1Y3R1cmUuCj4gK8KgICovCj4gKyAKPiArLXN0YXRpYyBpbnQg
+c2VydmVyX3NldF9rZXgoc3NoX3Nlc3Npb24gc2Vzc2lvbikgewo+ICsraW50IHNlcnZlcl9zZXRf
+a2V4KHNzaF9zZXNzaW9uIHNlc3Npb24pIHsKPiArwqDCoCBzdHJ1Y3Qgc3NoX2tleF9zdHJ1Y3Qg
+KnNlcnZlciA9ICZzZXNzaW9uLT5uZXh0X2NyeXB0by0KPiA+c2VydmVyX2tleDsKPiArwqDCoCBp
+bnQgaSwgaiwgcmM7Cj4gK8KgwqAgY29uc3QgY2hhciAqd2FudGVkOwo+ICtAQCAtNDU4LDcgKzQ1
+OCw3IEBAIHN0YXRpYyB2b2lkCj4gc3NoX3NlcnZlcl9jb25uZWN0aW9uX2NhbGxiYWNrKHNzaF9z
+ZXNzaW9uIHNlc3Npb24pewo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc3NoX3BhY2tldF9z
+ZXRfZGVmYXVsdF9jYWxsYmFja3Moc2Vzc2lvbik7Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oCBzZXRfc3RhdHVzKHNlc3Npb24sIDAuNWYpOwo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
+c2Vzc2lvbi0+c2Vzc2lvbl9zdGF0ZT1TU0hfU0VTU0lPTl9TVEFURV9JTklUSUFMX0tFWDsKPiAr
+LcKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaWYgKHNzaF9zZW5kX2tleChzZXNzaW9uLCAxKSA8IDAp
+IHsKPiArK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaWYgKHNzaF9zZW5kX2tleChzZXNzaW9uKSA8
+IDApIHsKPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZ290byBlcnJvcjsKPiAr
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIH0KPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGJy
+ZWFrOwo+ICtAQCAtNDY3LDExICs0NjcsMTEgQEAgc3RhdGljIHZvaWQKPiBzc2hfc2VydmVyX2Nv
+bm5lY3Rpb25fY2FsbGJhY2soc3NoX3Nlc3Npb24gc2Vzc2lvbil7Cj4gK8KgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoCBicmVhazsKPiArwqDCoMKgwqDCoMKgwqDCoCBjYXNlIFNTSF9TRVNTSU9OX1NU
+QVRFX0tFWElOSVRfUkVDRUlWRUQ6Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBzZXRfc3Rh
+dHVzKHNlc3Npb24sMC42Zik7Cj4gKy3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGlmKHNlc3Npb24t
+Pm5leHRfY3J5cHRvLT5zZXJ2ZXJfa2V4Lm1ldGhvZHNbMF09PU5VTEwpewo+ICsrwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoCBpZiAoKHNlc3Npb24tPmZsYWdzICYgU1NIX1NFU1NJT05fRkxBR19LRVhJ
+TklUX1NFTlQpID09Cj4gMCkgewo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBp
+ZihzZXJ2ZXJfc2V0X2tleChzZXNzaW9uKSA9PSBTU0hfRVJST1IpCj4gK8KgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZ290byBlcnJvcjsKPiArwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqAgLyogV2UgYXJlIGluIGEgcmVrZXlpbmcsIHNvIHdlIG5lZWQgdG8g
+c2VuZCB0aGUKPiBzZXJ2ZXIga2V4ICovCj4gKy3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqAgaWYoc3NoX3NlbmRfa2V4KHNlc3Npb24sIDEpIDwgMCkKPiArK8KgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoCBpZihzc2hfc2VuZF9rZXgoc2Vzc2lvbikgPCAwKQo+ICvCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGdvdG8gZXJyb3I7Cj4gK8KgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoCB9Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBzc2hfbGlzdF9rZXgo
+JnNlc3Npb24tPm5leHRfY3J5cHRvLT5jbGllbnRfa2V4KTsgLy8gbG9nCj4gY2xpZW50IGtleAo+
+ICstLSAKPiArMi4yNS4xCj4gKwo+IGRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtc3VwcG9y
+dC9saWJzc2gvbGlic3NoXzAuOC45LmJiIGIvbWV0YS0KPiBvZS9yZWNpcGVzLXN1cHBvcnQvbGli
+c3NoL2xpYnNzaF8wLjguOS5iYgo+IGluZGV4IDA2MWYxMzkxMmYuLmNhZDU1MmU3OGEgMTAwNjQ0
+Cj4gLS0tIGEvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvbGlic3NoL2xpYnNzaF8wLjguOS5iYgo+
+ICsrKyBiL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2xpYnNzaC9saWJzc2hfMC44LjkuYmIKPiBA
+QCAtOCw2ICs4LDcgQEAgREVQRU5EUyA9ICJ6bGliIG9wZW5zc2wiCj4gwqAKPiDCoFNSQ19VUkkg
+PQo+ICJnaXQ6Ly9naXQubGlic3NoLm9yZy9wcm9qZWN0cy9saWJzc2guZ2l0O3Byb3RvY29sPWh0
+dHBzO2JyYW5jaD1zdGFibAo+IGUtMC44IFwKPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGZpbGU6
+Ly9DVkUtMjAyMC0xNjEzNS5wYXRjaMKgXAo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoCBmaWxlOi8v
+Q1ZFLTIwMjMtMTY2Ny5wYXRjaMKgXAo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgICIKPiDCoFNSQ1JF
+ViA9ICIwNDY4NWE3NGRmOWNlMWRiMWJjMTE2YTgzYTBkYTc4YjRmNGZhMWY4Igo+IMKgCj4gCj4g
+LT0tPS09LT0tPS09LT0tPS09LT0tPS0KPiBMaW5rczogWW91IHJlY2VpdmUgYWxsIG1lc3NhZ2Vz
+IHNlbnQgdG8gdGhpcyBncm91cC4KPiBWaWV3L1JlcGx5IE9ubGluZSAoIzEwNzM0NSk6Cj4gaHR0
+cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL2cvb3BlbmVtYmVkZGVkLWRldmVsL21lc3NhZ2Uv
+MTA3MzQ1Cj4gTXV0ZSBUaGlzIFRvcGljOiBodHRwczovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcv
+bXQvMTAzMTQ1MzIyLzM2MTY3MDIKPiBHcm91cCBPd25lcjogb3BlbmVtYmVkZGVkLWRldmVsK293
+bmVyQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcKPiBVbnN1YnNjcmliZToKPiBodHRwczovL2xpc3Rz
+Lm9wZW5lbWJlZGRlZC5vcmcvZy9vcGVuZW1iZWRkZWQtZGV2ZWwvdW5zdWLCoFsKPiBhbnVqLm1p
+dHRhbEBpbnRlbC5jb21dCj4gLT0tPS09LT0tPS09LT0tPS09LT0tPS0KPiAKCg==
 
