@@ -2,82 +2,87 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8F15AC46CA3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8ED20C46CC6
 	for <webhook@archiver.kernel.org>; Wed, 13 Dec 2023 07:07:40 +0000 (UTC)
-Received: from mail-il1-f174.google.com (mail-il1-f174.google.com [209.85.166.174])
- by mx.groups.io with SMTP id smtpd.web11.30707.1702451260069329673
+Received: from mail-oi1-f182.google.com (mail-oi1-f182.google.com [209.85.167.182])
+ by mx.groups.io with SMTP id smtpd.web10.31074.1702451257346699030
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 12 Dec 2023 23:07:40 -0800
+ Tue, 12 Dec 2023 23:07:37 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=HONJq2VY;
- spf=pass (domain: gmail.com, ip: 209.85.166.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-il1-f174.google.com with SMTP id e9e14a558f8ab-35d3b220b64so25763375ab.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 12 Dec 2023 23:07:39 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=byUKYb5/;
+ spf=pass (domain: gmail.com, ip: 209.85.167.182, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f182.google.com with SMTP id 5614622812f47-3b9d2b8c3c6so4982117b6e.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 12 Dec 2023 23:07:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1702451259; x=1703056059; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1702451256; x=1703056056; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:date:message-id:subject
-         :references:in-reply-to:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=QJM3Xb66Wl1tWN1KaKpXIs5WNk3umTK4t2vYHdVBsIk=;
-        b=HONJq2VYxuwlAEvGzsminM3uj34Vm59RQl08WrTWTJ82rFVjWPumY5BeeRk+BBI4Oa
-         3GUvZp6ZKw91FY9ztjsUQOLgZtgJOAABkIv3a2uFM/KXE5vWXlTLnkN7sHQfZqFkhsBv
-         ezvcith5xh0jYB+EfiGJl+2rnO4GV3l59UWapmjkBpFjoO+oHkZpDwPB43zZ4+pagLIi
-         dJyknNXgD3Sd94f48sy+xWuC+zA/wzzs9EzXa8757npJx1kuRYg9mB+lzGFjYcJMBPbt
-         86E+KTzu110zKpxNvuZyo1/mMzQJ4QrQmrLAxxU9Y6fNtbMUG+DEcVjVban2y70t9Kqt
-         RpJg==
+         :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=TFUuF1dRmNcODqi2r6o2jRrDbPbEbdMya6MjlNCPDzg=;
+        b=byUKYb5/g2muK3zc+EJ8lNCzMPW81pe9THRs6gwOmHNXBpdHNKKla0tRNTEjlcjtuz
+         Q2OH/rXXuv9SLSmesvD8iqaGD2G5DgHRpwhET59atTpOUjZAXL/FwQb66Cf1xYmD8SIe
+         z0X9ig5Ofpg1eOOGlCfnIoFDQbSTu0auIR7+sJopYc2XYMOyfwBezWp0bi7QTTuxGPBb
+         XHG1RKKCNck1UGwcc4TrZWWuXNJQM47QDWKCXcgoqEZFq0yjofOBSXomQ+RxDlvAY3ZI
+         HkJnLChn7IxMFioBiVrkRFJ3eLqEbER4vNyFGq8GVAONIeICQ7ycQY/Z8Pr+SFUpU10l
+         pWcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702451259; x=1703056059;
+        d=1e100.net; s=20230601; t=1702451256; x=1703056056;
         h=content-transfer-encoding:mime-version:date:message-id:subject
-         :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+         :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=QJM3Xb66Wl1tWN1KaKpXIs5WNk3umTK4t2vYHdVBsIk=;
-        b=WtNddYND2xLSoaUrFPyDI1EDqXnq6Hh9LNv8+6P4oz89cAKiaUS6FdM7hwfr5oKJHs
-         I++hZND+0CtncA80+XbMvEQaWz0bV6CEFkoxEiQqpzO593vX5iSaAiW/YV3YHMK70Lfa
-         hBAa4FqaDZpQd9EMMb0oBUtw6sxP4znf4uhyIDQesHEbnSnaRLYTE0FwG90Tcdp9wnq5
-         je1FCCLk95QqkDd2AzFwylPGYxHgi6r6f2sf0JcfOKoJe27AzR3xAxVbEbhnRN4irZjL
-         9v+esS+dN3ddWsn2DFtHBRyIGHQcQvmN130+nekgbIW0BhcLGtdv+/lnHuuCOjhVc27/
-         UAIA==
-X-Gm-Message-State: AOJu0YyWH8AibaKQ6axU8yLh7ks4gAoPa07RlbMN1jHnk56aXsiKXdyV
-	5JqF+ZqD/G2TibBTkxWuidXAIx77h1I=
-X-Google-Smtp-Source: AGHT+IGYJLsE7k3Ei/8w23veYFu1/Q7Sz2OZyvwRmuhi1XjigYw+YyD1+yr8W2+GnTmcDUfrKFs02A==
-X-Received: by 2002:a05:6e02:188d:b0:35f:6818:3039 with SMTP id o13-20020a056e02188d00b0035f68183039mr2037429ilu.42.1702451258997;
-        Tue, 12 Dec 2023 23:07:38 -0800 (PST)
+        bh=TFUuF1dRmNcODqi2r6o2jRrDbPbEbdMya6MjlNCPDzg=;
+        b=HOkuZMM44xh+Vx4Q3yIUtMrqSP6IEqaLisxZgG8SVfSM4ofMPjFS0mIyB/cT8KQv3Y
+         dbs5K/w9xPmC8wlPvSU6O9R5w45OPZWtOs49cRnfE5nACIhq7nBmxrNq3GVRo944eBAQ
+         KHdw1/w/A8LCpCRcEDzGkBVdmG5rghSPqF0mcDHozKr0513j6zIXVy8mC8thWqtzmpGZ
+         1kwnQwiIn68iD43GlH9BX4f6sr4Zu9stnurWqsqRQOCXUMOfO9bS75uXMX/sfb4Lqyz8
+         2mDQTYCRf9EFXkomddzDHz03SFc9fNLrN+BxjevxKfVkvlwYTbOD9T+P7JsRXhW3cRXy
+         1WsQ==
+X-Gm-Message-State: AOJu0YytC+plmlGTsfoJcpJSjc5wxiOIjVatHiQcb/xIULV254Uzl5X4
+	5Ks20+X1ewxGhOe/KYsaO8MvZMEcCRM=
+X-Google-Smtp-Source: AGHT+IFvApzrvJvS+5u+AsILfTCHYattiQIbFV46GqysXSibnm68Ndl+x6hZOozqXHG0iCNnUZv5PA==
+X-Received: by 2002:a05:6808:1928:b0:3b8:b063:8247 with SMTP id bf40-20020a056808192800b003b8b0638247mr8996430oib.73.1702451256525;
+        Tue, 12 Dec 2023 23:07:36 -0800 (PST)
 Received: from apollo.localdomain ([2601:646:9d80:4380::4b6f])
-        by smtp.gmail.com with ESMTPSA id v29-20020a63481d000000b005c19c586cb7sm9218151pga.33.2023.12.12.23.07.38
+        by smtp.gmail.com with ESMTPSA id v29-20020a63481d000000b005c19c586cb7sm9218151pga.33.2023.12.12.23.07.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 12 Dec 2023 23:07:38 -0800 (PST)
+        Tue, 12 Dec 2023 23:07:36 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org, 
- =?utf-8?q?Zolt=C3=A1n_B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
-Cc: =?utf-8?q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-In-Reply-To: <20231208095009.319210-1-zboszor@gmail.com>
-References: <20231208095009.319210-1-zboszor@gmail.com>
-Subject: Re: [meta-gnome][PATCH] zenity: Upgrade to 4.0.0
-Message-Id: <170245125829.133993.12188266569146684689.b4-ty@gmail.com>
-Date: Tue, 12 Dec 2023 23:07:38 -0800
+ alperak <alperyasinak1@gmail.com>
+In-Reply-To: <20231207183254.1753575-1-alperyasinak1@gmail.com>
+References: <20231207183254.1753575-1-alperyasinak1@gmail.com>
+Subject: Re: [meta-oe][PATCHv2] xf86-video-mga: upgrade 2.0.0 -> 2.0.1
+Message-Id: <170245125572.133993.9257570349207544957.b4-ty@gmail.com>
+Date: Tue, 12 Dec 2023 23:07:35 -0800
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.12.4
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 13 Dec 2023 07:07:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107378
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107375
 
 
-On Fri, 08 Dec 2023 10:50:09 +0100, Zoltán Böszörményi wrote:
-> zenity 4.x now uses GTK4 and GTK4-based webkitgtk.
+On Thu, 07 Dec 2023 21:32:54 +0300, alperak wrote:
+> * checkfile.patch removed because fixed in the new version -> https://gitlab.freedesktop.org/xorg/driver/xf86-video-mga/-/commit/f227f2f286123a9ca64b567783825a2c18b87971
+> * License-Update: Fixed the typo in a word. "MERCHANTIBILITY" -> "MERCHANTABILITY"
 > 
-> The perl based gdialog is no more, its subpackage would be empty.
-> Don't try to generate this subpackage.
+> Changelog:
 > 
+> * Fix uninitialized read in MGAEnableSecondOutPut
+> * gitlab CI: add a basic build test
+> * Fix spelling/wording issues
+> * Build xz tarballs instead of bzip2
+> * configure.ac: fix cross-compilation
 > 
+> [...]
 
 Applied, thanks!
 
-[1/1] zenity: Upgrade to 4.0.0
-      commit: 0f9e5d1f9b62af785a65c1d5e6ab3b5d11befbff
+[1/1] xf86-video-mga: upgrade 2.0.0 -> 2.0.1
+      commit: f3c7c83bf40cd59ba9ba954ebceaaa68dd7f7bd7
 
 Best regards,
 -- 
