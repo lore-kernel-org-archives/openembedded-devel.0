@@ -1,83 +1,76 @@
-Return-Path: <robert.joslyn@redrectangle.org>
+Return-Path: <derek@asterius.io>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B97EFC4332F
-	for <webhook@archiver.kernel.org>; Thu, 14 Dec 2023 03:36:04 +0000 (UTC)
-Received: from wilbur.contactoffice.com (wilbur.contactoffice.com [212.3.242.68])
- by mx.groups.io with SMTP id smtpd.web11.14275.1702524961414407130
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A424C4332F
+	for <webhook@archiver.kernel.org>; Thu, 14 Dec 2023 04:53:45 +0000 (UTC)
+Received: from mail-io1-f50.google.com (mail-io1-f50.google.com [209.85.166.50])
+ by mx.groups.io with SMTP id smtpd.web11.15252.1702529617652423206
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 13 Dec 2023 19:36:01 -0800
+ Wed, 13 Dec 2023 20:53:37 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=robert.joslyn@redrectangle.org header.s=20230812-3u04 header.b=a6e54Vxo;
- spf=pass (domain: redrectangle.org, ip: 212.3.242.68, mailfrom: robert.joslyn@redrectangle.org)
-Received: from smtpauth1.co-bxl (smtpauth1.co-bxl [10.2.0.15])
-	by wilbur.contactoffice.com (Postfix) with ESMTP id 6333E602;
-	Thu, 14 Dec 2023 04:35:58 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1702524958;
-	s=20230812-3u04; d=redrectangle.org;
-	i=robert.joslyn@redrectangle.org;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Transfer-Encoding;
-	l=1420; bh=Mt7bxmKz0wAw7saFGHGW+jnNjl3LJArOqnP3NJeO27Q=;
-	b=a6e54VxoyAjLKDHZRSImzz+IIIQdhQ1A7qb4A38/S3W9B/MTpKCCtKAMahsgmv2R
-	bPkNYk/FxBDeCEA3M/w3IfJW5D7v3Cq93C1wQQkSft5yz0E7ncpS6fhTM33KWmryg1j
-	Gzspm0gHLKGCsoK+hXStWfnWjH1ogprJqv+A4YUFxWY7DP6Znr+tNrghTnVxylkb8NB
-	SeCEP+jbReKQrgJ0SwsHaIHFkosvpwJyU6Q4g0jsqER7BPeF3370oDHYdFLSFNXv+T1
-	OXEFKvBegxv6dZt3tnlaPfuRFIM3wjKVhAyN7TrVWlYzji6+4XfKmChphslwe4u4ver
-	FHtz7AzZSw==
-Received: by smtp.mailfence.com with ESMTPSA ; Thu, 14 Dec 2023 04:35:55 +0100 (CET)
-From: robert.joslyn@redrectangle.org
+ dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.166.50, mailfrom: straka.derek@gmail.com)
+Received: by mail-io1-f50.google.com with SMTP id ca18e2360f4ac-7b783ee485eso51923739f.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 13 Dec 2023 20:53:37 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1702529616; x=1703134416;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=swXvEJlNYuuJrGguupPfhlJ3kfoRAR+X6N8WzF1oG7g=;
+        b=Gv6viLerbI+iCViCSd95/Mr2kPN3xcrqcgG7ctnDDXNtSFm6l+coc4P9J2qvbcSJWL
+         25Py/iM++FlNuAsQXtZ1ukvAtBtMbon5qDzI9BzN2XWgLM0GQ2W04NnpJBmzvKUcO/ZY
+         ODq2aWy3p6Kc7T5wK6RoKfmCDS0P7cYDEmzKiwAYZ7RwPk4IUxwNWqyyCVD3ca/eoqL0
+         Q5DjyuP+AYdd4BexFb4BIEFz5UBYueAxrNaFvUprjZfS3gdoWINcty5reBQe4lUfg6PG
+         McLI0MhmMTSH4nh2iLsgZyqDkYS2FLRoZv87h8/3qFXmIb7jGRpHAbRC1Q7eSezw63rs
+         bbxg==
+X-Gm-Message-State: AOJu0Yx+InqVk+3ZGlvjMLTtDcQzQDPkr0vDYejPtmeJzlzxfM0rgVvB
+	EXd4NshjmVJKCwlkj1m7ZJn2t+Uc1dmucw==
+X-Google-Smtp-Source: AGHT+IEWQFmOhzFR8ssw4g0u8GCUCsRk78JT0xTjicw8v6IvJsUUXzAWFkK6feftxz8ISvKq9w05oQ==
+X-Received: by 2002:a5d:8247:0:b0:7b7:4b32:7984 with SMTP id n7-20020a5d8247000000b007b74b327984mr4744559ioo.21.1702529615910;
+        Wed, 13 Dec 2023 20:53:35 -0800 (PST)
+Received: from sparta.internal.asterius.io (c-73-228-213-122.hsd1.mn.comcast.net. [73.228.213.122])
+        by smtp.gmail.com with ESMTPSA id v25-20020a5ed719000000b007b39670c070sm3589215iom.52.2023.12.13.20.53.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 13 Dec 2023 20:53:35 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Cc: Robert Joslyn <robert.joslyn@redrectangle.org>
-Subject: [meta-oe][dunfell][PATCH] postgresql: Update to 12.17
-Date: Wed, 13 Dec 2023 19:35:41 -0800
-Message-ID: <20231214033541.4077877-1-robert.joslyn@redrectangle.org>
-X-Mailer: git-send-email 2.41.0
+Cc: Derek Straka <derek@asterius.io>
+Subject: [meta-python][PATCH] python3-tox: update to version 4.11.4
+Date: Thu, 14 Dec 2023 04:53:17 +0000
+Message-Id: <20231214045317.1187049-1-derek@asterius.io>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-ContactOffice-Account: com:454140407
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 14 Dec 2023 03:36:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107408
+ <openembedded-devel@lists.openembedded.org>; Thu, 14 Dec 2023 04:53:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107409
 
-From: Robert Joslyn <robert.joslyn@redrectangle.org>
-
-Minor security and bugfix release. Addresses the following CVEs:
-
-CVE-2023-5868: Memory disclosure in aggregate function calls
-CVE-2023-5869: Buffer overrun from integer overflow in array modification
-CVE-2023-5870: Role pg_signal_backend can signal certain superuser proces=
-ses
-
-Additional information is available in the release notes:
-https://www.postgresql.org/docs/release/12.17/
-
-Signed-off-by: Robert Joslyn <robert.joslyn@redrectangle.org>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../postgresql/{postgresql_12.16.bb =3D> postgresql_12.17.bb}     | 2 +-
+ .../python/{python3-tox_4.11.3.bb => python3-tox_4.11.4.bb}     | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-dbs/postgresql/{postgresql_12.16.bb =3D> postgres=
-ql_12.17.bb} (73%)
+ rename meta-python/recipes-devtools/python/{python3-tox_4.11.3.bb => python3-tox_4.11.4.bb} (92%)
 
-diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_12.16.bb b/meta-oe=
-/recipes-dbs/postgresql/postgresql_12.17.bb
-similarity index 73%
-rename from meta-oe/recipes-dbs/postgresql/postgresql_12.16.bb
-rename to meta-oe/recipes-dbs/postgresql/postgresql_12.17.bb
-index 134826220..e9f9f50a2 100644
---- a/meta-oe/recipes-dbs/postgresql/postgresql_12.16.bb
-+++ b/meta-oe/recipes-dbs/postgresql/postgresql_12.17.bb
-@@ -8,4 +8,4 @@ SRC_URI +=3D "\
-    file://0001-Improve-reproducibility.patch \
- "
-=20
--SRC_URI[sha256sum] =3D "c5f1fff7a0f93e1ec3746417b0594290ece617b4995ed95b=
-8d527af0ba0e38f3"
-+SRC_URI[sha256sum] =3D "93e8e1b23981d5f03c6c5763f77b28184c1ce4db7194fa46=
-6e2edb65d9c1c5f6"
---=20
-2.41.0
+diff --git a/meta-python/recipes-devtools/python/python3-tox_4.11.3.bb b/meta-python/recipes-devtools/python/python3-tox_4.11.4.bb
+similarity index 92%
+rename from meta-python/recipes-devtools/python/python3-tox_4.11.3.bb
+rename to meta-python/recipes-devtools/python/python3-tox_4.11.4.bb
+index be42c4b6f..62c15a7db 100644
+--- a/meta-python/recipes-devtools/python/python3-tox_4.11.3.bb
++++ b/meta-python/recipes-devtools/python/python3-tox_4.11.4.bb
+@@ -6,7 +6,7 @@ HOMEPAGE = "http://tox.readthedocs.org/"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=11610a9d8fd95649cf8159be12b98cb7"
+ 
+-SRC_URI[sha256sum] = "5039f68276461fae6a9452a3b2c7295798f00a0e92edcd9a3b78ba1a73577951"
++SRC_URI[sha256sum] = "73a7240778fabf305aeb05ab8ea26e575e042ab5a18d71d0ed13e343a51d6ce1"
+ 
+ BBCLASSEXTEND = "native nativesdk"
+ inherit pypi python_hatchling
+-- 
+2.34.1
 
 
