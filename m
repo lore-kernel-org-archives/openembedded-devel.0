@@ -1,75 +1,80 @@
-Return-Path: <derek@asterius.io>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C340C4332F
-	for <webhook@archiver.kernel.org>; Thu, 14 Dec 2023 05:41:55 +0000 (UTC)
-Received: from mail-io1-f54.google.com (mail-io1-f54.google.com [209.85.166.54])
- by mx.groups.io with SMTP id smtpd.web10.15776.1702532509648487760
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D4A2CC4332F
+	for <webhook@archiver.kernel.org>; Thu, 14 Dec 2023 08:39:56 +0000 (UTC)
+Received: from esa1.hc1455-7.c3s2.iphmx.com (esa1.hc1455-7.c3s2.iphmx.com [207.54.90.47])
+ by mx.groups.io with SMTP id smtpd.web11.17624.1702543188868738735
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 13 Dec 2023 21:41:49 -0800
+ Thu, 14 Dec 2023 00:39:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.166.54, mailfrom: straka.derek@gmail.com)
-Received: by mail-io1-f54.google.com with SMTP id ca18e2360f4ac-7b6f43740b4so307690339f.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 13 Dec 2023 21:41:49 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702532508; x=1703137308;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=r5SYK/b8Woid/ZKIqmmZpN8208UptEoqPmKM4SqwnvI=;
-        b=PIX8x9UKfMITmeWfXO4vjy2kbEt+6djW0Y6NriE4LDON0j6mxSHifWgCSiAva2+leR
-         UfAxhafXF+vaaNIor74rLyMhQ6f1Id+dyv9F6ykwNIMM9qjCPuPCf8rp1+qLccxeTVFw
-         llJ/VU4VDwLg/G5V86tYTfYksqPz4Ls4QIhM2JgdOpfObowOvDYuBzsSRjO3Y5oN/5Nd
-         8t14t9sJVw+erolOIdyr0vnBdMi5XlBurcOmHKA4e13EHML5eTqTrbC0deP9cNFK4eZy
-         f8o/Kfhs+i1bdtmGcumt/iRMN0b40rGaiG0ngtGjoTpSJ08X93+VhMgbQvW5KtFDYCT8
-         2APg==
-X-Gm-Message-State: AOJu0YwkwkAqhuUoa3f+yo0LeVilhQwWabpT8vc2vEpFKFSMxGKA+Gzv
-	ZEE9vEBYGCvbLAcG2w1AtZVC0Jv/ulhYXA==
-X-Google-Smtp-Source: AGHT+IG1vHyCLT072PtihFnzfDxvexSoiV6hr4JbMRwRuQ40vD1qiNgz4uUk7MosV+jrAikXSDTAaw==
-X-Received: by 2002:a05:6602:21cb:b0:7b7:3dad:99e2 with SMTP id c11-20020a05660221cb00b007b73dad99e2mr7632950ioc.39.1702532507954;
-        Wed, 13 Dec 2023 21:41:47 -0800 (PST)
-Received: from sparta.internal.asterius.io (c-73-228-213-122.hsd1.mn.comcast.net. [73.228.213.122])
-        by smtp.gmail.com with ESMTPSA id az12-20020a056638418c00b00466a2a9e5b0sm3204399jab.32.2023.12.13.21.41.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 13 Dec 2023 21:41:47 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
+ dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 207.54.90.47, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10923"; a="143159456"
+X-IronPort-AV: E=Sophos;i="6.04,274,1695654000"; 
+   d="scan'208";a="143159456"
+Received: from unknown (HELO oym-r3.gw.nic.fujitsu.com) ([210.162.30.91])
+  by esa1.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Dec 2023 17:39:47 +0900
+Received: from oym-m1.gw.nic.fujitsu.com (oym-nat-oym-m1.gw.nic.fujitsu.com [192.168.87.58])
+	by oym-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 96008CA244
+	for <openembedded-devel@lists.openembedded.org>; Thu, 14 Dec 2023 17:39:44 +0900 (JST)
+Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
+	by oym-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id BDC4CD8AE7
+	for <openembedded-devel@lists.openembedded.org>; Thu, 14 Dec 2023 17:39:43 +0900 (JST)
+Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.165])
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id C7BCA354C6E;
+	Thu, 14 Dec 2023 17:39:42 +0900 (JST)
+From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-python][PATCH] python3-ipython: update to version 8.18.1
-Date: Thu, 14 Dec 2023 05:41:39 +0000
-Message-Id: <20231214054139.1220161-1-derek@asterius.io>
-X-Mailer: git-send-email 2.34.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-alembic: upgrade 1.12.1 -> 1.13.0
+Date: Thu, 14 Dec 2023 16:39:34 +0800
+Message-Id: <1702543174-27307-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28056.006
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28056.006
+X-TMASE-Result: 10-1.473700-10.000000
+X-TMASE-MatchedRID: 4E21WKQgrFSjz0nOeth/yUIIxwDaU5mrBgA+oehWZhGU8ftiyKjZrdMj
+	jwb9QfV2CC8aAmGeO6lV00+whwxVQy/7QU2czuUNuce7gFxhKa0BQOqUsWgx5gIZ++dWnH7bnpt
+	r8PnHpyni8zVgXoAltuJ5hXsnxp7jC24oEZ6SpSmcfuxsiY4QFODeSwmIL3cFCCWOn8YuuUis4L
+	QJsVfGagbprO+qza97F8bp1oJxeZULiMAaywnNzDhL2oUySnz1hyey6YztZglozbbYGB339+x9n
+	1XpDqsJmC9SiJioatWbjnu8jwgbwH9jicWwFYB0PpCuffGH9zI=
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 14 Dec 2023 05:41:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107421
+ <openembedded-devel@lists.openembedded.org>; Thu, 14 Dec 2023 08:39:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107422
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+From: Wang Mingyu <wangmy@fujitsu.com>
+
+Changelog:
+ https://alembic.sqlalchemy.org/en/latest/changelog.html
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-ipython_8.18.0.bb => python3-ipython_8.18.1.bb}    | 2 +-
+ .../{python3-alembic_1.12.1.bb => python3-alembic_1.13.0.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-ipython_8.18.0.bb => python3-ipython_8.18.1.bb} (88%)
+ rename meta-python/recipes-devtools/python/{python3-alembic_1.12.1.bb => python3-alembic_1.13.0.bb} (81%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-ipython_8.18.0.bb b/meta-python/recipes-devtools/python/python3-ipython_8.18.1.bb
-similarity index 88%
-rename from meta-python/recipes-devtools/python/python3-ipython_8.18.0.bb
-rename to meta-python/recipes-devtools/python/python3-ipython_8.18.1.bb
-index aaeb720e6..5a7e1fbc5 100644
---- a/meta-python/recipes-devtools/python/python3-ipython_8.18.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-ipython_8.18.1.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING.rst;md5=59b20262b8663cdd094005bddf47af5f"
+diff --git a/meta-python/recipes-devtools/python/python3-alembic_1.12.1.bb b/meta-python/recipes-devtools/python/python3-alembic_1.13.0.bb
+similarity index 81%
+rename from meta-python/recipes-devtools/python/python3-alembic_1.12.1.bb
+rename to meta-python/recipes-devtools/python/python3-alembic_1.13.0.bb
+index 107546dbf..865dd017c 100644
+--- a/meta-python/recipes-devtools/python/python3-alembic_1.12.1.bb
++++ b/meta-python/recipes-devtools/python/python3-alembic_1.13.0.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e3023b042cb6002cb398344b51c67093"
  
- PYPI_PACKAGE = "ipython"
+ inherit pypi setuptools3
  
--SRC_URI[sha256sum] = "4feb61210160f75e229ce932dbf8b719bff37af123c0b985fd038b14233daa16"
-+SRC_URI[sha256sum] = "ca6f079bb33457c66e233e4580ebfc4128855b4cf6370dddd73842a9563e8a27"
+-SRC_URI[sha256sum] = "bca5877e9678b454706347bc10b97cb7d67f300320fa5c3a94423e8266e2823f"
++SRC_URI[sha256sum] = "ab4b3b94d2e1e5f81e34be8a9b7b7575fc9dd5398fccb0bef351ec9b14872623"
  
- RDEPENDS:${PN} = "\
-     ${PYTHON_PN}-setuptools \
+ PYPI_PACKAGE = "alembic"
+ 
 -- 
 2.34.1
 
