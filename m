@@ -2,131 +2,139 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 325D7C4332F
-	for <webhook@archiver.kernel.org>; Thu, 14 Dec 2023 16:47:20 +0000 (UTC)
-Received: from mail-ot1-f46.google.com (mail-ot1-f46.google.com [209.85.210.46])
- by mx.groups.io with SMTP id smtpd.web10.27732.1702572431274998678
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 87AB3C4332F
+	for <webhook@archiver.kernel.org>; Thu, 14 Dec 2023 17:39:20 +0000 (UTC)
+Received: from mail-oa1-f43.google.com (mail-oa1-f43.google.com [209.85.160.43])
+ by mx.groups.io with SMTP id smtpd.web11.29148.1702575554798541356
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 14 Dec 2023 08:47:11 -0800
+ Thu, 14 Dec 2023 09:39:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=dptGUAXl;
- spf=pass (domain: gmail.com, ip: 209.85.210.46, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f46.google.com with SMTP id 46e09a7af769-6da3a585c29so1301660a34.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 14 Dec 2023 08:47:11 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Cp2jSFw8;
+ spf=pass (domain: gmail.com, ip: 209.85.160.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f43.google.com with SMTP id 586e51a60fabf-1fa1c3755afso395305fac.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 14 Dec 2023 09:39:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1702572430; x=1703177230; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1702575554; x=1703180354; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=oRN+4dE7gv06YOVxcBv6WoxYl5O663a3FOGc4S+zqZg=;
-        b=dptGUAXlj8q9a59uurX/XIfBr9e4aMPTTNEEZKXZPmUqMb7E+P3bM8GO9qRz80YBjT
-         0ehMV0tJN5ZsnS6eNfKmCEc+JAlvoI2yCfcewH8guyRIFI2yQmHoie+Q723OM7EiN5Vj
-         IVrqNMDNqU0bJB/39h2XxYkI21ligZRELNceOb7dnB48rQtZSd10+tiiAWepxvKMsnUb
-         D6KLC1SkqH7XIERe9sCvsiTEznR66MKtLMJvnsC+alRGfA3TbZ2ewCsCpQ8BS7/ifBCz
-         hemvp/lPCqRsj/heO+Fj5NAu8dpQDDfrwP/vv7uAHPzr0ocmI4YsfgrHhq23zWMjmtAc
-         ZHKQ==
+        bh=SPNUvaYZ0q0IA5/GW3K+gfvo/qY5tsIBLVcqKJfapkI=;
+        b=Cp2jSFw8YH53ADXpSN4KMzgQL9vgCCQl54NPG2lbUHL5Mry3vauUVnQBzxhs28Jduf
+         9vWmGQostdRILtOSE/935/wsr9nz+1agNHD0SNxKnvMomFdHL2g0dBIdaqNP2hQgazzQ
+         lHxl+Bu1AcOeRGXp7tFa59Yuu5IhjuC1jou+CDn3z/dPJ3hZyPSrQwVOYB4GWrg36Daz
+         O+vn9SGiifPwef5cFP7S1JGZhiAvWisSuebunjho8PFD6JhhKyTygYi9vKxKQVx9K5WI
+         DJNceHCth6mAsZqBc99Y1FsXrqk3n+7is2YuCUIriMW9+ce/12Uj9g1YlaDDaHelXRoY
+         /LfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702572430; x=1703177230;
+        d=1e100.net; s=20230601; t=1702575554; x=1703180354;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=oRN+4dE7gv06YOVxcBv6WoxYl5O663a3FOGc4S+zqZg=;
-        b=onJjaSG12YQ6vq4pFaFYEVx9ZJrL9Zf+as0oApU9fPxXO7+y+kGYxo/ePMg+TZJI/d
-         s+xC5E/XExLqYRLUyFeISEdWSV8vuPD0HpnsWmRvAIaj3XzgrqBeZ5KzF3pD0jnFrOoB
-         561ogkY0xDk7MAV2Fz9glhXSGbcyBOfYvkjFhxgnRSw7MvrBu9wd3T/Tt1H9+6m0tG7n
-         0/bZkm9P7GMUBYFBfk0M1cEEEQ+ZdIflTZ6d71D1AETHZrZLMcagVtNtHaS7Dn2+9q+5
-         OyZfREg1o6LfHNIRpnWAIU9EcmjDDOIaXU7IV5L4+FmYp84HTFFiDOPRymbmhHhNSHcV
-         cYCQ==
-X-Gm-Message-State: AOJu0YxaMy9wljF6kk6dCw8QT4SRtS80DcGiEBa8y3/RCshZ9pyWX0sh
-	/8+S9OS25eUgzpeCyo9wcUNiZvmmpnI1IgoLCd1ge3g7
-X-Google-Smtp-Source: AGHT+IG6vNivRQFh+Fe+Ed52zqaQEhj+BU0KBBZKKwn00O2DiJ/B4IyQKAssn3vLeml+j7DBTuenLSCeFUbdS1pgSPs=
-X-Received: by 2002:a05:6870:7029:b0:1fb:75b:2fd4 with SMTP id
- u41-20020a056870702900b001fb075b2fd4mr11778240oae.107.1702572430288; Thu, 14
- Dec 2023 08:47:10 -0800 (PST)
+        bh=SPNUvaYZ0q0IA5/GW3K+gfvo/qY5tsIBLVcqKJfapkI=;
+        b=sCjxafqNqYkquxO0mQDcf0pCD50eC9OXHTccyMtX/22Jx+hNA9WywxDZ094ddrnaGH
+         59jq70AoKGl3WppZRMKaMr7wnVeABklFcCKtgPGUsP2hvmaixrp2AwRn0lMTpdPGt9kU
+         Qf3PtDlqsP3zz1eq/3yh97I3jf879i9NPHEkgLxdm7/dQEYI5s/lqgrsPz8FSc+9MeB8
+         hMX1QOIB9DG80QoKH3TxOKRsDAF+1v+koM1zzHKyAg6+qMK+15YrceovRlSLYAoCyWJ7
+         QG+Wa8UvtxtkYkf0SdJ6boq31Ca5m0krs2t8LIqijiLwA8rsEsWDkmUlgg2lw2v7KzOI
+         6jhw==
+X-Gm-Message-State: AOJu0YwRaL6nl1qE0cBEr7rlHQPNVN2iADHKwbs42nZHsBLLhySUKSO8
+	kapRl2E61pe7junkBeuIBgEgA7HNveTVGMLejFXlFKva25w=
+X-Google-Smtp-Source: AGHT+IH0CWgmDLGW1ufjdrywR1SV7sddklI2AjG7AcaAWeWdJsgUff03fiedVWnb0yla5YkZlDovtQVaL8PKIT2UeLg=
+X-Received: by 2002:a05:6870:912a:b0:203:3df9:47f9 with SMTP id
+ o42-20020a056870912a00b002033df947f9mr777652oae.47.1702575553836; Thu, 14 Dec
+ 2023 09:39:13 -0800 (PST)
 MIME-Version: 1.0
-References: <20231214103812.512113-1-meenali.gupta@windriver.com>
-In-Reply-To: <20231214103812.512113-1-meenali.gupta@windriver.com>
+References: <1702544699-28431-1-git-send-email-wangmy@fujitsu.com>
+In-Reply-To: <1702544699-28431-1-git-send-email-wangmy@fujitsu.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 14 Dec 2023 08:46:44 -0800
-Message-ID: <CAMKF1spE4bd8H3ATZOKcxYP01Cstp2hvBXZ9Qc9DeC8pQtoVWw@mail.gmail.com>
-Subject: Re: [oe][meta-webserver][kirkstone][PATCH 1/1] nginx: upgrade 1.25.2
- -> 1.25.3
-To: meenali.gupta@windriver.com
+Date: Thu, 14 Dec 2023 09:38:47 -0800
+Message-ID: <CAMKF1soK6wH5TnX3eC1VKJXg3a58GQKKD196WE19fqGy1KRJYA@mail.gmail.com>
+Subject: Re: [oe] [meta-python] [PATCH] python3-pyzmq: upgrade 25.1.1 -> 25.1.2
+To: wangmy <wangmy@fujitsu.com>
 Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 14 Dec 2023 16:47:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107454
+ <openembedded-devel@lists.openembedded.org>; Thu, 14 Dec 2023 17:39:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107455
 
-we need this on master as well. Its good to mention the branches a
-patch is needed in subject. Its fine to mention more than one if it
-applied directly to all of the requested branches.
-I almost ignored it as it said kirkstone alone.
+there was a patch submitted for this upgrade earlier
+https://patchwork.yoctoproject.org/project/oe/patch/20231214003919.1179147-=
+1-derek@asterius.io/
 
-On Thu, Dec 14, 2023 at 2:38=E2=80=AFAM Meenali Gupta via
-lists.openembedded.org
-<meenali.gupta=3Dwindriver.com@lists.openembedded.org> wrote:
+On Thu, Dec 14, 2023 at 1:05=E2=80=AFAM wangmy <wangmy@fujitsu.com> wrote:
 >
-> From: Meenali Gupta <meenali.gupta@windriver.com>
+> From: Wang Mingyu <wangmy@fujitsu.com>
 >
-> Changelog:
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> https://nginx.org/en/CHANGES
+> club-rpath-out.patch
+> refreshed for version 25.1.2
 >
-> *) Change: improved detection of misbehaving clients when using HTTP/2.
->
-> *) Feature: startup speedup when using a large number of locations.
->        Thanks to Yusuke Nojima.
->
-> *) Bugfix: a segmentation fault might occur in a worker process when
->        using HTTP/2 without SSL; the bug had appeared in 1.25.1.
->
-> *) Bugfix: the "Status" backend response header line with an empty
->        reason phrase was handled incorrectly.
->
-> *) Bugfix: memory leak during reconfiguration when using the PCRE2
->        library.
->        Thanks to ZhenZhong Wu.
->
-> *) Bugfixes and improvements in HTTP/3.
->
-> Signed-off-by: Meenali Gupta <meenali.gupta@windriver.com>
+> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 > ---
->  .../recipes-httpd/nginx/{nginx_1.25.2.bb =3D> nginx_1.25.3.bb}    | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-webserver/recipes-httpd/nginx/{nginx_1.25.2.bb =3D> nginx_1.=
-25.3.bb} (51%)
+>  .../python/python3-pyzmq/club-rpath-out.patch               | 6 +++---
+>  .../{python3-pyzmq_25.1.1.bb =3D> python3-pyzmq_25.1.2.bb}    | 2 +-
+>  2 files changed, 4 insertions(+), 4 deletions(-)
+>  rename meta-python/recipes-devtools/python/{python3-pyzmq_25.1.1.bb =3D>=
+ python3-pyzmq_25.1.2.bb} (94%)
 >
-> diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.25.2.bb b/meta-we=
-bserver/recipes-httpd/nginx/nginx_1.25.3.bb
-> similarity index 51%
-> rename from meta-webserver/recipes-httpd/nginx/nginx_1.25.2.bb
-> rename to meta-webserver/recipes-httpd/nginx/nginx_1.25.3.bb
-> index 66eef23895..8aa9fa0267 100644
-> --- a/meta-webserver/recipes-httpd/nginx/nginx_1.25.2.bb
-> +++ b/meta-webserver/recipes-httpd/nginx/nginx_1.25.3.bb
-> @@ -2,5 +2,5 @@ require nginx.inc
+> diff --git a/meta-python/recipes-devtools/python/python3-pyzmq/club-rpath=
+-out.patch b/meta-python/recipes-devtools/python/python3-pyzmq/club-rpath-o=
+ut.patch
+> index 61aeaca5f..2dae7d1e2 100644
+> --- a/meta-python/recipes-devtools/python/python3-pyzmq/club-rpath-out.pa=
+tch
+> +++ b/meta-python/recipes-devtools/python/python3-pyzmq/club-rpath-out.pa=
+tch
+> @@ -1,4 +1,4 @@
+> -From efae4e08d13e0958d929ea524e21c0a210b31982 Mon Sep 17 00:00:00 2001
+> +From 8ef6a7bdc0669e85822188f7734b53bc64f54a89 Mon Sep 17 00:00:00 2001
+>  From: Leon Anavi <leon.anavi@konsulko.com>
+>  Date: Fri, 22 Jan 2021 11:41:12 +0200
+>  Subject: [PATCH] setup.py: Adjust _add_rpath
+> @@ -14,10 +14,10 @@ Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+>   1 file changed, 3 deletions(-)
 >
->  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D79ad2eb837299421c4435dedc8897=
-b3d"
+>  diff --git a/setup.py b/setup.py
+> -index b634d94..7f6a2f1 100755
+> +index 4ac4788..e917825 100755
+>  --- a/setup.py
+>  +++ b/setup.py
+> -@@ -235,9 +235,6 @@ def _add_rpath(settings, path):
+> +@@ -215,9 +215,6 @@ def _add_rpath(settings, path):
+>       """
+>       if sys.platform =3D=3D 'darwin':
+>           settings['extra_link_args'].extend(['-Wl,-rpath', '-Wl,%s' % pa=
+th])
+> diff --git a/meta-python/recipes-devtools/python/python3-pyzmq_25.1.1.bb =
+b/meta-python/recipes-devtools/python/python3-pyzmq_25.1.2.bb
+> similarity index 94%
+> rename from meta-python/recipes-devtools/python/python3-pyzmq_25.1.1.bb
+> rename to meta-python/recipes-devtools/python/python3-pyzmq_25.1.2.bb
+> index 504ef7abc..658dbe6e2 100644
+> --- a/meta-python/recipes-devtools/python/python3-pyzmq_25.1.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-pyzmq_25.1.2.bb
+> @@ -13,7 +13,7 @@ SRC_URI:append =3D " \
+>      file://club-rpath-out.patch \
+>      file://run-ptest \
+>  "
+> -SRC_URI[sha256sum] =3D "259c22485b71abacdfa8bf79720cd7bcf4b9d128b30ea554=
+f01ae71fdbfdaa23"
+> +SRC_URI[sha256sum] =3D "93f1aa311e8bb912e34f004cf186407a4e90eec4f0ecc0ef=
+d26056bf7eda0226"
 >
-> -SRC_URI[sha256sum] =3D "05dd6d9356d66a74e61035f2a42162f8c754c97cf1ba64e7=
-a801ba158d6c0711"
-> +SRC_URI[sha256sum] =3D "64c5b975ca287939e828303fa857d22f142b251f17808dfe=
-41733512d9cded86"
+>  inherit pypi pkgconfig python_setuptools_build_meta ptest
 >
 > --
-> 2.40.0
+> 2.34.1
 >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#107451): https://lists.openembedded.org/g/openembedde=
-d-devel/message/107451
-> Mute This Topic: https://lists.openembedded.org/mt/103167529/1997914
+> View/Reply Online (#107447): https://lists.openembedded.org/g/openembedde=
+d-devel/message/107447
+> Mute This Topic: https://lists.openembedded.org/mt/103166900/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
 aj.khem@gmail.com]
