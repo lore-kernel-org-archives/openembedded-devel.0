@@ -2,54 +2,54 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 902D0C4332F
-	for <webhook@archiver.kernel.org>; Thu, 14 Dec 2023 17:45:50 +0000 (UTC)
-Received: from mail-oi1-f173.google.com (mail-oi1-f173.google.com [209.85.167.173])
- by mx.groups.io with SMTP id smtpd.web10.29351.1702575948742903807
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 75C2BC4332F
+	for <webhook@archiver.kernel.org>; Thu, 14 Dec 2023 17:46:50 +0000 (UTC)
+Received: from mail-oa1-f44.google.com (mail-oa1-f44.google.com [209.85.160.44])
+ by mx.groups.io with SMTP id smtpd.web10.29375.1702576009358614728
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 14 Dec 2023 09:45:48 -0800
+ Thu, 14 Dec 2023 09:46:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=V5a3vyOu;
- spf=pass (domain: gmail.com, ip: 209.85.167.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f173.google.com with SMTP id 5614622812f47-3b9e07690ccso5512112b6e.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 14 Dec 2023 09:45:48 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=l7ngzdt9;
+ spf=pass (domain: gmail.com, ip: 209.85.160.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f44.google.com with SMTP id 586e51a60fabf-203198c9aa5so1876115fac.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 14 Dec 2023 09:46:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1702575948; x=1703180748; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1702576008; x=1703180808; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=+QfQxeE5JXiSrWFdh++fBoLpNcC9Lm//3eIwPfEZDbA=;
-        b=V5a3vyOuIo9w6WppTQjgdP8VvA3rS9vAga36qMAgZ8XEpPc6IpMnbVm15kz007+Aqr
-         ECv232Sr2uzqiwZ/jbnQll8E4EJrNTBV9q2ZbCGm+ZcXo+5v7E14DB1is7Cw/fpOs8ok
-         SaOWtj2AU1Kx7d4kf7mL+/xHQYosItj0IjwI9FITsBAE496yPCqaLjKwNaBEu3J72Qdw
-         nNYPZUwujH8kDIBR0G+7ia5pVtm6TqjcG5GPyBBUv1LlHZMTl+zI5ip4+70xHYZlKAy5
-         7YHpClCfjhSCHIGSlNjYWhJWQzGI6AOAYACI77ti1NvKIcUsbSqz0bxhquNk9gAgi3dE
-         fcUQ==
+        bh=jxeY8064Zb/B2rc8Iz6TJsx367tG7EjrKdGWVdVlt3Y=;
+        b=l7ngzdt9zUDelHxiokSbucO17bms3Hyt5yEGa1okZqqQI5AjPVt+WepeyBassRjn8i
+         QVQ6Vi4e0EfWGELIWNdv8aA6lAlqIKBbwS9FMWz2f4WesJ425VNsjWMNr3WdJhqh6QJB
+         svwBgyL1udENmNZ/qv8sv7ik84vVkTFvXpKd3p2PE8JSJ275VC+AMKCGyjEwq7fnSGDt
+         IMLJbnLKLfGxhSy5Qf66Ouvrp2LYWytlJazWV9++CYpZYdai5FNunC+1ARpIZvADFpik
+         XBinEenGq2jP+5prhCvdAQsjdZL5LHMOys9g+0gg3krZjNbZDcPoX7JqeIlLf3/s6np2
+         IB5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702575948; x=1703180748;
+        d=1e100.net; s=20230601; t=1702576008; x=1703180808;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=+QfQxeE5JXiSrWFdh++fBoLpNcC9Lm//3eIwPfEZDbA=;
-        b=LJ53JO14CdP/ItRl8u49JBHUjVRQn+POZlqUAnccFXig6jcQcfTtbCreJm2KSI6N2z
-         FuCWfFvz0FmDhLUUU87WzuyEEeVRSTlAquupRrbbsfQZH8wfq+1bMoOBJLqJ5u0WOj5Q
-         a2jpPb45yChwJg9KlF3Tlkq+xwMRraGChRX/agsTEFY7qTioVNVRB69Q7eOjsQh7KhYu
-         FsjJG0h6qMJV4NXEHx0c+ec3ejammCm9U6OlERlLvMfQhfWsDFNceg5Ve7ojhFl4E9EJ
-         QJKfZdOJYbQ1oOcjy5ZP3ore+90dVGBDS1iIBKP/LDRUtyTWb+MZq6jKdXPKq+Z2s7Yl
-         bBxg==
-X-Gm-Message-State: AOJu0Yz+SlvqYeRa9pVAUG95o1maTYt7cpIq8VpQimIZu5Zzwr8elE6s
-	MLECkFLWRHYptqjmxr0/tL5AV/crgqgCxG+IKDQKOH27PVg=
-X-Google-Smtp-Source: AGHT+IGts4c9BWiT91Ph3jQwAnOya78pvbyY/qm0XbRJ5BhqYgVaI4tvaBV65Qu/GOfrq7SQzHYYCwyzBk5jDg3D62Y=
-X-Received: by 2002:a05:6870:5149:b0:203:31f4:6962 with SMTP id
- z9-20020a056870514900b0020331f46962mr3007166oak.4.1702575947936; Thu, 14 Dec
- 2023 09:45:47 -0800 (PST)
+        bh=jxeY8064Zb/B2rc8Iz6TJsx367tG7EjrKdGWVdVlt3Y=;
+        b=Pa59zguMP2gLGTcoxrok+P3xBn4oFClWiav7nDgIQ58ueBkdBZx1vx3/gvHIHgyjXb
+         UedrKsgl+6yhjgRK/pPH0NsppHtQ2MyyyEieDBecqPMth5ZsC66Tr7eyaa8DNZJ0qwfG
+         CVIY99h5dyqrYwjVjpYXZel4A86VPusGnxAbj9KTfVnbm8mv9/E8ONdIyP66osK3Wq8r
+         XhCM3CozKcFDbml3N0WVoigOv9taS18GA5qCSLcf3/DSlm737LNP7lQaHtKphcKdmcKr
+         ZaTl4ul3KJRa8r+YLHSvaAoF2Z4Gkdrw0ra/nkCireLUt3aAbd6Neo7qUUZ9sjWRcllg
+         VyNA==
+X-Gm-Message-State: AOJu0YwLCWPn65YzkZeF2p70kMgyswamDTzbC0Ba/omMniytuqQYpUG+
+	evi7Zy8ZUzc5zsaLrp0oQYgucc8202gxHVqlGp7dz7NuH7c=
+X-Google-Smtp-Source: AGHT+IFimAxnNQSqCMkTg2wwunfZo/lGPVUpHIVtqOB6rFJI6kK2V+QaNKeaXiUC6SNZxWfYwItq4lWZxSZL9EivUFE=
+X-Received: by 2002:a05:6871:809:b0:1fa:f404:b94b with SMTP id
+ q9-20020a056871080900b001faf404b94bmr12016644oap.58.1702576008564; Thu, 14
+ Dec 2023 09:46:48 -0800 (PST)
 MIME-Version: 1.0
-References: <1702543966-27805-1-git-send-email-wangmy@fujitsu.com>
-In-Reply-To: <1702543966-27805-1-git-send-email-wangmy@fujitsu.com>
+References: <1702543786-27640-1-git-send-email-wangmy@fujitsu.com>
+In-Reply-To: <1702543786-27640-1-git-send-email-wangmy@fujitsu.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 14 Dec 2023 09:45:22 -0800
-Message-ID: <CAMKF1sqbjTkmcpXSEUpezvbienP1kUwOQJkT84dGaxp15hZoRg@mail.gmail.com>
-Subject: Re: [oe] [meta-python] [PATCH] python3-gmqtt: upgrade 0.6.12 -> 0.6.13
+Date: Thu, 14 Dec 2023 09:46:22 -0800
+Message-ID: <CAMKF1spu8DvXhsveMQkpEzyBqo+5DMhiv_MPLokHmPQQijJO=A@mail.gmail.com>
+Subject: Re: [oe] [meta-python] [PATCH] python3-colorlog: upgrade 6.7.0 -> 6.8.0
 To: wangmy <wangmy@fujitsu.com>
 Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
@@ -57,52 +57,55 @@ Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 14 Dec 2023 17:45:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107461
+ <openembedded-devel@lists.openembedded.org>; Thu, 14 Dec 2023 17:46:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107462
 
 duplicate of https://patchwork.yoctoproject.org/project/oe/patch/2023121405=
-2140.1209348-1-derek@asterius.io/
+0339.1190691-1-derek@asterius.io/
 
-On Thu, Dec 14, 2023 at 12:53=E2=80=AFAM wangmy <wangmy@fujitsu.com> wrote:
+On Thu, Dec 14, 2023 at 12:50=E2=80=AFAM wangmy <wangmy@fujitsu.com> wrote:
 >
 > From: Wang Mingyu <wangmy@fujitsu.com>
 >
+> Changelog:
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> -Remove universal wheel, python 2 is unsupported
+> -Fix running tests in environment with NO_COLOR=3D1
+>
 > Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 > ---
->  .../python/{python3-gmqtt_0.6.12.bb =3D> python3-gmqtt_0.6.13.bb} | 2 +-
+>  .../{python3-colorlog_6.7.0.bb =3D> python3-colorlog_6.8.0.bb}    | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-python/recipes-devtools/python/{python3-gmqtt_0.6.12.bb =3D>=
- python3-gmqtt_0.6.13.bb} (81%)
+>  rename meta-python/recipes-devtools/python/{python3-colorlog_6.7.0.bb =
+=3D> python3-colorlog_6.8.0.bb} (77%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-gmqtt_0.6.12.bb =
-b/meta-python/recipes-devtools/python/python3-gmqtt_0.6.13.bb
-> similarity index 81%
-> rename from meta-python/recipes-devtools/python/python3-gmqtt_0.6.12.bb
-> rename to meta-python/recipes-devtools/python/python3-gmqtt_0.6.13.bb
-> index c06e94e7a..101bfb9aa 100644
-> --- a/meta-python/recipes-devtools/python/python3-gmqtt_0.6.12.bb
-> +++ b/meta-python/recipes-devtools/python/python3-gmqtt_0.6.13.bb
-> @@ -3,7 +3,7 @@ HOMEPAGE =3D "https://github.com/wialon/gmqtt"
->  LICENSE =3D "MIT"
->  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D903f1792621a3b35ee546da75d139=
-177"
+> diff --git a/meta-python/recipes-devtools/python/python3-colorlog_6.7.0.b=
+b b/meta-python/recipes-devtools/python/python3-colorlog_6.8.0.bb
+> similarity index 77%
+> rename from meta-python/recipes-devtools/python/python3-colorlog_6.7.0.bb
+> rename to meta-python/recipes-devtools/python/python3-colorlog_6.8.0.bb
+> index 69f4be17c..6aefef6d1 100644
+> --- a/meta-python/recipes-devtools/python/python3-colorlog_6.7.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-colorlog_6.8.0.bb
+> @@ -7,6 +7,6 @@ inherit pypi setuptools3
 >
-> -SRC_URI[sha256sum] =3D "7df03792343089ae62dc7cd6f8be356861c4fc68768cefa2=
-2f3d8de5e7e5be48"
-> +SRC_URI[sha256sum] =3D "b4623d3e32ba266e96c04b0871bb057d05414371c1d27955=
-0648b390e6ba7577"
+>  PYPI_PACKAGE =3D "colorlog"
 >
->  inherit pypi setuptools3
+> -SRC_URI[sha256sum] =3D "bd94bd21c1e13fac7bd3153f4bc3a7dc0eb0974b8bc2fdf1=
+a989e474f6e582e5"
+> +SRC_URI[sha256sum] =3D "fbb6fdf9d5685f2517f388fb29bb27d54e8654dd31f58bc2=
+a3b217e967a95ca6"
 >
+>  RDEPENDS:${PN} +=3D "python3-logging"
 > --
 > 2.34.1
 >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#107432): https://lists.openembedded.org/g/openembedde=
-d-devel/message/107432
-> Mute This Topic: https://lists.openembedded.org/mt/103166812/1997914
+> View/Reply Online (#107428): https://lists.openembedded.org/g/openembedde=
+d-devel/message/107428
+> Mute This Topic: https://lists.openembedded.org/mt/103166777/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
 aj.khem@gmail.com]
