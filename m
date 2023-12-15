@@ -1,79 +1,92 @@
-Return-Path: <derek@asterius.io>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E71ECC4332F
-	for <webhook@archiver.kernel.org>; Fri, 15 Dec 2023 00:10:43 +0000 (UTC)
-Received: from mail-io1-f41.google.com (mail-io1-f41.google.com [209.85.166.41])
- by mx.groups.io with SMTP id smtpd.web11.45832.1702599039136206895
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E648EC4332F
+	for <webhook@archiver.kernel.org>; Fri, 15 Dec 2023 00:16:33 +0000 (UTC)
+Received: from esa2.hc1455-7.c3s2.iphmx.com (esa2.hc1455-7.c3s2.iphmx.com [207.54.90.48])
+ by mx.groups.io with SMTP id smtpd.web11.45938.1702599392037690115
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 14 Dec 2023 16:10:39 -0800
+ Thu, 14 Dec 2023 16:16:32 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.166.41, mailfrom: straka.derek@gmail.com)
-Received: by mail-io1-f41.google.com with SMTP id ca18e2360f4ac-7b751f23ff1so4299439f.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 14 Dec 2023 16:10:39 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702599038; x=1703203838;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=TxauUXF/B8/atU0Gn1knHdxmGPpiZl8FVW6OCMcsYEM=;
-        b=BbPvbLJ43oht1cdjtem5tpBrpClCZllHRZdBz32pMXUTBcIU6vSzBUDs42YFtFceZ2
-         BuLkeYdc+acuX4qI9Q21Ymf46X8MKU4k2o/I3+lwd2jT4Gui47hfHo8VHd+w+Jf2p5LT
-         yh3w+u++cBqCboVdXvKb8eDy9GVtfSeo1OhEd08nH5M0QFn14VxMlQNIaGpkrWErCY8S
-         3uHzI51l9zJpsPT/gZ6b5XNMVJDL/QFiBzkNamApO+4tpLW6+O9MuDl7Zju1DjRgTfQQ
-         2c0r3/xUwZKpjBB80VGMfxhYZjnyscBBVAGz37CFT20tyqCcIMv6MMVx7krO1iNogK3I
-         G6DQ==
-X-Gm-Message-State: AOJu0YyuU2YbhHY0njDyl0zd+dFhyoSHABcqRFHA9nvr6JYejxLtiTVy
-	TY8CjI1XU+2HZO1kL1ZcCbeFCBYQj34vJw==
-X-Google-Smtp-Source: AGHT+IF9W36odFmn8jVV+xhRPXBpRjlTlJt8xUQZQVZU4nOp2vbHpvv9Jv91Gv4Cpc9XM5Xr+js1Mw==
-X-Received: by 2002:a05:6602:641f:b0:7b4:28f8:df with SMTP id gn31-20020a056602641f00b007b428f800dfmr15578964iob.40.1702599037706;
-        Thu, 14 Dec 2023 16:10:37 -0800 (PST)
-Received: from sparta.internal.asterius.io (c-73-228-213-122.hsd1.mn.comcast.net. [73.228.213.122])
-        by smtp.gmail.com with ESMTPSA id m39-20020a05663840a700b004596858b397sm3795591jam.7.2023.12.14.16.10.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 14 Dec 2023 16:10:37 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
+ dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 207.54.90.48, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10924"; a="143420155"
+X-IronPort-AV: E=Sophos;i="6.04,277,1695654000"; 
+   d="scan'208";a="143420155"
+Received: from unknown (HELO yto-r1.gw.nic.fujitsu.com) ([218.44.52.217])
+  by esa2.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Dec 2023 09:16:29 +0900
+Received: from yto-m1.gw.nic.fujitsu.com (yto-nat-yto-m1.gw.nic.fujitsu.com [192.168.83.64])
+	by yto-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id 59186D9DAB
+	for <openembedded-devel@lists.openembedded.org>; Fri, 15 Dec 2023 09:16:27 +0900 (JST)
+Received: from aks-ab1.gw.nic.fujitsu.com (aks-ab1.gw.nic.fujitsu.com [192.51.207.11])
+	by yto-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id 7C63BD2BA8
+	for <openembedded-devel@lists.openembedded.org>; Fri, 15 Dec 2023 09:16:26 +0900 (JST)
+Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.165])
+	by aks-ab1.gw.nic.fujitsu.com (Postfix) with ESMTP id 4BE3C2FC6EFB;
+	Fri, 15 Dec 2023 09:16:25 +0900 (JST)
+From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-python][PATCH] python3-portalocker: update to version 2.8.2
-Date: Fri, 15 Dec 2023 00:10:17 +0000
-Message-Id: <20231215001017.2557084-1-derek@asterius.io>
-X-Mailer: git-send-email 2.34.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-eth-keyfile: upgrade 0.6.1 -> 0.7.0
+Date: Fri, 15 Dec 2023 08:16:17 +0800
+Message-Id: <1702599377-1503-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1408-9.0.0.1002-28058.003
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1408-9.0.1002-28058.003
+X-TMASE-Result: 10-1.534200-10.000000
+X-TMASE-MatchedRID: jrsYt7uzg+ujz0nOeth/yXg2y0j5vXZGlEDhvi2wR879wRnyxuPjhKoG
+	E2MCfRXoeNwTkAnhVbMEzrb9UGg5KwciPhpYUztE031Nfxfj2zPFmmMdIwjrDqILsEPieIGYBAV
+	MudebvJjgK2NiZClvaQXURz+hQhGVWkIi5GvRHEpO5y1KmK5bJTZlY6a4lRLZDr5YGKfVA0WIwP
+	rAH8iLMhab+AC2MJ3sBhQWw3lZ+IU7BOj1lchJLN0KiTeJteVBfS0Ip2eEHnz3IzXlXlpamPoLR
+	4+zsDTt+gmVy5VdZklCUNdMiSOqSgdUOtAqXnnEYgRo5FRoWxFkOD1FNa0DkBl4zQ4mGjvGvavW
+	8pVJYfPZloEnz8Sjbp0br/p8IGdpDKguxNCuYnLyDBYNCJzj6s+YAJ5mo7zlOKgonZY9TFMtLgA
+	Q4uO3AA==
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 15 Dec 2023 00:10:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107467
+ <openembedded-devel@lists.openembedded.org>; Fri, 15 Dec 2023 00:16:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107468
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+From: Wang Mingyu <wangmy@fujitsu.com>
+
+License-Update:
+    Copyright year updated to 2023.
+
+Changelog:
+============
+-Use correct default parameters for scrypt
+-Drop python 3.7 support
+-Checksum address when creating a keyfile
+-Merge project template updates, including using pre-commit for linting.
+ Add typing.
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...n3-portalocker_2.7.0.bb => python3-portalocker_2.8.2.bb} | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
- rename meta-python/recipes-extended/python3-portalocker/{python3-portalocker_2.7.0.bb => python3-portalocker_2.8.2.bb} (66%)
+ ...hon3-eth-keyfile_0.6.1.bb => python3-eth-keyfile_0.7.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-eth-keyfile_0.6.1.bb => python3-eth-keyfile_0.7.0.bb} (66%)
 
-diff --git a/meta-python/recipes-extended/python3-portalocker/python3-portalocker_2.7.0.bb b/meta-python/recipes-extended/python3-portalocker/python3-portalocker_2.8.2.bb
+diff --git a/meta-python/recipes-devtools/python/python3-eth-keyfile_0.6.1.bb b/meta-python/recipes-devtools/python/python3-eth-keyfile_0.7.0.bb
 similarity index 66%
-rename from meta-python/recipes-extended/python3-portalocker/python3-portalocker_2.7.0.bb
-rename to meta-python/recipes-extended/python3-portalocker/python3-portalocker_2.8.2.bb
-index 03c4f2f40..e18aa83df 100644
---- a/meta-python/recipes-extended/python3-portalocker/python3-portalocker_2.7.0.bb
-+++ b/meta-python/recipes-extended/python3-portalocker/python3-portalocker_2.8.2.bb
-@@ -4,9 +4,11 @@ LICENSE = "BSD-3-Clause"
+rename from meta-python/recipes-devtools/python/python3-eth-keyfile_0.6.1.bb
+rename to meta-python/recipes-devtools/python/python3-eth-keyfile_0.7.0.bb
+index 55ab1a78d..2afc288bc 100644
+--- a/meta-python/recipes-devtools/python/python3-eth-keyfile_0.6.1.bb
++++ b/meta-python/recipes-devtools/python/python3-eth-keyfile_0.7.0.bb
+@@ -2,9 +2,9 @@ SUMMARY = "A library for handling the encrypted keyfiles used to store ethereum
+ HOMEPAGE = "https://github.com/ethereum/eth-keyfile"
+ SECTION = "devel/python"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=2beaef1b1764f4d6b46084c885b4bcad"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=6749008d847c14b9718949c2e24d5c0a"
  
- LIC_FILES_CHKSUM = "file://LICENSE;md5=152634da660a374ca18c0734ed07c63c"
+-SRC_URI[sha256sum] = "471be6e5386fce7b22556b3d4bde5558dbce46d2674f00848027cb0a20abdc8c"
++SRC_URI[sha256sum] = "6bdb8110c3a50439deb68a04c93c9d5ddd5402353bfae1bf4cfca1d6dff14fcf"
  
--SRC_URI[sha256sum] = "032e81d534a88ec1736d03f780ba073f047a06c478b06e2937486f334e955c51"
-+SRC_URI[sha256sum] = "2b035aa7828e46c58e9b31390ee1f169b98e1066ab10b9a6a861fe7e25ee4f33"
- 
--inherit pypi setuptools3
-+DEPENDS += "python3-setuptools-scm-native"
-+
-+inherit pypi python_setuptools_build_meta
- 
- BBCLASSEXTEND = "native nativesdk"
+ inherit pypi setuptools3
  
 -- 
 2.34.1
