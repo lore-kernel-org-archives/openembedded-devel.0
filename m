@@ -1,140 +1,142 @@
-Return-Path: <vanusuri@mvista.com>
+Return-Path: <alex.kanavin@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 707BEC4167B
-	for <webhook@archiver.kernel.org>; Fri, 15 Dec 2023 10:13:48 +0000 (UTC)
-Received: from mail-ot1-f52.google.com (mail-ot1-f52.google.com [209.85.210.52])
- by mx.groups.io with SMTP id smtpd.web11.59718.1702635219771237966
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EFCBEC46CA2
+	for <webhook@archiver.kernel.org>; Fri, 15 Dec 2023 12:04:18 +0000 (UTC)
+Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com [209.85.167.48])
+ by mx.groups.io with SMTP id smtpd.web10.60788.1702641855521970204
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 Dec 2023 02:13:39 -0800
+ Fri, 15 Dec 2023 04:04:15 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=Rw3pKoE2;
- spf=pass (domain: mvista.com, ip: 209.85.210.52, mailfrom: vanusuri@mvista.com)
-Received: by mail-ot1-f52.google.com with SMTP id 46e09a7af769-6da45aa5549so395832a34.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 15 Dec 2023 02:13:39 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=TtEitIYm;
+ spf=pass (domain: gmail.com, ip: 209.85.167.48, mailfrom: alex.kanavin@gmail.com)
+Received: by mail-lf1-f48.google.com with SMTP id 2adb3069b0e04-50bdec453c8so560666e87.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 15 Dec 2023 04:04:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1702635218; x=1703240018; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Jy9TL6sU0rFA5/qCuOSSU0HHREVp8zd+KbGk9lwOnuo=;
-        b=Rw3pKoE2mLEFtX2vQswAKV68fcvHAi9u9gOKh9kEfgYljPY/I19GH1BXDNauw0DdD4
-         TZmhpApaEKh/qyyV+/sJDoo1oqCNcU4gdad6817ZHWp2DK26Lyiuo52VzWWhSMzPUzVM
-         OTdTfBvsdmGmkPyvl1lBL7DRTk0OpJ8wnJpIo=
+        d=gmail.com; s=20230601; t=1702641854; x=1703246654; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=WFmfZaWzuwsfVsEYOOi0vU/pZGG/Bh4kiBVzlO912zY=;
+        b=TtEitIYmKm56c7NtJjx3tMGjdfJSHg84jIoW/ptOQPu9mjdH+gT7xHZM5RSDxmm9lf
+         yXenHpBFL7YWEcunxmnwTO+LQIF/vCaAsn+kCoev8nrt56+4ePwZoqk5Kcrox+/CZqmo
+         ZA0InriO7JxFUjuM23QN7Vs/8LhjdhVUlQYvaJ/tTqWi3e+oB1Qi9FNLub01qOjMsB+P
+         e5S2hQCfgE/V+QplrAji6l7/w6sCeJO8bVT+vnRUQEUlPzZv5Vy1QvHma2SdPnIok9pu
+         FV0ul63HAB1of7MH9w3u5uUDHjTo8JFv0VRT2ZKm7SFVmY0rlZllPlbgTnNC4qmcvf6U
+         0sKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702635218; x=1703240018;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1702641854; x=1703246654;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Jy9TL6sU0rFA5/qCuOSSU0HHREVp8zd+KbGk9lwOnuo=;
-        b=QzNFBcEzuikxK8GfTsXEwXUEt4irERlUBT+VVWP8gyvQ70owWhk3Rfn9Tz2DJFSDzZ
-         3i8yIfsGh+uv7w8bmQrxcZmxDkgnKuRizi9ZHGmxe57hRQcQHinzXZWioRe0J9eEVpOH
-         3UH5ZBuY6tAQlwSiAjbFo8XxENEy+TXVrMl+lAzfPrUgnb6dvS97U0KFUBnEqmP4mv5O
-         VSYqDVS9dyx7fsu9NcFfTy/h0osQfH8cVaX2WhLrxFdmGlsEFp9hnc/8CcgtAxFhq40T
-         v4OUAz7dzGLkNE2Gjk+JtCXvXvmQRqC8X/9PshgDi11J3VpaMmNKe9TKc8zYInZfK2Ti
-         0ToQ==
-X-Gm-Message-State: AOJu0YwhrHWPdCSSkyu/HXW66pnu1xCQyiPjdLarjKbmPZ4nF0g4ZX4N
-	GbdPB55uiYzhJ998aJyDPKpdt8qlA7zhYJDsf/8=
-X-Google-Smtp-Source: AGHT+IGjhZDlByn2lSNq64QLao2rGoiThQS6OibX4LpVqK83d0/tLGudepurqZjJ7J+3JMcDuViBTQ==
-X-Received: by 2002:a05:6830:160c:b0:6d9:d535:f28b with SMTP id g12-20020a056830160c00b006d9d535f28bmr12737291otr.15.1702635218101;
-        Fri, 15 Dec 2023 02:13:38 -0800 (PST)
-Received: from localhost.localdomain ([2401:4900:1c0f:7eed:1e55:99e6:364a:afa9])
-        by smtp.gmail.com with ESMTPSA id s16-20020a056a00195000b006cb574445efsm13224588pfk.88.2023.12.15.02.13.36
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 15 Dec 2023 02:13:37 -0800 (PST)
-From: vanusuri@mvista.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Vijay Anusuri <vanusuri@mvista.com>
-Subject: [oe][meta-networking][dunfell][PATCH] strongswan: Backport fix for CVE-2023-41913
-Date: Fri, 15 Dec 2023 15:43:18 +0530
-Message-Id: <20231215101318.580279-1-vanusuri@mvista.com>
-X-Mailer: git-send-email 2.25.1
+        bh=WFmfZaWzuwsfVsEYOOi0vU/pZGG/Bh4kiBVzlO912zY=;
+        b=ssTzTtumF4AYQ6+xnqdL+HskBSH6NauPmxrYeprs/MjnLh74BSsEVfHN3Kjphot57D
+         dquRo551YIa0ZfqIawXklBTWQW5LLUkp9r6rlykV0Z77Hv/zDJJfIC0020JtDK2nMr/r
+         X8WtRmfvkhmDW/lMO2bGAgpKH/utgd3qKXGstddiGflLgyE6zsn2LglnlYYXC9i9TpMR
+         HxUaiByzGWRjxAatVIMoTsIA74aPme+yNBjcgGCq0kUFPAtJbk7p6OVWUrgiqRBmlbap
+         cbPCucCYVcmBul7B2T8agGeoQssd5rmc6q9Cy5/E2yScYS6vybureQMye2kw66RtLk4D
+         Cq9w==
+X-Gm-Message-State: AOJu0Yyepunpt/YAmvqxKFE66lMEVFw9Mvj5Bxv524OVgo43Rqr207Wt
+	SpKm6qSFam/nGQxy195xZYlpVYE/bnoezNTPnDCfv/NLrxY=
+X-Google-Smtp-Source: AGHT+IEMN6q2F+EIegmP7ns5ydpI76pD6YckeAzq5l/mQGg92teerVh1IrrSPGuMYPk6dkWBZyu4b4+Ixy+KZCjgULA=
+X-Received: by 2002:a05:6512:3156:b0:50b:f279:c9b with SMTP id
+ s22-20020a056512315600b0050bf2790c9bmr5272018lfi.61.1702641853510; Fri, 15
+ Dec 2023 04:04:13 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20231215075239.3049865-1-alex@linutronix.de> <20231215075239.3049865-19-alex@linutronix.de>
+ <170263538033.2829918.17327515467462630423@ping.linuxembedded.co.uk> <170263553291.2829918.9491731797867514491@ping.linuxembedded.co.uk>
+In-Reply-To: <170263553291.2829918.9491731797867514491@ping.linuxembedded.co.uk>
+From: Alexander Kanavin <alex.kanavin@gmail.com>
+Date: Fri, 15 Dec 2023 13:04:02 +0100
+Message-ID: <CANNYZj-gFpOob-QsksbNiv-YFvDe6D=G8GLSz7X7LTfEJ78erA@mail.gmail.com>
+Subject: Re: [PATCH 19/20] libcamera: skip until upstream resolves python 3.12 compatibility
+To: Kieran Bingham <kieran.bingham@ideasonboard.com>
+Cc: openembedded-devel@lists.openembedded.org, 
+	libcamera-devel@lists.libcamera.org
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 15 Dec 2023 10:13:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107515
+ <openembedded-devel@lists.openembedded.org>; Fri, 15 Dec 2023 12:04:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107516
 
-From: Vijay Anusuri <vanusuri@mvista.com>
+That's right.
 
-Upstream-Status: Backport [https://download.strongswan.org/security/CVE-2023-41913/strongswan-5.3.0-5.9.6_charon_tkm_dh_len.patch]
+This page provides hints for how to replace usage of imp with
+equivalents in importlib:
+https://docs.python.org/3.11/library/imp.html
 
-Reference: https://www.strongswan.org/blog/2023/11/20/strongswan-vulnerability-(cve-2023-41913).html
+Alex
 
-Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
----
- .../strongswan/files/CVE-2023-41913.patch     | 46 +++++++++++++++++++
- .../strongswan/strongswan_5.8.4.bb            |  1 +
- 2 files changed, 47 insertions(+)
- create mode 100644 meta-networking/recipes-support/strongswan/files/CVE-2023-41913.patch
-
-diff --git a/meta-networking/recipes-support/strongswan/files/CVE-2023-41913.patch b/meta-networking/recipes-support/strongswan/files/CVE-2023-41913.patch
-new file mode 100644
-index 000000000..c0de1f158
---- /dev/null
-+++ b/meta-networking/recipes-support/strongswan/files/CVE-2023-41913.patch
-@@ -0,0 +1,46 @@
-+From 027421cbd2e6e628f5f959c74d722afadc477485 Mon Sep 17 00:00:00 2001
-+From: Tobias Brunner <tobias@strongswan.org>
-+Date: Tue, 11 Jul 2023 12:12:25 +0200
-+Subject: [PATCH] charon-tkm: Validate DH public key to fix potential buffer
-+ overflow
-+
-+Seems this was forgotten in the referenced commit and actually could lead
-+to a buffer overflow.  Since charon-tkm is untrusted this isn't that
-+much of an issue but could at least be easily exploited for a DoS attack
-+as DH public values are set when handling IKE_SA_INIT requests.
-+
-+Fixes: 0356089d0f94 ("diffie-hellman: Verify public DH values in backends")
-+Fixes: CVE-2023-41913
-+
-+Upstream-Status: Backport [https://download.strongswan.org/security/CVE-2023-41913/strongswan-5.3.0-5.9.6_charon_tkm_dh_len.patch]
-+CVE: CVE-2023-41913
-+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
-+---
-+ src/charon-tkm/src/tkm/tkm_diffie_hellman.c | 7 ++++++-
-+ 1 file changed, 6 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/charon-tkm/src/tkm/tkm_diffie_hellman.c b/src/charon-tkm/src/tkm/tkm_diffie_hellman.c
-+index 2b2d103d03e9..6999ad360d7e 100644
-+--- a/src/charon-tkm/src/tkm/tkm_diffie_hellman.c
-++++ b/src/charon-tkm/src/tkm/tkm_diffie_hellman.c
-+@@ -70,11 +70,16 @@ METHOD(key_exchange_t, get_shared_secret, bool,
-+ 	return TRUE;
-+ }
-+ 
-+-
-+ METHOD(diffie_hellman_t, set_other_public_value, bool,
-+ 	private_tkm_diffie_hellman_t *this, chunk_t value)
-+ {
-+ 	dh_pubvalue_type othervalue;
-++
-++	if (!key_exchange_verify_pubkey(this->group, value) ||
-++		value.len > sizeof(othervalue.data))
-++	{
-++		return FALSE;
-++	}
-+ 	othervalue.size = value.len;
-+ 	memcpy(&othervalue.data, value.ptr, value.len);
-+ 
-+-- 
-+2.34.1
-+
-diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.8.4.bb b/meta-networking/recipes-support/strongswan/strongswan_5.8.4.bb
-index c11748645..9f676d0b1 100644
---- a/meta-networking/recipes-support/strongswan/strongswan_5.8.4.bb
-+++ b/meta-networking/recipes-support/strongswan/strongswan_5.8.4.bb
-@@ -15,6 +15,7 @@ SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
-            file://CVE-2021-41991.patch \
-            file://CVE-2021-45079.patch \
-            file://CVE-2022-40617.patch \
-+           file://CVE-2023-41913.patch \
-            "
- 
- SRC_URI[md5sum] = "0634e7f40591bd3f6770e583c3f27d29"
--- 
-2.25.1
-
+On Fri, 15 Dec 2023 at 11:18, Kieran Bingham
+<kieran.bingham@ideasonboard.com> wrote:
+>
+> Quoting Kieran Bingham (2023-12-15 10:16:20)
+> > +libcamera-devel mailing list
+> >
+> > Quoting Alexander Kanavin (2023-12-15 07:52:38)
+> > > I'd note that imp module has been deprecated for years, so that's what
+> > > happens when deprecation warnings are ignored.
+> >
+> > Can you tell me more about what this issue is please? I'm not aware of
+> > it at all.
+> >
+> > --
+> > Kieran
+> >
+> >
+> > >
+> > > Signed-off-by: Alexander Kanavin <alex@linutronix.de>
+> > > ---
+> > >  meta-multimedia/recipes-multimedia/libcamera/libcamera_0.1.0.bb | 1 +
+> > >  .../packagegroups/packagegroup-meta-multimedia.bb               | 1 -
+> > >  meta-multimedia/recipes-multimedia/pipewire/pipewire_1.0.0.bb   | 2 +-
+> > >  3 files changed, 2 insertions(+), 2 deletions(-)
+> > >
+> > > diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.1.0.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.1.0.bb
+> > > index 2a3c6473e..9c04d7434 100644
+> > > --- a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.1.0.bb
+> > > +++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.1.0.bb
+> > > @@ -73,3 +73,4 @@ FILES:${PN}-gst = "${libdir}/gstreamer-1.0"
+> > >  # both 32 and 64 bit file APIs.
+> > >  GLIBC_64BIT_TIME_FLAGS = ""
+> > >
+> > > +SKIP_RECIPE[libcamera] ?= "Not compatible with python 3.12, see https://bugs.libcamera.org/show_bug.cgi?id=206"
+>
+>
+> Aha, the clue was buried here.
+>
+> --
+> Kieran
+>
+>
+> > > diff --git a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
+> > > index 672c8abc9..6ca4d539f 100644
+> > > --- a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
+> > > +++ b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
+> > > @@ -42,7 +42,6 @@ RDEPENDS:packagegroup-meta-multimedia = "\
+> > >      tearsofsteel-1080p \
+> > >      pipewire \
+> > >      ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", bb.utils.contains("DISTRO_FEATURES", "x11", "projucer", "", d), "", d)} \
+> > > -    libcamera \
+> > >      vorbis-tools \
+> > >      libopenmpt \
+> > >      mimic \
+> > > diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.0.0.bb b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.0.0.bb
+> > > index b4da781f0..4d894349a 100644
+> > > --- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.0.0.bb
+> > > +++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.0.0.bb
+> > > @@ -86,7 +86,7 @@ PACKAGECONFIG:class-target ??= " \
+> > >      ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd systemd-system-service systemd-user-service', '', d)} \
+> > >      ${@bb.utils.filter('DISTRO_FEATURES', 'alsa vulkan pulseaudio', d)} \
+> > >      ${PIPEWIRE_SESSION_MANAGER} \
+> > > -    ${FFMPEG_AVAILABLE} avahi flatpak gstreamer gsettings jack libusb pw-cat raop sndfile v4l2 udev volume webrtc-echo-cancelling libcamera readline \
+> > > +    ${FFMPEG_AVAILABLE} avahi flatpak gstreamer gsettings jack libusb pw-cat raop sndfile v4l2 udev volume webrtc-echo-cancelling readline \
+> > >  "
+> > >
+> > >  # "jack" and "pipewire-jack" packageconfigs cannot be both enabled,
+> > > --
+> > > 2.39.2
+> > >
+> > >
 
