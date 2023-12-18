@@ -1,124 +1,110 @@
-Return-Path: <alex.kiernan@gmail.com>
+Return-Path: <leon.anavi@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 98110C46CCD
-	for <webhook@archiver.kernel.org>; Mon, 18 Dec 2023 13:38:55 +0000 (UTC)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
- by mx.groups.io with SMTP id smtpd.web10.43631.1702906728848957547
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E07CEC35274
+	for <webhook@archiver.kernel.org>; Mon, 18 Dec 2023 17:09:16 +0000 (UTC)
+Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
+ by mx.groups.io with SMTP id smtpd.web10.48804.1702919353003938410
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Dec 2023 05:38:49 -0800
+ Mon, 18 Dec 2023 09:09:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ckFIYyCs;
- spf=pass (domain: gmail.com, ip: 209.85.128.47, mailfrom: alex.kiernan@gmail.com)
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-40c39ef63d9so33080455e9.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 18 Dec 2023 05:38:48 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=Ers/W67I;
+ spf=pass (domain: konsulko.com, ip: 209.85.208.42, mailfrom: leon.anavi@konsulko.com)
+Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-550dd0e3304so4133686a12.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 18 Dec 2023 09:09:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1702906727; x=1703511527; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1702919351; x=1703524151; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=PAOfdJ+GV6NMqNUm5Ps2O6K0r7xm/iwJzBJjg2SGnsM=;
-        b=ckFIYyCsmGdlUergMX3nFzDBe9nFDh66YJlFfnH9xqGvzVeOXN7TN63+i9ath205/w
-         TjhujCJvh1fBBfd+atgV2sZyFICFEkzFIE9ROURrNEpzguTioR/2UjGc3n9NSE5Y3vyR
-         oIO0WWDrLrHJwaMO2owYoI6a0J8FS/gRT9lLpQS8QrioI5zMKaSrTuqmjEpbhsAh9wka
-         ynaQecPz5r41EZh/1h1ggv3PQR5SfsAV+POMZw40RJXxSoMr4L8ZLmWte91WKCW331s2
-         bTDQzHeEU2pt4ZgeYGeU852LiGTeKze4E6RxLR1geA4gaWpKDjuT2RYzS7WyLanyMWvm
-         7E/w==
+        bh=GTIH8nUG1CSvhu3DQRW8VyUSYr8wCdiozVpPwb8wHWs=;
+        b=Ers/W67IDXaCMCPDKo6uq1KRTyQiJs68mzMotL476/qg6SdGjPyVHtbjCDnuNe2Js9
+         ItWl5l4sNz9hX6Zlk2RnYma+Sci87gVYVLWSrELnSl9XfqBYbz1dGYptVrGo1lu97phR
+         LAB1x+OW2BinHPntnDN372+TYQVImvXXwERHk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702906727; x=1703511527;
+        d=1e100.net; s=20230601; t=1702919351; x=1703524151;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=PAOfdJ+GV6NMqNUm5Ps2O6K0r7xm/iwJzBJjg2SGnsM=;
-        b=Qz2/iBc2fZoCaC9V/90RO9+hXGFlKbFYZ0TBVBs7y3e7rLWholXjrtD1tSUeE1SHgo
-         lJccBTYEL0MeRRNOvgELJh7g8w6Oq5yite0m6Vt3xo5lRUlbglLTROLy8Zj6w1kV6nUX
-         xjBOXGfR51M5cxESreUN4B7DUFBxaUolB8CFkSpsyJ4t1j1aYheH9Go/mQNX9CpWBN5C
-         D2oblxmSx2Jqv3NUrXwUGbiyFoP0uqmMZk9trAnCPAUnroDUsVzInJE+gZmNELEyQDki
-         PAERtGwKh5RWIVMB0kO9rb3Ti1938uCM/rv3fm0J2UcVuzYrLy89d1Me9Hdnj3Vb5EpE
-         vzxQ==
-X-Gm-Message-State: AOJu0YyslInfyQeykfzePeFVLWwRDy6XqlSjWPc2o/2WdDQjqQCXQXrq
-	DLih/vyLOWGWn55Vh0TxfO9Vb3mTemc=
-X-Google-Smtp-Source: AGHT+IFRZXW74aZ55Vstfi/sTSdLRqSdn+4f+zOeB50sK5hPnX5QXDTu7rPPQaa06cmYHn9OKrbu7w==
-X-Received: by 2002:a7b:c451:0:b0:40c:2f84:599c with SMTP id l17-20020a7bc451000000b0040c2f84599cmr8221760wmi.134.1702906726343;
-        Mon, 18 Dec 2023 05:38:46 -0800 (PST)
-Received: from localhost.localdomain ([5.148.102.211])
-        by smtp.gmail.com with ESMTPSA id f10-20020adff8ca000000b003365951cef9sm8416350wrq.55.2023.12.18.05.38.45
+        bh=GTIH8nUG1CSvhu3DQRW8VyUSYr8wCdiozVpPwb8wHWs=;
+        b=HEIjI74UiZEmiHS/PTXmEGLJCy3gHW4wAIwHwp1rIVChuW4nwrvGL9K6Tg/EcseYzA
+         yPaYt5U27wuJZ53X1MCGTVNbkJB3TdnzY8x4SEVTmkzWoMDW+nSvASyljBEPKyHGuN9V
+         TaDrVFZFncndS6+NiIxG1ku0VW25rZWlT+Mx03V1RcvecN6sc8TN3pmqAVnq/LAzrpGT
+         rauz9olUZ2iwNIDVMk3q17/tTav3G2t1DwUa03dkm0ju/FltUMYZfGq5luPHtyD8tBAy
+         OBOUC10V4EFpiNyIrxJYgspqStapPSwpbhwP3VQJarMRDI0KrhsXFR7R04L31HySsZ9a
+         F8KQ==
+X-Gm-Message-State: AOJu0YwWDzY3RrkSRkkcO/ur8oF56TmfYc+oPOpS2B+QmrMPFeI+OWVR
+	K3zepIymgTIFz8vRFd9fWujj1Q/oo2IGjY+mUeQ=
+X-Google-Smtp-Source: AGHT+IHuGcJewgWwqG+6vRjESEv4VBvWVFy+Ev8huGoT1R2YqdVE3PbA/dAmBdhHjMv4QtK52gUgtw==
+X-Received: by 2002:a50:bae3:0:b0:553:4d8f:cdf2 with SMTP id x90-20020a50bae3000000b005534d8fcdf2mr1197944ede.53.1702919350313;
+        Mon, 18 Dec 2023 09:09:10 -0800 (PST)
+Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
+        by smtp.gmail.com with ESMTPSA id d12-20020a056402000c00b0055344b92fb6sm1380419edu.75.2023.12.18.09.09.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 18 Dec 2023 05:38:46 -0800 (PST)
-From: Alex Kiernan <alex.kiernan@gmail.com>
+        Mon, 18 Dec 2023 09:09:10 -0800 (PST)
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Alex Kiernan <alex.kiernan@gmail.com>
-Subject: [meta-oe][PATCH] mbedtls: Upgrade 3.5.0 -> 3.5.1
-Date: Mon, 18 Dec 2023 13:37:47 +0000
-Message-Id: <20231218133747.28222-1-alex.kiernan@gmail.com>
-X-Mailer: git-send-email 2.39.0
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/4] python3-sdbus: upgrade 0.11.0 -> 0.11.1
+Date: Mon, 18 Dec 2023 19:08:58 +0200
+Message-Id: <20231218170901.1378254-1-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 18 Dec 2023 13:38:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107544
+ <openembedded-devel@lists.openembedded.org>; Mon, 18 Dec 2023 17:09:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107545
 
-Use canonical URL, add UPSTREAM_CHECK_GITTAGREGEX.
+Upgrade to version 0.11.1:
 
-Changes:
+- Improved interface generator handling of multiple uppercase
+  letters sequences.
+- Improved python formatting generated by interface code generator.
+- Added option --block to generate blocking interface code.
+- Fixed docstrings still being present even if python was
+  configured with --without-doc-strings.
+- Fixed interface generator crashing when a rare write-only
+  property is encountered.
+- Fixed async interfaces iterating over all members during
+  initialization.
+- Fixed TypeError: Dbus type '\x00' is unknown being raised when
+  trying to read from a message more than one time.
+- Fixed missing class body when generating code for interface
+  without members.
 
-Dave Rodgman (12):
-      Header updates
-      Fix some non-standard headers
-      Update documentation
-      Add Changelog for license
-      Update license for p256-m
-      README improvements to 3rdparty section
-      assemble Changelog
-      Fix typos in changelog
-      Bump version
-      Update BRANCHES
-      Update Changelog with bugfix entry
-      Add docs re Everest license
-
-David Horstmann (1):
-      Fix 3rdparty target names for custom config
-
-License-update: Upstream clarified licensing as dual Apache-2.0 or GPL-2.0 or later
-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
+ .../{python3-sdbus_0.11.0.bb => python3-sdbus_0.11.1.bb}  | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-sdbus_0.11.0.bb => python3-sdbus_0.11.1.bb} (64%)
 
- .../mbedtls/{mbedtls_3.5.0.bb => mbedtls_3.5.1.bb}       | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
- rename meta-networking/recipes-connectivity/mbedtls/{mbedtls_3.5.0.bb => mbedtls_3.5.1.bb} (90%)
-
-diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.5.0.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.5.1.bb
-similarity index 90%
-rename from meta-networking/recipes-connectivity/mbedtls/mbedtls_3.5.0.bb
-rename to meta-networking/recipes-connectivity/mbedtls/mbedtls_3.5.1.bb
-index 5f284227edc0..6fc824898a58 100644
---- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.5.0.bb
-+++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_3.5.1.bb
-@@ -17,16 +17,17 @@ understand what the code does. It features:                          \
+diff --git a/meta-python/recipes-devtools/python/python3-sdbus_0.11.0.bb b/meta-python/recipes-devtools/python/python3-sdbus_0.11.1.bb
+similarity index 64%
+rename from meta-python/recipes-devtools/python/python3-sdbus_0.11.0.bb
+rename to meta-python/recipes-devtools/python/python3-sdbus_0.11.1.bb
+index 6abdad0be..6372d3488 100644
+--- a/meta-python/recipes-devtools/python/python3-sdbus_0.11.0.bb
++++ b/meta-python/recipes-devtools/python/python3-sdbus_0.11.1.bb
+@@ -3,9 +3,15 @@ HOMEPAGE = "https://python-sdbus.readthedocs.io/en/latest/"
+ LICENSE = "LGPL-2.1-or-later"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=e77986dc8e2ee22d44a7c863e96852ae"
  
- HOMEPAGE = "https://tls.mbed.org/"
+-SRC_URI[sha256sum] = "f86fbadae54fea6441ec2f27dc29daf085269d66c5d9df1a4fbc9474a24b91d0"
++SRC_URI[sha256sum] = "adb97718ce996bb308520682c50b1a13e606d65a6edb1c1967a15d2e570cb3b7"
  
--LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
-+LICENSE = "Apache-2.0 | GPL-2.0-or-later"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=379d5819937a6c2f1ef1630d341e026d"
+ REQUIRED_DISTRO_FEATURES = "systemd"
+ DEPENDS += "systemd"
  
- SECTION = "libs"
- 
- S = "${WORKDIR}/git"
--SRCREV = "1ec69067fa1351427f904362c1221b31538c8b57"
--SRC_URI = "git://github.com/ARMmbed/mbedtls.git;protocol=https;branch=master \
-+SRCREV = "edb8fec9882084344a314368ac7fd957a187519c"
-+SRC_URI = "git://github.com/Mbed-TLS/mbedtls.git;protocol=https;branch=master \
- 	file://0001-AES-NI-use-target-attributes-for-x86-32-bit-intrinsi.patch \
- 	file://run-ptest"
-+UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
- 
- inherit cmake update-alternatives ptest
- 
++RDEPENDS:${PN} += " \
++    ${PYTHON_PN}-asyncio \
++    ${PYTHON_PN}-numbers \
++    ${PYTHON_PN}-core \
++"
++
+ inherit pypi setuptools3 features_check pkgconfig
 -- 
-2.39.0
+2.39.2
 
 
