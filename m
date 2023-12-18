@@ -1,148 +1,100 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <JPEWhacker@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CF846C46CD2
-	for <webhook@archiver.kernel.org>; Mon, 18 Dec 2023 17:09:26 +0000 (UTC)
-Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com [209.85.167.45])
- by mx.groups.io with SMTP id smtpd.web11.49285.1702919359275561316
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 84C22C35274
+	for <webhook@archiver.kernel.org>; Mon, 18 Dec 2023 20:47:02 +0000 (UTC)
+Received: from mail-oa1-f53.google.com (mail-oa1-f53.google.com [209.85.160.53])
+ by mx.groups.io with SMTP id smtpd.web10.1760.1702932416522387227
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Dec 2023 09:09:19 -0800
+ Mon, 18 Dec 2023 12:46:56 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=VW4a/r4p;
- spf=pass (domain: konsulko.com, ip: 209.85.167.45, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-lf1-f45.google.com with SMTP id 2adb3069b0e04-50e3cdcf010so1149061e87.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 18 Dec 2023 09:09:18 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=RBtlCvwV;
+ spf=pass (domain: gmail.com, ip: 209.85.160.53, mailfrom: jpewhacker@gmail.com)
+Received: by mail-oa1-f53.google.com with SMTP id 586e51a60fabf-1f5bd86ceb3so2537676fac.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 18 Dec 2023 12:46:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1702919357; x=1703524157; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=6lEuY2kL0LWNVjMUl1qXWl9QWqO3SkHlonH3B611uOA=;
-        b=VW4a/r4pFyySj680NPD9WshH5Gg3gNt8vKmqxlSmVC7iXY5z8E6eAy6YOQ3LRoojvN
-         IlWxjtYvOgQzr2MrVw7DhbNkfDyMPtxzBy63+6ogA/c3ll6uT9DdOB0To+Vbk1X3KNIj
-         rW1P/rGucky1ePjpBAwu0h2rdOFxzQyBW5fjg=
+        d=gmail.com; s=20230601; t=1702932415; x=1703537215; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=6KHwuWoJHEOVaoIAQo+hgB6xoLO8IQTPR0z3V/GL0xs=;
+        b=RBtlCvwV5OpD8l9B6IFIb8ywRkxlDgIJAcqAYodNwFyhYkVlEXpI7quUbJNHF+TPS8
+         PUQhfpsqwPl3NUMi0TbNJaFaJXuv+9E+jtcQlmzrwhtP4FCLphSnaQIbFJdCDRA/iR2x
+         e//0mmoNFT5MehU0tMh4UhpuypgkNi2+eBYQykOMjIUofRK/Di2A323GMoma8BdSwv4s
+         KRETLbJHBEW2iRz5kooKKF5zH/jL9Kj0fe2684ytYcRpZVBwRdvau5u1EUy+9dW8sB/S
+         LpT5yva7h777JRzy3QBCl3pAwBDUwJeGbP9d4wdkfNCK0FTfgTL02I7AZ1hICwFwlEc1
+         YdXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702919357; x=1703524157;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=6lEuY2kL0LWNVjMUl1qXWl9QWqO3SkHlonH3B611uOA=;
-        b=sKzfvFqtUjH7nfRd9IIFeWkfEFn1UN4yk9H1SQQSTXI5LUdlptUm0pnhigBuHDl2aV
-         8v3fvd5O0XUEiLq30FT69Tjg+pN5X/UXR3R0Pz6ePj7S4hFTlqGLxDv5ZqwoDdxLZO6h
-         n6xylWeXlYmkJLBlz1pOEb/+5Zg1U+SYY5US/l1+rHZXzQVAMdlJWE1mg0zLNZXUMGJH
-         PJREBt+iJ8us5XsPbi9obZI0Bb9sg21Rw+sJZwEQmYl6gRVQt9R0d2wOTmyJLU998k5R
-         W5zSsbBacGoM9Yuu3oVpgb+tI4ZlUvX4+h/bK2plfRRSrLcf4IIqPz1oHdW4JFtMrO0z
-         GV2A==
-X-Gm-Message-State: AOJu0Ywld/cNNlWqzOkY11GzmCCHUElghWANuBwHzi0+QRjneOXtCCtR
-	1a4YDOnaD4Bp/JvJD+czGgvTdKyP0u8W/KEEVG0=
-X-Google-Smtp-Source: AGHT+IGgaUBrJGA7krK1T7na91t2aTm62K4yC24fI1qXbB43YWYrcuOXABKlurPqIDtHo3pXND+yUA==
-X-Received: by 2002:a05:6512:2352:b0:50d:1e6f:b52c with SMTP id p18-20020a056512235200b0050d1e6fb52cmr5573762lfu.76.1702919357008;
-        Mon, 18 Dec 2023 09:09:17 -0800 (PST)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id d12-20020a056402000c00b0055344b92fb6sm1380419edu.75.2023.12.18.09.09.16
+        d=1e100.net; s=20230601; t=1702932415; x=1703537215;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=6KHwuWoJHEOVaoIAQo+hgB6xoLO8IQTPR0z3V/GL0xs=;
+        b=uK7wM1SU98kDEckXmfrYzgaWmisuYwBgiiweJ0wyy3YfPDmpG72dle7YkX1lnTEEOH
+         O9cRFZ2yjR/dQiMOp5sM7mYEoWvkKwG1VC5Kev7R4gy3NQ+k26jaLhkKm/865JlEtHOo
+         ZT8FBG+A9tF9D073507tTVS+fcuffYAUkkagyXWaiakc/FC1xV7qbrSiQ8KSgHw/m02a
+         DfL6NT+6HQA9a/C+bpDSpA7SH/QYKwncJhxLfgfW35ilWF4h0RZFQt95oeoTbm6VXlW6
+         LlDzwbh/Bfe8mnduQlrIZNtjpvLbGYrpgfqJ188/09r8sncdwdhwE50Kkz+G3LSWEChm
+         xN5Q==
+X-Gm-Message-State: AOJu0Yw5LLjLzR0HaLTv1lMatdaEqc3dXykT/ENqI+rATQsnxaDErpSj
+	HrzjxnIifbK9Ipa7i9dBjJl41Nf02pU=
+X-Google-Smtp-Source: AGHT+IGCFSpAM//Gp082jNDVl2wumVmFXA8YWFo4AY2/4FZbsLwDmJIHkJUY36+kkqYhLMQFk7ZcvQ==
+X-Received: by 2002:a05:6870:3042:b0:203:ae94:3350 with SMTP id u2-20020a056870304200b00203ae943350mr3725884oau.87.1702932414760;
+        Mon, 18 Dec 2023 12:46:54 -0800 (PST)
+Received: from localhost.localdomain ([2601:282:4300:19e0::35cb])
+        by smtp.gmail.com with ESMTPSA id lh10-20020a0568700b0a00b002032bb7895fsm2977810oab.55.2023.12.18.12.46.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 18 Dec 2023 09:09:16 -0800 (PST)
-From: Leon Anavi <leon.anavi@konsulko.com>
+        Mon, 18 Dec 2023 12:46:54 -0800 (PST)
+From: Joshua Watt <jpewhacker@gmail.com>
+X-Google-Original-From: Joshua Watt <JPEWhacker@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 4/4] python3-rlp: upgrade 3.0.0 -> 4.0.0
-Date: Mon, 18 Dec 2023 19:09:01 +0200
-Message-Id: <20231218170901.1378254-4-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20231218170901.1378254-1-leon.anavi@konsulko.com>
-References: <20231218170901.1378254-1-leon.anavi@konsulko.com>
+Cc: Joshua Watt <JPEWhacker@gmail.com>
+Subject: [oe][meta-oe][PATCH] redis: Create state directory in systemd service
+Date: Mon, 18 Dec 2023 13:46:51 -0700
+Message-Id: <20231218204651.4055447-1-JPEWhacker@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 18 Dec 2023 17:09:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107548
+ <openembedded-devel@lists.openembedded.org>; Mon, 18 Dec 2023 20:47:02 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107549
 
-Upgrade to version 4.0.0:
+Configures the systemd service file for redis to create the required
+state directory before redis starts.
 
-- repr() now returns an evaluatable string, like
-  MyRLPObj(my_int_field=1, my_str_field="a_str")
-- Convert .format strings to f-strings
-- Add autoflake linting and move config to pyproject.toml
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
 ---
- ...-setup-don-t-use-setuptools-markdown.patch | 37 -------------------
- ...hon3-rlp_3.0.0.bb => python3-rlp_4.0.0.bb} |  8 ++--
- 2 files changed, 5 insertions(+), 40 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-rlp/0001-setup-don-t-use-setuptools-markdown.patch
- rename meta-python/recipes-devtools/python/{python3-rlp_3.0.0.bb => python3-rlp_4.0.0.bb} (60%)
+ meta-oe/recipes-extended/redis/redis-7.2.3/redis.service | 1 +
+ meta-oe/recipes-extended/redis/redis/redis.service       | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-rlp/0001-setup-don-t-use-setuptools-markdown.patch b/meta-python/recipes-devtools/python/python3-rlp/0001-setup-don-t-use-setuptools-markdown.patch
-deleted file mode 100644
-index 0ab012a98..000000000
---- a/meta-python/recipes-devtools/python/python3-rlp/0001-setup-don-t-use-setuptools-markdown.patch
-+++ /dev/null
-@@ -1,37 +0,0 @@
--From 5a2db801c6520be296cee9cba0e0e4ffac68430c Mon Sep 17 00:00:00 2001
--From: Bartosz Golaszewski <brgl@bgdev.pl>
--Date: Wed, 11 May 2022 15:11:19 +0200
--Subject: [PATCH] setup: don't use setuptools-markdown
--
--This project is deprecated and irrelevant for the functionality of
--pyrlp. We don't support it in meta-python so just drop it from the
--dependencies.
--
--Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
-----
--Upstream-Status: Pending
--
-- setup.py | 2 --
-- 1 file changed, 2 deletions(-)
--
--diff --git a/setup.py b/setup.py
--index 1055fb1..55fca24 100755
----- a/setup.py
--+++ b/setup.py
--@@ -46,13 +46,11 @@ setup(
--     # *IMPORTANT*: Don't manually change the version here. See README for more.
--     version='3.0.0',
--     description="A package for Recursive Length Prefix encoding and decoding",
---    long_description_markdown_filename='README.md',
--     author="jnnk",
--     author_email='jnnknnj@gmail.com',
--     url='https://github.com/ethereum/pyrlp',
--     packages=find_packages(exclude=["tests", "tests.*"]),
--     include_package_data=True,
---    setup_requires=['setuptools-markdown'],
--     install_requires=[
--         "eth-utils>=2.0.0,<3",
--     ],
---- 
--2.34.1
--
-diff --git a/meta-python/recipes-devtools/python/python3-rlp_3.0.0.bb b/meta-python/recipes-devtools/python/python3-rlp_4.0.0.bb
-similarity index 60%
-rename from meta-python/recipes-devtools/python/python3-rlp_3.0.0.bb
-rename to meta-python/recipes-devtools/python/python3-rlp_4.0.0.bb
-index e747ae33b..49efd09a4 100644
---- a/meta-python/recipes-devtools/python/python3-rlp_3.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-rlp_4.0.0.bb
-@@ -4,11 +4,13 @@ SECTION = "devel/python"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=00854fa80a84236706b11f47f23e61e7"
+diff --git a/meta-oe/recipes-extended/redis/redis-7.2.3/redis.service b/meta-oe/recipes-extended/redis/redis-7.2.3/redis.service
+index a52204cc7..b7791d0df 100644
+--- a/meta-oe/recipes-extended/redis/redis-7.2.3/redis.service
++++ b/meta-oe/recipes-extended/redis/redis-7.2.3/redis.service
+@@ -10,6 +10,7 @@ ExecStop=/usr/bin/redis-cli shutdown
+ Restart=always
+ LimitNOFILE=10032
+ Type=notify
++StateDirectory=redis
  
--SRC_URI[sha256sum] = "63b0465d2948cd9f01de449d7adfb92d207c1aef3982f20310f8009be4a507e8"
--SRC_URI += "file://0001-setup-don-t-use-setuptools-markdown.patch"
-+SRC_URI[sha256sum] = "61a5541f86e4684ab145cb849a5929d2ced8222930a570b3941cf4af16b72a78"
+ [Install]
+ WantedBy=multi-user.target
+diff --git a/meta-oe/recipes-extended/redis/redis/redis.service b/meta-oe/recipes-extended/redis/redis/redis.service
+index 36d29852d..f98f2d19e 100644
+--- a/meta-oe/recipes-extended/redis/redis/redis.service
++++ b/meta-oe/recipes-extended/redis/redis/redis.service
+@@ -9,6 +9,7 @@ ExecStart=/usr/bin/redis-server /etc/redis/redis.conf
+ ExecStop=/usr/bin/redis-cli shutdown
+ Restart=always
+ LimitNOFILE=10032
++StateDirectory=redis
  
- inherit pypi setuptools3
- 
- DEPENDS += "python3-pip-native"
- 
--RDEPENDS:${PN} += "python3-eth-utils"
-+RDEPENDS:${PN} += " \
-+    ${PYTHON_PN}-eth-utils \
-+    ${PYTHON_PN}-typing-extensions \
-+"
+ [Install]
+ WantedBy=multi-user.target
 -- 
-2.39.2
+2.34.1
 
 
