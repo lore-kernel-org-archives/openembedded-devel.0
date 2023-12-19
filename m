@@ -2,58 +2,59 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6F0A0C41535
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 70D0FC46CD4
 	for <webhook@archiver.kernel.org>; Tue, 19 Dec 2023 06:27:05 +0000 (UTC)
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
- by mx.groups.io with SMTP id smtpd.web10.6733.1702967221596003136
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+ by mx.groups.io with SMTP id smtpd.web10.6735.1702967224439955778
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Dec 2023 22:27:01 -0800
+ Mon, 18 Dec 2023 22:27:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=g5EKyyQ1;
- spf=pass (domain: gmail.com, ip: 209.85.214.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-1d3e2972f65so263765ad.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 18 Dec 2023 22:27:01 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=SAj5nMOY;
+ spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-1d38bedd799so32632645ad.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 18 Dec 2023 22:27:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1702967221; x=1703572021; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1702967224; x=1703572024; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=KcSZcwVQgBpCaMeZMQbNqDfLvHonrgJ8KEVjf+wSX2k=;
-        b=g5EKyyQ1Wh67zBkx7hlUGbTLpbeOxgD3Q5vcJ8BH4t+JBTuL/nZf4suwkFE2DqBLmL
-         FreDJuDGTHGoMEhEj8RGMhV8nCSbBa2vSRRpUK32Eq/Rh42U9T7jBSyfnP/SrESiuhR0
-         ly0H9mS0JmE+IAyscAe57oHsbl6dEMOwGR7/nShzRMApTxqKsim89GkGzXilF3tL99gc
-         buE+rAEckFm22zdhpE/uJu/8F1QWXtKUa+ys8Gh+UsbnbSPVBS/UWIyPgjrNe0p0pX52
-         P7wD0D9kSI+BpjZQDD8ZGJvF62Gg/hG872H0wRP9XiQUikHz3m6k/YKD/4J70JQffKXZ
-         V83w==
+        bh=diEF9AFhazal0qlIYq5v3d23gOWVcGTWn0RPZlUB9Uo=;
+        b=SAj5nMOYaZ/0T2o3pjXXHE8iBo2QSCCFdykXpRXLC4bO1DuPDf+ycLrmS+fqg8pE3H
+         Ragg7StKy+BFv9VRdayu83p5oDGd0SixHQUIx+wruEsZMj18YOX23xm+mpHBYomYlw0M
+         9lddi+y6xad15klclZG8MgADoRQRPKyngeZG22PHVwhI2P8oqJ8WleVtL59kNtx1mVMV
+         cKdif5IKHwtBRNAYd7WuUDMk71M9RveZd+j4ioUCoY0UwBS8i3SVAe5VgyXr0aLoBLdd
+         qA2yLKE+KODJ6JJWU46j8iW/KeHcV1FPuPm71X62K57cX0YpmHiDmiWhK4CuAms+Hm85
+         WDVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702967221; x=1703572021;
+        d=1e100.net; s=20230601; t=1702967224; x=1703572024;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=KcSZcwVQgBpCaMeZMQbNqDfLvHonrgJ8KEVjf+wSX2k=;
-        b=YqFYQCS2L629wK/CnRz5A6oRxBId2uM/OlrFo+RLqtlFhdMMLn4TupNiEWjILW8Byd
-         Rg+MgmruhvemvWo/m69gp3ldHHYC7XcnUjvw1QstfRwv0wxzijM/LSXFSxbhpkgk47p1
-         f5P4UCY8uDv+RkUDYoJrs9jfV4cRCD2tevvTUEmW3U+hZzvj3cjSlcbVIbeCJOpv36/c
-         NtFd5w91jtTX6cjcR0o/SO+HfBjWoQU9YCiPR2XNZEsdtw4qI/Vw+bWBe0qQNeUueC4x
-         aqk2b2SueXFH68rIk2vx+UsSGqF2PikcvZyvS2I+vMtKsARcYvG6Qz2jHcaYVTkBqff2
-         Gu+g==
-X-Gm-Message-State: AOJu0Yy4h0uX6oT4qloy1yRYurwfAcUyj0B75KOPn9YeW6w0ENnHydPR
-	zUpcXM4Nwqr7UjIryd6QN2U=
-X-Google-Smtp-Source: AGHT+IHrUZ0BMQCBHXQhlNNl2K1cje3HmoGVO1MXwYVFJjv3KwK8O0MB709MTCCSF4+TwAJATR99JA==
-X-Received: by 2002:a17:902:cec7:b0:1d3:df5f:65fd with SMTP id d7-20020a170902cec700b001d3df5f65fdmr115852plg.126.1702967220842;
-        Mon, 18 Dec 2023 22:27:00 -0800 (PST)
+        bh=diEF9AFhazal0qlIYq5v3d23gOWVcGTWn0RPZlUB9Uo=;
+        b=deG0uwQaJzZyjUOv/b+9U/pXz0RLonGOSbPoa1Wl1OtOYAXZEbxiIviYfcCFlyl/IP
+         OVJqAHHY1DrkYN/2LAHWClWetd+1iGIVeF51TvdgOJ8x/Ml0DuoUi4rX1CNkimX4/y20
+         5YAH4hpCjo93ZMW0D2mxBiJDO+RuLYETq8ndX9xO+iUFT7UH6RvFBoCFABpTE3wArdPo
+         509DVbNXvYAPiXU6px3g949Fj5vvAP4tReIIbwJbSZ9iU0XtF70PPunExQryDmg5Jxbh
+         Dl0MZcF1A5/t1dSYOIUWEufsUYMKofttuZm3EENXHafmgHY6Ow37Uv7XSJCJCGd4DyyT
+         Tr7A==
+X-Gm-Message-State: AOJu0YyHUI86zLMwEA4XiuDRJVteKLzFdO433EvW6hWRGuyXnj2yvdcS
+	HNQHNas2GMt57PtH87rUnK31KFdrE/8=
+X-Google-Smtp-Source: AGHT+IGC25Y2r1r0MMwzWhteF/xH4sDjR8RRuakPRR6fpMN4YqFwBpwbJlp2DXLBGYx1iwEnj8Gfww==
+X-Received: by 2002:a17:902:e741:b0:1d3:c1d2:47a3 with SMTP id p1-20020a170902e74100b001d3c1d247a3mr3040637plf.33.1702967223866;
+        Mon, 18 Dec 2023 22:27:03 -0800 (PST)
 Received: from apollo.localdomain ([2601:646:9d80:4380::4b6f])
-        by smtp.gmail.com with ESMTPSA id k10-20020a170902694a00b001cca8a01e68sm20040524plt.278.2023.12.18.22.27.00
+        by smtp.gmail.com with ESMTPSA id k10-20020a170902694a00b001cca8a01e68sm20040524plt.278.2023.12.18.22.27.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 18 Dec 2023 22:27:00 -0800 (PST)
+        Mon, 18 Dec 2023 22:27:03 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org, 
- Samuli Piippo <samuli.piippo@gmail.com>
-In-Reply-To: <20231213084327.1840248-1-samuli.piippo@qt.io>
-References: <20231213084327.1840248-1-samuli.piippo@qt.io>
-Subject: Re: [meta-oe][PATCH] jasper: enable opengl only wih x11
-Message-Id: <170296722018.1627685.18365831827811753541.b4-ty@gmail.com>
-Date: Mon, 18 Dec 2023 22:27:00 -0800
+ Derek Straka <derek@asterius.io>
+In-Reply-To: <20231213222516.1124207-1-derek@asterius.io>
+References: <20231213222516.1124207-1-derek@asterius.io>
+Subject: Re: [meta-python][PATCH] python3-termcolor: update to version
+ 2.4.0
+Message-Id: <170296722301.1627685.12729133029409668547.b4-ty@gmail.com>
+Date: Mon, 18 Dec 2023 22:27:03 -0800
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -62,20 +63,26 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 19 Dec 2023 06:27:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107555
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107558
 
 
-On Wed, 13 Dec 2023 08:43:27 +0000, Samuli Piippo wrote:
-> The opengl PACKAGECONFIG depends on freeglut, but after commit
-> f721876add48dccfd228cc09ef261909afeb2d25 that's only available
-> with x11. Enable it only when both openg and x11 are available.
+On Wed, 13 Dec 2023 22:25:16 +0000, Derek Straka wrote:
+> Changelog:
 > 
+> Added
+>   - Document terminal colour detection overrides (#60) @hugovk
+>   - Add support for Python 3.13 (#55) @hugovk
+> Changed
+>   - Improve isatty check (#56) @XiaoliChan
+>   - Improve typing (#44) @marcin-serwin
+>   - Drop support for EOL Python 3.7 (#47) @hugovk
 > 
+> [...]
 
 Applied, thanks!
 
-[1/1] jasper: enable opengl only wih x11
-      commit: 5f76240e8810e681e822e51ea40c8332b5e6d978
+[1/1] python3-termcolor: update to version 2.4.0
+      commit: 2840fcf18dd6a416c2924040adf664a87da9ee66
 
 Best regards,
 -- 
