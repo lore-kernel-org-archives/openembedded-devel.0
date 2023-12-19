@@ -2,59 +2,57 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5611BC46CD4
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5BD67C46CD2
 	for <webhook@archiver.kernel.org>; Tue, 19 Dec 2023 06:28:07 +0000 (UTC)
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
- by mx.groups.io with SMTP id smtpd.web11.6852.1702967283375277955
+Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
+ by mx.groups.io with SMTP id smtpd.web10.6781.1702967279592828216
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Dec 2023 22:28:03 -0800
+ Mon, 18 Dec 2023 22:27:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=NW2vb2sz;
- spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-1d3dee5f534so1518665ad.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 18 Dec 2023 22:28:03 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=lSoFS/ZE;
+ spf=pass (domain: gmail.com, ip: 209.85.215.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f181.google.com with SMTP id 41be03b00d2f7-5cdbc7bebecso30633a12.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 18 Dec 2023 22:27:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1702967283; x=1703572083; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1702967279; x=1703572079; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=eP4GdY6EN6mV7TQQ5KAtBkEbfOvefCuWygQz9LalFGk=;
-        b=NW2vb2szXDS24/gSzM1sFQv0ioxRggEsKFjNyHgWLziaR7dh18taR7nNEsaBG63Ffd
-         47/5SYt6rqSe0J/xWTzL6SkS3vLnAtM8UrM6jDig3FE1e+nvTuddyCXGNoE3XkURUKpr
-         C1lauikfey7aiLrneUin90tfJMbGGd1BE6ZgzmT7y3N0ncjZHNOHWDc7HoB/L0AT868M
-         7cH28kVSLuXXZDGifuZj0ngY/CEPCoNMlNpBwmKtH0crxFy1fKzdrk7zUWTyptauhhSY
-         VLKB9W3cb+hk2KjE6lzYbcnncbSJThBL/vvTNsx2Qu2kbXPLHRCSrCho8bMKm7M0i4xV
-         agng==
+        bh=sO31YUmmszZ0KLiWI/Nal0UEszpV8vL4rMKmGyowjwk=;
+        b=lSoFS/ZExNxmq+aUOgxSPU9iwA1a1uE20ekseDRznXtYcdFwcQ8kpT1mk5fdQJ/vpq
+         0S8zu1vXHoDhi9EnS6bOrlyPQExSeoY5Yt4BCzIinNJqX1CSBl1pLXZhAnzl2rtgjSZ7
+         SdNVVmHQe1dkd3nA8ukCkG3zXQD0uHA2fNzo2ZZ3zL9P/KhNIosxvgDeGBVp78qMEUl4
+         IWeMt3R6AN1FhwDBA/bS8uKi5f9QB+5F95D1+dKDjdenPzqiR6PfubU3cyqRccuE51wP
+         +4UlfSuOBnFt+7op6YLHe0bRmpReCoA28obP3iho84p//IMaQBjOexGi231Gwzxs/Zfb
+         2OlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702967283; x=1703572083;
+        d=1e100.net; s=20230601; t=1702967279; x=1703572079;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=eP4GdY6EN6mV7TQQ5KAtBkEbfOvefCuWygQz9LalFGk=;
-        b=dBKT2GyMX4TP/fYKqRzO8v60yy0XnqaKq/isNidGhDAjGoW6bvFzO98fZn5d1s4RrL
-         obYNMzxdZtfS/hc3PCzHtNX+G7THCgtQzKCSve+SBSkOb3qxMMtrMGkMruyBVJlhLWTh
-         aVopyJGM7Nl2fhqe4RSdDHZCwvg8CGlCiYFkI2JusRrNQOjnTLAplCOte+qMsSsojBBf
-         HUAWPHG1cloVzDqAJ1aXWLb3fBdo+xjskERX1bN0YJJ0ONbv9Jha9FLDjLZ07t+jAFGo
-         GiEazZzBW0ziZfaR2TRkC7RH0Kr/72hJHQyQk/rdS6rmMw6R2tHQwkHRO5SW+evsZjFn
-         e/8A==
-X-Gm-Message-State: AOJu0YxUBvb1mQqUnpGKQQl5JYO7x3AC1Yy/r1O/y7Zu6UWRiXr/TU8T
-	z7ASE8/6P9nstnL4nstuhsI=
-X-Google-Smtp-Source: AGHT+IEFHG19uu9zDbRoYxWihHjl9Sx6+Hd9JQkR79YswEXFQ9K8yTzecJxby4mJt/a6FHmIBi0yQQ==
-X-Received: by 2002:a17:903:245:b0:1d3:abaa:1399 with SMTP id j5-20020a170903024500b001d3abaa1399mr831431plh.51.1702967282756;
-        Mon, 18 Dec 2023 22:28:02 -0800 (PST)
+        bh=sO31YUmmszZ0KLiWI/Nal0UEszpV8vL4rMKmGyowjwk=;
+        b=okzW4KcAZUTMpa37j4YO8hW3tuL59XoK/nImRG0mObNwhcRjIyIuD51nZktKpNyXRm
+         j01KvVifaQW89vhtb6taKs+rpCf/mjcdWGF+sDUsGAhisFs0Eij/+gp5Fz/6BaIP8acK
+         X6aKK6GSR/Gc0dPz/UhVncDPv40tum6DxrylS3pBzzYV2ftmkC3ti9r3hPp1og6latwM
+         VdjanQBIA3UY++iqFnloDAwRRs8RNt8US2D2w9v8FAzxZMjcCb/UbF/VRsSYRsWL2neV
+         Y+6G8lV9ZtmtIRmK2roSGfUics5KqSNYQeJiz+/n2eSyQuCpN0shZ4ZKQyWbrxS+LsfE
+         vvNA==
+X-Gm-Message-State: AOJu0YyLydRb7N6+Ank1MM3VqT2i3Qw9LE/tpUKcn+SR+n8Y3kQDj5Tu
+	hPLmffS1XsToi0GGjwVdyKI=
+X-Google-Smtp-Source: AGHT+IFDKa/ga/FYW3s1gGC/ZSM6OCKShErlkuyIaDO4SnL2EFpn3AlZCF3EcbpEMfJKld6Lqs5ASg==
+X-Received: by 2002:a17:903:248:b0:1d0:6ffd:8358 with SMTP id j8-20020a170903024800b001d06ffd8358mr8668641plh.99.1702967278957;
+        Mon, 18 Dec 2023 22:27:58 -0800 (PST)
 Received: from apollo.localdomain ([2601:646:9d80:4380::4b6f])
-        by smtp.gmail.com with ESMTPSA id k10-20020a170902694a00b001cca8a01e68sm20040524plt.278.2023.12.18.22.28.02
+        by smtp.gmail.com with ESMTPSA id k10-20020a170902694a00b001cca8a01e68sm20040524plt.278.2023.12.18.22.27.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 18 Dec 2023 22:28:02 -0800 (PST)
+        Mon, 18 Dec 2023 22:27:58 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org, 
- Leon Anavi <leon.anavi@konsulko.com>
-In-Reply-To: <20231218170901.1378254-1-leon.anavi@konsulko.com>
-References: <20231218170901.1378254-1-leon.anavi@konsulko.com>
-Subject: Re: [meta-python][PATCH 1/4] python3-sdbus: upgrade 0.11.0 ->
- 0.11.1
-Message-Id: <170296728205.1627685.15303586159387960074.b4-ty@gmail.com>
-Date: Mon, 18 Dec 2023 22:28:02 -0800
+To: openembedded-devel@lists.openembedded.org, wangmy@fujitsu.com
+In-Reply-To: <1702619789-4239-1-git-send-email-wangmy@fujitsu.com>
+References: <1702619789-4239-1-git-send-email-wangmy@fujitsu.com>
+Subject: Re: [oe] [meta-oe] [PATCH] sip: upgrade 6.8.0 -> 6.8.1
+Message-Id: <170296727837.1627685.4462624524232109174.b4-ty@gmail.com>
+Date: Mon, 18 Dec 2023 22:27:58 -0800
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -63,39 +61,17 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 19 Dec 2023 06:28:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107627
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107622
 
 
-On Mon, 18 Dec 2023 19:08:58 +0200, Leon Anavi wrote:
-> Upgrade to version 0.11.1:
+On Fri, 15 Dec 2023 13:56:29 +0800, wangmy@fujitsu.com wrote:
 > 
-> - Improved interface generator handling of multiple uppercase
->   letters sequences.
-> - Improved python formatting generated by interface code generator.
-> - Added option --block to generate blocking interface code.
-> - Fixed docstrings still being present even if python was
->   configured with --without-doc-strings.
-> - Fixed interface generator crashing when a rare write-only
->   property is encountered.
-> - Fixed async interfaces iterating over all members during
->   initialization.
-> - Fixed TypeError: Dbus type '\x00' is unknown being raised when
->   trying to read from a message more than one time.
-> - Fixed missing class body when generating code for interface
->   without members.
-> 
-> [...]
+
 
 Applied, thanks!
 
-[1/4] python3-sdbus: upgrade 0.11.0 -> 0.11.1
-      commit: a89917242d352f319b142103f33b0987f0215f99
-[2/4] python3-zeroconf: upgrade 0.128.4 -> 0.130.0
-      commit: c6ba2fcc4a46cf8df0060d1dc90d4b6864cb6140
-[3/4] python3-dominate: upgrade 2.8.0 -> 2.9.0
-      commit: 1d887eede793e8e3da3a75f3ffead7ea1d867698
-[4/4] python3-rlp: upgrade 3.0.0 -> 4.0.0
-      commit: fb7023bd3c2038fc61f40d3ed95c96a74cef2368
+[1/1] sip: upgrade 6.8.0 -> 6.8.1
+      commit: fa9122a2b8a2924ad3939db12082d74763c59034
 
 Best regards,
 -- 
