@@ -1,171 +1,216 @@
-Return-Path: <alex.kiernan@gmail.com>
+Return-Path: <frederic.martinsons@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9FBB6C46CCD
-	for <webhook@archiver.kernel.org>; Tue, 19 Dec 2023 13:41:09 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.web10.13661.1702993267563635093
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 564D0C46CD3
+	for <webhook@archiver.kernel.org>; Tue, 19 Dec 2023 14:55:40 +0000 (UTC)
+Received: from mail-oi1-f180.google.com (mail-oi1-f180.google.com [209.85.167.180])
+ by mx.groups.io with SMTP id smtpd.web10.15289.1702997735542610754
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 Dec 2023 05:41:07 -0800
+ Tue, 19 Dec 2023 06:55:35 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=IwPj3Mmc;
- spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: alex.kiernan@gmail.com)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-40c69403b3eso45363365e9.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 19 Dec 2023 05:41:07 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=NFV4dy43;
+ spf=pass (domain: gmail.com, ip: 209.85.167.180, mailfrom: frederic.martinsons@gmail.com)
+Received: by mail-oi1-f180.google.com with SMTP id 5614622812f47-3b9e2a014e8so3682310b6e.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 19 Dec 2023 06:55:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1702993265; x=1703598065; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=/nnhL1qEqbjKjuWRLucVacaJyP21ALC7SIDb1uIrcIg=;
-        b=IwPj3MmcizWlMfaqzfh5VNkseUvKHfLHeIhcV4jt5lUuRHu5zWw7hZap/CcAfAlo2O
-         f9adNnPRGRZIyxd2CvU+sirXnTZWgRoM9ovi9+j0nChrFnNiP7TQyXZ7XIugpPylwZEd
-         FUWnlSTK17iPTq6xOux2ynpw8HQf5/Cu+c1tTWbkWbYuSkn/1NZJRZ+08lM6AotA2TeC
-         lHKwuEiJ1O/Zl4zLn6R/pPNKRm8htFlPwqbrUWzOYLANoxvZoiIi7eX5ZoiiWdn2yeIw
-         LLYdYMmR5AommC/5TEBwobEIqCAfMT5gC8BBULieeb6Mp0ncKHSaAyqO20Qr4bj5Rzla
-         qoUw==
+        d=gmail.com; s=20230601; t=1702997735; x=1703602535; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=UBRqAWkkOqAMJT/PGbrlDgqCNb6N6dnqbZaMqz7CcXM=;
+        b=NFV4dy43PkW3wI/W/hHznytLqqNEnY9b7DorrepUf1lz/oiqcD70nKbsjeGW8LpZL0
+         4RaQHEZbUGumWH1N+icMgp6QqYD/8f889Wt2soGnUMk8oI/b2jQ+Ut1TkDkSCU/b1PGs
+         Ia/cf4uTz8aMoGSxfQ0GXxApdHNfHCOqgyHjWqJ2r/uNA6TxiP8r0CNNjyyBXElRyWPl
+         oK8kceQdJqv+md6F6fgT+R8t7HSntDKPWuc6CO4gfQZd1hPJcZLHZmLDjQUinl6eHVtI
+         mUbOJQ4P8Zv89gpf3a9hMFwNYZIUHazNuIx0aDSwJLi7H3vla88rmPuIQM9bVJ945BP9
+         ZlQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1702993265; x=1703598065;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1702997735; x=1703602535;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=/nnhL1qEqbjKjuWRLucVacaJyP21ALC7SIDb1uIrcIg=;
-        b=PJrI5G8cW262FvTEOH0TZMeCa2AXIfBNC8otP0FV/mVz9hY04wMHVhfqjyyISGjJvs
-         c9iB3oAaB1i1VEtqKAEmT/U/3JEoaMsd0KOxuDisQhUZQ/D6kDQpkWvakGnAbJzRGG3N
-         GcKaUYaJICj6yT6gbEDKY5xb3xQCb14c4LHbdkcMIvtChzKK1jdJo74prKmXfwVKPSsc
-         XOKo9fSJZsWphkVd/QVQAfjJlvfxp4acQdrjbSTfUoVMoNGyUq4OELLGCYYPxFOsMY0/
-         Xd/X1u+iqzKPp+rvU8VDOZ7Aa9l/zkw4+qQgTx3s3SadrG5fgcjsoeq2vbIgDuN4toD4
-         1zpA==
-X-Gm-Message-State: AOJu0Yz7E5iY8cQjl9ZmemxfyUIwWyN+fs9KsKprXX6S2jRoU3s7Vj6v
-	YNWjpqomlfUC9U09Z10D65FcyHMs5VM=
-X-Google-Smtp-Source: AGHT+IE1oBB/5TD0rFC/G+aYqdVGBUV6D2POEUZeIu41a9EwJeT56XR/E3jdBMauVbT5WbsPYnjZrw==
-X-Received: by 2002:a05:600c:4706:b0:40c:6b47:cb25 with SMTP id v6-20020a05600c470600b0040c6b47cb25mr4233579wmo.45.1702993265220;
-        Tue, 19 Dec 2023 05:41:05 -0800 (PST)
-Received: from Zuma-000004PC.lan ([2a02:390:9c57:0:4094:b876:d37f:10a4])
-        by smtp.gmail.com with ESMTPSA id n41-20020a05600c3ba900b0040c61ee0816sm6833405wms.0.2023.12.19.05.41.04
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 19 Dec 2023 05:41:04 -0800 (PST)
-From: Alex Kiernan <alex.kiernan@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Alex Kiernan <alex.kiernan@gmail.com>
-Subject: [meta-oe][PATCH] c-ares: Upgrade 1.22.1 -> 1.24.0
-Date: Tue, 19 Dec 2023 13:41:01 +0000
-Message-Id: <20231219134102.15916-1-alex.kiernan@gmail.com>
-X-Mailer: git-send-email 2.39.0
+        bh=UBRqAWkkOqAMJT/PGbrlDgqCNb6N6dnqbZaMqz7CcXM=;
+        b=BmEIYDGzTQLFTEGftXLpqztc9LU/+5Dc3DUCqgsWQ7SuBPu5I76F/p4bmpezxCWaI0
+         7c0DxUJJFVfkjiublEoWt7/jxYUuHdODV5qaBpjl8JszBT/LFxMgvrX3lxKjsSgTskgZ
+         xA4mibwKsQLNsBiUY8kCHYSZCL3A2Ryj8kYJOWd0o/ur8Z3lbaAcGMEeyssiXYstnAa9
+         Vs2Lxq2Xpq6e8oUDdA/yxMFL2n1PQbEY3GD4q+cdCqWq2Y1Fokrv/uTaxEf07Qi9piZY
+         MxE8zVZ/cfVEXdwObNgdKhw/1gyVNJZJRzcuxBXL4wBc+E71E0H0LFbfnwWFhsTMHxIn
+         YknA==
+X-Gm-Message-State: AOJu0YyJo09FGFQmWQO1lvkF1TszLODu6xaYbJ8pYuMjYta40vHPUuFk
+	WBMFs0Wg0oJ9DbdP/tkA1TmvRz30P+u49OgKWW0=
+X-Google-Smtp-Source: AGHT+IEVAfvRdxDzGkd6+UwLPZzVNe/19W2oKGsyEw3yVta2rrrhohtjm4Kv/q++Ai8qj4l7chylPJ6L4pct5kP/CCM=
+X-Received: by 2002:a05:6808:3089:b0:3a9:ba39:6d6e with SMTP id
+ bl9-20020a056808308900b003a9ba396d6emr23020085oib.0.1702997734787; Tue, 19
+ Dec 2023 06:55:34 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <CA+cAkeqg51T1u1DuPM_5vx+2gAn-6KxWYfY0GYuXdqvM_mbF4A@mail.gmail.com>
+ <CAMKF1soZHS40B7x+YvNF_EvnCk=E1+tcSrmEMXY1MVOUgd6CEw@mail.gmail.com> <179E5167E10B4EFD.1352@lists.openembedded.org>
+In-Reply-To: <179E5167E10B4EFD.1352@lists.openembedded.org>
+From: =?UTF-8?B?RnLDqWTDqXJpYyBNYXJ0aW5zb25z?= <frederic.martinsons@gmail.com>
+Date: Tue, 19 Dec 2023 15:55:23 +0100
+Message-ID: <CA+cAkeo==U7BGvsV7Hu-zWf=-BvaTZ95LhHU3RUiKvVQGn7zBw@mail.gmail.com>
+Subject: Re: [oe] Crash cross canadian?
+To: frederic.martinsons@gmail.com
+Cc: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="0000000000000910c2060cde0f85"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 19 Dec 2023 13:41:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107630
+ <openembedded-devel@lists.openembedded.org>; Tue, 19 Dec 2023 14:55:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107631
 
-Use PACKAGE_BEFORE_PN which is designed to introduce packages before the
-final greedy ${PN}.
+--0000000000000910c2060cde0f85
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Changes 1.24.0:
+Hello,
 
-Brad House (28):
-      Nameserver parsing: replace another hand-written parser (#643)
-      clang-format
-      SonarCloud: silence bogus reported error
-      ares_init_options() with invalid options values should unset the option
-      Enable system extensions
-      try to move AC_USE_SYSTEM_EXTENSIONS
-      ares__round_up_pow2() work around bogus warning
-      silence openwatcom warning due to qcache_max_ttl being unsigned
-      Support ipv6 link-local servers and %iface syntax (#646)
-      Windows UBSAN tests (#649)
-      increment failures on timeout (#651)
-      SonarCloud: make const
-      enhance timeout test case
-      enhance timeout test case to make sure it will re-use a previously downed server
-      Rewrite sortlist hand parser for memory safety and bugs (#653)
-      Clean up some Windows-only warnings (#654)
-      clang-format and fix one warning
-      remove redundant cast
-      use IF_NAMESIZE instead of IFNAMSIZ to avoid warning
-      Use external GoogleTest instead of bundling it (#655)
-      remove dead code: bitncmp
-      remove dead code: ares_iphlpapi.h
-      Coverity: fix allocation size as reported in new code
-      tag some functions as deprecated in docs
-      reference alternative to ares_getsock() in docs
-      1.24.0 release prep (#657)
-      rand: allow fallback from OS (#661)
-      ares_cancel() could trigger callback with wrong response code (#663)
+I sent a series for adding cross canadian crash two days ago.
 
-Changes 1.23.0:
+But I didn't see these in patchwork:
+https://patchwork.yoctoproject.org/project/oe/list/
+I thought that was automatic, did I miss something?
 
-Brad House (21):
-      Query Cache support (#625)
-      ares_set_servers_*() should allow an empty server list
-      Fix Windows UWP (Store) building and add to CI/CD (#627)
-      clang-format
-      cleanup some Windows warnings in test
-      fix additional windows test warnings
-      CMake: CXXFLAGS environment wasn't being read because C++ compiler was enabled after settings warnings.
-      now that warnings are enabled on test cases, clear a bunch of warnings
-      fix test case regression due to missing parens
-      SonarCloud: fix minor codesmells
-      more precise timeout calculation (#633)
-      environment is meant as an override for sysconfig
-      Fix MacOS version test
-      Basic Thread Safety (#636)
-      fix ares_threadsafety() prototype
-      ares_init_options with ARES_OPT_UDP_PORT wrong byte order
-      fix doc typo
-      remove a simply
-      clang-format
-      add missing manpage to distribution list
-      1.23.0 release prep (#641)
+Has someone in this list saw my patches or should I resent them ?
 
-Christian Clauss (2):
-      INSTALL.md: Fix typo (#630)
-      Fix typos discovered by codespell (#634)
+On Wed, 6 Dec 2023 at 19:26, Frederic Martinsons via lists.openembedded.org
+<frederic.martinsons=3Dgmail.com@lists.openembedded.org> wrote:
 
-Daniel Stenberg (1):
-      CI: codespell
+> Ok great, I'll rebase these on master on the coming days. The problem is
+> that my hardware (pretty specifics) just have been upgraded with Kirkston=
+e
+> and since I will not be able to test those on master branch. At least I c=
+an
+> make it compile, have you some advices to non regressed crash utility
+> (without involving real target test)?
+>
+> Le mer. 6 d=C3=A9c. 2023, 19:11, Khem Raj <raj.khem@gmail.com> a =C3=A9cr=
+it :
+>
+>>
+>>
+>> On Wed, Dec 6, 2023 at 10:02=E2=80=AFAM Fr=C3=A9d=C3=A9ric Martinsons <
+>> frederic.martinsons@gmail.com> wrote:
+>>
+>>> Hello list,
+>>>
+>>> Since some times (back to warrior branch I think), I have in my custom
+>>> layer a cross canadian version from the crash tool, I personnally used =
+it
+>>> for analysing vmcore from an arm target (cortex a53) offline within the=
+ sdk.
+>>>
+>>> I recently upgraded to kirsktone and the update of this version was a
+>>> little tricky (must have played with LDFLAGS, gdb target build and host=
+ and
+>>> so on...)
+>>>
+>>> I finally managed to get crash working for all my hardware (both includ=
+e
+>>> aarch64 and x86-64 arch).
+>>>
+>>> I would like to know if it would be acceptable to have a cross canadian
+>>> arch in meta-openembedded (from what I see, there is only native and ta=
+rget
+>>> flavor)?
+>>>
+>>
+>> It=E2=80=99s fine. I guess there were no such recipe needing it so far. =
+Please
+>> submit your patches
+>>
+>>
+>>> If you think it is accurate, I'll work to push some patches against
+>>> master.
+>>>
+>>> Please tell me, thanks!
+>>>
+>>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#107263):
+> https://lists.openembedded.org/g/openembedded-devel/message/107263
+> Mute This Topic: https://lists.openembedded.org/mt/103018278/6213388
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> frederic.martinsons@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
 
-Ignat (1):
-      Support attempts and timeout options from resolv.conf (#632)
+--0000000000000910c2060cde0f85
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-petrvh (1):
-      ares_getaddrinfo(): do not use search domains if ARES_FLAG_NOSEARCH is set (#638)
+<div dir=3D"ltr">Hello,=C2=A0<div><br></div><div>I sent a series for adding=
+ cross canadian crash two days ago.</div><div><br></div><div>But I didn&#39=
+;t see these in patchwork:=C2=A0<a href=3D"https://patchwork.yoctoproject.o=
+rg/project/oe/list/">https://patchwork.yoctoproject.org/project/oe/list/</a=
+></div><div>I thought that was automatic, did I miss something?</div><div><=
+br></div><div>Has someone in this list saw my patches or should I resent th=
+em ?</div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gm=
+ail_attr">On Wed, 6 Dec 2023 at 19:26, Frederic Martinsons via <a href=3D"h=
+ttp://lists.openembedded.org">lists.openembedded.org</a> &lt;frederic.marti=
+nsons=3D<a href=3D"mailto:gmail.com@lists.openembedded.org">gmail.com@lists=
+.openembedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote"=
+ style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);p=
+adding-left:1ex"><div dir=3D"auto">Ok great, I&#39;ll rebase these on maste=
+r on the coming days. The problem is that my hardware (pretty specifics) ju=
+st have been upgraded with Kirkstone and since I will not be able to test t=
+hose on master branch. At least I can make it compile, have you some advice=
+s to non regressed crash utility (without involving real target test)?=C2=
+=A0</div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_att=
+r">Le mer. 6 d=C3=A9c. 2023, 19:11, Khem Raj &lt;<a href=3D"mailto:raj.khem=
+@gmail.com" target=3D"_blank">raj.khem@gmail.com</a>&gt; a =C3=A9crit=C2=A0=
+:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.=
+8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div><br></div=
+><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">=
+On Wed, Dec 6, 2023 at 10:02=E2=80=AFAM Fr=C3=A9d=C3=A9ric Martinsons &lt;<=
+a href=3D"mailto:frederic.martinsons@gmail.com" rel=3D"noreferrer" target=
+=3D"_blank">frederic.martinsons@gmail.com</a>&gt; wrote:<br></div><blockquo=
+te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
+solid rgb(204,204,204);padding-left:1ex"><div dir=3D"auto">Hello list,<div =
+dir=3D"auto"><br></div><div dir=3D"auto">Since some times (back to warrior =
+branch I think), I have in my custom layer a cross canadian version from th=
+e crash tool, I personnally used it for analysing vmcore from an arm target=
+ (cortex a53) offline within the sdk.</div><div dir=3D"auto"><br></div><div=
+ dir=3D"auto">I recently upgraded to kirsktone and the update of this versi=
+on was a little tricky (must have played with LDFLAGS, gdb target build and=
+ host and so on...)=C2=A0</div><div dir=3D"auto"><br></div><div dir=3D"auto=
+">I finally managed to get crash working for all my hardware (both include =
+aarch64 and x86-64 arch).</div><div dir=3D"auto"><br></div><div dir=3D"auto=
+">I would like to know if it would be acceptable to have a cross canadian a=
+rch in meta-openembedded (from what I see, there is only native and target =
+flavor)?=C2=A0</div><div dir=3D"auto"></div></div></blockquote><div dir=3D"=
+auto"><br></div><div dir=3D"auto">It=E2=80=99s fine. I guess there were no =
+such recipe needing it so far. Please submit your patches</div><div dir=3D"=
+auto"><br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0=
+px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div dir=
+=3D"auto"><div dir=3D"auto"><br></div><div dir=3D"auto">If you think it is =
+accurate, I&#39;ll work to push some patches against master.</div><div dir=
+=3D"auto"><br></div><div dir=3D"auto">Please tell me, thanks!=C2=A0</div></=
+div>
+</blockquote></div></div>
+</blockquote></div>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#107263): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/107263" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/107263</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/103018278/621=
+3388" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/103018278/6213388</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:frederic.martinsons@gmai=
+l.com" target=3D"_blank">frederic.martinsons@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div>
 
-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
----
-
- .../c-ares/{c-ares_1.22.1.bb => c-ares_1.24.0.bb}             | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/c-ares/{c-ares_1.22.1.bb => c-ares_1.24.0.bb} (86%)
-
-diff --git a/meta-oe/recipes-support/c-ares/c-ares_1.22.1.bb b/meta-oe/recipes-support/c-ares/c-ares_1.24.0.bb
-similarity index 86%
-rename from meta-oe/recipes-support/c-ares/c-ares_1.22.1.bb
-rename to meta-oe/recipes-support/c-ares/c-ares_1.24.0.bb
-index 8ba1b60995f0..2171002aa95e 100644
---- a/meta-oe/recipes-support/c-ares/c-ares_1.22.1.bb
-+++ b/meta-oe/recipes-support/c-ares/c-ares_1.24.0.bb
-@@ -6,7 +6,7 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.md;md5=fdbc58a6da11a9f68aa73c453818decc"
- 
- SRC_URI = "git://github.com/c-ares/c-ares.git;branch=main;protocol=https"
--SRCREV = "36466bb240661fa8fdc2ffa47d229d92ac762286"
-+SRCREV = "972f456f2808b4e4b1730c90ab506f6af5f4c725"
- 
- UPSTREAM_CHECK_GITTAGREGEX = "cares-(?P<pver>\d+_(\d_?)+)"
- 
-@@ -14,7 +14,7 @@ S = "${WORKDIR}/git"
- 
- inherit cmake pkgconfig
- 
--PACKAGES =+ "${PN}-utils"
-+PACKAGE_BEFORE_PN = "${PN}-utils"
- 
- FILES:${PN}-utils = "${bindir}"
- 
--- 
-2.39.0
-
+--0000000000000910c2060cde0f85--
 
