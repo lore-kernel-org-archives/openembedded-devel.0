@@ -1,297 +1,179 @@
-Return-Path: <quaresma.jose@gmail.com>
+Return-Path: <niko.mauno@vaisala.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BFBB3C46CA2
-	for <webhook@archiver.kernel.org>; Tue, 19 Dec 2023 16:05:20 +0000 (UTC)
-Received: from mail-oi1-f172.google.com (mail-oi1-f172.google.com [209.85.167.172])
- by mx.groups.io with SMTP id smtpd.web10.16963.1703001917232245771
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EE079C41535
+	for <webhook@archiver.kernel.org>; Tue, 19 Dec 2023 16:28:00 +0000 (UTC)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com (EUR05-AM6-obe.outbound.protection.outlook.com [40.107.22.74])
+ by mx.groups.io with SMTP id smtpd.web11.378.1703003271409456558
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 Dec 2023 08:05:17 -0800
+ Tue, 19 Dec 2023 08:27:52 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=NYP/DMtf;
- spf=pass (domain: gmail.com, ip: 209.85.167.172, mailfrom: quaresma.jose@gmail.com)
-Received: by mail-oi1-f172.google.com with SMTP id 5614622812f47-3b9f727d94cso1681775b6e.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 19 Dec 2023 08:05:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1703001916; x=1703606716; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=rf9PeCbx5BS//baZzxWLVrxz/90lZZwxpXYBgYKbZJU=;
-        b=NYP/DMtfnV28Vv3FIJYK8Z1poBfwlI6NfMVpuA90BTUhSKuaXIIESuRtcRoZ1NLKod
-         ght8xCQ7W5W9pvqVXYLxB4R7vmR1i7sT01ZSX3t9uYJsQnxmaj80VyhzE5dyDQ0S4cJf
-         JKfAuklDkPf/lmEyWO9J78ggC2t800MdAW0boxok8nlaN9rhjy5uFatN/Wa8NADqvjQH
-         WlFRhtv8bweuKqPe9VavSzinWzTwI/0P9FonK7W4K9PVqf1AIKwC+ECb6MW6zzHq34HG
-         XOYDlowF4nHZ7aprbp8LvqJ28KhM4K3khHDpc3wNznCYxXx2GkpkrMJ/rB6mnUiFbGq7
-         M8Ow==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703001916; x=1703606716;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=rf9PeCbx5BS//baZzxWLVrxz/90lZZwxpXYBgYKbZJU=;
-        b=dRUoO2mKHq2QFDn1hAe3gov35T+hz6w3YWn9UsPYUv/yj0w8GPIXZRRyPA5lNSawTo
-         QvO5ssSxWUV1FZnmiRH98U3uE3WpTnPWKo5ugWJV7yhnnfHk/i8eBObyxVX5FtkPufy8
-         iuzNpK6040U3inDVQ6+STGphmN9FUD8b/yhTbCggF5mZmCPBOft4jToGwfKFI0ovDSpj
-         jj4AD9EE5hTbmNnuwqxygvoaMa5sS22LFXd29rKQN0LY6PQmqzbH3ZFxOWVEtvNfS1dF
-         dfQjhTJgai/oAc6YPbbILiCkZmID6VTMswjlm5CC+cFoLABvg6RtK5D3oAUF2wjKzBn2
-         E4LA==
-X-Gm-Message-State: AOJu0YwQQcB9eDuB/O/Eb74zJJQRBIP5Lj6HfIjmPqEUoMGM5eE9VH3n
-	VsydHwoH8u1jMspnr9FsGbdQUxH4KSg62BOm9LsKr3+rYUOKVg==
-X-Google-Smtp-Source: AGHT+IGqq6Y3ECsFke1uXjdkPk8xcCTV47kY3sDHISDZeODRN4Z8z3gyNriYWgHiwxqu9LRo/VRzj1dGcZ7gM3B5REE=
-X-Received: by 2002:a05:6808:11c3:b0:3b8:b063:8954 with SMTP id
- p3-20020a05680811c300b003b8b0638954mr12064148oiv.98.1703001916463; Tue, 19
- Dec 2023 08:05:16 -0800 (PST)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=d0pfdTS3;
+ spf=permerror, err=parse error for token &{10 18 spf3.vaisala.com}: parse error for token &{10 18 _spf-dc57.sapsf.eu}: limit exceeded (domain: vaisala.com, ip: 40.107.22.74, mailfrom: niko.mauno@vaisala.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=IResuLj9XAJhmEEMo1Dc31LtbQf/Fj+oSF0YYO/V6cwinANyLhyPE8U1vt3uWEcWWhXIVoGWaBZc7rhqWDCJIlRyRGlje6FxDDBMLmTY6g/y7MrRRO7+tiUeVC7vjUqJSNj4PZl4FZAIa4Gx3TEjqwcTP5VaG+IwyGhhv+5nuLGV++vTUxl7AdzhoJHF5gp/NCmrT2SbIZ5gz24ONb0cCv9Cg7pz9RqzpT9lRRJbe3WnDYoPxXS3JUaqrpwhCX+7FtbOH/ci+AvHhJNHgteHHE/fjXRSn2KJXjfzImgPq1uweVOekNX+AqVkEpgX+VbArH7eo/Nn2+Nq2PXaKMvLWw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=8vCP1wEUCEf+PocovFdcws9XPYTu4ksSlL1oEwjnQho=;
+ b=bLhyNcxM2owxTN7yDsbbxDXroNxsMCXLYXZ4ZUYglO81tW7WbjBpIrSkZjuHTn2FYdgE0TLtY73MOD2V5L0VbIR8qJye+W6ddAd/CLnp9kwFpDMUiPqMKBahZvfVpyHLmb2cAecvdFtIMQVDpt+7xkxd+aarn22XC/+lLqgYIw0y0674wQTM0DUgmZYRxwqNJvqXp2jmi4t2BwtER9EHFB0D40z3rCadMxYR63i+aVhhM0VAj2xMrSD0r3wfLB8wB/p+3F7ErBJ5pCyy0k1tetdlneKTDCo/uG7nhIqB8BknCEfGMpnZzPDxMzDwH65Hwu7nVD013Mv3GuvkGSoXBQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=vaisala.com; dmarc=pass action=none header.from=vaisala.com;
+ dkim=pass header.d=vaisala.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=8vCP1wEUCEf+PocovFdcws9XPYTu4ksSlL1oEwjnQho=;
+ b=d0pfdTS3qJrM7FkOdBOoS9MuEFIQLetOLIT7wpPJcmCj1vhGoMHy8bH/btbHotIS2StvVLvpdwlNdVWLH4tFj98RkCc0XfWfDGRfPef2r/7q6Cett30mIBXmQDMLZHmSmOorriT/TcJ7oCq0FRlq1uLFPXsKTFfsdpGU0HAOcuI9PEZv/gA9Eb73hnAdoKQ0ETYhH//nVbDl5lIQaFJzx0S5DYQD5Hxo1y2Xjq5CVntzhvk/qMMf5CtiYJkk03RcUDsvebdETmJMC/w4fGzK1ItdEj53b6Ukx8Kp+apZzDLegE6Cbdh49QGFKLAjnA6kJQJ8QAr42fqU1uRWlP8CXQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=vaisala.com;
+Received: from AS4PR06MB8447.eurprd06.prod.outlook.com (2603:10a6:20b:4e2::11)
+ by DB8PR06MB6554.eurprd06.prod.outlook.com (2603:10a6:10:129::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7091.37; Tue, 19 Dec
+ 2023 16:27:46 +0000
+Received: from AS4PR06MB8447.eurprd06.prod.outlook.com
+ ([fe80::820:f7b6:7f2b:324b]) by AS4PR06MB8447.eurprd06.prod.outlook.com
+ ([fe80::820:f7b6:7f2b:324b%4]) with mapi id 15.20.7091.034; Tue, 19 Dec 2023
+ 16:27:46 +0000
+From: niko.mauno@vaisala.com
+To: openembedded-devel@lists.openembedded.org
+CC: quaresma.jose@gmail.com,
+	Niko Mauno <niko.mauno@vaisala.com>
+Subject: [meta-oe][PATCHv2] pkcs11-provider: Add recipe
+Date: Tue, 19 Dec 2023 16:27:05 +0000
+Message-ID: <20231219162705.3865469-1-niko.mauno@vaisala.com>
+X-Mailer: git-send-email 2.39.2
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-ClientProxiedBy: GVYP280CA0022.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:150:fa::24) To AS4PR06MB8447.eurprd06.prod.outlook.com
+ (2603:10a6:20b:4e2::11)
 MIME-Version: 1.0
-References: <20231219155119.3859157-1-niko.mauno@vaisala.com>
-In-Reply-To: <20231219155119.3859157-1-niko.mauno@vaisala.com>
-From: Jose Quaresma <quaresma.jose@gmail.com>
-Date: Tue, 19 Dec 2023 16:05:05 +0000
-Message-ID: <CANPvuR=x0pi8KNgk1cmVX=W6ffAAh=522iSNRUGqhFD=CYXa_Q@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] pkcs11-provider: Add recipe
-To: niko.mauno@vaisala.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000485ff9060cdf08af"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS4PR06MB8447:EE_|DB8PR06MB6554:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0e0b4be5-da64-4817-c23d-08dc00af6f1c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	+D/lrLNyHr0abPaWMfYX8QzD3ez2E7JipUoQhNswoRzeGRsa6yNQb4DDWkzsXmJMGlhPEgtlPuVvW6NOKYx2wMZmutv2VWj4fz850UIWiESQ7H6/WYPHDqc1i/VUUAsostLMQSRxmSruyjFUHZG95yCPmGG106DLFyR3FCCHptf8tDgb0O75vmts0OilSB0z6gmpdLlQHBR+FDCZJhimH9wKO5+K+sdrXm4J2Ln9yxIemdnlOYuHuKE5HA+gDt9kmbYS6rXn2xAxyJhl0ViFIb/FyGMCcWLmZ/yiK3gx3k4xZcvoS8IRKlzM3Fr9TwTwseMMy9Vx7rz3pK+65zUx739/W6Ll6/VsmfwVvwcSXsU4UfFD+Iq0Pa58Jz64FXfbb+ZRZWQKefzf2xgYF0dcAsKpr5dCXu9I2lRa10QTA3VxwfSAypIPmSDR23TpXUIMPcekMLWEg5AHWq5mplUWESQb2E2B+suc3RmNNRDxhJmcyShYCupfDAvqc/bXxnq+URKY1kIyqHg+/csZXu44BoropFK9eVD5v55nX1V6Jd6Lav0Qp+m5e+CJAFWwy6OEah8dXSYQwP69p36sjDuwph9mb7lSaFRW/vnnd2v5ccg=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS4PR06MB8447.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(136003)(346002)(366004)(376002)(39860400002)(396003)(230922051799003)(64100799003)(451199024)(186009)(1800799012)(316002)(6916009)(8936002)(966005)(4326008)(8676002)(66556008)(66946007)(66476007)(41300700001)(2616005)(83380400001)(1076003)(107886003)(38100700002)(26005)(5660300002)(9686003)(6506007)(86362001)(36756003)(52116002)(6512007)(6486002)(2906002)(6666004)(478600001)(38350700005);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?wa6GAz+zHxj4k6AkAfSHzCxTemNs2dwBgE5UiwTPU5bLZRtDMik/oP2WuUVt?=
+ =?us-ascii?Q?qId4SQk/MsDxKDu0eO+QzwqPTVdVn2C2IiavwODZ3ecu+Qg5L8g3x6Z6qaBE?=
+ =?us-ascii?Q?Xo0JmUeTIrjAjqiFaH+bm8RXyGaP50IvZMTD5p8KuPbj0bIIcngxsSD20vqn?=
+ =?us-ascii?Q?Nw7HaeKrI8llDg0UgbfZbJxDiacVMbF6nMxhUN540Molyjk9Ea9zudu9Zzy+?=
+ =?us-ascii?Q?nR64hyxVwJvkTFQuEOu2pa3Fso42Mx3q8I+OzrdRqCBGRMNFW9x9VuOg1sy0?=
+ =?us-ascii?Q?5eHjyK/OYxQMKyO24R32CQSNQCf6TfptjZulLAeWEHrII1rUmKjhyMfjUhJd?=
+ =?us-ascii?Q?W9dflty5rEG0A2OGKPwMjfmYjyK/R6ZTdehTQ92urTZpa/RJODql4rQqbxOM?=
+ =?us-ascii?Q?AI4vt1/2UnLOIbXEZM7RGYYTZ9hY9PyvoGyDR4+JsWLbVIzQO61cs6WEOukH?=
+ =?us-ascii?Q?Jcb0ykRnZATOs8DElI8xpaZSKcc2FizmldKvBqXLbrgZERfD2EXB8X0Nc+dT?=
+ =?us-ascii?Q?DOwf9A0fyqPLyXNRc3vAGEEt6/RF3o79M+mOV1ebLhs2ZWOC5z6ypqlqc+E8?=
+ =?us-ascii?Q?RZPAtCXvFSghBbHYl6CiYu8FrrYDWQzQ8BkNbOtd2YXi4zX7Sgepth5bXhjN?=
+ =?us-ascii?Q?TgSv2+WSsmRBIwdLyYYlu+JJEnBMiNdpDQNTFLDMwsAWHmfpnOELdcPIq5UG?=
+ =?us-ascii?Q?9hgaFlTAIlIs0pNbcRe/An1l6zxKEl91desDLiUmFzUQeV37/sFsqo3rZk1n?=
+ =?us-ascii?Q?TB0cwRNnbJJyarEkzI0vBdKN8lSv2ivIm8ntUxQS5jlUKiNZ3PFpT9hyKpS6?=
+ =?us-ascii?Q?KoqgXLHDRdlehqQAr4NCbdd/EVIClI9jDZU+kUdMAEpuuKpKq4/AihhszyEp?=
+ =?us-ascii?Q?HDMWC9Fki8LAc5O7Zqbur/4qNsYItnvSF/wh6ENWaXfYOknX/sftBboJcvYg?=
+ =?us-ascii?Q?IvDdsyYF9USHlT/QRBMP0NxxiPnhteF7cV6ciIuY7pKdMf6NGtjwVGXXFb6J?=
+ =?us-ascii?Q?h2c1T8S833L6jAh9QuohFahnUR+PZdM+MFFwlvHZdhey5+gIVLb7BqvihdxX?=
+ =?us-ascii?Q?IpUWxatmqoICKQDKhv/DqL6+GPM8+PZUuDZvwhVuWpc1XaPz3cNJqhL1APCf?=
+ =?us-ascii?Q?WxGSr2NoC/pR+WhMNwyeBJSNlv+jh9LlRI7zv+mrGtf7+DXcBVrEkdaObFRx?=
+ =?us-ascii?Q?iKdaa5yHd0kUCbYWJIlI2NL/WhVWK8WUAiExIiesH4hD4ZFF3cFfguAwT8r4?=
+ =?us-ascii?Q?+mhOoToYr96/Pn0VT29Y92pP3YFIX22RrRhcVuZwB4WYlwdRbh+NGW8ebWzy?=
+ =?us-ascii?Q?n7sKaw+MHYxfYds5h8afnzrzpaZ92yaD3ApsmYHjBU6Ar/Phs9OASPjAQn3T?=
+ =?us-ascii?Q?UCE2wsNFXM8sbdpzr6jikPQ4hTqB1BiZCdBbZCgYJnkTijxhvUI8cHehKsJB?=
+ =?us-ascii?Q?8G81qjJ3hRBHPMwHOdarI+7D7oMS361EQMSw0u/ZO/NgD4wq9rsvI/gLXq7X?=
+ =?us-ascii?Q?KnDbcr2Qltenj8nOSeZZf9apDCvF+n2eF4wYsJ78V3Jy/FCEVmtJe2c4CL2i?=
+ =?us-ascii?Q?AercoIEqTKfacv9wPrCIrVgFPynWFOQhwqqaQb9Y2Co/RZNkMb5U9qG/0knw?=
+ =?us-ascii?Q?Xw=3D=3D?=
+X-OriginatorOrg: vaisala.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0e0b4be5-da64-4817-c23d-08dc00af6f1c
+X-MS-Exchange-CrossTenant-AuthSource: AS4PR06MB8447.eurprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Dec 2023 16:27:46.4928
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: QuwObIkIWeTYaULwJUVyXEPLkN76Z4CyhQHgc/i8mBZ9Dwg2r6ARoFEOGwfhz9uGS4ayEeYyqljrSA6SaatIbA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR06MB6554
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 19 Dec 2023 16:05:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107637
+ <openembedded-devel@lists.openembedded.org>; Tue, 19 Dec 2023 16:28:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107638
 
---000000000000485ff9060cdf08af
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Niko Mauno <niko.mauno@vaisala.com>
 
-Niko Mauno via lists.openembedded.org <niko.mauno=3D
-vaisala.com@lists.openembedded.org> escreveu no dia ter=C3=A7a, 19/12/2023 =
-=C3=A0(s)
-15:51:
+Starting with version 3.0 the OpenSSL project introduced a new modular
+system to extend OpenSSL that replaces the deprecated Engine modules.
 
-> From: Niko Mauno <niko.mauno@vaisala.com>
->
-> Starting with version 3.0 the OpenSSL project introduced a new modular
-> system to extend OpenSSL that replaces the deprecated Engine modules.
->
-> Providers are loaded via configuration directives in the openssl
-> configuration file (or directly loaded by applications).
->
-> The pkcs11 provider allows applications linked to openssl to use keys
-> and cryptographic operations from a hardware or software token via
-> their PKCS #11 driver and the use of PCKS #11 URIs.
->
-> The pkcs11 provider can be configured to be automatically loaded via
-> openssl.cnf
->
-> For more details, visit
->
-> https://github.com/latchset/pkcs11-provider/blob/main/docs/provider-pkcs1=
-1.7.md
->
-> Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
-> ---
->  .../pkcs11-provider/pkcs11-provider_git.bb    | 29 +++++++++++++++++++
->  1 file changed, 29 insertions(+)
->  create mode 100644 meta-oe/recipes-support/pkcs11-provider/
-> pkcs11-provider_git.bb
->
-> diff --git a/meta-oe/recipes-support/pkcs11-provider/
-> pkcs11-provider_git.bb b/meta-oe/recipes-support/pkcs11-provider/
-> pkcs11-provider_git.bb
-> new file mode 100644
-> index 000000000..12c0f5fae
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_git.bb
-> @@ -0,0 +1,29 @@
-> +SUMMARY =3D "An OpenSSL provider that allows direct interfacing with pkc=
-s11
-> drivers"
-> +DESCRIPTION =3D "\
-> +This is an Openssl 3.x provider to access Hardware or Software Tokens
-> using \
-> +the PKCS#11 Cryptographic Token Interface\
-> +\
-> +This code targets version 3.1 of the interface but should be backwards \
-> +compatible to previous versions as well.\
-> +"
-> +HOMEPAGE =3D "https://github.com/latchset/pkcs11-provider"
-> +SECTION =3D "libs"
-> +LICENSE =3D "Apache-2.0"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db53b787444a60266932bd270d1cf2=
-d45"
-> +DEPENDS =3D "\
-> +    autoconf-archive \
-> +    openssl \
-> +    p11-kit \
-> +"
-> +
-> +SRCREV =3D "e2abc4a7ae33159f2fb21b9d87a05ea9e79ef584"
-> +PV =3D "0.2+gitr${SRCPV}"
-> +PKGV =3D "0.2+gitr${GITPKGV}"
-> +
-> +SRC_URI =3D "git://
-> github.com/latchset/${BPN}.git;branch=3Dmain;protocol=3Dhttps
-> <http://github.com/latchset/$%7BBPN%7D.git;branch=3Dmain;protocol=3Dhttps=
->"
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +inherit autotools gitpkgv pkgconfig
->
+Providers are loaded via configuration directives in the openssl
+configuration file (or directly loaded by applications).
 
-Hi Niko,
+The pkcs11 provider allows applications linked to openssl to use keys
+and cryptographic operations from a hardware or software token via
+their PKCS #11 driver and the use of PCKS #11 URIs.
 
-Can the gitpkgv be removed and used with a bbappend on a custom layer?
-This is not strictly necessary for the package and looks more aligned with
-the product.
+The pkcs11 provider can be configured to be automatically loaded via
+openssl.cnf
 
-Jose
+For more details, visit
+https://github.com/latchset/pkcs11-provider/blob/main/docs/provider-pkcs11.=
+7.md
 
+Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
+---
+ .../pkcs11-provider/pkcs11-provider_git.bb    | 28 +++++++++++++++++++
+ 1 file changed, 28 insertions(+)
+ create mode 100644 meta-oe/recipes-support/pkcs11-provider/pkcs11-provider=
+_git.bb
 
-> +
-> +FILES:${PN} +=3D "${libdir}/ossl-modules/pkcs11.so"
-> --
-> 2.39.2
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#107634):
-> https://lists.openembedded.org/g/openembedded-devel/message/107634
-> Mute This Topic: https://lists.openembedded.org/mt/103264418/5052612
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> quaresma.jose@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
-
---=20
-Best regards,
-
-Jos=C3=A9 Quaresma
-
---000000000000485ff9060cdf08af
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">Niko Mauno via <a href=3D"http://list=
-s.openembedded.org">lists.openembedded.org</a> &lt;niko.mauno=3D<a href=3D"=
-mailto:vaisala.com@lists.openembedded.org">vaisala.com@lists.openembedded.o=
-rg</a>&gt; escreveu no dia ter=C3=A7a, 19/12/2023 =C3=A0(s) 15:51:<br></div=
-><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border=
--left:1px solid rgb(204,204,204);padding-left:1ex">From: Niko Mauno &lt;<a =
-href=3D"mailto:niko.mauno@vaisala.com" target=3D"_blank">niko.mauno@vaisala=
-.com</a>&gt;<br>
-<br>
-Starting with version 3.0 the OpenSSL project introduced a new modular<br>
-system to extend OpenSSL that replaces the deprecated Engine modules.<br>
-<br>
-Providers are loaded via configuration directives in the openssl<br>
-configuration file (or directly loaded by applications).<br>
-<br>
-The pkcs11 provider allows applications linked to openssl to use keys<br>
-and cryptographic operations from a hardware or software token via<br>
-their PKCS #11 driver and the use of PCKS #11 URIs.<br>
-<br>
-The pkcs11 provider can be configured to be automatically loaded via<br>
-openssl.cnf<br>
-<br>
-For more details, visit<br>
-<a href=3D"https://github.com/latchset/pkcs11-provider/blob/main/docs/provi=
-der-pkcs11.7.md" rel=3D"noreferrer" target=3D"_blank">https://github.com/la=
-tchset/pkcs11-provider/blob/main/docs/provider-pkcs11.7.md</a><br>
-<br>
-Signed-off-by: Niko Mauno &lt;<a href=3D"mailto:niko.mauno@vaisala.com" tar=
-get=3D"_blank">niko.mauno@vaisala.com</a>&gt;<br>
----<br>
-=C2=A0.../pkcs11-provider/<a href=3D"http://pkcs11-provider_git.bb" rel=3D"=
-noreferrer" target=3D"_blank">pkcs11-provider_git.bb</a>=C2=A0 =C2=A0 | 29 =
-+++++++++++++++++++<br>
-=C2=A01 file changed, 29 insertions(+)<br>
-=C2=A0create mode 100644 meta-oe/recipes-support/pkcs11-provider/<a href=3D=
-"http://pkcs11-provider_git.bb" rel=3D"noreferrer" target=3D"_blank">pkcs11=
--provider_git.bb</a><br>
-<br>
-diff --git a/meta-oe/recipes-support/pkcs11-provider/<a href=3D"http://pkcs=
-11-provider_git.bb" rel=3D"noreferrer" target=3D"_blank">pkcs11-provider_gi=
-t.bb</a> b/meta-oe/recipes-support/pkcs11-provider/<a href=3D"http://pkcs11=
--provider_git.bb" rel=3D"noreferrer" target=3D"_blank">pkcs11-provider_git.=
-bb</a><br>
-new file mode 100644<br>
-index 000000000..12c0f5fae<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-support/pkcs11-provider/<a href=3D"http://pkcs11-prov=
-ider_git.bb" rel=3D"noreferrer" target=3D"_blank">pkcs11-provider_git.bb</a=
-><br>
-@@ -0,0 +1,29 @@<br>
-+SUMMARY =3D &quot;An OpenSSL provider that allows direct interfacing with =
-pkcs11 drivers&quot;<br>
-+DESCRIPTION =3D &quot;\<br>
+diff --git a/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_git.bb=
+ b/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_git.bb
+new file mode 100644
+index 000000000..2e25d91c5
+--- /dev/null
++++ b/meta-oe/recipes-support/pkcs11-provider/pkcs11-provider_git.bb
+@@ -0,0 +1,28 @@
++SUMMARY =3D "An OpenSSL provider that allows direct interfacing with pkcs1=
+1 drivers"
++DESCRIPTION =3D "\
 +This is an Openssl 3.x provider to access Hardware or Software Tokens usin=
-g \<br>
-+the PKCS#11 Cryptographic Token Interface\<br>
-+\<br>
-+This code targets version 3.1 of the interface but should be backwards \<b=
-r>
-+compatible to previous versions as well.\<br>
-+&quot;<br>
-+HOMEPAGE =3D &quot;<a href=3D"https://github.com/latchset/pkcs11-provider"=
- rel=3D"noreferrer" target=3D"_blank">https://github.com/latchset/pkcs11-pr=
-ovider</a>&quot;<br>
-+SECTION =3D &quot;libs&quot;<br>
-+LICENSE =3D &quot;Apache-2.0&quot;<br>
-+LIC_FILES_CHKSUM =3D &quot;file://COPYING;md5=3Db53b787444a60266932bd270d1=
-cf2d45&quot;<br>
-+DEPENDS =3D &quot;\<br>
-+=C2=A0 =C2=A0 autoconf-archive \<br>
-+=C2=A0 =C2=A0 openssl \<br>
-+=C2=A0 =C2=A0 p11-kit \<br>
-+&quot;<br>
-+<br>
-+SRCREV =3D &quot;e2abc4a7ae33159f2fb21b9d87a05ea9e79ef584&quot;<br>
-+PV =3D &quot;0.2+gitr${SRCPV}&quot;<br>
-+PKGV =3D &quot;0.2+gitr${GITPKGV}&quot;<br>
-+<br>
-+SRC_URI =3D &quot;git://<a href=3D"http://github.com/latchset/$%7BBPN%7D.g=
-it;branch=3Dmain;protocol=3Dhttps" rel=3D"noreferrer" target=3D"_blank">git=
-hub.com/latchset/${BPN}.git;branch=3Dmain;protocol=3Dhttps</a>&quot;<br>
-+<br>
-+S =3D &quot;${WORKDIR}/git&quot;<br>
-+<br>
-+inherit autotools gitpkgv pkgconfig<br></blockquote><div><br>Hi Niko,<br><=
-br>Can the gitpkgv be removed and used with a bbappend on a custom layer?<b=
-r>This is not strictly necessary for the package and looks more aligned=C2=
-=A0with the product.<br><br>Jose<br>=C2=A0</div><blockquote class=3D"gmail_=
-quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,=
-204);padding-left:1ex">
-+<br>
-+FILES:${PN} +=3D &quot;${libdir}/ossl-modules/pkcs11.so&quot;<br>
--- <br>
-2.39.2<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#107634): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/107634" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/107634</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/103264418/505=
-2612" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/103264418/5052612</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:quaresma.jose@gmail.com"=
- target=3D"_blank">quaresma.jose@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div><br clear=3D"all"><div><br></div><span class=3D"gmail_si=
-gnature_prefix">-- </span><br><div dir=3D"ltr" class=3D"gmail_signature"><d=
-iv dir=3D"ltr">Best regards,<div><br>Jos=C3=A9 Quaresma</div></div></div></=
-div>
+g \
++the PKCS#11 Cryptographic Token Interface\
++\
++This code targets version 3.1 of the interface but should be backwards \
++compatible to previous versions as well.\
++"
++HOMEPAGE =3D "https://github.com/latchset/pkcs11-provider"
++SECTION =3D "libs"
++LICENSE =3D "Apache-2.0"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db53b787444a60266932bd270d1cf2d4=
+5"
++DEPENDS =3D "\
++    autoconf-archive \
++    openssl \
++    p11-kit \
++"
++
++SRCREV =3D "e2abc4a7ae33159f2fb21b9d87a05ea9e79ef584"
++PV =3D "0.2+git${SRCPV}"
++
++SRC_URI =3D "git://github.com/latchset/${BPN}.git;branch=3Dmain;protocol=
+=3Dhttps"
++
++S =3D "${WORKDIR}/git"
++
++inherit autotools pkgconfig
++
++FILES:${PN} +=3D "${libdir}/ossl-modules/pkcs11.so"
+--=20
+2.39.2
 
---000000000000485ff9060cdf08af--
 
