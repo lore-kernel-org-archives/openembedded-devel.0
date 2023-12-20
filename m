@@ -1,123 +1,82 @@
-Return-Path: <alex.kiernan@gmail.com>
+Return-Path: <derek@asterius.io>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A58F0C3DA6E
-	for <webhook@archiver.kernel.org>; Wed, 20 Dec 2023 20:55:33 +0000 (UTC)
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
- by mx.groups.io with SMTP id smtpd.web10.32392.1703105729161786272
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ABBA2C3DA6E
+	for <webhook@archiver.kernel.org>; Wed, 20 Dec 2023 21:08:53 +0000 (UTC)
+Received: from mail-il1-f176.google.com (mail-il1-f176.google.com [209.85.166.176])
+ by mx.groups.io with SMTP id smtpd.web11.32337.1703106526843754865
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Dec 2023 12:55:29 -0800
+ Wed, 20 Dec 2023 13:08:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=g0WxHkZp;
- spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: alex.kiernan@gmail.com)
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-40d190044c5so1233365e9.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 20 Dec 2023 12:55:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1703105727; x=1703710527; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=fZrUKdDGD6h9xtUnoU6IBfRgsrUurfg8Ds6E6JMepFg=;
-        b=g0WxHkZpdJfCqpWOY0RsPKUai9e+sAz6O9UD8sXfBLAM88+4jUOj6FvnBZ1cE+HX1/
-         TOxsDiZPGRYm+qbKTewf0yHMJ7v/SFOsxLQQWzQhqfocATpkdTbC52TyXs4acXXhfZ8S
-         6iaaU9zodq64B1z1Eg1S2ZzPW/fMBogDUEvb/eVqGnY8Nvw0ZnFF/Xvo3EIk79wOJGuM
-         VuUpRlqgcd2ivnMJU2JA2X8yK86IPuNeDIydHyPEm/QHawIAb88yj+ZnR7Wx8tFyyHUE
-         AuDofiCsBQth7jiSs723YZmnYt1xtgZXx7vH6CtCJ0m+8prRD96XfutWUYvd31ONqHvj
-         Czlw==
+ dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.166.176, mailfrom: straka.derek@gmail.com)
+Received: by mail-il1-f176.google.com with SMTP id e9e14a558f8ab-35da160de2bso350515ab.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 20 Dec 2023 13:08:46 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703105727; x=1703710527;
+        d=1e100.net; s=20230601; t=1703106525; x=1703711325;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=fZrUKdDGD6h9xtUnoU6IBfRgsrUurfg8Ds6E6JMepFg=;
-        b=vvAbevuXzMc4qNGKy9TF+wL9EanfLLwk8l96BB9306doIFUC7Pi7fHcR3WiKFEr3rA
-         tfid/h5XsLKwuhYQx0dFxdkwLndsdYxAaSOI7v74UdK8ThGC8MDf11Rhtwuq9zB8YDSf
-         3GK9galJzYO+3XAS0VsrdAVWGKL3v6IRrxEd++EjclzIOSh+TvaT6WhJEUWReHNugHOI
-         KtOZr3V8J/02NU24u2stQEZv/rrTbUsjlvFL9ge7pqUXJ/QvbXRc7Bf0XBfYmciqaDiK
-         QG2dzWKP2i+BYDXTU3D36hepahG3YNupkjAFSr+MmR9ek25fkJuVOkmNsjgdFdL2SLmP
-         qEqA==
-X-Gm-Message-State: AOJu0YwjX+j8zU99m5gOcydeOEIe2CmhMPZAsNYRd06yUtZnEV/tjU8z
-	UQKCh1p50PBjc0Ovz/zoMfoKbnKTsB0=
-X-Google-Smtp-Source: AGHT+IHFmpDhlZLDeYZ7YtTWzOBuy5+HA+9InuUOjYdqEJjKqocL6oB/3+ZYdvaWuBZ+pGzHpmOzmg==
-X-Received: by 2002:a05:600c:501f:b0:40c:692e:2576 with SMTP id n31-20020a05600c501f00b0040c692e2576mr174884wmr.136.1703105726613;
-        Wed, 20 Dec 2023 12:55:26 -0800 (PST)
-Received: from Zuma-000004PC.lan ([2a02:390:9c57:0:8108:f84e:1a21:c7d3])
-        by smtp.gmail.com with ESMTPSA id v8-20020a05600c444800b0040c2c5f5844sm780042wmn.21.2023.12.20.12.55.26
+        bh=K7vhDGICgltmzmVnICtSc8fvikvzE/wgzv8Uu898jOw=;
+        b=S1Wt0YYMLc+3utAEArqERvoexIi5OWOmo9bfWBBtocQeSSRmJin58kkZFIoSA66xHy
+         ZT5WEvKGR6rOjktZuCA1kdC+DXhwgCI74d+RGvBi65x1nCdVrCRESQq+EKft0k9BLgre
+         xJjAoJq4N+tY9/APpP87rvQ1sSeWlbHfeULRbwZBFKV5rb7apjGYPgoj42BwU/SIafHd
+         4uQ+rWxJWuzZERqM2Fx1Z2oQETij08VD7YUi0zhcxT9GnTebZxgmjIFHotVVCYZwaT8h
+         LY/ttYrrqQRI9MUkGf9r3Zees7iSkN9hDHPwIo+aFta0BdCPQjuihicSlJ0c3oRrRZXc
+         NETQ==
+X-Gm-Message-State: AOJu0Ywfp0FQkLmujwr3ElyqgKadCfGeyjnVdtk/WnTrpdWE6BaYwN+y
+	bBIOGrCcJiX3SjIOOWNWys/fepBPcEDlSQ==
+X-Google-Smtp-Source: AGHT+IHkgSpvCZt8oxLc1Ho4h9KrWkiMFZ8yRe47r/sUwW9qPOTNdZIwrqDWolxCiZT0GD55OF/AUg==
+X-Received: by 2002:a05:6e02:194d:b0:35f:c98f:b191 with SMTP id x13-20020a056e02194d00b0035fc98fb191mr2151737ilu.42.1703106525118;
+        Wed, 20 Dec 2023 13:08:45 -0800 (PST)
+Received: from sparta.internal.asterius.io (c-73-228-213-122.hsd1.mn.comcast.net. [73.228.213.122])
+        by smtp.gmail.com with ESMTPSA id f4-20020a056e020c6400b0035d70101e82sm95974ilj.42.2023.12.20.13.08.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 20 Dec 2023 12:55:26 -0800 (PST)
-From: Alex Kiernan <alex.kiernan@gmail.com>
+        Wed, 20 Dec 2023 13:08:44 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Cc: Alex Kiernan <alex.kiernan@gmail.com>
-Subject: [meta-oe][PATCH v2] c-ares: Move to tarballs, add ptest and static support
-Date: Wed, 20 Dec 2023 20:55:18 +0000
-Message-Id: <20231220205518.6966-1-alex.kiernan@gmail.com>
-X-Mailer: git-send-email 2.39.0
+Cc: Derek Straka <derek@asterius.io>
+Subject: [meta-python][PATCH] python3-astroid: update to version 3.0.2
+Date: Wed, 20 Dec 2023 21:08:25 +0000
+Message-Id: <20231220210825.3605157-1-derek@asterius.io>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 20 Dec 2023 20:55:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107672
+ <openembedded-devel@lists.openembedded.org>; Wed, 20 Dec 2023 21:08:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107673
 
-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+Changelog
+* Avoid duplicate inference results for some uses of typing.X constructs like Tuple[Optional[int], ...].
+  This was causing pylint to occasionally omit messages like deprecated-typing-alias.
+
+Closes pylint-dev/pylint#9220
+
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
+ .../{python3-astroid_3.0.1.bb => python3-astroid_3.0.2.bb}      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-astroid_3.0.1.bb => python3-astroid_3.0.2.bb} (90%)
 
-Changes in v2:
-- Use relative path to arestest
-
- .../recipes-support/c-ares/c-ares/run-ptest   |  7 +++++++
- .../recipes-support/c-ares/c-ares_1.24.0.bb   | 19 ++++++++++++++-----
- 2 files changed, 21 insertions(+), 5 deletions(-)
- create mode 100644 meta-oe/recipes-support/c-ares/c-ares/run-ptest
-
-diff --git a/meta-oe/recipes-support/c-ares/c-ares/run-ptest b/meta-oe/recipes-support/c-ares/c-ares/run-ptest
-new file mode 100644
-index 000000000000..15971dec058c
---- /dev/null
-+++ b/meta-oe/recipes-support/c-ares/c-ares/run-ptest
-@@ -0,0 +1,7 @@
-+#!/bin/sh
-+
-+if ./arestest; then
-+	echo "PASS: c-ares"
-+else
-+	echo "FAIL: c-ares"
-+fi
-diff --git a/meta-oe/recipes-support/c-ares/c-ares_1.24.0.bb b/meta-oe/recipes-support/c-ares/c-ares_1.24.0.bb
-index 2171002aa95e..3b3b2b83febc 100644
---- a/meta-oe/recipes-support/c-ares/c-ares_1.24.0.bb
-+++ b/meta-oe/recipes-support/c-ares/c-ares_1.24.0.bb
-@@ -5,14 +5,23 @@ SECTION = "libs"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.md;md5=fdbc58a6da11a9f68aa73c453818decc"
+diff --git a/meta-python/recipes-devtools/python/python3-astroid_3.0.1.bb b/meta-python/recipes-devtools/python/python3-astroid_3.0.2.bb
+similarity index 90%
+rename from meta-python/recipes-devtools/python/python3-astroid_3.0.1.bb
+rename to meta-python/recipes-devtools/python/python3-astroid_3.0.2.bb
+index 348dc2ebb..23501ce00 100644
+--- a/meta-python/recipes-devtools/python/python3-astroid_3.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-astroid_3.0.2.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a70cf540abf41acb644ac3b621b2fad1"
  
--SRC_URI = "git://github.com/c-ares/c-ares.git;branch=main;protocol=https"
--SRCREV = "972f456f2808b4e4b1730c90ab506f6af5f4c725"
-+SRC_URI = "https://c-ares.org/download/c-ares-1.24.0.tar.gz \
-+           file://run-ptest"
-+SRC_URI[sha256sum] = "c517de6d5ac9cd55a9b72c1541c3e25b84588421817b5f092850ac09a8df5103"
+-SRC_URI[sha256sum] = "86b0bb7d7da0be1a7c4aedb7974e391b32d4ed89e33de6ed6902b4b15c97577e"
++SRC_URI[sha256sum] = "4a61cf0a59097c7bb52689b0fd63717cd2a8a14dc9f1eee97b82d814881c8c91"
  
--UPSTREAM_CHECK_GITTAGREGEX = "cares-(?P<pver>\d+_(\d_?)+)"
-+PACKAGECONFIG ?= "${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)}"
-+PACKAGECONFIG[manpages] = ""
-+PACKAGECONFIG[tests] = "-DCARES_BUILD_TESTS=ON,-DCARES_BUILD_TESTS=OFF,googletest"
- 
--S = "${WORKDIR}/git"
-+inherit cmake manpages pkgconfig ptest
- 
--inherit cmake pkgconfig
-+EXTRA_OECMAKE = "-DCARES_STATIC=${@ 'ON' if d.getVar('DISABLE_STATIC') == '' else 'OFF' }"
-+
-+do_install_ptest () {
-+	install -d ${D}${PTEST_PATH}
-+	install -m 0755 ${B}/bin/arestest ${D}${PTEST_PATH}
-+	install -m 0755 ${WORKDIR}/run-ptest ${D}${PTEST_PATH}
-+}
- 
- PACKAGE_BEFORE_PN = "${PN}-utils"
+ inherit pypi python_setuptools_build_meta
  
 -- 
-2.39.0
+2.34.1
 
 
