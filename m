@@ -1,291 +1,123 @@
-Return-Path: <alex.kanavin@gmail.com>
+Return-Path: <alex.kiernan@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9AB49C3DA6E
-	for <webhook@archiver.kernel.org>; Wed, 20 Dec 2023 20:46:03 +0000 (UTC)
-Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com [209.85.167.44])
- by mx.groups.io with SMTP id smtpd.web11.31809.1703105154803879948
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A58F0C3DA6E
+	for <webhook@archiver.kernel.org>; Wed, 20 Dec 2023 20:55:33 +0000 (UTC)
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+ by mx.groups.io with SMTP id smtpd.web10.32392.1703105729161786272
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Dec 2023 12:45:55 -0800
+ Wed, 20 Dec 2023 12:55:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=i4aw6eVv;
- spf=pass (domain: gmail.com, ip: 209.85.167.44, mailfrom: alex.kanavin@gmail.com)
-Received: by mail-lf1-f44.google.com with SMTP id 2adb3069b0e04-50e34a72660so156138e87.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 20 Dec 2023 12:45:54 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=g0WxHkZp;
+ spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: alex.kiernan@gmail.com)
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-40d190044c5so1233365e9.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 20 Dec 2023 12:55:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1703105153; x=1703709953; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=bb1lS7iaZEaUDfipElcuhvYEdFXOPQPO9rnzfrGd4dM=;
-        b=i4aw6eVvmJ0yM3zK/jF+b/+9p/xlz+ukPx5LhR4Q53h56sRV8WsS7sQUit6zFGIzn1
-         s7pXN8xKg2KKGgBiVwVZMabONlNpOjfMK9jWvV6/IoP+a7trDKl7m0lhyS7IUp48a8bM
-         nb6FVLlDttLgbmiMxsZ3aJT4izUDtM3e+8x+YJGs9nyqbCiH3WouaxytkuaGkLUZ8EY4
-         5R4iryjNQ3wrPydf039Eiwz/ovZClK+FTCi9h5yeSYy7XTTfeeAzHSHlXhYiBp2mg4q5
-         uGTLEja9EMUP38AcWTJROMx0TTU1FAmZoGt3myYCX+YpluDQ5plj6lcfCoNS81bZmPV3
-         QiuA==
+        d=gmail.com; s=20230601; t=1703105727; x=1703710527; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=fZrUKdDGD6h9xtUnoU6IBfRgsrUurfg8Ds6E6JMepFg=;
+        b=g0WxHkZpdJfCqpWOY0RsPKUai9e+sAz6O9UD8sXfBLAM88+4jUOj6FvnBZ1cE+HX1/
+         TOxsDiZPGRYm+qbKTewf0yHMJ7v/SFOsxLQQWzQhqfocATpkdTbC52TyXs4acXXhfZ8S
+         6iaaU9zodq64B1z1Eg1S2ZzPW/fMBogDUEvb/eVqGnY8Nvw0ZnFF/Xvo3EIk79wOJGuM
+         VuUpRlqgcd2ivnMJU2JA2X8yK86IPuNeDIydHyPEm/QHawIAb88yj+ZnR7Wx8tFyyHUE
+         AuDofiCsBQth7jiSs723YZmnYt1xtgZXx7vH6CtCJ0m+8prRD96XfutWUYvd31ONqHvj
+         Czlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703105153; x=1703709953;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=bb1lS7iaZEaUDfipElcuhvYEdFXOPQPO9rnzfrGd4dM=;
-        b=YSWXvuyYppn7/bSMNhsCXENu012VmCE8LYCFhgy63v79bGDJd7FMR3+FAE0f3GEm3z
-         MpBFZdf876/Y8WpGTaPdaMxGZ99LOOmeQlsG+BBwZf6ybMn+X5tGge1i8rFLwPWOc6Uc
-         jNnSFX1pcn3R1EABAiQElrg261tfxZ8roxmkMO57Q738Uraquw0xioDT8KQD3p9JUfhe
-         MJp4+XE5sCz+zh24f5S/4ntN1KDm0uXt5o/BB7VJKLiWXwuCZ6/VSB18w3ZT0657xhgl
-         W2+fpD9HvwrTsybFonyKiz7p1wa1dSpDs+tNpfV13zvI7RgSfY7nYq7JfuhpiCu7VJeU
-         oUdw==
-X-Gm-Message-State: AOJu0Ywjd4/8kIutgQpaCOtZAbJGV5yYhso3UbkItMquhBCIXYZK1viw
-	ODb/ZwWMW1pi99ZCklozoLUzFPsg0Q0Fng64TSI=
-X-Google-Smtp-Source: AGHT+IF4+Nnis/plzTVlJkQjDbordAdYcYQZJFq5marn12Mm7XeqiEC12mOAPQE3mX+sPn4FIXMMgLXQ095/ZgpzoLE=
-X-Received: by 2002:a05:6512:606:b0:50e:4bea:b0c with SMTP id
- b6-20020a056512060600b0050e4bea0b0cmr1321611lfe.54.1703105152446; Wed, 20 Dec
- 2023 12:45:52 -0800 (PST)
+        d=1e100.net; s=20230601; t=1703105727; x=1703710527;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=fZrUKdDGD6h9xtUnoU6IBfRgsrUurfg8Ds6E6JMepFg=;
+        b=vvAbevuXzMc4qNGKy9TF+wL9EanfLLwk8l96BB9306doIFUC7Pi7fHcR3WiKFEr3rA
+         tfid/h5XsLKwuhYQx0dFxdkwLndsdYxAaSOI7v74UdK8ThGC8MDf11Rhtwuq9zB8YDSf
+         3GK9galJzYO+3XAS0VsrdAVWGKL3v6IRrxEd++EjclzIOSh+TvaT6WhJEUWReHNugHOI
+         KtOZr3V8J/02NU24u2stQEZv/rrTbUsjlvFL9ge7pqUXJ/QvbXRc7Bf0XBfYmciqaDiK
+         QG2dzWKP2i+BYDXTU3D36hepahG3YNupkjAFSr+MmR9ek25fkJuVOkmNsjgdFdL2SLmP
+         qEqA==
+X-Gm-Message-State: AOJu0YwjX+j8zU99m5gOcydeOEIe2CmhMPZAsNYRd06yUtZnEV/tjU8z
+	UQKCh1p50PBjc0Ovz/zoMfoKbnKTsB0=
+X-Google-Smtp-Source: AGHT+IHFmpDhlZLDeYZ7YtTWzOBuy5+HA+9InuUOjYdqEJjKqocL6oB/3+ZYdvaWuBZ+pGzHpmOzmg==
+X-Received: by 2002:a05:600c:501f:b0:40c:692e:2576 with SMTP id n31-20020a05600c501f00b0040c692e2576mr174884wmr.136.1703105726613;
+        Wed, 20 Dec 2023 12:55:26 -0800 (PST)
+Received: from Zuma-000004PC.lan ([2a02:390:9c57:0:8108:f84e:1a21:c7d3])
+        by smtp.gmail.com with ESMTPSA id v8-20020a05600c444800b0040c2c5f5844sm780042wmn.21.2023.12.20.12.55.26
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 20 Dec 2023 12:55:26 -0800 (PST)
+From: Alex Kiernan <alex.kiernan@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Alex Kiernan <alex.kiernan@gmail.com>
+Subject: [meta-oe][PATCH v2] c-ares: Move to tarballs, add ptest and static support
+Date: Wed, 20 Dec 2023 20:55:18 +0000
+Message-Id: <20231220205518.6966-1-alex.kiernan@gmail.com>
+X-Mailer: git-send-email 2.39.0
 MIME-Version: 1.0
-References: <20231215075239.3049865-1-alex@linutronix.de> <20231215075239.3049865-20-alex@linutronix.de>
- <CAMKF1sqeta7U-mQ6JzeZm0OwHuGGRPrsVhQTsRBsKjNO3bj9hA@mail.gmail.com>
-In-Reply-To: <CAMKF1sqeta7U-mQ6JzeZm0OwHuGGRPrsVhQTsRBsKjNO3bj9hA@mail.gmail.com>
-From: Alexander Kanavin <alex.kanavin@gmail.com>
-Date: Wed, 20 Dec 2023 21:45:41 +0100
-Message-ID: <CANNYZj9JHPEOrYZyScshxUkW0JW=71Qh=NRs5tgze9rSdypTuA@mail.gmail.com>
-Subject: Re: [oe] [PATCH 20/20] nodejs: backport (partially) python 3.12 support
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org, 
-	Alexander Kanavin <alex@linutronix.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 20 Dec 2023 20:46:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107671
+ <openembedded-devel@lists.openembedded.org>; Wed, 20 Dec 2023 20:55:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107672
 
-| npm ERR! ModuleNotFoundError: No module named 'packaging'
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+---
 
-Looks like python3-packaging needs to be in RDEPENDS as well, I'll
-make a fix (or you can quickly try to see if it resolves the error).
+Changes in v2:
+- Use relative path to arestest
 
-Alex
+ .../recipes-support/c-ares/c-ares/run-ptest   |  7 +++++++
+ .../recipes-support/c-ares/c-ares_1.24.0.bb   | 19 ++++++++++++++-----
+ 2 files changed, 21 insertions(+), 5 deletions(-)
+ create mode 100644 meta-oe/recipes-support/c-ares/c-ares/run-ptest
 
-On Wed, 20 Dec 2023 at 20:12, Khem Raj <raj.khem@gmail.com> wrote:
->
-> this is regressing some dependent recipe e.g. simpleiot which depends
-> on gyp from nodejs-native
->
-> https://github.com/YoeDistro/yoe-distro/actions/runs/7258317572/job/19834=
-510249?pr=3D882
->
-> On Thu, Dec 14, 2023 at 11:53=E2=80=AFPM Alexander Kanavin
-> <alex.kanavin@gmail.com> wrote:
-> >
-> > Signed-off-by: Alexander Kanavin <alex@linutronix.de>
-> > ---
-> >  ...001-build-fix-build-with-Python-3.12.patch | 55 ++++++++++++++++
-> >  .../0001-gyp-resolve-python-3.12-issues.patch | 63 +++++++++++++++++++
-> >  .../recipes-devtools/nodejs/nodejs_20.8.1.bb  |  4 +-
-> >  3 files changed, 121 insertions(+), 1 deletion(-)
-> >  create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0001-build-f=
-ix-build-with-Python-3.12.patch
-> >  create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0001-gyp-res=
-olve-python-3.12-issues.patch
-> >
-> > diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-build-fix-buil=
-d-with-Python-3.12.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0001-buil=
-d-fix-build-with-Python-3.12.patch
-> > new file mode 100644
-> > index 000000000..39026d074
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-devtools/nodejs/nodejs/0001-build-fix-build-with-=
-Python-3.12.patch
-> > @@ -0,0 +1,55 @@
-> > +From 656f6c91f1da7f1e1ffb01e2de7d9026a84958b5 Mon Sep 17 00:00:00 2001
-> > +From: Luigi Pinca <luigipinca@gmail.com>
-> > +Date: Wed, 8 Nov 2023 21:20:53 +0100
-> > +Subject: [PATCH] build: fix build with Python 3.12
-> > +
-> > +Replace `distutils.version.StrictVersion` with
-> > +`packaging.version.Version`.
-> > +
-> > +Refs: https://github.com/nodejs/node/pull/50209#issuecomment-179585253=
-9
-> > +PR-URL: https://github.com/nodejs/node/pull/50582
-> > +Reviewed-By: Richard Lau <rlau@redhat.com>
-> > +Reviewed-By: Chengzhong Wu <legendecas@gmail.com>
-> > +
-> > +Upstream-Status: Backport [https://github.com/nodejs/node/commit/95534=
-ad82f4e33f53fd50efe633d43f8da70cba6]
-> > +Signed-off-by: Alexander Kanavin <alex@linutronix.de>
-> > +---
-> > + configure.py | 11 +++++------
-> > + 1 file changed, 5 insertions(+), 6 deletions(-)
-> > +
-> > +diff --git a/configure.py b/configure.py
-> > +index 62f041ce..18fe7c14 100755
-> > +--- a/configure.py
-> > ++++ b/configure.py
-> > +@@ -14,8 +14,6 @@ import bz2
-> > + import io
-> > + from pathlib import Path
-> > +
-> > +-from distutils.version import StrictVersion
-> > +-
-> > + # If not run from node/, cd to node/.
-> > + os.chdir(Path(__file__).parent)
-> > +
-> > +@@ -30,6 +28,7 @@ tools_path =3D Path('tools')
-> > +
-> > + sys.path.insert(0, str(tools_path / 'gyp' / 'pylib'))
-> > + from gyp.common import GetFlavor
-> > ++from packaging.version import Version
-> > +
-> > + # imports in tools/configure.d
-> > + sys.path.insert(0, str(tools_path / 'configure.d'))
-> > +@@ -1565,10 +1564,10 @@ def configure_openssl(o):
-> > +     # supported asm compiler for AVX2. See https://github.com/openssl=
-/openssl/
-> > +     # blob/OpenSSL_1_1_0-stable/crypto/modes/asm/aesni-gcm-x86_64.pl#=
-L52-L69
-> > +     openssl110_asm_supported =3D \
-> > +-      ('gas_version' in variables and StrictVersion(variables['gas_ve=
-rsion']) >=3D StrictVersion('2.23')) or \
-> > +-      ('xcode_version' in variables and StrictVersion(variables['xcod=
-e_version']) >=3D StrictVersion('5.0')) or \
-> > +-      ('llvm_version' in variables and StrictVersion(variables['llvm_=
-version']) >=3D StrictVersion('3.3')) or \
-> > +-      ('nasm_version' in variables and StrictVersion(variables['nasm_=
-version']) >=3D StrictVersion('2.10'))
-> > ++      ('gas_version' in variables and Version(variables['gas_version'=
-]) >=3D Version('2.23')) or \
-> > ++      ('xcode_version' in variables and Version(variables['xcode_vers=
-ion']) >=3D Version('5.0')) or \
-> > ++      ('llvm_version' in variables and Version(variables['llvm_versio=
-n']) >=3D Version('3.3')) or \
-> > ++      ('nasm_version' in variables and Version(variables['nasm_versio=
-n']) >=3D Version('2.10'))
-> > +
-> > +     if is_x86 and not openssl110_asm_supported:
-> > +       error('''Did not find a new enough assembler, install one or bu=
-ild with
-> > diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-gyp-resolve-py=
-thon-3.12-issues.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0001-gyp-re=
-solve-python-3.12-issues.patch
-> > new file mode 100644
-> > index 000000000..9d878dfb8
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-devtools/nodejs/nodejs/0001-gyp-resolve-python-3.=
-12-issues.patch
-> > @@ -0,0 +1,63 @@
-> > +From bf8c96ba6936050ed4a0de5bc8aeeaf2b3c50dc1 Mon Sep 17 00:00:00 2001
-> > +From: Alexander Kanavin <alex@linutronix.de>
-> > +Date: Thu, 7 Dec 2023 12:54:30 +0100
-> > +Subject: [PATCH] gyp: resolve python 3.12 issues
-> > +
-> > +Upstream has updated gyp wholesale in the main branch, so
-> > +this patch can be dropped in due time.
-> > +
-> > +Upstream-Status: Inappropriate [issue will be fixed upstream with the =
-next nodejs LTS update]
-> > +
-> > +Signed-off-by: Alexander Kanavin <alex@linutronix.de>
-> > +---
-> > + deps/npm/node_modules/node-gyp/gyp/pylib/gyp/input.py | 4 ++--
-> > + tools/gyp/pylib/gyp/input.py                          | 4 ++--
-> > + 2 files changed, 4 insertions(+), 4 deletions(-)
-> > +
-> > +diff --git a/deps/npm/node_modules/node-gyp/gyp/pylib/gyp/input.py b/d=
-eps/npm/node_modules/node-gyp/gyp/pylib/gyp/input.py
-> > +index d9699a0a..173e9465 100644
-> > +--- a/deps/npm/node_modules/node-gyp/gyp/pylib/gyp/input.py
-> > ++++ b/deps/npm/node_modules/node-gyp/gyp/pylib/gyp/input.py
-> > +@@ -16,7 +16,7 @@ import subprocess
-> > + import sys
-> > + import threading
-> > + import traceback
-> > +-from distutils.version import StrictVersion
-> > ++from packaging.version import Version
-> > + from gyp.common import GypError
-> > + from gyp.common import OrderedSet
-> > +
-> > +@@ -1183,7 +1183,7 @@ def EvalSingleCondition(cond_expr, true_dict, fa=
-lse_dict, phase, variables, buil
-> > +         else:
-> > +             ast_code =3D compile(cond_expr_expanded, "<string>", "eva=
-l")
-> > +             cached_conditions_asts[cond_expr_expanded] =3D ast_code
-> > +-        env =3D {"__builtins__": {}, "v": StrictVersion}
-> > ++        env =3D {"__builtins__": {}, "v": Version}
-> > +         if eval(ast_code, env, variables):
-> > +             return true_dict
-> > +         return false_dict
-> > +diff --git a/tools/gyp/pylib/gyp/input.py b/tools/gyp/pylib/gyp/input.=
-py
-> > +index 354958bf..ab6112e5 100644
-> > +--- a/tools/gyp/pylib/gyp/input.py
-> > ++++ b/tools/gyp/pylib/gyp/input.py
-> > +@@ -16,7 +16,7 @@ import subprocess
-> > + import sys
-> > + import threading
-> > + import traceback
-> > +-from distutils.version import StrictVersion
-> > ++from packaging.version import Version
-> > + from gyp.common import GypError
-> > + from gyp.common import OrderedSet
-> > +
-> > +@@ -1190,7 +1190,7 @@ def EvalSingleCondition(cond_expr, true_dict, fa=
-lse_dict, phase, variables, buil
-> > +         else:
-> > +             ast_code =3D compile(cond_expr_expanded, "<string>", "eva=
-l")
-> > +             cached_conditions_asts[cond_expr_expanded] =3D ast_code
-> > +-        env =3D {"__builtins__": {}, "v": StrictVersion}
-> > ++        env =3D {"__builtins__": {}, "v": Version}
-> > +         if eval(ast_code, env, variables):
-> > +             return true_dict
-> > +         return false_dict
-> > +--
-> > +2.39.2
-> > +
-> > diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_20.8.1.bb b/meta-oe=
-/recipes-devtools/nodejs/nodejs_20.8.1.bb
-> > index 65f4eb3f3..0ca0c1498 100644
-> > --- a/meta-oe/recipes-devtools/nodejs/nodejs_20.8.1.bb
-> > +++ b/meta-oe/recipes-devtools/nodejs/nodejs_20.8.1.bb
-> > @@ -5,7 +5,7 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D162595a4a2f3=
-453a0534e60b0afe4e7b"
-> >
-> >  CVE_PRODUCT =3D "nodejs node.js"
-> >
-> > -DEPENDS =3D "openssl file-replacement-native"
-> > +DEPENDS =3D "openssl file-replacement-native python3-packaging-native"
-> >  DEPENDS:append:class-target =3D " qemu-native"
-> >  DEPENDS:append:class-native =3D " c-ares-native"
-> >
-> > @@ -27,6 +27,8 @@ SRC_URI =3D "http://nodejs.org/dist/v${PV}/node-v${PV=
-}.tar.xz \
-> >             file://0001-Revert-io_uring-changes-from-libuv-1.46.0.patch=
- \
-> >             file://0002-Revert-io_uring-changes-from-libuv-1.45.0.patch=
- \
-> >             file://run-ptest \
-> > +           file://0001-build-fix-build-with-Python-3.12.patch \
-> > +           file://0001-gyp-resolve-python-3.12-issues.patch \
-> >             "
-> >
-> >  SRC_URI:append:class-target =3D " \
-> > --
-> > 2.39.2
-> >
-> >
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#107513): https://lists.openembedded.org/g/openembed=
-ded-devel/message/107513
-> > Mute This Topic: https://lists.openembedded.org/mt/103186676/1997914
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[raj.khem@gmail.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
+diff --git a/meta-oe/recipes-support/c-ares/c-ares/run-ptest b/meta-oe/recipes-support/c-ares/c-ares/run-ptest
+new file mode 100644
+index 000000000000..15971dec058c
+--- /dev/null
++++ b/meta-oe/recipes-support/c-ares/c-ares/run-ptest
+@@ -0,0 +1,7 @@
++#!/bin/sh
++
++if ./arestest; then
++	echo "PASS: c-ares"
++else
++	echo "FAIL: c-ares"
++fi
+diff --git a/meta-oe/recipes-support/c-ares/c-ares_1.24.0.bb b/meta-oe/recipes-support/c-ares/c-ares_1.24.0.bb
+index 2171002aa95e..3b3b2b83febc 100644
+--- a/meta-oe/recipes-support/c-ares/c-ares_1.24.0.bb
++++ b/meta-oe/recipes-support/c-ares/c-ares_1.24.0.bb
+@@ -5,14 +5,23 @@ SECTION = "libs"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=fdbc58a6da11a9f68aa73c453818decc"
+ 
+-SRC_URI = "git://github.com/c-ares/c-ares.git;branch=main;protocol=https"
+-SRCREV = "972f456f2808b4e4b1730c90ab506f6af5f4c725"
++SRC_URI = "https://c-ares.org/download/c-ares-1.24.0.tar.gz \
++           file://run-ptest"
++SRC_URI[sha256sum] = "c517de6d5ac9cd55a9b72c1541c3e25b84588421817b5f092850ac09a8df5103"
+ 
+-UPSTREAM_CHECK_GITTAGREGEX = "cares-(?P<pver>\d+_(\d_?)+)"
++PACKAGECONFIG ?= "${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)}"
++PACKAGECONFIG[manpages] = ""
++PACKAGECONFIG[tests] = "-DCARES_BUILD_TESTS=ON,-DCARES_BUILD_TESTS=OFF,googletest"
+ 
+-S = "${WORKDIR}/git"
++inherit cmake manpages pkgconfig ptest
+ 
+-inherit cmake pkgconfig
++EXTRA_OECMAKE = "-DCARES_STATIC=${@ 'ON' if d.getVar('DISABLE_STATIC') == '' else 'OFF' }"
++
++do_install_ptest () {
++	install -d ${D}${PTEST_PATH}
++	install -m 0755 ${B}/bin/arestest ${D}${PTEST_PATH}
++	install -m 0755 ${WORKDIR}/run-ptest ${D}${PTEST_PATH}
++}
+ 
+ PACKAGE_BEFORE_PN = "${PN}-utils"
+ 
+-- 
+2.39.0
+
 
