@@ -2,165 +2,142 @@ Return-Path: <vanusuri@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D81E7C3DA6E
-	for <webhook@archiver.kernel.org>; Wed, 20 Dec 2023 07:58:05 +0000 (UTC)
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com [209.85.210.182])
- by mx.groups.io with SMTP id smtpd.web10.17397.1703059081632630873
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BDFDFC46CCD
+	for <webhook@archiver.kernel.org>; Wed, 20 Dec 2023 07:58:15 +0000 (UTC)
+Received: from mail-oi1-f171.google.com (mail-oi1-f171.google.com [209.85.167.171])
+ by mx.groups.io with SMTP id smtpd.web11.17186.1703059090671808519
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 19 Dec 2023 23:58:01 -0800
+ Tue, 19 Dec 2023 23:58:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=aC2t/wfN;
- spf=pass (domain: mvista.com, ip: 209.85.210.182, mailfrom: vanusuri@mvista.com)
-Received: by mail-pf1-f182.google.com with SMTP id d2e1a72fcca58-6d9344f30caso362866b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 19 Dec 2023 23:58:01 -0800 (PST)
+ dkim=pass header.i=@mvista.com header.s=google header.b=c9WHpz3s;
+ spf=pass (domain: mvista.com, ip: 209.85.167.171, mailfrom: vanusuri@mvista.com)
+Received: by mail-oi1-f171.google.com with SMTP id 5614622812f47-3bb7344a0e1so29658b6e.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 19 Dec 2023 23:58:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1703059080; x=1703663880; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=21euJ1ehQiJXiCndwQlk6/VYrHE+gUnkvKojSQKUZtw=;
-        b=aC2t/wfNanmtIOuHXa/pHJ7wPwTyeNZar+6iQ+C5nIstuZbB/+5ONtB8+ppAFQrYvr
-         rFTK18y+dveJ9H9BzaQJJ1QKxwkyILe+BoS5rQrTStOqFlhvvqNw/ATwk4hPkYyWlUDU
-         6hYz8ZgdKhXHodziJA4koBn4cixyWDvV6bWU8=
+        d=mvista.com; s=google; t=1703059089; x=1703663889; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=tAqLrn9bAdOLblt5VoOUCO7yHVKU66w5fKjNMRNKNws=;
+        b=c9WHpz3ssU1RsxN3+2/zSjjJRU+XF3xrO1QIKGn8Ljm4tbr6OsN5o9sI8BkMUdowzU
+         Z0/SV0jkMLu+nLbQQXZdi76Fs7MXjEzxHi8sJfGX5oMGa/VdoP8XCTtIFrEcqEW9eMUZ
+         qQNwVIcWu8yaiPuxdO86B3JX5nuQaxwURqtnI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703059080; x=1703663880;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=21euJ1ehQiJXiCndwQlk6/VYrHE+gUnkvKojSQKUZtw=;
-        b=vdcHMScnN26c2wraUrW+c5fP1DTp+pvSpOgWcb/l1IJs4MKfTwcE6xBXoYb5Vf8Ac1
-         Hw0lZnusF+rT8b9OP6k0BG59VTwjZJVfwgIZPTTZd2jGX8K0sXPnxTCTLbTkz4BfHoeZ
-         99YbBbyVuIxFWzDPjGGhNNUl2rjkmgyZvqczFunq01xKlc9M2kUwOqMqRIoG5Oiz+Tox
-         gC5WgDaMY803vlh+tt06V8Pg20HfmpXp1VRB6EWvrJ7Heu/fpsMpGaYLloL2YcN9fdUx
-         4ED09b3kqJ/66uX/773lzOWDSIUZMwc1uGd78GrlYGcaentZDnzEC0dqqYMpqY716ybT
-         r1BA==
-X-Gm-Message-State: AOJu0YxS9vvP+t2cQ5ZimoI9lbH0TUpC9HolO1PsakesJTXlYe+FLwbV
-	RClvNJE6k9mLOqf45n2ljiaKdqJLAtb92VGPT5XUhMgyAE8=
-X-Google-Smtp-Source: AGHT+IFobg2/pEE4XJRfKJwCJ52xot33UgqFWcgaDY+Wi9Ilfo6YKcuwZ5ctF+cYDfUkXYSEwaokTg==
-X-Received: by 2002:aa7:814d:0:b0:6d9:3e48:a782 with SMTP id d13-20020aa7814d000000b006d93e48a782mr1960602pfn.18.1703059080203;
-        Tue, 19 Dec 2023 23:58:00 -0800 (PST)
+        d=1e100.net; s=20230601; t=1703059089; x=1703663889;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=tAqLrn9bAdOLblt5VoOUCO7yHVKU66w5fKjNMRNKNws=;
+        b=CeinUL7pGJRp+7nYsz8iqvuhCmUBTeRCXJaMxw6Za3dmR3Er51x5eXuzUVzGgEcgpc
+         vH7+B/apmlWk7YP8ghzQbm2O05Sw0JM3D0/fH5RM0mQinKHyX8AYNI7sYvY5UlykYzt5
+         sgn5HeU5I9kov9YUV1dL2upWNnG2lZQw5ChKZtPoZTDtYZW6p8Vs0k58Q67ncNQckcmp
+         XFlHWvOg0XHRLeGk18sv3O3icjXnYxbAtcNe3/6rykzO147dcokWTIo2GEqZOp4xisn2
+         lKvX/opVjy9T18fMx2GdB8uMuuTVcZllOLJYcKkk0QBWgp0Ekk5bS8xVeuimoOnNUO3i
+         IxQg==
+X-Gm-Message-State: AOJu0YycF78tvHaxQGD9QgNF9BuxQHLe/tXvfd8NkklrWEGO24rpjk3r
+	FvHsjWANtJctHYjAchlYj7hzwODFDGMtoD/xEeU=
+X-Google-Smtp-Source: AGHT+IGUwdUtkc8RFHNC6D5vHHUd5RbIp8qy1TDnnnYunvQsKC2tgHuA8N1QSI1qBKYFW9PSN7mAbg==
+X-Received: by 2002:a05:6808:f91:b0:3b9:e48f:d653 with SMTP id o17-20020a0568080f9100b003b9e48fd653mr22693767oiw.66.1703059089098;
+        Tue, 19 Dec 2023 23:58:09 -0800 (PST)
 Received: from MVIN00020.mvista.com ([223.230.5.216])
-        by smtp.gmail.com with ESMTPSA id c3-20020aa78803000000b006d451d8d7f3sm6794230pfo.76.2023.12.19.23.57.58
+        by smtp.gmail.com with ESMTPSA id c3-20020aa78803000000b006d451d8d7f3sm6794230pfo.76.2023.12.19.23.58.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 19 Dec 2023 23:57:59 -0800 (PST)
+        Tue, 19 Dec 2023 23:58:08 -0800 (PST)
 From: vanusuri@mvista.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Vijay Anusuri <vanusuri@mvista.com>
-Subject: [OE-core][kirkstone][PATCH v2 1/4] libssh: upgrade 0.8.9 -> 0.10.4
-Date: Wed, 20 Dec 2023 13:25:40 +0530
-Message-Id: <20231220075543.96481-1-vanusuri@mvista.com>
+Cc: Vijay Anusuri <vanusuri@mvista.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [OE-core][kirkstone][PATCH v2 3/4] libssh: Fix build with clang16
+Date: Wed, 20 Dec 2023 13:25:42 +0530
+Message-Id: <20231220075543.96481-3-vanusuri@mvista.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20231220075543.96481-1-vanusuri@mvista.com>
+References: <20231220075543.96481-1-vanusuri@mvista.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 20 Dec 2023 07:58:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107646
+ <openembedded-devel@lists.openembedded.org>; Wed, 20 Dec 2023 07:58:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107648
 
 From: Vijay Anusuri <vanusuri@mvista.com>
 
-ChangeLog:
-https://git.libssh.org/projects/libssh.git/tree/CHANGELOG?h=libssh-0.10.4
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
-Drop CVE-2020-16135.patch
-
-Ref: https://git.openembedded.org/meta-openembedded-contrib/commit/?h=stable/nanbield-nut&id=4b7e4341327e867208bfc3d8ba1954af66641e60
+Ref: https://git.openembedded.org/meta-openembedded-contrib/commit/?h=stable/nanbield-nut&id=9323b287ef588f41c13f3520de85eb198f6eaf83
 
 Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
 ---
- .../libssh/libssh/CVE-2020-16135.patch        | 44 -------------------
- .../{libssh_0.8.9.bb => libssh_0.10.4.bb}     | 16 ++-----
- 2 files changed, 3 insertions(+), 57 deletions(-)
- delete mode 100644 meta-oe/recipes-support/libssh/libssh/CVE-2020-16135.patch
- rename meta-oe/recipes-support/libssh/{libssh_0.8.9.bb => libssh_0.10.4.bb} (62%)
+ ...prototype-of-des3_encrypt-des3_decry.patch | 46 +++++++++++++++++++
+ .../recipes-support/libssh/libssh_0.10.4.bb   |  1 +
+ 2 files changed, 47 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libssh/libssh/0001-libgcrypt.c-Fix-prototype-of-des3_encrypt-des3_decry.patch
 
-diff --git a/meta-oe/recipes-support/libssh/libssh/CVE-2020-16135.patch b/meta-oe/recipes-support/libssh/libssh/CVE-2020-16135.patch
-deleted file mode 100644
-index 63b78688d..000000000
---- a/meta-oe/recipes-support/libssh/libssh/CVE-2020-16135.patch
-+++ /dev/null
-@@ -1,44 +0,0 @@
--From 0a9268a60f2d3748ca69bde5651f20e72761058c Mon Sep 17 00:00:00 2001
--From: Andreas Schneider <asn@cryptomilk.org>
--Date: Wed, 3 Jun 2020 10:04:09 +0200
--Subject: CVE-2020-16135: Add missing NULL check for ssh_buffer_new()
--
--Add a missing NULL check for the pointer returned by ssh_buffer_new() in
--sftpserver.c.
--
--Thanks to Ramin Farajpour Cami for spotting this.
--
--Fixes T232
--
--Signed-off-by: Andreas Schneider <asn@cryptomilk.org>
--Reviewed-by: Anderson Toshiyuki Sasaki <ansasaki@redhat.com>
--Reviewed-by: Jakub Jelen <jjelen@redhat.com>
--(cherry picked from commit 533d881b0f4b24c72b35ecc97fa35d295d063e53)
--
--Upstream-Status: Backport [https://git.libssh.org/projects/libssh.git/patch/?id=0a9268a60f2d3748ca69bde5651f20e72761058c]
--CVE: CVE-2020-16135
--Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
-----
-- src/sftpserver.c | 6 ++++++
-- 1 file changed, 6 insertions(+)
--
--diff --git a/src/sftpserver.c b/src/sftpserver.c
--index 1717aa417..1af8a0e76 100644
----- a/src/sftpserver.c
--+++ b/src/sftpserver.c
--@@ -64,6 +64,12 @@ sftp_client_message sftp_get_client_message(sftp_session sftp) {
-- 
--   /* take a copy of the whole packet */
--   msg->complete_message = ssh_buffer_new();
--+  if (msg->complete_message == NULL) {
--+      ssh_set_error_oom(session);
--+      sftp_client_message_free(msg);
--+      return NULL;
--+  }
--+
--   ssh_buffer_add_data(msg->complete_message,
--                       ssh_buffer_get(payload),
--                       ssh_buffer_get_len(payload));
---- 
--2.25.1
--
-diff --git a/meta-oe/recipes-support/libssh/libssh_0.8.9.bb b/meta-oe/recipes-support/libssh/libssh_0.10.4.bb
-similarity index 62%
-rename from meta-oe/recipes-support/libssh/libssh_0.8.9.bb
-rename to meta-oe/recipes-support/libssh/libssh_0.10.4.bb
-index 061f13912..3a57a728a 100644
---- a/meta-oe/recipes-support/libssh/libssh_0.8.9.bb
+diff --git a/meta-oe/recipes-support/libssh/libssh/0001-libgcrypt.c-Fix-prototype-of-des3_encrypt-des3_decry.patch b/meta-oe/recipes-support/libssh/libssh/0001-libgcrypt.c-Fix-prototype-of-des3_encrypt-des3_decry.patch
+new file mode 100644
+index 000000000..19775fa52
+--- /dev/null
++++ b/meta-oe/recipes-support/libssh/libssh/0001-libgcrypt.c-Fix-prototype-of-des3_encrypt-des3_decry.patch
+@@ -0,0 +1,46 @@
++From 0cade4573334571055127a2d4fe3641e2397948d Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 20 Mar 2023 21:59:19 -0700
++Subject: [PATCH] libgcrypt.c: Fix prototype of des3_encrypt/des3_decrypt
++
++This is to match the prototype for callback functions which are now emitted as
++errors by clang16
++
++Fixes
++
++TOPDIR/build/tmp/work/cortexa15t2hf-neon-yoe-linux-gnueabi/libssh/0.10.4-r0/git/src/libgcrypt.c:903:20: error: incompatible function pointer types initializing 'void (*)(struct ssh_cipher_struct *, void *, void *, size_t)' (aka 'void (*)(struct ssh_cipher_struct *, void *, void *, unsigned int)') with an expression of type 'void (struct ssh_cipher_struct *, void *, void *, unsigned long)' [-Wincompatible-function-pointer-types]
++    .encrypt     = des3_encrypt,
++                   ^~~~~~~~~~~~
++TOPDIR/build/tmp/work/cortexa15t2hf-neon-yoe-linux-gnueabi/libssh/0.10.4-r0/git/src/libgcrypt.c:904:20: error: incompatible function pointer types initializing 'void (*)(struct ssh_cipher_struct *, void *, void *, size_t)' (aka 'void (*)(struct ssh_cipher_struct *, void *, void *, unsigned int)') with an expression of type 'void (struct ssh_cipher_struct *, void *, void *, unsigned long)' [-Wincompatible-function-pointer-types]
++    .decrypt     = des3_decrypt
++                   ^~~~~~~~~~~~
++
++Upstream-Status: Pending
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/libgcrypt.c | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/src/libgcrypt.c b/src/libgcrypt.c
++index da5588ad..e482b654 100644
++--- a/src/libgcrypt.c
+++++ b/src/libgcrypt.c
++@@ -469,12 +469,12 @@ static int des3_set_key(struct ssh_cipher_struct *cipher, void *key, void *IV) {
++ }
++ 
++ static void des3_encrypt(struct ssh_cipher_struct *cipher, void *in,
++-    void *out, unsigned long len) {
+++    void *out, size_t len) {
++   gcry_cipher_encrypt(cipher->key[0], out, len, in, len);
++ }
++ 
++ static void des3_decrypt(struct ssh_cipher_struct *cipher, void *in,
++-    void *out, unsigned long len) {
+++    void *out, size_t len) {
++   gcry_cipher_decrypt(cipher->key[0], out, len, in, len);
++ }
++ 
++-- 
++2.40.0
++
+diff --git a/meta-oe/recipes-support/libssh/libssh_0.10.4.bb b/meta-oe/recipes-support/libssh/libssh_0.10.4.bb
+index 801644d95..4b2ced5e5 100644
+--- a/meta-oe/recipes-support/libssh/libssh_0.10.4.bb
 +++ b/meta-oe/recipes-support/libssh/libssh_0.10.4.bb
-@@ -6,10 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=dabb4958b830e5df11d2b0ed8ea255a0"
+@@ -8,6 +8,7 @@ DEPENDS = "zlib openssl"
  
- DEPENDS = "zlib openssl"
- 
--SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable-0.8 \
--           file://CVE-2020-16135.patch \
--          "
--SRCREV = "04685a74df9ce1db1bc116a83a0da78b4f4fa1f8"
-+SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable-0.10"
-+SRCREV = "e8322817a9e5aaef0698d779ddd467a209a85d85"
- 
- S = "${WORKDIR}/git"
- 
-@@ -25,15 +23,7 @@ EXTRA_OECMAKE = " \
-     -DWITH_PCAP=1 \
-     -DWITH_SFTP=1 \
-     -DWITH_ZLIB=1 \
--    -DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')} \
-+    -DWITH_EXAMPLES=0 \
-     "
- 
--do_configure:prepend () {
--    # Disable building of examples
--    sed -i -e '/add_subdirectory(examples)/s/^/#DONOTWANT/' ${S}/CMakeLists.txt \
--        || bbfatal "Failed to disable examples"
--}
--
--TOOLCHAIN = "gcc"
--
- BBCLASSEXTEND = "native nativesdk"
+ SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable-0.10 \
+            file://0001-tests-CMakeLists.txt-do-not-search-ssh-sshd-commands.patch \
++           file://0001-libgcrypt.c-Fix-prototype-of-des3_encrypt-des3_decry.patch \
+            file://run-ptest \
+           "
+ SRCREV = "e8322817a9e5aaef0698d779ddd467a209a85d85"
 -- 
 2.25.1
 
