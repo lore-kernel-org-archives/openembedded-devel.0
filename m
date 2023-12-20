@@ -2,73 +2,73 @@ Return-Path: <derek@asterius.io>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0FAAEC3DA6E
-	for <webhook@archiver.kernel.org>; Wed, 20 Dec 2023 22:19:24 +0000 (UTC)
-Received: from mail-io1-f50.google.com (mail-io1-f50.google.com [209.85.166.50])
- by mx.groups.io with SMTP id smtpd.web10.34170.1703110759056851971
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E581C3DA6E
+	for <webhook@archiver.kernel.org>; Wed, 20 Dec 2023 22:23:14 +0000 (UTC)
+Received: from mail-il1-f172.google.com (mail-il1-f172.google.com [209.85.166.172])
+ by mx.groups.io with SMTP id smtpd.web11.33822.1703110989904357756
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Dec 2023 14:19:19 -0800
+ Wed, 20 Dec 2023 14:23:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.166.50, mailfrom: straka.derek@gmail.com)
-Received: by mail-io1-f50.google.com with SMTP id ca18e2360f4ac-7b7fdde8b56so7228539f.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 20 Dec 2023 14:19:18 -0800 (PST)
+ dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.166.172, mailfrom: straka.derek@gmail.com)
+Received: by mail-il1-f172.google.com with SMTP id e9e14a558f8ab-35d82fb7e86so578755ab.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 20 Dec 2023 14:23:09 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703110757; x=1703715557;
+        d=1e100.net; s=20230601; t=1703110988; x=1703715788;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=uLOEI5YzWKZkN7INDRFfcNQUF1jJi1P0edy/mebps2M=;
-        b=peaXgIzVgBxKGS0N1aglpbtDwHHe8QvmGMgPhcnBqlFiRIiulmPe5h5UWCOuk/YkQF
-         u2l2ENq76bNr4bTJJEve51kjLbhfqy3UcwFuWEV8x0+Ve+oR+EPh9pgiJfaTEXU18NN3
-         S2cyYwS4VZJnbg49h+SMk2R00FhJ9oCX+R/lCPItrHLoselKk7YPp3PEVid8xvXd1Csk
-         1qDhkGWy1yCdQhdBggodhAmTu+SyqnYOKfBkns9vC7s9mE5w4joIvdd2dwbxahRIDG5v
-         kfeDGqKYEmA8+oaJV/nJUW7syn3yRrR1K1XSMt/dnEtUh7yOVMxRZ00BWcThfR0QCgAs
-         Ruyg==
-X-Gm-Message-State: AOJu0YwIKWed9tJeY6RRVglRdaHf/c5B8wegv6OSDfwbpp3A/uZdR8UQ
-	VppwC2F2sTc+OiIztXPrGrolbQGj25hj5Q==
-X-Google-Smtp-Source: AGHT+IFFQLwdDKWDvaySGH9P5TqkUJMzLhG4fNUXQ0RF5bURQhXIWLY8uBi7Yzk7pHcgfz0q3zYcRQ==
-X-Received: by 2002:a5d:8850:0:b0:7b4:28f8:526 with SMTP id t16-20020a5d8850000000b007b428f80526mr24201263ios.38.1703110757171;
-        Wed, 20 Dec 2023 14:19:17 -0800 (PST)
+        bh=4MlwB63HrEKOhHPW8kbWwFibFkMRFV5refr+k+pAdEQ=;
+        b=fxcuVG5jKwmLYncBc1PFgh4gBfYJpqCb1LIkVHrhsAvl6r3l0YSqLEV1/FeutQnTg8
+         RBmRYDG5RzjvV5aCj/O5LwxPm+C7StFcSiQdeufN0g2YkchMHjIrHMNtChEJgrwc3Bwp
+         ND0uVWU+RKjguC3O/A33cyxNeTFkxgCD5eJR/4akw2PH2ih6L3v3kiG49n6veDXj8hn8
+         463KUIveLsn9ERIOvjKB/OlmKooCx2/o5YIPNwqrzYH2OzlXePcGWW2xYOn3SiBF02z8
+         uvhsrb+kfzrHgRC7nbmqMmuq6r/J0IHjMvObdaXPQR6E+qEPkas5Z50739FeOmyZor8T
+         4sgQ==
+X-Gm-Message-State: AOJu0Yx0X7+JGQL8n2iiDy4YFilH9kvyZCkamC6U0+z9+AqQDWwBPy0j
+	fiYtdQs1wcHIRL9O1z+ELRH7uGdc5iZTIA==
+X-Google-Smtp-Source: AGHT+IEWc+2brmNwYBqYFGk+0YUlL2owRjMVV/iLoRBLgbR/0nN739mpez3pMBxrVItworaJ7DK8Bg==
+X-Received: by 2002:a05:6e02:1d91:b0:35f:c4c5:91e8 with SMTP id h17-20020a056e021d9100b0035fc4c591e8mr3738511ila.60.1703110988211;
+        Wed, 20 Dec 2023 14:23:08 -0800 (PST)
 Received: from sparta.internal.asterius.io (c-73-228-213-122.hsd1.mn.comcast.net. [73.228.213.122])
-        by smtp.gmail.com with ESMTPSA id z6-20020a5ec906000000b007ba73d4810asm125676iol.10.2023.12.20.14.19.16
+        by smtp.gmail.com with ESMTPSA id cr1-20020a05663847c100b004666d987222sm136808jab.29.2023.12.20.14.23.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 20 Dec 2023 14:19:16 -0800 (PST)
+        Wed, 20 Dec 2023 14:23:07 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-python][PATCH] python3-pdm: update to version 2.11.1
-Date: Wed, 20 Dec 2023 22:19:08 +0000
-Message-Id: <20231220221908.3789842-1-derek@asterius.io>
+Subject: [meta-python][PATCH] python3-paramiko: update to version 3.4.0
+Date: Wed, 20 Dec 2023 22:23:00 +0000
+Message-Id: <20231220222300.3808649-1-derek@asterius.io>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 20 Dec 2023 22:19:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107681
+ <openembedded-devel@lists.openembedded.org>; Wed, 20 Dec 2023 22:23:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107682
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../python/{python3-pdm_2.10.4.bb => python3-pdm_2.11.1.bb}     | 2 +-
+ .../{python3-paramiko_3.3.1.bb => python3-paramiko_3.4.0.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pdm_2.10.4.bb => python3-pdm_2.11.1.bb} (81%)
+ rename meta-python/recipes-devtools/python/{python3-paramiko_3.3.1.bb => python3-paramiko_3.4.0.bb} (82%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pdm_2.10.4.bb b/meta-python/recipes-devtools/python/python3-pdm_2.11.1.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-pdm_2.10.4.bb
-rename to meta-python/recipes-devtools/python/python3-pdm_2.11.1.bb
-index fffefb3c6..5ff6ffc9e 100644
---- a/meta-python/recipes-devtools/python/python3-pdm_2.10.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-pdm_2.11.1.bb
-@@ -4,7 +4,7 @@ LICENSE = "MIT"
- SECTION = "devel/python"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=2eb31a2cc1a758c34b499f287dd04ef2"
+diff --git a/meta-python/recipes-devtools/python/python3-paramiko_3.3.1.bb b/meta-python/recipes-devtools/python/python3-paramiko_3.4.0.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python3-paramiko_3.3.1.bb
+rename to meta-python/recipes-devtools/python/python3-paramiko_3.4.0.bb
+index da87e5199..0d32d361c 100644
+--- a/meta-python/recipes-devtools/python/python3-paramiko_3.3.1.bb
++++ b/meta-python/recipes-devtools/python/python3-paramiko_3.4.0.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/paramiko/paramiko/"
+ LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=fd0120fc2e9f841c73ac707a30389af5"
  
--SRC_URI[sha256sum] = "6dfd9d4cb59043edecb2d0b47d208e55d89d333ba7197deb05cca2dfbc7a4bfb"
-+SRC_URI[sha256sum] = "b10bc4e5394856f1639ddc9bc754d9c26323ec5b828a135c6ed35f935b054b83"
+-SRC_URI[sha256sum] = "6a3777a961ac86dbef375c5f5b8d50014a1a96d0fd7f054a43bc880134b0ff77"
++SRC_URI[sha256sum] = "aac08f26a31dc4dffd92821527d1682d99d52f9ef6851968114a8728f3c274d3"
  
- inherit pypi python_setuptools_build_meta
+ PYPI_PACKAGE = "paramiko"
  
 -- 
 2.34.1
