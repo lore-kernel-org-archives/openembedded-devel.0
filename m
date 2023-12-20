@@ -2,121 +2,96 @@ Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 19C58C46CD2
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 25314C46CD3
 	for <webhook@archiver.kernel.org>; Wed, 20 Dec 2023 14:47:28 +0000 (UTC)
-Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com [209.85.167.52])
- by mx.groups.io with SMTP id smtpd.web11.22846.1703083639292706315
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
+ by mx.groups.io with SMTP id smtpd.web11.22847.1703083639801501995
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Dec 2023 06:47:19 -0800
+ Wed, 20 Dec 2023 06:47:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZER8uZC+;
- spf=pass (domain: gmail.com, ip: 209.85.167.52, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lf1-f52.google.com with SMTP id 2adb3069b0e04-50bf2d9b3fdso7988363e87.3
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Es9/IPC4;
+ spf=pass (domain: gmail.com, ip: 209.85.218.48, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-a2340c803c6so474893866b.0
         for <openembedded-devel@lists.openembedded.org>; Wed, 20 Dec 2023 06:47:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1703083637; x=1703688437; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=KxYJ/YXHi+444EncvO9OOqDrbaFAW40cdQvbQM/SPNE=;
-        b=ZER8uZC+O6C46JmyktHbxtCo8eIWNanja3tZKE3Hd6Z8itGlQdGMWeMjmCe9/52smJ
-         SEUwzRpPNINj8PJj6nIbON9oY5zPaBWYNierZ2SXRxvY9+YbMinEMOdwh5jZXAp6wppf
-         MiYv4QtyE+/oA3ehQOCQ9YixwiHA6gHNaVa+HxpUxCjGJyxYGcphEu1JyWHDTKtimi1a
-         YnNxSGWPvgP1uZDzH9Y8AMpPgmlzyBzKOp6qgISgKnvRb56sR0hMcB+t8bOVd8U29UG0
-         MOI9AdhLPcoj7Vr78GkWSMKebChduxw0uFs/FNJey4r993V+KhlJF9Wdns903Id06DoE
-         DHeA==
+        d=gmail.com; s=20230601; t=1703083638; x=1703688438; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=sI56oJr9MViQjmc21UeKI8y/fDf3/B8zTWy69rWqQL8=;
+        b=Es9/IPC4zsAkbe4OtTmvR8isMsgdyu2f0l/51ad8QRmxU9GYd5N4i0InUZyATNIPZu
+         ZzG7bvRqIQetvJN9XL4dh4SZ0fLYWGx/FUu3bAeI6GMOWoXoTl3vSgcmvv6Rp6Op/iLp
+         2ljficagLHhnFB0dAzNgdFD6icNV0krK6Kgn+zUpRGlSHyKvI7iDaffN6zUe2+rJF1Eo
+         7EGvYenpPicVgdhGyx3+YZjeBMz1Zu+OLuOnwujnQtkPgHy1ZNS/eFrXuP1rPqhVxuX4
+         /U6X99H5xqz/irIA31ItD+hocyBgoTxP2TiMR5ukagkegJfZvW8Q9sqTpWLBvOPdEd9J
+         ZW8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703083637; x=1703688437;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=KxYJ/YXHi+444EncvO9OOqDrbaFAW40cdQvbQM/SPNE=;
-        b=FqwZGHVPwHba7SIXjf7LarHUYyfzBMdEdneihxKpOjaCi/JG5tBN1f9sW+qR3t2bq2
-         60ciPHwYx8m0HOtl1DaMs1ihqeK5u3WwVpG+xXAlrUgIQ5oeavV4C1SzVP97vRUN405q
-         X8QJNC+CJEgwzOcWY2hfJsTkeB37Ye+t3urDda+uGW+6juWz3yqZCiOFcML7QLCunB48
-         mL0LNNKDOSjc1Fur2GJkkYkgzzJfXnUtb2t0/8XN/XdXY4bQLBFVnlPnS0PqbxuU1kW7
-         KXMewfdZkiBFrYEEsgU2ATeRCZVfjPIATRDvV1I96WGzuto4F+LgBdyFqP3RWCrT5B+6
-         t8LQ==
-X-Gm-Message-State: AOJu0YwrVmwbQAnS/ZP9OW5qkM8O193dFfdSOh1OBeJighjJPB4KYdOg
-	uKc9+PpEFY1pBA++wr6u0Ls65bOPShc=
-X-Google-Smtp-Source: AGHT+IFVPfwGTaFFpA8DQU2QwAWjrFXeQVXzeY9/0vHRDD7JWUzbVn2qXrRyacbzBa7h/4w4jmT73A==
-X-Received: by 2002:ac2:42c7:0:b0:50e:3659:8657 with SMTP id n7-20020ac242c7000000b0050e36598657mr2769045lfl.21.1703083637185;
-        Wed, 20 Dec 2023 06:47:17 -0800 (PST)
+        d=1e100.net; s=20230601; t=1703083638; x=1703688438;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=sI56oJr9MViQjmc21UeKI8y/fDf3/B8zTWy69rWqQL8=;
+        b=k/K7DN8jtSgC7Y0UerP4LlhH4KwHyB6spR43+kyU9zmvmNZiM5GNHJ/o90N+XzHHI3
+         nQ2Q6yN5XDl/tqOHMdcpFvoVvJBjomwhXex2YQO7DWO+qRoTD8FOuOeVufocMT5pp3jU
+         gP0H7Xmq7jFMx6vpp5eatl6jmVqbviPSbwYyd0qvumXlHaVU5lMNsaeEPzmymEFSqEtD
+         iC2z4la3UZq1qohmh2HSBnGMGvN4qEH+Aw73eBUTNn3jFoNMdRExPT+vjSn5fysdGt8W
+         XYVt9AGvjm1H4mzT4UipSXqi9GkfVQbkpDb0sGGUCxul4CTmFZxeL0N3fw5JEVDGFLEm
+         Vgqg==
+X-Gm-Message-State: AOJu0YwRgiAHYgbIkaAHOAmvuf3Ucj43/bSg0ecUf7mnmW4pQ3MGDCd2
+	oEwtvwhuaeHTGsVnke95tZDNthh0WHw=
+X-Google-Smtp-Source: AGHT+IGOA2nXimaq18jE1GQAazOaLdLFlfU4JDfHTG9sGOTSEF0oK3yDbSUoinwOC+m9Ow+Zm6dhig==
+X-Received: by 2002:a17:907:36e:b0:a23:6079:67fa with SMTP id rs14-20020a170907036e00b00a23607967famr2158826ejb.112.1703083638063;
+        Wed, 20 Dec 2023 06:47:18 -0800 (PST)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id op24-20020a170906bcf800b00a2361163cfesm3282880ejb.13.2023.12.20.06.47.16
+        by smtp.gmail.com with ESMTPSA id ah2-20020a1709069ac200b00a23577b265csm3927230ejc.173.2023.12.20.06.47.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 20 Dec 2023 06:47:16 -0800 (PST)
+        Wed, 20 Dec 2023 06:47:17 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Alexandre Belloni <alexandre.belloni@bootlin.com>,
 	Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][langdale][PATCHv2] poco: fix branch
-Date: Wed, 20 Dec 2023 15:47:08 +0100
-Message-ID: <20231220144710.438752-1-martin.jansa@gmail.com>
+Subject: [meta-oe][mickledore][PATCHv2] poco: fix branch
+Date: Wed, 20 Dec 2023 15:47:09 +0100
+Message-ID: <20231220144710.438752-2-martin.jansa@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20231220144710.438752-1-martin.jansa@gmail.com>
+References: <20231220144710.438752-1-martin.jansa@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 20 Dec 2023 14:47:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107658
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107659
 
 From: Alexandre Belloni <alexandre.belloni@bootlin.com>
 
 The current SRCREV is not on any branch anymore, switch to the 1.12.4
 branch HEAD which is similar and the only change is irrelevant.
 
-The SRCREV is still referenced from the tag so we could use nobranch here:
-github/poco $ git tag --contains f1aefe34a46891b09230422bbc37465bc6d0a0d1
-poco-1.12.3-release
-poco-1.12.4-release
-
-but the only difference in "new" branch HEAD is .github/FUNDING.ym file
-(don't know why they force pushed all the branches just to remove this)
-
-github/poco $ git diff f1aefe34a46891b09230422bbc37465bc6d0a0d1 9fc117d585e552ae3327b56900df9cc40653d574
-  diff --git a/.github/FUNDING.yml b/.github/FUNDING.yml
-  deleted file mode 100644
-  index b2884d85e..000000000
-  --- a/.github/FUNDING.yml
-  +++ /dev/null
-  @@ -1,13 +0,0 @@
-  -# These are supported funding model platforms
-  -
-  -github: [aleks-f]
-  -patreon: # Replace with a single Patreon username
-  -open_collective: # Replace with a single Open Collective username
-  -ko_fi: # Replace with a single Ko-fi username
-  -tidelift: # Replace with a single Tidelift platform-name/package-name e.g., npm/babel
-  -community_bridge: # Replace with a single Community Bridge project-name e.g., cloud-foundry
-  -liberapay: # Replace with a single Liberapay username
-  -issuehunt: # Replace with a single IssueHunt username
-  -otechie: # Replace with a single Otechie username
-  -lfx_crowdfunding: # Replace with a single LFX Crowdfunding project-name e.g., cloud-foundry
-  -custom: # Replace with up to 4 custom sponsorship URLs e.g., ['link1', 'link2']
-
 Signed-off-by: Alexandre Belloni <alexandre.belloni@bootlin.com>
 Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 ---
 v2: fix branch again, now it has "poco-" prefix
 
- meta-oe/recipes-support/poco/poco_1.12.3.bb | 4 ++--
+ meta-oe/recipes-support/poco/poco_1.12.4.bb | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/poco/poco_1.12.3.bb b/meta-oe/recipes-support/poco/poco_1.12.3.bb
-index 32c57ce978..55988a6f55 100644
---- a/meta-oe/recipes-support/poco/poco_1.12.3.bb
-+++ b/meta-oe/recipes-support/poco/poco_1.12.3.bb
-@@ -8,10 +8,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4267f48fc738f50380cbeeb76f95cebc"
+diff --git a/meta-oe/recipes-support/poco/poco_1.12.4.bb b/meta-oe/recipes-support/poco/poco_1.12.4.bb
+index 51bd5611fb..5fef774576 100644
+--- a/meta-oe/recipes-support/poco/poco_1.12.4.bb
++++ b/meta-oe/recipes-support/poco/poco_1.12.4.bb
+@@ -8,11 +8,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4267f48fc738f50380cbeeb76f95cebc"
  # These dependencies are required by Foundation
  DEPENDS = "libpcre2 zlib"
  
 -SRC_URI = "git://github.com/pocoproject/poco.git;branch=master;protocol=https \
-+SRC_URI = "git://github.com/pocoproject/poco.git;branch=poco-1.12.3;protocol=https \
++SRC_URI = "git://github.com/pocoproject/poco.git;branch=poco-1.12.4;protocol=https \
+            file://0001-Use-std-atomic-int-instead-of-std-atomic-bool.patch \
             file://run-ptest \
             "
--SRCREV = "f1aefe34a46891b09230422bbc37465bc6d0a0d1"
-+SRCREV = "9fc117d585e552ae3327b56900df9cc40653d574"
+-SRCREV = "1211613642269b7d53bea58b02de7fcd25ece3b9"
++SRCREV = "3572a1fb981672e2cd1d2533ffd836da7db0f414"
  
  UPSTREAM_CHECK_GITTAGREGEX = "poco-(?P<pver>\d+(\.\d+)+)"
  
