@@ -2,54 +2,54 @@ Return-Path: <vanusuri@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0AADBC46CD3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0926AC3DA6E
 	for <webhook@archiver.kernel.org>; Wed, 20 Dec 2023 08:55:06 +0000 (UTC)
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
- by mx.groups.io with SMTP id smtpd.web10.18016.1703062500234635318
+Received: from mail-ot1-f45.google.com (mail-ot1-f45.google.com [209.85.210.45])
+ by mx.groups.io with SMTP id smtpd.web11.17820.1703062497043726100
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Dec 2023 00:55:00 -0800
+ Wed, 20 Dec 2023 00:54:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=KqDj8z3K;
- spf=pass (domain: mvista.com, ip: 209.85.210.180, mailfrom: vanusuri@mvista.com)
-Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-6d3954833a5so3793500b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 20 Dec 2023 00:55:00 -0800 (PST)
+ dkim=pass header.i=@mvista.com header.s=google header.b=Qo+ouAee;
+ spf=pass (domain: mvista.com, ip: 209.85.210.45, mailfrom: vanusuri@mvista.com)
+Received: by mail-ot1-f45.google.com with SMTP id 46e09a7af769-6d9f7af8918so4636789a34.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 20 Dec 2023 00:54:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1703062499; x=1703667299; darn=lists.openembedded.org;
+        d=mvista.com; s=google; t=1703062495; x=1703667295; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=tAqLrn9bAdOLblt5VoOUCO7yHVKU66w5fKjNMRNKNws=;
-        b=KqDj8z3K+eBsExg8zz7Zek1HEkKJIM5rSH6YIqe3CSKM2LbqAUHA/qvsNABmfuyIkc
-         7Ad1Fs6aJd2ENU4BSiTLQnKsUorF6y+P3Z7QYH9SgJY5UMmWN+oNaXBAgYQzvyMOdm8I
-         Gj4/8lALkah2FCIdljxhMw/77rbIpjEh7nXEI=
+        bh=5+JaSWSEU1ytH72MsfMRhthdc06jo6UuCytqgtuot3A=;
+        b=Qo+ouAee1DvqnesYhzo7lJrqlyBtu5V5V/bwGIw0NI6apqT1g7QUCYovpZGqvaTlqC
+         A34xT4pMYsnEBqKbp+AdHqJI6Dp8Yf4hL7JdGQbpQPFj3rIDSJceLNH4vbj3uCR+eb4B
+         XVprEoG/wqOMK382u2wDbMJbl649mt2wskVN8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703062499; x=1703667299;
+        d=1e100.net; s=20230601; t=1703062495; x=1703667295;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=tAqLrn9bAdOLblt5VoOUCO7yHVKU66w5fKjNMRNKNws=;
-        b=VOPfLLAX9+jgMW/b8zk/HR+0s3X4KLkVuV4bMjwd66Hf/TNVA8Sraw0GGESVcoy2ZY
-         v9zBrDv4cOXr0ZfZT4Hm+BTENDhKoT6mVvM3DJdCd4SBlpQ4XVqnuY6An9ZM++LE//ej
-         g540mOs+YVF2Yx+dF0dlCzdtVBKkuHpiTmQF6th45dbxo3lgd25rlLkI0Xa2RE5F7CsE
-         2IbYdGVUN17jAy4S1o9B3a919ZWqKV+5nCzs247fKNopKFdJbHOsF+4jHo2xm3CL97a4
-         qIfEOEmQuDgA0cefx2nm5r3WXnEweyHxQT7k6jzb6funbKiRr+q5OZ+RlUq/dYxsqFUo
-         DScA==
-X-Gm-Message-State: AOJu0YwHXRPFn3DTv6Nw8HD0lqjk8Xsn23TLb+gsN57sIaa7qfcAnrXn
-	zNb2WMGjM6bcSfp5IzGUDtDmxS5WNsTruwl+X5E=
-X-Google-Smtp-Source: AGHT+IFKErSQaZr48qGEDHlNl3wp7R7xsy2TLAK23KgL3jNUChcpnLf2g1xXXSDCuiHoy1opngmSmA==
-X-Received: by 2002:a05:6a00:278f:b0:6d9:6081:602c with SMTP id bd15-20020a056a00278f00b006d96081602cmr334230pfb.19.1703062498917;
-        Wed, 20 Dec 2023 00:54:58 -0800 (PST)
+        bh=5+JaSWSEU1ytH72MsfMRhthdc06jo6UuCytqgtuot3A=;
+        b=Z7FCe1jJ/pgp/gsdOu7jOUFgVqy3z1XUlyzP5LXk8NGzfcbUrq/UEH3o9mUsU3Ybql
+         4zExcnb1hS2/5hhKuuBxSa8aZ5PChwTMHUKrh7R+EA9RpJ6ZXqOyfjCY8g7vCGA3Mdw+
+         PTfg7Z4djc7PD07GbC5hgp33J9Ndm32awBrYHdd1KLLQeqh/wk+FJrWelLumMAy33s/9
+         j6AgyoKkmsLCVK1IjENwQ94CtoXewuWX7K04zs/mF+5TKE52LREFj+XhotunwgmtLNaq
+         cZqEVcP5mR1VxWk1VtO8CZNDjPCW8UhZQSd8lyRgLEnDPR1P52icbwEUe0iYJZlSdICS
+         Z5sw==
+X-Gm-Message-State: AOJu0Yyr0ddc/fGU+viBamDs8BqSNROTLcUatz2boed824F1OdP9DQD1
+	GvKRXfBiXEANoPLwbplValx7zglsniCvS73pwGU=
+X-Google-Smtp-Source: AGHT+IGz69jG5CWd789G2rJ70YAKB8ILxrW37kJy5mAb4kcqjewjVlXCxwBSxxfIZCRlYh1n78A9vA==
+X-Received: by 2002:a9d:7601:0:b0:6db:9d0f:9c02 with SMTP id k1-20020a9d7601000000b006db9d0f9c02mr2559859otl.22.1703062495496;
+        Wed, 20 Dec 2023 00:54:55 -0800 (PST)
 Received: from localhost.localdomain ([2401:4900:1cb2:ae:9c0e:43e0:a383:ef58])
-        by smtp.gmail.com with ESMTPSA id fe16-20020a056a002f1000b006d3dd365a76sm7254213pfb.2.2023.12.20.00.54.57
+        by smtp.gmail.com with ESMTPSA id fe16-20020a056a002f1000b006d3dd365a76sm7254213pfb.2.2023.12.20.00.54.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 20 Dec 2023 00:54:58 -0800 (PST)
+        Wed, 20 Dec 2023 00:54:55 -0800 (PST)
 From: vanusuri@mvista.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Vijay Anusuri <vanusuri@mvista.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][kirkstone][PATCH v3 3/4] libssh: Fix build with clang16
-Date: Wed, 20 Dec 2023 14:24:37 +0530
-Message-Id: <20231220085438.97520-3-vanusuri@mvista.com>
+	Yi Zhao <yi.zhao@windriver.com>
+Subject: [meta-oe][kirkstone][PATCH v3 2/4] libssh: add ptest
+Date: Wed, 20 Dec 2023 14:24:36 +0530
+Message-Id: <20231220085438.97520-2-vanusuri@mvista.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20231220085438.97520-1-vanusuri@mvista.com>
 References: <20231220085438.97520-1-vanusuri@mvista.com>
@@ -59,85 +59,213 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 20 Dec 2023 08:55:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107652
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107651
 
 From: Vijay Anusuri <vanusuri@mvista.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Results:
+$ ptest-runner libssh
+START: ptest-runner
+2023-03-16T02:56
+BEGIN: /usr/lib/libssh/ptest
+PASS: torture_bind_config
+PASS: torture_buffer
+PASS: torture_bytearray
+PASS: torture_callbacks
+PASS: torture_channel
+PASS: torture_config
+PASS: torture_crypto
+PASS: torture_hashes
+PASS: torture_init
+PASS: torture_isipaddr
+PASS: torture_keyfiles
+PASS: torture_knownhosts_parsing
+PASS: torture_list
+PASS: torture_misc
+PASS: torture_moduli
+PASS: torture_options
+PASS: torture_packet
+PASS: torture_packet_filter
+PASS: torture_pki
+PASS: torture_pki_ecdsa
+PASS: torture_pki_ed25519
+PASS: torture_pki_rsa
+PASS: torture_push_pop_dir
+PASS: torture_rand
+PASS: torture_session_keys
+PASS: torture_temp_dir
+PASS: torture_temp_file
+PASS: torture_threads_buffer
+PASS: torture_threads_crypto
+PASS: torture_threads_init
+PASS: torture_threads_pki_rsa
+PASS: torture_tokens
+DURATION: 24
+END: /usr/lib/libssh/ptest
+2023-03-16T02:56
+STOP: ptest-runner
+TOTAL: 1 FAIL: 0
 
-Ref: https://git.openembedded.org/meta-openembedded-contrib/commit/?h=stable/nanbield-nut&id=9323b287ef588f41c13f3520de85eb198f6eaf83
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+
+Ref: https://git.openembedded.org/meta-openembedded-contrib/commit/?h=stable/nanbield-nut&id=bf49bdea290ba8cf18f3fd6b47d1d71dfe499948
 
 Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
 ---
- ...prototype-of-des3_encrypt-des3_decry.patch | 46 +++++++++++++++++++
- .../recipes-support/libssh/libssh_0.10.4.bb   |  1 +
- 2 files changed, 47 insertions(+)
- create mode 100644 meta-oe/recipes-support/libssh/libssh/0001-libgcrypt.c-Fix-prototype-of-des3_encrypt-des3_decry.patch
+ ....txt-do-not-search-ssh-sshd-commands.patch | 38 +++++++++++++
+ .../recipes-support/libssh/libssh/run-ptest   | 53 +++++++++++++++++++
+ .../recipes-support/libssh/libssh_0.10.4.bb   | 21 ++++++--
+ 3 files changed, 109 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-support/libssh/libssh/0001-tests-CMakeLists.txt-do-not-search-ssh-sshd-commands.patch
+ create mode 100644 meta-oe/recipes-support/libssh/libssh/run-ptest
 
-diff --git a/meta-oe/recipes-support/libssh/libssh/0001-libgcrypt.c-Fix-prototype-of-des3_encrypt-des3_decry.patch b/meta-oe/recipes-support/libssh/libssh/0001-libgcrypt.c-Fix-prototype-of-des3_encrypt-des3_decry.patch
+diff --git a/meta-oe/recipes-support/libssh/libssh/0001-tests-CMakeLists.txt-do-not-search-ssh-sshd-commands.patch b/meta-oe/recipes-support/libssh/libssh/0001-tests-CMakeLists.txt-do-not-search-ssh-sshd-commands.patch
 new file mode 100644
-index 000000000..19775fa52
+index 000000000..0c7f53029
 --- /dev/null
-+++ b/meta-oe/recipes-support/libssh/libssh/0001-libgcrypt.c-Fix-prototype-of-des3_encrypt-des3_decry.patch
-@@ -0,0 +1,46 @@
-+From 0cade4573334571055127a2d4fe3641e2397948d Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 20 Mar 2023 21:59:19 -0700
-+Subject: [PATCH] libgcrypt.c: Fix prototype of des3_encrypt/des3_decrypt
++++ b/meta-oe/recipes-support/libssh/libssh/0001-tests-CMakeLists.txt-do-not-search-ssh-sshd-commands.patch
+@@ -0,0 +1,38 @@
++From d2525ba0bc7b11de12c54ea1a3d1eb862537136d Mon Sep 17 00:00:00 2001
++From: Yi Zhao <yi.zhao@windriver.com>
++Date: Wed, 15 Mar 2023 16:51:58 +0800
++Subject: [PATCH] tests/CMakeLists.txt: do not search ssh/sshd commands on host
 +
-+This is to match the prototype for callback functions which are now emitted as
-+errors by clang16
++It will search ssh/sshd commands on host when configure. Since they are
++not required by unittests, we can skip the search.
 +
-+Fixes
++Upstream-Status: Inappropriate [embedded specific]
 +
-+TOPDIR/build/tmp/work/cortexa15t2hf-neon-yoe-linux-gnueabi/libssh/0.10.4-r0/git/src/libgcrypt.c:903:20: error: incompatible function pointer types initializing 'void (*)(struct ssh_cipher_struct *, void *, void *, size_t)' (aka 'void (*)(struct ssh_cipher_struct *, void *, void *, unsigned int)') with an expression of type 'void (struct ssh_cipher_struct *, void *, void *, unsigned long)' [-Wincompatible-function-pointer-types]
-+    .encrypt     = des3_encrypt,
-+                   ^~~~~~~~~~~~
-+TOPDIR/build/tmp/work/cortexa15t2hf-neon-yoe-linux-gnueabi/libssh/0.10.4-r0/git/src/libgcrypt.c:904:20: error: incompatible function pointer types initializing 'void (*)(struct ssh_cipher_struct *, void *, void *, size_t)' (aka 'void (*)(struct ssh_cipher_struct *, void *, void *, unsigned int)') with an expression of type 'void (struct ssh_cipher_struct *, void *, void *, unsigned long)' [-Wincompatible-function-pointer-types]
-+    .decrypt     = des3_decrypt
-+                   ^~~~~~~~~~~~
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 +---
-+ src/libgcrypt.c | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
++ tests/CMakeLists.txt | 2 ++
++ 1 file changed, 2 insertions(+)
 +
-+diff --git a/src/libgcrypt.c b/src/libgcrypt.c
-+index da5588ad..e482b654 100644
-+--- a/src/libgcrypt.c
-++++ b/src/libgcrypt.c
-+@@ -469,12 +469,12 @@ static int des3_set_key(struct ssh_cipher_struct *cipher, void *key, void *IV) {
-+ }
++diff --git a/tests/CMakeLists.txt b/tests/CMakeLists.txt
++index 22a36f37..aa32ca2e 100644
++--- a/tests/CMakeLists.txt
+++++ b/tests/CMakeLists.txt
++@@ -86,6 +86,7 @@ set(TEST_TARGET_LIBRARIES
 + 
-+ static void des3_encrypt(struct ssh_cipher_struct *cipher, void *in,
-+-    void *out, unsigned long len) {
-++    void *out, size_t len) {
-+   gcry_cipher_encrypt(cipher->key[0], out, len, in, len);
-+ }
++ add_subdirectory(unittests)
 + 
-+ static void des3_decrypt(struct ssh_cipher_struct *cipher, void *in,
-+-    void *out, unsigned long len) {
-++    void *out, size_t len) {
-+   gcry_cipher_decrypt(cipher->key[0], out, len, in, len);
-+ }
+++if (CLIENT_TESTING OR SERVER_TESTING)
++ # OpenSSH Capabilities are required for all unit tests
++ find_program(SSH_EXECUTABLE NAMES ssh)
++ if (SSH_EXECUTABLE)
++@@ -293,6 +294,7 @@ if (CLIENT_TESTING OR SERVER_TESTING)
++ 
++     message(STATUS "TORTURE_ENVIRONMENT=${TORTURE_ENVIRONMENT}")
++ endif ()
+++endif ()
++ 
++ configure_file(tests_config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/tests_config.h)
 + 
 +-- 
-+2.40.0
++2.25.1
 +
+diff --git a/meta-oe/recipes-support/libssh/libssh/run-ptest b/meta-oe/recipes-support/libssh/libssh/run-ptest
+new file mode 100644
+index 000000000..159994e9b
+--- /dev/null
++++ b/meta-oe/recipes-support/libssh/libssh/run-ptest
+@@ -0,0 +1,53 @@
++#!/bin/sh
++
++# Valid tests to run
++tests="torture_bind_config \
++       torture_buffer \
++       torture_bytearray \
++       torture_callbacks \
++       torture_channel \
++       torture_config \
++       torture_crypto \
++       torture_hashes \
++       torture_init \
++       torture_isipaddr \
++       torture_keyfiles \
++       torture_knownhosts_parsing \
++       torture_list \
++       torture_misc \
++       torture_moduli \
++       torture_options \
++       torture_packet \
++       torture_packet_filter \
++       torture_pki \
++       torture_pki_ecdsa \
++       torture_pki_ed25519 \
++       torture_pki_rsa \
++       torture_push_pop_dir \
++       torture_rand \
++       torture_session_keys \
++       torture_temp_dir \
++       torture_temp_file \
++       torture_threads_buffer \
++       torture_threads_crypto \
++       torture_threads_init \
++       torture_threads_pki_rsa \
++       torture_tokens \
++	  "
++
++ptestdir=$(dirname "$(readlink -f "$0")")
++cd "$ptestdir"/tests || exit
++
++# Run specified tests
++for f in $tests
++do
++    if test -e ./"$f"; then
++        if ./"$f" > ./"$f".out 2> ./"$f".err; then
++            echo "PASS: $f"
++        else
++            echo "FAIL: $f"
++        fi
++    else
++        echo "SKIP: $f"
++    fi
++done
 diff --git a/meta-oe/recipes-support/libssh/libssh_0.10.4.bb b/meta-oe/recipes-support/libssh/libssh_0.10.4.bb
-index 801644d95..4b2ced5e5 100644
+index 3a57a728a..801644d95 100644
 --- a/meta-oe/recipes-support/libssh/libssh_0.10.4.bb
 +++ b/meta-oe/recipes-support/libssh/libssh_0.10.4.bb
-@@ -8,6 +8,7 @@ DEPENDS = "zlib openssl"
+@@ -6,16 +6,20 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=dabb4958b830e5df11d2b0ed8ea255a0"
  
- SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable-0.10 \
-            file://0001-tests-CMakeLists.txt-do-not-search-ssh-sshd-commands.patch \
-+           file://0001-libgcrypt.c-Fix-prototype-of-des3_encrypt-des3_decry.patch \
-            file://run-ptest \
-           "
+ DEPENDS = "zlib openssl"
+ 
+-SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable-0.10"
++SRC_URI = "git://git.libssh.org/projects/libssh.git;protocol=https;branch=stable-0.10 \
++           file://0001-tests-CMakeLists.txt-do-not-search-ssh-sshd-commands.patch \
++           file://run-ptest \
++          "
  SRCREV = "e8322817a9e5aaef0698d779ddd467a209a85d85"
+ 
+ S = "${WORKDIR}/git"
+ 
+-inherit cmake
++inherit cmake ptest
+ 
+-PACKAGECONFIG ??= "gcrypt"
++PACKAGECONFIG ??= "gcrypt ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)}"
+ PACKAGECONFIG[gssapi] = "-DWITH_GSSAPI=1, -DWITH_GSSAPI=0, krb5, "
+ PACKAGECONFIG[gcrypt] = "-DWITH_GCRYPT=1, -DWITH_GCRYPT=0, libgcrypt, "
++PACKAGECONFIG[tests] = "-DUNIT_TESTING=1, -DUNIT_TESTING=0, cmocka"
+ 
+ ARM_INSTRUCTION_SET:armv5 = "arm"
+ 
+@@ -26,4 +30,15 @@ EXTRA_OECMAKE = " \
+     -DWITH_EXAMPLES=0 \
+     "
+ 
++do_compile:prepend () {
++    if [ ${PTEST_ENABLED} = "1" ]; then
++        sed -i -e 's|${B}|${PTEST_PATH}|g' ${B}/config.h
++    fi
++}
++
++do_install_ptest () {
++    install -d ${D}${PTEST_PATH}/tests
++    cp -f ${B}/tests/unittests/torture_* ${D}${PTEST_PATH}/tests/
++}
++
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.25.1
 
