@@ -2,74 +2,70 @@ Return-Path: <derek@asterius.io>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 18DEEC35274
-	for <webhook@archiver.kernel.org>; Thu, 21 Dec 2023 16:57:11 +0000 (UTC)
-Received: from mail-io1-f51.google.com (mail-io1-f51.google.com [209.85.166.51])
- by mx.groups.io with SMTP id smtpd.web10.56064.1703177825178879421
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F1DF2C35274
+	for <webhook@archiver.kernel.org>; Thu, 21 Dec 2023 17:02:30 +0000 (UTC)
+Received: from mail-il1-f171.google.com (mail-il1-f171.google.com [209.85.166.171])
+ by mx.groups.io with SMTP id smtpd.web10.56215.1703178145697120996
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Dec 2023 08:57:05 -0800
+ Thu, 21 Dec 2023 09:02:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.166.51, mailfrom: straka.derek@gmail.com)
-Received: by mail-io1-f51.google.com with SMTP id ca18e2360f4ac-7b7fe0ae57bso42660739f.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 21 Dec 2023 08:57:05 -0800 (PST)
+ dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.166.171, mailfrom: straka.derek@gmail.com)
+Received: by mail-il1-f171.google.com with SMTP id e9e14a558f8ab-35fcd6f8accso3561235ab.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 21 Dec 2023 09:02:25 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703177824; x=1703782624;
+        d=1e100.net; s=20230601; t=1703178144; x=1703782944;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=N4vbflDwL07//+COjxUPqUB3sJE0SR2z3AanuqS0Odk=;
-        b=cQDiVveg/x48ZxoN0QQs7puEU5WcHoY6wmm+keIThg5D2FVqJvSYmqUUaKvVGkMDhL
-         NcGzUxdohZjrAl9k4DScE8PUxccmQ/4olKDovxZgaPBvshRxmNsxfS9CnXb32XewWHrw
-         e8/GCrwzrJEx7g6c5vBsHTtG+Ki20DOB8q+XmYhtPfbChDEwbr0epIbkNuAWz4hikL8g
-         vkbF+w878dMDD3Kz2GBf/jnDP7pW3pPLMqEsN2Nh9S4lcOzhrv/fRjCJIJWQ6UJA/bkB
-         1POj5qg/bOOjJlSYea0zHvqy0U3IqkPn4jJdXFcrtXYE3pRrWwDAmbzwM8+ADWkIpYeP
-         QXFA==
-X-Gm-Message-State: AOJu0YxEvbNAJWk4DK2K72W1UEBnPA8iQ7b4SN/1Al1b1vUwxOJ2Amap
-	F6H5v/DgRasNeNXBbXvjoznrITDFN+w4Uw==
-X-Google-Smtp-Source: AGHT+IEQzmGTm3pfA3yGiJNiUXzY6Kes4B2I7Kjgr9Ffw2wWzMoEuxSeScex5qZnXzJkPWJ5VjjSgA==
-X-Received: by 2002:a05:6602:b16:b0:7ba:86da:fae2 with SMTP id fl22-20020a0566020b1600b007ba86dafae2mr21277iob.40.1703177824007;
-        Thu, 21 Dec 2023 08:57:04 -0800 (PST)
+        bh=U8vcZb0H8t8N0IG/tCZ+mB2QaO3hn3smYoLyVDIQ6WI=;
+        b=JWixtwTHT+0m0+WhUhGwOijaMCTG9/nq/ojF6gS2brmEYyVdX+NJnMsp5zzPtATGZL
+         SbGgZCx4wGCYWv8NwedenAfpF29Ccw31cHxHM3UDRj/h7z+shFAitfZQMbPlDEqFVp4l
+         Cxl2dZkL0JiiOzeBfaRAJL7dy7TG4q3Ndg5LP5zBzlvDgwhOcjo4KK0jGJFp/GWBzB4n
+         oYr0p+jhzE5NF5BDHESxAWQjJWTv57yd57kbki9AZsmbWvyhOpFkdO+BOvw28TXfZQX8
+         PVm06YtlQzgrC0nmUBG5HhI5U8W/YRjwH2LuMkNNOeQg/Mj/6myn7TVUB9mqPLUWcSU+
+         jbKA==
+X-Gm-Message-State: AOJu0YwyODayb8z2zJ8CkdfWdPngqiA+ueHTkTDu7XESC0XoU5O/UK3+
+	Uu3dsuL/SXWr19Bk+zH6dIXCcB225QzQwQ==
+X-Google-Smtp-Source: AGHT+IFtPfYtpW6bibIv+3xlRfHeX1Ow4QFwnkjSHv075U/6sHefAwbfxl6JMPi4dUZHWMcDE3kbRw==
+X-Received: by 2002:a05:6e02:1a04:b0:35f:b59c:924f with SMTP id s4-20020a056e021a0400b0035fb59c924fmr8501015ild.17.1703178144575;
+        Thu, 21 Dec 2023 09:02:24 -0800 (PST)
 Received: from sparta.internal.asterius.io (c-73-228-213-122.hsd1.mn.comcast.net. [73.228.213.122])
-        by smtp.gmail.com with ESMTPSA id t11-20020a056638204b00b0046b4976c3ccsm560670jaj.138.2023.12.21.08.57.03
+        by smtp.gmail.com with ESMTPSA id bp22-20020a056638441600b0046b39a6f404sm583062jab.17.2023.12.21.09.02.23
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 21 Dec 2023 08:57:03 -0800 (PST)
+        Thu, 21 Dec 2023 09:02:24 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-python][PATCH] python3-cmake: update to version 3.28.1
-Date: Thu, 21 Dec 2023 16:56:52 +0000
-Message-Id: <20231221165652.3899771-1-derek@asterius.io>
+Subject: [meta-python][PATCH] python3-flask-sqlalchemy: fix upstream uri check
+Date: Thu, 21 Dec 2023 17:02:16 +0000
+Message-Id: <20231221170216.3900138-1-derek@asterius.io>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 21 Dec 2023 16:57:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107723
+ <openembedded-devel@lists.openembedded.org>; Thu, 21 Dec 2023 17:02:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107724
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../python/{python3-cmake_3.28.0.bb => python3-cmake_3.28.1.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-cmake_3.28.0.bb => python3-cmake_3.28.1.bb} (90%)
+ .../recipes-devtools/python/python3-flask-sqlalchemy_3.1.1.bb   | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-cmake_3.28.0.bb b/meta-python/recipes-devtools/python/python3-cmake_3.28.1.bb
-similarity index 90%
-rename from meta-python/recipes-devtools/python/python3-cmake_3.28.0.bb
-rename to meta-python/recipes-devtools/python/python3-cmake_3.28.1.bb
-index c31161e8f..a6a7b6c4f 100644
---- a/meta-python/recipes-devtools/python/python3-cmake_3.28.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-cmake_3.28.1.bb
-@@ -11,7 +11,7 @@ PYPI_PACKAGE = "cmake"
- PYPI_ARCHIVE_NAME_PREFIX = "pypi-"
+diff --git a/meta-python/recipes-devtools/python/python3-flask-sqlalchemy_3.1.1.bb b/meta-python/recipes-devtools/python/python3-flask-sqlalchemy_3.1.1.bb
+index ecbcf16dd..56f63bf03 100644
+--- a/meta-python/recipes-devtools/python/python3-flask-sqlalchemy_3.1.1.bb
++++ b/meta-python/recipes-devtools/python/python3-flask-sqlalchemy_3.1.1.bb
+@@ -5,6 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=ffeffa59c90c9c4a033c7574f8f3fb75"
+ SRC_URI[sha256sum] = "e4b68bb881802dda1a7d878b2fc84c06d1ee57fb40b874d3dc97dabfa36b8312"
+ 
+ PYPI_PACKAGE = "flask_sqlalchemy"
++UPSTREAM_CHECK_URI = "https://pypi.python.org/pypi/Flask-SQLAlchemy"
++UPSTREAM_CHECK_REGEX = "/Flask-SQLAlchemy/(?P<pver>(\d+[\.\-_]*)+)"
  
  inherit pypi python_setuptools_build_meta
--SRC_URI[sha256sum] = "cb16c350eaa8543afcb1a9b142809b075f5ee8d94fa07b7c769fbd827c985dd0"
-+SRC_URI[sha256sum] = "0d4051d101d151d8387156c463aa45c8cd0e164f870e0ac0c8c91d3ff08528e1"
  
- SRC_URI += " \
- 	file://CMakeLists.txt \
 -- 
 2.34.1
 
