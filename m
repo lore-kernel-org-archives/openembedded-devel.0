@@ -2,71 +2,119 @@ Return-Path: <derek@asterius.io>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 204B5C46CCD
-	for <webhook@archiver.kernel.org>; Thu, 21 Dec 2023 17:48:40 +0000 (UTC)
-Received: from mail-io1-f42.google.com (mail-io1-f42.google.com [209.85.166.42])
- by mx.groups.io with SMTP id smtpd.web11.460.1703180911813936928
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4BCC0C46CD2
+	for <webhook@archiver.kernel.org>; Thu, 21 Dec 2023 18:06:30 +0000 (UTC)
+Received: from mail-il1-f174.google.com (mail-il1-f174.google.com [209.85.166.174])
+ by mx.groups.io with SMTP id smtpd.web10.925.1703181983118769472
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Dec 2023 09:48:31 -0800
+ Thu, 21 Dec 2023 10:06:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.166.42, mailfrom: straka.derek@gmail.com)
-Received: by mail-io1-f42.google.com with SMTP id ca18e2360f4ac-7b7f2c72846so41675639f.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 21 Dec 2023 09:48:31 -0800 (PST)
+ dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.166.174, mailfrom: straka.derek@gmail.com)
+Received: by mail-il1-f174.google.com with SMTP id e9e14a558f8ab-35fd04ede25so4277345ab.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 21 Dec 2023 10:06:23 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703180910; x=1703785710;
+        d=1e100.net; s=20230601; t=1703181981; x=1703786781;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=VCoWIQKdCjah2tLhn4ZzjGundRVftwO50vkjkjaMtQU=;
-        b=E7myfssaNUuUTXbhnYLIMjI3bRE5KtPRuLdXRREzZusIqlIMgcxgEp5gnjJUlIKg5k
-         NIFbuZ8t3YYGJtmTplne5HgrdvfbXbOSNyry1Fe2k7WE6TmawnPhptg2UQM5L3fO4kst
-         YThiTDYhg+OTvmCrCI2z8/dtn8FHDdOwUIMvOokP5oEeOAzuTRWid4u6iGH+YClJBs0R
-         pxQGy7+fR4sKU4NdmkxGy3mqhBG8AB0ysmReUF9Mp8kfJbzW9xxxBStdtk5uvkok5yHu
-         WHYTz9MaJycNyLK3flFAIZa6Q0qbq5eoFV6Xhb3i1/1YppmIksVuySLNvyofRqzFpZ4t
-         mtjQ==
-X-Gm-Message-State: AOJu0YxMTHsJSX1dM3K9vk1Vy2v96pAsysDHbcxeHn0JmTKeNUM20+w+
-	2XD/lBbfolVDg931kuREGo5MHqH3DC32ng==
-X-Google-Smtp-Source: AGHT+IH4YVWL/hklbc85782gY6eVmEyAYDUMY8B8j1KPPIFyc+uZRousa7nOAlDpTFxDlV/1NPk2TA==
-X-Received: by 2002:a6b:7105:0:b0:7ba:84b0:6d62 with SMTP id q5-20020a6b7105000000b007ba84b06d62mr135756iog.4.1703180910046;
-        Thu, 21 Dec 2023 09:48:30 -0800 (PST)
+        bh=8yGNOunO+gVolVIlbFkEAI4uLfHNhFl2pGH/JvyEgv0=;
+        b=P4STvCtJ15qRiqJL4G8YummSHbMCXsRBlYgIA06Lmdb0deaus+zQz9HA7Txj2EXjg6
+         mgTqxOCriRshYifD9xuSTqTMhQZ2MnY/7D8Dq2CA8t7DKQL22/2KH53jGFRtlBfChmCj
+         PNcIUDO6X0/H2t4Va+GD/tn+Gg0qF6ny1uvfY+oHZOhn/JxFY8NmhoWTKjOZb6zTyK1N
+         MfoDSb0r2hD8SXe9D8qg4VICb0KnN2rj0xK8D3XeEEKDJ29BnuDqWJxnCyxnrgSJ99PU
+         G0orDLfbr1uyz4KqlcJxIi3larql9rfO5/r2wx6lfd4UYoRK95BvBZHNV0pGTAaUhLlF
+         UE9g==
+X-Gm-Message-State: AOJu0YwMPkrOjjdJPP6+86V1Y3YKRoFadiOp4cUZwdZJgzhU0Oq/N9SF
+	eM6INV3O05OJ0+VUq+5s/bTkQTF3DHG66w==
+X-Google-Smtp-Source: AGHT+IGxFUc0mVq4+N11NKeGj90MtsM+O4ArCUJEGuFPyIwuCCovvZfNPlp4sYzorUYGs0SUZ7qAHQ==
+X-Received: by 2002:a05:6e02:12e3:b0:35f:71ce:cccc with SMTP id l3-20020a056e0212e300b0035f71ceccccmr39599iln.7.1703181981345;
+        Thu, 21 Dec 2023 10:06:21 -0800 (PST)
 Received: from sparta.internal.asterius.io (c-73-228-213-122.hsd1.mn.comcast.net. [73.228.213.122])
-        by smtp.gmail.com with ESMTPSA id fm20-20020a0566382b1400b0046b6f405aafsm585059jab.31.2023.12.21.09.48.29
+        by smtp.gmail.com with ESMTPSA id ck5-20020a056e02370500b0035d7c676117sm644927ilb.11.2023.12.21.10.06.20
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 21 Dec 2023 09:48:29 -0800 (PST)
+        Thu, 21 Dec 2023 10:06:20 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-python][PATCH] python3-wtforms: fix upstream uri and version check
-Date: Thu, 21 Dec 2023 17:48:22 +0000
-Message-Id: <20231221174822.3900911-1-derek@asterius.io>
+Subject: [meta-python][PATCH] gyp: update to the latest commit
+Date: Thu, 21 Dec 2023 18:06:09 +0000
+Message-Id: <20231221180609.3902636-1-derek@asterius.io>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 21 Dec 2023 17:48:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107725
+ <openembedded-devel@lists.openembedded.org>; Thu, 21 Dec 2023 18:06:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107726
+
+NOTE: gyp is now idle, and support will be removed in future releases
+https://chromium.googlesource.com/external/gyp/+/d6c5dd51dc3a60bf4ff32a5256713690a1a10376
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python3-wtforms_3.1.1.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ ...01-Fix-for-Python-3.10-compatibility.patch | 36 -------------------
+ meta-python/recipes-devtools/gyp/gyp_git.bb   |  3 +-
+ 2 files changed, 1 insertion(+), 38 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/gyp/gyp/0001-Fix-for-Python-3.10-compatibility.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-wtforms_3.1.1.bb b/meta-python/recipes-devtools/python/python3-wtforms_3.1.1.bb
-index c9ad1be48..b57c31100 100644
---- a/meta-python/recipes-devtools/python/python3-wtforms_3.1.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-wtforms_3.1.1.bb
-@@ -7,6 +7,9 @@ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=17ed54aa95f4a6cd0d7a4747d14b64d0"
+diff --git a/meta-python/recipes-devtools/gyp/gyp/0001-Fix-for-Python-3.10-compatibility.patch b/meta-python/recipes-devtools/gyp/gyp/0001-Fix-for-Python-3.10-compatibility.patch
+deleted file mode 100644
+index d1ac2c6b4..000000000
+--- a/meta-python/recipes-devtools/gyp/gyp/0001-Fix-for-Python-3.10-compatibility.patch
++++ /dev/null
+@@ -1,36 +0,0 @@
+-From bfe579283e5fcab60172818bfe4e6e1d40c2bed0 Mon Sep 17 00:00:00 2001
+-From: Kurt Kiefer <kurt.kiefer@arthrex.com>
+-Date: Mon, 18 Oct 2021 11:21:14 -0700
+-Subject: [PATCH] Fix for Python 3.10 compatibility
+-
+-The collections.abc module replaces collections for Python 3.10
+-
+-Signed-off-by: Kurt Kiefer <kurt.kiefer@arthrex.com>
+----
+-Upstream-Status: Pending
+-
+- pylib/gyp/common.py | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/pylib/gyp/common.py b/pylib/gyp/common.py
+-index b268d229..4f9cb0ec 100644
+---- a/pylib/gyp/common.py
+-+++ b/pylib/gyp/common.py
+-@@ -4,7 +4,7 @@
+- 
+- from __future__ import with_statement
+- 
+--import collections
+-+import collections.abc
+- import errno
+- import filecmp
+- import os.path
+-@@ -494,7 +494,7 @@ def uniquer(seq, idfun=None):
+- 
+- 
+- # Based on http://code.activestate.com/recipes/576694/.
+--class OrderedSet(collections.MutableSet):
+-+class OrderedSet(collections.abc.MutableSet):
+-   def __init__(self, iterable=None):
+-     self.end = end = []
+-     end += [None, end, end]         # sentinel node for doubly linked list
+diff --git a/meta-python/recipes-devtools/gyp/gyp_git.bb b/meta-python/recipes-devtools/gyp/gyp_git.bb
+index 38906de75..0f94a4476 100644
+--- a/meta-python/recipes-devtools/gyp/gyp_git.bb
++++ b/meta-python/recipes-devtools/gyp/gyp_git.bb
+@@ -5,9 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ab828cb8ce4c62ee82945a11247b6bbd"
+ SECTION = "devel"
  
- SRC_URI[sha256sum] = "5e51df8af9a60f6beead75efa10975e97768825a82146a65c7cbf5b915990620"
+ SRC_URI = "git://chromium.googlesource.com/external/gyp;protocol=https;branch=master \
+-           file://0001-Fix-for-Python-3.10-compatibility.patch \
+            "
+-SRCREV = "caa60026e223fc501e8b337fd5086ece4028b1c6"
++SRCREV = "a03d7413becefc8d55c8aa3df58b55b9bd0e9052"
  
-+UPSTREAM_CHECK_URI = "https://pypi.python.org/pypi/WTForms"
-+UPSTREAM_CHECK_REGEX = "/WTForms/(?P<pver>(\d+[\.\-_]*)+)"
-+
- inherit pypi python_hatchling
- 
- DEPENDS += "\
+ S = "${WORKDIR}/git"
+ PV = "0.1+git${SRCPV}"
 -- 
 2.34.1
 
