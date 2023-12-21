@@ -1,112 +1,150 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <ross.burton@arm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C065AC35274
-	for <webhook@archiver.kernel.org>; Thu, 21 Dec 2023 09:44:58 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
- by mx.groups.io with SMTP id smtpd.web11.47953.1703151893496400820
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F3617C35274
+	for <webhook@archiver.kernel.org>; Thu, 21 Dec 2023 10:20:28 +0000 (UTC)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by mx.groups.io with SMTP id smtpd.web11.48315.1703154018599242562
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Dec 2023 01:44:53 -0800
+ Thu, 21 Dec 2023 02:20:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=kmvz7X6T;
- spf=pass (domain: smile.fr, ip: 209.85.128.45, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-40d12b56a38so6085665e9.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 21 Dec 2023 01:44:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1703151891; x=1703756691; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:organization:from
-         :content-language:references:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=LyLoCRVMMZhXo68lDMVpuoo0jUL3paPwLi2njt+AqIc=;
-        b=kmvz7X6TTwOTeLgxSQUESF2zihX2rWrAHY12OJxa//7ke06dmNK5HWmfjphOgVOncw
-         CcOd/aUZvVXyOlfrdk05rREQ6CNu73ZcVBwgfL+nc5pksgPsn13expgEv2XHADGjamz/
-         A3vEmoBHEEsU+wwGDV082oWh4CBBmz8geOv9WZ6d2Uup+WqzYsP9aL6l78i58IUYrWXj
-         G2haLhlu1OH2xlWBGa0JIzoJ/HlwjepRI24hbGIyiRE1wDX/7i7HfVDnJhJ/jtSMUHIo
-         F/GP8EgRQ8zCRGiC+uE+/FiiCuyQYlMF1+4mABjpFZ0f50BcFlrdOln/oDL6+m13O/pI
-         fY3g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703151891; x=1703756691;
-        h=content-transfer-encoding:in-reply-to:organization:from
-         :content-language:references:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=LyLoCRVMMZhXo68lDMVpuoo0jUL3paPwLi2njt+AqIc=;
-        b=WB2XF+0w3mzbJraPmH9s4vZ1/o5hjVx67N2pnDTwJRIsFLJ1l/fhofEv8J7k6uLysF
-         AhHAAgFVkC1XtrA44vfe51VlR6GHfL7pecNvmdBXBbsNNOhcjeh2JXo9kcxiRtCvKqqc
-         9Mq5fhEpM8Iz6n7RS4VE7IHqA6cMDEWJbjkC0Sqplhy1rU10FHtx+a7XFXobsTBkQ57r
-         Ivm6XiJbfouea086LyfxM27Z2yXNUKpFP1VChTN0OCqUvHTRIfVFVg9XY7v5Sox8Z6S8
-         F6HqyGXTBcC6yFKfh39MhYSam+D8ZYzHhVYp69+OtkH9Vy6ThE6atiNp4Lm4Y94O0BPf
-         tfrw==
-X-Gm-Message-State: AOJu0YyckI2JkTWAEN1JIhRTapVgEVb80Qbid3lp+GP6DYqIWar90eKy
-	Hvik4NmFjW6MlYfobvu6OtKtlaEOMC+wbDPCNew=
-X-Google-Smtp-Source: AGHT+IEycD+ZZlSoerkWDq9xj1up44E9SWAFAgS9uXvaUI/BlYY08p19mmf2h+XtgO73K8LnXvj9PQ==
-X-Received: by 2002:a05:600c:524c:b0:40c:330f:f2fc with SMTP id fc12-20020a05600c524c00b0040c330ff2fcmr224756wmb.355.1703151891313;
-        Thu, 21 Dec 2023 01:44:51 -0800 (PST)
-Received: from [10.1.75.166] (static-css-ccs-204145.business.bouyguestelecom.com. [176.157.204.145])
-        by smtp.gmail.com with ESMTPSA id c18-20020a05600c0a5200b0040c6d559490sm2719548wmq.3.2023.12.21.01.44.51
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 21 Dec 2023 01:44:51 -0800 (PST)
-Message-ID: <b4bb9324-80b9-452c-be5a-ffb8d51d1d55@smile.fr>
-Date: Thu, 21 Dec 2023 10:44:50 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] python 3.12 - help needed in fixing meta-oe failures
+ dkim=none (message not signed); spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 86AE02F4
+	for <openembedded-devel@lists.openembedded.org>; Thu, 21 Dec 2023 02:21:02 -0800 (PST)
+Received: from oss-tx204.lab.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 59AF93F5A1
+	for <openembedded-devel@lists.openembedded.org>; Thu, 21 Dec 2023 02:20:17 -0800 (PST)
+From: ross.burton@arm.com
 To: openembedded-devel@lists.openembedded.org
-References: <CANNYZj_RSUUieQcKPkmrVft7fGmVHzR4yjL0wFGDBLx_wBghig@mail.gmail.com>
- <8133.1703001181390498333@lists.openembedded.org>
- <CAMKF1sqnSpuH4mKvA2tqMwh+XLOT_Bio42oF-eu1cvJH9U6MAA@mail.gmail.com>
-Content-Language: en-US
-From: Yoann Congal <yoann.congal@smile.fr>
-Organization: Smile ECS
-In-Reply-To: <CAMKF1sqnSpuH4mKvA2tqMwh+XLOT_Bio42oF-eu1cvJH9U6MAA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Subject: [PATCH] renderdoc: no need to depend on vim-native
+Date: Thu, 21 Dec 2023 10:20:15 +0000
+Message-Id: <20231221102015.1080653-1-ross.burton@arm.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 21 Dec 2023 09:44:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107704
+ <openembedded-devel@lists.openembedded.org>; Thu, 21 Dec 2023 10:20:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107705
 
-Le 19/12/2023 à 16:58, Khem Raj a écrit :
-> It would be good if you could send the patch this mailing list as well.
+From: Ross Burton <ross.burton@arm.com>
 
-Sent here => https://lists.openembedded.org/g/openembedded-devel/message/107703
+Remove the patch to bring back the user of xxd from vim-native, the
+patch claimed that the cross-compiling rules were broken. However they
+work just fine if you tell it what compiler to use, as the default is
+"c++" and that isn't in HOSTTOOLS.
 
-> 
-> On Tue, Dec 19, 2023 at 7:53 AM <nyantra.ranaivoarison@smile.fr> wrote:
->>
->> Hello,
->>
->> I send you a PR for this error:
->> /srv/work/alex/meta-openembedded/meta-python/recipes-devtools/python/python3-click-spinner_0.1.10.bb:do_compile
->> Here :
->> https://github.com/kanavin/meta-openembedded/pull/1
->>
->> These ones have not been maintained for years, maybe it's best to remove them:
->> /srv/work/alex/meta-openembedded/meta-python/recipes-devtools/python/python3-oslash_0.6.3.bb:do_compile
->> /srv/work/alex/meta-openembedded/meta-python/recipes-devtools/python/python3-xmlrunner_1.7.7.bb:do_compile
->>
->> This one should be fixed by this patch: https://lists.openembedded.org/g/openembedded-devel/message/107547
->>
->> Best regards,
->>
->> Ny Antra
->>
->>
->>
->>
->> -=-=-=-=-=-=-=-=-=-=-=-
->> Links: You receive all messages sent to this group.
->> View/Reply Online (#107636): https://lists.openembedded.org/g/openembedded-devel/message/107636
->> Mute This Topic: https://lists.openembedded.org/mt/103036574/4316185
->> Group Owner: openembedded-devel+owner@lists.openembedded.org
->> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [yoann.congal@smile.fr]
->> -=-=-=-=-=-=-=-=-=-=-=-
->>
+Signed-off-by: Ross Burton <ross.burton@arm.com>
+---
+ ...d-instead-of-cross-compiling-shim-bi.patch | 57 -------------------
+ .../renderdoc/renderdoc_1.27.bb               |  2 +-
+ 2 files changed, 1 insertion(+), 58 deletions(-)
+ delete mode 100644 meta-oe/recipes-graphics/renderdoc/renderdoc/0001-ren=
+derdoc-use-xxd-instead-of-cross-compiling-shim-bi.patch
 
--- 
-Yoann Congal
-Smile ECS - Tech Expert
+diff --git a/meta-oe/recipes-graphics/renderdoc/renderdoc/0001-renderdoc-=
+use-xxd-instead-of-cross-compiling-shim-bi.patch b/meta-oe/recipes-graphi=
+cs/renderdoc/renderdoc/0001-renderdoc-use-xxd-instead-of-cross-compiling-=
+shim-bi.patch
+deleted file mode 100644
+index e96dedfc39..0000000000
+--- a/meta-oe/recipes-graphics/renderdoc/renderdoc/0001-renderdoc-use-xxd=
+-instead-of-cross-compiling-shim-bi.patch
++++ /dev/null
+@@ -1,57 +0,0 @@
+-From 41a8c9b5ac13066770baee476ebf9828371f4dad Mon Sep 17 00:00:00 2001
+-From: Adrian Ratiu <adrian.ratiu@collabora.com>
+-Date: Tue, 24 Sep 2019 16:07:18 +0300
+-Subject: [PATCH] renderdoc: use xxd instead of cross-compiling shim bina=
+ry
+-
+-Renderdoc's attempt to cross compile an xxd replacement by directly
+-calling a host cross-compiler breaks under OE's recipe specific
+-sysroots protection because this is not a native recipe, so we just
+-use xxd-native instead.
+-
+-Upstream-Status: Inappropriate [embedded-specific]
+-
+----
+- renderdoc/CMakeLists.txt | 23 +----------------------
+- 1 file changed, 1 insertion(+), 22 deletions(-)
+-
+-diff --git a/renderdoc/CMakeLists.txt b/renderdoc/CMakeLists.txt
+-index 5cb7440a4..453a034ba 100644
+---- a/renderdoc/CMakeLists.txt
+-+++ b/renderdoc/CMakeLists.txt
+-@@ -370,26 +370,6 @@ set(data
+- set(data_objects)
+-=20
+- if(UNIX)
+--    # If we're cross-compiling, include-bin will get built for the targ=
+et and we
+--    # then can't execute it. Instead, we force calling c++ (which we ca=
+n safely
+--    # assume is present) directly to build the binary
+--
+--    if(CMAKE_CROSSCOMPILING)
+--        set(HOST_NATIVE_CPP_COMPILER c++ CACHE STRING "Command to run t=
+o compile a .cpp into an executable. Default is just c++")
+--
+--        add_custom_command(OUTPUT ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/inc=
+lude-bin
+--            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+--            COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_RUNTIME_=
+OUTPUT_DIRECTORY}
+--            COMMAND ${HOST_NATIVE_CPP_COMPILER} 3rdparty/include-bin/ma=
+in.cpp -o ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/include-bin
+--            DEPENDS 3rdparty/include-bin/main.cpp)
+--        set(INCLUDE_BIN_EXE "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/include-=
+bin")
+--        set(INCLUDE_BIN_DEP "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/include-=
+bin")
+--    else()
+--        add_executable(include-bin 3rdparty/include-bin/main.cpp)
+--        set(INCLUDE_BIN_EXE $<TARGET_FILE:include-bin>)
+--        set(INCLUDE_BIN_DEP include-bin)
+--    endif()
+--
+-     foreach(res ${data})
+-         set(in ${res})
+-         set(working_dir ${CMAKE_CURRENT_SOURCE_DIR})
+-@@ -399,8 +379,7 @@ if(UNIX)
+-         add_custom_command(OUTPUT ${out_src}
+-             WORKING_DIRECTORY ${working_dir}
+-             COMMAND ${CMAKE_COMMAND} -E make_directory ${out_src_dir}
+--            COMMAND ${INCLUDE_BIN_EXE} ${in} ${out_src}
+--            DEPENDS ${INCLUDE_BIN_DEP}
+-+            COMMAND xxd -i ${in} ${out_src}
+-             DEPENDS ${res})
+-=20
+-         list(APPEND data_objects ${out_src})
+diff --git a/meta-oe/recipes-graphics/renderdoc/renderdoc_1.27.bb b/meta-=
+oe/recipes-graphics/renderdoc/renderdoc_1.27.bb
+index 112f0ddcbe..58f2275736 100644
+--- a/meta-oe/recipes-graphics/renderdoc/renderdoc_1.27.bb
++++ b/meta-oe/recipes-graphics/renderdoc/renderdoc_1.27.bb
+@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM =3D "file://LICENSE.md;md5=3D36d34a46cb7=
+1546195d2b0c626a52e5d"
+ SRCREV =3D "35b13a8e8fd2a331854dba6da81a20452e142d6f"
+ SRC_URI =3D " \
+     git://github.com/baldurk/${BPN}.git;protocol=3Dhttps;branch=3Dv1.x \
+-    file://0001-renderdoc-use-xxd-instead-of-cross-compiling-shim-bi.pat=
+ch \
+ "
+ S =3D "${WORKDIR}/git"
+=20
+@@ -32,6 +31,7 @@ EXTRA_OECMAKE +=3D "\
+     -DENABLE_PYRENDERDOC=3DOFF \
+     -DENABLE_RENDERDOCCMD=3DON \
+     -DCMAKE_BUILD_TYPE=3DRelease \
++    -DHOST_NATIVE_CPP_COMPILER=3D"${BUILD_CXX}" \
+ "
+=20
+ FILES:${PN} +=3D "${libdir}"
+--=20
+2.34.1
+
 
