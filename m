@@ -1,253 +1,93 @@
-Return-Path: <padalkards17082001@gmail.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 03AD5C41535
-	for <webhook@archiver.kernel.org>; Fri, 22 Dec 2023 07:28:34 +0000 (UTC)
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
- by mx.groups.io with SMTP id smtpd.web10.19067.1703230110818212446
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0541FC41535
+	for <webhook@archiver.kernel.org>; Fri, 22 Dec 2023 13:46:36 +0000 (UTC)
+Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com [209.85.208.44])
+ by mx.groups.io with SMTP id smtpd.web11.23063.1703252790872782578
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Dec 2023 23:28:30 -0800
+ Fri, 22 Dec 2023 05:46:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=cp++TJu7;
- spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: padalkards17082001@gmail.com)
-Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-1d3e416f303so7500195ad.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 21 Dec 2023 23:28:30 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=GUi4vC0p;
+ spf=pass (domain: gmail.com, ip: 209.85.208.44, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f44.google.com with SMTP id 4fb4d7f45d1cf-55359dc0290so3321528a12.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 22 Dec 2023 05:46:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1703230109; x=1703834909; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1703252789; x=1703857589; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=9e0YHxNCE755LHVKODL/lK9R5kOmMVA14Q2tWEvmlJE=;
-        b=cp++TJu7LynLK3YA9JfBAKq9xuBl9rZzm94JnzO1enqV+/1mvl8wphHgS3KmYpb9/C
-         EHm6zvJ8b/8UGWVYQ7E1PRtKsVpRK3uE02Dj28qskjkxzxTcfCUoGvCw8sBGjtEsCsQw
-         bSGAoZZu3fbcd2/H9SiHMILCl5QNFnuynm1gsEp+QvvpWi1eIS89n8sA9HEUcwDDdLNo
-         nTx/R3BNIacD65hK8E7vx+SKPQkKWsAqqdARft6x/BFfRFjAVWEfar1ofluK3mUAutQY
-         v2BIAXeO8afmoyQpQ4BaOer9CHXvNIFKqD4JHvBBCM3LbLzalalqu3iwQDLZS5PoCnpJ
-         9Vng==
+        bh=4g35RygnUXnQ0P7zgvNNlccIEbmT3vMUfeHBOl0hrd4=;
+        b=GUi4vC0plLiimPiD/ZVKtp8q6UaagXTMR6slmfeamDXMrlO3NmEI4HVB6L+6K5pkXp
+         cvTa1dPSGrNw/Fe3rUkvB0XjfNGlOaUKw7ZrBaybEzVIq8WNyLIRhOEi0L8exLQqNN88
+         VvTfXpnzA90OOnfKMMgP/Y675kDw5JpiLwD8BD2Syz/6GNcYSHI0Bq7vMLUM0qdi+YPY
+         ucW20JMZzR2jRWgW2gnryeCzRumMFDAww3WACT5U/fHmasF5IGG8ybNAHbkGtxMMWRe5
+         96tYi+OF1tU5pGDy/e2P+2RwwKcwkoQcvpaIcDo7RNU36EC1S+kTGXnkE06HV18vfOLd
+         aKgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703230109; x=1703834909;
+        d=1e100.net; s=20230601; t=1703252789; x=1703857589;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=9e0YHxNCE755LHVKODL/lK9R5kOmMVA14Q2tWEvmlJE=;
-        b=gxPVUthQzStwDjNVaTbxH8t44EloG8wIHfoLRZ/W2Dqx/DjHgZ4ZWf/0HjOBBfst54
-         3Mk8yaPRGgxeBF42FwpOf639fp2A2SjJPvdHstnCnz/EIFp2WjvheTbo9zBmX9GuZP+d
-         MVOKrBjnSNff1+zUbvV1k4unyyH71FfA7d9jbRNvIQyfBHEZtBrfOk3Ugdqr1G447P1x
-         38g+xG4zgoTKmjgSSykcdB58ODChBQHsZco/r99oeHCAGiceZ4HglgaicV6OjZfxB4Jp
-         BAEMPu3M9oHpoQQpum1qQ/rnRa4LVwxnv8m5BQNoJdnfNlWJ2Gz5BgXkLJr/1iwCFd0z
-         ja0Q==
-X-Gm-Message-State: AOJu0YyDT/G6xF+vWnzgx3q1KZkRimlhuUFsVND8Is0P7l0YF0t+l998
-	IdwS+es204x0L+CynS/jI6MCod8zsq4=
-X-Google-Smtp-Source: AGHT+IFlMysFCrsboo9S8H5rZnA5KKdeuTYa9NeLpEnSg6GQG/J4bCrcQ+KS8vwqxQoPk3dGIakw5g==
-X-Received: by 2002:a17:902:a38c:b0:1d4:12f0:1293 with SMTP id x12-20020a170902a38c00b001d412f01293mr569127pla.93.1703230109175;
-        Thu, 21 Dec 2023 23:28:29 -0800 (PST)
-Received: from localhost.localdomain ([106.76.78.71])
-        by smtp.gmail.com with ESMTPSA id n1-20020a170902e54100b001cf51972586sm2761103plf.292.2023.12.21.23.28.27
+        bh=4g35RygnUXnQ0P7zgvNNlccIEbmT3vMUfeHBOl0hrd4=;
+        b=qO1JM4MFOGjFBUGr2400iEA2mRQy0WLPgnHasxZMU2oRM4ZrBu0mtpz7TUg1iCN/sY
+         UL09Phd5XOSnZou83Vg+dLdNPmXLA7H+g7CbnaAejiNZoO1AzQWo5cuSjkT9OgfnnkRc
+         sMH77HmQaezJRriyDwFHRoiCZH6tTNunfu27pTutv+PTK+Wjd7C/OMI39I49DFeI1qgF
+         gmTmbq3OYo9UZd9we7EHrpmDlADna6a2PfFSjnKJQ2e9KI6DfvviL3qTbWt/4NxZBrEm
+         FWvkB2G3Zt3HGPwMFFF6a/EMCbVoOkH3UwFHtEPiEVLGR9ReTXZKgg4RxgIWF0k0Mayd
+         yBIQ==
+X-Gm-Message-State: AOJu0YwlMKicxjRcRv8/Jn3IosSh+fI6iLquzcnQBRROkWHBRaOKLbzY
+	yTj11P6y0tvw3tuhJPSO1Z7tJsn2kJk=
+X-Google-Smtp-Source: AGHT+IFI4k+m/zPvjituWMU7blgM80+xFVnnC7wOKcfhTU74REWCxnI0B5iElbl5ftWikTC/Bd8NFA==
+X-Received: by 2002:a50:aa94:0:b0:553:8e37:6168 with SMTP id q20-20020a50aa94000000b005538e376168mr1316259edc.43.1703252788497;
+        Fri, 22 Dec 2023 05:46:28 -0800 (PST)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id b3-20020aa7d483000000b0054c7dfc63b4sm2598115edr.43.2023.12.22.05.46.28
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 21 Dec 2023 23:28:28 -0800 (PST)
-From: dnyandev <padalkards17082001@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	padalkards17082001@gmail.com
-Cc: ranjitsinh.rathod@kpit.com
-Subject: [oe][meta-python][kirkstone][PATCH] python3-pillow: Fix CVE-2023-44271
-Date: Fri, 22 Dec 2023 12:56:35 +0530
-Message-Id: <20231222072635.456015-1-padalkards17082001@gmail.com>
-X-Mailer: git-send-email 2.25.1
+        Fri, 22 Dec 2023 05:46:28 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: alperyasinak1@gmail.com,
+	Martin Jansa <martin.jansa@gmail.com>
+Subject: [meta-oe][PATCH] wavpack: add PACKAGECONFIG for shared and enable it by default
+Date: Fri, 22 Dec 2023 14:46:20 +0100
+Message-ID: <20231222134620.3710023-1-martin.jansa@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 22 Dec 2023 07:28:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107747
+ <openembedded-devel@lists.openembedded.org>; Fri, 22 Dec 2023 13:46:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107748
 
-Add patch to fix CVE-2023-44271
+* fixes gstreamer1.0-plugins-good build with wavpack enabled:
+  PACKAGECONFIG:append:pn-gstreamer1.0-plugins-good = " wavpack"
 
-Reference:
-https://github.com/python-pillow/Pillow/commit/1fe1bb49c452b0318cad12ea9d97c3bef188e9a7
+* 5.1.0 built shared libs by default, 5.6.0 build with CMake doesn't, causing:
+  http://errors.yoctoproject.org/Errors/Details/748247/
 
-Signed-off-by: Dnyandev Padalkar <padalkards17082001@gmail.com>
+TOPDIR/tmp-glibc/work/cortexa57-oe-linux/gstreamer1.0-plugins-good/1.22.7/recipe-sysroot-native/usr/bin/aarch64-oe-linux/../../libexec/aarch64-oe-linux/gcc/aarch64-oe-linux/13.2.0/ld: TOPDIR/tmp-glibc/work/cortexa57-oe-linux/gstreamer1.0-plugins-good/1.22.7/recipe-sysroot/usr/lib/libwavpack.a(read_words.c.o): relocation R_AARCH64_ADR_PREL_PG_HI21 against symbol `bitset' which may bind externally can not be used when making a shared object; recompile with -fPIC
+/usr/src/debug/wavpack/5.6.0/src/read_words.c:592:(.text+0xb88): dangerous relocation: unsupported relocation
+collect2: error: ld returned 1 exit status
+
+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 ---
- .../python3-pillow/CVE-2023-44271.patch       | 156 ++++++++++++++++++
- .../python/python3-pillow_9.4.0.bb            |   1 +
- 2 files changed, 157 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-pillow/CVE-2023-44271.patch
+ meta-oe/recipes-multimedia/wavpack/wavpack_5.6.0.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pillow/CVE-2023-44271.patch b/meta-python/recipes-devtools/python/python3-pillow/CVE-2023-44271.patch
-new file mode 100644
-index 000000000..ad51f1728
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pillow/CVE-2023-44271.patch
-@@ -0,0 +1,156 @@
-+From 1fe1bb49c452b0318cad12ea9d97c3bef188e9a7 Mon Sep 17 00:00:00 2001
-+From: Andrew Murray <radarhere@users.noreply.github.com>
-+Date: Fri, 30 Jun 2023 23:32:26 +1000
-+Subject: [PATCH] Added ImageFont.MAX_STRING_LENGTH
-+
-+Upstream-status: Backport [https://github.com/python-pillow/Pillow/commit/1fe1bb49c452b0318cad12ea9d97c3bef188e9a7]
-+CVE: CVE-2023-44271
-+Comment: Refresh hunk for test_imagefont.py, ImageFont.py and
-+Remove hunk 10.0.0.rst because in our version it is 9.4.0
-+
-+Signed-off-by: Pawan Badganchi <Pawan.Badganchi@kpit.com>
-+Signed-off-by: Dnyandev Padalkar <padalkards17082001@gmail.com>
-+---
-+ Tests/test_imagefont.py      | 19 +++++++++++++++++++
-+ docs/reference/ImageFont.rst | 18 ++++++++++++++++++
-+ src/PIL/ImageFont.py         | 15 +++++++++++++++
-+ 3 files changed, 52 insertions(+)
-+
-+diff --git a/Tests/test_imagefont.py b/Tests/test_imagefont.py
-+index 7fa8ff8cbfd..c50447a153d 100644
-+--- a/Tests/test_imagefont.py
-++++ b/Tests/test_imagefont.py
-+@@ -1107,6 +1107,25 @@
-+     assert_image_equal_tofile(im, "Tests/images/text_mono.gif")
-+ 
-+ 
-++def test_too_many_characters(font):
-++    with pytest.raises(ValueError):
-++        font.getlength("A" * 1000001)
-++    with pytest.raises(ValueError):
-++        font.getbbox("A" * 1000001)
-++    with pytest.raises(ValueError):
-++        font.getmask2("A" * 1000001)
-++
-++    transposed_font = ImageFont.TransposedFont(font)
-++    with pytest.raises(ValueError):
-++        transposed_font.getlength("A" * 1000001)
-++
-++    default_font = ImageFont.load_default()
-++    with pytest.raises(ValueError):
-++        default_font.getlength("A" * 1000001)
-++    with pytest.raises(ValueError):
-++        default_font.getbbox("A" * 1000001)
-++
-++
-+ @pytest.mark.parametrize(
-+     "test_file",
-+     [
-+diff --git a/docs/reference/ImageFont.rst b/docs/reference/ImageFont.rst
-+index 946bd3c4bed..2abfa0cc997 100644
-+--- a/docs/reference/ImageFont.rst
-++++ b/docs/reference/ImageFont.rst
-+@@ -18,6 +18,15 @@ OpenType fonts (as well as other font formats supported by the FreeType
-+ library). For earlier versions, TrueType support is only available as part of
-+ the imToolkit package.
-+ 
-++.. warning::
-++    To protect against potential DOS attacks when using arbitrary strings as
-++    text input, Pillow will raise a ``ValueError`` if the number of characters
-++    is over a certain limit, :py:data:`MAX_STRING_LENGTH`.
-++
-++    This threshold can be changed by setting
-++    :py:data:`MAX_STRING_LENGTH`. It can be disabled by setting
-++    ``ImageFont.MAX_STRING_LENGTH = None``.
-++
-+ Example
-+ -------
-+ 
-+@@ -73,3 +82,12 @@ Constants
-+ 
-+     Requires Raqm, you can check support using
-+     :py:func:`PIL.features.check_feature` with ``feature="raqm"``.
-++
-++Constants
-++---------
-++
-++.. data:: MAX_STRING_LENGTH
-++
-++    Set to 1,000,000, to protect against potential DOS attacks. Pillow will
-++    raise a ``ValueError`` if the number of characters is over this limit. The
-++    check can be disabled by setting ``ImageFont.MAX_STRING_LENGTH = None``. 
-+diff --git a/src/PIL/ImageFont.py b/src/PIL/ImageFont.py
-+index 3ddc1aaad64..1030985ebc4 100644
-+--- a/src/PIL/ImageFont.py
-++++ b/src/PIL/ImageFont.py
-+@@ -43,6 +43,9 @@
-+     RAQM = 1
-+ 
-+ 
-++MAX_STRING_LENGTH = 1000000
-++
-++
-+ def __getattr__(name):
-+     for enum, prefix in {Layout: "LAYOUT_"}.items():
-+         if name.startswith(prefix):
-+@@ -67,6 +67,12 @@
-+     core = _ImagingFtNotInstalled()
-+ 
-+ 
-++def _string_length_check(text):
-++    if MAX_STRING_LENGTH is not None and len(text) > MAX_STRING_LENGTH:
-++        msg = "too many characters in string"
-++        raise ValueError(msg)
-++
-++
-+ _UNSPECIFIED = object()
-+ 
-+ 
-+@@ -192,6 +192,7 @@
-+ 
-+         :return: ``(left, top, right, bottom)`` bounding box
-+         """
-++        _string_length_check(text)
-+         width, height = self.font.getsize(text)
-+         return 0, 0, width, height
-+ 
-+@@ -202,6 +202,7 @@
-+ 
-+         .. versionadded:: 9.2.0
-+         """
-++        _string_length_check(text)
-+         width, height = self.font.getsize(text)
-+         return width
-+ 
-+@@ -359,6 +359,7 @@
-+ 
-+         :return: Width for horizontal, height for vertical text.
-+         """
-++        _string_length_check(text)
-+         return self.font.getlength(text, mode, direction, features, language) / 64
-+ 
-+     def getbbox(
-+@@ -418,6 +418,7 @@
-+ 
-+         :return: ``(left, top, right, bottom)`` bounding box
-+         """
-++        _string_length_check(text)
-+         size, offset = self.font.getsize(
-+             text, mode, direction, features, language, anchor
-+         )
-+@@ -762,6 +762,7 @@
-+                  :py:mod:`PIL.Image.core` interface module, and the text offset, the
-+                  gap between the starting coordinate and the first marking
-+         """
-++        _string_length_check(text)
-+         if fill is _UNSPECIFIED:
-+             fill = Image.core.fill
-+         else:
-+@@ -924,6 +924,7 @@
-+         if self.orientation in (Image.Transpose.ROTATE_90, Image.Transpose.ROTATE_270):
-+             msg = "text length is undefined for text rotated by 90 or 270 degrees"
-+             raise ValueError(msg)
-++        _string_length_check(text)
-+         return self.font.getlength(text, *args, **kwargs)
-+ 
-+ 
-diff --git a/meta-python/recipes-devtools/python/python3-pillow_9.4.0.bb b/meta-python/recipes-devtools/python/python3-pillow_9.4.0.bb
-index 86705d2d8..b9c09127c 100644
---- a/meta-python/recipes-devtools/python/python3-pillow_9.4.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pillow_9.4.0.bb
-@@ -9,6 +9,7 @@ SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=main;protocol=https
-            file://0001-support-cross-compiling.patch \
-            file://0001-explicitly-set-compile-options.patch \
-            file://run-ptest \
-+           file://CVE-2023-44271.patch \
-            "
- SRCREV ?= "82541b6dec8452cb612067fcebba1c5a1a2bfdc8"
+diff --git a/meta-oe/recipes-multimedia/wavpack/wavpack_5.6.0.bb b/meta-oe/recipes-multimedia/wavpack/wavpack_5.6.0.bb
+index ebbc59dde8..1011cd4c03 100644
+--- a/meta-oe/recipes-multimedia/wavpack/wavpack_5.6.0.bb
++++ b/meta-oe/recipes-multimedia/wavpack/wavpack_5.6.0.bb
+@@ -9,3 +9,6 @@ SRCREV = "e03e8e29dc618e08e7baba9636e57ba1254874ce"
+ S = "${WORKDIR}/git"
  
+ inherit cmake pkgconfig
++
++PACKAGECONFIG = "shared"
++PACKAGECONFIG[shared] = "-DBUILD_SHARED_LIBS=ON,-DBUILD_SHARED_LIBS=OFF,,"
 -- 
-2.25.1
+2.43.0
 
 
