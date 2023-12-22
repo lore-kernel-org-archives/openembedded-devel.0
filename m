@@ -2,4147 +2,4281 @@ Return-Path: <alex.kanavin@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 642E9C41535
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7670AC46CD2
 	for <webhook@archiver.kernel.org>; Fri, 22 Dec 2023 15:11:36 +0000 (UTC)
-Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
- by mx.groups.io with SMTP id smtpd.web11.24907.1703257887481332876
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
+ by mx.groups.io with SMTP id smtpd.web10.25176.1703257888576462137
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 Dec 2023 07:11:28 -0800
+ Fri, 22 Dec 2023 07:11:29 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=iY0F/pch;
- spf=pass (domain: gmail.com, ip: 209.85.208.47, mailfrom: alex.kanavin@gmail.com)
-Received: by mail-ed1-f47.google.com with SMTP id 4fb4d7f45d1cf-5537114380bso1552898a12.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 22 Dec 2023 07:11:27 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Y5vpKbgQ;
+ spf=pass (domain: gmail.com, ip: 209.85.208.51, mailfrom: alex.kanavin@gmail.com)
+Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-54c7744a93fso2261649a12.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 22 Dec 2023 07:11:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1703257886; x=1703862686; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=FHMtovc0n/0MQOLfBWK756GoyZBrfCOPyRIfcVO4V1A=;
-        b=iY0F/pch1k7MDjEZ4pS2w6PG5Z5P5ixF1QheYuHr6sGCc/CXVz6VpLTO5qSWNPRv0N
-         Q8S8T8KAFJVt6s7I83DglT6qiVOjHvMHVSTKiH0BACiFwvUdOj05vtpupr1fghWUft3C
-         SCfNoiZ0Mx+8lk2LJpdVAFE2lm/XJcWbmEnb0VTly4VnSyEmBbL9Fpl48OrDYHtjSYdr
-         B222XqymbFPbXTb856NPYZnbSG3bWH6+StZQq/w85teQ1tIP7Q6G0jJ5BQua8FRAyF49
-         GNHNXN97xVV8PFCzTYA+GLbT4+0o4V/x/mJqPv05S3hJYf0vfiK5WywDNMgnYJEXoU+Z
-         5Sxw==
+        d=gmail.com; s=20230601; t=1703257887; x=1703862687; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=/xatkMVkF/NuW/BP0nfoQW9JEjJQLzPYpU4LIaTJpgc=;
+        b=Y5vpKbgQtcWPwRNWmNioOIL3cchN4axeyuASJosUvypNuXlBhB8CtaxDbw7Ge7meGh
+         adTr+7+Kjv9B1TyOFdec2XAv9mvr01/QdvOGpQ47v93mg6c3xsmY1bRHDdJd3OmIKt2+
+         flmfyj9IFO9vQFd1K5TYj9yxdGQtANf9EDV+4U0pFaat1YrOxXr3EnGxA0cP+GwVEt2o
+         P45zWwtFmSK4M/yqV7nYEmcElXOHrLtpErxQY55NGhnxNvUtxFNYnj2D3TGjaPGkhV++
+         GURHYUsd84div+1tBtF9ulSlbCLE2JApGQ35o3kNmEWhUq1iXPDal2VhVjt/D+C7Gsi+
+         WpMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703257886; x=1703862686;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=FHMtovc0n/0MQOLfBWK756GoyZBrfCOPyRIfcVO4V1A=;
-        b=uCu+8Ga9ubvn0IUN5NY2ZmWnUaDDqU7ynWnOkgpE6sdO90gJpHXFGxu5bPF3z2L7mN
-         qgKzz1BaOWow0y2k1+cGEuyYc1GL3dD5PjEQ6MPdc+gmQx5a7mA7liPLDHzlqptYdVqW
-         L69Fnw8PrH4UxzGj6fJr7hOE5MkQh5vf0YR17Go9sYSCbw6PzroMSBsXKuXX3txdCl2c
-         sCBcGJbE91IsAMmKw89Pt6lbIRiVExLAHLp7x+37SFdFMkTPhDTXHoUkUbPY/WJlaH4v
-         bjr72uR1WIwCDUv+CI+8wYg53AhY0yncsmjgFxluk0aOPlj+icO+2mzi9BwxqUWE739A
-         qgYA==
-X-Gm-Message-State: AOJu0Yy0YiLzF4VgepyHABPMbcT0kdIsMz2zT1lLxBo8tzDn+OvxHACb
-	CycMlXftaP6TLlXhG6Tn0Q+9qaYrAd4ykA==
-X-Google-Smtp-Source: AGHT+IEINhHf1OKhnO9pTK2yikPj11Gs/YFA1j51eo4+X15HMgwygRdyZWk31zRFXB4wpVEaTtPrXw==
-X-Received: by 2002:a50:8a9c:0:b0:554:4ad0:9374 with SMTP id j28-20020a508a9c000000b005544ad09374mr808822edj.52.1703257884969;
-        Fri, 22 Dec 2023 07:11:24 -0800 (PST)
+        d=1e100.net; s=20230601; t=1703257887; x=1703862687;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=/xatkMVkF/NuW/BP0nfoQW9JEjJQLzPYpU4LIaTJpgc=;
+        b=AR98c8al1oC304jrTks7myc3UcEaXBcai1ZhtIKLhha2vsZGuy7CK3q+bmhuOlVp2V
+         mzVhNNxt8Pfwkr8yqJthqM2h7uYtzJHyd2rS0CKwhOePF2J5jft5xkgOcXTY731LAqTZ
+         lw3WhYl20pePZO8Zp/Xr7RUiXL+k6KJv5LFIIl0H5u7YKNFaofq73bEdfdDL85bWCK12
+         nulf3dZBamu3aCExZrJgWHHA4veWHa2DULuTx7dhTQiQT34hYR+lMF2S13mPy0k03IHX
+         +P+iQGBVoSRaGp33PNcHmaoDEkCaFgHWVNcqijHwDn62gPDXnmyRUpSa057wfZLuJMsO
+         dQaA==
+X-Gm-Message-State: AOJu0YxbstdiqBbjGAF4ZDQFBXEb7gR4QmMFOtuO8hgCM1kWb4DjmXLG
+	G5HdwAt/gyxS0KHLa532rU1lsHAYOU74MQ==
+X-Google-Smtp-Source: AGHT+IHHubn2944bOopNr8kFri4tLvgluYjrytminRhKfJgIzXMS4dn7znr+xgWHJZaqiCBzid/5UA==
+X-Received: by 2002:a05:6402:647:b0:554:75d7:b35 with SMTP id u7-20020a056402064700b0055475d70b35mr149928edx.20.1703257885825;
+        Fri, 22 Dec 2023 07:11:25 -0800 (PST)
 Received: from Zen2.lab.linutronix.de. (drugstore.linutronix.de. [80.153.143.164])
-        by smtp.gmail.com with ESMTPSA id m9-20020aa7c2c9000000b00552666f4745sm2650247edp.22.2023.12.22.07.11.24
+        by smtp.gmail.com with ESMTPSA id m9-20020aa7c2c9000000b00552666f4745sm2650247edp.22.2023.12.22.07.11.25
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 22 Dec 2023 07:11:24 -0800 (PST)
+        Fri, 22 Dec 2023 07:11:25 -0800 (PST)
 From: Alexander Kanavin <alex.kanavin@gmail.com>
 X-Google-Original-From: Alexander Kanavin <alex@linutronix.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Alexander Kanavin <alex@linutronix.de>
-Subject: [PATCH 1/9] python3-yappi: update 1.4.0 -> 1.6.0
-Date: Fri, 22 Dec 2023 16:11:00 +0100
-Message-Id: <20231222151108.645675-1-alex@linutronix.de>
+Subject: [PATCH 2/9] polkit: remove long obsolete 0.119 version
+Date: Fri, 22 Dec 2023 16:11:01 +0100
+Message-Id: <20231222151108.645675-2-alex@linutronix.de>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20231222151108.645675-1-alex@linutronix.de>
+References: <20231222151108.645675-1-alex@linutronix.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 22 Dec 2023 15:11:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107753
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107756
 
-Drop patches:
-0002-add-3.11-to-the-setup.patch - issue resolved upstream
-0001-Fix-imports-for-ptests.patch - unclear what the problem is, too diffic=
-ult to rebase.
+It's also unbuildable as mozjs-91 has been removed as well.
 
 Signed-off-by: Alexander Kanavin <alex@linutronix.de>
 ---
- .../0001-Fix-imports-for-ptests.patch         | 3895 -----------------
- .../0002-add-3.11-to-the-setup.patch          |   26 -
- ...-yappi_1.4.0.bb =3D> python3-yappi_1.6.0.bb} |    8 +-
- 3 files changed, 2 insertions(+), 3927 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-yappi/0001-=
-Fix-imports-for-ptests.patch
- delete mode 100644 meta-python/recipes-devtools/python/python3-yappi/0002-=
-add-3.11-to-the-setup.patch
- rename meta-python/recipes-devtools/python/{python3-yappi_1.4.0.bb =3D> py=
-thon3-yappi_1.6.0.bb} (74%)
+ ...l-privilege-escalation-CVE-2021-4034.patch |   84 -
+ ...0002-CVE-2021-4115-GHSL-2021-077-fix.patch |   88 -
+ .../0002-jsauthority-port-to-mozjs-91.patch   |   38 -
+ ...ded-support-for-duktape-as-JS-engine.patch | 3459 -----------------
+ ...re-to-call-JS_Init-and-JS_ShutDown-e.patch |   63 -
+ .../0004-Make-netgroup-support-optional.patch |  253 --
+ ...ke-netgroup-support-optional-duktape.patch |   34 -
+ .../polkit/polkit/polkit-1_pam.patch          |   35 -
+ .../recipes-extended/polkit/polkit_0.119.bb   |   79 -
+ 9 files changed, 4133 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/polkit/polkit/0001-pkexec-local-privilege-escalation-CVE-2021-4034.patch
+ delete mode 100644 meta-oe/recipes-extended/polkit/polkit/0002-CVE-2021-4115-GHSL-2021-077-fix.patch
+ delete mode 100644 meta-oe/recipes-extended/polkit/polkit/0002-jsauthority-port-to-mozjs-91.patch
+ delete mode 100644 meta-oe/recipes-extended/polkit/polkit/0003-Added-support-for-duktape-as-JS-engine.patch
+ delete mode 100644 meta-oe/recipes-extended/polkit/polkit/0003-jsauthority-ensure-to-call-JS_Init-and-JS_ShutDown-e.patch
+ delete mode 100644 meta-oe/recipes-extended/polkit/polkit/0004-Make-netgroup-support-optional.patch
+ delete mode 100644 meta-oe/recipes-extended/polkit/polkit/0005-Make-netgroup-support-optional-duktape.patch
+ delete mode 100644 meta-oe/recipes-extended/polkit/polkit/polkit-1_pam.patch
+ delete mode 100644 meta-oe/recipes-extended/polkit/polkit_0.119.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-yappi/0001-Fix-imp=
-orts-for-ptests.patch b/meta-python/recipes-devtools/python/python3-yappi/0=
-001-Fix-imports-for-ptests.patch
+diff --git a/meta-oe/recipes-extended/polkit/polkit/0001-pkexec-local-privilege-escalation-CVE-2021-4034.patch b/meta-oe/recipes-extended/polkit/polkit/0001-pkexec-local-privilege-escalation-CVE-2021-4034.patch
 deleted file mode 100644
-index 476db4b7d..000000000
---- a/meta-python/recipes-devtools/python/python3-yappi/0001-Fix-imports-fo=
-r-ptests.patch
+index c725c001d..000000000
+--- a/meta-oe/recipes-extended/polkit/polkit/0001-pkexec-local-privilege-escalation-CVE-2021-4034.patch
 +++ /dev/null
-@@ -1,3895 +0,0 @@
--From 0dedc1c573ddc4e87475eb03c64555cd54a72e92 Mon Sep 17 00:00:00 2001
--From: Trevor Gamblin <trevor.gamblin@windriver.com>
--Date: Mon, 7 Jun 2021 09:40:20 -0400
--Subject: [PATCH] Fix imports for tests
+@@ -1,84 +0,0 @@
+-From 85c2dd9275cdfb369f613089f22733c0f1ba2aec Mon Sep 17 00:00:00 2001
+-From: Jan Rybar <jrybar@redhat.com>
+-Date: Tue, 25 Jan 2022 17:21:46 +0000
+-Subject: [PATCH 1/3] pkexec: local privilege escalation (CVE-2021-4034)
 -
--Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+-Signed-off-by: Mikko Rapeli <mikko.rapeli@bmw.de>
+-
 ----
--Upstream-Status: Pending
+- src/programs/pkcheck.c |  5 +++++
+- src/programs/pkexec.c  | 23 ++++++++++++++++++++---
+- 2 files changed, 25 insertions(+), 3 deletions(-)
 -
-- tests/test_asyncio.py              | 2 +-
-- tests/test_asyncio_context_vars.py | 2 +-
-- tests/test_functionality.py        | 2 +-
-- tests/test_hooks.py                | 2 +-
-- tests/test_tags.py                 | 2 +-
-- 5 files changed, 6 insertions(+), 6 deletions(-)
+-CVE: CVE-2021-4034
+-Upstream-Status: Backport [a2bf5c9c83b6ae46cbd5c779d3055bff81ded683]
 -
----- a/tests/test_asyncio.py
--+++ b/tests/test_asyncio.py
--@@ -2,7 +2,7 @@ import unittest
-- import yappi
-- import asyncio
-- import threading
---from utils import YappiUnitTestCase, find_stat_by_name, burn_cpu, burn_io
--+from .utils import YappiUnitTestCase, find_stat_by_name, burn_cpu, burn_io
--=20
--=20
-- async def async_sleep(sec):
----- a/tests/test_asyncio_context_vars.py
--+++ b/tests/test_asyncio_context_vars.py
--@@ -5,7 +5,7 @@ import contextvars
-- import functools
-- import time
-- import os
---import utils
--+import tests.utils as utils
-- import yappi
--=20
-- async_context_id =3D contextvars.ContextVar('async_context_id')
----- a/tests/test_functionality.py
--+++ b/tests/test_functionality.py
--@@ -1,1916 +1,1916 @@
---import os=0D
---import sys=0D
---import time=0D
---import threading=0D
---import unittest=0D
---import yappi=0D
---import _yappi=0D
---import utils=0D
---import multiprocessing  # added to fix http://bugs.python.org/issue15881 =
-for > Py2.6=0D
---import subprocess=0D
---=0D
---_counter =3D 0=0D
---=0D
---=0D
---class BasicUsage(utils.YappiUnitTestCase):=0D
---=0D
---    def test_callback_function_int_return_overflow(self):=0D
---        # this test is just here to check if any errors are generated, as=
- the err=0D
---        # is printed in C side, I did not include it here. THere are ways=
- to test=0D
---        # this deterministically, I did not bother=0D
---        import ctypes=0D
---=0D
---        def _unsigned_overflow_margin():=0D
---            return 2**(ctypes.sizeof(ctypes.c_void_p) * 8) - 1=0D
---=0D
---        def foo():=0D
---            pass=0D
---=0D
---        #with utils.captured_output() as (out, err):=0D
---        yappi.set_context_id_callback(_unsigned_overflow_margin)=0D
---        yappi.set_tag_callback(_unsigned_overflow_margin)=0D
---        yappi.start()=0D
---        foo()=0D
---=0D
---    def test_issue60(self):=0D
---=0D
---        def foo():=0D
---            buf =3D bytearray()=0D
---            buf +=3D b't' * 200=0D
---            view =3D memoryview(buf)[10:]=0D
---            view =3D view.tobytes()=0D
---            del buf[:10]  # this throws exception=0D
---            return view=0D
---=0D
---        yappi.start(builtins=3DTrue)=0D
---        foo()=0D
---        self.assertTrue(=0D
---            len(=0D
---                yappi.get_func_stats(=0D
---                    filter_callback=3Dlambda x: yappi.=0D
---                    func_matches(x, [memoryview.tobytes])=0D
---                )=0D
---            ) > 0=0D
---        )=0D
---        yappi.stop()=0D
---=0D
---    def test_issue54(self):=0D
---=0D
---        def _tag_cbk():=0D
---            global _counter=0D
---            _counter +=3D 1=0D
---            return _counter=0D
---=0D
---        def a():=0D
---            pass=0D
---=0D
---        def b():=0D
---            pass=0D
---=0D
---        yappi.set_tag_callback(_tag_cbk)=0D
---        yappi.start()=0D
---        a()=0D
---        a()=0D
---        a()=0D
---        yappi.stop()=0D
---        stats =3D yappi.get_func_stats()=0D
---        self.assertEqual(stats.pop().ncall, 3)  # aggregated if no tag is=
- given=0D
---        stats =3D yappi.get_func_stats(tag=3D1)=0D
---=0D
---        for i in range(1, 3):=0D
---            stats =3D yappi.get_func_stats(tag=3Di)=0D
---            stats =3D yappi.get_func_stats(=0D
---                tag=3Di, filter_callback=3Dlambda x: yappi.func_matches(x=
-, [a])=0D
---            )=0D
---=0D
---            stat =3D stats.pop()=0D
---            self.assertEqual(stat.ncall, 1)=0D
---=0D
---        yappi.set_tag_callback(None)=0D
---        yappi.clear_stats()=0D
---        yappi.start()=0D
---        b()=0D
---        b()=0D
---        stats =3D yappi.get_func_stats()=0D
---        self.assertEqual(len(stats), 1)=0D
---        stat =3D stats.pop()=0D
---        self.assertEqual(stat.ncall, 2)=0D
---=0D
---    def test_filter(self):=0D
---=0D
---        def a():=0D
---            pass=0D
---=0D
---        def b():=0D
---            a()=0D
---=0D
---        def c():=0D
---            b()=0D
---=0D
---        _TCOUNT =3D 5=0D
---=0D
---        ts =3D []=0D
---        yappi.start()=0D
---        for i in range(_TCOUNT):=0D
---            t =3D threading.Thread(target=3Dc)=0D
---            t.start()=0D
---            ts.append(t)=0D
---=0D
---        for t in ts:=0D
---            t.join()=0D
---=0D
---        yappi.stop()=0D
---=0D
---        ctx_ids =3D []=0D
---        for tstat in yappi.get_thread_stats():=0D
---            if tstat.name =3D=3D '_MainThread':=0D
---                main_ctx_id =3D tstat.id=0D
---            else:=0D
---                ctx_ids.append(tstat.id)=0D
---=0D
---        fstats =3D yappi.get_func_stats(filter=3D{"ctx_id": 9})=0D
---        self.assertTrue(fstats.empty())=0D
---        fstats =3D yappi.get_func_stats(=0D
---            filter=3D{=0D
---                "ctx_id": main_ctx_id,=0D
---                "name": "c"=0D
---            }=0D
---        )  # main thread=0D
---        self.assertTrue(fstats.empty())=0D
---=0D
---        for i in ctx_ids:=0D
---            fstats =3D yappi.get_func_stats(=0D
---                filter=3D{=0D
---                    "ctx_id": i,=0D
---                    "name": "a",=0D
---                    "ncall": 1=0D
---                }=0D
---            )=0D
---            self.assertEqual(fstats.pop().ncall, 1)=0D
---            fstats =3D yappi.get_func_stats(filter=3D{"ctx_id": i, "name"=
-: "b"})=0D
---            self.assertEqual(fstats.pop().ncall, 1)=0D
---            fstats =3D yappi.get_func_stats(filter=3D{"ctx_id": i, "name"=
-: "c"})=0D
---            self.assertEqual(fstats.pop().ncall, 1)=0D
---=0D
---        yappi.clear_stats()=0D
---        yappi.start(builtins=3DTrue)=0D
---        time.sleep(0.1)=0D
---        yappi.stop()=0D
---        fstats =3D yappi.get_func_stats(filter=3D{"module": "time"})=0D
---        self.assertEqual(len(fstats), 1)=0D
---=0D
---        # invalid filters`=0D
---        self.assertRaises(=0D
---            Exception, yappi.get_func_stats, filter=3D{'tag': "sss"}=0D
---        )=0D
---        self.assertRaises(=0D
---            Exception, yappi.get_func_stats, filter=3D{'ctx_id': "None"}=
-=0D
---        )=0D
---=0D
---    def test_filter_callback(self):=0D
---=0D
---        def a():=0D
---            time.sleep(0.1)=0D
---=0D
---        def b():=0D
---            a()=0D
---=0D
---        def c():=0D
---            pass=0D
---=0D
---        def d():=0D
---            pass=0D
---=0D
---        yappi.set_clock_type("wall")=0D
---        yappi.start(builtins=3DTrue)=0D
---        a()=0D
---        b()=0D
---        c()=0D
---        d()=0D
---        stats =3D yappi.get_func_stats(=0D
---            filter_callback=3Dlambda x: yappi.func_matches(x, [a, b])=0D
---        )=0D
---        #stats.print_all()=0D
---        r1 =3D '''=0D
---        tests/test_functionality.py:98 a      2      0.000000  0.200350  =
-0.100175=0D
---        tests/test_functionality.py:101 b     1      0.000000  0.120000  =
-0.100197=0D
---        '''=0D
---        self.assert_traces_almost_equal(r1, stats)=0D
---        self.assertEqual(len(stats), 2)=0D
---        stats =3D yappi.get_func_stats(=0D
---            filter_callback=3Dlambda x: yappi.=0D
---            module_matches(x, [sys.modules[__name__]])=0D
---        )=0D
---        r1 =3D '''=0D
---        tests/test_functionality.py:98 a      2      0.000000  0.230130  =
-0.115065=0D
---        tests/test_functionality.py:101 b     1      0.000000  0.120000  =
-0.109011=0D
---        tests/test_functionality.py:104 c     1      0.000000  0.000002  =
-0.000002=0D
---        tests/test_functionality.py:107 d     1      0.000000  0.000001  =
-0.000001=0D
---        '''=0D
---        self.assert_traces_almost_equal(r1, stats)=0D
---        self.assertEqual(len(stats), 4)=0D
---=0D
---        stats =3D yappi.get_func_stats(=0D
---            filter_callback=3Dlambda x: yappi.func_matches(x, [time.sleep=
-])=0D
---        )=0D
---        self.assertEqual(len(stats), 1)=0D
---        r1 =3D '''=0D
---        time.sleep                            2      0.206804  0.220000  =
-0.103402=0D
---        '''=0D
---        self.assert_traces_almost_equal(r1, stats)=0D
---=0D
---    def test_print_formatting(self):=0D
---=0D
---        def a():=0D
---            pass=0D
---=0D
---        def b():=0D
---            a()=0D
---=0D
---        func_cols =3D {=0D
---            1: ("name", 48),=0D
---            0: ("ncall", 5),=0D
---            2: ("tsub", 8),=0D
---        }=0D
---        thread_cols =3D {=0D
---            1: ("name", 48),=0D
---            0: ("ttot", 8),=0D
---        }=0D
---=0D
---        yappi.start()=0D
---        a()=0D
---        b()=0D
---        yappi.stop()=0D
---        fs =3D yappi.get_func_stats()=0D
---        cs =3D fs[1].children=0D
---        ts =3D yappi.get_thread_stats()=0D
---        #fs.print_all(out=3Dsys.stderr, columns=3D{1:("name", 70), })=0D
---        #cs.print_all(out=3Dsys.stderr, columns=3Dfunc_cols)=0D
---        #ts.print_all(out=3Dsys.stderr, columns=3Dthread_cols)=0D
---        #cs.print_all(out=3Dsys.stderr, columns=3D{})=0D
---=0D
---        self.assertRaises(=0D
---            yappi.YappiError, fs.print_all, columns=3D{1: ("namee", 9)}=0D
---        )=0D
---        self.assertRaises(=0D
---            yappi.YappiError, cs.print_all, columns=3D{1: ("dd", 0)}=0D
---        )=0D
---        self.assertRaises(=0D
---            yappi.YappiError, ts.print_all, columns=3D{1: ("tidd", 0)}=0D
---        )=0D
---=0D
---    def test_get_clock(self):=0D
---        yappi.set_clock_type('cpu')=0D
---        self.assertEqual('cpu', yappi.get_clock_type())=0D
---        clock_info =3D yappi.get_clock_info()=0D
---        self.assertTrue('api' in clock_info)=0D
---        self.assertTrue('resolution' in clock_info)=0D
---=0D
---        yappi.set_clock_type('wall')=0D
---        self.assertEqual('wall', yappi.get_clock_type())=0D
---=0D
---        t0 =3D yappi.get_clock_time()=0D
---        time.sleep(0.1)=0D
---        duration =3D yappi.get_clock_time() - t0=0D
---        self.assertTrue(0.05 < duration < 0.3)=0D
---=0D
---    def test_profile_decorator(self):=0D
---=0D
---        def aggregate(func, stats):=0D
---            fname =3D "tests/%s.profile" % (func.__name__)=0D
---            try:=0D
---                stats.add(fname)=0D
---            except IOError:=0D
---                pass=0D
---            stats.save(fname)=0D
---            raise Exception("messing around")=0D
---=0D
---        @yappi.profile(return_callback=3Daggregate)=0D
---        def a(x, y):=0D
---            if x + y =3D=3D 25:=0D
---                raise Exception("")=0D
---            return x + y=0D
---=0D
---        def b():=0D
---            pass=0D
---=0D
---        try:=0D
---            os.remove(=0D
---                "tests/a.profile"=0D
---            )  # remove the one from prev test, if available=0D
---        except:=0D
---            pass=0D
---=0D
---        # global profile is on to mess things up=0D
---        yappi.start()=0D
---        b()=0D
---=0D
---        # assert functionality and call function at same time=0D
---        try:=0D
---            self.assertEqual(a(1, 2), 3)=0D
---        except:=0D
---            pass=0D
---        try:=0D
---            self.assertEqual(a(2, 5), 7)=0D
---        except:=0D
---            pass=0D
---        try:=0D
---            a(4, 21)=0D
---        except:=0D
---            pass=0D
---        stats =3D yappi.get_func_stats().add("tests/a.profile")=0D
---        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
---        self.assertEqual(fsa.ncall, 3)=0D
---        self.assertEqual(len(stats), 1)  # b() should be cleared out.=0D
---=0D
---        @yappi.profile(return_callback=3Daggregate)=0D
---        def count_down_rec(n):=0D
---            if n =3D=3D 0:=0D
---                return=0D
---            count_down_rec(n - 1)=0D
---=0D
---        try:=0D
---            os.remove(=0D
---                "tests/count_down_rec.profile"=0D
---            )  # remove the one from prev test, if available=0D
---        except:=0D
---            pass=0D
---=0D
---        try:=0D
---            count_down_rec(4)=0D
---        except:=0D
---            pass=0D
---        try:=0D
---            count_down_rec(3)=0D
---        except:=0D
---            pass=0D
---=0D
---        stats =3D yappi.YFuncStats("tests/count_down_rec.profile")=0D
---        fsrec =3D utils.find_stat_by_name(stats, 'count_down_rec')=0D
---        self.assertEqual(fsrec.ncall, 9)=0D
---        self.assertEqual(fsrec.nactualcall, 2)=0D
---=0D
---    def test_strip_dirs(self):=0D
---=0D
---        def a():=0D
---            pass=0D
---=0D
---        stats =3D utils.run_and_get_func_stats(a, )=0D
---        stats.strip_dirs()=0D
---        fsa =3D utils.find_stat_by_name(stats, "a")=0D
---        self.assertEqual(fsa.module, os.path.basename(fsa.module))=0D
---=0D
---    @unittest.skipIf(os.name =3D=3D "nt", "do not run on Windows")=0D
---    def test_run_as_script(self):=0D
---        import re=0D
---        p =3D subprocess.Popen(=0D
---            ['yappi', os.path.join('./tests', 'run_as_script.py')],=0D
---            stdout=3Dsubprocess.PIPE=0D
---        )=0D
---        out, err =3D p.communicate()=0D
---        self.assertEqual(p.returncode, 0)=0D
---        func_stats, thread_stats =3D re.split(=0D
---            b'name\\s+id\\s+tid\\s+ttot\\s+scnt\\s*\n', out=0D
---        )=0D
---        self.assertTrue(b'FancyThread' in thread_stats)=0D
---=0D
---    def test_yappi_overhead(self):=0D
---        LOOP_COUNT =3D 100000=0D
---=0D
---        def a():=0D
---            pass=0D
---=0D
---        def b():=0D
---            for i in range(LOOP_COUNT):=0D
---                a()=0D
---=0D
---        t0 =3D time.time()=0D
---        yappi.start()=0D
---        b()=0D
---        yappi.stop()=0D
---        time_with_yappi =3D time.time() - t0=0D
---        t0 =3D time.time()=0D
---        b()=0D
---        time_without_yappi =3D time.time() - t0=0D
---        if time_without_yappi =3D=3D 0:=0D
---            time_without_yappi =3D 0.000001=0D
---=0D
---        # in latest v0.82, I calculated this as close to "7.0" in my mach=
-ine.=0D
---        # however, %83 of this overhead is coming from tickcount(). The o=
-ther %17=0D
---        # seems to have been evenly distributed to the internal bookkeepi=
-ng=0D
---        # structures/algorithms which seems acceptable. Note that our tes=
-t only=0D
---        # tests one function being profiled at-a-time in a short interval=
-.=0D
---        # profiling high number of functions in a small time=0D
---        # is a different beast, (which is pretty unlikely in most applica=
-tions)=0D
---        # So as a conclusion: I cannot see any optimization window for Ya=
-ppi that=0D
---        # is worth implementing as we will only optimize %17 of the time.=
-=0D
---        sys.stderr.write("\r\nYappi puts %0.1f times overhead to the prof=
-iled application in average.\r\n" % \=0D
---            (time_with_yappi / time_without_yappi))=0D
---=0D
---    def test_clear_stats_while_running(self):=0D
---=0D
---        def a():=0D
---            pass=0D
---=0D
---        yappi.start()=0D
---        a()=0D
---        yappi.clear_stats()=0D
---        a()=0D
---        stats =3D yappi.get_func_stats()=0D
---        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
---        self.assertEqual(fsa.ncall, 1)=0D
---=0D
---    def test_generator(self):=0D
---=0D
---        def _gen(n):=0D
---            while (n > 0):=0D
---                yield n=0D
---                n -=3D 1=0D
---=0D
---        yappi.start()=0D
---        for x in _gen(5):=0D
---            pass=0D
---        self.assertTrue(=0D
---            yappi.convert2pstats(yappi.get_func_stats()) is not None=0D
---        )=0D
---=0D
---    def test_slice_child_stats_and_strip_dirs(self):=0D
---=0D
---        def b():=0D
---            for i in range(10000000):=0D
---                pass=0D
---=0D
---        def a():=0D
---            b()=0D
---=0D
---        yappi.start(builtins=3DTrue)=0D
---        a()=0D
---        stats =3D yappi.get_func_stats()=0D
---        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
---        fsb =3D utils.find_stat_by_name(stats, 'b')=0D
---        self.assertTrue(fsa.children[0:1] is not None)=0D
---        prev_afullname =3D fsa.full_name=0D
---        prev_bchildfullname =3D fsa.children[fsb].full_name=0D
---        stats.strip_dirs()=0D
---        self.assertTrue(len(prev_afullname) > len(fsa.full_name))=0D
---        self.assertTrue(=0D
---            len(prev_bchildfullname) > len(fsa.children[fsb].full_name)=0D
---        )=0D
---=0D
---    def test_children_stat_functions(self):=0D
---        _timings =3D {"a_1": 5, "b_1": 3, "c_1": 1}=0D
---        _yappi._set_test_timings(_timings)=0D
---=0D
---        def b():=0D
---            pass=0D
---=0D
---        def c():=0D
---            pass=0D
---=0D
---        def a():=0D
---            b()=0D
---            c()=0D
---=0D
---        yappi.start()=0D
---        a()=0D
---        b()  # non-child call=0D
---        c()  # non-child call=0D
---        stats =3D yappi.get_func_stats()=0D
---        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
---        childs_of_a =3D fsa.children.get().sort("tavg", "desc")=0D
---        prev_item =3D None=0D
---        for item in childs_of_a:=0D
---            if prev_item:=0D
---                self.assertTrue(prev_item.tavg > item.tavg)=0D
---            prev_item =3D item=0D
---        childs_of_a.sort("name", "desc")=0D
---        prev_item =3D None=0D
---        for item in childs_of_a:=0D
---            if prev_item:=0D
---                self.assertTrue(prev_item.name > item.name)=0D
---            prev_item =3D item=0D
---        childs_of_a.clear()=0D
---        self.assertTrue(childs_of_a.empty())=0D
---=0D
---    def test_no_stats_different_clock_type_load(self):=0D
---=0D
---        def a():=0D
---            pass=0D
---=0D
---        yappi.start()=0D
---        a()=0D
---        yappi.stop()=0D
---        yappi.get_func_stats().save("tests/ystats1.ys")=0D
---        yappi.clear_stats()=0D
---        yappi.set_clock_type("WALL")=0D
---        yappi.start()=0D
---        yappi.stop()=0D
---        stats =3D yappi.get_func_stats().add("tests/ystats1.ys")=0D
---        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
---        self.assertTrue(fsa is not None)=0D
---=0D
---    def test_subsequent_profile(self):=0D
---        _timings =3D {"a_1": 1, "b_1": 1}=0D
---        _yappi._set_test_timings(_timings)=0D
---=0D
---        def a():=0D
---            pass=0D
---=0D
---        def b():=0D
---            pass=0D
---=0D
---        yappi.start()=0D
---        a()=0D
---        yappi.stop()=0D
---        yappi.start()=0D
---        b()=0D
---        yappi.stop()=0D
---        stats =3D yappi.get_func_stats()=0D
---        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
---        fsb =3D utils.find_stat_by_name(stats, 'b')=0D
---        self.assertTrue(fsa is not None)=0D
---        self.assertTrue(fsb is not None)=0D
---        self.assertEqual(fsa.ttot, 1)=0D
---        self.assertEqual(fsb.ttot, 1)=0D
---=0D
---    def test_lambda(self):=0D
---        f =3D lambda: time.sleep(0.3)=0D
---        yappi.set_clock_type("wall")=0D
---        yappi.start()=0D
---        f()=0D
---        stats =3D yappi.get_func_stats()=0D
---        fsa =3D utils.find_stat_by_name(stats, '<lambda>')=0D
---        self.assertTrue(fsa.ttot > 0.1)=0D
---=0D
---    def test_module_stress(self):=0D
---        self.assertEqual(yappi.is_running(), False)=0D
---=0D
---        yappi.start()=0D
---        yappi.clear_stats()=0D
---        self.assertRaises(_yappi.error, yappi.set_clock_type, "wall")=0D
---=0D
---        yappi.stop()=0D
---        yappi.clear_stats()=0D
---        yappi.set_clock_type("cpu")=0D
---        self.assertRaises(yappi.YappiError, yappi.set_clock_type, "dummy"=
-)=0D
---        self.assertEqual(yappi.is_running(), False)=0D
---        yappi.clear_stats()=0D
---        yappi.clear_stats()=0D
---=0D
---    def test_stat_sorting(self):=0D
---        _timings =3D {"a_1": 13, "b_1": 10, "a_2": 6, "b_2": 1}=0D
---        _yappi._set_test_timings(_timings)=0D
---=0D
---        self._ncall =3D 1=0D
---=0D
---        def a():=0D
---            b()=0D
---=0D
---        def b():=0D
---            if self._ncall =3D=3D 2:=0D
---                return=0D
---            self._ncall +=3D 1=0D
---            a()=0D
---=0D
---        stats =3D utils.run_and_get_func_stats(a)=0D
---        stats =3D stats.sort("totaltime", "desc")=0D
---        prev_stat =3D None=0D
---        for stat in stats:=0D
---            if prev_stat:=0D
---                self.assertTrue(prev_stat.ttot >=3D stat.ttot)=0D
---            prev_stat =3D stat=0D
---        stats =3D stats.sort("totaltime", "asc")=0D
---        prev_stat =3D None=0D
---        for stat in stats:=0D
---            if prev_stat:=0D
---                self.assertTrue(prev_stat.ttot <=3D stat.ttot)=0D
---            prev_stat =3D stat=0D
---        stats =3D stats.sort("avgtime", "asc")=0D
---        prev_stat =3D None=0D
---        for stat in stats:=0D
---            if prev_stat:=0D
---                self.assertTrue(prev_stat.tavg <=3D stat.tavg)=0D
---            prev_stat =3D stat=0D
---        stats =3D stats.sort("name", "asc")=0D
---        prev_stat =3D None=0D
---        for stat in stats:=0D
---            if prev_stat:=0D
---                self.assertTrue(prev_stat.name <=3D stat.name)=0D
---            prev_stat =3D stat=0D
---        stats =3D stats.sort("subtime", "asc")=0D
---        prev_stat =3D None=0D
---        for stat in stats:=0D
---            if prev_stat:=0D
---                self.assertTrue(prev_stat.tsub <=3D stat.tsub)=0D
---            prev_stat =3D stat=0D
---=0D
---        self.assertRaises(=0D
---            yappi.YappiError, stats.sort, "invalid_func_sorttype_arg"=0D
---        )=0D
---        self.assertRaises(=0D
---            yappi.YappiError, stats.sort, "totaltime",=0D
---            "invalid_func_sortorder_arg"=0D
---        )=0D
---=0D
---    def test_start_flags(self):=0D
---        self.assertEqual(_yappi._get_start_flags(), None)=0D
---        yappi.start()=0D
---=0D
---        def a():=0D
---            pass=0D
---=0D
---        a()=0D
---        self.assertEqual(_yappi._get_start_flags()["profile_builtins"], 0=
-)=0D
---        self.assertEqual(_yappi._get_start_flags()["profile_multicontext"=
-], 1)=0D
---        self.assertEqual(len(yappi.get_thread_stats()), 1)=0D
---=0D
---    def test_builtin_profiling(self):=0D
---=0D
---        def a():=0D
---            time.sleep(0.4)  # is a builtin function=0D
---=0D
---        yappi.set_clock_type('wall')=0D
---=0D
---        yappi.start(builtins=3DTrue)=0D
---        a()=0D
---        stats =3D yappi.get_func_stats()=0D
---        fsa =3D utils.find_stat_by_name(stats, 'sleep')=0D
---        self.assertTrue(fsa is not None)=0D
---        self.assertTrue(fsa.ttot > 0.3)=0D
---        yappi.stop()=0D
---        yappi.clear_stats()=0D
---=0D
---        def a():=0D
---            pass=0D
---=0D
---        yappi.start()=0D
---        t =3D threading.Thread(target=3Da)=0D
---        t.start()=0D
---        t.join()=0D
---        stats =3D yappi.get_func_stats()=0D
---=0D
---    def test_singlethread_profiling(self):=0D
---        yappi.set_clock_type('wall')=0D
---=0D
---        def a():=0D
---            time.sleep(0.2)=0D
---=0D
---        class Worker1(threading.Thread):=0D
---=0D
---            def a(self):=0D
---                time.sleep(0.3)=0D
---=0D
---            def run(self):=0D
---                self.a()=0D
---=0D
---        yappi.start(profile_threads=3DFalse)=0D
---=0D
---        c =3D Worker1()=0D
---        c.start()=0D
---        c.join()=0D
---        a()=0D
---        stats =3D yappi.get_func_stats()=0D
---        fsa1 =3D utils.find_stat_by_name(stats, 'Worker1.a')=0D
---        fsa2 =3D utils.find_stat_by_name(stats, 'a')=0D
---        self.assertTrue(fsa1 is None)=0D
---        self.assertTrue(fsa2 is not None)=0D
---        self.assertTrue(fsa2.ttot > 0.1)=0D
---=0D
---    def test_run(self):=0D
---=0D
---        def profiled():=0D
---            pass=0D
---=0D
---        yappi.clear_stats()=0D
---        try:=0D
---            with yappi.run():=0D
---                profiled()=0D
---            stats =3D yappi.get_func_stats()=0D
---        finally:=0D
---            yappi.clear_stats()=0D
---=0D
---        self.assertIsNotNone(utils.find_stat_by_name(stats, 'profiled'))=
-=0D
---=0D
---    def test_run_recursive(self):=0D
---=0D
---        def profiled():=0D
---            pass=0D
---=0D
---        def not_profiled():=0D
---            pass=0D
---=0D
---        yappi.clear_stats()=0D
---        try:=0D
---            with yappi.run():=0D
---                with yappi.run():=0D
---                    profiled()=0D
---                # Profiling stopped here=0D
---                not_profiled()=0D
---            stats =3D yappi.get_func_stats()=0D
---        finally:=0D
---            yappi.clear_stats()=0D
---=0D
---        self.assertIsNotNone(utils.find_stat_by_name(stats, 'profiled'))=
-=0D
---        self.assertIsNone(utils.find_stat_by_name(stats, 'not_profiled'))=
-=0D
---=0D
---=0D
---class StatSaveScenarios(utils.YappiUnitTestCase):=0D
---=0D
---    def test_pstats_conversion(self):=0D
---=0D
---        def pstat_id(fs):=0D
---            return (fs.module, fs.lineno, fs.name)=0D
---=0D
---        def a():=0D
---            d()=0D
---=0D
---        def b():=0D
---            d()=0D
---=0D
---        def c():=0D
---            pass=0D
---=0D
---        def d():=0D
---            pass=0D
---=0D
---        _timings =3D {"a_1": 12, "b_1": 7, "c_1": 5, "d_1": 2}=0D
---        _yappi._set_test_timings(_timings)=0D
---        stats =3D utils.run_and_get_func_stats(a, )=0D
---        stats.strip_dirs()=0D
---        stats.save("tests/a1.pstats", type=3D"pstat")=0D
---        fsa_pid =3D pstat_id(utils.find_stat_by_name(stats, "a"))=0D
---        fsd_pid =3D pstat_id(utils.find_stat_by_name(stats, "d"))=0D
---        yappi.clear_stats()=0D
---        _yappi._set_test_timings(_timings)=0D
---        stats =3D utils.run_and_get_func_stats(a, )=0D
---        stats.strip_dirs()=0D
---        stats.save("tests/a2.pstats", type=3D"pstat")=0D
---        yappi.clear_stats()=0D
---        _yappi._set_test_timings(_timings)=0D
---        stats =3D utils.run_and_get_func_stats(b, )=0D
---        stats.strip_dirs()=0D
---        stats.save("tests/b1.pstats", type=3D"pstat")=0D
---        fsb_pid =3D pstat_id(utils.find_stat_by_name(stats, "b"))=0D
---        yappi.clear_stats()=0D
---        _yappi._set_test_timings(_timings)=0D
---        stats =3D utils.run_and_get_func_stats(c, )=0D
---        stats.strip_dirs()=0D
---        stats.save("tests/c1.pstats", type=3D"pstat")=0D
---        fsc_pid =3D pstat_id(utils.find_stat_by_name(stats, "c"))=0D
---=0D
---        # merge saved stats and check pstats values are correct=0D
---        import pstats=0D
---        p =3D pstats.Stats(=0D
---            'tests/a1.pstats', 'tests/a2.pstats', 'tests/b1.pstats',=0D
---            'tests/c1.pstats'=0D
---        )=0D
---        p.strip_dirs()=0D
---        # ct =3D ttot, tt =3D tsub=0D
---        (cc, nc, tt, ct, callers) =3D p.stats[fsa_pid]=0D
---        self.assertEqual(cc, nc, 2)=0D
---        self.assertEqual(tt, 20)=0D
---        self.assertEqual(ct, 24)=0D
---        (cc, nc, tt, ct, callers) =3D p.stats[fsd_pid]=0D
---        self.assertEqual(cc, nc, 3)=0D
---        self.assertEqual(tt, 6)=0D
---        self.assertEqual(ct, 6)=0D
---        self.assertEqual(len(callers), 2)=0D
---        (cc, nc, tt, ct) =3D callers[fsa_pid]=0D
---        self.assertEqual(cc, nc, 2)=0D
---        self.assertEqual(tt, 4)=0D
---        self.assertEqual(ct, 4)=0D
---        (cc, nc, tt, ct) =3D callers[fsb_pid]=0D
---        self.assertEqual(cc, nc, 1)=0D
---        self.assertEqual(tt, 2)=0D
---        self.assertEqual(ct, 2)=0D
---=0D
---    def test_merge_stats(self):=0D
---        _timings =3D {=0D
---            "a_1": 15,=0D
---            "b_1": 14,=0D
---            "c_1": 12,=0D
---            "d_1": 10,=0D
---            "e_1": 9,=0D
---            "f_1": 7,=0D
---            "g_1": 6,=0D
---            "h_1": 5,=0D
---            "i_1": 1=0D
---        }=0D
---        _yappi._set_test_timings(_timings)=0D
---=0D
---        def a():=0D
---            b()=0D
---=0D
---        def b():=0D
---            c()=0D
---=0D
---        def c():=0D
---            d()=0D
---=0D
---        def d():=0D
---            e()=0D
---=0D
---        def e():=0D
---            f()=0D
---=0D
---        def f():=0D
---            g()=0D
---=0D
---        def g():=0D
---            h()=0D
---=0D
---        def h():=0D
---            i()=0D
---=0D
---        def i():=0D
---            pass=0D
---=0D
---        yappi.start()=0D
---        a()=0D
---        a()=0D
---        yappi.stop()=0D
---        stats =3D yappi.get_func_stats()=0D
---        self.assertRaises(=0D
---            NotImplementedError, stats.save, "", "INVALID_SAVE_TYPE"=0D
---        )=0D
---        stats.save("tests/ystats2.ys")=0D
---        yappi.clear_stats()=0D
---        _yappi._set_test_timings(_timings)=0D
---        yappi.start()=0D
---        a()=0D
---        stats =3D yappi.get_func_stats().add("tests/ystats2.ys")=0D
---        fsa =3D utils.find_stat_by_name(stats, "a")=0D
---        fsb =3D utils.find_stat_by_name(stats, "b")=0D
---        fsc =3D utils.find_stat_by_name(stats, "c")=0D
---        fsd =3D utils.find_stat_by_name(stats, "d")=0D
---        fse =3D utils.find_stat_by_name(stats, "e")=0D
---        fsf =3D utils.find_stat_by_name(stats, "f")=0D
---        fsg =3D utils.find_stat_by_name(stats, "g")=0D
---        fsh =3D utils.find_stat_by_name(stats, "h")=0D
---        fsi =3D utils.find_stat_by_name(stats, "i")=0D
---        self.assertEqual(fsa.ttot, 45)=0D
---        self.assertEqual(fsa.ncall, 3)=0D
---        self.assertEqual(fsa.nactualcall, 3)=0D
---        self.assertEqual(fsa.tsub, 3)=0D
---        self.assertEqual(fsa.children[fsb].ttot, fsb.ttot)=0D
---        self.assertEqual(fsa.children[fsb].tsub, fsb.tsub)=0D
---        self.assertEqual(fsb.children[fsc].ttot, fsc.ttot)=0D
---        self.assertEqual(fsb.children[fsc].tsub, fsc.tsub)=0D
---        self.assertEqual(fsc.tsub, 6)=0D
---        self.assertEqual(fsc.children[fsd].ttot, fsd.ttot)=0D
---        self.assertEqual(fsc.children[fsd].tsub, fsd.tsub)=0D
---        self.assertEqual(fsd.children[fse].ttot, fse.ttot)=0D
---        self.assertEqual(fsd.children[fse].tsub, fse.tsub)=0D
---        self.assertEqual(fse.children[fsf].ttot, fsf.ttot)=0D
---        self.assertEqual(fse.children[fsf].tsub, fsf.tsub)=0D
---        self.assertEqual(fsf.children[fsg].ttot, fsg.ttot)=0D
---        self.assertEqual(fsf.children[fsg].tsub, fsg.tsub)=0D
---        self.assertEqual(fsg.ttot, 18)=0D
---        self.assertEqual(fsg.tsub, 3)=0D
---        self.assertEqual(fsg.children[fsh].ttot, fsh.ttot)=0D
---        self.assertEqual(fsg.children[fsh].tsub, fsh.tsub)=0D
---        self.assertEqual(fsh.ttot, 15)=0D
---        self.assertEqual(fsh.tsub, 12)=0D
---        self.assertEqual(fsh.tavg, 5)=0D
---        self.assertEqual(fsh.children[fsi].ttot, fsi.ttot)=0D
---        self.assertEqual(fsh.children[fsi].tsub, fsi.tsub)=0D
---        #stats.debug_print()=0D
---=0D
---    def test_merge_multithreaded_stats(self):=0D
---        import _yappi=0D
---        timings =3D {"a_1": 2, "b_1": 1}=0D
---        _yappi._set_test_timings(timings)=0D
---=0D
---        def a():=0D
---            pass=0D
---=0D
---        def b():=0D
---            pass=0D
---=0D
---        yappi.start()=0D
---        t =3D threading.Thread(target=3Da)=0D
---        t.start()=0D
---        t.join()=0D
---        t =3D threading.Thread(target=3Db)=0D
---        t.start()=0D
---        t.join()=0D
---        yappi.get_func_stats().save("tests/ystats1.ys")=0D
---        yappi.clear_stats()=0D
---        _yappi._set_test_timings(timings)=0D
---        self.assertEqual(len(yappi.get_func_stats()), 0)=0D
---        self.assertEqual(len(yappi.get_thread_stats()), 1)=0D
---        t =3D threading.Thread(target=3Da)=0D
---        t.start()=0D
---        t.join()=0D
---=0D
---        self.assertEqual(_yappi._get_start_flags()["profile_builtins"], 0=
-)=0D
---        self.assertEqual(_yappi._get_start_flags()["profile_multicontext"=
-], 1)=0D
---        yappi.get_func_stats().save("tests/ystats2.ys")=0D
---=0D
---        stats =3D yappi.YFuncStats([=0D
---            "tests/ystats1.ys",=0D
---            "tests/ystats2.ys",=0D
---        ])=0D
---        fsa =3D utils.find_stat_by_name(stats, "a")=0D
---        fsb =3D utils.find_stat_by_name(stats, "b")=0D
---        self.assertEqual(fsa.ncall, 2)=0D
---        self.assertEqual(fsb.ncall, 1)=0D
---        self.assertEqual(fsa.tsub, fsa.ttot, 4)=0D
---        self.assertEqual(fsb.tsub, fsb.ttot, 1)=0D
---=0D
---    def test_merge_load_different_clock_types(self):=0D
---        yappi.start(builtins=3DTrue)=0D
---=0D
---        def a():=0D
---            b()=0D
---=0D
---        def b():=0D
---            c()=0D
---=0D
---        def c():=0D
---            pass=0D
---=0D
---        t =3D threading.Thread(target=3Da)=0D
---        t.start()=0D
---        t.join()=0D
---        yappi.get_func_stats().sort("name", "asc").save("tests/ystats1.ys=
-")=0D
---        yappi.stop()=0D
---        yappi.clear_stats()=0D
---        yappi.start(builtins=3DFalse)=0D
---        t =3D threading.Thread(target=3Da)=0D
---        t.start()=0D
---        t.join()=0D
---        yappi.get_func_stats().save("tests/ystats2.ys")=0D
---        yappi.stop()=0D
---        self.assertRaises(_yappi.error, yappi.set_clock_type, "wall")=0D
---        yappi.clear_stats()=0D
---        yappi.set_clock_type("wall")=0D
---        yappi.start()=0D
---        t =3D threading.Thread(target=3Da)=0D
---        t.start()=0D
---        t.join()=0D
---        yappi.get_func_stats().save("tests/ystats3.ys")=0D
---        self.assertRaises(=0D
---            yappi.YappiError,=0D
---            yappi.YFuncStats().add("tests/ystats1.ys").add, "tests/ystats=
-3.ys"=0D
---        )=0D
---        stats =3D yappi.YFuncStats(["tests/ystats1.ys",=0D
---                                  "tests/ystats2.ys"]).sort("name")=0D
---        fsa =3D utils.find_stat_by_name(stats, "a")=0D
---        fsb =3D utils.find_stat_by_name(stats, "b")=0D
---        fsc =3D utils.find_stat_by_name(stats, "c")=0D
---        self.assertEqual(fsa.ncall, 2)=0D
---        self.assertEqual(fsa.ncall, fsb.ncall, fsc.ncall)=0D
---=0D
---    def test_merge_aabab_aabbc(self):=0D
---        _timings =3D {=0D
---            "a_1": 15,=0D
---            "a_2": 14,=0D
---            "b_1": 12,=0D
---            "a_3": 10,=0D
---            "b_2": 9,=0D
---            "c_1": 4=0D
---        }=0D
---        _yappi._set_test_timings(_timings)=0D
---=0D
---        def a():=0D
---            if self._ncall =3D=3D 1:=0D
---                self._ncall +=3D 1=0D
---                a()=0D
---            elif self._ncall =3D=3D 5:=0D
---                self._ncall +=3D 1=0D
---                a()=0D
---            else:=0D
---                b()=0D
---=0D
---        def b():=0D
---            if self._ncall =3D=3D 2:=0D
---                self._ncall +=3D 1=0D
---                a()=0D
---            elif self._ncall =3D=3D 6:=0D
---                self._ncall +=3D 1=0D
---                b()=0D
---            elif self._ncall =3D=3D 7:=0D
---                c()=0D
---            else:=0D
---                return=0D
---=0D
---        def c():=0D
---            pass=0D
---=0D
---        self._ncall =3D 1=0D
---        stats =3D utils.run_and_get_func_stats(a, )=0D
---        stats.save("tests/ystats1.ys")=0D
---        yappi.clear_stats()=0D
---        _yappi._set_test_timings(_timings)=0D
---        #stats.print_all()=0D
---=0D
---        self._ncall =3D 5=0D
---        stats =3D utils.run_and_get_func_stats(a, )=0D
---        stats.save("tests/ystats2.ys")=0D
---=0D
---        #stats.print_all()=0D
---=0D
---        def a():  # same name but another function(code object)=0D
---            pass=0D
---=0D
---        yappi.start()=0D
---        a()=0D
---        stats =3D yappi.get_func_stats().add(=0D
---            ["tests/ystats1.ys", "tests/ystats2.ys"]=0D
---        )=0D
---        #stats.print_all()=0D
---        self.assertEqual(len(stats), 4)=0D
---=0D
---        fsa =3D None=0D
---        for stat in stats:=0D
---            if stat.name =3D=3D "a" and stat.ttot =3D=3D 45:=0D
---                fsa =3D stat=0D
---                break=0D
---        self.assertTrue(fsa is not None)=0D
---=0D
---        self.assertEqual(fsa.ncall, 7)=0D
---        self.assertEqual(fsa.nactualcall, 3)=0D
---        self.assertEqual(fsa.ttot, 45)=0D
---        self.assertEqual(fsa.tsub, 10)=0D
---        fsb =3D utils.find_stat_by_name(stats, "b")=0D
---        fsc =3D utils.find_stat_by_name(stats, "c")=0D
---        self.assertEqual(fsb.ncall, 6)=0D
---        self.assertEqual(fsb.nactualcall, 3)=0D
---        self.assertEqual(fsb.ttot, 36)=0D
---        self.assertEqual(fsb.tsub, 27)=0D
---        self.assertEqual(fsb.tavg, 6)=0D
---        self.assertEqual(fsc.ttot, 8)=0D
---        self.assertEqual(fsc.tsub, 8)=0D
---        self.assertEqual(fsc.tavg, 4)=0D
---        self.assertEqual(fsc.nactualcall, fsc.ncall, 2)=0D
---=0D
---=0D
---class MultithreadedScenarios(utils.YappiUnitTestCase):=0D
---=0D
---    def test_issue_32(self):=0D
---        '''=0D
---        Start yappi from different thread and we get Internal Error(15) a=
-s =0D
---        the current_ctx_id() called while enumerating the threads in star=
-t() =0D
---        and as it does not swap to the enumerated ThreadState* the THread=
-State_GetDict()=0D
---        returns wrong object and thus sets an invalid id for the _ctx str=
-ucture.=0D
---=0D
---        When this issue happens multiple Threads have same tid as the int=
-ernal ts_ptr=0D
---        will be same for different contexts. So, let's see if that happen=
-s=0D
---        '''=0D
---=0D
---        def foo():=0D
---            time.sleep(0.2)=0D
---=0D
---        def bar():=0D
---            time.sleep(0.1)=0D
---=0D
---        def thread_func():=0D
---            yappi.set_clock_type("wall")=0D
---            yappi.start()=0D
---=0D
---            bar()=0D
---=0D
---        t =3D threading.Thread(target=3Dthread_func)=0D
---        t.start()=0D
---        t.join()=0D
---=0D
---        foo()=0D
---=0D
---        yappi.stop()=0D
---=0D
---        thread_ids =3D set()=0D
---        for tstat in yappi.get_thread_stats():=0D
---            self.assertTrue(tstat.tid not in thread_ids)=0D
---            thread_ids.add(tstat.tid)=0D
---=0D
---    def test_subsequent_profile(self):=0D
---        WORKER_COUNT =3D 5=0D
---=0D
---        def a():=0D
---            pass=0D
---=0D
---        def b():=0D
---            pass=0D
---=0D
---        def c():=0D
---            pass=0D
---=0D
---        _timings =3D {=0D
---            "a_1": 3,=0D
---            "b_1": 2,=0D
---            "c_1": 1,=0D
---        }=0D
---=0D
---        yappi.start()=0D
---=0D
---        def g():=0D
---            pass=0D
---=0D
---        g()=0D
---        yappi.stop()=0D
---        yappi.clear_stats()=0D
---        _yappi._set_test_timings(_timings)=0D
---        yappi.start()=0D
---=0D
---        _dummy =3D []=0D
---        for i in range(WORKER_COUNT):=0D
---            t =3D threading.Thread(target=3Da)=0D
---            t.start()=0D
---            t.join()=0D
---        for i in range(WORKER_COUNT):=0D
---            t =3D threading.Thread(target=3Db)=0D
---            t.start()=0D
---            _dummy.append(t)=0D
---            t.join()=0D
---        for i in range(WORKER_COUNT):=0D
---            t =3D threading.Thread(target=3Da)=0D
---            t.start()=0D
---            t.join()=0D
---        for i in range(WORKER_COUNT):=0D
---            t =3D threading.Thread(target=3Dc)=0D
---            t.start()=0D
---            t.join()=0D
---        yappi.stop()=0D
---        yappi.start()=0D
---=0D
---        def f():=0D
---            pass=0D
---=0D
---        f()=0D
---        stats =3D yappi.get_func_stats()=0D
---        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
---        fsb =3D utils.find_stat_by_name(stats, 'b')=0D
---        fsc =3D utils.find_stat_by_name(stats, 'c')=0D
---        self.assertEqual(fsa.ncall, 10)=0D
---        self.assertEqual(fsb.ncall, 5)=0D
---        self.assertEqual(fsc.ncall, 5)=0D
---        self.assertEqual(fsa.ttot, fsa.tsub, 30)=0D
---        self.assertEqual(fsb.ttot, fsb.tsub, 10)=0D
---        self.assertEqual(fsc.ttot, fsc.tsub, 5)=0D
---=0D
---        # MACOSx optimizes by only creating one worker thread=0D
---        self.assertTrue(len(yappi.get_thread_stats()) >=3D 2)=0D
---=0D
---    def test_basic(self):=0D
---        yappi.set_clock_type('wall')=0D
---=0D
---        def dummy():=0D
---            pass=0D
---=0D
---        def a():=0D
---            time.sleep(0.2)=0D
---=0D
---        class Worker1(threading.Thread):=0D
---=0D
---            def a(self):=0D
---                time.sleep(0.3)=0D
---=0D
---            def run(self):=0D
---                self.a()=0D
---=0D
---        yappi.start(builtins=3DFalse, profile_threads=3DTrue)=0D
---=0D
---        c =3D Worker1()=0D
---        c.start()=0D
---        c.join()=0D
---        a()=0D
---        stats =3D yappi.get_func_stats()=0D
---        fsa1 =3D utils.find_stat_by_name(stats, 'Worker1.a')=0D
---        fsa2 =3D utils.find_stat_by_name(stats, 'a')=0D
---        self.assertTrue(fsa1 is not None)=0D
---        self.assertTrue(fsa2 is not None)=0D
---        self.assertTrue(fsa1.ttot > 0.2)=0D
---        self.assertTrue(fsa2.ttot > 0.1)=0D
---        tstats =3D yappi.get_thread_stats()=0D
---        self.assertEqual(len(tstats), 2)=0D
---        tsa =3D utils.find_stat_by_name(tstats, 'Worker1')=0D
---        tsm =3D utils.find_stat_by_name(tstats, '_MainThread')=0D
---        dummy()  # call dummy to force ctx name to be retrieved again.=0D
---        self.assertTrue(tsa is not None)=0D
---        # TODO: I put dummy() to fix below, remove the comments after a w=
-hile.=0D
---        self.assertTrue( # FIX: I see this fails sometimes?=0D
---            tsm is not None,=0D
---            'Could not find "_MainThread". Found: %s' % (', '.join(utils.=
-get_stat_names(tstats))))=0D
---=0D
---    def test_ctx_stats(self):=0D
---        from threading import Thread=0D
---        DUMMY_WORKER_COUNT =3D 5=0D
---        yappi.start()=0D
---=0D
---        class DummyThread(Thread):=0D
---            pass=0D
---=0D
---        def dummy():=0D
---            pass=0D
---=0D
---        def dummy_worker():=0D
---            pass=0D
---=0D
---        for i in range(DUMMY_WORKER_COUNT):=0D
---            t =3D DummyThread(target=3Ddummy_worker)=0D
---            t.start()=0D
---            t.join()=0D
---        yappi.stop()=0D
---        stats =3D yappi.get_thread_stats()=0D
---        tsa =3D utils.find_stat_by_name(stats, "DummyThread")=0D
---        self.assertTrue(tsa is not None)=0D
---        yappi.clear_stats()=0D
---        time.sleep(1.0)=0D
---        _timings =3D {=0D
---            "a_1": 6,=0D
---            "b_1": 5,=0D
---            "c_1": 3,=0D
---            "d_1": 1,=0D
---            "a_2": 4,=0D
---            "b_2": 3,=0D
---            "c_2": 2,=0D
---            "d_2": 1=0D
---        }=0D
---        _yappi._set_test_timings(_timings)=0D
---=0D
---        class Thread1(Thread):=0D
---            pass=0D
---=0D
---        class Thread2(Thread):=0D
---            pass=0D
---=0D
---        def a():=0D
---            b()=0D
---=0D
---        def b():=0D
---            c()=0D
---=0D
---        def c():=0D
---            d()=0D
---=0D
---        def d():=0D
---            time.sleep(0.6)=0D
---=0D
---        yappi.set_clock_type("wall")=0D
---        yappi.start()=0D
---        t1 =3D Thread1(target=3Da)=0D
---        t1.start()=0D
---        t2 =3D Thread2(target=3Da)=0D
---        t2.start()=0D
---        t1.join()=0D
---        t2.join()=0D
---        stats =3D yappi.get_thread_stats()=0D
---=0D
---        # the fist clear_stats clears the context table?=0D
---        tsa =3D utils.find_stat_by_name(stats, "DummyThread")=0D
---        self.assertTrue(tsa is None)=0D
---=0D
---        tst1 =3D utils.find_stat_by_name(stats, "Thread1")=0D
---        tst2 =3D utils.find_stat_by_name(stats, "Thread2")=0D
---        tsmain =3D utils.find_stat_by_name(stats, "_MainThread")=0D
---        dummy()  # call dummy to force ctx name to be retrieved again.=0D
---        self.assertTrue(len(stats) =3D=3D 3)=0D
---        self.assertTrue(tst1 is not None)=0D
---        self.assertTrue(tst2 is not None)=0D
---        # TODO: I put dummy() to fix below, remove the comments after a w=
-hile.=0D
---        self.assertTrue( # FIX: I see this fails sometimes=0D
---            tsmain is not None,=0D
---            'Could not find "_MainThread". Found: %s' % (', '.join(utils.=
-get_stat_names(stats))))=0D
---        self.assertTrue(1.0 > tst2.ttot >=3D 0.5)=0D
---        self.assertTrue(1.0 > tst1.ttot >=3D 0.5)=0D
---=0D
---        # test sorting of the ctx stats=0D
---        stats =3D stats.sort("totaltime", "desc")=0D
---        prev_stat =3D None=0D
---        for stat in stats:=0D
---            if prev_stat:=0D
---                self.assertTrue(prev_stat.ttot >=3D stat.ttot)=0D
---            prev_stat =3D stat=0D
---        stats =3D stats.sort("totaltime", "asc")=0D
---        prev_stat =3D None=0D
---        for stat in stats:=0D
---            if prev_stat:=0D
---                self.assertTrue(prev_stat.ttot <=3D stat.ttot)=0D
---            prev_stat =3D stat=0D
---        stats =3D stats.sort("schedcount", "desc")=0D
---        prev_stat =3D None=0D
---        for stat in stats:=0D
---            if prev_stat:=0D
---                self.assertTrue(prev_stat.sched_count >=3D stat.sched_cou=
-nt)=0D
---            prev_stat =3D stat=0D
---        stats =3D stats.sort("name", "desc")=0D
---        prev_stat =3D None=0D
---        for stat in stats:=0D
---            if prev_stat:=0D
---                self.assertTrue(prev_stat.name.lower() >=3D stat.name.low=
-er())=0D
---            prev_stat =3D stat=0D
---        self.assertRaises(=0D
---            yappi.YappiError, stats.sort, "invalid_thread_sorttype_arg"=0D
---        )=0D
---        self.assertRaises(=0D
---            yappi.YappiError, stats.sort, "invalid_thread_sortorder_arg"=
-=0D
---        )=0D
---=0D
---    def test_ctx_stats_cpu(self):=0D
---=0D
---        def get_thread_name():=0D
---            try:=0D
---                return threading.current_thread().name=0D
---            except AttributeError:=0D
---                return "Anonymous"=0D
---=0D
---        def burn_cpu(sec):=0D
---            t0 =3D yappi.get_clock_time()=0D
---            elapsed =3D 0=0D
---            while (elapsed < sec):=0D
---                for _ in range(1000):=0D
---                    pass=0D
---                elapsed =3D yappi.get_clock_time() - t0=0D
---=0D
---        def test():=0D
---=0D
---            ts =3D []=0D
---            for i in (0.01, 0.05, 0.1):=0D
---                t =3D threading.Thread(target=3Dburn_cpu, args=3D(i, ))=0D
---                t.name =3D "burn_cpu-%s" % str(i)=0D
---                t.start()=0D
---                ts.append(t)=0D
---            for t in ts:=0D
---                t.join()=0D
---=0D
---        yappi.set_clock_type("cpu")=0D
---        yappi.set_context_name_callback(get_thread_name)=0D
---=0D
---        yappi.start()=0D
---=0D
---        test()=0D
---=0D
---        yappi.stop()=0D
---=0D
---        tstats =3D yappi.get_thread_stats()=0D
---        r1 =3D '''=0D
---        burn_cpu-0.1      3      123145356058624  0.100105  8=0D
---        burn_cpu-0.05     2      123145361313792  0.050149  8=0D
---        burn_cpu-0.01     1      123145356058624  0.010127  2=0D
---        MainThread        0      4321620864       0.001632  6=0D
---        '''=0D
---        self.assert_ctx_stats_almost_equal(r1, tstats)=0D
---=0D
---    def test_producer_consumer_with_queues(self):=0D
---        # we currently just stress yappi, no functionality test is done h=
-ere.=0D
---        yappi.start()=0D
---        if utils.is_py3x():=0D
---            from queue import Queue=0D
---        else:=0D
---            from Queue import Queue=0D
---        from threading import Thread=0D
---        WORKER_THREAD_COUNT =3D 50=0D
---        WORK_ITEM_COUNT =3D 2000=0D
---=0D
---        def worker():=0D
---            while True:=0D
---                item =3D q.get()=0D
---                # do the work with item=0D
---                q.task_done()=0D
---=0D
---        q =3D Queue()=0D
---        for i in range(WORKER_THREAD_COUNT):=0D
---            t =3D Thread(target=3Dworker)=0D
---            t.daemon =3D True=0D
---            t.start()=0D
---=0D
---        for item in range(WORK_ITEM_COUNT):=0D
---            q.put(item)=0D
---        q.join()  # block until all tasks are done=0D
---        #yappi.get_func_stats().sort("callcount").print_all()=0D
---        yappi.stop()=0D
---=0D
---    def test_temporary_lock_waiting(self):=0D
---        yappi.start()=0D
---        _lock =3D threading.Lock()=0D
---=0D
---        def worker():=0D
---            _lock.acquire()=0D
---            try:=0D
---                time.sleep(1.0)=0D
---            finally:=0D
---                _lock.release()=0D
---=0D
---        t1 =3D threading.Thread(target=3Dworker)=0D
---        t2 =3D threading.Thread(target=3Dworker)=0D
---        t1.start()=0D
---        t2.start()=0D
---        t1.join()=0D
---        t2.join()=0D
---        #yappi.get_func_stats().sort("callcount").print_all()=0D
---        yappi.stop()=0D
---=0D
---    @unittest.skipIf(os.name !=3D "posix", "requires Posix compliant OS")=
-=0D
---    def test_signals_with_blocking_calls(self):=0D
---        import signal, os, time=0D
---=0D
---        # just to verify if signal is handled correctly and stats/yappi a=
-re not corrupted.=0D
---        def handler(signum, frame):=0D
---            raise Exception("Signal handler executed!")=0D
---=0D
---        yappi.start()=0D
---        signal.signal(signal.SIGALRM, handler)=0D
---        signal.alarm(1)=0D
---        self.assertRaises(Exception, time.sleep, 2)=0D
---        stats =3D yappi.get_func_stats()=0D
---        fsh =3D utils.find_stat_by_name(stats, "handler")=0D
---        self.assertTrue(fsh is not None)=0D
---=0D
---    @unittest.skipIf(not sys.version_info >=3D (3, 2), "requires Python 3=
-.2")=0D
---    def test_concurrent_futures(self):=0D
---        yappi.start()=0D
---        from concurrent.futures import ThreadPoolExecutor=0D
---        with ThreadPoolExecutor(max_workers=3D5) as executor:=0D
---            f =3D executor.submit(pow, 5, 2)=0D
---            self.assertEqual(f.result(), 25)=0D
---        time.sleep(1.0)=0D
---        yappi.stop()=0D
---=0D
---    @unittest.skipIf(not sys.version_info >=3D (3, 2), "requires Python 3=
-.2")=0D
---    def test_barrier(self):=0D
---        yappi.start()=0D
---        b =3D threading.Barrier(2, timeout=3D1)=0D
---=0D
---        def worker():=0D
---            try:=0D
---                b.wait()=0D
---            except threading.BrokenBarrierError:=0D
---                pass=0D
---            except Exception:=0D
---                raise Exception("BrokenBarrierError not raised")=0D
---=0D
---        t1 =3D threading.Thread(target=3Dworker)=0D
---        t1.start()=0D
---        #b.wait()=0D
---        t1.join()=0D
---        yappi.stop()=0D
---=0D
---=0D
---class NonRecursiveFunctions(utils.YappiUnitTestCase):=0D
---=0D
---    def test_abcd(self):=0D
---        _timings =3D {"a_1": 6, "b_1": 5, "c_1": 3, "d_1": 1}=0D
---        _yappi._set_test_timings(_timings)=0D
---=0D
---        def a():=0D
---            b()=0D
---=0D
---        def b():=0D
---            c()=0D
---=0D
---        def c():=0D
---            d()=0D
---=0D
---        def d():=0D
---            pass=0D
---=0D
---        stats =3D utils.run_and_get_func_stats(a)=0D
---        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
---        fsb =3D utils.find_stat_by_name(stats, 'b')=0D
---        fsc =3D utils.find_stat_by_name(stats, 'c')=0D
---        fsd =3D utils.find_stat_by_name(stats, 'd')=0D
---        cfsab =3D fsa.children[fsb]=0D
---        cfsbc =3D fsb.children[fsc]=0D
---        cfscd =3D fsc.children[fsd]=0D
---=0D
---        self.assertEqual(fsa.ttot, 6)=0D
---        self.assertEqual(fsa.tsub, 1)=0D
---        self.assertEqual(fsb.ttot, 5)=0D
---        self.assertEqual(fsb.tsub, 2)=0D
---        self.assertEqual(fsc.ttot, 3)=0D
---        self.assertEqual(fsc.tsub, 2)=0D
---        self.assertEqual(fsd.ttot, 1)=0D
---        self.assertEqual(fsd.tsub, 1)=0D
---        self.assertEqual(cfsab.ttot, 5)=0D
---        self.assertEqual(cfsab.tsub, 2)=0D
---        self.assertEqual(cfsbc.ttot, 3)=0D
---        self.assertEqual(cfsbc.tsub, 2)=0D
---        self.assertEqual(cfscd.ttot, 1)=0D
---        self.assertEqual(cfscd.tsub, 1)=0D
---=0D
---    def test_stop_in_middle(self):=0D
---        _timings =3D {"a_1": 6, "b_1": 4}=0D
---        _yappi._set_test_timings(_timings)=0D
---=0D
---        def a():=0D
---            b()=0D
---            yappi.stop()=0D
---=0D
---        def b():=0D
---            time.sleep(0.2)=0D
---=0D
---        yappi.start()=0D
---        a()=0D
---        stats =3D yappi.get_func_stats()=0D
---        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
---        fsb =3D utils.find_stat_by_name(stats, 'b')=0D
---=0D
---        self.assertEqual(fsa.ncall, 1)=0D
---        self.assertEqual(fsa.nactualcall, 0)=0D
---        self.assertEqual(fsa.ttot, 0)  # no call_leave called=0D
---        self.assertEqual(fsa.tsub, 0)  # no call_leave called=0D
---        self.assertEqual(fsb.ttot, 4)=0D
---=0D
---=0D
---class RecursiveFunctions(utils.YappiUnitTestCase):=0D
---=0D
---    def test_fibonacci(self):=0D
---=0D
---        def fib(n):=0D
---            if n > 1:=0D
---                return fib(n - 1) + fib(n - 2)=0D
---            else:=0D
---                return n=0D
---=0D
---        stats =3D utils.run_and_get_func_stats(fib, 22)=0D
---        fs =3D utils.find_stat_by_name(stats, 'fib')=0D
---        self.assertEqual(fs.ncall, 57313)=0D
---        self.assertEqual(fs.ttot, fs.tsub)=0D
---=0D
---    def test_abcadc(self):=0D
---        _timings =3D {=0D
---            "a_1": 20,=0D
---            "b_1": 19,=0D
---            "c_1": 17,=0D
---            "a_2": 13,=0D
---            "d_1": 12,=0D
---            "c_2": 10,=0D
---            "a_3": 5=0D
---        }=0D
---        _yappi._set_test_timings(_timings)=0D
---=0D
---        def a(n):=0D
---            if n =3D=3D 3:=0D
---                return=0D
---            if n =3D=3D 1 + 1:=0D
---                d(n)=0D
---            else:=0D
---                b(n)=0D
---=0D
---        def b(n):=0D
---            c(n)=0D
---=0D
---        def c(n):=0D
---            a(n + 1)=0D
---=0D
---        def d(n):=0D
---            c(n)=0D
---=0D
---        stats =3D utils.run_and_get_func_stats(a, 1)=0D
---        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
---        fsb =3D utils.find_stat_by_name(stats, 'b')=0D
---        fsc =3D utils.find_stat_by_name(stats, 'c')=0D
---        fsd =3D utils.find_stat_by_name(stats, 'd')=0D
---        self.assertEqual(fsa.ncall, 3)=0D
---        self.assertEqual(fsa.nactualcall, 1)=0D
---        self.assertEqual(fsa.ttot, 20)=0D
---        self.assertEqual(fsa.tsub, 7)=0D
---        self.assertEqual(fsb.ttot, 19)=0D
---        self.assertEqual(fsb.tsub, 2)=0D
---        self.assertEqual(fsc.ttot, 17)=0D
---        self.assertEqual(fsc.tsub, 9)=0D
---        self.assertEqual(fsd.ttot, 12)=0D
---        self.assertEqual(fsd.tsub, 2)=0D
---        cfsca =3D fsc.children[fsa]=0D
---        self.assertEqual(cfsca.nactualcall, 0)=0D
---        self.assertEqual(cfsca.ncall, 2)=0D
---        self.assertEqual(cfsca.ttot, 13)=0D
---        self.assertEqual(cfsca.tsub, 6)=0D
---=0D
---    def test_aaaa(self):=0D
---        _timings =3D {"d_1": 9, "d_2": 7, "d_3": 3, "d_4": 2}=0D
---        _yappi._set_test_timings(_timings)=0D
---=0D
---        def d(n):=0D
---            if n =3D=3D 3:=0D
---                return=0D
---            d(n + 1)=0D
---=0D
---        stats =3D utils.run_and_get_func_stats(d, 0)=0D
---        fsd =3D utils.find_stat_by_name(stats, 'd')=0D
---        self.assertEqual(fsd.ncall, 4)=0D
---        self.assertEqual(fsd.nactualcall, 1)=0D
---        self.assertEqual(fsd.ttot, 9)=0D
---        self.assertEqual(fsd.tsub, 9)=0D
---        cfsdd =3D fsd.children[fsd]=0D
---        self.assertEqual(cfsdd.ttot, 7)=0D
---        self.assertEqual(cfsdd.tsub, 7)=0D
---        self.assertEqual(cfsdd.ncall, 3)=0D
---        self.assertEqual(cfsdd.nactualcall, 0)=0D
---=0D
---    def test_abcabc(self):=0D
---        _timings =3D {=0D
---            "a_1": 20,=0D
---            "b_1": 19,=0D
---            "c_1": 17,=0D
---            "a_2": 13,=0D
---            "b_2": 11,=0D
---            "c_2": 9,=0D
---            "a_3": 6=0D
---        }=0D
---        _yappi._set_test_timings(_timings)=0D
---=0D
---        def a(n):=0D
---            if n =3D=3D 3:=0D
---                return=0D
---            else:=0D
---                b(n)=0D
---=0D
---        def b(n):=0D
---            c(n)=0D
---=0D
---        def c(n):=0D
---            a(n + 1)=0D
---=0D
---        stats =3D utils.run_and_get_func_stats(a, 1)=0D
---        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
---        fsb =3D utils.find_stat_by_name(stats, 'b')=0D
---        fsc =3D utils.find_stat_by_name(stats, 'c')=0D
---        self.assertEqual(fsa.ncall, 3)=0D
---        self.assertEqual(fsa.nactualcall, 1)=0D
---        self.assertEqual(fsa.ttot, 20)=0D
---        self.assertEqual(fsa.tsub, 9)=0D
---        self.assertEqual(fsb.ttot, 19)=0D
---        self.assertEqual(fsb.tsub, 4)=0D
---        self.assertEqual(fsc.ttot, 17)=0D
---        self.assertEqual(fsc.tsub, 7)=0D
---        cfsab =3D fsa.children[fsb]=0D
---        cfsbc =3D fsb.children[fsc]=0D
---        cfsca =3D fsc.children[fsa]=0D
---        self.assertEqual(cfsab.ttot, 19)=0D
---        self.assertEqual(cfsab.tsub, 4)=0D
---        self.assertEqual(cfsbc.ttot, 17)=0D
---        self.assertEqual(cfsbc.tsub, 7)=0D
---        self.assertEqual(cfsca.ttot, 13)=0D
---        self.assertEqual(cfsca.tsub, 8)=0D
---=0D
---    def test_abcbca(self):=0D
---        _timings =3D {"a_1": 10, "b_1": 9, "c_1": 7, "b_2": 4, "c_2": 2, =
-"a_2": 1}=0D
---        _yappi._set_test_timings(_timings)=0D
---        self._ncall =3D 1=0D
---=0D
---        def a():=0D
---            if self._ncall =3D=3D 1:=0D
---                b()=0D
---            else:=0D
---                return=0D
---=0D
---        def b():=0D
---            c()=0D
---=0D
---        def c():=0D
---            if self._ncall =3D=3D 1:=0D
---                self._ncall +=3D 1=0D
---                b()=0D
---            else:=0D
---                a()=0D
---=0D
---        stats =3D utils.run_and_get_func_stats(a)=0D
---        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
---        fsb =3D utils.find_stat_by_name(stats, 'b')=0D
---        fsc =3D utils.find_stat_by_name(stats, 'c')=0D
---        cfsab =3D fsa.children[fsb]=0D
---        cfsbc =3D fsb.children[fsc]=0D
---        cfsca =3D fsc.children[fsa]=0D
---        self.assertEqual(fsa.ttot, 10)=0D
---        self.assertEqual(fsa.tsub, 2)=0D
---        self.assertEqual(fsb.ttot, 9)=0D
---        self.assertEqual(fsb.tsub, 4)=0D
---        self.assertEqual(fsc.ttot, 7)=0D
---        self.assertEqual(fsc.tsub, 4)=0D
---        self.assertEqual(cfsab.ttot, 9)=0D
---        self.assertEqual(cfsab.tsub, 2)=0D
---        self.assertEqual(cfsbc.ttot, 7)=0D
---        self.assertEqual(cfsbc.tsub, 4)=0D
---        self.assertEqual(cfsca.ttot, 1)=0D
---        self.assertEqual(cfsca.tsub, 1)=0D
---        self.assertEqual(cfsca.ncall, 1)=0D
---        self.assertEqual(cfsca.nactualcall, 0)=0D
---=0D
---    def test_aabccb(self):=0D
---        _timings =3D {=0D
---            "a_1": 13,=0D
---            "a_2": 11,=0D
---            "b_1": 9,=0D
---            "c_1": 5,=0D
---            "c_2": 3,=0D
---            "b_2": 1=0D
---        }=0D
---        _yappi._set_test_timings(_timings)=0D
---        self._ncall =3D 1=0D
---=0D
---        def a():=0D
---            if self._ncall =3D=3D 1:=0D
---                self._ncall +=3D 1=0D
---                a()=0D
---            else:=0D
---                b()=0D
---=0D
---        def b():=0D
---            if self._ncall =3D=3D 3:=0D
---                return=0D
---            else:=0D
---                c()=0D
---=0D
---        def c():=0D
---            if self._ncall =3D=3D 2:=0D
---                self._ncall +=3D 1=0D
---                c()=0D
---            else:=0D
---                b()=0D
---=0D
---        stats =3D utils.run_and_get_func_stats(a)=0D
---        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
---        fsb =3D utils.find_stat_by_name(stats, 'b')=0D
---        fsc =3D utils.find_stat_by_name(stats, 'c')=0D
---        cfsaa =3D fsa.children[fsa.index]=0D
---        cfsab =3D fsa.children[fsb]=0D
---        cfsbc =3D fsb.children[fsc.full_name]=0D
---        cfscc =3D fsc.children[fsc]=0D
---        cfscb =3D fsc.children[fsb]=0D
---        self.assertEqual(fsb.ttot, 9)=0D
---        self.assertEqual(fsb.tsub, 5)=0D
---        self.assertEqual(cfsbc.ttot, 5)=0D
---        self.assertEqual(cfsbc.tsub, 2)=0D
---        self.assertEqual(fsa.ttot, 13)=0D
---        self.assertEqual(fsa.tsub, 4)=0D
---        self.assertEqual(cfsab.ttot, 9)=0D
---        self.assertEqual(cfsab.tsub, 4)=0D
---        self.assertEqual(cfsaa.ttot, 11)=0D
---        self.assertEqual(cfsaa.tsub, 2)=0D
---        self.assertEqual(fsc.ttot, 5)=0D
---        self.assertEqual(fsc.tsub, 4)=0D
---=0D
---    def test_abaa(self):=0D
---        _timings =3D {"a_1": 13, "b_1": 10, "a_2": 9, "a_3": 5}=0D
---        _yappi._set_test_timings(_timings)=0D
---=0D
---        self._ncall =3D 1=0D
---=0D
---        def a():=0D
---            if self._ncall =3D=3D 1:=0D
---                b()=0D
---            elif self._ncall =3D=3D 2:=0D
---                self._ncall +=3D 1=0D
---                a()=0D
---            else:=0D
---                return=0D
---=0D
---        def b():=0D
---            self._ncall +=3D 1=0D
---            a()=0D
---=0D
---        stats =3D utils.run_and_get_func_stats(a)=0D
---        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
---        fsb =3D utils.find_stat_by_name(stats, 'b')=0D
---        cfsaa =3D fsa.children[fsa]=0D
---        cfsba =3D fsb.children[fsa]=0D
---        self.assertEqual(fsb.ttot, 10)=0D
---        self.assertEqual(fsb.tsub, 1)=0D
---        self.assertEqual(fsa.ttot, 13)=0D
---        self.assertEqual(fsa.tsub, 12)=0D
---        self.assertEqual(cfsaa.ttot, 5)=0D
---        self.assertEqual(cfsaa.tsub, 5)=0D
---        self.assertEqual(cfsba.ttot, 9)=0D
---        self.assertEqual(cfsba.tsub, 4)=0D
---=0D
---    def test_aabb(self):=0D
---        _timings =3D {"a_1": 13, "a_2": 10, "b_1": 9, "b_2": 5}=0D
---        _yappi._set_test_timings(_timings)=0D
---=0D
---        self._ncall =3D 1=0D
---=0D
---        def a():=0D
---            if self._ncall =3D=3D 1:=0D
---                self._ncall +=3D 1=0D
---                a()=0D
---            elif self._ncall =3D=3D 2:=0D
---                b()=0D
---            else:=0D
---                return=0D
---=0D
---        def b():=0D
---            if self._ncall =3D=3D 2:=0D
---                self._ncall +=3D 1=0D
---                b()=0D
---            else:=0D
---                return=0D
---=0D
---        stats =3D utils.run_and_get_func_stats(a)=0D
---        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
---        fsb =3D utils.find_stat_by_name(stats, 'b')=0D
---        cfsaa =3D fsa.children[fsa]=0D
---        cfsab =3D fsa.children[fsb]=0D
---        cfsbb =3D fsb.children[fsb]=0D
---        self.assertEqual(fsa.ttot, 13)=0D
---        self.assertEqual(fsa.tsub, 4)=0D
---        self.assertEqual(fsb.ttot, 9)=0D
---        self.assertEqual(fsb.tsub, 9)=0D
---        self.assertEqual(cfsaa.ttot, 10)=0D
---        self.assertEqual(cfsaa.tsub, 1)=0D
---        self.assertEqual(cfsab.ttot, 9)=0D
---        self.assertEqual(cfsab.tsub, 4)=0D
---        self.assertEqual(cfsbb.ttot, 5)=0D
---        self.assertEqual(cfsbb.tsub, 5)=0D
---=0D
---    def test_abbb(self):=0D
---        _timings =3D {"a_1": 13, "b_1": 10, "b_2": 6, "b_3": 1}=0D
---        _yappi._set_test_timings(_timings)=0D
---=0D
---        self._ncall =3D 1=0D
---=0D
---        def a():=0D
---            if self._ncall =3D=3D 1:=0D
---                b()=0D
---=0D
---        def b():=0D
---            if self._ncall =3D=3D 3:=0D
---                return=0D
---            self._ncall +=3D 1=0D
---            b()=0D
---=0D
---        stats =3D utils.run_and_get_func_stats(a)=0D
---        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
---        fsb =3D utils.find_stat_by_name(stats, 'b')=0D
---        cfsab =3D fsa.children[fsb]=0D
---        cfsbb =3D fsb.children[fsb]=0D
---        self.assertEqual(fsa.ttot, 13)=0D
---        self.assertEqual(fsa.tsub, 3)=0D
---        self.assertEqual(fsb.ttot, 10)=0D
---        self.assertEqual(fsb.tsub, 10)=0D
---        self.assertEqual(fsb.ncall, 3)=0D
---        self.assertEqual(fsb.nactualcall, 1)=0D
---        self.assertEqual(cfsab.ttot, 10)=0D
---        self.assertEqual(cfsab.tsub, 4)=0D
---        self.assertEqual(cfsbb.ttot, 6)=0D
---        self.assertEqual(cfsbb.tsub, 6)=0D
---        self.assertEqual(cfsbb.nactualcall, 0)=0D
---        self.assertEqual(cfsbb.ncall, 2)=0D
---=0D
---    def test_aaab(self):=0D
---        _timings =3D {"a_1": 13, "a_2": 10, "a_3": 6, "b_1": 1}=0D
---        _yappi._set_test_timings(_timings)=0D
---=0D
---        self._ncall =3D 1=0D
---=0D
---        def a():=0D
---            if self._ncall =3D=3D 3:=0D
---                b()=0D
---                return=0D
---            self._ncall +=3D 1=0D
---            a()=0D
---=0D
---        def b():=0D
---            return=0D
---=0D
---        stats =3D utils.run_and_get_func_stats(a)=0D
---        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
---        fsb =3D utils.find_stat_by_name(stats, 'b')=0D
---        cfsaa =3D fsa.children[fsa]=0D
---        cfsab =3D fsa.children[fsb]=0D
---        self.assertEqual(fsa.ttot, 13)=0D
---        self.assertEqual(fsa.tsub, 12)=0D
---        self.assertEqual(fsb.ttot, 1)=0D
---        self.assertEqual(fsb.tsub, 1)=0D
---        self.assertEqual(cfsaa.ttot, 10)=0D
---        self.assertEqual(cfsaa.tsub, 9)=0D
---        self.assertEqual(cfsab.ttot, 1)=0D
---        self.assertEqual(cfsab.tsub, 1)=0D
---=0D
---    def test_abab(self):=0D
---        _timings =3D {"a_1": 13, "b_1": 10, "a_2": 6, "b_2": 1}=0D
---        _yappi._set_test_timings(_timings)=0D
---=0D
---        self._ncall =3D 1=0D
---=0D
---        def a():=0D
---            b()=0D
---=0D
---        def b():=0D
---            if self._ncall =3D=3D 2:=0D
---                return=0D
---            self._ncall +=3D 1=0D
---            a()=0D
---=0D
---        stats =3D utils.run_and_get_func_stats(a)=0D
---        fsa =3D utils.find_stat_by_name(stats, 'a')=0D
---        fsb =3D utils.find_stat_by_name(stats, 'b')=0D
---        cfsab =3D fsa.children[fsb]=0D
---        cfsba =3D fsb.children[fsa]=0D
---        self.assertEqual(fsa.ttot, 13)=0D
---        self.assertEqual(fsa.tsub, 8)=0D
---        self.assertEqual(fsb.ttot, 10)=0D
---        self.assertEqual(fsb.tsub, 5)=0D
---        self.assertEqual(cfsab.ttot, 10)=0D
---        self.assertEqual(cfsab.tsub, 5)=0D
---        self.assertEqual(cfsab.ncall, 2)=0D
---        self.assertEqual(cfsab.nactualcall, 1)=0D
---        self.assertEqual(cfsba.ttot, 6)=0D
---        self.assertEqual(cfsba.tsub, 5)=0D
---=0D
---=0D
---if __name__ =3D=3D '__main__':=0D
---    #     import sys;sys.argv =3D ['', 'BasicUsage.test_run_as_script']=0D
---    #     import sys;sys.argv =3D ['', 'MultithreadedScenarios.test_subse=
-quent_profile']=0D
---    unittest.main()=0D
--+import os
--+import sys
--+import time
--+import threading
--+import unittest
--+import yappi
--+import _yappi
--+import tests.utils as utils
--+import multiprocessing  # added to fix http://bugs.python.org/issue15881 =
-for > Py2.6
--+import subprocess
+-diff --git a/src/programs/pkcheck.c b/src/programs/pkcheck.c
+-index f1bb4e1..768525c 100644
+---- a/src/programs/pkcheck.c
+-+++ b/src/programs/pkcheck.c
+-@@ -363,6 +363,11 @@ main (int argc, char *argv[])
+-   local_agent_handle = NULL;
+-   ret = 126;
+- 
+-+  if (argc < 1)
+-+    {
+-+      exit(126);
+-+    }
 -+
--+_counter =3D 0
+-   /* Disable remote file access from GIO. */
+-   setenv ("GIO_USE_VFS", "local", 1);
+- 
+-diff --git a/src/programs/pkexec.c b/src/programs/pkexec.c
+-index 7698c5c..84e5ef6 100644
+---- a/src/programs/pkexec.c
+-+++ b/src/programs/pkexec.c
+-@@ -488,6 +488,15 @@ main (int argc, char *argv[])
+-   pid_t pid_of_caller;
+-   gpointer local_agent_handle;
+- 
+-+
+-+  /*
+-+   * If 'pkexec' is called THIS wrong, someone's probably evil-doing. Don't be nice, just bail out.
+-+   */
+-+  if (argc<1)
+-+    {
+-+      exit(127);
+-+    }
+-+
+-   ret = 127;
+-   authority = NULL;
+-   subject = NULL;
+-@@ -614,10 +623,10 @@ main (int argc, char *argv[])
+- 
+-       path = g_strdup (pwstruct.pw_shell);
+-       if (!path)
+--	{
+-+        {
+-           g_printerr ("No shell configured or error retrieving pw_shell\n");
+-           goto out;
+--	}
+-+        }
+-       /* If you change this, be sure to change the if (!command_line)
+- 	 case below too */
+-       command_line = g_strdup (path);
+-@@ -636,7 +645,15 @@ main (int argc, char *argv[])
+-           goto out;
+-         }
+-       g_free (path);
+--      argv[n] = path = s;
+-+      path = s;
+-+
+-+      /* argc<2 and pkexec runs just shell, argv is guaranteed to be null-terminated.
+-+       * /-less shell shouldn't happen, but let's be defensive and don't write to null-termination
+-+       */
+-+      if (argv[n] != NULL)
+-+      {
+-+        argv[n] = path;
+-+      }
+-     }
+-   if (access (path, F_OK) != 0)
+-     {
+--- 
+-2.20.1
+-
+diff --git a/meta-oe/recipes-extended/polkit/polkit/0002-CVE-2021-4115-GHSL-2021-077-fix.patch b/meta-oe/recipes-extended/polkit/polkit/0002-CVE-2021-4115-GHSL-2021-077-fix.patch
+deleted file mode 100644
+index fcad872dc..000000000
+--- a/meta-oe/recipes-extended/polkit/polkit/0002-CVE-2021-4115-GHSL-2021-077-fix.patch
++++ /dev/null
+@@ -1,88 +0,0 @@
+-From c86aea01a06ad4d6c428137e9cfe2f74b1ae7f01 Mon Sep 17 00:00:00 2001
+-From: Jan Rybar <jrybar@redhat.com>
+-Date: Mon, 21 Feb 2022 08:29:05 +0000
+-Subject: [PATCH 2/3] CVE-2021-4115 (GHSL-2021-077) fix
+-
+-Signed-off-by: Mikko Rapeli <mikko.rapeli@bmw.de>
+-
+----
+- src/polkit/polkitsystembusname.c | 38 ++++++++++++++++++++++++++++----
+- 1 file changed, 34 insertions(+), 4 deletions(-)
+-
+-CVE: CVE-2021-4115
+-Upstream-Status: Backport [41cb093f554da8772362654a128a84dd8a5542a7]
+-
+-diff --git a/src/polkit/polkitsystembusname.c b/src/polkit/polkitsystembusname.c
+-index 8ed1363..2fbf5f1 100644
+---- a/src/polkit/polkitsystembusname.c
+-+++ b/src/polkit/polkitsystembusname.c
+-@@ -62,6 +62,10 @@ enum
+-   PROP_NAME,
+- };
+- 
+-+
+-+guint8 dbus_call_respond_fails;      // has to be global because of callback
 -+
 -+
--+class BasicUsage(utils.YappiUnitTestCase):
+- static void subject_iface_init (PolkitSubjectIface *subject_iface);
+- 
+- G_DEFINE_TYPE_WITH_CODE (PolkitSystemBusName, polkit_system_bus_name, G_TYPE_OBJECT,
+-@@ -364,6 +368,7 @@ on_retrieved_unix_uid_pid (GObject              *src,
+-   if (!v)
+-     {
+-       data->caught_error = TRUE;
+-+      dbus_call_respond_fails += 1;
+-     }
+-   else
+-     {
+-@@ -405,6 +410,8 @@ polkit_system_bus_name_get_creds_sync (PolkitSystemBusName           *system_bus
+-   tmp_context = g_main_context_new ();
+-   g_main_context_push_thread_default (tmp_context);
+- 
+-+  dbus_call_respond_fails = 0;
 -+
--+    def test_callback_function_int_return_overflow(self):
--+        # this test is just here to check if any errors are generated, as=
- the err
--+        # is printed in C side, I did not include it here. THere are ways=
- to test
--+        # this deterministically, I did not bother
--+        import ctypes
+-   /* Do two async calls as it's basically as fast as one sync call.
+-    */
+-   g_dbus_connection_call (connection,
+-@@ -432,11 +439,34 @@ polkit_system_bus_name_get_creds_sync (PolkitSystemBusName           *system_bus
+- 			  on_retrieved_unix_uid_pid,
+- 			  &data);
+- 
+--  while (!((data.retrieved_uid && data.retrieved_pid) || data.caught_error))
+--    g_main_context_iteration (tmp_context, TRUE);
+-+  while (TRUE)
+-+  {
+-+    /* If one dbus call returns error, we must wait until the other call
+-+     * calls _call_finish(), otherwise fd leak is possible.
+-+     * Resolves: GHSL-2021-077
+-+    */
+- 
+--  if (data.caught_error)
+--    goto out;
+-+    if ( (dbus_call_respond_fails > 1) )
+-+    {
+-+      // we got two faults, we can leave
+-+      goto out;
+-+    }
 -+
--+        def _unsigned_overflow_margin():
--+            return 2**(ctypes.sizeof(ctypes.c_void_p) * 8) - 1
+-+    if ((data.caught_error && (data.retrieved_pid || data.retrieved_uid)))
+-+    {
+-+      // we got one fault and the other call finally finished, we can leave
+-+      goto out;
+-+    }
 -+
--+        def foo():
--+            pass
+-+    if ( !(data.retrieved_uid && data.retrieved_pid) )
+-+    {
+-+      g_main_context_iteration (tmp_context, TRUE);
+-+    }
+-+    else
+-+    {
+-+      break;
+-+    }
+-+  }
+- 
+-   if (out_uid)
+-     *out_uid = data.uid;
+--- 
+-2.20.1
+-
+diff --git a/meta-oe/recipes-extended/polkit/polkit/0002-jsauthority-port-to-mozjs-91.patch b/meta-oe/recipes-extended/polkit/polkit/0002-jsauthority-port-to-mozjs-91.patch
+deleted file mode 100644
+index 5b3660da2..000000000
+--- a/meta-oe/recipes-extended/polkit/polkit/0002-jsauthority-port-to-mozjs-91.patch
++++ /dev/null
+@@ -1,38 +0,0 @@
+-From 4ce27b66bb07b72cb96d3d43a75108a5a6e7e156 Mon Sep 17 00:00:00 2001
+-From: Xi Ruoyao <xry111@mengyan1223.wang>
+-Date: Tue, 10 Aug 2021 19:09:42 +0800
+-Subject: [PATCH] jsauthority: port to mozjs-91
+-
+-Upstream-Status: Submitted [https://gitlab.freedesktop.org/polkit/polkit/-/merge_requests/92]
+-Signed-off-by: Alexander Kanavin <alex@linutronix.de>
+----
+- configure.ac | 2 +-
+- meson.build  | 2 +-
+- 2 files changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/configure.ac b/configure.ac
+-index d807086..5a7fc11 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -80,7 +80,7 @@ PKG_CHECK_MODULES(GLIB, [gmodule-2.0 gio-unix-2.0 >= 2.30.0])
+- AC_SUBST(GLIB_CFLAGS)
+- AC_SUBST(GLIB_LIBS)
+- 
+--PKG_CHECK_MODULES(LIBJS, [mozjs-78])
+-+PKG_CHECK_MODULES(LIBJS, [mozjs-91])
+- 
+- AC_SUBST(LIBJS_CFLAGS)
+- AC_SUBST(LIBJS_CXXFLAGS)
+-diff --git a/meson.build b/meson.build
+-index b3702be..733bbff 100644
+---- a/meson.build
+-+++ b/meson.build
+-@@ -126,7 +126,7 @@ expat_dep = dependency('expat')
+- assert(cc.has_header('expat.h', dependencies: expat_dep), 'Can\'t find expat.h. Please install expat.')
+- assert(cc.has_function('XML_ParserCreate', dependencies: expat_dep), 'Can\'t find expat library. Please install expat.')
+- 
+--mozjs_dep = dependency('mozjs-78')
+-+mozjs_dep = dependency('mozjs-91')
+- 
+- dbus_dep = dependency('dbus-1')
+- dbus_confdir = dbus_dep.get_pkgconfig_variable('datadir', define_variable: ['datadir', pk_prefix / pk_datadir])   #changed from sysconfdir with respect to commit#8eada3836465838
+diff --git a/meta-oe/recipes-extended/polkit/polkit/0003-Added-support-for-duktape-as-JS-engine.patch b/meta-oe/recipes-extended/polkit/polkit/0003-Added-support-for-duktape-as-JS-engine.patch
+deleted file mode 100644
+index b8562f8ce..000000000
+--- a/meta-oe/recipes-extended/polkit/polkit/0003-Added-support-for-duktape-as-JS-engine.patch
++++ /dev/null
+@@ -1,3459 +0,0 @@
+-From 4af72493cb380ab5ce0dd7c5bcd25a8b5457d770 Mon Sep 17 00:00:00 2001
+-From: Gustavo Lima Chaves <limachaves@gmail.com>
+-Date: Tue, 25 Jan 2022 09:43:21 +0000
+-Subject: [PATCH] Added support for duktape as JS engine
+-
+-Original author: Wu Xiaotian (@yetist)
+-Resurrection author, runaway-killer author: Gustavo Lima Chaves (@limachaves)
+-
+-Signed-off-by: Mikko Rapeli <mikko.rapeli@bmw.de>
+-
+-Upstream-Status: Backport [c7fc4e1b61f0fd82fc697c19c604af7e9fb291a2]
+-Dropped change to .gitlab-ci.yml and adapted configure.ac due to other
+-patches in meta-oe.
+-
+----
+- buildutil/ax_pthread.m4                       |  522 ++++++++
+- configure.ac                                  |   34 +-
+- docs/man/polkit.xml                           |    4 +-
+- meson.build                                   |   16 +-
+- meson_options.txt                             |    1 +
+- src/polkitbackend/Makefile.am                 |   17 +-
+- src/polkitbackend/meson.build                 |   14 +-
+- src/polkitbackend/polkitbackendcommon.c       |  530 +++++++++
+- src/polkitbackend/polkitbackendcommon.h       |  158 +++
+- .../polkitbackendduktapeauthority.c           | 1051 +++++++++++++++++
+- .../polkitbackendjsauthority.cpp              |  721 +----------
+- .../etc/polkit-1/rules.d/10-testing.rules     |    6 +-
+- .../test-polkitbackendjsauthority.c           |    2 +-
+- 13 files changed, 2398 insertions(+), 678 deletions(-)
+- create mode 100644 buildutil/ax_pthread.m4
+- create mode 100644 src/polkitbackend/polkitbackendcommon.c
+- create mode 100644 src/polkitbackend/polkitbackendcommon.h
+- create mode 100644 src/polkitbackend/polkitbackendduktapeauthority.c
+-
+-diff --git a/buildutil/ax_pthread.m4 b/buildutil/ax_pthread.m4
+-new file mode 100644
+-index 0000000..9f35d13
+---- /dev/null
+-+++ b/buildutil/ax_pthread.m4
+-@@ -0,0 +1,522 @@
+-+# ===========================================================================
+-+#        https://www.gnu.org/software/autoconf-archive/ax_pthread.html
+-+# ===========================================================================
+-+#
+-+# SYNOPSIS
+-+#
+-+#   AX_PTHREAD([ACTION-IF-FOUND[, ACTION-IF-NOT-FOUND]])
+-+#
+-+# DESCRIPTION
+-+#
+-+#   This macro figures out how to build C programs using POSIX threads. It
+-+#   sets the PTHREAD_LIBS output variable to the threads library and linker
+-+#   flags, and the PTHREAD_CFLAGS output variable to any special C compiler
+-+#   flags that are needed. (The user can also force certain compiler
+-+#   flags/libs to be tested by setting these environment variables.)
+-+#
+-+#   Also sets PTHREAD_CC and PTHREAD_CXX to any special C compiler that is
+-+#   needed for multi-threaded programs (defaults to the value of CC
+-+#   respectively CXX otherwise). (This is necessary on e.g. AIX to use the
+-+#   special cc_r/CC_r compiler alias.)
+-+#
+-+#   NOTE: You are assumed to not only compile your program with these flags,
+-+#   but also to link with them as well. For example, you might link with
+-+#   $PTHREAD_CC $CFLAGS $PTHREAD_CFLAGS $LDFLAGS ... $PTHREAD_LIBS $LIBS
+-+#   $PTHREAD_CXX $CXXFLAGS $PTHREAD_CFLAGS $LDFLAGS ... $PTHREAD_LIBS $LIBS
+-+#
+-+#   If you are only building threaded programs, you may wish to use these
+-+#   variables in your default LIBS, CFLAGS, and CC:
+-+#
+-+#     LIBS="$PTHREAD_LIBS $LIBS"
+-+#     CFLAGS="$CFLAGS $PTHREAD_CFLAGS"
+-+#     CXXFLAGS="$CXXFLAGS $PTHREAD_CFLAGS"
+-+#     CC="$PTHREAD_CC"
+-+#     CXX="$PTHREAD_CXX"
+-+#
+-+#   In addition, if the PTHREAD_CREATE_JOINABLE thread-attribute constant
+-+#   has a nonstandard name, this macro defines PTHREAD_CREATE_JOINABLE to
+-+#   that name (e.g. PTHREAD_CREATE_UNDETACHED on AIX).
+-+#
+-+#   Also HAVE_PTHREAD_PRIO_INHERIT is defined if pthread is found and the
+-+#   PTHREAD_PRIO_INHERIT symbol is defined when compiling with
+-+#   PTHREAD_CFLAGS.
+-+#
+-+#   ACTION-IF-FOUND is a list of shell commands to run if a threads library
+-+#   is found, and ACTION-IF-NOT-FOUND is a list of commands to run it if it
+-+#   is not found. If ACTION-IF-FOUND is not specified, the default action
+-+#   will define HAVE_PTHREAD.
+-+#
+-+#   Please let the authors know if this macro fails on any platform, or if
+-+#   you have any other suggestions or comments. This macro was based on work
+-+#   by SGJ on autoconf scripts for FFTW (http://www.fftw.org/) (with help
+-+#   from M. Frigo), as well as ac_pthread and hb_pthread macros posted by
+-+#   Alejandro Forero Cuervo to the autoconf macro repository. We are also
+-+#   grateful for the helpful feedback of numerous users.
+-+#
+-+#   Updated for Autoconf 2.68 by Daniel Richard G.
+-+#
+-+# LICENSE
+-+#
+-+#   Copyright (c) 2008 Steven G. Johnson <stevenj@alum.mit.edu>
+-+#   Copyright (c) 2011 Daniel Richard G. <skunk@iSKUNK.ORG>
+-+#   Copyright (c) 2019 Marc Stevens <marc.stevens@cwi.nl>
+-+#
+-+#   This program is free software: you can redistribute it and/or modify it
+-+#   under the terms of the GNU General Public License as published by the
+-+#   Free Software Foundation, either version 3 of the License, or (at your
+-+#   option) any later version.
+-+#
+-+#   This program is distributed in the hope that it will be useful, but
+-+#   WITHOUT ANY WARRANTY; without even the implied warranty of
+-+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+-+#   Public License for more details.
+-+#
+-+#   You should have received a copy of the GNU General Public License along
+-+#   with this program. If not, see <https://www.gnu.org/licenses/>.
+-+#
+-+#   As a special exception, the respective Autoconf Macro's copyright owner
+-+#   gives unlimited permission to copy, distribute and modify the configure
+-+#   scripts that are the output of Autoconf when processing the Macro. You
+-+#   need not follow the terms of the GNU General Public License when using
+-+#   or distributing such scripts, even though portions of the text of the
+-+#   Macro appear in them. The GNU General Public License (GPL) does govern
+-+#   all other use of the material that constitutes the Autoconf Macro.
+-+#
+-+#   This special exception to the GPL applies to versions of the Autoconf
+-+#   Macro released by the Autoconf Archive. When you make and distribute a
+-+#   modified version of the Autoconf Macro, you may extend this special
+-+#   exception to the GPL to apply to your modified version as well.
 -+
--+        #with utils.captured_output() as (out, err):
--+        yappi.set_context_id_callback(_unsigned_overflow_margin)
--+        yappi.set_tag_callback(_unsigned_overflow_margin)
--+        yappi.start()
--+        foo()
+-+#serial 31
 -+
--+    def test_issue60(self):
+-+AU_ALIAS([ACX_PTHREAD], [AX_PTHREAD])
+-+AC_DEFUN([AX_PTHREAD], [
+-+AC_REQUIRE([AC_CANONICAL_HOST])
+-+AC_REQUIRE([AC_PROG_CC])
+-+AC_REQUIRE([AC_PROG_SED])
+-+AC_LANG_PUSH([C])
+-+ax_pthread_ok=no
 -+
--+        def foo():
--+            buf =3D bytearray()
--+            buf +=3D b't' * 200
--+            view =3D memoryview(buf)[10:]
--+            view =3D view.tobytes()
--+            del buf[:10]  # this throws exception
--+            return view
+-+# We used to check for pthread.h first, but this fails if pthread.h
+-+# requires special compiler flags (e.g. on Tru64 or Sequent).
+-+# It gets checked for in the link test anyway.
 -+
--+        yappi.start(builtins=3DTrue)
--+        foo()
--+        self.assertTrue(
--+            len(
--+                yappi.get_func_stats(
--+                    filter_callback=3Dlambda x: yappi.
--+                    func_matches(x, [memoryview.tobytes])
--+                )
--+            ) > 0
--+        )
--+        yappi.stop()
+-+# First of all, check if the user has set any of the PTHREAD_LIBS,
+-+# etcetera environment variables, and if threads linking works using
+-+# them:
+-+if test "x$PTHREAD_CFLAGS$PTHREAD_LIBS" != "x"; then
+-+        ax_pthread_save_CC="$CC"
+-+        ax_pthread_save_CFLAGS="$CFLAGS"
+-+        ax_pthread_save_LIBS="$LIBS"
+-+        AS_IF([test "x$PTHREAD_CC" != "x"], [CC="$PTHREAD_CC"])
+-+        AS_IF([test "x$PTHREAD_CXX" != "x"], [CXX="$PTHREAD_CXX"])
+-+        CFLAGS="$CFLAGS $PTHREAD_CFLAGS"
+-+        LIBS="$PTHREAD_LIBS $LIBS"
+-+        AC_MSG_CHECKING([for pthread_join using $CC $PTHREAD_CFLAGS $PTHREAD_LIBS])
+-+        AC_LINK_IFELSE([AC_LANG_CALL([], [pthread_join])], [ax_pthread_ok=yes])
+-+        AC_MSG_RESULT([$ax_pthread_ok])
+-+        if test "x$ax_pthread_ok" = "xno"; then
+-+                PTHREAD_LIBS=""
+-+                PTHREAD_CFLAGS=""
+-+        fi
+-+        CC="$ax_pthread_save_CC"
+-+        CFLAGS="$ax_pthread_save_CFLAGS"
+-+        LIBS="$ax_pthread_save_LIBS"
+-+fi
 -+
--+    def test_issue54(self):
+-+# We must check for the threads library under a number of different
+-+# names; the ordering is very important because some systems
+-+# (e.g. DEC) have both -lpthread and -lpthreads, where one of the
+-+# libraries is broken (non-POSIX).
 -+
--+        def _tag_cbk():
--+            global _counter
--+            _counter +=3D 1
--+            return _counter
+-+# Create a list of thread flags to try. Items with a "," contain both
+-+# C compiler flags (before ",") and linker flags (after ","). Other items
+-+# starting with a "-" are C compiler flags, and remaining items are
+-+# library names, except for "none" which indicates that we try without
+-+# any flags at all, and "pthread-config" which is a program returning
+-+# the flags for the Pth emulation library.
 -+
--+        def a():
--+            pass
+-+ax_pthread_flags="pthreads none -Kthread -pthread -pthreads -mthreads pthread --thread-safe -mt pthread-config"
 -+
--+        def b():
--+            pass
+-+# The ordering *is* (sometimes) important.  Some notes on the
+-+# individual items follow:
 -+
--+        yappi.set_tag_callback(_tag_cbk)
--+        yappi.start()
--+        a()
--+        a()
--+        a()
--+        yappi.stop()
--+        stats =3D yappi.get_func_stats()
--+        self.assertEqual(stats.pop().ncall, 3)  # aggregated if no tag is=
- given
--+        stats =3D yappi.get_func_stats(tag=3D1)
+-+# pthreads: AIX (must check this before -lpthread)
+-+# none: in case threads are in libc; should be tried before -Kthread and
+-+#       other compiler flags to prevent continual compiler warnings
+-+# -Kthread: Sequent (threads in libc, but -Kthread needed for pthread.h)
+-+# -pthread: Linux/gcc (kernel threads), BSD/gcc (userland threads), Tru64
+-+#           (Note: HP C rejects this with "bad form for `-t' option")
+-+# -pthreads: Solaris/gcc (Note: HP C also rejects)
+-+# -mt: Sun Workshop C (may only link SunOS threads [-lthread], but it
+-+#      doesn't hurt to check since this sometimes defines pthreads and
+-+#      -D_REENTRANT too), HP C (must be checked before -lpthread, which
+-+#      is present but should not be used directly; and before -mthreads,
+-+#      because the compiler interprets this as "-mt" + "-hreads")
+-+# -mthreads: Mingw32/gcc, Lynx/gcc
+-+# pthread: Linux, etcetera
+-+# --thread-safe: KAI C++
+-+# pthread-config: use pthread-config program (for GNU Pth library)
 -+
--+        for i in range(1, 3):
--+            stats =3D yappi.get_func_stats(tag=3Di)
--+            stats =3D yappi.get_func_stats(
--+                tag=3Di, filter_callback=3Dlambda x: yappi.func_matches(x=
-, [a])
--+            )
+-+case $host_os in
 -+
--+            stat =3D stats.pop()
--+            self.assertEqual(stat.ncall, 1)
+-+        freebsd*)
 -+
--+        yappi.set_tag_callback(None)
--+        yappi.clear_stats()
--+        yappi.start()
--+        b()
--+        b()
--+        stats =3D yappi.get_func_stats()
--+        self.assertEqual(len(stats), 1)
--+        stat =3D stats.pop()
--+        self.assertEqual(stat.ncall, 2)
+-+        # -kthread: FreeBSD kernel threads (preferred to -pthread since SMP-able)
+-+        # lthread: LinuxThreads port on FreeBSD (also preferred to -pthread)
 -+
--+    def test_filter(self):
+-+        ax_pthread_flags="-kthread lthread $ax_pthread_flags"
+-+        ;;
 -+
--+        def a():
--+            pass
+-+        hpux*)
 -+
--+        def b():
--+            a()
+-+        # From the cc(1) man page: "[-mt] Sets various -D flags to enable
+-+        # multi-threading and also sets -lpthread."
 -+
--+        def c():
--+            b()
+-+        ax_pthread_flags="-mt -pthread pthread $ax_pthread_flags"
+-+        ;;
 -+
--+        _TCOUNT =3D 5
+-+        openedition*)
 -+
--+        ts =3D []
--+        yappi.start()
--+        for i in range(_TCOUNT):
--+            t =3D threading.Thread(target=3Dc)
--+            t.start()
--+            ts.append(t)
+-+        # IBM z/OS requires a feature-test macro to be defined in order to
+-+        # enable POSIX threads at all, so give the user a hint if this is
+-+        # not set. (We don't define these ourselves, as they can affect
+-+        # other portions of the system API in unpredictable ways.)
 -+
--+        for t in ts:
--+            t.join()
+-+        AC_EGREP_CPP([AX_PTHREAD_ZOS_MISSING],
+-+            [
+-+#            if !defined(_OPEN_THREADS) && !defined(_UNIX03_THREADS)
+-+             AX_PTHREAD_ZOS_MISSING
+-+#            endif
+-+            ],
+-+            [AC_MSG_WARN([IBM z/OS requires -D_OPEN_THREADS or -D_UNIX03_THREADS to enable pthreads support.])])
+-+        ;;
 -+
--+        yappi.stop()
+-+        solaris*)
 -+
--+        ctx_ids =3D []
--+        for tstat in yappi.get_thread_stats():
--+            if tstat.name =3D=3D '_MainThread':
--+                main_ctx_id =3D tstat.id
--+            else:
--+                ctx_ids.append(tstat.id)
+-+        # On Solaris (at least, for some versions), libc contains stubbed
+-+        # (non-functional) versions of the pthreads routines, so link-based
+-+        # tests will erroneously succeed. (N.B.: The stubs are missing
+-+        # pthread_cleanup_push, or rather a function called by this macro,
+-+        # so we could check for that, but who knows whether they'll stub
+-+        # that too in a future libc.)  So we'll check first for the
+-+        # standard Solaris way of linking pthreads (-mt -lpthread).
 -+
--+        fstats =3D yappi.get_func_stats(filter=3D{"ctx_id": 9})
--+        self.assertTrue(fstats.empty())
--+        fstats =3D yappi.get_func_stats(
--+            filter=3D{
--+                "ctx_id": main_ctx_id,
--+                "name": "c"
+-+        ax_pthread_flags="-mt,-lpthread pthread $ax_pthread_flags"
+-+        ;;
+-+esac
+-+
+-+# Are we compiling with Clang?
+-+
+-+AC_CACHE_CHECK([whether $CC is Clang],
+-+    [ax_cv_PTHREAD_CLANG],
+-+    [ax_cv_PTHREAD_CLANG=no
+-+     # Note that Autoconf sets GCC=yes for Clang as well as GCC
+-+     if test "x$GCC" = "xyes"; then
+-+        AC_EGREP_CPP([AX_PTHREAD_CC_IS_CLANG],
+-+            [/* Note: Clang 2.7 lacks __clang_[a-z]+__ */
+-+#            if defined(__clang__) && defined(__llvm__)
+-+             AX_PTHREAD_CC_IS_CLANG
+-+#            endif
+-+            ],
+-+            [ax_cv_PTHREAD_CLANG=yes])
+-+     fi
+-+    ])
+-+ax_pthread_clang="$ax_cv_PTHREAD_CLANG"
+-+
+-+
+-+# GCC generally uses -pthread, or -pthreads on some platforms (e.g. SPARC)
+-+
+-+# Note that for GCC and Clang -pthread generally implies -lpthread,
+-+# except when -nostdlib is passed.
+-+# This is problematic using libtool to build C++ shared libraries with pthread:
+-+# [1] https://gcc.gnu.org/bugzilla/show_bug.cgi?id=25460
+-+# [2] https://bugzilla.redhat.com/show_bug.cgi?id=661333
+-+# [3] https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=468555
+-+# To solve this, first try -pthread together with -lpthread for GCC
+-+
+-+AS_IF([test "x$GCC" = "xyes"],
+-+      [ax_pthread_flags="-pthread,-lpthread -pthread -pthreads $ax_pthread_flags"])
+-+
+-+# Clang takes -pthread (never supported any other flag), but we'll try with -lpthread first
+-+
+-+AS_IF([test "x$ax_pthread_clang" = "xyes"],
+-+      [ax_pthread_flags="-pthread,-lpthread -pthread"])
+-+
+-+
+-+# The presence of a feature test macro requesting re-entrant function
+-+# definitions is, on some systems, a strong hint that pthreads support is
+-+# correctly enabled
+-+
+-+case $host_os in
+-+        darwin* | hpux* | linux* | osf* | solaris*)
+-+        ax_pthread_check_macro="_REENTRANT"
+-+        ;;
+-+
+-+        aix*)
+-+        ax_pthread_check_macro="_THREAD_SAFE"
+-+        ;;
+-+
+-+        *)
+-+        ax_pthread_check_macro="--"
+-+        ;;
+-+esac
+-+AS_IF([test "x$ax_pthread_check_macro" = "x--"],
+-+      [ax_pthread_check_cond=0],
+-+      [ax_pthread_check_cond="!defined($ax_pthread_check_macro)"])
+-+
+-+
+-+if test "x$ax_pthread_ok" = "xno"; then
+-+for ax_pthread_try_flag in $ax_pthread_flags; do
+-+
+-+        case $ax_pthread_try_flag in
+-+                none)
+-+                AC_MSG_CHECKING([whether pthreads work without any flags])
+-+                ;;
+-+
+-+                *,*)
+-+                PTHREAD_CFLAGS=`echo $ax_pthread_try_flag | sed "s/^\(.*\),\(.*\)$/\1/"`
+-+                PTHREAD_LIBS=`echo $ax_pthread_try_flag | sed "s/^\(.*\),\(.*\)$/\2/"`
+-+                AC_MSG_CHECKING([whether pthreads work with "$PTHREAD_CFLAGS" and "$PTHREAD_LIBS"])
+-+                ;;
+-+
+-+                -*)
+-+                AC_MSG_CHECKING([whether pthreads work with $ax_pthread_try_flag])
+-+                PTHREAD_CFLAGS="$ax_pthread_try_flag"
+-+                ;;
+-+
+-+                pthread-config)
+-+                AC_CHECK_PROG([ax_pthread_config], [pthread-config], [yes], [no])
+-+                AS_IF([test "x$ax_pthread_config" = "xno"], [continue])
+-+                PTHREAD_CFLAGS="`pthread-config --cflags`"
+-+                PTHREAD_LIBS="`pthread-config --ldflags` `pthread-config --libs`"
+-+                ;;
+-+
+-+                *)
+-+                AC_MSG_CHECKING([for the pthreads library -l$ax_pthread_try_flag])
+-+                PTHREAD_LIBS="-l$ax_pthread_try_flag"
+-+                ;;
+-+        esac
+-+
+-+        ax_pthread_save_CFLAGS="$CFLAGS"
+-+        ax_pthread_save_LIBS="$LIBS"
+-+        CFLAGS="$CFLAGS $PTHREAD_CFLAGS"
+-+        LIBS="$PTHREAD_LIBS $LIBS"
+-+
+-+        # Check for various functions.  We must include pthread.h,
+-+        # since some functions may be macros.  (On the Sequent, we
+-+        # need a special flag -Kthread to make this header compile.)
+-+        # We check for pthread_join because it is in -lpthread on IRIX
+-+        # while pthread_create is in libc.  We check for pthread_attr_init
+-+        # due to DEC craziness with -lpthreads.  We check for
+-+        # pthread_cleanup_push because it is one of the few pthread
+-+        # functions on Solaris that doesn't have a non-functional libc stub.
+-+        # We try pthread_create on general principles.
+-+
+-+        AC_LINK_IFELSE([AC_LANG_PROGRAM([#include <pthread.h>
+-+#                       if $ax_pthread_check_cond
+-+#                        error "$ax_pthread_check_macro must be defined"
+-+#                       endif
+-+                        static void *some_global = NULL;
+-+                        static void routine(void *a)
+-+                          {
+-+                             /* To avoid any unused-parameter or
+-+                                unused-but-set-parameter warning.  */
+-+                             some_global = a;
+-+                          }
+-+                        static void *start_routine(void *a) { return a; }],
+-+                       [pthread_t th; pthread_attr_t attr;
+-+                        pthread_create(&th, 0, start_routine, 0);
+-+                        pthread_join(th, 0);
+-+                        pthread_attr_init(&attr);
+-+                        pthread_cleanup_push(routine, 0);
+-+                        pthread_cleanup_pop(0) /* ; */])],
+-+            [ax_pthread_ok=yes],
+-+            [])
+-+
+-+        CFLAGS="$ax_pthread_save_CFLAGS"
+-+        LIBS="$ax_pthread_save_LIBS"
+-+
+-+        AC_MSG_RESULT([$ax_pthread_ok])
+-+        AS_IF([test "x$ax_pthread_ok" = "xyes"], [break])
+-+
+-+        PTHREAD_LIBS=""
+-+        PTHREAD_CFLAGS=""
+-+done
+-+fi
+-+
+-+
+-+# Clang needs special handling, because older versions handle the -pthread
+-+# option in a rather... idiosyncratic way
+-+
+-+if test "x$ax_pthread_clang" = "xyes"; then
+-+
+-+        # Clang takes -pthread; it has never supported any other flag
+-+
+-+        # (Note 1: This will need to be revisited if a system that Clang
+-+        # supports has POSIX threads in a separate library.  This tends not
+-+        # to be the way of modern systems, but it's conceivable.)
+-+
+-+        # (Note 2: On some systems, notably Darwin, -pthread is not needed
+-+        # to get POSIX threads support; the API is always present and
+-+        # active.  We could reasonably leave PTHREAD_CFLAGS empty.  But
+-+        # -pthread does define _REENTRANT, and while the Darwin headers
+-+        # ignore this macro, third-party headers might not.)
+-+
+-+        # However, older versions of Clang make a point of warning the user
+-+        # that, in an invocation where only linking and no compilation is
+-+        # taking place, the -pthread option has no effect ("argument unused
+-+        # during compilation").  They expect -pthread to be passed in only
+-+        # when source code is being compiled.
+-+        #
+-+        # Problem is, this is at odds with the way Automake and most other
+-+        # C build frameworks function, which is that the same flags used in
+-+        # compilation (CFLAGS) are also used in linking.  Many systems
+-+        # supported by AX_PTHREAD require exactly this for POSIX threads
+-+        # support, and in fact it is often not straightforward to specify a
+-+        # flag that is used only in the compilation phase and not in
+-+        # linking.  Such a scenario is extremely rare in practice.
+-+        #
+-+        # Even though use of the -pthread flag in linking would only print
+-+        # a warning, this can be a nuisance for well-run software projects
+-+        # that build with -Werror.  So if the active version of Clang has
+-+        # this misfeature, we search for an option to squash it.
+-+
+-+        AC_CACHE_CHECK([whether Clang needs flag to prevent "argument unused" warning when linking with -pthread],
+-+            [ax_cv_PTHREAD_CLANG_NO_WARN_FLAG],
+-+            [ax_cv_PTHREAD_CLANG_NO_WARN_FLAG=unknown
+-+             # Create an alternate version of $ac_link that compiles and
+-+             # links in two steps (.c -> .o, .o -> exe) instead of one
+-+             # (.c -> exe), because the warning occurs only in the second
+-+             # step
+-+             ax_pthread_save_ac_link="$ac_link"
+-+             ax_pthread_sed='s/conftest\.\$ac_ext/conftest.$ac_objext/g'
+-+             ax_pthread_link_step=`AS_ECHO(["$ac_link"]) | sed "$ax_pthread_sed"`
+-+             ax_pthread_2step_ac_link="($ac_compile) && (echo ==== >&5) && ($ax_pthread_link_step)"
+-+             ax_pthread_save_CFLAGS="$CFLAGS"
+-+             for ax_pthread_try in '' -Qunused-arguments -Wno-unused-command-line-argument unknown; do
+-+                AS_IF([test "x$ax_pthread_try" = "xunknown"], [break])
+-+                CFLAGS="-Werror -Wunknown-warning-option $ax_pthread_try -pthread $ax_pthread_save_CFLAGS"
+-+                ac_link="$ax_pthread_save_ac_link"
+-+                AC_LINK_IFELSE([AC_LANG_SOURCE([[int main(void){return 0;}]])],
+-+                    [ac_link="$ax_pthread_2step_ac_link"
+-+                     AC_LINK_IFELSE([AC_LANG_SOURCE([[int main(void){return 0;}]])],
+-+                         [break])
+-+                    ])
+-+             done
+-+             ac_link="$ax_pthread_save_ac_link"
+-+             CFLAGS="$ax_pthread_save_CFLAGS"
+-+             AS_IF([test "x$ax_pthread_try" = "x"], [ax_pthread_try=no])
+-+             ax_cv_PTHREAD_CLANG_NO_WARN_FLAG="$ax_pthread_try"
+-+            ])
+-+
+-+        case "$ax_cv_PTHREAD_CLANG_NO_WARN_FLAG" in
+-+                no | unknown) ;;
+-+                *) PTHREAD_CFLAGS="$ax_cv_PTHREAD_CLANG_NO_WARN_FLAG $PTHREAD_CFLAGS" ;;
+-+        esac
+-+
+-+fi # $ax_pthread_clang = yes
+-+
+-+
+-+
+-+# Various other checks:
+-+if test "x$ax_pthread_ok" = "xyes"; then
+-+        ax_pthread_save_CFLAGS="$CFLAGS"
+-+        ax_pthread_save_LIBS="$LIBS"
+-+        CFLAGS="$CFLAGS $PTHREAD_CFLAGS"
+-+        LIBS="$PTHREAD_LIBS $LIBS"
+-+
+-+        # Detect AIX lossage: JOINABLE attribute is called UNDETACHED.
+-+        AC_CACHE_CHECK([for joinable pthread attribute],
+-+            [ax_cv_PTHREAD_JOINABLE_ATTR],
+-+            [ax_cv_PTHREAD_JOINABLE_ATTR=unknown
+-+             for ax_pthread_attr in PTHREAD_CREATE_JOINABLE PTHREAD_CREATE_UNDETACHED; do
+-+                 AC_LINK_IFELSE([AC_LANG_PROGRAM([#include <pthread.h>],
+-+                                                 [int attr = $ax_pthread_attr; return attr /* ; */])],
+-+                                [ax_cv_PTHREAD_JOINABLE_ATTR=$ax_pthread_attr; break],
+-+                                [])
+-+             done
+-+            ])
+-+        AS_IF([test "x$ax_cv_PTHREAD_JOINABLE_ATTR" != "xunknown" && \
+-+               test "x$ax_cv_PTHREAD_JOINABLE_ATTR" != "xPTHREAD_CREATE_JOINABLE" && \
+-+               test "x$ax_pthread_joinable_attr_defined" != "xyes"],
+-+              [AC_DEFINE_UNQUOTED([PTHREAD_CREATE_JOINABLE],
+-+                                  [$ax_cv_PTHREAD_JOINABLE_ATTR],
+-+                                  [Define to necessary symbol if this constant
+-+                                   uses a non-standard name on your system.])
+-+               ax_pthread_joinable_attr_defined=yes
+-+              ])
+-+
+-+        AC_CACHE_CHECK([whether more special flags are required for pthreads],
+-+            [ax_cv_PTHREAD_SPECIAL_FLAGS],
+-+            [ax_cv_PTHREAD_SPECIAL_FLAGS=no
+-+             case $host_os in
+-+             solaris*)
+-+             ax_cv_PTHREAD_SPECIAL_FLAGS="-D_POSIX_PTHREAD_SEMANTICS"
+-+             ;;
+-+             esac
+-+            ])
+-+        AS_IF([test "x$ax_cv_PTHREAD_SPECIAL_FLAGS" != "xno" && \
+-+               test "x$ax_pthread_special_flags_added" != "xyes"],
+-+              [PTHREAD_CFLAGS="$ax_cv_PTHREAD_SPECIAL_FLAGS $PTHREAD_CFLAGS"
+-+               ax_pthread_special_flags_added=yes])
+-+
+-+        AC_CACHE_CHECK([for PTHREAD_PRIO_INHERIT],
+-+            [ax_cv_PTHREAD_PRIO_INHERIT],
+-+            [AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <pthread.h>]],
+-+                                             [[int i = PTHREAD_PRIO_INHERIT;
+-+                                               return i;]])],
+-+                            [ax_cv_PTHREAD_PRIO_INHERIT=yes],
+-+                            [ax_cv_PTHREAD_PRIO_INHERIT=no])
+-+            ])
+-+        AS_IF([test "x$ax_cv_PTHREAD_PRIO_INHERIT" = "xyes" && \
+-+               test "x$ax_pthread_prio_inherit_defined" != "xyes"],
+-+              [AC_DEFINE([HAVE_PTHREAD_PRIO_INHERIT], [1], [Have PTHREAD_PRIO_INHERIT.])
+-+               ax_pthread_prio_inherit_defined=yes
+-+              ])
+-+
+-+        CFLAGS="$ax_pthread_save_CFLAGS"
+-+        LIBS="$ax_pthread_save_LIBS"
+-+
+-+        # More AIX lossage: compile with *_r variant
+-+        if test "x$GCC" != "xyes"; then
+-+            case $host_os in
+-+                aix*)
+-+                AS_CASE(["x/$CC"],
+-+                    [x*/c89|x*/c89_128|x*/c99|x*/c99_128|x*/cc|x*/cc128|x*/xlc|x*/xlc_v6|x*/xlc128|x*/xlc128_v6],
+-+                    [#handle absolute path differently from PATH based program lookup
+-+                     AS_CASE(["x$CC"],
+-+                         [x/*],
+-+                         [
+-+			   AS_IF([AS_EXECUTABLE_P([${CC}_r])],[PTHREAD_CC="${CC}_r"])
+-+			   AS_IF([test "x${CXX}" != "x"], [AS_IF([AS_EXECUTABLE_P([${CXX}_r])],[PTHREAD_CXX="${CXX}_r"])])
+-+			 ],
+-+                         [
+-+			   AC_CHECK_PROGS([PTHREAD_CC],[${CC}_r],[$CC])
+-+			   AS_IF([test "x${CXX}" != "x"], [AC_CHECK_PROGS([PTHREAD_CXX],[${CXX}_r],[$CXX])])
+-+			 ]
+-+                     )
+-+                    ])
+-+                ;;
+-+            esac
+-+        fi
+-+fi
+-+
+-+test -n "$PTHREAD_CC" || PTHREAD_CC="$CC"
+-+test -n "$PTHREAD_CXX" || PTHREAD_CXX="$CXX"
+-+
+-+AC_SUBST([PTHREAD_LIBS])
+-+AC_SUBST([PTHREAD_CFLAGS])
+-+AC_SUBST([PTHREAD_CC])
+-+AC_SUBST([PTHREAD_CXX])
+-+
+-+# Finally, execute ACTION-IF-FOUND/ACTION-IF-NOT-FOUND:
+-+if test "x$ax_pthread_ok" = "xyes"; then
+-+        ifelse([$1],,[AC_DEFINE([HAVE_PTHREAD],[1],[Define if you have POSIX threads libraries and header files.])],[$1])
+-+        :
+-+else
+-+        ax_pthread_ok=no
+-+        $2
+-+fi
+-+AC_LANG_POP
+-+])dnl AX_PTHREAD
+-diff --git a/configure.ac b/configure.ac
+-index b625743..bbf4768 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -80,11 +80,22 @@ PKG_CHECK_MODULES(GLIB, [gmodule-2.0 gio-unix-2.0 >= 2.30.0])
+- AC_SUBST(GLIB_CFLAGS)
+- AC_SUBST(GLIB_LIBS)
+- 
+--PKG_CHECK_MODULES(LIBJS, [mozjs-78])
+--
+--AC_SUBST(LIBJS_CFLAGS)
+--AC_SUBST(LIBJS_CXXFLAGS)
+--AC_SUBST(LIBJS_LIBS)
+-+dnl ---------------------------------------------------------------------------
+-+dnl - Check javascript backend
+-+dnl ---------------------------------------------------------------------------
+-+AC_ARG_WITH(duktape, AS_HELP_STRING([--with-duktape],[Use Duktape as javascript backend]),with_duktape=yes,with_duktape=no)
+-+AS_IF([test x${with_duktape} == xyes], [
+-+  PKG_CHECK_MODULES(LIBJS, [duktape >= 2.2.0 ])
+-+  AC_SUBST(LIBJS_CFLAGS)
+-+  AC_SUBST(LIBJS_LIBS)
+-+], [
+-+  PKG_CHECK_MODULES(LIBJS, [mozjs-78])
+-+
+-+  AC_SUBST(LIBJS_CFLAGS)
+-+  AC_SUBST(LIBJS_CXXFLAGS)
+-+  AC_SUBST(LIBJS_LIBS)
+-+])
+-+AM_CONDITIONAL(USE_DUKTAPE, [test x$with_duktape == xyes], [Using duktape as javascript engine library])
+- 
+- EXPAT_LIB=""
+- AC_ARG_WITH(expat, [  --with-expat=<dir>      Use expat from here],
+-@@ -100,6 +111,12 @@ AC_CHECK_LIB(expat,XML_ParserCreate,[EXPAT_LIBS="-lexpat"],
+- 	     [AC_MSG_ERROR([Can't find expat library. Please install expat.])])
+- AC_SUBST(EXPAT_LIBS)
+- 
+-+AX_PTHREAD([], [AC_MSG_ERROR([Cannot find the way to enable pthread support.])])
+-+LIBS="$PTHREAD_LIBS $LIBS"
+-+CFLAGS="$CFLAGS $PTHREAD_CFLAGS"
+-+CC="$PTHREAD_CC"
+-+AC_CHECK_FUNCS([pthread_condattr_setclock])
+-+
+- AC_CHECK_FUNCS(clearenv fdatasync)
+- 
+- if test "x$GCC" = "xyes"; then
+-@@ -581,6 +598,13 @@ echo "
+-         PAM support:                ${have_pam}
+-         systemdsystemunitdir:       ${systemdsystemunitdir}
+-         polkitd user:               ${POLKITD_USER}"
+-+if test "x${with_duktape}" = xyes; then
+-+echo "
+-+        Javascript engine:          Duktape"
+-+else
+-+echo "
+-+        Javascript engine:          Mozjs"
+-+fi
+- 
+- if test "$have_pam" = yes ; then
+- echo "
+-diff --git a/docs/man/polkit.xml b/docs/man/polkit.xml
+-index 99aa474..90715a5 100644
+---- a/docs/man/polkit.xml
+-+++ b/docs/man/polkit.xml
+-@@ -639,7 +639,9 @@ polkit.Result = {
+-         If user-provided code takes a long time to execute, an exception
+-         will be thrown which normally results in the function being
+-         terminated (the current limit is 15 seconds). This is used to
+--        catch runaway scripts.
+-+        catch runaway scripts. If the duktape JavaScript backend is
+-+        compiled in, instead of mozjs, no exception will be thrown—the
+-+        script will be killed right away (same timeout).
+-       </para>
+- 
+-       <para>
+-diff --git a/meson.build b/meson.build
+-index b3702be..7506231 100644
+---- a/meson.build
+-+++ b/meson.build
+-@@ -126,7 +126,18 @@ expat_dep = dependency('expat')
+- assert(cc.has_header('expat.h', dependencies: expat_dep), 'Can\'t find expat.h. Please install expat.')
+- assert(cc.has_function('XML_ParserCreate', dependencies: expat_dep), 'Can\'t find expat library. Please install expat.')
+- 
+--mozjs_dep = dependency('mozjs-78')
+-+duktape_req_version = '>= 2.2.0'
+-+
+-+js_engine = get_option('js_engine')
+-+if js_engine == 'duktape'
+-+  js_dep = dependency('duktape', version: duktape_req_version)
+-+  libm_dep = cc.find_library('m')
+-+  thread_dep = dependency('threads')
+-+  func = 'pthread_condattr_setclock'
+-+  config_h.set('HAVE_' + func.to_upper(), cc.has_function(func, prefix : '#include <pthread.h>'))
+-+elif js_engine == 'mozjs'
+-+  js_dep = dependency('mozjs-78')
+-+endif
+- 
+- dbus_dep = dependency('dbus-1')
+- dbus_confdir = dbus_dep.get_pkgconfig_variable('datadir', define_variable: ['datadir', pk_prefix / pk_datadir])   #changed from sysconfdir with respect to commit#8eada3836465838
+-@@ -350,6 +361,9 @@ if enable_logind
+-   output += '        systemdsystemunitdir:     ' + systemd_systemdsystemunitdir + '\n'
+- endif
+- output += '        polkitd user:             ' + polkitd_user + ' \n'
+-+output += '        Javascript engine:        ' + js_engine + '\n'
+-+if enable_logind
+-+endif
+- output += '        PAM support:              ' + enable_pam.to_string() + '\n\n'
+- if enable_pam
+-   output += '        PAM file auth:            ' + pam_conf['PAM_FILE_INCLUDE_AUTH'] + '\n'
+-diff --git a/meson_options.txt b/meson_options.txt
+-index 25e3e77..76aa311 100644
+---- a/meson_options.txt
+-+++ b/meson_options.txt
+-@@ -16,3 +16,4 @@ option('introspection', type: 'boolean', value: true, description: 'Enable intro
+- 
+- option('gtk_doc', type: 'boolean', value: false, description: 'use gtk-doc to build documentation')
+- option('man', type: 'boolean', value: false, description: 'build manual pages')
+-+option('js_engine', type: 'combo', choices: ['mozjs', 'duktape'], value: 'duktape', description: 'javascript engine')
+-diff --git a/src/polkitbackend/Makefile.am b/src/polkitbackend/Makefile.am
+-index 7e3c080..935fb98 100644
+---- a/src/polkitbackend/Makefile.am
+-+++ b/src/polkitbackend/Makefile.am
+-@@ -17,6 +17,8 @@ AM_CPPFLAGS =                                                   \
+-         -DPACKAGE_LIB_DIR=\""$(libdir)"\"                       \
+-         -D_POSIX_PTHREAD_SEMANTICS                              \
+-         -D_REENTRANT                                            \
+-+        -D_XOPEN_SOURCE=700                                     \
+-+        -D_GNU_SOURCE=1                                         \
+-         $(NULL)
+- 
+- noinst_LTLIBRARIES=libpolkit-backend-1.la
+-@@ -31,9 +33,10 @@ libpolkit_backend_1_la_SOURCES =                                   			\
+-         polkitbackend.h									\
+- 	polkitbackendtypes.h								\
+- 	polkitbackendprivate.h								\
+-+	polkitbackendcommon.h			polkitbackendcommon.c			\
+- 	polkitbackendauthority.h		polkitbackendauthority.c		\
+- 	polkitbackendinteractiveauthority.h	polkitbackendinteractiveauthority.c	\
+--	polkitbackendjsauthority.h		polkitbackendjsauthority.cpp		\
+-+	polkitbackendjsauthority.h				\
+- 	polkitbackendactionpool.h		polkitbackendactionpool.c		\
+- 	polkitbackendactionlookup.h		polkitbackendactionlookup.c		\
+-         $(NULL)
+-@@ -51,19 +54,27 @@ libpolkit_backend_1_la_CFLAGS =                                        	\
+-         -D_POLKIT_BACKEND_COMPILATION                                  	\
+-         $(GLIB_CFLAGS)							\
+- 	$(LIBSYSTEMD_CFLAGS)						\
+--	$(LIBJS_CFLAGS)							\
+-+	$(LIBJS_CFLAGS)						\
+-         $(NULL)
+- 
+- libpolkit_backend_1_la_CXXFLAGS = $(libpolkit_backend_1_la_CFLAGS)
+- 
+- libpolkit_backend_1_la_LIBADD =                               		\
+-         $(GLIB_LIBS)							\
+-+        $(DUKTAPE_LIBS)							\
+- 	$(LIBSYSTEMD_LIBS)						\
+- 	$(top_builddir)/src/polkit/libpolkit-gobject-1.la		\
+- 	$(EXPAT_LIBS)							\
+--	$(LIBJS_LIBS)							\
+-+	$(LIBJS_LIBS)                                                   \
+-         $(NULL)
+- 
+-+if USE_DUKTAPE
+-+libpolkit_backend_1_la_SOURCES += polkitbackendduktapeauthority.c
+-+libpolkit_backend_1_la_LIBADD += -lm
+-+else
+-+libpolkit_backend_1_la_SOURCES += polkitbackendjsauthority.cpp
+-+endif
+-+
+- rulesdir = $(sysconfdir)/polkit-1/rules.d
+- rules_DATA = 50-default.rules
+- 
+-diff --git a/src/polkitbackend/meson.build b/src/polkitbackend/meson.build
+-index 93c3c34..99f8e33 100644
+---- a/src/polkitbackend/meson.build
+-+++ b/src/polkitbackend/meson.build
+-@@ -4,8 +4,8 @@ sources = files(
+-   'polkitbackendactionlookup.c',
+-   'polkitbackendactionpool.c',
+-   'polkitbackendauthority.c',
+-+  'polkitbackendcommon.c',
+-   'polkitbackendinteractiveauthority.c',
+--  'polkitbackendjsauthority.cpp',
+- )
+- 
+- output = 'initjs.h'
+-@@ -21,7 +21,7 @@ sources += custom_target(
+- deps = [
+-   expat_dep,
+-   libpolkit_gobject_dep,
+--  mozjs_dep,
+-+  js_dep,
+- ]
+- 
+- c_flags = [
+-@@ -29,8 +29,18 @@ c_flags = [
+-   '-D_POLKIT_BACKEND_COMPILATION',
+-   '-DPACKAGE_DATA_DIR="@0@"'.format(pk_prefix / pk_datadir),
+-   '-DPACKAGE_SYSCONF_DIR="@0@"'.format(pk_prefix / pk_sysconfdir),
+-+  '-D_XOPEN_SOURCE=700',
+-+  '-D_GNU_SOURCE=1',
+- ]
+- 
+-+if js_engine == 'duktape'
+-+  sources += files('polkitbackendduktapeauthority.c')
+-+  deps += libm_dep
+-+  deps += thread_dep
+-+elif js_engine == 'mozjs'
+-+  sources += files('polkitbackendjsauthority.cpp')
+-+endif
+-+
+- if enable_logind
+-   sources += files('polkitbackendsessionmonitor-systemd.c')
+- 
+-diff --git a/src/polkitbackend/polkitbackendcommon.c b/src/polkitbackend/polkitbackendcommon.c
+-new file mode 100644
+-index 0000000..6783dff
+---- /dev/null
+-+++ b/src/polkitbackend/polkitbackendcommon.c
+-@@ -0,0 +1,530 @@
+-+/*
+-+ * Copyright (C) 2008 Red Hat, Inc.
+-+ *
+-+ * This library is free software; you can redistribute it and/or
+-+ * modify it under the terms of the GNU Lesser General Public
+-+ * License as published by the Free Software Foundation; either
+-+ * version 2 of the License, or (at your option) any later version.
+-+ *
+-+ * This library is distributed in the hope that it will be useful,
+-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+-+ * Lesser General Public License for more details.
+-+ *
+-+ * You should have received a copy of the GNU Lesser General
+-+ * Public License along with this library; if not, write to the
+-+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
+-+ * Boston, MA 02111-1307, USA.
+-+ *
+-+ * Author: David Zeuthen <davidz@redhat.com>
+-+ */
+-+
+-+#include "polkitbackendcommon.h"
+-+
+-+static void
+-+utils_child_watch_from_release_cb (GPid     pid,
+-+                                   gint     status,
+-+                                   gpointer user_data)
+-+{
+-+}
+-+
+-+static void
+-+utils_spawn_data_free (UtilsSpawnData *data)
+-+{
+-+  if (data->timeout_source != NULL)
+-+    {
+-+      g_source_destroy (data->timeout_source);
+-+      data->timeout_source = NULL;
+-+    }
+-+
+-+  /* Nuke the child, if necessary */
+-+  if (data->child_watch_source != NULL)
+-+    {
+-+      g_source_destroy (data->child_watch_source);
+-+      data->child_watch_source = NULL;
+-+    }
+-+
+-+  if (data->child_pid != 0)
+-+    {
+-+      GSource *source;
+-+      kill (data->child_pid, SIGTERM);
+-+      /* OK, we need to reap for the child ourselves - we don't want
+-+       * to use waitpid() because that might block the calling
+-+       * thread (the child might handle SIGTERM and use several
+-+       * seconds for cleanup/rollback).
+-+       *
+-+       * So we use GChildWatch instead.
+-+       *
+-+       * Avoid taking a references to ourselves. but note that we need
+-+       * to pass the GSource so we can nuke it once handled.
+-+       */
+-+      source = g_child_watch_source_new (data->child_pid);
+-+      g_source_set_callback (source,
+-+                             (GSourceFunc) utils_child_watch_from_release_cb,
+-+                             source,
+-+                             (GDestroyNotify) g_source_destroy);
+-+      g_source_attach (source, data->main_context);
+-+      g_source_unref (source);
+-+      data->child_pid = 0;
+-+    }
+-+
+-+  if (data->child_stdout != NULL)
+-+    {
+-+      g_string_free (data->child_stdout, TRUE);
+-+      data->child_stdout = NULL;
+-+    }
+-+
+-+  if (data->child_stderr != NULL)
+-+    {
+-+      g_string_free (data->child_stderr, TRUE);
+-+      data->child_stderr = NULL;
+-+    }
+-+
+-+  if (data->child_stdout_channel != NULL)
+-+    {
+-+      g_io_channel_unref (data->child_stdout_channel);
+-+      data->child_stdout_channel = NULL;
+-+    }
+-+  if (data->child_stderr_channel != NULL)
+-+    {
+-+      g_io_channel_unref (data->child_stderr_channel);
+-+      data->child_stderr_channel = NULL;
+-+    }
+-+
+-+  if (data->child_stdout_source != NULL)
+-+    {
+-+      g_source_destroy (data->child_stdout_source);
+-+      data->child_stdout_source = NULL;
+-+    }
+-+  if (data->child_stderr_source != NULL)
+-+    {
+-+      g_source_destroy (data->child_stderr_source);
+-+      data->child_stderr_source = NULL;
+-+    }
+-+
+-+  if (data->child_stdout_fd != -1)
+-+    {
+-+      g_warn_if_fail (close (data->child_stdout_fd) == 0);
+-+      data->child_stdout_fd = -1;
+-+    }
+-+  if (data->child_stderr_fd != -1)
+-+    {
+-+      g_warn_if_fail (close (data->child_stderr_fd) == 0);
+-+      data->child_stderr_fd = -1;
+-+    }
+-+
+-+  if (data->cancellable_handler_id > 0)
+-+    {
+-+      g_cancellable_disconnect (data->cancellable, data->cancellable_handler_id);
+-+      data->cancellable_handler_id = 0;
+-+    }
+-+
+-+  if (data->main_context != NULL)
+-+    g_main_context_unref (data->main_context);
+-+
+-+  if (data->cancellable != NULL)
+-+    g_object_unref (data->cancellable);
+-+
+-+  g_slice_free (UtilsSpawnData, data);
+-+}
+-+
+-+/* called in the thread where @cancellable was cancelled */
+-+static void
+-+utils_on_cancelled (GCancellable *cancellable,
+-+                    gpointer      user_data)
+-+{
+-+  UtilsSpawnData *data = (UtilsSpawnData *)user_data;
+-+  GError *error;
+-+
+-+  error = NULL;
+-+  g_warn_if_fail (g_cancellable_set_error_if_cancelled (cancellable, &error));
+-+  g_simple_async_result_take_error (data->simple, error);
+-+  g_simple_async_result_complete_in_idle (data->simple);
+-+  g_object_unref (data->simple);
+-+}
+-+
+-+static gboolean
+-+utils_timeout_cb (gpointer user_data)
+-+{
+-+  UtilsSpawnData *data = (UtilsSpawnData *)user_data;
+-+
+-+  data->timed_out = TRUE;
+-+
+-+  /* ok, timeout is history, make sure we don't free it in spawn_data_free() */
+-+  data->timeout_source = NULL;
+-+
+-+  /* we're done */
+-+  g_simple_async_result_complete_in_idle (data->simple);
+-+  g_object_unref (data->simple);
+-+
+-+  return FALSE; /* remove source */
+-+}
+-+
+-+static void
+-+utils_child_watch_cb (GPid     pid,
+-+                      gint     status,
+-+                      gpointer user_data)
+-+{
+-+  UtilsSpawnData *data = (UtilsSpawnData *)user_data;
+-+  gchar *buf;
+-+  gsize buf_size;
+-+
+-+  if (g_io_channel_read_to_end (data->child_stdout_channel, &buf, &buf_size, NULL) == G_IO_STATUS_NORMAL)
+-+    {
+-+      g_string_append_len (data->child_stdout, buf, buf_size);
+-+      g_free (buf);
+-+    }
+-+  if (g_io_channel_read_to_end (data->child_stderr_channel, &buf, &buf_size, NULL) == G_IO_STATUS_NORMAL)
+-+    {
+-+      g_string_append_len (data->child_stderr, buf, buf_size);
+-+      g_free (buf);
+-+    }
+-+
+-+  data->exit_status = status;
+-+
+-+  /* ok, child watch is history, make sure we don't free it in spawn_data_free() */
+-+  data->child_pid = 0;
+-+  data->child_watch_source = NULL;
+-+
+-+  /* we're done */
+-+  g_simple_async_result_complete_in_idle (data->simple);
+-+  g_object_unref (data->simple);
+-+}
+-+
+-+static gboolean
+-+utils_read_child_stderr (GIOChannel *channel,
+-+                         GIOCondition condition,
+-+                         gpointer user_data)
+-+{
+-+  UtilsSpawnData *data = (UtilsSpawnData *)user_data;
+-+  gchar buf[1024];
+-+  gsize bytes_read;
+-+
+-+  g_io_channel_read_chars (channel, buf, sizeof buf, &bytes_read, NULL);
+-+  g_string_append_len (data->child_stderr, buf, bytes_read);
+-+  return TRUE;
+-+}
+-+
+-+static gboolean
+-+utils_read_child_stdout (GIOChannel *channel,
+-+                         GIOCondition condition,
+-+                         gpointer user_data)
+-+{
+-+  UtilsSpawnData *data = (UtilsSpawnData *)user_data;
+-+  gchar buf[1024];
+-+  gsize bytes_read;
+-+
+-+  g_io_channel_read_chars (channel, buf, sizeof buf, &bytes_read, NULL);
+-+  g_string_append_len (data->child_stdout, buf, bytes_read);
+-+  return TRUE;
+-+}
+-+
+-+void
+-+polkit_backend_common_spawn (const gchar *const  *argv,
+-+                             guint                timeout_seconds,
+-+                             GCancellable        *cancellable,
+-+                             GAsyncReadyCallback  callback,
+-+                             gpointer             user_data)
+-+{
+-+  UtilsSpawnData *data;
+-+  GError *error;
+-+
+-+  data = g_slice_new0 (UtilsSpawnData);
+-+  data->timeout_seconds = timeout_seconds;
+-+  data->simple = g_simple_async_result_new (NULL,
+-+                                            callback,
+-+                                            user_data,
+-+                                            (gpointer*)polkit_backend_common_spawn);
+-+  data->main_context = g_main_context_get_thread_default ();
+-+  if (data->main_context != NULL)
+-+    g_main_context_ref (data->main_context);
+-+
+-+  data->cancellable = cancellable != NULL ? (GCancellable*)g_object_ref (cancellable) : NULL;
+-+
+-+  data->child_stdout = g_string_new (NULL);
+-+  data->child_stderr = g_string_new (NULL);
+-+  data->child_stdout_fd = -1;
+-+  data->child_stderr_fd = -1;
+-+
+-+  /* the life-cycle of UtilsSpawnData is tied to its GSimpleAsyncResult */
+-+  g_simple_async_result_set_op_res_gpointer (data->simple, data, (GDestroyNotify) utils_spawn_data_free);
+-+
+-+  error = NULL;
+-+  if (data->cancellable != NULL)
+-+    {
+-+      /* could already be cancelled */
+-+      error = NULL;
+-+      if (g_cancellable_set_error_if_cancelled (data->cancellable, &error))
+-+        {
+-+          g_simple_async_result_take_error (data->simple, error);
+-+          g_simple_async_result_complete_in_idle (data->simple);
+-+          g_object_unref (data->simple);
+-+          goto out;
+-+        }
+-+
+-+      data->cancellable_handler_id = g_cancellable_connect (data->cancellable,
+-+                                                            G_CALLBACK (utils_on_cancelled),
+-+                                                            data,
+-+                                                            NULL);
+-+    }
+-+
+-+  error = NULL;
+-+  if (!g_spawn_async_with_pipes (NULL, /* working directory */
+-+                                 (gchar **) argv,
+-+                                 NULL, /* envp */
+-+                                 G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD,
+-+                                 NULL, /* child_setup */
+-+                                 NULL, /* child_setup's user_data */
+-+                                 &(data->child_pid),
+-+                                 NULL, /* gint *stdin_fd */
+-+                                 &(data->child_stdout_fd),
+-+                                 &(data->child_stderr_fd),
+-+                                 &error))
+-+    {
+-+      g_prefix_error (&error, "Error spawning: ");
+-+      g_simple_async_result_take_error (data->simple, error);
+-+      g_simple_async_result_complete_in_idle (data->simple);
+-+      g_object_unref (data->simple);
+-+      goto out;
+-+    }
+-+
+-+  if (timeout_seconds > 0)
+-+    {
+-+      data->timeout_source = g_timeout_source_new_seconds (timeout_seconds);
+-+      g_source_set_priority (data->timeout_source, G_PRIORITY_DEFAULT);
+-+      g_source_set_callback (data->timeout_source, utils_timeout_cb, data, NULL);
+-+      g_source_attach (data->timeout_source, data->main_context);
+-+      g_source_unref (data->timeout_source);
+-+    }
+-+
+-+  data->child_watch_source = g_child_watch_source_new (data->child_pid);
+-+  g_source_set_callback (data->child_watch_source, (GSourceFunc) utils_child_watch_cb, data, NULL);
+-+  g_source_attach (data->child_watch_source, data->main_context);
+-+  g_source_unref (data->child_watch_source);
+-+
+-+  data->child_stdout_channel = g_io_channel_unix_new (data->child_stdout_fd);
+-+  g_io_channel_set_flags (data->child_stdout_channel, G_IO_FLAG_NONBLOCK, NULL);
+-+  data->child_stdout_source = g_io_create_watch (data->child_stdout_channel, G_IO_IN);
+-+  g_source_set_callback (data->child_stdout_source, (GSourceFunc) utils_read_child_stdout, data, NULL);
+-+  g_source_attach (data->child_stdout_source, data->main_context);
+-+  g_source_unref (data->child_stdout_source);
+-+
+-+  data->child_stderr_channel = g_io_channel_unix_new (data->child_stderr_fd);
+-+  g_io_channel_set_flags (data->child_stderr_channel, G_IO_FLAG_NONBLOCK, NULL);
+-+  data->child_stderr_source = g_io_create_watch (data->child_stderr_channel, G_IO_IN);
+-+  g_source_set_callback (data->child_stderr_source, (GSourceFunc) utils_read_child_stderr, data, NULL);
+-+  g_source_attach (data->child_stderr_source, data->main_context);
+-+  g_source_unref (data->child_stderr_source);
+-+
+-+ out:
+-+  ;
+-+}
+-+
+-+void
+-+polkit_backend_common_on_dir_monitor_changed (GFileMonitor     *monitor,
+-+                                              GFile            *file,
+-+                                              GFile            *other_file,
+-+                                              GFileMonitorEvent event_type,
+-+                                              gpointer          user_data)
+-+{
+-+  PolkitBackendJsAuthority *authority = POLKIT_BACKEND_JS_AUTHORITY (user_data);
+-+
+-+  /* TODO: maybe rate-limit so storms of events are collapsed into one with a 500ms resolution?
+-+   *       Because when editing a file with emacs we get 4-8 events..
+-+   */
+-+
+-+  if (file != NULL)
+-+    {
+-+      gchar *name;
+-+
+-+      name = g_file_get_basename (file);
+-+
+-+      /* g_print ("event_type=%d file=%p name=%s\n", event_type, file, name); */
+-+      if (!g_str_has_prefix (name, ".") &&
+-+          !g_str_has_prefix (name, "#") &&
+-+          g_str_has_suffix (name, ".rules") &&
+-+          (event_type == G_FILE_MONITOR_EVENT_CREATED ||
+-+           event_type == G_FILE_MONITOR_EVENT_DELETED ||
+-+           event_type == G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT))
+-+        {
+-+          polkit_backend_authority_log (POLKIT_BACKEND_AUTHORITY (authority),
+-+                                        "Reloading rules");
+-+          polkit_backend_common_reload_scripts (authority);
+-+        }
+-+      g_free (name);
+-+    }
+-+}
+-+
+-+gboolean
+-+polkit_backend_common_spawn_finish (GAsyncResult   *res,
+-+                                    gint           *out_exit_status,
+-+                                    gchar         **out_standard_output,
+-+                                    gchar         **out_standard_error,
+-+                                    GError        **error)
+-+{
+-+  GSimpleAsyncResult *simple = G_SIMPLE_ASYNC_RESULT (res);
+-+  UtilsSpawnData *data;
+-+  gboolean ret = FALSE;
+-+
+-+  g_return_val_if_fail (G_IS_ASYNC_RESULT (res), FALSE);
+-+  g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
+-+
+-+  g_warn_if_fail (g_simple_async_result_get_source_tag (simple) == polkit_backend_common_spawn);
+-+
+-+  if (g_simple_async_result_propagate_error (simple, error))
+-+    goto out;
+-+
+-+  data = (UtilsSpawnData*)g_simple_async_result_get_op_res_gpointer (simple);
+-+
+-+  if (data->timed_out)
+-+    {
+-+      g_set_error (error,
+-+                   G_IO_ERROR,
+-+                   G_IO_ERROR_TIMED_OUT,
+-+                   "Timed out after %d seconds",
+-+                   data->timeout_seconds);
+-+      goto out;
+-+    }
+-+
+-+  if (out_exit_status != NULL)
+-+    *out_exit_status = data->exit_status;
+-+
+-+  if (out_standard_output != NULL)
+-+    *out_standard_output = g_strdup (data->child_stdout->str);
+-+
+-+  if (out_standard_error != NULL)
+-+    *out_standard_error = g_strdup (data->child_stderr->str);
+-+
+-+  ret = TRUE;
+-+
+-+ out:
+-+  return ret;
+-+}
+-+
+-+static const gchar *
+-+polkit_backend_js_authority_get_name (PolkitBackendAuthority *authority)
+-+{
+-+  return "js";
+-+}
+-+
+-+static const gchar *
+-+polkit_backend_js_authority_get_version (PolkitBackendAuthority *authority)
+-+{
+-+  return PACKAGE_VERSION;
+-+}
+-+
+-+static PolkitAuthorityFeatures
+-+polkit_backend_js_authority_get_features (PolkitBackendAuthority *authority)
+-+{
+-+  return POLKIT_AUTHORITY_FEATURES_TEMPORARY_AUTHORIZATION;
+-+}
+-+
+-+void
+-+polkit_backend_common_js_authority_class_init_common (PolkitBackendJsAuthorityClass *klass)
+-+{
+-+  GObjectClass *gobject_class;
+-+  PolkitBackendAuthorityClass *authority_class;
+-+  PolkitBackendInteractiveAuthorityClass *interactive_authority_class;
+-+
+-+  gobject_class = G_OBJECT_CLASS (klass);
+-+  gobject_class->finalize                               = polkit_backend_common_js_authority_finalize;
+-+  gobject_class->set_property                           = polkit_backend_common_js_authority_set_property;
+-+  gobject_class->constructed                            = polkit_backend_common_js_authority_constructed;
+-+
+-+  authority_class = POLKIT_BACKEND_AUTHORITY_CLASS (klass);
+-+  authority_class->get_name                             = polkit_backend_js_authority_get_name;
+-+  authority_class->get_version                          = polkit_backend_js_authority_get_version;
+-+  authority_class->get_features                         = polkit_backend_js_authority_get_features;
+-+
+-+  interactive_authority_class = POLKIT_BACKEND_INTERACTIVE_AUTHORITY_CLASS (klass);
+-+  interactive_authority_class->get_admin_identities     = polkit_backend_common_js_authority_get_admin_auth_identities;
+-+  interactive_authority_class->check_authorization_sync = polkit_backend_common_js_authority_check_authorization_sync;
+-+
+-+  g_object_class_install_property (gobject_class,
+-+                                   PROP_RULES_DIRS,
+-+                                   g_param_spec_boxed ("rules-dirs",
+-+                                                       NULL,
+-+                                                       NULL,
+-+                                                       G_TYPE_STRV,
+-+                                                       G_PARAM_CONSTRUCT_ONLY | G_PARAM_WRITABLE));
+-+}
+-+
+-+gint
+-+polkit_backend_common_rules_file_name_cmp (const gchar *a,
+-+                                           const gchar *b)
+-+{
+-+  gint ret;
+-+  const gchar *a_base;
+-+  const gchar *b_base;
+-+
+-+  a_base = strrchr (a, '/');
+-+  b_base = strrchr (b, '/');
+-+
+-+  g_assert (a_base != NULL);
+-+  g_assert (b_base != NULL);
+-+  a_base += 1;
+-+  b_base += 1;
+-+
+-+  ret = g_strcmp0 (a_base, b_base);
+-+  if (ret == 0)
+-+    {
+-+      /* /etc wins over /usr */
+-+      ret = g_strcmp0 (a, b);
+-+      g_assert (ret != 0);
+-+    }
+-+
+-+  return ret;
+-+}
+-+
+-+const gchar *
+-+polkit_backend_common_get_signal_name (gint signal_number)
+-+{
+-+  switch (signal_number)
+-+    {
+-+#define _HANDLE_SIG(sig) case sig: return #sig;
+-+    _HANDLE_SIG (SIGHUP);
+-+    _HANDLE_SIG (SIGINT);
+-+    _HANDLE_SIG (SIGQUIT);
+-+    _HANDLE_SIG (SIGILL);
+-+    _HANDLE_SIG (SIGABRT);
+-+    _HANDLE_SIG (SIGFPE);
+-+    _HANDLE_SIG (SIGKILL);
+-+    _HANDLE_SIG (SIGSEGV);
+-+    _HANDLE_SIG (SIGPIPE);
+-+    _HANDLE_SIG (SIGALRM);
+-+    _HANDLE_SIG (SIGTERM);
+-+    _HANDLE_SIG (SIGUSR1);
+-+    _HANDLE_SIG (SIGUSR2);
+-+    _HANDLE_SIG (SIGCHLD);
+-+    _HANDLE_SIG (SIGCONT);
+-+    _HANDLE_SIG (SIGSTOP);
+-+    _HANDLE_SIG (SIGTSTP);
+-+    _HANDLE_SIG (SIGTTIN);
+-+    _HANDLE_SIG (SIGTTOU);
+-+    _HANDLE_SIG (SIGBUS);
+-+#ifdef SIGPOLL
+-+    _HANDLE_SIG (SIGPOLL);
+-+#endif
+-+    _HANDLE_SIG (SIGPROF);
+-+    _HANDLE_SIG (SIGSYS);
+-+    _HANDLE_SIG (SIGTRAP);
+-+    _HANDLE_SIG (SIGURG);
+-+    _HANDLE_SIG (SIGVTALRM);
+-+    _HANDLE_SIG (SIGXCPU);
+-+    _HANDLE_SIG (SIGXFSZ);
+-+#undef _HANDLE_SIG
+-+    default:
+-+      break;
+-+    }
+-+  return "UNKNOWN_SIGNAL";
+-+}
+-+
+-+void
+-+polkit_backend_common_spawn_cb (GObject       *source_object,
+-+                                GAsyncResult  *res,
+-+                                gpointer       user_data)
+-+{
+-+  SpawnData *data = (SpawnData *)user_data;
+-+  data->res = (GAsyncResult*)g_object_ref (res);
+-+  g_main_loop_quit (data->loop);
+-+}
+-diff --git a/src/polkitbackend/polkitbackendcommon.h b/src/polkitbackend/polkitbackendcommon.h
+-new file mode 100644
+-index 0000000..dd700fc
+---- /dev/null
+-+++ b/src/polkitbackend/polkitbackendcommon.h
+-@@ -0,0 +1,158 @@
+-+/*
+-+ * Copyright (C) 2008 Red Hat, Inc.
+-+ *
+-+ * This library is free software; you can redistribute it and/or
+-+ * modify it under the terms of the GNU Lesser General Public
+-+ * License as published by the Free Software Foundation; either
+-+ * version 2 of the License, or (at your option) any later version.
+-+ *
+-+ * This library is distributed in the hope that it will be useful,
+-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+-+ * Lesser General Public License for more details.
+-+ *
+-+ * You should have received a copy of the GNU Lesser General
+-+ * Public License along with this library; if not, write to the
+-+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
+-+ * Boston, MA 02111-1307, USA.
+-+ *
+-+ * Author: David Zeuthen <davidz@redhat.com>
+-+ */
+-+
+-+#if !defined (_POLKIT_BACKEND_COMPILATION) && !defined(_POLKIT_BACKEND_INSIDE_POLKIT_BACKEND_H)
+-+#error "Only <polkitbackend/polkitbackend.h> can be included directly, this file may disappear or change contents."
+-+#endif
+-+
+-+#ifndef __POLKIT_BACKEND_COMMON_H
+-+#define __POLKIT_BACKEND_COMMON_H
+-+
+-+#include "config.h"
+-+#include <sys/wait.h>
+-+#include <errno.h>
+-+#include <pwd.h>
+-+#include <grp.h>
+-+#ifdef HAVE_NETGROUP_H
+-+#include <netgroup.h>
+-+#else
+-+#include <netdb.h>
+-+#endif
+-+#include <string.h>
+-+#include <glib/gstdio.h>
+-+#include <locale.h>
+-+#include <glib/gi18n-lib.h> //here, all things glib via glib.h (including -> gspawn.h)
+-+
+-+#include <polkit/polkit.h>
+-+#include "polkitbackendjsauthority.h"
+-+
+-+#include <polkit/polkitprivate.h>
+-+
+-+#ifdef HAVE_LIBSYSTEMD
+-+#include <systemd/sd-login.h>
+-+#endif /* HAVE_LIBSYSTEMD */
+-+
+-+#define RUNAWAY_KILLER_TIMEOUT (15)
+-+
+-+#ifdef __cplusplus
+-+extern "C" {
+-+#endif
+-+
+-+enum
+-+{
+-+  PROP_0,
+-+  PROP_RULES_DIRS,
+-+};
+-+
+-+typedef struct
+-+{
+-+  GSimpleAsyncResult *simple; /* borrowed reference */
+-+  GMainContext *main_context; /* may be NULL */
+-+
+-+  GCancellable *cancellable;  /* may be NULL */
+-+  gulong cancellable_handler_id;
+-+
+-+  GPid child_pid;
+-+  gint child_stdout_fd;
+-+  gint child_stderr_fd;
+-+
+-+  GIOChannel *child_stdout_channel;
+-+  GIOChannel *child_stderr_channel;
+-+
+-+  GSource *child_watch_source;
+-+  GSource *child_stdout_source;
+-+  GSource *child_stderr_source;
+-+
+-+  guint timeout_seconds;
+-+  gboolean timed_out;
+-+  GSource *timeout_source;
+-+
+-+  GString *child_stdout;
+-+  GString *child_stderr;
+-+
+-+  gint exit_status;
+-+} UtilsSpawnData;
+-+
+-+typedef struct
+-+{
+-+  GMainLoop *loop;
+-+  GAsyncResult *res;
+-+} SpawnData;
+-+
+-+void polkit_backend_common_spawn (const gchar *const  *argv,
+-+                                  guint                timeout_seconds,
+-+                                  GCancellable        *cancellable,
+-+                                  GAsyncReadyCallback  callback,
+-+                                  gpointer             user_data);
+-+void polkit_backend_common_spawn_cb (GObject       *source_object,
+-+                                     GAsyncResult  *res,
+-+                                     gpointer       user_data);
+-+gboolean polkit_backend_common_spawn_finish (GAsyncResult   *res,
+-+                                             gint           *out_exit_status,
+-+                                             gchar         **out_standard_output,
+-+                                             gchar         **out_standard_error,
+-+                                             GError        **error);
+-+
+-+void polkit_backend_common_on_dir_monitor_changed (GFileMonitor     *monitor,
+-+                                                   GFile            *file,
+-+                                                   GFile            *other_file,
+-+                                                   GFileMonitorEvent event_type,
+-+                                                   gpointer          user_data);
+-+
+-+void polkit_backend_common_js_authority_class_init_common (PolkitBackendJsAuthorityClass *klass);
+-+
+-+gint polkit_backend_common_rules_file_name_cmp (const gchar *a,
+-+                                                const gchar *b);
+-+
+-+const gchar *polkit_backend_common_get_signal_name (gint signal_number);
+-+
+-+/* To be provided by each JS backend, from here onwards  ---------------------------------------------- */
+-+
+-+void polkit_backend_common_reload_scripts (PolkitBackendJsAuthority *authority);
+-+void polkit_backend_common_js_authority_finalize (GObject *object);
+-+void polkit_backend_common_js_authority_constructed (GObject *object);
+-+GList *polkit_backend_common_js_authority_get_admin_auth_identities (PolkitBackendInteractiveAuthority *_authority,
+-+                                                                     PolkitSubject                     *caller,
+-+                                                                     PolkitSubject                     *subject,
+-+                                                                     PolkitIdentity                    *user_for_subject,
+-+                                                                     gboolean                           subject_is_local,
+-+                                                                     gboolean                           subject_is_active,
+-+                                                                     const gchar                       *action_id,
+-+                                                                     PolkitDetails                     *details);
+-+void polkit_backend_common_js_authority_set_property (GObject      *object,
+-+                                                      guint         property_id,
+-+                                                      const GValue *value,
+-+                                                      GParamSpec   *pspec);
+-+PolkitImplicitAuthorization polkit_backend_common_js_authority_check_authorization_sync (PolkitBackendInteractiveAuthority *_authority,
+-+                                                                                         PolkitSubject                     *caller,
+-+                                                                                         PolkitSubject                     *subject,
+-+                                                                                         PolkitIdentity                    *user_for_subject,
+-+                                                                                         gboolean                           subject_is_local,
+-+                                                                                         gboolean                           subject_is_active,
+-+                                                                                         const gchar                       *action_id,
+-+                                                                                         PolkitDetails                     *details,
+-+                                                                                         PolkitImplicitAuthorization        implicit);
+-+#ifdef __cplusplus
+-+}
+-+#endif
+-+
+-+#endif /* __POLKIT_BACKEND_COMMON_H */
+-+
+-diff --git a/src/polkitbackend/polkitbackendduktapeauthority.c b/src/polkitbackend/polkitbackendduktapeauthority.c
+-new file mode 100644
+-index 0000000..c89dbcf
+---- /dev/null
+-+++ b/src/polkitbackend/polkitbackendduktapeauthority.c
+-@@ -0,0 +1,1051 @@
+-+/*
+-+ * Copyright (C) 2008-2012 Red Hat, Inc.
+-+ * Copyright (C) 2015 Tangent Space <jstpierre@mecheye.net>
+-+ * Copyright (C) 2019 Wu Xiaotian <yetist@gmail.com>
+-+ *
+-+ * This library is free software; you can redistribute it and/or
+-+ * modify it under the terms of the GNU Lesser General Public
+-+ * License as published by the Free Software Foundation; either
+-+ * version 2 of the License, or (at your option) any later version.
+-+ *
+-+ * This library is distributed in the hope that it will be useful,
+-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+-+ * Lesser General Public License for more details.
+-+ *
+-+ * You should have received a copy of the GNU Lesser General
+-+ * Public License along with this library; if not, write to the
+-+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
+-+ * Boston, MA 02111-1307, USA.
+-+ *
+-+ * Author: David Zeuthen <davidz@redhat.com>
+-+ */
+-+
+-+#include <pthread.h>
+-+
+-+#include "polkitbackendcommon.h"
+-+
+-+#include "duktape.h"
+-+
+-+/* Built source and not too big to worry about deduplication */
+-+#include "initjs.h" /* init.js */
+-+
+-+/**
+-+ * SECTION:polkitbackendjsauthority
+-+ * @title: PolkitBackendJsAuthority
+-+ * @short_description: JS Authority
+-+ * @stability: Unstable
+-+ *
+-+ * An (Duktape-based) implementation of #PolkitBackendAuthority that reads and
+-+ * evaluates Javascript files and supports interaction with authentication
+-+ * agents (virtue of being based on #PolkitBackendInteractiveAuthority).
+-+ */
+-+
+-+/* ---------------------------------------------------------------------------------------------------- */
+-+
+-+struct _PolkitBackendJsAuthorityPrivate
+-+{
+-+  gchar **rules_dirs;
+-+  GFileMonitor **dir_monitors; /* NULL-terminated array of GFileMonitor instances */
+-+
+-+  duk_context *cx;
+-+
+-+  pthread_t runaway_killer_thread;
+-+};
+-+
+-+enum
+-+{
+-+  RUNAWAY_KILLER_THREAD_EXIT_STATUS_UNSET,
+-+  RUNAWAY_KILLER_THREAD_EXIT_STATUS_SUCCESS,
+-+  RUNAWAY_KILLER_THREAD_EXIT_STATUS_FAILURE,
+-+};
+-+
+-+static gboolean execute_script_with_runaway_killer(PolkitBackendJsAuthority *authority,
+-+                                                   const gchar *filename);
+-+
+-+/* ---------------------------------------------------------------------------------------------------- */
+-+
+-+G_DEFINE_TYPE (PolkitBackendJsAuthority, polkit_backend_js_authority, POLKIT_BACKEND_TYPE_INTERACTIVE_AUTHORITY);
+-+
+-+/* ---------------------------------------------------------------------------------------------------- */
+-+
+-+static duk_ret_t js_polkit_log (duk_context *cx);
+-+static duk_ret_t js_polkit_spawn (duk_context *cx);
+-+static duk_ret_t js_polkit_user_is_in_netgroup (duk_context *cx);
+-+
+-+static const duk_function_list_entry js_polkit_functions[] =
+-+{
+-+  { "log", js_polkit_log, 1 },
+-+  { "spawn", js_polkit_spawn, 1 },
+-+  { "_userIsInNetGroup", js_polkit_user_is_in_netgroup, 2 },
+-+  { NULL, NULL, 0 },
+-+};
+-+
+-+static void report_error (void     *udata,
+-+                          const char *msg)
+-+{
+-+    PolkitBackendJsAuthority *authority = udata;
+-+    polkit_backend_authority_log (POLKIT_BACKEND_AUTHORITY (authority),
+-+                                  "fatal Duktape JS backend error: %s",
+-+                                  (msg ? msg : "no message"));
+-+}
+-+
+-+static void
+-+polkit_backend_js_authority_init (PolkitBackendJsAuthority *authority)
+-+{
+-+  authority->priv = G_TYPE_INSTANCE_GET_PRIVATE (authority,
+-+                                                 POLKIT_BACKEND_TYPE_JS_AUTHORITY,
+-+                                                 PolkitBackendJsAuthorityPrivate);
+-+}
+-+
+-+static void
+-+load_scripts (PolkitBackendJsAuthority  *authority)
+-+{
+-+  GList *files = NULL;
+-+  GList *l;
+-+  guint num_scripts = 0;
+-+  GError *error = NULL;
+-+  guint n;
+-+
+-+  files = NULL;
+-+
+-+  for (n = 0; authority->priv->rules_dirs != NULL && authority->priv->rules_dirs[n] != NULL; n++)
+-+    {
+-+      const gchar *dir_name = authority->priv->rules_dirs[n];
+-+      GDir *dir = NULL;
+-+
+-+      polkit_backend_authority_log (POLKIT_BACKEND_AUTHORITY (authority),
+-+                                    "Loading rules from directory %s",
+-+                                    dir_name);
+-+
+-+      dir = g_dir_open (dir_name,
+-+                        0,
+-+                        &error);
+-+      if (dir == NULL)
+-+        {
+-+          polkit_backend_authority_log (POLKIT_BACKEND_AUTHORITY (authority),
+-+                                        "Error opening rules directory: %s (%s, %d)",
+-+                                        error->message, g_quark_to_string (error->domain), error->code);
+-+          g_clear_error (&error);
+-+        }
+-+      else
+-+        {
+-+          const gchar *name;
+-+          while ((name = g_dir_read_name (dir)) != NULL)
+-+            {
+-+              if (g_str_has_suffix (name, ".rules"))
+-+                files = g_list_prepend (files, g_strdup_printf ("%s/%s", dir_name, name));
 -+            }
--+        )  # main thread
--+        self.assertTrue(fstats.empty())
+-+          g_dir_close (dir);
+-+        }
+-+    }
 -+
--+        for i in ctx_ids:
--+            fstats =3D yappi.get_func_stats(
--+                filter=3D{
--+                    "ctx_id": i,
--+                    "name": "a",
--+                    "ncall": 1
+-+  files = g_list_sort (files, (GCompareFunc) polkit_backend_common_rules_file_name_cmp);
+-+
+-+  for (l = files; l != NULL; l = l->next)
+-+    {
+-+      const gchar *filename = (gchar *)l->data;
+-+
+-+      if (!execute_script_with_runaway_killer(authority, filename))
+-+          continue;
+-+      num_scripts++;
+-+    }
+-+
+-+  polkit_backend_authority_log (POLKIT_BACKEND_AUTHORITY (authority),
+-+                                "Finished loading, compiling and executing %d rules",
+-+                                num_scripts);
+-+  g_list_free_full (files, g_free);
+-+}
+-+
+-+void
+-+polkit_backend_common_reload_scripts (PolkitBackendJsAuthority *authority)
+-+{
+-+  duk_context *cx = authority->priv->cx;
+-+
+-+  duk_set_top (cx, 0);
+-+  if (!duk_get_global_string (cx, "polkit")) {
+-+      polkit_backend_authority_log (POLKIT_BACKEND_AUTHORITY (authority),
+-+                                    "Error deleting old rules, not loading new ones");
+-+      return;
+-+  }
+-+  duk_push_string (cx, "_deleteRules");
+-+
+-+  duk_call_prop (cx, 0, 0);
+-+
+-+  polkit_backend_authority_log (POLKIT_BACKEND_AUTHORITY (authority),
+-+                                "Collecting garbage unconditionally...");
+-+
+-+  load_scripts (authority);
+-+
+-+  /* Let applications know we have new rules... */
+-+  g_signal_emit_by_name (authority, "changed");
+-+}
+-+
+-+static void
+-+setup_file_monitors (PolkitBackendJsAuthority *authority)
+-+{
+-+  guint n;
+-+  GPtrArray *p;
+-+
+-+  p = g_ptr_array_new ();
+-+  for (n = 0; authority->priv->rules_dirs != NULL && authority->priv->rules_dirs[n] != NULL; n++)
+-+    {
+-+      GFile *file;
+-+      GError *error;
+-+      GFileMonitor *monitor;
+-+
+-+      file = g_file_new_for_path (authority->priv->rules_dirs[n]);
+-+      error = NULL;
+-+      monitor = g_file_monitor_directory (file,
+-+                                          G_FILE_MONITOR_NONE,
+-+                                          NULL,
+-+                                          &error);
+-+      g_object_unref (file);
+-+      if (monitor == NULL)
+-+        {
+-+          g_warning ("Error monitoring directory %s: %s",
+-+                     authority->priv->rules_dirs[n],
+-+                     error->message);
+-+          g_clear_error (&error);
+-+        }
+-+      else
+-+        {
+-+          g_signal_connect (monitor,
+-+                            "changed",
+-+                            G_CALLBACK (polkit_backend_common_on_dir_monitor_changed),
+-+                            authority);
+-+          g_ptr_array_add (p, monitor);
+-+        }
+-+    }
+-+  g_ptr_array_add (p, NULL);
+-+  authority->priv->dir_monitors = (GFileMonitor**) g_ptr_array_free (p, FALSE);
+-+}
+-+
+-+void
+-+polkit_backend_common_js_authority_constructed (GObject *object)
+-+{
+-+  PolkitBackendJsAuthority *authority = POLKIT_BACKEND_JS_AUTHORITY (object);
+-+  duk_context *cx;
+-+
+-+  cx = duk_create_heap (NULL, NULL, NULL, authority, report_error);
+-+  if (cx == NULL)
+-+    goto fail;
+-+
+-+  authority->priv->cx = cx;
+-+
+-+  duk_push_global_object (cx);
+-+  duk_push_object (cx);
+-+  duk_put_function_list (cx, -1, js_polkit_functions);
+-+  duk_put_prop_string (cx, -2, "polkit");
+-+
+-+  /* load polkit objects/functions into JS context (e.g. addRule(),
+-+   * _deleteRules(), _runRules() et al)
+-+   */
+-+  duk_eval_string (cx, init_js);
+-+
+-+  if (authority->priv->rules_dirs == NULL)
+-+    {
+-+      authority->priv->rules_dirs = g_new0 (gchar *, 3);
+-+      authority->priv->rules_dirs[0] = g_strdup (PACKAGE_SYSCONF_DIR "/polkit-1/rules.d");
+-+      authority->priv->rules_dirs[1] = g_strdup (PACKAGE_DATA_DIR "/polkit-1/rules.d");
+-+    }
+-+
+-+  setup_file_monitors (authority);
+-+  load_scripts (authority);
+-+
+-+  G_OBJECT_CLASS (polkit_backend_js_authority_parent_class)->constructed (object);
+-+  return;
+-+
+-+ fail:
+-+  g_critical ("Error initializing JavaScript environment");
+-+  g_assert_not_reached ();
+-+}
+-+
+-+void
+-+polkit_backend_common_js_authority_finalize (GObject *object)
+-+{
+-+  PolkitBackendJsAuthority *authority = POLKIT_BACKEND_JS_AUTHORITY (object);
+-+  guint n;
+-+
+-+  for (n = 0; authority->priv->dir_monitors != NULL && authority->priv->dir_monitors[n] != NULL; n++)
+-+    {
+-+      GFileMonitor *monitor = authority->priv->dir_monitors[n];
+-+      g_signal_handlers_disconnect_by_func (monitor,
+-+                                            G_CALLBACK (polkit_backend_common_on_dir_monitor_changed),
+-+                                            authority);
+-+      g_object_unref (monitor);
+-+    }
+-+  g_free (authority->priv->dir_monitors);
+-+  g_strfreev (authority->priv->rules_dirs);
+-+
+-+  duk_destroy_heap (authority->priv->cx);
+-+
+-+  G_OBJECT_CLASS (polkit_backend_js_authority_parent_class)->finalize (object);
+-+}
+-+
+-+void
+-+polkit_backend_common_js_authority_set_property (GObject      *object,
+-+                                                 guint         property_id,
+-+                                                 const GValue *value,
+-+                                                 GParamSpec   *pspec)
+-+{
+-+  PolkitBackendJsAuthority *authority = POLKIT_BACKEND_JS_AUTHORITY (object);
+-+
+-+  switch (property_id)
+-+    {
+-+      case PROP_RULES_DIRS:
+-+        g_assert (authority->priv->rules_dirs == NULL);
+-+        authority->priv->rules_dirs = (gchar **) g_value_dup_boxed (value);
+-+        break;
+-+
+-+      default:
+-+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+-+        break;
+-+    }
+-+}
+-+
+-+static void
+-+polkit_backend_js_authority_class_init (PolkitBackendJsAuthorityClass *klass)
+-+{
+-+  polkit_backend_common_js_authority_class_init_common (klass);
+-+  g_type_class_add_private (klass, sizeof (PolkitBackendJsAuthorityPrivate));
+-+}
+-+
+-+/* ---------------------------------------------------------------------------------------------------- */
+-+
+-+static void
+-+set_property_str (duk_context *cx,
+-+                  const gchar *name,
+-+                  const gchar *value)
+-+{
+-+  duk_push_string (cx, value);
+-+  duk_put_prop_string (cx, -2, name);
+-+}
+-+
+-+static void
+-+set_property_strv (duk_context *cx,
+-+                   const gchar *name,
+-+                   GPtrArray   *value)
+-+{
+-+  guint n;
+-+  duk_push_array (cx);
+-+  for (n = 0; n < value->len; n++)
+-+    {
+-+      duk_push_string (cx, g_ptr_array_index (value, n));
+-+      duk_put_prop_index (cx, -2, n);
+-+    }
+-+  duk_put_prop_string (cx, -2, name);
+-+}
+-+
+-+static void
+-+set_property_int32 (duk_context *cx,
+-+                    const gchar *name,
+-+                    gint32       value)
+-+{
+-+  duk_push_int (cx, value);
+-+  duk_put_prop_string (cx, -2, name);
+-+}
+-+
+-+static void
+-+set_property_bool (duk_context *cx,
+-+                   const char  *name,
+-+                   gboolean     value)
+-+{
+-+  duk_push_boolean (cx, value);
+-+  duk_put_prop_string (cx, -2, name);
+-+}
+-+
+-+/* ---------------------------------------------------------------------------------------------------- */
+-+
+-+static gboolean
+-+push_subject (duk_context               *cx,
+-+              PolkitSubject             *subject,
+-+              PolkitIdentity            *user_for_subject,
+-+              gboolean                   subject_is_local,
+-+              gboolean                   subject_is_active,
+-+              GError                   **error)
+-+{
+-+  gboolean ret = FALSE;
+-+  pid_t pid;
+-+  uid_t uid;
+-+  gchar *user_name = NULL;
+-+  GPtrArray *groups = NULL;
+-+  struct passwd *passwd;
+-+  char *seat_str = NULL;
+-+  char *session_str = NULL;
+-+
+-+  if (!duk_get_global_string (cx, "Subject")) {
+-+    return FALSE;
+-+  }
+-+
+-+  duk_new (cx, 0);
+-+
+-+  if (POLKIT_IS_UNIX_PROCESS (subject))
+-+    {
+-+      pid = polkit_unix_process_get_pid (POLKIT_UNIX_PROCESS (subject));
+-+    }
+-+  else if (POLKIT_IS_SYSTEM_BUS_NAME (subject))
+-+    {
+-+      PolkitSubject *process;
+-+      process = polkit_system_bus_name_get_process_sync (POLKIT_SYSTEM_BUS_NAME (subject), NULL, error);
+-+      if (process == NULL)
+-+        goto out;
+-+      pid = polkit_unix_process_get_pid (POLKIT_UNIX_PROCESS (process));
+-+      g_object_unref (process);
+-+    }
+-+  else
+-+    {
+-+      g_assert_not_reached ();
+-+    }
+-+
+-+#ifdef HAVE_LIBSYSTEMD
+-+  if (sd_pid_get_session (pid, &session_str) == 0)
+-+    {
+-+      if (sd_session_get_seat (session_str, &seat_str) == 0)
+-+        {
+-+          /* do nothing */
+-+        }
+-+    }
+-+#endif /* HAVE_LIBSYSTEMD */
+-+
+-+  g_assert (POLKIT_IS_UNIX_USER (user_for_subject));
+-+  uid = polkit_unix_user_get_uid (POLKIT_UNIX_USER (user_for_subject));
+-+
+-+  groups = g_ptr_array_new_with_free_func (g_free);
+-+
+-+  passwd = getpwuid (uid);
+-+  if (passwd == NULL)
+-+    {
+-+      user_name = g_strdup_printf ("%d", (gint) uid);
+-+      g_warning ("Error looking up info for uid %d: %m", (gint) uid);
+-+    }
+-+  else
+-+    {
+-+      gid_t gids[512];
+-+      int num_gids = 512;
+-+
+-+      user_name = g_strdup (passwd->pw_name);
+-+
+-+      if (getgrouplist (passwd->pw_name,
+-+                        passwd->pw_gid,
+-+                        gids,
+-+                        &num_gids) < 0)
+-+        {
+-+          g_warning ("Error looking up groups for uid %d: %m", (gint) uid);
+-+        }
+-+      else
+-+        {
+-+          gint n;
+-+          for (n = 0; n < num_gids; n++)
+-+            {
+-+              struct group *group;
+-+              group = getgrgid (gids[n]);
+-+              if (group == NULL)
+-+                {
+-+                  g_ptr_array_add (groups, g_strdup_printf ("%d", (gint) gids[n]));
 -+                }
--+            )
--+            self.assertEqual(fstats.pop().ncall, 1)
--+            fstats =3D yappi.get_func_stats(filter=3D{"ctx_id": i, "name"=
-: "b"})
--+            self.assertEqual(fstats.pop().ncall, 1)
--+            fstats =3D yappi.get_func_stats(filter=3D{"ctx_id": i, "name"=
-: "c"})
--+            self.assertEqual(fstats.pop().ncall, 1)
--+
--+        yappi.clear_stats()
--+        yappi.start(builtins=3DTrue)
--+        time.sleep(0.1)
--+        yappi.stop()
--+        fstats =3D yappi.get_func_stats(filter=3D{"module": "time"})
--+        self.assertEqual(len(fstats), 1)
--+
--+        # invalid filters`
--+        self.assertRaises(
--+            Exception, yappi.get_func_stats, filter=3D{'tag': "sss"}
--+        )
--+        self.assertRaises(
--+            Exception, yappi.get_func_stats, filter=3D{'ctx_id': "None"}
--+        )
--+
--+    def test_filter_callback(self):
--+
--+        def a():
--+            time.sleep(0.1)
--+
--+        def b():
--+            a()
--+
--+        def c():
--+            pass
--+
--+        def d():
--+            pass
--+
--+        yappi.set_clock_type("wall")
--+        yappi.start(builtins=3DTrue)
--+        a()
--+        b()
--+        c()
--+        d()
--+        stats =3D yappi.get_func_stats(
--+            filter_callback=3Dlambda x: yappi.func_matches(x, [a, b])
--+        )
--+        #stats.print_all()
--+        r1 =3D '''
--+        tests/test_functionality.py:98 a      2      0.000000  0.200350  =
-0.100175
--+        tests/test_functionality.py:101 b     1      0.000000  0.120000  =
-0.100197
--+        '''
--+        self.assert_traces_almost_equal(r1, stats)
--+        self.assertEqual(len(stats), 2)
--+        stats =3D yappi.get_func_stats(
--+            filter_callback=3Dlambda x: yappi.
--+            module_matches(x, [sys.modules[__name__]])
--+        )
--+        r1 =3D '''
--+        tests/test_functionality.py:98 a      2      0.000000  0.230130  =
-0.115065
--+        tests/test_functionality.py:101 b     1      0.000000  0.120000  =
-0.109011
--+        tests/test_functionality.py:104 c     1      0.000000  0.000002  =
-0.000002
--+        tests/test_functionality.py:107 d     1      0.000000  0.000001  =
-0.000001
--+        '''
--+        self.assert_traces_almost_equal(r1, stats)
--+        self.assertEqual(len(stats), 4)
--+
--+        stats =3D yappi.get_func_stats(
--+            filter_callback=3Dlambda x: yappi.func_matches(x, [time.sleep=
-])
--+        )
--+        self.assertEqual(len(stats), 1)
--+        r1 =3D '''
--+        time.sleep                            2      0.206804  0.220000  =
-0.103402
--+        '''
--+        self.assert_traces_almost_equal(r1, stats)
--+
--+    def test_print_formatting(self):
--+
--+        def a():
--+            pass
--+
--+        def b():
--+            a()
--+
--+        func_cols =3D {
--+            1: ("name", 48),
--+            0: ("ncall", 5),
--+            2: ("tsub", 8),
+-+              else
+-+                {
+-+                  g_ptr_array_add (groups, g_strdup (group->gr_name));
+-+                }
+-+            }
 -+        }
--+        thread_cols =3D {
--+            1: ("name", 48),
--+            0: ("ttot", 8),
+-+    }
+-+
+-+  set_property_int32 (cx, "pid", pid);
+-+  set_property_str (cx, "user", user_name);
+-+  set_property_strv (cx, "groups", groups);
+-+  set_property_str (cx, "seat", seat_str);
+-+  set_property_str (cx, "session", session_str);
+-+  set_property_bool (cx, "local", subject_is_local);
+-+  set_property_bool (cx, "active", subject_is_active);
+-+
+-+  ret = TRUE;
+-+
+-+ out:
+-+  free (session_str);
+-+  free (seat_str);
+-+  g_free (user_name);
+-+  if (groups != NULL)
+-+    g_ptr_array_unref (groups);
+-+
+-+  return ret;
+-+}
+-+
+-+/* ---------------------------------------------------------------------------------------------------- */
+-+
+-+static gboolean
+-+push_action_and_details (duk_context               *cx,
+-+                         const gchar               *action_id,
+-+                         PolkitDetails             *details,
+-+                         GError                   **error)
+-+{
+-+  gchar **keys;
+-+  guint n;
+-+
+-+  if (!duk_get_global_string (cx, "Action")) {
+-+    return FALSE;
+-+  }
+-+
+-+  duk_new (cx, 0);
+-+
+-+  set_property_str (cx, "id", action_id);
+-+
+-+  keys = polkit_details_get_keys (details);
+-+  for (n = 0; keys != NULL && keys[n] != NULL; n++)
+-+    {
+-+      gchar *key;
+-+      const gchar *value;
+-+      key = g_strdup_printf ("_detail_%s", keys[n]);
+-+      value = polkit_details_lookup (details, keys[n]);
+-+      set_property_str (cx, key, value);
+-+      g_free (key);
+-+    }
+-+  g_strfreev (keys);
+-+
+-+  return TRUE;
+-+}
+-+
+-+/* ---------------------------------------------------------------------------------------------------- */
+-+
+-+typedef struct {
+-+  PolkitBackendJsAuthority *authority;
+-+  const gchar *filename;
+-+  pthread_cond_t cond;
+-+  pthread_mutex_t mutex;
+-+  gint ret;
+-+} RunawayKillerCtx;
+-+
+-+static gpointer
+-+runaway_killer_thread_execute_js (gpointer user_data)
+-+{
+-+  RunawayKillerCtx *ctx = user_data;
+-+  duk_context *cx = ctx->authority->priv->cx;
+-+
+-+  int oldtype, pthread_err;
+-+
+-+  if ((pthread_err = pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, &oldtype))) {
+-+    polkit_backend_authority_log (POLKIT_BACKEND_AUTHORITY (ctx->authority),
+-+                                  "Error setting thread cancel type: %s",
+-+                                  strerror(pthread_err));
+-+    goto err;
+-+  }
+-+
+-+  GFile *file = g_file_new_for_path(ctx->filename);
+-+  char *contents;
+-+  gsize len;
+-+
+-+  if (!g_file_load_contents(file, NULL, &contents, &len, NULL, NULL)) {
+-+    polkit_backend_authority_log(POLKIT_BACKEND_AUTHORITY(ctx->authority),
+-+                                 "Error loading script %s", ctx->filename);
+-+    g_object_unref(file);
+-+    goto err;
+-+  }
+-+
+-+  g_object_unref(file);
+-+
+-+  /* evaluate the script, trying to print context in any syntax errors
+-+     found */
+-+  if (duk_peval_lstring(cx, contents, len) != 0)
+-+  {
+-+    polkit_backend_authority_log(POLKIT_BACKEND_AUTHORITY(ctx->authority),
+-+                                 "Error compiling script %s: %s", ctx->filename,
+-+                                 duk_safe_to_string(cx, -1));
+-+    duk_pop(cx);
+-+    goto free_err;
+-+  }
+-+  g_free(contents);
+-+
+-+  ctx->ret = RUNAWAY_KILLER_THREAD_EXIT_STATUS_SUCCESS;
+-+  goto end;
+-+
+-+free_err:
+-+  g_free(contents);
+-+err:
+-+  ctx->ret = RUNAWAY_KILLER_THREAD_EXIT_STATUS_FAILURE;
+-+end:
+-+  if ((pthread_err = pthread_cond_signal(&ctx->cond))) {
+-+    polkit_backend_authority_log (POLKIT_BACKEND_AUTHORITY (ctx->authority),
+-+                                  "Error signaling on condition variable: %s",
+-+                                  strerror(pthread_err));
+-+    ctx->ret = RUNAWAY_KILLER_THREAD_EXIT_STATUS_FAILURE;
+-+  }
+-+  return NULL;
+-+}
+-+
+-+static gpointer
+-+runaway_killer_thread_call_js (gpointer user_data)
+-+{
+-+  RunawayKillerCtx *ctx = user_data;
+-+  duk_context *cx = ctx->authority->priv->cx;
+-+  int oldtype, pthread_err;
+-+
+-+  if ((pthread_err = pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, &oldtype))) {
+-+    polkit_backend_authority_log (POLKIT_BACKEND_AUTHORITY (ctx->authority),
+-+                                  "Error setting thread cancel type: %s",
+-+                                  strerror(pthread_err));
+-+    goto err;
+-+  }
+-+
+-+  if (duk_pcall_prop (cx, 0, 2) != DUK_EXEC_SUCCESS)
+-+    {
+-+      polkit_backend_authority_log (POLKIT_BACKEND_AUTHORITY (ctx->authority),
+-+                                    "Error evaluating admin rules: ",
+-+                                    duk_safe_to_string (cx, -1));
+-+      goto err;
+-+    }
+-+
+-+  ctx->ret = RUNAWAY_KILLER_THREAD_EXIT_STATUS_SUCCESS;
+-+  goto end;
+-+
+-+err:
+-+  ctx->ret = RUNAWAY_KILLER_THREAD_EXIT_STATUS_FAILURE;
+-+end:
+-+  if ((pthread_err = pthread_cond_signal(&ctx->cond))) {
+-+    polkit_backend_authority_log (POLKIT_BACKEND_AUTHORITY (ctx->authority),
+-+                                  "Error signaling on condition variable: %s",
+-+                                  strerror(pthread_err));
+-+    ctx->ret = RUNAWAY_KILLER_THREAD_EXIT_STATUS_FAILURE;
+-+  }
+-+  return NULL;
+-+}
+-+
+-+#if defined (HAVE_PTHREAD_CONDATTR_SETCLOCK)
+-+#  if defined(CLOCK_MONOTONIC)
+-+#    define PK_CLOCK CLOCK_MONOTONIC
+-+#  elif defined(CLOCK_BOOTTIME)
+-+#    define PK_CLOCK CLOCK_BOOTTIME
+-+#  else
+-+     /* No suitable clock */
+-+#    undef HAVE_PTHREAD_CONDATTR_SETCLOCK
+-+#    define PK_CLOCK CLOCK_REALTIME
+-+#  endif
+-+#else  /* ! HAVE_PTHREAD_CONDATTR_SETCLOCK */
+-+#  define PK_CLOCK CLOCK_REALTIME
+-+#endif /* ! HAVE_PTHREAD_CONDATTR_SETCLOCK */
+-+
+-+static gboolean
+-+runaway_killer_common(PolkitBackendJsAuthority *authority, RunawayKillerCtx *ctx, void *js_context_cb (void *user_data))
+-+{
+-+  int pthread_err;
+-+  gboolean cancel = FALSE;
+-+  pthread_condattr_t attr;
+-+  struct timespec abs_time;
+-+
+-+#ifdef HAVE_PTHREAD_CONDATTR_SETCLOCK
+-+  if ((pthread_err = pthread_condattr_init(&attr))) {
+-+    polkit_backend_authority_log (POLKIT_BACKEND_AUTHORITY (authority),
+-+                                  "Error initializing condition variable attributes: %s",
+-+                                  strerror(pthread_err));
+-+    return FALSE;
+-+  }
+-+  if ((pthread_err = pthread_condattr_setclock(&attr, PK_CLOCK))) {
+-+    polkit_backend_authority_log (POLKIT_BACKEND_AUTHORITY (authority),
+-+                                  "Error setting condition variable attributes: %s",
+-+                                  strerror(pthread_err));
+-+    goto err_clean_condattr;
+-+  }
+-+  /* Init again, with needed attr */
+-+  if ((pthread_err = pthread_cond_init(&ctx->cond, &attr))) {
+-+    polkit_backend_authority_log (POLKIT_BACKEND_AUTHORITY (authority),
+-+                                  "Error initializing condition variable: %s",
+-+                                  strerror(pthread_err));
+-+    goto err_clean_condattr;
+-+  }
+-+#endif
+-+
+-+  if ((pthread_err = pthread_mutex_lock(&ctx->mutex))) {
+-+    polkit_backend_authority_log (POLKIT_BACKEND_AUTHORITY (authority),
+-+                                  "Error locking mutex: %s",
+-+                                  strerror(pthread_err));
+-+    goto err_clean_cond;
+-+  }
+-+
+-+  if (clock_gettime(PK_CLOCK, &abs_time)) {
+-+    polkit_backend_authority_log (POLKIT_BACKEND_AUTHORITY (authority),
+-+                                  "Error getting system's monotonic time: %s",
+-+                                  strerror(errno));
+-+    goto err_clean_cond;
+-+  }
+-+  abs_time.tv_sec += RUNAWAY_KILLER_TIMEOUT;
+-+
+-+  if ((pthread_err = pthread_create(&authority->priv->runaway_killer_thread, NULL,
+-+                                    js_context_cb, ctx))) {
+-+    polkit_backend_authority_log (POLKIT_BACKEND_AUTHORITY (authority),
+-+                                  "Error creating runaway JS killer thread: %s",
+-+                                  strerror(pthread_err));
+-+    goto err_clean_cond;
+-+  }
+-+
+-+  while (ctx->ret == RUNAWAY_KILLER_THREAD_EXIT_STATUS_UNSET) /* loop to treat spurious wakeups */
+-+    if (pthread_cond_timedwait(&ctx->cond, &ctx->mutex, &abs_time) == ETIMEDOUT) {
+-+      cancel = TRUE;
+-+
+-+      /* Log that we are terminating the script */
+-+      polkit_backend_authority_log (POLKIT_BACKEND_AUTHORITY (authority),
+-+                                    "Terminating runaway script after %d seconds",
+-+                                    RUNAWAY_KILLER_TIMEOUT);
+-+
+-+      break;
+-+    }
+-+
+-+  if ((pthread_err = pthread_mutex_unlock(&ctx->mutex))) {
+-+    polkit_backend_authority_log (POLKIT_BACKEND_AUTHORITY (authority),
+-+                                  "Error unlocking mutex: %s",
+-+                                  strerror(pthread_err));
+-+    goto err_clean_cond;
+-+  }
+-+
+-+  if (cancel) {
+-+    if ((pthread_err = pthread_cancel (authority->priv->runaway_killer_thread))) {
+-+      polkit_backend_authority_log (POLKIT_BACKEND_AUTHORITY (authority),
+-+                                    "Error cancelling runaway JS killer thread: %s",
+-+                                    strerror(pthread_err));
+-+      goto err_clean_cond;
+-+    }
+-+  }
+-+  if ((pthread_err = pthread_join (authority->priv->runaway_killer_thread, NULL))) {
+-+      polkit_backend_authority_log (POLKIT_BACKEND_AUTHORITY (authority),
+-+                                    "Error joining runaway JS killer thread: %s",
+-+                                    strerror(pthread_err));
+-+      goto err_clean_cond;
+-+    }
+-+
+-+  return ctx->ret == RUNAWAY_KILLER_THREAD_EXIT_STATUS_SUCCESS;
+-+
+-+    err_clean_cond:
+-+#ifdef HAVE_PTHREAD_CONDATTR_SETCLOCK
+-+  pthread_cond_destroy(&ctx->cond);
+-+#endif
+-+    err_clean_condattr:
+-+#ifdef HAVE_PTHREAD_CONDATTR_SETCLOCK
+-+  pthread_condattr_destroy(&attr);
+-+#endif
+-+  return FALSE;
+-+}
+-+
+-+/* Blocking for at most RUNAWAY_KILLER_TIMEOUT */
+-+static gboolean
+-+execute_script_with_runaway_killer(PolkitBackendJsAuthority *authority,
+-+                                   const gchar *filename)
+-+{
+-+  RunawayKillerCtx ctx = {.authority = authority, .filename = filename,
+-+                          .ret = RUNAWAY_KILLER_THREAD_EXIT_STATUS_UNSET,
+-+                          .mutex = PTHREAD_MUTEX_INITIALIZER,
+-+                          .cond = PTHREAD_COND_INITIALIZER};
+-+
+-+  return runaway_killer_common(authority, &ctx, &runaway_killer_thread_execute_js);
+-+}
+-+
+-+/* Calls already stacked function and args. Blocking for at most
+-+ * RUNAWAY_KILLER_TIMEOUT. If timeout is the case, ctx.ret will be
+-+ * RUNAWAY_KILLER_THREAD_EXIT_STATUS_UNSET, thus returning FALSE.
+-+ */
+-+static gboolean
+-+call_js_function_with_runaway_killer(PolkitBackendJsAuthority *authority)
+-+{
+-+  RunawayKillerCtx ctx = {.authority = authority,
+-+                          .ret = RUNAWAY_KILLER_THREAD_EXIT_STATUS_UNSET,
+-+                          .mutex = PTHREAD_MUTEX_INITIALIZER,
+-+                          .cond = PTHREAD_COND_INITIALIZER};
+-+
+-+  return runaway_killer_common(authority, &ctx, &runaway_killer_thread_call_js);
+-+}
+-+
+-+/* ---------------------------------------------------------------------------------------------------- */
+-+
+-+GList *
+-+polkit_backend_common_js_authority_get_admin_auth_identities (PolkitBackendInteractiveAuthority *_authority,
+-+                                                              PolkitSubject                     *caller,
+-+                                                              PolkitSubject                     *subject,
+-+                                                              PolkitIdentity                    *user_for_subject,
+-+                                                              gboolean                           subject_is_local,
+-+                                                              gboolean                           subject_is_active,
+-+                                                              const gchar                       *action_id,
+-+                                                              PolkitDetails                     *details)
+-+{
+-+  PolkitBackendJsAuthority *authority = POLKIT_BACKEND_JS_AUTHORITY (_authority);
+-+  GList *ret = NULL;
+-+  guint n;
+-+  GError *error = NULL;
+-+  const char *ret_str = NULL;
+-+  gchar **ret_strs = NULL;
+-+  duk_context *cx = authority->priv->cx;
+-+
+-+  duk_set_top (cx, 0);
+-+  if (!duk_get_global_string (cx, "polkit")) {
+-+      polkit_backend_authority_log (POLKIT_BACKEND_AUTHORITY (authority),
+-+                                    "Error deleting old rules, not loading new ones");
+-+      goto out;
+-+  }
+-+
+-+  duk_push_string (cx, "_runAdminRules");
+-+
+-+  if (!push_action_and_details (cx, action_id, details, &error))
+-+    {
+-+      polkit_backend_authority_log (POLKIT_BACKEND_AUTHORITY (authority),
+-+                                    "Error converting action and details to JS object: %s",
+-+                                    error->message);
+-+      g_clear_error (&error);
+-+      goto out;
+-+    }
+-+
+-+  if (!push_subject (cx, subject, user_for_subject, subject_is_local, subject_is_active, &error))
+-+    {
+-+      polkit_backend_authority_log (POLKIT_BACKEND_AUTHORITY (authority),
+-+                                    "Error converting subject to JS object: %s",
+-+                                    error->message);
+-+      g_clear_error (&error);
+-+      goto out;
+-+    }
+-+
+-+  if (!call_js_function_with_runaway_killer (authority))
+-+    goto out;
+-+
+-+  ret_str = duk_require_string (cx, -1);
+-+
+-+  ret_strs = g_strsplit (ret_str, ",", -1);
+-+  for (n = 0; ret_strs != NULL && ret_strs[n] != NULL; n++)
+-+    {
+-+      const gchar *identity_str = ret_strs[n];
+-+      PolkitIdentity *identity;
+-+
+-+      error = NULL;
+-+      identity = polkit_identity_from_string (identity_str, &error);
+-+      if (identity == NULL)
+-+        {
+-+          polkit_backend_authority_log (POLKIT_BACKEND_AUTHORITY (authority),
+-+                                        "Identity `%s' is not valid, ignoring: %s",
+-+                                        identity_str, error->message);
+-+          g_clear_error (&error);
 -+        }
--+
--+        yappi.start()
--+        a()
--+        b()
--+        yappi.stop()
--+        fs =3D yappi.get_func_stats()
--+        cs =3D fs[1].children
--+        ts =3D yappi.get_thread_stats()
--+        #fs.print_all(out=3Dsys.stderr, columns=3D{1:("name", 70), })
--+        #cs.print_all(out=3Dsys.stderr, columns=3Dfunc_cols)
--+        #ts.print_all(out=3Dsys.stderr, columns=3Dthread_cols)
--+        #cs.print_all(out=3Dsys.stderr, columns=3D{})
--+
--+        self.assertRaises(
--+            yappi.YappiError, fs.print_all, columns=3D{1: ("namee", 9)}
--+        )
--+        self.assertRaises(
--+            yappi.YappiError, cs.print_all, columns=3D{1: ("dd", 0)}
--+        )
--+        self.assertRaises(
--+            yappi.YappiError, ts.print_all, columns=3D{1: ("tidd", 0)}
--+        )
--+
--+    def test_get_clock(self):
--+        yappi.set_clock_type('cpu')
--+        self.assertEqual('cpu', yappi.get_clock_type())
--+        clock_info =3D yappi.get_clock_info()
--+        self.assertTrue('api' in clock_info)
--+        self.assertTrue('resolution' in clock_info)
--+
--+        yappi.set_clock_type('wall')
--+        self.assertEqual('wall', yappi.get_clock_type())
--+
--+        t0 =3D yappi.get_clock_time()
--+        time.sleep(0.1)
--+        duration =3D yappi.get_clock_time() - t0
--+        self.assertTrue(0.05 < duration < 0.3)
--+
--+    def test_profile_decorator(self):
--+
--+        def aggregate(func, stats):
--+            fname =3D "tests/%s.profile" % (func.__name__)
--+            try:
--+                stats.add(fname)
--+            except IOError:
--+                pass
--+            stats.save(fname)
--+            raise Exception("messing around")
--+
--+        @yappi.profile(return_callback=3Daggregate)
--+        def a(x, y):
--+            if x + y =3D=3D 25:
--+                raise Exception("")
--+            return x + y
--+
--+        def b():
--+            pass
--+
--+        try:
--+            os.remove(
--+                "tests/a.profile"
--+            )  # remove the one from prev test, if available
--+        except:
--+            pass
--+
--+        # global profile is on to mess things up
--+        yappi.start()
--+        b()
--+
--+        # assert functionality and call function at same time
--+        try:
--+            self.assertEqual(a(1, 2), 3)
--+        except:
--+            pass
--+        try:
--+            self.assertEqual(a(2, 5), 7)
--+        except:
--+            pass
--+        try:
--+            a(4, 21)
--+        except:
--+            pass
--+        stats =3D yappi.get_func_stats().add("tests/a.profile")
--+        fsa =3D utils.find_stat_by_name(stats, 'a')
--+        self.assertEqual(fsa.ncall, 3)
--+        self.assertEqual(len(stats), 1)  # b() should be cleared out.
--+
--+        @yappi.profile(return_callback=3Daggregate)
--+        def count_down_rec(n):
--+            if n =3D=3D 0:
--+                return
--+            count_down_rec(n - 1)
--+
--+        try:
--+            os.remove(
--+                "tests/count_down_rec.profile"
--+            )  # remove the one from prev test, if available
--+        except:
--+            pass
--+
--+        try:
--+            count_down_rec(4)
--+        except:
--+            pass
--+        try:
--+            count_down_rec(3)
--+        except:
--+            pass
--+
--+        stats =3D yappi.YFuncStats("tests/count_down_rec.profile")
--+        fsrec =3D utils.find_stat_by_name(stats, 'count_down_rec')
--+        self.assertEqual(fsrec.ncall, 9)
--+        self.assertEqual(fsrec.nactualcall, 2)
--+
--+    def test_strip_dirs(self):
--+
--+        def a():
--+            pass
--+
--+        stats =3D utils.run_and_get_func_stats(a, )
--+        stats.strip_dirs()
--+        fsa =3D utils.find_stat_by_name(stats, "a")
--+        self.assertEqual(fsa.module, os.path.basename(fsa.module))
--+
--+    @unittest.skipIf(os.name =3D=3D "nt", "do not run on Windows")
--+    def test_run_as_script(self):
--+        import re
--+        p =3D subprocess.Popen(
--+            ['yappi', os.path.join('./tests', 'run_as_script.py')],
--+            stdout=3Dsubprocess.PIPE
--+        )
--+        out, err =3D p.communicate()
--+        self.assertEqual(p.returncode, 0)
--+        func_stats, thread_stats =3D re.split(
--+            b'name\\s+id\\s+tid\\s+ttot\\s+scnt\\s*\n', out
--+        )
--+        self.assertTrue(b'FancyThread' in thread_stats)
--+
--+    def test_yappi_overhead(self):
--+        LOOP_COUNT =3D 100000
--+
--+        def a():
--+            pass
--+
--+        def b():
--+            for i in range(LOOP_COUNT):
--+                a()
--+
--+        t0 =3D time.time()
--+        yappi.start()
--+        b()
--+        yappi.stop()
--+        time_with_yappi =3D time.time() - t0
--+        t0 =3D time.time()
--+        b()
--+        time_without_yappi =3D time.time() - t0
--+        if time_without_yappi =3D=3D 0:
--+            time_without_yappi =3D 0.000001
--+
--+        # in latest v0.82, I calculated this as close to "7.0" in my mach=
-ine.
--+        # however, %83 of this overhead is coming from tickcount(). The o=
-ther %17
--+        # seems to have been evenly distributed to the internal bookkeepi=
-ng
--+        # structures/algorithms which seems acceptable. Note that our tes=
-t only
--+        # tests one function being profiled at-a-time in a short interval.
--+        # profiling high number of functions in a small time
--+        # is a different beast, (which is pretty unlikely in most applica=
-tions)
--+        # So as a conclusion: I cannot see any optimization window for Ya=
-ppi that
--+        # is worth implementing as we will only optimize %17 of the time.
--+        sys.stderr.write("\r\nYappi puts %0.1f times overhead to the prof=
-iled application in average.\r\n" % \
--+            (time_with_yappi / time_without_yappi))
--+
--+    def test_clear_stats_while_running(self):
--+
--+        def a():
--+            pass
--+
--+        yappi.start()
--+        a()
--+        yappi.clear_stats()
--+        a()
--+        stats =3D yappi.get_func_stats()
--+        fsa =3D utils.find_stat_by_name(stats, 'a')
--+        self.assertEqual(fsa.ncall, 1)
--+
--+    def test_generator(self):
--+
--+        def _gen(n):
--+            while (n > 0):
--+                yield n
--+                n -=3D 1
--+
--+        yappi.start()
--+        for x in _gen(5):
--+            pass
--+        self.assertTrue(
--+            yappi.convert2pstats(yappi.get_func_stats()) is not None
--+        )
--+
--+    def test_slice_child_stats_and_strip_dirs(self):
--+
--+        def b():
--+            for i in range(10000000):
--+                pass
--+
--+        def a():
--+            b()
--+
--+        yappi.start(builtins=3DTrue)
--+        a()
--+        stats =3D yappi.get_func_stats()
--+        fsa =3D utils.find_stat_by_name(stats, 'a')
--+        fsb =3D utils.find_stat_by_name(stats, 'b')
--+        self.assertTrue(fsa.children[0:1] is not None)
--+        prev_afullname =3D fsa.full_name
--+        prev_bchildfullname =3D fsa.children[fsb].full_name
--+        stats.strip_dirs()
--+        self.assertTrue(len(prev_afullname) > len(fsa.full_name))
--+        self.assertTrue(
--+            len(prev_bchildfullname) > len(fsa.children[fsb].full_name)
--+        )
--+
--+    def test_children_stat_functions(self):
--+        _timings =3D {"a_1": 5, "b_1": 3, "c_1": 1}
--+        _yappi._set_test_timings(_timings)
--+
--+        def b():
--+            pass
--+
--+        def c():
--+            pass
--+
--+        def a():
--+            b()
--+            c()
--+
--+        yappi.start()
--+        a()
--+        b()  # non-child call
--+        c()  # non-child call
--+        stats =3D yappi.get_func_stats()
--+        fsa =3D utils.find_stat_by_name(stats, 'a')
--+        childs_of_a =3D fsa.children.get().sort("tavg", "desc")
--+        prev_item =3D None
--+        for item in childs_of_a:
--+            if prev_item:
--+                self.assertTrue(prev_item.tavg > item.tavg)
--+            prev_item =3D item
--+        childs_of_a.sort("name", "desc")
--+        prev_item =3D None
--+        for item in childs_of_a:
--+            if prev_item:
--+                self.assertTrue(prev_item.name > item.name)
--+            prev_item =3D item
--+        childs_of_a.clear()
--+        self.assertTrue(childs_of_a.empty())
--+
--+    def test_no_stats_different_clock_type_load(self):
--+
--+        def a():
--+            pass
--+
--+        yappi.start()
--+        a()
--+        yappi.stop()
--+        yappi.get_func_stats().save("tests/ystats1.ys")
--+        yappi.clear_stats()
--+        yappi.set_clock_type("WALL")
--+        yappi.start()
--+        yappi.stop()
--+        stats =3D yappi.get_func_stats().add("tests/ystats1.ys")
--+        fsa =3D utils.find_stat_by_name(stats, 'a')
--+        self.assertTrue(fsa is not None)
--+
--+    def test_subsequent_profile(self):
--+        _timings =3D {"a_1": 1, "b_1": 1}
--+        _yappi._set_test_timings(_timings)
--+
--+        def a():
--+            pass
--+
--+        def b():
--+            pass
--+
--+        yappi.start()
--+        a()
--+        yappi.stop()
--+        yappi.start()
--+        b()
--+        yappi.stop()
--+        stats =3D yappi.get_func_stats()
--+        fsa =3D utils.find_stat_by_name(stats, 'a')
--+        fsb =3D utils.find_stat_by_name(stats, 'b')
--+        self.assertTrue(fsa is not None)
--+        self.assertTrue(fsb is not None)
--+        self.assertEqual(fsa.ttot, 1)
--+        self.assertEqual(fsb.ttot, 1)
--+
--+    def test_lambda(self):
--+        f =3D lambda: time.sleep(0.3)
--+        yappi.set_clock_type("wall")
--+        yappi.start()
--+        f()
--+        stats =3D yappi.get_func_stats()
--+        fsa =3D utils.find_stat_by_name(stats, '<lambda>')
--+        self.assertTrue(fsa.ttot > 0.1)
--+
--+    def test_module_stress(self):
--+        self.assertEqual(yappi.is_running(), False)
--+
--+        yappi.start()
--+        yappi.clear_stats()
--+        self.assertRaises(_yappi.error, yappi.set_clock_type, "wall")
--+
--+        yappi.stop()
--+        yappi.clear_stats()
--+        yappi.set_clock_type("cpu")
--+        self.assertRaises(yappi.YappiError, yappi.set_clock_type, "dummy")
--+        self.assertEqual(yappi.is_running(), False)
--+        yappi.clear_stats()
--+        yappi.clear_stats()
--+
--+    def test_stat_sorting(self):
--+        _timings =3D {"a_1": 13, "b_1": 10, "a_2": 6, "b_2": 1}
--+        _yappi._set_test_timings(_timings)
--+
--+        self._ncall =3D 1
--+
--+        def a():
--+            b()
--+
--+        def b():
--+            if self._ncall =3D=3D 2:
--+                return
--+            self._ncall +=3D 1
--+            a()
--+
--+        stats =3D utils.run_and_get_func_stats(a)
--+        stats =3D stats.sort("totaltime", "desc")
--+        prev_stat =3D None
--+        for stat in stats:
--+            if prev_stat:
--+                self.assertTrue(prev_stat.ttot >=3D stat.ttot)
--+            prev_stat =3D stat
--+        stats =3D stats.sort("totaltime", "asc")
--+        prev_stat =3D None
--+        for stat in stats:
--+            if prev_stat:
--+                self.assertTrue(prev_stat.ttot <=3D stat.ttot)
--+            prev_stat =3D stat
--+        stats =3D stats.sort("avgtime", "asc")
--+        prev_stat =3D None
--+        for stat in stats:
--+            if prev_stat:
--+                self.assertTrue(prev_stat.tavg <=3D stat.tavg)
--+            prev_stat =3D stat
--+        stats =3D stats.sort("name", "asc")
--+        prev_stat =3D None
--+        for stat in stats:
--+            if prev_stat:
--+                self.assertTrue(prev_stat.name <=3D stat.name)
--+            prev_stat =3D stat
--+        stats =3D stats.sort("subtime", "asc")
--+        prev_stat =3D None
--+        for stat in stats:
--+            if prev_stat:
--+                self.assertTrue(prev_stat.tsub <=3D stat.tsub)
--+            prev_stat =3D stat
--+
--+        self.assertRaises(
--+            yappi.YappiError, stats.sort, "invalid_func_sorttype_arg"
--+        )
--+        self.assertRaises(
--+            yappi.YappiError, stats.sort, "totaltime",
--+            "invalid_func_sortorder_arg"
--+        )
--+
--+    def test_start_flags(self):
--+        self.assertEqual(_yappi._get_start_flags(), None)
--+        yappi.start()
--+
--+        def a():
--+            pass
--+
--+        a()
--+        self.assertEqual(_yappi._get_start_flags()["profile_builtins"], 0)
--+        self.assertEqual(_yappi._get_start_flags()["profile_multicontext"=
-], 1)
--+        self.assertEqual(len(yappi.get_thread_stats()), 1)
--+
--+    def test_builtin_profiling(self):
--+
--+        def a():
--+            time.sleep(0.4)  # is a builtin function
--+
--+        yappi.set_clock_type('wall')
--+
--+        yappi.start(builtins=3DTrue)
--+        a()
--+        stats =3D yappi.get_func_stats()
--+        fsa =3D utils.find_stat_by_name(stats, 'sleep')
--+        self.assertTrue(fsa is not None)
--+        self.assertTrue(fsa.ttot > 0.3)
--+        yappi.stop()
--+        yappi.clear_stats()
--+
--+        def a():
--+            pass
--+
--+        yappi.start()
--+        t =3D threading.Thread(target=3Da)
--+        t.start()
--+        t.join()
--+        stats =3D yappi.get_func_stats()
--+
--+    def test_singlethread_profiling(self):
--+        yappi.set_clock_type('wall')
--+
--+        def a():
--+            time.sleep(0.2)
--+
--+        class Worker1(threading.Thread):
--+
--+            def a(self):
--+                time.sleep(0.3)
--+
--+            def run(self):
--+                self.a()
--+
--+        yappi.start(profile_threads=3DFalse)
--+
--+        c =3D Worker1()
--+        c.start()
--+        c.join()
--+        a()
--+        stats =3D yappi.get_func_stats()
--+        fsa1 =3D utils.find_stat_by_name(stats, 'Worker1.a')
--+        fsa2 =3D utils.find_stat_by_name(stats, 'a')
--+        self.assertTrue(fsa1 is None)
--+        self.assertTrue(fsa2 is not None)
--+        self.assertTrue(fsa2.ttot > 0.1)
--+
--+    def test_run(self):
--+
--+        def profiled():
--+            pass
--+
--+        yappi.clear_stats()
--+        try:
--+            with yappi.run():
--+                profiled()
--+            stats =3D yappi.get_func_stats()
--+        finally:
--+            yappi.clear_stats()
--+
--+        self.assertIsNotNone(utils.find_stat_by_name(stats, 'profiled'))
--+
--+    def test_run_recursive(self):
--+
--+        def profiled():
--+            pass
--+
--+        def not_profiled():
--+            pass
--+
--+        yappi.clear_stats()
--+        try:
--+            with yappi.run():
--+                with yappi.run():
--+                    profiled()
--+                # Profiling stopped here
--+                not_profiled()
--+            stats =3D yappi.get_func_stats()
--+        finally:
--+            yappi.clear_stats()
--+
--+        self.assertIsNotNone(utils.find_stat_by_name(stats, 'profiled'))
--+        self.assertIsNone(utils.find_stat_by_name(stats, 'not_profiled'))
--+
--+
--+class StatSaveScenarios(utils.YappiUnitTestCase):
--+
--+    def test_pstats_conversion(self):
--+
--+        def pstat_id(fs):
--+            return (fs.module, fs.lineno, fs.name)
--+
--+        def a():
--+            d()
--+
--+        def b():
--+            d()
--+
--+        def c():
--+            pass
--+
--+        def d():
--+            pass
--+
--+        _timings =3D {"a_1": 12, "b_1": 7, "c_1": 5, "d_1": 2}
--+        _yappi._set_test_timings(_timings)
--+        stats =3D utils.run_and_get_func_stats(a, )
--+        stats.strip_dirs()
--+        stats.save("tests/a1.pstats", type=3D"pstat")
--+        fsa_pid =3D pstat_id(utils.find_stat_by_name(stats, "a"))
--+        fsd_pid =3D pstat_id(utils.find_stat_by_name(stats, "d"))
--+        yappi.clear_stats()
--+        _yappi._set_test_timings(_timings)
--+        stats =3D utils.run_and_get_func_stats(a, )
--+        stats.strip_dirs()
--+        stats.save("tests/a2.pstats", type=3D"pstat")
--+        yappi.clear_stats()
--+        _yappi._set_test_timings(_timings)
--+        stats =3D utils.run_and_get_func_stats(b, )
--+        stats.strip_dirs()
--+        stats.save("tests/b1.pstats", type=3D"pstat")
--+        fsb_pid =3D pstat_id(utils.find_stat_by_name(stats, "b"))
--+        yappi.clear_stats()
--+        _yappi._set_test_timings(_timings)
--+        stats =3D utils.run_and_get_func_stats(c, )
--+        stats.strip_dirs()
--+        stats.save("tests/c1.pstats", type=3D"pstat")
--+        fsc_pid =3D pstat_id(utils.find_stat_by_name(stats, "c"))
--+
--+        # merge saved stats and check pstats values are correct
--+        import pstats
--+        p =3D pstats.Stats(
--+            'tests/a1.pstats', 'tests/a2.pstats', 'tests/b1.pstats',
--+            'tests/c1.pstats'
--+        )
--+        p.strip_dirs()
--+        # ct =3D ttot, tt =3D tsub
--+        (cc, nc, tt, ct, callers) =3D p.stats[fsa_pid]
--+        self.assertEqual(cc, nc, 2)
--+        self.assertEqual(tt, 20)
--+        self.assertEqual(ct, 24)
--+        (cc, nc, tt, ct, callers) =3D p.stats[fsd_pid]
--+        self.assertEqual(cc, nc, 3)
--+        self.assertEqual(tt, 6)
--+        self.assertEqual(ct, 6)
--+        self.assertEqual(len(callers), 2)
--+        (cc, nc, tt, ct) =3D callers[fsa_pid]
--+        self.assertEqual(cc, nc, 2)
--+        self.assertEqual(tt, 4)
--+        self.assertEqual(ct, 4)
--+        (cc, nc, tt, ct) =3D callers[fsb_pid]
--+        self.assertEqual(cc, nc, 1)
--+        self.assertEqual(tt, 2)
--+        self.assertEqual(ct, 2)
--+
--+    def test_merge_stats(self):
--+        _timings =3D {
--+            "a_1": 15,
--+            "b_1": 14,
--+            "c_1": 12,
--+            "d_1": 10,
--+            "e_1": 9,
--+            "f_1": 7,
--+            "g_1": 6,
--+            "h_1": 5,
--+            "i_1": 1
+-+      else
+-+        {
+-+          ret = g_list_prepend (ret, identity);
 -+        }
--+        _yappi._set_test_timings(_timings)
+-+    }
+-+  ret = g_list_reverse (ret);
 -+
--+        def a():
--+            b()
+-+ out:
+-+  g_strfreev (ret_strs);
+-+  /* fallback to root password auth */
+-+  if (ret == NULL)
+-+    ret = g_list_prepend (ret, polkit_unix_user_new (0));
 -+
--+        def b():
--+            c()
+-+  return ret;
+-+}
 -+
--+        def c():
--+            d()
+-+/* ---------------------------------------------------------------------------------------------------- */
 -+
--+        def d():
--+            e()
+-+PolkitImplicitAuthorization
+-+polkit_backend_common_js_authority_check_authorization_sync (PolkitBackendInteractiveAuthority *_authority,
+-+                                                             PolkitSubject                     *caller,
+-+                                                             PolkitSubject                     *subject,
+-+                                                             PolkitIdentity                    *user_for_subject,
+-+                                                             gboolean                           subject_is_local,
+-+                                                             gboolean                           subject_is_active,
+-+                                                             const gchar                       *action_id,
+-+                                                             PolkitDetails                     *details,
+-+                                                             PolkitImplicitAuthorization        implicit)
+-+{
+-+  PolkitBackendJsAuthority *authority = POLKIT_BACKEND_JS_AUTHORITY (_authority);
+-+  PolkitImplicitAuthorization ret = implicit;
+-+  GError *error = NULL;
+-+  gchar *ret_str = NULL;
+-+  gboolean good = FALSE;
+-+  duk_context *cx = authority->priv->cx;
 -+
--+        def e():
--+            f()
+-+  duk_set_top (cx, 0);
+-+  if (!duk_get_global_string (cx, "polkit")) {
+-+      goto out;
+-+  }
 -+
--+        def f():
--+            g()
+-+  duk_push_string (cx, "_runRules");
 -+
--+        def g():
--+            h()
+-+  if (!push_action_and_details (cx, action_id, details, &error))
+-+    {
+-+      polkit_backend_authority_log (POLKIT_BACKEND_AUTHORITY (authority),
+-+                                    "Error converting action and details to JS object: %s",
+-+                                    error->message);
+-+      g_clear_error (&error);
+-+      goto out;
+-+    }
 -+
--+        def h():
--+            i()
+-+  if (!push_subject (cx, subject, user_for_subject, subject_is_local, subject_is_active, &error))
+-+    {
+-+      polkit_backend_authority_log (POLKIT_BACKEND_AUTHORITY (authority),
+-+                                    "Error converting subject to JS object: %s",
+-+                                    error->message);
+-+      g_clear_error (&error);
+-+      goto out;
+-+    }
 -+
--+        def i():
--+            pass
+-+  // If any error is the js context happened (ctx.ret ==
+-+  // RUNAWAY_KILLER_THREAD_EXIT_STATUS_FAILURE) or it never properly returned
+-+  // (runaway scripts or ctx.ret == RUNAWAY_KILLER_THREAD_EXIT_STATUS_UNSET),
+-+  // unauthorize
+-+  if (!call_js_function_with_runaway_killer (authority))
+-+    goto out;
 -+
--+        yappi.start()
--+        a()
--+        a()
--+        yappi.stop()
--+        stats =3D yappi.get_func_stats()
--+        self.assertRaises(
--+            NotImplementedError, stats.save, "", "INVALID_SAVE_TYPE"
--+        )
--+        stats.save("tests/ystats2.ys")
--+        yappi.clear_stats()
--+        _yappi._set_test_timings(_timings)
--+        yappi.start()
--+        a()
--+        stats =3D yappi.get_func_stats().add("tests/ystats2.ys")
--+        fsa =3D utils.find_stat_by_name(stats, "a")
--+        fsb =3D utils.find_stat_by_name(stats, "b")
--+        fsc =3D utils.find_stat_by_name(stats, "c")
--+        fsd =3D utils.find_stat_by_name(stats, "d")
--+        fse =3D utils.find_stat_by_name(stats, "e")
--+        fsf =3D utils.find_stat_by_name(stats, "f")
--+        fsg =3D utils.find_stat_by_name(stats, "g")
--+        fsh =3D utils.find_stat_by_name(stats, "h")
--+        fsi =3D utils.find_stat_by_name(stats, "i")
--+        self.assertEqual(fsa.ttot, 45)
--+        self.assertEqual(fsa.ncall, 3)
--+        self.assertEqual(fsa.nactualcall, 3)
--+        self.assertEqual(fsa.tsub, 3)
--+        self.assertEqual(fsa.children[fsb].ttot, fsb.ttot)
--+        self.assertEqual(fsa.children[fsb].tsub, fsb.tsub)
--+        self.assertEqual(fsb.children[fsc].ttot, fsc.ttot)
--+        self.assertEqual(fsb.children[fsc].tsub, fsc.tsub)
--+        self.assertEqual(fsc.tsub, 6)
--+        self.assertEqual(fsc.children[fsd].ttot, fsd.ttot)
--+        self.assertEqual(fsc.children[fsd].tsub, fsd.tsub)
--+        self.assertEqual(fsd.children[fse].ttot, fse.ttot)
--+        self.assertEqual(fsd.children[fse].tsub, fse.tsub)
--+        self.assertEqual(fse.children[fsf].ttot, fsf.ttot)
--+        self.assertEqual(fse.children[fsf].tsub, fsf.tsub)
--+        self.assertEqual(fsf.children[fsg].ttot, fsg.ttot)
--+        self.assertEqual(fsf.children[fsg].tsub, fsg.tsub)
--+        self.assertEqual(fsg.ttot, 18)
--+        self.assertEqual(fsg.tsub, 3)
--+        self.assertEqual(fsg.children[fsh].ttot, fsh.ttot)
--+        self.assertEqual(fsg.children[fsh].tsub, fsh.tsub)
--+        self.assertEqual(fsh.ttot, 15)
--+        self.assertEqual(fsh.tsub, 12)
--+        self.assertEqual(fsh.tavg, 5)
--+        self.assertEqual(fsh.children[fsi].ttot, fsi.ttot)
--+        self.assertEqual(fsh.children[fsi].tsub, fsi.tsub)
--+        #stats.debug_print()
+-+  if (duk_is_null(cx, -1)) {
+-+    /* this is fine, means there was no match, use implicit authorizations */
+-+    good = TRUE;
+-+    goto out;
+-+  }
+-+  ret_str = g_strdup (duk_require_string (cx, -1));
+-+  if (!polkit_implicit_authorization_from_string (ret_str, &ret))
+-+    {
+-+      polkit_backend_authority_log (POLKIT_BACKEND_AUTHORITY (authority),
+-+                                    "Returned result `%s' is not valid",
+-+                                    ret_str);
+-+      goto out;
+-+    }
 -+
--+    def test_merge_multithreaded_stats(self):
--+        import _yappi
--+        timings =3D {"a_1": 2, "b_1": 1}
--+        _yappi._set_test_timings(timings)
+-+  good = TRUE;
 -+
--+        def a():
--+            pass
+-+ out:
+-+  if (!good)
+-+    ret = POLKIT_IMPLICIT_AUTHORIZATION_NOT_AUTHORIZED;
+-+  if (ret_str != NULL)
+-+      g_free (ret_str);
 -+
--+        def b():
--+            pass
+-+  return ret;
+-+}
 -+
--+        yappi.start()
--+        t =3D threading.Thread(target=3Da)
--+        t.start()
--+        t.join()
--+        t =3D threading.Thread(target=3Db)
--+        t.start()
--+        t.join()
--+        yappi.get_func_stats().save("tests/ystats1.ys")
--+        yappi.clear_stats()
--+        _yappi._set_test_timings(timings)
--+        self.assertEqual(len(yappi.get_func_stats()), 0)
--+        self.assertEqual(len(yappi.get_thread_stats()), 1)
--+        t =3D threading.Thread(target=3Da)
--+        t.start()
--+        t.join()
+-+/* ---------------------------------------------------------------------------------------------------- */
 -+
--+        self.assertEqual(_yappi._get_start_flags()["profile_builtins"], 0)
--+        self.assertEqual(_yappi._get_start_flags()["profile_multicontext"=
-], 1)
--+        yappi.get_func_stats().save("tests/ystats2.ys")
+-+static duk_ret_t
+-+js_polkit_log (duk_context *cx)
+-+{
+-+  const char *str = duk_require_string (cx, 0);
+-+  fprintf (stderr, "%s\n", str);
+-+  return 0;
+-+}
 -+
--+        stats =3D yappi.YFuncStats([
--+            "tests/ystats1.ys",
--+            "tests/ystats2.ys",
--+        ])
--+        fsa =3D utils.find_stat_by_name(stats, "a")
--+        fsb =3D utils.find_stat_by_name(stats, "b")
--+        self.assertEqual(fsa.ncall, 2)
--+        self.assertEqual(fsb.ncall, 1)
--+        self.assertEqual(fsa.tsub, fsa.ttot, 4)
--+        self.assertEqual(fsb.tsub, fsb.ttot, 1)
+-+/* ---------------------------------------------------------------------------------------------------- */
 -+
--+    def test_merge_load_different_clock_types(self):
--+        yappi.start(builtins=3DTrue)
+-+static duk_ret_t
+-+js_polkit_spawn (duk_context *cx)
+-+{
+-+  duk_ret_t ret = DUK_RET_ERROR;
+-+  gchar *standard_output = NULL;
+-+  gchar *standard_error = NULL;
+-+  gint exit_status;
+-+  GError *error = NULL;
+-+  guint32 array_len;
+-+  gchar **argv = NULL;
+-+  GMainContext *context = NULL;
+-+  GMainLoop *loop = NULL;
+-+  SpawnData data = {0};
+-+  char *err_str = NULL;
+-+  guint n;
 -+
--+        def a():
--+            b()
+-+  if (!duk_is_array (cx, 0))
+-+    goto out;
 -+
--+        def b():
--+            c()
+-+  array_len = duk_get_length (cx, 0);
 -+
--+        def c():
--+            pass
+-+  argv = g_new0 (gchar*, array_len + 1);
+-+  for (n = 0; n < array_len; n++)
+-+    {
+-+      duk_get_prop_index (cx, 0, n);
+-+      argv[n] = g_strdup (duk_to_string (cx, -1));
+-+      duk_pop (cx);
+-+    }
 -+
--+        t =3D threading.Thread(target=3Da)
--+        t.start()
--+        t.join()
--+        yappi.get_func_stats().sort("name", "asc").save("tests/ystats1.ys=
-")
--+        yappi.stop()
--+        yappi.clear_stats()
--+        yappi.start(builtins=3DFalse)
--+        t =3D threading.Thread(target=3Da)
--+        t.start()
--+        t.join()
--+        yappi.get_func_stats().save("tests/ystats2.ys")
--+        yappi.stop()
--+        self.assertRaises(_yappi.error, yappi.set_clock_type, "wall")
--+        yappi.clear_stats()
--+        yappi.set_clock_type("wall")
--+        yappi.start()
--+        t =3D threading.Thread(target=3Da)
--+        t.start()
--+        t.join()
--+        yappi.get_func_stats().save("tests/ystats3.ys")
--+        self.assertRaises(
--+            yappi.YappiError,
--+            yappi.YFuncStats().add("tests/ystats1.ys").add, "tests/ystats=
-3.ys"
--+        )
--+        stats =3D yappi.YFuncStats(["tests/ystats1.ys",
--+                                  "tests/ystats2.ys"]).sort("name")
--+        fsa =3D utils.find_stat_by_name(stats, "a")
--+        fsb =3D utils.find_stat_by_name(stats, "b")
--+        fsc =3D utils.find_stat_by_name(stats, "c")
--+        self.assertEqual(fsa.ncall, 2)
--+        self.assertEqual(fsa.ncall, fsb.ncall, fsc.ncall)
+-+  context = g_main_context_new ();
+-+  loop = g_main_loop_new (context, FALSE);
 -+
--+    def test_merge_aabab_aabbc(self):
--+        _timings =3D {
--+            "a_1": 15,
--+            "a_2": 14,
--+            "b_1": 12,
--+            "a_3": 10,
--+            "b_2": 9,
--+            "c_1": 4
+-+  g_main_context_push_thread_default (context);
+-+
+-+  data.loop = loop;
+-+  polkit_backend_common_spawn ((const gchar *const *) argv,
+-+                               10, /* timeout_seconds */
+-+                               NULL, /* cancellable */
+-+                               polkit_backend_common_spawn_cb,
+-+                               &data);
+-+
+-+  g_main_loop_run (loop);
+-+
+-+  g_main_context_pop_thread_default (context);
+-+
+-+  if (!polkit_backend_common_spawn_finish (data.res,
+-+                                           &exit_status,
+-+                                           &standard_output,
+-+                                           &standard_error,
+-+                                           &error))
+-+    {
+-+      err_str = g_strdup_printf ("Error spawning helper: %s (%s, %d)",
+-+                                 error->message, g_quark_to_string (error->domain), error->code);
+-+      g_clear_error (&error);
+-+      goto out;
+-+    }
+-+
+-+  if (!(WIFEXITED (exit_status) && WEXITSTATUS (exit_status) == 0))
+-+    {
+-+      GString *gstr;
+-+      gstr = g_string_new (NULL);
+-+      if (WIFEXITED (exit_status))
+-+        {
+-+          g_string_append_printf (gstr,
+-+                                  "Helper exited with non-zero exit status %d",
+-+                                  WEXITSTATUS (exit_status));
 -+        }
--+        _yappi._set_test_timings(_timings)
--+
--+        def a():
--+            if self._ncall =3D=3D 1:
--+                self._ncall +=3D 1
--+                a()
--+            elif self._ncall =3D=3D 5:
--+                self._ncall +=3D 1
--+                a()
--+            else:
--+                b()
--+
--+        def b():
--+            if self._ncall =3D=3D 2:
--+                self._ncall +=3D 1
--+                a()
--+            elif self._ncall =3D=3D 6:
--+                self._ncall +=3D 1
--+                b()
--+            elif self._ncall =3D=3D 7:
--+                c()
--+            else:
--+                return
--+
--+        def c():
--+            pass
--+
--+        self._ncall =3D 1
--+        stats =3D utils.run_and_get_func_stats(a, )
--+        stats.save("tests/ystats1.ys")
--+        yappi.clear_stats()
--+        _yappi._set_test_timings(_timings)
--+        #stats.print_all()
--+
--+        self._ncall =3D 5
--+        stats =3D utils.run_and_get_func_stats(a, )
--+        stats.save("tests/ystats2.ys")
--+
--+        #stats.print_all()
--+
--+        def a():  # same name but another function(code object)
--+            pass
--+
--+        yappi.start()
--+        a()
--+        stats =3D yappi.get_func_stats().add(
--+            ["tests/ystats1.ys", "tests/ystats2.ys"]
--+        )
--+        #stats.print_all()
--+        self.assertEqual(len(stats), 4)
--+
--+        fsa =3D None
--+        for stat in stats:
--+            if stat.name =3D=3D "a" and stat.ttot =3D=3D 45:
--+                fsa =3D stat
--+                break
--+        self.assertTrue(fsa is not None)
--+
--+        self.assertEqual(fsa.ncall, 7)
--+        self.assertEqual(fsa.nactualcall, 3)
--+        self.assertEqual(fsa.ttot, 45)
--+        self.assertEqual(fsa.tsub, 10)
--+        fsb =3D utils.find_stat_by_name(stats, "b")
--+        fsc =3D utils.find_stat_by_name(stats, "c")
--+        self.assertEqual(fsb.ncall, 6)
--+        self.assertEqual(fsb.nactualcall, 3)
--+        self.assertEqual(fsb.ttot, 36)
--+        self.assertEqual(fsb.tsub, 27)
--+        self.assertEqual(fsb.tavg, 6)
--+        self.assertEqual(fsc.ttot, 8)
--+        self.assertEqual(fsc.tsub, 8)
--+        self.assertEqual(fsc.tavg, 4)
--+        self.assertEqual(fsc.nactualcall, fsc.ncall, 2)
--+
--+
--+class MultithreadedScenarios(utils.YappiUnitTestCase):
--+
--+    def test_issue_32(self):
--+        '''
--+        Start yappi from different thread and we get Internal Error(15) as
--+        the current_ctx_id() called while enumerating the threads in star=
-t()
--+        and as it does not swap to the enumerated ThreadState* the THread=
-State_GetDict()
--+        returns wrong object and thus sets an invalid id for the _ctx str=
-ucture.
--+
--+        When this issue happens multiple Threads have same tid as the int=
-ernal ts_ptr
--+        will be same for different contexts. So, let's see if that happens
--+        '''
--+
--+        def foo():
--+            time.sleep(0.2)
--+
--+        def bar():
--+            time.sleep(0.1)
--+
--+        def thread_func():
--+            yappi.set_clock_type("wall")
--+            yappi.start()
--+
--+            bar()
--+
--+        t =3D threading.Thread(target=3Dthread_func)
--+        t.start()
--+        t.join()
--+
--+        foo()
--+
--+        yappi.stop()
--+
--+        thread_ids =3D set()
--+        for tstat in yappi.get_thread_stats():
--+            self.assertTrue(tstat.tid not in thread_ids)
--+            thread_ids.add(tstat.tid)
--+
--+    def test_subsequent_profile(self):
--+        WORKER_COUNT =3D 5
--+
--+        def a():
--+            pass
--+
--+        def b():
--+            pass
--+
--+        def c():
--+            pass
--+
--+        _timings =3D {
--+            "a_1": 3,
--+            "b_1": 2,
--+            "c_1": 1,
+-+      else if (WIFSIGNALED (exit_status))
+-+        {
+-+          g_string_append_printf (gstr,
+-+                                  "Helper was signaled with signal %s (%d)",
+-+                                  polkit_backend_common_get_signal_name (WTERMSIG (exit_status)),
+-+                                  WTERMSIG (exit_status));
 -+        }
--+
--+        yappi.start()
--+
--+        def g():
--+            pass
--+
--+        g()
--+        yappi.stop()
--+        yappi.clear_stats()
--+        _yappi._set_test_timings(_timings)
--+        yappi.start()
--+
--+        _dummy =3D []
--+        for i in range(WORKER_COUNT):
--+            t =3D threading.Thread(target=3Da)
--+            t.start()
--+            t.join()
--+        for i in range(WORKER_COUNT):
--+            t =3D threading.Thread(target=3Db)
--+            t.start()
--+            _dummy.append(t)
--+            t.join()
--+        for i in range(WORKER_COUNT):
--+            t =3D threading.Thread(target=3Da)
--+            t.start()
--+            t.join()
--+        for i in range(WORKER_COUNT):
--+            t =3D threading.Thread(target=3Dc)
--+            t.start()
--+            t.join()
--+        yappi.stop()
--+        yappi.start()
--+
--+        def f():
--+            pass
--+
--+        f()
--+        stats =3D yappi.get_func_stats()
--+        fsa =3D utils.find_stat_by_name(stats, 'a')
--+        fsb =3D utils.find_stat_by_name(stats, 'b')
--+        fsc =3D utils.find_stat_by_name(stats, 'c')
--+        self.assertEqual(fsa.ncall, 10)
--+        self.assertEqual(fsb.ncall, 5)
--+        self.assertEqual(fsc.ncall, 5)
--+        self.assertEqual(fsa.ttot, fsa.tsub, 30)
--+        self.assertEqual(fsb.ttot, fsb.tsub, 10)
--+        self.assertEqual(fsc.ttot, fsc.tsub, 5)
--+
--+        # MACOSx optimizes by only creating one worker thread
--+        self.assertTrue(len(yappi.get_thread_stats()) >=3D 2)
--+
--+    def test_basic(self):
--+        yappi.set_clock_type('wall')
--+
--+        def dummy():
--+            pass
--+
--+        def a():
--+            time.sleep(0.2)
--+
--+        class Worker1(threading.Thread):
--+
--+            def a(self):
--+                time.sleep(0.3)
--+
--+            def run(self):
--+                self.a()
--+
--+        yappi.start(builtins=3DFalse, profile_threads=3DTrue)
--+
--+        c =3D Worker1()
--+        c.start()
--+        c.join()
--+        a()
--+        stats =3D yappi.get_func_stats()
--+        fsa1 =3D utils.find_stat_by_name(stats, 'Worker1.a')
--+        fsa2 =3D utils.find_stat_by_name(stats, 'a')
--+        self.assertTrue(fsa1 is not None)
--+        self.assertTrue(fsa2 is not None)
--+        self.assertTrue(fsa1.ttot > 0.2)
--+        self.assertTrue(fsa2.ttot > 0.1)
--+        tstats =3D yappi.get_thread_stats()
--+        self.assertEqual(len(tstats), 2)
--+        tsa =3D utils.find_stat_by_name(tstats, 'Worker1')
--+        tsm =3D utils.find_stat_by_name(tstats, '_MainThread')
--+        dummy()  # call dummy to force ctx name to be retrieved again.
--+        self.assertTrue(tsa is not None)
--+        # TODO: I put dummy() to fix below, remove the comments after a w=
-hile.
--+        self.assertTrue( # FIX: I see this fails sometimes?
--+            tsm is not None,
--+            'Could not find "_MainThread". Found: %s' % (', '.join(utils.=
-get_stat_names(tstats))))
--+
--+    def test_ctx_stats(self):
--+        from threading import Thread
--+        DUMMY_WORKER_COUNT =3D 5
--+        yappi.start()
--+
--+        class DummyThread(Thread):
--+            pass
--+
--+        def dummy():
--+            pass
--+
--+        def dummy_worker():
--+            pass
--+
--+        for i in range(DUMMY_WORKER_COUNT):
--+            t =3D DummyThread(target=3Ddummy_worker)
--+            t.start()
--+            t.join()
--+        yappi.stop()
--+        stats =3D yappi.get_thread_stats()
--+        tsa =3D utils.find_stat_by_name(stats, "DummyThread")
--+        self.assertTrue(tsa is not None)
--+        yappi.clear_stats()
--+        time.sleep(1.0)
--+        _timings =3D {
--+            "a_1": 6,
--+            "b_1": 5,
--+            "c_1": 3,
--+            "d_1": 1,
--+            "a_2": 4,
--+            "b_2": 3,
--+            "c_2": 2,
--+            "d_2": 1
--+        }
--+        _yappi._set_test_timings(_timings)
--+
--+        class Thread1(Thread):
--+            pass
--+
--+        class Thread2(Thread):
--+            pass
--+
--+        def a():
--+            b()
--+
--+        def b():
--+            c()
--+
--+        def c():
--+            d()
--+
--+        def d():
--+            time.sleep(0.6)
--+
--+        yappi.set_clock_type("wall")
--+        yappi.start()
--+        t1 =3D Thread1(target=3Da)
--+        t1.start()
--+        t2 =3D Thread2(target=3Da)
--+        t2.start()
--+        t1.join()
--+        t2.join()
--+        stats =3D yappi.get_thread_stats()
--+
--+        # the fist clear_stats clears the context table?
--+        tsa =3D utils.find_stat_by_name(stats, "DummyThread")
--+        self.assertTrue(tsa is None)
--+
--+        tst1 =3D utils.find_stat_by_name(stats, "Thread1")
--+        tst2 =3D utils.find_stat_by_name(stats, "Thread2")
--+        tsmain =3D utils.find_stat_by_name(stats, "_MainThread")
--+        dummy()  # call dummy to force ctx name to be retrieved again.
--+        self.assertTrue(len(stats) =3D=3D 3)
--+        self.assertTrue(tst1 is not None)
--+        self.assertTrue(tst2 is not None)
--+        # TODO: I put dummy() to fix below, remove the comments after a w=
-hile.
--+        self.assertTrue( # FIX: I see this fails sometimes
--+            tsmain is not None,
--+            'Could not find "_MainThread". Found: %s' % (', '.join(utils.=
-get_stat_names(stats))))
--+        self.assertTrue(1.0 > tst2.ttot >=3D 0.5)
--+        self.assertTrue(1.0 > tst1.ttot >=3D 0.5)
--+
--+        # test sorting of the ctx stats
--+        stats =3D stats.sort("totaltime", "desc")
--+        prev_stat =3D None
--+        for stat in stats:
--+            if prev_stat:
--+                self.assertTrue(prev_stat.ttot >=3D stat.ttot)
--+            prev_stat =3D stat
--+        stats =3D stats.sort("totaltime", "asc")
--+        prev_stat =3D None
--+        for stat in stats:
--+            if prev_stat:
--+                self.assertTrue(prev_stat.ttot <=3D stat.ttot)
--+            prev_stat =3D stat
--+        stats =3D stats.sort("schedcount", "desc")
--+        prev_stat =3D None
--+        for stat in stats:
--+            if prev_stat:
--+                self.assertTrue(prev_stat.sched_count >=3D stat.sched_cou=
-nt)
--+            prev_stat =3D stat
--+        stats =3D stats.sort("name", "desc")
--+        prev_stat =3D None
--+        for stat in stats:
--+            if prev_stat:
--+                self.assertTrue(prev_stat.name.lower() >=3D stat.name.low=
-er())
--+            prev_stat =3D stat
--+        self.assertRaises(
--+            yappi.YappiError, stats.sort, "invalid_thread_sorttype_arg"
--+        )
--+        self.assertRaises(
--+            yappi.YappiError, stats.sort, "invalid_thread_sortorder_arg"
--+        )
--+
--+    def test_ctx_stats_cpu(self):
--+
--+        def get_thread_name():
--+            try:
--+                return threading.current_thread().name
--+            except AttributeError:
--+                return "Anonymous"
--+
--+        def burn_cpu(sec):
--+            t0 =3D yappi.get_clock_time()
--+            elapsed =3D 0
--+            while (elapsed < sec):
--+                for _ in range(1000):
--+                    pass
--+                elapsed =3D yappi.get_clock_time() - t0
--+
--+        def test():
--+
--+            ts =3D []
--+            for i in (0.01, 0.05, 0.1):
--+                t =3D threading.Thread(target=3Dburn_cpu, args=3D(i, ))
--+                t.name =3D "burn_cpu-%s" % str(i)
--+                t.start()
--+                ts.append(t)
--+            for t in ts:
--+                t.join()
--+
--+        yappi.set_clock_type("cpu")
--+        yappi.set_context_name_callback(get_thread_name)
--+
--+        yappi.start()
--+
--+        test()
--+
--+        yappi.stop()
--+
--+        tstats =3D yappi.get_thread_stats()
--+        r1 =3D '''
--+        burn_cpu-0.1      3      123145356058624  0.100105  8
--+        burn_cpu-0.05     2      123145361313792  0.050149  8
--+        burn_cpu-0.01     1      123145356058624  0.010127  2
--+        MainThread        0      4321620864       0.001632  6
--+        '''
--+        self.assert_ctx_stats_almost_equal(r1, tstats)
--+
--+    def test_producer_consumer_with_queues(self):
--+        # we currently just stress yappi, no functionality test is done h=
-ere.
--+        yappi.start()
--+        if utils.is_py3x():
--+            from queue import Queue
--+        else:
--+            from Queue import Queue
--+        from threading import Thread
--+        WORKER_THREAD_COUNT =3D 50
--+        WORK_ITEM_COUNT =3D 2000
--+
--+        def worker():
--+            while True:
--+                item =3D q.get()
--+                # do the work with item
--+                q.task_done()
--+
--+        q =3D Queue()
--+        for i in range(WORKER_THREAD_COUNT):
--+            t =3D Thread(target=3Dworker)
--+            t.daemon =3D True
--+            t.start()
--+
--+        for item in range(WORK_ITEM_COUNT):
--+            q.put(item)
--+        q.join()  # block until all tasks are done
--+        #yappi.get_func_stats().sort("callcount").print_all()
--+        yappi.stop()
--+
--+    def test_temporary_lock_waiting(self):
--+        yappi.start()
--+        _lock =3D threading.Lock()
--+
--+        def worker():
--+            _lock.acquire()
--+            try:
--+                time.sleep(1.0)
--+            finally:
--+                _lock.release()
--+
--+        t1 =3D threading.Thread(target=3Dworker)
--+        t2 =3D threading.Thread(target=3Dworker)
--+        t1.start()
--+        t2.start()
--+        t1.join()
--+        t2.join()
--+        #yappi.get_func_stats().sort("callcount").print_all()
--+        yappi.stop()
--+
--+    @unittest.skipIf(os.name !=3D "posix", "requires Posix compliant OS")
--+    def test_signals_with_blocking_calls(self):
--+        import signal, os, time
--+
--+        # just to verify if signal is handled correctly and stats/yappi a=
-re not corrupted.
--+        def handler(signum, frame):
--+            raise Exception("Signal handler executed!")
--+
--+        yappi.start()
--+        signal.signal(signal.SIGALRM, handler)
--+        signal.alarm(1)
--+        self.assertRaises(Exception, time.sleep, 2)
--+        stats =3D yappi.get_func_stats()
--+        fsh =3D utils.find_stat_by_name(stats, "handler")
--+        self.assertTrue(fsh is not None)
--+
--+    @unittest.skipIf(not sys.version_info >=3D (3, 2), "requires Python 3=
-.2")
--+    def test_concurrent_futures(self):
--+        yappi.start()
--+        from concurrent.futures import ThreadPoolExecutor
--+        with ThreadPoolExecutor(max_workers=3D5) as executor:
--+            f =3D executor.submit(pow, 5, 2)
--+            self.assertEqual(f.result(), 25)
--+        time.sleep(1.0)
--+        yappi.stop()
--+
--+    @unittest.skipIf(not sys.version_info >=3D (3, 2), "requires Python 3=
-.2")
--+    def test_barrier(self):
--+        yappi.start()
--+        b =3D threading.Barrier(2, timeout=3D1)
--+
--+        def worker():
--+            try:
--+                b.wait()
--+            except threading.BrokenBarrierError:
--+                pass
--+            except Exception:
--+                raise Exception("BrokenBarrierError not raised")
--+
--+        t1 =3D threading.Thread(target=3Dworker)
--+        t1.start()
--+        #b.wait()
--+        t1.join()
--+        yappi.stop()
--+
--+
--+class NonRecursiveFunctions(utils.YappiUnitTestCase):
--+
--+    def test_abcd(self):
--+        _timings =3D {"a_1": 6, "b_1": 5, "c_1": 3, "d_1": 1}
--+        _yappi._set_test_timings(_timings)
--+
--+        def a():
--+            b()
--+
--+        def b():
--+            c()
--+
--+        def c():
--+            d()
--+
--+        def d():
--+            pass
--+
--+        stats =3D utils.run_and_get_func_stats(a)
--+        fsa =3D utils.find_stat_by_name(stats, 'a')
--+        fsb =3D utils.find_stat_by_name(stats, 'b')
--+        fsc =3D utils.find_stat_by_name(stats, 'c')
--+        fsd =3D utils.find_stat_by_name(stats, 'd')
--+        cfsab =3D fsa.children[fsb]
--+        cfsbc =3D fsb.children[fsc]
--+        cfscd =3D fsc.children[fsd]
--+
--+        self.assertEqual(fsa.ttot, 6)
--+        self.assertEqual(fsa.tsub, 1)
--+        self.assertEqual(fsb.ttot, 5)
--+        self.assertEqual(fsb.tsub, 2)
--+        self.assertEqual(fsc.ttot, 3)
--+        self.assertEqual(fsc.tsub, 2)
--+        self.assertEqual(fsd.ttot, 1)
--+        self.assertEqual(fsd.tsub, 1)
--+        self.assertEqual(cfsab.ttot, 5)
--+        self.assertEqual(cfsab.tsub, 2)
--+        self.assertEqual(cfsbc.ttot, 3)
--+        self.assertEqual(cfsbc.tsub, 2)
--+        self.assertEqual(cfscd.ttot, 1)
--+        self.assertEqual(cfscd.tsub, 1)
--+
--+    def test_stop_in_middle(self):
--+        _timings =3D {"a_1": 6, "b_1": 4}
--+        _yappi._set_test_timings(_timings)
--+
--+        def a():
--+            b()
--+            yappi.stop()
--+
--+        def b():
--+            time.sleep(0.2)
--+
--+        yappi.start()
--+        a()
--+        stats =3D yappi.get_func_stats()
--+        fsa =3D utils.find_stat_by_name(stats, 'a')
--+        fsb =3D utils.find_stat_by_name(stats, 'b')
--+
--+        self.assertEqual(fsa.ncall, 1)
--+        self.assertEqual(fsa.nactualcall, 0)
--+        self.assertEqual(fsa.ttot, 0)  # no call_leave called
--+        self.assertEqual(fsa.tsub, 0)  # no call_leave called
--+        self.assertEqual(fsb.ttot, 4)
--+
--+
--+class RecursiveFunctions(utils.YappiUnitTestCase):
--+
--+    def test_fibonacci(self):
--+
--+        def fib(n):
--+            if n > 1:
--+                return fib(n - 1) + fib(n - 2)
--+            else:
--+                return n
--+
--+        stats =3D utils.run_and_get_func_stats(fib, 22)
--+        fs =3D utils.find_stat_by_name(stats, 'fib')
--+        self.assertEqual(fs.ncall, 57313)
--+        self.assertEqual(fs.ttot, fs.tsub)
--+
--+    def test_abcadc(self):
--+        _timings =3D {
--+            "a_1": 20,
--+            "b_1": 19,
--+            "c_1": 17,
--+            "a_2": 13,
--+            "d_1": 12,
--+            "c_2": 10,
--+            "a_3": 5
--+        }
--+        _yappi._set_test_timings(_timings)
--+
--+        def a(n):
--+            if n =3D=3D 3:
--+                return
--+            if n =3D=3D 1 + 1:
--+                d(n)
--+            else:
--+                b(n)
--+
--+        def b(n):
--+            c(n)
--+
--+        def c(n):
--+            a(n + 1)
--+
--+        def d(n):
--+            c(n)
--+
--+        stats =3D utils.run_and_get_func_stats(a, 1)
--+        fsa =3D utils.find_stat_by_name(stats, 'a')
--+        fsb =3D utils.find_stat_by_name(stats, 'b')
--+        fsc =3D utils.find_stat_by_name(stats, 'c')
--+        fsd =3D utils.find_stat_by_name(stats, 'd')
--+        self.assertEqual(fsa.ncall, 3)
--+        self.assertEqual(fsa.nactualcall, 1)
--+        self.assertEqual(fsa.ttot, 20)
--+        self.assertEqual(fsa.tsub, 7)
--+        self.assertEqual(fsb.ttot, 19)
--+        self.assertEqual(fsb.tsub, 2)
--+        self.assertEqual(fsc.ttot, 17)
--+        self.assertEqual(fsc.tsub, 9)
--+        self.assertEqual(fsd.ttot, 12)
--+        self.assertEqual(fsd.tsub, 2)
--+        cfsca =3D fsc.children[fsa]
--+        self.assertEqual(cfsca.nactualcall, 0)
--+        self.assertEqual(cfsca.ncall, 2)
--+        self.assertEqual(cfsca.ttot, 13)
--+        self.assertEqual(cfsca.tsub, 6)
--+
--+    def test_aaaa(self):
--+        _timings =3D {"d_1": 9, "d_2": 7, "d_3": 3, "d_4": 2}
--+        _yappi._set_test_timings(_timings)
--+
--+        def d(n):
--+            if n =3D=3D 3:
--+                return
--+            d(n + 1)
--+
--+        stats =3D utils.run_and_get_func_stats(d, 0)
--+        fsd =3D utils.find_stat_by_name(stats, 'd')
--+        self.assertEqual(fsd.ncall, 4)
--+        self.assertEqual(fsd.nactualcall, 1)
--+        self.assertEqual(fsd.ttot, 9)
--+        self.assertEqual(fsd.tsub, 9)
--+        cfsdd =3D fsd.children[fsd]
--+        self.assertEqual(cfsdd.ttot, 7)
--+        self.assertEqual(cfsdd.tsub, 7)
--+        self.assertEqual(cfsdd.ncall, 3)
--+        self.assertEqual(cfsdd.nactualcall, 0)
--+
--+    def test_abcabc(self):
--+        _timings =3D {
--+            "a_1": 20,
--+            "b_1": 19,
--+            "c_1": 17,
--+            "a_2": 13,
--+            "b_2": 11,
--+            "c_2": 9,
--+            "a_3": 6
--+        }
--+        _yappi._set_test_timings(_timings)
--+
--+        def a(n):
--+            if n =3D=3D 3:
--+                return
--+            else:
--+                b(n)
--+
--+        def b(n):
--+            c(n)
--+
--+        def c(n):
--+            a(n + 1)
--+
--+        stats =3D utils.run_and_get_func_stats(a, 1)
--+        fsa =3D utils.find_stat_by_name(stats, 'a')
--+        fsb =3D utils.find_stat_by_name(stats, 'b')
--+        fsc =3D utils.find_stat_by_name(stats, 'c')
--+        self.assertEqual(fsa.ncall, 3)
--+        self.assertEqual(fsa.nactualcall, 1)
--+        self.assertEqual(fsa.ttot, 20)
--+        self.assertEqual(fsa.tsub, 9)
--+        self.assertEqual(fsb.ttot, 19)
--+        self.assertEqual(fsb.tsub, 4)
--+        self.assertEqual(fsc.ttot, 17)
--+        self.assertEqual(fsc.tsub, 7)
--+        cfsab =3D fsa.children[fsb]
--+        cfsbc =3D fsb.children[fsc]
--+        cfsca =3D fsc.children[fsa]
--+        self.assertEqual(cfsab.ttot, 19)
--+        self.assertEqual(cfsab.tsub, 4)
--+        self.assertEqual(cfsbc.ttot, 17)
--+        self.assertEqual(cfsbc.tsub, 7)
--+        self.assertEqual(cfsca.ttot, 13)
--+        self.assertEqual(cfsca.tsub, 8)
--+
--+    def test_abcbca(self):
--+        _timings =3D {"a_1": 10, "b_1": 9, "c_1": 7, "b_2": 4, "c_2": 2, =
-"a_2": 1}
--+        _yappi._set_test_timings(_timings)
--+        self._ncall =3D 1
--+
--+        def a():
--+            if self._ncall =3D=3D 1:
--+                b()
--+            else:
--+                return
--+
--+        def b():
--+            c()
--+
--+        def c():
--+            if self._ncall =3D=3D 1:
--+                self._ncall +=3D 1
--+                b()
--+            else:
--+                a()
--+
--+        stats =3D utils.run_and_get_func_stats(a)
--+        fsa =3D utils.find_stat_by_name(stats, 'a')
--+        fsb =3D utils.find_stat_by_name(stats, 'b')
--+        fsc =3D utils.find_stat_by_name(stats, 'c')
--+        cfsab =3D fsa.children[fsb]
--+        cfsbc =3D fsb.children[fsc]
--+        cfsca =3D fsc.children[fsa]
--+        self.assertEqual(fsa.ttot, 10)
--+        self.assertEqual(fsa.tsub, 2)
--+        self.assertEqual(fsb.ttot, 9)
--+        self.assertEqual(fsb.tsub, 4)
--+        self.assertEqual(fsc.ttot, 7)
--+        self.assertEqual(fsc.tsub, 4)
--+        self.assertEqual(cfsab.ttot, 9)
--+        self.assertEqual(cfsab.tsub, 2)
--+        self.assertEqual(cfsbc.ttot, 7)
--+        self.assertEqual(cfsbc.tsub, 4)
--+        self.assertEqual(cfsca.ttot, 1)
--+        self.assertEqual(cfsca.tsub, 1)
--+        self.assertEqual(cfsca.ncall, 1)
--+        self.assertEqual(cfsca.nactualcall, 0)
--+
--+    def test_aabccb(self):
--+        _timings =3D {
--+            "a_1": 13,
--+            "a_2": 11,
--+            "b_1": 9,
--+            "c_1": 5,
--+            "c_2": 3,
--+            "b_2": 1
--+        }
--+        _yappi._set_test_timings(_timings)
--+        self._ncall =3D 1
--+
--+        def a():
--+            if self._ncall =3D=3D 1:
--+                self._ncall +=3D 1
--+                a()
--+            else:
--+                b()
--+
--+        def b():
--+            if self._ncall =3D=3D 3:
--+                return
--+            else:
--+                c()
--+
--+        def c():
--+            if self._ncall =3D=3D 2:
--+                self._ncall +=3D 1
--+                c()
--+            else:
--+                b()
--+
--+        stats =3D utils.run_and_get_func_stats(a)
--+        fsa =3D utils.find_stat_by_name(stats, 'a')
--+        fsb =3D utils.find_stat_by_name(stats, 'b')
--+        fsc =3D utils.find_stat_by_name(stats, 'c')
--+        cfsaa =3D fsa.children[fsa.index]
--+        cfsab =3D fsa.children[fsb]
--+        cfsbc =3D fsb.children[fsc.full_name]
--+        cfscc =3D fsc.children[fsc]
--+        cfscb =3D fsc.children[fsb]
--+        self.assertEqual(fsb.ttot, 9)
--+        self.assertEqual(fsb.tsub, 5)
--+        self.assertEqual(cfsbc.ttot, 5)
--+        self.assertEqual(cfsbc.tsub, 2)
--+        self.assertEqual(fsa.ttot, 13)
--+        self.assertEqual(fsa.tsub, 4)
--+        self.assertEqual(cfsab.ttot, 9)
--+        self.assertEqual(cfsab.tsub, 4)
--+        self.assertEqual(cfsaa.ttot, 11)
--+        self.assertEqual(cfsaa.tsub, 2)
--+        self.assertEqual(fsc.ttot, 5)
--+        self.assertEqual(fsc.tsub, 4)
--+
--+    def test_abaa(self):
--+        _timings =3D {"a_1": 13, "b_1": 10, "a_2": 9, "a_3": 5}
--+        _yappi._set_test_timings(_timings)
--+
--+        self._ncall =3D 1
--+
--+        def a():
--+            if self._ncall =3D=3D 1:
--+                b()
--+            elif self._ncall =3D=3D 2:
--+                self._ncall +=3D 1
--+                a()
--+            else:
--+                return
--+
--+        def b():
--+            self._ncall +=3D 1
--+            a()
--+
--+        stats =3D utils.run_and_get_func_stats(a)
--+        fsa =3D utils.find_stat_by_name(stats, 'a')
--+        fsb =3D utils.find_stat_by_name(stats, 'b')
--+        cfsaa =3D fsa.children[fsa]
--+        cfsba =3D fsb.children[fsa]
--+        self.assertEqual(fsb.ttot, 10)
--+        self.assertEqual(fsb.tsub, 1)
--+        self.assertEqual(fsa.ttot, 13)
--+        self.assertEqual(fsa.tsub, 12)
--+        self.assertEqual(cfsaa.ttot, 5)
--+        self.assertEqual(cfsaa.tsub, 5)
--+        self.assertEqual(cfsba.ttot, 9)
--+        self.assertEqual(cfsba.tsub, 4)
--+
--+    def test_aabb(self):
--+        _timings =3D {"a_1": 13, "a_2": 10, "b_1": 9, "b_2": 5}
--+        _yappi._set_test_timings(_timings)
--+
--+        self._ncall =3D 1
--+
--+        def a():
--+            if self._ncall =3D=3D 1:
--+                self._ncall +=3D 1
--+                a()
--+            elif self._ncall =3D=3D 2:
--+                b()
--+            else:
--+                return
--+
--+        def b():
--+            if self._ncall =3D=3D 2:
--+                self._ncall +=3D 1
--+                b()
--+            else:
--+                return
--+
--+        stats =3D utils.run_and_get_func_stats(a)
--+        fsa =3D utils.find_stat_by_name(stats, 'a')
--+        fsb =3D utils.find_stat_by_name(stats, 'b')
--+        cfsaa =3D fsa.children[fsa]
--+        cfsab =3D fsa.children[fsb]
--+        cfsbb =3D fsb.children[fsb]
--+        self.assertEqual(fsa.ttot, 13)
--+        self.assertEqual(fsa.tsub, 4)
--+        self.assertEqual(fsb.ttot, 9)
--+        self.assertEqual(fsb.tsub, 9)
--+        self.assertEqual(cfsaa.ttot, 10)
--+        self.assertEqual(cfsaa.tsub, 1)
--+        self.assertEqual(cfsab.ttot, 9)
--+        self.assertEqual(cfsab.tsub, 4)
--+        self.assertEqual(cfsbb.ttot, 5)
--+        self.assertEqual(cfsbb.tsub, 5)
--+
--+    def test_abbb(self):
--+        _timings =3D {"a_1": 13, "b_1": 10, "b_2": 6, "b_3": 1}
--+        _yappi._set_test_timings(_timings)
--+
--+        self._ncall =3D 1
--+
--+        def a():
--+            if self._ncall =3D=3D 1:
--+                b()
--+
--+        def b():
--+            if self._ncall =3D=3D 3:
--+                return
--+            self._ncall +=3D 1
--+            b()
--+
--+        stats =3D utils.run_and_get_func_stats(a)
--+        fsa =3D utils.find_stat_by_name(stats, 'a')
--+        fsb =3D utils.find_stat_by_name(stats, 'b')
--+        cfsab =3D fsa.children[fsb]
--+        cfsbb =3D fsb.children[fsb]
--+        self.assertEqual(fsa.ttot, 13)
--+        self.assertEqual(fsa.tsub, 3)
--+        self.assertEqual(fsb.ttot, 10)
--+        self.assertEqual(fsb.tsub, 10)
--+        self.assertEqual(fsb.ncall, 3)
--+        self.assertEqual(fsb.nactualcall, 1)
--+        self.assertEqual(cfsab.ttot, 10)
--+        self.assertEqual(cfsab.tsub, 4)
--+        self.assertEqual(cfsbb.ttot, 6)
--+        self.assertEqual(cfsbb.tsub, 6)
--+        self.assertEqual(cfsbb.nactualcall, 0)
--+        self.assertEqual(cfsbb.ncall, 2)
--+
--+    def test_aaab(self):
--+        _timings =3D {"a_1": 13, "a_2": 10, "a_3": 6, "b_1": 1}
--+        _yappi._set_test_timings(_timings)
--+
--+        self._ncall =3D 1
--+
--+        def a():
--+            if self._ncall =3D=3D 3:
--+                b()
--+                return
--+            self._ncall +=3D 1
--+            a()
--+
--+        def b():
--+            return
--+
--+        stats =3D utils.run_and_get_func_stats(a)
--+        fsa =3D utils.find_stat_by_name(stats, 'a')
--+        fsb =3D utils.find_stat_by_name(stats, 'b')
--+        cfsaa =3D fsa.children[fsa]
--+        cfsab =3D fsa.children[fsb]
--+        self.assertEqual(fsa.ttot, 13)
--+        self.assertEqual(fsa.tsub, 12)
--+        self.assertEqual(fsb.ttot, 1)
--+        self.assertEqual(fsb.tsub, 1)
--+        self.assertEqual(cfsaa.ttot, 10)
--+        self.assertEqual(cfsaa.tsub, 9)
--+        self.assertEqual(cfsab.ttot, 1)
--+        self.assertEqual(cfsab.tsub, 1)
--+
--+    def test_abab(self):
--+        _timings =3D {"a_1": 13, "b_1": 10, "a_2": 6, "b_2": 1}
--+        _yappi._set_test_timings(_timings)
--+
--+        self._ncall =3D 1
--+
--+        def a():
--+            b()
--+
--+        def b():
--+            if self._ncall =3D=3D 2:
--+                return
--+            self._ncall +=3D 1
--+            a()
--+
--+        stats =3D utils.run_and_get_func_stats(a)
--+        fsa =3D utils.find_stat_by_name(stats, 'a')
--+        fsb =3D utils.find_stat_by_name(stats, 'b')
--+        cfsab =3D fsa.children[fsb]
--+        cfsba =3D fsb.children[fsa]
--+        self.assertEqual(fsa.ttot, 13)
--+        self.assertEqual(fsa.tsub, 8)
--+        self.assertEqual(fsb.ttot, 10)
--+        self.assertEqual(fsb.tsub, 5)
--+        self.assertEqual(cfsab.ttot, 10)
--+        self.assertEqual(cfsab.tsub, 5)
--+        self.assertEqual(cfsab.ncall, 2)
--+        self.assertEqual(cfsab.nactualcall, 1)
--+        self.assertEqual(cfsba.ttot, 6)
--+        self.assertEqual(cfsba.tsub, 5)
--+
--+
--+if __name__ =3D=3D '__main__':
--+    #     import sys;sys.argv =3D ['', 'BasicUsage.test_run_as_script']
--+    #     import sys;sys.argv =3D ['', 'MultithreadedScenarios.test_subse=
-quent_profile']
--+    unittest.main()
----- a/tests/test_hooks.py
--+++ b/tests/test_hooks.py
--@@ -5,7 +5,7 @@ import unittest
-- import time
--=20
-- import yappi
---import utils
--+import tests.utils as utils
--=20
--=20
-- def a():
----- a/tests/test_tags.py
--+++ b/tests/test_tags.py
--@@ -2,7 +2,7 @@ import unittest
-- import yappi
-- import threading
-- import time
---from utils import YappiUnitTestCase, find_stat_by_name, burn_cpu, burn_io
--+from .utils import YappiUnitTestCase, find_stat_by_name, burn_cpu, burn_io
--=20
--=20
-- class MultiThreadTests(YappiUnitTestCase):
-diff --git a/meta-python/recipes-devtools/python/python3-yappi/0002-add-3.1=
-1-to-the-setup.patch b/meta-python/recipes-devtools/python/python3-yappi/00=
-02-add-3.11-to-the-setup.patch
+-+      g_string_append_printf (gstr, ", stdout=`%s', stderr=`%s'",
+-+                              standard_output, standard_error);
+-+      err_str = g_string_free (gstr, FALSE);
+-+      goto out;
+-+    }
+-+
+-+  duk_push_string (cx, standard_output);
+-+  ret = 1;
+-+
+-+ out:
+-+  g_strfreev (argv);
+-+  g_free (standard_output);
+-+  g_free (standard_error);
+-+  g_clear_object (&data.res);
+-+  if (loop != NULL)
+-+    g_main_loop_unref (loop);
+-+  if (context != NULL)
+-+    g_main_context_unref (context);
+-+
+-+  if (err_str)
+-+    duk_error (cx, DUK_ERR_ERROR, err_str);
+-+
+-+  return ret;
+-+}
+-+
+-+/* ---------------------------------------------------------------------------------------------------- */
+-+
+-+
+-+static duk_ret_t
+-+js_polkit_user_is_in_netgroup (duk_context *cx)
+-+{
+-+  const char *user;
+-+  const char *netgroup;
+-+  gboolean is_in_netgroup = FALSE;
+-+
+-+  user = duk_require_string (cx, 0);
+-+  netgroup = duk_require_string (cx, 1);
+-+
+-+  if (innetgr (netgroup,
+-+               NULL,  /* host */
+-+               user,
+-+               NULL)) /* domain */
+-+    {
+-+      is_in_netgroup = TRUE;
+-+    }
+-+
+-+  duk_push_boolean (cx, is_in_netgroup);
+-+  return 1;
+-+}
+-+
+-+/* ---------------------------------------------------------------------------------------------------- */
+-diff --git a/src/polkitbackend/polkitbackendjsauthority.cpp b/src/polkitbackend/polkitbackendjsauthority.cpp
+-index ca17108..11e91c0 100644
+---- a/src/polkitbackend/polkitbackendjsauthority.cpp
+-+++ b/src/polkitbackend/polkitbackendjsauthority.cpp
+-@@ -19,29 +19,7 @@
+-  * Author: David Zeuthen <davidz@redhat.com>
+-  */
+- 
+--#include "config.h"
+--#include <sys/wait.h>
+--#include <errno.h>
+--#include <pwd.h>
+--#include <grp.h>
+--#ifdef HAVE_NETGROUP_H
+--#include <netgroup.h>
+--#else
+--#include <netdb.h>
+--#endif
+--#include <string.h>
+--#include <glib/gstdio.h>
+--#include <locale.h>
+--#include <glib/gi18n-lib.h>
+--
+--#include <polkit/polkit.h>
+--#include "polkitbackendjsauthority.h"
+--
+--#include <polkit/polkitprivate.h>
+--
+--#ifdef HAVE_LIBSYSTEMD
+--#include <systemd/sd-login.h>
+--#endif /* HAVE_LIBSYSTEMD */
+-+#include "polkitbackendcommon.h"
+- 
+- #include <js/CompilationAndEvaluation.h>
+- #include <js/ContextOptions.h>
+-@@ -52,6 +30,7 @@
+- #include <js/Array.h>
+- #include <jsapi.h>
+- 
+-+/* Built source and not too big to worry about deduplication */
+- #include "initjs.h" /* init.js */
+- 
+- #ifdef JSGC_USE_EXACT_ROOTING
+-@@ -67,10 +46,9 @@
+-  * @short_description: JS Authority
+-  * @stability: Unstable
+-  *
+-- * An implementation of #PolkitBackendAuthority that reads and
+-- * evalates Javascript files and supports interaction with
+-- * authentication agents (virtue of being based on
+-- * #PolkitBackendInteractiveAuthority).
+-+ * An (SpiderMonkey-based) implementation of #PolkitBackendAuthority that reads
+-+ * and evaluates Javascript files and supports interaction with authentication
+-+ * agents (virtue of being based on #PolkitBackendInteractiveAuthority).
+-  */
+- 
+- /* ---------------------------------------------------------------------------------------------------- */
+-@@ -100,57 +78,11 @@ static bool execute_script_with_runaway_killer (PolkitBackendJsAuthority *author
+-                                     JS::HandleScript                 script,
+-                                     JS::MutableHandleValue           rval);
+- 
+--static void utils_spawn (const gchar *const  *argv,
+--                         guint                timeout_seconds,
+--                         GCancellable        *cancellable,
+--                         GAsyncReadyCallback  callback,
+--                         gpointer             user_data);
+--
+--gboolean utils_spawn_finish (GAsyncResult   *res,
+--                             gint           *out_exit_status,
+--                             gchar         **out_standard_output,
+--                             gchar         **out_standard_error,
+--                             GError        **error);
+--
+--static void on_dir_monitor_changed (GFileMonitor     *monitor,
+--                                    GFile            *file,
+--                                    GFile            *other_file,
+--                                    GFileMonitorEvent event_type,
+--                                    gpointer          user_data);
+--
+--/* ---------------------------------------------------------------------------------------------------- */
+--
+--enum
+--{
+--  PROP_0,
+--  PROP_RULES_DIRS,
+--};
+--
+- /* ---------------------------------------------------------------------------------------------------- */
+- 
+- static gpointer runaway_killer_thread_func (gpointer user_data);
+- static void runaway_killer_terminate (PolkitBackendJsAuthority *authority);
+- 
+--static GList *polkit_backend_js_authority_get_admin_auth_identities (PolkitBackendInteractiveAuthority *authority,
+--                                                                     PolkitSubject                     *caller,
+--                                                                     PolkitSubject                     *subject,
+--                                                                     PolkitIdentity                    *user_for_subject,
+--                                                                     gboolean                           subject_is_local,
+--                                                                     gboolean                           subject_is_active,
+--                                                                     const gchar                       *action_id,
+--                                                                     PolkitDetails                     *details);
+--
+--static PolkitImplicitAuthorization polkit_backend_js_authority_check_authorization_sync (
+--                                                          PolkitBackendInteractiveAuthority *authority,
+--                                                          PolkitSubject                     *caller,
+--                                                          PolkitSubject                     *subject,
+--                                                          PolkitIdentity                    *user_for_subject,
+--                                                          gboolean                           subject_is_local,
+--                                                          gboolean                           subject_is_active,
+--                                                          const gchar                       *action_id,
+--                                                          PolkitDetails                     *details,
+--                                                          PolkitImplicitAuthorization        implicit);
+--
+- G_DEFINE_TYPE (PolkitBackendJsAuthority, polkit_backend_js_authority, POLKIT_BACKEND_TYPE_INTERACTIVE_AUTHORITY);
+- 
+- /* ---------------------------------------------------------------------------------------------------- */
+-@@ -229,33 +161,6 @@ polkit_backend_js_authority_init (PolkitBackendJsAuthority *authority)
+-                                                  PolkitBackendJsAuthorityPrivate);
+- }
+- 
+--static gint
+--rules_file_name_cmp (const gchar *a,
+--                     const gchar *b)
+--{
+--  gint ret;
+--  const gchar *a_base;
+--  const gchar *b_base;
+--
+--  a_base = strrchr (a, '/');
+--  b_base = strrchr (b, '/');
+--
+--  g_assert (a_base != NULL);
+--  g_assert (b_base != NULL);
+--  a_base += 1;
+--  b_base += 1;
+--
+--  ret = g_strcmp0 (a_base, b_base);
+--  if (ret == 0)
+--    {
+--      /* /etc wins over /usr */
+--      ret = g_strcmp0 (a, b);
+--      g_assert (ret != 0);
+--    }
+--
+--  return ret;
+--}
+--
+- /* authority->priv->cx must be within a request */
+- static void
+- load_scripts (PolkitBackendJsAuthority  *authority)
+-@@ -299,7 +204,7 @@ load_scripts (PolkitBackendJsAuthority  *authority)
+-         }
+-     }
+- 
+--  files = g_list_sort (files, (GCompareFunc) rules_file_name_cmp);
+-+  files = g_list_sort (files, (GCompareFunc) polkit_backend_common_rules_file_name_cmp);
+- 
+-   for (l = files; l != NULL; l = l->next)
+-     {
+-@@ -365,8 +270,8 @@ load_scripts (PolkitBackendJsAuthority  *authority)
+-   g_list_free_full (files, g_free);
+- }
+- 
+--static void
+--reload_scripts (PolkitBackendJsAuthority *authority)
+-+void
+-+polkit_backend_common_reload_scripts (PolkitBackendJsAuthority *authority)
+- {
+-   JS::RootedValueArray<1> args(authority->priv->cx);
+-   JS::RootedValue rval(authority->priv->cx);
+-@@ -395,42 +300,6 @@ reload_scripts (PolkitBackendJsAuthority *authority)
+-   g_signal_emit_by_name (authority, "changed");
+- }
+- 
+--static void
+--on_dir_monitor_changed (GFileMonitor     *monitor,
+--                        GFile            *file,
+--                        GFile            *other_file,
+--                        GFileMonitorEvent event_type,
+--                        gpointer          user_data)
+--{
+--  PolkitBackendJsAuthority *authority = POLKIT_BACKEND_JS_AUTHORITY (user_data);
+--
+--  /* TODO: maybe rate-limit so storms of events are collapsed into one with a 500ms resolution?
+--   *       Because when editing a file with emacs we get 4-8 events..
+--   */
+--
+--  if (file != NULL)
+--    {
+--      gchar *name;
+--
+--      name = g_file_get_basename (file);
+--
+--      /* g_print ("event_type=%d file=%p name=%s\n", event_type, file, name); */
+--      if (!g_str_has_prefix (name, ".") &&
+--          !g_str_has_prefix (name, "#") &&
+--          g_str_has_suffix (name, ".rules") &&
+--          (event_type == G_FILE_MONITOR_EVENT_CREATED ||
+--           event_type == G_FILE_MONITOR_EVENT_DELETED ||
+--           event_type == G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT))
+--        {
+--          polkit_backend_authority_log (POLKIT_BACKEND_AUTHORITY (authority),
+--                                        "Reloading rules");
+--          reload_scripts (authority);
+--        }
+--      g_free (name);
+--    }
+--}
+--
+--
+- static void
+- setup_file_monitors (PolkitBackendJsAuthority *authority)
+- {
+-@@ -462,7 +331,7 @@ setup_file_monitors (PolkitBackendJsAuthority *authority)
+-         {
+-           g_signal_connect (monitor,
+-                             "changed",
+--                            G_CALLBACK (on_dir_monitor_changed),
+-+                            G_CALLBACK (polkit_backend_common_on_dir_monitor_changed),
+-                             authority);
+-           g_ptr_array_add (p, monitor);
+-         }
+-@@ -471,8 +340,8 @@ setup_file_monitors (PolkitBackendJsAuthority *authority)
+-   authority->priv->dir_monitors = (GFileMonitor**) g_ptr_array_free (p, FALSE);
+- }
+- 
+--static void
+--polkit_backend_js_authority_constructed (GObject *object)
+-+void
+-+polkit_backend_common_js_authority_constructed (GObject *object)
+- {
+-   PolkitBackendJsAuthority *authority = POLKIT_BACKEND_JS_AUTHORITY (object);
+- 
+-@@ -561,8 +430,8 @@ polkit_backend_js_authority_constructed (GObject *object)
+-   g_assert_not_reached ();
+- }
+- 
+--static void
+--polkit_backend_js_authority_finalize (GObject *object)
+-+void
+-+polkit_backend_common_js_authority_finalize (GObject *object)
+- {
+-   PolkitBackendJsAuthority *authority = POLKIT_BACKEND_JS_AUTHORITY (object);
+-   guint n;
+-@@ -577,7 +446,7 @@ polkit_backend_js_authority_finalize (GObject *object)
+-     {
+-       GFileMonitor *monitor = authority->priv->dir_monitors[n];
+-       g_signal_handlers_disconnect_by_func (monitor,
+--                                            (gpointer*)G_CALLBACK (on_dir_monitor_changed),
+-+                                            (gpointer*)G_CALLBACK (polkit_backend_common_on_dir_monitor_changed),
+-                                             authority);
+-       g_object_unref (monitor);
+-     }
+-@@ -594,11 +463,11 @@ polkit_backend_js_authority_finalize (GObject *object)
+-   G_OBJECT_CLASS (polkit_backend_js_authority_parent_class)->finalize (object);
+- }
+- 
+--static void
+--polkit_backend_js_authority_set_property (GObject      *object,
+--                                          guint         property_id,
+--                                          const GValue *value,
+--                                          GParamSpec   *pspec)
+-+void
+-+polkit_backend_common_js_authority_set_property (GObject      *object,
+-+                                                 guint         property_id,
+-+                                                 const GValue *value,
+-+                                                 GParamSpec   *pspec)
+- {
+-   PolkitBackendJsAuthority *authority = POLKIT_BACKEND_JS_AUTHORITY (object);
+- 
+-@@ -615,57 +484,12 @@ polkit_backend_js_authority_set_property (GObject      *object,
+-     }
+- }
+- 
+--static const gchar *
+--polkit_backend_js_authority_get_name (PolkitBackendAuthority *authority)
+--{
+--  return "js";
+--}
+--
+--static const gchar *
+--polkit_backend_js_authority_get_version (PolkitBackendAuthority *authority)
+--{
+--  return PACKAGE_VERSION;
+--}
+--
+--static PolkitAuthorityFeatures
+--polkit_backend_js_authority_get_features (PolkitBackendAuthority *authority)
+--{
+--  return POLKIT_AUTHORITY_FEATURES_TEMPORARY_AUTHORIZATION;
+--}
+--
+- static void
+- polkit_backend_js_authority_class_init (PolkitBackendJsAuthorityClass *klass)
+- {
+--  GObjectClass *gobject_class;
+--  PolkitBackendAuthorityClass *authority_class;
+--  PolkitBackendInteractiveAuthorityClass *interactive_authority_class;
+--
+--
+--  gobject_class = G_OBJECT_CLASS (klass);
+--  gobject_class->finalize                               = polkit_backend_js_authority_finalize;
+--  gobject_class->set_property                           = polkit_backend_js_authority_set_property;
+--  gobject_class->constructed                            = polkit_backend_js_authority_constructed;
+--
+--  authority_class = POLKIT_BACKEND_AUTHORITY_CLASS (klass);
+--  authority_class->get_name                             = polkit_backend_js_authority_get_name;
+--  authority_class->get_version                          = polkit_backend_js_authority_get_version;
+--  authority_class->get_features                         = polkit_backend_js_authority_get_features;
+--
+--  interactive_authority_class = POLKIT_BACKEND_INTERACTIVE_AUTHORITY_CLASS (klass);
+--  interactive_authority_class->get_admin_identities     = polkit_backend_js_authority_get_admin_auth_identities;
+--  interactive_authority_class->check_authorization_sync = polkit_backend_js_authority_check_authorization_sync;
+--
+--  g_object_class_install_property (gobject_class,
+--                                   PROP_RULES_DIRS,
+--                                   g_param_spec_boxed ("rules-dirs",
+--                                                       NULL,
+--                                                       NULL,
+--                                                       G_TYPE_STRV,
+--                                                       GParamFlags(G_PARAM_CONSTRUCT_ONLY | G_PARAM_WRITABLE)));
+--
+-+  polkit_backend_common_js_authority_class_init_common (klass);
+- 
+-   g_type_class_add_private (klass, sizeof (PolkitBackendJsAuthorityPrivate));
+--
+-   JS_Init ();
+- }
+- 
+-@@ -1005,11 +829,14 @@ runaway_killer_setup (PolkitBackendJsAuthority *authority)
+- {
+-   g_assert (authority->priv->rkt_source == NULL);
+- 
+--  /* set-up timer for runaway scripts, will be executed in runaway_killer_thread */
+-+  /* set-up timer for runaway scripts, will be executed in
+-+     runaway_killer_thread, that is one, permanent thread running a glib
+-+     mainloop (rkt_loop) whose context (rkt_context) has a timeout source
+-+     (rkt_source) */
+-   g_mutex_lock (&authority->priv->rkt_timeout_pending_mutex);
+-   authority->priv->rkt_timeout_pending = FALSE;
+-   g_mutex_unlock (&authority->priv->rkt_timeout_pending_mutex);
+--  authority->priv->rkt_source = g_timeout_source_new_seconds (15);
+-+  authority->priv->rkt_source = g_timeout_source_new_seconds (RUNAWAY_KILLER_TIMEOUT);
+-   g_source_set_callback (authority->priv->rkt_source, rkt_on_timeout, authority, NULL);
+-   g_source_attach (authority->priv->rkt_source, authority->priv->rkt_context);
+- 
+-@@ -1069,6 +896,9 @@ execute_script_with_runaway_killer (PolkitBackendJsAuthority *authority,
+- {
+-   bool ret;
+- 
+-+  // tries to JS_ExecuteScript(), may hang for > RUNAWAY_KILLER_TIMEOUT,
+-+  // runaway_killer_thread makes sure the call returns, due to exception
+-+  // injection
+-   runaway_killer_setup (authority);
+-   ret = JS_ExecuteScript (authority->priv->cx,
+-                           script,
+-@@ -1099,15 +929,15 @@ call_js_function_with_runaway_killer (PolkitBackendJsAuthority *authority,
+- 
+- /* ---------------------------------------------------------------------------------------------------- */
+- 
+--static GList *
+--polkit_backend_js_authority_get_admin_auth_identities (PolkitBackendInteractiveAuthority *_authority,
+--                                                       PolkitSubject                     *caller,
+--                                                       PolkitSubject                     *subject,
+--                                                       PolkitIdentity                    *user_for_subject,
+--                                                       gboolean                           subject_is_local,
+--                                                       gboolean                           subject_is_active,
+--                                                       const gchar                       *action_id,
+--                                                       PolkitDetails                     *details)
+-+GList *
+-+polkit_backend_common_js_authority_get_admin_auth_identities (PolkitBackendInteractiveAuthority *_authority,
+-+                                                              PolkitSubject                     *caller,
+-+                                                              PolkitSubject                     *subject,
+-+                                                              PolkitIdentity                    *user_for_subject,
+-+                                                              gboolean                           subject_is_local,
+-+                                                              gboolean                           subject_is_active,
+-+                                                              const gchar                       *action_id,
+-+                                                              PolkitDetails                     *details)
+- {
+-   PolkitBackendJsAuthority *authority = POLKIT_BACKEND_JS_AUTHORITY (_authority);
+-   GList *ret = NULL;
+-@@ -1202,16 +1032,16 @@ polkit_backend_js_authority_get_admin_auth_identities (PolkitBackendInteractiveA
+- 
+- /* ---------------------------------------------------------------------------------------------------- */
+- 
+--static PolkitImplicitAuthorization
+--polkit_backend_js_authority_check_authorization_sync (PolkitBackendInteractiveAuthority *_authority,
+--                                                      PolkitSubject                     *caller,
+--                                                      PolkitSubject                     *subject,
+--                                                      PolkitIdentity                    *user_for_subject,
+--                                                      gboolean                           subject_is_local,
+--                                                      gboolean                           subject_is_active,
+--                                                      const gchar                       *action_id,
+--                                                      PolkitDetails                     *details,
+--                                                      PolkitImplicitAuthorization        implicit)
+-+PolkitImplicitAuthorization
+-+polkit_backend_common_js_authority_check_authorization_sync (PolkitBackendInteractiveAuthority *_authority,
+-+                                                             PolkitSubject                     *caller,
+-+                                                             PolkitSubject                     *subject,
+-+                                                             PolkitIdentity                    *user_for_subject,
+-+                                                             gboolean                           subject_is_local,
+-+                                                             gboolean                           subject_is_active,
+-+                                                             const gchar                       *action_id,
+-+                                                             PolkitDetails                     *details,
+-+                                                             PolkitImplicitAuthorization        implicit)
+- {
+-   PolkitBackendJsAuthority *authority = POLKIT_BACKEND_JS_AUTHORITY (_authority);
+-   PolkitImplicitAuthorization ret = implicit;
+-@@ -1324,65 +1154,6 @@ js_polkit_log (JSContext  *cx,
+- 
+- /* ---------------------------------------------------------------------------------------------------- */
+- 
+--static const gchar *
+--get_signal_name (gint signal_number)
+--{
+--  switch (signal_number)
+--    {
+--#define _HANDLE_SIG(sig) case sig: return #sig;
+--    _HANDLE_SIG (SIGHUP);
+--    _HANDLE_SIG (SIGINT);
+--    _HANDLE_SIG (SIGQUIT);
+--    _HANDLE_SIG (SIGILL);
+--    _HANDLE_SIG (SIGABRT);
+--    _HANDLE_SIG (SIGFPE);
+--    _HANDLE_SIG (SIGKILL);
+--    _HANDLE_SIG (SIGSEGV);
+--    _HANDLE_SIG (SIGPIPE);
+--    _HANDLE_SIG (SIGALRM);
+--    _HANDLE_SIG (SIGTERM);
+--    _HANDLE_SIG (SIGUSR1);
+--    _HANDLE_SIG (SIGUSR2);
+--    _HANDLE_SIG (SIGCHLD);
+--    _HANDLE_SIG (SIGCONT);
+--    _HANDLE_SIG (SIGSTOP);
+--    _HANDLE_SIG (SIGTSTP);
+--    _HANDLE_SIG (SIGTTIN);
+--    _HANDLE_SIG (SIGTTOU);
+--    _HANDLE_SIG (SIGBUS);
+--#ifdef SIGPOLL
+--    _HANDLE_SIG (SIGPOLL);
+--#endif
+--    _HANDLE_SIG (SIGPROF);
+--    _HANDLE_SIG (SIGSYS);
+--    _HANDLE_SIG (SIGTRAP);
+--    _HANDLE_SIG (SIGURG);
+--    _HANDLE_SIG (SIGVTALRM);
+--    _HANDLE_SIG (SIGXCPU);
+--    _HANDLE_SIG (SIGXFSZ);
+--#undef _HANDLE_SIG
+--    default:
+--      break;
+--    }
+--  return "UNKNOWN_SIGNAL";
+--}
+--
+--typedef struct
+--{
+--  GMainLoop *loop;
+--  GAsyncResult *res;
+--} SpawnData;
+--
+--static void
+--spawn_cb (GObject       *source_object,
+--          GAsyncResult  *res,
+--          gpointer       user_data)
+--{
+--  SpawnData *data = (SpawnData *)user_data;
+--  data->res = (GAsyncResult*)g_object_ref (res);
+--  g_main_loop_quit (data->loop);
+--}
+--
+- static bool
+- js_polkit_spawn (JSContext  *cx,
+-                  unsigned    js_argc,
+-@@ -1440,21 +1211,21 @@ js_polkit_spawn (JSContext  *cx,
+-   g_main_context_push_thread_default (context);
+- 
+-   data.loop = loop;
+--  utils_spawn ((const gchar *const *) argv,
+--               10, /* timeout_seconds */
+--               NULL, /* cancellable */
+--               spawn_cb,
+--               &data);
+-+  polkit_backend_common_spawn ((const gchar *const *) argv,
+-+                               10, /* timeout_seconds */
+-+                               NULL, /* cancellable */
+-+                               polkit_backend_common_spawn_cb,
+-+                               &data);
+- 
+-   g_main_loop_run (loop);
+- 
+-   g_main_context_pop_thread_default (context);
+- 
+--  if (!utils_spawn_finish (data.res,
+--                           &exit_status,
+--                           &standard_output,
+--                           &standard_error,
+--                           &error))
+-+  if (!polkit_backend_common_spawn_finish (data.res,
+-+                                           &exit_status,
+-+                                           &standard_output,
+-+                                           &standard_error,
+-+                                           &error))
+-     {
+-       JS_ReportErrorUTF8 (cx,
+-                       "Error spawning helper: %s (%s, %d)",
+-@@ -1477,7 +1248,7 @@ js_polkit_spawn (JSContext  *cx,
+-         {
+-           g_string_append_printf (gstr,
+-                                   "Helper was signaled with signal %s (%d)",
+--                                  get_signal_name (WTERMSIG (exit_status)),
+-+                                  polkit_backend_common_get_signal_name (WTERMSIG (exit_status)),
+-                                   WTERMSIG (exit_status));
+-         }
+-       g_string_append_printf (gstr, ", stdout=`%s', stderr=`%s'",
+-@@ -1542,381 +1313,5 @@ js_polkit_user_is_in_netgroup (JSContext  *cx,
+-   return ret;
+- }
+- 
+--
+--
+- /* ---------------------------------------------------------------------------------------------------- */
+- 
+--typedef struct
+--{
+--  GSimpleAsyncResult *simple; /* borrowed reference */
+--  GMainContext *main_context; /* may be NULL */
+--
+--  GCancellable *cancellable;  /* may be NULL */
+--  gulong cancellable_handler_id;
+--
+--  GPid child_pid;
+--  gint child_stdout_fd;
+--  gint child_stderr_fd;
+--
+--  GIOChannel *child_stdout_channel;
+--  GIOChannel *child_stderr_channel;
+--
+--  GSource *child_watch_source;
+--  GSource *child_stdout_source;
+--  GSource *child_stderr_source;
+--
+--  guint timeout_seconds;
+--  gboolean timed_out;
+--  GSource *timeout_source;
+--
+--  GString *child_stdout;
+--  GString *child_stderr;
+--
+--  gint exit_status;
+--} UtilsSpawnData;
+--
+--static void
+--utils_child_watch_from_release_cb (GPid     pid,
+--                                   gint     status,
+--                                   gpointer user_data)
+--{
+--}
+--
+--static void
+--utils_spawn_data_free (UtilsSpawnData *data)
+--{
+--  if (data->timeout_source != NULL)
+--    {
+--      g_source_destroy (data->timeout_source);
+--      data->timeout_source = NULL;
+--    }
+--
+--  /* Nuke the child, if necessary */
+--  if (data->child_watch_source != NULL)
+--    {
+--      g_source_destroy (data->child_watch_source);
+--      data->child_watch_source = NULL;
+--    }
+--
+--  if (data->child_pid != 0)
+--    {
+--      GSource *source;
+--      kill (data->child_pid, SIGTERM);
+--      /* OK, we need to reap for the child ourselves - we don't want
+--       * to use waitpid() because that might block the calling
+--       * thread (the child might handle SIGTERM and use several
+--       * seconds for cleanup/rollback).
+--       *
+--       * So we use GChildWatch instead.
+--       *
+--       * Avoid taking a references to ourselves. but note that we need
+--       * to pass the GSource so we can nuke it once handled.
+--       */
+--      source = g_child_watch_source_new (data->child_pid);
+--      g_source_set_callback (source,
+--                             (GSourceFunc) utils_child_watch_from_release_cb,
+--                             source,
+--                             (GDestroyNotify) g_source_destroy);
+--      /* attach source to the global default main context */
+--      g_source_attach (source, NULL);
+--      g_source_unref (source);
+--      data->child_pid = 0;
+--    }
+--
+--  if (data->child_stdout != NULL)
+--    {
+--      g_string_free (data->child_stdout, TRUE);
+--      data->child_stdout = NULL;
+--    }
+--
+--  if (data->child_stderr != NULL)
+--    {
+--      g_string_free (data->child_stderr, TRUE);
+--      data->child_stderr = NULL;
+--    }
+--
+--  if (data->child_stdout_channel != NULL)
+--    {
+--      g_io_channel_unref (data->child_stdout_channel);
+--      data->child_stdout_channel = NULL;
+--    }
+--  if (data->child_stderr_channel != NULL)
+--    {
+--      g_io_channel_unref (data->child_stderr_channel);
+--      data->child_stderr_channel = NULL;
+--    }
+--
+--  if (data->child_stdout_source != NULL)
+--    {
+--      g_source_destroy (data->child_stdout_source);
+--      data->child_stdout_source = NULL;
+--    }
+--  if (data->child_stderr_source != NULL)
+--    {
+--      g_source_destroy (data->child_stderr_source);
+--      data->child_stderr_source = NULL;
+--    }
+--
+--  if (data->child_stdout_fd != -1)
+--    {
+--      g_warn_if_fail (close (data->child_stdout_fd) == 0);
+--      data->child_stdout_fd = -1;
+--    }
+--  if (data->child_stderr_fd != -1)
+--    {
+--      g_warn_if_fail (close (data->child_stderr_fd) == 0);
+--      data->child_stderr_fd = -1;
+--    }
+--
+--  if (data->cancellable_handler_id > 0)
+--    {
+--      g_cancellable_disconnect (data->cancellable, data->cancellable_handler_id);
+--      data->cancellable_handler_id = 0;
+--    }
+--
+--  if (data->main_context != NULL)
+--    g_main_context_unref (data->main_context);
+--
+--  if (data->cancellable != NULL)
+--    g_object_unref (data->cancellable);
+--
+--  g_slice_free (UtilsSpawnData, data);
+--}
+--
+--/* called in the thread where @cancellable was cancelled */
+--static void
+--utils_on_cancelled (GCancellable *cancellable,
+--                    gpointer      user_data)
+--{
+--  UtilsSpawnData *data = (UtilsSpawnData *)user_data;
+--  GError *error;
+--
+--  error = NULL;
+--  g_warn_if_fail (g_cancellable_set_error_if_cancelled (cancellable, &error));
+--  g_simple_async_result_take_error (data->simple, error);
+--  g_simple_async_result_complete_in_idle (data->simple);
+--  g_object_unref (data->simple);
+--}
+--
+--static gboolean
+--utils_read_child_stderr (GIOChannel *channel,
+--                         GIOCondition condition,
+--                         gpointer user_data)
+--{
+--  UtilsSpawnData *data = (UtilsSpawnData *)user_data;
+--  gchar buf[1024];
+--  gsize bytes_read;
+--
+--  g_io_channel_read_chars (channel, buf, sizeof buf, &bytes_read, NULL);
+--  g_string_append_len (data->child_stderr, buf, bytes_read);
+--  return TRUE;
+--}
+--
+--static gboolean
+--utils_read_child_stdout (GIOChannel *channel,
+--                         GIOCondition condition,
+--                         gpointer user_data)
+--{
+--  UtilsSpawnData *data = (UtilsSpawnData *)user_data;
+--  gchar buf[1024];
+--  gsize bytes_read;
+--
+--  g_io_channel_read_chars (channel, buf, sizeof buf, &bytes_read, NULL);
+--  g_string_append_len (data->child_stdout, buf, bytes_read);
+--  return TRUE;
+--}
+--
+--static void
+--utils_child_watch_cb (GPid     pid,
+--                      gint     status,
+--                      gpointer user_data)
+--{
+--  UtilsSpawnData *data = (UtilsSpawnData *)user_data;
+--  gchar *buf;
+--  gsize buf_size;
+--
+--  if (g_io_channel_read_to_end (data->child_stdout_channel, &buf, &buf_size, NULL) == G_IO_STATUS_NORMAL)
+--    {
+--      g_string_append_len (data->child_stdout, buf, buf_size);
+--      g_free (buf);
+--    }
+--  if (g_io_channel_read_to_end (data->child_stderr_channel, &buf, &buf_size, NULL) == G_IO_STATUS_NORMAL)
+--    {
+--      g_string_append_len (data->child_stderr, buf, buf_size);
+--      g_free (buf);
+--    }
+--
+--  data->exit_status = status;
+--
+--  /* ok, child watch is history, make sure we don't free it in spawn_data_free() */
+--  data->child_pid = 0;
+--  data->child_watch_source = NULL;
+--
+--  /* we're done */
+--  g_simple_async_result_complete_in_idle (data->simple);
+--  g_object_unref (data->simple);
+--}
+--
+--static gboolean
+--utils_timeout_cb (gpointer user_data)
+--{
+--  UtilsSpawnData *data = (UtilsSpawnData *)user_data;
+--
+--  data->timed_out = TRUE;
+--
+--  /* ok, timeout is history, make sure we don't free it in spawn_data_free() */
+--  data->timeout_source = NULL;
+--
+--  /* we're done */
+--  g_simple_async_result_complete_in_idle (data->simple);
+--  g_object_unref (data->simple);
+--
+--  return FALSE; /* remove source */
+--}
+--
+--static void
+--utils_spawn (const gchar *const  *argv,
+--             guint                timeout_seconds,
+--             GCancellable        *cancellable,
+--             GAsyncReadyCallback  callback,
+--             gpointer             user_data)
+--{
+--  UtilsSpawnData *data;
+--  GError *error;
+--
+--  data = g_slice_new0 (UtilsSpawnData);
+--  data->timeout_seconds = timeout_seconds;
+--  data->simple = g_simple_async_result_new (NULL,
+--                                            callback,
+--                                            user_data,
+--                                            (gpointer*)utils_spawn);
+--  data->main_context = g_main_context_get_thread_default ();
+--  if (data->main_context != NULL)
+--    g_main_context_ref (data->main_context);
+--
+--  data->cancellable = cancellable != NULL ? (GCancellable*)g_object_ref (cancellable) : NULL;
+--
+--  data->child_stdout = g_string_new (NULL);
+--  data->child_stderr = g_string_new (NULL);
+--  data->child_stdout_fd = -1;
+--  data->child_stderr_fd = -1;
+--
+--  /* the life-cycle of UtilsSpawnData is tied to its GSimpleAsyncResult */
+--  g_simple_async_result_set_op_res_gpointer (data->simple, data, (GDestroyNotify) utils_spawn_data_free);
+--
+--  error = NULL;
+--  if (data->cancellable != NULL)
+--    {
+--      /* could already be cancelled */
+--      error = NULL;
+--      if (g_cancellable_set_error_if_cancelled (data->cancellable, &error))
+--        {
+--          g_simple_async_result_take_error (data->simple, error);
+--          g_simple_async_result_complete_in_idle (data->simple);
+--          g_object_unref (data->simple);
+--          goto out;
+--        }
+--
+--      data->cancellable_handler_id = g_cancellable_connect (data->cancellable,
+--                                                            G_CALLBACK (utils_on_cancelled),
+--                                                            data,
+--                                                            NULL);
+--    }
+--
+--  error = NULL;
+--  if (!g_spawn_async_with_pipes (NULL, /* working directory */
+--                                 (gchar **) argv,
+--                                 NULL, /* envp */
+--                                 GSpawnFlags(G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD),
+--                                 NULL, /* child_setup */
+--                                 NULL, /* child_setup's user_data */
+--                                 &(data->child_pid),
+--                                 NULL, /* gint *stdin_fd */
+--                                 &(data->child_stdout_fd),
+--                                 &(data->child_stderr_fd),
+--                                 &error))
+--    {
+--      g_prefix_error (&error, "Error spawning: ");
+--      g_simple_async_result_take_error (data->simple, error);
+--      g_simple_async_result_complete_in_idle (data->simple);
+--      g_object_unref (data->simple);
+--      goto out;
+--    }
+--
+--  if (timeout_seconds > 0)
+--    {
+--      data->timeout_source = g_timeout_source_new_seconds (timeout_seconds);
+--      g_source_set_priority (data->timeout_source, G_PRIORITY_DEFAULT);
+--      g_source_set_callback (data->timeout_source, utils_timeout_cb, data, NULL);
+--      g_source_attach (data->timeout_source, data->main_context);
+--      g_source_unref (data->timeout_source);
+--    }
+--
+--  data->child_watch_source = g_child_watch_source_new (data->child_pid);
+--  g_source_set_callback (data->child_watch_source, (GSourceFunc) utils_child_watch_cb, data, NULL);
+--  g_source_attach (data->child_watch_source, data->main_context);
+--  g_source_unref (data->child_watch_source);
+--
+--  data->child_stdout_channel = g_io_channel_unix_new (data->child_stdout_fd);
+--  g_io_channel_set_flags (data->child_stdout_channel, G_IO_FLAG_NONBLOCK, NULL);
+--  data->child_stdout_source = g_io_create_watch (data->child_stdout_channel, G_IO_IN);
+--  g_source_set_callback (data->child_stdout_source, (GSourceFunc) utils_read_child_stdout, data, NULL);
+--  g_source_attach (data->child_stdout_source, data->main_context);
+--  g_source_unref (data->child_stdout_source);
+--
+--  data->child_stderr_channel = g_io_channel_unix_new (data->child_stderr_fd);
+--  g_io_channel_set_flags (data->child_stderr_channel, G_IO_FLAG_NONBLOCK, NULL);
+--  data->child_stderr_source = g_io_create_watch (data->child_stderr_channel, G_IO_IN);
+--  g_source_set_callback (data->child_stderr_source, (GSourceFunc) utils_read_child_stderr, data, NULL);
+--  g_source_attach (data->child_stderr_source, data->main_context);
+--  g_source_unref (data->child_stderr_source);
+--
+-- out:
+--  ;
+--}
+--
+--gboolean
+--utils_spawn_finish (GAsyncResult   *res,
+--                    gint           *out_exit_status,
+--                    gchar         **out_standard_output,
+--                    gchar         **out_standard_error,
+--                    GError        **error)
+--{
+--  GSimpleAsyncResult *simple = G_SIMPLE_ASYNC_RESULT (res);
+--  UtilsSpawnData *data;
+--  gboolean ret = FALSE;
+--
+--  g_return_val_if_fail (G_IS_ASYNC_RESULT (res), FALSE);
+--  g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
+--
+--  g_warn_if_fail (g_simple_async_result_get_source_tag (simple) == utils_spawn);
+--
+--  if (g_simple_async_result_propagate_error (simple, error))
+--    goto out;
+--
+--  data = (UtilsSpawnData*)g_simple_async_result_get_op_res_gpointer (simple);
+--
+--  if (data->timed_out)
+--    {
+--      g_set_error (error,
+--                   G_IO_ERROR,
+--                   G_IO_ERROR_TIMED_OUT,
+--                   "Timed out after %d seconds",
+--                   data->timeout_seconds);
+--      goto out;
+--    }
+--
+--  if (out_exit_status != NULL)
+--    *out_exit_status = data->exit_status;
+--
+--  if (out_standard_output != NULL)
+--    *out_standard_output = g_strdup (data->child_stdout->str);
+--
+--  if (out_standard_error != NULL)
+--    *out_standard_error = g_strdup (data->child_stderr->str);
+--
+--  ret = TRUE;
+--
+-- out:
+--  return ret;
+--}
+-diff --git a/test/data/etc/polkit-1/rules.d/10-testing.rules b/test/data/etc/polkit-1/rules.d/10-testing.rules
+-index 98bf062..e346b5d 100644
+---- a/test/data/etc/polkit-1/rules.d/10-testing.rules
+-+++ b/test/data/etc/polkit-1/rules.d/10-testing.rules
+-@@ -189,8 +189,10 @@ polkit.addRule(function(action, subject) {
+-                 ;
+-         } catch (error) {
+-             if (error == "Terminating runaway script")
+--                return polkit.Result.YES;
+--            return polkit.Result.NO;
+-+                // Inverted logic to accomodate Duktape's model as well, which
+-+                // will always fail with negation, on timeouts
+-+                return polkit.Result.NO;
+-+            return polkit.Result.YES;
+-         }
+-     }
+- });
+-diff --git a/test/polkitbackend/test-polkitbackendjsauthority.c b/test/polkitbackend/test-polkitbackendjsauthority.c
+-index f97e0e0..2103b17 100644
+---- a/test/polkitbackend/test-polkitbackendjsauthority.c
+-+++ b/test/polkitbackend/test-polkitbackendjsauthority.c
+-@@ -328,7 +328,7 @@ static const RulesTestCase rules_test_cases[] = {
+-     "net.company.run_away_script",
+-     "unix-user:root",
+-     NULL,
+--    POLKIT_IMPLICIT_AUTHORIZATION_AUTHORIZED,
+-+    POLKIT_IMPLICIT_AUTHORIZATION_NOT_AUTHORIZED,
+-   },
+- 
+-   {
+diff --git a/meta-oe/recipes-extended/polkit/polkit/0003-jsauthority-ensure-to-call-JS_Init-and-JS_ShutDown-e.patch b/meta-oe/recipes-extended/polkit/polkit/0003-jsauthority-ensure-to-call-JS_Init-and-JS_ShutDown-e.patch
 deleted file mode 100644
-index d40bd2b7c..000000000
---- a/meta-python/recipes-devtools/python/python3-yappi/0002-add-3.11-to-th=
-e-setup.patch
+index 9e9755e44..000000000
+--- a/meta-oe/recipes-extended/polkit/polkit/0003-jsauthority-ensure-to-call-JS_Init-and-JS_ShutDown-e.patch
 +++ /dev/null
-@@ -1,26 +0,0 @@
--From 38afdacf526410f970afc58e147c7377c6c7112c Mon Sep 17 00:00:00 2001
--From: =3D?UTF-8?q?S=3DC3=3DBCmer=3D20Cip?=3D <sumer.cip@platform.sh>
--Date: Fri, 25 Nov 2022 15:58:03 +0300
--Subject: [PATCH 2/2] add 3.11 to the setup
+@@ -1,63 +0,0 @@
+-From 7799441b9aa55324160deefbc65f9d918b8c94c1 Mon Sep 17 00:00:00 2001
+-From: Xi Ruoyao <xry111@mengyan1223.wang>
+-Date: Tue, 10 Aug 2021 18:52:56 +0800
+-Subject: [PATCH] jsauthority: ensure to call JS_Init() and JS_ShutDown()
+- exactly once
+-
+-Before this commit, we were calling JS_Init() in
+-polkit_backend_js_authority_class_init and never called JS_ShutDown.
+-This is actually a misusage of SpiderMonkey API.  Quote from a comment
+-in js/Initialization.h (both mozjs-78 and mozjs-91):
+-
+-    It is currently not possible to initialize SpiderMonkey multiple
+-    times (that is, calling JS_Init/JSAPI methods/JS_ShutDown in that
+-    order, then doing so again).
+-
+-This misusage does not cause severe issues with mozjs-78.  However, when
+-we eventually port jsauthority to use mozjs-91, bad thing will happen:
+-see the test failure mentioned in #150.
+-
+-This commit is tested with both mozjs-78 and mozjs-91, all tests pass
+-with it.
+-
+-Upstream-Status: Submitted [https://gitlab.freedesktop.org/polkit/polkit/-/merge_requests/91]
+-Signed-off-by: Alexander Kanavin <alex@linutronix.de>
+----
+- src/polkitbackend/polkitbackendjsauthority.cpp | 10 +++++++---
+- 1 file changed, 7 insertions(+), 3 deletions(-)
+-
+-diff --git a/src/polkitbackend/polkitbackendjsauthority.cpp b/src/polkitbackend/polkitbackendjsauthority.cpp
+-index 41d8d5c..38dc001 100644
+---- a/src/polkitbackend/polkitbackendjsauthority.cpp
+-+++ b/src/polkitbackend/polkitbackendjsauthority.cpp
+-@@ -75,6 +75,13 @@
+- 
+- /* ---------------------------------------------------------------------------------------------------- */
+- 
+-+static class JsInitHelperType
+-+{
+-+public:
+-+	JsInitHelperType() { JS_Init(); }
+-+	~JsInitHelperType() { JS_ShutDown(); }
+-+} JsInitHelper;
+-+
+- struct _PolkitBackendJsAuthorityPrivate
+- {
+-   gchar **rules_dirs;
+-@@ -589,7 +596,6 @@ polkit_backend_js_authority_finalize (GObject *object)
+-   delete authority->priv->js_polkit;
+- 
+-   JS_DestroyContext (authority->priv->cx);
+--  /* JS_ShutDown (); */
+- 
+-   G_OBJECT_CLASS (polkit_backend_js_authority_parent_class)->finalize (object);
+- }
+-@@ -665,8 +671,6 @@ polkit_backend_js_authority_class_init (PolkitBackendJsAuthorityClass *klass)
+- 
+- 
+-   g_type_class_add_private (klass, sizeof (PolkitBackendJsAuthorityPrivate));
+--
+--  JS_Init ();
+- }
+- 
+- /* ---------------------------------------------------------------------------------------------------- */
+diff --git a/meta-oe/recipes-extended/polkit/polkit/0004-Make-netgroup-support-optional.patch b/meta-oe/recipes-extended/polkit/polkit/0004-Make-netgroup-support-optional.patch
+deleted file mode 100644
+index 181aca16c..000000000
+--- a/meta-oe/recipes-extended/polkit/polkit/0004-Make-netgroup-support-optional.patch
++++ /dev/null
+@@ -1,253 +0,0 @@
+-From a334fac72112c01cd322f7c97ef7ca21457ab52f Mon Sep 17 00:00:00 2001
+-From: "A. Wilcox" <AWilcox@Wilcox-Tech.com>
+-Date: Sun, 15 May 2022 05:04:10 +0000
+-Subject: [PATCH] Make netgroup support optional
+-
+-On at least Linux/musl and Linux/uclibc, netgroup support is not
+-available.  PolKit fails to compile on these systems for that reason.
+-
+-This change makes netgroup support conditional on the presence of the
+-setnetgrent(3) function which is required for the support to work.  If
+-that function is not available on the system, an error will be returned
+-to the administrator if unix-netgroup: is specified in configuration.
+-
+-(sam: rebased for Meson and Duktape.)
+-
+-Closes: https://gitlab.freedesktop.org/polkit/polkit/-/issues/14
+-Closes: https://gitlab.freedesktop.org/polkit/polkit/-/issues/163
+-Closes: https://gitlab.freedesktop.org/polkit/polkit/-/merge_requests/52
+-Signed-off-by: A. Wilcox <AWilcox@Wilcox-Tech.com>
+-
+-Ported back the change in configure.ac (upstream removed autotools
+-support).
+-
+-Upstream-Status: Backport [https://gitlab.freedesktop.org/polkit/polkit/-/commit/b57deee8178190a7ecc75290fa13cf7daabc2c66]
+-Signed-off-by: Marta Rybczynska <marta.rybczynska@huawei.com>
 -
 ----
--Upstream-Status: Pending
+- configure.ac                                    |  2 +-
+- meson.build                                     |  1 +
+- src/polkit/polkitidentity.c                     | 17 +++++++++++++++++
+- src/polkit/polkitunixnetgroup.c                 |  3 +++
+- .../polkitbackendinteractiveauthority.c         | 14 ++++++++------
+- src/polkitbackend/polkitbackendjsauthority.cpp  |  2 ++
+- test/polkit/polkitidentitytest.c                |  8 +++++++-
+- test/polkit/polkitunixnetgrouptest.c            |  2 ++
+- .../test-polkitbackendjsauthority.c             |  2 ++
+- 9 files changed, 43 insertions(+), 8 deletions(-)
 -
-- setup.py | 1 +
-- 1 file changed, 1 insertion(+)
+-diff --git a/configure.ac b/configure.ac
+-index ca4b9f2..4c5d596 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -100,7 +100,7 @@ AC_CHECK_LIB(expat,XML_ParserCreate,[EXPAT_LIBS="-lexpat"],
+- 	     [AC_MSG_ERROR([Can't find expat library. Please install expat.])])
+- AC_SUBST(EXPAT_LIBS)
+- 
+--AC_CHECK_FUNCS(clearenv fdatasync)
+-+AC_CHECK_FUNCS(clearenv fdatasync setnetgrent)
+- 
+- if test "x$GCC" = "xyes"; then
+-   LDFLAGS="-Wl,--as-needed $LDFLAGS"
+-diff --git a/meson.build b/meson.build
+-index 733bbff..d840926 100644
+---- a/meson.build
+-+++ b/meson.build
+-@@ -82,6 +82,7 @@ config_h.set('_GNU_SOURCE', true)
+- check_functions = [
+-   'clearenv',
+-   'fdatasync',
+-+  'setnetgrent',
+- ]
+- 
+- foreach func: check_functions
+-diff --git a/src/polkit/polkitidentity.c b/src/polkit/polkitidentity.c
+-index 3aa1f7f..793f17d 100644
+---- a/src/polkit/polkitidentity.c
+-+++ b/src/polkit/polkitidentity.c
+-@@ -182,7 +182,15 @@ polkit_identity_from_string  (const gchar   *str,
+-     }
+-   else if (g_str_has_prefix (str, "unix-netgroup:"))
+-     {
+-+#ifndef HAVE_SETNETGRENT
+-+      g_set_error (error,
+-+                   POLKIT_ERROR,
+-+                   POLKIT_ERROR_FAILED,
+-+                   "Netgroups are not available on this machine ('%s')",
+-+                   str);
+-+#else
+-       identity = polkit_unix_netgroup_new (str + sizeof "unix-netgroup:" - 1);
+-+#endif
+-     }
+- 
+-   if (identity == NULL && (error != NULL && *error == NULL))
+-@@ -344,6 +352,14 @@ polkit_identity_new_for_gvariant (GVariant  *variant,
+-       GVariant *v;
+-       const char *name;
+- 
+-+#ifndef HAVE_SETNETGRENT
+-+      g_set_error (error,
+-+                   POLKIT_ERROR,
+-+                   POLKIT_ERROR_FAILED,
+-+                   "Netgroups are not available on this machine");
+-+      goto out;
+-+#else
+-+
+-       v = lookup_asv (details_gvariant, "name", G_VARIANT_TYPE_STRING, error);
+-       if (v == NULL)
+-         {
+-@@ -353,6 +369,7 @@ polkit_identity_new_for_gvariant (GVariant  *variant,
+-       name = g_variant_get_string (v, NULL);
+-       ret = polkit_unix_netgroup_new (name);
+-       g_variant_unref (v);
+-+#endif
+-     }
+-   else
+-     {
+-diff --git a/src/polkit/polkitunixnetgroup.c b/src/polkit/polkitunixnetgroup.c
+-index 8a2b369..83f8d4a 100644
+---- a/src/polkit/polkitunixnetgroup.c
+-+++ b/src/polkit/polkitunixnetgroup.c
+-@@ -194,6 +194,9 @@ polkit_unix_netgroup_set_name (PolkitUnixNetgroup *group,
+- PolkitIdentity *
+- polkit_unix_netgroup_new (const gchar *name)
+- {
+-+#ifndef HAVE_SETNETGRENT
+-+  g_assert_not_reached();
+-+#endif
+-   g_return_val_if_fail (name != NULL, NULL);
+-   return POLKIT_IDENTITY (g_object_new (POLKIT_TYPE_UNIX_NETGROUP,
+-                                        "name", name,
+-diff --git a/src/polkitbackend/polkitbackendinteractiveauthority.c b/src/polkitbackend/polkitbackendinteractiveauthority.c
+-index 056d9a8..36c2f3d 100644
+---- a/src/polkitbackend/polkitbackendinteractiveauthority.c
+-+++ b/src/polkitbackend/polkitbackendinteractiveauthority.c
+-@@ -2233,25 +2233,26 @@ get_users_in_net_group (PolkitIdentity                    *group,
+-   GList *ret;
+- 
+-   ret = NULL;
+-+#ifdef HAVE_SETNETGRENT
+-   name = polkit_unix_netgroup_get_name (POLKIT_UNIX_NETGROUP (group));
+- 
+--#ifdef HAVE_SETNETGRENT_RETURN
+-+# ifdef HAVE_SETNETGRENT_RETURN
+-   if (setnetgrent (name) == 0)
+-     {
+-       g_warning ("Error looking up net group with name %s: %s", name, g_strerror (errno));
+-       goto out;
+-     }
+--#else
+-+# else
+-   setnetgrent (name);
+--#endif
+-+# endif /* HAVE_SETNETGRENT_RETURN */
+- 
+-   for (;;)
+-     {
+--#if defined(HAVE_NETBSD) || defined(HAVE_OPENBSD)
+-+# if defined(HAVE_NETBSD) || defined(HAVE_OPENBSD)
+-       const char *hostname, *username, *domainname;
+--#else
+-+# else
+-       char *hostname, *username, *domainname;
+--#endif
+-+# endif /* defined(HAVE_NETBSD) || defined(HAVE_OPENBSD) */
+-       PolkitIdentity *user;
+-       GError *error = NULL;
+- 
+-@@ -2282,6 +2283,7 @@ get_users_in_net_group (PolkitIdentity                    *group,
+- 
+-  out:
+-   endnetgrent ();
+-+#endif /* HAVE_SETNETGRENT */
+-   return ret;
+- }
+- 
+-diff --git a/src/polkitbackend/polkitbackendjsauthority.cpp b/src/polkitbackend/polkitbackendjsauthority.cpp
+-index 5027815..bcb040c 100644
+---- a/src/polkitbackend/polkitbackendjsauthority.cpp
+-+++ b/src/polkitbackend/polkitbackendjsauthority.cpp
+-@@ -1524,6 +1524,7 @@ js_polkit_user_is_in_netgroup (JSContext  *cx,
+- 
+-   JS::CallArgs args = JS::CallArgsFromVp (argc, vp);
+- 
+-+#ifdef HAVE_SETNETGRENT
+-   JS::RootedString usrstr (authority->priv->cx);
+-   usrstr = args[0].toString();
+-   user = JS_EncodeStringToUTF8 (cx, usrstr);
+-@@ -1538,6 +1539,7 @@ js_polkit_user_is_in_netgroup (JSContext  *cx,
+-     {
+-       is_in_netgroup =  true;
+-     }
+-+#endif
+- 
+-   ret = true;
+- 
+-diff --git a/test/polkit/polkitidentitytest.c b/test/polkit/polkitidentitytest.c
+-index e91967b..2635c4c 100644
+---- a/test/polkit/polkitidentitytest.c
+-+++ b/test/polkit/polkitidentitytest.c
+-@@ -145,11 +145,15 @@ struct ComparisonTestData comparison_test_data [] = {
+-   {"unix-group:root", "unix-group:jane", FALSE},
+-   {"unix-group:jane", "unix-group:jane", TRUE},
+- 
+-+#ifdef HAVE_SETNETGRENT
+-   {"unix-netgroup:foo", "unix-netgroup:foo", TRUE},
+-   {"unix-netgroup:foo", "unix-netgroup:bar", FALSE},
+-+#endif
+- 
+-   {"unix-user:root", "unix-group:root", FALSE},
+-+#ifdef HAVE_SETNETGRENT
+-   {"unix-user:jane", "unix-netgroup:foo", FALSE},
+-+#endif
+- 
+-   {NULL},
+- };
+-@@ -181,11 +185,13 @@ main (int argc, char *argv[])
+-   g_test_add_data_func ("/PolkitIdentity/group_string_2", "unix-group:jane", test_string);
+-   g_test_add_data_func ("/PolkitIdentity/group_string_3", "unix-group:users", test_string);
+- 
+-+#ifdef HAVE_SETNETGRENT
+-   g_test_add_data_func ("/PolkitIdentity/netgroup_string", "unix-netgroup:foo", test_string);
+-+  g_test_add_data_func ("/PolkitIdentity/netgroup_gvariant", "unix-netgroup:foo", test_gvariant);
+-+#endif
+- 
+-   g_test_add_data_func ("/PolkitIdentity/user_gvariant", "unix-user:root", test_gvariant);
+-   g_test_add_data_func ("/PolkitIdentity/group_gvariant", "unix-group:root", test_gvariant);
+--  g_test_add_data_func ("/PolkitIdentity/netgroup_gvariant", "unix-netgroup:foo", test_gvariant);
+- 
+-   add_comparison_tests ();
+- 
+-diff --git a/test/polkit/polkitunixnetgrouptest.c b/test/polkit/polkitunixnetgrouptest.c
+-index 3701ba1..e1d211e 100644
+---- a/test/polkit/polkitunixnetgrouptest.c
+-+++ b/test/polkit/polkitunixnetgrouptest.c
+-@@ -69,7 +69,9 @@ int
+- main (int argc, char *argv[])
+- {
+-   g_test_init (&argc, &argv, NULL);
+-+#ifdef HAVE_SETNETGRENT
+-   g_test_add_func ("/PolkitUnixNetgroup/new", test_new);
+-   g_test_add_func ("/PolkitUnixNetgroup/set_name", test_set_name);
+-+#endif
+-   return g_test_run ();
+- }
+-diff --git a/test/polkitbackend/test-polkitbackendjsauthority.c b/test/polkitbackend/test-polkitbackendjsauthority.c
+-index f97e0e0..fc52149 100644
+---- a/test/polkitbackend/test-polkitbackendjsauthority.c
+-+++ b/test/polkitbackend/test-polkitbackendjsauthority.c
+-@@ -137,12 +137,14 @@ test_get_admin_identities (void)
+-         "unix-group:users"
+-       }
+-     },
+-+#ifdef HAVE_SETNETGRENT
+-     {
+-       "net.company.action3",
+-       {
+-         "unix-netgroup:foo"
+-       }
+-     },
+-+#endif
+-   };
+-   guint n;
+- 
+diff --git a/meta-oe/recipes-extended/polkit/polkit/0005-Make-netgroup-support-optional-duktape.patch b/meta-oe/recipes-extended/polkit/polkit/0005-Make-netgroup-support-optional-duktape.patch
+deleted file mode 100644
+index 12988ad94..000000000
+--- a/meta-oe/recipes-extended/polkit/polkit/0005-Make-netgroup-support-optional-duktape.patch
++++ /dev/null
+@@ -1,34 +0,0 @@
+-From 792f8e2151c120ec51b50a4098e4f9642409cbec Mon Sep 17 00:00:00 2001
+-From: Marta Rybczynska <rybczynska@gmail.com>
+-Date: Fri, 29 Jul 2022 11:52:59 +0200
+-Subject: [PATCH] Make netgroup support optional
 -
--diff --git a/setup.py b/setup.py
--index d006787..96e2a66 100644
----- a/setup.py
--+++ b/setup.py
--@@ -56,6 +56,7 @@ CLASSIFIERS =3D [
--     'Programming Language :: Python :: 3.8',
--     'Programming Language :: Python :: 3.9',
--     'Programming Language :: Python :: 3.10',
--+    'Programming Language :: Python :: 3.11',
--     'Programming Language :: Python :: Implementation :: CPython',
--     'Operating System :: OS Independent',
--     'Topic :: Software Development :: Libraries',
----=20
--2.30.2
+-This patch adds a fragment of the netgroup patch to apply on the duktape-related
+-code. This change is needed to compile with duktape+musl.
 -
-diff --git a/meta-python/recipes-devtools/python/python3-yappi_1.4.0.bb b/m=
-eta-python/recipes-devtools/python/python3-yappi_1.6.0.bb
-similarity index 74%
-rename from meta-python/recipes-devtools/python/python3-yappi_1.4.0.bb
-rename to meta-python/recipes-devtools/python/python3-yappi_1.6.0.bb
-index 71e74e86f..435dc11bb 100644
---- a/meta-python/recipes-devtools/python/python3-yappi_1.4.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-yappi_1.6.0.bb
-@@ -4,13 +4,9 @@ HOMEPAGE =3D "https://github.com/sumerc/yappi"
- LICENSE =3D "MIT"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D71c208c9a4fd864385eb69ad4caa3be=
-e"
-=20
--SRC_URI[sha256sum] =3D "504b5d8fc7433736cb5e257991d2e7f2946019174f1faec7b2=
-fe947881a17fc0"
-+SRC_URI[sha256sum] =3D "a9aaf72009d8c03067294151ee0470ac7a6dfa7b33baab40b1=
-98d6c1ef00430a"
-=20
--SRC_URI +=3D " \
--    file://run-ptest \
--    file://0001-Fix-imports-for-ptests.patch \
--    file://0002-add-3.11-to-the-setup.patch \
+-Upstream-Status: Backport [https://gitlab.freedesktop.org/polkit/polkit/-/commit/b57deee8178190a7ecc75290fa13cf7daabc2c66]
+-Signed-off-by: Marta Rybczynska <martarybczynska@huawei.com>
+----
+- src/polkitbackend/polkitbackendduktapeauthority.c | 2 ++
+- 1 file changed, 2 insertions(+)
+-
+-diff --git a/src/polkitbackend/polkitbackendduktapeauthority.c b/src/polkitbackend/polkitbackendduktapeauthority.c
+-index c89dbcf..58a5936 100644
+---- a/src/polkitbackend/polkitbackendduktapeauthority.c
+-+++ b/src/polkitbackend/polkitbackendduktapeauthority.c
+-@@ -1036,6 +1036,7 @@ js_polkit_user_is_in_netgroup (duk_context *cx)
+-   user = duk_require_string (cx, 0);
+-   netgroup = duk_require_string (cx, 1);
+- 
+-+#ifdef HAVE_SETNETGRENT
+-   if (innetgr (netgroup,
+-                NULL,  /* host */
+-                user,
+-@@ -1043,6 +1044,7 @@ js_polkit_user_is_in_netgroup (duk_context *cx)
+-     {
+-       is_in_netgroup = TRUE;
+-     }
+-+#endif
+- 
+-   duk_push_boolean (cx, is_in_netgroup);
+-   return 1;
+diff --git a/meta-oe/recipes-extended/polkit/polkit/polkit-1_pam.patch b/meta-oe/recipes-extended/polkit/polkit/polkit-1_pam.patch
+deleted file mode 100644
+index c491abf4a..000000000
+--- a/meta-oe/recipes-extended/polkit/polkit/polkit-1_pam.patch
++++ /dev/null
+@@ -1,35 +0,0 @@
+-polkit: No system-auth in OE-Core, we can use common-* in place of it.
+-
+-Upstream-Status:Inappropriate [configuration]
+-
+-Signed-off-by: Xiaofeng Yan <xiaofeng.yan@windriver.com>
+-
+-Upstream-Status: Inappropriate [oe specific]
+-Rebase to 0.115
+-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+----
+- configure.ac | 8 ++++----
+- 1 file changed, 4 insertions(+), 4 deletions(-)
+-
+-diff --git a/configure.ac b/configure.ac
+-index 36df239..8b3e1b1 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -471,10 +471,10 @@ elif test x$with_os_type = xfreebsd -o x$with_os_type = xnetbsd; then
+-     PAM_FILE_INCLUDE_PASSWORD=system
+-     PAM_FILE_INCLUDE_SESSION=system
+- else
+--   PAM_FILE_INCLUDE_AUTH=system-auth
+--   PAM_FILE_INCLUDE_ACCOUNT=system-auth
+--   PAM_FILE_INCLUDE_PASSWORD=system-auth
+--   PAM_FILE_INCLUDE_SESSION=system-auth
+-+   PAM_FILE_INCLUDE_AUTH=common-auth
+-+   PAM_FILE_INCLUDE_ACCOUNT=common-account
+-+   PAM_FILE_INCLUDE_PASSWORD=common-password
+-+   PAM_FILE_INCLUDE_SESSION=common-session
+- fi
+- 
+- AC_SUBST(PAM_FILE_INCLUDE_AUTH)
+--- 
+-2.7.4
+-
+diff --git a/meta-oe/recipes-extended/polkit/polkit_0.119.bb b/meta-oe/recipes-extended/polkit/polkit_0.119.bb
+deleted file mode 100644
+index c4d3d25af..000000000
+--- a/meta-oe/recipes-extended/polkit/polkit_0.119.bb
++++ /dev/null
+@@ -1,79 +0,0 @@
+-SUMMARY = "PolicyKit Authorization Framework"
+-DESCRIPTION = "The polkit package is an application-level toolkit for defining and handling the policy that allows unprivileged processes to speak to privileged processes."
+-HOMEPAGE = "http://www.freedesktop.org/wiki/Software/polkit"
+-LICENSE = "LGPL-2.0-or-later"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=155db86cdbafa7532b41f390409283eb \
+-                    file://src/polkit/polkit.h;beginline=1;endline=20;md5=0a8630b0133176d0504c87a0ded39db4"
+-
+-DEPENDS = "expat glib-2.0 intltool-native"
+-
+-inherit autotools gtk-doc pkgconfig useradd systemd gobject-introspection features_check
+-
+-REQUIRED_DISTRO_FEATURES = "polkit"
+-
+-PACKAGECONFIG = "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)} \
+-                 ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', \
+-                    bb.utils.contains('DISTRO_FEATURES', 'x11', 'consolekit', '', d), d)} \
+-                 mozjs \
+-                "
+-
+-PACKAGECONFIG[pam] = "--with-authfw=pam,--with-authfw=shadow,libpam,libpam"
+-PACKAGECONFIG[systemd] = "--enable-libsystemd-login=yes --with-systemdsystemunitdir=${systemd_unitdir}/system/,--enable-libsystemd-login=no --with-systemdsystemunitdir=,systemd"
+-# there is no --enable/--disable option for consolekit and it's not picked by shlibs, so add it to RDEPENDS
+-PACKAGECONFIG[consolekit] = ",,,consolekit"
+-
+-# Default to mozjs javascript library
+-PACKAGECONFIG[mozjs] = ",,mozjs-91,,,duktape"
+-# duktape javascript engine is much smaller and faster but is not compatible with
+-# same javascript standards as mozjs. For example array.includes() function is not
+-# supported. Test rule compatibility when switching to duktape.
+-PACKAGECONFIG[duktape] = "--with-duktape,,duktape,,,mozjs"
+-
+-MOZJS_PATCHES = "\
+-    file://0002-jsauthority-port-to-mozjs-91.patch \
+-    file://0003-jsauthority-ensure-to-call-JS_Init-and-JS_ShutDown-e.patch \
 -"
-+SRC_URI +=3D "file://run-ptest"
-=20
- inherit pypi setuptools3 ptest
-=20
---=20
+-DUKTAPE_PATCHES = "file://0003-Added-support-for-duktape-as-JS-engine.patch"
+-DUKTAPE_NG_PATCHES = "file://0005-Make-netgroup-support-optional-duktape.patch"
+-PAM_SRC_URI = "file://polkit-1_pam.patch"
+-SRC_URI = "http://www.freedesktop.org/software/polkit/releases/polkit-${PV}.tar.gz \
+-           ${@bb.utils.contains('DISTRO_FEATURES', 'pam', '${PAM_SRC_URI}', '', d)} \
+-           ${@bb.utils.contains('PACKAGECONFIG', 'mozjs', '${MOZJS_PATCHES}', '', d)} \
+-           ${@bb.utils.contains('PACKAGECONFIG', 'duktape', '${DUKTAPE_PATCHES}', '', d)} \
+-           file://0001-pkexec-local-privilege-escalation-CVE-2021-4034.patch \
+-           file://0002-CVE-2021-4115-GHSL-2021-077-fix.patch \
+-           file://0004-Make-netgroup-support-optional.patch \
+-           ${@bb.utils.contains('PACKAGECONFIG', 'duktape', '${DUKTAPE_NG_PATCHES}', '', d)} \
+-           "
+-SRC_URI[sha256sum] = "c8579fdb86e94295404211285fee0722ad04893f0213e571bd75c00972fd1f5c"
+-
+-EXTRA_OECONF = "--with-os-type=moblin \
+-                --disable-man-pages \
+-                --disable-libelogind \
+-               "
+-
+-do_configure:prepend () {
+-    rm -f ${S}/buildutil/lt*.m4 ${S}/buildutil/libtool.m4
+-}
+-
+-do_compile:prepend () {
+-    export GIR_EXTRA_LIBS_PATH="${B}/src/polkit/.libs"
+-}
+-
+-PACKAGES =+ "${PN}-examples"
+-
+-FILES:${PN}:append = " \
+-    ${libdir}/${BPN}-1 \
+-    ${nonarch_libdir}/${BPN}-1 \
+-    ${datadir}/dbus-1 \
+-    ${datadir}/${BPN}-1 \
+-    ${datadir}/gettext \
+-"
+-
+-FILES:${PN}-examples = "${bindir}/*example*"
+-
+-USERADD_PACKAGES = "${PN}"
+-USERADD_PARAM:${PN} = "--system --no-create-home --user-group --home-dir ${sysconfdir}/${BPN}-1 --shell /bin/nologin polkitd"
+-
+-SYSTEMD_SERVICE:${PN} = "${BPN}.service"
+-SYSTEMD_AUTO_ENABLE = "disable"
+-- 
 2.39.2
 
 
