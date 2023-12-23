@@ -1,144 +1,91 @@
-Return-Path: <alperyasinak1@gmail.com>
+Return-Path: <alex.kiernan@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 773DDC3DA6E
-	for <webhook@archiver.kernel.org>; Sat, 23 Dec 2023 07:35:09 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.web10.3080.1703316907302167907
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E058EC47072
+	for <webhook@archiver.kernel.org>; Sat, 23 Dec 2023 12:29:10 +0000 (UTC)
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+ by mx.groups.io with SMTP id smtpd.web10.5431.1703334548317805932
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 22 Dec 2023 23:35:07 -0800
+ Sat, 23 Dec 2023 04:29:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=U8LGtx2F;
- spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-40d3bf30664so25154905e9.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 22 Dec 2023 23:35:07 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=fX5v4it2;
+ spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: alex.kiernan@gmail.com)
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-40d2376db79so21437605e9.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 23 Dec 2023 04:29:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1703316905; x=1703921705; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=lKFfBtXlHQ9aQgB3fZLf/2BxBpCoYLTTo/50sEfLvfw=;
-        b=U8LGtx2FeKUwEtqdnki4mvbJdUFXDCiBkve09Igj2k0KAWc0Lg4dyvWGELsZdrslUU
-         2hhWHspn3HY9u3NBAt+u1RCjoUTnc0w9caDXJwvJcn1tPX7KtxYDnsosiyY5oO5/Wu/o
-         X0nMVfz+YXPR1VxicdNbO2DK3p+dY1XEH/RdM7EA7fLE83eHJPoHqNF/GmvvGDxGMjA5
-         Q8foiAdmqQgDhQcnOoHHR+8ky0z66TrYmiNjmaW4lfSSn92yxasUoE5HvQ2xjZJfbBPb
-         C5oCaC5yi7czAIYEgMMLWtMGPGA8V4a954w7MfY0LchxGXGOVdlw++22hOdh5YmavTru
-         BHqg==
+        d=gmail.com; s=20230601; t=1703334546; x=1703939346; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=87ZwQKJ5+9Htx/d8zWtutjeqBhR3NIyO9rlNd6Iv9Hc=;
+        b=fX5v4it26Kkmy+kRQVks3oh/NH8YBqvMgzdvkg1Xzoz8yMeNStOmpvECh5lRe8mQ4+
+         o9rj4kZlUpYnkkMViF5A+5bEPHf/pYt1+ndXcUj79c8JUx3wPa1fKNStf2rdVHoN5oaY
+         o+3houL8+8NTlNlRY6KMdn2WDMS1nRD2TaEq6HR7rJvEq688DzgCHKSjxjRqR35wsMzj
+         EnQuyrloTLQhDmS/BtkZVbC/B3lrE3C4A7PSFS9M2QJP6OLnnAjmA+2pbKOPBBs5Wjnt
+         t9+fUGdN8LfGwgoCMXmCh7bKQbefyBQith0vDmoM7MRS2ei86aP4MyVtRIoC+FopMkki
+         OV7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703316905; x=1703921705;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=lKFfBtXlHQ9aQgB3fZLf/2BxBpCoYLTTo/50sEfLvfw=;
-        b=X6f/z8VpL9uEcOfpJ711Pg2mEuDqjA0lOxp8L5gs+XbuhL0joluN4gpyBIg3cFBxu+
-         WJtKYJAoVLouJOgCziPrbpPaml2KRQwN3CvOijNuV3ovu9nBq91bEovUSm6pdAG9/SjL
-         uCqnbuBPX/05cuinAjj7i+m54870qezq1P14RFK7iJupFgW0bMaqAHk/RgAOU47wq/P7
-         jCOQ/FF7HiWX2tT6M0sPfC4X924D/+rhAxsmovLJkz7i2TDtSvi6EECk0yKnvW1UiyTh
-         Syii9ptthkiFM/nkk3fY5o7TnV5YNgT6opPDg5z/rNxDcg2ZRUv6D+MR9aWOWM/Vik8k
-         Pt3A==
-X-Gm-Message-State: AOJu0Ywv3XfRlHN1q3Va6tz58eTiWd2Y2Yh9Kj0TvMh2haq3VYpvGu8w
-	wiADu9Izc7VX8kM7YjCqrjlxPPUU1qE=
-X-Google-Smtp-Source: AGHT+IFn/cTp+IUe7MkljGPu0pt049e3acbOwls0laa8Jv0Hyidw8LHI0WqbAkKmb/bCvCVSIBHq2A==
-X-Received: by 2002:a05:600c:4f4b:b0:40c:30e8:fc5f with SMTP id m11-20020a05600c4f4b00b0040c30e8fc5fmr1529319wmq.90.1703316905018;
-        Fri, 22 Dec 2023 23:35:05 -0800 (PST)
-Received: from localhost.localdomain ([176.88.106.122])
-        by smtp.gmail.com with ESMTPSA id o11-20020a05600c510b00b0040b43da0bbasm9370060wms.30.2023.12.22.23.35.03
+        d=1e100.net; s=20230601; t=1703334546; x=1703939346;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=87ZwQKJ5+9Htx/d8zWtutjeqBhR3NIyO9rlNd6Iv9Hc=;
+        b=Z9v1x6y7Lq/jlNMOCRgHwF27sT4z+8l1ktfAzoDL2N33bNxLynDTyBdqivMT7do3n/
+         SjKLxLibwhfUQqCcYLepSmrrrXyUKdOL/c55EKTOc0c0r0d12OjkkV1/LRNBQhQX1StL
+         m/mtQCTjL+IIgBr9Fs8znsksdGBWjAhrFjLsiqPMfIjKYHnsDn6jb8Y1GUoPaSIzsqAT
+         72RgcqIx0MglPRbkPaT5QiI5mEVZzdX/rwUswxNy/P/vTMy9zuBRvEMC1r8FkjwwrtyP
+         6uaAmt2NNZYhkQF7/cHLl+5pZjsq3wqgBwWg6ktsyNjlR/yz+5w9BtjQtcOVBdfYx/9+
+         bEyA==
+X-Gm-Message-State: AOJu0YxalL2fisDacq1oW3z1OwLwKqy30C1BIzeRr5RD+XU/hh7aa8E7
+	Hozvde70hzEVqTSbjzCs1VxPfhIo1E0=
+X-Google-Smtp-Source: AGHT+IEZ2PdScqa7V6Iob1tZQIzuvGpscM0WWrWnNOGugv+KXq47XD9XebA/MJ9kirK2tc/ZprdncA==
+X-Received: by 2002:a05:600c:3596:b0:40d:5122:d7ef with SMTP id p22-20020a05600c359600b0040d5122d7efmr420811wmq.112.1703334545693;
+        Sat, 23 Dec 2023 04:29:05 -0800 (PST)
+Received: from Zuma-000004PC.lan ([2a02:390:9c57:0:d9e2:102b:56b1:9620])
+        by smtp.gmail.com with ESMTPSA id h7-20020a05600c350700b0040d2e37c06dsm10198199wmq.20.2023.12.23.04.29.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 22 Dec 2023 23:35:04 -0800 (PST)
-From: alperak <alperyasinak1@gmail.com>
+        Sat, 23 Dec 2023 04:29:04 -0800 (PST)
+From: Alex Kiernan <alex.kiernan@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-oe][PATCH] epeg: upgrade to latest release(0.9.3)
-Date: Sat, 23 Dec 2023 10:35:01 +0300
-Message-Id: <20231223073501.49038-1-alperyasinak1@gmail.com>
-X-Mailer: git-send-email 2.25.1
+Cc: Alex Kiernan <alex.kiernan@gmail.com>
+Subject: [meta-oe][PATCH v3 2/2] ptest-packagelists-meta-oe.inc Add c-ares to PTESTS_SLOW_META_OE
+Date: Sat, 23 Dec 2023 12:29:00 +0000
+Message-Id: <20231223122900.20077-2-alex.kiernan@gmail.com>
+X-Mailer: git-send-email 2.39.0
+In-Reply-To: <20231223122900.20077-1-alex.kiernan@gmail.com>
+References: <20231223122900.20077-1-alex.kiernan@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 23 Dec 2023 07:35:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107769
+ <openembedded-devel@lists.openembedded.org>; Sat, 23 Dec 2023 12:29:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107771
 
-* Dropped patch because fixed in the new version
+These take around 60s to run.
 
-Changelog:
-
-* Fix XMP rotation bug
-* add cmake as build system + add epeg_set/get_orientation + fix memleak in epeg_close
-* minor fixes to build on windows + enable build of command line tool with cmake
-* configure: Fix checks for libjpeg and libexif
-
-Signed-off-by: alperak <alperyasinak1@gmail.com>
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 ---
- ...e-Fix-checks-for-libjpeg-and-libexif.patch | 32 -------------------
- .../epeg/{epeg_git.bb => epeg_0.9.3.bb}       |  7 ++--
- 2 files changed, 3 insertions(+), 36 deletions(-)
- delete mode 100644 meta-oe/recipes-support/epeg/epeg/0001-configure-Fix-checks-for-libjpeg-and-libexif.patch
- rename meta-oe/recipes-support/epeg/{epeg_git.bb => epeg_0.9.3.bb} (80%)
 
-diff --git a/meta-oe/recipes-support/epeg/epeg/0001-configure-Fix-checks-for-libjpeg-and-libexif.patch b/meta-oe/recipes-support/epeg/epeg/0001-configure-Fix-checks-for-libjpeg-and-libexif.patch
-deleted file mode 100644
-index 1568fe96e..000000000
---- a/meta-oe/recipes-support/epeg/epeg/0001-configure-Fix-checks-for-libjpeg-and-libexif.patch
-+++ /dev/null
-@@ -1,32 +0,0 @@
--From 4e0c62634b0db6dbad0d41377bb71a8012abd75b Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Thu, 1 Sep 2022 12:56:54 -0700
--Subject: [PATCH] configure: Fix checks for libjpeg and libexif
--
--Use the functions from the respective library instead of using main
--function which is not part of library
--
--Upstream-Status: Submitted [https://github.com/mattes/epeg/pull/27]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- configure.ac | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/configure.ac b/configure.ac
--index a4f6ebd..e474b1d 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -31,8 +31,8 @@ AC_SUBST(version_info)
-- dnl AC_CHECK_FUNCS(fmemopen)
-- dnl AC_CHECK_FUNCS(open_memstream)
-- 
---AC_CHECK_LIB([jpeg], [main], [], [echo "libjpeg library not found. Please install it before proceeding"; exit -1])
---AC_CHECK_LIB([exif], [main], [], [echo "libexif library not found. Please install it before proceeding"; exit -1])
--+AC_CHECK_LIB([jpeg], [jpeg_simple_progression], [], [echo "libjpeg library not found. Please install it before proceeding"; exit -1])
--+AC_CHECK_LIB([exif], [exif_data_new_from_file], [], [echo "libexif library not found. Please install it before proceeding"; exit -1])
-- 
-- my_includes=""
-- my_libs="-ljpeg -lexif"
---- 
--2.37.3
--
-diff --git a/meta-oe/recipes-support/epeg/epeg_git.bb b/meta-oe/recipes-support/epeg/epeg_0.9.3.bb
-similarity index 80%
-rename from meta-oe/recipes-support/epeg/epeg_git.bb
-rename to meta-oe/recipes-support/epeg/epeg_0.9.3.bb
-index e5277b157..f70c3dd1e 100644
---- a/meta-oe/recipes-support/epeg/epeg_git.bb
-+++ b/meta-oe/recipes-support/epeg/epeg_0.9.3.bb
-@@ -3,12 +3,11 @@ DESCRIPTION = "Insanely fast JPEG/ JPG thumbnail scaling with the minimum fuss a
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=e7732a9290ea1e4b034fdc15cf49968d \
-                     file://COPYING-PLAIN;md5=f59cacc08235a546b0c34a5422133035"
-+
- DEPENDS = "jpeg libexif"
+(no changes since v1)
+
+ meta-oe/conf/include/ptest-packagelists-meta-oe.inc | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
+index 9182acf44915..06c7de3f8b33 100644
+--- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
++++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
+@@ -46,6 +46,7 @@ PTESTS_FAST_META_OE:remove:riscv64 = "nodejs"
+ PTESTS_FAST_META_OE:remove:riscv32 = "nodejs"
  
--SRC_URI = "git://github.com/mattes/epeg.git;branch=master;protocol=https \
--           file://0001-configure-Fix-checks-for-libjpeg-and-libexif.patch \
--           "
--SRCREV = "9a175cd67eaa61fe45413d8da82da72936567047"
-+SRC_URI = "git://github.com/mattes/epeg.git;branch=master;protocol=https"
-+SRCREV = "17bbae0f0a0b777e5fb01e0d16891e07153a41eb"
- S = "${WORKDIR}/git"
- 
- inherit autotools pkgconfig
+ PTESTS_SLOW_META_OE = "\
++    c-ares \
+     fftw \
+     libusb-compat \
+     rsyslog \
 -- 
-2.25.1
+2.39.0
 
 
