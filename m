@@ -1,90 +1,96 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <archana.polampalli@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8EC8FC46CD3
-	for <webhook@archiver.kernel.org>; Tue, 26 Dec 2023 07:51:50 +0000 (UTC)
-Received: from esa1.hc1455-7.c3s2.iphmx.com (esa1.hc1455-7.c3s2.iphmx.com [207.54.90.47])
- by mx.groups.io with SMTP id smtpd.web10.76905.1703577108781360523
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B441AC46CD3
+	for <webhook@archiver.kernel.org>; Tue, 26 Dec 2023 08:23:00 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.77153.1703578972435581299
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Dec 2023 23:51:49 -0800
+ Tue, 26 Dec 2023 00:22:52 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 207.54.90.47, mailfrom: wangmy@fujitsu.com)
-X-IronPort-AV: E=McAfee;i="6600,9927,10934"; a="144475182"
-X-IronPort-AV: E=Sophos;i="6.04,304,1695654000"; 
-   d="scan'208";a="144475182"
-Received: from unknown (HELO oym-r4.gw.nic.fujitsu.com) ([210.162.30.92])
-  by esa1.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Dec 2023 16:51:46 +0900
-Received: from oym-m2.gw.nic.fujitsu.com (oym-nat-oym-m2.gw.nic.fujitsu.com [192.168.87.59])
-	by oym-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 54679DCC15
-	for <openembedded-devel@lists.openembedded.org>; Tue, 26 Dec 2023 16:51:44 +0900 (JST)
-Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
-	by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 83498BF4A4
-	for <openembedded-devel@lists.openembedded.org>; Tue, 26 Dec 2023 16:51:43 +0900 (JST)
-Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 0F77F6B4D3
-	for <openembedded-devel@lists.openembedded.org>; Tue, 26 Dec 2023 16:51:43 +0900 (JST)
-Received: from vm4860.g01.fujitsu.local (unknown [10.167.225.33])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id BBAC61A0072;
-	Tue, 26 Dec 2023 15:51:42 +0800 (CST)
-From: wangmy@fujitsu.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH] python3-regex: upgrade 2023.10.3 -> 2023.12.25
-Date: Tue, 26 Dec 2023 15:37:21 +0800
-Message-Id: <1703576241-13485-1-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-X-TM-AS-GCONF: 00
-X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28080.006
-X-TM-AS-User-Approved-Sender: Yes
-X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28080.006
-X-TMASE-Result: 10-4.101500-10.000000
-X-TMASE-MatchedRID: rofoCPeR2CGjz0nOeth/yUIIxwDaU5mrjOKexJz6jz0fIGCZubTsxBEp
-	z9ydULanSUQWNWP9oCwRi1HXfI/8gcvnXbhSGw3rRy+94mWbR+alY4F8r0vXPyWMp0grg7M7vqn
-	FtM6Nq/L7tBxFpWhrycYoh/qEF/tVoYY7KoErjW8ReM8i8p3vgBCE2NlBjIjcKXqmmYTGpxiUg5
-	UD6AlF0rF9uGobEuT7gDLqnrRlXrbIDt27MLDp0t0H8LFZNFG76sBnwpOylLP0cN/AfbtB3SKsd
-	nfDlXPSZJ4Dfr5vKWfxAhyWZoRLD2xufZQlkd0akPv0Db28r+c9pl98pf+R8na/ZlHBS8AoqFR3
-	efwoig2IHqaUMp7VXtL/LK0d4I30Ze/gJB41STsbqpM7Cr+fvX7cGd19dSFd
-X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=sQ65UeR8;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=07249f857e=archana.polampalli@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 3BQ7pTo2015291
+	for <openembedded-devel@lists.openembedded.org>; Tue, 26 Dec 2023 00:22:52 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=2Ss+A
+	rkNHhMrewzxdByCxjE8vrUY+bs0gk7Aq0eBIuY=; b=sQ65UeR80N2sBOSwxP1zZ
+	jztl4qmAh+tocKGG4K98o2sgCq5RIMJYghZuvkClcZVYQZX4e44kNDE6BGRLazTY
+	wZASG1y53WD9s8tqyF/Z/VOoW1wAyZmvkkm5MzGAGKPZhqn4juvk4VYQKV1+dGST
+	+wnzVyO0MSy0idF2xob8Rish9/CVkrrq9QARAtZ+b1ZdNDwmcKajeVGX49qp7jal
+	sO0M+gfNbpIe29XBmBiHOXELWZObY62nhmcRIkTjB3UJ6muNdUB3UUp2CxGfqCZt
+	ktUhwoM03pOWkKxKjP8+qhmvZEpm/pEP0HJ0SSGu3ZG6cbjhcWwp/MOnlF+GDetq
+	w==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3v5yxm1v7s-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 26 Dec 2023 00:22:51 -0800 (PST)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.35; Tue, 26 Dec 2023 00:22:53 -0800
+From: <archana.polampalli@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][PATCH 1/1] cjson: upgrade 1.7.16 -> 1.7.17
+Date: Tue, 26 Dec 2023 08:22:37 +0000
+Message-ID: <20231226082237.919088-1-archana.polampalli@windriver.com>
+X-Mailer: git-send-email 2.40.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-GUID: 813gfjTCUhxP9JDdpNGL8qiKgK8AEkJc
+X-Proofpoint-ORIG-GUID: 813gfjTCUhxP9JDdpNGL8qiKgK8AEkJc
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-11-16_25,2023-11-16_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxlogscore=905
+ priorityscore=1501 mlxscore=0 bulkscore=0 impostorscore=0 adultscore=0
+ clxscore=1015 phishscore=0 spamscore=0 suspectscore=0 malwarescore=0
+ lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2311290000 definitions=main-2312260061
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 26 Dec 2023 07:51:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107802
+ <openembedded-devel@lists.openembedded.org>; Tue, 26 Dec 2023 08:23:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107803
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+From: Archana Polampalli <archana.polampalli@windriver.com>
 
-Changelog:
-=============
--Cannot get release notification action in main.yml to work. Commenting it out for now.
--Fixed invalid main.yml.
--The escape function no longer escapes \x00. It's not necessary.
--Inline flags can now be turned off and apply to what follows.
--Added \R to match line endings.
+The following CVEs are addressed in this release.
+CVE-2023-50471
+CVE-2023-50472
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+https://github.com/DaveGamble/cJSON/releases/tag/v1.7.17
+
+Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
 ---
- .../{python3-regex_2023.10.3.bb => python3-regex_2023.12.25.bb} | 2 +-
+ .../recipes-devtools/cjson/{cjson_1.7.16.bb => cjson_1.7.17.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-regex_2023.10.3.bb => python3-regex_2023.12.25.bb} (79%)
+ rename meta-oe/recipes-devtools/cjson/{cjson_1.7.16.bb => cjson_1.7.17.bb} (96%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-regex_2023.10.3.bb b/meta-python/recipes-devtools/python/python3-regex_2023.12.25.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-regex_2023.10.3.bb
-rename to meta-python/recipes-devtools/python/python3-regex_2023.12.25.bb
-index c26d55f47..d7ac61608 100644
---- a/meta-python/recipes-devtools/python/python3-regex_2023.10.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-regex_2023.12.25.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=7b5751ddd6b643203c31ff873051d069"
+diff --git a/meta-oe/recipes-devtools/cjson/cjson_1.7.16.bb b/meta-oe/recipes-devtools/cjson/cjson_1.7.17.bb
+similarity index 96%
+rename from meta-oe/recipes-devtools/cjson/cjson_1.7.16.bb
+rename to meta-oe/recipes-devtools/cjson/cjson_1.7.17.bb
+index f8e0bbff0..6c8934b34 100644
+--- a/meta-oe/recipes-devtools/cjson/cjson_1.7.16.bb
++++ b/meta-oe/recipes-devtools/cjson/cjson_1.7.17.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=218947f77e8cb8e2fa02918dc41c50d0"
+ SRC_URI = "git://github.com/DaveGamble/cJSON.git;branch=master;protocol=https \
+            file://run-ptest \
+          "
+-SRCREV = "cb8693b058ba302f4829ec6d03f609ac6f848546"
++SRCREV = "87d8f0961a01bf09bef98ff89bae9fdec42181ee"
  
- inherit pypi setuptools3
+ S = "${WORKDIR}/git"
  
--SRC_URI[sha256sum] = "3fef4f844d2290ee0ba57addcec17eec9e3df73f10a2748485dfd6a3a188cc0f"
-+SRC_URI[sha256sum] = "29171aa128da69afdf4bde412d5bedc335f2ca8fcfe4489038577d05f16181e5"
- 
- RDEPENDS:${PN} += " \
- 	python3-stringold \
 -- 
-2.34.1
+2.40.0
 
 
