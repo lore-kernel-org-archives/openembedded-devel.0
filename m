@@ -1,256 +1,81 @@
-Return-Path: <alperyasinak1@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4040EC46CD3
-	for <webhook@archiver.kernel.org>; Tue, 26 Dec 2023 06:33:00 +0000 (UTC)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.web11.75880.1703572377753991739
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 41C1AC46CD3
+	for <webhook@archiver.kernel.org>; Tue, 26 Dec 2023 06:56:00 +0000 (UTC)
+Received: from esa10.hc1455-7.c3s2.iphmx.com (esa10.hc1455-7.c3s2.iphmx.com [139.138.36.225])
+ by mx.groups.io with SMTP id smtpd.web11.76154.1703573751475083300
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Dec 2023 22:32:58 -0800
+ Mon, 25 Dec 2023 22:55:52 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Ul5pYGXH;
- spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-40d5b159350so831135e9.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Dec 2023 22:32:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1703572376; x=1704177176; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=wGhcrbvn7Bmj5ioxFNFgcy7anSHlwrn2PIZfzF8hYTE=;
-        b=Ul5pYGXHt8wIm5UrYPTzwnNn+0cFf4IdatALoNj94iVRH0ge8cZWfLpciMYkuIhQaI
-         IFo00zbZIXz5fePPKuEmBp0PdvrbPjULI97E0Wh7hlrO2liLA67Inr0bLXS4skJ4pwy0
-         1qBUWdKj0Vp9nuGSV6V/FOk6aLmN/PmJoMpNThohNujWbDmLoU7zcy9bReR/kqyYnr9c
-         OTwRsE4eVVq0blCEW0rKNLhSBeifI+B9n/7DSi25LCXr7u4Ebcso4ZG6LFIE6jkABat+
-         RCPhX2/C1Y2d2EzW8cQDMhI/JghNs6efdHeHRVUe1Hp5/SP5S0zyenq+mDumsw7BzU+D
-         tHYg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703572376; x=1704177176;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=wGhcrbvn7Bmj5ioxFNFgcy7anSHlwrn2PIZfzF8hYTE=;
-        b=HBk3ZDXo+S3gKO5VVCaKecp4Td2xcJp8GT1TqZHFHQhJyImmYWPREnqjz1NasVWxI7
-         gJ9k4/malL0NZQtpJlicfzAHlOaWXPZBYYuONL7LHJ3mt6mBX4FP6Yh9n6g4L5h/fU6X
-         NNSO+O6XFda+3q75fGBt7wrvEHzLDRcKv2l5hcYvqUIva2HCnvFYLJNYeyZGr4/xB130
-         g2WE6ET+QUJTYKtgl+P3saHte9+dyQQq2vBVRZYgCJKuEcqHXS+TqFBtWCDZZJUtnSRm
-         eucOWGOHuikHau1ZAoxo2FaIWihJs6U1CtnN2RWfeMneKLO+7WrL1mXs6eL7e3RLFMV8
-         OHFA==
-X-Gm-Message-State: AOJu0YzWvd9XItdKRuFNRFbOXYtb8FcLtGF3+cDSmy+aBrDsYzw/XqwD
-	W0ovoeyQpBUoYT+kv5DJmkVdasDIjkw=
-X-Google-Smtp-Source: AGHT+IGrylUVhfshEaq/WeG8oPceSJMgwqnkY2xG22DXhGtwr/7KW2W9zmN30bvy4yPvhdCKswz9mA==
-X-Received: by 2002:a05:600c:705:b0:40d:47b5:8e3 with SMTP id i5-20020a05600c070500b0040d47b508e3mr3238302wmn.31.1703572375352;
-        Mon, 25 Dec 2023 22:32:55 -0800 (PST)
-Received: from localhost.localdomain ([176.88.106.122])
-        by smtp.gmail.com with ESMTPSA id h5-20020a05600c314500b0040b2a52ecaasm27315831wmo.2.2023.12.25.22.32.54
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 25 Dec 2023 22:32:54 -0800 (PST)
-From: alperak <alperyasinak1@gmail.com>
+ dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 139.138.36.225, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10934"; a="132263629"
+X-IronPort-AV: E=Sophos;i="6.04,304,1695654000"; 
+   d="scan'208";a="132263629"
+Received: from unknown (HELO oym-r2.gw.nic.fujitsu.com) ([210.162.30.90])
+  by esa10.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Dec 2023 15:55:48 +0900
+Received: from oym-m1.gw.nic.fujitsu.com (oym-nat-oym-m1.gw.nic.fujitsu.com [192.168.87.58])
+	by oym-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id C81C9DC645
+	for <openembedded-devel@lists.openembedded.org>; Tue, 26 Dec 2023 15:55:46 +0900 (JST)
+Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
+	by oym-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id 019FED5014
+	for <openembedded-devel@lists.openembedded.org>; Tue, 26 Dec 2023 15:55:46 +0900 (JST)
+Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 6C5AD202F0412
+	for <openembedded-devel@lists.openembedded.org>; Tue, 26 Dec 2023 15:55:45 +0900 (JST)
+Received: from vm4860.g01.fujitsu.local (unknown [10.167.225.33])
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 2139A1A0072;
+	Tue, 26 Dec 2023 14:55:45 +0800 (CST)
+From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
-Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-oe][PATCH] libharu: upgrade 2.3.0 -> 2.4.4
-Date: Tue, 26 Dec 2023 09:32:50 +0300
-Message-Id: <20231226063250.35258-1-alperyasinak1@gmail.com>
-X-Mailer: git-send-email 2.25.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] dbus-cxx: upgrade 2.4.0 -> 2.5.0
+Date: Tue, 26 Dec 2023 14:55:41 +0800
+Message-Id: <1703573741-12570-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28080.005
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28080.005
+X-TMASE-Result: 10-1.026400-10.000000
+X-TMASE-MatchedRID: 7cZymtcOvx2jz0nOeth/yQPZZctd3P4B1cuIRwt/4MiysPB8dBBorXKn
+	6DBj/gsEIvrftAIhWmJ6eYPYGCVgy3gcxJAgqZ0ZaDCzqDR7DPZV4BnlVId1nZsoi2XrUn/J8m+
+	hzBStanvIM9mETCO70ydET58jp62Sl93/yrFbOCYwtf6p1172z+BzNL64pLoMWVulnnX60uuLGy
+	O2DrWmXipN4GrE385YqPLgeo0RdllTy1F1/6esUNxF7G+bIfZvS7+RMq/2CK6rA4c7UV2fQpvi2
+	PQO/FFQiz2ujrPVx9yEIU1NtMkm0Q==
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 26 Dec 2023 06:33:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107784
+ <openembedded-devel@lists.openembedded.org>; Tue, 26 Dec 2023 06:56:00 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107785
 
-* Dropped patches because fixed in the new version.
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Changelog:
-
-* Add copy hpdf_namedict.h at install
-* Added page boundary support.
-* fixed glyph index to be 16 bit unsigned instead of signed
-* Bug fixes
-* Shared library has an SOVERSION now
-* Fixed HPDF_FToA for small values
-* Add static hpdf_version.h header
-* hpdf_version.h included again
-* File attachment issue resolved
-* Renamed *_LIBZ defines to _*ZLIB, enables compression of PDF files again.
-* Reinstated hpdf_version.h
-* Fixed library name
-* Set correct version number
-* Add support for free-form triangle shading objects.
-* Fix config constant to match use in hpdf_mmgr.c
-* Improve small number writing in HPDF_FToA.
-* Fix missing /CapHeight key in font definition
-* Change HPDF_Page_CreateXObjectFromImage zoom parameter type to HPDF
-* Fix another case of png files with background mask save uncompressed
-* Avoid issue with libtiff duplicate symbols
-* Reajust bit_depth of png image after striping depth from 16 to 8.
-* Fixed typo in Japanese font name: Mincyo -> Mincho
-* Fix various typos
-* hpdf.h: add missing HPDF_Boolean typedef
-* Moved to a CMake only build environment.
-* Fix bad unicode in comment
-* Fix various typos
-
-Signed-off-by: alperak <alperyasinak1@gmail.com>
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...ib-into-var-libdir-rather-than-hardc.patch | 30 -----------
- .../libharu/libharu-RELEASE_2_3_0_cmake.patch | 52 -------------------
- .../recipes-support/libharu/libharu_2.3.0.bb  | 24 ---------
- .../recipes-support/libharu/libharu_2.4.4.bb  | 16 ++++++
- 4 files changed, 16 insertions(+), 106 deletions(-)
- delete mode 100644 meta-oe/recipes-support/libharu/libharu/0001-Install-static-lib-into-var-libdir-rather-than-hardc.patch
- delete mode 100644 meta-oe/recipes-support/libharu/libharu/libharu-RELEASE_2_3_0_cmake.patch
- delete mode 100644 meta-oe/recipes-support/libharu/libharu_2.3.0.bb
- create mode 100644 meta-oe/recipes-support/libharu/libharu_2.4.4.bb
+ .../dbus-cxx/{dbus-cxx_2.4.0.bb => dbus-cxx_2.5.0.bb}           | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-core/dbus-cxx/{dbus-cxx_2.4.0.bb => dbus-cxx_2.5.0.bb} (91%)
 
-diff --git a/meta-oe/recipes-support/libharu/libharu/0001-Install-static-lib-into-var-libdir-rather-than-hardc.patch b/meta-oe/recipes-support/libharu/libharu/0001-Install-static-lib-into-var-libdir-rather-than-hardc.patch
-deleted file mode 100644
-index 0947de196..000000000
---- a/meta-oe/recipes-support/libharu/libharu/0001-Install-static-lib-into-var-libdir-rather-than-hardc.patch
-+++ /dev/null
-@@ -1,30 +0,0 @@
--From 9341ac4f6ae38efe95dfd188105a9ea30941ccf6 Mon Sep 17 00:00:00 2001
--From: Lei Maohui <leimaohui@cn.fujitsu.com>
--Date: Wed, 18 Nov 2020 23:09:51 +0900
--Subject: [PATCH] Install static lib into var-libdir rather than hardcod lib.
--
--Lei Maohui <leimaohui@cn.fujitsu.com>
--
--Upstream-Status: Pending
-----
-- src/CMakeLists.txt | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
--index 249916c..fb06ea3 100644
----- a/src/CMakeLists.txt
--+++ b/src/CMakeLists.txt
--@@ -75,8 +75,8 @@ if(LIBHPDF_STATIC)
--   target_link_libraries(${LIBHPDF_NAME_STATIC} ${ADDITIONAL_LIBRARIES})
--   install(
--     TARGETS ${LIBHPDF_NAME_STATIC}
---    ARCHIVE DESTINATION lib
---    LIBRARY DESTINATION lib
--+    ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
--+    LIBRARY DESTINATION ${LIB_INSTALL_DIR}
--     RUNTIME DESTINATION bin
--   )
--   if(WIN32 AND NOT CYGWIN)
---- 
--2.25.1
--
-diff --git a/meta-oe/recipes-support/libharu/libharu/libharu-RELEASE_2_3_0_cmake.patch b/meta-oe/recipes-support/libharu/libharu/libharu-RELEASE_2_3_0_cmake.patch
-deleted file mode 100644
-index 05f78ed73..000000000
---- a/meta-oe/recipes-support/libharu/libharu/libharu-RELEASE_2_3_0_cmake.patch
-+++ /dev/null
-@@ -1,52 +0,0 @@
--Backport from Fedora Project.
--https://src.fedoraproject.org/rpms/libharu
--
--Fix the install destination of some files.
--
--Upstream-Status: Inappropriate
--
--Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
--
--diff -urp libharu-RELEASE_2_3_0/CMakeLists.txt libharu-RELEASE_2_3_0_cmake/CMakeLists.txt
----- libharu-RELEASE_2_3_0/CMakeLists.txt	2013-10-30 20:11:59.000000000 +0700
--+++ libharu-RELEASE_2_3_0_cmake/CMakeLists.txt	2017-06-01 15:56:06.533552795 +0700
--@@ -25,7 +25,7 @@ endif(MSVC)
-- 
-- # information about libharu
-- set(LIBHPDF_MAJOR 2)
---set(LIBHPDF_MINOR 2)
--+set(LIBHPDF_MINOR 3)
-- set(LIBHPDF_PATCH 0)
-- set(LIBHPDF_VERSION ${LIBHPDF_MAJOR}.${LIBHPDF_MINOR}.${LIBHPDF_PATCH})
-- set(LIBHPDF_DESCRIPTION "libHaru is a free, cross platform, open source library for generating PDF files.")
--@@ -210,9 +210,9 @@ set(
-- install(FILES ${haru_HDRS} DESTINATION include)
-- 
-- # install various files
---install(FILES README CHANGES INSTALL DESTINATION .)
--+install(FILES README CHANGES INSTALL DESTINATION ${SHARE_INSTALL_PREFIX}/libharu)
-- if(NOT DEVPAK)
---  install(DIRECTORY if DESTINATION .)
--+  install(DIRECTORY if DESTINATION ${SHARE_INSTALL_PREFIX}/libharu)
-- endif(NOT DEVPAK)
-- if(DEVPAK)
--   install(FILES ${CMAKE_BINARY_DIR}/libharu.DevPackage DESTINATION .)
--diff -urp libharu-RELEASE_2_3_0/src/CMakeLists.txt libharu-RELEASE_2_3_0_cmake/src/CMakeLists.txt
----- libharu-RELEASE_2_3_0/src/CMakeLists.txt	2013-10-30 20:11:59.000000000 +0700
--+++ libharu-RELEASE_2_3_0_cmake/src/CMakeLists.txt	2017-06-01 16:08:45.425105746 +0700
--@@ -90,11 +90,13 @@ if(LIBHPDF_SHARED)
--   target_link_libraries(${LIBHPDF_NAME} ${ADDITIONAL_LIBRARIES})
--   if(WIN32 AND NOT CYGWIN)
--   	set_target_properties(${LIBHPDF_NAME} PROPERTIES DEFINE_SYMBOL HPDF_DLL_MAKE)
--+  else(WIN32 AND NOT CYGWIN)
--+  	set_target_properties(${LIBHPDF_NAME} PROPERTIES SOVERSION ${LIBHPDF_VERSION})
--   endif(WIN32 AND NOT CYGWIN)
--   install(
--     TARGETS ${LIBHPDF_NAME}
---    ARCHIVE DESTINATION lib
---    LIBRARY DESTINATION lib
--+    ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
--+    LIBRARY DESTINATION ${LIB_INSTALL_DIR}
--     RUNTIME DESTINATION bin
--   )
-- endif(LIBHPDF_SHARED)
-diff --git a/meta-oe/recipes-support/libharu/libharu_2.3.0.bb b/meta-oe/recipes-support/libharu/libharu_2.3.0.bb
-deleted file mode 100644
-index 7477c5f03..000000000
---- a/meta-oe/recipes-support/libharu/libharu_2.3.0.bb
-+++ /dev/null
-@@ -1,24 +0,0 @@
--SUMMARY = "free PDF library"
--HOMEPAGE = "http://libharu.org"
--DESCRIPTION = "libHaru is a library for generating PDF files. \
--               It is free, open source, written in ANSI C and cross platform. "
--
--LICENSE = "Zlib"
--LIC_FILES_CHKSUM = "file://README;md5=3ee6bc1f64d9cc7907f44840c8e50cb1"
--
--SRC_URI = "git://github.com/libharu/libharu.git;branch=2_3;protocol=https \
--           file://libharu-RELEASE_2_3_0_cmake.patch \
--           file://0001-Install-static-lib-into-var-libdir-rather-than-hardc.patch \
--	   "
--
--SRCREV = "4ae1d5f4c84459f130bf1b1ef4c5c330af8eca5d"
--
--S = "${WORKDIR}/git"
--
--inherit cmake
--DEPENDS += "libpng zlib"
--
--do_install:append() {
--     mkdir -p ${D}/${datadir}/libharu
--     mv ${D}/libharu ${D}/${datadir}
--}
-diff --git a/meta-oe/recipes-support/libharu/libharu_2.4.4.bb b/meta-oe/recipes-support/libharu/libharu_2.4.4.bb
-new file mode 100644
-index 000000000..02dc499e0
---- /dev/null
-+++ b/meta-oe/recipes-support/libharu/libharu_2.4.4.bb
-@@ -0,0 +1,16 @@
-+SUMMARY = "free PDF library"
-+HOMEPAGE = "http://libharu.org"
-+DESCRIPTION = "libHaru is a library for generating PDF files. \
-+               It is free, open source, written in ANSI C and cross platform. "
-+
-+LICENSE = "Zlib"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=924546dab2bef90e370d7c0c090ddcf0"
-+
-+DEPENDS += "libpng zlib"
-+
-+SRC_URI = "git://github.com/libharu/libharu.git;branch=master;protocol=https"
-+SRCREV = "0c598becaadaef8e3d12b883f9fc2864a118c12d"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit cmake
+diff --git a/meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.4.0.bb b/meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.5.0.bb
+similarity index 91%
+rename from meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.4.0.bb
+rename to meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.5.0.bb
+index 6294827b1..fa81472af 100644
+--- a/meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.4.0.bb
++++ b/meta-oe/recipes-core/dbus-cxx/dbus-cxx_2.5.0.bb
+@@ -6,7 +6,7 @@ LICENSE = "LGPL-3.0-or-later | BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=24594f493407a4cd401ce9794e0b9308"
+ 
+ SRC_URI = "git://github.com/dbus-cxx/dbus-cxx.git;branch=master;protocol=https"
+-SRCREV = "ebac3df5beeb4337f65968ae5b265927abb792af"
++SRCREV = "2c3b3a767a5898ea8e51159e8122ddbb3aaeeb94"
+ 
+ DEPENDS = "\
+ 	dbus \
 -- 
-2.25.1
+2.34.1
 
 
