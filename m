@@ -2,57 +2,59 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C6880C4707B
-	for <webhook@archiver.kernel.org>; Wed, 27 Dec 2023 08:21:38 +0000 (UTC)
-Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
- by mx.groups.io with SMTP id smtpd.web10.98054.1703665294180241363
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 025C6C4725D
+	for <webhook@archiver.kernel.org>; Wed, 27 Dec 2023 08:21:39 +0000 (UTC)
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
+ by mx.groups.io with SMTP id smtpd.web11.97656.1703665291667789847
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 Dec 2023 00:21:34 -0800
+ Wed, 27 Dec 2023 00:21:31 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=DAToWLHL;
- spf=pass (domain: gmail.com, ip: 209.85.216.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f50.google.com with SMTP id 98e67ed59e1d1-28be5a5fdedso2131769a91.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 27 Dec 2023 00:21:34 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=JM1CKhbf;
+ spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-5c6839373f8so3088840a12.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 27 Dec 2023 00:21:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1703665293; x=1704270093; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1703665291; x=1704270091; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=6cL2Gi+mmcFqFXMG8iuIZdf+IeVIvLR+dGnknv+K5S0=;
-        b=DAToWLHLgQ5T1VOVOSQsgb6Ro46g2zZopgWl7dQ4uJSbvTUtbJl+mvhaiHDRr0XvTd
-         EhCtG2OaBb8VHiSkFw99BJ1mHF00hIHnCESA3ddRlCbolOwExYmzcF6Z+HXMyEzGO+G3
-         yT9UCLW2nrEhMeO+mybUl6S1uHLHk58amr/aSAhQChNjBLF2YgYUiMm+fer8L6G8Dh61
-         s0SQ26np6Xx+LMu5M8deNNQYs5ubYvcE24D6rzsgfwxGqyEUXLBSntCwMQ8DBgsHmrbQ
-         aMKESluf+0cbTFW/aS5uo2vUV6AX5x6Ix099OTNQxM76qktZ7lN9UK7duOBk+aD8sYE+
-         snGQ==
+        bh=Jj6y8OP9wkVXTLILfJvCy8FK+wY8kmphMGaTFBjnKys=;
+        b=JM1CKhbfCjur+6HFDAGP6nOWlHLDGx81IYu7F2k9KPUmjlxpjr8+YKcx+l1KfzWzgi
+         4Lv9bPcWOeNCJMXoh120oiuk9SnEK8kFojaLdcgIcraJgq3Ry+ji2rrb0cAshGOfSKrK
+         gGOSYmb8iwvwjcgl4pJ1RdCgXZYy9TnaUUcq87/PHHr3mXQATXH/KtB7gJKzqXMCRfSe
+         XuI0YhNa18h7yukWm1vMHsY7oC113MRkRHHf2nFj9sdiD0wSpoJD9/91h9ltyxMwGKYt
+         8Vpm9h9MHdFhy2WAAR5ZmYcnkVM3axpQNjLe8a6IXm8hwam8TMDtlQHlLHbugIchLgTn
+         Uh9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703665293; x=1704270093;
+        d=1e100.net; s=20230601; t=1703665291; x=1704270091;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=6cL2Gi+mmcFqFXMG8iuIZdf+IeVIvLR+dGnknv+K5S0=;
-        b=cxnOVjm6nUD8OEBuf5yVSdt0J/NQMPI3gY7caCeRQqVSr3squ8hHcNYeYbzbISBMHW
-         S4kuAyQxlHEwwJp08sIv/Wf4YIpH/f3T+ysXNK1lSz2quBzQpn6LbkMOgOXfLyclyxdY
-         KBU79QGgV1JKHrHCoJW6yMmhHkXSk98N9ExHw5vyklQPpNYfuwrBZG3StVbeBG0d81RE
-         4Riupw/ggInZWYwSX8Aim9n4VA++nCpYW/pcaZ04hDpXqj2uNHzUvIsm76Sigsr0wdNc
-         5RPuN0zCCTbRFWMeUxdlSHJe1fgHbhX+zXwUswS4BO0SDigALdLsr+JEYEEi+kg3eX2V
-         h65g==
-X-Gm-Message-State: AOJu0YxPUphhVXNP/X3nWsIcw4A7nuRsJqvjyRRcD65ekf6IHj6atsfN
-	fdmwvuMsRPYjq9dhfaSM9mtVTNRHM64=
-X-Google-Smtp-Source: AGHT+IGdkJzYO5bN9jpPD+pW/HyiXIV0J5WmLkuGMtB/0Iv76/6WbInBGIqZpzSH8CM6G+Ep2ysa8Q==
-X-Received: by 2002:a17:90b:3447:b0:28c:9605:f643 with SMTP id lj7-20020a17090b344700b0028c9605f643mr51027pjb.28.1703665293344;
-        Wed, 27 Dec 2023 00:21:33 -0800 (PST)
+        bh=Jj6y8OP9wkVXTLILfJvCy8FK+wY8kmphMGaTFBjnKys=;
+        b=E+51CY9j7sR7jkR7ZbnlB9WHINqHPpj4OShV9FcMA3PZQWSnRMAo4BfNnaAPR3Fy0l
+         GdHiyZ64xK/Ugy090sXZnREWG1OFCmO9Z8YCZitsQ6ZAvm7yGSm3wM5c/XZf72BObY/Y
+         srA2YqP25COlFV7hFwF0tyowC1+LHdBAnbIzhUY2zaChgJw3vJXGqci7smOHhj65Gu1T
+         UlXSm3j3TlgMQE5h0kHk/YSvBDnDv14W37NsmWqFYG29umy+nfvMr/Q1641ba69QBk20
+         TcCIL0c1E5LfJMVtoTU8uu54V9r/tRs5MDJuWTqoi06WNTtJjlBv880v+OkTnBrsgeyR
+         NCjA==
+X-Gm-Message-State: AOJu0YzJEkq+MTNY4mYjlgrih8kX92h+8atyo7Nrk+cBLgA2rahUHuL8
+	qipAASr/FCUiGLIaYFmeIsO93r0fNU0=
+X-Google-Smtp-Source: AGHT+IFsTschQJiacgHUWxP3ZVevejzGzGlxlyYmTluP41Z5wEVesLGWOJ3cOdmqGkyO7UPw1xIsxw==
+X-Received: by 2002:a17:90a:bf12:b0:28b:e2c1:8eaf with SMTP id c18-20020a17090abf1200b0028be2c18eafmr10465403pjs.2.1703665290782;
+        Wed, 27 Dec 2023 00:21:30 -0800 (PST)
 Received: from apollo.localdomain ([2601:646:9d80:4380::4b6f])
-        by smtp.gmail.com with ESMTPSA id gk8-20020a17090b118800b0028bc2035c09sm11780177pjb.34.2023.12.27.00.21.32
+        by smtp.gmail.com with ESMTPSA id gk8-20020a17090b118800b0028bc2035c09sm11780177pjb.34.2023.12.27.00.21.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 27 Dec 2023 00:21:32 -0800 (PST)
+        Wed, 27 Dec 2023 00:21:30 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org, ross.burton@arm.com
-In-Reply-To: <20231221102015.1080653-1-ross.burton@arm.com>
-References: <20231221102015.1080653-1-ross.burton@arm.com>
-Subject: Re: [PATCH] renderdoc: no need to depend on vim-native
-Message-Id: <170366529265.1947762.13634750070553067063.b4-ty@gmail.com>
-Date: Wed, 27 Dec 2023 00:21:32 -0800
+To: openembedded-devel@lists.openembedded.org, 
+ Alex Kiernan <alex.kiernan@gmail.com>
+In-Reply-To: <20231220204125.28017-1-alex.kiernan@gmail.com>
+References: <20231220204125.28017-1-alex.kiernan@gmail.com>
+Subject: Re: [meta-oe][PATCH] thin-provisioning-tools: Upgrade 1.0.4 ->
+ 1.0.9
+Message-Id: <170366529007.1947762.2816571771491423966.b4-ty@gmail.com>
+Date: Wed, 27 Dec 2023 00:21:30 -0800
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -60,22 +62,18 @@ X-Mailer: b4 0.12.4
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 27 Dec 2023 08:21:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107839
+ <openembedded-devel@lists.openembedded.org>; Wed, 27 Dec 2023 08:21:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107836
 
 
-On Thu, 21 Dec 2023 10:20:15 +0000, ross.burton@arm.com wrote:
-> Remove the patch to bring back the user of xxd from vim-native, the
-> patch claimed that the cross-compiling rules were broken. However they
-> work just fine if you tell it what compiler to use, as the default is
-> "c++" and that isn't in HOSTTOOLS.
+On Wed, 20 Dec 2023 20:41:25 +0000, Alex Kiernan wrote:
 > 
-> 
+
 
 Applied, thanks!
 
-[1/1] renderdoc: no need to depend on vim-native
-      commit: fc035a8c4dc84e7414a5a06a0949c514fdc69531
+[1/1] thin-provisioning-tools: Upgrade 1.0.4 -> 1.0.9
+      commit: b7d5acb3523c95054a0431a5291866d7b5bde5a2
 
 Best regards,
 -- 
