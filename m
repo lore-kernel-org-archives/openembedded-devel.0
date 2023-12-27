@@ -2,58 +2,58 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2720CC47258
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 176BFC47077
 	for <webhook@archiver.kernel.org>; Wed, 27 Dec 2023 08:21:18 +0000 (UTC)
-Received: from mail-io1-f52.google.com (mail-io1-f52.google.com [209.85.166.52])
- by mx.groups.io with SMTP id smtpd.web10.98042.1703665277526331751
+Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
+ by mx.groups.io with SMTP id smtpd.web11.97646.1703665272564894922
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 Dec 2023 00:21:17 -0800
+ Wed, 27 Dec 2023 00:21:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=PEp1J6c/;
- spf=pass (domain: gmail.com, ip: 209.85.166.52, mailfrom: raj.khem@gmail.com)
-Received: by mail-io1-f52.google.com with SMTP id ca18e2360f4ac-7ba84a3cc96so266882139f.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 27 Dec 2023 00:21:17 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=hmuA5vat;
+ spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f48.google.com with SMTP id 98e67ed59e1d1-28b9e9e83b0so2264237a91.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 27 Dec 2023 00:21:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1703665276; x=1704270076; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1703665271; x=1704270071; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=FjtJiXof8Pqnk8cem2JNbxCzafwRCGU7q1vnts3LGBM=;
-        b=PEp1J6c/Sn7dJmDZbrXdCU0v7q6ZIirbOJAaJM+qzGPNrKYcUMuqpdpdSdi24RxaP9
-         I7dBKWS7kqXl5wQJcddqXIvAINdgsKUpVMe8U/QiSj1rjjufU452ucq1+JX3mPRU/d5V
-         +SiP4QY36Eq3EMggSCBCPboGO0g8rabB+vbsSw6LpAsP9dneSEEwOXv36cKWwF29IhkJ
-         mml3j0N7IwCzUGsmf+3O0AUHZM37uQLuZoZZiIAEGZxv/3wnlOTIEbM25qDUKnuWbqqq
-         Ly3+fMRQkgFEmk4V8xzQ8WFXN5tph0Hac7zFo1vpPrmQlTtdSewHtrvTZTokdB49XQwP
-         X7Sw==
+        bh=67g43iN2MZNsqBfO+wGgBORlkEwE4/LPSEoi7c88QgU=;
+        b=hmuA5vats9+2tpdKhW4IRnrar46rPnbFv1yNkdV67a5LbRmjmKvR0RLFcGtfmzrN3r
+         MF8qgJdj45p0aYt/F9wajgAkKvvIiVTONQlraomfweybDT3xzEIAwfaYPsdeG/9fWrRW
+         IncIm4Yz1CFtDLOz4hgSn564LxOhmccanRKZqDURa2SWsUxqLfsexkxbld9Laedz1rg1
+         i3s8LToSrJUAkBcH7a57c3jf3gpv/SNa+aCOf8LQc0B8cWl1doZgYXby33BT5VGPiPd/
+         +2H18AuGYNFyyeN8jAwvYbEKPTnML4NdVzK7IuycsAccQrL9mCHtWca5E1NeKTslTGVC
+         WrQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703665276; x=1704270076;
+        d=1e100.net; s=20230601; t=1703665271; x=1704270071;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=FjtJiXof8Pqnk8cem2JNbxCzafwRCGU7q1vnts3LGBM=;
-        b=weffXmJc/rGhSzrVPR/KxG3vvU1xA98GUNFdbmR+t7GxRueyOSsYnTAWqWaYYSd3vT
-         6hEJQ9CUBg6QrDvwYsOpKrIL1EEkSILuGp9dved0L8W2wdWLt//wWmC5vimmlGarM/yi
-         pUwk8JLlOsebCm75witZVmxuNWm6+BGht8QVmbTBuOCbr5+St87b9yFsTtqpygWf/Lv1
-         M3+oFViQ3YNESOjZ5ln6qc5BXBYSd7el4Q2xXZQJR3sibKM6EiPBwJRia2zXwg4J3gFX
-         QOvVfYweAoJI+ua54itzQ97YLqhsubAOZSqq91EZngJlCReoSjLUy4InjJ+en/dPqRlN
-         MOjw==
-X-Gm-Message-State: AOJu0YxWuhNGnAbygcB2u7jzXKX6r3FdeFknATx8qmmjzDbjEkrMAb9M
-	ZfwvyjNYTeUcV27bhX25uDM=
-X-Google-Smtp-Source: AGHT+IEnol9r6kES/bQQWkg0j8ZeOIHV2S8A5P38VCTSoLMh5keeiG6n+4Xz7aQL7s0gfqSWLT1DjA==
-X-Received: by 2002:a6b:c9c8:0:b0:7b4:28f8:d9 with SMTP id z191-20020a6bc9c8000000b007b428f800d9mr13383631iof.34.1703665276558;
-        Wed, 27 Dec 2023 00:21:16 -0800 (PST)
+        bh=67g43iN2MZNsqBfO+wGgBORlkEwE4/LPSEoi7c88QgU=;
+        b=sGHCT9KZJiSO2KwXMGJ9m7Dv29rzkF1+R6Z8onird6u0gut+S64KcpWuqSYvG0P293
+         l34vv8Ik0auxuKtpryiZu2tWpBj9SZTiNOF1eacU54JSGtmr8bUvX3yMtOQ6QMtREsdQ
+         H5b4/U92aLWOJR6kTBm343grEySuAlczC6SLjTSTKBzlJ5+CjPdcbfrFrM4eYy6vPSaM
+         mZXXPv4vY+KAflcr2S37WE3cPW9PYdONCyxrocalYDCY33waclDdZvAPq4uU91xfQmFL
+         lkt5JdJOC1YX7pzlHPgTgN0Vyw4h4FGF984ra6ozM0ZqmxlAykZ5iudnuWHMmmzO94ES
+         PZvA==
+X-Gm-Message-State: AOJu0YyrqOjNoEkHenL+6HJjo0zAlrxHfcGo9O0Skduy+9Vxfqa3nMln
+	X8XiCSyX6PwyNeKlDSjKkaGYh8KQ4zA=
+X-Google-Smtp-Source: AGHT+IE1JoIdvDZkeVfhFjRocOBgNtiPy9130Ni5enUvW0r4F9FFy14Wx6rLL+1mjCg9N/4lL3hWUQ==
+X-Received: by 2002:a17:90a:a516:b0:28b:c0fe:ba16 with SMTP id a22-20020a17090aa51600b0028bc0feba16mr2407374pjq.60.1703665271460;
+        Wed, 27 Dec 2023 00:21:11 -0800 (PST)
 Received: from apollo.localdomain ([2601:646:9d80:4380::4b6f])
-        by smtp.gmail.com with ESMTPSA id gk8-20020a17090b118800b0028bc2035c09sm11780177pjb.34.2023.12.27.00.21.15
+        by smtp.gmail.com with ESMTPSA id gk8-20020a17090b118800b0028bc2035c09sm11780177pjb.34.2023.12.27.00.21.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 27 Dec 2023 00:21:15 -0800 (PST)
+        Wed, 27 Dec 2023 00:21:10 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org, 
- Derek Straka <derek@asterius.io>
-In-Reply-To: <20231220211326.3610507-1-derek@asterius.io>
-References: <20231220211326.3610507-1-derek@asterius.io>
-Subject: Re: [meta-python][PATCH] python3-alembic: update to version 1.13.1
-Message-Id: <170366527567.1947762.1650055321298300134.b4-ty@gmail.com>
-Date: Wed, 27 Dec 2023 00:21:15 -0800
+To: openembedded-devel@lists.openembedded.org, thomas.perrot@bootlin.com
+In-Reply-To: <20231220141550.1777282-1-thomas.perrot@bootlin.com>
+References: <20231220141550.1777282-1-thomas.perrot@bootlin.com>
+Subject: Re: [meta-networking][PATCH v2] networkmanager: fix some missing
+ pkgconfig
+Message-Id: <170366527060.1947762.11361160584139149181.b4-ty@gmail.com>
+Date: Wed, 27 Dec 2023 00:21:10 -0800
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -62,20 +62,23 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 27 Dec 2023 08:21:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107820
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107815
 
 
-On Wed, 20 Dec 2023 21:13:26 +0000, Derek Straka wrote:
-> Misc bug fixes for typing, versioning, and environment.
+On Wed, 20 Dec 2023 15:15:50 +0100, thomas.perrot@bootlin.com wrote:
+> - to build and package nmtui
+> - to automatically append networkmanager-adsl and
+>   networkmanager-wwan in recommended packages.
+> - to fix an invalid-packageconfig QA issue that is raised when
+>   adsl and wwan are added in pkgconfig.
 > 
-> See https://alembic.sqlalchemy.org/en/latest/changelog.html
 > 
-> 
+> [...]
 
 Applied, thanks!
 
-[1/1] python3-alembic: update to version 1.13.1
-      commit: 62d9c729df3e5c6bfa9605eaa0d62781736122de
+[1/1] networkmanager: fix some missing pkgconfig
+      commit: c331f59e42e9c0bda9d47d0365e6c276746fc81d
 
 Best regards,
 -- 
