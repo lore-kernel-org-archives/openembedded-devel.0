@@ -1,751 +1,436 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <joerg.sommer@navimatix.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A01CAC46CD4
-	for <webhook@archiver.kernel.org>; Wed, 27 Dec 2023 22:56:04 +0000 (UTC)
-Received: from mail-oa1-f47.google.com (mail-oa1-f47.google.com [209.85.160.47])
- by mx.groups.io with SMTP id smtpd.web11.112375.1703717755764334156
- for <Openembedded-devel@lists.openembedded.org>;
- Wed, 27 Dec 2023 14:55:55 -0800
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 26414C3DA6E
+	for <webhook@archiver.kernel.org>; Thu, 28 Dec 2023 14:02:59 +0000 (UTC)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com (EUR05-VI1-obe.outbound.protection.outlook.com [40.107.21.75])
+ by mx.groups.io with SMTP id smtpd.web10.123266.1703772169565244975
+ for <openembedded-devel@lists.openembedded.org>;
+ Thu, 28 Dec 2023 06:02:50 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=QfUqugKX;
- spf=pass (domain: gmail.com, ip: 209.85.160.47, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f47.google.com with SMTP id 586e51a60fabf-2041bb80cb3so4138463fac.2
-        for <Openembedded-devel@lists.openembedded.org>; Wed, 27 Dec 2023 14:55:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1703717755; x=1704322555; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=h/08KCQXCjt5Vzeg1xqjifpmfL4eI51QuNI7sFB5OYw=;
-        b=QfUqugKX8JQdIkWs7yJxeNOjSa0QTGBtK8Tih4Wv5691YxgCPgUcaz8WvuWBNZv7xk
-         2Yqo2/XoRrqpwgO6gmMiJyeKhvnOugpETm400o3CnXSRvHFqad7meIx47aHn2nnA5lzo
-         zc+WfaUCf0iZ+wwX+zJ5dDMOjAPUkTnIdwOeh0YrIUbYRQg91mnnkIR2qVtVp3CVHk9J
-         8knkrn5/vgrpBAKAbdQKdByZSJ85TlO/yStSSLXTKsJbtbT/tnnJPhsznCQSFNFuLCfC
-         gTvfcNp+vYfTS49Eo6MQKWWnYdHocigNpttPF+qaSRBB5J0Ubgpri0IPFq3JnOiNvJqz
-         u/+w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703717755; x=1704322555;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=h/08KCQXCjt5Vzeg1xqjifpmfL4eI51QuNI7sFB5OYw=;
-        b=KNdc9ifk6aJOBNlSI9xxYKJHV92tccBdU2hvwypSPzfoVa528kvJ5ZZof/95c8SmX1
-         QsUGnxbHnM/E7hVgxDaF7jNWumlAoATXfaHwFOo4LomTNgY+DU5iqBDyXtmmi9rst+zI
-         w9eRoCgDb0zCHfyonXm7nsy/IRi0qLtP0a+y5PaA/KCouwEk1g4z381EfsSRl91+eS5c
-         5A/KwPQUwhkVOckSx2eBuTS0YY9HcUE+TRH7icgEZGsUTidCRYhks126MT7wSfKiX6tY
-         7DPeuxCl7W+rnw89PvKCNIST6qlLUjO/RIuVlzUNZoJhzRl3I+ZdZo725lZEOoH1Ow62
-         7XFQ==
-X-Gm-Message-State: AOJu0YwYgW1CIFZFhiqrbjbsjVdhRKJXCjBmd5+kVpoYXCHyysGW1KPE
-	wS8XcFnI3ppo8SkZmMt2SFMeBmd8Dfu3IUbVPec=
-X-Google-Smtp-Source: AGHT+IFhFjiwKeuTvhzxC+YMBw/17/7iCzXYIxO0ubzbIhUhBDA4Y7G9cHsxuds8M05+ewBR/1eq1jHb/PnRllyUMUw=
-X-Received: by 2002:a05:6871:b0c:b0:204:32a:7b96 with SMTP id
- fq12-20020a0568710b0c00b00204032a7b96mr10338797oab.95.1703717754758; Wed, 27
- Dec 2023 14:55:54 -0800 (PST)
-MIME-Version: 1.0
-References: <17A3D724672C20F7.18684@lists.openembedded.org>
- <CANx9H-ChW547oCmp36u9vOh08BEdiLH6rFu++BuF8EF8kVsfzA@mail.gmail.com>
- <CAMKF1spf8ZLbtr6ZCTyy+H9X4YcXk3-4QreXoASjHqRR4H-9rw@mail.gmail.com> <CANx9H-A2EYkayoMWZs19_qqZC-Qxrv5isE1MDi2fkK6HRbjgXA@mail.gmail.com>
-In-Reply-To: <CANx9H-A2EYkayoMWZs19_qqZC-Qxrv5isE1MDi2fkK6HRbjgXA@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 27 Dec 2023 14:55:28 -0800
-Message-ID: <CAMKF1sqXO-fBK_nX3GNOXEgkB2f16orS0j8dELs4vUiLLY-H9w@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH] python3-yappi: upgrade 1.4.0 -> 1.6.0;
- fix ptests
-To: Tim Orling <ticotimo@gmail.com>
-Cc: Openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+ dkim=fail reason="dkim: body hash did not verify" header.i=@navimatix.de header.s=selector1 header.b=R/LCJsy3;
+ spf=pass (domain: navimatix.de, ip: 40.107.21.75, mailfrom: joerg.sommer@navimatix.de)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=IwftnWR3lAobCLARcRyHUYrma++/71yghFxyC5ATZkrBM3w7DRfNZLPUM81fOizm+Wc1P5EA2HvmreUJfeDZ00T7T2ooLWKGjakQYYMSYjpPGS8qXZnF3uDbAkqjyfmUb5mkxrTDVL4FfeoRrq+2Fdo7xhyrXD0cmdGYek8GwIp+zJA0epyqH2CAXDzvnuWEvdRbQ96afFWgoLMkAPI/XpUMQealiu1b09W+rKsdT6/s6AFbbYsGqHwsnSc1xVDSvxewuhg6iXoFP3l+zyzhZ7HuhnTezYg0c0ZPqsI//T14h71ceOu/K2wfs+dlNTozkoJV/AVtU6o5dcGzjGayVg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=IAdYorB2DQgAUQ/RU8BfPqk20xMgCLkntA5skoWWmWs=;
+ b=DFTG6B4cO9n/0jnMN5gL/S+a0uUtFCdqt7YB2s3nBSqB9B2K1EWyc94/vCl450w3cSdrmq5Q9jSd6QcBvFJHMK4cjOYbhT2ZlHK0CvheCY3qxV71/3gXh47m7f3CjRl+Aup558TRhK1AXFLgVQ27WpWEKUw8hTCM5Uj/xXZ75fA+Bn9eM+8QKlGLkL1Qs6269Ll6kqVwnsSvA3EWh4mfscjmPkm7xs9ClNSVMhH9WPU6Rom+isZ3Kk4mxQll46gchTBwxJuP8G83Xyg39bfL2xRewZbd6WctdGl+Meh9o+tB+pItQDkueD0BKKKqZi5qdmHP8Ir0DAJehOL+M0hhsQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=navimatix.de; dmarc=pass action=none header.from=navimatix.de;
+ dkim=pass header.d=navimatix.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=navimatix.de;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=IAdYorB2DQgAUQ/RU8BfPqk20xMgCLkntA5skoWWmWs=;
+ b=R/LCJsy34C+MXTUzqN1qv4yQoTPRaEsd4VNbz48c1Xdux7OakEH475pjuO2+inG7OwVYckXIiIKI3c5ganh3MiBrNfxGusDaXLXWOfXIngGC9Dj3n/HX1QzTxV4POa7Zrlba41qU9v5BtkoT8Cyd6VbceRNzhMCKIxYvd/q8ipc=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=navimatix.de;
+Received: from DU2PR01MB8592.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:2f7::22) by AS8PR01MB8777.eurprd01.prod.exchangelabs.com
+ (2603:10a6:20b:40c::16) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7135.20; Thu, 28 Dec
+ 2023 14:02:44 +0000
+Received: from DU2PR01MB8592.eurprd01.prod.exchangelabs.com
+ ([fe80::ccd0:21d8:8742:ee1f]) by DU2PR01MB8592.eurprd01.prod.exchangelabs.com
+ ([fe80::ccd0:21d8:8742:ee1f%4]) with mapi id 15.20.7135.019; Thu, 28 Dec 2023
+ 14:02:44 +0000
+From: joerg.sommer@navimatix.de
+To: openembedded-devel@lists.openembedded.org
+CC: =?UTF-8?q?J=C3=B6rg=20Sommer?= <joerg.sommer@navimatix.de>
+Subject: [meta-oe][PATCH] bonnie++: New recipe for version 2.0
+Date: Thu, 28 Dec 2023 15:02:30 +0100
+Message-ID: <8701b8118a57fad2921655c82cea20dcbf92c12d.1703772150.git.joerg.sommer@navimatix.de>
+X-Mailer: git-send-email 2.34.1
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
+X-ClientProxiedBy: BE1P281CA0497.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:b10:7e::20) To DU2PR01MB8592.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:2f7::22)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DU2PR01MB8592:EE_|AS8PR01MB8777:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5b08d4f1-68a6-425b-8bb3-08dc07adaa13
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	M9JvaccAG/B71XPehq9qYVpfwP5YCw1iiXtrWBGW4An+xSS3/u3WPFX0UlXiXXkdBAGMbFUFuZzXRALzUwwtyluPRon50EgD/d1BQlwvKMkMHueM5pFuRtNNeEzzW8LYTjfh313E4+VVQqZtXhM685VsvKUCpQ4xiUi8sdSCZoZtuMN3twP8BtoKLm4fmUnDymByTdgI8n122FYm9EAIn44MKBQ06Y/XlnUq6BzY10P+mXAxUXdR3NJUDYS3mewY96FMxh5QEMPvliovONOFeX0fHRg1d8MlAXgOGp1k3hEGDfht2mu5v+A/D1PBOVOPt3PhtbPkmBWTgwtlR/D8YMgSsuNRDVfTfTn3lKd9z5onIkX/gGOZu6oJgVfjqu0miYnBWmkX7J825SblPsfO1N4hute4Lnsh30YCnRz7KdOPTVSMb5LGHFLHhiysubLcXWZcpXk8NKCH13gcHMAfPdX17lYpzCpVT58Yopom6Y/aCklLuLjvnUzJ08mSeYvcZ5YA2Dy1XpnYfulXwgc2co2hj0IuSFCa1l2yIPiFVQXRBnCrAyI2tbNdZsYkcAD2r5rKoAyRG+gUuSHQYtM2YJMFUQA0E6/lzUmXgrkVN88=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR01MB8592.eurprd01.prod.exchangelabs.com;PTR:;CAT:NONE;SFS:(13230031)(396003)(39830400003)(376002)(346002)(366004)(136003)(230922051799003)(1800799012)(451199024)(186009)(64100799003)(38100700002)(38350700005)(36756003)(86362001)(107886003)(26005)(66574015)(83380400001)(9686003)(6512007)(52116002)(6506007)(6916009)(478600001)(966005)(316002)(6486002)(6666004)(2616005)(8936002)(66556008)(66476007)(66946007)(8676002)(41300700001)(4326008)(2906002)(5660300002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?ddMUrtZXHip2O9dFooLpIKvKZXTac00MX5VtOcb8Sg2z0Q2dIwVojB7Fti1w?=
+ =?us-ascii?Q?D9f7Lkq1LhBgou1Ehen7/SeGZfXmJo4sZsHdhK/ukVCtnve+F2IclbO1AqYQ?=
+ =?us-ascii?Q?kFvZH2eV7XLBzM/6OhSTDmAJXiFiGGtMKYNvMcnVJ+oUOFhzlJ74kuCD1zVz?=
+ =?us-ascii?Q?krYJtqwQyAM6y4JNWNpv6Msd/aA40yy79ESGTAyiDr6qf+Bgb/o5TmYlRqT/?=
+ =?us-ascii?Q?DMvx4JjayROMrM8prGC6WB78AKobYRlXVzDaDvGlmzaGS3pa7VuMlEApD9PC?=
+ =?us-ascii?Q?TvFabSpXmVhyo6C5O+NyRohHGV5LN0XPba7ClMdaXLn8xpoJA/FXRGvnz7At?=
+ =?us-ascii?Q?kHu7quFVjmyru0hsyyROUueI1imvH32CGGptTOUaS4f0xKYVuNY8P9XR/X7W?=
+ =?us-ascii?Q?d3MXtRXjv8dyxkOjqaXCq0XXlRaYrdW1FPkrxeKipkKh5Ksm3du2fHp7hJh7?=
+ =?us-ascii?Q?7765PUIdLG09ySkYvgpbgFBWGcFUbBdS8Uif+eFpX95FIzNNWTB7YQHFnN6M?=
+ =?us-ascii?Q?2+6IvCh7AWsRVbLLZYMV0fyV+9daB5bYT3jHnYBYFfl3EpGZDIHHxJATCZid?=
+ =?us-ascii?Q?ZrtnW3cqFfhTpYhL6WBnemjcNRafg5c9Bpbt4PMiLaBJv4oF2x5NvMqAJQBa?=
+ =?us-ascii?Q?/ncNRtz/2QKcZsjY5NeUZiZsfKYHWrnfd19QrEzcYubzfxLZKmM++4w0Kgs0?=
+ =?us-ascii?Q?3zvaPqHF5KReYHjJIfcBesOYUFzK29sIr/yTftSNM4pbZANyTaWmgsZgB+6C?=
+ =?us-ascii?Q?tFb+cIcgz6KT+crmQHWONs7M5Kf/Ue85mGBfbHfkjMrpyYOHo18LjHGvUTjg?=
+ =?us-ascii?Q?nVgDMLTYvaVn5S/npGwMIO/+rtdktjlixpL9MZI5d5kze9WkdYFR24YQYCbo?=
+ =?us-ascii?Q?5KMPTQFnYdmPlZmXbfJCQ5ji55EUaVVcnE75Z2vcXpqL7kqjrLzCTYoeRneL?=
+ =?us-ascii?Q?weys/tnX1URuD5jWCIhQt6VfyxTHqrxi53tBZfpupPINdr4EsZhE2EQAPr0W?=
+ =?us-ascii?Q?P5I4NJJYO2jbKnbDZgji1cYFycgpKliNWOlYEOqa5IStX4Yk2LWch47+Y7ee?=
+ =?us-ascii?Q?CtxHoVmwHK1Roy5s04s8HLKQ3jcLZuXVtgCeW03DwHs8O6GuhBLTNSWm5uJL?=
+ =?us-ascii?Q?xMlAgXnTUZ7Zn54LWsdFwnLnYhIlEag3hrWoGvg8PWvWc5y/vg0g0gQ1b9Qk?=
+ =?us-ascii?Q?QnLMG58JJAEyJUOHhk2v7LdwaLXKw7CVZD2UFwr8OhNOFYIpmeBXS3NPPfs3?=
+ =?us-ascii?Q?IL4g5yL5df4TtZ9M8EhG8ZLwuDsXnho1CY05rmTduMJnOnqWH7trJRGJlDxf?=
+ =?us-ascii?Q?okzePezHY5qBwHuHDSfy6IjCJdJCIxkQf7MLe0f7MZDU5dOY0TT6sKvR7lsE?=
+ =?us-ascii?Q?+TIypZwV6T1yJYUFt0hSbzgGgzh3BUM+Qm/ApWLINHVSIuGB3iTKZBtgt2JQ?=
+ =?us-ascii?Q?z7/vB2dXfiySwSpVxJv1gtLm23ITcexe/5ZRBW3bZifivhqJ7NmsbgpT3ymi?=
+ =?us-ascii?Q?KF2qVDzbjfQLy92eJyEr609HgZZKYnXuU7EJFukHpQzeYzhQDrd+bDtssjpu?=
+ =?us-ascii?Q?sNZ/L+aM2LHhA+hAnLfTvOc37Rf7sU3mAtFBU0Pss/fp7UqEt//YMfJpHgUy?=
+ =?us-ascii?Q?BQ=3D=3D?=
+X-OriginatorOrg: navimatix.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5b08d4f1-68a6-425b-8bb3-08dc07adaa13
+X-MS-Exchange-CrossTenant-AuthSource: DU2PR01MB8592.eurprd01.prod.exchangelabs.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Dec 2023 14:02:44.5206
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: c87b4f54-b992-4813-8f3f-4a876324197f
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: znSaN9aKsxL5yzVtb6/VsXz3zPnhS7aYJOxfIvfeSGXHmWaDuPkstjwVh8mcIIRTgPQn6GQkcAdjr3vaRyRgENsmFzPyeKisAwBHaR/3DsQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR01MB8777
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 27 Dec 2023 22:56:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107873
+ <openembedded-devel@lists.openembedded.org>; Thu, 28 Dec 2023 14:02:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107874
 
-On Wed, Dec 27, 2023 at 2:18=E2=80=AFPM Tim Orling <ticotimo@gmail.com> wro=
-te:
->
-> Seems there was an issue with most likely Windows -> Unix line endings ca=
-using the email patch to not apply. I had a similar problem with the prior =
-upgrade from Alex.
->
-> Pushed to a rebased branch on top of today's master-next:
->
-> https://git.openembedded.org/meta-openembedded-contrib/commit/?h=3Dtimo/p=
-ython3-yappi-ptest
+From: J=C3=B6rg Sommer <joerg.sommer@navimatix.de>
 
-Thanks, It is better this time.
+Newer versions of bonnie get published on
+<https://doc.coker.com.au/projects/bonnie/>. Unfortunately, the new version
+doesn't compile with g++=C2=A011 which requires *fix-csv2html-data.patch* a=
+nd
+configure fails due to cross compilation which gets fixed
+with *fix-configure-lfs.patch*
 
->
-> On Wed, Dec 27, 2023 at 1:46=E2=80=AFPM Khem Raj <raj.khem@gmail.com> wro=
-te:
->>
->> right, its in master-next already.
->>
->> On Wed, Dec 27, 2023 at 1:23=E2=80=AFPM Tim Orling <ticotimo@gmail.com> =
-wrote:
->> >
->> > Gentle ping. This one supersedes the on from Alex, since it fixes the =
-priests.
->> >
->> > On Sun, Dec 24, 2023 at 10:13=E2=80=AFAM Tim Orling via lists.openembe=
-dded.org <ticotimo=3Dgmail.com@lists.openembedded.org> wrote:
->> >>
->> >> * Switch to the python_setuptools_build_meta PEP-517 backend
->> >> * Refactor and submit 0001-Fix-imports-for-ptests.patch
->> >>   - split out the Windows -> Unix line endings conversion
->> >>   - https://github.com/sumerc/yappi/pull/164
->> >> * Drop 0002-add-3.11-to-the-setup.patch; upstream added 3.11 and 3.12
->> >> * Drop install of yappi.py in ptest; use site-packages as intended
->> >> * Drop complex run-ptest and simply run 'pytest --automake'
->> >> * Move out of "problems" group to "slow" group in ptest-packageslists=
--meta-python.inc
->> >>   - can now build meta-python-image-ptest-python3-yappi
->> >>   - tests take about 45 seconds
->> >>
->> >> https://github.com/sumerc/yappi/blob/1.6.0/CHANGELOG
->> >>
->> >> 1.6.0 (2023-12-07)
->> >>
->> >> - Drop support 2.7-3.5 and clean backward compatible code (pull/152)
->> >> - Add Python 3.12 wheels
->> >>
->> >> 1.5.1 (2023-12-06)
->> >>
->> >> - Add support for Python 3.12
->> >> - Fix child callgrind functions disappear
->> >>
->> >> Signed-off-by: Tim Orling <ticotimo@gmail.com>
->> >> ---
->> >> All tests pass on qemux86-64
->> >> Upstream GitHub Actions CI also passed with submitted patches
->> >>
->> >>  .../ptest-packagelists-meta-python.inc        |   2 +-
->> >>  ...nality-convert-line-endings-to-Unix.patch} | 120 +++++-----------=
---
->> >>  ...port-of-tests.utils-to-enable-pytest.patch | 101 +++++++++++++++
->> >>  .../0002-add-3.11-to-the-setup.patch          |  26 ----
->> >>  .../python/python3-yappi/run-ptest            |   2 +-
->> >>  .../python/python3-yappi_1.4.0.bb             |  36 ------
->> >>  .../python/python3-yappi_1.6.0.bb             |  37 ++++++
->> >>  7 files changed, 175 insertions(+), 149 deletions(-)
->> >>  rename meta-python/recipes-devtools/python/python3-yappi/{0001-Fix-i=
-mports-for-ptests.patch =3D> 0001-test_functionality-convert-line-endings-t=
-o-Unix.patch} (95%)
->> >>  create mode 100644 meta-python/recipes-devtools/python/python3-yappi=
-/0002-Fix-import-of-tests.utils-to-enable-pytest.patch
->> >>  delete mode 100644 meta-python/recipes-devtools/python/python3-yappi=
-/0002-add-3.11-to-the-setup.patch
->> >>  delete mode 100644 meta-python/recipes-devtools/python/python3-yappi=
-_1.4.0.bb
->> >>  create mode 100644 meta-python/recipes-devtools/python/python3-yappi=
-_1.6.0.bb
->> >>
->> >> diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.=
-inc b/meta-python/conf/include/ptest-packagelists-meta-python.inc
->> >> index 3272d98192..e1732c6177 100644
->> >> --- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
->> >> +++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
->> >> @@ -54,6 +54,7 @@ PTESTS_FAST_META_PYTHON =3D "\
->> >>
->> >>  PTESTS_SLOW_META_PYTHON =3D "\
->> >>      python3-lz4 \
->> >> +    python3-yappi \
->> >>  "
->> >>
->> >>  PTESTS_PROBLEMS_META_PYTHON =3D"\
->> >> @@ -82,6 +83,5 @@ PTESTS_PROBLEMS_META_PYTHON =3D"\
->> >>      python3-whoosh \
->> >>      python3-ujson \
->> >>      python3-xlrd \
->> >> -    python3-yappi \
->> >>      python3-yarl \
->> >>  "
->> >> diff --git a/meta-python/recipes-devtools/python/python3-yappi/0001-F=
-ix-imports-for-ptests.patch b/meta-python/recipes-devtools/python/python3-y=
-appi/0001-test_functionality-convert-line-endings-to-Unix.patch
->> >> similarity index 95%
->> >> rename from meta-python/recipes-devtools/python/python3-yappi/0001-Fi=
-x-imports-for-ptests.patch
->> >> rename to meta-python/recipes-devtools/python/python3-yappi/0001-test=
-_functionality-convert-line-endings-to-Unix.patch
->> >> index 476db4b7d0..70d4607c29 100644
->> >> --- a/meta-python/recipes-devtools/python/python3-yappi/0001-Fix-impo=
-rts-for-ptests.patch
->> >> +++ b/meta-python/recipes-devtools/python/python3-yappi/0001-test_fun=
-ctionality-convert-line-endings-to-Unix.patch
->> >> @@ -1,44 +1,23 @@
->> >> -From 0dedc1c573ddc4e87475eb03c64555cd54a72e92 Mon Sep 17 00:00:00 20=
-01
->> >> -From: Trevor Gamblin <trevor.gamblin@windriver.com>
->> >> -Date: Mon, 7 Jun 2021 09:40:20 -0400
->> >> -Subject: [PATCH] Fix imports for tests
->> >> +From 0136ca731cba8b056b3f2ff0e7df3953b94f1e87 Mon Sep 17 00:00:00 20=
-01
->> >> +From: Tim Orling <tim.orling@konsulko.com>
->> >> +Date: Sun, 24 Dec 2023 09:41:57 -0800
->> >> +Subject: [PATCH 1/2] test_functionality: convert line endings to Uni=
-x
->> >>
->> >> -Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
->> >> ----
->> >> -Upstream-Status: Pending
->> >> +Convert the Windows line endings with dos2unix to be like the
->> >> +other files in tests/*
->> >> +
->> >> +Upstream-Status: Submitted [https://github.com/sumerc/yappi/pull/164=
-]
->> >>
->> >> - tests/test_asyncio.py              | 2 +-
->> >> - tests/test_asyncio_context_vars.py | 2 +-
->> >> - tests/test_functionality.py        | 2 +-
->> >> - tests/test_hooks.py                | 2 +-
->> >> - tests/test_tags.py                 | 2 +-
->> >> - 5 files changed, 6 insertions(+), 6 deletions(-)
->> >> +Signed-off-by: Tim Orling <tim.orling@konsulko.com>
->> >> +---
->> >> + tests/test_functionality.py | 3822 +++++++++++++++++---------------=
+Signed-off-by: J=C3=B6rg Sommer <joerg.sommer@navimatix.de>
 ---
->> >> + 1 file changed, 1911 insertions(+), 1911 deletions(-)
->> >>
->> >> ---- a/tests/test_asyncio.py
->> >> -+++ b/tests/test_asyncio.py
->> >> -@@ -2,7 +2,7 @@ import unittest
->> >> - import yappi
->> >> - import asyncio
->> >> - import threading
->> >> --from utils import YappiUnitTestCase, find_stat_by_name, burn_cpu, b=
-urn_io
->> >> -+from .utils import YappiUnitTestCase, find_stat_by_name, burn_cpu, =
-burn_io
->> >> -
->> >> -
->> >> - async def async_sleep(sec):
->> >> ---- a/tests/test_asyncio_context_vars.py
->> >> -+++ b/tests/test_asyncio_context_vars.py
->> >> -@@ -5,7 +5,7 @@ import contextvars
->> >> - import functools
->> >> - import time
->> >> - import os
->> >> --import utils
->> >> -+import tests.utils as utils
->> >> - import yappi
->> >> -
->> >> - async_context_id =3D contextvars.ContextVar('async_context_id')
->> >> +diff --git a/tests/test_functionality.py b/tests/test_functionality.=
-py
->> >> +index 0e99c47..38bbe67 100644
->> >>  --- a/tests/test_functionality.py
->> >>  +++ b/tests/test_functionality.py
->> >> -@@ -1,1916 +1,1916 @@
->> >> +@@ -1,1911 +1,1911 @@
->> >>  -import os
->> >>  -import sys
->> >>  -import time
->> >> @@ -47,7 +26,7 @@ Upstream-Status: Pending
->> >>  -import yappi
->> >>  -import _yappi
->> >>  -import utils
->> >> --import multiprocessing  # added to fix http://bugs.python.org/issue=
-15881 for > Py2.6
->> >> +-import multiprocessing
->> >>  -import subprocess
->> >>  -
->> >>  -_counter =3D 0
->> >> @@ -318,10 +297,10 @@ Upstream-Status: Pending
->> >>  -    def test_profile_decorator(self):
->> >>  -
->> >>  -        def aggregate(func, stats):
->> >> --            fname =3D "tests/%s.profile" % (func.__name__)
->> >> +-            fname =3D f"tests/{func.__name__}.profile"
->> >>  -            try:
->> >>  -                stats.add(fname)
->> >> --            except IOError:
->> >> +-            except OSError:
->> >>  -                pass
->> >>  -            stats.save(fname)
->> >>  -            raise Exception("messing around")
->> >> @@ -1232,7 +1211,7 @@ Upstream-Status: Pending
->> >>  -        # TODO: I put dummy() to fix below, remove the comments aft=
-er a while.
->> >>  -        self.assertTrue( # FIX: I see this fails sometimes?
->> >>  -            tsm is not None,
->> >> --            'Could not find "_MainThread". Found: %s' % (', '.join(=
-utils.get_stat_names(tstats))))
->> >> +-            f"Could not find \"_MainThread\". Found: {', '.join(uti=
-ls.get_stat_names(tstats))}")
->> >>  -
->> >>  -    def test_ctx_stats(self):
->> >>  -        from threading import Thread
->> >> @@ -1312,7 +1291,7 @@ Upstream-Status: Pending
->> >>  -        # TODO: I put dummy() to fix below, remove the comments aft=
-er a while.
->> >>  -        self.assertTrue( # FIX: I see this fails sometimes
->> >>  -            tsmain is not None,
->> >> --            'Could not find "_MainThread". Found: %s' % (', '.join(=
-utils.get_stat_names(stats))))
->> >> +-            f"Could not find \"_MainThread\". Found: {', '.join(uti=
-ls.get_stat_names(stats))}")
->> >>  -        self.assertTrue(1.0 > tst2.ttot >=3D 0.5)
->> >>  -        self.assertTrue(1.0 > tst1.ttot >=3D 0.5)
->> >>  -
->> >> @@ -1369,7 +1348,7 @@ Upstream-Status: Pending
->> >>  -            ts =3D []
->> >>  -            for i in (0.01, 0.05, 0.1):
->> >>  -                t =3D threading.Thread(target=3Dburn_cpu, args=3D(i=
-, ))
->> >> --                t.name =3D "burn_cpu-%s" % str(i)
->> >> +-                t.name =3D f"burn_cpu-{str(i)}"
->> >>  -                t.start()
->> >>  -                ts.append(t)
->> >>  -            for t in ts:
->> >> @@ -1396,10 +1375,7 @@ Upstream-Status: Pending
->> >>  -    def test_producer_consumer_with_queues(self):
->> >>  -        # we currently just stress yappi, no functionality test is =
-done here.
->> >>  -        yappi.start()
->> >> --        if utils.is_py3x():
->> >> --            from queue import Queue
->> >> --        else:
->> >> --            from Queue import Queue
->> >> +-        from queue import Queue
->> >>  -        from threading import Thread
->> >>  -        WORKER_THREAD_COUNT =3D 50
->> >>  -        WORK_ITEM_COUNT =3D 2000
->> >> @@ -1458,7 +1434,6 @@ Upstream-Status: Pending
->> >>  -        fsh =3D utils.find_stat_by_name(stats, "handler")
->> >>  -        self.assertTrue(fsh is not None)
->> >>  -
->> >> --    @unittest.skipIf(not sys.version_info >=3D (3, 2), "requires Py=
-thon 3.2")
->> >>  -    def test_concurrent_futures(self):
->> >>  -        yappi.start()
->> >>  -        from concurrent.futures import ThreadPoolExecutor
->> >> @@ -1468,7 +1443,6 @@ Upstream-Status: Pending
->> >>  -        time.sleep(1.0)
->> >>  -        yappi.stop()
->> >>  -
->> >> --    @unittest.skipIf(not sys.version_info >=3D (3, 2), "requires Py=
-thon 3.2")
->> >>  -    def test_barrier(self):
->> >>  -        yappi.start()
->> >>  -        b =3D threading.Barrier(2, timeout=3D1)
->> >> @@ -1962,8 +1936,8 @@ Upstream-Status: Pending
->> >>  +import unittest
->> >>  +import yappi
->> >>  +import _yappi
->> >> -+import tests.utils as utils
->> >> -+import multiprocessing  # added to fix http://bugs.python.org/issue=
-15881 for > Py2.6
->> >> ++import utils
->> >> ++import multiprocessing
->> >>  +import subprocess
->> >>  +
->> >>  +_counter =3D 0
->> >> @@ -2234,10 +2208,10 @@ Upstream-Status: Pending
->> >>  +    def test_profile_decorator(self):
->> >>  +
->> >>  +        def aggregate(func, stats):
->> >> -+            fname =3D "tests/%s.profile" % (func.__name__)
->> >> ++            fname =3D f"tests/{func.__name__}.profile"
->> >>  +            try:
->> >>  +                stats.add(fname)
->> >> -+            except IOError:
->> >> ++            except OSError:
->> >>  +                pass
->> >>  +            stats.save(fname)
->> >>  +            raise Exception("messing around")
->> >> @@ -3007,8 +2981,8 @@ Upstream-Status: Pending
->> >>  +
->> >>  +    def test_issue_32(self):
->> >>  +        '''
->> >> -+        Start yappi from different thread and we get Internal Error=
-(15) as
->> >> -+        the current_ctx_id() called while enumerating the threads i=
-n start()
->> >> ++        Start yappi from different thread and we get Internal Error=
-(15) as
->> >> ++        the current_ctx_id() called while enumerating the threads i=
-n start()
->> >>  +        and as it does not swap to the enumerated ThreadState* the =
-THreadState_GetDict()
->> >>  +        returns wrong object and thus sets an invalid id for the _c=
-tx structure.
->> >>  +
->> >> @@ -3148,7 +3122,7 @@ Upstream-Status: Pending
->> >>  +        # TODO: I put dummy() to fix below, remove the comments aft=
-er a while.
->> >>  +        self.assertTrue( # FIX: I see this fails sometimes?
->> >>  +            tsm is not None,
->> >> -+            'Could not find "_MainThread". Found: %s' % (', '.join(=
-utils.get_stat_names(tstats))))
->> >> ++            f"Could not find \"_MainThread\". Found: {', '.join(uti=
-ls.get_stat_names(tstats))}")
->> >>  +
->> >>  +    def test_ctx_stats(self):
->> >>  +        from threading import Thread
->> >> @@ -3228,7 +3202,7 @@ Upstream-Status: Pending
->> >>  +        # TODO: I put dummy() to fix below, remove the comments aft=
-er a while.
->> >>  +        self.assertTrue( # FIX: I see this fails sometimes
->> >>  +            tsmain is not None,
->> >> -+            'Could not find "_MainThread". Found: %s' % (', '.join(=
-utils.get_stat_names(stats))))
->> >> ++            f"Could not find \"_MainThread\". Found: {', '.join(uti=
-ls.get_stat_names(stats))}")
->> >>  +        self.assertTrue(1.0 > tst2.ttot >=3D 0.5)
->> >>  +        self.assertTrue(1.0 > tst1.ttot >=3D 0.5)
->> >>  +
->> >> @@ -3285,7 +3259,7 @@ Upstream-Status: Pending
->> >>  +            ts =3D []
->> >>  +            for i in (0.01, 0.05, 0.1):
->> >>  +                t =3D threading.Thread(target=3Dburn_cpu, args=3D(i=
-, ))
->> >> -+                t.name =3D "burn_cpu-%s" % str(i)
->> >> ++                t.name =3D f"burn_cpu-{str(i)}"
->> >>  +                t.start()
->> >>  +                ts.append(t)
->> >>  +            for t in ts:
->> >> @@ -3312,10 +3286,7 @@ Upstream-Status: Pending
->> >>  +    def test_producer_consumer_with_queues(self):
->> >>  +        # we currently just stress yappi, no functionality test is =
-done here.
->> >>  +        yappi.start()
->> >> -+        if utils.is_py3x():
->> >> -+            from queue import Queue
->> >> -+        else:
->> >> -+            from Queue import Queue
->> >> ++        from queue import Queue
->> >>  +        from threading import Thread
->> >>  +        WORKER_THREAD_COUNT =3D 50
->> >>  +        WORK_ITEM_COUNT =3D 2000
->> >> @@ -3374,7 +3345,6 @@ Upstream-Status: Pending
->> >>  +        fsh =3D utils.find_stat_by_name(stats, "handler")
->> >>  +        self.assertTrue(fsh is not None)
->> >>  +
->> >> -+    @unittest.skipIf(not sys.version_info >=3D (3, 2), "requires Py=
-thon 3.2")
->> >>  +    def test_concurrent_futures(self):
->> >>  +        yappi.start()
->> >>  +        from concurrent.futures import ThreadPoolExecutor
->> >> @@ -3384,7 +3354,6 @@ Upstream-Status: Pending
->> >>  +        time.sleep(1.0)
->> >>  +        yappi.stop()
->> >>  +
->> >> -+    @unittest.skipIf(not sys.version_info >=3D (3, 2), "requires Py=
-thon 3.2")
->> >>  +    def test_barrier(self):
->> >>  +        yappi.start()
->> >>  +        b =3D threading.Barrier(2, timeout=3D1)
->> >> @@ -3871,25 +3840,6 @@ Upstream-Status: Pending
->> >>  +    #     import sys;sys.argv =3D ['', 'BasicUsage.test_run_as_scri=
-pt']
->> >>  +    #     import sys;sys.argv =3D ['', 'MultithreadedScenarios.test=
-_subsequent_profile']
->> >>  +    unittest.main()
->> >> ---- a/tests/test_hooks.py
->> >> -+++ b/tests/test_hooks.py
->> >> -@@ -5,7 +5,7 @@ import unittest
->> >> - import time
->> >> -
->> >> - import yappi
->> >> --import utils
->> >> -+import tests.utils as utils
->> >> -
->> >> -
->> >> - def a():
->> >> ---- a/tests/test_tags.py
->> >> -+++ b/tests/test_tags.py
->> >> -@@ -2,7 +2,7 @@ import unittest
->> >> - import yappi
->> >> - import threading
->> >> - import time
->> >> --from utils import YappiUnitTestCase, find_stat_by_name, burn_cpu, b=
-urn_io
->> >> -+from .utils import YappiUnitTestCase, find_stat_by_name, burn_cpu, =
-burn_io
->> >> -
->> >> -
->> >> - class MultiThreadTests(YappiUnitTestCase):
->> >> +--
->> >> +2.34.1
->> >> +
->> >> diff --git a/meta-python/recipes-devtools/python/python3-yappi/0002-F=
-ix-import-of-tests.utils-to-enable-pytest.patch b/meta-python/recipes-devto=
-ols/python/python3-yappi/0002-Fix-import-of-tests.utils-to-enable-pytest.pa=
-tch
->> >> new file mode 100644
->> >> index 0000000000..96dd024125
->> >> --- /dev/null
->> >> +++ b/meta-python/recipes-devtools/python/python3-yappi/0002-Fix-impo=
-rt-of-tests.utils-to-enable-pytest.patch
->> >> @@ -0,0 +1,101 @@
->> >> +From 28eac38566327091221aabbc164ea8e433c66e7e Mon Sep 17 00:00:00 20=
-01
->> >> +From: Tim Orling <tim.orling@konsulko.com>
->> >> +Date: Sun, 24 Dec 2023 09:27:50 -0800
->> >> +Subject: [PATCH 2/2] Fix import of tests.utils to enable pytest
->> >> +
->> >> +Running the test cases with pytest leads to importlib errors
->> >> +because the "utils" module cannot be found.
->> >> +
->> >> +Upstream-Status: Submitted [https://github.com/sumerc/yappi/pull/164=
-]
->> >> +
->> >> +Signed-off-by: Tim Orling <tim.orling@konsulko.com>
->> >> +---
->> >> + tests/test_asyncio.py              | 2 +-
->> >> + tests/test_asyncio_context_vars.py | 2 +-
->> >> + tests/test_functionality.py        | 2 +-
->> >> + tests/test_gevent.py               | 2 +-
->> >> + tests/test_hooks.py                | 2 +-
->> >> + tests/test_tags.py                 | 2 +-
->> >> + 6 files changed, 6 insertions(+), 6 deletions(-)
->> >> +
->> >> +diff --git a/tests/test_asyncio.py b/tests/test_asyncio.py
->> >> +index 8e9e631..bb36f4a 100644
->> >> +--- a/tests/test_asyncio.py
->> >> ++++ b/tests/test_asyncio.py
->> >> +@@ -2,7 +2,7 @@ import unittest
->> >> + import yappi
->> >> + import asyncio
->> >> + import threading
->> >> +-from utils import YappiUnitTestCase, find_stat_by_name, burn_cpu, b=
-urn_io
->> >> ++from tests.utils import YappiUnitTestCase, find_stat_by_name, burn_=
-cpu, burn_io
->> >> +
->> >> +
->> >> + async def async_sleep(sec):
->> >> +diff --git a/tests/test_asyncio_context_vars.py b/tests/test_asyncio=
-_context_vars.py
->> >> +index 5bd750c..9a253c0 100644
->> >> +--- a/tests/test_asyncio_context_vars.py
->> >> ++++ b/tests/test_asyncio_context_vars.py
->> >> +@@ -5,7 +5,7 @@ import contextvars
->> >> + import functools
->> >> + import time
->> >> + import os
->> >> +-import utils
->> >> ++import tests.utils as utils
->> >> + import yappi
->> >> +
->> >> + async_context_id =3D contextvars.ContextVar('async_context_id')
->> >> +diff --git a/tests/test_functionality.py b/tests/test_functionality.=
-py
->> >> +index 38bbe67..8098f17 100644
->> >> +--- a/tests/test_functionality.py
->> >> ++++ b/tests/test_functionality.py
->> >> +@@ -5,7 +5,7 @@ import threading
->> >> + import unittest
->> >> + import yappi
->> >> + import _yappi
->> >> +-import utils
->> >> ++import tests.utils as utils
->> >> + import multiprocessing
->> >> + import subprocess
->> >> +
->> >> +diff --git a/tests/test_gevent.py b/tests/test_gevent.py
->> >> +index ed9e6ae..502af5f 100644
->> >> +--- a/tests/test_gevent.py
->> >> ++++ b/tests/test_gevent.py
->> >> +@@ -2,7 +2,7 @@ import unittest
->> >> + import _yappi
->> >> + import yappi
->> >> + import threading
->> >> +-from utils import (
->> >> ++from tests.utils import (
->> >> +     YappiUnitTestCase, find_stat_by_name, burn_cpu, burn_io, burn_i=
-o_gevent
->> >> + )
->> >> +
->> >> +diff --git a/tests/test_hooks.py b/tests/test_hooks.py
->> >> +index 297c643..8c387fc 100644
->> >> +--- a/tests/test_hooks.py
->> >> ++++ b/tests/test_hooks.py
->> >> +@@ -5,7 +5,7 @@ import unittest
->> >> + import time
->> >> +
->> >> + import yappi
->> >> +-import utils
->> >> ++import tests.utils as utils
->> >> +
->> >> +
->> >> + def a():
->> >> +diff --git a/tests/test_tags.py b/tests/test_tags.py
->> >> +index b0b531d..b5a4016 100644
->> >> +--- a/tests/test_tags.py
->> >> ++++ b/tests/test_tags.py
->> >> +@@ -2,7 +2,7 @@ import unittest
->> >> + import yappi
->> >> + import threading
->> >> + import time
->> >> +-from utils import YappiUnitTestCase, find_stat_by_name, burn_cpu, b=
-urn_io
->> >> ++from tests.utils import YappiUnitTestCase, find_stat_by_name, burn_=
-cpu, burn_io
->> >> +
->> >> +
->> >> + class MultiThreadTests(YappiUnitTestCase):
->> >> +--
->> >> +2.34.1
->> >> +
->> >> diff --git a/meta-python/recipes-devtools/python/python3-yappi/0002-a=
-dd-3.11-to-the-setup.patch b/meta-python/recipes-devtools/python/python3-ya=
-ppi/0002-add-3.11-to-the-setup.patch
->> >> deleted file mode 100644
->> >> index d40bd2b7cc..0000000000
->> >> --- a/meta-python/recipes-devtools/python/python3-yappi/0002-add-3.11=
--to-the-setup.patch
->> >> +++ /dev/null
->> >> @@ -1,26 +0,0 @@
->> >> -From 38afdacf526410f970afc58e147c7377c6c7112c Mon Sep 17 00:00:00 20=
-01
->> >> -From: =3D?UTF-8?q?S=3DC3=3DBCmer=3D20Cip?=3D <sumer.cip@platform.sh>
->> >> -Date: Fri, 25 Nov 2022 15:58:03 +0300
->> >> -Subject: [PATCH 2/2] add 3.11 to the setup
->> >> -
->> >> ----
->> >> -Upstream-Status: Pending
->> >> -
->> >> - setup.py | 1 +
->> >> - 1 file changed, 1 insertion(+)
->> >> -
->> >> -diff --git a/setup.py b/setup.py
->> >> -index d006787..96e2a66 100644
->> >> ---- a/setup.py
->> >> -+++ b/setup.py
->> >> -@@ -56,6 +56,7 @@ CLASSIFIERS =3D [
->> >> -     'Programming Language :: Python :: 3.8',
->> >> -     'Programming Language :: Python :: 3.9',
->> >> -     'Programming Language :: Python :: 3.10',
->> >> -+    'Programming Language :: Python :: 3.11',
->> >> -     'Programming Language :: Python :: Implementation :: CPython',
->> >> -     'Operating System :: OS Independent',
->> >> -     'Topic :: Software Development :: Libraries',
->> >> ---
->> >> -2.30.2
->> >> -
->> >> diff --git a/meta-python/recipes-devtools/python/python3-yappi/run-pt=
-est b/meta-python/recipes-devtools/python/python3-yappi/run-ptest
->> >> index 3385d68939..8d2017d39c 100644
->> >> --- a/meta-python/recipes-devtools/python/python3-yappi/run-ptest
->> >> +++ b/meta-python/recipes-devtools/python/python3-yappi/run-ptest
->> >> @@ -1,3 +1,3 @@
->> >>  #!/bin/sh
->> >>
->> >> -pytest -o log_cli=3Dtrue -o log_cli_level=3DINFO | sed -e 's/\[...%\=
-]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPED/=
-SKIP/g'| awk '{if ($NF=3D=3D"PASS" || $NF=3D=3D"FAIL" || $NF=3D=3D"SKIP" ||=
- $NF=3D=3D"XFAIL" || $NF=3D=3D"XPASS"){printf "%s: %s\n", $NF, $0}else{prin=
-t}}'| awk '{if ($NF=3D=3D"PASS" || $NF=3D=3D"FAIL" || $NF=3D=3D"SKIP" || $N=
-F=3D=3D"XFAIL" || $NF=3D=3D"XPASS") {$NF=3D"";print $0}else{print}}'
->> >> +pytest --automake
->> >> diff --git a/meta-python/recipes-devtools/python/python3-yappi_1.4.0.=
-bb b/meta-python/recipes-devtools/python/python3-yappi_1.4.0.bb
->> >> deleted file mode 100644
->> >> index 71e74e86f2..0000000000
->> >> --- a/meta-python/recipes-devtools/python/python3-yappi_1.4.0.bb
->> >> +++ /dev/null
->> >> @@ -1,36 +0,0 @@
->> >> -SUMMARY  =3D "Yet Another Python Profiler"
->> >> -HOMEPAGE =3D "https://github.com/sumerc/yappi"
->> >> -
->> >> -LICENSE =3D "MIT"
->> >> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D71c208c9a4fd864385eb69ad4=
-caa3bee"
->> >> -
->> >> -SRC_URI[sha256sum] =3D "504b5d8fc7433736cb5e257991d2e7f2946019174f1f=
-aec7b2fe947881a17fc0"
->> >> -
->> >> -SRC_URI +=3D " \
->> >> -    file://run-ptest \
->> >> -    file://0001-Fix-imports-for-ptests.patch \
->> >> -    file://0002-add-3.11-to-the-setup.patch \
->> >> -"
->> >> -
->> >> -inherit pypi setuptools3 ptest
->> >> -
->> >> -RDEPENDS:${PN} +=3D "\
->> >> -    ${PYTHON_PN}-datetime \
->> >> -    ${PYTHON_PN}-pickle \
->> >> -    ${PYTHON_PN}-threading \
->> >> -"
->> >> -
->> >> -RDEPENDS:${PN}-ptest +=3D " \
->> >> -    ${PYTHON_PN}-gevent \
->> >> -    ${PYTHON_PN}-multiprocessing \
->> >> -    ${PYTHON_PN}-pytest \
->> >> -    ${PYTHON_PN}-profile \
->> >> -    ${PYTHON_PN}-zopeinterface \
->> >> -"
->> >> -
->> >> -do_install_ptest() {
->> >> -    install -d ${D}${PTEST_PATH}/tests
->> >> -    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
->> >> -    cp -f ${S}/yappi/yappi.py ${D}/${PTEST_PATH}/
->> >> -}
->> >> -
->> >> diff --git a/meta-python/recipes-devtools/python/python3-yappi_1.6.0.=
-bb b/meta-python/recipes-devtools/python/python3-yappi_1.6.0.bb
->> >> new file mode 100644
->> >> index 0000000000..4349cab1e7
->> >> --- /dev/null
->> >> +++ b/meta-python/recipes-devtools/python/python3-yappi_1.6.0.bb
->> >> @@ -0,0 +1,37 @@
->> >> +SUMMARY  =3D "Yet Another Python Profiler"
->> >> +HOMEPAGE =3D "https://github.com/sumerc/yappi"
->> >> +
->> >> +LICENSE =3D "MIT"
->> >> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D71c208c9a4fd864385eb69ad4=
-caa3bee"
->> >> +
->> >> +SRC_URI[sha256sum] =3D "a9aaf72009d8c03067294151ee0470ac7a6dfa7b33ba=
-ab40b198d6c1ef00430a"
->> >> +
->> >> +SRC_URI +=3D " \
->> >> +    file://run-ptest \
->> >> +    file://0001-test_functionality-convert-line-endings-to-Unix.patc=
-h \
->> >> +    file://0002-Fix-import-of-tests.utils-to-enable-pytest.patch \
->> >> +"
->> >> +
->> >> +inherit pypi python_setuptools_build_meta ptest
->> >> +
->> >> +RDEPENDS:${PN} +=3D "\
->> >> +    python3-datetime \
->> >> +    python3-pickle \
->> >> +    python3-threading \
->> >> +"
->> >> +
->> >> +RDEPENDS:${PN}-ptest +=3D " \
->> >> +    python3-gevent \
->> >> +    python3-multiprocessing \
->> >> +    python3-pytest \
->> >> +    python3-profile \
->> >> +    python3-unittest-automake-output \
->> >> +    python3-zopeinterface \
->> >> +"
->> >> +
->> >> +do_install_ptest() {
->> >> +    install -d ${D}${PTEST_PATH}/tests
->> >> +    cp -rf ${S}/tests ${D}${PTEST_PATH}
->> >> +    cp -f ${S}/run_tests.py ${D}${PTEST_PATH}
->> >> +}
->> >> +
->> >> --
->> >> 2.34.1
->> >>
->> >>
->> >> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->> >> Links: You receive all messages sent to this group.
->> >> View/Reply Online (#107782): https://lists.openembedded.org/g/openemb=
-edded-devel/message/107782
->> >> Mute This Topic: https://lists.openembedded.org/mt/103350816/924729
->> >> Group Owner: openembedded-devel+owner@lists.openembedded.org
->> >> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsu=
-b [ticotimo@gmail.com]
->> >> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->> >>
+ .../bonnie/bonnie++/fix-configure-lfs.patch   |  39 ++++
+ .../bonnie/bonnie++/fix-csv2html-data.patch   | 183 ++++++++++++++++++
+ .../bonnie/bonnie++_2.00a.bb                  |  33 ++++
+ 3 files changed, 255 insertions(+)
+ create mode 100644 meta-oe/recipes-benchmark/bonnie/bonnie++/fix-configure=
+-lfs.patch
+ create mode 100644 meta-oe/recipes-benchmark/bonnie/bonnie++/fix-csv2html-=
+data.patch
+ create mode 100644 meta-oe/recipes-benchmark/bonnie/bonnie++_2.00a.bb
+
+diff --git a/meta-oe/recipes-benchmark/bonnie/bonnie++/fix-configure-lfs.pa=
+tch b/meta-oe/recipes-benchmark/bonnie/bonnie++/fix-configure-lfs.patch
+new file mode 100644
+index 000000000..af20acdcd
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/bonnie/bonnie++/fix-configure-lfs.patch
+@@ -0,0 +1,39 @@
++Upstream-Status: Submitted [https://salsa.debian.org/etbe/bonnie/-/merge_r=
+equests/3/diffs?commit_id=3D4ffece51791ba75ddca2e664cdce726cc40c92d3]
++
++diff --git i/configure.in w/configure.in
++index 080e40c..f2a2bbe 100644
++--- i/configure.in
+++++ w/configure.in
++@@ -82,8 +82,15 @@ void * thread_func(void * param) { return NULL; }
++   , thread_ldflags=3D"-lpthread"
++   , thread_ldflags=3D"-pthread")
++=20
++-AC_SUBST(large_file)
++-AC_TRY_RUN([#ifndef _LARGEFILE64_SOURCE
+++AC_ARG_ENABLE(lfs,
+++      [  --disable-lfs  disable large file support],
+++      LFS_CHOICE=3D$enableval, LFS_CHOICE=3Dcheck)
+++
+++if test "$LFS_CHOICE" =3D yes; then
+++   bonniepp_cv_large_file=3Dyes
+++elif test "$LFS_CHOICE" =3D check; then
+++   AC_CACHE_CHECK([whether to enable -D_LARGEFILE64_SOURCE], bonniepp_cv_=
+large_file,
+++      AC_TRY_RUN([#ifndef _LARGEFILE64_SOURCE
++ #define _LARGEFILE64_SOURCE
++ #endif
++ #include <stdio.h>
++@@ -118,8 +125,12 @@ int main () {
++   }
++   close(fd);
++   return 0;
++-}], large_file=3D"yes")
++-if [[ -n "$large_file" ]]; then
+++}], bonniepp_cv_large_file=3D"yes"))
+++fi
+++
+++AC_SUBST(large_file)
+++
+++if [[ -n "$bonniepp_cv_large_file" ]]; then
++    large_file=3D"#define _LARGEFILE64_SOURCE"
++ fi
++=20
+diff --git a/meta-oe/recipes-benchmark/bonnie/bonnie++/fix-csv2html-data.pa=
+tch b/meta-oe/recipes-benchmark/bonnie/bonnie++/fix-csv2html-data.patch
+new file mode 100644
+index 000000000..4b37b8d65
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/bonnie/bonnie++/fix-csv2html-data.patch
+@@ -0,0 +1,183 @@
++commit 7e9433a56f22426b11cbc9bd80e0debca67c893b
++Author: J=C3=B6rg Sommer <joerg.sommer@navimatix.de>
++Date:   Mon Jun 26 12:38:30 2023 +0200
++
++    csv2html: Explicitly reference data in top level
++   =20
++    With g++ 11 *data* became ambiguous with [std::data][1]. Therefore it'=
+s
++    needed to explicitly address the variable from the top level scope.
++   =20
++    [1]=C2=A0https://en.cppreference.com/w/cpp/iterator/data
++
++Upstream-Status: Submitted [https://salsa.debian.org/etbe/bonnie/-/merge_r=
+equests/3/diffs?commit_id=3Dfb13a71d56dab8aaa39233fcaaedfb0ba4ad647d]
++
++diff --git a/bon_csv2html.cpp b/bon_csv2html.cpp
++index e9d9c50..652e330 100644
++--- a/bon_csv2html.cpp
+++++ b/bon_csv2html.cpp
++@@ -87,8 +87,8 @@ int main(int argc, char **argv)
++     read_in(buf);
++   }
++=20
++-  props =3D new PPCCHAR[data.size()];
++-  for(i =3D 0; i < data.size(); i++)
+++  props =3D new PPCCHAR[::data.size()];
+++  for(i =3D 0; i < ::data.size(); i++)
++   {
++     props[i] =3D new PCCHAR[MAX_ITEMS];
++     props[i][0] =3D NULL;
++@@ -109,7 +109,7 @@ int main(int argc, char **argv)
++   }
++   calc_vals();
++   int mid_width =3D header();
++-  for(i =3D 0; i < data.size(); i++)
+++  for(i =3D 0; i < ::data.size(); i++)
++   {
++ // First print the average speed line
++     printf("<tr>");
++@@ -171,23 +171,23 @@ int compar(const void *a, const void *b)
++=20
++ void calc_vals()
++ {
++-  ITEM *arr =3D new ITEM[data.size()];
+++  ITEM *arr =3D new ITEM[::data.size()];
++   for(unsigned int column_ind =3D 0; column_ind < MAX_ITEMS; column_ind++=
+)
++   {
++     switch(vals[column_ind])
++     {
++     case eNoCols:
++     {
++-      for(unsigned int row_ind =3D 0; row_ind < data.size(); row_ind++)
+++      for(unsigned int row_ind =3D 0; row_ind < ::data.size(); row_ind++)
++       {
++         if(column_ind =3D=3D COL_CONCURRENCY)
++         {
++-          if(data[row_ind][column_ind] && strcmp("1", data[row_ind][colum=
+n_ind]))
+++          if(::data[row_ind][column_ind] && strcmp("1", ::data[row_ind][c=
+olumn_ind]))
++             col_used[column_ind] =3D true;
++         }
++         else
++         {
++-          if(data[row_ind][column_ind] && strlen(data[row_ind][column_ind=
+]))
+++          if(::data[row_ind][column_ind] && strlen(::data[row_ind][column=
+_ind]))
++             col_used[column_ind] =3D true;
++         }
++       }
++@@ -195,22 +195,22 @@ void calc_vals()
++     break;
++     case eCPU:
++     {
++-      for(unsigned int row_ind =3D 0; row_ind < data.size(); row_ind++)
+++      for(unsigned int row_ind =3D 0; row_ind < ::data.size(); row_ind++)
++       {
++         double work, cpu;
++         arr[row_ind].val =3D 0.0;
++-        if(data[row_ind].size() > column_ind
++-         && sscanf(data[row_ind][column_ind - 1], "%lf", &work) =3D=3D 1
++-         && sscanf(data[row_ind][column_ind], "%lf", &cpu) =3D=3D 1)
+++        if(::data[row_ind].size() > column_ind
+++         && sscanf(::data[row_ind][column_ind - 1], "%lf", &work) =3D=3D =
+1
+++         && sscanf(::data[row_ind][column_ind], "%lf", &cpu) =3D=3D 1)
++         {
++           arr[row_ind].val =3D cpu / work;
++         }
++         arr[row_ind].pos =3D row_ind;
++       }
++-      qsort(arr, data.size(), sizeof(ITEM), compar);
+++      qsort(arr, ::data.size(), sizeof(ITEM), compar);
++       int col_count =3D -1;
++       double min_col =3D -1.0, max_col =3D -1.0;
++-      for(unsigned int sort_ind =3D 0; sort_ind < data.size(); sort_ind++=
+)
+++      for(unsigned int sort_ind =3D 0; sort_ind < ::data.size(); sort_ind=
+++)
++       {
++         // if item is different from previous or if the first row
++         // (sort_ind =3D=3D 0) then increment col count
++@@ -239,7 +239,7 @@ void calc_vals()
++           min_col /=3D mult;
++         }
++         double range_col =3D max_col - min_col;
++-        for(unsigned int sort_ind =3D 0; sort_ind < data.size(); sort_ind=
+++)
+++        for(unsigned int sort_ind =3D 0; sort_ind < ::data.size(); sort_i=
+nd++)
++         {
++           if(arr[sort_ind].col_ind > -1)
++           {
++@@ -250,7 +250,7 @@ void calc_vals()
++       }
++       else
++       {
++-        for(unsigned int sort_ind =3D 0; sort_ind < data.size(); sort_ind=
+++)
+++        for(unsigned int sort_ind =3D 0; sort_ind < ::data.size(); sort_i=
+nd++)
++         {
++           if(vals[column_ind] =3D=3D eLatency)
++           {
++@@ -263,25 +263,25 @@ void calc_vals()
++     case eSpeed:
++     case eLatency:
++     {
++-      for(unsigned int row_ind =3D 0; row_ind < data.size(); row_ind++)
+++      for(unsigned int row_ind =3D 0; row_ind < ::data.size(); row_ind++)
++       {
++         arr[row_ind].val =3D 0.0;
++-        if(data[row_ind].size() <=3D column_ind
++-         || sscanf(data[row_ind][column_ind], "%lf", &arr[row_ind].val) =
+=3D=3D 0)
+++        if(::data[row_ind].size() <=3D column_ind
+++         || sscanf(::data[row_ind][column_ind], "%lf", &arr[row_ind].val)=
+ =3D=3D 0)
++           arr[row_ind].val =3D 0.0;
++         if(vals[column_ind] =3D=3D eLatency && arr[row_ind].val !=3D 0.0)
++         {
++-          if(strstr(data[row_ind][column_ind], "ms"))
+++          if(strstr(::data[row_ind][column_ind], "ms"))
++             arr[row_ind].val *=3D 1000.0;
++-          else if(!strstr(data[row_ind][column_ind], "us"))
+++          else if(!strstr(::data[row_ind][column_ind], "us"))
++             arr[row_ind].val *=3D 1000000.0; // is !us && !ms then secs!
++         }
++         arr[row_ind].pos =3D row_ind;
++       }
++-      qsort(arr, data.size(), sizeof(ITEM), compar);
+++      qsort(arr, ::data.size(), sizeof(ITEM), compar);
++       int col_count =3D -1;
++       double min_col =3D -1.0, max_col =3D -1.0;
++-      for(unsigned int sort_ind =3D 0; sort_ind < data.size(); sort_ind++=
+)
+++      for(unsigned int sort_ind =3D 0; sort_ind < ::data.size(); sort_ind=
+++)
++       {
++         // if item is different from previous or if the first row
++         // (sort_ind =3D=3D 0) then increment col count
++@@ -310,7 +310,7 @@ void calc_vals()
++           min_col /=3D mult;
++         }
++         double range_col =3D max_col - min_col;
++-        for(unsigned int sort_ind =3D 0; sort_ind < data.size(); sort_ind=
+++)
+++        for(unsigned int sort_ind =3D 0; sort_ind < ::data.size(); sort_i=
+nd++)
++         {
++           if(arr[sort_ind].col_ind > -1)
++           {
++@@ -332,7 +332,7 @@ void calc_vals()
++       }
++       else
++       {
++-        for(unsigned int sort_ind =3D 0; sort_ind < data.size(); sort_ind=
+++)
+++        for(unsigned int sort_ind =3D 0; sort_ind < ::data.size(); sort_i=
+nd++)
++         {
++           if(vals[column_ind] =3D=3D eLatency)
++           {
++@@ -481,16 +481,16 @@ void read_in(CPCCHAR buf)
++     free((void *)arr[0]);
++     return;
++   }
++-  data.push_back(arr);
+++  ::data.push_back(arr);
++ }
++=20
++ void print_item(int num, int item, CPCCHAR extra)
++ {
++   PCCHAR line_data;
++   char buf[1024];
++-  if(int(data[num].size()) > item)
+++  if(int(::data[num].size()) > item)
++   {
++-    line_data =3D data[num][item];
+++    line_data =3D ::data[num][item];
++     switch(item)
++     {
++     case COL_PUT_BLOCK:
+diff --git a/meta-oe/recipes-benchmark/bonnie/bonnie++_2.00a.bb b/meta-oe/r=
+ecipes-benchmark/bonnie/bonnie++_2.00a.bb
+new file mode 100644
+index 000000000..f31fd09fc
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/bonnie/bonnie++_2.00a.bb
+@@ -0,0 +1,33 @@
++SUMMARY =3D "Tests large file IO and creation/deletion of small files"
++HOMEPAGE =3D "https://doc.coker.com.au/projects/bonnie/"
++SECTION =3D "benchmark/tests"
++LICENSE =3D "GPL-2.0-only"
++LIC_FILES_CHKSUM =3D "file://copyright.txt;md5=3Dcd4dde95a6b9d122f0a9150ae=
+9cc3ee0"
++
++SRC_URI =3D "http://www.coker.com.au/bonnie++/${BPN}-${PV}.tgz \
++    file://fix-configure-lfs.patch \
++    file://fix-csv2html-data.patch \
++"
++SRC_URI[md5sum] =3D "3a16b3a91b1d38b6f5561e197f81d870"
++SRC_URI[sha256sum] =3D "a8d33bbd81bc7eb559ce5bf6e584b9b53faea39ccfb4ae92e5=
+8f27257e468f0e"
++
++SCRIPTS =3D "bon_csv2html bon_csv2txt"
++EXES =3D "bonnie++ zcav"
++
++TARGET_CC_ARCH +=3D "${LDFLAGS}"
++# force lfs to skip configure's check, because we are cross-building
++EXTRA_OECONF:append=3D"--enable-lfs"
++
++do_install () {
++    install -d ${D}/${bindir}
++    install -d ${D}/${sbindir}
++    install -m 0755 ${EXES} ${D}/${sbindir}
++    install -m 0755 ${SCRIPTS} ${D}/${bindir}
++}
++
++PACKAGES =3D+ "bonnie-scripts"
++
++FILES:${PN} =3D "${sbindir}"
++FILES:bonnie-scripts =3D "${bindir}"
++
++RDEPENDS:bonnie-scripts +=3D "perl"
+--=20
+2.34.1
+
 
