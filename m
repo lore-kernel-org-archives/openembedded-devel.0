@@ -2,404 +2,376 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 199F3C47073
-	for <webhook@archiver.kernel.org>; Fri, 29 Dec 2023 16:58:49 +0000 (UTC)
-Received: from mail-oa1-f53.google.com (mail-oa1-f53.google.com [209.85.160.53])
- by mx.groups.io with SMTP id smtpd.web11.152718.1703869125324968510
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2105DC47073
+	for <webhook@archiver.kernel.org>; Fri, 29 Dec 2023 17:04:19 +0000 (UTC)
+Received: from mail-oi1-f181.google.com (mail-oi1-f181.google.com [209.85.167.181])
+ by mx.groups.io with SMTP id smtpd.web10.153373.1703869456639566662
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 29 Dec 2023 08:58:45 -0800
+ Fri, 29 Dec 2023 09:04:16 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=WO9Jw2vY;
- spf=pass (domain: gmail.com, ip: 209.85.160.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f53.google.com with SMTP id 586e51a60fabf-203fbbff863so3015492fac.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 29 Dec 2023 08:58:45 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=gbeljHq7;
+ spf=pass (domain: gmail.com, ip: 209.85.167.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f181.google.com with SMTP id 5614622812f47-3bbb4806f67so2955274b6e.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 29 Dec 2023 09:04:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1703869124; x=1704473924; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1703869456; x=1704474256; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Ir4bmJWfu4DgurtZI86ncGU/UVRv//oT8zLz70kFosk=;
-        b=WO9Jw2vYq/Ihu5UjZqccGJIwgXRU4EUKc2yzkirSYk1xFdTrAJorD6ChDEiz4mmWCU
-         j41zJt6h3eg9KOF3kNmO/GbAfgfPm7ygSOj7cr7AF4TwG0SDvIdzd0a5KM122nYcaEXy
-         V4sP+sBcdYC6DMLNYBbjKfNSUA/8qgG0g/ml08pgxdhnWlP+K1vqz4hvvxSpeZbbUtjQ
-         jLqi0e0YBf+NoOzsNIX2aSpUudl3kLXd5o1CcmhVORUt824B8WlDIzp9gGauK/ZLxFd1
-         wQoNIwMl2lgVrYHhTVL8NCSg7vBg4PYVIQyS8ZLl/ZEaCSaWFsnouAJaLCAGZV2ib+kN
-         5+EA==
+        bh=EaC+yB2ZXcIH6eUWTLfRz0G4aV9YmtAC9Ze2EQ9pdfU=;
+        b=gbeljHq7SAPK1o5nY/S2nj3Dx/ZHwUvueUZtnfxe3W8pUgFPxfMJdjmT56nwRlnuup
+         x/pwkbJgAvHUPz1Mw4pw5DOl2fgFEX7BtIgLM8vvofZPvcvmrFL7rbaAICNOA/Z9PvQC
+         VEw+Lj532n96YTxkCE4WLDVu/xvAqdupM0fnnz5eJaOp3jPkOZN06LG2kmzOCNP+ojPQ
+         7B4awUcyYsdGVb+ExOzJsBxvHRzh1n/2Rw+sqjZjeEsI3i/F3jTvjTfJ3PUERARm3QYt
+         2/pAjxKk5YeELjGDScfqFwVgek+1a4lW4bMeegRU5jpvFUm7IcLjsUlURLGmwdDqh6Ri
+         JBoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703869124; x=1704473924;
+        d=1e100.net; s=20230601; t=1703869456; x=1704474256;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Ir4bmJWfu4DgurtZI86ncGU/UVRv//oT8zLz70kFosk=;
-        b=YR77fPTR9n4qGdqfKqQfAjDojrxnTINXzA420aisGMvWbIhxbD7NWgVQ/lvkOk4ZZj
-         r3kWBjSqwNgZNHqGn7YLnT8d9ADOlaBpcfTAapgfLqR1ReVmG5WmtkyMMzdCFXxG2zwn
-         8RNU0SJXc+hhwXjAOTmGKVFG/a5LC68SYbYtqOvMOk/mUP0UFTYx/WnIR8zcU6fvYxqC
-         7aMogeqcqj1XROaJADZvF8g77Lwhxzs700iggrW4hHQh9+EC4sW+mDJeBORUDM4dw6/W
-         keBWKWV/hj2dxIosk8SZjB5Cua4Ry0He+2I/MTZSnayl+MXOf0Xe/9l7IWgszHsjS8PF
-         0P1Q==
-X-Gm-Message-State: AOJu0YwTMNM4AGg06EVSeLWs+cvxmjQD/Uv2oenHQ3GP8BgrWP2dNTtZ
-	CFcX39OUBqhBI5GVnBh39ubuNW9m9q/AJDBgKP4ggRUADxk=
-X-Google-Smtp-Source: AGHT+IFq7sfL/d1BEuv3p/9Hqk9bkgPIy7ZsdYDZjDLmp6aKK4F4TydBtPq3PtW7qLA0NgBstLiPOJVp8cYB6ZPFoHE=
-X-Received: by 2002:a05:6871:8a97:b0:203:824f:a343 with SMTP id
- tm23-20020a0568718a9700b00203824fa343mr4056140oab.0.1703869124073; Fri, 29
- Dec 2023 08:58:44 -0800 (PST)
+        bh=EaC+yB2ZXcIH6eUWTLfRz0G4aV9YmtAC9Ze2EQ9pdfU=;
+        b=UQyiOOSdqWsT9/d4WctvNZKE2owcDiRw4kDNcnzJ5BWE6d7Q6JgbdYdXvSBtE7F+b4
+         px/oyOn1ddPrh77Q14AgWGGwNlon4QRDOtVbOlWBPKPK/w8icC/yFmb8xH1IMFte+lLd
+         Etg++UOOyDFjAkELeeeoEQZqQc46sejDr8b3Mgha599VMy5kFxxj/jp8OCpgtlwKk5cA
+         TEn+aQD8KcObPNmvo0PF4D+XiBE3HLv50MKLjETdltuvaYMgHTKKgnXfhRTNcYZhFCrh
+         T55qzP736nw+vETLyDjPjhyeEjaS2srxDUU6F3+KZ0ZiyTKGIIJ06689x42d4S2rmicP
+         vsbw==
+X-Gm-Message-State: AOJu0YwKr7qXY9Qe6DZDcfiQfdjX0FiGFAuu2cWVkGK80VGAudqzXVY5
+	6fEDOd/+hkBlZzNeuJNbYj7MF6tXJ7vdFRghvOdORMNSlMc=
+X-Google-Smtp-Source: AGHT+IHlyws53HFplmQlGSGwGMRdRAoZ/L9qoXeO7UmbwsJxTcdR0whSrqnkXf3MKf2eX2zs0WnZDZMafijMrfrYwgg=
+X-Received: by 2002:a05:6871:60e:b0:203:b5ec:ef08 with SMTP id
+ w14-20020a056871060e00b00203b5ecef08mr13951746oan.107.1703869455691; Fri, 29
+ Dec 2023 09:04:15 -0800 (PST)
 MIME-Version: 1.0
-References: <c9925e3b7513843852cef0314fb2a16c962f7d3c.1703845151.git.joerg.sommer@navimatix.de>
-In-Reply-To: <c9925e3b7513843852cef0314fb2a16c962f7d3c.1703845151.git.joerg.sommer@navimatix.de>
+References: <20231224135056.3617584-1-yi.zhao@windriver.com>
+In-Reply-To: <20231224135056.3617584-1-yi.zhao@windriver.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 29 Dec 2023 08:58:17 -0800
-Message-ID: <CAMKF1sr2K7_SNWF9YJ+D-OT7yn_XtLdJ2V2A6M6spoAKWSiRsw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH v2] bonnie++: New recipe for version 2.0
-To: joerg.sommer@navimatix.de
+Date: Fri, 29 Dec 2023 09:03:49 -0800
+Message-ID: <CAMKF1sp57aXRd8TG5=8J2+JR1YE63=gLGeB2xJHjHWMfO58rsQ@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH] vsomeip: upgrade 3.3.8 -> 3.4.10
+To: Yi Zhao <yi.zhao@eng.windriver.com>
 Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 29 Dec 2023 16:58:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107878
+ <openembedded-devel@lists.openembedded.org>; Fri, 29 Dec 2023 17:04:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107879
 
-Here are some build issues seen while building for x86
+This fails to build when distro is using lld linker from llvm project.
 
-https://errors.yoctoproject.org/Errors/Details/748405/
+https://errors.yoctoproject.org/Errors/Details/748404/
 
-On Fri, Dec 29, 2023 at 2:19=E2=80=AFAM J=C3=B6rg Sommer via lists.openembe=
-dded.org
-<joerg.sommer=3Dnavimatix.de@lists.openembedded.org> wrote:
+The error it finds are valid, perhaps its using some sort of version
+definitions in linker script which
+is being detected.
+
+On Sun, Dec 24, 2023 at 5:51=E2=80=AFAM Yi Zhao <yi.zhao@eng.windriver.com>=
+ wrote:
 >
-> From: J=C3=B6rg Sommer <joerg.sommer@navimatix.de>
+> ChangeLog:
+> https://github.com/COVESA/vsomeip/releases/tag/3.4.10
 >
-> Newer versions of bonnie get published on
-> <https://doc.coker.com.au/projects/bonnie/>. Unfortunately, the new versi=
-on
-> doesn't compile with g++ 11 which requires *fix-csv2html-data.patch* and
-> configure fails due to cross compilation which gets fixed
-> with *fix-configure-lfs.patch*
+> * Refresh patches
 >
-> Signed-off-by: J=C3=B6rg Sommer <joerg.sommer@navimatix.de>
+> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 > ---
->  .../bonnie/bonnie++/fix-configure-lfs.patch   |  39 ++++
->  .../bonnie/bonnie++/fix-csv2html-data.patch   | 183 ++++++++++++++++++
->  .../bonnie/bonnie++_2.00a.bb                  |  26 +++
->  3 files changed, 248 insertions(+)
->  create mode 100644 meta-oe/recipes-benchmark/bonnie/bonnie++/fix-configu=
-re-lfs.patch
->  create mode 100644 meta-oe/recipes-benchmark/bonnie/bonnie++/fix-csv2htm=
-l-data.patch
->  create mode 100644 meta-oe/recipes-benchmark/bonnie/bonnie++_2.00a.bb
+>  .../0001-Fix-pkgconfig-dir-for-multilib.patch |  6 +-
+>  ...e-configuration-files-to-etc-vsomeip.patch |  6 +-
+>  .../0003-Do-not-build-external-gtest.patch    | 59 ++++++++++++++-----
+>  ...4-Do-not-specify-PIE-flag-explicitly.patch |  8 +--
+>  .../{vsomeip_3.3.8.bb =3D> vsomeip_3.4.10.bb}   |  4 +-
+>  5 files changed, 56 insertions(+), 27 deletions(-)
+>  rename meta-networking/recipes-protocols/vsomeip/{vsomeip_3.3.8.bb =3D> =
+vsomeip_3.4.10.bb} (93%)
 >
-> diff --git a/meta-oe/recipes-benchmark/bonnie/bonnie++/fix-configure-lfs.=
-patch b/meta-oe/recipes-benchmark/bonnie/bonnie++/fix-configure-lfs.patch
-> new file mode 100644
-> index 000000000..af20acdcd
-> --- /dev/null
-> +++ b/meta-oe/recipes-benchmark/bonnie/bonnie++/fix-configure-lfs.patch
-> @@ -0,0 +1,39 @@
-> +Upstream-Status: Submitted [https://salsa.debian.org/etbe/bonnie/-/merge=
-_requests/3/diffs?commit_id=3D4ffece51791ba75ddca2e664cdce726cc40c92d3]
-> +
-> +diff --git i/configure.in w/configure.in
-> +index 080e40c..f2a2bbe 100644
-> +--- i/configure.in
-> ++++ w/configure.in
-> +@@ -82,8 +82,15 @@ void * thread_func(void * param) { return NULL; }
-> +   , thread_ldflags=3D"-lpthread"
-> +   , thread_ldflags=3D"-pthread")
-> +
-> +-AC_SUBST(large_file)
-> +-AC_TRY_RUN([#ifndef _LARGEFILE64_SOURCE
-> ++AC_ARG_ENABLE(lfs,
-> ++      [  --disable-lfs  disable large file support],
-> ++      LFS_CHOICE=3D$enableval, LFS_CHOICE=3Dcheck)
-> ++
-> ++if test "$LFS_CHOICE" =3D yes; then
-> ++   bonniepp_cv_large_file=3Dyes
-> ++elif test "$LFS_CHOICE" =3D check; then
-> ++   AC_CACHE_CHECK([whether to enable -D_LARGEFILE64_SOURCE], bonniepp_c=
-v_large_file,
-> ++      AC_TRY_RUN([#ifndef _LARGEFILE64_SOURCE
-> + #define _LARGEFILE64_SOURCE
-> + #endif
-> + #include <stdio.h>
-> +@@ -118,8 +125,12 @@ int main () {
-> +   }
-> +   close(fd);
-> +   return 0;
-> +-}], large_file=3D"yes")
-> +-if [[ -n "$large_file" ]]; then
-> ++}], bonniepp_cv_large_file=3D"yes"))
-> ++fi
-> ++
-> ++AC_SUBST(large_file)
-> ++
-> ++if [[ -n "$bonniepp_cv_large_file" ]]; then
-> +    large_file=3D"#define _LARGEFILE64_SOURCE"
-> + fi
-> +
-> diff --git a/meta-oe/recipes-benchmark/bonnie/bonnie++/fix-csv2html-data.=
-patch b/meta-oe/recipes-benchmark/bonnie/bonnie++/fix-csv2html-data.patch
-> new file mode 100644
-> index 000000000..4b37b8d65
-> --- /dev/null
-> +++ b/meta-oe/recipes-benchmark/bonnie/bonnie++/fix-csv2html-data.patch
-> @@ -0,0 +1,183 @@
-> +commit 7e9433a56f22426b11cbc9bd80e0debca67c893b
-> +Author: J=C3=B6rg Sommer <joerg.sommer@navimatix.de>
-> +Date:   Mon Jun 26 12:38:30 2023 +0200
-> +
-> +    csv2html: Explicitly reference data in top level
-> +
-> +    With g++ 11 *data* became ambiguous with [std::data][1]. Therefore i=
-t's
-> +    needed to explicitly address the variable from the top level scope.
-> +
-> +    [1] https://en.cppreference.com/w/cpp/iterator/data
-> +
-> +Upstream-Status: Submitted [https://salsa.debian.org/etbe/bonnie/-/merge=
-_requests/3/diffs?commit_id=3Dfb13a71d56dab8aaa39233fcaaedfb0ba4ad647d]
-> +
-> +diff --git a/bon_csv2html.cpp b/bon_csv2html.cpp
-> +index e9d9c50..652e330 100644
-> +--- a/bon_csv2html.cpp
-> ++++ b/bon_csv2html.cpp
-> +@@ -87,8 +87,8 @@ int main(int argc, char **argv)
-> +     read_in(buf);
-> +   }
-> +
-> +-  props =3D new PPCCHAR[data.size()];
-> +-  for(i =3D 0; i < data.size(); i++)
-> ++  props =3D new PPCCHAR[::data.size()];
-> ++  for(i =3D 0; i < ::data.size(); i++)
-> +   {
-> +     props[i] =3D new PCCHAR[MAX_ITEMS];
-> +     props[i][0] =3D NULL;
-> +@@ -109,7 +109,7 @@ int main(int argc, char **argv)
-> +   }
-> +   calc_vals();
-> +   int mid_width =3D header();
-> +-  for(i =3D 0; i < data.size(); i++)
-> ++  for(i =3D 0; i < ::data.size(); i++)
-> +   {
-> + // First print the average speed line
-> +     printf("<tr>");
-> +@@ -171,23 +171,23 @@ int compar(const void *a, const void *b)
-> +
-> + void calc_vals()
-> + {
-> +-  ITEM *arr =3D new ITEM[data.size()];
-> ++  ITEM *arr =3D new ITEM[::data.size()];
-> +   for(unsigned int column_ind =3D 0; column_ind < MAX_ITEMS; column_ind=
-++)
-> +   {
-> +     switch(vals[column_ind])
-> +     {
-> +     case eNoCols:
-> +     {
-> +-      for(unsigned int row_ind =3D 0; row_ind < data.size(); row_ind++)
-> ++      for(unsigned int row_ind =3D 0; row_ind < ::data.size(); row_ind+=
-+)
-> +       {
-> +         if(column_ind =3D=3D COL_CONCURRENCY)
-> +         {
-> +-          if(data[row_ind][column_ind] && strcmp("1", data[row_ind][col=
-umn_ind]))
-> ++          if(::data[row_ind][column_ind] && strcmp("1", ::data[row_ind]=
-[column_ind]))
-> +             col_used[column_ind] =3D true;
-> +         }
-> +         else
-> +         {
-> +-          if(data[row_ind][column_ind] && strlen(data[row_ind][column_i=
-nd]))
-> ++          if(::data[row_ind][column_ind] && strlen(::data[row_ind][colu=
-mn_ind]))
-> +             col_used[column_ind] =3D true;
-> +         }
-> +       }
-> +@@ -195,22 +195,22 @@ void calc_vals()
-> +     break;
-> +     case eCPU:
-> +     {
-> +-      for(unsigned int row_ind =3D 0; row_ind < data.size(); row_ind++)
-> ++      for(unsigned int row_ind =3D 0; row_ind < ::data.size(); row_ind+=
-+)
-> +       {
-> +         double work, cpu;
-> +         arr[row_ind].val =3D 0.0;
-> +-        if(data[row_ind].size() > column_ind
-> +-         && sscanf(data[row_ind][column_ind - 1], "%lf", &work) =3D=3D =
-1
-> +-         && sscanf(data[row_ind][column_ind], "%lf", &cpu) =3D=3D 1)
-> ++        if(::data[row_ind].size() > column_ind
-> ++         && sscanf(::data[row_ind][column_ind - 1], "%lf", &work) =3D=
-=3D 1
-> ++         && sscanf(::data[row_ind][column_ind], "%lf", &cpu) =3D=3D 1)
-> +         {
-> +           arr[row_ind].val =3D cpu / work;
-> +         }
-> +         arr[row_ind].pos =3D row_ind;
-> +       }
-> +-      qsort(arr, data.size(), sizeof(ITEM), compar);
-> ++      qsort(arr, ::data.size(), sizeof(ITEM), compar);
-> +       int col_count =3D -1;
-> +       double min_col =3D -1.0, max_col =3D -1.0;
-> +-      for(unsigned int sort_ind =3D 0; sort_ind < data.size(); sort_ind=
-++)
-> ++      for(unsigned int sort_ind =3D 0; sort_ind < ::data.size(); sort_i=
-nd++)
-> +       {
-> +         // if item is different from previous or if the first row
-> +         // (sort_ind =3D=3D 0) then increment col count
-> +@@ -239,7 +239,7 @@ void calc_vals()
-> +           min_col /=3D mult;
-> +         }
-> +         double range_col =3D max_col - min_col;
-> +-        for(unsigned int sort_ind =3D 0; sort_ind < data.size(); sort_i=
-nd++)
-> ++        for(unsigned int sort_ind =3D 0; sort_ind < ::data.size(); sort=
-_ind++)
-> +         {
-> +           if(arr[sort_ind].col_ind > -1)
-> +           {
-> +@@ -250,7 +250,7 @@ void calc_vals()
-> +       }
-> +       else
-> +       {
-> +-        for(unsigned int sort_ind =3D 0; sort_ind < data.size(); sort_i=
-nd++)
-> ++        for(unsigned int sort_ind =3D 0; sort_ind < ::data.size(); sort=
-_ind++)
-> +         {
-> +           if(vals[column_ind] =3D=3D eLatency)
-> +           {
-> +@@ -263,25 +263,25 @@ void calc_vals()
-> +     case eSpeed:
-> +     case eLatency:
-> +     {
-> +-      for(unsigned int row_ind =3D 0; row_ind < data.size(); row_ind++)
-> ++      for(unsigned int row_ind =3D 0; row_ind < ::data.size(); row_ind+=
-+)
-> +       {
-> +         arr[row_ind].val =3D 0.0;
-> +-        if(data[row_ind].size() <=3D column_ind
-> +-         || sscanf(data[row_ind][column_ind], "%lf", &arr[row_ind].val)=
- =3D=3D 0)
-> ++        if(::data[row_ind].size() <=3D column_ind
-> ++         || sscanf(::data[row_ind][column_ind], "%lf", &arr[row_ind].va=
-l) =3D=3D 0)
-> +           arr[row_ind].val =3D 0.0;
-> +         if(vals[column_ind] =3D=3D eLatency && arr[row_ind].val !=3D 0.=
-0)
-> +         {
-> +-          if(strstr(data[row_ind][column_ind], "ms"))
-> ++          if(strstr(::data[row_ind][column_ind], "ms"))
-> +             arr[row_ind].val *=3D 1000.0;
-> +-          else if(!strstr(data[row_ind][column_ind], "us"))
-> ++          else if(!strstr(::data[row_ind][column_ind], "us"))
-> +             arr[row_ind].val *=3D 1000000.0; // is !us && !ms then secs=
-!
-> +         }
-> +         arr[row_ind].pos =3D row_ind;
-> +       }
-> +-      qsort(arr, data.size(), sizeof(ITEM), compar);
-> ++      qsort(arr, ::data.size(), sizeof(ITEM), compar);
-> +       int col_count =3D -1;
-> +       double min_col =3D -1.0, max_col =3D -1.0;
-> +-      for(unsigned int sort_ind =3D 0; sort_ind < data.size(); sort_ind=
-++)
-> ++      for(unsigned int sort_ind =3D 0; sort_ind < ::data.size(); sort_i=
-nd++)
-> +       {
-> +         // if item is different from previous or if the first row
-> +         // (sort_ind =3D=3D 0) then increment col count
-> +@@ -310,7 +310,7 @@ void calc_vals()
-> +           min_col /=3D mult;
-> +         }
-> +         double range_col =3D max_col - min_col;
-> +-        for(unsigned int sort_ind =3D 0; sort_ind < data.size(); sort_i=
-nd++)
-> ++        for(unsigned int sort_ind =3D 0; sort_ind < ::data.size(); sort=
-_ind++)
-> +         {
-> +           if(arr[sort_ind].col_ind > -1)
-> +           {
-> +@@ -332,7 +332,7 @@ void calc_vals()
-> +       }
-> +       else
-> +       {
-> +-        for(unsigned int sort_ind =3D 0; sort_ind < data.size(); sort_i=
-nd++)
-> ++        for(unsigned int sort_ind =3D 0; sort_ind < ::data.size(); sort=
-_ind++)
-> +         {
-> +           if(vals[column_ind] =3D=3D eLatency)
-> +           {
-> +@@ -481,16 +481,16 @@ void read_in(CPCCHAR buf)
-> +     free((void *)arr[0]);
-> +     return;
-> +   }
-> +-  data.push_back(arr);
-> ++  ::data.push_back(arr);
-> + }
-> +
-> + void print_item(int num, int item, CPCCHAR extra)
-> + {
-> +   PCCHAR line_data;
-> +   char buf[1024];
-> +-  if(int(data[num].size()) > item)
-> ++  if(int(::data[num].size()) > item)
-> +   {
-> +-    line_data =3D data[num][item];
-> ++    line_data =3D ::data[num][item];
-> +     switch(item)
-> +     {
-> +     case COL_PUT_BLOCK:
-> diff --git a/meta-oe/recipes-benchmark/bonnie/bonnie++_2.00a.bb b/meta-oe=
-/recipes-benchmark/bonnie/bonnie++_2.00a.bb
-> new file mode 100644
-> index 000000000..839ab7759
-> --- /dev/null
-> +++ b/meta-oe/recipes-benchmark/bonnie/bonnie++_2.00a.bb
-> @@ -0,0 +1,26 @@
-> +SUMMARY =3D "Tests large file IO and creation/deletion of small files"
-> +HOMEPAGE =3D "https://doc.coker.com.au/projects/bonnie/"
-> +SECTION =3D "benchmark/tests"
-> +LICENSE =3D "GPL-2.0-only"
-> +LIC_FILES_CHKSUM =3D "file://copyright.txt;md5=3Dcd4dde95a6b9d122f0a9150=
-ae9cc3ee0"
-> +
-> +SRC_URI =3D "\
-> +    http://www.coker.com.au/bonnie++/${BPN}-${PV}.tgz \
-> +    file://fix-configure-lfs.patch \
-> +    file://fix-csv2html-data.patch \
-> +"
-> +SRC_URI[sha256sum] =3D "a8d33bbd81bc7eb559ce5bf6e584b9b53faea39ccfb4ae92=
-e58f27257e468f0e"
-> +
-> +# force lfs to skip configure's check, because we are cross-building
-> +PACKAGECONFIG ?=3D "lfs"
-> +PACKAGECONFIG[lfs] =3D "--enable-lfs,--disable-lfs"
-> +
-> +do_install () {
-> +    install -m 0755 -Dt ${D}/${bindir} bonnie++ zcav bon_csv2html bon_cs=
-v2txt
-> +}
-> +
-> +PACKAGE_BEFORE_PN +=3D "${PN}-scripts"
-> +
-> +FILES:${PN}-scripts =3D "${bindir}/bon_csv2*"
-> +
-> +RDEPENDS:${PN}-scripts +=3D "perl"
+> diff --git a/meta-networking/recipes-protocols/vsomeip/vsomeip/0001-Fix-p=
+kgconfig-dir-for-multilib.patch b/meta-networking/recipes-protocols/vsomeip=
+/vsomeip/0001-Fix-pkgconfig-dir-for-multilib.patch
+> index 1c7eb17b2..0ddcb642b 100644
+> --- a/meta-networking/recipes-protocols/vsomeip/vsomeip/0001-Fix-pkgconfi=
+g-dir-for-multilib.patch
+> +++ b/meta-networking/recipes-protocols/vsomeip/vsomeip/0001-Fix-pkgconfi=
+g-dir-for-multilib.patch
+> @@ -1,4 +1,4 @@
+> -From e8a1b7a176398c2a9b5969f1b48ae0e1aa30f4ec Mon Sep 17 00:00:00 2001
+> +From 2f931baf290477b586309189445bf87e3bc5d5ba Mon Sep 17 00:00:00 2001
+>  From: Yi Zhao <yi.zhao@windriver.com>
+>  Date: Wed, 2 Mar 2022 14:51:13 +0800
+>  Subject: [PATCH] Fix pkgconfig dir for multilib
+> @@ -11,10 +11,10 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>
+>  diff --git a/CMakeLists.txt b/CMakeLists.txt
+> -index add3edda..fea80b4a 100644
+> +index ab399a69..beae6eaf 100644
+>  --- a/CMakeLists.txt
+>  +++ b/CMakeLists.txt
+> -@@ -602,7 +602,7 @@ endif()
+> +@@ -637,7 +637,7 @@ endif()
+>   # create pkg-config file
+>   if(NOT WIN32)
+>           configure_file(${VSOMEIP_NAME}.pc.in ${PROJECT_BINARY_DIR}/${VS=
+OMEIP_NAME}.pc @ONLY)
+> diff --git a/meta-networking/recipes-protocols/vsomeip/vsomeip/0002-Insta=
+ll-example-configuration-files-to-etc-vsomeip.patch b/meta-networking/recip=
+es-protocols/vsomeip/vsomeip/0002-Install-example-configuration-files-to-et=
+c-vsomeip.patch
+> index c22ef697b..bdaf34360 100644
+> --- a/meta-networking/recipes-protocols/vsomeip/vsomeip/0002-Install-exam=
+ple-configuration-files-to-etc-vsomeip.patch
+> +++ b/meta-networking/recipes-protocols/vsomeip/vsomeip/0002-Install-exam=
+ple-configuration-files-to-etc-vsomeip.patch
+> @@ -1,4 +1,4 @@
+> -From aea4c06ee2a0661d0c7b4773e846276a4f10e2e8 Mon Sep 17 00:00:00 2001
+> +From ebaa3206ee125741314272cddafa04fa71bd2d1e Mon Sep 17 00:00:00 2001
+>  From: Yi Zhao <yi.zhao@windriver.com>
+>  Date: Wed, 9 Mar 2022 11:48:44 +0800
+>  Subject: [PATCH] Install example configuration files to /etc/vsomeip
+> @@ -11,10 +11,10 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>
+>  diff --git a/CMakeLists.txt b/CMakeLists.txt
+> -index fea80b4a..e7a92ec6 100644
+> +index beae6eaf..d791c12e 100644
+>  --- a/CMakeLists.txt
+>  +++ b/CMakeLists.txt
+> -@@ -501,7 +501,7 @@ install(FILES ${PROJECT_BINARY_DIR}/vsomeip.pc DESTI=
+NATION lib/pkgconfig)
+> +@@ -536,7 +536,7 @@ install(FILES ${PROJECT_BINARY_DIR}/vsomeip.pc DESTI=
+NATION lib/pkgconfig)
+>   endif ()
+>
+>   install (
+> diff --git a/meta-networking/recipes-protocols/vsomeip/vsomeip/0003-Do-no=
+t-build-external-gtest.patch b/meta-networking/recipes-protocols/vsomeip/vs=
+omeip/0003-Do-not-build-external-gtest.patch
+> index 370d8a0fe..09dab9a8b 100644
+> --- a/meta-networking/recipes-protocols/vsomeip/vsomeip/0003-Do-not-build=
+-external-gtest.patch
+> +++ b/meta-networking/recipes-protocols/vsomeip/vsomeip/0003-Do-not-build=
+-external-gtest.patch
+> @@ -1,4 +1,4 @@
+> -From e012f91a73af7469ef6f660c3a6a752430a4d649 Mon Sep 17 00:00:00 2001
+> +From b1bf398015bc090020459954e5cd1ec3b51b8ac3 Mon Sep 17 00:00:00 2001
+>  From: Yi Zhao <yi.zhao@windriver.com>
+>  Date: Tue, 11 Jul 2023 16:53:46 +0800
+>  Subject: [PATCH] Do not build external gtest
+> @@ -10,15 +10,16 @@ Upstream-Status: Inappropriate [embedded specific]
+>
+>  Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+>  ---
+> - CMakeLists.txt                    | 30 ++----------
+> - test/network_tests/CMakeLists.txt | 80 -------------------------------
+> - 2 files changed, 3 insertions(+), 107 deletions(-)
+> + CMakeLists.txt                    | 11 ----
+> + test/CMakeLists.txt               | 22 +------
+> + test/network_tests/CMakeLists.txt | 99 -------------------------------
+> + 3 files changed, 3 insertions(+), 129 deletions(-)
+>
+>  diff --git a/CMakeLists.txt b/CMakeLists.txt
+> -index e7a92ec6..f6c680d4 100644
+> +index d791c12e..f1bcba27 100644
+>  --- a/CMakeLists.txt
+>  +++ b/CMakeLists.txt
+> -@@ -18,14 +18,6 @@ set (VSOMEIP_VERSION ${VSOMEIP_MAJOR_VERSION}.${VSOME=
+IP_MINOR_VERSION}.${VSOMEIP
+> +@@ -18,17 +18,6 @@ set (VSOMEIP_VERSION ${VSOMEIP_MAJOR_VERSION}.${VSOME=
+IP_MINOR_VERSION}.${VSOMEIP
+>   set (PACKAGE_VERSION ${VSOMEIP_VERSION}) # Used in documentation/doxyge=
+n.in
+>   set (CMAKE_VERBOSE_MAKEFILE off)
+>
+> @@ -26,16 +27,23 @@ index e7a92ec6..f6c680d4 100644
+>  -    if (DEFINED ENV{GTEST_ROOT})
+>  -        set(GTEST_ROOT $ENV{GTEST_ROOT})
+>  -    else()
+> --        set(GTEST_ROOT "n/a" CACHE STRING "Path to root folder of googl=
+etest. Must be set for building the tests.")
+> +-        include(FetchContent)
+> +-        FetchContent_Declare(googletest GIT_REPOSITORY https://github.c=
+om/google/googletest.git GIT_TAG v1.14.0)
+> +-        FetchContent_Populate(googletest)
+> +-        set(GTEST_ROOT ${googletest_SOURCE_DIR})
+>  -    endif()
+>  -endif()
+>  -
+>   #######################################################################=
+############################
+>   # see http://www.cmake.org/Wiki/CMake/Tutorials/How_to_create_a_Project=
+Config.cmake_file
+>   #######################################################################=
+############################
+> -@@ -630,27 +622,11 @@ find_package(benchmark)
+> - #######################################################################=
+#######
+> - # google test
+> +diff --git a/test/CMakeLists.txt b/test/CMakeLists.txt
+> +index f66ac5d3..6f09bf40 100644
+> +--- a/test/CMakeLists.txt
+> ++++ b/test/CMakeLists.txt
+> +@@ -17,27 +17,11 @@ find_package(benchmark)
+> + # remove export symbols from the cxx flags
+> + string(REPLACE "${EXPORTSYMBOLS}" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS=
+}")
+>
+>  -# check for set environment variable
+>  -if(${GTEST_ROOT} STREQUAL "n/a")
+> @@ -62,13 +70,13 @@ index e7a92ec6..f6c680d4 100644
+>  -    set(BUILD_SHARED_LIBS_AUTOMATIC_OFF 0)
+>  -endif()
+>
+> -
+> -
+> + #######################################################################=
+#######
+> + # build tests
+>  diff --git a/test/network_tests/CMakeLists.txt b/test/network_tests/CMak=
+eLists.txt
+> -index 6a148604..a501b6a7 100644
+> +index 883cc5cf..9a2a4f5e 100644
+>  --- a/test/network_tests/CMakeLists.txt
+>  +++ b/test/network_tests/CMakeLists.txt
+> -@@ -3633,86 +3633,6 @@ if(NOT ${TESTS_BAT})
+> +@@ -4116,105 +4116,6 @@ if(NOT ${TESTS_BAT})
+>
+>   endif()
+>
+> @@ -97,6 +105,12 @@ index 6a148604..a501b6a7 100644
+>  -    add_dependencies(${TEST_CLIENT_ID_UTILITY} gtest)
+>  -    add_dependencies(${TEST_DEBOUNCE_CLIENT} gtest)
+>  -    add_dependencies(${TEST_DEBOUNCE_SERVICE} gtest)
+> +-    add_dependencies(${TEST_DEBOUNCE_FILTER_CLIENT} gtest)
+> +-    add_dependencies(${TEST_DEBOUNCE_FILTER_SERVICE} gtest)
+> +-    add_dependencies(${TEST_DEBOUNCE_CALLBACK_CLIENT} gtest)
+> +-    add_dependencies(${TEST_DEBOUNCE_CALLBACK_SERVICE} gtest)
+> +-    add_dependencies(${TEST_DEBOUNCE_FREQUENCY_CLIENT} gtest)
+> +-    add_dependencies(${TEST_DEBOUNCE_FREQUENCY_SERVICE} gtest)
+>  -    add_dependencies(${TEST_SUBSCRIBE_NOTIFY_SERVICE} gtest)
+>  -    add_dependencies(${TEST_SUBSCRIBE_NOTIFY_ONE_EVENT_TWO_EVENTGROUPS_=
+SERVICE} gtest)
+>  -    add_dependencies(${TEST_SUBSCRIBE_NOTIFY_ONE_EVENT_TWO_EVENTGROUPS_=
+CLIENT} gtest)
+> @@ -127,8 +141,13 @@ index 6a148604..a501b6a7 100644
+>  -    add_dependencies(${TEST_E2E_PROFILE_04_SERVICE} gtest)
+>  -    add_dependencies(${TEST_E2E_PROFILE_04_CLIENT} gtest)
+>  -    endif()
+> +-    if (${TEST_E2E_PROFILE_07})
+> +-    add_dependencies(${TEST_E2E_PROFILE_07_SERVICE} gtest)
+> +-    add_dependencies(${TEST_E2E_PROFILE_07_CLIENT} gtest)
+> +-    endif()
+>  -    add_dependencies(${TEST_EVENT_SERVICE} gtest)
+>  -    add_dependencies(${TEST_EVENT_CLIENT} gtest)
+> +-    if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "QNX")
+>  -    add_dependencies(${TEST_NPDU_SERVICE_ONE} gtest)
+>  -    add_dependencies(${TEST_NPDU_SERVICE_TWO} gtest)
+>  -    add_dependencies(${TEST_NPDU_SERVICE_THREE} gtest)
+> @@ -139,6 +158,7 @@ index 6a148604..a501b6a7 100644
+>  -    add_dependencies(${TEST_NPDU_CLIENT_FOUR} gtest)
+>  -    add_dependencies(${TEST_NPDU_DAEMON_CLIENT} gtest)
+>  -    add_dependencies(${TEST_NPDU_DAEMON_SERVICE} gtest)
+> +-    endif()
+>  -    add_dependencies(${TEST_SOMEIPTP_CLIENT} gtest)
+>  -    add_dependencies(${TEST_SOMEIPTP_SERVICE} gtest)
+>  -    if(${TEST_SECOND_ADDRESS})
+> @@ -148,13 +168,20 @@ index 6a148604..a501b6a7 100644
+>  -    add_dependencies(${TEST_SUSPEND_RESUME_CLIENT} gtest)
+>  -    add_dependencies(${TEST_SUSPEND_RESUME_SERVICE} gtest)
+>  -else()
+> +-    add_dependencies(${TEST_APPLICATION} gtest)
+> +-    add_dependencies(${TEST_HEADER_FACTORY} gtest)
+> +-    add_dependencies(${TEST_HEADER_FACTORY_CLIENT} gtest)
+> +-    add_dependencies(${TEST_HEADER_FACTORY_SERVICE} gtest)
+> +-    add_dependencies(${TEST_PAYLOAD_SERVICE} gtest)
+> +-    add_dependencies(${TEST_PAYLOAD_CLIENT} gtest)
+> +-    add_dependencies(${TEST_BIG_PAYLOAD_SERVICE} gtest)
+> +-    add_dependencies(${TEST_BIG_PAYLOAD_CLIENT} gtest)
+>  -    add_dependencies(${TEST_LOCAL_ROUTING_SERVICE} gtest)
+>  -    add_dependencies(${TEST_LOCAL_ROUTING_CLIENT} gtest)
+>  -endif()
 > --
-> 2.34.1
+> +
+>   #######################################################################=
+#######
+>   # Add tests to the target build_network_tests
+> - #######################################################################=
+#######
+>  --
+>  2.25.1
+>
+> diff --git a/meta-networking/recipes-protocols/vsomeip/vsomeip/0004-Do-no=
+t-specify-PIE-flag-explicitly.patch b/meta-networking/recipes-protocols/vso=
+meip/vsomeip/0004-Do-not-specify-PIE-flag-explicitly.patch
+> index 970a37e50..4bb231855 100644
+> --- a/meta-networking/recipes-protocols/vsomeip/vsomeip/0004-Do-not-speci=
+fy-PIE-flag-explicitly.patch
+> +++ b/meta-networking/recipes-protocols/vsomeip/vsomeip/0004-Do-not-speci=
+fy-PIE-flag-explicitly.patch
+> @@ -1,4 +1,4 @@
+> -From 69805f9c8973a7a4d29297f8d50c29c88f981bee Mon Sep 17 00:00:00 2001
+> +From ec2d36466c9050ee282ea1c3bb1b5f1f61c96ecb Mon Sep 17 00:00:00 2001
+>  From: Yi Zhao <yi.zhao@windriver.com>
+>  Date: Mon, 17 Jul 2023 14:33:32 +0800
+>  Subject: [PATCH] Do not specify PIE flag explicitly
+> @@ -24,15 +24,15 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>
+>  diff --git a/CMakeLists.txt b/CMakeLists.txt
+> -index f6c680d4..dce1e701 100644
+> +index f1bcba27..2653a4df 100644
+>  --- a/CMakeLists.txt
+>  +++ b/CMakeLists.txt
+>  @@ -60,12 +60,12 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+>   if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+>       # This is only relevant for GCC and causes warnings on Clang
+>       set(EXPORTSYMBOLS "-Wl,-export-dynamic -Wl,--version-script=3D${CMA=
+KE_CURRENT_SOURCE_DIR}/exportmap.gcc")
+> --    set(OS_CXX_FLAGS "${OS_CXX_FLAGS} -pie -Wl,-z,relro,-z,now")
+> -+    set(OS_CXX_FLAGS "${OS_CXX_FLAGS} -Wl,-z,relro,-z,now")
+> +-    set(OS_CXX_FLAGS "${OS_CXX_FLAGS} -pie -Wno-tsan -Wl,-z,relro,-z,no=
+w")
+> ++    set(OS_CXX_FLAGS "${OS_CXX_FLAGS} -Wno-tsan -Wl,-z,relro,-z,now")
+>   endif()
+>
+>       set(NO_DEPRECATED "")
+> diff --git a/meta-networking/recipes-protocols/vsomeip/vsomeip_3.3.8.bb b=
+/meta-networking/recipes-protocols/vsomeip/vsomeip_3.4.10.bb
+> similarity index 93%
+> rename from meta-networking/recipes-protocols/vsomeip/vsomeip_3.3.8.bb
+> rename to meta-networking/recipes-protocols/vsomeip/vsomeip_3.4.10.bb
+> index b45bd2d63..aa1ad9e39 100644
+> --- a/meta-networking/recipes-protocols/vsomeip/vsomeip_3.3.8.bb
+> +++ b/meta-networking/recipes-protocols/vsomeip/vsomeip_3.4.10.bb
+> @@ -14,7 +14,7 @@ SRC_URI =3D "git://github.com/GENIVI/${BPN}.git;branch=
+=3Dmaster;protocol=3Dhttps;name=3D
+>             file://0004-Do-not-specify-PIE-flag-explicitly.patch \
+>            "
+>
+> -SRCREV =3D "07464840f503670bc75997b8e926b54734ffa410"
+> +SRCREV =3D "02c199dff8aba814beebe3ca417fd991058fe90c"
+>
+>  COMPATIBLE_HOST:mips =3D "null"
+>  COMPATIBLE_HOST:mips64 =3D "null"
+> @@ -55,6 +55,8 @@ do_install:append() {
+>      install -d ${D}/opt/${PN}-test/test/test/common
+>      cp -rf ${S}/test/common/examples_policies \
+>          ${D}/opt/${PN}-test/test/test/common/
+> +    install -m 0755 ${B}/test/common/libvsomeip_utilities.so \
+> +        ${D}/opt/${PN}-test/test/test/common/
+>
+>      for d in unit_tests network_tests; do
+>          install -d ${D}/opt/${PN}-test/test/$d
+> --
+> 2.25.1
 >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#107876): https://lists.openembedded.org/g/openembedde=
-d-devel/message/107876
-> Mute This Topic: https://lists.openembedded.org/mt/103415176/1997914
+> View/Reply Online (#107780): https://lists.openembedded.org/g/openembedde=
+d-devel/message/107780
+> Mute This Topic: https://lists.openembedded.org/mt/103347301/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
 aj.khem@gmail.com]
