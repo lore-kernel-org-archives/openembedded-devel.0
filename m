@@ -2,96 +2,95 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 006EDC4707B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 09A4DC47255
 	for <webhook@archiver.kernel.org>; Fri, 29 Dec 2023 19:02:50 +0000 (UTC)
-Received: from mail-yw1-f176.google.com (mail-yw1-f176.google.com [209.85.128.176])
- by mx.groups.io with SMTP id smtpd.web11.155473.1703876566954965320
+Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com [209.85.128.172])
+ by mx.groups.io with SMTP id smtpd.web10.156014.1703876564815833004
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 29 Dec 2023 11:02:47 -0800
+ Fri, 29 Dec 2023 11:02:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=imfFmeTK;
- spf=pass (domain: gmail.com, ip: 209.85.128.176, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f176.google.com with SMTP id 00721157ae682-5e7467eb93aso45847607b3.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 29 Dec 2023 11:02:46 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=kUTJEPfL;
+ spf=pass (domain: gmail.com, ip: 209.85.128.172, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f172.google.com with SMTP id 00721157ae682-5d05ff42db0so61632367b3.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 29 Dec 2023 11:02:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1703876566; x=1704481366; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1703876564; x=1704481364; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=B4mhP/OP/4NcIU90mh8o08mYbzVC5hUUJ0Qg8zJa5RA=;
-        b=imfFmeTKr+UiG1Z8PPmPc4+nPhcpW29Abf9TEVq1zWnXoQJ+l3dLA9qDBR53tmGWao
-         VcI0mDjfdiDLmZH+cSQJdp0UgCvyVZb2p4cw6ZCM4uhd6yIhCKfRs0gaFXOkA1hF9Khc
-         6rwttxBbQuPRvqlG8JWCBtKH7QCLhQDKUCm32QLfXp55FnMZeQAp+BdEg+Xpp2oR7/hb
-         e4gYEgzdgK8M/x/fFrCcwxP2ZxjrXS0BeRalK5y4yjC1W0CNliKAFN6biiEu8qiYamBC
-         RhMGMXe/bEcm0nFnHuG7brTWFi0Fpas7hbc4wsBOZ5IeMb8HHw6Kf6bkqRsa1Atw9HcZ
-         OCAQ==
+        bh=HNxV8R4hIsmqkW3HrB2usLgWr/am/JLU7yT8D5Y8H9w=;
+        b=kUTJEPfLEwkb3SmXiw97hQwc/bhN7fnIh3eqGoT2tEOSDNKeBn3NX2cye7SrGIiveb
+         17uX4xObsfxp373cnHQVZ4TifL7FZZiNdXQgSw6R2FyJftogMjPXl0MOHt2PzK+IthMi
+         UmDDXq04qZ0/cDoRZR+3i2HNCDW2FOCsUNQBtQ6xeS73RXzGfgS3H0yocIYFImEW3VrA
+         vGEvN4JTNeW4mCRik+4IIXofb2NsMcSFeGn7gbRPXsceyfYZGcHbUTAzeaKRyTUirzY8
+         Qw7QoZDajJVbaysQaobuXReSAwC1hPrGU/DR8Se0VekD8a0y6JCNVMoivVEkxOAraWoF
+         zBqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703876566; x=1704481366;
+        d=1e100.net; s=20230601; t=1703876564; x=1704481364;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=B4mhP/OP/4NcIU90mh8o08mYbzVC5hUUJ0Qg8zJa5RA=;
-        b=CozDJp+4rZgGDjRFmIxkYMfJnBaoNCFDQiBEv0Tm6a0WyZWlSinv20URhfEVFkMggc
-         CFa0c9brk3MDmg61osHhaZqP+QgD1lI/12wcVwtuCCrgr1PyBRz/7Abp2cF6pYNKw3Uj
-         qdl2v8VobdNwzRlVou74Y7REPSr3ycQaUIc6G8TJ9FCVOmIiEyQiJRNlwYKwt3WQjwwl
-         lUol2fsVYxdpI4gS54Q5F6H4ucMS7tv8afQpALEPrOWfwYeEKE4XT4tSoR/Jzqlxzlnp
-         xMOj1fOy1cqJrVLbnK9QdIH0bHGoW+Av7hPn5Jb01/uwRcdiLGuWmN/NIuZg/0EiaZe7
-         5lxw==
-X-Gm-Message-State: AOJu0YwCsVvVVXUso0jWGskItGegfJiiRAlhfoG7gZF4EIEr6yoZ3Q0M
-	t7+EF7N2Vx7I/7AtGl8mDN4BsBN3/IplbQ==
-X-Google-Smtp-Source: AGHT+IEVBHP7TYYgd+62rdZaLO6dLl+pv4K3HBH8bjg2TnUR91YdtweP/N4L+vjHOBhDMZ+qsKVxvQ==
-X-Received: by 2002:a0d:ec48:0:b0:5ef:4a7d:2426 with SMTP id r8-20020a0dec48000000b005ef4a7d2426mr1230013ywn.31.1703876565982;
-        Fri, 29 Dec 2023 11:02:45 -0800 (PST)
+        bh=HNxV8R4hIsmqkW3HrB2usLgWr/am/JLU7yT8D5Y8H9w=;
+        b=qWqUla1NfJFJZ44I9fb/CSUcs3Mk2TUVwBwFQySnB3t/sbr9H0FYl7NvaBx58ZSo//
+         L+8qQr7hQ5/RQfZHIv0dcTd/FjdTiLcxvowPSF63TcJ4Ja4f4qHCJML7Fi0ta/1oUSPZ
+         xWJjBSovgpUuRHekk/UVeV9+FIabhCIusbCqhBN9NxR1OT5hW3+nh/PJpOmDRidN2UNn
+         CxdSoQEexVv/WLeQrTSYEw0ssjiMq0fHjXaJvCV13CkP8cayTXZgu9G1sS3SDgBu6ap/
+         uX2gSDnj9TwVQl9bXu9oF84a6v3VaVi5G8PyafX36seCGQqWutahGuBwMRJXErfRD3DR
+         I3MA==
+X-Gm-Message-State: AOJu0YyrHcNxM3JhS3MCGz1ngYbeZCMSy2v07Wp43CnKORe0FMSh0Y5k
+	UQwqrvgssmKlhvazwjNGCb+mBWCua7WXFQ==
+X-Google-Smtp-Source: AGHT+IGiOjoD06hNshNfxv+R2JeSiMCouhKeJtGAraLO2KTancgdAy5Eklx3WmjybUs0+NiMRVAFzA==
+X-Received: by 2002:a81:dc07:0:b0:5ee:d57e:edfb with SMTP id h7-20020a81dc07000000b005eed57eedfbmr2649173ywj.26.1703876563716;
+        Fri, 29 Dec 2023 11:02:43 -0800 (PST)
 Received: from keaua.caveonetworks.com ([2600:1700:9190:ba10:2080:c728:4a66:97cc])
-        by smtp.gmail.com with ESMTPSA id d13-20020a81ab4d000000b005e71fbbc661sm8570683ywk.143.2023.12.29.11.02.44
+        by smtp.gmail.com with ESMTPSA id d13-20020a81ab4d000000b005e71fbbc661sm8570683ywk.143.2023.12.29.11.02.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 29 Dec 2023 11:02:44 -0800 (PST)
+        Fri, 29 Dec 2023 11:02:43 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: =?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>,
+Cc: Edi Feschiyan <edi.feschiyan@konsulko.com>,
 	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][nanbield][PATCH 13/17] geos: Fix packaging
-Date: Fri, 29 Dec 2023 14:02:26 -0500
-Message-Id: <20231229190230.135480-14-akuster808@gmail.com>
+Subject: [meta-oe][nanbield][PATCH 12/17] libbytesize: update SRC_URI
+Date: Fri, 29 Dec 2023 14:02:25 -0500
+Message-Id: <20231229190230.135480-13-akuster808@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231229190230.135480-1-akuster808@gmail.com>
 References: <20231229190230.135480-1-akuster808@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 29 Dec 2023 19:02:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107895
+ <openembedded-devel@lists.openembedded.org>; Fri, 29 Dec 2023 19:02:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107894
 
-From: Zoltán Böszörményi <zboszor@gmail.com>
+From: Edi Feschiyan <edi.feschiyan@konsulko.com>
 
-Due to the library file name change, the subpackage "geoslib"
-does not get generated, and the main geos package has unsatisfied
-dependencies.
+GitHub has been redirecting for a while, so switch SRC_URI from
+github.com/rhinstaller/libbytesize to
+github.com/storaged-project/libbytesize instead without redirects.
 
-Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
+Signed-off-by: Edi Feschiyan <edi.feschiyan@konsulko.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 405ee461078cfed493bd6ca06f922860be5081d0)
+(cherry picked from commit 75bb23b3b03e225aa012be8bd5998223ae8f9b2f)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-navigation/geos/geos_3.12.0.bb | 2 +-
+ meta-oe/recipes-support/libbytesize/libbytesize_2.10.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-navigation/geos/geos_3.12.0.bb b/meta-oe/recipes-navigation/geos/geos_3.12.0.bb
-index 95cb29775a..0382e6bdfe 100644
---- a/meta-oe/recipes-navigation/geos/geos_3.12.0.bb
-+++ b/meta-oe/recipes-navigation/geos/geos_3.12.0.bb
-@@ -13,7 +13,7 @@ inherit cmake pkgconfig binconfig
- PACKAGES =+ "geoslib ${PN}-c1"
+diff --git a/meta-oe/recipes-support/libbytesize/libbytesize_2.10.bb b/meta-oe/recipes-support/libbytesize/libbytesize_2.10.bb
+index 926a603b81..28e40f66e3 100644
+--- a/meta-oe/recipes-support/libbytesize/libbytesize_2.10.bb
++++ b/meta-oe/recipes-support/libbytesize/libbytesize_2.10.bb
+@@ -10,7 +10,7 @@ S = "${WORKDIR}/git"
+ B = "${S}"
  
- DESCRIPTION:${PN}lib = "Geometry engine for Geographic Information Systems - C++ Library"
--FILES:${PN}lib += "${libdir}/libgeos-${PV}.so"
-+FILES:${PN}lib += "${libdir}/libgeos.so.*"
+ SRCREV = "6e83cc6f6dff4f126fc79284e0c3c1c50123380d"
+-SRC_URI = "git://github.com/rhinstaller/libbytesize;branch=main;protocol=https"
++SRC_URI = "git://github.com/storaged-project/libbytesize;branch=main;protocol=https"
  
- DESCRIPTION:${PN}-c1 = "Geometry engine for Geographic Information Systems - C Library"
- FILES:${PN}-c1 += "${libdir}/libgeos_c.so.*"
+ inherit gettext autotools pkgconfig python3native
+ 
 -- 
 2.34.1
 
