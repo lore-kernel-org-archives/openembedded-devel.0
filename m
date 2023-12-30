@@ -2,371 +2,266 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A5A15C46CD2
-	for <webhook@archiver.kernel.org>; Sat, 30 Dec 2023 17:39:56 +0000 (UTC)
-Received: from mail-oa1-f45.google.com (mail-oa1-f45.google.com [209.85.160.45])
- by mx.groups.io with SMTP id smtpd.web11.188977.1703957987430480701
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1ABF6C46CD2
+	for <webhook@archiver.kernel.org>; Sat, 30 Dec 2023 19:06:27 +0000 (UTC)
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
+ by mx.groups.io with SMTP id smtpd.web11.190573.1703963177212629383
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 30 Dec 2023 09:39:47 -0800
+ Sat, 30 Dec 2023 11:06:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=GrYj/YWX;
- spf=pass (domain: gmail.com, ip: 209.85.160.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f45.google.com with SMTP id 586e51a60fabf-1f055438492so5919208fac.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 30 Dec 2023 09:39:47 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Mpv2hoY8;
+ spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-5bdbe2de25fso6073462a12.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 30 Dec 2023 11:06:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1703957986; x=1704562786; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=DB/ahcwoDXTohEQOXwn/7sxaN68/DO3l7mis1wIJkM4=;
-        b=GrYj/YWXdCh8MzsIkYeTX9TpcrrhRBe87PiA8s/kdWwNr17lagWHkYdeyvCrn+nii4
-         1x9WhkPeBVVXIHHGuXUKGBkvhTWzA6f01qSD9Kph7W3p1Q08Ht6DStNfoFm+GP02BdrN
-         0l6/lspsdgDnGavih0rGIfxBspM0O6H3K+tSMN5h+87OA9mb9aXeVVP+ca0JQLUtLGLM
-         +cUzHXbUzUHvjUJFDb5CPDunwZNejlPjQVFiurzFVGoETsMtVJVBu0e/5WcWCE7ZikA7
-         UpkjtGTFk15tXYUd76fKyU6hHAxVNwcZO/KnZeJ0ydoHgPRas73xEHU2+Q6J2tCHpzfp
-         EQMw==
+        d=gmail.com; s=20230601; t=1703963176; x=1704567976; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=iv9L4FH4w3276SxLe3NxiXN/R71YWxIH4kAJppiA/P8=;
+        b=Mpv2hoY8oAG3cs4iApn+vqt9Hb1USUFbfH3K5QKNS/zmZwmyN3cXt/rcIhgiUR6/er
+         L/r7ckoJ8AAsKsMuVTWiDuGq3QwO3ZOfCRTUnxnJUawzUfEYEM7cT3zX1Wk7qLSUeW3o
+         Th0rSRlaN26emAuJ1kHr91qvypHpH8n+5ezxUra+KlETc6U49T5znvgA6uLpBlCEUI0Z
+         c+7oBjTLWffHbN12BAibc9HFi3akOA0iX0UA4dxHg9SuHm5d8d5+ygepPgcI5CNAxCbl
+         fwoBxMpOuhVyzeqXL7fgcVAmDLI41qRO9TBTfL9Q6AaP6nRcECJGhVzqTobhKiN0FhVQ
+         v3YA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703957986; x=1704562786;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1703963176; x=1704567976;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=DB/ahcwoDXTohEQOXwn/7sxaN68/DO3l7mis1wIJkM4=;
-        b=xFB0C0XH634IlCIoJic2lXAiKsy5UPRN6OtVcAkTrHyaWD0/MPsgGTFK4zBM6QkyfX
-         /Ll0GwdP7Bs6DB6ciMHqLzu5tdbzOswsANW5chR58cev7Xdl9LbclsBtOBlDMkqa2a8c
-         +hi/cM+YPpamJVz0F9NIevJXAO6dWdUkTVqNE+Ws8aTGtulrh+7hmwgQN6WqkbMJvUjz
-         XFOVGDfTmhTkkXCvRFXD3OIwqiT7oEdy4O6DoDUbw6V1VBPnTjRtFPp6oDD2FutsHigz
-         /JJHRTLKUCtt7gRml1Keb/1uYyXf+PlNEaBzm8IVRiCoI9syp/AtL4B/x3OjWw14r3fQ
-         Vy2w==
-X-Gm-Message-State: AOJu0YyGKW7MtREttCG26h9b0q6iokCA7HAxYO+l7Urc5M3hzlF4IRnr
-	0PqxZVbzRsMziuRC/CD1fSU/Wu/O1dkuK98oAGTZNih3
-X-Google-Smtp-Source: AGHT+IGU/NoxgUJqIg2rmXxrVLmYqJNDNgl1foHiOOUbHHSYqbl6mQkuTgOegcQlQsIlcgcAElZXbjwjqzIPm4QWG9o=
-X-Received: by 2002:a05:6870:392b:b0:1fb:75b:1311 with SMTP id
- b43-20020a056870392b00b001fb075b1311mr16354595oap.99.1703957986508; Sat, 30
- Dec 2023 09:39:46 -0800 (PST)
-MIME-Version: 1.0
-References: <20231230171056.1297800-1-leon.anavi@konsulko.com>
-In-Reply-To: <20231230171056.1297800-1-leon.anavi@konsulko.com>
+        bh=iv9L4FH4w3276SxLe3NxiXN/R71YWxIH4kAJppiA/P8=;
+        b=a0Vq2GaJUDW1QUmUH+iPwdAz9wIMkZ9ea9iG+Yp5tMF03DU6m28wEhtNIKCOOZp2EB
+         tinPHg5Ky6iqGeraMF5ytK7E2IMAPvUQpsBTL+EzSJyxYX3X93skDB3/YjTDn+M+SzlG
+         /7cLjaINIdPy3glJ38eN5AO5ymlyPBihTkHiSOuAMe/eYcxUvKm0gEPLNbjTaNkMMPkN
+         TkxekSWKs+KD7Jdd1cp7B1gu38QQBd16eOlxURCftDcWtYhPtSofFyCfI7U3lYC5pa1Q
+         iYaIsv2VttlJ3SrcX6UGcSUKw8b1QP5Xd+F6HX901CBFxmdwC4NEFue0uQ0243sP93jo
+         04zQ==
+X-Gm-Message-State: AOJu0YxOYAztpkPm1Emun5J6AlPZk4hjgAdVi9EXbtXDDwVgMTlS8uHb
+	qpWwiNcbg39r66x9YOSLQSEGmAU4KWc=
+X-Google-Smtp-Source: AGHT+IHp8/4H+BOIL7I+utqmwtM81Ubo0XCdVmtZEQtM1CSNNLaXVsGII54GDhTkX9JNgUtRLIEPfg==
+X-Received: by 2002:a17:902:ef93:b0:1d3:fa43:6a08 with SMTP id iz19-20020a170902ef9300b001d3fa436a08mr14339588plb.44.1703963175968;
+        Sat, 30 Dec 2023 11:06:15 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::4b6f])
+        by smtp.gmail.com with ESMTPSA id l7-20020a17090270c700b001d49608e3dfsm4311066plt.50.2023.12.30.11.06.15
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 30 Dec 2023 11:06:15 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 30 Dec 2023 09:39:35 -0800
-Message-ID: <CAMKF1spd5J8EKq3ey9duGEMNTbRADQ0CeNe3Ws50SnUBUsA7qQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] ssd1306_git.bb: Add ssd1306_linux
-To: Leon Anavi <leon.anavi@konsulko.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000007f83b5060dbda2f4"
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-multimedia][PATCH 2/2] libcamera: Fix build with python 3.12
+Date: Sat, 30 Dec 2023 11:06:11 -0800
+Message-ID: <20231230190612.382560-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 30 Dec 2023 17:39:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107911
+ <openembedded-devel@lists.openembedded.org>; Sat, 30 Dec 2023 19:06:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107912
 
---0000000000007f83b5060dbda2f4
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../0001-mojom-Drop-using-imp-module.patch    | 176 ++++++++++++++++++
+ .../libcamera/libcamera_0.1.0.bb              |   1 +
+ 2 files changed, 177 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-mojom-Drop-using-imp-module.patch
 
-On Sat, Dec 30, 2023 at 9:11=E2=80=AFAM Leon Anavi <leon.anavi@konsulko.com=
-> wrote:
+diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-mojom-Drop-using-imp-module.patch b/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-mojom-Drop-using-imp-module.patch
+new file mode 100644
+index 0000000000..b07a790596
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-mojom-Drop-using-imp-module.patch
+@@ -0,0 +1,176 @@
++From 23a9bbb9ab380344c5daf5bc0109fab249e41afd Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 30 Dec 2023 10:55:44 -0800
++Subject: [PATCH] mojom: Drop using imp module.
++
++This module is gone in python 3.12 onwards, in most places it is unused
++so remove from those places, in some places where its still is needed
++replace it with importlib.util
++
++Fixes [1]
++
++[1] https://bugs.libcamera.org/show_bug.cgi?id=206
++
++Upstream-Status: Submitted [https://lists.libcamera.org/pipermail/libcamera-devel/2023-December/039986.html]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ utils/ipc/mojo/public/tools/mojom/mojom/fileutil.py        | 1 -
++ .../ipc/mojo/public/tools/mojom/mojom/fileutil_unittest.py | 1 -
++ .../tools/mojom/mojom/generate/generator_unittest.py       | 7 ++-----
++ .../tools/mojom/mojom/generate/translate_unittest.py       | 1 -
++ .../mojo/public/tools/mojom/mojom/parse/ast_unittest.py    | 1 -
++ .../mojom/mojom/parse/conditional_features_unittest.py     | 7 ++-----
++ utils/ipc/mojo/public/tools/mojom/mojom/parse/lexer.py     | 1 -
++ .../mojo/public/tools/mojom/mojom/parse/lexer_unittest.py  | 6 ++----
++ .../mojo/public/tools/mojom/mojom/parse/parser_unittest.py | 1 -
++ 9 files changed, 6 insertions(+), 20 deletions(-)
++
++diff --git a/utils/ipc/mojo/public/tools/mojom/mojom/fileutil.py b/utils/ipc/mojo/public/tools/mojom/mojom/fileutil.py
++index bf626f54..e1c823da 100644
++--- a/utils/ipc/mojo/public/tools/mojom/mojom/fileutil.py
+++++ b/utils/ipc/mojo/public/tools/mojom/mojom/fileutil.py
++@@ -3,7 +3,6 @@
++ # found in the LICENSE file.
++ 
++ import errno
++-import imp
++ import os.path
++ import sys
++ 
++diff --git a/utils/ipc/mojo/public/tools/mojom/mojom/fileutil_unittest.py b/utils/ipc/mojo/public/tools/mojom/mojom/fileutil_unittest.py
++index ff5753a2..e754151f 100644
++--- a/utils/ipc/mojo/public/tools/mojom/mojom/fileutil_unittest.py
+++++ b/utils/ipc/mojo/public/tools/mojom/mojom/fileutil_unittest.py
++@@ -2,7 +2,6 @@
++ # Use of this source code is governed by a BSD-style license that can be
++ # found in the LICENSE file.
++ 
++-import imp
++ import os.path
++ import shutil
++ import sys
++diff --git a/utils/ipc/mojo/public/tools/mojom/mojom/generate/generator_unittest.py b/utils/ipc/mojo/public/tools/mojom/mojom/generate/generator_unittest.py
++index 32c884a8..6cae6092 100644
++--- a/utils/ipc/mojo/public/tools/mojom/mojom/generate/generator_unittest.py
+++++ b/utils/ipc/mojo/public/tools/mojom/mojom/generate/generator_unittest.py
++@@ -2,7 +2,7 @@
++ # Use of this source code is governed by a BSD-style license that can be
++ # found in the LICENSE file.
++ 
++-import imp
+++import importlib.util
++ import os.path
++ import sys
++ import unittest
++@@ -18,10 +18,7 @@ def _GetDirAbove(dirname):
++     if tail == dirname:
++       return path
++ 
++-
++-try:
++-  imp.find_module("mojom")
++-except ImportError:
+++if importlib.util.find_spec("mojom") is None:
++   sys.path.append(os.path.join(_GetDirAbove("pylib"), "pylib"))
++ from mojom.generate import generator
++ 
++diff --git a/utils/ipc/mojo/public/tools/mojom/mojom/generate/translate_unittest.py b/utils/ipc/mojo/public/tools/mojom/mojom/generate/translate_unittest.py
++index 19905c8a..09724d88 100644
++--- a/utils/ipc/mojo/public/tools/mojom/mojom/generate/translate_unittest.py
+++++ b/utils/ipc/mojo/public/tools/mojom/mojom/generate/translate_unittest.py
++@@ -2,7 +2,6 @@
++ # Use of this source code is governed by a BSD-style license that can be
++ # found in the LICENSE file.
++ 
++-import imp
++ import os.path
++ import sys
++ import unittest
++diff --git a/utils/ipc/mojo/public/tools/mojom/mojom/parse/ast_unittest.py b/utils/ipc/mojo/public/tools/mojom/mojom/parse/ast_unittest.py
++index 62798631..4ab51033 100644
++--- a/utils/ipc/mojo/public/tools/mojom/mojom/parse/ast_unittest.py
+++++ b/utils/ipc/mojo/public/tools/mojom/mojom/parse/ast_unittest.py
++@@ -2,7 +2,6 @@
++ # Use of this source code is governed by a BSD-style license that can be
++ # found in the LICENSE file.
++ 
++-import imp
++ import os.path
++ import sys
++ import unittest
++diff --git a/utils/ipc/mojo/public/tools/mojom/mojom/parse/conditional_features_unittest.py b/utils/ipc/mojo/public/tools/mojom/mojom/parse/conditional_features_unittest.py
++index aa609be7..f3c2c95f 100644
++--- a/utils/ipc/mojo/public/tools/mojom/mojom/parse/conditional_features_unittest.py
+++++ b/utils/ipc/mojo/public/tools/mojom/mojom/parse/conditional_features_unittest.py
++@@ -2,7 +2,7 @@
++ # Use of this source code is governed by a BSD-style license that can be
++ # found in the LICENSE file.
++ 
++-import imp
+++import importlib.util
++ import os
++ import sys
++ import unittest
++@@ -18,10 +18,7 @@ def _GetDirAbove(dirname):
++     if tail == dirname:
++       return path
++ 
++-
++-try:
++-  imp.find_module('mojom')
++-except ImportError:
+++if importlib.util.find_spec("mojom") is None:
++   sys.path.append(os.path.join(_GetDirAbove('pylib'), 'pylib'))
++ import mojom.parse.ast as ast
++ import mojom.parse.conditional_features as conditional_features
++diff --git a/utils/ipc/mojo/public/tools/mojom/mojom/parse/lexer.py b/utils/ipc/mojo/public/tools/mojom/mojom/parse/lexer.py
++index 3e084bbf..1e8b49f2 100644
++--- a/utils/ipc/mojo/public/tools/mojom/mojom/parse/lexer.py
+++++ b/utils/ipc/mojo/public/tools/mojom/mojom/parse/lexer.py
++@@ -2,7 +2,6 @@
++ # Use of this source code is governed by a BSD-style license that can be
++ # found in the LICENSE file.
++ 
++-import imp
++ import os.path
++ import sys
++ 
++diff --git a/utils/ipc/mojo/public/tools/mojom/mojom/parse/lexer_unittest.py b/utils/ipc/mojo/public/tools/mojom/mojom/parse/lexer_unittest.py
++index eadc6587..77976507 100644
++--- a/utils/ipc/mojo/public/tools/mojom/mojom/parse/lexer_unittest.py
+++++ b/utils/ipc/mojo/public/tools/mojom/mojom/parse/lexer_unittest.py
++@@ -2,7 +2,7 @@
++ # Use of this source code is governed by a BSD-style license that can be
++ # found in the LICENSE file.
++ 
++-import imp
+++import importlib.util
++ import os.path
++ import sys
++ import unittest
++@@ -22,9 +22,7 @@ def _GetDirAbove(dirname):
++ sys.path.insert(1, os.path.join(_GetDirAbove("mojo"), "third_party"))
++ from ply import lex
++ 
++-try:
++-  imp.find_module("mojom")
++-except ImportError:
+++if importlib.util.find_spec("mojom") is None:
++   sys.path.append(os.path.join(_GetDirAbove("pylib"), "pylib"))
++ import mojom.parse.lexer
++ 
++diff --git a/utils/ipc/mojo/public/tools/mojom/mojom/parse/parser_unittest.py b/utils/ipc/mojo/public/tools/mojom/mojom/parse/parser_unittest.py
++index 6d6b7153..7e8acf43 100644
++--- a/utils/ipc/mojo/public/tools/mojom/mojom/parse/parser_unittest.py
+++++ b/utils/ipc/mojo/public/tools/mojom/mojom/parse/parser_unittest.py
++@@ -2,7 +2,6 @@
++ # Use of this source code is governed by a BSD-style license that can be
++ # found in the LICENSE file.
++ 
++-import imp
++ import os.path
++ import sys
++ import unittest
++-- 
++2.43.0
++
+diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.1.0.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.1.0.bb
+index 2a3c6473ee..c8ccff6f40 100644
+--- a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.1.0.bb
++++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.1.0.bb
+@@ -10,6 +10,7 @@ LIC_FILES_CHKSUM = "\
+ 
+ SRC_URI = " \
+         git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master \
++        file://0001-mojom-Drop-using-imp-module.patch \
+ "
+ 
+ SRCREV = "960d0c1e19feaf310321c906e14bd5410c6be629"
+-- 
+2.43.0
 
-> Add ssd1306_linux, a simple OLED I2C SSD1306 Linux driver based on
-> the i2c library libi2c from i2c-tools. Example usage for a
-> compatible display with resolution 128x64 pixels:
->
-> ssd1306_bin -n 1 -I 128x64
-> ssd1306_bin -n 1 -c
-> ssd1306_bin -n 1 -r 0
-> ssd1306_bin -n 1 -x 1 -y 1
-> ssd1306_bin -n 1 -l "Hello World"
->
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-> ---
->  .../ssd1306/0001-Use-include-filename.patch   | 49 +++++++++++++++++++
->  .../recipes-devtools/ssd1306/ssd1306_git.bb   | 25 ++++++++++
->  2 files changed, 74 insertions(+)
->  create mode 100644
-> meta-oe/recipes-devtools/ssd1306/ssd1306/0001-Use-include-filename.patch
->  create mode 100644 meta-oe/recipes-devtools/ssd1306/ssd1306_git.bb
->
-> diff --git
-> a/meta-oe/recipes-devtools/ssd1306/ssd1306/0001-Use-include-filename.patc=
-h
-> b/meta-oe/recipes-devtools/ssd1306/ssd1306/0001-Use-include-filename.patc=
-h
-> new file mode 100644
-> index 000000000..9ec682c7b
-> --- /dev/null
-> +++
-> b/meta-oe/recipes-devtools/ssd1306/ssd1306/0001-Use-include-filename.patc=
-h
-> @@ -0,0 +1,49 @@
-> +From cb32ebbb1efb3202808809861ec3cbd811c55bd2 Mon Sep 17 00:00:00 2001
-> +From: Leon Anavi <leon.anavi@konsulko.com>
-> +Date: Sat, 30 Dec 2023 13:23:31 +0000
-> +Subject: [PATCH] Use include "filename"
-> +
-> +Use include "filename" to include programmer-defined header files
-> +from the same directory as the file containing the directive.
-> +
-> +Upstream-Status: Pending
-
-
-I think it=E2=80=99s a good patch to submit upstream perhaps do that as wel=
-l while
-you are at it
-
->
-> +
-> +Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-> +---
-> + main.c    | 2 +-
-> + ssd1306.c | 6 +++---
-> + 2 files changed, 4 insertions(+), 4 deletions(-)
-> +
-> +diff --git a/main.c b/main.c
-> +index c1ffc2f..18e2b84 100644
-> +--- a/main.c
-> ++++ b/main.c
-> +@@ -6,7 +6,7 @@
-> + #include <string.h>
-> + #include <fcntl.h>
-> + #include <sys/ioctl.h>
-> +-#include <ssd1306.h>
-> ++#include "ssd1306.h"
-> +
-> + void print_help()
-> + {
-> +diff --git a/ssd1306.c b/ssd1306.c
-> +index a03674a..2e6ba97 100644
-> +--- a/ssd1306.c
-> ++++ b/ssd1306.c
-> +@@ -8,9 +8,9 @@
-> + #include <string.h>
-> + #include <fcntl.h>
-> + #include <sys/ioctl.h>
-> +-#include <linux_i2c.h>
-> +-#include <ssd1306.h>
-> +-#include <font.h>
-> ++#include "linux_i2c.h"
-> ++#include "ssd1306.h"
-> ++#include "font.h"
-> +
-> + const char init_oled_type_file[] =3D "/tmp/.ssd1306_oled_type";
-> +
-> +--
-> +2.39.2
-> +
-> diff --git a/meta-oe/recipes-devtools/ssd1306/ssd1306_git.bb
-> b/meta-oe/recipes-devtools/ssd1306/ssd1306_git.bb
-> new file mode 100644
-> index 000000000..5adfd3ed6
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/ssd1306/ssd1306_git.bb
-> @@ -0,0 +1,25 @@
-> +SUMMARY=3D"SSD1306 OLED I2C drive"
-> +DESCRIPTION =3D "SSD1306 OLED I2C driver working in Linux"
-> +HOMEPAGE =3D "https://github.com/armlabs/ssd1306_linux"
-> +SECTION =3D "console/utils"
-> +LICENSE =3D "MIT"
-> +
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D7b694e603a996c3bfdc6093ed1f70=
-c8f"
-> +
-> +SRC_URI =3D " \
-> +    git://
-> github.com/armlabs/ssd1306_linux.git;protocol=3Dhttps;branch=3Dmaster \
-> +    file://0001-Use-include-filename.patch \
-> +"
-> +SRCREV =3D "7375f1088732d243f7167c9a17725f1a860da587"
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +# coreutils provides fmt which is used in the Makefile
-> +DEPENDS =3D "i2c-tools coreutils-native"
-> +
-> +EXTRA_OEMAKE =3D "CC=3D'${CC}' CFLAGS=3D'${CFLAGS}' LDFLAGS=3D'${LDFLAGS=
-}'"
-> +
-> +do_install() {
-> +    install -d ${D}${bindir}
-> +    install -m 0755 ${B}/ssd1306_bin ${D}${bindir}
-> +}
-> --
-> 2.39.2
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#107908):
-> https://lists.openembedded.org/g/openembedded-devel/message/107908
-> Mute This Topic: https://lists.openembedded.org/mt/103434392/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> raj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
-
---0000000000007f83b5060dbda2f4
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Sat, Dec 30, 2023 at 9:11=E2=80=AFAM Leon Anavi &lt;<a h=
-ref=3D"mailto:leon.anavi@konsulko.com">leon.anavi@konsulko.com</a>&gt; wrot=
-e:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;bo=
-rder-left:1px #ccc solid;padding-left:1ex">Add ssd1306_linux, a simple OLED=
- I2C SSD1306 Linux driver based on<br>
-the i2c library libi2c from i2c-tools. Example usage for a<br>
-compatible display with resolution 128x64 pixels:<br>
-<br>
-ssd1306_bin -n 1 -I 128x64<br>
-ssd1306_bin -n 1 -c<br>
-ssd1306_bin -n 1 -r 0<br>
-ssd1306_bin -n 1 -x 1 -y 1<br>
-ssd1306_bin -n 1 -l &quot;Hello World&quot;<br>
-<br>
-Signed-off-by: Leon Anavi &lt;<a href=3D"mailto:leon.anavi@konsulko.com" ta=
-rget=3D"_blank">leon.anavi@konsulko.com</a>&gt;<br>
----<br>
-=C2=A0.../ssd1306/0001-Use-include-filename.patch=C2=A0 =C2=A0| 49 ++++++++=
-+++++++++++<br>
-=C2=A0.../recipes-devtools/ssd1306/<a href=3D"http://ssd1306_git.bb" rel=3D=
-"noreferrer" target=3D"_blank">ssd1306_git.bb</a>=C2=A0 =C2=A0| 25 ++++++++=
-++<br>
-=C2=A02 files changed, 74 insertions(+)<br>
-=C2=A0create mode 100644 meta-oe/recipes-devtools/ssd1306/ssd1306/0001-Use-=
-include-filename.patch<br>
-=C2=A0create mode 100644 meta-oe/recipes-devtools/ssd1306/<a href=3D"http:/=
-/ssd1306_git.bb" rel=3D"noreferrer" target=3D"_blank">ssd1306_git.bb</a><br=
->
-<br>
-diff --git a/meta-oe/recipes-devtools/ssd1306/ssd1306/0001-Use-include-file=
-name.patch b/meta-oe/recipes-devtools/ssd1306/ssd1306/0001-Use-include-file=
-name.patch<br>
-new file mode 100644<br>
-index 000000000..9ec682c7b<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-devtools/ssd1306/ssd1306/0001-Use-include-filename.pa=
-tch<br>
-@@ -0,0 +1,49 @@<br>
-+From cb32ebbb1efb3202808809861ec3cbd811c55bd2 Mon Sep 17 00:00:00 2001<br>
-+From: Leon Anavi &lt;<a href=3D"mailto:leon.anavi@konsulko.com" target=3D"=
-_blank">leon.anavi@konsulko.com</a>&gt;<br>
-+Date: Sat, 30 Dec 2023 13:23:31 +0000<br>
-+Subject: [PATCH] Use include &quot;filename&quot;<br>
-+<br>
-+Use include &quot;filename&quot; to include programmer-defined header file=
-s<br>
-+from the same directory as the file containing the directive.<br>
-+<br>
-+Upstream-Status: Pending</blockquote><div dir=3D"auto"><br></div><div dir=
-=3D"auto">I think it=E2=80=99s a good patch to submit upstream perhaps do t=
-hat as well while you are at it=C2=A0</div><blockquote class=3D"gmail_quote=
-" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex" d=
-ir=3D"auto"><br>
-+<br>
-+Signed-off-by: Leon Anavi &lt;<a href=3D"mailto:leon.anavi@konsulko.com" t=
-arget=3D"_blank">leon.anavi@konsulko.com</a>&gt;<br>
-+---<br>
-+ main.c=C2=A0 =C2=A0 | 2 +-<br>
-+ ssd1306.c | 6 +++---<br>
-+ 2 files changed, 4 insertions(+), 4 deletions(-)<br>
-+<br>
-+diff --git a/main.c b/main.c<br>
-+index c1ffc2f..18e2b84 100644<br>
-+--- a/main.c<br>
-++++ b/main.c<br>
-+@@ -6,7 +6,7 @@<br>
-+ #include &lt;string.h&gt;<br>
-+ #include &lt;fcntl.h&gt;<br>
-+ #include &lt;sys/ioctl.h&gt;<br>
-+-#include &lt;ssd1306.h&gt;<br>
-++#include &quot;ssd1306.h&quot;<br>
-+ <br>
-+ void print_help()<br>
-+ {<br>
-+diff --git a/ssd1306.c b/ssd1306.c<br>
-+index a03674a..2e6ba97 100644<br>
-+--- a/ssd1306.c<br>
-++++ b/ssd1306.c<br>
-+@@ -8,9 +8,9 @@<br>
-+ #include &lt;string.h&gt;<br>
-+ #include &lt;fcntl.h&gt;<br>
-+ #include &lt;sys/ioctl.h&gt;<br>
-+-#include &lt;linux_i2c.h&gt;<br>
-+-#include &lt;ssd1306.h&gt;<br>
-+-#include &lt;font.h&gt;<br>
-++#include &quot;linux_i2c.h&quot;<br>
-++#include &quot;ssd1306.h&quot;<br>
-++#include &quot;font.h&quot;<br>
-+ <br>
-+ const char init_oled_type_file[] =3D &quot;/tmp/.ssd1306_oled_type&quot;;=
-<br>
-+ <br>
-+-- <br>
-+2.39.2<br>
-+<br>
-diff --git a/meta-oe/recipes-devtools/ssd1306/<a href=3D"http://ssd1306_git=
-.bb" rel=3D"noreferrer" target=3D"_blank">ssd1306_git.bb</a> b/meta-oe/reci=
-pes-devtools/ssd1306/<a href=3D"http://ssd1306_git.bb" rel=3D"noreferrer" t=
-arget=3D"_blank">ssd1306_git.bb</a><br>
-new file mode 100644<br>
-index 000000000..5adfd3ed6<br>
---- /dev/null<br>
-+++ b/meta-oe/recipes-devtools/ssd1306/<a href=3D"http://ssd1306_git.bb" re=
-l=3D"noreferrer" target=3D"_blank">ssd1306_git.bb</a><br>
-@@ -0,0 +1,25 @@<br>
-+SUMMARY=3D&quot;SSD1306 OLED I2C drive&quot;<br>
-+DESCRIPTION =3D &quot;SSD1306 OLED I2C driver working in Linux&quot;<br>
-+HOMEPAGE =3D &quot;<a href=3D"https://github.com/armlabs/ssd1306_linux" re=
-l=3D"noreferrer" target=3D"_blank">https://github.com/armlabs/ssd1306_linux=
-</a>&quot;<br>
-+SECTION =3D &quot;console/utils&quot;<br>
-+LICENSE =3D &quot;MIT&quot;<br>
-+<br>
-+LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D7b694e603a996c3bfdc6093ed1=
-f70c8f&quot;<br>
-+<br>
-+SRC_URI =3D &quot; \<br>
-+=C2=A0 =C2=A0 git://<a href=3D"http://github.com/armlabs/ssd1306_linux.git=
-;protocol=3Dhttps;branch=3Dmaster" rel=3D"noreferrer" target=3D"_blank">git=
-hub.com/armlabs/ssd1306_linux.git;protocol=3Dhttps;branch=3Dmaster</a> \<br=
->
-+=C2=A0 =C2=A0 file://0001-Use-include-filename.patch \<br>
-+&quot;<br>
-+SRCREV =3D &quot;7375f1088732d243f7167c9a17725f1a860da587&quot;<br>
-+<br>
-+S =3D &quot;${WORKDIR}/git&quot;<br>
-+<br>
-+# coreutils provides fmt which is used in the Makefile<br>
-+DEPENDS =3D &quot;i2c-tools coreutils-native&quot;<br>
-+<br>
-+EXTRA_OEMAKE =3D &quot;CC=3D&#39;${CC}&#39; CFLAGS=3D&#39;${CFLAGS}&#39; L=
-DFLAGS=3D&#39;${LDFLAGS}&#39;&quot;<br>
-+<br>
-+do_install() {<br>
-+=C2=A0 =C2=A0 install -d ${D}${bindir}<br>
-+=C2=A0 =C2=A0 install -m 0755 ${B}/ssd1306_bin ${D}${bindir}<br>
-+}<br>
--- <br>
-2.39.2<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#107908): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/107908" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/107908</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/103434392/199=
-7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/103434392/1997914</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
-
---0000000000007f83b5060dbda2f4--
 
