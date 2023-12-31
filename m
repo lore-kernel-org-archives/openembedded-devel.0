@@ -2,58 +2,58 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 24D38C47255
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 29DEEC4725D
 	for <webhook@archiver.kernel.org>; Sun, 31 Dec 2023 00:38:29 +0000 (UTC)
-Received: from mail-io1-f50.google.com (mail-io1-f50.google.com [209.85.166.50])
- by mx.groups.io with SMTP id smtpd.web11.198978.1703983103678594433
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.web11.198976.1703983102499005991
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 30 Dec 2023 16:38:23 -0800
+ Sat, 30 Dec 2023 16:38:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Xia0ISC2;
- spf=pass (domain: gmail.com, ip: 209.85.166.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-io1-f50.google.com with SMTP id ca18e2360f4ac-7bb39897b8bso108512839f.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 30 Dec 2023 16:38:23 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=msARn1Dq;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-1d422c9f894so50702275ad.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 30 Dec 2023 16:38:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20230601; t=1703983102; x=1704587902; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=wDrzMTV/l9NTX0Mdl3coDyC9hw18b6V0YSQiArLm9rg=;
-        b=Xia0ISC2lpGMUzXb1sKc+2Uc12/QLhLscD2Z3T2D80pjSynbN4V62QRmkS9MtlWoMA
-         eTTaMGJM2DjNdJdKU1wJXQRW91yJ/LwmeRpMsnJ5dNNNfsnOvVLX12i39v4T+L999ZaY
-         ZvMavQ4PP1Jrzo8GRVIzu92hWmTED+le4wxpTJoEdrU6vupqgKpCk0wXIuOj/78BEDwz
-         kc1Dwp0tObCI1uuHX6WTxe4neJMvDR9cvX9AJtOERgzCdVbqgLAXGbp7+V9VpgX7U8iL
-         ok8EThg/zh0JhR5Yj/87AiPmyLQ3PwQ6vqke/NYG396k1Id44oBIoCUmkGG6aIV8g9UJ
-         AkOg==
+        bh=mKYMQHuJpS1XalgMT0061zRrzJOdMcWeTXTaydZfG2M=;
+        b=msARn1DqXZGvW4XdXWRG2hjaMAJimVVIQp1zjEDufyYezP13B/MNVbGWZ5O/ghGGeY
+         LXe60VYVIX6YWgabPph9urOSTvP+X1ZLmlC0TeEdGFdAbrbUeswSK8up/fez0OxK8gYu
+         OMlDshnUweQsvFkNSxk3Gf1IF4NIvGX9XYwLZRygdy/81rg2LENEN9cKiroYqJCAjFsR
+         G3LjG8F/S1RxKhnYOk2PzSZaxsTTSds3ib43/W3pKy48/HboH0004LFJibJ2P40sBTTC
+         zb7iU9NJ61s004sVNDSwJ92jAYuCKio0kCC/TIKbO1gsPY8DgIOVgxJWCkWgPqvCQSMw
+         TnTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20230601; t=1703983102; x=1704587902;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=wDrzMTV/l9NTX0Mdl3coDyC9hw18b6V0YSQiArLm9rg=;
-        b=qtdsLvl3NQ8Q3fPVdiHPF7YBs8MJxU59/KESjJId6q3BMReLVmdd3DpRGXL4ftkNnU
-         rmW2+Y2AhnNX1QfU9UJ6yAZDE5Uo7TuVE+IcME/tF/BYUP0T+91lw8VCqQD/cr2iCxUT
-         ijpUdNC5IUBSA+9RMWm5Vej3yrECN47VgSVvYrJ8EosMGDtJUZmEvOTfOtheSXLj8tcp
-         35bRE8X18Z+H7Jp0OM4QTySIdmg0IxkjH7PfAYSzRHHR5z4t/+rw6sWLbobLQhTbMWO0
-         9Jm/unQ7umTlykL3BtFNz5Llq1hCvve6g6ExCHoD+ZnyrkH0AknMBjtp2mM8V+GZABvS
-         ZlNw==
-X-Gm-Message-State: AOJu0Yz/z1C0o/IDgmgOv1mkNOPJUgOUEj4H7B1GPmpGBlM1JK5X9TBh
-	AtT8cKXyV4fZRvsCts0vLFQO2vxfCmU=
-X-Google-Smtp-Source: AGHT+IFw+yyfyEun9SmE/X8JS0yu/BmCvWZmXSrxoiO5tvm6ONRsWivjWOj24+l/w+g+9dw84VhMHw==
-X-Received: by 2002:a5d:874f:0:b0:7ba:b744:bc4 with SMTP id k15-20020a5d874f000000b007bab7440bc4mr13963851iol.30.1703983102647;
-        Sat, 30 Dec 2023 16:38:22 -0800 (PST)
+        bh=mKYMQHuJpS1XalgMT0061zRrzJOdMcWeTXTaydZfG2M=;
+        b=vdrYi8Z7W2JGerWkgWaSj6Nbw8zRnCqOn/3X2la52gxBsFliatkSVWeJWen3dlIRxQ
+         8d/VF4nzL7SMiL8WaoGvoKs+5OXN/lpqpze1qINnihs28AyXvRDGy0QC8zy6ziBfxD3U
+         Y/ROxZgPsR4sD8rRovsQkvSkky8Pg3qwwUEUCcUC5pTx0oXmMXNyrOge7Oug1jntmxIY
+         au7AUrL4Bt6KUUc31z7YSzH/Yz/8yV/IAM3cGw7A8hGHLNmukloO1LLZ+hm4vLiiCWcD
+         5gJLrfXkQHd59hAUIRaN7iXGFcf/rA0b53vgUGHFNdIRN2gIvN6Kg1Ee++tHudtltS5H
+         0YrA==
+X-Gm-Message-State: AOJu0YzLF+Nq7Kds1zbHQz28auhTBM9SdteSSUgbAYm7fZUTB+H5Bnck
+	BQBBj/YS7gCLEGSwEPn/gKWVrqhIh1w=
+X-Google-Smtp-Source: AGHT+IHVkGHQa5xRvqkJiLOpbzAKUjvz8Sm2hTS8KHsN+eExkDa4GVvG9p2rvvfmAFAKDxoRzhhEXA==
+X-Received: by 2002:a17:902:d2cc:b0:1d4:2c93:39c1 with SMTP id n12-20020a170902d2cc00b001d42c9339c1mr14249492plc.73.1703983101526;
+        Sat, 30 Dec 2023 16:38:21 -0800 (PST)
 Received: from apollo.localdomain ([2601:646:9d80:4380::4b6f])
-        by smtp.gmail.com with ESMTPSA id sj10-20020a17090b2d8a00b0028b845f2890sm16692026pjb.33.2023.12.30.16.38.21
+        by smtp.gmail.com with ESMTPSA id sj10-20020a17090b2d8a00b0028b845f2890sm16692026pjb.33.2023.12.30.16.38.20
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Sat, 30 Dec 2023 16:38:21 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org, 
- alperak <alperyasinak1@gmail.com>
-In-Reply-To: <20231226063250.35258-1-alperyasinak1@gmail.com>
-References: <20231226063250.35258-1-alperyasinak1@gmail.com>
-Subject: Re: [meta-oe][PATCH] libharu: upgrade 2.3.0 -> 2.4.4
-Message-Id: <170398310166.873206.6751970731745528611.b4-ty@gmail.com>
-Date: Sat, 30 Dec 2023 16:38:21 -0800
+ Alex Kiernan <alex.kiernan@gmail.com>
+In-Reply-To: <20231224154459.27680-1-alex.kiernan@gmail.com>
+References: <20231224154459.27680-1-alex.kiernan@gmail.com>
+Subject: Re: [meta-oe][PATCH v3] bearssl: Upgrade to latest
+Message-Id: <170398310079.873206.18205187478483269339.b4-ty@gmail.com>
+Date: Sat, 30 Dec 2023 16:38:20 -0800
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -62,48 +62,23 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 31 Dec 2023 00:38:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107917
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107916
 
 
-On Tue, 26 Dec 2023 09:32:50 +0300, alperak wrote:
-> * Dropped patches because fixed in the new version.
+On Sun, 24 Dec 2023 15:44:58 +0000, Alex Kiernan wrote:
+> Install headers so that dependencies can use this to build against. Make
+> `brssl` executable, fixup library soname. Drop patches which change
+> build flags in favour of command line overrides. Add support for static
+> build.
 > 
-> Changelog:
-> 
-> * Add copy hpdf_namedict.h at install
-> * Added page boundary support.
-> * fixed glyph index to be 16 bit unsigned instead of signed
-> * Bug fixes
-> * Shared library has an SOVERSION now
-> * Fixed HPDF_FToA for small values
-> * Add static hpdf_version.h header
-> * hpdf_version.h included again
-> * File attachment issue resolved
-> * Renamed *_LIBZ defines to _*ZLIB, enables compression of PDF files again.
-> * Reinstated hpdf_version.h
-> * Fixed library name
-> * Set correct version number
-> * Add support for free-form triangle shading objects.
-> * Fix config constant to match use in hpdf_mmgr.c
-> * Improve small number writing in HPDF_FToA.
-> * Fix missing /CapHeight key in font definition
-> * Change HPDF_Page_CreateXObjectFromImage zoom parameter type to HPDF
-> * Fix another case of png files with background mask save uncompressed
-> * Avoid issue with libtiff duplicate symbols
-> * Reajust bit_depth of png image after striping depth from 16 to 8.
-> * Fixed typo in Japanese font name: Mincyo -> Mincho
-> * Fix various typos
-> * hpdf.h: add missing HPDF_Boolean typedef
-> * Moved to a CMake only build environment.
-> * Fix bad unicode in comment
-> * Fix various typos
+> Changes:
 > 
 > [...]
 
 Applied, thanks!
 
-[1/1] libharu: upgrade 2.3.0 -> 2.4.4
-      commit: b9b9a9578b484741edfe451cac324c2761c07454
+[1/1] bearssl: Upgrade to latest
+      commit: bf4d7f62840ceef1f6319f161a40c4cdc8b2338a
 
 Best regards,
 -- 
