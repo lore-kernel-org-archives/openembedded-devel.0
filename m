@@ -2,57 +2,57 @@ Return-Path: <alex.kanavin@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6F9F5C4707B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 93470C47258
 	for <webhook@archiver.kernel.org>; Sun, 31 Dec 2023 12:23:43 +0000 (UTC)
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
- by mx.groups.io with SMTP id smtpd.web11.218944.1704025422060381305
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
+ by mx.groups.io with SMTP id smtpd.web11.218941.1704025420013025452
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 31 Dec 2023 04:23:42 -0800
+ Sun, 31 Dec 2023 04:23:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=OxuVKjBm;
- spf=pass (domain: gmail.com, ip: 209.85.128.43, mailfrom: alex.kanavin@gmail.com)
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-40d5b159350so41223005e9.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 31 Dec 2023 04:23:41 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=YNiQ7udr;
+ spf=pass (domain: gmail.com, ip: 209.85.221.50, mailfrom: alex.kanavin@gmail.com)
+Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-33677fb38a3so8183705f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 31 Dec 2023 04:23:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1704025420; x=1704630220; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1704025418; x=1704630218; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=towHQuLyDqvJD+G7pjJB4hOSk1A+0XmK8mqEW9Rn4D4=;
-        b=OxuVKjBm39gq0CSNJ7RVmIxMqqbn4s02srbFWYHIFDfQwAzbqg8YzsAPekRfTA8rXA
-         L1jZLaiZQ86eRp8Xx0jt/TCOViUZTbN99B9G8YtL+t96Sx5N5jZB9Jkg1Vvr12mO+P4Q
-         EOOCEvr/YDZRTOPx7U3JW+yzqBJQNfJov57wNjcb+LsBqx6y2YsWDTiw6z1n5JUMibOx
-         u666ZdjqbwXzryDuyRElMM/ZZ9wW6Gyx6S2ssLfGXL3qbH7vIJi4dT0mBpgdFrGSdMiB
-         sPO33CrQsnbDFKujak3W2kVzPpzKR7Rix6zyC1NMvJRhMnDLhP798+kPWgK0+BoBUrIW
-         wOhg==
+        bh=yefNwaG9lIkB36dVsMrr/Vq0BNaZzPQvK6POGFI7MWs=;
+        b=YNiQ7udr2nvTT9Z9gFajs/ekdYs4+7HFx8STWp2EhmqlzATVm6MdtaFfEvpBJp+jwc
+         unPOdyT2uiTH2U3UCLk9P5xqotFV8QRl/tMONQIQ/OeFTeFCHjzhMtd6KqUTzdtuB39V
+         k3uL8q2/i29HMy9M0J9VLWat03LIadfRVqFr6jgEX/3u+KWjgv+t+xOFqKLbHsvvze2C
+         mA9P00KQNu88dp5b+0oYXBz8AUL97GquisgtUEO+MoQXzGRqRqaluSgrgHEiQwSTcf4V
+         +slrhZSNBccb9HWlTxxCXK9BUz8uCYw/7Jm901tWbHeefvHgUQ/BJgVvlGa12unYqnVB
+         cQBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704025420; x=1704630220;
+        d=1e100.net; s=20230601; t=1704025418; x=1704630218;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=towHQuLyDqvJD+G7pjJB4hOSk1A+0XmK8mqEW9Rn4D4=;
-        b=PAabeqU/aC/vvfrWgW9rThN9FkSLorSQMFZUSFUfxksUAr27iAFB4kaNeuSG6ypHUG
-         HeEEGbDPYiqvMvfI/FKFctCv/v8RsnsHAtpQIdPIaUvaQNmcbWYyQkzJXQuGkEZUAJfU
-         SVhMsKOj44lXrz4QFrh2GfMy58Ufh++2rGLQnzVP4Cklon3epdWBMBXZzNr/WWiFkbxw
-         pjZ0c3D0HdqpjYdFtmvggs7zAKdZ0ri8jjLr4E/IpPXZ/qeyoQjZXPxvVl0w+WHwulsq
-         pjz38/e2tmMmyaXX+P/WYu+yr44F6zDNljpuWbbUh/TOsMB75OXfzEYScxu+aHbb6OGj
-         mdOw==
-X-Gm-Message-State: AOJu0YxVX/HMYAZdtMKQB+RqlG/rBNVtxGx9xUwh+upq4dINQRCap7dW
-	Q1jVYoLproxNVBGCA4gQYSwELWZsUPU=
-X-Google-Smtp-Source: AGHT+IH1ciaDzuvi2nzdz0OynZVeDgDRcJUKakly4EDUQTaWAr1dRVujci/fRKutXSmCzw1bNo2dfw==
-X-Received: by 2002:a05:600c:705:b0:40d:47b5:8e3 with SMTP id i5-20020a05600c070500b0040d47b508e3mr6954849wmn.31.1704025420483;
-        Sun, 31 Dec 2023 04:23:40 -0800 (PST)
+        bh=yefNwaG9lIkB36dVsMrr/Vq0BNaZzPQvK6POGFI7MWs=;
+        b=SFFNqnAoRfQpsP6/VO6lEffS5HM2kdho62FbNYAn+IGFVC8h2N2KIRqUiWOHNpPo05
+         I/sXbdct9nEygQuW/R83MDXeF7fsXoW6/5frLm4LIkwOMfu8mns+3tqN+jMsyY7hRDos
+         KZ+a0H4obcQo6O0LnaqmsiH27p5PMau6/oGRIM5tnvSTR77StOwv4cWQRxuMn/on+FAv
+         NzCJoGWqDqaF049PIr2388b+Neq7yOCbapINl13mZUZ5VwtWWyzXG9tleIKlLPj10sNF
+         5ejj270Sidm6lYqqc7ngxGfy7D5tYyW91mF7Z1zBR3mSJVvFVb/QfVkldmEnOYSFUWuS
+         8Aww==
+X-Gm-Message-State: AOJu0Yz/hVcJ4TO5GZfSOldKbk8VTLG+MBDWn3nFbYcCej5yjaLKzXO0
+	T25qHgq1FrHDWAaCwtt3++cG+hoVOL4=
+X-Google-Smtp-Source: AGHT+IEiA/j2ftDptZv7POM6UPg3WyBK+3v4nIuqjlZcMLex2w4dIAo6ZeHvv139/7JguXul2HN4VA==
+X-Received: by 2002:a5d:5486:0:b0:336:6e1b:9021 with SMTP id h6-20020a5d5486000000b003366e1b9021mr6786449wrv.106.1704025418444;
+        Sun, 31 Dec 2023 04:23:38 -0800 (PST)
 Received: from Zen2.lab.linutronix.de. (drugstore.linutronix.de. [80.153.143.164])
-        by smtp.gmail.com with ESMTPSA id ay23-20020a170907901700b00a26aea4942dsm9155474ejc.123.2023.12.31.04.23.40
+        by smtp.gmail.com with ESMTPSA id ay23-20020a170907901700b00a26aea4942dsm9155474ejc.123.2023.12.31.04.23.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 31 Dec 2023 04:23:40 -0800 (PST)
+        Sun, 31 Dec 2023 04:23:38 -0800 (PST)
 From: Alexander Kanavin <alex.kanavin@gmail.com>
 X-Google-Original-From: Alexander Kanavin <alex@linutronix.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Alexander Kanavin <alex@linutronix.de>
-Subject: [PATCH 09/23] python3-gmpy2: fix python 3.12 issues
-Date: Sun, 31 Dec 2023 13:23:15 +0100
-Message-Id: <20231231122329.405225-9-alex@linutronix.de>
+Subject: [PATCH 05/23] libpwquality: backport a python 3.12 compatibility patch
+Date: Sun, 31 Dec 2023 13:23:11 +0100
+Message-Id: <20231231122329.405225-5-alex@linutronix.de>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231231122329.405225-1-alex@linutronix.de>
 References: <20231231122329.405225-1-alex@linutronix.de>
@@ -62,295 +62,171 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 31 Dec 2023 12:23:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107960
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107956
+
+This also allows dropping a previous patch.
 
 Signed-off-by: Alexander Kanavin <alex@linutronix.de>
 ---
- .../0001-src-fix-python-3.12-builds.patch     | 263 ++++++++++++++++++
- .../python/python3-gmpy2_2.1.5.bb             |   1 +
- 2 files changed, 264 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-gmpy2/0001-src-fix-python-3.12-builds.patch
+ ...-Use-setuptools-instead-of-distutils.patch | 78 +++++++++++++++++++
+ ...missing-python-include-dir-for-cross.patch | 43 ----------
+ .../libpwquality/libpwquality_1.4.5.bb        |  6 +-
+ 3 files changed, 81 insertions(+), 46 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/libpwquality/files/0001-Use-setuptools-instead-of-distutils.patch
+ delete mode 100644 meta-oe/recipes-extended/libpwquality/files/add-missing-python-include-dir-for-cross.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-gmpy2/0001-src-fix-python-3.12-builds.patch b/meta-python/recipes-devtools/python/python3-gmpy2/0001-src-fix-python-3.12-builds.patch
+diff --git a/meta-oe/recipes-extended/libpwquality/files/0001-Use-setuptools-instead-of-distutils.patch b/meta-oe/recipes-extended/libpwquality/files/0001-Use-setuptools-instead-of-distutils.patch
 new file mode 100644
-index 000000000..1171322e2
+index 000000000..7eaca66b5
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-gmpy2/0001-src-fix-python-3.12-builds.patch
-@@ -0,0 +1,263 @@
-+From 43f132103cedfd92b85173bcdacfbabd5916d9fc Mon Sep 17 00:00:00 2001
-+From: Alexander Kanavin <alex@linutronix.de>
-+Date: Wed, 27 Dec 2023 14:52:16 +0100
-+Subject: [PATCH] src: fix python 3.12 builds
++++ b/meta-oe/recipes-extended/libpwquality/files/0001-Use-setuptools-instead-of-distutils.patch
+@@ -0,0 +1,78 @@
++From ad95b7684365dea8335c34527d4c1463c1668af0 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Miro=20Hron=C4=8Dok?= <miro@hroncok.cz>
++Date: Fri, 31 Mar 2023 14:52:19 +0200
++Subject: [PATCH] Use setuptools instead of distutils
 +
-+This is a backport for 3.1.x versions provided separately in https://github.com/aleaxit/gmpy/issues/446
++distutils is removed from Python 3.12+:
++https://peps.python.org/pep-0632/
 +
-+Upstream-Status: Inappropriate [can be dropped when 2.2.x is released]
-+
++Upstream-Status: Backport [https://github.com/libpwquality/libpwquality/commit/7b5e0f0097faebdcc6a8b783237bbba7a983147a]
 +Signed-off-by: Alexander Kanavin <alex@linutronix.de>
 +---
-+ src/gmpy2_convert.h       |  21 +++++++
-+ src/gmpy2_convert_gmp.c   | 129 +++++++++++++-------------------------
-+ src/gmpy2_convert_utils.c |   2 +-
-+ 3 files changed, 65 insertions(+), 87 deletions(-)
++ libpwquality.spec.in | 11 ++---------
++ python/Makefile.am   |  2 +-
++ python/setup.py.in   |  6 +++---
++ 3 files changed, 6 insertions(+), 13 deletions(-)
 +
-+diff --git a/src/gmpy2_convert.h b/src/gmpy2_convert.h
-+index f887d47..3e8cb2b 100644
-+--- a/src/gmpy2_convert.h
-++++ b/src/gmpy2_convert.h
-+@@ -142,6 +142,27 @@ extern "C" {
-+ #define IS_TYPE_COMPLEX_ONLY(x)     ((x > OBJ_TYPE_REAL) && \
-+                                      (x < OBJ_TYPE_COMPLEX))
++diff --git a/libpwquality.spec.in b/libpwquality.spec.in
++index 70a6f53..0809126 100644
++--- a/libpwquality.spec.in
+++++ b/libpwquality.spec.in
++@@ -33,9 +33,11 @@ BuildRequires: gettext
++ BuildRequires: pam-devel
++ %if %{with python2}
++ BuildRequires: python2-devel
+++BuildRequires: python2-setuptools
++ %endif
++ %if %{with python3}
++ BuildRequires: python3-devel
+++BuildRequires: python3-setuptools
++ %endif
 + 
-++/* Compatibility macros (to work with PyLongObject internals).
-++ */
-++
-++#if PY_VERSION_HEX >= 0x030C0000
-++#  define TAG_FROM_SIGN_AND_SIZE(is_neg, size) ((is_neg?2:(size==0)) | (((size_t)size) << 3))
-++#  define _PyLong_SetSignAndDigitCount(obj, is_neg, size) (obj->long_value.lv_tag = TAG_FROM_SIGN_AND_SIZE(is_neg, size))
-++#elif PY_VERSION_HEX >= 0x030900A4
-++#  define _PyLong_SetSignAndDigitCount(obj, is_neg, size) (Py_SET_SIZE(obj, (is_neg?-1:1)*size))
-++#else
-++#  define _PyLong_SetSignAndDigitCount(obj, is_neg, size) (Py_SIZE(obj) = (is_neg?-1:1)*size)
-++#endif
-++
-++#if PY_VERSION_HEX >= 0x030C0000
-++#  define GET_OB_DIGIT(obj) obj->long_value.ob_digit
-++#  define _PyLong_IsNegative(obj) ((obj->long_value.lv_tag & 3) == 2)
-++#  define _PyLong_DigitCount(obj) (obj->long_value.lv_tag >> 3)
-++#else
-++#  define GET_OB_DIGIT(obj) obj->ob_digit
-++#  define _PyLong_IsNegative(obj) (Py_SIZE(obj) < 0)
-++#  define _PyLong_DigitCount(obj) (_PyLong_IsNegative(obj)? -Py_SIZE(obj):Py_SIZE(obj))
-++#endif
-+ 
-+ /* Since the macros are used in gmpy2's codebase, these functions are skipped
-+  * until they are needed for the C API in the future.
-+diff --git a/src/gmpy2_convert_gmp.c b/src/gmpy2_convert_gmp.c
-+index cf0891e..8b8df81 100644
-+--- a/src/gmpy2_convert_gmp.c
-++++ b/src/gmpy2_convert_gmp.c
-+@@ -59,33 +59,24 @@ GMPy_MPZ_From_PyIntOrLong(PyObject *obj, CTXT_Object *context)
-+     }
-+ #endif
-+ 
-+-    switch (Py_SIZE(templong)) {
-+-    case -1:
-+-        mpz_set_si(result->z, -(sdigit)templong->ob_digit[0]);
-++    len = _PyLong_DigitCount(templong);
-++    negative = _PyLong_IsNegative(templong);
-++
-++    switch (len) {
-++    case 1:
-++        mpz_set_si(result->z, (sdigit)GET_OB_DIGIT(templong)[0]);
-+         break;
-+     case 0:
-+         mpz_set_si(result->z, 0);
-+         break;
-+-    case 1:
-+-        mpz_set_si(result->z, templong->ob_digit[0]);
-+-        break;
-+     default:
-+-        mpz_set_si(result->z, 0);
++ URL: https://github.com/libpwquality/libpwquality/
++@@ -103,15 +105,6 @@ cp -a . %{py3dir}
++ pushd %{py3dir}
++ %endif
++ %if %{with python3}
++-# setuptools >= 60 changes the environment to use its bundled copy of distutils
++-# by default, not the Python-bundled one. To run the Python's standard library
++-# distutils, the environment variable must be set.
++-# Although technically setuptools is not needed for this package, if it's
++-# pulled by another package, it changes the environment and consequently,
++-# the build fails. This was reported in:
++-# https://github.com/pypa/setuptools/issues/3143
++-export SETUPTOOLS_USE_DISTUTILS=stdlib
 +-
-+-        if (Py_SIZE(templong) < 0) {
-+-            len = - Py_SIZE(templong);
-+-            negative = 1;
-+-        } else {
-+-            len = Py_SIZE(templong);
-+-            negative = 0;
-+-        }
-+-
-+-        mpz_import(result->z, len, -1, sizeof(templong->ob_digit[0]), 0,
-+-                   sizeof(templong->ob_digit[0])*8 - PyLong_SHIFT, templong->ob_digit);
-++        mpz_import(result->z, len, -1, sizeof(GET_OB_DIGIT(templong)[0]), 0,
-++                   sizeof(GET_OB_DIGIT(templong)[0])*8 - PyLong_SHIFT,
-++                   GET_OB_DIGIT(templong));
-++    }
++ %configure \
++ 	--with-securedir=%{_moduledir} \
++ 	--with-pythonsitedir=%{python3_sitearch} \
++diff --git a/python/Makefile.am b/python/Makefile.am
++index 1d00c0c..6e51744 100644
++--- a/python/Makefile.am
+++++ b/python/Makefile.am
++@@ -14,7 +14,7 @@ all-local:
++ 	CFLAGS="${CFLAGS} -fno-strict-aliasing" @PYTHONBINARY@ setup.py build --build-base py$(PYTHONREV)
 + 
-+-        if (negative) {
-+-            mpz_neg(result->z, result->z);
-+-        }
-++    if (negative) {
-++        mpz_neg(result->z, result->z);
-+     }
-+     return result;
-+ }
-+@@ -105,33 +96,24 @@ mpz_set_PyIntOrLong(mpz_t z, PyObject *obj)
-+     }
-+ #endif
++ install-exec-local:
++-	CFLAGS="${CFLAGS} -fno-strict-aliasing" @PYTHONBINARY@ setup.py build --build-base py$(PYTHONREV) install --prefix=${DESTDIR}${prefix}
+++	CFLAGS="${CFLAGS} -fno-strict-aliasing" @PYTHONBINARY@ setup.py build --build-base py$(PYTHONREV) install --root ${DESTDIR} --prefix=${prefix}
 + 
-+-    switch (Py_SIZE(templong)) {
-+-    case -1:
-+-        mpz_set_si(z, -(sdigit)templong->ob_digit[0]);
-++    len = _PyLong_DigitCount(templong);
-++    negative = _PyLong_IsNegative(templong);
-++
-++    switch (len) {
-++    case 1:
-++        mpz_set_si(z, (sdigit)GET_OB_DIGIT(templong)[0]);
-+         break;
-+     case 0:
-+         mpz_set_si(z, 0);
-+         break;
-+-    case 1:
-+-        mpz_set_si(z, templong->ob_digit[0]);
-+-        break;
-+     default:
-+-        mpz_set_si(z, 0);
-+-
-+-        if (Py_SIZE(templong) < 0) {
-+-            len = - Py_SIZE(templong);
-+-            negative = 1;
-+-        } else {
-+-            len = Py_SIZE(templong);
-+-            negative = 0;
-+-        }
-+-
-+-        mpz_import(z, len, -1, sizeof(templong->ob_digit[0]), 0,
-+-                   sizeof(templong->ob_digit[0])*8 - PyLong_SHIFT, templong->ob_digit);
-++        mpz_import(z, len, -1, sizeof(GET_OB_DIGIT(templong)[0]), 0,
-++                   sizeof(GET_OB_DIGIT(templong)[0])*8 - PyLong_SHIFT,
-++                   GET_OB_DIGIT(templong));
-++    }
++ clean-local:
++ 	rm -rf py$(PYTHONREV)
++diff --git a/python/setup.py.in b/python/setup.py.in
++index a741b91..f934c50 100755
++--- a/python/setup.py.in
+++++ b/python/setup.py.in
++@@ -6,9 +6,9 @@
 + 
-+-        if (negative) {
-+-            mpz_neg(z, z);
-+-        }
-++    if (negative) {
-++        mpz_neg(z, z);
-+     }
-+     return;
-+ }
-+@@ -186,12 +168,7 @@ GMPy_PyLong_From_MPZ(MPZ_Object *obj, CTXT_Object *context)
++ import os
 + 
-+     /* Assume gmp uses limbs as least as large as the builtin longs do */
++-from distutils.core import setup, Extension
++-from distutils.command.build_ext import build_ext as _build_ext
++-from distutils.command.sdist import sdist as _sdist
+++from setuptools import setup, Extension
+++from setuptools.command.build_ext import build_ext as _build_ext
+++from setuptools.command.sdist import sdist as _sdist
 + 
-+-    if (mpz_sgn(obj->z) < 0) {
-+-        negative = 1;
-+-    } else {
-+-        negative = 0;
-+-    }
-+-
-++    negative = mpz_sgn(obj->z) < 0;
-+     size = (mpz_sizeinbase(obj->z, 2) + PyLong_SHIFT - 1) / PyLong_SHIFT;
-+ 
-+     if (!(result = _PyLong_New(size))) {
-+@@ -200,31 +177,20 @@ GMPy_PyLong_From_MPZ(MPZ_Object *obj, CTXT_Object *context)
-+         /* LCOV_EXCL_STOP */
-+     }
-+ 
-+-    mpz_export(result->ob_digit, &count, -1, sizeof(result->ob_digit[0]), 0,
-+-               sizeof(result->ob_digit[0])*8 - PyLong_SHIFT, obj->z);
-++    mpz_export(GET_OB_DIGIT(result), &count, -1, sizeof(GET_OB_DIGIT(result)[0]), 0,
-++               sizeof(GET_OB_DIGIT(result)[0])*8 - PyLong_SHIFT, obj->z);
-+ 
-+     if (count == 0) {
-+-        result->ob_digit[0] = 0;
-++        GET_OB_DIGIT(result)[0] = 0;
-+     }
-+ 
-+     /* long_normalize() is file-static so we must reimplement it */
-+     /* longobjp = long_normalize(longobjp); */
-+-    while ((size>0) && (result->ob_digit[size-1] == 0)) {
-++    while ((size>0) && (GET_OB_DIGIT(result)[size-1] == 0)) {
-+         size--;
-+     }
-+-#if PY_VERSION_HEX >= 0x030900A4
-+-    Py_SET_SIZE(result, size);
-+-#else
-+-    Py_SIZE(result) = size;
-+-#endif
-+ 
-+-    if (negative) {
-+-#if PY_VERSION_HEX >= 0x030900A4
-+-        Py_SET_SIZE(result, - Py_SIZE(result));
-+-#else
-+-        Py_SIZE(result) = - Py_SIZE(result);
-+-#endif
-+-    }
-++    _PyLong_SetSignAndDigitCount(result, negative, size);
-+     return (PyObject*)result;
-+ }
-+ 
-+@@ -476,33 +442,24 @@ GMPy_XMPZ_From_PyIntOrLong(PyObject *obj, CTXT_Object *context)
-+     }
-+ #endif
-+ 
-+-    switch (Py_SIZE(templong)) {
-+-    case -1:
-+-        mpz_set_si(result->z, -(sdigit)templong->ob_digit[0]);
-++    len = _PyLong_DigitCount(templong);
-++    negative = _PyLong_IsNegative(templong);
-++
-++    switch (len) {
-++    case 1:
-++        mpz_set_si(result->z, (sdigit)GET_OB_DIGIT(templong)[0]);
-+         break;
-+     case 0:
-+         mpz_set_si(result->z, 0);
-+         break;
-+-    case 1:
-+-        mpz_set_si(result->z, templong->ob_digit[0]);
-+-        break;
-+     default:
-+-        mpz_set_si(result->z, 0);
-+-
-+-        if (Py_SIZE(templong) < 0) {
-+-            len = - Py_SIZE(templong);
-+-            negative = 1;
-+-        } else {
-+-            len = Py_SIZE(templong);
-+-            negative = 0;
-+-        }
-+-
-+-        mpz_import(result->z, len, -1, sizeof(templong->ob_digit[0]), 0,
-+-                   sizeof(templong->ob_digit[0])*8 - PyLong_SHIFT, templong->ob_digit);
-++        mpz_import(result->z, len, -1, sizeof(GET_OB_DIGIT(templong)[0]), 0,
-++                   sizeof(GET_OB_DIGIT(templong)[0])*8 - PyLong_SHIFT,
-++                   GET_OB_DIGIT(templong));
-++    }
-+ 
-+-        if (negative) {
-+-            mpz_neg(result->z, result->z);
-+-        }
-++    if (negative) {
-++        mpz_neg(result->z, result->z);
-+     }
-+     return result;
-+ }
-+@@ -639,7 +596,7 @@ GMPy_MPQ_From_PyStr(PyObject *s, int base, CTXT_Object *context)
-+     }
-+ 
-+     cp = PyBytes_AsString(ascii_str);
-+-    
-++
-+     {
-+         char *whereslash = strchr((char*)cp, '/');
-+         char *wheredot = strchr((char*)cp, '.');
-+diff --git a/src/gmpy2_convert_utils.c b/src/gmpy2_convert_utils.c
-+index d676eaf..8908d17 100644
-+--- a/src/gmpy2_convert_utils.c
-++++ b/src/gmpy2_convert_utils.c
-+@@ -123,7 +123,7 @@ static unsigned long
-+ GMPy_Integer_AsUnsignedLongWithType_v2(PyObject *x, int xtype)
-+ {
-+     if IS_TYPE_PyInteger(xtype) {
-+-        if (Py_SIZE(x) < 0) {
-++        if (_PyLong_IsNegative(((PyLongObject*)x))) {
-+             VALUE_ERROR("n must be > 0");
-+             return (unsigned long)-1;
-+         }
-diff --git a/meta-python/recipes-devtools/python/python3-gmpy2_2.1.5.bb b/meta-python/recipes-devtools/python/python3-gmpy2_2.1.5.bb
-index 9a66af9a9..d9e9bd50e 100644
---- a/meta-python/recipes-devtools/python/python3-gmpy2_2.1.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-gmpy2_2.1.5.bb
-@@ -10,5 +10,6 @@ PYPI_PACKAGE = "gmpy2"
- SRC_URI[sha256sum] = "bc297f1fd8c377ae67a4f493fc0f926e5d1b157e5c342e30a4d84dc7b9f95d96"
++ def genconstants(headerfile, outputfile):
++     hf = open(headerfile, 'r')
+diff --git a/meta-oe/recipes-extended/libpwquality/files/add-missing-python-include-dir-for-cross.patch b/meta-oe/recipes-extended/libpwquality/files/add-missing-python-include-dir-for-cross.patch
+deleted file mode 100644
+index 636b29407..000000000
+--- a/meta-oe/recipes-extended/libpwquality/files/add-missing-python-include-dir-for-cross.patch
++++ /dev/null
+@@ -1,43 +0,0 @@
+-From 1ea09e09ab2387c326bb7170835361ece6e25477 Mon Sep 17 00:00:00 2001
+-From: Hongxu Jia <hongxu.jia@windriver.com>
+-Date: Mon, 3 Aug 2015 13:43:14 +0800
+-Subject: [PATCH] setup.py.in: add missing python include dir for cross
+- compiling
+-
+-Upstream-Status: Inappropriate [oe-core specific]
+-
+-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+----
+- python/Makefile.am | 2 +-
+- python/setup.py.in | 3 ++-
+- 2 files changed, 3 insertions(+), 2 deletions(-)
+-
+-diff --git a/python/Makefile.am b/python/Makefile.am
+-index 1d00c0c..52816b2 100644
+---- a/python/Makefile.am
+-+++ b/python/Makefile.am
+-@@ -14,7 +14,7 @@ all-local:
+- 	CFLAGS="${CFLAGS} -fno-strict-aliasing" @PYTHONBINARY@ setup.py build --build-base py$(PYTHONREV)
+- 
+- install-exec-local:
+--	CFLAGS="${CFLAGS} -fno-strict-aliasing" @PYTHONBINARY@ setup.py build --build-base py$(PYTHONREV) install --prefix=${DESTDIR}${prefix}
+-+	CFLAGS="${CFLAGS} -fno-strict-aliasing" @PYTHONBINARY@ setup.py build --build-base py$(PYTHONREV) install --prefix=${DESTDIR}${prefix} --install-lib=${DESTDIR}/${PYTHONSITEDIR}
+- 
+- clean-local:
+- 	rm -rf py$(PYTHONREV)
+-diff --git a/python/setup.py.in b/python/setup.py.in
+-index a741b91..6759a95 100755
+---- a/python/setup.py.in
+-+++ b/python/setup.py.in
+-@@ -33,7 +33,7 @@ class sdist(_sdist):
+- 
+- pwqmodule = Extension('pwquality',
+-             sources = ['pwquality.c'],
+--            include_dirs = ['../src'],
+-+            include_dirs = ['../src', os.path.join(os.environ['STAGING_INCDIR'], os.environ['PYTHON_DIR'])],
+-             library_dirs = ['../src/.libs'],
+-             libraries = ['pwquality'])
+- 
+--- 
+-2.17.1
+-
+diff --git a/meta-oe/recipes-extended/libpwquality/libpwquality_1.4.5.bb b/meta-oe/recipes-extended/libpwquality/libpwquality_1.4.5.bb
+index 5287430c4..91afedcb6 100644
+--- a/meta-oe/recipes-extended/libpwquality/libpwquality_1.4.5.bb
++++ b/meta-oe/recipes-extended/libpwquality/libpwquality_1.4.5.bb
+@@ -5,11 +5,11 @@ SECTION = "devel/lib"
+ LICENSE = "GPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=6bd2f1386df813a459a0c34fde676fc2"
  
- inherit pypi setuptools3 python3native
-+SRC_URI += "file://0001-src-fix-python-3.12-builds.patch"
+-DEPENDS = "cracklib"
++DEPENDS = "cracklib python3-setuptools-native"
  
- BBCLASSEXTEND = "native nativesdk"
+ SRC_URI = "git://github.com/libpwquality/libpwquality;branch=master;protocol=https \
+-           file://add-missing-python-include-dir-for-cross.patch \
+-"
++           file://0001-Use-setuptools-instead-of-distutils.patch \
++           "
+ SRCREV = "5490e96a3dd6ed7371435ca5b3ccef98bdb48b5a"
+ 
+ S = "${WORKDIR}/git"
 -- 
 2.39.2
 
