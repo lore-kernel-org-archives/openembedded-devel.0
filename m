@@ -2,269 +2,86 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1C573C4706F
-	for <webhook@archiver.kernel.org>; Sat, 30 Dec 2023 19:06:27 +0000 (UTC)
-Received: from mail-il1-f180.google.com (mail-il1-f180.google.com [209.85.166.180])
- by mx.groups.io with SMTP id smtpd.web11.190574.1703963178748856035
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E28F1C46CD2
+	for <webhook@archiver.kernel.org>; Sun, 31 Dec 2023 00:38:28 +0000 (UTC)
+Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
+ by mx.groups.io with SMTP id smtpd.web10.198907.1703983108200112655
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 30 Dec 2023 11:06:18 -0800
+ Sat, 30 Dec 2023 16:38:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=VCB0k0ee;
- spf=pass (domain: gmail.com, ip: 209.85.166.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-il1-f180.google.com with SMTP id e9e14a558f8ab-35fe456b94cso36472745ab.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 30 Dec 2023 11:06:18 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=CHExf17W;
+ spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-1d408d0bb87so56329745ad.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 30 Dec 2023 16:38:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1703963178; x=1704567978; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=iv9L4FH4w3276SxLe3NxiXN/R71YWxIH4kAJppiA/P8=;
-        b=VCB0k0eeZeArr9aIbTekHi7BqEHZ3uxsgWUaA3tfvdnbCIz7AigbcyVlsHtbBzCp1C
-         6rfWctz0GS9Glg5vUXCqaSe2bXBwAYIp5/Sgl1ynmkPMf5bTwnHlCGukFD6tQVHlGx73
-         blSZAqwnOtXQotCT1NGjKTZ9zXy9LHWVQQ0VW1BtS9+vXdUfF96aEmcalRIImg5FLimH
-         CaHyPH8om98bXBDqQdpbajXn89c+lRCDqRsYRKCfNNxvGQyyzj0kUtCoG3aAxkDt/KJU
-         Vw0YBa6Tg4DN2T3TzTazzF2OqE/l4d860LyY3awbRlReCihuPWcWJULlhuvN0N7m1ERA
-         wDJw==
+        d=gmail.com; s=20230601; t=1703983107; x=1704587907; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:date:message-id:subject
+         :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=zrstr05uqMtN8RVoV5iCekHSbld+TihMzvx33baHWao=;
+        b=CHExf17WuTX9ArcgsUQqghREprmU5Ch7Y2I2ifs+H/QwXtUvc+13kUhrPURxxRxH/6
+         0M23uuks0ODp1DvMesPE0ujOyaBVF1XBrchV1y3pui0933PuVJmxGGQr5kdzZ/JLA8F3
+         hA8Sz0qfLBDsisbgn+yz4HLNBXuCsvyhjgfKqOsIT12n7oPIkbHuouZukYfDHVAx2s8d
+         SyKuHLvndLcyF8HFvnGdyZfFFqm5c6BbTG1uda/Ax0mMmvefwV8VQlobtOL1ETDwa/Dm
+         ZynuQGIDSYZzTD288gTbND8qRISu96EQgzIBxPX8OXkWGMM6pWiMFLQI5ZaZ2TS86K+J
+         8bmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1703963178; x=1704567978;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1703983107; x=1704587907;
+        h=content-transfer-encoding:mime-version:date:message-id:subject
+         :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=iv9L4FH4w3276SxLe3NxiXN/R71YWxIH4kAJppiA/P8=;
-        b=OQD8NuV9aS9E0R91aSz8kv2VFN3AJBu9MZ2iq9fbnFLgwjwg5IvV1sFWTSkFnWua7U
-         JXbzACTvmqfne9f2thKW1gewyIlKxODnQAMd65hzDO0eweTx89/ZO57O4OghexGPrlog
-         lFzEfg9DaJxK3l3S1fZY3V27uxViWdbTB9wf6Oo0TewHPYtgWSnZBFLZ+nduJM33++mj
-         wNNNmwFG6GQ+YCPe1V99irdxlGWyvXN68Kd0uFo6YTQrhlh9EpalCdzmIAjcz30qc1GK
-         tljWXWLPJCy/SKPo+lcPbZn5ZBwH7th0cdQg2l+6ZANuH3Zxre+5r7NtXbYpp4IxRy0k
-         tFZA==
-X-Gm-Message-State: AOJu0YyJFfyrScPwyT/h4Rb+be+IN4fWZKmU8ueVlSRKWCpmdYBUwqvo
-	k0M4Hib6arSwH33EoZqUE+uqHyAvrsA=
-X-Google-Smtp-Source: AGHT+IGVZLvSa5VIQS8hx+INtpJIrE1rsLcKJBK2MIKhvaJwGhBiKD+wrEbi+M/7h/IqQAP61Auobg==
-X-Received: by 2002:a05:6e02:18c7:b0:35f:d99b:2f5d with SMTP id s7-20020a056e0218c700b0035fd99b2f5dmr25655100ilu.8.1703963177554;
-        Sat, 30 Dec 2023 11:06:17 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::4b6f])
-        by smtp.gmail.com with ESMTPSA id l7-20020a17090270c700b001d49608e3dfsm4311066plt.50.2023.12.30.11.06.16
+        bh=zrstr05uqMtN8RVoV5iCekHSbld+TihMzvx33baHWao=;
+        b=kKX47rS9Tq5vqKF/CvnSoObpQa1EIgfkITyJv456pRr4rLEQsVpZE5XwaRUdMqhdh3
+         /5L00yQFiAXVgcXmXfB4bGKtZ7p4ddixhlkEh8z9O5IYOa5eA/8X3VZTP/AoqS7a+2+R
+         1oC39pXShAlhhX8MAgVoRbmsOJBZ3EwI5ixiacXv6Ohe6ezK0qjNYyFTkVaHVWdHfQFo
+         i6VDMuMepjeNIXRnqWQOLceUELo6XBc6WhejqaBCCt8l+Mz9EJtW/wMo8oOFFoT0QneS
+         r/u72Cu/jJNsdWZOioLTTrvKxupyh/M2o5Ieozg/e66DOpa7bsxcQdcfaYaoKUwkcCBg
+         wiBA==
+X-Gm-Message-State: AOJu0YwpxX1RIjRzOKWIbhUxP5/aNXsXdkuQOxkizKIuwj8Ur+3puYqU
+	WYoA+VYJITTlB9RxTc01EshvMUIgAlc=
+X-Google-Smtp-Source: AGHT+IHP9jhdqFKrPl3J+BPs0M5gGq80lBXVyr9monmzdQqHB47omT3AMNoACbCf+choP62xV3PUcg==
+X-Received: by 2002:a17:903:41d2:b0:1d4:4c8c:b138 with SMTP id u18-20020a17090341d200b001d44c8cb138mr12368944ple.59.1703983107317;
+        Sat, 30 Dec 2023 16:38:27 -0800 (PST)
+Received: from apollo.localdomain ([2601:646:9d80:4380::4b6f])
+        by smtp.gmail.com with ESMTPSA id sj10-20020a17090b2d8a00b0028b845f2890sm16692026pjb.33.2023.12.30.16.38.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 30 Dec 2023 11:06:17 -0800 (PST)
+        Sat, 30 Dec 2023 16:38:26 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH 2/2] libcamera: Fix build with python 3.12
-Date: Sat, 30 Dec 2023 11:06:12 -0800
-Message-ID: <20231230190612.382560-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20231230190612.382560-1-raj.khem@gmail.com>
-References: <20231230190612.382560-1-raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org, wangmy@fujitsu.com
+In-Reply-To: <1703574033-12738-1-git-send-email-wangmy@fujitsu.com>
+References: <1703574033-12738-1-git-send-email-wangmy@fujitsu.com>
+Subject: Re: [oe] [meta-oe] [PATCH] jasper: Fix install conflict when
+ enable multilib.
+Message-Id: <170398310651.873206.3681161617396452296.b4-ty@gmail.com>
+Date: Sat, 30 Dec 2023 16:38:26 -0800
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.12.4
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 30 Dec 2023 19:06:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107913
+ <openembedded-devel@lists.openembedded.org>; Sun, 31 Dec 2023 00:38:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107922
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../0001-mojom-Drop-using-imp-module.patch    | 176 ++++++++++++++++++
- .../libcamera/libcamera_0.1.0.bb              |   1 +
- 2 files changed, 177 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-mojom-Drop-using-imp-module.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-mojom-Drop-using-imp-module.patch b/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-mojom-Drop-using-imp-module.patch
-new file mode 100644
-index 0000000000..b07a790596
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-mojom-Drop-using-imp-module.patch
-@@ -0,0 +1,176 @@
-+From 23a9bbb9ab380344c5daf5bc0109fab249e41afd Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 30 Dec 2023 10:55:44 -0800
-+Subject: [PATCH] mojom: Drop using imp module.
-+
-+This module is gone in python 3.12 onwards, in most places it is unused
-+so remove from those places, in some places where its still is needed
-+replace it with importlib.util
-+
-+Fixes [1]
-+
-+[1] https://bugs.libcamera.org/show_bug.cgi?id=206
-+
-+Upstream-Status: Submitted [https://lists.libcamera.org/pipermail/libcamera-devel/2023-December/039986.html]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ utils/ipc/mojo/public/tools/mojom/mojom/fileutil.py        | 1 -
-+ .../ipc/mojo/public/tools/mojom/mojom/fileutil_unittest.py | 1 -
-+ .../tools/mojom/mojom/generate/generator_unittest.py       | 7 ++-----
-+ .../tools/mojom/mojom/generate/translate_unittest.py       | 1 -
-+ .../mojo/public/tools/mojom/mojom/parse/ast_unittest.py    | 1 -
-+ .../mojom/mojom/parse/conditional_features_unittest.py     | 7 ++-----
-+ utils/ipc/mojo/public/tools/mojom/mojom/parse/lexer.py     | 1 -
-+ .../mojo/public/tools/mojom/mojom/parse/lexer_unittest.py  | 6 ++----
-+ .../mojo/public/tools/mojom/mojom/parse/parser_unittest.py | 1 -
-+ 9 files changed, 6 insertions(+), 20 deletions(-)
-+
-+diff --git a/utils/ipc/mojo/public/tools/mojom/mojom/fileutil.py b/utils/ipc/mojo/public/tools/mojom/mojom/fileutil.py
-+index bf626f54..e1c823da 100644
-+--- a/utils/ipc/mojo/public/tools/mojom/mojom/fileutil.py
-++++ b/utils/ipc/mojo/public/tools/mojom/mojom/fileutil.py
-+@@ -3,7 +3,6 @@
-+ # found in the LICENSE file.
-+ 
-+ import errno
-+-import imp
-+ import os.path
-+ import sys
-+ 
-+diff --git a/utils/ipc/mojo/public/tools/mojom/mojom/fileutil_unittest.py b/utils/ipc/mojo/public/tools/mojom/mojom/fileutil_unittest.py
-+index ff5753a2..e754151f 100644
-+--- a/utils/ipc/mojo/public/tools/mojom/mojom/fileutil_unittest.py
-++++ b/utils/ipc/mojo/public/tools/mojom/mojom/fileutil_unittest.py
-+@@ -2,7 +2,6 @@
-+ # Use of this source code is governed by a BSD-style license that can be
-+ # found in the LICENSE file.
-+ 
-+-import imp
-+ import os.path
-+ import shutil
-+ import sys
-+diff --git a/utils/ipc/mojo/public/tools/mojom/mojom/generate/generator_unittest.py b/utils/ipc/mojo/public/tools/mojom/mojom/generate/generator_unittest.py
-+index 32c884a8..6cae6092 100644
-+--- a/utils/ipc/mojo/public/tools/mojom/mojom/generate/generator_unittest.py
-++++ b/utils/ipc/mojo/public/tools/mojom/mojom/generate/generator_unittest.py
-+@@ -2,7 +2,7 @@
-+ # Use of this source code is governed by a BSD-style license that can be
-+ # found in the LICENSE file.
-+ 
-+-import imp
-++import importlib.util
-+ import os.path
-+ import sys
-+ import unittest
-+@@ -18,10 +18,7 @@ def _GetDirAbove(dirname):
-+     if tail == dirname:
-+       return path
-+ 
-+-
-+-try:
-+-  imp.find_module("mojom")
-+-except ImportError:
-++if importlib.util.find_spec("mojom") is None:
-+   sys.path.append(os.path.join(_GetDirAbove("pylib"), "pylib"))
-+ from mojom.generate import generator
-+ 
-+diff --git a/utils/ipc/mojo/public/tools/mojom/mojom/generate/translate_unittest.py b/utils/ipc/mojo/public/tools/mojom/mojom/generate/translate_unittest.py
-+index 19905c8a..09724d88 100644
-+--- a/utils/ipc/mojo/public/tools/mojom/mojom/generate/translate_unittest.py
-++++ b/utils/ipc/mojo/public/tools/mojom/mojom/generate/translate_unittest.py
-+@@ -2,7 +2,6 @@
-+ # Use of this source code is governed by a BSD-style license that can be
-+ # found in the LICENSE file.
-+ 
-+-import imp
-+ import os.path
-+ import sys
-+ import unittest
-+diff --git a/utils/ipc/mojo/public/tools/mojom/mojom/parse/ast_unittest.py b/utils/ipc/mojo/public/tools/mojom/mojom/parse/ast_unittest.py
-+index 62798631..4ab51033 100644
-+--- a/utils/ipc/mojo/public/tools/mojom/mojom/parse/ast_unittest.py
-++++ b/utils/ipc/mojo/public/tools/mojom/mojom/parse/ast_unittest.py
-+@@ -2,7 +2,6 @@
-+ # Use of this source code is governed by a BSD-style license that can be
-+ # found in the LICENSE file.
-+ 
-+-import imp
-+ import os.path
-+ import sys
-+ import unittest
-+diff --git a/utils/ipc/mojo/public/tools/mojom/mojom/parse/conditional_features_unittest.py b/utils/ipc/mojo/public/tools/mojom/mojom/parse/conditional_features_unittest.py
-+index aa609be7..f3c2c95f 100644
-+--- a/utils/ipc/mojo/public/tools/mojom/mojom/parse/conditional_features_unittest.py
-++++ b/utils/ipc/mojo/public/tools/mojom/mojom/parse/conditional_features_unittest.py
-+@@ -2,7 +2,7 @@
-+ # Use of this source code is governed by a BSD-style license that can be
-+ # found in the LICENSE file.
-+ 
-+-import imp
-++import importlib.util
-+ import os
-+ import sys
-+ import unittest
-+@@ -18,10 +18,7 @@ def _GetDirAbove(dirname):
-+     if tail == dirname:
-+       return path
-+ 
-+-
-+-try:
-+-  imp.find_module('mojom')
-+-except ImportError:
-++if importlib.util.find_spec("mojom") is None:
-+   sys.path.append(os.path.join(_GetDirAbove('pylib'), 'pylib'))
-+ import mojom.parse.ast as ast
-+ import mojom.parse.conditional_features as conditional_features
-+diff --git a/utils/ipc/mojo/public/tools/mojom/mojom/parse/lexer.py b/utils/ipc/mojo/public/tools/mojom/mojom/parse/lexer.py
-+index 3e084bbf..1e8b49f2 100644
-+--- a/utils/ipc/mojo/public/tools/mojom/mojom/parse/lexer.py
-++++ b/utils/ipc/mojo/public/tools/mojom/mojom/parse/lexer.py
-+@@ -2,7 +2,6 @@
-+ # Use of this source code is governed by a BSD-style license that can be
-+ # found in the LICENSE file.
-+ 
-+-import imp
-+ import os.path
-+ import sys
-+ 
-+diff --git a/utils/ipc/mojo/public/tools/mojom/mojom/parse/lexer_unittest.py b/utils/ipc/mojo/public/tools/mojom/mojom/parse/lexer_unittest.py
-+index eadc6587..77976507 100644
-+--- a/utils/ipc/mojo/public/tools/mojom/mojom/parse/lexer_unittest.py
-++++ b/utils/ipc/mojo/public/tools/mojom/mojom/parse/lexer_unittest.py
-+@@ -2,7 +2,7 @@
-+ # Use of this source code is governed by a BSD-style license that can be
-+ # found in the LICENSE file.
-+ 
-+-import imp
-++import importlib.util
-+ import os.path
-+ import sys
-+ import unittest
-+@@ -22,9 +22,7 @@ def _GetDirAbove(dirname):
-+ sys.path.insert(1, os.path.join(_GetDirAbove("mojo"), "third_party"))
-+ from ply import lex
-+ 
-+-try:
-+-  imp.find_module("mojom")
-+-except ImportError:
-++if importlib.util.find_spec("mojom") is None:
-+   sys.path.append(os.path.join(_GetDirAbove("pylib"), "pylib"))
-+ import mojom.parse.lexer
-+ 
-+diff --git a/utils/ipc/mojo/public/tools/mojom/mojom/parse/parser_unittest.py b/utils/ipc/mojo/public/tools/mojom/mojom/parse/parser_unittest.py
-+index 6d6b7153..7e8acf43 100644
-+--- a/utils/ipc/mojo/public/tools/mojom/mojom/parse/parser_unittest.py
-++++ b/utils/ipc/mojo/public/tools/mojom/mojom/parse/parser_unittest.py
-+@@ -2,7 +2,6 @@
-+ # Use of this source code is governed by a BSD-style license that can be
-+ # found in the LICENSE file.
-+ 
-+-import imp
-+ import os.path
-+ import sys
-+ import unittest
-+-- 
-+2.43.0
-+
-diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.1.0.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.1.0.bb
-index 2a3c6473ee..c8ccff6f40 100644
---- a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.1.0.bb
-+++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.1.0.bb
-@@ -10,6 +10,7 @@ LIC_FILES_CHKSUM = "\
- 
- SRC_URI = " \
-         git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master \
-+        file://0001-mojom-Drop-using-imp-module.patch \
- "
- 
- SRCREV = "960d0c1e19feaf310321c906e14bd5410c6be629"
+On Tue, 26 Dec 2023 15:00:33 +0800, wangmy@fujitsu.com wrote:
+> Error: Transaction test error:
+>   file /usr/include/jasper/jas_config.h conflicts between attempted installs of lib32-jasper-dev-4.1.1-r0.armv7ahf_neon and jasper-dev-4.1.1-r0.cortexa57
+> 
+> The differences between the two files are as follows:
+> @@ -44,10 +44,10 @@
+>  /* #undef JAS_HAVE_INT128_T */
+> 
+> [...]
+
+Applied, thanks!
+
+[1/1] jasper: Fix install conflict when enable multilib.
+      commit: 85360acc4d93e135a647bf4819b9ba524df3cdf0
+
+Best regards,
 -- 
-2.43.0
+Khem Raj <raj.khem@gmail.com>
 
 
