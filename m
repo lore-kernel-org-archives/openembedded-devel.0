@@ -2,57 +2,57 @@ Return-Path: <alex.kanavin@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E25D5C47255
-	for <webhook@archiver.kernel.org>; Sun, 31 Dec 2023 12:23:53 +0000 (UTC)
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
- by mx.groups.io with SMTP id smtpd.web10.219025.1704025427162371680
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 207F4C47DA7
+	for <webhook@archiver.kernel.org>; Sun, 31 Dec 2023 12:23:54 +0000 (UTC)
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+ by mx.groups.io with SMTP id smtpd.web10.219018.1704025423954037436
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 31 Dec 2023 04:23:47 -0800
+ Sun, 31 Dec 2023 04:23:44 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=cHozKMzL;
- spf=pass (domain: gmail.com, ip: 209.85.221.46, mailfrom: alex.kanavin@gmail.com)
-Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-3368b1e056eso7365113f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 31 Dec 2023 04:23:46 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=J/mPNdOu;
+ spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: alex.kanavin@gmail.com)
+Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-336990fb8fbso6124411f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 31 Dec 2023 04:23:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1704025425; x=1704630225; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1704025422; x=1704630222; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Qn5OfA5Tln2wU67Us4DujZ0FS66eI8krjvaA8/iDX8Y=;
-        b=cHozKMzLf0OMQWr67tzqC5aht7INP4K+cvnQAqV5Fc4l3LLKxj3wxEaRqQebYPMeMb
-         Vmskj7/rZCOkTaiQcwYrj/8QBWekBr9GtylXUHHgFuXP5dKwuX4FaCerXjtDvXFTxOwh
-         hXZnYDKYUrVc9fkOpX8WRJbl/r+4iwtNU+xIFxAh5IcMQObgqg84E1bJzkxpg91JVKcA
-         dF+jOQVEJzDicuaMLZl3od5TYXEI+jDe57PvvS+gMc+rv9ZVAKvCdbstzUoiAludgSTJ
-         yZ0DLspS/BbVaAVsdhJz7OxDJOAVhHmNtjGMmOGoG+HOuICyPlBMVooEt65bZMLP/f46
-         qrxA==
+        bh=oerWq5SmqQlOWWaqgscfKMORokw64bY7pPeIAgpfkGk=;
+        b=J/mPNdOu/aCqoEfbqBIiJAHPKpvBInK/r+aIflNpdQaI5j0e+ymNg5hQK57J+meS9z
+         lVKAe5TvZ5DYonZXQ7K+0oJgViDHzpxrRQvn554KTShIS7OisGChOI0tFA01xFm+M7oN
+         8wAH3sqg1Tlrm353Pq4ZIjgew7gkhC556G2GBR4Jz0EDtbAK52jiN3AjIOZRuLh4LLRf
+         PQsQNa8y4dl+tqqJDyvJvCl1M24uHg6W3cLwBMxFZtRzMlYwZE0Dpi8yO/FoL7dpTp+3
+         rg0UcQOcF0h229dxi3aIi3q93tVT3xjcCVTGIyc5a9+R3IK3d+5NOrMZ8Xrv73IearE4
+         safw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704025425; x=1704630225;
+        d=1e100.net; s=20230601; t=1704025422; x=1704630222;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Qn5OfA5Tln2wU67Us4DujZ0FS66eI8krjvaA8/iDX8Y=;
-        b=pLoFX67IZEKdoW9Vn46XpG2RP7qB5ImBANt3Gdi5PLpnk4w+rKZj5Bnkhs0X9WAszp
-         MLmQSUnVojNiGT1l+KQwwkw2G6F7QpssyxZLUU1N77xs13O7bhDNXPGMtV/YUiLCbgSm
-         pUCrtaH199CsKL/En6wE/92/5OfjAWYEls4Yu0+zQQ5lV2D+j9dxowG68BpgGft3S1XZ
-         cxFrimTUAALfzr3WKxWdLDtQZuB2ar/JR2e5aEUBDrV2K2u0Gb4+HOrWIe++uP8TreJE
-         PWFCsvrTPUEFgDTXyQm6quzwjHbjZHNHfzappJtKPt4Z20a97TSG2BYe+8SwtMX6S9XB
-         4u6A==
-X-Gm-Message-State: AOJu0YyD+U6INIoKSfTcN7xSKea+wBdiRbwz8kZtQuSqDsMIjnFNU3aV
-	u0hP8Z4EVhrVfq59YxunYmbVgipXPRg=
-X-Google-Smtp-Source: AGHT+IHvvBfvRgw3GXEEL/1abhWj8KCsGtGBWGSzUHJOzLZVDpO9sHdsoe3MllhUF39ewHb+iHlA/Q==
-X-Received: by 2002:a05:600c:4f43:b0:40d:8590:a310 with SMTP id m3-20020a05600c4f4300b0040d8590a310mr606175wmq.88.1704025425655;
-        Sun, 31 Dec 2023 04:23:45 -0800 (PST)
+        bh=oerWq5SmqQlOWWaqgscfKMORokw64bY7pPeIAgpfkGk=;
+        b=KUva7t2EzmanTtn3GcfKXU/XYVurFOtnculDm5KwuvJkbpmFQJqYUrRODIZnvEPutQ
+         if8Xbqhm+VmkTBueUJs4wELor/OJ02yCWvJE98z4Z+9xy1mrR1mJLbUZfFlJEmENhevz
+         mAHYFG0SZht6Fohqwfit9ZYCFTDejm8SOgPrmLRVHWUa5mXh9Us/5yyhXt/82lVFe1Tp
+         EJi7lHiBYChpDFwTefl4KxPh4hrBzMmptj2OP1+FbJzqdoXpQJxWSrpsUQWxQ9sEXkPM
+         YQkq+OXe1f/N8T7yS8c7rnb4PgpKhYOdQNbALms/bkVjqN/BghNdFPFmcD/65DF66Kfw
+         EecA==
+X-Gm-Message-State: AOJu0YyL9OU6wqrCnsxfZAl1tnQpPRTx1+BxR2155R8WaknxrNi/11qB
+	dCsfbvDwDUlY9Q60R3+58fGxY1SsH0o=
+X-Google-Smtp-Source: AGHT+IG4lqA86wH2FGvr7SuWQ7sOvUbLzrMDzzqEDhqtV06BA4qO4fRHw5d9kbVw2NED9BEvsbMJ2g==
+X-Received: by 2002:a05:6000:1ac5:b0:337:400c:eb75 with SMTP id i5-20020a0560001ac500b00337400ceb75mr116136wry.94.1704025422449;
+        Sun, 31 Dec 2023 04:23:42 -0800 (PST)
 Received: from Zen2.lab.linutronix.de. (drugstore.linutronix.de. [80.153.143.164])
-        by smtp.gmail.com with ESMTPSA id ay23-20020a170907901700b00a26aea4942dsm9155474ejc.123.2023.12.31.04.23.45
+        by smtp.gmail.com with ESMTPSA id ay23-20020a170907901700b00a26aea4942dsm9155474ejc.123.2023.12.31.04.23.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 31 Dec 2023 04:23:45 -0800 (PST)
+        Sun, 31 Dec 2023 04:23:42 -0800 (PST)
 From: Alexander Kanavin <alex.kanavin@gmail.com>
 X-Google-Original-From: Alexander Kanavin <alex@linutronix.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Alexander Kanavin <alex@linutronix.de>
-Subject: [PATCH 17/23] cockpit: add setuptools dependency to bring in distutils copy
-Date: Sun, 31 Dec 2023 13:23:23 +0100
-Message-Id: <20231231122329.405225-17-alex@linutronix.de>
+Subject: [PATCH 12/23] python3-oslash: remove
+Date: Sun, 31 Dec 2023 13:23:18 +0100
+Message-Id: <20231231122329.405225-12-alex@linutronix.de>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231231122329.405225-1-alex@linutronix.de>
 References: <20231231122329.405225-1-alex@linutronix.de>
@@ -61,27 +61,45 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 31 Dec 2023 12:23:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107968
+ <openembedded-devel@lists.openembedded.org>; Sun, 31 Dec 2023 12:23:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107963
+
+Not compatible with python 3.12; dead upstream (no activity since 2020).
 
 Signed-off-by: Alexander Kanavin <alex@linutronix.de>
 ---
- meta-webserver/recipes-webadmin/cockpit/cockpit_304.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../python/python3-oslash_0.6.3.bb            | 22 -------------------
+ 1 file changed, 22 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-oslash_0.6.3.bb
 
-diff --git a/meta-webserver/recipes-webadmin/cockpit/cockpit_304.bb b/meta-webserver/recipes-webadmin/cockpit/cockpit_304.bb
-index ab05fd377..df7f47a11 100644
---- a/meta-webserver/recipes-webadmin/cockpit/cockpit_304.bb
-+++ b/meta-webserver/recipes-webadmin/cockpit/cockpit_304.bb
-@@ -14,7 +14,7 @@ SRC_URI[sha256sum] = "a87d090c930e2058bb3e970ca7f2bafe678687966b5c0b8b42a802977e
- inherit gettext pkgconfig autotools systemd features_check
- inherit ${@bb.utils.contains('PACKAGECONFIG', 'old-bridge', '', 'python3targetconfig', d)}
- 
--DEPENDS += "glib-2.0-native intltool-native gnutls virtual/gettext json-glib krb5 libpam systemd"
-+DEPENDS += "glib-2.0-native intltool-native gnutls virtual/gettext json-glib krb5 libpam systemd python3-setuptools-native"
- DEPENDS += "${@bb.utils.contains('PACKAGECONFIG', 'old-bridge', '', 'python3-pip-native', d)}"
- 
- COMPATIBLE_HOST:libc-musl = "null"
+diff --git a/meta-python/recipes-devtools/python/python3-oslash_0.6.3.bb b/meta-python/recipes-devtools/python/python3-oslash_0.6.3.bb
+deleted file mode 100644
+index b926484db..000000000
+--- a/meta-python/recipes-devtools/python/python3-oslash_0.6.3.bb
++++ /dev/null
+@@ -1,22 +0,0 @@
+-SUMMARY = "Functors, Applicatives, And Monads in Python"
+-HOMEPAGE = "https://github.com/dbrattli/oslash"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://README.md;md5=ed79d2637878dfe97de89e357b5c02dd"
+-
+-DEPENDS += "\
+-    ${PYTHON_PN}-pip-native \
+-    ${PYTHON_PN}-pytest-runner-native\
+-"
+-
+-SRC_URI[sha256sum] = "868aeb58a656f2ed3b73d9dd6abe387b20b74fc9413d3e8653b615b15bf728f3"
+-
+-PYPI_PACKAGE = "OSlash"
+-
+-inherit pypi setuptools3
+-
+-RDEPENDS:${PN} += " \
+-    python3-json \
+-    python3-typing-extensions \
+-"
+-
+-BBCLASSEXTEND = "native nativesdk"
 -- 
 2.39.2
 
