@@ -2,86 +2,122 @@ Return-Path: <alex.kanavin@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5C6D0C3DA6E
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5DCCDC47077
 	for <webhook@archiver.kernel.org>; Sun, 31 Dec 2023 12:23:43 +0000 (UTC)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.web11.218938.1704025417956355452
+Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
+ by mx.groups.io with SMTP id smtpd.web10.219017.1704025422777062751
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 31 Dec 2023 04:23:38 -0800
+ Sun, 31 Dec 2023 04:23:43 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=b2/rRw7X;
- spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: alex.kanavin@gmail.com)
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-40d87ecf579so2129015e9.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 31 Dec 2023 04:23:37 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=eE8hta8Y;
+ spf=pass (domain: gmail.com, ip: 209.85.218.49, mailfrom: alex.kanavin@gmail.com)
+Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-a2339262835so830872266b.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 31 Dec 2023 04:23:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1704025416; x=1704630216; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Ie47pa00TfucbbJ39Qf7bgwQnRP93h3MsuKrFnw1v5U=;
-        b=b2/rRw7XF9FfTHbvjBUfP1zcvcixplJTl9z9oB+ximoH4nV/V61uwBUv0J4vRA0Y9K
-         QMhXrCT51HsCHDgaI3B0MILpU5HV1OFnCabRn3CwdCbTZvqlbNDojAlymsAq+fSbD0bY
-         4brxT1syMxvBHGmLELBhWWPB7G4Bj1Gq9CkU2er4SbcSaecPgD1bawvlDoH7OR1D7GhW
-         7NOotPXBNKt3ueh+oGyga179NB97e5den4HLG3uAqNXc0RcggdPH/GZp3sJcuvlu34GF
-         nSi/7oklVgc3q/UKiVkIcLkpqLNKzNSGFnBj4CprV5SiKiJ4uArQnjYk3BilAbEHOpdZ
-         hxhA==
+        d=gmail.com; s=20230601; t=1704025421; x=1704630221; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=KzbfHap1veE+augwRU6aJUT/4hO0qm223icoe6tZN4c=;
+        b=eE8hta8YeosIERUAkMKuQRKutePREZWUUdlzYGDGcOtQ0ViULx+290VNRyDAsSRKK/
+         Qxay+Syp2afAQDdvcb81LUZ+e/7pHbkGmkmbB8zOLtBMXmsXdJTKldOlXCS6HqZHBr+g
+         sqGSlU0lEEbKsYx2YGb5uNJ0Ji3ePF3Q4ksTa4zw+U0R6dPLVmWiD8dRWBsIkWWKz7A+
+         gWay5KTr7MAeMv7TWBTZLQA0afkgt48ns9rzFddR2hDq28B8SGu/9Yf8M5uwYQU4+Q38
+         QOERldpFAmr9Zo/dMBSbNZv1j8MMs5XgsfhaIEuU8FJbVb1qmEAKw3DBmSoaRT/izpCm
+         5Y0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704025416; x=1704630216;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Ie47pa00TfucbbJ39Qf7bgwQnRP93h3MsuKrFnw1v5U=;
-        b=V1ia5jiyob+0aHKOogJKPditnyDqcOT8Csc5HvW5RXf4dUWPbvlqHcG/QNm6ZhIkEo
-         Nycl2k781/ac2UbS9cdBgiwvdFXXqhG/I81Y5TRR1y9Kgevo7mnaDCNV658Vg+GBVAZ+
-         s0nKEUtGd50f465CjToVQsMmvgbAULCuLWj44FdX/V70+Wwvku9glbItd4MAVCB/sqCl
-         J6leOwdzs1r7ns7pdxhlmVspHaYC3bwsLQ5vZwovVz8EJ5H239Fjix4N4G1ptbcTW1su
-         QdAfaqNsnMcA3QA739FFvqRpJpdY9APnH/mgH58RSSbcd1fKVkoVL9CATOwztB6glF8Y
-         BnqA==
-X-Gm-Message-State: AOJu0YxxI1Up45lobnhNqwNz2I3lvtCfaWc23LEvFG4/q7UVpBq7PG/Q
-	2w4koETq+D6VpfaLymrsn28NOT9GLfY=
-X-Google-Smtp-Source: AGHT+IEGPnjTzmrKpy5PM3f7WW6fH9zHZ6vKubRl8agOCp5fw3648ExCDSX24ViXO9asb2CEPOGgqA==
-X-Received: by 2002:a05:600c:3844:b0:40d:86e7:f77e with SMTP id s4-20020a05600c384400b0040d86e7f77emr253991wmr.72.1704025416179;
-        Sun, 31 Dec 2023 04:23:36 -0800 (PST)
+        d=1e100.net; s=20230601; t=1704025421; x=1704630221;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=KzbfHap1veE+augwRU6aJUT/4hO0qm223icoe6tZN4c=;
+        b=s4/8yM6F4QTPVXzZTPclzsoMSpCat+MfH5Z9Xf2F/KqA122NXfhyTNpaAgUH7VppDo
+         dy6cP2mcQD+h5nM6iSxO4AIya0cNg1OkV2PhgxP/uNq1luGCBo+gnPlWWwhgzgdlPrS0
+         FBSK1izkd9r1Tie+dMtZ3GnKHH83bT7Odj3hhU9KZSKdoBYk0+G9Mm4Q7SdSA3haroeD
+         amYWaKwwAliwbc+7FJoOjgC7DSMEFA453pZhnGtM3h9hkvfJTlRb1mwDnpSq5YTIecSn
+         dyrEDpn0Q03mW5zddyFi5Krp6X+8OAvdB5Z4J6g3VobFlIuBXOa5+cgdgV/uit3PrxJW
+         NwoA==
+X-Gm-Message-State: AOJu0Yzo7t560drvtNAa5opgMensKqbLTqOHveneLstt/padLVzUOwRT
+	yQOvr1YGoRC5bmg5zi7b0RkZK2Lt5OA=
+X-Google-Smtp-Source: AGHT+IH9V1iXunt0G+OxMIKSuFI6eaj+otffdQg94GEZ1Ap/NGO8lOY6C4CvGXj8qk+RizFjepj+Pw==
+X-Received: by 2002:a17:906:bc88:b0:a27:fe31:ad84 with SMTP id lv8-20020a170906bc8800b00a27fe31ad84mr139813ejb.15.1704025421024;
+        Sun, 31 Dec 2023 04:23:41 -0800 (PST)
 Received: from Zen2.lab.linutronix.de. (drugstore.linutronix.de. [80.153.143.164])
-        by smtp.gmail.com with ESMTPSA id ay23-20020a170907901700b00a26aea4942dsm9155474ejc.123.2023.12.31.04.23.35
+        by smtp.gmail.com with ESMTPSA id ay23-20020a170907901700b00a26aea4942dsm9155474ejc.123.2023.12.31.04.23.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 31 Dec 2023 04:23:35 -0800 (PST)
+        Sun, 31 Dec 2023 04:23:40 -0800 (PST)
 From: Alexander Kanavin <alex.kanavin@gmail.com>
 X-Google-Original-From: Alexander Kanavin <alex@linutronix.de>
 To: openembedded-devel@lists.openembedded.org
 Cc: Alexander Kanavin <alex@linutronix.de>
-Subject: [PATCH 01/23] fontforge: add a readline PACKAGECONFIG
-Date: Sun, 31 Dec 2023 13:23:07 +0100
-Message-Id: <20231231122329.405225-1-alex@linutronix.de>
+Subject: [PATCH 10/23] python3-custom-inherit: fix python 3.12 builds
+Date: Sun, 31 Dec 2023 13:23:16 +0100
+Message-Id: <20231231122329.405225-10-alex@linutronix.de>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20231231122329.405225-1-alex@linutronix.de>
+References: <20231231122329.405225-1-alex@linutronix.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 31 Dec 2023 12:23:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107952
-
-This helps with build determinism; also if readline is not in sysroot
-but readline-native is, fontforge erroneously decides to build with it.
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107961
 
 Signed-off-by: Alexander Kanavin <alex@linutronix.de>
 ---
- meta-oe/recipes-graphics/fontforge/fontforge_20230101.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ ...oneer.py-do-not-use-SafeConfigParser.patch | 29 +++++++++++++++++++
+ .../python/python3-custom-inherit_2.4.1.bb    |  1 +
+ 2 files changed, 30 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/files/0001-versioneer.py-do-not-use-SafeConfigParser.patch
 
-diff --git a/meta-oe/recipes-graphics/fontforge/fontforge_20230101.bb b/meta-oe/recipes-graphics/fontforge/fontforge_20230101.bb
-index 404e86b86..31dd495fd 100644
---- a/meta-oe/recipes-graphics/fontforge/fontforge_20230101.bb
-+++ b/meta-oe/recipes-graphics/fontforge/fontforge_20230101.bb
-@@ -24,6 +24,8 @@ SRC_URI = "git://github.com/${BPN}/${BPN}.git;branch=master;protocol=https \
- S = "${WORKDIR}/git"
+diff --git a/meta-python/recipes-devtools/python/files/0001-versioneer.py-do-not-use-SafeConfigParser.patch b/meta-python/recipes-devtools/python/files/0001-versioneer.py-do-not-use-SafeConfigParser.patch
+new file mode 100644
+index 000000000..34caaca98
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/files/0001-versioneer.py-do-not-use-SafeConfigParser.patch
+@@ -0,0 +1,29 @@
++From 0920bd21ceab75bc4b655c571a37835526dd2468 Mon Sep 17 00:00:00 2001
++From: Alexander Kanavin <alex@linutronix.de>
++Date: Wed, 27 Dec 2023 15:12:19 +0100
++Subject: [PATCH] versioneer.py: do not use SafeConfigParser
++
++This has been deprecated for a long time, and finally removed in python 3.12
++
++Upstream-Status: Submitted [https://github.com/rsokl/custom_inherit/pull/49]
++Signed-off-by: Alexander Kanavin <alex@linutronix.de>
++---
++ versioneer.py | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/versioneer.py b/versioneer.py
++index 64fea1c..3aa5da3 100644
++--- a/versioneer.py
+++++ b/versioneer.py
++@@ -339,9 +339,9 @@ def get_config_from_root(root):
++     # configparser.NoOptionError (if it lacks "VCS="). See the docstring at
++     # the top of versioneer.py for instructions on writing your setup.cfg .
++     setup_cfg = os.path.join(root, "setup.cfg")
++-    parser = configparser.SafeConfigParser()
+++    parser = configparser.ConfigParser()
++     with open(setup_cfg, "r") as f:
++-        parser.readfp(f)
+++        parser.read_file(f)
++     VCS = parser.get("versioneer", "VCS")  # mandatory
++ 
++     def get(parser, name):
+diff --git a/meta-python/recipes-devtools/python/python3-custom-inherit_2.4.1.bb b/meta-python/recipes-devtools/python/python3-custom-inherit_2.4.1.bb
+index 478abbf1f..e7409f77e 100644
+--- a/meta-python/recipes-devtools/python/python3-custom-inherit_2.4.1.bb
++++ b/meta-python/recipes-devtools/python/python3-custom-inherit_2.4.1.bb
+@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=f910a85a4c3da51edf780f17a7608434"
  
- EXTRA_OECMAKE = "-DENABLE_DOCS=OFF"
-+PACKAGECONFIG = "readline"
-+PACKAGECONFIG[readline] = "-DENABLE_READLINE=ON,-DENABLE_READLINE=OFF,readline"
+ PYPI_PACKAGE = "custom_inherit"
  
- CFLAGS += "-fno-strict-aliasing"
- LDFLAGS += "-lpython${PYTHON_BASEVERSION}${PYTHON_ABI}"
++SRC_URI += "file://0001-versioneer.py-do-not-use-SafeConfigParser.patch"
+ SRC_URI[sha256sum] = "7052eb337bcce83551815264391cc4efc2bf70b295a3c52aba64f1ab57c3a8a2"
+ 
+ inherit pypi setuptools3
 -- 
 2.39.2
 
