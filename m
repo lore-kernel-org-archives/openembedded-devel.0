@@ -1,239 +1,374 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <yi.zhao@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AA874C46CD4
-	for <webhook@archiver.kernel.org>; Mon,  1 Jan 2024 03:34:08 +0000 (UTC)
-Received: from mail-il1-f180.google.com (mail-il1-f180.google.com [209.85.166.180])
- by mx.groups.io with SMTP id smtpd.web11.236245.1704080043431376970
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 40F6EC4706F
+	for <webhook@archiver.kernel.org>; Mon,  1 Jan 2024 07:50:23 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.1319.1704095414464403567
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 31 Dec 2023 19:34:03 -0800
+ Sun, 31 Dec 2023 23:50:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=GjV6eOoD;
- spf=pass (domain: gmail.com, ip: 209.85.166.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-il1-f180.google.com with SMTP id e9e14a558f8ab-35ff6de2068so35439545ab.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 31 Dec 2023 19:34:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1704080042; x=1704684842; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=33MGf2QK0jwc/UPaHghdbmU9EAH6+15AurOR4mR7ffo=;
-        b=GjV6eOoDE9g00TbFndoseoZEnBcQjcFLIIiZN4eQdOswzwNWYLYrQnTMKxJOmGr1Og
-         AM5te/XJFRhuBIcoXtUpXaRnGN8PvokGrzEVid0GLzFLZe+F/VvTd1kXMnkCGukhAfsr
-         Uqd2Q5HAVFxhACNyc7lh43aGkwEptlCc8VetiNU/Xys/T/hUc1azhcq6sAijTwDkjpbw
-         3Dl6eMI3T5jKhtWm0FRKh0RmGawj40r6zzcV+U95i4HyAKweKW0NqHjSEfPyP1+YrswE
-         20ryw5cvENIkWbRVBp2/lbjRktpMXhfcOvtzlNugAijrkGFpjUBET2/jLphmQOSWi4W/
-         7J/Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704080042; x=1704684842;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=33MGf2QK0jwc/UPaHghdbmU9EAH6+15AurOR4mR7ffo=;
-        b=KZt+a16qrDMlgOEviWnRTM2BqYEgpQbE1sO1jP3oz1r/yz9jIXVrIKiM+bzfVrVJKr
-         94jmz6shY/w7PItMHeS7HFx+CQongqLQAvf/pE1bjnT8zTBKjhXKbq9GGkR3OhWCPwn5
-         WBUZLmZJsQx+sRZbkBtNLBTuJbciq8fbjwagnRzkdNQooxbICnd+vM138BO0+XRVWfkI
-         OxmWU5y/UX++TyHHpegMH3RDade0vgY6O0omB4/nYTShQNz3qh1Rjp8BoqyGta0WrJTg
-         E/Jp6JrSgS0K4uWjM6KIQso+EHTtBZEAgnEIO7u5385u8cg+4j4B75j/0/cr9pArGPXe
-         S7zw==
-X-Gm-Message-State: AOJu0Yyv+vAxO4ExJznbB9HGOv5VmQ/Knoa9ydLSDygqJCPjOiYrXI4p
-	wIAYSfDSTx3Yg+fOIHR3WNnPkMpcys8=
-X-Google-Smtp-Source: AGHT+IE/9XXuH+ajjkv2MnStVQ+LfjPN06JmUHTXssPe58vD4TyS650ioU0sJUL/ULc3AKNh6Q+GcQ==
-X-Received: by 2002:a05:6e02:1bc9:b0:35d:6798:1734 with SMTP id x9-20020a056e021bc900b0035d67981734mr28142395ilv.27.1704080042169;
-        Sun, 31 Dec 2023 19:34:02 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::4b6f])
-        by smtp.gmail.com with ESMTPSA id k24-20020a170902761800b001d497c8eb92sm2806479pll.109.2023.12.31.19.34.01
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 31 Dec 2023 19:34:01 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=AdcvWNXW;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=17302f783c=yi.zhao@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 4017naQa013571
+	for <openembedded-devel@lists.openembedded.org>; Mon, 1 Jan 2024 07:50:13 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:content-transfer-encoding
+	:content-type:mime-version; s=PPS06212021; bh=0Kj8lIiOLuoyqDG2AC
+	qoRE6Ie31EOjz/U2pABGXWwTQ=; b=AdcvWNXWbt6P8xOM1v2ybZHHLMOWKwszbq
+	ekmS+WZjH9Y+6KRSduUKN0iFX8N9YjQta1yXB8iIoILho276QbCH6n9L9aoO9DNW
+	ej2sAs2aqz23lrQaQl6oV3CvF5uQRrg4N/9XM9kSrF8snWWYe/QbMAp8ArdA+KHl
+	U7jKjFERJtKYYxA/U6BBpZjUGsotYyD12dz9f8kLmGMk2+3mhAdsqOoEXZYsi2v1
+	rRAZ22JZK+XcdG+LdEhxtl7tDAgUaPwcve7XLz0D/YVPk/32h/l7dBS8Xri8xRPe
+	0FP2ee3fRcjn5RS9YUAUGBl5h9bF5rLmPV1ZCF0U0ueueSAa87gA==
+Received: from nam12-mw2-obe.outbound.protection.outlook.com (mail-mw2nam12lp2040.outbound.protection.outlook.com [104.47.66.40])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3vaa661pjx-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 01 Jan 2024 07:50:13 +0000 (GMT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=gdwPTfYhzCesD87lHXgSjoiXfaeeczApg5gzizIg2h/EP1B2COtJWrZsdHTWRB+XG7kqbEhOByBkV9BpA6cefTe2Q4QfivtHYePHjjoVJkLh8fX2PUaY4FWE3oWPsvnuSpg9cSp5kLInEsAFlPZhoHNkar6saDoFnvQmx2EECpBmAFu9tnJm25V45NL4rKRiaghtRSVzhlCYKoiEFjLjO/UkXsjDQvfWoIyrx5KODiU0in/975kPiBAIIU0pFC/TEdIiJVHRjcW9Wlt1pg6UH11KZ3BuWjImeHr+SBVJj2LWHeFZH2jFcmfIKl4WmF3qc0AGRMtLE6FwexDg4s1P+A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=0Kj8lIiOLuoyqDG2ACqoRE6Ie31EOjz/U2pABGXWwTQ=;
+ b=H3cy7n5hvaAyUmNaQ7LzhmH5m8c2RQLpYd2G1YN4OrJVCq4sYn4taJVkVlnOM+lwqosSTalMYyaUiJLu1i/f3vnpnEGNQiqty83nlhmMs7UEdIEX7U8esUj4krT2FlM0Rujm4tS397bMom+XNKrS/pp2iaCwPVznpAFlVQZ4A3+UZPweoO4MIs5eqE+KRufxI/TcKD6fs3LpH9L/wQPKAcDt7wylyquzIjAlvZQU6kcezVe8Qw9nnZJqpeZs3GhkPo9uyG44TkLpyDnEcWMlOSYWMjHz688cwRPCyuaOlhDndpaOZXXxIMbM2xDBDEQhbN79x8WYKvZsPR+uhIYlNQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from DS0PR11MB7484.namprd11.prod.outlook.com (2603:10b6:8:14c::10)
+ by IA0PR11MB7814.namprd11.prod.outlook.com (2603:10b6:208:408::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7135.24; Mon, 1 Jan
+ 2024 07:50:09 +0000
+Received: from DS0PR11MB7484.namprd11.prod.outlook.com
+ ([fe80::c56:aece:e7ef:6cb3]) by DS0PR11MB7484.namprd11.prod.outlook.com
+ ([fe80::c56:aece:e7ef:6cb3%3]) with mapi id 15.20.7135.023; Mon, 1 Jan 2024
+ 07:50:09 +0000
+From: Yi Zhao <yi.zhao@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] mraa: Update to latest tip of trunk
-Date: Sun, 31 Dec 2023 19:33:59 -0800
-Message-ID: <20240101033359.3389139-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.43.0
-MIME-Version: 1.0
+Subject: [meta-networking][PATCH 1/5] libtdb: upgrade 1.4.8 -> 1.4.9
+Date: Mon,  1 Jan 2024 15:49:54 +0800
+Message-Id: <20240101074958.2782143-1-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.25.1
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: TYCP286CA0368.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:405:79::19) To DS0PR11MB7484.namprd11.prod.outlook.com
+ (2603:10b6:8:14c::10)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS0PR11MB7484:EE_|IA0PR11MB7814:EE_
+X-MS-Office365-Filtering-Correlation-Id: 96dacca8-fe3e-4ceb-eb97-08dc0a9e46b5
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	fQMMUXoyUpFbciR1MQYKbiHzjS8z9FE5LyGCFaKQT5ZP6+O+0/xbyxzjF7FmYUEM3OCYGZi8g+46gDUtmXFqa4zhPgf8Zc48GWaf3NGmhIIIZlOwgUDgc4MyQ6ZlRjYy49yYCS7Hv27sbRQ+jSbhYcQyOqlK3Wu7iasG8Goioys3IZNCv8XPFw4DxR+EID1v4+FFzZ9IJE90KJChpb96Da+yeWmf3pgHCqlwiAYCePWZyp0oh7NY1Krfo+R3Oa6v4TYWOl1SzzVZ+KWC+GAolTDk5W1gPi4JfQSkND8LG+FmObeXEAIvPiYrEbNIWt+juMRjwCqhS1OkgGtiwbxR17PdYaffl/IpMEaqPZJMWB0PmWGkccq3BmtgTx/clSCTPmn0jp30NyBJeDQ4XfNvF356UUTqBCljwcR7xWm8yuVM4x1kPvyIiDOU4nFaBGchhXur7na+xs5FvPH6HyfnW1AtV7lPQGbJPLks1TOYLRNVfdK2TUPu0Lt6y2G4DTnsEFanXO+Ffzz7qQs4NvCr2wNlQh7xyKDk5c9QIwDcqseMjSUoUmKxdu35t4ahsaiEal60nNADNmTF35EeS7gHt/2yd0bGPjR4gh/l1QM9FxU=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB7484.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(376002)(346002)(396003)(136003)(39840400004)(366004)(230922051799003)(1800799012)(451199024)(64100799003)(186009)(1076003)(26005)(83380400001)(2616005)(6666004)(6506007)(6512007)(53546011)(5660300002)(44832011)(41300700001)(2906002)(478600001)(6486002)(316002)(8676002)(8936002)(66946007)(6916009)(66476007)(66556008)(86362001)(36756003)(38100700002)(38350700005)(52116002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?3MUVZXKuTjQTpMfGEXTjNrFp7sClCtiMbvqFrfGE8jpA3oswKjIS4xZBWWSP?=
+ =?us-ascii?Q?UgXG2CzyFgSduANUIQdF2ZOZAV/dVGcRq5q0eaXo2ofivf73Cx571q248uj7?=
+ =?us-ascii?Q?OkJ5Sy1DxmNUhJuipFzGp/y3MSrJ/8SbIly8J3uVK94xrdz38wRuSkTWzsEu?=
+ =?us-ascii?Q?ye9/Cdyn/2wtXdUcJmJXD37TNaDyKlr+iZaho85aB3hYH0aYOF5FiSd8uwXz?=
+ =?us-ascii?Q?7RyLBra/2JXISWX6NAHFXcHb0kw03aPDCta9v48PmG67l/Fff4Fk7vxoJyIc?=
+ =?us-ascii?Q?q+QEBT5Wzm7ZQ5Y8Yl5QJQvkOy3wXsPLum3d/7JrpTuQGEtI96vmiJFOZGJW?=
+ =?us-ascii?Q?RG5EaGG0mQjJ8kKda98YFojbFjxzu5sclSLUdDKlA7vvPC1z7t53WEHTaQ6i?=
+ =?us-ascii?Q?zKCkbBfpwGGH8vtamYK5CcKdLJhoktT5E1qWSfN4PjjPIXISOVKLaTpopPpN?=
+ =?us-ascii?Q?aOvGtlU16LJDzA3jAeU5tb8RHdLXE+jYMTPj2m5ES5iQVNxbjK8AmZnyeHrw?=
+ =?us-ascii?Q?7qhUkvQy5q+vNTi1BzcQCnSlbkbFhpR9MivplTS4hwxKBQ9b1vQ81E0noQOD?=
+ =?us-ascii?Q?wp61g2lc9Zefo115CDNzNEmXE4loNh5lrZJtW8GQ0u8xZ2euxGg2eb4M6OfZ?=
+ =?us-ascii?Q?QVaBGf+6+sHjglYdcakIHqFFoSc1i7Mt45yyBuUGsZWOnqp7tLAIQT9+YnSc?=
+ =?us-ascii?Q?h9ayqJHTld0QsXbEb7T3tOrynrPG2yisRNFqUR4vgwe3xA1K8I1jsnAiSoeq?=
+ =?us-ascii?Q?jHVKma+jONg3NiHt6xoC8emiuNNUinUIB0cOCCOSHt3G7j+PU97vaXIeu9Ci?=
+ =?us-ascii?Q?ruw5SqaR+yLWFaypqw0nScALDPErhwe/NgB1Toy4aD+jHFkhkxu9+QJRJxAl?=
+ =?us-ascii?Q?45/bAqJ0mVJYLpBJ8xq4S23fyLxeziLpT4pCj+Gvk0PJhJ65+rhsDjX2H/XZ?=
+ =?us-ascii?Q?Wair/aR1Z7nputakNelWb0ecc8SsBOJxIrNOvDG9IpzHV/M5EjKuI8egbKFN?=
+ =?us-ascii?Q?gR9elKnvBZdADXGbXuDk7384CK6rZY7NuG7pyDY6gcPU4loGpY4yWG5XKJbB?=
+ =?us-ascii?Q?0lt0ElTXThkgOsYM6b7QunDXtxkKl4High4OM3VNazKuhHHNdeVgJsipKhIY?=
+ =?us-ascii?Q?OdwG4iwYBohvcbv1AVOZFfGJg35pcJlIgjkTxGgfbAo1n9Tw9la4J0Swycka?=
+ =?us-ascii?Q?ecDQfNjFQFFFDAWYj4azZ/Q4oipZm7AwGLtHsIBDURZUB1SHXzKD2XsCQ5BF?=
+ =?us-ascii?Q?5ydXHRnprew+D62sDJA66VOC1QIlyU0YbJWV73SgbkeUn1bzxTRhmIacYPec?=
+ =?us-ascii?Q?EtYbf95/4fXAPTsmzGPK+i4OhBiEOfHyv/+D3Bi0phFo/xWsaBRsvxS7SVRW?=
+ =?us-ascii?Q?A+tYT/dhzTu8y7ubzcmZISk+uYhnd9SqGN5NRHu1151Upycuj3aWpEnyG7Ur?=
+ =?us-ascii?Q?PcPtkSe7WbwaHdCbpOSQnb+QT0PTthr9yMJHXRpe4SCwa/CyTeRNIMYH3LXN?=
+ =?us-ascii?Q?vr2mWJlZUU7GZNspvPKSJ99VS1xpdU8QJvaTV5+0m0s9kBunX1iOtRd4Bfig?=
+ =?us-ascii?Q?QNyrXvgt2iIrs6IQJwe0LPj/bFP4Xv8QzkKCR5K6?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 96dacca8-fe3e-4ceb-eb97-08dc0a9e46b5
+X-MS-Exchange-CrossTenant-AuthSource: DS0PR11MB7484.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jan 2024 07:50:08.9792
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: EyADk0TK6JzxEd1JHjKcC5PSor7kxXnxdudN7vDX18MaB32UKTnVn0p3Ly7R/6rqOvZF6didjVZ/ekOpY+xVwg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR11MB7814
+X-Proofpoint-GUID: pKyq2n2-2hFljBzPp4CoguMr22KaNFFh
+X-Proofpoint-ORIG-GUID: pKyq2n2-2hFljBzPp4CoguMr22KaNFFh
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-11-16_25,2023-11-16_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0
+ priorityscore=1501 clxscore=1015 mlxscore=0 suspectscore=0 mlxlogscore=999
+ lowpriorityscore=0 adultscore=0 impostorscore=0 phishscore=0 bulkscore=0
+ spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2311290000 definitions=main-2401010063
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 01 Jan 2024 03:34:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107977
+ <openembedded-devel@lists.openembedded.org>; Mon, 01 Jan 2024 07:50:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107978
 
-Drop already applied patch.
-Fix build with latest musl while here.
+* Remove PACKAGECONFIG[libaio] as libaio is no longer required by
+  libtdb.
+* Add ptest.
+* Refresh patches.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- ...lar-expression-to-match-x86-architec.patch |  2 +-
- ...de-Declare-gVERSION-global-as-extern.patch | 31 -------------
- .../mraa/0001-mraa-Use-posix-basename.patch   | 46 +++++++++++++++++++
- ...2-gpio-Include-limits.h-for-PATH_MAX.patch | 30 ++++++++++++
- meta-oe/recipes-extended/mraa/mraa_git.bb     |  5 +-
- 5 files changed, 80 insertions(+), 34 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/mraa/mraa/0001-include-Declare-gVERSION-global-as-extern.patch
- create mode 100644 meta-oe/recipes-extended/mraa/mraa/0001-mraa-Use-posix-basename.patch
- create mode 100644 meta-oe/recipes-extended/mraa/mraa/0002-gpio-Include-limits.h-for-PATH_MAX.patch
+ ...b-Add-configure-options-for-packages.patch | 48 ++++++++-----------
+ ...-pyext_PATTERN-for-cross-compilation.patch |  6 +--
+ .../recipes-support/libtdb/libtdb/run-ptest   | 17 +++++++
+ .../{libtdb_1.4.8.bb => libtdb_1.4.9.bb}      | 19 ++++++--
+ 4 files changed, 53 insertions(+), 37 deletions(-)
+ create mode 100644 meta-networking/recipes-support/libtdb/libtdb/run-ptest
+ rename meta-networking/recipes-support/libtdb/{libtdb_1.4.8.bb => libtdb_1.4.9.bb} (71%)
 
-diff --git a/meta-oe/recipes-extended/mraa/mraa/0001-cmake-Use-a-regular-expression-to-match-x86-architec.patch b/meta-oe/recipes-extended/mraa/mraa/0001-cmake-Use-a-regular-expression-to-match-x86-architec.patch
-index dedb4adf9b..bd8f5be05d 100644
---- a/meta-oe/recipes-extended/mraa/mraa/0001-cmake-Use-a-regular-expression-to-match-x86-architec.patch
-+++ b/meta-oe/recipes-extended/mraa/mraa/0001-cmake-Use-a-regular-expression-to-match-x86-architec.patch
-@@ -13,7 +13,7 @@ So using a wildcard helps in using any x86 arch
+diff --git a/meta-networking/recipes-support/libtdb/libtdb/0001-tdb-Add-configure-options-for-packages.patch b/meta-networking/recipes-support/libtdb/libtdb/0001-tdb-Add-configure-options-for-packages.patch
+index 93a85e854..477b1cec7 100644
+--- a/meta-networking/recipes-support/libtdb/libtdb/0001-tdb-Add-configure-options-for-packages.patch
++++ b/meta-networking/recipes-support/libtdb/libtdb/0001-tdb-Add-configure-options-for-packages.patch
+@@ -1,4 +1,4 @@
+-From d3b1d23e01e323b9610843ab6bef096512f6c244 Mon Sep 17 00:00:00 2001
++From 613cfb43622f0138edfcf3ad7a8fecc568e17db4 Mon Sep 17 00:00:00 2001
+ From: Changqing Li <changqing.li@windriver.com>
+ Date: Wed, 19 Jun 2019 17:53:34 +0800
+ Subject: [PATCH] tdb: Add configure options for packages
+@@ -6,7 +6,6 @@ Subject: [PATCH] tdb: Add configure options for packages
+ Add configure options for the following packages:
+  - acl
+  - attr
+- - libaio
+  - libbsd
+  - libcap
+  - valgrind
+@@ -18,16 +17,20 @@ Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+ Update to 1.4.0
  
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ Signed-off-by: Changqing Li <changqing.li@windriver.com>
++
++Rebase to 1.4.9
++Remove libaio option
++Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
  ---
--Upstream-Status: Pending
-+Upstream-Status: Submitted [https://github.com/eclipse/mraa/pull/1125]
+- lib/replace/wscript | 92 ++++++++++++++++++++++++++++++++++-----------
+- wscript             |  6 +++
+- 2 files changed, 77 insertions(+), 21 deletions(-)
++ lib/replace/wscript | 79 +++++++++++++++++++++++++++++++++------------
++ wscript             |  6 ++++
++ 2 files changed, 65 insertions(+), 20 deletions(-)
  
-  CMakeLists.txt | 3 +--
-  1 file changed, 1 insertion(+), 2 deletions(-)
-diff --git a/meta-oe/recipes-extended/mraa/mraa/0001-include-Declare-gVERSION-global-as-extern.patch b/meta-oe/recipes-extended/mraa/mraa/0001-include-Declare-gVERSION-global-as-extern.patch
-deleted file mode 100644
-index d1152ed641..0000000000
---- a/meta-oe/recipes-extended/mraa/mraa/0001-include-Declare-gVERSION-global-as-extern.patch
-+++ /dev/null
-@@ -1,31 +0,0 @@
--From dbb5961f106ec42cd70689d933674c9c37aedfe1 Mon Sep 17 00:00:00 2001
--From: =?UTF-8?q?Bj=C3=B6rn=20Esser?= <besser82@fedoraproject.org>
--Date: Mon, 13 Apr 2020 20:12:11 +0200
--Subject: include: Declare gVERSION global as 'extern'.
--
--Fixes build with '-fno-common'.
--
--Upstream-Status: Submitted [https://github.com/eclipse/mraa/pull/1012]
--Signed-off-by: Adrian Bunk <bunk@stusta.de>
-----
-- include/version.h | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/include/version.h b/include/version.h
--index 47366ef..3a567a1 100644
----- a/include/version.h
--+++ b/include/version.h
--@@ -11,8 +11,8 @@
-- extern "C" {
-- #endif
-- 
---const char* gVERSION;
---const char* gVERSION_SHORT;
--+extern const char* gVERSION;
--+extern const char* gVERSION_SHORT;
-- 
-- #ifdef __cplusplus
-- }
---- 
--2.17.1
--
-diff --git a/meta-oe/recipes-extended/mraa/mraa/0001-mraa-Use-posix-basename.patch b/meta-oe/recipes-extended/mraa/mraa/0001-mraa-Use-posix-basename.patch
+ diff --git a/lib/replace/wscript b/lib/replace/wscript
+-index 827d74f..70cde6f 100644
++index 199e636..cb13b62 100644
+ --- a/lib/replace/wscript
+ +++ b/lib/replace/wscript
+-@@ -25,6 +25,41 @@ def options(opt):
++@@ -25,6 +25,34 @@ def options(opt):
+      opt.PRIVATE_EXTENSION_DEFAULT('')
+      opt.RECURSE('buildtools/wafsamba')
+  
+@@ -45,13 +48,6 @@ index 827d74f..70cde6f 100644
+ +                   help=("Disable use of attr"),
+ +                   action="store_false", dest='enable_attr', default=False)
+ +
+-+    opt.add_option('--with-libaio',
+-+                   help=("Enable use of libaio"),
+-+                   action="store_true", dest='enable_libaio')
+-+    opt.add_option('--without-libaio',
+-+                   help=("Disable use of libaio"),
+-+                   action="store_false", dest='enable_libaio', default=False)
+-+
+ +    opt.add_option('--with-libbsd',
+ +                   help=("Enable use of libbsd"),
+ +                   action="store_true", dest='enable_libbsd')
+@@ -69,51 +65,45 @@ index 827d74f..70cde6f 100644
+  @Utils.run_once
+  def configure(conf):
+      conf.RECURSE('buildtools/wafsamba')
+-@@ -35,12 +70,25 @@ def configure(conf):
++@@ -38,12 +66,21 @@ def configure(conf):
+      conf.DEFINE('HAVE_LIBREPLACE', 1)
+      conf.DEFINE('LIBREPLACE_NETWORK_CHECKS', 1)
+  
+ -    conf.CHECK_HEADERS('linux/types.h crypt.h locale.h acl/libacl.h compat.h')
+ -    conf.CHECK_HEADERS('acl/libacl.h attr/xattr.h compat.h ctype.h dustat.h')
+ +    conf.CHECK_HEADERS('linux/types.h crypt.h locale.h compat.h')
+-+    conf.CHECK_HEADERS('attr/xattr.h compat.h ctype.h dustat.h')
+++    conf.CHECK_HEADERS('compat.h ctype.h dustat.h')
+      conf.CHECK_HEADERS('fcntl.h fnmatch.h glob.h history.h krb5.h langinfo.h')
+      conf.CHECK_HEADERS('locale.h ndir.h pwd.h')
+ -    conf.CHECK_HEADERS('shadow.h sys/acl.h')
+ -    conf.CHECK_HEADERS('sys/attributes.h attr/attributes.h sys/capability.h sys/dir.h sys/epoll.h')
+ +    conf.CHECK_HEADERS('shadow.h')
+ +    conf.CHECK_HEADERS('sys/attributes.h sys/dir.h sys/epoll.h')
+-+
+ +    if Options.options.enable_acl:
+ +        conf.CHECK_HEADERS('acl/libacl.h sys/acl.h')
+ +
+ +    if Options.options.enable_attr:
+ +        conf.CHECK_HEADERS('attr/attributes.h attr/xattr.h')
+ +
+-+    if Options.options.enable_libaio:
+-+        conf.CHECK_HEADERS('libaio.h')
+-+
+ +    if Options.options.enable_libcap:
+ +        conf.CHECK_HEADERS('sys/capability.h')
+ +
+-     conf.CHECK_HEADERS('port.h')
+      conf.CHECK_HEADERS('sys/fcntl.h sys/filio.h sys/filsys.h sys/fs/s5param.h')
+      conf.CHECK_HEADERS('sys/id.h sys/ioctl.h sys/ipc.h sys/mman.h sys/mode.h sys/ndir.h sys/priv.h')
+-@@ -110,9 +158,10 @@ def configure(conf):
++     conf.CHECK_HEADERS('sys/resource.h sys/security.h sys/shm.h sys/statfs.h sys/statvfs.h sys/termio.h')
++@@ -113,8 +150,9 @@ def configure(conf):
+      conf.CHECK_HEADERS('sys/fileio.h sys/filesys.h sys/dustat.h sys/sysmacros.h')
+      conf.CHECK_HEADERS('xfs/libxfs.h netgroup.h')
+  
+ -    conf.CHECK_HEADERS('valgrind.h valgrind/valgrind.h')
+--    conf.CHECK_HEADERS('valgrind/memcheck.h valgrind/helgrind.h')
+--    conf.CHECK_HEADERS('nss_common.h nsswitch.h ns_api.h')
++-    conf.CHECK_HEADERS('valgrind/memcheck.h valgrind/helgrind.h valgrind/callgrind.h')
+ +    if Options.options.enable_valgrind:
+ +        conf.CHECK_HEADERS('valgrind.h valgrind/valgrind.h')
+-+        conf.CHECK_HEADERS('valgrind/memcheck.h valgrind/helgrind.h')
+-+
+++        conf.CHECK_HEADERS('valgrind/memcheck.h valgrind/helgrind.h valgrind/callgrind.h')
++     conf.CHECK_HEADERS('nss_common.h nsswitch.h ns_api.h')
+      conf.CHECK_HEADERS('sys/extattr.h sys/ea.h sys/proplist.h sys/cdefs.h')
+      conf.CHECK_HEADERS('utmp.h utmpx.h lastlog.h')
+-     conf.CHECK_HEADERS('syscall.h sys/syscall.h inttypes.h')
+-@@ -431,20 +480,21 @@ def configure(conf):
++@@ -443,20 +481,21 @@ def configure(conf):
+  
+      strlcpy_in_bsd = False
+  
+@@ -150,7 +140,7 @@ index 827d74f..70cde6f 100644
+      conf.CHECK_CODE('''
+                  struct ucred cred;
+ diff --git a/wscript b/wscript
+-index 71ada31..10b16a7 100644
++index 5e6a928..5443b43 100644
+ --- a/wscript
+ +++ b/wscript
+ @@ -69,6 +69,12 @@ def options(opt):
+diff --git a/meta-networking/recipes-support/libtdb/libtdb/0002-Fix-pyext_PATTERN-for-cross-compilation.patch b/meta-networking/recipes-support/libtdb/libtdb/0002-Fix-pyext_PATTERN-for-cross-compilation.patch
+index 6bd118b53..00ec8a477 100644
+--- a/meta-networking/recipes-support/libtdb/libtdb/0002-Fix-pyext_PATTERN-for-cross-compilation.patch
++++ b/meta-networking/recipes-support/libtdb/libtdb/0002-Fix-pyext_PATTERN-for-cross-compilation.patch
+@@ -1,4 +1,4 @@
+-From 10b4546edb194ede7a5e8bb5e4c9f5fdc67984eb Mon Sep 17 00:00:00 2001
++From de39c696a62894fd9c6626d3e2931e42e3407be5 Mon Sep 17 00:00:00 2001
+ From: Yi Zhao <yi.zhao@windriver.com>
+ Date: Wed, 24 Nov 2021 13:33:35 +0800
+ Subject: [PATCH] Fix pyext_PATTERN for cross compilation
+@@ -25,10 +25,10 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/third_party/waf/waflib/Tools/python.py b/third_party/waf/waflib/Tools/python.py
+-index a23bd01..af202e0 100644
++index b2dd1a9..2bd3545 100644
+ --- a/third_party/waf/waflib/Tools/python.py
+ +++ b/third_party/waf/waflib/Tools/python.py
+-@@ -328,7 +328,7 @@ def check_python_headers(conf, features='pyembed pyext'):
++@@ -339,7 +339,7 @@ def check_python_headers(conf, features='pyembed pyext'):
+  	x = 'MACOSX_DEPLOYMENT_TARGET'
+  	if dct[x]:
+  		env[x] = conf.environ[x] = str(dct[x])
+diff --git a/meta-networking/recipes-support/libtdb/libtdb/run-ptest b/meta-networking/recipes-support/libtdb/libtdb/run-ptest
 new file mode 100644
-index 0000000000..4f07eae631
+index 000000000..7bc56f77c
 --- /dev/null
-+++ b/meta-oe/recipes-extended/mraa/mraa/0001-mraa-Use-posix-basename.patch
-@@ -0,0 +1,46 @@
-+From 30f78cb2775358dacd10b02c0ba2ec0c3ba2945d Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sun, 31 Dec 2023 19:16:35 -0800
-+Subject: [PATCH 1/2] mraa: Use posix basename
++++ b/meta-networking/recipes-support/libtdb/libtdb/run-ptest
+@@ -0,0 +1,17 @@
++#!/bin/sh
 +
-+Musl has removed the declaration from string.h [1] which exposes the
-+problem especially with clang-17+ compiler where implicit function
-+declaration is flagged as error. Use posix basename and make a copy of
-+string to operate on to emulate GNU basename behaviour.
++ptestdir=$(dirname "$(readlink -f "$0")")
++cd "$ptestdir"/tests || exit
 +
-+[1] https://git.musl-libc.org/cgit/musl/commit/?id=725e17ed6dff4d0cd22487bb64470881e86a92e7
++tests=$(find * -type f -name 'tdb1-*')
 +
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+Upstream-Status: Submitted [https://github.com/eclipse/mraa/pull/1125]
-+ src/mraa.c | 5 ++++-
-+ 1 file changed, 4 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/mraa.c b/src/mraa.c
-+index 653ea1fa..b556d045 100644
-+--- a/src/mraa.c
-++++ b/src/mraa.c
-+@@ -12,6 +12,7 @@
-+ #endif
-+ 
-+ #include <dlfcn.h>
-++#include <libgen.h>
-+ #include <pwd.h>
-+ #include <sched.h>
-+ #include <stddef.h>
-+@@ -341,9 +342,11 @@ static int
-+ mraa_count_iio_devices(const char* path, const struct stat* sb, int flag, struct FTW* ftwb)
-+ {
-+     // we are only interested in files with specific names
-+-    if (fnmatch(IIO_DEVICE_WILDCARD, basename(path), 0) == 0) {
-++    char* tmp = strdup(path);
-++    if (fnmatch(IIO_DEVICE_WILDCARD, basename(tmp), 0) == 0) {
-+         num_iio_devices++;
-+     }
-++    free(tmp);
-+     return 0;
-+ }
-+ 
-+-- 
-+2.43.0
-+
-diff --git a/meta-oe/recipes-extended/mraa/mraa/0002-gpio-Include-limits.h-for-PATH_MAX.patch b/meta-oe/recipes-extended/mraa/mraa/0002-gpio-Include-limits.h-for-PATH_MAX.patch
-new file mode 100644
-index 0000000000..0e472255a9
---- /dev/null
-+++ b/meta-oe/recipes-extended/mraa/mraa/0002-gpio-Include-limits.h-for-PATH_MAX.patch
-@@ -0,0 +1,30 @@
-+From ffa6f1254066b1d5d99192002043be945ff64297 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sun, 31 Dec 2023 19:18:42 -0800
-+Subject: [PATCH 2/2] gpio: Include limits.h for PATH_MAX
-+
-+Musl exposes this problem where PATH_MAX is used but limits.h is not
-+included, it works with glibc perhaps due to limits.h being indirectly
-+included by another system header.
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+Upstream-Status: Submitted [https://github.com/eclipse/mraa/pull/1125]
-+ src/gpio/gpio_chardev.c | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/src/gpio/gpio_chardev.c b/src/gpio/gpio_chardev.c
-+index 2cd15968..9f727de7 100644
-+--- a/src/gpio/gpio_chardev.c
-++++ b/src/gpio/gpio_chardev.c
-+@@ -12,6 +12,7 @@
-+ #include <dirent.h>
-+ #include <errno.h>
-+ #include <fcntl.h>
-++#include <limits.h>
-+ #include <poll.h>
-+ #include <pthread.h>
-+ #include <signal.h>
-+-- 
-+2.43.0
-+
-diff --git a/meta-oe/recipes-extended/mraa/mraa_git.bb b/meta-oe/recipes-extended/mraa/mraa_git.bb
-index f1cdf66fc2..61f36d724d 100644
---- a/meta-oe/recipes-extended/mraa/mraa_git.bb
-+++ b/meta-oe/recipes-extended/mraa/mraa_git.bb
-@@ -5,12 +5,13 @@ SECTION = "libs"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=91e7de50a8d3cf01057f318d72460acd"
++for f in replace_testsuite $tests
++do
++    if test -x ./"$f"; then
++        if ./"$f" > ./"$f".out 2> ./"$f".err; then
++            echo "PASS: $f"
++        else
++            echo "FAIL: $f"
++        fi
++    fi
++done
+diff --git a/meta-networking/recipes-support/libtdb/libtdb_1.4.8.bb b/meta-networking/recipes-support/libtdb/libtdb_1.4.9.bb
+similarity index 71%
+rename from meta-networking/recipes-support/libtdb/libtdb_1.4.8.bb
+rename to meta-networking/recipes-support/libtdb/libtdb_1.4.9.bb
+index 5dc87bd91..248b72967 100644
+--- a/meta-networking/recipes-support/libtdb/libtdb_1.4.8.bb
++++ b/meta-networking/recipes-support/libtdb/libtdb_1.4.9.bb
+@@ -11,9 +11,10 @@ export PYTHONHASHSEED="1"
+ SRC_URI = "https://samba.org/ftp/tdb/tdb-${PV}.tar.gz \
+            file://0001-tdb-Add-configure-options-for-packages.patch \
+            file://0002-Fix-pyext_PATTERN-for-cross-compilation.patch \
++           file://run-ptest \
+ "
  
--SRCREV = "7786c7ded5c9ce7773890d0e3dc27632898fc6b1"
-+SRCREV = "3c288a09109969eef9c2da7d92d3c62f92a015cc"
- PV = "2.2.0+git${SRCPV}"
+-SRC_URI[sha256sum] = "8434c9c857d13ce3fa8466f75601f25c3693676b36919f159e0ad6121baf5ce8"
++SRC_URI[sha256sum] = "0ac226073e3a2db8648da7af744cb95f50766a52feeb001d558b2b321b74a765"
  
- SRC_URI = "git://github.com/eclipse/${BPN}.git;protocol=https;branch=master \
-            file://0001-cmake-Use-a-regular-expression-to-match-x86-architec.patch \
--           file://0001-include-Declare-gVERSION-global-as-extern.patch \
-+           file://0001-mraa-Use-posix-basename.patch \
-+           file://0002-gpio-Include-limits.h-for-PATH_MAX.patch \
-            "
+ PACKAGECONFIG ??= "\
+     ${@bb.utils.filter('DISTRO_FEATURES', 'acl', d)} \
+@@ -22,17 +23,16 @@ PACKAGECONFIG ??= "\
  
- S = "${WORKDIR}/git"
+ PACKAGECONFIG[acl] = "--with-acl,--without-acl,acl"
+ PACKAGECONFIG[attr] = "--with-attr,--without-attr,attr"
+-PACKAGECONFIG[libaio] = "--with-libaio,--without-libaio,libaio"
+ PACKAGECONFIG[libbsd] = "--with-libbsd,--without-libbsd,libbsd"
+ PACKAGECONFIG[libcap] = "--with-libcap,--without-libcap,libcap"
+ PACKAGECONFIG[valgrind] = "--with-valgrind,--without-valgrind,valgrind"
+ 
+ S = "${WORKDIR}/tdb-${PV}"
+ 
+-inherit waf-samba
++inherit waf-samba pkgconfig ptest
+ 
+-#cross_compile cannot use preforked process, since fork process earlier than point subproces.popen
+-#to cross Popen
++# Cross_compile cannot use preforked process, since fork process earlier than point subproces.popen
++# to cross Popen
+ export WAF_NO_PREFORK="yes"
+ 
+ EXTRA_OECONF += "--disable-rpath \
+@@ -42,6 +42,15 @@ EXTRA_OECONF += "--disable-rpath \
+                  --with-libiconv=${STAGING_DIR_HOST}${prefix}\
+                 "
+ 
++do_install_ptest() {
++    install -d ${D}${PTEST_PATH}/tests
++    install -m 0755 ${B}/bin/tdb1-* ${D}${PTEST_PATH}/tests/
++    install -m 0755 ${B}/bin/replace_testsuite ${D}${PTEST_PATH}/tests/
++    install -d ${D}${PTEST_PATH}/tests/test
++    install -m 0644 ${B}/test/*.tdb ${D}${PTEST_PATH}/tests/test/
++    install -m 0644 ${B}/test/*.corrupt ${D}${PTEST_PATH}/tests/test/
++}
++
+ PACKAGES += "tdb-tools python3-tdb"
+ 
+ RPROVIDES:${PN}-dbg += "python3-tdb-dbg"
 -- 
-2.43.0
+2.25.1
 
 
