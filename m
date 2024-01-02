@@ -2,93 +2,82 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EABD0C46CD2
-	for <webhook@archiver.kernel.org>; Tue,  2 Jan 2024 07:01:35 +0000 (UTC)
-Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
- by mx.groups.io with SMTP id smtpd.web10.24311.1704178891099930729
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D64CDC47073
+	for <webhook@archiver.kernel.org>; Tue,  2 Jan 2024 07:02:15 +0000 (UTC)
+Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
+ by mx.groups.io with SMTP id smtpd.web10.24319.1704178932006673440
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Jan 2024 23:01:31 -0800
+ Mon, 01 Jan 2024 23:02:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: wangmy@fujitsu.com)
-X-IronPort-AV: E=McAfee;i="6600,9927,10940"; a="124376210"
+ dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10940"; a="145060391"
 X-IronPort-AV: E=Sophos;i="6.04,324,1695654000"; 
-   d="scan'208";a="124376210"
-Received: from unknown (HELO yto-r3.gw.nic.fujitsu.com) ([218.44.52.219])
-  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Jan 2024 16:01:28 +0900
-Received: from yto-m1.gw.nic.fujitsu.com (yto-nat-yto-m1.gw.nic.fujitsu.com [192.168.83.64])
-	by yto-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 36FEED4F51
-	for <openembedded-devel@lists.openembedded.org>; Tue,  2 Jan 2024 16:01:26 +0900 (JST)
-Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by yto-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id 7BE37D1B9C
-	for <openembedded-devel@lists.openembedded.org>; Tue,  2 Jan 2024 16:01:25 +0900 (JST)
+   d="scan'208";a="145060391"
+Received: from unknown (HELO oym-r4.gw.nic.fujitsu.com) ([210.162.30.92])
+  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Jan 2024 16:02:09 +0900
+Received: from oym-m1.gw.nic.fujitsu.com (oym-nat-oym-m1.gw.nic.fujitsu.com [192.168.87.58])
+	by oym-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 8B274DCC15
+	for <openembedded-devel@lists.openembedded.org>; Tue,  2 Jan 2024 16:02:07 +0900 (JST)
+Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
+	by oym-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id 8BBABF68B7
+	for <openembedded-devel@lists.openembedded.org>; Tue,  2 Jan 2024 16:02:06 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id F1D5220081325
-	for <openembedded-devel@lists.openembedded.org>; Tue,  2 Jan 2024 16:01:24 +0900 (JST)
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 1AAEC6B4DB
+	for <openembedded-devel@lists.openembedded.org>; Tue,  2 Jan 2024 16:02:06 +0900 (JST)
 Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.187])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 7795C1A0070;
-	Tue,  2 Jan 2024 15:01:24 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id B670E1A0070;
+	Tue,  2 Jan 2024 15:02:05 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] exiftool: upgrade 12.71 -> 12.72
-Date: Tue,  2 Jan 2024 14:28:02 +0800
-Message-Id: <1704176882-7543-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] feh: upgrade 3.10.1 -> 3.10.2
+Date: Tue,  2 Jan 2024 15:01:51 +0800
+Message-Id: <1704178911-7769-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28094.005
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28094.005
-X-TMASE-Result: 10--1.332000-10.000000
-X-TMASE-MatchedRID: rofoCPeR2CGjz0nOeth/yUIIxwDaU5mrWQ3R4k5PTnCY5nVpihxiwzlq
-	WSxu1gNPKLa1Z0d/Lq4fMrPgF6OYQ9DCM5b2Q+i0ewZ0VuGL+Bas4IQYg+G3CKuc6JWqg9I+vqn
-	FtM6Nq/L7tBxFpWhrycYoh/qEF/tVoYY7KoErjW8ReM8i8p3vgHM3nHyJFlyWtE8mz+ry/JQhjp
-	75eLVqH+0B0MT8S0EkgDLqnrRlXrbIDt27MLDp0t0H8LFZNFG76sBnwpOylLPMNv7HwREO2AUqU
-	9xkycGLD2+xS719ltdMUFMwgkOpKxwyY7HAKwnCtSSXLhDTWLsyX7g0mvzyE+pgEmiQsx9/XGyO
-	+u6sj6qIHqaUMp7VXtL/LK0d4I30Ze/gJB41STsbqpM7Cr+fvX7cGd19dSFd
+X-TMASE-Result: 10-4.658200-10.000000
+X-TMASE-MatchedRID: wgzGQ0X+yFqjz0nOeth/yUIIxwDaU5mrTfK5j0EZbyuMCqmhXL/EWtEQ
+	LJPlYQqEopYWyJNulHjGKIf6hBf7VQE4dbnyjMJaTuctSpiuWyUUi4Ehat0540uNdcZDLqeUhEz
+	I3+mkzieOzi7rdvouW9sZPvxQgOeY5UcZtwNsCroURSScn+QSXpjDMT0TyDk5+gtHj7OwNO0JC+
+	VZi2gQEd3fSJ9r5X1OmPCIGcYDodV+l2VKujdzRkSyNNJfl41tIvcLTuKS5zFgx0CeZjuQJYn/+
+	ioVX6vIv4tsZKbeyrVpcFNrq7wl3fIMFg0InOPqz5gAnmajvOU4qCidlj1MUy0uABDi47cA
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 02 Jan 2024 07:01:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107991
+ <openembedded-devel@lists.openembedded.org>; Tue, 02 Jan 2024 07:02:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107992
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-===========
-- Added read support for AAC audio files
-- Added a new QuickTime Keys Android tag
-- Added a number of new values for some Ricoh GR III tags
-- Decode timed metadata from Intsa360 Ace Pro MP4 videos
-- Decode GPSDateTime milliseconds in timed Insta360 metadata
-- Decode timed metadata from INNOV K5 TS videos
-- Decode a number of new GoPro timed-metadata tags
-- Decode a few new Xiaomi EXIF tags
-- Fixed writing of JPG/ARW images from some newer Sony models to preserve
-  HiddenData
+* Fix crash in right-click / menu rendering code on some distributions
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../perl/{exiftool_12.71.bb => exiftool_12.72.bb}               | 2 +-
+ meta-oe/recipes-graphics/feh/{feh_3.10.1.bb => feh_3.10.2.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/perl/{exiftool_12.71.bb => exiftool_12.72.bb} (92%)
+ rename meta-oe/recipes-graphics/feh/{feh_3.10.1.bb => feh_3.10.2.bb} (88%)
 
-diff --git a/meta-oe/recipes-devtools/perl/exiftool_12.71.bb b/meta-oe/recipes-devtools/perl/exiftool_12.72.bb
-similarity index 92%
-rename from meta-oe/recipes-devtools/perl/exiftool_12.71.bb
-rename to meta-oe/recipes-devtools/perl/exiftool_12.72.bb
-index 7d8d6b69f..ba3e3fdf7 100644
---- a/meta-oe/recipes-devtools/perl/exiftool_12.71.bb
-+++ b/meta-oe/recipes-devtools/perl/exiftool_12.72.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://perl-Image-ExifTool.spec;beginline=5;endline=5;md5=ff
+diff --git a/meta-oe/recipes-graphics/feh/feh_3.10.1.bb b/meta-oe/recipes-graphics/feh/feh_3.10.2.bb
+similarity index 88%
+rename from meta-oe/recipes-graphics/feh/feh_3.10.1.bb
+rename to meta-oe/recipes-graphics/feh/feh_3.10.2.bb
+index 40145b873..2c38ce614 100644
+--- a/meta-oe/recipes-graphics/feh/feh_3.10.1.bb
++++ b/meta-oe/recipes-graphics/feh/feh_3.10.2.bb
+@@ -9,7 +9,7 @@ DEPENDS = "\
+ "
  
- inherit cpan
+ SRC_URI = "https://feh.finalrewind.org/feh-${PV}.tar.bz2"
+-SRC_URI[sha256sum] = "ec5e44d3cfe6f50f1c64f28a6f0225d958f4f4621726d9c2a04b5a32e5106d23"
++SRC_URI[sha256sum] = "5f94a77de25c5398876f0cf431612d782b842f4db154d2139b778c8f196e8969"
  
--SRCREV = "7cefbaaa9057231b6e9b5765934f06e75994420d"
-+SRCREV = "fc4f6614ff0c19bb5f332a9c464dcef7267931df"
- SRC_URI = "git://github.com/exiftool/exiftool;protocol=https;branch=master"
- 
- S = "${WORKDIR}/git"
+ inherit mime-xdg features_check
+ # depends on virtual/libx11
 -- 
 2.34.1
 
