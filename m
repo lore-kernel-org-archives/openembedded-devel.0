@@ -1,206 +1,86 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BBDEAC46CD2
-	for <webhook@archiver.kernel.org>; Tue,  2 Jan 2024 16:22:48 +0000 (UTC)
-Received: from mail-oa1-f51.google.com (mail-oa1-f51.google.com [209.85.160.51])
- by mx.groups.io with SMTP id smtpd.web10.32670.1704212567870648544
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F3050C46CD2
+	for <webhook@archiver.kernel.org>; Tue,  2 Jan 2024 17:05:18 +0000 (UTC)
+Received: from smtp-fw-6001.amazon.com (smtp-fw-6001.amazon.com [52.95.48.154])
+ by mx.groups.io with SMTP id smtpd.web10.33619.1704214706523544941
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Jan 2024 08:22:48 -0800
+ Tue, 02 Jan 2024 08:58:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=aOzEy0zg;
- spf=pass (domain: gmail.com, ip: 209.85.160.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f51.google.com with SMTP id 586e51a60fabf-20440084f25so2184461fac.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Jan 2024 08:22:47 -0800 (PST)
+ dkim=pass header.i=@amazon.com header.s=amazon201209 header.b=cGbMELdh;
+ spf=pass (domain: amazon.com, ip: 52.95.48.154, mailfrom: prvs=7248f9d20=jorcrous@amazon.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1704212567; x=1704817367; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=SeJhwhIwGKRBbR0Ynvnpxr1yAGJG/oYSzg25GWD8gDE=;
-        b=aOzEy0zgQOg3oLH6mzV+218gTJcm0GtZRSGX/ER0MtlQXAxwVx+WN35Pfu5pwr5Pdu
-         B+cpgBeFBi8/3Gd4gSrLLPZrLH01H7Gj7r3CE5gSsqCNtSphw7n7AfWE5I4jlUCZ/Q17
-         Ih1MnDdMsoVkTSf7WXyQJkzOhxSxjLhl+K+60t5ucFPyAqxPUu9mPn6lkWloi868vEKy
-         cQMsBDHGhDIuMyOaMN9a/ZSexHnClyTOWdtSWrb7KNwnj1zUNCgGPuATtZm3eO4WtVNB
-         zA6eIgnU85QLlrhJQrq3t4jF8qnXrONReofDuTDFoFavw+2nJhQol4/ev1SGD1shl/v0
-         gT7A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704212567; x=1704817367;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=SeJhwhIwGKRBbR0Ynvnpxr1yAGJG/oYSzg25GWD8gDE=;
-        b=vhiF8epuucs0OAkVHV9CcfNTJJBM4VAS6M0dNlDLEu+qybe5nLRwdwVll0oXe89eBs
-         vCoUgXoxSpsPq2XsvU6ZB39IdK1lmKzcC0RWfZHKUyScCvQllGWUu+3VVgjkrNLiAlgf
-         meO2ztdfLSYTE0HSRSoCGkExxV403rY/1qzhp2AtWmM+nSSTG0pibejjwWIdiVwyzsbm
-         kc12y5ZVqiFutaQEKDK6v2OjqgLpPm9MpKomSbvb+F+qqLd8Tfl3WrMLryO40EOK9f9O
-         oKPVq1zkQfb1qnjabDSNzZWpuJ+9mXAgmRLRtIOR32DieEMNOgAZ1n+h7d0Ymkd1wS1Q
-         p+Kw==
-X-Gm-Message-State: AOJu0YwITFu/QkBnt6llrJ1VF+JSu67GVHxFATkkuS6sICuDOryVdwXB
-	xMKFTkhfSlbLNZ3ydl5cyjXS6hdeFFxCz+9EFfE=
-X-Google-Smtp-Source: AGHT+IEK0R47AZ1SB+gj2iGniSQHB3IaZEevPoYlWCU2N4ugKVrA9qT7Lpeu8k3m6ABB+jOhoNTUgX4pweFIPVW65xs=
-X-Received: by 2002:a05:6870:414c:b0:1fa:a4f0:ab29 with SMTP id
- r12-20020a056870414c00b001faa4f0ab29mr7927698oad.16.1704212567036; Tue, 02
- Jan 2024 08:22:47 -0800 (PST)
+  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
+  t=1704214707; x=1735750707;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=lOrZFblNgH66plxqAxqTlwheEESKUBocv4DQbNti/2w=;
+  b=cGbMELdhaK4tUCrahWeOkL+l0R7dp6Hfnvei/rZuV4I6nKTgXTmdtkBv
+   PxOnmBT45IJRcK8L0Tow8vOeeK/FgHbk4hqvhpNap374Sg37xZolZ/7+R
+   D6VFyv0myMGI1CnlbJDhqTGRS7z8VFPhCbB70uIfEgDCHLLx+tg0kCGKe
+   g=;
+X-IronPort-AV: E=Sophos;i="6.04,325,1695686400"; 
+   d="scan'208";a="379767898"
+Received: from iad12-co-svc-p1-lb1-vlan2.amazon.com (HELO email-inbound-relay-pdx-2a-m6i4x-1cca8d67.us-west-2.amazon.com) ([10.43.8.2])
+  by smtp-border-fw-6001.iad6.amazon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Jan 2024 16:58:26 +0000
+Received: from smtpout.prod.us-west-2.prod.farcaster.email.amazon.dev (pdx2-ws-svc-p26-lb5-vlan3.pdx.amazon.com [10.39.38.70])
+	by email-inbound-relay-pdx-2a-m6i4x-1cca8d67.us-west-2.amazon.com (Postfix) with ESMTPS id B103F8076C
+	for <openembedded-devel@lists.openembedded.org>; Tue,  2 Jan 2024 16:58:24 +0000 (UTC)
+Received: from EX19MTAUWB002.ant.amazon.com [10.0.21.151:49335]
+ by smtpin.naws.us-west-2.prod.farcaster.email.amazon.dev [10.0.31.59:2525] with esmtp (Farcaster)
+ id 70b32531-db53-4914-8b41-4c1eb1122db9; Tue, 2 Jan 2024 16:58:23 +0000 (UTC)
+X-Farcaster-Flow-ID: 70b32531-db53-4914-8b41-4c1eb1122db9
+Received: from EX19MTAUWB001.ant.amazon.com (10.250.64.248) by
+ EX19MTAUWB002.ant.amazon.com (10.250.64.231) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.40; Tue, 2 Jan 2024 16:58:23 +0000
+Received: from dev-dsk-jorcrous-2c-c0367878.us-west-2.amazon.com
+ (10.189.195.130) by mail-relay.amazon.com (10.250.64.254) with Microsoft SMTP
+ Server id 15.2.1118.40 via Frontend Transport; Tue, 2 Jan 2024 16:58:23 +0000
+Received: by dev-dsk-jorcrous-2c-c0367878.us-west-2.amazon.com (Postfix, from userid 14178300)
+	id 1161E60F2; Tue,  2 Jan 2024 16:58:23 +0000 (UTC)
+From: "Jordan Crouse" <jorcrous@amazon.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] collectd: Remove rrdtool from DEPENDS
+Date: Tue, 2 Jan 2024 16:58:23 +0000
+Message-ID: <20240102165823.12306-1-jorcrous@amazon.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-References: <20240102110400.1707120-1-leon.anavi@konsulko.com>
-In-Reply-To: <20240102110400.1707120-1-leon.anavi@konsulko.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 2 Jan 2024 08:22:21 -0800
-Message-ID: <CAMKF1sqakCTQ+6EX+kAgmeq6PtGoTN4v3dOTY8LbqwYB2KWGHg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCHv2] ssd1306_git.bb: Add ssd1306_linux
-To: Leon Anavi <leon.anavi@konsulko.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 02 Jan 2024 16:22:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108011
+ <openembedded-devel@lists.openembedded.org>; Tue, 02 Jan 2024 17:05:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108012
 
-On Tue, Jan 2, 2024 at 3:04=E2=80=AFAM Leon Anavi <leon.anavi@konsulko.com>=
- wrote:
->
-> Add ssd1306_linux, a simple OLED I2C SSD1306 Linux driver based on
-> the i2c library libi2c from i2c-tools. Example usage for a
-> compatible display with resolution 128x64 pixels:
->
-> ssd1306_bin -n 1 -I 128x64
-> ssd1306_bin -n 1 -c
-> ssd1306_bin -n 1 -r 0
-> ssd1306_bin -n 1 -x 1 -y 1
-> ssd1306_bin -n 1 -l "Hello World"
->
-> Pending GitHub pull request to the upstream of the project:
-> https://github.com/armlabs/ssd1306_linux/pull/4
->
-> After fixing the upstream 0001-Use-include-filename.patch should
-> be removed from the recipe.
->
-> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-> ---
->  .../ssd1306/0001-Use-include-filename.patch   | 52 +++++++++++++++++++
->  .../recipes-devtools/ssd1306/ssd1306_git.bb   | 25 +++++++++
->  2 files changed, 77 insertions(+)
->  create mode 100644 meta-oe/recipes-devtools/ssd1306/ssd1306/0001-Use-inc=
-lude-filename.patch
->  create mode 100644 meta-oe/recipes-devtools/ssd1306/ssd1306_git.bb
->
-> diff --git a/meta-oe/recipes-devtools/ssd1306/ssd1306/0001-Use-include-fi=
-lename.patch b/meta-oe/recipes-devtools/ssd1306/ssd1306/0001-Use-include-fi=
-lename.patch
-> new file mode 100644
-> index 000000000..a43116084
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/ssd1306/ssd1306/0001-Use-include-filename.=
-patch
-> @@ -0,0 +1,52 @@
-> +From cb32ebbb1efb3202808809861ec3cbd811c55bd2 Mon Sep 17 00:00:00 2001
-> +From: Leon Anavi <leon.anavi@konsulko.com>
-> +Date: Sat, 30 Dec 2023 13:23:31 +0000
-> +Subject: [PATCH] Use include "filename"
-> +
-> +Use include "filename" to include programmer-defined header files
-> +from the same directory as the file containing the directive.
-> +
-> +GitHub pull request to the upstream of the project:
-> +https://github.com/armlabs/ssd1306_linux/pull/4
-> +
+The core collectd tool does not require rrdtool to build. There are some
+configurable options that do need rrdtool but they are already properly
+adding the dependency in PACKAGECONFIG. This saves building half a dozen
+other libraries that wouldn't otherwise be present on a headless or server
+style target.
 
-This info above could be merged into line below e.g.
-Upstream-Status: Submitted [https://github.com/armlabs/ssd1306_linux/pull/4=
-]
+Signed-of-by: Jordan Crouse <jorcrous@amazon.com>
+---
+ meta-oe/recipes-extended/collectd/collectd_5.12.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> +Upstream-Status: Pending
-> +
-> +Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-> +---
-> + main.c    | 2 +-
-> + ssd1306.c | 6 +++---
-> + 2 files changed, 4 insertions(+), 4 deletions(-)
-> +
-> +diff --git a/main.c b/main.c
-> +index c1ffc2f..18e2b84 100644
-> +--- a/main.c
-> ++++ b/main.c
-> +@@ -6,7 +6,7 @@
-> + #include <string.h>
-> + #include <fcntl.h>
-> + #include <sys/ioctl.h>
-> +-#include <ssd1306.h>
-> ++#include "ssd1306.h"
-> +
-> + void print_help()
-> + {
-> +diff --git a/ssd1306.c b/ssd1306.c
-> +index a03674a..2e6ba97 100644
-> +--- a/ssd1306.c
-> ++++ b/ssd1306.c
-> +@@ -8,9 +8,9 @@
-> + #include <string.h>
-> + #include <fcntl.h>
-> + #include <sys/ioctl.h>
-> +-#include <linux_i2c.h>
-> +-#include <ssd1306.h>
-> +-#include <font.h>
-> ++#include "linux_i2c.h"
-> ++#include "ssd1306.h"
-> ++#include "font.h"
-> +
-> + const char init_oled_type_file[] =3D "/tmp/.ssd1306_oled_type";
-> +
-> +--
-> +2.39.2
-> +
-> diff --git a/meta-oe/recipes-devtools/ssd1306/ssd1306_git.bb b/meta-oe/re=
-cipes-devtools/ssd1306/ssd1306_git.bb
-> new file mode 100644
-> index 000000000..5adfd3ed6
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/ssd1306/ssd1306_git.bb
-> @@ -0,0 +1,25 @@
-> +SUMMARY=3D"SSD1306 OLED I2C drive"
-> +DESCRIPTION =3D "SSD1306 OLED I2C driver working in Linux"
-> +HOMEPAGE =3D "https://github.com/armlabs/ssd1306_linux"
-> +SECTION =3D "console/utils"
-> +LICENSE =3D "MIT"
-> +
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D7b694e603a996c3bfdc6093ed1f70=
-c8f"
-> +
-> +SRC_URI =3D " \
-> +    git://github.com/armlabs/ssd1306_linux.git;protocol=3Dhttps;branch=
-=3Dmaster \
-> +    file://0001-Use-include-filename.patch \
-> +"
-> +SRCREV =3D "7375f1088732d243f7167c9a17725f1a860da587"
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +# coreutils provides fmt which is used in the Makefile
-> +DEPENDS =3D "i2c-tools coreutils-native"
-> +
-> +EXTRA_OEMAKE =3D "CC=3D'${CC}' CFLAGS=3D'${CFLAGS}' LDFLAGS=3D'${LDFLAGS=
-}'"
-> +
-> +do_install() {
-> +    install -d ${D}${bindir}
-> +    install -m 0755 ${B}/ssd1306_bin ${D}${bindir}
-> +}
-> --
-> 2.39.2
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#108007): https://lists.openembedded.org/g/openembedde=
-d-devel/message/108007
-> Mute This Topic: https://lists.openembedded.org/mt/103479288/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+diff --git a/meta-oe/recipes-extended/collectd/collectd_5.12.0.bb b/meta-oe/recipes-extended/collectd/collectd_5.12.0.bb
+index bd4a5b3e8..02f1fcb42 100644
+--- a/meta-oe/recipes-extended/collectd/collectd_5.12.0.bb
++++ b/meta-oe/recipes-extended/collectd/collectd_5.12.0.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "https://collectd.org/"
+ LICENSE = "GPL-2.0-only & MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=1bd21f19f7f0c61a7be8ecacb0e28854"
+ 
+-DEPENDS = "rrdtool curl libpcap libxml2 yajl libgcrypt libtool lvm2"
++DEPENDS = "curl libpcap libxml2 yajl libgcrypt libtool lvm2"
+ 
+ SRC_URI = "https://collectd.org/files/collectd-${PV}.tar.bz2 \
+            file://collectd.init \
+-- 
+2.40.1
+
 
