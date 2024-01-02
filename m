@@ -1,173 +1,129 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <iillyyaa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F2DFC47074
-	for <webhook@archiver.kernel.org>; Tue,  2 Jan 2024 18:54:19 +0000 (UTC)
-Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com [209.85.167.50])
- by mx.groups.io with SMTP id smtpd.web11.36564.1704221656099629078
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 97772C46CD2
+	for <webhook@archiver.kernel.org>; Tue,  2 Jan 2024 19:12:39 +0000 (UTC)
+Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com [209.85.222.170])
+ by mx.groups.io with SMTP id smtpd.web10.37095.1704222757510867114
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Jan 2024 10:54:16 -0800
+ Tue, 02 Jan 2024 11:12:37 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=Pp2TdUSh;
- spf=pass (domain: konsulko.com, ip: 209.85.167.50, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-lf1-f50.google.com with SMTP id 2adb3069b0e04-50ea226bda8so583033e87.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Jan 2024 10:54:15 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=iJx7xQYT;
+ spf=pass (domain: gmail.com, ip: 209.85.222.170, mailfrom: iillyyaa@gmail.com)
+Received: by mail-qk1-f170.google.com with SMTP id af79cd13be357-7815547f2c5so392892985a.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Jan 2024 11:12:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1704221654; x=1704826454; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1704222756; x=1704827556; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=YUMJcAf+vh2NanGPAlJ0nx+/E5yCKRksml+wkAU5fj8=;
-        b=Pp2TdUShnywJtrrHi5WBK+ajDShVU/Dw9QNkSTxam5pF6MG31JhHhLEuiFy/lSGDff
-         A2Ow9a1UcpqcBja81ZBv/2Y2VpAIhI2SwbhIgmQZsloKTV5HSya7qbGor0tOiRdsjysl
-         O3hy3piFwsUDS20taacHyohFmlYa7DqGtfAbs=
+        bh=lR7ZZqKTn5UfK+ifhXUmUIySAj3zWSWA8U47LCrKHE4=;
+        b=iJx7xQYTObZ3VYFUrkayo6GUXO1qFkjSUbKG3HMbdWIJvTiyA5vQCjO5H2ATgovxxI
+         7kWm6ot4h79OvrS/kE+8UMUoptTY/7qUdXl/plrSEGRh7Im/3oGi+rfBm3kRJlERri+5
+         RMy63Ropi78jPN0MwimNzAcBRgZYgbRvCW2RFJ/BwDcixBu8U1OGsBJiaYPndD9vwalT
+         I8VM7VjEgbJHWQCklc953WqLR2RaBUcPSkgRhN0SRHQ5CNuQHcrCazYQLC8a976nJOvn
+         ENEH417a3qrt73mpMsph3OH+HDXmQiBoA921kzg7bGLEoDyf38H69xi85xfQNIqu8Qw+
+         FJXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704221654; x=1704826454;
+        d=1e100.net; s=20230601; t=1704222756; x=1704827556;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=YUMJcAf+vh2NanGPAlJ0nx+/E5yCKRksml+wkAU5fj8=;
-        b=FpOjjHQeaAiY8pcNtFoMS79Pwr2LoDD77lK6gEXzpynF6q/AwMEX0WSRSZP0F6tuaU
-         HjsxiorQcxIqi5Itt+PnBoUiOr+O236O9+m7zhmtCS0e2aIuHoZVBLPgnM07ZRXF0Ohc
-         n0tdPTetHooLrNtQCAeOLwxcSGwKrRA9KabsaFuMlijK0ahI+UoKa/Y/OKG+9SWu+zSQ
-         DvaHfbUsdNmXcOwbqbLpdSo32PC4x3vVeeIAt22bLophWUpU5SmHChJtUmW7eQogiMp7
-         h9XOWDASVhRUSEucHxOM0+xM/NsRyes9pn1aBXGndsSDVL8IgLQRyQsC56qUvk1MubKT
-         thOQ==
-X-Gm-Message-State: AOJu0YwCurSrBW6EZc1QGgujRMg3cC6U4Qq4ffOX8kOGRVBis7rbHRl9
-	3npwB0ItC9E4F0V68t15aV5QYlCmybg4Kws9Hji8vOMpPzs=
-X-Google-Smtp-Source: AGHT+IGTJozJkDROauy9kAyesXD0cfUr3Em5YbiFnk/sKKzhrsbGPY2G+OZZ2fyDSwfHwMQ/eOe3cw==
-X-Received: by 2002:ac2:4c14:0:b0:50e:698c:3426 with SMTP id t20-20020ac24c14000000b0050e698c3426mr7205116lfq.118.1704221653696;
-        Tue, 02 Jan 2024 10:54:13 -0800 (PST)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id le19-20020a170906ae1300b00a2798d33c31sm4118353ejb.77.2024.01.02.10.54.13
+        bh=lR7ZZqKTn5UfK+ifhXUmUIySAj3zWSWA8U47LCrKHE4=;
+        b=rUPxoJEqBpcIS7VfrOSipsBYuVoWkSFHo/fuair6GSvRpjLs4Q/rQZ4z8qKzI2dV4E
+         O/uFhPkjO5h9uj/Z/2lJLVDoyCPow8b04zDi+cVfhaglq8QSJSujbF9FiWy7znTr9FNW
+         0WtWZ3reQT4SZak3FTi8Ga+KiHq0Mkgbtdh2efmuYbmuf1UEgYoWqcr0byMHTqRoSmMH
+         d3m8SktnywN9ehk4emiVpIkiXZFEPY0CrFmhwnXOdxIG15MI3AcwfEwSMYgnOl98XGxF
+         NDokrMoT1JONFb8NR1vJ835YO0hwPLRAF6JTlxtEV2V1o7vh4XCV5iM1m0/UTZZ8fYUi
+         rctQ==
+X-Gm-Message-State: AOJu0Yw32kLKngMvkXi27PgUCBOuE69rlmLxzd3QP/q1akLflIAjY4KN
+	/AeWBoUujnOTMwaOJspJMhfaRqS0Ca0=
+X-Google-Smtp-Source: AGHT+IEpVsGI7ygjI7KIQ55PtiM7Enhhh4Kjok4K3Xz8CpWuyt1if3ncPubnCpg3N9oGaJVOGNQU7g==
+X-Received: by 2002:ae9:ec12:0:b0:781:7193:9b97 with SMTP id h18-20020ae9ec12000000b0078171939b97mr6595477qkg.69.1704222756073;
+        Tue, 02 Jan 2024 11:12:36 -0800 (PST)
+Received: from palpot.eng.veobot.io ([50.239.151.2])
+        by smtp.gmail.com with ESMTPSA id v2-20020ae9e302000000b00781d4c771c2sm990428qkf.60.2024.01.02.11.12.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 02 Jan 2024 10:54:13 -0800 (PST)
-From: Leon Anavi <leon.anavi@konsulko.com>
+        Tue, 02 Jan 2024 11:12:35 -0800 (PST)
+From: "Ilya A. Kriveshko" <iillyyaa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-oe][PATCHv3] ssd1306_git.bb: Add ssd1306_linux
-Date: Tue,  2 Jan 2024 20:54:10 +0200
-Message-Id: <20240102185410.3720762-1-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.39.2
+Cc: "Ilya A. Kriveshko" <iillyyaa@gmail.com>
+Subject: [meta-oe][PATCH] srecord: fix install prefix
+Date: Tue,  2 Jan 2024 14:12:22 -0500
+Message-Id: <20240102191222.833181-1-iillyyaa@gmail.com>
+X-Mailer: git-send-email 2.39.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 02 Jan 2024 18:54:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108014
+ <openembedded-devel@lists.openembedded.org>; Tue, 02 Jan 2024 19:12:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108015
 
-Add ssd1306_linux, a simple OLED I2C SSD1306 Linux driver based on
-the i2c library libi2c from i2c-tools. Example usage for a
-compatible display with resolution 128x64 pixels:
+srecord's CMakeLists.txt was unconditionally setting CMAKE_INSTALL_PREFIX
+for non-WIN32 builds, which caused it to ignore OE-supplied prefix
+that contained the sysroot portion of the path.  Fixed by removing the
+offending line.
 
-ssd1306_bin -n 1 -I 128x64
-ssd1306_bin -n 1 -c
-ssd1306_bin -n 1 -r 0
-ssd1306_bin -n 1 -x 1 -y 1
-ssd1306_bin -n 1 -l "Hello World"
-
-Pending GitHub pull request to the upstream of the project:
-https://github.com/armlabs/ssd1306_linux/pull/4
-
-After fixing the upstream 0001-Use-include-filename.patch should
-be removed from the recipe.
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Ilya A. Kriveshko <iillyyaa@gmail.com>
 ---
- .../ssd1306/0001-Use-include-filename.patch   | 49 +++++++++++++++++++
- .../recipes-devtools/ssd1306/ssd1306_git.bb   | 25 ++++++++++
- 2 files changed, 74 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/ssd1306/ssd1306/0001-Use-include-filename.patch
- create mode 100644 meta-oe/recipes-devtools/ssd1306/ssd1306_git.bb
+ ...rnally-supplied-CMAKE_INSTALL_PREFIX.patch | 27 +++++++++++++++++++
+ .../recipes-support/srecord/srecord_1.65.0.bb |  3 ++-
+ 2 files changed, 29 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/srecord/files/0001-allow-externally-supplied-CMAKE_INSTALL_PREFIX.patch
 
-diff --git a/meta-oe/recipes-devtools/ssd1306/ssd1306/0001-Use-include-filename.patch b/meta-oe/recipes-devtools/ssd1306/ssd1306/0001-Use-include-filename.patch
+diff --git a/meta-oe/recipes-support/srecord/files/0001-allow-externally-supplied-CMAKE_INSTALL_PREFIX.patch b/meta-oe/recipes-support/srecord/files/0001-allow-externally-supplied-CMAKE_INSTALL_PREFIX.patch
 new file mode 100644
-index 000000000..dfe48175a
+index 000000000..19b5c88f6
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/ssd1306/ssd1306/0001-Use-include-filename.patch
-@@ -0,0 +1,49 @@
-+From cb32ebbb1efb3202808809861ec3cbd811c55bd2 Mon Sep 17 00:00:00 2001
-+From: Leon Anavi <leon.anavi@konsulko.com>
-+Date: Sat, 30 Dec 2023 13:23:31 +0000
-+Subject: [PATCH] Use include "filename"
++++ b/meta-oe/recipes-support/srecord/files/0001-allow-externally-supplied-CMAKE_INSTALL_PREFIX.patch
+@@ -0,0 +1,27 @@
++From 023b3de19a9c04858f34143d5d9b32bd0287f6d7 Mon Sep 17 00:00:00 2001
++From: "Ilya A. Kriveshko" <iillyyaa@gmail.com>
++Date: Fri, 29 Dec 2023 20:48:37 +0000
++Subject: [PATCH] Allow externally supplied CMAKE_INSTALL_PREFIX
 +
-+Use include "filename" to include programmer-defined header files
-+from the same directory as the file containing the directive.
++CMAKE_INSTALL_PREFIX variable is supposed to be left as a default,
++or overwritten by the packager.  In particular, OE-provided prefix
++includes the sysroots path and should be used.
 +
-+Upstream-Status: Submitted [https://github.com/armlabs/ssd1306_linux/pull/4]
++Upstream-Status: Inappropriate [OE-specific]
 +
-+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 +---
-+ main.c    | 2 +-
-+ ssd1306.c | 6 +++---
-+ 2 files changed, 4 insertions(+), 4 deletions(-)
++ CMakeLists.txt | 1 -
++ 1 file changed, 1 deletion(-)
 +
-+diff --git a/main.c b/main.c
-+index c1ffc2f..18e2b84 100644
-+--- a/main.c
-++++ b/main.c
-+@@ -6,7 +6,7 @@
-+ #include <string.h>
-+ #include <fcntl.h>
-+ #include <sys/ioctl.h>
-+-#include <ssd1306.h>
-++#include "ssd1306.h"
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index 74b8108..f149917 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -32,7 +32,6 @@ include(GNUInstallDirs)
++ # FHS compliant paths for Linux installation
++ if(NOT WIN32 AND CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
++ #  set(CMAKE_INSTALL_PREFIX "/opt/${PROJECT_NAME}")
++-  set(CMAKE_INSTALL_PREFIX "/usr")
++ endif()
 + 
-+ void print_help()
-+ {
-+diff --git a/ssd1306.c b/ssd1306.c
-+index a03674a..2e6ba97 100644
-+--- a/ssd1306.c
-++++ b/ssd1306.c
-+@@ -8,9 +8,9 @@
-+ #include <string.h>
-+ #include <fcntl.h>
-+ #include <sys/ioctl.h>
-+-#include <linux_i2c.h>
-+-#include <ssd1306.h>
-+-#include <font.h>
-++#include "linux_i2c.h"
-++#include "ssd1306.h"
-++#include "font.h"
-+ 
-+ const char init_oled_type_file[] = "/tmp/.ssd1306_oled_type";
-+ 
-+-- 
-+2.39.2
-+
-diff --git a/meta-oe/recipes-devtools/ssd1306/ssd1306_git.bb b/meta-oe/recipes-devtools/ssd1306/ssd1306_git.bb
-new file mode 100644
-index 000000000..5adfd3ed6
---- /dev/null
-+++ b/meta-oe/recipes-devtools/ssd1306/ssd1306_git.bb
-@@ -0,0 +1,25 @@
-+SUMMARY="SSD1306 OLED I2C drive"
-+DESCRIPTION = "SSD1306 OLED I2C driver working in Linux"
-+HOMEPAGE = "https://github.com/armlabs/ssd1306_linux"
-+SECTION = "console/utils"
-+LICENSE = "MIT"
-+
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=7b694e603a996c3bfdc6093ed1f70c8f"
-+
-+SRC_URI = " \
-+    git://github.com/armlabs/ssd1306_linux.git;protocol=https;branch=master \
-+    file://0001-Use-include-filename.patch \
-+"
-+SRCREV = "7375f1088732d243f7167c9a17725f1a860da587"
-+
-+S = "${WORKDIR}/git"
-+
-+# coreutils provides fmt which is used in the Makefile
-+DEPENDS = "i2c-tools coreutils-native"
-+
-+EXTRA_OEMAKE = "CC='${CC}' CFLAGS='${CFLAGS}' LDFLAGS='${LDFLAGS}'"
-+
-+do_install() {
-+    install -d ${D}${bindir}
-+    install -m 0755 ${B}/ssd1306_bin ${D}${bindir}
-+}
++ # Pull in the rest of the pieces
+diff --git a/meta-oe/recipes-support/srecord/srecord_1.65.0.bb b/meta-oe/recipes-support/srecord/srecord_1.65.0.bb
+index 06ce48e65..6887f629e 100644
+--- a/meta-oe/recipes-support/srecord/srecord_1.65.0.bb
++++ b/meta-oe/recipes-support/srecord/srecord_1.65.0.bb
+@@ -4,11 +4,12 @@ LICENSE = "GPL-3.0-or-later & LGPL-3.0-or-later"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
+ 
+ SRC_URI = " \
+     https://sourceforge.net/projects/${BPN}/files/srecord/${@oe.utils.trim_version('${PV}', 2)}/${BP}-Source.tar.gz \
+     file://0001-Disable-doxygen.patch \
+-    file://0001-cmake-Do-not-try-to-compute-library-dependencies-dur.patch"
++    file://0001-cmake-Do-not-try-to-compute-library-dependencies-dur.patch \
++    file://0001-allow-externally-supplied-CMAKE_INSTALL_PREFIX.patch"
+ SRC_URI[sha256sum] = "81c3d07cf15ce50441f43a82cefd0ac32767c535b5291bcc41bd2311d1337644"
+ S = "${WORKDIR}/${BP}-Source"
+ 
+ UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/srecord/files/releases"
+ 
 -- 
-2.39.2
+2.39.0
 
 
