@@ -2,86 +2,88 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C4C3FC46CD2
-	for <webhook@archiver.kernel.org>; Tue,  2 Jan 2024 07:04:05 +0000 (UTC)
-Received: from esa7.hc1455-7.c3s2.iphmx.com (esa7.hc1455-7.c3s2.iphmx.com [139.138.61.252])
- by mx.groups.io with SMTP id smtpd.web11.24242.1704179040662787255
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C743BC46CD2
+	for <webhook@archiver.kernel.org>; Tue,  2 Jan 2024 07:05:05 +0000 (UTC)
+Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
+ by mx.groups.io with SMTP id smtpd.web10.24345.1704179103021221109
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Jan 2024 23:04:01 -0800
+ Mon, 01 Jan 2024 23:05:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 139.138.61.252, mailfrom: wangmy@fujitsu.com)
-X-IronPort-AV: E=McAfee;i="6600,9927,10940"; a="123830569"
+ dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10940"; a="145316496"
 X-IronPort-AV: E=Sophos;i="6.04,324,1695654000"; 
-   d="scan'208";a="123830569"
-Received: from unknown (HELO oym-r2.gw.nic.fujitsu.com) ([210.162.30.90])
-  by esa7.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Jan 2024 16:03:58 +0900
-Received: from oym-m2.gw.nic.fujitsu.com (oym-nat-oym-m2.gw.nic.fujitsu.com [192.168.87.59])
-	by oym-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 4403ED7AE3
-	for <openembedded-devel@lists.openembedded.org>; Tue,  2 Jan 2024 16:03:56 +0900 (JST)
+   d="scan'208";a="145316496"
+Received: from unknown (HELO yto-r1.gw.nic.fujitsu.com) ([218.44.52.217])
+  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Jan 2024 16:05:00 +0900
+Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
+	by yto-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id 7AC66D69D5
+	for <openembedded-devel@lists.openembedded.org>; Tue,  2 Jan 2024 16:04:58 +0900 (JST)
 Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
-	by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 8601ACA27D
-	for <openembedded-devel@lists.openembedded.org>; Tue,  2 Jan 2024 16:03:55 +0900 (JST)
+	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id A7FAE1414A
+	for <openembedded-devel@lists.openembedded.org>; Tue,  2 Jan 2024 16:04:57 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 1CE6B6B4DB
-	for <openembedded-devel@lists.openembedded.org>; Tue,  2 Jan 2024 16:03:55 +0900 (JST)
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 3410D6B4E0
+	for <openembedded-devel@lists.openembedded.org>; Tue,  2 Jan 2024 16:04:57 +0900 (JST)
 Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.187])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 8D2F81A0070;
-	Tue,  2 Jan 2024 15:03:54 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id C150C1A0070;
+	Tue,  2 Jan 2024 15:04:56 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] imapfilter: upgrade 2.8.1 -> 2.8.2
-Date: Tue,  2 Jan 2024 15:03:46 +0800
-Message-Id: <1704179026-7898-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] redis-plus-plus: upgrade 1.3.10 -> 1.3.11
+Date: Tue,  2 Jan 2024 15:04:22 +0800
+Message-Id: <1704179062-7936-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28094.005
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28094.005
-X-TMASE-Result: 10-0.874000-10.000000
-X-TMASE-MatchedRID: n7p0zKhDeQSjz0nOeth/yUIIxwDaU5mrF4r8H5YrEqz+Aw16GgqpOwkx
-	Gyoehq7BhhbadzHkVbt3aWU5jdY62O1a16oqp8B1/HTKStsDGMJHNQ8CqEKO2MC5DTEMxpeQRBg
-	61kSK4DiBkESMI05d4qHvyg1ZsxTfh38bnPLEpPHdCok3ibXlQU50qcJ5WOMhmyiLZetSf8nyb6
-	HMFK1qe11j5mhaIsibJ0RPnyOnrZJsRtOIOL7R2B/eZmUyXat7KpTETe+ZwSoKOOiA3SCjuXoVr
-	D2h7UnfNAIjuYx5ibqJP55ZcnEFD92bMl5tkGOzMCzOrnQsSWFLv5Eyr/YIrqsDhztRXZ9Cm+LY
-	9A78UVCLPa6Os9XH3IQhTU20ySbR
+X-TMASE-Result: 10--1.768200-10.000000
+X-TMASE-MatchedRID: R9NZgeCyXhKjz0nOeth/yUIIxwDaU5mrTfK5j0EZbysc5SGKNk1CGxEo
+	er5sO6Ai6V+wThLTbQuay7rv659o0FWSiIz6EL6ZP0HVIeixJdA3l2plwgrtWCD1HdXyqDnEvwU
+	evDt+uW6pByRBJ91zJDiMwfFTaQrQOwTo9ZXISSyeAiCmPx4NwGmRqNBHmBveVDC1CbuJXmMqtq
+	5d3cxkNVprfrw0uph3DvAyUjUwVQlkzNmd1DXnQu3JmqlymTnZSb20ylpyv4tYs+qWBVNs2Z867
+	MZShavo+GAE3xfCVvywGsMFRsqNQI4g39jQjFhNU8mdcvbI1h2S6jzjuXTm0MTMzICazP4UehYt
+	aVdyxm8=
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 02 Jan 2024 07:04:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107995
+ <openembedded-devel@lists.openembedded.org>; Tue, 02 Jan 2024 07:05:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/107996
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-===========
-- Add IMAP support for UTF-8 (RFC 6855) when "charset" is set to "UTF-8"
-- Don't use FETCH FAST macro use for better compatibility
-- Bug fix; recovery mechanism error on Lua 5.1
+==========
+-Fix redlock to make multiple threads be able to lock on the same RedMutex
+-Asynchronously update slot-node mapping in some edge cases
+-Use weak_ptr to avoid joining EvenLoop thread in itself
+-Support setting connection name
+-Support shard pub/sub
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../imapfilter/{imapfilter_2.8.1.bb => imapfilter_2.8.2.bb}     | 2 +-
+ .../{redis-plus-plus_1.3.10.bb => redis-plus-plus_1.3.11.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/imapfilter/{imapfilter_2.8.1.bb => imapfilter_2.8.2.bb} (91%)
+ rename meta-oe/recipes-extended/redis-plus-plus/{redis-plus-plus_1.3.10.bb => redis-plus-plus_1.3.11.bb} (95%)
 
-diff --git a/meta-oe/recipes-support/imapfilter/imapfilter_2.8.1.bb b/meta-oe/recipes-support/imapfilter/imapfilter_2.8.2.bb
-similarity index 91%
-rename from meta-oe/recipes-support/imapfilter/imapfilter_2.8.1.bb
-rename to meta-oe/recipes-support/imapfilter/imapfilter_2.8.2.bb
-index 878d28f13..422d96359 100644
---- a/meta-oe/recipes-support/imapfilter/imapfilter_2.8.1.bb
-+++ b/meta-oe/recipes-support/imapfilter/imapfilter_2.8.2.bb
-@@ -3,7 +3,7 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=f8d2fc4954306888fd0e4b27bef83525"
+diff --git a/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.10.bb b/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.11.bb
+similarity index 95%
+rename from meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.10.bb
+rename to meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.11.bb
+index 2df5e0919..3e757e603 100644
+--- a/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.10.bb
++++ b/meta-oe/recipes-extended/redis-plus-plus/redis-plus-plus_1.3.11.bb
+@@ -8,7 +8,7 @@ DEPENDS += "hiredis"
  
- # v2.7.6
--SRCREV = "e6372b88e09a4d1c573b57270de6b40846825a8b"
-+SRCREV = "9e6661278572009a92a8e125c9b339232a9735a1"
- SRC_URI = "git://github.com/lefcha/imapfilter;protocol=https;branch=master \
-            file://ldflags.patch \
- "
+ SRC_URI = "git://github.com/sewenew/redis-plus-plus;branch=master;protocol=https \
+            file://0001-CMakeLists.txt-fix-substitution-for-static-libs.patch"
+-SRCREV = "8b9ce389099608cf9bae617d79d257d2cc05e12f"
++SRCREV = "ad6baa121f4c6fbc7622d83d606210ac22549c78"
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
 2.34.1
 
