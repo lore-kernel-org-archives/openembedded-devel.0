@@ -1,202 +1,133 @@
-Return-Path: <sjolley.yp.pm@gmail.com>
+Return-Path: <iillyyaa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9DEBAC47074
-	for <webhook@archiver.kernel.org>; Tue,  2 Jan 2024 20:54:34 +0000 (UTC)
-Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
- by mx.groups.io with SMTP id smtpd.web10.1835.1704228866630247284
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8CF79C46CD2
+	for <webhook@archiver.kernel.org>; Tue,  2 Jan 2024 21:06:04 +0000 (UTC)
+Received: from mail-qk1-f172.google.com (mail-qk1-f172.google.com [209.85.222.172])
+ by mx.groups.io with SMTP id smtpd.web11.2002.1704229564130275907
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Jan 2024 12:54:26 -0800
+ Tue, 02 Jan 2024 13:06:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=dwZ654E/;
- spf=pass (domain: gmail.com, ip: 209.85.218.48, mailfrom: sjolley.yp.pm@gmail.com)
-Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-a27db7d85c7so202782666b.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Jan 2024 12:54:26 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=KRx1iNrh;
+ spf=pass (domain: gmail.com, ip: 209.85.222.172, mailfrom: iillyyaa@gmail.com)
+Received: by mail-qk1-f172.google.com with SMTP id af79cd13be357-781251ed685so780823185a.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Jan 2024 13:06:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1704228865; x=1704833665; darn=lists.openembedded.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=atSbZLJ5kgrw9G94uxBHRUFNCeP83Su4c0fNDE2KVVY=;
-        b=dwZ654E/hcZ6T9Aze00uD5hj839q+VJh+a2zPuEr7HjYdtkV8S9y7rl2BtYj9XR3Vi
-         KwBN14QvcfJf8vgYho30XV0oqMZ0ZAw6SNY0Ul38Z8Z9i869cO+YSuYEdnuylfZLgML+
-         07fV68HjEHjKwU1WtnrOo89/dvXXhpQsxC7H/utfWv0wnYaMPdpibBhj1iDTUOSJMTFN
-         0HzaauP+S9Nltd7Il4y2Lc8aX0hu/fyMy+jXTPC4g+sZ/1nin5C8uDz8OkAnJ3uYRAR/
-         Lxkao3JEWLuvmHFJCpveEnPtq3IxHiasH7BGWPMjDGTbJrYCKwPtRL46iiID8gqEXZv4
-         3GuA==
+        d=gmail.com; s=20230601; t=1704229562; x=1704834362; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=djZ911EcJ5LvMrmUWT3s26Dsq/2U0lagmVSLeRsSQUs=;
+        b=KRx1iNrhnzgvb7ouDDPU9t0cMPSc7G0M+7R6BVKu2uQz5ErHpqkyBBzrBiNUihi58y
+         226HZZQUOkTsHTLiFa0CvxRD2EkgrSozmuvim15JNeVLjZq0JlgDC/SL0/zE+zUmdM2Q
+         vJS0+nZXT+m6qbReKGr1jgB9WNtE2BJCJV2mOT+UUQ4w8QiSoL3QPkdXYlERBd7WhD3C
+         5MgRuQZjG7nOCm+A71z4FQN8tCaDcap/lj/QqY8l6aC4SV7ZDOTpFqS6cVqGbo9cZ/Yy
+         VngwG3rrbOUq0DdLYc3nh2cKnf8EMl8ooBKgaFJofNqRfCOhd3ekpvK3H6d7gh6aqlJV
+         3iaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704228865; x=1704833665;
-        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=atSbZLJ5kgrw9G94uxBHRUFNCeP83Su4c0fNDE2KVVY=;
-        b=XvnBMuDdezk8+05t7X+05QVFdCdcAXQpTs7OL4EmdspVktyc/1Zr3Cw/t5x/jMzZFB
-         dj56SzZAL2aoolBqzvwfaGTXKtZ2tVD0ng+vUHMT3B0422x4rTQTeTIModVitbm6Pgch
-         HIcIOSy971moC8UDW8LsNpn0EsAAREB4FSdPaIqYgVcoZKcTJZTgFXCdo0TOiAVoWFLE
-         pSrGVx8QVGb+gYugIr84429yK7c2a4qU/jEN0iFztnfIQhqrCmh1pbmdMWX0aUPne0Ha
-         o7ue3d5O+osllfVW7ZN/TCaZ8sNLhInPlzh+edSCUgQPE+uIg/RoGDQz4Zk8m3c6yM8A
-         85pg==
-X-Gm-Message-State: AOJu0Yz8riIPegiTjTD0N0PUdv2vczojkg1cpoIHmRiYE5FTz31f3d+0
-	cx1XNS8SIw+nFvVwY3mhQobm9zMhxOtoI7FE4a3jU+0llsw=
-X-Google-Smtp-Source: AGHT+IF1TXbx4e4wDSJ6hLOTWV/7o452Q5vENeOaa8DdW0fet2WkUPvt7wfWV7YuYx8ljkML/OVlAVkp2XUxlYsyMk0=
-X-Received: by 2002:a17:907:3d8e:b0:a23:6f2e:bc68 with SMTP id
- he14-20020a1709073d8e00b00a236f2ebc68mr9693385ejc.53.1704228864525; Tue, 02
- Jan 2024 12:54:24 -0800 (PST)
+        d=1e100.net; s=20230601; t=1704229562; x=1704834362;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=djZ911EcJ5LvMrmUWT3s26Dsq/2U0lagmVSLeRsSQUs=;
+        b=YhGJMWdBh2i5CqlShmFURXSZLTcFt6mj1pbRB59I2qxkhFhzQnFqDdSgoAQ4r94R/I
+         0qj/OCuffrWALv0tZV2lz5HbS5fJLT1M1ZyvypRWjRAOax3aY2jlSwKPhyN0P35/K4SL
+         Yc7Qe7Cu/be4ZPpK4tiirlwXUz0VLOssyopSM/wdQn7kMGkvu278dkoalF5yht32vspZ
+         CT9yucIa2oAXseSH90nceUm6QW9dqioW3hXYt6j9BX3L3DVHhLjB2u30bDxE6Hnr+Pmi
+         AkapW8c5YchNEiNWEtrNLmdKo4YOdIp1PhIChgBmVfCaF4I/SaB4xVszBMvli2+gFqNq
+         DxrA==
+X-Gm-Message-State: AOJu0YwwNqOmAQV1rzOpaNdUBsPARB+4Q67aVurya40GpoXZg/GtbZW1
+	rY8HThR1YO8jaN1RU2PPaqEcl0V2PZQ=
+X-Google-Smtp-Source: AGHT+IENuEoIGWz7VjPFfuC1qDl6Hhu+K40paqO9VRk2gCOjMIunyOioU+vSxi+XHLL9J+bqsh27rA==
+X-Received: by 2002:a05:620a:2886:b0:781:792d:6565 with SMTP id j6-20020a05620a288600b00781792d6565mr10669584qkp.146.1704229562373;
+        Tue, 02 Jan 2024 13:06:02 -0800 (PST)
+Received: from palpot.eng.veobot.io ([50.239.151.2])
+        by smtp.gmail.com with ESMTPSA id l8-20020ae9f008000000b00781b8f4c89asm2111428qkg.43.2024.01.02.13.06.01
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 02 Jan 2024 13:06:01 -0800 (PST)
+From: "Ilya A. Kriveshko" <iillyyaa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: "Ilya A. Kriveshko" <iillyyaa@gmail.com>
+Subject: [meta-oe][PATCH] srecord: fix install prefix
+Date: Tue,  2 Jan 2024 16:05:54 -0500
+Message-Id: <20240102210554.843148-1-iillyyaa@gmail.com>
+X-Mailer: git-send-email 2.39.0
 MIME-Version: 1.0
-From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
-Date: Tue, 2 Jan 2024 13:54:13 -0700
-Message-ID: <CAK5yBb8nGe=V08=QmJ2AGZKfd0JULyg2JMXuGZrJqhXCrR1u_A@mail.gmail.com>
-Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
-To: openembedded-devel@lists.openembedded.org, 
-	Yocto-mailing-list <yocto@lists.yoctoproject.org>
-Content-Type: multipart/alternative; boundary="000000000000160906060dfcb41f"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 02 Jan 2024 20:54:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108018
+ <openembedded-devel@lists.openembedded.org>; Tue, 02 Jan 2024 21:06:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108019
 
---000000000000160906060dfcb41f
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+srecord's CMakeLists.txt was unconditionally setting CMAKE_INSTALL_PREFIX
+for non-WIN32 builds, which caused it to ignore OE-supplied prefix
+that contained the sysroot portion of the path.  Fixed by setting
+the prefix only if it wasn't explicitly provided.
 
-All,
+Signed-off-by: Ilya A. Kriveshko <iillyyaa@gmail.com>
+---
+ ...make-respect-explicit-install-prefix.patch | 31 +++++++++++++++++++
+ .../recipes-support/srecord/srecord_1.65.0.bb |  3 +-
+ 2 files changed, 33 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/srecord/files/0001-cmake-respect-explicit-install-prefix.patch
 
-The triage team is starting to try and collect up and classify bugs which a
-newcomer to the project would be able to work on in a way which means
-people can find them. They're being listed on the triage page under the
-appropriate heading:
-https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
-review:
-https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
-how to create a bugzilla account at:
-https://bugzilla.yoctoproject.org/createaccount.cgi
+diff --git a/meta-oe/recipes-support/srecord/files/0001-cmake-respect-explicit-install-prefix.patch b/meta-oe/recipes-support/srecord/files/0001-cmake-respect-explicit-install-prefix.patch
+new file mode 100644
+index 000000000..d310d0410
+--- /dev/null
++++ b/meta-oe/recipes-support/srecord/files/0001-cmake-respect-explicit-install-prefix.patch
+@@ -0,0 +1,31 @@
++From 4aa8cf8c93e1fa6ffeb40fc3473f32b1b83af141 Mon Sep 17 00:00:00 2001
++From: "Ilya A. Kriveshko" <iillyyaa@gmail.com>
++Date: Tue, 2 Jan 2024 15:37:10 -0500
++Subject: [PATCH] cmake: respect explicit install prefix
++
++If CMAKE_INSTALL_PREFIX was supplied externally, use it.  This follows
++the pattern suggested by cmake documentation in:
++https://cmake.org/cmake/help/latest/variable/CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT.html
++
++Upstream-status: Submitted
++---
++ CMakeLists.txt | 6 +++---
++ 1 file changed, 3 insertions(+), 3 deletions(-)
++
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index 74b8108c..ac9f464e 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -30,9 +30,9 @@ include(InstallRequiredSystemLibraries)
++ include(GNUInstallDirs)
++ 
++ # FHS compliant paths for Linux installation
++-if(NOT WIN32 AND CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
++-#  set(CMAKE_INSTALL_PREFIX "/opt/${PROJECT_NAME}")
++-  set(CMAKE_INSTALL_PREFIX "/usr")
+++if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT
+++        AND NOT WIN32 AND CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+++  set(CMAKE_INSTALL_PREFIX "/usr" CACHE PATH "Install prefix" FORCE)
++ endif()
++ 
++ # Pull in the rest of the pieces
+diff --git a/meta-oe/recipes-support/srecord/srecord_1.65.0.bb b/meta-oe/recipes-support/srecord/srecord_1.65.0.bb
+index 06ce48e65..3e8a87d07 100644
+--- a/meta-oe/recipes-support/srecord/srecord_1.65.0.bb
++++ b/meta-oe/recipes-support/srecord/srecord_1.65.0.bb
+@@ -4,11 +4,12 @@ LICENSE = "GPL-3.0-or-later & LGPL-3.0-or-later"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
+ 
+ SRC_URI = " \
+     https://sourceforge.net/projects/${BPN}/files/srecord/${@oe.utils.trim_version('${PV}', 2)}/${BP}-Source.tar.gz \
+     file://0001-Disable-doxygen.patch \
+-    file://0001-cmake-Do-not-try-to-compute-library-dependencies-dur.patch"
++    file://0001-cmake-Do-not-try-to-compute-library-dependencies-dur.patch \
++    file://0001-cmake-respect-explicit-install-prefix.patch"
+ SRC_URI[sha256sum] = "81c3d07cf15ce50441f43a82cefd0ac32767c535b5291bcc41bd2311d1337644"
+ S = "${WORKDIR}/${BP}-Source"
+ 
+ UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/srecord/files/releases"
+ 
+-- 
+2.39.0
 
-The idea is these bugs should be straight forward for a person to help work
-on who doesn't have deep experience with the project. If anyone can help,
-please take ownership of the bug and send patches! If anyone needs
-help/advice there are people on irc who can likely do so, or some of the
-more experienced contributors will likely be happy to help too.
-
-Also, the triage team meets weekly and does its best to handle the bugs
-reported into the Bugzilla. The number of people attending that meeting has
-fallen, as have the number of people available to help fix bugs. One of the
-things we hear users report is they don't know how to help. We (the triage
-team) are therefore going to start reporting out the currently 408
-unassigned or newcomer bugs.
-
-We're hoping people may be able to spare some time now and again to help
-out with these. Bugs are split into two types, "true bugs" where things
-don't work as they should and "enhancements" which are features we'd want
-to add to the system. There are also roughly four different "priority"
-classes right now, =E2=80=9C5.0=E2=80=9D, =E2=80=9C5.1=E2=80=9D, "5.99" and=
- "Future", the more
-pressing/urgent issues being in "5.0" and then =E2=80=9C5.1=E2=80=9D.
-
-Please review this link and if a bug is something you would be able to help
-with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
-an e-mail with the bug number you would like and I will assign it to you
-(please make sure you have a Bugzilla account). The list is at:
-https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
-r_Bugs
-
-Thanks,
-
-
-
-*Stephen K. Jolley*
-
-*Yocto Project Program Manager*
-
-(    *Cell*:                (208) 244-4460
-
-* *Email*:                 *s
-<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
-*
-
---000000000000160906060dfcb41f
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><span style=3D"font-size:11pt;font-family:Calibri,Arial">A=
-ll,<br><br>The triage team is starting to try and collect up and classify b=
-ugs which a newcomer to the project would be able to work on in a way which=
- means people can find them. They&#39;re being listed on the triage page un=
-der the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/wiki/=
-Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage#New=
-comer_Bugs</a>  Also please review: <a href=3D"https://www.openembedded.org=
-/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.org/w=
-iki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugzilla =
-account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount.cgi"=
->https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The idea is=
- these bugs should be straight forward for a person to help work on who doe=
-sn&#39;t have deep experience with the project.  If anyone can help, please=
- take ownership of the bug and send patches!  If anyone needs help/advice t=
-here are people on irc who can likely do so, or some of the more experience=
-d contributors will likely be happy to help too.<br><br>Also, the triage te=
-am meets weekly and does its best to handle the bugs reported into the Bugz=
-illa. The number of people attending that meeting has fallen, as have the n=
-umber of people available to help fix bugs. One of the things we hear users=
- report is they don&#39;t know how to help. We (the triage team) are theref=
-ore going to start reporting out the currently 408 unassigned or newcomer b=
-ugs.<br><br>We&#39;re hoping people may be able to spare some time now and =
-again to help out with these.  Bugs are split into two types, &quot;true bu=
-gs&quot; where things don&#39;t work as they should and &quot;enhancements&=
-quot; which are features we&#39;d want to add to the system.  There are als=
-o roughly four different &quot;priority&quot; classes right now, =E2=80=9C5=
-.0=E2=80=9D, =E2=80=9C5.1=E2=80=9D, &quot;5.99&quot; and &quot;Future&quot;=
-, the more pressing/urgent issues being in &quot;5.0&quot; and then =E2=80=
-=9C5.1=E2=80=9D.<br><br>Please review this link and if a bug is something y=
-ou would be able to help with either take ownership of the bug, or send me =
-(<a href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>) an=
- e-mail with the bug number you would like and I will assign it to you (ple=
-ase make sure you have a Bugzilla account).  The list is at: <a href=3D"htt=
-ps://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcomer_B=
-ugs">https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Ne=
-wcomer_Bugs</a></span><br><div dir=3D"ltr" class=3D"gmail_signature" data-s=
-martmail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p class=3D"=
-MsoNormal" style=3D"background-image:initial;background-position:initial;ba=
-ckground-repeat:initial"><span style=3D"font-size:12pt;font-family:Arial,sa=
-ns-serif">Thanks,<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
-ily:Arial,sans-serif">=C2=A0<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
-lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
-ont-family:Arial,sans-serif"><span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
-amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
-an></b></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
-&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
-<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
-:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
-s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
--size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
-><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
-/span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
-t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
-=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
-color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
-uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
- lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
-erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
-phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
-.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
-u></p></div></div></div></div>
-
---000000000000160906060dfcb41f--
 
