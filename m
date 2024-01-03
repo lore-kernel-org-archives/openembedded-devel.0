@@ -1,133 +1,367 @@
-Return-Path: <iillyyaa@gmail.com>
+Return-Path: <hprajapati@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9CD09C46CD2
-	for <webhook@archiver.kernel.org>; Tue,  2 Jan 2024 22:25:10 +0000 (UTC)
-Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com [209.85.222.174])
- by mx.groups.io with SMTP id smtpd.web10.342.1704234305144258320
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 90A21C3DA6E
+	for <webhook@archiver.kernel.org>; Wed,  3 Jan 2024 05:11:52 +0000 (UTC)
+Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com [209.85.216.43])
+ by mx.groups.io with SMTP id smtpd.web10.10640.1704258707994331647
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Jan 2024 14:25:05 -0800
+ Tue, 02 Jan 2024 21:11:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Yd21c0Rf;
- spf=pass (domain: gmail.com, ip: 209.85.222.174, mailfrom: iillyyaa@gmail.com)
-Received: by mail-qk1-f174.google.com with SMTP id af79cd13be357-7818ab57d7dso355079085a.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Jan 2024 14:25:05 -0800 (PST)
+ dkim=pass header.i=@mvista.com header.s=google header.b=gXURxEKA;
+ spf=pass (domain: mvista.com, ip: 209.85.216.43, mailfrom: hprajapati@mvista.com)
+Received: by mail-pj1-f43.google.com with SMTP id 98e67ed59e1d1-28bc870c540so7798117a91.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Jan 2024 21:11:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1704234303; x=1704839103; darn=lists.openembedded.org;
+        d=mvista.com; s=google; t=1704258707; x=1704863507; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=GK9ioSTeEOUv3Auu9Up8JsQ4LCz6NjPKsellx+45WJU=;
-        b=Yd21c0RfRTDJLZmNqhDfbLnHsTNVQJF3542QhJTCLo7UAk4Sjy4Hj694pKfj2JOU0A
-         hdrVKkIZuInAz/Nccfa3Jg1xY9LqI6zopfPU2tR9Fpa9jf4i43u06M45xTeQR7nB73tC
-         jEz698tCn4gTqKoOfhepckXIaau0UrrMus9Ihud6zvtVlX14PmrYZjNiXU5EX8QQXQZU
-         Oedd9411bPR8NUB109l3dXrh6XgtBu7xAAIF4Mu5BtIZvVt4l6m27rM5XF2hZ/CpGtys
-         w/2fXsktDUQR+jOBPFJNHKm62dUo/ca2f1AWwODdCAg9AQFnbeY+nPmlTQkoa6t2P2+g
-         kUVw==
+        bh=nIcsREPDo+74ldEGXRpDZaSekZiD87dQL1UzxYQNf9k=;
+        b=gXURxEKAXN9pkuWdj/6qH3Tw9AAU7SH2P/ELnuv1jU/NxKxn8mzFiB3eqU/xiHatIb
+         VrrGWTLOhP+mzMjrx0gb/C1PvvgiWpVOkHBxTzUtGRlonHLZLzcbghpDAJEVxd18PBEp
+         m9zHR4Rnwd/Y+wmGku0i4tHYYWk2X3SopYavI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704234303; x=1704839103;
+        d=1e100.net; s=20230601; t=1704258707; x=1704863507;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=GK9ioSTeEOUv3Auu9Up8JsQ4LCz6NjPKsellx+45WJU=;
-        b=Z93d7Q4VOV/9P3bkcxb06bT6ElzewE4RilflxeffuvAyI5ga8l9ZAv9zesqlRvr0OM
-         iehTj0U+BxpdqRuF5KyAiFsFXylUNKButXp+JhyX2oNJB7NeIWFvpAKSdO5/MCUzW8Os
-         CSz44sTD6JynScT2vbNxi38y7dALmihOeNNiLnzv9Hi9YSY9yzwVon65BeY8lZ+mnGdK
-         HKF0QxQf2cu41AcSidfYvS8Nrp51OjNiRdwtAVnIqYzZ8tQfw4pcqivjhyPwYyBajHr4
-         vlx7O1Kbq9X8YQAdLiTAayhNsi3ttCpe2i1/X3p7+0wmUzBCc3UOhuKq/0SOBHPZuJXz
-         xrVg==
-X-Gm-Message-State: AOJu0YyFqcYYJj8ysARyLumY82IuG1wSn4+U6e1cCBmqaeFOCkal4Zlv
-	0OwaROugZFHKY3ZUB1wMVdPyBGsWJNo=
-X-Google-Smtp-Source: AGHT+IF1MNucmjHC0NhACxa6VT+pJU5AFGVwpT5qrFqCBj7vGe9nQuhN2a5D0PoXQrco/HoxptpkZA==
-X-Received: by 2002:a05:620a:1212:b0:781:dd9a:b620 with SMTP id u18-20020a05620a121200b00781dd9ab620mr1717980qkj.121.1704234303260;
-        Tue, 02 Jan 2024 14:25:03 -0800 (PST)
-Received: from palpot.eng.veobot.io ([50.239.151.2])
-        by smtp.gmail.com with ESMTPSA id w3-20020a05620a0e8300b00781cc3f50desm1462225qkm.0.2024.01.02.14.25.01
+        bh=nIcsREPDo+74ldEGXRpDZaSekZiD87dQL1UzxYQNf9k=;
+        b=wGIDZegP4DVpw4imRBiYeSTI+lTg4smg0lQulfZIJr5+LMWK++KOdcl9ofyVvJS1PN
+         MUPhEUtlIHMAv39usTPNyC2Zd/wfcmP9goHQNLLBsnaN6iyylMViUAR/8sXiWcwRAu+s
+         M55tXBlX2ie922JzP6f8wNYU0rxIXUS8b1s9v0nNS7vU/m70UGS7zV56o6PCde4AXViX
+         S/wjk9206mLEpGkuWTHoOQaORBROOhho0kd0ABHmixsJZnWU/Ij7OP93Nb0342mWvBjy
+         JCMxaNejoKI9VB2ScCPvpGZcnHWCBx3aYaTMSykS1R7UyoKyiCQ3x22DuF8MQ7AWZhyH
+         MyRw==
+X-Gm-Message-State: AOJu0YzKROpoEitSmZEW4EpeKoPcZ6TpdbJa6+Y+Szvn1CHr9Fy6Mick
+	NoPZWOAKFhocMhd7QqxRpeqXTYLQ6qJSyp2YRr3z0LoaL0U=
+X-Google-Smtp-Source: AGHT+IFmV5xxH9pEpmM/Anh80iGLgZnn5J362cW05WoN74Z9oQ3n2tPJoubXIKY3T/wXT0qRS0nksg==
+X-Received: by 2002:a17:90a:928e:b0:286:e9ef:e5bd with SMTP id n14-20020a17090a928e00b00286e9efe5bdmr8766030pjo.51.1704258707126;
+        Tue, 02 Jan 2024 21:11:47 -0800 (PST)
+Received: from MVIN00016.mvista.com ([43.249.234.189])
+        by smtp.gmail.com with ESMTPSA id q1-20020a17090a938100b0028bd303dc58sm551036pjo.11.2024.01.02.21.11.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 02 Jan 2024 14:25:02 -0800 (PST)
-From: "Ilya A. Kriveshko" <iillyyaa@gmail.com>
+        Tue, 02 Jan 2024 21:11:46 -0800 (PST)
+From: Hitendra Prajapati <hprajapati@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: "Ilya A. Kriveshko" <iillyyaa@gmail.com>
-Subject: [meta-oe][PATCH] srecord: fix install prefix
-Date: Tue,  2 Jan 2024 17:24:59 -0500
-Message-Id: <20240102222459.847246-1-iillyyaa@gmail.com>
-X-Mailer: git-send-email 2.39.0
+Cc: Hitendra Prajapati <hprajapati@mvista.com>
+Subject: [meta-networking][dunfell][PATCH] proftpd: Fix CVE-2023-51713 Out-of-bounds buffer read
+Date: Wed,  3 Jan 2024 10:41:41 +0530
+Message-Id: <20240103051141.40140-1-hprajapati@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 02 Jan 2024 22:25:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108022
+ <openembedded-devel@lists.openembedded.org>; Wed, 03 Jan 2024 05:11:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108023
 
-srecord's CMakeLists.txt was unconditionally setting CMAKE_INSTALL_PREFIX
-for non-WIN32 builds, which caused it to ignore OE-supplied prefix
-that contained the sysroot portion of the path.  Fixed by setting
-the prefix only if it wasn't explicitly provided.
+Upstream-Status: Backport from https://github.com/proftpd/proftpd/commit/97bbe68363ccf2de0c07f67170ec64a8b4d62592
 
-Signed-off-by: Ilya A. Kriveshko <iillyyaa@gmail.com>
+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
 ---
- ...make-respect-explicit-install-prefix.patch | 31 +++++++++++++++++++
- .../recipes-support/srecord/srecord_1.65.0.bb |  3 +-
- 2 files changed, 33 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/srecord/files/0001-cmake-respect-explicit-install-prefix.patch
+ .../proftpd/files/CVE-2023-51713.patch        | 277 ++++++++++++++++++
+ .../recipes-daemons/proftpd/proftpd_1.3.7c.bb |   1 +
+ 2 files changed, 278 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/proftpd/files/CVE-2023-51713.patch
 
-diff --git a/meta-oe/recipes-support/srecord/files/0001-cmake-respect-explicit-install-prefix.patch b/meta-oe/recipes-support/srecord/files/0001-cmake-respect-explicit-install-prefix.patch
+diff --git a/meta-networking/recipes-daemons/proftpd/files/CVE-2023-51713.patch b/meta-networking/recipes-daemons/proftpd/files/CVE-2023-51713.patch
 new file mode 100644
-index 000000000..5a74323bc
+index 0000000000..4b2cac1870
 --- /dev/null
-+++ b/meta-oe/recipes-support/srecord/files/0001-cmake-respect-explicit-install-prefix.patch
-@@ -0,0 +1,31 @@
-+From 4aa8cf8c93e1fa6ffeb40fc3473f32b1b83af141 Mon Sep 17 00:00:00 2001
-+From: "Ilya A. Kriveshko" <iillyyaa@gmail.com>
-+Date: Tue, 2 Jan 2024 15:37:10 -0500
-+Subject: [PATCH] cmake: respect explicit install prefix
++++ b/meta-networking/recipes-daemons/proftpd/files/CVE-2023-51713.patch
+@@ -0,0 +1,277 @@
++From 97bbe68363ccf2de0c07f67170ec64a8b4d62592 Mon Sep 17 00:00:00 2001
++From: TJ Saunders <tj@castaglia.org>
++Date: Sun, 6 Aug 2023 13:16:26 -0700
++Subject: [PATCH] Issue #1683: Avoid an edge case when handling unexpectedly
++ formatted input text from client, caused by quote/backslash semantics, by
++ skipping those semantics.
 +
-+If CMAKE_INSTALL_PREFIX was supplied externally, use it.  This follows
-+the pattern suggested by cmake documentation in:
-+https://cmake.org/cmake/help/latest/variable/CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT.html
-+
-+Upstream-status: Submitted [https://github.com/sierrafoxtrot/srecord/pull/68]
++Upstream-Status: Backport [https://github.com/proftpd/proftpd/commit/97bbe68363ccf2de0c07f67170ec64a8b4d62592]
++CVE: CVE-2023-51713
++Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
 +---
-+ CMakeLists.txt | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
++ include/str.h   |  3 ++-
++ src/main.c      | 34 +++++++++++++++++++++++++++++----
++ src/str.c       | 22 +++++++++++++---------
++ tests/api/str.c | 50 ++++++++++++++++++++++++++++++++++++++++++++++++-
++ 4 files changed, 94 insertions(+), 15 deletions(-)
 +
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index 74b8108c..ac9f464e 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -30,9 +30,9 @@ include(InstallRequiredSystemLibraries)
-+ include(GNUInstallDirs)
++diff --git a/include/str.h b/include/str.h
++index f08398017..1261ae2c2 100644
++--- a/include/str.h
+++++ b/include/str.h
++@@ -1,6 +1,6 @@
++ /*
++  * ProFTPD - FTP server daemon
++- * Copyright (c) 2008-2020 The ProFTPD Project team
+++ * Copyright (c) 2008-2023 The ProFTPD Project team
++  *
++  * This program is free software; you can redistribute it and/or modify
++  * it under the terms of the GNU General Public License as published by
++@@ -131,6 +131,7 @@ const char *pr_gid2str(pool *, gid_t);
++ #define PR_STR_FL_PRESERVE_COMMENTS		0x0001
++ #define PR_STR_FL_PRESERVE_WHITESPACE		0x0002
++ #define PR_STR_FL_IGNORE_CASE			0x0004
+++#define PR_STR_FL_IGNORE_QUOTES			0x0008
 + 
-+ # FHS compliant paths for Linux installation
-+-if(NOT WIN32 AND CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
-+-#  set(CMAKE_INSTALL_PREFIX "/opt/${PROJECT_NAME}")
-+-  set(CMAKE_INSTALL_PREFIX "/usr")
-++if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT
-++        AND NOT WIN32 AND CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
-++  set(CMAKE_INSTALL_PREFIX "/usr" CACHE PATH "Install prefix" FORCE)
-+ endif()
++ char *pr_str_get_token(char **, char *);
++ char *pr_str_get_token2(char **, char *, size_t *);
++diff --git a/src/main.c b/src/main.c
++index ee9c1eecb..e6b70731d 100644
++--- a/src/main.c
+++++ b/src/main.c
++@@ -811,8 +811,24 @@ static cmd_rec *make_ftp_cmd(pool *p, char *buf, size_t buflen, int flags) {
++     return NULL;
++   }
 + 
-+ # Pull in the rest of the pieces
-diff --git a/meta-oe/recipes-support/srecord/srecord_1.65.0.bb b/meta-oe/recipes-support/srecord/srecord_1.65.0.bb
-index 06ce48e65..3e8a87d07 100644
---- a/meta-oe/recipes-support/srecord/srecord_1.65.0.bb
-+++ b/meta-oe/recipes-support/srecord/srecord_1.65.0.bb
-@@ -4,11 +4,12 @@ LICENSE = "GPL-3.0-or-later & LGPL-3.0-or-later"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
+++  /* By default, pr_str_get_word will handle quotes and backslashes for
+++   * escaping characters.  This can produce words which are shorter, use
+++   * fewer bytes than the corresponding input buffer.
+++   *
+++   * In this particular situation, we use the length of this initial word
+++   * for determining the length of the remaining buffer bytes, assumed to
+++   * contain the FTP command arguments.  If this initial word is thus
+++   * unexpectedly "shorter", due to nonconformant FTP text, it can lead
+++   * the subsequent buffer scan, looking for CRNUL sequencees, to access
+++   * unexpected memory addresses (Issue #1683).
+++   *
+++   * Thus for this particular situation, we tell the function to ignore/skip
+++   * such quote/backslash semantics, and treat them as any other character
+++   * using the IGNORE_QUOTES flag.
+++   */
+++
++   ptr = buf;
++-  wrd = pr_str_get_word(&ptr, str_flags);
+++  wrd = pr_str_get_word(&ptr, str_flags|PR_STR_FL_IGNORE_QUOTES);
++   if (wrd == NULL) {
++     /* Nothing there...bail out. */
++     pr_trace_msg("ctrl", 5, "command '%s' is empty, ignoring", buf);
++@@ -820,6 +836,11 @@ static cmd_rec *make_ftp_cmd(pool *p, char *buf, size_t buflen, int flags) {
++     return NULL;
++   }
++ 
+++  /* Note that this first word is the FTP command.  This is why we make
+++   * use of the ptr buffer, which advances through the input buffer as
+++   * we read words from the buffer.
+++   */
+++
++   subpool = make_sub_pool(p);
++   pr_pool_tag(subpool, "make_ftp_cmd pool");
++   cmd = pcalloc(subpool, sizeof(cmd_rec));
++@@ -846,6 +867,7 @@ static cmd_rec *make_ftp_cmd(pool *p, char *buf, size_t buflen, int flags) {
++   arg_len = buflen - strlen(wrd);
++   arg = pcalloc(cmd->pool, arg_len + 1);
++ 
+++  /* Remember that ptr here is advanced past the first word. */
++   for (i = 0, j = 0; i < arg_len; i++) {
++     pr_signals_handle();
++     if (i > 1 &&
++@@ -854,14 +876,13 @@ static cmd_rec *make_ftp_cmd(pool *p, char *buf, size_t buflen, int flags) {
++ 
++       /* Strip out the NUL by simply not copying it into the new buffer. */
++       have_crnul = TRUE;
+++
++     } else {
++       arg[j++] = ptr[i];
++     }
++   }
++ 
++-  cmd->arg = arg;
++-
++-  if (have_crnul) {
+++  if (have_crnul == TRUE) {
++     char *dup_arg;
++ 
++     /* Now make a copy of the stripped argument; this is what we need to
++@@ -871,6 +892,11 @@ static cmd_rec *make_ftp_cmd(pool *p, char *buf, size_t buflen, int flags) {
++     ptr = dup_arg;
++   }
++ 
+++  cmd->arg = arg;
+++
+++  /* Now we can read the remamining words, as command arguments, from the
+++   * input buffer.
+++   */
++   while ((wrd = pr_str_get_word(&ptr, str_flags)) != NULL) {
++     pr_signals_handle();
++     *((char **) push_array(tarr)) = pstrdup(cmd->pool, wrd);
++diff --git a/src/str.c b/src/str.c
++index bcca4ae4d..a2ff74daf 100644
++--- a/src/str.c
+++++ b/src/str.c
++@@ -1,6 +1,6 @@
++ /*
++  * ProFTPD - FTP server daemon
++- * Copyright (c) 2008-2017 The ProFTPD Project team
+++ * Copyright (c) 2008-2023 The ProFTPD Project team
++  *
++  * This program is free software; you can redistribute it and/or modify
++  * it under the terms of the GNU General Public License as published by
++@@ -1209,7 +1209,7 @@ int pr_str_get_nbytes(const char *str, const char *units, off_t *nbytes) {
++ 
++ char *pr_str_get_word(char **cp, int flags) {
++   char *res, *dst;
++-  char quote_mode = 0;
+++  int quote_mode = FALSE;
++ 
++   if (cp == NULL ||
++      !*cp ||
++@@ -1238,24 +1238,28 @@ char *pr_str_get_word(char **cp, int flags) {
++     }
++   }
++ 
++-  if (**cp == '\"') {
++-    quote_mode++;
++-    (*cp)++;
+++  if (!(flags & PR_STR_FL_IGNORE_QUOTES)) {
+++    if (**cp == '\"') {
+++      quote_mode = TRUE;
+++      (*cp)++;
+++    }
++   }
++ 
++   while (**cp && (quote_mode ? (**cp != '\"') : !PR_ISSPACE(**cp))) {
++     pr_signals_handle();
++ 
++-    if (**cp == '\\' && quote_mode) {
++-
+++    if (**cp == '\\' &&
+++        quote_mode == TRUE) {
++       /* Escaped char */
++       if (*((*cp)+1)) {
++-        *dst = *(++(*cp));
+++        *dst++ = *(++(*cp));
+++        (*cp)++;
+++        continue;
++       }
++     }
++ 
++     *dst++ = **cp;
++-    ++(*cp);
+++    (*cp)++;
++   }
++ 
++   if (**cp) {
++diff --git a/tests/api/str.c b/tests/api/str.c
++index 050f5c563..bc64f0fb0 100644
++--- a/tests/api/str.c
+++++ b/tests/api/str.c
++@@ -1,6 +1,6 @@
++ /*
++  * ProFTPD - FTP server testsuite
++- * Copyright (c) 2008-2017 The ProFTPD Project team
+++ * Copyright (c) 2008-2023 The ProFTPD Project team
++  *
++  * This program is free software; you can redistribute it and/or modify
++  * it under the terms of the GNU General Public License as published by
++@@ -695,19 +695,23 @@ END_TEST
++ START_TEST (get_word_test) {
++   char *ok, *res, *str;
++ 
+++  mark_point();
++   res = pr_str_get_word(NULL, 0);
++   fail_unless(res == NULL, "Failed to handle null arguments");
++   fail_unless(errno == EINVAL, "Failed to set errno to EINVAL");
++ 
+++  mark_point();
++   str = NULL;
++   res = pr_str_get_word(&str, 0);
++   fail_unless(res == NULL, "Failed to handle null str argument");
++   fail_unless(errno == EINVAL, "Failed to set errno to EINVAL");
++ 
+++  mark_point();
++   str = pstrdup(p, "  ");
++   res = pr_str_get_word(&str, 0);
++   fail_unless(res == NULL, "Failed to handle whitespace argument");
++ 
+++  mark_point();
++   str = pstrdup(p, " foo");
++   res = pr_str_get_word(&str, PR_STR_FL_PRESERVE_WHITESPACE);
++   fail_unless(res != NULL, "Failed to handle whitespace argument: %s",
++@@ -723,6 +727,7 @@ START_TEST (get_word_test) {
++   ok = "foo";
++   fail_unless(strcmp(res, ok) == 0, "Expected '%s', got '%s'", ok, res);
++ 
+++  mark_point();
++   str = pstrdup(p, "  # foo");
++   res = pr_str_get_word(&str, 0);
++   fail_unless(res == NULL, "Failed to handle commented argument");
++@@ -742,6 +747,8 @@ START_TEST (get_word_test) {
++   fail_unless(strcmp(res, ok) == 0, "Expected '%s', got '%s'", ok, res);
++ 
++   /* Test multiple embedded quotes. */
+++
+++  mark_point();
++   str = pstrdup(p, "foo \"bar baz\" qux \"quz norf\"");
++   res = pr_str_get_word(&str, 0);
++   fail_unless(res != NULL, "Failed to handle quoted argument: %s",
++@@ -770,6 +777,47 @@ START_TEST (get_word_test) {
++ 
++   ok = "quz norf";
++   fail_unless(strcmp(res, ok) == 0, "Expected '%s', got '%s'", ok, res);
+++
+++
+++  /* Test embedded quotes with backslashes (Issue #1683). */
+++  mark_point();
+++
+++  str = pstrdup(p, "\"\\\\SYST\"");
+++  res = pr_str_get_word(&str, 0);
+++  fail_unless(res != NULL, "Failed to handle quoted argument: %s",
+++    strerror(errno));
+++
+++  ok = "\\SYST";
+++  fail_unless(strcmp(res, ok) == 0, "Expected '%s', got '%s'", ok, res);
+++
+++  mark_point();
+++  str = pstrdup(p, "\"\"\\\\SYST");
+++  res = pr_str_get_word(&str, 0);
+++  fail_unless(res != NULL, "Failed to handle quoted argument: %s",
+++    strerror(errno));
+++
+++  /* Note that pr_str_get_word() is intended to be called multiple times
+++   * on an advancing buffer, effectively tokenizing the buffer.  This is
+++   * why the function does NOT decrement its quote mode.
+++   */
+++  ok = "";
+++  fail_unless(strcmp(res, ok) == 0, "Expected '%s', got '%s'", ok, res);
+++
+++  /* Now do the same tests with the IGNORE_QUOTES flag */
+++  mark_point();
+++
+++  str = ok = pstrdup(p, "\"\\\\SYST\"");
+++  res = pr_str_get_word(&str, PR_STR_FL_IGNORE_QUOTES);
+++  fail_unless(res != NULL, "Failed to handle quoted argument: %s",
+++    strerror(errno));
+++  fail_unless(strcmp(res, ok) == 0, "Expected '%s', got '%s'", ok, res);
+++
+++  mark_point();
+++  str = ok = pstrdup(p, "\"\"\\\\SYST");
+++  res = pr_str_get_word(&str, PR_STR_FL_IGNORE_QUOTES);
+++  fail_unless(res != NULL, "Failed to handle quoted argument: %s",
+++    strerror(errno));
+++  fail_unless(strcmp(res, ok) == 0, "Expected '%s', got '%s'", ok, res);
++ }
++ END_TEST
++ 
++-- 
++2.25.1
++
+diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb
+index 686f1e5cdf..9d846f46a2 100644
+--- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb
++++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb
+@@ -15,6 +15,7 @@ SRC_URI = "git://github.com/proftpd/proftpd.git;branch=${BRANCH};protocol=https
+            file://contrib.patch  \
+            file://build_fixup.patch \
+            file://proftpd.service \
++           file://CVE-2023-51713.patch \
+            "
  
- SRC_URI = " \
-     https://sourceforge.net/projects/${BPN}/files/srecord/${@oe.utils.trim_version('${PV}', 2)}/${BP}-Source.tar.gz \
-     file://0001-Disable-doxygen.patch \
--    file://0001-cmake-Do-not-try-to-compute-library-dependencies-dur.patch"
-+    file://0001-cmake-Do-not-try-to-compute-library-dependencies-dur.patch \
-+    file://0001-cmake-respect-explicit-install-prefix.patch"
- SRC_URI[sha256sum] = "81c3d07cf15ce50441f43a82cefd0ac32767c535b5291bcc41bd2311d1337644"
- S = "${WORKDIR}/${BP}-Source"
- 
- UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/srecord/files/releases"
- 
+ S = "${WORKDIR}/git"
 -- 
-2.39.0
+2.25.1
 
 
