@@ -2,76 +2,76 @@ Return-Path: <hprajapati@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A43D9C3DA6E
-	for <webhook@archiver.kernel.org>; Wed,  3 Jan 2024 09:00:23 +0000 (UTC)
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
- by mx.groups.io with SMTP id smtpd.web10.13918.1704272417875400711
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AD0FCC3DA6E
+	for <webhook@archiver.kernel.org>; Wed,  3 Jan 2024 09:01:43 +0000 (UTC)
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
+ by mx.groups.io with SMTP id smtpd.web10.13931.1704272495558245682
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Jan 2024 01:00:17 -0800
+ Wed, 03 Jan 2024 01:01:35 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=aGFB96hW;
- spf=pass (domain: mvista.com, ip: 209.85.214.169, mailfrom: hprajapati@mvista.com)
-Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-1d3ed1ca402so78609145ad.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 03 Jan 2024 01:00:17 -0800 (PST)
+ dkim=pass header.i=@mvista.com header.s=google header.b=AI+uGs5v;
+ spf=pass (domain: mvista.com, ip: 209.85.214.178, mailfrom: hprajapati@mvista.com)
+Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-1d4414ec9c7so23515185ad.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 03 Jan 2024 01:01:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1704272417; x=1704877217; darn=lists.openembedded.org;
+        d=mvista.com; s=google; t=1704272495; x=1704877295; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=o3/Y5p/vR9HXRdibDZuQQjccih87SnuFbst79GpjSC8=;
-        b=aGFB96hWIUh8NGcFtH0JAQJ3Ec1wBN9bYe6bw1ozzlTpJRSGvXd1B9/I3yEgKTCYao
-         8z1Ho6Q74Ezs7/lgC3zikvlmWbL51805vHymEp7ocmh1P6E0n3viTkMiJCD+iPSIkmdJ
-         ecRTbKzT50l9UFyFTmai4PyPzEoZlixa/WoeM=
+        bh=nIcsREPDo+74ldEGXRpDZaSekZiD87dQL1UzxYQNf9k=;
+        b=AI+uGs5vwF7VJ7JHCCCwl+fT9UZ1l0+195UlWRI4izKY7Z0GqZtmHFPviJzFoTK9nA
+         WI7sR/sm7Cfh+qXAWtknp505o1W1U9Iwtk0g9B5qxEFeS92krksyfH/PzK4kkWhdeAnG
+         CKa96BUi3yOxnIc4pDD/4BFHPWeETWzwzFN7I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704272417; x=1704877217;
+        d=1e100.net; s=20230601; t=1704272495; x=1704877295;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=o3/Y5p/vR9HXRdibDZuQQjccih87SnuFbst79GpjSC8=;
-        b=tXGz8a7ZkrAQWFFcwdp4V+YN/xhpTDb5t8x1ZPOev+KwMUhnLykcsBtSHguaTUzKtr
-         pxCG+BwpW4t+xIaMobFIS1PtX76JUAZjhEp/yX+uz2A/u83bejmg+rb/e57aPcChZ00h
-         lmntcnCM6+ygy7AntN0NkZBVofsLYypd3nqU0PPM8ioV3MWfPmy3XCEAYzpr4s3SgWiy
-         9LQx24eweWsx0Vcj3Oag1z5cwpuQbcYyoMP5hHr/tpy4p1elCxFXrsghidqFPIwr/YAt
-         /OawWnmprZeuOJWZJVa2VGBne7VLd8mhpcftIMwsb3ibpvl69fj/LktEFthw6/FHP40I
-         kBBA==
-X-Gm-Message-State: AOJu0YwNR9BxBUT+bJZR3toG8VgHnhoWLK5lEmZkBg0nQdV6sJKSoYu0
-	6F2obiGufRDOY5CgRQ/J4XiothWglUNcE8Hy9SCL0ND+X3c=
-X-Google-Smtp-Source: AGHT+IEHSlV40ht9qY98Ge2YGf/KQUxYpp1eS1MbtsCls7dqghtigLHnlFaTBo/d4AOtbASK7tnvyg==
-X-Received: by 2002:a17:902:f681:b0:1d4:3969:ede7 with SMTP id l1-20020a170902f68100b001d43969ede7mr21700374plg.24.1704272416641;
-        Wed, 03 Jan 2024 01:00:16 -0800 (PST)
+        bh=nIcsREPDo+74ldEGXRpDZaSekZiD87dQL1UzxYQNf9k=;
+        b=c8dl3cSmNm2HbaIK562AdtMwD1tBAWUBpLxrjCCk4vCMO2BJ0Ixip932VCjweg8YIu
+         d+Q3Lyoi8nzV+TJB3FXflpEdoMFPvBqVfBLmTtq3Vh9n2WAaUWxsbikxmEBfuAkeem2J
+         9v6BX4y9yPebEn1ba9TxpjY23Q2m9LxnXNcFHSTaKP9sk2SyLuDY71MEGOAbxDnk6X/9
+         XpxbqPyh3/rgVkTof8jT0sGo+b/7jKRlxz40MB2foJWUVhAEvUHb8eUtiweSix9d4s8A
+         +xYRh3ttjljcGpuIMSEGi4mURCc2ym9/ivqb2fHLtPsZfiGUVGN9W8ClRjwEbrlq3Kw8
+         G4wQ==
+X-Gm-Message-State: AOJu0Yy/w0SjGVUz3wWlleL3S9QjUtIdLY4le/LfUcAY7YnP6S7bWdav
+	xgxsPSBVVwsbI9wT6saP0/qrvqi2c5BINkvZJEQmxns2Xfg=
+X-Google-Smtp-Source: AGHT+IGhvHjOA287XSF75zz9Be/I8uOjPzcadnmKEil8CjxrAOHDijsoJsg6cOaY/8zT8J25oiVK8A==
+X-Received: by 2002:a17:903:2346:b0:1d4:cecb:4811 with SMTP id c6-20020a170903234600b001d4cecb4811mr779051plh.51.1704272494706;
+        Wed, 03 Jan 2024 01:01:34 -0800 (PST)
 Received: from MVIN00016.mvista.com ([43.249.234.189])
-        by smtp.gmail.com with ESMTPSA id a4-20020a170902ecc400b001d058ad8770sm23253566plh.306.2024.01.03.01.00.14
+        by smtp.gmail.com with ESMTPSA id y18-20020a170902b49200b001d4ab6f0a5csm6913710plr.230.2024.01.03.01.01.33
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 03 Jan 2024 01:00:16 -0800 (PST)
+        Wed, 03 Jan 2024 01:01:34 -0800 (PST)
 From: Hitendra Prajapati <hprajapati@mvista.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Hitendra Prajapati <hprajapati@mvista.com>
-Subject: [meta-networking][dunfell][PATCHv2] proftpd: Fix CVE-2023-51713 Out-of-bounds buffer read
-Date: Wed,  3 Jan 2024 14:30:09 +0530
-Message-Id: <20240103090009.42644-1-hprajapati@mvista.com>
+Subject: [meta-networking][kirkstone][PATCH] proftpd: Fix CVE-2023-51713 Out-of-bounds buffer read
+Date: Wed,  3 Jan 2024 14:31:28 +0530
+Message-Id: <20240103090128.42761-1-hprajapati@mvista.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 03 Jan 2024 09:00:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108027
+ <openembedded-devel@lists.openembedded.org>; Wed, 03 Jan 2024 09:01:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108028
 
 Upstream-Status: Backport from https://github.com/proftpd/proftpd/commit/97bbe68363ccf2de0c07f67170ec64a8b4d62592
 
 Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
 ---
- .../proftpd/files/CVE-2023-51713.patch        | 278 ++++++++++++++++++
- .../recipes-daemons/proftpd/proftpd_1.3.6.bb  |   1 +
- 2 files changed, 279 insertions(+)
+ .../proftpd/files/CVE-2023-51713.patch        | 277 ++++++++++++++++++
+ .../recipes-daemons/proftpd/proftpd_1.3.7c.bb |   1 +
+ 2 files changed, 278 insertions(+)
  create mode 100644 meta-networking/recipes-daemons/proftpd/files/CVE-2023-51713.patch
 
 diff --git a/meta-networking/recipes-daemons/proftpd/files/CVE-2023-51713.patch b/meta-networking/recipes-daemons/proftpd/files/CVE-2023-51713.patch
 new file mode 100644
-index 0000000000..12f6948075
+index 0000000000..4b2cac1870
 --- /dev/null
 +++ b/meta-networking/recipes-daemons/proftpd/files/CVE-2023-51713.patch
-@@ -0,0 +1,278 @@
+@@ -0,0 +1,277 @@
 +From 97bbe68363ccf2de0c07f67170ec64a8b4d62592 Mon Sep 17 00:00:00 2001
 +From: TJ Saunders <tj@castaglia.org>
 +Date: Sun, 6 Aug 2023 13:16:26 -0700
@@ -84,24 +84,24 @@ index 0000000000..12f6948075
 +Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
 +---
 + include/str.h   |  3 ++-
-+ src/main.c      | 35 +++++++++++++++++++++++++++++-----
++ src/main.c      | 34 +++++++++++++++++++++++++++++----
 + src/str.c       | 22 +++++++++++++---------
 + tests/api/str.c | 50 ++++++++++++++++++++++++++++++++++++++++++++++++-
-+ 4 files changed, 94 insertions(+), 16 deletions(-)
++ 4 files changed, 94 insertions(+), 15 deletions(-)
 +
 +diff --git a/include/str.h b/include/str.h
-+index 316a32a..049a1b2 100644
++index f08398017..1261ae2c2 100644
 +--- a/include/str.h
 ++++ b/include/str.h
 +@@ -1,6 +1,6 @@
 + /*
 +  * ProFTPD - FTP server daemon
-+- * Copyright (c) 2008-2017 The ProFTPD Project team
++- * Copyright (c) 2008-2020 The ProFTPD Project team
 ++ * Copyright (c) 2008-2023 The ProFTPD Project team
 +  *
 +  * This program is free software; you can redistribute it and/or modify
 +  * it under the terms of the GNU General Public License as published by
-+@@ -121,6 +121,7 @@ const char *pr_gid2str(pool *, gid_t);
++@@ -131,6 +131,7 @@ const char *pr_gid2str(pool *, gid_t);
 + #define PR_STR_FL_PRESERVE_COMMENTS		0x0001
 + #define PR_STR_FL_PRESERVE_WHITESPACE		0x0002
 + #define PR_STR_FL_IGNORE_CASE			0x0004
@@ -110,10 +110,10 @@ index 0000000000..12f6948075
 + char *pr_str_get_token(char **, char *);
 + char *pr_str_get_token2(char **, char *, size_t *);
 +diff --git a/src/main.c b/src/main.c
-+index 1ead27f..01b1ef8 100644
++index ee9c1eecb..e6b70731d 100644
 +--- a/src/main.c
 ++++ b/src/main.c
-+@@ -787,8 +787,24 @@ static cmd_rec *make_ftp_cmd(pool *p, char *buf, size_t buflen, int flags) {
++@@ -811,8 +811,24 @@ static cmd_rec *make_ftp_cmd(pool *p, char *buf, size_t buflen, int flags) {
 +     return NULL;
 +   }
 + 
@@ -139,7 +139,7 @@ index 0000000000..12f6948075
 +   if (wrd == NULL) {
 +     /* Nothing there...bail out. */
 +     pr_trace_msg("ctrl", 5, "command '%s' is empty, ignoring", buf);
-+@@ -796,6 +812,11 @@ static cmd_rec *make_ftp_cmd(pool *p, char *buf, size_t buflen, int flags) {
++@@ -820,6 +836,11 @@ static cmd_rec *make_ftp_cmd(pool *p, char *buf, size_t buflen, int flags) {
 +     return NULL;
 +   }
 + 
@@ -151,7 +151,7 @@ index 0000000000..12f6948075
 +   subpool = make_sub_pool(p);
 +   pr_pool_tag(subpool, "make_ftp_cmd pool");
 +   cmd = pcalloc(subpool, sizeof(cmd_rec));
-+@@ -822,6 +843,7 @@ static cmd_rec *make_ftp_cmd(pool *p, char *buf, size_t buflen, int flags) {
++@@ -846,6 +867,7 @@ static cmd_rec *make_ftp_cmd(pool *p, char *buf, size_t buflen, int flags) {
 +   arg_len = buflen - strlen(wrd);
 +   arg = pcalloc(cmd->pool, arg_len + 1);
 + 
@@ -159,11 +159,10 @@ index 0000000000..12f6948075
 +   for (i = 0, j = 0; i < arg_len; i++) {
 +     pr_signals_handle();
 +     if (i > 1 &&
-+@@ -830,15 +852,13 @@ static cmd_rec *make_ftp_cmd(pool *p, char *buf, size_t buflen, int flags) {
++@@ -854,14 +876,13 @@ static cmd_rec *make_ftp_cmd(pool *p, char *buf, size_t buflen, int flags) {
 + 
 +       /* Strip out the NUL by simply not copying it into the new buffer. */
 +       have_crnul = TRUE;
-+-  
 ++
 +     } else {
 +       arg[j++] = ptr[i];
@@ -177,7 +176,7 @@ index 0000000000..12f6948075
 +     char *dup_arg;
 + 
 +     /* Now make a copy of the stripped argument; this is what we need to
-+@@ -848,6 +868,11 @@ static cmd_rec *make_ftp_cmd(pool *p, char *buf, size_t buflen, int flags) {
++@@ -871,6 +892,11 @@ static cmd_rec *make_ftp_cmd(pool *p, char *buf, size_t buflen, int flags) {
 +     ptr = dup_arg;
 +   }
 + 
@@ -190,7 +189,7 @@ index 0000000000..12f6948075
 +     pr_signals_handle();
 +     *((char **) push_array(tarr)) = pstrdup(cmd->pool, wrd);
 +diff --git a/src/str.c b/src/str.c
-+index eeed096..04188ce 100644
++index bcca4ae4d..a2ff74daf 100644
 +--- a/src/str.c
 ++++ b/src/str.c
 +@@ -1,6 +1,6 @@
@@ -247,7 +246,7 @@ index 0000000000..12f6948075
 + 
 +   if (**cp) {
 +diff --git a/tests/api/str.c b/tests/api/str.c
-+index 7c6e110..77fda8f 100644
++index 050f5c563..bc64f0fb0 100644
 +--- a/tests/api/str.c
 ++++ b/tests/api/str.c
 +@@ -1,6 +1,6 @@
@@ -350,18 +349,18 @@ index 0000000000..12f6948075
 +-- 
 +2.25.1
 +
-diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb
-index 9ec97b9237..aa1f9e4ef9 100644
---- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb
-+++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb
-@@ -13,6 +13,7 @@ SRC_URI = "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
+diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb
+index 686f1e5cdf..9d846f46a2 100644
+--- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb
++++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.7c.bb
+@@ -15,6 +15,7 @@ SRC_URI = "git://github.com/proftpd/proftpd.git;branch=${BRANCH};protocol=https
+            file://contrib.patch  \
             file://build_fixup.patch \
             file://proftpd.service \
-            file://CVE-2021-46854.patch \
 +           file://CVE-2023-51713.patch \
             "
- SRC_URI[md5sum] = "13270911c42aac842435f18205546a1b"
- SRC_URI[sha256sum] = "91ef74b143495d5ff97c4d4770c6804072a8c8eb1ad1ecc8cc541b40e152ecaf"
+ 
+ S = "${WORKDIR}/git"
 -- 
 2.25.1
 
