@@ -1,128 +1,95 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <mingli.yu@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BEEB3C47073
-	for <webhook@archiver.kernel.org>; Thu,  4 Jan 2024 04:53:09 +0000 (UTC)
-Received: from mail-oo1-f49.google.com (mail-oo1-f49.google.com [209.85.161.49])
- by mx.groups.io with SMTP id smtpd.web10.47908.1704343987391114495
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 77DE8C4706F
+	for <webhook@archiver.kernel.org>; Thu,  4 Jan 2024 07:13:40 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.49210.1704352410436680507
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Jan 2024 20:53:07 -0800
+ Wed, 03 Jan 2024 23:13:30 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=PNwhmVuC;
- spf=pass (domain: gmail.com, ip: 209.85.161.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f49.google.com with SMTP id 006d021491bc7-594cb19c5d9so444747eaf.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 03 Jan 2024 20:53:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1704343986; x=1704948786; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=f8iqWwi0lUoWWpbKZoVQbj3dr8XopM4VftbeHBRTxvg=;
-        b=PNwhmVuCPJ1Hrs5TZmRcDb6B1qQIOc1Xoo/NBPvkoIMOZgaAllq9HrOmFdCUU5l69P
-         LQnhJp6+N2IYyoacXo2Ch0Oul0J7qHXBusBalhCQ+A0LdtX73O+X+csfKI4YJUzYJgPa
-         btYIdbN+n0/f2OHKRNYRcNUXqZmYqHZ3ZmZKgHL+8vOjf1iA/g79WduhBoqUOdm5SfDh
-         bWQN4manlkJQP1hBaOeV4Y7Lp3ZEw08xXGKF+n2IIDrT/fK3W1dvtxWK/6E2R8dw7z/D
-         18ZafX25Z2GIAUXGvFHKbHsaRLL1b3ryB/PeEKc1XBg6UZjS7AF+Ja1FEBbKkVwfGqWg
-         XGqQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704343986; x=1704948786;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=f8iqWwi0lUoWWpbKZoVQbj3dr8XopM4VftbeHBRTxvg=;
-        b=wLOJ97SAeywyQ6mi0ESVnliq+HE1vP9yzb5qs7e+RdAIVUQznZsxJNVAP7ort1ENYs
-         nC3sUt5D/U3+pg5O5Zjv8GSSTMR3zLS/mZoXJaZrD9jv2EkQU3j9AB7CuQ8c1+8gm3Aq
-         TEUWMsim/GNNo4fFm7tZ/5dsEhPGEjwsCMLSPpajVl8i0vAg81PSbE4gvCHPfe38jGBj
-         MLRbNm/Hwkz92NavFz63Cf9FUZj3K0I0hPko2++tPYDhxL33uh43hA67WpUCnKzNKDX3
-         v7P+odOcmA4lezc+JF+ukfGjGPhACcmi3HsmRa9oUSiSqqa7vfD9k74FeDIUpLZKvVxG
-         /nCQ==
-X-Gm-Message-State: AOJu0Yzc6DFZbATDucCjDtyB5tRpnIDuW8HLC7+4zw0Xvp0EPyr0eYim
-	9Btlz2teu5R+MTsZ7qwe2T2QkwAsqXSHpZ0T1bA=
-X-Google-Smtp-Source: AGHT+IHgGcmVSBGpiO7Cvju6LFF0mPuwS/pmitXn9hHPbZi+/jsl4sE3IjUnka3b4ssknglVf1BFscRRAwVhS1aQ8rw=
-X-Received: by 2002:a05:6870:d18a:b0:204:3777:3399 with SMTP id
- a10-20020a056870d18a00b0020437773399mr821538oac.44.1704343986385; Wed, 03 Jan
- 2024 20:53:06 -0800 (PST)
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=A1E5zVbc;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=1733c87ab5=mingli.yu@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 4046ZhAU002529
+	for <openembedded-devel@lists.openembedded.org>; Wed, 3 Jan 2024 23:13:29 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=YGBSR
+	Fp+0KKV6u8nosO62LVSDbqk1ZQfExSXWDYe6uU=; b=A1E5zVbcVp8U1YpBp7S9O
+	oVaa08fqaok61iZtHWB1x4vStLPyIxZqW/6Ic6dxtABk4oai6aUZxvR0BORZAtvL
+	PflqnenPWPYY1vhLVZw7FUlRBSZ/sZe/ZmdOun1H8s8+yZNAw8TCDjKT9R4F60rk
+	eDt52ept6+bvcorEm1Pm7uu/zQ/qNtgGKkDJWn3rfhxA/3nQWO/b41qdtHl6BAjD
+	BGWXGb7tRXaQYp1PJXUc0JCMB0hsWe1qv43pRUFLqqeahhDOBYx071sZq5968Knx
+	Uu6Ypnmxx2cXf/7ZwO4gVHJ9W4QN1CWlDHlfzM8mWw5gXK0dWTsKj3gYGFrcFR36
+	w==
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3vdpgh043k-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 03 Jan 2024 23:13:29 -0800 (PST)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.35; Wed, 3 Jan 2024 23:13:39 -0800
+Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.35 via Frontend Transport; Wed, 3 Jan 2024 23:13:40 -0800
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] usleep: Make the version consistent
+Date: Thu, 4 Jan 2024 15:13:01 +0800
+Message-ID: <20240104071301.3366088-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <1704271107-17682-1-git-send-email-wangmy@fujitsu.com>
-In-Reply-To: <1704271107-17682-1-git-send-email-wangmy@fujitsu.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 3 Jan 2024 20:52:40 -0800
-Message-ID: <CAMKF1spTjsewEiC-WSQiU=OmJz=T=gW-kocrDuDB=tHvcnK4yg@mail.gmail.com>
-Subject: Re: [oe] [meta-oe] [PATCH] libtinyxml2: upgrade 9.0.0 -> 10.0.0
-To: wangmy <wangmy@fujitsu.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: vfTIoTs-4hnV_lDdbWtIJVTnuasLQ_L6
+X-Proofpoint-GUID: vfTIoTs-4hnV_lDdbWtIJVTnuasLQ_L6
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-11-16_25,2023-11-16_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 mlxlogscore=733
+ phishscore=0 priorityscore=1501 malwarescore=0 adultscore=0 bulkscore=0
+ clxscore=1015 suspectscore=0 mlxscore=0 lowpriorityscore=0 impostorscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2311290000
+ definitions=main-2401040050
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 04 Jan 2024 04:53:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108036
+ <openembedded-devel@lists.openembedded.org>; Thu, 04 Jan 2024 07:13:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108037
 
-This is failing ptests
+From: Mingli Yu <mingli.yu@windriver.com>
 
-   AssertionError:- [2/3]
-    Failed ptests:
-    {'libtinyxml2': ['xmltest']}
+The package version is inconsistent as below:
 
-You can run the ptest with
+ # rpm -qa | grep usleep
+ usleep-1.0-r0.core2_64
 
-bitbake meta-oe-image-ptest-libtinyxml2
-bitbake -ctestimage meta-oe-image-ptest-libtinyxml2
+ # usleep --version
+ usleep version 1.2
+	 usleep --help for more info
 
-On Wed, Jan 3, 2024 at 12:38=E2=80=AFAM wangmy <wangmy@fujitsu.com> wrote:
->
-> From: Wang Mingyu <wangmy@fujitsu.com>
->
-> remove non-existent files from install.
->
-> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-> ---
->  .../{libtinyxml2_9.0.0.bb =3D> libtinyxml2_10.0.0.bb}            | 3 +--
->  1 file changed, 1 insertion(+), 2 deletions(-)
->  rename meta-oe/recipes-support/libtinyxml2/{libtinyxml2_9.0.0.bb =3D> li=
-btinyxml2_10.0.0.bb} (85%)
->
-> diff --git a/meta-oe/recipes-support/libtinyxml2/libtinyxml2_9.0.0.bb b/m=
-eta-oe/recipes-support/libtinyxml2/libtinyxml2_10.0.0.bb
-> similarity index 85%
-> rename from meta-oe/recipes-support/libtinyxml2/libtinyxml2_9.0.0.bb
-> rename to meta-oe/recipes-support/libtinyxml2/libtinyxml2_10.0.0.bb
-> index 7ef4d89ce..af5a994d2 100644
-> --- a/meta-oe/recipes-support/libtinyxml2/libtinyxml2_9.0.0.bb
-> +++ b/meta-oe/recipes-support/libtinyxml2/libtinyxml2_10.0.0.bb
-> @@ -4,7 +4,7 @@ SECTION =3D "libs"
->  LICENSE =3D "Zlib"
->  LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D135624eef03e1f1101b9ba9ac=
-9b5fffd"
->
-> -SRCREV =3D "1dee28e51f9175a31955b9791c74c430fe13dc82"
-> +SRCREV =3D "321ea883b7190d4e85cae5512a12e5eaa8f8731f"
->  SRC_URI =3D "git://github.com/leethomason/tinyxml2.git;branch=3Dmaster;p=
-rotocol=3Dhttps \
->             file://run-ptest"
->
-> @@ -19,7 +19,6 @@ CXXFLAGS:append:libc-musl =3D " -D_LARGEFILE64_SOURCE"
->  do_install_ptest() {
->      install -Dm 0755 ${B}/xmltest ${D}${PTEST_PATH}/xmltest
->      install -d ${D}${PTEST_PATH}/resources/out
-> -    install -Dm 0644 ${B}/resources/*.xml ${D}${PTEST_PATH}/resources/
->  }
->
->  BBCLASSEXTEND =3D "native"
-> --
-> 2.34.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#108025): https://lists.openembedded.org/g/openembedde=
-d-devel/message/108025
-> Mute This Topic: https://lists.openembedded.org/mt/103498655/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+And there is below logic in meta-oe/recipes-core/usleep/files/usleep.c.
+  if (showVersion) {
+      printf("usleep version 1.2\n     usleep --help for more info\n");
+      return 0;
+  }
+
+So update the PV value to make the version consistent.
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+---
+ meta-oe/recipes-core/usleep/{usleep_1.0.bb => usleep_1.2.bb} | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename meta-oe/recipes-core/usleep/{usleep_1.0.bb => usleep_1.2.bb} (100%)
+
+diff --git a/meta-oe/recipes-core/usleep/usleep_1.0.bb b/meta-oe/recipes-core/usleep/usleep_1.2.bb
+similarity index 100%
+rename from meta-oe/recipes-core/usleep/usleep_1.0.bb
+rename to meta-oe/recipes-core/usleep/usleep_1.2.bb
+-- 
+2.25.1
+
 
