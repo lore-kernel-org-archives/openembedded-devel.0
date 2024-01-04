@@ -1,94 +1,96 @@
-Return-Path: <mingli.yu@eng.windriver.com>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 77DE8C4706F
-	for <webhook@archiver.kernel.org>; Thu,  4 Jan 2024 07:13:40 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.49210.1704352410436680507
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0D0BBC47073
+	for <webhook@archiver.kernel.org>; Thu,  4 Jan 2024 08:45:11 +0000 (UTC)
+Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
+ by mx.groups.io with SMTP id smtpd.web11.49915.1704357903936901033
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 03 Jan 2024 23:13:30 -0800
+ Thu, 04 Jan 2024 00:45:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=A1E5zVbc;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=1733c87ab5=mingli.yu@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 4046ZhAU002529
-	for <openembedded-devel@lists.openembedded.org>; Wed, 3 Jan 2024 23:13:29 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=YGBSR
-	Fp+0KKV6u8nosO62LVSDbqk1ZQfExSXWDYe6uU=; b=A1E5zVbcVp8U1YpBp7S9O
-	oVaa08fqaok61iZtHWB1x4vStLPyIxZqW/6Ic6dxtABk4oai6aUZxvR0BORZAtvL
-	PflqnenPWPYY1vhLVZw7FUlRBSZ/sZe/ZmdOun1H8s8+yZNAw8TCDjKT9R4F60rk
-	eDt52ept6+bvcorEm1Pm7uu/zQ/qNtgGKkDJWn3rfhxA/3nQWO/b41qdtHl6BAjD
-	BGWXGb7tRXaQYp1PJXUc0JCMB0hsWe1qv43pRUFLqqeahhDOBYx071sZq5968Knx
-	Uu6Ypnmxx2cXf/7ZwO4gVHJ9W4QN1CWlDHlfzM8mWw5gXK0dWTsKj3gYGFrcFR36
-	w==
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3vdpgh043k-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 03 Jan 2024 23:13:29 -0800 (PST)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Wed, 3 Jan 2024 23:13:39 -0800
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.35 via Frontend Transport; Wed, 3 Jan 2024 23:13:40 -0800
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] usleep: Make the version consistent
-Date: Thu, 4 Jan 2024 15:13:01 +0800
-Message-ID: <20240104071301.3366088-1-mingli.yu@windriver.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=jZQ7ibfk;
+ spf=pass (domain: gmail.com, ip: 209.85.218.44, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-a26f73732c5so25779466b.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Jan 2024 00:45:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1704357902; x=1704962702; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=QVhzsgGdWrNdTJ/VMPhZk5hQgxbrjORxk7C3qpY4cuU=;
+        b=jZQ7ibfkbMXeMxS33R0GFNDBL2JOR3ZaoM9sVE8LC0/DDrVtuGGj5uF1BP7cHMp/ar
+         LTyzPPEqs5vsExk4vwtKFBeA6nRZJn+0NhQ512lAhmmipeBtPPcRY4kq4iKeE7qpXKrI
+         SGKHOZ7Ha/UsfETDREn21mQPb4jSzeYaYKJIc+ETKfAEA4JHE6SKeraD34V2PaNxU+Kr
+         9lcgU0a1rUaRV3AzQv1IrpyJCdrgr/5s16+jWzjWUE+SmYiqF1tG9bZ1BHWeolTGuq4j
+         of6bJbe3tivIvSBGSStfIOE/odKsNn3tDVHYOB5i42mjJI0Vdk8TWGfeAOVN2etOvYZF
+         MbUg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1704357902; x=1704962702;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=QVhzsgGdWrNdTJ/VMPhZk5hQgxbrjORxk7C3qpY4cuU=;
+        b=IDwz/+/uqBSMH3NMV3aqOO2JFZA66QuaMhR6MBUhzvz7rJHAHmoz7nnzCKfgmPZdEA
+         wXLnHbRWUpFwHAGO4DdvquDQeCaaNRnCOiNWA/XvTZuo6rx999NJTUCH4wAsHXG1F+5r
+         dFKCG9ytewir+UjiWj+5wtyI5QKj7x/uzIoTGtizWLtHqgyTQSPI92KQOYCkPBN3DMw7
+         drhbp502xEkMgshipwD01Utu7mnPnPUDlrMJp/7k7OVMi2RjZSOV78BEI4MLcZPPiNk/
+         53WgKBcOyn76sxGxf8VAKBOKBB4HKnboKlcFGzlTRhQ0UV2ZEgqggF/Z8PQxNrI545S8
+         bkmA==
+X-Gm-Message-State: AOJu0YyY6bWaoEBD1eivVSiW6XAIjr9e6N0zbkFosqjejXEXObii1nyb
+	wXO422Q/j6M+shC/UQG8hyBNvNxuK8w=
+X-Google-Smtp-Source: AGHT+IFQLl/C0GKvUL+UMugOi3kkdxZeJSzVZFWgBySICEo2yqrP3/vftUft+h12zP0EsvQBLrDBAA==
+X-Received: by 2002:a17:906:1ed5:b0:a28:b74b:27ec with SMTP id m21-20020a1709061ed500b00a28b74b27ecmr127714ejj.111.1704357901487;
+        Thu, 04 Jan 2024 00:45:01 -0800 (PST)
+Received: from localhost.localdomain ([176.33.71.193])
+        by smtp.gmail.com with ESMTPSA id ef13-20020a17090697cd00b00a28d2e95152sm460441ejb.129.2024.01.04.00.45.00
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 04 Jan 2024 00:45:01 -0800 (PST)
+From: alperak <alperyasinak1@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: alperak <alperyasinak1@gmail.com>
+Subject: [meta-oe][PATCH] onig: upgrade 6.9.8 -> 6.9.9
+Date: Thu,  4 Jan 2024 11:44:58 +0300
+Message-Id: <20240104084458.308808-1-alperyasinak1@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: vfTIoTs-4hnV_lDdbWtIJVTnuasLQ_L6
-X-Proofpoint-GUID: vfTIoTs-4hnV_lDdbWtIJVTnuasLQ_L6
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-11-16_25,2023-11-16_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 mlxlogscore=733
- phishscore=0 priorityscore=1501 malwarescore=0 adultscore=0 bulkscore=0
- clxscore=1015 suspectscore=0 mlxscore=0 lowpriorityscore=0 impostorscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2311290000
- definitions=main-2401040050
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 04 Jan 2024 07:13:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108037
+ <openembedded-devel@lists.openembedded.org>; Thu, 04 Jan 2024 08:45:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108038
 
-From: Mingli Yu <mingli.yu@windriver.com>
+Changelog:
 
-The package version is inconsistent as below:
+* Update Unicode version 15.1.0
+* NEW API: ONIG_OPTION_MATCH_WHOLE_STRING
+* Fixed: (?I) option was not enabled for character classes (Issue #264).
+* Changed specification to check for incorrect POSIX bracket (Issue #253).
+* Changed [[:punct:]] in Unicode encodings to be compatible with POSIX definition. (Issue #268)
+* Fixed: ONIG_OPTION_FIND_LONGEST behavior
 
- # rpm -qa | grep usleep
- usleep-1.0-r0.core2_64
-
- # usleep --version
- usleep version 1.2
-	 usleep --help for more info
-
-And there is below logic in meta-oe/recipes-core/usleep/files/usleep.c.
-  if (showVersion) {
-      printf("usleep version 1.2\n     usleep --help for more info\n");
-      return 0;
-  }
-
-So update the PV value to make the version consistent.
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: alperak <alperyasinak1@gmail.com>
 ---
- meta-oe/recipes-core/usleep/{usleep_1.0.bb => usleep_1.2.bb} | 0
- 1 file changed, 0 insertions(+), 0 deletions(-)
- rename meta-oe/recipes-core/usleep/{usleep_1.0.bb => usleep_1.2.bb} (100%)
+ meta-oe/recipes-support/onig/{onig_6.9.8.bb => onig_6.9.9.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/onig/{onig_6.9.8.bb => onig_6.9.9.bb} (92%)
 
-diff --git a/meta-oe/recipes-core/usleep/usleep_1.0.bb b/meta-oe/recipes-core/usleep/usleep_1.2.bb
-similarity index 100%
-rename from meta-oe/recipes-core/usleep/usleep_1.0.bb
-rename to meta-oe/recipes-core/usleep/usleep_1.2.bb
+diff --git a/meta-oe/recipes-support/onig/onig_6.9.8.bb b/meta-oe/recipes-support/onig/onig_6.9.9.bb
+similarity index 92%
+rename from meta-oe/recipes-support/onig/onig_6.9.8.bb
+rename to meta-oe/recipes-support/onig/onig_6.9.9.bb
+index 214459228..b29437db1 100644
+--- a/meta-oe/recipes-support/onig/onig_6.9.8.bb
++++ b/meta-oe/recipes-support/onig/onig_6.9.9.bb
+@@ -14,7 +14,7 @@ SRC_URI = "\
+     file://run-ptest \
+ "
+ 
+-SRC_URI[sha256sum] = "28cd62c1464623c7910565fb1ccaaa0104b2fe8b12bcd646e81f73b47535213e"
++SRC_URI[sha256sum] = "60162bd3b9fc6f4886d4c7a07925ffd374167732f55dce8c491bfd9cd818a6cf"
+ 
+ BINCONFIG = "${bindir}/onig-config"
+ 
 -- 
 2.25.1
 
