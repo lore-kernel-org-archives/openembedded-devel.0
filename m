@@ -1,306 +1,368 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D7B02C4707B
-	for <webhook@archiver.kernel.org>; Fri,  5 Jan 2024 18:37:07 +0000 (UTC)
-Received: from mailout11.t-online.de (mailout11.t-online.de [194.25.134.85])
- by mx.groups.io with SMTP id smtpd.web11.31136.1704479823538871071
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DC55AC3DA6E
+	for <webhook@archiver.kernel.org>; Fri,  5 Jan 2024 18:49:07 +0000 (UTC)
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
+ by mx.groups.io with SMTP id smtpd.web10.27904.1704472593953621001
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 05 Jan 2024 10:37:04 -0800
+ Fri, 05 Jan 2024 08:36:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.85, mailfrom: f_l_k@t-online.de)
-Received: from fwd85.aul.t-online.de (fwd85.aul.t-online.de [10.223.144.111])
-	by mailout11.t-online.de (Postfix) with SMTP id CADC39FE0
-	for <openembedded-devel@lists.openembedded.org>; Fri,  5 Jan 2024 19:37:01 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.154.175.203]) by fwd85.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1rLp40-2G1C0Q0; Fri, 5 Jan 2024 19:37:00 +0100
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 2/2] mpv: upgrade 0.35.1 -> 0.37.0
-Date: Fri,  5 Jan 2024 19:36:48 +0100
-Message-ID: <20240105183648.61874-2-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240105183648.61874-1-f_l_k@t-online.de>
-References: <20240105183648.61874-1-f_l_k@t-online.de>
-MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1704479820-C12ED9F9-507565DC/0/0 CLEAN NORMAL
-X-TOI-MSGID: 2c69381f-ba3a-414c-81a7-d809f2703bed
-Content-Transfer-Encoding: quoted-printable
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=cPFf5Zxo;
+ spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: mail2szahir@gmail.com)
+Received: by mail-pg1-f180.google.com with SMTP id 41be03b00d2f7-5ce10b5ee01so500617a12.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 05 Jan 2024 08:36:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1704472593; x=1705077393; darn=lists.openembedded.org;
+        h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=N/10xnH6IhJKIW86FbVZ+0U3G79nV7Ar62SyvOVw2io=;
+        b=cPFf5ZxowqAP5pIA75EXv1eH5PJ2c/8odIqPQUtVZe/E3dJ7NZjA/N9hPKC4ll/Hb2
+         am3Ov+37ATejHG23yehfYt2j5drkN6unPSAUsL+GrK16CXARgSH3+lacC0XH6RZMc04S
+         gaJeCOxxukLJCs7p9CI7LyNrOPASqAVDvJp7oJ4Vl/VIV99pHSzvfPglURZzi/Izw44U
+         ASdcir5336pR+PQfMMMi0sM7S8/j7RdBXkAUsXRaqjO+ZLkvRoLfNvikyihrAZDb00J1
+         4hcKRRTiHfnqnCTKX0VXye7EvDlLnnXxb3psUUnUVP3cuUwdZ2tEiUT2mN0efLrkbkgf
+         iHyQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1704472593; x=1705077393;
+        h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=N/10xnH6IhJKIW86FbVZ+0U3G79nV7Ar62SyvOVw2io=;
+        b=elG6NhWy/MpGYXSZYNtGhUaPpoCFp4L4SymR0XuvLAg4Sxmhj2w2Kb3whJjVfkDvQg
+         WoUDvj94Xf4RinlN7yFEqN0dCYGqE1m+X+0whBwCEzxPqCopY7EAtfxnr8IfdiiIs6dq
+         /kqEFTF+i4YHho++pntTwawxVFgDdzvq0bmtJjdWvErpW27YWGSs3WCBE7ojX16UZe4h
+         bL1/BL7Sb7kF1cSHbN2J3AouC/06aMzpaSkwMhU00mnxhWixHmvasw9gP934XSvPSU7b
+         /ZFxvCFKY6/bQWA8Hs4fKvQ7rJnzBpb+0XlqtGlNmv7D98NXQY7hR/IoJxrbBWoBThwN
+         6PjA==
+X-Gm-Message-State: AOJu0YyUHabxFDOLSi+/zW9NPuyjoJwEWYJaTeAnLmazyrnCATf7co8d
+	gACHbjFN3ImWfaXaImGkvI7DKObIbr4=
+X-Google-Smtp-Source: AGHT+IFIQ5pXLGgpFqwcIYAwfG+o+BEwqmpbK+Ado9/eeo6ruDbNa2iL5fBw3o1y37oB6tbwZASaNA==
+X-Received: by 2002:a05:6a20:394f:b0:199:3b59:1dc8 with SMTP id r15-20020a056a20394f00b001993b591dc8mr1290811pzg.18.1704472592962;
+        Fri, 05 Jan 2024 08:36:32 -0800 (PST)
+Received: from localhost.localdomain ([49.43.249.163])
+        by smtp.gmail.com with ESMTPSA id d13-20020a056a0010cd00b006d9c1fb00c3sm1589008pfu.9.2024.01.05.08.36.30
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 05 Jan 2024 08:36:32 -0800 (PST)
+From: "aszh07" <mail2szahir@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	Zahir.Basha@kpit.com
+Cc: akash.hadke@kpit.com,
+	Zahir Hussain <zahir.basha@kpit.com>
+Subject: [meta-oe][kirkstone][PATCH] p7zip: fix CVE-2018-5996 & CVE-2016-9296
+Date: Fri,  5 Jan 2024 22:02:46 +0530
+Message-Id: <20240105163246.22192-1-mail2szahir@gmail.com>
+X-Mailer: git-send-email 2.17.1
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 05 Jan 2024 18:37:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108051
+ <openembedded-devel@lists.openembedded.org>; Fri, 05 Jan 2024 18:49:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108052
 
-- switch buildsystem from waf to meson
-- add libplacebo dependency
-- add vulkan support
-- build libmpv (needed eg. for mpvpaper)
+From: Zahir Hussain <zahir.basha@kpit.com>
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2018-5996
+https://nvd.nist.gov/vuln/detail/CVE-2016-9296
+
+Upstream patches:
+https://sources.debian.org/data/non-free/p/p7zip-rar/16.02-3/debian/patches/06-CVE-2018-5996.patch
+https://snapshot.debian.org/archive/debian-debug/20180205T215659Z/pool/main/p/p7zip/p7zip_16.02%2Bdfsg-6.debian.tar.xz
+
+Signed-off-by: Zahir Hussain <zahir.basha@kpit.com>
+Signed-off-by: aszh07 <mail2szahir@gmail.com>
 ---
- .../recipes-multimedia/mplayer/mpv_0.35.1.bb  | 116 ------------------
- .../recipes-multimedia/mplayer/mpv_0.37.0.bb  |  97 +++++++++++++++
- 2 files changed, 97 insertions(+), 116 deletions(-)
- delete mode 100644 meta-oe/recipes-multimedia/mplayer/mpv_0.35.1.bb
- create mode 100644 meta-oe/recipes-multimedia/mplayer/mpv_0.37.0.bb
+ .../p7zip/files/CVE-2016-9296.patch           |  30 +++
+ .../p7zip/files/CVE-2018-5996.patch           | 228 ++++++++++++++++++
+ meta-oe/recipes-extended/p7zip/p7zip_16.02.bb |   2 +
+ 3 files changed, 260 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/p7zip/files/CVE-2016-9296.patch
+ create mode 100644 meta-oe/recipes-extended/p7zip/files/CVE-2018-5996.patch
 
-diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.35.1.bb b/meta-oe/r=
-ecipes-multimedia/mplayer/mpv_0.35.1.bb
-deleted file mode 100644
-index 0f50a6e8f..000000000
---- a/meta-oe/recipes-multimedia/mplayer/mpv_0.35.1.bb
-+++ /dev/null
-@@ -1,116 +0,0 @@
--SUMMARY =3D "Open Source multimedia player"
--DESCRIPTION =3D "mpv is a fork of mplayer2 and MPlayer. It shares some f=
-eatures with the former projects while introducing many more."
--SECTION =3D "multimedia"
--HOMEPAGE =3D "http://www.mpv.io/"
--
--DEPENDS =3D " \
--    zlib \
--    ffmpeg \
--    jpeg \
--    libv4l \
--    libass \
--"
--
--LICENSE =3D "GPL-2.0-or-later"
--LIC_FILES_CHKSUM =3D "file://LICENSE.GPL;md5=3Db234ee4d69f5fce4486a80fda=
-f4a4263"
--
--SRCREV_mpv =3D "140ec21c89d671d392877a7f3b91d67e7d7b9239"
--SRC_URI =3D "git://github.com/mpv-player/mpv;name=3Dmpv;branch=3Drelease=
-/0.35;protocol=3Dhttps \
--           https://waf.io/waf-2.0.25;name=3Dwaf;subdir=3Dgit \
--           "
--SRC_URI[waf.sha256sum] =3D "21199cd220ccf60434133e1fd2ab8c8e5217c3799199=
-c82722543970dc8e38d5"
--
--S =3D "${WORKDIR}/git"
--
--inherit waf pkgconfig mime-xdg
--
--LDFLAGS:append:riscv64 =3D " -latomic"
--
--LUA ?=3D "lua"
--LUA:mips64  =3D ""
--LUA:powerpc64  =3D ""
--LUA:powerpc64le  =3D ""
--LUA:riscv64  =3D ""
--LUA:riscv32  =3D ""
--LUA:powerpc  =3D ""
--
--# Note: lua is required to get on-screen-display (controls)
--PACKAGECONFIG ??=3D " \
--    ${LUA} \
--    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland egl', ''=
-, d)} \
--    ${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)} \
--    ${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)} \
--"
--
--PACKAGECONFIG[x11] =3D "--enable-x11,--disable-x11,virtual/libx11 xsp li=
-bxv libxscrnsaver libxinerama libxpresent libxext"
--PACKAGECONFIG[xv] =3D "--enable-xv,--disable-xv,libxv"
--PACKAGECONFIG[opengl] =3D "--enable-gl,--disable-gl,virtual/libgl"
--PACKAGECONFIG[egl] =3D "--enable-egl,--disable-egl,virtual/egl"
--PACKAGECONFIG[drm] =3D "--enable-drm,--disable-drm,libdrm"
--PACKAGECONFIG[gbm] =3D "--enable-gbm,--disable-gbm,virtual/libgbm"
--PACKAGECONFIG[lua] =3D "--enable-lua,--disable-lua,lua luajit"
--PACKAGECONFIG[libarchive] =3D "--enable-libarchive,--disable-libarchive,=
-libarchive"
--PACKAGECONFIG[jack] =3D "--enable-jack, --disable-jack, jack"
--PACKAGECONFIG[vaapi] =3D "--enable-vaapi,--disable-vaapi,libva"
--PACKAGECONFIG[vdpau] =3D "--enable-vdpau,--disable-vdpau,libvdpau"
--PACKAGECONFIG[wayland] =3D "--enable-wayland,--disable-wayland,wayland w=
-ayland-native libxkbcommon"
--
--python __anonymous() {
--    packageconfig =3D (d.getVar("PACKAGECONFIG") or "").split()
--    extras =3D []
--    if "x11" in packageconfig and "opengl" in packageconfig:
--        extras.append(" --enable-gl-x11")
--    if "x11" in packageconfig and "egl" in packageconfig:
--        extras.append(" --enable-egl-x11")
--    if "egl" in packageconfig and "drm" in packageconfig:
--        extras.append(" --enable-egl-drm")
--    if "vaapi" in packageconfig and "x11" in packageconfig:
--        extras.append(" --enable-vaapi-x11")
--    if "vaapi" in packageconfig and "drm" in packageconfig:
--        extras.append(" --enable-vaapi-drm")
--    if "vaapi" in packageconfig and "x11" in packageconfig and "egl" in =
-packageconfig:
--        extras.append(" --enable-vaapi-x-egl")
--    if "vdpau" in packageconfig and "opengl" in packageconfig and "x11" =
-in packageconfig:
--        extras.append(" --enable-vdpau-gl-x11")
--    if "wayland" in packageconfig and "opengl" in packageconfig:
--        extras.append(" --enable-gl-wayland")
--    if "wayland" in packageconfig and "vaapi" in packageconfig:
--        extras.append(" --enable-vaapi-wayland")
--    if extras:
--        d.appendVar("EXTRA_OECONF", "".join(extras))
--}
--
--SIMPLE_TARGET_SYS =3D "${@'${TARGET_SYS}'.replace('${TARGET_VENDOR}', ''=
-)}"
--
--EXTRA_OECONF =3D " \
--    --prefix=3D${prefix} \
--    --target=3D${SIMPLE_TARGET_SYS} \
--    --confdir=3D${sysconfdir} \
--    --datadir=3D${datadir} \
--    --disable-manpage-build \
--    --disable-libbluray \
--    --disable-dvdnav \
--    --disable-cdda \
--    --disable-uchardet \
--    --disable-rubberband \
--    --disable-lcms2 \
--    --disable-vapoursynth \
--    ${PACKAGECONFIG_CONFARGS} \
--"
--
--do_configure:append() {
--    sed -i -e 's#${WORKDIR}#<WORKDIR>#g' ${B}/config.h
--}
--
--link_waf() {
--    ln -s waf-2.0.25 ${S}/waf
--}
--do_unpack[postfuncs] +=3D "link_waf"
--
--FILES:${PN} +=3D " \
--    ${datadir}/icons \
--    ${datadir}/zsh \
--    ${datadir}/bash-completion \
--    ${datadir}/metainfo \
--    "
--EXCLUDE_FROM_WORLD =3D "${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "=
-commercial", "0", "1", d)}"
-diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.37.0.bb b/meta-oe/r=
-ecipes-multimedia/mplayer/mpv_0.37.0.bb
+diff --git a/meta-oe/recipes-extended/p7zip/files/CVE-2016-9296.patch b/meta-oe/recipes-extended/p7zip/files/CVE-2016-9296.patch
 new file mode 100644
-index 000000000..e6e74dbd5
+index 000000000..42ea716be
 --- /dev/null
-+++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.37.0.bb
-@@ -0,0 +1,97 @@
-+SUMMARY =3D "Open Source multimedia player"
-+DESCRIPTION =3D "mpv is a fork of mplayer2 and MPlayer. It shares some f=
-eatures with the former projects while introducing many more."
-+SECTION =3D "multimedia"
-+HOMEPAGE =3D "http://www.mpv.io/"
++++ b/meta-oe/recipes-extended/p7zip/files/CVE-2016-9296.patch
+@@ -0,0 +1,30 @@
++From: Robert Luberda <robert@debian.org>
++Date: Sat, 19 Nov 2016 08:48:08 +0100
++Subject: Fix nullptr dereference (CVE-2016-9296)
 +
-+DEPENDS =3D " \
-+    alsa-lib \
-+    ffmpeg \
-+    libdrm \
-+    libass \
-+    libplacebo \
-+"
++Patch taken from https://sourceforge.net/p/p7zip/bugs/185/
 +
-+LICENSE =3D "GPL-2.0-or-later"
-+LIC_FILES_CHKSUM =3D "file://LICENSE.GPL;md5=3Db234ee4d69f5fce4486a80fda=
-f4a4263"
++CVE: CVE-2016-9296
 +
-+SRCREV =3D "140ec21c89d671d392877a7f3b91d67e7d7b9239"
-+SRC_URI =3D "git://github.com/mpv-player/mpv;name=3Dmpv;branch=3Drelease=
-/0.35;protocol=3Dhttps"
++Upstream-Status: Backport [https://snapshot.debian.org/archive/debian-debug/20180205T215659Z/pool/main/p/p7zip/p7zip_16.02%2Bdfsg-6.debian.tar.xz]
 +
-+S =3D "${WORKDIR}/git"
++Signed-off-by: Zahir Hussain <zahir.basha@kpit.com>
++Signed-off-by: aszh07 <mail2szahir@gmail.com>
++---
++ CPP/7zip/Archive/7z/7zIn.cpp | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
 +
-+inherit meson pkgconfig mime-xdg
++diff --git a/CPP/7zip/Archive/7z/7zIn.cpp b/CPP/7zip/Archive/7z/7zIn.cpp
++index b0c6b98..7c6dde2 100644
++--- a/CPP/7zip/Archive/7z/7zIn.cpp
+++++ b/CPP/7zip/Archive/7z/7zIn.cpp
++@@ -1097,7 +1097,8 @@ HRESULT CInArchive::ReadAndDecodePackedStreams(
++       if (CrcCalc(data, unpackSize) != folders.FolderCRCs.Vals[i])
++         ThrowIncorrect();
++   }
++-  HeadersSize += folders.PackPositions[folders.NumPackStreams];
+++  if (folders.PackPositions)
+++      HeadersSize += folders.PackPositions[folders.NumPackStreams];
++   return S_OK;
++ }
++ 
+diff --git a/meta-oe/recipes-extended/p7zip/files/CVE-2018-5996.patch b/meta-oe/recipes-extended/p7zip/files/CVE-2018-5996.patch
+new file mode 100644
+index 000000000..6b337b8d2
+--- /dev/null
++++ b/meta-oe/recipes-extended/p7zip/files/CVE-2018-5996.patch
+@@ -0,0 +1,228 @@
++From: Robert Luberda <robert@debian.org>
++Date: Sun, 28 Jan 2018 23:47:40 +0100
++Subject: CVE-2018-5996
 +
-+LDFLAGS:append:riscv64 =3D " -latomic"
++Hopefully fix Memory Corruptions via RAR PPMd (CVE-2018-5996) by
++applying a few changes from 7Zip 18.00-beta.
 +
-+LUA ?=3D "lua"
-+LUA:mips64  =3D ""
-+LUA:powerpc64  =3D ""
-+LUA:powerpc64le  =3D ""
-+LUA:riscv64  =3D ""
-+LUA:riscv32  =3D ""
-+LUA:powerpc  =3D ""
++Bug-Debian: https://bugs.debian.org/#888314
 +
-+# Note: lua is required to get on-screen-display (controls)
-+PACKAGECONFIG ??=3D " \
-+    ${LUA} \
-+    drm \
-+    vaapi \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'egl', '', d)} \
-+    ${@bb.utils.filter('DISTRO_FEATURES', 'x11 wayland opengl pipewire p=
-ulseaudio vulkan', d)} \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland x11', 'gbm', '', d)=
-} \
-+"
++CVE: CVE-2018-5996
 +
-+PACKAGECONFIG[x11] =3D "-Dx11=3Denabled,-Dx11=3Ddisabled,virtual/libx11 =
-xsp libxv libxscrnsaver libxinerama libxpresent libxext"
-+PACKAGECONFIG[xv] =3D "-Dxv=3Denabled,-Dxv=3Ddisabled,libxv"
-+PACKAGECONFIG[opengl] =3D "-Dgl=3Denabled,-Dgl=3Ddisabled,virtual/libgl"
-+PACKAGECONFIG[egl] =3D "-Degl=3Denabled,-Degl=3Ddisabled,virtual/egl"
-+PACKAGECONFIG[drm] =3D "-Ddrm=3Denabled,-Ddrm=3Ddisabled,libdrm"
-+PACKAGECONFIG[gbm] =3D "-Dgbm=3Denabled,-Dgbm=3Ddisabled,virtual/libgbm"
-+PACKAGECONFIG[lua] =3D "-Dlua=3Denabled,-Dlua=3Ddisabled,luajit"
-+PACKAGECONFIG[libarchive] =3D "-Dlibarchive=3Denabled,-Dlibarchive=3Ddis=
-abled,libarchive"
-+PACKAGECONFIG[jack] =3D "-Djack=3Denabled, -Djack=3Ddisabled, jack"
-+PACKAGECONFIG[vaapi] =3D "-Dvaapi=3Denabled,-Dvaapi=3Ddisabled,libva"
-+PACKAGECONFIG[vulkan] =3D "-Dvulkan=3Denabled,-Dvulkan=3Ddisabled,shader=
-c "
-+PACKAGECONFIG[vdpau] =3D "-Dvdpau=3Denabled,-Dvdpau=3Ddisabled,libvdpau"
-+PACKAGECONFIG[wayland] =3D "-Dwayland=3Denabled,-Dwayland=3Ddisabled,way=
-land wayland-native libxkbcommon"
-+PACKAGECONFIG[pipewire] =3D "-Dpipewire=3Denabled,-Dpipewire=3Ddisabled,=
-pipewire"
-+PACKAGECONFIG[pulseaudio] =3D "-Dpulse=3Denabled,-Dpulse=3Ddisabled,puls=
-eaudio"
++Upstream-Status: Backport [https://sources.debian.org/data/non-free/p/p7zip-rar/16.02-3/debian/patches/06-CVE-2018-5996.patch]
 +
-+python __anonymous() {
-+    packageconfig =3D (d.getVar("PACKAGECONFIG") or "").split()
-+    extras =3D []
-+    if "x11" in packageconfig and "opengl" in packageconfig:
-+        extras.append(" -Dgl-x11=3Denabled")
-+    if "x11" in packageconfig and "egl" in packageconfig:
-+        extras.append(" -Degl-x11=3Denabled")
-+    if "egl" in packageconfig and "drm" in packageconfig:
-+        extras.append(" -Degl-drm=3Denabled")
-+    if "vaapi" in packageconfig and "x11" in packageconfig:
-+        extras.append(" -Dvaapi-x11=3Denabled")
-+    if "vaapi" in packageconfig and "drm" in packageconfig:
-+        extras.append(" -Dvaapi-drm=3Denabled")
-+    if "vdpau" in packageconfig and "opengl" in packageconfig and "x11" =
-in packageconfig:
-+        extras.append(" -Dvdpau-gl-x11=3Denabled")
-+    if "wayland" in packageconfig and "opengl" in packageconfig:
-+        extras.append(" -Dgl-wayland=3Denabled")
-+    if "wayland" in packageconfig and "vaapi" in packageconfig:
-+        extras.append(" -Dvaapi-wayland=3Denabled")
-+}
++Signed-off-by: Zahir Hussain <zahir.basha@kpit.com>
++Signed-off-by: aszh07 <mail2szahir@gmail.com>
++---
++ CPP/7zip/Compress/Rar1Decoder.cpp | 13 +++++++++----
++ CPP/7zip/Compress/Rar1Decoder.h   |  1 +
++ CPP/7zip/Compress/Rar2Decoder.cpp | 10 +++++++++-
++ CPP/7zip/Compress/Rar2Decoder.h   |  1 +
++ CPP/7zip/Compress/Rar3Decoder.cpp | 23 ++++++++++++++++++++---
++ CPP/7zip/Compress/Rar3Decoder.h   |  2 ++
++ 6 files changed, 42 insertions(+), 8 deletions(-)
 +
-+SIMPLE_TARGET_SYS =3D "${@'${TARGET_SYS}'.replace('${TARGET_VENDOR}', ''=
-)}"
-+
-+EXTRA_OEMESON =3D " \
-+    -Dmanpage-build=3Ddisabled \
-+    -Dlibbluray=3Ddisabled \
-+    -Dlibmpv=3Dtrue \
-+    -Ddvdnav=3Ddisabled \
-+    -Dcdda=3Ddisabled \
-+    -Duchardet=3Ddisabled \
-+    -Drubberband=3Ddisabled \
-+    -Dlcms2=3Ddisabled \
-+    -Dvapoursynth=3Ddisabled \
-+    ${PACKAGECONFIG_CONFARGS} \
-+"
-+
-+FILES:${PN} +=3D "${datadir}"
-+EXCLUDE_FROM_WORLD =3D "${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "=
-commercial", "0", "1", d)}"
---=20
-2.43.0
++diff --git a/CPP/7zip/Compress/Rar1Decoder.cpp b/CPP/7zip/Compress/Rar1Decoder.cpp
++index 1aaedcc..68030c7 100644
++--- a/CPP/7zip/Compress/Rar1Decoder.cpp
+++++ b/CPP/7zip/Compress/Rar1Decoder.cpp
++@@ -29,7 +29,7 @@ public:
++ };
++ */
++ 
++-CDecoder::CDecoder(): m_IsSolid(false) { }
+++CDecoder::CDecoder(): m_IsSolid(false), _errorMode(false) { }
++ 
++ void CDecoder::InitStructures()
++ {
++@@ -406,9 +406,14 @@ HRESULT CDecoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *
++   InitData();
++   if (!m_IsSolid)
++   {
+++    _errorMode = false;
++     InitStructures();
++     InitHuff();
++   }
+++
+++  if (_errorMode)
+++    return S_FALSE;
+++
++   if (m_UnpackSize > 0)
++   {
++     GetFlagsBuf();
++@@ -477,9 +482,9 @@ STDMETHODIMP CDecoder::Code(ISequentialInStream *inStream, ISequentialOutStream
++     const UInt64 *inSize, const UInt64 *outSize, ICompressProgressInfo *progress)
++ {
++   try { return CodeReal(inStream, outStream, inSize, outSize, progress); }
++-  catch(const CInBufferException &e) { return e.ErrorCode; }
++-  catch(const CLzOutWindowException &e) { return e.ErrorCode; }
++-  catch(...) { return S_FALSE; }
+++  catch(const CInBufferException &e) { _errorMode = true; return e.ErrorCode; }
+++  catch(const CLzOutWindowException &e) { _errorMode = true; return e.ErrorCode; }
+++  catch(...) { _errorMode = true; return S_FALSE; }
++ }
++ 
++ STDMETHODIMP CDecoder::SetDecoderProperties2(const Byte *data, UInt32 size)
++diff --git a/CPP/7zip/Compress/Rar1Decoder.h b/CPP/7zip/Compress/Rar1Decoder.h
++index 630f089..01b606b 100644
++--- a/CPP/7zip/Compress/Rar1Decoder.h
+++++ b/CPP/7zip/Compress/Rar1Decoder.h
++@@ -39,6 +39,7 @@ public:
++ 
++   Int64 m_UnpackSize;
++   bool m_IsSolid;
+++  bool _errorMode;
++ 
++   UInt32 ReadBits(int numBits);
++   HRESULT CopyBlock(UInt32 distance, UInt32 len);
++diff --git a/CPP/7zip/Compress/Rar2Decoder.cpp b/CPP/7zip/Compress/Rar2Decoder.cpp
++index b3f2b4b..0580c8d 100644
++--- a/CPP/7zip/Compress/Rar2Decoder.cpp
+++++ b/CPP/7zip/Compress/Rar2Decoder.cpp
++@@ -80,7 +80,8 @@ static const UInt32 kHistorySize = 1 << 20;
++ static const UInt32 kWindowReservSize = (1 << 22) + 256;
++ 
++ CDecoder::CDecoder():
++-  m_IsSolid(false)
+++  m_IsSolid(false),
+++  m_TablesOK(false)
++ {
++ }
++ 
++@@ -100,6 +101,8 @@ UInt32 CDecoder::ReadBits(unsigned numBits) { return m_InBitStream.ReadBits(numB
++ 
++ bool CDecoder::ReadTables(void)
++ {
+++  m_TablesOK = false;
+++
++   Byte levelLevels[kLevelTableSize];
++   Byte newLevels[kMaxTableSize];
++   m_AudioMode = (ReadBits(1) == 1);
++@@ -170,6 +173,8 @@ bool CDecoder::ReadTables(void)
++   }
++   
++   memcpy(m_LastLevels, newLevels, kMaxTableSize);
+++  m_TablesOK = true;
+++
++   return true;
++ }
++ 
++@@ -344,6 +349,9 @@ HRESULT CDecoder::CodeReal(ISequentialInStream *inStream, ISequentialOutStream *
++       return S_FALSE;
++   }
++ 
+++  if (!m_TablesOK)
+++    return S_FALSE;
+++
++   UInt64 startPos = m_OutWindowStream.GetProcessedSize();
++   while (pos < unPackSize)
++   {
++diff --git a/CPP/7zip/Compress/Rar2Decoder.h b/CPP/7zip/Compress/Rar2Decoder.h
++index 3a0535c..0e9005f 100644
++--- a/CPP/7zip/Compress/Rar2Decoder.h
+++++ b/CPP/7zip/Compress/Rar2Decoder.h
++@@ -139,6 +139,7 @@ class CDecoder :
++ 
++   UInt64 m_PackSize;
++   bool m_IsSolid;
+++  bool m_TablesOK;
++ 
++   void InitStructures();
++   UInt32 ReadBits(unsigned numBits);
++diff --git a/CPP/7zip/Compress/Rar3Decoder.cpp b/CPP/7zip/Compress/Rar3Decoder.cpp
++index 3bf2513..6cb8a6a 100644
++--- a/CPP/7zip/Compress/Rar3Decoder.cpp
+++++ b/CPP/7zip/Compress/Rar3Decoder.cpp
++@@ -92,7 +92,8 @@ CDecoder::CDecoder():
++   _writtenFileSize(0),
++   _vmData(0),
++   _vmCode(0),
++-  m_IsSolid(false)
+++  m_IsSolid(false),
+++  _errorMode(false)
++ {
++   Ppmd7_Construct(&_ppmd);
++ }
++@@ -545,6 +546,9 @@ HRESULT CDecoder::ReadTables(bool &keepDecompressing)
++     return InitPPM();
++   }
++ 
+++  TablesRead = false;
+++  TablesOK = false;
+++
++   _lzMode = true;
++   PrevAlignBits = 0;
++   PrevAlignCount = 0;
++@@ -606,6 +610,9 @@ HRESULT CDecoder::ReadTables(bool &keepDecompressing)
++       }
++     }
++   }
+++  if (InputEofError())
+++    return S_FALSE;
+++
++   TablesRead = true;
++ 
++   // original code has check here:
++@@ -623,6 +630,9 @@ HRESULT CDecoder::ReadTables(bool &keepDecompressing)
++   RIF(m_LenDecoder.Build(&newLevels[kMainTableSize + kDistTableSize + kAlignTableSize]));
++ 
++   memcpy(m_LastLevels, newLevels, kTablesSizesSum);
+++
+++  TablesOK = true;
+++
++   return S_OK;
++ }
++ 
++@@ -824,7 +834,12 @@ HRESULT CDecoder::CodeReal(ICompressProgressInfo *progress)
++     PpmEscChar = 2;
++     PpmError = true;
++     InitFilters();
+++    _errorMode = false;
++   }
+++
+++  if (_errorMode)
+++    return S_FALSE;
+++
++   if (!m_IsSolid || !TablesRead)
++   {
++     bool keepDecompressing;
++@@ -838,6 +853,8 @@ HRESULT CDecoder::CodeReal(ICompressProgressInfo *progress)
++     bool keepDecompressing;
++     if (_lzMode)
++     {
+++      if (!TablesOK)
+++        return S_FALSE;
++       RINOK(DecodeLZ(keepDecompressing))
++     }
++     else
++@@ -901,8 +918,8 @@ STDMETHODIMP CDecoder::Code(ISequentialInStream *inStream, ISequentialOutStream
++     _unpackSize = outSize ? *outSize : (UInt64)(Int64)-1;
++     return CodeReal(progress);
++   }
++-  catch(const CInBufferException &e)  { return e.ErrorCode; }
++-  catch(...) { return S_FALSE; }
+++  catch(const CInBufferException &e)  { _errorMode = true; return e.ErrorCode; }
+++  catch(...) { _errorMode = true; return S_FALSE; }
++   // CNewException is possible here. But probably CNewException is caused
++   // by error in data stream.
++ }
++diff --git a/CPP/7zip/Compress/Rar3Decoder.h b/CPP/7zip/Compress/Rar3Decoder.h
++index c130cec..2f72d7d 100644
++--- a/CPP/7zip/Compress/Rar3Decoder.h
+++++ b/CPP/7zip/Compress/Rar3Decoder.h
++@@ -192,6 +192,7 @@ class CDecoder:
++   UInt32 _lastFilter;
++ 
++   bool m_IsSolid;
+++  bool _errorMode;
++ 
++   bool _lzMode;
++   bool _unsupportedFilter;
++@@ -200,6 +201,7 @@ class CDecoder:
++   UInt32 PrevAlignCount;
++ 
++   bool TablesRead;
+++  bool TablesOK;
++ 
++   CPpmd7 _ppmd;
++   int PpmEscChar;
+diff --git a/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb b/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
+index 04923116c..e795482eb 100644
+--- a/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
++++ b/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
+@@ -10,6 +10,8 @@ SRC_URI = "http://downloads.sourceforge.net/p7zip/p7zip/${PV}/p7zip_${PV}_src_al
+            file://CVE-2017-17969.patch \
+            file://0001-Fix-narrowing-errors-Wc-11-narrowing.patch \
+            file://change_numMethods_from_bool_to_unsigned.patch \
++           file://CVE-2018-5996.patch \
++           file://CVE-2016-9296.patch \
+            "
+ 
+ SRC_URI[md5sum] = "a0128d661cfe7cc8c121e73519c54fbf"
+-- 
+2.17.1
 
 
