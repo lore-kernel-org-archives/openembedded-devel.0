@@ -1,187 +1,185 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7CB30C3DA6E
-	for <webhook@archiver.kernel.org>; Fri,  5 Jan 2024 17:35:37 +0000 (UTC)
-Received: from mail-oa1-f45.google.com (mail-oa1-f45.google.com [209.85.160.45])
- by mx.groups.io with SMTP id smtpd.web11.29524.1704476135011165603
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D6907C3DA6E
+	for <webhook@archiver.kernel.org>; Fri,  5 Jan 2024 18:37:07 +0000 (UTC)
+Received: from mailout12.t-online.de (mailout12.t-online.de [194.25.134.22])
+ by mx.groups.io with SMTP id smtpd.web11.31135.1704479823510233152
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 05 Jan 2024 09:35:35 -0800
+ Fri, 05 Jan 2024 10:37:03 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=OVEK6r7e;
- spf=pass (domain: gmail.com, ip: 209.85.160.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f45.google.com with SMTP id 586e51a60fabf-2041c292da8so875818fac.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 05 Jan 2024 09:35:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1704476134; x=1705080934; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=UEnvD/zRb9QYUn+VvPXaf+4GFCS29Wr48l1JCUdvefg=;
-        b=OVEK6r7eBv5oOJtBG1jfMJBEtrxXHz2B+wQwyobO9fYX4fPdy25yiBQ03J+P2ddE5w
-         M1cUA1ws5WbSrrTCxbm2u0R9VjOptbo4oUbkifjpNji1n/Br3nax6WE93UYF8nH7jlEa
-         SZfOcUagrZx2k5WTJz3gVR0MgoSBBwcn09EwLeO1HMOD48jIr/tbi4N4vHqXmRTjgzpR
-         g/4WOVug+a792FNIoqmUajn6son5ZupBanhB10Z5RRSp8TD6P5WgJI/fJNESebYNizoq
-         6mvTfTwWlZyHsMLnYB9caa3tUUT7jwkpuqd8umPTmELBpIhN63mPs9cAkSuMkbZRioab
-         vB+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704476134; x=1705080934;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=UEnvD/zRb9QYUn+VvPXaf+4GFCS29Wr48l1JCUdvefg=;
-        b=YhC05P9ToQRzRN8ClOda+xoeagPvmCFiJDJqo8Fk/IBD7rkvLABrKoOpEij69zOBwo
-         gVge6KHJF08RUh/rkc9KmCmbarSoCBpyxsRwjJ7WtWug/LQT2cebD4cW2t2s6n7Vocrz
-         2hvCcwdX+fkssjc3mvynKTdXds2TEBntXVbeomoE+0nEXIzubcZhs5wWcGrrcJgRxi7F
-         W7FjISsjRjCU0klu+tTvCzZnMSLPKkxkeCIun14Rx41siKJjY3wHYRI4JGCoEgngosqf
-         tvO4tCeE/VZybB6TXjum8cEvPGBxE24CVLWsRVEmhREKsHVp3QBbCtFusZz6PIx6ZsP6
-         r6BQ==
-X-Gm-Message-State: AOJu0YxXOHfg+vIIC8RAZ0UMt6ZMXvi7RERQMiAKUrQ/4sf5DMeqLtaU
-	tr9I8eDuTyP7mJ+WjTljbP0NteXMCy8DEqiJmMg=
-X-Google-Smtp-Source: AGHT+IFc/5YQfHTrMKwMd2LTfDAE4EMi9p4AIno9mhDwP1LaKakabJw95yh3Yn1rZrXzDjHi6ms5ZJIA8aO7Y0mG5Mk=
-X-Received: by 2002:a05:6871:a004:b0:203:6d48:cf9f with SMTP id
- vp4-20020a056871a00400b002036d48cf9fmr2114220oab.79.1704476133662; Fri, 05
- Jan 2024 09:35:33 -0800 (PST)
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.22, mailfrom: f_l_k@t-online.de)
+Received: from fwd85.aul.t-online.de (fwd85.aul.t-online.de [10.223.144.111])
+	by mailout12.t-online.de (Postfix) with SMTP id C51A87AB8
+	for <openembedded-devel@lists.openembedded.org>; Fri,  5 Jan 2024 19:37:01 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.154.175.203]) by fwd85.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1rLp3w-2G1C0P0; Fri, 5 Jan 2024 19:36:56 +0100
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH 1/2] libplacebo: add recipe
+Date: Fri,  5 Jan 2024 19:36:47 +0100
+Message-ID: <20240105183648.61874-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <e6668968-0efe-411f-b2ea-efa2a4dc83f5@gmail.com>
-In-Reply-To: <e6668968-0efe-411f-b2ea-efa2a4dc83f5@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 5 Jan 2024 09:35:07 -0800
-Message-ID: <CAMKF1sqy-OcxBjZMqdvcx108TKdAb9GOwk95f8WTdrXuB2mTeA@mail.gmail.com>
-Subject: Re: nanbield merge request: Jan 5th
-To: akuster808 <akuster808@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+X-TOI-EXPURGATEID: 150726::1704479816-C12ED9F9-1CB5DDCA/0/0 CLEAN NORMAL
+X-TOI-MSGID: 6873778e-49e6-4c07-a660-fb8e44d55df9
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 05 Jan 2024 17:35:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108049
+ <openembedded-devel@lists.openembedded.org>; Fri, 05 Jan 2024 18:37:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108050
 
-merged thanks Armin.
+libplacebo is a required build dependency for mpv-0.37
 
-On Fri, Jan 5, 2024 at 4:58=E2=80=AFAM akuster808 <akuster808@gmail.com> wr=
-ote:
->
-> The following changes since commit 1750c66ae8e4268c472c0b2b94748a59d6ef86=
-6d:
->
->    emlog: Add PV (2023-11-01 08:16:30 -0400)
->
-> are available in the Git repository at:
->
->    https://git.openembedded.org/meta-openembedded nanbield-next
->
-> for you to fetch changes up to 2da6e1b0e43a8993fd422fee3f83940100b59f4c:
->
->    poco: fix branch (2024-01-05 07:52:17 -0500)
->
-> ----------------------------------------------------------------
-> Alexandre Belloni (1):
->        poco: fix branch
->
-> Christian Eggers (1):
->        python3-gcovr: switch to main branch
->
-> Dylan Turner (1):
->        apache2: v2.4.57 to v2.4.58 to fix CVE-2023-43622
->
-> Edi Feschiyan (1):
->        libbytesize: update SRC_URI
->
-> Fabio Estevam (3):
->        openocd: Use https for github
->        python3-piccata: Use https for github
->        multipath-tools: Use https for github
->
-> Jeffrey Pautler (1):
->        apache2: add vendor to product name used for CVE checking
->
-> Jonas Gorski (1):
->        frr: fix CVEs CVE-2023-4675{2,3} and CVE-2023-4723{4,5}
->
-> Khem Raj (3):
->        hwdata: upgrade 0.370 -> 0.375
->        openvpn: upgrade 2.6.3 -> 2.6.6
->        python3-scapy: upgrade to latest revision
->
-> Ross Burton (1):
->        yajl: fix CVE-2017-16516, CVE-2022-24795, CVE-2023-33460
->
-> Wang Mingyu (3):
->        hdf5: Fix install conflict when enable multilib.
->        dnf-plugin-tui: Recover BBCLASSEXTEND variants
->        strongswan: upgrade 5.9.11 -> 5.9.12
->
-> Zolt=C3=A1n B=C3=B6sz=C3=B6rm=C3=A9nyi (3):
->        python3-ninja-syntax: Set BBCLASSEXTEND =3D "native nativesdk"
->        python3-ninja: Set BBCLASSEXTEND =3D "native nativesdk"
->        geos: Fix packaging
->
->   meta-networking/recipes-devtools/python/python3-scapy_2.5.0.bb  | 2 +-
->   meta-networking/recipes-protocols/frr/frr/CVE-2023-46752.patch  | 125
-> ++++++++++++++++++++++++++++
->   meta-networking/recipes-protocols/frr/frr/CVE-2023-46753.patch  | 117
-> ++++++++++++++++++++++++++
->   meta-networking/recipes-protocols/frr/frr/CVE-2023-47234.patch  | 95
-> +++++++++++++++++++++
->   meta-networking/recipes-protocols/frr/frr/CVE-2023-47235.patch  | 112
-> +++++++++++++++++++++++++
->   meta-networking/recipes-protocols/frr/frr_9.0.1.bb              | 6 ++
->   .../openvpn/{openvpn_2.6.3.bb =3D> openvpn_2.6.6.bb} |   4 +-
->   .../strongswan/{strongswan_5.9.11.bb =3D> strongswan_5.9.12.bb} |   2 +=
--
->   meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb   | 2 +
->   meta-oe/recipes-devtools/openocd/openocd_git.bb                 | 2 +-
->   meta-oe/recipes-devtools/yajl/yajl/CVE-2017-16516.patch         | 37
-> ++++++++
->   meta-oe/recipes-devtools/yajl/yajl/CVE-2022-24795.patch         | 59
-> +++++++++++++
->   meta-oe/recipes-devtools/yajl/yajl/CVE-2023-33460.patch         | 35
-> ++++++++
->   meta-oe/recipes-devtools/yajl/yajl_2.1.0.bb                     | 6 +-
->   meta-oe/recipes-navigation/geos/geos_3.12.0.bb                  | 2 +-
->   meta-oe/recipes-support/hdf5/hdf5_1.14.2.bb                     | 6 +-
->   .../recipes-support/hwdata/{hwdata_0.370.bb =3D> hwdata_0.375.bb} |   2=
- +-
->   meta-oe/recipes-support/libbytesize/libbytesize_2.10.bb         | 2 +-
->   .../recipes-support/multipath-tools/multipath-tools_0.9.3.bb    | 2 +-
->   meta-oe/recipes-support/poco/poco_1.12.4.bb                     | 4 +-
->   meta-python/recipes-devtools/python/python3-gcovr_6.0.bb        | 2 +-
->   .../recipes-devtools/python/python3-ninja-syntax_1.7.2.bb       | 4 +-
->   meta-python/recipes-devtools/python/python3-ninja_1.11.1.bb     | 1 +
->   .../recipes-devtools/python3-piccata/python3-piccata_2.0.3.bb   | 2 +-
->   ...1-modules-mappers-config9.m4-Add-server-directory-to-i.patch | 31
-> -------
->   .../apache2/{apache2_2.4.57.bb =3D> apache2_2.4.58.bb} |   5 +-
->   26 files changed, 617 insertions(+), 50 deletions(-)
->   create mode 100644
-> meta-networking/recipes-protocols/frr/frr/CVE-2023-46752.patch
->   create mode 100644
-> meta-networking/recipes-protocols/frr/frr/CVE-2023-46753.patch
->   create mode 100644
-> meta-networking/recipes-protocols/frr/frr/CVE-2023-47234.patch
->   create mode 100644
-> meta-networking/recipes-protocols/frr/frr/CVE-2023-47235.patch
->   rename meta-networking/recipes-support/openvpn/{openvpn_2.6.3.bb =3D>
-> openvpn_2.6.6.bb} (95%)
->   rename
-> meta-networking/recipes-support/strongswan/{strongswan_5.9.11.bb =3D>
-> strongswan_5.9.12.bb} (99%)
->   create mode 100644 meta-oe/recipes-devtools/yajl/yajl/CVE-2017-16516.pa=
-tch
->   create mode 100644 meta-oe/recipes-devtools/yajl/yajl/CVE-2022-24795.pa=
-tch
->   create mode 100644 meta-oe/recipes-devtools/yajl/yajl/CVE-2023-33460.pa=
-tch
->   rename meta-oe/recipes-support/hwdata/{hwdata_0.370.bb =3D>
-> hwdata_0.375.bb} (91%)
->   delete mode 100644
-> meta-webserver/recipes-httpd/apache2/apache2/0011-modules-mappers-config9=
-.m4-Add-server-directory-to-i.patch
->   rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.57.bb =3D>
-> apache2_2.4.58.bb} (98%)
->
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ ...001-frame_queue.h-add-frame_duration.patch | 32 +++++++++++++++++++
+ .../libplacebo/0001-gpu.h-add-stride_w.patch  | 30 +++++++++++++++++
+ .../mplayer/libplacebo_git.bb                 | 28 ++++++++++++++++
+ 3 files changed, 90 insertions(+)
+ create mode 100644 meta-oe/recipes-multimedia/mplayer/libplacebo/0001-fr=
+ame_queue.h-add-frame_duration.patch
+ create mode 100644 meta-oe/recipes-multimedia/mplayer/libplacebo/0001-gp=
+u.h-add-stride_w.patch
+ create mode 100644 meta-oe/recipes-multimedia/mplayer/libplacebo_git.bb
+
+diff --git a/meta-oe/recipes-multimedia/mplayer/libplacebo/0001-frame_que=
+ue.h-add-frame_duration.patch b/meta-oe/recipes-multimedia/mplayer/libpla=
+cebo/0001-frame_queue.h-add-frame_duration.patch
+new file mode 100644
+index 000000000..5b4ded981
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/mplayer/libplacebo/0001-frame_queue.h-ad=
+d-frame_duration.patch
+@@ -0,0 +1,32 @@
++From 8437cd1fa7dc1797d3290c121ca17b39a0d2fd6a Mon Sep 17 00:00:00 2001
++From: Markus Volk <f_l_k@t-online.de>
++Date: Tue, 5 Dec 2023 19:49:42 +0100
++Subject: [PATCH] frame_queue.h: add frame_duration
++
++This fixes:
++| [ 87/266] Compiling stream/cookies.c
++| ../git/video/out/vo_gpu_next.c: In function 'draw_frame':
++| ../git/video/out/vo_gpu_next.c:932:14: error: 'struct pl_queue_params'=
+ has no member named 'frame_duration'
++|   932 |             .frame_duration =3D frame->ideal_frame_duration,
++|       |              ^~~~~~~~~~~~~~
++
++---
++ src/include/libplacebo/utils/frame_queue.h | 2 ++
++ 1 file changed, 2 insertions(+)
++
++diff --git a/src/include/libplacebo/utils/frame_queue.h b/src/include/li=
+bplacebo/utils/frame_queue.h
++index 2a9c90c3..8afa4355 100644
++--- a/src/include/libplacebo/utils/frame_queue.h
+++++ b/src/include/libplacebo/utils/frame_queue.h
++@@ -170,6 +170,8 @@ struct pl_queue_params {
++     // should instead be interpreted by the provided callback.
++     uint64_t timeout;
++=20
+++    const float frame_duration;
+++
++     // This callback will be used to pull new frames from the decoder. =
+It may
++     // block if needed. The user is responsible for setting appropriate=
+ time
++     // limits and/or returning and interpreting QUEUE_MORE as sensible.
++--=20
++2.42.1
++
+diff --git a/meta-oe/recipes-multimedia/mplayer/libplacebo/0001-gpu.h-add=
+-stride_w.patch b/meta-oe/recipes-multimedia/mplayer/libplacebo/0001-gpu.=
+h-add-stride_w.patch
+new file mode 100644
+index 000000000..f08e122cf
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/mplayer/libplacebo/0001-gpu.h-add-stride=
+_w.patch
+@@ -0,0 +1,30 @@
++From fbf74064bbb7133efe9234ef83976f06b3690e88 Mon Sep 17 00:00:00 2001
++From: Markus Volk <f_l_k@t-online.de>
++Date: Tue, 5 Dec 2023 19:35:51 +0100
++Subject: [PATCH] gpu.h: add stride_w
++
++this fixes:
++| [113/257] Compiling common/codecs.c
++| ../git/video/out/vo_gpu_next.c: In function 'update_overlays':
++| ../git/video/out/vo_gpu_next.c:268:14: error: 'struct pl_tex_transfer_=
+params' has no member named 'stride_w'
++|   268 |             .stride_w   =3D item->packed->stride[0] / tex_fmt-=
+>texel_size,
++|       |              ^~~~~~~~
++---
++ src/include/libplacebo/gpu.h | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/src/include/libplacebo/gpu.h b/src/include/libplacebo/gpu.h
++index a63fdf7c..57b4f195 100644
++--- a/src/include/libplacebo/gpu.h
+++++ b/src/include/libplacebo/gpu.h
++@@ -904,6 +904,7 @@ struct pl_tex_transfer_params {
++=20
++     // Note: The contents of the memory region / buffer must exactly ma=
+tch the
++     // texture format; i.e. there is no explicit conversion between for=
+mats.
+++    size_t stride_w;    //
++ };
++=20
++ #define pl_tex_transfer_params(...) (&(struct pl_tex_transfer_params) {=
+ __VA_ARGS__ })
++--=20
++2.42.1
++
+diff --git a/meta-oe/recipes-multimedia/mplayer/libplacebo_git.bb b/meta-=
+oe/recipes-multimedia/mplayer/libplacebo_git.bb
+new file mode 100644
+index 000000000..dd0796782
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/mplayer/libplacebo_git.bb
+@@ -0,0 +1,28 @@
++SUMMARY =3D "The core rendering algorithms and ideas of mpv rewritten as=
+ an independent library."
++SECTION =3D "multimedia"
++HOMEPAGE =3D "https://opensourcelibs.com/lib/libplacebo"
++
++LICENSE =3D "LGPL-2.1-only"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D435ed639f84d4585d93824e7da3d8=
+5da"
++
++SRC_URI =3D " \
++	git://code.videolan.org/videolan/libplacebo.git;protocol=3Dhttps;branch=
+=3Dv6.338 \
++	file://0001-gpu.h-add-stride_w.patch \
++	file://0001-frame_queue.h-add-frame_duration.patch \
++"
++
++S =3D "${WORKDIR}/git"
++SRCREV =3D "2805a0d01c029084ab36bf5d0e3c8742012a0b27"
++PV =3D "6.338.1"
++
++inherit meson pkgconfig
++
++PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'vulkan openg=
+l', d)}"
++
++PACKAGECONFIG[vulkan] =3D  "-Dvulkan=3Denabled,-Dvulkan=3Ddisabled,vulka=
+n-loader vulkan-headers shaderc spirv-shader-generator python3-mako-nativ=
+e python3-jinja2-native glad-native"
++PACKAGECONFIG[opengl] =3D "-Dopengl=3Denabled,-Dopengl=3Ddisabled,glad,g=
+lad"
++PACKAGECONFIG[lcms] =3D "-Dlcms=3Denabled,-Dlcms=3Ddisabled,lcms"
++PACKAGECONFIG[demos] =3D "-Ddemos=3Dtrue,-Ddemos=3Dfalse,ffmpeg libsdl2 =
+libsdl2-image"
++
++EXTRA_OEMESON =3D "-Dvulkan-registry=3D${STAGING_DATADIR}/vulkan/registr=
+y/vk.xml"
++
+--=20
+2.43.0
+
 
