@@ -1,129 +1,153 @@
-Return-Path: <alperyasinak1@gmail.com>
+Return-Path: <asharma@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 027D6C3DA6E
-	for <webhook@archiver.kernel.org>; Fri,  5 Jan 2024 06:12:54 +0000 (UTC)
-Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
- by mx.groups.io with SMTP id smtpd.web11.18168.1704435168289534609
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CA5FEC3DA6E
+	for <webhook@archiver.kernel.org>; Fri,  5 Jan 2024 09:06:14 +0000 (UTC)
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.web10.19966.1704445574061578463
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Jan 2024 22:12:48 -0800
+ Fri, 05 Jan 2024 01:06:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=DDBcSy74;
- spf=pass (domain: gmail.com, ip: 209.85.218.43, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-ej1-f43.google.com with SMTP id a640c23a62f3a-a27733ae1dfso144186266b.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Jan 2024 22:12:48 -0800 (PST)
+ dkim=pass header.i=@mvista.com header.s=google header.b=X/ume4Q8;
+ spf=pass (domain: mvista.com, ip: 209.85.214.172, mailfrom: asharma@mvista.com)
+Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-1d3e6c86868so9819865ad.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 05 Jan 2024 01:06:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1704435166; x=1705039966; darn=lists.openembedded.org;
+        d=mvista.com; s=google; t=1704445573; x=1705050373; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=LZHrJmndgk6nwkzPRpENUit/yitewCFytEQcIYS7JSw=;
-        b=DDBcSy74Kk36oTEWr1WtFqlEWBYzu38tEVA1WEvfFh2T8pJw3MN3cpBpv5SgvJN71h
-         /gm0Sz4HziGHLN7/QWuisZ5zfmU8CVMixm+83eTpt8mVJUF0gajzrGxor4+5pWXHsLl0
-         s9kKw85FhUfqtofN2M9dcrbZ4DpEjGdWe/tBNO6K7dKKLFMJY0mN7LeZEYLBz2jT68zL
-         148as0cKMmnpadSEDv8wTTKWNwr/4cPxKQWlTVOL3gzoxhpr+wg1P/E/hjo57aizXLAB
-         OleMMqyr15FVCSoGWkOgYiauGLQS2UWqGcQWPXWcgiB20eO3tkg9NAXzm0zupk9fycsv
-         0fIw==
+        bh=8QsBdyrw6800HQwFi0fS79FhjFN1qw6fszI4WDfPkfk=;
+        b=X/ume4Q8BQCwAYFO99wEaywrgObpRvlDpL3+vSbM31M63U0s4c1Z6eXVNntd63eG8P
+         /im6nCwPO5HvsHJ6ZtKtrplkl+IQMvqo1vo+RkGO3jcsruGcME8YHoUt0NN9p2UQ38J7
+         Glt78dYfvmhRujvugbrbmozQbn6Vr3syOC9vo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704435166; x=1705039966;
+        d=1e100.net; s=20230601; t=1704445573; x=1705050373;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=LZHrJmndgk6nwkzPRpENUit/yitewCFytEQcIYS7JSw=;
-        b=b33vadYlroUpJDLgtANN/x8vD4Y8G2gvZqIpne/iynlG4aOYV4zXQAd7agkQF1q6yx
-         uXF3/+XgTxo+IVQ2rYBkkk3zt8O8wWxFTdtTB5hogPr4Iuu6JbYZhtpVCgxj3vpOeLS1
-         G6K269qOCvnmVxtkLXP2gEqOsUS4ZW2RJX0FFfXIGjhat+JYaFTMlAYulFLEuwC85ds1
-         RY/pVixDMPPz0iKgSq+1OxjSDYk0areO23JuY/BcEchx90j59lMAU70a7hkylPm8LLhD
-         tvxbqzgVCjvflmDq6FRhCA3ndXeMeapZGVQ08F5VJDB6n1Q51TsD3pd2EtYsxG2ncDPq
-         xANA==
-X-Gm-Message-State: AOJu0Yx/zgSUsmnU1ptYTuhZueMyD6NerZgc/vmwrSR6KoNQa/1/S29v
-	Wdh5K93o8IzvU81naMab43+sQXuC5aE=
-X-Google-Smtp-Source: AGHT+IFub49S6H2MZ6kNFR7OJLJyM+yft0n/BzTNZnUQ1MCXk+UV63etWg5WHd85FM3TGS8+/4xwDA==
-X-Received: by 2002:a17:906:2646:b0:a28:a36f:b50a with SMTP id i6-20020a170906264600b00a28a36fb50amr350925ejc.134.1704435165990;
-        Thu, 04 Jan 2024 22:12:45 -0800 (PST)
-Received: from localhost.localdomain ([176.33.64.25])
-        by smtp.gmail.com with ESMTPSA id e5-20020a17090681c500b00a1d5444c2cdsm480511ejx.140.2024.01.04.22.12.44
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 04 Jan 2024 22:12:45 -0800 (PST)
-From: alperak <alperyasinak1@gmail.com>
+        bh=8QsBdyrw6800HQwFi0fS79FhjFN1qw6fszI4WDfPkfk=;
+        b=SlsgAtLUC5AxRXWtCULIANjn1Tim4HKrcKULXfJ9O7SFVjZF9O2e0LmpZn7Q5hi1vi
+         uXxmJzHQyaKW60AfLs1bG/fwJQz5PQQyJmERgvM/3Ox2bEp62/6y/3gMV5T0s04AtvOg
+         sRVSS8PVhemMJcTmSSy5NaB326YtFVS2XON/+83IgIxRyzvws+mRuOmwfyIkPoZXNT9t
+         lWnu/DA8kzZhN5W+NP8TXKC5oYHq5eValNp+SUU+NPsnJ79cdymuAo4ORiLQIYFqI7mO
+         WDiq1UxXGb/AY1yPuRVjjo2kr6lIbnz8lBzfnPpEHbOWwYFF6a3VzAD51dGHKQ90dZsr
+         T60w==
+X-Gm-Message-State: AOJu0YzWsQlSyJLQdrJsuym5+wxiY2IFQYd1i6HaJhIxkDk7+2MjF+a+
+	v9VAzaX5cry9VdGFaLWnuNs4pliy3w6CZQa0CX6mZRgar5U=
+X-Google-Smtp-Source: AGHT+IFJFahVc0XJ+vLdFEHC/EQKxRPxoQJojm3mtpjIUNTEh6XzFGeayR77hZvIHMM42U8onFvq4g==
+X-Received: by 2002:a17:902:b204:b0:1d4:97a:7f5a with SMTP id t4-20020a170902b20400b001d4097a7f5amr1490941plr.95.1704445573219;
+        Fri, 05 Jan 2024 01:06:13 -0800 (PST)
+Received: from asharma-Latitude-3400 ([2401:4900:1c31:5de7:4157:95f9:a303:a15c])
+        by smtp.gmail.com with ESMTPSA id j5-20020a170902da8500b001d3e3704d2fsm929602plx.31.2024.01.05.01.06.10
+        (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+        Fri, 05 Jan 2024 01:06:13 -0800 (PST)
+Received: by asharma-Latitude-3400 (sSMTP sendmail emulation); Fri, 05 Jan 2024 14:36:07 +0530
+From: Ashish Sharma <asharma@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-oe][PATCH] clinfo: upgrade 3.0.21.02.21 -> 3.0.23.01.25
-Date: Fri,  5 Jan 2024 09:12:40 +0300
-Message-Id: <20240105061240.27523-1-alperyasinak1@gmail.com>
-X-Mailer: git-send-email 2.25.1
+Cc: Ashish Sharma <asharma@mvista.com>
+Subject: [oe][meta-networking][dunfell][PATCH] wireshark: Backport fix for CVE-2023-1992 RPCoRDMA: Frame end cleanup for global write offsets
+Date: Fri,  5 Jan 2024 14:36:06 +0530
+Message-Id: <20240105090606.16197-1-asharma@mvista.com>
+X-Mailer: git-send-email 2.24.4
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 05 Jan 2024 06:12:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108043
+ <openembedded-devel@lists.openembedded.org>; Fri, 05 Jan 2024 09:06:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108044
 
-Changelog:
+Upstream-Status: Backport from [https://gitlab.com/colin.mcinnes/wireshark/-/commit/3c8be14c827f1587da3c2b3bb0d9c04faff57413]
 
-748c393 (tag: 3.0.23.01.25) Version 3.0.23.01.25
-6ffc5f4 Keep track of the known flags
-8a259ee Mark ARM extensions as such
-315a45f Fix some extended versioning support
-fd78db3 cl_khr_mutable_dispatch
-89581d9 Sempahore KHR extensions support
-6dedc29 cl_khr_external_memory support
-9e770d9 Cleanup and add TODO
-3bb2d68 cl_intel_unified_shared_memory support
-120b67c cl_khr_command_buffer support
-a38c9cc Update cl_arm_scheduling_controls support
-b43aa37 cl_intel_device_attribute_query support
-5b0ebba cl_intel_command_queue_families support
-c8de099 Option to handle the NULL platform like a normal one
-a6862eb Correctly size some variables
-62bbef9 Fix typo: comfornace
-d6f189d Makefile: Define and use `MAN1DIR`
-95051d9 Makefile: Support staged installs with `DESTDIR`
-a2d2cfb Makefile: Simplify by removing targets and move them to install target
-7870355 Revert "Makefile: Support staged installs with `DESTDIR`"
-a3729b0 Properly indent NV execution properties
-77b4693 Don't fetch array values when there aren't any
-efdb0f0 Show ICD loader properties even if no platforms are present
-a10af94 Older NVIDIA drivers don't support CL_DEVICE_PCI_DOMAIN_ID_NV
-a5bda6d Makefile: Support staged installs with `DESTDIR`
-72a1ee2 Some more ext vs (next) core things
-aabec89 Add missing extension checks
-20b7053 cl_arm_controlled_kernel_termination support
-11201e9 cl_khr_pci_bus_info support
-78c53d0 Fix string buffer used to report error
-e36ff2b Support cl_arm_scheduling_controls
-d34bc1a (tag: 3.0.21.02.21) Version 3.0.21.02.21
-
-Signed-off-by: alperak <alperyasinak1@gmail.com>
+Signed-off-by: Ashish Sharma <asharma@mvista.com>
 ---
- .../opencl/{clinfo_3.0.21.02.21.bb => clinfo_3.0.23.01.25.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/opencl/{clinfo_3.0.21.02.21.bb => clinfo_3.0.23.01.25.bb} (82%)
+ .../wireshark/files/CVE-2023-1992.patch       | 62 +++++++++++++++++++
+ .../wireshark/wireshark_3.2.18.bb             |  1 +
+ 2 files changed, 63 insertions(+)
+ create mode 100644 meta-networking/recipes-support/wireshark/files/CVE-2023-1992.patch
 
-diff --git a/meta-oe/recipes-support/opencl/clinfo_3.0.21.02.21.bb b/meta-oe/recipes-support/opencl/clinfo_3.0.23.01.25.bb
-similarity index 82%
-rename from meta-oe/recipes-support/opencl/clinfo_3.0.21.02.21.bb
-rename to meta-oe/recipes-support/opencl/clinfo_3.0.23.01.25.bb
-index 781e698cb..6cacd3722 100644
---- a/meta-oe/recipes-support/opencl/clinfo_3.0.21.02.21.bb
-+++ b/meta-oe/recipes-support/opencl/clinfo_3.0.23.01.25.bb
-@@ -9,12 +9,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=fd8857f774dfb0eefe1e80c8f9240a7e"
+diff --git a/meta-networking/recipes-support/wireshark/files/CVE-2023-1992.patch b/meta-networking/recipes-support/wireshark/files/CVE-2023-1992.patch
+new file mode 100644
+index 0000000000..2fbef6bae0
+--- /dev/null
++++ b/meta-networking/recipes-support/wireshark/files/CVE-2023-1992.patch
+@@ -0,0 +1,62 @@
++From 3c8be14c827f1587da3c2b3bb0d9c04faff57413 Mon Sep 17 00:00:00 2001
++From: John Thacker <johnthacker@gmail.com>
++Date: Sun, 19 Mar 2023 15:16:39 -0400
++Subject: [PATCH] RPCoRDMA: Frame end cleanup for global write offsets
++
++Add a frame end routine for a global which is assigned to packet
++scoped memory. It really should be made proto data, but is used
++in a function in the header (that doesn't take the packet info
++struct as an argument) and this fix needs to be made in stable
++branches.
++
++Fix #18852
++---
++Upstream-Status: Backport from [https://gitlab.com/colin.mcinnes/wireshark/-/commit/3c8be14c827f1587da3c2b3bb0d9c04faff57413]
++CVE: CVE-2023-1992
++Signed-off-by: Ashish Sharma <asharma@mvista.com>
++
++ epan/dissectors/packet-rpcrdma.c | 14 ++++++++++++++
++ 1 file changed, 14 insertions(+)
++
++diff --git a/epan/dissectors/packet-rpcrdma.c b/epan/dissectors/packet-rpcrdma.c
++index 680187b2653..3f250f0ea1c 100644
++--- a/epan/dissectors/packet-rpcrdma.c
+++++ b/epan/dissectors/packet-rpcrdma.c
++@@ -24,6 +24,7 @@
++ #include <epan/addr_resolv.h>
++ 
++ #include "packet-rpcrdma.h"
+++#include "packet-frame.h"
++ #include "packet-infiniband.h"
++ #include "packet-iwarp-ddp-rdmap.h"
++ 
++@@ -285,6 +286,18 @@ void rpcrdma_insert_offset(gint offset)
++     wmem_array_append_one(gp_rdma_write_offsets, offset);
++ }
++ 
+++/*
+++ * Reset the array of write offsets at the end of the frame. These
+++ * are packet scoped, so they don't need to be freed, but we want
+++ * to ensure that the global doesn't point to no longer allocated
+++ * memory in a later packet.
+++ */
+++static void
+++reset_write_offsets(void)
+++{
+++    gp_rdma_write_offsets = NULL;
+++}
+++
++ /* Get conversation state, it is created if it does not exist */
++ static rdma_conv_info_t *get_rdma_conv_info(packet_info *pinfo)
++ {
++@@ -1600,6 +1613,7 @@ dissect_rpcrdma(tvbuff_t *tvb, packet_info *pinfo, proto_tree *tree, void* data
++             if (write_size > 0 && !pinfo->fd->visited) {
++                 /* Initialize array of write chunk offsets */
++                 gp_rdma_write_offsets = wmem_array_new(wmem_packet_scope(), sizeof(gint));
+++                register_frame_end_routine(pinfo, reset_write_offsets);
++                 TRY {
++                     /*
++                      * Call the upper layer dissector to get a list of offsets
++-- 
++GitLab
++
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb b/meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb
+index 64e436df38..eb43574f9f 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb
+@@ -18,6 +18,7 @@ SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz
+            file://CVE-2023-0667.patch \
+            file://CVE-2023-0668.patch \
+            file://CVE-2023-2906.patch \
++           file://CVE-2023-1992.patch \
+            "
+ UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
  
- SRC_URI = "git://github.com/Oblomov/clinfo.git;protocol=https;branch=master"
- 
--SRCREV = "d34bc1a3bdc148e2e1fe64998398e1a0552ab04c"
-+SRCREV = "748c3930a9b9cb826e631d77439e2cb8f84f5bcf"
- 
- S = "${WORKDIR}/git"
- 
- DEPENDS += "opencl-headers virtual/opencl-icd"
- 
- do_install() {
--        install -D -m 755 clinfo ${D}${bindir}/clinfo
-+	oe_runmake install PREFIX=${D}${prefix} MANDIR=${D}${mandir}
- }
 -- 
-2.25.1
+2.24.4
 
 
