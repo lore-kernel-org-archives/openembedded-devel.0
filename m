@@ -1,236 +1,308 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7DCD7C3DA6E
-	for <webhook@archiver.kernel.org>; Fri,  5 Jan 2024 22:43:19 +0000 (UTC)
-Received: from mail-oa1-f45.google.com (mail-oa1-f45.google.com [209.85.160.45])
- by mx.groups.io with SMTP id smtpd.web11.37308.1704494598929125537
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D6FC0C46CD2
+	for <webhook@archiver.kernel.org>; Sat,  6 Jan 2024 06:42:21 +0000 (UTC)
+Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
+ by mx.groups.io with SMTP id smtpd.web10.44093.1704523334383231434
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 05 Jan 2024 14:43:19 -0800
+ Fri, 05 Jan 2024 22:42:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=jNMvH1f+;
- spf=pass (domain: gmail.com, ip: 209.85.160.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f45.google.com with SMTP id 586e51a60fabf-2048e63dbd9so45720fac.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 05 Jan 2024 14:43:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1704494598; x=1705099398; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=1jf4lp5EawJzDDJIDENzEQMrDjcaMWOOiasEl9FjVe0=;
-        b=jNMvH1f+TWD9Yt4/KgFhnzKajxrPECRm6LUXP6AhaNPZK68ud8lpbAokOWUVMOYtE1
-         kZisAISj909ZvhJV27OT64s+jTL3lcGk7ukcKMlIdVtLO5Vh+CpUG0WETcPAoMVgUFRl
-         Nch4+pwD1YAkI4vX74s9TqqvldI54xu/i7SnFFFIiW3+9uXYhdj/F0ajrAP6+gAAtvYj
-         XTkxNPXSz96Nwj2o9wbi51PPMlnWdoeM6LkPfLnSYqCqOfLhNyt3GF9piLi3zUhwanNH
-         BQxasochpQxNlzTAeQurbhnj6q7MpU4DLEAjOAYypaEQYEdQZED66EDtlMy4cMTMwGcy
-         pT2Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704494598; x=1705099398;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=1jf4lp5EawJzDDJIDENzEQMrDjcaMWOOiasEl9FjVe0=;
-        b=QzI6mf9kXixx6nEa8tfvpcDmqaqRbaImU3ZE0QqMNj1XoouvG2RdAuoqjc4x+90iY6
-         0wBVRqVHeaS12AxEiGaPNI7JW3XWQfPivsumkKxU1nNusIAgqtEtNkeq0POMcjgi4YUR
-         /Gqk47j+98btSr3NxrmPtKVHm54vlYOA+tZKCN1+1Hu7mGA9p/Z4RzwnD+U922K/6h82
-         vPBlziW5LEimKXFnjfqbYeTC1PTDC5Kk50rg+ZLW2d+aurBUC3Qt8gaUyl8L93TbHZD+
-         jLwnoYWbtt5NOGKWZycnc+3t/CPqaDxcei2ZrRxTAAMtsBDHZrSfCJcFzL8jGFSyAuxG
-         HAYg==
-X-Gm-Message-State: AOJu0YyN/ijHL6VaA7OatCxStiP8jAAjq4LoMDN2NLN6MQGmY42RTstu
-	CUjCqR5c/5tf1827QBIjExjH9pcUQJOyzEBG5Yo=
-X-Google-Smtp-Source: AGHT+IGLefS8IIJPTw1gKglxhojHIIdv9/ibkou7AuhY7pNW9qUbfiRh1ICKixALwk3YB1qSAxwx3LE685WZD1rrxJc=
-X-Received: by 2002:a05:6871:a0ca:b0:203:55e6:7678 with SMTP id
- vr10-20020a056871a0ca00b0020355e67678mr77828oab.40.1704494598071; Fri, 05 Jan
- 2024 14:43:18 -0800 (PST)
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
+Received: from fwd89.aul.t-online.de (fwd89.aul.t-online.de [10.223.144.115])
+	by mailout05.t-online.de (Postfix) with SMTP id 909F6C5EA
+	for <openembedded-devel@lists.openembedded.org>; Sat,  6 Jan 2024 07:42:12 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.154.174.51]) by fwd89.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1rM0Nn-2mRrcH0; Sat, 6 Jan 2024 07:42:11 +0100
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCHv3] mpv: upgrade 0.35.1 -> 0.37.0
+Date: Sat,  6 Jan 2024 07:42:03 +0100
+Message-ID: <20240106064203.13946-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20240105183648.61874-1-f_l_k@t-online.de>
-In-Reply-To: <20240105183648.61874-1-f_l_k@t-online.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 5 Jan 2024 14:42:51 -0800
-Message-ID: <CAMKF1srUMiM+r6eacPmb6aMeF1PS48Mifoc8hGLPKzpW1KCmng@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 1/2] libplacebo: add recipe
-To: Markus Volk <f_l_k@t-online.de>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
+X-TOI-EXPURGATEID: 150726::1704523331-491CA820-57E209AE/0/0 CLEAN NORMAL
+X-TOI-MSGID: d187598a-085e-48e7-9ba6-ee192db03a13
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 05 Jan 2024 22:43:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108056
+ <openembedded-devel@lists.openembedded.org>; Sat, 06 Jan 2024 06:42:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108057
 
-On Fri, Jan 5, 2024 at 10:37=E2=80=AFAM Markus Volk <f_l_k@t-online.de> wro=
-te:
->
-> libplacebo is a required build dependency for mpv-0.37
->
-> Signed-off-by: Markus Volk <f_l_k@t-online.de>
-> ---
->  ...001-frame_queue.h-add-frame_duration.patch | 32 +++++++++++++++++++
->  .../libplacebo/0001-gpu.h-add-stride_w.patch  | 30 +++++++++++++++++
->  .../mplayer/libplacebo_git.bb                 | 28 ++++++++++++++++
->  3 files changed, 90 insertions(+)
->  create mode 100644 meta-oe/recipes-multimedia/mplayer/libplacebo/0001-fr=
-ame_queue.h-add-frame_duration.patch
->  create mode 100644 meta-oe/recipes-multimedia/mplayer/libplacebo/0001-gp=
-u.h-add-stride_w.patch
->  create mode 100644 meta-oe/recipes-multimedia/mplayer/libplacebo_git.bb
->
-> diff --git a/meta-oe/recipes-multimedia/mplayer/libplacebo/0001-frame_que=
-ue.h-add-frame_duration.patch b/meta-oe/recipes-multimedia/mplayer/libplace=
-bo/0001-frame_queue.h-add-frame_duration.patch
-> new file mode 100644
-> index 000000000..5b4ded981
-> --- /dev/null
-> +++ b/meta-oe/recipes-multimedia/mplayer/libplacebo/0001-frame_queue.h-ad=
-d-frame_duration.patch
-> @@ -0,0 +1,32 @@
-> +From 8437cd1fa7dc1797d3290c121ca17b39a0d2fd6a Mon Sep 17 00:00:00 2001
-> +From: Markus Volk <f_l_k@t-online.de>
-> +Date: Tue, 5 Dec 2023 19:49:42 +0100
-> +Subject: [PATCH] frame_queue.h: add frame_duration
-> +
-> +This fixes:
-> +| [ 87/266] Compiling stream/cookies.c
-> +| ../git/video/out/vo_gpu_next.c: In function 'draw_frame':
-> +| ../git/video/out/vo_gpu_next.c:932:14: error: 'struct pl_queue_params'=
- has no member named 'frame_duration'
-> +|   932 |             .frame_duration =3D frame->ideal_frame_duration,
-> +|       |              ^~~~~~~~~~~~~~
-> +
-> +---
-> + src/include/libplacebo/utils/frame_queue.h | 2 ++
-> + 1 file changed, 2 insertions(+)
-> +
-> +diff --git a/src/include/libplacebo/utils/frame_queue.h b/src/include/li=
-bplacebo/utils/frame_queue.h
-> +index 2a9c90c3..8afa4355 100644
-> +--- a/src/include/libplacebo/utils/frame_queue.h
-> ++++ b/src/include/libplacebo/utils/frame_queue.h
-> +@@ -170,6 +170,8 @@ struct pl_queue_params {
-> +     // should instead be interpreted by the provided callback.
-> +     uint64_t timeout;
-> +
-> ++    const float frame_duration;
-> ++
-> +     // This callback will be used to pull new frames from the decoder. =
-It may
-> +     // block if needed. The user is responsible for setting appropriate=
- time
-> +     // limits and/or returning and interpreting QUEUE_MORE as sensible.
-> +--
-> +2.42.1
-> +
-> diff --git a/meta-oe/recipes-multimedia/mplayer/libplacebo/0001-gpu.h-add=
--stride_w.patch b/meta-oe/recipes-multimedia/mplayer/libplacebo/0001-gpu.h-=
-add-stride_w.patch
-> new file mode 100644
-> index 000000000..f08e122cf
-> --- /dev/null
-> +++ b/meta-oe/recipes-multimedia/mplayer/libplacebo/0001-gpu.h-add-stride=
-_w.patch
-> @@ -0,0 +1,30 @@
-> +From fbf74064bbb7133efe9234ef83976f06b3690e88 Mon Sep 17 00:00:00 2001
-> +From: Markus Volk <f_l_k@t-online.de>
-> +Date: Tue, 5 Dec 2023 19:35:51 +0100
-> +Subject: [PATCH] gpu.h: add stride_w
-> +
-> +this fixes:
-> +| [113/257] Compiling common/codecs.c
-> +| ../git/video/out/vo_gpu_next.c: In function 'update_overlays':
-> +| ../git/video/out/vo_gpu_next.c:268:14: error: 'struct pl_tex_transfer_=
-params' has no member named 'stride_w'
-> +|   268 |             .stride_w   =3D item->packed->stride[0] / tex_fmt-=
->texel_size,
-> +|       |              ^~~~~~~~
-> +---
-> + src/include/libplacebo/gpu.h | 1 +
-> + 1 file changed, 1 insertion(+)
-> +
-> +diff --git a/src/include/libplacebo/gpu.h b/src/include/libplacebo/gpu.h
-> +index a63fdf7c..57b4f195 100644
-> +--- a/src/include/libplacebo/gpu.h
-> ++++ b/src/include/libplacebo/gpu.h
-> +@@ -904,6 +904,7 @@ struct pl_tex_transfer_params {
-> +
-> +     // Note: The contents of the memory region / buffer must exactly ma=
-tch the
-> +     // texture format; i.e. there is no explicit conversion between for=
-mats.
-> ++    size_t stride_w;    //
-> + };
-> +
-> + #define pl_tex_transfer_params(...) (&(struct pl_tex_transfer_params) {=
- __VA_ARGS__ })
-> +--
-> +2.42.1
-> +
-> diff --git a/meta-oe/recipes-multimedia/mplayer/libplacebo_git.bb b/meta-=
-oe/recipes-multimedia/mplayer/libplacebo_git.bb
-> new file mode 100644
-> index 000000000..dd0796782
-> --- /dev/null
-> +++ b/meta-oe/recipes-multimedia/mplayer/libplacebo_git.bb
-> @@ -0,0 +1,28 @@
-> +SUMMARY =3D "The core rendering algorithms and ideas of mpv rewritten as=
- an independent library."
-> +SECTION =3D "multimedia"
-> +HOMEPAGE =3D "https://opensourcelibs.com/lib/libplacebo"
-> +
-> +LICENSE =3D "LGPL-2.1-only"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D435ed639f84d4585d93824e7da3d8=
-5da"
-> +
-> +SRC_URI =3D " \
-> +       git://code.videolan.org/videolan/libplacebo.git;protocol=3Dhttps;=
-branch=3Dv6.338 \
-> +       file://0001-gpu.h-add-stride_w.patch \
-> +       file://0001-frame_queue.h-add-frame_duration.patch \
-> +"
-> +
-> +S =3D "${WORKDIR}/git"
-> +SRCREV =3D "2805a0d01c029084ab36bf5d0e3c8742012a0b27"
-> +PV =3D "6.338.1"
-> +
-> +inherit meson pkgconfig
-> +
-> +PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'vulkan openg=
-l', d)}"
-> +
-> +PACKAGECONFIG[vulkan] =3D  "-Dvulkan=3Denabled,-Dvulkan=3Ddisabled,vulka=
-n-loader vulkan-headers shaderc spirv-shader-generator python3-mako-native =
-python3-jinja2-native glad-native"
-> +PACKAGECONFIG[opengl] =3D "-Dopengl=3Denabled,-Dopengl=3Ddisabled,glad,g=
-lad"
+- switch buildsystem from waf to meson
+- add libplacebo dependency
+- add vulkan support
+- build libmpv (needed eg. for mpvpaper)
 
-glad recipe does not exist in either core or meta-openembedded layers.
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ .../recipes-multimedia/mplayer/mpv_0.35.1.bb  | 116 ------------------
+ .../recipes-multimedia/mplayer/mpv_0.37.0.bb  | 101 +++++++++++++++
+ 2 files changed, 101 insertions(+), 116 deletions(-)
+ delete mode 100644 meta-oe/recipes-multimedia/mplayer/mpv_0.35.1.bb
+ create mode 100644 meta-oe/recipes-multimedia/mplayer/mpv_0.37.0.bb
 
-stdio: ERROR: Nothing PROVIDES 'glad-native' (but
-/home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/recipe=
-s-multimedia/mplayer/libplacebo_git.bb
-DEPENDS on or otherwise requires it). Close matches:
+diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.35.1.bb b/meta-oe/r=
+ecipes-multimedia/mplayer/mpv_0.35.1.bb
+deleted file mode 100644
+index 0f50a6e8f..000000000
+--- a/meta-oe/recipes-multimedia/mplayer/mpv_0.35.1.bb
++++ /dev/null
+@@ -1,116 +0,0 @@
+-SUMMARY =3D "Open Source multimedia player"
+-DESCRIPTION =3D "mpv is a fork of mplayer2 and MPlayer. It shares some f=
+eatures with the former projects while introducing many more."
+-SECTION =3D "multimedia"
+-HOMEPAGE =3D "http://www.mpv.io/"
+-
+-DEPENDS =3D " \
+-    zlib \
+-    ffmpeg \
+-    jpeg \
+-    libv4l \
+-    libass \
+-"
+-
+-LICENSE =3D "GPL-2.0-or-later"
+-LIC_FILES_CHKSUM =3D "file://LICENSE.GPL;md5=3Db234ee4d69f5fce4486a80fda=
+f4a4263"
+-
+-SRCREV_mpv =3D "140ec21c89d671d392877a7f3b91d67e7d7b9239"
+-SRC_URI =3D "git://github.com/mpv-player/mpv;name=3Dmpv;branch=3Drelease=
+/0.35;protocol=3Dhttps \
+-           https://waf.io/waf-2.0.25;name=3Dwaf;subdir=3Dgit \
+-           "
+-SRC_URI[waf.sha256sum] =3D "21199cd220ccf60434133e1fd2ab8c8e5217c3799199=
+c82722543970dc8e38d5"
+-
+-S =3D "${WORKDIR}/git"
+-
+-inherit waf pkgconfig mime-xdg
+-
+-LDFLAGS:append:riscv64 =3D " -latomic"
+-
+-LUA ?=3D "lua"
+-LUA:mips64  =3D ""
+-LUA:powerpc64  =3D ""
+-LUA:powerpc64le  =3D ""
+-LUA:riscv64  =3D ""
+-LUA:riscv32  =3D ""
+-LUA:powerpc  =3D ""
+-
+-# Note: lua is required to get on-screen-display (controls)
+-PACKAGECONFIG ??=3D " \
+-    ${LUA} \
+-    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'wayland egl', ''=
+, d)} \
+-    ${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)} \
+-    ${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)} \
+-"
+-
+-PACKAGECONFIG[x11] =3D "--enable-x11,--disable-x11,virtual/libx11 xsp li=
+bxv libxscrnsaver libxinerama libxpresent libxext"
+-PACKAGECONFIG[xv] =3D "--enable-xv,--disable-xv,libxv"
+-PACKAGECONFIG[opengl] =3D "--enable-gl,--disable-gl,virtual/libgl"
+-PACKAGECONFIG[egl] =3D "--enable-egl,--disable-egl,virtual/egl"
+-PACKAGECONFIG[drm] =3D "--enable-drm,--disable-drm,libdrm"
+-PACKAGECONFIG[gbm] =3D "--enable-gbm,--disable-gbm,virtual/libgbm"
+-PACKAGECONFIG[lua] =3D "--enable-lua,--disable-lua,lua luajit"
+-PACKAGECONFIG[libarchive] =3D "--enable-libarchive,--disable-libarchive,=
+libarchive"
+-PACKAGECONFIG[jack] =3D "--enable-jack, --disable-jack, jack"
+-PACKAGECONFIG[vaapi] =3D "--enable-vaapi,--disable-vaapi,libva"
+-PACKAGECONFIG[vdpau] =3D "--enable-vdpau,--disable-vdpau,libvdpau"
+-PACKAGECONFIG[wayland] =3D "--enable-wayland,--disable-wayland,wayland w=
+ayland-native libxkbcommon"
+-
+-python __anonymous() {
+-    packageconfig =3D (d.getVar("PACKAGECONFIG") or "").split()
+-    extras =3D []
+-    if "x11" in packageconfig and "opengl" in packageconfig:
+-        extras.append(" --enable-gl-x11")
+-    if "x11" in packageconfig and "egl" in packageconfig:
+-        extras.append(" --enable-egl-x11")
+-    if "egl" in packageconfig and "drm" in packageconfig:
+-        extras.append(" --enable-egl-drm")
+-    if "vaapi" in packageconfig and "x11" in packageconfig:
+-        extras.append(" --enable-vaapi-x11")
+-    if "vaapi" in packageconfig and "drm" in packageconfig:
+-        extras.append(" --enable-vaapi-drm")
+-    if "vaapi" in packageconfig and "x11" in packageconfig and "egl" in =
+packageconfig:
+-        extras.append(" --enable-vaapi-x-egl")
+-    if "vdpau" in packageconfig and "opengl" in packageconfig and "x11" =
+in packageconfig:
+-        extras.append(" --enable-vdpau-gl-x11")
+-    if "wayland" in packageconfig and "opengl" in packageconfig:
+-        extras.append(" --enable-gl-wayland")
+-    if "wayland" in packageconfig and "vaapi" in packageconfig:
+-        extras.append(" --enable-vaapi-wayland")
+-    if extras:
+-        d.appendVar("EXTRA_OECONF", "".join(extras))
+-}
+-
+-SIMPLE_TARGET_SYS =3D "${@'${TARGET_SYS}'.replace('${TARGET_VENDOR}', ''=
+)}"
+-
+-EXTRA_OECONF =3D " \
+-    --prefix=3D${prefix} \
+-    --target=3D${SIMPLE_TARGET_SYS} \
+-    --confdir=3D${sysconfdir} \
+-    --datadir=3D${datadir} \
+-    --disable-manpage-build \
+-    --disable-libbluray \
+-    --disable-dvdnav \
+-    --disable-cdda \
+-    --disable-uchardet \
+-    --disable-rubberband \
+-    --disable-lcms2 \
+-    --disable-vapoursynth \
+-    ${PACKAGECONFIG_CONFARGS} \
+-"
+-
+-do_configure:append() {
+-    sed -i -e 's#${WORKDIR}#<WORKDIR>#g' ${B}/config.h
+-}
+-
+-link_waf() {
+-    ln -s waf-2.0.25 ${S}/waf
+-}
+-do_unpack[postfuncs] +=3D "link_waf"
+-
+-FILES:${PN} +=3D " \
+-    ${datadir}/icons \
+-    ${datadir}/zsh \
+-    ${datadir}/bash-completion \
+-    ${datadir}/metainfo \
+-    "
+-EXCLUDE_FROM_WORLD =3D "${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "=
+commercial", "0", "1", d)}"
+diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.37.0.bb b/meta-oe/r=
+ecipes-multimedia/mplayer/mpv_0.37.0.bb
+new file mode 100644
+index 000000000..2d6fb76cb
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.37.0.bb
+@@ -0,0 +1,101 @@
++SUMMARY =3D "Open Source multimedia player"
++DESCRIPTION =3D "mpv is a fork of mplayer2 and MPlayer. It shares some f=
+eatures with the former projects while introducing many more."
++SECTION =3D "multimedia"
++HOMEPAGE =3D "http://www.mpv.io/"
++
++DEPENDS =3D " \
++    alsa-lib \
++    ffmpeg \
++    libdrm \
++    libass \
++    libplacebo \
++"
++
++LICENSE =3D "GPL-2.0-or-later"
++LIC_FILES_CHKSUM =3D "file://LICENSE.GPL;md5=3Db234ee4d69f5fce4486a80fda=
+f4a4263"
++
++SRCREV =3D "818ce7c51a6b9179307950e919983e0909942098"
++SRC_URI =3D "git://github.com/mpv-player/mpv;name=3Dmpv;branch=3Drelease=
+/0.37;protocol=3Dhttps"
++
++S =3D "${WORKDIR}/git"
++
++inherit meson pkgconfig mime-xdg
++
++LDFLAGS:append:riscv64 =3D " -latomic"
++
++LUA ?=3D "lua"
++LUA:mips64  =3D ""
++LUA:powerpc64  =3D ""
++LUA:powerpc64le  =3D ""
++LUA:riscv64  =3D ""
++LUA:riscv32  =3D ""
++LUA:powerpc  =3D ""
++
++# Note: lua is required to get on-screen-display (controls)
++PACKAGECONFIG ??=3D " \
++    ${LUA} \
++    drm \
++    vaapi \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'egl', '', d)} \
++    ${@bb.utils.filter('DISTRO_FEATURES', 'x11 wayland opengl pipewire p=
+ulseaudio vulkan', d)} \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland x11', 'gbm', '', d)=
+} \
++"
++
++PACKAGECONFIG[x11] =3D "-Dx11=3Denabled,-Dx11=3Ddisabled,virtual/libx11 =
+xsp libxv libxscrnsaver libxinerama libxpresent libxext"
++PACKAGECONFIG[xv] =3D "-Dxv=3Denabled,-Dxv=3Ddisabled,libxv"
++PACKAGECONFIG[opengl] =3D "-Dgl=3Denabled,-Dgl=3Ddisabled,virtual/libgl"
++PACKAGECONFIG[egl] =3D "-Degl=3Denabled,-Degl=3Ddisabled,virtual/egl"
++PACKAGECONFIG[drm] =3D "-Ddrm=3Denabled,-Ddrm=3Ddisabled,libdrm"
++PACKAGECONFIG[gbm] =3D "-Dgbm=3Denabled,-Dgbm=3Ddisabled,virtual/libgbm"
++PACKAGECONFIG[lua] =3D "-Dlua=3Denabled,-Dlua=3Ddisabled,luajit"
++PACKAGECONFIG[libarchive] =3D "-Dlibarchive=3Denabled,-Dlibarchive=3Ddis=
+abled,libarchive"
++PACKAGECONFIG[jack] =3D "-Djack=3Denabled, -Djack=3Ddisabled, jack"
++PACKAGECONFIG[vaapi] =3D "-Dvaapi=3Denabled,-Dvaapi=3Ddisabled,libva"
++PACKAGECONFIG[vulkan] =3D "-Dvulkan=3Denabled,-Dvulkan=3Ddisabled,shader=
+c "
++PACKAGECONFIG[vdpau] =3D "-Dvdpau=3Denabled,-Dvdpau=3Ddisabled,libvdpau"
++PACKAGECONFIG[wayland] =3D "-Dwayland=3Denabled,-Dwayland=3Ddisabled,way=
+land wayland-native libxkbcommon"
++PACKAGECONFIG[pipewire] =3D "-Dpipewire=3Denabled,-Dpipewire=3Ddisabled,=
+pipewire"
++PACKAGECONFIG[pulseaudio] =3D "-Dpulse=3Denabled,-Dpulse=3Ddisabled,puls=
+eaudio"
++
++python __anonymous() {
++    packageconfig =3D (d.getVar("PACKAGECONFIG") or "").split()
++    extras =3D []
++    if "x11" in packageconfig and "opengl" in packageconfig:
++        extras.append(" -Dgl-x11=3Denabled")
++    if "x11" in packageconfig and "egl" in packageconfig:
++        extras.append(" -Degl-x11=3Denabled")
++    if "egl" in packageconfig and "drm" in packageconfig:
++        extras.append(" -Degl-drm=3Denabled")
++    if "vaapi" in packageconfig and "x11" in packageconfig:
++        extras.append(" -Dvaapi-x11=3Denabled")
++    if "vaapi" in packageconfig and "drm" in packageconfig:
++        extras.append(" -Dvaapi-drm=3Denabled")
++    if "vdpau" in packageconfig and "opengl" in packageconfig and "x11" =
+in packageconfig:
++        extras.append(" -Dvdpau-gl-x11=3Denabled")
++    if "wayland" in packageconfig and "opengl" in packageconfig:
++        extras.append(" -Dgl-wayland=3Denabled")
++    if "wayland" in packageconfig and "vaapi" in packageconfig:
++        extras.append(" -Dvaapi-wayland=3Denabled")
++}
++
++SIMPLE_TARGET_SYS =3D "${@'${TARGET_SYS}'.replace('${TARGET_VENDOR}', ''=
+)}"
++
++EXTRA_OEMESON =3D " \
++    -Dmanpage-build=3Ddisabled \
++    -Dlibbluray=3Ddisabled \
++    -Dlibmpv=3Dtrue \
++    -Ddvdnav=3Ddisabled \
++    -Dcdda=3Ddisabled \
++    -Duchardet=3Ddisabled \
++    -Drubberband=3Ddisabled \
++    -Dlcms2=3Ddisabled \
++    -Dvapoursynth=3Ddisabled \
++    ${PACKAGECONFIG_CONFARGS} \
++"
++
++do_configure:append() {
++    sed -i -e 's#${WORKDIR}#<WORKDIR>#g' ${B}/config.h
++}
++
++FILES:${PN} +=3D "${datadir}"
++EXCLUDE_FROM_WORLD =3D "${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "=
+commercial", "0", "1", d)}"
+--=20
+2.43.0
 
-
-> +PACKAGECONFIG[lcms] =3D "-Dlcms=3Denabled,-Dlcms=3Ddisabled,lcms"
-> +PACKAGECONFIG[demos] =3D "-Ddemos=3Dtrue,-Ddemos=3Dfalse,ffmpeg libsdl2 =
-libsdl2-image"
-> +
-> +EXTRA_OEMESON =3D "-Dvulkan-registry=3D${STAGING_DATADIR}/vulkan/registr=
-y/vk.xml"
-> +
-> --
-> 2.43.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#108050): https://lists.openembedded.org/g/openembedde=
-d-devel/message/108050
-> Mute This Topic: https://lists.openembedded.org/mt/103548464/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
 
