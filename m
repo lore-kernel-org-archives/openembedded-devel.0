@@ -1,122 +1,119 @@
-Return-Path: <alperyasinak1@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BCBC5C47074
-	for <webhook@archiver.kernel.org>; Sun,  7 Jan 2024 15:31:32 +0000 (UTC)
-Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
- by mx.groups.io with SMTP id smtpd.web10.17130.1704641488527268224
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AE6F7C47073
+	for <webhook@archiver.kernel.org>; Sun,  7 Jan 2024 18:21:23 +0000 (UTC)
+Received: from mail-yw1-f175.google.com (mail-yw1-f175.google.com [209.85.128.175])
+ by mx.groups.io with SMTP id smtpd.web11.20835.1704651681723057916
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 07 Jan 2024 07:31:28 -0800
+ Sun, 07 Jan 2024 10:21:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=TfIy7BTb;
- spf=pass (domain: gmail.com, ip: 209.85.221.52, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-33761e291c1so476490f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Jan 2024 07:31:28 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=XBskmIns;
+ spf=pass (domain: gmail.com, ip: 209.85.128.175, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f175.google.com with SMTP id 00721157ae682-5f0c0ca5ef1so9329007b3.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Jan 2024 10:21:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1704641486; x=1705246286; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=6RhRAIpHrdk41mTifsmpvPmhz5QgZy5hwKEGpPdN99s=;
-        b=TfIy7BTb2dseqrGv0hi+Se8kLSBV76Yx93c+lxV1fZS21e8Z7O1Lk3NRMPprkyRnPx
-         vK0sZHlstYaUlUcGbs4SQ/b/+3RY/qc4CUqJt7r0t/XONdDwAwsiey/VDZINqsr3PEEk
-         qZ3YPCEQCuvtCjg8/62XZ5Aa5b7rMniGxtm+6nx63uxRNnH9Z2fyD6cz8ebNwwtZIsxM
-         SfjlaNfRccOBraBA4C/tkfy2vzyaHpML7J2oL3F9y9lp04KMQv8svc2lnqv5tfVd7pyi
-         KNPkNZXxMkVrf1jPbIYQxtN0ufsjhGfaqWohXH+mKHyO756uy7SE1i7qEDzSsvFerPGi
-         N1dg==
+        d=gmail.com; s=20230601; t=1704651681; x=1705256481; darn=lists.openembedded.org;
+        h=content-transfer-encoding:autocrypt:subject:from:to
+         :content-language:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=QQ5CmRShi9GdGMMtyI79NBuq6/iVFK+32A3jzU43Bwg=;
+        b=XBskmInsxXMRFxLTmH/WmdTVhBbbFmlW82xz1I3MlIuXNh91Qc27FQZb07Vjq9db0F
+         9SWbOBNo0+ReVw2FHP7eAOBacNXF+9wMCuPzxdEycBT3y2BcSksM/dNlq4cBoFGDz1gv
+         6Q4DTox/qZQ6No3m8YVo7wL/6BMcYxYeRO8jyOYfWLPL3m0l9vnUdN1J2hXhpZsnlCOU
+         5wYXY6Th5OmJRs/7Ixy9dipehKJOpakMhSV5Ir+EZD69LTQyp+e7es8tpE5E2Knksfa9
+         uc1It52VSLQAdEsvvjADE1ZIlkXst6kVgIwuSkB1JLRoJ6Z226e6PlOpMsmjrYePr8h1
+         8Xpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704641486; x=1705246286;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=6RhRAIpHrdk41mTifsmpvPmhz5QgZy5hwKEGpPdN99s=;
-        b=vNHmAFG+Jyshw89W7vN4VF/WpDeTf+9gcXVGzZqY3T2DNz7aDzqAz5U0XVYSo4P0od
-         mYY63CuHd5azfknin/tTS5Sxd0YJxATgzKyUPxxn0JZliJ87o/09g1FgKI/F8LwmnW/X
-         N8hqReFEUALe9JX1UH/hPf4DIUdWXenMgse0lxMjhHwlLyVNpGWgRsy8sC5xYyu//wjO
-         adepgyE4beGGkJagBnm4RLdi0qWs5q+p4ydFIrXq0DOvagCRUOq1ZER4oFn4SElQyfr0
-         nTfhQWGfpyKetSiFe3eZuioipaP3/5hz8j9FWoEkTR27p/sAYTp6AwA2vhhKjuszXFHL
-         vUtw==
-X-Gm-Message-State: AOJu0YwrUQT1Al9M39qxoxuxnXuuQX0OWOZ4EIimKsK65WSuNkrkwkBf
-	ohSElDTFfxU+OGphRIDF57+x2JO+R9hzDg==
-X-Google-Smtp-Source: AGHT+IHcSGN8y0TmtOFhPoPvAecCMtcT1+ahKjW9nF2JpRKeE+zpFT0AUx8M476b9iM66fkMrGtfYw==
-X-Received: by 2002:adf:f604:0:b0:336:58e8:d444 with SMTP id t4-20020adff604000000b0033658e8d444mr2434135wrp.30.1704641486140;
-        Sun, 07 Jan 2024 07:31:26 -0800 (PST)
-Received: from localhost.localdomain ([176.33.64.25])
-        by smtp.gmail.com with ESMTPSA id h13-20020a5d6e0d000000b0033677a4e0d6sm5550843wrz.13.2024.01.07.07.31.24
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 07 Jan 2024 07:31:25 -0800 (PST)
-From: alperak <alperyasinak1@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-oe][PATCH] pcsc-lite: upgrade 2.0.0 -> 2.0.1
-Date: Sun,  7 Jan 2024 18:31:20 +0300
-Message-Id: <20240107153120.879670-1-alperyasinak1@gmail.com>
-X-Mailer: git-send-email 2.25.1
+        d=1e100.net; s=20230601; t=1704651681; x=1705256481;
+        h=content-transfer-encoding:autocrypt:subject:from:to
+         :content-language:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=QQ5CmRShi9GdGMMtyI79NBuq6/iVFK+32A3jzU43Bwg=;
+        b=wzUtY0tkKZXzzhrHdT2czOKdOpqd2ZVs1OSZtIJRuPyDS63rmgKFndlqu8rMAiW7er
+         60sHypUbd76Z5Sv9f730Zn+gF04fY7N2+HmufUzmG/3rB4LKnX8+UWRlnR9gXyN5Rku/
+         ZSwld5eNWL7yU7DQYWt712pQrWyBHoK1U55E5OkOY+BQ7yw3JDoGWkDLJDi/4RXHvt1k
+         hPHKf8lfvdkt7n/oOxsS02e0418mXxQhvkErWTO+JljcqBsqDH3vrgUvoNQo/gkAjrpv
+         DI11LqvD56axAE4arZ9iIM4yYynBRcTkYA4UTG1gI7sJ1HyEtRdxWb+CNYq098vTBcFs
+         vnrA==
+X-Gm-Message-State: AOJu0YyO5fnGqSBS8iA1QZ/58C/X9Juki4bha6XeQ631crYzuf8sCoUX
+	nQdd8I/qfXfdryuO3oWo2Bs=
+X-Google-Smtp-Source: AGHT+IEtAmp5OL2Q9jIxNB+1So7+OmXgOSv91Qtjt0lF+tsovzR9L4bIpyBwG1zZxMl9r2KYI3XDJQ==
+X-Received: by 2002:a0d:cc05:0:b0:5d7:1940:dd8d with SMTP id o5-20020a0dcc05000000b005d71940dd8dmr1382074ywd.99.1704651680833;
+        Sun, 07 Jan 2024 10:21:20 -0800 (PST)
+Received: from ?IPV6:2600:1700:9190:ba10::29? ([2600:1700:9190:ba10::29])
+        by smtp.gmail.com with ESMTPSA id a9-20020a81bb49000000b005d6f34893dfsm2460211ywl.135.2024.01.07.10.21.19
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 07 Jan 2024 10:21:20 -0800 (PST)
+Message-ID: <2ff316e5-1456-4b3f-967b-d4e7f63c9096@gmail.com>
+Date: Sun, 7 Jan 2024 13:21:19 -0500
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Khem Raj <raj.khem@gmail.com>,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: akuster808 <akuster808@gmail.com>
+Subject: mickledore merge request: Jan 7th
+Autocrypt: addr=akuster808@gmail.com; keydata=
+ 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
+ ApZ86eOP
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 07 Jan 2024 15:31:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108074
+ <openembedded-devel@lists.openembedded.org>; Sun, 07 Jan 2024 18:21:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108075
 
-Changelog:
+The following changes since commit f29290563cb821fae95340ba959749641c69ed7f:
 
-- SCardConnect(): return SCARD_W_SECURITY_VIOLATION when needed (polkit)
-- SCardCancel(): return SCARD_S_SUCCESS even if the client already finished
-- polkit is enabled by default
-- libpcscspy: fix a crash with NULL pointers
-- Doxygen: fix SCardBeginTransaction() documentation
-- fix pcscd internal thread safety issues (clang -fsanitize=thread)
-- Some other minor improvements
+   python3-django: move to version 4.2.7 (2023-12-04 09:47:03 -0500)
 
-Signed-off-by: alperak <alperyasinak1@gmail.com>
----
- .../pcsc-lite/{pcsc-lite_2.0.0.bb => pcsc-lite_2.0.1.bb}  | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-support/pcsc-lite/{pcsc-lite_2.0.0.bb => pcsc-lite_2.0.1.bb} (88%)
+are available in the Git repository at:
 
-diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.0.0.bb b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.0.1.bb
-similarity index 88%
-rename from meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.0.0.bb
-rename to meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.0.1.bb
-index e7f4551af..0862f955b 100644
---- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.0.0.bb
-+++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.0.1.bb
-@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=628c01ba985ecfa21677f5ee2d5202f6"
- DEPENDS = "autoconf-archive-native flex-native"
- 
- SRC_URI = "https://pcsclite.apdu.fr/files/${BP}.tar.bz2"
--SRC_URI[sha256sum] = "d6c3e2b64510e5ed6fcd3323febf2cc2a8e5fda5a6588c7671f2d77f9f189356"
-+SRC_URI[sha256sum] = "5edcaf5d4544403bdab6ee2b5d6c02c6f97ea64eebf0825b8d0fa61ba417dada"
- 
- inherit autotools systemd pkgconfig perlnative
- 
-@@ -23,11 +23,12 @@ EXTRA_OECONF = " \
- 
- S = "${WORKDIR}/pcsc-lite-${PV}"
- 
--PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} udev"
-+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd polkit', d)} udev"
- PACKAGECONFIG:class-native ??= ""
- 
- PACKAGECONFIG[systemd]  = ",--disable-libsystemd,systemd,"
- PACKAGECONFIG[udev] = "--enable-libudev,--disable-libudev,udev"
-+PACKAGECONFIG[polkit] = ",--disable-polkit,polkit"
- 
- PACKAGES = "${PN} ${PN}-dbg ${PN}-dev ${PN}-lib ${PN}-doc ${PN}-spy ${PN}-spy-dev"
- 
-@@ -35,7 +36,8 @@ RRECOMMENDS:${PN} = "ccid"
- RRECOMMENDS:${PN}:class-native = ""
- RPROVIDES:${PN}:class-native += "pcsc-lite-lib-native"
- 
--FILES:${PN} = "${sbindir}/pcscd"
-+FILES:${PN} = "${sbindir}/pcscd \
-+               ${datadir}/polkit-1"
- FILES:${PN}-lib = "${libdir}/libpcsclite*${SOLIBS}"
- FILES:${PN}-dev = "${includedir} \
-                    ${libdir}/pkgconfig \
--- 
-2.25.1
+   https://git.openembedded.org/meta-openembedded mickledore-next
+
+for you to fetch changes up to 8e1f0fa6bfac0e96fedc666fe9066f92c85afb27:
+
+   nginx: fix CVE-2023-44487 (2024-01-07 13:15:11 -0500)
+
+----------------------------------------------------------------
+Alexandre Belloni (1):
+       poco: fix branch
+
+Meenali Gupta (1):
+       nginx: fix CVE-2023-44487
 
 
