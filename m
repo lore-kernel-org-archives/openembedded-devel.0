@@ -1,171 +1,122 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 39427C47074
-	for <webhook@archiver.kernel.org>; Sun,  7 Jan 2024 13:25:42 +0000 (UTC)
-Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
- by mx.groups.io with SMTP id smtpd.web10.14866.1704633937278988479
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BCBC5C47074
+	for <webhook@archiver.kernel.org>; Sun,  7 Jan 2024 15:31:32 +0000 (UTC)
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
+ by mx.groups.io with SMTP id smtpd.web10.17130.1704641488527268224
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 07 Jan 2024 05:25:37 -0800
+ Sun, 07 Jan 2024 07:31:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
-Received: from fwd71.aul.t-online.de (fwd71.aul.t-online.de [10.223.144.97])
-	by mailout05.t-online.de (Postfix) with SMTP id 6C62EA9CE
-	for <openembedded-devel@lists.openembedded.org>; Sun,  7 Jan 2024 14:25:35 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.163.46.223]) by fwd71.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1rMT9i-2dNWbJ0; Sun, 7 Jan 2024 14:25:34 +0100
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=TfIy7BTb;
+ spf=pass (domain: gmail.com, ip: 209.85.221.52, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-33761e291c1so476490f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Jan 2024 07:31:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1704641486; x=1705246286; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=6RhRAIpHrdk41mTifsmpvPmhz5QgZy5hwKEGpPdN99s=;
+        b=TfIy7BTb2dseqrGv0hi+Se8kLSBV76Yx93c+lxV1fZS21e8Z7O1Lk3NRMPprkyRnPx
+         vK0sZHlstYaUlUcGbs4SQ/b/+3RY/qc4CUqJt7r0t/XONdDwAwsiey/VDZINqsr3PEEk
+         qZ3YPCEQCuvtCjg8/62XZ5Aa5b7rMniGxtm+6nx63uxRNnH9Z2fyD6cz8ebNwwtZIsxM
+         SfjlaNfRccOBraBA4C/tkfy2vzyaHpML7J2oL3F9y9lp04KMQv8svc2lnqv5tfVd7pyi
+         KNPkNZXxMkVrf1jPbIYQxtN0ufsjhGfaqWohXH+mKHyO756uy7SE1i7qEDzSsvFerPGi
+         N1dg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1704641486; x=1705246286;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=6RhRAIpHrdk41mTifsmpvPmhz5QgZy5hwKEGpPdN99s=;
+        b=vNHmAFG+Jyshw89W7vN4VF/WpDeTf+9gcXVGzZqY3T2DNz7aDzqAz5U0XVYSo4P0od
+         mYY63CuHd5azfknin/tTS5Sxd0YJxATgzKyUPxxn0JZliJ87o/09g1FgKI/F8LwmnW/X
+         N8hqReFEUALe9JX1UH/hPf4DIUdWXenMgse0lxMjhHwlLyVNpGWgRsy8sC5xYyu//wjO
+         adepgyE4beGGkJagBnm4RLdi0qWs5q+p4ydFIrXq0DOvagCRUOq1ZER4oFn4SElQyfr0
+         nTfhQWGfpyKetSiFe3eZuioipaP3/5hz8j9FWoEkTR27p/sAYTp6AwA2vhhKjuszXFHL
+         vUtw==
+X-Gm-Message-State: AOJu0YwrUQT1Al9M39qxoxuxnXuuQX0OWOZ4EIimKsK65WSuNkrkwkBf
+	ohSElDTFfxU+OGphRIDF57+x2JO+R9hzDg==
+X-Google-Smtp-Source: AGHT+IHcSGN8y0TmtOFhPoPvAecCMtcT1+ahKjW9nF2JpRKeE+zpFT0AUx8M476b9iM66fkMrGtfYw==
+X-Received: by 2002:adf:f604:0:b0:336:58e8:d444 with SMTP id t4-20020adff604000000b0033658e8d444mr2434135wrp.30.1704641486140;
+        Sun, 07 Jan 2024 07:31:26 -0800 (PST)
+Received: from localhost.localdomain ([176.33.64.25])
+        by smtp.gmail.com with ESMTPSA id h13-20020a5d6e0d000000b0033677a4e0d6sm5550843wrz.13.2024.01.07.07.31.24
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 07 Jan 2024 07:31:25 -0800 (PST)
+From: alperak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCHv3] gnome-terminal: fix search_provider build
-Date: Sun,  7 Jan 2024 14:25:25 +0100
-Message-ID: <20240107132525.66160-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.43.0
+Cc: alperak <alperyasinak1@gmail.com>
+Subject: [meta-oe][PATCH] pcsc-lite: upgrade 2.0.0 -> 2.0.1
+Date: Sun,  7 Jan 2024 18:31:20 +0300
+Message-Id: <20240107153120.879670-1-alperyasinak1@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1704633934-E626F957-89E2A9AB/0/0 CLEAN NORMAL
-X-TOI-MSGID: fa974939-0272-4cda-b22b-4672a6b6de64
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 07 Jan 2024 13:25:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108073
+ <openembedded-devel@lists.openembedded.org>; Sun, 07 Jan 2024 15:31:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108074
 
-currently org.gnome.ShellSearchProvider2.xml is read from host machine an=
-d
-thus gnome-terminal with search_provider enabled can only be build from a=
- host
-system that has gnome-shell installed.
+Changelog:
 
-Add an option and set it to STAGING_DATADIR to avoid:
+- SCardConnect(): return SCARD_W_SECURITY_VIOLATION when needed (polkit)
+- SCardCancel(): return SCARD_S_SUCCESS even if the client already finished
+- polkit is enabled by default
+- libpcscspy: fix a crash with NULL pointers
+- Doxygen: fix SCardBeginTransaction() documentation
+- fix pcscd internal thread safety issues (clang -fsanitize=thread)
+- Some other minor improvements
 
-| DEBUG: Executing shell function do_compile
-| ninja: error: '/usr/share/dbus-1/interfaces/org.gnome.ShellSearchProvid=
-er2.xml', needed by 'src/terminal-search-provider-gdbus-generated.c', mis=
-sing and no known rule to make it
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: alperak <alperyasinak1@gmail.com>
 ---
- ...-add-option-to-set-dbus_interfacedir.patch | 63 +++++++++++++++++++
- .../gnome-terminal/gnome-terminal_3.50.1.bb   | 10 +--
- 2 files changed, 69 insertions(+), 4 deletions(-)
- create mode 100644 meta-gnome/recipes-gnome/gnome-terminal/gnome-termina=
-l/0001-meson-add-option-to-set-dbus_interfacedir.patch
+ .../pcsc-lite/{pcsc-lite_2.0.0.bb => pcsc-lite_2.0.1.bb}  | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-support/pcsc-lite/{pcsc-lite_2.0.0.bb => pcsc-lite_2.0.1.bb} (88%)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal/0001-=
-meson-add-option-to-set-dbus_interfacedir.patch b/meta-gnome/recipes-gnom=
-e/gnome-terminal/gnome-terminal/0001-meson-add-option-to-set-dbus_interfa=
-cedir.patch
-new file mode 100644
-index 000000000..9f8475bdd
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal/0001-meson-a=
-dd-option-to-set-dbus_interfacedir.patch
-@@ -0,0 +1,63 @@
-+From 61668e1eb86a316d4ad9a6b9cacf8c8cc74a0c33 Mon Sep 17 00:00:00 2001
-+From: Markus Volk <f_l_k@t-online.de>
-+Date: Sun, 7 Jan 2024 10:40:31 +0100
-+Subject: [PATCH] meson: add an option to set dbus_interface_dir
-+
-+Add an option that allows to set the dbus_interface_dir path manually.
-+This will help to cross-compile gnome-terminal on host systems that
-+don't have gnome-shell installed.
-+
-+Upstream-Status: Submitted [https://gitlab.gnome.org/GNOME/gnome-termina=
-l/-/issues/8046]
-+
-+Signed-off-by: Markus Volk <f_l_k@t-online.de>
-+---
-+ meson_options.txt | 7 +++++++
-+ src/meson.build   | 7 ++++++-
-+ 2 files changed, 13 insertions(+), 1 deletion(-)
-+
-+diff --git a/meson_options.txt b/meson_options.txt
-+index b555ab66..8fece058 100644
-+--- a/meson_options.txt
-++++ b/meson_options.txt
-+@@ -13,6 +13,13 @@
-+ # You should have received a copy of the GNU General Public License
-+ # along with this programme.  If not, see <https://www.gnu.org/licenses=
-/>.
-+=20
-++option(
-++  'dbus_interface_dir',
-++  type: 'string',
-++  value: '',
-++  description: 'directory for D-Bus session interface files [$datadir/d=
-bus-1/interfaces]',
-++)
-++
-+ option(
-+   'dbg',
-+   type: 'boolean',
-+diff --git a/src/meson.build b/src/meson.build
-+index 27ecd893..420ad45c 100644
-+--- a/src/meson.build
-++++ b/src/meson.build
-+@@ -185,6 +185,11 @@ server_sources =3D app_sources + client_util_source=
-s + debug_sources + dbus_source
-+=20
-+ if get_option('search_provider')
-+=20
-++  dbus_interface_dir =3D get_option('dbus_interface_dir')
-++  if dbus_interface_dir =3D=3D ''
-++    dbus_interface_dir =3D gt_prefix / gt_dbusinterfacedir
-++  endif
-++
-+   server_sources +=3D files(
-+     'terminal-search-provider.cc',
-+     'terminal-search-provider.hh',
-+@@ -192,7 +197,7 @@ if get_option('search_provider')
-+=20
-+   server_sources +=3D gnome.gdbus_codegen(
-+     'terminal-search-provider-gdbus-generated',
-+-    gt_prefix / gt_dbusinterfacedir / 'org.gnome.ShellSearchProvider2.x=
-ml',
-++    dbus_interface_dir / 'org.gnome.ShellSearchProvider2.xml',
-+     autocleanup: 'none',
-+     install_header: false,
-+     interface_prefix: 'org.gnome.Shell',
-+--=20
-+2.43.0
-+
-diff --git a/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.50.=
-1.bb b/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.50.1.bb
-index 8616f2c9b..53f11e95f 100644
---- a/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.50.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.50.1.bb
-@@ -19,15 +19,17 @@ DEPENDS =3D " \
-     libpcre2 \
- "
-=20
--SRC_URI =3D "git://gitlab.gnome.org/GNOME/gnome-terminal.git;protocol=3D=
-https;nobranch=3D1 \
--           file://0001-Add-W_EXITCODE-macro-for-non-glibc-systems.patch =
-\
--           "
-+SRC_URI =3D " \
-+	git://gitlab.gnome.org/GNOME/gnome-terminal.git;protocol=3Dhttps;nobran=
-ch=3D1 \
-+	file://0001-Add-W_EXITCODE-macro-for-non-glibc-systems.patch \
-+	file://0001-meson-add-option-to-set-dbus_interfacedir.patch \
-+"
- SRCREV =3D "5ac3b8e4bd6fa02651b3c23cedb0a7e1cd769655"
- S =3D "${WORKDIR}/git"
-=20
- PACKAGECONFIG ?=3D ""
- PACKAGECONFIG[nautilus] =3D "-Dnautilus_extension=3Dtrue,-Dnautilus_exte=
-nsion=3Dfalse,nautilus,nautilus"
--PACKAGECONFIG[search_provider] =3D "-Dsearch_provider=3Dtrue,-Dsearch_pr=
-ovider=3Dfalse,,gnome-shell"
-+PACKAGECONFIG[search_provider] =3D "-Dsearch_provider=3Dtrue -Ddbus_inte=
-rface_dir=3D${STAGING_DATADIR}/dbus-1/interfaces,-Dsearch_provider=3Dfals=
-e,gnome-shell"
-=20
- FILES:${PN} +=3D " \
-     ${datadir} \
---=20
-2.43.0
+diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.0.0.bb b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.0.1.bb
+similarity index 88%
+rename from meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.0.0.bb
+rename to meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.0.1.bb
+index e7f4551af..0862f955b 100644
+--- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.0.0.bb
++++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_2.0.1.bb
+@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=628c01ba985ecfa21677f5ee2d5202f6"
+ DEPENDS = "autoconf-archive-native flex-native"
+ 
+ SRC_URI = "https://pcsclite.apdu.fr/files/${BP}.tar.bz2"
+-SRC_URI[sha256sum] = "d6c3e2b64510e5ed6fcd3323febf2cc2a8e5fda5a6588c7671f2d77f9f189356"
++SRC_URI[sha256sum] = "5edcaf5d4544403bdab6ee2b5d6c02c6f97ea64eebf0825b8d0fa61ba417dada"
+ 
+ inherit autotools systemd pkgconfig perlnative
+ 
+@@ -23,11 +23,12 @@ EXTRA_OECONF = " \
+ 
+ S = "${WORKDIR}/pcsc-lite-${PV}"
+ 
+-PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} udev"
++PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd polkit', d)} udev"
+ PACKAGECONFIG:class-native ??= ""
+ 
+ PACKAGECONFIG[systemd]  = ",--disable-libsystemd,systemd,"
+ PACKAGECONFIG[udev] = "--enable-libudev,--disable-libudev,udev"
++PACKAGECONFIG[polkit] = ",--disable-polkit,polkit"
+ 
+ PACKAGES = "${PN} ${PN}-dbg ${PN}-dev ${PN}-lib ${PN}-doc ${PN}-spy ${PN}-spy-dev"
+ 
+@@ -35,7 +36,8 @@ RRECOMMENDS:${PN} = "ccid"
+ RRECOMMENDS:${PN}:class-native = ""
+ RPROVIDES:${PN}:class-native += "pcsc-lite-lib-native"
+ 
+-FILES:${PN} = "${sbindir}/pcscd"
++FILES:${PN} = "${sbindir}/pcscd \
++               ${datadir}/polkit-1"
+ FILES:${PN}-lib = "${libdir}/libpcsclite*${SOLIBS}"
+ FILES:${PN}-dev = "${includedir} \
+                    ${libdir}/pkgconfig \
+-- 
+2.25.1
 
 
