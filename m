@@ -1,151 +1,99 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8DBA8C46CD2
-	for <webhook@archiver.kernel.org>; Sat,  6 Jan 2024 22:33:27 +0000 (UTC)
-Received: from mailout08.t-online.de (mailout08.t-online.de [194.25.134.20])
- by mx.groups.io with SMTP id smtpd.web10.4577.1704580404407487470
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7FE60C47077
+	for <webhook@archiver.kernel.org>; Sun,  7 Jan 2024 05:09:39 +0000 (UTC)
+Received: from mail-io1-f54.google.com (mail-io1-f54.google.com [209.85.166.54])
+ by mx.groups.io with SMTP id smtpd.web11.10337.1704604178470892283
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 06 Jan 2024 14:33:24 -0800
+ Sat, 06 Jan 2024 21:09:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.20, mailfrom: f_l_k@t-online.de)
-Received: from fwd70.aul.t-online.de (fwd70.aul.t-online.de [10.223.144.96])
-	by mailout08.t-online.de (Postfix) with SMTP id E2C5A2AD66
-	for <openembedded-devel@lists.openembedded.org>; Sat,  6 Jan 2024 23:33:10 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.154.174.51]) by fwd70.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1rMFE6-0LzdWz0; Sat, 6 Jan 2024 23:33:10 +0100
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=m/NLy1Ff;
+ spf=pass (domain: gmail.com, ip: 209.85.166.54, mailfrom: raj.khem@gmail.com)
+Received: by mail-io1-f54.google.com with SMTP id ca18e2360f4ac-7bc32b04dc9so35591539f.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 06 Jan 2024 21:09:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1704604177; x=1705208977; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=K64ameQxCvuDBi9OIhhrldyTPteqJQhcKZfSbhcdbRw=;
+        b=m/NLy1FfMrbFDyd9gQaxJEiTDZUA+j49CeM2wnWUaJeDYcc6Jgq+QYf5qCqLm6hy5q
+         eW0rNIKh2Yx7BpCrP6STBGwWaH8pT8/uRSLW9q9BknlWJCecF99u8IQLpMvWjP+zpkqw
+         f1P14zoKpciKpAenhYUNRUEvgSKPraYnacCvhHqUYWTuhOFxR3Ch1It6QwHJ+bJKh9ZO
+         7k4vvPcyf7bDA5aQV4zpbnaVS51Qxi7QsIuCFbq/29+kW5noBuG05fVpAZ9TN75H4ZXJ
+         vvOcnpI0Y+7ty3fGGN7bYmuX/Shu9yWZD/x6d0GYFQk9iLh81xF9h4SODNoIvOzmhWiS
+         SsPA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1704604177; x=1705208977;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=K64ameQxCvuDBi9OIhhrldyTPteqJQhcKZfSbhcdbRw=;
+        b=ATgW6SRHbseNjXImSOnpyhZqxHBNymDyUA5GUTICpw0UlC959ycOMjmLWYbNtLTQAh
+         +80gLppYg+dorweTkc4IHu5dAq/z0JFQey9rr60Kv6rInW1xzB4BM6iACLOhOF9DhqEW
+         XHsls8BUYnN82kXKK3xZLtWzUsU3En9aKDTVDUVRyTH2eM17+OsefOQHUI2tnoEMxZ8j
+         ocofKXe0ivYzDnB7BUkTwF5P7pbjbpfDMdyzTosPebdN44K7qzuYHeoH/yONdv18HDSS
+         L2k9AyfzXijLmESscsqA0RoafK8x2jIMpnQ26x6rQYnAyRO9SGihc+LAMVTUU6k3kU4a
+         3jeg==
+X-Gm-Message-State: AOJu0YyXhHR8auVobghvNNBWGvdd95MW8Oj1IsIkCHMv68NdmQYdg/Bi
+	HvU/nx0iKnxAjRRDYmlY88EUKCC7Png=
+X-Google-Smtp-Source: AGHT+IEv9FE0tU1VLXkSMFU7DSORMXlK8oZY95RlWcR/oaOaGK2uKpvRFpypzTRWgsTOywuPSdXgcw==
+X-Received: by 2002:a6b:7404:0:b0:7bb:af7d:6264 with SMTP id s4-20020a6b7404000000b007bbaf7d6264mr2254053iog.28.1704604177335;
+        Sat, 06 Jan 2024 21:09:37 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::4b6f])
+        by smtp.gmail.com with ESMTPSA id y127-20020a636485000000b005b529d633b7sm3729184pgb.14.2024.01.06.21.09.36
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 06 Jan 2024 21:09:36 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH] gnome-terminal: fix search_provider build
-Date: Sat,  6 Jan 2024 23:33:05 +0100
-Message-ID: <20240106223305.337182-1-f_l_k@t-online.de>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH] python3-pydantic-core: Rename the cpython module on musl
+Date: Sat,  6 Jan 2024 21:09:34 -0800
+Message-ID: <20240107050934.2399534-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1704580390-31FF8937-B784D1F9/0/0 CLEAN NORMAL
-X-TOI-MSGID: 5cdb582d-3c44-4e4a-8f78-4d7226347791
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 06 Jan 2024 22:33:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108066
+ <openembedded-devel@lists.openembedded.org>; Sun, 07 Jan 2024 05:09:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108067
 
-currently org.gnome.ShellSearchProvider2.xml is read from host machine an=
-d
-thus gnome-terminal with search_provider enabled can only be build from a=
- host
-system that has gnome-shell installed.
+wheel contains site-package .so named linux-musl which is not loadable
+on musl systems, rename it to linux-gnu even on musl like other python
+dynamic modules.
 
-Add an option and set it to STAGING_DATADIR to avoid:
+This fixed ptest runs for both pydantic-core and pydantic recipes
 
-| DEBUG: Executing shell function do_compile
-| ninja: error: '/usr/share/dbus-1/interfaces/org.gnome.ShellSearchProvid=
-er2.xml', needed by 'src/terminal-search-provider-gdbus-generated.c', mis=
-sing and no known rule to make it
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...-add-option-to-set-dbus_interfacedir.patch | 45 +++++++++++++++++++
- .../gnome-terminal/gnome-terminal_3.50.1.bb   | 10 +++--
- 2 files changed, 51 insertions(+), 4 deletions(-)
- create mode 100644 meta-gnome/recipes-gnome/gnome-terminal/gnome-termina=
-l/0001-meson-add-option-to-set-dbus_interfacedir.patch
+ .../python/python3-pydantic-core_2.14.6.bb            | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal/0001-=
-meson-add-option-to-set-dbus_interfacedir.patch b/meta-gnome/recipes-gnom=
-e/gnome-terminal/gnome-terminal/0001-meson-add-option-to-set-dbus_interfa=
-cedir.patch
-new file mode 100644
-index 000000000..86f6d6f01
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal/0001-meson-a=
-dd-option-to-set-dbus_interfacedir.patch
-@@ -0,0 +1,45 @@
-+From 0ca761ee244a649c7420f15407439928addf6737 Mon Sep 17 00:00:00 2001
-+From: Markus Volk <f_l_k@t-online.de>
-+Date: Sat, 6 Jan 2024 23:05:25 +0100
-+Subject: [PATCH] meson: add option to set dbus_interfacedir
-+
-+Signed-off-by: Markus Volk <f_l_k@t-online.de>
-+---
-+ meson_options.txt | 7 +++++++
-+ src/meson.build   | 2 +-
-+ 2 files changed, 8 insertions(+), 1 deletion(-)
-+
-+diff --git a/meson_options.txt b/meson_options.txt
-+index b555ab663..aea66a3dd 100644
-+--- a/meson_options.txt
-++++ b/meson_options.txt
-+@@ -13,6 +13,13 @@
-+ # You should have received a copy of the GNU General Public License
-+ # along with this programme.  If not, see <https://www.gnu.org/licenses=
-/>.
-+=20
-++option(
-++  'dbus_interfacedir',
-++  type: 'string',
-++  value: '',
-++  description: 'Set searchprovider interface dir',
-++)
-++
-+ option(
-+   'dbg',
-+   type: 'boolean',
-+diff --git a/src/meson.build b/src/meson.build
-+index 86e287403..cb707a85d 100644
-+--- a/src/meson.build
-++++ b/src/meson.build
-+@@ -231,7 +231,7 @@ if get_option('search_provider')
-+=20
-+   server_sources +=3D gnome.gdbus_codegen(
-+     'terminal-search-provider-gdbus-generated',
-+-    gt_prefix / gt_dbusinterfacedir / 'org.gnome.ShellSearchProvider2.x=
-ml',
-++    get_option('dbus_interfacedir') / 'org.gnome.ShellSearchProvider2.x=
-ml',
-+     autocleanup: 'none',
-+     install_header: false,
-+     interface_prefix: 'org.gnome.Shell',
-+--=20
-+2.43.0
-+
-diff --git a/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.50.=
-1.bb b/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.50.1.bb
-index 8616f2c9b..6fd816c8c 100644
---- a/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.50.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.50.1.bb
-@@ -19,15 +19,17 @@ DEPENDS =3D " \
-     libpcre2 \
+diff --git a/meta-python/recipes-devtools/python/python3-pydantic-core_2.14.6.bb b/meta-python/recipes-devtools/python/python3-pydantic-core_2.14.6.bb
+index 601ba25b60..e58ee7fd66 100644
+--- a/meta-python/recipes-devtools/python/python3-pydantic-core_2.14.6.bb
++++ b/meta-python/recipes-devtools/python/python3-pydantic-core_2.14.6.bb
+@@ -34,6 +34,17 @@ RDEPENDS:${PN}-ptest += "\
+     python3-unittest-automake-output \
  "
-=20
--SRC_URI =3D "git://gitlab.gnome.org/GNOME/gnome-terminal.git;protocol=3D=
-https;nobranch=3D1 \
--           file://0001-Add-W_EXITCODE-macro-for-non-glibc-systems.patch =
-\
--           "
-+SRC_URI =3D " \
-+	git://gitlab.gnome.org/GNOME/gnome-terminal.git;protocol=3Dhttps;nobran=
-ch=3D1 \
-+	file://0001-Add-W_EXITCODE-macro-for-non-glibc-systems.patch \
-+	file://0001-meson-add-option-to-set-dbus_interfacedir.patch \
-+"
- SRCREV =3D "5ac3b8e4bd6fa02651b3c23cedb0a7e1cd769655"
- S =3D "${WORKDIR}/git"
-=20
- PACKAGECONFIG ?=3D ""
- PACKAGECONFIG[nautilus] =3D "-Dnautilus_extension=3Dtrue,-Dnautilus_exte=
-nsion=3Dfalse,nautilus,nautilus"
--PACKAGECONFIG[search_provider] =3D "-Dsearch_provider=3Dtrue,-Dsearch_pr=
-ovider=3Dfalse,,gnome-shell"
-+PACKAGECONFIG[search_provider] =3D "-Dsearch_provider=3Dtrue -Ddbus_inte=
-rfacedir=3D${STAGING_DATADIR}/dbus-1/interfaces,-Dsearch_provider=3Dfalse=
-,gnome-shell"
-=20
- FILES:${PN} +=3D " \
-     ${datadir} \
---=20
+ 
++do_install:append() {
++    for f in ${D}/${libdir}/${PYTHON_DIR}/site-packages/pydantic_core/_pydantic_core.*.so
++    do
++        fname=`basename $f`
++        lname=`echo $fname | sed 's/musl/gnu/'`
++        if [ "$fname" != "$lname" ]; then
++            mv $f ${D}/${libdir}/${PYTHON_DIR}/site-packages/pydantic_core/$lname
++        fi
++    done
++}
++
+ do_install_ptest() {
+     cp -rf ${S}/tests/ ${D}${PTEST_PATH}/
+     rm -rf ${D}${PTEST_PATH}/tests/benchmarks
+-- 
 2.43.0
 
 
