@@ -1,144 +1,127 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <vkumbhar@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 23099C3DA6E
-	for <webhook@archiver.kernel.org>; Mon,  8 Jan 2024 10:18:14 +0000 (UTC)
-Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
- by mx.groups.io with SMTP id smtpd.web11.3742.1704709092309371866
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 27798C3DA6E
+	for <webhook@archiver.kernel.org>; Mon,  8 Jan 2024 13:07:35 +0000 (UTC)
+Received: from mail-il1-f177.google.com (mail-il1-f177.google.com [209.85.166.177])
+ by mx.groups.io with SMTP id smtpd.web11.6004.1704719250085273713
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Jan 2024 02:18:12 -0800
+ Mon, 08 Jan 2024 05:07:30 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=q2tRCgLK;
- spf=pass (domain: konsulko.com, ip: 209.85.208.51, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-5572a9b3420so4460925a12.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 08 Jan 2024 02:18:12 -0800 (PST)
+ dkim=pass header.i=@mvista.com header.s=google header.b=Rb44Clem;
+ spf=pass (domain: mvista.com, ip: 209.85.166.177, mailfrom: vkumbhar@mvista.com)
+Received: by mail-il1-f177.google.com with SMTP id e9e14a558f8ab-3606f57e08aso9394655ab.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 08 Jan 2024 05:07:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1704709090; x=1705313890; darn=lists.openembedded.org;
+        d=mvista.com; s=google; t=1704719248; x=1705324048; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=JqaZ/gIXfvrRqFREVfXhTh3fWlQNq/2fy31AjQwJr8c=;
-        b=q2tRCgLKeB7z1TMue5AJswmZpz3GznbugF+UHgqgMEmQ4JbWOdG592t0RgBlZM0/4O
-         bBPIF6NpzZ45ZEclHsWAJ7yOaazoBGkbDqnREB9sDGV5S38tI5r9PKLLn1gIxz9dtPSD
-         SJZhN9q8lsPsmWouCV82IRvjyruL/YIgFHnv8=
+        bh=shyTaD5VKOcq/B0gQIpzHnWenp9WhxN4fqsSe07mEGw=;
+        b=Rb44Clem1AQw4dhF4q+kdjnr8v4LTFHykMph26hNy4+oqOFn1p4jXC0cwx/50oDP51
+         LrwOnX+YCYy5ZhKfgTxVk4nyPXYkCj+ZDkZQd69Hj3ZByzC1a/Wj6Q6wwF+lAkxJB8MY
+         kb4oT4ghknAJkPXQzy49tMkSNUs2QTTeyOjjc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704709090; x=1705313890;
+        d=1e100.net; s=20230601; t=1704719248; x=1705324048;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=JqaZ/gIXfvrRqFREVfXhTh3fWlQNq/2fy31AjQwJr8c=;
-        b=GF0euENVSP3iDyHTDdfb6nH/mJB1zVz2W4LIrHQXD4nOeenmrAczstPRSZbghdku5S
-         il0922Zt0B6PZwwuPcbYIl940hs+kN2plTFtsuFlv5kMfWPV7AyPlghfRBfnqBCDTzY8
-         NF0GcRUgSA1CCEJ1MEgFunkwH2hDPt3mLQybHq2U5TSwKHNCLDMbiVMgCz7kN0vGv0h8
-         56RPMDBImXwIT9yZVkiklhpX6RNkkeryNbFWr7fOdDmGe8F7e+9qaZdjbyMDF1CXaVDg
-         BF8w2lzNdiWHq+FYP2SvWdlv6WE3MkmrO9LDmmcRf+H/eGe95M+Lonm8fBy39aw2CHJO
-         7yUw==
-X-Gm-Message-State: AOJu0YxhNirxt3tbQULpU2YrJSB1I/0ywlexsp90Wzk5w19904PG6QMO
-	2PhZQTTf9Yt3fW/nGLFjCxUaQXi03A9Jl6vOWIa7ljgWE/0=
-X-Google-Smtp-Source: AGHT+IF3JR99dwEeEeWrHP0ByW4BdD/TX7LbmbAK8Fx/D9MkVAVogztlBoCzpuwtkkohOC57lyNY9w==
-X-Received: by 2002:a17:906:30c5:b0:a23:1b07:5c1b with SMTP id b5-20020a17090630c500b00a231b075c1bmr3393984ejb.10.1704709090277;
-        Mon, 08 Jan 2024 02:18:10 -0800 (PST)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id n15-20020a170906688f00b00a281f88f2ebsm3774737ejr.38.2024.01.08.02.18.09
+        bh=shyTaD5VKOcq/B0gQIpzHnWenp9WhxN4fqsSe07mEGw=;
+        b=rgl5+8ihtv9xIY0RfKg8hHDYMZwS6+riYzzy3aMfKNUkOULCyMoxhBZEqgOQlDoZ/Z
+         crWYhRTQCn/qZLTROu+hTO/Fjo+jFIkAGXIumbh4UVpdgcoyqZ/lSTyIaR8GKpltUpHb
+         bqow9Af+948R7MyUJ+PfEcQCKE7TZgRrTJWGLHRLPNng9FcO825lEBRbjVPM+Nb7yEyJ
+         9zeirviiZAgVsdJ6plHNj7GE+JClfRlPehx20JLUTNFVZejRcZyX6niUFjKyB4QIPy0c
+         GgkQf+QQl+a4NlxctwIRMDnGkhFhScx5f4DGrzu4mkx5CSGLW3Y73tZAPvD7GEN2XDmI
+         /1tQ==
+X-Gm-Message-State: AOJu0YxsUW1EA7XDg+w9w3GeIYDDmsPZoqJWfz/G99FTJLnd9gHQNCbW
+	l4t4FvDYulKWcGWWh0xAsuKiw/1mlY9CU51FwW8Pr/Wf2yU=
+X-Google-Smtp-Source: AGHT+IGCouA231EvnlanucJoCx2EpqULpDz8EABwTvyGGAtWP+qej+gq7ujSJcFJvzbtUOSX2xhFUQ==
+X-Received: by 2002:a05:6e02:19c5:b0:35f:d1ed:d189 with SMTP id r5-20020a056e0219c500b0035fd1edd189mr4952444ill.58.1704719248301;
+        Mon, 08 Jan 2024 05:07:28 -0800 (PST)
+Received: from localhost.localdomain ([116.75.166.129])
+        by smtp.gmail.com with ESMTPSA id m2-20020a632602000000b005cd86cd9055sm6039766pgm.1.2024.01.08.05.07.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 08 Jan 2024 02:18:09 -0800 (PST)
-From: Leon Anavi <leon.anavi@konsulko.com>
+        Mon, 08 Jan 2024 05:07:27 -0800 (PST)
+From: Vivek Kumbhar <vkumbhar@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-oe][PATCH] ssd1306: Update and remove patch
-Date: Mon,  8 Jan 2024 12:18:07 +0200
-Message-Id: <20240108101807.2132710-1-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.39.2
+Cc: Vivek Kumbhar <vkumbhar@mvista.com>
+Subject: [meta-oe][kirkstone][PATCH] squid: Backport fix for CVE-2023-49285
+Date: Mon,  8 Jan 2024 18:37:13 +0530
+Message-Id: <20240108130713.1551982-1-vkumbhar@mvista.com>
+X-Mailer: git-send-email 2.39.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 08 Jan 2024 10:18:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108128
+ <openembedded-devel@lists.openembedded.org>; Mon, 08 Jan 2024 13:07:35 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108129
 
-Update ssd1306_linux, OLED SSD1306 Linux user space driver, to the
-latest version and remove a patch that has been merged in upstream
-of the project in GitHub.
+Upstream-Status: Backport [https://github.com/squid-cache/squid/commit/77b3fb4df0f126784d5fd4967c28ed40eb8d521b]
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Vivek Kumbhar <vkumbhar@mvista.com>
 ---
- .../ssd1306/0001-Use-include-filename.patch   | 49 -------------------
- .../recipes-devtools/ssd1306/ssd1306_git.bb   |  3 +-
- 2 files changed, 1 insertion(+), 51 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/ssd1306/ssd1306/0001-Use-include-filename.patch
+ .../squid/files/CVE-2023-49285.patch          | 37 +++++++++++++++++++
+ .../recipes-daemons/squid/squid_4.15.bb       |  1 +
+ 2 files changed, 38 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/squid/files/CVE-2023-49285.patch
 
-diff --git a/meta-oe/recipes-devtools/ssd1306/ssd1306/0001-Use-include-filename.patch b/meta-oe/recipes-devtools/ssd1306/ssd1306/0001-Use-include-filename.patch
-deleted file mode 100644
-index dfe48175a..000000000
---- a/meta-oe/recipes-devtools/ssd1306/ssd1306/0001-Use-include-filename.patch
-+++ /dev/null
-@@ -1,49 +0,0 @@
--From cb32ebbb1efb3202808809861ec3cbd811c55bd2 Mon Sep 17 00:00:00 2001
--From: Leon Anavi <leon.anavi@konsulko.com>
--Date: Sat, 30 Dec 2023 13:23:31 +0000
--Subject: [PATCH] Use include "filename"
--
--Use include "filename" to include programmer-defined header files
--from the same directory as the file containing the directive.
--
--Upstream-Status: Submitted [https://github.com/armlabs/ssd1306_linux/pull/4]
--
--Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
-----
-- main.c    | 2 +-
-- ssd1306.c | 6 +++---
-- 2 files changed, 4 insertions(+), 4 deletions(-)
--
--diff --git a/main.c b/main.c
--index c1ffc2f..18e2b84 100644
----- a/main.c
--+++ b/main.c
--@@ -6,7 +6,7 @@
-- #include <string.h>
-- #include <fcntl.h>
-- #include <sys/ioctl.h>
---#include <ssd1306.h>
--+#include "ssd1306.h"
-- 
-- void print_help()
-- {
--diff --git a/ssd1306.c b/ssd1306.c
--index a03674a..2e6ba97 100644
----- a/ssd1306.c
--+++ b/ssd1306.c
--@@ -8,9 +8,9 @@
-- #include <string.h>
-- #include <fcntl.h>
-- #include <sys/ioctl.h>
---#include <linux_i2c.h>
---#include <ssd1306.h>
---#include <font.h>
--+#include "linux_i2c.h"
--+#include "ssd1306.h"
--+#include "font.h"
-- 
-- const char init_oled_type_file[] = "/tmp/.ssd1306_oled_type";
-- 
---- 
--2.39.2
--
-diff --git a/meta-oe/recipes-devtools/ssd1306/ssd1306_git.bb b/meta-oe/recipes-devtools/ssd1306/ssd1306_git.bb
-index 5adfd3ed6..f9e367959 100644
---- a/meta-oe/recipes-devtools/ssd1306/ssd1306_git.bb
-+++ b/meta-oe/recipes-devtools/ssd1306/ssd1306_git.bb
-@@ -8,9 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=7b694e603a996c3bfdc6093ed1f70c8f"
+diff --git a/meta-networking/recipes-daemons/squid/files/CVE-2023-49285.patch b/meta-networking/recipes-daemons/squid/files/CVE-2023-49285.patch
+new file mode 100644
+index 0000000000..6909f754f3
+--- /dev/null
++++ b/meta-networking/recipes-daemons/squid/files/CVE-2023-49285.patch
+@@ -0,0 +1,37 @@
++From 77b3fb4df0f126784d5fd4967c28ed40eb8d521b Mon Sep 17 00:00:00 2001
++From: Alex Rousskov <rousskov@measurement-factory.com>
++Date: Wed, 25 Oct 2023 19:41:45 +0000
++Subject: [PATCH] RFC 1123: Fix date parsing (#1538)
++
++The bug was discovered and detailed by Joshua Rogers at
++https://megamansec.github.io/Squid-Security-Audit/datetime-overflow.html
++where it was filed as "1-Byte Buffer OverRead in RFC 1123 date/time
++Handling".
++
++Upstream-Status: Backport [https://github.com/squid-cache/squid/commit/77b3fb4df0f126784d5fd4967c28ed40eb8d521b]
++CVE: CVE-2023-49285
++Signed-off-by: Vivek Kumbhar <vkumbhar@mvista.com>
++---
++ lib/rfc1123.c | 6 ++++++
++ 1 file changed, 6 insertions(+)
++
++diff --git a/lib/rfc1123.c b/lib/rfc1123.c
++index 2d889cc..add63f0 100644
++--- a/lib/rfc1123.c
+++++ b/lib/rfc1123.c
++@@ -50,7 +50,13 @@ make_month(const char *s)
++     char month[3];
++
++     month[0] = xtoupper(*s);
+++    if (!month[0])
+++        return -1; // protects *(s + 1) below
+++
++     month[1] = xtolower(*(s + 1));
+++    if (!month[1])
+++        return -1; // protects *(s + 2) below
+++
++     month[2] = xtolower(*(s + 2));
++
++     for (i = 0; i < 12; i++)
++--
++2.39.3
+diff --git a/meta-networking/recipes-daemons/squid/squid_4.15.bb b/meta-networking/recipes-daemons/squid/squid_4.15.bb
+index 3027806742..fb293453f1 100644
+--- a/meta-networking/recipes-daemons/squid/squid_4.15.bb
++++ b/meta-networking/recipes-daemons/squid/squid_4.15.bb
+@@ -26,6 +26,7 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${BPN}-${PV}.tar.bz2
+            file://0001-splay.cc-fix-bind-is-not-a-member-of-std.patch \
+            file://0001-Fix-build-on-Fedora-Rawhide-772.patch \
+            file://CVE-2023-46847.patch \
++           file://CVE-2023-49285.patch \
+            "
  
- SRC_URI = " \
-     git://github.com/armlabs/ssd1306_linux.git;protocol=https;branch=master \
--    file://0001-Use-include-filename.patch \
- "
--SRCREV = "7375f1088732d243f7167c9a17725f1a860da587"
-+SRCREV = "34b42992a43fda69c6ba2557b718601cafe16251"
- 
- S = "${WORKDIR}/git"
- 
+ SRC_URI:remove:toolchain-clang = "file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch"
 -- 
-2.39.2
+2.39.3
 
 
