@@ -1,118 +1,150 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D7CCC3DA6E
-	for <webhook@archiver.kernel.org>; Mon,  8 Jan 2024 18:39:29 +0000 (UTC)
-Received: from mail-oa1-f54.google.com (mail-oa1-f54.google.com [209.85.160.54])
- by mx.groups.io with SMTP id smtpd.web10.5382.1704739164734332236
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B42EC47073
+	for <webhook@archiver.kernel.org>; Mon,  8 Jan 2024 21:35:16 +0000 (UTC)
+Received: from mailout06.t-online.de (mailout06.t-online.de [194.25.134.19])
+ by mx.groups.io with SMTP id smtpd.web11.1704.1704749709294774732
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Jan 2024 10:39:24 -0800
+ Mon, 08 Jan 2024 13:35:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=O4z2vWGY;
- spf=pass (domain: gmail.com, ip: 209.85.160.54, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f54.google.com with SMTP id 586e51a60fabf-204ec50010eso1194283fac.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 08 Jan 2024 10:39:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1704739164; x=1705343964; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=VHgc4T8aatDa0qc4883hYTnMR4ftf30V1jJc8JIUIew=;
-        b=O4z2vWGYfkCoLuyNuO6Bn9ziGkCjP+vKwM4wKyCtvsv6bE20++t6HtAny0Fwix6stp
-         OGoqOcrcfW0zZGS6O8T0rFZ+y9/RmAmDFN/Qb9xZbfVlgGo4H9dXvX3vP67rw7flpZ04
-         /aUPBlJzgeoNPrsR/fTiR0BAv5Zu1/DEAcPyjO1qdFRJo9Orfbkob0i5N8utRj/QL3NG
-         zrEPo1f1XZPnb4ApMW4GRGrbQz9fMXtiZwJ45vwNLy0yHr7/sWUsdtv/DVmf6i6u4UHw
-         fWHG7NYqhq9TjNO1tkeTLRvhY39ahHZSgIN3jZCe/7qUKPeN29cts25pLYeIofL7r1GP
-         /0PQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704739164; x=1705343964;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=VHgc4T8aatDa0qc4883hYTnMR4ftf30V1jJc8JIUIew=;
-        b=AYQQOybR2YasydGoDMs5/MncETHDMRt4EVcN6wAEiwNhXmzH6nag6fqXGnE0wzCQIA
-         jzSKy8ApY0JuJoUELcjNi53fP3jFGU2uSDJOZo4NZzWKVtnHcnHmm3j8tprEfOnhTexf
-         kIJ17VVDJ0StJqrLLGeSCCDfrQboAkC2/eBmLUCelyje6YTP3piRFxd0vxpy+RUNZaUr
-         1yzbl5ZlmntxgJlp4oojlNnzpFpuzzgeDxzkVRFZTNjf7YHS3R4ZCL+9QiCZ58Zdi7Ko
-         hr6rtJ6m3ogesF4jOcOmtin+eiIYpasmBRMCmge/8Ltp8KwBofzW7fuwOj8grwPaRsfl
-         oTzA==
-X-Gm-Message-State: AOJu0Ywo+20TJzsBBRN8nN71SkblN1IDHcWG5I5LD9AT/h3/2gbZB8NU
-	suLXxuDrfYTZ4NHL70S/E+QLGX9FMwO6PkT1BqNu1UnHxbU=
-X-Google-Smtp-Source: AGHT+IFSw2+E495feNSO5Ga+CgGvPYmLWlNafk9sRE0t0HJwz9YErBOla7q4VMEzOOG6sJH5PLqxLKDZp+NfzMWOkAE=
-X-Received: by 2002:a05:6870:d0c9:b0:1fb:75b:99a0 with SMTP id
- k9-20020a056870d0c900b001fb075b99a0mr5131624oaa.79.1704739163514; Mon, 08 Jan
- 2024 10:39:23 -0800 (PST)
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.19, mailfrom: f_l_k@t-online.de)
+Received: from fwd73.aul.t-online.de (fwd73.aul.t-online.de [10.223.144.99])
+	by mailout06.t-online.de (Postfix) with SMTP id 183961F273
+	for <openembedded-devel@lists.openembedded.org>; Mon,  8 Jan 2024 22:35:07 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.154.164.233]) by fwd73.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1rMxGx-3UsucT0; Mon, 8 Jan 2024 22:35:03 +0100
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] imagemagick: upgrade 7.1.1-8 -> 7.1.1.26
+Date: Mon,  8 Jan 2024 22:34:55 +0100
+Message-ID: <20240108213455.1532998-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20240108135018.2967504-1-joaomarcos.costa@bootlin.com>
-In-Reply-To: <20240108135018.2967504-1-joaomarcos.costa@bootlin.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 8 Jan 2024 10:38:57 -0800
-Message-ID: <CAMKF1sqAdy7VaUWqtyGN0JTzTxfgY21qk9mjTi6pKLPzsnne=g@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH v1] iwd: upgrade 2.8 -> 2.9
-To: Joao Marcos Costa <joaomarcos.costa@bootlin.com>
-Cc: openembedded-devel@lists.openembedded.org, thomas.petazzoni@bootlin.com, 
-	alexandre.belloni@bootlin.com
-Content-Type: text/plain; charset="UTF-8"
+X-TOI-EXPURGATEID: 150726::1704749703-DD9C5917-803FA1E9/0/0 CLEAN NORMAL
+X-TOI-MSGID: 06d540ab-2a4b-4c36-89da-3eaed75f9699
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 08 Jan 2024 18:39:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108172
+ <openembedded-devel@lists.openembedded.org>; Mon, 08 Jan 2024 21:35:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108173
 
-there is another patch which bumps it to 2.12 see
-https://patchwork.yoctoproject.org/project/oe/patch/1704720002-29880-1-git-=
-send-email-wangmy@fujitsu.com/
+- remove autoconf patch [https://github.com/ImageMagick/ImageMagick/blob/=
+570a9a048bb0e3a5c221ca87be9408ae35f711e2/configure.ac#L496]
+- update sed command
+- license file changed [https://github.com/ImageMagick/ImageMagick/commit=
+/2c87d7da1b1db4573a37bd7933dfbf772ac3eecf]
+---
+ ...-Use-autconf-provided-AC_FUNC_FSEEKO.patch | 42 -------------------
+ .../imagemagick/imagemagick_7.1.1.bb          | 11 +++--
+ 2 files changed, 5 insertions(+), 48 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/imagemagick/imagemagick/0001-=
+m4-Use-autconf-provided-AC_FUNC_FSEEKO.patch
 
-On Mon, Jan 8, 2024 at 5:50=E2=80=AFAM Joao Marcos Costa
-<joaomarcos.costa@bootlin.com> wrote:
->
-> Tested in station and access point modes, running on a iMX93 evaluation
-> kit with U-Blox's Jody-W3 wireless module.
->
-> ver 2.9:
->         Fix issue with handling certain FT failures.
->         Fix issue with handling user-disabled bands.
->         Fix issue with handling roam on beacon loss event.
->         Add support for PKEX configurator.
->         Add support for PKEX enrollee.
->
-> Signed-off-by: Joao Marcos Costa <joaomarcos.costa@bootlin.com>
-> ---
->  meta-oe/recipes-connectivity/iwd/{iwd_2.8.bb =3D> iwd_2.9.bb} | 6 ++----
->  1 file changed, 2 insertions(+), 4 deletions(-)
->  rename meta-oe/recipes-connectivity/iwd/{iwd_2.8.bb =3D> iwd_2.9.bb} (88=
-%)
->
-> diff --git a/meta-oe/recipes-connectivity/iwd/iwd_2.8.bb b/meta-oe/recipe=
-s-connectivity/iwd/iwd_2.9.bb
-> similarity index 88%
-> rename from meta-oe/recipes-connectivity/iwd/iwd_2.8.bb
-> rename to meta-oe/recipes-connectivity/iwd/iwd_2.9.bb
-> index ee310d295..82a294909 100644
-> --- a/meta-oe/recipes-connectivity/iwd/iwd_2.8.bb
-> +++ b/meta-oe/recipes-connectivity/iwd/iwd_2.9.bb
-> @@ -5,10 +5,8 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dfb504b67c5033=
-1fc78734fed90fb0e09"
->
->  DEPENDS =3D "ell"
->
-> -SRC_URI =3D "https://www.kernel.org/pub/linux/network/wireless/${BP}.tar=
-.xz \
-> -           file://0001-build-Use-abs_top_srcdir-instead-of-abs_srcdir-fo=
-r-e.patch \
-> -           "
-> -SRC_URI[sha256sum] =3D "a90e621f45b9c2f9021beea0fa6477ee0334fcd2ee34beaa=
-b42e31ea0fd3be29"
-> +SRC_URI =3D "https://www.kernel.org/pub/linux/network/wireless/${BP}.tar=
-.xz"
-> +SRC_URI[sha256sum] =3D "ec02ae5750e47204f4b91791cbab7cde670e3035f884f414=
-3f6d00f400089d4c"
->
->  inherit autotools manpages pkgconfig python3native systemd
->
-> --
-> 2.43.0
->
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick/0001-m4-Use-=
+autconf-provided-AC_FUNC_FSEEKO.patch b/meta-oe/recipes-support/imagemagi=
+ck/imagemagick/0001-m4-Use-autconf-provided-AC_FUNC_FSEEKO.patch
+deleted file mode 100644
+index 6b225a10c..000000000
+--- a/meta-oe/recipes-support/imagemagick/imagemagick/0001-m4-Use-autconf=
+-provided-AC_FUNC_FSEEKO.patch
++++ /dev/null
+@@ -1,42 +0,0 @@
+-From 0912e49d58c2a5f455fabf76ab7dc61cfc44cfb9 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Thu, 30 Mar 2023 20:50:26 -0700
+-Subject: [PATCH] m4: Use autconf provided AC_FUNC_FSEEKO
+-
+-This helps in building with autoconf 2.72
+-
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- m4/ac_func_fseeko.m4 | 18 +-----------------
+- 1 file changed, 1 insertion(+), 17 deletions(-)
+-
+-diff --git a/m4/ac_func_fseeko.m4 b/m4/ac_func_fseeko.m4
+-index eaeabb978..f9b8859cf 100644
+---- a/m4/ac_func_fseeko.m4
+-+++ b/m4/ac_func_fseeko.m4
+-@@ -53,20 +53,4 @@
+- # --------------
+- AN_FUNCTION([ftello], [AC_FUNC_FSEEKO])
+- AN_FUNCTION([fseeko], [AC_FUNC_FSEEKO])
+--AC_DEFUN([AC_FUNC_FSEEKO],
+--[_AC_SYS_LARGEFILE_MACRO_VALUE(_LARGEFILE_SOURCE, 1,
+--   [ac_cv_sys_largefile_source],
+--   [Define to 1 to make fseeko visible on some hosts (e.g. glibc 2.2).]=
+,
+--   [[#include <sys/types.h> /* for off_t */
+--     #include <stdio.h>]],
+--   [[int (*fp) (FILE *, off_t, int) =3D fseeko;
+--     return fseeko (stdin, 0, 0) && fp (stdin, 0, 0);]])
+--
+--# We used to try defining _XOPEN_SOURCE=3D500 too, to work around a bug
+--# in glibc 2.1.3, but that breaks too many other things.
+--# If you want fseeko and ftello with glibc, upgrade to a fixed glibc.
+--if test $ac_cv_sys_largefile_source !=3D unknown; then
+--  AC_DEFINE(HAVE_FSEEKO, 1,
+--    [Define to 1 if fseeko (and presumably ftello) exists and is declar=
+ed.])
+--fi
+--])# AC_FUNC_FSEEKO
+-+AC_FUNC_FSEEKO
+---=20
+-2.40.0
+-
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb b/m=
+eta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
+index e59b511a7..dcc951bce 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.1.1.bb
+@@ -4,16 +4,15 @@ HOMEPAGE =3D "https://www.imagemagick.org/"
+ DESCRIPTION =3D "ImageMagick is a collection of tools for displaying, co=
+nverting, and \
+ editing raster and vector image files. It can read and write over 200 im=
+age file formats."
+ LICENSE =3D "ImageMagick"
+-LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dac58ac14f9d9d02cafd2d81ef38fb=
+2cc \
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D2f9de66264141265b203cde990281=
+9ea \
+                     file://NOTICE;md5=3Dbcbf1f1897b40ec8df39700cb560e9ed=
+"
+ # FIXME: There are many more checked libraries. All should be added or e=
+xplicitly disabled to get consistent results.
+ DEPENDS =3D "lcms bzip2 jpeg libpng tiff zlib fftw freetype libtool"
+=20
+ BASE_PV :=3D "${PV}"
+-PV .=3D "-8"
+-SRC_URI =3D "git://github.com/ImageMagick/ImageMagick.git;branch=3Dmain;=
+protocol=3Dhttps \
+-           file://0001-m4-Use-autconf-provided-AC_FUNC_FSEEKO.patch"
+-SRCREV =3D "920f79206ff59f30a4cff22c9c9c393508b82663"
++PV .=3D "-26"
++SRC_URI =3D "git://github.com/ImageMagick/ImageMagick.git;branch=3Dmain;=
+protocol=3Dhttps"
++SRCREV =3D "570a9a048bb0e3a5c221ca87be9408ae35f711e2"
+=20
+ S =3D "${WORKDIR}/git"
+=20
+@@ -38,7 +37,7 @@ PACKAGECONFIG[xml] =3D "--with-xml,--without-xml,libxml=
+2"
+=20
+ do_install:append:class-target() {
+     for file in MagickCore-config.im7 MagickWand-config.im7 Magick++-con=
+fig.im7; do
+-        sed -i 's,${STAGING_DIR_NATIVE},,g' ${D}${bindir}/"$file"
++        sed -i 's,${STAGING_DIR_TARGET},,g' ${D}${bindir}/"$file"
+     done
+     sed -i 's,${S},,g' ${D}${libdir}/ImageMagick-${BASE_PV}/config-Q16HD=
+RI/configure.xml
+     sed -i 's,${B},,g' ${D}${libdir}/ImageMagick-${BASE_PV}/config-Q16HD=
+RI/configure.xml
+--=20
+2.43.0
+
 
