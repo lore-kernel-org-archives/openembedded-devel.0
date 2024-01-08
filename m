@@ -2,58 +2,57 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4CB0AC47DAC
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D4C0C47422
 	for <webhook@archiver.kernel.org>; Mon,  8 Jan 2024 02:46:56 +0000 (UTC)
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
- by mx.groups.io with SMTP id smtpd.web10.31424.1704682008426700162
+Received: from mail-io1-f51.google.com (mail-io1-f51.google.com [209.85.166.51])
+ by mx.groups.io with SMTP id smtpd.web10.31427.1704682011042181137
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 07 Jan 2024 18:46:48 -0800
+ Sun, 07 Jan 2024 18:46:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=cuEHG7i5;
- spf=pass (domain: gmail.com, ip: 209.85.210.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-6daf694b439so91514b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Jan 2024 18:46:48 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=IwKeSn35;
+ spf=pass (domain: gmail.com, ip: 209.85.166.51, mailfrom: raj.khem@gmail.com)
+Received: by mail-io1-f51.google.com with SMTP id ca18e2360f4ac-7bc332d3a8cso138967039f.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Jan 2024 18:46:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1704682008; x=1705286808; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1704682010; x=1705286810; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=nFQ//EGOlw0/G7RO4iqit11+H4xXT/Xea0lv8Zjo6QI=;
-        b=cuEHG7i5c2dSS0jCpLWfzftTw2ONyqARsP4XULt7HWksOZjmbIx6obeLDV8McCkyEM
-         2oJdJqQxnp3/b9JsZSfnkS5+vstHcJHbp4fwu0/TO6jWAXPYG0AwsXPcp3Lf1XKo8aFp
-         TdOd23QoWAhjLjlreL8cG4yaGYt+EwBxo/62dXDhirbKGpQ1k2WNibvn5uf9hbN3+ZRL
-         8lCsloD9IKXRVzg8C9vkd8m5/IslYEGrW8T+x7EhR7otk+Buf4m4rKw3H/eo+qfFtZO+
-         kwuExY1cyoS42FuZvNpZkx63FmoscQn9PIB940kC7VZJ3sFsFDrODSUi1VZq2uH1MixD
-         nmgw==
+        bh=JxQefGeQ8cRU12jfYwHgH7jJFmnPJzvB2hqlGCv4V38=;
+        b=IwKeSn35/edbofkIaZEdu5qvN/Es9OrE2vt02E526YsLyS5n1OXX1quHOIXhqJ/hwz
+         SOB9aSEWoDl5rFikDAOD5Vo0k9byMcd7NbV7LIkadmogmnk4XshZuxvoXMenEDZ17Szi
+         2yj/qVgHniwiRnUHISqOeUlPYwQAr98VmYd+8MOsoVFSXo8sA5G7SKn2cTpL1U/DtGNr
+         CyNPVSm/QHDBmHlIjV5HCsDa2BSiwjCwaLV3kF+dXrXIdBpL4IWHoBChKuR4L3dpA11q
+         byxqaBkomlQiS8Fx33wraCY9C8KRJxTn5QIgQ4UIB9CF8ml7/NCXZ0UFo4ODfnVgWoIV
+         yV8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704682008; x=1705286808;
+        d=1e100.net; s=20230601; t=1704682010; x=1705286810;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=nFQ//EGOlw0/G7RO4iqit11+H4xXT/Xea0lv8Zjo6QI=;
-        b=mUKi/lGorOH4efi7ARYtT20iQMXyuabNhMEFCQQBdt96g9pHw7UPOOL+q9QLzzhb7O
-         8QRM5kF7JPvmaalCn8nVyG0bVCxA/wZB7xyCyVeAC8DFcRxCS6HVUUR35RGMhnbCcCCp
-         pz57T9ExV0qGV09nW5r562+SsLf9PrBsh2/htQwmYBv9bN64Hu4xqs5YRaw5Hb3srl0b
-         X7XKQC7jM3MymQLShNdPkjIuLSAKrmvnpPz90OZXHn04EAyurnSkl9egGs2e5rDnV3Ug
-         ZMPHT0V6d/iglfUb2/TW7igVhhXEfyM/CqFNTmedW42ab3b/3cuVbIT1wyPQf4QGv0bN
-         Zljw==
-X-Gm-Message-State: AOJu0YxZPEYhNxGN/em12zl82RCEJdVwIj4FQhqdZo4liPgldtI2+qHk
-	EJAfcZafuh2vHFOIsJhti+8=
-X-Google-Smtp-Source: AGHT+IHhc3jTbu24Q6j/z6Qp7QerX4KviV1GgOh9uUpsrBbFmEAnalIprTzkVA1b58DeKM6MQiJeIw==
-X-Received: by 2002:a17:902:da8b:b0:1d4:ceaf:e7bd with SMTP id j11-20020a170902da8b00b001d4ceafe7bdmr966007plx.99.1704682007665;
-        Sun, 07 Jan 2024 18:46:47 -0800 (PST)
+        bh=JxQefGeQ8cRU12jfYwHgH7jJFmnPJzvB2hqlGCv4V38=;
+        b=m3EPjKq8EturxDC4ux84s8HYV/iTL9YdjnwQEsHwolVdZZcfqRKbv6n4nsfdbNH6yC
+         cO/fdYhVjP8Ci2yej2ng8x3h4fPzqR2B3/D86gSy489etzTFHBiWUsRV2UxUpKQwJuti
+         usgB2+0+kKlDZs4YYQkwfB0TVawuwdZdXcCdgNwuMYVPfQ3NRCYmTvPhnGAhGzR6I/V4
+         0jkeWqPAArPt2lFu4o1tqpKNAaQxLbhwEsUfB3R46XcDTjnKmVVPgQdjxlL+VKjVeZ+t
+         4txCF5jF9J1oEC9PWXNzfKJAG0PHn6fgh35stHt4ZOcFiHI3HsvACyQDGnUWdq9DvOOP
+         QPzA==
+X-Gm-Message-State: AOJu0Yyj/rr1rUtiU55sHEdXboG9t4pwyayE3+3iO33E7/psFLnijD1j
+	eDVsd/3IoqfGRGkWIHjJdrY=
+X-Google-Smtp-Source: AGHT+IHzoCes/BoyBZyRRGDuhgWhCbHYunjxl9D/WbF78LPZsMdWqr5kTSbofnlWU+FkoN5KArhI4w==
+X-Received: by 2002:a05:6e02:1989:b0:360:637:f64d with SMTP id g9-20020a056e02198900b003600637f64dmr6064249ilf.6.1704682010284;
+        Sun, 07 Jan 2024 18:46:50 -0800 (PST)
 Received: from apollo.localdomain ([2601:646:9d80:4380::4b6f])
-        by smtp.gmail.com with ESMTPSA id az2-20020a170902a58200b001d08e080042sm5019868plb.43.2024.01.07.18.46.46
+        by smtp.gmail.com with ESMTPSA id az2-20020a170902a58200b001d08e080042sm5019868plb.43.2024.01.07.18.46.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 07 Jan 2024 18:46:47 -0800 (PST)
+        Sun, 07 Jan 2024 18:46:49 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org, wangmy@fujitsu.com
-In-Reply-To: <1704176840-7507-1-git-send-email-wangmy@fujitsu.com>
-References: <1704176840-7507-1-git-send-email-wangmy@fujitsu.com>
-Subject: Re: [oe] [meta-oe] [PATCH] ctags: upgrade 6.0.20231224.0 ->
- 6.1.20231231.0
-Message-Id: <170468200679.912276.15856997811547655723.b4-ty@gmail.com>
-Date: Sun, 07 Jan 2024 18:46:46 -0800
+In-Reply-To: <1704178953-7826-1-git-send-email-wangmy@fujitsu.com>
+References: <1704178953-7826-1-git-send-email-wangmy@fujitsu.com>
+Subject: Re: [oe] [meta-oe] [PATCH] libssh: upgrade 0.10.5 -> 0.10.6
+Message-Id: <170468200964.912276.15898242906279694310.b4-ty@gmail.com>
+Date: Sun, 07 Jan 2024 18:46:49 -0800
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -62,17 +61,29 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 08 Jan 2024 02:46:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108089
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108092
 
 
-On Tue, 02 Jan 2024 14:27:20 +0800, wangmy@fujitsu.com wrote:
+On Tue, 02 Jan 2024 15:02:33 +0800, wangmy@fujitsu.com wrote:
+> 0001-libgcrypt.c-Fix-prototype-of-des3_encrypt-des3_decry.patch
+> 0001-tests-CMakeLists.txt-do-not-search-ssh-sshd-commands.patch
+> refreshed for 0.10.6
 > 
-
+> Changelog:
+> ==========
+> * Fix CVE-2023-6004: Command injection using proxycommand
+> * Fix CVE-2023-48795: Potential downgrade attack using strict kex
+> * Fix CVE-2023-6918: Missing checks for return values of MD functions
+> * Fix ssh_send_issue_banner() for CMD(PowerShell)
+> * Avoid passing other events to callbacks when poll is called recursively (#202)
+> * Allow @ in usernames when parsing from URI composes
+> 
+> [...]
 
 Applied, thanks!
 
-[1/1] ctags: upgrade 6.0.20231224.0 -> 6.1.20231231.0
-      commit: bcf04e4948c0679555bbdd727f29a804d4a165be
+[1/1] libssh: upgrade 0.10.5 -> 0.10.6
+      commit: 1bea2e8c3053e7ecffb04adaaded54555f2afa0b
 
 Best regards,
 -- 
