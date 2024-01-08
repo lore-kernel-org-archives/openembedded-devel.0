@@ -1,248 +1,114 @@
-Return-Path: <alperyasinak1@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CCC54C3DA6E
-	for <webhook@archiver.kernel.org>; Mon,  8 Jan 2024 18:10:28 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.web11.4386.1704737427143870314
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9EB67C3DA6E
+	for <webhook@archiver.kernel.org>; Mon,  8 Jan 2024 18:36:49 +0000 (UTC)
+Received: from mail-oa1-f50.google.com (mail-oa1-f50.google.com [209.85.160.50])
+ by mx.groups.io with SMTP id smtpd.web10.5296.1704739009004018633
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Jan 2024 10:10:27 -0800
+ Mon, 08 Jan 2024 10:36:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=cqcdbavq;
- spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-40e461c1f44so14042055e9.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 08 Jan 2024 10:10:26 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Moho1L44;
+ spf=pass (domain: gmail.com, ip: 209.85.160.50, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f50.google.com with SMTP id 586e51a60fabf-204fdd685fdso2096434fac.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 08 Jan 2024 10:36:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1704737425; x=1705342225; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=y41QRry6ck4AApe0zBWMY2PZEjmZ0UzJ2ovtYg7oToY=;
-        b=cqcdbavqbwBroUNl1z9oCD+7MrJ5ATdSUINHWWNCDBgECT+b5fOs3qIfOF5EMPVqCM
-         DGQXs+P3Iv4aaIAYg+7uu7RM0bp+umXPPhxEZ2KXWgifKmJn7HPFVdW5TecYIrpoMn8z
-         uBuewFXcJz4ntIP5T66Efe/M8Mll/ftF6DHcbyI1XRo+p6vEnCAVw/eg8jxYTqSmVkad
-         j95RoQ391UrMvWpUHJr/hFja+xs29bp+11YyZqM4uVYrlBMGR65kYxfjWzmQkAYS6NxD
-         wpdENay5U1n3MvATLCARxiQ8vFmfoea0QlIsDbcpj87L/hOyffg4dzBywa20M3EHCn0d
-         E+qg==
+        d=gmail.com; s=20230601; t=1704739008; x=1705343808; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=1kGPblISseAYKTqW42Czc4SZGz/2QB4INft3I/aeYTo=;
+        b=Moho1L44EE5uWMKdpHswwPnvpCY9a3LCT0WTRkuSGSeThX0JSKe9El6QwJ7YLSYmnM
+         +op/jY4rSHT6RcF/wlD5cdUezkY/6xIFKHRn3h81hDI7g9ihe0qwkEvZhq1TwOkxY9ud
+         J+EkCYeQJBI2fCFS9v1n1jlNxkxyqaPix82cOiHWyMmOlDkn+8Mf2m8/YP7eBBgz4UdN
+         18j4/bdMkqIqr5/2sm0BYXzhlmho9ecAzhRZufND1r4oYX4a3Zq1Zoq9+2xaXZSCGYcY
+         IvmvG3IU2vw6RRzB5AfV+m+JWbaeG6tG+TaJu6MjIXJJ1+vlM+z2NxnWG2NIME6MCING
+         CEvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704737425; x=1705342225;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=y41QRry6ck4AApe0zBWMY2PZEjmZ0UzJ2ovtYg7oToY=;
-        b=HODF0iuNWbCxKUJf+c42YjBLRgsd7020Y3+WvaQn5458ytfBY1D/F+tRcWSy9+sjDh
-         YQjQKmcJpF89sMkxHTHYFsGOk+zVN3NOWInQ4RPyJyU2qzxNUflICeb3osgIyPGvPh6w
-         0XT0NcvQnBkljbTky/HBV1GWwXA7h3Cn8B59rVVnXDXB9SJ3FcKl55NDVC/OKY6RnS5F
-         mw3CtOoS1TZJXLPYrPfUBxJjTm5Y41lUVWsGeJG8A3232KdC3CfWlQepBKJto8MUIuWK
-         Z9RCGjq+RMtFbXXQnKpZb6Rg23haojG+6Dtd7u1LrWf/CwSIc4wviEnJnnzNXNk+obyu
-         WVxw==
-X-Gm-Message-State: AOJu0YwjRRRig9TcDbSevCP0FkB3bW10g6mBwNcQiI7MWQjvVkxx49Yx
-	cUMDygbbfsmUVn2ulkbzOUDrhbh20XBuLA==
-X-Google-Smtp-Source: AGHT+IHfTxSOyaOHrQlFwkWn9vuW2RtHS4f5Y8wYFlwafad1EB46Jo5DiArUnamS1kAeg08OxXeDJg==
-X-Received: by 2002:a05:600c:4f91:b0:40d:39cb:6af6 with SMTP id n17-20020a05600c4f9100b0040d39cb6af6mr2244560wmq.28.1704737424679;
-        Mon, 08 Jan 2024 10:10:24 -0800 (PST)
-Received: from localhost.localdomain ([176.33.64.25])
-        by smtp.gmail.com with ESMTPSA id c15-20020a5d4ccf000000b00336765e9babsm255920wrt.83.2024.01.08.10.10.23
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 08 Jan 2024 10:10:24 -0800 (PST)
-From: alperak <alperyasinak1@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-oe][PATCHv3] wavpack: upgrade 5.1.0 -> 5.6.0
-Date: Mon,  8 Jan 2024 21:10:14 +0300
-Message-Id: <20240108181014.321844-1-alperyasinak1@gmail.com>
-X-Mailer: git-send-email 2.25.1
+        d=1e100.net; s=20230601; t=1704739008; x=1705343808;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=1kGPblISseAYKTqW42Czc4SZGz/2QB4INft3I/aeYTo=;
+        b=k4rel9G5kGwIQ2WhhPI8MNdOsKj/n9KaVzoOxVEgMazdP7hGRi+08sYyJSRrCsw06F
+         N8BiPutQCXy50QV2qKlbAL4zWzlWah9XnofnnkRNRhEa9pmjrgw8k/LHvBoVtrT9J8Y+
+         qW0J6VPgVkvW1mFCAX4WLf8g0+t05Fa2nFCAjq55ztCK1RJJd3goOUz8IlysX2gRS3sR
+         fTvV7+sPmxuTijzWa2hjeutTpuTZMq5f6nC4VFo6enWhRQGb6f+8uvLOVqja1mHy7TjF
+         3XnJAKS3DyC7tUVAB8kOiuRZzvj4JmiR00PIYNhGm1FXnGY2Gg7TUcnmEvIVl8g16yFa
+         6OLw==
+X-Gm-Message-State: AOJu0YxBsgxgQzkVrNL1e+QUDimAYxSsOb3uuksMiDwh4WSazDKoMrXz
+	woRB7Rw4dmUSOK5irF0iYyzVhk5WqHtvDkRoBn9iDinf
+X-Google-Smtp-Source: AGHT+IFyYUX7xT2Bv/9A3n5SuwzhHcq0DotjtLe4JQIN2AnnKOatb4uR2RnyZ0PBz6cVdBcMAUMzSL0zzhd6idUhAVg=
+X-Received: by 2002:a05:6870:cd95:b0:203:ea4e:38a7 with SMTP id
+ xb21-20020a056870cd9500b00203ea4e38a7mr6278289oab.31.1704739008085; Mon, 08
+ Jan 2024 10:36:48 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <1704721743-30824-1-git-send-email-wangmy@fujitsu.com>
+In-Reply-To: <1704721743-30824-1-git-send-email-wangmy@fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 8 Jan 2024 10:36:21 -0800
+Message-ID: <CAMKF1spAQz_fkf4nLp=c2A+1VL0zaDe9DjBEjjqekvxb-cH-Fw@mail.gmail.com>
+Subject: Re: [oe] [meta-python] [PATCH] python3-netaddr: upgrade 0.9.0 -> 0.10.1
+To: wangmy <wangmy@fujitsu.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 08 Jan 2024 18:10:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108170
+ <openembedded-devel@lists.openembedded.org>; Mon, 08 Jan 2024 18:36:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108171
 
-* Added patches to fix -> unversioned.so was causing incorrect packaging and errors.
+this is already applied to master
 
-* Added openssl as a depends because trying to link with native libcrypto in some builds -> lib32-wavpack/5.6.0/recipe-sysroot-native/usr/lib/libcrypto.so: file not recognized: file format not recognized
-
-* License-Update: Copyright year changes
-
-Changelog:
-
-* added: AIFF file import/export support
-* added: WATCOM compiler and OS/2 support
-* added: cmake support for mingw, builds Cooledit + Winamp plugins
-* added: --force-even-byte-depth option for rounding up bit depths
-* fixed: detect and report PCM files having non-zero padding bits
-* fixed: possible crash when displaying long channel assignments
-* fixed: big-endian-sourced "raw" files gave big-endian "wav"s
-* fixed: numerous minor issues
-* fixed: CVE-2021-44269 (encoding crafted DSD file triggers OOB read crash)
-* fixed: very long filenames cause stack-overflow crash in all CLI programs
-* fixed: the length stored in WAV headers not always corrected when using -i
-* fixed: attempting to encode raw DSD audio from stdin sometimes causes crash
-* fixed: DSD to PCM decimation: small clicks between tracks and tiny DC offset
-* fixed: length update in library-generated WAV headers on big-endian machines
-* fixed: sanitize custom extensions read from WavPack files to be alphanumeric
-* added: accepting brace-delimited options in the wavpack executable filename
-* added: "--drop" option to Windows executables for multi-file "drag-and-drop"
-* added" "--raw-pcm" option to wvunpack executable (does DSD --> 24-bit PCM)
-* added: "--no-overwrite" option to wavpack executable (to resume sessions)
-* improved: build system clean-up including switch to non-recursive "make"
-* fixed: potential security issue CVE-2020-35738
-* fixed: disable A32 asm code when building for Apple silicon
-* fixed: issues with Adobe-style floating-point WAV files
-* added: -vv option to wvunpack to quickly verify using just
-     block checksums (ideal for detecting corrupted files)
-* added: --normalize-floats option to wvunpack for correctly
-     exporting un-normalized floating-point files
-* updated: Visual Studio 2019 for Windows builds
-* dropped: WinXP support in official binaries
-* fixed: OSS-Fuzz issues 19925, 19928, 20060, 20448
-      (no CVEs or vulnerabilities)
-* fixed: trailing garbage characters on imported ID3v2 TXXX tags
-* fixed: various minor undefined behavior and memory access issues
-* fixed: sanitize tag extraction names for length and path inclusion
-* improved: reformat wvunpack "help" and split into long + short versions
-* added: regression testing to Travis CI for OSS-Fuzz crashers
-* fixed: potential security issues including the following CVEs:
-     CVE-2018-19840 CVE-2018-19841 CVE-2018-10536
-     CVE-2018-10537 CVE-2018-10538 CVE-2018-10539
-     CVE-2018-10540 CVE-2018-7254  CVE-2018-7253
-     CVE-2018-6767
-* added: support for CMake, Travis CI, and Google's OSS-fuzz
-* fixed: use correction file for encode verify (pipe input, Windows)
-* fixed: correct WAV header with actual length (pipe input, -i option)
-* fixed: thumb interworking and not needing v6 architecture (ARM asm)
-* added: handle more ID3v2.3 tag items and from all file types
-* fixed: coredump on Sparc64 (changed MD5 implementation)
-* fixed: handle invalid ID3v2.3 tags from sacd-ripper
-* fixed: several corner-case memory leaks
-
-Signed-off-by: alperak <alperyasinak1@gmail.com>
----
- ...act-libtool-and-convert-to-soversion.patch | 35 +++++++++++++++++++
- .../files/set-soversion-and-version.patch     | 26 ++++++++++++++
- .../wavpack/wavpack_5.1.0.bb                  |  9 -----
- .../wavpack/wavpack_5.6.0.bb                  | 18 ++++++++++
- 4 files changed, 79 insertions(+), 9 deletions(-)
- create mode 100644 meta-oe/recipes-multimedia/wavpack/files/extract-libtool-and-convert-to-soversion.patch
- create mode 100644 meta-oe/recipes-multimedia/wavpack/files/set-soversion-and-version.patch
- delete mode 100644 meta-oe/recipes-multimedia/wavpack/wavpack_5.1.0.bb
- create mode 100644 meta-oe/recipes-multimedia/wavpack/wavpack_5.6.0.bb
-
-diff --git a/meta-oe/recipes-multimedia/wavpack/files/extract-libtool-and-convert-to-soversion.patch b/meta-oe/recipes-multimedia/wavpack/files/extract-libtool-and-convert-to-soversion.patch
-new file mode 100644
-index 000000000..11e45938d
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/wavpack/files/extract-libtool-and-convert-to-soversion.patch
-@@ -0,0 +1,35 @@
-+From 25e12cf5918884f232cebc34c92bd548fe40c2b3 Mon Sep 17 00:00:00 2001
-+From: Anonymous Maarten <anonymous.maarten@gmail.com>
-+Date: Fri, 9 Dec 2022 19:13:09 +0100
-+Subject: [PATCH] cmake: extract libtool from configure.ac and convert to
-+ SOVERSION
-+
-+Upstream-Status: Backport [https://github.com/dbry/WavPack/commit/25e12cf5918884f232cebc34c92bd548fe40c2b3]
-+Signed-off-by: alperak <alperyasinak1@gmail.com>
-+---
-+ CMakeLists.txt | 12 ++++++++++++
-+ 1 file changed, 12 insertions(+)
-+
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index adc73b09..7ae5043f 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -2,6 +2,18 @@ cmake_minimum_required(VERSION 3.2)
-+ 
-+ project(WavPack VERSION 5.6.0)
-+ 
-++file(READ "${CMAKE_CURRENT_SOURCE_DIR}/configure.ac" CONFIGURE_AC)
-++string(REGEX MATCH "LT_CURRENT=([0-9]+)" LT_CURRENT "${CONFIGURE_AC}")
-++set(LT_CURRENT "${CMAKE_MATCH_1}")
-++string(REGEX MATCH "LT_REVISION=([0-9]+)" LT_REVISION "${CONFIGURE_AC}")
-++set(LT_REVISION "${CMAKE_MATCH_1}")
-++string(REGEX MATCH "LT_AGE=([0-9]+)" LT_AGE "${CONFIGURE_AC}")
-++set(LT_AGE "${CMAKE_MATCH_1}")
-++
-++math(EXPR SOVERSION_MAJOR "${LT_CURRENT}-${LT_AGE}")
-++math(EXPR SOVERSION_MINOR "${LT_AGE}")
-++math(EXPR SOVERSION_MICRO "${LT_REVISION}")
-++
-+ # Languages
-+ 
-+ include(CheckLanguage)
-diff --git a/meta-oe/recipes-multimedia/wavpack/files/set-soversion-and-version.patch b/meta-oe/recipes-multimedia/wavpack/files/set-soversion-and-version.patch
-new file mode 100644
-index 000000000..faddb7b75
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/wavpack/files/set-soversion-and-version.patch
-@@ -0,0 +1,26 @@
-+From 7c1dd729302b7f77f65884df4e79301df1490423 Mon Sep 17 00:00:00 2001
-+From: Anonymous Maarten <anonymous.maarten@gmail.com>
-+Date: Fri, 9 Dec 2022 19:23:51 +0100
-+Subject: [PATCH] cmake: set SOVERSION and VERSION property of wavpack
-+
-+This is used to version .so libraries on Linux
-+
-+Upstream-Status: Backport [https://github.com/dbry/WavPack/commit/7c1dd729302b7f77f65884df4e79301df1490423]
-+Signed-off-by: alperak <alperyasinak1@gmail.com>
-+---
-+ CMakeLists.txt | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index 7ae5043f..285b295b 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -361,6 +361,8 @@ if(BUILD_SHARED_LIBS)
-+         target_link_directories(wavpack PRIVATE "-Wl,-exported_symbols_list,${CMAKE_CURRENT_BINARY_DIR}/libwavpack.sym")
-+     endif()
-+   else()
-++    set_target_properties(wavpack PROPERTIES SOVERSION "${SOVERSION_MAJOR}")
-++    set_target_properties(wavpack PROPERTIES VERSION "${SOVERSION_MAJOR}.${SOVERSION_MINOR}.${SOVERSION_MICRO}")
-+     set(CONFTTEST_CONTENTS "VERS_1 {\n    global: sym;\n};\n\nVERS_2 {\n    global: sym;\n} VERS_1;\n")
-+     file(WRITE ${PROJECT_BINARY_DIR}/${CMAKE_FILES_DIRECTORY}/conftest.map "${CONFTTEST_CONTENTS}")
-+     check_c_linker_flag("-Wl,--version-script=${PROJECT_BINARY_DIR}/${CMAKE_FILES_DIRECTORY}/conftest.map" COMPILER_SUPPORTS_SYMBOL_MAPS)
-diff --git a/meta-oe/recipes-multimedia/wavpack/wavpack_5.1.0.bb b/meta-oe/recipes-multimedia/wavpack/wavpack_5.1.0.bb
-deleted file mode 100644
-index 909612393..000000000
---- a/meta-oe/recipes-multimedia/wavpack/wavpack_5.1.0.bb
-+++ /dev/null
-@@ -1,9 +0,0 @@
--DESCRIPTION = "WavPack is a completely open audio compression format providing lossless, high-quality lossy, and a unique hybrid compression mode."
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://license.txt;md5=8c1a910e5c2a8b30ec8ffb2ffa63d9b2"
--
--SRC_URI = "git://github.com/dbry/WavPack.git;branch=master;protocol=https"
--SRCREV = "9ccc3fe4a37d069137ceabe513a4dd9b0a09c1c2"
--S = "${WORKDIR}/git"
--
--inherit autotools lib_package
-diff --git a/meta-oe/recipes-multimedia/wavpack/wavpack_5.6.0.bb b/meta-oe/recipes-multimedia/wavpack/wavpack_5.6.0.bb
-new file mode 100644
-index 000000000..6773c1d97
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/wavpack/wavpack_5.6.0.bb
-@@ -0,0 +1,18 @@
-+DESCRIPTION = "WavPack is a completely open audio compression format providing lossless, high-quality lossy, and a unique hybrid compression mode."
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://license.txt;md5=bb5d037e3ad41a3c84c9f2d8bb65a7b4"
-+
-+DEPENDS = "openssl"
-+
-+SRC_URI = "git://github.com/dbry/WavPack.git;branch=master;protocol=https \
-+	    file://set-soversion-and-version.patch \
-+	    file://extract-libtool-and-convert-to-soversion.patch \
-+	   "
-+
-+SRCREV = "e03e8e29dc618e08e7baba9636e57ba1254874ce"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit cmake pkgconfig
-+
-+EXTRA_OECMAKE += "-DWAVPACK_INSTALL_DOCS=OFF -DBUILD_SHARED_LIBS=ON"
--- 
-2.25.1
-
+On Mon, Jan 8, 2024 at 5:49=E2=80=AFAM wangmy <wangmy@fujitsu.com> wrote:
+>
+> From: Wang Mingyu <wangmy@fujitsu.com>
+>
+> Changelog:
+>  https://netaddr.readthedocs.io/en/latest/changes.html#release-0-10-1
+>
+> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+> ---
+>  .../{python3-netaddr_0.9.0.bb =3D> python3-netaddr_0.10.1.bb}     | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>  rename meta-python/recipes-devtools/python/{python3-netaddr_0.9.0.bb =3D=
+> python3-netaddr_0.10.1.bb} (75%)
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-netaddr_0.9.0.bb=
+ b/meta-python/recipes-devtools/python/python3-netaddr_0.10.1.bb
+> similarity index 75%
+> rename from meta-python/recipes-devtools/python/python3-netaddr_0.9.0.bb
+> rename to meta-python/recipes-devtools/python/python3-netaddr_0.10.1.bb
+> index 471d939a8..ce16cc178 100644
+> --- a/meta-python/recipes-devtools/python/python3-netaddr_0.9.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-netaddr_0.10.1.bb
+> @@ -2,7 +2,7 @@ SUMMARY =3D "A network address manipulation library for P=
+ython."
+>  LICENSE =3D "BSD-3-Clause"
+>  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3De6345d695ffe3776f68a56fe7962d=
+b44"
+>
+> -SRC_URI[sha256sum] =3D "7b46fa9b1a2d71fd5de9e4a3784ef339700a53a08c8040f0=
+8baf5f1194da0128"
+> +SRC_URI[sha256sum] =3D "f4da4222ca8c3f43c8e18a8263e5426c750a3a837fdfeccf=
+74c68d0408eaa3bf"
+>
+>  inherit pypi setuptools3
+>
+> --
+> 2.34.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#108157): https://lists.openembedded.org/g/openembedde=
+d-devel/message/108157
+> Mute This Topic: https://lists.openembedded.org/mt/103596959/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
