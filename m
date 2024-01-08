@@ -2,58 +2,57 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EC8D0C4725D
-	for <webhook@archiver.kernel.org>; Mon,  8 Jan 2024 02:47:16 +0000 (UTC)
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
- by mx.groups.io with SMTP id smtpd.web10.31456.1704682032996566671
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1787FC47DA2
+	for <webhook@archiver.kernel.org>; Mon,  8 Jan 2024 02:47:17 +0000 (UTC)
+Received: from mail-il1-f177.google.com (mail-il1-f177.google.com [209.85.166.177])
+ by mx.groups.io with SMTP id smtpd.web11.31456.1704682035669220962
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 07 Jan 2024 18:47:13 -0800
+ Sun, 07 Jan 2024 18:47:15 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=asmN9Oce;
- spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-1d427518d52so8648705ad.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Jan 2024 18:47:12 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Lc/KQxJK;
+ spf=pass (domain: gmail.com, ip: 209.85.166.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-il1-f177.google.com with SMTP id e9e14a558f8ab-36074b286d8so10633965ab.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Jan 2024 18:47:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1704682032; x=1705286832; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1704682035; x=1705286835; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=1gCnWp5iFtU/4IcAjKVRkh9dT9zmWQrdUDd3E9Cx/OY=;
-        b=asmN9OceQ39X16j2SfCBapwVdLL6bWKM24WdMCr/z3avf0NnJCPmzYbbgtySOSQSW0
-         NjLnnfNfeLq1jmzklbuPPCyl2bhijx1smsmh6sXf8aMc4cN9FFZIvwKDguh0pPwPDBma
-         sRKAd/uH6y8QvAQGuB+i+YVmtQtFiK25hV6racdwVOfkhwCfiAUVbR+IcsKA4o40igL9
-         lJlYSlBgixZGH1PQUjmG9VxBl737wAwwORHjEz9vbrN5QyqLDHjxl1+E5AIVKfP3ilU6
-         Pdf4vsNOH7SoQAM6juHs7seZax51whsfW4fr8n9tEEwa5LUwVv3tDzNS858p3aPhise9
-         X/hg==
+        bh=9zjVjh726XCjBJLR5KksmpBynWrFBN2Mp8bNU7qmkmU=;
+        b=Lc/KQxJKw5yV2hp7UVbSL9/ZkiZ52OX+CNG0cGVh7UL/ydumHRI9UF/dD5X3iq1xyZ
+         jO2jLepeVCXjVv9BqR4ZRrJKQBYnWN51EckxiFEzHVcSnIyL+tFPTMEb8E7o138+7hjm
+         8azjJYeLygZJBLCV4gxtv+1i49aGffT0CwTqbKVYQoOxMkfUAVJpJuXRFEgx5SW7ZDKR
+         Uzk/O9a+jq7F3OZcn1EPTF8POwkhHjb06XRvKEFlQrlMYpeya6TQ2KttVaIvNamWE/xs
+         e0bOMjb4bPb8f7XolpksyWcBG1Yq4VeqkGoBVIoG54MiJcLicUr51/OzcGgJb3p4/hC3
+         VjRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704682032; x=1705286832;
+        d=1e100.net; s=20230601; t=1704682035; x=1705286835;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=1gCnWp5iFtU/4IcAjKVRkh9dT9zmWQrdUDd3E9Cx/OY=;
-        b=K9R4m4sxInMG7MXwzuyBbnUazSd6qtjx07EuGtPU67DIadeIQvekr0q7f6B/EpsDfs
-         y3d9AHiX0495ox4ZfESs/g6d3gYV/3wL51RKHX3apu1B6y+lOt9gfRQ2fcgC0rwckk8x
-         96B7t6oql+NkMThHIsToJqauJErJCgjL3Vo729nKShlemvuC3AcONj1fl39YDRYr53k/
-         ViTZcG4G+SJckmy87B/NyQouDpENavsbYyJ4r98iG+ukUg3deEjOfWHydrvHc9uTlafI
-         gq9XVnuGowng1K5wmYWFq/mNtXA2BkNobCZEtoDSpJ9Em2xDo1S3h5KRY+qiGzwl8kwY
-         Qp8Q==
-X-Gm-Message-State: AOJu0YxTQIm5tkmryFslTWoqqUhBiJyoh/zgkQQZu2B5f+406EMCZe2B
-	1mAg/rDuASGXyJx37ZWiAFwHnT0BI9U=
-X-Google-Smtp-Source: AGHT+IE7Jm7/ZDK+tMGijQ4b/CFXyCgU9eqrpz8DYc+h/6jwJeWIOvE1QoMPcX/M2KNOBiKhElhgZg==
-X-Received: by 2002:a17:902:ecd2:b0:1cc:5671:8d9 with SMTP id a18-20020a170902ecd200b001cc567108d9mr8098168plh.27.1704682032142;
-        Sun, 07 Jan 2024 18:47:12 -0800 (PST)
+        bh=9zjVjh726XCjBJLR5KksmpBynWrFBN2Mp8bNU7qmkmU=;
+        b=McrMt44YthDEGhk6VskeWvvIpWJvRcqKswhkYSNUvZe+ZM3HLDw+GRDO+YamLdu6Is
+         5nREkOUE3kJM2uWKt5K3+jV2faqSLBOBh0+hZJBgSEdq9QEYkSvIaBGmeHj4Vt3oqiK/
+         moeC/HKH9A1mVmTNA0uqUWSd/TW/9RXtVC/qfRis+SPVQgp10kw4SNNC1m2AMlNiPl+E
+         WH+EBEvyVgeXDoNBWX2w9wqx43jz0+w66vD0OFSN9Mx6lY7aRpCwX9PIckCpQA/mW9Sb
+         tIIKc/qPYaL9FeDBYlbe22QaJuLQvP4EgtG7sctUUOwZU/BlJXuUkRkXvqV4nlc7w5ea
+         02fg==
+X-Gm-Message-State: AOJu0YwFlSpEIKZrdr0mx+/7XjeEBaenzfMG6GxmZG+IYvznthkWDAAK
+	fp1ZzjE3u9459ld8p3zBVQW1ZK/Y1fc=
+X-Google-Smtp-Source: AGHT+IGNJcJwl4JyAIow05mDIDMvXUK5qj5xA3RMnIcHkuR8ipE8rLHwo9GO9lVfxvf86xFHW0f2ag==
+X-Received: by 2002:a05:6e02:2491:b0:35f:b16d:cd75 with SMTP id bt17-20020a056e02249100b0035fb16dcd75mr7623287ilb.14.1704682034924;
+        Sun, 07 Jan 2024 18:47:14 -0800 (PST)
 Received: from apollo.localdomain ([2601:646:9d80:4380::4b6f])
-        by smtp.gmail.com with ESMTPSA id az2-20020a170902a58200b001d08e080042sm5019868plb.43.2024.01.07.18.47.11
+        by smtp.gmail.com with ESMTPSA id az2-20020a170902a58200b001d08e080042sm5019868plb.43.2024.01.07.18.47.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 07 Jan 2024 18:47:11 -0800 (PST)
+        Sun, 07 Jan 2024 18:47:14 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org, 
- Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-In-Reply-To: <20240103114112.445488-1-enrico.scholz@sigma-chemnitz.de>
-References: <20240103114112.445488-1-enrico.scholz@sigma-chemnitz.de>
-Subject: Re: [meta-oe][PATCH] krb5: use PACKAGE_BEFORE_PN
-Message-Id: <170468203152.912276.10284640916702384720.b4-ty@gmail.com>
-Date: Sun, 07 Jan 2024 18:47:11 -0800
+To: openembedded-devel@lists.openembedded.org, mingli.yu@windriver.com
+In-Reply-To: <20240104071301.3366088-1-mingli.yu@windriver.com>
+References: <20240104071301.3366088-1-mingli.yu@windriver.com>
+Subject: Re: [meta-oe][PATCH] usleep: Make the version consistent
+Message-Id: <170468203389.912276.14968849531015939123.b4-ty@gmail.com>
+Date: Sun, 07 Jan 2024 18:47:13 -0800
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -61,24 +60,26 @@ X-Mailer: b4 0.12.4
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 08 Jan 2024 02:47:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108116
+ <openembedded-devel@lists.openembedded.org>; Mon, 08 Jan 2024 02:47:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108119
 
 
-On Wed, 03 Jan 2024 12:41:12 +0100, Enrico Scholz wrote:
-> The 'krb5-config' tool should be in ${PN}-dev (as intented by
-> binconfig class).
+On Thu, 04 Jan 2024 15:13:01 +0800, mingli.yu@windriver.com wrote:
+> The package version is inconsistent as below:
 > 
-> Use PACKAGE_BEFORE_PN for extra packages so that -dev is handled
-> before -user.
+>  # rpm -qa | grep usleep
+>  usleep-1.0-r0.core2_64
 > 
+>  # usleep --version
+>  usleep version 1.2
+> 	 usleep --help for more info
 > 
 > [...]
 
 Applied, thanks!
 
-[1/1] krb5: use PACKAGE_BEFORE_PN
-      commit: 34a20e8b8aab93baca3cf0c84da4efa3140583fb
+[1/1] usleep: Make the version consistent
+      commit: 65116b253bf4692c8232f50d2007a924f522aff7
 
 Best regards,
 -- 
