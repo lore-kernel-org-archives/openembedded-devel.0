@@ -1,118 +1,81 @@
-Return-Path: <alperyasinak1@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CA92AC3DA6E
-	for <webhook@archiver.kernel.org>; Mon,  8 Jan 2024 05:30:50 +0000 (UTC)
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
- by mx.groups.io with SMTP id smtpd.web10.782.1704691842183048063
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9478EC3DA6E
+	for <webhook@archiver.kernel.org>; Mon,  8 Jan 2024 08:12:41 +0000 (UTC)
+Received: from mailout01.t-online.de (mailout01.t-online.de [194.25.134.80])
+ by mx.groups.io with SMTP id smtpd.web11.2412.1704701555633186681
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 07 Jan 2024 21:30:42 -0800
+ Mon, 08 Jan 2024 00:12:35 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=jz7y7wZe;
- spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-40d5f40ce04so17217785e9.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Jan 2024 21:30:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1704691840; x=1705296640; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=F+Uud8B2zf/E0Vu3CxXfKWtMj3iIw+uDCPgEB9Tv+Tk=;
-        b=jz7y7wZe1Ixb3QFfioJNpqUi0V4ku7T/+myoR1tgs2PIEhiocepGGkzAL1gpM6gxR3
-         B6I/ovMP0rpw7EJ+5T0v76XGGDXFLhBZoDqhmbdDcDaFvM7ITo+j2Wc4D6a4fra+2hpO
-         Baqhzl7HZqbLwTFrOgNe2NcWz9az7lgwK/setr5EzmyE6kt1dwT8PeYl0QI9DPz8zRyM
-         CTUPkQZllajJf5HEX8ZkriVTjQYUuzNLhoxWQ0oDvpN24OAG1zsPAHNoPoZ5KVG74/0e
-         1rJ/ZaUuyOxbSJxi3sZoXn3+cqwEyIBa2zHH9+ddZuWHDpmkH8smmNjDG8OrWjzL62am
-         grjA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704691840; x=1705296640;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=F+Uud8B2zf/E0Vu3CxXfKWtMj3iIw+uDCPgEB9Tv+Tk=;
-        b=UITb/RZxKYK0FocRDs5CXoLA6DTQ1OG9kIYstRMFNcWG4m0BGreXA5mcQp4fDgP/40
-         EJCq+t4xLotArGKKomHjVIF1dYbhT1EkpM/o2mlbv/rLhnQqpH3B/Fot89SiB4tP9dMz
-         WsirThEruWC9HayBgz+L1W9LRBgBAfzW8StLtgwA7ot/Vog1UpdxZ/5xZ4VMMjKhDUTW
-         AxtMkFfAd9WWA6YsNOQ5Sa5gc1c7f88In7/L6vFBzo0IySo7y3BrnEdxh/jQifGUTXZZ
-         MzyQ0lDGdOjah+3gC7j9uza0HvWRR3MlLq11lTn30+HEFNQNw0zC4iHjvQAXgR/rCoqy
-         01Pw==
-X-Gm-Message-State: AOJu0YzjjOf/UziQbH42SvsIkD8CPMFVVxhb8fGAMkRt+DT3sHrXiwWP
-	nasrodVTVReA3YRm3nw9IKn6H9rtZrTCIg==
-X-Google-Smtp-Source: AGHT+IFfVACazqiCZtAeI4rCkNf0rtLdfOQL9uZHmUApXyeN8vCDLxDAoivO2IjVO9ZcaEqfJBUNhA==
-X-Received: by 2002:a05:600c:3c85:b0:40d:8bc6:b153 with SMTP id bg5-20020a05600c3c8500b0040d8bc6b153mr1523539wmb.110.1704691839870;
-        Sun, 07 Jan 2024 21:30:39 -0800 (PST)
-Received: from localhost.localdomain ([176.33.64.25])
-        by smtp.gmail.com with ESMTPSA id fl13-20020a05600c0b8d00b0040e490cb666sm489117wmb.12.2024.01.07.21.30.38
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 07 Jan 2024 21:30:39 -0800 (PST)
-From: alperak <alperyasinak1@gmail.com>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.80, mailfrom: f_l_k@t-online.de)
+Received: from fwd83.aul.t-online.de (fwd83.aul.t-online.de [10.223.144.109])
+	by mailout01.t-online.de (Postfix) with SMTP id 3892613279
+	for <openembedded-devel@lists.openembedded.org>; Mon,  8 Jan 2024 09:12:32 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.154.164.233]) by fwd83.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1rMkkJ-1zOYhV0; Mon, 8 Jan 2024 09:12:31 +0100
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-oe][PATCH] pcsc-tools: upgrade 1.6.2 -> 1.7.1
-Date: Mon,  8 Jan 2024 08:30:34 +0300
-Message-Id: <20240108053034.28440-1-alperyasinak1@gmail.com>
-X-Mailer: git-send-email 2.25.1
+Subject: [meta-oe][PATCH] libplist: make sure rm doesn't fail on nonexistent file
+Date: Mon,  8 Jan 2024 09:12:21 +0100
+Message-ID: <20240108081221.3537692-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1704701551-A8FA299C-40185673/0/0 CLEAN NORMAL
+X-TOI-MSGID: 0957fb4f-c879-413b-a3df-1a0bee574cc6
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 08 Jan 2024 05:30:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108125
+ <openembedded-devel@lists.openembedded.org>; Mon, 08 Jan 2024 08:12:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108126
 
-Changelog:
+I've seen this on a rebuild:
+| DEBUG: Python function autotools_aclocals finished
+| DEBUG: Executing shell function do_configure
+| rm: cannot remove '/home/flk/poky/build-hypr/tmp/work/corei7-64-poky-li=
+nux/libplist/2.3.0+git/git/m4/ax_python_devel.m4': No such file or direct=
+ory
 
-===== 1.7.1 =====
-- 64 new ATRs
-- configure: Use ATR_analysis by default on GNU/Linux
-- improve Windows support
+This was fixed after '-c cleansstate' but just in case
 
-===== 1.7.0 =====
-- 182 new ATRs
-- pcsc_scan:
-	. add debug option -d
-	. add PnP option -p
-- gscriptor: i18n and l10n in English (default), French and Russian
-- configure: add --enable-ATRparser=foobar to specify an ATR parser
-- minor fixes and improvements
-
-Signed-off-by: alperak <alperyasinak1@gmail.com>
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../{pcsc-tools_1.6.2.bb => pcsc-tools_1.7.1.bb}           | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-support/pcsc-tools/{pcsc-tools_1.6.2.bb => pcsc-tools_1.7.1.bb} (75%)
+ meta-oe/recipes-extended/libimobiledevice/libplist_2.3.0.bb | 2 +-
+ meta-oe/recipes-extended/libimobiledevice/libplist_git.bb   | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/pcsc-tools/pcsc-tools_1.6.2.bb b/meta-oe/recipes-support/pcsc-tools/pcsc-tools_1.7.1.bb
-similarity index 75%
-rename from meta-oe/recipes-support/pcsc-tools/pcsc-tools_1.6.2.bb
-rename to meta-oe/recipes-support/pcsc-tools/pcsc-tools_1.7.1.bb
-index b71fb0427..57348ee7e 100644
---- a/meta-oe/recipes-support/pcsc-tools/pcsc-tools_1.6.2.bb
-+++ b/meta-oe/recipes-support/pcsc-tools/pcsc-tools_1.7.1.bb
-@@ -5,13 +5,13 @@ LIC_FILES_CHKSUM = "file://LICENCE;md5=94d55d512a9ba36caa9b7df079bae19f"
- 
- SRC_URI = "git://github.com/LudovicRousseau/pcsc-tools;protocol=https;branch=master"
- 
--SRCREV = "b1018b83346f8a3bc3d42c96f2ed4dc62147cb24"
-+SRCREV = "53834cd33155ae1f0332102b1baca6ce63660fc5"
- 
- inherit autotools pkgconfig
- 
- S = "${WORKDIR}/git"
- 
--DEPENDS = "pcsc-lite"
-+DEPENDS = "pcsc-lite autoconf-archive"
- 
- RDEPENDS:${PN} += " \
- 	${@bb.utils.contains('DISTRO_FEATURES','systemd','pcsc-lite-systemd', 'pcsc-lite', d)} \
-@@ -21,4 +21,5 @@ RDEPENDS:${PN} += " \
- 	libpcsc-perl \
+diff --git a/meta-oe/recipes-extended/libimobiledevice/libplist_2.3.0.bb =
+b/meta-oe/recipes-extended/libimobiledevice/libplist_2.3.0.bb
+index 3eefda733..78640934a 100644
+--- a/meta-oe/recipes-extended/libimobiledevice/libplist_2.3.0.bb
++++ b/meta-oe/recipes-extended/libimobiledevice/libplist_2.3.0.bb
+@@ -23,7 +23,7 @@ CVE_STATUS_LIBLIST =3D " \
  "
- 
--FILES:${PN} += "${datadir}/pcsc/smartcard_list.txt"
-+FILES:${PN} += "${datadir}/pcsc/smartcard_list.txt \
-+				${datadir}/pcsc/gscriptor.png"
--- 
-2.25.1
+=20
+ do_configure:prepend() {
+-    rm ${S}/m4/ax_python_devel.m4
++    rm -f ${S}/m4/ax_python_devel.m4
+ }
+=20
+ do_install:append () {
+diff --git a/meta-oe/recipes-extended/libimobiledevice/libplist_git.bb b/=
+meta-oe/recipes-extended/libimobiledevice/libplist_git.bb
+index 0142bcbaf..6fbc28394 100644
+--- a/meta-oe/recipes-extended/libimobiledevice/libplist_git.bb
++++ b/meta-oe/recipes-extended/libimobiledevice/libplist_git.bb
+@@ -24,7 +24,7 @@ CVE_STATUS_LIBLIST =3D " \
+ "
+=20
+ do_configure:prepend() {
+-    rm ${S}/m4/ax_python_devel.m4
++    rm -f ${S}/m4/ax_python_devel.m4
+ }
+=20
+ do_install:append () {
+--=20
+2.43.0
 
 
