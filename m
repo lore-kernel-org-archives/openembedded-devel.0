@@ -1,132 +1,155 @@
-Return-Path: <hprajapati@mvista.com>
+Return-Path: <alex.kanavin@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 80ED4C47073
-	for <webhook@archiver.kernel.org>; Tue,  9 Jan 2024 05:58:18 +0000 (UTC)
-Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
- by mx.groups.io with SMTP id smtpd.web10.11133.1704779889355383392
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 803D2C46CD2
+	for <webhook@archiver.kernel.org>; Tue,  9 Jan 2024 09:08:39 +0000 (UTC)
+Received: from mail-lf1-f51.google.com (mail-lf1-f51.google.com [209.85.167.51])
+ by mx.groups.io with SMTP id smtpd.web11.12791.1704791316415251450
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Jan 2024 21:58:09 -0800
+ Tue, 09 Jan 2024 01:08:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=LomeTts/;
- spf=pass (domain: mvista.com, ip: 209.85.214.172, mailfrom: hprajapati@mvista.com)
-Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-1d50d0c98c3so15629185ad.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 08 Jan 2024 21:58:09 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=T6HrTOZ4;
+ spf=pass (domain: gmail.com, ip: 209.85.167.51, mailfrom: alex.kanavin@gmail.com)
+Received: by mail-lf1-f51.google.com with SMTP id 2adb3069b0e04-50e7b273352so2663938e87.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 09 Jan 2024 01:08:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1704779888; x=1705384688; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=PKVKwZ1t99/E+ImWX8W9ZnMNBpeE+/vpoRHMp8Uy5Z8=;
-        b=LomeTts/qZHuWmIkahXG3z00lLvwTDzmA5NXmyrZHSLK9SU09zQT8zLzfmdGsSYugS
-         VETVaqExwjj6sJlm5RvvX+iMh/b8pKVQXwcvnyZwYe4SxbgWGjnfBPJ2GTW8JF4RbGdv
-         wAHymH61eENUJePhrZLdCTp9pC3QOYdkl5fw0=
+        d=gmail.com; s=20230601; t=1704791314; x=1705396114; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=DYevx4gEq4U+5v8exUmCrwYvTHTiXWw5/VD0+bcYUQ0=;
+        b=T6HrTOZ4+xQHC4p8TvTZ/CCV7V601JG+jQiWvt9kpONRnJPr6Mg1fv0mbmoNe3u7zh
+         jTKEbpeFK1Eju4KCNA/2j664BS4N8vl7V7LK7KAOkDkrUouai972IyQ8ubJdoo729Crm
+         YGX/8h+7tKVM4Is8aK7jJbOybgYYgtk0loClvmnQK99F+m1W6zUCuebcKT7X+tz1LDc2
+         TzzXDGgjwSdpx2wPHe8ovCwnUr5Rh8GqIP4p0EXiErhIQPSPKOej1DfkIJG7xJ0unqqJ
+         N13TdlF8OZMixuZplAHP6xEpiWpzm1Y0EH6k5hAs5YlWq+aR+zntAIlK3Lnzpafqetwg
+         R+8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704779888; x=1705384688;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=PKVKwZ1t99/E+ImWX8W9ZnMNBpeE+/vpoRHMp8Uy5Z8=;
-        b=WyZ2hOub/KlLkHsIZUxTo8eHJEikvdD4e+UI28GEoqrtF9GqUOb3CkaLMBqEVVnOJZ
-         ZvDTVYX9pjiSbV3vHYwnN9aT7jTzUD0wGHrgE5BeRfEwX61SEg6gATO7eOeOfMxXoTB9
-         1qdTiCZw7HfyWOz76V7cAfpVTEc7K6T9IvC4dZbQbTQkxQfcXGZyAQCKKWRBYXFvvCqn
-         tzpMahdv7bfY5CZK+7KJmKcvXKu6gkQoNtWvq0hAh28NjRSGTl3LQyAVE6WUfEbPw7n4
-         bTzzdf/7fnUKzLE0UMlj26DDR79tqERD50vd/KsoyivtV8lNTT1jwRdwZogS5iCkZVrA
-         HAug==
-X-Gm-Message-State: AOJu0YyVXLww3/FpyrTHFP+OZTyn3U8ErY9SAXyy50sRCHve7jeGx/kE
-	l2wdZT6Vm7JkuLz0D6ryzAoVr4lB4CZNTCH1qqpbmp2mYGI=
-X-Google-Smtp-Source: AGHT+IGeFCaEovIdONNjK5aL1M+jotThbd71x+n+Rd4UOpBi5gEV8EHPS62VS32C2zT9Bx54a2T2Ww==
-X-Received: by 2002:a17:903:2344:b0:1d3:8bf1:9add with SMTP id c4-20020a170903234400b001d38bf19addmr337799plh.36.1704779888548;
-        Mon, 08 Jan 2024 21:58:08 -0800 (PST)
-Received: from MVIN00016.mvista.com ([150.129.170.233])
-        by smtp.gmail.com with ESMTPSA id bd8-20020a170902830800b001d3dacffde3sm845490plb.226.2024.01.08.21.58.06
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 08 Jan 2024 21:58:08 -0800 (PST)
-From: Hitendra Prajapati <hprajapati@mvista.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Hitendra Prajapati <hprajapati@mvista.com>
-Subject: [meta-networking][kirkstone][PATCH] wireshark: fix CVE-2024-0208 GVCP dissector crash
-Date: Tue,  9 Jan 2024 11:28:01 +0530
-Message-Id: <20240109055801.248571-1-hprajapati@mvista.com>
-X-Mailer: git-send-email 2.25.1
+        d=1e100.net; s=20230601; t=1704791314; x=1705396114;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=DYevx4gEq4U+5v8exUmCrwYvTHTiXWw5/VD0+bcYUQ0=;
+        b=bmVl9pW9xJ98FzihONMt8h7FZ5PaNE8WBvQ+FO4kkQQHe8kgFlRUDOvcLWpZrYJ96x
+         5M9BToLwsrnkIbQTZv7wnvcwYXLq9c51iyWsrM+G6ijHFFPaG2+kglVkYNI/TTbIYHak
+         xbR+6RIdGpF2ACZ3KXiTURfrj8t1QPcZrtqzcYxKudczD8gLEbfPi8F8ubrPOPzLcgng
+         HmU0TAhAfGbB1olJUuRoqZ/9FrtEUuhAIyCnhlY571AqkMlNs/gZKpWyldZOzrOSJFB2
+         EIanKdHuGjBEINM+BR7L6vVVKPX//Vu2S4IpkGcyd4Nv5ZuLYzvaPngPRFcyGT6B38uS
+         n3eQ==
+X-Gm-Message-State: AOJu0YygZm9SV6VCYSvcZB1S46BqD9cEpWMks1uPezHIbPXntxstLZx8
+	0RN5Pl5ljfPJNWIIeHM9n2Oq+i64fSEGletYNbc=
+X-Google-Smtp-Source: AGHT+IEz4muPtxirgvEJrPDj91UsLnOmozVtHz8QYd8RzHNxGa1bINuph3WZLA1qF5TfMPEFjoSieJ2gEF3j6cOEMs0=
+X-Received: by 2002:a05:6512:202f:b0:50e:769b:7165 with SMTP id
+ s15-20020a056512202f00b0050e769b7165mr1543129lfs.57.1704791313990; Tue, 09
+ Jan 2024 01:08:33 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240105133611.3018041-1-alex@linutronix.de> <20240105133611.3018041-2-alex@linutronix.de>
+ <CAMKF1srDmU9h8xP2JGX=6otiRGqVPKr4ZNX00bicU-R=C9ipmQ@mail.gmail.com>
+In-Reply-To: <CAMKF1srDmU9h8xP2JGX=6otiRGqVPKr4ZNX00bicU-R=C9ipmQ@mail.gmail.com>
+From: Alexander Kanavin <alex.kanavin@gmail.com>
+Date: Tue, 9 Jan 2024 10:08:22 +0100
+Message-ID: <CANNYZj8kkMN-dzw2YzXEQ1dTFo3d+Bg5jxSe9VCLDyF=DNFVPg@mail.gmail.com>
+Subject: Re: [oe] [PATCH 2/2] python3-kivy: update 2.2.1 -> 2.3.0
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 09 Jan 2024 05:58:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108183
+ <openembedded-devel@lists.openembedded.org>; Tue, 09 Jan 2024 09:08:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108184
 
-Upstream-Status: Backport from https://gitlab.com/wireshark/wireshark/-/commit/a8586fde3a6512466afb2a660538ef3fe712076b
+I think it's clang, so needs to be added to conf/nonclangable.conf?
 
-Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
----
- .../wireshark/files/CVE-2024-0208.patch       | 42 +++++++++++++++++++
- .../wireshark/wireshark_3.4.12.bb             |  1 +
- 2 files changed, 43 insertions(+)
- create mode 100644 meta-networking/recipes-support/wireshark/files/CVE-2024-0208.patch
+/mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux-musl/python3-kivy/2.3.0=
+/git/kivy/graphics/cgl_backend/cgl_gl.c:4549:52:
+error: incompatible function pointer types assigning to 'void
+(*)(GLuint, GLsizei, const GLchar **, const GLint *)' (aka 'void
+(*)(unsigned int, int, const char **, const int *)') from 'void
+(GLuint, GLsizei, const GLchar *const *, const GLint *)' (aka 'void
+(unsigned int, int, const char *const *, const int *)')
+[-Wincompatible-function-pointer-types]
+ 4549 |   __pyx_v_4kivy_8graphics_3cgl_cgl->glShaderSource =3D glShaderSour=
+ce;
+      |                                                    ^ ~~~~~~~~~~~~~~
 
-diff --git a/meta-networking/recipes-support/wireshark/files/CVE-2024-0208.patch b/meta-networking/recipes-support/wireshark/files/CVE-2024-0208.patch
-new file mode 100644
-index 0000000000..4c9f8d29c0
---- /dev/null
-+++ b/meta-networking/recipes-support/wireshark/files/CVE-2024-0208.patch
-@@ -0,0 +1,42 @@
-+From a8586fde3a6512466afb2a660538ef3fe712076b Mon Sep 17 00:00:00 2001
-+From: John Thacker <johnthacker@gmail.com>
-+Date: Thu, 23 Nov 2023 13:47:51 -0500
-+Subject: [PATCH] gvcp: Don't try to add a NULL string to a column
-+
-+This was caught as an invalid argument by g_strlcpy before 4.2,
-+but it was never a good idea.
-+
-+Fix #19496
-+
-+Upstream-Status: Backport [https://gitlab.com/wireshark/wireshark/-/commit/a8586fde3a6512466afb2a660538ef3fe712076b]
-+CVE: CVE-2024-0208
-+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
-+---
-+ epan/dissectors/packet-gvcp.c | 7 ++-----
-+ 1 file changed, 2 insertions(+), 5 deletions(-)
-+
-+diff --git a/epan/dissectors/packet-gvcp.c b/epan/dissectors/packet-gvcp.c
-+index 6a17cff..eb849c0 100644
-+--- a/epan/dissectors/packet-gvcp.c
-++++ b/epan/dissectors/packet-gvcp.c
-+@@ -2222,15 +2222,12 @@ static void dissect_readreg_ack(proto_tree *gvcp_telegram_tree, tvbuff_t *tvb, p
-+ 			if (addr_list_size > 0)
-+ 			{
-+ 				address_string = get_register_name_from_address(*((guint32*)wmem_array_index(gvcp_trans->addr_list, 0)), gvcp_info, &is_custom_register);
-++				col_append_str(pinfo->cinfo, COL_INFO, address_string);
-+ 			}
-+ 
-+ 			if (num_registers)
-+ 			{
-+-				col_append_fstr(pinfo->cinfo, COL_INFO, "%s Value=0x%08X", address_string, tvb_get_ntohl(tvb, offset));
-+-			}
-+-			else
-+-			{
-+-				col_append_str(pinfo->cinfo, COL_INFO, address_string);
-++				col_append_sep_fstr(pinfo->cinfo, COL_INFO, " ", "Value=0x%08X", tvb_get_ntohl(tvb, offset));
-+ 			}
-+ 		}
-+ 	}
-+-- 
-+2.25.1
-+
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb b/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
-index 365ec5e90a..f5e316d9dc 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
-@@ -27,6 +27,7 @@ SRC_URI += " \
-     file://CVE-2023-2906.patch \
-     file://CVE-2023-1992.patch \
-     file://CVE-2022-4345.patch \
-+    file://CVE-2024-0208.patch \
- "
- 
- UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
--- 
-2.25.1
+Note that this update is needed for both cython 3.x and python 3.12
+compatibility.
 
+Alex
+
+On Tue, 9 Jan 2024 at 04:32, Khem Raj <raj.khem@gmail.com> wrote:
+>
+> this fails to build here ( maybe its clang finding additional problems )
+>
+> https://sprunge.us/lq5PKS
+>
+> On Fri, Jan 5, 2024 at 5:36=E2=80=AFAM Alexander Kanavin <alex.kanavin@gm=
+ail.com> wrote:
+> >
+> > License-Update: years, mention that it is MIT at the start.
+> >
+> > Signed-off-by: Alexander Kanavin <alex@linutronix.de>
+> > ---
+> >  .../python/{python3-kivy_2.2.1.bb =3D> python3-kivy_2.3.0.bb} | 6 +++-=
+--
+> >  1 file changed, 3 insertions(+), 3 deletions(-)
+> >  rename meta-python/recipes-devtools/python/{python3-kivy_2.2.1.bb =3D>=
+ python3-kivy_2.3.0.bb} (93%)
+> >
+> > diff --git a/meta-python/recipes-devtools/python/python3-kivy_2.2.1.bb =
+b/meta-python/recipes-devtools/python/python3-kivy_2.3.0.bb
+> > similarity index 93%
+> > rename from meta-python/recipes-devtools/python/python3-kivy_2.2.1.bb
+> > rename to meta-python/recipes-devtools/python/python3-kivy_2.3.0.bb
+> > index a72ee14f6..0d4a1207f 100644
+> > --- a/meta-python/recipes-devtools/python/python3-kivy_2.2.1.bb
+> > +++ b/meta-python/recipes-devtools/python/python3-kivy_2.3.0.bb
+> > @@ -2,7 +2,7 @@ SUMMARY =3D "Open source Python library for rapid devel=
+opment of applications \
+> >      that make use of innovative user interfaces, such as multi-touch a=
+pps."
+> >  HOMEPAGE =3D "https://kivy.org/"
+> >  LICENSE =3D "MIT"
+> > -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Ded5cd0f2cfda42852c332e3b88c=
+85fea"
+> > +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D6d3bc49400e35d5a2279d14c40d=
+cfb09"
+> >
+> >  inherit setuptools3 pkgconfig features_check
+> >  PIP_INSTALL_PACKAGE =3D "Kivy"
+> > @@ -11,11 +11,11 @@ PIP_INSTALL_PACKAGE =3D "Kivy"
+> >  # and mali-based OS's. We need to patch the setup file to tell Kivy se=
+tup
+> >  # that our machine has GLES libaries installed as well
+> >  # Also, if using SDL2 as backend, SDL2 needs to be configured with gle=
+s
+> > -SRC_URI =3D "git://github.com/kivy/kivy.git;protocol=3Dhttps;branch=3D=
+stable \
+> > +SRC_URI =3D "git://github.com/kivy/kivy.git;protocol=3Dhttps;branch=3D=
+master \
+> >             file://0001-add-support-for-glesv2.patch \
+> >             "
+> >
+> > -SRCREV =3D "344768bfefd2e8f5302cc9dfb8ca41991ce6f7e7"
+> > +SRCREV =3D "9ef218027178115a66b417ae34b21f488bdd3617"
+> >
+> >  S =3D "${WORKDIR}/git"
+> >
+> > --
+> > 2.39.2
+> >
+> >
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > Links: You receive all messages sent to this group.
+> > View/Reply Online (#108048): https://lists.openembedded.org/g/openembed=
+ded-devel/message/108048
+> > Mute This Topic: https://lists.openembedded.org/mt/103542151/1997914
+> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
+[raj.khem@gmail.com]
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >
 
