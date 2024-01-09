@@ -2,128 +2,171 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CE0A4C3DA6E
-	for <webhook@archiver.kernel.org>; Tue,  9 Jan 2024 03:33:07 +0000 (UTC)
-Received: from mail-oa1-f50.google.com (mail-oa1-f50.google.com [209.85.160.50])
- by mx.groups.io with SMTP id smtpd.web11.9283.1704771178590815145
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CD687C3DA6E
+	for <webhook@archiver.kernel.org>; Tue,  9 Jan 2024 03:35:47 +0000 (UTC)
+Received: from mail-oa1-f41.google.com (mail-oa1-f41.google.com [209.85.160.41])
+ by mx.groups.io with SMTP id smtpd.web10.9506.1704771340470784295
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Jan 2024 19:32:58 -0800
+ Mon, 08 Jan 2024 19:35:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=IrGSqoD/;
- spf=pass (domain: gmail.com, ip: 209.85.160.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f50.google.com with SMTP id 586e51a60fabf-204dfd7a89aso1207809fac.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 08 Jan 2024 19:32:58 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=DcqBCvXJ;
+ spf=pass (domain: gmail.com, ip: 209.85.160.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f41.google.com with SMTP id 586e51a60fabf-205cdc4b2b8so1808465fac.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 08 Jan 2024 19:35:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1704771178; x=1705375978; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1704771340; x=1705376140; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Ndz7yb/bdoi9HbH8Fpyz8RBeQqZZqoTw8hTCtfcksSY=;
-        b=IrGSqoD/c1VyiExIcHp3ioNSvsolie0eWtQuPp3c00ab4o1YgYGhMTH625AOAuvx1Y
-         JgeMhNjO92x7kcPG6yE0riwwh/wDN5AeOkr/Af8XV9D8ljhzSTpG0VkXJU5PvzZDSqqu
-         sIbpZqsEm+iXPMrCfNlOBgRzaMjF0uTDeaxJ35qWa7G+4/zNX2WtnH17ynLOXmwb2lb+
-         kgGgifUWoCXEztOfeaYPmiO/ej+7WCxtbt0odWVK0+Obm+i/I23XlNmEO3pYOgDAtsXB
-         3sXyc/q6Psv6xowiSOYo7pejjRYMAcukoWDSnHrh+60dptNRcGhzLHKrsxlNFvJzRGfN
-         R9rQ==
+        bh=+PzS3179x/7+3+Pv3z05HSLh1Q9K2BWJRGx1kPHNGTI=;
+        b=DcqBCvXJ8PRMuCijW8R2AyY0r2cDuKTKrxDsGwNlD6S3YGPX5bP8fv69mwyvv2BBq7
+         JjqEdlcWFB6D27ogLNW36OZKdgIINraOlHBigfn3L5IuaRljBG4hNoLT/rgo7fyXngO0
+         keHbguK4ykR8Dk+CJWoazjeIN80UD4nDClNa3BhvbqZrT1f9poAYIjao3S9oNNgW/kkD
+         hz7cM2Lec0086AQP20VUWDv9WDprhCchJbScsNm9gdo4KgdLx0Uqr7B3j8LNCMsvKJmB
+         KwuCfjUN0ClxtujtA3SLybwFFcC4UkYHHzYHxZeAD9RO4Q+ODBSTQjKbtgkjnwhYFWEW
+         n/vQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704771178; x=1705375978;
+        d=1e100.net; s=20230601; t=1704771340; x=1705376140;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Ndz7yb/bdoi9HbH8Fpyz8RBeQqZZqoTw8hTCtfcksSY=;
-        b=o4Y4hE5XUzED1Yee7mvIfn/1/A3KrlJ9EJFAZME0YcD0BEViDPBNytoqZitqC7IH44
-         UwVYfo9bR+RgXGF0z9LPggbHSnJvRwu0tavo+RaPcMLXhf1In+e66oJKy+9EkkP3sov/
-         LBEponT8Sr8xkfzePAwac0zgXMwYkz9kodz6nCNXgmZ3rfJeMjjj5QeF1YR4DTgcDyeu
-         bHtvgjpMIqKBWLpS96HtBwcJ7h03M9MtAAxjl4yUH3bo+hXuvW6JwXEZpvNanESO93lE
-         xlAVfYiapOIb4GemeYPbClDpPCvPd0nM8GeEIoJ0hYY75Sn0rdwfkt58IHSm8f7DEUzs
-         o8eQ==
-X-Gm-Message-State: AOJu0YzRyy+a5rrd0cRNsaInktHRGubt0LoDBx2+VMiEpWRWmCvrMNZ2
-	i1HEnPOgxcp2emCp+ks9fOZBpWaTkCIx1e8mqD8=
-X-Google-Smtp-Source: AGHT+IE2kDBbXcam68S1kUBSzF30egxhx7WEassnuCmszRY9PmzgACldVGy6a9om2FTMUni+PqZxiR8yKYGMIV2DT3Q=
-X-Received: by 2002:a05:6870:a2ce:b0:206:8cf:71cd with SMTP id
- w14-20020a056870a2ce00b0020608cf71cdmr35647oak.8.1704771177744; Mon, 08 Jan
- 2024 19:32:57 -0800 (PST)
+        bh=+PzS3179x/7+3+Pv3z05HSLh1Q9K2BWJRGx1kPHNGTI=;
+        b=JaFdxGOwZZVUjYgsbqltzDKhP+kWCYjPNx79jf02Un3suYvJof/AvuP0leDoaf3Hvf
+         RH0auHp/en+AJeOxcbzQ2HIwivEOokpx70w2NbtnLdvCeXvmtan4UK7buLPVv+fO7sT4
+         RDkP5EGPJms78O1dbgybvu5wce+fDPf7ZhJvX/Wfonu8bGWUeLbybNHTJqQXCY1ld24W
+         zmZXemHK4bNqLtjsadO1LuANVLpzIizuB5sM8LbgnYwP33z3HlWN+XuTexpYVgAcHadg
+         rDdgdZ9qnp9XrBBssyY94txXd2eRON+pX1ruVYrldkkUKsObyZigL62asE9UPC4cu1fO
+         MpZA==
+X-Gm-Message-State: AOJu0YwyVklYw9Nwc6T53Y6Pumzr2dZ1R1m9F5zuo2Tb4WtRTBF2JUML
+	DFMCAx72R1vtvc9pxuGj2quuJB2WefcS6eVaqQk=
+X-Google-Smtp-Source: AGHT+IGKWIoySxwxWdI1gYVSmdqb1BpAVKkCNZpgn+SEOhcjmocyga5DUcy/O9u1f1mq8G+ikmfIwlb70rX+EJ1jyHk=
+X-Received: by 2002:a05:6870:7254:b0:205:f283:52f9 with SMTP id
+ y20-20020a056870725400b00205f28352f9mr5826464oaf.108.1704771339666; Mon, 08
+ Jan 2024 19:35:39 -0800 (PST)
 MIME-Version: 1.0
-References: <20240105133611.3018041-1-alex@linutronix.de> <20240105133611.3018041-2-alex@linutronix.de>
-In-Reply-To: <20240105133611.3018041-2-alex@linutronix.de>
+References: <1704720002-29880-1-git-send-email-wangmy@fujitsu.com>
+In-Reply-To: <1704720002-29880-1-git-send-email-wangmy@fujitsu.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 8 Jan 2024 19:32:31 -0800
-Message-ID: <CAMKF1srDmU9h8xP2JGX=6otiRGqVPKr4ZNX00bicU-R=C9ipmQ@mail.gmail.com>
-Subject: Re: [oe] [PATCH 2/2] python3-kivy: update 2.2.1 -> 2.3.0
-To: Alexander Kanavin <alex.kanavin@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org, 
-	Alexander Kanavin <alex@linutronix.de>
+Date: Mon, 8 Jan 2024 19:35:13 -0800
+Message-ID: <CAMKF1sob+5dMHqJyz9O0QE5N1aBx-EVTfrXDw-HeGxpoEiF=PQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH] iwd: upgrade 2.8 -> 2.12
+To: wangmy <wangmy@fujitsu.com>
+Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 09 Jan 2024 03:33:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108176
+ <openembedded-devel@lists.openembedded.org>; Tue, 09 Jan 2024 03:35:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108177
 
-this fails to build here ( maybe its clang finding additional problems )
+fails on musl
 
-https://sprunge.us/lq5PKS
+https://sprunge.us/756nOz
 
-On Fri, Jan 5, 2024 at 5:36=E2=80=AFAM Alexander Kanavin <alex.kanavin@gmai=
-l.com> wrote:
+See my fixes to use POSIX basename for various recipes. You will need
+something similar.
+
+On Mon, Jan 8, 2024 at 5:20=E2=80=AFAM wangmy <wangmy@fujitsu.com> wrote:
 >
-> License-Update: years, mention that it is MIT at the start.
+> From: Wang Mingyu <wangmy@fujitsu.com>
 >
-> Signed-off-by: Alexander Kanavin <alex@linutronix.de>
+> Changelog
+> =3D=3D=3D=3D=3D=3D=3D=3D
+> -Fix issue with DPP extra settings not being used.
+> -Fix issue with DPP and PRF+ handling on AARCH64.
+>
+> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 > ---
->  .../python/{python3-kivy_2.2.1.bb =3D> python3-kivy_2.3.0.bb} | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
->  rename meta-python/recipes-devtools/python/{python3-kivy_2.2.1.bb =3D> p=
-ython3-kivy_2.3.0.bb} (93%)
+>  ...s_top_srcdir-instead-of-abs_srcdir-for-e.patch | 15 +++++++--------
+>  .../iwd/{iwd_2.8.bb =3D> iwd_2.12.bb}               |  2 +-
+>  2 files changed, 8 insertions(+), 9 deletions(-)
+>  rename meta-oe/recipes-connectivity/iwd/{iwd_2.8.bb =3D> iwd_2.12.bb} (9=
+4%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-kivy_2.2.1.bb b/=
-meta-python/recipes-devtools/python/python3-kivy_2.3.0.bb
-> similarity index 93%
-> rename from meta-python/recipes-devtools/python/python3-kivy_2.2.1.bb
-> rename to meta-python/recipes-devtools/python/python3-kivy_2.3.0.bb
-> index a72ee14f6..0d4a1207f 100644
-> --- a/meta-python/recipes-devtools/python/python3-kivy_2.2.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-kivy_2.3.0.bb
-> @@ -2,7 +2,7 @@ SUMMARY =3D "Open source Python library for rapid develop=
-ment of applications \
->      that make use of innovative user interfaces, such as multi-touch app=
-s."
->  HOMEPAGE =3D "https://kivy.org/"
->  LICENSE =3D "MIT"
-> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Ded5cd0f2cfda42852c332e3b88c85=
-fea"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D6d3bc49400e35d5a2279d14c40dcf=
-b09"
+> diff --git a/meta-oe/recipes-connectivity/iwd/iwd/0001-build-Use-abs_top_=
+srcdir-instead-of-abs_srcdir-for-e.patch b/meta-oe/recipes-connectivity/iwd=
+/iwd/0001-build-Use-abs_top_srcdir-instead-of-abs_srcdir-for-e.patch
+> index 9ed73104e..bc72f17e0 100644
+> --- a/meta-oe/recipes-connectivity/iwd/iwd/0001-build-Use-abs_top_srcdir-=
+instead-of-abs_srcdir-for-e.patch
+> +++ b/meta-oe/recipes-connectivity/iwd/iwd/0001-build-Use-abs_top_srcdir-=
+instead-of-abs_srcdir-for-e.patch
+> @@ -1,20 +1,22 @@
+> -From b0b51d762f45ff9d320b96bd0acb89313148a446 Mon Sep 17 00:00:00 2001
+> +From 2e782b849a2202d5a77bd5ac67160c4a47ae306d Mon Sep 17 00:00:00 2001
+>  From: Zang Ruochen <zangrc.fnst@fujitsu.com>
+>  Date: Wed, 12 May 2021 14:28:24 +0900
+> -Subject: [PATCH] build: Use abs_top_srcdir instead of abs_srcdir for ell=
+ sources
+> +Subject: [PATCH] build: Use abs_top_srcdir instead of abs_srcdir for ell
+> + sources
 >
->  inherit setuptools3 pkgconfig features_check
->  PIP_INSTALL_PACKAGE =3D "Kivy"
-> @@ -11,11 +11,11 @@ PIP_INSTALL_PACKAGE =3D "Kivy"
->  # and mali-based OS's. We need to patch the setup file to tell Kivy setu=
-p
->  # that our machine has GLES libaries installed as well
->  # Also, if using SDL2 as backend, SDL2 needs to be configured with gles
-> -SRC_URI =3D "git://github.com/kivy/kivy.git;protocol=3Dhttps;branch=3Dst=
-able \
-> +SRC_URI =3D "git://github.com/kivy/kivy.git;protocol=3Dhttps;branch=3Dma=
-ster \
->             file://0001-add-support-for-glesv2.patch \
+>  this makes it build when build dir is outside of sources dir
+>
+>  Upstream-Status: Submitted [https://lists.01.org/hyperkitty/list/iwd@lis=
+ts.01.org/message/SYX6Z7SUQHU7UWM6ECZTTJ6SPODIS6KB/]
+> +
+>  ---
+>   Makefile.am | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>
+>  diff --git a/Makefile.am b/Makefile.am
+> -index 68035e4..e3f7990 100644
+> +index 5ed6ab3..e0e3c87 100644
+>  --- a/Makefile.am
+>  +++ b/Makefile.am
+> -@@ -628,7 +628,7 @@ ell/shared: Makefile
+> +@@ -697,7 +697,7 @@ ell/shared: Makefile
+>         $(AM_V_at)$(MKDIR_P) ell
+>         $(AM_V_GEN)for f in $(ell_shared) ; do \
+>                 if [ ! -f $$f ] ; then \
+> @@ -23,7 +25,7 @@ index 68035e4..e3f7990 100644
+>                 fi \
+>         done > $@
+>
+> -@@ -636,7 +636,7 @@ ell/internal: Makefile
+> +@@ -705,7 +705,7 @@ ell/internal: Makefile
+>         $(AM_V_at)$(MKDIR_P) ell
+>         $(AM_V_GEN)for f in $(ell_headers) $(ell_sources) ; do \
+>                 if [ ! -f $$f ] ; then \
+> @@ -32,6 +34,3 @@ index 68035e4..e3f7990 100644
+>                 fi \
+>         done > $@
+>
+> ---
+> -2.25.1
+> -
+> diff --git a/meta-oe/recipes-connectivity/iwd/iwd_2.8.bb b/meta-oe/recipe=
+s-connectivity/iwd/iwd_2.12.bb
+> similarity index 94%
+> rename from meta-oe/recipes-connectivity/iwd/iwd_2.8.bb
+> rename to meta-oe/recipes-connectivity/iwd/iwd_2.12.bb
+> index ee310d295..2ed13afe3 100644
+> --- a/meta-oe/recipes-connectivity/iwd/iwd_2.8.bb
+> +++ b/meta-oe/recipes-connectivity/iwd/iwd_2.12.bb
+> @@ -8,7 +8,7 @@ DEPENDS =3D "ell"
+>  SRC_URI =3D "https://www.kernel.org/pub/linux/network/wireless/${BP}.tar=
+.xz \
+>             file://0001-build-Use-abs_top_srcdir-instead-of-abs_srcdir-fo=
+r-e.patch \
 >             "
+> -SRC_URI[sha256sum] =3D "a90e621f45b9c2f9021beea0fa6477ee0334fcd2ee34beaa=
+b42e31ea0fd3be29"
+> +SRC_URI[sha256sum] =3D "6b71a78c1e1a0200c6b0097efe0f4055a76f445c0e17cdd6=
+225d89538d7dc35e"
 >
-> -SRCREV =3D "344768bfefd2e8f5302cc9dfb8ca41991ce6f7e7"
-> +SRCREV =3D "9ef218027178115a66b417ae34b21f488bdd3617"
->
->  S =3D "${WORKDIR}/git"
+>  inherit autotools manpages pkgconfig python3native systemd
 >
 > --
-> 2.39.2
+> 2.34.1
 >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#108048): https://lists.openembedded.org/g/openembedde=
-d-devel/message/108048
-> Mute This Topic: https://lists.openembedded.org/mt/103542151/1997914
+> View/Reply Online (#108133): https://lists.openembedded.org/g/openembedde=
+d-devel/message/108133
+> Mute This Topic: https://lists.openembedded.org/mt/103596458/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
 aj.khem@gmail.com]
