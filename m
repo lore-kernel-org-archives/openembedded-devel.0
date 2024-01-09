@@ -1,165 +1,367 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <throos@amazon.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 36232C46CD2
-	for <webhook@archiver.kernel.org>; Tue,  9 Jan 2024 14:57:31 +0000 (UTC)
-Received: from mail-oo1-f44.google.com (mail-oo1-f44.google.com [209.85.161.44])
- by mx.groups.io with SMTP id smtpd.web11.18506.1704812242275754344
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 34457C46CD2
+	for <webhook@archiver.kernel.org>; Tue,  9 Jan 2024 15:01:21 +0000 (UTC)
+Received: from smtp-fw-80008.amazon.com (smtp-fw-80008.amazon.com [99.78.197.219])
+ by mx.groups.io with SMTP id smtpd.web10.18791.1704812476936721035
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 Jan 2024 06:57:22 -0800
+ Tue, 09 Jan 2024 07:01:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=RTSXNcaf;
- spf=pass (domain: gmail.com, ip: 209.85.161.44, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f44.google.com with SMTP id 006d021491bc7-595d24ad466so1806695eaf.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 09 Jan 2024 06:57:22 -0800 (PST)
+ dkim=pass header.i=@amazon.de header.s=amazon201209 header.b=E/sCLP0t;
+ spf=pass (domain: amazon.de, ip: 99.78.197.219, mailfrom: prvs=73170cd5c=throos@amazon.de)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1704812241; x=1705417041; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=XkThSKNc5+JOr0uJi+2/PyzRtCXm3/3Ua4qJvbdNNBc=;
-        b=RTSXNcafQN7HMShlHhPUfpfw3/nFL5OqYN3vuJQd35TSlFDvMAsjPqowgxeiCMTRcn
-         Ua9D5dAh8yO3S2poAGyVExi1GODIIwk1qq8ZHc5sS7JVZ/7Ap/Gp+ej7IwqXewipszkp
-         PCwg3HBtjqOQMWCzqymoddGg+mNxkQrI4M2C/MlyrW50Lkjhoq1XSH/MW1e94pZodDXx
-         dQQKmWGAs861VCTHXOLRX6WsFhe7u/Cj9Z4mcwFMfjNQ5b1RkeNp3ur+3eyEnZN9MbGa
-         UkTbuVFRIigDRyaqpSxw5tdX/8qHaqANh5/cukwR2JNknwj1N/0yDpNCqxdHqV4jAi+0
-         5uag==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704812241; x=1705417041;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=XkThSKNc5+JOr0uJi+2/PyzRtCXm3/3Ua4qJvbdNNBc=;
-        b=JR88FOACPfebC+7quFS1nqkMzFmIKwRMk4SaImGymhIOzGgV4Vav00Ey1MinljUas4
-         lEUJMWv7rgMlJfpnMf/QAw1Z10HriYCEY6MtqPHnhxv+V+OS5fKEAe/xJMew2CXQxrNo
-         xxkVJ7nDG7DzU8hznsKTFV/Xp8gvhU1Zy6q1Ni3/i8TPDzp/tGLsuSR1HJMQz83N03yb
-         g5FQhkPar9Eoc/bRvVY1fmiADjiGdRO+XLpmX27KlHO+ylmIlQPaOReDhOHVV4LIGFOg
-         vpbgB/wSnfRda89wV/QtVLwlrVabzyk/Fzwky1sAc4Kxjppd6pdoIM3k7PjUtGVpAu3M
-         evMQ==
-X-Gm-Message-State: AOJu0YzozVm2ICsK+t2oPfjft7lcGzN2GaCIzUefWX6Br90+3T5Zr6wC
-	5fJu87A8oa6rz8F1EHUcHpyKppHaEccIqHiojfk=
-X-Google-Smtp-Source: AGHT+IF3NORVq3q2eHLSoXWbN7ZonNYh/v7fSO3gUTXL03mbLKd+dj3iF/k2sYntYJm3EnwgzNVqkKTXioa5DMF3CbM=
-X-Received: by 2002:a05:6870:35cf:b0:203:b5ec:ef08 with SMTP id
- c15-20020a05687035cf00b00203b5ecef08mr6207780oak.107.1704812241263; Tue, 09
- Jan 2024 06:57:21 -0800 (PST)
+  d=amazon.de; i=@amazon.de; q=dns/txt; s=amazon201209;
+  t=1704812477; x=1736348477;
+  h=from:to:date:message-id:references:in-reply-to:
+   mime-version:subject;
+  bh=5k34ulCcxgkmk+6wg+gYxV5ncvMehBQFTCUJx627f2A=;
+  b=E/sCLP0tAimyHqP0TyY3dURyxAF3frN03R8CBHSDpTKJ7BI/mRHZZB0L
+   HursT0cI2WuvhPwsASbdN5eQbBMgz/Vk2sHOHPL88VTGGdhLFCOfXq7Hc
+   G5xLIMUe8H48gOFIsYLR57HEVlHS9uhOnRwy/TOil5fYDsyAdcbGff/Oe
+   Y=;
+X-IronPort-AV: E=Sophos;i="6.04,183,1695686400"; 
+   d="scan'208,217";a="56999870"
+Subject: AW: [oe] [PATCH] abseil-cpp: readd use of -std=c++14
+Thread-Topic: [oe] [PATCH] abseil-cpp: readd use of -std=c++14
+Received: from pdx4-co-svc-p1-lb2-vlan3.amazon.com (HELO email-inbound-relay-iad-1e-m6i4x-529f0975.us-east-1.amazon.com) ([10.25.36.214])
+  by smtp-border-fw-80008.pdx80.corp.amazon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Jan 2024 15:01:13 +0000
+Received: from smtpout.prod.us-west-2.prod.farcaster.email.amazon.dev (iad7-ws-svc-p70-lb3-vlan3.iad.amazon.com [10.32.235.38])
+	by email-inbound-relay-iad-1e-m6i4x-529f0975.us-east-1.amazon.com (Postfix) with ESMTPS id E314E4A1BD;
+	Tue,  9 Jan 2024 15:01:12 +0000 (UTC)
+Received: from EX19MTAEUC002.ant.amazon.com [10.0.43.254:47181]
+ by smtpin.naws.eu-west-1.prod.farcaster.email.amazon.dev [10.0.36.99:2525] with esmtp (Farcaster)
+ id 7a30f97c-adac-4e71-85db-5e88fb5a39e8; Tue, 9 Jan 2024 15:01:11 +0000 (UTC)
+X-Farcaster-Flow-ID: 7a30f97c-adac-4e71-85db-5e88fb5a39e8
+Received: from EX19D016EUC003.ant.amazon.com (10.252.51.244) by
+ EX19MTAEUC002.ant.amazon.com (10.252.51.181) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.40; Tue, 9 Jan 2024 15:01:11 +0000
+Received: from EX19D016EUC001.ant.amazon.com (10.252.51.169) by
+ EX19D016EUC003.ant.amazon.com (10.252.51.244) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.40; Tue, 9 Jan 2024 15:01:11 +0000
+Received: from EX19D016EUC001.ant.amazon.com ([fe80::ffab:9491:d0b8:dbb6]) by
+ EX19D016EUC001.ant.amazon.com ([fe80::ffab:9491:d0b8:dbb6%3]) with mapi id
+ 15.02.1118.040; Tue, 9 Jan 2024 15:01:11 +0000
+From: "Roos, Thomas" <throos@amazon.de>
+To: Petr Chernikov <p.chernikov@yadro.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Index: AQHaQvmGw+QJuQV4YEePASERyFIjsrDRdXFwgAACp/CAAAC5MIAAFNBb
+Date: Tue, 9 Jan 2024 15:01:10 +0000
+Message-ID: <f7360598b61448599bddcc3d0e7dc08e@amazon.de>
+References: <20240109124350.206419-1-throos@amazon.de>
+ <17A8B01D06ADC5D0.21327@lists.openembedded.org>
+ <17A8B0A1D52DEE2E.21327@lists.openembedded.org>,<568fbf3b6dae4961bd2a23b435248ec1@yadro.com>
+In-Reply-To: <568fbf3b6dae4961bd2a23b435248ec1@yadro.com>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.252.50.216]
+Content-Type: multipart/alternative;
+	boundary="_000_f7360598b61448599bddcc3d0e7dc08eamazonde_"
 MIME-Version: 1.0
-References: <20240105133611.3018041-1-alex@linutronix.de> <20240105133611.3018041-2-alex@linutronix.de>
- <CAMKF1srDmU9h8xP2JGX=6otiRGqVPKr4ZNX00bicU-R=C9ipmQ@mail.gmail.com> <CANNYZj8kkMN-dzw2YzXEQ1dTFo3d+Bg5jxSe9VCLDyF=DNFVPg@mail.gmail.com>
-In-Reply-To: <CANNYZj8kkMN-dzw2YzXEQ1dTFo3d+Bg5jxSe9VCLDyF=DNFVPg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 9 Jan 2024 06:56:55 -0800
-Message-ID: <CAMKF1sq4Da2ESxyO5vdrqiGfeCYptebHaYU4N0XA5m18wAkPWg@mail.gmail.com>
-Subject: Re: [oe] [PATCH 2/2] python3-kivy: update 2.2.1 -> 2.3.0
-To: Alexander Kanavin <alex.kanavin@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 09 Jan 2024 14:57:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108196
+ <openembedded-devel@lists.openembedded.org>; Tue, 09 Jan 2024 15:01:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108197
 
-On Tue, Jan 9, 2024 at 1:08=E2=80=AFAM Alexander Kanavin <alex.kanavin@gmai=
-l.com> wrote:
->
-> I think it's clang, so needs to be added to conf/nonclangable.conf?
+--_000_f7360598b61448599bddcc3d0e7dc08eamazonde_
+Content-Type: text/plain; charset="iso-8859-1"
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
 
-yes, Although it will be good to report this error upstream, since
-mixing const/non-const types can have
-unintended consequences and result in subtle bugs.
 
->
-> /mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux-musl/python3-kivy/2.3=
-.0/git/kivy/graphics/cgl_backend/cgl_gl.c:4549:52:
-> error: incompatible function pointer types assigning to 'void
-> (*)(GLuint, GLsizei, const GLchar **, const GLint *)' (aka 'void
-> (*)(unsigned int, int, const char **, const int *)') from 'void
-> (GLuint, GLsizei, const GLchar *const *, const GLint *)' (aka 'void
-> (unsigned int, int, const char *const *, const int *)')
-> [-Wincompatible-function-pointer-types]
->  4549 |   __pyx_v_4kivy_8graphics_3cgl_cgl->glShaderSource =3D glShaderSo=
-urce;
->       |                                                    ^ ~~~~~~~~~~~~=
-~~
->
-> Note that this update is needed for both cython 3.x and python 3.12
-> compatibility.
->
-> Alex
->
-> On Tue, 9 Jan 2024 at 04:32, Khem Raj <raj.khem@gmail.com> wrote:
-> >
-> > this fails to build here ( maybe its clang finding additional problems =
-)
-> >
-> > https://sprunge.us/lq5PKS
-> >
-> > On Fri, Jan 5, 2024 at 5:36=E2=80=AFAM Alexander Kanavin <alex.kanavin@=
-gmail.com> wrote:
-> > >
-> > > License-Update: years, mention that it is MIT at the start.
-> > >
-> > > Signed-off-by: Alexander Kanavin <alex@linutronix.de>
-> > > ---
-> > >  .../python/{python3-kivy_2.2.1.bb =3D> python3-kivy_2.3.0.bb} | 6 ++=
-+---
-> > >  1 file changed, 3 insertions(+), 3 deletions(-)
-> > >  rename meta-python/recipes-devtools/python/{python3-kivy_2.2.1.bb =
-=3D> python3-kivy_2.3.0.bb} (93%)
-> > >
-> > > diff --git a/meta-python/recipes-devtools/python/python3-kivy_2.2.1.b=
-b b/meta-python/recipes-devtools/python/python3-kivy_2.3.0.bb
-> > > similarity index 93%
-> > > rename from meta-python/recipes-devtools/python/python3-kivy_2.2.1.bb
-> > > rename to meta-python/recipes-devtools/python/python3-kivy_2.3.0.bb
-> > > index a72ee14f6..0d4a1207f 100644
-> > > --- a/meta-python/recipes-devtools/python/python3-kivy_2.2.1.bb
-> > > +++ b/meta-python/recipes-devtools/python/python3-kivy_2.3.0.bb
-> > > @@ -2,7 +2,7 @@ SUMMARY =3D "Open source Python library for rapid dev=
-elopment of applications \
-> > >      that make use of innovative user interfaces, such as multi-touch=
- apps."
-> > >  HOMEPAGE =3D "https://kivy.org/"
-> > >  LICENSE =3D "MIT"
-> > > -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Ded5cd0f2cfda42852c332e3b8=
-8c85fea"
-> > > +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D6d3bc49400e35d5a2279d14c4=
-0dcfb09"
-> > >
-> > >  inherit setuptools3 pkgconfig features_check
-> > >  PIP_INSTALL_PACKAGE =3D "Kivy"
-> > > @@ -11,11 +11,11 @@ PIP_INSTALL_PACKAGE =3D "Kivy"
-> > >  # and mali-based OS's. We need to patch the setup file to tell Kivy =
-setup
-> > >  # that our machine has GLES libaries installed as well
-> > >  # Also, if using SDL2 as backend, SDL2 needs to be configured with g=
-les
-> > > -SRC_URI =3D "git://github.com/kivy/kivy.git;protocol=3Dhttps;branch=
-=3Dstable \
-> > > +SRC_URI =3D "git://github.com/kivy/kivy.git;protocol=3Dhttps;branch=
-=3Dmaster \
-> > >             file://0001-add-support-for-glesv2.patch \
-> > >             "
-> > >
-> > > -SRCREV =3D "344768bfefd2e8f5302cc9dfb8ca41991ce6f7e7"
-> > > +SRCREV =3D "9ef218027178115a66b417ae34b21f488bdd3617"
-> > >
-> > >  S =3D "${WORKDIR}/git"
-> > >
-> > > --
-> > > 2.39.2
-> > >
-> > >
-> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > > Links: You receive all messages sent to this group.
-> > > View/Reply Online (#108048): https://lists.openembedded.org/g/openemb=
-edded-devel/message/108048
-> > > Mute This Topic: https://lists.openembedded.org/mt/103542151/1997914
-> > > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsu=
-b [raj.khem@gmail.com]
-> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > >
+Hi,
+good news - I could solve this problem by patching out the hardcoded -std=
+=3Dc++14 in our software (meta-aws).
+Sorry for the noise.
+Please ignore this patch.
+
+Cheers,
+Thomas
+
+
+________________________________
+Von: Petr Chernikov <p.chernikov@yadro.com>
+Gesendet: Dienstag, 9. Januar 2024 14:26:20
+An: Petr Chernikov; Roos, Thomas; openembedded-devel@lists.openembedded.org
+Betreff: RE: [EXTERNAL] [oe] [PATCH] abseil-cpp: readd use of -std=3Dc++14
+
+CAUTION: This email originated from outside of the organization. Do not cli=
+ck links or open attachments unless you can confirm the sender and know the=
+ content is safe.
+
+
+
+Sorry, typo, on the master branch
+
+Regards
+Pete
+
+-----Original Message-----
+From: openembedded-devel@lists.openembedded.org <openembedded-devel@lists.o=
+penembedded.org> On Behalf Of Petr Chernikov
+Sent: Tuesday, January 9, 2024 4:24 PM
+To: Petr Chernikov <p.chernikov@yadro.com>; throos@amazon.de; openembedded-=
+devel@lists.openembedded.org
+Subject: Re: [oe] [PATCH] abseil-cpp: readd use of -std=3Dc++14
+
+Also I'm able to compile protobuf and protobuf-native without any changes o=
+n nanbield branch
+
+Regards
+Pete
+
+-----Original Message-----
+From: openembedded-devel@lists.openembedded.org <openembedded-devel@lists.o=
+penembedded.org> On Behalf Of Petr Chernikov
+Sent: Tuesday, January 9, 2024 4:15 PM
+To: throos@amazon.de; openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] [PATCH] abseil-cpp: readd use of -std=3Dc++14
+
+Perhaps, better solution is to use c++17 for both packages:
+https://github.com/protocolbuffers/protobuf/issues/10768#issuecomment-17731=
+75439
+
+Regards
+Pete
+
+-----Original Message-----
+From: openembedded-devel@lists.openembedded.org <openembedded-devel@lists.o=
+penembedded.org> On Behalf Of Thomas Roos via lists.openembedded.org
+Sent: Tuesday, January 9, 2024 3:44 PM
+To: openembedded-devel@lists.openembedded.org
+Cc: Thomas Roos <throos@amazon.de>
+Subject: [oe] [PATCH] abseil-cpp: readd use of -std=3Dc++14
+
+From: Thomas Roos <throos@amazon.de>
+
+Protobuf is compiled with -std=3Dc++14, so abseil-cpp must be as well.
+Details can be found here: https://github.com/protocolbuffers/protobuf/issu=
+es/10768
+
+Signed-off-by: Thomas Roos <throos@amazon.de>
+---
+ meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb b/meta-o=
+e/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
+index ee62d4b59..1a713e1c5 100644
+--- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
++++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
+@@ -26,6 +26,7 @@ ASNEEDED:class-nativesdk =3D ""
+ inherit cmake
+
+ EXTRA_OECMAKE =3D "-DBUILD_SHARED_LIBS=3DON \
++                 -DCMAKE_CXX_STANDARD=3D14 \
+                  -DBUILD_TESTING=3DOFF    \
+                  -DABSL_ENABLE_INSTALL=3DON \
+                 "
+--
+2.34.1
+
+
+
+
+Amazon Web Services EMEA SARL
+38 avenue John F. Kennedy, L-1855 Luxembourg Sitz der Gesellschaft: L-1855 =
+Luxemburg eingetragen im Luxemburgischen Handelsregister unter R.C.S. B1862=
+84
+
+Amazon Web Services EMEA SARL, Niederlassung Deutschland Marcel-Breuer-Str.=
+ 12, D-80807 Muenchen Sitz der Zweigniederlassung: Muenchen eingetragen im =
+Handelsregister des Amtsgerichts Muenchen unter HRB 242240, USt-ID DE317013=
+094
+
+
+
+
+
+
+
+Amazon Web Services EMEA SARL
+38 avenue John F. Kennedy, L-1855 Luxembourg
+Sitz der Gesellschaft: L-1855 Luxemburg
+eingetragen im Luxemburgischen Handelsregister unter R.C.S. B186284
+
+Amazon Web Services EMEA SARL, Niederlassung Deutschland
+Marcel-Breuer-Str. 12, D-80807 Muenchen
+Sitz der Zweigniederlassung: Muenchen
+eingetragen im Handelsregister des Amtsgerichts Muenchen unter HRB 242240, =
+USt-ID DE317013094
+
+
+
+
+--_000_f7360598b61448599bddcc3d0e7dc08eamazonde_
+Content-Type: text/html; charset="iso-8859-1"
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+<style type=3D"text/css" style=3D"display:none;"><!-- P {margin-top:0;margi=
+n-bottom:0;} --></style>
+</head>
+<body dir=3D"ltr">
+<div id=3D"divtagdefaultwrapper" style=3D"font-size:12pt;color:#000000;font=
+-family:Calibri,Helvetica,sans-serif;" dir=3D"ltr">
+<p><br>
+</p>
+<meta content=3D"text/html; charset=3DUTF-8">
+<div dir=3D"ltr">
+<div id=3D"x_divtagdefaultwrapper" dir=3D"ltr" style=3D"font-size: 12pt; co=
+lor: rgb(0, 0, 0); font-family: Calibri, Helvetica, sans-serif, &quot;Emoji=
+Font&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, Noto=
+ColorEmoji, &quot;Segoe UI Symbol&quot;, &quot;Android Emoji&quot;, EmojiSy=
+mbols;">
+<p>Hi,<br>
+good news - I could solve this problem by patching out the hardcoded <font =
+face=3D"Calibri, sans-serif" color=3D"#000000" style=3D"font-size:11pt">
+-std=3Dc&#43;&#43;14</font> in our software (meta-aws).<br>
+Sorry for the noise.<br>
+Please ignore this patch.<br>
+<br>
+Cheers,<br>
+Thomas<br>
+<br>
+</p>
+</div>
+<hr tabindex=3D"-1" style=3D"display:inline-block; width:98%">
+<div id=3D"x_divRplyFwdMsg" dir=3D"ltr"><font face=3D"Calibri, sans-serif" =
+color=3D"#000000" style=3D"font-size:11pt"><b>Von:</b> Petr Chernikov &lt;p=
+.chernikov@yadro.com&gt;<br>
+<b>Gesendet:</b> Dienstag, 9. Januar 2024 14:26:20<br>
+<b>An:</b> Petr Chernikov; Roos, Thomas; openembedded-devel@lists.openembed=
+ded.org<br>
+<b>Betreff:</b> RE: [EXTERNAL] [oe] [PATCH] abseil-cpp: readd use of -std=
+=3Dc&#43;&#43;14</font>
+<div>&nbsp;</div>
+</div>
+</div>
+<font size=3D"2"><span style=3D"font-size:10pt">
+<div class=3D"PlainText">CAUTION: This email originated from outside of the=
+ organization. Do not click links or open attachments unless you can confir=
+m the sender and know the content is safe.<br>
+<br>
+<br>
+<br>
+Sorry, typo, on the master branch<br>
+<br>
+Regards<br>
+Pete<br>
+<br>
+-----Original Message-----<br>
+From: openembedded-devel@lists.openembedded.org &lt;openembedded-devel@list=
+s.openembedded.org&gt; On Behalf Of Petr Chernikov<br>
+Sent: Tuesday, January 9, 2024 4:24 PM<br>
+To: Petr Chernikov &lt;p.chernikov@yadro.com&gt;; throos@amazon.de; openemb=
+edded-devel@lists.openembedded.org<br>
+Subject: Re: [oe] [PATCH] abseil-cpp: readd use of -std=3Dc&#43;&#43;14<br>
+<br>
+Also I'm able to compile protobuf and protobuf-native without any changes o=
+n nanbield branch<br>
+<br>
+Regards<br>
+Pete<br>
+<br>
+-----Original Message-----<br>
+From: openembedded-devel@lists.openembedded.org &lt;openembedded-devel@list=
+s.openembedded.org&gt; On Behalf Of Petr Chernikov<br>
+Sent: Tuesday, January 9, 2024 4:15 PM<br>
+To: throos@amazon.de; openembedded-devel@lists.openembedded.org<br>
+Subject: Re: [oe] [PATCH] abseil-cpp: readd use of -std=3Dc&#43;&#43;14<br>
+<br>
+Perhaps, better solution is to use c&#43;&#43;17 for both packages:<br>
+<a href=3D"https://github.com/protocolbuffers/protobuf/issues/10768#issueco=
+mment-1773175439" id=3D"LPlnk717461" previewremoved=3D"true">https://github=
+.com/protocolbuffers/protobuf/issues/10768#issuecomment-1773175439</a><br>
+<br>
+Regards<br>
+Pete<br>
+<br>
+-----Original Message-----<br>
+From: openembedded-devel@lists.openembedded.org &lt;openembedded-devel@list=
+s.openembedded.org&gt; On Behalf Of Thomas Roos via lists.openembedded.org<=
+br>
+Sent: Tuesday, January 9, 2024 3:44 PM<br>
+To: openembedded-devel@lists.openembedded.org<br>
+Cc: Thomas Roos &lt;throos@amazon.de&gt;<br>
+Subject: [oe] [PATCH] abseil-cpp: readd use of -std=3Dc&#43;&#43;14<br>
+<br>
+From: Thomas Roos &lt;throos@amazon.de&gt;<br>
+<br>
+Protobuf is compiled with -std=3Dc&#43;&#43;14, so abseil-cpp must be as we=
+ll.<br>
+Details can be found here: <a href=3D"https://github.com/protocolbuffers/pr=
+otobuf/issues/10768" id=3D"LPlnk976354" previewremoved=3D"true">
+https://github.com/protocolbuffers/protobuf/issues/10768</a><br>
+<br>
+Signed-off-by: Thomas Roos &lt;throos@amazon.de&gt;<br>
+---<br>
+&nbsp;meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb | 1 &#43;<br>
+&nbsp;1 file changed, 1 insertion(&#43;)<br>
+<br>
+diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb b/meta-o=
+e/recipes-devtools/abseil-cpp/abseil-cpp_git.bb<br>
+index ee62d4b59..1a713e1c5 100644<br>
+--- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb<br>
+&#43;&#43;&#43; b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb<br>
+@@ -26,6 &#43;26,7 @@ ASNEEDED:class-nativesdk =3D &quot;&quot;<br>
+&nbsp;inherit cmake<br>
+<br>
+&nbsp;EXTRA_OECMAKE =3D &quot;-DBUILD_SHARED_LIBS=3DON \<br>
+&#43;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp;&nbsp;&nbsp; -DCMAKE_CXX_STANDARD=3D14 \<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp; -DBUILD_TESTING=3DOFF&nbsp;&nbsp;&nbsp; \<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp; -DABSL_ENABLE_INSTALL=3DON \<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp; &quot;<br>
+--<br>
+2.34.1<br>
+<br>
+<br>
+<br>
+<br>
+Amazon Web Services EMEA SARL<br>
+38 avenue John F. Kennedy, L-1855 Luxembourg Sitz der Gesellschaft: L-1855 =
+Luxemburg eingetragen im Luxemburgischen Handelsregister unter R.C.S. B1862=
+84<br>
+<br>
+Amazon Web Services EMEA SARL, Niederlassung Deutschland Marcel-Breuer-Str.=
+ 12, D-80807 Muenchen Sitz der Zweigniederlassung: Muenchen eingetragen im =
+Handelsregister des Amtsgerichts Muenchen unter HRB 242240, USt-ID DE317013=
+094<br>
+<br>
+<br>
+<br>
+<br>
+</div>
+</span></font></div>
+<br><br><br>Amazon Web Services EMEA SARL
+<br>38 avenue John F. Kennedy, L-1855 Luxembourg
+<br>Sitz der Gesellschaft: L-1855 Luxemburg
+<br>eingetragen im Luxemburgischen Handelsregister unter R.C.S. B186284
+<br>
+<br>Amazon Web Services EMEA SARL, Niederlassung Deutschland
+<br>Marcel-Breuer-Str. 12, D-80807 Muenchen
+<br>Sitz der Zweigniederlassung: Muenchen
+<br>eingetragen im Handelsregister des Amtsgerichts Muenchen unter HRB 2422=
+40, USt-ID DE317013094
+<br><br><br>
+</body>
+</html>
+
+--_000_f7360598b61448599bddcc3d0e7dc08eamazonde_--
+
 
