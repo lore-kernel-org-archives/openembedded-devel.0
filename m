@@ -1,210 +1,170 @@
-Return-Path: <alperyasinak1@gmail.com>
+Return-Path: <ross.burton@arm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A2D72C46CD2
-	for <webhook@archiver.kernel.org>; Tue,  9 Jan 2024 13:07:40 +0000 (UTC)
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
- by mx.groups.io with SMTP id smtpd.web10.16364.1704805653209597334
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A2D69C46CD2
+	for <webhook@archiver.kernel.org>; Tue,  9 Jan 2024 13:12:40 +0000 (UTC)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com (EUR05-AM6-obe.outbound.protection.outlook.com [40.107.22.68])
+ by mx.groups.io with SMTP id smtpd.web11.16334.1704805957966408468
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 Jan 2024 05:07:33 -0800
+ Tue, 09 Jan 2024 05:12:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=CL1wc9Ny;
- spf=pass (domain: gmail.com, ip: 209.85.216.52, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-28c0df4b42eso2660200a91.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 09 Jan 2024 05:07:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1704805652; x=1705410452; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=O4ykb1ei6y+1UOmgGEw+7S8njF6YMF5JmuA1710dUDQ=;
-        b=CL1wc9Ny21goXLPXt9RflvchBjSxHqhOdYNIRo5wO9m2jECATaHPZHrqsTjCaX7tFr
-         Q9qj2SOb7nD1HlEFzyKtCE/+pLQlsbve9UjhdeJ5eKcpkhoq/gV5kRhuyDuyillcpCec
-         Fl0KIptliQiw1l2DW0dLYMOxZCsigcNHux8h9drBeLaXCHv1LAJ9gU4zSipBE4Vv4WAF
-         vg0bQJjc/ZjvcV1CTWxN85XuHANuqdHXB4ijr+jXRe5POB+Wxi3iiaF5P86rvpt9Tu8C
-         geraSQIZtnfURxWGDHQwhF1/krs3jpzJYmUh+RL5e3PJWhwJNn726GNxTnV6hwwEh41o
-         as1w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704805652; x=1705410452;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=O4ykb1ei6y+1UOmgGEw+7S8njF6YMF5JmuA1710dUDQ=;
-        b=JZajcA6KO00IplTVjSFlq4o1dHfogS8+Iv2uxlQqARDzO0FJnGu7C0Auyk/SMO/8n0
-         IS6UE47E7kn2utUV7TFmNFTTvT3fag3rIGF5rjibcYW09QfP8Nv4ZMfqwXN3fXL7MDz6
-         i+0jHSOBt05Q1NesDyrU7zvu1FTiMqXHj9aRRL/K8S/w7xKsp+YyZ4wutHFPl3E2R1pN
-         I+lIXQ1y9x2k0/lz/+9SHgzNcylcNyhOBmDH0WTUVXJXd8gPsWxM/q+ElG7n5QmQfGzh
-         uDbAuqCpIMeczQDqIsE6GgnN8qxDl5oLnzvVz/84ug+dEPxZwNhw42Lc6aOGzDqFmvlG
-         5vIg==
-X-Gm-Message-State: AOJu0YwbIPkQYkzYuOydbHaqXMabyab6tkgosLvLsjPN5DyFV+QDzbeL
-	RckHTCOrxjpZ1HBZ+PRe7on0FIXYCZNsy8p9qdM=
-X-Google-Smtp-Source: AGHT+IGnulWoal95VSq0ndwAfJt4SITFzl9Lo0apCo6txHAe0FTsBR4vgLqMSDSAdUwY0tym4O2D7W8thsjEC1xfXng=
-X-Received: by 2002:a17:90b:1c01:b0:28c:4f11:1894 with SMTP id
- oc1-20020a17090b1c0100b0028c4f111894mr829454pjb.39.1704805652337; Tue, 09 Jan
- 2024 05:07:32 -0800 (PST)
-MIME-Version: 1.0
-References: <20240108181014.321844-1-alperyasinak1@gmail.com> <593B95CF-FB18-4AF4-997C-C1263BB0CF4D@arm.com>
-In-Reply-To: <593B95CF-FB18-4AF4-997C-C1263BB0CF4D@arm.com>
-From: Alper Ak <alperyasinak1@gmail.com>
-Date: Tue, 9 Jan 2024 16:07:21 +0300
-Message-ID: <CAGpma=6tqLfMV_swJaupYfXdQ=tsbD1PvYete+PHq-GY4sscSA@mail.gmail.com>
+ dkim=pass header.i=@armh.onmicrosoft.com header.s=selector2-armh-onmicrosoft-com header.b=p6OEexcC;
+ dkim=pass header.i=@armh.onmicrosoft.com header.s=selector2-armh-onmicrosoft-com header.b=p6OEexcC;
+ spf=pass (domain: arm.com, ip: 40.107.22.68, mailfrom: ross.burton@arm.com)
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=pass;
+ b=dN8VhTjJjsIs6mVdXHE1CcAXnWCYjjseogLd93vQw1KlE9OVKafoNLrXLafkjMvh9r32rLyBj5b4MbvDCRgpG6hx/TU9vGHvs8dOisTDjomc5fOOVoMVvM005yiC1kWJPFSjl3AP8xjxd+k3a26HWKzB0T9fBJZbOaljgrusK1Hwsch18KiUzbRjDXDA795jJvDs0O4FHGSXEHnM6JVRthOiHerHnWp/N3UHR7GzWDxGwABL8m71fn1sLbL2zlQ1VXNEzzOheALYQ501PJJueitho9McpyxBPQ0zGDq2hEmnMKqu9JCjmrnZFqmknLucePlkUmMZi/IkFGixMnBlOg==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=a72nQza52OXqRqgrgCL/4zaqDpyJXgukxCgYZQJbwHo=;
+ b=Slk9MBHfH7gWSCRvIFjPAbksdQ8y5NHtHQGF7f5L2yeOzzDYkFlNefPmXKjuYA27R/AAtQMtPfNpmsHCqXr+HqUkGVBMXwZRDv8m2OihMram8jPWWlZxHZ9Rn2VXGUXBKoorXvAEAXI2Q0V+fQYLOksfA3ODIHcSXeYI2icOOh/vHE5IQUrDQRC1hrHPAqcVCtsxATYIXvwxWmaKmnXKS9c2fnw7j0/EzzMP9+MgnnV6qNO+luBEdFMsmohLg4XSd/miowHkwrUEm+9W1CYA4gA25XzWFDQgA7zAJq867xXi7WEhKlFUtIVcOHqFyNoRf27bSY/1EUvTa5Wkg6MHQg==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 63.35.35.123) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=arm.com;
+ dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
+ dkim=pass (signature was verified) header.d=armh.onmicrosoft.com; arc=pass (0
+ oda=1 ltdi=1 spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=a72nQza52OXqRqgrgCL/4zaqDpyJXgukxCgYZQJbwHo=;
+ b=p6OEexcCgEYTNdMSU/zDSuutYvfVseWW2h+uReYToUnhx+d+LJkoFKv2C4dJO6CtLagNFiAAq7aoCjAaqFFvluwYNr1Z6gIENYv1jAWFR8uRRNQ179GmZI7q4KKejeRM0p2k9WjlxWJEO2q9WVS29N8liIozHQNAzLpBXuIXOq8=
+Received: from AM0PR02CA0008.eurprd02.prod.outlook.com (2603:10a6:208:3e::21)
+ by VI1PR08MB10148.eurprd08.prod.outlook.com (2603:10a6:800:1bc::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7159.23; Tue, 9 Jan
+ 2024 13:12:33 +0000
+Received: from AM3PEPF0000A79C.eurprd04.prod.outlook.com
+ (2603:10a6:208:3e:cafe::34) by AM0PR02CA0008.outlook.office365.com
+ (2603:10a6:208:3e::21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7159.23 via Frontend
+ Transport; Tue, 9 Jan 2024 13:12:32 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
+ client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+ pr=C
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ AM3PEPF0000A79C.mail.protection.outlook.com (10.167.16.107) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7181.14 via Frontend Transport; Tue, 9 Jan 2024 13:12:32 +0000
+Received: ("Tessian outbound 53c3c09c1e1b:v239"); Tue, 09 Jan 2024 13:12:32 +0000
+X-CheckRecipientChecked: true
+X-CR-MTA-CID: 59b92ff05513f5dc
+X-CR-MTA-TID: 64aa7808
+Received: from b61443ce9fc9.1
+	by 64aa7808-outbound-1.mta.getcheckrecipient.com id 4055BE8A-A770-414A-9E79-4DFAE6E8C6A1.1;
+	Tue, 09 Jan 2024 13:12:26 +0000
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+    by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id b61443ce9fc9.1
+    (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+    Tue, 09 Jan 2024 13:12:26 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=PXCbQ8nQa4p/UCYPIMzwu52+R/9W3QpsaFkQyuquCZkDh2zhtZVtH0cEGAYS8NGoITt6X1o/pp/6X3OXpAx6COEc53lxuHjYJQK0Eu0boXmEdNonoBj8dYMVbBJ3zaG7ZLaKHF1vc56TS9XIK5OSl1xBb4uY3cOfAYlRsMKZ3bSY+mjIJOKA7e4TmQpIbREszOttY9RMPf/FfFpa+rsdfX+MeHMPzyooC1ShHIsDMArVCaRpx4P8CKw0cdTbnqlXF63gGgxZz1mDN6QgxQg6x5JqX/2Y8IMM21p4f+TGl/Oqk7U+7gZzgUyyCPNhBjIQQEOqqqE8ekT4BI9cwbU4RA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=a72nQza52OXqRqgrgCL/4zaqDpyJXgukxCgYZQJbwHo=;
+ b=lGMcPXOWO1FKa8xfTL3Nv2bm9RcgOBYbFy8KqUA7LGogpiilJLxW4mW798XYqXUYgUYTvEegrARhNiwSkuPAalDm8GHbvGrj3QX2MGSWQem7JOvhoJG9OzxBn1UjknPtW7J7fP5VTsFmeQ+MLesnmmTgOO5mCQQWoM4Ni1zxs5vlz6N2kNkJvjYl1GQRTJuIflK/Jl/kOMVVKRTPr5B3nTjeUk9e4f8DEIcYrThLZjZKJlLuqZk7rgQtFVgPb1jL+MjSuoO/c8Gn+ouOhf9Swk4vfT6t+xE5DqObFnoHGVTGBJizbIe0/f6wNU/vzQ3be1G5EAuXwN5Yt623KiVg1g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=a72nQza52OXqRqgrgCL/4zaqDpyJXgukxCgYZQJbwHo=;
+ b=p6OEexcCgEYTNdMSU/zDSuutYvfVseWW2h+uReYToUnhx+d+LJkoFKv2C4dJO6CtLagNFiAAq7aoCjAaqFFvluwYNr1Z6gIENYv1jAWFR8uRRNQ179GmZI7q4KKejeRM0p2k9WjlxWJEO2q9WVS29N8liIozHQNAzLpBXuIXOq8=
+Received: from PA4PR08MB7411.eurprd08.prod.outlook.com (2603:10a6:102:2a3::12)
+ by GVXPR08MB10667.eurprd08.prod.outlook.com (2603:10a6:150:15a::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7159.23; Tue, 9 Jan
+ 2024 13:12:23 +0000
+Received: from PA4PR08MB7411.eurprd08.prod.outlook.com
+ ([fe80::ef47:2c42:1ef6:fe5c]) by PA4PR08MB7411.eurprd08.prod.outlook.com
+ ([fe80::ef47:2c42:1ef6:fe5c%6]) with mapi id 15.20.7159.020; Tue, 9 Jan 2024
+ 13:12:21 +0000
+From: Ross Burton <Ross.Burton@arm.com>
+To: Alper Ak <alperyasinak1@gmail.com>
+CC: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
 Subject: Re: [oe] [meta-oe][PATCHv3] wavpack: upgrade 5.1.0 -> 5.6.0
-To: Ross Burton <Ross.Burton@arm.com>
-Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="0000000000005197f7060e82ff72"
+Thread-Topic: [oe] [meta-oe][PATCHv3] wavpack: upgrade 5.1.0 -> 5.6.0
+Thread-Index: AQHaQl3+pivTG6bJuEGaFvrP4Ie87bDRWh+AgAAatICAAAFagA==
+Date: Tue, 9 Jan 2024 13:12:21 +0000
+Message-ID: <5F728096-A476-4819-B943-2F07EA02271E@arm.com>
+References: <20240108181014.321844-1-alperyasinak1@gmail.com>
+ <593B95CF-FB18-4AF4-997C-C1263BB0CF4D@arm.com>
+ <CAGpma=6tqLfMV_swJaupYfXdQ=tsbD1PvYete+PHq-GY4sscSA@mail.gmail.com>
+In-Reply-To: 
+ <CAGpma=6tqLfMV_swJaupYfXdQ=tsbD1PvYete+PHq-GY4sscSA@mail.gmail.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-mailer: Apple Mail (2.3774.300.61.1.2)
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+x-ms-traffictypediagnostic: 
+	PA4PR08MB7411:EE_|GVXPR08MB10667:EE_|AM3PEPF0000A79C:EE_|VI1PR08MB10148:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1b2dc5b0-bf64-4b9f-2cba-08dc1114a3ea
+x-checkrecipientrouted: true
+nodisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original: 
+ bc3JeiiKcfHelzt63nv0loknpjEVa1ZL0fWVitQrzuK0pSCnxxlqGlAQkN6LYZK74j321+kuQ6+y4+ltuZAMGN+ZKRH6i2sG1qhZ6yyppXXR6LcFuy14/lzwbHO8I7u0pqqfqMOLc6/eJHJMj3x44xzimEdfCa5ui+E5uARhY3cL7C4X8JjmBABQBxb0+AlvAWR3jIrrYjzM+qKaf8RJpb6DmlHDo5N4/yGbY6YewHcajnr+e86BoCnR+eSxRDuchINz227lLpFFNWkpm1lpRDkQiSLZ3qLEYD7qlUDuDDiI+JFqWmqkA3QjxzUQiuWGLTao/6DVV/QoJJImJZZf88f5AHTmwW7JFPBmo7GzrKluzm2Mbp0hCeHU/GkpAmj5Xtdgax+sXDvWT6ylf67bwSgMLYScNH/SP72tU4kPDahe/xDVJ7pLuYyhtdWyFzGskvlSqfCCW3F8/vw9AsuFLmw1ZTqpSA5y8RCRjSfGv+iDoSiIN92lmdbEwSk93Td11XwPkqY0L2Z9sBD/GSqBgdSTMbOlSb/0OAegVMnlWCs31IemVzZX6ILltPbBL5/XXNmY+KEo989+c1DkezL/ph5VXs/MQa0lK+2a9uj9eOfgyO4rIDdonpmnf5GTQe0HUKkrdTRbMeCBPKNVgQHNSA==
+X-Forefront-Antispam-Report-Untrusted: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA4PR08MB7411.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(346002)(39860400002)(366004)(396003)(136003)(376002)(230922051799003)(1800799012)(64100799003)(186009)(451199024)(66946007)(41300700001)(91956017)(76116006)(33656002)(36756003)(86362001)(38070700009)(38100700002)(122000001)(26005)(2616005)(6506007)(6512007)(53546011)(6486002)(2906002)(66556008)(66476007)(66446008)(64756008)(6916009)(316002)(478600001)(71200400001)(8676002)(8936002)(4326008)(4744005)(5660300002)(45980500001);DIR:OUT;SFP:1101;
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <48FB28339448074591BAA4B2ADDD90A5@eurprd08.prod.outlook.com>
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR08MB10667
+Original-Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: 
+ AM3PEPF0000A79C.eurprd04.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 
+	996dc3f1-6eeb-4073-1e52-08dc11149d5b
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	KmRuzFBrqyFXDMMMhzsZH4ev2PsasGa8+gAMAZt7x6k1Ldfr1rMw6SfNxkYsvDoQIbvwGsU41cBrmHnn0WvBW8SXBClRUh9DdYUvPkRjmGJaZNqaqcsHYY9TASRLE+jtr2XCoD+pTQZPmdsiPVS0NOTvBc1huWlqkRGFDgvlALotaGn9+owfshGs7NRaxepsbmdiN3W8aXdk6c+2mZ88bpSqi9caMiqyVjSZ/jwWF8yOldjXVAzWq43jjtBxgVvxYYnGMvpJNvbuOGybuHwRQTpLDWiS49M5I+70mHHyIUZEIpG4k93xj1l0RLQaw4ciC/naWyCXLSZ6HQw2GqvjngINOXBj1+Mkc5FB+IVSCuazBShOIzNtDs5KYuBk3WgLPoAITXtzfRlJzP8x69pZIqsS7gHui0psG+EBlIIrYKJZntQ9N6KYUacw0YfaFrm9eenOyR2ER/lZg+j0vhEob+ps3wlNUJcNFLNK9PCfgKviaYZr5IgCCd5GPwgJuQRAF/4J3U8tdp/Pcl0JNPSiiapvq0dZ+LI6KzjkENoFny8s0Y2wy9uk/FL9FEIaNJ/sHhcStfq8qjSrg1n4imSmrT+H/pE1PYHWQF76fW0X6wPVOYpLuc9YwuhmRIECs1XeFYlpHz1Ml0t599Q1jxrXwg9yFWMgriMjNyDDM6IprAPDeVc51LB0T395VcoKzj7OxWyOLcdj5EyHM5KUUt6YUQ==
+X-Forefront-Antispam-Report: 
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230031)(4636009)(39850400004)(396003)(376002)(346002)(136003)(230922051799003)(186009)(82310400011)(64100799003)(1800799012)(451199024)(36840700001)(46966006)(336012)(6512007)(26005)(53546011)(6506007)(2616005)(36860700001)(82740400003)(5660300002)(6862004)(4326008)(4744005)(41300700001)(2906002)(6486002)(478600001)(316002)(8676002)(8936002)(70206006)(70586007)(47076005)(86362001)(36756003)(33656002)(356005)(81166007)(40480700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jan 2024 13:12:32.3693
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1b2dc5b0-bf64-4b9f-2cba-08dc1114a3ea
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	AM3PEPF0000A79C.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR08MB10148
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 09 Jan 2024 13:07:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108188
+ <openembedded-devel@lists.openembedded.org>; Tue, 09 Jan 2024 13:12:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108189
 
---0000000000005197f7060e82ff72
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Thanks for the tips. I clearly understood when "lib_package" should and
-should not be used with the examples you have shown.
-
-> Manpages disappeared too.  Do they need to be enabled, or were they
-removed?
-
-I thought there should be no manpages in target so removed with cmake
-option. I guess, I should have created packageconfigs for both "manpages"
-and "shared lib" options and enable only shared lib in bb. If people don't
-want to use shared lib or want to add manpages, it can be added from
-bbappend.
-
-Best Regards,
-Alper Ak
-
-
-Ross Burton <Ross.Burton@arm.com>, 9 Oca 2024 Sal, 14:32 tarihinde =C5=9Fun=
-u
-yazd=C4=B1:
-
->
->
-> > On 8 Jan 2024, at 18:10, Alper Ak via lists.openembedded.org
-> <alperyasinak1=3Dgmail.com@lists.openembedded.org> wrote:
-> >
-> > -inherit autotools lib_package
->
-> You removed lib_package, which will change the packaging.  Always remembe=
-r
-> to check the packaging only changes in ways you expect (buildhistory-diff
-> is very useful for this):
->
-> packages/cortexa57-poky-linux/wavpack: PACKAGES: removed "wavpack-bin=E2=
-=80=9D
->
-> This is because you removed lib_package, which adds that package.  This
-> class pulls ${bindir} into ${PN}-bin, so the main package is _just_ the
-> library.  Of course there may be no binaries in bindir so it could have
-> been a redundant inherit.
->
-> packages/cortexa57-poky-linux/wavpack/wavpack: PKG changed from
-> libwavpack1 to wavpack [default] - may indicate debian renaming failure
->
-> This is what happens when the base package used to just contain a library
-> (so it gets renamed to reflect the library name) and now doesn=E2=80=99t,=
- so can=E2=80=99t
-> be renamed. This suggests that it was not a redundant inherit after all.
->
-> packages/cortexa57-poky-linux/wavpack/wavpack: FILELIST: removed
-> "/usr/lib/libwavpack.so.1.2.0", added "/usr/bin/wavpack /usr/bin/wvgain
-> /usr/lib/libwavpack.so.1.2.5 /usr/bin/wvunpack /usr/bin/wvtag=E2=80=9D
->
-> Here we can see .so.1.2.0 being replaced with .so.1.2.5 which is expected=
-,
-> but also ${bindir} being added as the -bin package no longer exists.  Thi=
-s
-> is wrong and lib_package should be inherited.
->
-> packages/cortexa57-poky-linux/wavpack/wavpack-dev: RRECOMMENDS: added
-> "openssl-dev=E2=80=9D
->
-> This is expected as you depend on openssl now.
->
-> packages/cortexa57-poky-linux/wavpack/wavpack-doc: FILELIST: removed all
-> items "/usr/share/man/man1/wavpack.1 /usr/share/man/man1/wvunpack.1
-> /usr/share/man/man1/wvtag.1 /usr/share/man/man1/wvgain.1=E2=80=9D
-> packages/cortexa57-poky-linux/wavpack/wavpack-doc: PKGSIZE changed from
-> 25522 to 0 (-100%)
->
-> Manpages disappeared too.  Do they need to be enabled, or were they
-> removed?
->
-> Ross
-
---0000000000005197f7060e82ff72
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Thanks for the tips. I clearly understood when &quot;lib_p=
-ackage&quot; should and should not be used with the examples you have shown=
-.<br><br>&gt; Manpages disappeared too.=C2=A0 Do they need to be enabled, o=
-r were they removed?<br><br>I thought there should be no manpages in target=
- so removed with cmake option. I guess, I should have created packageconfig=
-s for both &quot;manpages&quot; and &quot;shared lib&quot; options and enab=
-le only shared lib in bb. If people don&#39;t want to use shared lib or wan=
-t to add manpages, it can be added from bbappend.<br><br>Best Regards,<br>A=
-lper Ak<br></div><br><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">Ross Burton &lt;<a href=3D"mailto:Ross.Burton@arm.com">Ross=
-.Burton@arm.com</a>&gt;, 9 Oca 2024 Sal, 14:32 tarihinde =C5=9Funu yazd=C4=
-=B1:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px=
- 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><br>
-<br>
-&gt; On 8 Jan 2024, at 18:10, Alper Ak via <a href=3D"http://lists.openembe=
-dded.org" rel=3D"noreferrer" target=3D"_blank">lists.openembedded.org</a> &=
-lt;alperyasinak1=3D<a href=3D"mailto:gmail.com@lists.openembedded.org" targ=
-et=3D"_blank">gmail.com@lists.openembedded.org</a>&gt; wrote:<br>
-&gt; <br>
-&gt; -inherit autotools lib_package<br>
-<br>
-You removed lib_package, which will change the packaging.=C2=A0 Always reme=
-mber to check the packaging only changes in ways you expect (buildhistory-d=
-iff is very useful for this):<br>
-<br>
-packages/cortexa57-poky-linux/wavpack: PACKAGES: removed &quot;wavpack-bin=
-=E2=80=9D<br>
-<br>
-This is because you removed lib_package, which adds that package.=C2=A0 Thi=
-s class pulls ${bindir} into ${PN}-bin, so the main package is _just_ the l=
-ibrary.=C2=A0 Of course there may be no binaries in bindir so it could have=
- been a redundant inherit.<br>
-<br>
-packages/cortexa57-poky-linux/wavpack/wavpack: PKG changed from libwavpack1=
- to wavpack [default] - may indicate debian renaming failure<br>
-<br>
-This is what happens when the base package used to just contain a library (=
-so it gets renamed to reflect the library name) and now doesn=E2=80=99t, so=
- can=E2=80=99t be renamed. This suggests that it was not a redundant inheri=
-t after all.<br>
-<br>
-packages/cortexa57-poky-linux/wavpack/wavpack: FILELIST: removed &quot;/usr=
-/lib/libwavpack.so.1.2.0&quot;, added &quot;/usr/bin/wavpack /usr/bin/wvgai=
-n /usr/lib/libwavpack.so.1.2.5 /usr/bin/wvunpack /usr/bin/wvtag=E2=80=9D<br=
->
-<br>
-Here we can see .so.1.2.0 being replaced with .so.1.2.5 which is expected, =
-but also ${bindir} being added as the -bin package no longer exists.=C2=A0 =
-This is wrong and lib_package should be inherited.<br>
-<br>
-packages/cortexa57-poky-linux/wavpack/wavpack-dev: RRECOMMENDS: added &quot=
-;openssl-dev=E2=80=9D<br>
-<br>
-This is expected as you depend on openssl now.<br>
-<br>
-packages/cortexa57-poky-linux/wavpack/wavpack-doc: FILELIST: removed all it=
-ems &quot;/usr/share/man/man1/wavpack.1 /usr/share/man/man1/wvunpack.1 /usr=
-/share/man/man1/wvtag.1 /usr/share/man/man1/wvgain.1=E2=80=9D<br>
-packages/cortexa57-poky-linux/wavpack/wavpack-doc: PKGSIZE changed from 255=
-22 to 0 (-100%)<br>
-<br>
-Manpages disappeared too.=C2=A0 Do they need to be enabled, or were they re=
-moved?<br>
-<br>
-Ross</blockquote></div>
-
---0000000000005197f7060e82ff72--
+T24gOSBKYW4gMjAyNCwgYXQgMTM6MDcsIEFscGVyIEFrIDxhbHBlcnlhc2luYWsxQGdtYWlsLmNv
+bT4gd3JvdGU6DQo+IEkgdGhvdWdodCB0aGVyZSBzaG91bGQgYmUgbm8gbWFucGFnZXMgaW4gdGFy
+Z2V0IHNvIHJlbW92ZWQgd2l0aCBjbWFrZSBvcHRpb24uIEkgZ3Vlc3MsIEkgc2hvdWxkIGhhdmUg
+Y3JlYXRlZCBwYWNrYWdlY29uZmlncyBmb3IgYm90aCAibWFucGFnZXMiIGFuZCAic2hhcmVkIGxp
+YiIgb3B0aW9ucyBhbmQgZW5hYmxlIG9ubHkgc2hhcmVkIGxpYiBpbiBiYi4gSWYgcGVvcGxlIGRv
+bid0IHdhbnQgdG8gdXNlIHNoYXJlZCBsaWIgb3Igd2FudCB0byBhZGQgbWFucGFnZXMsIGl0IGNh
+biBiZSBhZGRlZCBmcm9tIGJiYXBwZW5kLg0KDQpJZiB0aGUgbWFucGFnZXMgYXJlIHRyaXZpYWwg
+dG8gYnVpbGQgb3IgcHJlZ2VuZXJhdGVkLCB0aGVuIGp1c3QgYWx3YXlzIGluc3RhbGwgdGhlbSBh
+bmQgbGV0IHRoZSBwYWNrYWdpbmcgZG8gaXRzIHRoaW5nIChwdXQgdGhlbSBpbnRvIC1kb2Mgc28g
+dGhleeKAmXJlIG5vdCBpbnN0YWxsZWQgYnkgZGVmYXVsdCwgYnV0IHRoZXJlIGlmIG5lZWRlZCku
+DQoNCldlIG9ubHkgbmVlZCBQQUNLQUdFQ09ORklHcyBmb3IgdGhpbmdzIGxpa2UgZnVsbCBBUEkg
+ZG9jdW1lbnRhdGlvbiB0aGF0IHRha2VzIGZpdmUgbWludXRlcyB0byBidWlsZCBhbmQgbW9yZSBi
+dWlsZCBkZXBlbmRlbmNpZXMuDQoNClJvc3M=
 
