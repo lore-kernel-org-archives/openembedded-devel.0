@@ -1,202 +1,124 @@
-Return-Path: <sjolley.yp.pm@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 62D47C4707B
-	for <webhook@archiver.kernel.org>; Mon,  8 Jan 2024 22:44:16 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
- by mx.groups.io with SMTP id smtpd.web10.3467.1704753855307330187
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C8037C3DA6E
+	for <webhook@archiver.kernel.org>; Tue,  9 Jan 2024 03:25:27 +0000 (UTC)
+Received: from mail-oa1-f44.google.com (mail-oa1-f44.google.com [209.85.160.44])
+ by mx.groups.io with SMTP id smtpd.web10.9355.1704770726038717308
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Jan 2024 14:44:15 -0800
+ Mon, 08 Jan 2024 19:25:26 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=X45CyUUy;
- spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: sjolley.yp.pm@gmail.com)
-Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-3373bc6d625so2284898f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 08 Jan 2024 14:44:15 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=PlyKnXOK;
+ spf=pass (domain: gmail.com, ip: 209.85.160.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f44.google.com with SMTP id 586e51a60fabf-204301f2934so1973628fac.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 08 Jan 2024 19:25:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1704753853; x=1705358653; darn=lists.openembedded.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=0NlkliTivgMP/NYYh07h/v9WFNrxwF2UMvQ/rRld9Bo=;
-        b=X45CyUUykFFDiZsxGbej8eMpIWToTYZxGLa3A/Gn2Zz2RiqhIWcHmyYWKL9jdw29Lj
-         7pIHzBQtlJma+JC0pWzeZpB5l/7gwykZ/TGKRZfI0Fxjo0TgD9w1a4DA/Ovo35+sEJB6
-         MnFvtQqOxqK6tnhds+1cK4/YKK649PMmu9NX7epz6VaJx9dezfGYm4t61w/Lq7ain/Zb
-         yoyNsO2ch1qMoRPNF81b1if0+PmoG/iqeNK7YZcKgrrBlOH44TjdgYjNuFHIpXHLtFcR
-         c53BJjyzg/yhYwU8ZkUW8AOjM9CBuH3ci+M3KYThHuj+9zCCsxCoA37pryhPvHirDoNC
-         nQ6w==
+        d=gmail.com; s=20230601; t=1704770725; x=1705375525; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ubs0hNoUM+2YEptQ/a55VrTRaoPERT31HWu44dZdz3U=;
+        b=PlyKnXOK1NGm6ALXbHxcTbcfu91Y/h40t8Tg5yXD+80OIj3kaXUOUgYoiLi0/VatMp
+         udtDlQK5S7p2O/vlLffXLfa1oquLwkCu8h6oIYLMU3WIQCuXSd1aeK6Ge34H/Uq3bZa5
+         32d52Ei5VyIMnXitJ4NbjmGr5hRy4WLespiupBmxe6YtH1fLVTQkVopwhE/CuvPT/RQO
+         dH/n/D95PmvKJGJVGGbnVx0pJ3zdqHsUcE3AnDE86e6rRtnbf+yU/OwfWYpOJ8abs7Vb
+         p5aDCQuxN1g+HHdkvzZQ0HlxcLbfGT0Mr2exyscSrU1t3DLBiPESomRcGOAc9ymMz2Bb
+         MZHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704753853; x=1705358653;
-        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=0NlkliTivgMP/NYYh07h/v9WFNrxwF2UMvQ/rRld9Bo=;
-        b=FoxRNz12IqBzCVIr2mfbp3Tm/2PjtAbFFm5HTvN/G93WYDuQjpUGsqQGz9M5/XOHwE
-         zqr9NPmJX3HFVs6qZjhzKSqMQsHyEriYKb+JPi1A0+RcfUOyiaw4Lh45SCjWjd4J6DL2
-         cybUPzEwvcsdBOV7lHoGaoTuPAdv4Umz+XwX6yIQfU0TYBwfTKtFJVHtbXWO3tnPP0gH
-         1IMFvaVxzTlcayjzE955Q4mUIb9J+5ZyjhF/WOK0yG5QxlwUfsvq30szd3fmBZVSWehh
-         6ohUPjM4/AwUtU3IvOlEgQOfcbzM/ehqpCQBPCCPkV3GquRX/KZuxgERr38fet1A59x4
-         B/cQ==
-X-Gm-Message-State: AOJu0YxCP+xyvrNRilr247QNwBkcZs/zwS5/LM46NVQJkGDVx/y6Pgwp
-	r9slgQ7dvJlVoyiSSH7UXJtUrBty2SM2WXO4t9ohKe98n3c=
-X-Google-Smtp-Source: AGHT+IFTvSdxWrFe6A5Zy+KGG1xioXHPLhYT9GAQtg6I7QR4Mq3POZ4xQbzKiPfKHVDY/BQa/aRGmCKpJKMeCGx38WY=
-X-Received: by 2002:a05:600c:210:b0:40d:3076:1f25 with SMTP id
- 16-20020a05600c021000b0040d30761f25mr2159596wmi.151.1704753853228; Mon, 08
- Jan 2024 14:44:13 -0800 (PST)
+        d=1e100.net; s=20230601; t=1704770725; x=1705375525;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=ubs0hNoUM+2YEptQ/a55VrTRaoPERT31HWu44dZdz3U=;
+        b=i+g95gQ6zkyBytj6cWL4KeVM0N9lkcFRa9CG012bU2NgwCMoNwb1NnbwWO7JX5AZUT
+         L3TC8UL69JKiPgAZLLu9g3vn2e8w4rcX23bgOXKhcCUzZA0gSj1im0uaQ+7hcO23JRY8
+         oXAXvOluUR41WM/hvE7Ng/aMO9Qz9lYQVn8avUnFD1IfLBQIY72r9pn6nbB/zfmPfAg6
+         Cav8poM/8y3F0hApv6vQ2Gnd2qQ8lzUZFsnFNuCfgh82HEAwMaf+xeV2IfxjplSC4PIk
+         cbBqqWtJl+qbXh5EJpvzRNtQlMJ4bKEa4Df0cHEB7Yb5XFxqbYLqUSCBp9l15fFI6BqF
+         JYEA==
+X-Gm-Message-State: AOJu0YwnEKLmU1TpqdOpkmeCoexWeRTzUUnvOygTvRo7BOXYjyH1N91A
+	2u66n89XBNpjKegZmil/MBUTj5YRunIHD+jUpA4=
+X-Google-Smtp-Source: AGHT+IH2xblLfmDJJV7MUnlGk7zV+2rPFZMC9xhutUvq9X3zbiuYdw3brEhEAJBY/dmInPEKcsuI6EhJ3Qp+T0FXO5Q=
+X-Received: by 2002:a05:6871:651:b0:205:ee9e:f39f with SMTP id
+ x17-20020a056871065100b00205ee9ef39fmr6297279oan.6.1704770725174; Mon, 08 Jan
+ 2024 19:25:25 -0800 (PST)
 MIME-Version: 1.0
-From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
-Date: Mon, 8 Jan 2024 15:44:02 -0700
-Message-ID: <CAK5yBb978M3sVApb1R8brNOD9d5UgVee11Q=TQeEusp_+JTfQg@mail.gmail.com>
-Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
-To: openembedded-devel@lists.openembedded.org, 
-	Yocto-mailing-list <yocto@lists.yoctoproject.org>
-Content-Type: multipart/alternative; boundary="000000000000d9ec0d060e76efa8"
+References: <17A7D9AEDE09B8A6.11644@lists.openembedded.org> <3ZUU6S.4D2P6KFZ7X3W2@t-online.de>
+In-Reply-To: <3ZUU6S.4D2P6KFZ7X3W2@t-online.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 8 Jan 2024 19:24:59 -0800
+Message-ID: <CAMKF1sqN7mt5J0k58k9P2FTs7548uNYsfcikZB4V6SZ64z5t6A@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCHv2] libplacebo: add recipe
+To: Markus Volk <f_l_k@t-online.de>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 08 Jan 2024 22:44:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108174
+ <openembedded-devel@lists.openembedded.org>; Tue, 09 Jan 2024 03:25:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108175
 
---000000000000d9ec0d060e76efa8
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Hi Markus
 
-All,
+This has build time issues
 
-The triage team is starting to try and collect up and classify bugs which a
-newcomer to the project would be able to work on in a way which means
-people can find them. They're being listed on the triage page under the
-appropriate heading:
-https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
-review:
-https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
-how to create a bugzilla account at:
-https://bugzilla.yoctoproject.org/createaccount.cgi
+https://sprunge.us/Ddf9jj
 
-The idea is these bugs should be straight forward for a person to help work
-on who doesn't have deep experience with the project. If anyone can help,
-please take ownership of the bug and send patches! If anyone needs
-help/advice there are people on irc who can likely do so, or some of the
-more experienced contributors will likely be happy to help too.
+I think wither we need to provide a recipe for fast-float or use gitsm
+fetcher instead of git fetcher.
+In next version drop PV setting in recipe instead use it in recipe name its=
+elf.
 
-Also, the triage team meets weekly and does its best to handle the bugs
-reported into the Bugzilla. The number of people attending that meeting has
-fallen, as have the number of people available to help fix bugs. One of the
-things we hear users report is they don't know how to help. We (the triage
-team) are therefore going to start reporting out the currently 407
-unassigned or newcomer bugs.
+I will drop related patches from master-next, so please send the
+complete series together again.
 
-We're hoping people may be able to spare some time now and again to help
-out with these. Bugs are split into two types, "true bugs" where things
-don't work as they should and "enhancements" which are features we'd want
-to add to the system. There are also roughly four different "priority"
-classes right now, =E2=80=9C5.0=E2=80=9D, =E2=80=9C5.1=E2=80=9D, "5.99" and=
- "Future", the more
-pressing/urgent issues being in "5.0" and then =E2=80=9C5.1=E2=80=9D.
+Thanks
+-Khem
 
-Please review this link and if a bug is something you would be able to help
-with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
-an e-mail with the bug number you would like and I will assign it to you
-(please make sure you have a Bugzilla account). The list is at:
-https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
-r_Bugs
-
-Thanks,
-
-
-
-*Stephen K. Jolley*
-
-*Yocto Project Program Manager*
-
-(    *Cell*:                (208) 244-4460
-
-* *Email*:                 *s
-<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
-*
-
---000000000000d9ec0d060e76efa8
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><span style=3D"font-size:11pt;font-family:Calibri,Arial">A=
-ll,<br><br>The triage team is starting to try and collect up and classify b=
-ugs which a newcomer to the project would be able to work on in a way which=
- means people can find them. They&#39;re being listed on the triage page un=
-der the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/wiki/=
-Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage#New=
-comer_Bugs</a>  Also please review: <a href=3D"https://www.openembedded.org=
-/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.org/w=
-iki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugzilla =
-account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount.cgi"=
->https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The idea is=
- these bugs should be straight forward for a person to help work on who doe=
-sn&#39;t have deep experience with the project.  If anyone can help, please=
- take ownership of the bug and send patches!  If anyone needs help/advice t=
-here are people on irc who can likely do so, or some of the more experience=
-d contributors will likely be happy to help too.<br><br>Also, the triage te=
-am meets weekly and does its best to handle the bugs reported into the Bugz=
-illa. The number of people attending that meeting has fallen, as have the n=
-umber of people available to help fix bugs. One of the things we hear users=
- report is they don&#39;t know how to help. We (the triage team) are theref=
-ore going to start reporting out the currently 407 unassigned or newcomer b=
-ugs.<br><br>We&#39;re hoping people may be able to spare some time now and =
-again to help out with these.  Bugs are split into two types, &quot;true bu=
-gs&quot; where things don&#39;t work as they should and &quot;enhancements&=
-quot; which are features we&#39;d want to add to the system.  There are als=
-o roughly four different &quot;priority&quot; classes right now, =E2=80=9C5=
-.0=E2=80=9D, =E2=80=9C5.1=E2=80=9D, &quot;5.99&quot; and &quot;Future&quot;=
-, the more pressing/urgent issues being in &quot;5.0&quot; and then =E2=80=
-=9C5.1=E2=80=9D.<br><br>Please review this link and if a bug is something y=
-ou would be able to help with either take ownership of the bug, or send me =
-(<a href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>) an=
- e-mail with the bug number you would like and I will assign it to you (ple=
-ase make sure you have a Bugzilla account).  The list is at: <a href=3D"htt=
-ps://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcomer_B=
-ugs">https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Ne=
-wcomer_Bugs</a></span><br><div dir=3D"ltr" class=3D"gmail_signature" data-s=
-martmail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p class=3D"=
-MsoNormal" style=3D"background-image:initial;background-position:initial;ba=
-ckground-repeat:initial"><span style=3D"font-size:12pt;font-family:Arial,sa=
-ns-serif">Thanks,<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
-ily:Arial,sans-serif">=C2=A0<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
-lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
-ont-family:Arial,sans-serif"><span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
-amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
-an></b></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
-&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
-<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
-:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
-s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
--size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
-><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
-/span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
-t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
-=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
-color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
-uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
- lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
-erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
-phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
-.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
-u></p></div></div></div></div>
-
---000000000000d9ec0d060e76efa8--
+On Sat, Jan 6, 2024 at 11:47=E2=80=AFAM Markus Volk <f_l_k@t-online.de> wro=
+te:
+>
+> v2 drops the patches that are not needed anymore
+>
+> On Sat, Jan 6 2024 at 08:45:11 PM +01:00:00, Markus Volk <f_l_k@t-online.=
+de> wrote:
+>
+> libplacebo is a required build dependency for mpv-0.37 Signed-off-by: Mar=
+kus Volk <f_l_k@t-online.de> --- .../mplayer/libplacebo_git.bb | 24 +++++++=
+++++++++++++ 1 file changed, 24 insertions(+) create mode 100644 meta-oe/re=
+cipes-multimedia/mplayer/libplacebo_git.bb diff --git a/meta-oe/recipes-mul=
+timedia/mplayer/libplacebo_git.bb b/meta-oe/recipes-multimedia/mplayer/libp=
+lacebo_git.bb new file mode 100644 index 000000000..337ccd23b --- /dev/null=
+ +++ b/meta-oe/recipes-multimedia/mplayer/libplacebo_git.bb @@ -0,0 +1,24 @=
+@ +SUMMARY =3D "The core rendering algorithms and ideas of mpv rewritten as=
+ an independent library." +SECTION =3D "multimedia" +HOMEPAGE =3D "https://=
+opensourcelibs.com/lib/libplacebo" + +LICENSE =3D "LGPL-2.1-only" +LIC_FILE=
+S_CHKSUM =3D "file://LICENSE;md5=3D435ed639f84d4585d93824e7da3d85da" + +SRC=
+_URI =3D "git://code.videolan.org/videolan/libplacebo.git;protocol=3Dhttps;=
+branch=3Dv6.338" + +S =3D "${WORKDIR}/git" +SRCREV =3D "2805a0d01c029084ab3=
+6bf5d0e3c8742012a0b27" +PV =3D "6.338.1" + +inherit meson pkgconfig + +PACK=
+AGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'vulkan opengl', d)}=
+" + +PACKAGECONFIG[vulkan] =3D "-Dvulkan=3Denabled,-Dvulkan=3Ddisabled,vulk=
+an-loader vulkan-headers shaderc spirv-shader-generator python3-mako-native=
+ python3-jinja2-native glad-native" +PACKAGECONFIG[opengl] =3D "-Dopengl=3D=
+enabled,-Dopengl=3Ddisabled,glad,glad" +PACKAGECONFIG[lcms] =3D "-Dlcms=3De=
+nabled,-Dlcms=3Ddisabled,lcms" +PACKAGECONFIG[demos] =3D "-Ddemos=3Dtrue,-D=
+demos=3Dfalse,ffmpeg libsdl2 libsdl2-image" + +EXTRA_OEMESON =3D "-Dvulkan-=
+registry=3D${STAGING_DATADIR}/vulkan/registry/vk.xml" +
+> --
+> 2.43.0
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#108065): https://lists.openembedded.org/g/openembedde=
+d-devel/message/108065
+> Mute This Topic: https://lists.openembedded.org/mt/103566960/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
