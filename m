@@ -1,174 +1,254 @@
-Return-Path: <alperyasinak1@gmail.com>
+Return-Path: <randy.macleod@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BF1BEC4707B
-	for <webhook@archiver.kernel.org>; Wed, 10 Jan 2024 20:08:47 +0000 (UTC)
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
- by mx.groups.io with SMTP id smtpd.web11.3955.1704917321995723499
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D1C71C47073
+	for <webhook@archiver.kernel.org>; Wed, 10 Jan 2024 20:38:17 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.4790.1704919095506536818
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Jan 2024 12:08:42 -0800
+ Wed, 10 Jan 2024 12:38:15 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=eUP3+kaL;
- spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-40e5afc18f5so3784745e9.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Jan 2024 12:08:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1704917320; x=1705522120; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=bsJPx9Q+nn+6b7UO3f7w17rRG95T5ZYDD5/Hi6B3c7Y=;
-        b=eUP3+kaLnvzf40t/BOUP7LBvDZIhIX9sEZjhPtQQNiEfEm275kfcuyq4AKQNTmNq2v
-         vWoZW2o2Ct6SjfU4FAJM57+gi6zYrwUIU+ZvZhd6ssnb4/YFYIgprvJKRMCORwkHEp/x
-         Xb9Il3rEV1cb3XOAz3C8M4hlz1yjQKlD2rqEG4m4UyQZbz/ds/+3nmEIPk2nT8e3Kido
-         DjNQTBhWaClGZrM3YU/zS1/Ai09QUNABFaRntIdrwF7bmS21ttwBEmE19uAbFfqGRWcX
-         FUu3U5NyZivI8kIhsiABzVOsBji0+Mpbaa8QS+SO/3pi9vV/cwz9rt2Knkzy+ihiIEHV
-         txhw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704917320; x=1705522120;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=bsJPx9Q+nn+6b7UO3f7w17rRG95T5ZYDD5/Hi6B3c7Y=;
-        b=c/+hdaEo1zFr7Vuly2DdM3l8Y9C64h7JJx8oFXYtYdfnZv51nFS8kqdnqzC+7uuHDl
-         lx09k5EhUN6pc09p8LnAfDUxS9WZGrX8/3CRkCaStqMgHREskQv+JE/eCzTCHuZKDMPo
-         fFBuCH4O64gBaRzFOas3oiedS0ANpxGvNDJmPSU6lAtR5cwiCs/sIcr/A72kQGV96tLW
-         U8Ex0DGpq8a0eGVoiqdP6EdBNSyOu8kS3Q651MAmTmshQB9nVFfOjuOriVF5ubVuKGUi
-         M8lOEORE96rCpGHPK5aVg5wpUlxDjlVulEW01jM2UTFLHduCw5Pk0nc2Cg75Gkg75FiH
-         iqaw==
-X-Gm-Message-State: AOJu0YwbuLtX9gjxVi+sY7IiUJ0yBd18yroDNaytXd+SNi6cLoLAZH7H
-	RIQn4AiBJLAWW43Vt4VF841Zco2Q2SHEfQ==
-X-Google-Smtp-Source: AGHT+IE1T/dIuG815uQUoFXGNLaW7+jPY0F+KQY31ZR23ACrD4hJRnlttePuwKsBRPARP3Cpu8Putg==
-X-Received: by 2002:a5d:6e81:0:b0:336:d8c3:a65c with SMTP id k1-20020a5d6e81000000b00336d8c3a65cmr12533wrz.36.1704917319562;
-        Wed, 10 Jan 2024 12:08:39 -0800 (PST)
-Received: from localhost.localdomain ([176.33.64.25])
-        by smtp.gmail.com with ESMTPSA id cr8-20020a05600004e800b00336673a4153sm5595306wrb.80.2024.01.10.12.08.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 10 Jan 2024 12:08:38 -0800 (PST)
-From: alperak <alperyasinak1@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-webserver][PATCH] nginx: fix CVE-2023-44487
-Date: Wed, 10 Jan 2024 23:08:24 +0300
-Message-Id: <20240110200824.225021-1-alperyasinak1@gmail.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=bHGgeg+7;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=1739e1d70f=randy.macleod@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 40A7ULNs009637;
+	Wed, 10 Jan 2024 20:38:13 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=gASSd
+	cbiMyXROIlGTWBTTG+FFMj0MEGAk+mmLe0dVS8=; b=bHGgeg+7KsEbxoubrxuzl
+	fg7Yl47JVhVrd5yt8G7rPj4OS3xHYw7byfNCp1+Xr2xeO5kA/BhdLL9RLMm5r/HW
+	EH8fquNhPaSgWE7g/Qw44/neteMsDEK/4enPuQEforussxqMBmernG0tPLioGw4s
+	XDv4C2XVA7JCksrv1M7dPMMKMXGmIM3eR2xg3jCbgh+Vw4PS9GLqtBHT5CXLKDyn
+	fCOjw+wafPhRd8ttot8hFNcYsRnjiYGFourZfKsSr7vUEgbbRxMuIfPlC3F0QW5/
+	5LbgftqzNmghsxxmCBeVGpyBMJhxwj3ncu4WhCNYRjWnDWiktCWgYm9VNOgK5tvX
+	Q==
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3vewu5d17j-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
+	Wed, 10 Jan 2024 20:38:13 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.35; Wed, 10 Jan 2024 12:38:41 -0800
+Received: from pop-os.wrs.com (172.25.44.2) by ala-exchng01.corp.ad.wrs.com
+ (147.11.82.252) with Microsoft SMTP Server id 15.1.2507.35 via Frontend
+ Transport; Wed, 10 Jan 2024 12:38:41 -0800
+From: <Randy.MacLeod@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <anuj.mittal@intel.com>, <david.zuhn@sonos.com>
+Subject: [PATCH] rng-tools: move from oe-core to meta-oe
+Date: Wed, 10 Jan 2024 15:38:10 -0500
+Message-ID: <20240110203810.1555817-1-Randy.MacLeod@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-GUID: jpYseLFP5S__Ph1J3t15ZrmszFQXXbcY
+X-Proofpoint-ORIG-GUID: jpYseLFP5S__Ph1J3t15ZrmszFQXXbcY
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-11-16_25,2023-11-16_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 mlxlogscore=999
+ priorityscore=1501 impostorscore=0 malwarescore=0 mlxscore=0 clxscore=1011
+ lowpriorityscore=0 phishscore=0 suspectscore=0 spamscore=0 bulkscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2311290000
+ definitions=main-2401100163
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 10 Jan 2024 20:08:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108218
+ <openembedded-devel@lists.openembedded.org>; Wed, 10 Jan 2024 20:38:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108219
 
-Upstream-Status: Backport from [https://github.com/nginx/nginx/commit/6ceef192e7af1c507826ac38a2d43f08bf265fb9]
-CVE: CVE-2023-44487
+From: Randy MacLeod <Randy.MacLeod@windriver.com>
 
-WARNING: nginx-1.24.0-r0 do_cve_check: Found unpatched CVE (CVE-2023-44487)
+Nothing in oe-core depends on rng-tools anymore:
+   e7e1bc43ca rng-tools: splitting the rng-tools systemd/sysvinit serivce as a package
+so move it to meta-oe for people who still want to run rngd
+as a service for some reason or for those who want to run rng-test.
 
-This vulnerability exists between the following versions -> From(including) 1.9.5 Up to(including) 1.25.2
-
-Signed-off-by: alperak <alperyasinak1@gmail.com>
+Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
 ---
- .../nginx/files/CVE-2023-44487.patch          | 76 +++++++++++++++++++
- .../recipes-httpd/nginx/nginx_1.24.0.bb       |  2 +
- 2 files changed, 78 insertions(+)
- create mode 100644 meta-webserver/recipes-httpd/nginx/files/CVE-2023-44487.patch
+ .../rng-tools/rng-tools/default               |  1 +
+ .../recipes-support/rng-tools/rng-tools/init  | 42 +++++++++++
+ .../rng-tools/rng-tools/rng-tools.service     | 32 +++++++++
+ .../rng-tools/rng-tools_6.16.bb               | 69 +++++++++++++++++++
+ 4 files changed, 144 insertions(+)
+ create mode 100644 meta-oe/recipes-support/rng-tools/rng-tools/default
+ create mode 100644 meta-oe/recipes-support/rng-tools/rng-tools/init
+ create mode 100644 meta-oe/recipes-support/rng-tools/rng-tools/rng-tools.service
+ create mode 100644 meta-oe/recipes-support/rng-tools/rng-tools_6.16.bb
 
-diff --git a/meta-webserver/recipes-httpd/nginx/files/CVE-2023-44487.patch b/meta-webserver/recipes-httpd/nginx/files/CVE-2023-44487.patch
+diff --git a/meta-oe/recipes-support/rng-tools/rng-tools/default b/meta-oe/recipes-support/rng-tools/rng-tools/default
 new file mode 100644
-index 000000000..4e006b5db
+index 000000000..b9f8e0363
 --- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/files/CVE-2023-44487.patch
-@@ -0,0 +1,76 @@
-+From 6ceef192e7af1c507826ac38a2d43f08bf265fb9 Mon Sep 17 00:00:00 2001
-+From: Maxim Dounin <mdounin@mdounin.ru>
-+Date: Wed, 10 Jan 2024 18:52:11 +0000
-+Subject: [PATCH] HTTP/2: per-iteration stream handling limit.
++++ b/meta-oe/recipes-support/rng-tools/rng-tools/default
+@@ -0,0 +1 @@
++EXTRA_ARGS="-r /dev/hwrng"
+diff --git a/meta-oe/recipes-support/rng-tools/rng-tools/init b/meta-oe/recipes-support/rng-tools/rng-tools/init
+new file mode 100644
+index 000000000..13f0ecd37
+--- /dev/null
++++ b/meta-oe/recipes-support/rng-tools/rng-tools/init
+@@ -0,0 +1,42 @@
++#!/bin/sh
++#
++# This is an init script for openembedded
++# Copy it to @SYSCONFDIR@/init.d/rng-tools and type
++# > update-rc.d rng-tools defaults 60
++#
 +
-+To ensure that attempts to flood servers with many streams are detected
-+early, a limit of no more than 2 * max_concurrent_streams new streams per one
-+event loop iteration was introduced.  This limit is applied even if
-+max_concurrent_streams is not yet reached - for example, if corresponding
-+streams are handled synchronously or reset.
++rngd=@SBINDIR@/rngd
++test -x "$rngd" || exit 1
 +
-+Further, refused streams are now limited to maximum of max_concurrent_streams
-+and 100, similarly to priority_limit initial value, providing some tolerance
-+to clients trying to open several streams at the connection start, yet
-+low tolerance to flooding attempts.
++[ -r @SYSCONFDIR@/default/rng-tools ] && . "@SYSCONFDIR@/default/rng-tools"
 +
-+Upstream-Status: Backport [https://github.com/nginx/nginx/commit/6ceef192e7af1c507826ac38a2d43f08bf265fb9]
-+Signed-off-by: alperak <alperyasinak1@gmail.com>
-+---
-+ src/http/v2/ngx_http_v2.c | 15 +++++++++++++++
-+ src/http/v2/ngx_http_v2.h |  2 ++
-+ 2 files changed, 17 insertions(+)
++case "$1" in
++  start)
++    echo -n "Starting random number generator daemon"
++    start-stop-daemon -S -q -x $rngd -- $EXTRA_ARGS
++    echo "."
++    ;;
++  stop)
++    echo -n "Stopping random number generator daemon"
++    start-stop-daemon -K -q -n rngd
++    echo "."
++    ;;
++  reload|force-reload)
++    echo -n "Signalling rng daemon restart"
++    start-stop-daemon -K -q -s 1 -x $rngd
++    start-stop-daemon -K -q -s 1 -x $rngd
++    ;;
++  restart)
++    echo -n "Stopping random number generator daemon"
++    start-stop-daemon -K -q -n rngd
++    echo "."
++    echo -n "Starting random number generator daemon"
++    start-stop-daemon -S -q -x $rngd -- $EXTRA_ARGS
++    echo "."
++    ;;
++  *)
++    echo "Usage: @SYSCONFDIR@/init.d/rng-tools {start|stop|reload|restart|force-reload}"
++    exit 1
++esac
 +
-+diff --git a/src/http/v2/ngx_http_v2.c b/src/http/v2/ngx_http_v2.c
-+index ea3f27c..1116e56 100644
-+--- a/src/http/v2/ngx_http_v2.c
-++++ b/src/http/v2/ngx_http_v2.c
-+@@ -361,6 +361,7 @@ ngx_http_v2_read_handler(ngx_event_t *rev)
-+     ngx_log_debug0(NGX_LOG_DEBUG_HTTP, c->log, 0, "http2 read handler");
-+ 
-+     h2c->blocked = 1;
-++    h2c->new_streams = 0;
-+ 
-+     if (c->close) {
-+         c->close = 0;
-+@@ -1321,6 +1322,14 @@ ngx_http_v2_state_headers(ngx_http_v2_connection_t *h2c, u_char *pos,
-+         goto rst_stream;
-+     }
-+ 
-++    if (h2c->new_streams++ >= 2 * h2scf->concurrent_streams) {
-++        ngx_log_error(NGX_LOG_INFO, h2c->connection->log, 0,
-++                      "client sent too many streams at once");
-++
-++        status = NGX_HTTP_V2_REFUSED_STREAM;
-++        goto rst_stream;
-++    }
-++
-+     if (!h2c->settings_ack
-+         && !(h2c->state.flags & NGX_HTTP_V2_END_STREAM_FLAG)
-+         && h2scf->preread_size < NGX_HTTP_V2_DEFAULT_WINDOW)
-+@@ -1386,6 +1395,12 @@ ngx_http_v2_state_headers(ngx_http_v2_connection_t *h2c, u_char *pos,
-+ 
-+ rst_stream:
-+ 
-++    if (h2c->refused_streams++ > ngx_max(h2scf->concurrent_streams, 100)) {
-++        ngx_log_error(NGX_LOG_INFO, h2c->connection->log, 0,
-++                      "client sent too many refused streams");
-++        return ngx_http_v2_connection_error(h2c, NGX_HTTP_V2_NO_ERROR);
-++    }
-++
-+     if (ngx_http_v2_send_rst_stream(h2c, h2c->state.sid, status) != NGX_OK) {
-+         return ngx_http_v2_connection_error(h2c, NGX_HTTP_V2_INTERNAL_ERROR);
-+     }
-+diff --git a/src/http/v2/ngx_http_v2.h b/src/http/v2/ngx_http_v2.h
-+index 4e25293..b9daf92 100644
-+--- a/src/http/v2/ngx_http_v2.h
-++++ b/src/http/v2/ngx_http_v2.h
-+@@ -124,6 +124,8 @@ struct ngx_http_v2_connection_s {
-+     ngx_uint_t                       processing;
-+     ngx_uint_t                       frames;
-+     ngx_uint_t                       idle;
-++    ngx_uint_t                       new_streams;
-++    ngx_uint_t                       refused_streams;
-+     ngx_uint_t                       priority_limit;
-+ 
-+     ngx_uint_t                       pushing;
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb
-index 2e865e400..e5666f6fe 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb
-+++ b/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb
-@@ -2,5 +2,7 @@ require nginx.inc
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=175abb631c799f54573dc481454c8632"
- 
-+SRC_URI:append = " file://CVE-2023-44487.patch"
++exit 0
+diff --git a/meta-oe/recipes-support/rng-tools/rng-tools/rng-tools.service b/meta-oe/recipes-support/rng-tools/rng-tools/rng-tools.service
+new file mode 100644
+index 000000000..5ae2fba21
+--- /dev/null
++++ b/meta-oe/recipes-support/rng-tools/rng-tools/rng-tools.service
+@@ -0,0 +1,32 @@
++[Unit]
++Description=Hardware RNG Entropy Gatherer Daemon
++DefaultDependencies=no
++Conflicts=shutdown.target
++Before=sysinit.target shutdown.target
++ConditionVirtualization=!container
 +
- SRC_URI[sha256sum] = "77a2541637b92a621e3ee76776c8b7b40cf6d707e69ba53a940283e30ff2f55d"
- 
++[Service]
++EnvironmentFile=-@SYSCONFDIR@/default/rng-tools
++ExecStart=@SBINDIR@/rngd -f $EXTRA_ARGS
++CapabilityBoundingSet=CAP_SYS_ADMIN
++IPAddressDeny=any
++LockPersonality=yes
++MemoryDenyWriteExecute=yes
++NoNewPrivileges=yes
++PrivateTmp=yes
++ProtectControlGroups=yes
++ProtectHome=yes
++ProtectHostname=yes
++ProtectKernelModules=yes
++ProtectKernelLogs=yes
++ProtectSystem=strict
++RestrictAddressFamilies=AF_UNIX
++RestrictNamespaces=yes
++RestrictRealtime=yes
++RestrictSUIDSGID=yes
++SystemCallArchitectures=native
++SystemCallErrorNumber=EPERM
++SystemCallFilter=@system-service
++
++[Install]
++WantedBy=sysinit.target
+diff --git a/meta-oe/recipes-support/rng-tools/rng-tools_6.16.bb b/meta-oe/recipes-support/rng-tools/rng-tools_6.16.bb
+new file mode 100644
+index 000000000..f0aa3ff93
+--- /dev/null
++++ b/meta-oe/recipes-support/rng-tools/rng-tools_6.16.bb
+@@ -0,0 +1,69 @@
++SUMMARY = "Random number generator daemon"
++DESCRIPTION = "Check and feed random data from hardware device to kernel"
++HOMEPAGE = "https://github.com/nhorman/rng-tools"
++BUGTRACKER = "https://github.com/nhorman/rng-tools/issues"
++LICENSE = "GPL-2.0-only"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++DEPENDS = "openssl libcap"
++
++SRC_URI = "git://github.com/nhorman/rng-tools.git;branch=master;protocol=https \
++           file://init \
++           file://default \
++           file://rng-tools.service \
++           "
++SRCREV = "e061c313b95890eb5fa0ada0cd6eec619dafdfe2"
++
++S = "${WORKDIR}/git"
++
++inherit autotools update-rc.d systemd pkgconfig
++
++EXTRA_OECONF = "--without-rtlsdr"
++
++PACKAGECONFIG ??= "libjitterentropy"
++PACKAGECONFIG:libc-musl = "libargp libjitterentropy"
++
++PACKAGECONFIG[libargp] = "--with-libargp,--without-libargp,argp-standalone,"
++PACKAGECONFIG[libjitterentropy] = "--enable-jitterentropy,--disable-jitterentropy,libjitterentropy"
++PACKAGECONFIG[libp11] = "--with-pkcs11,--without-pkcs11,libp11 openssl"
++PACKAGECONFIG[nistbeacon] = "--with-nistbeacon,--without-nistbeacon,curl libxml2"
++PACKAGECONFIG[qrypt] = "--with-qrypt,--without-qrypt,curl"
++
++INITSCRIPT_PACKAGES = "${PN}-service"
++INITSCRIPT_NAME:${PN}-service = "rng-tools"
++INITSCRIPT_PARAMS:${PN}-service = "start 03 2 3 4 5 . stop 30 0 6 1 ."
++
++SYSTEMD_PACKAGES = "${PN}-service"
++SYSTEMD_SERVICE:${PN}-service = "rng-tools.service"
++
++CFLAGS += " -DJENT_CONF_ENABLE_INTERNAL_TIMER "
++
++PACKAGES =+ "${PN}-service"
++
++FILES:${PN}-service += " \
++    ${sysconfdir}/init.d/rng-tools \
++    ${sysconfdir}/default/rng-tools \
++"
++
++# Refer autogen.sh in rng-tools
++do_configure:prepend() {
++    cp ${S}/README.md ${S}/README
++}
++
++do_install:append() {
++    install -Dm 0644 ${WORKDIR}/default ${D}${sysconfdir}/default/rng-tools
++    install -Dm 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/rng-tools
++    install -Dm 0644 ${WORKDIR}/rng-tools.service \
++                     ${D}${systemd_system_unitdir}/rng-tools.service
++    sed -i \
++        -e 's,@SYSCONFDIR@,${sysconfdir},g' \
++        -e 's,@SBINDIR@,${sbindir},g' \
++        ${D}${sysconfdir}/init.d/rng-tools \
++        ${D}${systemd_system_unitdir}/rng-tools.service
++
++    if [ "${@bb.utils.contains('PACKAGECONFIG', 'nistbeacon', 'yes', 'no', d)}" = "yes" ]; then
++        sed -i \
++            -e '/^IPAddressDeny=any/d' \
++            -e '/^RestrictAddressFamilies=/ s/$/ AF_INET AF_INET6/' \
++            ${D}${systemd_system_unitdir}/rng-tools.service
++    fi
++}
 -- 
-2.25.1
+2.34.1
 
 
