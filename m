@@ -1,108 +1,92 @@
-Return-Path: <cvubrugier@fastmail.fm>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 31E22C46CD2
-	for <webhook@archiver.kernel.org>; Tue,  9 Jan 2024 17:50:02 +0000 (UTC)
-Received: from out3-smtp.messagingengine.com (out3-smtp.messagingengine.com [66.111.4.27])
- by mx.groups.io with SMTP id smtpd.web11.23589.1704822594100058576
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EFABCC47077
+	for <webhook@archiver.kernel.org>; Wed, 10 Jan 2024 01:21:54 +0000 (UTC)
+Received: from esa1.hc1455-7.c3s2.iphmx.com (esa1.hc1455-7.c3s2.iphmx.com [207.54.90.47])
+ by mx.groups.io with SMTP id smtpd.web11.2028.1704849706643958622
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 09 Jan 2024 09:49:54 -0800
+ Tue, 09 Jan 2024 17:21:47 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fastmail.fm header.s=fm2 header.b=lGJUBvgi;
- dkim=pass header.i=@messagingengine.com header.s=fm2 header.b=z7FF6nOq;
- spf=pass (domain: fastmail.fm, ip: 66.111.4.27, mailfrom: cvubrugier@fastmail.fm)
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
-	by mailout.nyi.internal (Postfix) with ESMTP id E3AD85C02AF;
-	Tue,  9 Jan 2024 12:49:52 -0500 (EST)
-Received: from mailfrontend1 ([10.202.2.162])
-  by compute4.internal (MEProxy); Tue, 09 Jan 2024 12:49:52 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fastmail.fm; h=
-	cc:cc:content-transfer-encoding:content-type:date:date:from:from
-	:in-reply-to:message-id:mime-version:reply-to:subject:subject:to
-	:to; s=fm2; t=1704822592; x=1704908992; bh=0OaRWWzAGBhMXfxHfyIGv
-	Zvf171BZ38OUmTw/pX9+zQ=; b=lGJUBvgiQSAJoS5Gb3AL+y0ju+SixJSpyzF3A
-	q/Lo7Kz/2ZYy2a4d+4oU/C2ynxTHMp6tx9JHye0It8Ow/iJkKaCjb1gLi17/krhQ
-	gZHzVblM5AFT8nOvHvUJFWOMcQ/kV7HBhr5C7vWk1zs5ajiSIJlcgSFUMEygce8g
-	B6n38I3WYGFmm38WxhX/vNul8sM9TaFIbkUo2tgMjuh7/fksQjrOWxE+LV9WNFYe
-	ZDhR2JPpBo0g4b7eIKXCPUvCnxpthm51qI7glwALfH8DyF1AJFbzHIhKmNwBFLgh
-	iaQLz6OxeY+0W8PtFhhFI23nA8IKB2Z3/8U1b5uQ+CdZayxlg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:date:date:feedback-id:feedback-id:from:from
-	:in-reply-to:message-id:mime-version:reply-to:subject:subject:to
-	:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
-	fm2; t=1704822592; x=1704908992; bh=0OaRWWzAGBhMXfxHfyIGvZvf171B
-	Z38OUmTw/pX9+zQ=; b=z7FF6nOq/Oa81fLjutie+33NsyTEowjc0KLdYgUX0TDc
-	BqmoJMpwvaQIDhO1NVa9qx7wxzgbmWT7GQTGeUtoMRLPNyi3vD0eEkZbC/yb0++P
-	P6ulhfQ4VfxzT9kDNZpu8WvE0zaKuw1+WzoVDoMVYBkQh7y+M5pXjWKT9YOfOkc7
-	TO0R6BHyWLunuVGQOvZ1/nWuFigBNGPyL8qMQMbC+KTpq05N/iljbAzXSOyTAMXY
-	BeNNmsrmW4O1plxINZJHkVbj7w8AfPtghugA46oE6ztqsT6fGQ7rQbEYBGphNYGB
-	MH1giaK3EbBscCBcn8jJnb/2RXMjCILdqYb9VeA5SQ==
-X-ME-Sender: <xms:QIedZc-a9KDL47xv7dBIpJpZ4ieC2pb_hiQgW6tzE7AG6vAm7HYcFA>
-    <xme:QIedZUsABswqUoKg46K546Scd_Z3IhVbs_yfHf-K6vURxVmvnljw8a6tp1Gln3MUT
-    ZFugK8f6dm8llRo9w>
-X-ME-Received: <xmr:QIedZSDaVYkG52Iccbq4_mInEAoE4iDsjjOK21DbH3mq9L3qTua4_x5vojNWgRSKOgaq4CF0rmVApUC7FeK4hIeY8SmjiqrcuSuA4vtTz3g9pgw>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrvdehledguddtgecutefuodetggdotefrod
-    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
-    necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
-    enucfjughrpefhvfevufffkffoggfgsedtkeertdertddtnecuhfhrohhmpegtvhhusghr
-    uhhgihgvrhesfhgrshhtmhgrihhlrdhfmhenucggtffrrghtthgvrhhnpeeiueeltdekge
-    ekvdevleegfeehhfffieevieelvdejudfgiedvteejffeltdelheenucffohhmrghinhep
-    ghhithhhuhgsrdgtohhmnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrg
-    hilhhfrhhomheptghvuhgsrhhughhivghrsehfrghsthhmrghilhdrfhhm
-X-ME-Proxy: <xmx:QIedZccL6rXTHMtyeROzu-FHwA8fWWVB7FtakU5GZ47sXzpSnxWzQw>
-    <xmx:QIedZROS82QRzQIzrV4rTxdsLIWjXAhvqB3pzVmm6py6Ca_ks9GW8Q>
-    <xmx:QIedZWngXHUUEYW12tDmGZDI8AdoLMM9k26RV1ahEMv7jfyLsjbaKA>
-    <xmx:QIedZTUbeJUCEXad_griOH3JWJ89-bA4uDys2agy2QhEb7FGc2t5dA>
-Feedback-ID: i09e840f8:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 9 Jan 2024 12:49:52 -0500 (EST)
-From: cvubrugier@fastmail.fm
+ dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 207.54.90.47, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10947"; a="145484338"
+X-IronPort-AV: E=Sophos;i="6.04,184,1695654000"; 
+   d="scan'208";a="145484338"
+Received: from unknown (HELO yto-r4.gw.nic.fujitsu.com) ([218.44.52.220])
+  by esa1.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Jan 2024 10:21:44 +0900
+Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
+	by yto-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id C948ACD6C5
+	for <openembedded-devel@lists.openembedded.org>; Wed, 10 Jan 2024 10:21:41 +0900 (JST)
+Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
+	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 03E8F140AB
+	for <openembedded-devel@lists.openembedded.org>; Wed, 10 Jan 2024 10:21:41 +0900 (JST)
+Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 92FC440B73
+	for <openembedded-devel@lists.openembedded.org>; Wed, 10 Jan 2024 10:21:40 +0900 (JST)
+Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.187])
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 0DDA31A0070;
+	Wed, 10 Jan 2024 09:21:39 +0800 (CST)
+From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Christophe Vu-Brugier <christophe.vu-brugier@seagate.com>
-Subject: [meta-oe][PATCH] nvme-cli: upgrade 2.6 -> 2.7.1
-Date: Tue,  9 Jan 2024 18:49:42 +0100
-Message-ID: <20240109174942.156730-1-cvubrugier@fastmail.fm>
-X-Mailer: git-send-email 2.43.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-networkinge] [PATCH] daq: Fix install conflict when enable multilib.
+Date: Wed, 10 Jan 2024 09:21:30 +0800
+Message-Id: <1704849690-11386-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28110.003
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28110.003
+X-TMASE-Result: 10--1.842700-10.000000
+X-TMASE-MatchedRID: 9CLtS+2vXX+MPz8Goa6fXdl0i+WyI+919CFB7klVg4eysPB8dBBorXKn
+	6DBj/gsEIvrftAIhWmLy9zcRSkKatcwitucT3dE7fzgVmnL/olV9LQinZ4QefCP/VFuTOXUTae6
+	hIZpj4MuOhzOa6g8KrZO4CGSsZ7L+K3ZPXq6T/fdkVBEzHoZAuVN44bRnEjc7A7V0wQuGbs2NVN
+	yflqVdP76gC90GqIfMt7iuHjUwFNGxGLl3T2a9PB0m4Rm5hspVxSSu8i52URmXTt0OuyJi/IIuE
+	VM/dBEMBtjAKW7+qHc=
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 09 Jan 2024 17:50:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108204
+ <openembedded-devel@lists.openembedded.org>; Wed, 10 Jan 2024 01:21:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108205
 
-From: Christophe Vu-Brugier <christophe.vu-brugier@seagate.com>
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Keep nvme-cli in sync with libnvme which was upgraded from 1.6 to
-1.7.1 by the following commit:
+Error: Transaction test error:
+  file /usr/bin/daq-modules-config conflicts between attempted installs of lib32-daq-2.0.7-r0.armv7ahf_neon and daq-2.0.7-r0.cortexa57
 
- * 7a6ca59ab libnvme: upgrade 1.6 -> 1.7.1
+The differences of daq-modules-config are as follows:
+@@ -7,7 +7,7 @@
 
-Signed-off-by: Christophe Vu-Brugier <christophe.vu-brugier@seagate.com>
+ prefix=/usr
+ exec_prefix=/usr
+-LIBDIR=/usr/lib64
++LIBDIR=/usr/lib
+ STATIC_LIBS=" -lsfbpf -lpcap -lsfbpf -lnfnetlink -lnetfilter_queue -lsfbpf -lpcap  -ldnet"
+
+ static=0
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../recipes-bsp/nvme-cli/{nvme-cli_2.6.bb => nvme-cli_2.7.1.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-bsp/nvme-cli/{nvme-cli_2.6.bb => nvme-cli_2.7.1.bb} (95%)
+ meta-networking/recipes-connectivity/daq/daq_2.0.7.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.6.bb b/meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.7.1.bb
-similarity index 95%
-rename from meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.6.bb
-rename to meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.7.1.bb
-index 0d8923f34..d2b2536bc 100644
---- a/meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.6.bb
-+++ b/meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.7.1.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8264535c0c4e9c6c335635c4026a8022 \
-                     file://ccan/licenses/CC0;md5=c17af43b05840255a6fedc5eda9d56cc \
-                     file://ccan/licenses/BSD-MIT;md5=838c366f69b72c5df05c96dff79b35f2"
- DEPENDS = "json-c libnvme"
--SRCREV = "bd2f882a49a14b0e21a94c928128b1979e4316fd"
-+SRCREV = "dcdad6f5d70ffb2fa151f229db048180671eb1fe"
+diff --git a/meta-networking/recipes-connectivity/daq/daq_2.0.7.bb b/meta-networking/recipes-connectivity/daq/daq_2.0.7.bb
+index c5499ffee..66ad83f71 100644
+--- a/meta-networking/recipes-connectivity/daq/daq_2.0.7.bb
++++ b/meta-networking/recipes-connectivity/daq/daq_2.0.7.bb
+@@ -25,7 +25,8 @@ EXTRA_OECONF = "--enable-nfq-module --disable-ipq-module --includedir=${included
+ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)}"
+ PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
  
- SRC_URI = "git://github.com/linux-nvme/nvme-cli.git;branch=master;protocol=https"
+-inherit autotools
++inherit autotools multilib_script
++MULTILIB_SCRIPTS += "${PN}:${bindir}/daq-modules-config "
+ 
+ DISABLE_STATIC = ""
  
 -- 
-2.43.0
+2.34.1
 
 
