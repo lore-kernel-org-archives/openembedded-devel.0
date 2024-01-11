@@ -1,166 +1,175 @@
-Return-Path: <ross.burton@arm.com>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B3E8C47077
-	for <webhook@archiver.kernel.org>; Thu, 11 Jan 2024 11:43:10 +0000 (UTC)
-Received: from EUR04-VI1-obe.outbound.protection.outlook.com (EUR04-VI1-obe.outbound.protection.outlook.com [40.107.8.41])
- by mx.groups.io with SMTP id smtpd.web11.9631.1704973389370541766
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F081CC47077
+	for <webhook@archiver.kernel.org>; Thu, 11 Jan 2024 12:52:40 +0000 (UTC)
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.web11.10598.1704977558921464742
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Jan 2024 03:43:10 -0800
+ Thu, 11 Jan 2024 04:52:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@armh.onmicrosoft.com header.s=selector2-armh-onmicrosoft-com header.b=NHfvn3FC;
- dkim=pass header.i=@armh.onmicrosoft.com header.s=selector2-armh-onmicrosoft-com header.b=NHfvn3FC;
- spf=pass (domain: arm.com, ip: 40.107.8.41, mailfrom: ross.burton@arm.com)
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=pass;
- b=COazTbDA7RWKZofaj3mpzusyzZBIPrP9hX1ICZyvk86sLJWEnPaSwzkTGkQJiAYZMcNRJk4D0eKwvaVnq+P0Y705QFxqv4p7EvSaX9kuAxAQvaPk+tcLFYmcouEy9OnTapxsY62670Mf9YJd3q3a0Vla8nwYExLylfeBXp+GuMNLa5jDs4IL91Sua8yt1cIf2NocTU411Ac2O6XGDb0JDSThPYp7bIJ0BpA6S+817DcYlM698bXdELDuTb7a8DfkTOcsg3vuJCfpP9xpY1pJFLAFh7wvNbAFOK9Y+6ywbIc1Ich1V3RWweeI6k1hDOw+QWgJ8pWjY8eU0gggEwpLFQ==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Tb3GPdOBz743nwqY2fctCUH0/b5vAAkxw/svWJxYYgc=;
- b=YfaiE4J66HtoFG9viwnSweS/kEmLJvLjCt/zHTVeBBfmqq52HWI/ZtNvB3AsbD930jWhoRgk6i4hcvmjVITG8rIXMIJMkhUE1juUhwA1T8Zim0Q6qT6bV0LBNBT24i8oYphZ0ZOIaJ+z8dCnYrqOhadwSZthvDxW3pj3/QO3y0NfHEkWdhpPkQtdgTYoiVHD7mTNJQFNgIEAAsmlj4FDuMvSFSHyd+licSqvNnv96mztuvMsSk+9+EPMHFkXhpPz0t6l3b10w3RE5t1frZProvMXhaorEdX+dXXt/EMgQWjia/jlt8B9Pu9NSfxiGcsZoNQZIgxZDdz4vLDF0EmJTg==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 63.35.35.123) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=arm.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
- dkim=pass (signature was verified) header.d=armh.onmicrosoft.com; arc=pass (0
- oda=1 ltdi=1 spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
- dmarc=[1,1,header.from=arm.com])
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Tb3GPdOBz743nwqY2fctCUH0/b5vAAkxw/svWJxYYgc=;
- b=NHfvn3FCIyPYVdePrKpdZT+SfOUcmZYNhBO0rAKhrUviOzXK7ulhlX+FzEQrZO/fDsj57cRT/L0j47ICDk0WqIP/V9tAOde1VtXYH9xSd9U954H/qtp6ked9ULPNkJoY2Mb4Bf/ONacyGREPrENb0hyyvTN5iT1zB1YtLngty+U=
-Received: from AS9PR04CA0125.eurprd04.prod.outlook.com (2603:10a6:20b:531::16)
- by GV2PR08MB8751.eurprd08.prod.outlook.com (2603:10a6:150:b3::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7159.27; Thu, 11 Jan
- 2024 11:43:05 +0000
-Received: from AM1PEPF000252DF.eurprd07.prod.outlook.com
- (2603:10a6:20b:531:cafe::95) by AS9PR04CA0125.outlook.office365.com
- (2603:10a6:20b:531::16) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7181.19 via Frontend
- Transport; Thu, 11 Jan 2024 11:43:05 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
- client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
- pr=C
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- AM1PEPF000252DF.mail.protection.outlook.com (10.167.16.57) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7181.13 via Frontend Transport; Thu, 11 Jan 2024 11:43:04 +0000
-Received: ("Tessian outbound a297577ee0df:v228"); Thu, 11 Jan 2024 11:43:04 +0000
-X-CheckRecipientChecked: true
-X-CR-MTA-CID: 133186a27306c44e
-X-CR-MTA-TID: 64aa7808
-Received: from b0d38569cab4.1
-	by 64aa7808-outbound-1.mta.getcheckrecipient.com id 68B07BAC-18A0-447F-B99E-FC7AE31509C5.1;
-	Thu, 11 Jan 2024 11:42:56 +0000
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
-    by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id b0d38569cab4.1
-    (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
-    Thu, 11 Jan 2024 11:42:56 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=SYO6E2OV6tD+tFIhfEnkz5pWtsWSDBQMEODmw6JhDoXqn15iDQf96+/d+ij+2pX+tyPmIutJ1gUv6CAR6QNd/udlaHCdPhtOc7fCynUDJ65xMqxGcqhaAqzl87abAn+4r/jq6do+214yTfs9t+fAXUdxb97IWzKHkvvgkQdyLrFxsiXO9yihlQEZXf66OebiGu3Xc2HeeaMgXNSqte3p83uhxakrIwH1nErHqF2gVyjqwpGJX51Fs8I3YK0o/DtNnxbYFx0FoVgMSOvlyljw5woXdQEu4Nz2is8k6o3Qy3a53DnNFSYbJ/yp5FRgXbQkUxVGlB9VKYXgfxtYEJaidQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Tb3GPdOBz743nwqY2fctCUH0/b5vAAkxw/svWJxYYgc=;
- b=k8V7PIxnLjXZG5cyTXHirjXaO4BNJ1rJCjQpZLxDbCE8vniQzJ8X0uyqYNbhvODNFAHPs0y3bVpkZzdZhuYA6aj9apBteUEMoUZ28RCycv32MJT3pogh7xVB8MlZ1wXthAyhy+upzetI9igFKMiXv/zTDBfC80iRwoXzapabEA6vsjIMzmG8B1otA/LnjTofCisABmUh5mpsp76HHZBUeCXkZgofYEhL/t/lYvGYtcTFfrmeH8Ddhq7xj7u4IR/UDEpuaExlhZSlv4KtRbJ8CKXekC8QuP/pCwM/WrkSrALkRLA6CKtMmB93s+VFMSYAA8DqeaJ0pJS8TpEWFQzHdQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Tb3GPdOBz743nwqY2fctCUH0/b5vAAkxw/svWJxYYgc=;
- b=NHfvn3FCIyPYVdePrKpdZT+SfOUcmZYNhBO0rAKhrUviOzXK7ulhlX+FzEQrZO/fDsj57cRT/L0j47ICDk0WqIP/V9tAOde1VtXYH9xSd9U954H/qtp6ked9ULPNkJoY2Mb4Bf/ONacyGREPrENb0hyyvTN5iT1zB1YtLngty+U=
-Received: from PA4PR08MB7411.eurprd08.prod.outlook.com (2603:10a6:102:2a3::12)
- by AM9PR08MB6147.eurprd08.prod.outlook.com (2603:10a6:20b:2da::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7181.17; Thu, 11 Jan
- 2024 11:42:54 +0000
-Received: from PA4PR08MB7411.eurprd08.prod.outlook.com
- ([fe80::9f34:f165:4c51:be06]) by PA4PR08MB7411.eurprd08.prod.outlook.com
- ([fe80::9f34:f165:4c51:be06%3]) with mapi id 15.20.7181.019; Thu, 11 Jan 2024
- 11:42:54 +0000
-From: Ross Burton <Ross.Burton@arm.com>
-To: "alperyasinak1@gmail.com" <alperyasinak1@gmail.com>
-CC: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [meta-webserver][PATCH] nginx: fix CVE-2023-44487
-Thread-Topic: [oe] [meta-webserver][PATCH] nginx: fix CVE-2023-44487
-Thread-Index: AQHaRADXyCD9wsKFy0KsvCSfoj+/d7DUfpMA
-Date: Thu, 11 Jan 2024 11:42:54 +0000
-Message-ID: <9B7FEF32-62AC-440C-8B50-3316DA1974D8@arm.com>
-References: <20240110200824.225021-1-alperyasinak1@gmail.com>
-In-Reply-To: <20240110200824.225021-1-alperyasinak1@gmail.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-mailer: Apple Mail (2.3774.300.61.1.2)
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-x-ms-traffictypediagnostic: 
-	PA4PR08MB7411:EE_|AM9PR08MB6147:EE_|AM1PEPF000252DF:EE_|GV2PR08MB8751:EE_
-X-MS-Office365-Filtering-Correlation-Id: 77715235-38d5-4870-daf3-08dc129a78f6
-x-checkrecipientrouted: true
-nodisclaimer: true
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;
-X-Microsoft-Antispam-Message-Info-Original: 
- 7Zv8plb9M8CBJD1DrTuT6cRcT6nkCdDROUXKra93uD9yOb2xPdXLmupRjNQIu9aCBfGFFI/wB937NjET0hhdiPK0D+cHCJxKBJeYsq5+IHVhFQQAgoRbw880Fd2IO0XGdGEncp5spbZxEiN1z/OTOD6vAAMHTLxTxH2xv3iXO2Q88kW2DjvBdPSTbLn6I3wzzR78MAAEWM8RHSOFcE7IbfwXuy5cHeoMyH0o5nvIdCit158hvP/Mx9O7RJJDGUZJuEPgI9ptGryTEANGkAUxk9cX5pjvgCMEKpSwlPVWoh6ekP2VIlcvXX9cRtQqSUibUboVMrXK/ZxH378lexc3tT4Eul8Hn92kPMUdr6mhv0aJSwEXzyng0rZgcLTJ+Hp3Od0hQDlNqKQ6vIvP3BbJHv9xXERp2ENEe9qmxHOi3vFacTYszu8tjYD2XCheytcIa3qBbO54XP38GcbxbZfVzKaHkxS5G4mB3mLE55DuPybXyxki/X8vR2IPuA0DwWLPA+GGxI2dWTVa7Gyb6ttfECv6ayOCkJhaOfrNW9J3b4PvAO4XHc1A+zv6mZe8v/JCBSvLF9PcnKBdN0arzmlzuQNABop7kxKRZAIcMV7QIp/SLFpL5acanW/TYC47IEAMC54JeQOeFoipuKbTnc/KYA==
-X-Forefront-Antispam-Report-Untrusted: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA4PR08MB7411.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(376002)(346002)(396003)(39860400002)(366004)(136003)(230922051799003)(451199024)(1800799012)(64100799003)(186009)(478600001)(71200400001)(36756003)(122000001)(66946007)(6506007)(53546011)(6512007)(33656002)(558084003)(64756008)(91956017)(4326008)(66476007)(6916009)(66556008)(66446008)(8936002)(316002)(8676002)(38070700009)(41300700001)(6486002)(76116006)(38100700002)(26005)(2616005)(86362001)(2906002)(5660300002)(45980500001);DIR:OUT;SFP:1101;
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <7410A00D1271AD42AD7F2CF3756B789E@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: quoted-printable
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=NSb0AlBT;
+ spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-40e62425c60so1801825e9.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 11 Jan 2024 04:52:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1704977557; x=1705582357; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=c/fs4X2s0BaWJaAG2JNfNoXctAw/TBTuJFyuSJgBiXE=;
+        b=NSb0AlBT5OjqTSKbgOk/Es7ozbadU/63r0aMq55714j/Sq8Q9hEavRM/27qy5oDQzw
+         IPF9m+VnEtavesOV8HCO9M3Y+qp771wy4BdVN02ACwHrP1+F9ICNVa3mUWpbI8D+zacK
+         ERaaPgDMnqd/G044qDDipdahNiuoxICyO1jF/MOBdaOykcaxLcpA34JdKUGdbV471qR/
+         5x3Pp9tfWXrJXMeeyEJZMHVPHUqohyqA65E6yWwOOeVIO6crCHtM3KqopkvqS14WhGjm
+         agEsE5iS4lkVeJ6XC/y7e7XPlC2HnMd7AY7WlI1c88qGAZlkCiq4e7GYvHvJMrFfrbZx
+         fGvQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1704977557; x=1705582357;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=c/fs4X2s0BaWJaAG2JNfNoXctAw/TBTuJFyuSJgBiXE=;
+        b=YdldjbkyBSbao8ylyeJrQSyj0rGbhY9Feme9hjxde8Cd+h5XpjtZGabDZlSyg7PdVZ
+         PH7qeCdZLwFfmMl3CTwm1tAZnMI05L1bb9iaVF+iV6dMGs5261Z4N99AT0tjpLXyR3lf
+         99lYfLoaIkvGWVIN1z0+YdunmzLpHVPhxIfTMko1SzRPhlos5l0X70tMuRc92kFGtBYQ
+         36g+4hEBgeOqEEEbZ2jHBF4NBtNF6dVt8cT107P82FRjteU0uXoVXqY7N9VoulmLOG2H
+         JSPW3+f1mlcNV5XNxqpUFJs3XTqLWea5NeJ/oqqQTZJNRYP0P8WPYYzxXgAuaeCYO7Tz
+         wL3g==
+X-Gm-Message-State: AOJu0YxHU6W/RGaCI/+m6Rdo/WFKjrfaa9zWfBX7gAU/hT8RkdT/mmu9
+	q1pbDwDA/pCaQemjkfdWc/T9AN6BSmA=
+X-Google-Smtp-Source: AGHT+IGIpY9liioy5yJ1/LeUNqr7r/WTNQ9tp5BKnF3L4AFr2xyyfEnm+q49r1wN+7L9MDSQz2UKpg==
+X-Received: by 2002:a05:600c:1986:b0:40d:77ed:c44a with SMTP id t6-20020a05600c198600b0040d77edc44amr411187wmq.42.1704977556649;
+        Thu, 11 Jan 2024 04:52:36 -0800 (PST)
+Received: from localhost.localdomain ([176.33.66.82])
+        by smtp.gmail.com with ESMTPSA id fl13-20020a05600c0b8d00b0040d8cd116e4sm5762152wmb.37.2024.01.11.04.52.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 11 Jan 2024 04:52:36 -0800 (PST)
+From: alperak <alperyasinak1@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: alperak <alperyasinak1@gmail.com>
+Subject: [meta-webserver][PATCHv2] nginx: fix CVE-2023-44487
+Date: Thu, 11 Jan 2024 15:52:32 +0300
+Message-Id: <20240111125232.572662-1-alperyasinak1@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR08MB6147
-Original-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: 
- AM1PEPF000252DF.eurprd07.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: 
-	312392a6-c161-40db-0ab0-08dc129a72f7
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	edgq3Tblqv/ssHkhjU65l31ylAOsqxWRxrkA+LiYP7qhYvM9rRd5UIZm7QnrUZ18AQodz7AYIPr883Fkano7Dki0roR+sggCMCS0cxojFr6VWX0lvN9EtYvzY3qL7NbufNs5fhEZ88qHwrY8Zyj5xQveO8NjLHo6QokrFQ88mTzP4uwpFWoWS76WbUeNXvWDX9gXoEY3ueZKIiBYdtbFFJNNbRWN1JmVLqLQUd3y6ZbDUw+46JxVUqYKH1pQMZ28ddj1urmo6W6uAtWnjegAABv6chyO4N1KOPXNm0xxz7u209VAJk4YzJDMjVXuilWhFAD1l/c/DIjJCFylXI7OPIWdlcRxuNu0Ts1l1B6MEHftAjMjVpNF2LBFjfqbEhPWvkuW1zfV3/kh3W5rYUZg2kvXKhZznshTQWe3JBkoYO2jgGkcD3H5ofxwlFPRkDM+uvb17ZdEwUYoi5QS3yrfys2mnJKtUNdu7g7J3cf43hk0A2fwCZFlObyizjRypHJehZg/bw5pKu+ZVK7WSl8/+TqDuKlmnVgruDpOUBZgqt0LQdfKUjv8xZ0mZw90yMwoRd6E46lWWYIE7xmk5YOLOqW6mtN6fuHnboHP/+nBbQduwxiXKh9/YAilgnR/APGpZ2boGjQ1ZNSerEzmQ8OGw9my7xMgWDehpQCFrNItmIONIy4gYTEHxU4/XqJig+ksjlSnQsu6tiiMA99fwYVWTxqDZXYwIPsxwMg8QNQ7ciM=
-X-Forefront-Antispam-Report: 
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230031)(4636009)(346002)(396003)(39860400002)(136003)(376002)(230922051799003)(451199024)(1800799012)(64100799003)(186009)(82310400011)(40470700004)(36840700001)(46966006)(356005)(82740400003)(81166007)(36756003)(40480700001)(40460700003)(86362001)(336012)(26005)(36860700001)(41300700001)(2616005)(6512007)(478600001)(70586007)(70206006)(6506007)(53546011)(47076005)(316002)(6486002)(33656002)(5660300002)(6862004)(4744005)(8936002)(2906002)(8676002)(4326008);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Jan 2024 11:43:04.3006
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 77715235-38d5-4870-daf3-08dc129a78f6
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	AM1PEPF000252DF.eurprd07.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR08MB8751
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 11 Jan 2024 11:43:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108223
+ <openembedded-devel@lists.openembedded.org>; Thu, 11 Jan 2024 12:52:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108224
 
+Upstream-Status: Backport from [https://github.com/nginx/nginx/commit/6ceef192e7af1c507826ac38a2d43f08bf265fb9]
 
+WARNING: nginx-1.24.0-r0 do_cve_check: Found unpatched CVE (CVE-2023-44487)
 
-> On 10 Jan 2024, at 20:08, Alper Ak via lists.openembedded.org <alperyasin=
-ak1=3Dgmail.com@lists.openembedded.org> wrote:
->=20
-> +Upstream-Status: Backport [https://github.com/nginx/nginx/commit/6ceef19=
-2e7af1c507826ac38a2d43f08bf265fb9]
-> +Signed-off-by: alperak <alperyasinak1@gmail.com>
+This vulnerability exists between the following versions -> From(including) 1.9.5 Up to(including) 1.25.2
 
-Please put the CVE: CVE-2023-44487 tag here, instead of in the commit log.
+Signed-off-by: alperak <alperyasinak1@gmail.com>
+---
+ .../nginx/files/CVE-2023-44487.patch          | 78 +++++++++++++++++++
+ .../recipes-httpd/nginx/nginx_1.24.0.bb       |  2 +
+ 2 files changed, 80 insertions(+)
+ create mode 100644 meta-webserver/recipes-httpd/nginx/files/CVE-2023-44487.patch
 
-Ross=
+diff --git a/meta-webserver/recipes-httpd/nginx/files/CVE-2023-44487.patch b/meta-webserver/recipes-httpd/nginx/files/CVE-2023-44487.patch
+new file mode 100644
+index 000000000..2fc6a60f6
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/nginx/files/CVE-2023-44487.patch
+@@ -0,0 +1,78 @@
++From 6ceef192e7af1c507826ac38a2d43f08bf265fb9 Mon Sep 17 00:00:00 2001
++From: Maxim Dounin <mdounin@mdounin.ru>
++Date: Wed, 10 Jan 2024 18:52:11 +0000
++Subject: [PATCH] HTTP/2: per-iteration stream handling limit.
++
++To ensure that attempts to flood servers with many streams are detected
++early, a limit of no more than 2 * max_concurrent_streams new streams per one
++event loop iteration was introduced.  This limit is applied even if
++max_concurrent_streams is not yet reached - for example, if corresponding
++streams are handled synchronously or reset.
++
++Further, refused streams are now limited to maximum of max_concurrent_streams
++and 100, similarly to priority_limit initial value, providing some tolerance
++to clients trying to open several streams at the connection start, yet
++low tolerance to flooding attempts.
++
++Upstream-Status: Backport [https://github.com/nginx/nginx/commit/6ceef192e7af1c507826ac38a2d43f08bf265fb9]
++CVE: CVE-2023-44487
++
++Signed-off-by: alperak <alperyasinak1@gmail.com>
++---
++ src/http/v2/ngx_http_v2.c | 15 +++++++++++++++
++ src/http/v2/ngx_http_v2.h |  2 ++
++ 2 files changed, 17 insertions(+)
++
++diff --git a/src/http/v2/ngx_http_v2.c b/src/http/v2/ngx_http_v2.c
++index ea3f27c..1116e56 100644
++--- a/src/http/v2/ngx_http_v2.c
+++++ b/src/http/v2/ngx_http_v2.c
++@@ -361,6 +361,7 @@ ngx_http_v2_read_handler(ngx_event_t *rev)
++     ngx_log_debug0(NGX_LOG_DEBUG_HTTP, c->log, 0, "http2 read handler");
++ 
++     h2c->blocked = 1;
+++    h2c->new_streams = 0;
++ 
++     if (c->close) {
++         c->close = 0;
++@@ -1321,6 +1322,14 @@ ngx_http_v2_state_headers(ngx_http_v2_connection_t *h2c, u_char *pos,
++         goto rst_stream;
++     }
++ 
+++    if (h2c->new_streams++ >= 2 * h2scf->concurrent_streams) {
+++        ngx_log_error(NGX_LOG_INFO, h2c->connection->log, 0,
+++                      "client sent too many streams at once");
+++
+++        status = NGX_HTTP_V2_REFUSED_STREAM;
+++        goto rst_stream;
+++    }
+++
++     if (!h2c->settings_ack
++         && !(h2c->state.flags & NGX_HTTP_V2_END_STREAM_FLAG)
++         && h2scf->preread_size < NGX_HTTP_V2_DEFAULT_WINDOW)
++@@ -1386,6 +1395,12 @@ ngx_http_v2_state_headers(ngx_http_v2_connection_t *h2c, u_char *pos,
++ 
++ rst_stream:
++ 
+++    if (h2c->refused_streams++ > ngx_max(h2scf->concurrent_streams, 100)) {
+++        ngx_log_error(NGX_LOG_INFO, h2c->connection->log, 0,
+++                      "client sent too many refused streams");
+++        return ngx_http_v2_connection_error(h2c, NGX_HTTP_V2_NO_ERROR);
+++    }
+++
++     if (ngx_http_v2_send_rst_stream(h2c, h2c->state.sid, status) != NGX_OK) {
++         return ngx_http_v2_connection_error(h2c, NGX_HTTP_V2_INTERNAL_ERROR);
++     }
++diff --git a/src/http/v2/ngx_http_v2.h b/src/http/v2/ngx_http_v2.h
++index 4e25293..b9daf92 100644
++--- a/src/http/v2/ngx_http_v2.h
+++++ b/src/http/v2/ngx_http_v2.h
++@@ -124,6 +124,8 @@ struct ngx_http_v2_connection_s {
++     ngx_uint_t                       processing;
++     ngx_uint_t                       frames;
++     ngx_uint_t                       idle;
+++    ngx_uint_t                       new_streams;
+++    ngx_uint_t                       refused_streams;
++     ngx_uint_t                       priority_limit;
++ 
++     ngx_uint_t                       pushing;
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb
+index 2e865e400..e5666f6fe 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.24.0.bb
+@@ -2,5 +2,7 @@ require nginx.inc
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=175abb631c799f54573dc481454c8632"
+ 
++SRC_URI:append = " file://CVE-2023-44487.patch"
++
+ SRC_URI[sha256sum] = "77a2541637b92a621e3ee76776c8b7b40cf6d707e69ba53a940283e30ff2f55d"
+ 
+-- 
+2.25.1
+
 
