@@ -1,254 +1,87 @@
-Return-Path: <randy.macleod@windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D1C71C47073
-	for <webhook@archiver.kernel.org>; Wed, 10 Jan 2024 20:38:17 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.4790.1704919095506536818
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 68FF8C4707B
+	for <webhook@archiver.kernel.org>; Thu, 11 Jan 2024 00:27:17 +0000 (UTC)
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
+ by mx.groups.io with SMTP id smtpd.web11.336.1704932833117085499
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Jan 2024 12:38:15 -0800
+ Wed, 10 Jan 2024 16:27:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=bHGgeg+7;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=1739e1d70f=randy.macleod@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 40A7ULNs009637;
-	Wed, 10 Jan 2024 20:38:13 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=gASSd
-	cbiMyXROIlGTWBTTG+FFMj0MEGAk+mmLe0dVS8=; b=bHGgeg+7KsEbxoubrxuzl
-	fg7Yl47JVhVrd5yt8G7rPj4OS3xHYw7byfNCp1+Xr2xeO5kA/BhdLL9RLMm5r/HW
-	EH8fquNhPaSgWE7g/Qw44/neteMsDEK/4enPuQEforussxqMBmernG0tPLioGw4s
-	XDv4C2XVA7JCksrv1M7dPMMKMXGmIM3eR2xg3jCbgh+Vw4PS9GLqtBHT5CXLKDyn
-	fCOjw+wafPhRd8ttot8hFNcYsRnjiYGFourZfKsSr7vUEgbbRxMuIfPlC3F0QW5/
-	5LbgftqzNmghsxxmCBeVGpyBMJhxwj3ncu4WhCNYRjWnDWiktCWgYm9VNOgK5tvX
-	Q==
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3vewu5d17j-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
-	Wed, 10 Jan 2024 20:38:13 +0000 (GMT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Wed, 10 Jan 2024 12:38:41 -0800
-Received: from pop-os.wrs.com (172.25.44.2) by ala-exchng01.corp.ad.wrs.com
- (147.11.82.252) with Microsoft SMTP Server id 15.1.2507.35 via Frontend
- Transport; Wed, 10 Jan 2024 12:38:41 -0800
-From: <Randy.MacLeod@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <anuj.mittal@intel.com>, <david.zuhn@sonos.com>
-Subject: [PATCH] rng-tools: move from oe-core to meta-oe
-Date: Wed, 10 Jan 2024 15:38:10 -0500
-Message-ID: <20240110203810.1555817-1-Randy.MacLeod@windriver.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=JZcrDGww;
+ spf=pass (domain: gmail.com, ip: 209.85.210.177, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f177.google.com with SMTP id d2e1a72fcca58-6daf9d5f111so3354107b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Jan 2024 16:27:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1704932832; x=1705537632; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=nU2j2RPI8LlWGN+LJqYMeDaINcanx4fqFgWK0By/NMc=;
+        b=JZcrDGww6NiOd1JtYZGHo+5QV55hmNICJaiuLOVsyDMW0/pf5siLlnqllj2zb1BGbp
+         TUncOxo8XsuHXUBgjJzhXNTWIhHLSeCmTSMdRPXcIC8vxz/969RqDdJTXeEISgz/5vIp
+         jVmIEPkCvjQuWF2J6nBLswKwqkfEHgZk5HNsz/89gOLtWX4JvyH9OoeRIKwiO6C05e0z
+         Q1ZAADi2K25wnNRoaMmxG1TxQOGeAG2PQZrvsh0VoWMKoKHVIearzNxnEy1zmP4MuYQB
+         yd/HXcslOGEf3ZT9T9j6hgxIIap4VbNZj2WXnAfZ+tv69Ye4KfQQVHdmcfx2dqJQHhQy
+         E4Yw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1704932832; x=1705537632;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=nU2j2RPI8LlWGN+LJqYMeDaINcanx4fqFgWK0By/NMc=;
+        b=aIJ3XByUhPARQVZdcUC/ycRBEZsjz5Lbb9JwHDlu4tU186GoZsJd8jYX03JHUcfWRF
+         BIVirMuwbrVg3lsJzqHSRpozLCQ2HGAIEpOOuksEdMAEUShxxX8gAyLelglCYQu5Hd68
+         gpcALvhjDGiyNW2iUKNTMb5nGTbHEt6mXfVVJEf6eFpxJ3ZW9jlmvu83faFTZA54Vbih
+         0Z2j6VVUl/mNzfiiV09/GQZBacw5cbBNI0VeVhnojhoV4SOboDlGTO4C1OyS2FUb/4b9
+         iWE9LOJAbqBuLIyLXZN/2QsmQkzHGb4o5MMapuf4oYHI8aFSzRBcPR5O6sULo9InW85w
+         Wbtw==
+X-Gm-Message-State: AOJu0YxyoDmhtPx/FBlEXd3ESKOT84zS9/9AnkeF/Wo+nBn4BKRKrDmB
+	zkGSIvOsauPqokyGLyiYkySKL47LlZnr/Q==
+X-Google-Smtp-Source: AGHT+IG1Ia+h2EYv/YZ0mK9wDHUnLfM3jheg9M4xpVO0+beuIgbo/qUeJsRgNacgQ5hrW1pCGAl7PQ==
+X-Received: by 2002:a05:6a00:8d86:b0:6d9:b7ef:466c with SMTP id im6-20020a056a008d8600b006d9b7ef466cmr438544pfb.67.1704932832216;
+        Wed, 10 Jan 2024 16:27:12 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::3c3a])
+        by smtp.gmail.com with ESMTPSA id g17-20020aa78751000000b006d9fd64fdcasm4081000pfo.37.2024.01.10.16.27.11
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 10 Jan 2024 16:27:11 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] kernel-selftest: remove Wno-alloc-size-larger-than from scripts/Makefile.extrawarn
+Date: Wed, 10 Jan 2024 16:27:09 -0800
+Message-ID: <20240111002709.575122-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: jpYseLFP5S__Ph1J3t15ZrmszFQXXbcY
-X-Proofpoint-ORIG-GUID: jpYseLFP5S__Ph1J3t15ZrmszFQXXbcY
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-11-16_25,2023-11-16_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 mlxlogscore=999
- priorityscore=1501 impostorscore=0 malwarescore=0 mlxscore=0 clxscore=1011
- lowpriorityscore=0 phishscore=0 suspectscore=0 spamscore=0 bulkscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2311290000
- definitions=main-2401100163
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 10 Jan 2024 20:38:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108219
+ <openembedded-devel@lists.openembedded.org>; Thu, 11 Jan 2024 00:27:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108220
 
-From: Randy MacLeod <Randy.MacLeod@windriver.com>
+6.6+ kernel has the warning options moved to dedicated include file
+under scripts called Makefile.extrawarn, therefore search for this
+file as well to remove this unrecognized option by clang
 
-Nothing in oe-core depends on rng-tools anymore:
-   e7e1bc43ca rng-tools: splitting the rng-tools systemd/sysvinit serivce as a package
-so move it to meta-oe for people who still want to run rngd
-as a service for some reason or for those who want to run rng-test.
-
-Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../rng-tools/rng-tools/default               |  1 +
- .../recipes-support/rng-tools/rng-tools/init  | 42 +++++++++++
- .../rng-tools/rng-tools/rng-tools.service     | 32 +++++++++
- .../rng-tools/rng-tools_6.16.bb               | 69 +++++++++++++++++++
- 4 files changed, 144 insertions(+)
- create mode 100644 meta-oe/recipes-support/rng-tools/rng-tools/default
- create mode 100644 meta-oe/recipes-support/rng-tools/rng-tools/init
- create mode 100644 meta-oe/recipes-support/rng-tools/rng-tools/rng-tools.service
- create mode 100644 meta-oe/recipes-support/rng-tools/rng-tools_6.16.bb
+ meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-support/rng-tools/rng-tools/default b/meta-oe/recipes-support/rng-tools/rng-tools/default
-new file mode 100644
-index 000000000..b9f8e0363
---- /dev/null
-+++ b/meta-oe/recipes-support/rng-tools/rng-tools/default
-@@ -0,0 +1 @@
-+EXTRA_ARGS="-r /dev/hwrng"
-diff --git a/meta-oe/recipes-support/rng-tools/rng-tools/init b/meta-oe/recipes-support/rng-tools/rng-tools/init
-new file mode 100644
-index 000000000..13f0ecd37
---- /dev/null
-+++ b/meta-oe/recipes-support/rng-tools/rng-tools/init
-@@ -0,0 +1,42 @@
-+#!/bin/sh
-+#
-+# This is an init script for openembedded
-+# Copy it to @SYSCONFDIR@/init.d/rng-tools and type
-+# > update-rc.d rng-tools defaults 60
-+#
-+
-+rngd=@SBINDIR@/rngd
-+test -x "$rngd" || exit 1
-+
-+[ -r @SYSCONFDIR@/default/rng-tools ] && . "@SYSCONFDIR@/default/rng-tools"
-+
-+case "$1" in
-+  start)
-+    echo -n "Starting random number generator daemon"
-+    start-stop-daemon -S -q -x $rngd -- $EXTRA_ARGS
-+    echo "."
-+    ;;
-+  stop)
-+    echo -n "Stopping random number generator daemon"
-+    start-stop-daemon -K -q -n rngd
-+    echo "."
-+    ;;
-+  reload|force-reload)
-+    echo -n "Signalling rng daemon restart"
-+    start-stop-daemon -K -q -s 1 -x $rngd
-+    start-stop-daemon -K -q -s 1 -x $rngd
-+    ;;
-+  restart)
-+    echo -n "Stopping random number generator daemon"
-+    start-stop-daemon -K -q -n rngd
-+    echo "."
-+    echo -n "Starting random number generator daemon"
-+    start-stop-daemon -S -q -x $rngd -- $EXTRA_ARGS
-+    echo "."
-+    ;;
-+  *)
-+    echo "Usage: @SYSCONFDIR@/init.d/rng-tools {start|stop|reload|restart|force-reload}"
-+    exit 1
-+esac
-+
-+exit 0
-diff --git a/meta-oe/recipes-support/rng-tools/rng-tools/rng-tools.service b/meta-oe/recipes-support/rng-tools/rng-tools/rng-tools.service
-new file mode 100644
-index 000000000..5ae2fba21
---- /dev/null
-+++ b/meta-oe/recipes-support/rng-tools/rng-tools/rng-tools.service
-@@ -0,0 +1,32 @@
-+[Unit]
-+Description=Hardware RNG Entropy Gatherer Daemon
-+DefaultDependencies=no
-+Conflicts=shutdown.target
-+Before=sysinit.target shutdown.target
-+ConditionVirtualization=!container
-+
-+[Service]
-+EnvironmentFile=-@SYSCONFDIR@/default/rng-tools
-+ExecStart=@SBINDIR@/rngd -f $EXTRA_ARGS
-+CapabilityBoundingSet=CAP_SYS_ADMIN
-+IPAddressDeny=any
-+LockPersonality=yes
-+MemoryDenyWriteExecute=yes
-+NoNewPrivileges=yes
-+PrivateTmp=yes
-+ProtectControlGroups=yes
-+ProtectHome=yes
-+ProtectHostname=yes
-+ProtectKernelModules=yes
-+ProtectKernelLogs=yes
-+ProtectSystem=strict
-+RestrictAddressFamilies=AF_UNIX
-+RestrictNamespaces=yes
-+RestrictRealtime=yes
-+RestrictSUIDSGID=yes
-+SystemCallArchitectures=native
-+SystemCallErrorNumber=EPERM
-+SystemCallFilter=@system-service
-+
-+[Install]
-+WantedBy=sysinit.target
-diff --git a/meta-oe/recipes-support/rng-tools/rng-tools_6.16.bb b/meta-oe/recipes-support/rng-tools/rng-tools_6.16.bb
-new file mode 100644
-index 000000000..f0aa3ff93
---- /dev/null
-+++ b/meta-oe/recipes-support/rng-tools/rng-tools_6.16.bb
-@@ -0,0 +1,69 @@
-+SUMMARY = "Random number generator daemon"
-+DESCRIPTION = "Check and feed random data from hardware device to kernel"
-+HOMEPAGE = "https://github.com/nhorman/rng-tools"
-+BUGTRACKER = "https://github.com/nhorman/rng-tools/issues"
-+LICENSE = "GPL-2.0-only"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+DEPENDS = "openssl libcap"
-+
-+SRC_URI = "git://github.com/nhorman/rng-tools.git;branch=master;protocol=https \
-+           file://init \
-+           file://default \
-+           file://rng-tools.service \
-+           "
-+SRCREV = "e061c313b95890eb5fa0ada0cd6eec619dafdfe2"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit autotools update-rc.d systemd pkgconfig
-+
-+EXTRA_OECONF = "--without-rtlsdr"
-+
-+PACKAGECONFIG ??= "libjitterentropy"
-+PACKAGECONFIG:libc-musl = "libargp libjitterentropy"
-+
-+PACKAGECONFIG[libargp] = "--with-libargp,--without-libargp,argp-standalone,"
-+PACKAGECONFIG[libjitterentropy] = "--enable-jitterentropy,--disable-jitterentropy,libjitterentropy"
-+PACKAGECONFIG[libp11] = "--with-pkcs11,--without-pkcs11,libp11 openssl"
-+PACKAGECONFIG[nistbeacon] = "--with-nistbeacon,--without-nistbeacon,curl libxml2"
-+PACKAGECONFIG[qrypt] = "--with-qrypt,--without-qrypt,curl"
-+
-+INITSCRIPT_PACKAGES = "${PN}-service"
-+INITSCRIPT_NAME:${PN}-service = "rng-tools"
-+INITSCRIPT_PARAMS:${PN}-service = "start 03 2 3 4 5 . stop 30 0 6 1 ."
-+
-+SYSTEMD_PACKAGES = "${PN}-service"
-+SYSTEMD_SERVICE:${PN}-service = "rng-tools.service"
-+
-+CFLAGS += " -DJENT_CONF_ENABLE_INTERNAL_TIMER "
-+
-+PACKAGES =+ "${PN}-service"
-+
-+FILES:${PN}-service += " \
-+    ${sysconfdir}/init.d/rng-tools \
-+    ${sysconfdir}/default/rng-tools \
-+"
-+
-+# Refer autogen.sh in rng-tools
-+do_configure:prepend() {
-+    cp ${S}/README.md ${S}/README
-+}
-+
-+do_install:append() {
-+    install -Dm 0644 ${WORKDIR}/default ${D}${sysconfdir}/default/rng-tools
-+    install -Dm 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/rng-tools
-+    install -Dm 0644 ${WORKDIR}/rng-tools.service \
-+                     ${D}${systemd_system_unitdir}/rng-tools.service
-+    sed -i \
-+        -e 's,@SYSCONFDIR@,${sysconfdir},g' \
-+        -e 's,@SBINDIR@,${sbindir},g' \
-+        ${D}${sysconfdir}/init.d/rng-tools \
-+        ${D}${systemd_system_unitdir}/rng-tools.service
-+
-+    if [ "${@bb.utils.contains('PACKAGECONFIG', 'nistbeacon', 'yes', 'no', d)}" = "yes" ]; then
-+        sed -i \
-+            -e '/^IPAddressDeny=any/d' \
-+            -e '/^RestrictAddressFamilies=/ s/$/ AF_INET AF_INET6/' \
-+            ${D}${systemd_system_unitdir}/rng-tools.service
-+    fi
-+}
+diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
+index 291a83aaad..6c97e28545 100644
+--- a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
++++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
+@@ -93,6 +93,7 @@ either install it and add it to HOSTTOOLS, or add clang-native from meta-clang t
+     sed -i -e 's|^all: docs|all:|' ${S}/tools/testing/selftests/bpf/Makefile
+     sed -i -e '/mrecord-mcount/d' ${S}/Makefile
+     sed -i -e '/Wno-alloc-size-larger-than/d' ${S}/Makefile
++    sed -i -e '/Wno-alloc-size-larger-than/d' ${S}/scripts/Makefile.*
+     for i in ${TEST_LIST}
+     do
+         oe_runmake -C ${S}/tools/testing/selftests/${i}
 -- 
-2.34.1
+2.43.0
 
 
