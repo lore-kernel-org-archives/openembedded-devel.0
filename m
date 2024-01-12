@@ -1,86 +1,124 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3A148C4707C
-	for <webhook@archiver.kernel.org>; Fri, 12 Jan 2024 03:49:11 +0000 (UTC)
-Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
- by mx.groups.io with SMTP id smtpd.web10.224.1705031347677730467
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8016DC4707C
+	for <webhook@archiver.kernel.org>; Fri, 12 Jan 2024 08:51:42 +0000 (UTC)
+Received: from esa7.hc1455-7.c3s2.iphmx.com (esa7.hc1455-7.c3s2.iphmx.com [139.138.61.252])
+ by mx.groups.io with SMTP id smtpd.web10.3410.1705049499866342760
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Jan 2024 19:49:07 -0800
+ Fri, 12 Jan 2024 00:51:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=C3NJA3jD;
- spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f180.google.com with SMTP id 41be03b00d2f7-5ce942efda5so4534810a12.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 11 Jan 2024 19:49:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1705031347; x=1705636147; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=N2YH6BgM86cZ4jR5Bd3fMvWoWmUE1OkQBmryhe6k8ao=;
-        b=C3NJA3jDcimF91mFhmV4vZPQsVZ3ouKduC/14GG1j9+qae81uwKVcXyDcklB44eWEx
-         k+31P2nMgLMhYq6xmzUlhmDp/L0es8uHDkG2yrXVZJTYwGOsdXqHL7DXn7uJm6yLiyKG
-         BZL/KlF8KjkcfK8mFY9Myioz4DCtn1UnccJU+XYXwzgytu5s7RufP0lrY4xMOI/DKQ8I
-         4KVxPmFkIoUaJi0cofgejfWsJetbm/QGn/4KWJB9RI1JGJsqj0qDpKuoTkjcflgaiLbv
-         NGNKFZqDmmVAv+9XiV1IQ7LJm26MEpm7iiAwKmq5q5ADjRVlicdc/fjGOMAmQyzzP0UX
-         RBrg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1705031347; x=1705636147;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=N2YH6BgM86cZ4jR5Bd3fMvWoWmUE1OkQBmryhe6k8ao=;
-        b=nDgRy1+M+HcedVQXvO7wsF+TeQA+YmKzy81fah5CSyx63zcTSdHVQ7X7nC8RVYp92e
-         doq+okg2W7W5Vu6H9Jxu7ngIs+tm2ZTBefgQBXj+MC7uzNFoyiS2aBxxsv7Td3Hn4YEi
-         ggGo28+tNSfzBx3klCZ/NX28RdX+CiU8jwSwRCO5W9TDsuB/O51g7IkZyFb+o/n/yIK2
-         +w7lodR9tdzFMuJSwTxsXPmoqVLVflrizlzp1gKXm+wCuhCmkIrHt8IWJcL2K8x+YySg
-         fMWLbxQ89+kTrhsHdc8kKx34rYIqya37k9VzcmoseFGYcevjcy1jrghDxEna6/eVSjWo
-         N3iw==
-X-Gm-Message-State: AOJu0YzVYZvcgvu3lsOOvjJ1ECU698j0/ifSrAb/2FC9UqUkJ1cVbvus
-	yFmzyKsbBmtU/OEv4rR58aE=
-X-Google-Smtp-Source: AGHT+IHi92G1oqX7BvwlTurRwVrVhkSN8QRmsfpwYCM72W4xrxCve1Rz049JAzmU4BnWO+hZhK+wmQ==
-X-Received: by 2002:a05:6a20:da85:b0:19a:2d38:9572 with SMTP id iy5-20020a056a20da8500b0019a2d389572mr456963pzb.14.1705031346872;
-        Thu, 11 Jan 2024 19:49:06 -0800 (PST)
-Received: from ?IPV6:2601:646:9d80:4380:4c28:cbf2:ee1f:e1e3? ([2601:646:9d80:4380:4c28:cbf2:ee1f:e1e3])
-        by smtp.gmail.com with ESMTPSA id f16-20020a056a001ad000b006da04f1b884sm2060621pfv.105.2024.01.11.19.49.06
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 11 Jan 2024 19:49:06 -0800 (PST)
-Message-ID: <b471f38f-89eb-4d66-a1ab-42598bf138a9@gmail.com>
-Date: Thu, 11 Jan 2024 19:49:04 -0800
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [PATCH] v4l-utils: Update to 1.26.1
-To: Fabio Estevam <festevam@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org,
- Fabio Estevam <festevam@denx.de>
-References: <20240111040734.112703-1-festevam@gmail.com>
- <CAMKF1sp=0T4Ow_F=DwOL7BxZU=j8D4z2eaP9qXa44kwOo9Ha1A@mail.gmail.com>
- <CAMKF1somcAJpnMW9822wNy0M2a3Yd5SFCgeouSVUg_0HW0HdFA@mail.gmail.com>
- <CAOMZO5CF41YpSU0Zdz5PUpHvHpMuGFWt999+FBC_b2hcUe5x_w@mail.gmail.com>
-Content-Language: en-US
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <CAOMZO5CF41YpSU0Zdz5PUpHvHpMuGFWt999+FBC_b2hcUe5x_w@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+ dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 139.138.61.252, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10950"; a="124725953"
+X-IronPort-AV: E=Sophos;i="6.04,189,1695654000"; 
+   d="scan'208";a="124725953"
+Received: from unknown (HELO yto-r4.gw.nic.fujitsu.com) ([218.44.52.220])
+  by esa7.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Jan 2024 17:51:37 +0900
+Received: from yto-m4.gw.nic.fujitsu.com (yto-nat-yto-m4.gw.nic.fujitsu.com [192.168.83.67])
+	by yto-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 3AAD5D50B1
+	for <openembedded-devel@lists.openembedded.org>; Fri, 12 Jan 2024 17:51:35 +0900 (JST)
+Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
+	by yto-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 6B0D1D3F2E
+	for <openembedded-devel@lists.openembedded.org>; Fri, 12 Jan 2024 17:51:34 +0900 (JST)
+Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id E55952007B714
+	for <openembedded-devel@lists.openembedded.org>; Fri, 12 Jan 2024 17:51:33 +0900 (JST)
+Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.187])
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 807391A0070;
+	Fri, 12 Jan 2024 16:51:33 +0800 (CST)
+From: wangmy@fujitsu.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] frr: Fix install conflict  when enable multilib.
+Date: Fri, 12 Jan 2024 16:51:23 +0800
+Message-Id: <1705049483-30941-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28114.006
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28114.006
+X-TMASE-Result: 10--12.926600-10.000000
+X-TMASE-MatchedRID: WEhXzTeHU+aMPz8Goa6fXdl0i+WyI+91C//1TMV5chO4GyTmeN+AbLRj
+	qdUKeL4YDVHHAE0cndTxNdSJNcNeLJgbaf/qJzUdb/oIJuUAIuHxuhkRWK22GIMogwlv6PZoDJw
+	RJ6RwBAFPvZfZHGeBclq2wMYALD4n0vxh6c85bkQaWyhV4E2vAX607foZgOWyCednjFOfspyKFp
+	UuXMOO1bEzThseKC1BxVa37B5t6UBFeIgwm+98D513aYUE0ivymZiw53dqSN+ysPB8dBBorXKn6
+	DBj/gsEIvrftAIhWmLy9zcRSkKatcwitucT3dE7s0T0PE+KHuWYu54KOb/ndJsoi2XrUn/JUTdY
+	/mdfTXtJKW4mDlJsMSAHAopEd76v8WkFMOEZb9sKEPdn+eTLU9UO8dzlTvMU0kdYl/R5fV1nqtM
+	VqPGdNQ==
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 12 Jan 2024 03:49:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108233
+ <openembedded-devel@lists.openembedded.org>; Fri, 12 Jan 2024 08:51:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108234
 
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-On 1/11/24 7:18 PM, Fabio Estevam wrote:
-> Hi Khem,
->
-> On Thu, Jan 11, 2024 at 5:10 PM Khem Raj <raj.khem@gmail.com> wrote:
->> I meant to say without systemd ( using sysvinit )
-> Yes, I have sent a patch to v4l-utils to fix this bug.
+Error: Transaction test error:
+  file /usr/lib/systemd/system/frr.service conflicts between attempted installs of frr-9.1-r1.cortexa57 and lib32-frr-9.1-r1.armv7ahf_neon
+  file /usr/lib/systemd/system/frr@.service conflicts between attempted installs of frr-9.1-r1.cortexa57 and lib32-frr-9.1-r1.armv7ahf_neon
+  file /usr/include/frr/version.h conflicts between attempted installs of lib32-frr-dev-9.1-r1.armv7ahf_neon and frr-dev-9.1-r1.cortexa57
 
+The differences of version.h are as follows:
+@@ -32,7 +32,7 @@
+ #define FRR_VER_SHORT   "9.1"
+ #define FRR_BUG_ADDRESS "https://github.com/frrouting/frr/issues"
+ #define FRR_COPYRIGHT   "Copyright 1996-2005 Kunihiro Ishiguro, et al."
+-#define FRR_CONFIG_ARGS "'--build=x86_64-linux' '--host=aarch64-poky-linux' '--target=aarch64-poky-linux' '--prefix=/usr' '--exec_prefix=/usr' '--bindir=/usr/bin' '--sbindir=/usr/sbin' '--libexecdir=/usr/libexec' '--datadir=/usr/share' '--sysconfdir=/etc' '--sharedstatedir=/com' '--localstatedir=/var' '--libdir=/usr/lib64' '--includedir=/usr/include' '--oldincludedir=/usr/include' '--infodir=/usr/share/info' '--mandir=/usr/share/man' '--disable-silent-rules' '--disable-dependency-tracking' '--with-libtool-sysroot=' '--sbindir=/usr/lib64/frr' '--sysconfdir=/etc/frr' '--localstatedir=/var/run/frr' '--enable-vtysh' '--enable-multipath=64' '--enable-user=frr' '--enable-group=frr' '--enable-vty-group=frrvty' '--enable-configfile-mask=0640' '--enable-logfile-mask=0640' '--disable-doc' '--with-clippy=/usr/lib/clippy' '--disable-static' '--disable-capabilities' '--disable-cumulus' '--disable-datacenter' '--disable-fpm' '--disable-grpc' '--disable-ospfapi' '--disable-ospfclient' '--without-l
+ ibpam' '--disable-protobuf' '--disable-snmp' '--disable-zeromq' 'build_alias=x86_64-linux' 'host_alias=aarch64-poky-linux' 'target_alias=aarch64-poky-linux' 'AR=aarch64-poky-linux-gcc-ar' 'LD=aarch64-poky-linux-ld --sysroot= ' 'OBJCOPY=aarch64-poky-linux-objcopy' 'OBJDUMP=aarch64-poky-linux-objdump' 'RANLIB=aarch64-poky-linux-gcc-ranlib' 'STRIP=aarch64-poky-linux-strip' 'PKG_CONFIG_PATH=/usr/lib64/pkgconfig:/usr/share/pkgconfig://usr/share/pkgconfig' 'PKG_CONFIG_LIBDIR=/usr/lib64/pkgconfig' 'CC=aarch64-poky-linux-gcc -mcpu=cortex-a57 -march=armv8-a+crc -mbranch-protection=standard -fstack-protector-strong -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=' 'CPPFLAGS=' 'CPP=aarch64-poky-linux-gcc -E --sysroot= -mcpu=cortex-a57 -march=armv8-a+crc -mbranch-protection=standard -fstack-protector-strong -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security' 'CXX=aarch64-poky-linux-g++ -mcpu=cortex-a57 -march=armv8-a+crc -mbranch-prot
+ ection=standard -fstack-protector-strong -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security --sysroot=' 'PYTHON=/usr/bin/python3-native/python3'"
++#define FRR_CONFIG_ARGS "'--build=x86_64-linux' '--host=arm-pokymllib32-linux-gnueabi' '--target=arm-pokymllib32-linux-gnueabi' '--prefix=/usr' '--exec_prefix=/usr' '--bindir=/usr/bin' '--sbindir=/usr/sbin' '--libexecdir=/usr/libexec' '--datadir=/usr/share' '--sysconfdir=/etc' '--sharedstatedir=/com' '--localstatedir=/var' '--libdir=/usr/lib' '--includedir=/usr/include' '--oldincludedir=/usr/include' '--infodir=/usr/share/info' '--mandir=/usr/share/man' '--disable-silent-rules' '--disable-dependency-tracking' '--with-libtool-sysroot=' '--sbindir=/usr/lib/frr' '--sysconfdir=/etc/frr' '--localstatedir=/var/run/frr' '--enable-vtysh' '--enable-multipath=64' '--enable-user=frr' '--enable-group=frr' '--enable-vty-group=frrvty' '--enable-configfile-mask=0640' '--enable-logfile-mask=0640' '--disable-doc' '--with-clippy=/usr/lib/clippy' '--disable-static' '--disable-capabilities' '--disable-cumulus' '--disable-datacenter' '--disable-fpm' '--disable-grpc' '--disable-ospfapi' '--disable-ospfcl
+ ient' '--without-libpam' '--disable-protobuf' '--disable-snmp' '--disable-zeromq' 'build_alias=x86_64-linux' 'host_alias=arm-pokymllib32-linux-gnueabi' 'target_alias=arm-pokymllib32-linux-gnueabi' 'AR=arm-pokymllib32-linux-gnueabi-gcc-ar' 'LD=arm-pokymllib32-linux-gnueabi-ld --sysroot= ' 'OBJCOPY=arm-pokymllib32-linux-gnueabi-objcopy' 'OBJDUMP=arm-pokymllib32-linux-gnueabi-objdump' 'RANLIB=arm-pokymllib32-linux-gnueabi-gcc-ranlib' 'STRIP=arm-pokymllib32-linux-gnueabi-strip' 'PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/share/pkgconfig:/ubinux-dev/ubinux001/contribution/build_xh/tmp/work/armv7ahf-neon-pokymllib32-linux-gnueabi/lib32-frr/9.1/recipe-sysroot//usr/share/pkgconfig' 'PKG_CONFIG_LIBDIR=/usr/lib/pkgconfig' 'CC=arm-pokymllib32-linux-gnueabi-gcc -march=armv7-a -mfpu=neon -mfloat-abi=hard -fstack-protector-strong -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security -D_TIME_BITS=64 -D_FILE_OFFSET_BITS=64 --sysroot=' 'CPPFLAGS=' 'CPP=arm-pokymllib32-linux-gnueabi
+ -gcc -E --sysroot= -march=armv7-a -mfpu=neon -mfloat-abi=hard -fstack-protector-strong -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security -D_TIME_BITS=64 -D_FILE_OFFSET_BITS=64' 'CXX=arm-pokymllib32-linux-gnueabi-g++ -march=armv7-a -mfpu=neon -mfloat-abi=hard -fstack-protector-strong -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security -D_TIME_BITS=64 -D_FILE_OFFSET_BITS=64 --sysroot=' 'PYTHON=/usr/bin/python3-native/python3'"
 
-Thanks, I am expecting a v2 of meta-openembedded patch as well which 
-includes the fix
+ #define FRR_DEFAULT_MOTD \
+        "\n" \
 
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+---
+ meta-networking/recipes-protocols/frr/frr_9.1.bb | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-> Thanks
+diff --git a/meta-networking/recipes-protocols/frr/frr_9.1.bb b/meta-networking/recipes-protocols/frr/frr_9.1.bb
+index 5cc19d09d..0926f8421 100644
+--- a/meta-networking/recipes-protocols/frr/frr_9.1.bb
++++ b/meta-networking/recipes-protocols/frr/frr_9.1.bb
+@@ -46,7 +46,7 @@ PACKAGECONFIG[ospfclient] = "--enable-ospfapi --enable-ospfclient,--disable-ospf
+ 
+ EXTRA_OECONF:class-native = "--enable-clippy-only"
+ 
+-EXTRA_OECONF:class-target = "--sbindir=${libdir}/frr \
++EXTRA_OECONF:class-target = "--sbindir=${libexecdir}/frr \
+                              --sysconfdir=${sysconfdir}/frr \
+                              --localstatedir=${localstatedir}/run/frr \
+                              --enable-vtysh \
+@@ -74,7 +74,7 @@ SYSTEMD_PACKAGES = "${PN}"
+ SYSTEMD_SERVICE:${PN} = "frr.service"
+ SYSTEMD_AUTO_ENABLE = "disable"
+ 
+-inherit update-alternatives
++inherit update-alternatives multilib_script multilib_header
+ 
+ ALTERNATIVE_PRIORITY = "100"
+ ALTERNATIVE:${PN} = " ietf-interfaces "
+@@ -95,6 +95,7 @@ do_install:class-native () {
+ 
+ do_install:append:class-target () {
+     install -m 0755 -d ${D}${sysconfdir}/frr
++    install -m 0755 -d ${D}${libexecdir}/frr
+     install -m 0640 ${S}/tools/etc/frr/* ${D}${sysconfdir}/frr/
+     chown frr:frrvty ${D}${sysconfdir}/frr
+     chown frr:frr ${D}${sysconfdir}/frr/*
+@@ -123,6 +124,7 @@ do_install:append:class-target () {
+         echo "d /run/frr 0755 frr frr -" \
+             > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
+     fi
++    oe_multilib_header frr/version.h
+ }
+ 
+ USERADD_PACKAGES = "${PN}"
+-- 
+2.34.1
+
 
