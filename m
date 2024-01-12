@@ -1,73 +1,71 @@
-Return-Path: <derek@asterius.io>
+Return-Path: <festevam@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4733EC4707C
-	for <webhook@archiver.kernel.org>; Fri, 12 Jan 2024 19:20:05 +0000 (UTC)
-Received: from mail-io1-f47.google.com (mail-io1-f47.google.com [209.85.166.47])
- by mx.groups.io with SMTP id smtpd.web10.968.1705087195243243790
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 531CDC4707C
+	for <webhook@archiver.kernel.org>; Fri, 12 Jan 2024 19:23:45 +0000 (UTC)
+Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
+ by mx.groups.io with SMTP id smtpd.web10.1056.1705087416869631232
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 12 Jan 2024 11:19:55 -0800
+ Fri, 12 Jan 2024 11:23:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.166.47, mailfrom: straka.derek@gmail.com)
-Received: by mail-io1-f47.google.com with SMTP id ca18e2360f4ac-7beda2e6794so153368939f.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Jan 2024 11:19:55 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=hg/HR7vq;
+ spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: festevam@gmail.com)
+Received: by mail-pj1-f48.google.com with SMTP id 98e67ed59e1d1-28c05f68d1cso1127332a91.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Jan 2024 11:23:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1705087416; x=1705692216; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=z/I+CgRCUmrEfz6sVo562CfdiwBaH7mTdPhLbMP5gcs=;
+        b=hg/HR7vqGFyFnIIcvzxIvkevenN2kiWLkMw7GQKJYBRnGToTO/cMvPcr9pRRGnTpIH
+         RSgcypt7zB2+TKCLl7DagKa1caLcb7C2kYQi8WB3rB5QGi5+sPVY+3skHxV/amvVudu4
+         Q+a+otAR0pMW9SpD62opaZoTjh/P6L/GxxLztMRzHO5aD7zTCVe0ZiL6rhMBr+8THbK8
+         0V4DuG1gNMr1ssR6HWp4/nci6RYFtxNekLVPY0WXl7ddJNW72hTGEEN4mscfleZhG3cY
+         n/AewccaSgqnE3LS266HdswAG3cMWDUhIycpyds+MjvNjTT8cTaYUR0L1QFXUm377zyl
+         /G2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1705087193; x=1705691993;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=hryDfaolfFbUFFoleV8xUWavJ2umitjtsPjk5xcxMyc=;
-        b=To6Hxt7RdntHYFFl/xSPb2mJ/1/6FdA/sq52PZegH0bhQhNMiYAJs6944deoxnFvbh
-         Un47jOM/Wk48JbzdQ+Rt1wYfAZjRsO18MIwvKZAbsBhv2JfYkA8RAs9VWUSoqpRG4Xnk
-         VCI1lYbMEgOtgn+d8H0P2yGaw2H5lNlJFzYO8we52PC/eVYHzIiU6Ozle9YnwPZ4cQwX
-         vqDfPzeNEv+BooWCJZ6UkmRmOrt6PHsH2seugI2s5iKbSmB5cNckRXgVy1JMHDELPJ1X
-         5sKM5g6MAOKnD39/24KfA/VCRVcdqQxXO0vfyVr1aCiJYi7BB6OKeXrp74ffo2pHbVMv
-         kLrQ==
-X-Gm-Message-State: AOJu0Yxw/7c3s/hTfUNt7XLcnSawQ9mMyahQe2AMlfIbX9iDbYKZf+o5
-	0RSjihGGh1Y9YHs2thD+ktZw1mxum2DSpg==
-X-Google-Smtp-Source: AGHT+IEIwykt2q9Np6Q+Jmv9pD4N1YOshVuY/OSzeLubOuCKzTavQBMzsLRrwp8JnywvO71OBMRkSg==
-X-Received: by 2002:a05:6602:142:b0:7bf:827:9c61 with SMTP id v2-20020a056602014200b007bf08279c61mr1421593iot.9.1705087193634;
-        Fri, 12 Jan 2024 11:19:53 -0800 (PST)
-Received: from sparta.internal.asterius.io (c-73-228-213-122.hsd1.mn.comcast.net. [73.228.213.122])
-        by smtp.gmail.com with ESMTPSA id d69-20020a6bcd48000000b007baf1948186sm1010466iog.42.2024.01.12.11.19.52
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 12 Jan 2024 11:19:53 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-python][PATCH] python-4.8.2: update to version 4.8.2
-Date: Fri, 12 Jan 2024 19:19:44 +0000
-Message-Id: <20240112191944.3025922-1-derek@asterius.io>
-X-Mailer: git-send-email 2.34.1
+        d=1e100.net; s=20230601; t=1705087416; x=1705692216;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=z/I+CgRCUmrEfz6sVo562CfdiwBaH7mTdPhLbMP5gcs=;
+        b=T3bbKxWe2IiJZycKqPLgBvijP8HfevDKwXjrE/0HbjeKCSwVYIqkIFiXkeDsg+D/e5
+         K87aDIPwdK6TmownwWUYp/BELkCsYIxyIfgeaLdhq3ssH1hlfJDorjwLMkv79vDDUA7e
+         q+RznGsjOZVKFYZewJr20k2kWY0L4tO1edSVWIrH1QihoLhj00D62NQqmBjDF5nDR4nM
+         r0vF+DkXXgj8DYX4cUnHblnivoStyK6Wb6+359EaGcpfVatuDSyTyGEJ/y7fbLMjX5Pj
+         xf85Hg9tJEL3D1ZTAzANdcYsTTJPZrExeZPLKOenKgp4gF5vQOevNFC0mHl0Y4UNL9dN
+         AIlg==
+X-Gm-Message-State: AOJu0Yy/MtCpIAcMkA4/SHL01RQJB1xjtLcLn0lsRp+ycTSEhUtVf2p/
+	AQjvh9EgTB+dRqA0GiLJLsoDJFoZi5/n/6FQZyA=
+X-Google-Smtp-Source: AGHT+IHaPCDp99J+MRxxzFqatHC500JuFsXddVZCp8eGoH+AVXXmrG3utgdKBuwYOUlPnJ4WcSkBnUOnu7mDxQC9dMc=
+X-Received: by 2002:a17:90b:1b0b:b0:28d:2e64:88ae with SMTP id
+ nu11-20020a17090b1b0b00b0028d2e6488aemr2749791pjb.2.1705087416289; Fri, 12
+ Jan 2024 11:23:36 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240112191944.3025922-1-derek@asterius.io>
+In-Reply-To: <20240112191944.3025922-1-derek@asterius.io>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 12 Jan 2024 16:23:24 -0300
+Message-ID: <CAOMZO5BfN63x0Hf8M6Sdgnms2=zgfexX0-8AqOAcDDi2D8AinA@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH] python-4.8.2: update to version 4.8.2
+To: Derek Straka <derek@asterius.io>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 12 Jan 2024 19:20:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108251
+ <openembedded-devel@lists.openembedded.org>; Fri, 12 Jan 2024 19:23:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108252
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- .../{python3-engineio_4.8.1.bb => python3-engineio_4.8.2.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-engineio_4.8.1.bb => python3-engineio_4.8.2.bb} (82%)
+On Fri, Jan 12, 2024 at 4:19=E2=80=AFPM Derek Straka <derek@asterius.io> wr=
+ote:
+>
+> Signed-off-by: Derek Straka <derek@asterius.io>
 
-diff --git a/meta-python/recipes-devtools/python/python3-engineio_4.8.1.bb b/meta-python/recipes-devtools/python/python3-engineio_4.8.2.bb
-similarity index 82%
-rename from meta-python/recipes-devtools/python/python3-engineio_4.8.1.bb
-rename to meta-python/recipes-devtools/python/python3-engineio_4.8.2.bb
-index f88a3acf1..9dad138ea 100644
---- a/meta-python/recipes-devtools/python/python3-engineio_4.8.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-engineio_4.8.2.bb
-@@ -17,4 +17,4 @@ RDEPENDS:${PN} += " \
- 	python3-asyncio \
- "
- 
--SRC_URI[sha256sum] = "fadc39c66348f96476d8dc2d7aaee7ea0a39d96e333217f5321300677b980121"
-+SRC_URI[sha256sum] = "f8609e3afdda318fdc336b4ba2de8dd397bb8f9b8a1b43e56c27330e32c2e34c"
--- 
-2.34.1
+Maybe change the Subject to:
 
+python3-engineio: update to version 4.8.2
 
