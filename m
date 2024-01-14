@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8783BC4707B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9841DC47DA7
 	for <webhook@archiver.kernel.org>; Sun, 14 Jan 2024 07:20:26 +0000 (UTC)
-Received: from mail-oa1-f50.google.com (mail-oa1-f50.google.com [209.85.160.50])
- by mx.groups.io with SMTP id smtpd.web11.34968.1705216821613786188
+Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com [209.85.215.178])
+ by mx.groups.io with SMTP id smtpd.web10.35541.1705216818987913372
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 13 Jan 2024 23:20:21 -0800
+ Sat, 13 Jan 2024 23:20:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=VOdnVDJA;
- spf=pass (domain: gmail.com, ip: 209.85.160.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f50.google.com with SMTP id 586e51a60fabf-20503dc09adso5119236fac.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 13 Jan 2024 23:20:21 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=aSryUBFN;
+ spf=pass (domain: gmail.com, ip: 209.85.215.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f178.google.com with SMTP id 41be03b00d2f7-5cf2306c1b4so2689427a12.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 13 Jan 2024 23:20:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1705216820; x=1705821620; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1705216818; x=1705821618; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=xZPY9Ej3mkeryWREiBJi73znzcMaGzyYbGlbx3gXF58=;
-        b=VOdnVDJAue8KAI4CVkURUiWolQRov/R2Mz1QBUmzC5zT4llhkwf0bfbE/MOLpEqdht
-         KAOfrqaIlfZeBFwestawraOexERh38rVbNX1wo+TNE0mfCN3Nrx3c4R8YfaP9juKPHFc
-         7ZwPg/ZsVvejZ+DEBIsM6tb83uIgylQmU9NfiRoEKxT5GrpsO1YhbfHljJ8GCYD/QkOV
-         s2Vyuh0sJ3yc6G9yRXjrIAphjZn/7rN2x+zCQcATasdCHdB/N755u8cXxSmSO9FCP/LH
-         Hfcs7l3MzJ+uCCb4auJ38QltTWIUGQfML7W6Ek7n68In6F1uE6kIf8uUvkwFfTGN0MQV
-         x3gQ==
+        bh=0Mc5sTZv6rVCxDjaB9nG1Gqtvc0eIIkcFcEZqiQHTtA=;
+        b=aSryUBFNBwl8GeWD42u18skNMs44ia9MEhnR3CN3cckMJKv6Ge4gQxIcrK12QYgCcv
+         yTDjxjuG9XS1Rcs+q84G7T7xgQ7/soZZSOQIydDcg04lcTk3SRGyfQhHE2ydMTn0zg3D
+         j5bwzC27Qcek6SXQbu5khP8FGGrm8FF4E5TTLv1llnP9dBOUO6aHTiCWn0wcOipK+CYR
+         tYMIC6Mn8nYaGzrz5YiA0apYLPa1xfiShzO0E0VU3PfTt8u6q/MNCD5P5ZKTKox25Cc+
+         OM/gFs7wjNE0MS36fZednxz5wkOgnFnzqrE1Y0VMHWUBjdnx06XNPndqiCVoik7m+eOd
+         2yIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1705216820; x=1705821620;
+        d=1e100.net; s=20230601; t=1705216818; x=1705821618;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=xZPY9Ej3mkeryWREiBJi73znzcMaGzyYbGlbx3gXF58=;
-        b=KimyGUuHG3/d+TC+5sr+61z9MBfxk3onBwVet/z4RhuGK4QkKBtmV/M9ISyRzV+O1U
-         Pw/BH/Y7SCqAdKWxrlHsoRHJt9WY+5F0uTIUZWNUQnTAXT1+OWlDIRajddzHBjw0v0KS
-         uD2AjKKVpIlID3eCZl0SialxNaJYuxZuKAnbHaUPls+PXcYQonPbYTQsz6sxPIwgPS15
-         GinmoaTKLGnV8JFKPci4LkOUVXN+ACVR2HrP/28o4vKfaIp+7tKWcGtOIrxcNLkoLR4y
-         vcxjUkFT5pYGlgCAbGJYdjyDiXjXUdmw25SuVnkh5+m5WshcNnCxlbxhK54TWrtv79KC
-         c9LA==
-X-Gm-Message-State: AOJu0Yxbce/h3xe2n7ZVW0SI7E6BVLuzLkZqZ+IicT/lM5maaM245NMU
-	tg+u+ZPpD2HW0WgWuv4z11vCKduMz5JDPg==
-X-Google-Smtp-Source: AGHT+IGN560tI6AMtUg6tJrHN8SSbeg4OOm/HbVEqx9dO61i6wBSsHp+9dXZXAD/8oJ8vPLaKE10yQ==
-X-Received: by 2002:a05:6870:b523:b0:205:c427:da16 with SMTP id v35-20020a056870b52300b00205c427da16mr6048584oap.101.1705216820489;
-        Sat, 13 Jan 2024 23:20:20 -0800 (PST)
+        bh=0Mc5sTZv6rVCxDjaB9nG1Gqtvc0eIIkcFcEZqiQHTtA=;
+        b=Bo5oqU7uT7RCEbGrwMTswK3TOOBOqCqxlR6iBtYRXDr/6JdmflvMcaISt25IrtgY0k
+         BVlGib9BqGj9667C3nuvjAX4P5MuBI9TUuweFeRS2xUKf9uqbizaOUD0TXLOagYUT48p
+         HFTDysyBijxD9J9DWQ5jcaNRGaki54VVR4h+blbBmgef0MDEP0gwN728is0NJht+W9PP
+         j9oQMAxmGT2unuEaaIk6GtgZj8RD+2eFAPKzSvqPiumjDd5fSvXis9O9bkAW+mHp3X6e
+         Q3pOpc1KVYltLW2FqZEyTUP9nh7WCXzPCrlOFezw0kmedmcJ/DSLodTxMLO4GLvZhqm3
+         u8rA==
+X-Gm-Message-State: AOJu0YwVkgeXP9unzJyJHIGq+VVSKrkfkDjRK8D3N3GpSrCtrq+W2zmx
+	kDLiLIRbqPupbUVY49sf3HbRrH3jnK9y2w==
+X-Google-Smtp-Source: AGHT+IE79N2K7zLjvL7wuoJfHs89iVZX/JIgY3vUTOkFFVNEjOeP7CFCVLzgp8GR8DhTbkdSeSkAZQ==
+X-Received: by 2002:a05:6a20:1013:b0:19a:754:bf4 with SMTP id gs19-20020a056a20101300b0019a07540bf4mr2966006pzc.62.1705216818041;
+        Sat, 13 Jan 2024 23:20:18 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::3648])
-        by smtp.gmail.com with ESMTPSA id i63-20020a638742000000b005b458aa0541sm5864020pge.15.2024.01.13.23.20.19
+        by smtp.gmail.com with ESMTPSA id i63-20020a638742000000b005b458aa0541sm5864020pge.15.2024.01.13.23.20.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 13 Jan 2024 23:20:19 -0800 (PST)
+        Sat, 13 Jan 2024 23:20:17 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH 4/5] schroedinger: inherit gtk-doc
-Date: Sat, 13 Jan 2024 23:20:13 -0800
-Message-ID: <20240114072014.601505-4-raj.khem@gmail.com>
+Subject: [meta-gnome][PATCH 2/5] libxklavier: inherit gtk-doc
+Date: Sat, 13 Jan 2024 23:20:11 -0800
+Message-ID: <20240114072014.601505-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240114072014.601505-1-raj.khem@gmail.com>
 References: <20240114072014.601505-1-raj.khem@gmail.com>
@@ -61,7 +61,7 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 14 Jan 2024 07:20:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108272
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108270
 
 Recent changes to oe-core[1] mean that if a configure.ac uses gtk-doc
 then gtkdocize will be called. This means that recipes that don't
@@ -75,19 +75,21 @@ build the API documentation.
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-multimedia/schroedinger/schroedinger_1.0.11.bb      | 2 +-
+ meta-gnome/recipes-gnome/libxklavier/libxklavier_5.4.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/schroedinger/schroedinger_1.0.11.bb b/meta-multimedia/recipes-multimedia/schroedinger/schroedinger_1.0.11.bb
-index c78e008007..e8f6df6348 100644
---- a/meta-multimedia/recipes-multimedia/schroedinger/schroedinger_1.0.11.bb
-+++ b/meta-multimedia/recipes-multimedia/schroedinger/schroedinger_1.0.11.bb
-@@ -19,5 +19,5 @@ SRC_URI[sha256sum] = "1e572a0735b92aca5746c4528f9bebd35aa0ccf8619b22fa2756137a8c
+diff --git a/meta-gnome/recipes-gnome/libxklavier/libxklavier_5.4.bb b/meta-gnome/recipes-gnome/libxklavier/libxklavier_5.4.bb
+index 7955663f26..f52c210ed4 100644
+--- a/meta-gnome/recipes-gnome/libxklavier/libxklavier_5.4.bb
++++ b/meta-gnome/recipes-gnome/libxklavier/libxklavier_5.4.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=6e29c688d912da12b66b73e32b03d812"
  
- EXTRA_OECONF += "STAGING_DIR=${STAGING_DIR_NATIVE}"
+ DEPENDS = "xkbcomp gtk+ iso-codes libxi libxml2"
  
--inherit autotools-brokensep pkgconfig
-+inherit autotools-brokensep pkgconfig gtk-doc
+-inherit autotools pkgconfig gettext gobject-introspection features_check
++inherit autotools pkgconfig gettext gobject-introspection features_check gtk-doc
+ 
+ REQUIRED_DISTRO_FEATURES = "x11"
  
 -- 
 2.43.0
