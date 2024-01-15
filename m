@@ -2,39 +2,37 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D577DC47258
-	for <webhook@archiver.kernel.org>; Mon, 15 Jan 2024 15:14:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2673AC3DA79
+	for <webhook@archiver.kernel.org>; Mon, 15 Jan 2024 16:14:07 +0000 (UTC)
 Received: from relay8-d.mail.gandi.net (relay8-d.mail.gandi.net [217.70.183.201])
- by mx.groups.io with SMTP id smtpd.web11.81571.1705329384903825908
+ by mx.groups.io with SMTP id smtpd.web11.84682.1705334472517055816
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Jan 2024 06:36:25 -0800
+ Mon, 15 Jan 2024 08:01:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bootlin.com header.s=gm1 header.b=c8Kx9tfa;
+ dkim=pass header.i=@bootlin.com header.s=gm1 header.b=HV48uCVH;
  spf=pass (domain: bootlin.com, ip: 217.70.183.201, mailfrom: joaomarcos.costa@bootlin.com)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 9D0D31BF20E;
-	Mon, 15 Jan 2024 14:36:22 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 04C251BF20C;
+	Mon, 15 Jan 2024 16:01:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
-	t=1705329383;
+	t=1705334470;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding;
-	bh=T27OpcTdjNQ+QFy1RNHhqa8YYfRTGxoFprvhAJymNgQ=;
-	b=c8Kx9tfavv5ZOvMPO8uYoN4PxzeD8Yd/ef/+L3wWNvqlNF9MX+ElgiwfD/g2m6y4eZqXIw
-	AyhnB5MzH0jc+z041UJw5XnKowebCUi9BWwngBnlUmx29et/siRSv5GplltjchXG6mzEP+
-	FzgzLyhRNmNznJNxFHt4bK9FdQ9+5cL94n4fDO3oEGdIsxIuJzHdRt+r9ZpnmVJDnCM9mN
-	Tj2lCQWLL9y+FGT8VB/oSPiUeVVHMWSAT+tCPGE39F05Ie7Hh2/TNs+PU39OhSk+BzAfQ9
-	naPN+i3l4fCsmph662aoKa+jWokVZUpeVpPRt4j0G7s86NwEf2yZEXQn0656hg==
+	bh=yEJ2r7EaJICFD2WaHIvE3x9HwFAdiHgnbV/3EvChYTg=;
+	b=HV48uCVHpK5yZrK/MzAOg8OG6hujb6Zh+6/ETRl4NGzbcUvPozguR4ksiPqlV3CMq17bLe
+	8vt9B0Zrc96Wp0DkKiybsvvmKeg8pyURP1H8Wnu8mdqQ28eBTfmNl0l9pWeEWOr8JOfm+l
+	r905zD5qkqn3wspBuLtBHD6I7ujYQeFd1F54H+KT770HOT6FOnZQ2FqdbWhDhmi/vuTz0P
+	Z6KvG1deaForsMKtf9APOMGrzAgg3FLzWDSEDzXRt2y7e83TeRXWhV+dG2MO3T6lJ8yFnA
+	10NMSD9RbQr2I4KPOqsQjsAZMkbWdFa7IC8v4xx2QRv8PUr07OYJcR/9srpkIQ==
 From: "Joao Marcos Costa" <joaomarcos.costa@bootlin.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: raj.khem@gmail.com,
 	thomas.petazzoni@bootlin.com,
 	alexandre.belloni@bootlin.com,
-	Wang Mingyu <wangmy@fujitsu.com>,
-	Armin Kuster <akuster808@gmail.com>,
 	Joao Marcos Costa <joaomarcos.costa@bootlin.com>
-Subject: [oe] [meta-oe] [dunfell] [RESEND PATCH v1] openwsman: Change download branch from master to main.
-Date: Mon, 15 Jan 2024 15:36:16 +0100
-Message-ID: <20240115143616.2164725-1-joaomarcos.costa@bootlin.com>
+Subject: [meta-oe] [kirkstone] [PATCH v1] xscreensaver: Add osuosl backup MIRROR
+Date: Mon, 15 Jan 2024 17:00:53 +0100
+Message-ID: <20240115160053.2175550-1-joaomarcos.costa@bootlin.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 X-GND-Sasl: joaomarcos.costa@bootlin.com
@@ -42,35 +40,34 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 15 Jan 2024 15:14:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108289
+ <openembedded-devel@lists.openembedded.org>; Mon, 15 Jan 2024 16:14:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108291
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+old tarballs disappear from main location, use a backup location to
+fetch it in such cases.
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
 Signed-off-by: Joao Marcos Costa <joaomarcos.costa@bootlin.com>
 
-Backported from Kirkstone
-(cherry-picked from commit 84425db660a30570044e334509e174e5c92173ed)
+Backported from Nanbield
+(cherry-picked from commit 8d34444c749a466f35445fd4c2212b3fbdb8d844)
 ---
- meta-oe/recipes-extended/openwsman/openwsman_2.6.11.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-graphics/xscreensaver/xscreensaver_6.01.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-extended/openwsman/openwsman_2.6.11.bb b/meta-oe/recipes-extended/openwsman/openwsman_2.6.11.bb
-index f635a9b13..e96c97745 100644
---- a/meta-oe/recipes-extended/openwsman/openwsman_2.6.11.bb
-+++ b/meta-oe/recipes-extended/openwsman/openwsman_2.6.11.bb
-@@ -17,7 +17,7 @@ REQUIRED_DISTRO_FEATURES = "pam"
+diff --git a/meta-oe/recipes-graphics/xscreensaver/xscreensaver_6.01.bb b/meta-oe/recipes-graphics/xscreensaver/xscreensaver_6.01.bb
+index 2ab529794..a5271f08b 100644
+--- a/meta-oe/recipes-graphics/xscreensaver/xscreensaver_6.01.bb
++++ b/meta-oe/recipes-graphics/xscreensaver/xscreensaver_6.01.bb
+@@ -6,6 +6,8 @@ LIC_FILES_CHKSUM = "file://driver/xscreensaver.h;endline=10;md5=c3ce41cdff745eb1
+ SRC_URI = "https://www.jwz.org/${BPN}/${BP}.tar.gz"
+ SRC_URI[sha256sum] = "085484665d91f60b4a1dedacd94bcf9b74b0fb096bcedc89ff1c245168e5473b"
  
- SRCREV = "d8eba6cb6682b59d84ca1da67a523520b879ade6"
- 
--SRC_URI = "git://github.com/Openwsman/openwsman.git;branch=master;protocol=https \
-+SRC_URI = "git://github.com/Openwsman/openwsman.git;branch=main;protocol=https \
-            file://libssl-is-required-if-eventint-supported.patch \
-            file://openwsmand.service \
-            file://0001-lock.c-Define-PTHREAD_MUTEX_RECURSIVE_NP-if-undefine.patch \
++MIRRORS += "https://www.jwz.org/${BPN} https://ftp.osuosl.org/pub/blfs/conglomeration/${BPN}"
++
+ SRC_URI += " \
+     file://xscreensaver.service \
+     file://0001-build-Do-not-build-po-files.patch \
 -- 
 2.43.0
 
