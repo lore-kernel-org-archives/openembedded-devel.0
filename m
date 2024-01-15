@@ -1,139 +1,150 @@
-Return-Path: <alperyasinak1@gmail.com>
+Return-Path: <thakur.virendra1810@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 13377C3DA79
-	for <webhook@archiver.kernel.org>; Mon, 15 Jan 2024 12:24:36 +0000 (UTC)
-Received: from mail-lj1-f172.google.com (mail-lj1-f172.google.com [209.85.208.172])
- by mx.groups.io with SMTP id smtpd.web10.78379.1705321475270847240
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 571F2C47258
+	for <webhook@archiver.kernel.org>; Mon, 15 Jan 2024 13:17:26 +0000 (UTC)
+Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
+ by mx.groups.io with SMTP id smtpd.web10.79563.1705324641528977292
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Jan 2024 04:24:35 -0800
+ Mon, 15 Jan 2024 05:17:21 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=I1/Qj/1d;
- spf=pass (domain: gmail.com, ip: 209.85.208.172, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-lj1-f172.google.com with SMTP id 38308e7fff4ca-2cceb5f0918so90458501fa.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 15 Jan 2024 04:24:34 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=X7r/iLFr;
+ spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: thakur.virendra1810@gmail.com)
+Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-1d3eb299e2eso51430025ad.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 15 Jan 2024 05:17:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1705321472; x=1705926272; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1705324640; x=1705929440; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=I03Xcq6tCuUDGvVoPYu4GXIv6Q0zTu+paCW8VryP3Xo=;
-        b=I1/Qj/1dTxRk92eZtA1X5kcRVRZYKciCCVUEm4Mfl3LMb5EnrlMj7R7+jrY0wG7QZa
-         sxYEsPcHgY//NF42Kq384pHy+ybNdHVDQ2oJOiWQ1CsmURxaNK15iTPjMj0DTy71iR+H
-         ckATEHIwSn11UI0E3g8Ql0kvSQ105y3jEteYHN6ZFUpjtqinEkLFA0LWBNiwy5Gwf8Do
-         IIe2YYjeyY3qo6lP7tUebx11QsZqeXnYW9K/2zuxTdhvvwKPCAjMiXax4xPI/5/1kLrs
-         RTHJKsiQmUksqruL90wo1w1YTbn7eQ++BpzS7T4rTlVLIDTZX1nN1RbMmLS1Y6nVbxnj
-         giAg==
+        bh=cg7UWMPMiDf1ZdsJPMyVYYrBOV5B93OeQ6BK09uhcBI=;
+        b=X7r/iLFriANqxa4nx0GzjMhmm7Yoh/W8euQCjvuzjXVQCq20j3Z+rucmSoWiWjek8z
+         IbDZqL2Ppp0howeJk4bK8nd4sJe4DEa4eFBtVe3rcjM3mhaDGvmT2wC3j5n6jYw79ban
+         KKZvuuD/ZYJKsUj/9V+yyJYNdfWQQ0rgXEZ3/4uYP0l20QKF1/LHm+izZ8IcPYREwe5x
+         Fzm1E315NpU8LPSfWjMP9UJgzhSP5/SKJ9z6zI8hDylUZe8eWq7qLpwJwp7KbKqQWUyo
+         LFo7N/f5oLMlAeUcpNjlm5YypfoYDdBPv983CqATAc7xXdTe7Z4xRG34o/KDct64fQyo
+         COow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1705321472; x=1705926272;
+        d=1e100.net; s=20230601; t=1705324640; x=1705929440;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=I03Xcq6tCuUDGvVoPYu4GXIv6Q0zTu+paCW8VryP3Xo=;
-        b=Cmf6M5EwpXYbHE3bXNK7D7BvClNRI8poGwZfElELtL3H233XAB1Wxyh6mc+rjmOMYu
-         kQ4rDuHx+LsGIKB2/pru4g8D1RZHPO7EPNie+cvRM8NY5FjYF3JRouA8N0wABH9uNf3v
-         skhDabOl4joNtxVStcgZZIRgNNTNEfsOhEiOEibORnnUDKbgBuYe9189QfcFHp20KdBT
-         6UfqOtUj8YwEviaFv8omB3TLP5u1sCDJI40b2nkGYa14oZtFtLgxLEQgxe7rC2j5dZEh
-         4BEu4dCwukhghJDd32y1RUHdeSrciO/ubLcJGuQphsy9tk3pCWBgwcM88armvKDRXdYp
-         1ABQ==
-X-Gm-Message-State: AOJu0YxSf5oIEj7zntlQTQ2sypRF67L4UExNv2Z87O9EPAiIWb7eVzn+
-	h2SQc3eVO7Vu4L8tSYYplOsrkYjoy803uQ==
-X-Google-Smtp-Source: AGHT+IF3v9IyASnlgRnU2v1Z+tcCygMFlVcpLoUXSI5Mnjd7NiYWpcYlB7THmFoZ65KQM7HDIhcTzw==
-X-Received: by 2002:a05:6512:34d3:b0:50e:ea33:7596 with SMTP id w19-20020a05651234d300b0050eea337596mr1333039lfr.181.1705321472160;
-        Mon, 15 Jan 2024 04:24:32 -0800 (PST)
-Received: from localhost.localdomain ([176.33.66.82])
-        by smtp.gmail.com with ESMTPSA id xo16-20020a170907bb9000b00a26aa5c5a60sm5301196ejc.19.2024.01.15.04.24.30
+        bh=cg7UWMPMiDf1ZdsJPMyVYYrBOV5B93OeQ6BK09uhcBI=;
+        b=C+2byf2m1rxHC9IAZKVKOTZuH9LEgBjjh29BFsJIT1oHGfwcGC1aDHkbw8/wKq00di
+         Hi4sKhX+dEtxC82EXh6sTy+8zsdv3scqxaoU9zUYblM0PUOM33ERQLfAiGUGsViZqmGU
+         Y07lZRKFoWUMIS43ktkViy2lIgqS1Pu/n5aPorZhcWEfLUJJk6RRoH2vMgoYZCB96KD/
+         n3aCEXV7UV3z5WxcDGxitZ/GHWWrBY8zuz6F0jV/BYL4bUwJ7F+1HGUSb0DTg6dmPN7d
+         tchxqbosdAModQ7Fpd7dpFSX5JLWJ43s0IX98Jcc/CiOsZVkJkZJ1Y1cEakav2pAhzhO
+         zlAg==
+X-Gm-Message-State: AOJu0YxpBpopSqSqeg0P/Q0NFGfmUdil8luHaS8JkyNO6uvCOLEnVqTp
+	brKQdis0bsMHrBRqUp9iGvAGjD3OR4U=
+X-Google-Smtp-Source: AGHT+IFEuq45rgG4fmbWNu4CRfK1F7KU6q6zFIPQFHbQVmDG0+r9Unaim+E+cvhA15vGCydPFb7svQ==
+X-Received: by 2002:a17:903:245:b0:1d4:cb95:179d with SMTP id j5-20020a170903024500b001d4cb95179dmr2956514plh.100.1705324640517;
+        Mon, 15 Jan 2024 05:17:20 -0800 (PST)
+Received: from L-18076.kpit.com ([2401:4900:1c43:110c:c984:bb4e:e4d9:4f24])
+        by smtp.gmail.com with ESMTPSA id m9-20020a170902db0900b001d5a578df8bsm5843968plx.179.2024.01.15.05.17.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 15 Jan 2024 04:24:31 -0800 (PST)
-From: alperak <alperyasinak1@gmail.com>
+        Mon, 15 Jan 2024 05:17:20 -0800 (PST)
+From: virendra thakur <thakur.virendra1810@gmail.com>
+X-Google-Original-From: virendra thakur <virendrak@kpit.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-oe][PATCH] spdlog: upgrade 1.12 -> 1.13
-Date: Mon, 15 Jan 2024 15:24:26 +0300
-Message-Id: <20240115122426.766281-1-alperyasinak1@gmail.com>
+Cc: raj.khem@gmail.com
+Subject: [kirkstone][meta-oe[PATCH 1/2] opensc: Fix CVE-2023-40660
+Date: Mon, 15 Jan 2024 18:40:14 +0530
+Message-Id: <20240115131015.1170717-1-virendrak@kpit.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 15 Jan 2024 12:24:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108285
+ <openembedded-devel@lists.openembedded.org>; Mon, 15 Jan 2024 13:17:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108286
 
-Dropped SPDLOG_BUILD_TESTS and SPDLOG_BUILD_BENCH from EXTRA_OECMAKE because already OFF
+Add patch file to fix CVE
 
-License-Update: Use upstream's LICENSE file instead of Poky's MIT license.
+Upstream-Status: Backport [https://salsa.debian.org/opensc-team/opensc/-/commit/940e8bc764047c873f88bb1396933a5368d03533]
 
-Changelog:
-
-Enhancements
-
-    Qt Sink: Allow for darker colors for light backgrounds
-    Set CMAKE_BUILD_TYPE only for single-config generators
-    Provide spdlog_header_only in build directory export
-    Add SPDLOG_TO_VERSION to compare spdlog version
-    Support async_overflow_policy::discard_new
-    Make syslog_sink.h's syslog_prio_from_level protected
-    Fix OS availability check of pthread_threadid_np for iOS
-    Add .git-blame-ignore-revs to ignore clang-format related commits
-    Match SPDLOG_CONSTEXPR_FUNC to FMT_CONSTEXPR
-
-Bug Fixes
-
-    Check fd_ is not nullptr in file_helper to prevent possible crash if disk is full
-    Fix encoding issue in qt_sinks
-    Fix wrong thread_id (TID) in systemd_sink.h
-    Update example.cpp to fix the vector issue in bin_example
-    Fix MSVC compile flag for no exceptions
-    Fix bug in circular_q::size()
-    Fix link to fmt license file
-
-Maintenance
-
-    Added and updated various tests for circular_q.
-    Removed obsolete part from CMake configuration files
-    Removed policy_max from cmake_minimum_required(..).
-    Updated clang-format to google style and updated various formatting scripts.
-    Bumped to catch2
-
-Signed-off-by: alperak <alperyasinak1@gmail.com>
+Signed-off-by: virendra thakur <virendrak@kpit.com>
 ---
- .../spdlog/{spdlog_1.12.0.bb => spdlog_1.13.0.bb}   | 13 +++++++------
- 1 file changed, 7 insertions(+), 6 deletions(-)
- rename meta-oe/recipes-support/spdlog/{spdlog_1.12.0.bb => spdlog_1.13.0.bb} (58%)
+ .../opensc/opensc/CVE-2023-40660.patch        | 55 +++++++++++++++++++
+ .../recipes-support/opensc/opensc_0.22.0.bb   |  1 +
+ 2 files changed, 56 insertions(+)
+ create mode 100644 meta-oe/recipes-support/opensc/opensc/CVE-2023-40660.patch
 
-diff --git a/meta-oe/recipes-support/spdlog/spdlog_1.12.0.bb b/meta-oe/recipes-support/spdlog/spdlog_1.13.0.bb
-similarity index 58%
-rename from meta-oe/recipes-support/spdlog/spdlog_1.12.0.bb
-rename to meta-oe/recipes-support/spdlog/spdlog_1.13.0.bb
-index c7d8ff8f3..c6a0881db 100644
---- a/meta-oe/recipes-support/spdlog/spdlog_1.12.0.bb
-+++ b/meta-oe/recipes-support/spdlog/spdlog_1.13.0.bb
-@@ -1,17 +1,18 @@
- DESCRIPTION = "Very fast, header only, C++ logging library."
- HOMEPAGE = "https://github.com/gabime/spdlog/wiki"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=9573510928429ad0cbe5ba4de77546e9"
- 
--SRCREV = "7e635fca68d014934b4af8a1cf874f63989352b7"
-+SRCREV = "7c02e204c92545f869e2f04edaab1f19fe8b19fd"
- SRC_URI = "git://github.com/gabime/spdlog.git;protocol=https;branch=v1.x"
- 
--DEPENDS += "fmt"
-+DEPENDS = "fmt"
- 
- S = "${WORKDIR}/git"
- 
--BBCLASSEXTEND = "native"
-+inherit cmake
+diff --git a/meta-oe/recipes-support/opensc/opensc/CVE-2023-40660.patch b/meta-oe/recipes-support/opensc/opensc/CVE-2023-40660.patch
+new file mode 100644
+index 000000000..74e547298
+--- /dev/null
++++ b/meta-oe/recipes-support/opensc/opensc/CVE-2023-40660.patch
+@@ -0,0 +1,55 @@
++Origin: https://github.com/OpenSC/OpenSC/commit/868f76fb31255fd3fdacfc3e476452efeb61c3e7
++From: Frank Morgner <frankmorgner@gmail.com>
++Date: Wed, 21 Jun 2023 12:27:23 +0200
++Subject: Fixed PIN authentication bypass
 +
- # no need to build example & tests & benchmarks on pure yocto
--EXTRA_OECMAKE += "-DSPDLOG_INSTALL=on -DSPDLOG_BUILD_SHARED=on -DSPDLOG_BUILD_EXAMPLE=off -DSPDLOG_BUILD_TESTS=off -DSPDLOG_BUILD_BENCH=off -DSPDLOG_FMT_EXTERNAL=on"
-+EXTRA_OECMAKE += "-DSPDLOG_INSTALL=on -DSPDLOG_BUILD_SHARED=on -DSPDLOG_BUILD_EXAMPLE=off -DSPDLOG_FMT_EXTERNAL=on"
++If two processes are accessing a token, then one process may leave the
++card usable with an authenticated PIN so that a key may sign/decrypt any
++data. This is especially the case if the token does not support a way of
++resetting the authentication status (logout).
++
++We have some tracking of the authentication status in software via
++PKCS#11, Minidriver (os-wise) and CryptoTokenKit, which is why a
++PIN-prompt will appear even though the card may technically be unlocked
++as described in the above example. However, before this change, an empty
++PIN was not verified (likely yielding an error during PIN-verification),
++but it was just checked whether the PIN is authenticated. This defeats
++the purpose of the PIN verification, because an empty PIN is not the
++correct one. Especially during OS Logon, we don't want that kind of
++shortcut, but we want the user to verify the correct PIN (even though
++the token was left unattended and authentication at the computer).
++
++This essentially reverts commit e6f7373ef066cfab6e3162e8b5f692683db23864.
++
++CVE: CVE-2023-40660
++Upstream-Status: Backport [https://salsa.debian.org/opensc-team/opensc/-/commit/940e8bc764047c873f88bb1396933a5368d03533]
++Signed-off-by: Virendra Thakur <virendrak@kpit.com>
++---
++ src/libopensc/pkcs15-pin.c | 13 -------------
++ 1 file changed, 13 deletions(-)
++
++diff --git a/src/libopensc/pkcs15-pin.c b/src/libopensc/pkcs15-pin.c
++index 80a185fecd..393234efe4 100644
++--- a/src/libopensc/pkcs15-pin.c
+++++ b/src/libopensc/pkcs15-pin.c
++@@ -307,19 +307,6 @@
++ 		LOG_FUNC_RETURN(ctx, SC_ERROR_INVALID_PIN_REFERENCE);
++ 	auth_info = (struct sc_pkcs15_auth_info *)pin_obj->data;
++ 
++-	/*
++-	 * if pin cache is disabled, we can get here with no PIN data.
++-	 * in this case, to avoid error or unnecessary pin prompting on pinpad,
++-	 * check if the PIN has been already verified and the access condition
++-	 * is still open on card.
++-	 */
++-	if (pinlen == 0) {
++-	    r = sc_pkcs15_get_pin_info(p15card, pin_obj);
++-
++-	    if (r == SC_SUCCESS && auth_info->logged_in == SC_PIN_STATE_LOGGED_IN)
++-		LOG_FUNC_RETURN(ctx, r);
++-	}
++-
++ 	r = _validate_pin(p15card, auth_info, pinlen);
++ 
++ 	if (r)
++
+diff --git a/meta-oe/recipes-support/opensc/opensc_0.22.0.bb b/meta-oe/recipes-support/opensc/opensc_0.22.0.bb
+index 3bb79b9d9..816d9a3a1 100644
+--- a/meta-oe/recipes-support/opensc/opensc_0.22.0.bb
++++ b/meta-oe/recipes-support/opensc/opensc_0.22.0.bb
+@@ -15,6 +15,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=cb8aedd3bced19bd8026d96a8b6876d7"
+ SRCREV = "c902e1992195e00ada12d71beb1029287cd72037"
+ SRC_URI = "git://github.com/OpenSC/OpenSC;branch=master;protocol=https \
+            file://CVE-2023-2977.patch \
++           file://CVE-2023-40660.patch \
+           "
  
--inherit cmake
-+BBCLASSEXTEND = "native"
+ # CVE-2021-34193 is a duplicate CVE covering the 5 individual
 -- 
 2.25.1
 
