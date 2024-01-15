@@ -2,361 +2,138 @@ Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 19559C3DA79
-	for <webhook@archiver.kernel.org>; Mon, 15 Jan 2024 11:50:06 +0000 (UTC)
-Received: from mail-lf1-f47.google.com (mail-lf1-f47.google.com [209.85.167.47])
- by mx.groups.io with SMTP id smtpd.web10.77550.1705319397074483950
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 13377C3DA79
+	for <webhook@archiver.kernel.org>; Mon, 15 Jan 2024 12:24:36 +0000 (UTC)
+Received: from mail-lj1-f172.google.com (mail-lj1-f172.google.com [209.85.208.172])
+ by mx.groups.io with SMTP id smtpd.web10.78379.1705321475270847240
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Jan 2024 03:49:57 -0800
+ Mon, 15 Jan 2024 04:24:35 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=f+4RS+aK;
- spf=pass (domain: gmail.com, ip: 209.85.167.47, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-lf1-f47.google.com with SMTP id 2adb3069b0e04-50e7f58c5fbso11554514e87.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 15 Jan 2024 03:49:56 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=I1/Qj/1d;
+ spf=pass (domain: gmail.com, ip: 209.85.208.172, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-lj1-f172.google.com with SMTP id 38308e7fff4ca-2cceb5f0918so90458501fa.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 15 Jan 2024 04:24:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1705319395; x=1705924195; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1705321472; x=1705926272; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=1BBus30gvnHPF2alU4m5ZedPEeV/gSRLh2GEm/+hme0=;
-        b=f+4RS+aKNrQ3Si9/AV9Kuik9JQN6A/yKyfMhMMTWSoVktYehSfz2EiTS4XhZ7Hw5N5
-         4kjqFoMYxfGFp2rM38KWuWlyVijeePEwopWFMFKASz0wr/OeFTN5vOw7Y45dB4sRO4wl
-         5ZSoj8nLYXeENewEh/LBuWstvr1PMj/Lwpeud3f+NMH4KTfI/7XLLr546OMMN3xshhvg
-         ow3urLIbML96QL1zvLqnFUSr+RHlzhoj3F+tHOFBKmXsen7BlX55ET/6j+CZtMa9dZFw
-         IxtzwpAE6qLDHpycnywTbueIpOuEzH+z0rUSGCedEGvERGvvDuIXuWa9j27Sf4RBmAhf
-         3mIg==
+        bh=I03Xcq6tCuUDGvVoPYu4GXIv6Q0zTu+paCW8VryP3Xo=;
+        b=I1/Qj/1dTxRk92eZtA1X5kcRVRZYKciCCVUEm4Mfl3LMb5EnrlMj7R7+jrY0wG7QZa
+         sxYEsPcHgY//NF42Kq384pHy+ybNdHVDQ2oJOiWQ1CsmURxaNK15iTPjMj0DTy71iR+H
+         ckATEHIwSn11UI0E3g8Ql0kvSQ105y3jEteYHN6ZFUpjtqinEkLFA0LWBNiwy5Gwf8Do
+         IIe2YYjeyY3qo6lP7tUebx11QsZqeXnYW9K/2zuxTdhvvwKPCAjMiXax4xPI/5/1kLrs
+         RTHJKsiQmUksqruL90wo1w1YTbn7eQ++BpzS7T4rTlVLIDTZX1nN1RbMmLS1Y6nVbxnj
+         giAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1705319395; x=1705924195;
+        d=1e100.net; s=20230601; t=1705321472; x=1705926272;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=1BBus30gvnHPF2alU4m5ZedPEeV/gSRLh2GEm/+hme0=;
-        b=D+STn8U9zZDsSmtKtFuOw4KrZqhQdF2haocLrHjndjarxZbn2do6K22mI8/pL/qjX7
-         vW416cIvJGTuAD6c0SYj4SOQekY6BGqkGRLXodHMIzUbB75TqFAp6esZxdk3CLPYw/le
-         cZxaY2AyA5B8CdbxF+c9OKrkZC0WNaOZdw6By+6yE24AczvmsUWPeS8Nibh+okU9lK/4
-         REyNMbyzHUMhJq7+NLR7OtLZGSjbdfJ/Dd7brqJDtN08rUTyFT8jGsUwqPpr9gf5kk6p
-         jo+6FxM5uHeFaWt307gcpICbYDjh14K1UVEFdBHDjHCqzZl9d2pNfwFwyxjfKi/X/B4t
-         WEaw==
-X-Gm-Message-State: AOJu0YwgEjIyiucm/ZpY3rf9YlFYX5h7PPW/vs88ZLbF8/JRs3dYvUcL
-	tiRHPkxd8HefYlfm7+Urkg8/vH2+pvU20A==
-X-Google-Smtp-Source: AGHT+IGCvgLRhoLONPbGkgq0EsmlfRoWvkB5KSWDzyx/M1Fp2cA4oCDBNIi9FFXnnDmPHi7qTdXK8w==
-X-Received: by 2002:a05:6512:3d12:b0:50e:8e98:c25c with SMTP id d18-20020a0565123d1200b0050e8e98c25cmr3403149lfv.70.1705319394206;
-        Mon, 15 Jan 2024 03:49:54 -0800 (PST)
+        bh=I03Xcq6tCuUDGvVoPYu4GXIv6Q0zTu+paCW8VryP3Xo=;
+        b=Cmf6M5EwpXYbHE3bXNK7D7BvClNRI8poGwZfElELtL3H233XAB1Wxyh6mc+rjmOMYu
+         kQ4rDuHx+LsGIKB2/pru4g8D1RZHPO7EPNie+cvRM8NY5FjYF3JRouA8N0wABH9uNf3v
+         skhDabOl4joNtxVStcgZZIRgNNTNEfsOhEiOEibORnnUDKbgBuYe9189QfcFHp20KdBT
+         6UfqOtUj8YwEviaFv8omB3TLP5u1sCDJI40b2nkGYa14oZtFtLgxLEQgxe7rC2j5dZEh
+         4BEu4dCwukhghJDd32y1RUHdeSrciO/ubLcJGuQphsy9tk3pCWBgwcM88armvKDRXdYp
+         1ABQ==
+X-Gm-Message-State: AOJu0YxSf5oIEj7zntlQTQ2sypRF67L4UExNv2Z87O9EPAiIWb7eVzn+
+	h2SQc3eVO7Vu4L8tSYYplOsrkYjoy803uQ==
+X-Google-Smtp-Source: AGHT+IF3v9IyASnlgRnU2v1Z+tcCygMFlVcpLoUXSI5Mnjd7NiYWpcYlB7THmFoZ65KQM7HDIhcTzw==
+X-Received: by 2002:a05:6512:34d3:b0:50e:ea33:7596 with SMTP id w19-20020a05651234d300b0050eea337596mr1333039lfr.181.1705321472160;
+        Mon, 15 Jan 2024 04:24:32 -0800 (PST)
 Received: from localhost.localdomain ([176.33.66.82])
-        by smtp.gmail.com with ESMTPSA id lb7-20020a170906adc700b00a2a4bd50588sm5256393ejb.147.2024.01.15.03.49.52
+        by smtp.gmail.com with ESMTPSA id xo16-20020a170907bb9000b00a26aa5c5a60sm5301196ejc.19.2024.01.15.04.24.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 15 Jan 2024 03:49:53 -0800 (PST)
+        Mon, 15 Jan 2024 04:24:31 -0800 (PST)
 From: alperak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-multimedia][PATCHv2] gerbera: upgrade 1.12.1 -> 2.0.0
-Date: Mon, 15 Jan 2024 14:49:20 +0300
-Message-Id: <20240115114920.751423-1-alperyasinak1@gmail.com>
+Subject: [meta-oe][PATCH] spdlog: upgrade 1.12 -> 1.13
+Date: Mon, 15 Jan 2024 15:24:26 +0300
+Message-Id: <20240115122426.766281-1-alperyasinak1@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 15 Jan 2024 11:50:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108284
+ <openembedded-devel@lists.openembedded.org>; Mon, 15 Jan 2024 12:24:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108285
 
-* 0001-Fix-build-against-fmt-10.patch dropped because fixed in the new version
-* Expat dropped from DEPENDS because has been replaced with pugixml at version 1.5.0
-* Required dependencies updated and added to DEPENDS
-* Optional packages added and those enable by default have been enabled.
+Dropped SPDLOG_BUILD_TESTS and SPDLOG_BUILD_BENCH from EXTRA_OECMAKE because already OFF
+
+License-Update: Use upstream's LICENSE file instead of Poky's MIT license.
 
 Changelog:
 
-NEW Features
+Enhancements
 
-    Staged importing that allows updating the virtual layout instead of deleting and recreating it each time (import-mode="grb")
-    Config options as command line arguments (--set-option OPT=VAL with --print-options)
-    Allow configuration of follow-symlinks per autoscan directory
-    Configuration of containers in virtual layout: title can be changed, some nodes can be disabled
-    New mode of loading Javascript plugins with cleanup of global variables
-    Generation of example configuration via command line option --create-example-config
-    Case insensitive sorting for databases
-    New config options for URL handling and host redirection
-    Use .nomedia to hide directory, incl. config option
-    Support for UPnP commands GetFeatureList and GetSortExtensionCapabilities
-    Build for Ubuntu 23.04 and 23.10
+    Qt Sink: Allow for darker colors for light backgrounds
+    Set CMAKE_BUILD_TYPE only for single-config generators
+    Provide spdlog_header_only in build directory export
+    Add SPDLOG_TO_VERSION to compare spdlog version
+    Support async_overflow_policy::discard_new
+    Make syslog_sink.h's syslog_prio_from_level protected
+    Fix OS availability check of pthread_threadid_np for iOS
+    Add .git-blame-ignore-revs to ignore clang-format related commits
+    Match SPDLOG_CONSTEXPR_FUNC to FMT_CONSTEXPR
 
-FIXES
+Bug Fixes
 
-    Autoscan: Keep track of renamed directories
-    Docker: add JPEG and update description
-    Runtime issues in request handling
-    Configurable handling of HOME directory
-    Transcoding: parsing issue of requests
-    Stability for sqlite database access
-    Browsing on Samsung devices
+    Check fd_ is not nullptr in file_helper to prevent possible crash if disk is full
+    Fix encoding issue in qt_sinks
+    Fix wrong thread_id (TID) in systemd_sink.h
+    Update example.cpp to fix the vector issue in bin_example
+    Fix MSVC compile flag for no exceptions
+    Fix bug in circular_q::size()
+    Fix link to fmt license file
 
-Code Improvements
+Maintenance
 
-    Update Javascript libraries
-    Update versions of googletest (1.14), pupnp (1.14.18), libexiv2 (v0.28.1), libebml (1.4.5), fmt (10.2.0), pugixml (1.14), spdlog (1.12.0) and taglib (1.13.1)
-    Compatibility with gcc14
+    Added and updated various tests for circular_q.
+    Removed obsolete part from CMake configuration files
+    Removed policy_max from cmake_minimum_required(..).
+    Updated clang-format to google style and updated various formatting scripts.
+    Bumped to catch2
 
 Signed-off-by: alperak <alperyasinak1@gmail.com>
 ---
- Unlike v1, magic(libmagic) and js(duktape) packageconfigs have been added. Also, libmagic is part of 'file'.
- According to this https://github.com/gerbera/gerbera/blob/v2.0.0/CMakeLists.txt#L29 packageconfigs that should be activated have been activated.
+ .../spdlog/{spdlog_1.12.0.bb => spdlog_1.13.0.bb}   | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
+ rename meta-oe/recipes-support/spdlog/{spdlog_1.12.0.bb => spdlog_1.13.0.bb} (58%)
 
- .../0001-Fix-build-against-fmt-10.patch       | 168 ------------------
- .../gerbera/gerbera_1.12.1.bb                 |  31 ----
- .../gerbera/gerbera_2.0.0.bb                  |  30 ++++
- 3 files changed, 30 insertions(+), 199 deletions(-)
- delete mode 100644 meta-multimedia/recipes-multimedia/gerbera/gerbera/0001-Fix-build-against-fmt-10.patch
- delete mode 100644 meta-multimedia/recipes-multimedia/gerbera/gerbera_1.12.1.bb
- create mode 100644 meta-multimedia/recipes-multimedia/gerbera/gerbera_2.0.0.bb
-
-diff --git a/meta-multimedia/recipes-multimedia/gerbera/gerbera/0001-Fix-build-against-fmt-10.patch b/meta-multimedia/recipes-multimedia/gerbera/gerbera/0001-Fix-build-against-fmt-10.patch
-deleted file mode 100644
-index 2da98cfcf..000000000
---- a/meta-multimedia/recipes-multimedia/gerbera/gerbera/0001-Fix-build-against-fmt-10.patch
-+++ /dev/null
-@@ -1,168 +0,0 @@
--From 2c08724e8a7e3a0ee8cdd91246a714a17f2ba5c1 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Wed, 17 May 2023 17:31:56 -0700
--Subject: [PATCH] Fix build against fmt 10+
--
--Fixes
--git/src/config/setup/config_setup_vector.cc:191:9:   required from here
--| /home/hains/openpli-dm920-python3/build/tmp/work/cortexa15hf-neon-vfpv4-oe-linux-gnueabi/gerbera/1.11.0-r0/
--recipe-sysroot/usr/include/fmt/core.h:1691:7: error: static assertion failed: Cannot format an argument. To make type T formattable provide a formatter<T> specialization: https://fmt.dev/latest/api.html#udt
--|  1691 |       formattable,
--|       |       ^~~~~~~~~~~
--
--Source: https://github.com/Hains/openpli-dm920-python3/commit/688ae121bd3928925a8656bd4aaf3857d8e8a8ed
--
--Upstream-Status: Pending
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/config/setup/config_setup_array.cc       | 6 +++---
-- src/config/setup/config_setup_autoscan.cc    | 2 +-
-- src/config/setup/config_setup_client.cc      | 2 +-
-- src/config/setup/config_setup_dictionary.cc  | 6 +++---
-- src/config/setup/config_setup_dynamic.cc     | 2 +-
-- src/config/setup/config_setup_transcoding.cc | 2 +-
-- src/config/setup/config_setup_tweak.cc       | 2 +-
-- src/config/setup/config_setup_vector.cc      | 4 ++--
-- 8 files changed, 13 insertions(+), 13 deletions(-)
--
--diff --git a/src/config/setup/config_setup_array.cc b/src/config/setup/config_setup_array.cc
--index 8f3cf1db..efc9b501 100644
----- a/src/config/setup/config_setup_array.cc
--+++ b/src/config/setup/config_setup_array.cc
--@@ -136,11 +136,11 @@ std::vector<std::string> ConfigArraySetup::getXmlContent(const pugi::xml_node& o
--     std::vector<std::string> result;
--     if (initArray) {
--         if (!initArray(optValue, result, ConfigDefinition::mapConfigOption(nodeOption))) {
---            throw_std_runtime_error("Invalid {} array value '{}'", xpath, optValue);
--+            throw_std_runtime_error("Invalid {} array value '{}'", xpath, optValue.value());
--         }
--     } else {
--         if (!createOptionFromNode(optValue, result)) {
---            throw_std_runtime_error("Invalid {} array value '{}'", xpath, optValue);
--+            throw_std_runtime_error("Invalid {} array value '{}'", xpath, optValue.value());
--         }
--     }
--     if (result.empty()) {
--@@ -149,7 +149,7 @@ std::vector<std::string> ConfigArraySetup::getXmlContent(const pugi::xml_node& o
--         result = defaultEntries;
--     }
--     if (notEmpty && result.empty()) {
---        throw_std_runtime_error("Invalid array {} empty '{}'", xpath, optValue);
--+        throw_std_runtime_error("Invalid array {} empty '{}'", xpath, optValue.value());
--     }
--     return result;
-- }
--diff --git a/src/config/setup/config_setup_autoscan.cc b/src/config/setup/config_setup_autoscan.cc
--index e882ca3e..d773419b 100644
----- a/src/config/setup/config_setup_autoscan.cc
--+++ b/src/config/setup/config_setup_autoscan.cc
--@@ -203,7 +203,7 @@ std::shared_ptr<ConfigOption> ConfigAutoscanSetup::newOption(const pugi::xml_nod
-- {
--     auto result = std::vector<AutoscanDirectory>();
--     if (!createOptionFromNode(optValue, result)) {
---        throw_std_runtime_error("Init {} autoscan failed '{}'", xpath, optValue);
--+        throw_std_runtime_error("Init {} autoscan failed '{}'", xpath, optValue.value());
--     }
--     optionValue = std::make_shared<AutoscanListOption>(result);
--     return optionValue;
--diff --git a/src/config/setup/config_setup_client.cc b/src/config/setup/config_setup_client.cc
--index 30bb98cb..56be9c53 100644
----- a/src/config/setup/config_setup_client.cc
--+++ b/src/config/setup/config_setup_client.cc
--@@ -163,7 +163,7 @@ std::shared_ptr<ConfigOption> ConfigClientSetup::newOption(const pugi::xml_node&
--     auto result = std::make_shared<ClientConfigList>();
-- 
--     if (!createOptionFromNode(isEnabled ? optValue : pugi::xml_node(nullptr), result)) {
---        throw_std_runtime_error("Init {} client config failed '{}'", xpath, optValue);
--+        throw_std_runtime_error("Init {} client config failed '{}'", xpath, optValue.value());
--     }
--     optionValue = std::make_shared<ClientConfigListOption>(result);
--     return optionValue;
--diff --git a/src/config/setup/config_setup_dictionary.cc b/src/config/setup/config_setup_dictionary.cc
--index eb91c694..ea2aaa05 100644
----- a/src/config/setup/config_setup_dictionary.cc
--+++ b/src/config/setup/config_setup_dictionary.cc
--@@ -162,11 +162,11 @@ std::map<std::string, std::string> ConfigDictionarySetup::getXmlContent(const pu
--     std::map<std::string, std::string> result;
--     if (initDict) {
--         if (!initDict(optValue, result)) {
---            throw_std_runtime_error("Init {} dictionary failed '{}'", xpath, optValue);
--+            throw_std_runtime_error("Init {} dictionary failed '{}'", xpath, optValue.value());
--         }
--     } else {
--         if (!createOptionFromNode(optValue, result) && required) {
---            throw_std_runtime_error("Init {} dictionary failed '{}'", xpath, optValue);
--+            throw_std_runtime_error("Init {} dictionary failed '{}'", xpath, optValue.value());
--         }
--     }
--     if (result.empty()) {
--@@ -175,7 +175,7 @@ std::map<std::string, std::string> ConfigDictionarySetup::getXmlContent(const pu
--         result = defaultEntries;
--     }
--     if (notEmpty && result.empty()) {
---        throw_std_runtime_error("Invalid dictionary {} empty '{}'", xpath, optValue);
--+        throw_std_runtime_error("Invalid dictionary {} empty '{}'", xpath, optValue.value());
--     }
--     return result;
-- }
--diff --git a/src/config/setup/config_setup_dynamic.cc b/src/config/setup/config_setup_dynamic.cc
--index 6a43b820..93030b85 100644
----- a/src/config/setup/config_setup_dynamic.cc
--+++ b/src/config/setup/config_setup_dynamic.cc
--@@ -179,7 +179,7 @@ std::shared_ptr<ConfigOption> ConfigDynamicContentSetup::newOption(const pugi::x
--     auto result = std::make_shared<DynamicContentList>();
-- 
--     if (!createOptionFromNode(optValue, result)) {
---        throw_std_runtime_error("Init {} DynamicContentList failed '{}'", xpath, optValue);
--+        throw_std_runtime_error("Init {} DynamicContentList failed '{}'", xpath, optValue.value());
--     }
--     optionValue = std::make_shared<DynamicContentListOption>(result);
--     return optionValue;
--diff --git a/src/config/setup/config_setup_transcoding.cc b/src/config/setup/config_setup_transcoding.cc
--index 4827f109..c353ce1f 100644
----- a/src/config/setup/config_setup_transcoding.cc
--+++ b/src/config/setup/config_setup_transcoding.cc
--@@ -492,7 +492,7 @@ std::shared_ptr<ConfigOption> ConfigTranscodingSetup::newOption(const pugi::xml_
--     auto result = std::make_shared<TranscodingProfileList>();
-- 
--     if (!createOptionFromNode(isEnabled ? optValue : pugi::xml_node(nullptr), result)) {
---        throw_std_runtime_error("Init {} transcoding failed '{}'", xpath, optValue);
--+        throw_std_runtime_error("Init {} transcoding failed '{}'", xpath, optValue.value());
--     }
--     optionValue = std::make_shared<TranscodingProfileListOption>(result);
--     return optionValue;
--diff --git a/src/config/setup/config_setup_tweak.cc b/src/config/setup/config_setup_tweak.cc
--index d7692c09..72c2beb2 100644
----- a/src/config/setup/config_setup_tweak.cc
--+++ b/src/config/setup/config_setup_tweak.cc
--@@ -242,7 +242,7 @@ std::shared_ptr<ConfigOption> ConfigDirectorySetup::newOption(const pugi::xml_no
--     auto result = std::make_shared<DirectoryConfigList>();
-- 
--     if (!createOptionFromNode(optValue, result)) {
---        throw_std_runtime_error("Init {} DirectoryConfigList failed '{}'", xpath, optValue);
--+        throw_std_runtime_error("Init {} DirectoryConfigList failed '{}'", xpath, optValue.value());
--     }
--     optionValue = std::make_shared<DirectoryTweakOption>(result);
--     return optionValue;
--diff --git a/src/config/setup/config_setup_vector.cc b/src/config/setup/config_setup_vector.cc
--index c8ff853d..91f99ca4 100644
----- a/src/config/setup/config_setup_vector.cc
--+++ b/src/config/setup/config_setup_vector.cc
--@@ -180,7 +180,7 @@ std::vector<std::vector<std::pair<std::string, std::string>>> ConfigVectorSetup:
-- {
--     std::vector<std::vector<std::pair<std::string, std::string>>> result;
--     if (!createOptionFromNode(optValue, result) && required) {
---        throw_std_runtime_error("Init {} vector failed '{}'", xpath, optValue);
--+        throw_std_runtime_error("Init {} vector failed '{}'", xpath, optValue.value());
--     }
--     if (result.empty()) {
--         log_debug("{} assigning {} default values", xpath, defaultEntries.size());
--@@ -188,7 +188,7 @@ std::vector<std::vector<std::pair<std::string, std::string>>> ConfigVectorSetup:
--         result = defaultEntries;
--     }
--     if (notEmpty && result.empty()) {
---        throw_std_runtime_error("Invalid vector {} empty '{}'", xpath, optValue);
--+        throw_std_runtime_error("Invalid vector {} empty '{}'", xpath, optValue.value());
--     }
--     return result;
-- }
-diff --git a/meta-multimedia/recipes-multimedia/gerbera/gerbera_1.12.1.bb b/meta-multimedia/recipes-multimedia/gerbera/gerbera_1.12.1.bb
-deleted file mode 100644
-index 89cc51e0e..000000000
---- a/meta-multimedia/recipes-multimedia/gerbera/gerbera_1.12.1.bb
-+++ /dev/null
-@@ -1,31 +0,0 @@
--Description = "Gerbera - An UPnP media server"
--
--LICENSE = "GPL-2.0-only"
--LIC_FILES_CHKSUM = "file://LICENSE.md;md5=25cdec9afe3f1f26212ead6bd2f7fac8"
--
--SRC_URI = "git://github.com/gerbera/gerbera.git;protocol=https;branch=master \
--           file://0001-Fix-build-against-fmt-10.patch \
--           "
--
--SRCREV = "559e1d1a92f5977ce8cff7393aa85330dbf2d1d6"
--
--S = "${WORKDIR}/git"
--
--DEPENDS = "expat fmt spdlog pugixml libebml libmatroska zlib curl libupnp e2fsprogs sqlite3 libnsl2"
--
--SYSTEMD_SERVICE:${PN} = "gerbera.service"
--
--inherit cmake pkgconfig systemd
--
--PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
--PACKAGECONFIG[systemd] = "-DWITH_SYSTEMD=TRUE,-DWITH_SYSTEMD=FALSE,systemd"
--PACKAGECONFIG[taglib] = "-DWITH_TAGLIB=TRUE,-DWITH_TAGLIB=FALSE,taglib"
--EXTRA_OECMAKE = "-DWITH_JS=FALSE -DWITH_MAGIC=FALSE -DWITH_EXIF=FALSE -DLIBUUID_INCLUDE_DIRS=${STAGING_INCDIR} -DLIBUUID_LIBRARIES=-luuid"
--
--do_install:append() {
--    install -d ${D}/root/.config/
--}
--
--FILES:${PN} += "/root/.config/"
--
--SECURITY_CFLAGS:riscv64 = "${SECURITY_NOPIE_CFLAGS}"
-diff --git a/meta-multimedia/recipes-multimedia/gerbera/gerbera_2.0.0.bb b/meta-multimedia/recipes-multimedia/gerbera/gerbera_2.0.0.bb
-new file mode 100644
-index 000000000..fea14fd84
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/gerbera/gerbera_2.0.0.bb
-@@ -0,0 +1,30 @@
-+Description = "Gerbera is a UPnP media server which allows you to stream your digital media through your home network and consume it on a variety of UPnP compatible devices."
+diff --git a/meta-oe/recipes-support/spdlog/spdlog_1.12.0.bb b/meta-oe/recipes-support/spdlog/spdlog_1.13.0.bb
+similarity index 58%
+rename from meta-oe/recipes-support/spdlog/spdlog_1.12.0.bb
+rename to meta-oe/recipes-support/spdlog/spdlog_1.13.0.bb
+index c7d8ff8f3..c6a0881db 100644
+--- a/meta-oe/recipes-support/spdlog/spdlog_1.12.0.bb
++++ b/meta-oe/recipes-support/spdlog/spdlog_1.13.0.bb
+@@ -1,17 +1,18 @@
+ DESCRIPTION = "Very fast, header only, C++ logging library."
+ HOMEPAGE = "https://github.com/gabime/spdlog/wiki"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=9573510928429ad0cbe5ba4de77546e9"
+ 
+-SRCREV = "7e635fca68d014934b4af8a1cf874f63989352b7"
++SRCREV = "7c02e204c92545f869e2f04edaab1f19fe8b19fd"
+ SRC_URI = "git://github.com/gabime/spdlog.git;protocol=https;branch=v1.x"
+ 
+-DEPENDS += "fmt"
++DEPENDS = "fmt"
+ 
+ S = "${WORKDIR}/git"
+ 
+-BBCLASSEXTEND = "native"
++inherit cmake
 +
-+LICENSE = "GPL-2.0-only"
-+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=25cdec9afe3f1f26212ead6bd2f7fac8"
-+
-+SRC_URI = "git://github.com/gerbera/gerbera.git;protocol=https;branch=master"
-+SRCREV = "2f26e656b16fb86132f27d1f8d47c6055041430d"
-+
-+S = "${WORKDIR}/git"
-+
-+DEPENDS = "pugixml sqlite3 zlib fmt spdlog util-linux-libuuid libupnp libnsl2"
-+
-+SYSTEMD_SERVICE:${PN} = "gerbera.service"
-+
-+inherit cmake pkgconfig systemd
-+
-+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} curl taglib inotify exif matroska magic js"
-+PACKAGECONFIG[systemd] = "-DWITH_SYSTEMD=TRUE,-DWITH_SYSTEMD=FALSE,systemd"
-+PACKAGECONFIG[taglib] = "-DWITH_TAGLIB=TRUE,-DWITH_TAGLIB=FALSE,taglib"
-+PACKAGECONFIG[curl] = "-DWITH_CURL=TRUE,-DWITH_CURL=FALSE,curl"
-+PACKAGECONFIG[inotify] = "-DWITH_INOTIFY=TRUE,-DWITH_INOTIFY=FALSE,inotify-tools"
-+PACKAGECONFIG[avcodec] = "-DWITH_AVCODEC=TRUE,-DWITH_AVCODEC=FALSE,ffmpeg"
-+PACKAGECONFIG[wavpack] = "-DWITH_WAVPACK=TRUE,-DWITH_WAVPACK=FALSE,wavpack"
-+PACKAGECONFIG[exif] = "-DWITH_EXIF=TRUE,-DWITH_EXIF=FALSE,libexif"
-+PACKAGECONFIG[exiv2] = "-DWITH_EXIV2=TRUE,-DWITH_EXIV2=FALSE,exiv2"
-+PACKAGECONFIG[matroska] = "-DWITH_MATROSKA=TRUE,-DWITH_MATROSKA=FALSE,libebml libmatroska"
-+PACKAGECONFIG[magic] = "-DWITH_MAGIC=TRUE,-DWITH_MAGIC=FALSE,file"
-+PACKAGECONFIG[js] = "-DWITH_JS=TRUE,-DWITH_JS=FALSE,duktape"
-+
-+SECURITY_CFLAGS:riscv64 = "${SECURITY_NOPIE_CFLAGS}"
+ # no need to build example & tests & benchmarks on pure yocto
+-EXTRA_OECMAKE += "-DSPDLOG_INSTALL=on -DSPDLOG_BUILD_SHARED=on -DSPDLOG_BUILD_EXAMPLE=off -DSPDLOG_BUILD_TESTS=off -DSPDLOG_BUILD_BENCH=off -DSPDLOG_FMT_EXTERNAL=on"
++EXTRA_OECMAKE += "-DSPDLOG_INSTALL=on -DSPDLOG_BUILD_SHARED=on -DSPDLOG_BUILD_EXAMPLE=off -DSPDLOG_FMT_EXTERNAL=on"
+ 
+-inherit cmake
++BBCLASSEXTEND = "native"
 -- 
 2.25.1
 
