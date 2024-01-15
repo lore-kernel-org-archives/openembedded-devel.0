@@ -1,366 +1,169 @@
-Return-Path: <alperyasinak1@gmail.com>
+Return-Path: <ross.burton@arm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C021C3DA79
-	for <webhook@archiver.kernel.org>; Mon, 15 Jan 2024 10:15:45 +0000 (UTC)
-Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
- by mx.groups.io with SMTP id smtpd.web11.74946.1705313736774999126
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 91D4AC3DA79
+	for <webhook@archiver.kernel.org>; Mon, 15 Jan 2024 10:44:25 +0000 (UTC)
+Received: from EUR01-VE1-obe.outbound.protection.outlook.com (EUR01-VE1-obe.outbound.protection.outlook.com [40.107.14.83])
+ by mx.groups.io with SMTP id smtpd.web11.75516.1705315463497418978
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Jan 2024 02:15:37 -0800
+ Mon, 15 Jan 2024 02:44:24 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ielALDZN;
- spf=pass (domain: gmail.com, ip: 209.85.208.42, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-555144cd330so10497859a12.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 15 Jan 2024 02:15:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1705313735; x=1705918535; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=agjDE8xhWPsKaPAyqJYfWzXrh8loB3RD3hVEycf0LaU=;
-        b=ielALDZNeE4ji4A7nIPqmMUbe1MR6uPVkrWbk5O4XXylf6v/AYnBNVQDA1OJNUVZ1y
-         eesoiG5jE06MX/7AjZ9c3u5xAO2dtGMosy8bhKue5RETjzvrFkI9eYk00wd7hd/ts8RZ
-         bnLfQCR40pWXmiUH7+um5TJHOF2ri2BFO5gM8G0aVhIx1QjYyzluMB1gRP+x8oAn7DJm
-         OI+3PsVOFnPLIv/gzk1BcFJkCeiwaFE0d/wS+CfyurNVdj+R8Rhb2OY/wCTicbC6ylvz
-         WY5hD/Oap4c6nZ6IFEkPLcCr2ScdT9FgjzVksWmzhEbbj+1Ws8hqwIYBWWrJ1Tq6O87z
-         JB3A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1705313735; x=1705918535;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=agjDE8xhWPsKaPAyqJYfWzXrh8loB3RD3hVEycf0LaU=;
-        b=JRs8HiQR+5sS7BFqfIAV7k0LIrtnJrPyG1tkpxWLM06mvpmmRzBRl1G9pbVl+e2lq3
-         x2YLH3DJ2gG0kDYMWYGYZ/f9zweNRiWP26fSMrDTGdkcmqtXk1rZb1oP1+rZSW90p0ib
-         jZWJ9Ra5dCeAo2Fw+9ytqwzQ351ppIjPBH+POAvFxRYQRjruO/Xj0LJ7HZrcO+SOuEgN
-         87ax21SovmmAaTyszyhx+l4lDhvMY3/jIPttNxe5qwva9R8wBxW5JDtFUrZxOGoIbPsv
-         X1/xYOd6pgNn/xolBCk+4jnNf9ypUBdsijurv+lZAVX+KMBhtHfBc1CGrNGap6QgEDzN
-         Vezg==
-X-Gm-Message-State: AOJu0YxOHEnFm8bNLphc1Rs++9il9qRJJOCfpPcK79Sii6wobYe/I0oE
-	PAfZU8bcIDG+hWv83m6rn6Ht/a2xk1uqQg==
-X-Google-Smtp-Source: AGHT+IEe23I9l9Y0x8vBr6SEXsz4QFYZq6yjLxEv+lYnpONhJSaJ5v+yEdynLI+d7EikBme/M3Btpg==
-X-Received: by 2002:a05:6402:31fa:b0:558:e890:7460 with SMTP id dy26-20020a05640231fa00b00558e8907460mr2203855edb.12.1705313734300;
-        Mon, 15 Jan 2024 02:15:34 -0800 (PST)
-Received: from localhost.localdomain ([176.33.66.82])
-        by smtp.gmail.com with ESMTPSA id g11-20020a056402114b00b00558b0c513e0sm4845196edw.61.2024.01.15.02.15.33
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 15 Jan 2024 02:15:33 -0800 (PST)
-From: alperak <alperyasinak1@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-multimedia][PATCH] gerbera: upgrade 1.12.1 -> 2.0.0
-Date: Mon, 15 Jan 2024 13:15:26 +0300
-Message-Id: <20240115101526.680868-1-alperyasinak1@gmail.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@armh.onmicrosoft.com header.s=selector2-armh-onmicrosoft-com header.b=nqoX/2Rx;
+ dkim=pass header.i=@armh.onmicrosoft.com header.s=selector2-armh-onmicrosoft-com header.b=nqoX/2Rx;
+ spf=pass (domain: arm.com, ip: 40.107.14.83, mailfrom: ross.burton@arm.com)
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=pass;
+ b=MzAIJf5ZFd6NcF4o0AdInAz0vUjjonT9FlytOo3bBEHAXaooWKIa8V9HPpWiktf9/xMpk2gZqPkJZ5tl/MSjSg4m3vpXtTp22H3fOkQA6Wk+n54ibyZXCKTVzTKfDe6VZElklYEkRdIjbAeI+JTBVRZKxfGcM8/VSwjAxqdslu5z0fWSh76TlMiCasRI733XE9WtaRl8SlyB5x4bhhdbOGAbMXaaj/7mjKcMW499GPv6tsK8kY9zL4RhXRLeBL0ditlPOxu4IayhSmSYkDcTJkv9Fkv1ymnf1l3A6Wpb7ICkYNX7qF40j352Z5T4MGC90EtDanU4mA/1//lnoA1UmQ==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=uB28Sp0YtCCoX6d5ZASgMtjdhGwiwXWhhDj+RBYs3kM=;
+ b=dnQHV7Qs1ZDuEvSS9MyD8dh/koHHGFB2VfEVWBgSHdk29fEXbUShGmv/QNX7AL+8WpO3zXIeLaLAMxXR19k1LwT7BDRbQsYkfBXSuURgK+yWk6d+a9VbGqhLFnbaf4vvO4/WkAE/7jAbt8aHQV48gGxYFoycItsmnNG9uTxHZi6rP04vy5DAmW7vSQXdIGu0AMUhxOINFkgkvY52jbbkijtNdO99x2DhpeHSBliFHOAlMYkweWBxCGtEoy2su9Q5o7OEje+RY7MvGMDrG1YWxaQJsgsQFom3IfFgPbuWVSFucluiRQSxq7TbOzGb06G1Gw1oB2HeVsa2s+g+TxB+yQ==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 63.35.35.123) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=arm.com;
+ dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
+ dkim=pass (signature was verified) header.d=armh.onmicrosoft.com; arc=pass (0
+ oda=1 ltdi=1 spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=uB28Sp0YtCCoX6d5ZASgMtjdhGwiwXWhhDj+RBYs3kM=;
+ b=nqoX/2Rxs9gdj7tarGwCrTY0gJt8Fp120DwFEnWJ00z5EPOc7skhow/2h4vBfy9S5+BwTkUb63RbmCq72DzXRt4Gj4XMZ1DkYNEO0gG1/ayDA6C2DMvc6Oqoecpq/rzobp8PJGm+//eMKDqZq1MBflWU3CCb3Q5KfRKHDlynSLQ=
+Received: from DUZPR01CA0314.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:4ba::21) by DB9PR08MB6362.eurprd08.prod.outlook.com
+ (2603:10a6:10:25a::17) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7181.26; Mon, 15 Jan
+ 2024 10:44:19 +0000
+Received: from DU6PEPF0000B61C.eurprd02.prod.outlook.com
+ (2603:10a6:10:4ba:cafe::a7) by DUZPR01CA0314.outlook.office365.com
+ (2603:10a6:10:4ba::21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7181.26 via Frontend
+ Transport; Mon, 15 Jan 2024 10:44:19 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
+ client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+ pr=C
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ DU6PEPF0000B61C.mail.protection.outlook.com (10.167.8.135) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7202.16 via Frontend Transport; Mon, 15 Jan 2024 10:44:19 +0000
+Received: ("Tessian outbound a064b9944658:v228"); Mon, 15 Jan 2024 10:44:19 +0000
+X-CheckRecipientChecked: true
+X-CR-MTA-CID: 9cb6b44f1cab04fa
+X-CR-MTA-TID: 64aa7808
+Received: from 252efd6a3615.1
+	by 64aa7808-outbound-1.mta.getcheckrecipient.com id D6C7B297-A29F-4919-9B71-B6386112DDAC.1;
+	Mon, 15 Jan 2024 10:44:12 +0000
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com
+    by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 252efd6a3615.1
+    (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+    Mon, 15 Jan 2024 10:44:12 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=A/XWG6LmahasFbREwI0XAHnyAfnT4k0UKaZxcmheE64wURq4sOt09zWwkEWaWk+Uou4ov0SEX6LAikz+ThMw71J4eLw/2itOS/n9p7qVcvBrDNC0r6q216hQq+Yj8mY1bPGR8tAHnI+IcEM7eOB3IwzRSx7cA2JfQA5ipEqVoWGUCRroJ6gKSXCP5Ov7bAGuKhdFy+/B35ArH92Z3FcMXykLQFEDejqsgZ94hBpkW/7952SQggp1r3Il1by4E+a9eg0l5XS62RbwOly434knfsghPKSZaoPWUJT50ah05XBvc/3uH+KeCm0NWO+MR8nRVbr26XnDFSxLocdxCzZAZQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=uB28Sp0YtCCoX6d5ZASgMtjdhGwiwXWhhDj+RBYs3kM=;
+ b=i1H50w95B2CpD6/od4MMYuvGBGdHmnnabA94OTSWhkWRX1kvEY7Ci6ez0A9kVm++BJkk79smiIQWpRweNUKUGYrRyn5bA8aecdavTVu/Y0wW4nNxWmezQa3ka57cQ7btOEXPXJ+dCIMS4kQbwnbh9/8YWDh+ZvG26Ops7/5ta0iLenYSlwB95pgza+XiULvRUVMuuLSilbzFWxZPDIEbMqoG01u8qzW/OVp5gwXvPFufOHjKAxc1xGXFKBJ6BwDaZ/vXN2FALyx0Nqfpy7ZMBe6JT9qDxblNEa8Oc9lurbSzLo0hqBP3dTCfLxZURXjBdUDFgNImixmzHOleyXNQEA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=uB28Sp0YtCCoX6d5ZASgMtjdhGwiwXWhhDj+RBYs3kM=;
+ b=nqoX/2Rxs9gdj7tarGwCrTY0gJt8Fp120DwFEnWJ00z5EPOc7skhow/2h4vBfy9S5+BwTkUb63RbmCq72DzXRt4Gj4XMZ1DkYNEO0gG1/ayDA6C2DMvc6Oqoecpq/rzobp8PJGm+//eMKDqZq1MBflWU3CCb3Q5KfRKHDlynSLQ=
+Received: from PA4PR08MB7411.eurprd08.prod.outlook.com (2603:10a6:102:2a3::12)
+ by DU0PR08MB7614.eurprd08.prod.outlook.com (2603:10a6:10:31c::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7181.23; Mon, 15 Jan
+ 2024 10:44:09 +0000
+Received: from PA4PR08MB7411.eurprd08.prod.outlook.com
+ ([fe80::9f34:f165:4c51:be06]) by PA4PR08MB7411.eurprd08.prod.outlook.com
+ ([fe80::9f34:f165:4c51:be06%3]) with mapi id 15.20.7181.019; Mon, 15 Jan 2024
+ 10:44:09 +0000
+From: Ross Burton <Ross.Burton@arm.com>
+To: alper ak <alperyasinak1@gmail.com>
+CC: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] [meta-multimedia][PATCH] gerbera: upgrade 1.12.1 -> 2.0.0
+Thread-Topic: [oe] [meta-multimedia][PATCH] gerbera: upgrade 1.12.1 -> 2.0.0
+Thread-Index: AQHaR5vWyU7i9PHkHUuwTwQVRwBr17DasEaA
+Date: Mon, 15 Jan 2024 10:44:09 +0000
+Message-ID: <DC50EBB8-5524-40C5-8E8E-7393E1A657A1@arm.com>
+References: <20240115101526.680868-1-alperyasinak1@gmail.com>
+In-Reply-To: <20240115101526.680868-1-alperyasinak1@gmail.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-mailer: Apple Mail (2.3774.300.61.1.2)
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+x-ms-traffictypediagnostic: 
+	PA4PR08MB7411:EE_|DU0PR08MB7614:EE_|DU6PEPF0000B61C:EE_|DB9PR08MB6362:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7c65076f-ffd4-4b36-0002-08dc15b6ed98
+x-checkrecipientrouted: true
+nodisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original: 
+ T7uxTmUGggkMI1zEJiUE1Yoz6VSCvhWYX1A62ahdhdpkXQAe0L+9S3vtpUnlXFULztCqxrv3i3qqRHfh7XWmYnJLoZLvcl2aK7OXfzn5zs6OUFjnshwAl0Dyxaai+m1M4EFq2E82Dt0XlrK40492O/BUIIwwfjYbNha9/elzXRV+Ivu/BjFS+G9ib9xPTME3u/xmTbob9Mgw4TopPn6drEST9SbQzTAqHok23oE5IYoTTBzeGUvo9sQTAZjSqsOad1NI3UlqeFmGcDI8UJ4DjZdlXxErNfa7KySMU5cpC6qb13Q+bsf5+LDpOup76zPIDJuhLl6ayz8FqsOiRES/W8sh+TogI6ZBCfdchmFBNnNju+A8Dfwrd9CoRwt9AeJTtcTuFqVIPvb6s4DzJ2RqjdYqJnjV4kCqW24qSCrdXGQehM93cpvvSUGscJ/hOhrC/B61AUgfIR3c4zwQxfqoXmzskLx6ZW09LHb2OriK9vshQGgmreAO8XNvQdQwBpidgpTNe7a9j+jJJ6YspN0EBWqj38Nm0qAZ3hZmmm4LKbrLRR1nTLbfuzBenzMOYUOn2DowMIcNXrqu+P4mQAnabBJQ06C5dzk+bvb/MwbbH9p7zGdK9ynhkuveq4IcgnHUHBdXe4CUbppbfhBP1v5pjQ==
+X-Forefront-Antispam-Report-Untrusted: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA4PR08MB7411.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(376002)(396003)(366004)(346002)(136003)(39860400002)(230922051799003)(451199024)(1800799012)(64100799003)(186009)(86362001)(122000001)(38100700002)(2616005)(36756003)(33656002)(38070700009)(71200400001)(6506007)(6512007)(64756008)(316002)(966005)(53546011)(6486002)(91956017)(66446008)(66556008)(66476007)(66946007)(76116006)(6916009)(4744005)(2906002)(8676002)(8936002)(5660300002)(4326008)(478600001)(41300700001)(45980500001);DIR:OUT;SFP:1101;
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <2831B2CE1C5F7B4D98FAEA95004A4AC4@eurprd08.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR08MB7614
+Original-Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: 
+ DU6PEPF0000B61C.eurprd02.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 
+	8e8606a0-9c3c-4b8a-2439-08dc15b6e7d9
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	HL1ilSabmZK6fqVeRJH3zRC41jL7GcZmcrnudSkvu4vR2hyE/bHnlgJnobZrz7TXVr2QD2+BYDX/aDsHm49dsKzxDzkY3v6Wxf05zEbRbS1xOVhs57eXEqA2KR0iHSWrH7al1V2Sr0DVlee+xI7RccgIcJnnEA1DgV9v7V9zT9NXj7hz1NLtlzLhpjuTamkdzEAPipYFEpSlqzPZd7uLy+P/e05AIDb32oxE5AAwULJGSKYfJRHaBcH4ZA7QdN28MNiKq9eeWs1t4WtYSoLqUvwGKZyoH9+UOm3+MSr70yc+TpWDxiIOy1+1TYa3Do11jo3xRGE+86dGlycsGzEFtHx8g9DvULSU3J9N+5EOIWaexdBpE8e84YAk7kle+ZalS2b4mhqaI+mIxhQduD7TgRnoZ0Cf3KFSTn/nI8SrXEEYSLKXzUGCKPUPGjhrHtBOzqBYGUTGRUUU0DnyJmROtFo+pKr9PMrDc6TNxx6TUqZM/dcFn7JcIbj3wfT/mcSMqnwGzsLGWBCAuM/LWGSbu9aslZ/aSZz3YTAnKtpRk9wXq0Gik/VdjWdp9b1q87T37/s+Q0pzThBYYbSKE9yOYJLRobAtS1pov0exWcPBnjsPDJ5zT9d1NjrrJg2w0NgM1EHYcuPynr7Nm7hgXUqvRrsMeKnUKSMo5Lzt8RN+01fgwBfQn7ltz6XfQewDdeEt4UreD7FGWSr/XJlLbE4cHg/bxZCp7XSmrpYlO/Yfsos=
+X-Forefront-Antispam-Report: 
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230031)(4636009)(396003)(346002)(376002)(39860400002)(136003)(230922051799003)(186009)(82310400011)(1800799012)(64100799003)(451199024)(36840700001)(40470700004)(46966006)(40480700001)(40460700003)(2616005)(26005)(53546011)(6512007)(336012)(478600001)(82740400003)(81166007)(356005)(36756003)(33656002)(86362001)(6862004)(4326008)(5660300002)(4744005)(2906002)(41300700001)(36860700001)(47076005)(6506007)(70586007)(70206006)(316002)(6486002)(966005)(8936002)(8676002);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jan 2024 10:44:19.4160
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7c65076f-ffd4-4b36-0002-08dc15b6ed98
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	DU6PEPF0000B61C.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR08MB6362
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 15 Jan 2024 10:15:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108280
+ <openembedded-devel@lists.openembedded.org>; Mon, 15 Jan 2024 10:44:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108281
 
-* 0001-Fix-build-against-fmt-10.patch dropped because fixed in the new version
-* Expat dropped from DEPENDS because has been replaced with pugixml at version 1.5.0
-* Required dependencies updated and added to DEPENDS
-* Optional packages added and those enable by default have been enabled.
-
-Changelog:
-
-NEW Features
-
-    Staged importing that allows updating the virtual layout instead of deleting and recreating it each time (import-mode="grb")
-    Config options as command line arguments (--set-option OPT=VAL with --print-options)
-    Allow configuration of follow-symlinks per autoscan directory
-    Configuration of containers in virtual layout: title can be changed, some nodes can be disabled
-    New mode of loading Javascript plugins with cleanup of global variables
-    Generation of example configuration via command line option --create-example-config
-    Case insensitive sorting for databases
-    New config options for URL handling and host redirection
-    Use .nomedia to hide directory, incl. config option
-    Support for UPnP commands GetFeatureList and GetSortExtensionCapabilities
-    Build for Ubuntu 23.04 and 23.10
-
-FIXES
-
-    Autoscan: Keep track of renamed directories
-    Docker: add JPEG and update description
-    Runtime issues in request handling
-    Configurable handling of HOME directory
-    Transcoding: parsing issue of requests
-    Stability for sqlite database access
-    Browsing on Samsung devices
-
-Code Improvements
-
-    Update Javascript libraries
-    Update versions of googletest (1.14), pupnp (1.14.18), libexiv2 (v0.28.1), libebml (1.4.5), fmt (10.2.0), pugixml (1.14), spdlog (1.12.0) and taglib (1.13.1)
-    Compatibility with gcc14
-
-Signed-off-by: alperak <alperyasinak1@gmail.com>
----
- .../0001-Fix-build-against-fmt-10.patch       | 168 ------------------
- .../gerbera/gerbera_1.12.1.bb                 |  31 ----
- .../gerbera/gerbera_2.0.0.bb                  |  36 ++++
- 3 files changed, 36 insertions(+), 199 deletions(-)
- delete mode 100644 meta-multimedia/recipes-multimedia/gerbera/gerbera/0001-Fix-build-against-fmt-10.patch
- delete mode 100644 meta-multimedia/recipes-multimedia/gerbera/gerbera_1.12.1.bb
- create mode 100644 meta-multimedia/recipes-multimedia/gerbera/gerbera_2.0.0.bb
-
-diff --git a/meta-multimedia/recipes-multimedia/gerbera/gerbera/0001-Fix-build-against-fmt-10.patch b/meta-multimedia/recipes-multimedia/gerbera/gerbera/0001-Fix-build-against-fmt-10.patch
-deleted file mode 100644
-index 2da98cfcf..000000000
---- a/meta-multimedia/recipes-multimedia/gerbera/gerbera/0001-Fix-build-against-fmt-10.patch
-+++ /dev/null
-@@ -1,168 +0,0 @@
--From 2c08724e8a7e3a0ee8cdd91246a714a17f2ba5c1 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Wed, 17 May 2023 17:31:56 -0700
--Subject: [PATCH] Fix build against fmt 10+
--
--Fixes
--git/src/config/setup/config_setup_vector.cc:191:9:   required from here
--| /home/hains/openpli-dm920-python3/build/tmp/work/cortexa15hf-neon-vfpv4-oe-linux-gnueabi/gerbera/1.11.0-r0/
--recipe-sysroot/usr/include/fmt/core.h:1691:7: error: static assertion failed: Cannot format an argument. To make type T formattable provide a formatter<T> specialization: https://fmt.dev/latest/api.html#udt
--|  1691 |       formattable,
--|       |       ^~~~~~~~~~~
--
--Source: https://github.com/Hains/openpli-dm920-python3/commit/688ae121bd3928925a8656bd4aaf3857d8e8a8ed
--
--Upstream-Status: Pending
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/config/setup/config_setup_array.cc       | 6 +++---
-- src/config/setup/config_setup_autoscan.cc    | 2 +-
-- src/config/setup/config_setup_client.cc      | 2 +-
-- src/config/setup/config_setup_dictionary.cc  | 6 +++---
-- src/config/setup/config_setup_dynamic.cc     | 2 +-
-- src/config/setup/config_setup_transcoding.cc | 2 +-
-- src/config/setup/config_setup_tweak.cc       | 2 +-
-- src/config/setup/config_setup_vector.cc      | 4 ++--
-- 8 files changed, 13 insertions(+), 13 deletions(-)
--
--diff --git a/src/config/setup/config_setup_array.cc b/src/config/setup/config_setup_array.cc
--index 8f3cf1db..efc9b501 100644
----- a/src/config/setup/config_setup_array.cc
--+++ b/src/config/setup/config_setup_array.cc
--@@ -136,11 +136,11 @@ std::vector<std::string> ConfigArraySetup::getXmlContent(const pugi::xml_node& o
--     std::vector<std::string> result;
--     if (initArray) {
--         if (!initArray(optValue, result, ConfigDefinition::mapConfigOption(nodeOption))) {
---            throw_std_runtime_error("Invalid {} array value '{}'", xpath, optValue);
--+            throw_std_runtime_error("Invalid {} array value '{}'", xpath, optValue.value());
--         }
--     } else {
--         if (!createOptionFromNode(optValue, result)) {
---            throw_std_runtime_error("Invalid {} array value '{}'", xpath, optValue);
--+            throw_std_runtime_error("Invalid {} array value '{}'", xpath, optValue.value());
--         }
--     }
--     if (result.empty()) {
--@@ -149,7 +149,7 @@ std::vector<std::string> ConfigArraySetup::getXmlContent(const pugi::xml_node& o
--         result = defaultEntries;
--     }
--     if (notEmpty && result.empty()) {
---        throw_std_runtime_error("Invalid array {} empty '{}'", xpath, optValue);
--+        throw_std_runtime_error("Invalid array {} empty '{}'", xpath, optValue.value());
--     }
--     return result;
-- }
--diff --git a/src/config/setup/config_setup_autoscan.cc b/src/config/setup/config_setup_autoscan.cc
--index e882ca3e..d773419b 100644
----- a/src/config/setup/config_setup_autoscan.cc
--+++ b/src/config/setup/config_setup_autoscan.cc
--@@ -203,7 +203,7 @@ std::shared_ptr<ConfigOption> ConfigAutoscanSetup::newOption(const pugi::xml_nod
-- {
--     auto result = std::vector<AutoscanDirectory>();
--     if (!createOptionFromNode(optValue, result)) {
---        throw_std_runtime_error("Init {} autoscan failed '{}'", xpath, optValue);
--+        throw_std_runtime_error("Init {} autoscan failed '{}'", xpath, optValue.value());
--     }
--     optionValue = std::make_shared<AutoscanListOption>(result);
--     return optionValue;
--diff --git a/src/config/setup/config_setup_client.cc b/src/config/setup/config_setup_client.cc
--index 30bb98cb..56be9c53 100644
----- a/src/config/setup/config_setup_client.cc
--+++ b/src/config/setup/config_setup_client.cc
--@@ -163,7 +163,7 @@ std::shared_ptr<ConfigOption> ConfigClientSetup::newOption(const pugi::xml_node&
--     auto result = std::make_shared<ClientConfigList>();
-- 
--     if (!createOptionFromNode(isEnabled ? optValue : pugi::xml_node(nullptr), result)) {
---        throw_std_runtime_error("Init {} client config failed '{}'", xpath, optValue);
--+        throw_std_runtime_error("Init {} client config failed '{}'", xpath, optValue.value());
--     }
--     optionValue = std::make_shared<ClientConfigListOption>(result);
--     return optionValue;
--diff --git a/src/config/setup/config_setup_dictionary.cc b/src/config/setup/config_setup_dictionary.cc
--index eb91c694..ea2aaa05 100644
----- a/src/config/setup/config_setup_dictionary.cc
--+++ b/src/config/setup/config_setup_dictionary.cc
--@@ -162,11 +162,11 @@ std::map<std::string, std::string> ConfigDictionarySetup::getXmlContent(const pu
--     std::map<std::string, std::string> result;
--     if (initDict) {
--         if (!initDict(optValue, result)) {
---            throw_std_runtime_error("Init {} dictionary failed '{}'", xpath, optValue);
--+            throw_std_runtime_error("Init {} dictionary failed '{}'", xpath, optValue.value());
--         }
--     } else {
--         if (!createOptionFromNode(optValue, result) && required) {
---            throw_std_runtime_error("Init {} dictionary failed '{}'", xpath, optValue);
--+            throw_std_runtime_error("Init {} dictionary failed '{}'", xpath, optValue.value());
--         }
--     }
--     if (result.empty()) {
--@@ -175,7 +175,7 @@ std::map<std::string, std::string> ConfigDictionarySetup::getXmlContent(const pu
--         result = defaultEntries;
--     }
--     if (notEmpty && result.empty()) {
---        throw_std_runtime_error("Invalid dictionary {} empty '{}'", xpath, optValue);
--+        throw_std_runtime_error("Invalid dictionary {} empty '{}'", xpath, optValue.value());
--     }
--     return result;
-- }
--diff --git a/src/config/setup/config_setup_dynamic.cc b/src/config/setup/config_setup_dynamic.cc
--index 6a43b820..93030b85 100644
----- a/src/config/setup/config_setup_dynamic.cc
--+++ b/src/config/setup/config_setup_dynamic.cc
--@@ -179,7 +179,7 @@ std::shared_ptr<ConfigOption> ConfigDynamicContentSetup::newOption(const pugi::x
--     auto result = std::make_shared<DynamicContentList>();
-- 
--     if (!createOptionFromNode(optValue, result)) {
---        throw_std_runtime_error("Init {} DynamicContentList failed '{}'", xpath, optValue);
--+        throw_std_runtime_error("Init {} DynamicContentList failed '{}'", xpath, optValue.value());
--     }
--     optionValue = std::make_shared<DynamicContentListOption>(result);
--     return optionValue;
--diff --git a/src/config/setup/config_setup_transcoding.cc b/src/config/setup/config_setup_transcoding.cc
--index 4827f109..c353ce1f 100644
----- a/src/config/setup/config_setup_transcoding.cc
--+++ b/src/config/setup/config_setup_transcoding.cc
--@@ -492,7 +492,7 @@ std::shared_ptr<ConfigOption> ConfigTranscodingSetup::newOption(const pugi::xml_
--     auto result = std::make_shared<TranscodingProfileList>();
-- 
--     if (!createOptionFromNode(isEnabled ? optValue : pugi::xml_node(nullptr), result)) {
---        throw_std_runtime_error("Init {} transcoding failed '{}'", xpath, optValue);
--+        throw_std_runtime_error("Init {} transcoding failed '{}'", xpath, optValue.value());
--     }
--     optionValue = std::make_shared<TranscodingProfileListOption>(result);
--     return optionValue;
--diff --git a/src/config/setup/config_setup_tweak.cc b/src/config/setup/config_setup_tweak.cc
--index d7692c09..72c2beb2 100644
----- a/src/config/setup/config_setup_tweak.cc
--+++ b/src/config/setup/config_setup_tweak.cc
--@@ -242,7 +242,7 @@ std::shared_ptr<ConfigOption> ConfigDirectorySetup::newOption(const pugi::xml_no
--     auto result = std::make_shared<DirectoryConfigList>();
-- 
--     if (!createOptionFromNode(optValue, result)) {
---        throw_std_runtime_error("Init {} DirectoryConfigList failed '{}'", xpath, optValue);
--+        throw_std_runtime_error("Init {} DirectoryConfigList failed '{}'", xpath, optValue.value());
--     }
--     optionValue = std::make_shared<DirectoryTweakOption>(result);
--     return optionValue;
--diff --git a/src/config/setup/config_setup_vector.cc b/src/config/setup/config_setup_vector.cc
--index c8ff853d..91f99ca4 100644
----- a/src/config/setup/config_setup_vector.cc
--+++ b/src/config/setup/config_setup_vector.cc
--@@ -180,7 +180,7 @@ std::vector<std::vector<std::pair<std::string, std::string>>> ConfigVectorSetup:
-- {
--     std::vector<std::vector<std::pair<std::string, std::string>>> result;
--     if (!createOptionFromNode(optValue, result) && required) {
---        throw_std_runtime_error("Init {} vector failed '{}'", xpath, optValue);
--+        throw_std_runtime_error("Init {} vector failed '{}'", xpath, optValue.value());
--     }
--     if (result.empty()) {
--         log_debug("{} assigning {} default values", xpath, defaultEntries.size());
--@@ -188,7 +188,7 @@ std::vector<std::vector<std::pair<std::string, std::string>>> ConfigVectorSetup:
--         result = defaultEntries;
--     }
--     if (notEmpty && result.empty()) {
---        throw_std_runtime_error("Invalid vector {} empty '{}'", xpath, optValue);
--+        throw_std_runtime_error("Invalid vector {} empty '{}'", xpath, optValue.value());
--     }
--     return result;
-- }
-diff --git a/meta-multimedia/recipes-multimedia/gerbera/gerbera_1.12.1.bb b/meta-multimedia/recipes-multimedia/gerbera/gerbera_1.12.1.bb
-deleted file mode 100644
-index 89cc51e0e..000000000
---- a/meta-multimedia/recipes-multimedia/gerbera/gerbera_1.12.1.bb
-+++ /dev/null
-@@ -1,31 +0,0 @@
--Description = "Gerbera - An UPnP media server"
--
--LICENSE = "GPL-2.0-only"
--LIC_FILES_CHKSUM = "file://LICENSE.md;md5=25cdec9afe3f1f26212ead6bd2f7fac8"
--
--SRC_URI = "git://github.com/gerbera/gerbera.git;protocol=https;branch=master \
--           file://0001-Fix-build-against-fmt-10.patch \
--           "
--
--SRCREV = "559e1d1a92f5977ce8cff7393aa85330dbf2d1d6"
--
--S = "${WORKDIR}/git"
--
--DEPENDS = "expat fmt spdlog pugixml libebml libmatroska zlib curl libupnp e2fsprogs sqlite3 libnsl2"
--
--SYSTEMD_SERVICE:${PN} = "gerbera.service"
--
--inherit cmake pkgconfig systemd
--
--PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
--PACKAGECONFIG[systemd] = "-DWITH_SYSTEMD=TRUE,-DWITH_SYSTEMD=FALSE,systemd"
--PACKAGECONFIG[taglib] = "-DWITH_TAGLIB=TRUE,-DWITH_TAGLIB=FALSE,taglib"
--EXTRA_OECMAKE = "-DWITH_JS=FALSE -DWITH_MAGIC=FALSE -DWITH_EXIF=FALSE -DLIBUUID_INCLUDE_DIRS=${STAGING_INCDIR} -DLIBUUID_LIBRARIES=-luuid"
--
--do_install:append() {
--    install -d ${D}/root/.config/
--}
--
--FILES:${PN} += "/root/.config/"
--
--SECURITY_CFLAGS:riscv64 = "${SECURITY_NOPIE_CFLAGS}"
-diff --git a/meta-multimedia/recipes-multimedia/gerbera/gerbera_2.0.0.bb b/meta-multimedia/recipes-multimedia/gerbera/gerbera_2.0.0.bb
-new file mode 100644
-index 000000000..de4de3a07
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/gerbera/gerbera_2.0.0.bb
-@@ -0,0 +1,36 @@
-+Description = "Gerbera is a UPnP media server which allows you to stream your digital media through your home network and consume it on a variety of UPnP compatible devices."
-+
-+LICENSE = "GPL-2.0-only"
-+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=25cdec9afe3f1f26212ead6bd2f7fac8"
-+
-+SRC_URI = "git://github.com/gerbera/gerbera.git;protocol=https;branch=master"
-+SRCREV = "2f26e656b16fb86132f27d1f8d47c6055041430d"
-+
-+S = "${WORKDIR}/git"
-+
-+DEPENDS = "pugixml sqlite3 zlib fmt spdlog util-linux-libuuid libupnp libnsl2"
-+
-+SYSTEMD_SERVICE:${PN} = "gerbera.service"
-+
-+inherit cmake pkgconfig systemd
-+
-+EXTRA_OECMAKE = "-DWITH_JS=FALSE -DWITH_MAGIC=FALSE"
-+
-+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} curl taglib inotify exif matroska"
-+PACKAGECONFIG[systemd] = "-DWITH_SYSTEMD=TRUE,-DWITH_SYSTEMD=FALSE,systemd"
-+PACKAGECONFIG[taglib] = "-DWITH_TAGLIB=TRUE,-DWITH_TAGLIB=FALSE,taglib"
-+PACKAGECONFIG[curl] = "-DWITH_CURL=TRUE,-DWITH_CURL=FALSE,curl"
-+PACKAGECONFIG[inotify] = "-DWITH_INOTIFY=TRUE,-DWITH_INOTIFY=FALSE,inotify-tools"
-+PACKAGECONFIG[avcodec] = "-DWITH_AVCODEC=TRUE,-DWITH_AVCODEC=FALSE,ffmpeg"
-+PACKAGECONFIG[wavpack] = "-DWITH_WAVPACK=TRUE,-DWITH_WAVPACK=FALSE,wavpack"
-+PACKAGECONFIG[exif] = "-DWITH_EXIF=TRUE,-DWITH_EXIF=FALSE,libexif"
-+PACKAGECONFIG[exiv2] = "-DWITH_EXIV2=TRUE,-DWITH_EXIV2=FALSE,exiv2"
-+PACKAGECONFIG[matroska] = "-DWITH_MATROSKA=TRUE,-DWITH_MATROSKA=FALSE,libebml libmatroska"
-+
-+do_install:append() {
-+    install -d ${D}/root/.config/
-+}
-+
-+FILES:${PN} += "/root/.config/"
-+
-+SECURITY_CFLAGS:riscv64 = "${SECURITY_NOPIE_CFLAGS}"
--- 
-2.25.1
-
+T24gMTUgSmFuIDIwMjQsIGF0IDEwOjE1LCBBbHBlciBBayB2aWEgbGlzdHMub3BlbmVtYmVkZGVk
+Lm9yZyA8YWxwZXJ5YXNpbmFrMT1nbWFpbC5jb21AbGlzdHMub3BlbmVtYmVkZGVkLm9yZz4gd3Jv
+dGU6DQo+IA0KPiArZG9faW5zdGFsbDphcHBlbmQoKSB7DQo+ICsgICAgaW5zdGFsbCAtZCAke0R9
+L3Jvb3QvLmNvbmZpZy8NCj4gK30NCj4gKw0KPiArRklMRVM6JHtQTn0gKz0gIi9yb290Ly5jb25m
+aWcv4oCcDQoNCkkga25vdyBpdCB3YXMgdGhlcmUgYmVmb3JlLCBidXQgcmVtb3ZlIHRoaXMgYmVj
+YXVzZSBpdOKAmXMgbm9uc2Vuc2UuDQoNCj4gK0VYVFJBX09FQ01BS0UgPSAiLURXSVRIX0pTPUZB
+TFNFIC1EV0lUSF9NQUdJQz1GQUxTReKAnQ0KDQoNCkFnYWluIEkga25vdyB0aGlzIHdhcyB0aGVy
+ZSBiZWZvcmUsIGJ1dCBsaWJtYWdpYyBpcyBwYXJ0IG9mIOKAmGZpbGXigJkgc28gYWRkIHRoaXMg
+YXMgYSBQQUNLQUdFQ09ORklHLiAgQWxzbyB0aGUgSlMgaW1wbGVtZW50YXRpb24gaXMgZHVrdGFw
+ZSB3aGljaCB3ZSBoYXZlIGEgcGFja2FnZSBvZiwgc28gdGhhdCBjYW4gYmUgYSBQQUNLQUdFQ09O
+RklHIHRvby4NCg0KSXTigJlzIHVzZWZ1bCB0byBhdCBsZWFzdCBjb25zaWRlciB0aGUgZGVmYXVs
+dHMgaW4gYSBwYWNrYWdlIHdoZW4gd3JpdGluZyB0aGUgUEFDS0FHRUNPTkZJR3MsIHNvIGFjY29y
+ZGluZyB0byBodHRwczovL2dpdGh1Yi5jb20vZ2VyYmVyYS9nZXJiZXJhL2Jsb2IvbWFzdGVyL0NN
+YWtlTGlzdHMudHh0I0wyOCB3ZSBzaG91bGQgZW5hYmxlIHRoZSBtYWdpYyBQQUNLQUdFQ09ORklH
+IGJ5IGRlZmF1bHQuDQoNClJvc3MNCg0K
 
