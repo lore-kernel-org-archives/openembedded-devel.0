@@ -1,74 +1,80 @@
-Return-Path: <philip@balister.org>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2673AC3DA79
-	for <webhook@archiver.kernel.org>; Mon, 15 Jan 2024 16:14:07 +0000 (UTC)
-Received: from relay8-d.mail.gandi.net (relay8-d.mail.gandi.net [217.70.183.201])
- by mx.groups.io with SMTP id smtpd.web11.84682.1705334472517055816
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A00EC47DA2
+	for <webhook@archiver.kernel.org>; Mon, 15 Jan 2024 18:24:13 +0000 (UTC)
+Received: from mailout04.t-online.de (mailout04.t-online.de [194.25.134.18])
+ by mx.groups.io with SMTP id smtpd.web11.90161.1705343049221909333
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Jan 2024 08:01:13 -0800
+ Mon, 15 Jan 2024 10:24:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bootlin.com header.s=gm1 header.b=HV48uCVH;
- spf=pass (domain: bootlin.com, ip: 217.70.183.201, mailfrom: joaomarcos.costa@bootlin.com)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 04C251BF20C;
-	Mon, 15 Jan 2024 16:01:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
-	t=1705334470;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=yEJ2r7EaJICFD2WaHIvE3x9HwFAdiHgnbV/3EvChYTg=;
-	b=HV48uCVHpK5yZrK/MzAOg8OG6hujb6Zh+6/ETRl4NGzbcUvPozguR4ksiPqlV3CMq17bLe
-	8vt9B0Zrc96Wp0DkKiybsvvmKeg8pyURP1H8Wnu8mdqQ28eBTfmNl0l9pWeEWOr8JOfm+l
-	r905zD5qkqn3wspBuLtBHD6I7ujYQeFd1F54H+KT770HOT6FOnZQ2FqdbWhDhmi/vuTz0P
-	Z6KvG1deaForsMKtf9APOMGrzAgg3FLzWDSEDzXRt2y7e83TeRXWhV+dG2MO3T6lJ8yFnA
-	10NMSD9RbQr2I4KPOqsQjsAZMkbWdFa7IC8v4xx2QRv8PUr07OYJcR/9srpkIQ==
-From: "Joao Marcos Costa" <joaomarcos.costa@bootlin.com>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.18, mailfrom: f_l_k@t-online.de)
+Received: from fwd73.aul.t-online.de (fwd73.aul.t-online.de [10.223.144.99])
+	by mailout04.t-online.de (Postfix) with SMTP id 8B660139A6
+	for <openembedded-devel@lists.openembedded.org>; Mon, 15 Jan 2024 19:24:06 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.154.169.126]) by fwd73.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1rPRcy-2E8KDk0; Mon, 15 Jan 2024 19:24:04 +0100
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: raj.khem@gmail.com,
-	thomas.petazzoni@bootlin.com,
-	alexandre.belloni@bootlin.com,
-	Joao Marcos Costa <joaomarcos.costa@bootlin.com>
-Subject: [meta-oe] [kirkstone] [PATCH v1] xscreensaver: Add osuosl backup MIRROR
-Date: Mon, 15 Jan 2024 17:00:53 +0100
-Message-ID: <20240115160053.2175550-1-joaomarcos.costa@bootlin.com>
+Subject: [meta-gnome][PATCH 4/4] gjs: update 1.78.1 -> 1.78.2
+Date: Mon, 15 Jan 2024 19:24:01 +0100
+Message-ID: <20240115182402.126946-4-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240115182402.126946-1-f_l_k@t-online.de>
+References: <20240115182402.126946-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-X-GND-Sasl: joaomarcos.costa@bootlin.com
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1705343044-DF21A917-6F3FF331/0/0 CLEAN NORMAL
+X-TOI-MSGID: 24502c87-7b50-4545-a56b-8ded37094dd3
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 15 Jan 2024 16:14:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108291
+ <openembedded-devel@lists.openembedded.org>; Mon, 15 Jan 2024 18:24:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108293
 
-old tarballs disappear from main location, use a backup location to
-fetch it in such cases.
+Version 1.78.2
+--------------
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Joao Marcos Costa <joaomarcos.costa@bootlin.com>
+- Closed bugs and merge requests:
+  * Uninitialized memory in float out values can lead to crashes in mozjs=
+ gc
+    code later on [#591, !902, Philip Chimento]
+  * Garbage collection of Gdk surfaces [#592, !905, Philip Chimento]
+  * gi/gerror: Fix version of the GIRepository typelib import [!906, Jord=
+an
+    Petridis]
 
-Backported from Nanbield
-(cherry-picked from commit 8d34444c749a466f35445fd4c2212b3fbdb8d844)
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-oe/recipes-graphics/xscreensaver/xscreensaver_6.01.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-gnome/recipes-gnome/gjs/{gjs_1.78.1.bb =3D> gjs_1.78.2.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/gjs/{gjs_1.78.1.bb =3D> gjs_1.78.2.bb} (=
+92%)
 
-diff --git a/meta-oe/recipes-graphics/xscreensaver/xscreensaver_6.01.bb b/meta-oe/recipes-graphics/xscreensaver/xscreensaver_6.01.bb
-index 2ab529794..a5271f08b 100644
---- a/meta-oe/recipes-graphics/xscreensaver/xscreensaver_6.01.bb
-+++ b/meta-oe/recipes-graphics/xscreensaver/xscreensaver_6.01.bb
-@@ -6,6 +6,8 @@ LIC_FILES_CHKSUM = "file://driver/xscreensaver.h;endline=10;md5=c3ce41cdff745eb1
- SRC_URI = "https://www.jwz.org/${BPN}/${BP}.tar.gz"
- SRC_URI[sha256sum] = "085484665d91f60b4a1dedacd94bcf9b74b0fb096bcedc89ff1c245168e5473b"
- 
-+MIRRORS += "https://www.jwz.org/${BPN} https://ftp.osuosl.org/pub/blfs/conglomeration/${BPN}"
-+
- SRC_URI += " \
-     file://xscreensaver.service \
-     file://0001-build-Do-not-build-po-files.patch \
--- 
+diff --git a/meta-gnome/recipes-gnome/gjs/gjs_1.78.1.bb b/meta-gnome/reci=
+pes-gnome/gjs/gjs_1.78.2.bb
+similarity index 92%
+rename from meta-gnome/recipes-gnome/gjs/gjs_1.78.1.bb
+rename to meta-gnome/recipes-gnome/gjs/gjs_1.78.2.bb
+index 34eef1403..c8ffcdaab 100644
+--- a/meta-gnome/recipes-gnome/gjs/gjs_1.78.1.bb
++++ b/meta-gnome/recipes-gnome/gjs/gjs_1.78.2.bb
+@@ -7,7 +7,7 @@ DEPENDS =3D "mozjs-115 cairo"
+=20
+ inherit gnomebase gsettings gobject-introspection gettext features_check=
+ upstream-version-is-even pkgconfig
+=20
+-SRC_URI[archive.sha256sum] =3D "7e90511c429127c39eac0068c4ac9a353df7e6fb=
+bc646f5f18e8962882c18641"
++SRC_URI[archive.sha256sum] =3D "6a2abeb6bb7b49dd20a2e86475a56c1d992ad271=
+a0991e58b1431ad1d4997fd5"
+ SRC_URI +=3D " \
+     file://0001-Support-cross-builds-a-bit-better.patch \
+     file://0002-meson.build-Do-not-add-dir-installed-tests-when-inst.pat=
+ch \
+--=20
 2.43.0
 
 
