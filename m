@@ -2,105 +2,95 @@ Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 06A9CC47077
-	for <webhook@archiver.kernel.org>; Tue, 16 Jan 2024 16:53:16 +0000 (UTC)
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
- by mx.groups.io with SMTP id smtpd.web10.21264.1705423992654599930
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 22DC0C47077
+	for <webhook@archiver.kernel.org>; Tue, 16 Jan 2024 17:10:56 +0000 (UTC)
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+ by mx.groups.io with SMTP id smtpd.web10.21903.1705425051623068482
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Jan 2024 08:53:13 -0800
+ Tue, 16 Jan 2024 09:10:52 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=esCDlDIn;
- spf=pass (domain: smile.fr, ip: 209.85.128.54, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-40d6b4e2945so113662815e9.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 16 Jan 2024 08:53:12 -0800 (PST)
+ dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=tPKPljf9;
+ spf=pass (domain: smile.fr, ip: 209.85.128.48, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-40e857ce784so6769565e9.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 16 Jan 2024 09:10:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1705423990; x=1706028790; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:organization:from
-         :content-language:references:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=8CePzJV2FOuU2y56eC55pi40e74F1hKGGNOVIwvJ/N8=;
-        b=esCDlDInyTJXwO4PkicwPo2pXXArZz2wq3GOVazVuXXZzmEcSAXlrzEfsr1o3ARcR8
-         A++zJzQ1sZ7Ab5cAJuSkoSLs00dEqK63Q8c57AdP6VYr4VIj+rp9g98pRkAPIZut/X9u
-         oWD+AO2+nEVutWClgGexjam50+pmazMFLxHVfjRlWe7RkX9QXkd1XEWYYiQnSYgD3ghT
-         FAZqLgVOeZv7v0jIGZhtD8q9y4Ll7O7IhU3FJu1V3tv1Ce32UuJ3+vCSSF8SQT18iMVB
-         qbDH7KJbvNAda68k5QsQ8ElcY+afFuUYvWnsmBCl02YtLqPZOUJN8jANJ/a8meTojnV+
-         x+QA==
+        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1705425049; x=1706029849; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=poFsFPz7p8WUFHVabQpSghuPx6d2Bnb8myhgBX9CS1A=;
+        b=tPKPljf9TzRj0OviDnLJxAQDwUOnWRj0+DBoew8BId9x+UVnigLDcq4xWyppfmwSVd
+         TNeZ0dZ40qXTWCENy0mEhFHlT9YEGCNtg6pJJd+aeMovEa0YjnuBl6hH0RU7GYo7v6qE
+         f2Z/6UJ0gvDd136UJ+O/rQGV1myrgPhT2uADNhLQOVwmmQbZ3DZS54H56+tSkdh8+WN7
+         7WtKJ/8vNOXOTzH6l8+qg7UUvlPUV5XLLEZT23hiSrnTEpiByNkKnCKZePrKmZYurhsD
+         SGcC4sbzxa+KibQmT2HMViwfQODW+f5LIsVHrQ4icvZf5fbDaZAm7kEwX4bdORlKvGXh
+         03Lw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1705423990; x=1706028790;
-        h=content-transfer-encoding:in-reply-to:organization:from
-         :content-language:references:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1705425049; x=1706029849;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=8CePzJV2FOuU2y56eC55pi40e74F1hKGGNOVIwvJ/N8=;
-        b=lmq1gF2r/DNeaH2HrVyYE5qVWf7LQXfqdED8gADX6JgujvdXf2BwA/mcK9x9DKCrY3
-         fFspIHYJN8kZOeQ+Rr007rDr0G6xKTHzKJLM9OiU+oixTxJKrO4GZL0QZODlJ9hcIUca
-         3SctyCbEFdNXYxyLfFEblRM2P71f7AGDeptiilIIEAIG6yMJf1P4Ng+vkwq1otFIUCos
-         7cnfk/OzhcNyM8Ts2QHHXLc+yrS5QQ/WF/KyOZUQQVcdMlDZAO/SsKCN/QR7k2ySeb57
-         3PRF3byRBkNexUA4Lxpib6k0+n9UeZIUowjhtq6dnLdhKFW+YdksQK8/+Oi0p5gW8kEl
-         6E/g==
-X-Gm-Message-State: AOJu0Yzb0bVZ8C3fpr68dE6VNrQZygfAvE/Uz1YaJkNnC+zT7eGmBPrq
-	3hEEgP6SMy8Vqd+HmDduOejfNFFWRkqtZy2bswKb9swOUQZt2w==
-X-Google-Smtp-Source: AGHT+IE8hY9xOdA9/0npmktF4teI/95S1S0xc2FfdIT/TwMUt4ry1WDSjhKbQD7nSC5DWEMWCsXIiw==
-X-Received: by 2002:a05:600c:6a04:b0:40d:8356:e8bc with SMTP id jj4-20020a05600c6a0400b0040d8356e8bcmr3068849wmb.194.1705423990331;
-        Tue, 16 Jan 2024 08:53:10 -0800 (PST)
-Received: from [192.168.0.28] ([89.159.1.53])
-        by smtp.gmail.com with ESMTPSA id r19-20020a05600c459300b0040e42391a12sm19671221wmo.13.2024.01.16.08.53.09
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 16 Jan 2024 08:53:10 -0800 (PST)
-Message-ID: <7502f2b0-f452-4b03-9af3-8f4c52c57c0e@smile.fr>
-Date: Tue, 16 Jan 2024 17:53:09 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-python][PATCH] python3-pytest-cov: add missing
- python3-coverage dependency
-To: openembedded-devel@lists.openembedded.org
-References: <20240103095602.2737711-1-dev@g0hl1n.net>
- <170468202896.912276.243218147597829225.b4-ty@gmail.com>
-Content-Language: en-US
+        bh=poFsFPz7p8WUFHVabQpSghuPx6d2Bnb8myhgBX9CS1A=;
+        b=xCv9DFQUPcIr2YDiMHFJTS1WgKlUfahn317JHIAvbHfRRrJcmAkR3y5IMi3pRvhXYv
+         fz3C92jeh3jYjytGxj0KF8pWdTADvhdGZEG35ieLzd821HT6RVSbOZg5Y+NO8NbeNzEj
+         TVhsf6hJMds2gdj7+BcEi9fW+fhUX1SRVTGiystHjYTH+Y3H/Nh6iPzaJVaFz2KP3hAi
+         rXRpDUxbQz/LDqs9hsd6FVsNt3c6M/M0YPSX2VKtmS3QjPdTzha9FtXq9TEKp7FuPvyA
+         G3RU5xi2VwrMy1UnhuQ2OUQcFB1KoMhkTEgRfUoBjoqD/GZmCQqGS1EnoHx2xCd+a6lv
+         2Lag==
+X-Gm-Message-State: AOJu0YwfxRGVgA5CmUgEsA6BLgrgKEc2Aq7S3E40s1NtjrFn7QfHFb+M
+	XWloJQEDWdYRD+Q6kJiTzaLK7dL3BxxQYF7xAJL/vwfY4eMNDw==
+X-Google-Smtp-Source: AGHT+IEAo3nw3XMue6BrLc+YLeYw2jiynUMMfS9YbX8kI9t8y4lpiJMLrT2Z/oJDOHhCtgjXV53Cog==
+X-Received: by 2002:a05:600c:491d:b0:40e:3ab2:3cba with SMTP id f29-20020a05600c491d00b0040e3ab23cbamr4197381wmp.158.1705425049113;
+        Tue, 16 Jan 2024 09:10:49 -0800 (PST)
+Received: from P-ASN-ECS-830T8C3.local ([89.159.1.53])
+        by smtp.gmail.com with ESMTPSA id bg42-20020a05600c3caa00b0040e3733a32bsm23658741wmb.41.2024.01.16.09.10.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 16 Jan 2024 09:10:48 -0800 (PST)
 From: Yoann Congal <yoann.congal@smile.fr>
-Organization: Smile ECS
-In-Reply-To: <170468202896.912276.243218147597829225.b4-ty@gmail.com>
-Content-Type: text/plain; charset=UTF-8
+To: openembedded-devel@lists.openembedded.org
+Cc: Yoann Congal <yoann.congal@smile.fr>
+Subject: [meta-oe][PATCH] packagegroup-meta-oe: remove mongodb
+Date: Tue, 16 Jan 2024 18:10:31 +0100
+Message-Id: <20240116171031.3015154-1-yoann.congal@smile.fr>
+X-Mailer: git-send-email 2.39.2
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 16 Jan 2024 16:53:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108305
+ <openembedded-devel@lists.openembedded.org>; Tue, 16 Jan 2024 17:10:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108306
 
-Le 08/01/2024 à 03:47, Khem Raj a écrit :
-> 
-> On Wed, 03 Jan 2024 10:56:02 +0100, Richard Leitner wrote:
->> As reported by "pip3 check" python3-pytest-cov depends on
->> python3-coverage:
->>
->> 	$ pip3 check
->> 	pytest-cov 4.1.0 requires coverage, which is not installed.
->>
->> This patch fixes this problem by adding python3-coverage to RDEPENDS
->>
->> [...]
-> 
-> Applied, thanks!
-> 
-> [1/1] python3-pytest-cov: add missing python3-coverage dependency
->       commit: b56ab3d10999f77cb429881b73b52fe2991ad4e3
+mongodb is skipped pending a port to Python 3.12. But there is no plan
+to actually do this port so, in the meantime, remove mongodb from
+packagegroup-meta-oe to avoid an unbuildable dependency.
 
-Hi,
+This patch may be reverted once mongodb has been ported to Python 3.12.
 
-This caused https://autobuilder.yoctoproject.org/typhoon/#/builders/156/builds/206:
-  stdio: WARNING: Nothing RPROVIDES 'nativesdk-python3-coverage' (but virtual:nativesdk:/home/pokybuild/yocto-worker/meta-oe-mirror/build/meta-openembedded/meta-python/recipes-devtools/python/python3-pytest-cov_4.1.0.bb RDEPENDS on or otherwise requires it)
-  stdio: WARNING: Nothing RPROVIDES 'python3-coverage-native' (but virtual:native:/home/pokybuild/yocto-worker/meta-oe-mirror/build/meta-openembedded/meta-python/recipes-devtools/python/python3-pytest-cov_4.1.0.bb RDEPENDS on or otherwise requires it)
+[0]: https://lists.openembedded.org/g/openembedded-devel/message/108300
 
-python3-pytest-cov does BBCLASSEXTEND = "native nativesdk" does the new dependency python3-coverage does not.
+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+---
+ .../recipes-core/packagegroups/packagegroup-meta-oe.bbappend | 5 -----
+ 1 file changed, 5 deletions(-)
 
-So, python3-pytest-cov-native and nativesdk-python3-pytest-cov do become unbuildable. We can either :
-* keep the dependency and remove the BBCLASSEXTEND
-* add the necessary BBCLASSEXTEND to the python3-pytest-cov dependencies (recursively) starting with python3-coverage
-
-Regards,
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-core/packagegroups/packagegroup-meta-oe.bbappend b/meta-oe/dynamic-layers/meta-python/recipes-core/packagegroups/packagegroup-meta-oe.bbappend
+index db1813189..7fff849ec 100644
+--- a/meta-oe/dynamic-layers/meta-python/recipes-core/packagegroups/packagegroup-meta-oe.bbappend
++++ b/meta-oe/dynamic-layers/meta-python/recipes-core/packagegroups/packagegroup-meta-oe.bbappend
+@@ -1,12 +1,7 @@
+ RDEPENDS:packagegroup-meta-oe-devtools += "\
+     python3-distutils-extra \
+     rwmem \
+-    mongodb \
+ "
+-RDEPENDS:packagegroup-meta-oe-devtools:remove:riscv64 = "mongodb"
+-RDEPENDS:packagegroup-meta-oe-devtools:remove:riscv32 = "mongodb"
+-RDEPENDS:packagegroup-meta-oe-devtools:remove:mipsarch = "mongodb"
+-RDEPENDS:packagegroup-meta-oe-devtools:remove:powerpc = "mongodb"
+ 
+ RDEPENDS:packagegroup-meta-oe-connectivity += "\
+     lirc \
 -- 
-Yoann Congal
-Smile ECS - Tech Expert
+2.39.2
+
 
