@@ -1,96 +1,74 @@
-Return-Path: <alperyasinak1@gmail.com>
+Return-Path: <alex.kanavin@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8551BC4706C
-	for <webhook@archiver.kernel.org>; Tue, 16 Jan 2024 05:13:32 +0000 (UTC)
-Received: from mail-lf1-f54.google.com (mail-lf1-f54.google.com [209.85.167.54])
- by mx.groups.io with SMTP id smtpd.web11.5188.1705382003502711081
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E0AF8C47077
+	for <webhook@archiver.kernel.org>; Tue, 16 Jan 2024 09:30:33 +0000 (UTC)
+Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com [209.85.167.45])
+ by mx.groups.io with SMTP id smtpd.web11.9413.1705397427178722097
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Jan 2024 21:13:23 -0800
+ Tue, 16 Jan 2024 01:30:27 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=O0BkPcVy;
- spf=pass (domain: gmail.com, ip: 209.85.167.54, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-lf1-f54.google.com with SMTP id 2adb3069b0e04-50e72e3d435so9055131e87.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 15 Jan 2024 21:13:23 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=SmqDKI2P;
+ spf=pass (domain: gmail.com, ip: 209.85.167.45, mailfrom: alex.kanavin@gmail.com)
+Received: by mail-lf1-f45.google.com with SMTP id 2adb3069b0e04-50e78f1f41fso10144999e87.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 16 Jan 2024 01:30:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1705382001; x=1705986801; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=HiowO+EJa8FJL3Vpv3Jv06NDNgaPT6C8IWuybBnUN+w=;
-        b=O0BkPcVyxXb3xpLiUz0QgmRZwbvgZGmkutqbdyYm0679MNlddkj3BWTtL6+mDr2I49
-         YJqWf8FZYdnjf05EkO7bb1N9a1owRgIFUAkYDFQoB3tytgrBSqdJQXmkHr0+rktaSvO1
-         zG8zzZiPETbx7Io/y3j4WTVrIaGFZlKk1Zv4Gmiu8NDAHPXKdd0YF9xUf/8gS69iDtU4
-         jMlqz56XOLqUjF0RmuVGvmFDeQB+i93kRN9cywrXAHr0ypA7dx/3AfXAiJgPWAWvXHno
-         PHkiyOb3VNrnueMW0SS66XJqRrEnNQq+VSntQ7l0a5ikV4qYj1arUCAlHPnen0l2Y+tH
-         U/Hg==
+        d=gmail.com; s=20230601; t=1705397425; x=1706002225; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=pkkXswt0Wb/0pOvChIpJVhpMW2bMIuAaU4RJoDAvV5s=;
+        b=SmqDKI2Pc8DpZeqtoxWqh/P2hVvt1BLQazPkdTppBUHqj6Dr+EoLNBjiy9TUlgh2/d
+         ojc1FDwGlOFkR67RtzglwnGpArdynhl1giUDSvPCEQtmKttIkaF1O6qJ43olLHm5SCNG
+         6UObyrfFUGe2UuVFEfmqTaz3MmQbDPXTV0Vb+ev4uD5cpmSoNPgOUM4NWjPKl0uXarwv
+         78uUTtIO3w4quBghxW34CnUDFQvcNAri93e9N77OOlI0AA3fc9370RC47tR224AicutO
+         ceK3h2qb+qNebTtln+E6pn+9oPDk9w4XOr3YShZddTsVXZocuYIXhGmFqkuFthicnEKv
+         njyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1705382001; x=1705986801;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1705397425; x=1706002225;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=HiowO+EJa8FJL3Vpv3Jv06NDNgaPT6C8IWuybBnUN+w=;
-        b=vsgxejaaIbZji+sCxQtcwBr7yorkDqz9T0g+1bGokzPVZX8kMeNjcXzh2wZOteUGW8
-         PQBqgitGv4ZfZ6Q55G0b8KgHlJYJvS6pPQDZEKvKNyfvsG3QI57fP5V6WsbS1GO5iOvM
-         hEUE4R8eWVQ5vhXxdUXGl0KWlKG1uNsXk6k3hZBIZkXdKZcYGZtnR8Zb3n+jKv9m3kjL
-         vQvm6ojce/p3TciEdRAfQsZdcMTfSg9SG/CTSbc+G/MISCX+75n+R9YZgGgo4bKol16I
-         ViXqq+8X40s1PsO1Owe34X0V2OG5N+Z6u3agIRldoYfMrKVWjzZqYAp+oO5FkWfS+YNR
-         TWWg==
-X-Gm-Message-State: AOJu0YweqPgaLXu6uYhLqW4zxHxtvS3pZYsorIduWxKx+QsQ2woQ+PqV
-	Kw5OpOu6mgWVQS0amWZ8j43RvF5LQ6wb/w==
-X-Google-Smtp-Source: AGHT+IGb9p1yi1sVutLj6D6q7o7Zs0GLkaJIu/6tlxlD97asfjzrPdATnrGEiJJN8f5pGzJFTXZRfQ==
-X-Received: by 2002:ac2:43ac:0:b0:50e:6859:bf27 with SMTP id t12-20020ac243ac000000b0050e6859bf27mr1782580lfl.36.1705382000894;
-        Mon, 15 Jan 2024 21:13:20 -0800 (PST)
-Received: from localhost.localdomain ([176.33.66.82])
-        by smtp.gmail.com with ESMTPSA id i18-20020a170906091200b00a2c2b475a0esm5997848ejd.105.2024.01.15.21.13.19
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 15 Jan 2024 21:13:20 -0800 (PST)
-From: alperak <alperyasinak1@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-multimedia][PATCH] libebml: upgrade 1.4.4 -> 1.4.5
-Date: Tue, 16 Jan 2024 08:13:16 +0300
-Message-Id: <20240116051316.18788-1-alperyasinak1@gmail.com>
-X-Mailer: git-send-email 2.25.1
+        bh=pkkXswt0Wb/0pOvChIpJVhpMW2bMIuAaU4RJoDAvV5s=;
+        b=bCFLl25GB1G9Y3kx5uwlN2c5GgvFv/vCjQ12f25V11xjfhZAUKAlKw8x/ZeIPJQo8A
+         vUN7dVgSCZUN0Im82v4WJoKWJ9KTFbY39miKgFXq7WD+fR+VS8U6ssmk9IHrmWdYq87r
+         QO0D579m3+Bfpgp8YVxifQOzKXdUuwx0lyjONIVEAkyZX2ZANBKnn//8Tm4RQ4E38WYF
+         CbZ7XjLk+BcAcSMbxw1url87SX4F1Rfjg4rUvEW7/veBJ2IS9eu6SxG+GUqM0ClVv2ED
+         ZRFWQLvbV+2WnAe3LZICmwL0hSxIUMac2HaZcGdF5OJC0XYpbML0RasZ+CQfTQLtgv1J
+         7JtA==
+X-Gm-Message-State: AOJu0Yxu2psbUlJdkgZjTOfvP/Kqb8GtdvRPS5VHPcVGDLJeez9aUnGG
+	iPbRJAXQQC7nWhM70V04iiD6nzu0Gn0rCRbBN9o=
+X-Google-Smtp-Source: AGHT+IGFfR6+HwJpvODNIEA4TyPPxmM9UZ8ZkL6ySu1jy8HAdNxnJUUOMVxFZiUqcbaFjqZV2wYM/nQwlPdzYuqFCdY=
+X-Received: by 2002:a05:6512:224f:b0:50e:f73b:fe68 with SMTP id
+ i15-20020a056512224f00b0050ef73bfe68mr1616370lfu.107.1705397425245; Tue, 16
+ Jan 2024 01:30:25 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20231231122329.405225-1-alex@linutronix.de> <20231231122329.405225-18-alex@linutronix.de>
+ <e056ee1f-78b3-4f94-947a-c8b159717097@bootlin.com>
+In-Reply-To: <e056ee1f-78b3-4f94-947a-c8b159717097@bootlin.com>
+From: Alexander Kanavin <alex.kanavin@gmail.com>
+Date: Tue, 16 Jan 2024 10:30:13 +0100
+Message-ID: <CANNYZj-Q+GSw7VWkOu=mMCNCFZ4vO18Q9cztOtv8qowT0rQE-g@mail.gmail.com>
+Subject: Re: [PATCH 18/23] mongodb: skip until python 3.12 fixes are available.
+To: Joao Marcos Costa <joaomarcos.costa@bootlin.com>
+Cc: openembedded-devel@lists.openembedded.org, 
+	Alexander Kanavin <alex@linutronix.de>, Alexandre Belloni <alexandre.belloni@bootlin.com>, raj.khem@gmail.com
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 16 Jan 2024 05:13:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108299
+ <openembedded-devel@lists.openembedded.org>; Tue, 16 Jan 2024 09:30:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108300
 
-Changelog:
+On Tue, 16 Jan 2024 at 10:24, Joao Marcos Costa
+<joaomarcos.costa@bootlin.com> wrote:
+> Would you have any updates on this porting?
 
-44e5095317faf33a0ba318b98a04fc5d60a192dc NEWS: add entry about invalid memory access bug fix
-f3249a701df76185103c978f3693684bb0c84b74 MemIOCallback: fix buffer overflow when writing too much data
-4c0d757d6de529e8dda6bb6ca08369d5f9bffdb3 MemIOCallback: fix buffer overflow when reading too much data
-f4eb4ae863bad23b70964931dcb1464d091ba2df [1.x] add a GitHub action to test ABI breakage
-3b582725864b33100902761cb8438503c163e5dd [1.x] do 1.x build actions when pushing to the v1.x branch
+I wouldn't and I don't plan to fix it. Mongodb is under a proprietary
+license that OSI rejected and thus in my opinion doesn't belong in
+meta-oe at all.
 
-Signed-off-by: alperak <alperyasinak1@gmail.com>
----
- .../recipes-mkv/libebml/{libebml_1.4.4.bb => libebml_1.4.5.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-multimedia/recipes-mkv/libebml/{libebml_1.4.4.bb => libebml_1.4.5.bb} (88%)
+If it's important to you, then you need to do the work.
 
-diff --git a/meta-multimedia/recipes-mkv/libebml/libebml_1.4.4.bb b/meta-multimedia/recipes-mkv/libebml/libebml_1.4.5.bb
-similarity index 88%
-rename from meta-multimedia/recipes-mkv/libebml/libebml_1.4.4.bb
-rename to meta-multimedia/recipes-mkv/libebml/libebml_1.4.5.bb
-index 3e37e7d2d..680380606 100644
---- a/meta-multimedia/recipes-mkv/libebml/libebml_1.4.4.bb
-+++ b/meta-multimedia/recipes-mkv/libebml/libebml_1.4.5.bb
-@@ -4,7 +4,7 @@ LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=4fbd65380cdd255951079008b364516c"
- 
- SRC_URI = "git://github.com/Matroska-Org/libebml.git;branch=v1.x;protocol=https"
--SRCREV = "8330b222fec992b295c8b2149cf70f9ff648ce4a"
-+SRCREV = "1878e784321673561039a6a37076b2736f4dc98f"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.25.1
-
+Alex
 
