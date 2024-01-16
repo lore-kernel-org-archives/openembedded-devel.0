@@ -1,98 +1,110 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E648C47DA7
-	for <webhook@archiver.kernel.org>; Tue, 16 Jan 2024 17:13:26 +0000 (UTC)
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
- by mx.groups.io with SMTP id smtpd.web11.22202.1705425198984361961
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 94A67C47077
+	for <webhook@archiver.kernel.org>; Tue, 16 Jan 2024 18:43:06 +0000 (UTC)
+Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
+ by mx.groups.io with SMTP id smtpd.web11.25695.1705430578831990583
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Jan 2024 09:13:19 -0800
+ Tue, 16 Jan 2024 10:42:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=ng9PwbYP;
- spf=pass (domain: smile.fr, ip: 209.85.128.53, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-40e7e2e04f0so16746635e9.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 16 Jan 2024 09:13:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1705425197; x=1706029997; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:organization:from:references
-         :cc:to:content-language:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=u4Kf3xtB9fjK/1u6EKWZzVcbP9Emhxhqn+CDn0Xptdk=;
-        b=ng9PwbYPHB6+hAheM0nGhKkBto4Qu4jsaq1kUqDlbJ4xl/0G2Pn1LSQVuLbLf3J8Gu
-         v/kiwd0rYdkmmgNce00oSWblvTE7qY7WiqMIe+xmb6euCFlOF9+p2YFoHRPFwxANMG9r
-         818wGucPmzkyNdaCUxzm37r/zl5UA7DxPiRDrZgXlmCCopm/oENC4bcOzLRww5NWhx6h
-         G9JVARYXfuV1/7XRtuzMSDXgujmWP2utQ22fV3+tPeXPLtE5v3/7e94rV3deKlMqO+x6
-         nya+7lOVv67BLCvzpQRd7kgzMo4iL90MWQIPy7xuFa2LXbhpvgHsfloIZM1mB6WuRat8
-         wTNA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1705425197; x=1706029997;
-        h=content-transfer-encoding:in-reply-to:organization:from:references
-         :cc:to:content-language:subject:user-agent:mime-version:date
-         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=u4Kf3xtB9fjK/1u6EKWZzVcbP9Emhxhqn+CDn0Xptdk=;
-        b=sxgY1U3oP8k6M34xY472mj0siYoM1ECJmjqMCWogTK1Iv0sXrx5CGQgVGguMR29OcU
-         8G/qvCQyyRuOUauwgNvFqFohel05eGst4Qi+v0/lhXuC+RNwyuwCWi/dtmVQ1HOo+LTY
-         zBQPemC8qeDVMy2br5bGP/k4jZSrRp+z1unOHt3EsikBYBVaeKVxHO3XTWnT5qPH2Jup
-         9Qz9s6LWFV8z/fc2I+OnelIqzHVvGT/ojkiCSN5HxiACUsgnZZk0dTCrgD8mReHznJOL
-         HAY3LTatJAgF2hqgo1tEgvFC9lMF2aRR0zqCQRG+qap2J0srvfPgtnkmDuwFnphsBUwN
-         b8dQ==
-X-Gm-Message-State: AOJu0Yzg1//Qu+F0alLwcJzCRpIdJS3ay7ZEHdilOfnL4rR2TP1KE+FD
-	VFQ+VT/X7fPAAe6zuBv+xFqI3/ovEMCOYA==
-X-Google-Smtp-Source: AGHT+IGpdwY8VRWbhIvvygByzIg0/GWSJnM2tOIjYxaMt33nvGxm1M3shLEW2onYKjaF2SAcH6P/vQ==
-X-Received: by 2002:a05:600c:3c89:b0:40e:61a6:c639 with SMTP id bg9-20020a05600c3c8900b0040e61a6c639mr4350671wmb.94.1705425197387;
-        Tue, 16 Jan 2024 09:13:17 -0800 (PST)
-Received: from [192.168.0.28] ([89.159.1.53])
-        by smtp.gmail.com with ESMTPSA id m26-20020a7bca5a000000b0040e54381a85sm19278329wml.26.2024.01.16.09.13.17
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 16 Jan 2024 09:13:17 -0800 (PST)
-Message-ID: <4abd75ec-e214-4176-9b73-530d54213680@smile.fr>
-Date: Tue, 16 Jan 2024 18:13:16 +0100
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
+Received: from fwd79.aul.t-online.de (fwd79.aul.t-online.de [10.223.144.105])
+	by mailout03.t-online.de (Postfix) with SMTP id 3EE73A90E
+	for <openembedded-devel@lists.openembedded.org>; Tue, 16 Jan 2024 19:42:56 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.163.34.153]) by fwd79.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1rPoOm-1kjk3t0; Tue, 16 Jan 2024 19:42:56 +0100
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-multimedia][PATCH] pipewire: update 1.0.0 -> 1.0.1
+Date: Tue, 16 Jan 2024 19:42:50 +0100
+Message-ID: <20240116184250.606557-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [PATCH 18/23] mongodb: skip until python 3.12 fixes are
- available.
-Content-Language: en-US
-To: Alexander Kanavin <alex.kanavin@gmail.com>,
- Joao Marcos Costa <joaomarcos.costa@bootlin.com>
-Cc: openembedded-devel@lists.openembedded.org,
- Alexander Kanavin <alex@linutronix.de>,
- Alexandre Belloni <alexandre.belloni@bootlin.com>, raj.khem@gmail.com
-References: <20231231122329.405225-1-alex@linutronix.de>
- <20231231122329.405225-18-alex@linutronix.de>
- <e056ee1f-78b3-4f94-947a-c8b159717097@bootlin.com>
- <CANNYZj-Q+GSw7VWkOu=mMCNCFZ4vO18Q9cztOtv8qowT0rQE-g@mail.gmail.com>
-From: Yoann Congal <yoann.congal@smile.fr>
-Organization: Smile ECS
-In-Reply-To: <CANNYZj-Q+GSw7VWkOu=mMCNCFZ4vO18Q9cztOtv8qowT0rQE-g@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1705430576-577A9986-A8301A50/0/0 CLEAN NORMAL
+X-TOI-MSGID: fa88ab0e-f0f3-44e4-843f-f56e0c7cb05d
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 16 Jan 2024 17:13:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108307
+ <openembedded-devel@lists.openembedded.org>; Tue, 16 Jan 2024 18:43:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108308
 
-Hello,
+This is a bugfix release that is API and ABI compatible with previous
+1.0.x releases.
 
-Le 16/01/2024 à 10:30, Alexander Kanavin a écrit :
-> On Tue, 16 Jan 2024 at 10:24, Joao Marcos Costa
-> <joaomarcos.costa@bootlin.com> wrote:
->> Would you have any updates on this porting?
-> 
-> I wouldn't and I don't plan to fix it. Mongodb is under a proprietary
-> license that OSI rejected and thus in my opinion doesn't belong in
-> meta-oe at all.
-> 
-> If it's important to you, then you need to do the work.
+  - Work around the buggy ALSA backend in libcanberra by forcing the puls=
+e
+    backend in module-x11-bell.
+  - Fix a race in the device info updates in pulse-server.
+  - Fix timing and rate matching in ALSA sequencer.
+  - Improve timing information in JACK and from the ALSA driver.
+  - More small fixes and improvements.
 
-FYI, I've sent a patch removing mongodb from the packagegroup:
-https://lists.openembedded.org/g/openembedded-devel/message/108306
+  - Fix a build issue when examples where disabled.
+  - Avoid some compiler warnings.
+  - Avoid some bitfield data races. (#3706)
 
-Regards,
+  - Bump the PTP driver priority. (#3217)
+  - Support the previous "allowed" permission in the access module.
+  - Fix filename leak in module-filter-chain.
+  - Work around the buggy ALSA backend in libcanberra by forcing the puls=
+e
+    backend in module-x11-bell. (#3688)
+  - Fix a race in the device info updates in pulse-server.
+  - Fix compatibility in RAOP. (#3698)
 
--- 
-Yoann Congal
-Smile ECS - Tech Expert
+  - Handle ALSA picth control errors correctly
+  - Clamp buffer-frames correctly. (#3000)
+  - Fix timing and rate matching in ALSA sequencer. (#3657)
+  - Revert a commit that could result in current time in the future in th=
+e
+    timing updates.
+  - Improve adapter state checks.
+  - Remove the timer from the ALSA pcm.
+  - Fix timeout in freewheel driver.
+
+  - Also handle active ports for monitor sources.
+  - Fix zeroconf-publish format properties.
+
+  - Improve timing and transport calculations.
+  - Handle -ENOENT from the core and don't error out.
+
+  - Handle node port removal in the device provider. (#3708)
+  - Improve error handling while connecting.
+  - Fix dts_offset.
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ .../pipewire/{pipewire_1.0.0.bb =3D> pipewire_1.0.1.bb}         | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_1.0.0.bb =3D=
+> pipewire_1.0.1.bb} (99%)
+
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.0.0.b=
+b b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.0.1.bb
+similarity index 99%
+rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_1.0.0.bb
+rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_1.0.1.bb
+index b4da781f0..a312594ad 100644
+--- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.0.0.bb
++++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.0.1.bb
+@@ -12,8 +12,8 @@ LIC_FILES_CHKSUM =3D " \
+=20
+ DEPENDS =3D "dbus ncurses"
+=20
+-SRCREV =3D "4debdcd40b055b3eaa83a8f4443aa990ea566bfe"
+-SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
+master;protocol=3Dhttps"
++SRCREV =3D "79b98884af80329f59596906231da5597bcdb7b6"
++SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
+1.0;protocol=3Dhttps"
+=20
+ S =3D "${WORKDIR}/git"
+=20
+--=20
+2.43.0
+
 
