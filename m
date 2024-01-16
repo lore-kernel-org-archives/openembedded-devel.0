@@ -1,74 +1,167 @@
-Return-Path: <alex.kanavin@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E0AF8C47077
-	for <webhook@archiver.kernel.org>; Tue, 16 Jan 2024 09:30:33 +0000 (UTC)
-Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com [209.85.167.45])
- by mx.groups.io with SMTP id smtpd.web11.9413.1705397427178722097
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CAD8BC47077
+	for <webhook@archiver.kernel.org>; Tue, 16 Jan 2024 12:34:14 +0000 (UTC)
+Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com [209.85.128.177])
+ by mx.groups.io with SMTP id smtpd.web10.12389.1705408452482565842
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Jan 2024 01:30:27 -0800
+ Tue, 16 Jan 2024 04:34:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=SmqDKI2P;
- spf=pass (domain: gmail.com, ip: 209.85.167.45, mailfrom: alex.kanavin@gmail.com)
-Received: by mail-lf1-f45.google.com with SMTP id 2adb3069b0e04-50e78f1f41fso10144999e87.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 16 Jan 2024 01:30:26 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=GxR9S3qZ;
+ spf=pass (domain: gmail.com, ip: 209.85.128.177, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f177.google.com with SMTP id 00721157ae682-5ed10316e22so88577267b3.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 16 Jan 2024 04:34:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1705397425; x=1706002225; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=pkkXswt0Wb/0pOvChIpJVhpMW2bMIuAaU4RJoDAvV5s=;
-        b=SmqDKI2Pc8DpZeqtoxWqh/P2hVvt1BLQazPkdTppBUHqj6Dr+EoLNBjiy9TUlgh2/d
-         ojc1FDwGlOFkR67RtzglwnGpArdynhl1giUDSvPCEQtmKttIkaF1O6qJ43olLHm5SCNG
-         6UObyrfFUGe2UuVFEfmqTaz3MmQbDPXTV0Vb+ev4uD5cpmSoNPgOUM4NWjPKl0uXarwv
-         78uUTtIO3w4quBghxW34CnUDFQvcNAri93e9N77OOlI0AA3fc9370RC47tR224AicutO
-         ceK3h2qb+qNebTtln+E6pn+9oPDk9w4XOr3YShZddTsVXZocuYIXhGmFqkuFthicnEKv
-         njyw==
+        d=gmail.com; s=20230601; t=1705408451; x=1706013251; darn=lists.openembedded.org;
+        h=content-transfer-encoding:autocrypt:subject:from:to
+         :content-language:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=O0X4rMmGGy0EUAJShYleNfB36UEsg3rwu2zf34bWQ1Q=;
+        b=GxR9S3qZdsZ960Hbn4bs8B2ck9ThpAE8V7RQlbmfekCz8rsolfMZF91lNmqZkyrRZn
+         HcRmyIalGd3VzIqxSZUwuIz4t18TTfB4RoCSP3C5lWqwZ+0yV1kBfJ3JBg4n8xQqbB3u
+         C01BuiRuW9J+OqyqvklI9aD79+Vs58MaQXXxYlH4hy4B4ENpvOP1QLh/LNaVJiFFUGf4
+         z+uPS1z49OndRs5qfYgcwSWB9VPmT0Q+Only1oogRYEhrKBNOvPVgUT5GJ93QHuk+ocW
+         +YKPYqrGuw3EaPqNyw2z4Y4QtFm+WOODXSBn18nirgXV0WU0G2H7k7NfB9B2UXGBNjy3
+         ZoSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1705397425; x=1706002225;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=pkkXswt0Wb/0pOvChIpJVhpMW2bMIuAaU4RJoDAvV5s=;
-        b=bCFLl25GB1G9Y3kx5uwlN2c5GgvFv/vCjQ12f25V11xjfhZAUKAlKw8x/ZeIPJQo8A
-         vUN7dVgSCZUN0Im82v4WJoKWJ9KTFbY39miKgFXq7WD+fR+VS8U6ssmk9IHrmWdYq87r
-         QO0D579m3+Bfpgp8YVxifQOzKXdUuwx0lyjONIVEAkyZX2ZANBKnn//8Tm4RQ4E38WYF
-         CbZ7XjLk+BcAcSMbxw1url87SX4F1Rfjg4rUvEW7/veBJ2IS9eu6SxG+GUqM0ClVv2ED
-         ZRFWQLvbV+2WnAe3LZICmwL0hSxIUMac2HaZcGdF5OJC0XYpbML0RasZ+CQfTQLtgv1J
-         7JtA==
-X-Gm-Message-State: AOJu0Yxu2psbUlJdkgZjTOfvP/Kqb8GtdvRPS5VHPcVGDLJeez9aUnGG
-	iPbRJAXQQC7nWhM70V04iiD6nzu0Gn0rCRbBN9o=
-X-Google-Smtp-Source: AGHT+IGFfR6+HwJpvODNIEA4TyPPxmM9UZ8ZkL6ySu1jy8HAdNxnJUUOMVxFZiUqcbaFjqZV2wYM/nQwlPdzYuqFCdY=
-X-Received: by 2002:a05:6512:224f:b0:50e:f73b:fe68 with SMTP id
- i15-20020a056512224f00b0050ef73bfe68mr1616370lfu.107.1705397425245; Tue, 16
- Jan 2024 01:30:25 -0800 (PST)
+        d=1e100.net; s=20230601; t=1705408451; x=1706013251;
+        h=content-transfer-encoding:autocrypt:subject:from:to
+         :content-language:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=O0X4rMmGGy0EUAJShYleNfB36UEsg3rwu2zf34bWQ1Q=;
+        b=qM9vYf3MbgNs4/isQf72Oe+uVjC9V4GhG9BiwOKPFWRTU59hJtA9zs3zb95+eIWiEj
+         V07W0Y4175b++0AKrGgMk1Ow+bCDLTMEoRAPopzeabGfZ/Gns/E463Cvy/8Y+QcIpERL
+         6S84YEfHD9WiX38/eTbe1tfoJ2yapTeJ2+TE9Zoo+rdLY69Q5Q4v4mfhM8J/qgnl+TJ2
+         4UgWfNLdTsAHh41XqYCr+ETdNbLVrlgVGqX26R/uDrmNWkFHc3JarCJBnU75neNZpAsP
+         IxeZ0g3Uooroluh8EMEugWZvL6s+DnFrr+xgEw8iDKSVWB3IUcxmCGLwLechZtX2qFVs
+         tNhA==
+X-Gm-Message-State: AOJu0Yw1wozWofY3VCETZYi+mHSi2tG0SaD1458KXq0+OVAhUEIK9BIn
+	oN84OW9vYXgZN7NQ6B/zS1s=
+X-Google-Smtp-Source: AGHT+IEFaFatgILtBtdFUEKB8a8QcbiJsedwZbNG+dTApIZpm+6VDYUeTMr05m/Z4xz6Z/cssF8rMg==
+X-Received: by 2002:a81:b607:0:b0:5ff:4c50:1010 with SMTP id u7-20020a81b607000000b005ff4c501010mr787780ywh.35.1705408451607;
+        Tue, 16 Jan 2024 04:34:11 -0800 (PST)
+Received: from ?IPV6:2600:1700:9190:ba10:da88:1700:b0e6:e4bd? ([2600:1700:9190:ba10:da88:1700:b0e6:e4bd])
+        by smtp.gmail.com with ESMTPSA id o63-20020a0dcc42000000b005ff407a35aesm962108ywd.84.2024.01.16.04.34.11
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 16 Jan 2024 04:34:11 -0800 (PST)
+Message-ID: <3c5ecef2-afbe-4dea-92a4-b79a0bb47a53@gmail.com>
+Date: Tue, 16 Jan 2024 07:34:10 -0500
 MIME-Version: 1.0
-References: <20231231122329.405225-1-alex@linutronix.de> <20231231122329.405225-18-alex@linutronix.de>
- <e056ee1f-78b3-4f94-947a-c8b159717097@bootlin.com>
-In-Reply-To: <e056ee1f-78b3-4f94-947a-c8b159717097@bootlin.com>
-From: Alexander Kanavin <alex.kanavin@gmail.com>
-Date: Tue, 16 Jan 2024 10:30:13 +0100
-Message-ID: <CANNYZj-Q+GSw7VWkOu=mMCNCFZ4vO18Q9cztOtv8qowT0rQE-g@mail.gmail.com>
-Subject: Re: [PATCH 18/23] mongodb: skip until python 3.12 fixes are available.
-To: Joao Marcos Costa <joaomarcos.costa@bootlin.com>
-Cc: openembedded-devel@lists.openembedded.org, 
-	Alexander Kanavin <alex@linutronix.de>, Alexandre Belloni <alexandre.belloni@bootlin.com>, raj.khem@gmail.com
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Khem Raj <raj.khem@gmail.com>,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: akuster808 <akuster808@gmail.com>
+Subject: Dunfell merge request: Jan 16th
+Autocrypt: addr=akuster808@gmail.com; keydata=
+ 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
+ ApZ86eOP
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 16 Jan 2024 09:30:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108300
+ <openembedded-devel@lists.openembedded.org>; Tue, 16 Jan 2024 12:34:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108301
 
-On Tue, 16 Jan 2024 at 10:24, Joao Marcos Costa
-<joaomarcos.costa@bootlin.com> wrote:
-> Would you have any updates on this porting?
+The following changes since commit fc632d5bb0936e91e4e0191547b9aa8ca47b4ffe:
 
-I wouldn't and I don't plan to fix it. Mongodb is under a proprietary
-license that OSI rejected and thus in my opinion doesn't belong in
-meta-oe at all.
+   wireshark: fix CVE-2022-4345 multiple (BPv6, OpenFlow, and Kafka 
+protocol) dissector infinite loops (2023-12-17 15:36:42 -0500)
 
-If it's important to you, then you need to do the work.
+are available in the Git repository at:
 
-Alex
+   https://git.openembedded.org/meta-openembedded dunfell-next
+
+for you to fetch changes up to daa4619fe3fbf8c28f342c4a7163a84a330f7653:
+
+   postgresql: Update to 12.17 (2024-01-16 07:31:14 -0500)
+
+----------------------------------------------------------------
+Hitendra Prajapati (1):
+       proftpd: Fix CVE-2023-51713 Out-of-bounds buffer read
+
+Robert Joslyn (1):
+       postgresql: Update to 12.17
+
+Vijay Anusuri (1):
+       strongswan: Backport fix for CVE-2023-41913
+
+virendra thakur (2):
+       opensc: Fix CVE-2023-40660
+       opensc: Fix CVE-2023-40661
+
+  .../recipes-daemons/proftpd/files/CVE-2023-51713.patch          | 278 
+++++++++++++++++++++++++++++
+  meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb        | 1 +
+  .../recipes-support/strongswan/files/CVE-2023-41913.patch       | 46 +++++
+  meta-networking/recipes-support/strongswan/strongswan_5.8.4.bb  | 1 +
+  .../postgresql/{postgresql_12.16.bb => postgresql_12.17.bb} |   2 +-
+  meta-oe/recipes-support/opensc/opensc/CVE-2023-40660.patch      | 55 
+++++++
+  meta-oe/recipes-support/opensc/opensc/CVE-2023-40661-1.patch    | 47 +++++
+  meta-oe/recipes-support/opensc/opensc/CVE-2023-40661-2.patch    | 32 ++++
+  meta-oe/recipes-support/opensc/opensc/CVE-2023-40661-3.patch    | 31 ++++
+  meta-oe/recipes-support/opensc/opensc/CVE-2023-40661-4.patch    | 28 +++
+  meta-oe/recipes-support/opensc/opensc/CVE-2023-40661-5.patch    | 30 +++
+  meta-oe/recipes-support/opensc/opensc/CVE-2023-40661-6.patch    | 30 +++
+  meta-oe/recipes-support/opensc/opensc/CVE-2023-40661-7.patch    | 40 ++++
+  meta-oe/recipes-support/opensc/opensc_0.20.0.bb                 | 8 +
+  14 files changed, 628 insertions(+), 1 deletion(-)
+  create mode 100644 
+meta-networking/recipes-daemons/proftpd/files/CVE-2023-51713.patch
+  create mode 100644 
+meta-networking/recipes-support/strongswan/files/CVE-2023-41913.patch
+  rename meta-oe/recipes-dbs/postgresql/{postgresql_12.16.bb => 
+postgresql_12.17.bb} (73%)
+  create mode 100644 
+meta-oe/recipes-support/opensc/opensc/CVE-2023-40660.patch
+  create mode 100644 
+meta-oe/recipes-support/opensc/opensc/CVE-2023-40661-1.patch
+  create mode 100644 
+meta-oe/recipes-support/opensc/opensc/CVE-2023-40661-2.patch
+  create mode 100644 
+meta-oe/recipes-support/opensc/opensc/CVE-2023-40661-3.patch
+  create mode 100644 
+meta-oe/recipes-support/opensc/opensc/CVE-2023-40661-4.patch
+  create mode 100644 
+meta-oe/recipes-support/opensc/opensc/CVE-2023-40661-5.patch
+  create mode 100644 
+meta-oe/recipes-support/opensc/opensc/CVE-2023-40661-6.patch
+  create mode 100644 
+meta-oe/recipes-support/opensc/opensc/CVE-2023-40661-7.patch
+
 
