@@ -1,119 +1,100 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 15D14C47077
-	for <webhook@archiver.kernel.org>; Tue, 16 Jan 2024 23:50:58 +0000 (UTC)
-Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
- by mx.groups.io with SMTP id smtpd.web10.34745.1705449055898849027
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4024DC47077
+	for <webhook@archiver.kernel.org>; Wed, 17 Jan 2024 01:13:24 +0000 (UTC)
+Received: from mail-yw1-f170.google.com (mail-yw1-f170.google.com [209.85.128.170])
+ by mx.groups.io with SMTP id smtpd.web11.1288.1705454003035099102
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Jan 2024 15:50:55 -0800
+ Tue, 16 Jan 2024 17:13:23 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=jSXPc3Nw;
- spf=pass (domain: gmail.com, ip: 209.85.210.177, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f177.google.com with SMTP id d2e1a72fcca58-6db0c49e93eso7681545b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 16 Jan 2024 15:50:55 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Pd3kx0Z0;
+ spf=pass (domain: gmail.com, ip: 209.85.128.170, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f170.google.com with SMTP id 00721157ae682-5f15a1052b3so96172297b3.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 16 Jan 2024 17:13:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1705449055; x=1706053855; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1705454002; x=1706058802; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=MZK+U7tllR4ZG0n/8OmHupP1K5bQXa5klcDQ0bqznBY=;
-        b=jSXPc3NwgUncrg1WtmA7RtnUd/sDheMZV1csV6IZwteRrU2V0rszsxSQCgJWsGdc7E
-         GN0fLgAhT5ZR5qJk0S1KdAognsm9NMqKjdz/+YPK7vQT7aWfJFxJz9/jIdklrEEnth6z
-         Hga6gZMa2uxlSRub4GLcCTfPaQJ3B8S0bs4K52HH+XqIE/5DNACoNQVNyLcfUAyO1eAU
-         5xOsTkCXRQgHgwNzGNrLH4Bb6MMLtdPetwFmv4VfQRbHGLm+4xJ0e/AJOfjEsgzJkc/z
-         Y5MthCBIpU4voCrQbInirE9DapZLLXoadnp8p9fY0n3RZiFPdA/pTvjjXjLWMXb7aDsk
-         J8cA==
+        bh=+0DzBdMeEKLy3B+RcSPnfSJypwYo+T1CaVyREhtkZBo=;
+        b=Pd3kx0Z0Y54Ic5eLAMoE8IU8ctdV5bY6q7isXuPrbvr0NSeBqQ7RHIKkZRBFkP8kxd
+         KFbpDpUqMpdqCiyACHYJG/2qVoxgyOUA6hYyokSuwJiW8GeH8XrHyA3DpYKaf5DatfI/
+         Rvhb0li4W/e2bML3pJBxBy+ni3vLXVAdZqhdTywe5s2XJDlk5n17G8j2AeT1Tj84T0QL
+         FV+02utNMmrAAPnsujQ6LGps/cQIk1mbkqvmb29tGoSMuHa8ymE175FjZhWHCD2DtiW9
+         Pf03NpK89AXEvixPjl6x3UovAVAJ1n2TV9VABiXOrs0q61OSber4C7E2o9L68DFyUfCt
+         2+pA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1705449055; x=1706053855;
+        d=1e100.net; s=20230601; t=1705454002; x=1706058802;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=MZK+U7tllR4ZG0n/8OmHupP1K5bQXa5klcDQ0bqznBY=;
-        b=LMMlTp+uzC1YnaqAJRFlMnbFWc9fQ48KowpAclX48YKpwFEhYKYLstnZ7bWp8T0sXT
-         my1yibutPthsGqNM9hNS0zyNLTcLkcoqGkAzv3LDWXVqKm00fiEZR8saTmDh51Ukq7ma
-         sl56wDVKs5LFETSra1CAWo4Iwn6ExpMJ7HY5I0wT7hvgOG87NtwUQhGsx2bFD/H0ylHg
-         wYnqDE9De9VaQeM8fewP9/iEQ5oK/3llgs7KxmBLmoyZ+M82QAI8E+yktqkSntX6zfoR
-         /tKi96n7SMGjB8Pnfr7hTs7J1EGjNVPk8FzczPfVx0vm955K5qft2+O4BOztM05qn4xU
-         LluA==
-X-Gm-Message-State: AOJu0Yz+3XJtvkLlnI5w12njC31sgo0oIvN4VD0Cf0uQYWLp/xp5QlV3
-	C2bb7VxJhTmGfFnyUGiMYEeHnvSALKIxvA==
-X-Google-Smtp-Source: AGHT+IEDTMy4IeR9mkRPVKFWp0I/nH0agJmuE14Ws2pFcecrgXKOIFjriz3MXtu8vky1bAKfxfmkjg==
-X-Received: by 2002:a05:6a00:1b:b0:6da:3194:1e68 with SMTP id h27-20020a056a00001b00b006da31941e68mr9707787pfk.41.1705449054962;
-        Tue, 16 Jan 2024 15:50:54 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::b80b])
-        by smtp.gmail.com with ESMTPSA id z1-20020aa785c1000000b006da8b181bfbsm142182pfn.169.2024.01.16.15.50.54
+        bh=+0DzBdMeEKLy3B+RcSPnfSJypwYo+T1CaVyREhtkZBo=;
+        b=mmuMd9JMjJ/o/ZQJsYjvwiiHjfPO4gH9fp50RN2Ng5B2kaI8CPx8KPeXMtfLlsjizT
+         NCBSIk1RvmyXxfGpiBibjZ+X7A/MG5jmWMTrwMGkfllFaRXhcZEtnac71w72aSmmeGIW
+         LY5y0C1jH654M49DDr7sBDwFWBuIW4ajBkjo6a7IGCeTrma2cZs9UuLbcf3pxOK4k4ew
+         5Rp+SDUkwViPYysSwP7Ta4x7OEYX67oNbL+QshYRTNfFGc1ywcw3HU8i75OFbilxdyT9
+         X9NoQnfZJ5daBExmd+ml1uDhEdIZqrpwqGT7uB12P6nVe3yCFyByuyWqDQwCf3dcphGo
+         3ZdQ==
+X-Gm-Message-State: AOJu0YyMGcqW3jE9qyPVCt0YLignmkmutVirHhILGrCiDOz3thyW+8Pq
+	srxowcLkSvpdCd9+fIShRUnvgrV9C9c6kA==
+X-Google-Smtp-Source: AGHT+IFaHF0mqSSwZrhokD/hBv24IT8Kl3BoWm4MpNNl6pbcXP8F1K0IsN0CGziagVwE7QSTggEixw==
+X-Received: by 2002:a05:690c:d94:b0:5f8:b42d:4707 with SMTP id da20-20020a05690c0d9400b005f8b42d4707mr7266027ywb.101.1705454001873;
+        Tue, 16 Jan 2024 17:13:21 -0800 (PST)
+Received: from keaua.attlocal.net ([2600:1700:9190:ba10:5290:e922:866d:63a6])
+        by smtp.gmail.com with ESMTPSA id s188-20020a815ec5000000b005f06f997e22sm5426446ywb.50.2024.01.16.17.13.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 16 Jan 2024 15:50:54 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+        Tue, 16 Jan 2024 17:13:21 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	=?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
-Subject: [meta-oe][PATCH] opencl-icd: Rename rdepends to virtual-opencl-icd
-Date: Tue, 16 Jan 2024 15:50:52 -0800
-Message-ID: <20240116235052.3713167-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Wang Mingyu <wangmy@fujitsu.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][nanbield][PATCH 01/11] strongswan: upgrade 5.9.12 -> 5.9.13
+Date: Tue, 16 Jan 2024 20:13:10 -0500
+Message-Id: <20240117011320.1856392-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 16 Jan 2024 23:50:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108310
+ <openembedded-devel@lists.openembedded.org>; Wed, 17 Jan 2024 01:13:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108311
 
-This helps in fending off the build time QA error
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-WARNING: /mnt/b/yoe/master/sources/meta-openembedded/meta-oe/recipes-core/opencl/opencl-icd-loader_2023.12.14.bb: RPROVIDES is set to v
-irtual/opencl-icd, the substring 'virtual/' holds no meaning in this context. It is suggested to use the 'virtual-' instead.
+Changelog:
+- Fixes a regression with handling OCSP error responses and adds a new
+  option to specify the length of nonces in OCSP requests.  Also adds some
+  other improvements for OCSP handling and fuzzers for OCSP
+  requests/responses.
 
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Zoltán Böszörményi <zboszor@gmail.com>
+(cherry picked from commit 5be2e20157f3025f9e2370933267a56fd526c58e)
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/conf/layer.conf                                     | 2 +-
- meta-oe/recipes-core/opencl/ocl-icd_2.3.2.bb                | 2 +-
- meta-oe/recipes-core/opencl/opencl-icd-loader_2023.12.14.bb | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ .../strongswan/{strongswan_5.9.12.bb => strongswan_5.9.13.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-support/strongswan/{strongswan_5.9.12.bb => strongswan_5.9.13.bb} (99%)
 
-diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
-index 83a9f7d566..6b64328c81 100644
---- a/meta-oe/conf/layer.conf
-+++ b/meta-oe/conf/layer.conf
-@@ -54,7 +54,7 @@ PREFERRED_PROVIDER_android-tools-conf ?= "android-tools-conf"
- # Configures whether coreutils or uutils-coreutils is used.
- PREFERRED_PROVIDER_coreutils = "coreutils"
- PREFERRED_PROVIDER_virtual/opencl-icd ?= "opencl-icd-loader"
--PREFERRED_RPROVIDER_virtual/opencl-icd ?= "opencl-icd-loader"
-+PREFERRED_RPROVIDER_virtual-opencl-icd ?= "opencl-icd-loader"
+diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.9.12.bb b/meta-networking/recipes-support/strongswan/strongswan_5.9.13.bb
+similarity index 99%
+rename from meta-networking/recipes-support/strongswan/strongswan_5.9.12.bb
+rename to meta-networking/recipes-support/strongswan/strongswan_5.9.13.bb
+index 87d12bc6c8..4523187af2 100644
+--- a/meta-networking/recipes-support/strongswan/strongswan_5.9.12.bb
++++ b/meta-networking/recipes-support/strongswan/strongswan_5.9.13.bb
+@@ -11,7 +11,7 @@ DEPENDS:append = "${@bb.utils.contains('DISTRO_FEATURES', 'tpm2', '  tpm2-tss',
+ SRC_URI = "https://download.strongswan.org/strongswan-${PV}.tar.bz2 \
+           "
  
- SIGGEN_EXCLUDERECIPES_ABISAFE += " \
-   fbset-modes \
-diff --git a/meta-oe/recipes-core/opencl/ocl-icd_2.3.2.bb b/meta-oe/recipes-core/opencl/ocl-icd_2.3.2.bb
-index 93fac969c9..d43ea281ae 100644
---- a/meta-oe/recipes-core/opencl/ocl-icd_2.3.2.bb
-+++ b/meta-oe/recipes-core/opencl/ocl-icd_2.3.2.bb
-@@ -15,6 +15,6 @@ inherit autotools
+-SRC_URI[sha256sum] = "5e6018b07cbe9f72c044c129955a13be3e2f799ceb53f53a4459da6a922b95e5"
++SRC_URI[sha256sum] = "56e30effb578fd9426d8457e3b76c8c3728cd8a5589594b55649b2719308ba55"
  
- DEPENDS = "ruby-native"
- PROVIDES = "virtual/opencl-icd"
--RPROVIDES:${PN} = "virtual/opencl-icd"
-+RPROVIDES:${PN} = "virtual-opencl-icd"
- 
- BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-oe/recipes-core/opencl/opencl-icd-loader_2023.12.14.bb b/meta-oe/recipes-core/opencl/opencl-icd-loader_2023.12.14.bb
-index 6bf01a2484..146ec6e472 100644
---- a/meta-oe/recipes-core/opencl/opencl-icd-loader_2023.12.14.bb
-+++ b/meta-oe/recipes-core/opencl/opencl-icd-loader_2023.12.14.bb
-@@ -9,7 +9,7 @@ inherit pkgconfig cmake
- DEPENDS += "opencl-headers"
- 
- PROVIDES = "virtual/opencl-icd"
--RPROVIDES:${PN} = "virtual/opencl-icd"
-+RPROVIDES:${PN} = "virtual-opencl-icd"
- 
- S = "${WORKDIR}/git"
+ UPSTREAM_CHECK_REGEX = "strongswan-(?P<pver>\d+(\.\d+)+)\.tar"
  
 -- 
-2.43.0
+2.34.1
 
 
