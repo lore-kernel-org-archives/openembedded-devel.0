@@ -1,141 +1,91 @@
-Return-Path: <philip@balister.org>
+Return-Path: <costamagna.gianfranco@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D11ABC47258
-	for <webhook@archiver.kernel.org>; Wed, 17 Jan 2024 19:26:21 +0000 (UTC)
-Received: from letterbox.kde.org (letterbox.kde.org [46.43.1.242])
- by mx.groups.io with SMTP id smtpd.web10.12786.1705519328700479954
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C9B7C47258
+	for <webhook@archiver.kernel.org>; Wed, 17 Jan 2024 19:42:52 +0000 (UTC)
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
+ by mx.groups.io with SMTP id smtpd.web11.13598.1705520562244800068
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Jan 2024 11:22:09 -0800
+ Wed, 17 Jan 2024 11:42:42 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@kde.org header.s=users header.b=Zcf9l/s3;
- spf=pass (domain: kde.org, ip: 46.43.1.242, mailfrom: cordlandwehr@kde.org)
-Received: from behemoth.fritz.box (p200300e27f1e2400a82d5affb25f13e4.dip0.t-ipconnect.de [IPv6:2003:e2:7f1e:2400:a82d:5aff:b25f:13e4])
-	(Authenticated sender: cordlandwehr)
-	by letterbox.kde.org (Postfix) with ESMTPSA id 9DC3232CA3F;
-	Wed, 17 Jan 2024 19:22:04 +0000 (GMT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kde.org; s=users;
-	t=1705519324; bh=7Ld86oVNjxCbSJr89P7XDq/ENVtCyDdcUiCZsaVGvPM=;
-	h=From:To:Cc:Subject:Date:From;
-	b=Zcf9l/s3+6WDESJTjk4wrdBvQNeIV0VYRD70DxpBACC9CDt+Qi+KR1gk2See+wd2l
-	 NJZvCH4n2PdLYRpuPm5jnJ2ns2gQ6oanNATAgjr+5IMYImi9OeIG4uxswWn6WzrArL
-	 EPQor/wZq6uYxJF+u+3AIMKBb8NiqfvyOhhrzAg/UCpVY4S5G42Tu/Qx/ReyWXRjql
-	 CH0uF0hYRE3emvjBdfkMn57mKWNwZHn4KhmNxXUJlmTkdZobOOYnw5Cx58Kb+T7PVv
-	 Zm1OWv03Q+XstQqeLctwgWPvf8DLnTg/yv1vq+5gor1fjn4PXmj79QtvZsdVLPfSRw
-	 FvUF4Tan3OX4g==
-From: "Andreas Cord-Landwehr" <cordlandwehr@kde.org>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=cVH6aJ3j;
+ spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: costamagna.gianfranco@gmail.com)
+Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-336990fb8fbso9014575f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 17 Jan 2024 11:42:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1705520560; x=1706125360; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=BEWkuyeown3BRi/8U8YxwG/U2xQB6Dy2LIbevws5MRw=;
+        b=cVH6aJ3jcWIcIHEWw5LWQfpIA3fkF1vwynSDGtwcc1SU/kRPdoPVlizjQzPzUNacdJ
+         sZLW8o1gsmGfp/rB2VaaxIa+Q/Zq2I5o4fspUqkT2n05qDa8y1RQAYWXZlFuNdzu3FSm
+         6CmA/Ls/95CWLUtkE6y8SgBMHBfBgFZriGEhcC0eYF3kC3I4Ht0Gm9qJlZsnJ9MxQq9+
+         wagG6Y8s8b/+r0NGlIf9DbkO9dqailfZCND8Sl1r8rI4yAhgGBtvtjSOAZrJct8Aiyr9
+         np4MXTdwlrfMMewIfhl3HP6OEKBrZfHAqLaEpKPmFF9gcazV06scn2eAMoIJ7FPuZZ1d
+         yIEw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1705520560; x=1706125360;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=BEWkuyeown3BRi/8U8YxwG/U2xQB6Dy2LIbevws5MRw=;
+        b=tNDcqAJCow0k34Ekf1I9eBBR1c7UG8a+NCbC7ol7dNTviTBfIfU1NUn4hNNV6JvW0O
+         wmGVAlYXXI/I5mXo8oRQGJqSoFevu1k5Ul/8GlTV2rnfTEg9qYd5H/vAARtYcwdy2n36
+         uH9Wjg4VSaYIED1zpJ514o/b2j72Nxw6+DzjBwdbRYoF8nTKo/6ZMkSlRoyutK9MTE69
+         OwpsauOMzkc3j5Ln4UdkHoxe7A9EdjGYVzXDp9V5VwJWmktrOP9EWpP7S0nL8GgEyNMn
+         uC7E1fx8J0rR4BBTBKyjOI6+YO20XzE0SmDvsRQ7E0PhSveyOURov6k9N+FgtcB+kLxa
+         dHyg==
+X-Gm-Message-State: AOJu0YwVMPppb6Nf+zouL1I+A+U6YovYZRGU9XiS01spgcBgIsjx3Z6W
+	z1zvqNXpbyb9PKviiuu5l8gfJlo2oIk=
+X-Google-Smtp-Source: AGHT+IGpWNFGOtPBJci43/sbNiJBFVJog0rgRwtQP3zaB/UMkmZKmbVIkbA2RiHT+CwkYyc7umHEGw==
+X-Received: by 2002:a5d:4242:0:b0:337:be12:3261 with SMTP id s2-20020a5d4242000000b00337be123261mr1466807wrr.68.1705520559922;
+        Wed, 17 Jan 2024 11:42:39 -0800 (PST)
+Received: from Unimatrix08-Jammy.marelli.com (mob-5-90-42-240.net.vodafone.it. [5.90.42.240])
+        by smtp.gmail.com with ESMTPSA id h5-20020adf9cc5000000b003368849129dsm2332124wre.15.2024.01.17.11.42.38
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 17 Jan 2024 11:42:39 -0800 (PST)
+From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
+X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
 To: openembedded-devel@lists.openembedded.org
-Cc: Andreas Cord-Landwehr <cordlandwehr@kde.org>
-Subject: [meta-oe][PATCH] freerdp: provide cmake integration
-Date: Wed, 17 Jan 2024 20:21:32 +0100
-Message-Id: <20240117192132.905323-1-cordlandwehr@kde.org>
-X-Mailer: git-send-email 2.40.1
+Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
+	Gianfranco Costamagna <locutusofborg@debian.org>
+Subject: [meta-oe][PATCH] vbxguestdrivers: upgrade 7.0.12 -> 7.0.14
+Date: Wed, 17 Jan 2024 20:42:35 +0100
+Message-Id: <20240117194235.3862263-1-costamagnagianfranco@yahoo.it>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 17 Jan 2024 19:26:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108337
+ <openembedded-devel@lists.openembedded.org>; Wed, 17 Jan 2024 19:42:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108338
 
-Do not delete the cmake config and target files to allow easy
-integration with cmake based libraries/applications.
-
-Signed-off-by: Andreas Cord-Landwehr <cordlandwehr@kde.org>
+Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
 ---
- ...Do-not-install-tools-a-CMake-targets.patch | 45 +++++++++++++++++++
- .../recipes-support/freerdp/freerdp_2.11.2.bb |  2 +-
- 2 files changed, 46 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp/0002-Do-not-i=
-nstall-tools-a-CMake-targets.patch
+ .../{vboxguestdrivers_7.0.12.bb => vboxguestdrivers_7.0.14.bb}  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/vboxguestdrivers/{vboxguestdrivers_7.0.12.bb => vboxguestdrivers_7.0.14.bb} (97%)
 
-diff --git a/meta-oe/recipes-support/freerdp/freerdp/0002-Do-not-install-=
-tools-a-CMake-targets.patch b/meta-oe/recipes-support/freerdp/freerdp/000=
-2-Do-not-install-tools-a-CMake-targets.patch
-new file mode 100644
-index 000000000..2e5e6a424
---- /dev/null
-+++ b/meta-oe/recipes-support/freerdp/freerdp/0002-Do-not-install-tools-a=
--CMake-targets.patch
-@@ -0,0 +1,45 @@
-+From 0ddaeae351295e48365657482f165652051bbca2 Mon Sep 17 00:00:00 2001
-+From: Andreas Cord-Landwehr <cordlandwehr@kde.org>
-+Date: Wed, 17 Jan 2024 20:00:58 +0100
-+Subject: [PATCH] Do not install tools a CMake targets
-+
-+The cli tools are installed manually and thus are missing in the sysroot
-+folder. Do not export their targets because they do not exist and make
-+CMake fail when searching for the library.
-+
-+Upstream-Status: Inappropriate
-+Signed-off-by: Andreas Cord-Landwehr <cordlandwehr@kde.org>
-+---
-+ winpr/tools/hash-cli/CMakeLists.txt     | 2 +-
-+ winpr/tools/makecert-cli/CMakeLists.txt | 2 +-
-+ 2 files changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/winpr/tools/hash-cli/CMakeLists.txt b/winpr/tools/hash-cli/=
-CMakeLists.txt
-+index 9f8c7a8a0..b6d048fec 100644
-+--- a/winpr/tools/hash-cli/CMakeLists.txt
-++++ b/winpr/tools/hash-cli/CMakeLists.txt
-+@@ -43,7 +43,7 @@ set(${MODULE_PREFIX}_LIBS winpr)
-+=20
-+ target_link_libraries(${MODULE_NAME} ${${MODULE_PREFIX}_LIBS})
-+=20
-+-install(TARGETS ${MODULE_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR} COMP=
-ONENT tools EXPORT WinPRTargets)
-++install(TARGETS ${MODULE_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR} COMP=
-ONENT tools)
-+=20
-+ if (WITH_DEBUG_SYMBOLS AND MSVC)
-+ 	install(FILES ${CMAKE_BINARY_DIR}/${MODULE_NAME}.pdb DESTINATION ${CMA=
-KE_INSTALL_BINDIR} COMPONENT symbols)
-+diff --git a/winpr/tools/makecert-cli/CMakeLists.txt b/winpr/tools/makec=
-ert-cli/CMakeLists.txt
-+index 48fda5b5e..c7cf4bfaf 100644
-+--- a/winpr/tools/makecert-cli/CMakeLists.txt
-++++ b/winpr/tools/makecert-cli/CMakeLists.txt
-+@@ -46,7 +46,7 @@ target_link_libraries(${MODULE_NAME} ${${MODULE_PREFIX=
-}_LIBS} winpr)
-+=20
-+ set_property(TARGET ${MODULE_NAME} PROPERTY FOLDER "WinPR/Tools")
-+=20
-+-install(TARGETS ${MODULE_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR} COMP=
-ONENT tools EXPORT WinPRTargets)
-++install(TARGETS ${MODULE_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR} COMP=
-ONENT tools)
-+ if (WITH_DEBUG_SYMBOLS AND MSVC)
-+     install(FILES ${CMAKE_PDB_BINARY_DIR}/${MODULE_NAME}.pdb DESTINATIO=
-N ${CMAKE_INSTALL_BINDIR} COMPONENT symbols)
-+ endif()
-+--=20
-+2.40.1
-+
-diff --git a/meta-oe/recipes-support/freerdp/freerdp_2.11.2.bb b/meta-oe/=
-recipes-support/freerdp/freerdp_2.11.2.bb
-index c8d996d41..8de0e39ad 100644
---- a/meta-oe/recipes-support/freerdp/freerdp_2.11.2.bb
-+++ b/meta-oe/recipes-support/freerdp/freerdp_2.11.2.bb
-@@ -17,6 +17,7 @@ SRCREV =3D "a38c1be9eee39a9bc22b511fffe96e63fdf8ebe7"
- SRC_URI =3D "git://github.com/FreeRDP/FreeRDP.git;branch=3Dstable-2.0;pr=
-otocol=3Dhttps \
-            file://winpr-makecert-Build-with-install-RPATH.patch \
-            file://0001-Fix-const-qualifier-error.patch \
-+           file://0002-Do-not-install-tools-a-CMake-targets.patch \
-            "
-=20
- S =3D "${WORKDIR}/git"
-@@ -63,7 +64,6 @@ do_configure:append() {
- do_install:append () {
-     install -d ${D}${bindir}
-     install -m755 winpr/tools/makecert-cli/winpr-makecert ${D}${bindir}
--    rm -rf ${D}${libdir}/cmake
-     rm -rf ${D}${libdir}/freerdp
- }
-=20
---=20
-2.40.1
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.12.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.14.bb
+similarity index 97%
+rename from meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.12.bb
+rename to meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.14.bb
+index 6b493de7c..208b1bb6e 100644
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.12.bb
++++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_7.0.14.bb
+@@ -15,7 +15,7 @@ SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2
+     file://Makefile.utils \
+ "
+ 
+-SRC_URI[sha256sum] = "d76634c6ccf62503726a5aeae6c78a3462474c51a0ebe4942591ccc2d939890a"
++SRC_URI[sha256sum] = "45860d834804a24a163c1bb264a6b1cb802a5bc7ce7e01128072f8d6a4617ca9"
+ 
+ S ?= "${WORKDIR}/vbox_module"
+ S:task-patch = "${WORKDIR}/${VBOX_NAME}"
+-- 
+2.34.1
 
 
