@@ -1,135 +1,86 @@
-Return-Path: <zboszor@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 51B75C47258
-	for <webhook@archiver.kernel.org>; Wed, 17 Jan 2024 09:40:49 +0000 (UTC)
-Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
- by mx.groups.io with SMTP id smtpd.web10.5820.1705484445650661886
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ACCA4C47DA2
+	for <webhook@archiver.kernel.org>; Wed, 17 Jan 2024 12:13:48 +0000 (UTC)
+Received: from mail.savoirfairelinux.com (mail.savoirfairelinux.com [208.88.110.44])
+ by mx.groups.io with SMTP id smtpd.web11.7705.1705491576173723101
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Jan 2024 01:40:45 -0800
+ Wed, 17 Jan 2024 03:39:37 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=dA/AEr6D;
- spf=pass (domain: gmail.com, ip: 209.85.218.49, mailfrom: zboszor@gmail.com)
-Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-a28cc85e6b5so1283111366b.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 17 Jan 2024 01:40:45 -0800 (PST)
+ dkim=pass header.i=@savoirfairelinux.com header.s=DFC430D2-D198-11EC-948E-34200CB392D2 header.b=sawisgrH;
+ spf=pass (domain: savoirfairelinux.com, ip: 208.88.110.44, mailfrom: paul.leguendekerneizon@savoirfairelinux.com)
+Received: from localhost (localhost [127.0.0.1])
+	by mail.savoirfairelinux.com (Postfix) with ESMTP id 06B499C420E
+	for <openembedded-devel@lists.openembedded.org>; Wed, 17 Jan 2024 06:39:35 -0500 (EST)
+Received: from mail.savoirfairelinux.com ([127.0.0.1])
+ by localhost (mail.savoirfairelinux.com [127.0.0.1]) (amavis, port 10032)
+ with ESMTP id e5aDdowLYWyy; Wed, 17 Jan 2024 06:39:34 -0500 (EST)
+Received: from localhost (localhost [127.0.0.1])
+	by mail.savoirfairelinux.com (Postfix) with ESMTP id AABEC9C4199;
+	Wed, 17 Jan 2024 06:39:34 -0500 (EST)
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.savoirfairelinux.com AABEC9C4199
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1705484443; x=1706089243; darn=lists.openembedded.org;
-        h=content-transfer-encoding:subject:from:content-language:to
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=A5bI2crG4aKD9ff13rufw1tsPXffGcxUBC4rHG/pMu4=;
-        b=dA/AEr6DbWUVjwtMlpYRrkt0dxy0hWygphCZ5dlYFrNQjf8hD3Gl6wIk0Yz3yj2ygQ
-         KhhFAKXSX5FXHPzLEfS9pfjB/Za21UBk8bMBFlTJY4JspDBKJNeeseirDuPUu3v4e6U/
-         whhKrsA+hP89zQmJj+RVDfXbF/1C26hnwQyDMM54O01Sc75XFR5YQMwSCupbSqrUV1nT
-         UV+vGjcSxCI/LDB6HFA3SrQb3VFycV4mC2ovy5j9pOXztKwDveBswMKBzHKdSnZ7oJga
-         oK6ywJKnDpFu4GlKnsWOIGdMj27oibLf6Q0dbebK0puShWg6gK9MQC9tyuX8XUga1UEv
-         liaw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1705484443; x=1706089243;
-        h=content-transfer-encoding:subject:from:content-language:to
-         :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=A5bI2crG4aKD9ff13rufw1tsPXffGcxUBC4rHG/pMu4=;
-        b=RBrNELc2D+gPjUAQF8KaRuO7JbbPkrO5NNCOeW3TfrGuuUEpPioFqKCDsJD3YzTomM
-         dRsrjoyeHTakvh/6JLU4PbXPqCy5P2F04SMmG32sBT36/rKpHDY4tidz633Qxu60bgyt
-         JZFzXF228j3mZ6vRTyCPSw9B2SWiBjJ3YJ3nNIihUBgbVyu8hMTwlVeyNDaSSDM1RON/
-         89v4rJBE4cw5n/Fk3FSkGUjUwKAweLymszXvaVRIsJki5vp0FB03MGQaAbxSNIS4ieId
-         25XUOGlVj3NLNz2rFHdZMLEXSyfGQa+YydpoR7oz4spTga4nvWOjrZNiO0GnXFv9Ei1v
-         4YnA==
-X-Gm-Message-State: AOJu0YwQKYSAomsb83PJ9dT3WjL8t3F5oVZ6fvMUIXxx5k9IGhxsUeAH
-	94vGalblm6o9Rhwk+QBh8pWGfvT2Q2g=
-X-Google-Smtp-Source: AGHT+IE6gCVeka/bW6Wb7UubWTkntsALrXFCg+/Zs0dhj1Y+Auiy/5fBdEmt7wyrqwVEcFqKqA2aBA==
-X-Received: by 2002:a17:907:60d6:b0:a29:3089:16c3 with SMTP id hv22-20020a17090760d600b00a29308916c3mr3179962ejc.8.1705484442834;
-        Wed, 17 Jan 2024 01:40:42 -0800 (PST)
-Received: from [192.168.2.143] (dsl51B7D2F9.fixip.t-online.hu. [81.183.210.249])
-        by smtp.gmail.com with ESMTPSA id cw8-20020a170907160800b00a2cd72af9cesm6349779ejd.146.2024.01.17.01.40.42
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 17 Jan 2024 01:40:42 -0800 (PST)
-Message-ID: <415ef717-ab15-4bcf-a8d2-2e8d8fb37a25@gmail.com>
-Date: Wed, 17 Jan 2024 10:40:41 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+	d=savoirfairelinux.com; s=DFC430D2-D198-11EC-948E-34200CB392D2;
+	t=1705491574; bh=lEHURbMxstVQXgKW/u+pYB8hrh+CwKtkJCeHoY/6mHg=;
+	h=From:To:Date:Message-Id:MIME-Version;
+	b=sawisgrHAXm7QeShp5loLDCzc13tjVMgUqYY/OgSlWEwiKO+D3PfkxgBhFSzVEd4M
+	 zoeAFH+oFuoBBB/tPvgybU7LVLJj8lvcmfw2F9hkAtHREal+saSyrr0Xk2/v0aXAQD
+	 7Y/mdV/lsHcRigG/pEkVKOf1ehfw/u7E/KZbCJ2HU4/4iH+Wxh7DdkKwbMFugZs+a9
+	 IFBP/4Lkyls7IADLiwg0BWxM00BZEoPJ5ZjIWX21IvkBPSehFh9qzJCtbZrif2FrUH
+	 WodhyLsbZ7Xsuyd4N1JqAovIX6Ooi1G4A9nTBUtZsNsXY9GTZ8SvmVAZBxhPHGgd3V
+	 00ghPSqbVJiHA==
+X-Virus-Scanned: amavis at mail.savoirfairelinux.com
+Received: from mail.savoirfairelinux.com ([127.0.0.1])
+ by localhost (mail.savoirfairelinux.com [127.0.0.1]) (amavis, port 10026)
+ with ESMTP id FE7YihjMpRyb; Wed, 17 Jan 2024 06:39:34 -0500 (EST)
+Received: from pleguen-ThinkPad-P14s-Gen-2a.rennes.sfl (lmontsouris-657-1-69-118.w80-15.abo.wanadoo.fr [80.15.101.118])
+	by mail.savoirfairelinux.com (Postfix) with ESMTPSA id 3E6859C3290;
+	Wed, 17 Jan 2024 06:39:34 -0500 (EST)
+From: paul.leguendekerneizon@savoirfairelinux.com
 To: openembedded-devel@lists.openembedded.org
-Content-Language: en-US
-From: =?UTF-8?B?QsO2c3rDtnJtw6lueWkgWm9sdMOhbg==?= <zboszor@gmail.com>
-Subject: [ANNOUNCEMENT] New layer for parallel installable PHP versions and
- misc modules
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Cc: Paul Le Guen de Kerneizon <paul.leguendekerneizon@savoirfairelinux.com>
+Subject: [meta-webserver][PATCH 0/2] add support of cockpit-machines
+Date: Wed, 17 Jan 2024 12:39:09 +0100
+Message-Id: <20240117113911.15322-1-paul.leguendekerneizon@savoirfairelinux.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 17 Jan 2024 09:40:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108326
+ <openembedded-devel@lists.openembedded.org>; Wed, 17 Jan 2024 12:13:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108329
 
-Hi,
+Hello community,
 
-Yocto was sticking to a single PHP series for the lifetime of
-one release, which may or may not be applicable to a
-specific application.
+Since version 242 of Cockpit package, plugin `cockpit-machines` has been =
+moved
+to a dedicated repository. This cockpit plugin is used to manage in web U=
+I
+virtual machines. There is currently no support of the new cockpit-machin=
+es
+package in any Yocto meta and the following patches bring it:
+  - Patch 1 adds the recipe of cockpit-machines
+  - Patch 2 remove all the old occurences of cockpit-machines package ins=
+ide
+    cockpit recipe.
 
-Because of this, I have been maintaining multiple PHP versions
-for a long time to satisfy such applications that we developed
-in-house.
+Waiting for your review, feel free to ask any questions or remarks.
+Regards,
+Paul Le Guen de Kerneizon, Savoir-faire Linux
 
-These recipes are prefixed with phpNN where NN is the PHP
-major version without the dot.
+Paul Le Guen de Kerneizon (2):
+  cockpit-machines: add recipe
+  cockpit: remove occurences of machines package
 
-These recipes are now public at https://github.com/zboszor/meta-parallel-php
+ .../cockpit-machines/cockpit-machines_304.bb  | 22 +++++++++++++++++++
+ .../recipes-webadmin/cockpit/cockpit_304.bb   |  5 -----
+ 2 files changed, 22 insertions(+), 5 deletions(-)
+ create mode 100644 meta-webserver/recipes-webadmin/cockpit-machines/cock=
+pit-machines_304.bb
 
-These PHP builds are much closer to Red Hat / Fedora than the recipes
-in Yocto, as in PHP modules are mostly built as shared modules.
-
-Yocto versions 3.4 Honister and newer are supported.
-
-PHP 7.0, 7.1, 7.2, 7.3 are only supported in the honister branch.
-These old versions cannot be built in kirkstone or later,
-mostly due to the "icu" changes in Yocto.
-
-PHP 7.4, 8.0, 8.1, 8.2 and 8.3 are supported in all branches.
-
-External module recipes are also available, in some cases :
-phpNN-pecl-crack
-phpNN-pecl-inotify
-phpNN-pecl-mcrypt (for PHP 7.2 and up)
-phpNN-nano
-phpNN-pecl-ncurses
-phpNN-pecl-pam
-phpNN-posix-realtime
-phpNN-screw
-phpNN-pecl-sodium (for PHP 7.0 and 7.1 only, this module is in PHP 7.2+)
-phpNN-pecl-ssh2
-phpNN-pecl-timezonedb
-phpNN-pecl-xdebug
-
-These recipes use the parallel-php-module.bbclass to execute
-phpizeNN ; ./configure ; make for the build.
-
-To make one specific PHP series the default, i.e. to provide the
-php, pear, etc. names, the phpNN-symlinks package can be installed.
-These symlinks are using the alternatives symlinks with the NN number
-used as priority.
-
-php.ini and php-fpm configuration files are not included, similarly to
-the Yocto php recipe.
-
-Versioned recipes for composer are also available in both
-native and target builds. Only one of the target builds may be
-installed at a time, though.
-
-Another class called parallel-php-native.bbclass is also
-available that allows using phpNN-native and the
-corresponding composer-phpNN-native during the build
-of PHP apps that use "composer install".
-
-Practically, it's a very small subset of what https://rpms.remirepo.net/
-is doing.
-
-Comments, issues and PRs on my github repo is welcome.
-
-Best regards,
-Zoltán Böszörményi
-
+--
+2.34.1
 
