@@ -1,126 +1,169 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E343C47DB3
-	for <webhook@archiver.kernel.org>; Thu, 18 Jan 2024 16:51:36 +0000 (UTC)
-Received: from mail-oa1-f45.google.com (mail-oa1-f45.google.com [209.85.160.45])
- by mx.groups.io with SMTP id smtpd.web11.18043.1705596688463727694
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 46F95C47DAF
+	for <webhook@archiver.kernel.org>; Thu, 18 Jan 2024 16:59:06 +0000 (UTC)
+Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
+ by mx.groups.io with SMTP id smtpd.web11.18324.1705597145027929630
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Jan 2024 08:51:28 -0800
+ Thu, 18 Jan 2024 08:59:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=R8rTuHUw;
- spf=pass (domain: gmail.com, ip: 209.85.160.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f45.google.com with SMTP id 586e51a60fabf-206b77b9f4bso5508909fac.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 18 Jan 2024 08:51:28 -0800 (PST)
+ dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=PvzWfkzI;
+ spf=pass (domain: smile.fr, ip: 209.85.218.50, mailfrom: yoann.congal@smile.fr)
+Received: by mail-ej1-f50.google.com with SMTP id a640c23a62f3a-a2d04888d3dso718608466b.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 18 Jan 2024 08:59:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1705596688; x=1706201488; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=IFPf7l3UAkdyG0RxDXPKGYPw9bpFpL6VSY5cGg1SRHo=;
-        b=R8rTuHUw66emmbxwfr3C5qMXL/pS31eCbQZJCepTxn5LHGlPvo/nhNaq/oU/FAuFQr
-         aVLDaC1PMfMf4VMzya0Z5lsharFjX8nTEJi7b6GFfc3nv+SuuXF4c1+1TtkAKdRSmnuA
-         vbKPh2WhcPcaTU0yrgC9HAe8+d2lU7V9vX+UQ8OhGe14j39uYSabMCnyKefi8Smgjz/j
-         ibqmjzIQgjcB54Z2CNGhT/h4lLtjPyM4VnmQcY9ia1vErRpZhOhNjzFi5zBTHbDOkyAv
-         SUQXTcEgmfHZwj85ESv8Ul5SlA2cADs7yP6k4irsyJCZDz+kffVnjvTxNXxjmd7lWQXY
-         94GA==
+        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1705597143; x=1706201943; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=MyEv9Nv8FJUkfnziEJiRMGYDOCCTBbLv1L1oN0YEUzo=;
+        b=PvzWfkzIcMhLnPIlkiG4i80tK0cwglZQeGYmqTO+/JNDRf5S84PWmJndjFSuwnAX8Z
+         NvNw9dQdAe/NGyZZhSQxOrwpi//zYxwHhv5x9YDdVyDsmuBtIrk6uxRgwKdNnTdI1adh
+         ZIqqKHNr/a8NCcwzoHB3U5PdfnXxBlN3MncbpzurcVZT7D/RzHi8JJdAIHyBkeKM3+E6
+         ypPZeShB9/Pq4s/z2wGzc3VtY8Uf4imt/9G5In3kDnFuIwKftTTvE8wT0Snl3s813FKG
+         2Y9o0CdXKSr5ZNFJwdsag3OoDxj8vYMcWlJ2tUAMFeLS5CVs7qE5XGAKqjIu7fEquid9
+         8Y6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1705596688; x=1706201488;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=IFPf7l3UAkdyG0RxDXPKGYPw9bpFpL6VSY5cGg1SRHo=;
-        b=JS02ViWcc0UTL5WqXBJMfEt/2dsU35h9+RWtytE4KQ4V5iEkE1hMnEPc++IoimPOcl
-         XHGsXQ0Z06kX9GdDEOL0bnt8pG22tkJ18HtNfMvlZDe5cGepH5UWqmWD//V9tRQ+n6hs
-         A1lapBkhFXDgqlza6nPW/ixfUAIBi5MhKqadCE8NZuIK8B3vkBvBYQ4cf/6EQ7fTjwPO
-         7rCTe3EH37UYB0fpBjbq2T45HwG1d2fM/hQpkxRpLEHqwcrPqtGwX5AtfRiqkdGiWhww
-         XQs4ZBzS/Qfdz1kBOW1CPiTVH9FkMmy99ecvvEIoF3klwhUItsc4Qhuwq3jfI5W7pufO
-         BdNA==
-X-Gm-Message-State: AOJu0YzvdoVZWm98mBo1SLFrNCk1t8NzUm53cyT9gDiCTLyHZ2DYHu0e
-	Ids6hV1c1pocQPi68axPg0VUQf2o56Ipbu/G60FQ4yxRrO05ooMOuPiEBB9vehWdU2/T2YX4O50
-	EIp6OGMoD6hO2kZ9fsqO5shhZWAZKW05suN/HsA==
-X-Google-Smtp-Source: AGHT+IGEG+QXnxfY1qcRN/+4X6TPjhkaFvJvoVyzkOkBULeVdEsPVJYU8IU9f5gu8SM0uUBFJAqdWEiglLxRF8WHGjo=
-X-Received: by 2002:a05:6870:ef16:b0:210:8adc:52a7 with SMTP id
- qq22-20020a056870ef1600b002108adc52a7mr1301659oab.90.1705596687705; Thu, 18
- Jan 2024 08:51:27 -0800 (PST)
+        d=1e100.net; s=20230601; t=1705597143; x=1706201943;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=MyEv9Nv8FJUkfnziEJiRMGYDOCCTBbLv1L1oN0YEUzo=;
+        b=enrZQqDJ3a290tVbCS5v6shFrweMn4CxYJUX2p+qcBA/c4LIcZO4j6J23Ximd3oz9l
+         e00e9tt4WkT3dNoy8qae1DIT+1E4Grx7RGcPi8nzN/+aYhe8+QudcpEV08GKbkp2DR3V
+         8AxZ8cbhaowI3qA9oiTYB0Er5FJdZDDnDOrscA5L1Z4h5O3t3ZUGokL6tVmrHgZ2lOkg
+         L0KxIE6cd2d7cdMuwOO1yiONrBZIOKUKkDlmVemd2E2mVuP32oD/QZ98x+6um6oRklyQ
+         yH8MPfJyNyQEWxa2JAnPqvr0R9DFYLhM36UAer30WC8wo/lqyGNMUAw64cgvl/oHJg7V
+         L1BA==
+X-Gm-Message-State: AOJu0YxAigi1Wc+Wq4YuOZsR1gKoDuEd5eTsHdjGZQbrhsR3aOrse0Kd
+	W2sjpBV3mDhJzf1PqMHxjgSHqBkwZdmYM2jxT1Mlk4BgEIu9ecpW/lbrA7t/t2uzB+whMFF6rKh
+	uMeZpwmtbrHCeTazuuERmlDBHyCJIwOW9OHTAJg==
+X-Google-Smtp-Source: AGHT+IECf6SJilXKQwLpsUSzY4gqHkw7bWpYWewtsoykykQN0lYKSvOJfrkPl1TnbdrOhJgMrFPzafsc300PLgzxqS8=
+X-Received: by 2002:a17:906:3da:b0:a2d:474e:8236 with SMTP id
+ c26-20020a17090603da00b00a2d474e8236mr568715eja.134.1705597143381; Thu, 18
+ Jan 2024 08:59:03 -0800 (PST)
 MIME-Version: 1.0
-References: <20240117202405.29013-1-simone.p.weiss@posteo.com>
-In-Reply-To: <20240117202405.29013-1-simone.p.weiss@posteo.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 18 Jan 2024 08:51:01 -0800
-Message-ID: <CAMKF1srwkG9N7oELo9V5UtiO6r5Cx9KHAvc2xorkPVzCZBHALw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] open-cl: stop using "virtual/" in RPROVIDES
-To: =?UTF-8?B?U2ltb25lIFdlacOf?= <simone.p.weiss@posteo.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+References: <20240117082519.3037503-1-yoann.congal@smile.fr>
+ <CAMKF1sqNjnpWcV8HTwnQiytkN5QJAufAgOv+zA1vvvh-+mF5MA@mail.gmail.com>
+ <CAMSfU+5_3qkFXTAEMNvX3ewEKXcSto+xZcjqVMzHyuKwgD679Q@mail.gmail.com>
+ <CAMKF1sog9N5XQyZoD3eEaDLyK8F20DbQkrBP82Eks3XtdZo55w@mail.gmail.com> <CAMSfU+7RASoD=buv3O1W0QseMKxXu2CSXZCWoPw-WyERW124NQ@mail.gmail.com>
+In-Reply-To: <CAMSfU+7RASoD=buv3O1W0QseMKxXu2CSXZCWoPw-WyERW124NQ@mail.gmail.com>
+From: Yoann CONGAL <yoann.congal@smile.fr>
+Date: Thu, 18 Jan 2024 17:58:37 +0100
+Message-ID: <CAMSfU+4VxG4Da4Wdc0xL=puWZGTJ4mVptO-BNLR6hfeA0mwbgA@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH] python3-pytest-cov: Remove unbuildable BBCLASSEXTENDs
+To: Khem Raj <raj.khem@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
+	Richard Leitner <dev@g0hl1n.net>
+Content-Type: multipart/alternative; boundary="000000000000dc8c0a060f3b4713"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 18 Jan 2024 16:51:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108348
+ <openembedded-devel@lists.openembedded.org>; Thu, 18 Jan 2024 16:59:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108349
 
-I have staged a similar patch already in master-next
-https://patchwork.yoctoproject.org/project/oe/patch/20240116235052.3713167-=
-1-raj.khem@gmail.com/
+--000000000000dc8c0a060f3b4713
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jan 17, 2024 at 12:24=E2=80=AFPM Simone Wei=C3=9F <simone.p.weiss@p=
-osteo.com> wrote:
+Le mer. 17 janv. 2024 =C3=A0 17:44, Yoann CONGAL <yoann.congal@smile.fr> a
+=C3=A9crit :
+
+> Le mer. 17 janv. 2024 =C3=A0 17:31, Khem Raj <raj.khem@gmail.com> a =C3=
+=A9crit :
 >
-> From: Simone Wei=C3=9F <simone.p.weiss@posteo.com>
+>> On Wed, Jan 17, 2024 at 8:20=E2=80=AFAM Yoann CONGAL <yoann.congal@smile=
+.fr>
+>> wrote:
+>>
+>>> Le mer. 17 janv. 2024 =C3=A0 16:26, Khem Raj <raj.khem@gmail.com> a =C3=
+=A9crit :
+>>>
+>>>> how about we add
+>>>>
+>>>> BBCLASSEXTEND =3D "native nativesdk"
+>>>>
+>>>> to meta-python/recipes-devtools/python/python3-coverage_7.4.0.bb
+>>>
+>>>
+>>> Sure! ... But I have no idea how to test it.
+>>> Do we really care about pytest-cov in native environments? If yes, I'll
+>>> look into it.
+>>>
+>>
+>> Since the native extends existed before it gained the extra dependency o=
+n
+>> coverage package it=E2=80=99s possible that there is a use of it already=
+ in place
+>>
 >
-> For RPROVIDES and RDEPENDS the string "/virtual" holds no special meaning
-> and hence packages should avoid the use of "virtual/" there. Update it
-> for opencl to the suggested alternative "-virtual". See also the
-> discussion on the yocto docs mailing list:
-> https://lists.yoctoproject.org/g/docs/message/1785
+> Good point. I'll try test it before sending a patch.
 >
-> Signed-off-by: Simone Wei=C3=9F <simone.p.weiss@posteo.com>
-> ---
->  meta-oe/recipes-core/opencl/ocl-icd_2.3.2.bb                | 2 +-
->  meta-oe/recipes-core/opencl/opencl-icd-loader_2023.12.14.bb | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-oe/recipes-core/opencl/ocl-icd_2.3.2.bb b/meta-oe/recip=
-es-core/opencl/ocl-icd_2.3.2.bb
-> index 93fac969c..d43ea281a 100644
-> --- a/meta-oe/recipes-core/opencl/ocl-icd_2.3.2.bb
-> +++ b/meta-oe/recipes-core/opencl/ocl-icd_2.3.2.bb
-> @@ -15,6 +15,6 @@ inherit autotools
->
->  DEPENDS =3D "ruby-native"
->  PROVIDES =3D "virtual/opencl-icd"
-> -RPROVIDES:${PN} =3D "virtual/opencl-icd"
-> +RPROVIDES:${PN} =3D "virtual-opencl-icd"
->
->  BBCLASSEXTEND =3D "native nativesdk"
-> diff --git a/meta-oe/recipes-core/opencl/opencl-icd-loader_2023.12.14.bb =
-b/meta-oe/recipes-core/opencl/opencl-icd-loader_2023.12.14.bb
-> index 6bf01a248..146ec6e47 100644
-> --- a/meta-oe/recipes-core/opencl/opencl-icd-loader_2023.12.14.bb
-> +++ b/meta-oe/recipes-core/opencl/opencl-icd-loader_2023.12.14.bb
-> @@ -9,7 +9,7 @@ inherit pkgconfig cmake
->  DEPENDS +=3D "opencl-headers"
->
->  PROVIDES =3D "virtual/opencl-icd"
-> -RPROVIDES:${PN} =3D "virtual/opencl-icd"
-> +RPROVIDES:${PN} =3D "virtual-opencl-icd"
->
->  S =3D "${WORKDIR}/git"
->
-> --
-> 2.39.2
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#108339): https://lists.openembedded.org/g/openembedde=
-d-devel/message/108339
-> Mute This Topic: https://lists.openembedded.org/mt/103794862/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+
+Patches sent here:
+[meta-python][PATCH 1/2] python3-coverage: add native and nativesdk
+BBCLASSEXTEND
+https://lists.openembedded.org/g/openembedded-devel/message/108346
+[meta-python][PATCH 2/2] python3-pytest-cov: Add missing python3-pytest
+RDEPENDS
+https://lists.openembedded.org/g/openembedded-devel/message/108347
+
+--=20
+Yoann Congal
+Smile ECS - Tech expert
+
+--000000000000dc8c0a060f3b4713
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
+<div dir=3D"ltr" class=3D"gmail_attr">Le=C2=A0mer. 17 janv. 2024 =C3=A0=C2=
+=A017:44, Yoann CONGAL &lt;<a href=3D"mailto:yoann.congal@smile.fr">yoann.c=
+ongal@smile.fr</a>&gt; a =C3=A9crit=C2=A0:<br></div><blockquote class=3D"gm=
+ail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,=
+204,204);padding-left:1ex"><div dir=3D"auto"><div><div class=3D"gmail_quote=
+"><div dir=3D"ltr" class=3D"gmail_attr">Le mer. 17 janv. 2024 =C3=A0 17:31,=
+ Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_blank">raj.k=
+hem@gmail.com</a>&gt; a =C3=A9crit=C2=A0:<br></div><blockquote class=3D"gma=
+il_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,2=
+04,204);padding-left:1ex"><div><div class=3D"gmail_quote"><div dir=3D"ltr" =
+class=3D"gmail_attr">On Wed, Jan 17, 2024 at 8:20=E2=80=AFAM Yoann CONGAL &=
+lt;<a href=3D"mailto:yoann.congal@smile.fr" rel=3D"noreferrer" target=3D"_b=
+lank">yoann.congal@smile.fr</a>&gt; wrote:<br></div><blockquote class=3D"gm=
+ail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,=
+204,204);padding-left:1ex"><div dir=3D"auto"><div dir=3D"auto">Le mer. 17 j=
+anv. 2024 =C3=A0 16:26, Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" =
+rel=3D"noreferrer" target=3D"_blank">raj.khem@gmail.com</a>&gt; a =C3=A9cri=
+t=C2=A0:<br></div><div class=3D"gmail_quote" dir=3D"auto"><blockquote class=
+=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
+b(204,204,204);padding-left:1ex">how about we add<br>
+<br>
+BBCLASSEXTEND =3D &quot;native nativesdk&quot;<br>
+<br>
+to meta-python/recipes-devtools/python/<a href=3D"http://python3-coverage_7=
+.4.0.bb" rel=3D"noreferrer noreferrer noreferrer" target=3D"_blank">python3=
+-coverage_7.4.0.bb</a></blockquote></div><div dir=3D"auto"><br></div><div d=
+ir=3D"auto">Sure! ... But I have no idea how to test it.=C2=A0</div><div di=
+r=3D"auto">Do we really care about pytest-cov in native environments? If ye=
+s, I&#39;ll look into it.<br></div></div><div dir=3D"auto"><div dir=3D"auto=
+"></div></div></blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">Si=
+nce the native extends existed before it gained the extra dependency on cov=
+erage package it=E2=80=99s possible that there is a use of it already in pl=
+ace</div></div></div></blockquote></div></div><div dir=3D"auto"><br></div><=
+div dir=3D"auto">Good point. I&#39;ll try test it before sending a patch.</=
+div></div></blockquote><div><br></div><div>Patches sent here:<br></div><div=
+>[meta-python][PATCH 1/2] python3-coverage: add native and nativesdk BBCLAS=
+SEXTEND<br><a href=3D"https://lists.openembedded.org/g/openembedded-devel/m=
+essage/108346">https://lists.openembedded.org/g/openembedded-devel/message/=
+108346</a><br>[meta-python][PATCH 2/2] python3-pytest-cov: Add missing pyth=
+on3-pytest RDEPENDS<br><a href=3D"https://lists.openembedded.org/g/openembe=
+dded-devel/message/108347">https://lists.openembedded.org/g/openembedded-de=
+vel/message/108347</a>=C2=A0</div><div><br></div></div><span class=3D"gmail=
+_signature_prefix">-- </span><br><div dir=3D"ltr" class=3D"gmail_signature"=
+><div dir=3D"ltr"><font face=3D"Raleway, regular">Yoann Congal</font><div><=
+font face=3D"Raleway, regular">Smile ECS - Tech expert<br></font></div></di=
+v></div></div>
+
+--000000000000dc8c0a060f3b4713--
 
