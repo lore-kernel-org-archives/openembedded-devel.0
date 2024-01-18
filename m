@@ -1,101 +1,101 @@
-Return-Path: <belouargamohamed@gmail.com>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3E807C4725D
-	for <webhook@archiver.kernel.org>; Wed, 17 Jan 2024 23:56:14 +0000 (UTC)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.web10.3237.1705535773654860499
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B86C1C4707B
+	for <webhook@archiver.kernel.org>; Thu, 18 Jan 2024 04:57:12 +0000 (UTC)
+Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com [209.85.208.48])
+ by mx.groups.io with SMTP id smtpd.web10.4828.1705553822430780505
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Jan 2024 15:56:13 -0800
+ Wed, 17 Jan 2024 20:57:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=HQ8ztubB;
- spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: belouargamohamed@gmail.com)
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-40e90163be1so483125e9.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 17 Jan 2024 15:56:13 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=PZGYhi/k;
+ spf=pass (domain: gmail.com, ip: 209.85.208.48, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-ed1-f48.google.com with SMTP id 4fb4d7f45d1cf-559edcee47eso1043193a12.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 17 Jan 2024 20:57:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1705535771; x=1706140571; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1705553820; x=1706158620; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=xxS9QsUTFmYJdlhgkB70Yt01VNr7ke+iN1NzSyC4C8Y=;
-        b=HQ8ztubBMvsRboMFlSa4h/O2K+fJpvqmPqHWtKl4oPtyuMoLyUPQxiT73nBmZ10XJr
-         ngNIU+QpL3qTGsJjMiDsgT6Mp1+d3JOYNdUyWOXg1stlAUo4BnTh32/zVKc4AeOfTrFD
-         xesaxZelXZRAaIcgtf3EPon18XrFgPt4X0nRk8/WyY2ZET2HfyVVOZcdrXRur00BJGM2
-         rqObbL8CpS2yqYTkJfcnyi9/XYX9Fm+XCzdXAmvHQ2EYmSWj4iRJECVvjgfOY4bBdnAn
-         dhIqdLPMH/BOofas/UICIBVgE3W5OSVwLKBm8Bhm9Z92mpOS+ainkrm82sYiaB8CPymn
-         WXCA==
+        bh=jAkOAviU4tCxLXB14LZ2jFZJ8zT65pdCp0eUFpejB44=;
+        b=PZGYhi/k1pK+a0B4slt4m1DVBkFV9JMrqeixaNp10aklwMhkJLMNgG+xFJL4csrhOQ
+         GnHxAxwdX/szj7R7ih9UoGfGUZ0KDr1OOZVFe3TNUUoZGU+gGRaOQEShfkU/UEW+HhuZ
+         c0j9djQjaIYmZpjT02DQrk6XZqVpX9IRV3vUAYYfQVpddEgNXWNnJR6QXQA173hLU8si
+         MJLtMTiLy7d4sfYf7c8GFdKpiP1P0cr1isG7QPMCQ5GbPmp8XZdzzlt2ppgTg/7Pqw6A
+         GvInrTol6L8t63/Xdnk0vA2d12K9JtsyP58jjA2xYuVkm5/C3p4TGuIc7CA9lUf2UVcs
+         hJbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1705535771; x=1706140571;
+        d=1e100.net; s=20230601; t=1705553820; x=1706158620;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=xxS9QsUTFmYJdlhgkB70Yt01VNr7ke+iN1NzSyC4C8Y=;
-        b=rgUEdtiUs0DVHuyk/NGYwUhat0Rv0mPvzQ3ZttZ+W8YNhsvPTUwrnMouU/bX9sWiqA
-         g4qPaNNunvvk6rdJL3D9myynCAWQ+kg+/mrvoSzApjKwTBXJ6DQgrfg4IFb+KUys0Bd4
-         K5JsoXuXdxlXwYeX9dmoz+n2vYxeYVd7YxjoHcH5xunEQp11jGu7rbr6EXT+Ewf3Z0j5
-         tcSYhX85bKCGasqp+G81yVp2ZJQaKd89x7pbNfLBRXh6m00785jkTg0jhlFK3bjBI777
-         mXrw2Vm6VGfhZ4Q2q+SUQwx4L/dLCEPp6z9iJEkYA52zqlCARRoaffz80eyKNl0NGqPr
-         yJtw==
-X-Gm-Message-State: AOJu0Yz0mJRJUvxLhNthd3uZRCeGvmsk8NfCe2/y8mMTAWfDOmJu1L55
-	6q1Cxk4VrB+dKn7enBkl9qQTsht/qVA=
-X-Google-Smtp-Source: AGHT+IGs6Ty0thPoWXACG4E1qQRQahwhLw1Kieb/K1TqV+NhPK1qTnp6ujx9aB+HQeDQsD2xQJh7+w==
-X-Received: by 2002:a05:600c:6a85:b0:40e:48e8:ee05 with SMTP id jl5-20020a05600c6a8500b0040e48e8ee05mr3011345wmb.92.1705535770753;
-        Wed, 17 Jan 2024 15:56:10 -0800 (PST)
-Received: from localhost.localdomain (cust-east-par-46-193-64-76.cust.wifirst.net. [46.193.64.76])
-        by smtp.gmail.com with ESMTPSA id m35-20020a05600c3b2300b0040e541ddcb1sm24069425wms.33.2024.01.17.15.56.10
+        bh=jAkOAviU4tCxLXB14LZ2jFZJ8zT65pdCp0eUFpejB44=;
+        b=DGAFZi68V4r9Wx4f0cplJqY32JF8rmgTgP6CiVaT5RBc8Lc6MqU1PS1bZcPL2MGPZ1
+         6+rIYl5Yd1ddp7FPYVZX4EmfXX/PUjxwkTNhOMM5y7j9jV+x/KYujKxIHvdcEp3pA1og
+         9hpFYtBklYmWzMvGXe8B5xZSWzEcQV7LAwrD7t8hxtZQH/yiPe6hxhedyhsS/FM8cy0/
+         IShoPMUANfZZHZ72/kqsdd/9IOXpFOv3bBhFSeb/ZiVpkoY/tazQgtfZ2BoL7yrZHrxJ
+         Gfju9vBYVwZyPs1yobJ1AEBw2HeCtxKEWlxXEKGtKDcKXDEkuExP+Pttx0cUisdkRZYJ
+         N13g==
+X-Gm-Message-State: AOJu0Yyt+B+/Jnpr3CSuKC1eVEQb31Ei8ld2YQaBGsLzaanQpjG1WSdo
+	iq1Wua7OPwTKgVYIENJOsDwj45zAbb37qG2RoSPUwG+9P9AxoUsQwks5+/UDGw4=
+X-Google-Smtp-Source: AGHT+IGmHXoF7hVoH4LrL1HA9o2kfref7SRdGt3GxrFZMTVVUJtF0UT5eum1K94P6BZ2ygKg44r9ag==
+X-Received: by 2002:a17:906:2411:b0:a28:d1f9:976 with SMTP id z17-20020a170906241100b00a28d1f90976mr129750eja.65.1705553819898;
+        Wed, 17 Jan 2024 20:56:59 -0800 (PST)
+Received: from localhost.localdomain ([176.33.66.82])
+        by smtp.gmail.com with ESMTPSA id vx4-20020a170907a78400b00a2d62a515e8sm5795600ejc.212.2024.01.17.20.56.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 17 Jan 2024 15:56:10 -0800 (PST)
-From: belouargamohamed@gmail.com
-X-Google-Original-From: m.belouarga@technologyandstrategy.com
+        Wed, 17 Jan 2024 20:56:59 -0800 (PST)
+From: alperak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: f.lahoudere@technologyandstrategy.com,
-	BELOUARGA Mohamed <m.belouarga@technologyandstrategy.com>
-Subject: [PATCH] Monocypher: Correct source URI and license
-Date: Thu, 18 Jan 2024 00:56:07 +0100
-Message-Id: <20240117235607.370589-1-m.belouarga@technologyandstrategy.com>
+Cc: alperak <alperyasinak1@gmail.com>
+Subject: [meta-oe][PATCH] libkcapi: upgrade 1.4.0 -> 1.5.0
+Date: Thu, 18 Jan 2024 07:56:54 +0300
+Message-Id: <20240118045654.6906-1-alperyasinak1@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 17 Jan 2024 23:56:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108340
+ <openembedded-devel@lists.openembedded.org>; Thu, 18 Jan 2024 04:57:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108341
 
-From: BELOUARGA Mohamed <m.belouarga@technologyandstrategy.com>
+License-Update: Copyright years change
 
-Monocypher has two recipes and a release tarball in home page and in github
+Changelog:
 
-Signed-off-by: BELOUARGA Mohamed <m.belouarga@technologyandstrategy.com>
+    move all sha* applications to the libexec directory to allow them to coexist with other packages sha* applications - the caller is expected to make a symlink to them
+    add sha3sum
+    add kcapi_md_sha3_* wrapper APIs
+    various small fixes
+
+Signed-off-by: alperak <alperyasinak1@gmail.com>
 ---
- .../recipes-crypto/monocypher/monocypher_4.0.2.bb    | 12 +++++++-----
- 1 file changed, 7 insertions(+), 5 deletions(-)
+ .../libkcapi/{libkcapi_1.4.0.bb => libkcapi_1.5.0.bb}         | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-crypto/libkcapi/{libkcapi_1.4.0.bb => libkcapi_1.5.0.bb} (90%)
 
-diff --git a/meta-oe/recipes-crypto/monocypher/monocypher_4.0.2.bb b/meta-oe/recipes-crypto/monocypher/monocypher_4.0.2.bb
-index e6380d9a2..813c6ec4c 100644
---- a/meta-oe/recipes-crypto/monocypher/monocypher_4.0.2.bb
-+++ b/meta-oe/recipes-crypto/monocypher/monocypher_4.0.2.bb
-@@ -3,13 +3,15 @@ DESCRIPTION = "Monocypher is an easy to use, easy to deploy, \
- auditable crypto library written in portable C. It approaches the size of TweetNaCl and the speed of libsodium."
- HOMEPAGE = "https://monocypher.org/"
- SECTION = "libs"
--LICENSE = "BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://LICENCE.md;md5=6a251155d943c8531e01a139f3fc531a"
-+LICENSE = "BSD-2-Clause | CC0-1.0"
-+LIC_FILES_CHKSUM = "file://LICENCE.md;md5=ff30a1c41dfd9e6fa559a9e45ee98302"
+diff --git a/meta-oe/recipes-crypto/libkcapi/libkcapi_1.4.0.bb b/meta-oe/recipes-crypto/libkcapi/libkcapi_1.5.0.bb
+similarity index 90%
+rename from meta-oe/recipes-crypto/libkcapi/libkcapi_1.4.0.bb
+rename to meta-oe/recipes-crypto/libkcapi/libkcapi_1.5.0.bb
+index 3be8c76b5..35e9b032b 100644
+--- a/meta-oe/recipes-crypto/libkcapi/libkcapi_1.4.0.bb
++++ b/meta-oe/recipes-crypto/libkcapi/libkcapi_1.5.0.bb
+@@ -1,10 +1,10 @@
+ SUMMARY = "Linux Kernel Crypto API User Space Interface Library"
+ HOMEPAGE = "http://www.chronox.de/libkcapi.html"
+ LICENSE = "BSD-3-Clause | GPL-2.0-only"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=a2562899bc38f1735868f0bf0c1dd1a5"
++LIC_FILES_CHKSUM = "file://COPYING;md5=3d8a091d797491204567185a6efce70f"
  
--SRC_URI = "git://github.com/LoupVaillant/Monocypher.git;protocol=https;branch=master"
--SRCREV = "0d85f98c9d9b0227e42cf795cb527dff372b40a4"
-+SRC_URI = "https://monocypher.org/download/${BPN}-${PV}.tar.gz"
-+SRC_URI[sha512sum] = "bf275d4c53ff94af6cdc723a4e002e9f080f4d1436c86c76bb37870b34807f1d7b32331d8ff8a1aeb369e946f3769021e03e63efac25b82efc5abf54dc084714"
+ S = "${WORKDIR}/git"
+-SRCREV = "1429ab42d48123cc8f73b96c69a87fb9c6d8a7c9"
++SRCREV = "fc937358e71253a6efaa3ba74885364976b040ea"
+ SRC_URI = "git://github.com/smuellerDD/libkcapi.git;branch=master;protocol=https \
+           "
  
--S = "${WORKDIR}/git"
-+MIRRORS = "https://.*/.* https://github.com/LoupVaillant/Monocypher/releases/download/${PV}/${BPN}-${PV}.tar.gz "
-+
-+S = "${WORKDIR}/${BPN}-${PV}"
- 
- CFLAGS += "-pedantic -Wall -Wextra -O3"
- EXTRA_OEMAKE = "'PREFIX=${prefix}' 'DESTDIR=${D}' 'CFLAGS=${CFLAGS}' 'LIBDIR=${libdir}'"
 -- 
-2.17.1
+2.25.1
+
 
