@@ -1,90 +1,126 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 19413C47DB3
-	for <webhook@archiver.kernel.org>; Thu, 18 Jan 2024 16:50:56 +0000 (UTC)
-Received: from mail-lf1-f43.google.com (mail-lf1-f43.google.com [209.85.167.43])
- by mx.groups.io with SMTP id smtpd.web11.18013.1705596648192085917
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E343C47DB3
+	for <webhook@archiver.kernel.org>; Thu, 18 Jan 2024 16:51:36 +0000 (UTC)
+Received: from mail-oa1-f45.google.com (mail-oa1-f45.google.com [209.85.160.45])
+ by mx.groups.io with SMTP id smtpd.web11.18043.1705596688463727694
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Jan 2024 08:50:48 -0800
+ Thu, 18 Jan 2024 08:51:28 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=c8945tH6;
- spf=pass (domain: smile.fr, ip: 209.85.167.43, mailfrom: yoann.congal@smile.fr)
-Received: by mail-lf1-f43.google.com with SMTP id 2adb3069b0e04-50f11e3ba3aso1525747e87.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 18 Jan 2024 08:50:47 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=R8rTuHUw;
+ spf=pass (domain: gmail.com, ip: 209.85.160.45, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f45.google.com with SMTP id 586e51a60fabf-206b77b9f4bso5508909fac.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 18 Jan 2024 08:51:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1705596646; x=1706201446; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1705596688; x=1706201488; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=I8ltMUZVBJpXHvisTpK9CnwNqKTdKQh4JbzOcTK8FQM=;
-        b=c8945tH6W65iCauHslFahoYUEYNxWluT1GQ7AVMa0WGlFOMdIBrH3ZgivC32mtyfgT
-         vhgZGhI4zhq07xcF8fm+hFtPQocpG+1Nj4mg2IA/n0ECc/dkB9OgG/9Vwth2sCr7tzUG
-         aKhaskYuTfyxOZJM3974KqmHJzgevHeksYQRDhNEwtv/uqEwdthrF9adM84D/+gJ3iVc
-         2g6bhBUsK70bcG7MMW/6xVKx+60Mjep5S/fqV5Rp4slHH/xOkS+uK+6Ae6K74dOzNs5f
-         d9uIPZy6vz2uOnp0ydcYt4BteQTomnarDAEsYjgoZ1F/E3aageWrBxPT8RjfSROXLMPQ
-         7bJQ==
+        bh=IFPf7l3UAkdyG0RxDXPKGYPw9bpFpL6VSY5cGg1SRHo=;
+        b=R8rTuHUw66emmbxwfr3C5qMXL/pS31eCbQZJCepTxn5LHGlPvo/nhNaq/oU/FAuFQr
+         aVLDaC1PMfMf4VMzya0Z5lsharFjX8nTEJi7b6GFfc3nv+SuuXF4c1+1TtkAKdRSmnuA
+         vbKPh2WhcPcaTU0yrgC9HAe8+d2lU7V9vX+UQ8OhGe14j39uYSabMCnyKefi8Smgjz/j
+         ibqmjzIQgjcB54Z2CNGhT/h4lLtjPyM4VnmQcY9ia1vErRpZhOhNjzFi5zBTHbDOkyAv
+         SUQXTcEgmfHZwj85ESv8Ul5SlA2cADs7yP6k4irsyJCZDz+kffVnjvTxNXxjmd7lWQXY
+         94GA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1705596646; x=1706201446;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1705596688; x=1706201488;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=I8ltMUZVBJpXHvisTpK9CnwNqKTdKQh4JbzOcTK8FQM=;
-        b=IoPidjhg3olNAUK9gkxLeLiYtemz/ICXlz0v6c0h8lbQgUA3FSRzCu50bSR/Za8Qjp
-         WXPJ8wPvY342eQj0dfk7oy3jD8tdG8+WMrFEAdfqa/Yql156M5H3DYQu+6WsJ2P+ffnK
-         SYnBtRmsl6j6XLW0Sgz6VTWSdkb42/s8FwPE3Fz/ns6N9/U0wM+YuXkth8ymtRFghgVV
-         9SqcT0EwWAHFN8E6UmkWTENEyzPwdS0V8/8V9YJAv+9SL/Ey3ulrisHbLZ6pcsUgajBY
-         nTCLNlWlLg9DoWm6+Jn2egtaZqg0JYJfjJ2Sx11N/lqq/HVPgjmORtz/mIznaqGQKlcC
-         HNpw==
-X-Gm-Message-State: AOJu0YwWs3qsfhOEhWkvwPf9LUTpzOUOX9+zCoz1+tAa52uDejKFTlsk
-	lfGsmVSSSvvQ5DzRBb5zJ5zwi1B+GZ74IEfD+QgD3C8QpFTijMcG4ENDpX5w3hEwkarRI0hcuxz
-	2QjM=
-X-Google-Smtp-Source: AGHT+IFM+nNOXOR7oIRPAUAIv6iblbQhGGHEpHtNg5DUpl0s9SEPJR+YrJdVygJonoAvuW+jMLQYXA==
-X-Received: by 2002:a05:6512:370b:b0:50e:936b:a466 with SMTP id z11-20020a056512370b00b0050e936ba466mr666214lfr.90.1705596645702;
-        Thu, 18 Jan 2024 08:50:45 -0800 (PST)
-Received: from P-ASN-ECS-830T8C3.numericable.fr ([89.159.1.53])
-        by smtp.gmail.com with ESMTPSA id n18-20020a05600c501200b0040e77ce8768sm14435012wmr.16.2024.01.18.08.50.45
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 18 Jan 2024 08:50:45 -0800 (PST)
-From: Yoann Congal <yoann.congal@smile.fr>
-To: openembedded-devel@lists.openembedded.org
-Cc: Yoann Congal <yoann.congal@smile.fr>
-Subject: [meta-python][PATCH 2/2] python3-pytest-cov: Add missing python3-pytest RDEPENDS
-Date: Thu, 18 Jan 2024 17:49:59 +0100
-Message-Id: <20240118164959.2797172-2-yoann.congal@smile.fr>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240118164959.2797172-1-yoann.congal@smile.fr>
-References: <20240118164959.2797172-1-yoann.congal@smile.fr>
+        bh=IFPf7l3UAkdyG0RxDXPKGYPw9bpFpL6VSY5cGg1SRHo=;
+        b=JS02ViWcc0UTL5WqXBJMfEt/2dsU35h9+RWtytE4KQ4V5iEkE1hMnEPc++IoimPOcl
+         XHGsXQ0Z06kX9GdDEOL0bnt8pG22tkJ18HtNfMvlZDe5cGepH5UWqmWD//V9tRQ+n6hs
+         A1lapBkhFXDgqlza6nPW/ixfUAIBi5MhKqadCE8NZuIK8B3vkBvBYQ4cf/6EQ7fTjwPO
+         7rCTe3EH37UYB0fpBjbq2T45HwG1d2fM/hQpkxRpLEHqwcrPqtGwX5AtfRiqkdGiWhww
+         XQs4ZBzS/Qfdz1kBOW1CPiTVH9FkMmy99ecvvEIoF3klwhUItsc4Qhuwq3jfI5W7pufO
+         BdNA==
+X-Gm-Message-State: AOJu0YzvdoVZWm98mBo1SLFrNCk1t8NzUm53cyT9gDiCTLyHZ2DYHu0e
+	Ids6hV1c1pocQPi68axPg0VUQf2o56Ipbu/G60FQ4yxRrO05ooMOuPiEBB9vehWdU2/T2YX4O50
+	EIp6OGMoD6hO2kZ9fsqO5shhZWAZKW05suN/HsA==
+X-Google-Smtp-Source: AGHT+IGEG+QXnxfY1qcRN/+4X6TPjhkaFvJvoVyzkOkBULeVdEsPVJYU8IU9f5gu8SM0uUBFJAqdWEiglLxRF8WHGjo=
+X-Received: by 2002:a05:6870:ef16:b0:210:8adc:52a7 with SMTP id
+ qq22-20020a056870ef1600b002108adc52a7mr1301659oab.90.1705596687705; Thu, 18
+ Jan 2024 08:51:27 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240117202405.29013-1-simone.p.weiss@posteo.com>
+In-Reply-To: <20240117202405.29013-1-simone.p.weiss@posteo.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 18 Jan 2024 08:51:01 -0800
+Message-ID: <CAMKF1srwkG9N7oELo9V5UtiO6r5Cx9KHAvc2xorkPVzCZBHALw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] open-cl: stop using "virtual/" in RPROVIDES
+To: =?UTF-8?B?U2ltb25lIFdlacOf?= <simone.p.weiss@posteo.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 18 Jan 2024 16:50:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108347
+ <openembedded-devel@lists.openembedded.org>; Thu, 18 Jan 2024 16:51:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108348
 
-python3-pytest-cov is a plugin of python3-pytest adding test coverage
-feature. It does not seem to do anything useful by itself.
+I have staged a similar patch already in master-next
+https://patchwork.yoctoproject.org/project/oe/patch/20240116235052.3713167-=
+1-raj.khem@gmail.com/
 
-Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
----
- meta-python/recipes-devtools/python/python3-pytest-cov_4.1.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-python/recipes-devtools/python/python3-pytest-cov_4.1.0.bb b/meta-python/recipes-devtools/python/python3-pytest-cov_4.1.0.bb
-index 3a68011f4..66375dec3 100644
---- a/meta-python/recipes-devtools/python/python3-pytest-cov_4.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pytest-cov_4.1.0.bb
-@@ -10,6 +10,6 @@ SRC_URI[sha256sum] = "3904b13dfbfec47f003b8e77fd5b589cd11904a21ddf1ab38a64f204d6
- inherit pypi setuptools3
- 
- DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
--RDEPENDS:${PN} += "python3-coverage"
-+RDEPENDS:${PN} += "python3-coverage python3-pytest"
- 
- BBCLASSEXTEND = "native nativesdk"
--- 
-2.39.2
-
+On Wed, Jan 17, 2024 at 12:24=E2=80=AFPM Simone Wei=C3=9F <simone.p.weiss@p=
+osteo.com> wrote:
+>
+> From: Simone Wei=C3=9F <simone.p.weiss@posteo.com>
+>
+> For RPROVIDES and RDEPENDS the string "/virtual" holds no special meaning
+> and hence packages should avoid the use of "virtual/" there. Update it
+> for opencl to the suggested alternative "-virtual". See also the
+> discussion on the yocto docs mailing list:
+> https://lists.yoctoproject.org/g/docs/message/1785
+>
+> Signed-off-by: Simone Wei=C3=9F <simone.p.weiss@posteo.com>
+> ---
+>  meta-oe/recipes-core/opencl/ocl-icd_2.3.2.bb                | 2 +-
+>  meta-oe/recipes-core/opencl/opencl-icd-loader_2023.12.14.bb | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-oe/recipes-core/opencl/ocl-icd_2.3.2.bb b/meta-oe/recip=
+es-core/opencl/ocl-icd_2.3.2.bb
+> index 93fac969c..d43ea281a 100644
+> --- a/meta-oe/recipes-core/opencl/ocl-icd_2.3.2.bb
+> +++ b/meta-oe/recipes-core/opencl/ocl-icd_2.3.2.bb
+> @@ -15,6 +15,6 @@ inherit autotools
+>
+>  DEPENDS =3D "ruby-native"
+>  PROVIDES =3D "virtual/opencl-icd"
+> -RPROVIDES:${PN} =3D "virtual/opencl-icd"
+> +RPROVIDES:${PN} =3D "virtual-opencl-icd"
+>
+>  BBCLASSEXTEND =3D "native nativesdk"
+> diff --git a/meta-oe/recipes-core/opencl/opencl-icd-loader_2023.12.14.bb =
+b/meta-oe/recipes-core/opencl/opencl-icd-loader_2023.12.14.bb
+> index 6bf01a248..146ec6e47 100644
+> --- a/meta-oe/recipes-core/opencl/opencl-icd-loader_2023.12.14.bb
+> +++ b/meta-oe/recipes-core/opencl/opencl-icd-loader_2023.12.14.bb
+> @@ -9,7 +9,7 @@ inherit pkgconfig cmake
+>  DEPENDS +=3D "opencl-headers"
+>
+>  PROVIDES =3D "virtual/opencl-icd"
+> -RPROVIDES:${PN} =3D "virtual/opencl-icd"
+> +RPROVIDES:${PN} =3D "virtual-opencl-icd"
+>
+>  S =3D "${WORKDIR}/git"
+>
+> --
+> 2.39.2
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#108339): https://lists.openembedded.org/g/openembedde=
+d-devel/message/108339
+> Mute This Topic: https://lists.openembedded.org/mt/103794862/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
