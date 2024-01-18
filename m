@@ -1,142 +1,89 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D578DC47DAF
-	for <webhook@archiver.kernel.org>; Thu, 18 Jan 2024 15:37:05 +0000 (UTC)
-Received: from mail-ot1-f54.google.com (mail-ot1-f54.google.com [209.85.210.54])
- by mx.groups.io with SMTP id smtpd.web11.14769.1705592220878796991
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4ED78C47DB3
+	for <webhook@archiver.kernel.org>; Thu, 18 Jan 2024 16:50:36 +0000 (UTC)
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.web10.17812.1705596634374129156
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Jan 2024 07:37:00 -0800
+ Thu, 18 Jan 2024 08:50:35 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZqsN1jsY;
- spf=pass (domain: gmail.com, ip: 209.85.210.54, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f54.google.com with SMTP id 46e09a7af769-6dde173384aso6426887a34.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 18 Jan 2024 07:37:00 -0800 (PST)
+ dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=DiBMrmaD;
+ spf=pass (domain: smile.fr, ip: 209.85.128.49, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-40e8801221cso19369045e9.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 18 Jan 2024 08:50:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1705592220; x=1706197020; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=BdtGyafFewlDScxVsqIEuqEUUeJENirGnDt66rZkDqU=;
-        b=ZqsN1jsYnKAv+X8E0/hetWQQj0+oVSUxGND1rhhkY+xOOiYUuLsciOzZ0W1xuStlpc
-         YbUdLNxkLZ0BXFdZuF9fFlCdVvUNGX16wITjxoDvYX/XulEJqXvIO+wpWeLPVWzzDlql
-         FVEjozdUN0sxK1LRVLN2nUF1SKzrILPvJafTus8ceJ/cug36kTG0kvTpeiGkXC7GZp3C
-         M2fE5epHvT/VyhNsR4dyqux1rTo+48zuf0TbpiialVTYjGrLeaeESQNjdye4yqFjzrSO
-         EEEOyzOGHk3gxxCY6NqNMKPJQZVwUCD0Xd0+O+WckhsSLtUJGjEo99mc2SgdS3Zfm6LO
-         FeUA==
+        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1705596632; x=1706201432; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=yMd37t7wHzYTKNbpFiYc3kOeNQpEdjPK+xGLBVM1m/Q=;
+        b=DiBMrmaDEcDOnNhPDeCkp9Nxo3Ajf/gGQT2Zc2WbGmh1KTsICjSMDtlxUyHoMzCnU2
+         Abk8SfPshct/fe2hLx5hzYEzNLyUkeJQdEx3+8yNY/xIOWAkzRj0Tws0sp/bmW9ycjji
+         oRZ/ZNuNZLN5eLAsV00gwfkNAb9F+DkijoNx3j8n6/raMANsQ4yebuwFRabILBMw8cYt
+         6X+6ZOkKDcwNuPRBwVnY+60Pq6SOaoBl4Y0r0iDkDiRTGIF8QsGZHbr8aSLAhQzLfxY0
+         gaWvklYHlFJuxsvJCvGQwTy8DfdPau3OO71BWgxlLxMP/virYbWon+qORugaavFFqLys
+         wnxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1705592220; x=1706197020;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=BdtGyafFewlDScxVsqIEuqEUUeJENirGnDt66rZkDqU=;
-        b=T9BZGRPVb9EqHlwVMT+yvRcWMqbmAc3qVFSodWNktfy303vZvTLhOEGOoNhxZ/8qLe
-         n8M/2AWzcT+cDUNh3V5gWIIgVYomSG34goA14PhjZS6ZSwzOYdp7dePK6kn32UPujYAu
-         m3gv4VpuNZjcPYyfzk3NgvRNJHQu751ttXVPnqUa96zNJ8lRFkQX5UkDUMUi4AcDIXnL
-         nXDUnecm4W/kwL0kPdRG1sQJ2j/Euf5p8O9OAkdbSLVF9asbkgubCQ0cZEE/irFgAEFD
-         bY7KUKx44g4mxg2EXehDIuEY7APIWB4Q0a87QqoVTtppI8BCem7NL2oUXcii6iLBjbBo
-         VGPg==
-X-Gm-Message-State: AOJu0YwA4KAZ4kaU/pf8j7LSUntY28uvZKtq9i78FPArhrq4obsAfaNd
-	3/jegiQBhFJrU6y3zSWxqJpzXgzqgD3GYhBYB7JTYP6LH119Esa3LJqVqRdqjOEsNkW8ZGKbSX7
-	uBfdJe2FBCM4Z8ZCSyxrRxKGxXbBCC7JYqo40ow==
-X-Google-Smtp-Source: AGHT+IGhQPxKv7w+5PXyHQpjZv4EiOXm3AlYIS+Kf0B3qiAK8CroT4oBGDUEiGRXTIMX0XztSmjDaCSEGqxvRXnGLA0=
-X-Received: by 2002:a05:6870:f152:b0:206:b992:136e with SMTP id
- l18-20020a056870f15200b00206b992136emr1026008oac.68.1705592219924; Thu, 18
- Jan 2024 07:36:59 -0800 (PST)
+        d=1e100.net; s=20230601; t=1705596632; x=1706201432;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=yMd37t7wHzYTKNbpFiYc3kOeNQpEdjPK+xGLBVM1m/Q=;
+        b=Ak3qgztTlxz02IqgP54lt2DlyAs9eUsso8b+M/Q1+1J9R6ZIN42QiXl+Rcoff+FbE9
+         7FjAe6ffDO5MMtXZmxrT6iItiIFj5YuaK44Awc8jQHIPTPBWDnHEGxV1y03aBXU5IeUw
+         IL3QPqWQFdvPSwDla+l8Mx7QOGY35mGRi9L5uSREaprtBdUxAyElVvTzmVE1S0I7QSg2
+         UGMpnxy1xU2/YVN17Oa+G0b4D1Iz4oYIGjjlztknVo20NieGQGh8K5nDPe5UYOgKipek
+         uUIWAq6jP7qzpwA4WA9/Px3IF+7Gx2NhALydEBlMgC1aUW+bTC/VcMXxV4xFazkkRfAX
+         k6tw==
+X-Gm-Message-State: AOJu0YxK7xGyY82NpQWDTHuvfRw2injLc1JImA5g25oy4xM2utZihlCw
+	JwCIVDrYIQLDRTS1ARQgDmAFcbZwhLPrnqE8klO2aAUId3vZ1Sh3BqUsVypI4goAppzf/IPEclI
+	wdR8=
+X-Google-Smtp-Source: AGHT+IFlt6ntPRKSTwZI3MlAq/SO3i3EZp6Xa52f9Jmi5WDBhCLWERf6FypT/+Gk9aSWspCaStcOug==
+X-Received: by 2002:a05:600c:6a0e:b0:40e:5e30:212d with SMTP id jj14-20020a05600c6a0e00b0040e5e30212dmr783429wmb.30.1705596632368;
+        Thu, 18 Jan 2024 08:50:32 -0800 (PST)
+Received: from P-ASN-ECS-830T8C3.numericable.fr ([89.159.1.53])
+        by smtp.gmail.com with ESMTPSA id n18-20020a05600c501200b0040e77ce8768sm14435012wmr.16.2024.01.18.08.50.32
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 18 Jan 2024 08:50:32 -0800 (PST)
+From: Yoann Congal <yoann.congal@smile.fr>
+To: openembedded-devel@lists.openembedded.org
+Cc: Yoann Congal <yoann.congal@smile.fr>
+Subject: [meta-python][PATCH 1/2] python3-coverage: add native and nativesdk BBCLASSEXTEND
+Date: Thu, 18 Jan 2024 17:49:58 +0100
+Message-Id: <20240118164959.2797172-1-yoann.congal@smile.fr>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-References: <20240117113911.15322-1-paul.leguendekerneizon@savoirfairelinux.com>
- <20240117113911.15322-2-paul.leguendekerneizon@savoirfairelinux.com>
-In-Reply-To: <20240117113911.15322-2-paul.leguendekerneizon@savoirfairelinux.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 18 Jan 2024 07:36:33 -0800
-Message-ID: <CAMKF1sqAtNYPjLRkv1RAn_Sx8A=f8EihK+xXTORujH0st4gw7Q@mail.gmail.com>
-Subject: Re: [oe] [meta-webserver][PATCH 1/2] cockpit-machines: add recipe
-To: Paul Le Guen de Kerneizon <paul.leguendekerneizon@savoirfairelinux.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 18 Jan 2024 15:37:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108345
+ <openembedded-devel@lists.openembedded.org>; Thu, 18 Jan 2024 16:50:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108346
 
-this needs to match the constraints on cockpit recipe or we get these error=
-s
+To build python3-pytest-cov-native we need python3-coverage-native.
+To build nativesdk-python3-pytest-cov we need nativesdk-python3-coverage.
 
-https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/3532/step=
-s/12/logs/stdio
+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
 
-you might need to add
+---
+Tested in native and nativesdk environnement:
+"pytest --cov" does exist and start.
+---
+ meta-python/recipes-devtools/python/python3-coverage_7.4.0.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-    REQUIRED_DISTRO_FEATURES =3D "systemd pam"
+diff --git a/meta-python/recipes-devtools/python/python3-coverage_7.4.0.bb b/meta-python/recipes-devtools/python/python3-coverage_7.4.0.bb
+index cb1041c2f..30922697a 100644
+--- a/meta-python/recipes-devtools/python/python3-coverage_7.4.0.bb
++++ b/meta-python/recipes-devtools/python/python3-coverage_7.4.0.bb
+@@ -18,3 +18,5 @@ RDEPENDS:${PN} += " \
+     python3-tomllib \
+     python3-xml \
+ "
++
++BBCLASSEXTEND = "native nativesdk"
+-- 
+2.39.2
 
-    COMPATIBLE_HOST:libc-musl =3D "null"
-
-On Wed, Jan 17, 2024 at 4:13=E2=80=AFAM Paul Le Guen de Kerneizon
-<paul.leguendekerneizon@savoirfairelinux.com> wrote:
->
-> `cockpit-machines` is a Cockpit plugin used to provide a web interface
-> to manage virtual machines. Since Cockpit version 242, cockpit-machines
-> has been moved to a dedicated repository.
->
-> Signed-off-by: Paul Le Guen de Kerneizon <paul.leguendekerneizon@savoirfa=
-irelinux.com>
-> ---
->  .../cockpit-machines/cockpit-machines_304.bb  | 22 +++++++++++++++++++
->  1 file changed, 22 insertions(+)
->  create mode 100644 meta-webserver/recipes-webadmin/cockpit-machines/cock=
-pit-machines_304.bb
->
-> diff --git a/meta-webserver/recipes-webadmin/cockpit-machines/cockpit-mac=
-hines_304.bb b/meta-webserver/recipes-webadmin/cockpit-machines/cockpit-mac=
-hines_304.bb
-> new file mode 100644
-> index 000000000..b787a5cf6
-> --- /dev/null
-> +++ b/meta-webserver/recipes-webadmin/cockpit-machines/cockpit-machines_3=
-04.bb
-> @@ -0,0 +1,22 @@
-> +SUMMARY =3D "Cockpit UI for virtual machines"
-> +DESCRIPTION =3D "Cockpit-machines provides a user interface to manage vi=
-rtual machines"
-> +LICENSE =3D "LGPL-2.1-only"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D4fbd65380cdd255951079008b3645=
-16c"
-> +DEPENDS +=3D "cockpit"
-> +
-> +SRC_URI =3D "https://github.com/cockpit-project/cockpit-machines/release=
-s/download/${PV}/cockpit-machines-${PV}.tar.xz"
-> +SRC_URI[sha256sum] =3D "b9b41d728d68ae9d21c229765e00793ad018231903c84ed6=
-53c21d25444714e3"
-> +
-> +S =3D "${WORKDIR}/${PN}"
-> +
-> +inherit autotools-brokensep gettext
-> +
-> +RDEPENDS:${PN} +=3D "cockpit libvirt-dbus pciutils virt-install"
-> +
-> +# Default installation path of cockpit-machines is /usr/local/
-> +FILES:${PN} =3D "\
-> +    ${prefix}/local/ \
-> +    ${datadir}/metainfo/org.cockpit-project.cockpit-machines.metainfo.xm=
-l \
-> +"
-> +
-> +BUGTRACKER =3D "github.com/cockpit-project/cockpit-machines/issues"
-> --
-> 2.34.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#108327): https://lists.openembedded.org/g/openembedde=
-d-devel/message/108327
-> Mute This Topic: https://lists.openembedded.org/mt/103784069/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
 
