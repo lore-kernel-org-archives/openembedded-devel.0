@@ -1,261 +1,108 @@
-Return-Path: <randy.macleod@windriver.com>
+Return-Path: <ross.burton@arm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 45D39C47DAF
-	for <webhook@archiver.kernel.org>; Thu, 18 Jan 2024 17:02:26 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.18480.1705597343273021562
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6AC5EC47DAF
+	for <webhook@archiver.kernel.org>; Thu, 18 Jan 2024 20:37:22 +0000 (UTC)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by mx.groups.io with SMTP id smtpd.web10.4269.1705610236132122034
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Jan 2024 09:02:23 -0800
+ Thu, 18 Jan 2024 12:37:16 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=qPeigwLE;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=174791ccb8=randy.macleod@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 40I8Kcn5010382;
-	Thu, 18 Jan 2024 17:02:21 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=JZsr0
-	QYK3aDN9Hb9pgQd7p9cYtjlKebzMHeg/3uXovM=; b=qPeigwLEJ+WfESD2xAamf
-	ly3aqsjJYuH/HZsMmLgPnDySgg7NTPWUOhb3I8gVblGFfiSCFYTZ8QgaC0TqoUMr
-	CWw/85z9ICv1kJJV960yYBy9kXlJWS8KmuUyJUFRKFwu0EZ9JAX2CW+jTT0NBBud
-	HWBJlx3BapCRG0m1iGOkqUbjKcucDEmKQAnIJoTMFR4rRTG3DsJ0oZ+WMJI0GZbX
-	W1vrYr2kK48703ZaUyq9yevt8K1anMR5vM23UMDkwF1EHwqRHHRRNia4aeHDdIaw
-	pBean1jnUdl5vrwMHXsgEyxu8Ds8APa1FYjHl4Z+sW5jfAg9NJjQEXMHn05Dtwvp
-	Q==
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3vkhg660s1-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
-	Thu, 18 Jan 2024 17:02:20 +0000 (GMT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Thu, 18 Jan 2024 09:02:29 -0800
-Received: from pop-os.wrs.com (172.25.44.3) by ala-exchng01.corp.ad.wrs.com
- (147.11.82.252) with Microsoft SMTP Server id 15.1.2507.35 via Frontend
- Transport; Thu, 18 Jan 2024 09:02:29 -0800
-From: <Randy.MacLeod@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <anuj.mittal@intel.com>, <david.zuhn@sonos.com>
-Subject: [PATCH] rng-tools: Revert "rng-tools: move from oe-core to meta-oe"
-Date: Thu, 18 Jan 2024 12:02:18 -0500
-Message-ID: <20240118170218.2000699-1-Randy.MacLeod@windriver.com>
+ dkim=none (message not signed); spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 624171042
+	for <openembedded-devel@lists.openembedded.org>; Thu, 18 Jan 2024 12:38:00 -0800 (PST)
+Received: from oss-tx204.lab.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 2A27F3F766
+	for <openembedded-devel@lists.openembedded.org>; Thu, 18 Jan 2024 12:37:14 -0800 (PST)
+From: ross.burton@arm.com
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH] mozjs-115: fix the build on ARMv5
+Date: Thu, 18 Jan 2024 20:37:12 +0000
+Message-Id: <20240118203712.3016674-1-ross.burton@arm.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: BOrRqqO53OLsQEsWevKqSFL1giYs4GUz
-X-Proofpoint-GUID: BOrRqqO53OLsQEsWevKqSFL1giYs4GUz
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-01-18_08,2024-01-17_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0 spamscore=0
- lowpriorityscore=0 phishscore=0 mlxlogscore=999 suspectscore=0 bulkscore=0
- malwarescore=0 adultscore=0 mlxscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.19.0-2311290000 definitions=main-2401180124
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 18 Jan 2024 17:02:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108351
+ <openembedded-devel@lists.openembedded.org>; Thu, 18 Jan 2024 20:37:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108352
 
-From: Randy MacLeod <Randy.MacLeod@windriver.com>
+From: Ross Burton <ross.burton@arm.com>
 
-This reverts commit c076a263517e4dc52b115acc4ead8e3ddfcdded1.
+The JIT uses the ISB instruction, but being a multi-core barrier
+instruction this doesn't exist on the single-core ARMv5 ISA. Check the
+ISA level before using ISB.
 
-Revert this commit since:
+Also set [cleandirs] for ${B} to ensure clean builds are done when
+reconfiguring.
 
- - some systems using oe-core master may still be using kernels from
-   before 5.6 pulled in the rng-tools algorithm, and
+[ YOCTO #14572 ]
 
- - some hardware platforms may not have a hardware random number generator
-   and could therefore need to run rngd to avoid long boot-time initialization
-   due to a depleted entropy pool.
-
-so it's best to leave the recipe in oe-core.
-
-Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+Signed-off-by: Ross Burton <ross.burton@arm.com>
 ---
- .../rng-tools/rng-tools/default               |  1 -
- .../recipes-support/rng-tools/rng-tools/init  | 42 -----------
- .../rng-tools/rng-tools/rng-tools.service     | 32 ---------
- .../rng-tools/rng-tools_6.16.bb               | 69 -------------------
- 4 files changed, 144 deletions(-)
- delete mode 100644 meta-oe/recipes-support/rng-tools/rng-tools/default
- delete mode 100644 meta-oe/recipes-support/rng-tools/rng-tools/init
- delete mode 100644 meta-oe/recipes-support/rng-tools/rng-tools/rng-tools.service
- delete mode 100644 meta-oe/recipes-support/rng-tools/rng-tools_6.16.bb
+ .../mozjs/mozjs-115/armv5.patch               | 19 +++++++++++++++++++
+ .../mozjs/mozjs-115_115.2.0.bb                |  2 ++
+ 2 files changed, 21 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/mozjs/mozjs-115/armv5.patch
 
-diff --git a/meta-oe/recipes-support/rng-tools/rng-tools/default b/meta-oe/recipes-support/rng-tools/rng-tools/default
-deleted file mode 100644
-index b9f8e0363..000000000
---- a/meta-oe/recipes-support/rng-tools/rng-tools/default
-+++ /dev/null
-@@ -1 +0,0 @@
--EXTRA_ARGS="-r /dev/hwrng"
-diff --git a/meta-oe/recipes-support/rng-tools/rng-tools/init b/meta-oe/recipes-support/rng-tools/rng-tools/init
-deleted file mode 100644
-index 13f0ecd37..000000000
---- a/meta-oe/recipes-support/rng-tools/rng-tools/init
-+++ /dev/null
-@@ -1,42 +0,0 @@
--#!/bin/sh
--#
--# This is an init script for openembedded
--# Copy it to @SYSCONFDIR@/init.d/rng-tools and type
--# > update-rc.d rng-tools defaults 60
--#
--
--rngd=@SBINDIR@/rngd
--test -x "$rngd" || exit 1
--
--[ -r @SYSCONFDIR@/default/rng-tools ] && . "@SYSCONFDIR@/default/rng-tools"
--
--case "$1" in
--  start)
--    echo -n "Starting random number generator daemon"
--    start-stop-daemon -S -q -x $rngd -- $EXTRA_ARGS
--    echo "."
--    ;;
--  stop)
--    echo -n "Stopping random number generator daemon"
--    start-stop-daemon -K -q -n rngd
--    echo "."
--    ;;
--  reload|force-reload)
--    echo -n "Signalling rng daemon restart"
--    start-stop-daemon -K -q -s 1 -x $rngd
--    start-stop-daemon -K -q -s 1 -x $rngd
--    ;;
--  restart)
--    echo -n "Stopping random number generator daemon"
--    start-stop-daemon -K -q -n rngd
--    echo "."
--    echo -n "Starting random number generator daemon"
--    start-stop-daemon -S -q -x $rngd -- $EXTRA_ARGS
--    echo "."
--    ;;
--  *)
--    echo "Usage: @SYSCONFDIR@/init.d/rng-tools {start|stop|reload|restart|force-reload}"
--    exit 1
--esac
--
--exit 0
-diff --git a/meta-oe/recipes-support/rng-tools/rng-tools/rng-tools.service b/meta-oe/recipes-support/rng-tools/rng-tools/rng-tools.service
-deleted file mode 100644
-index 5ae2fba21..000000000
---- a/meta-oe/recipes-support/rng-tools/rng-tools/rng-tools.service
-+++ /dev/null
-@@ -1,32 +0,0 @@
--[Unit]
--Description=Hardware RNG Entropy Gatherer Daemon
--DefaultDependencies=no
--Conflicts=shutdown.target
--Before=sysinit.target shutdown.target
--ConditionVirtualization=!container
--
--[Service]
--EnvironmentFile=-@SYSCONFDIR@/default/rng-tools
--ExecStart=@SBINDIR@/rngd -f $EXTRA_ARGS
--CapabilityBoundingSet=CAP_SYS_ADMIN
--IPAddressDeny=any
--LockPersonality=yes
--MemoryDenyWriteExecute=yes
--NoNewPrivileges=yes
--PrivateTmp=yes
--ProtectControlGroups=yes
--ProtectHome=yes
--ProtectHostname=yes
--ProtectKernelModules=yes
--ProtectKernelLogs=yes
--ProtectSystem=strict
--RestrictAddressFamilies=AF_UNIX
--RestrictNamespaces=yes
--RestrictRealtime=yes
--RestrictSUIDSGID=yes
--SystemCallArchitectures=native
--SystemCallErrorNumber=EPERM
--SystemCallFilter=@system-service
--
--[Install]
--WantedBy=sysinit.target
-diff --git a/meta-oe/recipes-support/rng-tools/rng-tools_6.16.bb b/meta-oe/recipes-support/rng-tools/rng-tools_6.16.bb
-deleted file mode 100644
-index f0aa3ff93..000000000
---- a/meta-oe/recipes-support/rng-tools/rng-tools_6.16.bb
-+++ /dev/null
-@@ -1,69 +0,0 @@
--SUMMARY = "Random number generator daemon"
--DESCRIPTION = "Check and feed random data from hardware device to kernel"
--HOMEPAGE = "https://github.com/nhorman/rng-tools"
--BUGTRACKER = "https://github.com/nhorman/rng-tools/issues"
--LICENSE = "GPL-2.0-only"
--LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
--DEPENDS = "openssl libcap"
--
--SRC_URI = "git://github.com/nhorman/rng-tools.git;branch=master;protocol=https \
--           file://init \
--           file://default \
--           file://rng-tools.service \
--           "
--SRCREV = "e061c313b95890eb5fa0ada0cd6eec619dafdfe2"
--
--S = "${WORKDIR}/git"
--
--inherit autotools update-rc.d systemd pkgconfig
--
--EXTRA_OECONF = "--without-rtlsdr"
--
--PACKAGECONFIG ??= "libjitterentropy"
--PACKAGECONFIG:libc-musl = "libargp libjitterentropy"
--
--PACKAGECONFIG[libargp] = "--with-libargp,--without-libargp,argp-standalone,"
--PACKAGECONFIG[libjitterentropy] = "--enable-jitterentropy,--disable-jitterentropy,libjitterentropy"
--PACKAGECONFIG[libp11] = "--with-pkcs11,--without-pkcs11,libp11 openssl"
--PACKAGECONFIG[nistbeacon] = "--with-nistbeacon,--without-nistbeacon,curl libxml2"
--PACKAGECONFIG[qrypt] = "--with-qrypt,--without-qrypt,curl"
--
--INITSCRIPT_PACKAGES = "${PN}-service"
--INITSCRIPT_NAME:${PN}-service = "rng-tools"
--INITSCRIPT_PARAMS:${PN}-service = "start 03 2 3 4 5 . stop 30 0 6 1 ."
--
--SYSTEMD_PACKAGES = "${PN}-service"
--SYSTEMD_SERVICE:${PN}-service = "rng-tools.service"
--
--CFLAGS += " -DJENT_CONF_ENABLE_INTERNAL_TIMER "
--
--PACKAGES =+ "${PN}-service"
--
--FILES:${PN}-service += " \
--    ${sysconfdir}/init.d/rng-tools \
--    ${sysconfdir}/default/rng-tools \
--"
--
--# Refer autogen.sh in rng-tools
--do_configure:prepend() {
--    cp ${S}/README.md ${S}/README
--}
--
--do_install:append() {
--    install -Dm 0644 ${WORKDIR}/default ${D}${sysconfdir}/default/rng-tools
--    install -Dm 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/rng-tools
--    install -Dm 0644 ${WORKDIR}/rng-tools.service \
--                     ${D}${systemd_system_unitdir}/rng-tools.service
--    sed -i \
--        -e 's,@SYSCONFDIR@,${sysconfdir},g' \
--        -e 's,@SBINDIR@,${sbindir},g' \
--        ${D}${sysconfdir}/init.d/rng-tools \
--        ${D}${systemd_system_unitdir}/rng-tools.service
--
--    if [ "${@bb.utils.contains('PACKAGECONFIG', 'nistbeacon', 'yes', 'no', d)}" = "yes" ]; then
--        sed -i \
--            -e '/^IPAddressDeny=any/d' \
--            -e '/^RestrictAddressFamilies=/ s/$/ AF_INET AF_INET6/' \
--            ${D}${systemd_system_unitdir}/rng-tools.service
--    fi
--}
--- 
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs-115/armv5.patch b/meta-=
+oe/recipes-extended/mozjs/mozjs-115/armv5.patch
+new file mode 100644
+index 0000000000..4c45955bca
+--- /dev/null
++++ b/meta-oe/recipes-extended/mozjs/mozjs-115/armv5.patch
+@@ -0,0 +1,19 @@
++The ISB instruction isn't available in ARMv5 or v6, so
++guard it's use to fix the build on qemuarmv5.
++
++Upstream-Status: Pending
++Signed-off-by: Ross Burton <ross.burton@arm.com>
++
++diff --git a/js/src/jit/arm/Architecture-arm.cpp b/js/src/jit/arm/Archit=
+ecture-arm.cpp
++--- a/js/src/jit/arm/Architecture-arm.cpp	2024-01-18 17:31:32.078718197 =
++0000
+++++ b/js/src/jit/arm/Architecture-arm.cpp	2024-01-18 18:00:16.738921445 =
++0000
++@@ -529,7 +529,9 @@
++ void FlushExecutionContext() {
++ #ifndef JS_SIMULATOR_ARM
+++#if __ARM_ARCH >=3D 7
++   // Ensure that any instructions already in the pipeline are discarded=
+ and
++   // reloaded from the icache.
++   asm volatile("isb\n" : : : "memory");
+++#endif
++ #else
++   // We assume the icache flushing routines on other platforms take car=
+e of this
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs-115_115.2.0.bb b/meta-o=
+e/recipes-extended/mozjs/mozjs-115_115.2.0.bb
+index e1a547c339..84db3cd3c2 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs-115_115.2.0.bb
++++ b/meta-oe/recipes-extended/mozjs/mozjs-115_115.2.0.bb
+@@ -16,6 +16,7 @@ SRC_URI =3D "https://archive.mozilla.org/pub/firefox/re=
+leases/${PV}esr/source/fire
+            file://musl-disable-stackwalk.patch \
+            file://0001-add-arm-to-list-of-mozinline.patch \
+            file://py3.12.patch \
++           file://armv5.patch \
+            "
+ SRC_URI[sha256sum] =3D "51534dd2a158d955a2cb67cc1308f100f6c9def0788713ed=
+8b4d743f3ad72457"
+=20
+@@ -75,6 +76,7 @@ do_configure() {
+         ${JIT} \
+         ${ICU}
+ }
++do_configure[cleandirs] +=3D "${B}"
+=20
+ do_install() {
+     oe_runmake 'DESTDIR=3D${D}' install
+--=20
 2.34.1
 
 
