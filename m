@@ -1,92 +1,108 @@
-Return-Path: <philip@balister.org>
+Return-Path: <ross.burton@arm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DD283C4725D
-	for <webhook@archiver.kernel.org>; Fri, 19 Jan 2024 11:40:46 +0000 (UTC)
-Received: from mail.savoirfairelinux.com (mail.savoirfairelinux.com [208.88.110.44])
- by mx.groups.io with SMTP id smtpd.web10.18962.1705659619145891432
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 58C3DC47DAF
+	for <webhook@archiver.kernel.org>; Fri, 19 Jan 2024 12:47:37 +0000 (UTC)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by mx.groups.io with SMTP id smtpd.web11.21177.1705668452113620257
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 Jan 2024 02:20:19 -0800
+ Fri, 19 Jan 2024 04:47:33 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@savoirfairelinux.com header.s=DFC430D2-D198-11EC-948E-34200CB392D2 header.b=O+sJNaVZ;
- spf=pass (domain: savoirfairelinux.com, ip: 208.88.110.44, mailfrom: paul.leguendekerneizon@savoirfairelinux.com)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.savoirfairelinux.com (Postfix) with ESMTP id CF8F29C3675
-	for <openembedded-devel@lists.openembedded.org>; Fri, 19 Jan 2024 05:20:17 -0500 (EST)
-Received: from mail.savoirfairelinux.com ([127.0.0.1])
- by localhost (mail.savoirfairelinux.com [127.0.0.1]) (amavis, port 10032)
- with ESMTP id 4UyB-OZdAivh; Fri, 19 Jan 2024 05:20:17 -0500 (EST)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.savoirfairelinux.com (Postfix) with ESMTP id 635E29C3394;
-	Fri, 19 Jan 2024 05:20:17 -0500 (EST)
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.savoirfairelinux.com 635E29C3394
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=savoirfairelinux.com; s=DFC430D2-D198-11EC-948E-34200CB392D2;
-	t=1705659617; bh=9fGDb8OHjw+TloCK+B7PR3/YVIKtKR/2RmVXOjGoZls=;
-	h=From:To:Date:Message-Id:MIME-Version;
-	b=O+sJNaVZLDkiYWiYYlYTeV/KuiXACofwyhIErmMp31l6GP9TaZMHltI3PAsk7o0QG
-	 /uVreERmO/2+9CL+mcEZeGATkkIWzq+UaQ3H06z6uzdDNDwWZ1+sTS6iwUVO90iQE0
-	 q8oK+V6MNlku4KrKxP/yXclMAY5CiIhiwJDsrsNsnY7Tyy9Q+y/n6860+16u0fo8So
-	 EV5+b7ikV/nZtjFin6kHKJT+ArpEGg5UeXIUrod4B1CIoPneccTqk14lwfyeJIvfUJ
-	 j4RfDFmE5EWH9NQCKr6HTuPYc9tPlUDcfMBzuRGmUE7SdxsB7bLabS24OWIJAvkng3
-	 GyhmE4XH8vlEQ==
-X-Virus-Scanned: amavis at mail.savoirfairelinux.com
-Received: from mail.savoirfairelinux.com ([127.0.0.1])
- by localhost (mail.savoirfairelinux.com [127.0.0.1]) (amavis, port 10026)
- with ESMTP id hxClponKUW8O; Fri, 19 Jan 2024 05:20:17 -0500 (EST)
-Received: from pleguen-ThinkPad-P14s-Gen-2a.rennes.sfl (lmontsouris-657-1-69-118.w80-15.abo.wanadoo.fr [80.15.101.118])
-	by mail.savoirfairelinux.com (Postfix) with ESMTPSA id EB9589C3335;
-	Fri, 19 Jan 2024 05:20:16 -0500 (EST)
-From: "Paul Le Guen de Kerneizon" <paul.leguendekerneizon@savoirfairelinux.com>
+ dkim=none (message not signed); spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8C2F41042
+	for <openembedded-devel@lists.openembedded.org>; Fri, 19 Jan 2024 04:48:16 -0800 (PST)
+Received: from oss-tx204.lab.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 322E43F73F
+	for <openembedded-devel@lists.openembedded.org>; Fri, 19 Jan 2024 04:47:30 -0800 (PST)
+From: ross.burton@arm.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Paul Le Guen de Kerneizon <paul.leguendekerneizon@savoirfairelinux.com>
-Subject: [meta-webserver][PATCH v2 0/2] add support of cockpit-machines
-Date: Fri, 19 Jan 2024 11:20:07 +0100
-Message-Id: <20240119102009.18867-1-paul.leguendekerneizon@savoirfairelinux.com>
+Subject: [PATCH v2] mozjs-115: fix the build on ARMv5
+Date: Fri, 19 Jan 2024 12:47:28 +0000
+Message-Id: <20240119124728.3075552-1-ross.burton@arm.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 19 Jan 2024 11:40:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108358
+ <openembedded-devel@lists.openembedded.org>; Fri, 19 Jan 2024 12:47:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108360
 
-Hello community,
+From: Ross Burton <ross.burton@arm.com>
 
-Since version 242 of Cockpit package, plugin `cockpit-machines` has been =
-moved
-to a dedicated repository. This cockpit plugin is used to manage in web U=
-I
-virtual machines. There is currently no support of the new cockpit-machin=
-es
-package in any Yocto meta and the following patches bring it:
-  - Patch 1 adds the recipe of cockpit-machines
-  - Patch 2 remove all the old occurences of cockpit-machines package ins=
-ide
-    cockpit recipe.
+The JIT uses the ISB instruction, but being a multi-core barrier
+instruction this doesn't exist on the single-core ARMv5 ISA. Check the
+ISA level before using ISB.
 
-Waiting for your review, feel free to ask any questions or remarks.
-Regards,
-Paul Le Guen de Kerneizon, Savoir-faire Linux
+Also set [cleandirs] for ${B} to ensure clean builds are done when
+reconfiguring.
 
-V2 changelog:
-- add needed distro features to match cockpit recipe constraints
-- add needed compatible host to match cockpit recipe constraints
+[ YOCTO #14572 ]
 
-V1 patch: https://lists.openembedded.org/g/openembedded-devel/message/108=
-327
-Paul Le Guen de Kerneizon (2):
-  cockpit-machines: add recipe
-  cockpit: remove occurences of machines package
+Signed-off-by: Ross Burton <ross.burton@arm.com>
+---
+ .../mozjs/mozjs-115/armv5.patch               | 19 +++++++++++++++++++
+ .../mozjs/mozjs-115_115.6.0.bb                |  2 ++
+ 2 files changed, 21 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/mozjs/mozjs-115/armv5.patch
 
- .../cockpit-machines/cockpit-machines_304.bb  | 28 +++++++++++++++++++
- .../recipes-webadmin/cockpit/cockpit_304.bb   |  5 ----
- 2 files changed, 28 insertions(+), 5 deletions(-)
- create mode 100644 meta-webserver/recipes-webadmin/cockpit-machines/cock=
-pit-machines_304.bb
-
---
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs-115/armv5.patch b/meta-=
+oe/recipes-extended/mozjs/mozjs-115/armv5.patch
+new file mode 100644
+index 0000000000..4c45955bca
+--- /dev/null
++++ b/meta-oe/recipes-extended/mozjs/mozjs-115/armv5.patch
+@@ -0,0 +1,19 @@
++The ISB instruction isn't available in ARMv5 or v6, so
++guard it's use to fix the build on qemuarmv5.
++
++Upstream-Status: Pending
++Signed-off-by: Ross Burton <ross.burton@arm.com>
++
++diff --git a/js/src/jit/arm/Architecture-arm.cpp b/js/src/jit/arm/Archit=
+ecture-arm.cpp
++--- a/js/src/jit/arm/Architecture-arm.cpp	2024-01-18 17:31:32.078718197 =
++0000
+++++ b/js/src/jit/arm/Architecture-arm.cpp	2024-01-18 18:00:16.738921445 =
++0000
++@@ -529,7 +529,9 @@
++ void FlushExecutionContext() {
++ #ifndef JS_SIMULATOR_ARM
+++#if __ARM_ARCH >=3D 7
++   // Ensure that any instructions already in the pipeline are discarded=
+ and
++   // reloaded from the icache.
++   asm volatile("isb\n" : : : "memory");
+++#endif
++ #else
++   // We assume the icache flushing routines on other platforms take car=
+e of this
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs-115_115.6.0.bb b/meta-o=
+e/recipes-extended/mozjs/mozjs-115_115.6.0.bb
+index 6503747d88..4d9bb0e585 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs-115_115.6.0.bb
++++ b/meta-oe/recipes-extended/mozjs/mozjs-115_115.6.0.bb
+@@ -16,6 +16,7 @@ SRC_URI =3D "https://archive.mozilla.org/pub/firefox/re=
+leases/${PV}esr/source/fire
+            file://musl-disable-stackwalk.patch \
+            file://0001-add-arm-to-list-of-mozinline.patch \
+            file://py3.12.patch \
++           file://armv5.patch \
+            "
+ SRC_URI[sha256sum] =3D "66d7e6e5129ac8e6fe83e24227dc7bb8dc42650bc53b2183=
+8e614de80d22bc66"
+=20
+@@ -75,6 +76,7 @@ do_configure() {
+         ${JIT} \
+         ${ICU}
+ }
++do_configure[cleandirs] +=3D "${B}"
+=20
+ do_install() {
+     oe_runmake 'DESTDIR=3D${D}' install
+--=20
 2.34.1
+
 
