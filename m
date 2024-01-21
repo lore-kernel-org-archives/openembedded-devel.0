@@ -2,116 +2,125 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6DFC7C47422
-	for <webhook@archiver.kernel.org>; Sun, 21 Jan 2024 06:06:41 +0000 (UTC)
-Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
- by mx.groups.io with SMTP id smtpd.web10.42409.1705817199372756217
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D8C3C47422
+	for <webhook@archiver.kernel.org>; Sun, 21 Jan 2024 06:15:01 +0000 (UTC)
+Received: from mail-oo1-f45.google.com (mail-oo1-f45.google.com [209.85.161.45])
+ by mx.groups.io with SMTP id smtpd.web10.42471.1705817694146047979
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 20 Jan 2024 22:06:39 -0800
+ Sat, 20 Jan 2024 22:14:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=HWwXMDjY;
- spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f48.google.com with SMTP id 98e67ed59e1d1-2906bd9f2ebso451336a91.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 20 Jan 2024 22:06:39 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=OYX03Gtc;
+ spf=pass (domain: gmail.com, ip: 209.85.161.45, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f45.google.com with SMTP id 006d021491bc7-5986cb7bb61so1203775eaf.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 20 Jan 2024 22:14:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1705817198; x=1706421998; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=zoCO1RmEE4/PsNHa1FoSXyhW+LqBAO5YzQlodQzHF0w=;
-        b=HWwXMDjYVzJexIa3XncOAP61dC7AsxsIKA/Yx7kY6vqz/eXcdTtu89KoH7YNv4OBQ4
-         sz7p/OO+ajx4kjR/BiW0OAe8NQjQnRiep0Ca0PTbBJgOs2ezak136v4xmE1o5cqLX176
-         dspv3YWiHnGTmD3N2pe8DR4h8oMppDq9gQONrnVWDjaP2YQRZcc3IqBvrMnPGLHajg4+
-         B3Crze6IcAEVOpQG9sOsYwLc7xD3ZCC+d3B1QPu8rDI99y716FWA0AI2OBjcbtsci6Tf
-         8WC198kIvcToOa2RtQbseCqmwZZNfvhUPcB3YUChNZUHVVVMWMBOnuuycoQvTtrndGn3
-         hp5g==
+        d=gmail.com; s=20230601; t=1705817693; x=1706422493; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=MMsqjvv680+n9h0NhY6BsFi/KSS66g6HpUaZtSByV94=;
+        b=OYX03Gtca9ZvtL1IYgojNZAh8b22zvq1eY8ykrUVcsPPzQsP78wBS+HsOXanudr7IF
+         mojZLgT39Jt8XhdlXgfZPoXIxEfs+gQq6qupTd0pSQ3bw84zuzKDPzX5rNDFzMCRVIY1
+         I9EsN1Jf4vM1bN+eLLFbRsvmVLuXWV5hh/M549pQAHUTJ5EqbGiLKVzld6Ne59oqFDEs
+         g77H5QC7o5uMcHHZFI/ZUKMSG5zxjIsmGrufdRzUyTM2nEhctj9umy+bzQChPsVnWPIw
+         2D1FDYqCdda7NoElylJbDr7zGQToXqmKjms+WllM5l0HluZ2du7L/LUWzdOpK1+2uwG/
+         iDEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1705817198; x=1706421998;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=zoCO1RmEE4/PsNHa1FoSXyhW+LqBAO5YzQlodQzHF0w=;
-        b=bkIS0308gZpiaIApBC3TrPRn2putIH9vaBlsJWd2iiBuwMpamijZcstYZi7v+9CRbD
-         fazEJDfFzYPLQT6wMhiGtfpWQ8zy4Pl+C17O1VGAx38ns4kxF62iEUr/uga6wWUcDzhY
-         AL5YlokglABtrbx7OMY0ZvRvgHJE9FDOCiKQLCW7/mmNTZwPJF31s35IOJEw/kHqkBWg
-         /yQ4+q65HX7illVzik9+7eQu0qoQ+iPJX/QGMhCchzdnSHAMygyNxBRj9GCPYvOpRHgH
-         vfqANtx9HPEZizD99UrVvEszStisoCi+Sm83KwXCUQdOAp7Zs80WUOjlwLrvlPbsURz7
-         fkPQ==
-X-Gm-Message-State: AOJu0YwW4aNjxGS0KttGTmmbDUGJkd80p9EpA4UcfnrbXQdK/CCfNeER
-	5GxvIC/620Z+g2PLnsOiWfljNU5/rw17C0A1NOvnpf1McEO/Eh0psfLYwYMwTcs=
-X-Google-Smtp-Source: AGHT+IHwJkpZAY1bMQRXsyr02GuVccBe54EvsIumWYP8ddSZDMxGt24zOldsZO1+ngy9qdQqnLMISQ==
-X-Received: by 2002:a17:90a:d913:b0:28d:7981:926e with SMTP id c19-20020a17090ad91300b0028d7981926emr2866894pjv.9.1705817198161;
-        Sat, 20 Jan 2024 22:06:38 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::edfc])
-        by smtp.gmail.com with ESMTPSA id dj11-20020a17090ad2cb00b0029051dad730sm4383911pjb.26.2024.01.20.22.06.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 20 Jan 2024 22:06:37 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH] python3-multidict: Fix running ptests
-Date: Sat, 20 Jan 2024 22:06:35 -0800
-Message-ID: <20240121060635.2564856-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.43.0
+        d=1e100.net; s=20230601; t=1705817693; x=1706422493;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=MMsqjvv680+n9h0NhY6BsFi/KSS66g6HpUaZtSByV94=;
+        b=Ja5gF4SgTf6PgpoSu+zBAlzwaGoF6YAgyzrBBsWlgMptgPSi0pFinXGVsQcnlo6o2H
+         rEvO6SCOaLGF3MGfXvqdtHNZ/wMou8KSyRVa9x8CsjdFVFRoxjnhI5S2JjrYqpe/w2AO
+         5sfnwnBugS+/TPHFSWFFH8J4du37Y2HjIop9hXNAuDH9Z0UKtM4EST32yofJpK8+jxcp
+         V8zYTIrndgVMUiV+aSp0TQ1L2N+ezGNkqj8CoWeBkmMJZp0I/pWzmwZMXUjoK1NpoJE7
+         6jgosJmLDZbb+LL3GzLJuBb5jimpLzWoKzU31OR0Td1CaamkjV1NsfhoIR4xQ16bQ1xD
+         Fwrg==
+X-Gm-Message-State: AOJu0YyFnFV+xJAz3g11vY3oSORKc5qwqA/u7E3NFPuJZ51TvlgzMHIO
+	FyWBzI+IBLn7Z1na71F6xrqVTe6e/F9qxn9YOkUR1IT/0ROCruLNx3jiEp8vTQKqabc+aXy9cKP
+	JrWq5Yt9bYhdglpmrokypSa4MHhRrwL3Akoy/pQ==
+X-Google-Smtp-Source: AGHT+IH12c93OR5+JqfIwvza54N4KN9/vPTCJf3mTD4rtfFXHvBcdDqdwjLOssDZ4UKTjkqOT7bgOiy4E9JWd5bV+xk=
+X-Received: by 2002:a05:6870:63a9:b0:214:2cbd:3c12 with SMTP id
+ t41-20020a05687063a900b002142cbd3c12mr1603024oap.70.1705817693250; Sat, 20
+ Jan 2024 22:14:53 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240119102009.18867-1-paul.leguendekerneizon@savoirfairelinux.com>
+In-Reply-To: <20240119102009.18867-1-paul.leguendekerneizon@savoirfairelinux.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 20 Jan 2024 22:14:27 -0800
+Message-ID: <CAMKF1srn6ie3a8N7tYZQi2i-oYsi7kyaa=3QraViX5hNXO2ESQ@mail.gmail.com>
+Subject: Re: [oe] [meta-webserver][PATCH v2 0/2] add support of cockpit-machines
+To: Paul Le Guen de Kerneizon <paul.leguendekerneizon@savoirfairelinux.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 21 Jan 2024 06:06:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108366
+ <openembedded-devel@lists.openembedded.org>; Sun, 21 Jan 2024 06:15:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108367
 
-Add missing runtime dependency on pytest-cov
-and move the test to PTESTS_FAST_META_PYTHON since it takes < 20 seconds
+I am seeing some more missing deps
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-python/conf/include/ptest-packagelists-meta-python.inc    | 2 +-
- .../recipes-devtools/python/python3-multidict/run-ptest        | 3 +--
- meta-python/recipes-devtools/python/python3-multidict_6.0.4.bb | 1 +
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ERROR: Nothing RPROVIDES 'virt-install' (but
+/mnt/b/yoe/master/sources/meta-openembedded/meta-webserver/recipes-webadmin=
+/cockpit-machines/cockpit-machines_304.bb
+RDEPENDS on or otherwise requires it)
+NOTE: Runtime target 'virt-install' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['virt-install']
+ERROR: Required build target 'cockpit-machines' has no buildable providers.
+Missing or unbuildable dependency chain was: ['cockpit-machines',
+'virt-install']
 
-diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-index 2c75d511b3..44507b394e 100644
---- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
-+++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-@@ -22,6 +22,7 @@ PTESTS_FAST_META_PYTHON = "\
-     python3-intervals \
-     python3-ipy \
-     python3-iso3166 \
-+    python3-multidict \
-     python3-parse-type \
-     python3-platformdirs \
-     python3-polyline \
-@@ -71,7 +72,6 @@ PTESTS_PROBLEMS_META_PYTHON ="\
-     python3-jsmin \
-     python3-license-expression \
-     python3-msgpack \
--    python3-multidict \
-     python3-ordered-set \
-     python3-parse \
-     python3-pillow \
-diff --git a/meta-python/recipes-devtools/python/python3-multidict/run-ptest b/meta-python/recipes-devtools/python/python3-multidict/run-ptest
-index 5cec711696..e4f3b623ab 100644
---- a/meta-python/recipes-devtools/python/python3-multidict/run-ptest
-+++ b/meta-python/recipes-devtools/python/python3-multidict/run-ptest
-@@ -1,3 +1,2 @@
- #!/bin/sh
--
--pytest
-+pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
-diff --git a/meta-python/recipes-devtools/python/python3-multidict_6.0.4.bb b/meta-python/recipes-devtools/python/python3-multidict_6.0.4.bb
-index 23d3eb3155..b057e05f65 100644
---- a/meta-python/recipes-devtools/python/python3-multidict_6.0.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-multidict_6.0.4.bb
-@@ -19,6 +19,7 @@ SRC_URI += " \
- 
- RDEPENDS:${PN}-ptest += " \
- 	${PYTHON_PN}-pytest \
-+	${PYTHON_PN}-pytest-cov \
- "
- 
- do_install_ptest() {
--- 
-2.43.0
-
+On Fri, Jan 19, 2024 at 3:40=E2=80=AFAM Paul Le Guen de Kerneizon
+<paul.leguendekerneizon@savoirfairelinux.com> wrote:
+>
+> Hello community,
+>
+> Since version 242 of Cockpit package, plugin `cockpit-machines` has been =
+moved
+> to a dedicated repository. This cockpit plugin is used to manage in web U=
+I
+> virtual machines. There is currently no support of the new cockpit-machin=
+es
+> package in any Yocto meta and the following patches bring it:
+>   - Patch 1 adds the recipe of cockpit-machines
+>   - Patch 2 remove all the old occurences of cockpit-machines package ins=
+ide
+>     cockpit recipe.
+>
+> Waiting for your review, feel free to ask any questions or remarks.
+> Regards,
+> Paul Le Guen de Kerneizon, Savoir-faire Linux
+>
+> V2 changelog:
+> - add needed distro features to match cockpit recipe constraints
+> - add needed compatible host to match cockpit recipe constraints
+>
+> V1 patch: https://lists.openembedded.org/g/openembedded-devel/message/108=
+327
+> Paul Le Guen de Kerneizon (2):
+>   cockpit-machines: add recipe
+>   cockpit: remove occurences of machines package
+>
+>  .../cockpit-machines/cockpit-machines_304.bb  | 28 +++++++++++++++++++
+>  .../recipes-webadmin/cockpit/cockpit_304.bb   |  5 ----
+>  2 files changed, 28 insertions(+), 5 deletions(-)
+>  create mode 100644 meta-webserver/recipes-webadmin/cockpit-machines/cock=
+pit-machines_304.bb
+>
+> --
+> 2.34.1
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#108358): https://lists.openembedded.org/g/openembedde=
+d-devel/message/108358
+> Mute This Topic: https://lists.openembedded.org/mt/103828014/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
