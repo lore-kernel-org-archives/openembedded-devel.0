@@ -1,274 +1,277 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B443C47DAF
-	for <webhook@archiver.kernel.org>; Mon, 22 Jan 2024 19:31:53 +0000 (UTC)
-Received: from mailout10.t-online.de (mailout10.t-online.de [194.25.134.21])
- by mx.groups.io with SMTP id smtpd.web10.1702.1705951909096799085
- for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Jan 2024 11:31:49 -0800
-Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.21, mailfrom: f_l_k@t-online.de)
-Received: from fwd75.aul.t-online.de (fwd75.aul.t-online.de [10.223.144.101])
-	by mailout10.t-online.de (Postfix) with SMTP id 8E9BE1EA79
-	for <openembedded-devel@lists.openembedded.org>; Mon, 22 Jan 2024 20:31:17 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.163.35.62]) by fwd75.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1rS00q-0XEiVl0; Mon, 22 Jan 2024 20:31:16 +0100
-From: Markus Volk <f_l_k@t-online.de>
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A4A6FC46CD2
+	for <webhook@archiver.kernel.org>; Mon, 22 Jan 2024 22:04:43 +0000 (UTC)
+Subject: Add python3-apscheduler #error
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 1/3] lua: add recipe for lua-5.2
-Date: Mon, 22 Jan 2024 20:31:07 +0100
-Message-ID: <20240122193109.3041355-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.43.0
+From: p35420102@gmail.com
+X-Originating-Location: TW (125.229.195.25)
+X-Originating-Platform: Windows Chrome 120
+User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1705951876-0CA7E850-63DD6BAC/0/0 CLEAN NORMAL
-X-TOI-MSGID: 6f60f0d3-8ea1-4c64-a654-c27f617905a0
-Content-Transfer-Encoding: quoted-printable
+Date: Sun, 21 Jan 2024 22:24:29 -0800
+Message-ID: <HwKj.1705904669013507737.KXJd@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="5wvDmGdCzkHQeXYPoGXb"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 22 Jan 2024 19:31:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108374
+ <openembedded-devel@lists.openembedded.org>; Mon, 22 Jan 2024 22:04:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108376
 
-mpv only supports lua-5.2 and luajit. Add lua-5.2 to unblock gui build
-for platforms that dont support luajit
+--5wvDmGdCzkHQeXYPoGXb
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- .../lua/lua-5.2/Makefile-build-so.patch       | 82 +++++++++++++++++++
- .../recipes-devtools/lua/lua-5.2/lua.pc.in    | 10 +++
- .../recipes-devtools/lua/lua-5.2/run-ptest    | 19 +++++
- meta-oe/recipes-devtools/lua/lua-5.2_5.2.3.bb | 67 +++++++++++++++
- 4 files changed, 178 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/lua/lua-5.2/Makefile-build-s=
-o.patch
- create mode 100644 meta-oe/recipes-devtools/lua/lua-5.2/lua.pc.in
- create mode 100644 meta-oe/recipes-devtools/lua/lua-5.2/run-ptest
- create mode 100644 meta-oe/recipes-devtools/lua/lua-5.2_5.2.3.bb
+SUMMARY =3D "In-process task scheduler with Cron-like capabilities"
+HOMEPAGE =3D "https://github.com/agronholm/apscheduler"
 
-diff --git a/meta-oe/recipes-devtools/lua/lua-5.2/Makefile-build-so.patch=
- b/meta-oe/recipes-devtools/lua/lua-5.2/Makefile-build-so.patch
-new file mode 100644
-index 000000000..343d1ddd6
---- /dev/null
-+++ b/meta-oe/recipes-devtools/lua/lua-5.2/Makefile-build-so.patch
-@@ -0,0 +1,82 @@
-+Upstream-Status: Inappropriate [Upstream doesn't support so libs]
-+
-+diff -ru lua-5.2.1/Makefile lua-5.2.1.new/Makefile
-+--- a/Makefile	2012-05-17 16:05:54.000000000 +0200
-++++ b/Makefile	2012-09-12 22:39:07.162748096 +0200
-+@@ -38,16 +38,16 @@
-+ # Convenience platforms targets.
-+ PLATS=3D aix ansi bsd freebsd generic linux macosx mingw posix solaris
-+=20
-++# Lua version and release.
-++V=3D 5.2
-++R=3D $V.3
-++
-+ # What to install.
-+ TO_BIN=3D lua luac
-+ TO_INC=3D lua.h luaconf.h lualib.h lauxlib.h lua.hpp
-+-TO_LIB=3D liblua.a
-++TO_LIB=3D liblua.a liblua.so.$(R)
-+ TO_MAN=3D lua.1 luac.1
-+=20
-+-# Lua version and release.
-+-V=3D 5.2
-+-R=3D $V.3
-+-
-+ # Targets start here.
-+ all:	$(PLAT)
-+=20
-+@@ -63,7 +63,8 @@
-+ 	cd src && $(INSTALL_DATA) $(TO_INC) $(INSTALL_INC)
-+ 	cd src && $(INSTALL_DATA) $(TO_LIB) $(INSTALL_LIB)
-+ 	cd doc && $(INSTALL_DATA) $(TO_MAN) $(INSTALL_MAN)
-+-
-++	ln -sf ./liblua.so.$(R) $(INSTALL_LIB)/liblua.so.$(V)
-++	ln -sf ./liblua.so.$(R) $(INSTALL_LIB)/liblua.so
-+ uninstall:
-+ 	cd src && cd $(INSTALL_BIN) && $(RM) $(TO_BIN)
-+ 	cd src && cd $(INSTALL_INC) && $(RM) $(TO_INC)
-+diff -ru lua-5.2.1/src/luaconf.h lua-5.2.1.new/src/luaconf.h
-+--- lua-5.2.1/src/luaconf.h	2012-05-11 16:14:42.000000000 +0200
-++++ lua-5.2.1.new/src/luaconf.h	2012-09-12 22:40:27.986622772 +0200
-+@@ -100,7 +100,7 @@
-+ #else			/* }{ */
-+=20
-+ #define LUA_VDIR	LUA_VERSION_MAJOR "." LUA_VERSION_MINOR "/"
-+-#define LUA_ROOT	"/usr/local/"
-++#define LUA_ROOT	"/usr"
-+ #define LUA_LDIR	LUA_ROOT "share/lua/" LUA_VDIR
-+ #define LUA_CDIR	LUA_ROOT "lib/lua/" LUA_VDIR
-+ #define LUA_PATH_DEFAULT  \
-+diff -ru lua-5.2.1/src/Makefile lua-5.2.1.new/src/Makefile
-+--- lua-5.2.1/src/Makefile	2012-03-09 17:32:16.000000000 +0100
-++++ lua-5.2.1.new/src/Makefile	2012-09-12 22:38:08.591386896 +0200
-+@@ -29,6 +29,7 @@
-+ PLATS=3D aix ansi bsd freebsd generic linux macosx mingw posix solaris
-+=20
-+ LUA_A=3D	liblua.a
-++LUA_SO=3D liblua.so
-+ CORE_O=3D	lapi.o lcode.o lctype.o ldebug.o ldo.o ldump.o lfunc.o lgc.o =
-llex.o \
-+ 	lmem.o lobject.o lopcodes.o lparser.o lstate.o lstring.o ltable.o \
-+ 	ltm.o lundump.o lvm.o lzio.o
-+@@ -43,7 +44,7 @@
-+ LUAC_O=3D	luac.o
-+=20
-+ ALL_O=3D $(BASE_O) $(LUA_O) $(LUAC_O)
-+-ALL_T=3D $(LUA_A) $(LUA_T) $(LUAC_T)
-++ALL_T=3D $(LUA_A) $(LUA_T) $(LUAC_T) $(LUA_SO)
-+ ALL_A=3D $(LUA_A)
-+=20
-+ # Targets start here.
-+@@ -59,6 +60,12 @@
-+ 	$(AR) $@ $(BASE_O)
-+ 	$(RANLIB) $@
-+=20
-++$(LUA_SO): $(CORE_O) $(LIB_O)
-++	$(CC) -shared -ldl -Wl,-soname,$(LUA_SO).5.2 -o $@.5.2.3 $? -lm $(MYLD=
-FLAGS)
-++
-++
-++
-++
-+ $(LUA_T): $(LUA_O) $(LUA_A)
-+ 	$(CC) -o $@ $(LDFLAGS) $(LUA_O) $(LUA_A) $(LIBS)
-+=20
-diff --git a/meta-oe/recipes-devtools/lua/lua-5.2/lua.pc.in b/meta-oe/rec=
-ipes-devtools/lua/lua-5.2/lua.pc.in
-new file mode 100644
-index 000000000..c26775fa7
---- /dev/null
-+++ b/meta-oe/recipes-devtools/lua/lua-5.2/lua.pc.in
-@@ -0,0 +1,10 @@
-+libdir=3D@LIBDIR@
-+includedir=3D@INCLUDEDIR@
-+
-+Name: Lua
-+Description: Lua language engine
-+Version: @VERSION@
-+Requires:
-+Libs: -L${libdir} -llua -lm -ldl
-+Cflags: -I${includedir}
-+
-diff --git a/meta-oe/recipes-devtools/lua/lua-5.2/run-ptest b/meta-oe/rec=
-ipes-devtools/lua/lua-5.2/run-ptest
-new file mode 100644
-index 000000000..8e085e1af
---- /dev/null
-+++ b/meta-oe/recipes-devtools/lua/lua-5.2/run-ptest
-@@ -0,0 +1,19 @@
-+#!/bin/sh
-+
-+cd test
-+lua -e"_U=3Dtrue" all.lua > lua-test.tmp
-+
-+echo "--- test output ---"
-+cat lua-test.tmp
-+echo ""
-+echo ""
-+echo "--- ptest result ---"
-+
-+grep "final OK \!\!\!" lua-test.tmp > /dev/null
-+if [ $? -eq 0 ]; then
-+   echo "PASS: lua"
-+else
-+   echo "FAIL: lua"
-+fi
-+
-+rm -f lua-test.tmp
-diff --git a/meta-oe/recipes-devtools/lua/lua-5.2_5.2.3.bb b/meta-oe/reci=
-pes-devtools/lua/lua-5.2_5.2.3.bb
-new file mode 100644
-index 000000000..58f716337
---- /dev/null
-+++ b/meta-oe/recipes-devtools/lua/lua-5.2_5.2.3.bb
-@@ -0,0 +1,67 @@
-+SUMMARY =3D "Lua is a powerful light-weight programming language designe=
-d \
-+for extending applications."
-+LICENSE =3D "MIT"
-+LIC_FILES_CHKSUM =3D "file://doc/readme.html;beginline=3D381;endline=3D3=
-99;md5=3D07ddfddb01fa4ed9f2fb5e8eeae817a4"
-+HOMEPAGE =3D "http://www.lua.org/"
-+
-+SRC_URI =3D "http://www.lua.org/ftp/lua-${PV}.tar.gz;name=3Dtarballsrc \
-+           file://lua.pc.in \
-+           ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'http://www.=
-lua.org/tests/lua-${PV_testsuites}-tests.tar.gz;name=3Dtarballtest file:/=
-/run-ptest ', '', d)} \
-+           file://Makefile-build-so.patch \
-+           "
-+
-+# if no test suite matches PV release of Lua exactly, download the suite=
- for the closest Lua release.
-+PV_testsuites =3D "5.2.2"
-+
-+SRC_URI[tarballsrc.sha256sum] =3D "13c2fb97961381f7d06d5b5cea55b743c1638=
-00896fd5c5e2356201d3619002d"
-+SRC_URI[tarballtest.sha256sum] =3D "07c1071c66d9cb4dc80200ed430fc21ebbbc=
-cf1f55148b87eb0b9522932e4eb6"
-+
-+S =3D "${WORKDIR}/lua-${PV}"
-+
-+DEPENDS =3D "readline"
-+inherit pkgconfig binconfig ptest
-+
-+TARGET_CC_ARCH +=3D " -fPIC  ${LDFLAGS}"
-+EXTRA_OEMAKE =3D "'CC=3D${CC} -fPIC' 'MYCFLAGS=3D${CFLAGS} -fPIC' MYLDFL=
-AGS=3D'${LDFLAGS}'"
-+
-+do_configure:prepend() {
-+    sed -i -e s:/usr/local:${prefix}:g src/luaconf.h
-+    sed -i -e s:lib/lua/:${baselib}/lua/:g src/luaconf.h
-+}
-+
-+do_compile () {
-+    oe_runmake linux
-+}
-+
-+do_install () {
-+    oe_runmake \
-+        'INSTALL_TOP=3D${D}${prefix}' \
-+        'INSTALL_BIN=3D${D}${bindir}' \
-+        'INSTALL_INC=3D${D}${includedir}/' \
-+        'INSTALL_MAN=3D${D}${mandir}/man1' \
-+        'INSTALL_SHARE=3D${D}${datadir}' \
-+        'INSTALL_LIB=3D${D}${libdir}' \
-+        'INSTALL_CMOD=3D${D}${libdir}' \
-+        install
-+    install -d ${D}${libdir}/pkgconfig  ${D}${datadir}/doc/lua
-+
-+    sed -e s/@VERSION@/${PV}/ -e s#@LIBDIR@#${libdir}# -e s#@INCLUDEDIR@=
-#${includedir}# ${WORKDIR}/lua.pc.in > ${WORKDIR}/lua.pc
-+    install -m 0644 ${WORKDIR}/lua.pc ${D}${libdir}/pkgconfig/
-+    install -m 0644 doc/*.{gif,png,css,html} ${D}${datadir}/doc/lua
-+    rm -rf ${D}${datadir}/lua
-+}
-+
-+do_install_ptest () {
-+        cp -R --no-dereference --preserve=3Dmode,links -v ${WORKDIR}/lua=
--${PV_testsuites}-tests ${D}${PTEST_PATH}/test
-+}
-+
-+do_install_ptest:append:libc-musl () {
-+        # locale tests does not work on musl, due to limited locale impl=
-ementation
-+        # https://wiki.musl-libc.org/open-issues.html#Locale-limitations
-+        sed -i -e 's|os.setlocale("pt_BR") or os.setlocale("ptb")|false|=
-g' ${D}${PTEST_PATH}/test/literals.lua
-+}
-+
-+BBCLASSEXTEND =3D "native nativesdk"
-+
-+inherit multilib_script
-+MULTILIB_SCRIPTS =3D "${PN}-dev:${includedir}/luaconf.h"
---=20
-2.43.0
+SECTION =3D "devel/python"
 
+LICENSE =3D "MIT"
+LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3Df0e423eea5c91e7aa21bdb70184b=
+3e53"
+
+PYPI_PACKAGE =3D "APScheduler"
+
+SRC_URI[sha256sum] =3D "e6df071b27d9be898e486bc7940a7be50b4af2e9da7c08f0744=
+a96d4bd4cef4a"
+
+RDEPENDS:${PN} +=3D "\
+python3-six \
+python3-pytz \
+python3-tzlocal \
+"
+
+inherit pypi setuptools3
+
+ERROR: python3-apscheduler-3.10.4-r0 do_compile: 'python3 setup.py bdist_wh=
+eel ' execution failed.
+ERROR: python3-apscheduler-3.10.4-r0 do_compile: ExecutionError('/home/iot-=
+yocto/build/tmp/work/armv8a-poky-linux/python3-apscheduler/3.10.4-r0/temp/r=
+un.do_compile.531694', 1, None, None)
+ERROR: Logfile of failure stored in: /home/iot-yocto/build/tmp/work/armv8a-=
+poky-linux/python3-apscheduler/3.10.4-r0/temp/log.do_compile.531694
+Log data follows:
+| DEBUG: Executing shell function do_compile
+| /home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apscheduler/3.10=
+.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/setuptools/dis=
+t.py:720: UserWarning: Usage of dash-separated 'upload-dir' will not be sup=
+ported in future versions. Please use the underscore name 'upload_dir' inst=
+ead
+|=C2=A0 =C2=A0warnings.warn(
+| /home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apscheduler/3.10=
+.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/setuptools/ins=
+taller.py:27: SetuptoolsDeprecationWarning: setuptools.installer is depreca=
+ted. Requirements should be satisfied by a PEP 517 installer.
+|=C2=A0 =C2=A0warnings.warn(
+| /home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apscheduler/3.10=
+.4-r0/recipe-sysroot-native/usr/bin/python3-native/python3: No module named=
+ pip
+| Traceback (most recent call last):
+|=C2=A0 =C2=A0File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python=
+3-apscheduler/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packa=
+ges/setuptools/installer.py", line 82, in fetch_build_egg
+|=C2=A0 =C2=A0 =C2=A0subprocess.check_call(cmd)
+|=C2=A0 =C2=A0File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python=
+3-apscheduler/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/subprocess=
+.py", line 369, in check_call
+|=C2=A0 =C2=A0 =C2=A0raise CalledProcessError(retcode, cmd)
+| subprocess.CalledProcessError: Command '['/home/iot-yocto/build/tmp/work/=
+armv8a-poky-linux/python3-apscheduler/3.10.4-r0/recipe-sysroot-native/usr/b=
+in/python3-native/python3', '-m', 'pip', '--disable-pip-version-check', 'wh=
+eel', '--no-deps', '-w', '/tmp/tmpmh5cnujt', '--quiet', 'setuptools_scm']' =
+returned non-zero exit status 1.
+|
+| The above exception was the direct cause of the following exception:
+|
+| Traceback (most recent call last):
+|=C2=A0 =C2=A0File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python=
+3-apscheduler/3.10.4-r0/APScheduler-3.10.4/setup.py", line 10, in <module>
+|=C2=A0 =C2=A0 =C2=A0setup(
+|=C2=A0 =C2=A0File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python=
+3-apscheduler/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packa=
+ges/setuptools/__init__.py", line 152, in setup
+|=C2=A0 =C2=A0 =C2=A0_install_setup_requires(attrs)
+|=C2=A0 =C2=A0File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python=
+3-apscheduler/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packa=
+ges/setuptools/__init__.py", line 147, in _install_setup_requires
+|=C2=A0 =C2=A0 =C2=A0dist.fetch_build_eggs(dist.setup_requires)
+|=C2=A0 =C2=A0File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python=
+3-apscheduler/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packa=
+ges/setuptools/dist.py", line 809, in fetch_build_eggs
+|=C2=A0 =C2=A0 =C2=A0resolved_dists =3D pkg_resources.working_set.resolve(
+|=C2=A0 =C2=A0File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python=
+3-apscheduler/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packa=
+ges/pkg_resources/__init__.py", line 771, in resolve
+|=C2=A0 =C2=A0 =C2=A0dist =3D best[req.key] =3D env.best_match(
+|=C2=A0 =C2=A0File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python=
+3-apscheduler/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packa=
+ges/pkg_resources/__init__.py", line 1056, in best_match
+|=C2=A0 =C2=A0 =C2=A0return self.obtain(req, installer)
+|=C2=A0 =C2=A0File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python=
+3-apscheduler/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packa=
+ges/pkg_resources/__init__.py", line 1068, in obtain
+|=C2=A0 =C2=A0 =C2=A0return installer(requirement)
+|=C2=A0 =C2=A0File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python=
+3-apscheduler/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packa=
+ges/setuptools/dist.py", line 880, in fetch_build_egg
+|=C2=A0 =C2=A0 =C2=A0return fetch_build_egg(self, req)
+|=C2=A0 =C2=A0File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python=
+3-apscheduler/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packa=
+ges/setuptools/installer.py", line 84, in fetch_build_egg
+|=C2=A0 =C2=A0 =C2=A0raise DistutilsError(str(e)) from e
+| distutils.errors.DistutilsError: Command '['/home/iot-yocto/build/tmp/wor=
+k/armv8a-poky-linux/python3-apscheduler/3.10.4-r0/recipe-sysroot-native/usr=
+/bin/python3-native/python3', '-m', 'pip', '--disable-pip-version-check', '=
+wheel', '--no-deps', '-w', '/tmp/tmpmh5cnujt', '--quiet', 'setuptools_scm']=
+' returned non-zero exit status 1.
+| ERROR: 'python3 setup.py bdist_wheel ' execution failed.
+| WARNING: exit code 1 from a shell command.
+ERROR: Task (/home/iot-yocto/src/poky/../meta-openembedded/meta-python/reci=
+pes-devtools/python/python3-apscheduler_3.10.4.bb:do_compile) failed with e=
+xit code '1'
+NOTE: Tasks Summary: Attempted 7610 tasks of which 7603 didn't need to be r=
+erun and 1 failed.
+
+Summary: 1 task failed:
+/home/iot-yocto/src/poky/../meta-openembedded/meta-python/recipes-devtools/=
+python/python3-apscheduler_3.10.4.bb:do_compile
+Summary: There was 1 WARNING message.
+Summary: There were 2 ERROR messages, returning a non-zero exit code.
+
+--5wvDmGdCzkHQeXYPoGXb
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div>SUMMARY =3D "In-process task scheduler with Cron-like capabilities"</d=
+iv>
+<div>HOMEPAGE =3D "https://github.com/agronholm/apscheduler"</div>
+<div>&nbsp;</div>
+<div>SECTION =3D "devel/python"</div>
+<div>&nbsp;</div>
+<div>LICENSE =3D "MIT"</div>
+<div>LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3Df0e423eea5c91e7aa21bdb7=
+0184b3e53"</div>
+<div>&nbsp;</div>
+<div>PYPI_PACKAGE =3D "APScheduler"</div>
+<div>&nbsp;</div>
+<div>SRC_URI[sha256sum] =3D "e6df071b27d9be898e486bc7940a7be50b4af2e9da7c08=
+f0744a96d4bd4cef4a"</div>
+<div>&nbsp;</div>
+<div>RDEPENDS:${PN} +=3D "\</div>
+<div><span style=3D"white-space: normal;"><span style=3D"white-space: pre;"=
+> </span>python3-six \</span></div>
+<div><span style=3D"white-space: normal;"><span style=3D"white-space: pre;"=
+> </span>python3-pytz \</span></div>
+<div><span style=3D"white-space: normal;"><span style=3D"white-space: pre;"=
+> </span>python3-tzlocal \</span></div>
+<div><span style=3D"white-space: normal;"><span style=3D"white-space: pre;"=
+> </span>"</span></div>
+<div>&nbsp;</div>
+<div>inherit pypi setuptools3<br /><br />
+<div>ERROR: python3-apscheduler-3.10.4-r0 do_compile: 'python3 setup.py bdi=
+st_wheel ' execution failed.</div>
+<div>ERROR: python3-apscheduler-3.10.4-r0 do_compile: ExecutionError('/home=
+/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apscheduler/3.10.4-r0/t=
+emp/run.do_compile.531694', 1, None, None)</div>
+<div>ERROR: Logfile of failure stored in: /home/iot-yocto/build/tmp/work/ar=
+mv8a-poky-linux/python3-apscheduler/3.10.4-r0/temp/log.do_compile.531694</d=
+iv>
+<div>Log data follows:</div>
+<div>| DEBUG: Executing shell function do_compile</div>
+<div>| /home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apscheduler=
+/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/setuptool=
+s/dist.py:720: UserWarning: Usage of dash-separated 'upload-dir' will not b=
+e supported in future versions. Please use the underscore name 'upload_dir'=
+ instead</div>
+<div>|&nbsp; &nbsp;warnings.warn(</div>
+<div>| /home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apscheduler=
+/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/setuptool=
+s/installer.py:27: SetuptoolsDeprecationWarning: setuptools.installer is de=
+precated. Requirements should be satisfied by a PEP 517 installer.</div>
+<div>|&nbsp; &nbsp;warnings.warn(</div>
+<div>| /home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apscheduler=
+/3.10.4-r0/recipe-sysroot-native/usr/bin/python3-native/python3: No module =
+named pip</div>
+<div>| Traceback (most recent call last):</div>
+<div>|&nbsp; &nbsp;File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/p=
+ython3-apscheduler/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-=
+packages/setuptools/installer.py", line 82, in fetch_build_egg</div>
+<div>|&nbsp; &nbsp; &nbsp;subprocess.check_call(cmd)</div>
+<div>|&nbsp; &nbsp;File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/p=
+ython3-apscheduler/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/subpr=
+ocess.py", line 369, in check_call</div>
+<div>|&nbsp; &nbsp; &nbsp;raise CalledProcessError(retcode, cmd)</div>
+<div>| subprocess.CalledProcessError: Command '['/home/iot-yocto/build/tmp/=
+work/armv8a-poky-linux/python3-apscheduler/3.10.4-r0/recipe-sysroot-native/=
+usr/bin/python3-native/python3', '-m', 'pip', '--disable-pip-version-check'=
+, 'wheel', '--no-deps', '-w', '/tmp/tmpmh5cnujt', '--quiet', 'setuptools_sc=
+m']' returned non-zero exit status 1.</div>
+<div>|&nbsp;</div>
+<div>| The above exception was the direct cause of the following exception:=
+</div>
+<div>|&nbsp;</div>
+<div>| Traceback (most recent call last):</div>
+<div>|&nbsp; &nbsp;File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/p=
+ython3-apscheduler/3.10.4-r0/APScheduler-3.10.4/setup.py", line 10, in &lt;=
+module&gt;</div>
+<div>|&nbsp; &nbsp; &nbsp;setup(</div>
+<div>|&nbsp; &nbsp;File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/p=
+ython3-apscheduler/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-=
+packages/setuptools/__init__.py", line 152, in setup</div>
+<div>|&nbsp; &nbsp; &nbsp;_install_setup_requires(attrs)</div>
+<div>|&nbsp; &nbsp;File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/p=
+ython3-apscheduler/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-=
+packages/setuptools/__init__.py", line 147, in _install_setup_requires</div=
+>
+<div>|&nbsp; &nbsp; &nbsp;dist.fetch_build_eggs(dist.setup_requires)</div>
+<div>|&nbsp; &nbsp;File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/p=
+ython3-apscheduler/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-=
+packages/setuptools/dist.py", line 809, in fetch_build_eggs</div>
+<div>|&nbsp; &nbsp; &nbsp;resolved_dists =3D pkg_resources.working_set.reso=
+lve(</div>
+<div>|&nbsp; &nbsp;File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/p=
+ython3-apscheduler/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-=
+packages/pkg_resources/__init__.py", line 771, in resolve</div>
+<div>|&nbsp; &nbsp; &nbsp;dist =3D best[req.key] =3D env.best_match(</div>
+<div>|&nbsp; &nbsp;File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/p=
+ython3-apscheduler/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-=
+packages/pkg_resources/__init__.py", line 1056, in best_match</div>
+<div>|&nbsp; &nbsp; &nbsp;return self.obtain(req, installer)</div>
+<div>|&nbsp; &nbsp;File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/p=
+ython3-apscheduler/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-=
+packages/pkg_resources/__init__.py", line 1068, in obtain</div>
+<div>|&nbsp; &nbsp; &nbsp;return installer(requirement)</div>
+<div>|&nbsp; &nbsp;File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/p=
+ython3-apscheduler/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-=
+packages/setuptools/dist.py", line 880, in fetch_build_egg</div>
+<div>|&nbsp; &nbsp; &nbsp;return fetch_build_egg(self, req)</div>
+<div>|&nbsp; &nbsp;File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/p=
+ython3-apscheduler/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-=
+packages/setuptools/installer.py", line 84, in fetch_build_egg</div>
+<div>|&nbsp; &nbsp; &nbsp;raise DistutilsError(str(e)) from e</div>
+<div>| distutils.errors.DistutilsError: Command '['/home/iot-yocto/build/tm=
+p/work/armv8a-poky-linux/python3-apscheduler/3.10.4-r0/recipe-sysroot-nativ=
+e/usr/bin/python3-native/python3', '-m', 'pip', '--disable-pip-version-chec=
+k', 'wheel', '--no-deps', '-w', '/tmp/tmpmh5cnujt', '--quiet', 'setuptools_=
+scm']' returned non-zero exit status 1.</div>
+<div>| ERROR: 'python3 setup.py bdist_wheel ' execution failed.</div>
+<div>| WARNING: exit code 1 from a shell command.</div>
+<div>ERROR: Task (/home/iot-yocto/src/poky/../meta-openembedded/meta-python=
+/recipes-devtools/python/python3-apscheduler_3.10.4.bb:do_compile) failed w=
+ith exit code '1'</div>
+<div>NOTE: Tasks Summary: Attempted 7610 tasks of which 7603 didn't need to=
+ be rerun and 1 failed.</div>
+<div>&nbsp;</div>
+<div>Summary: 1 task failed:</div>
+<div>&nbsp; /home/iot-yocto/src/poky/../meta-openembedded/meta-python/recip=
+es-devtools/python/python3-apscheduler_3.10.4.bb:do_compile</div>
+<div>Summary: There was 1 WARNING message.</div>
+<div>Summary: There were 2 ERROR messages, returning a non-zero exit code.<=
+/div>
+</div>
+
+--5wvDmGdCzkHQeXYPoGXb--
 
