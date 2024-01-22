@@ -1,230 +1,117 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <cvubrugier@fastmail.fm>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9CAE1C47DD9
-	for <webhook@archiver.kernel.org>; Mon, 22 Jan 2024 16:37:12 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.web11.79480.1705941430676520024
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 02330C47DAF
+	for <webhook@archiver.kernel.org>; Mon, 22 Jan 2024 17:53:43 +0000 (UTC)
+Received: from out3-smtp.messagingengine.com (out3-smtp.messagingengine.com [66.111.4.27])
+ by mx.groups.io with SMTP id smtpd.web11.82054.1705946020811110253
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Jan 2024 08:37:11 -0800
+ Mon, 22 Jan 2024 09:53:41 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=MhrfujIg;
- spf=pass (domain: gmail.com, ip: 209.85.128.44, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-40ea5654271so23314825e9.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 22 Jan 2024 08:37:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1705941429; x=1706546229; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=nwGpEycKM4KrbNpjBEaqtIJWFlz4oaEgczjo/vAknEQ=;
-        b=MhrfujIgptaMUkqzp2IMNgvd/DETCxPC2PDUfIDoL9D2T61KISJ8PsKVOWPCSjTUMV
-         avSiKD5AhbMZbbRZ0ft/bCNefaLGMtWrgyoSl6FhTjbvxMyCalZIYO4+cKYMYSMoWjJt
-         PVbw++87gkh5juO3AFGDhBQ4lIrf5/FL+GTHOHcCxB2dPZz2T4x5K3bNJkTQC9hAebuX
-         2D7dgkacsErjT0ePXCShPsLnr7CYbIxmtAArJuqAJSjUvQhI11yUmrqIavIYsO/sVHRT
-         QIDE+HqzJ8nTvfP4xa4XQP/WRmubyjYZkMkOdUXISQiD7SQ9EbEd0q6WoTR1186IjYFN
-         DYXw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1705941429; x=1706546229;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=nwGpEycKM4KrbNpjBEaqtIJWFlz4oaEgczjo/vAknEQ=;
-        b=ZSqIJVSvqOlVoxZRD96ErciYKOhkZmyQh4Qq3qX3iAX0hPwINoGduflcJKxB+A/lrs
-         sqvXhKok/4kJQ06iXoGCeyzdBPz0/0FujVSDXav34twvTHtEhtbhvMOJbyoLx+iqN0RS
-         nEN7Ep0fiFdwUXQSKJUJTLDNbqh3joiol1NBAqOpmGHzmI1rlZf5Uu0eQlbQgKuNo9e6
-         wyUXdZhEQUy8FItgz0XFDeYse7oooefMQyzpUPrkRBh1KSw2esjX44YOIPIWJkEN9Gz6
-         641hElN4tV52Ohqda8+ZiyJkv2HINHg5k6MGG6wRP2rCSunUGYjW5M1onbjN9gZTANfq
-         BcXw==
-X-Gm-Message-State: AOJu0Yxbqyk2u4hzYvBFi9hugDHVpUEN3DyBSTspb0uagh71gGZjSEgX
-	TL2NKfmLdyaOkdPbBmjggs9gQKdnu3kRF4ZexCCzTeGOorXt5AYunQicV3Mu
-X-Google-Smtp-Source: AGHT+IGge+EC1sS6ntD/7SMfZ1Aek9GrQyBhwhQm4xQ65aIIU5bdHd+Dca4QpZxzAtM/iJy/hEI3yw==
-X-Received: by 2002:a05:600c:4448:b0:40e:b21d:6bed with SMTP id v8-20020a05600c444800b0040eb21d6bedmr397052wmn.96.1705941428683;
-        Mon, 22 Jan 2024 08:37:08 -0800 (PST)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id jg1-20020a05600ca00100b0040d4e1393dcsm43037804wmb.20.2024.01.22.08.37.08
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 22 Jan 2024 08:37:08 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+ dkim=pass header.i=@fastmail.fm header.s=fm3 header.b=BtyYVhWW;
+ dkim=pass header.i=@messagingengine.com header.s=fm3 header.b=kOpfdtFk;
+ spf=pass (domain: fastmail.fm, ip: 66.111.4.27, mailfrom: cvubrugier@fastmail.fm)
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+	by mailout.nyi.internal (Postfix) with ESMTP id 30C905C01B7;
+	Mon, 22 Jan 2024 12:53:40 -0500 (EST)
+Received: from mailfrontend1 ([10.202.2.162])
+  by compute3.internal (MEProxy); Mon, 22 Jan 2024 12:53:40 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fastmail.fm; h=
+	cc:cc:content-transfer-encoding:content-type:date:date:from:from
+	:in-reply-to:message-id:mime-version:reply-to:subject:subject:to
+	:to; s=fm3; t=1705946020; x=1706032420; bh=nVVubN7Ik53apdiMWVNvJ
+	mL62bCTqIMN5vyBn843d9A=; b=BtyYVhWWSK6uYDHpzy+MRJjrTsLkQFwu5LRJf
+	PrHcwkU6WRFd0CddprDto+A6LAunjiS43FvMDjc2sQ7z9bpfXXbkHH1MajSYVPfU
+	Lm6tlDUH2KKZqioA8c8UmtSQMaKGDtNRz1/hee10uMpew4pTS6oGu/usZoELNlqv
+	c/pRzD8qPMPPTkrPFOmHEd+Y1s/RixFaWReKXfpoVw4uegsdoFklcSSA1pOFuo0Q
+	L6jtsyhWaqYXj23FAnT1YAcIEb6sLd79ECd+s3OWdKnVKBepD2WpqGmAtgdLCvbj
+	mYPhR5w2xhTTZebU10HdSp59tENCfVHg/9wcsyapZf5ZXQ3HQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:date:date:feedback-id:feedback-id:from:from
+	:in-reply-to:message-id:mime-version:reply-to:subject:subject:to
+	:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+	fm3; t=1705946020; x=1706032420; bh=nVVubN7Ik53apdiMWVNvJmL62bCT
+	qIMN5vyBn843d9A=; b=kOpfdtFkaqV4E7U+vuFZFfStEcQCTUAtp6dWZdVxxGXH
+	AZxNN8OUJFvlL/pyuHJktwqLyrZ/3NTbuw65pfDKAF0zHqwtMji6PFYgiDZd4qKD
+	mAqWesc/9dqMEFbbxEY4AR3tOk8DDpfT/h7OCsWaufPcZQ2vttdujpiv7KwFbAZh
+	CAO4scS54r1ck5SufdXT5KYAGD98OlHKJJbQNiWHJsxtxNn0LVUMQYdNvoDkIFbB
+	ZY1ExFe3cZMZW+ce/krBLz8BFaymjKozY+ueQ9cIP98vHA2IY4n8KJfpjXk5xxF6
+	cOvZJnSvkxCDTxeXoQ4jE72wOKEGsj4dFNMgxKB0wA==
+X-ME-Sender: <xms:o6uuZQycM53boBRTWmItBcs5xPuj6DkkYyDMBV1vQRCDtGHG5unMTw>
+    <xme:o6uuZURVMtiK_kzoZGmZIh92rlGqm2om2aXtV_UgLt6TFqBs0KqcQW_QLNBKBqYs_
+    Xa03xabZaGpR-0osQ>
+X-ME-Received: <xmr:o6uuZSW-GdDEqmZGxD1onZb8M_n5HfsCcywlZlYrGGeDuT2lrBWHkFYVpWz6bDVP49-9ubjFx0WYe57Dfvtbv0K6_3Y0xRj30DL-zx3d2z6-BE8>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrvdekiedguddthecutefuodetggdotefrod
+    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
+    necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
+    enucfjughrpefhvfevufffkffoggfgsedtkeertdertddtnecuhfhrohhmpegtvhhusghr
+    uhhgihgvrhesfhgrshhtmhgrihhlrdhfmhenucggtffrrghtthgvrhhnpeeiueeltdekge
+    ekvdevleegfeehhfffieevieelvdejudfgiedvteejffeltdelheenucffohhmrghinhep
+    ghhithhhuhgsrdgtohhmnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrg
+    hilhhfrhhomheptghvuhgsrhhughhivghrsehfrghsthhmrghilhdrfhhm
+X-ME-Proxy: <xmx:pKuuZeifymAKAO5Z5bjJQ0cQdZwR4jEgQvp3QRz5Yo7BZSJJsU4XmA>
+    <xmx:pKuuZSBKFBi8q9QVSAdv9wGrEweJ-0zMgsN2ALR8ydk456oZLYuhvg>
+    <xmx:pKuuZfLrohF9Jcty1jQk_ffeRpzCSomQRAEp5q4OXUoGdP0HJ4H1lQ>
+    <xmx:pKuuZdqaEG-g1D7B-qYFaYcTJf-NV15_DrbGWVHPBIl4-ywFQSx93A>
+Feedback-ID: i09e840f8:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
+ 22 Jan 2024 12:53:39 -0500 (EST)
+From: cvubrugier@fastmail.fm
 To: openembedded-devel@lists.openembedded.org
-Cc: alex@linutronix.de,
-	Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][PATCH] libtalloc, libtevent, libtdb, libldb: set PYTHONARCHDIR for waf to respect python libdir
-Date: Mon, 22 Jan 2024 17:36:57 +0100
-Message-ID: <20240122163657.2571699-1-martin.jansa@gmail.com>
+Cc: Christophe Vu-Brugier <christophe.vu-brugier@seagate.com>
+Subject: [meta-networking][PATCH] dropwatch: add new recipe
+Date: Mon, 22 Jan 2024 18:53:30 +0100
+Message-ID: <20240122175330.41009-1-cvubrugier@fastmail.fm>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 22 Jan 2024 16:37:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108371
+ <openembedded-devel@lists.openembedded.org>; Mon, 22 Jan 2024 17:53:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108372
 
-* fixes installed-vs-shipped when libdir in target is different than in
-  native python e.g. with multilib enabled:
+From: Christophe Vu-Brugier <christophe.vu-brugier@seagate.com>
 
-ERROR: QA Issue: libtdb: Files/directories were installed but not shipped in any package:
-  /usr/lib/python3.12/site-packages/tdb.so
-  /usr/lib/python3.12/site-packages/_tdb_text.py
-Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
-libtdb: 2 installed and not shipped files. [installed-vs-shipped]
+Dropwatch is a utility to help developers and system administrators to
+diagnose problems in the Linux Networking stack, specifically their
+ability to diagnose where packets are getting dropped.
 
-ERROR: QA Issue: libtalloc: Files/directories were installed but not shipped in any package:
-  /usr/lib/python3.12/site-packages/talloc.so
-Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
-libtalloc: 1 installed and not shipped files. [installed-vs-shipped]
+References:
+* https://github.com/nhorman/dropwatch
 
-ERROR: QA Issue: libtevent: Files/directories were installed but not shipped in any package:
-  /usr/lib/python3.12/site-packages/_tevent.so
-  /usr/lib/python3.12/site-packages/tevent.py
-Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
-lib32-libtevent: 2 installed and not shipped files. [installed-vs-shipped]
-
-* waflib has some fallback to query distutils when PYTHONARCHDIR isn't
-  set in environment as in:
-  https://gitlab.com/ita1024/waf/-/commit/84c26588fc3d479a1e79e1edacaa2cf052286c07
-
-  but this still returns wrong value from
-  print(get_python_lib(plat_specific=1, standard_lib=0, prefix='/usr'))
-  e.g.
-  /usr/lib/python3.12/site-packages
-  matching native layout instead of:
-  /usr/lib64/python3.12/site-packages
-
-* python3targetconfig inherit breaks waflib as well as shown in config.log:
-['libtdb/1.4.9/recipe-sysroot-native/usr/bin/python3-native/python3', '-c', "\ntry:\n\tfrom distutils.sysconfig import get_config_var, get_python_lib\nexcept ImportError:\n\tfrom sysconfig import get_config_var, get_path\n\tdef get_python_lib(*k, **kw):\n\t\tkeyword='platlib' if kw.get('plat_specific') else 'purelib'\n\t\tif 'prefix' in kw:\n\t\t\treturn get_path(keyword, vars={'installed_base': kw['prefix'], 'platbase': kw['prefix']})\n\t\treturn get_path(keyword)\n\nprint(repr(get_python_lib(standard_lib=0, prefix='/usr') or ''))"]
-err: Traceback (most recent call last):
-  File "<string>", line 12, in <module>
-  File "<string>", line 9, in get_python_lib
-  File "libtdb/1.4.9/recipe-sysroot-native/usr/lib/python3.12/sysconfig.py", line 636, in get_path
-    return get_paths(scheme, vars, expand)[name]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "libtdb/1.4.9/recipe-sysroot-native/usr/lib/python3.12/sysconfig.py", line 626, in get_paths
-    return _expand_vars(scheme, vars)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "libtdb/1.4.9/recipe-sysroot-native/usr/lib/python3.12/sysconfig.py", line 270, in _expand_vars
-    _extend_dict(vars, get_config_vars())
-                       ^^^^^^^^^^^^^^^^^
-  File "libtdb/1.4.9/recipe-sysroot-native/usr/lib/python3.12/sysconfig.py", line 728, in get_config_vars
-    _init_config_vars()
-  File "libtdb/1.4.9/recipe-sysroot-native/usr/lib/python3.12/sysconfig.py", line 670, in _init_config_vars
-    _init_posix(_CONFIG_VARS)
-  File "libtdb/1.4.9/recipe-sysroot-native/usr/lib/python3.12/sysconfig.py", line 536, in _init_posix
-    _temp = __import__(name, globals(), locals(), ['build_time_vars'], 0)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-ModuleNotFoundError: No module named '_sysconfigdata'
-
-* setting PYTHONARCHDIR is simplest fix
-
-* this also fixes libldb failure when it fails to find e.g. tevent after
-  these installed-vs-shipped issues instealled it in wrong libdir:
-
-Checking for system tevent (>=0.15.0)                                                           : yes
-Traceback (most recent call last):
-  File "lib32-libldb/2.8.0/ldb-2.8.0/third_party/waf/waflib/Scripting.py", line 159, in waf_entry_point
-    run_commands()
-  File "lib32-libldb/2.8.0/ldb-2.8.0/third_party/waf/waflib/Scripting.py", line 255, in run_commands
-    ctx = run_command(cmd_name)
-          ^^^^^^^^^^^^^^^^^^^^^
-  File "lib32-libldb/2.8.0/ldb-2.8.0/third_party/waf/waflib/Scripting.py", line 239, in run_command
-    ctx.execute()
-  File "lib32-libldb/2.8.0/ldb-2.8.0/third_party/waf/waflib/Configure.py", line 159, in execute
-    super(ConfigurationContext, self).execute()
-  File "lib32-libldb/2.8.0/ldb-2.8.0/third_party/waf/waflib/Context.py", line 214, in execute
-    self.recurse([os.path.dirname(g_module.root_path)])
-  File "lib32-libldb/2.8.0/ldb-2.8.0/third_party/waf/waflib/Context.py", line 296, in recurse
-    user_function(self)
-  File "lib32-libldb/2.8.0/ldb-2.8.0/wscript", line 54, in configure
-    conf.RECURSE('lib/tevent')
-  File "lib32-libldb/2.8.0/ldb-2.8.0/buildtools/wafsamba/samba_utils.py", line 66, in fun
-    return f(*k, **kw)
-           ^^^^^^^^^^^
-  File "lib32-libldb/2.8.0/ldb-2.8.0/buildtools/wafsamba/samba_utils.py", line 469, in RECURSE
-    return ctx.recurse(relpath)
-           ^^^^^^^^^^^^^^^^^^^^
-  File "lib32-libldb/2.8.0/ldb-2.8.0/third_party/waf/waflib/Context.py", line 296, in recurse
-    user_function(self)
-  File "lib32-libldb/2.8.0/ldb-2.8.0/lib/tevent/wscript", line 51, in configure
-    conf.CHECK_BUNDLED_SYSTEM_PYTHON('pytevent', 'tevent', minversion=VERSION):
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "lib32-libldb/2.8.0/ldb-2.8.0/buildtools/wafsamba/samba_utils.py", line 66, in fun
-    return f(*k, **kw)
-           ^^^^^^^^^^^
-  File "lib32-libldb/2.8.0/ldb-2.8.0/buildtools/wafsamba/samba_bundled.py", line 270, in CHECK_BUNDLED_SYSTEM_PYTHON
-    if not found and not conf.LIB_MAY_BE_BUNDLED(libname):
-           ^^^^^
-UnboundLocalError: cannot access local variable 'found' where it is not associated with a value
-
-and then it needs PYTHONARCHDIR as well to fix:
-
-ERROR: libldb-2.8.0-r0 do_package: QA Issue: libldb: Files/directories were installed but not shipped in any package:
-  /usr/lib
-  /usr/lib/python3.12
-  /usr/lib/python3.12/site-packages
-  /usr/lib/python3.12/site-packages/_ldb_text.py
-  /usr/lib/python3.12/site-packages/ldb.so
-  /usr/lib/python3.12/site-packages/.debug
-  /usr/lib/python3.12/site-packages/.debug/ldb.so
-Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
-libldb: 7 installed and not shipped files. [installed-vs-shipped]
-
-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+Signed-off-by: Christophe Vu-Brugier <christophe.vu-brugier@seagate.com>
 ---
- meta-networking/recipes-support/libldb/libldb_2.8.0.bb        | 1 +
- meta-networking/recipes-support/libtalloc/libtalloc_2.4.1.bb  | 1 +
- meta-networking/recipes-support/libtdb/libtdb_1.4.9.bb        | 1 +
- meta-networking/recipes-support/libtevent/libtevent_0.16.0.bb | 1 +
- 4 files changed, 4 insertions(+)
+ .../dropwatch/dropwatch_1.5.4.bb               | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+ create mode 100644 meta-networking/recipes-support/dropwatch/dropwatch_1.5.4.bb
 
-diff --git a/meta-networking/recipes-support/libldb/libldb_2.8.0.bb b/meta-networking/recipes-support/libldb/libldb_2.8.0.bb
-index ec56eb0205..58d683eab4 100644
---- a/meta-networking/recipes-support/libldb/libldb_2.8.0.bb
-+++ b/meta-networking/recipes-support/libldb/libldb_2.8.0.bb
-@@ -7,6 +7,7 @@ DEPENDS += "libtdb libtalloc libtevent popt cmocka"
- RDEPENDS:pyldb += "python3"
- 
- export PYTHONHASHSEED="1"
-+export PYTHONARCHDIR = "${PYTHON_SITEPACKAGES_DIR}"
- 
- SRC_URI = "http://samba.org/ftp/ldb/ldb-${PV}.tar.gz \
-            file://0001-do-not-import-target-module-while-cross-compile.patch \
-diff --git a/meta-networking/recipes-support/libtalloc/libtalloc_2.4.1.bb b/meta-networking/recipes-support/libtalloc/libtalloc_2.4.1.bb
-index bf7fbc8649..92da03e1a1 100644
---- a/meta-networking/recipes-support/libtalloc/libtalloc_2.4.1.bb
-+++ b/meta-networking/recipes-support/libtalloc/libtalloc_2.4.1.bb
-@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://talloc.h;beginline=3;endline=27;md5=a301712782cad6dd6
-                     "
- 
- export PYTHONHASHSEED="1"
-+export PYTHONARCHDIR = "${PYTHON_SITEPACKAGES_DIR}"
- 
- SRC_URI = "https://www.samba.org/ftp/talloc/talloc-${PV}.tar.gz \
-            file://0001-talloc-Add-configure-options-for-packages.patch \
-diff --git a/meta-networking/recipes-support/libtdb/libtdb_1.4.9.bb b/meta-networking/recipes-support/libtdb/libtdb_1.4.9.bb
-index 248b72967d..9367600351 100644
---- a/meta-networking/recipes-support/libtdb/libtdb_1.4.9.bb
-+++ b/meta-networking/recipes-support/libtdb/libtdb_1.4.9.bb
-@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://tools/tdbdump.c;endline=18;md5=b59cd45aa8624578126a8c
-                     file://include/tdb.h;endline=27;md5=f5bb544641d3081821bcc1dd58310be6"
- 
- export PYTHONHASHSEED="1"
-+export PYTHONARCHDIR = "${PYTHON_SITEPACKAGES_DIR}"
- 
- SRC_URI = "https://samba.org/ftp/tdb/tdb-${PV}.tar.gz \
-            file://0001-tdb-Add-configure-options-for-packages.patch \
-diff --git a/meta-networking/recipes-support/libtevent/libtevent_0.16.0.bb b/meta-networking/recipes-support/libtevent/libtevent_0.16.0.bb
-index 0158f8bc74..67f36083bf 100644
---- a/meta-networking/recipes-support/libtevent/libtevent_0.16.0.bb
-+++ b/meta-networking/recipes-support/libtevent/libtevent_0.16.0.bb
-@@ -7,6 +7,7 @@ DEPENDS += "libtalloc libtirpc cmocka"
- RDEPENDS:python3-tevent = "python3"
- 
- export PYTHONHASHSEED="1"
-+export PYTHONARCHDIR = "${PYTHON_SITEPACKAGES_DIR}"
- 
- SRC_URI = "https://samba.org/ftp/tevent/tevent-${PV}.tar.gz \
-            file://0001-Add-configure-options-for-packages.patch \
+diff --git a/meta-networking/recipes-support/dropwatch/dropwatch_1.5.4.bb b/meta-networking/recipes-support/dropwatch/dropwatch_1.5.4.bb
+new file mode 100644
+index 000000000..e3dbac4a2
+--- /dev/null
++++ b/meta-networking/recipes-support/dropwatch/dropwatch_1.5.4.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "Dropwatch is a utility to diagnose where packets are getting dropped"
++DESCRIPTION = "\
++Dropwatch is a utility to help developers and system administrators to \
++diagnose problems in the Linux Networking stack, specifically their \
++ability to diagnose where packets are getting dropped."
++HOMEPAGE = "https://github.com/nhorman/${BPN}"
++SECTION = "net/misc"
++LICENSE = "GPL-2.0-or-later"
++LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
++
++SRC_URI = "git://github.com/nhorman/dropwatch.git;protocol=https;nobranch=1"
++SRCREV = "1e7e487a019a7c02f1f429c4d3a4647fa3787a13"
++
++S = "${WORKDIR}/git"
++
++DEPENDS = "binutils libnl libpcap readline"
++
++inherit pkgconfig autotools
 -- 
 2.43.0
 
