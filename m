@@ -1,164 +1,144 @@
-Return-Path: <max.oss.09@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 15579C47DDB
-	for <webhook@archiver.kernel.org>; Tue, 23 Jan 2024 17:54:23 +0000 (UTC)
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
- by mx.groups.io with SMTP id smtpd.web10.529.1706032458601539021
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CE3DFC47258
+	for <webhook@archiver.kernel.org>; Tue, 23 Jan 2024 19:56:23 +0000 (UTC)
+Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
+ by mx.groups.io with SMTP id smtpd.web10.4196.1706039775179986635
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Jan 2024 09:54:18 -0800
+ Tue, 23 Jan 2024 11:56:15 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZV3x06OC;
- spf=pass (domain: gmail.com, ip: 209.85.221.53, mailfrom: max.oss.09@gmail.com)
-Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-33921b8988fso4073608f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Jan 2024 09:54:18 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Tr1vl1pI;
+ spf=pass (domain: gmail.com, ip: 209.85.214.182, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f182.google.com with SMTP id d9443c01a7336-1d720c7fc04so26401345ad.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Jan 2024 11:56:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1706032457; x=1706637257; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1706039774; x=1706644574; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=O68qb9JuOCUIV4TxYDJv+OMpvmcYlbYHivTZctv8Z50=;
-        b=ZV3x06OColQzteB494C5f4xMVGY5/8Px7RhtVoPsHhGY97PWeQCYeKr+o3guacWEWj
-         5TiFYxWimis7T6SgEydSNnZU/B9Z52Ujt/bkyKQYlGzMlFVu4C9ITPsgxhrRQi9g07f1
-         I2wBwaptqmBDhhhVvT9NATjiAYEZdux/y76F8iXIFnLy/Rhvxg5n8cdFmxzRDY4Z8c2a
-         yisKluONc9ZIFZyD4CNl7zJPmYmXsY1tP5OOOUBpusMZiTKobywBWs6h0tvMzk9Xhghk
-         hzmAM23qXO+/K2dXtNAmT+53CUpaRXuqGdr0huD9OJ9OdTc4bScoUWe0ng/fKsFeUsvt
-         FigA==
+        bh=MMe+knYkN9rYD7lZaHYTxLenoQIzPSR5Q1f2yE1uvQY=;
+        b=Tr1vl1pIhy9mGN/Ez1NBAQJQ0X+jJFBkpkV0hy0/jQv5l/JZe7lyROj8Jg0/aRFT8M
+         NA3kydOL1LNqTjtk7mTca6BEmw1R4qBKvvgLwDiZ6reLS4BdZccHr2gfo02SkuNpqT9u
+         6EpB09a5NXZiBpSoU2F4WdYURYen1wSpi67hwPhb0p769Q2Y71XulZ9V9gVDJ3zlVHbb
+         /gBUIAj4yGGDDgXMjNVktRxfUU+YaLOTaMmZq6edLZADO/5syD5+w0/JV3U+FZo/5u6g
+         Qr9+Vw7VtvyrErn6Z9OOJZ1+pMUnvaJgpyxzPvMfnYP/QdMzbHZDwRPZYrmC91HlAOiY
+         7Yag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1706032457; x=1706637257;
+        d=1e100.net; s=20230601; t=1706039774; x=1706644574;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=O68qb9JuOCUIV4TxYDJv+OMpvmcYlbYHivTZctv8Z50=;
-        b=P0I+T4jHhKhgEMsfFbGsHOnBLLivr3D3xb3OY0BUTvL3DdWdq+E8Nu3/6kIgBn9Nsh
-         jQBQlBTtFYiPA7gSbD6RfT7O3cYI1BPP2ISVEeSHZgrvRUdVFSUrUYm9QtCRI+FyQMYt
-         n4udbtl0+fuvHoiVCTmOHGSwvkBlBjpGH1Rz9lZoV3lAGF0CUJkHOmhgdVlCxV03SYRV
-         R5d7skthwN5pBNji3Wa3APmhE1Duatv6MTX02x9pcTPyxs/USP8kAZgVsWTdqhqQGsdf
-         iI1oPguE1o6Kt2wEsRnBdUORpBihGpA7Id0Qyt+M/btKblNujP+JFTs35SfbUBfda3JE
-         aYZg==
-X-Gm-Message-State: AOJu0YwjLYTqubaX1sSi+rwfYTDscRM7adXW8FTuXC9klPq+58u1W8qh
-	RxbZjX/mI2nd9etiSyrC73bkwewFH6NTX8rvU6jpYTVZ13PcH77GiQLR+CEh
-X-Google-Smtp-Source: AGHT+IEQ1VEvW1Dkv7RMMhf5Bf2Z4eA4qDfM+EWBuTkS/t+U0BAfpa8obiWqFkVjdNtF5YcG6U5rXw==
-X-Received: by 2002:a05:6000:11cb:b0:337:c3b2:284e with SMTP id i11-20020a05600011cb00b00337c3b2284emr3685089wrx.33.1706032456639;
-        Tue, 23 Jan 2024 09:54:16 -0800 (PST)
-Received: from toolbox.int.toradex.com (31-10-206-125.static.upc.ch. [31.10.206.125])
-        by smtp.gmail.com with ESMTPSA id x4-20020a5d4904000000b0033928514699sm9480142wrq.2.2024.01.23.09.54.16
+        bh=MMe+knYkN9rYD7lZaHYTxLenoQIzPSR5Q1f2yE1uvQY=;
+        b=K8ztKX3oGz2+4p5KnBrtGfwMY2MJQTlHxty+2wzBrDVAhHXvP/8hSIpzqCMPMvP63H
+         yiXTTs02TfurJjUAWsJhGQOf4ZE9OUhrCtUUSzRZI0xeFW9nKBCR79OkoAiUiHrSvZEP
+         UXGYx6Kml9XdtolAIbzX4pjgD658EfEyWi/x0HTdKfd84nUOFHjqnGG+csC8aLmQF7PL
+         jgGMQhK7VX2izieZ23SxyPZGfZaEDXdHCvIDkJtLyKdd6X/WIV7iuTrGcoY7T6cyOA2V
+         cBlJ1cexpcWVPr9ceal/QylqGgbexQ+DfrQAx5wd943QDU/zp90ct2Tg5GBv8pGjFiyr
+         V4qA==
+X-Gm-Message-State: AOJu0YwgVM6bST2f8hHwN8ngVD45nibDDgtGVmKZ2g5g8IAwNSUPKbQu
+	IBA52bxzA0JSTtNrc6OOgHv/DEuZfjig9nlCKaSYARpy2H5r8b5PlT2PlSAxTcI=
+X-Google-Smtp-Source: AGHT+IHAfhQXn4xQ/mQw5t7P8wkezVjFxAsQBpknCyCm0Jnt7df/IZ17Es3W2sywB33ILcRbH9Bstg==
+X-Received: by 2002:a05:6a20:2452:b0:199:8c54:5868 with SMTP id t18-20020a056a20245200b001998c545868mr4077008pzc.35.1706039774247;
+        Tue, 23 Jan 2024 11:56:14 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::d592])
+        by smtp.gmail.com with ESMTPSA id fa38-20020a056a002d2600b006dd810cdf60sm1424919pfb.163.2024.01.23.11.56.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 23 Jan 2024 09:54:16 -0800 (PST)
-From: max.oss.09@gmail.com
+        Tue, 23 Jan 2024 11:56:13 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Changqing Li <changqing.li@windriver.com>,
-	Khem Raj <raj.khem@gmail.com>,
-	Max Krummenacher <max.krummenacher@toradex.com>
-Subject: [meta-oe][dunfell][PATCH] linuxptp: fix do_compile error
-Date: Tue, 23 Jan 2024 18:53:37 +0100
-Message-ID: <20240123175337.1115266-1-max.oss.09@gmail.com>
-X-Mailer: git-send-email 2.42.0
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] minicoredumper: Fix build with clang
+Date: Tue, 23 Jan 2024 11:56:11 -0800
+Message-ID: <20240123195611.3106347-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 23 Jan 2024 17:54:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108438
+ <openembedded-devel@lists.openembedded.org>; Tue, 23 Jan 2024 19:56:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108439
 
-From: Changqing Li <changqing.li@windriver.com>
-
-with make 4.4, linuxptp do_compile will failed with error:
-In file included from clock.c:35:
-missing.h:61:9: error: redeclaration of enumerator 'HWTSTAMP_TX_ONESTEP_P2P'
-   61 |         HWTSTAMP_TX_ONESTEP_P2P = 3,
-      |         ^~~~~~~~~~~~~~~~~~~~~~~
-In file included from clock.c:21:
-/buildarea2/WRLCD_Regression/Rerun/build_dir/11201532-build_scp_world_Feature_Test/qemux86-64-standard-std-OE/build/tmp-glibc/work/core2-64-wrs-linux/linuxptp/3.1.1-r0/recipe-sysroot/usr/include/linux/net_tstamp.h:128:9: note: previous definition of 'HWTSTAMP_TX_ONESTEP_P2P' with type 'enum hwtstamp_tx_types'
-  128 |         HWTSTAMP_TX_ONESTEP_P2P,
-      |
-
-Following change of make 4.4 changes behavior of shell function:
-* WARNING: Backward-incompatibility!
-  Previously makefile variables marked as export were not exported to commands
-  started by the $(shell ...) function.  Now, all exported variables are
-  exported to $(shell ...).
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-
-Backport of commit 05c1003c4 ("linuxptp: fix do_compile error").
-This is present in dunfell/kirkstone as well. If net_tstamp.h of the
-build host disagrees with net_tstamp.h of the OE kernel or I remove
-the build host's net_tstamp.h do_compile fails.
-
-Changed Upstream Status to Backport with the git sha as the commit is
-now applied upstream.
-
-Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
 ---
- ...ditional-assignment-for-KBUILD_OUTPU.patch | 42 +++++++++++++++++++
- .../linuxptp/linuxptp_2.0.1.bb                |  1 +
- 2 files changed, 43 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/linuxptp/linuxptp/0001-makefile-use-conditional-assignment-for-KBUILD_OUTPU.patch
+ ...restripper-Fix-uninitialized-warning.patch | 53 +++++++++++++++++++
+ .../minicoredumper/minicoredumper_2.0.7.bb    |  1 +
+ 2 files changed, 54 insertions(+)
+ create mode 100644 meta-oe/recipes-kernel/minicoredumper/files/0001-corestripper-Fix-uninitialized-warning.patch
 
-diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp/0001-makefile-use-conditional-assignment-for-KBUILD_OUTPU.patch b/meta-oe/recipes-connectivity/linuxptp/linuxptp/0001-makefile-use-conditional-assignment-for-KBUILD_OUTPU.patch
+diff --git a/meta-oe/recipes-kernel/minicoredumper/files/0001-corestripper-Fix-uninitialized-warning.patch b/meta-oe/recipes-kernel/minicoredumper/files/0001-corestripper-Fix-uninitialized-warning.patch
 new file mode 100644
-index 000000000..83bdae858
+index 0000000000..8b90d33e1b
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp/0001-makefile-use-conditional-assignment-for-KBUILD_OUTPU.patch
-@@ -0,0 +1,42 @@
-+From dfd38cb29c0768692f886d3ab9158bd2b3132582 Mon Sep 17 00:00:00 2001
-+From: Changqing Li <changqing.li@windriver.com>
-+Date: Tue, 22 Nov 2022 15:20:48 +0800
-+Subject: [PATCH] makefile: use conditional assignment for KBUILD_OUTPUT
++++ b/meta-oe/recipes-kernel/minicoredumper/files/0001-corestripper-Fix-uninitialized-warning.patch
+@@ -0,0 +1,53 @@
++From bb44bb643cd2a2f937331b4d1a76b03556b718a2 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 23 Jan 2024 11:36:41 -0800
++Subject: [PATCH] corestripper: Fix uninitialized warning
 +
-+Refer [1],from make 4.4, all variables that are marked as export will
-+also be passed to the shell started by the shell function. use "=" will
-+make KBUILD_OUTPUT always empty for shell function, use "?=" to make
-+"export KBUILD_OUTPUT" in enrironment can work.
++Clang finds more open paths where ret can be uninitialized
 +
-+[snip of 4.4 NEWS]
-+* WARNING: Backward-incompatibility!
-+   Previously makefile variables marked as export were not exported to commands
-+   started by the $(shell ...) function.  Now, all exported variables are
-+   exported to $(shell ...).
-+[snip]
++Fixes
++| ../../../git/src/minicoredumper/corestripper.c:2768:13: error: variable 'ret' is used uninitialized whenever 'if' condition is false [-Werror,-Wsometimes-uninitialized]
++|  2768 |         } else if (di->core_fd >= 0) {
++|       |                    ^~~~~~~~~~~~~~~~
++| ../../../git/src/minicoredumper/corestripper.c:2773:9: note: uninitialized use occurs here
++|  2773 |         return ret;
++|       |                ^~~
++| ../../../git/src/minicoredumper/corestripper.c:2768:9: note: remove the 'if' if its condition is always true
++|  2768 |         } else if (di->core_fd >= 0) {
++|       |                ^~~~~~~~~~~~~~~~~~~~~
++| ../../../git/src/minicoredumper/corestripper.c:2763:9: note: initialize the variable 'ret' to silence this warning
++|  2763 |         int ret;
++|       |                ^
++|       |                 = 0
 +
-+[1] https://git.savannah.gnu.org/cgit/make.git/tree/NEWS?h=4.4&id=ed493f6c9116cc217b99c2cfa6a95f15803235a2#n74
-+
-+Upstream-Status: Backport [d3dd51ba611802d7cbb28631cb943cb882fa4aac]
-+
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
++Upstream-Status: Submitted [https://github.com/diamon/minicoredumper/pull/15]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ makefile | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ src/minicoredumper/corestripper.c | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
 +
-+diff --git a/makefile b/makefile
-+index 529d8a0..3db60fa 100644
-+--- a/makefile
-++++ b/makefile
-+@@ -15,7 +15,7 @@
-+ # with this program; if not, write to the Free Software Foundation, Inc.,
-+ # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
++diff --git a/src/minicoredumper/corestripper.c b/src/minicoredumper/corestripper.c
++index 3eb9089..e9e3936 100644
++--- a/src/minicoredumper/corestripper.c
+++++ b/src/minicoredumper/corestripper.c
++@@ -2707,7 +2707,7 @@ static int dump_data_content_file(struct dump_info *di,
++ 	char *tmp_path;
++ 	FILE *file;
++ 	int len;
++-	int ret;
+++	int ret = -1;
 + 
-+-KBUILD_OUTPUT =
-++KBUILD_OUTPUT ?=
++ 	len = strlen(di->dst_dir) + strlen("/dumps/") + 32 +
++ 	      strlen(dd->ident) + 1;
++@@ -2760,7 +2760,7 @@ out:
++ static int dump_data_content(struct dump_info *di, struct mcd_dump_data *dd,
++ 			     const char *symname)
++ {
++-	int ret;
+++	int ret = -1;
 + 
-+ DEBUG	=
-+ CC	?= $(CROSS_COMPILE)gcc
++ 	if (dd->ident) {
++ 		/* dump to external file */
 +-- 
-+2.25.1
++2.43.0
 +
-diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.1.bb b/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.1.bb
-index 79e59a8fe..b848575e1 100644
---- a/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.1.bb
-+++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.1.bb
-@@ -6,6 +6,7 @@ SRC_URI = "http://sourceforge.net/projects/linuxptp/files/v2.0/linuxptp-${PV}.tg
-            file://build-Allow-CC-and-prefix-to-be-overriden.patch \
-            file://Use-cross-cpp-in-incdefs.patch \
-            file://time_t_maybe_long_long.patch \
-+           file://0001-makefile-use-conditional-assignment-for-KBUILD_OUTPU.patch \
+diff --git a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.7.bb b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.7.bb
+index 0c38271418..726aa60ce7 100644
+--- a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.7.bb
++++ b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.7.bb
+@@ -15,6 +15,7 @@ SRC_URI = "git://github.com/diamon/minicoredumper;protocol=https;branch=master \
+            file://minicoredumper.service \
+            file://minicoredumper.init \
+            file://run-ptest \
++           file://0001-corestripper-Fix-uninitialized-warning.patch \
             "
  
- SRC_URI[sha256sum] = "6f4669db1733747427217a9e74c8b5ca25c4245947463e9cdb860ec8f5ec797a"
+ S = "${WORKDIR}/git"
 -- 
-2.42.0
+2.43.0
 
 
