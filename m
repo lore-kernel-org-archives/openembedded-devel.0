@@ -1,283 +1,607 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 26314C46CD2
-	for <webhook@archiver.kernel.org>; Tue, 23 Jan 2024 02:23:05 +0000 (UTC)
-Received: from esa5.fujitsucc.c3s2.iphmx.com (esa5.fujitsucc.c3s2.iphmx.com [68.232.159.76])
- by mx.groups.io with SMTP id smtpd.web10.2285.1705976583353185040
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 778E1C47DDF
+	for <webhook@archiver.kernel.org>; Tue, 23 Jan 2024 03:33:05 +0000 (UTC)
+Received: from mail-yb1-f176.google.com (mail-yb1-f176.google.com [209.85.219.176])
+ by mx.groups.io with SMTP id smtpd.web11.3580.1705980783913124569
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Jan 2024 18:23:04 -0800
+ Mon, 22 Jan 2024 19:33:04 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj1 header.b=Vkwl7EqW;
- spf=neutral (domain: fujitsu.com, ip: 68.232.159.76, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj1;
-  t=1705976583; x=1737512583;
-  h=from:to:cc:subject:date:message-id:references:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=Jn7T9S83cfGGgqQzf9Cv3ERVQ0LIJ3JmlCyeva6jMpM=;
-  b=Vkwl7EqWREbgVQmIgAsc6YitsqYMGoe/65ouDkFeS2CWkHqFlFM4QczF
-   fmvcag1JugJVC3p43VvLpJyF58sODJDiFv09IqUc3I8UgZVKUortk9zm3
-   Tiq1pjo7jLar1ts7EXKIRAqj/WxFEePOXJlGs6xxxCGSwp5geVDoJVnVN
-   66S5Unn8+46CDuDGs41G3Dz9Eb5tSV+BKjTOBGWF/hoM3NeQ5ICe95FWI
-   uj2PgmUeIycjRn6+bHQPZErEgiILHkbAfHqxumQmTy9NMq3LeHXp0Noou
-   WHIR6/6EI3GJAtB3m1zstO2kcTPOBYsTQ8WgpV/w21LFk+g1C4zZ9bwQM
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10961"; a="109278215"
-X-IronPort-AV: E=Sophos;i="6.05,213,1701097200"; 
-   d="scan'208";a="109278215"
-Received: from mail-tycjpn01lp2168.outbound.protection.outlook.com (HELO JPN01-TYC-obe.outbound.protection.outlook.com) ([104.47.23.168])
-  by ob1.fujitsucc.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Jan 2024 11:22:55 +0900
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=cVWT35VdG58A/+f6cHNC+6QZE1xPNfKKHyFuJ0LUAZQrAHxRsO/QgbhCRLSgFgLuPbbT8q2AmjHwZcFhsB/WkYVEi8gxs1G+WUrAc/CDPgZVns/2l+2WrhSLSCP18HAsxqP0JWRfE1IE54QgeDab2tKIbK5CGBUaAYy08ZZdCfZiCG2dL/swqDoeGZNYXOXaqfq0pr3nhoGJ3zBds/XAmZcsLjduUQ4zOaqmOYBHOVUpJGkpN0ViDaaGXTDO9jP//NUghR/6a5oKON+u4VSO/LZG0knBE/4M1zcvzxghHJQq+aSVT+uWaP6gDSAE0fWOyGwCRi8BRgYASH7UmbAOeQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Jn7T9S83cfGGgqQzf9Cv3ERVQ0LIJ3JmlCyeva6jMpM=;
- b=VjAc04ikXc6ezHhjiAExnF6L3H156D2BLuv/iylUQYEfZ1KKM/x66LRBhYja0hnJTF9vXNaYRUjesVAM90foPpVcgvXInpmpt3UtMX4+99QksS+TR+rTUQ+W3HvarxVbvaMBdO3Zo3p/acMadxm0Y70Z1kSQC1BOSQFhlbdrMcBbdEC4sV+FCAGqEw9BlXLAmZfjT/9MBt4ZLKTVvQ5WL5TstFPvHLNOqzkzYm51vRnM6Bqu6o1KxbfayE/9DTCeaue17sD0kb9UOM4wWiSnAM9N2HGd2TpykpKnkQIaYRtTOUcfEHqBRkYfg0fuHuraqDgNWVVJXguMog1uttgEUQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=fujitsu.com; dmarc=pass action=none header.from=fujitsu.com;
- dkim=pass header.d=fujitsu.com; arc=none
-Received: from TYWPR01MB11861.jpnprd01.prod.outlook.com
- (2603:1096:400:3fb::13) by TYAPR01MB6107.jpnprd01.prod.outlook.com
- (2603:1096:402:32::12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7228.20; Tue, 23 Jan
- 2024 02:22:52 +0000
-Received: from TYWPR01MB11861.jpnprd01.prod.outlook.com
- ([fe80::cf97:6081:d424:2dc4]) by TYWPR01MB11861.jpnprd01.prod.outlook.com
- ([fe80::cf97:6081:d424:2dc4%5]) with mapi id 15.20.7228.020; Tue, 23 Jan 2024
- 02:22:52 +0000
-From: "Mingyu Wang (Fujitsu)" <wangmy@fujitsu.com>
-To: Khem Raj <raj.khem@gmail.com>, "p35420102@gmail.com" <p35420102@gmail.com>
-CC: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: RE: [oe] Add python3-apscheduler #error
-Thread-Topic: [oe] Add python3-apscheduler #error
-Thread-Index: AQHaTX8KH+S5VAoSk0SEB9Ph53rUx7DmiduAgAAdArA=
-Date: Tue, 23 Jan 2024 02:22:52 +0000
-Message-ID: 
- <TYWPR01MB11861F5DF79157AE6558754A4DC742@TYWPR01MB11861.jpnprd01.prod.outlook.com>
-References: <HwKj.1705904669013507737.KXJd@lists.openembedded.org>
- <CAMKF1sqSeAJO=dgxjJJsF+qvZK1YkpRMZ2PJ9fUCK30cB3996Q@mail.gmail.com>
-In-Reply-To: 
- <CAMKF1sqSeAJO=dgxjJJsF+qvZK1YkpRMZ2PJ9fUCK30cB3996Q@mail.gmail.com>
-Accept-Language: zh-CN, en-US
-Content-Language: zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: 
- =?utf-8?B?TVNJUF9MYWJlbF8xZTkyZWY3My0wYWQxLTQwYzUtYWQ1NS00NmRlMzM5Njgw?=
- =?utf-8?B?MmZfQWN0aW9uSWQ9NmI5ZGFjZGItMDc0MS00MDM0LWI4NTItYWU5NTBjNmFk?=
- =?utf-8?B?ZmU0O01TSVBfTGFiZWxfMWU5MmVmNzMtMGFkMS00MGM1LWFkNTUtNDZkZTMz?=
- =?utf-8?B?OTY4MDJmX0NvbnRlbnRCaXRzPTA7TVNJUF9MYWJlbF8xZTkyZWY3My0wYWQx?=
- =?utf-8?B?LTQwYzUtYWQ1NS00NmRlMzM5NjgwMmZfRW5hYmxlZD10cnVlO01TSVBfTGFi?=
- =?utf-8?B?ZWxfMWU5MmVmNzMtMGFkMS00MGM1LWFkNTUtNDZkZTMzOTY4MDJmX01ldGhv?=
- =?utf-8?B?ZD1Qcml2aWxlZ2VkO01TSVBfTGFiZWxfMWU5MmVmNzMtMGFkMS00MGM1LWFk?=
- =?utf-8?B?NTUtNDZkZTMzOTY4MDJmX05hbWU9RlVKSVRTVS1QVUJMSUPigIs7TVNJUF9M?=
- =?utf-8?B?YWJlbF8xZTkyZWY3My0wYWQxLTQwYzUtYWQ1NS00NmRlMzM5NjgwMmZfU2V0?=
- =?utf-8?B?RGF0ZT0yMDI0LTAxLTIzVDAyOjA3OjM4WjtNU0lQX0xhYmVsXzFlOTJlZjcz?=
- =?utf-8?B?LTBhZDEtNDBjNS1hZDU1LTQ2ZGUzMzk2ODAyZl9TaXRlSWQ9YTE5ZjEyMWQt?=
- =?utf-8?Q?81e1-4858-a9d8-736e267fd4c7;?=
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=fujitsu.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: TYWPR01MB11861:EE_|TYAPR01MB6107:EE_
-x-ms-office365-filtering-correlation-id: d72b6120-c730-4954-8317-08dc1bba33af
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- ICOYJ+gytr8pj0LdHKuAy4zBxt4XfYp1zcuqOMxV7NF5cH8pxCCDGlSvWRdzpFuO/W0dxsY1g6ldrQJBglMFOzk7nVK8awKRwFOzH9Ltw6XrpJErgqc25xsDpzDG/TFqelhV/tpqt8mOjT5LPuc8oISv2Hh0asb5/TLokcbsJ6hbn4YNfXVggWSDh6dEpOAr4K4XiIU2DNmHuMCvo+KUj4AH6Liqaxnkr3IW+t5ylH24cCju7/ycJhE5TqK2O0zwtx0voDj2XqSxWDY28Z7nbKr1qrvKWbUFwBgEMx722JRUglf3tRozt8gM25C72Fg79aV0S5ySgkhnp5aeHAlG8/BAes5TtUk0L/+WUwwI14A28MRLmiu/OIdb9Dw+g8wkxWHB5TtgbBjVhIC2Zsxb092o8BXddPSpCxWgg0EMoPswRl2JDIGCCFgfZjoMCYpVdJcq9Uof8/f3YauwApSXAinYKpT7rWCEPaUqBdto3xWA1WLTQ+qiQXyDWjiXbgW5AwKkR05Ug9rVxqLwAoU41jsUIoXxtK2c3oAGCuyPNCRP08112YhaauGbOZvxrpPoAEqaikk5uZ0ZfYU1Pep0lbaRXpXNxTlroYNLid0CCvADCdlR/SePZQd6kIdtQuuWTa8QY8IhrSXbHXhviaJXybMOluZ1KrneRR/6P8sapUehgyJpzM7R9mh7Zk6ndmbjs2a2BpIpYVR1BgjiPIVa+w==
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TYWPR01MB11861.jpnprd01.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(376002)(39860400002)(366004)(396003)(136003)(346002)(230922051799003)(230273577357003)(230173577357003)(1590799021)(1800799012)(451199024)(186009)(64100799003)(1580799018)(2906002)(38100700002)(83380400001)(26005)(82960400001)(316002)(41300700001)(122000001)(71200400001)(66556008)(66476007)(66946007)(76116006)(5660300002)(110136005)(8936002)(8676002)(7696005)(66446008)(4326008)(52536014)(64756008)(9686003)(6506007)(966005)(53546011)(478600001)(38070700009)(33656002)(85182001)(55016003)(86362001);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?utf-8?B?NTZjak54c3l6ZGpTWjdrUldjcnl3UUh6WlREZEZrN1I4d212ZUJzSXc4bWhI?=
- =?utf-8?B?cjBwdUhsMG8vRmU3TTVpYnlYSlpRTWdKZlhodGRqTXJGY0tkdU5tZGhqaWcx?=
- =?utf-8?B?RkRDTzJFUTJ6cVgxd2RKZ0tKQ21Mblk1Zkx3WFROMnJXV0hiRHpURElpWkkr?=
- =?utf-8?B?ZlhPeS9JOThnUlVIaWgvd0laZmFFYndwZlVqTFRhNk93SnErczZmRU04eHMz?=
- =?utf-8?B?djBCQXJxUWtDOXcxc1UzYnJjTjBBRktBSVNqSy8zK3YrL25iMmxTVVZLamdy?=
- =?utf-8?B?NWhmYW85aWkxVTZySUpWN3B6dFdBSCtxYjdFcENVNlNuY1VlS212Y01MY0NU?=
- =?utf-8?B?T2RVbU1wL2oyTkNHQ1NVUE1GTGVmWmkyRng3YnNhczhuOUcyZTMxNTcvSXBz?=
- =?utf-8?B?VEFPT1J5cWFLMnRjVVJhTnd1WXhqR08wMW5jVUh5UTJ6WW5kd1llQ0lhelVY?=
- =?utf-8?B?Ym5rNU5Ua0QzQ2ExNW9jNnJhZ3pXTW9oeUV6ZEZLY2N3N00yRGF2S0ZDeE5Q?=
- =?utf-8?B?alo3T3MxeERaWThsVVRRVi9WUnlzQVdMM045a2VDNGlxbTZ1cnNtWkh5QkNl?=
- =?utf-8?B?aGNMU2hYdWFYQWtVT0JkV0liL3JXUUlwSEl2S2pmbnpZMXZIWCtOQm1XVHlL?=
- =?utf-8?B?WXRIRk5FenBaTkdvOEdwK1k0Z3ZGcnQ2cC8wTWdLeXh6cXpkVGlYemM0KzhR?=
- =?utf-8?B?OHg4RFBXazBLSTRIQmpqaS9ITDl1Rlc5RERGNDlpVVNUVmVzZk9MdHlhZ1or?=
- =?utf-8?B?aUUzWE9WUDZJTWFuajhhWHNLc0lGNGpoUS9qclV4Mll4Um9wTFpOdVAwTEg2?=
- =?utf-8?B?a2swZDA4UU5lYmhZMEpCQ2hIVU44V3hEOG5hL2oyQ3drZTBvNGhDUlFpUVhB?=
- =?utf-8?B?TVN2bkE2bUNBUG1IbXovL3ljdEVQc3RMeW43NWRCWnp6cVgyZmpZemRhaENp?=
- =?utf-8?B?aTAvTUY1eVZYQkl4YWxZUnRiM2htdEUrUWxtOW9QcVJCRVlibGpHbUdtRGd3?=
- =?utf-8?B?WnNGNEU4QVpzdEFZR2duL1hKVnpoSk5FaUJFbi8zZVhXRkFHTWZBVS94MmQy?=
- =?utf-8?B?Yys3VHhYZXhlQTVzU1NRUTlIeHdJN0VBbVkyUkkzZXpLZFhxa1FJSEtjWUZk?=
- =?utf-8?B?Yms1UmZ1M0dOR1ovbXY2MGtudzR0N2tpa3Bxc0NyM0RtRGhiY0NiVnUyN1c3?=
- =?utf-8?B?Ym1Sajh5Ty96alhNdExSZjNJTWV3SVNmR1FWSkgvdUlFM0p4VVBkWE1LcVNh?=
- =?utf-8?B?aEdwOUpBcWhTQzd0NmV2WXA3S094T09IdUFmbG9pam1qYzJnRzZrRUx2ZFFO?=
- =?utf-8?B?NHZBTGpoNHAvUXBmcWx3Vzd6NU5JTmxIdldCc2g1Q0M5Q2xXVzdRU1REbEZB?=
- =?utf-8?B?aEQrdWhkcHVhUGRUdDdubUNOU1N3Wkp4Rm9RSXJDVEVJLzhmNFdzZDNOYkFN?=
- =?utf-8?B?dzFpZnlwTEJ5K0hUYzllTE9MQ3E4aFRubzUyRU8vbDZ0ZEh3bzJydEpCQ28x?=
- =?utf-8?B?YzNqZGRXV2RmYTE2ZkRIcGZWeDM1NGJTMWFvd3lLNncwZFVkVi9uenQ0WU9l?=
- =?utf-8?B?UGRLK29oRWxpclR4RUVvY3RuZnExRThXWENuc3lTYm8vK0d3cng4Tms0TUFK?=
- =?utf-8?B?eit6WXNiazRzZExack5vbEx1L2lybmplRjh6UTJ5dUp0Mk44WjE2VW9FNld4?=
- =?utf-8?B?M2EwcEc1VlNaSmpFbHl5NnFTMHU4dTVzV3h2ZWpFeHBGZ2FUa3pDN2kzVS9r?=
- =?utf-8?B?cnJ2RTBGdkkwZDR4LzlGTlpKVXVqWFc1aU5zOXBadWpLYWZKMWF2M3FRcmdX?=
- =?utf-8?B?TUdrczB2VkJ2Z3ZpVU1md0I5MHZYc2tGUTQvUHBXNkp1TDZjWGliTlBMSUtR?=
- =?utf-8?B?WU1uNGRVaXdtVFlrY2UvVGlqdE9MYkc4bEZ2UWN4SmxNN045TElyeHJ3TmRF?=
- =?utf-8?B?Kzd4QThXbjNnMnljZDE0TlNCcGJEN2RBVWhIMHRHcmlwV0hMN2NRSWVzK3Fx?=
- =?utf-8?B?bGc0K3pncXZlY3ZnYlk5V1FqSVNRelZ1WkYzOUtaaWU1bFRUb1doMjNsT1Ri?=
- =?utf-8?B?WHhaWVo1TmxTd0pQY0E0Mm10TW9MWVU2d1VIMnJOYi9TM2l6RGZqWitUaXF6?=
- =?utf-8?Q?JSTIZxuaJEBV2BMm5HGwskxSX?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=JaSctTf9;
+ spf=pass (domain: gmail.com, ip: 209.85.219.176, mailfrom: ticotimo@gmail.com)
+Received: by mail-yb1-f176.google.com with SMTP id 3f1490d57ef6-dc21d7a7042so3186715276.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 22 Jan 2024 19:33:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1705980783; x=1706585583; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=8cQKf92xs2/pXO7p/P97nBPDfkKMs9u/Vbl+HJ9MM2E=;
+        b=JaSctTf9RTTQ4P2vN3WgQEM4enTThL39J/KYuHhqB0WYHJhcDg16Tq3be9/LXpXxHJ
+         4Tx9oikcaB0yzcbz0pfdFksA2BI14m+gE+5wPMUSK6JziEM7CdZBZt0ZFaATs6QqDM7t
+         RXw0MOiFj4pasvF/gTGOMFDSBSC4Xqx0M0KUWpcYMf9XdHhz4HzHLwnv5ADSJGelbF2p
+         PLqRk9seGJA5NMBAuQPW/VxQ5ojl30p8Rgs6LpWC8h6kpFGeqFv1BEC6cyAQqlZz3NBj
+         WrRWm2TyjwIEUu+PMrooMWwTWsakhK8E3y+QquaB5Glj2PL5onmVBbZCEo1BgEg5BMyu
+         Z4lQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1705980783; x=1706585583;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=8cQKf92xs2/pXO7p/P97nBPDfkKMs9u/Vbl+HJ9MM2E=;
+        b=bQjDo5YqA6kHKt1y1GFtNobbodHyI1kBPOGleZqajlC1GuYbrnd3g7xed4onwnCloj
+         7uVYdb8fF53mNhsLKP6vOIqgGKSBQWM4vpBTgiQKSMu2jYI1cfArgxVhBhhbICQciKYv
+         2ZIZxvXv185EoZbxuDYLdWDTmI3T2w/scg3jGOWtkArhJUyG6WpZ9TpRgr4BIdTtWn9n
+         br+Xj/tgaMFZJWMwUaLkyZ2iCF67TbQE6DDIlqxJET3K6e35BWdcIdvix7f0tnmLjqhD
+         opo1Gk7XT+jEYE1GUQruGtl+pu+2RhlAjlZsMrYKVnxWZmxe44qljRfABSdGTu6wNDAS
+         q5aQ==
+X-Gm-Message-State: AOJu0YzhW689N17aXquo42IADJTPLVMqdGPg56cEylE2KC3rIG28XSey
+	SL4y3ZaycVIA0oo78vcEAOf3h/kanTjGBQNpdZFdtPDMaMFNbcjKW9yWIU4MU3UiLp3zTrFG8nK
+	eVH1kGLzM8IxXOKDgQCgdm76w2XA=
+X-Google-Smtp-Source: AGHT+IFr5T5wJ6eww2Bf7jwis3NgH4t8BifwftwRBZQiLp9IfjKQ8pKsWUi+KVT5a5DwP7gmVHhaqLD6I+ZmWcUdzcY=
+X-Received: by 2002:a5b:941:0:b0:dc2:3af4:3ff4 with SMTP id
+ x1-20020a5b0941000000b00dc23af43ff4mr2969191ybq.52.1705980782910; Mon, 22 Jan
+ 2024 19:33:02 -0800 (PST)
 MIME-Version: 1.0
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: 
-	7F9ZFOnsctfiS7bjmxFArzXnEfsoM1cTfJcgaX2zC9TipZgobBF/sZtQGv67dYt+FjBiIUVfBoiH6vvffD9a1nl0DnPw6pzAt62n4vABgAF2dVc6MXFcO5jntAa+Pb38VEeJb913clyv3khOryW8quXgMmH+8ULL+HB9E8qfhnbfpWuhqiBscvrN92P9rLveCUN0S+pI57cBbMARYiAEPsp142/yCZvZHTT/vW+vMp8CXlxPmvfH/23prcky7D2LEqUAucQmMiFqNB5fkJKZ6icvIT/z/Q6ynQX0qmgtm3hQDcsMLL40vbE/jif1oCzgDurO8oPvntAf/k5F6QJF/uHZu4wI/wB/R8dmlxf6Y2SDcXqV6GgFdI2RsXtsPXZ/m0U80zOBTvDLYee6cBpSeDy6OGft8al+lDeY9jjeq+urLuPVC6d94tkq56y/g4zpUyB+6DusKleRCxsAmV3e3msum+qpDB41tVqMJaAL2NNBGiGcrqU8jM/ejFHtnyA9YcL4Tu1zeRIyxBKAyhVxuXrfQFbbMxP6dWN4mrfekUWpuQxWpl93i9AK/8L4UA3/jQ+KAFFFyTfNorX7cRwWbSNhzyW4rQvPzAgyz6s+I99IHJqLbLrGWQQQxh1S2u/G
-X-OriginatorOrg: fujitsu.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TYWPR01MB11861.jpnprd01.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d72b6120-c730-4954-8317-08dc1bba33af
-X-MS-Exchange-CrossTenant-originalarrivaltime: 23 Jan 2024 02:22:52.4275
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: a19f121d-81e1-4858-a9d8-736e267fd4c7
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: bNBdXD6Ni/NVG+qHp6V6DM988j2BDd55uV21d89cL9dopTI0vlPnMB19/RDlsIMSYIN6vUGVeXyrXLqUuYvV+Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYAPR01MB6107
+References: <HwKj.1705904669013507737.KXJd@lists.openembedded.org>
+ <CAMKF1sqSeAJO=dgxjJJsF+qvZK1YkpRMZ2PJ9fUCK30cB3996Q@mail.gmail.com> <TYWPR01MB11861F5DF79157AE6558754A4DC742@TYWPR01MB11861.jpnprd01.prod.outlook.com>
+In-Reply-To: <TYWPR01MB11861F5DF79157AE6558754A4DC742@TYWPR01MB11861.jpnprd01.prod.outlook.com>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Mon, 22 Jan 2024 19:32:51 -0800
+Message-ID: <CANx9H-AGVrAkoOT+9gCS-7OGZffNS2uxs7+EQ7ybTXge4s9h7w@mail.gmail.com>
+Subject: Re: [oe] Add python3-apscheduler #error
+To: wangmy <wangmy@fujitsu.com>
+Cc: Khem Raj <raj.khem@gmail.com>, 
+	"openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>, 
+	"p35420102@gmail.com" <p35420102@gmail.com>
+Content-Type: multipart/alternative; boundary="0000000000008f21cf060f949ac1"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 23 Jan 2024 02:23:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108431
+ <openembedded-devel@lists.openembedded.org>; Tue, 23 Jan 2024 03:33:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108432
 
-SSB0cmllZCBERVBFTkRTICs9ICJweXRob24zLXBpcC1uYXRpdmUiLCBidXQgdGhlcmUgaXMgYW4g
-ZXJyb3I6DQoNCnwgRVJST1IgTWlzc2luZyBkZXBlbmRlbmNpZXM6DQp8ICAgICAgIHNldHVwdG9v
-bHNfc2NtDQoNCklmIEkgdHJpZWQgDQpERVBFTkRTICs9ICJweXRob24zLXBpcC1uYXRpdmUgXA0K
-ICAgICAgICAgICAgcHl0aG9uMy1zZXR1cHRvb2xzLXNjbS1uYXRpdmUiDQp0aGUgY29tcGlsZSBz
-dWNjZWVkZWQuDQoNCsKgIC0tDQpCZXN0IFJlZ2FyZHMNCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KV2FuZyBNaW5neXUNCkRldmVsb3BtZW50IERl
-cHQuSQ0KTmFuamluZyBGdWppdHN1IE5hbmRhIFNvZnR3YXJlIFRlY2guIENvLiwgTHRkLihGTlNU
-KSBOby4gNiBXZW56aHUgUm9hZCwgTmFuamluZywgMjEwMDEyLCBDaGluYQ0KVEVMOiArODYrMjUt
-ODY2MzA1NjYtODU2OA0KQ09JTlM6IDc5OTg4NTQ4DQpGQVg6ICs4NisyNS04MzMxNzY4NQ0KTUFJ
-TDogd2FuZ215QGZ1aml0c3UuY29tDQpodHRwOi8vd3d3LmZ1aml0c3UuY29tL2NuL2Zuc3QvDQoN
-Cj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogb3BlbmVtYmVkZGVkLWRldmVs
-QGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gPG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVu
-ZW1iZWRkZWQub3JnPiBPbiBCZWhhbGYgT2YgS2hlbSBSYWoNCj4gU2VudDogVHVlc2RheSwgSmFu
-dWFyeSAyMywgMjAyNCA4OjI0IEFNDQo+IFRvOiBwMzU0MjAxMDJAZ21haWwuY29tDQo+IENjOiBv
-cGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBTdWJqZWN0OiBSZTog
-W29lXSBBZGQgcHl0aG9uMy1hcHNjaGVkdWxlciAjZXJyb3INCj4gDQo+IGNhbiB5b3UgdHJ5IGFk
-ZGluZw0KPiANCj4gREVQRU5EUyArPSAicHl0aG9uMy1waXAtbmF0aXZlIg0KPiANCj4gT24gTW9u
-LCBKYW4gMjIsIDIwMjQgYXQgMjowNOKAr1BNIDxwMzU0MjAxMDJAZ21haWwuY29tPiB3cm90ZToN
-Cj4gPg0KPiA+IFNVTU1BUlkgPSAiSW4tcHJvY2VzcyB0YXNrIHNjaGVkdWxlciB3aXRoIENyb24t
-bGlrZSBjYXBhYmlsaXRpZXMiDQo+ID4gSE9NRVBBR0UgPSAiaHR0cHM6Ly9naXRodWIuY29tL2Fn
-cm9uaG9sbS9hcHNjaGVkdWxlciINCj4gPg0KPiA+IFNFQ1RJT04gPSAiZGV2ZWwvcHl0aG9uIg0K
-PiA+DQo+ID4gTElDRU5TRSA9ICJNSVQiDQo+ID4gTElDX0ZJTEVTX0NIS1NVTSA9DQo+ICJmaWxl
-Oi8vTElDRU5TRS50eHQ7bWQ1PWYwZTQyM2VlYTVjOTFlN2FhMjFiZGI3MDE4NGIzZTUzIg0KPiA+
-DQo+ID4gUFlQSV9QQUNLQUdFID0gIkFQU2NoZWR1bGVyIg0KPiA+DQo+ID4gU1JDX1VSSVtzaGEy
-NTZzdW1dID0NCj4gImU2ZGYwNzFiMjdkOWJlODk4ZTQ4NmJjNzk0MGE3YmU1MGI0YWYyZTlkYTdj
-MDhmMDc0NGE5NmQ0YmQ0Y2VmNGEiDQo+ID4NCj4gPiBSREVQRU5EUzoke1BOfSArPSAiXA0KPiA+
-IHB5dGhvbjMtc2l4IFwNCj4gPiBweXRob24zLXB5dHogXA0KPiA+IHB5dGhvbjMtdHpsb2NhbCBc
-DQo+ID4gIg0KPiA+DQo+ID4gaW5oZXJpdCBweXBpIHNldHVwdG9vbHMzDQo+ID4NCj4gPiBFUlJP
-UjogcHl0aG9uMy1hcHNjaGVkdWxlci0zLjEwLjQtcjAgZG9fY29tcGlsZTogJ3B5dGhvbjMgc2V0
-dXAucHkNCj4gYmRpc3Rfd2hlZWwgJyBleGVjdXRpb24gZmFpbGVkLg0KPiA+IEVSUk9SOiBweXRo
-b24zLWFwc2NoZWR1bGVyLTMuMTAuNC1yMCBkb19jb21waWxlOg0KPiA+IEV4ZWN1dGlvbkVycm9y
-KCcvaG9tZS9pb3QteW9jdG8vYnVpbGQvdG1wL3dvcmsvYXJtdjhhLXBva3ktbGludXgvcHl0aG8N
-Cj4gPiBuMy1hcHNjaGVkdWxlci8zLjEwLjQtcjAvdGVtcC9ydW4uZG9fY29tcGlsZS41MzE2OTQn
-LCAxLCBOb25lLCBOb25lKQ0KPiA+IEVSUk9SOiBMb2dmaWxlIG9mIGZhaWx1cmUgc3RvcmVkIGlu
-Og0KPiA+IC9ob21lL2lvdC15b2N0by9idWlsZC90bXAvd29yay9hcm12OGEtcG9reS1saW51eC9w
-eXRob24zLWFwc2NoZWR1bGVyLzMNCj4gPiAuMTAuNC1yMC90ZW1wL2xvZy5kb19jb21waWxlLjUz
-MTY5NA0KPiA+IExvZyBkYXRhIGZvbGxvd3M6DQo+ID4gfCBERUJVRzogRXhlY3V0aW5nIHNoZWxs
-IGZ1bmN0aW9uIGRvX2NvbXBpbGUNCj4gPiB8DQo+IC9ob21lL2lvdC15b2N0by9idWlsZC90bXAv
-d29yay9hcm12OGEtcG9reS1saW51eC9weXRob24zLWFwc2NoZWR1bGVyLzMuMTANCj4gLjQtcjAv
-cmVjaXBlLXN5c3Jvb3QtbmF0aXZlL3Vzci9saWIvcHl0aG9uMy4xMC9zaXRlLXBhY2thZ2VzL3Nl
-dHVwdG9vbHMvZGlzdC5weToNCj4gNzIwOiBVc2VyV2FybmluZzogVXNhZ2Ugb2YgZGFzaC1zZXBh
-cmF0ZWQgJ3VwbG9hZC1kaXInIHdpbGwgbm90IGJlIHN1cHBvcnRlZCBpbg0KPiBmdXR1cmUgdmVy
-c2lvbnMuIFBsZWFzZSB1c2UgdGhlIHVuZGVyc2NvcmUgbmFtZSAndXBsb2FkX2RpcicgaW5zdGVh
-ZA0KPiA+IHwgICB3YXJuaW5ncy53YXJuKA0KPiA+IHwNCj4gL2hvbWUvaW90LXlvY3RvL2J1aWxk
-L3RtcC93b3JrL2FybXY4YS1wb2t5LWxpbnV4L3B5dGhvbjMtYXBzY2hlZHVsZXIvMy4xMA0KPiAu
-NC1yMC9yZWNpcGUtc3lzcm9vdC1uYXRpdmUvdXNyL2xpYi9weXRob24zLjEwL3NpdGUtcGFja2Fn
-ZXMvc2V0dXB0b29scy9pbnN0YWxsZQ0KPiByLnB5OjI3OiBTZXR1cHRvb2xzRGVwcmVjYXRpb25X
-YXJuaW5nOiBzZXR1cHRvb2xzLmluc3RhbGxlciBpcyBkZXByZWNhdGVkLg0KPiBSZXF1aXJlbWVu
-dHMgc2hvdWxkIGJlIHNhdGlzZmllZCBieSBhIFBFUCA1MTcgaW5zdGFsbGVyLg0KPiA+IHwgICB3
-YXJuaW5ncy53YXJuKA0KPiA+IHwgL2hvbWUvaW90LXlvY3RvL2J1aWxkL3RtcC93b3JrL2FybXY4
-YS1wb2t5LWxpbnV4L3B5dGhvbjMtYXBzY2hlZHVsZXINCj4gPiB8IC8zLjEwLjQtcjAvcmVjaXBl
-LXN5c3Jvb3QtbmF0aXZlL3Vzci9iaW4vcHl0aG9uMy1uYXRpdmUvcHl0aG9uMzogTm8NCj4gbW9k
-dWxlIG5hbWVkIHBpcCBUcmFjZWJhY2sgKG1vc3QgcmVjZW50IGNhbGwgbGFzdCk6DQo+ID4gfCAg
-IEZpbGUNCj4gIi9ob21lL2lvdC15b2N0by9idWlsZC90bXAvd29yay9hcm12OGEtcG9reS1saW51
-eC9weXRob24zLWFwc2NoZWR1bGVyLzMuMQ0KPiAwLjQtcjAvcmVjaXBlLXN5c3Jvb3QtbmF0aXZl
-L3Vzci9saWIvcHl0aG9uMy4xMC9zaXRlLXBhY2thZ2VzL3NldHVwdG9vbHMvaW5zdGFsbA0KPiBl
-ci5weSIsIGxpbmUgODIsIGluIGZldGNoX2J1aWxkX2VnZw0KPiA+IHwgICAgIHN1YnByb2Nlc3Mu
-Y2hlY2tfY2FsbChjbWQpDQo+ID4gfCAgIEZpbGUNCj4gIi9ob21lL2lvdC15b2N0by9idWlsZC90
-bXAvd29yay9hcm12OGEtcG9reS1saW51eC9weXRob24zLWFwc2NoZWR1bGVyLzMuMQ0KPiAwLjQt
-cjAvcmVjaXBlLXN5c3Jvb3QtbmF0aXZlL3Vzci9saWIvcHl0aG9uMy4xMC9zdWJwcm9jZXNzLnB5
-IiwgbGluZSAzNjksIGluDQo+IGNoZWNrX2NhbGwNCj4gPiB8ICAgICByYWlzZSBDYWxsZWRQcm9j
-ZXNzRXJyb3IocmV0Y29kZSwgY21kKQ0KPiA+IHwgc3VicHJvY2Vzcy5DYWxsZWRQcm9jZXNzRXJy
-b3I6IENvbW1hbmQNCj4gJ1snL2hvbWUvaW90LXlvY3RvL2J1aWxkL3RtcC93b3JrL2FybXY4YS1w
-b2t5LWxpbnV4L3B5dGhvbjMtYXBzY2hlZHVsZXIvMy4xDQo+IDAuNC1yMC9yZWNpcGUtc3lzcm9v
-dC1uYXRpdmUvdXNyL2Jpbi9weXRob24zLW5hdGl2ZS9weXRob24zJywgJy1tJywgJ3BpcCcsDQo+
-ICctLWRpc2FibGUtcGlwLXZlcnNpb24tY2hlY2snLCAnd2hlZWwnLCAnLS1uby1kZXBzJywgJy13
-JywgJy90bXAvdG1wbWg1Y251anQnLA0KPiAnLS1xdWlldCcsICdzZXR1cHRvb2xzX3NjbSddJyBy
-ZXR1cm5lZCBub24temVybyBleGl0IHN0YXR1cyAxLg0KPiA+IHwNCj4gPiB8IFRoZSBhYm92ZSBl
-eGNlcHRpb24gd2FzIHRoZSBkaXJlY3QgY2F1c2Ugb2YgdGhlIGZvbGxvd2luZyBleGNlcHRpb246
-DQo+ID4gfA0KPiA+IHwgVHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOg0KPiA+IHwg
-ICBGaWxlDQo+ICIvaG9tZS9pb3QteW9jdG8vYnVpbGQvdG1wL3dvcmsvYXJtdjhhLXBva3ktbGlu
-dXgvcHl0aG9uMy1hcHNjaGVkdWxlci8zLjENCj4gMC40LXIwL0FQU2NoZWR1bGVyLTMuMTAuNC9z
-ZXR1cC5weSIsIGxpbmUgMTAsIGluIDxtb2R1bGU+DQo+ID4gfCAgICAgc2V0dXAoDQo+ID4gfCAg
-IEZpbGUNCj4gIi9ob21lL2lvdC15b2N0by9idWlsZC90bXAvd29yay9hcm12OGEtcG9reS1saW51
-eC9weXRob24zLWFwc2NoZWR1bGVyLzMuMQ0KPiAwLjQtcjAvcmVjaXBlLXN5c3Jvb3QtbmF0aXZl
-L3Vzci9saWIvcHl0aG9uMy4xMC9zaXRlLXBhY2thZ2VzL3NldHVwdG9vbHMvX19pbml0DQo+IF9f
-LnB5IiwgbGluZSAxNTIsIGluIHNldHVwDQo+ID4gfCAgICAgX2luc3RhbGxfc2V0dXBfcmVxdWly
-ZXMoYXR0cnMpDQo+ID4gfCAgIEZpbGUNCj4gIi9ob21lL2lvdC15b2N0by9idWlsZC90bXAvd29y
-ay9hcm12OGEtcG9reS1saW51eC9weXRob24zLWFwc2NoZWR1bGVyLzMuMQ0KPiAwLjQtcjAvcmVj
-aXBlLXN5c3Jvb3QtbmF0aXZlL3Vzci9saWIvcHl0aG9uMy4xMC9zaXRlLXBhY2thZ2VzL3NldHVw
-dG9vbHMvX19pbml0DQo+IF9fLnB5IiwgbGluZSAxNDcsIGluIF9pbnN0YWxsX3NldHVwX3JlcXVp
-cmVzDQo+ID4gfCAgICAgZGlzdC5mZXRjaF9idWlsZF9lZ2dzKGRpc3Quc2V0dXBfcmVxdWlyZXMp
-DQo+ID4gfCAgIEZpbGUNCj4gIi9ob21lL2lvdC15b2N0by9idWlsZC90bXAvd29yay9hcm12OGEt
-cG9reS1saW51eC9weXRob24zLWFwc2NoZWR1bGVyLzMuMQ0KPiAwLjQtcjAvcmVjaXBlLXN5c3Jv
-b3QtbmF0aXZlL3Vzci9saWIvcHl0aG9uMy4xMC9zaXRlLXBhY2thZ2VzL3NldHVwdG9vbHMvZGlz
-dC5wDQo+IHkiLCBsaW5lIDgwOSwgaW4gZmV0Y2hfYnVpbGRfZWdncw0KPiA+IHwgICAgIHJlc29s
-dmVkX2Rpc3RzID0gcGtnX3Jlc291cmNlcy53b3JraW5nX3NldC5yZXNvbHZlKA0KPiA+IHwgICBG
-aWxlDQo+ICIvaG9tZS9pb3QteW9jdG8vYnVpbGQvdG1wL3dvcmsvYXJtdjhhLXBva3ktbGludXgv
-cHl0aG9uMy1hcHNjaGVkdWxlci8zLjENCj4gMC40LXIwL3JlY2lwZS1zeXNyb290LW5hdGl2ZS91
-c3IvbGliL3B5dGhvbjMuMTAvc2l0ZS1wYWNrYWdlcy9wa2dfcmVzb3VyY2VzL18NCj4gX2luaXRf
-Xy5weSIsIGxpbmUgNzcxLCBpbiByZXNvbHZlDQo+ID4gfCAgICAgZGlzdCA9IGJlc3RbcmVxLmtl
-eV0gPSBlbnYuYmVzdF9tYXRjaCgNCj4gPiB8ICAgRmlsZQ0KPiAiL2hvbWUvaW90LXlvY3RvL2J1
-aWxkL3RtcC93b3JrL2FybXY4YS1wb2t5LWxpbnV4L3B5dGhvbjMtYXBzY2hlZHVsZXIvMy4xDQo+
-IDAuNC1yMC9yZWNpcGUtc3lzcm9vdC1uYXRpdmUvdXNyL2xpYi9weXRob24zLjEwL3NpdGUtcGFj
-a2FnZXMvcGtnX3Jlc291cmNlcy9fDQo+IF9pbml0X18ucHkiLCBsaW5lIDEwNTYsIGluIGJlc3Rf
-bWF0Y2gNCj4gPiB8ICAgICByZXR1cm4gc2VsZi5vYnRhaW4ocmVxLCBpbnN0YWxsZXIpDQo+ID4g
-fCAgIEZpbGUNCj4gIi9ob21lL2lvdC15b2N0by9idWlsZC90bXAvd29yay9hcm12OGEtcG9reS1s
-aW51eC9weXRob24zLWFwc2NoZWR1bGVyLzMuMQ0KPiAwLjQtcjAvcmVjaXBlLXN5c3Jvb3QtbmF0
-aXZlL3Vzci9saWIvcHl0aG9uMy4xMC9zaXRlLXBhY2thZ2VzL3BrZ19yZXNvdXJjZXMvXw0KPiBf
-aW5pdF9fLnB5IiwgbGluZSAxMDY4LCBpbiBvYnRhaW4NCj4gPiB8ICAgICByZXR1cm4gaW5zdGFs
-bGVyKHJlcXVpcmVtZW50KQ0KPiA+IHwgICBGaWxlDQo+ICIvaG9tZS9pb3QteW9jdG8vYnVpbGQv
-dG1wL3dvcmsvYXJtdjhhLXBva3ktbGludXgvcHl0aG9uMy1hcHNjaGVkdWxlci8zLjENCj4gMC40
-LXIwL3JlY2lwZS1zeXNyb290LW5hdGl2ZS91c3IvbGliL3B5dGhvbjMuMTAvc2l0ZS1wYWNrYWdl
-cy9zZXR1cHRvb2xzL2Rpc3QucA0KPiB5IiwgbGluZSA4ODAsIGluIGZldGNoX2J1aWxkX2VnZw0K
-PiA+IHwgICAgIHJldHVybiBmZXRjaF9idWlsZF9lZ2coc2VsZiwgcmVxKQ0KPiA+IHwgICBGaWxl
-DQo+ICIvaG9tZS9pb3QteW9jdG8vYnVpbGQvdG1wL3dvcmsvYXJtdjhhLXBva3ktbGludXgvcHl0
-aG9uMy1hcHNjaGVkdWxlci8zLjENCj4gMC40LXIwL3JlY2lwZS1zeXNyb290LW5hdGl2ZS91c3Iv
-bGliL3B5dGhvbjMuMTAvc2l0ZS1wYWNrYWdlcy9zZXR1cHRvb2xzL2luc3RhbGwNCj4gZXIucHki
-LCBsaW5lIDg0LCBpbiBmZXRjaF9idWlsZF9lZ2cNCj4gPiB8ICAgICByYWlzZSBEaXN0dXRpbHNF
-cnJvcihzdHIoZSkpIGZyb20gZQ0KPiA+IHwgZGlzdHV0aWxzLmVycm9ycy5EaXN0dXRpbHNFcnJv
-cjogQ29tbWFuZA0KPiAnWycvaG9tZS9pb3QteW9jdG8vYnVpbGQvdG1wL3dvcmsvYXJtdjhhLXBv
-a3ktbGludXgvcHl0aG9uMy1hcHNjaGVkdWxlci8zLjENCj4gMC40LXIwL3JlY2lwZS1zeXNyb290
-LW5hdGl2ZS91c3IvYmluL3B5dGhvbjMtbmF0aXZlL3B5dGhvbjMnLCAnLW0nLCAncGlwJywNCj4g
-Jy0tZGlzYWJsZS1waXAtdmVyc2lvbi1jaGVjaycsICd3aGVlbCcsICctLW5vLWRlcHMnLCAnLXcn
-LCAnL3RtcC90bXBtaDVjbnVqdCcsDQo+ICctLXF1aWV0JywgJ3NldHVwdG9vbHNfc2NtJ10nIHJl
-dHVybmVkIG5vbi16ZXJvIGV4aXQgc3RhdHVzIDEuDQo+ID4gfCBFUlJPUjogJ3B5dGhvbjMgc2V0
-dXAucHkgYmRpc3Rfd2hlZWwgJyBleGVjdXRpb24gZmFpbGVkLg0KPiA+IHwgV0FSTklORzogZXhp
-dCBjb2RlIDEgZnJvbSBhIHNoZWxsIGNvbW1hbmQuDQo+ID4gRVJST1I6IFRhc2sNCj4gKC9ob21l
-L2lvdC15b2N0by9zcmMvcG9reS8uLi9tZXRhLW9wZW5lbWJlZGRlZC9tZXRhLXB5dGhvbi9yZWNp
-cGVzLWRldnRvDQo+IG9scy9weXRob24vcHl0aG9uMy1hcHNjaGVkdWxlcl8zLjEwLjQuYmI6ZG9f
-Y29tcGlsZSkgZmFpbGVkIHdpdGggZXhpdCBjb2RlICcxJw0KPiA+IE5PVEU6IFRhc2tzIFN1bW1h
-cnk6IEF0dGVtcHRlZCA3NjEwIHRhc2tzIG9mIHdoaWNoIDc2MDMgZGlkbid0IG5lZWQgdG8gYmUN
-Cj4gcmVydW4gYW5kIDEgZmFpbGVkLg0KPiA+DQo+ID4gU3VtbWFyeTogMSB0YXNrIGZhaWxlZDoN
-Cj4gPg0KPiA+IC9ob21lL2lvdC15b2N0by9zcmMvcG9reS8uLi9tZXRhLW9wZW5lbWJlZGRlZC9t
-ZXRhLXB5dGhvbi9yZWNpcGVzLWRldnQNCj4gPiBvb2xzL3B5dGhvbi9weXRob24zLWFwc2NoZWR1
-bGVyXzMuMTAuNC5iYjpkb19jb21waWxlDQo+ID4gU3VtbWFyeTogVGhlcmUgd2FzIDEgV0FSTklO
-RyBtZXNzYWdlLg0KPiA+IFN1bW1hcnk6IFRoZXJlIHdlcmUgMiBFUlJPUiBtZXNzYWdlcywgcmV0
-dXJuaW5nIGEgbm9uLXplcm8gZXhpdCBjb2RlLg0KPiA+DQo+ID4NCj4gPg0K
+--0000000000008f21cf060f949ac1
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+This project uses setuptools.build_meta:
+https://github.com/agronholm/apscheduler/blob/master/pyproject.toml#L6
+
+Instead of =E2=80=9Cinherit setuptools3=E2=80=9D please use =E2=80=9Cinheri=
+t
+python_setuptools_build_meta=E2=80=9D
+https://git.yoctoproject.org/poky/tree/meta/classes-recipe/python_setuptool=
+s_build_meta.bbclass
+
+If you had used =E2=80=9Cdevtool add=E2=80=9D it would have detected this.
+
+On Mon, Jan 22, 2024 at 6:23=E2=80=AFPM wangmy <wangmy@fujitsu.com> wrote:
+
+> I tried DEPENDS +=3D "python3-pip-native", but there is an error:
+>
+> | ERROR Missing dependencies:
+> |       setuptools_scm
+>
+> If I tried
+> DEPENDS +=3D "python3-pip-native \
+>             python3-setuptools-scm-native"
+> the compile succeeded.
+>
+>   --
+> Best Regards
+> ---------------------------------------------------
+> Wang Mingyu
+> Development Dept.I
+> Nanjing Fujitsu Nanda Software Tech. Co., Ltd.(FNST) No. 6 Wenzhu Road,
+> Nanjing, 210
+> <https://www.google.com/maps/search/ST)+No.+6+Wenzhu+Road,+Nanjing,+210?e=
+ntry=3Dgmail&source=3Dg>012,
+> China
+> TEL: +86+25-86630566-8568
+> COINS: 79988548
+> FAX: +86+25-83317685
+> MAIL: wangmy@fujitsu.com
+> http://www.fujitsu.com/cn/fnst/
+>
+> > -----Original Message-----
+> > From: openembedded-devel@lists.openembedded.org
+> > <openembedded-devel@lists.openembedded.org> On Behalf Of Khem Raj
+> > Sent: Tuesday, January 23, 2024 8:24 AM
+> > To: p35420102@gmail.com
+> > Cc: openembedded-devel@lists.openembedded.org
+> > Subject: Re: [oe] Add python3-apscheduler #error
+> >
+> > can you try adding
+> >
+> > DEPENDS +=3D "python3-pip-native"
+> >
+> > On Mon, Jan 22, 2024 at 2:04=E2=80=AFPM <p35420102@gmail.com> wrote:
+> > >
+> > > SUMMARY =3D "In-process task scheduler with Cron-like capabilities"
+> > > HOMEPAGE =3D "https://github.com/agronholm/apscheduler"
+> > >
+> > > SECTION =3D "devel/python"
+> > >
+> > > LICENSE =3D "MIT"
+> > > LIC_FILES_CHKSUM =3D
+> > "file://LICENSE.txt;md5=3Df0e423eea5c91e7aa21bdb70184b3e53"
+> > >
+> > > PYPI_PACKAGE =3D "APScheduler"
+> > >
+> > > SRC_URI[sha256sum] =3D
+> > "e6df071b27d9be898e486bc7940a7be50b4af2e9da7c08f0744a96d4bd4cef4a"
+> > >
+> > > RDEPENDS:${PN} +=3D "\
+> > > python3-six \
+> > > python3-pytz \
+> > > python3-tzlocal \
+> > > "
+> > >
+> > > inherit pypi setuptools3
+> > >
+> > > ERROR: python3-apscheduler-3.10.4-r0 do_compile: 'python3 setup.py
+> > bdist_wheel ' execution failed.
+> > > ERROR: python3-apscheduler-3.10.4-r0 do_compile:
+> > > ExecutionError('/home/iot-yocto/build/tmp/work/armv8a-poky-linux/pyth=
+o
+> > > n3-apscheduler/3.10.4-r0/temp/run.do_compile.531694', 1, None, None)
+> > > ERROR: Logfile of failure stored in:
+> > > /home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apscheduler/=
+3
+> > > .10.4-r0/temp/log.do_compile.531694
+> > > Log data follows:
+> > > | DEBUG: Executing shell function do_compile
+> > > |
+> > /home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apscheduler/3.=
+10
+> >
+> .4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/setuptools/d=
+ist.py:
+> > 720: UserWarning: Usage of dash-separated 'upload-dir' will not be
+> supported in
+> > future versions. Please use the underscore name 'upload_dir' instead
+> > > |   warnings.warn(
+> > > |
+> > /home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apscheduler/3.=
+10
+> >
+> .4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/setuptools/i=
+nstalle
+> > r.py:27: SetuptoolsDeprecationWarning: setuptools.installer is
+> deprecated.
+> > Requirements should be satisfied by a PEP 517 installer.
+> > > |   warnings.warn(
+> > > | /home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apschedule=
+r
+> > > | /3.10.4-r0/recipe-sysroot-native/usr/bin/python3-native/python3: No
+> > module named pip Traceback (most recent call last):
+> > > |   File
+> > "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apscheduler/3=
+.1
+> >
+> 0.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/setuptools/=
+install
+> > er.py", line 82, in fetch_build_egg
+> > > |     subprocess.check_call(cmd)
+> > > |   File
+> > "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apscheduler/3=
+.1
+> > 0.4-r0/recipe-sysroot-native/usr/lib/python3.10/subprocess.py", line
+> 369, in
+> > check_call
+> > > |     raise CalledProcessError(retcode, cmd)
+> > > | subprocess.CalledProcessError: Command
+> >
+> '['/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apscheduler/3=
+.1
+> > 0.4-r0/recipe-sysroot-native/usr/bin/python3-native/python3', '-m',
+> 'pip',
+> > '--disable-pip-version-check', 'wheel', '--no-deps', '-w',
+> '/tmp/tmpmh5cnujt',
+> > '--quiet', 'setuptools_scm']' returned non-zero exit status 1.
+> > > |
+> > > | The above exception was the direct cause of the following exception=
+:
+> > > |
+> > > | Traceback (most recent call last):
+> > > |   File
+> > "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apscheduler/3=
+.1
+> > 0.4-r0/APScheduler-3.10.4/setup.py", line 10, in <module>
+> > > |     setup(
+> > > |   File
+> > "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apscheduler/3=
+.1
+> >
+> 0.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/setuptools/=
+__init
+> > __.py", line 152, in setup
+> > > |     _install_setup_requires(attrs)
+> > > |   File
+> > "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apscheduler/3=
+.1
+> >
+> 0.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/setuptools/=
+__init
+> > __.py", line 147, in _install_setup_requires
+> > > |     dist.fetch_build_eggs(dist.setup_requires)
+> > > |   File
+> > "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apscheduler/3=
+.1
+> >
+> 0.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/setuptools/=
+dist.p
+> > y", line 809, in fetch_build_eggs
+> > > |     resolved_dists =3D pkg_resources.working_set.resolve(
+> > > |   File
+> > "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apscheduler/3=
+.1
+> >
+> 0.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/pkg_resourc=
+es/_
+> > _init__.py", line 771, in resolve
+> > > |     dist =3D best[req.key] =3D env.best_match(
+> > > |   File
+> > "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apscheduler/3=
+.1
+> >
+> 0.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/pkg_resourc=
+es/_
+> > _init__.py", line 1056, in best_match
+> > > |     return self.obtain(req, installer)
+> > > |   File
+> > "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apscheduler/3=
+.1
+> >
+> 0.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/pkg_resourc=
+es/_
+> > _init__.py", line 1068, in obtain
+> > > |     return installer(requirement)
+> > > |   File
+> > "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apscheduler/3=
+.1
+> >
+> 0.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/setuptools/=
+dist.p
+> > y", line 880, in fetch_build_egg
+> > > |     return fetch_build_egg(self, req)
+> > > |   File
+> > "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apscheduler/3=
+.1
+> >
+> 0.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/setuptools/=
+install
+> > er.py", line 84, in fetch_build_egg
+> > > |     raise DistutilsError(str(e)) from e
+> > > | distutils.errors.DistutilsError: Command
+> >
+> '['/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apscheduler/3=
+.1
+> > 0.4-r0/recipe-sysroot-native/usr/bin/python3-native/python3', '-m',
+> 'pip',
+> > '--disable-pip-version-check', 'wheel', '--no-deps', '-w',
+> '/tmp/tmpmh5cnujt',
+> > '--quiet', 'setuptools_scm']' returned non-zero exit status 1.
+> > > | ERROR: 'python3 setup.py bdist_wheel ' execution failed.
+> > > | WARNING: exit code 1 from a shell command.
+> > > ERROR: Task
+> > (/home/iot-yocto/src/poky/../meta-openembedded/meta-python/recipes-devt=
+o
+> > ols/python/python3-apscheduler_3.10.4.bb:do_compile) failed with exit
+> code '1'
+> > > NOTE: Tasks Summary: Attempted 7610 tasks of which 7603 didn't need t=
+o
+> be
+> > rerun and 1 failed.
+> > >
+> > > Summary: 1 task failed:
+> > >
+> > > /home/iot-yocto/src/poky/../meta-openembedded/meta-python/recipes-dev=
+t
+> > > ools/python/python3-apscheduler_3.10.4.bb:do_compile
+> > > Summary: There was 1 WARNING message.
+> > > Summary: There were 2 ERROR messages, returning a non-zero exit code.
+> > >
+> > >
+> > >
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#108431):
+> https://lists.openembedded.org/g/openembedded-devel/message/108431
+> Mute This Topic: https://lists.openembedded.org/mt/103897332/924729
+> Mute #error:
+> https://lists.openembedded.org/g/openembedded-devel/mutehashtag/error
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> ticotimo@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--0000000000008f21cf060f949ac1
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div><div dir=3D"auto">This project uses setuptools.build_meta:</div><div d=
+ir=3D"auto"><div><a href=3D"https://github.com/agronholm/apscheduler/blob/m=
+aster/pyproject.toml#L6">https://github.com/agronholm/apscheduler/blob/mast=
+er/pyproject.toml#L6</a></div><br></div><div dir=3D"auto">Instead of =E2=80=
+=9Cinherit setuptools3=E2=80=9D please use =E2=80=9Cinherit python_setuptoo=
+ls_build_meta=E2=80=9D</div><div dir=3D"auto"><div><a href=3D"https://git.y=
+octoproject.org/poky/tree/meta/classes-recipe/python_setuptools_build_meta.=
+bbclass">https://git.yoctoproject.org/poky/tree/meta/classes-recipe/python_=
+setuptools_build_meta.bbclass</a></div><br></div><div dir=3D"auto">If you h=
+ad used =E2=80=9Cdevtool add=E2=80=9D it would have detected this.</div></d=
+iv><div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail=
+_attr">On Mon, Jan 22, 2024 at 6:23=E2=80=AFPM wangmy &lt;<a href=3D"mailto=
+:wangmy@fujitsu.com" target=3D"_blank">wangmy@fujitsu.com</a>&gt; wrote:<br=
+></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;=
+border-left-width:1px;border-left-style:solid;padding-left:1ex;border-left-=
+color:rgb(204,204,204)">I tried DEPENDS +=3D &quot;python3-pip-native&quot;=
+, but there is an error:<br>
+<br>
+| ERROR Missing dependencies:<br>
+|=C2=A0 =C2=A0 =C2=A0 =C2=A0setuptools_scm<br>
+<br>
+If I tried <br>
+DEPENDS +=3D &quot;python3-pip-native \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 python3-setuptools-scm-native&quo=
+t;<br>
+the compile succeeded.<br>
+<br>
+=C2=A0 --<br>
+Best Regards<br>
+---------------------------------------------------<br>
+Wang Mingyu<br>
+Development Dept.I<br>
+Nanjing Fujitsu Nanda Software Tech. Co., Ltd.(FN<a href=3D"https://www.goo=
+gle.com/maps/search/ST)+No.+6+Wenzhu+Road,+Nanjing,+210?entry=3Dgmail&amp;s=
+ource=3Dg" target=3D"_blank">ST) No. 6 Wenzhu Road, Nanjing, 210</a>012, Ch=
+ina<br>
+TEL: +86+25-86630566-8568<br>
+COINS: 79988548<br>
+FAX: +86+25-83317685<br>
+MAIL: <a href=3D"mailto:wangmy@fujitsu.com" target=3D"_blank">wangmy@fujits=
+u.com</a><br>
+<a href=3D"http://www.fujitsu.com/cn/fnst/" rel=3D"noreferrer" target=3D"_b=
+lank">http://www.fujitsu.com/cn/fnst/</a><br>
+<br>
+&gt; -----Original Message-----<br>
+&gt; From: <a href=3D"mailto:openembedded-devel@lists.openembedded.org" tar=
+get=3D"_blank">openembedded-devel@lists.openembedded.org</a><br>
+&gt; &lt;<a href=3D"mailto:openembedded-devel@lists.openembedded.org" targe=
+t=3D"_blank">openembedded-devel@lists.openembedded.org</a>&gt; On Behalf Of=
+ Khem Raj<br>
+&gt; Sent: Tuesday, January 23, 2024 8:24 AM<br>
+&gt; To: <a href=3D"mailto:p35420102@gmail.com" target=3D"_blank">p35420102=
+@gmail.com</a><br>
+&gt; Cc: <a href=3D"mailto:openembedded-devel@lists.openembedded.org" targe=
+t=3D"_blank">openembedded-devel@lists.openembedded.org</a><br>
+&gt; Subject: Re: [oe] Add python3-apscheduler #error<br>
+&gt; <br>
+&gt; can you try adding<br>
+&gt; <br>
+&gt; DEPENDS +=3D &quot;python3-pip-native&quot;<br>
+&gt; <br>
+&gt; On Mon, Jan 22, 2024 at 2:04=E2=80=AFPM &lt;<a href=3D"mailto:p3542010=
+2@gmail.com" target=3D"_blank">p35420102@gmail.com</a>&gt; wrote:<br>
+&gt; &gt;<br>
+&gt; &gt; SUMMARY =3D &quot;In-process task scheduler with Cron-like capabi=
+lities&quot;<br>
+&gt; &gt; HOMEPAGE =3D &quot;<a href=3D"https://github.com/agronholm/apsche=
+duler" rel=3D"noreferrer" target=3D"_blank">https://github.com/agronholm/ap=
+scheduler</a>&quot;<br>
+&gt; &gt;<br>
+&gt; &gt; SECTION =3D &quot;devel/python&quot;<br>
+&gt; &gt;<br>
+&gt; &gt; LICENSE =3D &quot;MIT&quot;<br>
+&gt; &gt; LIC_FILES_CHKSUM =3D<br>
+&gt; &quot;file://LICENSE.txt;md5=3Df0e423eea5c91e7aa21bdb70184b3e53&quot;<=
+br>
+&gt; &gt;<br>
+&gt; &gt; PYPI_PACKAGE =3D &quot;APScheduler&quot;<br>
+&gt; &gt;<br>
+&gt; &gt; SRC_URI[sha256sum] =3D<br>
+&gt; &quot;e6df071b27d9be898e486bc7940a7be50b4af2e9da7c08f0744a96d4bd4cef4a=
+&quot;<br>
+&gt; &gt;<br>
+&gt; &gt; RDEPENDS:${PN} +=3D &quot;\<br>
+&gt; &gt; python3-six \<br>
+&gt; &gt; python3-pytz \<br>
+&gt; &gt; python3-tzlocal \<br>
+&gt; &gt; &quot;<br>
+&gt; &gt;<br>
+&gt; &gt; inherit pypi setuptools3<br>
+&gt; &gt;<br>
+&gt; &gt; ERROR: python3-apscheduler-3.10.4-r0 do_compile: &#39;python3 set=
+up.py<br>
+&gt; bdist_wheel &#39; execution failed.<br>
+&gt; &gt; ERROR: python3-apscheduler-3.10.4-r0 do_compile:<br>
+&gt; &gt; ExecutionError(&#39;/home/iot-yocto/build/tmp/work/armv8a-poky-li=
+nux/pytho<br>
+&gt; &gt; n3-apscheduler/3.10.4-r0/temp/run.do_compile.531694&#39;, 1, None=
+, None)<br>
+&gt; &gt; ERROR: Logfile of failure stored in:<br>
+&gt; &gt; /home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apschedu=
+ler/3<br>
+&gt; &gt; .10.4-r0/temp/log.do_compile.531694<br>
+&gt; &gt; Log data follows:<br>
+&gt; &gt; | DEBUG: Executing shell function do_compile<br>
+&gt; &gt; |<br>
+&gt; /home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apscheduler/3=
+.10<br>
+&gt; .4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/setuptool=
+s/dist.py:<br>
+&gt; 720: UserWarning: Usage of dash-separated &#39;upload-dir&#39; will no=
+t be supported in<br>
+&gt; future versions. Please use the underscore name &#39;upload_dir&#39; i=
+nstead<br>
+&gt; &gt; |=C2=A0 =C2=A0warnings.warn(<br>
+&gt; &gt; |<br>
+&gt; /home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apscheduler/3=
+.10<br>
+&gt; .4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/setuptool=
+s/installe<br>
+&gt; r.py:27: SetuptoolsDeprecationWarning: setuptools.installer is depreca=
+ted.<br>
+&gt; Requirements should be satisfied by a PEP 517 installer.<br>
+&gt; &gt; |=C2=A0 =C2=A0warnings.warn(<br>
+&gt; &gt; | /home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apsche=
+duler<br>
+&gt; &gt; | /3.10.4-r0/recipe-sysroot-native/usr/bin/python3-native/python3=
+: No<br>
+&gt; module named pip Traceback (most recent call last):<br>
+&gt; &gt; |=C2=A0 =C2=A0File<br>
+&gt; &quot;/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apsched=
+uler/3.1<br>
+&gt; 0.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/setuptoo=
+ls/install<br>
+&gt; er.py&quot;, line 82, in fetch_build_egg<br>
+&gt; &gt; |=C2=A0 =C2=A0 =C2=A0subprocess.check_call(cmd)<br>
+&gt; &gt; |=C2=A0 =C2=A0File<br>
+&gt; &quot;/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apsched=
+uler/3.1<br>
+&gt; 0.4-r0/recipe-sysroot-native/usr/lib/python3.10/subprocess.py&quot;, l=
+ine 369, in<br>
+&gt; check_call<br>
+&gt; &gt; |=C2=A0 =C2=A0 =C2=A0raise CalledProcessError(retcode, cmd)<br>
+&gt; &gt; | subprocess.CalledProcessError: Command<br>
+&gt; &#39;[&#39;/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-ap=
+scheduler/3.1<br>
+&gt; 0.4-r0/recipe-sysroot-native/usr/bin/python3-native/python3&#39;, &#39=
+;-m&#39;, &#39;pip&#39;,<br>
+&gt; &#39;--disable-pip-version-check&#39;, &#39;wheel&#39;, &#39;--no-deps=
+&#39;, &#39;-w&#39;, &#39;/tmp/tmpmh5cnujt&#39;,<br>
+&gt; &#39;--quiet&#39;, &#39;setuptools_scm&#39;]&#39; returned non-zero ex=
+it status 1.<br>
+&gt; &gt; |<br>
+&gt; &gt; | The above exception was the direct cause of the following excep=
+tion:<br>
+&gt; &gt; |<br>
+&gt; &gt; | Traceback (most recent call last):<br>
+&gt; &gt; |=C2=A0 =C2=A0File<br>
+&gt; &quot;/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apsched=
+uler/3.1<br>
+&gt; 0.4-r0/APScheduler-3.10.4/setup.py&quot;, line 10, in &lt;module&gt;<b=
+r>
+&gt; &gt; |=C2=A0 =C2=A0 =C2=A0setup(<br>
+&gt; &gt; |=C2=A0 =C2=A0File<br>
+&gt; &quot;/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apsched=
+uler/3.1<br>
+&gt; 0.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/setuptoo=
+ls/__init<br>
+&gt; __.py&quot;, line 152, in setup<br>
+&gt; &gt; |=C2=A0 =C2=A0 =C2=A0_install_setup_requires(attrs)<br>
+&gt; &gt; |=C2=A0 =C2=A0File<br>
+&gt; &quot;/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apsched=
+uler/3.1<br>
+&gt; 0.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/setuptoo=
+ls/__init<br>
+&gt; __.py&quot;, line 147, in _install_setup_requires<br>
+&gt; &gt; |=C2=A0 =C2=A0 =C2=A0dist.fetch_build_eggs(dist.setup_requires)<b=
+r>
+&gt; &gt; |=C2=A0 =C2=A0File<br>
+&gt; &quot;/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apsched=
+uler/3.1<br>
+&gt; 0.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/setuptoo=
+ls/dist.p<br>
+&gt; y&quot;, line 809, in fetch_build_eggs<br>
+&gt; &gt; |=C2=A0 =C2=A0 =C2=A0resolved_dists =3D pkg_resources.working_set=
+.resolve(<br>
+&gt; &gt; |=C2=A0 =C2=A0File<br>
+&gt; &quot;/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apsched=
+uler/3.1<br>
+&gt; 0.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/pkg_reso=
+urces/_<br>
+&gt; _init__.py&quot;, line 771, in resolve<br>
+&gt; &gt; |=C2=A0 =C2=A0 =C2=A0dist =3D best[req.key] =3D env.best_match(<b=
+r>
+&gt; &gt; |=C2=A0 =C2=A0File<br>
+&gt; &quot;/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apsched=
+uler/3.1<br>
+&gt; 0.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/pkg_reso=
+urces/_<br>
+&gt; _init__.py&quot;, line 1056, in best_match<br>
+&gt; &gt; |=C2=A0 =C2=A0 =C2=A0return self.obtain(req, installer)<br>
+&gt; &gt; |=C2=A0 =C2=A0File<br>
+&gt; &quot;/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apsched=
+uler/3.1<br>
+&gt; 0.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/pkg_reso=
+urces/_<br>
+&gt; _init__.py&quot;, line 1068, in obtain<br>
+&gt; &gt; |=C2=A0 =C2=A0 =C2=A0return installer(requirement)<br>
+&gt; &gt; |=C2=A0 =C2=A0File<br>
+&gt; &quot;/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apsched=
+uler/3.1<br>
+&gt; 0.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/setuptoo=
+ls/dist.p<br>
+&gt; y&quot;, line 880, in fetch_build_egg<br>
+&gt; &gt; |=C2=A0 =C2=A0 =C2=A0return fetch_build_egg(self, req)<br>
+&gt; &gt; |=C2=A0 =C2=A0File<br>
+&gt; &quot;/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apsched=
+uler/3.1<br>
+&gt; 0.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/setuptoo=
+ls/install<br>
+&gt; er.py&quot;, line 84, in fetch_build_egg<br>
+&gt; &gt; |=C2=A0 =C2=A0 =C2=A0raise DistutilsError(str(e)) from e<br>
+&gt; &gt; | distutils.errors.DistutilsError: Command<br>
+&gt; &#39;[&#39;/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-ap=
+scheduler/3.1<br>
+&gt; 0.4-r0/recipe-sysroot-native/usr/bin/python3-native/python3&#39;, &#39=
+;-m&#39;, &#39;pip&#39;,<br>
+&gt; &#39;--disable-pip-version-check&#39;, &#39;wheel&#39;, &#39;--no-deps=
+&#39;, &#39;-w&#39;, &#39;/tmp/tmpmh5cnujt&#39;,<br>
+&gt; &#39;--quiet&#39;, &#39;setuptools_scm&#39;]&#39; returned non-zero ex=
+it status 1.<br>
+&gt; &gt; | ERROR: &#39;python3 setup.py bdist_wheel &#39; execution failed=
+.<br>
+&gt; &gt; | WARNING: exit code 1 from a shell command.<br>
+&gt; &gt; ERROR: Task<br>
+&gt; (/home/iot-yocto/src/poky/../meta-openembedded/meta-python/recipes-dev=
+to<br>
+&gt; ols/python/python3-apscheduler_3.10.4.bb:do_compile) failed with exit =
+code &#39;1&#39;<br>
+&gt; &gt; NOTE: Tasks Summary: Attempted 7610 tasks of which 7603 didn&#39;=
+t need to be<br>
+&gt; rerun and 1 failed.<br>
+&gt; &gt;<br>
+&gt; &gt; Summary: 1 task failed:<br>
+&gt; &gt;<br>
+&gt; &gt; /home/iot-yocto/src/poky/../meta-openembedded/meta-python/recipes=
+-devt<br>
+&gt; &gt; ools/python/python3-apscheduler_3.10.4.bb:do_compile<br>
+&gt; &gt; Summary: There was 1 WARNING message.<br>
+&gt; &gt; Summary: There were 2 ERROR messages, returning a non-zero exit c=
+ode.<br>
+&gt; &gt;<br>
+&gt; &gt;<br>
+&gt; &gt;<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#108431): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/108431" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/108431</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/103897332/924=
+729" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
+/103897332/924729</a><br>
+Mute #error:<a href=3D"https://lists.openembedded.org/g/openembedded-devel/=
+mutehashtag/error" rel=3D"noreferrer" target=3D"_blank">https://lists.opene=
+mbedded.org/g/openembedded-devel/mutehashtag/error</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
+et=3D"_blank">ticotimo@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
+</div>
+
+--0000000000008f21cf060f949ac1--
 
