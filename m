@@ -2,65 +2,65 @@ Return-Path: <max.oss.09@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D0762C47DDB
-	for <webhook@archiver.kernel.org>; Tue, 23 Jan 2024 17:33:59 +0000 (UTC)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
- by mx.groups.io with SMTP id smtpd.web11.19452.1706031238076009094
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 15579C47DDB
+	for <webhook@archiver.kernel.org>; Tue, 23 Jan 2024 17:54:23 +0000 (UTC)
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+ by mx.groups.io with SMTP id smtpd.web10.529.1706032458601539021
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 23 Jan 2024 09:33:58 -0800
+ Tue, 23 Jan 2024 09:54:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Bflyy9fj;
- spf=pass (domain: gmail.com, ip: 209.85.128.52, mailfrom: max.oss.09@gmail.com)
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-40eb2f392f0so13517405e9.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Jan 2024 09:33:57 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZV3x06OC;
+ spf=pass (domain: gmail.com, ip: 209.85.221.53, mailfrom: max.oss.09@gmail.com)
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-33921b8988fso4073608f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 23 Jan 2024 09:54:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1706031236; x=1706636036; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1706032457; x=1706637257; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=pD7GPvKxXEZmNh36i61Rz+yfuU/j0LtdNbLhUMF3KYQ=;
-        b=Bflyy9fja0muXMSa5K4EC7jkvwA3PbC6sEP9fYYb89x15Xb8kDjrothqIxhEy+cwrH
-         PdKbBTtbPFMLR576YfZOykb0K63RoSXsLTBjdCE2zyQ9T0z0/gs6d/moRbDZWfum2sLE
-         uRpzTuTtOVAy2P/h8G1qAwJSDHrSKdCU2ZD4ghztbls+dzoKko6K/d+bHqFzty8POoM2
-         EA4d9s7B1VG7jP++TuiNrAUaHyPDF9M+YeF5h0OHbwi3vumBBC/koSLTrkBZYE6Y9r2s
-         daFRMnIC1vXPjEWbC0gSh4BR3Li+wHx8elG1VBK7zWVRqK9AzpqjB2hNijY04Qyb068t
-         NdWQ==
+        bh=O68qb9JuOCUIV4TxYDJv+OMpvmcYlbYHivTZctv8Z50=;
+        b=ZV3x06OColQzteB494C5f4xMVGY5/8Px7RhtVoPsHhGY97PWeQCYeKr+o3guacWEWj
+         5TiFYxWimis7T6SgEydSNnZU/B9Z52Ujt/bkyKQYlGzMlFVu4C9ITPsgxhrRQi9g07f1
+         I2wBwaptqmBDhhhVvT9NATjiAYEZdux/y76F8iXIFnLy/Rhvxg5n8cdFmxzRDY4Z8c2a
+         yisKluONc9ZIFZyD4CNl7zJPmYmXsY1tP5OOOUBpusMZiTKobywBWs6h0tvMzk9Xhghk
+         hzmAM23qXO+/K2dXtNAmT+53CUpaRXuqGdr0huD9OJ9OdTc4bScoUWe0ng/fKsFeUsvt
+         FigA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1706031236; x=1706636036;
+        d=1e100.net; s=20230601; t=1706032457; x=1706637257;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=pD7GPvKxXEZmNh36i61Rz+yfuU/j0LtdNbLhUMF3KYQ=;
-        b=HbXV2NIFp8hrIxYy6SyFOlhrlW+ooaAAV+KIiLiUee+CHt81ieSYXIqisWvTq4ykic
-         Jv06tHtVVpVfjtG+BoWw3LCPyEhZCMb76wqawUDE2I6e4j/Uqk88MnG1iFmZOmsQ3qI6
-         zIs+8h7kMsoKqG3pwWOKPjto81ppNkz5YIiVeDDFsd50WuZv6bH84uOPQRhb101byjyM
-         2WlS/06lIjBPe7dHEUE69/YkvzUagdY7uDcDyrf8SPJvhCcNtiROd+9d8Q6+MzJs/ujq
-         u22Q1Kwx5zLkzbrCYbKREptgqa2ez6p6AD+pYQ1cyk7SPV5p/hm4yvxCx1Gexlhtkzl8
-         SP/g==
-X-Gm-Message-State: AOJu0YxqWVmKQMFdQt7IaNa770H9Ko/ZEaJ+wQIorARF139rHiDohvYn
-	iJS31zmwi3Ao4tNpXbsT9TMnLeFD10iYExHopJ7edFopwD6uVlrLrbzJ3A44
-X-Google-Smtp-Source: AGHT+IE4mCDwVfgLrt/BMCQgHj+8RISbJbIJwYUgublXuUzHmxclXkq07QIbg7441Kt6mvvLc18PRw==
-X-Received: by 2002:a05:600c:3781:b0:40e:b21a:7aa0 with SMTP id o1-20020a05600c378100b0040eb21a7aa0mr359139wmr.172.1706031235428;
-        Tue, 23 Jan 2024 09:33:55 -0800 (PST)
+        bh=O68qb9JuOCUIV4TxYDJv+OMpvmcYlbYHivTZctv8Z50=;
+        b=P0I+T4jHhKhgEMsfFbGsHOnBLLivr3D3xb3OY0BUTvL3DdWdq+E8Nu3/6kIgBn9Nsh
+         jQBQlBTtFYiPA7gSbD6RfT7O3cYI1BPP2ISVEeSHZgrvRUdVFSUrUYm9QtCRI+FyQMYt
+         n4udbtl0+fuvHoiVCTmOHGSwvkBlBjpGH1Rz9lZoV3lAGF0CUJkHOmhgdVlCxV03SYRV
+         R5d7skthwN5pBNji3Wa3APmhE1Duatv6MTX02x9pcTPyxs/USP8kAZgVsWTdqhqQGsdf
+         iI1oPguE1o6Kt2wEsRnBdUORpBihGpA7Id0Qyt+M/btKblNujP+JFTs35SfbUBfda3JE
+         aYZg==
+X-Gm-Message-State: AOJu0YwjLYTqubaX1sSi+rwfYTDscRM7adXW8FTuXC9klPq+58u1W8qh
+	RxbZjX/mI2nd9etiSyrC73bkwewFH6NTX8rvU6jpYTVZ13PcH77GiQLR+CEh
+X-Google-Smtp-Source: AGHT+IEQ1VEvW1Dkv7RMMhf5Bf2Z4eA4qDfM+EWBuTkS/t+U0BAfpa8obiWqFkVjdNtF5YcG6U5rXw==
+X-Received: by 2002:a05:6000:11cb:b0:337:c3b2:284e with SMTP id i11-20020a05600011cb00b00337c3b2284emr3685089wrx.33.1706032456639;
+        Tue, 23 Jan 2024 09:54:16 -0800 (PST)
 Received: from toolbox.int.toradex.com (31-10-206-125.static.upc.ch. [31.10.206.125])
-        by smtp.gmail.com with ESMTPSA id fl21-20020a05600c0b9500b0040e9d507424sm16929875wmb.5.2024.01.23.09.33.54
+        by smtp.gmail.com with ESMTPSA id x4-20020a5d4904000000b0033928514699sm9480142wrq.2.2024.01.23.09.54.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 23 Jan 2024 09:33:55 -0800 (PST)
+        Tue, 23 Jan 2024 09:54:16 -0800 (PST)
 From: max.oss.09@gmail.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Changqing Li <changqing.li@windriver.com>,
 	Khem Raj <raj.khem@gmail.com>,
 	Max Krummenacher <max.krummenacher@toradex.com>
-Subject: [meta-oe][kirkstone][PATCH] linuxptp: fix do_compile error
-Date: Tue, 23 Jan 2024 18:32:58 +0100
-Message-ID: <20240123173258.1112540-1-max.oss.09@gmail.com>
+Subject: [meta-oe][dunfell][PATCH] linuxptp: fix do_compile error
+Date: Tue, 23 Jan 2024 18:53:37 +0100
+Message-ID: <20240123175337.1115266-1-max.oss.09@gmail.com>
 X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 23 Jan 2024 17:33:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108437
+ <openembedded-devel@lists.openembedded.org>; Tue, 23 Jan 2024 17:54:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108438
 
 From: Changqing Li <changqing.li@windriver.com>
 
@@ -94,7 +94,7 @@ now applied upstream.
 Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
 ---
  ...ditional-assignment-for-KBUILD_OUTPU.patch | 42 +++++++++++++++++++
- .../linuxptp/linuxptp_3.1.1.bb                |  1 +
+ .../linuxptp/linuxptp_2.0.1.bb                |  1 +
  2 files changed, 43 insertions(+)
  create mode 100644 meta-oe/recipes-connectivity/linuxptp/linuxptp/0001-makefile-use-conditional-assignment-for-KBUILD_OUTPU.patch
 
@@ -146,18 +146,18 @@ index 000000000..83bdae858
 +-- 
 +2.25.1
 +
-diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp_3.1.1.bb b/meta-oe/recipes-connectivity/linuxptp/linuxptp_3.1.1.bb
-index 9c0f56e73..9c8e649b1 100644
---- a/meta-oe/recipes-connectivity/linuxptp/linuxptp_3.1.1.bb
-+++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp_3.1.1.bb
-@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- SRC_URI = "http://sourceforge.net/projects/linuxptp/files/v3.1/linuxptp-${PV}.tgz \
+diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.1.bb b/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.1.bb
+index 79e59a8fe..b848575e1 100644
+--- a/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.1.bb
++++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.1.bb
+@@ -6,6 +6,7 @@ SRC_URI = "http://sourceforge.net/projects/linuxptp/files/v2.0/linuxptp-${PV}.tg
             file://build-Allow-CC-and-prefix-to-be-overriden.patch \
             file://Use-cross-cpp-in-incdefs.patch \
+            file://time_t_maybe_long_long.patch \
 +           file://0001-makefile-use-conditional-assignment-for-KBUILD_OUTPU.patch \
             "
  
- UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/linuxptp/files/"
+ SRC_URI[sha256sum] = "6f4669db1733747427217a9e74c8b5ca25c4245947463e9cdb860ec8f5ec797a"
 -- 
 2.42.0
 
