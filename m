@@ -1,176 +1,89 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CDD8EC46CD2
-	for <webhook@archiver.kernel.org>; Tue, 23 Jan 2024 01:44:54 +0000 (UTC)
-Received: from mail-ot1-f51.google.com (mail-ot1-f51.google.com [209.85.210.51])
- by mx.groups.io with SMTP id smtpd.web10.1479.1705974288199859533
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C6A4BC46CD2
+	for <webhook@archiver.kernel.org>; Tue, 23 Jan 2024 01:45:04 +0000 (UTC)
+Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
+ by mx.groups.io with SMTP id smtpd.web11.1444.1705974302398988557
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Jan 2024 17:44:48 -0800
+ Mon, 22 Jan 2024 17:45:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=LXP2g4FL;
- spf=pass (domain: gmail.com, ip: 209.85.210.51, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f51.google.com with SMTP id 46e09a7af769-6ddf05b1922so2874206a34.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 22 Jan 2024 17:44:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1705974287; x=1706579087; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=EJxd1UtLHFUp/Y+Czyf+z8j1OukYJVCQVQXvj0xAMqo=;
-        b=LXP2g4FLig/oRI0cWs5RaLn6y0j5FyEaAr/7jwIysn4hitiaHavhYmG8VC6JL1jEmg
-         PLKaYLG/ZztZq42UdxoVFuQuWXVgZsi7PwEx1oq8fUAVW6I2Tzlk9uhvXfTl6ZDZEZeV
-         k0+Bl0N21PgECkZEn8G6VLPAazNwBeykArMmzeL57vUFnuVZJkgUK2xlqsgcZlsCSe7a
-         PGh3AGqZ0tnITvwCbACpArDmjbWdIGxNk70TPT33x0Htk3O+8OOnvA7kZEacOBIY8uYr
-         +fkRFgQA4jyMGAK4O4QTjWRUotc6UGdv34+CDYfJ7uL49mem7MqCqrh6WEJf9ON+RMWS
-         0axg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1705974287; x=1706579087;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=EJxd1UtLHFUp/Y+Czyf+z8j1OukYJVCQVQXvj0xAMqo=;
-        b=Ps7xBHdkX0Z26fhgKXLPMYQqS4/BgU3nYQu3UJ0whFzUGNSaNhLowCVE+i98l3lVBR
-         2ryvycHrOrRvAKU0KuqmFxdeUYZgMK6APi7Kmra7K+UnWkEKMZd19/9YQmt6Vp9BTx/R
-         kLSB3tDPbJyXcEhPqmLQVlclGZS+V+u9Y72k9A8Nlxh3bmYQNZ8jJcnJxp0yV/t+n5aU
-         aj3PgmujfM0ndyWP4ENavJxfK0WUw4FlNwvXY5Euo83DexWYU44hRb5LoiOCzctq9Ye3
-         0pEeGzJYenCG7HHqHfn4mPrejyhBxcjLpqR2qAYHtdV3t3vDg+W0cZ/s5U+vVTF8WYoM
-         pY6g==
-X-Gm-Message-State: AOJu0YwHdVID/x+2EoAfG4KiMB9/NbcsKwuoUGJSFljhdYOTqyqwfmQj
-	losI9mfeIsT6Mz4ou73GH9JQ5TsjGHddEKK1vvjpOAutU2haH26nJyaRXH7SAluC+zX7hxaTP8O
-	vq9Sgacx7uh20hIN6tD9eleKyLNY=
-X-Google-Smtp-Source: AGHT+IGLqNvxa+7cfzhjQsMnwvF/qYP6rWGhghWNBHMgzquV2NOXg7otB87fhSnJysOjm3heAvN+az9kOCad8wvYIyc=
-X-Received: by 2002:a05:6870:219b:b0:210:ba0d:fa9a with SMTP id
- l27-20020a056870219b00b00210ba0dfa9amr915339oae.48.1705974287306; Mon, 22 Jan
- 2024 17:44:47 -0800 (PST)
-MIME-Version: 1.0
-References: <1705970908-24302-1-git-send-email-wangmy@fujitsu.com>
-In-Reply-To: <1705970908-24302-1-git-send-email-wangmy@fujitsu.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 22 Jan 2024 17:44:21 -0800
-Message-ID: <CAMKF1srfbrpUhpbQd_CHsXZSiWtN2tCHnHSR7LGBpZmXXoyfdQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe] [PATCH] ccid: upgrade 1.5.4 -> 1.5.5
-To: wangmy <wangmy@fujitsu.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10961"; a="126250837"
+X-IronPort-AV: E=Sophos;i="6.05,212,1701097200"; 
+   d="scan'208";a="126250837"
+Received: from unknown (HELO yto-r2.gw.nic.fujitsu.com) ([218.44.52.218])
+  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Jan 2024 10:45:00 +0900
+Received: from yto-m4.gw.nic.fujitsu.com (yto-nat-yto-m4.gw.nic.fujitsu.com [192.168.83.67])
+	by yto-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id E6D49D6189
+	for <openembedded-devel@lists.openembedded.org>; Tue, 23 Jan 2024 10:44:57 +0900 (JST)
+Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
+	by yto-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 2D7DAD3F29
+	for <openembedded-devel@lists.openembedded.org>; Tue, 23 Jan 2024 10:44:57 +0900 (JST)
+Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id A7C8B2660C8
+	for <openembedded-devel@lists.openembedded.org>; Tue, 23 Jan 2024 10:44:56 +0900 (JST)
+Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.187])
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 4F4641A006A;
+	Tue, 23 Jan 2024 09:44:56 +0800 (CST)
+From: wangmy@fujitsu.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH] python3-eth-typing: upgrade 3.5.2 -> 4.0.0
+Date: Tue, 23 Jan 2024 09:44:29 +0800
+Message-Id: <1705974269-25776-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28136.004
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28136.004
+X-TMASE-Result: 10--2.827600-10.000000
+X-TMASE-MatchedRID: rofoCPeR2CGjz0nOeth/yUIIxwDaU5mr8FHp8LCpZ7SwZuykSn6+/IyG
+	8V1UOe4OhDLYiwcLbP19t+5pVoYOEbxNGXfew0dmqoeab9Xgz89csgu/IQFPzpTx+2LIqNmt0yO
+	PBv1B9XYILxoCYZ47qVXTT7CHDFVDL/tBTZzO5Q3cgUVP3Cp+vRCE2NlBjIjcKXqmmYTGpxiUg5
+	UD6AlF0rF9uGobEuT7gDLqnrRlXrbIDt27MLDp0t0H8LFZNFG76sBnwpOylLNUtUtdKS7UGdvSh
+	hYCc69Ej7gaXe01/EVV6NA+PiqHWoXFbj0IBF9w1XtU2oxeQw2ky8NRo+lr2Ysrea1mzb52S4xH
+	IHArYHaIHqaUMp7VXtL/LK0d4I30Ze/gJB41STsbqpM7Cr+fvX7cGd19dSFd
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 23 Jan 2024 01:44:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108409
+ <openembedded-devel@lists.openembedded.org>; Tue, 23 Jan 2024 01:45:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108410
 
-On Mon, Jan 22, 2024 at 4:52=E2=80=AFPM wangmy <wangmy@fujitsu.com> wrote:
->
-> From: Wang Mingyu <wangmy@fujitsu.com>
->
-> 0001-Add-build-rule-for-README.patch
-> refreshed for 1.5.5
->
-> Changelog:
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> - Add support of
->   - Alpha-Project ANGARA Token
->   - Broadcom Corp 58200 (idProduct: 0x5864)
->   - Broadcom Corp 58200 (idProduct: 0x5865)
->   - Imprivata USB CCID
->   - KAPELSE eS-KAP-Ad
->   - Kapelse inSide
->   - KAPELSE KAP-Care
->   - KAPELSE KAP-eCV
->   - KAPELSE KAP-GO
->   - KAPELSE KAP-LINK2
->   - Kapelse KAP-Move
->   - Kapelse Ti-Kap
->   - rf IDEAS USB CCID
->   - SIMHUB pcsc reader
-> - support Kapelse readers on macOS (composite as multislot)
-> - Some other minor improvements
->
-> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-> ---
->  .../ccid/ccid/0001-Add-build-rule-for-README.patch  | 13 ++++++-------
->  .../ccid/{ccid_1.5.4.bb =3D> ccid_1.5.5.bb}           |  2 +-
->  2 files changed, 7 insertions(+), 8 deletions(-)
->  rename meta-oe/recipes-support/ccid/{ccid_1.5.4.bb =3D> ccid_1.5.5.bb} (=
-85%)
->
-> diff --git a/meta-oe/recipes-support/ccid/ccid/0001-Add-build-rule-for-RE=
-ADME.patch b/meta-oe/recipes-support/ccid/ccid/0001-Add-build-rule-for-READ=
-ME.patch
-> index 46d30e8c1..0904207bb 100644
-> --- a/meta-oe/recipes-support/ccid/ccid/0001-Add-build-rule-for-README.pa=
-tch
-> +++ b/meta-oe/recipes-support/ccid/ccid/0001-Add-build-rule-for-README.pa=
-tch
-> @@ -1,24 +1,23 @@
-> +From c82680a21c7411ba63e5815786eeb471720faa29 Mon Sep 17 00:00:00 2001
-> +From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-> +Date: Wed, 6 Nov 2019 20:10:09 +0800
->  Subject: [PATCH] Add build rule for README.
->
->  fix do_configure error:
->  Makefile.am: required file `./README' not found
->
->  Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-> ----
-> -Upstream-Status: Pending
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-This is dropped without updating this elsewhere, I have restored it
-while staging.
+Changelog:
+============
+-Drop python 3.7 support
+-Merge updates from the project template, notably: use pre-commit for linting
+ and change the name of the master branch to main
+-Fixed booleans in pyproject.toml and added a test for the presence of the
+ eth_typing.__version__ attribute
 
->
-> +---
->   Makefile.am | 1 +
->   1 file changed, 1 insertion(+)
->
->  diff --git a/Makefile.am b/Makefile.am
-> -index 49574a3..a5a7c2a 100644
-> +index e77c4c4..fd77ecd 100644
->  --- a/Makefile.am
->  +++ b/Makefile.am
-> -@@ -26,3 +26,4 @@ libtool: $(LIBTOOL_DEPS)
-> +@@ -27,3 +27,4 @@ libtool: $(LIBTOOL_DEPS)
->   ChangeLog:
->         git log --stat --decorate=3Dshort > $@
->
->  +README: README.md
-> ---
-> -2.7.4
-> -
-> diff --git a/meta-oe/recipes-support/ccid/ccid_1.5.4.bb b/meta-oe/recipes=
--support/ccid/ccid_1.5.5.bb
-> similarity index 85%
-> rename from meta-oe/recipes-support/ccid/ccid_1.5.4.bb
-> rename to meta-oe/recipes-support/ccid/ccid_1.5.5.bb
-> index e53ffa40b..e76881916 100644
-> --- a/meta-oe/recipes-support/ccid/ccid_1.5.4.bb
-> +++ b/meta-oe/recipes-support/ccid/ccid_1.5.5.bb
-> @@ -10,7 +10,7 @@ SRC_URI =3D "https://ccid.apdu.fr/files/ccid-${PV}.tar.=
-bz2 \
->      file://0001-Add-build-rule-for-README.patch \
->  "
->
-> -SRC_URI[sha256sum] =3D "6e832adc172ecdcfdee2b56f33144684882cbe972daff193=
-8e7a9c73a64f88bf"
-> +SRC_URI[sha256sum] =3D "194708f75fe369d45dd7c15e8b3e8a7db8b49cfc5557574c=
-a2a2e76ef12ca0ca"
->
->  inherit autotools pkgconfig
->
-> --
-> 2.34.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#108379): https://lists.openembedded.org/g/openembedde=
-d-devel/message/108379
-> Mute This Topic: https://lists.openembedded.org/mt/103900764/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+---
+ ...{python3-eth-typing_3.5.2.bb => python3-eth-typing_4.0.0.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-eth-typing_3.5.2.bb => python3-eth-typing_4.0.0.bb} (74%)
+
+diff --git a/meta-python/recipes-devtools/python/python3-eth-typing_3.5.2.bb b/meta-python/recipes-devtools/python/python3-eth-typing_4.0.0.bb
+similarity index 74%
+rename from meta-python/recipes-devtools/python/python3-eth-typing_3.5.2.bb
+rename to meta-python/recipes-devtools/python/python3-eth-typing_4.0.0.bb
+index c8044b389..3ca311db5 100644
+--- a/meta-python/recipes-devtools/python/python3-eth-typing_3.5.2.bb
++++ b/meta-python/recipes-devtools/python/python3-eth-typing_4.0.0.bb
+@@ -4,6 +4,6 @@ SECTION = "devel/python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3d7bdfe69b1ffbde073ca6e96f5c53f7"
+ 
+-SRC_URI[sha256sum] = "22bf051ddfaa35ff827c30090de167e5c5b8cc6d343f7f35c9b1c7553f6ab64d"
++SRC_URI[sha256sum] = "9af0b6beafbc5c2e18daf19da5f5a68315023172c4e79d149e12ad10a3d3f731"
+ 
+ inherit pypi setuptools3
+-- 
+2.34.1
+
 
