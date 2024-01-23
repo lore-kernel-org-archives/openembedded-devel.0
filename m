@@ -1,199 +1,114 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5C33DC46CD2
-	for <webhook@archiver.kernel.org>; Tue, 23 Jan 2024 00:24:14 +0000 (UTC)
-Received: from mail-oa1-f53.google.com (mail-oa1-f53.google.com [209.85.160.53])
- by mx.groups.io with SMTP id smtpd.web11.10230.1705969451951636571
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B8602C46CD2
+	for <webhook@archiver.kernel.org>; Tue, 23 Jan 2024 00:48:14 +0000 (UTC)
+Received: from esa10.hc1455-7.c3s2.iphmx.com (esa10.hc1455-7.c3s2.iphmx.com [139.138.36.225])
+ by mx.groups.io with SMTP id smtpd.web11.167.1705970892704488270
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Jan 2024 16:24:12 -0800
+ Mon, 22 Jan 2024 16:48:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=g3zfyhef;
- spf=pass (domain: gmail.com, ip: 209.85.160.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f53.google.com with SMTP id 586e51a60fabf-21429ac4dc9so1167623fac.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 22 Jan 2024 16:24:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1705969451; x=1706574251; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=GRsE7cmg97uleUl2mRM/8UN7hI/CH0vHVFBFVt9RoOI=;
-        b=g3zfyhefmdl2T3oiIVlO7Mz3pVgFPQthG9PuKcpAxjRku7KvBLdc950oUAkMU33utP
-         eG+B300koesWDZJn6Zx9JbY5MC88iC4KMHqXDddzOKr+AvEDMEXB5LeDmNU/5I2okOGA
-         WIKLFem+MCpsHEv41Z5P8LhZXU3LtmYQ/WxVWLKrCRTdBO4z0HtceWzczqRrZETKWeRp
-         7Gbbhj7dI02uqbJsKtCgK29w7Q1UmJwwZs18T2Rr5LSHSbdbLiTIl+z7JD2DkZw+03EI
-         Jwn9e2h5h+GhV9lF2UT4YowcR9So/q12ku/S2/4GWrDh+hUfNNkQ8BJlHERduvrbZ++Z
-         qTtw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1705969451; x=1706574251;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=GRsE7cmg97uleUl2mRM/8UN7hI/CH0vHVFBFVt9RoOI=;
-        b=NGmMpdbiXeBAwcIQcbY4GCr++kYgF/vWFsZ3SJq60FJIe6/RNlE0r9fAfoK9ZL9DSy
-         i/V32EfRmtraWz97MUnAtnvAGCnPXAZqTvzTSiS+ijpxHNLo7Tx+3eFsi6NPbJhjNxxS
-         urS586/fA4mF8ZngWBMmGVFcNYr+76rjIUunSZerotJq/QbuUQF9z2FJvuwjukWpB9zP
-         Elx3HBj65jXh5obrCCYM9avvb8GefnnbGC9yTyx/Kt3AZa9ehdCKTgZxg3tcCJ150Kg0
-         c3ViGg1xRPHkKxoNLK57pCGbwuWszgbV3o7TOxqnBaSzLk3qFu9H8A6R2UJTvHzMwOMR
-         gvzg==
-X-Gm-Message-State: AOJu0Yxkm+gSfGJMacbinaGJwub+dBnWJ4yrU0bvOx4yvGLcoE6ZfcEM
-	tkZ9ecHBzQbLWnU9PbhttbR8HKJgD+W6OiZF7sqQ6dRtfFJwDRf2iQ4jHzbey1gdu1CYV2t0jT2
-	vEoEZxr1CWoNK9pR4NuN8TFynhrM=
-X-Google-Smtp-Source: AGHT+IFqZfldjfksoA6ac03Q+4oMqb/eNKbN2sE4Wot02f52PnhiuTWpVP3zsnRLM99E26UUNbQTgJNUsIMGs/5O+3Q=
-X-Received: by 2002:a05:6870:41d5:b0:210:90ab:a600 with SMTP id
- z21-20020a05687041d500b0021090aba600mr317973oac.27.1705969451059; Mon, 22 Jan
- 2024 16:24:11 -0800 (PST)
-MIME-Version: 1.0
-References: <HwKj.1705904669013507737.KXJd@lists.openembedded.org>
-In-Reply-To: <HwKj.1705904669013507737.KXJd@lists.openembedded.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 22 Jan 2024 16:23:45 -0800
-Message-ID: <CAMKF1sqSeAJO=dgxjJJsF+qvZK1YkpRMZ2PJ9fUCK30cB3996Q@mail.gmail.com>
-Subject: Re: [oe] Add python3-apscheduler #error
-To: p35420102@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ dkim=none (message not signed); spf=pass (domain: fujitsu.com, ip: 139.138.36.225, mailfrom: wangmy@fujitsu.com)
+X-IronPort-AV: E=McAfee;i="6600,9927,10961"; a="134570683"
+X-IronPort-AV: E=Sophos;i="6.05,212,1701097200"; 
+   d="scan'208";a="134570683"
+Received: from unknown (HELO yto-r2.gw.nic.fujitsu.com) ([218.44.52.218])
+  by esa10.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Jan 2024 09:48:09 +0900
+Received: from yto-m1.gw.nic.fujitsu.com (yto-nat-yto-m1.gw.nic.fujitsu.com [192.168.83.64])
+	by yto-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 78C5FD6186
+	for <openembedded-devel@lists.openembedded.org>; Tue, 23 Jan 2024 09:48:07 +0900 (JST)
+Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
+	by yto-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id B3B79CFBA4
+	for <openembedded-devel@lists.openembedded.org>; Tue, 23 Jan 2024 09:48:06 +0900 (JST)
+Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 3BD8B1EA80B
+	for <openembedded-devel@lists.openembedded.org>; Tue, 23 Jan 2024 09:48:06 +0900 (JST)
+Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.187])
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id A8B071A006A;
+	Tue, 23 Jan 2024 08:48:05 +0800 (CST)
+From: wangmy@fujitsu.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] btop: upgrade 1.2.13 -> 1.3.0
+Date: Tue, 23 Jan 2024 08:47:53 +0800
+Message-Id: <1705970873-24263-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28136.003
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28136.003
+X-TMASE-Result: 10-2.144800-10.000000
+X-TMASE-MatchedRID: AFiVwG0qm0+jz0nOeth/yUIIxwDaU5mrh6nwisY6+c14YeSlHZYFonCY
+	NJeKvSCj5JycdpKDCe9bEyZZsI9kWBJ8EINAmcWbSCtgxgcsrMqXBPRemiwRNcnb9Hgg5W80nW9
+	y3u6VT2ZyhEbsob8Ka0FCXXISkKEjTl6egUCE6WgEClJgjzpjqHhKwaDYNA5igoLCSomnT4AIpj
+	Lek0l1pVfk7+g08q3smH0xdtEzEFw7mT8/EEC+/vCW/PNRRp/ZN5dqZcIK7VgwcMedHxxRAiFLS
+	h+QCTPZIvrftAIhWmLy9zcRSkKatYgrKnsJ1GRgOwpfLMeBwRsAtH/ey8zRp50C6WJNXTpiDG+R
+	jKM7C1RbJcQH3furV3k48PxckV+kHxPMjOKY7A9qHXONfTwSQsRB0bsfrpPIcSqbxBgG0w6c4j3
+	lV2XbDHlmKbofolFhJnGOZJoZx3s8rv80bTFTvpCTGm5bFZMbw5eQliJgFnm3f9sdrBIVi6KGQZ
+	gRjzMZdnk10ZXg0PyCvqWrFsheUcLe0zBjeZrbFQOP52BRBXJMTsKj18q/fA==
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 23 Jan 2024 00:24:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108377
+ <openembedded-devel@lists.openembedded.org>; Tue, 23 Jan 2024 00:48:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108378
 
-can you try adding
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-DEPENDS +=3D "python3-pip-native"
+Changelog:
+===========
+* Added Gpu Support Linux
+* Added platform support for OpenBSD
+* Enable macos clang
+* Fix Apple Silicon CPUs misprinted
+* Cmake support for MacOS
+* Elementarish theme: color update according to Elementary palette
+* Add alternative key codes for Delete, Insert, Home, End
+* Fix scrollbar not clearing sometimes.
+* Add keybind for toggling memory display mode in PROC box
+* Minor string initialization improvement
+* Made disks statvfs logic asynchronous.
+* Fix signal list on non-linux/weird linux platforms
+* Add option to accumulate a child's resources in parent in tree-view
+* Add CMake support for Linux
+* Horizon theme
+* Fix short conversion of 1000-1023 *iB
+* Fix integer overflows in btop_collect.cpp
+* Support compiling with LLVM
+* Fix getting zfs pool name with '.' char in freebsd
+* [macos/freebsd] support gcc13
+* FreeBSD swap info
+* Create adwaita.theme
+* Try get terminal size of "/dev/tty" if stdout fails
+* Refresh rate program argument
+* Improved error handling when determining the config directory
+* Use native POSIX polling syscalls to read input
+* Conditional compile on Big Sur and up
 
-On Mon, Jan 22, 2024 at 2:04=E2=80=AFPM <p35420102@gmail.com> wrote:
->
-> SUMMARY =3D "In-process task scheduler with Cron-like capabilities"
-> HOMEPAGE =3D "https://github.com/agronholm/apscheduler"
->
-> SECTION =3D "devel/python"
->
-> LICENSE =3D "MIT"
-> LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3Df0e423eea5c91e7aa21bdb7018=
-4b3e53"
->
-> PYPI_PACKAGE =3D "APScheduler"
->
-> SRC_URI[sha256sum] =3D "e6df071b27d9be898e486bc7940a7be50b4af2e9da7c08f07=
-44a96d4bd4cef4a"
->
-> RDEPENDS:${PN} +=3D "\
-> python3-six \
-> python3-pytz \
-> python3-tzlocal \
-> "
->
-> inherit pypi setuptools3
->
-> ERROR: python3-apscheduler-3.10.4-r0 do_compile: 'python3 setup.py bdist_=
-wheel ' execution failed.
-> ERROR: python3-apscheduler-3.10.4-r0 do_compile: ExecutionError('/home/io=
-t-yocto/build/tmp/work/armv8a-poky-linux/python3-apscheduler/3.10.4-r0/temp=
-/run.do_compile.531694', 1, None, None)
-> ERROR: Logfile of failure stored in: /home/iot-yocto/build/tmp/work/armv8=
-a-poky-linux/python3-apscheduler/3.10.4-r0/temp/log.do_compile.531694
-> Log data follows:
-> | DEBUG: Executing shell function do_compile
-> | /home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apscheduler/3.=
-10.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/setuptools/d=
-ist.py:720: UserWarning: Usage of dash-separated 'upload-dir' will not be s=
-upported in future versions. Please use the underscore name 'upload_dir' in=
-stead
-> |   warnings.warn(
-> | /home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apscheduler/3.=
-10.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/setuptools/i=
-nstaller.py:27: SetuptoolsDeprecationWarning: setuptools.installer is depre=
-cated. Requirements should be satisfied by a PEP 517 installer.
-> |   warnings.warn(
-> | /home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apscheduler/3.=
-10.4-r0/recipe-sysroot-native/usr/bin/python3-native/python3: No module nam=
-ed pip
-> | Traceback (most recent call last):
-> |   File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apsche=
-duler/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/setu=
-ptools/installer.py", line 82, in fetch_build_egg
-> |     subprocess.check_call(cmd)
-> |   File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apsche=
-duler/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/subprocess.py", li=
-ne 369, in check_call
-> |     raise CalledProcessError(retcode, cmd)
-> | subprocess.CalledProcessError: Command '['/home/iot-yocto/build/tmp/wor=
-k/armv8a-poky-linux/python3-apscheduler/3.10.4-r0/recipe-sysroot-native/usr=
-/bin/python3-native/python3', '-m', 'pip', '--disable-pip-version-check', '=
-wheel', '--no-deps', '-w', '/tmp/tmpmh5cnujt', '--quiet', 'setuptools_scm']=
-' returned non-zero exit status 1.
-> |
-> | The above exception was the direct cause of the following exception:
-> |
-> | Traceback (most recent call last):
-> |   File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apsche=
-duler/3.10.4-r0/APScheduler-3.10.4/setup.py", line 10, in <module>
-> |     setup(
-> |   File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apsche=
-duler/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/setu=
-ptools/__init__.py", line 152, in setup
-> |     _install_setup_requires(attrs)
-> |   File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apsche=
-duler/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/setu=
-ptools/__init__.py", line 147, in _install_setup_requires
-> |     dist.fetch_build_eggs(dist.setup_requires)
-> |   File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apsche=
-duler/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/setu=
-ptools/dist.py", line 809, in fetch_build_eggs
-> |     resolved_dists =3D pkg_resources.working_set.resolve(
-> |   File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apsche=
-duler/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/pkg_=
-resources/__init__.py", line 771, in resolve
-> |     dist =3D best[req.key] =3D env.best_match(
-> |   File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apsche=
-duler/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/pkg_=
-resources/__init__.py", line 1056, in best_match
-> |     return self.obtain(req, installer)
-> |   File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apsche=
-duler/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/pkg_=
-resources/__init__.py", line 1068, in obtain
-> |     return installer(requirement)
-> |   File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apsche=
-duler/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/setu=
-ptools/dist.py", line 880, in fetch_build_egg
-> |     return fetch_build_egg(self, req)
-> |   File "/home/iot-yocto/build/tmp/work/armv8a-poky-linux/python3-apsche=
-duler/3.10.4-r0/recipe-sysroot-native/usr/lib/python3.10/site-packages/setu=
-ptools/installer.py", line 84, in fetch_build_egg
-> |     raise DistutilsError(str(e)) from e
-> | distutils.errors.DistutilsError: Command '['/home/iot-yocto/build/tmp/w=
-ork/armv8a-poky-linux/python3-apscheduler/3.10.4-r0/recipe-sysroot-native/u=
-sr/bin/python3-native/python3', '-m', 'pip', '--disable-pip-version-check',=
- 'wheel', '--no-deps', '-w', '/tmp/tmpmh5cnujt', '--quiet', 'setuptools_scm=
-']' returned non-zero exit status 1.
-> | ERROR: 'python3 setup.py bdist_wheel ' execution failed.
-> | WARNING: exit code 1 from a shell command.
-> ERROR: Task (/home/iot-yocto/src/poky/../meta-openembedded/meta-python/re=
-cipes-devtools/python/python3-apscheduler_3.10.4.bb:do_compile) failed with=
- exit code '1'
-> NOTE: Tasks Summary: Attempted 7610 tasks of which 7603 didn't need to be=
- rerun and 1 failed.
->
-> Summary: 1 task failed:
->   /home/iot-yocto/src/poky/../meta-openembedded/meta-python/recipes-devto=
-ols/python/python3-apscheduler_3.10.4.bb:do_compile
-> Summary: There was 1 WARNING message.
-> Summary: There were 2 ERROR messages, returning a non-zero exit code.
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#108376): https://lists.openembedded.org/g/openembedde=
-d-devel/message/108376
-> Mute This Topic: https://lists.openembedded.org/mt/103897332/1997914
-> Mute #error:https://lists.openembedded.org/g/openembedded-devel/mutehasht=
-ag/error
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+---
+ meta-oe/recipes-support/btop/{btop_1.2.13.bb => btop_1.3.0.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/btop/{btop_1.2.13.bb => btop_1.3.0.bb} (93%)
+
+diff --git a/meta-oe/recipes-support/btop/btop_1.2.13.bb b/meta-oe/recipes-support/btop/btop_1.3.0.bb
+similarity index 93%
+rename from meta-oe/recipes-support/btop/btop_1.2.13.bb
+rename to meta-oe/recipes-support/btop/btop_1.3.0.bb
+index a944fe7b5..f20d1a8ec 100644
+--- a/meta-oe/recipes-support/btop/btop_1.2.13.bb
++++ b/meta-oe/recipes-support/btop/btop_1.3.0.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ SECTION = "console/utils"
+ 
+ SRC_URI = "git://github.com/aristocratos/btop.git;protocol=https;branch=main"
+-SRCREV = "9edbf27f1b6d5844a97325fcda732762ba086a99"
++SRCREV = "36842a3bccfb78f5c27642435bff387b42f7d13b"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.34.1
+
 
