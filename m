@@ -1,177 +1,92 @@
-Return-Path: <jean-marc.bouche@foss.st.com>
+Return-Path: <jester@theyoctojester.info>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BE360C47E49
-	for <webhook@archiver.kernel.org>; Wed, 24 Jan 2024 16:32:29 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com [185.132.182.106])
- by mx.groups.io with SMTP id smtpd.web10.27417.1706113939238241214
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 030C8C48260
+	for <webhook@archiver.kernel.org>; Wed, 24 Jan 2024 17:24:20 +0000 (UTC)
+Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
+ by mx.groups.io with SMTP id smtpd.web11.29008.1706117054164518159
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Jan 2024 08:32:19 -0800
+ Wed, 24 Jan 2024 09:24:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@foss.st.com header.s=selector1 header.b=jQwp2jGX;
- spf=pass (domain: foss.st.com, ip: 185.132.182.106, mailfrom: prvs=1753451908=jean-marc.bouche@foss.st.com)
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
-	by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 40OFmv3Z031104;
-	Wed, 24 Jan 2024 17:32:16 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
-	from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=selector1; bh=XVdwGTE
-	MHzlbB+r+AzReE+mJrMQ36JmkuPUz7HuKVbQ=; b=jQwp2jGXVN87xDmq/HwNLd6
-	aF+PQW39c1AJDLNCa7dmldttbkiBXcguFBS4HmvgPneH6NIvd1e/jt2qXYUU0wQC
-	V4UqiC+DRc2ps/91dglEQZa258NYkbezrcCGbG8SoH/vdyr1muzkDuNd6ox4w1ru
-	aycGhTWHiy4mFLpdMCZuxmQgWPkzIfpKBrvS0flFzb9O9BB7Hrs6LWpZukRLSH4M
-	b78ZK7HmJgqgt3dbnl0EkkO2aC+4scTOeaWKN7uxpBDoFYpsBXGUN2cVD7w2a6fR
-	+8zFBOrFZ2xeo75TFa6HU1ijdq6otGBUmFC9W+yrLOsBvoX+my02EUujMhYwBsg=
-	=
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
-	by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vtmf7m68s-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 24 Jan 2024 17:32:16 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
-	by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 272CD10005B;
-	Wed, 24 Jan 2024 17:32:15 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
-	by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1F69620B607;
-	Wed, 24 Jan 2024 17:32:15 +0100 (CET)
-Received: from localhost (10.129.178.205) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Wed, 24 Jan
- 2024 17:32:14 +0100
-From: Jean-Marc BOUCHE <jean-marc.bouche@foss.st.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Jean-Marc BOUCHE <jean-marc.bouche@foss.st.com>,
-        Khem Raj
-	<raj.khem@gmail.com>
-Subject: [oe][meta-oe][nanbield][PATCH] terminus-font: build compressed archives with -n
-Date: Wed, 24 Jan 2024 17:32:10 +0100
-Message-ID: <20240124163210.3241727-1-jean-marc.bouche@foss.st.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@theyoctojester-info.20230601.gappssmtp.com header.s=20230601 header.b=XMr5pjDO;
+ spf=none, err=permanent DNS error (domain: theyoctojester.info, ip: 209.85.208.53, mailfrom: jester@theyoctojester.info)
+Received: by mail-ed1-f53.google.com with SMTP id 4fb4d7f45d1cf-559f92bf7b6so10367299a12.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Jan 2024 09:24:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=theyoctojester-info.20230601.gappssmtp.com; s=20230601; t=1706117052; x=1706721852; darn=lists.openembedded.org;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=Df2Q33/9CEgIgSoxE6XI4p8yriQO5DLHgyTrIpRn6+c=;
+        b=XMr5pjDO8/AA5qkkmSynj+MYJnv83VW4Yf6V1J68y3N5vqZtp6YWaTogXBV6oONElv
+         HFdMzkZ4nwxfvoWt19B6/Tw3GVxNBpVw90VlD/OVFR1Zrq/ZfBHYx5ojJYyPlZFcWfx5
+         DF/J136T6wm8rJTlrdibeEFHwEiHICvEI3pLYlblYDLMMcjloNNrB2t2cd+MD1Of5R8x
+         rbcyXrFXhFyyzEzwjTsoJJC7dFC7v0Otev8oj6Nq0ZhgMLaO8keJXDd0CwsN45jnr6+o
+         2U853u4KIgQOXRDey3MQqjaNDmuu3VhNCjH6NeUr9wB4TJHX3lUZank28FGfr7lwDrLY
+         p+Nw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1706117052; x=1706721852;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=Df2Q33/9CEgIgSoxE6XI4p8yriQO5DLHgyTrIpRn6+c=;
+        b=UgVDan2M1JHcS+E2jHzBWxZPZCu8JMMRBOXeN41TQqEf7uxEquV7+ii/YyEq0/pq6K
+         9gIrFz2mwGjdQ8l7UOKTw34PQQvpEeSAg98FVNqAk0CaR2cFd5iXhg15R95L+jUWGZpn
+         wXGjTVa50A8UaeIu0FNGhkdLYujDjqyIA6j9I2Ljsufn9bLhOk0y8GDly3CTFyQRs73O
+         4MMkajs4qQXPbCTqCaYIHDEvioZ2EfhRaDL5r88dhozuyrHuNk5JHORQQsgaCDKyf7IM
+         I3mrIUYmi3agYAY0c0YwNjkSCX7EYhyHx16eL1t4d/xGtaCDjkoBYFrGO4aooIjk8xOc
+         H/lA==
+X-Gm-Message-State: AOJu0YzyGHOALOpTHQwhUfTG9/RyoI/odRInIdStNSr+8ZsQ4XjoJiS+
+	yJyWsSnSMUTfPHzjJQPUU50tQBoRr0aDmoe46b13PO+BLN+R5kuEPKLi3HDSDuFqCsA9OKQdpOg
+	nUJr853fMb6Dm8Jvb5mHecDexuMMj5plCGvXFZmaQNqMZIOlzdFY=
+X-Google-Smtp-Source: AGHT+IEIm8hxVb9SjdaRBAOLUVWBkG4CJryVX6g3kjBd9bZUN2v0JeLY9BTHLHXvWjpdB6stf7nizYavoo/mKybWfdc=
+X-Received: by 2002:a05:6402:5145:b0:55c:7415:ece5 with SMTP id
+ n5-20020a056402514500b0055c7415ece5mr1584997edd.6.1706117052254; Wed, 24 Jan
+ 2024 09:24:12 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.129.178.205]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-01-24_06,2024-01-24_01,2023-05-22_02
+From: Josef Holzmayr <jester@theyoctojester.info>
+Date: Wed, 24 Jan 2024 18:23:46 +0100
+Message-ID: <CAEt6NwqasJzzj46gJ3Jr=NZebW2Gue7gs8Ze2BH+UMLzdnsV+w@mail.gmail.com>
+Subject: OE Workshop in Brussels on February 5th - Monday after FOSDEM
+To: openembedded-devel@lists.openembedded.org, 
+	openembedded-core <openembedded-core@lists.openembedded.org>, 
+	Yocto-mailing-list <yocto@lists.yoctoproject.org>, members@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000d85b25060fb45452"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 Jan 2024 16:32:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108449
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 Jan 2024 17:24:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108450
 
-When building this recipe, internal archives are compressed with
-gzip. The compressed archives contain a header with the field
-MTIME (Modification Time) which is initialized from the built
-date. As a consequence, two builds of this recipe always generate
-packages whose checksum differs.
-Adding the -n option to gzip while compressing the archive does
-not save the original time stamp by default hence making
-reproducible package.
+--000000000000d85b25060fb45452
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Jean-Marc BOUCHE <jean-marc.bouche@foss.st.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Hi you!
 
-Backport of commit f60e4bfcb ("terminus-font: build compressed archives
-with -n")
+Yes, exactly you!
 
-Signed-off-by: Jean-Marc BOUCHE <jean-marc.bouche@foss.st.com>
----
- .../use-no-name-option-for-gzip.patch         | 66 +++++++++++++++++++
- .../terminus-font/terminus-font_4.49.1.bb     |  4 +-
- 2 files changed, 69 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-graphics/terminus-font/terminus-font/use-no-name-option-for-gzip.patch
+Didn't you want to grab a seat at the OE Workshop in Brussels, the Monday
+right after FOSDEM? It's time to hurry up now, there are just a couple of
+seats remaining by now. So head over to
+https://pretix.eu/OpenEmbedded/OEW24/ and make sure you get one now, or you
+might miss out.
 
-diff --git a/meta-oe/recipes-graphics/terminus-font/terminus-font/use-no-name-option-for-gzip.patch b/meta-oe/recipes-graphics/terminus-font/terminus-font/use-no-name-option-for-gzip.patch
-new file mode 100644
-index 000000000..97213c07d
---- /dev/null
-+++ b/meta-oe/recipes-graphics/terminus-font/terminus-font/use-no-name-option-for-gzip.patch
-@@ -0,0 +1,66 @@
-+Build compressed archives with -n
-+
-+The compressed archives contain a header with the field MTIME
-+(Modification Time) which is initialized from the built date.
-+As a consequence, two separate builds generate compressed archives
-+whose checksum differs. Such behavior prevents reproducible builds.
-+
-+Adding the -n option to gzip while compressing the archive does
-+not save the original time stamp by default hence making
-+reproducible build.
-+
-+Upstream-Status: Inappropriate
-+
-+Signed-off-by: Jean-Marc BOUCHE <jean-marc.bouche@foss.st.com>
-+Index: terminus-font-4.49.1/Makefile
-+===================================================================
-+--- terminus-font-4.49.1.orig/Makefile
-++++ terminus-font-4.49.1/Makefile
-+@@ -92,9 +92,9 @@ otbdir  = $(prefix)/share/fonts/terminus
-+ 
-+ install: $(PSF) $(PCF)
-+ 	mkdir -p $(DESTDIR)$(psfdir)
-+-	for i in $(PSF) ; do gzip -c $$i > $(DESTDIR)$(psfdir)/$$i.gz ; done
-++	for i in $(PSF) ; do gzip -c -n $$i > $(DESTDIR)$(psfdir)/$$i.gz ; done
-+ 	mkdir -p $(DESTDIR)$(x11dir)
-+-	for i in $(PCF) ; do gzip -c $$i > $(DESTDIR)$(x11dir)/$$i.gz ; done
-++	for i in $(PCF) ; do gzip -c -n $$i > $(DESTDIR)$(x11dir)/$$i.gz ; done
-+ 
-+ uninstall:
-+ 	for i in $(PSF) ; do rm -f $(DESTDIR)$(psfdir)/$$i.gz ; done
-+@@ -193,7 +193,7 @@ psf: $(PSF)
-+ 
-+ install-psf: $(PSF)
-+ 	mkdir -p $(DESTDIR)$(psfdir)
-+-	for i in $(PSF) ; do gzip -c $$i > $(DESTDIR)$(psfdir)/$$i.gz ; done
-++	for i in $(PSF) ; do gzip -c -n $$i > $(DESTDIR)$(psfdir)/$$i.gz ; done
-+ 
-+ uninstall-psf:
-+ 	for i in $(PSF) ; do rm -f $(DESTDIR)$(psfdir)/$$i.gz ; done
-+@@ -202,7 +202,7 @@ psf-vgaw: $(PSF_VGAW)
-+ 
-+ install-psf-vgaw: $(PSF_VGAW)
-+ 	mkdir -p $(DESTDIR)$(psfdir)
-+-	for i in $(PSF_VGAW) ; do gzip -c $$i > $(DESTDIR)$(psfdir)/$$i.gz ; done
-++	for i in $(PSF_VGAW) ; do gzip -c -n $$i > $(DESTDIR)$(psfdir)/$$i.gz ; done
-+ 
-+ uninstall-psf-vgaw:
-+ 	for i in $(PSF_VGAW) ; do rm -f $(DESTDIR)$(psfdir)/$$i.gz ; done
-+@@ -279,7 +279,7 @@ pcf: $(PCF)
-+ 
-+ install-pcf: $(PCF)
-+ 	mkdir -p $(DESTDIR)$(x11dir)
-+-	for i in $(PCF) ; do gzip -c $$i > $(DESTDIR)$(x11dir)/$$i.gz ; done
-++	for i in $(PCF) ; do gzip -c -n $$i > $(DESTDIR)$(x11dir)/$$i.gz ; done
-+ 
-+ uninstall-pcf:
-+ 	for i in $(PCF) ; do rm -f $(DESTDIR)$(x11dir)/$$i.gz ; done
-+@@ -288,7 +288,7 @@ pcf-8bit: $(PCF_8BIT)
-+ 
-+ install-pcf-8bit: $(PCF_8BIT)
-+ 	mkdir -p $(DESTDIR)$(x11dir)
-+-	for i in $(PCF_8BIT) ; do gzip -c $$i > $(DESTDIR)$(x11dir)/$$i.gz ; done
-++	for i in $(PCF_8BIT) ; do gzip -c -n $$i > $(DESTDIR)$(x11dir)/$$i.gz ; done
-+ 
-+ uninstall-pcf-8bit:
-+ 	for i in $(PCF_8BIT) ; do rm -f $(DESTDIR)$(x11dir)/$$i.gz ; done
-diff --git a/meta-oe/recipes-graphics/terminus-font/terminus-font_4.49.1.bb b/meta-oe/recipes-graphics/terminus-font/terminus-font_4.49.1.bb
-index 65cafab9e..1fabe2e29 100644
---- a/meta-oe/recipes-graphics/terminus-font/terminus-font_4.49.1.bb
-+++ b/meta-oe/recipes-graphics/terminus-font/terminus-font_4.49.1.bb
-@@ -9,7 +9,9 @@ LIC_FILES_CHKSUM = "file://OFL.TXT;md5=f57e6cca943dbc6ef83dc14f1855bdcc"
- 
- DEPENDS = "hostperl-runtime-native gzip-native bdftopcf-native"
- 
--SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz"
-+SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz \
-+          file://use-no-name-option-for-gzip.patch \
-+          "
- SRC_URI[md5sum] = "1b6acbd221957e33c8a792ebfaf3a659"
- SRC_URI[sha256sum] = "d961c1b781627bf417f9b340693d64fc219e0113ad3a3af1a3424c7aa373ef79"
- 
--- 
-2.25.1
+And that would be sad, right?
 
+Greets,
+Josef
+
+--000000000000d85b25060fb45452
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hi you!<div><br></div><div>Yes, exactly you!</div><div><br=
+></div><div>Didn&#39;t you want to grab a seat at the OE Workshop in Brusse=
+ls, the Monday right after FOSDEM? It&#39;s time to hurry up now, there are=
+ just a couple of seats remaining by now. So head over to=C2=A0<a href=3D"h=
+ttps://pretix.eu/OpenEmbedded/OEW24/">https://pretix.eu/OpenEmbedded/OEW24/=
+</a> and make sure you get one now, or you might miss out.</div><div><br></=
+div><div>And that would be sad, right?</div><div><br></div><div>Greets,</di=
+v><div>Josef</div></div>
+
+--000000000000d85b25060fb45452--
 
