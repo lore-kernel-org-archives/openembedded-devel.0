@@ -2,50 +2,50 @@ Return-Path: <jean-marc.bouche@foss.st.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ACD3CC46CD2
-	for <webhook@archiver.kernel.org>; Wed, 24 Jan 2024 16:16:49 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com [91.207.212.93])
- by mx.groups.io with SMTP id smtpd.web10.26948.1706113006528691979
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BE360C47E49
+	for <webhook@archiver.kernel.org>; Wed, 24 Jan 2024 16:32:29 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com [185.132.182.106])
+ by mx.groups.io with SMTP id smtpd.web10.27417.1706113939238241214
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Jan 2024 08:16:47 -0800
+ Wed, 24 Jan 2024 08:32:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@foss.st.com header.s=selector1 header.b=KCP9TGX/;
- spf=pass (domain: foss.st.com, ip: 91.207.212.93, mailfrom: prvs=1753451908=jean-marc.bouche@foss.st.com)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
-	by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 40OFpa9U032508;
-	Wed, 24 Jan 2024 17:16:42 +0100
+ dkim=pass header.i=@foss.st.com header.s=selector1 header.b=jQwp2jGX;
+ spf=pass (domain: foss.st.com, ip: 185.132.182.106, mailfrom: prvs=1753451908=jean-marc.bouche@foss.st.com)
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+	by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 40OFmv3Z031104;
+	Wed, 24 Jan 2024 17:32:16 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
 	from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=selector1; bh=ydYXDey
-	qmpc0tulmLHes5rMj7U4t6igQIZHMVpkrgd4=; b=KCP9TGX/leBjwytJRWjuQgB
-	nLk2meEncDLzZZz1zpKOfC1ZVTBNc84lQ8PPPyEeMRp4eyjSxqxsgrLO1wN/+nVx
-	8Sd2B3IZgxCqyYBSWqZNA41fWfopWKa4qc/ai4ylK6BKsz8XksVNCBA6Xcb+DtKg
-	zbVwWlkXgBO++YfUpYYSqF7v9xDZGcz8btDnlnhWTuBZIv3MCPfbqNBN2x0EzEhi
-	xUFZyN+OpCiHXLDeX7eI9JLkYrL9BD1nDGW+ouXMzBwfjtXdFVeWk/DTHf1g67U2
-	06k/peAYhY5ToxFZJYt1ArPIPQhnI3XHhwsSPT16vpAtri/mj/g/3Uul41z1XNQ=
+	:content-transfer-encoding:content-type; s=selector1; bh=XVdwGTE
+	MHzlbB+r+AzReE+mJrMQ36JmkuPUz7HuKVbQ=; b=jQwp2jGXVN87xDmq/HwNLd6
+	aF+PQW39c1AJDLNCa7dmldttbkiBXcguFBS4HmvgPneH6NIvd1e/jt2qXYUU0wQC
+	V4UqiC+DRc2ps/91dglEQZa258NYkbezrcCGbG8SoH/vdyr1muzkDuNd6ox4w1ru
+	aycGhTWHiy4mFLpdMCZuxmQgWPkzIfpKBrvS0flFzb9O9BB7Hrs6LWpZukRLSH4M
+	b78ZK7HmJgqgt3dbnl0EkkO2aC+4scTOeaWKN7uxpBDoFYpsBXGUN2cVD7w2a6fR
+	+8zFBOrFZ2xeo75TFa6HU1ijdq6otGBUmFC9W+yrLOsBvoX+my02EUujMhYwBsg=
 	=
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
-	by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vtmf9c1fy-1
+	by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vtmf7m68s-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Wed, 24 Jan 2024 17:16:42 +0100 (CET)
+	Wed, 24 Jan 2024 17:32:16 +0100 (CET)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
-	by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id F158A10005B;
-	Wed, 24 Jan 2024 17:16:39 +0100 (CET)
+	by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 272CD10005B;
+	Wed, 24 Jan 2024 17:32:15 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
-	by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id EB57D20A75E;
-	Wed, 24 Jan 2024 17:16:39 +0100 (CET)
+	by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1F69620B607;
+	Wed, 24 Jan 2024 17:32:15 +0100 (CET)
 Received: from localhost (10.129.178.205) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Wed, 24 Jan
- 2024 17:16:39 +0100
+ 2024 17:32:14 +0100
 From: Jean-Marc BOUCHE <jean-marc.bouche@foss.st.com>
 To: <openembedded-devel@lists.openembedded.org>
 CC: Jean-Marc BOUCHE <jean-marc.bouche@foss.st.com>,
         Khem Raj
 	<raj.khem@gmail.com>
-Subject: [oe][meta-oe][mickledore][PATCH] terminus-font: build compressed archives with -n
-Date: Wed, 24 Jan 2024 17:15:46 +0100
-Message-ID: <20240124161546.3241264-1-jean-marc.bouche@foss.st.com>
+Subject: [oe][meta-oe][nanbield][PATCH] terminus-font: build compressed archives with -n
+Date: Wed, 24 Jan 2024 17:32:10 +0100
+Message-ID: <20240124163210.3241727-1-jean-marc.bouche@foss.st.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -59,8 +59,8 @@ X-Proofpoint-Virus-Version: vendor=baseguard
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 Jan 2024 16:16:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108448
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 Jan 2024 16:32:29 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108449
 
 When building this recipe, internal archives are compressed with
 gzip. The compressed archives contain a header with the field
@@ -74,7 +74,8 @@ reproducible package.
 Signed-off-by: Jean-Marc BOUCHE <jean-marc.bouche@foss.st.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
-Backport of commit f60e4bfcb ("terminus-font: build compressed archives with -n")
+Backport of commit f60e4bfcb ("terminus-font: build compressed archives
+with -n")
 
 Signed-off-by: Jean-Marc BOUCHE <jean-marc.bouche@foss.st.com>
 ---
@@ -156,10 +157,10 @@ index 000000000..97213c07d
 + uninstall-pcf-8bit:
 + 	for i in $(PCF_8BIT) ; do rm -f $(DESTDIR)$(x11dir)/$$i.gz ; done
 diff --git a/meta-oe/recipes-graphics/terminus-font/terminus-font_4.49.1.bb b/meta-oe/recipes-graphics/terminus-font/terminus-font_4.49.1.bb
-index 7eddf1da4..bd4fdf0f1 100644
+index 65cafab9e..1fabe2e29 100644
 --- a/meta-oe/recipes-graphics/terminus-font/terminus-font_4.49.1.bb
 +++ b/meta-oe/recipes-graphics/terminus-font/terminus-font_4.49.1.bb
-@@ -10,7 +10,9 @@ LIC_FILES_CHKSUM = "file://OFL.TXT;md5=f57e6cca943dbc6ef83dc14f1855bdcc"
+@@ -9,7 +9,9 @@ LIC_FILES_CHKSUM = "file://OFL.TXT;md5=f57e6cca943dbc6ef83dc14f1855bdcc"
  
  DEPENDS = "hostperl-runtime-native gzip-native bdftopcf-native"
  
