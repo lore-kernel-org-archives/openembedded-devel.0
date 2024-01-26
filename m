@@ -1,175 +1,401 @@
-Return-Path: <Angelo.Ribeiro@criticaltechworks.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 09563C47422
-	for <webhook@archiver.kernel.org>; Fri, 26 Jan 2024 10:24:51 +0000 (UTC)
-Received: from EUR04-VI1-obe.outbound.protection.outlook.com (EUR04-VI1-obe.outbound.protection.outlook.com [40.107.8.72])
- by mx.groups.io with SMTP id smtpd.web10.12885.1706264681560322796
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9A784C47422
+	for <webhook@archiver.kernel.org>; Fri, 26 Jan 2024 12:01:01 +0000 (UTC)
+Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
+ by mx.groups.io with SMTP id smtpd.web11.14061.1706270452659687125
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 26 Jan 2024 02:24:42 -0800
+ Fri, 26 Jan 2024 04:00:53 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@criticaltechworks.com header.s=selector1 header.b=ro2lVYtl;
- spf=pass (domain: criticaltechworks.com, ip: 40.107.8.72, mailfrom: angelo.ribeiro@criticaltechworks.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=fqKJaK/A6dkTaRSW4UFu+LxbHxedTNs2uo7oJUkpIAF5F1QgRMUQyjYk1PozfSlf6TiYy7R+daajgzRdK3ZXL6P7H8zzh2tYCIywPcSrhz+wZcgE9PEqjlKEIDi6NBCsh+BkdYD4ezXxNjaa7t00Bz6lQs5/voHnCQhu9yqDX28vxybYXbj6QGrnuua1hSD70O6rweg7A3z/Cv/ISD5iFgZhAYAHLQOAR9TmgimfZqo5FJs1QYE6QIzk47mwhVTe4rlRDd7/Pjbg7r+z42uUgZjUT+P2wOvt7HnobdBfL7D8GP09yrVtNz20Z9cx+86hX+xjEgImuOTfT/lWZN62BA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ffJK2x744sEuIKtlEAcYglA0+DsUNvBVWeYTPW9Q1uw=;
- b=nPDrD3Qo4JuhL6PeJZhEN9P47iVMq9vRfmhoit8lBHFhL2ziGxpm2RSl/8+8AXQLAglmUnLzSlDnoZ2WPFLDtgZk9mMkgyJvZxjhQw9cz8yXJePallTL5EOqvAZVFnS+d2s1UoPyGM8tCOPOBnYZ10HJ9TMpppvjz6IkTEWWIrj+b7mdayVZnk2F1c7bqxnEUC5LUaGLf2GzuXD+eWp9yJWejqhC7IJG9K/7BGzpop2vnwRGVP/DipMwq6SXJ732nkT+NNQKHZ/+5wEvJqEfH+fCXaZfUB9eVzFtkHVxRfe0rBBLw+2g9QPwlIkZVyqegsbDTui/EgcLNF5o9LX3Tw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=criticaltechworks.com; dmarc=pass action=none
- header.from=criticaltechworks.com; dkim=pass header.d=criticaltechworks.com;
- arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=criticaltechworks.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ffJK2x744sEuIKtlEAcYglA0+DsUNvBVWeYTPW9Q1uw=;
- b=ro2lVYtlT4U8OB4Ib4HdXi532jiuQJxEWSAR05kgWC1MXTfztjb7aP/2rocoVuzOXgWKjEIleMS3pyencAox54EAIgPzhZ9wsQJbP2B1i9hwuyMDnRNCTL6bQn1CG8AzLOLdDokmT4mSPf/FT/q0+sisoyb84cN8nWVNgxCmC9EUly2PFEL7WceEW+RFByf7dJ3bkyTlLhskliqy6Vzq69dMp7o0/N6XKzia17zo4lEw3OE0vaQ2S7sJY/eY7MaDwZNzK1QSufEVkHB7MrveUhB7GZZaMtURxXqev/TUWooJl8Tag3Oc28B1uQ5YMxDfBgYc8S/BhXBsnvqws1TOCg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=criticaltechworks.com;
-Received: from AM9P193MB1651.EURP193.PROD.OUTLOOK.COM (2603:10a6:20b:3e0::20)
- by PAXP193MB2364.EURP193.PROD.OUTLOOK.COM (2603:10a6:102:22b::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7228.26; Fri, 26 Jan
- 2024 10:24:37 +0000
-Received: from AM9P193MB1651.EURP193.PROD.OUTLOOK.COM
- ([fe80::412d:4d7:fa21:8757]) by AM9P193MB1651.EURP193.PROD.OUTLOOK.COM
- ([fe80::412d:4d7:fa21:8757%5]) with mapi id 15.20.7228.022; Fri, 26 Jan 2024
- 10:24:37 +0000
-From: "Angelo.Ribeiro" <Angelo.Ribeiro@criticaltechworks.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=WMl2s4hK;
+ spf=pass (domain: gmail.com, ip: 209.85.208.52, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f52.google.com with SMTP id 4fb4d7f45d1cf-55cdaa96f34so3308952a12.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 26 Jan 2024 04:00:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1706270451; x=1706875251; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=vDSHKurSBJjt6LwtoGsbrp6+DSYlHAKh9LsF46i8BGE=;
+        b=WMl2s4hKCLMqqF7f9LZCKjJ06B1VrZYwx+88eSEn6kZowiFB1yyAoI3725k1KbT6iq
+         K5T5w3t9Zfxx6rzuwuG8/s05uEdNTB+AnyrP4nvkN4nbHCNlp21kj59sraiHiNyG7GhL
+         FZce9K/M21jNiQAyLCqwlZv77jrEKOhmsuUQDerYZZSNsN/7ytkUViZJynPG7US6iO1d
+         eC0M+9dX13jaMQBfQjipQeUppDCACuXZyhG4S06mhu2/N9qi1yXpO0dtf6qfi/nllffx
+         XhV23eRz5L4V26xFekH2OgfKRpWn6dE7cuuGCXLK0gBgINWe6GaUtdICULv18ecsVukP
+         BcyA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1706270451; x=1706875251;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=vDSHKurSBJjt6LwtoGsbrp6+DSYlHAKh9LsF46i8BGE=;
+        b=UvNiX/iPphmsgp20vZ0r2H9qRklSESclpsHkUA6HZIYhI9NYrxfG7qEv7k3VYUHAx9
+         LNjXVRgqzp6Fc927SmWaTxTQgTx8Rncy4Gi5/l+Xs6r/Q6ImBs+IkMPHuZ5aBRkOE7Xq
+         Se7FaFpWi1zPNyN+Hd74fKFAXCzfOKEascho2NnwMCzD6T+KX8gXlygdJs5qz36HOGmL
+         Swt6P2Wm/g58ntweoCMEVKrxwUFR5iPQ/3Iii01yQDRyjWD7fAFtxzw7hOmTUR51fi8Y
+         rMAZOpYxMaw9bgR+tPG4Eyy9vZqs9zQGXlsUFfC2vUNbTNSxNEhekBJVmTTvrZSHDxNY
+         nb6w==
+X-Gm-Message-State: AOJu0YxCBVq99dS0GajyeQQjI6OTy5D4ltr6Bz58vMSKFvY0sH1Y0Ja7
+	cBUUSBttKWsEnxjTyvRWzmIoFDWkfG77kiXciCttF0FwRPMNTjXcp1l87Bd/
+X-Google-Smtp-Source: AGHT+IF6cwkAdNfs3JQz+q/sHIWFqHj2iuDlL/kw5jv8TzQcsHoRzly0cO8IkpMa/bk2kGlv/dop4A==
+X-Received: by 2002:a17:906:d29a:b0:a34:96fa:9602 with SMTP id ay26-20020a170906d29a00b00a3496fa9602mr821078ejb.34.1706270450549;
+        Fri, 26 Jan 2024 04:00:50 -0800 (PST)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id tk7-20020a170907c28700b00a34a17a0eeasm552796ejc.116.2024.01.26.04.00.50
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 26 Jan 2024 04:00:50 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: "Angelo.Ribeiro" <Angelo.Ribeiro@criticaltechworks.com>
-Subject: [meta-filesystems][PATCH] e2tools: Add tool recipe
-Date: Fri, 26 Jan 2024 10:24:09 +0000
-Message-Id: <20240126102409.215142-2-Angelo.Ribeiro@criticaltechworks.com>
-X-Mailer: git-send-email 2.34.1
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-ClientProxiedBy: PAZP264CA0116.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:1ef::6) To AM9P193MB1651.EURP193.PROD.OUTLOOK.COM
- (2603:10a6:20b:3e0::20)
+Cc: zboszor@gmail.com,
+	Martin Jansa <martin.jansa@gmail.com>
+Subject: [meta-oe][PATCH] jack: fix build with python3 on host
+Date: Fri, 26 Jan 2024 13:00:42 +0100
+Message-ID: <20240126120044.1775176-1-martin.jansa@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM9P193MB1651:EE_|PAXP193MB2364:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4deab773-244c-4f5e-387e-08dc1e58ff5d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	Uuv0kozoJaikTZvwq0p0B+gg9BnIXaZoOtZMhbGywOxaF3G+sbIVkVjGSY5U28kJqWfK/ces3mZmLxhKHrbzfUzkQp3hcWgTgtiwsFuTvVWp16JpOkAie3WdvNdInEjfrAruzJ77g/AQVJ9uqVG9cVzEeYRMPn8Hjjthk7ooaBcebdW3w+5gG44YoJAwY4+e708CKOfcAacE3dfpNlNZNi1OgBhbg0zJlV4J5EsLNbpuyGKI6R2hSdJGEK4xB/H8Y/BDAr2M3isdZCgSkKFDkVWnpgO2jhJKL3w5zKtgG/mQEi12UAm3oBaYaNeygCqudJ8LtG5e6zI4XR4lvZDIfUd80v6dECBQuG34xuGmvdKENNVeiMzjQD4JXr7LnWyt12JmuqfOkmepz9A9Oh0OhkpBnuc2WkEcsbJg8oZYcHSWyroH3kBQnVhEITqBFRVyZ03ASbu/ca0SQZkxVdTEsLla37/z9zgZmTJeR38qPChKcJVCTUppT/Va5zdh6tKCCYAkCUIXgxBb+BlTb5ZZPGAFJIM1meKm50Qya+VJFe8rR5kGNNGFFkUjjFRvF+nmzC33CIdA/3m2275CVT2vj3J4XCr+/VnklA7mKJw45ZA=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM9P193MB1651.EURP193.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230031)(136003)(376002)(366004)(396003)(39850400004)(346002)(230922051799003)(1800799012)(64100799003)(186009)(451199024)(2906002)(38100700002)(41300700001)(36756003)(86362001)(66476007)(316002)(6916009)(8936002)(52116002)(6512007)(478600001)(6486002)(5660300002)(6666004)(83380400001)(66946007)(4326008)(26005)(2616005)(107886003)(66556008)(1076003)(8676002)(6506007)(38350700005);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?rDZotuOYLxzS8rD4GPyRfM8+4XOCpJFpw23lVvWw7Hy9glWK46K3OyAu0fYA?=
- =?us-ascii?Q?Mru1GpnstgWzhQ5dYYDqgaqMiqouboCNPsHbovPLdMZVFXrSe4N7ewXq1NhV?=
- =?us-ascii?Q?BxxIgsl5a+bQ3idsOUcLUVQMcoB0KAUFEN0YIsVRydYB7NUQ3S/QBeR8VMe1?=
- =?us-ascii?Q?U7KllCACP4u4nZpEppg2eOeI6gZgj248anPNXFCLltGxn2gZNgW0jrH1vBR8?=
- =?us-ascii?Q?viTjmgkdQH3T4vnxf9JX5GclWE7xOS2d9zpHLf+PwZ7Qktw1O4QIpnAADo2J?=
- =?us-ascii?Q?XVc2MZ60MAwl5tKB/kRfQSXorVEpWppkKBd2f2hJQC8sUoqQD4SFMUf6obxV?=
- =?us-ascii?Q?hxpgwjLHZUO36mYNEw4hHgHofB/96ozuhSxJhywho/CS8018BPk0YXhzb/N4?=
- =?us-ascii?Q?LpdjFRYSTsLOhe1w0PUuqAUChuStvIsWdEtpkRw5uxCHqS26oIqEVhbEb6Qc?=
- =?us-ascii?Q?gtKr+d6Cq0i/aPQh1d8+4YaD9SOaJDUh5TqMV+0XcAyaUEFH6NBfJocXkHIQ?=
- =?us-ascii?Q?Ng9oRt0esVZZIXGOUsSHJoV4gPFCTlLm74DP/QxwyyyTPeJ1aLVQM/LO0vAK?=
- =?us-ascii?Q?76ATsBIyzCgQZ3FAIZMjKn4CN14QREJsUKTg6Ul7WZkLlkViMfMcdw5nLvpp?=
- =?us-ascii?Q?mbzk9sjFQlWTGnBnB57B+w4Lfay3amp+BVReheEVNp6JF4zp1OJmB1i25Bf2?=
- =?us-ascii?Q?kgt8nS8CM+K4n9XUPrHTvBI0zksEsFVLklmhGQdVNiWNICqrhlKSat1+1lSI?=
- =?us-ascii?Q?V07BfvLAJCEWHJjWMg9O1SRO7vRqx56b0oSHaFE1Wf/vMeiRk2f8OE4CI/oK?=
- =?us-ascii?Q?YG6X+tpob0Gg7KIufalRhV1g8OZop0lGKT+OKru+8NBKQG41A0pJF9SDvz83?=
- =?us-ascii?Q?cHrUVr+Gy5SnyLeWxFEu2ZxxO4PcyeMEx3UdZcXqUkM1MOyyFfZmDfMLf9+I?=
- =?us-ascii?Q?9Eoiuagn5NO9btGBjb+TdI1793vF5me95Rgv8KNWAy9/NdrocK7auiLrdX/Z?=
- =?us-ascii?Q?MwPrjszaZf7+HbwnzYC7pGTcMeod9DsVcxkxTQ0gId3i993RHdq+mZj2XhR9?=
- =?us-ascii?Q?DKsOAlQFPXNRx+uQatgZQGkxOPmrqCTaNAnpxgvRba1hVdp/pkVPdQKQt7WS?=
- =?us-ascii?Q?d4fdGwZaHn/SZsV8cyy+ZKSP8+cuYPuk7OmeXYkJb5clEBHBCf2l2TGprJ2y?=
- =?us-ascii?Q?3nk37YtqdbQd9p1I1yxBl+V7xUaal/sPDm/0jl3PV5J5dfU8hUowhErApRPu?=
- =?us-ascii?Q?EsAi0Dms9nOPo5GHqRwcc2KqXUIHW8bJ1d7yYXwqFvKnepxLww2bTcsFEH7g?=
- =?us-ascii?Q?MalGtJJDznnwDWbMiG+3V/dLzNz8Gt8GC3aAN4WL/ByCm+Wjhj1gyLI2bEsA?=
- =?us-ascii?Q?VP8YWaPcxXvRSHm21tR2VT4wpz4h8aMHMRd07qR07Hw6v+EdAZuKjqQtsI+R?=
- =?us-ascii?Q?BBnuY7Q+k3GiEkbXHKz+kjC6MvUW0uapl9KNnqgpVifvxcYTGVwDApZhiDKN?=
- =?us-ascii?Q?KhAkOMgehwyvHWGG3awkfpHcg8vb7JkzdqiWZajP/KNSlGRhM6efbH951TBI?=
- =?us-ascii?Q?sYPE04mUw4AWxWXEzjoJaIoWHSfc7ySFpQTUrzXfsYoh7nk1itkGOPkKNQhc?=
- =?us-ascii?Q?iyCVKH/OhOXXGh74qD46SdM=3D?=
-X-OriginatorOrg: criticaltechworks.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4deab773-244c-4f5e-387e-08dc1e58ff5d
-X-MS-Exchange-CrossTenant-AuthSource: AM9P193MB1651.EURP193.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Jan 2024 10:24:37.1280
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 61f30b8e-4f6b-44fe-9bc2-041e3a9f7346
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: sTAjXxnsq6mEdS+t3W1t+76ababWm5J9KTzWDk0GeAzqdVzJ1N2Tb53p47p+gpBO+0cFz3fvjHAM/GQkB2EG2IDhX7WUVGEDc/bmsgyagO4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXP193MB2364
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 26 Jan 2024 10:24:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108460
+ <openembedded-devel@lists.openembedded.org>; Fri, 26 Jan 2024 12:01:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108461
 
-e2tools is a simple set of GPL'ed utilities to read, write, and manipulate
-files in an ext2/ext3 filesystem.
-These utilities access a filesystem directly using the ext2fs library.
+* first backport from waflib fixes:
+| DEBUG: Executing shell function do_configure
+| Traceback (most recent call last):
+|   File "/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/jack/1.9.22/git/./waf", line 166, in <module>
+|     from waflib import Scripting
+|   File "/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/jack/1.9.22/git/waflib/Scripting.py", line 10, in <module>
+|     from waflib import Utils, Configure, Logs, Options, ConfigSet, Context, Errors, Build, Node
+|   File "/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/jack/1.9.22/git/waflib/Configure.py", line 16, in <module>
+|     from waflib import ConfigSet, Utils, Options, Logs, Context, Build, Errors
+|   File "/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/jack/1.9.22/git/waflib/Options.py", line 14, in <module>
+|     from waflib import Logs, Utils, Context, Errors
+|   File "/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/jack/1.9.22/git/waflib/Context.py", line 9, in <module>
+|     import os, re, imp, sys
+| ModuleNotFoundError: No module named 'imp'
 
-Signed-off-by: Angelo.Ribeiro <Angelo.Ribeiro@criticaltechworks.com>
+  the 2nd one avoids SyntaxWarning from waf --version which causes
+  waf_preconfigure to fail, because SyntaxWarning ends in
+    waf_preconfigure to fail, because SyntaxWarning ends in bb.utils.vercmp_string_op:
+
+jack/1.9.22/git $ python3 waf --version
+/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/jack/1.9.22/git/waflib/Context.py:617: SyntaxWarning: invalid escape sequence '\_'
+  """
+/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/jack/1.9.22/git/waflib/Build.py:107: SyntaxWarning: invalid escape sequence '\*'
+  """List of targets to build (default: \*)"""
+/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/jack/1.9.22/git/waflib/Task.py:1047: SyntaxWarning: invalid escape sequence '\w'
+  re_cond = re.compile('(?P<var>\w+)|(?P<or>\|)|(?P<and>&)')
+/OE/build/oe-core/tmp-glibc/work/core2-64-oe-linux/jack/1.9.22/git/waflib/TaskGen.py:730: SyntaxWarning: invalid escape sequence '\w'
+  re_m4 = re.compile('@(\w+)@', re.M)
+waf 2.0.12 (54841218840ffa34fddf834680a5a17db69caa12)
+
+As reported in
+https://lists.openembedded.org/g/openembedded-core/message/194348
+
+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 ---
- .../recipes-utils/e2tools/e2tools_git.bb      | 25 +++++++++++++++++++
- 1 file changed, 25 insertions(+)
- create mode 100644 meta-filesystems/recipes-utils/e2tools/e2tools_git.bb
+ ...0001-Conceal-imp-warnings-in-Python3.patch |  34 +++
+ ...ationWarning-invalid-escape-sequence.patch | 229 ++++++++++++++++++
+ .../recipes-multimedia/jack/jack_1.9.22.bb    |   5 +-
+ 3 files changed, 267 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-multimedia/jack/jack/0001-Conceal-imp-warnings-in-Python3.patch
+ create mode 100644 meta-oe/recipes-multimedia/jack/jack/0002-Fix-all-DeprecationWarning-invalid-escape-sequence.patch
 
-diff --git a/meta-filesystems/recipes-utils/e2tools/e2tools_git.bb b/meta-f=
-ilesystems/recipes-utils/e2tools/e2tools_git.bb
+diff --git a/meta-oe/recipes-multimedia/jack/jack/0001-Conceal-imp-warnings-in-Python3.patch b/meta-oe/recipes-multimedia/jack/jack/0001-Conceal-imp-warnings-in-Python3.patch
 new file mode 100644
-index 000000000..d8492bf8d
+index 0000000000..8411d12caf
 --- /dev/null
-+++ b/meta-filesystems/recipes-utils/e2tools/e2tools_git.bb
-@@ -0,0 +1,25 @@
-+SUMMARY =3D "Set of GPL'ed utilities to ext2/ext3 filesystem."
-+DESCRIPTION =3D "e2tools is a simple set of GPL'ed utilities to read, writ=
-e, \
-+and manipulate files in an ext2/ext3 filesystem. These utilities access a =
-\
-+filesystem directly using the ext2fs library. Can also be used on a Linux =
-\
-+machine to read/write to disk images or floppies without having to mount \
-+them or have root access."
-+HOMEPAGE =3D "https://github.com/e2tools/e2tools"
-+SECTION =3D "base"
-+LICENSE =3D "GPL-2.0-only"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a426=
-3"
++++ b/meta-oe/recipes-multimedia/jack/jack/0001-Conceal-imp-warnings-in-Python3.patch
+@@ -0,0 +1,34 @@
++From f864a2aa29377a77c3aef61ce917cc03d099c430 Mon Sep 17 00:00:00 2001
++From: Thomas Nagy <tnagy@waf.io>
++Date: Wed, 14 Aug 2019 22:05:45 +0200
++Subject: [PATCH] Conceal imp warnings in Python3
 +
-+DEPENDS +=3D "e2fsprogs"
++---
++Upstream-Status: Backport [from waflib not jack: https://gitlab.com/ita1024/waf/-/commit/d2060dfd8af4edb5824153ff24e207b39ecd67a2.patch]
 +
-+PV =3D "0.1.0+gitr${SRCPV}"
++ waflib/Context.py | 9 ++++++++-
++ 1 file changed, 8 insertions(+), 1 deletion(-)
 +
-+SRC_URI =3D " \
-+           git://github.com/e2tools/e2tools;protocol=3Dhttps;branch=3Dmast=
-er \
++diff --git a/waflib/Context.py b/waflib/Context.py
++index 761b521f..38ab03f1 100644
++--- a/waflib/Context.py
+++++ b/waflib/Context.py
++@@ -6,10 +6,17 @@
++ Classes and functions enabling the command system
++ """
++ 
++-import os, re, imp, sys
+++import os, re, sys
++ from waflib import Utils, Errors, Logs
++ import waflib.Node
++ 
+++if sys.hexversion > 0x3040000:
+++	import types
+++	class imp(object):
+++		new_module = lambda x: types.ModuleType(x)
+++else:
+++	import imp
+++
++ # the following 3 constants are updated on each new release (do not touch)
++ HEXVERSION=0x2000c00
++ """Constant updated on new releases"""
+diff --git a/meta-oe/recipes-multimedia/jack/jack/0002-Fix-all-DeprecationWarning-invalid-escape-sequence.patch b/meta-oe/recipes-multimedia/jack/jack/0002-Fix-all-DeprecationWarning-invalid-escape-sequence.patch
+new file mode 100644
+index 0000000000..cbced56a67
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/jack/jack/0002-Fix-all-DeprecationWarning-invalid-escape-sequence.patch
+@@ -0,0 +1,229 @@
++From bcba27168d99a3919b730e6a533cf79ab3b24eee Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Micka=C3=ABl=20Schoentgen?= <contact@tiger-222.fr>
++Date: Sat, 5 Jan 2019 12:02:42 +0100
++Subject: [PATCH] Fix all DeprecationWarning: invalid escape sequence
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++Signed-off-by: Mickaël Schoentgen <contact@tiger-222.fr>
++---
++Upstream-Status: Backport [from waflib not jack: https://gitlab.com/ita1024/waf/-/commit/412a9b819e86a0061f990c7245f0f5db76d0eda3]
++
++ waflib/Build.py           |  2 +-
++ waflib/ConfigSet.py       |  2 +-
++ waflib/Context.py         |  2 +-
++ waflib/Task.py            |  2 +-
++ waflib/TaskGen.py         |  2 +-
++ waflib/Tools/c_config.py  |  2 +-
++ waflib/Tools/c_preproc.py |  6 +++---
++ waflib/Tools/msvc.py      | 16 ++++++++--------
++ waflib/Utils.py           |  2 +-
++ waflib/ansiterm.py        |  2 +-
++ 10 files changed, 19 insertions(+), 19 deletions(-)
++
++diff --git a/waflib/Build.py b/waflib/Build.py
++index c9661df1..9e733c9e 100644
++--- a/waflib/Build.py
+++++ b/waflib/Build.py
++@@ -104,7 +104,7 @@ class BuildContext(Context.Context):
++ 		"""Amount of jobs to run in parallel"""
++ 
++ 		self.targets = Options.options.targets
++-		"""List of targets to build (default: \*)"""
+++		"""List of targets to build (default: \\*)"""
++ 
++ 		self.keep = Options.options.keep
++ 		"""Whether the build should continue past errors"""
++diff --git a/waflib/ConfigSet.py b/waflib/ConfigSet.py
++index 84736c9c..901fba6c 100644
++--- a/waflib/ConfigSet.py
+++++ b/waflib/ConfigSet.py
++@@ -11,7 +11,7 @@ The values put in :py:class:`ConfigSet` must be serializable (dicts, lists, stri
++ 
++ import copy, re, os
++ from waflib import Logs, Utils
++-re_imp = re.compile('^(#)*?([^#=]*?)\ =\ (.*?)$', re.M)
+++re_imp = re.compile(r'^(#)*?([^#=]*?)\ =\ (.*?)$', re.M)
++ 
++ class ConfigSet(object):
++ 	"""
++diff --git a/waflib/Context.py b/waflib/Context.py
++index 38ab03f1..5799a60a 100644
++--- a/waflib/Context.py
+++++ b/waflib/Context.py
++@@ -614,7 +614,7 @@ class Context(ctx):
++ 		Logs.pprint(color, msg)
++ 
++ 	def load_special_tools(self, var, ban=[]):
++-		"""
+++		r"""
++ 		Loads third-party extensions modules for certain programming languages
++ 		by trying to list certain files in the extras/ directory. This method
++ 		is typically called once for a programming language group, see for
++diff --git a/waflib/Task.py b/waflib/Task.py
++index 6aebc607..0c5cb994 100644
++--- a/waflib/Task.py
+++++ b/waflib/Task.py
++@@ -1044,7 +1044,7 @@ def funex(c):
++ 	exec(c, dc)
++ 	return dc['f']
++ 
++-re_cond = re.compile('(?P<var>\w+)|(?P<or>\|)|(?P<and>&)')
+++re_cond = re.compile(r'(?P<var>\w+)|(?P<or>\|)|(?P<and>&)')
++ re_novar = re.compile(r'^(SRC|TGT)\W+.*?$')
++ reg_act = re.compile(r'(?P<backslash>\\)|(?P<dollar>\$\$)|(?P<subst>\$\{(?P<var>\w+)(?P<code>.*?)\})', re.M)
++ def compile_fun_shell(line):
++diff --git a/waflib/TaskGen.py b/waflib/TaskGen.py
++index a74e6431..3776bac1 100644
++--- a/waflib/TaskGen.py
+++++ b/waflib/TaskGen.py
++@@ -727,7 +727,7 @@ def sequence_order(self):
++ 	self.bld.prev = self
++ 
++ 
++-re_m4 = re.compile('@(\w+)@', re.M)
+++re_m4 = re.compile(r'@(\w+)@', re.M)
++ 
++ class subst_pc(Task.Task):
++ 	"""
++diff --git a/waflib/Tools/c_config.py b/waflib/Tools/c_config.py
++index d2b3c0d8..60cc0ecd 100644
++--- a/waflib/Tools/c_config.py
+++++ b/waflib/Tools/c_config.py
++@@ -239,7 +239,7 @@ def validate_cfg(self, kw):
++ 
++ @conf
++ def exec_cfg(self, kw):
++-	"""
+++	r"""
++ 	Executes ``pkg-config`` or other ``-config`` applications to collect configuration flags:
++ 
++ 	* if atleast_pkgconfig_version is given, check that pkg-config has the version n and return
++diff --git a/waflib/Tools/c_preproc.py b/waflib/Tools/c_preproc.py
++index 7e04b4a7..68e5f5ae 100644
++--- a/waflib/Tools/c_preproc.py
+++++ b/waflib/Tools/c_preproc.py
++@@ -75,13 +75,13 @@ re_lines = re.compile(
++ 	re.IGNORECASE | re.MULTILINE)
++ """Match #include lines"""
++ 
++-re_mac = re.compile("^[a-zA-Z_]\w*")
+++re_mac = re.compile(r"^[a-zA-Z_]\w*")
++ """Match macro definitions"""
++ 
++ re_fun = re.compile('^[a-zA-Z_][a-zA-Z0-9_]*[(]')
++ """Match macro functions"""
++ 
++-re_pragma_once = re.compile('^\s*once\s*', re.IGNORECASE)
+++re_pragma_once = re.compile(r'^\s*once\s*', re.IGNORECASE)
++ """Match #pragma once statements"""
++ 
++ re_nl = re.compile('\\\\\r*\n', re.MULTILINE)
++@@ -660,7 +660,7 @@ def extract_macro(txt):
++ 			# empty define, assign an empty token
++ 			return (v, [[], [('T','')]])
++ 
++-re_include = re.compile('^\s*(<(?:.*)>|"(?:.*)")')
+++re_include = re.compile(r'^\s*(<(?:.*)>|"(?:.*)")')
++ def extract_include(txt, defs):
++ 	"""
++ 	Process a line in the form::
++diff --git a/waflib/Tools/msvc.py b/waflib/Tools/msvc.py
++index 17b347d4..ff58449d 100644
++--- a/waflib/Tools/msvc.py
+++++ b/waflib/Tools/msvc.py
++@@ -281,7 +281,7 @@ def gather_wince_supported_platforms():
++ 
++ def gather_msvc_detected_versions():
++ 	#Detected MSVC versions!
++-	version_pattern = re.compile('^(\d\d?\.\d\d?)(Exp)?$')
+++	version_pattern = re.compile(r'^(\d\d?\.\d\d?)(Exp)?$')
++ 	detected_versions = []
++ 	for vcver,vcvar in (('VCExpress','Exp'), ('VisualStudio','')):
++ 		prefix = 'SOFTWARE\\Wow6432node\\Microsoft\\' + vcver
++@@ -367,7 +367,7 @@ def gather_wsdk_versions(conf, versions):
++ 	:param versions: list to modify
++ 	:type versions: list
++ 	"""
++-	version_pattern = re.compile('^v..?.?\...?.?')
+++	version_pattern = re.compile(r'^v..?.?\...?.?')
++ 	try:
++ 		all_versions = Utils.winreg.OpenKey(Utils.winreg.HKEY_LOCAL_MACHINE, 'SOFTWARE\\Wow6432node\\Microsoft\\Microsoft SDKs\\Windows')
++ 	except OSError:
++@@ -525,7 +525,7 @@ def gather_icl_versions(conf, versions):
++ 	:param versions: list to modify
++ 	:type versions: list
++ 	"""
++-	version_pattern = re.compile('^...?.?\....?.?')
+++	version_pattern = re.compile(r'^...?.?\....?.?')
++ 	try:
++ 		all_versions = Utils.winreg.OpenKey(Utils.winreg.HKEY_LOCAL_MACHINE, 'SOFTWARE\\Wow6432node\\Intel\\Compilers\\C++')
++ 	except OSError:
++@@ -579,7 +579,7 @@ def gather_intel_composer_versions(conf, versions):
++ 	:param versions: list to modify
++ 	:type versions: list
++ 	"""
++-	version_pattern = re.compile('^...?.?\...?.?.?')
+++	version_pattern = re.compile(r'^...?.?\...?.?.?')
++ 	try:
++ 		all_versions = Utils.winreg.OpenKey(Utils.winreg.HKEY_LOCAL_MACHINE, 'SOFTWARE\\Wow6432node\\Intel\\Suites')
++ 	except OSError:
++@@ -683,7 +683,7 @@ def find_lt_names_msvc(self, libname, is_static=False):
++ 				if not is_static and ltdict.get('library_names', ''):
++ 					dllnames=ltdict['library_names'].split()
++ 					dll=dllnames[0].lower()
++-					dll=re.sub('\.dll$', '', dll)
+++					dll=re.sub(r'\.dll$', '', dll)
++ 					return (lt_libdir, dll, False)
++ 				elif ltdict.get('old_library', ''):
++ 					olib=ltdict['old_library']
++@@ -700,7 +700,7 @@ def find_lt_names_msvc(self, libname, is_static=False):
++ @conf
++ def libname_msvc(self, libname, is_static=False):
++ 	lib = libname.lower()
++-	lib = re.sub('\.lib$','',lib)
+++	lib = re.sub(r'\.lib$','',lib)
++ 
++ 	if lib in g_msvc_systemlibs:
++ 		return lib
++@@ -747,11 +747,11 @@ def libname_msvc(self, libname, is_static=False):
++ 		for libn in libnames:
++ 			if os.path.exists(os.path.join(path, libn)):
++ 				Logs.debug('msvc: lib found: %s', os.path.join(path,libn))
++-				return re.sub('\.lib$', '',libn)
+++				return re.sub(r'\.lib$', '',libn)
++ 
++ 	#if no lib can be found, just return the libname as msvc expects it
++ 	self.fatal('The library %r could not be found' % libname)
++-	return re.sub('\.lib$', '', libname)
+++	return re.sub(r'\.lib$', '', libname)
++ 
++ @conf
++ def check_lib_msvc(self, libname, is_static=False, uselib_store=None):
++diff --git a/waflib/Utils.py b/waflib/Utils.py
++index a0cc2a09..da1b73e7 100644
++--- a/waflib/Utils.py
+++++ b/waflib/Utils.py
++@@ -730,7 +730,7 @@ def unversioned_sys_platform():
++ 	if s == 'cli' and os.name == 'nt':
++ 		# ironpython is only on windows as far as we know
++ 		return 'win32'
++-	return re.split('\d+$', s)[0]
+++	return re.split(r'\d+$', s)[0]
++ 
++ def nada(*k, **kw):
++ 	"""
++diff --git a/waflib/ansiterm.py b/waflib/ansiterm.py
++index 0d20c637..027f0ad6 100644
++--- a/waflib/ansiterm.py
+++++ b/waflib/ansiterm.py
++@@ -264,7 +264,7 @@ else:
++ 			'u': pop_cursor,
++ 		}
++ 		# Match either the escape sequence or text not containing escape sequence
++-		ansi_tokens = re.compile('(?:\x1b\[([0-9?;]*)([a-zA-Z])|([^\x1b]+))')
+++		ansi_tokens = re.compile(r'(?:\x1b\[([0-9?;]*)([a-zA-Z])|([^\x1b]+))')
++ 		def write(self, text):
++ 			try:
++ 				wlock.acquire()
+diff --git a/meta-oe/recipes-multimedia/jack/jack_1.9.22.bb b/meta-oe/recipes-multimedia/jack/jack_1.9.22.bb
+index b5c52a6edc..bb844e4ff1 100644
+--- a/meta-oe/recipes-multimedia/jack/jack_1.9.22.bb
++++ b/meta-oe/recipes-multimedia/jack/jack_1.9.22.bb
+@@ -16,7 +16,10 @@ LIC_FILES_CHKSUM = " \
+ 
+ DEPENDS = "libsamplerate0 libsndfile1"
+ 
+-SRC_URI = "git://github.com/jackaudio/jack2.git;branch=master;protocol=https"
++SRC_URI = "git://github.com/jackaudio/jack2.git;branch=master;protocol=https \
++    file://0001-Conceal-imp-warnings-in-Python3.patch \
++    file://0002-Fix-all-DeprecationWarning-invalid-escape-sequence.patch \
 +"
-+SRCREV =3D "fd092754a6b65c3a769f74f888668c066f09c36d"
-+
-+S =3D "${WORKDIR}/git"
-+
-+inherit autotools pkgconfig
-+
-+BBCLASSEXTEND =3D "native"
---
-2.34.1
+ SRCREV = "4f58969432339a250ce87fe855fb962c67d00ddb"
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+-- 
+2.43.0
 
-The information in this communication may contain confidential or legally p=
-rivileged information. It is intended solely for the use of the individual =
-or entity it addresses and others authorized to receive it. If you are not =
-an intended recipient, you are hereby notified that any disclosure, copying=
-, distribution or action in reliance on the contents of this information is=
- strictly prohibited and may be unlawful. If you have received this communi=
-cation by error, please notify us immediately by responding to this e-mail =
-and then delete it from your system. Critical TechWorks is not liable for t=
-he proper and complete transmission of the information in this communicatio=
-n nor for any delay in its receipt
-
-This e-mail is environmentally friendly, just like Critical TechWorks, whic=
-h lives in a paper-free atmosphere. Therefore, please consider the environm=
-ent before printing it!
 
