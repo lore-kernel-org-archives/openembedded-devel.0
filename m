@@ -2,150 +2,286 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 33CF4C47422
-	for <webhook@archiver.kernel.org>; Fri, 26 Jan 2024 17:23:48 +0000 (UTC)
-Received: from mail-oa1-f47.google.com (mail-oa1-f47.google.com [209.85.160.47])
- by mx.groups.io with SMTP id smtpd.web11.4026.1706289825257048616
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 16E10C47DDB
+	for <webhook@archiver.kernel.org>; Fri, 26 Jan 2024 17:25:28 +0000 (UTC)
+Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
+ by mx.groups.io with SMTP id smtpd.web10.4046.1706289920219622247
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 26 Jan 2024 09:23:45 -0800
+ Fri, 26 Jan 2024 09:25:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=S2M0raF3;
- spf=pass (domain: gmail.com, ip: 209.85.160.47, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f47.google.com with SMTP id 586e51a60fabf-20536d5c5c7so382102fac.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 26 Jan 2024 09:23:45 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=K0SHgWI9;
+ spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-6ddb1115e82so683444b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 26 Jan 2024 09:25:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1706289824; x=1706894624; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=SOEVZQvshg44wQRMLRNYOay7Hahw5/ykwmT3vcOR/WA=;
-        b=S2M0raF3x/0YIDwkmVxnknQtBcLYuR79xuOdVo4OIhqAqtplE4mcqq+8LY71/R7ffF
-         prg7RSe+FtnbFU1LI46dPOXaLyREz13R1klCUnRBl8G+swLTwUOcqLEXici2XREt6UTu
-         1qrtNtPFplBGOcjVxbp7aR1urxi0MNizkH6g0mIOHv7WHAzTqpJm18IK7JLSY5r9Bye2
-         lc2qwlz7L4kMFKzLlCMYjkd7sCrD970RbLudHOpH2P/heGv5p+TOkEZyWoX3HrvF3jNk
-         i6SXprIBw0gPZbWLyYFdF63UKaTeEz1L6vl6+VeldznG2MTiEnRG1bRNd0vomWYxM7mH
-         7fRg==
+        d=gmail.com; s=20230601; t=1706289919; x=1706894719; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Gzz+vdajCSsnUNvuaNuoDNWo/BsPX89HdEThY3CmMe4=;
+        b=K0SHgWI9FXrJwNcHNZGUiUB522Qy4dsH4fkkSGyg/mL03d1146cwX09NiipHF4kv/e
+         toSQNe6U87lhzkogs4r01noxFjGRvXRa+pcAAt1bJLTLZNE8kWRMVMe0QRaJNQRzEygu
+         I1Q9iiVLJwanWBIOF/rxplgkrs7rguR9Ywuza77jHT2gsSIAct67xh9w0z7p/l/V5g28
+         DOHaqshTJIrqBe3/G97B6dK5S36U8/w199WIz1Rpz2DPVz24yIxWqKYcjrwODb+chrKT
+         pl9oveLV1sv9JT8dNMEmgghsCFj/+jik02g6p3+bmX0osSDzEmTbmr6kWtInfVStbZcM
+         50Iw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1706289824; x=1706894624;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=SOEVZQvshg44wQRMLRNYOay7Hahw5/ykwmT3vcOR/WA=;
-        b=Uq5cRiuIaiMI5bb/XcQKXJL14VSzb+McnnnpFcbTajclDXRgvct/oMtk6ifUcVkR47
-         MhNvg+Ak364HH9w3ylJROIm1ZpcEoptgDRIwM9NMQZLT9ABVO/2hWtmBoIApjyuTRpQu
-         xHFNz/EZc9vxug2ZuJigaV1Sb3xQH+VeamNMc03ca6KWTIL6tcGp4BcAXksV+wwYrGfP
-         WaCkZMz6v5ShOL/QhUze8NCOunQ9XYLvjFen5YFLD45LGn6acgbwbCnflZTXcMtSDY0P
-         GNgm9HtdbEsbZ58o9NclzskzhathGhkK9xsODriP44WmbCsFiQMt0Te9xusaAjQJxh7u
-         w+Jg==
-X-Gm-Message-State: AOJu0YzzysyeJgYO/md4psMHdWeFyv1VWQGRVdT83txsQe8saBi49kfs
-	9eMjI0wlAXwtdiDrx1lUBMsXnOm4FzGwQ1qRXZ+eUX2ZrwqSATQjrNhH5MJ7SRwIgHlAqY4BYJ5
-	Fj5iKTgdynXzIPcWpP2tkLZNeCp4=
-X-Google-Smtp-Source: AGHT+IE7jXd8FVo1czSJ95tnTlamGBySq5On1gpWFcbz6BGuo129ibdBS2ZSq/pV8d4J2iak1Bxe8D5wtyae0BWvUeU=
-X-Received: by 2002:a05:6870:c1cf:b0:206:c934:49db with SMTP id
- i15-20020a056870c1cf00b00206c93449dbmr1420587oad.99.1706289824521; Fri, 26
- Jan 2024 09:23:44 -0800 (PST)
-MIME-Version: 1.0
-References: <20240126102409.215142-2-Angelo.Ribeiro@criticaltechworks.com>
-In-Reply-To: <20240126102409.215142-2-Angelo.Ribeiro@criticaltechworks.com>
+        d=1e100.net; s=20230601; t=1706289919; x=1706894719;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Gzz+vdajCSsnUNvuaNuoDNWo/BsPX89HdEThY3CmMe4=;
+        b=ClmY7Sf/k5rO2ev5Se1tCXF+8Xp8pwG2JXsJ32NvYtNR0VxE6gXZ6zGwVNcQx7aCX7
+         gedS0s0XMIcR5ic3UkmmwD/b2YIjpVy14LOpxuBg/4uPmcv27sZJcHeU0WD8ENx0Xwi+
+         VkJv2n+fOGjDr0Ta7yJdPUhjWDMr+7cf3pQUyMAJwAaY66uq05hWZkHFjbpgdyNTqdgb
+         hOlgP63hi9hBAPTSdQIeq464gmfGXwJdhNY2ii12HLzmMAi9POA17dNuw+fiow+ry7af
+         zu33j++H5FmbhRq7+fFbfXOrhHJMTcLhPHpxf6WoLHII7I7SVa2TdsrOcF4toT0mw5G1
+         Zo0w==
+X-Gm-Message-State: AOJu0YxjqefYiSEp95Tgm8EyeLrWqFl3HBPa+aBRTXL1VjEVwG45xWVR
+	RNvgzUHdNl2Np8cqC2uSRISmc8HozSujvpbyRzEOXTwcl7QiIfnKaSziz+HNAN8=
+X-Google-Smtp-Source: AGHT+IGNwTJ7NSMoqXndDPx6eIwIVFpVPhzETWYaC3+VloQRsWnRFlIpu0jSPfFWiAK6+6xd6O8PLQ==
+X-Received: by 2002:aa7:8c16:0:b0:6dd:8349:e333 with SMTP id c22-20020aa78c16000000b006dd8349e333mr136738pfd.40.1706289918959;
+        Fri, 26 Jan 2024 09:25:18 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::edce])
+        by smtp.gmail.com with ESMTPSA id ld10-20020a056a004f8a00b006d99f930607sm1367804pfb.140.2024.01.26.09.25.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 26 Jan 2024 09:25:18 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 26 Jan 2024 09:23:18 -0800
-Message-ID: <CAMKF1srz8JZbAxGotp8cm5HguPqXNJ928yfNKRDXhrbQ6apDRA@mail.gmail.com>
-Subject: Re: [oe] [meta-filesystems][PATCH] e2tools: Add tool recipe
-To: Angelo.Ribeiro@criticaltechworks.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] vulkan-cts: Upgrade to 1.3.7.3
+Date: Fri, 26 Jan 2024 09:25:16 -0800
+Message-ID: <20240126172516.3108163-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 26 Jan 2024 17:23:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108464
+ <openembedded-devel@lists.openembedded.org>; Fri, 26 Jan 2024 17:25:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108465
 
-Thanks for your contribution Angelo
+Adjust for different patches between vulkan-cts and opengl-es-cts
+Use gcc to compile vulkan-cts for now, it does not like libc++ headers
+from clang-18
 
-On Fri, Jan 26, 2024 at 2:24=E2=80=AFAM Angelo Ribeiro via
-lists.openembedded.org
-<Angelo.Ribeiro=3Dcriticaltechworks.com@lists.openembedded.org> wrote:
->
-> e2tools is a simple set of GPL'ed utilities to read, write, and manipulat=
-e
-> files in an ext2/ext3 filesystem.
-> These utilities access a filesystem directly using the ext2fs library.
->
-> Signed-off-by: Angelo.Ribeiro <Angelo.Ribeiro@criticaltechworks.com>
-> ---
->  .../recipes-utils/e2tools/e2tools_git.bb      | 25 +++++++++++++++++++
->  1 file changed, 25 insertions(+)
->  create mode 100644 meta-filesystems/recipes-utils/e2tools/e2tools_git.bb
->
-> diff --git a/meta-filesystems/recipes-utils/e2tools/e2tools_git.bb b/meta=
--filesystems/recipes-utils/e2tools/e2tools_git.bb
-> new file mode 100644
-> index 000000000..d8492bf8d
-> --- /dev/null
-> +++ b/meta-filesystems/recipes-utils/e2tools/e2tools_git.bb
-> @@ -0,0 +1,25 @@
-> +SUMMARY =3D "Set of GPL'ed utilities to ext2/ext3 filesystem."
-> +DESCRIPTION =3D "e2tools is a simple set of GPL'ed utilities to read, wr=
-ite, \
-> +and manipulate files in an ext2/ext3 filesystem. These utilities access =
-a \
-> +filesystem directly using the ext2fs library. Can also be used on a Linu=
-x \
-> +machine to read/write to disk images or floppies without having to mount=
- \
-> +them or have root access."
-> +HOMEPAGE =3D "https://github.com/e2tools/e2tools"
-> +SECTION =3D "base"
-> +LICENSE =3D "GPL-2.0-only"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4=
-263"
-> +
-> +DEPENDS +=3D "e2fsprogs"
-> +
-> +PV =3D "0.1.0+gitr${SRCPV}"
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...LAND_SCANNER-and-WAYLAND_PROTOCOLS_D.patch | 20 ++----
+ .../files/0001-include-missing-cstdint.patch  | 61 -------------------
+ .../vk-gl-cts/khronos-cts.inc                 |  3 +-
+ ...0001-use-library-sonames-for-linking.patch |  0
+ .../vk-gl-cts/opengl-es-cts_3.2.9.3.bb        |  4 ++
+ ...0001-use-library-sonames-for-linking.patch |  4 +-
+ ...n-cts_1.3.3.1.bb => vulkan-cts_1.3.7.3.bb} | 24 +++++---
+ 7 files changed, 27 insertions(+), 89 deletions(-)
+ delete mode 100644 meta-oe/recipes-graphics/vk-gl-cts/files/0001-include-missing-cstdint.patch
+ copy meta-oe/recipes-graphics/vk-gl-cts/{files => opengl-es-cts}/0001-use-library-sonames-for-linking.patch (100%)
+ rename meta-oe/recipes-graphics/vk-gl-cts/{files => vulkan-cts}/0001-use-library-sonames-for-linking.patch (96%)
+ rename meta-oe/recipes-graphics/vk-gl-cts/{vulkan-cts_1.3.3.1.bb => vulkan-cts_1.3.7.3.bb} (53%)
 
-I think SRCPV can be dropped here these days. PV =3D "0.1.0+git" would suff=
-ice.
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/files/0001-cmake-Define-WAYLAND_SCANNER-and-WAYLAND_PROTOCOLS_D.patch b/meta-oe/recipes-graphics/vk-gl-cts/files/0001-cmake-Define-WAYLAND_SCANNER-and-WAYLAND_PROTOCOLS_D.patch
+index d7000b7da1..f659e36066 100644
+--- a/meta-oe/recipes-graphics/vk-gl-cts/files/0001-cmake-Define-WAYLAND_SCANNER-and-WAYLAND_PROTOCOLS_D.patch
++++ b/meta-oe/recipes-graphics/vk-gl-cts/files/0001-cmake-Define-WAYLAND_SCANNER-and-WAYLAND_PROTOCOLS_D.patch
+@@ -13,25 +13,17 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  framework/platform/CMakeLists.txt | 8 ++++++--
+  1 file changed, 6 insertions(+), 2 deletions(-)
+ 
+-diff --git a/framework/platform/CMakeLists.txt b/framework/platform/CMakeLists.txt
+-index c3ac463e4..030163f6c 100644
+ --- a/framework/platform/CMakeLists.txt
+ +++ b/framework/platform/CMakeLists.txt
+-@@ -73,8 +73,12 @@ if (NOT DEFINED TCUTIL_PLATFORM_SRCS)
++@@ -73,8 +73,9 @@ if (NOT DEFINED TCUTIL_PLATFORM_SRCS)
+  			add_definitions(-DDEQP_SUPPORT_WAYLAND=1)
+  			include_directories(lnx/wayland)
+  
+ -			pkg_get_variable(WAYLAND_PROTOCOLS_DIR wayland-protocols pkgdatadir)
+--			pkg_get_variable(WAYLAND_SCANNER wayland-scanner wayland_scanner)
+-+			if (NOT DEFINED WAYLAND_PROTOCOLS_DIR)
++-
+++			if (NOT WAYLAND_PROTOCOLS_DIR)
+ +				pkg_get_variable(WAYLAND_PROTOCOLS_DIR wayland-protocols pkgdatadir)
+ +			endif()
+-+			if (NOT DEFINED WAYLAND_SCANNER)
+-+				pkg_get_variable(WAYLAND_SCANNER wayland-scanner wayland_scanner)
+-+			endif()
+- 
+- 			set(DEQP_XDG_SHELL_PROTOCOL ${WAYLAND_PROTOCOLS_DIR}/stable/xdg-shell/xdg-shell.xml)
+- 			set(DEQP_XDG_SHELL_GEN_OUTPUTS_DIR ${PROJECT_BINARY_DIR}/framework/platform)
+--- 
+-2.37.3
+-
++ 			if (NOT WAYLAND_SCANNER)
++ 				pkg_get_variable(WAYLAND_SCANNER wayland-scanner wayland_scanner)
++ 			endif()
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/files/0001-include-missing-cstdint.patch b/meta-oe/recipes-graphics/vk-gl-cts/files/0001-include-missing-cstdint.patch
+deleted file mode 100644
+index 47d9fc748a..0000000000
+--- a/meta-oe/recipes-graphics/vk-gl-cts/files/0001-include-missing-cstdint.patch
++++ /dev/null
+@@ -1,61 +0,0 @@
+-From 74cf53d89529902ecdef5b230421bc4d30fd089b Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Wed, 25 Jan 2023 15:36:14 -0800
+-Subject: [PATCH] include missing <cstdint>
+-
+-gcc-13 exposed errors like below due to it removing indirect includes of
+-these headers in libstdc++ [1]
+-
+-../git/external/amber/src/include/amber/shader_info.h:60:15: error: 'uint32_t' was not declared in this scope
+-   60 |   std::vector<uint32_t> shader_data;
+-      |               ^~~~~~~~
+-
+-[1] https://www.gnu.org/software/gcc/gcc-13/porting_to.html
+-
+-Upstream-Status: Submitted [https://github.com/google/amber/pull/1016]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- include/amber/recipe.h                  | 1 +
+- include/amber/shader_info.h             | 1 +
+- src/descriptor_set_and_binding_parser.h | 1 +
+- 3 files changed, 3 insertions(+)
+-
+-diff --git a/include/amber/recipe.h b/include/amber/recipe.h
+-index 310a86a..1b83213 100644
+---- a/include/amber/recipe.h
+-+++ b/include/amber/recipe.h
+-@@ -15,6 +15,7 @@
+- #ifndef AMBER_RECIPE_H_
+- #define AMBER_RECIPE_H_
+- 
+-+#include <cstdint>
+- #include <string>
+- #include <utility>
+- #include <vector>
+-diff --git a/include/amber/shader_info.h b/include/amber/shader_info.h
+-index 6c9126a..b5ce751 100644
+---- a/include/amber/shader_info.h
+-+++ b/include/amber/shader_info.h
+-@@ -15,6 +15,7 @@
+- #ifndef AMBER_SHADER_INFO_H_
+- #define AMBER_SHADER_INFO_H_
+- 
+-+#include <cstdint>
+- #include <string>
+- #include <vector>
+- 
+-diff --git a/src/descriptor_set_and_binding_parser.h b/src/descriptor_set_and_binding_parser.h
+-index 145aa42..4b0d774 100644
+---- a/src/descriptor_set_and_binding_parser.h
+-+++ b/src/descriptor_set_and_binding_parser.h
+-@@ -15,6 +15,7 @@
+- #ifndef SRC_DESCRIPTOR_SET_AND_BINDING_PARSER_H_
+- #define SRC_DESCRIPTOR_SET_AND_BINDING_PARSER_H_
+- 
+-+#include <cstdint>
+- #include <string>
+- 
+- #include "amber/result.h"
+--- 
+-2.39.1
+-
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc b/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
+index 04e4227915..09f1fbcaee 100644
+--- a/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
++++ b/meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
+@@ -11,8 +11,7 @@ SRC_URI = "\
+         git://github.com/KhronosGroup/Vulkan-Docs.git;protocol=https;destsuffix=git/external/vulkan-docs/src;name=vulkan-docs;branch=main \
+         https://raw.githubusercontent.com/baldurk/renderdoc/v1.1/renderdoc/api/app/renderdoc_app.h;subdir=git/external/renderdoc/src;name=renderdoc \
+         git://github.com/Igalia/ESExtractor.git;protocol=https;destsuffix=git/external/ESExtractor/src;name=ESExtractor;branch=main \
+-        git://github.com/nvpro-samples/vk_video_samples.git;protocol=https;destsuffix=git/external/video-parser/src;name=video-parser;branch=main \
+-        file://gen-framework-path.patch \
++        git://github.com/Igalia/vk_video_samples.git;protocol=https;destsuffix=git/external/nvidia-video-samples/src;name=video-parser;nobranch=1 \
+ "
+ 
+ S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/files/0001-use-library-sonames-for-linking.patch b/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts/0001-use-library-sonames-for-linking.patch
+similarity index 100%
+copy from meta-oe/recipes-graphics/vk-gl-cts/files/0001-use-library-sonames-for-linking.patch
+copy to meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts/0001-use-library-sonames-for-linking.patch
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.9.3.bb b/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.9.3.bb
+index 67ce5f2b9d..0656d724b4 100644
+--- a/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.9.3.bb
++++ b/meta-oe/recipes-graphics/vk-gl-cts/opengl-es-cts_3.2.9.3.bb
+@@ -14,6 +14,10 @@ SRCREV_vulkan-docs = "9a2e576a052a1e65a5d41b593e693ff02745604b"
+ SRCREV_video-parser = "7d68747d3524842afaf050c5e00a10f5b8c07904"
+ SRC_URI[renderdoc.sha256sum] = "e7b5f0aa5b1b0eadc63a1c624c0ca7f5af133aa857d6a4271b0ef3d0bdb6868e"
+ 
++SRC_URI += "\
++        git://github.com/nvpro-samples/vk_video_samples.git;protocol=https;destsuffix=git/external/video-parser/src;name=video-parser;branch=main \
++        file://gen-framework-path.patch \
++        "
+ S = "${WORKDIR}/git"
+ 
+ do_install() {
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/files/0001-use-library-sonames-for-linking.patch b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts/0001-use-library-sonames-for-linking.patch
+similarity index 96%
+rename from meta-oe/recipes-graphics/vk-gl-cts/files/0001-use-library-sonames-for-linking.patch
+rename to meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts/0001-use-library-sonames-for-linking.patch
+index b5a1d331ed..f12abd0c1a 100644
+--- a/meta-oe/recipes-graphics/vk-gl-cts/files/0001-use-library-sonames-for-linking.patch
++++ b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts/0001-use-library-sonames-for-linking.patch
+@@ -103,10 +103,10 @@ Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+  #endif
+  
+  #if !defined(DEQP_VULKAN_LIBRARY_PATH)
+-@@ -234,7 +234,7 @@ glu::RenderContext* ContextFactory::crea
++@@ -237,7 +237,7 @@ glu::RenderContext* ContextFactory::crea
+  }
+  
+- EglRenderContext::EglRenderContext(const glu::RenderConfig& config, const tcu::CommandLine& cmdLine)
++ EglRenderContext::EglRenderContext(const glu::RenderConfig& config, const tcu::CommandLine& cmdLine, const glu::RenderContext *sharedContext)
+ -	: m_egl("libEGL.so")
+ +	: m_egl("libEGL.so.1")
+  	, m_contextType(config.type)
+diff --git a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.3.3.1.bb b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.3.7.3.bb
+similarity index 53%
+rename from meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.3.3.1.bb
+rename to meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.3.7.3.bb
+index f491385b33..1008a5fd42 100644
+--- a/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.3.3.1.bb
++++ b/meta-oe/recipes-graphics/vk-gl-cts/vulkan-cts_1.3.7.3.bb
+@@ -1,24 +1,28 @@
+ DESCRIPTION = "Vulkan CTS"
+ 
+ require khronos-cts.inc
+-# vulkan-cts-1.3.3.1
+-SRCREV_vk-gl-cts = "6024a88390942876147a88dce82bbed73b866c1b"
+-SRCREV_amber = "8b145a6c89dcdb4ec28173339dd176fb7b6f43ed"
+-SRCREV_glslang = "7dda6a6347b0bd550e202942adee475956ef462a"
+-SRCREV_spirv-headers = "b765c355f488837ca4c77980ba69484f3ff277f5"
+-SRCREV_spirv-tools = "b930e734ea198b7aabbbf04ee1562cf6f57962f0"
++
++SRC_URI += "git://github.com/Igalia/vk_video_samples.git;protocol=https;destsuffix=git/external/nvidia-video-samples/src;name=video-parser;nobranch=1"
++
++# vulkan-cts-1.3.7.3
++SRCREV_vk-gl-cts = "d71a36db16d98313c431829432a136dbda692a08"
++SRCREV_amber = "933ecb4d6288675a92eb1650e0f52b1d7afe8273"
++SRCREV_glslang = "c5117b328afc86e16edff6ed6afe0fe7872a7cf3"
++SRCREV_spirv-headers = "b8b9eb8640c8c0107ba580fbcb10f969022ca32c"
++SRCREV_spirv-tools = "bfc94f63a7adbcf8ae166f5f108ac9f69079efc0"
+ SRCREV_jsoncpp = "9059f5cad030ba11d37818847443a53918c327b1"
+-SRCREV_vulkan-docs = "9b5562187a8ad72c171410b036ceedbc450153ba"
++SRCREV_vulkan-docs = "b9aad705f0d9e5e6734ac2ad671d5d1de57b05e0"
+ SRC_URI[renderdoc.sha256sum] = "e7b5f0aa5b1b0eadc63a1c624c0ca7f5af133aa857d6a4271b0ef3d0bdb6868e"
+ # Not yet needed
+-SRCREV_ESExtractor = "ce5d7ebcf0ebb0d78385ee4cc34653eb6764bfc4"
+-SRCREV_video-parser = "7d68747d3524842afaf050c5e00a10f5b8c07904"
++SRCREV_ESExtractor = "75ffcaf55bb069f7a23764194742d2fb78c7f71f"
++SRCREV_video-parser = "138bbe048221d315962ddf8413aa6a08cc62a381"
+ 
+ SRC_URI += "file://0001-cmake-Define-WAYLAND_SCANNER-and-WAYLAND_PROTOCOLS_D.patch \
+             file://0001-vulkan-cts-include-missing-cstdint.patch \
+-            file://0001-include-missing-cstdint.patch;patchdir=external/amber/src \
+ "
+ 
++TOOLCHAIN = "gcc"
++
+ S = "${WORKDIR}/git"
+ 
+ REQUIRED_DISTRO_FEATURES = "vulkan"
+-- 
+2.43.0
 
-> +
-> +SRC_URI =3D " \
-> +           git://github.com/e2tools/e2tools;protocol=3Dhttps;branch=3Dma=
-ster \
-> +"
-> +SRCREV =3D "fd092754a6b65c3a769f74f888668c066f09c36d"
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +inherit autotools pkgconfig
-> +
-> +BBCLASSEXTEND =3D "native"
-> --
-> 2.34.1
->
-> The information in this communication may contain confidential or legally=
- privileged information. It is intended solely for the use of the individua=
-l or entity it addresses and others authorized to receive it. If you are no=
-t an intended recipient, you are hereby notified that any disclosure, copyi=
-ng, distribution or action in reliance on the contents of this information =
-is strictly prohibited and may be unlawful. If you have received this commu=
-nication by error, please notify us immediately by responding to this e-mai=
-l and then delete it from your system. Critical TechWorks is not liable for=
- the proper and complete transmission of the information in this communicat=
-ion nor for any delay in its receipt
->
-> This e-mail is environmentally friendly, just like Critical TechWorks, wh=
-ich lives in a paper-free atmosphere. Therefore, please consider the enviro=
-nment before printing it!
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#108460): https://lists.openembedded.org/g/openembedde=
-d-devel/message/108460
-> Mute This Topic: https://lists.openembedded.org/mt/103973659/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
 
