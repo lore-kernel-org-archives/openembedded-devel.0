@@ -1,173 +1,100 @@
-Return-Path: <vanusuri@mvista.com>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 55BB0C46CD2
-	for <webhook@archiver.kernel.org>; Tue, 30 Jan 2024 05:18:14 +0000 (UTC)
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
- by mx.groups.io with SMTP id smtpd.web10.12132.1706591885571845485
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A73A7C46CD2
+	for <webhook@archiver.kernel.org>; Tue, 30 Jan 2024 06:21:44 +0000 (UTC)
+Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com [209.85.167.52])
+ by mx.groups.io with SMTP id smtpd.web10.12830.1706595698170825840
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Jan 2024 21:18:05 -0800
+ Mon, 29 Jan 2024 22:21:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=HfxmXtJD;
- spf=pass (domain: mvista.com, ip: 209.85.214.171, mailfrom: vanusuri@mvista.com)
-Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-1d70b0e521eso25240285ad.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Jan 2024 21:18:05 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ii0qrXQ6;
+ spf=pass (domain: gmail.com, ip: 209.85.167.52, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-lf1-f52.google.com with SMTP id 2adb3069b0e04-5111f40b8beso58164e87.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Jan 2024 22:21:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1706591884; x=1707196684; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1706595696; x=1707200496; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=VkVossqiaveparkFnkXnhd9PoxcPbwz7FZNgUGdL/3M=;
-        b=HfxmXtJDyuab4ARJel8xDEb74NDEKzb2NyVLxuxvYFoarPCxx2hQQtMxX8zaUhTkh4
-         uDao1G8oLGmcpxzrWha5gN8C/lHexFkkxXLasBbHHqLkiIQnlvfCTyI54wwOmK9mmg6W
-         o/GpA7uPbUg/RPGrmzKme5t7otBOOHE6qlVNw=
+        bh=xWRvpIVNz/u+/941u+y4niScVvGXSMVSeWt3838qmUg=;
+        b=ii0qrXQ65VhKP7e9heexR2yCytAA0LkmmgKZo2dmV9FNeRGQwzzYTiwNQf6rq3J9/F
+         eQfHR+DuyBDZO0TXyyf6wrOoucrReY7JkNDNK+yRs49rxXHlDr4WuaB4fqlHd5AL86qR
+         G7aawDaKGGSZPB0xgk7s27hjlNYemsPomJfWOLh8P4mf5XANJUQTuALI8rXDQ+gmUYiY
+         9/KC46XAW0JIIYrdREM02yQjhrHzmysqDNxXMKP62Bep0NqL7x4nXNpCzdHIbu8tYbZu
+         lH2UY4I5cP3BiLd21yXkV9w/vCFOl15/jH83/SJBSxYQt4FFXU479XsgKlzDgxDspDB9
+         vgNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1706591884; x=1707196684;
+        d=1e100.net; s=20230601; t=1706595696; x=1707200496;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=VkVossqiaveparkFnkXnhd9PoxcPbwz7FZNgUGdL/3M=;
-        b=FnCXzk7lMgVZDnpFYsr/2wiRCptaUF+oGuAeVXKQq74+wg13+0lUjmPU/4fPSY40Ix
-         NzthxGBIZ5tf1CZzDJ4KeyjHdFStJiDL2r6P+iKbcQpVt3jQVXQt+hq4Tcx1tQo0MF1y
-         qGt5bP3BTCxjVADBxvsow9EMIp1kleEseK5J5NYmLOE7OrioDitFHj1o5z7sAstluDHR
-         rFT3CCthD8vYFsQxnc0jKkgwp+69NkVJIuyaThM/eJJdPe53e2LVkSpeBjDLPRarBOBR
-         xaB3vtoPbKZ/GxLk/gQX4yUORTdxMJJ+rkdJfXraX1kXhlX/AF/cCnUVSda1JpxOYo+a
-         lDsw==
-X-Gm-Message-State: AOJu0Yzp8zUHEyUakyO/EXSt9bcr8nHFtvK/at1CAd81/d5TVlUinFpA
-	tR/H9lWpkIZfbkJj3NJ/IGgXq0+H0URkyKpGIp4NXPoLcB1tNrtWzPIBDInZnLk48DGI6pY6r95
-	q
-X-Google-Smtp-Source: AGHT+IGg3gcik5KQXgwqQPFt79PNNa/FtXsqMht7WtZDMhPPZdVFQrIJScjfQHc2arZu+M+V4QvtDw==
-X-Received: by 2002:a17:902:ced0:b0:1d7:61f9:a5aa with SMTP id d16-20020a170902ced000b001d761f9a5aamr8956821plg.49.1706591884515;
-        Mon, 29 Jan 2024 21:18:04 -0800 (PST)
-Received: from MVIN00020.mvista.com ([136.185.83.90])
-        by smtp.gmail.com with ESMTPSA id i18-20020a170902c95200b001d7439bf914sm6233128pla.235.2024.01.29.21.18.02
+        bh=xWRvpIVNz/u+/941u+y4niScVvGXSMVSeWt3838qmUg=;
+        b=Ws13rHqn85+aaRsE0g1nfnTaXuqQdZ2RHOCiiJiJE02ptXnabXUC+lH3wWaGYJcpca
+         SPN4pfLO8caVLerUzouK62e1nrFTa7YAuNVpicNDmByk41iTV432E4rYGGZbASExHZsN
+         sYrpKavArRTk7tVCBj5CN9jOs/UCAKspipvdOCBslOC4U4ojYSCzaIw7mppimvCbYZSY
+         DMbrqRT4Cc9qqKtwCJ51cpKCHmfsnhVm9b7G50ZuaLm5Ftiyczf9+T50drda+StCBkyE
+         iDbnF+fX47XBEnZB1rfgIgazbbyjIPiC2vDZarUQrslJg6h1yhy9Q6Hk9TLF3vsQq33V
+         VANQ==
+X-Gm-Message-State: AOJu0YzW2/5Gp9rnt/Oa91QWsNLJTxdUsui6P87UyBRIbSpNAuQ2JA4L
+	roonqUrRNErnHdrNNTyMuCRXYsOFYSPvRDqsDTxwz+3AUd0UDsCEHbKSufPYsIA=
+X-Google-Smtp-Source: AGHT+IF4yhYO6kPkSHBtC/HkUkSbQ/kjfhTpDGI/R3TpXCmBBOvbEjE6AAxPY8omUE/dkbJWQMvzzw==
+X-Received: by 2002:a19:2d1c:0:b0:50f:738:a5b1 with SMTP id k28-20020a192d1c000000b0050f0738a5b1mr4674063lfj.61.1706595695680;
+        Mon, 29 Jan 2024 22:21:35 -0800 (PST)
+Received: from localhost.localdomain ([176.33.65.159])
+        by smtp.gmail.com with ESMTPSA id fj17-20020a1709069c9100b00a2b3bb73b83sm4787913ejc.94.2024.01.29.22.21.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 29 Jan 2024 21:18:04 -0800 (PST)
-From: vanusuri@mvista.com
+        Mon, 29 Jan 2024 22:21:35 -0800 (PST)
+From: alperak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Vijay Anusuri <vanusuri@mvista.com>
-Subject: [oe][meta-networking][kirkstone][PATCH] wireshark: Fix for CVE-2023-4511
-Date: Tue, 30 Jan 2024 10:45:51 +0530
-Message-Id: <20240130051551.261893-1-vanusuri@mvista.com>
+Cc: alperak <alperyasinak1@gmail.com>
+Subject: [meta-python][PATCH] python3-eth-rlp: upgrade 1.0.0 -> 1.0.1
+Date: Tue, 30 Jan 2024 09:21:31 +0300
+Message-Id: <20240130062131.58056-1-alperyasinak1@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 30 Jan 2024 05:18:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108489
+ <openembedded-devel@lists.openembedded.org>; Tue, 30 Jan 2024 06:21:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108490
 
-From: Vijay Anusuri <vanusuri@mvista.com>
+Changelog:
 
-Upstream-Status: Backport from https://gitlab.com/wireshark/wireshark/-/commit/ef9c79ae81b00a63aa8638076ec81dc9482972e9
+* Add the missing typing_extensions module
 
-Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
+Signed-off-by: alperak <alperyasinak1@gmail.com>
 ---
- .../wireshark/files/CVE-2023-4511.patch       | 81 +++++++++++++++++++
- .../wireshark/wireshark_3.4.12.bb             |  1 +
- 2 files changed, 82 insertions(+)
- create mode 100644 meta-networking/recipes-support/wireshark/files/CVE-2023-4511.patch
+ ...python3-eth-rlp_1.0.0.bb => python3-eth-rlp_1.0.1.bb} | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-eth-rlp_1.0.0.bb => python3-eth-rlp_1.0.1.bb} (57%)
 
-diff --git a/meta-networking/recipes-support/wireshark/files/CVE-2023-4511.patch b/meta-networking/recipes-support/wireshark/files/CVE-2023-4511.patch
-new file mode 100644
-index 000000000..6a2f20163
---- /dev/null
-+++ b/meta-networking/recipes-support/wireshark/files/CVE-2023-4511.patch
-@@ -0,0 +1,81 @@
-+From ef9c79ae81b00a63aa8638076ec81dc9482972e9 Mon Sep 17 00:00:00 2001
-+From: John Thacker <johnthacker@gmail.com>
-+Date: Thu, 10 Aug 2023 05:29:09 -0400
-+Subject: [PATCH] btsdp: Keep offset advancing
-+
-+hf_data_element_value is a FT_NONE, so we can add the item with
-+the expected length and get_hfi_length() will adjust the length
-+without throwing an exception. There's no need to add it with
-+zero length and call proto_item_set_len. Also, don't increment
-+the offset by 0 instead of the real length when there isn't
-+enough data in the packet, as that can lead to failing to advance
-+the offset.
-+
-+When dissecting a sequence type (sequence or alternative) and
-+recursing into the sequence member, instead of using the main
-+packet tvb directly, create a subset using the indicated length
-+of the sequence. That will properly throw an exception if a
-+contained item is larger than the containing sequence, instead of
-+dissecting the same bytes as several different items (inside
-+the sequence recursively, as well in the outer loop.)
-+
-+Fix #19258
-+
-+Upstream-Status: Backport [https://gitlab.com/wireshark/wireshark/-/commit/ef9c79ae81b00a63aa8638076ec81dc9482972e9]
-+CVE: CVE-2023-4511
-+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
-+---
-+ epan/dissectors/packet-btsdp.c | 15 ++++++++-------
-+ 1 file changed, 8 insertions(+), 7 deletions(-)
-+
-+diff --git a/epan/dissectors/packet-btsdp.c b/epan/dissectors/packet-btsdp.c
-+index 397ece7..eb7f5fa 100644
-+--- a/epan/dissectors/packet-btsdp.c
-++++ b/epan/dissectors/packet-btsdp.c
-+@@ -1925,13 +1925,11 @@ dissect_data_element(proto_tree *tree, proto_tree **next_tree,
-+         offset += len - length;
-+     }
-+ 
-+-    pitem = proto_tree_add_item(ptree, hf_data_element_value, tvb, offset,  0, ENC_NA);
-++    pitem = proto_tree_add_item(ptree, hf_data_element_value, tvb, offset, length, ENC_NA);
-+     if (length > tvb_reported_length_remaining(tvb, offset)) {
-+         expert_add_info(pinfo, pitem, &ei_data_element_value_large);
-+-        length = 0;
-+-    }
-+-    proto_item_set_len(pitem, length);
-+-    if (length == 0)
-++	proto_item_append_text(pitem, ": MISSING");
-++    } else if (length == 0)
-+         proto_item_append_text(pitem, ": MISSING");
-+ 
-+     if (next_tree) *next_tree = proto_item_add_subtree(pitem, ett_btsdp_data_element_value);
-+@@ -3523,6 +3521,8 @@ dissect_sdp_type(proto_tree *tree, packet_info *pinfo, tvbuff_t *tvb,
-+         gint           bytes_to_go = size;
-+         gint           first       = 1;
-+         wmem_strbuf_t *substr;
-++	tvbuff_t      *next_tvb = tvb_new_subset_length(tvb, offset, size);
-++	gint           next_offset = 0;
-+ 
-+         ti = proto_tree_add_item(next_tree, (type == 6) ? hf_data_element_value_sequence : hf_data_element_value_alternative,
-+                 tvb, offset, size, ENC_NA);
-+@@ -3537,14 +3537,15 @@ dissect_sdp_type(proto_tree *tree, packet_info *pinfo, tvbuff_t *tvb,
-+                 first = 0;
-+             }
-+ 
-+-            size = dissect_sdp_type(st, pinfo, tvb, offset, attribute, service_uuid,
-++            size = dissect_sdp_type(st, pinfo, next_tvb, next_offset,
-++		    attribute, service_uuid,
-+                     service_did_vendor_id, service_did_vendor_id_source,
-+                     service_hdp_data_exchange_specification, service_info, &substr);
-+             if (size < 1) {
-+                 break;
-+             }
-+             wmem_strbuf_append_printf(info_buf, "%s ", wmem_strbuf_get_str(substr));
-+-            offset += size ;
-++            next_offset += size;
-+             bytes_to_go -= size;
-+         }
-+ 
-+-- 
-+2.25.1
-+
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb b/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
-index 365ec5e90..6a6d3ac63 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
-@@ -27,6 +27,7 @@ SRC_URI += " \
-     file://CVE-2023-2906.patch \
-     file://CVE-2023-1992.patch \
-     file://CVE-2022-4345.patch \
-+    file://CVE-2023-4511.patch \
- "
+diff --git a/meta-python/recipes-devtools/python/python3-eth-rlp_1.0.0.bb b/meta-python/recipes-devtools/python/python3-eth-rlp_1.0.1.bb
+similarity index 57%
+rename from meta-python/recipes-devtools/python/python3-eth-rlp_1.0.0.bb
+rename to meta-python/recipes-devtools/python/python3-eth-rlp_1.0.1.bb
+index 5cd0d0544..243f75f5b 100644
+--- a/meta-python/recipes-devtools/python/python3-eth-rlp_1.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-eth-rlp_1.0.1.bb
+@@ -4,12 +4,13 @@ SECTION = "devel/python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3d7bdfe69b1ffbde073ca6e96f5c53f7"
  
- UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
+-SRC_URI[sha256sum] = "a988d713a36452e7c6da71186798343f687eaf3aeb7f99266750dd9e1f754c7b"
++SRC_URI[sha256sum] = "d61dbda892ee1220f28fb3663c08f6383c305db9f1f5624dc585c9cd05115027"
+ 
+ inherit pypi setuptools3
+ 
+ RDEPENDS:${PN} = " \
+-    python3-eth-utils \
+-    python3-hexbytes \
+-    python3-rlp \
++    ${PYTHON_PN}-eth-utils \
++    ${PYTHON_PN}-hexbytes \
++    ${PYTHON_PN}-rlp \
++    ${PYTHON_PN}-typing-extensions \
+ "
 -- 
 2.25.1
 
