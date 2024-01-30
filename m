@@ -1,203 +1,174 @@
-Return-Path: <sjolley.yp.pm@gmail.com>
+Return-Path: <vanusuri@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 44E06C47DDF
-	for <webhook@archiver.kernel.org>; Mon, 29 Jan 2024 22:03:12 +0000 (UTC)
-Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
- by mx.groups.io with SMTP id smtpd.web10.3818.1706565790647342055
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 55BB0C46CD2
+	for <webhook@archiver.kernel.org>; Tue, 30 Jan 2024 05:18:14 +0000 (UTC)
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
+ by mx.groups.io with SMTP id smtpd.web10.12132.1706591885571845485
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Jan 2024 14:03:10 -0800
+ Mon, 29 Jan 2024 21:18:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=VW9s6dgW;
- spf=pass (domain: gmail.com, ip: 209.85.208.51, mailfrom: sjolley.yp.pm@gmail.com)
-Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-554fe147ddeso3513643a12.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Jan 2024 14:03:10 -0800 (PST)
+ dkim=pass header.i=@mvista.com header.s=google header.b=HfxmXtJD;
+ spf=pass (domain: mvista.com, ip: 209.85.214.171, mailfrom: vanusuri@mvista.com)
+Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-1d70b0e521eso25240285ad.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Jan 2024 21:18:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1706565789; x=1707170589; darn=lists.openembedded.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=LHXC9BN5O1V+95krCga1HdWD7Lgmbd+g1pMkUiEcvps=;
-        b=VW9s6dgWVvnMYwBncjTfckEK0WmUesSS/T1zkd13iAepufy0zO++PUp8bvwd98oMja
-         YOcmOrRGEiEZpaeR84JjJ4LoGSjhYo1RFpy7qOTEYFp5NnTsNZy6byDDROMKxtFAUO8z
-         mkVPJswCULDnq+2kg2IwZbwTQbspdk6h1MbkfYtE1VOKmQfDpQGP/pP8EwLbn1TDZ+2n
-         dEaBcw/AHGAXUwXyFpB9uK2Iz4aV9QLBNT/zuKv1D+GLTB2CwS4yjf8OZbRRpJ/9HhgR
-         9G3KYbFfoYdqTKZvZIbIe2dPlxeaCNGnihDQ4W3+5Gb9Mrz58yP0RKmz1FGSeK09GeKR
-         ThHg==
+        d=mvista.com; s=google; t=1706591884; x=1707196684; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=VkVossqiaveparkFnkXnhd9PoxcPbwz7FZNgUGdL/3M=;
+        b=HfxmXtJDyuab4ARJel8xDEb74NDEKzb2NyVLxuxvYFoarPCxx2hQQtMxX8zaUhTkh4
+         uDao1G8oLGmcpxzrWha5gN8C/lHexFkkxXLasBbHHqLkiIQnlvfCTyI54wwOmK9mmg6W
+         o/GpA7uPbUg/RPGrmzKme5t7otBOOHE6qlVNw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1706565789; x=1707170589;
-        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=LHXC9BN5O1V+95krCga1HdWD7Lgmbd+g1pMkUiEcvps=;
-        b=cT+cKOheIdEeqFMQi3kQia9kS4s/QSuMrigkmjFaLo/ndfYbzuszlBihj5kiZFBvZC
-         yBBzZ1E8T79iSlEk3u8UakdqbFqFPHyoXExXAW1Cs8E3M63uXyv5BH0GyIdxgN8U1/SU
-         3ZwmVg5iG0hSR5o9YhbeZTQT9S1W4UnmCY49CJrOim7AQ11tmyFOVHZOVC+KtyBACMmP
-         ZrEBy6Pvfo5/F5qLzQ7JBdlBJMr1oVedlVGI6iJEub5lqdepDklWD4c6xbMD7Xp7Th+n
-         EA2H2r18mgRG7HlydkIpUqsWfZecSCJjMmLK4K3TsSMfNXPyMTT7mnOiC9mDNHZ8g0+r
-         Hjgg==
-X-Gm-Message-State: AOJu0YwaY8RepeMN4q4LU7lZzT9dqku2ROpkVVMvn1qH5eKMpZwiHuQE
-	8eBfvPOsiIx4XirrOOGuGfFtZlXHrG7us7zRhboCOksss7hbRIxlDJXFO60dMHJtw7ykMTz38Cs
-	JpS2LBSn5nD9r+Wr/1WWSKvplvMC4vwa8tC0=
-X-Google-Smtp-Source: AGHT+IFUAyvJm7vlSzdQ1QquhRaTSq1320zSfrNgw1cYLt4z3zUwTDPsMNe9VRWrWL6WX0tSKEf4nRLk8EW/fVjcL3o=
-X-Received: by 2002:a17:906:d7b2:b0:a31:6811:bf99 with SMTP id
- pk18-20020a170906d7b200b00a316811bf99mr5410479ejb.56.1706565788440; Mon, 29
- Jan 2024 14:03:08 -0800 (PST)
+        d=1e100.net; s=20230601; t=1706591884; x=1707196684;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=VkVossqiaveparkFnkXnhd9PoxcPbwz7FZNgUGdL/3M=;
+        b=FnCXzk7lMgVZDnpFYsr/2wiRCptaUF+oGuAeVXKQq74+wg13+0lUjmPU/4fPSY40Ix
+         NzthxGBIZ5tf1CZzDJ4KeyjHdFStJiDL2r6P+iKbcQpVt3jQVXQt+hq4Tcx1tQo0MF1y
+         qGt5bP3BTCxjVADBxvsow9EMIp1kleEseK5J5NYmLOE7OrioDitFHj1o5z7sAstluDHR
+         rFT3CCthD8vYFsQxnc0jKkgwp+69NkVJIuyaThM/eJJdPe53e2LVkSpeBjDLPRarBOBR
+         xaB3vtoPbKZ/GxLk/gQX4yUORTdxMJJ+rkdJfXraX1kXhlX/AF/cCnUVSda1JpxOYo+a
+         lDsw==
+X-Gm-Message-State: AOJu0Yzp8zUHEyUakyO/EXSt9bcr8nHFtvK/at1CAd81/d5TVlUinFpA
+	tR/H9lWpkIZfbkJj3NJ/IGgXq0+H0URkyKpGIp4NXPoLcB1tNrtWzPIBDInZnLk48DGI6pY6r95
+	q
+X-Google-Smtp-Source: AGHT+IGg3gcik5KQXgwqQPFt79PNNa/FtXsqMht7WtZDMhPPZdVFQrIJScjfQHc2arZu+M+V4QvtDw==
+X-Received: by 2002:a17:902:ced0:b0:1d7:61f9:a5aa with SMTP id d16-20020a170902ced000b001d761f9a5aamr8956821plg.49.1706591884515;
+        Mon, 29 Jan 2024 21:18:04 -0800 (PST)
+Received: from MVIN00020.mvista.com ([136.185.83.90])
+        by smtp.gmail.com with ESMTPSA id i18-20020a170902c95200b001d7439bf914sm6233128pla.235.2024.01.29.21.18.02
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 29 Jan 2024 21:18:04 -0800 (PST)
+From: vanusuri@mvista.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Vijay Anusuri <vanusuri@mvista.com>
+Subject: [oe][meta-networking][kirkstone][PATCH] wireshark: Fix for CVE-2023-4511
+Date: Tue, 30 Jan 2024 10:45:51 +0530
+Message-Id: <20240130051551.261893-1-vanusuri@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
-Date: Mon, 29 Jan 2024 15:02:57 -0700
-Message-ID: <CAK5yBb_oMi3=mzw1oL3PdiQdxghCEioNES5=46WApebBKX0ZeA@mail.gmail.com>
-Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
-To: openembedded-devel@lists.openembedded.org, 
-	Yocto-mailing-list <yocto@lists.yoctoproject.org>
-Content-Type: multipart/alternative; boundary="0000000000009b1b6206101ccfd7"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 29 Jan 2024 22:03:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108488
+ <openembedded-devel@lists.openembedded.org>; Tue, 30 Jan 2024 05:18:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108489
 
---0000000000009b1b6206101ccfd7
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Vijay Anusuri <vanusuri@mvista.com>
 
-All,
+Upstream-Status: Backport from https://gitlab.com/wireshark/wireshark/-/commit/ef9c79ae81b00a63aa8638076ec81dc9482972e9
 
-The triage team is starting to try and collect up and classify bugs which a
-newcomer to the project would be able to work on in a way which means
-people can find them. They're being listed on the triage page under the
-appropriate heading:
-https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
-review:
-https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
-how to create a bugzilla account at:
-https://bugzilla.yoctoproject.org/createaccount.cgi
+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
+---
+ .../wireshark/files/CVE-2023-4511.patch       | 81 +++++++++++++++++++
+ .../wireshark/wireshark_3.4.12.bb             |  1 +
+ 2 files changed, 82 insertions(+)
+ create mode 100644 meta-networking/recipes-support/wireshark/files/CVE-2023-4511.patch
 
-The idea is these bugs should be straight forward for a person to help work
-on who doesn't have deep experience with the project. If anyone can help,
-please take ownership of the bug and send patches! If anyone needs
-help/advice there are people on irc who can likely do so, or some of the
-more experienced contributors will likely be happy to help too.
+diff --git a/meta-networking/recipes-support/wireshark/files/CVE-2023-4511.patch b/meta-networking/recipes-support/wireshark/files/CVE-2023-4511.patch
+new file mode 100644
+index 000000000..6a2f20163
+--- /dev/null
++++ b/meta-networking/recipes-support/wireshark/files/CVE-2023-4511.patch
+@@ -0,0 +1,81 @@
++From ef9c79ae81b00a63aa8638076ec81dc9482972e9 Mon Sep 17 00:00:00 2001
++From: John Thacker <johnthacker@gmail.com>
++Date: Thu, 10 Aug 2023 05:29:09 -0400
++Subject: [PATCH] btsdp: Keep offset advancing
++
++hf_data_element_value is a FT_NONE, so we can add the item with
++the expected length and get_hfi_length() will adjust the length
++without throwing an exception. There's no need to add it with
++zero length and call proto_item_set_len. Also, don't increment
++the offset by 0 instead of the real length when there isn't
++enough data in the packet, as that can lead to failing to advance
++the offset.
++
++When dissecting a sequence type (sequence or alternative) and
++recursing into the sequence member, instead of using the main
++packet tvb directly, create a subset using the indicated length
++of the sequence. That will properly throw an exception if a
++contained item is larger than the containing sequence, instead of
++dissecting the same bytes as several different items (inside
++the sequence recursively, as well in the outer loop.)
++
++Fix #19258
++
++Upstream-Status: Backport [https://gitlab.com/wireshark/wireshark/-/commit/ef9c79ae81b00a63aa8638076ec81dc9482972e9]
++CVE: CVE-2023-4511
++Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
++---
++ epan/dissectors/packet-btsdp.c | 15 ++++++++-------
++ 1 file changed, 8 insertions(+), 7 deletions(-)
++
++diff --git a/epan/dissectors/packet-btsdp.c b/epan/dissectors/packet-btsdp.c
++index 397ece7..eb7f5fa 100644
++--- a/epan/dissectors/packet-btsdp.c
+++++ b/epan/dissectors/packet-btsdp.c
++@@ -1925,13 +1925,11 @@ dissect_data_element(proto_tree *tree, proto_tree **next_tree,
++         offset += len - length;
++     }
++ 
++-    pitem = proto_tree_add_item(ptree, hf_data_element_value, tvb, offset,  0, ENC_NA);
+++    pitem = proto_tree_add_item(ptree, hf_data_element_value, tvb, offset, length, ENC_NA);
++     if (length > tvb_reported_length_remaining(tvb, offset)) {
++         expert_add_info(pinfo, pitem, &ei_data_element_value_large);
++-        length = 0;
++-    }
++-    proto_item_set_len(pitem, length);
++-    if (length == 0)
+++	proto_item_append_text(pitem, ": MISSING");
+++    } else if (length == 0)
++         proto_item_append_text(pitem, ": MISSING");
++ 
++     if (next_tree) *next_tree = proto_item_add_subtree(pitem, ett_btsdp_data_element_value);
++@@ -3523,6 +3521,8 @@ dissect_sdp_type(proto_tree *tree, packet_info *pinfo, tvbuff_t *tvb,
++         gint           bytes_to_go = size;
++         gint           first       = 1;
++         wmem_strbuf_t *substr;
+++	tvbuff_t      *next_tvb = tvb_new_subset_length(tvb, offset, size);
+++	gint           next_offset = 0;
++ 
++         ti = proto_tree_add_item(next_tree, (type == 6) ? hf_data_element_value_sequence : hf_data_element_value_alternative,
++                 tvb, offset, size, ENC_NA);
++@@ -3537,14 +3537,15 @@ dissect_sdp_type(proto_tree *tree, packet_info *pinfo, tvbuff_t *tvb,
++                 first = 0;
++             }
++ 
++-            size = dissect_sdp_type(st, pinfo, tvb, offset, attribute, service_uuid,
+++            size = dissect_sdp_type(st, pinfo, next_tvb, next_offset,
+++		    attribute, service_uuid,
++                     service_did_vendor_id, service_did_vendor_id_source,
++                     service_hdp_data_exchange_specification, service_info, &substr);
++             if (size < 1) {
++                 break;
++             }
++             wmem_strbuf_append_printf(info_buf, "%s ", wmem_strbuf_get_str(substr));
++-            offset += size ;
+++            next_offset += size;
++             bytes_to_go -= size;
++         }
++ 
++-- 
++2.25.1
++
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb b/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
+index 365ec5e90..6a6d3ac63 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
+@@ -27,6 +27,7 @@ SRC_URI += " \
+     file://CVE-2023-2906.patch \
+     file://CVE-2023-1992.patch \
+     file://CVE-2022-4345.patch \
++    file://CVE-2023-4511.patch \
+ "
+ 
+ UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
+-- 
+2.25.1
 
-Also, the triage team meets weekly and does its best to handle the bugs
-reported into the Bugzilla. The number of people attending that meeting has
-fallen, as have the number of people available to help fix bugs. One of the
-things we hear users report is they don't know how to help. We (the triage
-team) are therefore going to start reporting out the currently 418
-unassigned or newcomer bugs.
-
-We're hoping people may be able to spare some time now and again to help
-out with these. Bugs are split into two types, "true bugs" where things
-don't work as they should and "enhancements" which are features we'd want
-to add to the system. There are also roughly four different "priority"
-classes right now, =E2=80=9C5.0=E2=80=9D, =E2=80=9C5.1=E2=80=9D, "5.99" and=
- "Future", the more
-pressing/urgent issues being in "5.0" and then =E2=80=9C5.1=E2=80=9D.
-
-Please review this link and if a bug is something you would be able to help
-with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
-an e-mail with the bug number you would like and I will assign it to you
-(please make sure you have a Bugzilla account). The list is at:
-https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
-r_Bugs
-
-Thanks,
-
-
-
-*Stephen K. Jolley*
-
-*Yocto Project Program Manager*
-
-(    *Cell*:                (208) 244-4460
-
-* *Email*:                 *s
-<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
-*
-
---0000000000009b1b6206101ccfd7
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><span style=3D"font-size:11pt;font-family:Calibri,Arial">A=
-ll,<br><br>The triage team is starting to try and collect up and classify b=
-ugs which a newcomer to the project would be able to work on in a way which=
- means people can find them. They&#39;re being listed on the triage page un=
-der the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/wiki/=
-Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage#New=
-comer_Bugs</a>  Also please review: <a href=3D"https://www.openembedded.org=
-/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.org/w=
-iki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugzilla =
-account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount.cgi"=
->https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The idea is=
- these bugs should be straight forward for a person to help work on who doe=
-sn&#39;t have deep experience with the project.  If anyone can help, please=
- take ownership of the bug and send patches!  If anyone needs help/advice t=
-here are people on irc who can likely do so, or some of the more experience=
-d contributors will likely be happy to help too.<br><br>Also, the triage te=
-am meets weekly and does its best to handle the bugs reported into the Bugz=
-illa. The number of people attending that meeting has fallen, as have the n=
-umber of people available to help fix bugs. One of the things we hear users=
- report is they don&#39;t know how to help. We (the triage team) are theref=
-ore going to start reporting out the currently 418 unassigned or newcomer b=
-ugs.<br><br>We&#39;re hoping people may be able to spare some time now and =
-again to help out with these.  Bugs are split into two types, &quot;true bu=
-gs&quot; where things don&#39;t work as they should and &quot;enhancements&=
-quot; which are features we&#39;d want to add to the system.  There are als=
-o roughly four different &quot;priority&quot; classes right now, =E2=80=9C5=
-.0=E2=80=9D, =E2=80=9C5.1=E2=80=9D, &quot;5.99&quot; and &quot;Future&quot;=
-, the more pressing/urgent issues being in &quot;5.0&quot; and then =E2=80=
-=9C5.1=E2=80=9D.<br><br>Please review this link and if a bug is something y=
-ou would be able to help with either take ownership of the bug, or send me =
-(<a href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>) an=
- e-mail with the bug number you would like and I will assign it to you (ple=
-ase make sure you have a Bugzilla account).  The list is at: <a href=3D"htt=
-ps://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcomer_B=
-ugs">https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Ne=
-wcomer_Bugs</a></span><br><div dir=3D"ltr" class=3D"gmail_signature" data-s=
-martmail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p class=3D"=
-MsoNormal" style=3D"background-image:initial;background-position:initial;ba=
-ckground-repeat:initial"><span style=3D"font-size:12pt;font-family:Arial,sa=
-ns-serif">Thanks,<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
-ily:Arial,sans-serif">=C2=A0<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
-lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
-ont-family:Arial,sans-serif"><span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
-amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
-an></b></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
-&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
-<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
-:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
-s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
--size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
-><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
-/span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
-t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
-=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
-color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
-uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
- lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
-erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
-phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
-.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
-u></p></div></div></div></div>
-
---0000000000009b1b6206101ccfd7--
 
