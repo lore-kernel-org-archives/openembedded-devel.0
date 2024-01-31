@@ -1,264 +1,1457 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <asharma@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 58269C47258
-	for <webhook@archiver.kernel.org>; Wed, 31 Jan 2024 14:26:58 +0000 (UTC)
-Received: from mail-lf1-f41.google.com (mail-lf1-f41.google.com [209.85.167.41])
- by mx.groups.io with SMTP id smtpd.web11.15156.1706711214418113846
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A224C47258
+	for <webhook@archiver.kernel.org>; Wed, 31 Jan 2024 16:26:19 +0000 (UTC)
+Received: from mail-oo1-f41.google.com (mail-oo1-f41.google.com [209.85.161.41])
+ by mx.groups.io with SMTP id smtpd.web10.18219.1706718374147643191
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 31 Jan 2024 06:26:55 -0800
+ Wed, 31 Jan 2024 08:26:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=HybarOlb;
- spf=pass (domain: smile.fr, ip: 209.85.167.41, mailfrom: yoann.congal@smile.fr)
-Received: by mail-lf1-f41.google.com with SMTP id 2adb3069b0e04-50eabbc3dccso6542647e87.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 31 Jan 2024 06:26:54 -0800 (PST)
+ dkim=pass header.i=@mvista.com header.s=google header.b=JbgaXK5l;
+ spf=pass (domain: mvista.com, ip: 209.85.161.41, mailfrom: asharma@mvista.com)
+Received: by mail-oo1-f41.google.com with SMTP id 006d021491bc7-59a8ecbadf7so391352eaf.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 31 Jan 2024 08:26:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1706711212; x=1707316012; darn=lists.openembedded.org;
+        d=mvista.com; s=google; t=1706718373; x=1707323173; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=O6T1LHA7ZgWhYat7ryB5EjaEl3V4tx8PVxQv5HekiE4=;
-        b=HybarOlbMxMGnBmlH4+9CAtkOC4uMhppGPZMe+r/Lt4P94V/fY3LAmkeHOxptr4Scc
-         McWdBs1VpuTq2u9kfyLNvETlSRxXvZypZfvNVV5/4Ag9yZTOTvlZrmrTOuX6mHSGAbyg
-         +C63SfC4EEP7Hl947DUH+Q/ve0A3qq8qEzZKqTm0anpEsuL4mRd5ML/nVXRL2bJDICRP
-         1UF74pW+X0C0LuAKzpKXSTRYJIFYl+GM9Z4kDBxN43k3BpJdQjP7w4SJ4sTpuwvba7TB
-         oKwImqh3LfjKUpjUE5EnxQXfgs+6EHhOtUb3fX4rfko+hX4+PE11wX292R74kc+Ojhbx
-         OA5Q==
+        bh=XA/ZscnvBihXzXC7QPeZNSBR+PGXsIvlJ/gY4mTKPEw=;
+        b=JbgaXK5lj0kIodGZZEYxEuV88sos7w+cgwxTBdrhkT/ooj331xR4yASh3rK9vHg5l2
+         KINzhFI/NXhziuifXleJ2/KkbkIxWARkmuwckWfiqmxm7I4QqTw7T6JgMu0Y0LiozsHI
+         KMPDqRC5mOiIrj+lT3l1IPM+CWQjY8r8WjOHc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1706711212; x=1707316012;
+        d=1e100.net; s=20230601; t=1706718373; x=1707323173;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=O6T1LHA7ZgWhYat7ryB5EjaEl3V4tx8PVxQv5HekiE4=;
-        b=nKwhQ8DSKOSbEQlXsQxA0yhXrGMkIZLiToiv+qMw5vilKeVcm35StTSYg1+yqZiRIh
-         Lv6Rn1rf3VHwK4K/QL8m1cOoeo6TDNmonEKeGFcySnJKoU/2AtXpPbqiO09E4bRpj0Sb
-         KLoy1V9u/UryIQZ3GPmCOWdIpi9R+Tb7cuntOOE1M98+n72qzT0rn/yU2ajSASJe9SRG
-         WYNmcrk5m8dWPSa1vwfDEJYO+Zy+B6sn+6hE6/qlduvzmMN7xBvhTl+9I7IoTMPu3cjg
-         BDpsPUgsGR5qGoGeIyQ2diXqAtoM+WZuBflGFwLz2Hir1oARsRQO95YeU67PuKCt7EwO
-         GSPw==
-X-Gm-Message-State: AOJu0YwUHRRf236ysZ2nysUc2yHJuxS70JvaKlqN+J72ptL/KnjTk4Kn
-	zkVMd/ANNbqZTVygpWrIPW3TWlSADao6tGeY21bxqkzOKEEyCDu6AtL3T17JsFXaTP0DAfhQEuR
-	tOno=
-X-Google-Smtp-Source: AGHT+IErXpKbgaqmkS+G+HUtCGfotnzY2wTLyrc6dpjAvjyb2shzbe1FnUZh4a+L9Yw/tP+HeeePIg==
-X-Received: by 2002:ac2:58ea:0:b0:510:d7e:4cbe with SMTP id v10-20020ac258ea000000b005100d7e4cbemr1450588lfo.63.1706711211794;
-        Wed, 31 Jan 2024 06:26:51 -0800 (PST)
-Received: from P-ASN-ECS-830T8C3.local ([89.159.1.53])
-        by smtp.gmail.com with ESMTPSA id ex8-20020a056000248800b0033af81d6dc8sm5000851wrb.87.2024.01.31.06.26.51
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 31 Jan 2024 06:26:51 -0800 (PST)
-From: Yoann Congal <yoann.congal@smile.fr>
+        bh=XA/ZscnvBihXzXC7QPeZNSBR+PGXsIvlJ/gY4mTKPEw=;
+        b=YZsDn5Rj1LqgMmFNXY8Wp0+O9f4H2gLvhc/yU0xr3q3/4nHSwPKzuzSnr3qYT6m2Jk
+         A6vq2zU8rqmQGtD6/a+P2ysrZ7xzmYIeyPowl1+wyPi+Q4z0omT4fWyfRMebIoh90lOP
+         fmo7kfbsmM8Ig8S/++l5dqO7b3dyh3CI5CvQJw30bNa3ZV+NocMqnBoKMXJWOvELjFOr
+         YifBcgKmZ/5sYxlb36A9iMHGNp0krHe0dvZXNF8ifgsq29WCnVbtLHJgKIWzSyw1Y1Yy
+         sCkfrrOOxLsdNBjmsKzcdOA2cg9p2iwhBpInCe7uFW1AvyZjpgqede1Rs4ORU3eJ9z11
+         21Ew==
+X-Gm-Message-State: AOJu0YzgWuItvA00qevYnxlVTVvFvLjFhZDckkkVlNP8Nkl3Y3f+vxax
+	ID/EEj7ad6YUV0Svtu7Iena10JHAMIAi3MyIMO5y++DIxOtgGEvQ3u9EF+w0GfiC36S4NEnYu51
+	z
+X-Google-Smtp-Source: AGHT+IHtaJwZyo/yK//X2ittVQax39eekEUoV6kGb7UuwfROSLJN1gDj/hdmqfESw+s7TWJ6GtGi5Q==
+X-Received: by 2002:a05:6358:27a6:b0:176:7f77:a2b2 with SMTP id l38-20020a05635827a600b001767f77a2b2mr2504679rwb.5.1706718371385;
+        Wed, 31 Jan 2024 08:26:11 -0800 (PST)
+Received: from asharma-Latitude-3400 ([223.190.87.75])
+        by smtp.gmail.com with ESMTPSA id i129-20020a636d87000000b005cee9115cb3sm10927469pgc.0.2024.01.31.08.26.08
+        (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+        Wed, 31 Jan 2024 08:26:11 -0800 (PST)
+Received: by asharma-Latitude-3400 (sSMTP sendmail emulation); Wed, 31 Jan 2024 21:53:55 +0530
+From: Ashish Sharma <asharma@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Yoann Congal <yoann.congal@smile.fr>
-Subject: [meta-gnome][PATCH] ibus: backport a reproducibility fix
-Date: Wed, 31 Jan 2024 15:26:24 +0100
-Message-Id: <20240131142624.1239856-1-yoann.congal@smile.fr>
-X-Mailer: git-send-email 2.39.2
+Cc: Ashish Sharma <asharma@mvista.com>
+Subject: [oe][meta-networking][kirkstone][PATCH] postfix: Backport fix for CVE-2023-51764
+Date: Wed, 31 Jan 2024 21:53:42 +0530
+Message-Id: <20240131162342.25467-1-asharma@mvista.com>
+X-Mailer: git-send-email 2.35.7
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 31 Jan 2024 14:26:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108507
+ <openembedded-devel@lists.openembedded.org>; Wed, 31 Jan 2024 16:26:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108508
 
-This backport fix the ibus-doc reproducibility issue.
-The problem: manpages are compressed with gzip with a non-reproducible
-timestamp in the header.
-The backported fix: do not compress the manpages.
+Import patches from ubuntu launchpad  fix CVE-2023-51764
 
-Note: This backported patch is included in version >= 1.5.29 and can be
-dropped after upgrading.
-
-Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+Upstream-Status: Backport from [https://launchpad.net/ubuntu/+source/postfix/3.6.4-1ubuntu1.3]
+Signed-off-by: Ashish Sharma <asharma@mvista.com>
 ---
- meta-gnome/recipes-support/ibus/ibus.inc      |   1 +
- ...01-makefile-don-t-gzip-the-man-pages.patch | 164 ++++++++++++++++++
- 2 files changed, 165 insertions(+)
- create mode 100644 meta-gnome/recipes-support/ibus/ibus/0001-makefile-don-t-gzip-the-man-pages.patch
+ .../postfix/files/CVE-2023-51764-1.patch      | 377 +++++++
+ .../postfix/files/CVE-2023-51764-2.patch      | 978 ++++++++++++++++++
+ .../recipes-daemons/postfix/postfix_3.6.7.bb  |   2 +
+ 3 files changed, 1357 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/postfix/files/CVE-2023-51764-1.patch
+ create mode 100644 meta-networking/recipes-daemons/postfix/files/CVE-2023-51764-2.patch
 
-diff --git a/meta-gnome/recipes-support/ibus/ibus.inc b/meta-gnome/recipes-support/ibus/ibus.inc
-index 9579404b3..9d0600c79 100644
---- a/meta-gnome/recipes-support/ibus/ibus.inc
-+++ b/meta-gnome/recipes-support/ibus/ibus.inc
-@@ -12,6 +12,7 @@ DEPENDS = "unicode-ucd"
- SRC_URI = " \
-     git://github.com/ibus/ibus.git;branch=main;protocol=https \
-     file://0001-Do-not-try-to-start-dbus-we-do-not-have-dbus-lauch.patch \
-+    file://0001-makefile-don-t-gzip-the-man-pages.patch \
- "
- SRCREV = "6a70ab0338206bd1c7d01a4e1874ea0ee5b3a9d3"
- S = "${WORKDIR}/git"
-diff --git a/meta-gnome/recipes-support/ibus/ibus/0001-makefile-don-t-gzip-the-man-pages.patch b/meta-gnome/recipes-support/ibus/ibus/0001-makefile-don-t-gzip-the-man-pages.patch
+diff --git a/meta-networking/recipes-daemons/postfix/files/CVE-2023-51764-1.patch b/meta-networking/recipes-daemons/postfix/files/CVE-2023-51764-1.patch
 new file mode 100644
-index 000000000..105e34873
+index 00000000000..65436b704e0
 --- /dev/null
-+++ b/meta-gnome/recipes-support/ibus/ibus/0001-makefile-don-t-gzip-the-man-pages.patch
-@@ -0,0 +1,164 @@
-+From 5307c3b310fabeaa52fafe743c5efaca73ccce46 Mon Sep 17 00:00:00 2001
-+From: Emil Velikov <emil.l.velikov@gmail.com>
-+Date: Sun, 11 Jun 2023 16:16:35 +0900
-+Subject: [PATCH] makefile: don't gzip the man pages
-+
-+Drop the gzip step from the manpages - distributions already do that as
-+needed. In addition this resolves the final reproducibility issue with
-+ibus.
-+
-+BUG=https://github.com/ibus/ibus/pull/2514
-+
-+Upstream-Status: Backport [https://github.com/ibus/ibus/commit/1a25975d9f55f18eab609e4d147dd32689e367f3]
-+Note: This commit is included in version >= 1.5.29 and can be dropped
-+after upgrading.
-+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
++++ b/meta-networking/recipes-daemons/postfix/files/CVE-2023-51764-1.patch
+@@ -0,0 +1,377 @@
++From a6596ec37a4892e1d9c2498ecbfc4b8e6be5156a Mon Sep 17 00:00:00 2001
++From: Wietse Venema <wietse@porcupine.org>
++Date: Fri, 22 Dec 2023 00:00:00 -0500
++Subject: [PATCH] postfix-3.6.13
 +---
-+ bus/Makefile.am        | 6 +-----
-+ data/dconf/Makefile.am | 6 +-----
-+ setup/Makefile.am      | 6 +-----
-+ tools/Makefile.am      | 6 +-----
-+ ui/gtk3/Makefile.am    | 6 +-----
-+ 5 files changed, 5 insertions(+), 25 deletions(-)
++Upstream-Status: Backport from [https://launchpad.net/ubuntu/+source/postfix/3.6.4-1ubuntu1.3]
++CVE: CVE-2023-51764
++Signed-off-by: Ashish Sharma <asharma@mvista.com>
 +
-+diff --git a/bus/Makefile.am b/bus/Makefile.am
-+index e173ee25..d0445d02 100644
-+--- a/bus/Makefile.am
-++++ b/bus/Makefile.am
-+@@ -169,7 +169,6 @@ EXTRA_DIST =                \
++ man/man5/postconf.5      |   55 +++++++++++++++++++++++++++++++++++++++++++++++
++ man/man8/smtpd.8         |    9 +++++++
++ mantools/postlink        |    2 +
++ proto/postconf.proto     |   52 ++++++++++++++++++++++++++++++++++++++++++++
++ src/global/mail_params.h |   11 ++++++++-
++ src/global/smtp_stream.c |   14 +++++++++++
++ src/global/smtp_stream.h |    2 +
++ src/smtpd/smtpd.c        |   42 +++++++++++++++++++++++++++++++++++
++ 8 files changed, 185 insertions(+), 2 deletions(-)
++
++--- a/man/man5/postconf.5
+++++ b/man/man5/postconf.5
++@@ -10412,6 +10412,61 @@
++ parameter $name expansion.
++ .PP
++ This feature is available in Postfix 2.0 and later.
+++.SH smtpd_forbid_bare_newline (default: Postfix < 3.9: no)
+++Reply with "Error: bare <LF> received" and disconnect
+++when a remote SMTP client sends a line ending in <LF>, violating
+++the RFC 5321 requirement that lines must end in <CR><LF>.
+++This feature is disbled by default with Postfix < 3.9. Use
+++smtpd_forbid_bare_newline_exclusions to exclude non\-standard clients
+++such as netcat. Specify "smtpd_forbid_bare_newline = no" to disable
+++(not recommended for an Internet\-connected MTA).
+++.PP
+++See
+++https://www.postfix.org/smtp\-smuggling.html for details.
+++.PP
+++Example:
+++.sp
+++.in +4
+++.nf
+++.na
+++.ft C
+++# Disconnect remote SMTP clients that send bare newlines, but allow
+++# local clients with non\-standard SMTP implementations such as netcat,
+++# fax machines, or load balancer health checks.
+++#
+++smtpd_forbid_bare_newline = yes
+++smtpd_forbid_bare_newline_exclusions = $mynetworks
+++.fi
+++.ad
+++.ft R
+++.in -4
+++.PP
+++This feature is available in Postfix >= 3.9, 3.8.4, 3.7.9,
+++3.6.13, and 3.5.23.
+++.SH smtpd_forbid_bare_newline_exclusions (default: $mynetworks)
+++Exclude the specified clients from smtpd_forbid_bare_newline
+++enforcement. It uses the same syntax and parent\-domain matching
+++behavior as mynetworks.
+++.PP
+++Example:
+++.sp
+++.in +4
+++.nf
+++.na
+++.ft C
+++# Disconnect remote SMTP clients that send bare newlines, but allow
+++# local clients with non\-standard SMTP implementations such as netcat,
+++# fax machines, or load balancer health checks.
+++#
+++smtpd_forbid_bare_newline = yes
+++smtpd_forbid_bare_newline_exclusions = $mynetworks
+++.fi
+++.ad
+++.ft R
+++.in -4
+++.PP
+++This feature is available in Postfix >= 3.9, 3.8.4, 3.7.9,
+++3.6.13, and 3.5.23.
++ .SH smtpd_forbidden_commands (default: CONNECT, GET, POST)
++ List of commands that cause the Postfix SMTP server to immediately
++ terminate the session with a 221 code. This can be used to disconnect
++--- a/man/man8/smtpd.8
+++++ b/man/man8/smtpd.8
++@@ -808,6 +808,15 @@
++ The maximal number of AUTH commands that any client is allowed to
++ send to this service per time unit, regardless of whether or not
++ Postfix actually accepts those commands.
+++.PP
+++Available in Postfix 3.9, 3.8.4, 3.7.9, 3.6.13, 3.5.23 and later:
+++.IP "\fBsmtpd_forbid_bare_newline (Postfix < 3.9: no)\fR"
+++Reply with "Error: bare <LF> received" and disconnect
+++when a remote SMTP client sends a line ending in <LF>, violating
+++the RFC 5321 requirement that lines must end in <CR><LF>.
+++.IP "\fBsmtpd_forbid_bare_newline_exclusions ($mynetworks)\fR"
+++Exclude the specified clients from smtpd_forbid_bare_newline
+++enforcement.
++ .SH "TARPIT CONTROLS"
++ .na
++ .nf
++--- a/mantools/postlink
+++++ b/mantools/postlink
++@@ -547,6 +547,8 @@
++     s;\bsmtpd_error_sleep_time\b;<a href="postconf.5.html#smtpd_error_sleep_time">$&</a>;g;
++     s;\bsmtpd_etrn_restrictions\b;<a href="postconf.5.html#smtpd_etrn_restrictions">$&</a>;g;
++     s;\bsmtpd_expansion_filter\b;<a href="postconf.5.html#smtpd_expansion_filter">$&</a>;g;
+++    s;\bsmtpd_for[-</bB>]*\n*[ <bB>]*bid_bare_newline\b;<a href="postconf.5.html#smtpd_forbi    d_bare_newline">$&</a>;g;
+++    s;\bsmtpd_for[-</bB>]*\n*[ <bB>]*bid_bare_newline_exclusions\b;<a href="postconf.5.html#    smtpd_forbid_bare_newline_exclusions">$&</a>;g;
++     s;\bsmtpd_for[-</bB>]*\n*[ <bB>]*bidden_commands\b;<a href="postconf.5.html#smtpd_forbidden_commands">$&</a>;g;
++     s;\bsmtpd_hard_error_limit\b;<a href="postconf.5.html#smtpd_hard_error_limit">$&</a>;g;
++     s;\bsmtpd_helo_required\b;<a href="postconf.5.html#smtpd_helo_required">$&</a>;g;
++--- a/proto/postconf.proto
+++++ b/proto/postconf.proto
++@@ -18058,3 +18058,55 @@
++ name or port number. </p>
 + 
-+ CLEANFILES = \
-+ 	$(man_one_DATA)            \
-+-	$(man_one_files)        \
-+ 	$(NULL)
++ <p> This feature is available in Postfix 3.6 and later. </p>
+++
+++%PARAM smtpd_forbid_bare_newline Postfix &lt; 3.9: no
+++
+++<p> Reply with "Error: bare &lt;LF&gt; received" and disconnect
+++when a remote SMTP client sends a line ending in &lt;LF&gt;, violating
+++the RFC 5321 requirement that lines must end in &lt;CR&gt;&lt;LF&gt;.
+++This feature is disbled by default with Postfix &lt; 3.9. Use
+++smtpd_forbid_bare_newline_exclusions to exclude non-standard clients
+++such as netcat. Specify "smtpd_forbid_bare_newline = no" to disable
+++(not recommended for an Internet-connected MTA). </p>
+++
+++<p> See <a href="https://www.postfix.org/smtp-smuggling.html">
+++https://www.postfix.org/smtp-smuggling.html</a> for details.
+++
+++<p> Example: </p>
+++
+++<blockquote>
+++<pre>
+++# Disconnect remote SMTP clients that send bare newlines, but allow
+++# local clients with non-standard SMTP implementations such as netcat,
+++# fax machines, or load balancer health checks.
+++#
+++smtpd_forbid_bare_newline = yes
+++smtpd_forbid_bare_newline_exclusions = $mynetworks
+++</pre>
+++</blockquote>
+++
+++<p> This feature is available in Postfix &ge; 3.9, 3.8.4, 3.7.9,
+++3.6.13, and 3.5.23. </p>
+++
+++%PARAM smtpd_forbid_bare_newline_exclusions $mynetworks
+++
+++<p> Exclude the specified clients from smtpd_forbid_bare_newline
+++enforcement. It uses the same syntax and parent-domain matching
+++behavior as mynetworks. </p>
+++
+++<p> Example: </p>
+++
+++<blockquote>
+++<pre>
+++# Disconnect remote SMTP clients that send bare newlines, but allow
+++# local clients with non-standard SMTP implementations such as netcat,
+++# fax machines, or load balancer health checks.
+++#
+++smtpd_forbid_bare_newline = yes
+++smtpd_forbid_bare_newline_exclusions = $mynetworks
+++</pre>
+++</blockquote>
+++
+++<p> This feature is available in Postfix &ge; 3.9, 3.8.4, 3.7.9,
+++3.6.13, and 3.5.23. </p>
+++
++--- a/src/global/mail_params.h
+++++ b/src/global/mail_params.h
++@@ -4170,7 +4170,16 @@
++ extern char *var_smtpd_dns_re_filter;
 + 
-+ $(libibus):
-+@@ -181,14 +180,11 @@ test: ibus-daemon
-+ 		$(builddir)/ibus-daemon -v
++  /*
++-  * Share TLS sessions through tlproxy(8).
+++  * Backwards compatibility.
+++  */
+++#define VAR_SMTPD_FORBID_BARE_LF	"smtpd_forbid_bare_newline"
+++#define DEF_SMTPD_FORBID_BARE_LF	0
+++
+++#define VAR_SMTPD_FORBID_BARE_LF_EXCL	"smtpd_forbid_bare_newline_exclusions"
+++#define DEF_SMTPD_FORBID_BARE_LF_EXCL	"$" VAR_MYNETWORKS
+++
+++ /*
+++  * Share TLS sessions through tlsproxy(8).
++   */
++ #define VAR_SMTP_TLS_CONN_REUSE		"smtp_tls_connection_reuse"
++ #define DEF_SMTP_TLS_CONN_REUSE		0
++--- a/src/global/smtp_stream.c
+++++ b/src/global/smtp_stream.c
++@@ -50,6 +50,8 @@
++ /*	VSTREAM *stream;
++ /*	char	*format;
++ /*	va_list	ap;
+++/*
+++/*	int	smtp_forbid_bare_lf;
++ /* AUXILIARY API
++ /*	int	smtp_get_noexcept(vp, stream, maxlen, flags)
++ /*	VSTRING	*vp;
++@@ -124,11 +126,16 @@
++ /*	smtp_vprintf() is the machine underneath smtp_printf().
++ /*
++ /*	smtp_get_noexcept() implements the subset of smtp_get()
++-/*	without timeouts and without making long jumps. Instead,
+++/*	without long jumps for timeout or EOF errors. Instead,
++ /*	query the stream status with vstream_feof() etc.
+++/*	This function will make a VSTREAM long jump (error code
+++/*	SMTP_ERR_LF) when rejecting input with a bare newline byte.
++ /*
++ /*	smtp_timeout_setup() is a backwards-compatibility interface
++ /*	for programs that don't require per-record deadline support.
+++/*
+++/*	smtp_forbid_bare_lf controls whether smtp_get_noexcept()
+++/*	will reject input with a bare newline byte.
++ /* DIAGNOSTICS
++ /* .fi
++ /* .ad
++@@ -201,6 +208,8 @@
 + 
-+ man_one_in_files = ibus-daemon.1.in
-+-man_one_files = $(man_one_in_files:.1.in=.1)
-+-man_one_DATA =$(man_one_files:.1=.1.gz) 
-++man_one_DATA = $(man_one_in_files:.1.in=.1)
-+ man_onedir = $(mandir)/man1
-+ %.1: %.1.in
-+ 	$(AM_V_GEN) sed \
-+ 		-e 's|@VERSION[@]|$(VERSION)|g' $< > $@.tmp && \
-+ 		mv $@.tmp $@
-+-%.1.gz: %.1
-+-	$(AM_V_GEN) gzip -c $< > $@.tmp && mv $@.tmp $@
++ #include "smtp_stream.h"
 + 
-+ -include $(top_srcdir)/git.mk
-+diff --git a/data/dconf/Makefile.am b/data/dconf/Makefile.am
-+index 5360f033..2352f770 100644
-+--- a/data/dconf/Makefile.am
-++++ b/data/dconf/Makefile.am
-+@@ -38,15 +38,12 @@ dconfdb_DATA = 00-upstream-settings
-+ 		{ rc=$$?; $(RM) -rf $@; exit $$rc; }
+++int     smtp_forbid_bare_lf;
+++
++ /* smtp_timeout_reset - reset per-stream error flags, restart deadline timer */
 + 
-+ man_5_in_files = 00-upstream-settings.5.in ibus.5.in
-+-man_5_files = $(man_5_in_files:.5.in=.5)
-+-man_5_DATA =$(man_5_files:.5=.5.gz)
-++man_5_DATA = $(man_5_in_files:.5.in=.5)
-+ man_5dir = $(mandir)/man5
-+ %.5: %.5.in
-+ 	$(AM_V_GEN) sed \
-+ 	    -e 's|@VERSION[@]|$(VERSION)|g' $< > $@.tmp && \
-+ 	    mv $@.tmp $@
-+-%.5.gz: %.5
-+-	$(AM_V_GEN) gzip -c $< > $@.tmp && mv $@.tmp $@
++ static void smtp_timeout_reset(VSTREAM *stream)
++@@ -404,6 +413,9 @@
++ 	 */
++     case '\n':
++ 	vstring_truncate(vp, VSTRING_LEN(vp) - 1);
+++	if (smtp_forbid_bare_lf
+++	    && (VSTRING_LEN(vp) == 0 || vstring_end(vp)[-1] != '\r'))
+++	    vstream_longjmp(stream, SMTP_ERR_LF);
++ 	while (VSTRING_LEN(vp) > 0 && vstring_end(vp)[-1] == '\r')
++ 	    vstring_truncate(vp, VSTRING_LEN(vp) - 1);
++ 	VSTRING_TERMINATE(vp);
++--- a/src/global/smtp_stream.h
+++++ b/src/global/smtp_stream.h
++@@ -32,6 +32,7 @@
++ #define SMTP_ERR_QUIET	3		/* silent cleanup (application) */
++ #define SMTP_ERR_NONE	4		/* non-error case */
++ #define SMTP_ERR_DATA	5		/* application data error */
+++#define SMTP_ERR_LF	6		/* bare <LF> protocol error */
 + 
-+ install-data-hook:
-+ 	if test -z "$(DESTDIR)"; then \
-+@@ -63,7 +60,6 @@ EXTRA_DIST = \
++ extern void smtp_stream_setup(VSTREAM *, int, int);
++ extern void PRINTFLIKE(2, 3) smtp_printf(VSTREAM *, const char *,...);
++@@ -43,6 +44,7 @@
++ extern void smtp_fwrite(const char *, ssize_t len, VSTREAM *);
++ extern void smtp_fread_buf(VSTRING *, ssize_t len, VSTREAM *);
++ extern void smtp_fputc(int, VSTREAM *);
+++extern int smtp_forbid_bare_lf;
 + 
-+ CLEANFILES = \
-+     $(man_5_DATA) \
-+-    $(man_5_files) \
-+     $(NULL)
++ extern void smtp_vprintf(VSTREAM *, const char *, va_list);
 + 
-+ MAINTAINERCLEANFILES = \
-+diff --git a/setup/Makefile.am b/setup/Makefile.am
-+index 34c8f136..b34aa8fc 100644
-+--- a/setup/Makefile.am
-++++ b/setup/Makefile.am
-+@@ -56,20 +56,16 @@ org.freedesktop.IBus.Setup.desktop: ibus-setup.desktop
-+ 	$(AM_V_GEN) $(MSGFMT) --desktop --template $< -d $(top_srcdir)/po -o $@
++--- a/src/smtpd/smtpd.c
+++++ b/src/smtpd/smtpd.c
++@@ -762,6 +762,15 @@
++ /*	The maximal number of AUTH commands that any client is allowed to
++ /*	send to this service per time unit, regardless of whether or not
++ /*	Postfix actually accepts those commands.
+++/* .PP
+++/*	Available in Postfix 3.9, 3.8.4, 3.7.9, 3.6.13, 3.5.23 and later:
+++/* .IP "\fBsmtpd_forbid_bare_newline (Postfix < 3.9: no)\fR"
+++/*	Reply with "Error: bare <LF> received" and disconnect
+++/*	when a remote SMTP client sends a line ending in <LF>, violating
+++/*	the RFC 5321 requirement that lines must end in <CR><LF>.
+++/* .IP "\fBsmtpd_forbid_bare_newline_exclusions ($mynetworks)\fR"
+++/*	Exclude the specified clients from smtpd_forbid_bare_newline
+++/*	enforcement.
++ /* TARPIT CONTROLS
++ /* .ad
++ /* .fi
++@@ -1467,6 +1476,10 @@
++ int     var_smtpd_uproxy_tmout;
++ bool    var_relay_before_rcpt_checks;
 + 
-+ man_one_in_files = ibus-setup.1.in
-+-man_one_files = $(man_one_in_files:.1.in=.1)
-+-man_one_DATA =$(man_one_files:.1=.1.gz) 
-++man_one_DATA = $(man_one_in_files:.1.in=.1)
-+ man_onedir = $(mandir)/man1
-+ %.1: %.1.in
-+ 	$(AM_V_GEN) sed \
-+ 		-e 's|@VERSION[@]|$(VERSION)|g' $< > $@.tmp && \
-+ 		mv $@.tmp $@
-+-%.1.gz: %.1
-+-	$(AM_V_GEN) gzip -c $< > $@.tmp && mv $@.tmp $@
+++bool    var_smtpd_forbid_bare_lf;
+++char   *var_smtpd_forbid_bare_lf_excl;
+++static NAMADR_LIST *bare_lf_excl;
+++
++  /*
++   * Silly little macros.
++   */
++@@ -1541,6 +1554,7 @@
++ #define REASON_TIMEOUT		"timeout"
++ #define REASON_LOST_CONNECTION	"lost connection"
++ #define REASON_ERROR_LIMIT	"too many errors"
+++#define REASON_BARE_LF		"bare <LF> received"
 + 
-+ CLEANFILES = \
-+     $(desktop_DATA) \
-+     $(man_one_DATA) \
-+-    $(man_one_files) \
-+     *.pyc \
-+     ibus-setup \
-+     $(NULL)
-+diff --git a/tools/Makefile.am b/tools/Makefile.am
-+index 5c18d3d6..1c716136 100644
-+--- a/tools/Makefile.am
-++++ b/tools/Makefile.am
-+@@ -79,15 +79,12 @@ bash_completion_DATA= \
-+ bash_completiondir=@datadir@/bash-completion/completions
++ #ifdef USE_TLS
 + 
-+ man_one_in_files = ibus.1.in
-+-man_one_files = $(man_one_in_files:.1.in=.1)
-+-man_one_DATA =$(man_one_files:.1=.1.gz) 
-++man_one_DATA = $(man_one_in_files:.1.in=.1)
-+ man_onedir = $(mandir)/man1
-+ %.1: %.1.in
-+ 	$(AM_V_GEN) sed \
-+ 		-e 's|@VERSION[@]|$(VERSION)|g' $< > $@.tmp && \
-+ 		mv $@.tmp $@
-+-%.1.gz: %.1
-+-	$(AM_V_GEN) gzip -c $< > $@.tmp && mv $@.tmp $@
++@@ -3967,6 +3981,7 @@
++      */
++     done = 0;
++     do {
+++	int     payload_err;
 + 
-+ EXTRA_DIST = \
-+ 	$(man_one_in_files) \
-+@@ -96,7 +93,6 @@ EXTRA_DIST = \
++ 	/*
++ 	 * Do not skip the smtp_fread_buf() call if read_len == 0. We still
++@@ -3980,6 +3995,10 @@
++ 	smtp_fread_buf(state->buffer, read_len, state->client);
++ 	state->bdat_get_stream = vstream_memreopen(
++ 			   state->bdat_get_stream, state->buffer, O_RDONLY);
+++	vstream_control(state->bdat_get_stream, CA_VSTREAM_CTL_EXCEPT,
+++			CA_VSTREAM_CTL_END);
+++	if ((payload_err = vstream_setjmp(state->bdat_get_stream)) != 0)
+++	    vstream_longjmp(state->client, payload_err);
 + 
-+ CLEANFILES = \
-+ 	$(man_one_DATA) \
-+-	$(man_one_files) \
-+ 	$(NULL)
++ 	/*
++ 	 * Read lines from the fragment. The last line may continue in the
++@@ -4655,6 +4674,9 @@
++      */
++     xclient_allowed =
++ 	namadr_list_match(xclient_hosts, state->name, state->addr);
+++    smtp_forbid_bare_lf = SMTPD_STAND_ALONE((state)) == 0
+++	&& var_smtpd_forbid_bare_lf
+++	&& !namadr_list_match(bare_lf_excl, state->name, state->addr);
++     /* NOT: tls_reset() */
++     if (got_helo == 0)
++ 	helo_reset(state);
++@@ -5446,6 +5468,13 @@
++ 			     var_myhostname);
++ 	break;
 + 
-+ if ENABLE_EMOJI_DICT
-+diff --git a/ui/gtk3/Makefile.am b/ui/gtk3/Makefile.am
-+index ab379328..aff035da 100644
-+--- a/ui/gtk3/Makefile.am
-++++ b/ui/gtk3/Makefile.am
-+@@ -242,15 +242,12 @@ panelbinding.o: $(srcdir)/panelbinding.c
+++    case SMTP_ERR_LF:
+++	state->reason = REASON_BARE_LF;
+++	if (vstream_setjmp(state->client) == 0)
+++	    smtpd_chat_reply(state, "521 5.5.2 %s Error: bare <LF> received",
+++			     var_myhostname);
+++	break;
+++
++     case 0:
 + 
-+ MAINTAINERCLEANFILES += extension.c panelbinding.c
++ 	/*
++@@ -5995,6 +6024,13 @@
++ 	namadr_list_match(xforward_hosts, state.name, state.addr);
 + 
-+-man_seven_files = $(man_seven_in_files:.7.in=.7)
-+-man_seven_DATA =$(man_seven_files:.7=.7.gz)
-++man_seven_DATA = $(man_seven_in_files:.7.in=.7)
-+ man_sevendir = $(mandir)/man7
-+ %.7: %.7.in
-+ 	$(AM_V_GEN) sed \
-+ 	    -e 's|@VERSION[@]|$(VERSION)|g' $< > $@.tmp && \
-+ 	    mv $@.tmp $@
-+-%.7.gz: %.7
-+-	$(AM_V_GEN) gzip -c $< > $@.tmp && mv $@.tmp $@
++     /*
+++     * Enforce strict SMTP line endings, with compatibility exclusions.
+++     */
+++    smtp_forbid_bare_lf = SMTPD_STAND_ALONE((&state)) == 0
+++	&& var_smtpd_forbid_bare_lf
+++	&& !namadr_list_match(bare_lf_excl, state.name, state.addr);
+++
+++    /*
++      * See if we need to turn on verbose logging for this client.
++      */
++     debug_peer_check(state.name, state.addr);
++@@ -6055,6 +6091,10 @@
++     hogger_list = namadr_list_init(VAR_SMTPD_HOGGERS, MATCH_FLAG_RETURN
++ 				   | match_parent_style(VAR_SMTPD_HOGGERS),
++ 				   var_smtpd_hoggers);
+++    bare_lf_excl = namadr_list_init(VAR_SMTPD_FORBID_BARE_LF_EXCL,
+++				    MATCH_FLAG_RETURN
+++				    | match_parent_style(VAR_MYNETWORKS),
+++				    var_smtpd_forbid_bare_lf_excl);
 + 
-+ desktop_in_files = \
-+     ibus-ui-emojier.desktop.in \
-+@@ -278,7 +275,6 @@ CLEANFILES += \
-+     $(desktop_DATA) \
-+     $(desktop_notrans_files) \
-+     $(man_seven_DATA) \
-+-    $(man_seven_files) \
-+     $(NULL)
++     /*
++      * Open maps before dropping privileges so we can read passwords etc.
++@@ -6412,6 +6452,7 @@
++ 	VAR_SMTPD_PEERNAME_LOOKUP, DEF_SMTPD_PEERNAME_LOOKUP, &var_smtpd_peername_lookup,
++ 	VAR_SMTPD_DELAY_OPEN, DEF_SMTPD_DELAY_OPEN, &var_smtpd_delay_open,
++ 	VAR_SMTPD_CLIENT_PORT_LOG, DEF_SMTPD_CLIENT_PORT_LOG, &var_smtpd_client_port_log,
+++    VAR_SMTPD_FORBID_BARE_LF, DEF_SMTPD_FORBID_BARE_LF, &var_smtpd_forbid_bare_lf,
++ 	0,
++     };
++     static const CONFIG_NBOOL_TABLE nbool_table[] = {
++@@ -6527,6 +6568,7 @@
++ 	VAR_SMTPD_POLICY_CONTEXT, DEF_SMTPD_POLICY_CONTEXT, &var_smtpd_policy_context, 0, 0,
++ 	VAR_SMTPD_DNS_RE_FILTER, DEF_SMTPD_DNS_RE_FILTER, &var_smtpd_dns_re_filter, 0, 0,
++ 	VAR_SMTPD_REJ_FTR_MAPS, DEF_SMTPD_REJ_FTR_MAPS, &var_smtpd_rej_ftr_maps, 0, 0,
+++	VAR_SMTPD_FORBID_BARE_LF_EXCL, DEF_SMTPD_FORBID_BARE_LF_EXCL, &var_smtpd_forbid_bare_lf_excl, 0, 0,
++ 	0,
++     };
++     static const CONFIG_RAW_TABLE raw_table[] = {
+diff --git a/meta-networking/recipes-daemons/postfix/files/CVE-2023-51764-2.patch b/meta-networking/recipes-daemons/postfix/files/CVE-2023-51764-2.patch
+new file mode 100644
+index 00000000000..e97a0885574
+--- /dev/null
++++ b/meta-networking/recipes-daemons/postfix/files/CVE-2023-51764-2.patch
+@@ -0,0 +1,978 @@
++From cb3b1cbda3dec086a7f4541fe64751d9bb2988bd Mon Sep 17 00:00:00 2001
++From: Wietse Venema <wietse@porcupine.org>
++Date: Sun, 21 Jan 2024 00:00:00 -0500
++Subject: [PATCH] postfix-3.6.14
++
++---
++
++Upstream-Status: Backport from [https://launchpad.net/ubuntu/+source/postfix/3.6.4-1ubuntu1.3]
++CVE: CVE-2023-51764
++Signed-off-by: Ashish Sharma <asharma@mvista.com>
++
++ man/man5/postconf.5           |  173 +++++++++++++++++++++++++++++++++++-------
++ man/man8/cleanup.8            |    8 +
++ man/man8/smtpd.8              |   11 +-
++ mantools/postlink             |    6 -
++ proto/postconf.proto          |  142 +++++++++++++++++++++++++++-------
++ src/cleanup/cleanup.c         |    8 +
++ src/cleanup/cleanup_init.c    |    2 
++ src/cleanup/cleanup_message.c |   17 ++++
++ src/global/cleanup_strerror.c |    1 
++ src/global/cleanup_user.h     |    6 +
++ src/global/mail_params.h      |    9 +-
++ src/global/smtp_stream.c      |   34 +++++---
++ src/global/smtp_stream.h      |    4 
++ src/smtpd/smtpd.c             |  114 ++++++++++++++++++++-------
++ src/smtpd/smtpd_check.c       |   14 ++-
++ src/smtpd/smtpd_check.h       |    1 
++ 16 files changed, 443 insertions(+), 107 deletions(-)
++
++--- a/man/man5/postconf.5
+++++ b/man/man5/postconf.5
++@@ -845,6 +845,32 @@
++ .fi
++ .ad
++ .ft R
+++.SH cleanup_replace_stray_cr_lf (default: yes)
+++Replace each stray <CR> or <LF> character in message
+++content with a space character, to prevent outbound SMTP smuggling,
+++and to make the evaluation of Postfix\-added DKIM or other signatures
+++independent from how a remote mail server handles such characters.
+++.PP
+++SMTP does not allow such characters unless they are part of a
+++<CR><LF> sequence, and different mail systems handle
+++such stray characters in an implementation\-dependent manner. Stray
+++<CR> or <LF> characters could be used for outbound
+++SMTP smuggling, where an attacker uses a Postfix server to send
+++message content with a non\-standard End\-of\-DATA sequence that
+++triggers inbound SMTP smuggling at a remote SMTP server.
+++.PP
+++The replacement happens before all other content management,
+++and before Postfix may add a DKIM etc. signature; if the signature
+++were created first, the replacement could invalidate the signature.
+++.PP
+++In addition to preventing SMTP smuggling, replacing stray
+++<CR> or <LF> characters ensures that the result of
+++signature validation by later mail system will not depend on how
+++that mail system handles those stray characters in an
+++implementation\-dependent manner.
+++.PP
+++This feature is available in Postfix >= 3.9, 3.8.5, 3.7.10,
+++3.6.14, and 3.5.24.
++ .SH cleanup_service_name (default: cleanup)
++ The name of the \fBcleanup\fR(8) service. This service rewrites addresses
++ into the standard form, and performs \fBcanonical\fR(5) address mapping
++@@ -10413,60 +10439,153 @@
++ .PP
++ This feature is available in Postfix 2.0 and later.
++ .SH smtpd_forbid_bare_newline (default: Postfix < 3.9: no)
++-Reply with "Error: bare <LF> received" and disconnect
++-when a remote SMTP client sends a line ending in <LF>, violating
++-the RFC 5321 requirement that lines must end in <CR><LF>.
++-This feature is disbled by default with Postfix < 3.9. Use
++-smtpd_forbid_bare_newline_exclusions to exclude non\-standard clients
++-such as netcat. Specify "smtpd_forbid_bare_newline = no" to disable
++-(not recommended for an Internet\-connected MTA).
++-.PP
++-See
++-https://www.postfix.org/smtp\-smuggling.html for details.
+++Reject or restrict input lines from an SMTP client that end in
+++<LF> instead of the standard <CR><LF>. Such line
+++endings are commonly allowed with UNIX\-based SMTP servers, but they
+++violate RFC 5321, and allowing such line endings can make a server
+++vulnerable to
+++SMTP smuggling.
+++.PP
+++Specify one of the following values (case does not matter):
+++.IP "\fBnormalize\fR"
+++Require the standard
+++End\-of\-DATA sequence <CR><LF>.<CR><LF>.
+++Otherwise, allow command or message content lines ending in the
+++non\-standard <LF>, and process them as if the client sent the
+++standard <CR><LF>.
+++.br
+++.br
+++This maintains compatibility
+++with many legitimate SMTP client applications that send a mix of
+++standard and non\-standard line endings, but will fail to receive
+++email from client implementations that do not terminate DATA content
+++with the standard End\-of\-DATA sequence
+++<CR><LF>.<CR><LF>.
+++.br
+++.br
+++Such clients
+++can be excluded with smtpd_forbid_bare_newline_exclusions.
+++.br
+++.IP "\fByes\fR"
+++Compatibility alias for \fBnormalize\fR.
+++.br
+++.IP "\fBreject\fR"
+++Require the standard End\-of\-DATA
+++sequence <CR><LF>.<CR><LF>. Reject a command
+++or message content when a line contains bare <LF>, log a "bare
+++<LF> received" error, and reply with the SMTP status code in
+++$smtpd_forbid_bare_newline_reject_code.
+++.br
+++.br
+++This will reject
+++email from SMTP clients that send any non\-standard line endings
+++such as web applications, netcat, or load balancer health checks.
+++.br
+++.br
+++This will also reject email from services that use BDAT
+++to send MIME text containing a bare newline (RFC 3030 Section 3
+++requires canonical MIME format for text message types, defined in
+++RFC 2045 Sections 2.7 and 2.8).
+++.br
+++.br
+++Such clients can be
+++excluded with smtpd_forbid_bare_newline_exclusions (or, in the case
+++of BDAT violations, BDAT can be selectively disabled with
+++smtpd_discard_ehlo_keyword_address_maps, or globally disabled with
+++smtpd_discard_ehlo_keywords).
+++.br
+++.IP "\fBno\fR (default)"
+++Do not require the standard
+++End\-of\-DATA
+++sequence <CR><LF>.<CR><LF>. Always process
+++a bare <LF> as if the client sent <CR><LF>. This
+++option is fully backwards compatible, but is not recommended for
+++an Internet\-facing SMTP server, because it is vulnerable to  SMTP smuggling.
+++.br
+++.br
++ .PP
++-Example:
+++Recommended settings:
++ .sp
++ .in +4
++ .nf
++ .na
++ .ft C
++-# Disconnect remote SMTP clients that send bare newlines, but allow
++-# local clients with non\-standard SMTP implementations such as netcat,
++-# fax machines, or load balancer health checks.
+++# Require the standard End\-of\-DATA sequence <CR><LF>.<CR><LF>.
+++# Otherwise, allow bare <LF> and process it as if the client sent
+++# <CR><LF>.
++ #
++-smtpd_forbid_bare_newline = yes
+++# This maintains compatibility with many legitimate SMTP client
+++# applications that send a mix of standard and non\-standard line
+++# endings, but will fail to receive email from client implementations
+++# that do not terminate DATA content with the standard End\-of\-DATA
+++# sequence <CR><LF>.<CR><LF>.
+++#
+++# Such clients can be allowlisted with smtpd_forbid_bare_newline_exclusions.
+++# The example below allowlists SMTP clients in trusted networks.
+++#
+++smtpd_forbid_bare_newline = normalize
++ smtpd_forbid_bare_newline_exclusions = $mynetworks
++ .fi
++ .ad
++ .ft R
++ .in -4
++ .PP
++-This feature is available in Postfix >= 3.9, 3.8.4, 3.7.9,
++-3.6.13, and 3.5.23.
++-.SH smtpd_forbid_bare_newline_exclusions (default: $mynetworks)
++-Exclude the specified clients from smtpd_forbid_bare_newline
++-enforcement. It uses the same syntax and parent\-domain matching
++-behavior as mynetworks.
++-.PP
++-Example:
+++Alternative:
++ .sp
++ .in +4
++ .nf
++ .na
++ .ft C
++-# Disconnect remote SMTP clients that send bare newlines, but allow
++-# local clients with non\-standard SMTP implementations such as netcat,
++-# fax machines, or load balancer health checks.
+++# Reject input lines that contain <LF> and log a "bare <LF> received"
+++# error. Require that input lines end in <CR><LF>, and require the
+++# standard End\-of\-DATA sequence <CR><LF>.<CR><LF>.
+++#
+++# This will reject email from SMTP clients that send any non\-standard
+++# line endings such as web applications, netcat, or load balancer
+++# health checks.
++ #
++-smtpd_forbid_bare_newline = yes
+++# This will also reject email from services that use BDAT to send
+++# MIME text containing a bare newline (RFC 3030 Section 3 requires
+++# canonical MIME format for text message types, defined in RFC 2045
+++# Sections 2.7 and 2.8).
+++#
+++# Such clients can be allowlisted with smtpd_forbid_bare_newline_exclusions.
+++# The example below allowlists SMTP clients in trusted networks.
+++#
+++smtpd_forbid_bare_newline = reject
++ smtpd_forbid_bare_newline_exclusions = $mynetworks
+++#
+++# Alternatively, in the case of BDAT violations, BDAT can be selectively
+++# disabled with smtpd_discard_ehlo_keyword_address_maps, or globally
+++# disabled with smtpd_discard_ehlo_keywords.
+++#
+++# smtpd_discard_ehlo_keyword_address_maps = cidr:/path/to/file
+++# /path/to/file:
+++#     10.0.0.0/24 chunking, silent\-discard
+++# smtpd_discard_ehlo_keywords = chunking, silent\-discard
++ .fi
++ .ad
++ .ft R
++ .in -4
++ .PP
+++This feature with settings \fByes\fR and \fBno\fR is available
+++in Postfix 3.8.4, 3.7.9, 3.6.13, and 3.5.23. Additionally, the
+++settings \fBreject\fR, and \fBnormalize\fR are available with
+++Postfix >= 3.9, 3.8.5, 3.7.10, 3.6.14, and 3.5.24.
+++.SH smtpd_forbid_bare_newline_exclusions (default: $mynetworks)
+++Exclude the specified clients from smtpd_forbid_bare_newline
+++enforcement. This setting uses the same syntax and parent\-domain
+++matching behavior as mynetworks.
+++.PP
++ This feature is available in Postfix >= 3.9, 3.8.4, 3.7.9,
++ 3.6.13, and 3.5.23.
+++.SH smtpd_forbid_bare_newline_reject_code (default: 550)
+++The numerical Postfix SMTP server response code when rejecting a
+++request with "smtpd_forbid_bare_newline = reject".
+++Specify a 5XX status code (521 to disconnect).
+++.PP
+++This feature is available in Postfix >= 3.9, 3.8.5, 3.7.10,
+++3.6.14, and 3.5.24.
++ .SH smtpd_forbidden_commands (default: CONNECT, GET, POST)
++ List of commands that cause the Postfix SMTP server to immediately
++ terminate the session with a 221 code. This can be used to disconnect
++--- a/man/man8/cleanup.8
+++++ b/man/man8/cleanup.8
++@@ -163,6 +163,14 @@
++ .IP "\fBmessage_strip_characters (empty)\fR"
++ The set of characters that Postfix will remove from message
++ content.
+++.PP
+++Available in Postfix version 3.9, 3.8.5, 3.7.10, 3.6.14,
+++3.5.24, and later:
+++.IP "\fBcleanup_replace_stray_cr_lf (yes)\fR"
+++Replace each stray <CR> or <LF> character in message
+++content with a space character, to prevent outbound SMTP smuggling,
+++and to make the evaluation of Postfix\-added DKIM or other signatures
+++independent from how a remote mail server handles such characters.
++ .SH "BEFORE QUEUE MILTER CONTROLS"
++ .na
++ .nf
++--- a/man/man8/smtpd.8
+++++ b/man/man8/smtpd.8
++@@ -811,12 +811,17 @@
++ .PP
++ Available in Postfix 3.9, 3.8.4, 3.7.9, 3.6.13, 3.5.23 and later:
++ .IP "\fBsmtpd_forbid_bare_newline (Postfix < 3.9: no)\fR"
++-Reply with "Error: bare <LF> received" and disconnect
++-when a remote SMTP client sends a line ending in <LF>, violating
++-the RFC 5321 requirement that lines must end in <CR><LF>.
+++Reject or restrict input lines from an SMTP client that end in
+++<LF> instead of the standard <CR><LF>.
++ .IP "\fBsmtpd_forbid_bare_newline_exclusions ($mynetworks)\fR"
++ Exclude the specified clients from smtpd_forbid_bare_newline
++ enforcement.
+++.PP
+++Available in Postfix 3.9, 3.8.5, 3.7.10, 3.6.14, 3.5.24 and
+++later:
+++.IP "\fBsmtpd_forbid_bare_newline_reject_code (550)\fR"
+++The numerical Postfix SMTP server response code when rejecting a
+++request with "smtpd_forbid_bare_newline = reject".
++ .SH "TARPIT CONTROLS"
++ .na
++ .nf
++--- a/mantools/postlink
+++++ b/mantools/postlink
++@@ -547,8 +547,10 @@
++     s;\bsmtpd_error_sleep_time\b;<a href="postconf.5.html#smtpd_error_sleep_time">$&</a>;g;
++     s;\bsmtpd_etrn_restrictions\b;<a href="postconf.5.html#smtpd_etrn_restrictions">$&</a>;g;
++     s;\bsmtpd_expansion_filter\b;<a href="postconf.5.html#smtpd_expansion_filter">$&</a>;g;
++-    s;\bsmtpd_for[-</bB>]*\n*[ <bB>]*bid_bare_newline\b;<a href="postconf.5.html#smtpd_forbi    d_bare_newline">$&</a>;g;
++-    s;\bsmtpd_for[-</bB>]*\n*[ <bB>]*bid_bare_newline_exclusions\b;<a href="postconf.5.html#    smtpd_forbid_bare_newline_exclusions">$&</a>;g;
+++    s;\bsmtpd_for[-</bB>]*\n*[ <bB>]*bid_bare_new[-</bB>]*\n*[ <bB>]*line\b;<a href="postconf.5.html#smtpd_forbid_bare_newline">$&</a>;g;
+++    s;\bsmtpd_for[-</bB>]*\n*[ <bB>]*bid_bare_new[-</bB>]*\n*[ <bB>]*line_reject_code\b;<a href="postconf.5.html#smtpd_forbid_bare_newline_reject_code">$&</a>;g;
+++    s;\bsmtpd_for[-</bB>]*\n*[ <bB>]*bid_bare_new[-</bB>]*\n*[ <bB>]*line_exclusions\b;<a href="postconf.5.html#smtpd_forbid_bare_newline_exclusions">$&</a>;g;
+++    s;\bcleanup_replace_stray_cr_lf\b;<a href="postconf.5.html#cleanup_replace_stray_cr_lf">$&</a>;g;
++     s;\bsmtpd_for[-</bB>]*\n*[ <bB>]*bidden_commands\b;<a href="postconf.5.html#smtpd_forbidden_commands">$&</a>;g;
++     s;\bsmtpd_hard_error_limit\b;<a href="postconf.5.html#smtpd_hard_error_limit">$&</a>;g;
++     s;\bsmtpd_helo_required\b;<a href="postconf.5.html#smtpd_helo_required">$&</a>;g;
++--- a/proto/postconf.proto
+++++ b/proto/postconf.proto
++@@ -18061,52 +18061,138 @@
 + 
-+ endif
++ %PARAM smtpd_forbid_bare_newline Postfix &lt; 3.9: no
++ 
++-<p> Reply with "Error: bare &lt;LF&gt; received" and disconnect
++-when a remote SMTP client sends a line ending in &lt;LF&gt;, violating
++-the RFC 5321 requirement that lines must end in &lt;CR&gt;&lt;LF&gt;.
++-This feature is disbled by default with Postfix &lt; 3.9. Use
++-smtpd_forbid_bare_newline_exclusions to exclude non-standard clients
++-such as netcat. Specify "smtpd_forbid_bare_newline = no" to disable
++-(not recommended for an Internet-connected MTA). </p>
+++<p> Reject or restrict input lines from an SMTP client that end in
+++&lt;LF&gt; instead of the standard &lt;CR&gt;&lt;LF&gt;. Such line
+++endings are commonly allowed with UNIX-based SMTP servers, but they
+++violate RFC 5321, and allowing such line endings can make a server
+++vulnerable to <a href="https://www.postfix.org/smtp-smuggling.html">
+++SMTP smuggling</a>.  </p>
+++
+++<p> Specify one of the following values (case does not matter): </p>
+++
+++<dl compact>
+++
+++<dt> <b>normalize</b></dt> <dd> Require the standard
+++End-of-DATA sequence &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;.
+++Otherwise, allow command or message content lines ending in the
+++non-standard &lt;LF&gt;, and process them as if the client sent the
+++standard &lt;CR&gt;&lt;LF&gt;. <br> <br> This maintains compatibility
+++with many legitimate SMTP client applications that send a mix of
+++standard and non-standard line endings, but will fail to receive
+++email from client implementations that do not terminate DATA content
+++with the standard End-of-DATA sequence
+++&lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;. <br> <br> Such clients
+++can be excluded with smtpd_forbid_bare_newline_exclusions. </dd>
+++
+++<dt> <b>yes</b> </dt> <dd> Compatibility alias for <b>normalize</b>. </dd>
+++
+++<dt> <b>reject</b> </dt> <dd> Require the standard End-of-DATA
+++sequence &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;. Reject a command
+++or message content when a line contains bare &lt;LF&gt;, log a "bare
+++&lt;LF&gt; received" error, and reply with the SMTP status code in
+++$smtpd_forbid_bare_newline_reject_code. <br> <br> This will reject
+++email from SMTP clients that send any non-standard line endings
+++such as web applications, netcat, or load balancer health checks.
+++<br> <br> This will also reject email from services that use BDAT
+++to send MIME text containing a bare newline (RFC 3030 Section 3
+++requires canonical MIME format for text message types, defined in
+++RFC 2045 Sections 2.7 and 2.8). <br> <br> Such clients can be
+++excluded with smtpd_forbid_bare_newline_exclusions (or, in the case
+++of BDAT violations, BDAT can be selectively disabled with
+++smtpd_discard_ehlo_keyword_address_maps, or globally disabled with
+++smtpd_discard_ehlo_keywords). </dd>
+++
+++<dt> <b>no</b> (default)</dt> <dd> Do not require the standard
+++End-of-DATA
+++sequence &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;. Always process
+++a bare &lt;LF&gt; as if the client sent &lt;CR&gt;&lt;LF&gt;. This
+++option is fully backwards compatible, but is not recommended for
+++an Internet-facing SMTP server, because it is vulnerable to <a
+++href="https://www.postfix.org/smtp-smuggling.html"> SMTP smuggling</a>.
+++</dd>
++ 
++-<p> See <a href="https://www.postfix.org/smtp-smuggling.html">
++-https://www.postfix.org/smtp-smuggling.html</a> for details.
+++</dl>
++ 
++-<p> Example: </p>
+++<p> Recommended settings: </p>
++ 
++ <blockquote>
++ <pre>
++-# Disconnect remote SMTP clients that send bare newlines, but allow
++-# local clients with non-standard SMTP implementations such as netcat,
++-# fax machines, or load balancer health checks.
+++# Require the standard End-of-DATA sequence &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;.
+++# Otherwise, allow bare &lt;LF&gt; and process it as if the client sent
+++# &lt;CR&gt;&lt;LF&gt;.
++ #
++-smtpd_forbid_bare_newline = yes
+++# This maintains compatibility with many legitimate SMTP client
+++# applications that send a mix of standard and non-standard line
+++# endings, but will fail to receive email from client implementations
+++# that do not terminate DATA content with the standard End-of-DATA
+++# sequence &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;.
+++#
+++# Such clients can be allowlisted with smtpd_forbid_bare_newline_exclusions.
+++# The example below allowlists SMTP clients in trusted networks.
+++#
+++smtpd_forbid_bare_newline = normalize
++ smtpd_forbid_bare_newline_exclusions = $mynetworks
++ </pre>
++ </blockquote>
++ 
++-<p> This feature is available in Postfix &ge; 3.9, 3.8.4, 3.7.9,
++-3.6.13, and 3.5.23. </p>
++-
++-%PARAM smtpd_forbid_bare_newline_exclusions $mynetworks
++-
++-<p> Exclude the specified clients from smtpd_forbid_bare_newline
++-enforcement. It uses the same syntax and parent-domain matching
++-behavior as mynetworks. </p>
++-
++-<p> Example: </p>
+++<p> Alternative: </p>
++ 
++ <blockquote>
++ <pre>
++-# Disconnect remote SMTP clients that send bare newlines, but allow
++-# local clients with non-standard SMTP implementations such as netcat,
++-# fax machines, or load balancer health checks.
+++# Reject input lines that contain &lt;LF&gt; and log a "bare &lt;LF&gt; received"
+++# error. Require that input lines end in &lt;CR&gt;&lt;LF&gt;, and require the
+++# standard End-of-DATA sequence &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;.
+++#
+++# This will reject email from SMTP clients that send any non-standard
+++# line endings such as web applications, netcat, or load balancer
+++# health checks.
+++#
+++# This will also reject email from services that use BDAT to send
+++# MIME text containing a bare newline (RFC 3030 Section 3 requires
+++# canonical MIME format for text message types, defined in RFC 2045
+++# Sections 2.7 and 2.8).
+++#
+++# Such clients can be allowlisted with smtpd_forbid_bare_newline_exclusions.
+++# The example below allowlists SMTP clients in trusted networks.
++ #
++-smtpd_forbid_bare_newline = yes
+++smtpd_forbid_bare_newline = reject
++ smtpd_forbid_bare_newline_exclusions = $mynetworks
+++#
+++# Alternatively, in the case of BDAT violations, BDAT can be selectively
+++# disabled with smtpd_discard_ehlo_keyword_address_maps, or globally
+++# disabled with smtpd_discard_ehlo_keywords.
+++#
+++# smtpd_discard_ehlo_keyword_address_maps = cidr:/path/to/file
+++# /path/to/file:
+++#     10.0.0.0/24 chunking, silent-discard
+++# smtpd_discard_ehlo_keywords = chunking, silent-discard
++ </pre>
++ </blockquote>
++ 
+++<p> This feature with settings <b>yes</b> and <b>no</b> is available
+++in Postfix 3.8.4, 3.7.9, 3.6.13, and 3.5.23. Additionally, the
+++settings <b>reject</b>, and <b>normalize</b> are available with
+++Postfix &ge; 3.9, 3.8.5, 3.7.10, 3.6.14, and 3.5.24. </p>
+++
+++%PARAM smtpd_forbid_bare_newline_exclusions $mynetworks
+++
+++<p> Exclude the specified clients from smtpd_forbid_bare_newline
+++enforcement. This setting uses the same syntax and parent-domain
+++matching behavior as mynetworks. </p>
+++
++ <p> This feature is available in Postfix &ge; 3.9, 3.8.4, 3.7.9,
++ 3.6.13, and 3.5.23. </p>
++ 
+++%PARAM smtpd_forbid_bare_newline_reject_code 550
+++
+++<p>
+++The numerical Postfix SMTP server response code when rejecting a
+++request with "smtpd_forbid_bare_newline = reject".
+++Specify a 5XX status code (521 to disconnect).
+++</p>
+++
+++<p> This feature is available in Postfix &ge; 3.9, 3.8.5, 3.7.10,
+++3.6.14, and 3.5.24. </p>
+++
+++%PARAM cleanup_replace_stray_cr_lf yes
+++
++--- a/src/cleanup/cleanup.c
+++++ b/src/cleanup/cleanup.c
++@@ -145,6 +145,14 @@
++ /* .IP "\fBmessage_strip_characters (empty)\fR"
++ /*	The set of characters that Postfix will remove from message
++ /*	content.
+++/* .PP
+++/*	Available in Postfix version 3.9, 3.8.5, 3.7.10, 3.6.14,
+++/*	3.5.24, and later:
+++/* .IP "\fBcleanup_replace_stray_cr_lf (yes)\fR"
+++/*	Replace each stray <CR> or <LF> character in message
+++/*	content with a space character, to prevent outbound SMTP smuggling,
+++/*	and to make the evaluation of Postfix-added DKIM or other signatures
+++/*	independent from how a remote mail server handles such characters.
++ /* BEFORE QUEUE MILTER CONTROLS
++ /* .ad
++ /* .fi
++--- a/src/cleanup/cleanup_init.c
+++++ b/src/cleanup/cleanup_init.c
++@@ -173,6 +173,7 @@
++ int     var_always_add_hdrs;		/* always add missing headers */
++ int     var_virt_addrlen_limit;		/* stop exponential growth */
++ char   *var_hfrom_format;		/* header_from_format */
+++int     var_cleanup_mask_stray_cr_lf;	/* replace stray CR or LF with space */
++ 
++ const CONFIG_INT_TABLE cleanup_int_table[] = {
++     VAR_HOPCOUNT_LIMIT, DEF_HOPCOUNT_LIMIT, &var_hopcount_limit, 1, 0,
++@@ -189,6 +190,7 @@
++     VAR_VERP_BOUNCE_OFF, DEF_VERP_BOUNCE_OFF, &var_verp_bounce_off,
++     VAR_AUTO_8BIT_ENC_HDR, DEF_AUTO_8BIT_ENC_HDR, &var_auto_8bit_enc_hdr,
++     VAR_ALWAYS_ADD_HDRS, DEF_ALWAYS_ADD_HDRS, &var_always_add_hdrs,
+++    VAR_CLEANUP_MASK_STRAY_CR_LF, DEF_CLEANUP_MASK_STRAY_CR_LF, &var_cleanup_mask_stray_cr_lf,
++     0,
++ };
++ 
++--- a/src/cleanup/cleanup_message.c
+++++ b/src/cleanup/cleanup_message.c
++@@ -930,6 +930,23 @@
++     char   *dst;
++ 
++     /*
+++     * Replace each stray CR or LF with one space. These are not allowed in
+++     * SMTP, and can be used to enable outbound (remote) SMTP smuggling.
+++     * Replacing these early ensures that our later DKIM etc. signature will
+++     * not be invalidated. Besides preventing SMTP smuggling, replacing stray
+++     * <CR> or <LF> ensures that the result of signature validation by a
+++     * later mail system will not depend on how that mail system handles
+++     * those stray characters in an implementation-dependent manner.
+++     *
+++     * The input length is not changed, therefore it is safe to overwrite the
+++     * input.
+++     */
+++    if (var_cleanup_mask_stray_cr_lf)
+++	for (dst = (char *) buf; dst < buf + len; dst++)
+++	    if (*dst == '\r' || *dst == '\n')
+++		*dst = ' ';
+++
+++    /*
++      * Reject unwanted characters.
++      * 
++      * XXX Possible optimization: simplify the loop when the "reject" set
++--- a/src/global/cleanup_strerror.c
+++++ b/src/global/cleanup_strerror.c
++@@ -73,6 +73,7 @@
++     CLEANUP_STAT_CONT, 550, "5.7.1", "message content rejected",
++     CLEANUP_STAT_WRITE, 451, "4.3.0", "queue file write error",
++     CLEANUP_STAT_NOPERM, 550, "5.7.1", "service denied",
+++    CLEANUP_STAT_BARE_LF, 521, "5.5.2", "bare <LF> received",
++ };
++ 
++ static CLEANUP_STAT_DETAIL cleanup_stat_success = {
++--- a/src/global/cleanup_user.h
+++++ b/src/global/cleanup_user.h
++@@ -65,6 +65,12 @@
++ #define CLEANUP_STAT_NOPERM	(1<<9)	/* Denied by non-content policy */
++ 
++  /*
+++  * Non-cleanup errors that live in the same bitmask space, to centralize
+++  * error handling.
+++  */
+++#define CLEANUP_STAT_BARE_LF   (1<<16)	/* Bare <LF> received */
+++
+++ /*
++   * These are set when we can't bounce even if we were asked to.
++   */
++ #define CLEANUP_STAT_MASK_CANT_BOUNCE \
++--- a/src/global/mail_params.h
+++++ b/src/global/mail_params.h
++@@ -4173,11 +4173,18 @@
++   * Backwards compatibility.
++   */
++ #define VAR_SMTPD_FORBID_BARE_LF	"smtpd_forbid_bare_newline"
++-#define DEF_SMTPD_FORBID_BARE_LF	0
+++#define DEF_SMTPD_FORBID_BARE_LF	"no"
++ 
++ #define VAR_SMTPD_FORBID_BARE_LF_EXCL	"smtpd_forbid_bare_newline_exclusions"
++ #define DEF_SMTPD_FORBID_BARE_LF_EXCL	"$" VAR_MYNETWORKS
++ 
+++#define VAR_SMTPD_FORBID_BARE_LF_CODE	"smtpd_forbid_bare_newline_reject_code"
+++#define DEF_SMTPD_FORBID_BARE_LF_CODE	550
+++
+++#define VAR_CLEANUP_MASK_STRAY_CR_LF	"cleanup_replace_stray_cr_lf"
+++#define DEF_CLEANUP_MASK_STRAY_CR_LF	1
+++extern int var_cleanup_mask_stray_cr_lf;
+++
++  /*
++   * Share TLS sessions through tlsproxy(8).
++   */
++--- a/src/global/smtp_stream.c
+++++ b/src/global/smtp_stream.c
++@@ -51,7 +51,8 @@
++ /*	char	*format;
++ /*	va_list	ap;
++ /*
++-/*	int	smtp_forbid_bare_lf;
+++/*	int	smtp_detect_bare_lf;
+++/*	int	smtp_got_bare_lf;
++ /* AUXILIARY API
++ /*	int	smtp_get_noexcept(vp, stream, maxlen, flags)
++ /*	VSTRING	*vp;
++@@ -126,16 +127,16 @@
++ /*	smtp_vprintf() is the machine underneath smtp_printf().
++ /*
++ /*	smtp_get_noexcept() implements the subset of smtp_get()
++-/*	without long jumps for timeout or EOF errors. Instead,
+++/*	without timeouts and without making long jumps. Instead,
++ /*	query the stream status with vstream_feof() etc.
++-/*	This function will make a VSTREAM long jump (error code
++-/*	SMTP_ERR_LF) when rejecting input with a bare newline byte.
+++/*
+++/*	This function assigns smtp_got_bare_lf = smtp_detect_bare_lf,
+++/*	if smtp_detect_bare_lf is non-zero and the last read line
+++/*	was terminated with a bare newline. Otherwise, this function
+++/*	sets smtp_got_bare_lf to zero.
++ /*
++ /*	smtp_timeout_setup() is a backwards-compatibility interface
++ /*	for programs that don't require per-record deadline support.
++-/*
++-/*	smtp_forbid_bare_lf controls whether smtp_get_noexcept()
++-/*	will reject input with a bare newline byte.
++ /* DIAGNOSTICS
++ /* .fi
++ /* .ad
++@@ -208,7 +209,8 @@
++ 
++ #include "smtp_stream.h"
++ 
++-int     smtp_forbid_bare_lf;
+++int     smtp_detect_bare_lf;
+++int     smtp_got_bare_lf;
++ 
++ /* smtp_timeout_reset - reset per-stream error flags, restart deadline timer */
++ 
++@@ -371,6 +373,8 @@
++     int     last_char;
++     int     next_char;
++ 
+++    smtp_got_bare_lf = 0;
+++
++     /*
++      * It's painful to do I/O with records that may span multiple buffers.
++      * Allow for partial long lines (we will read the remainder later) and
++@@ -413,11 +417,15 @@
++ 	 */
++     case '\n':
++ 	vstring_truncate(vp, VSTRING_LEN(vp) - 1);
++-	if (smtp_forbid_bare_lf
++-	    && (VSTRING_LEN(vp) == 0 || vstring_end(vp)[-1] != '\r'))
++-	    vstream_longjmp(stream, SMTP_ERR_LF);
++-	while (VSTRING_LEN(vp) > 0 && vstring_end(vp)[-1] == '\r')
++-	    vstring_truncate(vp, VSTRING_LEN(vp) - 1);
+++	if (smtp_detect_bare_lf) {
+++	    if (VSTRING_LEN(vp) == 0 || vstring_end(vp)[-1] != '\r')
+++		smtp_got_bare_lf = smtp_detect_bare_lf;
+++	    else
+++		vstring_truncate(vp, VSTRING_LEN(vp) - 1);
+++	} else {
+++	    while (VSTRING_LEN(vp) > 0 && vstring_end(vp)[-1] == '\r')
+++		vstring_truncate(vp, VSTRING_LEN(vp) - 1);
+++	}
++ 	VSTRING_TERMINATE(vp);
++ 	/* FALLTRHOUGH */
++ 
++--- a/src/global/smtp_stream.h
+++++ b/src/global/smtp_stream.h
++@@ -32,7 +32,6 @@
++ #define SMTP_ERR_QUIET	3		/* silent cleanup (application) */
++ #define SMTP_ERR_NONE	4		/* non-error case */
++ #define SMTP_ERR_DATA	5		/* application data error */
++-#define SMTP_ERR_LF	6		/* bare <LF> protocol error */
++ 
++ extern void smtp_stream_setup(VSTREAM *, int, int);
++ extern void PRINTFLIKE(2, 3) smtp_printf(VSTREAM *, const char *,...);
++@@ -44,7 +43,8 @@
++ extern void smtp_fwrite(const char *, ssize_t len, VSTREAM *);
++ extern void smtp_fread_buf(VSTRING *, ssize_t len, VSTREAM *);
++ extern void smtp_fputc(int, VSTREAM *);
++-extern int smtp_forbid_bare_lf;
+++extern int smtp_detect_bare_lf;
+++extern int smtp_got_bare_lf;
++ 
++ extern void smtp_vprintf(VSTREAM *, const char *, va_list);
++ 
++--- a/src/smtpd/smtpd.c
+++++ b/src/smtpd/smtpd.c
++@@ -765,12 +765,17 @@
++ /* .PP
++ /*	Available in Postfix 3.9, 3.8.4, 3.7.9, 3.6.13, 3.5.23 and later:
++ /* .IP "\fBsmtpd_forbid_bare_newline (Postfix < 3.9: no)\fR"
++-/*	Reply with "Error: bare <LF> received" and disconnect
++-/*	when a remote SMTP client sends a line ending in <LF>, violating
++-/*	the RFC 5321 requirement that lines must end in <CR><LF>.
+++/*	Reject or restrict input lines from an SMTP client that end in
+++/*	<LF> instead of the standard <CR><LF>.
++ /* .IP "\fBsmtpd_forbid_bare_newline_exclusions ($mynetworks)\fR"
++ /*	Exclude the specified clients from smtpd_forbid_bare_newline
++ /*	enforcement.
+++/* .PP
+++/*	Available in Postfix 3.9, 3.8.5, 3.7.10, 3.6.14, 3.5.24 and
+++/*	later:
+++/* .IP "\fBsmtpd_forbid_bare_newline_reject_code (550)\fR"
+++/*	The numerical Postfix SMTP server response code when rejecting a
+++/*	request with "smtpd_forbid_bare_newline = reject".
++ /* TARPIT CONTROLS
++ /* .ad
++ /* .fi
++@@ -1476,8 +1481,10 @@
++ int     var_smtpd_uproxy_tmout;
++ bool    var_relay_before_rcpt_checks;
++ 
++-bool    var_smtpd_forbid_bare_lf;
+++char   *var_smtpd_forbid_bare_lf;
++ char   *var_smtpd_forbid_bare_lf_excl;
+++int     var_smtpd_forbid_bare_lf_code;
+++static int bare_lf_mask;
++ static NAMADR_LIST *bare_lf_excl;
++ 
++  /*
++@@ -1554,7 +1561,6 @@
++ #define REASON_TIMEOUT		"timeout"
++ #define REASON_LOST_CONNECTION	"lost connection"
++ #define REASON_ERROR_LIMIT	"too many errors"
++-#define REASON_BARE_LF		"bare <LF> received"
++ 
++ #ifdef USE_TLS
++ 
++@@ -1573,6 +1579,40 @@
++   */
++ static DICT *smtpd_cmd_filter;
++ 
+++ /*
+++  * Bare LF and End-of-DATA controls (bare CR is handled elsewhere).
+++  *
+++  * At the smtp_get*() line reader level, setting any of these flags in the
+++  * smtp_detect_bare_lf variable enables the detection of bare newlines. The
+++  * line reader will set the same flags in the smtp_got_bare_lf variable
+++  * after it detects a bare newline, otherwise it clears smtp_got_bare_lf.
+++  *
+++  * At the SMTP command level, the flags in smtp_got_bare_lf control whether
+++  * commands ending in a bare newline are rejected.
+++  *
+++  * At the DATA and BDAT content level, the flags in smtp_got_bare_lf control
+++  * whether the standard End-of-DATA sequence CRLF.CRLF is required, and
+++  * whether lines ending in bare newlines are rejected.
+++  *
+++  * Postfix implements "delayed reject" after detecting a bare newline in BDAT
+++  * or DATA content. The SMTP server delays a REJECT response until the
+++  * command is finished, instead of replying and hanging up immediately. The
+++  * End-of-DATA detection is secured with BARE_LF_FLAG_WANT_STD_EOD.
+++  */
+++#define BARE_LF_FLAG_WANT_STD_EOD	(1<<0)	/* Require CRLF.CRLF */
+++#define BARE_LF_FLAG_REPLY_REJECT	(1<<1)	/* Reject bare newline */
+++
+++#define IS_BARE_LF_WANT_STD_EOD(m)	((m) & BARE_LF_FLAG_WANT_STD_EOD)
+++#define IS_BARE_LF_REPLY_REJECT(m)	((m) & BARE_LF_FLAG_REPLY_REJECT)
+++
+++static const NAME_CODE bare_lf_mask_table[] = {
+++    "normalize", BARE_LF_FLAG_WANT_STD_EOD,	/* Default */
+++    "yes", BARE_LF_FLAG_WANT_STD_EOD,	/* Migration aid */
+++    "reject", BARE_LF_FLAG_WANT_STD_EOD | BARE_LF_FLAG_REPLY_REJECT,
+++    "no", 0,
+++    0, -1,				/* error */
+++};
+++
++ #ifdef USE_SASL_AUTH
++ 
++  /*
++@@ -3515,6 +3555,7 @@
++     int     curr_rec_type;
++     int     prev_rec_type;
++     int     first = 1;
+++    int     prev_got_bare_lf = 0;
++ 
++     /*
++      * Copy the message content. If the cleanup process has a problem, keep
++@@ -3528,12 +3569,15 @@
++      * XXX Deal with UNIX-style From_ lines at the start of message content
++      * because sendmail permits it.
++      */
++-    for (prev_rec_type = 0; /* void */ ; prev_rec_type = curr_rec_type) {
+++    for (prev_rec_type = 0; /* void */ ; prev_rec_type = curr_rec_type,
+++	 prev_got_bare_lf = smtp_got_bare_lf) {
++ 	if (smtp_get(state->buffer, state->client, var_line_limit,
++ 		     SMTP_GET_FLAG_NONE) == '\n')
++ 	    curr_rec_type = REC_TYPE_NORM;
++ 	else
++ 	    curr_rec_type = REC_TYPE_CONT;
+++	if (IS_BARE_LF_REPLY_REJECT(smtp_got_bare_lf))
+++	    state->err |= CLEANUP_STAT_BARE_LF;
++ 	start = vstring_str(state->buffer);
++ 	len = VSTRING_LEN(state->buffer);
++ 	if (first) {
++@@ -3546,9 +3590,14 @@
++ 	    if (len > 0 && IS_SPACE_TAB(start[0]))
++ 		out_record(out_stream, REC_TYPE_NORM, "", 0);
++ 	}
++-	if (prev_rec_type != REC_TYPE_CONT && *start == '.'
++-	    && (proxy == 0 ? (++start, --len) == 0 : len == 1))
++-	    break;
+++	if (prev_rec_type != REC_TYPE_CONT && *start == '.') {
+++	    if (len == 1 && IS_BARE_LF_WANT_STD_EOD(smtp_detect_bare_lf)
+++		&& (smtp_got_bare_lf || prev_got_bare_lf))
+++		/* Do not store or send to proxy filter. */
+++		continue;
+++	    if (proxy == 0 ? (++start, --len) == 0 : len == 1)
+++		break;
+++	}
++ 	if (state->err == CLEANUP_STAT_OK) {
++ 	    if (ENFORCING_SIZE_LIMIT(var_message_limit)
++ 		&& var_message_limit - state->act_size < len + 2) {
++@@ -3701,6 +3750,11 @@
++ 	else
++ 	    smtpd_chat_reply(state,
++ 			     "250 2.0.0 Ok: queued as %s", state->queue_id);
+++    } else if ((state->err & CLEANUP_STAT_BARE_LF) != 0) {
+++	state->error_mask |= MAIL_ERROR_PROTOCOL;
+++	log_whatsup(state, "reject", "bare <LF> received");
+++	smtpd_chat_reply(state, "%d 5.5.2 %s Error: bare <LF> received",
+++			 var_smtpd_forbid_bare_lf_code, var_myhostname);
++     } else if (why && IS_SMTP_REJECT(STR(why))) {
++ 	state->error_mask |= MAIL_ERROR_POLICY;
++ 	smtpd_chat_reply(state, "%s", STR(why));
++@@ -3981,7 +4035,6 @@
++      */
++     done = 0;
++     do {
++-	int     payload_err;
++ 
++ 	/*
++ 	 * Do not skip the smtp_fread_buf() call if read_len == 0. We still
++@@ -3995,10 +4048,6 @@
++ 	smtp_fread_buf(state->buffer, read_len, state->client);
++ 	state->bdat_get_stream = vstream_memreopen(
++ 			   state->bdat_get_stream, state->buffer, O_RDONLY);
++-	vstream_control(state->bdat_get_stream, CA_VSTREAM_CTL_EXCEPT,
++-			CA_VSTREAM_CTL_END);
++-	if ((payload_err = vstream_setjmp(state->bdat_get_stream)) != 0)
++-	    vstream_longjmp(state->client, payload_err);
++ 
++ 	/*
++ 	 * Read lines from the fragment. The last line may continue in the
++@@ -4023,6 +4072,8 @@
++ 		/* Skip the out_record() and VSTRING_RESET() calls below. */
++ 		break;
++ 	    }
+++	    if (IS_BARE_LF_REPLY_REJECT(smtp_got_bare_lf))
+++		state->err |= CLEANUP_STAT_BARE_LF;
++ 	    start = vstring_str(state->bdat_get_buffer);
++ 	    len = VSTRING_LEN(state->bdat_get_buffer);
++ 	    if (state->err == CLEANUP_STAT_OK) {
++@@ -4674,9 +4725,9 @@
++      */
++     xclient_allowed =
++ 	namadr_list_match(xclient_hosts, state->name, state->addr);
++-    smtp_forbid_bare_lf = SMTPD_STAND_ALONE((state)) == 0
++-	&& var_smtpd_forbid_bare_lf
++-	&& !namadr_list_match(bare_lf_excl, state->name, state->addr);
+++    smtp_detect_bare_lf = (SMTPD_STAND_ALONE((state)) == 0 && bare_lf_mask
+++	    && !namadr_list_match(bare_lf_excl, state->name, state->addr)) ?
+++	bare_lf_mask : 0;
++     /* NOT: tls_reset() */
++     if (got_helo == 0)
++ 	helo_reset(state);
++@@ -5468,13 +5519,6 @@
++ 			     var_myhostname);
++ 	break;
++ 
++-    case SMTP_ERR_LF:
++-	state->reason = REASON_BARE_LF;
++-	if (vstream_setjmp(state->client) == 0)
++-	    smtpd_chat_reply(state, "521 5.5.2 %s Error: bare <LF> received",
++-			     var_myhostname);
++-	break;
++-
++     case 0:
++ 
++ 	/*
++@@ -5676,6 +5720,13 @@
++ 	    }
++ 	    watchdog_pat();
++ 	    smtpd_chat_query(state);
+++	    if (IS_BARE_LF_REPLY_REJECT(smtp_got_bare_lf)) {
+++		log_whatsup(state, "reject", "bare <LF> received");
+++		state->error_mask |= MAIL_ERROR_PROTOCOL;
+++		smtpd_chat_reply(state, "%d 5.5.2 %s Error: bare <LF> received",
+++			     var_smtpd_forbid_bare_lf_code, var_myhostname);
+++		break;
+++	    }
++ 	    /* Safety: protect internal interfaces against malformed UTF-8. */
++ 	    if (var_smtputf8_enable && valid_utf8_string(STR(state->buffer),
++ 						 LEN(state->buffer)) == 0) {
++@@ -6024,11 +6075,11 @@
++ 	namadr_list_match(xforward_hosts, state.name, state.addr);
++ 
++     /*
++-     * Enforce strict SMTP line endings, with compatibility exclusions.
+++     * Reject or normalize bare LF, with compatibility exclusions.
++      */
++-    smtp_forbid_bare_lf = SMTPD_STAND_ALONE((&state)) == 0
++-	&& var_smtpd_forbid_bare_lf
++-	&& !namadr_list_match(bare_lf_excl, state.name, state.addr);
+++    smtp_detect_bare_lf = (SMTPD_STAND_ALONE((&state)) == 0 && bare_lf_mask
+++	      && !namadr_list_match(bare_lf_excl, state.name, state.addr)) ?
+++	bare_lf_mask : 0;
++ 
++     /*
++      * See if we need to turn on verbose logging for this client.
++@@ -6095,6 +6146,10 @@
++ 				    MATCH_FLAG_RETURN
++ 				    | match_parent_style(VAR_MYNETWORKS),
++ 				    var_smtpd_forbid_bare_lf_excl);
+++    if ((bare_lf_mask = name_code(bare_lf_mask_table, NAME_CODE_FLAG_NONE,
+++				  var_smtpd_forbid_bare_lf)) < 0)
+++	msg_fatal("bad parameter value: '%s = %s'",
+++		  VAR_SMTPD_FORBID_BARE_LF, var_smtpd_forbid_bare_lf);
++ 
++     /*
++      * Open maps before dropping privileges so we can read passwords etc.
++@@ -6390,6 +6445,7 @@
++ 	VAR_VIRT_MAILBOX_CODE, DEF_VIRT_MAILBOX_CODE, &var_virt_mailbox_code, 0, 0,
++ 	VAR_RELAY_RCPT_CODE, DEF_RELAY_RCPT_CODE, &var_relay_rcpt_code, 0, 0,
++ 	VAR_PLAINTEXT_CODE, DEF_PLAINTEXT_CODE, &var_plaintext_code, 0, 0,
+++	VAR_SMTPD_FORBID_BARE_LF_CODE, DEF_SMTPD_FORBID_BARE_LF_CODE, &var_smtpd_forbid_bare_lf_code, 500, 599,
++ 	VAR_SMTPD_CRATE_LIMIT, DEF_SMTPD_CRATE_LIMIT, &var_smtpd_crate_limit, 0, 0,
++ 	VAR_SMTPD_CCONN_LIMIT, DEF_SMTPD_CCONN_LIMIT, &var_smtpd_cconn_limit, 0, 0,
++ 	VAR_SMTPD_CMAIL_LIMIT, DEF_SMTPD_CMAIL_LIMIT, &var_smtpd_cmail_limit, 0, 0,
++@@ -6452,7 +6508,6 @@
++ 	VAR_SMTPD_PEERNAME_LOOKUP, DEF_SMTPD_PEERNAME_LOOKUP, &var_smtpd_peername_lookup,
++ 	VAR_SMTPD_DELAY_OPEN, DEF_SMTPD_DELAY_OPEN, &var_smtpd_delay_open,
++ 	VAR_SMTPD_CLIENT_PORT_LOG, DEF_SMTPD_CLIENT_PORT_LOG, &var_smtpd_client_port_log,
++-    VAR_SMTPD_FORBID_BARE_LF, DEF_SMTPD_FORBID_BARE_LF, &var_smtpd_forbid_bare_lf,
++ 	0,
++     };
++     static const CONFIG_NBOOL_TABLE nbool_table[] = {
++@@ -6569,6 +6624,7 @@
++ 	VAR_SMTPD_DNS_RE_FILTER, DEF_SMTPD_DNS_RE_FILTER, &var_smtpd_dns_re_filter, 0, 0,
++ 	VAR_SMTPD_REJ_FTR_MAPS, DEF_SMTPD_REJ_FTR_MAPS, &var_smtpd_rej_ftr_maps, 0, 0,
++ 	VAR_SMTPD_FORBID_BARE_LF_EXCL, DEF_SMTPD_FORBID_BARE_LF_EXCL, &var_smtpd_forbid_bare_lf_excl, 0, 0,
+++	VAR_SMTPD_FORBID_BARE_LF, DEF_SMTPD_FORBID_BARE_LF, &var_smtpd_forbid_bare_lf, 1, 0,
++ 	0,
++     };
++     static const CONFIG_RAW_TABLE raw_table[] = {
++--- a/src/smtpd/smtpd_check.c
+++++ b/src/smtpd/smtpd_check.c
++@@ -48,6 +48,11 @@
++ /*
++ /*	char	*smtpd_check_queue(state)
++ /*	SMTPD_STATE *state;
+++/* AUXILIARY FUNCTIONS
+++/*	void	log_whatsup(state, action, text)
+++/*	SMTPD_STATE *state;
+++/*	const char *action;
+++/*	const char *text;
++ /* DESCRIPTION
++ /*	This module implements additional checks on SMTP client requests.
++ /*	A client request is validated in the context of the session state.
++@@ -146,6 +151,11 @@
++ /*	The recipient address given with the RCPT TO or VRFY command.
++ /* .IP size
++ /*	The message size given with the MAIL FROM command (zero if unknown).
+++/* .PP
+++/*	log_whatsup() logs "<queueid>: <action>: <protocol state>
+++/*	from: <client-name[client-addr]>: <text>" plus the protocol
+++/*	(SMTP or ESMTP), and if available, EHLO, MAIL FROM, or RCPT
+++/*	TO.
++ /* BUGS
++ /*	Policies like these should not be hard-coded in C, but should
++ /*	be user-programmable instead.
++@@ -987,8 +997,8 @@
++ 
++ /* log_whatsup - log as much context as we have */
++ 
++-static void log_whatsup(SMTPD_STATE *state, const char *whatsup,
++-			        const char *text)
+++void    log_whatsup(SMTPD_STATE *state, const char *whatsup,
+++		            const char *text)
++ {
++     VSTRING *buf = vstring_alloc(100);
++ 
++--- a/src/smtpd/smtpd_check.h
+++++ b/src/smtpd/smtpd_check.h
++@@ -25,6 +25,7 @@
++ extern char *smtpd_check_data(SMTPD_STATE *);
++ extern char *smtpd_check_eod(SMTPD_STATE *);
++ extern char *smtpd_check_policy(SMTPD_STATE *, char *);
+++extern void log_whatsup(SMTPD_STATE *, const char *, const char *);
++ 
++ /* LICENSE
++ /* .ad
+diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.6.7.bb b/meta-networking/recipes-daemons/postfix/postfix_3.6.7.bb
+index 17864b89155..fdda2e749ef 100644
+--- a/meta-networking/recipes-daemons/postfix/postfix_3.6.7.bb
++++ b/meta-networking/recipes-daemons/postfix/postfix_3.6.7.bb
+@@ -13,6 +13,8 @@ SRC_URI += "ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${P
+             file://0004-Fix-icu-config.patch \
+             file://0005-makedefs-add-lnsl-and-lresolv-to-SYSLIBS-by-default.patch \
+             file://0006-makedefs-Account-for-linux-6.x-version.patch \
++            file://CVE-2023-51764-1.patch \
++            file://CVE-2023-51764-2.patch \ 
+            "
+ SRC_URI[sha256sum] = "e471df7e0eb11c4a1e574b6d7298f635386e2843b6b3584c25a04543d587e07f"
+ UPSTREAM_CHECK_REGEX = "postfix\-(?P<pver>3\.6(\.\d+)+).tar.gz"
 -- 
-2.39.2
+2.35.7
 
 
