@@ -1,208 +1,110 @@
-Return-Path: <emil.kronborg@protonmail.com>
+Return-Path: <tgamblin@baylibre.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 69C58C47258
-	for <webhook@archiver.kernel.org>; Wed, 31 Jan 2024 19:13:33 +0000 (UTC)
-Received: from mail-4316.protonmail.ch (mail-4316.protonmail.ch [185.70.43.16])
- by mx.groups.io with SMTP id smtpd.web11.3860.1706728403074758726
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E35C9C47258
+	for <webhook@archiver.kernel.org>; Wed, 31 Jan 2024 20:36:13 +0000 (UTC)
+Received: from mail-oi1-f177.google.com (mail-oi1-f177.google.com [209.85.167.177])
+ by mx.groups.io with SMTP id smtpd.web11.6037.1706733370242771954
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 31 Jan 2024 11:13:23 -0800
+ Wed, 31 Jan 2024 12:36:10 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@protonmail.com header.s=protonmail3 header.b=txM64W1/;
- spf=pass (domain: protonmail.com, ip: 185.70.43.16, mailfrom: emil.kronborg@protonmail.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
-	s=protonmail3; t=1706728400; x=1706987600;
-	bh=y+WGltJgujcBTshT8wrKfXALcq8g7E87SPZ+QPDNuKY=;
-	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
-	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=txM64W1/U8dfrJfxBZwFMB5QjZyIdLMDqpsDpZnTC4oRtcuPA1OlpyJ5O42kyvZv+
-	 ibk28QEYZpmxamldN0K5v2OzInCNWq7e2g2P2+VCQ9XpOlGUcUoguAKd1++95H+M8m
-	 KHXnamWqMyJASO0h1QQGsEUoTQsf4ZQ32MALUR0cdC+kxxCDaveGtJz4Ht5uJyc1kV
-	 h8D6sLBia7wRXbsrQZZig8cT6F29u2TW5RhkuEyuzeNork9/xiRgor6j+U+iulS/7Q
-	 9UeRYm6aecoRsU2ytictayIAv+AksmVGXny3duBf3erGR31cHTnDD5q6xwSbK4yUrB
-	 v1SmC0holIgHQ==
-Date: Wed, 31 Jan 2024 19:13:13 +0000
-To: openembedded-devel@lists.openembedded.org
-From: Emil Kronborg <emil.kronborg@protonmail.com>
-Cc: emkan@prevas.dk, Emil Kronborg <emil.kronborg@protonmail.com>
-Subject: [meta-oe][PATCH] php-fpm: fix systemd
-Message-ID: <20240131191300.117589-1-emil.kronborg@protonmail.com>
-Feedback-ID: 20949900:user:proton
+ dkim=pass header.i=@baylibre-com.20230601.gappssmtp.com header.s=20230601 header.b=sil1cMmy;
+ spf=pass (domain: baylibre.com, ip: 209.85.167.177, mailfrom: tgamblin@baylibre.com)
+Received: by mail-oi1-f177.google.com with SMTP id 5614622812f47-3bba50cd318so189996b6e.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 31 Jan 2024 12:36:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1706733369; x=1707338169; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:from:references:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=Fz7gsdcgHrha92W7XcS4YP+i2lb7bZmViGRBtlPEUvY=;
+        b=sil1cMmyqFKeQSnj3z2o790iUmL8t7wGrzkaVVvpg/rdB8u6pLSWTGtOYKNb9g0yZ/
+         SJkyM9Hlb4STaMG7+FQC5ddhmh9AKX0lNn+Je0fHRTRUKMs1HdEdITBUroENqorUJIy2
+         CAAO4fcpeahmM3fqm0bDWlXYXPdVBhru5ZXNJDSHN7QHtgu0F5kQl40DEREI9BGSVfyZ
+         zW5fsvp5cayZ1Y45IdwPIgvib/l0LcYkn90MdTqgIgk1djSPBhEFKiY2uF5OptR7Uo8F
+         CYvAiQe36VX57j/utTziEFgGk6cvS7odRA/H3V5KModfNcMOTAYzLsRZRWNvoKPml8Or
+         xo0A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1706733369; x=1707338169;
+        h=content-transfer-encoding:in-reply-to:from:references:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=Fz7gsdcgHrha92W7XcS4YP+i2lb7bZmViGRBtlPEUvY=;
+        b=foWiLwAuP0IuRvPCJ1tDRFMlU+txGySCJNA+S/sBaMO/kVZKfl0TZCSJ9yAQQu2bM5
+         rToXxSXQ28UO63Pmi/A611xkeCpXPbSTWrhkno0Fe/yob77mJoB81bo+B6AUDnkurl2R
+         0pZXU0kucVgu2rmC6yse2+y8HVKGVPsM/rLkmvTF+vC4oghzTCXLwUm9WHioJBRWC4Vl
+         v0gRAGU5p3COmN+/3tNLaYoA9C6eWzkdPEmqxx6bNul+N4K2mxYmDK9ZgDTTGSdJ9qPV
+         4asnO898QA9/XbHW/HMpYStX+X0yzvY0tyESRGXwvNRw403rcss+LImSbwbBK5jRXHnx
+         MEAg==
+X-Gm-Message-State: AOJu0YwhzW0HLqC90YjY+fNrVojECkkYZCYyP1xBhmskuqgB99yYCCS6
+	H4lNyau4fRHFJLq+ITOp5FgsKNmsCUObeMPqRKcPeJ0LaXshijA1+mZLU1KIAlw=
+X-Google-Smtp-Source: AGHT+IHN7zTTZHyuA3RIYX1Lfu8a344aWqdZVeh0L+WJfAHG0UPgxB16083eDoMC7VYDPVZ1zCTOkQ==
+X-Received: by 2002:a05:6808:3996:b0:3be:f032:11c6 with SMTP id gq22-20020a056808399600b003bef03211c6mr315964oib.6.1706733369502;
+        Wed, 31 Jan 2024 12:36:09 -0800 (PST)
+X-Forwarded-Encrypted: i=0; AJvYcCWe0dUwtCC/tvb73qhQFug/WBJw6jvGLmakchF6borTXNton3+g24aZORSkIqNyMUsATpLqcTcTxe//ljBPitVxJlP5jy6Wa7mxFuYSDbmCtg/ufMeRTnGRJA==
+Received: from [192.168.40.12] (d24-150-219-207.home.cgocable.net. [24.150.219.207])
+        by smtp.gmail.com with ESMTPSA id p23-20020a05620a057700b00783de6b5ccfsm4649902qkp.88.2024.01.31.12.36.09
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 31 Jan 2024 12:36:09 -0800 (PST)
+Message-ID: <630968c2-01ba-450e-b714-c02b9561c98c@baylibre.com>
+Date: Wed, 31 Jan 2024 15:36:08 -0500
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-python][PATCH] python3-google-auth-oauthlib: add
+ recipe
+Content-Language: en-US
+To: Alper Ak <alperyasinak1@gmail.com>,
+ openembedded-devel@lists.openembedded.org
+References: <20240131074948.18462-1-alperyasinak1@gmail.com>
+From: Trevor Gamblin <tgamblin@baylibre.com>
+In-Reply-To: <20240131074948.18462-1-alperyasinak1@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 31 Jan 2024 19:13:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108509
-
-2848cc99a186 ("php-fpm: Add support for systemd") introduced a systemd
-service file, where ExecStart and ExecStop uses /etc/init.d/php-fpm,
-which does not exist if systemd is enabled. Consequently, the php-fpm
-service fails to start even though it is correctly installed. This is
-fixed by this commit in which the service file is identical to the one
-from the PHP source code except for the use of BitBake variables. Also,
-use ${systemd_system_unitdir} instead of ${systemd_unitdir}/system.
-
-Signed-off-by: Emil Kronborg <emil.kronborg@protonmail.com>
----
- .../recipes-devtools/php/php/php-fpm.service  | 57 +++++++++++++++++--
- meta-oe/recipes-devtools/php/php_8.2.9.bb     | 17 +++---
- 2 files changed, 62 insertions(+), 12 deletions(-)
-
-diff --git a/meta-oe/recipes-devtools/php/php/php-fpm.service b/meta-oe/rec=
-ipes-devtools/php/php/php-fpm.service
-index eec76fb563ac..918ffe6749a6 100644
---- a/meta-oe/recipes-devtools/php/php/php-fpm.service
-+++ b/meta-oe/recipes-devtools/php/php/php-fpm.service
-@@ -1,10 +1,57 @@
-+# It's not recommended to modify this file in-place, because it
-+# will be overwritten during upgrades.  If you want to customize,
-+# the best way is to use the "systemctl edit" command.
-+
- [Unit]
--Description=3DPHP-FPM
-+Description=3DThe PHP FastCGI Process Manager
- After=3Dnetwork.target
-+
- [Service]
--Type=3Dforking
--PIDFile=3D/run/php-fpm.pid
--ExecStart=3D@SYSCONFDIR@/init.d/php-fpm start
--ExecStop=3D@SYSCONFDIR@/init.d/php-fpm stop
-+Type=3Dsimple
-+PIDFile=3D@LOCALSTATEDIR@/run/php-fpm.pid
-+ExecStart=3D@SBINDIR@/php-fpm --nodaemonize --fpm-config /etc/php-fpm.conf
-+ExecReload=3D@BINDIR@/kill -USR2 $MAINPID
-+
-+# Set up a new file system namespace and mounts private /tmp and /var/tmp =
-directories
-+# so this service cannot access the global directories and other processes=
- cannot
-+# access this service's directories.
-+PrivateTmp=3Dtrue
-+
-+# Mounts the /usr, /boot, and /etc directories read-only for processes inv=
-oked by this unit.
-+ProtectSystem=3Dfull
-+
-+# Sets up a new /dev namespace for the executed processes and only adds AP=
-I pseudo devices
-+# such as /dev/null, /dev/zero or /dev/random (as well as the pseudo TTY s=
-ubsystem) to it,
-+# but no physical devices such as /dev/sda.
-+PrivateDevices=3Dtrue
-+
-+# Explicit module loading will be denied. This allows to turn off module l=
-oad and unload
-+# operations on modular kernels. It is recommended to turn this on for mos=
-t services that
-+# do not need special file systems or extra kernel modules to work.
-+ProtectKernelModules=3Dtrue
-+
-+# Kernel variables accessible through /proc/sys, /sys, /proc/sysrq-trigger=
-, /proc/latency_stats,
-+# /proc/acpi, /proc/timer_stats, /proc/fs and /proc/irq will be made read-=
-only to all processes
-+# of the unit. Usually, tunable kernel variables should only be written at=
- boot-time, with the
-+# sysctl.d(5) mechanism. Almost no services need to write to these at runt=
-ime; it is hence
-+# recommended to turn this on for most services.
-+ProtectKernelTunables=3Dtrue
-+
-+# The Linux Control Groups (cgroups(7)) hierarchies accessible through /sy=
-s/fs/cgroup will be
-+# made read-only to all processes of the unit. Except for container manage=
-rs no services should
-+# require write access to the control groups hierarchies; it is hence reco=
-mmended to turn this on
-+# for most services
-+ProtectControlGroups=3Dtrue
-+
-+# Any attempts to enable realtime scheduling in a process of the unit are =
-refused.
-+RestrictRealtime=3Dtrue
-+
-+# Restricts the set of socket address families accessible to the processes=
- of this unit.
-+# Protects against vulnerabilities such as CVE-2016-8655
-+RestrictAddressFamilies=3DAF_INET AF_INET6 AF_NETLINK AF_UNIX
-+
-+# Takes away the ability to create or manage any kind of namespace
-+RestrictNamespaces=3Dtrue
-+
- [Install]
- WantedBy=3Dmulti-user.target
-diff --git a/meta-oe/recipes-devtools/php/php_8.2.9.bb b/meta-oe/recipes-de=
-vtools/php/php_8.2.9.bb
-index cb9d0060a3f7..e645a284d5a6 100644
---- a/meta-oe/recipes-devtools/php/php_8.2.9.bb
-+++ b/meta-oe/recipes-devtools/php/php_8.2.9.bb
-@@ -44,7 +44,7 @@ CVE_STATUS_PHP =3D " \
-     CVE-2007-4596 \
- "
-=20
--inherit autotools pkgconfig python3native gettext multilib_header multilib=
-_script
-+inherit autotools pkgconfig python3native gettext multilib_header multilib=
-_script systemd
-=20
- # phpize is not scanned for absolute paths by default (but php-config is).
- #
-@@ -193,11 +193,11 @@ do_install:append:class-target() {
-     install -m 0644 ${WORKDIR}/php-fpm-apache.conf ${D}/${sysconfdir}/apac=
-he2/conf.d/php-fpm.conf
-=20
-     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}=
-;then
--        install -d ${D}${systemd_unitdir}/system
--        install -m 0644 ${WORKDIR}/php-fpm.service ${D}${systemd_unitdir}/=
-system/
--        sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' \
--            -e 's,@LOCALSTATEDIR@,${localstatedir},g' \
--            ${D}${systemd_unitdir}/system/php-fpm.service
-+        install -d ${D}${systemd_system_unitdir}
-+        install -m 0644 ${WORKDIR}/php-fpm.service ${D}${systemd_system_un=
-itdir}/php-fpm.service
-+        sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${D}${systemd_sys=
-tem_unitdir}/php-fpm.service
-+        sed -i -e 's,@SBINDIR@,${sbindir},g' ${D}${systemd_system_unitdir}=
-/php-fpm.service
-+        sed -i -e 's,@BINDIR@,${bindir},g' ${D}${systemd_system_unitdir}/p=
-hp-fpm.service
-     fi
-=20
-     if ${@bb.utils.contains('PACKAGECONFIG', 'apache2', 'true', 'false', d=
-)}; then
-@@ -259,7 +259,7 @@ FILES:${PN}-cli =3D "${bindir}/php"
- FILES:${PN}-phpdbg =3D "${bindir}/phpdbg"
- FILES:${PN}-phar =3D "${bindir}/phar*"
- FILES:${PN}-cgi =3D "${bindir}/php-cgi"
--FILES:${PN}-fpm =3D "${sbindir}/php-fpm ${sysconfdir}/php-fpm.conf ${datad=
-ir}/fpm ${sysconfdir}/init.d/php-fpm ${systemd_unitdir}/system/php-fpm.serv=
-ice ${sysconfdir}/php-fpm.d/www.conf.default"
-+FILES:${PN}-fpm =3D "${sbindir}/php-fpm ${sysconfdir}/php-fpm.conf ${datad=
-ir}/fpm ${sysconfdir}/init.d/php-fpm ${sysconfdir}/php-fpm.d/www.conf.defau=
-lt"
- FILES:${PN}-fpm-apache2 =3D "${sysconfdir}/apache2/conf.d/php-fpm.conf"
- CONFFILES:${PN}-fpm =3D "${sysconfdir}/php-fpm.conf"
- CONFFILES:${PN}-fpm-apache2 =3D "${sysconfdir}/apache2/conf.d/php-fpm.conf=
-"
-@@ -290,6 +290,9 @@ RPROVIDES:${PN}-modphp =3D "${MODPHP_OLDPACKAGE}"
- RREPLACES:${PN}-modphp =3D "${MODPHP_OLDPACKAGE}"
- RCONFLICTS:${PN}-modphp =3D "${MODPHP_OLDPACKAGE}"
-=20
-+SYSTEMD_SERVICE:${PN}-fpm =3D "php-fpm.service"
-+SYSTEMD_PACKAGES +=3D "${PN}-fpm"
-+
- do_install:append:class-native() {
-     create_wrapper ${D}${bindir}/php \
-         PHP_PEAR_SYSCONF_DIR=3D${sysconfdir}/
---=20
-2.43.0
+ <openembedded-devel@lists.openembedded.org>; Wed, 31 Jan 2024 20:36:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108510
 
 
+On 2024-01-31 02:49, Alper Ak wrote:
+> Signed-off-by: alperak <alperyasinak1@gmail.com>
+I know that the recipe name is fairly self-explanatory, but you should 
+submit new recipes like this with a short commit message describing what 
+the recipe does and why it'd be useful to have in the layer.
+> ---
+>   .../python/python3-google-auth-oauthlib_1.2.0.bb   | 14 ++++++++++++++
+>   1 file changed, 14 insertions(+)
+>   create mode 100644 meta-python/recipes-devtools/python/python3-google-auth-oauthlib_1.2.0.bb
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-google-auth-oauthlib_1.2.0.bb b/meta-python/recipes-devtools/python/python3-google-auth-oauthlib_1.2.0.bb
+> new file mode 100644
+> index 000000000..b1e89e4b4
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-google-auth-oauthlib_1.2.0.bb
+> @@ -0,0 +1,14 @@
+> +SUMMARY = "Google Authentication Library"
+> +DESCRIPTION = "This library provides oauthlib integration with google-auth"
+> +HOMEPAGE = "https://github.com/googleapis/google-auth-library-python-oauthlib"
+> +LICENSE = "Apache-2.0"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+> +
+> +SRC_URI[sha256sum] = "292d2d3783349f2b0734a0a0207b1e1e322ac193c2c09d8f7c613fb7cc501ea8"
+> +
+> +inherit pypi setuptools3
+> +
+> +RDEPENDS:${PN} = " \
+> +    ${PYTHON_PN}-google-auth \
+> +    ${PYTHON_PN}-requests-oauthlib \
+> +"
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#108505): https://lists.openembedded.org/g/openembedded-devel/message/108505
+> Mute This Topic: https://lists.openembedded.org/mt/104071227/7611679
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [tgamblin@baylibre.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
