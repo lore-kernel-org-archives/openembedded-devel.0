@@ -2,61 +2,61 @@ Return-Path: <vanusuri@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A1A9C47DDB
-	for <webhook@archiver.kernel.org>; Wed, 31 Jan 2024 02:29:54 +0000 (UTC)
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
- by mx.groups.io with SMTP id smtpd.web11.5657.1706668192088723414
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 809CFC47DDB
+	for <webhook@archiver.kernel.org>; Wed, 31 Jan 2024 02:37:14 +0000 (UTC)
+Received: from mail-ot1-f44.google.com (mail-ot1-f44.google.com [209.85.210.44])
+ by mx.groups.io with SMTP id smtpd.web10.5787.1706668633147953557
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 30 Jan 2024 18:29:52 -0800
+ Tue, 30 Jan 2024 18:37:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=E78czTmH;
- spf=pass (domain: mvista.com, ip: 209.85.214.170, mailfrom: vanusuri@mvista.com)
-Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-1d72f71f222so26187955ad.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Jan 2024 18:29:51 -0800 (PST)
+ dkim=pass header.i=@mvista.com header.s=google header.b=UQfzcDwO;
+ spf=pass (domain: mvista.com, ip: 209.85.210.44, mailfrom: vanusuri@mvista.com)
+Received: by mail-ot1-f44.google.com with SMTP id 46e09a7af769-6e1214ae9d4so1678529a34.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Jan 2024 18:37:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1706668190; x=1707272990; darn=lists.openembedded.org;
+        d=mvista.com; s=google; t=1706668631; x=1707273431; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=0LH8cwuwXWJo5yDXkqqitLARvxX/6DvLzpZoWNlftaI=;
-        b=E78czTmH4fKq7aj4B7DdrTp9ge3VOt2SB3WVj7BDw04PdRGRPH/CP3+oPhzfkdaZ4x
-         oda7+qABD5Z2JQBWjkQaqbbR4EXeJBPuUbYNA0OS//7+LKqkl7mRBu4i4mMqwNsMGRUg
-         dhScC67+IhT3qvDONeC3WQXKq5H+O6I+U9Now=
+        bh=Dmmp0agHBacnWOdD1JFQ7V+A+i1HasFOGQCkTBWuBZ8=;
+        b=UQfzcDwOASIwnMzDbHeGibVwGdMITie8sqvSmfiGv4zmqRobLTmhur50n6Y9hhf2v1
+         luUxweCWs7fHITI3WYRpNpelwtcyADlFJjVB6j0qdv/E2E72mysLxcJlDv8z0KtoZrOV
+         u+xXViLQI4czWO0cij2fiMf7ec6fF9STCMPv4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1706668190; x=1707272990;
+        d=1e100.net; s=20230601; t=1706668631; x=1707273431;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=0LH8cwuwXWJo5yDXkqqitLARvxX/6DvLzpZoWNlftaI=;
-        b=UMeuJInrIv0W77ZebO2iovHJhwJXl5/1DS3J6yT4nV2GNWsaaU4ngVLMGnDg6avMtv
-         EVnb5qX8D5lCw1Rxm3IfJ0HzsFjM5OlgFRXdHIQoT0S7CgRSwikwhaEqH7v/h7yy5AeJ
-         KzF7sJhJW5t0Olr2v7iwVXLDyyUrTjbRbpCKXEbaXiH7wMrsaWqEqtlLzbZYszCG/0Nd
-         uvUDiu27UoO+vtcFgPl06KIwTEgnUxRysoCCBsljdleIg8uGTNnj6GctCXRrpg3bCrw0
-         Cg4TOguVp1MwJDattVzsLz3sxg63DHlf9NEZTRcOMMiWft/xa5z985D00dy77Q28ShEB
-         nSzw==
-X-Gm-Message-State: AOJu0YzH/y0xWGDrtFuS42qAiK7CXePvo8NsaCq/baUaYr8JFPmyotXM
-	Vc4ckyYcBqlbqG5o1ovvMSFzo5UKq506zxMUJdOqcUaV9oPahvCJxt9n9r0M8VJmMEqsjis5mPW
-	y
-X-Google-Smtp-Source: AGHT+IGwVJQi9E285NF3LjxYiVH7xrmBlOeAIhX9A9UQ27IA7cgyUM3L77vbPxl0dE+Rm8tvNXOTRA==
-X-Received: by 2002:a17:903:11cd:b0:1d7:133e:5c09 with SMTP id q13-20020a17090311cd00b001d7133e5c09mr568518plh.22.1706668189394;
-        Tue, 30 Jan 2024 18:29:49 -0800 (PST)
+        bh=Dmmp0agHBacnWOdD1JFQ7V+A+i1HasFOGQCkTBWuBZ8=;
+        b=kpZPAlnZhG7VYUad2BPBz+/jYABicPulbuUHMuqgOIdXB2GbepDICb2SVCkt0bk/uF
+         yh9k+5KSQYcHONvlyav9klGrsBZcYXTqxBZFN9FfiJndUmn0zDlzoPbQ4VnP9IZD2TGw
+         Idalz4JkznA1fSqcvFa5etF3GFLe5qZerDRRluqoNL8k6Dm8YnmM8FnFuq1YadyNCE8N
+         mq116D7cWsjwjgFo+d+GoFIbzvwBgcNmijQbbtUHcoToZBTKAdcj5dLFH+N9af5NP6kZ
+         BGvhWxTmkcLOGhlaISRWpOJeQ4IOB9iBkKb9fafPfGagIBCEFHjQDD37F9TXHuaWE8Zd
+         IX+g==
+X-Gm-Message-State: AOJu0YzdCvU5WNo41YChJAcDqdHMabraQqKm0fXp7BZvv/IMU0j7E2+e
+	mVJC2apUBArDaLvcPIEOH5Wm0kB//vuDSYyhJzPpzJ0XFW8rtLgOfCxCqTdyC/f7tZG5kd2TXmf
+	r
+X-Google-Smtp-Source: AGHT+IFCVoAQryQJ3jkuwU6PwtEPo9A4+bhuwnr+CagNnnEunq5SAaQvuOzJhNxucnZH/zYE9tV5Uw==
+X-Received: by 2002:a9d:6190:0:b0:6e1:46ce:a2b7 with SMTP id g16-20020a9d6190000000b006e146cea2b7mr247387otk.2.1706668630326;
+        Tue, 30 Jan 2024 18:37:10 -0800 (PST)
 Received: from MVIN00020.mvista.com ([122.181.211.15])
-        by smtp.gmail.com with ESMTPSA id a19-20020a170902b59300b001d7393f6917sm7890905pls.86.2024.01.30.18.29.46
+        by smtp.gmail.com with ESMTPSA id m1-20020a634c41000000b005cfd70edc1bsm9152286pgl.7.2024.01.30.18.37.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 30 Jan 2024 18:29:48 -0800 (PST)
+        Tue, 30 Jan 2024 18:37:09 -0800 (PST)
 From: vanusuri@mvista.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Vijay Anusuri <vanusuri@mvista.com>
-Subject: [oe][meta-networking][kirkstone][PATCH] squid: backport Debian patch for CVE-2023-46728 and CVE-2023-46846
-Date: Wed, 31 Jan 2024 07:57:35 +0530
-Message-Id: <20240131022735.4882-1-vanusuri@mvista.com>
+Subject: [oe][meta-networking][dunfell][PATCH] squid: backport Debian patch for CVE-2023-46728 and CVE-2023-46846
+Date: Wed, 31 Jan 2024 08:04:59 +0530
+Message-Id: <20240131023459.5105-1-vanusuri@mvista.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 31 Jan 2024 02:29:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108503
+ <openembedded-devel@lists.openembedded.org>; Wed, 31 Jan 2024 02:37:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108504
 
 From: Vijay Anusuri <vanusuri@mvista.com>
 
@@ -77,7 +77,7 @@ Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
  .../squid/files/CVE-2023-46728.patch          |  608 +++++++++
  .../squid/files/CVE-2023-46846-pre1.patch     | 1154 +++++++++++++++++
  .../squid/files/CVE-2023-46846.patch          |  169 +++
- .../recipes-daemons/squid/squid_4.15.bb       |    3 +
+ .../recipes-daemons/squid/squid_4.9.bb        |    3 +
  4 files changed, 1934 insertions(+)
  create mode 100644 meta-networking/recipes-daemons/squid/files/CVE-2023-46728.patch
  create mode 100644 meta-networking/recipes-daemons/squid/files/CVE-2023-46846-pre1.patch
@@ -2032,20 +2032,20 @@ index 000000000..a6d0965e7
 +     /** Removes a single trailing character from the set.
 +      *
 +      * \return whether a character was removed
-diff --git a/meta-networking/recipes-daemons/squid/squid_4.15.bb b/meta-networking/recipes-daemons/squid/squid_4.15.bb
-index 302780674..174d7f0fb 100644
---- a/meta-networking/recipes-daemons/squid/squid_4.15.bb
-+++ b/meta-networking/recipes-daemons/squid/squid_4.15.bb
-@@ -26,6 +26,9 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${BPN}-${PV}.tar.bz2
+diff --git a/meta-networking/recipes-daemons/squid/squid_4.9.bb b/meta-networking/recipes-daemons/squid/squid_4.9.bb
+index c9a92772d..98257e54c 100644
+--- a/meta-networking/recipes-daemons/squid/squid_4.9.bb
++++ b/meta-networking/recipes-daemons/squid/squid_4.9.bb
+@@ -25,6 +25,9 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${BPN}-${PV}.tar.bz2
+            file://0001-tools.cc-fixed-unused-result-warning.patch \
             file://0001-splay.cc-fix-bind-is-not-a-member-of-std.patch \
-            file://0001-Fix-build-on-Fedora-Rawhide-772.patch \
             file://CVE-2023-46847.patch \
 +           file://CVE-2023-46728.patch \
 +           file://CVE-2023-46846-pre1.patch \
 +           file://CVE-2023-46846.patch \
             "
  
- SRC_URI:remove:toolchain-clang = "file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch"
+ SRC_URI_remove_toolchain-clang = "file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch"
 -- 
 2.25.1
 
