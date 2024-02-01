@@ -2,248 +2,152 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5735FC47DDB
-	for <webhook@archiver.kernel.org>; Thu,  1 Feb 2024 05:11:19 +0000 (UTC)
-Received: from mail-ot1-f50.google.com (mail-ot1-f50.google.com [209.85.210.50])
- by mx.groups.io with SMTP id smtpd.web11.8955.1706764274532502698
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 68B11C47DDB
+	for <webhook@archiver.kernel.org>; Thu,  1 Feb 2024 05:24:19 +0000 (UTC)
+Received: from mail-ot1-f45.google.com (mail-ot1-f45.google.com [209.85.210.45])
+ by mx.groups.io with SMTP id smtpd.web10.9213.1706765052171425837
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 31 Jan 2024 21:11:14 -0800
+ Wed, 31 Jan 2024 21:24:12 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=f5B1/dBj;
- spf=pass (domain: gmail.com, ip: 209.85.210.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f50.google.com with SMTP id 46e09a7af769-6e11cda9f6fso280522a34.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 31 Jan 2024 21:11:14 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=TM/OHqJ/;
+ spf=pass (domain: gmail.com, ip: 209.85.210.45, mailfrom: raj.khem@gmail.com)
+Received: by mail-ot1-f45.google.com with SMTP id 46e09a7af769-6e1270e8cd3so250838a34.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 31 Jan 2024 21:24:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1706764273; x=1707369073; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1706765051; x=1707369851; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=tW2WbqMKuHveh7jMvSb1zRwANevoXAz2hKbBQNVsbuI=;
-        b=f5B1/dBj2k1wOGQ5NpzJRF9R0/o0pyPS1UIstF2cSAFEJWGo2ryyfEbCmaoelW7CgA
-         6NKl0AEasOEI1wbmUR9Fq0D6N3EiKjXnFvR/1Ps5PenjjPgAgCc7nY6MB90yBQQy0GHO
-         T1HdHklqidcrl7RAwckubv367D6ABWuFOjYkJ59qGcv6OfWJfdT8DvMgX306phwseWw8
-         G2BkuKG7LzqAmhHGmQvdVJOr/KMjlnmiZJ6c2mzw6WYlAIrlanB1OJHr4JNDzw/Qbk3M
-         XAGfgjapi6ODDbXMpJy2mZi2Rw4f8AMH65OQywL3ajdUl9kT8P99XTEii4qGK1Ru9qmm
-         PFLw==
+        bh=tw6gc4cZ7L572VTHGjiaRTB+EgJa6BL2HDlb0Kdz5zE=;
+        b=TM/OHqJ/N8yGhe2PWeGxeMpCu9EGeZS5hPjVrgsyoAko9L1prFnaeJIbrDXUbF2awe
+         4YtOi6vHJTIe9D8TJ5jVTUhXPd22f+pVxQgUQSm3nLjcclDuonYvphHL/E2aU3eR8xL5
+         WxL6tgVK/WpBFw2Co1T29IDLZjxWWbxiUgxGWUwidzapK8nCGcsq7P1Dz9Rj8MnCtqrv
+         IH232ZLrfDY2MUVHI5qv9YfT7JkB5MIzdGHTLO6yzzhryLQUXss7VcoMnkJofoDlClCz
+         rRPJpAKJXLywPW8Zw4vXBcN9fTj4g1OxZuaJnEblFlRPllKDkbQjfxk2xOoP4Onk4VkK
+         rj+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1706764273; x=1707369073;
+        d=1e100.net; s=20230601; t=1706765051; x=1707369851;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=tW2WbqMKuHveh7jMvSb1zRwANevoXAz2hKbBQNVsbuI=;
-        b=UnlF0xGrvm7A3iflq3KvzhTerQt9uwo/zZXjG5TUadcEVrwZWd011K1jM1a0XK5S7l
-         WoN8e7s6ySi5dyF4vJYD7yDktBhVAD01OO4NPuZZkQJ6bMqjWaB74eeH0VkMs+KCBy4W
-         JZChRPj0A73YONR1o7+Bi0vThUIAmG9awv2y/cG96oQxzo42A0tART6+8bRIj/5Xh/xC
-         b+M0rpNHgcP42EWSzAm7JlROAodnP+elmi7dNUqLzTNlyhajULRni2gmOcLsBGsKEjtH
-         Wwct51wxgOiaNlx4SMCqJZ4nN4asWU10Zdo7U12NVF3feN3JJQZOk5gP4eQHgogiB0Uo
-         xlsA==
-X-Gm-Message-State: AOJu0YxSvp9FzkZ1fNyqEdQqmr92eIW9ynWvtmMjjnc3gWfrXqpJeRcJ
-	nHYzb5LaXtpTwFqCAqNyV91+nma6efgON8+RwbDJyLbXV5vFBWnsgVVFp7ejnaE=
-X-Google-Smtp-Source: AGHT+IHbh3A3sfJUXDVRRscc5oridyGXfDjPeZEJCImfFSasqixB1d6/apIUX3mSPxEOJY3XS7m90Q==
-X-Received: by 2002:a05:6808:399b:b0:3bd:cc3b:294a with SMTP id gq27-20020a056808399b00b003bdcc3b294amr5354843oib.8.1706764273395;
-        Wed, 31 Jan 2024 21:11:13 -0800 (PST)
+        bh=tw6gc4cZ7L572VTHGjiaRTB+EgJa6BL2HDlb0Kdz5zE=;
+        b=C1dGZg3Hfl9dR0cKcWpzBiYlmMc26tdQ7ZhV/rZLrpjIAkHCyqEm+jwYd5xhcmhO2G
+         73D7F1iPy/tzRMM8Cd/tmyRnHj2V7YUUoc8bSFSoDCVquhmCFGj4+HlfN+3x+mNIEWVV
+         X4w5w2cvzUEz8371/1Qe/UxuLbqVoW8h2dpnkzNUCSqEJzvusW++l8JCVDNtXxIg90yu
+         97hLBHJC64j9/gR5lfqxquoBFQnbcAC8GZJtxGrhYZKWF3YeoN2YWdFb/gaNl/YU/6X3
+         /TKl8cioP5ZMBIv9GConuO1kAer6h3qlW4hjF0sSrhuUXZucQRnzJCltDIUuKZLWCwni
+         +Fnw==
+X-Gm-Message-State: AOJu0YxaT5WxGXMiNOamMKi58awaQSAZDGTax5bIQ5HAUikCpQdPGlto
+	Goypi+HGYbvPjEpQNvDKiEBIWX0uDsQCuRIlTOuR8hMaRd2mP+Q9nBvtOqcSpNE=
+X-Google-Smtp-Source: AGHT+IGX6/k6S3k9xaCli8QdbWADZwmeRCm6sx1GIXhm+EFZwKSdnzlF/lHHEoHkEpGNxjEJjoTavA==
+X-Received: by 2002:a9d:4e95:0:b0:6e1:3d4b:4b27 with SMTP id v21-20020a9d4e95000000b006e13d4b4b27mr3862822otk.27.1706765051107;
+        Wed, 31 Jan 2024 21:24:11 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::8157])
-        by smtp.gmail.com with ESMTPSA id z184-20020a6365c1000000b005d8c1ce4443sm8708867pgb.88.2024.01.31.21.11.12
+        by smtp.gmail.com with ESMTPSA id i129-20020a636d87000000b005cee9115cb3sm11762503pgc.0.2024.01.31.21.24.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 31 Jan 2024 21:11:13 -0800 (PST)
+        Wed, 31 Jan 2024 21:24:10 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH] libcamera: Fix build with clang-18
-Date: Wed, 31 Jan 2024 21:11:11 -0800
-Message-ID: <20240201051111.3507973-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] breakpad: Upgrade to 2023.06.01 release
+Date: Wed, 31 Jan 2024 21:24:08 -0800
+Message-ID: <20240201052408.3527135-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 01 Feb 2024 05:11:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108511
+ <openembedded-devel@lists.openembedded.org>; Thu, 01 Feb 2024 05:24:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108512
+
+Add a backport to fix build with latest clang
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...evice-Add-bool-return-type-to-unlock.patch | 59 ++++++++++++
- ...002-options-Replace-use-of-VLAs-in-C.patch | 91 +++++++++++++++++++
- .../libcamera/libcamera_0.2.0.bb              |  2 +
- 3 files changed, 152 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-media_device-Add-bool-return-type-to-unlock.patch
- create mode 100644 meta-multimedia/recipes-multimedia/libcamera/libcamera/0002-options-Replace-use-of-VLAs-in-C.patch
+ ...ixed-missing-include-for-std-find_if.patch | 31 +++++++++++++++++++
+ ...breakpad_git.bb => breakpad_2023.06.01.bb} | 11 +++----
+ 2 files changed, 35 insertions(+), 7 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/breakpad/breakpad/0001-Fixed-missing-include-for-std-find_if.patch
+ rename meta-oe/recipes-devtools/breakpad/{breakpad_git.bb => breakpad_2023.06.01.bb} (96%)
 
-diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-media_device-Add-bool-return-type-to-unlock.patch b/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-media_device-Add-bool-return-type-to-unlock.patch
+diff --git a/meta-oe/recipes-devtools/breakpad/breakpad/0001-Fixed-missing-include-for-std-find_if.patch b/meta-oe/recipes-devtools/breakpad/breakpad/0001-Fixed-missing-include-for-std-find_if.patch
 new file mode 100644
-index 0000000000..12f034effd
+index 0000000000..943daf4d00
 --- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera/0001-media_device-Add-bool-return-type-to-unlock.patch
-@@ -0,0 +1,59 @@
-+From 6914c4fd3d53c0c6ea304123bf57429bb64ec16f Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 31 Jan 2024 21:01:27 -0800
-+Subject: [PATCH 1/2] media_device: Add bool return type to unlock()
++++ b/meta-oe/recipes-devtools/breakpad/breakpad/0001-Fixed-missing-include-for-std-find_if.patch
+@@ -0,0 +1,31 @@
++From 45ea097e864e566771d756c92619e984815acd1e Mon Sep 17 00:00:00 2001
++From: Nathan Moinvaziri <nathan@nathanm.com>
++Date: Tue, 19 Dec 2023 14:35:05 -0800
++Subject: [PATCH] Fixed missing include for std::find_if.
 +
-+unlock uses lockf which is marked with __attribute__
-+((warn_unused_result)) and compilers warn about it and some treat
-+-Wunused-result as error with -Werror turned on, It would be good to
-+check if lockf failed or succeeded, however, that piece is not changed
-+with this, this fixes build with clang++ 18
++Throws an error when compiling on Windows.
 +
-+    ../git/src/libcamera/media_device.cpp:167:2: error: ignoring return value of function declared with 'warn_unused_result' attribute [-Werror,-Wunused-result]
-+      167 |         lockf(fd_.get(), F_ULOCK, 0);
-+          |         ^~~~~ ~~~~~~~~~~~~~~~~~~~~~
-+    1 error generated.
-+
-+Upstream-Status: Submitted [https://lists.libcamera.org/pipermail/libcamera-devel/2024-February/040380.html]
++Upstream-Status: Backport [https://github.com/google/breakpad/commit/898a997855168c0e6a689072fefba89246271a5d]
++Change-Id: Ieb34c00cf199aaa1b45a440086c48b8ed363b3c7
++Reviewed-on: https://chromium-review.googlesource.com/c/breakpad/breakpad/+/5137658
++Reviewed-by: Ivan Penkov <ivanpe@chromium.org>
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ include/libcamera/internal/media_device.h | 2 +-
-+ src/libcamera/media_device.cpp            | 6 +++---
-+ 2 files changed, 4 insertions(+), 4 deletions(-)
++ src/common/module.cc | 1 +
++ 1 file changed, 1 insertion(+)
 +
-+diff --git a/include/libcamera/internal/media_device.h b/include/libcamera/internal/media_device.h
-+index eb8cfde4..b09dfd16 100644
-+--- a/include/libcamera/internal/media_device.h
-++++ b/include/libcamera/internal/media_device.h
-+@@ -33,7 +33,7 @@ public:
-+ 	bool busy() const { return acquired_; }
++diff --git a/src/common/module.cc b/src/common/module.cc
++index 0eb5aad8..b6f5da7e 100644
++--- a/src/common/module.cc
+++++ b/src/common/module.cc
++@@ -42,6 +42,7 @@
++ #include <stdio.h>
++ #include <string.h>
 + 
-+ 	bool lock();
-+-	void unlock();
-++	bool unlock();
-+ 
-+ 	int populate();
-+ 	bool isValid() const { return valid_; }
-+diff --git a/src/libcamera/media_device.cpp b/src/libcamera/media_device.cpp
-+index 2949816b..eaa2fdb0 100644
-+--- a/src/libcamera/media_device.cpp
-++++ b/src/libcamera/media_device.cpp
-+@@ -159,12 +159,12 @@ bool MediaDevice::lock()
-+  *
-+  * \sa lock()
-+  */
-+-void MediaDevice::unlock()
-++bool MediaDevice::unlock()
-+ {
-+ 	if (!fd_.isValid())
-+-		return;
-++		return false;
-+ 
-+-	lockf(fd_.get(), F_ULOCK, 0);
-++	return lockf(fd_.get(), F_ULOCK, 0) == 0;
-+ }
-+ 
-+ /**
+++#include <algorithm>
++ #include <functional>
++ #include <iostream>
++ #include <memory>
 +-- 
 +2.43.0
 +
-diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera/0002-options-Replace-use-of-VLAs-in-C.patch b/meta-multimedia/recipes-multimedia/libcamera/libcamera/0002-options-Replace-use-of-VLAs-in-C.patch
-new file mode 100644
-index 0000000000..95f321782e
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera/0002-options-Replace-use-of-VLAs-in-C.patch
-@@ -0,0 +1,91 @@
-+From c80d273a57547aec9353d888aa316bf6560cf1ba Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 31 Jan 2024 21:04:28 -0800
-+Subject: [PATCH 2/2] options: Replace use of VLAs in C++
-+
-+Clang++ 18 is fussy about this with new warning checks.
-+
-+   ../git/src/apps/common/options.cpp:882:20: error: variable length arrays in C++ are a Clang extension [-Werror,-Wvla-cxx-extension]
-+      882 |         char shortOptions[optionsMap_.size() * 3 + 2];
-+          |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+Therefore replace using VLAs with alloca and malloc/free
-+
-+Upstream-Status: Submitted [https://lists.libcamera.org/pipermail/libcamera-devel/2024-February/040381.html]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/apps/common/options.cpp      |  4 ++--
-+ src/libcamera/ipc_unixsocket.cpp | 12 ++++++++----
-+ 2 files changed, 10 insertions(+), 6 deletions(-)
-+
-+diff --git a/src/apps/common/options.cpp b/src/apps/common/options.cpp
-+index 4f7e8691..b020f603 100644
-+--- a/src/apps/common/options.cpp
-++++ b/src/apps/common/options.cpp
-+@@ -879,8 +879,8 @@ OptionsParser::Options OptionsParser::parse(int argc, char **argv)
-+ 	 * Allocate short and long options arrays large enough to contain all
-+ 	 * options.
-+ 	 */
-+-	char shortOptions[optionsMap_.size() * 3 + 2];
-+-	struct option longOptions[optionsMap_.size() + 1];
-++	char *shortOptions = (char*)alloca(optionsMap_.size() * 3 + 2);
-++	struct option *longOptions = (struct option*)alloca(optionsMap_.size() + 1);
-+ 	unsigned int ids = 0;
-+ 	unsigned int idl = 0;
-+ 
-+diff --git a/src/libcamera/ipc_unixsocket.cpp b/src/libcamera/ipc_unixsocket.cpp
-+index 1980d374..3a7f8ee6 100644
-+--- a/src/libcamera/ipc_unixsocket.cpp
-++++ b/src/libcamera/ipc_unixsocket.cpp
-+@@ -247,8 +247,8 @@ int IPCUnixSocket::sendData(const void *buffer, size_t length,
-+ 	iov[0].iov_base = const_cast<void *>(buffer);
-+ 	iov[0].iov_len = length;
-+ 
-+-	char buf[CMSG_SPACE(num * sizeof(uint32_t))];
-+-	memset(buf, 0, sizeof(buf));
-++	char *buf = (char*)malloc(CMSG_SPACE(num * sizeof(uint32_t)));
-++	memset((void*)buf, 0, sizeof(buf));
-+ 
-+ 	struct cmsghdr *cmsg = (struct cmsghdr *)buf;
-+ 	cmsg->cmsg_len = CMSG_LEN(num * sizeof(uint32_t));
-+@@ -270,9 +270,11 @@ int IPCUnixSocket::sendData(const void *buffer, size_t length,
-+ 		int ret = -errno;
-+ 		LOG(IPCUnixSocket, Error)
-+ 			<< "Failed to sendmsg: " << strerror(-ret);
-++    free(buf);
-+ 		return ret;
-+ 	}
-+ 
-++  free(buf);
-+ 	return 0;
-+ }
-+ 
-+@@ -283,8 +285,8 @@ int IPCUnixSocket::recvData(void *buffer, size_t length,
-+ 	iov[0].iov_base = buffer;
-+ 	iov[0].iov_len = length;
-+ 
-+-	char buf[CMSG_SPACE(num * sizeof(uint32_t))];
-+-	memset(buf, 0, sizeof(buf));
-++	char *buf = (char*)malloc(CMSG_SPACE(num * sizeof(uint32_t)));
-++	memset((void*)buf, 0, sizeof(buf));
-+ 
-+ 	struct cmsghdr *cmsg = (struct cmsghdr *)buf;
-+ 	cmsg->cmsg_len = CMSG_LEN(num * sizeof(uint32_t));
-+@@ -305,12 +307,14 @@ int IPCUnixSocket::recvData(void *buffer, size_t length,
-+ 		if (ret != -EAGAIN)
-+ 			LOG(IPCUnixSocket, Error)
-+ 				<< "Failed to recvmsg: " << strerror(-ret);
-++    free(buf);
-+ 		return ret;
-+ 	}
-+ 
-+ 	if (fds)
-+ 		memcpy(fds, CMSG_DATA(cmsg), num * sizeof(uint32_t));
-+ 
-++  free(buf);
-+ 	return 0;
-+ }
-+ 
-+-- 
-+2.43.0
-+
-diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.2.0.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.2.0.bb
-index 3fd17f0a85..5b2e863369 100644
---- a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.2.0.bb
-+++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.2.0.bb
-@@ -10,6 +10,8 @@ LIC_FILES_CHKSUM = "\
+diff --git a/meta-oe/recipes-devtools/breakpad/breakpad_git.bb b/meta-oe/recipes-devtools/breakpad/breakpad_2023.06.01.bb
+similarity index 96%
+rename from meta-oe/recipes-devtools/breakpad/breakpad_git.bb
+rename to meta-oe/recipes-devtools/breakpad/breakpad_2023.06.01.bb
+index 3462b846d3..3bf4371e85 100644
+--- a/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
++++ b/meta-oe/recipes-devtools/breakpad/breakpad_2023.06.01.bb
+@@ -18,22 +18,18 @@ BBCLASSEXTEND = "native"
  
- SRC_URI = " \
-         git://git.libcamera.org/libcamera/libcamera.git;protocol=https;branch=master \
-+        file://0001-media_device-Add-bool-return-type-to-unlock.patch \
-+        file://0002-options-Replace-use-of-VLAs-in-C.patch \
+ PE = "2"
+ 
+-PV = "1.0"
++SRCREV_FORMAT = "breakpad_gtest_protobuf_lss"
+ 
+-SRCREV_FORMAT = "breakpad_gtest_protobuf_lss_gyp"
+-
+-SRCREV_breakpad = "7a1a190f4f68e8a3e06788498f50a4d5520a69f3"
+-#v1.10.0
++SRCREV_breakpad = "8988364bcddd9b194b0bf931c10bc125987330ed"
++#v1.11.0
+ SRCREV_gtest = "e2239ee6043f73722e7aa812a459f54a28552929"
+ SRCREV_protobuf = "cb6dd4ef5f82e41e06179dcd57d3b1d9246ad6ac"
+ SRCREV_lss = "9719c1e1e676814c456b55f5f070eabad6709d31"
+-SRCREV_gyp = "324dd166b7c0b39d513026fa52d6280ac6d56770"
+ 
+ SRC_URI = "git://github.com/google/breakpad;name=breakpad;branch=main;protocol=https \
+            git://github.com/google/googletest.git;destsuffix=git/src/testing/gtest;name=gtest;branch=main;protocol=https \
+            git://github.com/protocolbuffers/protobuf.git;destsuffix=git/src/third_party/protobuf/protobuf;name=protobuf;branch=master;protocol=https \
+            git://chromium.googlesource.com/linux-syscall-support;protocol=https;branch=main;destsuffix=git/src/third_party/lss;name=lss \
+-           git://chromium.googlesource.com/external/gyp;protocol=https;destsuffix=git/src/tools/gyp;name=gyp;branch=master \
+            file://0001-include-sys-reg.h-to-get-__WORDSIZE-on-musl-libc.patch \
+            file://0003-Fix-conflict-between-musl-libc-dirent.h-and-lss.patch \
+            file://0001-Turn-off-sign-compare-for-musl-libc.patch \
+@@ -41,6 +37,7 @@ SRC_URI = "git://github.com/google/breakpad;name=breakpad;branch=main;protocol=h
+            file://0004-elf_reader.cc-include-sys-reg.h-to-get-__WORDSIZE-on.patch \
+            file://mcontext.patch \
+            file://0001-Remove-HAVE_GETCONTEXT-check-to-add-local-implementa.patch \
++           file://0001-Fixed-missing-include-for-std-find_if.patch \
+            file://0001-lss-Match-syscalls-to-match-musl.patch;patchdir=src/third_party/lss \
+            file://mips_asm_sgidefs.patch;patchdir=src/third_party/lss \
  "
- 
- SRCREV = "89227a428a82e724548399d35c98ea89566f9045"
 -- 
 2.43.0
 
