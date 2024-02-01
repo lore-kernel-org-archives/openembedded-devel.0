@@ -1,94 +1,99 @@
-Return-Path: <alperyasinak1@gmail.com>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B4BEC48286
-	for <webhook@archiver.kernel.org>; Thu,  1 Feb 2024 17:40:34 +0000 (UTC)
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
- by mx.groups.io with SMTP id smtpd.web10.1547.1706809233185492398
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5DF56C4828D
+	for <webhook@archiver.kernel.org>; Thu,  1 Feb 2024 22:39:54 +0000 (UTC)
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+ by mx.groups.io with SMTP id smtpd.web11.9593.1706827192709751753
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 01 Feb 2024 09:40:33 -0800
+ Thu, 01 Feb 2024 14:39:53 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=G3xSUn69;
- spf=pass (domain: gmail.com, ip: 209.85.221.50, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-33b1b21c020so330101f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 01 Feb 2024 09:40:32 -0800 (PST)
+ dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=VGOxqOwr;
+ spf=pass (domain: smile.fr, ip: 209.85.128.53, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-40e8fec0968so13185505e9.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 01 Feb 2024 14:39:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1706809231; x=1707414031; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=B5a34RDXhOs0bLJB51RwrnXqAnwgqy5vUZzjARgAG+E=;
-        b=G3xSUn690YV1xMjklFR/ZTVtCmyUVbQKyruyDEjFSTxzFOwCN35btwG51//RgC1aCO
-         Bta8xcKh3URGsoIsTJt86QrhcccZBrXOr302cJqEjgo4tUy/IUC4C6L6Ted1OkGyaxqH
-         AzcEsBMJ/p9WrWTs9XQyfsQeX1RsFQ5mEXKWFPcD1heLFraUm50a0TM+6riSABO/q+lj
-         SLJVtbRYJueYfn6sFFjbV75zMoleIWKDvINmO2CuVvafyiVQKrlLYma/2F9SBadE9iXp
-         vsrn/idYn5X+kjpVr2hP2bk2DIITlADOcNAjEBBAh5Cq5bkEg1KtZzTLOvzRNn/lq5VK
-         xg2w==
+        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1706827190; x=1707431990; darn=lists.openembedded.org;
+        h=content-transfer-encoding:organization:content-language:to:subject
+         :from:user-agent:mime-version:date:message-id:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=oFbf0Lcih1Z0kMAKF79pEYYGj6hkLWZjWKHcIBSHAIk=;
+        b=VGOxqOwrpNlzwq/xQvWNIyG96YWy15yIPbIvXwhprDCZOCz25PBaooy5R5s4/jfFbN
+         exixIZu1Wjb7doMRTHHFswr+P/3dzR7tyvo5eWqmLnX+YRuIhjJkd2EIDpUh24CBB/0V
+         kjXcNZSZyHU1b8ieyeaW8vKw06IY8dvAAT4h+O6jD+mlNxq4YqRKvCXViUr+2dKner0y
+         GbwPIYRXF7Y60QJV8ItbOxSo46lrBMfnGbZIQfJV6FSEkiNCMafo6W3Pnw8EEjHVoMwB
+         P/9b7Kj3Q9QGPZI/CoTxwRZFk7ULLzkMoRqKeJv3T1EjaoEO2f8FcyHU9Jg4VmvCCiFF
+         pjYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1706809231; x=1707414031;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=B5a34RDXhOs0bLJB51RwrnXqAnwgqy5vUZzjARgAG+E=;
-        b=aS4caFH8tqHk2k9Ly5fGZ8HPsovGoum0tvuaLBW2iF8FWgC7ZTEXNOfhUt/1ejEmKc
-         PilDmzn4dQ8yu27PpsQhxseVUHAXU//IezzYoCmci75hbIQ0eYDDVIqGgNAFhpuIGe/8
-         f3+9FZgL6oHruoFaTvdvlKQbqHWcisa8d2f+xqyq6Kob6L8aAtsXjcEXE4v0Bt3ipk+5
-         o4ru9EF3J3edGn1XtGgNQ0QJrMcekojUMnYabvCmwIValb4j+4llMzP39wJWPX5xAM/D
-         cHxeVPlI+7EBIyK3rqWEoRKcpYS/y01PPOijFpVLqDBSWe7DVNAmxQjJldnzsg5aeVPd
-         2y/Q==
-X-Gm-Message-State: AOJu0Yw9pTtsxP6j33SzQCiMpAJVgAejclxGQBtpDe2iO4SKtoFHyCqW
-	Fr8A2R7b/jkJv6PyqUUDQLUXOkUblnzEdkiuc/ta6502AR3j8P9Imil6qkk/6Ds=
-X-Google-Smtp-Source: AGHT+IEeQFxUP98ueb4xuRbJSS1tH04CI3XROeRXGgDQcDkPBuLozX8mSkJpvQwsJ3lvpnZBi2LXBw==
-X-Received: by 2002:adf:ef4d:0:b0:33a:ea49:34db with SMTP id c13-20020adfef4d000000b0033aea4934dbmr4075771wrp.60.1706809230996;
-        Thu, 01 Feb 2024 09:40:30 -0800 (PST)
-Received: from localhost.localdomain ([176.33.65.159])
-        by smtp.gmail.com with ESMTPSA id d2-20020a5d4f82000000b0033af670213dsm258041wru.110.2024.02.01.09.40.29
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 01 Feb 2024 09:40:30 -0800 (PST)
-From: alperak <alperyasinak1@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-python][PATCHv2] python3-google-auth-oauthlib: add recipe
-Date: Thu,  1 Feb 2024 20:40:20 +0300
-Message-Id: <20240201174020.94018-1-alperyasinak1@gmail.com>
-X-Mailer: git-send-email 2.25.1
+        d=1e100.net; s=20230601; t=1706827190; x=1707431990;
+        h=content-transfer-encoding:organization:content-language:to:subject
+         :from:user-agent:mime-version:date:message-id:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=oFbf0Lcih1Z0kMAKF79pEYYGj6hkLWZjWKHcIBSHAIk=;
+        b=nJ6xrN7lEO7XO/gs7PIpFmtmAMHVkGFXR/hZzAFQHvF+8tEPshlBYHd3H88lvXuT2p
+         b8i1lizuKjMUshG3erWv9f7Bd65lO0s8rGQ4xsrWV+sLnn+xO1BnMjNFiH8BerwCYTL8
+         sj8smC4CeFf2XlYY4/v6GVGouLcEz212afYJmD+xXUY4o7mPGpT7Hr33pGfIi8qTCkvp
+         CxldFmOJ6d72DEh1dq1T/JWn66d0yUmZhNaYdYhEmIGw1Rb+HLA9xK9rbB0JFQwUwyJt
+         h1WTRuEimA03dfNxXbxVMOeprYU84RlI/GOIq1fT3o+zpwTETILH9w4E9Kdy5NlHqUsa
+         p4eQ==
+X-Gm-Message-State: AOJu0Yw0fhIKccUMLti4QmnS0IEBCNJrZY8pAvYNvS1zbFFvW48eHyb3
+	FSdz4NKRgrby3yRYzWWIt4SUxPTPYXdWqKprZj4jzvEBg6sS+H/Ck6xQyOc8TnfxLnB7gU/1ZjU
+	akpM=
+X-Google-Smtp-Source: AGHT+IG8HC674Uw4oKxvXmKuWHybJI54ZNdFOQHnTEnj3q7v7322vLzVjeReZ6KkVn4z4OrEBIAgcw==
+X-Received: by 2002:a05:600c:1f93:b0:40e:f66f:1959 with SMTP id je19-20020a05600c1f9300b0040ef66f1959mr4648613wmb.17.1706827190281;
+        Thu, 01 Feb 2024 14:39:50 -0800 (PST)
+Received: from [192.168.0.20] ([89.159.1.53])
+        by smtp.gmail.com with ESMTPSA id u18-20020a05600c19d200b0040fbc9a3405sm2885886wmq.0.2024.02.01.14.39.49
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 01 Feb 2024 14:39:50 -0800 (PST)
+Message-ID: <c9858cf1-f8e5-4462-9d6a-db84b0924f1c@smile.fr>
+Date: Thu, 1 Feb 2024 23:39:49 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+From: Yoann Congal <yoann.congal@smile.fr>
+Subject: Bug tracking for meta-openembedded ?
+To: openembedded-devel@lists.openembedded.org
+Content-Language: fr, en-US
+Organization: Smile ECS
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 01 Feb 2024 17:40:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108520
+ <openembedded-devel@lists.openembedded.org>; Thu, 01 Feb 2024 22:39:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108521
 
-This library is part of the Google Auth Library and simplifies the authentication and authorization processes by utilizing the OAuth protocol.
+Hi,
 
-Signed-off-by: alperak <alperyasinak1@gmail.com>
----
- .../python/python3-google-auth-oauthlib_1.2.0.bb   | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-google-auth-oauthlib_1.2.0.bb
+We recently extended some of the continuous tests from oe-core/poky to meta-openembedded :
+* meta-oe-mirror: mirroring all meta-openembedded sources
+  * https://autobuilder.yoctoproject.org/typhoon/#/builders/156
+* reproducible-meta-oe: is meta-openembedded reproducible?
+  * https://autobuilder.yoctoproject.org/typhoon/#/builders/155
+* auh-meta-oe: Are there upgrade available upstream?
+  * https://autobuilder.yoctoproject.org/typhoon/#/builders/159
 
-diff --git a/meta-python/recipes-devtools/python/python3-google-auth-oauthlib_1.2.0.bb b/meta-python/recipes-devtools/python/python3-google-auth-oauthlib_1.2.0.bb
-new file mode 100644
-index 000000000..b1e89e4b4
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-google-auth-oauthlib_1.2.0.bb
-@@ -0,0 +1,14 @@
-+SUMMARY = "Google Authentication Library"
-+DESCRIPTION = "This library provides oauthlib integration with google-auth"
-+HOMEPAGE = "https://github.com/googleapis/google-auth-library-python-oauthlib"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
-+
-+SRC_URI[sha256sum] = "292d2d3783349f2b0734a0a0207b1e1e322ac193c2c09d8f7c613fb7cc501ea8"
-+
-+inherit pypi setuptools3
-+
-+RDEPENDS:${PN} = " \
-+    ${PYTHON_PN}-google-auth \
-+    ${PYTHON_PN}-requests-oauthlib \
-+"
+All of those tests are *wide*, they try to fetch "universe" and build "world" for all meta-openembedded sub-layers.
+Doing that it caught a bunch of warning/errors.
+
+For example, take https://autobuilder.yoctoproject.org/typhoon/#/builders/155/builds/9:
+* Some packages are not reproducible (this is not surprising)
+* Some throw warnings at build: "mariadb-native: native/nativesdk class is not inherited last[...]"
+* Some simply don't build : "radvd-2.19-r0 do_prepare_recipe_sysroot: radvd: useradd command did not succeed."
+
+My question is: How can we report/track/attribute these problems?
+
+I've asked this question during the Yocto bug triage meeting. Information I've got then was:
+* The current way to report bugs to meta-openembedded is this mailing list (Which I didn't know)
+* The Yocto bugzilla might host the meta-openembedded bugs (the bug triage effort being a separate subject)
+* This subject need a larger conversation (maybe involving meta-openembedded TSC) 
+
+So, this is me, starting this conversation :-)
+
+Regards,
 -- 
-2.25.1
-
+Yoann Congal
+Smile ECS - Tech Expert
 
