@@ -2,132 +2,129 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AA563C48286
-	for <webhook@archiver.kernel.org>; Fri,  2 Feb 2024 03:02:35 +0000 (UTC)
-Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
- by mx.groups.io with SMTP id smtpd.web11.14805.1706842949352878811
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 122A8C47258
+	for <webhook@archiver.kernel.org>; Fri,  2 Feb 2024 04:46:16 +0000 (UTC)
+Received: from mail-oa1-f45.google.com (mail-oa1-f45.google.com [209.85.160.45])
+ by mx.groups.io with SMTP id smtpd.web11.16272.1706849167819455232
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 01 Feb 2024 19:02:29 -0800
+ Thu, 01 Feb 2024 20:46:07 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Wz+QV5EX;
- spf=pass (domain: gmail.com, ip: 209.85.216.44, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f44.google.com with SMTP id 98e67ed59e1d1-295f3bf41d5so274478a91.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 01 Feb 2024 19:02:29 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=aFraeQnE;
+ spf=pass (domain: gmail.com, ip: 209.85.160.45, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f45.google.com with SMTP id 586e51a60fabf-218dcbd1584so1096870fac.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 01 Feb 2024 20:46:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1706842948; x=1707447748; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=pCHivhntGDwvOCQSVVbxiCtF0OHwhCtYOC7u2s96n+E=;
-        b=Wz+QV5EX1XkrOeEn7QH4PyT8fJVSSPXZkWpX/xpwDJ3SJUSOOKfvgSg2XtdeNClxQV
-         IREe5pR+A8XC29S8me2RHpmAdfoHYCwz7yIctgZiU508OhsS1uOva/NuZDkn3y+tSNap
-         zcugNyBHIhkZT5s04ucRghdXxcnox5DHinnU89py3yLrJadhfb2ePayCcnGvllsBoBt3
-         2Xzc0JZHT0kOzC3pAjgy14B7pm9DjuYOvnXQAnWCr+TFBqDhRjbTl63ouC7lo4gPth7/
-         geT7iyMblXlE25GtqN8IwadLA5xVyqT7XMRyi+Rwr1bCnyxwLpFvKlyiLah4Axf/BV8G
-         pwBA==
+        d=gmail.com; s=20230601; t=1706849167; x=1707453967; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=tHANF/6brG2nPUgsVXyumP2HzqWlhzgmZQwR/e1YIDM=;
+        b=aFraeQnE8VstVLonQj+FDAgUaVYysPrSia729FteDgrHquix8aWs4WVLb7sD7QcbX0
+         tGPfEQ26L8YTRKifjDcfXkHVQBtzl4D2HzWT0X1t1gsGmQB0na+OF+wx3+4VYYB8EcQU
+         HFob3XnzOD+LKq7PtH1mhTrCz92NvluvWM5LrVndApI1bv3W3I5O5r/xxrRjoeYysEcb
+         UMAwLeVU8bt95xv5FstiuThqNqh4gx/FLGPEh/VHPlh5Ug4ynKXOR9212sRNY5jB7RIK
+         /S8Pbdl2B9i0Bpa8Nhc3lDaT2QCOwyXvPuIMDw55TlAJ2djjmWhadDt1EnZnN80J38tx
+         VA/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1706842948; x=1707447748;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=pCHivhntGDwvOCQSVVbxiCtF0OHwhCtYOC7u2s96n+E=;
-        b=uo5ZC452OkOP5VpK2QdOZAuKFu5UyxGTrkqWLobfBW8oqsfFQnmMq6c3Qy95KxFMUh
-         H8eTlGRZ6t0IEPauijDoK9HwyYge3FUvVjN0q4dZQVhPTTcFB3/Kh52NC1ldYcYswjvi
-         pWFwcdEC1buJJoAalHEJL1FtqmxWWPZj7Nvn6LdFYllW1epLa3UijmXAEyCR0a3d9SGz
-         Ryc/ixBb+kTX1XOL905GSB8Feqc9PeRy2KLod1jFsS9k/7lA5p3JSfcSRRm3bAdMNA9S
-         mfwQqae7i/IfHTuHMoIaLjxO2FStQvmHfBA5WkV6ynW+fn/Vg10Lb/ZKNWixStJFGeVf
-         3lfw==
-X-Gm-Message-State: AOJu0YwMmI0T8u2es6z4wPtlhwK9L/+ZylWmvu2BI4Itfo/eUee6xSIz
-	wBrp/hEY5z4V7zSRDBr2vALSl0DfOKL2p60E551OXHgkU7ejrjVEe7jqzpf/NjA=
-X-Google-Smtp-Source: AGHT+IGp2x/Nq1Ge0Lh5tb2DGBXIGxQ1KxNtfngcgZkx98yqK6SMeHBRQ8zuCqZR7CZHGlJieASZuA==
-X-Received: by 2002:a17:90a:868c:b0:295:ef2a:d0fb with SMTP id p12-20020a17090a868c00b00295ef2ad0fbmr1424600pjn.5.1706842948353;
-        Thu, 01 Feb 2024 19:02:28 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::e58e])
-        by smtp.gmail.com with ESMTPSA id se8-20020a17090b518800b00295bc312ceasm579536pjb.34.2024.02.01.19.02.27
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 01 Feb 2024 19:02:27 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] flatcc: Fix build warnings found with clang-18
-Date: Thu,  1 Feb 2024 19:02:26 -0800
-Message-ID: <20240202030226.392012-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.43.0
+        d=1e100.net; s=20230601; t=1706849167; x=1707453967;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=tHANF/6brG2nPUgsVXyumP2HzqWlhzgmZQwR/e1YIDM=;
+        b=VXJ9aKdy5bbzOghY/9gZ/OSRyjT8WhpFf9ZQrbXQVrAMm2eR817wDJHQQJvwLc0PdG
+         X7WspjoI3ACpr3TGrMBbWIhzKMqnNHZ8UrR7OBzOxKgbVRYd1mlcHMeAJ3MgbvFB9hHF
+         rnKKYac7TyqiJgmswBnvFxFllY5zip3aQv8oxGc6b0zkcZdIISK6mOdGahhFTLmOt/Vd
+         T9ZY/AaWN091itbGnTJ8p/QM2N8Ka+PC9KLnDnkETRE8o58jmtiYWeYHUoTn+c7yzNLh
+         trV9coM4VCt64/UkZYlASM0q28Xq9ng18WwPDFCfeS27cqkSbtLUgLLvGGHvPDkZia22
+         aXHw==
+X-Gm-Message-State: AOJu0YxKkqlnpgIfPPEHddza6/kXyb8WiPXgAJTsHM2TlltqEt7qPuKS
+	m+4H9WApw+6uYvx5DbskOtZOoh5R3l88dWeoeFPYC8bVQlKqwteT/c4/GjB3FTibHTWyW10L2wE
+	1LR8Tj6syE2WQauE1f1gZiTFWdM5c0fHNXbM=
+X-Google-Smtp-Source: AGHT+IFf0XKIB8DY3UrZwlk95Uo/CqZe8Cm3xhzZjV3PgdNLXbByJa9fYJyGIWm7oodTOKq6F8NOxamrCslfVjuRUk8=
+X-Received: by 2002:a05:6870:6394:b0:218:5023:793c with SMTP id
+ t20-20020a056870639400b002185023793cmr6810716oap.25.1706849166997; Thu, 01
+ Feb 2024 20:46:06 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240202020149.2950813-1-chi.xu@windriver.com>
+In-Reply-To: <20240202020149.2950813-1-chi.xu@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 1 Feb 2024 20:45:41 -0800
+Message-ID: <CAMKF1soSDvn5vL3q2hvsf1Zq7agssHVOpyd9VG-8ux__skfcig@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] Update oe selftest case syzkaller.py
+To: Chi Xu <chi.xu@eng.windriver.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 02 Feb 2024 03:02:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108523
+ <openembedded-devel@lists.openembedded.org>; Fri, 02 Feb 2024 04:46:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108524
 
-Fix what we can, and also disable warning-as-error as some compilers can
-be quite ambitious.
+On Thu, Feb 1, 2024 at 6:01=E2=80=AFPM Chi Xu <chi.xu@eng.windriver.com> wr=
+ote:
+>
+> 1. Will meet following error when run test again.
+> [FATAL] bad config syzkaller param: can't find /root/poky/build-st/tmp/wo=
+rk/core2-64-poky-linux/syzkaller/git/package/usr/bin/linux_amd64/syz-fuzzer
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...ndard-version-23-for-__fallthrough__.patch | 31 +++++++++++++++++++
- meta-oe/recipes-devtools/flatcc/flatcc_git.bb |  2 ++
- 2 files changed, 33 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/flatcc/flatcc/0001-Check-for-C-standard-version-23-for-__fallthrough__.patch
+Can this be provided by some sort of native recipe and then a DEPENDS
+created to pull this in when
+building syzkaller
 
-diff --git a/meta-oe/recipes-devtools/flatcc/flatcc/0001-Check-for-C-standard-version-23-for-__fallthrough__.patch b/meta-oe/recipes-devtools/flatcc/flatcc/0001-Check-for-C-standard-version-23-for-__fallthrough__.patch
-new file mode 100644
-index 0000000000..c9ff55a167
---- /dev/null
-+++ b/meta-oe/recipes-devtools/flatcc/flatcc/0001-Check-for-C-standard-version-23-for-__fallthrough__.patch
-@@ -0,0 +1,31 @@
-+From 7c199e3b191a6f714694035f1eba40112e71675c Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 1 Feb 2024 18:41:51 -0800
-+Subject: [PATCH] Check for C standard version >= 23 for [[__fallthrough__]]
-+
-+This avoids warnings with clang-18+ e.g.
-+
-+pprintint.h:256:6: error: [[]] attributes are a C23 extension [-Werror,-Wc23-extensions]
-+
-+Upstream-Status: Submitted [https://github.com/dvidelabs/flatcc/pull/273]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ include/flatcc/portable/pattributes.h | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/include/flatcc/portable/pattributes.h b/include/flatcc/portable/pattributes.h
-+index 9240fa3..dd4918a 100644
-+--- a/include/flatcc/portable/pattributes.h
-++++ b/include/flatcc/portable/pattributes.h
-+@@ -57,7 +57,7 @@ extern "C" {
-+ 
-+ 
-+ /* https://en.cppreference.com/w/c/language/attributes/fallthrough */
-+-#if PORTABLE_HAS_C_ATTRIBUTE(__fallthrough__)
-++#if PORTABLE_HAS_C_ATTRIBUTE(__fallthrough__) && defined(__STDC_VERSION__) && __STDC_VERSION__ >= 202311L
-+ # define pattribute_fallthrough [[__fallthrough__]]
-+ #elif PORTABLE_HAS_ATTRIBUTE(__fallthrough__)
-+ # define pattribute_fallthrough __attribute__((__fallthrough__))
-+-- 
-+2.43.0
-+
-diff --git a/meta-oe/recipes-devtools/flatcc/flatcc_git.bb b/meta-oe/recipes-devtools/flatcc/flatcc_git.bb
-index 660a44c5a5..161c4107b5 100644
---- a/meta-oe/recipes-devtools/flatcc/flatcc_git.bb
-+++ b/meta-oe/recipes-devtools/flatcc/flatcc_git.bb
-@@ -10,6 +10,7 @@ PV = "0.6.2+gitr${SRCPV}"
- 
- SRC_URI = " \
-            git://github.com/dvidelabs/flatcc.git;protocol=https;branch=master \
-+           file://0001-Check-for-C-standard-version-23-for-__fallthrough__.patch \
- "
- SRCREV = "1653ec964730ec7d9892a08a1695ada6d20f5196"
- 
-@@ -22,6 +23,7 @@ inherit cmake
- EXTRA_OECMAKE += " \
-     -DFLATCC_INSTALL=On \
-     -DFLATCC_TEST=Off \
-+    -DFLATCC_ALLOW_WERROR=Off \
- "
- 
- BBCLASSEXTEND = "native nativesdk"
--- 
-2.43.0
-
+> This is because oe-selftest will add "SSTATE_DIR" to local.conf,
+> bitbake will not build syzkaller again, then test case can not
+> find syz-fuzzer under work dirertory.
+> Fix this isseu with adding SSTATE_SKIP_CREATION:pn-syzkaller =3D "1"
+> to configure file.
+>
+> 2. Image name has been changed from core-image-minimal-qemux86-64.ext4
+> to core-image-minimal-qemux86-64.rootfs.ext4, so update the defination
+> of self.rootfs.
+>
+> Signed-off-by: Xu, Chi <chi.xu@windriver.com>
+> ---
+>  meta-oe/lib/oeqa/selftest/cases/syzkaller.py | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/lib/oeqa/selftest/cases/syzkaller.py b/meta-oe/lib/o=
+eqa/selftest/cases/syzkaller.py
+> index 64fc864bf..2c35ba230 100644
+> --- a/meta-oe/lib/oeqa/selftest/cases/syzkaller.py
+> +++ b/meta-oe/lib/oeqa/selftest/cases/syzkaller.py
+> @@ -65,6 +65,7 @@ KERNEL_EXTRA_FEATURES +=3D " \
+>      cfg/debug/syzkaller/debug-syzkaller.scc \
+>  "
+>  IMAGE_INSTALL:append =3D " syzkaller"
+> +SSTATE_SKIP_CREATION:pn-syzkaller =3D "1"
+>  """
+>  % (self.machine, self.fstype))
+>
+> @@ -110,7 +111,7 @@ SYZ_QEMU_CPUS=3D"2"'    # number of cpus used by each=
+ qemu VM
+>
+>          self.syz_cfg =3D os.path.join(self.syz_workdir, 'syzkaller.cfg')
+>          self.kernel =3D os.path.join(self.deploy_dir_image, 'bzImage')
+> -        self.rootfs =3D os.path.join(self.deploy_dir_image, '%s-%s.%s' %=
+ (self.image, self.machine, self.fstype))
+> +        self.rootfs =3D os.path.join(self.deploy_dir_image, '%s-%s.rootf=
+s.%s' % (self.image, self.machine, self.fstype))
+>
+>          self.syz_native_sysroot =3D get_bb_var('RECIPE_SYSROOT_NATIVE', =
+'syzkaller-native')
+>
+> --
+> 2.25.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#108522): https://lists.openembedded.org/g/openembedde=
+d-devel/message/108522
+> Mute This Topic: https://lists.openembedded.org/mt/104111739/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
