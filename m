@@ -2,107 +2,103 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 27407C48286
-	for <webhook@archiver.kernel.org>; Tue,  6 Feb 2024 08:01:54 +0000 (UTC)
-Received: from esa8.hc1455-7.c3s2.iphmx.com (esa8.hc1455-7.c3s2.iphmx.com [139.138.61.253])
- by mx.groups.io with SMTP id smtpd.web11.17074.1707206509158978466
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A4D1C48286
+	for <webhook@archiver.kernel.org>; Tue,  6 Feb 2024 08:05:24 +0000 (UTC)
+Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
+ by mx.groups.io with SMTP id smtpd.web10.17098.1707206718318806859
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 06 Feb 2024 00:01:49 -0800
+ Tue, 06 Feb 2024 00:05:19 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=cfBGPZdD;
- spf=pass (domain: fujitsu.com, ip: 139.138.61.253, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=JI5RHZGW;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1707206509; x=1738742509;
+  t=1707206718; x=1738742718;
   h=from:to:cc:subject:date:message-id;
-  bh=EB7rzG7IXT73JhP15tSIo/LXObLMtjn3xAkobD8PycY=;
-  b=cfBGPZdDcYBUL9i3wfLBji+3Uraa5pg+H0QQOpTwwvsRM/JAvvU+KeeH
-   mZ0V1DJYXsu3UOCDRVSwaR+xt34WVQhKciQMrtX7vQOzDKMga8+iLmbWo
-   EawVVdE1tfRgu7Cb6c3E8TOXzhn9JtGeGRE7byN7AWSNUIZXSmPKlff11
-   RKbRsmrix3xI3dqx+oWF6c8VgXKdnl95MsFmtLHnrOZUvU1HAkY6/yWHJ
-   mSljtkTXJP5pkckmzTe8eeIQh5qMxvBUthtNGlBnbtwgWDiGcvi4bN/ty
-   Hni+4Rm1vm8hZSchK9/hLgzu4spKh1Xxh0b7Lu13FHOAG+WH3VGBaodqb
-   g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10975"; a="136543777"
+  bh=qqH8pwbSiKXqxTVtoC4jAkqQtI7NM33wzmM8CoyLwHs=;
+  b=JI5RHZGWFYq5IsgBeUrPbc0gZfFBX1462NkGlvR9hqbZSWoFQu9zLH2W
+   idCpLtXBleYrRnthbQFjAzKtkArJA5cT0yecBsjLi8h0KC2+CC1zOosTW
+   Unc2jrmTed0I/pJgCj2hkfkdMSq9xZpSyEIApyTdm7n3zO2syCIp+ZCPE
+   RkENymiAbiXeixnk1bFL3N0zQuIpBAsVN6RyIJjI8kk2uDImsrI7rivV/
+   im+DIixCtXDRK9cipyJ188LDGN0aEZ4+gmtsZQXyIi+Pj81dYhbjoljQD
+   hczPCz8F6zJ8S0x9WEUA8oMFYGbZJ+pVD+Lw9y7dJRwddnY4TShFupJAp
+   A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10975"; a="148534060"
 X-IronPort-AV: E=Sophos;i="6.05,246,1701097200"; 
-   d="scan'208";a="136543777"
-Received: from unknown (HELO oym-r4.gw.nic.fujitsu.com) ([210.162.30.92])
-  by esa8.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Feb 2024 17:01:47 +0900
-Received: from oym-m2.gw.nic.fujitsu.com (oym-nat-oym-m2.gw.nic.fujitsu.com [192.168.87.59])
-	by oym-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id C5D071DDD50
-	for <openembedded-devel@lists.openembedded.org>; Tue,  6 Feb 2024 17:01:44 +0900 (JST)
+   d="scan'208";a="148534060"
+Received: from unknown (HELO yto-r3.gw.nic.fujitsu.com) ([218.44.52.219])
+  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Feb 2024 17:05:16 +0900
+Received: from yto-m1.gw.nic.fujitsu.com (yto-nat-yto-m1.gw.nic.fujitsu.com [192.168.83.64])
+	by yto-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 99760E9A27
+	for <openembedded-devel@lists.openembedded.org>; Tue,  6 Feb 2024 17:05:13 +0900 (JST)
 Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
-	by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id B8DC2BF4AD
-	for <openembedded-devel@lists.openembedded.org>; Tue,  6 Feb 2024 17:01:43 +0900 (JST)
+	by yto-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id D3D87CF7C2
+	for <openembedded-devel@lists.openembedded.org>; Tue,  6 Feb 2024 17:05:12 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 29BAA1EBE52
-	for <openembedded-devel@lists.openembedded.org>; Tue,  6 Feb 2024 17:01:43 +0900 (JST)
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 5DA58E20FD
+	for <openembedded-devel@lists.openembedded.org>; Tue,  6 Feb 2024 17:05:12 +0900 (JST)
 Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id BAA841A006A;
-	Tue,  6 Feb 2024 16:01:42 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id E60861A006A;
+	Tue,  6 Feb 2024 16:05:11 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-networking] [PATCH] squid: upgrade 6.6 -> 6.7
-Date: Tue,  6 Feb 2024 16:01:16 +0800
-Message-Id: <1707206476-5165-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH] iotop: upgrade 1.25 -> 1.26
+Date: Tue,  6 Feb 2024 16:02:11 +0800
+Message-Id: <1707206531-5245-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28170.005
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28170.005
-X-TMASE-Result: 10--0.721900-10.000000
-X-TMASE-MatchedRID: 242WXRytjV6jz0nOeth/yUIIxwDaU5mrGBULflUTtXThA4WtAM986Q/9
-	275IaKqDqh6ayVk/ef+hH9YEXFGn/i8oE1Ngob6lHEDUAqZUZM72/fdRbxY1gLoVNuDqd1E5PbG
-	fARr+8Lq3T22yAfj5MHjhw4b/Sd4TTjMjF3x6fOlYUconbBJWJApbrx4idn+FoS4fXu6r0iIG6E
-	w0t87pQGTBHJB+pPJTTDW61Lsl8qP3NhTrOUQg2z9B1SHosSXQN5dqZcIK7VjAuQ0xDMaXkO5tC
-	u25FAyi/ylbX2Ykg6a4aE+cD2zDF/PumXek4cU6SHCU59h5KrHjLrHqvAiSy1cZNuxCoduS1vZ7
-	s3YIVDJ6eUBjjG/BILVijUdnqQBWkfRhdidsajMURSScn+QSXgGlEJORGTlJ+gtHj7OwNO2qszj
-	olCcvyN0fD3xblzVxZo9ARkr4Fy0uDCbr8K4vilAEtnq9/UFoAEIH2HZiSIz80HyIgwt61eIcx/
-	mugluAPY+kA9pZjL8XoW+7sGuBp/IMFg0InOPqz5gAnmajvOU4qCidlj1MUy0uABDi47cA
+X-TMASE-Result: 10--0.408200-10.000000
+X-TMASE-MatchedRID: dhm/lGuWeZijz0nOeth/yUIIxwDaU5mrF4r8H5YrEqyc2kGz0N2bplfW
+	IQC27i4vjf84k1uW53jqXvXKPBg5Bm0Xr+fj3ww/TuctSpiuWyU2ZWOmuJUS2RKve+dd8RhJeVs
+	0skyEaS2BkESMI05d4qjeYGNquYUzTweK12oEGfvdCok3ibXlQX0tCKdnhB58I/9UW5M5dRNp7q
+	EhmmPgy46HM5rqDwqtg/xcbL3pZGAyTlhz6Dj6zj8JnPxMwTQMr9AYt8xrZb9kRN/dsJk8jKg4x
+	jRIq8QQ5Vm0BJ2FmrjKTGhJ1WwTq9RFlrCNyXv1HSbhGbmGylXFJK7yLnZRGZdO3Q67ImL8gi4R
+	Uz90EQwG2MApbv6odw==
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 06 Feb 2024 08:01:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108602
+ <openembedded-devel@lists.openembedded.org>; Tue, 06 Feb 2024 08:05:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108603
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-===========
-- Bug 5337: workaround for crash on startup if -a option is used
-- Bug 5274: Successful tunnels logged as TCP_TUNNEL/500
-- Fix crash when NTLM and Negotiate helpers are queried with no HTTP request
-- Fix SslBump memory leak when mimicking certificates with Authority Key Identifier
-- Fix memory leak on SslBump certificates with Authority Key Identifier extension
-- Fix a possible integer overflow in FTP Gateway
-- Extend cache_log_message to Bug 5187 and job invalidation BUGs
-- Remove incorrect beta version warning
-- MS Windows portability improvements and some documentation improvements
+ Add clock in upper right corner
+
+License-Update: Copyright year updated to 2024.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../recipes-daemons/squid/{squid_6.6.bb => squid_6.7.bb}        | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-daemons/squid/{squid_6.6.bb => squid_6.7.bb} (98%)
+ .../recipes-extended/iotop/{iotop_1.25.bb => iotop_1.26.bb}   | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-extended/iotop/{iotop_1.25.bb => iotop_1.26.bb} (83%)
 
-diff --git a/meta-networking/recipes-daemons/squid/squid_6.6.bb b/meta-networking/recipes-daemons/squid/squid_6.7.bb
-similarity index 98%
-rename from meta-networking/recipes-daemons/squid/squid_6.6.bb
-rename to meta-networking/recipes-daemons/squid/squid_6.7.bb
-index e5053f092..519ece80f 100644
---- a/meta-networking/recipes-daemons/squid/squid_6.6.bb
-+++ b/meta-networking/recipes-daemons/squid/squid_6.7.bb
-@@ -25,7 +25,7 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${BPN}-${PV}.tar.bz2
+diff --git a/meta-oe/recipes-extended/iotop/iotop_1.25.bb b/meta-oe/recipes-extended/iotop/iotop_1.26.bb
+similarity index 83%
+rename from meta-oe/recipes-extended/iotop/iotop_1.25.bb
+rename to meta-oe/recipes-extended/iotop/iotop_1.26.bb
+index 8d19c6298..9b36b57cb 100644
+--- a/meta-oe/recipes-extended/iotop/iotop_1.25.bb
++++ b/meta-oe/recipes-extended/iotop/iotop_1.26.bb
+@@ -1,11 +1,11 @@
+ SUMMARY = "A top utility for I/O"
+ LICENSE = "GPL-2.0-or-later"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=72ad44c0841d1e759669d27744e39389"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=686f457fedcecd9b92d69e625291ffa2"
  
- SRC_URI:remove:toolchain-clang = "file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch"
+ DEPENDS = "ncurses"
  
--SRC_URI[sha256sum] = "bc73ce506050334f51441f9054ffba4eb7cfd365a5e98a6d178b8263b9222f40"
-+SRC_URI[sha256sum] = "7a09a0232026824c300b72c42cc5c0c431cbb65498f41d5dea48ef447ab8037e"
+ SRC_URI = "git://github.com/Tomas-M/iotop.git;branch=master;protocol=https"
+-SRCREV = "9d60bb7e262e0d41b0aa3bcfaa806fa4f42e548a"
++SRCREV = "b15743b04bb04ff1fc6e197d21ba30365349edcb"
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                     file://errors/COPYRIGHT;md5=d324bc1f9447d1d1588d75b22a678dc4 \
+ S = "${WORKDIR}/git"
+ 
 -- 
 2.34.1
 
