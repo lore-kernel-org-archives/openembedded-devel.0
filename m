@@ -2,92 +2,95 @@ Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 380D8C4828D
-	for <webhook@archiver.kernel.org>; Tue,  6 Feb 2024 11:31:45 +0000 (UTC)
-Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
- by mx.groups.io with SMTP id smtpd.web10.19367.1707219104547771113
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A4E7BC48297
+	for <webhook@archiver.kernel.org>; Tue,  6 Feb 2024 13:10:16 +0000 (UTC)
+Received: from mail-yb1-f172.google.com (mail-yb1-f172.google.com [209.85.219.172])
+ by mx.groups.io with SMTP id smtpd.web10.20998.1707225009334663192
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 06 Feb 2024 03:31:44 -0800
+ Tue, 06 Feb 2024 05:10:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=PIqCZQqs;
- spf=pass (domain: gmail.com, ip: 209.85.218.44, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-a3810e975aaso85955966b.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 06 Feb 2024 03:31:44 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=f/y5Q5SK;
+ spf=pass (domain: gmail.com, ip: 209.85.219.172, mailfrom: martin.jansa@gmail.com)
+Received: by mail-yb1-f172.google.com with SMTP id 3f1490d57ef6-dc6d5267cceso5054362276.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 06 Feb 2024 05:10:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1707219103; x=1707823903; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1707225008; x=1707829808; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=AwmVIQ77IWeTCj8qEvSkDeQBc5PZAcxGautLg9eI/lI=;
-        b=PIqCZQqsgIBBhfp4lMFzF+JkynIzxoIFfIKjtEePyAZMPSOhf3Ci75Fe2kOWqcigUc
-         /9ivQlKT7gSX/C/t30gLnsZX56uyUYeS3NzhqXqvHzJhZCiHyRsAWI2ieh/pqc1GhWsa
-         y8K7B0Z+gyPYW+rblTIzVULG+MLaIzNb0NLMTaUYAu4uIuGrwrcRQ5MCRvznLzbohOYX
-         hjXIG/yRUVfn/xTSmtXfm4hl+JjL6+7Ab4LQ1VfouSp9HtZZv/j7Ckhd53S7zCk7EGRe
-         XLlSR0h8vWts8SKoB0D6QVB+IPVCtnYznvzr9hkSXjmCz1EhFJ1unh9gK6nRzl69ZJtJ
-         6anw==
+        bh=Tab3iNJilhKIoa9yaXlJ+R5ZQKrYYnEow4beCnORyOY=;
+        b=f/y5Q5SK7QFdFpfngoSRB0h0cFiVZ6RQOutam8SisrIpdiDQyInJeoB8DdBR/tt38G
+         Vw3mtH5nBZL7bVrvhjXCGB+f7bJxrri/kWNXWzQc3UOj0BIGw0ZOfCabzD5DbytYaXe/
+         h0uZd2vTQrKS6xNouvIYfjiGz/d0AUKDTzcWy/S1O+RxAShe/zd6v3gFJZpoEmVhqRD5
+         3ooHNXMFYOp/yj04uEVM1nc73Ws3spJBGFjxRRcDFg1BcslEus5+8dtGwZRQuf3qE66/
+         Y3P0h8WGlzGKwKzaA3qdXd1TDg7bj2Gg1i8ukHYg4VTG91YRaL/ag1d+sRZlArixXt9l
+         ycMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707219103; x=1707823903;
+        d=1e100.net; s=20230601; t=1707225008; x=1707829808;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=AwmVIQ77IWeTCj8qEvSkDeQBc5PZAcxGautLg9eI/lI=;
-        b=J3/eHxLobZD1dFWEQ8t9ZvskIbUbpiEXorFu2JCf4uwLgZGCzqxIXPa27K6B2gXBFq
-         dsuzChZmTATdpWuUKO6aC93ZVoSrWlyTp9/g/fjZelq+khsdA9OrVWnukSR48ZgGLHYo
-         8XfJM9p8I5r8h73xoVUAqHeAHzXqnVbc4SQYAZCe0auGUyjxEzxo594pHPqa93/fDKJs
-         b82/iiLo/mA3bMq6Vng3ci93PTnBy9rcgF2ePEnOvPgtGTnxqqqG6aIxTJWBodoaczcV
-         0CNhMkgRgDkiEHYFaus1KiVpOxtrQAUBSZ2DaA6oV6udFubXrH0YrRgebUmbnktFbh//
-         TXmw==
-X-Gm-Message-State: AOJu0YwP8RkHuUnPrSQuwoHXncF7n780/caQ7LvOyEAsu9eqkyJtxBRS
-	+dX5OvGcSvxGHXq/TPPfzViSg8MbzqrCvTtXiIDQqGxoU2tqtposyj3ThgDo
-X-Google-Smtp-Source: AGHT+IF8Fx26jRKAV2vZQd5PNvtt6EZOufoS2aQcOTYRHG3lMNb4NMAamlcAZ3i752gS/tBSh9udTA==
-X-Received: by 2002:a17:906:5791:b0:a37:e980:5946 with SMTP id k17-20020a170906579100b00a37e9805946mr1398684ejq.24.1707219102781;
-        Tue, 06 Feb 2024 03:31:42 -0800 (PST)
-X-Forwarded-Encrypted: i=0; AJvYcCVQZfrAAgPIO2LQotPLt0Szof1fGLTfUaDz69JdABrwAosrJt22LlfGU4WePpFX9lyIwPWa284SfvdiaP2y079bVQlGiQCj
+        bh=Tab3iNJilhKIoa9yaXlJ+R5ZQKrYYnEow4beCnORyOY=;
+        b=hihp3xQE9HJE9sZqgosgXpti7LkgBucSrt26XPCspVxx3nZR0u1MTkCb+mGoDb7dLV
+         7WawhWolbg4RvVgR+9xB29rrpKNT0WH7x/REp2kYrVUuyFzmestKUpz7VbP7YMkYUE6g
+         jZwPQsYYJhHyykyYCKigkQJePZyRAP6vkUknv7juO6HlQdSHr5N0zGdiMTzGrvBDIsV+
+         Xn9I61zH3AnqJm5TguObiqPWp5t1VcGR93B+OhmwdF5t1teACKYti/pDc171pTPn8Ilf
+         Of4KE+yaenWPeTxUqLF2bErRQP2GYKiFFWCRG97vT3gmw3Vq5FO9N3MSS3Vy+bSogNI6
+         WMaA==
+X-Gm-Message-State: AOJu0Yy7wvAZXkwUKj5X2+Cv3RPtHVMre47AFffRFaUm8VOtUJ24VL2C
+	hbknrXH46tiqImDRsJ+zVvt9f4ij4Qf4Xp5oUgFrmp5lgZWA54NlJ9bbhYpE
+X-Google-Smtp-Source: AGHT+IEFvhVCfMRO196GaAzoUX1p9xxxIQ3jMa182DPeanGYr36asF54cPe98Sg1QAkIfEnskdgdrw==
+X-Received: by 2002:a05:6902:566:b0:dc6:421a:3024 with SMTP id a6-20020a056902056600b00dc6421a3024mr1503941ybt.43.1707225008450;
+        Tue, 06 Feb 2024 05:10:08 -0800 (PST)
+X-Forwarded-Encrypted: i=0; AJvYcCWDiubIVrOiAp0PdrcVhe5ptWF59zYglws7fVvjCAAASWyGwJKeM+VmeazoJ7XGBfvVK3w/A341n7vdleMnmayP9cD3tT9K
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id m3-20020a1709060d8300b00a3634a461f9sm1033434eji.109.2024.02.06.03.31.42
+        by smtp.gmail.com with ESMTPSA id u15-20020a25094f000000b00dbdbcb37e81sm473373ybm.31.2024.02.06.05.10.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 06 Feb 2024 03:31:42 -0800 (PST)
+        Tue, 06 Feb 2024 05:10:08 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Angelo.Ribeiro@criticaltechworks.com,
 	Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][PATCH] flatcc: respect baselib
-Date: Tue,  6 Feb 2024 12:31:37 +0100
-Message-ID: <20240206113137.464450-1-martin.jansa@gmail.com>
+Subject: [meta-oe][PATCH] flatcc: drop 'r' from gitr and ${SRCPV}
+Date: Tue,  6 Feb 2024 14:10:02 +0100
+Message-ID: <20240206131002.515330-1-martin.jansa@gmail.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 06 Feb 2024 11:31:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108625
+ <openembedded-devel@lists.openembedded.org>; Tue, 06 Feb 2024 13:10:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108626
 
-* avoid installed-vs-shipped with multilib when baselib is lib32 or lib64 instead of just lib
+* +git is preferred over +gitr since 2012:
+  https://lists.openembedded.org/g/openembedded-core/topic/72154716#16837
+  some recipes still use +gitr, because updating it would cause PV going backwards
+  but this recipe was added just recently so adjust that
 
-ERROR: QA Issue: lib32-flatcc: Files/directories were installed but not shipped in any package:
-  /usr/lib
-  /usr/lib/libflatcc.a
-  /usr/lib/libflatccrt.a
-Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
-lib32-flatcc: 3 installed and not shipped files. [installed-vs-shipped]
+* Drop SRCPV similarly like oe-core did in:
+  https://git.openembedded.org/openembedded-core/commit/?h=nanbield&id=843f82a246a535c353e08072f252d1dc78217872
+
+* SRCPV is deferred now from PV to PKGV since:
+  https://git.openembedded.org/openembedded-core/commit/?h=nanbield&id=a8e7b0f932b9ea69b3a218fca18041676c65aba0
 
 Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 ---
- meta-oe/recipes-devtools/flatcc/flatcc_git.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-devtools/flatcc/flatcc_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/meta-oe/recipes-devtools/flatcc/flatcc_git.bb b/meta-oe/recipes-devtools/flatcc/flatcc_git.bb
-index 161c4107b5..ed26299901 100644
+index ed26299901..2530dac526 100644
 --- a/meta-oe/recipes-devtools/flatcc/flatcc_git.bb
 +++ b/meta-oe/recipes-devtools/flatcc/flatcc_git.bb
-@@ -24,6 +24,7 @@ EXTRA_OECMAKE += " \
-     -DFLATCC_INSTALL=On \
-     -DFLATCC_TEST=Off \
-     -DFLATCC_ALLOW_WERROR=Off \
-+    -DFLATCC_INSTALL_LIB=${baselib} \
- "
+@@ -6,7 +6,7 @@ SECTION = "devel/lib"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b3d8fb7158bf7e2600ba3191428dc4ef"
  
- BBCLASSEXTEND = "native nativesdk"
+-PV = "0.6.2+gitr${SRCPV}"
++PV = "0.6.2+git"
+ 
+ SRC_URI = " \
+            git://github.com/dvidelabs/flatcc.git;protocol=https;branch=master \
 -- 
 2.43.0
 
