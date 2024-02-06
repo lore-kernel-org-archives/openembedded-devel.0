@@ -2,103 +2,98 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 13B27C4828D
-	for <webhook@archiver.kernel.org>; Tue,  6 Feb 2024 07:26:34 +0000 (UTC)
-Received: from esa11.hc1455-7.c3s2.iphmx.com (esa11.hc1455-7.c3s2.iphmx.com [207.54.90.137])
- by mx.groups.io with SMTP id smtpd.web11.16771.1707204389011321793
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 13D12C48286
+	for <webhook@archiver.kernel.org>; Tue,  6 Feb 2024 07:27:44 +0000 (UTC)
+Received: from esa2.hc1455-7.c3s2.iphmx.com (esa2.hc1455-7.c3s2.iphmx.com [207.54.90.48])
+ by mx.groups.io with SMTP id smtpd.web10.16735.1707204456908678938
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 05 Feb 2024 23:26:29 -0800
+ Mon, 05 Feb 2024 23:27:37 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=n35jVk8d;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.137, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=I1rr2XNn;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.48, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1707204389; x=1738740389;
+  t=1707204458; x=1738740458;
   h=from:to:cc:subject:date:message-id;
-  bh=N6bjzMkv1eV3Iy7rOmnUhELJl8a1NvmZuHtXN4SG1Uc=;
-  b=n35jVk8dSLlHYno5oJrnhRzkRJV9DoCnmQK8kq9QjQo8TFbupBZo9PMS
-   Wn6ozYHJn/cMsrWaImm0cTeGrcdQZ1rUZIjwQu+Bqn81N0UrQqkCmGLLp
-   98NXmGSRsYnzYhf0YJ5UiV4w54/FaI3sAz++u9wjA7shT3BxaGVRUK2T/
-   QHwpsW7dGecHFHx8NQTh8+Mn6p33MzMVNuCWVT2f9PVdkJTQ8AiNACea/
-   P0qb6o51f+hkFYJkXYbK8zwc3McXeumBqdbIlnGtpDsrq6+o/8XNwtKrY
-   CvPSEIcgE8xmElD1nk8r7JlxOIEvUJpAsbRjz3KhzkYhOZy3Aq17Abo3O
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10975"; a="127928443"
+  bh=JyUlcxRvXxYeM+WZ28Gp7IQdZTQWnPz99Q/xl51/k04=;
+  b=I1rr2XNnaLkW7JjGaBhdgnpZUOOkXLXDQlOvgHTcHq6vIOmSUgbDc7rJ
+   MIvLvEPjgMn6hDU5THwDLadYrCsOEl1YoTZQ8LpaSWVRqFoDtlOxr3d65
+   RNxBHA4zLC1jlzbvJErQ7HSWZ4lesMjbpYXegqg2ZlPMdOaVQlYjJiI3K
+   dwelDCitm2OTwQ0tsbm3jV0OwJcV7oWGtyhLQKxVaSGDwlW3uYQsiUUCT
+   iSl+SNO5WZbr9PvzQmoqOqLGRzEZUHi9CcssAIRZO8BklShL8Fy79OIsL
+   NbrGm8m1uKB+uZBbPaQuF6/fsylqnWAypUU5CZ5V4I5b2H6RxHAaUnChC
+   w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10975"; a="148550245"
 X-IronPort-AV: E=Sophos;i="6.05,246,1701097200"; 
-   d="scan'208";a="127928443"
-Received: from unknown (HELO yto-r3.gw.nic.fujitsu.com) ([218.44.52.219])
-  by esa11.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Feb 2024 16:26:27 +0900
-Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
-	by yto-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 703ABE95F4
-	for <openembedded-devel@lists.openembedded.org>; Tue,  6 Feb 2024 16:26:24 +0900 (JST)
-Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
-	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id BECCDD9683
-	for <openembedded-devel@lists.openembedded.org>; Tue,  6 Feb 2024 16:26:23 +0900 (JST)
+   d="scan'208";a="148550245"
+Received: from unknown (HELO oym-r4.gw.nic.fujitsu.com) ([210.162.30.92])
+  by esa2.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Feb 2024 16:27:35 +0900
+Received: from oym-m4.gw.nic.fujitsu.com (oym-nat-oym-m4.gw.nic.fujitsu.com [192.168.87.61])
+	by oym-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 20DA41DDD4F
+	for <openembedded-devel@lists.openembedded.org>; Tue,  6 Feb 2024 16:27:32 +0900 (JST)
+Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
+	by oym-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 1BA7326521F
+	for <openembedded-devel@lists.openembedded.org>; Tue,  6 Feb 2024 16:27:31 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 4C13D6C83F
-	for <openembedded-devel@lists.openembedded.org>; Tue,  6 Feb 2024 16:26:23 +0900 (JST)
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id AA63A20093574
+	for <openembedded-devel@lists.openembedded.org>; Tue,  6 Feb 2024 16:27:30 +0900 (JST)
 Received: from localhost.localdomain (unknown [10.167.225.33])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 06CE41A009A;
-	Tue,  6 Feb 2024 15:26:22 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 678541A009A;
+	Tue,  6 Feb 2024 15:27:30 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] md4c: upgrade 0.5.0 -> 0.5.2
-Date: Tue,  6 Feb 2024 15:25:30 +0800
-Message-Id: <1707204330-4637-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH] nanomsg: upgrade 1.2 -> 1.2.1
+Date: Tue,  6 Feb 2024 15:26:51 +0800
+Message-Id: <1707204411-4675-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28170.005
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28170.005
-X-TMASE-Result: 10--4.084800-10.000000
-X-TMASE-MatchedRID: n7p0zKhDeQSjz0nOeth/yQhqMB9TCLP2/Eo10sZXT1NffSkyb6LPSIxS
-	vzXEuxuJWdV1PkCMbWRhWgNOVfhPTLUN8Yzp1vtfpzmJJw2f0KE3l2plwgrtWDBwx50fHFECIUt
-	KH5AJM9ki+t+0AiFaYvL3NxFKQpq1TweK12oEGfvdCok3ibXlQU50qcJ5WOMhmyiLZetSf8nyb6
-	HMFK1qe11j5mhaIsibJ0RPnyOnrZJx7s8kKG295Fsp1oMd9+/pAD6Nk3uTEkgOnLMJl8oTzZyvq
-	ojGt4QDm0A/bDJ9fPhZJjVxGV4s0Uv7zOzQ/3Ha8oEUOPuTxURLv5Eyr/YIrqsDhztRXZ9Cm+LY
+X-TMASE-Result: 10-0.602000-10.000000
+X-TMASE-MatchedRID: n7p0zKhDeQSjz0nOeth/yUIIxwDaU5mrrOCEGIPhtwjIgofMgahPreoH
+	78fyjH+uq3UV6iO5sqDov4MY2WSEP+1a16oqp8B1/HTKStsDGMJHNQ8CqEKO2MC5DTEMxpeQRBg
+	61kSK4DiBkESMI05d4nF03j9r9uDD2qjKAYV8LUZvTnqYKYXTRlXgGeVUh3WdmyiLZetSf8nyb6
+	HMFK1qe11j5mhaIsibJ0RPnyOnrZJMlkIx10t2gkGMbwWPDUojXYsb0AqLlmzKuzSksMfz281cY
+	Y4iLoX3B+HlafgVAUmwQchNkZrN/TpkV9AvAKnAgRmTTF+vcs5Lv5Eyr/YIrqsDhztRXZ9Cm+LY
 	9A78UVCLPa6Os9XH3IQhTU20ySbR
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 06 Feb 2024 07:26:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108596
+ <openembedded-devel@lists.openembedded.org>; Tue, 06 Feb 2024 07:27:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108597
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Changes:
+Changelog:
 ===========
-- The specification expands set of Unicode characters seen by Markdown
-  parser as a punctuation. Namely all Unicode general categories P
-  (punctuation) and S (symbols) are now seen as such.
-- The definition of HTML comment has been changed so that '<!-->' and
-  '<!--->' are also recognized as HTML comments.
-- HTML tags recognized as HTML block starting condition of type 4 has been
-  updated, namely a tag '<source>' has been removed, whereas '<search>'
-  added.
+-Fixed #1105 which caused a SIGBUS on some some platforms due misaligned accesses.
+-Fixed a problem when using absolute CMake target directories.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- meta-oe/recipes-support/md4c/{md4c_0.5.0.bb => md4c_0.5.2.bb} | 2 +-
+ .../nanomsg/{nanomsg_1.2.bb => nanomsg_1.2.1.bb}                | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/md4c/{md4c_0.5.0.bb => md4c_0.5.2.bb} (87%)
+ rename meta-networking/recipes-connectivity/nanomsg/{nanomsg_1.2.bb => nanomsg_1.2.1.bb} (94%)
 
-diff --git a/meta-oe/recipes-support/md4c/md4c_0.5.0.bb b/meta-oe/recipes-support/md4c/md4c_0.5.2.bb
-similarity index 87%
-rename from meta-oe/recipes-support/md4c/md4c_0.5.0.bb
-rename to meta-oe/recipes-support/md4c/md4c_0.5.2.bb
-index 755d5f50f..6c409666f 100644
---- a/meta-oe/recipes-support/md4c/md4c_0.5.0.bb
-+++ b/meta-oe/recipes-support/md4c/md4c_0.5.2.bb
-@@ -12,6 +12,6 @@ SRC_URI = " \
-         git://github.com/mity/md4c.git;protocol=https;branch=master \
- "
+diff --git a/meta-networking/recipes-connectivity/nanomsg/nanomsg_1.2.bb b/meta-networking/recipes-connectivity/nanomsg/nanomsg_1.2.1.bb
+similarity index 94%
+rename from meta-networking/recipes-connectivity/nanomsg/nanomsg_1.2.bb
+rename to meta-networking/recipes-connectivity/nanomsg/nanomsg_1.2.1.bb
+index fdb781180..c250ea877 100644
+--- a/meta-networking/recipes-connectivity/nanomsg/nanomsg_1.2.bb
++++ b/meta-networking/recipes-connectivity/nanomsg/nanomsg_1.2.1.bb
+@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=587b3fd7fd291e418ff4d2b8f3904755"
+ SECTION = "libs/networking"
  
--SRCREV = "481230f4180cb0e0aad56da06de9327d5bacd570"
-+SRCREV = "729e6b8b320caa96328968ab27d7db2235e4fb47"
+ SRC_URI = "git://github.com/nanomsg/nanomsg.git;protocol=https;branch=master"
+-SRCREV = "a081f1720f576d3e72ddce14e159ba90384e5b92"
++SRCREV = "fc3f684a80151a3319446fc96083a9ff384ee4fe"
  
- inherit cmake
+ S = "${WORKDIR}/git"
+ 
 -- 
 2.34.1
 
