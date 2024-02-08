@@ -1,252 +1,139 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EC1CEC48260
-	for <webhook@archiver.kernel.org>; Thu,  8 Feb 2024 11:18:56 +0000 (UTC)
-Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
- by mx.groups.io with SMTP id smtpd.web10.15496.1707391136264611884
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 21C78C48260
+	for <webhook@archiver.kernel.org>; Thu,  8 Feb 2024 12:01:07 +0000 (UTC)
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
+ by mx.groups.io with SMTP id smtpd.web11.16136.1707393657829625330
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Feb 2024 03:18:56 -0800
+ Thu, 08 Feb 2024 04:00:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=F0tn/269;
- spf=pass (domain: smile.fr, ip: 209.85.218.47, mailfrom: yoann.congal@smile.fr)
-Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-a34c5ca2537so227770666b.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Feb 2024 03:18:56 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=bv2rOaFs;
+ spf=pass (domain: gmail.com, ip: 209.85.208.51, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-55a8fd60af0so2090247a12.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Feb 2024 04:00:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1707391135; x=1707995935; darn=lists.openembedded.org;
-        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=6qmV1MZ7XM8dv+20cEzx4ChIEoNUtyoCGQUfMx6hyhI=;
-        b=F0tn/269A0R6XOhCcOcvOfwDyZIQE9+8mI5Jw0QnnZ4mKXNHpcqI1vRt7heHWrtBuV
-         aua0swd/Z3GnddNMEAHNfDlPpmeWW5rJG7wZTCFj+Q063s5F1Z0KgwW2/jHDPCulabyM
-         KgdCs/qNigwPsJInFiFgsAPYk3sAxWTaCHjVLOrDNb9hsIfYjRScJxAg0BIjbswL7lj+
-         JhKqf0vr1b6FrUqH43w6mJqGtj6qhMGuUCEmepYVLIuHvDUXEheTZ2WyJcV4vRytnbk9
-         0BxhF5E26aB5n005UEtdDeAR8ZkT8L4UOInoTeGirQi7UK0Lm0CuOA9Ojr4vY9L41zIU
-         DZMw==
+        d=gmail.com; s=20230601; t=1707393656; x=1707998456; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=L57MJhtJeyqyoNiSiT9/iwOVJnhEMkcbkpqN9/gwI0I=;
+        b=bv2rOaFse+VMEoaFXGnKSWZmX/C9BZkAIoJ+2ldHR0wULi7GcG2YUMA4c/E1FLG6Ma
+         8HJrWitWReb0rKr3ZMPEkIdEBBxE6kML1hz+4pIWP5ssnfKhI0l9pwXF/iKRMuQmCdNA
+         OPJ2I+j5PzQzpQZVeIhgzCspa9E7xUTO/8NVNCxCNpPQ3GrfmZs4e0xs0H+EShxFtJlO
+         5QJZ5KsDlWhEcqY1y2VJOSyljmlYvr9d0qXI5msLA7ylOUgykD6IN4KvPp3EcpTWpBfX
+         CPd6gslE6lIAmFOassIox7cs71pkfjOXbp9sG6/1blpgqDMmjSBBakYOkyyhwHoAbM4j
+         LoVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707391135; x=1707995935;
-        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=6qmV1MZ7XM8dv+20cEzx4ChIEoNUtyoCGQUfMx6hyhI=;
-        b=aaNxPLW0gfrPcW2I0W8svx9KgTxv1owqhYAOed9eqo2NV4lxTFK1SiSWgC1o/qeuYN
-         P17LpIpts9v4MRVdytikCePr3yxMzXW/3B/KIXPMc0TnaBtEiwWNkAAZF5t7aIbGxaso
-         9WtS2o/3bhOZMbpoPrUjhpeECE7H4IZpvDdFHYSPtEj32/aQgXpPQ9avvn00D0+N1EYX
-         LbnimR4s/aqdEwgUu04xnOSYTsX6FgMazOA6101NWQMosYAT4Io2j0AdcJGBxuRX+feL
-         duNuEA9002nU6xO0qfBY8ZqnXrqHp8Dj1fe3qYND18ArCc9csmX4wIVc4gxQw6oXhT9D
-         2M2w==
-X-Forwarded-Encrypted: i=1; AJvYcCU3OaC45CI5VHhgGk6LDXHhvptRXT07EWuGA7lcJTYTJohdwv53HQYtLzJfNlK3LQsbZtcNTFH2ih0XjtmpZbwo8i3VcPH7b+RDevCx3915TeKviGWchZS4zQ==
-X-Gm-Message-State: AOJu0Yxcp6Y65QzYEb5QQzOa6y0M+l59bt+1icTY/w7KtPuIFFGdPk4p
-	QjNc5med34DUPHlqPckZIAVLOdrs/w7RfYr8q51WGeaVz9sQVtHkwE4I7/hL+HPWdDUy4plt4Dd
-	9dDbJfiVxxB2oY7FvYVZd3HGPvx4B9Zlu3Ej59D3fEgzG2ITLXwYuFA==
-X-Google-Smtp-Source: AGHT+IEgSDgcfguV0wYe2s1851JtxyUnuYprK/i7I+sp5FJRPLZmDeLM9uXx9uVLRg3TQOSTc/u7mTTrvBu2Ea7Cuus=
-X-Received: by 2002:a17:907:75e1:b0:a27:6570:adbc with SMTP id
- jz1-20020a17090775e100b00a276570adbcmr6486641ejc.33.1707391134704; Thu, 08
- Feb 2024 03:18:54 -0800 (PST)
+        d=1e100.net; s=20230601; t=1707393656; x=1707998456;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=L57MJhtJeyqyoNiSiT9/iwOVJnhEMkcbkpqN9/gwI0I=;
+        b=FtGw5wNZ8rqhMAt9dtvQR2/eHYGIrCQsm1/myJTTbkIk04OfiX/0FyEXVXC2eSCGF2
+         i4m3MxjXbCfZMp4/fb687Te6GR8OLnDgYLamsY1j/AUzPy4r9Bf80kJXjps1/T1LZbst
+         ZsjB01jAqhl0FQcg8s+1xfqzElbd9Ua8bpM4xrm3ptvk2cY5NxygZFqey8SWnT9MwF1P
+         +uLk2tcs9pV4mVvtqQtd7DPLrkdUmnZ2Clwr6d8ShL40thWK3HGVMwSOGP6JKraaiLkn
+         iGn5fyQplkDEVskQGsC5h3z/Y3dsczhOr0+ZlCuJoH7/RbDudHmzdVTrqkYhsdm6mxEo
+         64LQ==
+X-Gm-Message-State: AOJu0YwgxPkjUMliCZ/jfKR8RaLNAlAzMR48KQ2uRhCKfVJdjSTcZaJo
+	ZTpTAPWv16meEAlhIiNKclHf9FmUFLHqpwfY0wug7H3cYh/iFyyzmM0uSA2lon4=
+X-Google-Smtp-Source: AGHT+IG4t+qesYDMNd0kWGI93jD6GimJ2ikWM5EBuDGWQn+j30oujAoamxi0xjko/Q7sXq2NItAy2w==
+X-Received: by 2002:a17:906:3498:b0:a38:25f0:aa35 with SMTP id g24-20020a170906349800b00a3825f0aa35mr6243912ejb.41.1707393655376;
+        Thu, 08 Feb 2024 04:00:55 -0800 (PST)
+Received: from localhost.localdomain ([176.33.65.159])
+        by smtp.gmail.com with ESMTPSA id ps4-20020a170906bf4400b00a3bbf724978sm132584ejb.220.2024.02.08.04.00.54
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 08 Feb 2024 04:00:54 -0800 (PST)
+From: alperak <alperyasinak1@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: alperak <alperyasinak1@gmail.com>
+Subject: [meta-python][PATCHv2] python3-strenum: add recipe
+Date: Thu,  8 Feb 2024 15:00:45 +0300
+Message-Id: <20240208120045.2004323-1-alperyasinak1@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20240129062328.1689458-1-li.wang@windriver.com> <7d95b6d4-12bc-4f00-a391-b9c31d19e818@smile.fr>
-In-Reply-To: <7d95b6d4-12bc-4f00-a391-b9c31d19e818@smile.fr>
-From: Yoann CONGAL <yoann.congal@smile.fr>
-Date: Thu, 8 Feb 2024 12:18:28 +0100
-Message-ID: <CAMSfU+6_ek0pc2yRmSw4Ny3B=7gANf_MT8VRkGODf+-Yp3JzYA@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][kirkstone][PATCH] radvd: add '--shell
- /sbin/nologin' to /etc/passwd
-To: li.wang@windriver.com, openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="00000000000013b8510610dcfa96"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 08 Feb 2024 11:18:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108663
+ <openembedded-devel@lists.openembedded.org>; Thu, 08 Feb 2024 12:01:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108664
 
---00000000000013b8510610dcfa96
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+StrEnum is a Python enum.Enum that inherits from str to complement enum.IntEnum in the standard library
 
-Le lun. 29 janv. 2024 =C3=A0 09:07, Yoann Congal <yoann.congal@smile.fr> a
-=C3=A9crit :
+Signed-off-by: alperak <alperyasinak1@gmail.com>
+---
+ ...ioneer-for-python-3.12-compatibility.patch | 37 +++++++++++++++++++
+ .../python/python3-strenum_0.4.15.bb          | 14 +++++++
+ 2 files changed, 51 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-strenum/0001-patch-versioneer-for-python-3.12-compatibility.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-strenum_0.4.15.bb
 
-> Hi,
->
-> Le 29/01/2024 =C3=A0 07:23, Li Wang via lists.openembedded.org a =C3=A9cr=
-it :
-> > the default setting USERADD_PARAM of yocto:
-> > -s /bin/sh
-> >
-> > follow redhat policy:
-> > radvd/redhat/systemd/radvd.spec
-> >   useradd ... -s /sbin/nologin ...
-> >
-> > Signed-off-by: Li Wang <li.wang@windriver.com>
-> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
->
-> Can this fix this error from autobuilder by any chance?
->   stdio: ERROR: radvd-2.19-r0 do_prepare_recipe_sysroot: radvd: useradd
-> command did not succeed.
->   stdio: ERROR: radvd-2.19-r0 do_prepare_recipe_sysroot:
-> ExecutionError('/home/pokybuild/yocto-worker/reproducible-meta-oe/build/b=
-uild/build-st-meta-networking/build-st/reproducibleA/tmp/work/core2-64-poky=
--linux/radvd/2.19/temp/run.useradd_sysroot.818430',
-> 1, None, None)
->
-> Link :
-> https://autobuilder.yoctoproject.org/typhoon/#/builders/155/builds/9/step=
-s/29/logs/errors
+diff --git a/meta-python/recipes-devtools/python/python3-strenum/0001-patch-versioneer-for-python-3.12-compatibility.patch b/meta-python/recipes-devtools/python/python3-strenum/0001-patch-versioneer-for-python-3.12-compatibility.patch
+new file mode 100644
+index 000000000..cdf3f1acb
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-strenum/0001-patch-versioneer-for-python-3.12-compatibility.patch
+@@ -0,0 +1,37 @@
++From 3a71c9bc3747201e5bebe0e80b98ac6219209875 Mon Sep 17 00:00:00 2001
++From: alperak <alperyasinak1@gmail.com>
++Date: Thu, 8 Feb 2024 14:09:32 +0300
++Subject: [PATCH] Patch versioneer for Python 3.12 compatibility
++
++AttributeError: 'ConfigParser' object has no attribute 'readfp'. Did you mean: 'read'?
++AttributeError: module 'configparser' has no attribute 'SafeConfigParser'. Did you mean: 'RawConfigParser'?
++
++readfp and SafeConfigParser has been deprecated since Python 3.2 and removed in Python 3.12 (due October 2023). Use read_file and ConfigParser instead.
++
++https://docs.python.org/3/whatsnew/3.12.html#configparser
++
++Upstream-Status: Submitted [https://github.com/irgeek/StrEnum/pull/34]
++Signed-off-by: alperak <alperyasinak1@gmail.com>
++---
++ versioneer.py | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/versioneer.py b/versioneer.py
++index 64fea1c..3aa5da3 100644
++--- a/versioneer.py
+++++ b/versioneer.py
++@@ -339,9 +339,9 @@ def get_config_from_root(root):
++     # configparser.NoOptionError (if it lacks "VCS="). See the docstring at
++     # the top of versioneer.py for instructions on writing your setup.cfg .
++     setup_cfg = os.path.join(root, "setup.cfg")
++-    parser = configparser.SafeConfigParser()
+++    parser = configparser.ConfigParser()
++     with open(setup_cfg, "r") as f:
++-        parser.readfp(f)
+++        parser.read_file(f)
++     VCS = parser.get("versioneer", "VCS")  # mandatory
++
++     def get(parser, name):
++--
++2.25.1
++
+diff --git a/meta-python/recipes-devtools/python/python3-strenum_0.4.15.bb b/meta-python/recipes-devtools/python/python3-strenum_0.4.15.bb
+new file mode 100644
+index 000000000..aa85189ee
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-strenum_0.4.15.bb
+@@ -0,0 +1,14 @@
++SUMMARY = "An Enum that inherits from str"
++HOMEPAGE = "https://github.com/irgeek/StrEnum"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=ba0eb3de1df70bde0ed48488cfd81269"
++
++SRC_URI += "file://0001-patch-versioneer-for-python-3.12-compatibility.patch"
++
++DEPENDS = "${PYTHON_PN}-pytest-runner-native"
++
++SRC_URI[sha256sum] = "878fb5ab705442070e4dd1929bb5e2249511c0bcf2b0eeacf3bcd80875c82eff"
++
++PYPI_PACKAGE = "StrEnum"
++
++inherit pypi python_setuptools_build_meta
+-- 
+2.25.1
 
-
-FWIW, this was an unrelated problem for which I've sent a patch:
-[meta-networking][PATCH] radvd: Fix build in reproducible test
-https://lists.openembedded.org/g/openembedded-devel/message/108662
-
-Regards,
-
-
->
-> Thanks!
->
-> > ---
-> >  meta-networking/recipes-daemons/radvd/radvd.inc | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/meta-networking/recipes-daemons/radvd/radvd.inc
-> b/meta-networking/recipes-daemons/radvd/radvd.inc
-> > index 219d88f49..5da31b3f0 100644
-> > --- a/meta-networking/recipes-daemons/radvd/radvd.inc
-> > +++ b/meta-networking/recipes-daemons/radvd/radvd.inc
-> > @@ -59,7 +59,7 @@ do_install:append () {
-> >
-> >  USERADD_PACKAGES =3D "${PN}"
-> >  GROUPADD_PARAM:${PN} =3D "--system nogroup"
-> > -USERADD_PARAM:${PN} =3D "--system --home ${localstatedir}/run/radvd/ -=
-M
-> -g nogroup radvd"
-> > +USERADD_PARAM:${PN} =3D "--system --home ${localstatedir}/run/radvd/ -=
-M
-> -g nogroup --shell /sbin/nologin radvd"
-> >
-> >  pkg_postinst:${PN} () {
-> >      if [ -z "$D" -a -x /etc/init.d/populate-volatile.sh ]; then
-> >
-> >
-> >
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#108480):
-> https://lists.openembedded.org/g/openembedded-devel/message/108480
-> > Mute This Topic: https://lists.openembedded.org/mt/104026959/4316185
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[
-> yoann.congal@smile.fr]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
->
-> --
-> Yoann Congal
-> Smile ECS - Tech Expert
->
-
-
---=20
-Yoann Congal
-Smile ECS - Tech expert
-
---00000000000013b8510610dcfa96
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">Le=C2=A0lun. 29 janv. 2024 =C3=A0=C2=
-=A009:07, Yoann Congal &lt;<a href=3D"mailto:yoann.congal@smile.fr">yoann.c=
-ongal@smile.fr</a>&gt; a =C3=A9crit=C2=A0:<br></div><blockquote class=3D"gm=
-ail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,=
-204,204);padding-left:1ex">Hi,<br>
-<br>
-Le 29/01/2024 =C3=A0 07:23, Li Wang via <a href=3D"http://lists.openembedde=
-d.org" rel=3D"noreferrer" target=3D"_blank">lists.openembedded.org</a> a =
-=C3=A9crit=C2=A0:<br>
-&gt; the default setting USERADD_PARAM of yocto:<br>
-&gt; -s /bin/sh<br>
-&gt; <br>
-&gt; follow redhat policy:<br>
-&gt; radvd/redhat/systemd/radvd.spec<br>
-&gt;=C2=A0 =C2=A0useradd ... -s /sbin/nologin ...<br>
-&gt; <br>
-&gt; Signed-off-by: Li Wang &lt;<a href=3D"mailto:li.wang@windriver.com" ta=
-rget=3D"_blank">li.wang@windriver.com</a>&gt;<br>
-&gt; Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" targ=
-et=3D"_blank">raj.khem@gmail.com</a>&gt;<br>
-<br>
-Can this fix this error from autobuilder by any chance?<br>
-=C2=A0 stdio: ERROR: radvd-2.19-r0 do_prepare_recipe_sysroot: radvd: userad=
-d command did not succeed.<br>
-=C2=A0 stdio: ERROR: radvd-2.19-r0 do_prepare_recipe_sysroot: ExecutionErro=
-r(&#39;/home/pokybuild/yocto-worker/reproducible-meta-oe/build/build/build-=
-st-meta-networking/build-st/reproducibleA/tmp/work/core2-64-poky-linux/radv=
-d/2.19/temp/run.useradd_sysroot.818430&#39;, 1, None, None)<br>
-<br>
-Link : <a href=3D"https://autobuilder.yoctoproject.org/typhoon/#/builders/1=
-55/builds/9/steps/29/logs/errors" rel=3D"noreferrer" target=3D"_blank">http=
-s://autobuilder.yoctoproject.org/typhoon/#/builders/155/builds/9/steps/29/l=
-ogs/errors</a></blockquote><div><br></div><div>FWIW, this was an unrelated =
-problem for which I&#39;ve sent a patch:</div><div>[meta-networking][PATCH]=
- radvd: Fix build in reproducible test<br><a href=3D"https://lists.openembe=
-dded.org/g/openembedded-devel/message/108662">https://lists.openembedded.or=
-g/g/openembedded-devel/message/108662</a></div><div><br></div><div>Regards,=
-<br></div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margi=
-n:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex=
-"><br>
-Thanks!<br>
-<br>
-&gt; ---<br>
-&gt;=C2=A0 meta-networking/recipes-daemons/radvd/radvd.inc | 2 +-<br>
-&gt;=C2=A0 1 file changed, 1 insertion(+), 1 deletion(-)<br>
-&gt; <br>
-&gt; diff --git a/meta-networking/recipes-daemons/radvd/radvd.inc b/meta-ne=
-tworking/recipes-daemons/radvd/radvd.inc<br>
-&gt; index 219d88f49..5da31b3f0 100644<br>
-&gt; --- a/meta-networking/recipes-daemons/radvd/radvd.inc<br>
-&gt; +++ b/meta-networking/recipes-daemons/radvd/radvd.inc<br>
-&gt; @@ -59,7 +59,7 @@ do_install:append () {<br>
-&gt;=C2=A0 <br>
-&gt;=C2=A0 USERADD_PACKAGES =3D &quot;${PN}&quot;<br>
-&gt;=C2=A0 GROUPADD_PARAM:${PN} =3D &quot;--system nogroup&quot;<br>
-&gt; -USERADD_PARAM:${PN} =3D &quot;--system --home ${localstatedir}/run/ra=
-dvd/ -M -g nogroup radvd&quot;<br>
-&gt; +USERADD_PARAM:${PN} =3D &quot;--system --home ${localstatedir}/run/ra=
-dvd/ -M -g nogroup --shell /sbin/nologin radvd&quot;<br>
-&gt;=C2=A0 <br>
-&gt;=C2=A0 pkg_postinst:${PN} () {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 if [ -z &quot;$D&quot; -a -x /etc/init.d/populate-=
-volatile.sh ]; then<br>
-&gt; <br>
-&gt; <br>
-&gt; <br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt; Links: You receive all messages sent to this group.<br>
-&gt; View/Reply Online (#108480): <a href=3D"https://lists.openembedded.org=
-/g/openembedded-devel/message/108480" rel=3D"noreferrer" target=3D"_blank">=
-https://lists.openembedded.org/g/openembedded-devel/message/108480</a><br>
-&gt; Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/10402695=
-9/4316185" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.=
-org/mt/104026959/4316185</a><br>
-&gt; Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openem=
-bedded.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.o=
-rg</a><br>
-&gt; Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-=
-devel/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedde=
-d.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:yoann.congal@smile.=
-fr" target=3D"_blank">yoann.congal@smile.fr</a>]<br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt; <br>
-<br>
--- <br>
-Yoann Congal<br>
-Smile ECS - Tech Expert<br>
-</blockquote></div><br clear=3D"all"><br><span class=3D"gmail_signature_pre=
-fix">-- </span><br><div dir=3D"ltr" class=3D"gmail_signature"><div dir=3D"l=
-tr"><font face=3D"Raleway, regular">Yoann Congal</font><div><font face=3D"R=
-aleway, regular">Smile ECS - Tech expert<br></font></div></div></div></div>
-
---00000000000013b8510610dcfa96--
 
