@@ -2,209 +2,364 @@ Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6F776C48260
-	for <webhook@archiver.kernel.org>; Thu,  8 Feb 2024 16:51:51 +0000 (UTC)
-Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
- by mx.groups.io with SMTP id smtpd.web10.312.1707411105893508554
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D381C4828F
+	for <webhook@archiver.kernel.org>; Thu,  8 Feb 2024 23:40:38 +0000 (UTC)
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
+ by mx.groups.io with SMTP id smtpd.web11.4869.1707435637745973673
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 08 Feb 2024 08:51:46 -0800
+ Thu, 08 Feb 2024 15:40:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Q+qBELJU;
- spf=pass (domain: gmail.com, ip: 209.85.218.50, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f50.google.com with SMTP id a640c23a62f3a-a38291dbe65so248302166b.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Feb 2024 08:51:45 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=NZZaPBG2;
+ spf=pass (domain: gmail.com, ip: 209.85.221.41, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-33b29b5ea96so228512f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 08 Feb 2024 15:40:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1707411104; x=1708015904; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=8Sl3K2KdIj40l9ttCtFsHOZYdW3CA/0KX2A1wIMu1CE=;
-        b=Q+qBELJUq7ZdGiviDP15SDNRK/VSk73LyQLpbvuA3wcVSoYteaMlYHxK/LiNgk4k9g
-         dPoeYehX8D24uPDJ0XU+xr6GkDIPJodKFIfci3Pmp1twRTMXzkELhy4EXHxmDriJMire
-         NQHxYKy6D7M17ICPslQwEi4o+IbqliddE2YQPcx0tXu3pHs2poiiyE4/SHhCKJxFQDkV
-         /gs14irS6a4aX4p4v0QntTWtlhWPMQHjKH48WK+MJZ6lSKk9Dg3LjMM9VNFcjf4um1jC
-         Ju+NGmZlYKjKkRk+ij6KCH5ZR5nD1a7+D0+mAQRpfxM9r+Zp0E4sNbW4gSql7S9TIMkS
-         Iong==
+        d=gmail.com; s=20230601; t=1707435636; x=1708040436; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Pd0pTLTSJe4A04J9GgVP0Lxw+wIPh/Sg+7PkXC7Dg+Y=;
+        b=NZZaPBG2yjqYih/Jr0jarKe1+AP+NpvGUpJk8aNnuvjLcJJ5m9QYxsrH4CWrvF62vg
+         +pWWCa7qkjDZZpNp0bDDWkjNonyNwtUWAcIWGMqDrUPQbgYhCRFbouvGLkmo1nj0DUTI
+         Oc6ut+GFtA9dUTdbzwF/+u27DJHBZUZG9aN04ZKcpv7436O5vnwL9xFwzKCqX3vDHVoA
+         O1+JR5KFbkf1ziHTq+4CmfzvWRZMs5uh2qNyHiV9YgQTTy9oDmN0ja2vd5QO/sRM6N9k
+         0yypr51bt0PZX9DLqUtJrltKb1R7jhahLXgFJI4VEPdT3XQwXKCiyBycYIJSlvOAbgPm
+         0Eiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707411104; x=1708015904;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=8Sl3K2KdIj40l9ttCtFsHOZYdW3CA/0KX2A1wIMu1CE=;
-        b=wfB0Dlitt8J0+C1Vos83iDxcWE3+tvkL6dKQYKfBzVw33YiMDmpIJLpUOSl6G0VFqj
-         XQasz88m+uugmaBUvs7T4HoqLJnoLCnF7lNDfseu0XppU8lIw8bgMd1e2Ldlyiv51Lrq
-         /LxiGIWTUPut6D63k8QK6DzCBx8I4s9uVj/ZXtxnrLhYKKbpeWmNFrqqoZmvOU7VzEsT
-         jKYPMpNvm2s7D3VM1mt9B1ZqFNuRJa5m6/s1Ve813JvMOCPP0p7x1bEpP2B3Sznoj+SW
-         upYp9GyiQ1NbQ3zwuLQOykW7CGU8Cwszcf7OhT7/UMEjq3YTIA0oN1hzFzeWBq9TDsxn
-         a02Q==
-X-Gm-Message-State: AOJu0Ywh1B4fRekw9LHVtYmxc4VaskNYfQ7fmRi1SPIBD4ZBQWgxajA8
-	YntgNLJ0nJvP4wet99a7drhbSX90u8LPtmSxwbRi30eMvtu2eVtoXdxL57q/
-X-Google-Smtp-Source: AGHT+IEcJnfDnN6B7aFI8pz/e4fSZnBedCtqBFpiB/VFOPVDbejImGxGgQh7UxdFlwClEfEzyDXIrw==
-X-Received: by 2002:a17:906:1e4d:b0:a37:5bf7:f64a with SMTP id i13-20020a1709061e4d00b00a375bf7f64amr7718835ejj.41.1707411104157;
-        Thu, 08 Feb 2024 08:51:44 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AJvYcCX4lv61ex03eVo2mgyxhPckLdasgoqrnFznHBUftmnuvHwpxcIPvKDwuoDnw0qBzXfLkbvFGLMVJ3rUrQFM//dCIDLk3imvfQyD+6BZYhnK+0MYsMb0sxtfrgzu2wBXQldixt3EQvsX0OmDvnCQ2NsymUWNQtmIt3M=
+        d=1e100.net; s=20230601; t=1707435636; x=1708040436;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Pd0pTLTSJe4A04J9GgVP0Lxw+wIPh/Sg+7PkXC7Dg+Y=;
+        b=kCLXMFzbsBjluY41yzFNQ3+0J+mi/CkBGpvOWW5VTRtjPeEcXJfafUnod3sqdhQ5cn
+         BhrrcNi7RteFu6FGCFWF3RlrKE3Sg6CXGizuna8sdbWGorm3HU4/G3upr3NxflUwrDIt
+         hIORMZ4rZg7j1x9jBCIlZAIBoYGc3q70IGICivDqtyZbX2CiTXWAuS2KFjBScW48wMx6
+         FHp3fAtXP0OFcLouRJcBfnPVjLJIpVaYkfU01DncWmWuY2/iKmcdJpNbEh2yKQ/38xKD
+         qa2SFMsE9zMgQv1OQkYpwd+Ajbk3RxlQ7LvexTCTnrv72Vhs+WtOiBYQogQ+0YjLLk8N
+         qMIw==
+X-Gm-Message-State: AOJu0YwdVhq9sxVOT6ATCl2TI84nCNcSv8hZWGvAR52PhfMMduW7OnWo
+	jv2om3wxv1iwzkegqFNanhgfg1edFIvmaSb74KWdNS1gyM+MXCFnVvdi8uIM
+X-Google-Smtp-Source: AGHT+IGXEk9GA8ZVRXzYRrLln00CsX1BueYU15TyFOt8P0q5eEBvvC5XHnere4qTfhMYAi4CPTHh9Q==
+X-Received: by 2002:a5d:60d2:0:b0:33b:1398:2614 with SMTP id x18-20020a5d60d2000000b0033b13982614mr142757wrt.25.1707435635879;
+        Thu, 08 Feb 2024 15:40:35 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AJvYcCUahJr9JmzREJsL3zbBa+VQX/Jf0wP8EXXqNbWT+JYN6mOKDW1sCJkiwsAusTFYU2b9Hua8CnQK+cxImKNR0ogJRNhjLQQc5bzpHYDi5Lq0mTT9nfyNSwm3v/6xPEaPlFFEof23s0n4naB2YGo64cK8aIGbN4MlDGE=
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id tb11-20020a1709078b8b00b00a372b38380csm236150ejc.13.2024.02.08.08.51.43
+        by smtp.gmail.com with ESMTPSA id by13-20020a056000098d00b0033b5efcd0cbsm414635wrb.11.2024.02.08.15.40.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 08 Feb 2024 08:51:43 -0800 (PST)
+        Thu, 08 Feb 2024 15:40:35 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: uvv.mail@gmail.com,
 	wangmy@fujitsu.com,
 	Vyacheslav.Yurkov@bruker.com,
 	Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-filesystems][PATCH 2/2] xfstests: drop the upstream rejected install-sh hack
-Date: Thu,  8 Feb 2024 17:51:35 +0100
-Message-ID: <20240208165135.2026155-2-martin.jansa@gmail.com>
+Subject: [meta-filesystems][PATCH] xfstests: fix make install race condition
+Date: Fri,  9 Feb 2024 00:40:26 +0100
+Message-ID: <20240208234026.3515183-1-martin.jansa@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240208165135.2026155-1-martin.jansa@gmail.com>
-References: <20240208165135.2026155-1-martin.jansa@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 08 Feb 2024 16:51:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108673
+ <openembedded-devel@lists.openembedded.org>; Thu, 08 Feb 2024 23:40:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108674
 
-* I'm trying to fix random build failure from world builds:
-  tests-install sometimes fails as shown bellow:
+* sometimes make install was failing with:
   cp: cannot stat 'group.list': No such file or directory
-  ...
+  and bunch of non-fatal messages:
   mv: failed to preserve ownership for 'group.list': Invalid argument
 
-  whole log:
-  2023.10.29: http://errors.yoctoproject.org/Errors/Details/752403/
-  2024.01.14 http://errors.yoctoproject.org/Errors/Details/752404/
+* this was when tools/mkgroupfile did
+  mv -f "$new_groups" "$groupfile"
+  overwritting the group.list file while install-sh was already
+  copying it to output
 
-* Interestingly I finally triggered this error for first time in my
-  local build (when rebuilding it after reverting this upgrade -
-  which might be just coincidence), here is the log:
-
-  While looking at this a bit more, I've noticed that install-sh in:
-
-  # install-sh script in the project is outdated
-  # we use the one from the latest libtool to solve installation issues
-  # It looks like the upstream is not interested in having it fixed :(
-  # https://www.spinics.net/lists/fstests/msg16981.html
-  do_configure:prepend() {
-      cp ${STAGING_DIR_NATIVE}${datadir}/libtool/build-aux/install-sh ${B}
-  }
-
-  is copied only to ${B}, but Makefile still has "cp include/install-sh ."
-  which was removed in proposed change for upstream:
-  https://www.spinics.net/lists/fstests/msg16899.html
-
-  but here it isn't, so shouldn't we copy it to ${B}/include to make
-  sure that make won't use the old version?
-  So I've tried to add:
-    cp ${STAGING_DIR_NATIVE}${datadir}/libtool/build-aux/install-sh ${B}/include
-
-  in do_configure:prepend and then I've triggered the build failure again
-  this time with 2024.01.14 version as well by running:
-  for i in `seq -w 1 100`; do bitbake -c cleansstate xfstests; bitbake -k xfstests 2>&1 | tee log.xfstests.$i; done
-
-  so the issue isn't fixed in the 2024.01.14 version, but maybe it's
-  a bug introduced by our install-sh?
-  It was rejected by upstream in:
-  https://www.spinics.net/lists/fstests/msg16928.html
-
-    This install-sh has been used for performance reason, I'd like keep it
-    if possible. Would you please describe the failures you hit in
-    cross-compilation env? It'd be great if we could fix the env issue.
-
-  Also the important error isn't:
-  "mv: failed to preserve ownership for 'group.list': Invalid argument"
-  because that's shown in all the builds:
-  xfstests $ grep -c "mv: failed to preserve ownership for 'group.list': Invalid argument" */temp/log.do_install*
-  2023.10.29-broken/temp/log.do_install:14
-  2023.10.29-broken/temp/log.do_install.1094046:14
-  2023.10.29-fixed-after-broken/temp/log.do_install:14
-  2023.10.29-fixed-after-broken/temp/log.do_install.1094046:14
-  2023.10.29-fixed-after-broken/temp/log.do_install.1120923:14
-  2023.10.29/temp/log.do_install:14
-  2023.10.29/temp/log.do_install.1094046:14
-  2024.01.14-ok/temp/log.do_install:14
-  2024.01.14-ok/temp/log.do_install.1186155:14
-
-  but the "cp: cannot stat 'group.list': No such file or directory" which is shown only in the ones which in the end failed:
-
-  xfstests $ grep cp */temp/log.do_install*
-  2023.10.29-broken/temp/log.do_install:cp: cannot stat 'group.list': No such file or directory
-  2023.10.29-broken/temp/log.do_install.1094046:cp: cannot stat 'group.list': No such file or directory
-  2023.10.29-fixed-after-broken/temp/log.do_install.1094046:cp: cannot stat 'group.list': No such file or directory
-  2023.10.29/temp/log.do_install:cp: cannot stat 'group.list': No such file or directory
-  2023.10.29/temp/log.do_install.1094046:cp: cannot stat 'group.list': No such file or directory
-
-  So I guess we should just drop this install-sh hack from do_configure completely
-  as cross-compilation seems to be fixed upstream already in:
-  https://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git/commit/?id=5d20084fefaf09e86be26d7c71bd1c7ac2a2b35c
-
-  xfstests/2024.01.14-ok/git $ git log --oneline include/install-sh
-  fa993e51 include/: spdx license conversion
-  da7916f7 build: Use the original install-sh file from SGI
-
-  xfstests/2024.01.14-ok/git $ git log --oneline install-sh
-  5d20084f build: allow cros-compilation on chromeOS
-  e3ca126a xfstests: respect DESTDIR when installing
-  fa6a7868 xfsqa: more sh to bash conversions
-  491d467f Add GPL license plate to SGI's files.
-  d259454b Update copyright annotations and license boilerplates to correspond with SGI Legals preferences. Merge of master-melb:xfs-cmds:24329a by kenmcd.
-  3ef12e38 Update copyright dates (again)
-  bc4eb461 Undoes mod:     xfs-cmds:slinx:120772a Undo xfs-cmds:slinx:120772a, inadvertently whacked a previous mod.
-  8ce73f86 Update copyright dates
-  db6944ec need a copy of this here too.
-
-* buildhistory doesn't show any difference, so all the
-  files are installed in the same location as before
+* in the end easily reproducible by
+  1) removing tests/*/group.list before each make install
+  2) adding some sleep in mkgroupfile before the mv call
 
 Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 ---
- .../xfstests/xfstests_2024.01.14.bb           | 20 +++++++++++++------
- 1 file changed, 14 insertions(+), 6 deletions(-)
+ ...ake-sure-group.list-DIRT-exists-befo.patch | 239 ++++++++++++++++++
+ .../xfstests/xfstests_2024.01.14.bb           |  10 +-
+ 2 files changed, 242 insertions(+), 7 deletions(-)
+ create mode 100644 meta-filesystems/recipes-utils/xfstests/xfstests/0003-tests-Makefile-make-sure-group.list-DIRT-exists-befo.patch
 
+diff --git a/meta-filesystems/recipes-utils/xfstests/xfstests/0003-tests-Makefile-make-sure-group.list-DIRT-exists-befo.patch b/meta-filesystems/recipes-utils/xfstests/xfstests/0003-tests-Makefile-make-sure-group.list-DIRT-exists-befo.patch
+new file mode 100644
+index 0000000000..5e8bf0c606
+--- /dev/null
++++ b/meta-filesystems/recipes-utils/xfstests/xfstests/0003-tests-Makefile-make-sure-group.list-DIRT-exists-befo.patch
+@@ -0,0 +1,239 @@
++From b30d5690d7245aa8bd5ca2896e629e62ec97afda Mon Sep 17 00:00:00 2001
++From: Martin Jansa <martin.jansa@gmail.com>
++Date: Thu, 8 Feb 2024 23:01:36 +0100
++Subject: [PATCH] tests/*/Makefile: make sure group.list DIRT exists before
++ install
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++* sometimes make install was failing with:
++  cp: cannot stat 'group.list': No such file or directory
++  and bunch of non-fatal messages:
++  mv: failed to preserve ownership for 'group.list': Invalid argument
++
++* this was when tools/mkgroupfile did
++  mv -f "$new_groups" "$groupfile"
++  overwritting the group.list file while install-sh was already
++  copying it to output
++
++* in the end easily reproducible by
++  1) removing tests/*/group.list before each make install
++  2) adding some sleep in mkgroupfile before the mv call
++
++Upstream-Status: Submitted [https://lore.kernel.org/fstests/20240208225241.644701-1-martin.jansa@gmail.com/]
++
++Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
++---
++ tests/btrfs/Makefile    | 2 +-
++ tests/ceph/Makefile     | 2 +-
++ tests/cifs/Makefile     | 2 +-
++ tests/ext4/Makefile     | 2 +-
++ tests/f2fs/Makefile     | 2 +-
++ tests/generic/Makefile  | 2 +-
++ tests/nfs/Makefile      | 2 +-
++ tests/ocfs2/Makefile    | 2 +-
++ tests/overlay/Makefile  | 2 +-
++ tests/perf/Makefile     | 2 +-
++ tests/selftest/Makefile | 2 +-
++ tests/shared/Makefile   | 2 +-
++ tests/tmpfs/Makefile    | 2 +-
++ tests/udf/Makefile      | 2 +-
++ tests/xfs/Makefile      | 2 +-
++ 15 files changed, 15 insertions(+), 15 deletions(-)
++
++diff --git a/tests/btrfs/Makefile b/tests/btrfs/Makefile
++index 1b72a1a1..6d9995b4 100644
++--- a/tests/btrfs/Makefile
+++++ b/tests/btrfs/Makefile
++@@ -14,7 +14,7 @@ default: $(DIRT)
++ 
++ include $(BUILDRULES)
++ 
++-install:
+++install: default
++ 	$(INSTALL) -m 755 -d $(TARGET_DIR)
++ 	$(INSTALL) -m 755 $(TESTS) $(TARGET_DIR)
++ 	$(INSTALL) -m 644 group.list $(TARGET_DIR)
++diff --git a/tests/ceph/Makefile b/tests/ceph/Makefile
++index 2761e1e9..5f24d518 100644
++--- a/tests/ceph/Makefile
+++++ b/tests/ceph/Makefile
++@@ -12,7 +12,7 @@ default: $(DIRT)
++ 
++ include $(BUILDRULES)
++ 
++-install:
+++install: default
++ 	$(INSTALL) -m 755 -d $(TARGET_DIR)
++ 	$(INSTALL) -m 755 $(TESTS) $(TARGET_DIR)
++ 	$(INSTALL) -m 644 group.list $(TARGET_DIR)
++diff --git a/tests/cifs/Makefile b/tests/cifs/Makefile
++index 62c48935..0b89a01d 100644
++--- a/tests/cifs/Makefile
+++++ b/tests/cifs/Makefile
++@@ -14,7 +14,7 @@ default: $(DIRT)
++ 
++ include $(BUILDRULES)
++ 
++-install:
+++install: default
++ 	$(INSTALL) -m 755 -d $(TARGET_DIR)
++ 	$(INSTALL) -m 755 $(TESTS) $(TARGET_DIR)
++ 	$(INSTALL) -m 644 group.list $(TARGET_DIR)
++diff --git a/tests/ext4/Makefile b/tests/ext4/Makefile
++index a2a0d561..296e3850 100644
++--- a/tests/ext4/Makefile
+++++ b/tests/ext4/Makefile
++@@ -14,7 +14,7 @@ default: $(DIRT)
++ 
++ include $(BUILDRULES)
++ 
++-install:
+++install: default
++ 	$(INSTALL) -m 755 -d $(TARGET_DIR)
++ 	$(INSTALL) -m 755 $(TESTS) $(TARGET_DIR)
++ 	$(INSTALL) -m 644 group.list $(TARGET_DIR)
++diff --git a/tests/f2fs/Makefile b/tests/f2fs/Makefile
++index 9d1ed3c6..0a90b465 100644
++--- a/tests/f2fs/Makefile
+++++ b/tests/f2fs/Makefile
++@@ -15,7 +15,7 @@ default: $(DIRT)
++ 
++ include $(BUILDRULES)
++ 
++-install:
+++install: default
++ 	$(INSTALL) -m 755 -d $(TARGET_DIR)
++ 	$(INSTALL) -m 755 $(TESTS) $(TARGET_DIR)
++ 	$(INSTALL) -m 644 group.list $(TARGET_DIR)
++diff --git a/tests/generic/Makefile b/tests/generic/Makefile
++index b464b22b..d6ed3e55 100644
++--- a/tests/generic/Makefile
+++++ b/tests/generic/Makefile
++@@ -14,7 +14,7 @@ default: $(DIRT)
++ 
++ include $(BUILDRULES)
++ 
++-install:
+++install: default
++ 	$(INSTALL) -m 755 -d $(TARGET_DIR)
++ 	$(INSTALL) -m 755 $(TESTS) $(TARGET_DIR)
++ 	$(INSTALL) -m 644 group.list $(TARGET_DIR)
++diff --git a/tests/nfs/Makefile b/tests/nfs/Makefile
++index 128d2a3a..51590b5c 100644
++--- a/tests/nfs/Makefile
+++++ b/tests/nfs/Makefile
++@@ -14,7 +14,7 @@ default: $(DIRT)
++ 
++ include $(BUILDRULES)
++ 
++-install:
+++install: default
++ 	$(INSTALL) -m 755 -d $(TARGET_DIR)
++ 	$(INSTALL) -m 755 $(TESTS) $(TARGET_DIR)
++ 	$(INSTALL) -m 644 group.list $(TARGET_DIR)
++diff --git a/tests/ocfs2/Makefile b/tests/ocfs2/Makefile
++index 260ad31b..17e01bf3 100644
++--- a/tests/ocfs2/Makefile
+++++ b/tests/ocfs2/Makefile
++@@ -14,7 +14,7 @@ default: $(DIRT)
++ 
++ include $(BUILDRULES)
++ 
++-install:
+++install: default
++ 	$(INSTALL) -m 755 -d $(TARGET_DIR)
++ 	$(INSTALL) -m 755 $(TESTS) $(TARGET_DIR)
++ 	$(INSTALL) -m 644 group.list $(TARGET_DIR)
++diff --git a/tests/overlay/Makefile b/tests/overlay/Makefile
++index 2785b94d..c71e78d6 100644
++--- a/tests/overlay/Makefile
+++++ b/tests/overlay/Makefile
++@@ -14,7 +14,7 @@ default: $(DIRT)
++ 
++ include $(BUILDRULES)
++ 
++-install:
+++install: default
++ 	$(INSTALL) -m 755 -d $(TARGET_DIR)
++ 	$(INSTALL) -m 755 $(TESTS) $(TARGET_DIR)
++ 	$(INSTALL) -m 644 group.list $(TARGET_DIR)
++diff --git a/tests/perf/Makefile b/tests/perf/Makefile
++index 0c74ba39..d72c04d9 100644
++--- a/tests/perf/Makefile
+++++ b/tests/perf/Makefile
++@@ -14,7 +14,7 @@ default: $(DIRT)
++ 
++ include $(BUILDRULES)
++ 
++-install:
+++install: default
++ 	$(INSTALL) -m 755 -d $(TARGET_DIR)
++ 	$(INSTALL) -m 755 $(TESTS) $(TARGET_DIR)
++ 	$(INSTALL) -m 644 group.list $(TARGET_DIR)
++diff --git a/tests/selftest/Makefile b/tests/selftest/Makefile
++index 3ddfca37..cabc35a9 100644
++--- a/tests/selftest/Makefile
+++++ b/tests/selftest/Makefile
++@@ -14,7 +14,7 @@ default: $(DIRT)
++ 
++ include $(BUILDRULES)
++ 
++-install:
+++install: default
++ 	$(INSTALL) -m 755 -d $(TARGET_DIR)
++ 	$(INSTALL) -m 755 $(TESTS) $(TARGET_DIR)
++ 	$(INSTALL) -m 644 group.list $(TARGET_DIR)
++diff --git a/tests/shared/Makefile b/tests/shared/Makefile
++index f3128714..2e6aa718 100644
++--- a/tests/shared/Makefile
+++++ b/tests/shared/Makefile
++@@ -14,7 +14,7 @@ default: $(DIRT)
++ 
++ include $(BUILDRULES)
++ 
++-install:
+++install: default
++ 	$(INSTALL) -m 755 -d $(TARGET_DIR)
++ 	$(INSTALL) -m 755 $(TESTS) $(TARGET_DIR)
++ 	$(INSTALL) -m 644 group.list $(TARGET_DIR)
++diff --git a/tests/tmpfs/Makefile b/tests/tmpfs/Makefile
++index 46544313..46b62dad 100644
++--- a/tests/tmpfs/Makefile
+++++ b/tests/tmpfs/Makefile
++@@ -14,7 +14,7 @@ default: $(DIRT)
++ 
++ include $(BUILDRULES)
++ 
++-install:
+++install: default
++ 	$(INSTALL) -m 755 -d $(TARGET_DIR)
++ 	$(INSTALL) -m 755 $(TESTS) $(TARGET_DIR)
++ 	$(INSTALL) -m 644 group.list $(TARGET_DIR)
++diff --git a/tests/udf/Makefile b/tests/udf/Makefile
++index ed4434f0..feda69a6 100644
++--- a/tests/udf/Makefile
+++++ b/tests/udf/Makefile
++@@ -14,7 +14,7 @@ default: $(DIRT)
++ 
++ include $(BUILDRULES)
++ 
++-install:
+++install: default
++ 	$(INSTALL) -m 755 -d $(TARGET_DIR)
++ 	$(INSTALL) -m 755 $(TESTS) $(TARGET_DIR)
++ 	$(INSTALL) -m 644 group.list $(TARGET_DIR)
++diff --git a/tests/xfs/Makefile b/tests/xfs/Makefile
++index 5f413e67..6bfafdb1 100644
++--- a/tests/xfs/Makefile
+++++ b/tests/xfs/Makefile
++@@ -14,7 +14,7 @@ default: $(DIRT)
++ 
++ include $(BUILDRULES)
++ 
++-install:
+++install: default
++ 	$(INSTALL) -m 755 -d $(TARGET_DIR)
++ 	$(INSTALL) -m 755 $(TESTS) $(TARGET_DIR)
++ 	$(INSTALL) -m 644 group.list $(TARGET_DIR)
 diff --git a/meta-filesystems/recipes-utils/xfstests/xfstests_2024.01.14.bb b/meta-filesystems/recipes-utils/xfstests/xfstests_2024.01.14.bb
-index 33d441e41e..711637a70d 100644
+index 711637a70d..5ff1914569 100644
 --- a/meta-filesystems/recipes-utils/xfstests/xfstests_2024.01.14.bb
 +++ b/meta-filesystems/recipes-utils/xfstests/xfstests_2024.01.14.bb
-@@ -16,6 +16,7 @@ SRCREV_unionmount = "e3825b16b46f4c4574a1a69909944c059835f914"
+@@ -7,8 +7,9 @@ SRCREV_FORMAT = "xfstests_unionmount"
  
- S = "${WORKDIR}/git"
+ SRC_URI = "git://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git;branch=master;name=xfstests \
+            git://github.com/amir73il/unionmount-testsuite.git;branch=master;protocol=https;name=unionmount;destsuffix=unionmount-testsuite \
+-           file://0002-Drop-detached_mounts_propagation-and-remove-sys-moun.patch \
+            file://0001-add-missing-FTW_-macros-when-not-available-in-libc.patch \
++           file://0002-Drop-detached_mounts_propagation-and-remove-sys-moun.patch \
++           file://0003-tests-Makefile-make-sure-group.list-DIRT-exists-befo.patch \
+            "
  
-+# brokensep because m4/package_globals.m4 calls ". ./VERSION" (and that's not the only issue)
- inherit autotools-brokensep useradd
- 
- DEPENDS += "xfsprogs acl"
-@@ -44,15 +45,22 @@ USERADD_PARAM:${PN} = "-U -m fsgqa; -N 123456-fsgqa; -N fsgqa2"
- EXTRA_OECONF = "INSTALL_USER=root INSTALL_GROUP=root"
- 
- TARGET_CC_ARCH:append:libc-musl = " -D_LARGEFILE64_SOURCE"
--# install-sh script in the project is outdated
--# we use the one from the latest libtool to solve installation issues
--# It looks like the upstream is not interested in having it fixed :(
--# https://www.spinics.net/lists/fstests/msg16981.html
-+
- do_configure:prepend() {
--    cp ${STAGING_DIR_NATIVE}${datadir}/libtool/build-aux/install-sh ${B}
-+    # this is done by Makefile configure target, but we don't call it in do_configure
-+    cp -a ${S}/include/install-sh .
+ SRCREV_xfstests = "c46ca4d1f6c0c45f9a3ea18bc31ba5ae89e02c70"
+@@ -51,12 +52,7 @@ do_configure:prepend() {
+     cp -a ${S}/include/install-sh .
  }
  
--do_install:append() {
-+# Not sure if this is needed, but with old install-sh it was sometimes failing with:
-+# cp: cannot stat 'group.list': No such file or directory
-+# http://errors.yoctoproject.org/Errors/Details/752404/
-+# PARALLEL_MAKEINST = "-j1"
-+
-+do_install:prepend() {
-+    # otherwise install-sh duplicates DESTDIR prefix
-+    export DIST_ROOT="/" DIST_MANIFEST="" DESTDIR="${D}"
-+    oe_runmake install
-+
-     unionmount_target_dir=${D}/usr/xfstests/unionmount-testsuite
-     install -d ${D}/usr/xfstests/unionmount-testsuite/tests
-     install -D ${WORKDIR}/unionmount-testsuite/tests/* -t $unionmount_target_dir/tests
+-# Not sure if this is needed, but with old install-sh it was sometimes failing with:
+-# cp: cannot stat 'group.list': No such file or directory
+-# http://errors.yoctoproject.org/Errors/Details/752404/
+-# PARALLEL_MAKEINST = "-j1"
+-
+-do_install:prepend() {
++do_install() {
+     # otherwise install-sh duplicates DESTDIR prefix
+     export DIST_ROOT="/" DIST_MANIFEST="" DESTDIR="${D}"
+     oe_runmake install
 -- 
 2.43.0
 
