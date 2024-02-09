@@ -1,95 +1,224 @@
-Return-Path: <festevam@gmail.com>
+Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 18062C48297
-	for <webhook@archiver.kernel.org>; Fri,  9 Feb 2024 18:19:28 +0000 (UTC)
-Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
- by mx.groups.io with SMTP id smtpd.web10.19644.1707502766937770203
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 76172C48297
+	for <webhook@archiver.kernel.org>; Fri,  9 Feb 2024 19:43:08 +0000 (UTC)
+Received: from mail-yb1-f171.google.com (mail-yb1-f171.google.com [209.85.219.171])
+ by mx.groups.io with SMTP id smtpd.web10.22268.1707507778353899765
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 09 Feb 2024 10:19:26 -0800
+ Fri, 09 Feb 2024 11:42:58 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=khgnlqIm;
- spf=pass (domain: gmail.com, ip: 209.85.214.182, mailfrom: festevam@gmail.com)
-Received: by mail-pl1-f182.google.com with SMTP id d9443c01a7336-1d3ae9d1109so2177335ad.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 09 Feb 2024 10:19:26 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=eL1NIiUm;
+ spf=pass (domain: gmail.com, ip: 209.85.219.171, mailfrom: ticotimo@gmail.com)
+Received: by mail-yb1-f171.google.com with SMTP id 3f1490d57ef6-dc754853524so856308276.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 09 Feb 2024 11:42:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1707502766; x=1708107566; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=+1p5dkjq7l+Fzueocm9c5O1ow6oV6jXL+XDSBngq+cI=;
-        b=khgnlqIm4pchft8x8+hG7laxw1mFGDmTC+/IWnfltzl1FnAXGitgHxNb+8odiZXFJX
-         niOw2Tyfe8aQcGGsZPd/FSmo4MQQWXguK90zXNEHDiq38ByPcYrBse5bmnyr0o60P/qa
-         YynDFv/ArlzV089x+S1nEbH8+im8TWwwR9GPPZZfe6E3HQwtHmkf3hD7mgXTP9ThIcvv
-         2ZRwxuEvyiBmXa192qBhHJJAqi/6XLlli2fhZC3McDvxtSOHRPAa4i169HxqQ5HMMOP4
-         l8tvcn/5grl4GpTtYSnlQHmUdJY/I99/cEO9oFSHTgjpOfvwBuiCJYC18i7wWsQYNwjU
-         /WVw==
+        d=gmail.com; s=20230601; t=1707507777; x=1708112577; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=W5qEE4hmihXOXp44BV6UqpW1j8Xbezy7fGGKfN2wsBs=;
+        b=eL1NIiUmpkmBxcY0F1JmYTGlBaSl4LPaYyBBim4b1UgZr7Nd4wNZBMa+dEUl4vSjvV
+         k1LY83Gy2f+Cu+rojrnG4q2VHvSewaITgyYq3n/nU+YSXgIm4QVNbZnMBXmDfH2WC7OD
+         j28dALyeQLXuGNK4ai92t3eUb7MFrMMB9ttr0ccAREeboxEb1laVneybmt8y8zdUnszT
+         dS4rXmEfm3YkWvIeKrfX4MRwDapx3p6L/Rly7zNXkF+kGPqr3VEP+TQmdTLNI1dQWk9F
+         UG59EM8HWl9uQpA21nBkZ2L6Bww3/Zttfs+MvzYTrTGzk6zHjC/FEfU7Pz9/c+pedRx4
+         orvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707502766; x=1708107566;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1707507777; x=1708112577;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=+1p5dkjq7l+Fzueocm9c5O1ow6oV6jXL+XDSBngq+cI=;
-        b=Ldm/PqTmHFfBfOfuMJjZhcidavQvlanu/zZnTCjiD/UJknZsylwjQWvctUCviO0uqB
-         NxONCnmHzDAgzOUwyGWNB8Y29jQwop+AVMytlmoTZ2ehQfTEGJEBcw5vSJzNhNeNOwvf
-         Dl1dUffs8rZ4QaFkOgXWRGII2sBosw+1+p+9xnQxQl8oNp8mi/z9aTeiLqPoYjdXXJGA
-         5JsWi18Opp3MxqzwDVPUDUDl7EpYY8JWCm6I4MClDgBgZVtZ/1qc7m49s8T6yjbPDP6n
-         a6QdXIi5dyhkhdTb8wZNvMLNGPUFbp039n9B7YX+3cYhR67fVR9ziNKaxVge5l3b/cse
-         4mcQ==
-X-Gm-Message-State: AOJu0YxIV7SyAAdTmzaWWReGi/3BwF3c36VjguUl67h+Dc7FahFzOUPR
-	+cuhgJAS6NhRgW2DaunnH4h30knU0L4nCkyrpNt1WVWIHXnIE9Mq/Wd26Ovb
-X-Google-Smtp-Source: AGHT+IEPjLDfe5hTvNT00NTAlpTx1bLfp72xM8y7drhgZu+LVi2iQuT6FQoHxp7FIJL37ZSx6hj5Yw==
-X-Received: by 2002:a17:902:ea09:b0:1da:7d4:3410 with SMTP id s9-20020a170902ea0900b001da07d43410mr81690plg.0.1707502765891;
-        Fri, 09 Feb 2024 10:19:25 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AJvYcCXv2HCC6IbO6Owo9xPMKf62dzO8WW3btlcHC2uIaP8AV8HfQ0HNfZyKgFJ2BS/xuuaDD/sZk1OSIor3a0CZ5wTJ6FtTBmLZvl5iejhKczctUg6B2JvkmBprNQ==
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:d37e:ce72:3699:77e7])
-        by smtp.gmail.com with ESMTPSA id lc7-20020a170902fa8700b001d8fcbbd6e7sm1798941plb.79.2024.02.09.10.19.23
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 09 Feb 2024 10:19:25 -0800 (PST)
-From: Fabio Estevam <festevam@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: richard.leitner@skidata.com,
-	tim.orling@konsulko.com,
-	Fabio Estevam <festevam@denx.de>
-Subject: [PATCH] [meta-java] xml-commons: xom: Update github entry
-Date: Fri,  9 Feb 2024 15:19:17 -0300
-Message-Id: <20240209181917.1941840-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+        bh=W5qEE4hmihXOXp44BV6UqpW1j8Xbezy7fGGKfN2wsBs=;
+        b=qVkzIjMCgTUSzWUqN6zvmAF/iUui6pDOzqpt761WhJmzf6jynZH2rG+fbJsqxkU0sk
+         HfVQsMo5jfwDS7DSzZ7RyrAdB4g38CtnEfqTzcWUZwYCAhaj+PBiN+o/qXb/zdCC2S6L
+         A1s7VG2gKhYfUAFGNrJ6jW0fBOCxZA0powWYuJ93gFSczZ1Pt+cYKGLQg4ciMFUvqUzj
+         I+P2rn4OTfr5fY8yNkmaTmMpAD2dWpElKaC4t215LExPeGUSV1dLA2nQyzTSR34xhnMs
+         Ly5I6cxjZBo8Ftb4fOpEkNcIGkK/mYKMfnmnrFcIog71JW3Wz3Y+GptkEyjBRTZpmip+
+         Stww==
+X-Gm-Message-State: AOJu0YyaNTpyTqmgBxPaQFw/E7Vc4QhWrjTYe9CZUsbR+hlhlU51ZDhO
+	KYXPCkPbOi/YCIgwBk/bd7kK96h47UtIXMFh2Aky7iJQS6S5MSFmBYWL6BfGkScP9gNYhRYgC45
+	ER2DNMDkcTgfAr1c5YqbnRsoV4Lo=
+X-Google-Smtp-Source: AGHT+IErSouDiaHv7z2XI5j1uGsGOg5w90vUNywp8VKcDsABvZy1NkP6ApSms1twNTuZNcJxq0D33HJB/WJi1uBP67k=
+X-Received: by 2002:a05:6902:2611:b0:dc6:bd4c:b119 with SMTP id
+ dw17-20020a056902261100b00dc6bd4cb119mr164385ybb.55.1707507777357; Fri, 09
+ Feb 2024 11:42:57 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240209181917.1941840-1-festevam@gmail.com>
+In-Reply-To: <20240209181917.1941840-1-festevam@gmail.com>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Fri, 9 Feb 2024 11:42:46 -0800
+Message-ID: <CANx9H-ATNOoSgtoK1QJ9opj0jbr1x+1eh5xF5mBurYEbRQgDNQ@mail.gmail.com>
+Subject: Re: [oe] [PATCH] [meta-java] xml-commons: xom: Update github entry
+To: Fabio Estevam <festevam@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org, richard.leitner@skidata.com, 
+	tim.orling@konsulko.com, Fabio Estevam <festevam@denx.de>
+Content-Type: multipart/alternative; boundary="000000000000854c380610f82216"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 09 Feb 2024 18:19:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108690
+ <openembedded-devel@lists.openembedded.org>; Fri, 09 Feb 2024 19:43:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108691
 
-From: Fabio Estevam <festevam@denx.de>
+--000000000000854c380610f82216
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Switch to using https, pass protocol and the branch name to fix
-the following warnings:
+On Fri, Feb 9, 2024 at 10:19=E2=80=AFAM Fabio Estevam <festevam@gmail.com> =
+wrote:
 
-WARNING: .../meta-java/recipes-core/xml-commons/xom_1.2.10.bb: URL: git://github.com/codehaus/jaxen;name=jaxen uses git protocol which is no longer supported by github. Please change to ;protocol=https in the url.
-WARNING: .../meta-java/recipes-core/xml-commons/xom_1.2.10.bb: URL: git://github.com/codehaus/jaxen;name=jaxen does not set any branch parameter. The future default branch used by tools and repositories is uncertain and we will therefore soon require this is set in all git urls.
+> From: Fabio Estevam <festevam@denx.de>
+>
+> Switch to using https, pass protocol and the branch name to fix
+> the following warnings:
+>
+> WARNING: .../meta-java/recipes-core/xml-commons/xom_1.2.10.bb: URL: git:/=
+/
+> github.com/codehaus/jaxen;name=3Djaxen uses git protocol which is no long=
+er
+> supported by github. Please change to ;protocol=3Dhttps in the url.
+> WARNING: .../meta-java/recipes-core/xml-commons/xom_1.2.10.bb: URL: git:/=
+/
+> github.com/codehaus/jaxen;name=3Djaxen does not set any branch parameter.
+> The future default branch used by tools and repositories is uncertain and
+> we will therefore soon require this is set in all git urls.
+>
+> Signed-off-by: Fabio Estevam <festevam@denx.de>
+> ---
+>  recipes-core/xml-commons/xom_1.2.10.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/recipes-core/xml-commons/xom_1.2.10.bb
+> b/recipes-core/xml-commons/xom_1.2.10.bb
+> index 42ad957..2eed0fe 100644
+> --- a/recipes-core/xml-commons/xom_1.2.10.bb
+> +++ b/recipes-core/xml-commons/xom_1.2.10.bb
+> @@ -14,7 +14,7 @@ PV_jaxen =3D "1.1.6"
+>
+>  SRC_URI =3D "\
+>         http://www.cafeconleche.org/XOM/${P}-src.tar.gz;name=3Darchive \
+> -       git://github.com/codehaus/${SRCNAME_jaxen};name=3Djaxen
+> <http://github.com/codehaus/$%7BSRCNAME_jaxen%7D;name=3Djaxen> \
+> +
+> https://github.com/codehaus/${SRCNAME_jaxen};protocol=3Dhttps;branch=3Dma=
+ster
+> \
+>
 
-Signed-off-by: Fabio Estevam <festevam@denx.de>
----
- recipes-core/xml-commons/xom_1.2.10.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+You should not drop the name=3Djaxen, pretty sure that is required for the
+SRCREV_jaxen to work?
 
-diff --git a/recipes-core/xml-commons/xom_1.2.10.bb b/recipes-core/xml-commons/xom_1.2.10.bb
-index 42ad957..2eed0fe 100644
---- a/recipes-core/xml-commons/xom_1.2.10.bb
-+++ b/recipes-core/xml-commons/xom_1.2.10.bb
-@@ -14,7 +14,7 @@ PV_jaxen = "1.1.6"
- 
- SRC_URI = "\
- 	http://www.cafeconleche.org/XOM/${P}-src.tar.gz;name=archive \
--	git://github.com/codehaus/${SRCNAME_jaxen};name=jaxen \
-+	https://github.com/codehaus/${SRCNAME_jaxen};protocol=https;branch=master \
- 	file://04_remove_sun_import.patch \
- "
- SRC_URI[archive.md5sum] = "9f3a2ae827a9f6826fe76e4b7b0c22b3"
--- 
-2.37.3
+We should also drop the archive.md5sum... we haven't used md5sum in quite
+some time.
 
+        file://04_remove_sun_import.patch \
+>  "
+>  SRC_URI[archive.md5sum] =3D "9f3a2ae827a9f6826fe76e4b7b0c22b3"
+> --
+> 2.37.3
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#108690):
+> https://lists.openembedded.org/g/openembedded-devel/message/108690
+> Mute This Topic: https://lists.openembedded.org/mt/104264377/924729
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> ticotimo@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--000000000000854c380610f82216
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
+<div dir=3D"ltr" class=3D"gmail_attr">On Fri, Feb 9, 2024 at 10:19=E2=80=AF=
+AM Fabio Estevam &lt;<a href=3D"mailto:festevam@gmail.com">festevam@gmail.c=
+om</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margi=
+n:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex=
+">From: Fabio Estevam &lt;<a href=3D"mailto:festevam@denx.de" target=3D"_bl=
+ank">festevam@denx.de</a>&gt;<br>
+<br>
+Switch to using https, pass protocol and the branch name to fix<br>
+the following warnings:<br>
+<br>
+WARNING: .../meta-java/recipes-core/xml-commons/<a href=3D"http://xom_1.2.1=
+0.bb" rel=3D"noreferrer" target=3D"_blank">xom_1.2.10.bb</a>: URL: git://<a=
+ href=3D"http://github.com/codehaus/jaxen;name=3Djaxen" rel=3D"noreferrer" =
+target=3D"_blank">github.com/codehaus/jaxen;name=3Djaxen</a> uses git proto=
+col which is no longer supported by github. Please change to ;protocol=3Dht=
+tps in the url.<br>
+WARNING: .../meta-java/recipes-core/xml-commons/<a href=3D"http://xom_1.2.1=
+0.bb" rel=3D"noreferrer" target=3D"_blank">xom_1.2.10.bb</a>: URL: git://<a=
+ href=3D"http://github.com/codehaus/jaxen;name=3Djaxen" rel=3D"noreferrer" =
+target=3D"_blank">github.com/codehaus/jaxen;name=3Djaxen</a> does not set a=
+ny branch parameter. The future default branch used by tools and repositori=
+es is uncertain and we will therefore soon require this is set in all git u=
+rls.<br>
+<br>
+Signed-off-by: Fabio Estevam &lt;<a href=3D"mailto:festevam@denx.de" target=
+=3D"_blank">festevam@denx.de</a>&gt;<br>
+---<br>
+=C2=A0recipes-core/xml-commons/<a href=3D"http://xom_1.2.10.bb" rel=3D"nore=
+ferrer" target=3D"_blank">xom_1.2.10.bb</a> | 2 +-<br>
+=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
+<br>
+diff --git a/recipes-core/xml-commons/<a href=3D"http://xom_1.2.10.bb" rel=
+=3D"noreferrer" target=3D"_blank">xom_1.2.10.bb</a> b/recipes-core/xml-comm=
+ons/<a href=3D"http://xom_1.2.10.bb" rel=3D"noreferrer" target=3D"_blank">x=
+om_1.2.10.bb</a><br>
+index 42ad957..2eed0fe 100644<br>
+--- a/recipes-core/xml-commons/<a href=3D"http://xom_1.2.10.bb" rel=3D"nore=
+ferrer" target=3D"_blank">xom_1.2.10.bb</a><br>
++++ b/recipes-core/xml-commons/<a href=3D"http://xom_1.2.10.bb" rel=3D"nore=
+ferrer" target=3D"_blank">xom_1.2.10.bb</a><br>
+@@ -14,7 +14,7 @@ PV_jaxen =3D &quot;1.1.6&quot;<br>
+<br>
+=C2=A0SRC_URI =3D &quot;\<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 <a href=3D"http://www.cafeconleche.org/XOM/$%7B=
+P%7D-src.tar.gz;name=3Darchive" rel=3D"noreferrer" target=3D"_blank">http:/=
+/www.cafeconleche.org/XOM/${P}-src.tar.gz;name=3Darchive</a> \<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0git://<a href=3D"http://github.com/codehaus/$%7=
+BSRCNAME_jaxen%7D;name=3Djaxen" rel=3D"noreferrer" target=3D"_blank">github=
+.com/codehaus/${SRCNAME_jaxen};name=3Djaxen</a> \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0<a href=3D"https://github.com/codehaus/$%7BSRCN=
+AME_jaxen%7D;protocol=3Dhttps;branch=3Dmaster" rel=3D"noreferrer" target=3D=
+"_blank">https://github.com/codehaus/${SRCNAME_jaxen};protocol=3Dhttps;bran=
+ch=3Dmaster</a> \<br></blockquote><div><br></div><div>You should not drop t=
+he name=3Djaxen, pretty sure that is required for the SRCREV_jaxen to work?=
+</div><div><br></div><div>We should also drop the archive.md5sum... we have=
+n&#39;t used md5sum in quite some time.</div><div><br></div><blockquote cla=
+ss=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid =
+rgb(204,204,204);padding-left:1ex">
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 file://04_remove_sun_import.patch \<br>
+=C2=A0&quot;<br>
+=C2=A0SRC_URI[archive.md5sum] =3D &quot;9f3a2ae827a9f6826fe76e4b7b0c22b3&qu=
+ot;<br>
+-- <br>
+2.37.3<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#108690): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/108690" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/108690</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/104264377/924=
+729" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
+/104264377/924729</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
+et=3D"_blank">ticotimo@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
+
+--000000000000854c380610f82216--
 
