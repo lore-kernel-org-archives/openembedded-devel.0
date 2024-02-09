@@ -2,34 +2,34 @@ Return-Path: <thomas.perrot@bootlin.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 50F95C4828F
-	for <webhook@archiver.kernel.org>; Fri,  9 Feb 2024 15:34:37 +0000 (UTC)
-Received: from relay2-d.mail.gandi.net (relay2-d.mail.gandi.net [217.70.183.194])
- by mx.groups.io with SMTP id smtpd.web10.15041.1707492875363333441
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 58A59C4828F
+	for <webhook@archiver.kernel.org>; Fri,  9 Feb 2024 15:36:27 +0000 (UTC)
+Received: from relay5-d.mail.gandi.net (relay5-d.mail.gandi.net [217.70.183.197])
+ by mx.groups.io with SMTP id smtpd.web11.14756.1707492986778820367
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 09 Feb 2024 07:34:35 -0800
+ Fri, 09 Feb 2024 07:36:27 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bootlin.com header.s=gm1 header.b=Z0RdCeDl;
- spf=pass (domain: bootlin.com, ip: 217.70.183.194, mailfrom: thomas.perrot@bootlin.com)
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 15CB440008;
-	Fri,  9 Feb 2024 15:34:32 +0000 (UTC)
+ dkim=pass header.i=@bootlin.com header.s=gm1 header.b=VG+n1nRv;
+ spf=pass (domain: bootlin.com, ip: 217.70.183.197, mailfrom: thomas.perrot@bootlin.com)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id E58C61C0002;
+	Fri,  9 Feb 2024 15:36:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
-	t=1707492873;
+	t=1707492985;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding;
-	bh=jSZTIouGxMLOp+dIE5J8rl8zlcpLFTUOqREKPmNjXMY=;
-	b=Z0RdCeDleDoeNW6rtindHZA1NkGTcHsanX1BiZdxt75IycDlRuiLwQnfLT3NT74iIKk2X4
-	yYlvbluUpnxMyCD7i4U48bzNCzIgmP0XokpkFqG1WmuSr5gQD6/ER2WoBg0gqjXRr3vI5h
-	swDHpOVZunO3UzE/H9XbI2DZ+OiH160v0XHv+yOYvVaXrlRL+3tuZa3Q+aWDHLUQNyf6Fw
-	c9lWpZYviNQwmYxsnoqU7WOPrUg1FQATEW+8AuyXgFB9YGxxo0scfvQQhWglvXMmKP+Sdg
-	jCFuTGjKEOUcrne9QU4it1pHiXyqLHtbJojAfjYbnF8uhXt5w7sPaiBSFwigvw==
+	bh=Ptzc8h5M8E9fQuBckBvFyQmNSoDK3pZZoL0gg9xThBk=;
+	b=VG+n1nRv3MrpxFne3Hbj2jzZqryPm9VE1ZZGj5hWaxL5xa/bi4zC8ZRJ9HUNkjOXQhenaM
+	156A3iQipLUD6MFBDaYusCkfHGBsO9qKVjDuvqNBlCxcGsTeiavclTwQsk5V002J3AEHLf
+	esb4S/A+VFpoumz5/bKkUEGQ4o6ZY6SAT6AeQeQguRCq5krk4nN/XInjNa1bjZADuSOBdc
+	vmhABsR9gIy4B8Qiux64lh7QNUqO1iWazYNOa8Wc20Qc9kjWrmKTRsTkI+j7tSFGDvgqlW
+	G3igVEAgua1oWMeAJkHumEFyLTIbm0Kp8FNL3xftHdf5j5t1BQldzvVQVIZmTg==
 From: thomas.perrot@bootlin.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Thomas Perrot <thomas.perrot@bootlin.com>
-Subject: [oe][meta-oe][PATCH] etcd-cpp-apiv3: no longer skip ldflags QA
-Date: Fri,  9 Feb 2024 16:34:30 +0100
-Message-ID: <20240209153430.2756697-1-thomas.perrot@bootlin.com>
+Subject: [oe][meta-oe][PATCH] kernel-selftest: no longer skip ldflags QA
+Date: Fri,  9 Feb 2024 16:36:23 +0100
+Message-ID: <20240209153623.2759946-1-thomas.perrot@bootlin.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -37,8 +37,8 @@ X-GND-Sasl: thomas.perrot@bootlin.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 09 Feb 2024 15:34:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108686
+ <openembedded-devel@lists.openembedded.org>; Fri, 09 Feb 2024 15:36:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108687
 
 From: Thomas Perrot <thomas.perrot@bootlin.com>
 
@@ -46,20 +46,22 @@ Because there is no longer the error.
 
 Signed-off-by: Thomas Perrot <thomas.perrot@bootlin.com>
 ---
- meta-oe/recipes-extended/etcd/etcd-cpp-apiv3_0.15.3.bb | 1 -
- 1 file changed, 1 deletion(-)
+ meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/etcd/etcd-cpp-apiv3_0.15.3.bb b/meta-oe/recipes-extended/etcd/etcd-cpp-apiv3_0.15.3.bb
-index e8299bab5fdf..401d53c79c1d 100644
---- a/meta-oe/recipes-extended/etcd/etcd-cpp-apiv3_0.15.3.bb
-+++ b/meta-oe/recipes-extended/etcd/etcd-cpp-apiv3_0.15.3.bb
-@@ -19,6 +19,5 @@ S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
+index 6868f175bcf1..7d21dac7d573 100644
+--- a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
++++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
+@@ -156,7 +156,7 @@ FILES:${PN} += "/usr/kernel-selftest"
  
- EXTRA_OECONF += "-DCPPREST_EXCLUDE_WEBSOCKETS=ON"
+ RDEPENDS:${PN} += "python3 perl perl-module-io-handle"
+ # tools/testing/selftests/vm/Makefile doesn't respect LDFLAGS and tools/testing/selftests/Makefile explicitly overrides to empty
+-INSANE_SKIP:${PN} += "ldflags libdir"
++INSANE_SKIP:${PN} += "libdir"
  
--INSANE_SKIP:${PN}:append = " ldflags"
- SOLIBS = ".so"
- FILES_SOLIBSDEV = ""
+ SECURITY_CFLAGS = ""
+ COMPATIBLE_HOST:libc-musl = 'null'
 -- 
 2.43.0
 
