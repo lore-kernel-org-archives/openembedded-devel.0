@@ -1,130 +1,324 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <beniaminsandu@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 17BF1C48297
-	for <webhook@archiver.kernel.org>; Fri,  9 Feb 2024 11:19:26 +0000 (UTC)
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
- by mx.groups.io with SMTP id smtpd.web10.9179.1707477558738868287
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9A27DC4828F
+	for <webhook@archiver.kernel.org>; Fri,  9 Feb 2024 13:24:36 +0000 (UTC)
+Received: from mail-lj1-f173.google.com (mail-lj1-f173.google.com [209.85.208.173])
+ by mx.groups.io with SMTP id smtpd.web10.11293.1707485067049060266
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 09 Feb 2024 03:19:19 -0800
+ Fri, 09 Feb 2024 05:24:27 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=k+o/Zxdl;
- spf=pass (domain: smile.fr, ip: 209.85.221.53, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-33b4e5ed890so437564f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 09 Feb 2024 03:19:18 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZCIHHgvo;
+ spf=pass (domain: gmail.com, ip: 209.85.208.173, mailfrom: beniaminsandu@gmail.com)
+Received: by mail-lj1-f173.google.com with SMTP id 38308e7fff4ca-2d0a4e8444dso10565871fa.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 09 Feb 2024 05:24:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1707477557; x=1708082357; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1707485065; x=1708089865; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Dbd+BaO8N9wEydZ7efP8ucXMiv1eqXFed0DeoYpGhGk=;
-        b=k+o/ZxdliNR1j8OwUg4ELD1AgpTbXo1+ybxKEq+0h+/SroqfkZclSC6YzBgvJqbkIi
-         Xq3a4svHbkp5Fy7VAmhdzX2BHN2PYJMjnKqvB2/S4NNt3OEokdy1SaXHNj2QjwutlhLq
-         +6h9IDg+85gOXIHX48FYBVKVi3R25sWphIVaf5AnlfLASX0QNxHdECd1CGcnFDof6lHY
-         IACXmdPqJi6KLgPKwOaVwRV4y0WKmTL2IF2FkvHIMP/EchDQPpsHDlZTqP9vwmXrIcBs
-         NujmcjIfS1Ku22ZVPPFgg0OGGhFYYrbB8rLq0/VFXi1tZnb8AIBJKEjhk8mrc4px5Cym
-         Gnxg==
+        bh=tY6W4YZkBO4qhcprJUz9hfpPSKilg26YxA1z92xSO0Y=;
+        b=ZCIHHgvo8hAXQYdpS4RR74w0ebFdgZGTc1hDOiQy+cB3yfIo8VNkIG1W4J5mBwNAXQ
+         16SQbpff9CIsBel9OdLsM10cbMnIib0oDYl+fuWpK6iroZNzPYTI3zkbvxvPFW10n8Wu
+         pk6Xjg+TH5eF2VmnA8dw5tEBxH4XrG06CiJ7BY07EcGlAwhJOL9T22fjxsiepdiIVq4A
+         BnNCcXAjwvvvGwC8YmZ1vlXluybmPLMoNqF3C5JLDU2H1DGt8p0Bol5uWEBcOngVuDeh
+         +phL2JEir2h0ESBxZgO0h3dSxxY+dSQMQaKFU5rkCI3Atd2op22rjdWip3cXAiYkLWlx
+         BIHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707477557; x=1708082357;
+        d=1e100.net; s=20230601; t=1707485065; x=1708089865;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Dbd+BaO8N9wEydZ7efP8ucXMiv1eqXFed0DeoYpGhGk=;
-        b=KnW2Gvbale/OuDXQiF/mj1i6F5GiR9/ZoJO8Ocay4VXpZNo11b9jY92g5b4APfSgB1
-         wu7CwzX/qh7z00px8xiaOWeUrkgOJnqQELDEBU9jpb6MxpoKIKXM6zCnfWtX7iVNXQGP
-         vUSGd1hi5QYsLjT3L9xe8xue1cg60AH18s/u+TwaGxxRIP2NZuE3lv+a1FPBhtWPQN7+
-         QS7X4mpYwwiCb9y7E+5p2B6YY/E5gQIKYvYpRoFlrCTpKZkwfRGXxOIbdDOnEVxVkYTF
-         DMDV4J3jMdkXPF8raZT6M7I4avzKBjK2IVdqtJaLtKU6S+ofegIKzVh1OxzvxxGQSiYI
-         wNaA==
-X-Gm-Message-State: AOJu0Yzvjo0vi/DQEw9zstaoffuwiAJebPJS07eLJ365KIz5+niGb0lM
-	H8PlThrn5Vsrg4WOfQWtNjUssFwUTEW1JWXvkNVlzEOZn9x3Dn5tYuz3qadC2aE0c1L3a/3ZAXV
-	J7u4=
-X-Google-Smtp-Source: AGHT+IH7Xs6zYz/05YrH5UnrwFEdENg1zCHOJ3CqvzAeNO9K80JEgJ1XYzHB4HMMKplwJf+3dJh/IA==
-X-Received: by 2002:a5d:4743:0:b0:33b:26be:c5c4 with SMTP id o3-20020a5d4743000000b0033b26bec5c4mr830236wrs.58.1707477556920;
-        Fri, 09 Feb 2024 03:19:16 -0800 (PST)
-Received: from P-ASN-ECS-830T8C3.local ([89.159.1.53])
-        by smtp.gmail.com with ESMTPSA id a17-20020a5d4571000000b0033af5716a7fsm1544424wrc.61.2024.02.09.03.19.16
+        bh=tY6W4YZkBO4qhcprJUz9hfpPSKilg26YxA1z92xSO0Y=;
+        b=MTiztXHUOFbbQkPmv+HuW62WzM2Ou89/5hfZGS+d/biyMt/McrO+JN97apYy8zKP5b
+         uWr2BYQ0sxxuXbwUT3h1poSJZ5OR+mnv7ssOxEY5CNQ16dJKmM/Pz+1oBhsLLnVrHtVP
+         c7fYFJpyyA1fUQFAcuwr9+27D6QY4qfv+Pflkb1Xfb28Vkrfm+9q3G+2PpEuJ/GrMekd
+         HYCoP74xmVPUqIJ+IHh0Wephut1ftOXZ33OFBfBmcgZQ9hHPGVr6WQOwtVg5KolpiXi1
+         gSdrLh5/WXcHrwIrIeOf+ERWHirkMQ+gxi/1cUDg9NEC22+zr3e/FcQHhlUfRWJRdk/7
+         IMjQ==
+X-Gm-Message-State: AOJu0Yz5+dK0F4vUiJNztzqPUwbseRg0xnRvTYUUeRjvT3E6b6qj4VDR
+	SgabSq+12ljBr1/RN5R8Inw5P8E/4uoxalQRmLMRrLMwV2SOkp9h3O+y0ka0
+X-Google-Smtp-Source: AGHT+IFz8UVXshwvAhIUjTr8ZlbvIeKOvU7nwaXIPaFJfLyNpT0yIxeb707NxON1+kCZW1E7JAkhYw==
+X-Received: by 2002:a19:c506:0:b0:511:75a7:1513 with SMTP id w6-20020a19c506000000b0051175a71513mr1154664lfe.67.1707485064737;
+        Fri, 09 Feb 2024 05:24:24 -0800 (PST)
+Received: from localhost.localdomain (finc-23-b2-v4wan-163330-cust316.vm7.cable.virginm.net. [82.30.59.61])
+        by smtp.gmail.com with ESMTPSA id y18-20020a1c4b12000000b00410723b14e4sm621689wma.19.2024.02.09.05.24.23
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 09 Feb 2024 03:19:16 -0800 (PST)
-From: Yoann Congal <yoann.congal@smile.fr>
+        Fri, 09 Feb 2024 05:24:24 -0800 (PST)
+From: Beniamin Sandu <beniaminsandu@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Yoann Congal <yoann.congal@smile.fr>
-Subject: [meta-oe][PATCH] mariadb: Move useradd handling in target side of the recipe
-Date: Fri,  9 Feb 2024 12:18:16 +0100
-Message-Id: <20240209111815.1901401-1-yoann.congal@smile.fr>
-X-Mailer: git-send-email 2.39.2
+Cc: Beniamin Sandu <beniaminsandu@gmail.com>
+Subject: [meta-oe][PATCH] opencv: upgrade 4.8.0 -> 4.9.0
+Date: Fri,  9 Feb 2024 13:23:46 +0000
+Message-Id: <20240209132346.31869-1-beniaminsandu@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 09 Feb 2024 11:19:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108682
+ <openembedded-devel@lists.openembedded.org>; Fri, 09 Feb 2024 13:24:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108683
 
-Having useradd class inherited for the -native recipe makes no sense and
-emit this kind of warning during reproducibility test:
-  stdio: WARNING: QA Issue: mariadb-native: native/nativesdk class is not inherited last, this can result in unexpected behaviour. Classes inherited after native/nativesdk: useradd-staticids.bbclass [native-last]
+Full changelogs:
+https://github.com/opencv/opencv/wiki/ChangeLog#version481
+https://github.com/opencv/opencv/wiki/ChangeLog#version490
 
-So, move the useradd inherit and associated variables to the target side
-of the recipe.
-
-Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
 ---
-Tested target ptest OK but could not find a -native test.
----
- meta-oe/recipes-dbs/mysql/mariadb.inc        | 6 +-----
- meta-oe/recipes-dbs/mysql/mariadb_10.11.6.bb | 6 ++++++
- 2 files changed, 7 insertions(+), 5 deletions(-)
+ .../opencv/fix-build-with-protobuf-v22.patch  | 203 ------------------
+ .../{opencv_4.8.0.bb => opencv_4.9.0.bb}      |   8 +-
+ 2 files changed, 4 insertions(+), 207 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/opencv/opencv/fix-build-with-protobuf-v22.patch
+ rename meta-oe/recipes-support/opencv/{opencv_4.8.0.bb => opencv_4.9.0.bb} (97%)
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index 7e6ef42bc..25dc15b46 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -33,7 +33,7 @@ S = "${WORKDIR}/mariadb-${PV}"
- 
- BINCONFIG_GLOB = "mysql_config"
- 
--inherit cmake gettext binconfig update-rc.d useradd systemd multilib_script pkgconfig
-+inherit cmake gettext binconfig update-rc.d systemd multilib_script pkgconfig
- 
- MULTILIB_SCRIPTS = "${PN}-server:${bindir}/mariadbd-safe \
-                     ${PN}-setupdb:${bindir}/mariadb-install-db"
-@@ -42,10 +42,6 @@ INITSCRIPT_PACKAGES = "${PN}-server ${PN}-setupdb"
- INITSCRIPT_NAME:${PN}-server = "mysqld"
- INITSCRIPT_PARAMS:${PN}-server ?= "start 45 5 . stop 45 0 6 1 ."
- 
--USERADD_PACKAGES = "${PN}-setupdb"
--USERADD_PARAM:${PN}-setupdb = "--system --home-dir /var/mysql -g mysql --shell /bin/false mysql"
--GROUPADD_PARAM:${PN}-setupdb = "--system mysql"
+diff --git a/meta-oe/recipes-support/opencv/opencv/fix-build-with-protobuf-v22.patch b/meta-oe/recipes-support/opencv/opencv/fix-build-with-protobuf-v22.patch
+deleted file mode 100644
+index 265d723c6..000000000
+--- a/meta-oe/recipes-support/opencv/opencv/fix-build-with-protobuf-v22.patch
++++ /dev/null
+@@ -1,203 +0,0 @@
+-From 75f7475fcfb35cbe4d8f5ccf5c4ac8bc78f2dc30 Mon Sep 17 00:00:00 2001
+-From: Kumataro <Kumataro@users.noreply.github.com>
+-Date: Thu, 19 Oct 2023 14:45:08 +0900
+-Subject: [PATCH] Merge pull request #24372 from Kumataro:fix24369
 -
- INITSCRIPT_NAME:${PN}-setupdb = "install_db"
- INITSCRIPT_PARAMS:${PN}-setupdb ?= "defaults 44 44"
+-Supporting protobuf v22 and later(with abseil-cpp/C++17) #24372
+-
+-fix https://github.com/opencv/opencv/issues/24369
+-related https://github.com/opencv/opencv/issues/23791
+-
+-1. This patch supports external protobuf v22 and later, it required abseil-cpp and c++17.
+-    Even if the built-in protobuf is upgraded to v22 or later,
+-    the dependency on abseil-cpp and the requirement for C++17 will continue.
+-2. Some test for caffe required patched protobuf, so this patch disable them.
+-
+-This patch is tested by following libraries.
+--  Protobuf:                    /usr/local/lib/libprotobuf.so (4.24.4)
+--  abseil-cpp:                YES (20230125)
+-
+-See details at https://github.com/opencv/opencv/wiki/How_to_contribute#making-a-good-pull-request
+-
+-- [x] I agree to contribute to the project under Apache 2 License.
+-- [x] To the best of my knowledge, the proposed patch is not based on a code under GPL or another license that is incompatible with OpenCV
+-- [x] The PR is proposed to the proper branch
+-- [x] There is a reference to the original bug report and related work
+-- [x] There is accuracy test, performance test and test data in opencv_extra repository, if applicable
+-      Patch to opencv_extra has the same branch name.
+-- [x] The feature is well documented and sample code can be built with the project CMake
+-
+-Upstream-Status: Backport [https://github.com/opencv/opencv/commit/6e4280ea81b59c6dca45bb9801b758377beead55]
+----
+- cmake/OpenCVFindProtobuf.cmake   | 35 +++++++++++++++++++++++++++-----
+- modules/dnn/CMakeLists.txt       |  6 ++++++
+- modules/dnn/test/test_layers.cpp | 24 ++++++++++++++++++----
+- 3 files changed, 56 insertions(+), 9 deletions(-)
+-
+-diff --git a/cmake/OpenCVFindProtobuf.cmake b/cmake/OpenCVFindProtobuf.cmake
+-index 8835347d1d..5b1e17529f 100644
+---- a/cmake/OpenCVFindProtobuf.cmake
+-+++ b/cmake/OpenCVFindProtobuf.cmake
+-@@ -30,8 +30,14 @@ if(BUILD_PROTOBUF)
+-   set(Protobuf_LIBRARIES "libprotobuf")
+-   set(HAVE_PROTOBUF TRUE)
+- else()
+-+  # we still need this for command PROTOBUF_GENERATE_CPP.
+-+  set(protobuf_MODULE_COMPATIBLE ON)
+-+
+-   unset(Protobuf_VERSION CACHE)
+--  find_package(Protobuf QUIET)
+-+  find_package(Protobuf QUIET CONFIG)
+-+  if(NOT Protobuf_FOUND)
+-+    find_package(Protobuf QUIET)
+-+  endif()
+- 
+-   # Backwards compatibility
+-   # Define camel case versions of input variables
+-@@ -67,6 +73,20 @@ else()
+-   endif()
+- endif()
+- 
+-+# See https://github.com/opencv/opencv/issues/24369
+-+# In Protocol Buffers v22.0 and later drops C++11 support and depends abseil-cpp.
+-+#   Details: https://protobuf.dev/news/2022-08-03/
+-+# And if std::text_view is in abseil-cpp requests C++17 and later.
+-+
+-+if(HAVE_PROTOBUF)
+-+  if(NOT (Protobuf_VERSION VERSION_LESS 22))
+-+    if((CMAKE_CXX_STANDARD EQUAL 98) OR (CMAKE_CXX_STANDARD LESS 17))
+-+      message(STATUS "CMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD} is too old to support protobuf(${Protobuf_VERSION}) and/or abseil-cpp. Use C++17 or later. Turning HAVE_PROTOBUF off")
+-+      set(HAVE_PROTOBUF FALSE)
+-+    endif()
+-+  endif()
+-+endif()
+-+
+- if(HAVE_PROTOBUF AND PROTOBUF_UPDATE_FILES AND NOT COMMAND PROTOBUF_GENERATE_CPP)
+-   message(FATAL_ERROR "Can't configure protobuf dependency (BUILD_PROTOBUF=${BUILD_PROTOBUF} PROTOBUF_UPDATE_FILES=${PROTOBUF_UPDATE_FILES})")
+- endif()
+-@@ -74,15 +94,20 @@ endif()
+- if(HAVE_PROTOBUF)
+-   list(APPEND CUSTOM_STATUS protobuf)
+-   if(NOT BUILD_PROTOBUF)
+-+    unset( __location)
+-     if(TARGET "${Protobuf_LIBRARIES}")
+-       get_target_property(__location "${Protobuf_LIBRARIES}" IMPORTED_LOCATION_RELEASE)
+-       if(NOT __location)
+-         get_target_property(__location "${Protobuf_LIBRARIES}" IMPORTED_LOCATION)
+-       endif()
+--    elseif(Protobuf_LIBRARY)
+--      set(__location "${Protobuf_LIBRARY}")
+--    else()
+--      set(__location "${Protobuf_LIBRARIES}")
+-+    endif()
+-+
+-+    if(NOT __location)
+-+      if(Protobuf_LIBRARY)
+-+        set(__location "${Protobuf_LIBRARY}")
+-+      else()
+-+        set(__location "${Protobuf_LIBRARIES}")
+-+      endif()
+-     endif()
+-   endif()
+-   list(APPEND CUSTOM_STATUS_protobuf "    Protobuf:"
+-diff --git a/modules/dnn/CMakeLists.txt b/modules/dnn/CMakeLists.txt
+-index 804b78ead2..9fcc460909 100644
+---- a/modules/dnn/CMakeLists.txt
+-+++ b/modules/dnn/CMakeLists.txt
+-@@ -245,6 +245,12 @@ ocv_create_module(${libs} ${dnn_runtime_libs})
+- ocv_add_samples()
+- ocv_add_accuracy_tests(${dnn_runtime_libs})
+- 
+-+if(NOT BUILD_PROTOBUF)
+-+  if(TARGET opencv_test_dnn)
+-+    ocv_target_compile_definitions(opencv_test_dnn PRIVATE "OPENCV_DNN_EXTERNAL_PROTOBUF=1")
+-+  endif()
+-+endif()
+-+
+- set(perf_path "${CMAKE_CURRENT_LIST_DIR}/perf")
+- file(GLOB_RECURSE perf_srcs "${perf_path}/*.cpp")
+- file(GLOB_RECURSE perf_hdrs "${perf_path}/*.hpp" "${perf_path}/*.h")
+-diff --git a/modules/dnn/test/test_layers.cpp b/modules/dnn/test/test_layers.cpp
+-index 763d94b99c..6cb6d54b3f 100644
+---- a/modules/dnn/test/test_layers.cpp
+-+++ b/modules/dnn/test/test_layers.cpp
+-@@ -756,11 +756,15 @@ TEST_F(Layer_RNN_Test, get_set_test)
+- 
+- TEST_P(Test_Caffe_layers, Accum)
+- {
+-+#ifdef OPENCV_DNN_EXTERNAL_PROTOBUF
+-+    throw SkipTestException("Requires patched protobuf");
+-+#else
+-     if (backend == DNN_BACKEND_OPENCV && target != DNN_TARGET_CPU)
+-         applyTestTag(CV_TEST_TAG_DNN_SKIP_OPENCL, CV_TEST_TAG_DNN_SKIP_OPENCL_FP16);
+- 
+-     testLayerUsingCaffeModels("accum", false, false, 0.0, 0.0, 2);
+-     testLayerUsingCaffeModels("accum_ref", false, false, 0.0, 0.0, 2);
+-+#endif
+- }
+- 
+- TEST_P(Test_Caffe_layers, FlowWarp)
+-@@ -780,27 +784,39 @@ TEST_P(Test_Caffe_layers, ChannelNorm)
+- 
+- TEST_P(Test_Caffe_layers, DataAugmentation)
+- {
+-+#ifdef OPENCV_DNN_EXTERNAL_PROTOBUF
+-+    throw SkipTestException("Requires patched protobuf");
+-+#else
+-     if (backend == DNN_BACKEND_OPENCV && target == DNN_TARGET_OPENCL_FP16)
+-         applyTestTag(CV_TEST_TAG_DNN_SKIP_OPENCL_FP16);
+-     testLayerUsingCaffeModels("data_augmentation", true, false);
+-     testLayerUsingCaffeModels("data_augmentation_2x1", true, false);
+-     testLayerUsingCaffeModels("data_augmentation_8x6", true, false);
+-+#endif
+- }
+- 
+- TEST_P(Test_Caffe_layers, Resample)
+- {
+-+#ifdef OPENCV_DNN_EXTERNAL_PROTOBUF
+-+    throw SkipTestException("Requires patched protobuf");
+-+#else
+-     if (backend != DNN_BACKEND_OPENCV)
+-         applyTestTag(CV_TEST_TAG_DNN_SKIP_IE_NN_BUILDER, CV_TEST_TAG_DNN_SKIP_IE_NGRAPH);
+-     testLayerUsingCaffeModels("nearest_2inps", false, false, 0.0, 0.0, 2);
+-     testLayerUsingCaffeModels("nearest", false, false);
+-+#endif
+- }
+- 
+- TEST_P(Test_Caffe_layers, Correlation)
+- {
+-+#ifdef OPENCV_DNN_EXTERNAL_PROTOBUF
+-+    throw SkipTestException("Requires patched protobuf");
+-+#else
+-     if (backend == DNN_BACKEND_OPENCV && target == DNN_TARGET_OPENCL_FP16)
+-         applyTestTag(CV_TEST_TAG_DNN_SKIP_IE_NGRAPH, CV_TEST_TAG_DNN_SKIP_IE_NN_BUILDER,
+-                      CV_TEST_TAG_DNN_SKIP_OPENCL, CV_TEST_TAG_DNN_SKIP_OPENCL_FP16);
+-     testLayerUsingCaffeModels("correlation", false, false, 0.0, 0.0, 2);
+-+#endif
+- }
+- 
+- TEST_P(Test_Caffe_layers, Convolution2Inputs)
+-@@ -1641,12 +1657,11 @@ private:
+-     int outWidth, outHeight, zoomFactor;
+- };
+- 
+--#ifndef OPENCV_DNN_EXTERNAL_PROTOBUF
+- TEST_P(Test_Caffe_layers, Interp)
+--#else
+--TEST_P(Test_Caffe_layers, DISABLED_Interp)  // requires patched protobuf (available in OpenCV source tree only)
+--#endif
+- {
+-+#ifdef OPENCV_DNN_EXTERNAL_PROTOBUF
+-+    throw SkipTestException("Requires patched protobuf");
+-+#else
+- #if defined(INF_ENGINE_RELEASE) && INF_ENGINE_VER_MAJOR_EQ(2021030000)
+-     if (backend == DNN_BACKEND_INFERENCE_ENGINE_NGRAPH && target == DNN_TARGET_MYRIAD)
+-         applyTestTag(CV_TEST_TAG_DNN_SKIP_IE_MYRIAD, CV_TEST_TAG_DNN_SKIP_IE_NGRAPH);  // exception
+-@@ -1670,6 +1685,7 @@ TEST_P(Test_Caffe_layers, DISABLED_Interp)  // requires patched protobuf (availa
+- 
+-     // Test an implemented layer.
+-     testLayerUsingCaffeModels("layer_interp", false, false);
+-+#endif
+- }
+- 
+- INSTANTIATE_TEST_CASE_P(/*nothing*/, Test_Caffe_layers, dnnBackendsAndTargets());
+diff --git a/meta-oe/recipes-support/opencv/opencv_4.8.0.bb b/meta-oe/recipes-support/opencv/opencv_4.9.0.bb
+similarity index 97%
+rename from meta-oe/recipes-support/opencv/opencv_4.8.0.bb
+rename to meta-oe/recipes-support/opencv/opencv_4.9.0.bb
+index 85eb230b0..1faecf4ca 100644
+--- a/meta-oe/recipes-support/opencv/opencv_4.8.0.bb
++++ b/meta-oe/recipes-support/opencv/opencv_4.9.0.bb
+@@ -10,8 +10,8 @@ ARM_INSTRUCTION_SET:armv5 = "arm"
  
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.11.6.bb b/meta-oe/recipes-dbs/mysql/mariadb_10.11.6.bb
-index a4498fa44..b1d1355e2 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb_10.11.6.bb
-+++ b/meta-oe/recipes-dbs/mysql/mariadb_10.11.6.bb
-@@ -1,6 +1,8 @@
- require mariadb.inc
+ DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
  
- inherit ptest
-+inherit useradd
-+
- SRC_URI += "${@bb.utils.contains('PTEST_ENABLED', '1', 'file://run-ptest', '', d)}"
- DEPENDS += "${@bb.utils.contains('PTEST_ENABLED', '1', 'rsync-native', '', d)}"
- RDEPENDS:${PN}-ptest += "cmake sed perl-module-test-more"
-@@ -36,6 +38,10 @@ DEPENDS += "mariadb-native bison-native boost libpcre2 curl ncurses \
+-SRCREV_opencv = "f9a59f2592993d3dcc080e495f4f5e02dd8ec7ef"
+-SRCREV_contrib = "f10c84d48b0714f2b408c9e5cccfac1277c8e6cc"
++SRCREV_opencv = "dad8af6b17f8e60d7b95a1203a1b4d22f56574cf"
++SRCREV_contrib = "c7602a8f74205e44389bd6a4e8d727d32e7e27b4"
+ SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
+ SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
+ SRCREV_face = "8afa57abc8229d611c4937165d20e2a2d9fc5a12"
+@@ -31,7 +31,6 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=4.x;protocol=ht
+            file://download.patch \
+            file://0001-Make-ts-module-external.patch \
+            file://0008-Do-not-embed-build-directory-in-binaries.patch \
+-           file://fix-build-with-protobuf-v22.patch \
+            "
+ SRC_URI:append:riscv64 = " file://0001-Use-Os-to-compile-tinyxml2.cpp.patch;patchdir=contrib"
  
- PROVIDES += "mysql5 libmysqlclient"
+@@ -128,8 +127,9 @@ inherit pkgconfig cmake
+ inherit ${@bb.utils.contains('PACKAGECONFIG', 'python3', 'setuptools3-base', '', d)}
+ inherit ${@bb.utils.contains('PACKAGECONFIG', 'python2', 'distutils-base', '', d)}
  
-+USERADD_PACKAGES = "${PN}-setupdb"
-+USERADD_PARAM:${PN}-setupdb = "--system --home-dir /var/mysql -g mysql --shell /bin/false mysql"
-+GROUPADD_PARAM:${PN}-setupdb = "--system mysql"
-+
- RPROVIDES:${PN} += "mysql5"
- RREPLACES:${PN} += "mysql5"
- RCONFLICTS:${PN} += "mysql5"
++PYTHON_VER="${@bb.utils.contains('PACKAGECONFIG', 'python3', 'python3', 'python', d)}"
+ export PYTHON_CSPEC="-I${STAGING_INCDIR}/${PYTHON_DIR}"
+-export PYTHON="${STAGING_BINDIR_NATIVE}/${@bb.utils.contains('PACKAGECONFIG', 'python3', 'python3', 'python', d)}"
++export PYTHON="${STAGING_BINDIR_NATIVE}/${PYTHON_VER}-native/${PYTHON_VER}"
+ export ORACLE_JAVA_HOME="${STAGING_DIR_NATIVE}/usr/bin/java"
+ export JAVA_HOME="${STAGING_DIR_NATIVE}/usr/lib/jvm/openjdk-8-native"
+ export ANT_DIR="${STAGING_DIR_NATIVE}/usr/share/ant/"
 -- 
-2.39.2
+2.34.1
 
 
