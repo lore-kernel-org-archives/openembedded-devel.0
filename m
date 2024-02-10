@@ -1,87 +1,89 @@
-Return-Path: <wak@google.com>
+Return-Path: <alex.kiernan@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 04881C48297
-	for <webhook@archiver.kernel.org>; Sat, 10 Feb 2024 00:59:48 +0000 (UTC)
-Received: from mail-yw1-f202.google.com (mail-yw1-f202.google.com [209.85.128.202])
- by mx.groups.io with SMTP id smtpd.web11.4584.1707526782842336958
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A2323C48260
+	for <webhook@archiver.kernel.org>; Sat, 10 Feb 2024 16:14:52 +0000 (UTC)
+Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com [209.85.167.44])
+ by mx.groups.io with SMTP id smtpd.web10.16753.1707581691484889495
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 09 Feb 2024 16:59:42 -0800
+ Sat, 10 Feb 2024 08:14:51 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@google.com header.s=20230601 header.b=LTNnU19l;
- spf=pass (domain: flex--wak.bounces.google.com, ip: 209.85.128.202, mailfrom: 3fsrgzqmkagmxblhpphmf.dpn@flex--wak.bounces.google.com)
-Received: by mail-yw1-f202.google.com with SMTP id 00721157ae682-5eba564eb3fso34272527b3.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 09 Feb 2024 16:59:42 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=frGxPgD6;
+ spf=pass (domain: gmail.com, ip: 209.85.167.44, mailfrom: alex.kiernan@gmail.com)
+Received: by mail-lf1-f44.google.com with SMTP id 2adb3069b0e04-51181d8f52fso623040e87.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 10 Feb 2024 08:14:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1707526782; x=1708131582; darn=lists.openembedded.org;
-        h=cc:to:from:subject:references:mime-version:message-id:in-reply-to
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=thKwcQLuqqxpX6bp5Xf0dqz93GPrRz8ZlWrLcp+XEB0=;
-        b=LTNnU19lWbXChmuty6okY9q7vYuPp5wiH/8Nbmqs6wNMHOD+XnZR9Ln33KxbG8W1UX
-         xfvTgotCUvu/69kBPkb1AqMOEyc/qMrji8Tu/ajI80/3Pv3VV5mJasgKaIKitd1udOzS
-         q0HfwZLZmEkjYKLqDYsziqCxwp6Fnkry5cXm1pyU/C6uptmIJXIpsEdJao6swUAv/aSw
-         sOC7RDZA2uYfTQ1OkvxLjS+w6kOnl+zLfpK/3tb1fpSoYFFDVvSF7Q4+ljv6wOSpShZc
-         74HF7A7oL/q1OEOwo8TMYoydTA0oN+j0o7UkQoa5BO2wUSAfQe+JyYRrc8mORvMytSZb
-         XfhQ==
+        d=gmail.com; s=20230601; t=1707581689; x=1708186489; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=lVKwcE1VXgzooF+hGZOMnC/l6eP8WwaoJzU8/RybCsE=;
+        b=frGxPgD6Rav7lfIyqgYtgA7bVhqFFNMYNW0xMbM5z2jHP/ijNcXE49sgxskGrr5jNC
+         OqqWbni5wMND4A6E2jSqmVlG+XFl0qLzIBTWwTvXG5aHCkmxlwv1UUAouG9wQ0S/hLAu
+         QEXDD0KB3d+/7bQgD+hcDN5C5Fxqdt0ns7hILDZIq4mCPigp7HQ7fiWB+hRO9RySYGnh
+         ntzlD8kFkU89/urRkXSYBdaNybslUG3OYJUYLCXUoMooC6cUrZkMZDd8iHM5P0By9xyq
+         Nl3UJrnJZVfLlQX4Jt8NfS7EmNQ7VSIZOAWCnOj29ug3SXhTFvjVEYTN8aNaCXJP8tWx
+         xung==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707526782; x=1708131582;
-        h=cc:to:from:subject:references:mime-version:message-id:in-reply-to
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=thKwcQLuqqxpX6bp5Xf0dqz93GPrRz8ZlWrLcp+XEB0=;
-        b=R879481eglnOGqLad77qQu7iGAPVOnR4hGukQdQx3HUIvM2Ftwtw5sWj60RQ5XOsK8
-         uisFfO+IaCnwprbk6hYbKNIj0rEhln5uGzTDypOfpg8LUcHsxoKPytJ712/sFQSlhfb9
-         X5Sr7h41IdnG8gF2T3xj1vdO/M1wNldxUjte3jYMdcqrr6UO4mQTbJVw85/25nvY5WHq
-         jY419cUJb39Ly/U1zapfp1Iop+FgEJ4VfmXa78ARmW+HOSzkJfjxHHR5lx07FbA3HOrg
-         A87EQVxqczJCK2x9QTqrfIPJSKdi1spJemjzntrm9Y8jo1icMwsEV0Dz6zCV/Co8yAuW
-         WnkQ==
-X-Gm-Message-State: AOJu0Yw2mAOXiH0L+3KkzvgcaOZZLkm86ZzxvdyjPQu0hUhCC2W92Re9
-	sgLmA5X1snVyWGclVX4Lu5y6GDbpYrQX3UMC6z+zurdgr8liAeCyhFaYl14RCULZP16FxavKCbC
-	OM6ZkMI63c8COydSGhE9O2hfyXUMXM88BjA2+Z/UwcsXjio8VlCSHNyav0cX4tjGEXcn6DENOwD
-	VeUWqmooT8BGFh2bb40d/qFiEurFWp8Hq7rYld3yO9BQ==
-X-Google-Smtp-Source: AGHT+IFUYCMxPaR/QXRFG9eOF1vyz6NF9vdrvuGMfCfGVM9Ox6CUGAgO7lvy3r5cM1+uvSINvArO41k=
-X-Received: from wak-linux.svl.corp.google.com ([2620:15c:2a3:200:cf74:ea8a:4909:577e])
- (user=wak job=sendgmr) by 2002:a05:690c:fce:b0:603:ea10:c37c with SMTP id
- dg14-20020a05690c0fce00b00603ea10c37cmr215646ywb.7.1707526782087; Fri, 09 Feb
- 2024 16:59:42 -0800 (PST)
-Date: Fri,  9 Feb 2024 16:59:20 -0800
-In-Reply-To: <20240210005921.1909326-1-wak@google.com>
-Message-Id: <20240210005921.1909326-4-wak@google.com>
-Mime-Version: 1.0
-References: <20240210005921.1909326-1-wak@google.com>
-X-Mailer: git-send-email 2.43.0.687.g38aa6559b0-goog
-Subject: [meta-oe][PATCH 3/3] nanopb-runtime: Enable shared library
-From: "William A. Kennington III" <wak@google.com>
+        d=1e100.net; s=20230601; t=1707581689; x=1708186489;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=lVKwcE1VXgzooF+hGZOMnC/l6eP8WwaoJzU8/RybCsE=;
+        b=oi6RaeIxR32RNrDbIvUskL9I31LEtR+FuDKvc2sKyUiUxbbT0/S04lCPOV8n7+fZ3V
+         Uk0BcpCqK3XU2CuUUROiTsD5Z66njvv3VnBmIopwd0Adf2BOf9tIy1kXHTMODZVR1NK9
+         u7kIVRan5tCZp83v/CWih3bTIq+BPWgXeLojiTXGoWF4WnWTYNB74nG1ZmPPb9QdTd3Z
+         OhkRIYFSf4oHt9alrrUBes1p/wgvmRiq24VOcGlYf+iTA/THycfsC1GFJgf63jZ64I72
+         xo3o9XQLr+/d9i1zYSwlRwQfYPwQLdHbYsqX/kbHU1AnX5nr4OTIrAKnULK/+dHvYrYd
+         H2gQ==
+X-Gm-Message-State: AOJu0YxAjRhfeB6976SPiKTnkytHkvWqqml4isg2sA6xHY0jXbkK7RDS
+	wyoPsfS3MfGgAcB9uP9Frvg6NMjxu57Cn6eWyoXwixRGwsUqSq+BJzaL2vJV
+X-Google-Smtp-Source: AGHT+IGqpyXjOP+Z8gPEGeHcGtSDOtzuDW58bjjbOJlp1KmYY7/6l7135nrNsgp3DtdUG/QDZDyZCQ==
+X-Received: by 2002:a19:654f:0:b0:511:5660:69d4 with SMTP id c15-20020a19654f000000b00511566069d4mr1172133lfj.36.1707581689033;
+        Sat, 10 Feb 2024 08:14:49 -0800 (PST)
+Received: from Zuma-000004PC.lan ([2a02:390:9c57:0:d016:9a35:28cd:913d])
+        by smtp.gmail.com with ESMTPSA id by16-20020a056000099000b0033b75e5bc13sm650313wrb.1.2024.02.10.08.14.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 10 Feb 2024 08:14:48 -0800 (PST)
+From: Alex Kiernan <alex.kiernan@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: "William A. Kennington III" <wak@google.com>
-Content-Type: text/plain; charset="UTF-8"
+Cc: Alex Kiernan <alex.kiernan@gmail.com>
+Subject: [meta-networking][PATCH] mdns: Upgrade 2200.60.25.0.4 -> 2200.80.16
+Date: Sat, 10 Feb 2024 16:14:44 +0000
+Message-Id: <20240210161444.20858-1-alex.kiernan@gmail.com>
+X-Mailer: git-send-email 2.39.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 10 Feb 2024 00:59:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108699
+ <openembedded-devel@lists.openembedded.org>; Sat, 10 Feb 2024 16:14:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108700
 
-Some users would like to be able to share library code between multiple
-applications without embedding a static copy.
-
-Signed-off-by: William A. Kennington III <wak@google.com>
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 ---
- .../meta-python/recipes-devtools/nanopb/nanopb-runtime_0.4.8.bb  | 1 +
- 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-devtools/nanopb/nanopb-runtime_0.4.8.bb b/meta-oe/dynamic-layers/meta-python/recipes-devtools/nanopb/nanopb-runtime_0.4.8.bb
-index e36abf808..e43931a4e 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-devtools/nanopb/nanopb-runtime_0.4.8.bb
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-devtools/nanopb/nanopb-runtime_0.4.8.bb
-@@ -2,6 +2,7 @@ require nanopb.inc
+ .../mdns/{mdns_2200.60.25.0.4.bb => mdns_2200.80.16.bb}         | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-protocols/mdns/{mdns_2200.60.25.0.4.bb => mdns_2200.80.16.bb} (99%)
+
+diff --git a/meta-networking/recipes-protocols/mdns/mdns_2200.60.25.0.4.bb b/meta-networking/recipes-protocols/mdns/mdns_2200.80.16.bb
+similarity index 99%
+rename from meta-networking/recipes-protocols/mdns/mdns_2200.60.25.0.4.bb
+rename to meta-networking/recipes-protocols/mdns/mdns_2200.80.16.bb
+index 09af3d5ae36e..c516eba6ea85 100644
+--- a/meta-networking/recipes-protocols/mdns/mdns_2200.60.25.0.4.bb
++++ b/meta-networking/recipes-protocols/mdns/mdns_2200.80.16.bb
+@@ -26,7 +26,7 @@ SRC_URI = "git://github.com/apple-oss-distributions/mDNSResponder;protocol=https
+            file://0001-Handle-interface-without-ifa_addr.patch \
+            file://0001-Fix-SIGSEGV-during-DumpStateLog.patch \
+            "
+-SRCREV = "8acabead9ae56551011172d6835822a89c5298d6"
++SRCREV = "5fdc65a52db5c31fdf4b872d912590235b36a4dc"
  
- EXTRA_OECMAKE += " \
-   -Dnanopb_PROTOC_PATH=/bin/false \
-+  -DBUILD_SHARED_LIBS=ON \
-   -Dnanopb_BUILD_RUNTIME=ON \
-   -Dnanopb_BUILD_GENERATOR=OFF \
-   "
+ # We install a stub Makefile in the top directory so that the various checks
+ # in base.bbclass pass their tests for a Makefile, this ensures (that amongst
 -- 
-2.43.0.687.g38aa6559b0-goog
+2.39.0
 
 
