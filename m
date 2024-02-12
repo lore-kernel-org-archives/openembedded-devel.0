@@ -1,142 +1,116 @@
-Return-Path: <fathi.boudra@linaro.org>
+Return-Path: <wak@google.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 65C85C48297
-	for <webhook@archiver.kernel.org>; Mon, 12 Feb 2024 10:49:18 +0000 (UTC)
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
- by mx.groups.io with SMTP id smtpd.web10.3940.1707734955750500200
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 69001C48297
+	for <webhook@archiver.kernel.org>; Mon, 12 Feb 2024 11:00:38 +0000 (UTC)
+Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
+ by mx.groups.io with SMTP id smtpd.web11.4183.1707735636876931862
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 12 Feb 2024 02:49:16 -0800
+ Mon, 12 Feb 2024 03:00:37 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=hLXgeUHu;
- spf=pass (domain: linaro.org, ip: 209.85.221.51, mailfrom: fathi.boudra@linaro.org)
-Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-33aea66a31cso1673526f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Feb 2024 02:49:15 -0800 (PST)
+ dkim=pass header.i=@google.com header.s=20230601 header.b=CWHG1ap7;
+ spf=pass (domain: google.com, ip: 209.85.218.51, mailfrom: wak@google.com)
+Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-a28a6cef709so404567966b.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Feb 2024 03:00:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1707734954; x=1708339754; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=bV7gUMO7BjxUvUthAZlVo/DDGSreyW7CMia2xZ+KwEc=;
-        b=hLXgeUHu0fGfSyQb4U1EuNMQL/rmbh8ExMq4xdOhSN1WbU12sYZAadZJYIVmm0PdFr
-         x+pj2yZ3KBYJ4D/DWJ+ULOYuJrp0JsYGK56q5lwGLgyLVd9nyRq2aVG/onHdNIkcZYjR
-         jOz2niikx+qlrdwz6l9IRy1PPy+gcMGaAy3o65N/kAyr1dautvLS6HAinHsXT3TpL8ku
-         rVHND4BwHkD557aTAnSYjtit6DROYimGoKChGnFgTSnQWzVd7t2lHy8sof9aX9QCnbEM
-         MTnElw2hgIw7BE9j8JAYaTbEssjlDL9/kn7VE2l3qeXQZ4jNelDpL41npw331YxzyB6I
-         jwxw==
+        d=google.com; s=20230601; t=1707735635; x=1708340435; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=pEJ8YipABTnJSqtoa114UFUW1LUkkOoqpZwXzuqpYQY=;
+        b=CWHG1ap7tm8iCk9+KVTl+yyKewTP9QaqR27dsyAGecrbYOAVynAF1y8z9ECO9LALro
+         8p5HVHhMo+jGHbDE8DfbQFDzqQZp+lSgYCqkZL6Lza5kFV0gD4GgV0po2CnwykG1teAn
+         EIXo1JinL20hwL69/FXEbIH6NRyx9nvHdQ8itacIKL5FgN/xyg77JCgTCSSHBdLUzYM6
+         Ka7o7Ax1qa5smtqx/5Iw67OieCFyAsEFp1+dMs36pRyoAJyd9WIpyig4YP5UY9K6hU6L
+         9bySrT032fqsnfzLqx2oapLblKQZ3Iqg2IspN70lXj/TmOD6RtlyI387uPrBikxpuG9+
+         L5Mw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707734954; x=1708339754;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=bV7gUMO7BjxUvUthAZlVo/DDGSreyW7CMia2xZ+KwEc=;
-        b=RKitGKVCdRGvWGhtOWv3oFVPm0CezBR2w53PJ7FE+fSPwUAoQhMunQfD80BWGCYbmP
-         8tsPG4kXLzq18LIIkyN6x/LlSZewf+JTnm9mDbGbXBvRYuQumDWfttg6hFRbHX0mB2cC
-         QQKVc8dwqC2VOkBUh4F7RxknJRuR/9o2KK7y/1B37Fv72t1yyvRuKYyQh9iI0bc5/BZm
-         O5atMgqpqWM3HtxUbGfPi6ZcdqrKnm4ufctIabFiRly4ceqASyjuHB9fq2YFIefu3y/F
-         xyS6Kg6IF3H0iaAkB+Hv79w66doMcix88pVHoOm4HBCwQYa8pZNMz0Uer5XvGRLLxfb/
-         N6Tw==
-X-Gm-Message-State: AOJu0YwrE7uGluyvpcYCiUgPfZYarsMKWUDL/EPPPiFzCBIuc9HAhfzW
-	AEkM+MVXvgZs2pH5P0qVvvqS1tNid9H6Wk+MXHLJ5snYFZxYBahSEPZn4iMptwNjggYxg8OVrRv
-	OJS0q4A==
-X-Google-Smtp-Source: AGHT+IFNVQbrLe43+67mzNiPLIa7iuLLSxc8xW5b9PD9QPL0NaPcX8uh4Z3PVE6+sVqUuN0VWFo/xw==
-X-Received: by 2002:adf:f701:0:b0:33b:6e33:6cc with SMTP id r1-20020adff701000000b0033b6e3306ccmr4420725wrp.36.1707734953889;
-        Mon, 12 Feb 2024 02:49:13 -0800 (PST)
-Received: from corsair.. (88-169-167-85.subs.proxad.net. [88.169.167.85])
-        by smtp.gmail.com with ESMTPSA id n16-20020a5d67d0000000b0033af26545c8sm6403439wrw.50.2024.02.12.02.49.13
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 12 Feb 2024 02:49:13 -0800 (PST)
-From: Fathi Boudra <fathi.boudra@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Cc: Fathi Boudra <fathi.boudra@linaro.org>
-Subject: [meta-python][PATCH] whitenoise: add a new recipe
-Date: Mon, 12 Feb 2024 11:48:55 +0100
-Message-ID: <20240212104855.29980-1-fathi.boudra@linaro.org>
-X-Mailer: git-send-email 2.43.0
+        d=1e100.net; s=20230601; t=1707735635; x=1708340435;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=pEJ8YipABTnJSqtoa114UFUW1LUkkOoqpZwXzuqpYQY=;
+        b=VcN9Y395QEEANGld0dP5rOAIN3TfzrHRSHJhQJJI2pBtzjoWkoV4qzleltURCmNYcJ
+         cHlo2z52MXqIoP3LNAQX830z72PlQAW2NLdGIgVwLa2QrCatthGKrdxmv8udL3kxpqQ7
+         xjaJ9Axs2KRbu9rqnyHtMCJu4HUKNgD6Y1jJ8TDj4V+xxIeOWteb26mxWmeQu/kk1n5u
+         +5b7syY721iUDIZmtZRedvbY1BXyMNZTGw7NuUaPyaJ4/IezGFS3MUVzOKcnumjOs83X
+         elw8B8B+Fs4HJ5W11fmO6LFAKAkXGb8JG40hGaReN6O3T+KjSdAKONmdML4g4Ua3OSgF
+         +LbQ==
+X-Gm-Message-State: AOJu0YwLvtYBghnX8N1QMnaEp8oiKmjd1wfPLIkeuGcHjSt6hqtBKhgr
+	TsI40GTosHN0Zveawl8n2Znbx/qpfjGl3gA8HbDEthALRScCQopD/sh42oz/UM/7vVWW/ZukLWF
+	zyw6fXwL0LiMRX6xgu1nxPYZmEnmJZoF47ULc
+X-Google-Smtp-Source: AGHT+IHSfI/3Z1OAMRTHnlgy+yZeOwNXwTydOiDTEE7nfmn7TR5wW3lldiIWexge6fr1PPF5zx9D88QaX4zXjNS+4cU=
+X-Received: by 2002:a17:906:e291:b0:a3c:bbea:2333 with SMTP id
+ gg17-20020a170906e29100b00a3cbbea2333mr1027304ejb.3.1707735635192; Mon, 12
+ Feb 2024 03:00:35 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240210005921.1909326-1-wak@google.com> <20240210005921.1909326-4-wak@google.com>
+ <2723178.mvXUDI8C0e@n95hx1g2>
+In-Reply-To: <2723178.mvXUDI8C0e@n95hx1g2>
+From: William Kennington <wak@google.com>
+Date: Mon, 12 Feb 2024 03:00:22 -0800
+Message-ID: <CAPnigKnLjhfzOpXTAtE9vcn9q8AuB192mXYFxAyXWxq4ramTOw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 3/3] nanopb-runtime: Enable shared library
+To: Christian Eggers <ceggers@arri.de>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 12 Feb 2024 10:49:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108706
+ <openembedded-devel@lists.openembedded.org>; Mon, 12 Feb 2024 11:00:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108707
 
-Radically simplified static file serving for Python web apps
+On Sun, Feb 11, 2024 at 10:07=E2=80=AFPM Christian Eggers <ceggers@arri.de>=
+ wrote:
+>
+> On Saturday, 10 February 2024, 01:59:20 CET, William A. Kennington III vi=
+a lists.openembedded.org wrote:
+> > Some users would like to be able to share library code between multiple
+> > applications without embedding a static copy.
+>
+> Some CMake based recipes have a PACKAGECONFIG for this:
+>
+> PACKAGECONFIG[shared] =3D "-DBUILD_SHARED_LIBS=3DON,-DBUILD_SHARED_LIBS=
+=3DOFF"
+>
+> Particularly for permissive licenses I personally prefer static linking
+> due to performance benefits.
 
-With a couple of lines of config WhiteNoise allows your web app
-to serve its own static files, making it a self-contained unit
-that can be deployed anywhere without relying on nginx, Amazon S3
-or any other external service.
+You could still statically link if you want to, this just builds both
+sets of libraries instead of the static library only. I don't mind
+adding the option though.
 
-https://whitenoise.readthedocs.io/en/latest/
-
-Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
----
- .../0001-add-setup.py.patch                   | 25 +++++++++++++++++++
- .../python/python3-whitenoise_6.6.0.bb        | 21 ++++++++++++++++
- 2 files changed, 46 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-whitenoise/0001-add-setup.py.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-whitenoise_6.6.0.bb
-
-diff --git a/meta-python/recipes-devtools/python/python3-whitenoise/0001-add-setup.py.patch b/meta-python/recipes-devtools/python/python3-whitenoise/0001-add-setup.py.patch
-new file mode 100644
-index 0000000000..48a861496e
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-whitenoise/0001-add-setup.py.patch
-@@ -0,0 +1,25 @@
-+From ded40864cd0d74e0881040ed580917128a83f40f Mon Sep 17 00:00:00 2001
-+From: Sahaj Sarup <sahaj.sarup@linaro.org>
-+Date: Thu, 16 Mar 2023 05:20:49 +0530
-+Subject: [PATCH] add setup.py
-+
-+Signed-off-by: Sahaj Sarup <sahaj.sarup@linaro.org>
-+
-+Upstream-Status: Pending
-+---
-+ setup.py | 3 +++
-+ 1 file changed, 3 insertions(+)
-+ create mode 100644 setup.py
-+
-+diff --git a/setup.py b/setup.py
-+new file mode 100644
-+index 0000000..f13cf21
-+--- /dev/null
-++++ b/setup.py
-+@@ -0,0 +1,3 @@
-++from setuptools import setup
-++if __name__ == '__main__':
-++    setup()
-+-- 
-+2.43.0
-+
-diff --git a/meta-python/recipes-devtools/python/python3-whitenoise_6.6.0.bb b/meta-python/recipes-devtools/python/python3-whitenoise_6.6.0.bb
-new file mode 100644
-index 0000000000..4948977448
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-whitenoise_6.6.0.bb
-@@ -0,0 +1,21 @@
-+SUMMARY = "Radically simplified static file serving for WSGI applications"
-+AUTHOR = "David Evans <d@evans.io>"
-+HOMEPAGE = "https://whitenoise.evans.io"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=aba4901cc64e401cea5a267eac2a2e1e"
-+
-+PYPI_PACKAGE = "whitenoise"
-+
-+SRC_URI += "file://0001-add-setup.py.patch"
-+
-+SRC_URI[sha256sum] = "8998f7370973447fac1e8ef6e8ded2c5209a7b1f67c1012866dbcd09681c3251"
-+
-+inherit pypi setuptools3
-+
-+RDEPENDS:${PN}:append = " \
-+    python3-brotli \
-+    python3-coverage \
-+    python3-django \
-+    python3-pytest \
-+    python3-requests \
-+"
--- 
-2.43.0
-
+>
+> regards,
+> Christian
+>
+> >
+> > Signed-off-by: William A. Kennington III <wak@google.com>
+> > ---
+> >  .../meta-python/recipes-devtools/nanopb/nanopb-runtime_0.4.8.bb  | 1 +
+> >  1 file changed, 1 insertion(+)
+> >
+> > diff --git a/meta-oe/dynamic-layers/meta-python/recipes-devtools/nanopb=
+/nanopb-runtime_0.4.8.bb b/meta-oe/dynamic-layers/meta-python/recipes-devto=
+ols/nanopb/nanopb-runtime_0.4.8.bb
+> > index e36abf808..e43931a4e 100644
+> > --- a/meta-oe/dynamic-layers/meta-python/recipes-devtools/nanopb/nanopb=
+-runtime_0.4.8.bb
+> > +++ b/meta-oe/dynamic-layers/meta-python/recipes-devtools/nanopb/nanopb=
+-runtime_0.4.8.bb
+> > @@ -2,6 +2,7 @@ require nanopb.inc
+> >
+> >  EXTRA_OECMAKE +=3D " \
+> >    -Dnanopb_PROTOC_PATH=3D/bin/false \
+> > +  -DBUILD_SHARED_LIBS=3DON \
+> >    -Dnanopb_BUILD_RUNTIME=3DON \
+> >    -Dnanopb_BUILD_GENERATOR=3DOFF \
+> >    "
+> >
+>
+>
+>
+>
 
