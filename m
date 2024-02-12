@@ -1,148 +1,160 @@
-Return-Path: <alex.kiernan@gmail.com>
+Return-Path: <vanusuri@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 56D7DC48260
-	for <webhook@archiver.kernel.org>; Sat, 10 Feb 2024 18:35:43 +0000 (UTC)
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
- by mx.groups.io with SMTP id smtpd.web10.21013.1707590133165379926
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EFF7BC4829B
+	for <webhook@archiver.kernel.org>; Mon, 12 Feb 2024 03:56:52 +0000 (UTC)
+Received: from mail-io1-f47.google.com (mail-io1-f47.google.com [209.85.166.47])
+ by mx.groups.io with SMTP id smtpd.web11.52410.1707710202934759331
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 10 Feb 2024 10:35:33 -0800
+ Sun, 11 Feb 2024 19:56:45 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Lk6cxD0P;
- spf=pass (domain: gmail.com, ip: 209.85.128.49, mailfrom: alex.kiernan@gmail.com)
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-40fd72f7125so16467495e9.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 10 Feb 2024 10:35:32 -0800 (PST)
+ dkim=pass header.i=@mvista.com header.s=google header.b=XgeN6sQs;
+ spf=pass (domain: mvista.com, ip: 209.85.166.47, mailfrom: vanusuri@mvista.com)
+Received: by mail-io1-f47.google.com with SMTP id ca18e2360f4ac-7bfd527d443so74508839f.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 11 Feb 2024 19:56:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1707590131; x=1708194931; darn=lists.openembedded.org;
+        d=mvista.com; s=google; t=1707710201; x=1708315001; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ZZIeN1KiC/wZsg4tFBLYKfFxoHRIM48ipJMwmSt2hhw=;
-        b=Lk6cxD0PhxSPqQdmiW3o3vGj7udlwZCiSxc6lbi6oy8A3DwO3x9cVE46x1sPbOPDdj
-         v8+SbNt+vDjzPbFWL9DQkN82yeTt+fOtmPzGlmwC/lTBq2dbdKgeRpbHG0YdNLyc2a/J
-         Cj9G+di4ZXMcvIYOO6sklbBKR5XXuPOjR4Lu/0vSFJYDpPFHdrQZYczuw2K1DSnANqLY
-         Fdzvj978cfcAx+PPY5mL5UnlJ8FjlTZSOl4IiHxShYNCTaxXVAxCOpCAyezdRedSlmmV
-         3Te9XeW0b0RiDvV18YIAbzNIsHEKm93cpkaWzsGPmRmjAlkC4qOlHqN+m389czrXLB8l
-         QBUA==
+        bh=7SM+YJ3mSEcXaG8atotiKh/HFQmicVn99Xxci0ShGYM=;
+        b=XgeN6sQs85kE8cwWz6ymW5HRBpD7A4mqx3AUaWpDAYWarmgpybybHHu7F5DFSf8bPK
+         u8YDATVhgDIGlbyACmQSwU/os/POxrG3Q3CEevlQDmT47nO9SpvUHCBK/87zcTagZJVM
+         RA8us5EbrLWe6e2+YA6jACinC5hph41V2ieAA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707590131; x=1708194931;
+        d=1e100.net; s=20230601; t=1707710201; x=1708315001;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=ZZIeN1KiC/wZsg4tFBLYKfFxoHRIM48ipJMwmSt2hhw=;
-        b=lpe/Ah123Va4OUJfXpK4azEs5aZnYq1adQQxy2e/4u5vdVwgzjc1P08t8Ke4tEMT2u
-         7XV4jAuhzu93xPbG9lK8Os8uTKjXavbjal3YPcO9bGnQaScVN0nbLSvcIBqwDioTlqLm
-         242SR3rmZUQi3EECGrxc6tm32RiL0SpR35c/iRjbWT/W2RK8CQG7qD7jEhDAaQyoJUVa
-         XUFweQvvC+jaHCQm1JZ4OTdjYuUExZlCSfND7MWH0WhjprR3IPLXmInunbR/aBzSHXK+
-         YTy2P19uooWTp0cFQr9InjSIwYpKzdFztLWkVSGZ80SQdDWokWCMkqhVFf28mU27F+6G
-         a+MQ==
-X-Gm-Message-State: AOJu0Yw6Onw4a3WzCex4kT5nW4N2GMu3OSyz8axuaMl/WP+EwjKHGgW/
-	fLa7FGtTjJeVDSgdqloRWeBvussrROk8kWqtB4DooA/aFIUjwx09wEuSnV45
-X-Google-Smtp-Source: AGHT+IFx7fyvwsaaPNa/Kw8DCpoTqCdw5ua5cEfY2bF/wV/vUlDwycVzVWLidzu0yn97vb2XFokKmg==
-X-Received: by 2002:a05:600c:46c9:b0:40f:ddb6:a63b with SMTP id q9-20020a05600c46c900b0040fddb6a63bmr2270186wmo.24.1707590130606;
-        Sat, 10 Feb 2024 10:35:30 -0800 (PST)
-Received: from Zuma-000004PC.lan ([2a02:390:9c57:0:d016:9a35:28cd:913d])
-        by smtp.gmail.com with ESMTPSA id j8-20020a05600c190800b004100b3c41absm4008153wmq.30.2024.02.10.10.35.30
+        bh=7SM+YJ3mSEcXaG8atotiKh/HFQmicVn99Xxci0ShGYM=;
+        b=o7r2w7rZrCR/aNBi68FyhG1oF1gRprlAFMTa+tM+qQcO58AdvkOjPxP3lm2xspiAi/
+         SVPHkeSdM8RcJmumHs0M22fyIEcTsg8sNXP5iJ1aeqW6s6WSZXitQ3G+ty5MdXNnukuK
+         7xCbAfiRwf/FV4PGkw1wvgnW9peIMRMj0Nc5BdDID2+OMDRommcRP3E2tsLzcHcoFDSr
+         I53ixqnL0wZ4/L5flvOnxf+XTv2jnhX8kvf4utrdAsA1wOiWu2O4Z81V9Nb4GrAqnOyp
+         hiWqOlvsvOgXvq2IYgClsDY2Ge1gji2vgWACDdOESuLLZwtvfDXbMDWDCCZWWmXISNmc
+         kEZQ==
+X-Gm-Message-State: AOJu0YxipYAXuc4gPAgsxZKqkW7ad6bManBl8POhi4KDACGYLl/GXsWj
+	WiWBmmZuDh3IDPc/pdALGG/xgPVdX2XOjj3O3/WNzIRPi1YbNRF7vLzDa4Ky9WQGiUfOQ6rVD3M
+	6
+X-Google-Smtp-Source: AGHT+IG3mHTvHnVvWtOYpNZGGpc6zXia0kEdfLCovR/nY2KNdSK8WDhI1vWGSyElyR/oAXPMDMtJmg==
+X-Received: by 2002:a92:da50:0:b0:363:dfc7:acc2 with SMTP id p16-20020a92da50000000b00363dfc7acc2mr7190738ilq.12.1707710201218;
+        Sun, 11 Feb 2024 19:56:41 -0800 (PST)
+Received: from MVIN00020.mvista.com ([2405:201:c01c:781c:2806:d73:94e:9363])
+        by smtp.gmail.com with ESMTPSA id h9-20020a170902f2c900b001d94a461d2dsm4970589plc.73.2024.02.11.19.56.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 10 Feb 2024 10:35:30 -0800 (PST)
-From: Alex Kiernan <alex.kiernan@gmail.com>
+        Sun, 11 Feb 2024 19:56:40 -0800 (PST)
+From: vanusuri@mvista.com
 To: openembedded-devel@lists.openembedded.org
-Cc: Alex Kiernan <alex.kiernan@gmail.com>
-Subject: [meta-oe][PATCH] c-ares: Upgrade 1.24.0 -> 1.26.0
-Date: Sat, 10 Feb 2024 18:35:26 +0000
-Message-Id: <20240210183526.68684-1-alex.kiernan@gmail.com>
-X-Mailer: git-send-email 2.39.0
+Cc: Vijay Anusuri <vanusuri@mvista.com>
+Subject: [oe][meta-networking][dunfell][PATCH] squid: Backport fix for CVE-2023-50269
+Date: Mon, 12 Feb 2024 09:26:24 +0530
+Message-Id: <20240212035624.14404-1-vanusuri@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 10 Feb 2024 18:35:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108701
+ <openembedded-devel@lists.openembedded.org>; Mon, 12 Feb 2024 03:56:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108702
 
-Changes 1.26.0:
+From: Vijay Anusuri <vanusuri@mvista.com>
 
-Brad House (14):
-      update release notes format
-      update format slightly
-      RELEASE-NOTES -> RELEASE-NOTES.md
-      test: fix outdated license headers
-      no reason to include sys/random.h all the time (#684)
-      Do not sanity check RR Name vs Question (#685)
-      autotools: fix building for 32bit windows due to stdcall symbol mangling (#689)
-      man ares_fds(3): mark as deprecated and add explanation (#691)
-      fix doxygen typo
-      Autotools allow make to override CFLAGS/CPPFLAGS/CXXFLAGS (#695)
-      Event Subsystem: No longer require integrators to have their own (#696)
-      adig: Differentiate between internal and server error
-      Release prep for c-ares 1.26.0 (#698)
-      clusterfuzz: enforce maximum DNS packet size due to long parser time
+import patch from ubuntu to fix
+ CVE-2023-50269
 
-Erik Lax (1):
-      Added flags to are_dns_parse to force RAW packet parsing (#693)
+Upstream-Status: Backport [import from ubuntu https://git.launchpad.net/ubuntu/+source/squid/tree/debian/patches?h=ubuntu/focal-security&id=9ccd217ca9428c9a6597e9310a99552026b245fa
+Upstream commit
+https://github.com/squid-cache/squid/commit/9f7136105bff920413042a8806cc5de3f6086d6d]
 
-Gregor Jasny (1):
-      cmake: improve some include related code (#680)
-
-Changes 1.25.0:
-
-Brad House (22):
-      fix test building with symbol hiding
-      ci: add test case for building with hidden symbol visibility
-      ci: disable static for symbol hiding tests
-      getrandom() may require sys/random.h on some systems
-      fix support with older google test versions
-      CI: Add Alpine Linux and old Ubuntu (#667)
-      Fix bad stub for ares__iface_ips_enumerate()
-      ahost should use ares_getaddrinfo() these days (#669)
-      Connection failure should increment server failure count first
-      sonarcloud: const
-      clang-format
-      ares_strsplit() rewrite as wrapper around ares__buf_split()
-      clang-format
-      Autotools warning fixes (#671)
-      Old MacOS SDKs require you include sys/socket.h before net/if.h (#673)
-      docs: host -> ip
-      Autotools: rework to simplify and fix recent issues (#674)
-      set winver consistently across build systems
-      autotools: update logic for building tests to provide more feedback
-      OSSFuzz: it assumes autotools builds a static library by default, which means the old autotools must have done that even though there were comments saying it wasn't.  Disable static by default on Windows however since it can't build both simultaneously.
-      tests: replace google DNS with CloudFlare for reverse lookups as google's servers stopped responding properly
-      1.25.0 release prep (#676)
-
-Gregor Jasny (1):
-      Fix minor warnings and documentation typos (#666)
-
-Martin Chang (1):
-      Use SOCK_DNS extension on socket on OpenBSD (#659)
-
-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
 ---
+ .../squid/files/CVE-2023-50269.patch          | 62 +++++++++++++++++++
+ .../recipes-daemons/squid/squid_4.9.bb        |  1 +
+ 2 files changed, 63 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/squid/files/CVE-2023-50269.patch
 
- .../c-ares/{c-ares_1.24.0.bb => c-ares_1.26.0.bb}             | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/c-ares/{c-ares_1.24.0.bb => c-ares_1.26.0.bb} (85%)
-
-diff --git a/meta-oe/recipes-support/c-ares/c-ares_1.24.0.bb b/meta-oe/recipes-support/c-ares/c-ares_1.26.0.bb
-similarity index 85%
-rename from meta-oe/recipes-support/c-ares/c-ares_1.24.0.bb
-rename to meta-oe/recipes-support/c-ares/c-ares_1.26.0.bb
-index 3b3b2b83febc..450d466f4961 100644
---- a/meta-oe/recipes-support/c-ares/c-ares_1.24.0.bb
-+++ b/meta-oe/recipes-support/c-ares/c-ares_1.26.0.bb
-@@ -5,9 +5,9 @@ SECTION = "libs"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.md;md5=fdbc58a6da11a9f68aa73c453818decc"
+diff --git a/meta-networking/recipes-daemons/squid/files/CVE-2023-50269.patch b/meta-networking/recipes-daemons/squid/files/CVE-2023-50269.patch
+new file mode 100644
+index 000000000..51c895e0e
+--- /dev/null
++++ b/meta-networking/recipes-daemons/squid/files/CVE-2023-50269.patch
+@@ -0,0 +1,62 @@
++From: Markus Koschany <apo@debian.org>
++Date: Tue, 26 Dec 2023 19:58:12 +0100
++Subject: CVE-2023-50269
++
++Bug-Debian: https://bugs.debian.org/1058721
++Origin: http://www.squid-cache.org/Versions/v5/SQUID-2023_10.patch
++
++Upstream-Status: Backport [import from ubuntu https://git.launchpad.net/ubuntu/+source/squid/tree/debian/patches/CVE-2023-50269.patch?h=ubuntu/focal-security&id=9ccd217ca9428c9a6597e9310a99552026b245fa
++Upstream commit https://github.com/squid-cache/squid/commit/9f7136105bff920413042a8806cc5de3f6086d6d]
++CVE: CVE-2023-50269
++Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
++---
++ src/ClientRequestContext.h |  4 ++++
++ src/client_side_request.cc | 17 +++++++++++++++--
++ 2 files changed, 19 insertions(+), 2 deletions(-)
++
++--- a/src/ClientRequestContext.h
+++++ b/src/ClientRequestContext.h
++@@ -81,6 +81,10 @@
++ #endif
++     ErrorState *error; ///< saved error page for centralized/delayed processing
++     bool readNextRequest; ///< whether Squid should read after error handling
+++
+++#if FOLLOW_X_FORWARDED_FOR
+++    size_t currentXffHopNumber = 0; ///< number of X-Forwarded-For header values processed so far
+++#endif
++ };
++ 
++ #endif /* SQUID_CLIENTREQUESTCONTEXT_H */
++--- a/src/client_side_request.cc
+++++ b/src/client_side_request.cc
++@@ -78,6 +78,11 @@
++ static const char *const crlf = "\r\n";
++ 
++ #if FOLLOW_X_FORWARDED_FOR
+++
+++#if !defined(SQUID_X_FORWARDED_FOR_HOP_MAX)
+++#define SQUID_X_FORWARDED_FOR_HOP_MAX 64
+++#endif
+++
++ static void clientFollowXForwardedForCheck(allow_t answer, void *data);
++ #endif /* FOLLOW_X_FORWARDED_FOR */
++ 
++@@ -485,8 +490,16 @@
++                 /* override the default src_addr tested if we have to go deeper than one level into XFF */
++                 Filled(calloutContext->acl_checklist)->src_addr = request->indirect_client_addr;
++             }
++-            calloutContext->acl_checklist->nonBlockingCheck(clientFollowXForwardedForCheck, data);
++-            return;
+++            if (++calloutContext->currentXffHopNumber < SQUID_X_FORWARDED_FOR_HOP_MAX) {
+++                calloutContext->acl_checklist->nonBlockingCheck(clientFollowXForwardedForCheck, data);
+++                return;
+++            }
+++            const auto headerName = Http::HeaderLookupTable.lookup(Http::HdrType::X_FORWARDED_FOR).name;
+++            debugs(28, DBG_CRITICAL, "ERROR: Ignoring trailing " << headerName << " addresses");
+++            debugs(28, DBG_CRITICAL, "addresses allowed by follow_x_forwarded_for: " << calloutContext->currentXffHopNumber);
+++            debugs(28, DBG_CRITICAL, "last/accepted address: " << request->indirect_client_addr);
+++            debugs(28, DBG_CRITICAL, "ignored trailing addresses: " << request->x_forwarded_for_iterator);
+++            // fall through to resume clientAccessCheck() processing
++         }
++     }
++ 
+diff --git a/meta-networking/recipes-daemons/squid/squid_4.9.bb b/meta-networking/recipes-daemons/squid/squid_4.9.bb
+index 482ce76d1..09c0a2cd7 100644
+--- a/meta-networking/recipes-daemons/squid/squid_4.9.bb
++++ b/meta-networking/recipes-daemons/squid/squid_4.9.bb
+@@ -30,6 +30,7 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${BPN}-${PV}.tar.bz2
+            file://CVE-2023-46846.patch \
+            file://CVE-2023-49285.patch \
+            file://CVE-2023-49286.patch \
++           file://CVE-2023-50269.patch \
+            "
  
--SRC_URI = "https://c-ares.org/download/c-ares-1.24.0.tar.gz \
-+SRC_URI = "https://c-ares.org/download/${BPN}-${PV}.tar.gz \
-            file://run-ptest"
--SRC_URI[sha256sum] = "c517de6d5ac9cd55a9b72c1541c3e25b84588421817b5f092850ac09a8df5103"
-+SRC_URI[sha256sum] = "bed58c4f02b009080ebda6c2467ba469722ac6aebbf4497dc44a83d8c6194e50"
- 
- PACKAGECONFIG ?= "${@bb.utils.contains('PTEST_ENABLED', '1', 'tests', '', d)}"
- PACKAGECONFIG[manpages] = ""
+ SRC_URI_remove_toolchain-clang = "file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch"
 -- 
-2.39.0
+2.25.1
 
 
