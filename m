@@ -1,102 +1,198 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3DF13C48260
-	for <webhook@archiver.kernel.org>; Tue, 13 Feb 2024 20:35:37 +0000 (UTC)
-Received: from mail-oa1-f41.google.com (mail-oa1-f41.google.com [209.85.160.41])
- by mx.groups.io with SMTP id smtpd.web10.24288.1707856536639470556
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D159C4829A
+	for <webhook@archiver.kernel.org>; Tue, 13 Feb 2024 22:50:48 +0000 (UTC)
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+ by mx.groups.io with SMTP id smtpd.web10.28355.1707864637939629220
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 13 Feb 2024 12:35:36 -0800
+ Tue, 13 Feb 2024 14:50:38 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=gcmdYaxN;
- spf=pass (domain: gmail.com, ip: 209.85.160.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f41.google.com with SMTP id 586e51a60fabf-2184133da88so772597fac.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 13 Feb 2024 12:35:36 -0800 (PST)
+ dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=Cqdyrz2P;
+ spf=pass (domain: smile.fr, ip: 209.85.128.43, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-411e698e679so182725e9.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 13 Feb 2024 14:50:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1707856536; x=1708461336; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=il29xOX9b/hp/T2ooXnLTCUl2ddA/n57vP5a20k4pcs=;
-        b=gcmdYaxNuX6BaHHzXgRjrNzf5sHVAuZO8hdwCQpUScofcJpTa2f+5ooKjgOhS7zWbg
-         eOtvAp9YnTchWaFsJZMaeDW7EPP8UvLgEKnH10qW1DnICffKHkK9kSWjd6JpyGd9MFNh
-         q2zmbwwmHGnDh0v65KRZCuXaKzoqwC0T/IOgKPJxi5nf4WijY4yFxevkelplnslCz51N
-         z8fIzhlimSzXu1zc0fav1OihxD4qj/lS4k2DYOdW5Fj+MFFxyd1oi3IXVtz58FLstKwt
-         m0BRdb+bUcfdSslkFVxcvwLtMKoqGDyoVmWXT+n1TflO1enUhyYIBOsHP7JOYmMaWILv
-         YTyw==
+        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1707864635; x=1708469435; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=AueLKWSqNiVbOLFfNU7hr5siih1DoWza3eJD289Chdc=;
+        b=Cqdyrz2PsncsZWsDaAgvC84RxmYKChmvVXmR7wiYmXHuuAaoWw63NDBnFjJrMBrqF+
+         +BPmWjUTkmELiPwwvZBd4hHuzxDSIFiFAffok7JCTuYHgDDUkQKa/4HyxCoCUNNaC+hB
+         nXAvIrRBtDotFnn++15yDfreSZ4fDCt6cHo3Jz4MUsmPehEStVo/AmwV0TwhVV4hpCAa
+         /NENZ2EVMSA0L3UZnYwvv/tB8BPC/Fg+mIwDMEWLVSHYZlfLPtxelVRFNDGI5OQAmQSn
+         AzoVEkh7VA+1ZwCrtkEjD56p82lpHP0hTdJJwLZyJ+HhGvj2feE2L53m2pNn903b0fp/
+         jpoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707856536; x=1708461336;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=il29xOX9b/hp/T2ooXnLTCUl2ddA/n57vP5a20k4pcs=;
-        b=NSgkf2eeBJaI2ePKREMQhZGjr252R1jTq21+AIKQFWnQJUKIFbmCLkfpcYxi6TsmcR
-         mbRfkw2+nh/WTzFWmn4dCUF0jVt9uSmQoNjJCUxnCmvrWb2NENU7frCc+YJ67pnrYgSQ
-         pXJ7oI0+xQbOoO69bHR8r02JUJ1fSDUkjqnr4NRNOyOeZLtb9KdRA4Le6d6gwPYdi92n
-         E/R46zAS/NhGnNvBvK8RIfk67e+/Xz1M1Vw1tkL0QGxBfSThHvOQwe38VxnPqQtTqjQI
-         f+oDvvuxNTZl5kI0YhDZwl5Y2Jg4VzWBdy6Lypz+i9JJoF6arsSLRZ4RdY/rRTeeAhRn
-         HebQ==
-X-Gm-Message-State: AOJu0YwtY0ZYtQIOP+8XF/DPYf7vc7wj9UGrgEQbxDmT4eKktf9kqjP0
-	s/75ehEMFdo0YhzqkLAQqF9vYsqon7VTzSfR2hnr0ELNm8J8V7saCuDD9tRMbSUnPGIXKBjGOCx
-	AVW4dY6yBskoVr9wmQl1pvyyNbao=
-X-Google-Smtp-Source: AGHT+IEQCEyWRY4R8qC0UTQkQa0PLm3M+Z3OUqWgVYdyxllT/QedUYnUkjy4d1yNNzU53sLy7ZtBWGLlazqF12SjW9w=
-X-Received: by 2002:a05:6870:c084:b0:219:6d32:131b with SMTP id
- c4-20020a056870c08400b002196d32131bmr540053oad.22.1707856535154; Tue, 13 Feb
- 2024 12:35:35 -0800 (PST)
+        d=1e100.net; s=20230601; t=1707864635; x=1708469435;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=AueLKWSqNiVbOLFfNU7hr5siih1DoWza3eJD289Chdc=;
+        b=PtYgNNZgnSjSNlnXP2+PNYYrKWNNTQA2qnaIx2LtKmHDHFtLDIqvV0CIbbkALBS2GZ
+         Ujo9t4CbKub2lvoB09zNoBqnW+Q1T+4MG9eXrCLXim5jI6C8Lsdb6jHmjj81p1ZBkEXB
+         gRkep1PFm1nZFClw2JNlj2qYe/qAJMwgrHpmpLPO9aK58jw3k1C+Vi7lIxlgpyGzZH0L
+         /GRk6NRyD5w36I5GWc98zrD7zjtLL3mhbyLeMEUh9oTuMt2U8EHR3aaY5gDKvVFbpJvn
+         J1VkMdnL42N9Uxdmy464l5vgMCTzZggDr+fX1YJTw879gPmxvewxnjvJicWxEVVZI1y7
+         A4Yg==
+X-Gm-Message-State: AOJu0YzEJ42rYgT1Br2msOblJoVV5KqChXgd0NkCeMRYFVNcrHK5WvXy
+	1VqrR+Pt873mUj/nyB8Ye/XxWWFC+y9+4pq0WmXg5MlaOS+mC5rIkQri9gpJJITxbdSI25PTT2Y
+	m4t0=
+X-Google-Smtp-Source: AGHT+IEjjDj6GP3s3UqOZGF4hXdkwOJUmQhDXtrN1ykejJOs2UqnM1kuAoohE8Q/SXjtdLKH2GgPsw==
+X-Received: by 2002:a5d:5913:0:b0:33b:628f:3690 with SMTP id v19-20020a5d5913000000b0033b628f3690mr397453wrd.20.1707864635285;
+        Tue, 13 Feb 2024 14:50:35 -0800 (PST)
+Received: from P-ASN-ECS-830T8C3.local ([89.159.1.53])
+        by smtp.gmail.com with ESMTPSA id 8-20020a05600c248800b00411e75eb83fsm5118wms.18.2024.02.13.14.50.34
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 13 Feb 2024 14:50:35 -0800 (PST)
+From: Yoann Congal <yoann.congal@smile.fr>
+To: openembedded-devel@lists.openembedded.org
+Cc: Yoann Congal <yoann.congal@smile.fr>
+Subject: [meta-initramfs][PATCH] kexec-tools-klibc: Fix building on x86_64 with binutils 2.41
+Date: Tue, 13 Feb 2024 23:50:17 +0100
+Message-Id: <20240213225017.2107323-1-yoann.congal@smile.fr>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-References: <7fffaa90-0e3c-4f71-a385-e6248df3b27f@kernel.crashing.org>
-In-Reply-To: <7fffaa90-0e3c-4f71-a385-e6248df3b27f@kernel.crashing.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 13 Feb 2024 12:35:08 -0800
-Message-ID: <CAMKF1sqRBtJ3RL3WHUqFovwhkRU-1a_JU4OOpR2wcYR0cEahaw@mail.gmail.com>
-Subject: Re: [oe] opencv - python3-opencv not building properly
-To: Mark Hatle <mark.hatle@kernel.crashing.org>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 13 Feb 2024 20:35:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108731
+ <openembedded-devel@lists.openembedded.org>; Tue, 13 Feb 2024 22:50:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108732
 
-On Tue, Feb 13, 2024 at 8:38=E2=80=AFAM Mark Hatle
-<mark.hatle@kernel.crashing.org> wrote:
->
-> With master as of yesterday (February 12, 2024), the python3-opencv packa=
-ge is
-> not building.  There is no error during the build of the opencv recipe, b=
-ut the
-> package itself never builds.
->
-> During the do_configure step there is a non-fatal error generated:
->
-> -- Found PythonInterp: .../opencv/4.9.0/recipe-sysroot-native/usr/bin/pyt=
-hon3
-> (found suitable version "3.12.1", minimum required is "3.2")
-> -- Could NOT find PythonLibs (missing: PYTHON_LIBRARIES PYTHON_INCLUDE_DI=
-RS)
-> (Required is at least version "3.12")
->
-> I've been unable to figure out what is causing the failure.  Was hoping s=
-omeone
-> else might be able to figure this out or provide a clue to be able to fig=
-ure out
-> what Cmake is trying to do that it can't.
+Newer versions of the GNU assembler (observed with binutils 2.41) will
+complain about the ".arch i386" in files assembled with "as --64",
+with the message "Error: 64bit mode not supported on 'i386'".
 
-Just shooting in dark here, but can you try inheriting
-python3targetconfig in the recipe and see if that helps ?
+Fix by moving ".arch i386" below the relevant ".code32" directive, so
+that the assembler is no longer expecting 64-bit instructions to be used
+by the time that the ".arch i386" directive is encountered.
 
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#108729): https://lists.openembedded.org/g/openembedde=
-d-devel/message/108729
-> Mute This Topic: https://lists.openembedded.org/mt/104335555/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+---
+ ...uilding-on-x86_64-with-binutils-2.41.patch | 95 +++++++++++++++++++
+ .../kexec/kexec-tools-klibc_git.bb            |  4 +-
+ 2 files changed, 98 insertions(+), 1 deletion(-)
+ create mode 100644 meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/Fix-building-on-x86_64-with-binutils-2.41.patch
+
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/Fix-building-on-x86_64-with-binutils-2.41.patch b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/Fix-building-on-x86_64-with-binutils-2.41.patch
+new file mode 100644
+index 000000000..4894f044f
+--- /dev/null
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/Fix-building-on-x86_64-with-binutils-2.41.patch
+@@ -0,0 +1,95 @@
++From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
++From: Michel Lind <salimma@fedoraproject.org>
++Date: Tue, 30 Jan 2024 04:14:31 -0600
++Subject: [PATCH] Fix building on x86_64 with binutils 2.41
++
++Newer versions of the GNU assembler (observed with binutils 2.41) will
++complain about the ".arch i386" in files assembled with "as --64",
++with the message "Error: 64bit mode not supported on 'i386'".
++
++Fix by moving ".arch i386" below the relevant ".code32" directive, so
++that the assembler is no longer expecting 64-bit instructions to be used
++by the time that the ".arch i386" directive is encountered.
++
++Based on similar iPXE fix:
++https://github.com/ipxe/ipxe/commit/6ca597eee
++
++Signed-off-by: Michel Lind <michel@michel-slm.name>
++Signed-off-by: Simon Horman <horms@kernel.org>
++
++Upstream-Status: Backport [https://git.kernel.org/pub/scm/utils/kernel/kexec/kexec-tools.git/commit/?h=main&id=328de8e00e298f00d7ba6b25dc3950147e9642e6]
++Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
++---
++ purgatory/arch/i386/entry32-16-debug.S | 2 +-
++ purgatory/arch/i386/entry32-16.S       | 2 +-
++ purgatory/arch/i386/entry32.S          | 2 +-
++ purgatory/arch/i386/setup-x86.S        | 2 +-
++ 4 files changed, 4 insertions(+), 4 deletions(-)
++
++diff --git a/purgatory/arch/i386/entry32-16-debug.S b/purgatory/arch/i386/entry32-16-debug.S
++index 5167944..12e1164 100644
++--- a/purgatory/arch/i386/entry32-16-debug.S
+++++ b/purgatory/arch/i386/entry32-16-debug.S
++@@ -25,10 +25,10 @@
++ 	.globl entry16_debug_pre32
++ 	.globl entry16_debug_first32
++ 	.globl entry16_debug_old_first32
++-	.arch i386
++ 	.balign 16
++ entry16_debug:
++ 	.code32
+++	.arch i386
++ 	/* Compute where I am running at (assumes esp valid) */
++ 	call	1f
++ 1:	popl	%ebx
++diff --git a/purgatory/arch/i386/entry32-16.S b/purgatory/arch/i386/entry32-16.S
++index c051aab..eace095 100644
++--- a/purgatory/arch/i386/entry32-16.S
+++++ b/purgatory/arch/i386/entry32-16.S
++@@ -20,10 +20,10 @@
++ #undef i386	
++ 	.text
++ 	.globl entry16, entry16_regs
++-	.arch i386
++ 	.balign 16
++ entry16:
++ 	.code32
+++	.arch i386
++ 	/* Compute where I am running at (assumes esp valid) */
++ 	call	1f
++ 1:	popl	%ebx
++diff --git a/purgatory/arch/i386/entry32.S b/purgatory/arch/i386/entry32.S
++index f7a494f..8ce9e31 100644
++--- a/purgatory/arch/i386/entry32.S
+++++ b/purgatory/arch/i386/entry32.S
++@@ -20,10 +20,10 @@
++ #undef i386
++ 
++ 	.text
++-	.arch	i386
++ 	.globl entry32, entry32_regs
++ entry32:
++ 	.code32
+++	.arch	i386
++ 
++ 	/* Setup a gdt that should that is generally usefully */
++ 	lgdt	%cs:gdt
++diff --git a/purgatory/arch/i386/setup-x86.S b/purgatory/arch/i386/setup-x86.S
++index 201bb2c..a212eed 100644
++--- a/purgatory/arch/i386/setup-x86.S
+++++ b/purgatory/arch/i386/setup-x86.S
++@@ -21,10 +21,10 @@
++ #undef i386
++ 
++ 	.text
++-	.arch	i386
++ 	.globl purgatory_start
++ purgatory_start:
++ 	.code32
+++	.arch	i386
++ 
++ 	/* Load a gdt so I know what the segment registers are */
++ 	lgdt	%cs:gdt
++-- 
++2.39.2
++
+diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
+index adfc3ba73..363cdb9ad 100644
+--- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
++++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_git.bb
+@@ -15,7 +15,9 @@ SRC_URI = "git://git.kernel.org/pub/scm/utils/kernel/kexec/kexec-tools.git;branc
+ SRCREV = "5750980cdbbc33ef75bfba6660295b932376ce15"
+ 
+ BUILD_PATCHES = "file://0001-force-static-build.patch \
+-                 file://0002-Adjust-the-order-of-headers-to-fix-build-for-musl.patch"
++                 file://0002-Adjust-the-order-of-headers-to-fix-build-for-musl.patch \
++                 file://Fix-building-on-x86_64-with-binutils-2.41.patch \
++                 "
+ 
+ KLIBC_PATCHES += " \
+             file://0003-kexec-elf-rel-use-our-elf.h.patch \
+-- 
+2.39.2
+
 
