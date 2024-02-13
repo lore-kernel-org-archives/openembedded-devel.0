@@ -2,158 +2,139 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 81CD0C4829D
-	for <webhook@archiver.kernel.org>; Mon, 12 Feb 2024 22:38:36 +0000 (UTC)
-Received: from mail-oa1-f50.google.com (mail-oa1-f50.google.com [209.85.160.50])
- by mx.groups.io with SMTP id smtpd.web10.728.1707777514654477615
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D4CD8C4829A
+	for <webhook@archiver.kernel.org>; Tue, 13 Feb 2024 03:31:01 +0000 (UTC)
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com [209.85.215.171])
+ by mx.groups.io with SMTP id smtpd.web11.3671.1707795055360286360
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 12 Feb 2024 14:38:34 -0800
+ Mon, 12 Feb 2024 19:30:55 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=NIiWBJ6+;
- spf=pass (domain: gmail.com, ip: 209.85.160.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f50.google.com with SMTP id 586e51a60fabf-2046b2cd2d3so3022518fac.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Feb 2024 14:38:34 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=E/58hciL;
+ spf=pass (domain: gmail.com, ip: 209.85.215.171, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f171.google.com with SMTP id 41be03b00d2f7-5d81b08d6f2so3012468a12.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Feb 2024 19:30:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1707777514; x=1708382314; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=c81MNb2tyiuZs8rdxYmelp8E/lz+E+RIe2kKq3JZkSQ=;
-        b=NIiWBJ6+mqDKITSgTmeVc98NjANhiH8O95lqyNQjgMjJsysBocsU20WJzwb7KSO5j4
-         l5ynDVsacrWGZbZaMm4S3VDSdzSNruF4SUKrZXjo04i37AAWNUUbaJO7arKlQq/gJMxX
-         dxGn4KcaIf9e3nGP+iqTbluE/jEYGKQNEPWfD/f/ov82+ZpkOnb93LpxXF+wPvUBQB1i
-         SUhe42MEA4WXzP6T9lle2YZmGb0y28jI/WUorAEPBV9R0P+HGUcX2iH2WSZVizfvZDs3
-         a34o3RalhidwgQvOP5+vOp8OJJoQDx7QeyDdhmK5KlcLeomEzCrMfy9u+hG7Ob9YDVe1
-         FL8Q==
+        d=gmail.com; s=20230601; t=1707795054; x=1708399854; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=N+v8gY60VDdc6Wy6feX9/3/PMYt4JCV4iLKag4eA4cI=;
+        b=E/58hciLx2fu7PoUOOEAOtTsCtByQCg3fYEIZHvcp89olf9n0TArWikDuzvvQDPEQf
+         QLk89iPABiG2ok/XzWWvMn5kjJuDFl4/2+CNdMJCWSm6RNQJZRYU/lutSlubEN3fj2J0
+         a9IZwyjCfpeNlzjgc7MzJb8y+BPRTKhO1gxfBDobIqZpq/qVW7g/fPCf/b478ZEfo7NS
+         BKfjJZhamC2uHzSc0OiaRvQUkKtviFGPFpC3jSogn14mqblDJ2kmCj/sI+5eQxCHf/q3
+         QycjFFFAEVG6GrsBoc5eR6O2zss6LgUKBxQlzKtSw7VJT0ohvBcQRU9qj73nqvAjXQ5O
+         K6ng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707777514; x=1708382314;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=c81MNb2tyiuZs8rdxYmelp8E/lz+E+RIe2kKq3JZkSQ=;
-        b=qMqIDc705eu+VdV8ewLZAlwbdg0MrQFFiKiXQfRkG+zwTUOz8Pqz5mEDBRhdaJmKhL
-         d4/INWkzzn6knxV1ybvDvVra/41n0rEOBQlpZqJjY18y6QmQEKDPgF2l9Zdy99j5Dj3L
-         C0QzFY8wFfg4V/5s4kyYAs9BYwtx7/vwpx2mLK8DnsgpLFYoax1WacZRWtlenYLVGOoq
-         X7WDKbyXJwYIpCbuoL9K6HDKqlS+TLS4tTbENfoLxGXURP2lgby3UZp6y/glnF+4lk29
-         X2Fpc8S24STbZqY3Drwh42Cu/+JrXbdDkJZeTpXu2AdK8iWNdbgFhWPB+NnWCc9QkIth
-         HDHQ==
-X-Gm-Message-State: AOJu0YykJbqGBaKZZM2RVIv8QDZEAYZbCoksVh71reg3tEHNZXlWs4XM
-	FwXei7H8hNn1e2cCtiakGRThByqW1rMAf7iW8fnzZ4EKupWlE9mhjmCW1wnFOnOXIWw/TE6G11T
-	RP1w4gPvXfWQOxdoWP8lieyTXXGoTU+Jt+VtHfg==
-X-Google-Smtp-Source: AGHT+IFlm8WVCETInCV0WQFWW3IdELMu8MHEiOh7nG5Ztb2DnWAjc3Yd7l1Ranb8T132KDZcw0dMkU7c1KYdGW5q7jk=
-X-Received: by 2002:a05:6870:a102:b0:218:50a9:8df3 with SMTP id
- m2-20020a056870a10200b0021850a98df3mr10820659oae.12.1707777513833; Mon, 12
- Feb 2024 14:38:33 -0800 (PST)
-MIME-Version: 1.0
-References: <20240212171958.35956-1-f_l_k@t-online.de>
-In-Reply-To: <20240212171958.35956-1-f_l_k@t-online.de>
+        d=1e100.net; s=20230601; t=1707795054; x=1708399854;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=N+v8gY60VDdc6Wy6feX9/3/PMYt4JCV4iLKag4eA4cI=;
+        b=T+nUvSbr07nTxI6RetgruX2HlPa/cylmnXMOF+9YR0xTkOWi8vMwh4eEZ7XTLpv3up
+         xpKXsW4PCiW84G8zwYuTz9WD/M+dmaCt8ELjnfsWh/vDMpkDVuk0kzAJobkqTWWSYpvT
+         ipOb+DK0r1GC0ifgvzGarTWRx4Y5zZgQod1jjHCGxoRRJubERIS3HilfWOMTcYUznkcA
+         2qjGjzpkKb9Uevdum+YjOYPhaaXt91Il3nh8wids2f5ayIKyWRux0bZVUkaoOb+J2f6B
+         sHEqAEc8CczQhXnU05Ngyn6T1gMiMT/CQiWSUXQyt2/VxQb+jjCGCGIWg4xfMqheqXhg
+         eXhw==
+X-Gm-Message-State: AOJu0Yzn9Nprn6y8bUgNVcYZ11oVexEJP5ZXKh5aKoMnkqvBmlQS2I06
+	ft+QC+jYQlvq6E+j/9ysHhxyIIG9WMWVwcClD7pNCICPrAKNTIXK4QelvRTnMWM=
+X-Google-Smtp-Source: AGHT+IFRY08aCoqROghuIO53Dh2SSTFNEgS27JADvCwdE63pPDdvWZtd2LlmQ+cFsWcumufyjH5hSQ==
+X-Received: by 2002:a05:6a20:ce4e:b0:19c:9c1d:6090 with SMTP id id14-20020a056a20ce4e00b0019c9c1d6090mr11509159pzb.6.1707795054264;
+        Mon, 12 Feb 2024 19:30:54 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AJvYcCWDXgf0l47m1TTj3j7BS5LHn1kMEiFu72sHTrEqb14P18ge5uV7twChkdWZ/Y+7ZDDyhpYD16WbXdujZOwcZC8i2w==
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::fffa])
+        by smtp.gmail.com with ESMTPSA id lo5-20020a170903434500b001d8ecf5ff6csm1051906plb.147.2024.02.12.19.30.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 12 Feb 2024 19:30:53 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 12 Feb 2024 14:38:07 -0800
-Message-ID: <CAMKF1spjAN=CW1x0WgS5ueUqDaffR6JQ2CKm9n8FJ1kKBGmW5Q@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] libnfs: update 5.0.2 -> 5.0.3
-To: Markus Volk <f_l_k@t-online.de>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Markus Volk <f_l_k@t-online.de>
+Subject: [meta-oe][PATCH] libnfs: Add cmake checks for sys/uio.h
+Date: Mon, 12 Feb 2024 19:30:51 -0800
+Message-ID: <20240213033051.2910281-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.43.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 12 Feb 2024 22:38:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108718
+ <openembedded-devel@lists.openembedded.org>; Tue, 13 Feb 2024 03:31:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108719
 
-This fails with newer gcc-14 and clang-18
+Fixes build issues with latest compiler e.g. gcc-14
 
-https://errors.yoctoproject.org/Errors/Details/752904/
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Markus Volk <f_l_k@t-online.de>
+---
+ .../0001-cmake-Test-for-sys-uio.h.patch       | 44 +++++++++++++++++++
+ .../libnfs/libnfs_5.0.3.bb                    |  1 +
+ 2 files changed, 45 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/libnfs/libnfs/0001-cmake-Test-for-sys-uio.h.patch
 
-On Mon, Feb 12, 2024 at 9:20=E2=80=AFAM Markus Volk <f_l_k@t-online.de> wro=
-te:
->
-> Signed-off-by: Markus Volk <f_l_k@t-online.de>
-> ---
->  ...s.txt-respect-CMAKE_INSTALL_LIBDIR-for-mult.patch | 12 ++++++------
->  .../libnfs/{libnfs_5.0.2.bb =3D> libnfs_5.0.3.bb}      |  2 +-
->  2 files changed, 7 insertions(+), 7 deletions(-)
->  rename meta-oe/recipes-connectivity/libnfs/{libnfs_5.0.2.bb =3D> libnfs_=
-5.0.3.bb} (90%)
->
-> diff --git a/meta-oe/recipes-connectivity/libnfs/libnfs/0001-CMakeLists.t=
-xt-respect-CMAKE_INSTALL_LIBDIR-for-mult.patch b/meta-oe/recipes-connectivi=
-ty/libnfs/libnfs/0001-CMakeLists.txt-respect-CMAKE_INSTALL_LIBDIR-for-mult.=
-patch
-> index 55595104a..978f38d01 100644
-> --- a/meta-oe/recipes-connectivity/libnfs/libnfs/0001-CMakeLists.txt-resp=
-ect-CMAKE_INSTALL_LIBDIR-for-mult.patch
-> +++ b/meta-oe/recipes-connectivity/libnfs/libnfs/0001-CMakeLists.txt-resp=
-ect-CMAKE_INSTALL_LIBDIR-for-mult.patch
-> @@ -29,19 +29,19 @@ Upstream-Status: Pending
->   2 files changed, 5 insertions(+), 5 deletions(-)
->
->  diff --git a/CMakeLists.txt b/CMakeLists.txt
-> -index 4fb0fe7..8e5a0e4 100644
-> +index 5be774d..6b4fd25 100644
->  --- a/CMakeLists.txt
->  +++ b/CMakeLists.txt
-> -@@ -6,11 +6,11 @@ project(libnfs
-> -
-> - set(SOVERSION 11.1.0 CACHE STRING "" FORCE)
-> +@@ -7,11 +7,11 @@ project(libnfs
-> + set(SOVERSION 11.2.0 CACHE STRING "" FORCE)
->
-> + set(INSTALL_BIN_DIR "${CMAKE_INSTALL_PREFIX}/bin" CACHE PATH "Installat=
-ion directory for binaries")
->  -set(INSTALL_LIB_DIR "${CMAKE_INSTALL_PREFIX}/lib" CACHE PATH "Installat=
-ion directory for libraries")
->  +set(INSTALL_LIB_DIR "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}" C=
-ACHE PATH "Installation directory for libraries")
->   set(INSTALL_INC_DIR "${CMAKE_INSTALL_PREFIX}/include" CACHE PATH "Insta=
-llation directory for headers")
->   set(INSTALL_MAN_DIR "${CMAKE_INSTALL_PREFIX}/share/man" CACHE PATH "Ins=
-tallation directory for manual pages")
-> --set(INSTALL_PKGCONFIG_DIR "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" CACHE=
- PATH "Installation directory for pkgconfig (.pc) files")
-> --set(INSTALL_CMAKE_DIR "${CMAKE_INSTALL_PREFIX}/lib/cmake/libnfs" CACHE =
-PATH "Installation directory for cmake (.cmake) files")
-> +-set(INSTALL_PKGCONFIG_DIR "${INSTALL_LIB_DIR}/pkgconfig" CACHE PATH "In=
-stallation directory for pkgconfig (.pc) files")
-> +-set(INSTALL_CMAKE_DIR "${INSTALL_LIB_DIR}/cmake/libnfs" CACHE PATH "Ins=
-tallation directory for cmake (.cmake) files")
->  +set(INSTALL_PKGCONFIG_DIR "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBD=
-IR}/pkgconfig" CACHE PATH "Installation directory for pkgconfig (.pc) files=
-")
->  +set(INSTALL_CMAKE_DIR "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/=
-cmake/libnfs" CACHE PATH "Installation directory for cmake (.cmake) files")
->
-> diff --git a/meta-oe/recipes-connectivity/libnfs/libnfs_5.0.2.bb b/meta-o=
-e/recipes-connectivity/libnfs/libnfs_5.0.3.bb
-> similarity index 90%
-> rename from meta-oe/recipes-connectivity/libnfs/libnfs_5.0.2.bb
-> rename to meta-oe/recipes-connectivity/libnfs/libnfs_5.0.3.bb
-> index afec2753c..068c827f7 100644
-> --- a/meta-oe/recipes-connectivity/libnfs/libnfs_5.0.2.bb
-> +++ b/meta-oe/recipes-connectivity/libnfs/libnfs_5.0.3.bb
-> @@ -7,7 +7,7 @@ SRC_URI =3D " \
->         git://github.com/sahlberg/libnfs.git;protocol=3Dhttps;branch=3Dma=
-ster \
->         file://0001-CMakeLists.txt-respect-CMAKE_INSTALL_LIBDIR-for-mult.=
-patch \
->  "
-> -SRCREV =3D "40348f45d6beb8a8f50b6b63414a98fc1a061b7d"
-> +SRCREV =3D "4379837536d9eac537810dc7b13071136049b22a"
->  S =3D "${WORKDIR}/git"
->
->  inherit cmake
-> --
-> 2.43.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#108715): https://lists.openembedded.org/g/openembedde=
-d-devel/message/108715
-> Mute This Topic: https://lists.openembedded.org/mt/104315753/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+diff --git a/meta-oe/recipes-connectivity/libnfs/libnfs/0001-cmake-Test-for-sys-uio.h.patch b/meta-oe/recipes-connectivity/libnfs/libnfs/0001-cmake-Test-for-sys-uio.h.patch
+new file mode 100644
+index 0000000000..de3ab82292
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/libnfs/libnfs/0001-cmake-Test-for-sys-uio.h.patch
+@@ -0,0 +1,44 @@
++From d0fa719d49f38777911a8e99717f2d4b30811080 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 12 Feb 2024 19:24:54 -0800
++Subject: [PATCH] cmake: Test for sys/uio.h
++
++writev() API is used in few places and it will need including sys/uio.h
++for getting the funciton signature
++
++Upstream-Status: Submitted [https://github.com/sahlberg/libnfs/pull/440]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ cmake/ConfigureChecks.cmake | 1 +
++ cmake/config.h.cmake        | 3 +++
++ 2 files changed, 4 insertions(+)
++
++diff --git a/cmake/ConfigureChecks.cmake b/cmake/ConfigureChecks.cmake
++index 0258fc8..c26a02d 100644
++--- a/cmake/ConfigureChecks.cmake
+++++ b/cmake/ConfigureChecks.cmake
++@@ -22,6 +22,7 @@ check_include_file("sys/stat.h" HAVE_SYS_STAT_H)
++ check_include_file("sys/sysmacros.h" HAVE_SYS_SYSMACROS_H)
++ check_include_file("sys/time.h" HAVE_SYS_TIME_H)
++ check_include_file("sys/types.h" HAVE_SYS_TYPES_H)
+++check_include_file("sys/uio.h" HAVE_SYS_UIO_H)
++ check_include_file("sys/vfs.h" HAVE_SYS_VFS_H)
++ check_include_file("unistd.h" HAVE_UNISTD_H)
++ check_include_file("utime.h" HAVE_UTIME_H)
++diff --git a/cmake/config.h.cmake b/cmake/config.h.cmake
++index 4016c6c..6263896 100644
++--- a/cmake/config.h.cmake
+++++ b/cmake/config.h.cmake
++@@ -90,6 +90,9 @@
++ /* Define to 1 if you have the <sys/types.h> header file. */
++ #cmakedefine HAVE_SYS_TYPES_H
++ 
+++/* Define to 1 if you have the <sys/uio.h> header file. */
+++#cmakedefine HAVE_SYS_UIO_H
+++
++ /* Define to 1 if you have the <sys/vfs.h> header file. */
++ #cmakedefine HAVE_SYS_VFS_H
++ 
++-- 
++2.43.1
++
+diff --git a/meta-oe/recipes-connectivity/libnfs/libnfs_5.0.3.bb b/meta-oe/recipes-connectivity/libnfs/libnfs_5.0.3.bb
+index 068c827f70..8a470ee2fb 100644
+--- a/meta-oe/recipes-connectivity/libnfs/libnfs_5.0.3.bb
++++ b/meta-oe/recipes-connectivity/libnfs/libnfs_5.0.3.bb
+@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=825301ba17efc9d188ee0abd4b924ada"
+ SRC_URI = " \
+ 	git://github.com/sahlberg/libnfs.git;protocol=https;branch=master \
+ 	file://0001-CMakeLists.txt-respect-CMAKE_INSTALL_LIBDIR-for-mult.patch \
++  file://0001-cmake-Test-for-sys-uio.h.patch \
+ "
+ SRCREV = "4379837536d9eac537810dc7b13071136049b22a"
+ S = "${WORKDIR}/git"
+-- 
+2.43.1
+
 
