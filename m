@@ -1,203 +1,242 @@
-Return-Path: <sjolley.yp.pm@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 532DEC48BC3
-	for <webhook@archiver.kernel.org>; Tue, 13 Feb 2024 04:51:12 +0000 (UTC)
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
- by mx.groups.io with SMTP id smtpd.web10.4634.1707799869936639752
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BB7D9C4829A
+	for <webhook@archiver.kernel.org>; Tue, 13 Feb 2024 06:31:42 +0000 (UTC)
+Received: from mailout02.t-online.de (mailout02.t-online.de [194.25.134.17])
+ by mx.groups.io with SMTP id smtpd.web10.5908.1707805895795063879
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 12 Feb 2024 20:51:10 -0800
+ Mon, 12 Feb 2024 22:31:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=PtiXNpeq;
- spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: sjolley.yp.pm@gmail.com)
-Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-a3566c0309fso473422766b.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 12 Feb 2024 20:51:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1707799868; x=1708404668; darn=lists.openembedded.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=lf+TrrorM1hwsAEgMqc93p48P4wqTDyMDrEyyjcJKLk=;
-        b=PtiXNpeqCoOJTXICyjtHFbY4WD1a0MmuBBlubh0fhIehDfWoNXUB/IhCR4VXsqTDT9
-         QLHQUD+VImdbMWPCoz5p33P2L0RdERr/jW9gmwnSSN4FKvzFoRxXNaT1PVOL7kMYZwEN
-         q4zIecEqA7XkAM/tmkKMLr81iUz2kj1vtcJC40OjDxTUULMvRtly6LGhExyyFO7EvV+g
-         zs49msF6MSiTTQ2yt6rrr8pS29URJ0ripvPXJeHp9wE71Yo8Du7OJ2uollNtp69WsDD8
-         DElQpEVyVnsysTFzZkKOfs6S9a5XlfIvdgvr5G+a+aCDfInoNBwepoQxCCoVFKm+wzYi
-         Zw8w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707799868; x=1708404668;
-        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=lf+TrrorM1hwsAEgMqc93p48P4wqTDyMDrEyyjcJKLk=;
-        b=E7aE081KPsYHIwcfHjAMfhWoTbco4lWy8iPLhNFyD6vuC11guISdXhzHYB9G1lRHxB
-         XuWPYwth9FTv7u/ik3poGAbGDGSpKo7D9RlzdMgHKoknIxPKeC/TyfKDK7RKY03h4na1
-         2yDGNbVTVFs6Elq98VpkHa+ShTy8uNPOoR5/XVtp1LouiCKfh+QsjANzwAsgyTYMth0o
-         N5h/9NHnUsdH0B6sIVhS3rtfe4bvR6rRukoPZPoZMysjNVa1ME5BEW5SEwyZBDYLoJvp
-         CClcBDW0wYVzEY6q6zHVok57yg18Q+tOdzjwtCBYVh2/NKOhrOWs3TpLmM5ZWBWAYRkG
-         SEZw==
-X-Gm-Message-State: AOJu0Yw8unHdR8NOMoNyq8OZRxbIRtKfR2ok3EjsTnNS0inOGytys1Ar
-	Laqfnf0lYSfY0VAmv/dig9vg7uv5qEAArQ9EqIiCPa1FCpfbMt8h1JfaKSUGHIbhoyk2mJIZFo2
-	pBFH1VS5z0hS9r6Cz/MmPruRthryvVwbc7Fo=
-X-Google-Smtp-Source: AGHT+IGc9lo0V6mm2VXCtmC98VVYAzGrfXvVs3e2tUrpB2+HNzexCL4VmKOt/uewbOXtLHw9K854E5SNP0rbDUN7mPo=
-X-Received: by 2002:a17:906:b245:b0:a3c:f586:9e1f with SMTP id
- ce5-20020a170906b24500b00a3cf5869e1fmr678909ejb.31.1707799867701; Mon, 12 Feb
- 2024 20:51:07 -0800 (PST)
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.17, mailfrom: f_l_k@t-online.de)
+Received: from fwd78.aul.t-online.de (fwd78.aul.t-online.de [10.223.144.104])
+	by mailout02.t-online.de (Postfix) with SMTP id D7B165C4A;
+	Tue, 13 Feb 2024 07:31:28 +0100 (CET)
+Received: from [192.168.178.67] ([84.163.32.89]) by fwd78.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1rZmKG-0lrKl60; Tue, 13 Feb 2024 07:31:28 +0100
+Date: Tue, 13 Feb 2024 07:31:42 +0100
+From: f_l_k@t-online.de
+Subject: Re: [oe] [meta-oe][PATCH] libnfs: Add cmake checks for sys/uio.h
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Message-Id: <UG7S8S.3LEL3RUU0WPC@t-online.de>
+In-Reply-To: <20240213033051.2910281-1-raj.khem@gmail.com>
+References: <20240213033051.2910281-1-raj.khem@gmail.com>
+X-Mailer: geary/44.1
 MIME-Version: 1.0
-From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
-Date: Mon, 12 Feb 2024 21:50:57 -0700
-Message-ID: <CAK5yBb8Bv-9K800JJaf0-2LAhDse=7K=Q16qbUDrrUdtGd6zvw@mail.gmail.com>
-Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
-To: openembedded-devel@lists.openembedded.org, 
-	Yocto-mailing-list <yocto@lists.yoctoproject.org>
-Content-Type: multipart/alternative; boundary="000000000000763c3306113c240a"
+Content-Type: multipart/alternative; boundary="=-uQIsiErSaPZ7cja8quER"
+X-TOI-EXPURGATEID: 150726::1707805888-477FD979-58C878E3/0/0 CLEAN NORMAL
+X-TOI-MSGID: 975674d5-ab75-45e3-b39e-a337ee62a00b
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 13 Feb 2024 04:51:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108720
+ <openembedded-devel@lists.openembedded.org>; Tue, 13 Feb 2024 06:31:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108721
 
---000000000000763c3306113c240a
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+--=-uQIsiErSaPZ7cja8quER
+Content-Type: text/plain; charset=us-ascii; format=flowed
 
-All,
+Thanks for the fix!
 
-The triage team is starting to try and collect up and classify bugs which a
-newcomer to the project would be able to work on in a way which means
-people can find them. They're being listed on the triage page under the
-appropriate heading:
-https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
-review:
-https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
-how to create a bugzilla account at:
-https://bugzilla.yoctoproject.org/createaccount.cgi
+On Mon, Feb 12 2024 at 07:30:51 PM -08:00:00, Khem Raj 
+<raj.khem@gmail.com> wrote:
+> Fixes build issues with latest compiler e.g. gcc-14
+> 
+> Signed-off-by: Khem Raj <raj.khem@gmail.com 
+> <mailto:raj.khem@gmail.com>>
+> Cc: Markus Volk <f_l_k@t-online.de <mailto:f_l_k@t-online.de>>
+> ---
+>  .../0001-cmake-Test-for-sys-uio.h.patch       | 44 
+> +++++++++++++++++++
+>  .../libnfs/libnfs_5.0.3.bb                    |  1 +
+>  2 files changed, 45 insertions(+)
+>  create mode 100644 
+> meta-oe/recipes-connectivity/libnfs/libnfs/0001-cmake-Test-for-sys-uio.h.patch
+> 
+> diff --git 
+> a/meta-oe/recipes-connectivity/libnfs/libnfs/0001-cmake-Test-for-sys-uio.h.patch 
+> b/meta-oe/recipes-connectivity/libnfs/libnfs/0001-cmake-Test-for-sys-uio.h.patch
+> new file mode 100644
+> index 0000000000..de3ab82292
+> --- /dev/null
+> +++ 
+> b/meta-oe/recipes-connectivity/libnfs/libnfs/0001-cmake-Test-for-sys-uio.h.patch
+> @@ -0,0 +1,44 @@
+> +From d0fa719d49f38777911a8e99717f2d4b30811080 Mon Sep 17 00:00:00 
+> 2001
+> +From: Khem Raj <raj.khem@gmail.com <mailto:raj.khem@gmail.com>>
+> +Date: Mon, 12 Feb 2024 19:24:54 -0800
+> +Subject: [PATCH] cmake: Test for sys/uio.h
+> +
+> +writev() API is used in few places and it will need including 
+> sys/uio.h
+> +for getting the funciton signature
+> +
+> +Upstream-Status: Submitted 
+> [<https://github.com/sahlberg/libnfs/pull/440>]
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com 
+> <mailto:raj.khem@gmail.com>>
+> +---
+> + cmake/ConfigureChecks.cmake | 1 +
+> + cmake/config.h.cmake        | 3 +++
+> + 2 files changed, 4 insertions(+)
+> +
+> +diff --git a/cmake/ConfigureChecks.cmake 
+> b/cmake/ConfigureChecks.cmake
+> +index 0258fc8..c26a02d 100644
+> +--- a/cmake/ConfigureChecks.cmake
+> ++++ b/cmake/ConfigureChecks.cmake
+> +@@ -22,6 +22,7 @@ check_include_file("sys/stat.h" HAVE_SYS_STAT_H)
+> + check_include_file("sys/sysmacros.h" HAVE_SYS_SYSMACROS_H)
+> + check_include_file("sys/time.h" HAVE_SYS_TIME_H)
+> + check_include_file("sys/types.h" HAVE_SYS_TYPES_H)
+> ++check_include_file("sys/uio.h" HAVE_SYS_UIO_H)
+> + check_include_file("sys/vfs.h" HAVE_SYS_VFS_H)
+> + check_include_file("unistd.h" HAVE_UNISTD_H)
+> + check_include_file("utime.h" HAVE_UTIME_H)
+> +diff --git a/cmake/config.h.cmake b/cmake/config.h.cmake
+> +index 4016c6c..6263896 100644
+> +--- a/cmake/config.h.cmake
+> ++++ b/cmake/config.h.cmake
+> +@@ -90,6 +90,9 @@
+> + /* Define to 1 if you have the <sys/types.h> header file. */
+> + #cmakedefine HAVE_SYS_TYPES_H
+> +
+> ++/* Define to 1 if you have the <sys/uio.h> header file. */
+> ++#cmakedefine HAVE_SYS_UIO_H
+> ++
+> + /* Define to 1 if you have the <sys/vfs.h> header file. */
+> + #cmakedefine HAVE_SYS_VFS_H
+> +
+> +--
+> +2.43.1
+> +
+> diff --git a/meta-oe/recipes-connectivity/libnfs/libnfs_5.0.3.bb 
+> b/meta-oe/recipes-connectivity/libnfs/libnfs_5.0.3.bb
+> index 068c827f70..8a470ee2fb 100644
+> --- a/meta-oe/recipes-connectivity/libnfs/libnfs_5.0.3.bb
+> +++ b/meta-oe/recipes-connectivity/libnfs/libnfs_5.0.3.bb
+> @@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = 
+> "file://COPYING;md5=825301ba17efc9d188ee0abd4b924ada"
+>  SRC_URI = " \
+>  	git://github.com/sahlberg/libnfs.git;protocol=https;branch=master \
+>  
+> 	file://0001-CMakeLists.txt-respect-CMAKE_INSTALL_LIBDIR-for-mult.patch 
+> <file://0001-cmakelists.txt-respect-cmake_install_libdir-for-mult.patch/> 
+> \
+> +  file://0001-cmake-Test-for-sys-uio.h.patch 
+> <file://0001-cmake-test-for-sys-uio.h.patch/> \
+>  "
+>  SRCREV = "4379837536d9eac537810dc7b13071136049b22a"
+>  S = "${WORKDIR}/git"
+> --
+> 2.43.1
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#108719): 
+> <https://lists.openembedded.org/g/openembedded-devel/message/108719>
+> Mute This Topic: <https://lists.openembedded.org/mt/104326527/3618223>
+> Group Owner: openembedded-devel+owner@lists.openembedded.org 
+> <mailto:openembedded-devel+owner@lists.openembedded.org>
+> Unsubscribe: 
+> <https://lists.openembedded.org/g/openembedded-devel/unsub> 
+> [f_l_k@t-online.de <mailto:f_l_k@t-online.de>]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
 
-The idea is these bugs should be straight forward for a person to help work
-on who doesn't have deep experience with the project. If anyone can help,
-please take ownership of the bug and send patches! If anyone needs
-help/advice there are people on irc who can likely do so, or some of the
-more experienced contributors will likely be happy to help too.
 
-Also, the triage team meets weekly and does its best to handle the bugs
-reported into the Bugzilla. The number of people attending that meeting has
-fallen, as have the number of people available to help fix bugs. One of the
-things we hear users report is they don't know how to help. We (the triage
-team) are therefore going to start reporting out the currently 416
-unassigned or newcomer bugs.
+--=-uQIsiErSaPZ7cja8quER
+Content-Type: text/html; charset=us-ascii
 
-We're hoping people may be able to spare some time now and again to help
-out with these. Bugs are split into two types, "true bugs" where things
-don't work as they should and "enhancements" which are features we'd want
-to add to the system. There are also roughly four different "priority"
-classes right now, =E2=80=9C5.0=E2=80=9D, =E2=80=9C5.1=E2=80=9D, "5.99" and=
- "Future", the more
-pressing/urgent issues being in "5.0" and then =E2=80=9C5.1=E2=80=9D.
+<div id="geary-body" dir="auto"><div>Thanks for the fix!</div></div><div id="geary-quote" dir="auto"><br>On Mon, Feb 12 2024 at 07:30:51 PM -08:00:00, Khem Raj &lt;raj.khem@gmail.com&gt; wrote:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">Fixes build issues with latest compiler e.g. gcc-14
 
-Please review this link and if a bug is something you would be able to help
-with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
-an e-mail with the bug number you would like and I will assign it to you
-(please make sure you have a Bugzilla account). The list is at:
-https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
-r_Bugs
+Signed-off-by: Khem Raj &lt;<a href="mailto:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt;
+Cc: Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;
+---
+ .../0001-cmake-Test-for-sys-uio.h.patch       | 44 +++++++++++++++++++
+ .../libnfs/libnfs_5.0.3.bb                    |  1 +
+ 2 files changed, 45 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/libnfs/libnfs/0001-cmake-Test-for-sys-uio.h.patch
 
-Thanks,
+diff --git a/meta-oe/recipes-connectivity/libnfs/libnfs/0001-cmake-Test-for-sys-uio.h.patch b/meta-oe/recipes-connectivity/libnfs/libnfs/0001-cmake-Test-for-sys-uio.h.patch
+new file mode 100644
+index 0000000000..de3ab82292
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/libnfs/libnfs/0001-cmake-Test-for-sys-uio.h.patch
+@@ -0,0 +1,44 @@
++From d0fa719d49f38777911a8e99717f2d4b30811080 Mon Sep 17 00:00:00 2001
++From: Khem Raj &lt;<a href="mailto:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt;
++Date: Mon, 12 Feb 2024 19:24:54 -0800
++Subject: [PATCH] cmake: Test for sys/uio.h
++
++writev() API is used in few places and it will need including sys/uio.h
++for getting the funciton signature
++
++Upstream-Status: Submitted [<a href="https://github.com/sahlberg/libnfs/pull/440">https://github.com/sahlberg/libnfs/pull/440</a>]
++Signed-off-by: Khem Raj &lt;<a href="mailto:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt;
++---
++ cmake/ConfigureChecks.cmake | 1 +
++ cmake/config.h.cmake        | 3 +++
++ 2 files changed, 4 insertions(+)
++
++diff --git a/cmake/ConfigureChecks.cmake b/cmake/ConfigureChecks.cmake
++index 0258fc8..c26a02d 100644
++--- a/cmake/ConfigureChecks.cmake
+++++ b/cmake/ConfigureChecks.cmake
++@@ -22,6 +22,7 @@ check_include_file("sys/stat.h" HAVE_SYS_STAT_H)
++ check_include_file("sys/sysmacros.h" HAVE_SYS_SYSMACROS_H)
++ check_include_file("sys/time.h" HAVE_SYS_TIME_H)
++ check_include_file("sys/types.h" HAVE_SYS_TYPES_H)
+++check_include_file("sys/uio.h" HAVE_SYS_UIO_H)
++ check_include_file("sys/vfs.h" HAVE_SYS_VFS_H)
++ check_include_file("unistd.h" HAVE_UNISTD_H)
++ check_include_file("utime.h" HAVE_UTIME_H)
++diff --git a/cmake/config.h.cmake b/cmake/config.h.cmake
++index 4016c6c..6263896 100644
++--- a/cmake/config.h.cmake
+++++ b/cmake/config.h.cmake
++@@ -90,6 +90,9 @@
++ /* Define to 1 if you have the &lt;sys/types.h&gt; header file. */
++ #cmakedefine HAVE_SYS_TYPES_H
++ 
+++/* Define to 1 if you have the &lt;sys/uio.h&gt; header file. */
+++#cmakedefine HAVE_SYS_UIO_H
+++
++ /* Define to 1 if you have the &lt;sys/vfs.h&gt; header file. */
++ #cmakedefine HAVE_SYS_VFS_H
++ 
++-- 
++2.43.1
++
+diff --git a/meta-oe/recipes-connectivity/libnfs/libnfs_5.0.3.bb b/meta-oe/recipes-connectivity/libnfs/libnfs_5.0.3.bb
+index 068c827f70..8a470ee2fb 100644
+--- a/meta-oe/recipes-connectivity/libnfs/libnfs_5.0.3.bb
++++ b/meta-oe/recipes-connectivity/libnfs/libnfs_5.0.3.bb
+@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=825301ba17efc9d188ee0abd4b924ada"
+ SRC_URI = " \
+ 	git://github.com/sahlberg/libnfs.git;protocol=https;branch=master \
+ 	<a href="file://0001-CMakeLists.txt-respect-CMAKE_INSTALL_LIBDIR-for-mult.patch">file://0001-CMakeLists.txt-respect-CMAKE_INSTALL_LIBDIR-for-mult.patch</a> \
++  <a href="file://0001-cmake-Test-for-sys-uio.h.patch">file://0001-cmake-Test-for-sys-uio.h.patch</a> \
+ "
+ SRCREV = "4379837536d9eac537810dc7b13071136049b22a"
+ S = "${WORKDIR}/git"
+<div>-- 
+</div>2.43.1
 
+</div><div class="plaintext" style="white-space: break-spaces;">
+-=-=-=-=-=-=-=-=-=-=-=-
+Links: You receive all messages sent to this group.
+View/Reply Online (#108719): <a href="https://lists.openembedded.org/g/openembedded-devel/message/108719">https://lists.openembedded.org/g/openembedded-devel/message/108719</a>
+Mute This Topic: <a href="https://lists.openembedded.org/mt/104326527/3618223">https://lists.openembedded.org/mt/104326527/3618223</a>
+Group Owner: <a href="mailto:openembedded-devel+owner@lists.openembedded.org">openembedded-devel+owner@lists.openembedded.org</a>
+Unsubscribe: <a href="https://lists.openembedded.org/g/openembedded-devel/unsub">https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>]
+-=-=-=-=-=-=-=-=-=-=-=-
 
+</div></blockquote></div>
+--=-uQIsiErSaPZ7cja8quER--
 
-*Stephen K. Jolley*
-
-*Yocto Project Program Manager*
-
-(    *Cell*:                (208) 244-4460
-
-* *Email*:                 *s
-<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
-*
-
---000000000000763c3306113c240a
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><span style=3D"font-size:11pt;font-family:Calibri,Arial">A=
-ll,<br><br>The triage team is starting to try and collect up and classify b=
-ugs which a newcomer to the project would be able to work on in a way which=
- means people can find them. They&#39;re being listed on the triage page un=
-der the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/wiki/=
-Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage#New=
-comer_Bugs</a>  Also please review: <a href=3D"https://www.openembedded.org=
-/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.org/w=
-iki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugzilla =
-account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount.cgi"=
->https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The idea is=
- these bugs should be straight forward for a person to help work on who doe=
-sn&#39;t have deep experience with the project.  If anyone can help, please=
- take ownership of the bug and send patches!  If anyone needs help/advice t=
-here are people on irc who can likely do so, or some of the more experience=
-d contributors will likely be happy to help too.<br><br>Also, the triage te=
-am meets weekly and does its best to handle the bugs reported into the Bugz=
-illa. The number of people attending that meeting has fallen, as have the n=
-umber of people available to help fix bugs. One of the things we hear users=
- report is they don&#39;t know how to help. We (the triage team) are theref=
-ore going to start reporting out the currently 416 unassigned or newcomer b=
-ugs.<br><br>We&#39;re hoping people may be able to spare some time now and =
-again to help out with these.  Bugs are split into two types, &quot;true bu=
-gs&quot; where things don&#39;t work as they should and &quot;enhancements&=
-quot; which are features we&#39;d want to add to the system.  There are als=
-o roughly four different &quot;priority&quot; classes right now, =E2=80=9C5=
-.0=E2=80=9D, =E2=80=9C5.1=E2=80=9D, &quot;5.99&quot; and &quot;Future&quot;=
-, the more pressing/urgent issues being in &quot;5.0&quot; and then =E2=80=
-=9C5.1=E2=80=9D.<br><br>Please review this link and if a bug is something y=
-ou would be able to help with either take ownership of the bug, or send me =
-(<a href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>) an=
- e-mail with the bug number you would like and I will assign it to you (ple=
-ase make sure you have a Bugzilla account).  The list is at: <a href=3D"htt=
-ps://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcomer_B=
-ugs">https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Ne=
-wcomer_Bugs</a></span><br><div dir=3D"ltr" class=3D"gmail_signature" data-s=
-martmail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p class=3D"=
-MsoNormal" style=3D"background-image:initial;background-position:initial;ba=
-ckground-repeat:initial"><span style=3D"font-size:12pt;font-family:Arial,sa=
-ns-serif">Thanks,<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
-ily:Arial,sans-serif">=C2=A0<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
-lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
-ont-family:Arial,sans-serif"><span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
-amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
-an></b></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
-&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
-<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
-:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
-s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
--size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
-><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
-/span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
-t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
-=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
-color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
-uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
- lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
-erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
-phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
-.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
-u></p></div></div></div></div>
-
---000000000000763c3306113c240a--
 
