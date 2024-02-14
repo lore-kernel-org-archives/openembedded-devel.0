@@ -2,48 +2,50 @@ Return-Path: <niko.mauno@vaisala.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BBAA1C48BC4
-	for <webhook@archiver.kernel.org>; Wed, 14 Feb 2024 08:25:30 +0000 (UTC)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com (EUR05-VI1-obe.outbound.protection.outlook.com [40.107.21.117])
- by mx.groups.io with SMTP id smtpd.web11.37595.1707899128576390189
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 98FBEC48BC4
+	for <webhook@archiver.kernel.org>; Wed, 14 Feb 2024 08:25:50 +0000 (UTC)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com (EUR05-VI1-obe.outbound.protection.outlook.com [40.107.21.133])
+ by mx.groups.io with SMTP id smtpd.web11.37599.1707899140497621383
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Feb 2024 00:25:29 -0800
+ Wed, 14 Feb 2024 00:25:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=z1Jvkq4y;
- spf=permerror, err=parse error for token &{10 18 spf3.vaisala.com}: parse error for token &{10 18 _spf-dc57.sapsf.eu}: limit exceeded (domain: vaisala.com, ip: 40.107.21.117, mailfrom: niko.mauno@vaisala.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=gNXM0+d7;
+ spf=permerror, err=parse error for token &{10 18 spf3.vaisala.com}: parse error for token &{10 18 _spf-dc57.sapsf.eu}: limit exceeded (domain: vaisala.com, ip: 40.107.21.133, mailfrom: niko.mauno@vaisala.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ChCv0C+XUVqOpQ9n4aQW+zo4d7Fg4wjVQXrco2mnJ8dIZJ6zs+KXNrOCWDCkjxuf/AMuLqdNOS26JP8rEInv27gO5KR41XHN5ghO9BcOE9thi/NRFOMg9yFCRnc7M6SjPilBLr55BOeFrb/TTByvPVGjegopI9ffQ5jqpLqxMZ5S3MLgePSwnftnzSccADrAcVVp9NS1JawolamioU08Gj+Nh1WMxEqVdvCUs6tnT30uIPgwYgtcLTXAb9gcCCyNJixMW3A6c3Y8ReVYMm24FTfPYTMJ/luAXT2cGczbTegfT69TpO2HCWL7D+J2lG3Wy1lC+WsaW+5GpSqUo1yEHg==
+ b=i0UAN5fFER/aFHon+E5jkE4hwf9E9yJJnPSwwxlGEG9u5w0lvsyPqUk2Zc+UK7EjF7Iw1is3Y4jRMXzCoVryFk3/+8CcpayYnWKyJW7Lf1UhMLZlC6eqFN72X1MexQaVnspZ/EQPVbx2YesYwt2m18KgHxbPC8NxMwKBpjR7xNNM17p8w5Pllp2kj2DMsKqXCXBOc+1l+YOhCntBksKvemiPzQFaKl/L/QnY0zZVz675fH3nmThb0LlRSVeMQUbtuEr5ShVsE5fRx6onF73JK5ON+bw415L+vIHUZ8py3M2PAse4D7MBL8qa2vQCZ4G3+TUyndS1PtF4hsuzBUd/nw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=hYfewQ87ELvtVn6FGjzMsWdnqyD6VX0xZB2N+HVYOo8=;
- b=lWkOmal4D5VtkS+thZdxM3B/nBw57vAVM0OUga9gvlcKLvxZkvGFlVrXT7C8TgkOGvX+gH/nBo09mdGcZzWtfpgW5veBEq3TsQoSMbZzWsIR7cCwXEL4LGfx4IbOiw3HYxkj0jGZdo36l1vuN4uAMOYUBiKOgdXG+CO7saL18Y7OGZ4JsN7IQbkSqw94UCz61cCvOL6tIrofPMwUrZSRCzHfkucJmpkfe1ifzTPu9YvLv4wMMBmKEd5ezLhzfYAuAOBMqMSyxFKCJLOoAHoCRY7lXspeY5XDwIba+SFQ18GtfOgKSZTNonrD9yRrRXZvGTW0Ec5nxS+pwhN5FMa8Rw==
+ bh=VGLdwn8YNNnejdQaZ0+yxv6WgPZLc27JifgNkmb7A0M=;
+ b=FbmxGAItnFrBtEyCxdmXqSTNK/i4ZvzyqmrBYDMY4DGNgATuRN3jjMlyQz1u1yPGFivAHIgQpXXXCRY0BMuYuuA7CpAUerPTePkeNDScEcpvsjwl7AKCJuL75UfQcryGpL4VQ/l9CBpAsRwAUAYx9nSIalrE/6FD1IHCnSehnRSexfWC2CDvBNpNGnptg+kKShGWqJmMoRgc40CSmXtfKnij0FzJdEUIdIuCEQKJ90AB8qPHg9w4OmSYke+6PP+UTqwx9tqejTQlyDyaenZayPvZAlBEEysjFpuD1Va+hUfKFoCG4oJVdltZGJSSazYPGXrX8nD6WFnQQtMrEbmrGQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=vaisala.com; dmarc=pass action=none header.from=vaisala.com;
  dkim=pass header.d=vaisala.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hYfewQ87ELvtVn6FGjzMsWdnqyD6VX0xZB2N+HVYOo8=;
- b=z1Jvkq4ylfjkaCJd73z+yB3TDULBYlnyEQ9mUsIeQ8eBzzGMweT6pSK2B6az5Dc4uNkaHGRDVaYHz7L1UThqK/WpNsZgqM00rpRhJhjlH14PEKBONaXm6XYUhH4l0G29GCw1fJ1xeJpZ3RCNjMcaltzPS1jUN0Kf4Va2s33N/gY/8j6TpJBrbpaftftiuoQgzkV/oirLXctU6CM56FJXvHRmQonSp9GNHNaAGBOmTezSu5/mfv6ja5FyhaPoA80L8DI+m48YQuWweNPCoqZiCJIi0NWLEVeySaRv8O1yD+roZHRBFlP2OFlbb6EUkpByWIN9gQPq9BZTKnWZfuq7+w==
+ bh=VGLdwn8YNNnejdQaZ0+yxv6WgPZLc27JifgNkmb7A0M=;
+ b=gNXM0+d7hnTLmZikqpg0pON1NUM5Fpmca5soMh5NyGtbSE+IaL1PE60ArYkhMBuJE6I6xfpVl6q6W0WnH/J9Q2jxYNNERo3NOy+PkS36JJ7xm/oqnXrBC3HswrSDGZ6nRgErhmdmBtqwfgabaWBDSzvlVOP5avwrfK5sN5PhOHxA1mYmCQOYZ5gvg6kNqD2gWw4FL+iCzrMaysxGhO/j3wkQM+8Bkik7xMn6lG3N8nB2RMYUvrzXe2gj6P28QH6IfJcF/yf4SFyUzBpHxoY9LoBt5GFC7PnR7hARdBbFZcSgbIQjnjLH2dEM11Nmjb4xNzrDchZCg+0owk71jqaGxQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=vaisala.com;
 Received: from AS4PR06MB8447.eurprd06.prod.outlook.com (2603:10a6:20b:4e2::11)
  by DBAPR06MB6741.eurprd06.prod.outlook.com (2603:10a6:10:187::22) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7292.26; Wed, 14 Feb
- 2024 08:25:25 +0000
+ 2024 08:25:36 +0000
 Received: from AS4PR06MB8447.eurprd06.prod.outlook.com
  ([fe80::b5ae:8355:acaf:29e0]) by AS4PR06MB8447.eurprd06.prod.outlook.com
  ([fe80::b5ae:8355:acaf:29e0%4]) with mapi id 15.20.7270.036; Wed, 14 Feb 2024
- 08:25:25 +0000
+ 08:25:35 +0000
 From: niko.mauno@vaisala.com
 To: openembedded-devel@lists.openembedded.org
 CC: Niko Mauno <niko.mauno@vaisala.com>
-Subject: [meta-python][PATCH 1/4] python3-pybind11: Amend HOMEPAGE
-Date: Wed, 14 Feb 2024 08:24:46 +0000
-Message-ID: <20240214082449.3498259-1-niko.mauno@vaisala.com>
+Subject: [meta-python][PATCH 2/4] python3-pybind11: Prune redundant inherit
+Date: Wed, 14 Feb 2024 08:24:47 +0000
+Message-ID: <20240214082449.3498259-2-niko.mauno@vaisala.com>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240214082449.3498259-1-niko.mauno@vaisala.com>
+References: <20240214082449.3498259-1-niko.mauno@vaisala.com>
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
 X-ClientProxiedBy: GVYP280CA0024.SWEP280.PROD.OUTLOOK.COM
@@ -52,66 +54,65 @@ X-ClientProxiedBy: GVYP280CA0024.SWEP280.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS4PR06MB8447:EE_|DBAPR06MB6741:EE_
-X-MS-Office365-Filtering-Correlation-Id: 937aec97-514f-4fb9-8413-08dc2d367e4f
+X-MS-Office365-Filtering-Correlation-Id: 46aaaa1f-c9df-4168-3d29-08dc2d3684a1
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	iGIJtNPqqMyqocp7BB0UAbiKJ7//uhSRALHl+GpDzFJiuW2b0JOQTl03nx/KXgUv46c2ZRCt8ZyESFHEFx1jrAw4NsyrAkkIiCVFal1o81LsEs26w6tAnnbqpMNwMFaa0YbvbMOARsTueiJYZ2ZAiDv+AulwQa/w3K/1OBhnSipVbwC0WPNB8ooOmgw4YXxVjOv15sgdPZ/ck0T8mQekubiRBfQgRmh+1zRsoKTTtWnTe6Ml0XLS3wLkWBCdbBFA/4yNc+NGYlEGfD1zm3LWpPEm1y4Bh/DbuUkrxcRJlPzWZqgW1B47zF6S9QzuOucw4HxQ0k6g3HIOl2jQFwdZK3EZnw3XJkz2Og4V8TFVAeZIybYH3kwzvQDeEw4es8EKBiwS571d/HGjd8/xPf526ojhu8hAiSf582eTAHi7kH1jkOT5fydCwzfPLaNliPSqLghQTWmKA3QM3BKm7D/ZrOzqlfXgbwKO/eEjfYSYHK+rAWOXelVTON6UcW3WqZww8ajGH+10JonEaHV/Sk3HoukeKQlqJs04HZXZhHoMDvVuUc1DnD7GqNDUsGJ7TaoT3UoGZctzTp/uFDDb5bZINaKT6sa6S5FNcV4IepIjwDQ=
+	2wwRE8f4PPmBcViqeQFZGKx4Y/Bh3WUR9n1PbBz8gxFvT/CJzUoExEqyPKd5qIHBZIlE0az+Q98W1W7lZ0wRuAUbLT9DYvq+tyEvneiXqf4kX4zmMJFH/xTEKMgJbA6SA9dX/xueHoL1F8LsRuX4Ev6obHfnslfVC0kzJyLe8FH8VC2vHrTw74nMZq3pPpI/+8Dz3rzH7LmQsCFXgRavD1/r9PZ8Lzu5hJXUYQFFI//ERTObROMX0hp+93hsmllbiXNBMEtI+8dYW8oQ62xYJGuJuy7Ue1p695Vh57RB1Wznufmx2GcpXqMSFgwv5epRxk95k2s72jRDZz/De3OrHHQHfKHSRjbqQIDZKw7maSPAGrNoRLmuHzyEmghhyY02J/22ECIXspW9WOak1d4iHfJre6utdH1jprMfLcDbqD6Itxj2UWrPSQpCMkEUBHn0eNYG0YqoEi0zy0huMbgvlXnA8fQXhHTTfCs8P7KAL5s6M/ag9Ah0I8F8w4cjzdXWyqVQDyuJ/NR+lnZfzxHhXiJSdQVNB0v4nf+O7GqAprdZaoQG+d7Hu+lj8WH35twmI96HFQL78hiFslgfQA9MXsVGAooexteAt8cveEqDISuiPQKSJLbMTzvCZnydDMJY
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS4PR06MB8447.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(396003)(39850400004)(376002)(136003)(366004)(346002)(230922051799003)(64100799003)(451199024)(1800799012)(186009)(9686003)(6512007)(6666004)(6486002)(478600001)(41300700001)(2906002)(5660300002)(8936002)(4326008)(8676002)(4744005)(38350700005)(52116002)(6506007)(66476007)(66556008)(66946007)(316002)(6916009)(2616005)(83380400001)(107886003)(86362001)(1076003)(38100700002)(26005)(36756003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?xReLpYrmByAO6y5jhnsG4j2gRgJ+eTL4hopU/geox6w4exAX5WAVShSEfG7S?=
- =?us-ascii?Q?vIUSYNXc80tfr/wNvDo0RxFilCs5H0CtQNVHfsyVhT4J6hdd3YtssFrMfC87?=
- =?us-ascii?Q?VZy8Of14z1kULtioAQf5scDOYB7kdmVKQaoeN15lHV6gUWdq+AE0r1dtUwZY?=
- =?us-ascii?Q?9H/kl4vPiHF/xcJuJE8Dy3ul5rbonWXEJYLQqQtn1wj59DhXT6eV5WdEfFri?=
- =?us-ascii?Q?o5spp6EO1aroMwO/iGVdtmsRTd4vQczG6UN0KInFfvv1W4wrU52vgaif2i+B?=
- =?us-ascii?Q?tlfLDQuEIvu+QM/KgnYIrjWSWfN9svXFWetuldByao+ckvVTtWfnaGhsvatE?=
- =?us-ascii?Q?yqipMoGpDeRcy+V1KcRV8wLOmgo+KfNaZksGIO3AYoiCQfXnJbNMzlJHykpz?=
- =?us-ascii?Q?B2JhE9ebcSxWgjADi9IaD4k48kXL3TXQoaD6cBMdPnhksYKgdfEz+v68+O5m?=
- =?us-ascii?Q?WW9WJu+voOtOqx+FY6yunC36hTiL0RSv+jMI40WMfb/bpEJuIPWsCFE9yzrR?=
- =?us-ascii?Q?Fac6Lxj+1N8BnCgbwaANDFSpviU/7usibmx2hzfBLXU2JI1x6JTkxy4/HEib?=
- =?us-ascii?Q?9ptQ5QshEWWzh+fUCdhR9WkkSJzOgRG3xibGLLIOHdI7gB/uJa+0vPmkk9sL?=
- =?us-ascii?Q?nMY8j2mb+zlX8+HDzzgRBThMGk2HVIYZ+HfOzEFlfkatgsIyc87ltQkV9nCl?=
- =?us-ascii?Q?3CDdny26Slr65H/WehubyQmcZip82nsI4ilU7UBUVAogmzp/Y0qZS896tQ6s?=
- =?us-ascii?Q?T2qKX/y6590ea8zqSTS0ovF6n3aIIeFykqMHr1oyim6bSb6YZDS/NiMOurly?=
- =?us-ascii?Q?K2cF2io+BWcGvm40y8HJy84OZSIUey9A5sJA9J19vl2MwZuYlNtZ0cHtsVqu?=
- =?us-ascii?Q?kxpGA99L5dauaRzNVIC/waKzikT+pVCdv/2n8HZFeSlhJ9uB+K515sZv8v5B?=
- =?us-ascii?Q?hUBHQtxgl3a6V7/r1I8DHTX/fjmoncLSLECyQCS/aFTeRvMFofLW7w+DT3Tm?=
- =?us-ascii?Q?cP5KtIMVq8H2tGSz/efK0dSemqI6KENDwHxvecCx2+WSLj1M5tddcVU80POS?=
- =?us-ascii?Q?ENe38SJwz9yIrRocJM7LrZQtxCClEzaV3uW4lRFuprhMMGvxq0Jcg3LLSlZR?=
- =?us-ascii?Q?JO6ho0n1oolZtWSz5KRfqad1LwleptVamzZ1yEXupQBiesrfebSLCYhqP//M?=
- =?us-ascii?Q?YhJYUpxLiYwCBU0M0a53jjbORmLHTIdg4ct2zi9QNnBVJ2tBHAOuG2o1vQy5?=
- =?us-ascii?Q?Z3ursrOhu6AE+nqtFqDS9JQ8AD0X0lJLuigGjAD/mCPMRMPyYLSAKnl6SU1F?=
- =?us-ascii?Q?ri8Ni+St+tpNmSgPz4ffSuZsmKeEpgGNUlPqmW4HkdNLqPPPPST2DYMZKd/p?=
- =?us-ascii?Q?64gL6ePohBWAcUrmO1o9p6y6iwZQUry3BdU7GTGvlcYK7WrHcoqlk3inBEGo?=
- =?us-ascii?Q?5RIe6FQjkCzEuGhnKqA/YkMYfAHEClcJpQqoQ3gWjWF8xpixAR957a5vBd5T?=
- =?us-ascii?Q?hyydxykqu5PRCez13nBv0n/Hz3F4KFdPB0qLfWUia1lKzcC/qz+d5XmE6Kqu?=
- =?us-ascii?Q?MfdjAFDbTJDSq9V0DRjknzTB/VroSYdmo6m+h8CZoJcUM83Kl48BRZtRbeDl?=
- =?us-ascii?Q?NA=3D=3D?=
+	=?us-ascii?Q?6nyKT9e+cXs9li8E8vGxxZAdsSTb0LM9RNfJiWgik2tai90Ph8x/gLKQPaYv?=
+ =?us-ascii?Q?tdjsGwhQc8ntOWuUOW3/JWYYcZgN9FqVszsKOmzGh0fQBluFVdK92fF5026y?=
+ =?us-ascii?Q?dBbMDB55MX+xWYxMaNFY4wz6idAn85yGtnnkDfWHgOlZsW38efSNuw2WjZQx?=
+ =?us-ascii?Q?SdRhiM4oLG0RuBXbuPDYYmY4UREf4IeTNCFUYfIdvMtz3P8nJQ9qkZSnHddn?=
+ =?us-ascii?Q?M+Enao4bKgNCQ2U5hg0FofWoutef1X4kY+i8k6RpcRwtL1DMhpsOfQWxpA18?=
+ =?us-ascii?Q?VU4BP1P0kDVhZm7r5f+rFYhXuXgixl7QKt4/TRg29rxPe3eB6it7fSxp7Dms?=
+ =?us-ascii?Q?CmYpcRXltVpi3xAHracMCcHAamtH1Boi6//PEe71MnwlBu4hYUqoN+2O050A?=
+ =?us-ascii?Q?IPwrpNq2fIg2ghTJ9GyOUIer9JbaNhA02YEvvARmdQ9Fq0mwhvR/v0w0a5Gm?=
+ =?us-ascii?Q?5nqSiW9+hZyoiGGJXuTYKN8nDQgrfqjXVC7Gb+M7/fR3xIKMpXxvmGaOKRsU?=
+ =?us-ascii?Q?juAmE3y2iiYSWmipRP+UaE5q/PdinTRz3QVy5mWo6Fopk8m5NY33M0+6Bgve?=
+ =?us-ascii?Q?lFWcPrMfiKJBHyALZdmoN0EbHaEs7rAcwxlD3eFkVV6qk2sOrVstVHkQc1f1?=
+ =?us-ascii?Q?v4q1wUooL68UiAfqN0huKnbgmMj8AreAcJcAB1xwKGQxhxU6ROFI+hABsDJO?=
+ =?us-ascii?Q?VA55UgVkYtUOolp0kSxctB6mfPWGMkWnusjr2FGxZ5GsaHthDEn2kLKd8TFa?=
+ =?us-ascii?Q?uO0kl28sVypAv4zVGW/vQ/ZqrN9YoXc4eaJ7Ryol8HQwd9PExdHVkM7Yli7Z?=
+ =?us-ascii?Q?s57Z9thBbb2QUzOd+PXWYkmN6GfAGdsLnHY8wI9Rn+xqPCa6f7zieFyM/7Sk?=
+ =?us-ascii?Q?KJjaYaf8dUBhCf200+1MIs1VCowla+f/f3gMm42IYNqCMOwQQrOKlz2ytp2F?=
+ =?us-ascii?Q?aMbxZSHGsr8Brnkxi7FSZvrIZqBKePRXBxVOtpRfr7FWNf96eNm3Pwhq5UF8?=
+ =?us-ascii?Q?JkzDbpb8wVv8oEPDp0UOGddr/2hIZvb3SwH/m8tOXMmttzvzaATR3K9epRyF?=
+ =?us-ascii?Q?RO9uTJ9Zc+iUywBFKrGNhCq51ttQNDW/Q2CfxHHdSGm/vBKzRgBYiwSGEUii?=
+ =?us-ascii?Q?5xf0DWMvYuiVN0j/sbKBZc/+6Lv7Yxtzkrm/J+W24oNUBD4YanvRji0ORxDt?=
+ =?us-ascii?Q?p6Lfv/8VLdc7eS9nGTbMaSUd16PSCDQuzlcazZGmrBu4klOOlkN/HaVECOYN?=
+ =?us-ascii?Q?tNrqlKDo6vouv4xpW1ZM3HoKPaEGhi5G85WgT8Fhjf/81kJzEvdr6AnmUXSK?=
+ =?us-ascii?Q?RBn9UUzEBesefXun9U8e+UTQGmClVWlsU+6iXhr/6mKt3nBkzMJpa2rB+AdE?=
+ =?us-ascii?Q?mvWTwcBbMtNZqbo2jurfpoIMNUJj0k+8dqsU1fuTN2GWi7ZrTjgGLYspdW0e?=
+ =?us-ascii?Q?GumqPGjyMNOecDePEFX9J1BVKCilBNIf22Ib2sQ6L20UIvRsR9zSovdsVBY4?=
+ =?us-ascii?Q?ntoGALctNE23ybj0zJ5dQ8mCLOzD1weCLFXfB819VYfZbkbvE3oDl/lWpHTp?=
+ =?us-ascii?Q?kYLLBYhy0+ybX5gwKPwsIFM1XJyCoZvILdtq64PUrOMAlnwvG4NK8PK1QMal?=
+ =?us-ascii?Q?2Q=3D=3D?=
 X-OriginatorOrg: vaisala.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 937aec97-514f-4fb9-8413-08dc2d367e4f
+X-MS-Exchange-CrossTenant-Network-Message-Id: 46aaaa1f-c9df-4168-3d29-08dc2d3684a1
 X-MS-Exchange-CrossTenant-AuthSource: AS4PR06MB8447.eurprd06.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Feb 2024 08:25:25.2169
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Feb 2024 08:25:35.7920
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: I5Cbim2rb1WAmCH6PTFn5DGlwBc1oPg+NHzHipXE74nzyOlKoBtTXauwLallqyeo53OZTyEKahoJrErk1Fhy4Q==
+X-MS-Exchange-CrossTenant-UserPrincipalName: cI7hbK1HK17z+JC3ZiAAGDAPOfUFYFuw8hg0305Nt4hYRI6ykwy5wa4dUIZg3xeSrOHzCaJ5UmzwqL/4K2GPzA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAPR06MB6741
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 14 Feb 2024 08:25:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108734
+ <openembedded-devel@lists.openembedded.org>; Wed, 14 Feb 2024 08:25:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108735
 
 From: Niko Mauno <niko.mauno@vaisala.com>
 
-Update the HOMEPAGE value so that the URL points to the original
-repository instead of a fork. By doing this we fix the mismatch
-between HOMEPAGE and SRC_URI.
+Inheriting setuptools3 implies the inherit of python3native, so drop
+the latter inherit as redundant.
 
 Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
 ---
@@ -120,17 +121,18 @@ Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
 
 diff --git a/meta-python/recipes-devtools/python/python3-pybind11_2.11.1.bb=
  b/meta-python/recipes-devtools/python/python3-pybind11_2.11.1.bb
-index d51dd905a..e919e7dcc 100644
+index e919e7dcc..442837199 100644
 --- a/meta-python/recipes-devtools/python/python3-pybind11_2.11.1.bb
 +++ b/meta-python/recipes-devtools/python/python3-pybind11_2.11.1.bb
-@@ -1,5 +1,5 @@
- SUMMARY =3D "Seamless operability between C++11 and Python"
--HOMEPAGE =3D "https://github.com/wjakob/pybind11"
-+HOMEPAGE =3D "https://github.com/pybind/pybind11"
- LICENSE =3D "BSD-2-Clause"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D774f65abd8a7fe3124be2cdf766cd06=
-f"
+@@ -13,7 +13,7 @@ S =3D "${WORKDIR}/git"
 =20
+ EXTRA_OECMAKE =3D  "-DPYBIND11_TEST=3DOFF"
+=20
+-inherit cmake setuptools3 python3native
++inherit cmake setuptools3
+=20
+ PIP_INSTALL_DIST_PATH =3D "${S}/dist"
+ PIP_INSTALL_PACKAGE =3D "pybind11"
 --=20
 2.39.2
 
