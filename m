@@ -2,104 +2,100 @@ Return-Path: <cvubrugier@fastmail.fm>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 73161C48BC3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 73F47C48BEC
 	for <webhook@archiver.kernel.org>; Wed, 14 Feb 2024 17:45:23 +0000 (UTC)
-Received: from out1-smtp.messagingengine.com (out1-smtp.messagingengine.com [66.111.4.25])
- by mx.groups.io with SMTP id smtpd.web10.47398.1707932718245620831
+Received: from fout5-smtp.messagingengine.com (fout5-smtp.messagingengine.com [103.168.172.148])
+ by mx.groups.io with SMTP id smtpd.web11.47939.1707932717430040920
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Feb 2024 09:45:18 -0800
+ Wed, 14 Feb 2024 09:45:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fastmail.fm header.s=fm1 header.b=rkaxCCyX;
- dkim=pass header.i=@messagingengine.com header.s=fm3 header.b=gd2+k1EA;
- spf=pass (domain: fastmail.fm, ip: 66.111.4.25, mailfrom: cvubrugier@fastmail.fm)
-Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
-	by mailout.nyi.internal (Postfix) with ESMTP id 7B4EE5C0099;
-	Wed, 14 Feb 2024 12:45:17 -0500 (EST)
+ dkim=pass header.i=@fastmail.fm header.s=fm1 header.b=HehajRRy;
+ dkim=pass header.i=@messagingengine.com header.s=fm3 header.b=RHv4Jq8N;
+ spf=pass (domain: fastmail.fm, ip: 103.168.172.148, mailfrom: cvubrugier@fastmail.fm)
+Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
+	by mailfout.nyi.internal (Postfix) with ESMTP id AF36E13800D3;
+	Wed, 14 Feb 2024 12:45:16 -0500 (EST)
 Received: from mailfrontend2 ([10.202.2.163])
-  by compute1.internal (MEProxy); Wed, 14 Feb 2024 12:45:17 -0500
+  by compute6.internal (MEProxy); Wed, 14 Feb 2024 12:45:16 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fastmail.fm; h=
 	cc:cc:content-transfer-encoding:content-type:date:date:from:from
-	:in-reply-to:in-reply-to:message-id:mime-version:references
-	:reply-to:subject:subject:to:to; s=fm1; t=1707932717; x=
-	1708019117; bh=UiMpD+2ev/v7200TsHJZ/NT/G2SR0WmVAbCHWbbEx8g=; b=r
-	kaxCCyXTSltIbmsR2SjHQrfv1MlM7RQl1wp813AlrIYiw/jdUuhYOitDjhys87Gf
-	xB5uJVjRC2sBH6l5I5NrDcc1+cuvk7sMkMGXLcqL0QrMfdj8/yqPtSR5cA+80ZT/
-	I5KAbUwqUlHUy0V0dA0OL1EAlejLXWYM4E/RXfKSmDg9oW1nopzi1oERse3zAPhE
-	NAT2uDY92IyDU12ortezW9wY2WyZ91vaXnvFgLlZwQZvmRfcvY/G3vBVYch4X32T
-	8aYxQuLtgkQYwtZyOV+ber4E05N3IrJJSuZYhz0Hm+VUKjn0U4h3/uEZzLLm86Ak
-	1TMel9fU9fVTLiwumFFYw==
+	:in-reply-to:message-id:mime-version:reply-to:subject:subject:to
+	:to; s=fm1; t=1707932716; x=1708019116; bh=Q0tk25k4JPTnLoLf/N/PD
+	Vgq73EYF2FLJ1PyuZiiTIM=; b=HehajRRy9i1vkEMzh/0V1PDUf0gfm0t2Jo4/8
+	vmoil8jArBvZbGOE5kiJibEm6QLiHlEo5eG5XN8onGfvA0+WNaa1Sx5eH9QWCHXf
+	VzR//SH5AbRTuEMYq9R67BoIV6ind2lqcL86vSUKE5blXRTdA/89qczLBVIGouch
+	1msjKY1JjV8vBqa8SFBlgvtxpdM7nk5lEWvWgJ5K0IIwg2EZ7SCUvhhTiaFhxz9D
+	0qjOHflTYRQLJQ4SDXiPUmD5zNF3mdCjNNO6l88dNsCwBFh1X2JP4uLx0yTlcC4x
+	4ScgHaFFJWbNRA6bM7DGq2YlVRb2PjGPsRapHzyFw3x9nPH6A==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:date:date:feedback-id:feedback-id:from:from
-	:in-reply-to:in-reply-to:message-id:mime-version:references
-	:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1707932717; x=
-	1708019117; bh=UiMpD+2ev/v7200TsHJZ/NT/G2SR0WmVAbCHWbbEx8g=; b=g
-	d2+k1EAInLhm+nURPy1DH46wwjPvblagQyfJDknoK9BhpZm85V/8OhiBtLVcyP3r
-	RfMwjixgSkxsQCUgZDF/ESJye1tcYxw1nXRSdSj4nZ/TrtA1NeqojNCV88x63cd4
-	sdVRageKrw/MPxMcDSqeDLmsn5h5/xZF/3ACBeSfTW0RRXXHeXAYCxToirAKCOIC
-	A4PrA5PpUnljOBIImFG0jnQVFrRwXABCVv1AswB+pXcs5BsosWdUo7vSK0YkNXUn
-	5+/lY0zqWX5qCLMwSGP6xPDrBs4/uGvFS/VPuMCb52g4SNXsztmN2V8isaJemGdx
-	Sqh4HF1B1v9KCldA0qEfA==
-X-ME-Sender: <xms:LfzMZfV57QC3iC_ewdZoTkG_tAWs3J2J7Hxg8xwQcXu8vGaiDvKffA>
-    <xme:LfzMZXkngez4vjpqeui-p9gc5O-ORb5AcZBVFJ9bQoNkp5WEnnKUlQsdXWBX8vuJy
-    eP_5803SgJGjXftLw>
-X-ME-Received: <xmr:LfzMZbbcYAVMFHIqJIr57E5osfGxQ5fVnzYhXC0p-hRV_5R42nXVdxj_F9SuDxITfEoB0J4WoINzz9Idq2sxlRNv2Ep0orH6ylYMSgPQbF3qFS8>
+	:in-reply-to:message-id:mime-version:reply-to:subject:subject:to
+	:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+	fm3; t=1707932716; x=1708019116; bh=Q0tk25k4JPTnLoLf/N/PDVgq73EY
+	F2FLJ1PyuZiiTIM=; b=RHv4Jq8NFUNnvlIi0ug2dPdwsZmAvN7TAvMin1DUteaW
+	i9ZUKj3CJBtfnrMoJ1rFP5x8BynArCP4JiYWaLu4VT4uXA3y2ObmV9QFnluErqc/
+	DpFZbW8aSpKbb1IMB7FB9uOYBjElW/M0wSiMlTDC6A5xhTEtgMjSPEBCoK8XCBcw
+	E9RrJ/y0H5l0dx6l6hZ+Ncy/CWIdGefKb1y5CNyrPsO54m4yK9x9KS3q3t/RRfxJ
+	HkeRt1KvEP43JM5BKnWI8V7xhpRfQh+FXbcIMB1tpF4bjnASyOu9qmur1+sPOBUN
+	6IBKxJvWQjz0YyoddUG3ddLDG73NSgiqg0jgG8CHmQ==
+X-ME-Sender: <xms:LPzMZXE-jKR4IRdsEgLWROHrgOM9HQQYl_eU1wZ0GxkZ7gMXlkYOLQ>
+    <xme:LPzMZUU48uURx5TWpWshu7dHGliflIA_iR0nv8IWxW6dATA4-WlmwrAdtaO_F6tbs
+    lSWy7hPG4rY20L8RA>
+X-ME-Received: <xmr:LPzMZZJLrDOhYQ18y07QMN7-5-KTgn_QcbEttUgFdzQbgZeL9XhbyXQuyB9TO84VtiaW7aaTN0auF6g2rW83dvqoRIqgs-coOSbl1-UMg6ZFv4g>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrudejgddutdehucetufdoteggodetrfdotf
     fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
     uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomheptghvuhgs
-    rhhughhivghrsehfrghsthhmrghilhdrfhhmnecuggftrfgrthhtvghrnhepjefhhfeike
-    ejgeevtdfgueeihfduveegtedutdeuudehfeefheeiffetgfejuedvnecuffhomhgrihhn
-    pehgihhthhhusgdrtghomhenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmh
-    grihhlfhhrohhmpegtvhhusghruhhgihgvrhesfhgrshhtmhgrihhlrdhfmh
-X-ME-Proxy: <xmx:LfzMZaXpNOFh9rIqNT_AxDXa0tcErIFs_jRChrpaufBSn3GYB7sqxw>
-    <xmx:LfzMZZl90SOzemZk-ZzpZNxJKJEKVR-E8HEGnBOQ4Me7CDDUcIGBSA>
-    <xmx:LfzMZXeM_G58y8azPupW7IjVhdpFx-KKctxSvo4GjzI4NRPmc9JLIg>
-    <xmx:LfzMZZukH0Cqf4p9VCrPtH2oO1pgjL17tJy_efPLQFKJ9vafdYeT-w>
+    cujfgurhephffvvefufffkofgggfestdekredtredttdenucfhrhhomheptghvuhgsrhhu
+    ghhivghrsehfrghsthhmrghilhdrfhhmnecuggftrfgrthhtvghrnhepieeuledtkeegke
+    dvveelgeefhefhffeiveeiledvjedugfeivdetjeffledtleehnecuffhomhgrihhnpehg
+    ihhthhhusgdrtghomhenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrih
+    hlfhhrohhmpegtvhhusghruhhgihgvrhesfhgrshhtmhgrihhlrdhfmh
+X-ME-Proxy: <xmx:LPzMZVHFvFek5NoY0H8j7CB1VwHIuJUXSIck80t1hZXEAyc703oKpw>
+    <xmx:LPzMZdWNllUWpEMZqiIWBwNba2CL3LYYqA-nvPrbKN-CeNkxyJ9SRw>
+    <xmx:LPzMZQNeyqvUxTe2d4nB-ccxtN68PdB4XAYzHL39LKspGXa8bPfnRw>
+    <xmx:LPzMZaigExI6iFXUEVkmauv46pqmXHfz4hE3OHqnoom6Su2A1B4cOQ>
 Feedback-ID: i09e840f8:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 14 Feb 2024 12:45:16 -0500 (EST)
+ 14 Feb 2024 12:45:15 -0500 (EST)
 From: cvubrugier@fastmail.fm
 To: openembedded-devel@lists.openembedded.org
 Cc: Christophe Vu-Brugier <christophe.vu-brugier@seagate.com>
-Subject: [meta-oe][PATCH 2/2] nvme-cli: upgrade 2.7.1 -> 2.8
-Date: Wed, 14 Feb 2024 18:44:53 +0100
-Message-ID: <20240214174453.59408-2-cvubrugier@fastmail.fm>
+Subject: [meta-oe][PATCH 1/2] libnvme: upgrade 1.7.1 -> 1.8
+Date: Wed, 14 Feb 2024 18:44:52 +0100
+Message-ID: <20240214174453.59408-1-cvubrugier@fastmail.fm>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240214174453.59408-1-cvubrugier@fastmail.fm>
-References: <20240214174453.59408-1-cvubrugier@fastmail.fm>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 14 Feb 2024 17:45:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108746
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108745
 
 From: Christophe Vu-Brugier <christophe.vu-brugier@seagate.com>
 
 Signed-off-by: Christophe Vu-Brugier <christophe.vu-brugier@seagate.com>
 ---
- .../recipes-bsp/nvme-cli/{nvme-cli_2.7.1.bb => nvme-cli_2.8.bb} | 2 +-
+ .../libnvme/{libnvme_1.7.1.bb => libnvme_1.8.bb}                | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-bsp/nvme-cli/{nvme-cli_2.7.1.bb => nvme-cli_2.8.bb} (95%)
+ rename meta-oe/recipes-support/libnvme/{libnvme_1.7.1.bb => libnvme_1.8.bb} (94%)
 
-diff --git a/meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.7.1.bb b/meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.8.bb
-similarity index 95%
-rename from meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.7.1.bb
-rename to meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.8.bb
-index d2b2536bc..81b30c283 100644
---- a/meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.7.1.bb
-+++ b/meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.8.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8264535c0c4e9c6c335635c4026a8022 \
+diff --git a/meta-oe/recipes-support/libnvme/libnvme_1.7.1.bb b/meta-oe/recipes-support/libnvme/libnvme_1.8.bb
+similarity index 94%
+rename from meta-oe/recipes-support/libnvme/libnvme_1.7.1.bb
+rename to meta-oe/recipes-support/libnvme/libnvme_1.8.bb
+index 985fd7c55..3894facec 100644
+--- a/meta-oe/recipes-support/libnvme/libnvme_1.7.1.bb
++++ b/meta-oe/recipes-support/libnvme/libnvme_1.8.bb
+@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c \
                      file://ccan/licenses/CC0;md5=c17af43b05840255a6fedc5eda9d56cc \
                      file://ccan/licenses/BSD-MIT;md5=838c366f69b72c5df05c96dff79b35f2"
- DEPENDS = "json-c libnvme"
--SRCREV = "dcdad6f5d70ffb2fa151f229db048180671eb1fe"
-+SRCREV = "43b716b982da3df1cf8c4658f7c31b0fe28d377b"
+ DEPENDS = "json-c"
+-SRCREV = "13ba38387e5446849ae59d3ccd8183cf9aca3145"
++SRCREV = "bff7dda7e2a0f883d0b89e23fed725c916de3e61"
  
- SRC_URI = "git://github.com/linux-nvme/nvme-cli.git;branch=master;protocol=https"
+ SRC_URI = "git://github.com/linux-nvme/libnvme;protocol=https;branch=master"
  
 -- 
 2.39.2
