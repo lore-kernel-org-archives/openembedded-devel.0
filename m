@@ -1,175 +1,107 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <cvubrugier@fastmail.fm>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4CE37C48BC3
-	for <webhook@archiver.kernel.org>; Wed, 14 Feb 2024 17:19:23 +0000 (UTC)
-Received: from mail-ot1-f54.google.com (mail-ot1-f54.google.com [209.85.210.54])
- by mx.groups.io with SMTP id smtpd.web11.47194.1707931162738064354
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 73161C48BC3
+	for <webhook@archiver.kernel.org>; Wed, 14 Feb 2024 17:45:23 +0000 (UTC)
+Received: from out1-smtp.messagingengine.com (out1-smtp.messagingengine.com [66.111.4.25])
+ by mx.groups.io with SMTP id smtpd.web10.47398.1707932718245620831
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Feb 2024 09:19:22 -0800
+ Wed, 14 Feb 2024 09:45:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Yn/X8EUE;
- spf=pass (domain: gmail.com, ip: 209.85.210.54, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f54.google.com with SMTP id 46e09a7af769-6e2e58feaefso978371a34.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Feb 2024 09:19:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1707931161; x=1708535961; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=a44Qh6AnzySwlIXmbOMrlvOqyjl9oRh8YZ19A0nakjQ=;
-        b=Yn/X8EUEMoEyoka02/5j4z1ITPp6Ul8c3DQFMh5ZQV9mPZ0fa4dR9wfEBE9pS4llp6
-         FBI3IANPQhs1BpFGmFZrAR0/1TpGXdRvUwWjXUsGpU98ykn1sW6uR83GVb9uUOGvpcms
-         A3BtnFfqFcRh4CFA0VIAK23bZtqBgR+SkRpSIT6a7Vd8swdIePjiQSPcMmVP1i3xzXGu
-         we4xFncsM9F9qMc+XRCRT7QR4pkrjeeqiLB+ODi4OmsHHUHZZy//k1noFV3IjyqneSM2
-         6TUHAi/GV10eMhpxzfmI+wzhEM9bhstEGIfD5qU9qQdLnQtaIO81i7h71Rkd8YSPGJqI
-         tL6w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707931161; x=1708535961;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=a44Qh6AnzySwlIXmbOMrlvOqyjl9oRh8YZ19A0nakjQ=;
-        b=Q0W4Yg7/OzR839hOszquxbMduIR+c4qElfFTNThknfF5F+F/fnhxe0YCyTFQi1zmAM
-         VBv4xT/HJrgazLxVXFDT3eX4QfDWPtcWJGhrNLxkoydTWHv6fBQq7zb+XQcnijwpiA/B
-         G5xnY6h6kXLYXT+KeX4iTRRGVJ+nwoGXp5U82TEen1BEHv/nO1kUjJWLZDYyk45ACKiz
-         Xb7/9cMSCEUgWahibj7kteWaPqWoeSoJU8TI1MZvVkGoQS4QPKmusi00zk+5g0mIF36a
-         M34qnHDOks4QedNyIcBixfZ8WrCzNvuJ09ScQA/3GpHG5vyTDLJGs7nW9eZrIXc3T9kk
-         +elg==
-X-Gm-Message-State: AOJu0YwEQxEDl44/9IY+PAYVHpSpaV3WVolaEWlHf8L8/o3lRxwMWGTJ
-	be8fs5BQ52KZLP7ODb8aMTA9B1tJzzzObBWPHKMV+vmf5YXtbF9MeKEpOkw9sbTqNKNpF64Jp7F
-	FVjND/tZq1tUqQsVNhgQILS+t6xE=
-X-Google-Smtp-Source: AGHT+IFcnJGgDSYEzLwPT9jYyWUlhOD6ozEpNcGiLHqKgsjidhxHE4gjM0T0tB7mGsMOPCBlPgzSvnVEQdzjlceYYdI=
-X-Received: by 2002:a05:6870:5e4d:b0:21a:8e6c:26ea with SMTP id
- ne13-20020a0568705e4d00b0021a8e6c26eamr3579507oac.8.1707931161536; Wed, 14
- Feb 2024 09:19:21 -0800 (PST)
+ dkim=pass header.i=@fastmail.fm header.s=fm1 header.b=rkaxCCyX;
+ dkim=pass header.i=@messagingengine.com header.s=fm3 header.b=gd2+k1EA;
+ spf=pass (domain: fastmail.fm, ip: 66.111.4.25, mailfrom: cvubrugier@fastmail.fm)
+Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
+	by mailout.nyi.internal (Postfix) with ESMTP id 7B4EE5C0099;
+	Wed, 14 Feb 2024 12:45:17 -0500 (EST)
+Received: from mailfrontend2 ([10.202.2.163])
+  by compute1.internal (MEProxy); Wed, 14 Feb 2024 12:45:17 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fastmail.fm; h=
+	cc:cc:content-transfer-encoding:content-type:date:date:from:from
+	:in-reply-to:in-reply-to:message-id:mime-version:references
+	:reply-to:subject:subject:to:to; s=fm1; t=1707932717; x=
+	1708019117; bh=UiMpD+2ev/v7200TsHJZ/NT/G2SR0WmVAbCHWbbEx8g=; b=r
+	kaxCCyXTSltIbmsR2SjHQrfv1MlM7RQl1wp813AlrIYiw/jdUuhYOitDjhys87Gf
+	xB5uJVjRC2sBH6l5I5NrDcc1+cuvk7sMkMGXLcqL0QrMfdj8/yqPtSR5cA+80ZT/
+	I5KAbUwqUlHUy0V0dA0OL1EAlejLXWYM4E/RXfKSmDg9oW1nopzi1oERse3zAPhE
+	NAT2uDY92IyDU12ortezW9wY2WyZ91vaXnvFgLlZwQZvmRfcvY/G3vBVYch4X32T
+	8aYxQuLtgkQYwtZyOV+ber4E05N3IrJJSuZYhz0Hm+VUKjn0U4h3/uEZzLLm86Ak
+	1TMel9fU9fVTLiwumFFYw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:date:date:feedback-id:feedback-id:from:from
+	:in-reply-to:in-reply-to:message-id:mime-version:references
+	:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1707932717; x=
+	1708019117; bh=UiMpD+2ev/v7200TsHJZ/NT/G2SR0WmVAbCHWbbEx8g=; b=g
+	d2+k1EAInLhm+nURPy1DH46wwjPvblagQyfJDknoK9BhpZm85V/8OhiBtLVcyP3r
+	RfMwjixgSkxsQCUgZDF/ESJye1tcYxw1nXRSdSj4nZ/TrtA1NeqojNCV88x63cd4
+	sdVRageKrw/MPxMcDSqeDLmsn5h5/xZF/3ACBeSfTW0RRXXHeXAYCxToirAKCOIC
+	A4PrA5PpUnljOBIImFG0jnQVFrRwXABCVv1AswB+pXcs5BsosWdUo7vSK0YkNXUn
+	5+/lY0zqWX5qCLMwSGP6xPDrBs4/uGvFS/VPuMCb52g4SNXsztmN2V8isaJemGdx
+	Sqh4HF1B1v9KCldA0qEfA==
+X-ME-Sender: <xms:LfzMZfV57QC3iC_ewdZoTkG_tAWs3J2J7Hxg8xwQcXu8vGaiDvKffA>
+    <xme:LfzMZXkngez4vjpqeui-p9gc5O-ORb5AcZBVFJ9bQoNkp5WEnnKUlQsdXWBX8vuJy
+    eP_5803SgJGjXftLw>
+X-ME-Received: <xmr:LfzMZbbcYAVMFHIqJIr57E5osfGxQ5fVnzYhXC0p-hRV_5R42nXVdxj_F9SuDxITfEoB0J4WoINzz9Idq2sxlRNv2Ep0orH6ylYMSgPQbF3qFS8>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrudejgddutdehucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+    cujfgurhephffvvefufffkofgjfhgggfestdekredtredttdenucfhrhhomheptghvuhgs
+    rhhughhivghrsehfrghsthhmrghilhdrfhhmnecuggftrfgrthhtvghrnhepjefhhfeike
+    ejgeevtdfgueeihfduveegtedutdeuudehfeefheeiffetgfejuedvnecuffhomhgrihhn
+    pehgihhthhhusgdrtghomhenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmh
+    grihhlfhhrohhmpegtvhhusghruhhgihgvrhesfhgrshhtmhgrihhlrdhfmh
+X-ME-Proxy: <xmx:LfzMZaXpNOFh9rIqNT_AxDXa0tcErIFs_jRChrpaufBSn3GYB7sqxw>
+    <xmx:LfzMZZl90SOzemZk-ZzpZNxJKJEKVR-E8HEGnBOQ4Me7CDDUcIGBSA>
+    <xmx:LfzMZXeM_G58y8azPupW7IjVhdpFx-KKctxSvo4GjzI4NRPmc9JLIg>
+    <xmx:LfzMZZukH0Cqf4p9VCrPtH2oO1pgjL17tJy_efPLQFKJ9vafdYeT-w>
+Feedback-ID: i09e840f8:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 14 Feb 2024 12:45:16 -0500 (EST)
+From: cvubrugier@fastmail.fm
+To: openembedded-devel@lists.openembedded.org
+Cc: Christophe Vu-Brugier <christophe.vu-brugier@seagate.com>
+Subject: [meta-oe][PATCH 2/2] nvme-cli: upgrade 2.7.1 -> 2.8
+Date: Wed, 14 Feb 2024 18:44:53 +0100
+Message-ID: <20240214174453.59408-2-cvubrugier@fastmail.fm>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240214174453.59408-1-cvubrugier@fastmail.fm>
+References: <20240214174453.59408-1-cvubrugier@fastmail.fm>
 MIME-Version: 1.0
-References: <20240214092807.1224894-1-archana.polampalli@windriver.com>
-In-Reply-To: <20240214092807.1224894-1-archana.polampalli@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 14 Feb 2024 09:18:55 -0800
-Message-ID: <CAMKF1sq5PzDFwP6MMkmciZzRwsG6fZZ-z430hNQrD1uiprAqXA@mail.gmail.com>
-Subject: Re: [oe][meta-oe][PATCH 1/1] nodejs: update to latest v20 version 20.11.0
-To: archana.polampalli@windriver.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 14 Feb 2024 17:19:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108744
+ <openembedded-devel@lists.openembedded.org>; Wed, 14 Feb 2024 17:45:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108746
 
-On Wed, Feb 14, 2024 at 1:28=E2=80=AFAM Polampalli, Archana via
-lists.openembedded.org
-<archana.polampalli=3Dwindriver.com@lists.openembedded.org> wrote:
->
-> From: Archana Polampalli <archana.polampalli@windriver.com>
->
-> License-Update:
->     update c-ares to 1.20.0 [1]
->     Copyright update [2]
->
-> Removed below patches as these are availbe in 20.11.0
->     0001-build-fix-build-with-Python-3.12.patch [3]
->     0001-gyp-resolve-python-3.12-issues.patch [4]
+From: Christophe Vu-Brugier <christophe.vu-brugier@seagate.com>
 
-I see them removed from SRC_URI, however they should be deleted from
-repository as well which I do not see in this patch.
+Signed-off-by: Christophe Vu-Brugier <christophe.vu-brugier@seagate.com>
+---
+ .../recipes-bsp/nvme-cli/{nvme-cli_2.7.1.bb => nvme-cli_2.8.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-bsp/nvme-cli/{nvme-cli_2.7.1.bb => nvme-cli_2.8.bb} (95%)
 
->
-> Changelog:
->    https://github.com/nodejs/node/releases/tag/v20.11.0
->
-> [1] https://github.com/nodejs/node/commit/b705e19a95b5fc5a2edc9fc11a7649d=
-6eb32d70b
-> [2] https://github.com/nodejs/node/commit/347e1dd06a5f927d9fd64ce72d776c5=
-6d5101910
-> [3] https://github.com/nodejs/node/commit/0a5e9c12cf961a56bd63005974b953b=
-bc0bc62a7
-> [4] https://github.com/nodejs/node/commit/68ec1e5eeb4ff984868c625f0ce8082=
-10169360d
->
-> Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
-> ---
->  .../oe-npm-cache                                            | 0
->  ...cache-native_20.5.bb =3D> nodejs-oe-cache-native_20.11.bb} | 0
->  .../nodejs/{nodejs_20.8.1.bb =3D> nodejs_20.11.0.bb}          | 6 ++----
->  3 files changed, 2 insertions(+), 4 deletions(-)
->  rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-20.5 =3D> nodejs=
--oe-cache-20.11}/oe-npm-cache (100%)
->  rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-native_20.5.bb =
-=3D> nodejs-oe-cache-native_20.11.bb} (100%)
->  rename meta-oe/recipes-devtools/nodejs/{nodejs_20.8.1.bb =3D> nodejs_20.=
-11.0.bb} (95%)
->
-> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-20.5/oe-npm-=
-cache b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-20.11/oe-npm-cache
-> similarity index 100%
-> rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-20.5/oe-npm-c=
-ache
-> rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-20.11/oe-npm-ca=
-che
-> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_20.5.=
-bb b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_20.11.bb
-> similarity index 100%
-> rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_20.5.b=
-b
-> rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_20.11.bb
-> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_20.8.1.bb b/meta-oe/r=
-ecipes-devtools/nodejs/nodejs_20.11.0.bb
-> similarity index 95%
-> rename from meta-oe/recipes-devtools/nodejs/nodejs_20.8.1.bb
-> rename to meta-oe/recipes-devtools/nodejs/nodejs_20.11.0.bb
-> index 5cdcd2767..cc5135478 100644
-> --- a/meta-oe/recipes-devtools/nodejs/nodejs_20.8.1.bb
-> +++ b/meta-oe/recipes-devtools/nodejs/nodejs_20.11.0.bb
-> @@ -1,7 +1,7 @@
->  DESCRIPTION =3D "nodeJS Evented I/O for V8 JavaScript"
->  HOMEPAGE =3D "http://nodejs.org"
->  LICENSE =3D "MIT & ISC & BSD-2-Clause & BSD-3-Clause & Artistic-2.0 & Ap=
-ache-2.0"
-> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D162595a4a2f3453a0534e60b0afe4=
-e7b"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D78ad16dab3c1d15d4878c81770be0=
-be7"
->
->  CVE_PRODUCT =3D "nodejs node.js"
->
-> @@ -27,8 +27,6 @@ SRC_URI =3D "http://nodejs.org/dist/v${PV}/node-v${PV}.=
-tar.xz \
->             file://0001-Revert-io_uring-changes-from-libuv-1.46.0.patch \
->             file://0002-Revert-io_uring-changes-from-libuv-1.45.0.patch \
->             file://run-ptest \
-> -           file://0001-build-fix-build-with-Python-3.12.patch \
-> -           file://0001-gyp-resolve-python-3.12-issues.patch \
->             "
->
->  SRC_URI:append:class-target =3D " \
-> @@ -40,7 +38,7 @@ SRC_URI:append:toolchain-clang:x86 =3D " \
->  SRC_URI:append:toolchain-clang:powerpc64le =3D " \
->             file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
->             "
-> -SRC_URI[sha256sum] =3D "f799c66f6a6386bb8ac2c75a378f740c455e97f1fe964393=
-dd39c9f9f6efbc70"
-> +SRC_URI[sha256sum] =3D "31807ebeeeb049c53f1765e4a95aed69476a4b696dd100cb=
-539ab668d7950b40"
->
->  S =3D "${WORKDIR}/node-v${PV}"
->
-> --
-> 2.40.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#108738): https://lists.openembedded.org/g/openembedde=
-d-devel/message/108738
-> Mute This Topic: https://lists.openembedded.org/mt/104349882/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+diff --git a/meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.7.1.bb b/meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.8.bb
+similarity index 95%
+rename from meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.7.1.bb
+rename to meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.8.bb
+index d2b2536bc..81b30c283 100644
+--- a/meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.7.1.bb
++++ b/meta-oe/recipes-bsp/nvme-cli/nvme-cli_2.8.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8264535c0c4e9c6c335635c4026a8022 \
+                     file://ccan/licenses/CC0;md5=c17af43b05840255a6fedc5eda9d56cc \
+                     file://ccan/licenses/BSD-MIT;md5=838c366f69b72c5df05c96dff79b35f2"
+ DEPENDS = "json-c libnvme"
+-SRCREV = "dcdad6f5d70ffb2fa151f229db048180671eb1fe"
++SRCREV = "43b716b982da3df1cf8c4658f7c31b0fe28d377b"
+ 
+ SRC_URI = "git://github.com/linux-nvme/nvme-cli.git;branch=master;protocol=https"
+ 
+-- 
+2.39.2
+
 
