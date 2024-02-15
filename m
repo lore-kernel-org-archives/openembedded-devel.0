@@ -1,122 +1,194 @@
-Return-Path: <derek@asterius.io>
+Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 20947C48BEB
-	for <webhook@archiver.kernel.org>; Wed, 14 Feb 2024 23:05:33 +0000 (UTC)
-Received: from mail-io1-f47.google.com (mail-io1-f47.google.com [209.85.166.47])
- by mx.groups.io with SMTP id smtpd.web10.1710.1707951925341701240
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5B48DC48BC4
+	for <webhook@archiver.kernel.org>; Thu, 15 Feb 2024 03:30:54 +0000 (UTC)
+Received: from mail-yw1-f176.google.com (mail-yw1-f176.google.com [209.85.128.176])
+ by mx.groups.io with SMTP id smtpd.web11.6439.1707967848607709578
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 14 Feb 2024 15:05:25 -0800
+ Wed, 14 Feb 2024 19:30:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.166.47, mailfrom: straka.derek@gmail.com)
-Received: by mail-io1-f47.google.com with SMTP id ca18e2360f4ac-7c47f06863bso8912439f.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Feb 2024 15:05:25 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=TqbM7a1Q;
+ spf=pass (domain: gmail.com, ip: 209.85.128.176, mailfrom: ticotimo@gmail.com)
+Received: by mail-yw1-f176.google.com with SMTP id 00721157ae682-60778d7b02bso4804957b3.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 14 Feb 2024 19:30:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1707967848; x=1708572648; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=DOcWKFH6Q0sEM6DteWbffuaBzytxTfnwoxqrdzcfF/k=;
+        b=TqbM7a1QcmsWwxDRf2mWyubhVXqigctImeMBluuVwcEkFp/+Lx0l8eKixGYFhl137s
+         Uhw3bgETn/M1xGAKgG9lx8TKb/hP721Ycg7SmsigL4qjxKMTnWme56WpcR/vD9UT45fC
+         ItN/ud4Rx9a5t8Uz/MAaImN4Sr/X5aCxd/d9euQWlrpq1GHpN6Y0xKKx+h4fVsaMd6Xb
+         CskWhnzeWpKd443CO4qqUsg1x9StbDtBKYm3D8nlwRKf81BVxwXEJTehRQJjxB2DUiHr
+         laYhhZYqAf3wmKK26/8aKbIQruBYCsWgfQ88D1Pbfl7JqZJMZd5uWqLj/yQmMDZdWOMP
+         kmbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707951924; x=1708556724;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1707967848; x=1708572648;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=+sCyJq6noexWQDW5hpCTuBiD7GPXJlFsTLbaafmekbQ=;
-        b=AX+gkP0db52CPEdzO7pKPXFrM/y2zPH7rhRqNKiwfa+jBPiVFgRlx/pG8yobxs4nB5
-         DXuIZnPo7dEBLkcVAMMbyUzLLbzPpTE0yqB+0BDyceB2MIu9j6OGpFq6YkaVKZfojoVz
-         DvMGtAHR/yUc0eQ+jJkIy/keRzcnfT0Ygh50JEfJ02f4dDGZ5nj0Fw+GjLdWhupZ3rLl
-         KfPSBoA3VQou9/bFmJtMeHJYmdbfR27SKQzorBtkEPaXPT6ylW1fdrF0Uwx8Wh3e+6dC
-         X5nu+7y/3YfzpzhDowDs2sgZ61xf8jvj3oVTkIKkdOedD1WcIhQWoVYSAKWR+Ypah8nY
-         X/iA==
-X-Gm-Message-State: AOJu0Yyz54pN5g/XGWJ3TjqgcD8ECgI0LYhEemdN7qfNNYg2lXqvdMH8
-	hpmXPDP40ikn5wEV4ut1whue82SIn/kMp5rcnaKiY2Q3xy20nOz8IzFVbg+B1q8=
-X-Google-Smtp-Source: AGHT+IFWhjc//egogMAf4h/KRPbzlaqR7ngpwTjXDlsiD+d3ueXdFWJbgHcF9uIbQO8B2R/tnfHM8g==
-X-Received: by 2002:a05:6602:599:b0:7c4:74ae:c319 with SMTP id v25-20020a056602059900b007c474aec319mr188029iox.6.1707951923499;
-        Wed, 14 Feb 2024 15:05:23 -0800 (PST)
-Received: from sparta.internal.asterius.io (c-73-228-213-122.hsd1.mn.comcast.net. [73.228.213.122])
-        by smtp.gmail.com with ESMTPSA id g34-20020a028525000000b00473ce47e182sm41973jai.63.2024.02.14.15.05.22
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Feb 2024 15:05:22 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-python][PATCH] python3-pyyaml-include: add initial recipe for version 1.3.2
-Date: Wed, 14 Feb 2024 23:04:52 +0000
-Message-Id: <20240214230452.2252927-1-derek@asterius.io>
-X-Mailer: git-send-email 2.34.1
+        bh=DOcWKFH6Q0sEM6DteWbffuaBzytxTfnwoxqrdzcfF/k=;
+        b=ogOLI9BGCq4Brj1JMUMk819hsgshaudwZL6xl+VTmJB4Y7eOMYBlaWaShYjk4UYXAc
+         97n2nNH8yZqxv/XnB5Tuicc2bb2RzLOa+oU7zvHMrqJT4kQWK5nlH4T2ti+/npfKPO7q
+         /vfGK2Bpbax+y7wBxxFJ+GrIQx/2jYQI/SMTWm4JJ7Fn6uOS9sPLGiGYi5/GpdUOaQ0m
+         /VX5jSreul4GWo/ta80cU4XwCa8ajgnVn5cOZgZdkzCet5/imPcyHdZfOmzhF9jJqGuv
+         mgupuUiRO8VTGkTB6roQC34Si5iTo493juaJKbmbpZfVPkbUQFNMMgE/1zuwlIbix73W
+         bfAg==
+X-Gm-Message-State: AOJu0YxDBInkLECi/crSVWcCn/b8oO9pzGxAWssf4NzeBOLSx09XNQ/0
+	SCwqZ0RrFpj9IWoFqlpzPV4Tk4mBzOsY6Es3FfNHPrgJK5MBwqReD4nALqjnAjSrMv7eDpw+ADZ
+	u5IDvH5mfL2wnmWBvknv3nvfRfjk=
+X-Google-Smtp-Source: AGHT+IEWcaYzzM0bufhgQAqD2aMOHPZARX1o6s36mEfsnrejWeJQyLKg/PK7moJT5pv9Oa5uQFUJej+P/FeebktkV3k=
+X-Received: by 2002:a05:690c:82e:b0:607:9796:db4f with SMTP id
+ by14-20020a05690c082e00b006079796db4fmr556829ywb.5.1707967847679; Wed, 14 Feb
+ 2024 19:30:47 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240214082449.3498259-1-niko.mauno@vaisala.com> <20240214082449.3498259-2-niko.mauno@vaisala.com>
+In-Reply-To: <20240214082449.3498259-2-niko.mauno@vaisala.com>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Wed, 14 Feb 2024 19:30:36 -0800
+Message-ID: <CANx9H-DYRrFpa_sfzqbthTrq6B6vzuOBiz8DA9vXiU557gH6_A@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH 2/4] python3-pybind11: Prune redundant inherit
+To: niko.mauno@vaisala.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000d9493b0611634056"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 14 Feb 2024 23:05:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108747
+ <openembedded-devel@lists.openembedded.org>; Thu, 15 Feb 2024 03:30:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108748
 
-Add a recipe for the pyyaml-include package that extends PyYAML to include
-YAML files within YAML files.  Add a ptest to run the unit tests and include
-the tests as part of the package lists in meta-python
+--000000000000d9493b0611634056
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- .../ptest-packagelists-meta-python.inc        |  1 +
- .../python/python3-pyyaml-include/run-ptest   |  3 ++
- .../python/python3-pyyaml-include_1.3.2.bb    | 28 +++++++++++++++++++
- 3 files changed, 32 insertions(+)
- create mode 100755 meta-python/recipes-devtools/python/python3-pyyaml-include/run-ptest
- create mode 100644 meta-python/recipes-devtools/python/python3-pyyaml-include_1.3.2.bb
+On Wed, Feb 14, 2024 at 12:25=E2=80=AFAM Niko Mauno via lists.openembedded.=
+org
+<niko.mauno=3Dvaisala.com@lists.openembedded.org> wrote:
 
-diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-index 44507b394..44704208e 100644
---- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
-+++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-@@ -38,6 +38,7 @@ PTESTS_FAST_META_PYTHON = "\
-     python3-pyserial \
-     python3-pytest-mock \
-     python3-pytoml \
-+    python3-pyyaml-include \
-     python3-rapidjson \
-     python3-requests-file \
-     python3-requests-toolbelt \
-diff --git a/meta-python/recipes-devtools/python/python3-pyyaml-include/run-ptest b/meta-python/recipes-devtools/python/python3-pyyaml-include/run-ptest
-new file mode 100755
-index 000000000..3385d6893
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pyyaml-include/run-ptest
-@@ -0,0 +1,3 @@
-+#!/bin/sh
-+
-+pytest -o log_cli=true -o log_cli_level=INFO | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
-diff --git a/meta-python/recipes-devtools/python/python3-pyyaml-include_1.3.2.bb b/meta-python/recipes-devtools/python/python3-pyyaml-include_1.3.2.bb
-new file mode 100644
-index 000000000..9bfaa2194
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pyyaml-include_1.3.2.bb
-@@ -0,0 +1,28 @@
-+SUMMARY = "Extending PyYAML with a custom constructor for including YAML files within YAML files"
-+HOMEPAGE = "https://github.com/tanbro/pyyaml-include"
-+LICENSE = "GPL-3.0-only"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=d32239bcb673463ab874e80d47fae504"
-+DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
-+SRCREV = "36b6975aa8fc7a6cbf37de40aa2ed6d996b2f7be"
-+
-+SRC_URI = " \
-+            git://github.com/tanbro/pyyaml-include;protocol=https;branch=main \
-+            file://run-ptest \
-+          "
-+
-+S = "${WORKDIR}/git"
-+
-+inherit python_setuptools_build_meta ptest
-+
-+do_install_ptest() {
-+    install -d ${D}${PTEST_PATH}/tests
-+    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-+}
-+
-+RDEPENDS:${PN} += " \
-+    ${PYTHON_PN}-pyyaml \
-+"
-+RDEPENDS:${PN}-ptest += " \
-+    ${PYTHON_PN}-pytest \
-+"
-+
--- 
-2.34.1
+> From: Niko Mauno <niko.mauno@vaisala.com>
+>
+> Inheriting setuptools3 implies the inherit of python3native, so drop
+> the latter inherit as redundant.
+>
+according to
+https://github.com/pybind/pybind11/blob/8b48ff878c168b51fe5ef7b8c728815b9e1=
+a9857/pyproject.toml#L3
+we should drop setuptools3 and inherit pyyhin_setuptools_build_meta
 
+>
+> Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
+> ---
+>  meta-python/recipes-devtools/python/python3-pybind11_2.11.1.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-python/recipes-devtools/python/
+> python3-pybind11_2.11.1.bb b/meta-python/recipes-devtools/python/
+> python3-pybind11_2.11.1.bb
+> index e919e7dcc..442837199 100644
+> --- a/meta-python/recipes-devtools/python/python3-pybind11_2.11.1.bb
+> +++ b/meta-python/recipes-devtools/python/python3-pybind11_2.11.1.bb
+> @@ -13,7 +13,7 @@ S =3D "${WORKDIR}/git"
+>
+>  EXTRA_OECMAKE =3D  "-DPYBIND11_TEST=3DOFF"
+>
+> -inherit cmake setuptools3 python3native
+> +inherit cmake setuptools3
+>
+>  PIP_INSTALL_DIST_PATH =3D "${S}/dist"
+>  PIP_INSTALL_PACKAGE =3D "pybind11"
+> --
+> 2.39.2
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#108735):
+> https://lists.openembedded.org/g/openembedded-devel/message/108735
+> Mute This Topic: https://lists.openembedded.org/mt/104349532/924729
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> ticotimo@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--000000000000d9493b0611634056
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Wed, Feb 14, 2024 at 12:25=E2=80=AFAM Niko Mauno via <a =
+href=3D"http://lists.openembedded.org">lists.openembedded.org</a> &lt;niko.=
+mauno=3D<a href=3D"mailto:vaisala.com@lists.openembedded.org">vaisala.com@l=
+ists.openembedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_qu=
+ote" style=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-st=
+yle:solid;padding-left:1ex;border-left-color:rgb(204,204,204)">From: Niko M=
+auno &lt;<a href=3D"mailto:niko.mauno@vaisala.com" target=3D"_blank">niko.m=
+auno@vaisala.com</a>&gt;<br>
+<br>
+Inheriting setuptools3 implies the inherit of python3native, so drop<br>
+the latter inherit as redundant.<br>
+</blockquote><div dir=3D"auto">according to=C2=A0<div><a href=3D"https://gi=
+thub.com/pybind/pybind11/blob/8b48ff878c168b51fe5ef7b8c728815b9e1a9857/pypr=
+oject.toml#L3">https://github.com/pybind/pybind11/blob/8b48ff878c168b51fe5e=
+f7b8c728815b9e1a9857/pyproject.toml#L3</a></div><div dir=3D"auto">we should=
+ drop setuptools3 and inherit pyyhin_setuptools_build_meta</div></div><bloc=
+kquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left-=
+width:1px;border-left-style:solid;padding-left:1ex;border-left-color:rgb(20=
+4,204,204)"><br>
+Signed-off-by: Niko Mauno &lt;<a href=3D"mailto:niko.mauno@vaisala.com" tar=
+get=3D"_blank">niko.mauno@vaisala.com</a>&gt;<br>
+---<br>
+=C2=A0meta-python/recipes-devtools/python/<a href=3D"http://python3-pybind1=
+1_2.11.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-pybind11_2.11.1.b=
+b</a> | 2 +-<br>
+=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
+<br>
+diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
+pybind11_2.11.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-pybind11_2=
+.11.1.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://python=
+3-pybind11_2.11.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-pybind11=
+_2.11.1.bb</a><br>
+index e919e7dcc..442837199 100644<br>
+--- a/meta-python/recipes-devtools/python/<a href=3D"http://python3-pybind1=
+1_2.11.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-pybind11_2.11.1.b=
+b</a><br>
++++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-pybind1=
+1_2.11.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-pybind11_2.11.1.b=
+b</a><br>
+@@ -13,7 +13,7 @@ S =3D &quot;${WORKDIR}/git&quot;<br>
+<br>
+=C2=A0EXTRA_OECMAKE =3D=C2=A0 &quot;-DPYBIND11_TEST=3DOFF&quot;<br>
+<br>
+-inherit cmake setuptools3 python3native<br>
++inherit cmake setuptools3<br>
+<br>
+=C2=A0PIP_INSTALL_DIST_PATH =3D &quot;${S}/dist&quot;<br>
+=C2=A0PIP_INSTALL_PACKAGE =3D &quot;pybind11&quot;<br>
+-- <br>
+2.39.2<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#108735): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/108735" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/108735</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/104349532/924=
+729" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
+/104349532/924729</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
+et=3D"_blank">ticotimo@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
+
+--000000000000d9493b0611634056--
 
