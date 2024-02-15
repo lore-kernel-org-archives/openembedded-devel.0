@@ -2,152 +2,107 @@ Return-Path: <max.oss.09@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 79CEBC4829E
-	for <webhook@archiver.kernel.org>; Thu, 15 Feb 2024 14:09:17 +0000 (UTC)
-Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com [209.85.218.52])
- by mx.groups.io with SMTP id smtpd.web10.14466.1708006150890932075
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7AB2EC4829E
+	for <webhook@archiver.kernel.org>; Thu, 15 Feb 2024 14:16:57 +0000 (UTC)
+Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
+ by mx.groups.io with SMTP id smtpd.web10.14663.1708006607025527073
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 15 Feb 2024 06:09:11 -0800
+ Thu, 15 Feb 2024 06:16:47 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Xy0KrCn1;
- spf=pass (domain: gmail.com, ip: 209.85.218.52, mailfrom: max.oss.09@gmail.com)
-Received: by mail-ej1-f52.google.com with SMTP id a640c23a62f3a-a3d54555692so92346566b.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 15 Feb 2024 06:09:10 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ApbcDY2W;
+ spf=pass (domain: gmail.com, ip: 209.85.218.47, mailfrom: max.oss.09@gmail.com)
+Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-a3832ef7726so117127366b.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 15 Feb 2024 06:16:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1708006148; x=1708610948; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=VuaxwWii2I+r0i22tWD+r+T8ERyLYVqu7BSvZZl8AQg=;
-        b=Xy0KrCn1ggAugOJEL+ezV65IbPHvFipKx6Z8wVw0F7vK1s8/2KZ4Rj0pedcQzhdKCo
-         T+gMXb27Q9iFn7DbzjgJOuEntzwLmZxxY2EfUst6I+Et8ouswt4N7gIPDY7rT5y6sYdC
-         nRKrU3ZWHZF1on5gXJuqs5zl4/6CsrIOMt7hI1npJVjHPf3vMxs2fn03DrQcqNEbqoFs
-         zGAYbbCDMwHpjNPoq952DctJKCQj6Eb22WGnxRT2SdpP8yorROI1QtYlP6m13jX/LhMf
-         3xhe8sHSHZSsdrASTcA+qwPBrfmnhcqBOMD+K5W9GcJ+nJOu7sLm+y7xvQIUqdeG1bvc
-         yBWg==
+        d=gmail.com; s=20230601; t=1708006605; x=1708611405; darn=lists.openembedded.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=IuUzv9xpChBMF/DQzqxAIZRFLLqT5Kd/rQCTZyII94U=;
+        b=ApbcDY2WLmKmKirXAUB1BL3cFD5MojKt8ezKrH+W0rixgUGZCGd+HElWl6fGEUtV9e
+         KxiX0q/lv71IB1dEg7uxlCXluGUA4ldH2qlBs5WHlxyrSPeBItDXaiD1Lhtr7dXQUoHp
+         IA0nakczUkbjArCEfbP7QtCHGgv7fn1e2QmniR7R5vKZFBq8qN+YQ4Tv3HOgEwliY3IM
+         TlkQGt8mXCeh/DXLX3cy+7d7zZiSsn8e8X2BfBebcJro86V0AKqaFo9BshDVkkL6BV8w
+         VjhLYFfxKpPxh7Jy/D2TF4UC/2v/BE8pbx8hBmwojTYqbmRzkHK9QPHPSbad9yg68dhp
+         PD3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1708006148; x=1708610948;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=VuaxwWii2I+r0i22tWD+r+T8ERyLYVqu7BSvZZl8AQg=;
-        b=WSwBueu2Pze//rCW5D49KcjMp2DC9Mso1d5ldnfZkSqtoQJuV8CIpAAD3E4i+bdX1I
-         S+cHEfQhMa5JhaPzmp6nwRtF/xoPYYCPacT98qaqcl3R7YRsiyF/EVvvlK27TDevlRJ/
-         rysFNC6FJcNR3uH262TdIXL7Y6RMRmoiR/sqTlch5G6fySKaeajPth9ihbsiZzxU3Yu1
-         Tv0VoqKai5hXlii0umZ6DoSA+mjxM+IZSj0g+LNB+aiPaKSGavyHiZOGvfXYsU0sgAQZ
-         p44hRFGsSeXC6m+KA0nUzGSP2CfaZC77UN2QrOC/9B+Im5yDHwuXgrSNQEERWaeEa10k
-         tq9Q==
-X-Gm-Message-State: AOJu0YzXVSWxSHjyDGhuEwwgHJlXZO20l8pEqBm0TDMfiHNxJpAsiRFd
-	XApRm9iU8FX1Xs5/nKeQdesEFwoLnMmAVV7ECB8ImeIW3OFyjkDzFwpXhPvo
-X-Google-Smtp-Source: AGHT+IGVdAFraagwH4GxQ6mfGwewp+B+X4XJgSWCKhqpPPJRis9WYbVfWhuwHoGSdLlXyLxR2O4I3A==
-X-Received: by 2002:a17:906:3b0b:b0:a3d:8366:e1eb with SMTP id g11-20020a1709063b0b00b00a3d8366e1ebmr1532472ejf.31.1708006148358;
-        Thu, 15 Feb 2024 06:09:08 -0800 (PST)
-Received: from toolbox.int.toradex.com (31-10-206-125.static.upc.ch. [31.10.206.125])
-        by smtp.gmail.com with ESMTPSA id p19-20020a170906b21300b00a3dad483948sm238238ejz.182.2024.02.15.06.09.07
+        d=1e100.net; s=20230601; t=1708006605; x=1708611405;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=IuUzv9xpChBMF/DQzqxAIZRFLLqT5Kd/rQCTZyII94U=;
+        b=cfYqOyssF+bEl4gz39j/1L42203aKFENu1Ull7EYp2vrEDDTyE0gn8uDHE/o/Su5gC
+         JZTt8y1Mm+y/CW9Oy2qV9y2Y779XKcyt9ACtqeBsCgPeHqEu42smUIPfvpfOCetOpqI9
+         FTQZ9HCTRpg5S+rvrr+yMe66QD/BkP6uvhViCDjxt3+NH71ZiWEWMZG7rSnCDyh1kReV
+         rwLnhmOxzVx4F3LizzMDkCh7COu+d6zX/qN0ekQv+CV7cFTfCmzoYKNlSSEtN/j+plJU
+         0CRnw4uvRGKpmHfLwSM8ml8A26gTDqd20R3bGGfwFIl84+29i+XlAT1nE00mntWd8zN4
+         wKKw==
+X-Gm-Message-State: AOJu0YzYO1UbzBhfRHN2SFak5G9u/qu+p1gFuXEEHq52QbScckC/oVrJ
+	2E5zc6tDUW+t3k+hbHt7s8ifRMF1CR3FWxiH5t7D6g5U3Na6iYcYvaMb/YxT
+X-Google-Smtp-Source: AGHT+IHHI89wuRfCjVYqdDaprrwYgR02kUk02knRzLK8uhBgMKti+Q+By10w/PTHfovUJqOtz8UIQQ==
+X-Received: by 2002:a17:906:5fc5:b0:a38:7171:e832 with SMTP id k5-20020a1709065fc500b00a387171e832mr1189758ejv.32.1708006605253;
+        Thu, 15 Feb 2024 06:16:45 -0800 (PST)
+Received: from toolbox (31-10-206-125.static.upc.ch. [31.10.206.125])
+        by smtp.gmail.com with ESMTPSA id cu11-20020a170906ba8b00b00a3d9b0e41e6sm486587ejd.205.2024.02.15.06.16.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 15 Feb 2024 06:09:08 -0800 (PST)
-From: max.oss.09@gmail.com
+        Thu, 15 Feb 2024 06:16:44 -0800 (PST)
+Date: Thu, 15 Feb 2024 15:16:43 +0100
+From: Max Krummenacher <max.oss.09@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Max Krummenacher <max.krummenacher@toradex.com>
-Subject: [meta-oe][PATCH 1/2] libusbgx: fix usbgx.service stop / restart
-Date: Thu, 15 Feb 2024 15:07:13 +0100
-Message-ID: <20240215140714.2106808-1-max.oss.09@gmail.com>
-X-Mailer: git-send-email 2.42.0
+Subject: Re: [meta-oe][PATCH 2/2] libusbgx: uprev to the latest commit
+Message-ID: <Zc4cyxt-05mSp25z@toolbox>
+References: <20240215140714.2106808-1-max.oss.09@gmail.com>
+ <20240215140714.2106808-2-max.oss.09@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240215140714.2106808-2-max.oss.09@gmail.com>
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 15 Feb 2024 14:09:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108751
+ <openembedded-devel@lists.openembedded.org>; Thu, 15 Feb 2024 14:16:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108753
 
-From: Max Krummenacher <max.krummenacher@toradex.com>
+On Thu, Feb 15, 2024 at 03:07:14PM +0100, max.oss.09@gmail.com wrote:
+> From: Max Krummenacher <max.krummenacher@toradex.com>
+> 
+> Uprev libusbgx to ec0b01c to get following fixes:
+> ```
+> ec0b01c Merge pull request #83 from mgrzeschik/uac2-controls
+> cbf1750 uac2: add additional configuration controls
+> 81d7c05 load libcomposite kernel module
+> caad244 Fix: Memory leak config label
+> 51abbfd Automake: fix distclean of tests
+> 3cc5af7 Added printer function header to installed headers
+> adc45af Added missing extern C closing brace
+> ```
+> 
+> Refresh 0001-fix-stack-buffer-overflow-in-usbg_f_foo_attr_val-pro.patch.
 
-On start the usbgx service configures the usb gadget. However if
-one stops the service nothing is done, a subsequent start then
-tries to configure the gadget again and fails. `systemctl restart`
-is implemented by doing a stop followed by a start and thus is
-also affected.
-
-Doing a start/stop/start results with the following reported in
-status:
-
-| systemd[1]: Starting Load USB gadget schemas...
-| gadget-start[801]: usbg_create_gadget()  duplicate gadget name
-| gadget-start[801]:
-| gadget-start[801]: Error on import gadget
-| gadget-start[801]: Error: USBG_ERROR_EXIST : Already exist
-| gadget-start[812]: ls: write error: Device or resource busy
-
-The run-postinsts service does execute a restart for each package
-which uses the systemd class which creates a race condition that the
-usbgx service is already started when run-postinsts restarts usbgx
-and creates the above error output.
-
-Fix that by unconfiguring the usb gadget on stop.
-
-Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
----
- .../recipes-support/libusbgx/libusbgx/gadget-stop   | 13 +++++++++++++
- .../recipes-support/libusbgx/libusbgx/usbgx.service |  2 ++
- meta-oe/recipes-support/libusbgx/libusbgx_git.bb    |  3 +++
- 3 files changed, 18 insertions(+)
- create mode 100755 meta-oe/recipes-support/libusbgx/libusbgx/gadget-stop
-
-diff --git a/meta-oe/recipes-support/libusbgx/libusbgx/gadget-stop b/meta-oe/recipes-support/libusbgx/libusbgx/gadget-stop
-new file mode 100755
-index 000000000..24b7caed5
---- /dev/null
-+++ b/meta-oe/recipes-support/libusbgx/libusbgx/gadget-stop
-@@ -0,0 +1,13 @@
-+#!/bin/sh
-+
-+[ -r /etc/default/usbgx ] && . /etc/default/usbgx
-+
-+for i in $IMPORT_SCHEMAS; do
-+    if [ -e /sys/kernel/config/usb_gadget/"$i"/idVendor ]; then
-+        if [ -e /sys/kernel/config/usb_gadget/"$i"/idProduct ]; then
-+            idVendor=$(cat /sys/kernel/config/usb_gadget/"$i"/idVendor)
-+            idProduct=$(cat /sys/kernel/config/usb_gadget/"$i"/idProduct)
-+            /usr/bin/gadget-vid-pid-remove ${idVendor}:${idProduct}
-+        fi
-+    fi
-+done
-diff --git a/meta-oe/recipes-support/libusbgx/libusbgx/usbgx.service b/meta-oe/recipes-support/libusbgx/libusbgx/usbgx.service
-index d7d394cfe..7210969d6 100644
---- a/meta-oe/recipes-support/libusbgx/libusbgx/usbgx.service
-+++ b/meta-oe/recipes-support/libusbgx/libusbgx/usbgx.service
-@@ -5,7 +5,9 @@ After=sys-kernel-config.mount
- 
- [Service]
- Type=oneshot
-+RemainAfterExit=yes
- ExecStart=/usr/bin/gadget-start
-+ExecStop=/usr/bin/gadget-stop
- 
- [Install]
- WantedBy=usb-gadget.target
-diff --git a/meta-oe/recipes-support/libusbgx/libusbgx_git.bb b/meta-oe/recipes-support/libusbgx/libusbgx_git.bb
-index f8ebcc776..484110561 100644
---- a/meta-oe/recipes-support/libusbgx/libusbgx_git.bb
-+++ b/meta-oe/recipes-support/libusbgx/libusbgx_git.bb
-@@ -13,6 +13,7 @@ SRC_URI = " \
-     file://0001-libusbgx-Add-interface-name-for-NCM-Feature-Descript.patch \
-     file://0001-fix-stack-buffer-overflow-in-usbg_f_foo_attr_val-pro.patch \
-     file://gadget-start \
-+    file://gadget-stop \
-     file://usbgx.initd \
-     file://usbgx.service \
- "
-@@ -39,6 +40,8 @@ INHIBIT_UPDATERCD_BBCLASS = "${@bb.utils.contains('PACKAGECONFIG', 'examples', '
- do_install:append() {
-     install -Dm 0755 ${WORKDIR}/gadget-start ${D}${bindir}/gadget-start
-     sed -i -e 's,/usr/bin,${bindir},g' -e 's,/etc,${sysconfdir},g' ${D}${bindir}/gadget-start
-+    install -m 0755 ${WORKDIR}/gadget-start ${D}${bindir}/gadget-stop
-+    sed -i -e 's,/usr/bin,${bindir},g' -e 's,/etc,${sysconfdir},g' ${D}${bindir}/gadget-stop
- 
-     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-         install -Dm 0644 ${WORKDIR}/usbgx.service ${D}${systemd_system_unitdir}/usbgx.service
--- 
-2.42.0
-
+I missed to add the changed patch file to the commit, v2 to follow shortly.
+Sorry about that.
+Max
+> 
+> Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
+> ---
+>  meta-oe/recipes-support/libusbgx/libusbgx_git.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/meta-oe/recipes-support/libusbgx/libusbgx_git.bb b/meta-oe/recipes-support/libusbgx/libusbgx_git.bb
+> index 484110561..a20ff4eea 100644
+> --- a/meta-oe/recipes-support/libusbgx/libusbgx_git.bb
+> +++ b/meta-oe/recipes-support/libusbgx/libusbgx_git.bb
+> @@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+>  inherit autotools pkgconfig systemd update-rc.d update-alternatives
+>  
+>  PV = "0.2.0+git"
+> -SRCREV = "721e3a1cbd7e2b6361bb439d3959e7403e4f0092"
+> +SRCREV = "ec0b01c03fdc7893997b7b32ec1c12c6103f62f3"
+>  SRCBRANCH = "master"
+>  SRC_URI = " \
+>      git://github.com/libusbgx/libusbgx.git;branch=${SRCBRANCH};protocol=https \
+> -- 
+> 2.42.0
+> 
+> 
 
