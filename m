@@ -1,94 +1,93 @@
-Return-Path: <fathi.boudra@linaro.org>
+Return-Path: <derek@asterius.io>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D8D60C48260
-	for <webhook@archiver.kernel.org>; Fri, 16 Feb 2024 13:43:50 +0000 (UTC)
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
- by mx.groups.io with SMTP id smtpd.web10.18975.1708091025582217402
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 578B9C48260
+	for <webhook@archiver.kernel.org>; Fri, 16 Feb 2024 15:23:31 +0000 (UTC)
+Received: from mail-oo1-f51.google.com (mail-oo1-f51.google.com [209.85.161.51])
+ by mx.groups.io with SMTP id smtpd.web10.21345.1708097004839682907
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 16 Feb 2024 05:43:45 -0800
+ Fri, 16 Feb 2024 07:23:24 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=OLMgmpB7;
- spf=pass (domain: linaro.org, ip: 209.85.128.53, mailfrom: fathi.boudra@linaro.org)
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-4124c3a7a75so3703545e9.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 16 Feb 2024 05:43:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1708091023; x=1708695823; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=rHWWqtIPmfiBBSL4XAXeW4xKpetTLKwHBoyZL4A534E=;
-        b=OLMgmpB7S6OsmAVBikqyqRIMghp7DnwNIhHOxnnqqpyKc4ACvfjqydnakWKJiZpE+t
-         qZAUxWETH4oq89bJXUvDk9BNwS+TV9XOjSRcbICjw2SeSHXKZAOKEMnQ+4ao5Aj5XmJ/
-         JOXxJrcyumdLNc4g0BZZGyLpLXL7dkfZgFZyAADZIJ0rkpTwYc6VTYYxS+3sGPnLtzGC
-         +4nLwMM4lMuKLDQxDqC9+KaR4MaKU+AhF/WmoEyNrz4ne8SgRMnFXp7oZzlEle5f/3BN
-         TVX/GhKoEuR3+IkOutiB1UzF38Qd5bSAa2KwCnhZyemPpvju/4yNKxgSdMcf8MvbM6gO
-         dRFA==
+ dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.161.51, mailfrom: straka.derek@gmail.com)
+Received: by mail-oo1-f51.google.com with SMTP id 006d021491bc7-59d489e8d68so309510eaf.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 16 Feb 2024 07:23:24 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1708091023; x=1708695823;
+        d=1e100.net; s=20230601; t=1708097003; x=1708701803;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=rHWWqtIPmfiBBSL4XAXeW4xKpetTLKwHBoyZL4A534E=;
-        b=Qu6mwMoUY4trRo1bxKz41vARAnYhgv3CaguDsNusQE/oH0M+4ERdHj4elCUT912T+Q
-         DGufyRf58TguMmUjQtOI0peloNmrM91eQoJiymqX8U8YHmtLccwbaoVPh+VnoZlWwT0L
-         /cgxHZe6Y9JpzYZWGO2LM9Fjmf98962jisKvoMyWNM5tiRQEYsMV4SqMtl/KHJnuF3sT
-         0nja5iKi9rjxItsPl5rlaTEOU0dKtoTG2Wfsl2sagan0YN7KUwIBtOB1IGZCP8+MROxY
-         860wmpBj8TPT2HcHErhYa6A2zYBdiByaJFuC1J+htBSIvV8UFKuCCtCOpy0ejbDPlA4+
-         tFmA==
-X-Gm-Message-State: AOJu0YwMjFIFj7Aj9RqaEZdPkg3zk6eEG9GYiid7re4g3TFjzzrpvQQN
-	owKSD+2YpRdzwd3aG0RzBjGhcKIyoqMhkKWDvP9Ft7PcSCcr9eVZiDlZCv17TyDLsK0eJ6qgML2
-	eeV0=
-X-Google-Smtp-Source: AGHT+IHeoPOEDP+ja75KDCNH/6HU3b39ymEBbYIurkvEIIiAmAYMRGW+HPMwN5uvXQFxtAnPy8Z4mQ==
-X-Received: by 2002:a5d:6711:0:b0:33b:8050:291f with SMTP id o17-20020a5d6711000000b0033b8050291fmr3873635wru.32.1708091023302;
-        Fri, 16 Feb 2024 05:43:43 -0800 (PST)
-Received: from corsair.. (88-169-167-85.subs.proxad.net. [88.169.167.85])
-        by smtp.gmail.com with ESMTPSA id az9-20020adfe189000000b0033b7a2136a4sm2303381wrb.97.2024.02.16.05.43.42
+        bh=WysB4CPIx2pjdcYAN5DRcxp69Zrzud9milxFg6fjO9k=;
+        b=J/CuN04Gf5rEb/fw+shwUtDbjbDAn4Tsb5VwQxLMUsAdiK6ytKRWWaOMO0wge8qur8
+         6uN4SB6RxTAKpop2RHeQRaYWVQ2q+OdvOtvi/P5InfqZ/urGpLLfJyYCAx8hGXNsjoet
+         /gO3S8s6skr0M6ZOol1F3xqR+0d0661ai8YiDOp/zvl8s6MzAs3XYQaEZvcuaihlqSNX
+         05K3okRc4rjJyiAOzEJ11BDfL4BkMVYhKMFNBndY2UcWVP8qfANm7hTrlBvdJgUKYJFd
+         pfBG9luW7+qhQNYDi8vE/6TjQ7AhEWtb7E+84E/c+Kq5XEHdDgyWH6Idk9J3BM5BYhFY
+         gvSA==
+X-Gm-Message-State: AOJu0Yy9Re5GaCacn5I9lwHa9LWKLmvBDRE1PdJb/AzvtdAZuKr2HRUR
+	Q4DXStbpsxGRLuHMLqIaQeeRwyWJAA0d/tnA3Js134dL40+QIpL2nwQsAq6fopU=
+X-Google-Smtp-Source: AGHT+IEeyjxi6qriH0uBjn05YB3R2f+pFoxXkYH9kBeHKOvMKhQewZ+aJYJ/s0nbzAwZYNwdH/zt5Q==
+X-Received: by 2002:a4a:bb07:0:b0:59f:91de:26ce with SMTP id f7-20020a4abb07000000b0059f91de26cemr3360896oop.8.1708097003440;
+        Fri, 16 Feb 2024 07:23:23 -0800 (PST)
+Received: from sparta.internal.asterius.io (c-73-228-213-122.hsd1.mn.comcast.net. [73.228.213.122])
+        by smtp.gmail.com with ESMTPSA id k1-20020a4a9101000000b0059a14309a29sm13648oog.16.2024.02.16.07.23.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 16 Feb 2024 05:43:42 -0800 (PST)
-From: Fathi Boudra <fathi.boudra@linaro.org>
+        Fri, 16 Feb 2024 07:23:22 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Cc: Fathi Boudra <fathi.boudra@linaro.org>
-Subject: [meta-python][kirkstone][PATCH] python3-django: upgrade from 4.2.7 to 4.2.10
-Date: Fri, 16 Feb 2024 14:43:40 +0100
-Message-ID: <20240216134340.2756376-1-fathi.boudra@linaro.org>
-X-Mailer: git-send-email 2.43.0
+Cc: Derek Straka <derek@asterius.io>
+Subject: [meta-python][PATCH 1/3] python3-appdirs: add ptest into PTESTS_FAST_META_PYTHON items
+Date: Fri, 16 Feb 2024 15:22:58 +0000
+Message-Id: <20240216152300.2587130-1-derek@asterius.io>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 16 Feb 2024 13:43:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108766
+ <openembedded-devel@lists.openembedded.org>; Fri, 16 Feb 2024 15:23:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108767
 
-Upgrade to the latest 4.x LTS release.
+Verified successful test run using bitbake meta-python-image-ptest-python3-appdirs on qemu86-64
 
-Bugs fixes only. Fix CVE:
-CVE-2024-24680: Potential denial-of-service in intcomma template filter
+root@qemux86-64:/usr/lib/python3-appdirs/ptest# ./run-ptest
+============================= test session starts ==============================
+platform linux -- Python 3.12.1, pytest-7.4.4, pluggy-1.3.0
+rootdir: /usr/lib/python3-appdirs/ptest
+collected 3 items
 
-Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
+PASS: test/test_api.py::Test_AppDir::test_dirs
+PASS: test/test_api.py::Test_AppDir::test_helpers
+PASS: test/test_api.py::Test_AppDir::test_metadata
+
+============================== 3 passed in 0.19s ===============================
+
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../{python3-django_4.2.7.bb => python3-django_4.2.10.bb}       | 2 +-
+ meta-python/conf/include/ptest-packagelists-meta-python.inc | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-django_4.2.7.bb => python3-django_4.2.10.bb} (77%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-django_4.2.7.bb b/meta-python/recipes-devtools/python/python3-django_4.2.10.bb
-similarity index 77%
-rename from meta-python/recipes-devtools/python/python3-django_4.2.7.bb
-rename to meta-python/recipes-devtools/python/python3-django_4.2.10.bb
-index 580592d702..a9f25ac2b3 100644
---- a/meta-python/recipes-devtools/python/python3-django_4.2.7.bb
-+++ b/meta-python/recipes-devtools/python/python3-django_4.2.10.bb
-@@ -1,7 +1,7 @@
- require python-django.inc
- inherit setuptools3
+diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+index 44704208e..a96009ab9 100644
+--- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
++++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+@@ -7,6 +7,7 @@
+ #
+ # ptests which take less than ~30s each
+ PTESTS_FAST_META_PYTHON = "\
++    python3-appdirs \
+     python3-ansicolors \
+     python3-asgiref \
+     python3-aspectlib \
+@@ -62,7 +63,6 @@ PTESTS_SLOW_META_PYTHON = "\
+ "
  
--SRC_URI[sha256sum] = "8e0f1c2c2786b5c0e39fe1afce24c926040fad47c8ea8ad30aaf1188df29fc41"
-+SRC_URI[sha256sum] = "b1260ed381b10a11753c73444408e19869f3241fc45c985cd55a30177c789d13"
- 
- RDEPENDS:${PN} += "\
-     ${PYTHON_PN}-sqlparse \
+ PTESTS_PROBLEMS_META_PYTHON ="\
+-    python3-appdirs \
+     python3-betamax \
+     python3-dnspython \
+     python3-fastjsonschema \
 -- 
-2.43.0
+2.34.1
 
 
