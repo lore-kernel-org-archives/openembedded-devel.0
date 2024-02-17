@@ -1,94 +1,82 @@
-Return-Path: <fathi.boudra@linaro.org>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A4138C48BC4
-	for <webhook@archiver.kernel.org>; Sat, 17 Feb 2024 16:34:30 +0000 (UTC)
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
- by mx.groups.io with SMTP id smtpd.web11.495.1708187662728330737
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EE6C0C48BF8
+	for <webhook@archiver.kernel.org>; Sat, 17 Feb 2024 23:54:48 +0000 (UTC)
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+ by mx.groups.io with SMTP id smtpd.web11.9191.1708214086367608034
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 17 Feb 2024 08:34:23 -0800
+ Sat, 17 Feb 2024 15:54:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=mz8Eypzc;
- spf=pass (domain: linaro.org, ip: 209.85.128.46, mailfrom: fathi.boudra@linaro.org)
-Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-4125f9f2facso1220525e9.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Feb 2024 08:34:22 -0800 (PST)
+ dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=C5tduEbB;
+ spf=pass (domain: smile.fr, ip: 209.85.128.43, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-412605d6723so2487785e9.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Feb 2024 15:54:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1708187661; x=1708792461; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=dmOM67PqHNfiZ1xFtEzD7RMrg+nV6V3+ww1ZXo4uTHw=;
-        b=mz8Eypzcman6MvlPx5VHTwKC9mLSMS/ULHmeLnUgO8BNvHADE1wYX773ooS5jz9cDA
-         uQU3RkS32Il9KQDAe80FdEG3tnxe8N0lq+qjhSy/D4Saskp1VW+5w0SIyvx3acITwCH7
-         Vh0uG2N76ypvPVHJmC4ToHZgOJXgD//tCwetP4jxpabzHRD6j1GfbUJ3alql7O6j7VBJ
-         AsMKWYBG8HOYbsqWs8lgu1xy5NSxiiBgIwmJ2ilSp+czo3RyXf0X9+kez0EBFT/BYTq+
-         arhYo7JgyDMlLTfLcAciV62U1vE7TcD5dCkefxFCHUJwfS6ISQW5gECgqxyWFlINFiy0
-         Go8g==
+        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1708214084; x=1708818884; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=RvDbEWoSBbjz9HiG8iL4KoIMHyOfFSUM4VHmG5xLIWc=;
+        b=C5tduEbBBpytIrtreJHLMUaenuMTzQ0JAuvtzrfEo+aOQRhvMIWfLrlPpSG6vthPNW
+         X72SjkOE0kRlhbCZWtM9NpKAvaO9oChsOqdMeIr13YQ8xsrr+oAMEtv9QoHDBBaW99y+
+         cDv15Q3XgBUTmVLwzSZpy8F8Z1XdH2CEYJGTP5SyKXq2FvtX7rprQDm0jx3aXilyyDKe
+         YY7As0gQNrOVmPGuLBBpGSVHruokoGz1kmaQOSdHw4SnGbXeaH9gyI8GQFF3Ft3j0d9R
+         DYtJiadPShggsXemfDFaS15/K3mUb19FKSqRv+XZRXRlKxYwwOKOnS7TLxDP1nZiIWoL
+         yuQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1708187661; x=1708792461;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=dmOM67PqHNfiZ1xFtEzD7RMrg+nV6V3+ww1ZXo4uTHw=;
-        b=h7tihPicnOOnfcHQ9Wbw78Wv6ppar2I3H2YaFdortvn5U0A2n65WnHAxgx7ar5tIJT
-         t3OhOOBtI/CtnRO75ApvpB8S9dkTJIQVFtjnBlePlulZb7E08nYuwhy/tOD3C2j+SNIC
-         I7pf5GYNAqVZTlcrmbCn+8JtFsDH/a9avtnKHxaJJ2BjDRgP7gwTFmLknlyw1BW/hH4j
-         IaN8RwC8tdg0p5QzaVDo/u2fzQAkFDREmFJZ/yhy+vv2TBZd6j8jdJQSS6m4a9Ltsu22
-         z0nzAwyv20FruK2Reb6X1eMnr0FoefcrX37F3MsC+dLPslcbEkFyQNM+ih9C5iNBHh6A
-         qeKQ==
-X-Gm-Message-State: AOJu0YyTW+g8f+LkP3och+khV87vKJKr6QGCgT+vh/FBUudj0jlYsqDq
-	yJ03cUdcg24JWvG9aOWGq+v3w4fuKfgTEzXyuXR8brlsZ15eAn1RfIMOmoNe8Rg3MqpZ8gTwed1
-	h8/A=
-X-Google-Smtp-Source: AGHT+IGa1w0HxXsa53yMGpu77+FDF74o+qFvBT6NE1JnqbWjQXK2dovSIjYqssXE3WqVhreckTAhYA==
-X-Received: by 2002:a05:600c:1382:b0:410:7897:6bc0 with SMTP id u2-20020a05600c138200b0041078976bc0mr6124313wmf.22.1708187660911;
-        Sat, 17 Feb 2024 08:34:20 -0800 (PST)
-Received: from corsair.. (88-169-167-85.subs.proxad.net. [88.169.167.85])
-        by smtp.gmail.com with ESMTPSA id z2-20020a5d4c82000000b0033d07edbaa6sm5277639wrs.110.2024.02.17.08.34.20
+        d=1e100.net; s=20230601; t=1708214084; x=1708818884;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=RvDbEWoSBbjz9HiG8iL4KoIMHyOfFSUM4VHmG5xLIWc=;
+        b=PekIDbHQ1Uz+RxreX2Up1Yx1nY8BibULlNEq1TQRNakwOpCeKcidsOLiLkcnZHmwkq
+         wWsyMIgAKoQZviTID0viuGTBCRGx0NHxcGtQusZkrZfeArXhuzoJXdanhN7NyC7idHfW
+         MfAulQYKE92ejLWImY2yAv+r+TWEgwopRmJCO0o4ZdOiBwh0imp8MIOvHPdY9IIc/zrb
+         sTQu5vODXvcVUh9WQrHlYu9E1QycfKXIV38yvjEa3zulFufh5dhSAx3UdCYmmoyMKzOc
+         XDMLYqPwo131OEHnKX7lWw0h+FP0yJWXtJ9hjYjFi2hkj+5JZ0KsaPZDyis5+haraoj4
+         TXLw==
+X-Gm-Message-State: AOJu0YytLlf0A/MJdeGlLUkIf/8Bv4aomVTB3ZzyN3bADbV9o896JusZ
+	HQ2ur48SipSMN0Pp9XMF4TxNZUh9wcoJY/RgOtUni0W0si8eh9x/0WPx+j7Hdv1wGeonw0yuHFQ
+	8JO8=
+X-Google-Smtp-Source: AGHT+IGUVE4wNfviErspYJwu82KsJLghpeCPB//O622CDWr5D8Ov0uM5TBatduiKNsF+gK8CSGHe+Q==
+X-Received: by 2002:a05:6000:1887:b0:33d:3abc:8a4a with SMTP id a7-20020a056000188700b0033d3abc8a4amr671712wri.62.1708214083787;
+        Sat, 17 Feb 2024 15:54:43 -0800 (PST)
+Received: from P-ASN-ECS-830T8C3.home (2a01cb058e286b009d8a6db98b186dac.ipv6.abo.wanadoo.fr. [2a01:cb05:8e28:6b00:9d8a:6db9:8b18:6dac])
+        by smtp.gmail.com with ESMTPSA id o1-20020a05600c378100b004125f34fd7csm1817628wmr.31.2024.02.17.15.54.43
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 17 Feb 2024 08:34:20 -0800 (PST)
-From: Fathi Boudra <fathi.boudra@linaro.org>
+        Sat, 17 Feb 2024 15:54:43 -0800 (PST)
+From: Yoann Congal <yoann.congal@smile.fr>
 To: openembedded-devel@lists.openembedded.org
-Cc: Fathi Boudra <fathi.boudra@linaro.org>
-Subject: [meta-oe][PATCH 2/2] libtinyxml2: allow to build both shared and static libraries
-Date: Sat, 17 Feb 2024 17:34:08 +0100
-Message-ID: <20240217163408.213929-2-fathi.boudra@linaro.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240217163408.213929-1-fathi.boudra@linaro.org>
-References: <20240217163408.213929-1-fathi.boudra@linaro.org>
+Cc: Yoann Congal <yoann.congal@smile.fr>
+Subject: [meta-oe][PATCH 0/2] Fix influxdb reproducibility build
+Date: Sun, 18 Feb 2024 00:54:22 +0100
+Message-Id: <20240217235424.1091544-1-yoann.congal@smile.fr>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 17 Feb 2024 16:34:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108834
+ <openembedded-devel@lists.openembedded.org>; Sat, 17 Feb 2024 23:54:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108835
 
-E.g. if we want to build uuu statically, libtinyxml2 static library is
-missing as it builds only the shared library by default.
+This series fixes influxdb in reproducible test build (See failure [0]) 
+* Fix a type on the owner of files in do_install of the recipe
+* Fix static ids files user in reproducible builds
 
-Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
----
- meta-oe/recipes-support/libtinyxml2/libtinyxml2_10.0.0.bb | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+[0]: https://autobuilder.yoctoproject.org/typhoon/#/builders/155/builds/12/steps/32/logs/stdio line 34799
 
-diff --git a/meta-oe/recipes-support/libtinyxml2/libtinyxml2_10.0.0.bb b/meta-oe/recipes-support/libtinyxml2/libtinyxml2_10.0.0.bb
-index 5039e9ff77..1c94eff246 100644
---- a/meta-oe/recipes-support/libtinyxml2/libtinyxml2_10.0.0.bb
-+++ b/meta-oe/recipes-support/libtinyxml2/libtinyxml2_10.0.0.bb
-@@ -12,7 +12,10 @@ S = "${WORKDIR}/git"
- 
- inherit meson ptest
- 
--EXTRA_OEMESON += "${@bb.utils.contains('PTEST_ENABLED', '1', '-Dtests=true', '', d)}"
-+EXTRA_OEMESON += " \
-+    ${@bb.utils.contains('PTEST_ENABLED', '1', '-Dtests=true', '', d)} \
-+    -Ddefault_library=both \
-+"
- 
- CXXFLAGS:append:libc-musl = " -D_LARGEFILE64_SOURCE"
- 
+Yoann Congal (2):
+  influxdb: Fix /etc files owner
+  influxdb: Add missing group to static id
+
+ meta-oe/files/static-group-meta-oe              | 1 +
+ meta-oe/files/static-passwd-meta-oe             | 4 ++--
+ meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb | 2 +-
+ 3 files changed, 4 insertions(+), 3 deletions(-)
+
 -- 
-2.43.0
+2.39.2
 
 
