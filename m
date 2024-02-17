@@ -1,165 +1,102 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 73EB8C48BF8
-	for <webhook@archiver.kernel.org>; Sat, 17 Feb 2024 00:17:34 +0000 (UTC)
-Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
- by mx.groups.io with SMTP id smtpd.web11.635.1708129051200259083
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 83C69C48BC4
+	for <webhook@archiver.kernel.org>; Sat, 17 Feb 2024 14:16:48 +0000 (UTC)
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+ by mx.groups.io with SMTP id smtpd.web11.10389.1708179399719601916
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 16 Feb 2024 16:17:31 -0800
+ Sat, 17 Feb 2024 06:16:40 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=GHyWgozq;
- spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: ticotimo@gmail.com)
-Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-6e0aa4bb62fso1568412b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 16 Feb 2024 16:17:31 -0800 (PST)
+ dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=M8eslwHX;
+ spf=pass (domain: smile.fr, ip: 209.85.128.49, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-4125edd1433so1714385e9.3
+        for <openembedded-devel@lists.openembedded.org>; Sat, 17 Feb 2024 06:16:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1708129050; x=1708733850; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=L5DBVqnUzwqE62otUyIs/MftHxzv6/UQY5jJgLDcpcw=;
-        b=GHyWgozqi42/1GGqB+3Zt7vAwKZfqpn2yEImfRtSNHiHIjK/EbItzT45iZmw3Nnd2M
-         8fY2vLYsOaQSn6agIThfwMaJD9N1PMAHujK36ErKaW4O49Hn4ZIb1dqsNyqUZeMBIy3Y
-         98uCvjS7D7XBcCsycRQuQsnNiiw+D/Zh1thwdXQIO8CCDjQqkl++wv6EtH/aFb+WmpC5
-         G5b12PqZRbNBe2TOfgZ6YDwbxMUDLXGe5ailV7LBn/BtuqEo8VM3WilfYnfSaBQP5vA1
-         9zxUULacHu/T3DABLHZ1GGFHJyh6F7epPP9GGqFQbV3nNbdu7+J560bZR37GpH6pnleB
-         xuOA==
+        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1708179397; x=1708784197; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Fl7Lf6n/kTU2jFW62hMykzL41KvOwe+p9BFFjPOK5tg=;
+        b=M8eslwHXBhFz/9Ui3Xbonv53c0i0QShWA5SVn0lmP+SVJVJ0SEWTM0ESkidMqiRR8r
+         IZnpKUv4RP+WB03Vt27N53Kmgvo742LTVmXd1TdehPPrvWdeUmrjFGA33q1klAO8Lufw
+         jGBm6Gg5ukzjTT4nYgJmAZombIqrmkxQmX4v8PIlmxeFMUkWtE6oPSC5t2jRJy/f5vpD
+         TKNkZBj/2MfGzpYfVEkcWKoepvxXDUq/drqu6yaIa9HJunq2BkUc5utRKSYKwOyawzSr
+         YMHp/EHEF9wH1/yXs3HZ6bS96n82AFqcPUPgHdmrF3MYTB0uo+0o2roVAEfhMn7SYPPt
+         wp+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1708129050; x=1708733850;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=L5DBVqnUzwqE62otUyIs/MftHxzv6/UQY5jJgLDcpcw=;
-        b=XzChUB1ZVJ6t5sIZemBOw1YoYYYbUuJkWD/1uzdQJ+t+g3OJFB+WvnMR40s3lkiJcf
-         FB8gFfA4/28MZ0DsDM7G5S36DIVURoFeMjtDhddra5WXPYraUAMk+Q6clO2RkBkwcDIb
-         U2SLucXDuyue5gwMEe78LX3inos+IXAb3flHVORQ6ZplCf9Ugk6CoRMQ8WfRCeKXBsVD
-         yHNeRwuR6S6IFlhYpGXB61LYzIvxZLPlCPMIn5VmZl7gGKK+wFmMcJEKGCMWXiBE2qpu
-         Lo6C0UwET5Izl8anM44um3hzhgbofKp87qXOkwxvhP2EY4Tra15vRdvNdi9U2sInMYbV
-         zfsA==
-X-Gm-Message-State: AOJu0YwAwNBRk8jV/gE3PBftqqQJ8wmjb88lTGODC9zo079LTyEX/vwx
-	ozgudbI4Y0yf2yyYp7y3UX632et1IktcqA5cprEKPHXaTI/sBlPrgclELS2i
-X-Google-Smtp-Source: AGHT+IHZ2GH5E+fNu04FpsgRFVyjvaIQtKxR+1wtQwylcKeOuuzYJjOi68+zydqTYVMybOtq9ArQSA==
-X-Received: by 2002:aa7:84d8:0:b0:6e2:497f:abb6 with SMTP id x24-20020aa784d8000000b006e2497fabb6mr545738pfn.0.1708129049547;
-        Fri, 16 Feb 2024 16:17:29 -0800 (PST)
-Received: from chiron.hsd1.or.comcast.net ([2601:1c0:ca01:19f0::d846])
-        by smtp.gmail.com with ESMTPSA id kt22-20020a056a004bb600b006e0825acbc3sm514781pfb.77.2024.02.16.16.17.29
-        for <openembedded-devel@lists.openembedded.org>
+        d=1e100.net; s=20230601; t=1708179397; x=1708784197;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Fl7Lf6n/kTU2jFW62hMykzL41KvOwe+p9BFFjPOK5tg=;
+        b=ucqVkfUNk5TZi51GH94uZpJk2GHZdnc1WA/dNJtXqFIZ3ULpb8ZXtVFWPu12Ll9TDr
+         ATSeKnuZ+5bscpBTbtFRYS7apc0xv/JH+RJDc/T3ssa34xwOfkxmb3MZvwgYA5uaCbOH
+         179Vu+a/Sstsu2IQDJktnH4gnxjRhQGcvoITXhyh3nK14AhQaaHOeWi+UvhLEVHlMtEs
+         DgKbfVWy6spZYsARBGdTp6bqROnQNm9UM0EXJh8NiGMldTnFC33fycPtn9bMVDoiaIeU
+         OZHG0q+LmeFf1VIClyYUSbporwc6xSbAsiE8Uz2pl0jTaKH/gyLlNxl0vuZQ4RHL+wyh
+         kBcA==
+X-Gm-Message-State: AOJu0YyfIX6bjIXpTlneJeoFCHuAwo62Sonaci0vkpE3i/EXsrDJJ+/N
+	jUhLR1hU2JEiz3WZ1J/YV8jE0au6U9YCd6uehbfrjWsKlBSIUSF8U1IwBRR1zBbxH7ytJoV8fay
+	+OUU=
+X-Google-Smtp-Source: AGHT+IF8VWdKVyXuoLmRJZtxRAAy9hsjKZMWoh6zGmtcvr/sXNg2PQ8ZzHAg455vl2W6E7WmRYo3Wg==
+X-Received: by 2002:a5d:58f2:0:b0:33d:3673:6292 with SMTP id f18-20020a5d58f2000000b0033d36736292mr563907wrd.47.1708179397128;
+        Sat, 17 Feb 2024 06:16:37 -0800 (PST)
+Received: from P-ASN-ECS-830T8C3.home (2a01cb058e286b009d8a6db98b186dac.ipv6.abo.wanadoo.fr. [2a01:cb05:8e28:6b00:9d8a:6db9:8b18:6dac])
+        by smtp.gmail.com with ESMTPSA id 14-20020a056000154e00b0033d10bd6612sm5091979wry.81.2024.02.17.06.16.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 16 Feb 2024 16:17:29 -0800 (PST)
-From: Tim Orling <ticotimo@gmail.com>
-X-Google-Original-From: Tim Orling <tim.orling@konsulko.com>
+        Sat, 17 Feb 2024 06:16:36 -0800 (PST)
+From: Yoann Congal <yoann.congal@smile.fr>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 60/60] python3-pylint: switch to pytest --automake
-Date: Fri, 16 Feb 2024 16:15:51 -0800
-Message-Id: <b82ce5fb3a9ad57e815590d3688998a4c8bbd5b8.1708127759.git.tim.orling@konsulko.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1708127759.git.tim.orling@konsulko.com>
-References: <cover.1708127759.git.tim.orling@konsulko.com>
+Cc: Yoann Congal <yoann.congal@smile.fr>
+Subject: [meta-networking][PATCH 1/2] freeradius: Add missing 'radiusd' static group id
+Date: Sat, 17 Feb 2024 15:16:08 +0100
+Message-Id: <20240217141609.625329-1-yoann.congal@smile.fr>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 17 Feb 2024 00:17:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108830
+ <openembedded-devel@lists.openembedded.org>; Sat, 17 Feb 2024 14:16:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108831
 
-* Also replace ${PYTHON_PN} with python3
-* Sort all REDEPENDS alphabetically
-* Drop trailing whitespace
+This fixes build in reproducible test environment [0]:
+ERROR: freeradius-3.0.26-r0 do_install: ExecutionError [...]
+| chown: invalid group: ‘radiusd:radiusd’
 
-Signed-off-by: Tim Orling <tim.orling@konsulko.com>
+[0]: https://autobuilder.yoctoproject.org/typhoon/#/builders/155/builds/12/steps/28/logs/stdio line 12830
+
+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
 ---
- .../python/python3-pylint/run-ptest           |  2 +-
- .../python/python3-pylint_3.0.3.bb            | 56 ++++++++++---------
- 2 files changed, 30 insertions(+), 28 deletions(-)
+ meta-networking/files/static-group-meta-networking  | 1 +
+ meta-networking/files/static-passwd-meta-networking | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pylint/run-ptest b/meta-python/recipes-devtools/python/python3-pylint/run-ptest
-index 2a4e87e03a..ed424cb879 100644
---- a/meta-python/recipes-devtools/python/python3-pylint/run-ptest
-+++ b/meta-python/recipes-devtools/python/python3-pylint/run-ptest
-@@ -1,3 +1,3 @@
- #!/bin/sh
- 
--pytest --benchmark-disable -vv --minimal-messages-config tests/test_functional.py | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
-+pytest --benchmark-disable -vv --minimal-messages-config --automake tests/test_functional.py
-diff --git a/meta-python/recipes-devtools/python/python3-pylint_3.0.3.bb b/meta-python/recipes-devtools/python/python3-pylint_3.0.3.bb
-index cc33edd829..eb4b9e897f 100644
---- a/meta-python/recipes-devtools/python/python3-pylint_3.0.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-pylint_3.0.3.bb
-@@ -10,34 +10,36 @@ SRCREV = "1a5ffc1f447b77071ffe18a9c6836c09147ee2ed"
- 
- inherit python_setuptools_build_meta ptest
- 
--RDEPENDS:${PN} += "${PYTHON_PN}-astroid \
--                   ${PYTHON_PN}-dill \
--                   ${PYTHON_PN}-isort \
--                   ${PYTHON_PN}-mccabe \
--                   ${PYTHON_PN}-numbers \
--                   ${PYTHON_PN}-platformdirs \
--                   ${PYTHON_PN}-shell \
--                   ${PYTHON_PN}-json \
--                   ${PYTHON_PN}-pkgutil \
--                   ${PYTHON_PN}-difflib \
--                   ${PYTHON_PN}-netserver \
--                   ${PYTHON_PN}-tomlkit \
--                  "
-+RDEPENDS:${PN} += "\
-+    python3-astroid \
-+    python3-difflib \
-+    python3-dill \
-+    python3-isort \
-+    python3-json \
-+    python3-mccabe \
-+    python3-netserver \
-+    python3-numbers \
-+    python3-pkgutil \
-+    python3-platformdirs \
-+    python3-shell \
-+    python3-tomlkit \
-+    "
- 
- RDEPENDS:${PN}-ptest += " \
--        ${PYTHON_PN}-core \
--        ${PYTHON_PN}-git \
--        ${PYTHON_PN}-py \
--        ${PYTHON_PN}-pytest \
--        ${PYTHON_PN}-pytest-benchmark \
--        ${PYTHON_PN}-pytest-runner \
--        ${PYTHON_PN}-pytest-timeout \
--        ${PYTHON_PN}-pytest-xdist \
--        ${PYTHON_PN}-requests \
--        ${PYTHON_PN}-statistics \
--        ${PYTHON_PN}-tomllib \
--        ${PYTHON_PN}-typing-extensions \
--        "
-+    python3-core \
-+    python3-git \
-+    python3-py \
-+    python3-pytest \
-+    python3-pytest-benchmark \
-+    python3-pytest-runner \
-+    python3-pytest-timeout \
-+    python3-pytest-xdist \
-+    python3-requests \
-+    python3-statistics \
-+    python3-tomllib \
-+    python3-typing-extensions \
-+    python3-unittest-automake-output \
-+    "
- 
- S = "${WORKDIR}/git"
- 
-@@ -46,7 +48,7 @@ do_install_ptest() {
-     cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-     install -Dm 0644 ${S}/tests/.pylint_primer_tests/.gitkeep ${D}${PTEST_PATH}/tests/.pylint_primer_tests/.gitkeep
-     sed -i 's#/usr/bin/python$#/usr/bin/python3#g' ${D}${PTEST_PATH}/tests/data/ascript
--    # regression_distutil_import_error_73.py fails to run see 
-+    # regression_distutil_import_error_73.py fails to run see
-     # https://lists.openembedded.org/g/openembedded-devel/topic/103181847
-     rm ${D}${PTEST_PATH}/tests/functional/r/regression_02/regression_distutil_import_error_73.py
- }
+diff --git a/meta-networking/files/static-group-meta-networking b/meta-networking/files/static-group-meta-networking
+index 1b6de8d1c..f654c55e3 100644
+--- a/meta-networking/files/static-group-meta-networking
++++ b/meta-networking/files/static-group-meta-networking
+@@ -11,3 +11,4 @@ ftp:x:640:
+ rwhod:x:641:
+ lldpd:x:642:
+ opensaf:x:643:
++radiusd:x:651:
+diff --git a/meta-networking/files/static-passwd-meta-networking b/meta-networking/files/static-passwd-meta-networking
+index 03dc2133c..ea907cb42 100644
+--- a/meta-networking/files/static-passwd-meta-networking
++++ b/meta-networking/files/static-passwd-meta-networking
+@@ -10,7 +10,7 @@ rwhod:x:641:641::/:/bin/nologin
+ lldpd:x:642:642::/:/bin/nologin
+ opensaf:x:643:643::/:/bin/nologin
+ tinyproxy:x:650:nogroup::/:/bin/nologin
+-radiusd:x:651:nogroup::/:/bin/nologin
++radiusd:x:651:radiusd::/:/bin/nologin
+ nm-openconnect:x:652:nogroup::/:/bin/nologin
+ ntp:x:653:nogroup::/:/bin/nologin
+ nm-fortisslvpn:x:654:nogroup::/:/bin/nologin
 -- 
-2.34.1
+2.39.2
 
 
