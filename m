@@ -1,78 +1,104 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C5BF6C48BC3
-	for <webhook@archiver.kernel.org>; Mon, 19 Feb 2024 18:47:56 +0000 (UTC)
-Received: from mailout08.t-online.de (mailout08.t-online.de [194.25.134.20])
- by mx.groups.io with SMTP id smtpd.web11.2156.1708368466681635555
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 588DAC48BC3
+	for <webhook@archiver.kernel.org>; Mon, 19 Feb 2024 19:23:37 +0000 (UTC)
+Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
+ by mx.groups.io with SMTP id smtpd.web11.3063.1708370616137383585
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Feb 2024 10:47:47 -0800
+ Mon, 19 Feb 2024 11:23:36 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.20, mailfrom: f_l_k@t-online.de)
-Received: from fwd84.aul.t-online.de (fwd84.aul.t-online.de [10.223.144.110])
-	by mailout08.t-online.de (Postfix) with SMTP id F39C7220FC
-	for <openembedded-devel@lists.openembedded.org>; Mon, 19 Feb 2024 19:47:21 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.163.47.44]) by fwd84.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1rc8ff-1vNyUO0; Mon, 19 Feb 2024 19:47:19 +0100
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=iRpUGTG/;
+ spf=pass (domain: gmail.com, ip: 209.85.215.172, mailfrom: ticotimo@gmail.com)
+Received: by mail-pg1-f172.google.com with SMTP id 41be03b00d2f7-5d3907ff128so4157647a12.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Feb 2024 11:23:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1708370615; x=1708975415; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Q6hva6QxH5Nl6DQfneFuc46vSWIRCZI8CHPLkKVgCxo=;
+        b=iRpUGTG/T4oEWf07gynPGWZR4PXWvMGF91+fSmMxGB8YdQJUZAVKkwyOF8FhcbFKqr
+         DZk1dq0wFX3TDgfZh4LGQUKnJGI/wNE9Expy0SsgrmqxAxRGSsZCXYyBeFL7zrJXdcdN
+         h7364L4skwfbbDNfxFJgVTH4wUWem7B3cfKes1c956t2tbwg0woY1JuAbFeXcMQCB30j
+         +5HECyrzOqsQy4dHv0yFcSqXOedKe06XHi4xVCRLoQDdQ2CEMeln+jsks7K13C5NtNZQ
+         tbw6ufZFJB9gHBkkXRLeHqhjVSpPDsGBXvQ2Jt1cX9LWl04TVfhpxGYxp4pXg9KbNpA7
+         WJRQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1708370615; x=1708975415;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Q6hva6QxH5Nl6DQfneFuc46vSWIRCZI8CHPLkKVgCxo=;
+        b=ngR4CaRUOOjpJk0drBaNaMhSd9CAsjYTbY5mftnmzeTYsVR9zyQ79nXK7HqrPUc7aT
+         B2kx7wMN3s6xGkDkDBeUw5LJKG0Tm0igwPbijlsJYntOReVWKXS8GfhHf8y2lA5l8wKG
+         Aog0HwcKEVR5UMaoMWTQhUQ70IXiXaojOjlFKf8iG4l9BSj1DprtsiYQrhnyxPiKqHly
+         prq44++JYWI8OwN0w8PM/NwswYNDxbO930KugrYf6rKa9n2sl/61jMjFxOTbkdDAel+5
+         +XaNjIXX6niPijU+dELjFzCK5eWL6uUoOL5eNXMZQRC7EGS1fW0bEHXzJcrQcLh4UYWj
+         +cOA==
+X-Gm-Message-State: AOJu0YyxO48B2MiIVh9Rv5ecY44fB9ozj6QqJGLEUKdw/8+Kpq3QhEsg
+	vipwMPGc2pNcQyz2+nV6bOS/zxqkQK0PA9B8XvbPCkJ8YsBJGSpn39CipJjF
+X-Google-Smtp-Source: AGHT+IGoQVr+Q0+0zqL+DzgyOuSpFtHkqGB2wLMqbVdKNTheP67X5vFy36dqCaMUJ3JinPoUu7THsQ==
+X-Received: by 2002:a17:902:d542:b0:1db:e7ae:e2f4 with SMTP id z2-20020a170902d54200b001dbe7aee2f4mr6277803plf.51.1708370615134;
+        Mon, 19 Feb 2024 11:23:35 -0800 (PST)
+Received: from chiron.hsd1.or.comcast.net ([2601:1c0:ca01:19f0:7caf:da97:8daf:f655])
+        by smtp.gmail.com with ESMTPSA id u10-20020a170903304a00b001d7222d8caasm4797723pla.50.2024.02.19.11.23.34
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 19 Feb 2024 11:23:34 -0800 (PST)
+From: Tim Orling <ticotimo@gmail.com>
+X-Google-Original-From: Tim Orling <tim.orling@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH 4/4] dav1d: update 1.3.0 -> 1.4.0
-Date: Mon, 19 Feb 2024 19:47:31 +0100
-Message-ID: <20240219184731.3378-4-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240219184731.3378-1-f_l_k@t-online.de>
-References: <20240219184731.3378-1-f_l_k@t-online.de>
+Subject: [meta-filesystems][PATCH 3/5] meta-filesystems: drop ${PYTHON_PN}
+Date: Mon, 19 Feb 2024 11:23:17 -0800
+Message-Id: <a3461bfb3fe0b052f0501409efae6913fca86678.1708370337.git.tim.orling@konsulko.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1708370337.git.tim.orling@konsulko.com>
+References: <cover.1708370337.git.tim.orling@konsulko.com>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1708368439-2D7F99FB-B9FE1BFE/0/0 CLEAN NORMAL
-X-TOI-MSGID: dc101ea9-a0b2-4fe8-811c-a5a9bc2555cf
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 19 Feb 2024 18:47:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108878
+ <openembedded-devel@lists.openembedded.org>; Mon, 19 Feb 2024 19:23:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108882
 
-Changes for 1.4.0 'Road Runner':
-------------------------------------------------------
+python 2 is long unsupported, so we no longer need this variable
 
-1.4.0 is a medium release of dav1d, focusing on new architecture support =
-and optimizations
-
-- AVX-512 optimizations for z1, z2, z3 in 8bit and high-bitdepth
-- New architecture supported: loongarch
-- Loongarch optimizations for 8bit
-- New architecture supported: RISC-V
-- RISC-V optimizations for itx
-- Misc improvements in threading and in reducing binary size
-- Fix potential integer overflow with extremely large frame sizes
+Signed-off-by: Tim Orling <tim.orling@konsulko.com>
 ---
- .../recipes-multimedia/dav1d/{dav1d_1.3.0.bb =3D> dav1d_1.4.0.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-multimedia/recipes-multimedia/dav1d/{dav1d_1.3.0.bb =3D> dav=
-1d_1.4.0.bb} (89%)
+ .../recipes-filesystems/sshfs-fuse/sshfs-fuse_3.7.3.bb          | 2 +-
+ meta-filesystems/recipes-support/fuse/fuse3_3.16.2.bb           | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/dav1d/dav1d_1.3.0.bb b/me=
-ta-multimedia/recipes-multimedia/dav1d/dav1d_1.4.0.bb
-similarity index 89%
-rename from meta-multimedia/recipes-multimedia/dav1d/dav1d_1.3.0.bb
-rename to meta-multimedia/recipes-multimedia/dav1d/dav1d_1.4.0.bb
-index 2d5049b9a..0eb622d03 100644
---- a/meta-multimedia/recipes-multimedia/dav1d/dav1d_1.3.0.bb
-+++ b/meta-multimedia/recipes-multimedia/dav1d/dav1d_1.4.0.bb
-@@ -7,7 +7,7 @@ LICENSE =3D "BSD-2-Clause"
- LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc8055cfe7548dfdaa3a6dc45d8793=
-669"
-=20
- SRC_URI =3D "git://code.videolan.org/videolan/dav1d.git;protocol=3Dhttps=
-;branch=3Dmaster"
--SRCREV =3D "48035599cdd4e4415732e408c407e0c1cd1c7444"
-+SRCREV =3D "bb645893f374ab694b10a79f1205a728e010f2c9"
-=20
- S =3D "${WORKDIR}/git"
-=20
---=20
-2.43.0
+diff --git a/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_3.7.3.bb b/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_3.7.3.bb
+index 1d07061ff0..c85483759e 100644
+--- a/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_3.7.3.bb
++++ b/meta-filesystems/recipes-filesystems/sshfs-fuse/sshfs-fuse_3.7.3.bb
+@@ -16,7 +16,7 @@ SRC_URI += " \
+ "
+ 
+ RDEPENDS:${PN}-ptest += " \
+-        ${PYTHON_PN}-pytest \
++        python3-pytest \
+         bash \
+ "
+ 
+diff --git a/meta-filesystems/recipes-support/fuse/fuse3_3.16.2.bb b/meta-filesystems/recipes-support/fuse/fuse3_3.16.2.bb
+index 66c35010b8..5e532ba7ed 100644
+--- a/meta-filesystems/recipes-support/fuse/fuse3_3.16.2.bb
++++ b/meta-filesystems/recipes-support/fuse/fuse3_3.16.2.bb
+@@ -29,7 +29,7 @@ SRC_URI += " \
+ "
+ 
+ RDEPENDS:${PN}-ptest += " \
+-        ${PYTHON_PN}-pytest \
++        python3-pytest \
+ 	bash \
+ "
+ 
+-- 
+2.34.1
 
 
