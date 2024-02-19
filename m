@@ -1,98 +1,91 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <derek@asterius.io>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8DD53C48BF8
-	for <webhook@archiver.kernel.org>; Mon, 19 Feb 2024 21:37:57 +0000 (UTC)
-Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com [209.85.215.180])
- by mx.groups.io with SMTP id smtpd.web11.868.1708378677089549956
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9CACEC54787
+	for <webhook@archiver.kernel.org>; Mon, 19 Feb 2024 21:48:17 +0000 (UTC)
+Received: from mail-oi1-f177.google.com (mail-oi1-f177.google.com [209.85.167.177])
+ by mx.groups.io with SMTP id smtpd.web11.1102.1708379294435114787
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Feb 2024 13:37:57 -0800
+ Mon, 19 Feb 2024 13:48:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=jXJgUJZi;
- spf=pass (domain: gmail.com, ip: 209.85.215.180, mailfrom: ticotimo@gmail.com)
-Received: by mail-pg1-f180.google.com with SMTP id 41be03b00d2f7-53fbf2c42bfso3160884a12.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Feb 2024 13:37:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1708378676; x=1708983476; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=7rfBkLrR7mI92lYZldAMNwFzrxZnGC9Et6OS4D6mNxI=;
-        b=jXJgUJZia+1yJ0murkNPjVcyMmLJaeumc5NdYK1VeQLB6XHmdsiGDn3PAAGJEPMcPx
-         EzOFaWDHBWEivylsHWP4PHH7lAoPYZzfFW+zDy/OoSWr4FHYXEQKqSFsjfNlCIA78IhE
-         IFcYUc+BZ+NQ0Jl2UwsgmPjUwq9VqBXKScR1g4NoibP96ohbCxKAy9xgMKPuwXzgKW/a
-         yDf6Ph9o+XaG2ReAZzdmvg0jDYsVxKAGxPhpSTJeKFDkJ9BkUKT3WuHkZZA84p9c7IIS
-         PHY73YC9UtOZzjcC9kVfmiA/U4z/79hFb1b6u07FQ3ii9kMskeMqxLzbe9UVKFJjDwGB
-         Q6KA==
+ dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.167.177, mailfrom: straka.derek@gmail.com)
+Received: by mail-oi1-f177.google.com with SMTP id 5614622812f47-3c15dd2a1fdso831359b6e.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Feb 2024 13:48:14 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1708378676; x=1708983476;
+        d=1e100.net; s=20230601; t=1708379293; x=1708984093;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=7rfBkLrR7mI92lYZldAMNwFzrxZnGC9Et6OS4D6mNxI=;
-        b=BBgPf5MgiS9EEK+WuKdKL60hw/Kmw64sNQh/jtt+12RNxrKJnX+cMfEZXYzj869Zvy
-         Q+8SVdpkB2hTwNvNooUi5mX38J3jGHYCs7qXfRrhxovSbjKG+ogK3WT1TNUPlSpr5fwZ
-         Vi1AYscf8GsfzyhuTTgSEMG9Ro8JQoMuU1aLIO9RSZwcz6SvhgAk9Mye5Y+xsmBwrADL
-         fRP3abnvlXEDDqL+JaFJWI44uglweLcOT/l8wO9BRiugT61kZKQfv8NmbT23VuhnKyxc
-         wT2WO5mtmzeFHXxPIO+/fr9SbxUTi8e0/hxVm8f4CoeYyclsy+djglqw2TWcb1HvOBxg
-         nBcQ==
-X-Gm-Message-State: AOJu0YxmnobUTcDsQ+oJxwcujMZaxgi+j6u3WicxL570YRkFux/to5Pl
-	5fB68zL+Giv/MGlJrzSz86YtF2SwHDgSl4TKUg2N+PiJXONCq4qwxyWZKprg
-X-Google-Smtp-Source: AGHT+IHUmILWYUhHayYKmrMc6YFVhvW/EGjMjYM5sP3Xri8M9w6eH5um3SU5f1L0z0hVelJYgdMEIg==
-X-Received: by 2002:a05:6a20:c90c:b0:1a0:5f8b:2cad with SMTP id gx12-20020a056a20c90c00b001a05f8b2cadmr16504378pzb.13.1708378676135;
-        Mon, 19 Feb 2024 13:37:56 -0800 (PST)
-Received: from chiron.hsd1.or.comcast.net ([2601:1c0:ca01:19f0:7caf:da97:8daf:f655])
-        by smtp.gmail.com with ESMTPSA id m68-20020a632647000000b005cfbdf71baasm5135679pgm.47.2024.02.19.13.37.55
+        bh=dwFx6zzPRWGVnSDP5o0DO0ks6dXM8tlxmfdgaukXvps=;
+        b=fJa2iracUzBjl/nJZD2am2bM0Zl7NWtx3TQCYVoLx5UdadblaqifiP8XhewxrAIP5f
+         0ZAKTDaaTAJGXboB1oF+woOCGIPB6ZKUbBTWPB+eH6M9J9r3UVjhvPdoSLaqi0aGH5RT
+         1O6iX4DbNGzWkhN6IAeDkgA7ND46s9vbuYYbX2rIdrkSmU01i3bUJiOnaZ6Zr5vAGbDp
+         DC7M9gPuQ2Lr85YCL4iTevQ1Vv5rSv0UhHXbnWbs0IhiY41x9fE/e6jL0V5v5FcudAKS
+         g4jBloaAG7GimFVffOPEa4Xqn9r/0wuEzNh0zKlOJujzsGmKZhzuIDR6zvJVjsVdduVn
+         QZaA==
+X-Gm-Message-State: AOJu0YwTBYREshONxFAK5I5R5URyQyIE2h7vkBGpmWqGZWbMKHNklgLM
+	HP2lfw3pJA9QLsU40UMniAEgZZwWgzoGDdXUxGUTBiPcWr5rlK0ruk0vd3pqpXM=
+X-Google-Smtp-Source: AGHT+IGyekvjEzCf9IRloW7ED7R/1/9046gmN5mt15SMHfvbzAdAwHZbWHQCnGQC3oTaLeDBXKQihQ==
+X-Received: by 2002:a05:6808:180c:b0:3c1:5440:f2e1 with SMTP id bh12-20020a056808180c00b003c15440f2e1mr6599683oib.41.1708379292755;
+        Mon, 19 Feb 2024 13:48:12 -0800 (PST)
+Received: from sparta.internal.asterius.io (c-73-228-213-122.hsd1.mn.comcast.net. [73.228.213.122])
+        by smtp.gmail.com with ESMTPSA id bw10-20020a056808244a00b003c03fde4611sm994747oib.2.2024.02.19.13.48.11
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 Feb 2024 13:37:55 -0800 (PST)
-From: Tim Orling <ticotimo@gmail.com>
-X-Google-Original-From: Tim Orling <tim.orling@konsulko.com>
+        Mon, 19 Feb 2024 13:48:12 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Cc: Tim Orling <tim.orling@konsulko.com>
-Subject: [meta-python][PATCH] python3-pyproject-metadata: move to oe-core
-Date: Mon, 19 Feb 2024 13:37:25 -0800
-Message-Id: <20240219213724.2056915-1-tim.orling@konsulko.com>
+Cc: Derek Straka <derek@asterius.io>
+Subject: [meta-python][PATCH 1/8] python3-trustme: add runtime dependency for tests and re-add to ptest
+Date: Mon, 19 Feb 2024 21:47:54 +0000
+Message-Id: <20240219214801.1514843-1-derek@asterius.io>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 19 Feb 2024 21:37:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108885
+ <openembedded-devel@lists.openembedded.org>; Mon, 19 Feb 2024 21:48:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108886
 
-This is a dependency for python3-meson-python.
-
-This was missed in the earlier round of moving to oe-core.
-
-Signed-off-by: Tim Orling <tim.orling@konsulko.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../python/python3-pyproject-metadata_0.7.1.bb   | 16 ----------------
- 1 file changed, 16 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-pyproject-metadata_0.7.1.bb
+ meta-python/conf/include/ptest-packagelists-meta-python.inc  | 2 +-
+ meta-python/recipes-devtools/python/python3-trustme_1.1.0.bb | 1 +
+ 2 files changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyproject-metadata_0.7.1.bb b/meta-python/recipes-devtools/python/python3-pyproject-metadata_0.7.1.bb
-deleted file mode 100644
-index 9887af78d0..0000000000
---- a/meta-python/recipes-devtools/python/python3-pyproject-metadata_0.7.1.bb
-+++ /dev/null
-@@ -1,16 +0,0 @@
--SUMMARY = "PEP 621 metadata parsing"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=310439af287b0fb4780b2ad6907c256c"
--
--PYPI_PACKAGE = "pyproject-metadata"
--
--inherit pypi python_setuptools_build_meta
--SRC_URI[sha256sum] = "0a94f18b108b9b21f3a26a3d541f056c34edcb17dc872a144a15618fed7aef67"
--
--BBCLASSEXTEND = "native nativesdk"
--
--RDEPENDS:${PN} += " \
--    python3-logging \
--    python3-packaging \
--    python3-profile \
--"
+diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+index 598548262..51fcdd2b2 100644
+--- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
++++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+@@ -50,6 +50,7 @@ PTESTS_FAST_META_PYTHON = "\
+     python3-soupsieve \
+     python3-sqlparse \
+     python3-tomlkit \
++    python3-trustme \
+     python3-ujson \
+     python3-u-msgpack-python \
+     python3-unidiff \
+@@ -83,7 +84,6 @@ PTESTS_PROBLEMS_META_PYTHON ="\
+     python3-pyzmq \
+     python3-scrypt \
+     python3-service-identity \
+-    python3-trustme \
+     python3-typeguard \
+     python3-whoosh \
+     python3-xlrd \
+diff --git a/meta-python/recipes-devtools/python/python3-trustme_1.1.0.bb b/meta-python/recipes-devtools/python/python3-trustme_1.1.0.bb
+index ac03bce2b..21161a0e0 100644
+--- a/meta-python/recipes-devtools/python/python3-trustme_1.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-trustme_1.1.0.bb
+@@ -20,6 +20,7 @@ RDEPENDS:${PN} += " \
+ "
+ 
+ RDEPENDS:${PN}-ptest += " \
++    python3-pyopenssl \
+     python3-pyasn1-modules \
+     python3-pytest \
+     python3-service-identity \
 -- 
 2.34.1
 
