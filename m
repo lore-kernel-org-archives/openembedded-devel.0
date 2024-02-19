@@ -1,69 +1,85 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <c-shilwant@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A3DD9C48BC3
-	for <webhook@archiver.kernel.org>; Mon, 19 Feb 2024 07:01:38 +0000 (UTC)
-Received: from mailout06.t-online.de (mailout06.t-online.de [194.25.134.19])
- by mx.groups.io with SMTP id smtpd.web10.36212.1708326088361634617
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 29E0BC48260
+	for <webhook@archiver.kernel.org>; Mon, 19 Feb 2024 08:34:09 +0000 (UTC)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ by mx.groups.io with SMTP id smtpd.web10.37043.1708331642239885422
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 18 Feb 2024 23:01:28 -0800
+ Mon, 19 Feb 2024 00:34:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.19, mailfrom: f_l_k@t-online.de)
-Received: from fwd79.aul.t-online.de (fwd79.aul.t-online.de [10.223.144.105])
-	by mailout06.t-online.de (Postfix) with SMTP id 41984166EF
-	for <openembedded-devel@lists.openembedded.org>; Mon, 19 Feb 2024 08:01:26 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.163.47.44]) by fwd79.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1rbxeX-1b5vjl0; Mon, 19 Feb 2024 08:01:25 +0100
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCH 1/2] libgedit-gtksourceview: update 299.0.5 -> 299.1.0
-Date: Mon, 19 Feb 2024 08:01:39 +0100
-Message-ID: <20240219070140.149267-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.43.0
+ dkim=pass header.i=@ti.com header.s=ti-com-17Q1 header.b=sxSZuwnN;
+ spf=pass (domain: ti.com, ip: 198.47.23.249, mailfrom: c-shilwant@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41J8XxND090940;
+	Mon, 19 Feb 2024 02:33:59 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1708331639;
+	bh=pouRLFH2Y5SHeEPDXP+D/37NqHxSBpE0zNzplndVfz0=;
+	h=From:To:CC:Subject:Date;
+	b=sxSZuwnNh6C72eRLvGirey7vjjIKBs8Ub3IEVSNCYwfvXKDR5jMLPZFzS+QWZGPER
+	 6WATCECgryk5fF/2zgpODLEnTUqMpaKYUOCNzQhmU6Bwjjo7q2Ya/opDlgyU3rx5wB
+	 RGDkwg/BVkoQFxRGptz9oiPLWBeNQsNeT5iAfVqQ=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41J8XxFP053092
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Mon, 19 Feb 2024 02:33:59 -0600
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 19
+ Feb 2024 02:33:58 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 19 Feb 2024 02:33:58 -0600
+Received: from localhost (chirag-hp-z2-tower-g5-workstation.dhcp.ti.com [172.24.227.238])
+	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41J8Xw6t098496;
+	Mon, 19 Feb 2024 02:33:58 -0600
+From: Chirag Shilwant <c-shilwant@ti.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Gyan Gupta <g-gupta@ti.com>, Khasim <khasim@ti.com>,
+        Ryan
+	<reatmon@ti.com>, Denys <denis@denix.org>
+Subject: [meta-oe][kirkstone][PATCH] meta-oe: kernel-selftest: Add few more testcases
+Date: Mon, 19 Feb 2024 14:03:50 +0530
+Message-ID: <20240219083350.1149745-1-c-shilwant@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1708326085-577A9986-4CD6B495/0/0 CLEAN NORMAL
-X-TOI-MSGID: 842bbf70-646e-4f27-9874-7451d4d5e4b3
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 19 Feb 2024 07:01:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108843
+ <openembedded-devel@lists.openembedded.org>; Mon, 19 Feb 2024 08:34:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108845
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+- This commit will build and install following testcases under /usr/kernel-selftest of filesystem,
+    * ptp
+    * timers
+
+- Backporting the commit from master 02806ed4c16d7e6f80653baec71be071d4e8f9c0
+
+Signed-off-by: Chirag Shilwant <c-shilwant@ti.com>
 ---
- ...ourceview_299.0.5.bb =3D> libgedit-gtksourceview_299.1.0.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-gnome/recipes-gnome/gedit/{libgedit-gtksourceview_299.0.5.bb=
- =3D> libgedit-gtksourceview_299.1.0.bb} (85%)
+ meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-gnome/recipes-gnome/gedit/libgedit-gtksourceview_299.0.=
-5.bb b/meta-gnome/recipes-gnome/gedit/libgedit-gtksourceview_299.1.0.bb
-similarity index 85%
-rename from meta-gnome/recipes-gnome/gedit/libgedit-gtksourceview_299.0.5=
-.bb
-rename to meta-gnome/recipes-gnome/gedit/libgedit-gtksourceview_299.1.0.b=
-b
-index 00e5bec32..0ebc22acb 100644
---- a/meta-gnome/recipes-gnome/gedit/libgedit-gtksourceview_299.0.5.bb
-+++ b/meta-gnome/recipes-gnome/gedit/libgedit-gtksourceview_299.1.0.bb
-@@ -7,9 +7,9 @@ DEPENDS =3D "glib-2.0 gtk+3 libxml2"
-=20
- inherit meson pkgconfig gobject-introspection features_check gtk-doc
-=20
--SRC_URI =3D "git://github.com/gedit-technology/libgedit-gtksourceview.gi=
-t;protocol=3Dhttps;branch=3Dlibgedit-gtksourceview-299-0"
-+SRC_URI =3D "git://github.com/gedit-technology/libgedit-gtksourceview.gi=
-t;protocol=3Dhttps;branch=3Dmain"
- S =3D "${WORKDIR}/git"
--SRCREV =3D "7e2179a8ff3022edad27e2d57744876d125cb040"
-+SRCREV =3D "b271a625ca057cc3fa7d5ac83285c5d4e038202e"
-=20
- ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"
-=20
---=20
-2.43.0
+diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
+index 3d97ea096..ab76fe262 100644
+--- a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
++++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
+@@ -44,6 +44,8 @@ S = "${WORKDIR}/${BP}"
+ TEST_LIST = "\
+     ${@bb.utils.filter('PACKAGECONFIG', 'bpf firmware vm', d)} \
+     rtc \
++    ptp \
++    timers \
+ "
+ 
+ EXTRA_OEMAKE = '\
+-- 
+2.34.1
 
 
