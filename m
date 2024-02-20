@@ -2,57 +2,57 @@ Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F3C2C48BF8
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 80F3DC5475B
 	for <webhook@archiver.kernel.org>; Tue, 20 Feb 2024 00:48:10 +0000 (UTC)
 Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.web10.2788.1708390081416541440
+ by mx.groups.io with SMTP id smtpd.web11.2712.1708390088054622814
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 19 Feb 2024 16:48:01 -0800
+ Mon, 19 Feb 2024 16:48:08 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=hsMKdyKi;
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=mmfOopw7;
  spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: ticotimo@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id d2e1a72fcca58-6e47a8fcd5eso111718b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Feb 2024 16:48:01 -0800 (PST)
+Received: by mail-pf1-f176.google.com with SMTP id d2e1a72fcca58-6e471f5f1a5so623643b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 19 Feb 2024 16:48:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1708390080; x=1708994880; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1708390087; x=1708994887; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=tZtj4Abh6+VRXeKvvcRDb+oNjxYl1x2Tx2R/3qKgF2M=;
-        b=hsMKdyKi0xOvbnuH8t9ypC8/KXfOnMqCaK8zfBF73HjmYBy78mLe1knkv9W4CX3DXR
-         wKm8qLczpOjAzgG5Tja/fz1m1s4CjXMM2ag5ymPLOWGA74BfeLsc9u9Z3qxwANBrKML0
-         HsMjeJb+PBVclJ3tDoBk7D6YWJbeYxiNI0WUoVqvZdcBUKYSqblEV7T2iXSQ+3EUCo5L
-         1DuFCIcI1wR0IVaNSlTis5L275dtaHydMHWJ1rcWX4ifxQrKSgPrumUTLGc7Tqu00oBd
-         cN07f3CCGZcRZ5m5IH7YzRwE6uAG2HZZ/VfXc5VjjrmR7Howyj/68s69tGDU2izPjdsv
-         OKZQ==
+        bh=UHqloxnFWeqQ8U/yBEC4lW5oHIzDNJ54u0ayjKjNmBs=;
+        b=mmfOopw7+2ZfR3PCTOT7lh+K68Y6f/zU7qBBwvPPkZrcYlFGAxclGZglfUXapXAPxF
+         XCnhO6WFSjf6XWn3WBJ3DniVV67imeEqZE3Bl4ChhuaTLcrgX2TmVnc8YOJI3CQ0LiQu
+         fGrZ5vPNtfnujB/RFupbTcnNBW67C5NZLCNmK/50CvnnBEhxMGP7QLqjSoMYjv10b9aM
+         FFqnziQGSWZteiKdf+9/rnnCTEY4FRE75G3j0l6bV4u5+3gaY3PBVLYSMm1YUH4j07jt
+         sjThTCdKwgDK8d0sNNQE2Pbac9SaqYLHlTfZf7ddMVeiW+F+kq5s4U/3a6hXZw0GBIN6
+         ERdg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1708390080; x=1708994880;
+        d=1e100.net; s=20230601; t=1708390087; x=1708994887;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=tZtj4Abh6+VRXeKvvcRDb+oNjxYl1x2Tx2R/3qKgF2M=;
-        b=sLnhiSHE2Eh1kEUqhFgn6cyp1eoipWHhhkHR5gICLgXFRmASPF8YZQOWSiVaumHOdI
-         3dYE8B9Xgp+u+wYIvsBpMbzcrJPy1wd6kq6POZTJtJyLyAgSArDCL62p3szhp9ueqZAy
-         ZstQGq8vaQpOdZAqLDCYZEN5/T+z9sn1GROOruEBxG++pSIh/rENru4GVtRp/XQFeCJr
-         haqNfpWP1i7xuf5rfapNEBcRVYKI53Nf5b+qHMQ+INUsiGjKteIpyxXXRKabysqL2eLr
-         dP00ziq+Jih0yuHCCYPDBtw12mc9dfa0tRYGC+LU9M6uIEWBwiJtpIWnCe4fr+trrB6I
-         5LXw==
-X-Gm-Message-State: AOJu0YyKTJZ2JBhSZZTMbTMD9Rnq6H4bPhSVYrw567t3d7LtFdkW8V+M
-	ZkM4xbC7yghhj/gxFGm3t6QlKqZqQ4D26bDodyotBgLpp+WvS3bvow3Au4ED
-X-Google-Smtp-Source: AGHT+IFDQ73rE0Vj5/NtIQ4KyEt15uTm7T9MVpeHiZV3B6ASgVWXRifvoiZJ46vc0OGbhNi7X3+oAg==
-X-Received: by 2002:a62:cdc4:0:b0:6e4:f40:b4e2 with SMTP id o187-20020a62cdc4000000b006e40f40b4e2mr5038144pfg.14.1708390080314;
-        Mon, 19 Feb 2024 16:48:00 -0800 (PST)
+        bh=UHqloxnFWeqQ8U/yBEC4lW5oHIzDNJ54u0ayjKjNmBs=;
+        b=HopXDFhwMxou9+BndwUCXG58f1TFYxVzyC4hvPQnJlsLCuWB+PsARwJjsqr9wyTfXM
+         q1Lj5tq+4SiBf93Ap8omoRiRLKdHUfeJkjtjXTaKWH9cgf2KFXkffk1AWJAxfjebJYvT
+         bJrqt9d577awR1JOHSNjMSeiwb73UZCWVznylPyZBvilfuKsMKbkwQIsVKaBxBNp008O
+         UM1JfjLpN5fokbuW6t98VRxFObeRv2rLFItCX78qJhlA/4jTuvP1ecIX7oj/JKA9QHia
+         7a+yB8NP4elZbMimu1oOJylt0FPeiTyUP7xLOO47gAsw9q/DrMfAQQCc8KwA5WTXhcmc
+         sb/w==
+X-Gm-Message-State: AOJu0YweBOlXpHIuxVrHDOcVWnZUUYlM/m9udfMcTYkIcdc3Z+o2KSzc
+	sxOLAZKaSchDITOIMRsUubMfP6/0aPiXVpvj4z7RwqE4MegZMqP250GFqqqN
+X-Google-Smtp-Source: AGHT+IFThTXqMMojQy/a/4zAhhH5goIFSYdOmkkra6jJ1cTJYECFB13sR68f95zo0u4Ab5sZP6jVTw==
+X-Received: by 2002:a05:6a00:9395:b0:6e4:7146:f139 with SMTP id ka21-20020a056a00939500b006e47146f139mr2927070pfb.19.1708390087151;
+        Mon, 19 Feb 2024 16:48:07 -0800 (PST)
 Received: from chiron.hsd1.or.comcast.net ([2601:1c0:ca01:19f0::d846])
-        by smtp.gmail.com with ESMTPSA id e15-20020a056a0000cf00b006e3be1a64f7sm4101548pfj.160.2024.02.19.16.47.59
+        by smtp.gmail.com with ESMTPSA id e15-20020a056a0000cf00b006e3be1a64f7sm4101548pfj.160.2024.02.19.16.48.06
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 19 Feb 2024 16:47:59 -0800 (PST)
+        Mon, 19 Feb 2024 16:48:06 -0800 (PST)
 From: Tim Orling <ticotimo@gmail.com>
 X-Google-Original-From: Tim Orling <tim.orling@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 1/3] python3-pytest-lazy-fixtures: add 1.0.5
-Date: Mon, 19 Feb 2024 16:47:44 -0800
-Message-Id: <d25724ad8be17d77e2a188e6e7b1a541c910a182.1708389659.git.tim.orling@konsulko.com>
+Subject: [meta-python][PATCH 3/3] python3-pytest-lazy-fixture: drop recipe
+Date: Mon, 19 Feb 2024 16:47:46 -0800
+Message-Id: <9be5a7a0f31b41dfb03a0f94e80a01eeccb3231d.1708389659.git.tim.orling@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1708389659.git.tim.orling@konsulko.com>
 References: <cover.1708389659.git.tim.orling@konsulko.com>
@@ -62,60 +62,101 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 20 Feb 2024 00:48:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108895
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108897
 
-Use your fixtures in @pytest.mark.parametrize.
+This recipe is no longer maintained (since 2020) and is not compliant with python3-pytest_8.0.0+.
 
-This project was inspired by pytest-lazy-fixture.
+The only dependency in meta-python was the old version of python3-prettytable-ptest, which now
+RDEPENDS upon python3-pytest-lazy-fixtures (with the s).
 
-Improvements that have been made in this project:
-
-1. You can use fixtures in any data structures
-2. You can access the attributes of fixtures
-3. You can use functions in fixtures
-
-* Dependency for python3-prettytable ptest.
-  (Not the same as python3-pytest-lazy-fixture without the s)
-* Upstream does not package tests/ in the sdist on pypi, so
-  we do not try to enable ptest at this time (it would require
-  using git fetcher instead of pypi.bbclass).
-* The ptest for the predecessor (python3-pytest-lazy-fixture
-  without the s) was already in PTEST_PROBLEMS, meaning its
-  ptests did not run cleanly.
+Drop the recipe
+Drop it from packagegroup-meta-python
+Drop it from PTEST_PROBLEMS in ptest-packagelists-meta-python.inc
 
 Signed-off-by: Tim Orling <tim.orling@konsulko.com>
 ---
- .../python3-pytest-lazy-fixtures_1.0.5.bb     | 21 +++++++++++++++++++
- 1 file changed, 21 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-pytest-lazy-fixtures_1.0.5.bb
+ .../ptest-packagelists-meta-python.inc        |  1 -
+ .../packagegroups/packagegroup-meta-python.bb |  3 +--
+ .../python3-pytest-lazy-fixture/run-ptest     |  3 ---
+ .../python3-pytest-lazy-fixture_0.6.3.bb      | 26 -------------------
+ 4 files changed, 1 insertion(+), 32 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pytest-lazy-fixture/run-ptest
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pytest-lazy-fixture_0.6.3.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-pytest-lazy-fixtures_1.0.5.bb b/meta-python/recipes-devtools/python/python3-pytest-lazy-fixtures_1.0.5.bb
-new file mode 100644
-index 0000000000..dcf662a2c8
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pytest-lazy-fixtures_1.0.5.bb
-@@ -0,0 +1,21 @@
-+SUMMARY = "Allows you to use fixtures in @pytest.mark.parametrize."
-+DESCRIPTION = "Use your fixtures in @pytest.mark.parametrize. \
-+\
-+This project was inspired by pytest-lazy-fixture.\
-+\
-+Improvements that have been made in this project:\
-+\
-+* You can use fixtures in any data structures\
-+* You can access the attributes of fixtures\
-+* You can use functions in fixtures"
-+HOMEPAGE = "https://github.com/dev-petrov/pytest-lazy-fixtures"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=4475e66fcfabe27395e6764c8f69c876"
-+
-+SRC_URI[sha256sum] = "066b253a94c249e6d9cdfad465e2503d2219139fb468d8f687243dfde39ab9cb"
-+
-+inherit pypi python_poetry_core
-+
-+PYPI_PACKAGE = "pytest_lazy_fixtures"
-+
-+RDEPENDS:${PN} = "python3-pytest"
+diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+index 5985482628..097d5e184c 100644
+--- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
++++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+@@ -79,7 +79,6 @@ PTESTS_PROBLEMS_META_PYTHON ="\
+     python3-parse \
+     python3-pillow \
+     python3-pint \
+-    python3-pytest-lazy-fixture \
+     python3-pyzmq \
+     python3-scrypt \
+     python3-service-identity \
+diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+index 41fce53274..eb5a264631 100644
+--- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
++++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
+@@ -348,7 +348,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
+     python3-pytest-forked \
+     python3-pytest-helpers-namespace \
+     python3-pytest-html \
+-    python3-pytest-lazy-fixture \
++    python3-pytest-lazy-fixtures \
+     python3-pytest-metadata \
+     python3-pytest-tempdir \
+     python3-pytest-timeout \
+@@ -507,7 +507,6 @@ RDEPENDS:packagegroup-meta-python3-ptest = "\
+     python3-pyasn1-modules-ptest \
+     python3-pyroute2-ptest \
+     python3-pyserial-ptest \
+-    python3-pytest-lazy-fixture-ptest \
+     python3-pytoml-ptest \
+     python3-pyzmq-ptest \
+     python3-requests-file-ptest \
+diff --git a/meta-python/recipes-devtools/python/python3-pytest-lazy-fixture/run-ptest b/meta-python/recipes-devtools/python/python3-pytest-lazy-fixture/run-ptest
+deleted file mode 100644
+index 8d2017d39c..0000000000
+--- a/meta-python/recipes-devtools/python/python3-pytest-lazy-fixture/run-ptest
++++ /dev/null
+@@ -1,3 +0,0 @@
+-#!/bin/sh
+-
+-pytest --automake
+diff --git a/meta-python/recipes-devtools/python/python3-pytest-lazy-fixture_0.6.3.bb b/meta-python/recipes-devtools/python/python3-pytest-lazy-fixture_0.6.3.bb
+deleted file mode 100644
+index 9c50528fb0..0000000000
+--- a/meta-python/recipes-devtools/python/python3-pytest-lazy-fixture_0.6.3.bb
++++ /dev/null
+@@ -1,26 +0,0 @@
+-# Copyright (C) 2022 Wind River Systems
+-
+-SUMMARY = "Use your fixtures in @pytest.mark.parametrize."
+-HOMEPAGE = "https://github.com/tvorog/pytest-lazy-fixture"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=aae6f2b7c9b3ced83e0b5bb42346d4dd"
+-
+-SRC_URI[sha256sum] = "0e7d0c7f74ba33e6e80905e9bfd81f9d15ef9a790de97993e34213deb5ad10ac"
+-
+-SRC_URI += "file://run-ptest \
+-           "
+-
+-
+-inherit ptest pypi setuptools3
+-
+-do_install_ptest() {
+-    install -d ${D}${PTEST_PATH}/tests
+-    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+-}
+-
+-
+-RDEPENDS:${PN} += "python3-core python3-pytest"
+-RDEPENDS:${PN}-ptest = " \
+-    python3-unixadmin \
+-    python3-unittest-automake-output \
+-    "
 -- 
 2.34.1
 
