@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E6765C5475B
-	for <webhook@archiver.kernel.org>; Tue, 20 Feb 2024 16:45:06 +0000 (UTC)
-Received: from mail-oa1-f48.google.com (mail-oa1-f48.google.com [209.85.160.48])
- by mx.groups.io with SMTP id smtpd.web10.17827.1708447498727447721
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CF308C48BC3
+	for <webhook@archiver.kernel.org>; Tue, 20 Feb 2024 16:45:16 +0000 (UTC)
+Received: from mail-oa1-f50.google.com (mail-oa1-f50.google.com [209.85.160.50])
+ by mx.groups.io with SMTP id smtpd.web10.17839.1708447512974553185
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 20 Feb 2024 08:44:58 -0800
+ Tue, 20 Feb 2024 08:45:13 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=WkkPMKX3;
- spf=pass (domain: gmail.com, ip: 209.85.160.48, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f48.google.com with SMTP id 586e51a60fabf-21e7c3e3cf3so3235466fac.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Feb 2024 08:44:58 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=mzrKkixH;
+ spf=pass (domain: gmail.com, ip: 209.85.160.50, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f50.google.com with SMTP id 586e51a60fabf-21eea6aab5eso1454364fac.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 20 Feb 2024 08:45:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1708447498; x=1709052298; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1708447512; x=1709052312; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=BvCvo+RaXJ2dHblwr22BJpdRxQGM88RjE/ns1gdazCk=;
-        b=WkkPMKX3Myl4MUfWdjdysSPvYfYCzltZ9a3fzAbiH8as14MlL8wqMvZ1jgKCKetY5A
-         AVoBjjTXZiJf0w6phxNmbGl4aX/64LAzmgSA70E8vPUkAkFBY2Cl2lxF4ApTsH+IjAJD
-         5ST9VX09mgHZZsJEIMA/ebjT7Lz4mUGOZBK/drETLfnMguxN+U4Wuxym8eUdZt5ukQd/
-         yb6yXD/aSYUGvsfugJy8GFOyCmqkHV5I4Aqd0KbYsk2IqDAZHs1yYvyMeu9UWdWcwW/u
-         f7XFeC757VLXtJ8bgn994plfuJcDt8JgKbhT0QJ3mT5/Y/fHKE+MNxv/QUs9XpwK1ecP
-         g6KQ==
+        bh=gCX0Cq2GAOb+HKelfUxQofhrSD3aXLWfkpSKpojO9zM=;
+        b=mzrKkixHrb9/nsj4sF6JjAriaqcVvoO4wLa0ffDvd0ap4qKdPGZibgkoC3T4eDSlUo
+         5t9LTmc4Tnrx4GlT0iG591ZkugsDniu6c1/73tXZTGENI5BvrW+u2Jn62cTnVmSpEA6R
+         rPika+WmdBiGf0+Po+EFwb7OPREQ7YmbyIhpGAi+wPXTKScPk64y9Nqt46LlONevrpsE
+         LPQqB9mR8SmOuqTDNcMtwOyOiyavLsjD95/XVmLsUNO6EB0CyjywJy/U05w9m+7E1wYV
+         pUY/y/vM3Gj73YVd1mm/Q210TSms4Ko5u8ZZQn9ouBN8CMK4BaFCvVkj6+CYLv2lz/pO
+         gj5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1708447498; x=1709052298;
+        d=1e100.net; s=20230601; t=1708447512; x=1709052312;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=BvCvo+RaXJ2dHblwr22BJpdRxQGM88RjE/ns1gdazCk=;
-        b=oPCYY3vaafiuNQESz+xx2DRA4NS7BqITlLuDCEEH2AFsDErSQCwTFJVueeWT3vx3NH
-         UfZv6kBPZVw02xuujrF73x62EAtuWas9ac6ZxpgugnB4Y5zjH1l+BJlrCythRVmIyqd7
-         8B6zGS1TclCnP6kK20cMHaJByKIgx04CkmZOwNxqzxHwIqBmmYMuubk/EYy2n+1/7ef6
-         P5ZUD8n7voqzN+eDxfrauerEm5JNpcwCArMIefSXTICPsk0Luhc3DFLK1bV31uhh6lSZ
-         79JYGuPtEW6x0aOqYaK+dUEs8w5yHv1GdzCx1HJA3WAiytStNx0hY3+5tDQ0VK7oidFp
-         ih9w==
-X-Gm-Message-State: AOJu0Yw2z/V2MJD7/iQEgq7+q6Nd6eCKLr7hj5xbWLk1cj9NCnLzlhPB
-	8zIlLBonuZfCC9ijQk6aDYYx4bQ7i2tFMXvm3mUaxY1MVAkS/+8EZ6BIt5K4yhqxLQH3hCOztWu
-	LjFk9gWbrxrPc1VsFyTerG/aMz6Jw25ryY6k=
-X-Google-Smtp-Source: AGHT+IGtz+RaegbmjwTCBSBfxarfm6AVfAje5Ck5TJxot2yI1R1jN9b8J/t7z5/1YFmW7lI+TECyvPlzMsoG58P+VNc=
-X-Received: by 2002:a05:6871:713:b0:21e:6670:b84a with SMTP id
- f19-20020a056871071300b0021e6670b84amr12333544oap.5.1708447497954; Tue, 20
- Feb 2024 08:44:57 -0800 (PST)
+        bh=gCX0Cq2GAOb+HKelfUxQofhrSD3aXLWfkpSKpojO9zM=;
+        b=kXSuFvmY5kurPeC45vLUXssnx1Q76Nvh5xAPb7e3f15CmycrxTNYtyKby9CcJYL93I
+         sAhCWJKWjJaGoiQhrIUESxwYv5g17KZ73ZS+0nERxcbZ0Zgd6tuNIdfBUgmX+rY7YOsE
+         pmazltCDZAPdcOCNGgvzFy8fCv+UbbBaAlS12A69cy58e7fM8WRuoQjD+MP9j9iD6aqB
+         3Mw+C3U/1/kh8bZupwIk0jILXHskyaPhr0P/bqhOil2OLVsAphXWrLuK4jtonkpHdjYM
+         VGraVeQ8zwZFNAIy7PHxNQc2NjV2RYQv7ZGCbiV8JWTA868RMRHd+PUWvlwEoARMW5dY
+         xKhw==
+X-Gm-Message-State: AOJu0Yydw5t2FHRUxy/3yeRp6pjh2b13Tvh0GP1V7sxGo8VoS4QYd55t
+	faaKVmLosYL+E3IjykCsz6mV+26yqT0skdsR6pIckueQjbgubbev9et3j3zl4giMS/i7bYVQ0OC
+	arojL9vipKsaFH5D2rao6fe+eYfLMCC+I+K/JpQ==
+X-Google-Smtp-Source: AGHT+IFhzcI529ttysIsa+p7fhm7Mj3QM7twlu3qvsLNdn+uijspZdJZRqRbaICSRowHJC5FDzWcpYsqBCQCH0YqVFg=
+X-Received: by 2002:a05:6870:b24e:b0:21e:5bca:82b7 with SMTP id
+ b14-20020a056870b24e00b0021e5bca82b7mr15829491oam.25.1708447512219; Tue, 20
+ Feb 2024 08:45:12 -0800 (PST)
 MIME-Version: 1.0
-References: <1708419281-26047-1-git-send-email-wangmy@fujitsu.com> <1708419281-26047-18-git-send-email-wangmy@fujitsu.com>
-In-Reply-To: <1708419281-26047-18-git-send-email-wangmy@fujitsu.com>
+References: <1708419281-26047-1-git-send-email-wangmy@fujitsu.com> <1708419281-26047-19-git-send-email-wangmy@fujitsu.com>
+In-Reply-To: <1708419281-26047-19-git-send-email-wangmy@fujitsu.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 20 Feb 2024 08:44:31 -0800
-Message-ID: <CAMKF1soKPqH-sMA7ryLJM0scqmNOwNs4QCurXxC-5KaCSrFsgA@mail.gmail.com>
-Subject: Re: [oe] [meta-python] [PATCH 18/26] python3-sentry-sdk: upgrade
- 1.40.0 -> 1.40.4
+Date: Tue, 20 Feb 2024 08:44:46 -0800
+Message-ID: <CAMKF1sr85j_h6YZy85bDh8Gzx8qPABB9Z8KbS4mO=xdAY5MpNg@mail.gmail.com>
+Subject: Re: [oe] [meta-python] [PATCH 19/26] python3-socketio: upgrade 5.11.0
+ -> 5.11.1
 To: wangmy@fujitsu.com
 Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
@@ -59,8 +59,8 @@ Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 20 Feb 2024 16:45:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108950
+ <openembedded-devel@lists.openembedded.org>; Tue, 20 Feb 2024 16:45:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108951
 
 please rebase this patch on current master-next branch and resend.
 
@@ -70,64 +70,48 @@ On Tue, Feb 20, 2024 at 12:55=E2=80=AFAM wangmy via lists.openembedded.org
 > From: Wang Mingyu <wangmy@fujitsu.com>
 >
 > Changelog:
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> -Only start metrics flusher thread on demand
-> -Bump checkouts/data-schemas from aa7058c to 6121fd3
-> -Turn off metrics for uWSGI
-> -Minor improvements
-> -test: Fix pytest error (#2712)
-> -build(deps): bump types-protobuf from 4.24.0.4 to 4.24.0.20240129
-> -Fix uWSGI workers hanging
-> -Make metrics work with gevent
-> -Guard against engine.url being None
-> -Fix performance regression in sentry_sdk.utils._generate_installed_modul=
-es
-> -Guard against Sentry initialization mid SQLAlchemy cursor
-> -Fix yaml generation script
-> -Fix AWS Lambda workflow
-> -Bump codecov/codecov-action from 3 to 4
-> -Bump actions/cache from 3 to 4
-> -Bump actions/checkout from 3.1.0 to 4.1.1
-> -Bump github/codeql-action from 2 to 3
-> -Bump actions/setup-python from 4 to 5
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D
+> -Connection retry option in the client
+> -use Socket.IO sid in transport
+> -Add support for Python 3.12 and drop 3.7
 >
 > Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 > ---
->  ...ython3-sentry-sdk_1.40.0.bb =3D> python3-sentry-sdk_1.40.4.bb} | 2 +-
+>  .../{python3-socketio_5.11.0.bb =3D> python3-socketio_5.11.1.bb}  | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-python/recipes-devtools/python/{python3-sentry-sdk_1.40.0.bb=
- =3D> python3-sentry-sdk_1.40.4.bb} (86%)
+>  rename meta-python/recipes-devtools/python/{python3-socketio_5.11.0.bb =
+=3D> python3-socketio_5.11.1.bb} (89%)
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-sentry-sdk_1.40.=
-0.bb b/meta-python/recipes-devtools/python/python3-sentry-sdk_1.40.4.bb
-> similarity index 86%
-> rename from meta-python/recipes-devtools/python/python3-sentry-sdk_1.40.0=
-.bb
-> rename to meta-python/recipes-devtools/python/python3-sentry-sdk_1.40.4.b=
+> diff --git a/meta-python/recipes-devtools/python/python3-socketio_5.11.0.=
+bb b/meta-python/recipes-devtools/python/python3-socketio_5.11.1.bb
+> similarity index 89%
+> rename from meta-python/recipes-devtools/python/python3-socketio_5.11.0.b=
 b
-> index ec59c712b..cc27b6fd6 100644
-> --- a/meta-python/recipes-devtools/python/python3-sentry-sdk_1.40.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-sentry-sdk_1.40.4.bb
-> @@ -15,7 +15,7 @@ RDEPENDS:${PN} +=3D "\
->         ${PYTHON_PN}-datetime \
->  "
+> rename to meta-python/recipes-devtools/python/python3-socketio_5.11.1.bb
+> index 72471e956..b89430ef9 100644
+> --- a/meta-python/recipes-devtools/python/python3-socketio_5.11.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-socketio_5.11.1.bb
+> @@ -9,7 +9,7 @@ inherit pypi python_setuptools_build_meta
 >
-> -SRC_URI[sha256sum] =3D "34ad8cfc9b877aaa2a8eb86bfe5296a467fffe0619b931a0=
-5b181c45f6da59bf"
-> +SRC_URI[sha256sum] =3D "657abae98b0050a0316f0873d7149f951574ae6212f71d2e=
-3a1c4c88f62d6456"
+>  PYPI_PACKAGE =3D "python-socketio"
 >
->  PYPI_PACKAGE =3D "sentry-sdk"
+> -SRC_URI[sha256sum] =3D "b03186e04b942088781f6286c13604a853e5e35ed59158c5=
+1ff7af22fa032e6f"
+> +SRC_URI[sha256sum] =3D "bbcbd758ed8c183775cb2853ba001361e2fa018babf5cbe1=
+1a5b77e91c2ec2a2"
 >
+>  PACKAGECONFIG ?=3D "asyncio_client client"
+>  PACKAGECONFIG[asyncio_client] =3D ",,,${PYTHON_PN}-aiohttp ${PYTHON_PN}-=
+websockets"
 > --
 > 2.34.1
 >
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#108936): https://lists.openembedded.org/g/openembedde=
-d-devel/message/108936
-> Mute This Topic: https://lists.openembedded.org/mt/104464225/1997914
+> View/Reply Online (#108939): https://lists.openembedded.org/g/openembedde=
+d-devel/message/108939
+> Mute This Topic: https://lists.openembedded.org/mt/104464229/1997914
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
 > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
 aj.khem@gmail.com]
