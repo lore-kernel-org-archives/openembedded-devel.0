@@ -1,124 +1,144 @@
-Return-Path: <romain.naour@smile.fr>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C512C48BF6
-	for <webhook@archiver.kernel.org>; Wed, 21 Feb 2024 13:29:27 +0000 (UTC)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.web11.12730.1708522160467804794
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4B5C6C48BF6
+	for <webhook@archiver.kernel.org>; Wed, 21 Feb 2024 16:21:08 +0000 (UTC)
+Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
+ by mx.groups.io with SMTP id smtpd.web10.17341.1708532460126568068
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Feb 2024 05:29:20 -0800
+ Wed, 21 Feb 2024 08:21:00 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=O66LvZX1;
- spf=pass (domain: smile.fr, ip: 209.85.128.48, mailfrom: romain.naour@smile.fr)
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-4125df3c40aso35147915e9.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Feb 2024 05:29:20 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=QgD8iHLH;
+ spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-6da9c834646so757517b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Feb 2024 08:21:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1708522159; x=1709126959; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1708532459; x=1709137259; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Z4kBaLtp4N/A0HsHCU/odkmpUCQb7yervyq8n5MTX98=;
-        b=O66LvZX1iu+cygbhdtb5lRg0Ft3eTXNd8rHQu5pSNMI6Ws+pOuSkWEFebnyGaj4sOd
-         62ZXl0t1p8RKfRanKqfgCRmSDBOkrFtpTAOtbop0o0X8IsBJTKYH1OjixEmu3OTOG5Pv
-         LcdLAKs4ZvM8QGdfDcZeR+Bmb759+27dpiHycIlSRLk7m8wqDzABdozyZCCbDx02w989
-         tbe2CarQc+LkYIrj6FMGowakyBg8lPIvBHNneYPNStlocFPxx1eCOHdTyzqqQeNUoNAo
-         zWnAJYbV2euGCCSQXN7F6OJd4nqx03+BWnWdhw0yMR4v4PvleN5diAaTQivPD/cvZbiJ
-         QzGg==
+        bh=71d/j6/T2A4719HO7ebDJjdq715TOz+zMz45OcCFIRE=;
+        b=QgD8iHLHssCxHhvLaQMIRKpJpGI4DBnCicNNEQGnRfNm3AdhAdO/wsWqoGlXJu4Cvo
+         cW39rIH4pvRx+qjFAak7pmv8w24Xt/sBAUdgT4FXdwD7jLgnXMp647nVUfUjD8eBLv+L
+         0cleO7wYe8lPC9ot1Y+lsOFNHyHs30Wibg8KRcHt+bumuWBnZiPESUciTuQVuPY2u4ge
+         Ug+NV31sKfq62FhvcZIf/h6MwJgulAyeFZAjWlZP/VPFXB0FH5XWaIILlogyx81QhgKj
+         r8E6uy7EMwAyQS8Tck5opFjLMfCkEwSV2M1mkQbOSEwfwkYsxV7Jj/ZN3NvuUW8rkUOK
+         1E7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1708522159; x=1709126959;
+        d=1e100.net; s=20230601; t=1708532459; x=1709137259;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Z4kBaLtp4N/A0HsHCU/odkmpUCQb7yervyq8n5MTX98=;
-        b=cMHXXFvaaQCdd9TB0wIxJrVWvmMnj+UFEdsbIg29+sH4ASP563fQq7ckOv0JsGu8kZ
-         474wQ9hPBNcj0tT9T4X1CW56+hg7yfpWoAO0jnbwhN4OpXswQAjWhLFswyQUqJlo4rDH
-         XIeWlIdCxRCAyGWv3bNKRfiiR/TfAl9CUnRXgeJ7+2k79R8hvrlpLZQFK9kT+Q9KDV+j
-         NgrpBhDOYgfv0NvVBKkQHc2GvhCrJM7ynIRbyTjpj46OV8rNNT9MT7TgEQuqcfC6MUdw
-         uoH+e9l3s3atuEm6qDnndoOUjs6h1qKXyiUz84hClcIE4wth4Zyy501T+vOcpj8h2HWR
-         dYUg==
-X-Gm-Message-State: AOJu0Ywa0YEFSdX0ef4qrCjeEOtecaeml5J9ofdpYw8ZwLwopEOY30+c
-	MXXwWNdIOnOIemOj6dKMuf6MzTrnhXIplEtKHVwZSkQr49EdZ8TrpAxLUa7+aD4CNxudXJB2T7Y
-	b
-X-Google-Smtp-Source: AGHT+IFpBwLEuX4yrBgWkgPBjvvir5h5fqFB0mB9HCq8hJQga6FJmjRqMrR4dimllokDpHb2BX++vg==
-X-Received: by 2002:a05:600c:4f13:b0:412:7673:ac11 with SMTP id l19-20020a05600c4f1300b004127673ac11mr1049167wmq.27.1708522158833;
-        Wed, 21 Feb 2024 05:29:18 -0800 (PST)
-Received: from P-NTS-Evian.. ([2a04:cec0:102f:f3c5:3be6:9d2b:1a77:e396])
-        by smtp.gmail.com with ESMTPSA id f19-20020a05600c155300b00411ff030f06sm18703450wmg.9.2024.02.21.05.29.18
+        bh=71d/j6/T2A4719HO7ebDJjdq715TOz+zMz45OcCFIRE=;
+        b=Tbu8Xy3QD3WdvvSHOrLGazYE9u1G3OQmUwGLfqi0Ug7xj0+/d3kqnjaAnctdlg21su
+         NkOQtEbo6xBG+dUUvGFbbwEKZUj/FD7AbfwwSjueRiBS2H5kLLmQWFfHdU3NpEot7HPV
+         MiIa+9r/Jic+tZflgK0nN6flfYywo6EPvJUA+C8qnioFAxXq2YfblN7ydvL/2f6+770q
+         qWT7C6dYQgQ6BZI1kONXagtdGkdUYNZAYMNx7TLxlFL7Lp06BbN+pdnCbzjHBd9sgDLW
+         nG71qUOs6SgW3hBT9byDH2/WI6CKg0InERv7IqoWx+JiGpO+fSkJ1YcOW/abzoofGZxm
+         D3bg==
+X-Gm-Message-State: AOJu0YwRI1Omm0wbCLewl5Kmx6EdS3MgzL4703qVrEZrgws6nCNm3CNM
+	uvDa/4zyyhDVt9iqukW5dqpXIFalBNcq+DYwJqISgMd8bhz7Bj+/b000P6cOj+M=
+X-Google-Smtp-Source: AGHT+IFPh6D/dcCk+BeBrtrjpTYfxzKC3L2o/1Bad6NM8QrsiJRw/QxP4fwE6Qv7m9RvxqeFtpXtBA==
+X-Received: by 2002:a05:6a20:9c8b:b0:1a0:6496:84c1 with SMTP id mj11-20020a056a209c8b00b001a0649684c1mr23805254pzb.37.1708532459112;
+        Wed, 21 Feb 2024 08:20:59 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::67c2])
+        by smtp.gmail.com with ESMTPSA id nv13-20020a17090b1b4d00b00298e639d17esm9753550pjb.22.2024.02.21.08.20.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 21 Feb 2024 05:29:18 -0800 (PST)
-From: Romain Naour <romain.naour@smile.fr>
+        Wed, 21 Feb 2024 08:20:58 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Romain Naour <romain.naour@smile.fr>
-Subject: [PATCH] wavemon: add recipe for version 0.9.5
-Date: Wed, 21 Feb 2024 14:29:14 +0100
-Message-ID: <20240221132914.26748-1-romain.naour@smile.fr>
-X-Mailer: git-send-email 2.43.0
+Cc: Khawaja Shaheryar <behzadshaheryar@gmail.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 1/4] libdaq: add recipe
+Date: Wed, 21 Feb 2024 08:20:54 -0800
+Message-ID: <20240221162057.4154660-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.43.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 21 Feb 2024 13:29:27 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108963
+ <openembedded-devel@lists.openembedded.org>; Wed, 21 Feb 2024 16:21:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108964
 
-wavemon is an ncurses-based monitoring application for wireless network
-devices on Linux.
+From: Khawaja Shaheryar <behzadshaheryar@gmail.com>
 
-We have to provide the path to libnl3 headers since the build system is
-not able to find them.
+I am adding this recipe as snort3 depends on it.
+snort3 recipe will be provided in next commit.
+See more: https://github.com/snort3/libdaq
 
-In order to workaround a link issue with pthread library, we have to
-add -pthread to CFLAGS in order to add the library after the object
-file.
-
-  arm-none-linux-gnueabihf/bin/ld: info_scr.o: undefined reference to symbol 'pthread_mutex_trylock@@GLIBC_2.4'
-  [...]/wavemon/0.9.5-r0/recipe-sysroot/lib/libpthread.so.0: error adding symbols: DSO missing from command line
-
-  "We should mention the library on the command line after the object files being compiled" [1]
-
-[1] https://stackoverflow.com/questions/19901934/libpthread-so-0-error-adding-symbols-dso-missing-from-command-line
-
-Signed-off-by: Romain Naour <romain.naour@smile.fr>
+Signed-off-by: Khawaja Shaheryar <behzadshaheryar@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-support/wavemon/wavemon_0.9.5.bb  | 28 +++++++++++++++++++
- 1 file changed, 28 insertions(+)
- create mode 100644 meta-networking/recipes-support/wavemon/wavemon_0.9.5.bb
+ ...01-example-Use-lm-for-the-fst-module.patch | 32 +++++++++++++++++++
+ .../recipes-connectivity/daq/libdaq_git.bb    | 18 +++++++++++
+ 2 files changed, 50 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/daq/libdaq/0001-example-Use-lm-for-the-fst-module.patch
+ create mode 100644 meta-networking/recipes-connectivity/daq/libdaq_git.bb
 
-diff --git a/meta-networking/recipes-support/wavemon/wavemon_0.9.5.bb b/meta-networking/recipes-support/wavemon/wavemon_0.9.5.bb
+diff --git a/meta-networking/recipes-connectivity/daq/libdaq/0001-example-Use-lm-for-the-fst-module.patch b/meta-networking/recipes-connectivity/daq/libdaq/0001-example-Use-lm-for-the-fst-module.patch
 new file mode 100644
-index 000000000..9da43cf9f
+index 0000000000..7147c042a1
 --- /dev/null
-+++ b/meta-networking/recipes-support/wavemon/wavemon_0.9.5.bb
-@@ -0,0 +1,28 @@
-+SUMMARY = "wavemon is a wireless device monitoring application"
-+HOMEPAGE = "https://github.com/uoaerg/wavemon"
-+DESCRIPTION = "wavemon is a wireless device monitoring application that \
-+	allows you to watch signal and noise levels, packet \
-+	statistics, device configuration and network parameters of \
-+	your wireless network hardware."
++++ b/meta-networking/recipes-connectivity/daq/libdaq/0001-example-Use-lm-for-the-fst-module.patch
+@@ -0,0 +1,32 @@
++From 9357da2a5a829f7a0620e6c19835a65b7b02a8fb Mon Sep 17 00:00:00 2001
++From: Khawaja Shaheryar <behzadshaheryar@gmail.com>
++Date: Tue, 20 Feb 2024 21:03:26 +0500
++Subject: [PATCH] example: Use -lm for the fst module
 +
-+LICENSE = "GPL-3.0-or-later"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=1ebbd3e34237af26da5dc08a4e440464"
++If -lm is not passed in Makefile.am, the following is seen
++| arm-yoe-linux-gnueabi-ld.lld: error: undefined symbol: ceilf
++| >>> referenced by math.h:632 (/usr/include/c++/v1/math.h:632)
++| >>>               libdaq_static_fst_la-daq_fst.o:(std::__1::pair<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<FstKey, FstNode*>, void*>*>, bool> std::__1::__hash_table<std::__1::__hash_value_type<FstKey, FstNode*>, std::__1::__unordered_map_hasher<FstKey, std::__1::__hash_value_type<FstKey, FstNode*>, FstKeyHash, std::__1::equal_to<FstKey>, true>, std::__1::__unordered_map_equal<FstKey, std::__1::__hash_value_type<FstKey, FstNode*>, std::__1::equal_to<FstKey>, FstKeyHash, true>, std::__1::allocator<std::__1::__hash_value_type<FstKey, FstNode*>>>::__emplace_unique_key_args<FstKey, std::__1::pair<FstKey const, FstNode*>>(FstKey const&, std::__1::pair<FstKey const, FstNode*>&&)) in archive ../modules/fst/.libs/libdaq_static_fst.a
 +
-+PACKAGECONFIG ??= "cap"
-+PACKAGECONFIG[cap] = "--with-libcap,--without-libcap,libcap"
++Upstream-Status: Pending
 +
-+DEPENDS = "libnl ncurses"
++Signed-off-by: Khawaja Shaheryar <behzadshaheryar@gmail.com>
++---
++ example/Makefile.am | 1 +
++ 1 file changed, 1 insertion(+)
 +
-+SRC_URI = "git://github.com/uoaerg/wavemon;branch=master;protocol=https"
-+SRCREV = "a7c2f190e010db508ead31fa952478e2a1c13d64"
++diff --git a/example/Makefile.am b/example/Makefile.am
++index 0d5ca31..1eaa9e8 100644
++--- a/example/Makefile.am
+++++ b/example/Makefile.am
++@@ -31,6 +31,7 @@ endif
++ if BUILD_FST_MODULE
++ daqtest_static_CFLAGS += -DBUILD_FST_MODULE
++ daqtest_static_LDADD += ${top_builddir}/modules/fst/libdaq_static_fst.la $(DAQ_FST_LIBS)
+++daqtest_static_LDFLAGS += -lm
++ endif
++ if BUILD_NETMAP_MODULE
++ daqtest_static_CFLAGS += -DBUILD_NETMAP_MODULE
++-- 
++2.34.1
 +
-+# Needs some help to find libnl3 headers.
-+# Reorder -pthread flag on the command line.
-+EXTRA_OEMAKE = "\
-+    CC='${CC}' CFLAGS='${CFLAGS} -pthread -I${STAGING_INCDIR}/libnl3' \
-+"
+diff --git a/meta-networking/recipes-connectivity/daq/libdaq_git.bb b/meta-networking/recipes-connectivity/daq/libdaq_git.bb
+new file mode 100644
+index 0000000000..19346124bf
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/daq/libdaq_git.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "LibDAQ: The Data AcQuisition Library"
++DESCRIPTION = "LibDAQ is a pluggable abstraction layer for interacting with a data source (traditionally a network interface or network data plane)."
++HOMEPAGE = "http://www.snort.org"
++SECTION = "libs"
++LICENSE = "GPL-2.0-only"
++LIC_FILES_CHKSUM = "file://COPYING;md5=79258250506422d064560a7b95b2d53e"
++
++DEPENDS = "libdnet libpcap"
++
++inherit autotools pkgconfig
++
++SRC_URI = "git://github.com/snort3/libdaq.git;protocol=https;branch=master \
++           file://0001-example-Use-lm-for-the-fst-module.patch"
++SRCREV = "c757aaae5a70d5bbb3239c5a16bca217a5aca651"
 +
 +S = "${WORKDIR}/git"
 +
-+# wavemon does not support using out-of-tree builds
-+inherit autotools-brokensep pkgconfig
++FILES:${PN} += "${libdir}/daq/*.so"
 -- 
-2.43.0
+2.43.2
 
 
