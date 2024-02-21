@@ -1,119 +1,124 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <romain.naour@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CAFDBC48BF6
-	for <webhook@archiver.kernel.org>; Wed, 21 Feb 2024 08:19:55 +0000 (UTC)
-Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
- by mx.groups.io with SMTP id smtpd.web10.8717.1708503587418875598
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C512C48BF6
+	for <webhook@archiver.kernel.org>; Wed, 21 Feb 2024 13:29:27 +0000 (UTC)
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+ by mx.groups.io with SMTP id smtpd.web11.12730.1708522160467804794
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Feb 2024 00:19:47 -0800
+ Wed, 21 Feb 2024 05:29:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=SAxI44Eo;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1708503587; x=1740039587;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references;
-  bh=hZFObx2ykQOY9yCl4S0RNM8Oh/GKxrTLaS7ap37HJLs=;
-  b=SAxI44EoBnQbVrNGtPLZDdneUiw4rR4dGyJA6BK32g/DociqLWeb6n28
-   rIWAA5xLLTxx7V/nsqM7v4r615XhIiwKjCG+oYNX5YD5NygvY/bNSc0e/
-   KQW01LlYTJgQGF0+Da0BTW8unIy5blXt8ggONy1kKJmVwP6i0lM7QmYOz
-   6SCXd3MFtcirZxEMtOi7xI2/z0nzXG2+nQyDQF9yEhT2NKau8qEYzlWNc
-   6L2ezdFpfsIQBXU3yAaD7CrGVbSetuuemiLx/+knPUK2ZbhL6sBOLEaQ3
-   7NWoy3OxoipWIdtwH20TropWjSO6ebKfG4dYIMHvfAQ7Cr/HEjeNIlLhx
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10990"; a="150301401"
-X-IronPort-AV: E=Sophos;i="6.06,175,1705330800"; 
-   d="scan'208";a="150301401"
-Received: from unknown (HELO oym-r3.gw.nic.fujitsu.com) ([210.162.30.91])
-  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Feb 2024 17:19:34 +0900
-Received: from oym-m4.gw.nic.fujitsu.com (oym-nat-oym-m4.gw.nic.fujitsu.com [192.168.87.61])
-	by oym-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 9C1CB155872
-	for <openembedded-devel@lists.openembedded.org>; Wed, 21 Feb 2024 17:19:32 +0900 (JST)
-Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by oym-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id D1F6DD530A
-	for <openembedded-devel@lists.openembedded.org>; Wed, 21 Feb 2024 17:19:31 +0900 (JST)
-Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 7312920095793
-	for <openembedded-devel@lists.openembedded.org>; Wed, 21 Feb 2024 17:19:31 +0900 (JST)
-Received: from vm4860.g01.fujitsu.local (unknown [10.167.225.33])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 2DBF01A006B;
-	Wed, 21 Feb 2024 16:19:31 +0800 (CST)
-From: wangmy@fujitsu.com
+ dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=O66LvZX1;
+ spf=pass (domain: smile.fr, ip: 209.85.128.48, mailfrom: romain.naour@smile.fr)
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-4125df3c40aso35147915e9.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Feb 2024 05:29:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1708522159; x=1709126959; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Z4kBaLtp4N/A0HsHCU/odkmpUCQb7yervyq8n5MTX98=;
+        b=O66LvZX1iu+cygbhdtb5lRg0Ft3eTXNd8rHQu5pSNMI6Ws+pOuSkWEFebnyGaj4sOd
+         62ZXl0t1p8RKfRanKqfgCRmSDBOkrFtpTAOtbop0o0X8IsBJTKYH1OjixEmu3OTOG5Pv
+         LcdLAKs4ZvM8QGdfDcZeR+Bmb759+27dpiHycIlSRLk7m8wqDzABdozyZCCbDx02w989
+         tbe2CarQc+LkYIrj6FMGowakyBg8lPIvBHNneYPNStlocFPxx1eCOHdTyzqqQeNUoNAo
+         zWnAJYbV2euGCCSQXN7F6OJd4nqx03+BWnWdhw0yMR4v4PvleN5diAaTQivPD/cvZbiJ
+         QzGg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1708522159; x=1709126959;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Z4kBaLtp4N/A0HsHCU/odkmpUCQb7yervyq8n5MTX98=;
+        b=cMHXXFvaaQCdd9TB0wIxJrVWvmMnj+UFEdsbIg29+sH4ASP563fQq7ckOv0JsGu8kZ
+         474wQ9hPBNcj0tT9T4X1CW56+hg7yfpWoAO0jnbwhN4OpXswQAjWhLFswyQUqJlo4rDH
+         XIeWlIdCxRCAyGWv3bNKRfiiR/TfAl9CUnRXgeJ7+2k79R8hvrlpLZQFK9kT+Q9KDV+j
+         NgrpBhDOYgfv0NvVBKkQHc2GvhCrJM7ynIRbyTjpj46OV8rNNT9MT7TgEQuqcfC6MUdw
+         uoH+e9l3s3atuEm6qDnndoOUjs6h1qKXyiUz84hClcIE4wth4Zyy501T+vOcpj8h2HWR
+         dYUg==
+X-Gm-Message-State: AOJu0Ywa0YEFSdX0ef4qrCjeEOtecaeml5J9ofdpYw8ZwLwopEOY30+c
+	MXXwWNdIOnOIemOj6dKMuf6MzTrnhXIplEtKHVwZSkQr49EdZ8TrpAxLUa7+aD4CNxudXJB2T7Y
+	b
+X-Google-Smtp-Source: AGHT+IFpBwLEuX4yrBgWkgPBjvvir5h5fqFB0mB9HCq8hJQga6FJmjRqMrR4dimllokDpHb2BX++vg==
+X-Received: by 2002:a05:600c:4f13:b0:412:7673:ac11 with SMTP id l19-20020a05600c4f1300b004127673ac11mr1049167wmq.27.1708522158833;
+        Wed, 21 Feb 2024 05:29:18 -0800 (PST)
+Received: from P-NTS-Evian.. ([2a04:cec0:102f:f3c5:3be6:9d2b:1a77:e396])
+        by smtp.gmail.com with ESMTPSA id f19-20020a05600c155300b00411ff030f06sm18703450wmg.9.2024.02.21.05.29.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 21 Feb 2024 05:29:18 -0800 (PST)
+From: Romain Naour <romain.naour@smile.fr>
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 4/4] python3-sentry-sdk: upgrade 1.40.0 -> 1.40.4
-Date: Wed, 21 Feb 2024 16:19:19 +0800
-Message-Id: <1708503559-1895-4-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1708503559-1895-1-git-send-email-wangmy@fujitsu.com>
-References: <1708503559-1895-1-git-send-email-wangmy@fujitsu.com>
-X-TM-AS-GCONF: 00
-X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28204.005
-X-TM-AS-User-Approved-Sender: Yes
-X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28204.005
-X-TMASE-Result: 10--1.905700-10.000000
-X-TMASE-MatchedRID: EzAtoNUuirijz0nOeth/yUIIxwDaU5mrsBSA1tuZVSZqTj+cW75OIDq5
-	pN7LydEY+FyTwBk2ojw76EG8K9nMWCSTQ+POZGNWGFMYlDUzwr1ITEcvqjcF4P5FpHriNwIFlrH
-	7mJSSe4VBOq1LSIbi+w3KvrUy7pE6bRev5+PfDD/y3h9RQZ4StME5XPQnBzGX+rNJicjlVL2em2
-	vw+cenKeLzNWBegCW29sZ0UX0EaOILbigRnpKlKZx+7GyJjhAU6SpZvfhtTrX+AKj3VuUy6LvUT
-	q37A01khUm794tP1kr/oKvmqeVb9r7LmHkxKZmnhkTgFeZgLh2iUmnv825bNidmYSLRg/wR7H2f
-	VekOqwmYL1KImKhq1ZuOe7yPCBvAf2OJxbAVgHQ+kK598Yf3Mg==
-X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
+Cc: Romain Naour <romain.naour@smile.fr>
+Subject: [PATCH] wavemon: add recipe for version 0.9.5
+Date: Wed, 21 Feb 2024 14:29:14 +0100
+Message-ID: <20240221132914.26748-1-romain.naour@smile.fr>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 21 Feb 2024 08:19:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108962
+ <openembedded-devel@lists.openembedded.org>; Wed, 21 Feb 2024 13:29:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108963
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+wavemon is an ncurses-based monitoring application for wireless network
+devices on Linux.
 
-Changelog:
-==========
--Only start metrics flusher thread on demand
--Bump checkouts/data-schemas from aa7058c to 6121fd3
--Turn off metrics for uWSGI
--Minor improvements
--test: Fix pytest error (#2712)
--build(deps): bump types-protobuf from 4.24.0.4 to 4.24.0.20240129
--Fix uWSGI workers hanging
--Make metrics work with gevent
--Guard against engine.url being None
--Fix performance regression in sentry_sdk.utils._generate_installed_modules
--Guard against Sentry initialization mid SQLAlchemy cursor
--Fix yaml generation script
--Fix AWS Lambda workflow
--Bump codecov/codecov-action from 3 to 4
--Bump actions/cache from 3 to 4
--Bump actions/checkout from 3.1.0 to 4.1.1
--Bump github/codeql-action from 2 to 3
--Bump actions/setup-python from 4 to 5
+We have to provide the path to libnl3 headers since the build system is
+not able to find them.
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+In order to workaround a link issue with pthread library, we have to
+add -pthread to CFLAGS in order to add the library after the object
+file.
+
+  arm-none-linux-gnueabihf/bin/ld: info_scr.o: undefined reference to symbol 'pthread_mutex_trylock@@GLIBC_2.4'
+  [...]/wavemon/0.9.5-r0/recipe-sysroot/lib/libpthread.so.0: error adding symbols: DSO missing from command line
+
+  "We should mention the library on the command line after the object files being compiled" [1]
+
+[1] https://stackoverflow.com/questions/19901934/libpthread-so-0-error-adding-symbols-dso-missing-from-command-line
+
+Signed-off-by: Romain Naour <romain.naour@smile.fr>
 ---
- ...ython3-sentry-sdk_1.40.0.bb => python3-sentry-sdk_1.40.4.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-sentry-sdk_1.40.0.bb => python3-sentry-sdk_1.40.4.bb} (85%)
+ .../recipes-support/wavemon/wavemon_0.9.5.bb  | 28 +++++++++++++++++++
+ 1 file changed, 28 insertions(+)
+ create mode 100644 meta-networking/recipes-support/wavemon/wavemon_0.9.5.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-sentry-sdk_1.40.0.bb b/meta-python/recipes-devtools/python/python3-sentry-sdk_1.40.4.bb
-similarity index 85%
-rename from meta-python/recipes-devtools/python/python3-sentry-sdk_1.40.0.bb
-rename to meta-python/recipes-devtools/python/python3-sentry-sdk_1.40.4.bb
-index 19095b30d..f3f2a5d20 100644
---- a/meta-python/recipes-devtools/python/python3-sentry-sdk_1.40.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-sentry-sdk_1.40.4.bb
-@@ -15,7 +15,7 @@ RDEPENDS:${PN} += "\
- 	python3-datetime \
- "
- 
--SRC_URI[sha256sum] = "34ad8cfc9b877aaa2a8eb86bfe5296a467fffe0619b931a05b181c45f6da59bf"
-+SRC_URI[sha256sum] = "657abae98b0050a0316f0873d7149f951574ae6212f71d2e3a1c4c88f62d6456"
- 
- PYPI_PACKAGE = "sentry-sdk"
- 
+diff --git a/meta-networking/recipes-support/wavemon/wavemon_0.9.5.bb b/meta-networking/recipes-support/wavemon/wavemon_0.9.5.bb
+new file mode 100644
+index 000000000..9da43cf9f
+--- /dev/null
++++ b/meta-networking/recipes-support/wavemon/wavemon_0.9.5.bb
+@@ -0,0 +1,28 @@
++SUMMARY = "wavemon is a wireless device monitoring application"
++HOMEPAGE = "https://github.com/uoaerg/wavemon"
++DESCRIPTION = "wavemon is a wireless device monitoring application that \
++	allows you to watch signal and noise levels, packet \
++	statistics, device configuration and network parameters of \
++	your wireless network hardware."
++
++LICENSE = "GPL-3.0-or-later"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=1ebbd3e34237af26da5dc08a4e440464"
++
++PACKAGECONFIG ??= "cap"
++PACKAGECONFIG[cap] = "--with-libcap,--without-libcap,libcap"
++
++DEPENDS = "libnl ncurses"
++
++SRC_URI = "git://github.com/uoaerg/wavemon;branch=master;protocol=https"
++SRCREV = "a7c2f190e010db508ead31fa952478e2a1c13d64"
++
++# Needs some help to find libnl3 headers.
++# Reorder -pthread flag on the command line.
++EXTRA_OEMAKE = "\
++    CC='${CC}' CFLAGS='${CFLAGS} -pthread -I${STAGING_INCDIR}/libnl3' \
++"
++
++S = "${WORKDIR}/git"
++
++# wavemon does not support using out-of-tree builds
++inherit autotools-brokensep pkgconfig
 -- 
-2.34.1
+2.43.0
 
 
