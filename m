@@ -2,54 +2,54 @@ Return-Path: <tim.orling@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C0B6EC48BEB
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CF61AC48BF8
 	for <webhook@archiver.kernel.org>; Thu, 22 Feb 2024 04:26:44 +0000 (UTC)
-Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
- by mx.groups.io with SMTP id smtpd.web10.6186.1708576003715742377
+Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
+ by mx.groups.io with SMTP id smtpd.web11.6266.1708575999188466854
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Feb 2024 20:26:43 -0800
+ Wed, 21 Feb 2024 20:26:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=WgLicx5p;
- spf=pass (domain: konsulko.com, ip: 209.85.210.173, mailfrom: tim.orling@konsulko.com)
-Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-6da4a923b1bso6271992b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Feb 2024 20:26:43 -0800 (PST)
+ dkim=pass header.i=@konsulko.com header.s=google header.b=DtEK01ot;
+ spf=pass (domain: konsulko.com, ip: 209.85.215.182, mailfrom: tim.orling@konsulko.com)
+Received: by mail-pg1-f182.google.com with SMTP id 41be03b00d2f7-5dca1efad59so6797900a12.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Feb 2024 20:26:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1708576003; x=1709180803; darn=lists.openembedded.org;
+        d=konsulko.com; s=google; t=1708575998; x=1709180798; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=HxAy10MS+3fKH1ODQPSgVtCA6YuPYy19XdY4t+x1/u8=;
-        b=WgLicx5p/WYI+s5EgCJgNbcN6BvmnUKDkN+Q8OLKO6WvltSC1n/j/HXidyd4EQQ83F
-         XLkuxqw7MJkLFvFDL2KqWeq9OnVSElMbFOqlPFgAaErt3QPInzu6aHZ5+Wt65bCSVD+z
-         B4wi0ZHumTQm46F/MleJQIWZVMhGRph7Ozaao=
+        bh=6etmwKZpdxTq5PO+kVpqIJJow5pfqVVcJqOs5+PwtuU=;
+        b=DtEK01oty9ktTL9QF2zG8TUL1r5GW7R/r28gqtgK1ynuKoqB70b6btXc1mn/7UcTeU
+         j6Wizk7VbC8CqWX288GXW22BKkUFw9Ww6z4WKfWe/vKiaGfDRw5cDyWw2yFXSx1ODcpg
+         88+pcKnhnr1gIhEd4uErJGeczJMcJojQAITcE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1708576003; x=1709180803;
+        d=1e100.net; s=20230601; t=1708575998; x=1709180798;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=HxAy10MS+3fKH1ODQPSgVtCA6YuPYy19XdY4t+x1/u8=;
-        b=LX7UkS1OsMVKt7vFoP3fgXsteZ95l84B/4ZC1/qF/nrx9c2RTshtUkVIaXrF9mzKkB
-         f8olyvYRre0ZqWyO8cdvaamlCQqPSK/6ehKQ/rwcWAkUpkPOOe5phE1RySTj+duBSd3c
-         3B1CBJVzGIbQGc3p4zvIjIbLKK0RLZOajoYek2Lfip/5Wztg8i79+YTkZxSehxiiJnTX
-         TnxtCi0pqFje06je1mwX4iOBtkDQu8KFGStp3p/bijSCuePifQisvbZYz48gHpDNrm05
-         mQ6s7sdwfwJInNRe9+D5EZkPvK29ChVoFCgWrLMRulwmGZkxhOHH18T7VFIVpzM2S6EY
-         fLrg==
-X-Gm-Message-State: AOJu0Yz65YiRc3ZhwwbzeY++dXigz+Dq2NhRm3KLhYi5Q4yjLA3IM3Jg
-	kbNh76kFNFH1SmUNAWMI6cASkrzLyc50bTKdXShFgHBPJ4KIa7jhGx8m2XWOOYlG3Z8bd77jvfl
-	OkNg=
-X-Google-Smtp-Source: AGHT+IHSpcVaQpkq7OhcmnAg6lOkJbA+pyuWu20efa4RKKPm5CNNvB5JGVKuqetX1KF8C/01a7Qh+A==
-X-Received: by 2002:a05:6a21:3184:b0:19e:cc0c:dc44 with SMTP id za4-20020a056a21318400b0019ecc0cdc44mr18827924pzb.58.1708576002795;
-        Wed, 21 Feb 2024 20:26:42 -0800 (PST)
+        bh=6etmwKZpdxTq5PO+kVpqIJJow5pfqVVcJqOs5+PwtuU=;
+        b=o+/VpScCmNCitppEtWt4dlAECxvQS758oJTEacaM0B2HazAa8tB7lomLD6Jcd+oUb9
+         jeukk76NTYNFo5DHnKzRZYDcBDU3HWtcyI0zPt+oMbdC8mHmUn5SEmBrXHljZRHB6vyf
+         9ZOo+++SInf/qFpRxbixE5c1QBFMY1QMw7DfjtW5/PN3D+c3+bNkk0AEvpYe0mBePLJK
+         DcRA8vVFn1LwbXAMAT+mtCPcLdpZB0rRHCKGOXCUZtJFnZjwljmQTJROpXWOEU3zGgRZ
+         naFsHQ7CTrYpArnJhOrQO7m0siBGGATlR/i5YkDuZoThrQiwXOdoDB6XsBzd+dUUz/7z
+         Js7w==
+X-Gm-Message-State: AOJu0YxMAOOyDqAlzQYtXJUeeABWgMOkqr8qi/Ixy0uEldzfjDXZKHrL
+	FXYRHyFNcHX5eBYGwTcKeE35DmcULU7HhQrnfv6/h73ohCqpXyTSvvy1wmKqdmmly1rweADCYg7
+	abXg=
+X-Google-Smtp-Source: AGHT+IFrxxFLEl/CPelJaFAer0qTRXU4jrE3UAGkk7DX/3b7XSSDrw5/nMV5PwWPJW7D/W+xnBXt0w==
+X-Received: by 2002:a17:90a:ca84:b0:299:4f75:150e with SMTP id y4-20020a17090aca8400b002994f75150emr10098885pjt.47.1708575997839;
+        Wed, 21 Feb 2024 20:26:37 -0800 (PST)
 Received: from localhost ([2601:1c0:ca01:19f0::d846])
-        by smtp.gmail.com with ESMTPSA id j14-20020a17090aeb0e00b00297138f0496sm2738024pjz.31.2024.02.21.20.26.42
+        by smtp.gmail.com with ESMTPSA id w13-20020a17090aea0d00b00298c17e8135sm10730082pjy.13.2024.02.21.20.26.37
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 21 Feb 2024 20:26:42 -0800 (PST)
+        Wed, 21 Feb 2024 20:26:37 -0800 (PST)
 From: Tim Orling <tim.orling@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 3/3] meta-python-image-ptest: add PTESTS_PROBLEMS_META_PYTHON
-Date: Wed, 21 Feb 2024 20:26:31 -0800
-Message-Id: <0993d7cb0c8c9f5882f1d2e1d9e134be9ba72f32.1708573650.git.tim.orling@konsulko.com>
+Subject: [meta-oe][PATCH 1/3] meta-oe-image-ptest: add PTESTS_PROBLEMS_META_OE
+Date: Wed, 21 Feb 2024 20:26:29 -0800
+Message-Id: <32305e4f0fcb8b47212a70bd6febebc40a9604a6.1708573650.git.tim.orling@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1708573650.git.tim.orling@konsulko.com>
 References: <cover.1708573650.git.tim.orling@konsulko.com>
@@ -59,43 +59,43 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 22 Feb 2024 04:26:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108981
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108979
 
 In oe-core, PTESTS_PROBLEMS are also enabled, so even though
 the recipe might have failures or the ptests do not run cleanly,
 the BBCLASSEXTEND still works.
 
-Enable the same behavior for meta-python.
+Enable the same behavior for meta-oe.
 
 Signed-off-by: Tim Orling <tim.orling@konsulko.com>
 ---
- meta-python/recipes-core/images/meta-python-image-ptest-all.bb | 2 +-
- meta-python/recipes-core/images/meta-python-image-ptest.bb     | 2 +-
+ meta-oe/recipes-core/images/meta-oe-image-ptest-all.bb | 2 +-
+ meta-oe/recipes-core/images/meta-oe-image-ptest.bb     | 2 +-
  2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-python/recipes-core/images/meta-python-image-ptest-all.bb b/meta-python/recipes-core/images/meta-python-image-ptest-all.bb
-index 56c392f036..d6708c5fd0 100644
---- a/meta-python/recipes-core/images/meta-python-image-ptest-all.bb
-+++ b/meta-python/recipes-core/images/meta-python-image-ptest-all.bb
+diff --git a/meta-oe/recipes-core/images/meta-oe-image-ptest-all.bb b/meta-oe/recipes-core/images/meta-oe-image-ptest-all.bb
+index e8e1750b0e..da942e8bee 100644
+--- a/meta-oe/recipes-core/images/meta-oe-image-ptest-all.bb
++++ b/meta-oe/recipes-core/images/meta-oe-image-ptest-all.bb
 @@ -9,7 +9,7 @@ REQUIRED_DISTRO_FEATURES = "ptest"
- require conf/include/ptest-packagelists-meta-python.inc
+ require conf/include/ptest-packagelists-meta-oe.inc
  
  # Include the full set of ptests
--PTESTS_META_PYTHON = "${PTESTS_FAST_META_PYTHON} ${PTESTS_SLOW_META_PYTHON}"
-+PTESTS_META_PYTHON = "${PTESTS_FAST_META_PYTHON} ${PTESTS_SLOW_META_PYTHON} ${PTESTS_PROBLEMS_META_PYTHON}"
+-PTESTS_META_OE = "${PTESTS_FAST_META_OE} ${PTESTS_SLOW_META_OE}"
++PTESTS_META_OE = "${PTESTS_FAST_META_OE} ${PTESTS_SLOW_META_OE} ${PTESTS_PROBLEMS_META_OE}"
  
  do_testimage[noexec] = "1"
- do_testimage[depends] = "${@' '.join(['meta-python-image-ptest-'+x+':do_testimage' for x in d.getVar('PTESTS_META_PYTHON').split()])}"
-diff --git a/meta-python/recipes-core/images/meta-python-image-ptest.bb b/meta-python/recipes-core/images/meta-python-image-ptest.bb
-index fed676c42e..9c542855a2 100644
---- a/meta-python/recipes-core/images/meta-python-image-ptest.bb
-+++ b/meta-python/recipes-core/images/meta-python-image-ptest.bb
-@@ -9,7 +9,7 @@ SUMMARY = "meta-python ptest test image"
+ do_testimage[depends] = "${@' '.join(['meta-oe-image-ptest-'+x+':do_testimage' for x in d.getVar('PTESTS_META_OE').split()])}"
+diff --git a/meta-oe/recipes-core/images/meta-oe-image-ptest.bb b/meta-oe/recipes-core/images/meta-oe-image-ptest.bb
+index 4cd1f4497c..b32df0e221 100644
+--- a/meta-oe/recipes-core/images/meta-oe-image-ptest.bb
++++ b/meta-oe/recipes-core/images/meta-oe-image-ptest.bb
+@@ -9,7 +9,7 @@ SUMMARY = "meta-oe ptest test image"
  DESCRIPTION += "Also including the ${MCNAME} ptest package."
  HOMEPAGE = "https://www.openembedded.org/"
  
--PTESTS_META_PYTHON = "${PTESTS_SLOW_META_PYTHON} ${PTESTS_FAST_META_PYTHON}"
-+PTESTS_META_PYTHON = "${PTESTS_SLOW_META_PYTHON} ${PTESTS_FAST_META_PYTHON} ${PTESTS_PROBLEMS_META_PYTHON}"
+-PTESTS_META_OE = "${PTESTS_SLOW_META_OE} ${PTESTS_FAST_META_OE}"
++PTESTS_META_OE = "${PTESTS_SLOW_META_OE} ${PTESTS_FAST_META_OE} ${PTESTS_PROBLEMS_META_OE}"
  
  IMAGE_INSTALL:append = " ${MCNAME}-ptest openssh"
  
