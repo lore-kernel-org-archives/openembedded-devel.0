@@ -1,105 +1,121 @@
-Return-Path: <tim.orling@konsulko.com>
+Return-Path: <mingli.yu@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 011CEC54788
-	for <webhook@archiver.kernel.org>; Thu, 22 Feb 2024 04:26:45 +0000 (UTC)
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
- by mx.groups.io with SMTP id smtpd.web11.6267.1708576001375816827
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C6AB9C48BF8
+	for <webhook@archiver.kernel.org>; Thu, 22 Feb 2024 07:03:25 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.7804.1708585398366487969
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 21 Feb 2024 20:26:41 -0800
+ Wed, 21 Feb 2024 23:03:18 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=lHZ8iNIj;
- spf=pass (domain: konsulko.com, ip: 209.85.214.178, mailfrom: tim.orling@konsulko.com)
-Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-1d7431e702dso73487425ad.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 21 Feb 2024 20:26:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1708576000; x=1709180800; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=gMRsprGIbL5bUTgnPjRe//A2WEw302Ne8WkuG+LnMBY=;
-        b=lHZ8iNIjn38Ayp2UVS2UBSAbQE41fAxBv988Xq9W+pGQBtv3gmUN/DunGZKcEkwC4R
-         wCLoOXuN/JYgYNfA97NTo62ht6I/flZLSpdjEo7pEN4MoRxcHiQk48WFd8yukgYD+hbS
-         8i1nCw/I5dMsnS+upVNOTvirsh9njGNcnTTJE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1708576000; x=1709180800;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=gMRsprGIbL5bUTgnPjRe//A2WEw302Ne8WkuG+LnMBY=;
-        b=EEUPBj8cZ2wOfjPzT3vfHrao5wp/+qp6oPXA4VSpU84BPYL5P5D3ocss+BCEZOex1F
-         AvDTAJ2NR8hlVvMaAiQ71FyKOMyUIG5vNs1y8xNVCFBOSlFsEBtQ7XVqgyVuX3P/iCms
-         Yor5tZcKh4em9222kA0ucLAkvoTRkQbhsOU5PSI6ieCMWiDtGhNrGe8fAESg/RGCY2Up
-         IiElmJBB6fnZb490Z74GRMn2wymaARjZJ6qbcbbG2vyBnUGZgslt2y+22zBeRGOtU0OT
-         tpTH8zReFlHEskqnpBByc+vjDNbYQJNkwpdfBuzNXo+KLKBMpfbh6DhL3XHitEFWnYKZ
-         j56w==
-X-Gm-Message-State: AOJu0YxndG1guIWJSsHWJWps3oagWk9qDQa6zqdIc3M8lKAJCmAyitHk
-	+C7I2l0MZHmYtK90uG35nZBLo14HpISR+IM4IjlkX2w8Jo2HcnBUCHQSTc2uChKCDnBuzL5b9de
-	/zic=
-X-Google-Smtp-Source: AGHT+IH50DvZIP7CTGK01oGvjrrBUUYaMr9ol9MzE4tAI+Xw18ZybbX3nF9AP0NCWPQKTTFQVPSL1A==
-X-Received: by 2002:a17:902:76cc:b0:1d9:11dd:2e1b with SMTP id j12-20020a17090276cc00b001d911dd2e1bmr16348597plt.37.1708575999978;
-        Wed, 21 Feb 2024 20:26:39 -0800 (PST)
-Received: from localhost ([2601:1c0:ca01:19f0::d846])
-        by smtp.gmail.com with ESMTPSA id lf5-20020a170902fb4500b001db43f3629dsm8911600plb.140.2024.02.21.20.26.39
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 21 Feb 2024 20:26:39 -0800 (PST)
-From: Tim Orling <tim.orling@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-perl][PATCH 2/3] meta-perl-image-ptest: add PTESTS_PROBLEMS_META_PERL
-Date: Wed, 21 Feb 2024 20:26:30 -0800
-Message-Id: <61b3add8a0c6454ad3b0eb3636fae0ab5a6183d9.1708573650.git.tim.orling@konsulko.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1708573650.git.tim.orling@konsulko.com>
-References: <cover.1708573650.git.tim.orling@konsulko.com>
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=F5Dnvl1z;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=2782c7dc8f=mingli.yu@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 41M4e3wO003201
+	for <openembedded-devel@lists.openembedded.org>; Wed, 21 Feb 2024 23:03:18 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=AXDce
+	oXeJ0n1eH830Nl6HJAJ5ZDblFhR0bp3/E329Uk=; b=F5Dnvl1zmI97j6Ya5Bqoo
+	/7vxRHgwPlbiH5xEq44JtxVUXEo3mnBmpTHrjRjieocF5lKoHOuLGkpLL3z/wOf4
+	uHMZTXEaphCzBVzJl1S/Z8mxlrXSCwGR3R8MDaPEzhmz7zd4EHlNbVJVovw4ezAL
+	NyDONGqt9QLs4sCBTubShaSFf5ucYZzaBZVoFgYFmQg9AsXjNnd3SXMqZ78jZOKi
+	qm95HbT2MvMTuEi7SaIXNEOcpBrWoNYZWLB0VhEE+vEOE8fO9wuxsg3RGslP6Xa+
+	TXTfUuJ11N15hSOyw0c0cOy/Aj4E0uI9iuOaJvYquuF4j7pixUYwhEUHTlIFPsZl
+	Q==
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3wd20csnmr-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 21 Feb 2024 23:03:17 -0800 (PST)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.35; Wed, 21 Feb 2024 23:03:17 -0800
+Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.35 via Frontend Transport; Wed, 21 Feb 2024 23:03:16 -0800
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] mariadb: Upgrade to 10.11.7
+Date: Thu, 22 Feb 2024 15:03:15 +0800
+Message-ID: <20240222070315.346679-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-GUID: A0BXNvaoFbyIe7_XosyzCzDo1WAnhlou
+X-Proofpoint-ORIG-GUID: A0BXNvaoFbyIe7_XosyzCzDo1WAnhlou
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-02-22_05,2024-02-22_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
+ lowpriorityscore=0 phishscore=0 bulkscore=0 malwarescore=0 adultscore=0
+ impostorscore=0 mlxlogscore=999 suspectscore=0 clxscore=1011 spamscore=0
+ mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2402120000 definitions=main-2402220054
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 22 Feb 2024 04:26:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108980
+ <openembedded-devel@lists.openembedded.org>; Thu, 22 Feb 2024 07:03:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108982
 
-In oe-core, PTESTS_PROBLEMS are also enabled, so even though
-the recipe might have failures or the ptests do not run cleanly,
-the BBCLASSEXTEND still works.
+From: Mingli Yu <mingli.yu@windriver.com>
 
-Enable the same behavior for meta-perl.
+As the change [1] introduced in 10.11.7, there comes below configure failure:
+ | -- Performing Test HAVE_SYSTEM_LIBFMT
+ | CMake Error: try_run() invoked in cross-compiling mode, please set the following cache variables appropriately:
+ |    HAVE_SYSTEM_LIBFMT_EXITCODE (advanced)
+ | For details see /build/tmp-glibc/work/core2-64-wrs-linux/mariadb/10.11.7/build/TryRunResults.cmake
+ | -- Performing Test HAVE_SYSTEM_LIBFMT - Failed
+ [snip]
 
-Signed-off-by: Tim Orling <tim.orling@konsulko.com>
+Considering [1] is mainly used to test fmt 10.0.0 failure and we use libfmt
+10.2.1 now, so define "-DHAVE_SYSTEM_LIBFMT_EXITCODE=0" as workaround [2] to
+fix the above configure error.
+
+[1] https://github.com/MariaDB/server/commit/b5c367cd88e37091ab5f8dab0396c01c97d037e2
+[2] https://jira.mariadb.org/browse/MDEV-30694
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- meta-perl/recipes-core/images/meta-perl-image-ptest-all.bb | 2 +-
- meta-perl/recipes-core/images/meta-perl-image-ptest.bb     | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ .../{mariadb-native_10.11.6.bb => mariadb-native_10.11.7.bb}   | 0
+ meta-oe/recipes-dbs/mysql/mariadb.inc                          | 3 ++-
+ .../mysql/{mariadb_10.11.6.bb => mariadb_10.11.7.bb}           | 0
+ 3 files changed, 2 insertions(+), 1 deletion(-)
+ rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.11.6.bb => mariadb-native_10.11.7.bb} (100%)
+ rename meta-oe/recipes-dbs/mysql/{mariadb_10.11.6.bb => mariadb_10.11.7.bb} (100%)
 
-diff --git a/meta-perl/recipes-core/images/meta-perl-image-ptest-all.bb b/meta-perl/recipes-core/images/meta-perl-image-ptest-all.bb
-index e2cafa98a5..9efe5087f0 100644
---- a/meta-perl/recipes-core/images/meta-perl-image-ptest-all.bb
-+++ b/meta-perl/recipes-core/images/meta-perl-image-ptest-all.bb
-@@ -9,7 +9,7 @@ REQUIRED_DISTRO_FEATURES = "ptest"
- require conf/include/ptest-packagelists-meta-perl.inc
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.11.6.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_10.11.7.bb
+similarity index 100%
+rename from meta-oe/recipes-dbs/mysql/mariadb-native_10.11.6.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb-native_10.11.7.bb
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+index 25dc15b46..9be8ef3eb 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+@@ -25,7 +25,7 @@ SRC_URI = "https://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
+            file://0001-Add-missing-includes-cstdint-and-cstdio.patch \
+           "
+ SRC_URI:append:libc-musl = " file://ppc-remove-glibc-dep.patch"
+-SRC_URI[sha256sum] = "1c0163463e98d71f4780741611a40981eee2bc44d392601ca49bbf948d04dd67"
++SRC_URI[sha256sum] = "5239a245ed90517e96396605cd01ccd8f73cd7442d1b3076b6ffe258110e5157"
  
- # Include the full set of ptests
--PTESTS_META_PERL = "${PTESTS_FAST_META_PERL} ${PTESTS_SLOW_META_PERL}"
-+PTESTS_META_PERL = "${PTESTS_FAST_META_PERL} ${PTESTS_SLOW_META_PERL} ${PTESTS_PROBLEMS_META_PERL}"
+ UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
  
- do_testimage[noexec] = "1"
- do_testimage[depends] = "${@' '.join(['meta-perl-image-ptest-'+x+':do_testimage' for x in d.getVar('PTESTS_META_PERL').split()])}"
-diff --git a/meta-perl/recipes-core/images/meta-perl-image-ptest.bb b/meta-perl/recipes-core/images/meta-perl-image-ptest.bb
-index 7905977828..94d77b97f0 100644
---- a/meta-perl/recipes-core/images/meta-perl-image-ptest.bb
-+++ b/meta-perl/recipes-core/images/meta-perl-image-ptest.bb
-@@ -9,7 +9,7 @@ require conf/include/ptest-packagelists-meta-perl.inc
- DESCRIPTION += "Also including the ${MCNAME} ptest package."
- HOMEPAGE = "https://www.openembedded.org/"
+@@ -96,6 +96,7 @@ EXTRA_OECMAKE = "-DWITH_EMBEDDED_SERVER=ON \
+                  -DMYSQL_DATADIR:PATH=/var/mysql \
+                  -DCAT_EXECUTABLE=`which cat` \
+                  -DSTACK_DIRECTION=1 \
++                 -DHAVE_SYSTEM_LIBFMT_EXITCODE=0 \
+                  -DCMAKE_AR:FILEPATH=${AR}"
  
--PTESTS_META_PERL = "${PTESTS_SLOW_META_PERL} ${PTESTS_FAST_META_PERL}"
-+PTESTS_META_PERL = "${PTESTS_SLOW_META_PERL} ${PTESTS_FAST_META_PERL} ${PTESTS_PROBLEMS_META_PERL}"
  
- IMAGE_INSTALL:append = " ${MCNAME}-ptest openssh"
- 
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.11.6.bb b/meta-oe/recipes-dbs/mysql/mariadb_10.11.7.bb
+similarity index 100%
+rename from meta-oe/recipes-dbs/mysql/mariadb_10.11.6.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb_10.11.7.bb
 -- 
-2.34.1
+2.25.1
 
 
