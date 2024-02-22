@@ -2,71 +2,89 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 77D72C5478C
-	for <webhook@archiver.kernel.org>; Thu, 22 Feb 2024 18:03:09 +0000 (UTC)
-Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
- by mx.groups.io with SMTP id smtpd.web10.20012.1708624979320891039
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EB8D5C48BF8
+	for <webhook@archiver.kernel.org>; Thu, 22 Feb 2024 18:50:39 +0000 (UTC)
+Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
+ by mx.groups.io with SMTP id smtpd.web11.20967.1708627832765643315
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Feb 2024 10:02:59 -0800
+ Thu, 22 Feb 2024 10:50:32 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=hcutELRi;
- spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-6e457fab0e2so58828b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Feb 2024 10:02:59 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=fQSN4/dk;
+ spf=pass (domain: gmail.com, ip: 209.85.214.182, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f182.google.com with SMTP id d9443c01a7336-1d7881b1843so741995ad.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Feb 2024 10:50:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1708624978; x=1709229778; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1708627832; x=1709232632; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Z03g7iAxs2uhIY9IJamvpQ44x7Hbs+unUVkkGjdwpnY=;
-        b=hcutELRiiaCGO8j+A+z1F18t+dxenh770QM11qKmtnGaQxl//+hYbCCXYMcee65SvG
-         oNTRQzjSuao+BVhuP88e6oCR4PPleX2XCut/p3yEpNVi8BdwNdlpn9l+jYsgzX+LoRGW
-         jhxiZ4VpgvaL1YLnBelluyK3RfMXVlXX/72WIZcbWPHjfoun+fGF/F2TXoHZWHJ+Zg+P
-         LbhyHRvf3e5WEUUy1cbbtQBd9/gnpvsh6/tr4ToTB5FhAoco965zY/QKHjpwBsM9ED6l
-         qadWAEdKQLEYbnc6oKowrthOFWHQf3pXkRwMMOq0s23cV9lThaQo7hfjMr/RY6KsjKva
-         q4xQ==
+        bh=dFBmEabJwnkW4yfuEJa9vsio2UAwxAF6NCde7s0NrwQ=;
+        b=fQSN4/dkxY/sfEl36jetf9tW+EKbFJULsp1LmXFXrROEvw0DcF36B3omzRgqaXGTOO
+         l4kX/zcVe7fq/7jbSJNJd+xWrZo4ToIKFG3aaFUX4rLRdjJQeSD2eF9W5X9FN/8NM90/
+         EcaDBTdSm8CGEz7UDC03PPNLuc36drRaghCUAT466T0Gm99O7FFu4SxpTlNTDNBiaG75
+         gZUuF5SQQXF7S3ZNbOXsljlQnyPlbVv3g5scMyoOvm4l9tKF3ylXbkVozMPcVbPbbcnh
+         6Uc/7gj1PQsRHmfzVfc2v8wI5lE1C9ryNxuLaeuY621PaQkL0eA0JuH0L3/0tWIMm5FW
+         4LWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1708624978; x=1709229778;
+        d=1e100.net; s=20230601; t=1708627832; x=1709232632;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Z03g7iAxs2uhIY9IJamvpQ44x7Hbs+unUVkkGjdwpnY=;
-        b=XTZlxId7WHE1ZAy2HIOJXUDgdpmDqz09Hdbl4Wx3O2jUDbG7+0u3OcoMKFjArndDuk
-         iq+nvJmHlzsnT0ysAb4jAPpfivq/LNvJi9CVk1ajn3wO7NMtnODlYZzuGQ0WPURnY1BA
-         BBgpq0SHt56OanvNw35GuVfp62HGXf5MHi10R6Qu5yNGkSJ2KzDtksWC1orqJmrsr8dC
-         g/2DH93dEMJskqfeG2lnsOJcbzRlzyWZmeBhoepEDxYBNUaoYK2UOXpYLoTQ9UsKfwhf
-         kKiMyVwQLUUm4+v9zTm6cBESosYEREKAOSWfJemn5lQoppA14DPXNsz9K9XE5zKysRMd
-         AcPw==
-X-Gm-Message-State: AOJu0YxMLdS3xi2V7t1mKYup6Cq0wItJ5zbIbydmqK8tarN1rhLgbYNj
-	fjYyocslpq747Qo3YilBcuelXDLEaKtiTBUXL0l7ZKU+GkgGIGaBibQryoBq6Qo=
-X-Google-Smtp-Source: AGHT+IFXYMfGTpAFmpeOSq/CpU54B5mQ4ow41lkPHkNlFiHdKs3RU5QjmCr4PqPw4xed/vVW9b9MJQ==
-X-Received: by 2002:aa7:9dcd:0:b0:6e4:7a6c:7035 with SMTP id g13-20020aa79dcd000000b006e47a6c7035mr4125473pfq.2.1708624978488;
-        Thu, 22 Feb 2024 10:02:58 -0800 (PST)
+        bh=dFBmEabJwnkW4yfuEJa9vsio2UAwxAF6NCde7s0NrwQ=;
+        b=GrQq2hxLCQG8QVdVOXx3JVXco19TDcOSlGzf45dJhyVyPkaERycnmNLOdCq6zNAQgo
+         rOgJph8IbhLPtU3eNLzwdGP9rSUm8HQfIGqRTNMXicc0MunnehXovXut1G2kZxmrvMo/
+         OuZVpGa+74NraozRkvGiYD4RLls5gTack3b62tOCMnqB0xvN3Ph/Q4pE2jC4yvmoWBoD
+         mrY2YRYTd3ykoZH2j55A0hst2HbtacP3TMMrmWgoNVX+LNx9z2NvaB9lZGpkZLFPu+nP
+         d3jUxIKXzTIxp4u5OmhAsALgW/0W7W+16+/yr/cmZWGjEYlg1A854eJ9bdvdH76LfpVi
+         NETg==
+X-Gm-Message-State: AOJu0YyjESc6cUop/IgkYAayYjv5pfgNLHrOREtwMKzt/NR6J9wr2RsL
+	HgPs/FAf8+LEgKqeFBrZm4gkpoBEKXD683cGPSlLgsBgGwETDIGLbdNDcZ3BaMY=
+X-Google-Smtp-Source: AGHT+IFCW2+diRkxavzcXDEzkvJS+c9G2uwKZNf9E7Nszi9tM/UXeHfSk2zL9Dk2N+IyBmjsDNjl3Q==
+X-Received: by 2002:a17:902:9006:b0:1d7:524:a4f8 with SMTP id a6-20020a170902900600b001d70524a4f8mr21587629plp.41.1708627831631;
+        Thu, 22 Feb 2024 10:50:31 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::7619])
-        by smtp.gmail.com with ESMTPSA id o25-20020a056a001b5900b006e3b868b8b2sm9872117pfv.156.2024.02.22.10.02.57
+        by smtp.gmail.com with ESMTPSA id qa8-20020a17090b4fc800b002989901759bsm4413100pjb.42.2024.02.22.10.50.31
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Feb 2024 10:02:58 -0800 (PST)
+        Thu, 22 Feb 2024 10:50:31 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH] python3-jsmin: Fix ptests to run with python 3.12+
-Date: Thu, 22 Feb 2024 10:02:56 -0800
-Message-ID: <20240222180256.2212406-1-raj.khem@gmail.com>
+Subject: [meta-python][PATCH v2] python3-jsmin: Fix ptests to run with python 3.12+
+Date: Thu, 22 Feb 2024 10:50:29 -0800
+Message-ID: <20240222185029.2463631-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.43.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 22 Feb 2024 18:03:09 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108991
+ <openembedded-devel@lists.openembedded.org>; Thu, 22 Feb 2024 18:50:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108992
+
+Remove it from problematic tests list ot fast list as it runs ok now.
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
+v2: Fix test output and remove from problematic list
+
+ .../ptest-packagelists-meta-python.inc        |  1 -
  ...d76c2d6bfb917f30ced8f5c0a9a4157f7819.patch | 82 +++++++++++++++++++
+ .../python/python3-jsmin/run-ptest            |  3 +-
  .../python/python3-jsmin_3.0.1.bb             |  1 +
- 2 files changed, 83 insertions(+)
+ 4 files changed, 84 insertions(+), 3 deletions(-)
  create mode 100644 meta-python/recipes-devtools/python/python3-jsmin/7a75d76c2d6bfb917f30ced8f5c0a9a4157f7819.patch
 
+diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+index c899166a7c..790d5b019d 100644
+--- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
++++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+@@ -76,7 +76,6 @@ PTESTS_PROBLEMS_META_PYTHON ="\
+     python3-dnspython \
+     python3-fastjsonschema \
+     python3-gpiod \
+-    python3-jsmin \
+     python3-ordered-set \
+     python3-pillow \
+     python3-pint \
 diff --git a/meta-python/recipes-devtools/python/python3-jsmin/7a75d76c2d6bfb917f30ced8f5c0a9a4157f7819.patch b/meta-python/recipes-devtools/python/python3-jsmin/7a75d76c2d6bfb917f30ced8f5c0a9a4157f7819.patch
 new file mode 100644
 index 0000000000..2646e2f5a0
@@ -155,6 +173,15 @@ index 0000000000..2646e2f5a0
 + 
 +     def test_preserve_copyright(self):
 +         original = '''
+diff --git a/meta-python/recipes-devtools/python/python3-jsmin/run-ptest b/meta-python/recipes-devtools/python/python3-jsmin/run-ptest
+index cbcfffda5b..586608d7b2 100644
+--- a/meta-python/recipes-devtools/python/python3-jsmin/run-ptest
++++ b/meta-python/recipes-devtools/python/python3-jsmin/run-ptest
+@@ -1,3 +1,2 @@
+ #!/bin/sh
+-
+-python3 test.py
++pytest -vv test.py | sed -e 's/\[...%\]//g'| sed -e 's/PASSED/PASS/g'| sed -e 's/FAILED/FAIL/g'|sed -e 's/SKIPPED/SKIP/g'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS"){printf "%s: %s\n", $NF, $0}else{print}}'| awk '{if ($NF=="PASS" || $NF=="FAIL" || $NF=="SKIP" || $NF=="XFAIL" || $NF=="XPASS") {$NF="";print $0}else{print}}'
 diff --git a/meta-python/recipes-devtools/python/python3-jsmin_3.0.1.bb b/meta-python/recipes-devtools/python/python3-jsmin_3.0.1.bb
 index 15c9b14595..c3129e7b53 100644
 --- a/meta-python/recipes-devtools/python/python3-jsmin_3.0.1.bb
