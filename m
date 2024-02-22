@@ -1,149 +1,153 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F3F2FC54788
-	for <webhook@archiver.kernel.org>; Thu, 22 Feb 2024 14:28:37 +0000 (UTC)
-Received: from esa5.hc1455-7.c3s2.iphmx.com (esa5.hc1455-7.c3s2.iphmx.com [68.232.139.130])
- by mx.groups.io with SMTP id smtpd.web10.13956.1708612107493363625
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9BAB9C48BF8
+	for <webhook@archiver.kernel.org>; Thu, 22 Feb 2024 15:18:38 +0000 (UTC)
+Received: from mail-oa1-f45.google.com (mail-oa1-f45.google.com [209.85.160.45])
+ by mx.groups.io with SMTP id smtpd.web11.15105.1708615117856370308
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Feb 2024 06:28:27 -0800
+ Thu, 22 Feb 2024 07:18:37 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=U08N6ahI;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.130, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1708612107; x=1740148107;
-  h=from:to:cc:subject:date:message-id;
-  bh=EhKsmewKYEbNqaMAX6GJBO8RzVXWgu1QIVuKLxWDWaY=;
-  b=U08N6ahI/go7MKwqGqsGHflDSK3ZagHViZ7MSoeF8lmxEIGr3Z60OkDS
-   jsFE2TwCbtAGJGPFW7WNrKhgL9idNIqucgIvVOcyGpedxzPgyPN3x6LbS
-   WTKo84OyX5bEpJtAPGgBpzJNmllf8zuhxhpdc25CrN4WHsw+hNay6UDjr
-   UQQoY/70FbRo5gViQJlggLJ8fLO4PvQKxUbidA8WsrJcfoslh1ZEPBtCB
-   82pbbpe1bR3DSD6N/lAgEn0e4HXAxO9aqNipe2gcxOpXo7phk2DYQGDqv
-   a7uttkUQmoVwMzwCLif4/8vPOPPzJWCwQ9j0WQuHLg2RupPiOV/hijy/1
-   g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10991"; a="149633544"
-X-IronPort-AV: E=Sophos;i="6.06,179,1705330800"; 
-   d="scan'208";a="149633544"
-Received: from unknown (HELO oym-r3.gw.nic.fujitsu.com) ([210.162.30.91])
-  by esa5.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Feb 2024 23:28:24 +0900
-Received: from oym-m2.gw.nic.fujitsu.com (oym-nat-oym-m2.gw.nic.fujitsu.com [192.168.87.59])
-	by oym-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 6E508D63CE
-	for <openembedded-devel@lists.openembedded.org>; Thu, 22 Feb 2024 23:28:22 +0900 (JST)
-Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
-	by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 9B5E9D3F72
-	for <openembedded-devel@lists.openembedded.org>; Thu, 22 Feb 2024 23:28:21 +0900 (JST)
-Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 228EE70BFD
-	for <openembedded-devel@lists.openembedded.org>; Thu, 22 Feb 2024 23:28:21 +0900 (JST)
-Received: from vm4860.g01.fujitsu.local (unknown [10.167.225.33])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id A1BDB1A009A;
-	Thu, 22 Feb 2024 22:28:20 +0800 (CST)
-From: wangmy@fujitsu.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH V2] webkitgtk3: upgrade 2.42.4 -> 2.42.5
-Date: Thu, 22 Feb 2024 22:28:15 +0800
-Message-Id: <1708612095-7256-1-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-X-TM-AS-GCONF: 00
-X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28206.007
-X-TM-AS-User-Approved-Sender: Yes
-X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28206.007
-X-TMASE-Result: 10--6.119800-10.000000
-X-TMASE-MatchedRID: 242WXRytjV6jz0nOeth/yaoXHZz/dXlxTfK5j0EZbysyKRnX9xPs4J6j
-	qg90kb/2sRovwaIGbRcMtZdk//12bgzlifXGuD0lHWRJEfGP5nmfmd9HsjZ0UyWxD2S0xfx/4bK
-	KzrJaqbMAjPE9XBt9MfL3NxFKQpq1iCsqewnUZGDNgrlT5Ajc7jeXamXCCu1YMHDHnR8cUQIhS0
-	ofkAkz2Vhh+cFQJYahNDYPBpSwW5qN6MoIzHiu3krOO5m0+0gEGbJMFqqIm9zk++hGM2nSe6bgJ
-	3ym+c0eFnrnG5LOkLYep5R/z/M+R/9ehdaP6yTur7+qhZS/khnExmr5hqNL1nXHQq6zBeSUSexP
-	oTd4iBbxgwYhHpmqNe8EXzJfARL1rWL/xQJnm46eAiCmPx4NwBnUJ0Ek6yhjxEHRux+uk8h+ICq
-	uNi0WJO4aCp0tNFpWUrarCLxdSt/42qtlhio7BpHsPZQWiRFTftwZ3X11IV0=
-X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Xtq4zrrL;
+ spf=pass (domain: gmail.com, ip: 209.85.160.45, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f45.google.com with SMTP id 586e51a60fabf-214def5da12so3774710fac.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Feb 2024 07:18:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1708615117; x=1709219917; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=EawEPm+KQd/Y2fLMbIsjQqAgpzrGgoSyBfGxVimHklU=;
+        b=Xtq4zrrLCWjmggyUAVV7NC9PxayESz97BS3QEdSDYQEM2I2Eg9/IoLWegvPLmrSow4
+         0GIOOEGqeJ5AIO3W2cZNHlGZXLgbGeFVxtCevGkWVpBYk1cPFt3zC+2utHRcaXeyqy1A
+         IQcrVBQcjkX1bs27ynDKbyhI5EHurLSF6EsrTHjitDrDF+GIrYbn7aC129Hg9a2YORmg
+         /ei4oNH1z64B89+Pp0bwNvp5SMK2yeqw1Zm8xb29eFrHYw0wCsGKDeYRYZ5EuvFR5dMt
+         IsYSOX0N7Yr4TssQCm/pNXtHYXaTQeEZIEDQOrJhlMyGxAW2qQzEIwp9yE/HB9PkIX0Q
+         mV1w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1708615117; x=1709219917;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=EawEPm+KQd/Y2fLMbIsjQqAgpzrGgoSyBfGxVimHklU=;
+        b=oWk96s/em+y8BPGi1YPSdlUTujsUebLQhpqFwUrW2J7bWwT9pFVD6gV38FCjO54ieH
+         k2xumXn8gtMDgg7wSd8sFOo/b6FrFdRwiNfRp4nGwT90J3TuJNY7nX20v1ShWfxHOKYN
+         aGvaS25pxg4pn+WUNSPRzCt5fHXIPQDtDMiCnEAlNff4ZeVITuYd2/RXe0r9ntMjKRq7
+         cOloFUHH/ndDWyrENjBbMsKcpTbqUCLM7rXtj8ulSzwNdOJhH1Nhu83W/lHb7ghHsX6/
+         62jiuVvskxjPH65oN+19ouFyzB23pLTYXiZmkJOCz1gE410bi9s4yB5902eOfS5G0eLm
+         N1JA==
+X-Gm-Message-State: AOJu0YxbCWfmyPRmg1i+YYwrpE+Td9ByWlwtfgltCXTPRQv49R6XMQ4S
+	6KtWdN7ik1VPuR09QWVgd+XoVPa1iZeUPuPv3ufJACgaWJtI6JycjNOblivbVkdXAqrRr1Ym1nr
+	hQ1LsksHmHIE/5a3K5ZAZ7VZaBNJAjuiI95/5Kg==
+X-Google-Smtp-Source: AGHT+IECVrLkEguwRDedQ3COb3JTVr3mKQU2iTEAi5CbY6rr3wzgbdl8/EsIB+y1FE6EGWO3VqRbjIL6OvZH6mvaaDI=
+X-Received: by 2002:a05:6870:180c:b0:21e:3c95:68f1 with SMTP id
+ t12-20020a056870180c00b0021e3c9568f1mr22696357oaf.10.1708615117029; Thu, 22
+ Feb 2024 07:18:37 -0800 (PST)
+MIME-Version: 1.0
+References: <20240222070315.346679-1-mingli.yu@windriver.com>
+In-Reply-To: <20240222070315.346679-1-mingli.yu@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 22 Feb 2024 07:18:10 -0800
+Message-ID: <CAMKF1squeo+teS06KUSKaweeYQcVRYSQnCVEF8rV99JFJwRDyQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] mariadb: Upgrade to 10.11.7
+To: "Yu, Mingli" <mingli.yu@eng.windriver.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 22 Feb 2024 14:28:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108988
+ <openembedded-devel@lists.openembedded.org>; Thu, 22 Feb 2024 15:18:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108989
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+fails build on arm
+https://errors.yoctoproject.org/Errors/Details/754269/
 
-Add 01-Fix-build-error.patch to fix build error.
-
-Changelog:
-=========
-- Fix webkit_web_context_allow_tls_certificate_for_host to handle IPv6 URIs produced by SoupURI.
-- Ignore stops with offset zero before last one when rendering gradients with cairo.
-- Write bwrapinfo.json to disk for xdg-desktop-portal.
-- Fix gamepads detection by correctly handling focused window in GTK4.
-- Fix several crashes and rendering issues.
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
----
- .../webkitgtk3/0001-Fix-build-error.patch     | 33 +++++++++++++++++++
- ...kitgtk3_2.42.4.bb => webkitgtk3_2.42.5.bb} |  3 +-
- 2 files changed, 35 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Fix-build-error.patch
- rename meta-oe/recipes-support/webkitgtk/{webkitgtk3_2.42.4.bb => webkitgtk3_2.42.5.bb} (98%)
-
-diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Fix-build-error.patch b/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Fix-build-error.patch
-new file mode 100644
-index 000000000..6cbd10c05
---- /dev/null
-+++ b/meta-oe/recipes-support/webkitgtk/webkitgtk3/0001-Fix-build-error.patch
-@@ -0,0 +1,33 @@
-+From ff00bb783bf1d921e38dcefaa2b709a41d6a3ff8 Mon Sep 17 00:00:00 2001
-+From: Wang Mingyu <wangmy@fujitsu.com>
-+Date: Thu, 22 Feb 2024 03:14:57 +0000
-+Subject: [PATCH] Fix build error.
-+
-+Error message:
-+LowLevelInterpreter.cpp:339:21: error: 't6' was not declared in this scope
-+LowLevelInterpreter.cpp:340:21: error: 't7' was not declared in this scope
-+
-+Upstream-Status: Backport
-+[https://github.com/WebKit/WebKit/commit/3d5373575695b293b8559155431d0079a6153aff]
-+
-+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-+---
-+ Source/JavaScriptCore/llint/LowLevelInterpreter.cpp | 2 --
-+ 1 file changed, 2 deletions(-)
-+
-+diff --git a/Source/JavaScriptCore/llint/LowLevelInterpreter.cpp b/Source/JavaScriptCore/llint/LowLevelInterpreter.cpp
-+index 5064ead6..9a2e2653 100644
-+--- a/Source/JavaScriptCore/llint/LowLevelInterpreter.cpp
-++++ b/Source/JavaScriptCore/llint/LowLevelInterpreter.cpp
-+@@ -336,8 +336,6 @@ JSValue CLoop::execute(OpcodeID entryOpcodeID, void* executableAddress, VM* vm,
-+     UNUSED_VARIABLE(t2);
-+     UNUSED_VARIABLE(t3);
-+     UNUSED_VARIABLE(t5);
-+-    UNUSED_VARIABLE(t6);
-+-    UNUSED_VARIABLE(t7);
-+ 
-+     struct StackPointerScope {
-+         StackPointerScope(CLoopStack& stack)
-+-- 
-+2.34.1
-+
-diff --git a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.42.4.bb b/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.42.5.bb
-similarity index 98%
-rename from meta-oe/recipes-support/webkitgtk/webkitgtk3_2.42.4.bb
-rename to meta-oe/recipes-support/webkitgtk/webkitgtk3_2.42.5.bb
-index 3c6b7db81..9999bc162 100644
---- a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.42.4.bb
-+++ b/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.42.5.bb
-@@ -14,8 +14,9 @@ SRC_URI = "https://www.webkitgtk.org/releases/webkitgtk-${PV}.tar.xz \
-            file://reproducibility.patch \
-            file://0d3344e17d258106617b0e6d783d073b188a2548.patch \
-            file://no-musttail-arm.patch \
-+           file://0001-Fix-build-error.patch \
-            "
--SRC_URI[sha256sum] = "52288b30bda22373442cecb86f9c9a569ad8d4769a1f97b352290ed92a67ed86"
-+SRC_URI[sha256sum] = "b64278c1f20b8cfdbfb5ff573c37d871aba74a1db26d9b39f74e8953fe61e749"
- 
- inherit cmake pkgconfig gobject-introspection perlnative features_check upstream-version-is-even gi-docgen
- 
--- 
-2.34.1
-
+On Wed, Feb 21, 2024 at 11:03=E2=80=AFPM Yu, Mingli <mingli.yu@eng.windrive=
+r.com> wrote:
+>
+> From: Mingli Yu <mingli.yu@windriver.com>
+>
+> As the change [1] introduced in 10.11.7, there comes below configure fail=
+ure:
+>  | -- Performing Test HAVE_SYSTEM_LIBFMT
+>  | CMake Error: try_run() invoked in cross-compiling mode, please set the=
+ following cache variables appropriately:
+>  |    HAVE_SYSTEM_LIBFMT_EXITCODE (advanced)
+>  | For details see /build/tmp-glibc/work/core2-64-wrs-linux/mariadb/10.11=
+.7/build/TryRunResults.cmake
+>  | -- Performing Test HAVE_SYSTEM_LIBFMT - Failed
+>  [snip]
+>
+> Considering [1] is mainly used to test fmt 10.0.0 failure and we use libf=
+mt
+> 10.2.1 now, so define "-DHAVE_SYSTEM_LIBFMT_EXITCODE=3D0" as workaround [=
+2] to
+> fix the above configure error.
+>
+> [1] https://github.com/MariaDB/server/commit/b5c367cd88e37091ab5f8dab0396=
+c01c97d037e2
+> [2] https://jira.mariadb.org/browse/MDEV-30694
+>
+> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+> ---
+>  .../{mariadb-native_10.11.6.bb =3D> mariadb-native_10.11.7.bb}   | 0
+>  meta-oe/recipes-dbs/mysql/mariadb.inc                          | 3 ++-
+>  .../mysql/{mariadb_10.11.6.bb =3D> mariadb_10.11.7.bb}           | 0
+>  3 files changed, 2 insertions(+), 1 deletion(-)
+>  rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.11.6.bb =3D> mariadb=
+-native_10.11.7.bb} (100%)
+>  rename meta-oe/recipes-dbs/mysql/{mariadb_10.11.6.bb =3D> mariadb_10.11.=
+7.bb} (100%)
+>
+> diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.11.6.bb b/meta-o=
+e/recipes-dbs/mysql/mariadb-native_10.11.7.bb
+> similarity index 100%
+> rename from meta-oe/recipes-dbs/mysql/mariadb-native_10.11.6.bb
+> rename to meta-oe/recipes-dbs/mysql/mariadb-native_10.11.7.bb
+> diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/=
+mysql/mariadb.inc
+> index 25dc15b46..9be8ef3eb 100644
+> --- a/meta-oe/recipes-dbs/mysql/mariadb.inc
+> +++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+> @@ -25,7 +25,7 @@ SRC_URI =3D "https://archive.mariadb.org/${BP}/source/$=
+{BP}.tar.gz \
+>             file://0001-Add-missing-includes-cstdint-and-cstdio.patch \
+>            "
+>  SRC_URI:append:libc-musl =3D " file://ppc-remove-glibc-dep.patch"
+> -SRC_URI[sha256sum] =3D "1c0163463e98d71f4780741611a40981eee2bc44d392601c=
+a49bbf948d04dd67"
+> +SRC_URI[sha256sum] =3D "5239a245ed90517e96396605cd01ccd8f73cd7442d1b3076=
+b6ffe258110e5157"
+>
+>  UPSTREAM_CHECK_URI =3D "https://github.com/MariaDB/server/releases"
+>
+> @@ -96,6 +96,7 @@ EXTRA_OECMAKE =3D "-DWITH_EMBEDDED_SERVER=3DON \
+>                   -DMYSQL_DATADIR:PATH=3D/var/mysql \
+>                   -DCAT_EXECUTABLE=3D`which cat` \
+>                   -DSTACK_DIRECTION=3D1 \
+> +                 -DHAVE_SYSTEM_LIBFMT_EXITCODE=3D0 \
+>                   -DCMAKE_AR:FILEPATH=3D${AR}"
+>
+>
+> diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.11.6.bb b/meta-oe/recip=
+es-dbs/mysql/mariadb_10.11.7.bb
+> similarity index 100%
+> rename from meta-oe/recipes-dbs/mysql/mariadb_10.11.6.bb
+> rename to meta-oe/recipes-dbs/mysql/mariadb_10.11.7.bb
+> --
+> 2.25.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#108982): https://lists.openembedded.org/g/openembedde=
+d-devel/message/108982
+> Mute This Topic: https://lists.openembedded.org/mt/104504689/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
