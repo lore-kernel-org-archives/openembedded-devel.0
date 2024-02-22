@@ -2,82 +2,171 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B0F92C48BF8
-	for <webhook@archiver.kernel.org>; Thu, 22 Feb 2024 15:38:08 +0000 (UTC)
-Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
- by mx.groups.io with SMTP id smtpd.web10.15796.1708616287695704302
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 77D72C5478C
+	for <webhook@archiver.kernel.org>; Thu, 22 Feb 2024 18:03:09 +0000 (UTC)
+Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
+ by mx.groups.io with SMTP id smtpd.web10.20012.1708624979320891039
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 22 Feb 2024 07:38:07 -0800
+ Thu, 22 Feb 2024 10:02:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=dTPn65jo;
- spf=pass (domain: gmail.com, ip: 209.85.214.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f182.google.com with SMTP id d9443c01a7336-1dc49afb495so7766245ad.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Feb 2024 07:38:07 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=hcutELRi;
+ spf=pass (domain: gmail.com, ip: 209.85.210.178, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f178.google.com with SMTP id d2e1a72fcca58-6e457fab0e2so58828b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 22 Feb 2024 10:02:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1708616287; x=1709221087; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1708624978; x=1709229778; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=oXMQ7PbS46wf/hQYME7fqj4t7fjBwZklk5oDaZP3C40=;
-        b=dTPn65joa37znQiwdoFHESUqSWj6i+JV2ThdPaIZleknlsDwVWuIoELHLSuchlSEUC
-         B/t320FwP9uAX0L1WNiP4fGqxazSdvIK4HeN823jUnd1ptfPoG6U+7NHalY2UZXa1XRw
-         Msmjw5iEmDsW4iQvTqHiCvjs3K+g8aW5+slf3UNWB+d7rgTjE3Uf0stMkhbna6Uguj2L
-         ZtJFTKuT2Gya5kBr/jgVbRFmu4QM3w3GX0URlWuaqOqKYKX7AgFafctVfxSNvIwuVeKG
-         rslSv6BsiXklRRRMLKzxfktg63bT+HMn4rUuvr7JFWD8ozucDsSvB09GyOtLM9G9rHok
-         enHw==
+        bh=Z03g7iAxs2uhIY9IJamvpQ44x7Hbs+unUVkkGjdwpnY=;
+        b=hcutELRiiaCGO8j+A+z1F18t+dxenh770QM11qKmtnGaQxl//+hYbCCXYMcee65SvG
+         oNTRQzjSuao+BVhuP88e6oCR4PPleX2XCut/p3yEpNVi8BdwNdlpn9l+jYsgzX+LoRGW
+         jhxiZ4VpgvaL1YLnBelluyK3RfMXVlXX/72WIZcbWPHjfoun+fGF/F2TXoHZWHJ+Zg+P
+         LbhyHRvf3e5WEUUy1cbbtQBd9/gnpvsh6/tr4ToTB5FhAoco965zY/QKHjpwBsM9ED6l
+         qadWAEdKQLEYbnc6oKowrthOFWHQf3pXkRwMMOq0s23cV9lThaQo7hfjMr/RY6KsjKva
+         q4xQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1708616287; x=1709221087;
+        d=1e100.net; s=20230601; t=1708624978; x=1709229778;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=oXMQ7PbS46wf/hQYME7fqj4t7fjBwZklk5oDaZP3C40=;
-        b=xALrI7xFqQ+SY/Yq9IhD9ZAd3hyrojy3yk3EsOH6M78iXhPNkq1n3QXQRVClMDl49f
-         VZ/24VvYw22gVrHSJDICvyr88uG+PN9Q8zFKN3aCQvdu1vCW9A8cLJIKk4ZdglxyCvNz
-         nws4lpOevxB5KJCsYaQ/cvOZ2X7IALnzzw977ETdw3TWHHIHsmD4wR5rxDAAtQxEbWUc
-         EFR/TnYNfDnPDQC1s0YUDLvRNmTJtfggQYk12zgVuZ+sFQwxQgQDpti4SxJNhQx8J714
-         lGvil/dT4t91F3pvawM9Zhy8Mto1NxICNsI3VaEWMKnxqcz94ulta8oBhXqs4cYWjiM/
-         0LrQ==
-X-Gm-Message-State: AOJu0YygXxhQm5mKWSTWcvUMNznCRpvMtzo2YvdqxIx856bzXjKAkqkB
-	0/2N5rtZmE7C4GnXvKlCI8x96Mc2/E4YjE30+jZV2JoalKB3qsEnZNMnCaXXWT0=
-X-Google-Smtp-Source: AGHT+IH/jX96HWV+oZacj3c/a7h1pJcQh7frbR3IMRewl89jWow7l4PyxsKi5Aw08uk2/Q0lFoP0DA==
-X-Received: by 2002:a17:90a:c305:b0:29a:691c:8404 with SMTP id g5-20020a17090ac30500b0029a691c8404mr585253pjt.0.1708616286503;
-        Thu, 22 Feb 2024 07:38:06 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::e522])
-        by smtp.gmail.com with ESMTPSA id u17-20020a17090adb5100b0029a04d96d02sm3889433pjx.11.2024.02.22.07.38.05
+        bh=Z03g7iAxs2uhIY9IJamvpQ44x7Hbs+unUVkkGjdwpnY=;
+        b=XTZlxId7WHE1ZAy2HIOJXUDgdpmDqz09Hdbl4Wx3O2jUDbG7+0u3OcoMKFjArndDuk
+         iq+nvJmHlzsnT0ysAb4jAPpfivq/LNvJi9CVk1ajn3wO7NMtnODlYZzuGQ0WPURnY1BA
+         BBgpq0SHt56OanvNw35GuVfp62HGXf5MHi10R6Qu5yNGkSJ2KzDtksWC1orqJmrsr8dC
+         g/2DH93dEMJskqfeG2lnsOJcbzRlzyWZmeBhoepEDxYBNUaoYK2UOXpYLoTQ9UsKfwhf
+         kKiMyVwQLUUm4+v9zTm6cBESosYEREKAOSWfJemn5lQoppA14DPXNsz9K9XE5zKysRMd
+         AcPw==
+X-Gm-Message-State: AOJu0YxMLdS3xi2V7t1mKYup6Cq0wItJ5zbIbydmqK8tarN1rhLgbYNj
+	fjYyocslpq747Qo3YilBcuelXDLEaKtiTBUXL0l7ZKU+GkgGIGaBibQryoBq6Qo=
+X-Google-Smtp-Source: AGHT+IFXYMfGTpAFmpeOSq/CpU54B5mQ4ow41lkPHkNlFiHdKs3RU5QjmCr4PqPw4xed/vVW9b9MJQ==
+X-Received: by 2002:aa7:9dcd:0:b0:6e4:7a6c:7035 with SMTP id g13-20020aa79dcd000000b006e47a6c7035mr4125473pfq.2.1708624978488;
+        Thu, 22 Feb 2024 10:02:58 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::7619])
+        by smtp.gmail.com with ESMTPSA id o25-20020a056a001b5900b006e3b868b8b2sm9872117pfv.156.2024.02.22.10.02.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Feb 2024 07:38:06 -0800 (PST)
+        Thu, 22 Feb 2024 10:02:58 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] ptest-packagelists-meta-oe: Remove oprofile for rv32/rv64
-Date: Thu, 22 Feb 2024 07:38:03 -0800
-Message-ID: <20240222153803.433202-1-raj.khem@gmail.com>
+Subject: [meta-python][PATCH] python3-jsmin: Fix ptests to run with python 3.12+
+Date: Thu, 22 Feb 2024 10:02:56 -0800
+Message-ID: <20240222180256.2212406-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.43.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 22 Feb 2024 15:38:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108990
-
-oprofile is not ported to riscv yet.
+ <openembedded-devel@lists.openembedded.org>; Thu, 22 Feb 2024 18:03:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/108991
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/conf/include/ptest-packagelists-meta-oe.inc | 3 +++
- 1 file changed, 3 insertions(+)
+ ...d76c2d6bfb917f30ced8f5c0a9a4157f7819.patch | 82 +++++++++++++++++++
+ .../python/python3-jsmin_3.0.1.bb             |  1 +
+ 2 files changed, 83 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-jsmin/7a75d76c2d6bfb917f30ced8f5c0a9a4157f7819.patch
 
-diff --git a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-index 06c7de3f8b..0645cfc753 100644
---- a/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-+++ b/meta-oe/conf/include/ptest-packagelists-meta-oe.inc
-@@ -71,3 +71,6 @@ PTESTS_PROBLEMS_META_OE ="\
-     psqlodbc \
-     pv \
- "
+diff --git a/meta-python/recipes-devtools/python/python3-jsmin/7a75d76c2d6bfb917f30ced8f5c0a9a4157f7819.patch b/meta-python/recipes-devtools/python/python3-jsmin/7a75d76c2d6bfb917f30ced8f5c0a9a4157f7819.patch
+new file mode 100644
+index 0000000000..2646e2f5a0
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-jsmin/7a75d76c2d6bfb917f30ced8f5c0a9a4157f7819.patch
+@@ -0,0 +1,82 @@
++From 7a75d76c2d6bfb917f30ced8f5c0a9a4157f7819 Mon Sep 17 00:00:00 2001
++From: aekoroglu <ali.erdinc.koroglu@intel.com>
++Date: Fri, 24 Jun 2022 14:12:59 +0300
++Subject: [PATCH] DeprecationWarning invalid escape sequence fix
 +
-+PTESTS_FAST_META_OE:remove:riscv64 = "oprofile"
-+PTESTS_FAST_META_OE:remove:riscv32 = "oprofile"
++Upstream-Status: Submitted [https://github.com/tikitu/jsmin/pull/38]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ jsmin/test.py | 22 +++++++++++-----------
++ 1 file changed, 11 insertions(+), 11 deletions(-)
++
++diff --git a/jsmin/test.py b/jsmin/test.py
++index 173ac65..afea4e7 100644
++--- a/jsmin/test.py
+++++ b/jsmin/test.py
++@@ -337,8 +337,8 @@ def testImplicitSemicolon3(self):
++         self.assertMinified("return//comment...\r\na", "return\na")
++ 
++     def testSingleComment2(self):
++-        self.assertMinified('x.replace(/\//, "_")// slash to underscore',
++-                'x.replace(/\//,"_")')
+++        self.assertMinified('x.replace(/\\//, "_")// slash to underscore',
+++                'x.replace(/\\//,"_")')
++ 
++     def testSlashesNearComments(self):
++         original = '''
++@@ -383,8 +383,8 @@ def test_space_in_regex(self):
++         self.assertMinified(original, original)
++ 
++     def test_brackets_around_slashed_regex(self):
++-        original = 'function a() { /\//.test("a") }'
++-        expected = 'function a(){/\//.test("a")}'
+++        original = 'function a() { /\\//.test("a") }'
+++        expected = 'function a(){/\\//.test("a")}'
++         self.assertMinified(original, expected)
++ 
++     def test_angular_1(self):
++@@ -455,12 +455,12 @@ def testBackticksTagged(self):
++     def test_issue_bitbucket_16(self):
++         original = """
++             f = function() {
++-                return /DataTree\/(.*)\//.exec(this._url)[1];
+++                return /DataTree\\/(.*)\\//.exec(this._url)[1];
++             }
++         """
++         self.assertMinified(
++             original,
++-            'f=function(){return /DataTree\/(.*)\//.exec(this._url)[1];}')
+++            'f=function(){return /DataTree\\/(.*)\\//.exec(this._url)[1];}')
++ 
++     def test_issue_bitbucket_17(self):
++         original = "// hi\n/^(get|post|head|put)$/i.test('POST')"
++@@ -470,7 +470,7 @@ def test_issue_bitbucket_17(self):
++     def test_issue_6(self):
++         original = '''
++             respond.regex = {
++-                comments: /\/\*[^*]*\*+([^/][^*]*\*+)*\//gi,
+++                comments: /\\/\\*[^*]*\\*+([^/][^*]*\\*+)*\\//gi,
++                 urls: 'whatever'
++             };
++         '''
++@@ -548,16 +548,16 @@ def test_issue_9_multi_comments(self):
++ 
++     def test_issue_12_re_nl_if(self):
++         original = '''
++-            var re = /\d{4}/
+++            var re = /\\d{4}/
++             if (1) { console.log(2); }'''
++         self.assertMinified(
++-            original, 'var re=/\d{4}/\nif(1){console.log(2);}')
+++            original, 'var re=/\\d{4}/\nif(1){console.log(2);}')
++ 
++     def test_issue_12_re_nl_other(self):
++         original = '''
++-            var re = /\d{4}/
+++            var re = /\\d{4}/
++             g = 10'''
++-        self.assertMinified(original , 'var re=/\d{4}/\ng=10')
+++        self.assertMinified(original , 'var re=/\\d{4}/\ng=10')
++ 
++     def test_preserve_copyright(self):
++         original = '''
+diff --git a/meta-python/recipes-devtools/python/python3-jsmin_3.0.1.bb b/meta-python/recipes-devtools/python/python3-jsmin_3.0.1.bb
+index 15c9b14595..c3129e7b53 100644
+--- a/meta-python/recipes-devtools/python/python3-jsmin_3.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-jsmin_3.0.1.bb
+@@ -10,6 +10,7 @@ SRC_URI[sha256sum] = "c0959a121ef94542e807a674142606f7e90214a2b3d1eb17300244bbb5
+ BBCLASSEXTEND = "native nativesdk"
+ 
+ SRC_URI += " \
++  file://7a75d76c2d6bfb917f30ced8f5c0a9a4157f7819.patch \
+ 	file://run-ptest \
+ "
+ 
 -- 
 2.43.2
 
