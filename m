@@ -2,336 +2,212 @@ Return-Path: <archana.polampalli@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 87612C5478C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9BF58C54E4A
 	for <webhook@archiver.kernel.org>; Fri, 23 Feb 2024 08:37:25 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.6597.1708677437653997013
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.6599.1708677442062686464
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 23 Feb 2024 00:37:17 -0800
+ Fri, 23 Feb 2024 00:37:22 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=E/PyAvSR;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=2783f3eaa2=archana.polampalli@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 41N6JMsQ013563
-	for <openembedded-devel@lists.openembedded.org>; Fri, 23 Feb 2024 08:37:17 GMT
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=bIEeeJY0;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=2783f3eaa2=archana.polampalli@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 41N6tdKc017456
+	for <openembedded-devel@lists.openembedded.org>; Fri, 23 Feb 2024 00:37:21 -0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=aWxiw
-	aRXEI2z2K6YYjnjcsI92LSR341F/VBEexFVkNE=; b=E/PyAvSRXkhlKLn0uIrQF
-	Mnvhjf6WGsXpWa7Six3EqVlCilhRiFKx4OF+ZD2vm03K8rYESDkPqY3YRbdBwgGU
-	wXVgCGUu71r43DRbYR3h4fJ0It6rtYh7PXVprrqLQj3+BSaeg3qamx1ka9hWfv3M
-	+BLlTcaEKMZdtJ3dvWRn+otNtEZGaD+iTQjAztqIQfM7xgyKcPT59bMLRqYcVImX
-	ecfmoExpfW8z5ltkasA9Iy2+OBXzUcP//XYXaFVB4Y2U1eaZvXcXQMnFmosjP6WC
-	skcotfeVw9/9Xs9ELGfSpCeat/VgYpblDd8X9dgHlpt1J4YQxsUeQVlUrQqH7abt
-	A==
+	 h=from:to:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding:content-type; s=
+	PPS06212021; bh=8qtHm2q9ojdCYBN85uw2ERzbScFCjS+Ra7B6AsTqEUc=; b=
+	bIEeeJY0VLsHzRffItheqjwwgIS8pCEn5a/pcj5KrkHx3c6l6Fh7qK/uxuiGHbme
+	251nREhPnRFBQFCmbU8Jx8RUGkQHzxS8hHebQXd4c3vF8d8H5YOE1G0/3zO+mSm+
+	ETegxBvZX/9qjeBjtwDGZkbkFDi8DR7Ize277ml5ovp21tRuhldlLFQtrVBSWog2
+	xrh04/L+Mdt/knjLrJsf2njBhkt9n8kXmTSkbx7NBUaeEQpaRhx4zbNvA9ezYUR6
+	j6EHK8IbwdBKRTtw4G6vs1J6dgt8vhO/Skz3/sN5UGpgN68S3lAQZaBynmfdjvQZ
+	lX13YSxlK/3VoVo5T/4NwA==
 Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3wd217ax53-1
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3wd20cjxn9-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 23 Feb 2024 08:37:16 +0000 (GMT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 23 Feb 2024 00:37:21 -0800 (PST)
 Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Fri, 23 Feb 2024 00:37:13 -0800
+ 15.1.2507.35; Fri, 23 Feb 2024 00:37:19 -0800
 From: <archana.polampalli@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][kirkstone][PATCH 1/4] nodejs: fix CVE-2024-22019
-Date: Fri, 23 Feb 2024 08:36:17 +0000
-Message-ID: <20240223083620.182565-1-archana.polampalli@windriver.com>
+Subject: [oe][meta-oe][kirkstone][PATCH 4/4] nodjes: fix CVE-2023-46809
+Date: Fri, 23 Feb 2024 08:36:20 +0000
+Message-ID: <20240223083620.182565-4-archana.polampalli@windriver.com>
 X-Mailer: git-send-email 2.40.0
+In-Reply-To: <20240223083620.182565-1-archana.polampalli@windriver.com>
+References: <20240223083620.182565-1-archana.polampalli@windriver.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [147.11.136.210]
 X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
  ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-GUID: I-QfHV4t8KvllQWRKr4t5OuHA8zpngWM
-X-Proofpoint-ORIG-GUID: I-QfHV4t8KvllQWRKr4t5OuHA8zpngWM
+X-Proofpoint-GUID: JKp50Mkl3Ntvu3T9qA_8_l6qJQJaGdNX
+X-Proofpoint-ORIG-GUID: JKp50Mkl3Ntvu3T9qA_8_l6qJQJaGdNX
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2024-02-22_15,2024-02-22_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- impostorscore=0 suspectscore=0 malwarescore=0 spamscore=0 bulkscore=0
- clxscore=1015 adultscore=0 mlxlogscore=999 lowpriorityscore=0 mlxscore=0
- phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0
+ priorityscore=1501 lowpriorityscore=0 mlxlogscore=999 malwarescore=0
+ clxscore=1015 impostorscore=0 phishscore=0 spamscore=0 suspectscore=0
+ mlxscore=0 bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.19.0-2402120000 definitions=main-2402230059
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 23 Feb 2024 08:37:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109004
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109007
 
 From: Archana Polampalli <archana.polampalli@windriver.com>
 
-A vulnerability in Node.js HTTP servers allows an attacker to send a specially
-crafted HTTP request with chunked encoding, leading to resource exhaustion and
-denial of service (DoS). The server reads an unbounded number of bytes from a
-single connection, exploiting the lack of limitations on chunk extension bytes.
-The issue can cause CPU and network bandwidth exhaustion, bypassing standard
-safeguards like timeouts and body size limits
-
 Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
 ---
- .../nodejs/nodejs/CVE-2024-22019.patch        | 241 ++++++++++++++++++
- .../recipes-devtools/nodejs/nodejs_16.20.2.bb |   1 +
- 2 files changed, 242 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/CVE-2024-22019.patch
+ .../nodejs/nodejs/CVE-2023-46809.patch        | 120 ++++++++++++++++++
+ .../recipes-devtools/nodejs/nodejs_16.20.2.bb |   3 +-
+ 2 files changed, 122 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/CVE-2023-46809.patch
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2024-22019.patch b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2024-22019.patch
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2023-46809.patch b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2023-46809.patch
 new file mode 100644
-index 000000000..26fd2ff87
+index 000000000..87550e996
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2024-22019.patch
-@@ -0,0 +1,241 @@
-+From 03a5c34a829742f1c47b68f831b2940af44addf6 Mon Sep 17 00:00:00 2001
-+From: Paolo Insogna <paolo@cowtech.it>
-+Date: Wed, 3 Jan 2024 07:23:15 +0100
-+Subject: [PATCH] http: add maximum chunk extension size
++++ b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2023-46809.patch
+@@ -0,0 +1,120 @@
++From 54cd268059626800dbe1e02a88b28d9538cf5587 Mon Sep 17 00:00:00 2001
++From: Michael Dawson <midawson@redhat.com>
++Date: Thu, 4 Jan 2024 21:32:51 +0000
++Subject: [PATCH 5/5] crypto: disable PKCS#1 padding for privateDecrypt
 +
-+PR-URL: https://github.com/nodejs-private/node-private/pull/518
-+Fixes: https://hackerone.com/reports/2233486
-+Reviewed-By: Matteo Collina <matteo.collina@gmail.com>
-+Reviewed-By: Marco Ippolito <marcoippolito54@gmail.com>
++Refs: https://hackerone.com/bugs?subject=nodejs&report_id=2269177
++
++Disable RSA_PKCS1_PADDING for crypto.privateDecrypt() in order
++to protect against the Marvin attack.
++
++Includes a security revert flag that can be used to restore
++support.
++
++Signed-off-by: Michael Dawson <midawson@redhat.com>
++PR-URL: https://github.com/nodejs-private/node-private/pull/525
++Refs: https://hackerone.com/bugs?subject=nodejs&report_id=2269177
 +Reviewed-By: Rafael Gonzaga <rafael.nunu@hotmail.com>
 +
-+CVE-ID: CVE-2024-22019
++CVE-ID: CVE-2023-46809
 +
-+Upstream-Status: Backport [https://github.com/nodejs/node/commit/03a5c34a829742f]
++Upstream-Status: Backport [https://github.com/nodejs/node/commit/54cd268059626800]
 +
 +Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
 +---
-+ lib/_http_server.js                           |   8 ++
-+ src/node_http_parser.cc                       |  19 ++-
-+ .../test-http-chunk-extensions-limit.js       | 131 ++++++++++++++++++
-+ 3 files changed, 157 insertions(+), 1 deletion(-)
-+ create mode 100644 test/parallel/test-http-chunk-extensions-limit.js
++ src/crypto/crypto_cipher.cc          | 26 ++++++++++++++++++
++ test/parallel/test-crypto-rsa-dsa.js | 41 ++++++++++++++++++++--------
++ 2 files changed, 55 insertions(+), 12 deletions(-)
 +
-+diff --git a/lib/_http_server.js b/lib/_http_server.js
-+index 4e23266..263bb52 100644
-+--- a/lib/_http_server.js
-++++ b/lib/_http_server.js
-+@@ -706,6 +706,11 @@ const requestHeaderFieldsTooLargeResponse = Buffer.from(
-+   `HTTP/1.1 431 ${STATUS_CODES[431]}\r\n` +
-+   'Connection: close\r\n\r\n', 'ascii'
-+ );
-++const requestChunkExtensionsTooLargeResponse = Buffer.from(
-++  `HTTP/1.1 413 ${STATUS_CODES[413]}\r\n` +
-++  'Connection: close\r\n\r\n', 'ascii',
-++);
++diff --git a/src/crypto/crypto_cipher.cc b/src/crypto/crypto_cipher.cc
++index 10579ce..d1dcc99 100644
++--- a/src/crypto/crypto_cipher.cc
+++++ b/src/crypto/crypto_cipher.cc
++@@ -1061,6 +1061,32 @@ void PublicKeyCipher::Cipher(const FunctionCallbackInfo<Value>& args) {
++   uint32_t padding;
++   if (!args[offset + 1]->Uint32Value(env->context()).To(&padding)) return;
++
+++  if (EVP_PKEY_cipher == EVP_PKEY_decrypt &&
+++      operation == PublicKeyCipher::kPrivate && padding == RSA_PKCS1_PADDING) {
+++    EVPKeyCtxPointer ctx(EVP_PKEY_CTX_new(pkey.get(), nullptr));
+++    CHECK(ctx);
 ++
-+ function socketOnError(e) {
-+   // Ignore further errors
-+   this.removeListener('error', socketOnError);
-+@@ -719,6 +724,9 @@ function socketOnError(e) {
-+         case 'HPE_HEADER_OVERFLOW':
-+           response = requestHeaderFieldsTooLargeResponse;
-+           break;
-++	case 'HPE_CHUNK_EXTENSIONS_OVERFLOW':
-++          response = requestChunkExtensionsTooLargeResponse;
-++          break;
-+         case 'ERR_HTTP_REQUEST_TIMEOUT':
-+           response = requestTimeoutResponse;
-+           break;
-+diff --git a/src/node_http_parser.cc b/src/node_http_parser.cc
-+index 74f3248..a137fd7 100644
-+--- a/src/node_http_parser.cc
-++++ b/src/node_http_parser.cc
-+@@ -79,6 +79,8 @@ const uint32_t kOnExecute = 5;
-+ const uint32_t kOnTimeout = 6;
-+ // Any more fields than this will be flushed into JS
-+ const size_t kMaxHeaderFieldsCount = 32;
-++// Maximum size of chunk extensions
-++const size_t kMaxChunkExtensionsSize = 16384;
-+
-+ const uint32_t kLenientNone = 0;
-+ const uint32_t kLenientHeaders = 1 << 0;
-+@@ -206,6 +208,7 @@ class Parser : public AsyncWrap, public StreamListener {
-+
-+   int on_message_begin() {
-+     num_fields_ = num_values_ = 0;
-++    chunk_extensions_nread_ = 0;
-+     url_.Reset();
-+     status_message_.Reset();
-+     header_parsing_start_time_ = uv_hrtime();
-+@@ -443,9 +446,22 @@ class Parser : public AsyncWrap, public StreamListener {
-+     return 0;
-+   }
-+
-+-  // Reset nread for the next chunk
-++  int on_chunk_extension(const char* at, size_t length) {
-++    chunk_extensions_nread_ += length;
-++
-++    if (chunk_extensions_nread_ > kMaxChunkExtensionsSize) {
-++      llhttp_set_error_reason(&parser_,
-++          "HPE_CHUNK_EXTENSIONS_OVERFLOW:Chunk extensions overflow");
-++      return HPE_USER;
+++    if (EVP_PKEY_decrypt_init(ctx.get()) <= 0) {
+++      return ThrowCryptoError(env, ERR_get_error());
 ++    }
 ++
-++    return 0;
+++    int rsa_pkcs1_implicit_rejection =
+++        EVP_PKEY_CTX_ctrl_str(ctx.get(), "rsa_pkcs1_implicit_rejection", "1");
+++    // From the doc -2 means that the option is not supported.
+++    // The default for the option is enabled and if it has been
+++    // specifically disabled we want to respect that so we will
+++    // not throw an error if the option is supported regardless
+++    // of how it is set. The call to set the value
+++    // will not affect what is used since a different context is
+++    // used in the call if the option is supported
+++    if (rsa_pkcs1_implicit_rejection <= 0) {
+++      return THROW_ERR_INVALID_ARG_VALUE(
+++          env,
+++          "RSA_PKCS1_PADDING is no longer supported for private decryption,"
+++          " this can be reverted with --security-revert=CVE-2024-PEND");
+++    }
 ++  }
 ++
-++  // Reset nread for the next chunk and also reset the extensions counter
-+   int on_chunk_header() {
-+     header_nread_ = 0;
-++    chunk_extensions_nread_ = 0;
-+     return 0;
-+   }
++   const EVP_MD* digest = nullptr;
++   if (args[offset + 2]->IsString()) {
++     const Utf8Value oaep_str(env->isolate(), args[offset + 2]);
++diff --git a/test/parallel/test-crypto-rsa-dsa.js b/test/parallel/test-crypto-rsa-dsa.js
++index 9afcb38..601f510 100644
++--- a/test/parallel/test-crypto-rsa-dsa.js
+++++ b/test/parallel/test-crypto-rsa-dsa.js
++@@ -221,19 +221,36 @@ function test_rsa(padding, encryptOaepHash, decryptOaepHash) {
++     oaepHash: encryptOaepHash
++   }, bufferToEncrypt);
 +
-+@@ -887,6 +903,7 @@ class Parser : public AsyncWrap, public StreamListener {
-+   const char* current_buffer_data_;
-+   bool pending_pause_ = false;
-+   uint64_t header_nread_ = 0;
-++  uint64_t chunk_extensions_nread_ = 0;
-+   uint64_t max_http_header_size_;
-+   uint64_t headers_timeout_;
-+   uint64_t header_parsing_start_time_ = 0;
-+diff --git a/test/parallel/test-http-chunk-extensions-limit.js b/test/parallel/test-http-chunk-extensions-limit.js
-+new file mode 100644
-+index 0000000..6868b3d
-+--- /dev/null
-++++ b/test/parallel/test-http-chunk-extensions-limit.js
-+@@ -0,0 +1,131 @@
-++'use strict';
-++
-++const common = require('../common');
-++const http = require('http');
-++const net = require('net');
-++const assert = require('assert');
-++
-++// Verify that chunk extensions are limited in size when sent all together.
-++{
-++  const server = http.createServer((req, res) => {
-++    req.on('end', () => {
-++      res.writeHead(200, { 'Content-Type': 'text/plain' });
-++      res.end('bye');
-++    });
-++
-++    req.resume();
-++  });
-++
-++  server.listen(0, () => {
-++    const sock = net.connect(server.address().port);
-++    let data = '';
-++
-++    sock.on('data', (chunk) => data += chunk.toString('utf-8'));
-++
-++    sock.on('end', common.mustCall(function() {
-++      assert.strictEqual(data, 'HTTP/1.1 413 Payload Too Large\r\nConnection: close\r\n\r\n');
-++      server.close();
-++    }));
-++
-++    sock.end('' +
-++      'GET / HTTP/1.1\r\n' +
-++      'Host: localhost:8080\r\n' +
-++      'Transfer-Encoding: chunked\r\n\r\n' +
-++      '2;' + 'A'.repeat(20000) + '=bar\r\nAA\r\n' +
-++      '0\r\n\r\n'
-++    );
-++  });
-++}
-++
-++// Verify that chunk extensions are limited in size when sent in intervals.
-++{
-++  const server = http.createServer((req, res) => {
-++    req.on('end', () => {
-++      res.writeHead(200, { 'Content-Type': 'text/plain' });
-++      res.end('bye');
-++    });
-++
-++    req.resume();
-++  });
-++
-++  server.listen(0, () => {
-++    const sock = net.connect(server.address().port);
-++    let remaining = 20000;
-++    let data = '';
-++
-++    const interval = setInterval(
-++      () => {
-++        if (remaining > 0) {
-++          sock.write('A'.repeat(1000));
-++        } else {
-++          sock.write('=bar\r\nAA\r\n0\r\n\r\n');
-++          clearInterval(interval);
-++        }
-++
-++        remaining -= 1000;
-++      },
-++      common.platformTimeout(20),
-++    ).unref();
-++
-++    sock.on('data', (chunk) => data += chunk.toString('utf-8'));
-++
-++    sock.on('end', common.mustCall(function() {
-++      assert.strictEqual(data, 'HTTP/1.1 413 Payload Too Large\r\nConnection: close\r\n\r\n');
-++      server.close();
-++    }));
-++
-++    sock.write('' +
-++    'GET / HTTP/1.1\r\n' +
-++    'Host: localhost:8080\r\n' +
-++    'Transfer-Encoding: chunked\r\n\r\n' +
-++    '2;'
-++    );
-++  });
-++}
-++
-++// Verify the chunk extensions is correctly reset after a chunk
-++{
-++  const server = http.createServer((req, res) => {
-++    req.on('end', () => {
-++      res.writeHead(200, { 'content-type': 'text/plain', 'connection': 'close', 'date': 'now' });
-++      res.end('bye');
-++    });
-++
-++    req.resume();
-++  });
-++
-++  server.listen(0, () => {
-++    const sock = net.connect(server.address().port);
-++    let data = '';
-++
-++    sock.on('data', (chunk) => data += chunk.toString('utf-8'));
-++
-++    sock.on('end', common.mustCall(function() {
-++      assert.strictEqual(
-++        data,
-++        'HTTP/1.1 200 OK\r\n' +
-++        'content-type: text/plain\r\n' +
-++        'connection: close\r\n' +
-++        'date: now\r\n' +
-++        'Transfer-Encoding: chunked\r\n' +
-++        '\r\n' +
-++        '3\r\n' +
-++        'bye\r\n' +
-++        '0\r\n' +
-++        '\r\n',
-++      );
-++
-++      server.close();
-++    }));
-++
-++    sock.end('' +
-++      'GET / HTTP/1.1\r\n' +
-++      'Host: localhost:8080\r\n' +
-++      'Transfer-Encoding: chunked\r\n\r\n' +
-++      '2;' + 'A'.repeat(10000) + '=bar\r\nAA\r\n' +
-++      '2;' + 'A'.repeat(10000) + '=bar\r\nAA\r\n' +
-++      '2;' + 'A'.repeat(10000) + '=bar\r\nAA\r\n' +
-++      '0\r\n\r\n'
-++    );
-++  });
-++}
++-  let decryptedBuffer = crypto.privateDecrypt({
++-    key: rsaKeyPem,
++-    padding: padding,
++-    oaepHash: decryptOaepHash
++-  }, encryptedBuffer);
++-  assert.deepStrictEqual(decryptedBuffer, input);
+++  if (padding === constants.RSA_PKCS1_PADDING) {
+++    assert.throws(() => {
+++      crypto.privateDecrypt({
+++        key: rsaKeyPem,
+++        padding: padding,
+++        oaepHash: decryptOaepHash
+++      }, encryptedBuffer);
+++    }, { code: 'ERR_INVALID_ARG_VALUE' });
+++    assert.throws(() => {
+++      crypto.privateDecrypt({
+++        key: rsaPkcs8KeyPem,
+++        padding: padding,
+++        oaepHash: decryptOaepHash
+++      }, encryptedBuffer);
+++    }, { code: 'ERR_INVALID_ARG_VALUE' });
+++  } else {
+++    let decryptedBuffer = crypto.privateDecrypt({
+++      key: rsaKeyPem,
+++      padding: padding,
+++      oaepHash: decryptOaepHash
+++    }, encryptedBuffer);
+++    assert.deepStrictEqual(decryptedBuffer, input);
++
++-  decryptedBuffer = crypto.privateDecrypt({
++-    key: rsaPkcs8KeyPem,
++-    padding: padding,
++-    oaepHash: decryptOaepHash
++-  }, encryptedBuffer);
++-  assert.deepStrictEqual(decryptedBuffer, input);
+++    decryptedBuffer = crypto.privateDecrypt({
+++      key: rsaPkcs8KeyPem,
+++      padding: padding,
+++      oaepHash: decryptOaepHash
+++    }, encryptedBuffer);
+++    assert.deepStrictEqual(decryptedBuffer, input);
+++  }
++ }
++
++ test_rsa('RSA_NO_PADDING');
 +--
 +2.40.0
 diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_16.20.2.bb b/meta-oe/recipes-devtools/nodejs/nodejs_16.20.2.bb
-index 16593a0fe..b786c0273 100644
+index 2c1037e7e..8fdadd081 100644
 --- a/meta-oe/recipes-devtools/nodejs/nodejs_16.20.2.bb
 +++ b/meta-oe/recipes-devtools/nodejs/nodejs_16.20.2.bb
-@@ -27,6 +27,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
-            file://0001-mips-Use-32bit-cast-for-operand-on-mips32.patch \
-            file://0001-Nodejs-Fixed-pipes-DeprecationWarning.patch \
-            file://CVE-2022-25883.patch \
-+           file://CVE-2024-22019.patch \
+@@ -30,7 +30,8 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+            file://CVE-2024-22019.patch \
+            file://CVE-2024-21892-0001.patch \
+            file://CVE-2024-21892-0002.patch \
+-           file:// CVE-2024-22025.patch \
++           file://CVE-2024-22025.patch \
++           file://CVE-2023-46809.patch \
             "
  SRC_URI:append:class-target = " \
             file://0001-Using-native-binaries.patch \
