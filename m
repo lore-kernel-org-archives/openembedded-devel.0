@@ -1,177 +1,85 @@
-Return-Path: <peter.marko@siemens.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D4C12C48BF6
-	for <webhook@archiver.kernel.org>; Sat, 24 Feb 2024 13:04:22 +0000 (UTC)
-Received: from mta-65-227.siemens.flowmailer.net (mta-65-227.siemens.flowmailer.net [185.136.65.227])
- by mx.groups.io with SMTP id smtpd.web10.18130.1708779857140916933
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EA3A3C48BF6
+	for <webhook@archiver.kernel.org>; Sat, 24 Feb 2024 20:17:24 +0000 (UTC)
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
+ by mx.groups.io with SMTP id smtpd.web11.27020.1708805837440442631
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 24 Feb 2024 05:04:18 -0800
+ Sat, 24 Feb 2024 12:17:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=cudTxH5k;
- spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.227, mailfrom: fm-256628-202402241304139eca2e866b768cdcce-1dpxog@rts-flowmailer.siemens.com)
-Received: by mta-65-227.siemens.flowmailer.net with ESMTPSA id 202402241304139eca2e866b768cdcce
-        for <openembedded-devel@lists.openembedded.org>;
-        Sat, 24 Feb 2024 14:04:14 +0100
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
- d=siemens.com; i=peter.marko@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=81P/PITrc7inFE61zdU2bwgm90s/N054L128O510qdI=;
- b=cudTxH5kksBWDL2EgevciOPB4EneAToINFuc5gUVWFA33AZIo2hJm66EZ1hSPUdsnBzZ6Q
- eE6rJvfnhLQ+7tVEzmmbZFlb/WdWVIQy3Xn93kl7MgNThmq1T2UtAZpTwTpy8RTaZkdbGh6q
- 49yDzkA5Y3BC8LGlq/l3jDeH2pTfM=;
-From: Peter Marko <peter.marko@siemens.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=nOaHPIEy;
+ spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-5c66b093b86so1049034a12.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 24 Feb 2024 12:17:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1708805836; x=1709410636; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=pTHMyuicphSMD3HOCrKCRuvk/S+PqWSlEAUe/DmubUg=;
+        b=nOaHPIEy4O6tnTGfm6WyrsRkmNvSRMEvppcSrQ9MWL0iRhwDUQAI1cj6is4cCVeiLN
+         H30pqWYbU8rrTIlyJP40DV6RzcMK671LdRvkwoqsSYPBFrXqf/d2qscs6C+pbgBWTQtY
+         NFVSU7JFSPyk6zcPqRJKL3EaMK88LJTbASqtxetcTX+IsQ6lZOJbvW8eJiYc6cPWfQAs
+         +BmzGAqKZBILxeBPOsxHZ7qB90ZTiSWLKHLOM0qqRtgO91GB/6cz0L36Rb20esOr9WwK
+         f0IuVA91/MuJl+aoMh6mgmP88buc3iq7aJTeKWz6/bs4YRtzvQiU/5SIg+kB/evuzOhK
+         GdDQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1708805836; x=1709410636;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=pTHMyuicphSMD3HOCrKCRuvk/S+PqWSlEAUe/DmubUg=;
+        b=F0jNIuIBDsFozLVKbdNBYJhHfF0B+StAvCk9QILB/UDvHMNpHHckskwX6rKtpZG0sj
+         Yu664SFx5Mt790zFR70Ms/39ainKHfviPDcLMiLmyu60P6UroYBGeXV+Z2mTcpZIvkWb
+         Hofnmobmsdiz6AAVn3O5ltJJHy8nz6Dcnxeli2BZ+9pMvQv5Oc4IMvnLX99LoERqKUOX
+         8spjbHmGgLAsKhcsigoGcbU2c/1QZNnEYaO9HD3ifejYkHAY8spBXlD4sfUSRne+/7lP
+         r5IASrLaJ8a8N6EqcLREhD/Uem3ahyaTkmEonFCODufxfFdGrb4q+Rus35lfR33XZu4A
+         zofQ==
+X-Gm-Message-State: AOJu0YyB/1Zy7n0k0Jmr7vQm+GeiSO4rG4k4sPiu8mY56psdaXw7cMIu
+	ToE6xoXnZ8vP05UFLU3nu6rW72e9Fzm+77l3hhLUeQoTBvdqAt5ARdyzs8Hc7Rs=
+X-Google-Smtp-Source: AGHT+IG8uc0yflyE3l8KrYzgEtYgzF0uPn4IbWTcjOeBsU0oVKRmhmHstrdEW4PoCvcgTYT6losKPQ==
+X-Received: by 2002:a17:90a:17e2:b0:299:48db:1920 with SMTP id q89-20020a17090a17e200b0029948db1920mr4185529pja.3.1708805836204;
+        Sat, 24 Feb 2024 12:17:16 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::a43d])
+        by smtp.gmail.com with ESMTPSA id pl1-20020a17090b268100b0029a4f1335d1sm3697476pjb.0.2024.02.24.12.17.15
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 24 Feb 2024 12:17:15 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Peter Marko <peter.marko@siemens.com>
-Subject: [meta-networking][PATCH] dnsmasq: Upgrade 2.89 -> 2.90
-Date: Sat, 24 Feb 2024 14:03:25 +0100
-Message-Id: <20240224130325.202922-1-peter.marko@siemens.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-networking][PATCH] python3-scapy: Drop python3-tox from ptest rdeps
+Date: Sat, 24 Feb 2024 12:17:14 -0800
+Message-ID: <20240224201714.3179859-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 24 Feb 2024 13:04:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109026
+ <openembedded-devel@lists.openembedded.org>; Sat, 24 Feb 2024 20:17:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109027
 
-From: Peter Marko <peter.marko@siemens.com>
+python3-tox is only needed if internal driver for running tests is used
+which we do not use in OE
 
-Fixes CVE-2023-50387 and CVE-2023-50868
-
-Remove backported CVE patch.
-Remove patch for lua as hardcoding lua version was removed.
-
-Signed-off-by: Peter Marko <peter.marko@siemens.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-support/dnsmasq/dnsmasq/lua.patch | 33 -------------
- .../{dnsmasq_2.89.bb => dnsmasq_2.90.bb}      |  4 +-
- .../dnsmasq/files/CVE-2023-28450.patch        | 48 -------------------
- 3 files changed, 1 insertion(+), 84 deletions(-)
- delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq/lua.patch
- rename meta-networking/recipes-support/dnsmasq/{dnsmasq_2.89.bb => dnsmasq_2.90.bb} (97%)
- delete mode 100644 meta-networking/recipes-support/dnsmasq/files/CVE-2023-28450.patch
+ meta-networking/recipes-devtools/python/python3-scapy_2.5.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq/lua.patch b/meta-networking/recipes-support/dnsmasq/dnsmasq/lua.patch
-deleted file mode 100644
-index f8697699a..000000000
---- a/meta-networking/recipes-support/dnsmasq/dnsmasq/lua.patch
-+++ /dev/null
-@@ -1,33 +0,0 @@
--From be1b3d2d0f1608cba5efee73d6aac5ad0709041b Mon Sep 17 00:00:00 2001
--From: Joe MacDonald <joe_macdonald@mentor.com>
--Date: Tue, 9 Sep 2014 10:24:58 -0400
--Subject: [PATCH] Upstream-Status: Inappropriate [OE specific]
--
--Signed-off-by: Christopher Larson <chris_larson@mentor.com>
--Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
--
-----
--Upstream-Status: Pending
--
-- Makefile | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/Makefile b/Makefile
--index 73ea23e..ed3eeb9 100644
----- a/Makefile
--+++ b/Makefile
--@@ -60,8 +60,8 @@ idn2_cflags =   `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_LIBIDN2 $(PKG_CONFI
-- idn2_libs =     `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_LIBIDN2 $(PKG_CONFIG) --libs libidn2`
-- ct_cflags =     `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_CONNTRACK $(PKG_CONFIG) --cflags libnetfilter_conntrack`
-- ct_libs =       `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_CONNTRACK $(PKG_CONFIG) --libs libnetfilter_conntrack`
---lua_cflags =    `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_LUASCRIPT $(PKG_CONFIG) --cflags lua5.2` 
---lua_libs =      `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_LUASCRIPT $(PKG_CONFIG) --libs lua5.2` 
--+lua_cflags =    `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_LUASCRIPT $(PKG_CONFIG) --cflags lua`
--+lua_libs =      `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_LUASCRIPT $(PKG_CONFIG) --libs lua`
-- nettle_cflags = `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_DNSSEC     $(PKG_CONFIG) --cflags 'nettle hogweed' \
--                                                         HAVE_CRYPTOHASH $(PKG_CONFIG) --cflags nettle \
--                                                         HAVE_NETTLEHASH $(PKG_CONFIG) --cflags nettle`
--
---- 
--2.9.5
--
-diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.89.bb b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.90.bb
-similarity index 97%
-rename from meta-networking/recipes-support/dnsmasq/dnsmasq_2.89.bb
-rename to meta-networking/recipes-support/dnsmasq/dnsmasq_2.90.bb
-index 684eb4432..38fa271dc 100644
---- a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.89.bb
-+++ b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.90.bb
-@@ -11,15 +11,13 @@ DEPENDS += "gettext-native"
- 
- #at least versions 2.69 and prior are moved to the archive folder on the server
- SRC_URI = "http://www.thekelleys.org.uk/dnsmasq/${@['archive/', ''][float(d.getVar('PV').split('.')[1]) > 69]}dnsmasq-${PV}.tar.gz \
--           file://lua.patch \
-            file://init \
-            file://dnsmasq.conf \
-            file://dnsmasq-resolvconf.service \
-            file://dnsmasq-noresolvconf.service \
-            file://dnsmasq-resolved.conf \
--           file://CVE-2023-28450.patch \
- "
--SRC_URI[sha256sum] = "8651373d000cae23776256e83dcaa6723dee72c06a39362700344e0c12c4e7e4"
-+SRC_URI[sha256sum] = "8f6666b542403b5ee7ccce66ea73a4a51cf19dd49392aaccd37231a2c51b303b"
- 
- inherit pkgconfig update-rc.d systemd
- 
-diff --git a/meta-networking/recipes-support/dnsmasq/files/CVE-2023-28450.patch b/meta-networking/recipes-support/dnsmasq/files/CVE-2023-28450.patch
-deleted file mode 100644
-index 129c9043e..000000000
---- a/meta-networking/recipes-support/dnsmasq/files/CVE-2023-28450.patch
-+++ /dev/null
-@@ -1,48 +0,0 @@
--From eb92fb32b746f2104b0f370b5b295bb8dd4bd5e5 Mon Sep 17 00:00:00 2001
--From: Simon Kelley <simon@thekelleys.org.uk>
--Date: Tue, 7 Mar 2023 22:07:46 +0000
--Subject: [PATCH] Set the default maximum DNS UDP packet size to 1232.
--
--http://www.dnsflagday.net/2020/ refers.
--
--Thanks to Xiang Li for the prompt.
--
--CVE: CVE-2023-28450
--Upstream-Status: Backport [https://thekelleys.org.uk/gitweb/?p=dnsmasq.git;a=commit;h=eb92fb32b746f2104b0f370b5b295bb8dd4bd5e5]
--
--Signed-off-by: Peter Marko <peter.marko@siemens.com>
-----
-- man/dnsmasq.8 | 3 ++-
-- src/config.h  | 2 +-
-- 2 files changed, 3 insertions(+), 2 deletions(-)
--
--diff --git a/man/dnsmasq.8 b/man/dnsmasq.8
--index 41e2e04..5acb935 100644
----- a/man/dnsmasq.8
--+++ b/man/dnsmasq.8
--@@ -183,7 +183,8 @@ to zero completely disables DNS function, leaving only DHCP and/or TFTP.
-- .TP
-- .B \-P, --edns-packet-max=<size>
-- Specify the largest EDNS.0 UDP packet which is supported by the DNS
---forwarder. Defaults to 4096, which is the RFC5625-recommended size.
--+forwarder. Defaults to 1232, which is the recommended size following the
--+DNS flag day in 2020. Only increase if you know what you are doing.
-- .TP
-- .B \-Q, --query-port=<query_port>
-- Send outbound DNS queries from, and listen for their replies on, the
--diff --git a/src/config.h b/src/config.h
--index 1e7b30f..37b374e 100644
----- a/src/config.h
--+++ b/src/config.h
--@@ -19,7 +19,7 @@
-- #define CHILD_LIFETIME 150 /* secs 'till terminated (RFC1035 suggests > 120s) */
-- #define TCP_MAX_QUERIES 100 /* Maximum number of queries per incoming TCP connection */
-- #define TCP_BACKLOG 32  /* kernel backlog limit for TCP connections */
---#define EDNS_PKTSZ 4096 /* default max EDNS.0 UDP packet from RFC5625 */
--+#define EDNS_PKTSZ 1232 /* default max EDNS.0 UDP packet from from  /dnsflagday.net/2020 */
-- #define SAFE_PKTSZ 1232 /* "go anywhere" UDP packet size, see https://dnsflagday.net/2020/ */
-- #define KEYBLOCK_LEN 40 /* choose to minimise fragmentation when storing DNSSEC keys */
-- #define DNSSEC_WORK 50 /* Max number of queries to validate one question */
---- 
--2.20.1
--
+diff --git a/meta-networking/recipes-devtools/python/python3-scapy_2.5.0.bb b/meta-networking/recipes-devtools/python/python3-scapy_2.5.0.bb
+index d5d4850402..d57cb977e4 100644
+--- a/meta-networking/recipes-devtools/python/python3-scapy_2.5.0.bb
++++ b/meta-networking/recipes-devtools/python/python3-scapy_2.5.0.bb
+@@ -40,5 +40,5 @@ RDEPENDS:${PN} = "tcpdump python3-compression python3-cryptography python3-netcl
+                   python3-netserver python3-pydoc python3-pkgutil python3-shell \
+                   python3-threading python3-numbers python3-fcntl python3-logging \
+                   python3-difflib"
+-RDEPENDS:${PN}-ptest += "python3-json python3-mock python3-multiprocessing python3-tox \
++RDEPENDS:${PN}-ptest += "python3-json python3-mock python3-multiprocessing \
+                          iproute2 tshark"
 -- 
-2.30.2
+2.44.0
 
 
