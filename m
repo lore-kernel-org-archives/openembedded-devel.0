@@ -1,144 +1,253 @@
-Return-Path: <niko.mauno@vaisala.com>
+Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5042AC54E49
-	for <webhook@archiver.kernel.org>; Mon, 26 Feb 2024 11:46:29 +0000 (UTC)
-Received: from EUR02-AM0-obe.outbound.protection.outlook.com (EUR02-AM0-obe.outbound.protection.outlook.com [40.107.247.96])
- by mx.groups.io with SMTP id smtpd.web11.18322.1708947972737650037
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EFBCBC48BF6
+	for <webhook@archiver.kernel.org>; Mon, 26 Feb 2024 23:20:36 +0000 (UTC)
+Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com [209.85.128.177])
+ by mx.groups.io with SMTP id smtpd.web10.34.1708989635688313877
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 26 Feb 2024 03:46:13 -0800
+ Mon, 26 Feb 2024 15:20:35 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=RmCD5m1r;
- spf=permerror, err=parse error for token &{10 18 spf3.vaisala.com}: parse error for token &{10 18 _spf-dc57.sapsf.eu}: limit exceeded (domain: vaisala.com, ip: 40.107.247.96, mailfrom: niko.mauno@vaisala.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=mxJtFXZgwLKZm6ineKRgkoW/wrJ3lBh/KlMlmOVofVLi32bb1m+SIl3MbdJnhuCr1oF5fLcpe+19+VHsM0ENQ3zrZ1YCLLVHYBmFl6NfWFgybQIoY49oIamKhMyFf/oRiCgCSMddaDN2zsDMzp1CcXCoKbAIPYgHXVrcQ+b7kcDcQOi3b7ZZlCs9Op+USLHL3zRXll+iCag3kCu0qWZj7CVEZ+CqPXE8khKGn9+aBtsf+PLTnKNU8koVAr7V9M97hXayRxJmJUbIfEGCdAwGSp3LpbjCNs8+SSp7vPxuTz/nj5ruzk5LR2zNhpGglQFP4tPfWRPClFLmf3VqNtnGpw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=642XpWSVa/tKgBFsfAqTqT8na7S7DdKK3/wSpKrLpNU=;
- b=WUKKdVT3pwSUK+x6jNfkjs1avpTiFX7YYl+pewdCuwMUJoX1QLwUFP96AqzA5KuJt1RRl5LiO6mafmQ4OHc5yg4pwVHw2KmyUMQAH9JTBaz7sN1KaOrAIRor7P0ku4KojRtQT5qoJOr+rWXkWxJr1iBIbCVhoKqeTMh1RPLalbXx7ieht8nU29uCGW4s2XXC0Dpqjy2cTj4WlMrYjcquv0wkgQMY5gGlOzc1aN533wxaOP+0qmCsj4STo9pTvyBwTT1lVEHR6WpvZ2IHhwXV2hV/qzJASMYoejLbk/EhftK4tHhvigQhWf2jh5MYVFoH5HzvVkeJEKgAHql6ObQrvA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vaisala.com; dmarc=pass action=none header.from=vaisala.com;
- dkim=pass header.d=vaisala.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=642XpWSVa/tKgBFsfAqTqT8na7S7DdKK3/wSpKrLpNU=;
- b=RmCD5m1rJGLUlpTgO2UQZB5syyJ9BSaWtmNcy/BI7On+7I94wUW7uIgrNuur5VBFn6KarnmtNBuErsDM1M2WruFyEqDNbSx7Mm8y5s2c21kcfKM1rAYdifnLpEDlMzDygPyqQ4wWRFld+Pb9zKhYNLbyZtEkRBwuhRTfSwwNK/DtOgPhMPKgLPgEqhrzlVbjmf5RGAAa/x2fK5dBGyOqbp7qi4DTLYt0hFQFNIROFVV3n0m5ehr0HLhMoQlAwNsGGw8qX3hZGNVyHrEYmkt7xX9zwyrRmo22dBtow8E/LxRjj3d5QJLuBrbr1f+JhDQLXDbTC0wFimdrmMO5O4AIkQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vaisala.com;
-Received: from AS4PR06MB8447.eurprd06.prod.outlook.com (2603:10a6:20b:4e2::11)
- by DUZPR06MB8773.eurprd06.prod.outlook.com (2603:10a6:10:4d8::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7339.23; Mon, 26 Feb
- 2024 11:46:10 +0000
-Received: from AS4PR06MB8447.eurprd06.prod.outlook.com
- ([fe80::b5ae:8355:acaf:29e0]) by AS4PR06MB8447.eurprd06.prod.outlook.com
- ([fe80::b5ae:8355:acaf:29e0%4]) with mapi id 15.20.7339.022; Mon, 26 Feb 2024
- 11:46:09 +0000
-Message-ID: <b5ebf160-6562-42e7-af2e-172702e39686@vaisala.com>
-Date: Mon, 26 Feb 2024 13:46:07 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-python][PATCH 2/4] python3-pybind11: Prune redundant
- inherit
-To: Khem Raj <raj.khem@gmail.com>, Tim Orling <ticotimo@gmail.com>
-CC: openembedded-devel@lists.openembedded.org
-References: <20240214082449.3498259-1-niko.mauno@vaisala.com>
- <20240214082449.3498259-2-niko.mauno@vaisala.com>
- <CANx9H-DYRrFpa_sfzqbthTrq6B6vzuOBiz8DA9vXiU557gH6_A@mail.gmail.com>
- <CAMKF1spRz8YYP1c5P1p72L3LLVSdW5wTToZT+7WDkkhAwJP=fA@mail.gmail.com>
-Content-Language: en-US
-From: Niko Mauno <niko.mauno@vaisala.com>
-In-Reply-To: <CAMKF1spRz8YYP1c5P1p72L3LLVSdW5wTToZT+7WDkkhAwJP=fA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-ClientProxiedBy: GVX0EPF0000ED8E.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:144:1:0:3:0:6) To AS4PR06MB8447.eurprd06.prod.outlook.com
- (2603:10a6:20b:4e2::11)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=b/8RRjQx;
+ spf=pass (domain: gmail.com, ip: 209.85.128.177, mailfrom: ticotimo@gmail.com)
+Received: by mail-yw1-f177.google.com with SMTP id 00721157ae682-6092387bdd0so2379627b3.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 26 Feb 2024 15:20:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1708989635; x=1709594435; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=0+5V/ClYEDCFhj6ZrlPcS/AmWgtJ8ser48HLSW573q4=;
+        b=b/8RRjQxD3fkN8ybJ1wCizFodqQF9EYHVulJT9eTwNW4ZTAxvrEg8BlTxGYBzW2Ivb
+         JOnIVeUKKY4KJorx5d5JftnCdeeZHykMEJu5tLNcVI21Z0KTkezBR7M1WUuniQKGko75
+         7yVhweSGlA0L1iVdsYBqb8SKd0f0uXS7X++E0W5dKOazceHnO5i/nwTXXVABGpbhpRcb
+         siSzPHVN5m4jvQBlW9GU1qU5G+fJ+8Kwo/sTaBE3lcmGSK7qHLsCagAaUeM6jxA7EFgz
+         OOsueYCSitY4MvN9ihnb0JHCqwqLPHqGp3oSqWou6NHm5hGErrL1aANOjZNB8WM7IvEi
+         Zirg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1708989635; x=1709594435;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=0+5V/ClYEDCFhj6ZrlPcS/AmWgtJ8ser48HLSW573q4=;
+        b=wi/Y0uG+Xe/TjBxoM4zsFOaqJTuSh/oMvSQFFrFCqy1pnixKGW+Ns9lBhWhh0dCEXy
+         1T74EEEchAiUpuvA46mPt8vJn13mAczMXTAi8Tqjbly7na8XxdkiTkonL5FdTPUkaurJ
+         YguHu4WNzkhZIZqDdp9UcjpIXoqIFMOQQ2Ocg+Thr90tnRl5LUSJSwIyewcZunkou/HC
+         e7/lmncuB0gtltBraIaeFOzimaABBg4wodAs4BkxSySv6ZnCHpsOg4yokR+RH8nggEmX
+         f3mWhSJrWwpL3Vn7E9tEYmyDW1DoYF6o3yfZw/n0B5v8QmCuvowQ4RM/YRgoCp2/s2tc
+         RHSw==
+X-Gm-Message-State: AOJu0YwzdOWpha3K3XU56IQxNEnV6e1nUcgpkD//aFDawof87w2kjL+D
+	yKNQFG/aeXmVfbNafVAweYu9XO+1k4WA1zhENUeKUX6dq5Q1GJ44ZOSi8AtK0Yy13QbW1NGVD7m
+	PVdTeudypsD0OfL6LegqRpgGh8Dw=
+X-Google-Smtp-Source: AGHT+IH/x/dUUanDKAhGnPpED+97SP2MtbaA9KxiTRGPYTZoz/1nTuUWuJTf3E/HgmSU44VQwEExE3R5z3Wf/ezdPVY=
+X-Received: by 2002:a81:4004:0:b0:604:bfd:cdba with SMTP id
+ l4-20020a814004000000b006040bfdcdbamr631036ywn.9.1708989634657; Mon, 26 Feb
+ 2024 15:20:34 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS4PR06MB8447:EE_|DUZPR06MB8773:EE_
-X-MS-Office365-Filtering-Correlation-Id: 93bd361a-abdb-401d-b862-08dc36c08681
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	/lDYNu4HNhg8F/B2/slG64bS018PYWef+ro+MMBRZzRvF09ms9AUEvQK3R+Ywvm1wZCksN3GXmqpjEI4Qr5nYgcKlvO82lKN6oz98cBnT6r/YYEnb+2fN4vh7sjrPrTQCBmiILBwBMe69lkv20+IF01CORg9QT/f2inLcs5WOGrG3aadLcmiNZ61U32kr9pAM5w0B8I3b9hZUhQgarHWzAlgdgd9ZurmvmIK7omxnLaT4oX6PobDXKDlNK566U3oREt7CnjvDoH2+INFpuNYcFU5Wj0K852wRp0BkfxScNCJkaooYzreFfsoDdVLHHPEaaS47UnC0MZ1Q6P8YN6Qlq8tSEnCtNIXQDfshvcGE8trqX8L36YhfjwufsLS+ezQiif9Rw+giN1Ikjtlgr3SQCT0VjuvlsL0/7ZX5tULa5Gz5zM/TatSITpKpUoZberja2rsHHjNgVKTEOxc7cJxgaL+776v1pePZ4B3NASCx6kIpx1134WixbRjrHY8qrxJNRxFmOQuW7eeDucfc30/taKw+LqIj7KZ9RW5+FEnX1SqtC0CSblgE8+VBmb2vCVLAnu+iTvQe9Z2fBh7oSmvvKrPf051fICvcpyWpEOTm/1fO27NOBg5ErEU6zvAnMD5
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS4PR06MB8447.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?u4/ShbQcU98hDFckzJkgMlgWEPlMm9hVwu/sfY6dBwelgA0PKfiHzelOcOvO?=
- =?us-ascii?Q?D9INIP0K9roqNLLQUtKi1c86verbZf649w09jZBOJv3W+XdhEhq74qoHiErD?=
- =?us-ascii?Q?Xv8SUB7hHXLg87BcnnmZ8scUoY9rnERqYGzydB2YAS0pW0zv4zLDkp1Z/HyD?=
- =?us-ascii?Q?g0WQplwTznJn3/Qf0+UUphsOTYRgogYBsLjd/eIOVEzVBb3rmTsvB2Cb+pZ3?=
- =?us-ascii?Q?JGsftLl4eHmdoQ1wlPo35n8VfY7EFf8nYrlozCLr4h9IMBxTgTREu1JBdfRc?=
- =?us-ascii?Q?O7mR/gclBwrP5IMVLq7Tz+uxUfQ/lSOd0oJeGcA8C8JjDh9R1Jt5EtjYUuIh?=
- =?us-ascii?Q?12VWDVufte3orucep9Ur9aYAzfEXZl09GJkjhMvMTphJrpaqQH51C9s2ZSnI?=
- =?us-ascii?Q?y0VIUX4ahlSp3RnvVcbJE99ZwmGKZjpF9i9PE/loGtk1w3H+i24DjHjlF4bs?=
- =?us-ascii?Q?WLVt+0MDgH/9yV4SmNMFKvNa8/YJS6RxGHmVsI0P90KdWcjZdFwyb267UVWP?=
- =?us-ascii?Q?cwuv8S78pen7s9fIya+OXAC3Fb66YkR6hLnEu+xDfZs0sYso6LAWd3UL6+fn?=
- =?us-ascii?Q?wC3HWr0gKaDPBOlkfqoH9IZ1ynoYiES2QTTq7P1Nvo067dEUSL4OXA3hxQLP?=
- =?us-ascii?Q?mMstKdlNTa3qA+yjQDbcmhn6hRkS/pRCEhDr9UZ3lPjb+m0ekm4RyvTKj6fr?=
- =?us-ascii?Q?cdVKc4McNLgbGEmiSPoOPs+8n2BQBOhPIkicvLv6EANAusavxPeBO6qZk+VQ?=
- =?us-ascii?Q?47+VPDXCBCl2cVoihLsQUSvpfp+MItJk0Ldeh3/BlKuDMmXJSdkMVSOU1d1B?=
- =?us-ascii?Q?foAOPJU25jwc1c1guGw6EOTO5cUGKYTn1bI7cwjaz/XCm9V3Dlv2dOeNNOUP?=
- =?us-ascii?Q?6/RwGYxULTcU4JnT0RwFcO98S5l539iCU/X02GKu+MkH7v+i84Ub/DriK8ck?=
- =?us-ascii?Q?0nHB+8GXfvz5HuVz6JCUE80HexTQ6heZfC0l6Co0YmqQtI2Wk3sr9i5gbbWI?=
- =?us-ascii?Q?/hlBX+DAOX9Sw2l2iTIOe/7ffG1H0772Dv+qgH/S6tVVnp0QtUif88eo3R9I?=
- =?us-ascii?Q?3DYxtNGU1N6d/Kd3L5tuzazLP0tpA3wK1CzrCjquXesGPRffI+zwEjis6X3Q?=
- =?us-ascii?Q?jrEF10p5levu1qp9TxgR6Z8IYzHjinxos05TcwuLfc5L6j60msdBLAAOeflx?=
- =?us-ascii?Q?bR2JWfLeQLtJzdJ5trCAv0eFoDtlKCnTCvGjSLln5X8do+9NZc7ZBfjRAutI?=
- =?us-ascii?Q?WUwsQPOOxMoOieRjXOuLKW5yys/v4LIvhaPdUmHSdhGih93JReybXfhfuJT6?=
- =?us-ascii?Q?jPmZvWAG60GQGawlxwEZktxiL/tEnBsrDUAqZMZw9clcYyYFMYme65u0J+Y8?=
- =?us-ascii?Q?qYqwIanQMRtlAX4QD0CMi+avb5hAsGa7ObjTAye2yWnwD5tmpXXYwdrgUu2D?=
- =?us-ascii?Q?AOdKQWaGbEv6Phh0qz6D7ZNg9skPnsyyRjS52Ronp2jRWcgjIJU3efR/5Z1h?=
- =?us-ascii?Q?Q948XoE8lep1rCfwaCIeg02RxvNVSABD2vve6vWZp10Jnl10VtmqpcTKyNXk?=
- =?us-ascii?Q?BBCXOV3jI3pVEY6wPpKufuEUAMNG4Z/8QUpSkwO8i+6PkH3bIddSdtSA2Dt+?=
- =?us-ascii?Q?ng=3D=3D?=
-X-OriginatorOrg: vaisala.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 93bd361a-abdb-401d-b862-08dc36c08681
-X-MS-Exchange-CrossTenant-AuthSource: AS4PR06MB8447.eurprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Feb 2024 11:46:09.8990
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ay820lKhwh7n2G1O0V3tiw0ZHXAPPDaNLRPffRcBpDdeZZa0x0ozBqxnPzmozNppNKtpKzHQBTv/uFZH60oQEQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DUZPR06MB8773
+References: <20240224113942.11482-1-peter.marko@siemens.com>
+In-Reply-To: <20240224113942.11482-1-peter.marko@siemens.com>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Mon, 26 Feb 2024 15:20:23 -0800
+Message-ID: <CANx9H-Bxz_Eu_yV5Whc4YT0+XcpbPNTadq3eUxpjoaYN6s0dYg@mail.gmail.com>
+Subject: Re: [oe] [meta-java][PATCH] jsch,xerces-j: fix CVE_STATUS
+To: peter.marko@siemens.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="00000000000019438906125128dc"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 26 Feb 2024 11:46:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109035
+ <openembedded-devel@lists.openembedded.org>; Mon, 26 Feb 2024 23:20:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109036
 
-On 15.2.2024 5.39, Khem Raj wrote:
-> On Wed, Feb 14, 2024 at 7:30=E2=80=AFPM Tim Orling <ticotimo@gmail.com=20
-> <mailto:ticotimo@gmail.com>> wrote:
->=20
->     On Wed, Feb 14, 2024 at 12:25=E2=80=AFAM Niko Mauno via
->     lists.openembedded.org
->     <http://lists.openembedded.org/
->=20
->         From: Niko Mauno <niko.mauno@vaisala.com
->         <mailto:niko.mauno@vaisala.com>>
->=20
->         Inheriting setuptools3 implies the inherit of python3native, so d=
-rop
->         the latter inherit as redundant.
->=20
->     according to
->     https://github.com/pybind/pybind11/blob/8b48ff878c168b51fe5ef7b8c7288=
-15b9e1a9857/pyproject.toml#L3 <https://github.com/pybind/pybind11/blob/8b48=
-ff878c168b51fe5ef7b8c728815b9e1a9857/pyproject.toml#L3
->     we should drop setuptools3 and inherit pyyhin_setuptools_build_meta
->=20
->=20
-> Good point I think that could be added as a new patch
+--00000000000019438906125128dc
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Thanks, submitted a new series for addressing this issue:=20
-https://patchwork.yoctoproject.org/project/oe/list/?series=3D22759
--Niko
+On Sat, Feb 24, 2024 at 3:40=E2=80=AFAM Peter Marko via lists.openembedded.=
+org
+<peter.marko=3Dsiemens.com@lists.openembedded.org> wrote:
+
+> From: Peter Marko <peter.marko@siemens.com>
+>
+> Last commit tried to convert CVE_CHECK_IGNORE to CVE_STATUS,
+> however it was done in wrong way and caused the CVEs
+> to be reported as open again.
+>
+> This fixes CVE_STATUS syntax.
+>
+> Merged. Thank you. (Especially thank you for fixing MY mistakes)
+
+NOTE: both jsched and xerces-j have newer CVEs so if you have time to
+investigate upgrades to fix them, it would be appreciated:
+https://nvd.nist.gov/vuln/detail/CVE-2022-23437
+https://nvd.nist.gov/vuln/detail/CVE-2023-48795
+
+
+> Signed-off-by: Peter Marko <peter.marko@siemens.com>
+> ---
+>  recipes-core/jcraft/jsch_0.1.40.bb       | 3 +--
+>  recipes-core/xerces-j/xerces-j_2.11.0.bb | 2 +-
+>  2 files changed, 2 insertions(+), 3 deletions(-)
+>
+> diff --git a/recipes-core/jcraft/jsch_0.1.40.bb b/recipes-core/jcraft/
+> jsch_0.1.40.bb
+> index 8ef5c85..aeb04b4 100644
+> --- a/recipes-core/jcraft/jsch_0.1.40.bb
+> +++ b/recipes-core/jcraft/jsch_0.1.40.bb
+> @@ -25,8 +25,7 @@ do_compile() {
+>  SRC_URI[md5sum] =3D "b59cec19a487e95aed68378976b4b566"
+>  SRC_URI[sha256sum] =3D
+> "ca9d2ae08fd7a8983fb00d04f0f0c216a985218a5eb364ff9bee73870f28e097"
+>
+> -# Ignore the CVE because it only affects Windows platforms
+> -CVE_STATUS +=3D "CVE-2016-5725"
+> +CVE_STATUS[CVE-2016-5725] =3D "not-applicable-platform: Issue only appli=
+es
+> on Windows"
+>
+>  BBCLASSEXTEND =3D "native"
+>
+> diff --git a/recipes-core/xerces-j/xerces-j_2.11.0.bb
+> b/recipes-core/xerces-j/xerces-j_2.11.0.bb
+> index c7a54ab..45d3c43 100644
+> --- a/recipes-core/xerces-j/xerces-j_2.11.0.bb
+> +++ b/recipes-core/xerces-j/xerces-j_2.11.0.bb
+> @@ -18,7 +18,7 @@ SRC_URI =3D "
+> http://archive.apache.org/dist/xerces/j/source/Xerces-J-src.${PV}.tar
+>  # Already fixed with updates and closed.
+>  # https://access.redhat.com/security/cve/CVE-2018-2799
+>  # https://bugzilla.redhat.com/show_bug.cgi?id=3D1567542
+> -CVE_STATUS +=3D "CVE-2018-2799"
+> +CVE_STATUS[CVE-2018-2799] =3D "not-applicable-platform: Issue only appli=
+es
+> on some Oracle Java SE and Red Hat Enterprise Linux versions"
+>
+>  S =3D "${WORKDIR}/xerces-2_11_0"
+>
+> --
+> 2.30.2
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#109025):
+> https://lists.openembedded.org/g/openembedded-devel/message/109025
+> Mute This Topic: https://lists.openembedded.org/mt/104544794/924729
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> ticotimo@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--00000000000019438906125128dc
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
+<div dir=3D"ltr" class=3D"gmail_attr">On Sat, Feb 24, 2024 at 3:40=E2=80=AF=
+AM Peter Marko via <a href=3D"http://lists.openembedded.org">lists.openembe=
+dded.org</a> &lt;peter.marko=3D<a href=3D"mailto:siemens.com@lists.openembe=
+dded.org">siemens.com@lists.openembedded.org</a>&gt; wrote:<br></div><block=
+quote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1=
+px solid rgb(204,204,204);padding-left:1ex">From: Peter Marko &lt;<a href=
+=3D"mailto:peter.marko@siemens.com" target=3D"_blank">peter.marko@siemens.c=
+om</a>&gt;<br>
+<br>
+Last commit tried to convert CVE_CHECK_IGNORE to CVE_STATUS,<br>
+however it was done in wrong way and caused the CVEs<br>
+to be reported as open again.<br>
+<br>
+This fixes CVE_STATUS syntax.<br>
+<br></blockquote><div>Merged. Thank you. (Especially thank you for fixing M=
+Y mistakes)</div><div><br></div><div>NOTE: both jsched and xerces-j have ne=
+wer CVEs so if you have time to investigate upgrades to fix them, it would =
+be appreciated:</div><div><a href=3D"https://nvd.nist.gov/vuln/detail/CVE-2=
+022-23437">https://nvd.nist.gov/vuln/detail/CVE-2022-23437</a></div><div><a=
+ href=3D"https://nvd.nist.gov/vuln/detail/CVE-2023-48795">https://nvd.nist.=
+gov/vuln/detail/CVE-2023-48795</a></div><div>=C2=A0</div><blockquote class=
+=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
+b(204,204,204);padding-left:1ex">
+Signed-off-by: Peter Marko &lt;<a href=3D"mailto:peter.marko@siemens.com" t=
+arget=3D"_blank">peter.marko@siemens.com</a>&gt;<br>
+---<br>
+=C2=A0recipes-core/jcraft/<a href=3D"http://jsch_0.1.40.bb" rel=3D"noreferr=
+er" target=3D"_blank">jsch_0.1.40.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0| 3 +--<=
+br>
+=C2=A0recipes-core/xerces-j/<a href=3D"http://xerces-j_2.11.0.bb" rel=3D"no=
+referrer" target=3D"_blank">xerces-j_2.11.0.bb</a> | 2 +-<br>
+=C2=A02 files changed, 2 insertions(+), 3 deletions(-)<br>
+<br>
+diff --git a/recipes-core/jcraft/<a href=3D"http://jsch_0.1.40.bb" rel=3D"n=
+oreferrer" target=3D"_blank">jsch_0.1.40.bb</a> b/recipes-core/jcraft/<a hr=
+ef=3D"http://jsch_0.1.40.bb" rel=3D"noreferrer" target=3D"_blank">jsch_0.1.=
+40.bb</a><br>
+index 8ef5c85..aeb04b4 100644<br>
+--- a/recipes-core/jcraft/<a href=3D"http://jsch_0.1.40.bb" rel=3D"noreferr=
+er" target=3D"_blank">jsch_0.1.40.bb</a><br>
++++ b/recipes-core/jcraft/<a href=3D"http://jsch_0.1.40.bb" rel=3D"noreferr=
+er" target=3D"_blank">jsch_0.1.40.bb</a><br>
+@@ -25,8 +25,7 @@ do_compile() {<br>
+=C2=A0SRC_URI[md5sum] =3D &quot;b59cec19a487e95aed68378976b4b566&quot;<br>
+=C2=A0SRC_URI[sha256sum] =3D &quot;ca9d2ae08fd7a8983fb00d04f0f0c216a985218a=
+5eb364ff9bee73870f28e097&quot;<br>
+<br>
+-# Ignore the CVE because it only affects Windows platforms<br>
+-CVE_STATUS +=3D &quot;CVE-2016-5725&quot;<br>
++CVE_STATUS[CVE-2016-5725] =3D &quot;not-applicable-platform: Issue only ap=
+plies on Windows&quot;<br>
+<br>
+=C2=A0BBCLASSEXTEND =3D &quot;native&quot;<br>
+<br>
+diff --git a/recipes-core/xerces-j/<a href=3D"http://xerces-j_2.11.0.bb" re=
+l=3D"noreferrer" target=3D"_blank">xerces-j_2.11.0.bb</a> b/recipes-core/xe=
+rces-j/<a href=3D"http://xerces-j_2.11.0.bb" rel=3D"noreferrer" target=3D"_=
+blank">xerces-j_2.11.0.bb</a><br>
+index c7a54ab..45d3c43 100644<br>
+--- a/recipes-core/xerces-j/<a href=3D"http://xerces-j_2.11.0.bb" rel=3D"no=
+referrer" target=3D"_blank">xerces-j_2.11.0.bb</a><br>
++++ b/recipes-core/xerces-j/<a href=3D"http://xerces-j_2.11.0.bb" rel=3D"no=
+referrer" target=3D"_blank">xerces-j_2.11.0.bb</a><br>
+@@ -18,7 +18,7 @@ SRC_URI =3D &quot;<a href=3D"http://archive.apache.org/di=
+st/xerces/j/source/Xerces-J-src.$%7BPV%7D.tar" rel=3D"noreferrer" target=3D=
+"_blank">http://archive.apache.org/dist/xerces/j/source/Xerces-J-src.${PV}.=
+tar</a><br>
+=C2=A0# Already fixed with updates and closed.<br>
+=C2=A0# <a href=3D"https://access.redhat.com/security/cve/CVE-2018-2799" re=
+l=3D"noreferrer" target=3D"_blank">https://access.redhat.com/security/cve/C=
+VE-2018-2799</a><br>
+=C2=A0# <a href=3D"https://bugzilla.redhat.com/show_bug.cgi?id=3D1567542" r=
+el=3D"noreferrer" target=3D"_blank">https://bugzilla.redhat.com/show_bug.cg=
+i?id=3D1567542</a><br>
+-CVE_STATUS +=3D &quot;CVE-2018-2799&quot;<br>
++CVE_STATUS[CVE-2018-2799] =3D &quot;not-applicable-platform: Issue only ap=
+plies on some Oracle Java SE and Red Hat Enterprise Linux versions&quot;<br=
+>
+<br>
+=C2=A0S =3D &quot;${WORKDIR}/xerces-2_11_0&quot;<br>
+<br>
+-- <br>
+2.30.2<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#109025): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/109025" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/109025</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/104544794/924=
+729" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
+/104544794/924729</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
+et=3D"_blank">ticotimo@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
+
+--00000000000019438906125128dc--
 
