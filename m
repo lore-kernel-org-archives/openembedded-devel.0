@@ -2,186 +2,230 @@ Return-Path: <niko.mauno@vaisala.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 66DACC54E4A
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 64A20C48BF6
 	for <webhook@archiver.kernel.org>; Mon, 26 Feb 2024 11:42:29 +0000 (UTC)
-Received: from EUR02-AM0-obe.outbound.protection.outlook.com (EUR02-AM0-obe.outbound.protection.outlook.com [40.107.247.114])
- by mx.groups.io with SMTP id smtpd.web10.18530.1708947739469513582
+Received: from EUR02-AM0-obe.outbound.protection.outlook.com (EUR02-AM0-obe.outbound.protection.outlook.com [40.107.247.125])
+ by mx.groups.io with SMTP id smtpd.web10.18531.1708947743790236617
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 26 Feb 2024 03:42:20 -0800
+ Mon, 26 Feb 2024 03:42:24 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=RyD0Nk4x;
- spf=permerror, err=parse error for token &{10 18 spf3.vaisala.com}: parse error for token &{10 18 _spf-dc57.sapsf.eu}: limit exceeded (domain: vaisala.com, ip: 40.107.247.114, mailfrom: niko.mauno@vaisala.com)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@vaisala.com header.s=selector1 header.b=afQgBhRo;
+ spf=permerror, err=parse error for token &{10 18 spf3.vaisala.com}: parse error for token &{10 18 _spf-dc57.sapsf.eu}: limit exceeded (domain: vaisala.com, ip: 40.107.247.125, mailfrom: niko.mauno@vaisala.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=V7AWDQ4Lj2BQrLuGhf/3PQyJodtkZJYVVWXhzIVrnteho8bdu+dxNAaAvMsBF7cw/I4IPWTUwuAtEZZpfi/C1IthHBlyv0H4vR6tAOM+iti3GFe/NTS9ZdvHqsFsCFqqBAJiXpmeqOBQlF6oKMvQ8WR3hMDKAFgxGkrn2jASWWwbNrHawUNilX4eDMTolojVX6kK+hM9SEhb+RzXDA/CX6JGaZxnzOeVl3TaBjBn2Cj3Rq/6BysMHu0jcUpzTOPju21u/Dxf1/VnQvBOdiM7+Q21HxUSSvCfnInuayNSluS5oR0TPZ2/XA5T41QzZ62KEDYxrheZyo2n9PdsSIkkqg==
+ b=XLY+5hHjP9JABhmL5zPMZgrqIL2VkSoRJxPzIMOqFgeN641Ald9hw9w3e8iTPx7yifMhWl/SYrcw9qwXy+ewwjoP9GFwEwga0E+vFRvTmnMZA9nAXaNTTkqfiLV1JbNNHESBinUGmX10Xg8axPQC2iqRE1QPwj7EvWlidPjTmU7pJROwNzpUXgpHGuTF8k16w54Ng/vLEk7s6+PlTyJcKX8a1O8UUDJWS6X43Zcgqv0055b3cI9K9F+Ly7i4vp4m6HUqowCA/gOjj0+w5dC4NZv6WldXwmWVePQ4EtfVj9FhZ5K0JBI3Dzc4ifpB0m/1BmMvuv7w9R9Gh1DzL6rwGA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qyi6qz2hbJE946BL1x1JKnCrg8OO0ECbGJn4yJoZy1o=;
- b=J7/4qRPRWWPT1+DrE24hZ0HC7fKt8XLT04WvEKJgdxXsVA/CmJtsPgqMF3eIX0C3h2EglhKtslyG24f4QXW6z4k60WnttPcEAI/LIA5rhlMmWmWhbQ4Q7/7J5xUNBsM9M0f1WhVRAvO9m2yC9leyvFJFmiUm1ASOAyMzgzMJmKfEM8KBRddSZsN78LhPxnFzZtfkLFYbEey4r+QLrDRyHGapy6cgmuXCQrJy6shKFz4edSZx9SaxbPUc+HXZIvTVczHub+IH/CqOaN+aujKxboSM2FNrlsrXnOOPd9unSjh3MkrbGM03rrLLwuW+YKyiEuolVZorw/esYTvzuHnpSA==
+ bh=5om2cVA2CesfeFV9QcUghS+hdm5/AR2nXl304b2VVhY=;
+ b=Y0o3Qt2TvCd3vuDmsvqJ7nWLWluUQXzQRbrx1bbg0I99SrZvYTOvGytB/dW7IXFyh6Mls4YDNJs2Lohhg3QBzquuulEtRqqQbnbKL/MnqYDk/fc9/IOXVLUUhKQmUjfFTh/7sF0wr2qljjGuN2XWunTSYiNdxlhcygWq+rJf7mJCYU2uNWaTKYYdeGf/KZX9eCdxuVZqy3VvQvxe7rMsB1SznoreP4owq6jpJAJ0mOFoGcDcVMVFwo/PLG3Ex1qC8nuK7K1iUN8EWMzi6YBxhq/zLjsJCc68Vm60fN9oaV57HZ23tWNJ4OKFJHRRhi6qYaE0+PwLsKx03Yb+XQfLFg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=vaisala.com; dmarc=pass action=none header.from=vaisala.com;
  dkim=pass header.d=vaisala.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vaisala.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qyi6qz2hbJE946BL1x1JKnCrg8OO0ECbGJn4yJoZy1o=;
- b=RyD0Nk4xpQykK4CDAGm6koelWPtXRFTj2RxFU2TKDoctHRtSyoXJ6QTHTzCwgqK7SnQfSqgF2wUUavIijwG5Hv2RAqenn38Btj3cNYWU1p/fYtoSTY0sXmOaa3ABGz4S0pkRtEtI4kK9swtwlyIHmc2pDVM2GdXtHDLlUo6+iwnG1a+YfkZPR0d5qot/uFZFISJR+rM5ndgdw69Uf7CqSSe+e3A3khCqb4WwhlwSpV2iXBlUTJ1dIVTbWqHtOzwkpXIBZkw17DAj8TLXPbymddLqjnS8mHHK9M/Yfd8wqE+by6u+MzxsQKHrxfOqKSgObxYe0LhuW7U6SaRZxPYFvA==
+ bh=5om2cVA2CesfeFV9QcUghS+hdm5/AR2nXl304b2VVhY=;
+ b=afQgBhRo61SFwsH8sFaXgZULpD8/UyyrHtLKZcBXEwYISbiwgH6D4WMiZ/b4po7GfVAbNep5B1df70kuDGLTUuHtmZ6/1Wetv4PirqFVjvctLzCDDQ+zzFjjWQ7F9YNC4k6bXJMk2d7VD810YuP/j0IUGiNpVa+/hLqIe6U83a3lyycQZKIt3hyygw5BMVOhpj6j9/7SXaRx7MaxMVu90Tv4KXSOYEpU/NRESF2iTZ/cTXdm1Hk7Nb2CPeCrBnQrrhh8tZjfok5gV0BcZoy+xZd6+ikR1y3e9l+3wMennQ0sCvW11rK/wPJ6UUhW20/V5+a71JZrsmdS9xxr3wCrJw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=vaisala.com;
 Received: from AS4PR06MB8447.eurprd06.prod.outlook.com (2603:10a6:20b:4e2::11)
  by DUZPR06MB8773.eurprd06.prod.outlook.com (2603:10a6:10:4d8::19) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7339.23; Mon, 26 Feb
- 2024 11:42:15 +0000
+ 2024 11:42:21 +0000
 Received: from AS4PR06MB8447.eurprd06.prod.outlook.com
  ([fe80::b5ae:8355:acaf:29e0]) by AS4PR06MB8447.eurprd06.prod.outlook.com
  ([fe80::b5ae:8355:acaf:29e0%4]) with mapi id 15.20.7339.022; Mon, 26 Feb 2024
- 11:42:15 +0000
+ 11:42:21 +0000
 From: niko.mauno@vaisala.com
 To: openembedded-devel@lists.openembedded.org
 CC: ticotimo@gmail.com,
 	raj.khem@gmail.com,
 	joonas.salonpaa@vaisala.com,
 	Niko Mauno <niko.mauno@vaisala.com>
-Subject: [meta-python][PATCH 1/2] python3-pybind11: Migrate to python_setuptools_build_meta
-Date: Mon, 26 Feb 2024 11:41:53 +0000
-Message-ID: <20240226114154.1033676-1-niko.mauno@vaisala.com>
+Subject: [meta-python][PATCH 2/2] python3-pybind11: Restore strip prevention patch
+Date: Mon, 26 Feb 2024 11:41:54 +0000
+Message-ID: <20240226114154.1033676-2-niko.mauno@vaisala.com>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240226114154.1033676-1-niko.mauno@vaisala.com>
+References: <20240226114154.1033676-1-niko.mauno@vaisala.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
 X-ClientProxiedBy: GVX0EPF00011B52.SWEP280.PROD.OUTLOOK.COM
  (2603:10a6:144:1:0:8:0:c) To AS4PR06MB8447.eurprd06.prod.outlook.com
  (2603:10a6:20b:4e2::11)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS4PR06MB8447:EE_|DUZPR06MB8773:EE_
-X-MS-Office365-Filtering-Correlation-Id: 59a5befb-34f8-48b3-bd4d-08dc36bffadc
+X-MS-Office365-Filtering-Correlation-Id: 68e24120-ed35-41b7-f2f7-08dc36bffe7d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	80eqBfrx4+txocBucdAQ1Kk6fC8fmmYAnpHDghUOOGWp8scoxMnnh9AwoyMDmYx2f/VJHPcDDS26vsNDeIH6u9RYo5UjTTGF5c0SRYSl+ZdtrGzivODjeotjQoKcMi3zi16MkrqgOcAS5Xe9QfnCtMjHt+6Oc5CMPPaEwlTHCQIdpZbIxd+CCQXia1VJ4fmlBKwJs/1yufTrfpaTmHJp4clGpWVUSkoiJSDqQQb/AyiNlkgNImUBwU80AatJoCTQ5Fy6/HKJpUfzMzXxyNi9vlR2BIjWd9KEzfX0ljuGCpSxlqpaXPgBRmUt+MbqjK1x6J/f7afKPR0yN9sG283DndF9X4MVN3SQZD9fIkdxUOQ4vtFvNjgvyr1nXqSJhkBk7hxJjDQpY5VL0EN2SGYv5BrLII9JRr4fPMJ4J/Qghdv1wsfiXfbgy+0Dg2wUD3zRn1XHTDMT/c5pVzQrbU9UzLNrzhxEVm+rkC1iujhM3OK+a2IKs+7bEFsutvSLZ8aZi8ZOehvQGINm77XBiitn4zx+lYzId99caYxQ3mXArXnuxk0Qyi0bkkPbW+wxxOESAZvSC8WHk5y0uoYeW8WV0i1ZGdAS9zZ3SnSbv9ScQ+4IXc8oXz9LmT2HedjjwKwmcidSmcynMeKCWv+ok3V5yTOTAovUDDma9Yc9ed8c5xjo2SOkTcx2C7oKnZxcj+iHEXaLOJWSMlU5vKCtxvjXIA==
+	eJV4WPf4JBoX2Hy7dZ135RoA0OgLDodCiHp3m9kfE+geeI2KfmsiHEee7TkcQOxZZt5lclAJlOeMXdFh2z3wS8edYDD7hAT9/+rEoyI54WHEWOCGvBFKjwPqKjZ2OoUuO+1ETxZJW64ylIM2Ksqfl4rneLpVKngX7GFo+Eto+JJ4sUA9GqvxlSyoeZ9fcx8RpeuS953+cFIDkXuv8utWldlH58IIC/IrHiYxY/5+i9DPlolEn2TWxxxEwfT44zQYY9jABoiIW+pcdV/F0t5SixLIE7KP5qFa+5bFHCKROYmMfJ3Ez9P05JNjgN7/fgSAgo2FQRJGah3BpRXGm79TCQPEJ5JLDKv/DGheEit53RZglB1luB2/xWqoEDLrAeXg0r61hDnpOqb3p0LnBLaE2Ev8an1rZ/R5/gh5XfjysBJGT64uoYxGkoYXq+Y2nNIqBhSvcpo+geRpDnO+eMveP61S10eQ/pF0g7YMgcOZUx15clQ6RvNiytg3IdGnvQY7GoIe6IweWjljHRW04FXZbWX3ufJ1CSabnGBrHNNpU6LPO8LP1/2tiFA3HtSMms5s//UYlQqJ+xyNsHGyexorjHl/3BaMDCOayC/GnK2JwGm2UOsp2z2UKFIVz++1Hg57FjfMeXs3df1GNp2zYKt7IGJ1jLPoaoxK8tcxr8nWSJ6aFbS70NZ2WhZHYpeB++SD+L+0Eed3FT2i3wbaT80xpqZ0s8hNTcyA1imbpAcC4fU=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS4PR06MB8447.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(230273577357003)(38350700005);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS4PR06MB8447.eurprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(38350700005);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?kFSsdeCEca4WjpLNXlepTqptHkv3A41TGdPFoc99ytbPeP6/1JyAgeRMsLBH?=
- =?us-ascii?Q?mvWGvROxR5eXfD5E9pXjwRVUaPuWKnpBxsqbtAN/Z0Ygj5mAXjy9VEQfpylA?=
- =?us-ascii?Q?9lxtrr7R0l1oHEa0fUFs6rDsKPuJUoKpUU+Ba5e3Ph9iFKQGQcBAS4YFDlX1?=
- =?us-ascii?Q?GhAFr/9WeGfx54bM9H6B5c3hIgy1qLdI90Y73xLCCybeTn0zfNmjU/QfUQh4?=
- =?us-ascii?Q?jI0Vi1wwkgmE/oDqz02ABD9Myb+NdpGtoHLZ76aaeM7do/G6NR5kiO/nOlWJ?=
- =?us-ascii?Q?8bWi+J8EaYVrjE6n99+Qr19ASwhCVu3f3p+LKh4oIFxfSSntv4ASBWz2xzqJ?=
- =?us-ascii?Q?1PkEmumxxngYl/ScbJx4txRZviL91zyreL+tvuFHcbciJhB/yFHAzcPqoWZ5?=
- =?us-ascii?Q?3PVcIQi8hiy01YeJC0l5a/0AlPVoDyjcOAf99txQBOaxD3OjkeVRsu1VR9V8?=
- =?us-ascii?Q?JS4cfiR4f0cTRRpyPTn5ARFm1wGqAVcrnpCIi+DLPIUsIksyoy03HFCmFVBm?=
- =?us-ascii?Q?3xib6RBzuIMFnSR1QBeNJEigSGCzBoaQGrlf9I3dAEJl3ZIYbv+PgFQD6Yid?=
- =?us-ascii?Q?V9rieestjXlmz1R3QJDTVMI6Qx7HL+H22cBZJ/qayDNRoqA+6f3GMaUQ7XI6?=
- =?us-ascii?Q?DHuvcJLBXz1ddnROuJaANPTNiMf3arUNo3FwX+slUdJgD6shFsV62GXg4YZI?=
- =?us-ascii?Q?K9cW/GFlrEph8+iSxdGwzXrj8kCkClM2uVge8ZDe5wcV4gkXJoiCTqK5dEWN?=
- =?us-ascii?Q?MEw/K2kc5djUDFaOj9LIpBKz4qbUhtqeTNudz0e4ho1uz48YZmesax5gDilA?=
- =?us-ascii?Q?xgvlExUsALfN0N0f3Zyp7grRibscDuJTaSUceoom/rSlFIsXd7JzULi3q39Q?=
- =?us-ascii?Q?gAhjh/3cZAPUHwyVVqhweTcaPmbZDiy3xwgQatKrn7ElEuvtIPvxhY30WZva?=
- =?us-ascii?Q?FQltyAfU1ITrPl6moi1F1opXC5qo5uFc5jCa/VeHAWzKjgXsuEp00kIv6kMZ?=
- =?us-ascii?Q?8AgFuT0bYesoRgzuHZ3lI2y7LACKY9HYtlOov0E+aEjXzIKlcNsGnIJ4MB+b?=
- =?us-ascii?Q?cfZc9V5MwofrdSi/bxnHt5QhhgtVIcOCONT0blEDHw3JlZGHBbNXQ1y5bwvf?=
- =?us-ascii?Q?tVnE3i0N5cAkY1BdAcGe1LQlp0YLELWjMjxxV/siDrnMmDy5pln0H+OKH4Le?=
- =?us-ascii?Q?2pFHZMMe3vruLZdHKPlZev+87zxbfxf0ZxEPLMvMjK9lf9WxoaIX5emVhfMJ?=
- =?us-ascii?Q?0W/LO67mA8bNjeaR4lgWQTuEtfpokFo+vmvsKovCL0keg5Qu36BNJ8doDfkp?=
- =?us-ascii?Q?HPPECzKetkFIWZ/v55X42dM8Eo4ktcHMxQXo/xP+OpSa1tSskHP4hyDJk4zD?=
- =?us-ascii?Q?89mHEJ0s7v5G3IU/nKjW19gp8MRkzZfIoZ5Pg2iL7S8+s3IzRql6/ebPezJG?=
- =?us-ascii?Q?9eYY9dTdwDSCmqrGaGKEJFy1FZ6eC+9gde0chYlaKcIaQsN9mjGHHI72BKhZ?=
- =?us-ascii?Q?TLzO/NCQN5HkV5BvDPMmnauCevV8IfWNVUJyIYhDbgN0zWrE9XnZoZMnyhpB?=
- =?us-ascii?Q?WWoUN2GT6+EekSowEPTNGEx/M4AAjpNkKPKYvExsY0y2LZStxXa9FluGXbrU?=
- =?us-ascii?Q?Sw=3D=3D?=
+	=?us-ascii?Q?PQKVPeD5PMfYqfYcVri0+yOVTcslkqKRSVIyzj9WvddTHX3dg1yWuC3AMxze?=
+ =?us-ascii?Q?pXgTwOqoZNBi3zXTyAlKyDfbOqLpvSY6xHi3B2vGtQszu9IOB1E7TBWErwo/?=
+ =?us-ascii?Q?O3xNT2pPdr1LGamKHNtsklWiFmiu5DPkVTOaaVvxowQ78rXt+QfFAjZzvhfp?=
+ =?us-ascii?Q?l8cE1wr3iiMPNORrKLcr2laERxgaTAEeBy3qTPMNNekplAzFSTr//LyhDnpc?=
+ =?us-ascii?Q?XiO65+HGwMUzBdag41bsO2wcUxwfTwZPsmVnAtynrgPJeqhiOy/dXNN/WrML?=
+ =?us-ascii?Q?aO3ch9ZKLdzHgFU4hHszgYRWf6Glsz3AU1UzbIUDaBuWAeHW0FJ+NQL7M1X4?=
+ =?us-ascii?Q?wFwOGyUfTbrAQ+yJKcja4SLklbl1/BGVFLMNNK5aH+yYeKOAKm4SVTemEc3w?=
+ =?us-ascii?Q?s+Bdg+KmB/u5r6dV54Ud1Tj85nyBGp/XH3qUFHlbNoaQb1QidVwO0P0WAeX9?=
+ =?us-ascii?Q?9yZREPwh9huoSeOe0z3cWZeFcj+P/Ad144E84FlHwcTZtdNYL11nwSTgr2GR?=
+ =?us-ascii?Q?N0xrj5stIgfq9yV9r6iNcc7pblW96Xdbibb6tMT+M7vqfT3G3TABBPxytVSo?=
+ =?us-ascii?Q?Y4UsHzQcnrf+kAxNwKxSqibyrv5joaLWxFraeRaAlMLCkiSNvTqIJdwGKEzE?=
+ =?us-ascii?Q?uQP3UjhQcZ+3ClD+ecCJisDMpc6s+X0Iyp5K8G9RKIj6h6hOWQACcir/v026?=
+ =?us-ascii?Q?DxpFR2PXuSUE74nPVoF2hTBhcPtP3a1Oqyi8dFqn6JhQNZI07oaX0cjxUTqp?=
+ =?us-ascii?Q?T1ih+6nbXoQNp+VR9TIjL6tV0WQfVSz6BU1DYT4xfXSAKHNoW8KyFL5lcbj9?=
+ =?us-ascii?Q?QVv9efzXrAV+Hp9McQxQ/6QBAAGxyCyR/MdqIbXdiI/sJtXOM5rPy0Jqg2sP?=
+ =?us-ascii?Q?FFzQG05Zg3wBg1av8HRa4QL4PGssVqbI5A2c4JdpWR7KCsvLz8GVfVxV9my7?=
+ =?us-ascii?Q?lJ2A9BfNWli/dEPLGjgdnYkhHdllOiu9Ow3zsgQGDW+N3BPY57uVjiy1Uoax?=
+ =?us-ascii?Q?98sAPTyMNg4u74A4Yt6wsl8CA4hcJYZwSktDfHCIuVXh94I/dlvCOr4GivN0?=
+ =?us-ascii?Q?8e4OxG4RZAEnGzlg46oZTvx6dmDHMwMGiyxeB3RtJQUxgclLpkmuhrrszZCb?=
+ =?us-ascii?Q?O5S2FqsEGFMmJMYkwhoqL7ZAouvMGn9HHOR394GrcEIx0DcZH5pEo/FnxT6s?=
+ =?us-ascii?Q?XRPK8JUnL4I/wd6CHY5EDS5RltNhGLmV4ZmoXV3DmMvSs9IzjF76ze/Dei06?=
+ =?us-ascii?Q?zvpIZwxfRFcJ8edZPXJzF+/Memqp1K2mSBkjz9IZbSG46cE3w4mMY1pVAwNe?=
+ =?us-ascii?Q?TJtamOe3YWofLBDBumoxguLxzsUgeI+O7ncWoylPR+AxAAJ0YKOu0jcgw6Ya?=
+ =?us-ascii?Q?Y/EQxwnyyIGqNRaZL5FqLgQdEkBWLxo2LgnDPDYQEnf+//Ux0UE49niz25KQ?=
+ =?us-ascii?Q?A+6BWlobQ+w37Dx+EVPUq96B7nzXRkVbL2cv3eQnVWpWBQ4grglNRDd5fmDN?=
+ =?us-ascii?Q?XoLaWvX3BLB5MZ+DNdVCmyzQeUV9FQiiUUtR91kLN+ezWpLV0Hh7/ifFvqCD?=
+ =?us-ascii?Q?pSkpMx4DwYKLiPM7FU1vdqbh9dbuR3f7gXuQkFe74w5Z9eSPH6hBv/tefN2P?=
+ =?us-ascii?Q?SQ=3D=3D?=
 X-OriginatorOrg: vaisala.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 59a5befb-34f8-48b3-bd4d-08dc36bffadc
+X-MS-Exchange-CrossTenant-Network-Message-Id: 68e24120-ed35-41b7-f2f7-08dc36bffe7d
 X-MS-Exchange-CrossTenant-AuthSource: AS4PR06MB8447.eurprd06.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Feb 2024 11:42:15.7641
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Feb 2024 11:42:21.7062
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 6d7393e0-41f5-4c2e-9b12-4c2be5da5c57
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: xkRbiWFRqJqLoUOI5oPWBP/d0v6FqAPhX+RSjo5oe5eH62f+lbgRnqpLr7GuZgQJqm37CPh5pzxp5LNXpgTqtA==
+X-MS-Exchange-CrossTenant-UserPrincipalName: Jh3Tmk6qPNnAlwZVmRIQsmF1KBXQESR54RXfPzFy61rVXsidnJfNcLfsQAuHuZHdzij5OZoqFuphWYqIzF9FwA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DUZPR06MB8773
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 26 Feb 2024 11:42:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109032
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109033
 
 From: Niko Mauno <niko.mauno@vaisala.com>
 
-Switch from setuptools3.bbclass to python_setuptools_build_meta.bblass
-which reflects
-https://github.com/pybind/pybind11/blob/v2.11.1/pyproject.toml#L3 and
-mitigates following warning during do_compile:
+The patch which removed the pybind11_strip() call from provisioned
+pybind11*Tools.cmake files was dropped in commit
+5c455804aede17e0ea0cbb7ab55f8580f912e664 ("python3-pybind11: Upgrade
+to 2.10.3").
 
-  .../python3-pybind11/2.11.1/recipe-sysroot-native/usr/lib/python3.11/site=
--packages/setuptools/_distutils/cmd.py:66: SetuptoolsDeprecationWarning: se=
-tup.py install is deprecated.
+However this change delegated the requirement to set CMAKE_BUILD_TYPE
+as 'Debug' or 'RelWithDebInfo' (or as unset) to the cmake utilizing
+packages which have build time dependency on python3-pybind11, failure
+to do which causes following kind of BitBake failure with Yocto:
 
-Here we also fix remaining minor style issue in task declarations
-(use four space indentation instead of three).
+  ERROR: foobar-1.0.0-r0 do_package: QA Issue: File '/usr/lib/python3.11/si=
+te-packages/foobar.so' from foobar was already stripped, this will prevent =
+future debugging! [already-stripped]
 
-Reported-by: Tim Orling <ticotimo@gmail.com>
-Closes: https://lists.openembedded.org/g/openembedded-devel/message/108748
+Restore the patch so that the stripping is delegated to Yocto once
+more, allowing depending cmake packages to work out of the box also
+when they use 'Release' or 'MinSizeRel' as CMAKE_BUILD_TYPE by
+default.
+
+Signed-off-by: Joonas Salonp=C3=A4=C3=A4 <joonas.salonpaa@vaisala.com>
 Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
 ---
- .../python/python3-pybind11_2.11.1.bb         | 23 +++++++++----------
- 1 file changed, 11 insertions(+), 12 deletions(-)
+ .../0001-Do-not-strip-binaries.patch          | 52 +++++++++++++++++++
+ .../python/python3-pybind11_2.11.1.bb         |  5 +-
+ 2 files changed, 56 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pybind11/00=
+01-Do-not-strip-binaries.patch
 
+diff --git a/meta-python/recipes-devtools/python/python3-pybind11/0001-Do-n=
+ot-strip-binaries.patch b/meta-python/recipes-devtools/python/python3-pybin=
+d11/0001-Do-not-strip-binaries.patch
+new file mode 100644
+index 000000000..37cb78a30
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pybind11/0001-Do-not-stri=
+p-binaries.patch
+@@ -0,0 +1,52 @@
++From debd676cd94f92a30b3be45f1245aa13d8c398c0 Mon Sep 17 00:00:00 2001
++From: Philip Balister <philip@balister.org>
++Date: Wed, 8 Jul 2020 09:41:43 -0400
++Subject: [PATCH] Do not strip binaries.
++
++ * OpenEmbedded strips them after creating debug packages.
++
++Signed-off-by: Philip Balister <philip@balister.org>
++Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
++---
++ tools/pybind11NewTools.cmake | 7 -------
++ tools/pybind11Tools.cmake    | 6 ------
++ 2 files changed, 13 deletions(-)
++
++diff --git a/tools/pybind11NewTools.cmake b/tools/pybind11NewTools.cmake
++index 7d7424a7..accd90c4 100644
++--- a/tools/pybind11NewTools.cmake
+++++ b/tools/pybind11NewTools.cmake
++@@ -233,13 +233,6 @@ function(pybind11_add_module target_name)
++     endif()
++   endif()
++=20
++-  # Use case-insensitive comparison to match the result of $<CONFIG:cfgs>
++-  string(TOUPPER "${CMAKE_BUILD_TYPE}" uppercase_CMAKE_BUILD_TYPE)
++-  if(NOT MSVC AND NOT "${uppercase_CMAKE_BUILD_TYPE}" MATCHES DEBUG|RELWI=
+THDEBINFO)
++-    # Strip unnecessary sections of the binary on Linux/macOS
++-    pybind11_strip(${target_name})
++-  endif()
++-
++   if(MSVC)
++     target_link_libraries(${target_name} PRIVATE pybind11::windows_extras=
+)
++   endif()
++diff --git a/tools/pybind11Tools.cmake b/tools/pybind11Tools.cmake
++index 66ad00a4..855ede41 100644
++--- a/tools/pybind11Tools.cmake
+++++ b/tools/pybind11Tools.cmake
++@@ -212,12 +212,6 @@ function(pybind11_add_module target_name)
++     endif()
++   endif()
++=20
++-  # Use case-insensitive comparison to match the result of $<CONFIG:cfgs>
++-  string(TOUPPER "${CMAKE_BUILD_TYPE}" uppercase_CMAKE_BUILD_TYPE)
++-  if(NOT MSVC AND NOT "${uppercase_CMAKE_BUILD_TYPE}" MATCHES DEBUG|RELWI=
+THDEBINFO)
++-    pybind11_strip(${target_name})
++-  endif()
++-
++   if(MSVC)
++     target_link_libraries(${target_name} PRIVATE pybind11::windows_extras=
+)
++   endif()
++--=20
++2.39.2
++
 diff --git a/meta-python/recipes-devtools/python/python3-pybind11_2.11.1.bb=
  b/meta-python/recipes-devtools/python/python3-pybind11_2.11.1.bb
-index f94ef3637..13f63b7c6 100644
+index 13f63b7c6..78662fe3c 100644
 --- a/meta-python/recipes-devtools/python/python3-pybind11_2.11.1.bb
 +++ b/meta-python/recipes-devtools/python/python3-pybind11_2.11.1.bb
-@@ -2,31 +2,30 @@ SUMMARY =3D "Seamless operability between C++11 and Pytho=
-n"
- HOMEPAGE =3D "https://github.com/pybind/pybind11"
- LICENSE =3D "BSD-3-Clause"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D774f65abd8a7fe3124be2cdf766cd06=
-f"
-+DEPENDS =3D "\
-+    python3-cmake-native \
-+    python3-ninja-native \
-+"
+@@ -8,7 +8,10 @@ DEPENDS =3D "\
+ "
 =20
  SRCREV =3D "8a099e44b3d5f85b20f05828d919d2332a8de841"
- SRC_URI =3D "git://github.com/pybind/pybind11.git;branch=3Dstable;protocol=
+-SRC_URI =3D "git://github.com/pybind/pybind11.git;branch=3Dstable;protocol=
 =3Dhttps"
++SRC_URI =3D "\
++    git://github.com/pybind/pybind11.git;branch=3Dstable;protocol=3Dhttps =
+\
++    file://0001-Do-not-strip-binaries.patch \
++"
 =20
  S =3D "${WORKDIR}/git"
 =20
--inherit cmake setuptools3
-+inherit cmake python_setuptools_build_meta
-=20
- EXTRA_OECMAKE =3D "-DPYBIND11_TEST=3DOFF"
-=20
--PIP_INSTALL_DIST_PATH =3D "${S}/dist"
--PIP_INSTALL_PACKAGE =3D "pybind11"
--
--do_configure() {
--   cmake_do_configure
-+do_configure:append() {
-+    cmake_do_configure
- }
-=20
--do_compile() {
--   setuptools3_do_compile
--   cmake_do_compile
-+do_compile:append() {
-+    cmake_do_compile
- }
-=20
--do_install() {
--   setuptools3_do_install
--   cmake_do_install
-+do_install:append() {
-+    cmake_do_install
- }
-=20
- BBCLASSEXTEND =3D "native nativesdk"
 --=20
 2.39.2
 
