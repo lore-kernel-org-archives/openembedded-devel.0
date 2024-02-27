@@ -1,253 +1,649 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <archana.polampalli@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EFBCBC48BF6
-	for <webhook@archiver.kernel.org>; Mon, 26 Feb 2024 23:20:36 +0000 (UTC)
-Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com [209.85.128.177])
- by mx.groups.io with SMTP id smtpd.web10.34.1708989635688313877
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BA66BC5478C
+	for <webhook@archiver.kernel.org>; Tue, 27 Feb 2024 02:18:07 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.3791.1709000285349806604
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 26 Feb 2024 15:20:35 -0800
+ Mon, 26 Feb 2024 18:18:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=b/8RRjQx;
- spf=pass (domain: gmail.com, ip: 209.85.128.177, mailfrom: ticotimo@gmail.com)
-Received: by mail-yw1-f177.google.com with SMTP id 00721157ae682-6092387bdd0so2379627b3.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 26 Feb 2024 15:20:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1708989635; x=1709594435; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=0+5V/ClYEDCFhj6ZrlPcS/AmWgtJ8ser48HLSW573q4=;
-        b=b/8RRjQxD3fkN8ybJ1wCizFodqQF9EYHVulJT9eTwNW4ZTAxvrEg8BlTxGYBzW2Ivb
-         JOnIVeUKKY4KJorx5d5JftnCdeeZHykMEJu5tLNcVI21Z0KTkezBR7M1WUuniQKGko75
-         7yVhweSGlA0L1iVdsYBqb8SKd0f0uXS7X++E0W5dKOazceHnO5i/nwTXXVABGpbhpRcb
-         siSzPHVN5m4jvQBlW9GU1qU5G+fJ+8Kwo/sTaBE3lcmGSK7qHLsCagAaUeM6jxA7EFgz
-         OOsueYCSitY4MvN9ihnb0JHCqwqLPHqGp3oSqWou6NHm5hGErrL1aANOjZNB8WM7IvEi
-         Zirg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1708989635; x=1709594435;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=0+5V/ClYEDCFhj6ZrlPcS/AmWgtJ8ser48HLSW573q4=;
-        b=wi/Y0uG+Xe/TjBxoM4zsFOaqJTuSh/oMvSQFFrFCqy1pnixKGW+Ns9lBhWhh0dCEXy
-         1T74EEEchAiUpuvA46mPt8vJn13mAczMXTAi8Tqjbly7na8XxdkiTkonL5FdTPUkaurJ
-         YguHu4WNzkhZIZqDdp9UcjpIXoqIFMOQQ2Ocg+Thr90tnRl5LUSJSwIyewcZunkou/HC
-         e7/lmncuB0gtltBraIaeFOzimaABBg4wodAs4BkxSySv6ZnCHpsOg4yokR+RH8nggEmX
-         f3mWhSJrWwpL3Vn7E9tEYmyDW1DoYF6o3yfZw/n0B5v8QmCuvowQ4RM/YRgoCp2/s2tc
-         RHSw==
-X-Gm-Message-State: AOJu0YwzdOWpha3K3XU56IQxNEnV6e1nUcgpkD//aFDawof87w2kjL+D
-	yKNQFG/aeXmVfbNafVAweYu9XO+1k4WA1zhENUeKUX6dq5Q1GJ44ZOSi8AtK0Yy13QbW1NGVD7m
-	PVdTeudypsD0OfL6LegqRpgGh8Dw=
-X-Google-Smtp-Source: AGHT+IH/x/dUUanDKAhGnPpED+97SP2MtbaA9KxiTRGPYTZoz/1nTuUWuJTf3E/HgmSU44VQwEExE3R5z3Wf/ezdPVY=
-X-Received: by 2002:a81:4004:0:b0:604:bfd:cdba with SMTP id
- l4-20020a814004000000b006040bfdcdbamr631036ywn.9.1708989634657; Mon, 26 Feb
- 2024 15:20:34 -0800 (PST)
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=iduqk2qE;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=27871ec9df=archana.polampalli@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 41R1M8k4003074
+	for <openembedded-devel@lists.openembedded.org>; Mon, 26 Feb 2024 18:18:05 -0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=phOKO
+	O+VJDfYnI8m5aagXD3yK++ukt7q3+VkWkKI4Pg=; b=iduqk2qEJpeTGHUsgY6xL
+	GawPZoQGgdhCK9pAUAM4mcR3997s9b/u+3AWI68cN8W4+xUII0vNhZVoH2yXc9OT
+	tEFR9nVj+Yj8KgespiKo8nB5jFN0wutdZ5el6KA+kP5uAg7UJLzE/qhChBs0uzJC
+	og5jEklNhKCi93HcFRkFP0EGOQztld/gOkww6EesG9J6/YJm4FHhswWn+3TAVrnJ
+	OZo+d9jDtewHWpUKa0D6Fi03jKhXzJ4laTa643vOj6o49HFVBo6DYs8rvAs+eFdd
+	k7hH2Le+Esiiib35oMVrF8VNPPqzJLNnASbP4iGz2oU4o+hRxtgNzfLkAq2MlocB
+	w==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3wfcm42e37-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 26 Feb 2024 18:18:04 -0800 (PST)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.35; Mon, 26 Feb 2024 18:18:02 -0800
+From: <archana.polampalli@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][kirkstone][PATCH V2 1/1] nodejs: fix CVE-2024-22019
+Date: Tue, 27 Feb 2024 02:17:50 +0000
+Message-ID: <20240227021750.3377640-1-archana.polampalli@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-References: <20240224113942.11482-1-peter.marko@siemens.com>
-In-Reply-To: <20240224113942.11482-1-peter.marko@siemens.com>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Mon, 26 Feb 2024 15:20:23 -0800
-Message-ID: <CANx9H-Bxz_Eu_yV5Whc4YT0+XcpbPNTadq3eUxpjoaYN6s0dYg@mail.gmail.com>
-Subject: Re: [oe] [meta-java][PATCH] jsch,xerces-j: fix CVE_STATUS
-To: peter.marko@siemens.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="00000000000019438906125128dc"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-ORIG-GUID: 48TFXLX-KUJEid0iDV9sUtXWKGQ8moPE
+X-Proofpoint-GUID: 48TFXLX-KUJEid0iDV9sUtXWKGQ8moPE
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-02-26_11,2024-02-26_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
+ impostorscore=0 spamscore=0 bulkscore=0 mlxlogscore=999 mlxscore=0
+ lowpriorityscore=0 clxscore=1015 adultscore=0 suspectscore=0 phishscore=0
+ malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2402120000 definitions=main-2402270017
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 26 Feb 2024 23:20:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109036
+ <openembedded-devel@lists.openembedded.org>; Tue, 27 Feb 2024 02:18:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109037
 
---00000000000019438906125128dc
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Archana Polampalli <archana.polampalli@windriver.com>
 
-On Sat, Feb 24, 2024 at 3:40=E2=80=AFAM Peter Marko via lists.openembedded.=
-org
-<peter.marko=3Dsiemens.com@lists.openembedded.org> wrote:
+Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
+---
+ .../nodejs/nodejs/CVE-2024-22019.patch        | 556 ++++++++++++++++++
+ .../recipes-devtools/nodejs/nodejs_16.20.2.bb |   1 +
+ 2 files changed, 557 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/CVE-2024-22019.patch
 
-> From: Peter Marko <peter.marko@siemens.com>
->
-> Last commit tried to convert CVE_CHECK_IGNORE to CVE_STATUS,
-> however it was done in wrong way and caused the CVEs
-> to be reported as open again.
->
-> This fixes CVE_STATUS syntax.
->
-> Merged. Thank you. (Especially thank you for fixing MY mistakes)
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2024-22019.patch b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2024-22019.patch
+new file mode 100644
+index 000000000..ca1c7981c
+--- /dev/null
++++ b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2024-22019.patch
+@@ -0,0 +1,556 @@
++From 911cb33cdadab57a75f97186290ea8f3903a6171 Mon Sep 17 00:00:00 2001
++From: Paolo Insogna <paolo@cowtech.it>
++Date: Tue, 9 Jan 2024 18:10:04 +0100
++Subject: [PATCH] http: add maximum chunk extension size
++
++PR-URL: https://github.com/nodejs-private/node-private/pull/520
++Refs: https://github.com/nodejs-private/node-private/pull/518
++
++CVE-ID: CVE-2024-22019
++
++Upstream-Status: Backport [https://github.com/nodejs/node/commit/911cb33cdadab57a]
++
++Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
++---
++ deps/llhttp/CMakeLists.txt                    |   2 +-
++ deps/llhttp/include/llhttp.h                  |   7 +-
++ deps/llhttp/src/api.c                         |   7 +
++ deps/llhttp/src/llhttp.c                      | 122 ++++++++++++++--
++ doc/api/errors.md                             |  12 ++
++ lib/_http_server.js                           |   8 ++
++ src/node_http_parser.cc                       |  20 ++-
++ .../test-http-chunk-extensions-limit.js       | 131 ++++++++++++++++++
++ tools/update-llhttp.sh                        |   2 +-
++ 9 files changed, 292 insertions(+), 19 deletions(-)
++ create mode 100644 test/parallel/test-http-chunk-extensions-limit.js
++
++diff --git a/deps/llhttp/CMakeLists.txt b/deps/llhttp/CMakeLists.txt
++index d038203..747564a 100644
++--- a/deps/llhttp/CMakeLists.txt
+++++ b/deps/llhttp/CMakeLists.txt
++@@ -1,7 +1,7 @@
++ cmake_minimum_required(VERSION 3.5.1)
++ cmake_policy(SET CMP0069 NEW)
++
++-project(llhttp VERSION 6.0.11)
+++project(llhttp VERSION 6.1.0)
++ include(GNUInstallDirs)
++
++ set(CMAKE_C_STANDARD 99)
++diff --git a/deps/llhttp/include/llhttp.h b/deps/llhttp/include/llhttp.h
++index 2da66f1..78f27ab 100644
++--- a/deps/llhttp/include/llhttp.h
+++++ b/deps/llhttp/include/llhttp.h
++@@ -2,8 +2,8 @@
++ #define INCLUDE_LLHTTP_H_
++
++ #define LLHTTP_VERSION_MAJOR 6
++-#define LLHTTP_VERSION_MINOR 0
++-#define LLHTTP_VERSION_PATCH 11
+++#define LLHTTP_VERSION_MINOR 1
+++#define LLHTTP_VERSION_PATCH 0
++
++ #ifndef LLHTTP_STRICT_MODE
++ # define LLHTTP_STRICT_MODE 0
++@@ -348,6 +348,9 @@ struct llhttp_settings_s {
++    */
++   llhttp_cb      on_headers_complete;
++
+++  /* Possible return values 0, -1, HPE_USER */
+++  llhttp_data_cb on_chunk_parameters;
+++
++   /* Possible return values 0, -1, HPE_USER */
++   llhttp_data_cb on_body;
++
++diff --git a/deps/llhttp/src/api.c b/deps/llhttp/src/api.c
++index c4ce197..d3065b3 100644
++--- a/deps/llhttp/src/api.c
+++++ b/deps/llhttp/src/api.c
++@@ -355,6 +355,13 @@ int llhttp__on_chunk_header(llhttp_t* s, const char* p, const char* endp) {
++ }
++
++
+++int llhttp__on_chunk_parameters(llhttp_t* s, const char* p, const char* endp) {
+++  int err;
+++  SPAN_CALLBACK_MAYBE(s, on_chunk_parameters, p, endp - p);
+++  return err;
+++}
+++
+++
++ int llhttp__on_chunk_complete(llhttp_t* s, const char* p, const char* endp) {
++   int err;
++   CALLBACK_MAYBE(s, on_chunk_complete);
++diff --git a/deps/llhttp/src/llhttp.c b/deps/llhttp/src/llhttp.c
++index 5e7c5d1..5eb19f6 100644
++--- a/deps/llhttp/src/llhttp.c
+++++ b/deps/llhttp/src/llhttp.c
++@@ -340,6 +340,8 @@ enum llparse_state_e {
++   s_n_llhttp__internal__n_invoke_is_equal_content_length,
++   s_n_llhttp__internal__n_chunk_size_almost_done,
++   s_n_llhttp__internal__n_chunk_parameters,
+++  s_n_llhttp__internal__n_span_start_llhttp__on_chunk_parameters,
+++  s_n_llhttp__internal__n_chunk_parameters_ows,
++   s_n_llhttp__internal__n_chunk_size_otherwise,
++   s_n_llhttp__internal__n_chunk_size,
++   s_n_llhttp__internal__n_chunk_size_digit,
++@@ -539,6 +541,10 @@ int llhttp__on_body(
++     llhttp__internal_t* s, const unsigned char* p,
++     const unsigned char* endp);
++
+++int llhttp__on_chunk_parameters(
+++    llhttp__internal_t* s, const unsigned char* p,
+++    const unsigned char* endp);
+++
++ int llhttp__on_status(
++     llhttp__internal_t* s, const unsigned char* p,
++     const unsigned char* endp);
++@@ -1226,8 +1232,7 @@ static llparse_state_t llhttp__internal__run(
++           goto s_n_llhttp__internal__n_chunk_parameters;
++         }
++         case 2: {
++-          p++;
++-          goto s_n_llhttp__internal__n_chunk_size_almost_done;
+++	  goto s_n_llhttp__internal__n_span_end_llhttp__on_chunk_parameters;
++         }
++         default: {
++           goto s_n_llhttp__internal__n_error_10;
++@@ -1236,6 +1241,34 @@ static llparse_state_t llhttp__internal__run(
++       /* UNREACHABLE */;
++       abort();
++     }
+++    case s_n_llhttp__internal__n_span_start_llhttp__on_chunk_parameters:
+++    s_n_llhttp__internal__n_span_start_llhttp__on_chunk_parameters: {
+++      if (p == endp) {
+++        return s_n_llhttp__internal__n_span_start_llhttp__on_chunk_parameters;
+++      }
+++      state->_span_pos0 = (void*) p;
+++      state->_span_cb0 = llhttp__on_chunk_parameters;
+++      goto s_n_llhttp__internal__n_chunk_parameters;
+++      /* UNREACHABLE */;
+++      abort();
+++    }
+++    case s_n_llhttp__internal__n_chunk_parameters_ows:
+++    s_n_llhttp__internal__n_chunk_parameters_ows: {
+++      if (p == endp) {
+++        return s_n_llhttp__internal__n_chunk_parameters_ows;
+++      }
+++      switch (*p) {
+++        case ' ': {
+++          p++;
+++          goto s_n_llhttp__internal__n_chunk_parameters_ows;
+++        }
+++        default: {
+++          goto s_n_llhttp__internal__n_span_start_llhttp__on_chunk_parameters;
+++        }
+++      }
+++      /* UNREACHABLE */;
+++      abort();
+++    }
++     case s_n_llhttp__internal__n_chunk_size_otherwise:
++     s_n_llhttp__internal__n_chunk_size_otherwise: {
++       if (p == endp) {
++@@ -1246,13 +1279,9 @@ static llparse_state_t llhttp__internal__run(
++           p++;
++           goto s_n_llhttp__internal__n_chunk_size_almost_done;
++         }
++-        case ' ': {
++-          p++;
++-          goto s_n_llhttp__internal__n_chunk_parameters;
++-        }
++         case ';': {
++           p++;
++-          goto s_n_llhttp__internal__n_chunk_parameters;
+++          goto s_n_llhttp__internal__n_chunk_parameters_ows;
++         }
++         default: {
++           goto s_n_llhttp__internal__n_error_11;
++@@ -6074,6 +6103,24 @@ static llparse_state_t llhttp__internal__run(
++     /* UNREACHABLE */;
++     abort();
++   }
+++  s_n_llhttp__internal__n_span_end_llhttp__on_chunk_parameters: {
+++    const unsigned char* start;
+++    int err;
+++
+++    start = state->_span_pos0;
+++    state->_span_pos0 = NULL;
+++    err = llhttp__on_chunk_parameters(state, start, p);
+++    if (err != 0) {
+++      state->error = err;
+++      state->error_pos = (const char*) (p + 1);
+++      state->_current = (void*) (intptr_t) s_n_llhttp__internal__n_chunk_size_almost_done;
+++      return s_error;
+++    }
+++    p++;
+++    goto s_n_llhttp__internal__n_chunk_size_almost_done;
+++    /* UNREACHABLE */;
+++    abort();
+++  }
++   s_n_llhttp__internal__n_error_10: {
++     state->error = 0x2;
++     state->reason = "Invalid character in chunk parameters";
++@@ -8441,6 +8488,8 @@ enum llparse_state_e {
++   s_n_llhttp__internal__n_invoke_is_equal_content_length,
++   s_n_llhttp__internal__n_chunk_size_almost_done,
++   s_n_llhttp__internal__n_chunk_parameters,
+++  s_n_llhttp__internal__n_span_start_llhttp__on_chunk_parameters,
+++  s_n_llhttp__internal__n_chunk_parameters_ows,
++   s_n_llhttp__internal__n_chunk_size_otherwise,
++   s_n_llhttp__internal__n_chunk_size,
++   s_n_llhttp__internal__n_chunk_size_digit,
++@@ -8635,6 +8684,10 @@ int llhttp__on_body(
++     llhttp__internal_t* s, const unsigned char* p,
++     const unsigned char* endp);
++
+++int llhttp__on_chunk_parameters(
+++    llhttp__internal_t* s, const unsigned char* p,
+++    const unsigned char* endp);
+++
++ int llhttp__on_status(
++     llhttp__internal_t* s, const unsigned char* p,
++     const unsigned char* endp);
++@@ -9299,8 +9352,7 @@ static llparse_state_t llhttp__internal__run(
++           goto s_n_llhttp__internal__n_chunk_parameters;
++         }
++         case 2: {
++-          p++;
++-          goto s_n_llhttp__internal__n_chunk_size_almost_done;
+++	  goto s_n_llhttp__internal__n_span_end_llhttp__on_chunk_parameters;
++         }
++         default: {
++           goto s_n_llhttp__internal__n_error_6;
++@@ -9309,6 +9361,34 @@ static llparse_state_t llhttp__internal__run(
++       /* UNREACHABLE */;
++       abort();
++     }
+++    case s_n_llhttp__internal__n_span_start_llhttp__on_chunk_parameters:
+++    s_n_llhttp__internal__n_span_start_llhttp__on_chunk_parameters: {
+++      if (p == endp) {
+++        return s_n_llhttp__internal__n_span_start_llhttp__on_chunk_parameters;
+++      }
+++      state->_span_pos0 = (void*) p;
+++      state->_span_cb0 = llhttp__on_chunk_parameters;
+++      goto s_n_llhttp__internal__n_chunk_parameters;
+++      /* UNREACHABLE */;
+++      abort();
+++    }
+++    case s_n_llhttp__internal__n_chunk_parameters_ows:
+++    s_n_llhttp__internal__n_chunk_parameters_ows: {
+++      if (p == endp) {
+++        return s_n_llhttp__internal__n_chunk_parameters_ows;
+++      }
+++      switch (*p) {
+++        case ' ': {
+++          p++;
+++          goto s_n_llhttp__internal__n_chunk_parameters_ows;
+++        }
+++        default: {
+++          goto s_n_llhttp__internal__n_span_start_llhttp__on_chunk_parameters;
+++        }
+++      }
+++      /* UNREACHABLE */;
+++      abort();
+++    }
++     case s_n_llhttp__internal__n_chunk_size_otherwise:
++     s_n_llhttp__internal__n_chunk_size_otherwise: {
++       if (p == endp) {
++@@ -9319,13 +9399,9 @@ static llparse_state_t llhttp__internal__run(
++           p++;
++           goto s_n_llhttp__internal__n_chunk_size_almost_done;
++         }
++-        case ' ': {
++-          p++;
++-          goto s_n_llhttp__internal__n_chunk_parameters;
++-        }
++         case ';': {
++           p++;
++-          goto s_n_llhttp__internal__n_chunk_parameters;
+++          goto s_n_llhttp__internal__n_chunk_parameters_ows;
++         }
++         default: {
++           goto s_n_llhttp__internal__n_error_7;
++@@ -13951,6 +14027,24 @@ static llparse_state_t llhttp__internal__run(
++     /* UNREACHABLE */;
++     abort();
++   }
+++  s_n_llhttp__internal__n_span_end_llhttp__on_chunk_parameters: {
+++    const unsigned char* start;
+++    int err;
+++
+++    start = state->_span_pos0;
+++    state->_span_pos0 = NULL;
+++    err = llhttp__on_chunk_parameters(state, start, p);
+++    if (err != 0) {
+++      state->error = err;
+++      state->error_pos = (const char*) (p + 1);
+++      state->_current = (void*) (intptr_t) s_n_llhttp__internal__n_chunk_size_almost_done;
+++      return s_error;
+++    }
+++    p++;
+++    goto s_n_llhttp__internal__n_chunk_size_almost_done;
+++    /* UNREACHABLE */;
+++    abort();
+++  }
++   s_n_llhttp__internal__n_error_6: {
++     state->error = 0x2;
++     state->reason = "Invalid character in chunk parameters";
++diff --git a/doc/api/errors.md b/doc/api/errors.md
++index dcf8744..a76bfe5 100644
++--- a/doc/api/errors.md
+++++ b/doc/api/errors.md
++@@ -3043,6 +3043,18 @@ malconfigured clients, if more than 8 KiB of HTTP header data is received then
++ HTTP parsing will abort without a request or response object being created, and
++ an `Error` with this code will be emitted.
++
+++<a id="HPE_CHUNK_EXTENSIONS_OVERFLOW"></a>
+++
+++### `HPE_CHUNK_EXTENSIONS_OVERFLOW`
+++
+++<!-- YAML
+++added: REPLACEME
+++-->
+++
+++Too much data was received for a chunk extensions. In order to protect against
+++malicious or malconfigured clients, if more than 16 KiB of data is received
+++then an `Error` with this code will be emitted.
+++
++ <a id="HPE_UNEXPECTED_CONTENT_LENGTH"></a>
++
++ ### `HPE_UNEXPECTED_CONTENT_LENGTH`
++diff --git a/lib/_http_server.js b/lib/_http_server.js
++index 4e23266..263bb52 100644
++--- a/lib/_http_server.js
+++++ b/lib/_http_server.js
++@@ -706,6 +706,11 @@ const requestHeaderFieldsTooLargeResponse = Buffer.from(
++   `HTTP/1.1 431 ${STATUS_CODES[431]}\r\n` +
++   'Connection: close\r\n\r\n', 'ascii'
++ );
+++const requestChunkExtensionsTooLargeResponse = Buffer.from(
+++  `HTTP/1.1 413 ${STATUS_CODES[413]}\r\n` +
+++  'Connection: close\r\n\r\n', 'ascii',
+++);
+++
++ function socketOnError(e) {
++   // Ignore further errors
++   this.removeListener('error', socketOnError);
++@@ -719,6 +724,9 @@ function socketOnError(e) {
++         case 'HPE_HEADER_OVERFLOW':
++           response = requestHeaderFieldsTooLargeResponse;
++           break;
+++	case 'HPE_CHUNK_EXTENSIONS_OVERFLOW':
+++          response = requestChunkExtensionsTooLargeResponse;
+++          break;
++         case 'ERR_HTTP_REQUEST_TIMEOUT':
++           response = requestTimeoutResponse;
++           break;
++diff --git a/src/node_http_parser.cc b/src/node_http_parser.cc
++index 74f3248..b92e848 100644
++--- a/src/node_http_parser.cc
+++++ b/src/node_http_parser.cc
++@@ -79,6 +79,8 @@ const uint32_t kOnExecute = 5;
++ const uint32_t kOnTimeout = 6;
++ // Any more fields than this will be flushed into JS
++ const size_t kMaxHeaderFieldsCount = 32;
+++// Maximum size of chunk extensions
+++const size_t kMaxChunkExtensionsSize = 16384;
++
++ const uint32_t kLenientNone = 0;
++ const uint32_t kLenientHeaders = 1 << 0;
++@@ -206,6 +208,7 @@ class Parser : public AsyncWrap, public StreamListener {
++
++   int on_message_begin() {
++     num_fields_ = num_values_ = 0;
+++    chunk_extensions_nread_ = 0;
++     url_.Reset();
++     status_message_.Reset();
++     header_parsing_start_time_ = uv_hrtime();
++@@ -443,9 +446,22 @@ class Parser : public AsyncWrap, public StreamListener {
++     return 0;
++   }
++
++-  // Reset nread for the next chunk
+++  int on_chunk_extension(const char* at, size_t length) {
+++    chunk_extensions_nread_ += length;
+++
+++    if (chunk_extensions_nread_ > kMaxChunkExtensionsSize) {
+++      llhttp_set_error_reason(&parser_,
+++        "HPE_CHUNK_EXTENSIONS_OVERFLOW:Chunk extensions overflow");
+++      return HPE_USER;
+++    }
+++
+++    return 0;
+++  }
+++
+++  // Reset nread for the next chunk and also reset the extensions counter
++   int on_chunk_header() {
++     header_nread_ = 0;
+++    chunk_extensions_nread_ = 0;
++     return 0;
++   }
++
++@@ -887,6 +903,7 @@ class Parser : public AsyncWrap, public StreamListener {
++   const char* current_buffer_data_;
++   bool pending_pause_ = false;
++   uint64_t header_nread_ = 0;
+++  uint64_t chunk_extensions_nread_ = 0;
++   uint64_t max_http_header_size_;
++   uint64_t headers_timeout_;
++   uint64_t header_parsing_start_time_ = 0;
++@@ -921,6 +938,7 @@ const llhttp_settings_t Parser::settings = {
++   Proxy<DataCall, &Parser::on_header_field>::Raw,
++   Proxy<DataCall, &Parser::on_header_value>::Raw,
++   Proxy<Call, &Parser::on_headers_complete>::Raw,
+++  Proxy<DataCall, &Parser::on_chunk_extension>::Raw,
++   Proxy<DataCall, &Parser::on_body>::Raw,
++   Proxy<Call, &Parser::on_message_complete>::Raw,
++   Proxy<Call, &Parser::on_chunk_header>::Raw,
++diff --git a/test/parallel/test-http-chunk-extensions-limit.js b/test/parallel/test-http-chunk-extensions-limit.js
++new file mode 100644
++index 0000000..6868b3d
++--- /dev/null
+++++ b/test/parallel/test-http-chunk-extensions-limit.js
++@@ -0,0 +1,131 @@
+++'use strict';
+++
+++const common = require('../common');
+++const http = require('http');
+++const net = require('net');
+++const assert = require('assert');
+++
+++// Verify that chunk extensions are limited in size when sent all together.
+++{
+++  const server = http.createServer((req, res) => {
+++    req.on('end', () => {
+++      res.writeHead(200, { 'Content-Type': 'text/plain' });
+++      res.end('bye');
+++    });
+++
+++    req.resume();
+++  });
+++
+++  server.listen(0, () => {
+++    const sock = net.connect(server.address().port);
+++    let data = '';
+++
+++    sock.on('data', (chunk) => data += chunk.toString('utf-8'));
+++
+++    sock.on('end', common.mustCall(function() {
+++      assert.strictEqual(data, 'HTTP/1.1 413 Payload Too Large\r\nConnection: close\r\n\r\n');
+++      server.close();
+++    }));
+++
+++    sock.end('' +
+++      'GET / HTTP/1.1\r\n' +
+++      'Host: localhost:8080\r\n' +
+++      'Transfer-Encoding: chunked\r\n\r\n' +
+++      '2;' + 'A'.repeat(20000) + '=bar\r\nAA\r\n' +
+++      '0\r\n\r\n'
+++    );
+++  });
+++}
+++
+++// Verify that chunk extensions are limited in size when sent in intervals.
+++{
+++  const server = http.createServer((req, res) => {
+++    req.on('end', () => {
+++      res.writeHead(200, { 'Content-Type': 'text/plain' });
+++      res.end('bye');
+++    });
+++
+++    req.resume();
+++  });
+++
+++  server.listen(0, () => {
+++    const sock = net.connect(server.address().port);
+++    let remaining = 20000;
+++    let data = '';
+++
+++    const interval = setInterval(
+++      () => {
+++        if (remaining > 0) {
+++          sock.write('A'.repeat(1000));
+++        } else {
+++          sock.write('=bar\r\nAA\r\n0\r\n\r\n');
+++          clearInterval(interval);
+++        }
+++
+++        remaining -= 1000;
+++      },
+++      common.platformTimeout(20),
+++    ).unref();
+++
+++    sock.on('data', (chunk) => data += chunk.toString('utf-8'));
+++
+++    sock.on('end', common.mustCall(function() {
+++      assert.strictEqual(data, 'HTTP/1.1 413 Payload Too Large\r\nConnection: close\r\n\r\n');
+++      server.close();
+++    }));
+++
+++    sock.write('' +
+++    'GET / HTTP/1.1\r\n' +
+++    'Host: localhost:8080\r\n' +
+++    'Transfer-Encoding: chunked\r\n\r\n' +
+++    '2;'
+++    );
+++  });
+++}
+++
+++// Verify the chunk extensions is correctly reset after a chunk
+++{
+++  const server = http.createServer((req, res) => {
+++    req.on('end', () => {
+++      res.writeHead(200, { 'content-type': 'text/plain', 'connection': 'close', 'date': 'now' });
+++      res.end('bye');
+++    });
+++
+++    req.resume();
+++  });
+++
+++  server.listen(0, () => {
+++    const sock = net.connect(server.address().port);
+++    let data = '';
+++
+++    sock.on('data', (chunk) => data += chunk.toString('utf-8'));
+++
+++    sock.on('end', common.mustCall(function() {
+++      assert.strictEqual(
+++        data,
+++        'HTTP/1.1 200 OK\r\n' +
+++        'content-type: text/plain\r\n' +
+++        'connection: close\r\n' +
+++        'date: now\r\n' +
+++        'Transfer-Encoding: chunked\r\n' +
+++        '\r\n' +
+++        '3\r\n' +
+++        'bye\r\n' +
+++        '0\r\n' +
+++        '\r\n',
+++      );
+++
+++      server.close();
+++    }));
+++
+++    sock.end('' +
+++      'GET / HTTP/1.1\r\n' +
+++      'Host: localhost:8080\r\n' +
+++      'Transfer-Encoding: chunked\r\n\r\n' +
+++      '2;' + 'A'.repeat(10000) + '=bar\r\nAA\r\n' +
+++      '2;' + 'A'.repeat(10000) + '=bar\r\nAA\r\n' +
+++      '2;' + 'A'.repeat(10000) + '=bar\r\nAA\r\n' +
+++      '0\r\n\r\n'
+++    );
+++  });
+++}
++diff --git a/tools/update-llhttp.sh b/tools/update-llhttp.sh
++index 12e2f46..a95eef1 100755
++--- a/tools/update-llhttp.sh
+++++ b/tools/update-llhttp.sh
++@@ -59,5 +59,5 @@ echo ""
++ echo "Please git add llhttp, commit the new version:"
++ echo ""
++ echo "$ git add -A deps/llhttp"
++-echo "$ git commit -m \"deps: update nghttp2 to $LLHTTP_VERSION\""
+++echo "$ git commit -m \"deps: update llhttp to $LLHTTP_VERSION\""
++ echo ""
++--
++2.40.0
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_16.20.2.bb b/meta-oe/recipes-devtools/nodejs/nodejs_16.20.2.bb
+index 16593a0fe..b786c0273 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_16.20.2.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_16.20.2.bb
+@@ -27,6 +27,7 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+            file://0001-mips-Use-32bit-cast-for-operand-on-mips32.patch \
+            file://0001-Nodejs-Fixed-pipes-DeprecationWarning.patch \
+            file://CVE-2022-25883.patch \
++           file://CVE-2024-22019.patch \
+            "
+ SRC_URI:append:class-target = " \
+            file://0001-Using-native-binaries.patch \
+-- 
+2.40.0
 
-NOTE: both jsched and xerces-j have newer CVEs so if you have time to
-investigate upgrades to fix them, it would be appreciated:
-https://nvd.nist.gov/vuln/detail/CVE-2022-23437
-https://nvd.nist.gov/vuln/detail/CVE-2023-48795
-
-
-> Signed-off-by: Peter Marko <peter.marko@siemens.com>
-> ---
->  recipes-core/jcraft/jsch_0.1.40.bb       | 3 +--
->  recipes-core/xerces-j/xerces-j_2.11.0.bb | 2 +-
->  2 files changed, 2 insertions(+), 3 deletions(-)
->
-> diff --git a/recipes-core/jcraft/jsch_0.1.40.bb b/recipes-core/jcraft/
-> jsch_0.1.40.bb
-> index 8ef5c85..aeb04b4 100644
-> --- a/recipes-core/jcraft/jsch_0.1.40.bb
-> +++ b/recipes-core/jcraft/jsch_0.1.40.bb
-> @@ -25,8 +25,7 @@ do_compile() {
->  SRC_URI[md5sum] =3D "b59cec19a487e95aed68378976b4b566"
->  SRC_URI[sha256sum] =3D
-> "ca9d2ae08fd7a8983fb00d04f0f0c216a985218a5eb364ff9bee73870f28e097"
->
-> -# Ignore the CVE because it only affects Windows platforms
-> -CVE_STATUS +=3D "CVE-2016-5725"
-> +CVE_STATUS[CVE-2016-5725] =3D "not-applicable-platform: Issue only appli=
-es
-> on Windows"
->
->  BBCLASSEXTEND =3D "native"
->
-> diff --git a/recipes-core/xerces-j/xerces-j_2.11.0.bb
-> b/recipes-core/xerces-j/xerces-j_2.11.0.bb
-> index c7a54ab..45d3c43 100644
-> --- a/recipes-core/xerces-j/xerces-j_2.11.0.bb
-> +++ b/recipes-core/xerces-j/xerces-j_2.11.0.bb
-> @@ -18,7 +18,7 @@ SRC_URI =3D "
-> http://archive.apache.org/dist/xerces/j/source/Xerces-J-src.${PV}.tar
->  # Already fixed with updates and closed.
->  # https://access.redhat.com/security/cve/CVE-2018-2799
->  # https://bugzilla.redhat.com/show_bug.cgi?id=3D1567542
-> -CVE_STATUS +=3D "CVE-2018-2799"
-> +CVE_STATUS[CVE-2018-2799] =3D "not-applicable-platform: Issue only appli=
-es
-> on some Oracle Java SE and Red Hat Enterprise Linux versions"
->
->  S =3D "${WORKDIR}/xerces-2_11_0"
->
-> --
-> 2.30.2
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#109025):
-> https://lists.openembedded.org/g/openembedded-devel/message/109025
-> Mute This Topic: https://lists.openembedded.org/mt/104544794/924729
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> ticotimo@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
-
---00000000000019438906125128dc
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Sat, Feb 24, 2024 at 3:40=E2=80=AF=
-AM Peter Marko via <a href=3D"http://lists.openembedded.org">lists.openembe=
-dded.org</a> &lt;peter.marko=3D<a href=3D"mailto:siemens.com@lists.openembe=
-dded.org">siemens.com@lists.openembedded.org</a>&gt; wrote:<br></div><block=
-quote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1=
-px solid rgb(204,204,204);padding-left:1ex">From: Peter Marko &lt;<a href=
-=3D"mailto:peter.marko@siemens.com" target=3D"_blank">peter.marko@siemens.c=
-om</a>&gt;<br>
-<br>
-Last commit tried to convert CVE_CHECK_IGNORE to CVE_STATUS,<br>
-however it was done in wrong way and caused the CVEs<br>
-to be reported as open again.<br>
-<br>
-This fixes CVE_STATUS syntax.<br>
-<br></blockquote><div>Merged. Thank you. (Especially thank you for fixing M=
-Y mistakes)</div><div><br></div><div>NOTE: both jsched and xerces-j have ne=
-wer CVEs so if you have time to investigate upgrades to fix them, it would =
-be appreciated:</div><div><a href=3D"https://nvd.nist.gov/vuln/detail/CVE-2=
-022-23437">https://nvd.nist.gov/vuln/detail/CVE-2022-23437</a></div><div><a=
- href=3D"https://nvd.nist.gov/vuln/detail/CVE-2023-48795">https://nvd.nist.=
-gov/vuln/detail/CVE-2023-48795</a></div><div>=C2=A0</div><blockquote class=
-=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
-b(204,204,204);padding-left:1ex">
-Signed-off-by: Peter Marko &lt;<a href=3D"mailto:peter.marko@siemens.com" t=
-arget=3D"_blank">peter.marko@siemens.com</a>&gt;<br>
----<br>
-=C2=A0recipes-core/jcraft/<a href=3D"http://jsch_0.1.40.bb" rel=3D"noreferr=
-er" target=3D"_blank">jsch_0.1.40.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=A0| 3 +--<=
-br>
-=C2=A0recipes-core/xerces-j/<a href=3D"http://xerces-j_2.11.0.bb" rel=3D"no=
-referrer" target=3D"_blank">xerces-j_2.11.0.bb</a> | 2 +-<br>
-=C2=A02 files changed, 2 insertions(+), 3 deletions(-)<br>
-<br>
-diff --git a/recipes-core/jcraft/<a href=3D"http://jsch_0.1.40.bb" rel=3D"n=
-oreferrer" target=3D"_blank">jsch_0.1.40.bb</a> b/recipes-core/jcraft/<a hr=
-ef=3D"http://jsch_0.1.40.bb" rel=3D"noreferrer" target=3D"_blank">jsch_0.1.=
-40.bb</a><br>
-index 8ef5c85..aeb04b4 100644<br>
---- a/recipes-core/jcraft/<a href=3D"http://jsch_0.1.40.bb" rel=3D"noreferr=
-er" target=3D"_blank">jsch_0.1.40.bb</a><br>
-+++ b/recipes-core/jcraft/<a href=3D"http://jsch_0.1.40.bb" rel=3D"noreferr=
-er" target=3D"_blank">jsch_0.1.40.bb</a><br>
-@@ -25,8 +25,7 @@ do_compile() {<br>
-=C2=A0SRC_URI[md5sum] =3D &quot;b59cec19a487e95aed68378976b4b566&quot;<br>
-=C2=A0SRC_URI[sha256sum] =3D &quot;ca9d2ae08fd7a8983fb00d04f0f0c216a985218a=
-5eb364ff9bee73870f28e097&quot;<br>
-<br>
--# Ignore the CVE because it only affects Windows platforms<br>
--CVE_STATUS +=3D &quot;CVE-2016-5725&quot;<br>
-+CVE_STATUS[CVE-2016-5725] =3D &quot;not-applicable-platform: Issue only ap=
-plies on Windows&quot;<br>
-<br>
-=C2=A0BBCLASSEXTEND =3D &quot;native&quot;<br>
-<br>
-diff --git a/recipes-core/xerces-j/<a href=3D"http://xerces-j_2.11.0.bb" re=
-l=3D"noreferrer" target=3D"_blank">xerces-j_2.11.0.bb</a> b/recipes-core/xe=
-rces-j/<a href=3D"http://xerces-j_2.11.0.bb" rel=3D"noreferrer" target=3D"_=
-blank">xerces-j_2.11.0.bb</a><br>
-index c7a54ab..45d3c43 100644<br>
---- a/recipes-core/xerces-j/<a href=3D"http://xerces-j_2.11.0.bb" rel=3D"no=
-referrer" target=3D"_blank">xerces-j_2.11.0.bb</a><br>
-+++ b/recipes-core/xerces-j/<a href=3D"http://xerces-j_2.11.0.bb" rel=3D"no=
-referrer" target=3D"_blank">xerces-j_2.11.0.bb</a><br>
-@@ -18,7 +18,7 @@ SRC_URI =3D &quot;<a href=3D"http://archive.apache.org/di=
-st/xerces/j/source/Xerces-J-src.$%7BPV%7D.tar" rel=3D"noreferrer" target=3D=
-"_blank">http://archive.apache.org/dist/xerces/j/source/Xerces-J-src.${PV}.=
-tar</a><br>
-=C2=A0# Already fixed with updates and closed.<br>
-=C2=A0# <a href=3D"https://access.redhat.com/security/cve/CVE-2018-2799" re=
-l=3D"noreferrer" target=3D"_blank">https://access.redhat.com/security/cve/C=
-VE-2018-2799</a><br>
-=C2=A0# <a href=3D"https://bugzilla.redhat.com/show_bug.cgi?id=3D1567542" r=
-el=3D"noreferrer" target=3D"_blank">https://bugzilla.redhat.com/show_bug.cg=
-i?id=3D1567542</a><br>
--CVE_STATUS +=3D &quot;CVE-2018-2799&quot;<br>
-+CVE_STATUS[CVE-2018-2799] =3D &quot;not-applicable-platform: Issue only ap=
-plies on some Oracle Java SE and Red Hat Enterprise Linux versions&quot;<br=
->
-<br>
-=C2=A0S =3D &quot;${WORKDIR}/xerces-2_11_0&quot;<br>
-<br>
--- <br>
-2.30.2<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#109025): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/109025" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/109025</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/104544794/924=
-729" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
-/104544794/924729</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
-et=3D"_blank">ticotimo@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
-
---00000000000019438906125128dc--
 
