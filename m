@@ -1,599 +1,169 @@
-Return-Path: <archana.polampalli@windriver.com>
+Return-Path: <omatiush@cisco.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 63FE3C5478C
-	for <webhook@archiver.kernel.org>; Tue, 27 Feb 2024 11:37:40 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.10312.1709033853734782269
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C040C5478C
+	for <webhook@archiver.kernel.org>; Tue, 27 Feb 2024 13:59:21 +0000 (UTC)
+Received: from rcdn-iport-1.cisco.com (rcdn-iport-1.cisco.com [173.37.86.72])
+ by mx.groups.io with SMTP id smtpd.web11.12597.1709042354040900290
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Feb 2024 03:37:33 -0800
+ Tue, 27 Feb 2024 05:59:14 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=r3BYFXQH;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=27871ec9df=archana.polampalli@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 41R5wouQ018844
-	for <openembedded-devel@lists.openembedded.org>; Tue, 27 Feb 2024 11:37:33 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=QSzkS
-	gjCLYOkE2/S2HocJDVpVVM8oXx7kiZVlu/GquI=; b=r3BYFXQHSSVObplXfRF/0
-	44mmNatHuR65bNS/rhM9FDdpv5xiHOZfMy3pA2DGss2gMgTuKQwvz6A0EPDe82wl
-	lkN3RUwYK8eb/hjlfX/Qejat5Z62WWzVqCNQ/8WZ/mL7srqJf/JWvrKqMS7hGTm4
-	xIcWHSIVTv1Dm0yLzbP0RmULMyJkIS/rj6kmFwUuCalpm7dMbfXfKOJULf8VmGFA
-	+Am1GFen8dr790LW74Gd76Phm6eIvAcwOJYgrLNTKQjlRLGh0S6d/RQhH9Zj/iUn
-	J6rktRDzR8oEig6qA6I02nZlBl3u3BUY3V1zI9OaaMoY9VQYdtJM807R2d43aIy1
-	A==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3wf7e6b0p8-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 27 Feb 2024 11:37:32 +0000 (GMT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Tue, 27 Feb 2024 03:37:29 -0800
-From: <archana.polampalli@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][kirkstone][PATCH V2 1/2] nodejs: fix CVE-2024-22025
-Date: Tue, 27 Feb 2024 11:37:16 +0000
-Message-ID: <20240227113717.1068213-1-archana.polampalli@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport header.b=ZFUhrIh3;
+ spf=pass (domain: cisco.com, ip: 173.37.86.72, mailfrom: omatiush@cisco.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=cisco.com; i=@cisco.com; l=4336; q=dns/txt; s=iport;
+  t=1709042354; x=1710251954;
+  h=from:to:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=s/qxOpOn5RkesmZ4yCWE0tp+jN6AHkLE1wPCLrrr9jI=;
+  b=ZFUhrIh3f43aObzvJ4kbZTupK/3Mrtf3h+3PHmGAxl9V+3AxNd+B203y
+   ggkvRaKItSO/19cgFpLAlxhwbRU6Qnja7v2hujJgwmsGpUhLtI/0poZQ3
+   efD3f/GwgyGGRjbEJHoeAeayyXJC47uqIiiSI5TTV+AhmqsHLJUwduGDg
+   Y=;
+X-CSE-ConnectionGUID: mXBuSJN6QZu90Bk7oh+i2w==
+X-CSE-MsgGUID: h3R5QIgHQu6r4mOKxyrt+w==
+X-IronPort-AV: E=Sophos;i="6.06,188,1705363200"; 
+   d="scan'208";a="196693091"
+Received: from rcdn-core-3.cisco.com ([173.37.93.154])
+  by rcdn-iport-1.cisco.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Feb 2024 13:59:13 +0000
+Received: from sjc-ads-6997.cisco.com (sjc-ads-6997.cisco.com [10.30.218.117])
+	by rcdn-core-3.cisco.com (8.15.2/8.15.2) with ESMTP id 41RDxDMk010114;
+	Tue, 27 Feb 2024 13:59:13 GMT
+From: Oleh Matiusha <omatiush@cisco.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [PATCH] yasm: improve reproducibility
+Date: Tue, 27 Feb 2024 13:59:12 +0000
+Message-Id: <20240227135912.3781920-1-omatiush@cisco.com>
+X-Mailer: git-send-email 2.33.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-GUID: _wQmVmK_OyLeGj-le0zw5JIesEPi3Tch
-X-Proofpoint-ORIG-GUID: _wQmVmK_OyLeGj-le0zw5JIesEPi3Tch
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-02-26_11,2024-02-27_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
- adultscore=0 phishscore=0 mlxscore=0 impostorscore=0 spamscore=0
- bulkscore=0 malwarescore=0 mlxlogscore=999 clxscore=1015
- priorityscore=1501 suspectscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.19.0-2402120000 definitions=main-2402270090
+Content-Transfer-Encoding: 8bit
+X-Outbound-SMTP-Client: 10.30.218.117, sjc-ads-6997.cisco.com
+X-Outbound-Node: rcdn-core-3.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 27 Feb 2024 11:37:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109042
+ <openembedded-devel@lists.openembedded.org>; Tue, 27 Feb 2024 13:59:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109044
 
-From: Archana Polampalli <archana.polampalli@windriver.com>
+Place reproducible build date in source files instead of
+actual build date if SOURCE_DATE_EPOCH available.
 
-Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
+Signed-off-by: Oleh Matiusha <omatiush@cisco.com>
 ---
- .../nodejs/nodejs/CVE-2024-22025.patch        | 148 ++++++++++++++++++
- .../recipes-devtools/nodejs/nodejs_16.20.2.bb |   1 +
- 2 files changed, 149 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/CVE-2024-22025.p=
-atch
+ ...-Set-build-date-to-SOURCE_DATE_EPOCH.patch | 35 ++++++++++++++++
+ ...m-Use-BUILD_DATE-for-reproducibility.patch | 40 +++++++++++++++++++
+ meta-oe/recipes-devtools/yasm/yasm_git.bb     |  3 ++
+ 3 files changed, 78 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/yasm/yasm/0001-yasm-Set-build-date-to-SOURCE_DATE_EPOCH.patch
+ create mode 100644 meta-oe/recipes-devtools/yasm/yasm/0002-yasm-Use-BUILD_DATE-for-reproducibility.patch
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2024-22025.patch b/=
-meta-oe/recipes-devtools/nodejs/nodejs/CVE-2024-22025.patch
+diff --git a/meta-oe/recipes-devtools/yasm/yasm/0001-yasm-Set-build-date-to-SOURCE_DATE_EPOCH.patch b/meta-oe/recipes-devtools/yasm/yasm/0001-yasm-Set-build-date-to-SOURCE_DATE_EPOCH.patch
 new file mode 100644
-index 000000000..ac3a54aba
+index 000000000..e65c9853e
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2024-22025.patch
-@@ -0,0 +1,148 @@
-+From 9052ef43dc2d1b0db340591a9bc9e45a25c01d90 Mon Sep 17 00:00:00 2001
-+From: Matteo Collina <hello@matteocollina.com>
-+Date: Tue, 6 Feb 2024 16:47:20 +0100
-+Subject: [PATCH 4/5] zlib: pause stream if outgoing buffer is full
++++ b/meta-oe/recipes-devtools/yasm/yasm/0001-yasm-Set-build-date-to-SOURCE_DATE_EPOCH.patch
+@@ -0,0 +1,35 @@
++From eb164bb201c0f792fa8aa78270c47294065183a3 Mon Sep 17 00:00:00 2001
++From: Oleh Matiusha <omatiush@cisco.com>
++Date: Tue, 6 Feb 2024 09:33:11 +0000
++Subject: [PATCH 1/2] yasm: Set build date to SOURCE_DATE_EPOCH
 +
-+Signed-off-by: Matteo Collina <hello@matteocollina.com>
-+PR-URL: https://github.com/nodejs-private/node-private/pull/540
-+Reviewed-By: Robert Nagy <ronagy@icloud.com>
-+Ref: https://hackerone.com/reports/2284065
++If SOURCE_DATE_EPOCH is set, use it to generate a reproducible
++string for BUILD_DATE.
 +
-+CVE-ID: CVE-2024-22025
-+
-+Upstream-Status: Backport [https://github.com/nodejs/node/commit/9052ef43d=
-c2d1b0d]
-+
-+Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
++Signed-off-by: Oleh Matiusha <omatiush@cisco.com>
 +---
-+ lib/zlib.js                            | 32 +++++++++++++++++++-------
-+ test/parallel/test-zlib-brotli-16GB.js | 22 ++++++++++++++++++
-+ test/parallel/test-zlib-params.js      | 24 +++++++++++--------
-+ 3 files changed, 61 insertions(+), 17 deletions(-)
-+ create mode 100644 test/parallel/test-zlib-brotli-16GB.js
++ configure.ac | 8 ++++++++
++ 1 file changed, 8 insertions(+)
 +
-+diff --git a/lib/zlib.js b/lib/zlib.js
-+index 9bde199..8e033e5 100644
-+--- a/lib/zlib.js
-++++ b/lib/zlib.js
-+@@ -560,10 +560,11 @@ function processCallback() {
-+   self.bytesWritten +=3D inDelta;
++diff --git a/configure.ac b/configure.ac
++index 2823ecd..eeb51ce 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -103,6 +103,14 @@ AM_WITH_DMALLOC
++ #
++ AC_CHECK_HEADERS([strings.h libgen.h unistd.h direct.h sys/stat.h])
++ 
+++# Use reproducible build date and time
+++if test "$SOURCE_DATE_EPOCH"; then
+++	DATE_FMT="%d %b %Y %H:%M:%S"
+++	BUILD_DATE=$(LC_ALL=C date -u -d "@$SOURCE_DATE_EPOCH" "+$DATE_FMT")
+++	AC_DEFINE_UNQUOTED([BUILD_DATE], ["$BUILD_DATE"], [Use reproducidle build date])
+++fi
+++
+++
++ #
++ # Checks for typedefs, structures, and compiler characteristics.
++ #
++-- 
++2.33.0
 +
-+   const have =3D handle.availOutBefore - availOutAfter;
-++  let streamBufferIsFull =3D false;
-+   if (have > 0) {
-+     const out =3D self._outBuffer.slice(self._outOffset, self._outOffset =
-+ have);
-+     self._outOffset +=3D have;
-+-    self.push(out);
-++    streamBufferIsFull =3D !self.push(out);
-+   } else {
-+     assert(have =3D=3D=3D 0, 'have should not go down');
-+   }
-+@@ -588,13 +589,28 @@ function processCallback() {
-+     handle.inOff +=3D inDelta;
-+     handle.availInBefore =3D availInAfter;
+diff --git a/meta-oe/recipes-devtools/yasm/yasm/0002-yasm-Use-BUILD_DATE-for-reproducibility.patch b/meta-oe/recipes-devtools/yasm/yasm/0002-yasm-Use-BUILD_DATE-for-reproducibility.patch
+new file mode 100644
+index 000000000..665f3afc9
+--- /dev/null
++++ b/meta-oe/recipes-devtools/yasm/yasm/0002-yasm-Use-BUILD_DATE-for-reproducibility.patch
+@@ -0,0 +1,40 @@
++From 19fffab74a201dc41c3da7e74d86eafa8f68bbc6 Mon Sep 17 00:00:00 2001
++From: Oleh Matiusha <omatiush@cisco.com>
++Date: Tue, 6 Feb 2024 09:34:26 +0000
++Subject: [PATCH] yasm: Use BUILD_DATE for reproducibility
 +
-+-    this.write(handle.flushFlag,
-+-               this.buffer, // in
-+-               handle.inOff, // in_off
-+-               handle.availInBefore, // in_len
-+-               self._outBuffer, // out
-+-               self._outOffset, // out_off
-+-               self._chunkSize); // out_len
-++    if (!streamBufferIsFull) {
-++      this.write(handle.flushFlag,
-++                 this.buffer, // in
-++                 handle.inOff, // in_off
-++                 handle.availInBefore, // in_len
-++                 self._outBuffer, // out
-++                 self._outOffset, // out_off
-++                 self._chunkSize); // out_len
-++    } else {
-++      const oldRead =3D self._read;
-++      self._read =3D (n) =3D> {
-++        self._read =3D oldRead;
-++        this.write(handle.flushFlag,
-++                   this.buffer, // in
-++                   handle.inOff, // in_off
-++                   handle.availInBefore, // in_len
-++                   self._outBuffer, // out
-++                   self._outOffset, // out_off
-++                   self._chunkSize); // out_len
-++        self._read(n);
-++      };
-++    }
-+     return;
-+   }
++Use reproducible build date instead of compilation time and date.
 +
-+diff --git a/test/parallel/test-zlib-brotli-16GB.js b/test/parallel/test-z=
-lib-brotli-16GB.js
-+new file mode 100644
-+index 0000000..1ca10f7
-+--- /dev/null
-++++ b/test/parallel/test-zlib-brotli-16GB.js
-+@@ -0,0 +1,22 @@
-++use strict';
-++
-++const common =3D require('../common');
-++const { createBrotliDecompress } =3D require('node:zlib');
-++const strictEqual =3D require('node:assert').strictEqual;
-++
-++// This tiny HEX string is a 16GB file.
-++// This test verifies that the stream actually stops.
-++/* eslint-disable max-len */
-++const content =3D 'cfffff7ff82700e2b14020f7fe9ffffffff04f00c4610180eefd3f=
-ffffffe19f0088c32200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074e=
-ffff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800=
-a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c=
-30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04=
-401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff=
-82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeff=
-ffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff=
-3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7=
-fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f011087050=
-0baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe098038=
-2c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f0=
-0c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff87=
-7f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7fff=
-f3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3f=
-ffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074e=
-ffff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800=
-a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c=
-30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04=
-401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff=
-82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeff=
-ffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff=
-3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7=
-fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f011087050=
-0baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe098038=
-2c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f0=
-0c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff87=
-7f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7fff=
-f3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3f=
-ffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074e=
-ffff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800=
-a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c=
-30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04=
-401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff=
-82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeff=
-ffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff=
-3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7=
-fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f011087050=
-0baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe098038=
-2c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f0=
-0c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff87=
-7f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7fff=
-f3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3f=
-ffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074e=
-ffff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800=
-a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c=
-30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04=
-401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff=
-82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeff=
-ffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff=
-3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7=
-fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f011087050=
-0baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe098038=
-2c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f0=
-0c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff87=
-7f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7fff=
-f3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3f=
-ffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074e=
-ffff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800=
-a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c=
-30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04=
-401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff=
-82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeff=
-ffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff=
-3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7=
-fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f011087050=
-0baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe098038=
-2c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f0=
-0c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff87=
-7f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7fff=
-f3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3f=
-ffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074e=
-ffff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800=
-a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c=
-30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04=
-401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff=
-82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeff=
-ffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff=
-3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7=
-fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f011087050=
-0baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe098038=
-2c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f0=
-0c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff87=
-7f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7fff=
-f3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3f=
-ffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074e=
-ffff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800=
-a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c=
-30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04=
-401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff=
-82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeff=
-ffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff=
-3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7=
-fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f011087050=
-0baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe098038=
-2c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f0=
-0c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff87=
-7f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7fff=
-f3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3f=
-ffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074e=
-ffff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800=
-a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c=
-30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04=
-401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff=
-82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeff=
-ffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff=
-3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7=
-fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f011087050=
-0baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe098038=
-2c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f0=
-0c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff87=
-7f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7fff=
-f3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3f=
-ffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074e=
-ffff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800=
-a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c=
-30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04=
-401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff=
-82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeff=
-ffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff=
-3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7=
-fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f011087050=
-0baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe098038=
-2c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f0=
-0c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff87=
-7f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7fff=
-f3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3f=
-ffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074e=
-ffff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800=
-a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c=
-30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04=
-401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff=
-82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeff=
-ffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff=
-3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7=
-fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f011087050=
-0baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe098038=
-2c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f0=
-0c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff87=
-7f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7fff=
-f3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3f=
-ffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074e=
-ffff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800=
-a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c=
-30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04=
-401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff=
-82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeff=
-ffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff=
-3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7=
-fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f011087050=
-0baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe098038=
-2c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f0=
-0c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff87=
-7f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7fff=
-f3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3f=
-ffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074e=
-ffff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800=
-a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c=
-30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04=
-401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff=
-82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeff=
-ffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff=
-3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7=
-fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f011087050=
-0baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe098038=
-2c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f0=
-0c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff87=
-7f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7fff=
-f3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3f=
-ffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074e=
-ffff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800=
-a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c=
-30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04=
-401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff=
-82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeff=
-ffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff=
-3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7=
-fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f011087050=
-0baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe098038=
-2c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f0=
-0c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff87=
-7f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7fff=
-f3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3f=
-ffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074e=
-ffff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800=
-a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c=
-30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04=
-401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff=
-82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeff=
-ffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff=
-3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7=
-fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f011087050=
-0baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe098038=
-2c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f0=
-0c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff87=
-7f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7fff=
-f3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3f=
-ffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074e=
-ffff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800=
-a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c=
-30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04=
-401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff=
-82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeff=
-ffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff=
-3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7=
-fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f011087050=
-0baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe098038=
-2c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f0=
-0c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff87=
-7f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7fff=
-f3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3f=
-ffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074e=
-ffff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800=
-a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c=
-30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04=
-401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff=
-82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeff=
-ffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff=
-3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7=
-fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f011087050=
-0baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe098038=
-2c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f0=
-0c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff87=
-7f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7fff=
-f3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3f=
-ffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074e=
-ffff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800=
-a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c=
-30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04=
-401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff=
-82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeff=
-ffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff=
-3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7=
-fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f011087050=
-0baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe098038=
-2c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f0=
-0c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff87=
-7f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7fff=
-f3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3f=
-ffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074e=
-ffff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800=
-a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c=
-30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04=
-401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff=
-82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeff=
-ffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff=
-3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7=
-fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f011087050=
-0baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe098038=
-2c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f0=
-0c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff87=
-7f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7fff=
-f3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3f=
-ffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074e=
-ffff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800=
-a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c=
-30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04=
-401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff=
-82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeff=
-ffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff=
-3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7=
-fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f011087050=
-0baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe098038=
-2c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f0=
-0c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff87=
-7f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7fff=
-f3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3f=
-ffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074e=
-ffff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800=
-a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c=
-30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04=
-401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff=
-82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeff=
-ffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff=
-3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7=
-fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f011087050=
-0baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe098038=
-2c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f0=
-0c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff87=
-7f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7fff=
-f3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3f=
-ffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074e=
-ffff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800=
-a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c=
-30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04=
-401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff=
-82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeff=
-ffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff=
-3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7=
-fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f011087050=
-0baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe098038=
-2c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f0=
-0c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff87=
-7f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7fff=
-f3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3f=
-ffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074e=
-ffff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800=
-a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c=
-30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04=
-401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff=
-82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeff=
-ffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff=
-3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7=
-fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f011087050=
-0baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe098038=
-2c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f0=
-0c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff87=
-7f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7fff=
-f3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3f=
-ffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074e=
-ffff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800=
-a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c=
-30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04=
-401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff=
-82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeff=
-ffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff=
-3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7=
-fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f011087050=
-0baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe098038=
-2c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f0=
-0c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff87=
-7f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7fff=
-f3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3f=
-ffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074e=
-ffff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800=
-a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c=
-30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04=
-401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff=
-82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeff=
-ffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff=
-3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7=
-fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f011087050=
-0baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe098038=
-2c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f0=
-0c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff87=
-7f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7fff=
-f3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3f=
-ffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074e=
-ffff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800=
-a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c=
-30200ddfb7ffeffffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04=
-401c1600e8defff3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff=
-82700e2b00040f7fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeff=
-ffc33f0110870500baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff=
-3ffff1ffe0980382c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7=
-fe9ffffffff04f00c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f011087050=
-0baf7fffcffff877f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe098038=
-2c00d0bdffe7ffff3ffc1300715800a07bffcfffff7ff82700e2b00040f7fe9ffffffff04f0=
-0c4610180eefd3fffffffe19f0088c30200ddfb7ffeffffc33f0110870500baf7fffcffff87=
-7f02200e0b0074effff9ffff0fff04401c1600e8defff3ffff1ffe0980382c00d0bdffe7fff=
-f3ffc1300715800a07bff3f';
-++
-++const buf =3D Buffer.from(content, 'hex');
-++
-++const decoder =3D createBrotliDecompress();
-++decoder.end(buf);
-++
-++// We need to wait to verify that the libuv thread pool had time
-++// to process the data and the buffer is not empty.
-++setTimeout(common.mustCall(() =3D> {
-++  // There is only one chunk in the buffer
-++  strictEqual(decoder._readableState.buffer.length, 1);
-++}), common.platformTimeout(100));
-+diff --git a/test/parallel/test-zlib-params.js b/test/parallel/test-zlib-p=
-arams.js
-+index 30d4f13..18271fe 100644
-+--- a/test/parallel/test-zlib-params.js
-++++ b/test/parallel/test-zlib-params.js
-+@@ -12,23 +12,29 @@ const deflater =3D zlib.createDeflate(opts);
-+ const chunk1 =3D file.slice(0, chunkSize);
-+ const chunk2 =3D file.slice(chunkSize);
-+ const blkhdr =3D Buffer.from([0x00, 0x5a, 0x82, 0xa5, 0x7d]);
-+-const expected =3D Buffer.concat([blkhdr, chunk2]);
-+-let actual;
-++const blkftr =3D Buffer.from('010000ffff7dac3072', 'hex');
-++const expected =3D Buffer.concat([blkhdr, chunk2, blkftr]);
-++const bufs =3D [];
-++
-++function read() {
-++  let buf;
-++  while ((buf =3D deflater.read()) !=3D=3D null) {
-++    bufs.push(buf);
-++  }
-++}
++Signed-off-by: Oleh Matiusha <omatiush@cisco.com>
 +
-+ deflater.write(chunk1, function() {
-+   deflater.params(0, zlib.constants.Z_DEFAULT_STRATEGY, function() {
-+     while (deflater.read());
-+-    deflater.end(chunk2, function() {
-+-      const bufs =3D [];
-+-      let buf;
-+-      while ((buf =3D deflater.read()) !=3D=3D null)
-+-        bufs.push(buf);
-+-      actual =3D Buffer.concat(bufs);
-+-    });
-++
-++    deflater.on('readable', read);
-++
-++    deflater.end(chunk2);
-+   });
-+   while (deflater.read());
-+ });
++---
++ tools/re2c/parser.c | 5 +++++
++ 1 file changed, 5 insertions(+)
 +
-+ process.once('exit', function() {
-++  const actual =3D Buffer.concat(bufs);
-+   assert.deepStrictEqual(actual, expected);
-+ });
-+--
-+2.40.0
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_16.20.2.bb b/meta-oe/re=
-cipes-devtools/nodejs/nodejs_16.20.2.bb
-index b786c0273..b4261eaf8 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_16.20.2.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_16.20.2.bb
-@@ -28,6 +28,7 @@ SRC_URI =3D "http://nodejs.org/dist/v${PV}/node-v${PV}.ta=
-r.xz \
-            file://0001-Nodejs-Fixed-pipes-DeprecationWarning.patch \
-            file://CVE-2022-25883.patch \
-            file://CVE-2024-22019.patch \
-+           file://CVE-2024-22025.patch \
-            "
- SRC_URI:append:class-target =3D " \
-            file://0001-Using-native-binaries.patch \
---=20
-2.40.0
++diff --git a/tools/re2c/parser.c b/tools/re2c/parser.c
++index 02d5c66..1c90aee 100644
++--- a/tools/re2c/parser.c
+++++ b/tools/re2c/parser.c
++@@ -5,6 +5,7 @@
++ #include "tools/re2c/globals.h"
++ #include "tools/re2c/parse.h"
++ #include "tools/re2c/parser.h"
+++#include "config.h"
++ 
++ int yylex(void);
++ static RegExp *parse_expr(void);
++@@ -233,7 +234,11 @@ void parse(FILE *i, FILE *o){
++     peektok = NONE;
++ 
++     fputs("/* Generated by re2c 0.9.1-C on ", o);
+++#ifndef BUILD_DATE
++     fprintf(o, "%-24s", ctime(&now));
+++#else
+++    fprintf(o, "%-24s", BUILD_DATE " ");
+++#endif
++     fputs(" */\n", o); oline+=2;
++ 
++     in = Scanner_new(i);
++-- 
++2.33.0
++
+diff --git a/meta-oe/recipes-devtools/yasm/yasm_git.bb b/meta-oe/recipes-devtools/yasm/yasm_git.bb
+index 079f805d6..216b77766 100644
+--- a/meta-oe/recipes-devtools/yasm/yasm_git.bb
++++ b/meta-oe/recipes-devtools/yasm/yasm_git.bb
+@@ -14,6 +14,8 @@ SRC_URI = "git://github.com/yasm/yasm.git;branch=master;protocol=https \
+            file://0001-Do-not-use-AC_HEADER_STDC.patch \
+            file://CVE-2023-31975.patch \
+            file://CVE-2023-37732.patch \
++           file://0001-yasm-Set-build-date-to-SOURCE_DATE_EPOCH.patch \
++           file://0002-yasm-Use-BUILD_DATE-for-reproducibility.patch \
+ "
+ 
+ S = "${WORKDIR}/git"
+@@ -30,3 +32,4 @@ do_configure:prepend() {
+      # Don't include $CC (which includes path to sysroot) in generated header.
+      sed -i -e "s/^echo \"\/\* generated \$ac_cv_stdint_message \*\/\" >>\$ac_stdint$"// ${S}/m4/ax_create_stdint_h.m4
+ }
++
+-- 
+2.33.0
 
 
