@@ -1,169 +1,96 @@
-Return-Path: <omatiush@cisco.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C040C5478C
-	for <webhook@archiver.kernel.org>; Tue, 27 Feb 2024 13:59:21 +0000 (UTC)
-Received: from rcdn-iport-1.cisco.com (rcdn-iport-1.cisco.com [173.37.86.72])
- by mx.groups.io with SMTP id smtpd.web11.12597.1709042354040900290
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A54C3C5478C
+	for <webhook@archiver.kernel.org>; Tue, 27 Feb 2024 17:56:17 +0000 (UTC)
+Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
+ by mx.groups.io with SMTP id smtpd.web11.942.1709056567422991443
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Feb 2024 05:59:14 -0800
+ Tue, 27 Feb 2024 09:56:07 -0800
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: message contains an insecure body length tag" header.i=@cisco.com header.s=iport header.b=ZFUhrIh3;
- spf=pass (domain: cisco.com, ip: 173.37.86.72, mailfrom: omatiush@cisco.com)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Kdp5pidc;
+ spf=pass (domain: gmail.com, ip: 209.85.210.175, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f175.google.com with SMTP id d2e1a72fcca58-6e4d48a5823so3736318b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Feb 2024 09:56:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=cisco.com; i=@cisco.com; l=4336; q=dns/txt; s=iport;
-  t=1709042354; x=1710251954;
-  h=from:to:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=s/qxOpOn5RkesmZ4yCWE0tp+jN6AHkLE1wPCLrrr9jI=;
-  b=ZFUhrIh3f43aObzvJ4kbZTupK/3Mrtf3h+3PHmGAxl9V+3AxNd+B203y
-   ggkvRaKItSO/19cgFpLAlxhwbRU6Qnja7v2hujJgwmsGpUhLtI/0poZQ3
-   efD3f/GwgyGGRjbEJHoeAeayyXJC47uqIiiSI5TTV+AhmqsHLJUwduGDg
-   Y=;
-X-CSE-ConnectionGUID: mXBuSJN6QZu90Bk7oh+i2w==
-X-CSE-MsgGUID: h3R5QIgHQu6r4mOKxyrt+w==
-X-IronPort-AV: E=Sophos;i="6.06,188,1705363200"; 
-   d="scan'208";a="196693091"
-Received: from rcdn-core-3.cisco.com ([173.37.93.154])
-  by rcdn-iport-1.cisco.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Feb 2024 13:59:13 +0000
-Received: from sjc-ads-6997.cisco.com (sjc-ads-6997.cisco.com [10.30.218.117])
-	by rcdn-core-3.cisco.com (8.15.2/8.15.2) with ESMTP id 41RDxDMk010114;
-	Tue, 27 Feb 2024 13:59:13 GMT
-From: Oleh Matiusha <omatiush@cisco.com>
+        d=gmail.com; s=20230601; t=1709056566; x=1709661366; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=KGr6nR+gXJHbvroCwaEYTcJPBKCGJ84vChJxEjuBU90=;
+        b=Kdp5pidc9Wj+yLdvR4t3t/Igv8HWl+SCycw4fQzsm99SH2t99LbSpRbI18Kzg9KyfB
+         FrlyYMSBOmGOq+/uXsQL82mYzCEwVMJ6fhRLmODhCF3MAeiWK51y08PHhJZnn5wZTXrz
+         8cdyhXh4IRWlpMdX/bedp4fmnBhaQHxjmntXGWzDh2JuWLWwmN5qYAOfvNqTct3rToom
+         HZ+fWeIjxkqbwPRgf27Y1G/pema5x4h24ssAKCrOqgK39MYLb6SRM1w/SAQ+TSOQ7brQ
+         waEmNe8LK0neHBbmpbaj/ytiLD3EPCyhfzEKQhnu40CmQndhDtnLXePCBGjpSZGoOJEG
+         0I1A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1709056566; x=1709661366;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=KGr6nR+gXJHbvroCwaEYTcJPBKCGJ84vChJxEjuBU90=;
+        b=ndMERuy1Utqd+zCqn2A0+jQcMpLBUovAm8Rtiuiwi/h9JwqjMbDw8FiyBFOtSvITeF
+         2b2K+eBZ1h94pNUmgNQo0wbIoKSiRDRUIx9LwIujo+h7DqjEDADTqJufJMpliGUQfTY7
+         UENx1pxGD08blrDXiIB4qrY0DRRvJX4pRkmeBvVEyE7oOrV/PhmneCEoJjNczmnIz5yG
+         YKHHfOHhWjp1be1iagWCH8LWWp+hO6RZ5JxSxlnLUs418r4NXqxFT97HxfLBT2R1zmnv
+         wchNRTG9zP3KdRSIREwNVKx1sMKDMabyBwp4p1S0DY9zubwoheM8403ExuQoXloQYBw2
+         /Obg==
+X-Gm-Message-State: AOJu0YwUymTFsBwin3XRTOfCmqI2b3cFxne9z95p0lUdWt36hyO9e6Tt
+	ygvicDV3eZ/NuAgqJS84AvnqWJVr1iLpsnyeHo+FmtrFQUSZssVLRioHJku9HTg=
+X-Google-Smtp-Source: AGHT+IFWsnI+iqllLBJyvlwmUfSf6hw5Wo5MsyZB/PzZqSXFV/qZicfAzN3aoSRmocoTTHjsKDEeOQ==
+X-Received: by 2002:a05:6a20:b323:b0:19e:b9ab:189e with SMTP id ef35-20020a056a20b32300b0019eb9ab189emr2339962pzb.60.1709056566370;
+        Tue, 27 Feb 2024 09:56:06 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::95e0])
+        by smtp.gmail.com with ESMTPSA id k9-20020a63ba09000000b005cf5bf78b74sm5161861pgf.17.2024.02.27.09.56.05
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 27 Feb 2024 09:56:06 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH] yasm: improve reproducibility
-Date: Tue, 27 Feb 2024 13:59:12 +0000
-Message-Id: <20240227135912.3781920-1-omatiush@cisco.com>
-X-Mailer: git-send-email 2.33.0
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] ostree: Remove strace from ptest rdeps
+Date: Tue, 27 Feb 2024 09:56:04 -0800
+Message-ID: <20240227175604.2844370-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Outbound-SMTP-Client: 10.30.218.117, sjc-ads-6997.cisco.com
-X-Outbound-Node: rcdn-core-3.cisco.com
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 27 Feb 2024 13:59:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109044
+ <openembedded-devel@lists.openembedded.org>; Tue, 27 Feb 2024 17:56:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109045
 
-Place reproducible build date in source files instead of
-actual build date if SOURCE_DATE_EPOCH available.
+it checks for strace and then try fault injection if it exists. So,
+while it will be good to have strace port for rv32 it can be disabled
+for now
 
-Signed-off-by: Oleh Matiusha <omatiush@cisco.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...-Set-build-date-to-SOURCE_DATE_EPOCH.patch | 35 ++++++++++++++++
- ...m-Use-BUILD_DATE-for-reproducibility.patch | 40 +++++++++++++++++++
- meta-oe/recipes-devtools/yasm/yasm_git.bb     |  3 ++
- 3 files changed, 78 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/yasm/yasm/0001-yasm-Set-build-date-to-SOURCE_DATE_EPOCH.patch
- create mode 100644 meta-oe/recipes-devtools/yasm/yasm/0002-yasm-Use-BUILD_DATE-for-reproducibility.patch
+ meta-oe/recipes-extended/ostree/ostree_2024.3.bb | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/yasm/yasm/0001-yasm-Set-build-date-to-SOURCE_DATE_EPOCH.patch b/meta-oe/recipes-devtools/yasm/yasm/0001-yasm-Set-build-date-to-SOURCE_DATE_EPOCH.patch
-new file mode 100644
-index 000000000..e65c9853e
---- /dev/null
-+++ b/meta-oe/recipes-devtools/yasm/yasm/0001-yasm-Set-build-date-to-SOURCE_DATE_EPOCH.patch
-@@ -0,0 +1,35 @@
-+From eb164bb201c0f792fa8aa78270c47294065183a3 Mon Sep 17 00:00:00 2001
-+From: Oleh Matiusha <omatiush@cisco.com>
-+Date: Tue, 6 Feb 2024 09:33:11 +0000
-+Subject: [PATCH 1/2] yasm: Set build date to SOURCE_DATE_EPOCH
-+
-+If SOURCE_DATE_EPOCH is set, use it to generate a reproducible
-+string for BUILD_DATE.
-+
-+Signed-off-by: Oleh Matiusha <omatiush@cisco.com>
-+---
-+ configure.ac | 8 ++++++++
-+ 1 file changed, 8 insertions(+)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 2823ecd..eeb51ce 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -103,6 +103,14 @@ AM_WITH_DMALLOC
-+ #
-+ AC_CHECK_HEADERS([strings.h libgen.h unistd.h direct.h sys/stat.h])
-+ 
-++# Use reproducible build date and time
-++if test "$SOURCE_DATE_EPOCH"; then
-++	DATE_FMT="%d %b %Y %H:%M:%S"
-++	BUILD_DATE=$(LC_ALL=C date -u -d "@$SOURCE_DATE_EPOCH" "+$DATE_FMT")
-++	AC_DEFINE_UNQUOTED([BUILD_DATE], ["$BUILD_DATE"], [Use reproducidle build date])
-++fi
-++
-++
-+ #
-+ # Checks for typedefs, structures, and compiler characteristics.
-+ #
-+-- 
-+2.33.0
-+
-diff --git a/meta-oe/recipes-devtools/yasm/yasm/0002-yasm-Use-BUILD_DATE-for-reproducibility.patch b/meta-oe/recipes-devtools/yasm/yasm/0002-yasm-Use-BUILD_DATE-for-reproducibility.patch
-new file mode 100644
-index 000000000..665f3afc9
---- /dev/null
-+++ b/meta-oe/recipes-devtools/yasm/yasm/0002-yasm-Use-BUILD_DATE-for-reproducibility.patch
-@@ -0,0 +1,40 @@
-+From 19fffab74a201dc41c3da7e74d86eafa8f68bbc6 Mon Sep 17 00:00:00 2001
-+From: Oleh Matiusha <omatiush@cisco.com>
-+Date: Tue, 6 Feb 2024 09:34:26 +0000
-+Subject: [PATCH] yasm: Use BUILD_DATE for reproducibility
-+
-+Use reproducible build date instead of compilation time and date.
-+
-+Signed-off-by: Oleh Matiusha <omatiush@cisco.com>
-+
-+---
-+ tools/re2c/parser.c | 5 +++++
-+ 1 file changed, 5 insertions(+)
-+
-+diff --git a/tools/re2c/parser.c b/tools/re2c/parser.c
-+index 02d5c66..1c90aee 100644
-+--- a/tools/re2c/parser.c
-++++ b/tools/re2c/parser.c
-+@@ -5,6 +5,7 @@
-+ #include "tools/re2c/globals.h"
-+ #include "tools/re2c/parse.h"
-+ #include "tools/re2c/parser.h"
-++#include "config.h"
-+ 
-+ int yylex(void);
-+ static RegExp *parse_expr(void);
-+@@ -233,7 +234,11 @@ void parse(FILE *i, FILE *o){
-+     peektok = NONE;
-+ 
-+     fputs("/* Generated by re2c 0.9.1-C on ", o);
-++#ifndef BUILD_DATE
-+     fprintf(o, "%-24s", ctime(&now));
-++#else
-++    fprintf(o, "%-24s", BUILD_DATE " ");
-++#endif
-+     fputs(" */\n", o); oline+=2;
-+ 
-+     in = Scanner_new(i);
-+-- 
-+2.33.0
-+
-diff --git a/meta-oe/recipes-devtools/yasm/yasm_git.bb b/meta-oe/recipes-devtools/yasm/yasm_git.bb
-index 079f805d6..216b77766 100644
---- a/meta-oe/recipes-devtools/yasm/yasm_git.bb
-+++ b/meta-oe/recipes-devtools/yasm/yasm_git.bb
-@@ -14,6 +14,8 @@ SRC_URI = "git://github.com/yasm/yasm.git;branch=master;protocol=https \
-            file://0001-Do-not-use-AC_HEADER_STDC.patch \
-            file://CVE-2023-31975.patch \
-            file://CVE-2023-37732.patch \
-+           file://0001-yasm-Set-build-date-to-SOURCE_DATE_EPOCH.patch \
-+           file://0002-yasm-Use-BUILD_DATE-for-reproducibility.patch \
- "
+diff --git a/meta-oe/recipes-extended/ostree/ostree_2024.3.bb b/meta-oe/recipes-extended/ostree/ostree_2024.3.bb
+index 07dedc8b81..158ec9bc23 100644
+--- a/meta-oe/recipes-extended/ostree/ostree_2024.3.bb
++++ b/meta-oe/recipes-extended/ostree/ostree_2024.3.bb
+@@ -28,8 +28,6 @@ S = "${WORKDIR}/libostree-${PV}"
  
- S = "${WORKDIR}/git"
-@@ -30,3 +32,4 @@ do_configure:prepend() {
-      # Don't include $CC (which includes path to sysroot) in generated header.
-      sed -i -e "s/^echo \"\/\* generated \$ac_cv_stdint_message \*\/\" >>\$ac_stdint$"// ${S}/m4/ax_create_stdint_h.m4
- }
-+
+ inherit autotools bash-completion gobject-introspection github-releases gtk-doc manpages pkgconfig ptest-gnome systemd
+ 
+-COMPATIBLE_HOST:riscv32 = "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'null', 'riscv32', d)}"
+-
+ UNKNOWN_CONFIGURE_OPT_IGNORE = "--disable-introspection --enable-introspection"
+ 
+ # Workaround compile failure:
+@@ -203,6 +201,7 @@ RDEPENDS:${PN}-ptest += " \
+     python3-pyyaml \
+     ${@bb.utils.contains('PACKAGECONFIG', 'gjs', 'gjs', '', d)} \
+ "
++RDEPENDS:${PN}-ptest:remove:riscv32 = "strace"
+ RDEPENDS:${PN}-ptest:append:libc-glibc = " glibc-utils glibc-localedata-en-us"
+ 
+ RRECOMMENDS:${PN}:append:class-target = " kernel-module-overlay"
 -- 
-2.33.0
+2.44.0
 
 
