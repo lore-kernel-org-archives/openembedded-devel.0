@@ -1,250 +1,168 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <yi.zhao@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1245DC5478C
-	for <webhook@archiver.kernel.org>; Tue, 27 Feb 2024 19:22:48 +0000 (UTC)
-Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
- by mx.groups.io with SMTP id smtpd.web11.2984.1709061765860555263
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B7D86C54E41
+	for <webhook@archiver.kernel.org>; Wed, 28 Feb 2024 07:34:12 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.8439.1709105642350188190
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 27 Feb 2024 11:22:45 -0800
+ Tue, 27 Feb 2024 23:34:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=A1N88ck1;
- spf=pass (domain: gmail.com, ip: 209.85.210.177, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f177.google.com with SMTP id d2e1a72fcca58-6e45d0c9676so97675b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 27 Feb 2024 11:22:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1709061765; x=1709666565; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=qkHq0fgyTww/ubnb1mb3zb9zaDVYJuLxDkBetv2WOac=;
-        b=A1N88ck1vL6kPS0A4T79oBgW0x8brIfNQp55KV2ZwCo1E4Ahtd2yaT/4ayPVyRGg5p
-         JfRLtnYuEere1mw4nnZAHa2Kwa4rXI0ncAPPe1HK5oRvBizGcr2NFRZaFNhZBf6ZfmM/
-         Q1ZiZ/rtNO+5rh959nt622eTJnUCvev83fde8DwYuCUgNJpKJWGuKSNlsyC2i+nHBUct
-         IDSxTyr/BMM5ycKAUKbTj1PDgVD/L2yzBkDMuhAdbrxtMSMZ1sU0v3GN33UlS45MhEHJ
-         zUCBE+xBGqiLUtvjhr3e0RThuaXOIkWM0Yh6E2yxO8Onwuf0eZNwEVVYVClPItuXB0zO
-         64Mg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1709061765; x=1709666565;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=qkHq0fgyTww/ubnb1mb3zb9zaDVYJuLxDkBetv2WOac=;
-        b=WsFq2jNTIjhAbA+kCGBpm7wQf5+RtYHfqsNrliwtqcU512ZQkZQ9jgFCq8IqrUjtQG
-         QSw/ZymEVAbb624qeMNO7hqeaLjaUuLGZCCgAEElxLS5Eb4k8k24lzlkrFtVrdJLzEJD
-         58bzcYUjDzK7Akydk5cFTc5nysCOCYZYGo8raKq6LUPq0noEDgX/YRA/TvWSi28V/37z
-         SKvKxUqXRPEe6CJBFkEjWc+VYXX2wTMB63T6Ib656kofPg5QIGXzEHCdiljkaR5LA0z4
-         2GGgyD3FeiBQpKQ5FCl7t6mtcgfNDsW3VlwOq5XNpQhhjSgleW34H03wa8KC7xrra1g5
-         qUDA==
-X-Gm-Message-State: AOJu0YwCdBzWfT0Z9MOwmjyDJefmwwCvEqjwSyvFMM00IYWAv7jAl4Ip
-	kWWefV+f3DAQsd3ESz0072SZmn28TdhTwZOuZniYQUc670ITJAEL/Nd5pm0PrxI=
-X-Google-Smtp-Source: AGHT+IFC0GRHtTGMqkgWm1tuuaeVZ5lMSiMDb/jSNRSxbNPWZBDi02gYBVM940GbqQ3qFrA/BpEdqA==
-X-Received: by 2002:a05:6a20:9c8e:b0:1a0:f3f4:3b1a with SMTP id mj14-20020a056a209c8e00b001a0f3f43b1amr395468pzb.10.1709061765011;
-        Tue, 27 Feb 2024 11:22:45 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::95e0])
-        by smtp.gmail.com with ESMTPSA id k62-20020a632441000000b005dc3fc53f19sm6223199pgk.7.2024.02.27.11.22.44
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 27 Feb 2024 11:22:44 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=RV0JwKb/;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=27881ff055=yi.zhao@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 41S5g3qU004493
+	for <openembedded-devel@lists.openembedded.org>; Wed, 28 Feb 2024 07:34:01 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:content-transfer-encoding
+	:content-type:mime-version; s=PPS06212021; bh=e3IIY91v0uke7CPLic
+	PlMV+388J1jD0lCnUbNeDUNt0=; b=RV0JwKb/VZCZR2dA5xCY0D4CTckEjJF389
+	36siPF7Mr7qjjGvqNZYZCoI1b9lvZfknQ5hSmEQkj21kjoTZZtcwQz+8urGfZ8IK
+	kzL/rmA/oFcH9V3/idGLhENGUmKuY2H8+C2sAQKTHwZze+BEpZplZfgiW5/HkiPb
+	J51R0NSVP6Ow1aGbWW3Rqq0GlF74670uBwUW1gpr++PK8xHSnw8joNk0Pvj/pC7d
+	YpmcdS4LMQmzWQx+XRuZbO6JeFkAgAhncdET/5PBcxTtNX7I3WYuqHIdyVKLlwdL
+	DDg/rmNrCysjUXbQ4n1q9KtR8Z05TOhuVUsUMK/28QxtoWwVlBIA==
+Received: from nam12-dm6-obe.outbound.protection.outlook.com (mail-dm6nam12lp2169.outbound.protection.outlook.com [104.47.59.169])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3wf7e6c0md-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Wed, 28 Feb 2024 07:34:01 +0000 (GMT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=MeTn6dzn6ZDyyFndUFSBrU6vWxRFlXWLZLzzQyk3AllUPqPVoNPGHGel2DgMaW/HyexAFKY8lU+cr5PxoZrqmRlX5APnzXeFKTOOQFzFoFpvQyAUHOfVWmrEAEypMPsdK996EtV1ecypx/GACoN8zSTOs0sMdRDjGp3yAqKH2Iw2UlZ9K+rRZvnHjjOLzS+VqLWDZNq289d2QvXSw0PA89uWA23EnGFu3y8zF5NvVZXc0M64akkZPstYpK0hKRuKKqOwLzBb3CYW0vv7GJ/kecZxzBC/W89uOa7bHdSqw1zk8BFn3rZIcJRvcAiXHR/rSKn5hECGmvrTA57c+joSzg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=e3IIY91v0uke7CPLicPlMV+388J1jD0lCnUbNeDUNt0=;
+ b=XGXro0ZVDC0nM6Zsf1E/GQk+8hFL6CX2jHmW6AzFhNV+JTOlNBrsskLNY2SPg4LD2avgoxFeYCN0WjZEB2VHn6R5sTBYC3Xt1dANZyTG6jtfPJt79sFAcAQMoKSu1nD6UDpYFkAh6WbW/OW5QiesIaiZGYXv2LvshoqXdzlmumIyipVDE7y1zJeY4vjP6J1aQQKO3MIn7ujaPZKC5uEjpuHBP/aCNQrDPZcIlfc5KtKMX/MLi2A18s0sBwYd0PJs/YldcN1ZDK5rPky8yxL5EqQPQ82jFKtc1dq8bzdQXQIw9tx08TJ+J6PZOtC9OPC5Bbr+jAi+SaGNtL20yFCwqA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from DS0PR11MB7484.namprd11.prod.outlook.com (2603:10b6:8:14c::10)
+ by IA0PR11MB8420.namprd11.prod.outlook.com (2603:10b6:208:482::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7339.24; Wed, 28 Feb
+ 2024 07:33:57 +0000
+Received: from DS0PR11MB7484.namprd11.prod.outlook.com
+ ([fe80::97da:833f:8511:a558]) by DS0PR11MB7484.namprd11.prod.outlook.com
+ ([fe80::97da:833f:8511:a558%5]) with mapi id 15.20.7339.024; Wed, 28 Feb 2024
+ 07:33:57 +0000
+From: Yi Zhao <yi.zhao@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 2/2] python3-pydantic-core: Fix build for arches without 64bit atomics
-Date: Tue, 27 Feb 2024 11:22:42 -0800
-Message-ID: <20240227192242.3844005-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.44.0
-In-Reply-To: <20240227192242.3844005-1-raj.khem@gmail.com>
-References: <20240227192242.3844005-1-raj.khem@gmail.com>
-MIME-Version: 1.0
+Subject: [meta-networking][PATCH] openipmi: fix do_configure error when using dash
+Date: Wed, 28 Feb 2024 15:33:45 +0800
+Message-Id: <20240228073345.1503738-1-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.25.1
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SI2PR02CA0040.apcprd02.prod.outlook.com
+ (2603:1096:4:196::6) To DS0PR11MB7484.namprd11.prod.outlook.com
+ (2603:10b6:8:14c::10)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS0PR11MB7484:EE_|IA0PR11MB8420:EE_
+X-MS-Office365-Filtering-Correlation-Id: f0544bad-0229-444c-baa5-08dc382f9fbd
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	/ND8lFhqb05ax0HorMaHFTNqnd8d7jQt7gBohltZVDFLeAq/RXaUNzgFRm9p/EQpZTH/6MnexkXtxUznHF9YcK7FXFeudH3t1iHIyU4ecDVU7/X9gCmE7KE0SUka9CEAe/A5HCMx5Z02s0SxEYSU21kaoz8qUIKvwqRYDIQT5Ftn0Xq3xJxY4DJdo6d8aPA1WcCQECgtzC0mzOY+hO2Xb85LYoL1AzyD1AtAtzoJj+bf/wZlg1kLlcQ6VQNZzsdk0Mcgk9hLUsiCmzjhRSBROBi/O6VwFwe52Nz0GvECBN4AtuXZ/clHOm8IgRtjoZ7hZJIXA2acjZcU50ZtfmgRTrI13XrpdDBmnhW18IdAhBkBcoklIxt/RcsvaltOIlYaxJgLGhX7sv7LzsiZSurd/5ONSaj7aIUvBQZ/nivHMk1mfz5KI33B5sggnlrSya8mFORoTBbJfWYaSw60Mf2UOdpq5DcIXyGmVPseD9DgtYYibZ6xrL+k7Kn4mr8aKCHbfagom/NWsj13ZcV94Vys4NFzPGXe54F8sjmncXdOaQteZ2ffpU1DMnlOEfdZ5nKnvp+fFbEhS2HvTjzCRn7V7wab/9sjarzPDwOqajWHwM+VcV1n6tDeXhCqks3RQ1efwJ4XaTiRaxLcZDc/A+BERBI4+jaHodfTJkA9QP3+dNAdsq+X0PIR3klDqnp1KfduxtRPOhp2CFcq9cwp0YtjHozoCWU4MR8E02OB4/jbFGk=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB7484.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(38350700005);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?LDFWF+A3Ia9oGgjAat73UY69OXRB00bVG3jjxYVGPeTTrDKPy2eUHJqpHclf?=
+ =?us-ascii?Q?7Sa9Kae8k7qVxq9mRj54zng5OpP7aWtWpLofVsTRJ3oCX7ZTv00CtcGVD3wf?=
+ =?us-ascii?Q?woSUHNvTuTZMXZhSIG6aiJztAyabbjt6I8d3IvuZIE1egWN/MaWoenGrdt9P?=
+ =?us-ascii?Q?/1Hrk9QMNZEhg7C1jK2A30xaEq3rfa3/Xv/0uro6aOfL+rHWpA4M1fLDHSVA?=
+ =?us-ascii?Q?gQrQpM7v0SHrHU3mWDdsP9DtHcljWEKMacwtothxANFmkWF/35mTlr68YwAy?=
+ =?us-ascii?Q?H918sVx1y9dtxdcDq5qy1TXwtcHlCGT+guM6j8QFN4VRAwOE3DqylXsiBMLp?=
+ =?us-ascii?Q?duR4OTaiTpL18UEGk44iJp80uvjGkhrgYSbPg9s9ezhhRXLLqkOVZ3GBbLXV?=
+ =?us-ascii?Q?MUUQx8od1fI+NOuD1nset0DwPrvWrcS/MvWwGev/msiVp/VF2LK6ek8d3EBp?=
+ =?us-ascii?Q?NI56oxyRvpgqH7MT4qHCpDOs3rw8VilN2bBt4GpOmUT5Aw1/GhVAl79s37+B?=
+ =?us-ascii?Q?DWK3Jo25GuA3bStBp4yxBsLtntm2bUGjd8OURPP108gPDyoWn33a8U64hzLc?=
+ =?us-ascii?Q?MCgv3OIcjuFtkaat2OfQFaQnWvT/2WJ6H7vJqgmlwK7+YfW3sExBlrWtqwo8?=
+ =?us-ascii?Q?7NqYofTo+jZHfiffMMvgkSVFRxMzUsGKdS1Qz7P+rQlIO8ObGDPcsWkpQyam?=
+ =?us-ascii?Q?wb7p2amrjSDwTUkHPBQgAzpJ6l8gfZAJzY8m50a4CbESxJ9vZxPYB4s9amVN?=
+ =?us-ascii?Q?SkiyKGdf8Ls1gsiY2/fq5eyEiCWNWO0kDgX3EcLqo9al6jnpog/vdRMxDcJ4?=
+ =?us-ascii?Q?Dbp7M14/M8yvSdY/4uzsV5yetztcXFma/L3V/ubt5lwUpOyxQk9eSMEOsF9r?=
+ =?us-ascii?Q?ODEJjzEF0DhQaIOZftagK1TbUcsKJ1PVNGhNaFJmUbeYgRDn+lic6+ww3AWS?=
+ =?us-ascii?Q?ahK8PTxj9McisxVJlVI+N2R3t5kUDFjhiE8HRsC5eGdJWYnG/kbYOTBE/oIR?=
+ =?us-ascii?Q?HuTjWzmbnaQOqdl8XB+84WAqf5d1DrN7wX0avfgsv7yvVHSKhUh91ww8CMmb?=
+ =?us-ascii?Q?D/X98GSYfdAMOCHaJ8Km+CrGouwZeeN0NOmIZ9lNPMhDSxA8DlCTDOqstIvc?=
+ =?us-ascii?Q?hsZcw6Dna28MNh09X2YFYE+TOQNmE9w43MnMCmoxWnxV3qkfytW8FO5p2imN?=
+ =?us-ascii?Q?YVaXurdU5XKUUj3yhdYsarHai3rBCX57u7p6pgZfip+b5mfj8ZivfEdG0OWR?=
+ =?us-ascii?Q?g2KbFPEWjQpT4BN2Stb9ck30zkc4bvpplY9Fx1PzZgtZiE4xIoozGCXTsV6l?=
+ =?us-ascii?Q?Y+A8Vj2sDaOGuF8iNQcCp3u63EMUy6nV2Dz5HL7rfD6QW5kAO041cqKpPvXE?=
+ =?us-ascii?Q?ZTRjvLO7VzOkaS1ahVW70Dc/Jnw+8lfqV3wiqxkWYw5nXyykqM3fzowYR5hS?=
+ =?us-ascii?Q?moGT1/nKKx4opfqvspUC8/d/C8uhS1OSBUgIFxXeAby8iYx/bM3RgGE4Cdw2?=
+ =?us-ascii?Q?mYw5+hgEvnReG71cuzq9OuyZjDlSPRIm9KfQHZdtgD3kY6HEPAcfIjJeCcCE?=
+ =?us-ascii?Q?pxruRX+WL/nF/TBdUZpe0fVs1bAgolrxG85tNxGq?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f0544bad-0229-444c-baa5-08dc382f9fbd
+X-MS-Exchange-CrossTenant-AuthSource: DS0PR11MB7484.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Feb 2024 07:33:57.6141
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: k0m/PSBC7u6BOmY9LlOE2gDTdjRinEhS2sudAHwFZmt+gqMkLWu051CzLHVRAHNGiiAw1OuDWJcMo/xNekFaAA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR11MB8420
+X-Proofpoint-GUID: knFJhi6LLFwDHe52sKgiKXJ2CZwNcdK0
+X-Proofpoint-ORIG-GUID: knFJhi6LLFwDHe52sKgiKXJ2CZwNcdK0
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-02-28_04,2024-02-27_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
+ adultscore=0 phishscore=0 mlxscore=0 impostorscore=0 spamscore=0
+ bulkscore=0 malwarescore=0 mlxlogscore=999 clxscore=1015
+ priorityscore=1501 suspectscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.19.0-2402120000 definitions=main-2402280057
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 27 Feb 2024 19:22:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109047
+ <openembedded-devel@lists.openembedded.org>; Wed, 28 Feb 2024 07:34:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109048
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+We encountered a do_configure error when using dash on Ubuntu 20.04:
+conftest.c:31:26: fatal error: Python.h: No such file or directory
+   31 |                 #include <Python.h>
+      |                          ^~~~~~~~~~
+
+It seems that PYTHON_CPPFLAGS is not passed to configure command
+correctly. Use configuration option --with-pythoncflags instead of
+passing it in cmdline.
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- .../python/python3-pydantic-core-crates.inc   |  20 +--
- ...-github.com-pyo3-pyo3-from-0.20.2-to.patch | 115 ++++++++++++++++++
- .../python/python3-pydantic-core_2.16.3.bb    |   1 +
- 3 files changed, 127 insertions(+), 9 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-pydantic-core/0001-Bumps-pyo3-https-github.com-pyo3-pyo3-from-0.20.2-to.patch
+ meta-networking/recipes-support/openipmi/openipmi_2.0.34.bb | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pydantic-core-crates.inc b/meta-python/recipes-devtools/python/python3-pydantic-core-crates.inc
-index 5518ff6ec9..e8e4ef23a8 100644
---- a/meta-python/recipes-devtools/python/python3-pydantic-core-crates.inc
-+++ b/meta-python/recipes-devtools/python/python3-pydantic-core-crates.inc
-@@ -38,11 +38,12 @@ SRC_URI += " \
-     crate://crates.io/parking_lot/0.12.1 \
-     crate://crates.io/parking_lot_core/0.9.8 \
-     crate://crates.io/percent-encoding/2.3.1 \
-+    crate://crates.io/portable-atomic/1.6.0 \
-     crate://crates.io/proc-macro2/1.0.76 \
--    crate://crates.io/pyo3/0.20.2 \
--    crate://crates.io/pyo3-build-config/0.20.2 \
--    crate://crates.io/pyo3-ffi/0.20.2 \
--    crate://crates.io/pyo3-macros/0.20.2 \
-+    crate://crates.io/pyo3/0.20.3 \
-+    crate://crates.io/pyo3-build-config/0.20.3 \
-+    crate://crates.io/pyo3-ffi/0.20.3 \
-+    crate://crates.io/pyo3-macros/0.20.3 \
-     crate://crates.io/pyo3-macros-backend/0.20.2 \
-     crate://crates.io/python3-dll-a/0.2.9 \
-     crate://crates.io/quote/1.0.35 \
-@@ -121,12 +122,13 @@ SRC_URI[once_cell-1.18.0.sha256sum] = "dd8b5dd2ae5ed71462c540258bedcb51965123ad7
- SRC_URI[parking_lot-0.12.1.sha256sum] = "3742b2c103b9f06bc9fff0a37ff4912935851bee6d36f3c02bcc755bcfec228f"
- SRC_URI[parking_lot_core-0.9.8.sha256sum] = "93f00c865fe7cabf650081affecd3871070f26767e7b2070a3ffae14c654b447"
- SRC_URI[percent-encoding-2.3.1.sha256sum] = "e3148f5046208a5d56bcfc03053e3ca6334e51da8dfb19b6cdc8b306fae3283e"
-+SRC_URI[portable-atomic-1.6.0.sha256sum] = "7170ef9988bc169ba16dd36a7fa041e5c4cbeb6a35b76d4c03daded371eae7c0"
- SRC_URI[proc-macro2-1.0.76.sha256sum] = "95fc56cda0b5c3325f5fbbd7ff9fda9e02bb00bb3dac51252d2f1bfa1cb8cc8c"
--SRC_URI[pyo3-0.20.2.sha256sum] = "9a89dc7a5850d0e983be1ec2a463a171d20990487c3cfcd68b5363f1ee3d6fe0"
--SRC_URI[pyo3-build-config-0.20.2.sha256sum] = "07426f0d8fe5a601f26293f300afd1a7b1ed5e78b2a705870c5f30893c5163be"
--SRC_URI[pyo3-ffi-0.20.2.sha256sum] = "dbb7dec17e17766b46bca4f1a4215a85006b4c2ecde122076c562dd058da6cf1"
--SRC_URI[pyo3-macros-0.20.2.sha256sum] = "05f738b4e40d50b5711957f142878cfa0f28e054aa0ebdfc3fd137a843f74ed3"
--SRC_URI[pyo3-macros-backend-0.20.2.sha256sum] = "0fc910d4851847827daf9d6cdd4a823fbdaab5b8818325c5e97a86da79e8881f"
-+SRC_URI[pyo3-0.20.3.sha256sum] = "53bdbb96d49157e65d45cc287af5f32ffadd5f4761438b527b055fb0d4bb8233"
-+SRC_URI[pyo3-build-config-0.20.3.sha256sum] = "deaa5745de3f5231ce10517a1f5dd97d53e5a2fd77aa6b5842292085831d48d7"
-+SRC_URI[pyo3-ffi-0.20.3.sha256sum] = "62b42531d03e08d4ef1f6e85a2ed422eb678b8cd62b762e53891c05faf0d4afa"
-+SRC_URI[pyo3-macros-0.20.3.sha256sum] = "7305c720fa01b8055ec95e484a6eca7a83c841267f0dd5280f0c8b8551d2c158"
-+SRC_URI[pyo3-macros-backend-0.20.2.sha256sum] = "7c7e9b68bb9c3149c5b0cade5d07f953d6d125eb4337723c4ccdb665f1f96185"
- SRC_URI[python3-dll-a-0.2.9.sha256sum] = "d5f07cd4412be8fa09a721d40007c483981bbe072cd6a21f2e83e04ec8f8343f"
- SRC_URI[quote-1.0.35.sha256sum] = "291ec9ab5efd934aaf503a6466c5d5251535d108ee747472c3977cc5acc868ef"
- SRC_URI[redox_syscall-0.3.5.sha256sum] = "567664f262709473930a4bf9e51bf2ebf3348f2e748ccc50dea20646858f8f29"
-diff --git a/meta-python/recipes-devtools/python/python3-pydantic-core/0001-Bumps-pyo3-https-github.com-pyo3-pyo3-from-0.20.2-to.patch b/meta-python/recipes-devtools/python/python3-pydantic-core/0001-Bumps-pyo3-https-github.com-pyo3-pyo3-from-0.20.2-to.patch
-new file mode 100644
-index 0000000000..ba9bd1c150
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pydantic-core/0001-Bumps-pyo3-https-github.com-pyo3-pyo3-from-0.20.2-to.patch
-@@ -0,0 +1,115 @@
-+From a5690f973384bf8cbf4deb3b83d822b7aaefbdd8 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 27 Feb 2024 11:00:46 -0800
-+Subject: [PATCH] Bumps [pyo3](https://github.com/pyo3/pyo3) from 0.20.2 to
-+ 0.20.3.
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ Cargo.lock | 26 +++++++++++++++++---------
-+ Cargo.toml |  2 +-
-+ 2 files changed, 18 insertions(+), 10 deletions(-)
-+
-+diff --git a/Cargo.lock b/Cargo.lock
-+index 62615dc..b0d4448 100644
-+--- a/Cargo.lock
-++++ b/Cargo.lock
-+@@ -321,6 +321,12 @@ version = "2.3.1"
-+ source = "registry+https://github.com/rust-lang/crates.io-index"
-+ checksum = "e3148f5046208a5d56bcfc03053e3ca6334e51da8dfb19b6cdc8b306fae3283e"
-+ 
-++[[package]]
-++name = "portable-atomic"
-++version = "1.6.0"
-++source = "registry+https://github.com/rust-lang/crates.io-index"
-++checksum = "7170ef9988bc169ba16dd36a7fa041e5c4cbeb6a35b76d4c03daded371eae7c0"
-++
-+ [[package]]
-+ name = "proc-macro2"
-+ version = "1.0.76"
-+@@ -357,9 +363,9 @@ dependencies = [
-+ 
-+ [[package]]
-+ name = "pyo3"
-+-version = "0.20.2"
-++version = "0.20.3"
-+ source = "registry+https://github.com/rust-lang/crates.io-index"
-+-checksum = "9a89dc7a5850d0e983be1ec2a463a171d20990487c3cfcd68b5363f1ee3d6fe0"
-++checksum = "53bdbb96d49157e65d45cc287af5f32ffadd5f4761438b527b055fb0d4bb8233"
-+ dependencies = [
-+  "cfg-if",
-+  "indoc",
-+@@ -367,6 +373,7 @@ dependencies = [
-+  "memoffset",
-+  "num-bigint",
-+  "parking_lot",
-++ "portable-atomic",
-+  "pyo3-build-config",
-+  "pyo3-ffi",
-+  "pyo3-macros",
-+@@ -375,9 +382,9 @@ dependencies = [
-+ 
-+ [[package]]
-+ name = "pyo3-build-config"
-+-version = "0.20.2"
-++version = "0.20.3"
-+ source = "registry+https://github.com/rust-lang/crates.io-index"
-+-checksum = "07426f0d8fe5a601f26293f300afd1a7b1ed5e78b2a705870c5f30893c5163be"
-++checksum = "deaa5745de3f5231ce10517a1f5dd97d53e5a2fd77aa6b5842292085831d48d7"
-+ dependencies = [
-+  "once_cell",
-+  "python3-dll-a",
-+@@ -386,9 +393,9 @@ dependencies = [
-+ 
-+ [[package]]
-+ name = "pyo3-ffi"
-+-version = "0.20.2"
-++version = "0.20.3"
-+ source = "registry+https://github.com/rust-lang/crates.io-index"
-+-checksum = "dbb7dec17e17766b46bca4f1a4215a85006b4c2ecde122076c562dd058da6cf1"
-++checksum = "62b42531d03e08d4ef1f6e85a2ed422eb678b8cd62b762e53891c05faf0d4afa"
-+ dependencies = [
-+  "libc",
-+  "pyo3-build-config",
-+@@ -396,9 +403,9 @@ dependencies = [
-+ 
-+ [[package]]
-+ name = "pyo3-macros"
-+-version = "0.20.2"
-++version = "0.20.3"
-+ source = "registry+https://github.com/rust-lang/crates.io-index"
-+-checksum = "05f738b4e40d50b5711957f142878cfa0f28e054aa0ebdfc3fd137a843f74ed3"
-++checksum = "7305c720fa01b8055ec95e484a6eca7a83c841267f0dd5280f0c8b8551d2c158"
-+ dependencies = [
-+  "proc-macro2",
-+  "pyo3-macros-backend",
-+@@ -410,10 +417,11 @@ dependencies = [
-+ name = "pyo3-macros-backend"
-+ version = "0.20.2"
-+ source = "registry+https://github.com/rust-lang/crates.io-index"
-+-checksum = "0fc910d4851847827daf9d6cdd4a823fbdaab5b8818325c5e97a86da79e8881f"
-++checksum = "7c7e9b68bb9c3149c5b0cade5d07f953d6d125eb4337723c4ccdb665f1f96185"
-+ dependencies = [
-+  "heck",
-+  "proc-macro2",
-++ "pyo3-build-config",
-+  "quote",
-+  "syn",
-+ ]
-+diff --git a/Cargo.toml b/Cargo.toml
-+index 64861f8..27ed671 100644
-+--- a/Cargo.toml
-++++ b/Cargo.toml
-+@@ -26,7 +26,7 @@ include = [
-+ ]
-+ 
-+ [dependencies]
-+-pyo3 = { version = "0.20.2", features = ["generate-import-lib", "num-bigint"] }
-++pyo3 = { version = "0.20.3", features = ["generate-import-lib", "num-bigint"] }
-+ regex = "1.10.2"
-+ strum = { version = "0.25.0", features = ["derive"] }
-+ strum_macros = "0.25.3"
-+-- 
-+2.44.0
-+
-diff --git a/meta-python/recipes-devtools/python/python3-pydantic-core_2.16.3.bb b/meta-python/recipes-devtools/python/python3-pydantic-core_2.16.3.bb
-index ef48c0020d..b26478451a 100644
---- a/meta-python/recipes-devtools/python/python3-pydantic-core_2.16.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-pydantic-core_2.16.3.bb
-@@ -8,6 +8,7 @@ HOMEPAGE = "https://github.com/pydantic/pydantic-core"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=ab599c188b4a314d2856b3a55030c75c"
+diff --git a/meta-networking/recipes-support/openipmi/openipmi_2.0.34.bb b/meta-networking/recipes-support/openipmi/openipmi_2.0.34.bb
+index 470ce1e25..eacbe5ce9 100644
+--- a/meta-networking/recipes-support/openipmi/openipmi_2.0.34.bb
++++ b/meta-networking/recipes-support/openipmi/openipmi_2.0.34.bb
+@@ -42,7 +42,9 @@ CFLAGS += "-D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64"
  
-+SRC_URI += "file://0001-Bumps-pyo3-https-github.com-pyo3-pyo3-from-0.20.2-to.patch"
- SRC_URI[sha256sum] = "1cac689f80a3abab2d3c0048b29eea5751114054f032a941a32de4c852c59cad"
+ EXTRA_OECONF = "--disable-static \
+                 --with-perl='${STAGING_BINDIR_NATIVE}/perl-native/perl' \
+-                --with-glibver=2.0"
++                --with-glibver=2.0 \
++                --with-pythoncflags='-I${STAGING_INCDIR}/${PYTHON_DIR}${PYTHON_ABI}' \
++               "
  
- DEPENDS = "python3-maturin-native python3-typing-extensions"
+ PACKAGECONFIG ??= "gdbm"
+ PACKAGECONFIG[gdbm] = "ac_cv_header_gdbm_h=yes,ac_cv_header_gdbm_h=no,gdbm,"
+@@ -64,7 +66,7 @@ FILES:${PN}-dbg += " \
+ 
+ do_configure () {
+     # Let's perform regular configuration first then handle perl issues.
+-    PYTHON_CPPFLAGS=-I${STAGING_INCDIR}/${PYTHON_DIR}${PYTHON_ABI} autotools_do_configure
++    autotools_do_configure
+ 
+     perl_ver=`perl -V:version | cut -d\' -f 2`
+     
 -- 
-2.44.0
+2.25.1
 
 
