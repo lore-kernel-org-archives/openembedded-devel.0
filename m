@@ -2,63 +2,66 @@ Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CD569C54E41
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CC8AEC5478C
 	for <webhook@archiver.kernel.org>; Wed, 28 Feb 2024 19:14:37 +0000 (UTC)
-Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com [209.85.208.44])
- by mx.groups.io with SMTP id smtpd.web10.5790.1709147669721141441
+Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
+ by mx.groups.io with SMTP id smtpd.web10.5791.1709147670597326539
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 28 Feb 2024 11:14:30 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=HuoZkxRE;
- spf=pass (domain: gmail.com, ip: 209.85.208.44, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f44.google.com with SMTP id 4fb4d7f45d1cf-563cb3ba9daso178914a12.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 28 Feb 2024 11:14:29 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Y5ddltNj;
+ spf=pass (domain: gmail.com, ip: 209.85.218.49, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-a4429c556efso25914166b.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 28 Feb 2024 11:14:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1709147668; x=1709752468; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=fKPLKmu0vcoRaicHvZtixNIou3ChWturt3XwCGnBqeg=;
-        b=HuoZkxRE0a1rVPVhZemrvAbAn6NGdsIEqRqbuVk8xp8jE0jLvC/L/qoA2bGUcLOqtY
-         hUYubWj99y6skFiWlKrQb0y0iABQZYTwlgsXiVGs0PO5wOGLJUtyaytANn4uGK3lKrat
-         kZyvjeKxjdkzgjIYQjNA8NscItnxZEvxjIWNqIJ6usWicRK53O/8Jfu2OOpe9Q95aMjU
-         nyRdGlpEIr72oKxTo06WcD2P2jBkmDvg+X/qspi38kv4Dz1VjY2DVFIbKjB9tMHFsbHR
-         90Sr8aIDLs6EBR+8kZzy/8CsKabq1IcVXsOKuF2EFci0yxR//UvQhTtWsB7vGbeNyE6N
-         s3xg==
+        d=gmail.com; s=20230601; t=1709147669; x=1709752469; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=lQ08OvSJi/SPtljsUFbRnMPwO8hdXyNfX0OgoJtuSzU=;
+        b=Y5ddltNjtyY5zJYDsbukM3xmxYuFo7HHu+quowM54eLrgvm62gSXToHxaCifCIBnqr
+         gL80XmaJemTRqfLhHl/QlwrkDQ3lE2U+w/Yyu+DB61uQ/syl/WyuiRN/aSMN2FOdW4M5
+         3hSoAjKgsMtFjlDxYo8Rti+sHevIopv6H7/URley6xPBR2k8EKuRuHa0O6JQyvs0EzMx
+         XPikQ4FawCubwCT9hUyJq3v2Q0bPN772QTuycfV2X9meG6xKH67a7EdfPqnRnzVPoBUR
+         0BQ5SFi76rbyAw8J09KvASQILy/0VxH0NuJT30PJvu4HyQvGcW8jmNvKW5ePAZ71rt47
+         uang==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1709147668; x=1709752468;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=fKPLKmu0vcoRaicHvZtixNIou3ChWturt3XwCGnBqeg=;
-        b=vvUxtdLtytkQlsGM3WvN8whzSmv4LH8RrdBaAoWUHmsp22CKVz1Z4n9811TYbOdvFB
-         I2FW/HPkNIJpv9vnWqvdDnLWzwkD607YFir1BWOGbrYeCKAFGEWQP8PCHtepWTS1VhJ4
-         B0dIH0WcqB3pcSB7D+w8+fE715eqY3+Zf1+Dv1j/Txq91czqGmB3TtU4xO+c0WHp/hb4
-         uMC9IdvcSxVb9Xcq3rjbQvRvIRmDGlpAPjnUBpOeMHAV6C3Bm2kwOkGCb/NQBoYsJTUl
-         qY0DTz2iHGXEQIuE4fJTIF7ZJbc/LtABlZj4F8GT0JPyO7ULlQcS17M68164acUah/LB
-         P95g==
-X-Gm-Message-State: AOJu0YwcUG1phl7/HhTezlCNrga2PgH075MA0uG6PQ1rj/6jUyi0JyO9
-	Fnd5u9Iq3UDJtAYXTlVMVl3nt7iK+CbiRX4drDOWliq0WPa9x8WxCGlInZb+
-X-Google-Smtp-Source: AGHT+IFzlseLtkiS7LOefOsu7tTz6y6XfwFTwBmVNLZeNg/YzX/qGVlKwSiHY1PrZ/+eDl19BhcIkg==
-X-Received: by 2002:a05:6402:519:b0:566:2be1:5276 with SMTP id m25-20020a056402051900b005662be15276mr256763edv.23.1709147667749;
-        Wed, 28 Feb 2024 11:14:27 -0800 (PST)
+        d=1e100.net; s=20230601; t=1709147669; x=1709752469;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=lQ08OvSJi/SPtljsUFbRnMPwO8hdXyNfX0OgoJtuSzU=;
+        b=N05zfqyodur4UlxlYeBWAnLG5c12miZQ/W6wave9Cf89VnrY7cZJ403WjgUIUkFUoH
+         eM+gr+7k4cSOHqQfhLM1o0xUtcpR0yxQZC760bpGE7utt6jp7IJLvnTbqw8cQ/0z7Ht0
+         waHF0QrqkgIk4ArQFu5Ap+pjCacJLGe55B1ilAjEyqvDQor01S1pyu509fDnUx3xtogE
+         yrgLuYGDBUW+nqeu5vTirXZCMrJrh4TpxsyCbQ0oKIsf5tlUhLPn0b02ty4M9THEVJKI
+         g8CI9iMXZrTcdE9Y2QdAmIgtYMAdS9N9Y9WaEAenHgbP3bYrNATEaGYCi/pDP9KXmZHA
+         85Zg==
+X-Gm-Message-State: AOJu0Yyi7cb4dFYEZLO0+CpZxECJK1RucA9gwdUbA5BHfp37g2jcsTlw
+	Xl0KqbndLZVIXz5lap2yTrE80ohr+Mo+pQ3FLcHgiGbTMgO35nvjpdCzctzM
+X-Google-Smtp-Source: AGHT+IHXx3+pQpGF9VW0TF3HO5pleawtOH0P7p9ck8t9TL23jorNo2rE12wQYwOBYvOfOQnFhU1Lwg==
+X-Received: by 2002:a17:906:c291:b0:a43:b30c:299f with SMTP id r17-20020a170906c29100b00a43b30c299fmr392334ejz.52.1709147668795;
+        Wed, 28 Feb 2024 11:14:28 -0800 (PST)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id s21-20020aa7cb15000000b005645961ad39sm2057300edt.47.2024.02.28.11.14.27
+        by smtp.gmail.com with ESMTPSA id u24-20020a170906409800b00a3cfd838f32sm2173554ejj.178.2024.02.28.11.14.28
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 28 Feb 2024 11:14:27 -0800 (PST)
+        Wed, 28 Feb 2024 11:14:28 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-xfce][PATCH 1/2] ristretto: use python3native and depend on glib-2.0-native, python3-packaging-native
-Date: Wed, 28 Feb 2024 20:14:18 +0100
-Message-ID: <20240228191419.87199-1-martin.jansa@gmail.com>
+Subject: [meta-xfce][PATCH 2/2] xfce4-notifyd: use python3native and depend on python3-packaging-native
+Date: Wed, 28 Feb 2024 20:14:19 +0100
+Message-ID: <20240228191419.87199-2-martin.jansa@gmail.com>
 X-Mailer: git-send-email 2.44.0
+In-Reply-To: <20240228191419.87199-1-martin.jansa@gmail.com>
+References: <20240228191419.87199-1-martin.jansa@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 28 Feb 2024 19:14:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109056
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109057
 
 * it uses gdbus-codegen from glib-2.0-native which depended
   on python3-distutils-native until
@@ -69,21 +72,22 @@ X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/1090
   so on hosts without distutils this was already failing
   and the glib-2.0-native change only changes the dependency from
   distutils to packaging which results in:
-  https://errors.yoctoproject.org/Errors/Details/754996/
+  https://errors.yoctoproject.org/Errors/Details/754995/
 
 gdbus-codegen \
-	--c-namespace=Tumbler \
-	--interface-prefix=org.freedesktop.thumbnails. \
-	--generate-c-code=tumbler \
-	tumbler-service-dbus.xml
+	--interface-prefix org.xfce.Notifyd.Log \
+	--c-namespace Xfce \
+	--generate-c-code xfce-notify-log-gbus \
+	--glib-max-allowed 2.68 \
+	../../xfce4-notifyd-0.8.2/common/xfce-notify-log-dbus.xml
 Traceback (most recent call last):
-  File "TOPDIR/build/tmp/work/riscv64-yoe-linux/ristretto/0.13.1/recipe-sysroot-native/usr/bin/gdbus-codegen", line 53, in <module>
+  File "TOPDIR/build/tmp/work/riscv64-yoe-linux/xfce4-notifyd/0.8.2/recipe-sysroot-native/usr/bin/gdbus-codegen", line 53, in <module>
     from codegen import codegen_main
-  File "TOPDIR/build/tmp/work/riscv64-yoe-linux/ristretto/0.13.1/recipe-sysroot-native/usr/share/glib-2.0/codegen/codegen_main.py", line 29, in <module>
+  File "TOPDIR/build/tmp/work/riscv64-yoe-linux/xfce4-notifyd/0.8.2/recipe-sysroot-native/usr/share/glib-2.0/codegen/codegen_main.py", line 29, in <module>
     from . import dbustypes
-  File "TOPDIR/build/tmp/work/riscv64-yoe-linux/ristretto/0.13.1/recipe-sysroot-native/usr/share/glib-2.0/codegen/dbustypes.py", line 22, in <module>
+  File "TOPDIR/build/tmp/work/riscv64-yoe-linux/xfce4-notifyd/0.8.2/recipe-sysroot-native/usr/share/glib-2.0/codegen/dbustypes.py", line 22, in <module>
     from . import utils
-  File "TOPDIR/build/tmp/work/riscv64-yoe-linux/ristretto/0.13.1/recipe-sysroot-native/usr/share/glib-2.0/codegen/utils.py", line 22, in <module>
+  File "TOPDIR/build/tmp/work/riscv64-yoe-linux/xfce4-notifyd/0.8.2/recipe-sysroot-native/usr/share/glib-2.0/codegen/utils.py", line 22, in <module>
     import packaging.version
 ModuleNotFoundError: No module named 'packaging'
 
@@ -93,24 +97,24 @@ ModuleNotFoundError: No module named 'packaging'
 
 Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 ---
- meta-xfce/recipes-apps/ristretto/ristretto_0.13.1.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.8.2.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-xfce/recipes-apps/ristretto/ristretto_0.13.1.bb b/meta-xfce/recipes-apps/ristretto/ristretto_0.13.1.bb
-index 4aac89fe79..dcae982cee 100644
---- a/meta-xfce/recipes-apps/ristretto/ristretto_0.13.1.bb
-+++ b/meta-xfce/recipes-apps/ristretto/ristretto_0.13.1.bb
-@@ -4,9 +4,9 @@ SECTION = "x11/application"
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=35d145429ad3cbf5308d1dc93f66376b"
+diff --git a/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.8.2.bb b/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.8.2.bb
+index 7dbd90c188..96cfd32f7b 100644
+--- a/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.8.2.bb
++++ b/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.8.2.bb
+@@ -10,9 +10,11 @@ DEPENDS = " \
+     libxfce4ui \
+     xfconf \
+     xfce4-panel \
++    python3-packaging-native \
+ "
  
--DEPENDS = "exo libexif libxfce4ui libxfce4util xfconf cairo file"
-+DEPENDS = "exo libexif libxfce4ui libxfce4util xfconf cairo file glib-2.0-native python3-packaging-native"
+ inherit xfce-app
++inherit python3native
  
--inherit xfce-app mime-xdg
-+inherit xfce-app mime-xdg python3native
- 
- RRECOMMENDS:${PN} += "tumbler"
+ SRC_URI:append = " file://xfce4-notifyd-get-var-abs-path.patch"
  
 -- 
 2.44.0
