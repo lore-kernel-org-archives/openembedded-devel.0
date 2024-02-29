@@ -1,122 +1,113 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <c-shilwant@ti.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CC8AEC5478C
-	for <webhook@archiver.kernel.org>; Wed, 28 Feb 2024 19:14:37 +0000 (UTC)
-Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
- by mx.groups.io with SMTP id smtpd.web10.5791.1709147670597326539
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7500DC48BF6
+	for <webhook@archiver.kernel.org>; Thu, 29 Feb 2024 10:11:42 +0000 (UTC)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ by mx.groups.io with SMTP id smtpd.web10.21385.1709201494604612537
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 28 Feb 2024 11:14:30 -0800
+ Thu, 29 Feb 2024 02:11:34 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Y5ddltNj;
- spf=pass (domain: gmail.com, ip: 209.85.218.49, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-a4429c556efso25914166b.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 28 Feb 2024 11:14:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1709147669; x=1709752469; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=lQ08OvSJi/SPtljsUFbRnMPwO8hdXyNfX0OgoJtuSzU=;
-        b=Y5ddltNjtyY5zJYDsbukM3xmxYuFo7HHu+quowM54eLrgvm62gSXToHxaCifCIBnqr
-         gL80XmaJemTRqfLhHl/QlwrkDQ3lE2U+w/Yyu+DB61uQ/syl/WyuiRN/aSMN2FOdW4M5
-         3hSoAjKgsMtFjlDxYo8Rti+sHevIopv6H7/URley6xPBR2k8EKuRuHa0O6JQyvs0EzMx
-         XPikQ4FawCubwCT9hUyJq3v2Q0bPN772QTuycfV2X9meG6xKH67a7EdfPqnRnzVPoBUR
-         0BQ5SFi76rbyAw8J09KvASQILy/0VxH0NuJT30PJvu4HyQvGcW8jmNvKW5ePAZ71rt47
-         uang==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1709147669; x=1709752469;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=lQ08OvSJi/SPtljsUFbRnMPwO8hdXyNfX0OgoJtuSzU=;
-        b=N05zfqyodur4UlxlYeBWAnLG5c12miZQ/W6wave9Cf89VnrY7cZJ403WjgUIUkFUoH
-         eM+gr+7k4cSOHqQfhLM1o0xUtcpR0yxQZC760bpGE7utt6jp7IJLvnTbqw8cQ/0z7Ht0
-         waHF0QrqkgIk4ArQFu5Ap+pjCacJLGe55B1ilAjEyqvDQor01S1pyu509fDnUx3xtogE
-         yrgLuYGDBUW+nqeu5vTirXZCMrJrh4TpxsyCbQ0oKIsf5tlUhLPn0b02ty4M9THEVJKI
-         g8CI9iMXZrTcdE9Y2QdAmIgtYMAdS9N9Y9WaEAenHgbP3bYrNATEaGYCi/pDP9KXmZHA
-         85Zg==
-X-Gm-Message-State: AOJu0Yyi7cb4dFYEZLO0+CpZxECJK1RucA9gwdUbA5BHfp37g2jcsTlw
-	Xl0KqbndLZVIXz5lap2yTrE80ohr+Mo+pQ3FLcHgiGbTMgO35nvjpdCzctzM
-X-Google-Smtp-Source: AGHT+IHXx3+pQpGF9VW0TF3HO5pleawtOH0P7p9ck8t9TL23jorNo2rE12wQYwOBYvOfOQnFhU1Lwg==
-X-Received: by 2002:a17:906:c291:b0:a43:b30c:299f with SMTP id r17-20020a170906c29100b00a43b30c299fmr392334ejz.52.1709147668795;
-        Wed, 28 Feb 2024 11:14:28 -0800 (PST)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id u24-20020a170906409800b00a3cfd838f32sm2173554ejj.178.2024.02.28.11.14.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 28 Feb 2024 11:14:28 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-xfce][PATCH 2/2] xfce4-notifyd: use python3native and depend on python3-packaging-native
-Date: Wed, 28 Feb 2024 20:14:19 +0100
-Message-ID: <20240228191419.87199-2-martin.jansa@gmail.com>
-X-Mailer: git-send-email 2.44.0
-In-Reply-To: <20240228191419.87199-1-martin.jansa@gmail.com>
-References: <20240228191419.87199-1-martin.jansa@gmail.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ti.com header.s=ti-com-17Q1 header.b=Rbae4JLq;
+ spf=pass (domain: ti.com, ip: 198.47.19.142, mailfrom: c-shilwant@ti.com)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+	by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 41TABV1e020888;
+	Thu, 29 Feb 2024 04:11:31 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1709201491;
+	bh=u2McGkaW23ObUWf8gq4CUGvirpHwffRmMcK71uqEHS4=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=Rbae4JLq+hWR6yKIG6dILB0V3d5NrIJ1G6S3ow4VUpJ677QiiLf//n5Yb1PVBbkyX
+	 I2I3x96MShpl7ar0F4afRbsJTGOqHRVhVFOmDBTUWfRzt1mDL2ewyz9k8MsOb+sbdD
+	 LtHMlXSedrAxcSWs9nJ+jpkXBOSqwGIEAxXOKGbs=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+	by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 41TABUJ3121278
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Thu, 29 Feb 2024 04:11:31 -0600
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 29
+ Feb 2024 04:11:30 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 29 Feb 2024 04:11:30 -0600
+Received: from [172.24.227.238] (chirag-hp-z2-tower-g5-workstation.dhcp.ti.com [172.24.227.238])
+	by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 41TABSSO019200;
+	Thu, 29 Feb 2024 04:11:28 -0600
+Message-ID: <d0c0ad13-3fa2-4b62-adcb-ea1b7244ec72@ti.com>
+Date: Thu, 29 Feb 2024 15:41:27 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [EXTERNAL] [oe] [meta-oe][kirkstone][PATCH] meta-oe:
+ kernel-selftest: Add few more testcases
+Content-Language: en-US
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+        <akuster808@gmail.com>
+CC: "Gupta, Gyan" <g-gupta@ti.com>, "Khasim, Syed Mohammed" <khasim@ti.com>,
+        "Eatmon, Ryan" <reatmon@ti.com>, Denys <denis@denix.org>
+References: <17B53693E4F27B39.26582@lists.openembedded.org>
+From: Chirag Shilwant <c-shilwant@ti.com>
+In-Reply-To: <17B53693E4F27B39.26582@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by fllv0016.ext.ti.com id 41TABV1e020888
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 28 Feb 2024 19:14:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109057
+ <openembedded-devel@lists.openembedded.org>; Thu, 29 Feb 2024 10:11:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109058
 
-* it uses gdbus-codegen from glib-2.0-native which depended
-  on python3-distutils-native until
-  https://lists.openembedded.org/g/openembedded-core/message/196136
-  but distutils on host was enforced by sanity check only until mickledore with:
-  https://git.openembedded.org/openembedded-core/commit/?id=8e3a5b0709384f2b455a82ac1e8e212686fe4456
+Hi Akuster,
 
-  so on hosts without distutils this was already failing
-  and the glib-2.0-native change only changes the dependency from
-  distutils to packaging which results in:
-  https://errors.yoctoproject.org/Errors/Details/754995/
+A gentle ping on this patch on kirkstone.
+It's a backporting patch from master.
 
-gdbus-codegen \
-	--interface-prefix org.xfce.Notifyd.Log \
-	--c-namespace Xfce \
-	--generate-c-code xfce-notify-log-gbus \
-	--glib-max-allowed 2.68 \
-	../../xfce4-notifyd-0.8.2/common/xfce-notify-log-dbus.xml
-Traceback (most recent call last):
-  File "TOPDIR/build/tmp/work/riscv64-yoe-linux/xfce4-notifyd/0.8.2/recipe-sysroot-native/usr/bin/gdbus-codegen", line 53, in <module>
-    from codegen import codegen_main
-  File "TOPDIR/build/tmp/work/riscv64-yoe-linux/xfce4-notifyd/0.8.2/recipe-sysroot-native/usr/share/glib-2.0/codegen/codegen_main.py", line 29, in <module>
-    from . import dbustypes
-  File "TOPDIR/build/tmp/work/riscv64-yoe-linux/xfce4-notifyd/0.8.2/recipe-sysroot-native/usr/share/glib-2.0/codegen/dbustypes.py", line 22, in <module>
-    from . import utils
-  File "TOPDIR/build/tmp/work/riscv64-yoe-linux/xfce4-notifyd/0.8.2/recipe-sysroot-native/usr/share/glib-2.0/codegen/utils.py", line 22, in <module>
-    import packaging.version
-ModuleNotFoundError: No module named 'packaging'
+Regards,
+Chirag
 
-* packaging probably isn't as wide spread on host distros as old
-  distutils was, so make sure it's available by using
-  python3-native with python3-packaging-native from OE build
 
-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
----
- meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.8.2.bb | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.8.2.bb b/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.8.2.bb
-index 7dbd90c188..96cfd32f7b 100644
---- a/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.8.2.bb
-+++ b/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.8.2.bb
-@@ -10,9 +10,11 @@ DEPENDS = " \
-     libxfce4ui \
-     xfconf \
-     xfce4-panel \
-+    python3-packaging-native \
- "
- 
- inherit xfce-app
-+inherit python3native
- 
- SRC_URI:append = " file://xfce4-notifyd-get-var-abs-path.patch"
- 
--- 
-2.44.0
-
+On 19/02/24 14:03, Chirag Shilwant via lists.openembedded.org wrote:
+> - This commit will build and install following testcases under=20
+> /usr/kernel-selftest of filesystem, * ptp * timers - Backporting the=20
+> commit from master 02806ed4c16d7e6f80653baec71be071d4e8f9c0=20
+> Signed-off-by: Chirag Shilwant <c-shilwant@=E2=80=8Ati.=E2=80=8Acom>
+> ZjQcmQRYFpfptBannerStart
+> This message was sent from outside of Texas Instruments.
+> Do not click links or open attachments unless you recognize the source=20
+> of this email and know the content is safe.
+> ZjQcmQRYFpfptBannerEnd
+> - This commit will build and install following testcases under /usr/ker=
+nel-selftest of filesystem,
+>      * ptp
+>      * timers
+>
+> - Backporting the commit from master 02806ed4c16d7e6f80653baec71be071d4=
+e8f9c0
+>
+> Signed-off-by: Chirag Shilwant <c-shilwant@ti.com>
+> ---
+>   meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb | 2 ++
+>   1 file changed, 2 insertions(+)
+>
+> diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb =
+b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
+> index 3d97ea096..ab76fe262 100644
+> --- a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
+> +++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
+> @@ -44,6 +44,8 @@ S =3D "${WORKDIR}/${BP}"
+>   TEST_LIST =3D "\
+>       ${@bb.utils.filter('PACKAGECONFIG', 'bpf firmware vm', d)} \
+>       rtc \
+> +    ptp \
+> +    timers \
+>   "
+>  =20
+>   EXTRA_OEMAKE =3D '\
+> --=20
+> 2.34.1
+>
 
