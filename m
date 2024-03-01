@@ -2,66 +2,66 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 828D6C5478C
-	for <webhook@archiver.kernel.org>; Fri,  1 Mar 2024 16:50:05 +0000 (UTC)
-Received: from mail-ot1-f41.google.com (mail-ot1-f41.google.com [209.85.210.41])
- by mx.groups.io with SMTP id smtpd.web11.28500.1709311802049246578
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 64725C5475B
+	for <webhook@archiver.kernel.org>; Fri,  1 Mar 2024 16:50:25 +0000 (UTC)
+Received: from mail-oi1-f169.google.com (mail-oi1-f169.google.com [209.85.167.169])
+ by mx.groups.io with SMTP id smtpd.web11.28507.1709311820094254319
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 01 Mar 2024 08:50:02 -0800
+ Fri, 01 Mar 2024 08:50:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=nEKFlmuh;
- spf=pass (domain: gmail.com, ip: 209.85.210.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f41.google.com with SMTP id 46e09a7af769-6e49833ccdfso1003809a34.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 01 Mar 2024 08:50:01 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=f98BuL8O;
+ spf=pass (domain: gmail.com, ip: 209.85.167.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f169.google.com with SMTP id 5614622812f47-3c1c44a9554so1018606b6e.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 01 Mar 2024 08:50:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1709311801; x=1709916601; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1709311819; x=1709916619; darn=lists.openembedded.org;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=2cwng0X01POSUalV8J6ZQve7/RVy/KIxTVgdF1f+SpE=;
-        b=nEKFlmuh0+xrOnleUNysOJSuc9Xkl0CElWSU9kxuuEMybSsLEeow8Z+qwZJtnLWusH
-         JeIHNJZv8UKzLnJb/Hjc+tr3yXkpzRAWhi0JPfflisoxUgWTJ5XgMF7zncppK1cflEuQ
-         1wOsDa3n3hhFkO5HF4OvDPoZ9bzu1VK0t0SBW24tkStL/rxt4unhzdEKozw1uWzxtt+A
-         UBUOGpE6Eygw50gtgq197HLJNmwMzI/vvoamE71qyVQzwjGLbK1wtHIOw1BepKRgPLK+
-         pwKLZJM1sHJx7pkcLqYHuUsc1hQUSMDwjaYbOxxHVuoTh7duhRcCHXDh3SuYJtnY6BxZ
-         vqxA==
+        bh=9Eq/DKkwTCp0CWoeEM4jmU7bSh31ZGXn0ktJbsFeTuQ=;
+        b=f98BuL8OorEUf/OBmwGI+1xPEY+i0vB0NWhhnFLsY8/Z/YY61TnI2nL4LlDHldITon
+         meUpf+VmoiI/TK/CXMBxNKtMwrN75va9Ya9pJYtiTNavFeTChzqGW6NSNoc21wLU6nTH
+         px2/LQqSW9QSAPUSFsu+09of9NSAD9X9bDLi3BfrtO2cJYipzqx5+WQiTt4uWsH6nUvf
+         /mGwg33Oy5ryzutILmwIMJbdMFSJLF6vknivPobtXR5ISALCJq8Kpclch8MIpTMYHbKz
+         krpos5EIuuaVNk5LxQDZeODbC1JnmvikNKPbuaC9T+ddXWJrom8AhjubECLeZr8BaBqb
+         cxDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1709311801; x=1709916601;
+        d=1e100.net; s=20230601; t=1709311819; x=1709916619;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=2cwng0X01POSUalV8J6ZQve7/RVy/KIxTVgdF1f+SpE=;
-        b=hJ6qc+dVZp8Q1KN1CoL9fp3nGQW1CMjXvZbGpS7GAWlQGu7g71qO9Xwz1o48ReBmtp
-         mSORnQZ+/JeQxZ/z9VtxEeMgC+x3yG51MBYh7bNs7gbjyUoZN+DT8e6qEBFLunBVqZ9y
-         /T0HGgpuNbfJXx/rYTqEPX8D+gBl3FAx1en17hpIfeBqYxsRiXvmfiBM1CJ44MyK2kcb
-         WGUoJWNxiNTB9EqSNLXIMUqR/QssrVgTudMRJ2kN+tLxyYgzAduwCtG4X6/zJ9Vte2pI
-         Pb2OItY6G2Wrt/QHWtVyK/ItbTaFNly7i1/6eCmwy4HVG8SwEhIebe+DIWi1XHE/YgZp
-         xSuA==
-X-Gm-Message-State: AOJu0Ywd3jV7Jiy3ATpMswEBkerb/3FiBhHKYbfbV8hjUtYl7gjOEOBC
-	UHTuJfiHatK0FZX4gEccvlSX2F70Ar7VrI05yEVnUKYPWzNkc5YELdVe3bzbiwB8/v7sXLWBN1y
-	yv9842etJ865LFQ8+59YyQOwYEBQ=
-X-Google-Smtp-Source: AGHT+IHNmfErrbilJ3rEjemjEysJDnd8rcqXG9lpKeocrpGA2igp08Rveb6/SP766av/Wgfx1QLIlLV2t1WOsvHh8qw=
-X-Received: by 2002:a05:6871:818b:b0:220:be60:b6fc with SMTP id
- so11-20020a056871818b00b00220be60b6fcmr1940317oab.25.1709311801237; Fri, 01
- Mar 2024 08:50:01 -0800 (PST)
+        bh=9Eq/DKkwTCp0CWoeEM4jmU7bSh31ZGXn0ktJbsFeTuQ=;
+        b=pFtkanIK05nCiTbF0MAcDrXwnQCPL90wjHGsFXXLd/jLBjTlylQEsxKtFdaovl/Cu8
+         y7tPnOol4BbrcqZJIJO4AJuGvOoCXvTSgg5t7TOa1tgLm6SiqhazpJYpxYyK0TAfc4x2
+         7msmfy6EY856GbhdtJAfkv6LJrVkxJ5477SsK8krg1qBZSlVYaumXkFtddFhjeVLqwe9
+         pZEqQiYG6Dg/6jYze/IYKq57il6ezy0RX37/hbBDlVV7z2uE01ric6PW3ksAA9wVA7VL
+         hfsMJ7Z2efqHxQaXv5JlmFsr9+7b7koQBJPAARKn9jqvY3kzn8PfVIuZJfwMFwrL6mvP
+         fDew==
+X-Gm-Message-State: AOJu0YyXMORCWbKoPlZMxDZOeyp7xlUBzRq/Bs5jeKwyTouuEIUVxhyB
+	h1sAHqmCVFN+Yq8cmV7vKUNljup3SWkh5+glmowY2UlwOeOiKFeJAkd+7cOJTNMbNUBHXLZug5Z
+	iYuNhcBQak3vd/x9rzFzdTjT9yI/VT32Y
+X-Google-Smtp-Source: AGHT+IF94ubuN1DolXWqOCuqO63DMWWWiH+Xzm8Pk2/GYkFnK9d8NCAe80B2zYgXUSA4ER1dykUhYocxEz924iSZyuk=
+X-Received: by 2002:a05:6870:f14c:b0:21e:95d9:dc7b with SMTP id
+ l12-20020a056870f14c00b0021e95d9dc7bmr2147105oac.30.1709311819361; Fri, 01
+ Mar 2024 08:50:19 -0800 (PST)
 MIME-Version: 1.0
 References: <20240222205827.2813212-1-raj.khem@gmail.com> <CA+chaQfOOMdDvQE1Q+7qMBdb37A3UUins90d+=hUy7OVYT60Xw@mail.gmail.com>
  <CA+chaQdtcOvfmXtPM2W2ZeVo1XtvUtNC_b4m78b7krrQedZaLQ@mail.gmail.com>
 In-Reply-To: <CA+chaQdtcOvfmXtPM2W2ZeVo1XtvUtNC_b4m78b7krrQedZaLQ@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 1 Mar 2024 08:49:50 -0800
-Message-ID: <CAMKF1srLd2oZ1S3Zq=Jhr6n1cude0AAZeqAMxgxa+L7TEMd=1Q@mail.gmail.com>
+Date: Fri, 1 Mar 2024 08:50:08 -0800
+Message-ID: <CAMKF1sqnTK3OPZpxxo5COcZ9Fr8ba6VtZY2jeMtAMuxdoRrJNg@mail.gmail.com>
 Subject: Re: [oe] [meta-filesystems][PATCH 1/4] fuse3: Add missing runtime
  deps for ptests
 To: Martin Jansa <martin.jansa@gmail.com>
 Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000b9262806129c2a75"
+Content-Type: multipart/alternative; boundary="000000000000cdb36f06129c2b5c"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 01 Mar 2024 16:50:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109079
+ <openembedded-devel@lists.openembedded.org>; Fri, 01 Mar 2024 16:50:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109080
 
---000000000000b9262806129c2a75
+--000000000000cdb36f06129c2b5c
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -69,6 +69,11 @@ On Fri, Mar 1, 2024 at 2:45=E2=80=AFAM Martin Jansa <martin.jansa@gmail.com=
 > wrote:
 
 > or is it typo cuse -> fuse?
+
+
+No
+
+
 >
 > On Fri, Mar 1, 2024 at 11:43=E2=80=AFAM Martin Jansa <martin.jansa@gmail.=
 com>
@@ -76,19 +81,9 @@ com>
 > >
 > > does it need virtual/kernel dependency now?
 > >
-
-
-
-
 > > in world build I've seen:
 > > ERROR: QA Issue: fuse3-ptest rdepends on kernel-module-cuse, but it
 > > isn't a build dependency? [build-deps]
-
-
-Yeah this should be a recommends not rdepends
-
-
->
 > >
 > > On Thu, Feb 22, 2024 at 9:58=E2=80=AFPM Khem Raj <raj.khem@gmail.com> w=
 rote:
@@ -133,36 +128,29 @@ b
 > > >
 >
 
---000000000000b9262806129c2a75
+--000000000000cdb36f06129c2b5c
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div><div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" cl=
-ass=3D"gmail_attr">On Fri, Mar 1, 2024 at 2:45=E2=80=AFAM Martin Jansa &lt;=
-<a href=3D"mailto:martin.jansa@gmail.com" target=3D"_blank">martin.jansa@gm=
-ail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"=
-margin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-style:solid;padd=
-ing-left:1ex;border-left-color:rgb(204,204,204)">or is it typo cuse -&gt; f=
-use?<br>
+<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Fri, Mar 1, 2024 at 2:45=E2=80=AFAM Martin Jansa &lt;<a =
+href=3D"mailto:martin.jansa@gmail.com">martin.jansa@gmail.com</a>&gt; wrote=
+:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;bor=
+der-left:1px #ccc solid;padding-left:1ex">or is it typo cuse -&gt; fuse?</b=
+lockquote><div dir=3D"auto"><br></div><div dir=3D"auto">No</div><div dir=3D=
+"auto"><br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8=
+ex;border-left:1px #ccc solid;padding-left:1ex" dir=3D"auto"><br>
 <br>
 On Fri, Mar 1, 2024 at 11:43=E2=80=AFAM Martin Jansa &lt;<a href=3D"mailto:=
 martin.jansa@gmail.com" target=3D"_blank">martin.jansa@gmail.com</a>&gt; wr=
 ote:<br>
 &gt;<br>
 &gt; does it need virtual/kernel dependency now?<br>
-&gt;</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto"><br></div><b=
-lockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-le=
-ft-width:1px;border-left-style:solid;padding-left:1ex;border-left-color:rgb=
-(204,204,204)" dir=3D"auto"><br>
+&gt;<br>
 &gt; in world build I&#39;ve seen:<br>
 &gt; ERROR: QA Issue: fuse3-ptest rdepends on kernel-module-cuse, but it<br=
 >
-&gt; isn&#39;t a build dependency? [build-deps]</blockquote><div dir=3D"aut=
-o"><br></div><div dir=3D"auto">Yeah this should be a recommends not rdepend=
-s=C2=A0</div><div dir=3D"auto">=C2=A0</div><blockquote class=3D"gmail_quote=
-" style=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-style=
-:solid;padding-left:1ex;border-left-color:rgb(204,204,204)" dir=3D"auto"><b=
-r>
+&gt; isn&#39;t a build dependency? [build-deps]<br>
 &gt;<br>
 &gt; On Thu, Feb 22, 2024 at 9:58=E2=80=AFPM Khem Raj &lt;<a href=3D"mailto=
 :raj.khem@gmail.com" target=3D"_blank">raj.khem@gmail.com</a>&gt; wrote:<br=
@@ -221,7 +209,6 @@ mail.com" target=3D"_blank">martin.jansa@gmail.com</a>]<br>
 &gt; &gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
 &gt; &gt;<br>
 </blockquote></div></div>
-</div>
 
---000000000000b9262806129c2a75--
+--000000000000cdb36f06129c2b5c--
 
