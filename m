@@ -1,154 +1,227 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 332FAC5478C
-	for <webhook@archiver.kernel.org>; Fri,  1 Mar 2024 15:36:15 +0000 (UTC)
-Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
- by mx.groups.io with SMTP id smtpd.web10.26179.1709307368881818980
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 828D6C5478C
+	for <webhook@archiver.kernel.org>; Fri,  1 Mar 2024 16:50:05 +0000 (UTC)
+Received: from mail-ot1-f41.google.com (mail-ot1-f41.google.com [209.85.210.41])
+ by mx.groups.io with SMTP id smtpd.web11.28500.1709311802049246578
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 01 Mar 2024 07:36:09 -0800
+ Fri, 01 Mar 2024 08:50:02 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=U0XBTWc6;
- spf=pass (domain: gmail.com, ip: 209.85.218.43, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f43.google.com with SMTP id a640c23a62f3a-a34c5ca2537so364452266b.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 01 Mar 2024 07:36:08 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=nEKFlmuh;
+ spf=pass (domain: gmail.com, ip: 209.85.210.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-ot1-f41.google.com with SMTP id 46e09a7af769-6e49833ccdfso1003809a34.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 01 Mar 2024 08:50:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1709307367; x=1709912167; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=sw1SZB7gEoeIszK+odGir486kwOdXEEqh2cp2abqlZc=;
-        b=U0XBTWc6dxwSwNEKrz7Gi6GMqIUq9qkGCinXxTTx6KgK2oPkXKDnUIUQC1chMJBoYC
-         MYLRihSax4j5scV/m+pAsmgfUTMjSner8FS6MII9Uc0CpIDMtbdMjnBa6J4rZQiaYVty
-         TnyQSWLtRouPxBQWMKzuQAZr7W1/Hna6e6FCJ1uw98Tng1jhWWVOWzGlVbAmhA/SrG6M
-         Ahlvzrer2Z3FMAsFk7lnvPTw80KW3sSqg3Ule61fhbGHyVbJOZ726xK/yfFQmtCisK5E
-         3eb5gdTsFy4+hbZKh6J++gMg3EJvu+qh7TYGGI5B4YcLwqOoKaqOUQ8wZcinUPQBdVcf
-         xSbQ==
+        d=gmail.com; s=20230601; t=1709311801; x=1709916601; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=2cwng0X01POSUalV8J6ZQve7/RVy/KIxTVgdF1f+SpE=;
+        b=nEKFlmuh0+xrOnleUNysOJSuc9Xkl0CElWSU9kxuuEMybSsLEeow8Z+qwZJtnLWusH
+         JeIHNJZv8UKzLnJb/Hjc+tr3yXkpzRAWhi0JPfflisoxUgWTJ5XgMF7zncppK1cflEuQ
+         1wOsDa3n3hhFkO5HF4OvDPoZ9bzu1VK0t0SBW24tkStL/rxt4unhzdEKozw1uWzxtt+A
+         UBUOGpE6Eygw50gtgq197HLJNmwMzI/vvoamE71qyVQzwjGLbK1wtHIOw1BepKRgPLK+
+         pwKLZJM1sHJx7pkcLqYHuUsc1hQUSMDwjaYbOxxHVuoTh7duhRcCHXDh3SuYJtnY6BxZ
+         vqxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1709307367; x=1709912167;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1709311801; x=1709916601;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=sw1SZB7gEoeIszK+odGir486kwOdXEEqh2cp2abqlZc=;
-        b=YFRDH9RsY3QXeM9PITt7LuQJDoufAUXGZhcg6fxsLg+13mhULP3L53TigsMQI1QXfM
-         C0TwwzVtc6BjMid3qEh2Qlp5f+LqRbjMbn2ERirGwfXhlLCJcM0Ir73Apu2Po+xxnVBe
-         znzMd2wTOAJ3XvglUYvTGNtZAs0EgR/kh097hPFNOasuJS52ewrEgghN3tzrRqZzLd3I
-         xceCPLGMM3ozsnicx0eLHSTEd6enb0gGgAv/oOO17UG7pi2jbnBkXnBnwBwDkqNZKMkh
-         RF2sCQ0UlPNg1HJcS8AXL2ihSGB6ca/SbG9fgbGyoDv3fyaHVSIx5gNn3mGCdM6E4m3/
-         +uUA==
-X-Gm-Message-State: AOJu0YyeWNmwva5+/bDFnsVMr+bKbvtZy9zff6fxa7WWWSk2zlKmPFC0
-	aj8JF3VXOUPrMux7tGv/x+p1Dnc9gugscRMaR7g8Lv4HDipukyOyZltBudXG
-X-Google-Smtp-Source: AGHT+IH/ArGsf/Xpf3IpStthqEveFUYMeHR4qaGNlKktC6XQA1vgh8T/ZUeA2CDv/Oxcy2alDJ2T4g==
-X-Received: by 2002:a17:906:aecd:b0:a3e:5de6:701d with SMTP id me13-20020a170906aecd00b00a3e5de6701dmr1270065ejb.50.1709307367013;
-        Fri, 01 Mar 2024 07:36:07 -0800 (PST)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id z20-20020a170906271400b00a441cb52bfcsm1793888ejc.165.2024.03.01.07.36.06
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 01 Mar 2024 07:36:06 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-filesystems][PATCH] fuse3: use 4 spaces for indentation
-Date: Fri,  1 Mar 2024 16:35:57 +0100
-Message-ID: <20240301153557.202049-1-martin.jansa@gmail.com>
-X-Mailer: git-send-email 2.44.0
+        bh=2cwng0X01POSUalV8J6ZQve7/RVy/KIxTVgdF1f+SpE=;
+        b=hJ6qc+dVZp8Q1KN1CoL9fp3nGQW1CMjXvZbGpS7GAWlQGu7g71qO9Xwz1o48ReBmtp
+         mSORnQZ+/JeQxZ/z9VtxEeMgC+x3yG51MBYh7bNs7gbjyUoZN+DT8e6qEBFLunBVqZ9y
+         /T0HGgpuNbfJXx/rYTqEPX8D+gBl3FAx1en17hpIfeBqYxsRiXvmfiBM1CJ44MyK2kcb
+         WGUoJWNxiNTB9EqSNLXIMUqR/QssrVgTudMRJ2kN+tLxyYgzAduwCtG4X6/zJ9Vte2pI
+         Pb2OItY6G2Wrt/QHWtVyK/ItbTaFNly7i1/6eCmwy4HVG8SwEhIebe+DIWi1XHE/YgZp
+         xSuA==
+X-Gm-Message-State: AOJu0Ywd3jV7Jiy3ATpMswEBkerb/3FiBhHKYbfbV8hjUtYl7gjOEOBC
+	UHTuJfiHatK0FZX4gEccvlSX2F70Ar7VrI05yEVnUKYPWzNkc5YELdVe3bzbiwB8/v7sXLWBN1y
+	yv9842etJ865LFQ8+59YyQOwYEBQ=
+X-Google-Smtp-Source: AGHT+IHNmfErrbilJ3rEjemjEysJDnd8rcqXG9lpKeocrpGA2igp08Rveb6/SP766av/Wgfx1QLIlLV2t1WOsvHh8qw=
+X-Received: by 2002:a05:6871:818b:b0:220:be60:b6fc with SMTP id
+ so11-20020a056871818b00b00220be60b6fcmr1940317oab.25.1709311801237; Fri, 01
+ Mar 2024 08:50:01 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240222205827.2813212-1-raj.khem@gmail.com> <CA+chaQfOOMdDvQE1Q+7qMBdb37A3UUins90d+=hUy7OVYT60Xw@mail.gmail.com>
+ <CA+chaQdtcOvfmXtPM2W2ZeVo1XtvUtNC_b4m78b7krrQedZaLQ@mail.gmail.com>
+In-Reply-To: <CA+chaQdtcOvfmXtPM2W2ZeVo1XtvUtNC_b4m78b7krrQedZaLQ@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 1 Mar 2024 08:49:50 -0800
+Message-ID: <CAMKF1srLd2oZ1S3Zq=Jhr6n1cude0AAZeqAMxgxa+L7TEMd=1Q@mail.gmail.com>
+Subject: Re: [oe] [meta-filesystems][PATCH 1/4] fuse3: Add missing runtime
+ deps for ptests
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000b9262806129c2a75"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 01 Mar 2024 15:36:15 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109078
+ <openembedded-devel@lists.openembedded.org>; Fri, 01 Mar 2024 16:50:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109079
 
-* instead of mix of 8, 9 and 4 spaces
+--000000000000b9262806129c2a75
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
----
- .../recipes-support/fuse/fuse3_3.16.2.bb      | 56 ++++++++++---------
- 1 file changed, 29 insertions(+), 27 deletions(-)
+On Fri, Mar 1, 2024 at 2:45=E2=80=AFAM Martin Jansa <martin.jansa@gmail.com=
+> wrote:
 
-diff --git a/meta-filesystems/recipes-support/fuse/fuse3_3.16.2.bb b/meta-filesystems/recipes-support/fuse/fuse3_3.16.2.bb
-index 321851da5c..7964621b58 100644
---- a/meta-filesystems/recipes-support/fuse/fuse3_3.16.2.bb
-+++ b/meta-filesystems/recipes-support/fuse/fuse3_3.16.2.bb
-@@ -7,9 +7,11 @@ DESCRIPTION = "FUSE (Filesystem in Userspace) is a simple interface for userspac
- HOMEPAGE = "https://github.com/libfuse/libfuse"
- SECTION = "libs"
- LICENSE = "GPL-2.0-only & LGPL-2.0-only"
--LIC_FILES_CHKSUM = "file://GPL2.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
--                    file://LGPL2.txt;md5=4fbd65380cdd255951079008b364516c \
--                    file://LICENSE;md5=a55c12a2d7d742ecb41ca9ae0a6ddc66"
-+LIC_FILES_CHKSUM = " \
-+    file://GPL2.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-+    file://LGPL2.txt;md5=4fbd65380cdd255951079008b364516c \
-+    file://LICENSE;md5=a55c12a2d7d742ecb41ca9ae0a6ddc66 \
-+"
- 
- SRC_URI = "https://github.com/libfuse/libfuse/releases/download/fuse-${PV}/fuse-${PV}.tar.gz \
- "
-@@ -25,7 +27,7 @@ CVE_PRODUCT = "fuse_project:fuse"
- inherit meson pkgconfig ptest
- 
- SRC_URI += " \
--        file://run-ptest \
-+    file://run-ptest \
- "
- 
- RDEPENDS:${PN}-ptest += " \
-@@ -36,29 +38,29 @@ RDEPENDS:${PN}-ptest += " \
- "
- 
- do_install_ptest() {
--        install -d ${D}${PTEST_PATH}/test
--        install -d ${D}${PTEST_PATH}/example
--        install -d ${D}${PTEST_PATH}/util
--        cp -rf ${S}/test/* ${D}${PTEST_PATH}/test/
--
--        example_excutables=`find ${B}/example -type f -executable`
--        util_excutables=`find ${B}/util -type f -executable`
--        test_excutables=`find ${B}/test -type f -executable`
--
--        for e in $example_excutables
--        do
--            cp -rf $e  ${D}${PTEST_PATH}/example/
--         done
--
--        for e in $util_excutables
--        do
--            cp -rf $e  ${D}${PTEST_PATH}/util/
--        done
--
--        for e in $test_excutables
--        do
--            cp -rf $e  ${D}${PTEST_PATH}/test
--        done
-+    install -d ${D}${PTEST_PATH}/test
-+    install -d ${D}${PTEST_PATH}/example
-+    install -d ${D}${PTEST_PATH}/util
-+    cp -rf ${S}/test/* ${D}${PTEST_PATH}/test/
-+
-+    example_excutables=`find ${B}/example -type f -executable`
-+    util_excutables=`find ${B}/util -type f -executable`
-+    test_excutables=`find ${B}/test -type f -executable`
-+
-+    for e in $example_excutables
-+    do
-+        cp -rf $e  ${D}${PTEST_PATH}/example/
-+    done
-+
-+    for e in $util_excutables
-+    do
-+        cp -rf $e  ${D}${PTEST_PATH}/util/
-+    done
-+
-+    for e in $test_excutables
-+    do
-+        cp -rf $e  ${D}${PTEST_PATH}/test
-+    done
- }
- 
- DEPENDS = "udev"
--- 
-2.44.0
+> or is it typo cuse -> fuse?
+>
+> On Fri, Mar 1, 2024 at 11:43=E2=80=AFAM Martin Jansa <martin.jansa@gmail.=
+com>
+> wrote:
+> >
+> > does it need virtual/kernel dependency now?
+> >
 
+
+
+
+> > in world build I've seen:
+> > ERROR: QA Issue: fuse3-ptest rdepends on kernel-module-cuse, but it
+> > isn't a build dependency? [build-deps]
+
+
+Yeah this should be a recommends not rdepends
+
+
+>
+> >
+> > On Thu, Feb 22, 2024 at 9:58=E2=80=AFPM Khem Raj <raj.khem@gmail.com> w=
+rote:
+> > >
+> > > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > > ---
+> > >  meta-filesystems/recipes-support/fuse/fuse3_3.16.2.bb | 6 ++++--
+> > >  1 file changed, 4 insertions(+), 2 deletions(-)
+> > >
+> > > diff --git a/meta-filesystems/recipes-support/fuse/fuse3_3.16.2.bb
+> b/meta-filesystems/recipes-support/fuse/fuse3_3.16.2.bb
+> > > index 5e532ba7ed..321851da5c 100644
+> > > --- a/meta-filesystems/recipes-support/fuse/fuse3_3.16.2.bb
+> > > +++ b/meta-filesystems/recipes-support/fuse/fuse3_3.16.2.bb
+> > > @@ -29,8 +29,10 @@ SRC_URI +=3D " \
+> > >  "
+> > >
+> > >  RDEPENDS:${PN}-ptest +=3D " \
+> > > -        python3-pytest \
+> > > -       bash \
+> > > +    python3-pytest \
+> > > +    python3-looseversion \
+> > > +    kernel-module-cuse \
+> > > +    bash \
+> > >  "
+> > >
+> > >  do_install_ptest() {
+> > > --
+> > > 2.43.2
+> > >
+> > >
+> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > > Links: You receive all messages sent to this group.
+> > > View/Reply Online (#108994):
+> https://lists.openembedded.org/g/openembedded-devel/message/108994
+> > > Mute This Topic: https://lists.openembedded.org/mt/104516894/3617156
+> > > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsu=
+b
+> [martin.jansa@gmail.com]
+> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > >
+>
+
+--000000000000b9262806129c2a75
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div><div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" cl=
+ass=3D"gmail_attr">On Fri, Mar 1, 2024 at 2:45=E2=80=AFAM Martin Jansa &lt;=
+<a href=3D"mailto:martin.jansa@gmail.com" target=3D"_blank">martin.jansa@gm=
+ail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"=
+margin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-style:solid;padd=
+ing-left:1ex;border-left-color:rgb(204,204,204)">or is it typo cuse -&gt; f=
+use?<br>
+<br>
+On Fri, Mar 1, 2024 at 11:43=E2=80=AFAM Martin Jansa &lt;<a href=3D"mailto:=
+martin.jansa@gmail.com" target=3D"_blank">martin.jansa@gmail.com</a>&gt; wr=
+ote:<br>
+&gt;<br>
+&gt; does it need virtual/kernel dependency now?<br>
+&gt;</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto"><br></div><b=
+lockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-le=
+ft-width:1px;border-left-style:solid;padding-left:1ex;border-left-color:rgb=
+(204,204,204)" dir=3D"auto"><br>
+&gt; in world build I&#39;ve seen:<br>
+&gt; ERROR: QA Issue: fuse3-ptest rdepends on kernel-module-cuse, but it<br=
+>
+&gt; isn&#39;t a build dependency? [build-deps]</blockquote><div dir=3D"aut=
+o"><br></div><div dir=3D"auto">Yeah this should be a recommends not rdepend=
+s=C2=A0</div><div dir=3D"auto">=C2=A0</div><blockquote class=3D"gmail_quote=
+" style=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-style=
+:solid;padding-left:1ex;border-left-color:rgb(204,204,204)" dir=3D"auto"><b=
+r>
+&gt;<br>
+&gt; On Thu, Feb 22, 2024 at 9:58=E2=80=AFPM Khem Raj &lt;<a href=3D"mailto=
+:raj.khem@gmail.com" target=3D"_blank">raj.khem@gmail.com</a>&gt; wrote:<br=
+>
+&gt; &gt;<br>
+&gt; &gt; Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com"=
+ target=3D"_blank">raj.khem@gmail.com</a>&gt;<br>
+&gt; &gt; ---<br>
+&gt; &gt;=C2=A0 meta-filesystems/recipes-support/fuse/<a href=3D"http://fus=
+e3_3.16.2.bb" rel=3D"noreferrer" target=3D"_blank">fuse3_3.16.2.bb</a> | 6 =
+++++--<br>
+&gt; &gt;=C2=A0 1 file changed, 4 insertions(+), 2 deletions(-)<br>
+&gt; &gt;<br>
+&gt; &gt; diff --git a/meta-filesystems/recipes-support/fuse/<a href=3D"htt=
+p://fuse3_3.16.2.bb" rel=3D"noreferrer" target=3D"_blank">fuse3_3.16.2.bb</=
+a> b/meta-filesystems/recipes-support/fuse/<a href=3D"http://fuse3_3.16.2.b=
+b" rel=3D"noreferrer" target=3D"_blank">fuse3_3.16.2.bb</a><br>
+&gt; &gt; index 5e532ba7ed..321851da5c 100644<br>
+&gt; &gt; --- a/meta-filesystems/recipes-support/fuse/<a href=3D"http://fus=
+e3_3.16.2.bb" rel=3D"noreferrer" target=3D"_blank">fuse3_3.16.2.bb</a><br>
+&gt; &gt; +++ b/meta-filesystems/recipes-support/fuse/<a href=3D"http://fus=
+e3_3.16.2.bb" rel=3D"noreferrer" target=3D"_blank">fuse3_3.16.2.bb</a><br>
+&gt; &gt; @@ -29,8 +29,10 @@ SRC_URI +=3D &quot; \<br>
+&gt; &gt;=C2=A0 &quot;<br>
+&gt; &gt;<br>
+&gt; &gt;=C2=A0 RDEPENDS:${PN}-ptest +=3D &quot; \<br>
+&gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 python3-pytest \<br>
+&gt; &gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0bash \<br>
+&gt; &gt; +=C2=A0 =C2=A0 python3-pytest \<br>
+&gt; &gt; +=C2=A0 =C2=A0 python3-looseversion \<br>
+&gt; &gt; +=C2=A0 =C2=A0 kernel-module-cuse \<br>
+&gt; &gt; +=C2=A0 =C2=A0 bash \<br>
+&gt; &gt;=C2=A0 &quot;<br>
+&gt; &gt;<br>
+&gt; &gt;=C2=A0 do_install_ptest() {<br>
+&gt; &gt; --<br>
+&gt; &gt; 2.43.2<br>
+&gt; &gt;<br>
+&gt; &gt;<br>
+&gt; &gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+&gt; &gt; Links: You receive all messages sent to this group.<br>
+&gt; &gt; View/Reply Online (#108994): <a href=3D"https://lists.openembedde=
+d.org/g/openembedded-devel/message/108994" rel=3D"noreferrer" target=3D"_bl=
+ank">https://lists.openembedded.org/g/openembedded-devel/message/108994</a>=
+<br>
+&gt; &gt; Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/104=
+516894/3617156" rel=3D"noreferrer" target=3D"_blank">https://lists.openembe=
+dded.org/mt/104516894/3617156</a><br>
+&gt; &gt; Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.o=
+penembedded.org" target=3D"_blank">openembedded-devel+owner@lists.openembed=
+ded.org</a><br>
+&gt; &gt; Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembe=
+dded-devel/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openem=
+bedded.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:martin.jansa@g=
+mail.com" target=3D"_blank">martin.jansa@gmail.com</a>]<br>
+&gt; &gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+&gt; &gt;<br>
+</blockquote></div></div>
+</div>
+
+--000000000000b9262806129c2a75--
 
