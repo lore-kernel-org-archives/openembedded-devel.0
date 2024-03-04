@@ -1,163 +1,101 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <joe.slater@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 85454C5478C
-	for <webhook@archiver.kernel.org>; Mon,  4 Mar 2024 20:13:39 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
- by mx.groups.io with SMTP id smtpd.web11.1929.1709583209217838901
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 34359C48BF6
+	for <webhook@archiver.kernel.org>; Mon,  4 Mar 2024 21:50:20 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.5853.1709589017084685640
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 04 Mar 2024 12:13:29 -0800
+ Mon, 04 Mar 2024 13:50:17 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=zrV3CRTa;
- spf=pass (domain: smile.fr, ip: 209.85.128.45, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-412e90ef887so5219545e9.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 04 Mar 2024 12:13:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1709583207; x=1710188007; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=RSBwN2eMdutPOJ8ZNKnxlp84FPo4PvxBm9DqnLzO4rs=;
-        b=zrV3CRTaJy1PZpSvvw1nToGIhv2YdQgtqq/ZXmyNuy48kI8OVMCwGObVZebmgTJoB9
-         BLLIDWo9kA4SIVCr2KANAFW8XCUq3KFq693qL+6vV3UUpmtX0T4/MRm9UUH3/htLLBwO
-         P7dAtfYbqpuw2qBh4kcoHUf76wt5/9hVllgWonsKWVJ9zawt7AKFe/OcLGonhG0OIdh+
-         dHVDv7fn4krJBE269llloYW+7FO3M9RQCAeYJlS/PzM9sagYrTKG8Q0ZmDoUdmECpl1N
-         GfScvsfgFPmsyJTpQWuv9tED+i7pHVaQp//m5etolIPNJ0Cjl5KTPN5GD4PJu4TPHS5G
-         LZ5Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1709583207; x=1710188007;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=RSBwN2eMdutPOJ8ZNKnxlp84FPo4PvxBm9DqnLzO4rs=;
-        b=uq0rbXrb7ZuuSSdkZF6eh0XiwwF1UoWAuJsGv5/m4GbSWv7uJbpDYA9q9NepG1gOoD
-         t4b9FUjYTEIGKImzSA+kYcqHjD7iq70MgLdDpo8isdziIlZ8wgH3wu5slpkYcSPendL/
-         vWTF3R8WOqFI/h6QhtC2H+Su+ANqnSuFjcxqzg7FobF1OePYoMr+xkPKg95AKI1p9MbB
-         CQkdCSeFY+F1Gh1NSj4a66fmXa5k6bg/UT2in80XqCGUWpB3HRiZU0IU6EQ35z38MMqs
-         yEN3DPa299jfbFVRCyBHXwzwpY7NiDz/XS+gpmZks7qZCfGrkXd/+mUnLAF/7GsOAQRs
-         j5bQ==
-X-Gm-Message-State: AOJu0YzVtrNd1XGuyVj9D+UKfSufVKeIKF8ZB4hELnqRZmeXu8CKx72U
-	OuAmThVQXc1+PT58RPNGgah1ZRRp7v7jJC1DUajXhj7mIHj8GXGxIGEExBgi3nqIcc6a4WkOuN+
-	3AWysuw==
-X-Google-Smtp-Source: AGHT+IECPRF5bOdwNgj70Wc/sXKH/nomzLxtsmOgB2wPyDZdqleb7b3cKt3X0pJtXLSgMaWDLZSfOg==
-X-Received: by 2002:a05:600c:4448:b0:412:eaa9:9f0a with SMTP id v8-20020a05600c444800b00412eaa99f0amr317850wmn.24.1709583206793;
-        Mon, 04 Mar 2024 12:13:26 -0800 (PST)
-Received: from P-ASN-ECS-830T8C3.numericable.fr ([89.159.1.53])
-        by smtp.gmail.com with ESMTPSA id y10-20020adff14a000000b0033e1be7f3d8sm10649018wro.70.2024.03.04.12.13.26
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 04 Mar 2024 12:13:26 -0800 (PST)
-From: Yoann Congal <yoann.congal@smile.fr>
-To: openembedded-devel@lists.openembedded.org
-Cc: Yoann Congal <yoann.congal@smile.fr>
-Subject: [meta-networking][PATCH] drbd-utils: Fix a udev rule reproducibility
-Date: Mon,  4 Mar 2024 21:13:12 +0100
-Message-Id: <20240304201312.1089609-1-yoann.congal@smile.fr>
-X-Mailer: git-send-email 2.39.2
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=fah8OzTE;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=3793ce0496=joe.slater@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 4247Kus4028208
+	for <openembedded-devel@lists.openembedded.org>; Mon, 4 Mar 2024 21:50:16 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=oZblN
+	Clvk8tCDQpz7X83DvvwRIcab46XoL/OyIuT/Io=; b=fah8OzTEhaMhUq1CAc/ES
+	8I0MByT7v2a8YJs0fYUE7fQDSbirkCVOYD1tEb+ixxOCMcBMGoallJDhGlp0wn9p
+	m/tpayH1kgrzfOTejCVB3OufijMB3lw5J+w6Ws78l31NzQJezZ+lCOTC1fdfUp+a
+	oVksQYx3nw3xo7jy9f9Obqc+ZAS96NRnj8dz3abWVHlX5t5JQsnWa+bTRiR6c1zO
+	/rg/w3tvig7D0jzrQKM0bZfA9q038x+bNrS9D1VKagVDTLn+FHrOALIFqswHJhHe
+	/xkYjSZOeIWj+Vx1/m/hSbATjao0xI4AoA5+qBfJM9xqpYYPmt8W2CJv6AR02O4J
+	w==
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3wksawt7hm-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 04 Mar 2024 21:50:16 +0000 (GMT)
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.35; Mon, 4 Mar 2024 13:50:14 -0800
+Received: from ala-jslater-lx2.corp.ad.wrs.com (147.11.136.210) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
+ 15.1.2507.35 via Frontend Transport; Mon, 4 Mar 2024 13:50:14 -0800
+From: <joe.slater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <joe.slater@windriver.com>, <randy.macleod@windriver.com>
+Subject: [meta-oe][PATCH 1/1] googletest: allow for shared libraries
+Date: Mon, 4 Mar 2024 13:50:14 -0800
+Message-ID: <20240304215014.4191019-1-joe.slater@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: 4rF9NG91A_V7VFPgtrjQ7PBqk477OsWP
+X-Proofpoint-GUID: 4rF9NG91A_V7VFPgtrjQ7PBqk477OsWP
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-03-04_18,2024-03-04_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 malwarescore=0
+ suspectscore=0 lowpriorityscore=0 spamscore=0 impostorscore=0
+ priorityscore=1501 adultscore=0 bulkscore=0 clxscore=1011 mlxlogscore=939
+ mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2402120000 definitions=main-2403040169
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 04 Mar 2024 20:13:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109102
+ <openembedded-devel@lists.openembedded.org>; Mon, 04 Mar 2024 21:50:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109103
 
-drbd-utils configure step check the build host udev version to enable
-or disable the target udev rule. This leads to a clear
-non-reproducibility.
+From: Joe Slater <joe.slater@windriver.com>
 
-This patch fixes this by adding a configure option to the configure step
-which allows to skip the udev version checks and unconditionally enable
-the udev rule.
+Add a PACKAGECONFIG option to produce shared libraries.
+Allow staticdev to be empty if no static libraries
+are built.
 
-Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
 ---
- ...-an-option-to-disable-host-udev-vers.patch | 55 +++++++++++++++++++
- .../recipes-support/drbd/drbd-utils_9.22.0.bb |  2 +
- 2 files changed, 57 insertions(+)
- create mode 100644 meta-networking/recipes-support/drbd/drbd-utils/0001-configure.ac-Add-an-option-to-disable-host-udev-vers.patch
+ meta-oe/recipes-test/googletest/googletest_1.14.0.bb | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/drbd/drbd-utils/0001-configure.ac-Add-an-option-to-disable-host-udev-vers.patch b/meta-networking/recipes-support/drbd/drbd-utils/0001-configure.ac-Add-an-option-to-disable-host-udev-vers.patch
-new file mode 100644
-index 0000000000..5e03ff7b32
---- /dev/null
-+++ b/meta-networking/recipes-support/drbd/drbd-utils/0001-configure.ac-Add-an-option-to-disable-host-udev-vers.patch
-@@ -0,0 +1,55 @@
-+From 50749a5b0eb0becb39a4edb5fe844b13bbeb5836 Mon Sep 17 00:00:00 2001
-+From: Yoann Congal <yoann.congal@smile.fr>
-+Date: Sat, 2 Mar 2024 16:23:07 +0100
-+Subject: [PATCH] configure.ac: Add an option to disable host udev version
-+ checks
-+
-+In cross-compilation environment, the build host might have an outdated
-+udev or no udev at all. But the user may still want to build with the
-+enabled udev rule (for its udev-enabled target).
-+
-+This patch adds a "--disable-udevchecks" option the disable build host
-+udev version check at configure-time and unconditionally install the
-+enabled udev rule. Without this new option, the behavior stays the same
-+(checks enabled).
-+
-+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
-+Upstream-Status: Submitted [https://lists.linbit.com/pipermail/drbd-dev/2024-March/007201.html]
-+---
-+ configure.ac | 9 +++++++--
-+ 1 file changed, 7 insertions(+), 2 deletions(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index d5a0e733..da083240 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -71,6 +71,11 @@ AC_ARG_WITH([udev],
-+ 	[AS_HELP_STRING([--with-udev],
-+ 			[Enable udev integration])],
-+ 	[WITH_UDEV=$withval])
-++AC_ARG_ENABLE([udevchecks],
-++	[AS_HELP_STRING([--disable-udevchecks],
-++			[Disable host udev version checks])],
-++	[],
-++	[enable_udevchecks=yes])
-+ AC_ARG_WITH([xen],
-+ 	[AS_HELP_STRING([--with-xen],
-+ 			[Enable Xen integration])],
-+@@ -309,7 +314,7 @@ if test -z $GIT; then
-+    AC_MSG_WARN(Cannot update buildtag without git. You may safely ignore this warning when building from a tarball.)
-+ fi
-+ 
-+-if test $UDEVADM = false && test $UDEVINFO = false; then
-++if test "x$enable_udevchecks" != "xno" && test $UDEVADM = false && test $UDEVINFO = false; then
-+    if test "$WITH_UDEV" = "yes"; then
-+      AC_MSG_WARN([udev support enabled, but neither udevadm nor udevinfo found on this system.])
-+    fi
-+@@ -413,7 +418,7 @@ dnl default.
-+ test -z $INITDIR && INITDIR="$sysconfdir/init.d"
-+ 
-+ dnl Our udev rules file is known to work only with udev >= 85
-+-if test "$WITH_UDEV" = "yes"; then
-++if test "x$enable_udevchecks" != "xno" && test "$WITH_UDEV" = "yes"; then
-+    udev_version=$( set -- $($UDEVADM version); echo $1 )
-+    if test -z "$udev_version"; then
-+ 	udev_version=$( set -- $($UDEVINFO -V); echo $3 )
-diff --git a/meta-networking/recipes-support/drbd/drbd-utils_9.22.0.bb b/meta-networking/recipes-support/drbd/drbd-utils_9.22.0.bb
-index 960260fd39..65a43d9b26 100644
---- a/meta-networking/recipes-support/drbd/drbd-utils_9.22.0.bb
-+++ b/meta-networking/recipes-support/drbd/drbd-utils_9.22.0.bb
-@@ -12,6 +12,7 @@ SRC_URI = "git://github.com/LINBIT/drbd-utils;name=drbd-utils;branch=master;prot
-            file://0001-drbdmon-add-LDFLAGS-when-linking.patch \
-            file://0001-replace-off64_t-with-off_t.patch \
-            ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','file://0001-drbd-utils-support-usrmerge.patch','',d)} \
-+           file://0001-configure.ac-Add-an-option-to-disable-host-udev-vers.patch \
-            "
- SRC_URI:append:libc-musl = " file://0002-drbdadm-drop-use-of-GLOB_MAGCHAR-use-strchr-heuristi.patch "
- SRCREV_drbd-utils = "409097fe02187f83790b88ac3e0d94f3c167adab"
-@@ -39,6 +40,7 @@ EXTRA_OECONF = " \
-                 --with-initscripttype=both    \
-                 --with-systemdunitdir=${systemd_unitdir}/system \
-                 --without-manual \
-+                --disable-udevchecks \
-                "
+diff --git a/meta-oe/recipes-test/googletest/googletest_1.14.0.bb b/meta-oe/recipes-test/googletest/googletest_1.14.0.bb
+index 8c75f936de..1b05f3d336 100644
+--- a/meta-oe/recipes-test/googletest/googletest_1.14.0.bb
++++ b/meta-oe/recipes-test/googletest/googletest_1.14.0.bb
+@@ -10,11 +10,17 @@ S = "${WORKDIR}/git"
+ SRCREV = "f8d7d77c06936315286eb55f8de22cd23c188571"
+ SRC_URI = "git://github.com/google/googletest.git;branch=main;protocol=https"
  
- # If we have inherited reproducible_build, we want to use it.
+-inherit cmake
++inherit cmake pkgconfig
++
++# allow for shared libraries, but do not default to them
++#
++PACKAGECONFIG[shared] = "-DBUILD_SHARED_LIBS=ON,-DBUILD_SHARED_LIBS=OFF,,"
++
+ 
+ ALLOW_EMPTY:${PN} = "1"
+ ALLOW_EMPTY:${PN}-dbg = "1"
+ 
++ALLOW_EMPTY:${PN}-staticdev = "1"
+ RDEPENDS:${PN}-dev += "${PN}-staticdev"
+ 
+ BBCLASSEXTEND = "native nativesdk"
 -- 
-2.39.2
+2.25.1
 
 
