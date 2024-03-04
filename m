@@ -1,232 +1,317 @@
-Return-Path: <mingli.yu@eng.windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5269CC54E49
-	for <webhook@archiver.kernel.org>; Mon,  4 Mar 2024 06:14:37 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.92442.1709532871327255244
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 53B5CC48BF6
+	for <webhook@archiver.kernel.org>; Mon,  4 Mar 2024 06:34:57 +0000 (UTC)
+Received: from mail-oa1-f47.google.com (mail-oa1-f47.google.com [209.85.160.47])
+ by mx.groups.io with SMTP id smtpd.web10.92692.1709534094490308143
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 03 Mar 2024 22:14:31 -0800
+ Sun, 03 Mar 2024 22:34:54 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=BqlNUklz;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=379381a8da=mingli.yu@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 4244QN4U013831
-	for <openembedded-devel@lists.openembedded.org>; Mon, 4 Mar 2024 06:14:30 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=8fapm
-	LLqpsxGlM4pJRzH2N/SjGpyxp06GsOMd3SjHPM=; b=BqlNUklzYJGnUEqtBGkKg
-	RhDDlUdUvt+3f6vDodapC9KAKM5hx8Hh/q0TPzGo+Qk7BJ4u3Li7pwyrRHH0rWIg
-	HVK3k0EDV0HiMuwJ4dIyIoaDmsZqxkw1K6TJG00xiw93NMaAdRAyZCXa1xrx4doQ
-	9H/c0PMXIK8kbd6Icq176ynIwj8MhPSfSKvFc48G9FgaIoCx4FUswj5wPbwE/HaL
-	QJ60Ixylhkkn3auRfX5BrDalTYh3frvy/8lfJU2w2wE2lOCvdYscuylJpSdPZ0nG
-	yZjlVd1Mz9ztXWpqkh7WxOmNBX0wDYIa2Pg5UAxHg2VV8wqLRUqsAgUtCeFEcLzB
-	w==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3wku369dcr-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 04 Mar 2024 06:14:30 +0000 (GMT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Sun, 3 Mar 2024 22:14:29 -0800
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.35 via Frontend Transport; Sun, 3 Mar 2024 22:14:28 -0800
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] nlohmann-json: Upgrade to 3.11.3
-Date: Mon, 4 Mar 2024 14:14:27 +0800
-Message-ID: <20240304061427.3252728-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=GjcSaiy4;
+ spf=pass (domain: gmail.com, ip: 209.85.160.47, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f47.google.com with SMTP id 586e51a60fabf-21fdf31a154so2390285fac.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 03 Mar 2024 22:34:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1709534094; x=1710138894; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=kNTZ6TM20wLASD6S+DEsWBzMkNnNwJ4lAsmFH5tHh3Y=;
+        b=GjcSaiy4gD50YDOzqMMdx1U+7Ph98LlrJXEp5WaJVdiVCKK0eqaYVx7TRgO1mcOohq
+         S6j0ld54Qj+JHJfPVGvb422OA1Dq86iDjp8ajwBaeCsLp/NpM8PNQy9TSgVueE/Z3Ss2
+         mtpqjaRMa43xe3P7uHI5ictGWaoLGq133BsCM3VxEzouGeB7LhBeq1H/wnPeg9lFErGs
+         fhPqlbTLzaoMd0Ixq4ln08nDRh3Go7vzqnCkxNVC2yJN2ka+OkYrdaptGBrq5gX8Nbo8
+         LS1mKnlYtcJXAiEmAmgQHLsK0z+izI5v8rzAP+qhFarc0OX/N0mvK6UQPp1TOlfOQyCd
+         IduA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1709534094; x=1710138894;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=kNTZ6TM20wLASD6S+DEsWBzMkNnNwJ4lAsmFH5tHh3Y=;
+        b=pEgfnLUhKPuG0c0DAEib2f8taIpfGglKPoGzPWGH5l3pxxwnxssr18m+8MAZyivWWD
+         2dKzfq/0n76Q7+PpBNiMEokeDqnSmrJs4evbdDoh4AjHBpqtgYVeAG+n+jC6sSLL6D26
+         rrynYxfZrYq/OQSM06QHpK1CWb2u1qS4KOP5a/grqgj/UrPZUWJta9mz68mN8GA8K/Fq
+         NZbH6uzsssi1To7BXpqa1FxrTUxjYHnL5cy4rRbiODEKJ0/CRYp3ZDHvISU9zACYCHeo
+         eEY48jpC65M9bJFz5gChtwSn5DITSXgLw1ZqG8YoDf0/H5x99/cZuWyyaW5VTWp5WnhT
+         /E5g==
+X-Gm-Message-State: AOJu0Yx1J8XHzRNweRQQ2B0g2OllNJP1CZ4wL22Yu+0JLiStahQJ7ZRc
+	a036VCjY3L00di5FD3olLT/ONFjUNBudIGueTmKlzLYO85Qojj4oMclabNDWHH/N6yIRyGlRFTH
+	dzFQHtSixXJ8Hl0YzDUF2GOMl+pg=
+X-Google-Smtp-Source: AGHT+IHoFoEGO3lSUJGI1cC842QemfhcaNEETXP+cm6T+EMKSpcHCEV68jyp6C3ukCRh+3R45Spq+qHsAvQadKZkNLI=
+X-Received: by 2002:a05:6871:206:b0:21f:1f78:adc9 with SMTP id
+ t6-20020a056871020600b0021f1f78adc9mr10331360oad.29.1709534093545; Sun, 03
+ Mar 2024 22:34:53 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: x7iHdOnYo24r2lgYst3-4ffimwvEUnFO
-X-Proofpoint-GUID: x7iHdOnYo24r2lgYst3-4ffimwvEUnFO
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-03-04_02,2024-03-01_03,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 spamscore=0
- phishscore=0 priorityscore=1501 malwarescore=0 bulkscore=0 adultscore=0
- mlxlogscore=999 suspectscore=0 impostorscore=0 mlxscore=0
- lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2402120000 definitions=main-2403040045
+References: <20240222134140.2367805-1-William.Lyu@windriver.com>
+ <CAMKF1spgXkbYj446g_ujSO41hrR9kUx14SF-iyw1y33-4Y7x3g@mail.gmail.com>
+ <LV3PR11MB8767C8BB2545D95BF7131C3FEE5E2@LV3PR11MB8767.namprd11.prod.outlook.com>
+ <CAMKF1spywovBtYyEUOd5paR-4sSpe-aXLe8tY2jzg13mvSO03g@mail.gmail.com>
+ <550e0375-89cc-4ec0-b16d-5a7882fd3a08@windriver.com> <3d1bd8f4-1e81-478e-96ad-f2956c065a50@windriver.com>
+In-Reply-To: <3d1bd8f4-1e81-478e-96ad-f2956c065a50@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 3 Mar 2024 22:34:26 -0800
+Message-ID: <CAMKF1spUjLnzLuOh=doaMRx++MVEjVoXbz7p4Z5NV=FqbdPAxA@mail.gmail.com>
+Subject: Re: [oe] [meta-filesystems][PATCH] e2tools: Add ptest
+To: "Lyu, William" <William.Lyu@windriver.com>
+Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 04 Mar 2024 06:14:37 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109095
+ <openembedded-devel@lists.openembedded.org>; Mon, 04 Mar 2024 06:34:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109096
 
-From: Mingli Yu <mingli.yu@windriver.com>
+its happening quite consistently now on all kinds of AB workers, see
+recent 4-5 failures on
 
-Remove two backported patches and the ptest output as below.
- # ./run-ptest
-PASS: test-algorithms_cpp11
-PASS: test-allocator_cpp11
-PASS: test-alt-string_cpp11
-PASS: test-assert_macro_cpp11
-PASS: test-binary_formats_cpp11
-PASS: test-bjdata_cpp11
-PASS: test-bson_cpp11
-PASS: test-byte_container_with_subtype_cpp11
-PASS: test-capacity_cpp11
-PASS: test-cbor_cpp11
-PASS: test-class_const_iterator_cpp11
-PASS: test-class_iterator_cpp11
-PASS: test-class_lexer_cpp11
-PASS: test-class_parser_cpp11
-PASS: test-comparison_cpp11
-PASS: test-comparison_cpp20
-PASS: test-comparison_legacy_cpp11
-PASS: test-comparison_legacy_cpp20
-PASS: test-concepts_cpp11
-PASS: test-constructor1_cpp11
-PASS: test-constructor2_cpp11
-PASS: test-convenience_cpp11
-PASS: test-conversions_cpp11
-PASS: test-conversions_cpp17
-PASS: test-custom-base-class_cpp11
-[snip]
+https://autobuilder.yoctoproject.org/typhoon/#/builders/88
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
----
- ...tors-define-missing-rebind-type-3895.patch | 61 -------------------
- ...tors2-use-std-ranges-equals-for-rang.patch | 31 ----------
- ...json_3.11.2.bb => nlohmann-json_3.11.3.bb} |  4 +-
- 3 files changed, 1 insertion(+), 95 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/nlohmann-json/files/0001-custom-allocators-define-missing-rebind-type-3895.patch
- delete mode 100644 meta-oe/recipes-devtools/nlohmann-json/files/0001-tests-unit-iterators2-use-std-ranges-equals-for-rang.patch
- rename meta-oe/recipes-devtools/nlohmann-json/{nlohmann-json_3.11.2.bb => nlohmann-json_3.11.3.bb} (86%)
-
-diff --git a/meta-oe/recipes-devtools/nlohmann-json/files/0001-custom-allocators-define-missing-rebind-type-3895.patch b/meta-oe/recipes-devtools/nlohmann-json/files/0001-custom-allocators-define-missing-rebind-type-3895.patch
-deleted file mode 100644
-index d964586c1..000000000
---- a/meta-oe/recipes-devtools/nlohmann-json/files/0001-custom-allocators-define-missing-rebind-type-3895.patch
-+++ /dev/null
-@@ -1,61 +0,0 @@
--From 6cec5aefc97ad219b6fd5a4132f88f7c8f6800ee Mon Sep 17 00:00:00 2001
--From: Sergei Trofimovich <slyich@gmail.com>
--Date: Wed, 8 Mar 2023 11:31:56 +0000
--Subject: [PATCH] custom allocators: define missing 'rebind' type (#3895)
--
--Upstream-Status: Backport [https://github.com/nlohmann/json/commit/6cec5aefc97ad219b6fd5a4132f88f7c8f6800ee]
--
--Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-----
-- tests/src/unit-allocator.cpp   | 9 +++++++++
-- tests/src/unit-regression2.cpp | 9 +++++++++
-- 2 files changed, 18 insertions(+)
--
--diff --git a/tests/src/unit-allocator.cpp b/tests/src/unit-allocator.cpp
--index 76e3b03f..f2e63552 100644
----- a/tests/src/unit-allocator.cpp
--+++ b/tests/src/unit-allocator.cpp
--@@ -20,11 +20,20 @@ struct bad_allocator : std::allocator<T>
-- {
--     using std::allocator<T>::allocator;
-- 
--+    bad_allocator() = default;
--+    template<class U> bad_allocator(const bad_allocator<U>& /*unused*/) { }
--+
--     template<class... Args>
--     void construct(T* /*unused*/, Args&& ... /*unused*/)
--     {
--         throw std::bad_alloc();
--     }
--+
--+    template <class U>
--+    struct rebind
--+    {
--+        using other = bad_allocator<U>;
--+    };
-- };
-- } // namespace
-- 
--diff --git a/tests/src/unit-regression2.cpp b/tests/src/unit-regression2.cpp
--index 2bb9b32e..dbafb436 100644
----- a/tests/src/unit-regression2.cpp
--+++ b/tests/src/unit-regression2.cpp
--@@ -189,6 +189,15 @@ class my_allocator : public std::allocator<T>
-- {
--   public:
--     using std::allocator<T>::allocator;
--+
--+    my_allocator() = default;
--+    template<class U> my_allocator(const my_allocator<U>& /*unused*/) { }
--+
--+    template <class U>
--+    struct rebind
--+    {
--+        using other = my_allocator<U>;
--+    };
-- };
-- 
-- /////////////////////////////////////////////////////////////////////
---- 
--2.25.1
--
-diff --git a/meta-oe/recipes-devtools/nlohmann-json/files/0001-tests-unit-iterators2-use-std-ranges-equals-for-rang.patch b/meta-oe/recipes-devtools/nlohmann-json/files/0001-tests-unit-iterators2-use-std-ranges-equals-for-rang.patch
-deleted file mode 100644
-index 463912e4b..000000000
---- a/meta-oe/recipes-devtools/nlohmann-json/files/0001-tests-unit-iterators2-use-std-ranges-equals-for-rang.patch
-+++ /dev/null
-@@ -1,31 +0,0 @@
--From 660d0b58565073975d6f5d94365d6cbf150a4cf8 Mon Sep 17 00:00:00 2001
--From: =?UTF-8?q?Arsen=20Arsenovi=C4=87?= <arsen@aarsen.me>
--Date: Sun, 5 Mar 2023 14:11:22 +0100
--Subject: [PATCH] tests/unit-iterators2: use std::ranges::equals for range
-- comparisons (#3950)
--
--Closes https://github.com/nlohmann/json/issues/3927
--
--Upstream-Status: Backport [https://github.com/nlohmann/json/commit/660d0b58565073975d6f5d94365d6cbf150a4cf8]
--
--Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-----
-- tests/src/unit-iterators2.cpp | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/tests/src/unit-iterators2.cpp b/tests/src/unit-iterators2.cpp
--index 27926084..72a5d9dc 100644
----- a/tests/src/unit-iterators2.cpp
--+++ b/tests/src/unit-iterators2.cpp
--@@ -943,7 +943,7 @@ TEST_CASE("iterators 2")
--                 json j_expected{5, 4, 3, 2, 1};
-- 
--                 auto reversed = j | std::views::reverse;
---                CHECK(reversed == j_expected);
--+                CHECK(std::ranges::equal(reversed, j_expected));
--             }
-- 
--             SECTION("transform")
---- 
--2.25.1
--
-diff --git a/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.11.2.bb b/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.11.3.bb
-similarity index 86%
-rename from meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.11.2.bb
-rename to meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.11.3.bb
-index 350932388..194e80546 100644
---- a/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.11.2.bb
-+++ b/meta-oe/recipes-devtools/nlohmann-json/nlohmann-json_3.11.3.bb
-@@ -8,12 +8,10 @@ CVE_PRODUCT = "json-for-modern-cpp"
- 
- SRC_URI = "git://github.com/nlohmann/json.git;branch=develop;protocol=https \
-            git://github.com/nlohmann/json_test_data.git;destsuffix=git/json_test_data;name=json-test-data;branch=master;protocol=https \
--           file://0001-custom-allocators-define-missing-rebind-type-3895.patch \
--           file://0001-tests-unit-iterators2-use-std-ranges-equals-for-rang.patch \
-            file://run-ptest \
- "
- 
--SRCREV = "bc889afb4c5bf1c0d8ee29ef35eaaf4c8bef8a5d"
-+SRCREV = "9cca280a4d0ccf0c08f47a99aa71d1b0e52f8d03"
- SRCREV_json-test-data = "a1375cea09d27cc1c4cadb8d00470375b421ac37"
- 
- SRCREV_FORMAT .= "_json-test-data"
--- 
-2.25.1
-
+On Sun, Mar 3, 2024 at 10:01=E2=80=AFPM Lyu, William <William.Lyu@windriver=
+.com> wrote:
+>
+> On 3/4/2024 12:41 AM, Lyu, William wrote:
+> > On 3/1/2024 4:52 PM, Khem Raj wrote:
+> >> CAUTION: This email comes from a non Wind River email account!
+> >> Do not click links or open attachments unless you recognize the sender
+> >> and know the content is safe.
+> >>
+> >> On Fri, Mar 1, 2024 at 12:20=E2=80=AFPM Lyu, William
+> >> <William.Lyu@windriver.com> wrote:
+> >>>
+> >>>> I am running into this error on some builders on AB
+> >>>>
+> >>>> stdio: ERROR: Task
+> >>>> (/home/pokybuild/yocto-worker/meta-oe/build/meta/recipes-support/lib=
+exif/libexif_0.6.24.bb:do_package_qa)
+> >>>> failed with exit code '1'
+> >>>> stdio: ERROR: e2tools-0.1.0+git-r0 do_package_qa: QA Issue:
+> >>>> /usr/lib/e2tools/ptest/git/.git/hooks/update.sample contained in
+> >>>> package e2tools-ptest requires /usr/bin/sh, but no providers found i=
+n
+> >>>> RDEPENDS:e2tools-ptest? [file-rdeps]
+> >>>
+> >>> File "update.sample" is from ".git" directory. I do not actually need
+> >>> this
+> >>> file or anything from ".git" directory. I only need the source tree
+> >>> for ptest
+> >>> to run.
+> >>>
+> >>> However, I am a bit confused about this QA issue because:
+> >>> -   I do not see any file that has "#!/usr/bin/sh". Even
+> >>> "update.sample" has
+> >>>      "#!/bin/sh" as the first line. There are files in the source
+> >>> tree (not
+> >>>      under ".git" directory) that have "#!/bin/sh" as the first line.
+> >>> -   "/bin/sh" is referring to the default POSIX shell, and the "bash"
+> >>> in the
+> >>>      RDEPENDS:e2tools-ptest should already fulfill this runtime
+> >>> dependency,
+> >>> -   I am not yet able to reproduce this issue using poky. I assume
+> >>> this is
+> >>>      because the QA Issue checker "file-rdeps" in poky do not check
+> >>> "sh" by
+> >>>      default (excerpt taken from "meta/classes-global/insane.bbclass"=
+):
+> >>>
+> >>>      if "file-rdeps" not in skip:
+> >>>          ignored_file_rdeps =3D set(['/bin/sh', '/usr/bin/env',
+> >>> 'rtld(GNU_HASH)'])
+> >>>          if bb.utils.contains('DISTRO_FEATURES', 'usrmerge', True,
+> >>> False, d):
+> >>>              ignored_file_rdeps |=3D set(['/usr/bin/sh'])
+> >>>          if bb.data.inherits_class('nativesdk', d):
+> >>>              ignored_file_rdeps |=3D set(['/bin/bash', '/usr/bin/perl=
+',
+> >>> 'perl'])
+> >>>              if bb.utils.contains('DISTRO_FEATURES', 'usrmerge',
+> >>> True, False, d):
+> >>>                  ignored_file_rdeps |=3D set(['/usr/bin/bash'])
+> >>>
+> >>> William
+> >>
+> >> what distro features do you have enabled ? perhaps try it with and
+> >> without usermerge in DISTRO_FEATURES
+> >> and rebuild this package after doing cleansstate to ensure its being
+> >> rebuilt in both cases.
+> >
+> > I have not been able to reproduce this "QA Issue" error yet. Is it
+> > possible that the [file-rdeps] checker on the autobuilder (AB) where yo=
+u
+> > saw this issue is defined differently than the default poky? The
+> > following are the details regarding my previous and new builds.
+> >
+> > For my previous builds, there are no specified DISTRO_FEATURES. In
+> > conf/local.conf, I only added the following line. The build command I
+> > used was "bitbake core-image-minimal".
+> >
+> > IMAGE_INSTALL:append =3D " libexif e2tools e2tools-ptest"
+> >
+> > I tried a new build with the following line added to conf/local.conf.
+> >
+> > DISTRO_FEATURES:append =3D " usermerge"
+> >
+> > I also did "bitbake -c cleansstate e2tools" and "bitbake -c cleansstate
+> > core-image-minimal" before each build.
+> >
+> > William
+>
+> Just in case the [file-rdeps] checker is somehow not working, I removed
+> "bash" from "RDEPENDS:${PN}-ptest". I indeed get the following error
+> message as expected when building "bitbake core-image-minimal":
+>
+> ERROR: QA Issue: /usr/lib/e2tools/ptest/build/config.status contained in
+> package e2tools-ptest requires /bin/bash, but no providers found in
+> RDEPENDS:e2tools-ptest? [file-rdeps]
+>
+> William
+>
+> >
+> >>
+> >>>
+> >>>> stdio: ERROR: e2tools-0.1.0+git-r0 do_package_qa: Fatal QA errors we=
+re
+> >>>> found, failing task.
+> >>>> stdio: ERROR: Logfile of failure stored in:
+> >>>> /home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-p=
+oky-linux/e2tools/0.1.0+git/temp/log.do_package_qa.3114961
+> >>>>
+> >>>> On Thu, Feb 22, 2024 at 5:56=E2=80=AFAM Lyu, William via
+> >>>> lists.openembedded.org
+> >>>> <william.lyu=3Dwindriver.com@lists.openembedded.org> wrote:
+> >>>>>
+> >>>>> From: William Lyu <William.Lyu@windriver.com>
+> >>>>>
+> >>>>> Signed-off-by: William Lyu <William.Lyu@windriver.com>
+> >>>>> ---
+> >>>>>   .../recipes-utils/e2tools/e2tools_git.bb      | 51
+> >>>>> ++++++++++++++++++-
+> >>>>>   .../recipes-utils/e2tools/files/run-ptest     |  5 ++
+> >>>>>   2 files changed, 54 insertions(+), 2 deletions(-)
+> >>>>>   create mode 100644
+> >>>>> meta-filesystems/recipes-utils/e2tools/files/run-ptest
+> >>>>>
+> >>>>> diff --git a/meta-filesystems/recipes-utils/e2tools/e2tools_git.bb
+> >>>>> b/meta-filesystems/recipes-utils/e2tools/e2tools_git.bb
+> >>>>> index caf0025c8..a80b6f598 100644
+> >>>>> --- a/meta-filesystems/recipes-utils/e2tools/e2tools_git.bb
+> >>>>> +++ b/meta-filesystems/recipes-utils/e2tools/e2tools_git.bb
+> >>>>> @@ -9,17 +9,64 @@ SECTION =3D "base"
+> >>>>>   LICENSE =3D "GPL-2.0-only"
+> >>>>>   LIC_FILES_CHKSUM =3D
+> >>>>> "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4263"
+> >>>>>
+> >>>>> -DEPENDS +=3D "e2fsprogs"
+> >>>>> +DEPENDS +=3D "coreutils e2fsprogs"
+> >>>>>
+> >>>>>   PV =3D "0.1.0+git"
+> >>>>>
+> >>>>>   SRC_URI =3D " \
+> >>>>>
+> >>>>> git://github.com/e2tools/e2tools;protocol=3Dhttps;branch=3Dmaster \
+> >>>>> +           file://run-ptest \
+> >>>>>   "
+> >>>>> +
+> >>>>>   SRCREV =3D "fd092754a6b65c3a769f74f888668c066f09c36d"
+> >>>>>
+> >>>>>   S =3D "${WORKDIR}/git"
+> >>>>>
+> >>>>> -inherit autotools pkgconfig
+> >>>>> +inherit autotools pkgconfig ptest
+> >>>>> +
+> >>>>> +do_configure:prepend() {
+> >>>>> +    git -C "${WORKDIR}/git" reset --hard HEAD
+> >>>>> +
+> >>>>> +    # To install ptest for this package, special configuration
+> >>>>> needs to be
+> >>>>> +    # done before do_configure(). So, do_configure_ptest() which
+> >>>>> is scheduled
+> >>>>> +    # after do_configure() cannot be used.
+> >>>>> +
+> >>>>> +    # We only do special configuration if we are installing ptest
+> >>>>> for this
+> >>>>> +    # package.
+> >>>>> +    if [ "${@d.getVar('PTEST_ENABLED')}" -eq "1" ]; then
+> >>>>> +        # Since we guarantee run-time dependency when installing
+> >>>>> the ptest for
+> >>>>> +        # this package, we do not need the check macros under
+> >>>>> section "checks
+> >>>>> +        # for programs" in "configure.ac". Plus, these check
+> >>>>> macros set the
+> >>>>> +        # ouput variables to incorrect values as these checks are
+> >>>>> performed on
+> >>>>> +        # the host environment. Still, we need these variables
+> >>>>> outputted from
+> >>>>> +        # these check macros. So, we insert the following lines to
+> >>>>> manually
+> >>>>> +        # set these output variables to the correct value in
+> >>>>> "configure.ac".
+> >>>>> +
+> >>>>> +        # Note that HAVE_DD_COMMAND and HAVE_MKE2FS_COMMAND are
+> >>>>> only ever used
+> >>>>> +        # in tests/Makefile-files which determines whether to
+> >>>>> include the test
+> >>>>> +        # cases. As for output variables CHMOD, DD, and MKE2FS,
+> >>>>> they only
+> >>>>> +        # point to the programs which test cases need to run.
+> >>>>> Since these
+> >>>>> +        # commands are guaranteed to be present due to RDEPENDS
+> >>>>> and are
+> >>>>> +        # guaranteed to be accessible under PATH environment
+> >>>>> variable on the
+> >>>>> +        # target, we only need to specify the name of these progra=
+ms.
+> >>>>> +
+> >>>>> +        perl -i -0777 -pe 's/(^dnl\s*=3D+\s*^dnl\s*Checks for
+> >>>>> compiler flags\s*^dnl\s*=3D+)/
+> >>>>> +AC_SUBST([CHMOD], 'chmod')
+> >>>>> +AC_SUBST([DD], 'dd')
+> >>>>> +AC_SUBST([MKE2FS], 'mke2fs')
+> >>>>> +AM_CONDITIONAL([HAVE_DD_COMMAND], [true])
+> >>>>> +AM_CONDITIONAL([HAVE_MKE2FS_COMMAND], [true])
+> >>>>> +\1/ms' "${WORKDIR}/git/configure.ac"
+> >>>>> +    fi
+> >>>>> +}
+> >>>>> +
+> >>>>> +do_install_ptest() {
+> >>>>> +    rm -rf "${D}${PTEST_PATH}/*"
+> >>>>> +    cp -r ../build "${D}${PTEST_PATH}"
+> >>>>> +    cp -r "${S}/build-aux" "${D}${PTEST_PATH}/build"
+> >>>>> +    cp -r "${S}" "${D}${PTEST_PATH}"
+> >>>>> +}
+> >>>>> +
+> >>>>> +RDEPENDS:${PN}-ptest +=3D "bash coreutils e2fsprogs e2tools gawk
+> >>>>> make perl"
+> >>>>>
+> >>>>>   BBCLASSEXTEND =3D "native"
+> >>>>> diff --git a/meta-filesystems/recipes-utils/e2tools/files/run-ptest
+> >>>>> b/meta-filesystems/recipes-utils/e2tools/files/run-ptest
+> >>>>> new file mode 100644
+> >>>>> index 000000000..3d4dd9cf3
+> >>>>> --- /dev/null
+> >>>>> +++ b/meta-filesystems/recipes-utils/e2tools/files/run-ptest
+> >>>>> @@ -0,0 +1,5 @@
+> >>>>> +#!/bin/sh
+> >>>>> +
+> >>>>> +set -e
+> >>>>> +
+> >>>>> +make -C build check
+> >>>>> --
+> >>>>> 2.43.0
+> >>>>>
+> >>>>>
+> >>>>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >>>>> Links: You receive all messages sent to this group.
+> >>>>> View/Reply Online (#108987):
+> >>>>> https://lists.openembedded.org/g/openembedded-devel/message/108987
+> >>>>> Mute This Topic: https://lists.openembedded.org/mt/104508347/199791=
+4
+> >>>>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> >>>>> Unsubscribe:
+> >>>>> https://lists.openembedded.org/g/openembedded-devel/unsub
+> >>>>> [raj.khem@gmail.com]
+> >>>>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 
