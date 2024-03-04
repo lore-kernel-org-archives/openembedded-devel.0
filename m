@@ -1,191 +1,229 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1BE79C48BF6
-	for <webhook@archiver.kernel.org>; Sun,  3 Mar 2024 21:55:35 +0000 (UTC)
-Received: from mail-oo1-f42.google.com (mail-oo1-f42.google.com [209.85.161.42])
- by mx.groups.io with SMTP id smtpd.web11.84022.1709502927465605022
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3DD88C48BF6
+	for <webhook@archiver.kernel.org>; Mon,  4 Mar 2024 05:40:07 +0000 (UTC)
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
+ by mx.groups.io with SMTP id smtpd.web11.92067.1709530806213263109
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 03 Mar 2024 13:55:27 -0800
+ Sun, 03 Mar 2024 21:40:06 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=kg1VeIKa;
- spf=pass (domain: gmail.com, ip: 209.85.161.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f42.google.com with SMTP id 006d021491bc7-5a0e5f083f1so2251027eaf.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 03 Mar 2024 13:55:27 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=mXRyv+QN;
+ spf=pass (domain: gmail.com, ip: 209.85.208.51, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-564fd9eea75so5835063a12.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 03 Mar 2024 21:40:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1709502926; x=1710107726; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=mK2KVd8wOWHltQ9O7R/8lz0GKJhAZnHRKRw5LUpXBZY=;
-        b=kg1VeIKamvyrH9p9tIM7VbHxk94i0qHo6syf97M1+OgwpVCyOfbo4dfaioxUFKDjTC
-         eMlimLQQiQjg4Lxc1OaTUa6LyfXZ1fDIHGAgpkEqM9Tz7ccz7QTXnYeRpnL/L2Wd/izN
-         lxUkPKJ69jT4Ht4rSBiMJ1S7dFLv8N0o8p97hnWUlhDsQ5mECE3SOJsGVJzjLTerbj+n
-         TP2hoY6uoXMY9BR1DyiLJkOxLYFWV4+A1j1/6shFkvoJMlQyOQybas/h4yr3tRA9BCkp
-         I9oPzDifttW2Q9N3oahOq/cWyDhavPlzeKzq/1bIamyc/Jj2TR0kVUtAk7f/tqHg9l2L
-         5EVw==
+        d=gmail.com; s=20230601; t=1709530804; x=1710135604; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=p17jplMLZ3udslrM2lTFXJSaRfGVUISCORC424iloDI=;
+        b=mXRyv+QNtcFvUEhh2kVsHI/sNAXUFOEy2USjHJsrhZg/WSUifwx7r++JiBehY9m6SM
+         VMHYj9V/yy3Cs+EDcVStL9/b1ROHuqNhlxMyCdVh3BD8PJ6AiTs/0GLxZIEX35+pkgWe
+         sWQw2dpQVaKnR7r85ufu2GCNrPwmWV6S+iyb+tMvIMBMUOijUzuHAyU9+lGUkCBqJCfm
+         R74zzZXpu92LABB19htUkNpDfGH61VMsglbeqUx5T/4ohFiMk1zhkuNV+Lh/QodGE+QB
+         brzXncI1jkVv6OQcCLUzafO7/vRWeXY5dIju6WuaSR1Bgjr+05gxgqMQlNXCGn5zSz/X
+         TaFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1709502926; x=1710107726;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=mK2KVd8wOWHltQ9O7R/8lz0GKJhAZnHRKRw5LUpXBZY=;
-        b=XRaF5tykbvd+hDMKhtKckJZKoKKJWrb629ti+V1GJU1lCcaT2WmuakuditqVxDp/fB
-         OP70xdeWzARBMpP/74t3vQqS4zF6TfOAc4f1ZVJuRUjXLkNjD+BljZsTEQU83CLtd6d9
-         bo0tRSNtPOKpRWTopuJ+/zey9y5ytTn0Oga1MSCC9a9cJ6iJCRHl2MexlTfQlUMMEFEe
-         NU0DrmQlFoyt9CpMHYqxAbn0yU9tI6VfCbHKQuDey4GL4arfpRJwJMgq1MceQXSmgtf/
-         L7wPpNu/Y76CRfdC/R4uwhmA2pphWRXEY0ZqfeNpVphiy6CyG50xkA5yx1MFmU1wQ66R
-         Yfxg==
-X-Gm-Message-State: AOJu0YxCGw5G1lJMvRvkoCnduY5qxmqXShUNgUnqiQ4g9H3QWBJOrm1d
-	WAKQJNRADPO21sv0aGTKSZPT9u9Ty7j3KsWxfF7I07oOBrHhhVt/8ekhm8A1GiF8TgEPiy5l7s3
-	LPXUw16Ch7N9vJw5yXqPcBtAQRD0=
-X-Google-Smtp-Source: AGHT+IH8RUtl7/t+yOx9ITctg1cpSiFbQ4GHIumbCkY8FoWv+UIf/o7QMnPForaxnevmSS0h9Cd9DNpaOgJrQyt7zZw=
-X-Received: by 2002:a05:6871:80e:b0:21e:6d93:7bca with SMTP id
- q14-20020a056871080e00b0021e6d937bcamr8893761oap.59.1709502926557; Sun, 03
- Mar 2024 13:55:26 -0800 (PST)
+        d=1e100.net; s=20230601; t=1709530804; x=1710135604;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=p17jplMLZ3udslrM2lTFXJSaRfGVUISCORC424iloDI=;
+        b=gDLLjMg2BXs71N29ZcZJJg+7BgDmEg+5K3SzZKCahzAWYl4/B9wk3WIt2KjZRRqBv3
+         4djFcsknf/2gTo7ooi1sdPYnTHKYfG4t8st6o0DQc+1M+WDTJljEdThHiiuiCeddh9/O
+         lVZkxURMpDXZYm/oVMKXCdAwb6QCjOrWmKPkjmGdIzxFdSAwPcUTdAWSimf2FaHwuowD
+         tUh636s4fRuhKHpBMpANFfgv5DvXWxo6cad6bPcxsLJFYeDfYStkOiUBsrXixNysl7CJ
+         9sBX+ePLUmPPX/I9jrMDaCYPWdFILXLMOLehFV6FVEhfOiWUWKDxZwhmyl9CgCoVFvsT
+         kgkQ==
+X-Gm-Message-State: AOJu0Yzx+sz+5tUxyOrXJPbS0bLLG1BthC+v40S4N4469j1BAfZxgguw
+	PhZYEpC4JyLeuvw/9juJCzQlQUoGjqVpmqcKTp6pn+Rw0zH9kq7YMKz6QFj1RAM=
+X-Google-Smtp-Source: AGHT+IF1Ku2n02RvvQnIBshkexBF11Md6l1B1TAZnJKSm2DcE5+mrckq6eCmwa/8xIYAxc/g+Dsj9A==
+X-Received: by 2002:a05:6402:510d:b0:567:1b50:559c with SMTP id m13-20020a056402510d00b005671b50559cmr3239803edd.39.1709530803781;
+        Sun, 03 Mar 2024 21:40:03 -0800 (PST)
+Received: from localhost.localdomain ([176.33.65.159])
+        by smtp.gmail.com with ESMTPSA id n22-20020a05640205d600b00566d6950d14sm3077890edx.92.2024.03.03.21.40.02
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 03 Mar 2024 21:40:03 -0800 (PST)
+From: alperak <alperyasinak1@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: alperak <alperyasinak1@gmail.com>
+Subject: [meta-python][PATCH] python3-netaddr: upgrade 0.10.1 -> 1.2.1 and add ptest
+Date: Mon,  4 Mar 2024 08:39:39 +0300
+Message-Id: <20240304053939.1021959-1-alperyasinak1@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <6155dc8a-5054-4273-84b8-9ac7c5604e8b@gmail.com>
-In-Reply-To: <6155dc8a-5054-4273-84b8-9ac7c5604e8b@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 3 Mar 2024 13:55:00 -0800
-Message-ID: <CAMKF1srxe7W0ZOTLN57QR+6oJf9UCmjtXf2qfMg38CyCZT0-3Q@mail.gmail.com>
-Subject: Re: dunfell merge request: March 3rd
-To: akuster808 <akuster808@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 03 Mar 2024 21:55:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109093
+ <openembedded-devel@lists.openembedded.org>; Mon, 04 Mar 2024 05:40:07 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109094
 
-merged. thanks Armin.
+Ptest result:
 
-On Sun, Mar 3, 2024 at 1:41=E2=80=AFPM akuster808 <akuster808@gmail.com> wr=
-ote:
->
-> The following changes since commit daa4619fe3fbf8c28f342c4a7163a84a330f76=
-53:
->
->    postgresql: Update to 12.17 (2024-01-16 07:31:14 -0500)
->
-> are available in the Git repository at:
->
->    https://git.openembedded.org/meta-openembedded dunfell-next
->
-> for you to fetch changes up to c74ebbddfd9dbe02d3f7422016324451eb218e1e:
->
->    python3-pillow: Fix for CVE-2023-50447 (2024-03-03 16:38:27 -0500)
->
-> ----------------------------------------------------------------
-> Ashish Sharma (1):
->        wireshark: Backport fix for CVE-2023-1992
->
-> Changqing Li (1):
->        linuxptp: fix do_compile error
->
-> Hitendra Prajapati (2):
->        apache2: upgrade 2.4.57 -> 2.4.58
->        wireshark: fix CVE-2024-0208 GVCP dissector crash
->
-> Hugo SIMELIERE (1):
->        libuv: fix CVE-2024-24806
->
-> Khem Raj (1):
->        gdm: Add polkit to required distro features
->
-> Vijay Anusuri (4):
->        squid: backport Debian patch for CVE-2023-46728 and CVE-2023-46846
->        squid: Fix for CVE-2023-49285 and CVE-2023-49286
->        squid: Backport fix for CVE-2023-50269
->        python3-pillow: Fix for CVE-2023-50447
->
-> Wang Mingyu (1):
->        openwsman: Change download branch from master to main.
->
-> virendra thakur (1):
->        nodejs: Set CVE_PRODUCT to "node.js"
->
->   meta-gnome/recipes-gnome/gdm/gdm_3.34.1.bb |    2 +-
->   meta-networking/recipes-daemons/squid/files/CVE-2023-46728.patch |
-> 608 ++++++++++++++++++++
->   meta-networking/recipes-daemons/squid/files/CVE-2023-46846-pre1.patch
-> | 1154 ++++++++++++++++++++++++++++++++++++++
->   meta-networking/recipes-daemons/squid/files/CVE-2023-46846.patch |
-> 169 ++++++
->   meta-networking/recipes-daemons/squid/files/CVE-2023-49285.patch |   35=
- ++
->   meta-networking/recipes-daemons/squid/files/CVE-2023-49286.patch |
-> 87 +++
->   meta-networking/recipes-daemons/squid/files/CVE-2023-50269.patch |   62=
- ++
->   meta-networking/recipes-daemons/squid/squid_4.9.bb |    6 +
->   meta-networking/recipes-support/wireshark/files/CVE-2023-1992.patch
-> |   62 ++
->   meta-networking/recipes-support/wireshark/files/CVE-2024-0208.patch
-> |   42 ++
->   meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb |    2 +
->   meta-oe/recipes-connectivity/libuv/libuv/CVE-2024-24806-1.patch |   32 =
-++
->   meta-oe/recipes-connectivity/libuv/libuv/CVE-2024-24806-2.patch |   30 =
+Testsuite summary
+TOTAL: 340
+PASS: 339
+SKIP: 1
+XFAIL: 0
+FAIL: 0
+XPASS: 0
+ERROR: 0
+DURATION: 28
+
+* Tested on qemux86_64 and qemuarm64
+* Add ptest into PTESTS_FAST_META_PYTHON items
+==============
+
+Switch to the python_setuptools_build_meta backend
+
+License-Update: License check file changed from LICENSE to LICENSE.rst
+
+Changelog:
+
+Release: 1.2.1
+===============
+Fixed:
+
+    Fix bad version 1.2.0 upload to PyPI – now yanked. No changes to the package.
+
+Release: 1.2.0
+===============
+Added:
+
+    Add CLI tool subcommand to display Network information.
+
+Changed:
+
+    Support running Interactive shell without IPython installed.
+
+Fixed:
+
+    Explicitly raise TypeError is a non-string value is passed to valid_ipv4() or valid_ipv6().
+
+Release: 1.1.0
+===============
+Added:
+
+    Add the required Python version to the package metadata (GH #365).
+    Add expand_partial_ipv4_address() to the public API.
+
+Fixed:
+
+    Fix IPNetwork(...) in IPRange(...) false negatives (GH #157).
+    Fix a few IPNetwork slicing edge cases (GH #214).
+    Fix support for partial IP addresses accidentally left in IPNetwork in 1.0.0.
+    When I removed the implicit_prefix switch I missed the fact that there was some partial IPv4 address expansion triggered unconditionally.
+    If you need the old behavior use expand_partial_ipv4_address().
+    Related GH issue: #110.
+    Fixed an incorrect license classifier in the package metadata.
+
+Release: 1.0.0
+===============
+Removed:
+
+    Drop support for Python versions lower than 3.7.
+    Remove the flag shorthands: N, P and Z. Use NOHOST, INET_PTON and ZEROFILL instead.
+    Remove abbreviated CIDR format support in IPNetwork (implicit_prefix=True), use cidr_abbrev_to_verbose() if you need this behavior.
+    Remove the IPAddress.is_private method.
+    There are more precise replacements for subset of the addresses that used to handled by is_private:
+        IPAddress.is_link_local()
+        IPAddress.is_ipv4_private_use()
+        IPAddress.is_ipv6_unique_local()
+        IPAddress.is_global()
+    The following address blocks used to be handled by is_private have no dedicated convenience methods and you’ll have to handle them manually or request a method addition:
+        100.64.0.0/10 – Shared Address Space
+        192.0.0.0/24 – IETF Protocol Assignments (watch out – there are exceptions in there)
+        198.18.0.0/15 – Benchmarking
+        239.0.0.0-239.255.255.255 – 240.0.0.0/4 is Reserved, 239.0.0.0/8 – unclear
+
+Changed:
+
+    Stop accepting leading zeros when parsing IPv4 addresses in INET_PTON mode (it’s been allowed on some platforms).
+    If you need to allow and discard leading zeros use the ZEROFILL flag.
+    This change will affect implicit conversions from str in all relevant contexts. If you need to control the IPv4 parsing mode construct IPAddress objects explicitly.
+    Stop parsing IPv4 addresses permissively (inet_aton()-like) by default.
+    INET_PTON is the default mode.
+    If you need to be permissive and parse using inet_aton() semantics use the INET_ATON flag.
+    This change will affect implicit conversions from str in all relevant contexts. If you need to control the IPv4 parsing mode construct IPAddress objects explicitly.
+    Apply the two changes above to valid_ipv4() as well.
+    Update the address databases to the 2024-02-10 versions.
+
+Fixed:
+
+    Return False instead of raising AddrFormatError when an empty string is passed to valid_ipv4() or valid_ipv6().
+    Fix handling of dialect provided to EUI during copy-construction.
+
+Signed-off-by: alperak <alperyasinak1@gmail.com>
+---
+ .../ptest-packagelists-meta-python.inc        |  1 +
+ .../python/python3-netaddr/run-ptest          |  3 +++
+ ...ddr_0.10.1.bb => python3-netaddr_1.2.1.bb} | 23 +++++++++++++------
+ 3 files changed, 20 insertions(+), 7 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-netaddr/run-ptest
+ rename meta-python/recipes-devtools/python/{python3-netaddr_0.10.1.bb => python3-netaddr_1.2.1.bb} (16%)
+
+diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+index b6e8d865a..53934e656 100644
+--- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
++++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+@@ -30,6 +30,7 @@ PTESTS_FAST_META_PYTHON = "\
+     python3-jsmin \
+     python3-msgpack \
+     python3-multidict \
++    python3-netaddr \
+     python3-ordered-set \
+     python3-parse \
+     python3-parse-type \
+diff --git a/meta-python/recipes-devtools/python/python3-netaddr/run-ptest b/meta-python/recipes-devtools/python/python3-netaddr/run-ptest
+new file mode 100644
+index 000000000..8d2017d39
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-netaddr/run-ptest
+@@ -0,0 +1,3 @@
++#!/bin/sh
 +
->   meta-oe/recipes-connectivity/libuv/libuv_1.36.0.bb |    4 +-
->   .../linuxptp/0001-makefile-use-conditional-assignment-for-KBUILD_OUTPU.=
-patch |   42 ++
->   meta-oe/recipes-connectivity/linuxptp/linuxptp_2.0.1.bb |    1 +
->   meta-oe/recipes-devtools/nodejs/nodejs_12.22.12.bb |    2 +
->   meta-oe/recipes-devtools/nodejs/nodejs_14.18.1.bb |    2 +
->   meta-oe/recipes-extended/openwsman/openwsman_2.6.11.bb |    2 +-
->   meta-python/recipes-devtools/python/python3-pillow/CVE-2023-50447-1.pat=
-ch |   31 +
->   meta-python/recipes-devtools/python/python3-pillow/CVE-2023-50447-2.pat=
-ch |   54 ++
->   meta-python/recipes-devtools/python/python3-pillow/CVE-2023-50447-3.pat=
-ch |   44 ++
->   meta-python/recipes-devtools/python/python3-pillow_6.2.1.bb |    3 +
->   .../apache2/0011-modules-mappers-config9.m4-Add-server-directory-to-i.p=
-atch |   31 -
->   meta-webserver/recipes-httpd/apache2/apache2/CVE-2023-45802.patch |
-> 141 -----
->   meta-webserver/recipes-httpd/apache2/{apache2_2.4.57.bb =3D>
-> apache2_2.4.58.bb}      |    4 +-
->   26 files changed, 2474 insertions(+), 178 deletions(-)
->   create mode 100644
-> meta-networking/recipes-daemons/squid/files/CVE-2023-46728.patch
->   create mode 100644
-> meta-networking/recipes-daemons/squid/files/CVE-2023-46846-pre1.patch
->   create mode 100644
-> meta-networking/recipes-daemons/squid/files/CVE-2023-46846.patch
->   create mode 100644
-> meta-networking/recipes-daemons/squid/files/CVE-2023-49285.patch
->   create mode 100644
-> meta-networking/recipes-daemons/squid/files/CVE-2023-49286.patch
->   create mode 100644
-> meta-networking/recipes-daemons/squid/files/CVE-2023-50269.patch
->   create mode 100644
-> meta-networking/recipes-support/wireshark/files/CVE-2023-1992.patch
->   create mode 100644
-> meta-networking/recipes-support/wireshark/files/CVE-2024-0208.patch
->   create mode 100644
-> meta-oe/recipes-connectivity/libuv/libuv/CVE-2024-24806-1.patch
->   create mode 100644
-> meta-oe/recipes-connectivity/libuv/libuv/CVE-2024-24806-2.patch
->   create mode 100644
-> meta-oe/recipes-connectivity/linuxptp/linuxptp/0001-makefile-use-conditio=
-nal-assignment-for-KBUILD_OUTPU.patch
->   create mode 100644
-> meta-python/recipes-devtools/python/python3-pillow/CVE-2023-50447-1.patch
->   create mode 100644
-> meta-python/recipes-devtools/python/python3-pillow/CVE-2023-50447-2.patch
->   create mode 100644
-> meta-python/recipes-devtools/python/python3-pillow/CVE-2023-50447-3.patch
->   delete mode 100644
-> meta-webserver/recipes-httpd/apache2/apache2/0011-modules-mappers-config9=
-.m4-Add-server-directory-to-i.patch
->   delete mode 100644
-> meta-webserver/recipes-httpd/apache2/apache2/CVE-2023-45802.patch
->   rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.57.bb =3D>
-> apache2_2.4.58.bb} (97%)
++pytest --automake
+diff --git a/meta-python/recipes-devtools/python/python3-netaddr_0.10.1.bb b/meta-python/recipes-devtools/python/python3-netaddr_1.2.1.bb
+similarity index 16%
+rename from meta-python/recipes-devtools/python/python3-netaddr_0.10.1.bb
+rename to meta-python/recipes-devtools/python/python3-netaddr_1.2.1.bb
+index ce16cc178..082e7c502 100644
+--- a/meta-python/recipes-devtools/python/python3-netaddr_0.10.1.bb
++++ b/meta-python/recipes-devtools/python/python3-netaddr_1.2.1.bb
+@@ -1,13 +1,22 @@
+ SUMMARY = "A network address manipulation library for Python."
+ LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=e6345d695ffe3776f68a56fe7962db44"
++LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=8afa43eca873b71d5d85dd0be1f707fa"
+ 
+-SRC_URI[sha256sum] = "f4da4222ca8c3f43c8e18a8263e5426c750a3a837fdfeccf74c68d0408eaa3bf"
++SRC_URI[sha256sum] = "6eb8fedf0412c6d294d06885c110de945cf4d22d2b510d0404f4e06950857987"
+ 
+-inherit pypi setuptools3
++inherit pypi python_setuptools_build_meta ptest
+ 
+-RDEPENDS:${PN} += " \
+-    python3-io \
+-    python3-pprint \
+-    python3-xml \
++SRC_URI += " \
++        file://run-ptest \
+ "
++
++RDEPENDS:${PN}-ptest += " \
++    python3-pytest \
++    python3-unittest-automake-output \
++"
++
++do_install_ptest() {
++    install -d ${D}${PTEST_PATH}/tests
++    cp -rf ${S}/netaddr/tests/* ${D}${PTEST_PATH}/tests/
++}
++
+-- 
+2.25.1
+
 
