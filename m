@@ -1,94 +1,88 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 599E9C54E41
-	for <webhook@archiver.kernel.org>; Tue,  5 Mar 2024 15:28:25 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
- by mx.groups.io with SMTP id smtpd.web11.26303.1709652495050209939
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 67D65C54E41
+	for <webhook@archiver.kernel.org>; Tue,  5 Mar 2024 15:52:15 +0000 (UTC)
+Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com [209.85.208.44])
+ by mx.groups.io with SMTP id smtpd.web11.27090.1709653925043411225
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Mar 2024 07:28:15 -0800
+ Tue, 05 Mar 2024 07:52:05 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=0q2z3gsd;
- spf=pass (domain: smile.fr, ip: 209.85.128.44, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-412ecc1064cso6450465e9.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Mar 2024 07:28:14 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=VS3LS14b;
+ spf=pass (domain: gmail.com, ip: 209.85.208.44, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-ed1-f44.google.com with SMTP id 4fb4d7f45d1cf-563b7b3e3ecso8797529a12.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Mar 2024 07:52:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1709652492; x=1710257292; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1709653923; x=1710258723; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=MctOoIBJ4EJUSM63PM914+RdyOPtyB9mWo9oOcGiDe0=;
-        b=0q2z3gsdz6oDccbMrIe3cNOflybAtP77LiUBxWjnO6i9SEXffVK4JAyCL0Rvk4o63N
-         O2ZGiD9CjW3gVDrmpeRx/3KKzF5JxN+y6Tv6dZSUPCFo+H0Bc6/o4aETFAsJEYAiOP72
-         ahh0zUdr4RxQVbpYTNbj/lF7PVMgICLhyy5hY/1m49Ny4Mcy6XQHE83peyx62WGVzQH6
-         eJyp29FHNd6VO/RtN3BrynpkYLSv+HjU6i2du9nuAdYgmxRK/bFeNdCi71f6iD6F2to2
-         kZlncA2fUSHWn3viabYx0TjUT+nv+VnB1LiTbuAD7miGfLO7sLyKFVCiyB3E+MZk52vM
-         jQeg==
+        bh=sIC0yBq1PW3Zh4W5Z7nOHAc0MLNaz0fQWip35xXrC54=;
+        b=VS3LS14bKoclZkHnPqpgkICx/XKbfejkd/pGivXg0Xojvg2YlOYaJe0r5vbPFPWAQv
+         McuZGjLRBz6THDHHMArNfHhnAx6Dd5xK/fidFtkK7BxowIyhwhujzVUOJG4cCswaCSen
+         4XUmv8fsrjieu2cTbzHuNNA3ogWLjBr7jj4KXO2A+44X5HXa3SdZB1vlm+w+tFr3J0DB
+         Gi8lZOK2j5yqeO57tprGFI/E50uHnwBAFcj4eX2/xHrnZf70Kai99sWuZKT3EHX+lhOh
+         XrYYmpav6KWflA2ICPHRpMmqxmSRKSsznecxcIKda8bDuGvw7/v1vObBsT1KwanP/k5o
+         cCeQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1709652492; x=1710257292;
+        d=1e100.net; s=20230601; t=1709653923; x=1710258723;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=MctOoIBJ4EJUSM63PM914+RdyOPtyB9mWo9oOcGiDe0=;
-        b=lfG/N8U8wHxybpWocXNqpJsl9VJfJ10x7eqfYgtQH05L7KDaxJv5xYbTlRC6Bgpd5P
-         XlS6rQ5NOBu59eHRRGe2dr5OAwwensSoYUQaVDg8BUi1dxHsAc4UQgVZijgY6jN4FLdn
-         aBEWAKoQU2n3YrQZkKBkTLg0CvvtvFK6RbesuVECo6jtRCxhS440oyuSDTZqvoGIz7TB
-         gS9rxAVg+fsXtQ0ntWk/kYRQmHENYTioji0ILxFq3PHR4U4ocsncILyJDaqYnLdSprP7
-         cCI4W+ywuUjGgjf2me6U3//VNFMTwcvX9jXUDjXwhHiGKo5BmOymwK7Ngz+02dRaAau4
-         Lmaw==
-X-Gm-Message-State: AOJu0YzzLCgTR/TG9ofZnruZ9efSI7coAjUkDmWeg5fo7CUE321QhZSy
-	pK90erB4OswQzXDlLV9xxrxKZvJLq4Z846i+LgBXkICrqKcOaE7kfiCzwYDzTlY/b3bc+pc+C5V
-	CIC8=
-X-Google-Smtp-Source: AGHT+IH+3m6unG933kwnTUgNjd3A3vU7ynfi3/37hnA4JFWynXT8q9D6E8zPKqECtd1kc1qHuIh25Q==
-X-Received: by 2002:a05:600c:548e:b0:412:e4f6:75ae with SMTP id iv14-20020a05600c548e00b00412e4f675aemr3491202wmb.32.1709652492294;
-        Tue, 05 Mar 2024 07:28:12 -0800 (PST)
-Received: from P-ASN-ECS-830T8C3.numericable.fr ([89.159.1.53])
-        by smtp.gmail.com with ESMTPSA id w15-20020a05600c474f00b00412f0592e0bsm559873wmo.47.2024.03.05.07.28.11
+        bh=sIC0yBq1PW3Zh4W5Z7nOHAc0MLNaz0fQWip35xXrC54=;
+        b=p1Gp9yL5wNa/Q8KL+1vc+Gk7RMYUj7VU5UqCw0ruUmN6R4hF4D0nmpRYgX3vBPkJ8x
+         ZJ6bJg7OetF0fL79egKmj91R2DZcSBbRv2baEINO3vN13D02TeZRl17uLDsq24bZestw
+         Tgg2JU8wn7lVhCQ8f+bSwOm+dWf82xacEUpa0omKF0QwodDEaO1Rle1v6/Mubq5XZkKW
+         NfatyFvwk4CzsyEUVDxevUZ+qH9dsqQ+2DYelzJdaEuQmDlBif9geYXv6DD/eQTaHh3O
+         8G/gacQWO8s7Xhrq1klJm87Mp+mIyERvbdvNoGpSnNQvb+ECXvsQy0n13DO79Pt8RYq5
+         MPPA==
+X-Gm-Message-State: AOJu0Yz44WGppHFs+EdayZ13A4RPrBfsj6O3rjEFu9ELx3p8cH3AbYE0
+	5S411ybEjN3p+MqWezJ1HabLBCkeai/of/BsLif92zF51ORs/PeWRd6CUzpXvGo=
+X-Google-Smtp-Source: AGHT+IHOmdepSsS0CZywbpXEAVpdsqMCcMBD4UxY2verrzYEFwSMNgyfIEPDWeyZdaPy19V82x3k5g==
+X-Received: by 2002:a05:6402:3493:b0:566:f67e:3f72 with SMTP id v19-20020a056402349300b00566f67e3f72mr7525631edc.12.1709653922673;
+        Tue, 05 Mar 2024 07:52:02 -0800 (PST)
+Received: from localhost.localdomain ([176.33.65.159])
+        by smtp.gmail.com with ESMTPSA id g20-20020a056402321400b00567bdc41c91sm197757eda.62.2024.03.05.07.52.01
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 05 Mar 2024 07:28:12 -0800 (PST)
-From: Yoann Congal <yoann.congal@smile.fr>
+        Tue, 05 Mar 2024 07:52:01 -0800 (PST)
+From: alperak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Yoann Congal <yoann.congal@smile.fr>
-Subject: [meta-oe][PATCH] toybox-inittab: Fix serial getty reproducibility
-Date: Tue,  5 Mar 2024 16:27:59 +0100
-Message-Id: <20240305152759.1702540-1-yoann.congal@smile.fr>
-X-Mailer: git-send-email 2.39.2
+Cc: alperak <alperyasinak1@gmail.com>
+Subject: [meta-python][PATCH 1/2] python3-types-python-dateutil: add recipe
+Date: Tue,  5 Mar 2024 18:51:45 +0300
+Message-Id: <20240305155145.593699-1-alperyasinak1@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 05 Mar 2024 15:28:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109121
+ <openembedded-devel@lists.openembedded.org>; Tue, 05 Mar 2024 15:52:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109122
 
-The enable_getty test uses a bash-only syntax "[[ ... ]]".
-On /bin/sh==bash hosts, it enables the serial getty.
-On /bin/sh!=bash hosts, it does not enable it.
+This is a PEP 561 type stub package for the python-dateutil package. It can be used by type-checking tools like mypy, pyright, pytype, PyCharm, etc. to check code that uses python-dateutil.
 
-Fix this non-reproducibility by using the standard shell "[ ... ]"
-syntax which should work in any POSIX shell[0].
-
-[0]: https://www.shellcheck.net/wiki/SC3010
-
-Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+Signed-off-by: alperak <alperyasinak1@gmail.com>
 ---
- meta-oe/recipes-core/toybox/toybox-inittab_0.8.2.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../python3-types-python-dateutil_2.8.19.20240106.bb      | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-types-python-dateutil_2.8.19.20240106.bb
 
-diff --git a/meta-oe/recipes-core/toybox/toybox-inittab_0.8.2.bb b/meta-oe/recipes-core/toybox/toybox-inittab_0.8.2.bb
-index 603f365cf3..4cad7dce11 100644
---- a/meta-oe/recipes-core/toybox/toybox-inittab_0.8.2.bb
-+++ b/meta-oe/recipes-core/toybox/toybox-inittab_0.8.2.bb
-@@ -34,7 +34,7 @@ do_configure() {
- 	cp orig/* .
- 
- 	for config in ${PACKAGECONFIG_CONFARGS}; do
--		if [[ ${config} == "enable_getty" ]]; then
-+		if [ "${config}" = "enable_getty" ]; then
- 			echo "# generated by bitbake recipe ${PN}" >> ${S}/inittab
- 			for console in "${SERIAL_CONSOLES}"; do
- 				param=$(echo ${console} | sed s/\;/\ /g)
+diff --git a/meta-python/recipes-devtools/python/python3-types-python-dateutil_2.8.19.20240106.bb b/meta-python/recipes-devtools/python/python3-types-python-dateutil_2.8.19.20240106.bb
+new file mode 100644
+index 000000000..2075d96b4
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-types-python-dateutil_2.8.19.20240106.bb
+@@ -0,0 +1,8 @@
++SUMMARY = "Typing stubs for python-dateutil"
++HOMEPAGE = "https://github.com/python/typeshed"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=6;endline=6;md5=ef4dc1e740f5c928f1608a4a9c7b578e"
++
++SRC_URI[sha256sum] = "1f8db221c3b98e6ca02ea83a58371b22c374f42ae5bbdf186db9c9a76581459f"
++
++inherit pypi setuptools3
 -- 
-2.39.2
+2.25.1
 
 
