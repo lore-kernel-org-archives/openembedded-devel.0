@@ -2,149 +2,148 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BA964C54E41
-	for <webhook@archiver.kernel.org>; Tue,  5 Mar 2024 16:49:25 +0000 (UTC)
-Received: from mail-oi1-f172.google.com (mail-oi1-f172.google.com [209.85.167.172])
- by mx.groups.io with SMTP id smtpd.web10.28454.1709657360275310738
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4B49EC54798
+	for <webhook@archiver.kernel.org>; Tue,  5 Mar 2024 19:07:50 +0000 (UTC)
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+ by mx.groups.io with SMTP id smtpd.web10.1547.1709665668909627595
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Mar 2024 08:49:20 -0800
+ Tue, 05 Mar 2024 11:07:48 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Ptyxp1b5;
- spf=pass (domain: gmail.com, ip: 209.85.167.172, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f172.google.com with SMTP id 5614622812f47-3bd72353d9fso466175b6e.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Mar 2024 08:49:20 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=DAEfDLoU;
+ spf=pass (domain: gmail.com, ip: 209.85.214.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-1dca3951ad9so1517475ad.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Mar 2024 11:07:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1709657359; x=1710262159; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Fg4+tqcsJnnD0sB86ao1R64rFaCJwuf8yzRbWaRDz6U=;
-        b=Ptyxp1b5LnHkWeH/MuoEE/OgZ26kRJR63uIsCx1NEcp1tsgdURS8m6WNPF9qWxgflS
-         QaiszNotvDf/w+jXBci34FzB1Znh9zVIkhVdiigSd5UzE0kpYKLsxkiJeGF6jZ0oqf5c
-         ZpXSf2+D/awQMB74DHUdpkMac6b6egz4J3fHfNkTSJYnKZkbfnzCPdpbQJ0AjEg6flxt
-         Fob+wD0ZzHZfneCaDAi15MW94X2Jodmt90JcTwHhxkJSPxFG7mcf9I0LnrrQLIuktGNF
-         Gn6ekVrFwLrk4doNvhC4IaVUfyEQNtYsCKuEfPw1Z5BwyXaVfw+N5cw/d+VAzgCIJI+P
-         rFfg==
+        d=gmail.com; s=20230601; t=1709665668; x=1710270468; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=KiByJM51rXWsOc0juBAlujg2QbqlilzPgm1cAzVKqYQ=;
+        b=DAEfDLoUDmmHNbVV1/s6FS2Yk3OFkxyNhGFzruvFwb9E+dG4NCIgaq34sNMRH8Zfj0
+         A2n7kUYOD4ZDFEnPDSlSow7rF7R+zXDV93XwPoiYRN27WIn+v5XDTkk9FZEuqSr1zixr
+         hJluk57xs1U1OAbZt4UaDzVFgVbijO2IX3afbUwrJn2i3RjYhgNep7lzJX7OxF1MdODg
+         Cp3lGMrGCYbFrO57t1vBfIF0phxSaVb4OYTN9H6fQRFUNtqGFbRNGD7es557QT+z4AV/
+         osr9qNzC/NbgwzVxdrZ37F7JmtWUGqRG2KcZHmxpkkwILrcBeZmen8NeDwGxaOgsEvrK
+         y0Fw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1709657359; x=1710262159;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=Fg4+tqcsJnnD0sB86ao1R64rFaCJwuf8yzRbWaRDz6U=;
-        b=mPQSz9Ta0gujcJy4t4+AmRBR7AOelmWhI1hXrkrKStQh797ALumIqz+f+kGcayaGfX
-         X2wYAc8laYWg8t46ANSeLh4kxCh1nHXjBSaFg9olI2dzMU1DrXVswRd2A3H5Kj9B96qV
-         kq6Licpo6c/AdL7wR4JAUljdiHRXwj+K6oErEtahBBTHHJ14PIeJwTNlDriYVySAZFId
-         u5MKbqIsblpQagvOg/2qAcr5IVYJi+gePmMTNBy8jO8t9ly9KDJh9JQRO7chNBZKfEbV
-         lKwpgo27tEERPp8yqY0+Hryw+2oJZfa2Lx9pOvURjt16SG07mMHO+xDAA+g6M9rB6u7o
-         43hg==
-X-Gm-Message-State: AOJu0Yx+p5klnxARWd+/iMhqUyrNfE7fwiYcwfhQEpsV5DDAjJaYtImp
-	gLv5YH3RuzMaOjtupaCej/KeP6U/1OC1af5MR/wGM02+n2q5rTPLQ44kY9jxb678DiufjK9acEE
-	w/QDTi6Idg2eiymt48AUHNJEfqEA=
-X-Google-Smtp-Source: AGHT+IH/KazRzS+6PozJqpmmTeGIYsLMA8IHXGL7x4rTuS+72Pt+n7rABEcO/s16Q7bqD7yxp/yDoKhZH7ZWo8gTVEI=
-X-Received: by 2002:a05:6870:ab85:b0:21e:7655:2b22 with SMTP id
- gs5-20020a056870ab8500b0021e76552b22mr2715988oab.57.1709657359465; Tue, 05
- Mar 2024 08:49:19 -0800 (PST)
-MIME-Version: 1.0
-References: <20240304215014.4191019-1-joe.slater@windriver.com>
- <CAMKF1sqND1HW4vubUN7AMpvQvWwXGHTKygR36zkzQuZAoVP3tA@mail.gmail.com> <BY5PR11MB3992D4DE0161EEE482A2C27088222@BY5PR11MB3992.namprd11.prod.outlook.com>
-In-Reply-To: <BY5PR11MB3992D4DE0161EEE482A2C27088222@BY5PR11MB3992.namprd11.prod.outlook.com>
+        d=1e100.net; s=20230601; t=1709665668; x=1710270468;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=KiByJM51rXWsOc0juBAlujg2QbqlilzPgm1cAzVKqYQ=;
+        b=IEabnKJ7U7KdrKWIiZNjFCQ30pWYUfRjKmDsT5LQC5mxQ3b4b07pZgclOjDxCDT66O
+         73JN50ppuEsu3P4TXIf3SIC8zSA6ZQEADmnDbA+AM3U6Z0gRsOIcYYcvMetCqTSb91RE
+         n4nSkQmY/WBBKq/N3s5dqV74X7JbMrX/z78VyiIsdtq/ucucs/W0bt/pF50epZglENp6
+         d8gEneoojWDMas3FHE6tDv0iwEfyg/VpCbB2wFDmAy3dfzxBr/PSu5FfRl5kiS4aQ5Da
+         jVruKnK9ZY4vjiU8R2KIMBq4y3HrPPCqLSlck+Ed5FT9I/Qr/VbEsusrwoewNCwPWymn
+         MJIw==
+X-Gm-Message-State: AOJu0Yz9pBocFAed6+x/ZntwbPED2dE3wcVvEakKX+bUTMjYtOq2weg2
+	YmvMpyOe9FoPq786R/IlpVCaSgpoGNRRaLoRzNTAIgytnmnMFq+LaU/J696Y
+X-Google-Smtp-Source: AGHT+IEVW7U/WhJkp5iA5RSryQCA0Ifd1vLd4vmQwMZVbjRqExAIyGq484OqJmSYAG8ny0Tt8npfuw==
+X-Received: by 2002:a17:902:da92:b0:1dc:cf38:3a92 with SMTP id j18-20020a170902da9200b001dccf383a92mr2728699plx.8.1709665667874;
+        Tue, 05 Mar 2024 11:07:47 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::d3a5])
+        by smtp.gmail.com with ESMTPSA id q15-20020a170902a3cf00b001db3efca159sm11104411plb.132.2024.03.05.11.07.47
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 05 Mar 2024 11:07:47 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 5 Mar 2024 08:48:53 -0800
-Message-ID: <CAMKF1spoLgCocqivseAZW-xq-7RR-yBLSy-T3VNsMSwyRq6VDw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 1/1] googletest: allow for shared libraries
-To: "Slater, Joseph" <joe.slater@windriver.com>
-Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>, 
-	"MacLeod, Randy" <Randy.MacLeod@windriver.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 1/3] pgpool2: Upgrade to 4.5.1
+Date: Tue,  5 Mar 2024 11:07:43 -0800
+Message-ID: <20240305190745.3586645-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.44.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 05 Mar 2024 16:49:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109126
+ <openembedded-devel@lists.openembedded.org>; Tue, 05 Mar 2024 19:07:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109127
 
-On Tue, Mar 5, 2024 at 8:31=E2=80=AFAM Slater, Joseph <joe.slater@windriver=
-.com> wrote:
->
->
->
-> > -----Original Message-----
-> > From: Khem Raj <raj.khem@gmail.com>
-> > Sent: Monday, March 4, 2024 3:50 PM
-> > To: Slater, Joseph <joe.slater@windriver.com>
-> > Cc: openembedded-devel@lists.openembedded.org; MacLeod, Randy
-> > <Randy.MacLeod@windriver.com>
-> > Subject: Re: [oe] [meta-oe][PATCH 1/1] googletest: allow for shared lib=
-raries
-> >
-> > On Mon, Mar 4, 2024 at 1:50=E2=80=AFPM Joe Slater via lists.openembedde=
-d.org
-> > <joe.slater=3Dwindriver.com@lists.openembedded.org> wrote:
-> > >
-> > > From: Joe Slater <joe.slater@windriver.com>
-> > >
-> > > Add a PACKAGECONFIG option to produce shared libraries.
-> > > Allow staticdev to be empty if no static libraries are built.
-> > >
-> >
-> > why would be not build static libs ? and if we do not then why do we ne=
-ed to
-> > create empty package ?
->
-> If we set -DBUILD_SHARED_LIBS=3DON static libs will not be built and -sta=
-ticdev will not be created, so -dev will produce an error if we try to, for=
- example, populate an sdk.  I guess we could put static libs in -dev and ge=
-t rid of -staticdev, but I didn't want to mess with the packaging.
->
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...own-type-name-fd_set-error-with-musl.patch | 33 -------------------
+ .../{pgpool2_4.4.1.bb => pgpool2_4.5.1.bb}    |  8 ++---
+ 2 files changed, 2 insertions(+), 39 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/pgpool2/pgpool2/0001-pgpool2-Fix-unknown-type-name-fd_set-error-with-musl.patch
+ rename meta-networking/recipes-support/pgpool2/{pgpool2_4.4.1.bb => pgpool2_4.5.1.bb} (87%)
 
-maybe you can unbuckle the rdep for dev on staticdev package
+diff --git a/meta-networking/recipes-support/pgpool2/pgpool2/0001-pgpool2-Fix-unknown-type-name-fd_set-error-with-musl.patch b/meta-networking/recipes-support/pgpool2/pgpool2/0001-pgpool2-Fix-unknown-type-name-fd_set-error-with-musl.patch
+deleted file mode 100644
+index 26f8afe4d6..0000000000
+--- a/meta-networking/recipes-support/pgpool2/pgpool2/0001-pgpool2-Fix-unknown-type-name-fd_set-error-with-musl.patch
++++ /dev/null
+@@ -1,33 +0,0 @@
+-From 5d335b5ddd052f047759cae0e9b94ec49f9f3884 Mon Sep 17 00:00:00 2001
+-From: Lei Maohui <leimaohui@fujitsu.com>
+-Date: Mon, 20 Mar 2023 02:03:04 +0000
+-Subject: [PATCH] pgpool2: Fix unknown type name 'fd_set' error with musl.
+-
+-| read.c: In function 'read_until_ready_for_query':
+-| read.c:53:24: error: storage size of 'timeoutval' isn't known
+-|    53 |         struct timeval timeoutval;
+-|       |                        ^~~~~~~~~~
+-| read.c:54:9: error: unknown type name 'fd_set'
+-|    54 |         fd_set          readmask;
+-|       |         ^~~~~~
+-
+-Upstream-Status: Inappropriate [embedded specific]
+-Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
+----
+- src/tools/pgproto/read.c | 1 +
+- 1 file changed, 1 insertion(+)
+-
+-diff --git a/src/tools/pgproto/read.c b/src/tools/pgproto/read.c
+-index c7fb548..4efe641 100644
+---- a/src/tools/pgproto/read.c
+-+++ b/src/tools/pgproto/read.c
+-@@ -19,6 +19,7 @@
+- #include "../../include/config.h"
+- #include "pgproto/pgproto.h"
+- #include <unistd.h>
+-+#include <sys/select.h>
+- #include <stdlib.h>
+- #include <stdio.h>
+- #include <string.h>
+---
+-2.34.1
+diff --git a/meta-networking/recipes-support/pgpool2/pgpool2_4.4.1.bb b/meta-networking/recipes-support/pgpool2/pgpool2_4.5.1.bb
+similarity index 87%
+rename from meta-networking/recipes-support/pgpool2/pgpool2_4.4.1.bb
+rename to meta-networking/recipes-support/pgpool2/pgpool2_4.5.1.bb
+index 5e6e00caeb..b127d69625 100644
+--- a/meta-networking/recipes-support/pgpool2/pgpool2_4.4.1.bb
++++ b/meta-networking/recipes-support/pgpool2/pgpool2_4.5.1.bb
+@@ -1,4 +1,4 @@
+-SUMMARY = "a language independent connection pool server for PostgreSQL."
++SUMMARY = "A language independent connection pool server for PostgreSQL."
+ 
+ DESCRIPTION = "Pgpool-II is a middleware that works between PostgreSQL \
+                servers and a PostgreSQL database client. It is distributed \
+@@ -12,11 +12,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e4b38de086d73e0521de0bbdbaa4a1a9"
+ 
+ SRC_URI = "http://www.pgpool.net/mediawiki/images/pgpool-II-${PV}.tar.gz \
+ 	   file://0001-Fix-build-error-when-build-this-file.patch \
+-	   file://0001-pgpool2-Fix-unknown-type-name-fd_set-error-with-musl.patch \
+ 	   file://pgpool.sysconfig \
+ 	   file://pgpool.service \
+            "
+-SRC_URI[sha256sum] = "4b379bbba8e178128a1cee4a5bd1ae116dedb3da6121b728c18f0f54c881f328"
++SRC_URI[sha256sum] = "8e14b0558a15dae8767c8e1acee3f2f6c7c08ebfffda66a359367eaaa56c3936"
+ 
+ S = "${WORKDIR}/pgpool-II-${PV}"
+ 
+@@ -34,9 +33,6 @@ PACKAGECONFIG[postgresql] = "--with-pgsql-includedir=${STAGING_INCDIR}/postgresq
+ EXTRA_OECONF += "--disable-static \
+ 	         --disable-rpath \
+ 	        "
+-
+-CFLAGS:append = " -fcommon "
+-
+ FILES:${PN} += "${datadir}/pgpool-II/ "
+ 
+ do_configure:append() {
+-- 
+2.44.0
 
-> Joe
->
-> >
-> > > Signed-off-by: Joe Slater <joe.slater@windriver.com>
-> > > ---
-> > >  meta-oe/recipes-test/googletest/googletest_1.14.0.bb | 8 +++++++-
-> > >  1 file changed, 7 insertions(+), 1 deletion(-)
-> > >
-> > > diff --git a/meta-oe/recipes-test/googletest/googletest_1.14.0.bb
-> > > b/meta-oe/recipes-test/googletest/googletest_1.14.0.bb
-> > > index 8c75f936de..1b05f3d336 100644
-> > > --- a/meta-oe/recipes-test/googletest/googletest_1.14.0.bb
-> > > +++ b/meta-oe/recipes-test/googletest/googletest_1.14.0.bb
-> > > @@ -10,11 +10,17 @@ S =3D "${WORKDIR}/git"
-> > >  SRCREV =3D "f8d7d77c06936315286eb55f8de22cd23c188571"
-> > >  SRC_URI =3D
-> > "git://github.com/google/googletest.git;branch=3Dmain;protocol=3Dhttps"
-> > >
-> > > -inherit cmake
-> > > +inherit cmake pkgconfig
-> > > +
-> > > +# allow for shared libraries, but do not default to them #
-> > > +PACKAGECONFIG[shared] =3D "-DBUILD_SHARED_LIBS=3DON,-
-> > DBUILD_SHARED_LIBS=3DOFF,,"
-> > > +
-> > >
-> > >  ALLOW_EMPTY:${PN} =3D "1"
-> > >  ALLOW_EMPTY:${PN}-dbg =3D "1"
-> > >
-> > > +ALLOW_EMPTY:${PN}-staticdev =3D "1"
-> > >  RDEPENDS:${PN}-dev +=3D "${PN}-staticdev"
-> > >
-> > >  BBCLASSEXTEND =3D "native nativesdk"
-> > > --
-> > > 2.25.1
-> > >
-> > >
-> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > > Links: You receive all messages sent to this group.
-> > > View/Reply Online (#109103):
-> > https://lists.openembedded.org/g/openembedded-devel/message/109103
-> > > Mute This Topic: https://lists.openembedded.org/mt/104732413/1997914
-> > > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsu=
-b
-> > [raj.khem@gmail.com]
-> > > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > >
 
