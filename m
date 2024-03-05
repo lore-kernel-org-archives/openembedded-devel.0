@@ -1,463 +1,170 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AED11C54798
-	for <webhook@archiver.kernel.org>; Tue,  5 Mar 2024 10:00:03 +0000 (UTC)
-Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
- by mx.groups.io with SMTP id smtpd.web10.18381.1709632794545166132
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D685CC54798
+	for <webhook@archiver.kernel.org>; Tue,  5 Mar 2024 10:12:43 +0000 (UTC)
+Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
+ by mx.groups.io with SMTP id smtpd.web10.18722.1709633558695957581
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 05 Mar 2024 01:59:54 -0800
+ Tue, 05 Mar 2024 02:12:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=HlXKh5Bw;
- spf=pass (domain: smile.fr, ip: 209.85.218.49, mailfrom: yoann.congal@smile.fr)
-Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-a3fb8b0b7acso688734366b.2
-        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Mar 2024 01:59:54 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=W5fmR0yw;
+ spf=pass (domain: gmail.com, ip: 209.85.218.41, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-a441d7c6125so51410366b.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 05 Mar 2024 02:12:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1709632793; x=1710237593; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=//7ggUUmmxEdqhySBFUJZFlqFSt4A20l4OWCGC73oGE=;
-        b=HlXKh5Bw/+xw451Wdr36/o3AE4U1CwJomw5qeCAKD8WomJtyjCZPveZmyR5OPHQ40K
-         ELz3Qh2DWavoa8XMur4NPXfjuic9lXkzxRZ+SSWdaKpVOSlJ3cbOzWmvSaikht7u/waK
-         90tBPTEYNqvR7i/ULYfFgjnzE2iiNEl7e1zR4LnugJG6A5IEci1IP19QED/ho8/lPPXW
-         qwDE6l2jbYI8AN+7GO08r5sHsu35qPXdLf/WYBPQXKSLRAFCpPwiBU45HuoysEkEFiZo
-         4RO5QPKaLZ6s5HtzFvQOGSBRh7wBpIqCcG3pqSIHZAsmgWI8UVqJKg6CZnbIG02cJyCp
-         dRfQ==
+        d=gmail.com; s=20230601; t=1709633557; x=1710238357; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Z+3mJUro733XfG8ZQImQg4L2/DAN4nvAEtKxdwKwW3U=;
+        b=W5fmR0ywsioJhHuAPcxcbAKqj/MZ9CdzWZFNU0uThxWwNvnoKKChvN72WjCY6xj3hi
+         Y6OKQHccFWrJiwaq1prL8zck9+rVWJl0FByQNYcqDgrZW6kpO++iPSYfIkPycDADtgGn
+         XCahz+zA1LslgaNnH/2xMRZWHj4+V995jF+j+0DTgTv0cnyI5ejV7CdJS9dghmv/1sIS
+         4IUcACEZvxuEj82OAF4zONcAWd2OzY/0w636J07cfNEXT3Zni5WRXeYqE5r88A0Uc653
+         C2gEyrxFwmqOUTlTqXL7T442yp8APgd7wxcoIaCg/BaGV3iZZiStVZD8tfmuq+rDAEEB
+         S9DA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1709632793; x=1710237593;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1709633557; x=1710238357;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=//7ggUUmmxEdqhySBFUJZFlqFSt4A20l4OWCGC73oGE=;
-        b=G0jxkD23ggnsemvxBg4/pNqBBcHpWmh7yee40i5STJMgy1phQf3SszrZEDXFvWicTw
-         2eYcV/WQ6iK9X9zFZ78OvCbz3m059onLswKkJNyJ5m01CMbauqByMJw7QXZ67oRLkrS8
-         odtUrSil8/S5UllUjflGwq7nDXl9feQH2uCW3566t4ZXXSUTpZV8Kjfa2IXc/DunxTVy
-         1WNgNLtEz7LudiR00UPTDJqfyHMg9+hLzIKAbviQ5c+eGN5+kLbjL2whEX8dsBkrPA9d
-         fLiHJYQcr9sZqWETn9ZIEsi+XtMdXhi4taujI8SctgZwbYuMK6FGdPWpF8mD6vhlmV+0
-         9hkg==
-X-Gm-Message-State: AOJu0YzRkc4xWBV+83TyWa/4Pqm44KXZ7NdnPWLGvpCA8dgN9k+gQqra
-	wh3QOJYqWeNNcTwrubWbNxLqzvWioScMg/xsUQ8wfDzOa3uTWhKTOre+KAOSzYRuWoZNP0B3JL1
-	N92pRZHnc2n/+gNG0sgLqyMZJK9H27qrqYIS5ez0TW23JU9dM
-X-Google-Smtp-Source: AGHT+IH0fN2tQqEmG5tPECLi2Q9FDQQnLFxirKurgzPfnjtZ56NXsVNqasdzv6IeFnQa0+96k0caZKk/I03AojNAc1M=
-X-Received: by 2002:a17:906:3642:b0:a45:122b:5637 with SMTP id
- r2-20020a170906364200b00a45122b5637mr4626556ejb.41.1709632792870; Tue, 05 Mar
- 2024 01:59:52 -0800 (PST)
+        bh=Z+3mJUro733XfG8ZQImQg4L2/DAN4nvAEtKxdwKwW3U=;
+        b=PUh0253hSfEnnb7XLBNSKBwgHEu0k2/ogTU+nnYvB2gV4sJ0e/GijLcbRRYe95A5/1
+         cvcyiiPI9zFM3Za04H0VAKiwOd3XNwTkfvRoSHZ5b3c1A3U6P8HIn/9RFlrANSPH1ddO
+         mWA1MM0KwyNDTZ+gzpCkZY4pM/9GyNmHW3BzL9i6+XxlR4K63/mfDW/lLWl7rEHFVKgG
+         Ar6BCnwiATGtf74x5fPaYG6mYY4htX9ee/63h6xQFb8M1XgCPbVyWkeCOxeJWzzfkcE1
+         U6bkFxAI1IGLUGd+1vqP478sS9cWMWDQS8+XZtTvKLcMUiM4lbnzX5cZJ3VgoUQmR3Lj
+         UUpQ==
+X-Gm-Message-State: AOJu0YwbCLSvZE0gOktyJVSyKLXBP27UujlquKay/aWpLOcwLOBV7nKp
+	jcMuBgZ0xRYpajkDN+Mnz21aAzRlkbxazcGisI0hVa0NuYhUFqFu+Phcmeg+D/s=
+X-Google-Smtp-Source: AGHT+IH5orLhp9oMkb51ArSUzzAW7v9+VrST7LD0XbT9ucTDlRYJaHwAMWXhOZXl6mSDvEEVWp753Q==
+X-Received: by 2002:a17:906:2e92:b0:a45:6b65:f6cb with SMTP id o18-20020a1709062e9200b00a456b65f6cbmr2952966eji.26.1709633556598;
+        Tue, 05 Mar 2024 02:12:36 -0800 (PST)
+Received: from localhost.localdomain ([176.33.65.159])
+        by smtp.gmail.com with ESMTPSA id jw3-20020a170906e94300b00a44d3847811sm3791402ejb.102.2024.03.05.02.12.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 05 Mar 2024 02:12:36 -0800 (PST)
+From: alperak <alperyasinak1@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: alperak <alperyasinak1@gmail.com>
+Subject: [meta-python][PATCH] python3-freezegun: add recipe and add ptest
+Date: Tue,  5 Mar 2024 13:12:29 +0300
+Message-Id: <20240305101229.304761-1-alperyasinak1@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20240304201312.1089609-1-yoann.congal@smile.fr>
- <CAMKF1spa5cCKTYdCJq6sxvDwVjGXWVHHWmyDBc9P=7Dh9mTOxQ@mail.gmail.com> <CAMSfU+4AE-ayPRKJ7EL4WzBa3GUa8vfyDeLtnt-b0KYT5eTaBA@mail.gmail.com>
-In-Reply-To: <CAMSfU+4AE-ayPRKJ7EL4WzBa3GUa8vfyDeLtnt-b0KYT5eTaBA@mail.gmail.com>
-From: Yoann CONGAL <yoann.congal@smile.fr>
-Date: Tue, 5 Mar 2024 10:59:26 +0100
-Message-ID: <CAMSfU+6RPzi8LkTe+2sQ2WDgcBi0S0Ahv0neEwOaj1V5aMgOBg@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH] drbd-utils: Fix a udev rule reproducibility
-To: Khem Raj <raj.khem@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="00000000000050d1f10612e6e7d4"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 05 Mar 2024 10:00:03 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109116
+ <openembedded-devel@lists.openembedded.org>; Tue, 05 Mar 2024 10:12:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109117
 
---00000000000050d1f10612e6e7d4
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+FreezeGun is a library that allows your Python tests to travel through time by mocking the datetime module.
 
-Le mar. 5 mars 2024 =C3=A0 07:49, Yoann CONGAL <yoann.congal@smile.fr> a =
-=C3=A9crit :
+* Tested on qemux86-64 and qemuarm64
+* Add ptest into PTESTS_FAST_META_PYTHON
 
-> Le mar. 5 mars 2024 =C3=A0 00:48, Khem Raj <raj.khem@gmail.com> a =C3=A9c=
-rit :
->
->> which branch is it meant for ?
->>
->
-> That was for the master branch but I missed the 9.27.0 update, sorry.
->
-> I'll rebase and send a v2.
->
+Ptest result:
+=============
+qemuarm64:
 
-v2 sent!
+Testsuite summary
+TOTAL: 127
+PASS: 121
+SKIP: 6
+XFAIL: 0
+FAIL: 0
+XPASS: 0
+ERROR: 0
+DURATION: 20
+END: /usr/lib/python3-freezegun/ptest
+2024-03-05T06:53
+STOP: ptest-runner
+TOTAL: 1 FAIL: 0
 
-Thanks!
+qemux86-64:
 
+Testsuite summary
+TOTAL: 127
+PASS: 121
+SKIP: 6
+XFAIL: 0
+FAIL: 0
+XPASS: 0
+ERROR: 0
+DURATION: 21
+END: /usr/lib/python3-freezegun/ptest
+2024-03-05T06:57
+STOP: ptest-runner
+TOTAL: 1 FAIL: 0
 
->
-> On Mon, Mar 4, 2024 at 12:13=E2=80=AFPM Yoann Congal <yoann.congal@smile.=
-fr>
->> wrote:
->> >
->> > drbd-utils configure step check the build host udev version to enable
->> > or disable the target udev rule. This leads to a clear
->> > non-reproducibility.
->> >
->> > This patch fixes this by adding a configure option to the configure st=
-ep
->> > which allows to skip the udev version checks and unconditionally enabl=
-e
->> > the udev rule.
->> >
->> > Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
->> > ---
->> >  ...-an-option-to-disable-host-udev-vers.patch | 55 ++++++++++++++++++=
+Signed-off-by: alperak <alperyasinak1@gmail.com>
+---
+ .../ptest-packagelists-meta-python.inc        |  1 +
+ .../python/python3-freezegun/run-ptest        |  3 ++
+ .../python/python3-freezegun_1.4.0.bb         | 29 +++++++++++++++++++
+ 3 files changed, 33 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-freezegun/run-ptest
+ create mode 100644 meta-python/recipes-devtools/python/python3-freezegun_1.4.0.bb
+
+diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+index 3b19152f4..65a45c4b6 100644
+--- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
++++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+@@ -17,6 +17,7 @@ PTESTS_FAST_META_PYTHON = "\
+     python3-click \
+     python3-dominate \
+     python3-execnet \
++    python3-freezegun \
+     python3-geojson \
+     python3-gpiod \
+     python3-gunicorn \
+diff --git a/meta-python/recipes-devtools/python/python3-freezegun/run-ptest b/meta-python/recipes-devtools/python/python3-freezegun/run-ptest
+new file mode 100644
+index 000000000..8d2017d39
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-freezegun/run-ptest
+@@ -0,0 +1,3 @@
++#!/bin/sh
 +
->> >  .../recipes-support/drbd/drbd-utils_9.22.0.bb |  2 +
->> >  2 files changed, 57 insertions(+)
->> >  create mode 100644
->> meta-networking/recipes-support/drbd/drbd-utils/0001-configure.ac-Add-an=
--option-to-disable-host-udev-vers.patch
->> >
->> > diff --git
->> a/meta-networking/recipes-support/drbd/drbd-utils/0001-configure.ac-Add-=
-an-option-to-disable-host-udev-vers.patch
->> b/meta-networking/recipes-support/drbd/drbd-utils/0001-configure.ac-Add-=
-an-option-to-disable-host-udev-vers.patch
->> > new file mode 100644
->> > index 0000000000..5e03ff7b32
->> > --- /dev/null
->> > +++
->> b/meta-networking/recipes-support/drbd/drbd-utils/0001-configure.ac-Add-=
-an-option-to-disable-host-udev-vers.patch
->> > @@ -0,0 +1,55 @@
->> > +From 50749a5b0eb0becb39a4edb5fe844b13bbeb5836 Mon Sep 17 00:00:00 200=
-1
->> > +From: Yoann Congal <yoann.congal@smile.fr>
->> > +Date: Sat, 2 Mar 2024 16:23:07 +0100
->> > +Subject: [PATCH] configure.ac: Add an option to disable host udev
->> version
->> > + checks
->> > +
->> > +In cross-compilation environment, the build host might have an outdat=
-ed
->> > +udev or no udev at all. But the user may still want to build with the
->> > +enabled udev rule (for its udev-enabled target).
->> > +
->> > +This patch adds a "--disable-udevchecks" option the disable build hos=
-t
->> > +udev version check at configure-time and unconditionally install the
->> > +enabled udev rule. Without this new option, the behavior stays the sa=
-me
->> > +(checks enabled).
->> > +
->> > +Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
->> > +Upstream-Status: Submitted [
->> https://lists.linbit.com/pipermail/drbd-dev/2024-March/007201.html]
->> > +---
->> > + configure.ac | 9 +++++++--
->> > + 1 file changed, 7 insertions(+), 2 deletions(-)
->> > +
->> > +diff --git a/configure.ac b/configure.ac
->> > +index d5a0e733..da083240 100644
->> > +--- a/configure.ac
->> > ++++ b/configure.ac
->> > +@@ -71,6 +71,11 @@ AC_ARG_WITH([udev],
->> > +       [AS_HELP_STRING([--with-udev],
->> > +                       [Enable udev integration])],
->> > +       [WITH_UDEV=3D$withval])
->> > ++AC_ARG_ENABLE([udevchecks],
->> > ++      [AS_HELP_STRING([--disable-udevchecks],
->> > ++                      [Disable host udev version checks])],
->> > ++      [],
->> > ++      [enable_udevchecks=3Dyes])
->> > + AC_ARG_WITH([xen],
->> > +       [AS_HELP_STRING([--with-xen],
->> > +                       [Enable Xen integration])],
->> > +@@ -309,7 +314,7 @@ if test -z $GIT; then
->> > +    AC_MSG_WARN(Cannot update buildtag without git. You may safely
->> ignore this warning when building from a tarball.)
->> > + fi
->> > +
->> > +-if test $UDEVADM =3D false && test $UDEVINFO =3D false; then
->> > ++if test "x$enable_udevchecks" !=3D "xno" && test $UDEVADM =3D false =
-&&
->> test $UDEVINFO =3D false; then
->> > +    if test "$WITH_UDEV" =3D "yes"; then
->> > +      AC_MSG_WARN([udev support enabled, but neither udevadm nor
->> udevinfo found on this system.])
->> > +    fi
->> > +@@ -413,7 +418,7 @@ dnl default.
->> > + test -z $INITDIR && INITDIR=3D"$sysconfdir/init.d"
->> > +
->> > + dnl Our udev rules file is known to work only with udev >=3D 85
->> > +-if test "$WITH_UDEV" =3D "yes"; then
->> > ++if test "x$enable_udevchecks" !=3D "xno" && test "$WITH_UDEV" =3D "y=
-es";
->> then
->> > +    udev_version=3D$( set -- $($UDEVADM version); echo $1 )
->> > +    if test -z "$udev_version"; then
->> > +       udev_version=3D$( set -- $($UDEVINFO -V); echo $3 )
->> > diff --git a/meta-networking/recipes-support/drbd/drbd-utils_9.22.0.bb
->> b/meta-networking/recipes-support/drbd/drbd-utils_9.22.0.bb
->> > index 960260fd39..65a43d9b26 100644
->> > --- a/meta-networking/recipes-support/drbd/drbd-utils_9.22.0.bb
->> > +++ b/meta-networking/recipes-support/drbd/drbd-utils_9.22.0.bb
->> > @@ -12,6 +12,7 @@ SRC_URI =3D "git://
->> github.com/LINBIT/drbd-utils;name=3Ddrbd-utils;branch=3Dmaster;prot
->> >             file://0001-drbdmon-add-LDFLAGS-when-linking.patch \
->> >             file://0001-replace-off64_t-with-off_t.patch \
->> >
->>  ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','file://0001-drbd-uti=
-ls-support-usrmerge.patch','',d)}
->> \
->> > +
->>  file://0001-configure.ac-Add-an-option-to-disable-host-udev-vers.patch =
-\
->> >             "
->> >  SRC_URI:append:libc-musl =3D "
->> file://0002-drbdadm-drop-use-of-GLOB_MAGCHAR-use-strchr-heuristi.patch "
->> >  SRCREV_drbd-utils =3D "409097fe02187f83790b88ac3e0d94f3c167adab"
->> > @@ -39,6 +40,7 @@ EXTRA_OECONF =3D " \
->> >                  --with-initscripttype=3Dboth    \
->> >                  --with-systemdunitdir=3D${systemd_unitdir}/system \
->> >                  --without-manual \
->> > +                --disable-udevchecks \
->> >                 "
->> >
->> >  # If we have inherited reproducible_build, we want to use it.
->> > --
->> > 2.39.2
->> >
->> >
->> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->> > Links: You receive all messages sent to this group.
->> > View/Reply Online (#109102):
->> https://lists.openembedded.org/g/openembedded-devel/message/109102
->> > Mute This Topic: https://lists.openembedded.org/mt/104730465/1997914
->> > Group Owner: openembedded-devel+owner@lists.openembedded.org
->> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub
->> [raj.khem@gmail.com]
->> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->> >
->>
-> --
-> Yoann Congal - Smile ECS
->
++pytest --automake
+diff --git a/meta-python/recipes-devtools/python/python3-freezegun_1.4.0.bb b/meta-python/recipes-devtools/python/python3-freezegun_1.4.0.bb
+new file mode 100644
+index 000000000..15c0bf06b
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-freezegun_1.4.0.bb
+@@ -0,0 +1,29 @@
++SUMMARY = "FreezeGun is a library that allows your Python tests to travel through time by mocking the datetime module."
++HOMEPAGE = "https://github.com/spulec/freezegun"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=acf1d209bb6eddae4cbe6ffd6a0144fe"
++
++SRC_URI[sha256sum] = "10939b0ba0ff5adaecf3b06a5c2f73071d9678e507c5eaedb23c761d56ac774b"
++
++inherit pypi python_setuptools_build_meta ptest
++
++SRC_URI += " \
++        file://run-ptest \
++"
++
++RDEPENDS:${PN}-ptest += " \
++        python3-pytest \
++        python3-sqlite3 \
++        python3-unittest-automake-output \
++"
++
++do_install_ptest() {
++        install -d ${D}${PTEST_PATH}/tests
++        cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
++}
++
++RDEPENDS:${PN} = "\
++        python3-asyncio \
++        python3-dateutil \
++        python3-unittest \
++"
+-- 
+2.25.1
 
-
---=20
-Yoann Congal
-Smile ECS - Tech expert
-
---00000000000050d1f10612e6e7d4
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">Le=C2=A0mar. 5 mars 2024 =C3=A0=C2=A0=
-07:49, Yoann CONGAL &lt;<a href=3D"mailto:yoann.congal@smile.fr">yoann.cong=
-al@smile.fr</a>&gt; a =C3=A9crit=C2=A0:<br></div><blockquote class=3D"gmail=
-_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204=
-,204);padding-left:1ex"><div dir=3D"auto"><div><div class=3D"gmail_quote"><=
-div dir=3D"ltr" class=3D"gmail_attr">Le mar. 5 mars 2024 =C3=A0 00:48, Khem=
- Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_blank">raj.khem@g=
-mail.com</a>&gt; a =C3=A9crit=C2=A0:<br></div><blockquote class=3D"gmail_qu=
-ote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,20=
-4);padding-left:1ex">which branch is it meant for ?<br></blockquote></div><=
-/div><div dir=3D"auto"><br></div><div dir=3D"auto">That was for the master =
-branch but I missed the 9.27.0 update, sorry.</div><div dir=3D"auto"><br></=
-div><div dir=3D"auto">I&#39;ll rebase and send a v2.</div></div></blockquot=
-e><div><br></div><div>v2 sent!</div><div><br></div><div>Thanks!<br></div><d=
-iv>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0p=
-x 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><div dir=
-=3D"auto"><div dir=3D"auto"><br></div><div dir=3D"auto"><div class=3D"gmail=
-_quote"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex=
-;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-On Mon, Mar 4, 2024 at 12:13=E2=80=AFPM Yoann Congal &lt;<a href=3D"mailto:=
-yoann.congal@smile.fr" rel=3D"noreferrer" target=3D"_blank">yoann.congal@sm=
-ile.fr</a>&gt; wrote:<br>
-&gt;<br>
-&gt; drbd-utils configure step check the build host udev version to enable<=
-br>
-&gt; or disable the target udev rule. This leads to a clear<br>
-&gt; non-reproducibility.<br>
-&gt;<br>
-&gt; This patch fixes this by adding a configure option to the configure st=
-ep<br>
-&gt; which allows to skip the udev version checks and unconditionally enabl=
-e<br>
-&gt; the udev rule.<br>
-&gt;<br>
-&gt; Signed-off-by: Yoann Congal &lt;<a href=3D"mailto:yoann.congal@smile.f=
-r" rel=3D"noreferrer" target=3D"_blank">yoann.congal@smile.fr</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 ...-an-option-to-disable-host-udev-vers.patch | 55 +++++++++++++=
-++++++<br>
-&gt;=C2=A0 .../recipes-support/drbd/<a href=3D"http://drbd-utils_9.22.0.bb"=
- rel=3D"noreferrer noreferrer" target=3D"_blank">drbd-utils_9.22.0.bb</a> |=
-=C2=A0 2 +<br>
-&gt;=C2=A0 2 files changed, 57 insertions(+)<br>
-&gt;=C2=A0 create mode 100644 meta-networking/recipes-support/drbd/drbd-uti=
-ls/0001-configure.ac-Add-an-option-to-disable-host-udev-vers.patch<br>
-&gt;<br>
-&gt; diff --git a/meta-networking/recipes-support/drbd/drbd-utils/0001-conf=
-igure.ac-Add-an-option-to-disable-host-udev-vers.patch b/meta-networking/re=
-cipes-support/drbd/drbd-utils/0001-configure.ac-Add-an-option-to-disable-ho=
-st-udev-vers.patch<br>
-&gt; new file mode 100644<br>
-&gt; index 0000000000..5e03ff7b32<br>
-&gt; --- /dev/null<br>
-&gt; +++ b/meta-networking/recipes-support/drbd/drbd-utils/0001-configure.a=
-c-Add-an-option-to-disable-host-udev-vers.patch<br>
-&gt; @@ -0,0 +1,55 @@<br>
-&gt; +From 50749a5b0eb0becb39a4edb5fe844b13bbeb5836 Mon Sep 17 00:00:00 200=
-1<br>
-&gt; +From: Yoann Congal &lt;<a href=3D"mailto:yoann.congal@smile.fr" rel=
-=3D"noreferrer" target=3D"_blank">yoann.congal@smile.fr</a>&gt;<br>
-&gt; +Date: Sat, 2 Mar 2024 16:23:07 +0100<br>
-&gt; +Subject: [PATCH] <a href=3D"http://configure.ac" rel=3D"noreferrer no=
-referrer" target=3D"_blank">configure.ac</a>: Add an option to disable host=
- udev version<br>
-&gt; + checks<br>
-&gt; +<br>
-&gt; +In cross-compilation environment, the build host might have an outdat=
-ed<br>
-&gt; +udev or no udev at all. But the user may still want to build with the=
-<br>
-&gt; +enabled udev rule (for its udev-enabled target).<br>
-&gt; +<br>
-&gt; +This patch adds a &quot;--disable-udevchecks&quot; option the disable=
- build host<br>
-&gt; +udev version check at configure-time and unconditionally install the<=
-br>
-&gt; +enabled udev rule. Without this new option, the behavior stays the sa=
-me<br>
-&gt; +(checks enabled).<br>
-&gt; +<br>
-&gt; +Signed-off-by: Yoann Congal &lt;<a href=3D"mailto:yoann.congal@smile.=
-fr" rel=3D"noreferrer" target=3D"_blank">yoann.congal@smile.fr</a>&gt;<br>
-&gt; +Upstream-Status: Submitted [<a href=3D"https://lists.linbit.com/piper=
-mail/drbd-dev/2024-March/007201.html" rel=3D"noreferrer noreferrer" target=
-=3D"_blank">https://lists.linbit.com/pipermail/drbd-dev/2024-March/007201.h=
-tml</a>]<br>
-&gt; +---<br>
-&gt; + <a href=3D"http://configure.ac" rel=3D"noreferrer noreferrer" target=
-=3D"_blank">configure.ac</a> | 9 +++++++--<br>
-&gt; + 1 file changed, 7 insertions(+), 2 deletions(-)<br>
-&gt; +<br>
-&gt; +diff --git a/<a href=3D"http://configure.ac" rel=3D"noreferrer norefe=
-rrer" target=3D"_blank">configure.ac</a> b/<a href=3D"http://configure.ac" =
-rel=3D"noreferrer noreferrer" target=3D"_blank">configure.ac</a><br>
-&gt; +index d5a0e733..da083240 100644<br>
-&gt; +--- a/<a href=3D"http://configure.ac" rel=3D"noreferrer noreferrer" t=
-arget=3D"_blank">configure.ac</a><br>
-&gt; ++++ b/<a href=3D"http://configure.ac" rel=3D"noreferrer noreferrer" t=
-arget=3D"_blank">configure.ac</a><br>
-&gt; +@@ -71,6 +71,11 @@ AC_ARG_WITH([udev],<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0[AS_HELP_STRING([--with-udev],<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0[Enable udev integration])],<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0[WITH_UDEV=3D$withval])<br>
-&gt; ++AC_ARG_ENABLE([udevchecks],<br>
-&gt; ++=C2=A0 =C2=A0 =C2=A0 [AS_HELP_STRING([--disable-udevchecks],<br>
-&gt; ++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 [Disable host udev version checks])],<br>
-&gt; ++=C2=A0 =C2=A0 =C2=A0 [],<br>
-&gt; ++=C2=A0 =C2=A0 =C2=A0 [enable_udevchecks=3Dyes])<br>
-&gt; + AC_ARG_WITH([xen],<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0[AS_HELP_STRING([--with-xen],<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0[Enable Xen integration])],<br>
-&gt; +@@ -309,7 +314,7 @@ if test -z $GIT; then<br>
-&gt; +=C2=A0 =C2=A0 AC_MSG_WARN(Cannot update buildtag without git. You may=
- safely ignore this warning when building from a tarball.)<br>
-&gt; + fi<br>
-&gt; +<br>
-&gt; +-if test $UDEVADM =3D false &amp;&amp; test $UDEVINFO =3D false; then=
-<br>
-&gt; ++if test &quot;x$enable_udevchecks&quot; !=3D &quot;xno&quot; &amp;&a=
-mp; test $UDEVADM =3D false &amp;&amp; test $UDEVINFO =3D false; then<br>
-&gt; +=C2=A0 =C2=A0 if test &quot;$WITH_UDEV&quot; =3D &quot;yes&quot;; the=
-n<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 AC_MSG_WARN([udev support enabled, but neither u=
-devadm nor udevinfo found on this system.])<br>
-&gt; +=C2=A0 =C2=A0 fi<br>
-&gt; +@@ -413,7 +418,7 @@ dnl default.<br>
-&gt; + test -z $INITDIR &amp;&amp; INITDIR=3D&quot;$sysconfdir/init.d&quot;=
-<br>
-&gt; +<br>
-&gt; + dnl Our udev rules file is known to work only with udev &gt;=3D 85<b=
-r>
-&gt; +-if test &quot;$WITH_UDEV&quot; =3D &quot;yes&quot;; then<br>
-&gt; ++if test &quot;x$enable_udevchecks&quot; !=3D &quot;xno&quot; &amp;&a=
-mp; test &quot;$WITH_UDEV&quot; =3D &quot;yes&quot;; then<br>
-&gt; +=C2=A0 =C2=A0 udev_version=3D$( set -- $($UDEVADM version); echo $1 )=
-<br>
-&gt; +=C2=A0 =C2=A0 if test -z &quot;$udev_version&quot;; then<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0udev_version=3D$( set -- $($UDEVINFO -V); =
-echo $3 )<br>
-&gt; diff --git a/meta-networking/recipes-support/drbd/<a href=3D"http://dr=
-bd-utils_9.22.0.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">drbd-ut=
-ils_9.22.0.bb</a> b/meta-networking/recipes-support/drbd/<a href=3D"http://=
-drbd-utils_9.22.0.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">drbd-=
-utils_9.22.0.bb</a><br>
-&gt; index 960260fd39..65a43d9b26 100644<br>
-&gt; --- a/meta-networking/recipes-support/drbd/<a href=3D"http://drbd-util=
-s_9.22.0.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">drbd-utils_9.2=
-2.0.bb</a><br>
-&gt; +++ b/meta-networking/recipes-support/drbd/<a href=3D"http://drbd-util=
-s_9.22.0.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">drbd-utils_9.2=
-2.0.bb</a><br>
-&gt; @@ -12,6 +12,7 @@ SRC_URI =3D &quot;git://<a href=3D"http://github.com=
-/LINBIT/drbd-utils;name=3Ddrbd-utils;branch=3Dmaster;prot" rel=3D"noreferre=
-r noreferrer" target=3D"_blank">github.com/LINBIT/drbd-utils;name=3Ddrbd-ut=
-ils;branch=3Dmaster;prot</a><br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://0001-drbdmon-add=
--LDFLAGS-when-linking.patch \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://0001-replace-off=
-64_t-with-off_t.patch \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0${@bb.utils.contains(&#=
-39;DISTRO_FEATURES&#39;,&#39;usrmerge&#39;,&#39;file://0001-drbd-utils-supp=
-ort-usrmerge.patch&#39;,&#39;&#39;,d)} \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://0001-configure.ac-Add=
--an-option-to-disable-host-udev-vers.patch \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;<br>
-&gt;=C2=A0 SRC_URI:append:libc-musl =3D &quot; file://0002-drbdadm-drop-use=
--of-GLOB_MAGCHAR-use-strchr-heuristi.patch &quot;<br>
-&gt;=C2=A0 SRCREV_drbd-utils =3D &quot;409097fe02187f83790b88ac3e0d94f3c167=
-adab&quot;<br>
-&gt; @@ -39,6 +40,7 @@ EXTRA_OECONF =3D &quot; \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 --with-i=
-nitscripttype=3Dboth=C2=A0 =C2=A0 \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 --with-s=
-ystemdunitdir=3D${systemd_unitdir}/system \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 --withou=
-t-manual \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 --disable-ude=
-vchecks \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;<br=
->
-&gt;<br>
-&gt;=C2=A0 # If we have inherited reproducible_build, we want to use it.<br=
->
-&gt; --<br>
-&gt; 2.39.2<br>
-&gt;<br>
-&gt;<br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt; Links: You receive all messages sent to this group.<br>
-&gt; View/Reply Online (#109102): <a href=3D"https://lists.openembedded.org=
-/g/openembedded-devel/message/109102" rel=3D"noreferrer noreferrer" target=
-=3D"_blank">https://lists.openembedded.org/g/openembedded-devel/message/109=
-102</a><br>
-&gt; Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/10473046=
-5/1997914" rel=3D"noreferrer noreferrer" target=3D"_blank">https://lists.op=
-enembedded.org/mt/104730465/1997914</a><br>
-&gt; Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openem=
-bedded.org" rel=3D"noreferrer" target=3D"_blank">openembedded-devel+owner@l=
-ists.openembedded.org</a><br>
-&gt; Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-=
-devel/unsub" rel=3D"noreferrer noreferrer" target=3D"_blank">https://lists.=
-openembedded.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem=
-@gmail.com" rel=3D"noreferrer" target=3D"_blank">raj.khem@gmail.com</a>]<br=
->
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt;<br>
-</blockquote></div></div><div>-- <br>Yoann Congal - Smile ECS</div></div>
-</blockquote></div><br clear=3D"all"><br><span class=3D"gmail_signature_pre=
-fix">-- </span><br><div dir=3D"ltr" class=3D"gmail_signature"><div dir=3D"l=
-tr"><font face=3D"Raleway, regular">Yoann Congal</font><div><font face=3D"R=
-aleway, regular">Smile ECS - Tech expert<br></font></div></div></div></div>
-
---00000000000050d1f10612e6e7d4--
 
