@@ -1,223 +1,110 @@
-Return-Path: <alperyasinak1@gmail.com>
+Return-Path: <andre.paiusco@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 64B82C5475B
-	for <webhook@archiver.kernel.org>; Wed,  6 Mar 2024 18:38:54 +0000 (UTC)
-Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
- by mx.groups.io with SMTP id smtpd.web10.1781.1709750325129182150
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7BF51C54E41
+	for <webhook@archiver.kernel.org>; Wed,  6 Mar 2024 18:58:04 +0000 (UTC)
+Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com [209.85.167.53])
+ by mx.groups.io with SMTP id smtpd.web10.2350.1709751479037711142
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Mar 2024 10:38:45 -0800
+ Wed, 06 Mar 2024 10:57:59 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=f3guNAgv;
- spf=pass (domain: gmail.com, ip: 209.85.216.49, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-pj1-f49.google.com with SMTP id 98e67ed59e1d1-29b6f82125dso1292886a91.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Mar 2024 10:38:45 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=G2dVVQk6;
+ spf=pass (domain: gmail.com, ip: 209.85.167.53, mailfrom: andre.paiusco@gmail.com)
+Received: by mail-lf1-f53.google.com with SMTP id 2adb3069b0e04-512e4f4e463so28921e87.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Mar 2024 10:57:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1709750324; x=1710355124; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=5BzKL3gWeYIRJxTmQZFgCN8Sh/zy+rduJSyYMH+fwik=;
-        b=f3guNAgvYfyy0D5Xiobo52xH3DOk3NaXCTpenQJjY7/l7ub8RBmngRSeH8qjOh62kP
-         TSu+awjSCffyxjRfLc0mhYda53Ig7kGIYz0tOjojln39aiuvGwtf3NT7F0Z81BrNB0tn
-         GzXyIb36k1qv3EkMRDfn7+VZRxbSp0bLWN7UpIuGcQQ8VxVtMRO+zS9gf3armNUzP8zc
-         UQ4VbCHWdyCHnPNCIMDziZAyAnt+jis+Cq8FwPZZk966D8U/krzmH2GqvQ5Rmqb87PKq
-         jr8J5QRRz40nlJhOo9ufGNB76g8ZTXsaa0RvUli0XNMel6iVG+VOblWQUiVTrN/R37AH
-         Rw7Q==
+        d=gmail.com; s=20230601; t=1709751476; x=1710356276; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=lU1ZMZPhjIPJV7/Lqjh5Ezuo0+l4thl0tSnbSgLcrq8=;
+        b=G2dVVQk6b9iJ3xvuyzsXgTxt5MAcpglgpKJWoRteipL7h/JfUuNy0vSuXrXVjMiIif
+         HmwUSxJwvex5E1shwUZoeeahUh/vF6aodPjZ/cV/I88FOw0lMZhpeRC5X82ZEDLFwGaV
+         tkb7PCBcokJDyqtJpfMxbRrN/BSYX+8covlIuvzikQ34naJwTMaAFyD7eDR9XwS6WKRw
+         ehPWfXnJboIty1S4mFaHAQGPhxne/RoHqZ0mz2PeFjexwOZnvmHpiJVb3ONT6OVD1Lbd
+         RozKmw5tdmu0Z70ZQj/BlYJ6P4gUOzbBBauAQGlmflsOIdn9npWfYXcprXumx+rnaLYB
+         mvYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1709750324; x=1710355124;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1709751476; x=1710356276;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=5BzKL3gWeYIRJxTmQZFgCN8Sh/zy+rduJSyYMH+fwik=;
-        b=JTe35vYXVB+rqvS0dtzrw1mHAVYZkBMXrylolIcL1m/7fUe6+x4uKkbA6jKvLEe3pG
-         olYpqDf89jRU0rp+RUT8YsTQS8SQx1URxYEtulypinK4i5hNLQvzHc9Y5HuYenB7t4a2
-         LAM/Bg++CHa/qewgJI78sJF3aD5bgcYqvBn+/fX/We0+L/8vDeLHhYqGHGBnWuEZgbBp
-         YY02yfhsxKAsI+cNbVREp3zFTlTc1SkXLgaiC49Cuk0ZGldNgzKDFrb4O7BX8u2b2NtW
-         5he2GMVDKKLrWm2kqdj7IGdSY7HvLR/dzsOfs9IJTrmStmbd5mpCSxXeFBGrUgEnsbxc
-         MAPA==
-X-Gm-Message-State: AOJu0Yzwtyx58fq6vZYFqM7iNrCq399WGaBGXHkxszBqZY1yhWRGIPX2
-	w6AGi5WekcddiV6f9jbgFcc0s3wmNOT9BNPDC/k0kXrHu/YCSdQmw4jUTte5x+U3T+10x6BBMuo
-	D6XUqo4HrAp/SbjdMq6yVR8wiIbM=
-X-Google-Smtp-Source: AGHT+IGpW2dYwGVmQr0QxoeTIA7nzzaPmQrNgPoS8dfrGaiSCGtN3oEKEBMnTHsok10bhLGvGZXMHe+ynWymUt6VUfQ=
-X-Received: by 2002:a17:90b:886:b0:299:3c2e:64ca with SMTP id
- bj6-20020a17090b088600b002993c2e64camr13050353pjb.14.1709750323929; Wed, 06
- Mar 2024 10:38:43 -0800 (PST)
+        bh=lU1ZMZPhjIPJV7/Lqjh5Ezuo0+l4thl0tSnbSgLcrq8=;
+        b=gzzdZT9lkKJqOLhQjqT7dk1ViyzGSP7xY2jbyAAIJ3fk2NraiTrn8Q1+p4tdH+KPkf
+         Qgk94tIa9g3LR5FDQ+WGeubtGkt5sbqdU6hCYRdCSA4OWrp5dN/Pv0dGtQjwW4Hp9tNW
+         Lr55DwqQIZ2p3zuacQSMvO1fkxKlNuaFBaDfdjdmLCcurSrdQ1gOymoyQNJJTCZuMPfc
+         jB/93z80UGeU2TG/k0JGQGEZ3RwXhWXiFzuaMSFZ16DC4C9+s5WF6UqpK7061nBAwYn2
+         FdOb5maC9TMJM7RRNnOLUTkTj63J1fuade0f7LjdqSpdGcLad0s/9YfkdjB1V40X6v02
+         ANGg==
+X-Gm-Message-State: AOJu0YwYUNzS8zktYz7HPsxvfRcOf8NhmSqNbhhHXIWcY9G8au0/notB
+	RvJkPr0olNLP+HDbZXmbSQFfj1xu7wjtqWDEvJBHsOsMJgsjPFSnh9wGH6a1
+X-Google-Smtp-Source: AGHT+IEytIcvpwW6uc7vlMDnT7CxzvwKCVUGzJLwnIxozX1GGoaXTtklyJALay9R5dZ/DYI6//tVbQ==
+X-Received: by 2002:a05:6512:3d05:b0:513:426e:618 with SMTP id d5-20020a0565123d0500b00513426e0618mr5797464lfv.48.1709751476005;
+        Wed, 06 Mar 2024 10:57:56 -0800 (PST)
+Received: from localhost.localdomain (84-107-6-196.cable.dynamic.v4.ziggo.nl. [84.107.6.196])
+        by smtp.gmail.com with ESMTPSA id h5-20020a1709062dc500b00a45beb1c671sm799947eji.13.2024.03.06.10.57.55
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 06 Mar 2024 10:57:55 -0800 (PST)
+From: Andre Paiusco <andre.paiusco@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Andre Paiusco <andre.paiusco@gmail.com>
+Subject: [PATCH] ydotool: Add new package
+Date: Wed,  6 Mar 2024 19:57:23 +0100
+Message-ID: <20240306185724.14629-1-andre.paiusco@gmail.com>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
-References: <20240306171740.480830-1-alperyasinak1@gmail.com> <CAMKF1sqjODuzjjc47US2obJXSX7uJLKC0XEu91fRLiZRrY3HgQ@mail.gmail.com>
-In-Reply-To: <CAMKF1sqjODuzjjc47US2obJXSX7uJLKC0XEu91fRLiZRrY3HgQ@mail.gmail.com>
-From: Alper Ak <alperyasinak1@gmail.com>
-Date: Wed, 6 Mar 2024 21:38:32 +0300
-Message-ID: <CAGpma=7YWN5pyD9ZqkyzN_7abqxVdnppVVoNYi0h2P64mH5TLQ@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH] python3-icecream: add recipe
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000b66e33061302442e"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 06 Mar 2024 18:38:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109177
+ <openembedded-devel@lists.openembedded.org>; Wed, 06 Mar 2024 18:58:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109178
 
---000000000000b66e33061302442e
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Andre Paiusco <andre.paiusco@gmail.com>
+---
+ .../packagegroups/packagegroup-meta-oe.bb      |  1 +
+ .../recipes-graphics/ydotool/ydotool_git.bb    | 18 ++++++++++++++++++
+ 2 files changed, 19 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/ydotool/ydotool_git.bb
 
-There is but when I tried to test it, I encountered deprecated things being
-used. For example, new assert function name is required for Python 3.12
-compat.
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index 6e2012dae..dd033208b 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -611,6 +611,7 @@ RDEPENDS:packagegroup-meta-oe-graphics ="\
+     xcursorgen \
+     ${@bb.utils.contains("DISTRO_FEATURES", "x11 pam", "xscreensaver", "", d)} \
+     yad \
++    ydotool \
+     parallel-deqp-runner \
+     ${@bb.utils.contains("DISTRO_FEATURES", "opengl", "opengl-es-cts", "", d)} \
+     ${@bb.utils.contains("DISTRO_FEATURES", "opengl vulkan", "vulkan-cts", "", d)} \
+diff --git a/meta-oe/recipes-graphics/ydotool/ydotool_git.bb b/meta-oe/recipes-graphics/ydotool/ydotool_git.bb
+new file mode 100644
+index 000000000..83ab1fc37
+--- /dev/null
++++ b/meta-oe/recipes-graphics/ydotool/ydotool_git.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "Generic Linux command-line automation tool (no X!)"
++DESCRIPTION = "ydotool is not limited to Wayland. You can use it on anything as long as it accepts keyboard/mouse/whatever input."
++LICENSE = "AGPL-3.0-or-later"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=eb1e647870add0502f8f010b19de32af"
++
++DEPENDS = "systemd"
++PV = "1.0.4+git${SRCPV}"
++
++SRC_URI = "git://github.com/ReimuNotMoe/ydotool;protocol=https;branch=master"
++SRCREV = "c07ae72be46c40912023b91b8ba737630d8720e1"
++
++inherit cmake systemd pkgconfig
++
++EXTRA_OECMAKE = "\
++    -DBUILD_DOCS=OFF \
++"
++
++SYSTEMD_SERVICE:${PN} = "ydotoold.service
+\ No newline at end of file
+-- 
+2.44.0
 
-Khem Raj <raj.khem@gmail.com>, 6 Mar 2024 =C3=87ar, 20:19 tarihinde =C5=9Fu=
-nu yazd=C4=B1:
-
-> Are there any unit tests with this new package ?
->
-> On Wed, Mar 6, 2024 at 9:17=E2=80=AFAM Alper Ak <alperyasinak1@gmail.com>=
- wrote:
-> >
-> > icecream (ic) package offers a more concise and readable way to debug
-> code by replacing print statements with simple function calls.
-> >
-> > Signed-off-by: alperak <alperyasinak1@gmail.com>
-> > ---
-> >  .../python/python3-icecream_2.1.3.bb            | 17 +++++++++++++++++
-> >  1 file changed, 17 insertions(+)
-> >  create mode 100644 meta-python/recipes-devtools/python/
-> python3-icecream_2.1.3.bb
-> >
-> > diff --git a/meta-python/recipes-devtools/python/
-> python3-icecream_2.1.3.bb b/meta-python/recipes-devtools/python/
-> python3-icecream_2.1.3.bb
-> > new file mode 100644
-> > index 000000000..ec3a4b90f
-> > --- /dev/null
-> > +++ b/meta-python/recipes-devtools/python/python3-icecream_2.1.3.bb
-> > @@ -0,0 +1,17 @@
-> > +SUMMARY =3D "Never use print() to debug again; inspect variables,
-> expressions, and program execution with a single, simple function call."
-> > +HOMEPAGE =3D "https://github.com/gruns/icecream"
-> > +LICENSE =3D "MIT"
-> > +LIC_FILES_CHKSUM =3D
-> "file://LICENSE.txt;md5=3Deca5ce1610d64ed40920efdce85ff8d1"
-> > +
-> > +SRC_URI[sha256sum] =3D
-> "0aa4a7c3374ec36153a1d08f81e3080e83d8ac1eefd97d2f4fe9544e8f9b49de"
-> > +
-> > +inherit pypi setuptools3
-> > +
-> > +RDEPENDS:${PN} +=3D " \
-> > +        python3-asttokens \
-> > +        python3-colorama \
-> > +        python3-executing \
-> > +        python3-numbers \
-> > +        python3-pygments \
-> > +        python3-pprint \
-> > +"
-> > --
-> > 2.25.1
-> >
-> >
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#109174):
-> https://lists.openembedded.org/g/openembedded-devel/message/109174
-> > Mute This Topic: https://lists.openembedded.org/mt/104770329/1997914
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[
-> raj.khem@gmail.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
->
-
---000000000000b66e33061302442e
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr">There is but when I tried to test it, I e=
-ncountered deprecated things being used. For example, new assert function n=
-ame is required for Python 3.12 compat.</div></div><br><div class=3D"gmail_=
-quote"><div dir=3D"ltr" class=3D"gmail_attr">Khem Raj &lt;<a href=3D"mailto=
-:raj.khem@gmail.com">raj.khem@gmail.com</a>&gt;, 6 Mar 2024 =C3=87ar, 20:19=
- tarihinde =C5=9Funu yazd=C4=B1:<br></div><blockquote class=3D"gmail_quote"=
- style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);p=
-adding-left:1ex">Are there any unit tests with this new package ?<br>
-<br>
-On Wed, Mar 6, 2024 at 9:17=E2=80=AFAM Alper Ak &lt;<a href=3D"mailto:alper=
-yasinak1@gmail.com" target=3D"_blank">alperyasinak1@gmail.com</a>&gt; wrote=
-:<br>
-&gt;<br>
-&gt; icecream (ic) package offers a more concise and readable way to debug =
-code by replacing print statements with simple function calls.<br>
-&gt;<br>
-&gt; Signed-off-by: alperak &lt;<a href=3D"mailto:alperyasinak1@gmail.com" =
-target=3D"_blank">alperyasinak1@gmail.com</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 .../python/<a href=3D"http://python3-icecream_2.1.3.bb" rel=3D"n=
-oreferrer" target=3D"_blank">python3-icecream_2.1.3.bb</a>=C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 | 17 +++++++++++++++++<br>
-&gt;=C2=A0 1 file changed, 17 insertions(+)<br>
-&gt;=C2=A0 create mode 100644 meta-python/recipes-devtools/python/<a href=
-=3D"http://python3-icecream_2.1.3.bb" rel=3D"noreferrer" target=3D"_blank">=
-python3-icecream_2.1.3.bb</a><br>
-&gt;<br>
-&gt; diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://pyt=
-hon3-icecream_2.1.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-icecre=
-am_2.1.3.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://pyt=
-hon3-icecream_2.1.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-icecre=
-am_2.1.3.bb</a><br>
-&gt; new file mode 100644<br>
-&gt; index 000000000..ec3a4b90f<br>
-&gt; --- /dev/null<br>
-&gt; +++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-ic=
-ecream_2.1.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-icecream_2.1.=
-3.bb</a><br>
-&gt; @@ -0,0 +1,17 @@<br>
-&gt; +SUMMARY =3D &quot;Never use print() to debug again; inspect variables=
-, expressions, and program execution with a single, simple function call.&q=
-uot;<br>
-&gt; +HOMEPAGE =3D &quot;<a href=3D"https://github.com/gruns/icecream" rel=
-=3D"noreferrer" target=3D"_blank">https://github.com/gruns/icecream</a>&quo=
-t;<br>
-&gt; +LICENSE =3D &quot;MIT&quot;<br>
-&gt; +LIC_FILES_CHKSUM =3D &quot;file://LICENSE.txt;md5=3Deca5ce1610d64ed40=
-920efdce85ff8d1&quot;<br>
-&gt; +<br>
-&gt; +SRC_URI[sha256sum] =3D &quot;0aa4a7c3374ec36153a1d08f81e3080e83d8ac1e=
-efd97d2f4fe9544e8f9b49de&quot;<br>
-&gt; +<br>
-&gt; +inherit pypi setuptools3<br>
-&gt; +<br>
-&gt; +RDEPENDS:${PN} +=3D &quot; \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 python3-asttokens \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 python3-colorama \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 python3-executing \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 python3-numbers \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 python3-pygments \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 python3-pprint \<br>
-&gt; +&quot;<br>
-&gt; --<br>
-&gt; 2.25.1<br>
-&gt;<br>
-&gt;<br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt; Links: You receive all messages sent to this group.<br>
-&gt; View/Reply Online (#109174): <a href=3D"https://lists.openembedded.org=
-/g/openembedded-devel/message/109174" rel=3D"noreferrer" target=3D"_blank">=
-https://lists.openembedded.org/g/openembedded-devel/message/109174</a><br>
-&gt; Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/10477032=
-9/1997914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.=
-org/mt/104770329/1997914</a><br>
-&gt; Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openem=
-bedded.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.o=
-rg</a><br>
-&gt; Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-=
-devel/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedde=
-d.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com"=
- target=3D"_blank">raj.khem@gmail.com</a>]<br>
-&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-&gt;<br>
-</blockquote></div>
-
---000000000000b66e33061302442e--
 
