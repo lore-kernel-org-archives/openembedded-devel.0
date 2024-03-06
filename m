@@ -1,504 +1,795 @@
-Return-Path: <yi.zhao@eng.windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 37126C5475B
-	for <webhook@archiver.kernel.org>; Wed,  6 Mar 2024 12:54:29 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.11049.1709729663203104613
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 55988C54E41
+	for <webhook@archiver.kernel.org>; Wed,  6 Mar 2024 16:02:52 +0000 (UTC)
+Received: from mail-oi1-f182.google.com (mail-oi1-f182.google.com [209.85.167.182])
+ by mx.groups.io with SMTP id smtpd.web10.15679.1709740966390331660
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Mar 2024 04:54:23 -0800
+ Wed, 06 Mar 2024 08:02:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=GQ8g8Vol;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=37951e9ca0=yi.zhao@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 4264UTrM017888
-	for <openembedded-devel@lists.openembedded.org>; Wed, 6 Mar 2024 04:54:22 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:content-transfer-encoding
-	:content-type:mime-version; s=PPS06212021; bh=jJULudV0Xl2HT1E27W
-	cZ9CMDqrjDVlvpruC4XmVm4G0=; b=GQ8g8VolBsrUQj4jrIaST2hvX3xmo5j1Au
-	DwMLtAHnCcLqbFwELC2qmOV0DMI1v4Zkqmg1qsTnvCcF1ZKad9warvHlPPhnOV9x
-	MlKJ7A+n1ZFiECgZDTzAdduBr7UHR93oYzLiULKAc+w2pNtnwd14dTuPznhTyxCH
-	lzNoYT7mmbSWYuLZq+e0z5sJG7WNxDfmRQ/cvaDSZtg0047ghC5P446o8zSKLjZX
-	TqEccc2/vlQjWEpv2WzdqBhDkNR0BAXBgsaXAwOVP5DwQgaNbvtiJkmJ8k3KVzaI
-	bVSXn4RVecwWX91qfnlpnDd5RF/1fDWW2fihVz8i5LfgIXSd8+CA==
-Received: from nam11-bn8-obe.outbound.protection.outlook.com (mail-bn8nam11lp2168.outbound.protection.outlook.com [104.47.58.168])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3wm093us50-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 06 Mar 2024 04:54:22 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=fH6q6rbqlUxDjZ6Y2FSj+NStpoWSwFzBcCKGIo7CRdWd4WextksEt3UtZpTJ5P+xkJN8z4B3FcxqvoWvzz2Mlka9H/FuvqG/6YbqfL33P81QQz2OrnRUis63tMjv7rmHfaRzJyWT6YERiWHCUAtK9wq8bT2g+YgClti3++/cYFjnJkgPwwu+CJ0FwSVmLMa2XKF+QITdgtwqbd0w1wjXhKH/uKaHevBnyHhWwe87Yf33GiiGwzpgx6urxmFARusQ0vqRo61yNUfVuydRsZ8jDQ3RqXIYwPJI49f6lHoHJbagV3eqCdTuoH6V8lJNoc5bzyqMCyLtXcAbMffaQSVPoQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jJULudV0Xl2HT1E27WcZ9CMDqrjDVlvpruC4XmVm4G0=;
- b=kS9k5l4m2OioodoFfDQTzAw9DWrdyeacLU2jyazJtIp7jwJhheo8MUS94LYkF1rk1QUbW2UJdMbUBkQZDusy9syJGSOg8z6Yulyn7efaeyiwOZ0bZutSs/uIgzYsYXAMNDQ7YSqIIqTXHzHXYi2UEuIPb0GJi/GmUgj0AqYzCtmGhwmudXMuMTw8JFc4ko0eXjNk/6yT8avgWUPn+FVPz3vxhjLlpHpIGdcsxI764MFPM7FYYRAb23uaHCJfVGJIdUqsUCg2UTvO5RUNgz7yVYHtGpJBA7xHNXT9Ce7uhsEkLXW6fXHMxCEjFl/73KfBK3CSjqhXZLUjkP/751t8kQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from DS0PR11MB7484.namprd11.prod.outlook.com (2603:10b6:8:14c::10)
- by DM6PR11MB4562.namprd11.prod.outlook.com (2603:10b6:5:2a8::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7339.25; Wed, 6 Mar
- 2024 12:54:18 +0000
-Received: from DS0PR11MB7484.namprd11.prod.outlook.com
- ([fe80::97da:833f:8511:a558]) by DS0PR11MB7484.namprd11.prod.outlook.com
- ([fe80::97da:833f:8511:a558%6]) with mapi id 15.20.7362.019; Wed, 6 Mar 2024
- 12:54:18 +0000
-From: Yi Zhao <yi.zhao@windriver.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] netplan: upgrade 0.106 -> 1.0
-Date: Wed,  6 Mar 2024 20:54:06 +0800
-Message-Id: <20240306125406.1381827-1-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.25.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SI2PR01CA0024.apcprd01.prod.exchangelabs.com
- (2603:1096:4:192::20) To DS0PR11MB7484.namprd11.prod.outlook.com
- (2603:10b6:8:14c::10)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=D9Fa4lNX;
+ spf=pass (domain: gmail.com, ip: 209.85.167.182, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f182.google.com with SMTP id 5614622812f47-3c1f55ba3ecso1755101b6e.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Mar 2024 08:02:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1709740965; x=1710345765; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=1uMURPmjcUfim9Ec6XS7PmQN6WKxLEpCZevnBURbCZ8=;
+        b=D9Fa4lNXVr84k8Bf3gmMjWE1jUS35N9yqqH0+c7QUxylOIz/3mtkd9l5NyALyul4HH
+         mDAQCahdkRUovAYTkgfnnKJUYi5KFKVRz0KCqedNEUq2wgOa10S/ZkJ+I5Vwm8KTXvvi
+         Fj/shSzxMHhcKxeoCSCfq/9ZWxf3rvrpjByKN/V7ibRkb5YR26v7ZC+7YND6Vu0gcoxV
+         YyUYo/EIU60iARkqtCHlnFwEKC9fDhO4r7Xwzt1xo6KD2PB8t+8hKjH67jpUvAUhcct4
+         q7X7G9prfn5S32rFFjkA+eWmBnA9Dyc6Z30xbuuq8FXCxWgRV+gIDwQ8IFs/rBTGY0rD
+         ioAA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1709740965; x=1710345765;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=1uMURPmjcUfim9Ec6XS7PmQN6WKxLEpCZevnBURbCZ8=;
+        b=TqeVOBiBmJhaw5QEy9PAv8llsBaGuV+FnhDy0SSLxijf+VNR0TaE3L2V28njS/ixo9
+         uiM/HNjm9BmyjtbHCBmpEafifUmE3egjZ2rVAWBG6Ph9v9E0Mdmczf2NJQMmC+snhPNA
+         dbZhHwS3c3dUva2goEQ12OefHFlwrO3EVjelw6OhLldBX60Tn6gmyduDLtq5X8fIg7I9
+         nwl8lw1iBF+ubNfIU+926tvA4x+y4g1K/j0isOoFPluVDbppYKMjvAyLbacyxuYAa9IL
+         48Nkcnhv4bJl+SOgOnGa78cTIWyj9NVLJijGY0xmprzlJ9GMjm5ZrWU1MhmA8c76b6RU
+         AbYA==
+X-Gm-Message-State: AOJu0YxvYsAYuzp+iD9IG2T/8JLfIMiMMrBFqesCJKNJ2yRbiRo0/wTE
+	lJ+J84gAY8/xx0JyWNosFp1bXD9LJASrWl8ZAyQyg+OSv4IGNa1o3GgKmMGvf01v9jyjbnHN9/u
+	YCKYwQfRSM+BdGkroCU2IKHUPMwVWSbdm
+X-Google-Smtp-Source: AGHT+IEVduR+6LbZ0CwwMkbAVdT6F2r1WmCPYLrES/r6C+E5gUzbNUPdnWkf37XoUb/8EWRXv41SeiqX3IUSAxAh/Jc=
+X-Received: by 2002:a05:6870:55d4:b0:220:be34:7ee2 with SMTP id
+ qk20-20020a05687055d400b00220be347ee2mr5652118oac.26.1709740965129; Wed, 06
+ Mar 2024 08:02:45 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS0PR11MB7484:EE_|DM6PR11MB4562:EE_
-X-MS-Office365-Filtering-Correlation-Id: f4c2ab71-bc46-4d10-090b-08dc3ddc88cc
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	m6G5DZ809OBsH1gwMdsqZVWhiPhh7Eekp6IWRc5zwAkSjAImATEDokkrCOG9zl5cGaOj+wSLqHNY7C1oyr8cLampqvrdVB76z3mZMtfPvbnVra/cSPnGdt3ceafP0HuFhO/QosUvfqmBPjFeotSt4t+pY4BDKCowcKBVZ2Jp2fOjN+p/xNECQ9sQ2gCgqnv+T0Ce3gEh4NjuQkhs5BCIhjvKc3AiIuSEJiC9B7/vlqdb/RLC+KUOr/CYH8UOr6FOcMxW8RupraPRSR8Iq4q8vNJTbC36MfwmiNx2mP//vIDQ49PGZZ0KXvwHwmo3k+5QZGB5g3CQWrcdqIpsK5pM8o9MNp0a0PysFUeZyarClFTPKRwPCgQgRvH1WamGPUrWXW+xYKK72WTa6fuUa/diDmskbbZs5hCpP0ZyYYqnaLl3XrmnneqenwJ0dGXAtJZzo3OTTbTjl6eRf8JxwlNizoTU4hcxiFBqPET+oe0yDb8Mx9sqj8qHom2783oglWfjDfe31y40vM7YVYvPUwFa9lYZUjQAMDq73p5mscfZfZFjrogAhckx6HxiMGq0xSbDb7kUFygOd++rQpgFNbDaaEaObtfgmStPZpTrsuCGmY/5w7K9+L/g/0Fuctymei+JYnQFnnKOOlgcqtbXr5Oxh6lxUwpvTwcvzrRPRSz0zqAzb/54KMaf70s+OkjN58Xy
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB7484.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(376005)(38350700005);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?s3KX17LqTjGv8bep6y7sVsSM8dVwOQZOXBpa0xvdQpQrpr2vxVJ7/5AkxjaA?=
- =?us-ascii?Q?jp2cfd8xK3GswKbWrF3rC49WSFmzxS/4DUZk5G15pgYuLPVIPBz+vbduJZWX?=
- =?us-ascii?Q?pJPGYqDrSUVo0jKN1MA+PQbqKfJvhTU1Yeiaw16xkBULwmjg8EgHfl7ZGEDS?=
- =?us-ascii?Q?kmFZaBQpLJQNy/HQnPdBfA9SuIU+AzQHGXdgIoQ68Azh/6XJF9raJgdho7oD?=
- =?us-ascii?Q?gfQgMlziwXe69BioPNPVkNvf4g5mDMuE1uCrVf2MCGJciHjrofZaybxHpTXU?=
- =?us-ascii?Q?fuRgzeZuoqMqA3dpboGclP0ztgnDcViGlIUvqlMCm5aQTBh973TJJDn4vkDH?=
- =?us-ascii?Q?+pPT5tv8Re/AjoQA4gOL22pvOX7nSNFuGcF1eoPc3nI0Bh9rojftMRDy5sLO?=
- =?us-ascii?Q?G/H/yMyugOx85O4GQAYIUQy1M3VdGVCOKGj4xcpSWo6o8uzY31ifjrrRXJZH?=
- =?us-ascii?Q?CSJ7GeNvqR1/2xh4tavLqyyHOzwX1j+QybuhDQKaxEqM6bFczB4W+wSOgbAQ?=
- =?us-ascii?Q?9mjBZi8kHkgfYxpFYLuBuciYE7/9pcaEgpXP8anLln49V8fqKsQTSb5c5jWr?=
- =?us-ascii?Q?/8mnfMCqeBWNHBRU8stIzBRYCUjotb21PuKfkdAHWvY8Ytt/muz8WeLtwX8a?=
- =?us-ascii?Q?HpC2qU/iI1ccpUYiKOZ29o4NwgtkRloqdbZUYagiW/RnPTOqZqUDTFAyXUCI?=
- =?us-ascii?Q?VTYLGH447zJZzJIdu5cmhGNAE1lbw2FS/I5c5SMnIF+NSblgnIRgvJswYT7e?=
- =?us-ascii?Q?tccrGoVUOw8lKZy14fB6LRBVz4Qp7u1MFCqGwo+Aiffw0rISyzSebrD4FCFY?=
- =?us-ascii?Q?kSVN+UvcTBVAsVpIBlqtor+Hg7CBHQVsb25+5gzvCgviUOwpjFYg3omP7M39?=
- =?us-ascii?Q?YKdzzNDKv9wwHorzpcZtdygKzm1P8xIScav4F+Mph3XpC1tF89yQWFFLDbH8?=
- =?us-ascii?Q?zGFtzGvO/4GnoqVJpP8kq5cb7AUP88m228yPp1Kvlnt8xrH6WhhaZhXXN8oe?=
- =?us-ascii?Q?tmSPtS6NV8jJBYX390TrLmXdBUem7NCr8W0S2Sp+yo/+G2PLHNuQFVjsQNBh?=
- =?us-ascii?Q?kL9wtp6hbmKwG4crJijLN23yXfWnWx3ilaPGAsKO9APtsiDWBt2Cu4sAEq6s?=
- =?us-ascii?Q?bbi/q3fwLcDjRVDYpz3r49l/20LS8BzdAf+9qb7FnBsA3mWZTkjXlgjIpdur?=
- =?us-ascii?Q?ooBoN7dWJ4xlzcLn6vGiyQsUbb75q+x4XY90BbsAa53hR20IqWzwR5PHXa2d?=
- =?us-ascii?Q?x0HXWmlvxZLLVlHXM4JmXpWZLes+0D0d0cY0Hu0Mr1vw5qzqyj8kWa5KE3ei?=
- =?us-ascii?Q?llWAsMPiyDtmwvl5GfC6bntrtktoTUu8oUYSjrP7sa+z/+s/PQ58iafLctCt?=
- =?us-ascii?Q?jM7Llt9cim0b6W16X3ztizg9heosDWpJtmdIyVlV5MVw2NYvoAteWJGGOMOD?=
- =?us-ascii?Q?69LVQFi+FSX6/JRBAxygZi0EWIHlYKW2mm3bAKR+phVcGm9oFkQMUfzTv1ky?=
- =?us-ascii?Q?bnmWfqv5eGmu7UE632o5vx2uB4vhsaFF1l790KOj3QX8npZ+q9rHturfcJcu?=
- =?us-ascii?Q?KiMJ0X9YWDR+DaDCETL56iNsj2fQNjOwtP87+DsB?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f4c2ab71-bc46-4d10-090b-08dc3ddc88cc
-X-MS-Exchange-CrossTenant-AuthSource: DS0PR11MB7484.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Mar 2024 12:54:18.0298
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: HnjOLn29GPafewyEhSFQ1pBeViakCIb+C2i22dKB03hpkJbT9T1V/Albdoxlg16hmuPFPW4NsIzhSaR5XmEP5A==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR11MB4562
-X-Proofpoint-GUID: N7J774MXTjwYfQaruh6u1UNwuqp1hfRK
-X-Proofpoint-ORIG-GUID: N7J774MXTjwYfQaruh6u1UNwuqp1hfRK
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-03-06_08,2024-03-05_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0 spamscore=0
- lowpriorityscore=0 impostorscore=0 clxscore=1015 adultscore=0
- mlxlogscore=999 mlxscore=0 malwarescore=0 phishscore=0 priorityscore=1501
- suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2402120000 definitions=main-2403060103
+References: <20240222134140.2367805-1-William.Lyu@windriver.com>
+ <CAMKF1spgXkbYj446g_ujSO41hrR9kUx14SF-iyw1y33-4Y7x3g@mail.gmail.com>
+ <LV3PR11MB8767C8BB2545D95BF7131C3FEE5E2@LV3PR11MB8767.namprd11.prod.outlook.com>
+ <CAMKF1spywovBtYyEUOd5paR-4sSpe-aXLe8tY2jzg13mvSO03g@mail.gmail.com>
+ <550e0375-89cc-4ec0-b16d-5a7882fd3a08@windriver.com> <3d1bd8f4-1e81-478e-96ad-f2956c065a50@windriver.com>
+ <CAMKF1spUjLnzLuOh=doaMRx++MVEjVoXbz7p4Z5NV=FqbdPAxA@mail.gmail.com> <c5f6672d-9173-46c5-b455-06cb48fed3da@windriver.com>
+In-Reply-To: <c5f6672d-9173-46c5-b455-06cb48fed3da@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 6 Mar 2024 08:02:33 -0800
+Message-ID: <CAMKF1spQ_cNhb8trCRQVH5-GooXEyBfpMeOat2qpkjaFb+_FmQ@mail.gmail.com>
+Subject: Re: [oe] [meta-filesystems][PATCH] e2tools: Add ptest
+To: "Lyu, William" <William.Lyu@windriver.com>
+Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="000000000000e271c7061300169f"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 06 Mar 2024 12:54:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109167
+ <openembedded-devel@lists.openembedded.org>; Wed, 06 Mar 2024 16:02:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109168
 
-Release Notes:
-https://github.com/canonical/netplan/releases/tag/1.0
+--000000000000e271c7061300169f
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-* Switch to meson build
-* Add systemd to REQUIRED_DISTRO_FEATURES as systemd dependency can not
-  be removed.
-* Add a patch to fix build with clang.
+On Wed, Mar 6, 2024 at 8:00=E2=80=AFAM Lyu, William <William.Lyu@windriver.=
+com>
+wrote:
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
----
- .../0001-Makefile-do-not-use-Werror.patch     | 26 -------
- ...-t-fail-if-GLOB_BRACE-is-not-defined.patch | 12 ++--
- ...-drop-unnecessary-build-dependencies.patch | 58 ++++++++++++++++
- ...ine-scope-specific-to-case-statement.patch | 47 +++++++++++++
- .../0002-meson.build-do-not-use-Werror.patch  | 29 ++++++++
- .../netplan/netplan_0.106.bb                  | 67 -------------------
- .../netplan/netplan_1.0.bb                    | 47 +++++++++++++
- 7 files changed, 187 insertions(+), 99 deletions(-)
- delete mode 100644 meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan/0001-Makefile-do-not-use-Werror.patch
- create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan/0001-meson.build-drop-unnecessary-build-dependencies.patch
- create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan/0001-networkd.c-define-scope-specific-to-case-statement.patch
- create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan/0002-meson.build-do-not-use-Werror.patch
- delete mode 100644 meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan_0.106.bb
- create mode 100644 meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan_1.0.bb
+> I see that you pushed a commit that adds command removing unnecessary
+> files and host paths in the e2tools recipe.
+>
+>
+> https://github.com/openembedded/meta-openembedded/commit/92b6825a870fde29=
+1b1244193dba8d7c1051c53f
+>
+> I have tested this latest e2tools recipe locally using the latest poky.
+> I built an image using "bitbake core-image-minimal" with e2tools and its
+> ptest package. The build was successful (still no QA errors) and the
+> ptest for e2tools ran without any issue.
+>
+> Are you still seeing the [file-rdeps] QA issues on the Yocto Autobuilder?
+>
+No
+This patch fixes the issue this is what I have been asking for all along
 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan/0001-Makefile-do-not-use-Werror.patch b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan/0001-Makefile-do-not-use-Werror.patch
-deleted file mode 100644
-index b8c48d540..000000000
---- a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan/0001-Makefile-do-not-use-Werror.patch
-+++ /dev/null
-@@ -1,26 +0,0 @@
--From a06c77557ed951249d5b344441ad6ec57410e63f Mon Sep 17 00:00:00 2001
--From: Alexander Kanavin <alex@linutronix.de>
--Date: Sun, 3 Oct 2021 21:52:16 +0200
--Subject: [PATCH] Makefile: do not use -Werror
--
--Upstream-Status: Inappropriate [oe-core specific]
--Signed-off-by: Alexander Kanavin <alex@linutronix.de>
-----
-- Makefile | 1 -
-- 1 file changed, 1 deletion(-)
--
--diff --git a/Makefile b/Makefile
--index 97973ce..78273ff 100644
----- a/Makefile
--+++ b/Makefile
--@@ -8,7 +8,6 @@ BUILDFLAGS = \
-- 	-DSBINDIR=\"$(SBINDIR)\" \
-- 	-I${CURDIR}/include \
-- 	-Wall \
---	-Werror \
-- 	$(NULL)
-- 
-- TESTFLAGS =	\
---- 
--2.34.1
--
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan/0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan/0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch
-index 0bd7f80c2..cabceae84 100644
---- a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan/0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan/0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch
-@@ -1,20 +1,20 @@
--From e0df1f07d1707d5daf0358cc60b30f06121f7e60 Mon Sep 17 00:00:00 2001
-+From 0ea11f520a8b4453e60eaf0679b9feb757024422 Mon Sep 17 00:00:00 2001
- From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
- Date: Fri, 25 Dec 2020 11:41:43 +0900
- Subject: [PATCH] don't fail if GLOB_BRACE is not defined
- 
--Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-----
- Upstream-Status: Pending
- 
-+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-+---
-  src/util.c | 6 ++++++
-  1 file changed, 6 insertions(+)
- 
- diff --git a/src/util.c b/src/util.c
--index 841ec12..59595da 100644
-+index 36eb896a..ee13ec44 100644
- --- a/src/util.c
- +++ b/src/util.c
--@@ -32,6 +32,12 @@
-+@@ -35,6 +35,12 @@
-  #include "names.h"
-  #include "yaml-helpers.h"
-  
-@@ -24,7 +24,7 @@ index 841ec12..59595da 100644
- +#define GLOB_BRACE 0
- +#endif
- +
-- NETPLAN_ABI GHashTable*
-+ GHashTable*
-  wifi_frequency_24;
-  
- -- 
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan/0001-meson.build-drop-unnecessary-build-dependencies.patch b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan/0001-meson.build-drop-unnecessary-build-dependencies.patch
-new file mode 100644
-index 000000000..4f385e917
---- /dev/null
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan/0001-meson.build-drop-unnecessary-build-dependencies.patch
-@@ -0,0 +1,58 @@
-+From d3aa30f5cd7ba375e006a755752acbcfcd619452 Mon Sep 17 00:00:00 2001
-+From: Yi Zhao <yi.zhao@windriver.com>
-+Date: Wed, 6 Mar 2024 19:27:15 +0800
-+Subject: [PATCH] meson.build: drop unnecessary build dependencies
-+
-+The pytest and pycoverage are required by meson test but not for
-+building. Mark them as 'required: false' to get rid of unnecessary
-+build dependencies.
-+
-+Upstream-Status: Inappropriate [oe specific]
-+
-+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-+---
-+ meson.build | 8 ++++++--
-+ 1 file changed, 6 insertions(+), 2 deletions(-)
-+
-+diff --git a/meson.build b/meson.build
-+index 9556836a..30f33fe2 100644
-+--- a/meson.build
-++++ b/meson.build
-+@@ -25,8 +25,8 @@ bash_completions_dir = completions.get_variable(pkgconfig: 'completionsdir', def
-+ # Order: Fedora/Mageia/openSUSE || Debian/Ubuntu
-+ pyflakes = find_program('pyflakes-3', 'pyflakes3', required: false)
-+ pycodestyle = find_program('pycodestyle-3', 'pycodestyle', 'pep8', required: false)
-+-pytest = find_program('pytest-3', 'pytest3')  # also requires the pytest-cov plugin
-+-pycoverage = find_program('coverage-3', 'python3-coverage')
-++pytest = find_program('pytest-3', 'pytest3', required: false)  # also requires the pytest-cov plugin
-++pycoverage = find_program('coverage-3', 'python3-coverage', required: false)
-+ pandoc = find_program('pandoc', required: false)
-+ find = find_program('find')
-+ 
-+@@ -75,6 +75,7 @@ if get_option('unit_testing')
-+ endif
-+ 
-+ #FIXME: exclude doc/env/
-++if pyflakes.found() and pycodestyle.found()
-+ test('linting',
-+      pyflakes,
-+      timeout: 100,
-+@@ -91,7 +92,9 @@ test('legacy-tests',
-+      find_program('tests/cli_legacy.py'),
-+      timeout: 600,
-+      env: test_env)
-++endif
-+ #TODO: split out dbus tests into own test() instance, to run in parallel
-++if pycoverage.found()
-+ test('unit-tests',
-+      pycoverage,
-+      args: ['run', '-a', '-m', 'pytest', '-s', '-v', '--cov-append', meson.current_source_dir()],
-+@@ -143,4 +146,5 @@ if get_option('b_coverage')
-+          priority: -99, # run last
-+          is_parallel: false)
-+ endif
-++endif
-+ 
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan/0001-networkd.c-define-scope-specific-to-case-statement.patch b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan/0001-networkd.c-define-scope-specific-to-case-statement.patch
-new file mode 100644
-index 000000000..9f01108a2
---- /dev/null
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan/0001-networkd.c-define-scope-specific-to-case-statement.patch
-@@ -0,0 +1,47 @@
-+From 6e3dd61bf90a7ca8c36c5b95943cbff7c1ad3c2d Mon Sep 17 00:00:00 2001
-+From: Yi Zhao <yi.zhao@windriver.com>
-+Date: Wed, 6 Mar 2024 16:12:31 +0800
-+Subject: [PATCH] networkd.c: define scope specific to case statement
-+
-+Per [1], define a scope specific to case statement to fix build with
-+clang.
-+
-+Fixes:
-+../git/src/networkd.c:544:13: error: expected expression
-+  544 |             gchar* first = g_strcmp0(def->id, def->veth_peer_link->id) < 0 ? def->id : def->veth_peer_link->id;
-+      |             ^
-+../git/src/networkd.c:545:17: error: use of undeclared identifier 'first'
-+  545 |             if (first != def->id) {
-+      |                 ^
-+
-+[1] https://stackoverflow.com/questions/92396/why-cant-variables-be-declared-in-a-switch-statement
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-+---
-+ src/networkd.c | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/src/networkd.c b/src/networkd.c
-+index 25121c48..5eb9c0fe 100644
-+--- a/src/networkd.c
-++++ b/src/networkd.c
-+@@ -541,12 +541,14 @@ write_netdev_file(const NetplanNetDefinition* def, const char* rootdir, const ch
-+              * and, if the selected name is the name of the netdef being written, we generate
-+              * the .netdev file. Otherwise we skip the netdef.
-+              */
-++        {
-+             gchar* first = g_strcmp0(def->id, def->veth_peer_link->id) < 0 ? def->id : def->veth_peer_link->id;
-+             if (first != def->id) {
-+                 g_string_free(s, TRUE);
-+                 return;
-+             }
-+             g_string_append_printf(s, "Kind=veth\n\n[Peer]\nName=%s\n", def->veth_peer_link->id);
-++        }
-+             break;
-+ 
-+         case NETPLAN_DEF_TYPE_TUNNEL:
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan/0002-meson.build-do-not-use-Werror.patch b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan/0002-meson.build-do-not-use-Werror.patch
-new file mode 100644
-index 000000000..663a80ecd
---- /dev/null
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan/0002-meson.build-do-not-use-Werror.patch
-@@ -0,0 +1,29 @@
-+From 668ee79f39614ad758edd44c42b8b0eff57877cf Mon Sep 17 00:00:00 2001
-+From: Alexander Kanavin <alex@linutronix.de>
-+Date: Sun, 3 Oct 2021 21:52:16 +0200
-+Subject: [PATCH] meson.build: do not use -Werror
-+
-+Upstream-Status: Inappropriate [oe specific]
-+
-+Signed-off-by: Alexander Kanavin <alex@linutronix.de>
-+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-+---
-+ meson.build | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/meson.build b/meson.build
-+index 30f33fe2..0b214795 100644
-+--- a/meson.build
-++++ b/meson.build
-+@@ -4,7 +4,7 @@ project('netplan', 'c',
-+         default_options: [
-+             'c_std=c99',
-+             'warning_level=2',
-+-            'werror=true',
-++            'werror=false',
-+         ],
-+         meson_version: '>= 0.61.0',
-+ )
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan_0.106.bb b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan_0.106.bb
-deleted file mode 100644
-index 8c1eaa550..000000000
---- a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan_0.106.bb
-+++ /dev/null
-@@ -1,67 +0,0 @@
--SUMMARY = "The network configuration abstraction renderer"
--DESCRIPTION = "Netplan is a utility for easily configuring networking on a \
--linux system. You simply create a YAML description of the required network \
--interfaces and what each should be configured to do. From this description \
--Netplan will generate all the necessary configuration for your chosen renderer \
--tool."
--HOMEPAGE = "https://netplan.io"
--SECTION = "net/misc"
--
--LICENSE = "GPL-3.0-only"
--LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
--
--S = "${WORKDIR}/git"
--SRCREV = "15ce044d1df27b5057556d84d0d14beef8dd4e4d"
--PV = "0.106"
--
--SRC_URI = "git://github.com/CanonicalLtd/netplan.git;branch=main;protocol=https \
--           file://0001-Makefile-do-not-use-Werror.patch \
--           "
--
--SRC_URI:append:libc-musl = " file://0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch"
--
--DEPENDS = "glib-2.0 libyaml ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
--
--PACKAGECONFIG ?= ""
--
--PACKAGECONFIG[tests] = ",,,python3-nose python3-coverage python3-netifaces python3-pycodestyle python3-pyflakes python3-pyyaml"
--
--RDEPENDS:${PN} = "python3 python3-core python3-netifaces python3-pyyaml util-linux-libuuid libnetplan python3-dbus python3-rich"
--
--inherit pkgconfig systemd
--
--TARGET_CC_ARCH += "${LDFLAGS}"
--
--EXTRA_OEMAKE = "generate netplan/_features.py"
--EXTRA_OEMAKE =+ "${@bb.utils.contains('DISTRO_FEATURES','systemd','netplan-dbus dbus/io.netplan.Netplan.service','',d)}"
--
--do_install() {
--	install -d ${D}${sbindir} ${D}${libdir} ${D}${base_libdir}/netplan ${D}${datadir}/netplan/netplan/cli/commands ${D}${sysconfdir}/netplan
--	install -m 755 ${S}/generate ${D}${base_libdir}/netplan/
--	install -m 644 ${S}/netplan/*.py ${D}${datadir}/netplan/netplan
--	install -m 644 ${S}/netplan/cli/*.py ${D}${datadir}/netplan/netplan/cli
--	install -m 644 ${S}/netplan/cli/commands/*.py ${D}${datadir}/netplan/netplan/cli/commands
--	install -m 755 ${S}/src/netplan.script ${D}${datadir}/netplan/
--	ln -srf ${D}${datadir}/netplan/netplan.script ${D}${sbindir}/netplan
--	sed -i -e "s#/lib/netplan/generate#${base_libdir}/netplan/generate#" ${D}${datadir}/netplan/netplan/cli/utils.py
--
--	install -d ${D}/${systemd_unitdir}/system ${D}${systemd_unitdir}/system-generators
--	ln -srf ${D}/${base_libdir}/netplan/generate ${D}${systemd_unitdir}/system-generators
--
--	if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
--		install -d ${D}${datadir}/dbus-1/system.d ${D}${datadir}/dbus-1/system-services
--		install -m 755 ${S}/netplan-dbus ${D}${base_libdir}/netplan
--		install -m 644 ${S}/dbus/io.netplan.Netplan.conf ${D}${datadir}/dbus-1/system.d
--		install -m 644 ${S}/dbus/io.netplan.Netplan.service ${D}${datadir}/dbus-1/system-services
--		sed -i -e "s#^Exec=/lib/#Exec=${base_libdir}/#" ${D}${datadir}/dbus-1/system-services/io.netplan.Netplan.service
--	fi
--
--	install -m 755 ${S}/libnetplan.so.0.0 ${D}${libdir}
--        ln -rfs ${D}${libdir}/libnetplan.so.0.0 ${D}${libdir}/libnetplan.so
--}
--
--PACKAGES += "${PN}-dbus libnetplan"
--
--FILES:libnetplan = "${libdir}/libnetplan.so.0.0"
--FILES:${PN} = "${sbindir} ${base_libdir}/netplan/generate ${datadir}/netplan ${sysconfdir}/netplan ${systemd_unitdir}"
--FILES:${PN}-dbus = "${base_libdir}/netplan/netplan-dbus ${datadir}/dbus-1"
-diff --git a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan_1.0.bb b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan_1.0.bb
-new file mode 100644
-index 000000000..71efd2cc3
---- /dev/null
-+++ b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/netplan/netplan_1.0.bb
-@@ -0,0 +1,47 @@
-+SUMMARY = "The network configuration abstraction renderer"
-+DESCRIPTION = "Netplan is a utility for easily configuring networking on a \
-+linux system. You simply create a YAML description of the required network \
-+interfaces and what each should be configured to do. From this description \
-+Netplan will generate all the necessary configuration for your chosen renderer \
-+tool."
-+HOMEPAGE = "https://netplan.io"
-+SECTION = "net/misc"
-+
-+LICENSE = "GPL-3.0-only"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
-+
-+inherit meson pkgconfig systemd python3targetconfig features_check
-+
-+REQUIRED_DISTRO_FEATURES = "systemd"
-+
-+SRC_URI = "git://github.com/CanonicalLtd/netplan.git;branch=main;protocol=https \
-+           file://0001-meson.build-drop-unnecessary-build-dependencies.patch \
-+           file://0002-meson.build-do-not-use-Werror.patch \
-+          "
-+
-+SRC_URI:append:libc-musl = " file://0001-don-t-fail-if-GLOB_BRACE-is-not-defined.patch"
-+SRC_URI:append:toolchain-clang = " file://0001-networkd.c-define-scope-specific-to-case-statement.patch"
-+
-+SRCREV = "45f7cd1569896d9e316c130bf5c60b7ccfc8211d"
-+
-+S = "${WORKDIR}/git"
-+
-+DEPENDS = "glib-2.0 libyaml util-linux-libuuid \
-+           systemd python3-cffi-native \
-+          "
-+
-+EXTRA_OEMESON = "-Dunit_testing=false"
-+
-+RDEPENDS:${PN} = "python3-core python3-netifaces python3-pyyaml \
-+                  python3-dbus python3-rich python3-cffi \
-+                  util-linux-libuuid libnetplan \
-+                 "
-+
-+PACKAGES += "${PN}-dbus libnetplan"
-+
-+FILES:libnetplan = "${libdir}/libnetplan.so.*"
-+FILES:${PN} = "${sbindir} ${libexecdir}/netplan/generate \
-+               ${datadir}/netplan ${datadir}/bash-completion \
-+               ${systemd_unitdir} ${PYTHON_SITEPACKAGES_DIR} \
-+              "
-+FILES:${PN}-dbus = "${libexecdir}/netplan/netplan-dbus ${datadir}/dbus-1"
--- 
-2.25.1
 
+> Thank you for removing the unnecessary files and improving the e2tools
+> recipe.
+>
+> On 3/4/2024 1:34 AM, Khem Raj wrote:
+> > CAUTION: This email comes from a non Wind River email account!
+> > Do not click links or open attachments unless you recognize the sender
+> and know the content is safe.
+> >
+> > its happening quite consistently now on all kinds of AB workers, see
+> > recent 4-5 failures on
+> >
+> > https://autobuilder.yoctoproject.org/typhoon/#/builders/88
+> >
+> > On Sun, Mar 3, 2024 at 10:01=E2=80=AFPM Lyu, William <William.Lyu@windr=
+iver.com>
+> wrote:
+> >>
+> >> On 3/4/2024 12:41 AM, Lyu, William wrote:
+> >>> On 3/1/2024 4:52 PM, Khem Raj wrote:
+> >>>> CAUTION: This email comes from a non Wind River email account!
+> >>>> Do not click links or open attachments unless you recognize the send=
+er
+> >>>> and know the content is safe.
+> >>>>
+> >>>> On Fri, Mar 1, 2024 at 12:20=E2=80=AFPM Lyu, William
+> >>>> <William.Lyu@windriver.com> wrote:
+> >>>>>
+> >>>>>> I am running into this error on some builders on AB
+> >>>>>>
+> >>>>>> stdio: ERROR: Task
+> >>>>>>
+> (/home/pokybuild/yocto-worker/meta-oe/build/meta/recipes-support/libexif/=
+libexif_0.6.24.bb:
+> do_package_qa)
+> >>>>>> failed with exit code '1'
+> >>>>>> stdio: ERROR: e2tools-0.1.0+git-r0 do_package_qa: QA Issue:
+> >>>>>> /usr/lib/e2tools/ptest/git/.git/hooks/update.sample contained in
+> >>>>>> package e2tools-ptest requires /usr/bin/sh, but no providers found
+> in
+> >>>>>> RDEPENDS:e2tools-ptest? [file-rdeps]
+> >>>>>
+> >>>>> File "update.sample" is from ".git" directory. I do not actually ne=
+ed
+> >>>>> this
+> >>>>> file or anything from ".git" directory. I only need the source tree
+> >>>>> for ptest
+> >>>>> to run.
+> >>>>>
+> >>>>> However, I am a bit confused about this QA issue because:
+> >>>>> -   I do not see any file that has "#!/usr/bin/sh". Even
+> >>>>> "update.sample" has
+> >>>>>       "#!/bin/sh" as the first line. There are files in the source
+> >>>>> tree (not
+> >>>>>       under ".git" directory) that have "#!/bin/sh" as the first
+> line.
+> >>>>> -   "/bin/sh" is referring to the default POSIX shell, and the "bas=
+h"
+> >>>>> in the
+> >>>>>       RDEPENDS:e2tools-ptest should already fulfill this runtime
+> >>>>> dependency,
+> >>>>> -   I am not yet able to reproduce this issue using poky. I assume
+> >>>>> this is
+> >>>>>       because the QA Issue checker "file-rdeps" in poky do not chec=
+k
+> >>>>> "sh" by
+> >>>>>       default (excerpt taken from
+> "meta/classes-global/insane.bbclass"):
+> >>>>>
+> >>>>>       if "file-rdeps" not in skip:
+> >>>>>           ignored_file_rdeps =3D set(['/bin/sh', '/usr/bin/env',
+> >>>>> 'rtld(GNU_HASH)'])
+> >>>>>           if bb.utils.contains('DISTRO_FEATURES', 'usrmerge', True,
+> >>>>> False, d):
+> >>>>>               ignored_file_rdeps |=3D set(['/usr/bin/sh'])
+> >>>>>           if bb.data.inherits_class('nativesdk', d):
+> >>>>>               ignored_file_rdeps |=3D set(['/bin/bash',
+> '/usr/bin/perl',
+> >>>>> 'perl'])
+> >>>>>               if bb.utils.contains('DISTRO_FEATURES', 'usrmerge',
+> >>>>> True, False, d):
+> >>>>>                   ignored_file_rdeps |=3D set(['/usr/bin/bash'])
+> >>>>>
+> >>>>> William
+> >>>>
+> >>>> what distro features do you have enabled ? perhaps try it with and
+> >>>> without usermerge in DISTRO_FEATURES
+>
+> For the sake of documentation and preventing confusion for anyone
+> stumbling upon this email thread, I would like to confirm if "usermerge"
+> here is a typo. Is it correct that you meant "usrmerge"?
+>
+> William
+>
+> >>>> and rebuild this package after doing cleansstate to ensure its being
+> >>>> rebuilt in both cases.
+> >>>
+> >>> I have not been able to reproduce this "QA Issue" error yet. Is it
+> >>> possible that the [file-rdeps] checker on the autobuilder (AB) where
+> you
+> >>> saw this issue is defined differently than the default poky? The
+> >>> following are the details regarding my previous and new builds.
+> >>>
+> >>> For my previous builds, there are no specified DISTRO_FEATURES. In
+> >>> conf/local.conf, I only added the following line. The build command I
+> >>> used was "bitbake core-image-minimal".
+> >>>
+> >>> IMAGE_INSTALL:append =3D " libexif e2tools e2tools-ptest"
+> >>>
+> >>> I tried a new build with the following line added to conf/local.conf.
+> >>>
+> >>> DISTRO_FEATURES:append =3D " usermerge"
+> >>>
+> >>> I also did "bitbake -c cleansstate e2tools" and "bitbake -c cleanssta=
+te
+> >>> core-image-minimal" before each build.
+> >>>
+> >>> William
+> >>
+> >> Just in case the [file-rdeps] checker is somehow not working, I remove=
+d
+> >> "bash" from "RDEPENDS:${PN}-ptest". I indeed get the following error
+> >> message as expected when building "bitbake core-image-minimal":
+> >>
+> >> ERROR: QA Issue: /usr/lib/e2tools/ptest/build/config.status contained =
+in
+> >> package e2tools-ptest requires /bin/bash, but no providers found in
+> >> RDEPENDS:e2tools-ptest? [file-rdeps]
+> >>
+> >> William
+> >>
+> >>>
+> >>>>
+> >>>>>
+> >>>>>> stdio: ERROR: e2tools-0.1.0+git-r0 do_package_qa: Fatal QA errors
+> were
+> >>>>>> found, failing task.
+> >>>>>> stdio: ERROR: Logfile of failure stored in:
+> >>>>>>
+> /home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-l=
+inux/e2tools/0.1.0+git/temp/log.do_package_qa.3114961
+> >>>>>>
+> >>>>>> On Thu, Feb 22, 2024 at 5:56=E2=80=AFAM Lyu, William via
+> >>>>>> lists.openembedded.org
+> >>>>>> <william.lyu=3Dwindriver.com@lists.openembedded.org> wrote:
+> >>>>>>>
+> >>>>>>> From: William Lyu <William.Lyu@windriver.com>
+> >>>>>>>
+> >>>>>>> Signed-off-by: William Lyu <William.Lyu@windriver.com>
+> >>>>>>> ---
+> >>>>>>>    .../recipes-utils/e2tools/e2tools_git.bb      | 51
+> >>>>>>> ++++++++++++++++++-
+> >>>>>>>    .../recipes-utils/e2tools/files/run-ptest     |  5 ++
+> >>>>>>>    2 files changed, 54 insertions(+), 2 deletions(-)
+> >>>>>>>    create mode 100644
+> >>>>>>> meta-filesystems/recipes-utils/e2tools/files/run-ptest
+> >>>>>>>
+> >>>>>>> diff --git a/meta-filesystems/recipes-utils/e2tools/e2tools_git.b=
+b
+> >>>>>>> b/meta-filesystems/recipes-utils/e2tools/e2tools_git.bb
+> >>>>>>> index caf0025c8..a80b6f598 100644
+> >>>>>>> --- a/meta-filesystems/recipes-utils/e2tools/e2tools_git.bb
+> >>>>>>> +++ b/meta-filesystems/recipes-utils/e2tools/e2tools_git.bb
+> >>>>>>> @@ -9,17 +9,64 @@ SECTION =3D "base"
+> >>>>>>>    LICENSE =3D "GPL-2.0-only"
+> >>>>>>>    LIC_FILES_CHKSUM =3D
+> >>>>>>> "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4263"
+> >>>>>>>
+> >>>>>>> -DEPENDS +=3D "e2fsprogs"
+> >>>>>>> +DEPENDS +=3D "coreutils e2fsprogs"
+> >>>>>>>
+> >>>>>>>    PV =3D "0.1.0+git"
+> >>>>>>>
+> >>>>>>>    SRC_URI =3D " \
+> >>>>>>>
+> >>>>>>> git://github.com/e2tools/e2tools;protocol=3Dhttps;branch=3Dmaster=
+ \
+> >>>>>>> +           file://run-ptest \
+> >>>>>>>    "
+> >>>>>>> +
+> >>>>>>>    SRCREV =3D "fd092754a6b65c3a769f74f888668c066f09c36d"
+> >>>>>>>
+> >>>>>>>    S =3D "${WORKDIR}/git"
+> >>>>>>>
+> >>>>>>> -inherit autotools pkgconfig
+> >>>>>>> +inherit autotools pkgconfig ptest
+> >>>>>>> +
+> >>>>>>> +do_configure:prepend() {
+> >>>>>>> +    git -C "${WORKDIR}/git" reset --hard HEAD
+> >>>>>>> +
+> >>>>>>> +    # To install ptest for this package, special configuration
+> >>>>>>> needs to be
+> >>>>>>> +    # done before do_configure(). So, do_configure_ptest() which
+> >>>>>>> is scheduled
+> >>>>>>> +    # after do_configure() cannot be used.
+> >>>>>>> +
+> >>>>>>> +    # We only do special configuration if we are installing ptes=
+t
+> >>>>>>> for this
+> >>>>>>> +    # package.
+> >>>>>>> +    if [ "${@d.getVar('PTEST_ENABLED')}" -eq "1" ]; then
+> >>>>>>> +        # Since we guarantee run-time dependency when installing
+> >>>>>>> the ptest for
+> >>>>>>> +        # this package, we do not need the check macros under
+> >>>>>>> section "checks
+> >>>>>>> +        # for programs" in "configure.ac". Plus, these check
+> >>>>>>> macros set the
+> >>>>>>> +        # ouput variables to incorrect values as these checks ar=
+e
+> >>>>>>> performed on
+> >>>>>>> +        # the host environment. Still, we need these variables
+> >>>>>>> outputted from
+> >>>>>>> +        # these check macros. So, we insert the following lines =
+to
+> >>>>>>> manually
+> >>>>>>> +        # set these output variables to the correct value in
+> >>>>>>> "configure.ac".
+> >>>>>>> +
+> >>>>>>> +        # Note that HAVE_DD_COMMAND and HAVE_MKE2FS_COMMAND are
+> >>>>>>> only ever used
+> >>>>>>> +        # in tests/Makefile-files which determines whether to
+> >>>>>>> include the test
+> >>>>>>> +        # cases. As for output variables CHMOD, DD, and MKE2FS,
+> >>>>>>> they only
+> >>>>>>> +        # point to the programs which test cases need to run.
+> >>>>>>> Since these
+> >>>>>>> +        # commands are guaranteed to be present due to RDEPENDS
+> >>>>>>> and are
+> >>>>>>> +        # guaranteed to be accessible under PATH environment
+> >>>>>>> variable on the
+> >>>>>>> +        # target, we only need to specify the name of these
+> programs.
+> >>>>>>> +
+> >>>>>>> +        perl -i -0777 -pe 's/(^dnl\s*=3D+\s*^dnl\s*Checks for
+> >>>>>>> compiler flags\s*^dnl\s*=3D+)/
+> >>>>>>> +AC_SUBST([CHMOD], 'chmod')
+> >>>>>>> +AC_SUBST([DD], 'dd')
+> >>>>>>> +AC_SUBST([MKE2FS], 'mke2fs')
+> >>>>>>> +AM_CONDITIONAL([HAVE_DD_COMMAND], [true])
+> >>>>>>> +AM_CONDITIONAL([HAVE_MKE2FS_COMMAND], [true])
+> >>>>>>> +\1/ms' "${WORKDIR}/git/configure.ac"
+> >>>>>>> +    fi
+> >>>>>>> +}
+> >>>>>>> +
+> >>>>>>> +do_install_ptest() {
+> >>>>>>> +    rm -rf "${D}${PTEST_PATH}/*"
+> >>>>>>> +    cp -r ../build "${D}${PTEST_PATH}"
+> >>>>>>> +    cp -r "${S}/build-aux" "${D}${PTEST_PATH}/build"
+> >>>>>>> +    cp -r "${S}" "${D}${PTEST_PATH}"
+> >>>>>>> +}
+> >>>>>>> +
+> >>>>>>> +RDEPENDS:${PN}-ptest +=3D "bash coreutils e2fsprogs e2tools gawk
+> >>>>>>> make perl"
+> >>>>>>>
+> >>>>>>>    BBCLASSEXTEND =3D "native"
+> >>>>>>> diff --git a/meta-filesystems/recipes-utils/e2tools/files/run-pte=
+st
+> >>>>>>> b/meta-filesystems/recipes-utils/e2tools/files/run-ptest
+> >>>>>>> new file mode 100644
+> >>>>>>> index 000000000..3d4dd9cf3
+> >>>>>>> --- /dev/null
+> >>>>>>> +++ b/meta-filesystems/recipes-utils/e2tools/files/run-ptest
+> >>>>>>> @@ -0,0 +1,5 @@
+> >>>>>>> +#!/bin/sh
+> >>>>>>> +
+> >>>>>>> +set -e
+> >>>>>>> +
+> >>>>>>> +make -C build check
+> >>>>>>> --
+> >>>>>>> 2.43.0
+> >>>>>>>
+> >>>>>>>
+> >>>>>>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >>>>>>> Links: You receive all messages sent to this group.
+> >>>>>>> View/Reply Online (#108987):
+> >>>>>>> https://lists.openembedded.org/g/openembedded-devel/message/10898=
+7
+> >>>>>>> Mute This Topic:
+> https://lists.openembedded.org/mt/104508347/1997914
+> >>>>>>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> >>>>>>> Unsubscribe:
+> >>>>>>> https://lists.openembedded.org/g/openembedded-devel/unsub
+> >>>>>>> [raj.khem@gmail.com]
+> >>>>>>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+
+--000000000000e271c7061300169f
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Wed, Mar 6, 2024 at 8:00=E2=80=AFAM Lyu, William &lt;<a =
+href=3D"mailto:William.Lyu@windriver.com">William.Lyu@windriver.com</a>&gt;=
+ wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8=
+ex;border-left:1px #ccc solid;padding-left:1ex">I see that you pushed a com=
+mit that adds command removing unnecessary <br>
+files and host paths in the e2tools recipe.<br>
+<br>
+<a href=3D"https://github.com/openembedded/meta-openembedded/commit/92b6825=
+a870fde291b1244193dba8d7c1051c53f" rel=3D"noreferrer" target=3D"_blank">htt=
+ps://github.com/openembedded/meta-openembedded/commit/92b6825a870fde291b124=
+4193dba8d7c1051c53f</a><br>
+<br>
+I have tested this latest e2tools recipe locally using the latest poky. <br=
+>
+I built an image using &quot;bitbake core-image-minimal&quot; with e2tools =
+and its <br>
+ptest package. The build was successful (still no QA errors) and the <br>
+ptest for e2tools ran without any issue.<br>
+<br>
+Are you still seeing the [file-rdeps] QA issues on the Yocto Autobuilder?<b=
+r>
+</blockquote><div dir=3D"auto">No</div><div dir=3D"auto">This patch fixes t=
+he issue this is what I have been asking for all along=C2=A0</div><div dir=
+=3D"auto"><br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0=
+ .8ex;border-left:1px #ccc solid;padding-left:1ex"><br>
+Thank you for removing the unnecessary files and improving the e2tools <br>
+recipe.<br>
+<br>
+On 3/4/2024 1:34 AM, Khem Raj wrote:<br>
+&gt; CAUTION: This email comes from a non Wind River email account!<br>
+&gt; Do not click links or open attachments unless you recognize the sender=
+ and know the content is safe.<br>
+&gt; <br>
+&gt; its happening quite consistently now on all kinds of AB workers, see<b=
+r>
+&gt; recent 4-5 failures on<br>
+&gt; <br>
+&gt; <a href=3D"https://autobuilder.yoctoproject.org/typhoon/#/builders/88"=
+ rel=3D"noreferrer" target=3D"_blank">https://autobuilder.yoctoproject.org/=
+typhoon/#/builders/88</a><br>
+&gt; <br>
+&gt; On Sun, Mar 3, 2024 at 10:01=E2=80=AFPM Lyu, William &lt;<a href=3D"ma=
+ilto:William.Lyu@windriver.com" target=3D"_blank">William.Lyu@windriver.com=
+</a>&gt; wrote:<br>
+&gt;&gt;<br>
+&gt;&gt; On 3/4/2024 12:41 AM, Lyu, William wrote:<br>
+&gt;&gt;&gt; On 3/1/2024 4:52 PM, Khem Raj wrote:<br>
+&gt;&gt;&gt;&gt; CAUTION: This email comes from a non Wind River email acco=
+unt!<br>
+&gt;&gt;&gt;&gt; Do not click links or open attachments unless you recogniz=
+e the sender<br>
+&gt;&gt;&gt;&gt; and know the content is safe.<br>
+&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt; On Fri, Mar 1, 2024 at 12:20=E2=80=AFPM Lyu, William<br>
+&gt;&gt;&gt;&gt; &lt;<a href=3D"mailto:William.Lyu@windriver.com" target=3D=
+"_blank">William.Lyu@windriver.com</a>&gt; wrote:<br>
+&gt;&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt;&gt;&gt; I am running into this error on some builders on A=
+B<br>
+&gt;&gt;&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt;&gt;&gt; stdio: ERROR: Task<br>
+&gt;&gt;&gt;&gt;&gt;&gt; (/home/pokybuild/yocto-worker/meta-oe/build/meta/r=
+ecipes-support/libexif/libexif_0.6.24.bb:do_package_qa)<br>
+&gt;&gt;&gt;&gt;&gt;&gt; failed with exit code &#39;1&#39;<br>
+&gt;&gt;&gt;&gt;&gt;&gt; stdio: ERROR: e2tools-0.1.0+git-r0 do_package_qa: =
+QA Issue:<br>
+&gt;&gt;&gt;&gt;&gt;&gt; /usr/lib/e2tools/ptest/git/.git/hooks/update.sampl=
+e contained in<br>
+&gt;&gt;&gt;&gt;&gt;&gt; package e2tools-ptest requires /usr/bin/sh, but no=
+ providers found in<br>
+&gt;&gt;&gt;&gt;&gt;&gt; RDEPENDS:e2tools-ptest? [file-rdeps]<br>
+&gt;&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt;&gt; File &quot;update.sample&quot; is from &quot;.git&quot=
+; directory. I do not actually need<br>
+&gt;&gt;&gt;&gt;&gt; this<br>
+&gt;&gt;&gt;&gt;&gt; file or anything from &quot;.git&quot; directory. I on=
+ly need the source tree<br>
+&gt;&gt;&gt;&gt;&gt; for ptest<br>
+&gt;&gt;&gt;&gt;&gt; to run.<br>
+&gt;&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt;&gt; However, I am a bit confused about this QA issue becau=
+se:<br>
+&gt;&gt;&gt;&gt;&gt; -=C2=A0 =C2=A0I do not see any file that has &quot;#!/=
+usr/bin/sh&quot;. Even<br>
+&gt;&gt;&gt;&gt;&gt; &quot;update.sample&quot; has<br>
+&gt;&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;#!/bin/sh&quot; as the=
+ first line. There are files in the source<br>
+&gt;&gt;&gt;&gt;&gt; tree (not<br>
+&gt;&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0under &quot;.git&quot; direc=
+tory) that have &quot;#!/bin/sh&quot; as the first line.<br>
+&gt;&gt;&gt;&gt;&gt; -=C2=A0 =C2=A0&quot;/bin/sh&quot; is referring to the =
+default POSIX shell, and the &quot;bash&quot;<br>
+&gt;&gt;&gt;&gt;&gt; in the<br>
+&gt;&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0RDEPENDS:e2tools-ptest shoul=
+d already fulfill this runtime<br>
+&gt;&gt;&gt;&gt;&gt; dependency,<br>
+&gt;&gt;&gt;&gt;&gt; -=C2=A0 =C2=A0I am not yet able to reproduce this issu=
+e using poky. I assume<br>
+&gt;&gt;&gt;&gt;&gt; this is<br>
+&gt;&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0because the QA Issue checker=
+ &quot;file-rdeps&quot; in poky do not check<br>
+&gt;&gt;&gt;&gt;&gt; &quot;sh&quot; by<br>
+&gt;&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0default (excerpt taken from =
+&quot;meta/classes-global/insane.bbclass&quot;):<br>
+&gt;&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0if &quot;file-rdeps&quot; no=
+t in skip:<br>
+&gt;&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0ignored_file_r=
+deps =3D set([&#39;/bin/sh&#39;, &#39;/usr/bin/env&#39;,<br>
+&gt;&gt;&gt;&gt;&gt; &#39;rtld(GNU_HASH)&#39;])<br>
+&gt;&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if bb.utils.co=
+ntains(&#39;DISTRO_FEATURES&#39;, &#39;usrmerge&#39;, True,<br>
+&gt;&gt;&gt;&gt;&gt; False, d):<br>
+&gt;&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ignored_file_rdeps |=3D set([&#39;/usr/bin/sh&#39;])<br>
+&gt;&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if bb.data.inh=
+erits_class(&#39;nativesdk&#39;, d):<br>
+&gt;&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ignored_file_rdeps |=3D set([&#39;/bin/bash&#39;, &#39;/usr/bin/perl&#39;,<=
+br>
+&gt;&gt;&gt;&gt;&gt; &#39;perl&#39;])<br>
+&gt;&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+if bb.utils.contains(&#39;DISTRO_FEATURES&#39;, &#39;usrmerge&#39;,<br>
+&gt;&gt;&gt;&gt;&gt; True, False, d):<br>
+&gt;&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0ignored_file_rdeps |=3D set([&#39;/usr/bin/bash&#39;])<br>
+&gt;&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt;&gt; William<br>
+&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt; what distro features do you have enabled ? perhaps try it =
+with and<br>
+&gt;&gt;&gt;&gt; without usermerge in DISTRO_FEATURES<br>
+<br>
+For the sake of documentation and preventing confusion for anyone <br>
+stumbling upon this email thread, I would like to confirm if &quot;usermerg=
+e&quot; <br>
+here is a typo. Is it correct that you meant &quot;usrmerge&quot;?<br>
+<br>
+William<br>
+<br>
+&gt;&gt;&gt;&gt; and rebuild this package after doing cleansstate to ensure=
+ its being<br>
+&gt;&gt;&gt;&gt; rebuilt in both cases.<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt; I have not been able to reproduce this &quot;QA Issue&quot; er=
+ror yet. Is it<br>
+&gt;&gt;&gt; possible that the [file-rdeps] checker on the autobuilder (AB)=
+ where you<br>
+&gt;&gt;&gt; saw this issue is defined differently than the default poky? T=
+he<br>
+&gt;&gt;&gt; following are the details regarding my previous and new builds=
+.<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt; For my previous builds, there are no specified DISTRO_FEATURES=
+. In<br>
+&gt;&gt;&gt; conf/local.conf, I only added the following line. The build co=
+mmand I<br>
+&gt;&gt;&gt; used was &quot;bitbake core-image-minimal&quot;.<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt; IMAGE_INSTALL:append =3D &quot; libexif e2tools e2tools-ptest&=
+quot;<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt; I tried a new build with the following line added to conf/loca=
+l.conf.<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt; DISTRO_FEATURES:append =3D &quot; usermerge&quot;<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt; I also did &quot;bitbake -c cleansstate e2tools&quot; and &quo=
+t;bitbake -c cleansstate<br>
+&gt;&gt;&gt; core-image-minimal&quot; before each build.<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt; William<br>
+&gt;&gt;<br>
+&gt;&gt; Just in case the [file-rdeps] checker is somehow not working, I re=
+moved<br>
+&gt;&gt; &quot;bash&quot; from &quot;RDEPENDS:${PN}-ptest&quot;. I indeed g=
+et the following error<br>
+&gt;&gt; message as expected when building &quot;bitbake core-image-minimal=
+&quot;:<br>
+&gt;&gt;<br>
+&gt;&gt; ERROR: QA Issue: /usr/lib/e2tools/ptest/build/config.status contai=
+ned in<br>
+&gt;&gt; package e2tools-ptest requires /bin/bash, but no providers found i=
+n<br>
+&gt;&gt; RDEPENDS:e2tools-ptest? [file-rdeps]<br>
+&gt;&gt;<br>
+&gt;&gt; William<br>
+&gt;&gt;<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt;&gt;&gt; stdio: ERROR: e2tools-0.1.0+git-r0 do_package_qa: =
+Fatal QA errors were<br>
+&gt;&gt;&gt;&gt;&gt;&gt; found, failing task.<br>
+&gt;&gt;&gt;&gt;&gt;&gt; stdio: ERROR: Logfile of failure stored in:<br>
+&gt;&gt;&gt;&gt;&gt;&gt; /home/pokybuild/yocto-worker/meta-oe/build/build/t=
+mp/work/core2-64-poky-linux/e2tools/0.1.0+git/temp/log.do_package_qa.311496=
+1<br>
+&gt;&gt;&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt;&gt;&gt; On Thu, Feb 22, 2024 at 5:56=E2=80=AFAM Lyu, Willi=
+am via<br>
+&gt;&gt;&gt;&gt;&gt;&gt; <a href=3D"http://lists.openembedded.org" rel=3D"n=
+oreferrer" target=3D"_blank">lists.openembedded.org</a><br>
+&gt;&gt;&gt;&gt;&gt;&gt; &lt;william.lyu=3D<a href=3D"mailto:windriver.com@=
+lists.openembedded.org" target=3D"_blank">windriver.com@lists.openembedded.=
+org</a>&gt; wrote:<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; From: William Lyu &lt;<a href=3D"mailto:Willia=
+m.Lyu@windriver.com" target=3D"_blank">William.Lyu@windriver.com</a>&gt;<br=
+>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; Signed-off-by: William Lyu &lt;<a href=3D"mail=
+to:William.Lyu@windriver.com" target=3D"_blank">William.Lyu@windriver.com</=
+a>&gt;<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; ---<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 .../recipes-utils/e2tools/<a href=
+=3D"http://e2tools_git.bb" rel=3D"noreferrer" target=3D"_blank">e2tools_git=
+.bb</a>=C2=A0 =C2=A0 =C2=A0 | 51<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; ++++++++++++++++++-<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 .../recipes-utils/e2tools/files/r=
+un-ptest=C2=A0 =C2=A0 =C2=A0|=C2=A0 5 ++<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 2 files changed, 54 insertions(+)=
+, 2 deletions(-)<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 create mode 100644<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; meta-filesystems/recipes-utils/e2tools/files/r=
+un-ptest<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; diff --git a/meta-filesystems/recipes-utils/e2=
+tools/<a href=3D"http://e2tools_git.bb" rel=3D"noreferrer" target=3D"_blank=
+">e2tools_git.bb</a><br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; b/meta-filesystems/recipes-utils/e2tools/<a hr=
+ef=3D"http://e2tools_git.bb" rel=3D"noreferrer" target=3D"_blank">e2tools_g=
+it.bb</a><br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; index caf0025c8..a80b6f598 100644<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; --- a/meta-filesystems/recipes-utils/e2tools/<=
+a href=3D"http://e2tools_git.bb" rel=3D"noreferrer" target=3D"_blank">e2too=
+ls_git.bb</a><br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +++ b/meta-filesystems/recipes-utils/e2tools/<=
+a href=3D"http://e2tools_git.bb" rel=3D"noreferrer" target=3D"_blank">e2too=
+ls_git.bb</a><br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; @@ -9,17 +9,64 @@ SECTION =3D &quot;base&quot;=
+<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 LICENSE =3D &quot;GPL-2.0-only&qu=
+ot;<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 LIC_FILES_CHKSUM =3D<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; &quot;file://COPYING;md5=3Db234ee4d69f5fce4486=
+a80fdaf4a4263&quot;<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; -DEPENDS +=3D &quot;e2fsprogs&quot;<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +DEPENDS +=3D &quot;coreutils e2fsprogs&quot;<=
+br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 PV =3D &quot;0.1.0+git&quot;<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 SRC_URI =3D &quot; \<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; git://<a href=3D"http://github.com/e2tools/e2t=
+ools;protocol=3Dhttps;branch=3Dmaster" rel=3D"noreferrer" target=3D"_blank"=
+>github.com/e2tools/e2tools;protocol=3Dhttps;branch=3Dmaster</a> \<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file=
+://run-ptest \<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 &quot;<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 SRCREV =3D &quot;fd092754a6b65c3a=
+769f74f888668c066f09c36d&quot;<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 S =3D &quot;${WORKDIR}/git&quot;<=
+br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; -inherit autotools pkgconfig<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +inherit autotools pkgconfig ptest<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +do_configure:prepend() {<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 git -C &quot;${WORKDIR}/git&quo=
+t; reset --hard HEAD<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 # To install ptest for this pac=
+kage, special configuration<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; needs to be<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 # done before do_configure(). S=
+o, do_configure_ptest() which<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; is scheduled<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 # after do_configure() cannot b=
+e used.<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 # We only do special configurat=
+ion if we are installing ptest<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; for this<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 # package.<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 if [ &quot;${@d.getVar(&#39;PTE=
+ST_ENABLED&#39;)}&quot; -eq &quot;1&quot; ]; then<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 # Since we guaran=
+tee run-time dependency when installing<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; the ptest for<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 # this package, w=
+e do not need the check macros under<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; section &quot;checks<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 # for programs&qu=
+ot; in &quot;<a href=3D"http://configure.ac" rel=3D"noreferrer" target=3D"_=
+blank">configure.ac</a>&quot;. Plus, these check<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; macros set the<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 # ouput variables=
+ to incorrect values as these checks are<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; performed on<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 # the host enviro=
+nment. Still, we need these variables<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; outputted from<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 # these check mac=
+ros. So, we insert the following lines to<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; manually<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 # set these outpu=
+t variables to the correct value in<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; &quot;<a href=3D"http://configure.ac" rel=3D"n=
+oreferrer" target=3D"_blank">configure.ac</a>&quot;.<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 # Note that HAVE_=
+DD_COMMAND and HAVE_MKE2FS_COMMAND are<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; only ever used<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 # in tests/Makefi=
+le-files which determines whether to<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; include the test<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 # cases. As for o=
+utput variables CHMOD, DD, and MKE2FS,<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; they only<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 # point to the pr=
+ograms which test cases need to run.<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; Since these<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 # commands are gu=
+aranteed to be present due to RDEPENDS<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; and are<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 # guaranteed to b=
+e accessible under PATH environment<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; variable on the<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 # target, we only=
+ need to specify the name of these programs.<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 perl -i -0777 -pe=
+ &#39;s/(^dnl\s*=3D+\s*^dnl\s*Checks for<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; compiler flags\s*^dnl\s*=3D+)/<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +AC_SUBST([CHMOD], &#39;chmod&#39;)<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +AC_SUBST([DD], &#39;dd&#39;)<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +AC_SUBST([MKE2FS], &#39;mke2fs&#39;)<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +AM_CONDITIONAL([HAVE_DD_COMMAND], [true])<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +AM_CONDITIONAL([HAVE_MKE2FS_COMMAND], [true])=
+<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +\1/ms&#39; &quot;${WORKDIR}/git/<a href=3D"ht=
+tp://configure.ac" rel=3D"noreferrer" target=3D"_blank">configure.ac</a>&qu=
+ot;<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 fi<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +}<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +do_install_ptest() {<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 rm -rf &quot;${D}${PTEST_PATH}/=
+*&quot;<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 cp -r ../build &quot;${D}${PTES=
+T_PATH}&quot;<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 cp -r &quot;${S}/build-aux&quot=
+; &quot;${D}${PTEST_PATH}/build&quot;<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 cp -r &quot;${S}&quot; &quot;${=
+D}${PTEST_PATH}&quot;<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +}<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +RDEPENDS:${PN}-ptest +=3D &quot;bash coreutil=
+s e2fsprogs e2tools gawk<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; make perl&quot;<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 BBCLASSEXTEND =3D &quot;native&qu=
+ot;<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; diff --git a/meta-filesystems/recipes-utils/e2=
+tools/files/run-ptest<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; b/meta-filesystems/recipes-utils/e2tools/files=
+/run-ptest<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; new file mode 100644<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; index 000000000..3d4dd9cf3<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; --- /dev/null<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +++ b/meta-filesystems/recipes-utils/e2tools/f=
+iles/run-ptest<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; @@ -0,0 +1,5 @@<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +#!/bin/sh<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +set -e<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; +make -C build check<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; --<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 2.43.0<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<=
+br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; Links: You receive all messages sent to this g=
+roup.<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; View/Reply Online (#108987):<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/108987" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/108987</a><br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; Mute This Topic: <a href=3D"https://lists.open=
+embedded.org/mt/104508347/1997914" rel=3D"noreferrer" target=3D"_blank">htt=
+ps://lists.openembedded.org/mt/104508347/1997914</a><br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; Group Owner: <a href=3D"mailto:openembedded-de=
+vel%2Bowner@lists.openembedded.org" target=3D"_blank">openembedded-devel+ow=
+ner@lists.openembedded.org</a><br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; Unsubscribe:<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.=
+openembedded.org/g/openembedded-devel/unsub</a><br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; [<a href=3D"mailto:raj.khem@gmail.com" target=
+=3D"_blank">raj.khem@gmail.com</a>]<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<=
+br>
+</blockquote></div></div>
+
+--000000000000e271c7061300169f--
 
