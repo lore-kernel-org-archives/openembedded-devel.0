@@ -2,51 +2,51 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9EA20C5475B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C2A06C54E49
 	for <webhook@archiver.kernel.org>; Wed,  6 Mar 2024 08:44:07 +0000 (UTC)
-Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
- by mx.groups.io with SMTP id smtpd.web10.7747.1709714640931222290
+Received: from esa8.hc1455-7.c3s2.iphmx.com (esa8.hc1455-7.c3s2.iphmx.com [139.138.61.253])
+ by mx.groups.io with SMTP id smtpd.web11.7730.1709714646761391410
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Mar 2024 00:44:01 -0800
+ Wed, 06 Mar 2024 00:44:07 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=C9pTtAjY;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=feS7yT/8;
+ spf=pass (domain: fujitsu.com, ip: 139.138.61.253, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1709714641; x=1741250641;
+  t=1709714646; x=1741250646;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=9ALyOABhSVdclDLtS3G90rOR5jUJu1uvB40cLHZlyoI=;
-  b=C9pTtAjYYXgANwfT4/JVyCrFEBkyaGt759+5Ax+Beu4W+mNiVJmfeu16
-   BnPgX0B3+T5l7jxTm/AER+XjMqF3CkPxkQYzTarPvQQgbP8hqoS0v/O0x
-   RrLXGTMyaoCT4MoZp1JL5dZ+qH/cBwpmsKvQ074YE9rMf5AkOm0LeyW4A
-   eBQ+Tj+Ezd5oPJEjSb4x+4J0B13FAvZuCSxCHDYbupVHhuKH6mhCs99kF
-   9RsrlXVEnnInFjtFgOaocf41iMyVIsnGUXLFtdGUpmBhUE2SfhWwT11gA
-   eUPhFK2ZWjWR3q3GZeUT5UiHZ1N8hoxgN225Ii3CyJUJbMQVruEFEH5t1
-   A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,11004"; a="153197188"
+  bh=XkqMv104+xEOBcuzIp54rz1yBtDtLpV0O9kOLN5eiqA=;
+  b=feS7yT/8skQ6eKbdzenCYUF9+s5YcqSwxTdT74hE+K1Ej+yJb/jGjB+M
+   DgRowj6yjx2Opm7i/B+WhUpHuhLm/RMbmN01wnVxnTyDPQXYSXmtIQMLP
+   di6XkQdanqWXISccYZ8YQKzxWe4+8Qbu7TeJ3Ie7YimCLLgIFdSeHKJu0
+   9fdNONvqp0uaHGWYy18PKscv54cYJjiRpwOZf8GOXOYJPQ3dOr/DnJntr
+   YkEkI+soHfQgKhYFulk7fS2tkq6e8w1A0MbW6DfFsa+sQX3egC2Hibft4
+   ym8bBWFWy/LwI/EzqDWPNGX4BhI0jeS2v/UOzU6KN/aGCjF+yNyi/ENwE
+   g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,11004"; a="139397617"
 X-IronPort-AV: E=Sophos;i="6.06,207,1705330800"; 
-   d="scan'208";a="153197188"
-Received: from unknown (HELO yto-r2.gw.nic.fujitsu.com) ([218.44.52.218])
-  by esa6.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Mar 2024 17:43:58 +0900
-Received: from yto-m4.gw.nic.fujitsu.com (yto-nat-yto-m4.gw.nic.fujitsu.com [192.168.83.67])
-	by yto-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 3FF38C68A0
-	for <openembedded-devel@lists.openembedded.org>; Wed,  6 Mar 2024 17:43:56 +0900 (JST)
+   d="scan'208";a="139397617"
+Received: from unknown (HELO oym-r1.gw.nic.fujitsu.com) ([210.162.30.89])
+  by esa8.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Mar 2024 17:44:04 +0900
+Received: from oym-m4.gw.nic.fujitsu.com (oym-nat-oym-m4.gw.nic.fujitsu.com [192.168.87.61])
+	by oym-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id 7E433D4800
+	for <openembedded-devel@lists.openembedded.org>; Wed,  6 Mar 2024 17:44:02 +0900 (JST)
 Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
-	by yto-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 8255CEA0B1
-	for <openembedded-devel@lists.openembedded.org>; Wed,  6 Mar 2024 17:43:55 +0900 (JST)
+	by oym-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id A7F27D5D05
+	for <openembedded-devel@lists.openembedded.org>; Wed,  6 Mar 2024 17:44:01 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 1E1B341182
-	for <openembedded-devel@lists.openembedded.org>; Wed,  6 Mar 2024 17:43:55 +0900 (JST)
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 4520D41189
+	for <openembedded-devel@lists.openembedded.org>; Wed,  6 Mar 2024 17:44:01 +0900 (JST)
 Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id C0E401A006A;
-	Wed,  6 Mar 2024 16:43:54 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id EF79F1A006D;
+	Wed,  6 Mar 2024 16:44:00 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 06/26] ddrescue: upgrade 1.27 -> 1.28
-Date: Wed,  6 Mar 2024 16:43:08 +0800
-Message-Id: <1709714608-19296-6-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH 09/26] libtdb: upgrade 1.4.9 -> 1.4.10
+Date: Wed,  6 Mar 2024 16:43:11 +0800
+Message-Id: <1709714608-19296-9-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1709714608-19296-1-git-send-email-wangmy@fujitsu.com>
 References: <1709714608-19296-1-git-send-email-wangmy@fujitsu.com>
@@ -54,56 +54,134 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28234.006
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28234.006
-X-TMASE-Result: 10--0.088000-10.000000
-X-TMASE-MatchedRID: jrsYt7uzg+ujz0nOeth/yUIIxwDaU5mrgoxTlWqmGpUH8UzOewTxw7YH
-	qiG3BlJo8YMGIR6ZqjV/RDv7qBblm9M0nwj1UH/GhdD+G7U5X/TKrKWVfpQki2A+B6CBXAIWqhw
-	ZY7RsJWhLosSdOWWE4NseKHBzEjWEPubnqD2XLwjy3h9RQZ4StME5XPQnBzGXR/IzlV+CMbbW9n
-	uzdghUMjo2a10XPZVUwp1qGgAVpwkYDuLyyS3P9d0KiTeJteVBfS0Ip2eEHnz3IzXlXlpamPoLR
-	4+zsDTtlu/VKvCjKPUSdm4zEICpT0MCuNpNY2B09K/iscFrKhvaijfWZiUYIsuDft6TsLHCdrnO
-	v2q+gioSsYjwZqGdOSEF3MH14IOwki5BQRiSI6TyDBYNCJzj6s+YAJ5mo7zlOKgonZY9TFMtLgA
-	Q4uO3AA==
+X-TMASE-Result: 10-4.723500-10.000000
+X-TMASE-MatchedRID: 51ABSdwnBXSjz0nOeth/yaoXHZz/dXlxkdS3kPlaZyXfUZT83lbkENb2
+	e7N2CFQy+7QcRaVoa8nGKIf6hBf7VaGGOyqBK41vEXjPIvKd74AxXH/dlhvLv/QJJFxg7p4qdYJ
+	3pC9XNt5VB65/84yB9bxT9Nknd+sG6RGSI6KP9SvhuntKSqs2aU+crEA4+nhZ/gMNehoKqTtaoX
+	EEYamtBBw6+4unSooldueAo5I16bi4lcR4ssnr7J4CIKY/Hg3AGdQnQSTrKGPEQdG7H66TyHEqm
+	8QYBtMO8IKZ2Xpk50NXgexSMkBZePFbiXR1XeY27M1fW7hSHQK5x7bTB3syLE/GojHjHcu6gZhj
+	8N6A7+89rau9i82GPQWjIzscx33Pgr6lqxbIXlHC3tMwY3ma2xUDj+dgUQVyTE7Co9fKv3w=
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 06 Mar 2024 08:44:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109146
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109149
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Changelog:
-============
-* main.cc: Rename option '--verify-on-error' to '--check-on-error'.
-  Rename option '--verify-input-size' to '--check-input-size'.
-  Remove synonym '--exit-on-error'.
-* fillbook.cc (fill_areas), rescuebook.cc (do_rescue):
-  Issue a final fsync to prevent early exit if kernel caches writes.
-* ddrescuelog.cc (show_status): Show mapfile names at verbosity == 0.
-* ddrescue.texi: Document how to create a compressed image.
-* configure, Makefile.in: New variable 'MAKEINFO'.
+0001-tdb-Add-configure-options-for-packages.patch
+refreshed for 1.4.10
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../ddrescue/{ddrescue_1.27.bb => ddrescue_1.28.bb}             | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/ddrescue/{ddrescue_1.27.bb => ddrescue_1.28.bb} (93%)
+ ...b-Add-configure-options-for-packages.patch | 39 +++++++++++++++----
+ .../{libtdb_1.4.9.bb => libtdb_1.4.10.bb}     |  2 +-
+ 2 files changed, 33 insertions(+), 8 deletions(-)
+ rename meta-networking/recipes-support/libtdb/{libtdb_1.4.9.bb => libtdb_1.4.10.bb} (96%)
 
-diff --git a/meta-oe/recipes-extended/ddrescue/ddrescue_1.27.bb b/meta-oe/recipes-extended/ddrescue/ddrescue_1.28.bb
-similarity index 93%
-rename from meta-oe/recipes-extended/ddrescue/ddrescue_1.27.bb
-rename to meta-oe/recipes-extended/ddrescue/ddrescue_1.28.bb
-index 7a71d02dc..0863fc120 100644
---- a/meta-oe/recipes-extended/ddrescue/ddrescue_1.27.bb
-+++ b/meta-oe/recipes-extended/ddrescue/ddrescue_1.28.bb
-@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=76d6e300ffd8fb9d18bd9b136a9bba13 \
-                     "
+diff --git a/meta-networking/recipes-support/libtdb/libtdb/0001-tdb-Add-configure-options-for-packages.patch b/meta-networking/recipes-support/libtdb/libtdb/0001-tdb-Add-configure-options-for-packages.patch
+index 477b1cec7..5c811c468 100644
+--- a/meta-networking/recipes-support/libtdb/libtdb/0001-tdb-Add-configure-options-for-packages.patch
++++ b/meta-networking/recipes-support/libtdb/libtdb/0001-tdb-Add-configure-options-for-packages.patch
+@@ -21,13 +21,16 @@ Signed-off-by: Changqing Li <changqing.li@windriver.com>
+ Rebase to 1.4.9
+ Remove libaio option
+ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
++
++Rebase to 1.4.10
++Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+ ---
+- lib/replace/wscript | 79 +++++++++++++++++++++++++++++++++------------
+- wscript             |  6 ++++
+- 2 files changed, 65 insertions(+), 20 deletions(-)
++ lib/replace/wscript | 101 ++++++++++++++++++++++++++++++--------------
++ wscript             |   6 +++
++ 2 files changed, 76 insertions(+), 31 deletions(-)
  
- SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.lz"
--SRC_URI[sha256sum] = "38c80c98c5a44f15e53663e4510097fd68d6ec20758efdf3a925037c183232eb"
-+SRC_URI[sha256sum] = "6626c07a7ca1cc1d03cad0958522c5279b156222d32c342e81117cfefaeb10c1"
+ diff --git a/lib/replace/wscript b/lib/replace/wscript
+-index 199e636..cb13b62 100644
++index 77e655b..e6d50b3 100644
+ --- a/lib/replace/wscript
+ +++ b/lib/replace/wscript
+ @@ -25,6 +25,34 @@ def options(opt):
+@@ -103,7 +106,7 @@ index 199e636..cb13b62 100644
+      conf.CHECK_HEADERS('nss_common.h nsswitch.h ns_api.h')
+      conf.CHECK_HEADERS('sys/extattr.h sys/ea.h sys/proplist.h sys/cdefs.h')
+      conf.CHECK_HEADERS('utmp.h utmpx.h lastlog.h')
+-@@ -443,20 +481,21 @@ def configure(conf):
++@@ -443,31 +481,32 @@ def configure(conf):
+  
+      strlcpy_in_bsd = False
+  
+@@ -112,6 +115,17 @@ index 199e636..cb13b62 100644
+ -        if conf.CHECK_FUNCS_IN('strlcpy strlcat', 'bsd', headers='bsd/string.h',
+ -                               checklibc=True):
+ -            strlcpy_in_bsd = True
++-    elif conf.env.enable_fuzzing:
++-        # Just to complicate it more, some versions of Honggfuzz have
++-        # got strlcpy and strlcat in libc, but not in <string.h>
++-        # (unless it is there coincidentally, on a BSD). Therefore we
++-        # can't use CHECK_FUNCS alone to decide whether to add the
++-        # headers to replace.h.
++-        #
++-        # As this is only known to happen on a fuzzing compiler, we'll
++-        # skip the check when not in fuzzing mode.
++-        conf.CHECK_HEADERS('bsd/string.h')
++-
+ -    if not conf.CHECK_FUNCS('getpeereid'):
+ -        conf.CHECK_FUNCS_IN('getpeereid', 'bsd', headers='sys/types.h bsd/unistd.h')
+ -    if not conf.CHECK_FUNCS_IN('setproctitle', 'setproctitle', headers='setproctitle.h'):
+@@ -127,6 +141,17 @@ index 199e636..cb13b62 100644
+ +            if conf.CHECK_FUNCS_IN('strlcpy strlcat', 'bsd', headers='bsd/string.h',
+ +                                   checklibc=True):
+ +                strlcpy_in_bsd = True
+++        elif conf.env.enable_fuzzing:
+++            # Just to complicate it more, some versions of Honggfuzz have
+++            # got strlcpy and strlcat in libc, but not in <string.h>
+++            # (unless it is there coincidentally, on a BSD). Therefore we
+++            # can't use CHECK_FUNCS alone to decide whether to add the
+++            # headers to replace.h.
+++            #
+++            # As this is only known to happen on a fuzzing compiler, we'll
+++            # skip the check when not in fuzzing mode.
+++            conf.CHECK_HEADERS('bsd/string.h')
+++
+ +        if not conf.CHECK_FUNCS('getpeereid'):
+ +            conf.CHECK_FUNCS_IN('getpeereid', 'bsd', headers='sys/types.h bsd/unistd.h')
+ +        if not conf.CHECK_FUNCS_IN('setproctitle', 'setproctitle', headers='setproctitle.h'):
+@@ -140,7 +165,7 @@ index 199e636..cb13b62 100644
+      conf.CHECK_CODE('''
+                  struct ucred cred;
+ diff --git a/wscript b/wscript
+-index 5e6a928..5443b43 100644
++index 2c587fb..b2164b2 100644
+ --- a/wscript
+ +++ b/wscript
+ @@ -69,6 +69,12 @@ def options(opt):
+@@ -157,5 +182,5 @@ index 5e6a928..5443b43 100644
+  def configure(conf):
+      conf.env.disable_tdb_mutex_locking = getattr(Options.options,
+ -- 
+-2.25.1
++2.34.1
  
- # This isn't already added by base.bbclass
- do_unpack[depends] += "lzip-native:do_populate_sysroot"
+diff --git a/meta-networking/recipes-support/libtdb/libtdb_1.4.9.bb b/meta-networking/recipes-support/libtdb/libtdb_1.4.10.bb
+similarity index 96%
+rename from meta-networking/recipes-support/libtdb/libtdb_1.4.9.bb
+rename to meta-networking/recipes-support/libtdb/libtdb_1.4.10.bb
+index 936760035..f23b157e8 100644
+--- a/meta-networking/recipes-support/libtdb/libtdb_1.4.9.bb
++++ b/meta-networking/recipes-support/libtdb/libtdb_1.4.10.bb
+@@ -15,7 +15,7 @@ SRC_URI = "https://samba.org/ftp/tdb/tdb-${PV}.tar.gz \
+            file://run-ptest \
+ "
+ 
+-SRC_URI[sha256sum] = "0ac226073e3a2db8648da7af744cb95f50766a52feeb001d558b2b321b74a765"
++SRC_URI[sha256sum] = "02338e33c16c21c9e29571cef523e76b2b708636254f6f30c6cf195d48c62daf"
+ 
+ PACKAGECONFIG ??= "\
+     ${@bb.utils.filter('DISTRO_FEATURES', 'acl', d)} \
 -- 
 2.34.1
 
