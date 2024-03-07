@@ -1,219 +1,178 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B8A5C54798
-	for <webhook@archiver.kernel.org>; Thu,  7 Mar 2024 13:49:30 +0000 (UTC)
-Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
- by mx.groups.io with SMTP id smtpd.web10.23380.1709819369362619839
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D071AC48BF6
+	for <webhook@archiver.kernel.org>; Thu,  7 Mar 2024 15:30:50 +0000 (UTC)
+Received: from mail-lj1-f174.google.com (mail-lj1-f174.google.com [209.85.208.174])
+ by mx.groups.io with SMTP id smtpd.web10.25989.1709825446418516226
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 07 Mar 2024 05:49:29 -0800
+ Thu, 07 Mar 2024 07:30:46 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=bVz4JOR/;
- spf=pass (domain: smile.fr, ip: 209.85.218.44, mailfrom: yoann.congal@smile.fr)
-Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-a441d7c6125so100897066b.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 07 Mar 2024 05:49:29 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=LwgFOrvt;
+ spf=pass (domain: gmail.com, ip: 209.85.208.174, mailfrom: martin.jansa@gmail.com)
+Received: by mail-lj1-f174.google.com with SMTP id 38308e7fff4ca-2d382a78c38so11150171fa.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 07 Mar 2024 07:30:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1709819368; x=1710424168; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=Wm0naI+n5uoo+z3fbdMDEpKHofHEA2JVOR2PktvdgAY=;
-        b=bVz4JOR/tHwoYm/zxe3prDBmjyYtigDG1GmdyEs3STKK3ZNJLuv+JAXYKAShOaPU8V
-         FXCXJGWhK1KFhZathtxo6UjkzAbuhdkqAdHXY7KWC92EUF/7AFTvz+xoKBckFEuTLyNf
-         dLURDKQzlOlAlQtURc4iB06dkSa/dYbZuZjNrCQ1hHE9/dqyfB2QlZg+T0duKC5ytQ9V
-         2Y4hTAro8YHvEzEYZGSbolxFwm9JDXt4/4v2mCsrKNoLNHmNbxbijvIvTzxykZivugPP
-         7COguyNGeDO3blsPZGgISzfuPOFtJX7qNqNmixRTnbfJ7iL2b24ZdYxMqsQ+7naeCMdy
-         gRVQ==
+        d=gmail.com; s=20230601; t=1709825444; x=1710430244; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=9aR9z8CPtmQe6aS9mwWikhUOrWRdkTSiCVkQMG1u/D8=;
+        b=LwgFOrvtMP/RF5DaHOgOpIdbrRLC/N3j3AtDDDyrbsKoGh+alQrmSq5rAxYlVM80Wt
+         pn/Ufw43adHxkOLCwhg6ooFE1RE+cBZQ4qo62qWmPAuje16mFGLIazLKYNWpGgWByPFZ
+         wV0fLltUGWgbjGaOaWaVg10thGm3L4TRVn+6bJY3CJ+yEKggQax1VHZltkznBn3KOHdZ
+         QokdkEcoMYbZDMQpeN5uUgvVUGa9JrOQ5DZX806flkULiE2A8Ch3fiBveqDBMi37siBw
+         fv/jf0/Kd7VyYhGDjMDpDHt6jTewCoplOZANv9B/wQ9HVOzVpt00TqNPor3c6+AVCWmN
+         UmPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1709819368; x=1710424168;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1709825444; x=1710430244;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Wm0naI+n5uoo+z3fbdMDEpKHofHEA2JVOR2PktvdgAY=;
-        b=tKMGlf81oHn3UwhZOkmtALYcvB69TTkGWZ8XMhS8joOj75GoiIDe6ifPefKn/75YM7
-         pSxH0dBXyDKBVZBKarmGzQfVaR7cO1JGQylIXECq6wBT16cYQ1G07lXJJ36zcpxyNtZT
-         snNitt4NAC+zYarCZAxghEz3jbCVBEKObhHEnbRcSKAN/xjmiv0kxfBHq27A6KePOKCZ
-         Z/cj5yRkNlkYzhOJXJjXptB23nSPRiJxiezCrSxXH7h5xx0fT6UY6H4aTmscbrIy3Q5R
-         zi48XPr/5NSZ26SwMKkwE5+/SofCjlxP+W1k8mz85lCcmvq0CSHrdYPZmVHRkiQRAYRf
-         3L3g==
-X-Gm-Message-State: AOJu0YwLYENNFbXjPqxpr6cqqz8z7FY+Eg5sRtPZKWHTHeIZtS8mdsGY
-	WgDKfhYi3zKFh03N2ReP/3QBQ40C6KUAVSwRWf9UIIWpWBBSBCNiA1+DvKVvI4AckW/+f9iYjxR
-	9Qw2LUdqpVL+oJwWkxI4G2RggYMGKdRB9uXtp4QrJHS90talVOuk=
-X-Google-Smtp-Source: AGHT+IG8PwMxrYAhlQy3zW1Cd+J1CS5RszyCZMw53SnWmRq9Prnv/FylvUEq2M0AxSXvFlUkBwFfONIAYHfi/X8K074=
-X-Received: by 2002:a17:906:d106:b0:a45:b7a3:e8a0 with SMTP id
- b6-20020a170906d10600b00a45b7a3e8a0mr3637148ejz.56.1709819367464; Thu, 07 Mar
- 2024 05:49:27 -0800 (PST)
+        bh=9aR9z8CPtmQe6aS9mwWikhUOrWRdkTSiCVkQMG1u/D8=;
+        b=vSTETcX8Pfj13f2Ra/fn0A0J9F3MRT8XWapI3CeJZjaN1Oczm57dkIY686YXFs6duN
+         O2+HZWMGX2IoIbcrzWqHSXtINxa2UcNpjCCEqVjaGEZZ/TzrSsQsad5YpKhQTxSDOgrT
+         maAHu2BDMqTtRTCzEY4nnuscFF9/XCCboIrbv3ncGjsWJzMnC1l/EBl6xvsVi+BfwPvr
+         WW3s4p4SOyR8wZkMapGx0ziH2OAtF/5UjBHHaX8NSRHrqv1+B3GAM3cIFy3MdeHHMeAp
+         4FSS48glVAVd3q28wlOd1HNVUd+KjTQUCZaNbAO+v4H4foWBj6Ug98GyRpngl+xtOAU0
+         Rh4g==
+X-Gm-Message-State: AOJu0YyVpecnJtnl99HFzFL70cTaFcqfY5nrtGZykURZhCb0HHY2Thie
+	0xvMq9kDao5FNNYCAD2S59kCx5lCwZP726mI8X9ElHNROzEEHadn6whR+NVT
+X-Google-Smtp-Source: AGHT+IGr8xzUCOsw42b8Mx2FXyuzb5PygmicSxSXBk05EXZsZnh9S0znHdDeZ4ii/sVO+ZZAKHGzkA==
+X-Received: by 2002:a05:651c:2ca:b0:2d2:b929:9388 with SMTP id f10-20020a05651c02ca00b002d2b9299388mr1531995ljo.22.1709825444218;
+        Thu, 07 Mar 2024 07:30:44 -0800 (PST)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id u23-20020a50c057000000b00565af2ea649sm8493806edd.14.2024.03.07.07.30.43
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 07 Mar 2024 07:30:43 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: akuster808@gmail.com,
+	Anuj Mittal <anuj.mittal@intel.com>,
+	Khem Raj <raj.khem@gmail.com>,
+	Martin Jansa <martin.jansa@gmail.com>
+Subject: [meta-oe][kirkstone][PATCH] opencv: fix reproducibility issues
+Date: Thu,  7 Mar 2024 16:30:35 +0100
+Message-ID: <20240307153035.2433958-1-martin.jansa@gmail.com>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
-References: <20240307092113.3674886-1-soumya.sambu@windriver.com>
-In-Reply-To: <20240307092113.3674886-1-soumya.sambu@windriver.com>
-From: Yoann CONGAL <yoann.congal@smile.fr>
-Date: Thu, 7 Mar 2024 14:49:01 +0100
-Message-ID: <CAMSfU+5fWfoHoguf12vNjE+Lakd3bxGQ1TStUf7xOPgKCjaccg@mail.gmail.com>
-Subject: Re: [oe][meta-oe][kirkstone][PATCH 1/1] openvpn: ignore CVE-2023-7235
-To: soumya.sambu@windriver.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000073fb70613125852"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 07 Mar 2024 13:49:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109196
+ <openembedded-devel@lists.openembedded.org>; Thu, 07 Mar 2024 15:30:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109197
 
---000000000000073fb70613125852
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Anuj Mittal <anuj.mittal@intel.com>
 
-Hi,
+Download and unpack contrib modules and other repositories in S instead
+of WORKDIR so they don't escape file-prefix-map substitutions.
 
-Le jeu. 7 mars 2024 =C3=A0 10:21, Soumya via lists.openembedded.org
-<soumya.sambu=3Dwindriver.com@lists.openembedded.org> a =C3=A9crit :
+Fixes a number of reproducibility problems because of OpenCV check
+macros that were embedding path to files in contrib/.
 
-> From: Soumya Sambu <soumya.sambu@windriver.com>
->
-> This CVE is related to OpenVPN 2.x GUI on Windows.
->
-> References:
-> https://community.openvpn.net/openvpn/wiki/CVE-2023-7235
-> https://security-tracker.debian.org/tracker/CVE-2023-7235
->
-> Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
-> ---
->  meta-networking/recipes-support/openvpn/openvpn_2.5.6.bb | 3 +++
->  1 file changed, 3 insertions(+)
->
-> diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.5.6.bb
-> b/meta-networking/recipes-support/openvpn/openvpn_2.5.6.bb
-> index 218e72b7a..828cd5033 100644
-> --- a/meta-networking/recipes-support/openvpn/openvpn_2.5.6.bb
-> +++ b/meta-networking/recipes-support/openvpn/openvpn_2.5.6.bb
-> @@ -19,6 +19,9 @@ SRC_URI[sha256sum] =3D
-> "333a7ef3d5b317968aca2c77bdc29aa7c6d6bb3316eb3f79743b59c532
->  # CVE-2020-7224 and CVE-2020-27569 are for Aviatrix OpenVPN client, not
-> for openvpn.
->  CVE_CHECK_IGNORE +=3D "CVE-2020-7224 CVE-2020-27569"
->
-> +# CVE-2023-7235 is specific to Windows platform
-> +CVE_CHECK_IGNORE +=3D "CVE-2023-7235"
->
+MJ: this is backport from langdale and fixes not only reproducibility
+    issues but also pseudo aborts in do_install when do_install
+    is executed again after do_package (in incremental builds):
 
-That's weird, this CVE does not appear as applicable neither locally for me
-or on the AB:
-https://autobuilder.yocto.io/pub/non-release/patchmetrics-meta-oe/cve-statu=
-s-kirkstone.txt
-Did you do something specific to see this CVE?
+  | DEBUG: Executing shell function do_install
+  | NOTE: DESTDIR=opencv/4.5.5-r0/image VERBOSE=1 cmake --build opencv/4.5.5-r0/build --target install --
+  | abort()ing pseudo client by server request. See https://wiki.yoctoproject.org/wiki/Pseudo_Abort for more details on this.
+  | Check logfile: opencv/4.5.5-r0/pseudo//pseudo.log
+  | Subprocess aborted
 
+  and pseudo.log file shows:
+  path mismatch [3 links]: ino 214373575 db 'opencv/4.5.5-r0/package/usr/src/debug/lib32-opencv/4.5.5-r0/contrib/modules/intensity_transform/src/bimef.cpp' req 'opencv/4.5.5-r0/contrib/modules/intensity_transform/src/bimef.cpp'.
 
-> +
->  SYSTEMD_SERVICE:${PN} +=3D "openvpn@loopback-server.service
-> openvpn@loopback-client.service"
->  SYSTEMD_AUTO_ENABLE =3D "disable"
->
-> --
-> 2.40.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#109193):
-> https://lists.openembedded.org/g/openembedded-devel/message/109193
-> Mute This Topic: https://lists.openembedded.org/mt/104784192/4316185
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> yoann.congal@smile.fr]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
+  easily reproducible with:
+  bitbake -c cleansstate opencv; bitbake -c package opencv; bitbake -c install -f opencv
 
---=20
-Yoann Congal
-Smile ECS - Tech expert
+  unlike ${S} ${WORKDIR}/contrib isn't in default PSEUDO_IGNORE_PATHS
 
---000000000000073fb70613125852
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+---
+ .../recipes-support/opencv/opencv_4.5.5.bb    | 34 +++++++++----------
+ 1 file changed, 17 insertions(+), 17 deletions(-)
 
-<div dir=3D"ltr"><div dir=3D"ltr"><div>Hi,</div></div><br><div class=3D"gma=
-il_quote"><div dir=3D"ltr" class=3D"gmail_attr">Le=C2=A0jeu. 7 mars 2024 =
-=C3=A0=C2=A010:21, Soumya via <a href=3D"http://lists.openembedded.org">lis=
-ts.openembedded.org</a> &lt;soumya.sambu=3D<a href=3D"mailto:windriver.com@=
-lists.openembedded.org">windriver.com@lists.openembedded.org</a>&gt; a =C3=
-=A9crit=C2=A0:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0=
-px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">F=
-rom: Soumya Sambu &lt;<a href=3D"mailto:soumya.sambu@windriver.com" target=
-=3D"_blank">soumya.sambu@windriver.com</a>&gt;<br>
-<br>
-This CVE is related to OpenVPN 2.x GUI on Windows.<br>
-<br>
-References:<br>
-<a href=3D"https://community.openvpn.net/openvpn/wiki/CVE-2023-7235" rel=3D=
-"noreferrer" target=3D"_blank">https://community.openvpn.net/openvpn/wiki/C=
-VE-2023-7235</a><br>
-<a href=3D"https://security-tracker.debian.org/tracker/CVE-2023-7235" rel=
-=3D"noreferrer" target=3D"_blank">https://security-tracker.debian.org/track=
-er/CVE-2023-7235</a><br>
-<br>
-Signed-off-by: Soumya Sambu &lt;<a href=3D"mailto:soumya.sambu@windriver.co=
-m" target=3D"_blank">soumya.sambu@windriver.com</a>&gt;<br>
----<br>
-=C2=A0meta-networking/recipes-support/openvpn/<a href=3D"http://openvpn_2.5=
-.6.bb" rel=3D"noreferrer" target=3D"_blank">openvpn_2.5.6.bb</a> | 3 +++<br=
->
-=C2=A01 file changed, 3 insertions(+)<br>
-<br>
-diff --git a/meta-networking/recipes-support/openvpn/<a href=3D"http://open=
-vpn_2.5.6.bb" rel=3D"noreferrer" target=3D"_blank">openvpn_2.5.6.bb</a> b/m=
-eta-networking/recipes-support/openvpn/<a href=3D"http://openvpn_2.5.6.bb" =
-rel=3D"noreferrer" target=3D"_blank">openvpn_2.5.6.bb</a><br>
-index 218e72b7a..828cd5033 100644<br>
---- a/meta-networking/recipes-support/openvpn/<a href=3D"http://openvpn_2.5=
-.6.bb" rel=3D"noreferrer" target=3D"_blank">openvpn_2.5.6.bb</a><br>
-+++ b/meta-networking/recipes-support/openvpn/<a href=3D"http://openvpn_2.5=
-.6.bb" rel=3D"noreferrer" target=3D"_blank">openvpn_2.5.6.bb</a><br>
-@@ -19,6 +19,9 @@ SRC_URI[sha256sum] =3D &quot;333a7ef3d5b317968aca2c77bdc2=
-9aa7c6d6bb3316eb3f79743b59c532<br>
-=C2=A0# CVE-2020-7224 and CVE-2020-27569 are for Aviatrix OpenVPN client, n=
-ot for openvpn.<br>
-=C2=A0CVE_CHECK_IGNORE +=3D &quot;CVE-2020-7224 CVE-2020-27569&quot;<br>
-<br>
-+# CVE-2023-7235 is specific to Windows platform<br>
-+CVE_CHECK_IGNORE +=3D &quot;CVE-2023-7235&quot;<br></blockquote><div><br><=
-/div><div>That&#39;s weird, this CVE does not appear as applicable neither =
-locally for me or on the AB: <a href=3D"https://autobuilder.yocto.io/pub/no=
-n-release/patchmetrics-meta-oe/cve-status-kirkstone.txt">https://autobuilde=
-r.yocto.io/pub/non-release/patchmetrics-meta-oe/cve-status-kirkstone.txt</a=
-></div><div>Did you do something specific to see this CVE?<br></div><div>=
-=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0=
-.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-+<br>
-=C2=A0SYSTEMD_SERVICE:${PN} +=3D &quot;openvpn@loopback-server.service open=
-vpn@loopback-client.service&quot;<br>
-=C2=A0SYSTEMD_AUTO_ENABLE =3D &quot;disable&quot;<br>
-<br>
--- <br>
-2.40.0<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#109193): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/109193" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/109193</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/104784192/431=
-6185" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
-t/104784192/4316185</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:yoann.congal@smile.fr" t=
-arget=3D"_blank">yoann.congal@smile.fr</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div><br clear=3D"all"><br><span class=3D"gmail_signature_pre=
-fix">-- </span><br><div dir=3D"ltr" class=3D"gmail_signature"><div dir=3D"l=
-tr"><font face=3D"Raleway, regular">Yoann Congal</font><div><font face=3D"R=
-aleway, regular">Smile ECS - Tech expert<br></font></div></div></div></div>
+diff --git a/meta-oe/recipes-support/opencv/opencv_4.5.5.bb b/meta-oe/recipes-support/opencv/opencv_4.5.5.bb
+index a7700a3743..5b5685f990 100644
+--- a/meta-oe/recipes-support/opencv/opencv_4.5.5.bb
++++ b/meta-oe/recipes-support/opencv/opencv_4.5.5.bb
+@@ -39,12 +39,12 @@ IPP_MD5 = "${@ipp_md5sum(d)}"
+ 
+ SRCREV_FORMAT = "opencv_contrib_ipp_boostdesc_vgg"
+ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=master;protocol=https \
+-           git://github.com/opencv/opencv_contrib.git;destsuffix=contrib;name=contrib;branch=master;protocol=https \
+-           git://github.com/opencv/opencv_3rdparty.git;branch=ippicv/master_20191018;destsuffix=ipp;name=ipp;protocol=https \
+-           git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_boostdesc_20161012;destsuffix=boostdesc;name=boostdesc;protocol=https \
+-           git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_vgg_20160317;destsuffix=vgg;name=vgg;protocol=https \
+-           git://github.com/opencv/opencv_3rdparty.git;branch=contrib_face_alignment_20170818;destsuffix=face;name=face;protocol=https \
+-           git://github.com/WeChatCV/opencv_3rdparty.git;branch=wechat_qrcode;destsuffix=wechat_qrcode;name=wechat-qrcode;protocol=https \
++           git://github.com/opencv/opencv_contrib.git;destsuffix=git/contrib;name=contrib;branch=master;protocol=https \
++           git://github.com/opencv/opencv_3rdparty.git;branch=ippicv/master_20191018;destsuffix=git/ipp;name=ipp;protocol=https \
++           git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_boostdesc_20161012;destsuffix=git/boostdesc;name=boostdesc;protocol=https \
++           git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_vgg_20160317;destsuffix=git/vgg;name=vgg;protocol=https \
++           git://github.com/opencv/opencv_3rdparty.git;branch=contrib_face_alignment_20170818;destsuffix=git/face;name=face;protocol=https \
++           git://github.com/WeChatCV/opencv_3rdparty.git;branch=wechat_qrcode;destsuffix=git/wechat_qrcode;name=wechat-qrcode;protocol=https \
+            file://0001-3rdparty-ippicv-Use-pre-downloaded-ipp.patch \
+            file://0003-To-fix-errors-as-following.patch \
+            file://0001-Temporarliy-work-around-deprecated-ffmpeg-RAW-functi.patch \
+@@ -52,10 +52,10 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv;branch=master;protocol
+            file://download.patch \
+            file://0001-Make-ts-module-external.patch \
+            file://0001-core-vsx-update-vec_absd-workaround-condition.patch \
+-           file://CVE-2023-2617.patch;patchdir=../contrib \
+-           file://CVE-2023-2618.patch;patchdir=../contrib \
++           file://CVE-2023-2617.patch;patchdir=contrib \
++           file://CVE-2023-2618.patch;patchdir=contrib \
+            "
+-SRC_URI:append:riscv64 = " file://0001-Use-Os-to-compile-tinyxml2.cpp.patch;patchdir=../contrib"
++SRC_URI:append:riscv64 = " file://0001-Use-Os-to-compile-tinyxml2.cpp.patch;patchdir=contrib"
+ 
+ S = "${WORKDIR}/git"
+ 
+@@ -64,7 +64,7 @@ S = "${WORKDIR}/git"
+ OPENCV_DLDIR = "${WORKDIR}/downloads"
+ 
+ do_unpack_extra() {
+-    tar xzf ${WORKDIR}/ipp/ippicv/${IPP_FILENAME} -C ${WORKDIR}
++    tar xzf ${S}/ipp/ippicv/${IPP_FILENAME} -C ${S}
+ 
+     md5() {
+         # Return the MD5 of $1
+@@ -79,22 +79,22 @@ do_unpack_extra() {
+             test -e $DEST || ln -s $F $DEST
+         done
+     }
+-    cache xfeatures2d/boostdesc ${WORKDIR}/boostdesc/*.i
+-    cache xfeatures2d/vgg ${WORKDIR}/vgg/*.i
+-    cache data ${WORKDIR}/face/*.dat
+-    cache wechat_qrcode ${WORKDIR}/wechat_qrcode/*.caffemodel
+-    cache wechat_qrcode ${WORKDIR}/wechat_qrcode/*.prototxt
++    cache xfeatures2d/boostdesc ${S}/boostdesc/*.i
++    cache xfeatures2d/vgg ${S}/vgg/*.i
++    cache data ${S}/face/*.dat
++    cache wechat_qrcode ${S}/wechat_qrcode/*.caffemodel
++    cache wechat_qrcode ${S}/wechat_qrcode/*.prototxt
+ }
+ addtask unpack_extra after do_unpack before do_patch
+ 
+ CMAKE_VERBOSE = "VERBOSE=1"
+ 
+-EXTRA_OECMAKE = "-DOPENCV_EXTRA_MODULES_PATH=${WORKDIR}/contrib/modules \
++EXTRA_OECMAKE = "-DOPENCV_EXTRA_MODULES_PATH=${S}/contrib/modules \
+     -DWITH_1394=OFF \
+     -DENABLE_PRECOMPILED_HEADERS=OFF \
+     -DCMAKE_SKIP_RPATH=ON \
+     -DOPENCV_ICV_HASH=${IPP_MD5} \
+-    -DIPPROOT=${WORKDIR}/ippicv_lnx \
++    -DIPPROOT=${S}/ippicv_lnx \
+     -DOPENCV_GENERATE_PKGCONFIG=ON \
+     -DOPENCV_DOWNLOAD_PATH=${OPENCV_DLDIR} \
+     -DOPENCV_ALLOW_DOWNLOADS=OFF \
+-- 
+2.44.0
 
---000000000000073fb70613125852--
 
