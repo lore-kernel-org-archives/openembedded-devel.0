@@ -1,165 +1,218 @@
-Return-Path: <mingli.yu@eng.windriver.com>
+Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0743AC54E41
-	for <webhook@archiver.kernel.org>; Thu,  7 Mar 2024 03:21:17 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.14896.1709781670380248647
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5852AC48BF6
+	for <webhook@archiver.kernel.org>; Thu,  7 Mar 2024 04:24:17 +0000 (UTC)
+Received: from mail-yw1-f179.google.com (mail-yw1-f179.google.com [209.85.128.179])
+ by mx.groups.io with SMTP id smtpd.web11.15845.1709785448912521081
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Mar 2024 19:21:10 -0800
+ Wed, 06 Mar 2024 20:24:09 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=F1lNU2V/;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=3796958646=mingli.yu@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 42720QAH028158
-	for <openembedded-devel@lists.openembedded.org>; Thu, 7 Mar 2024 03:21:09 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding:content-type; s=
-	PPS06212021; bh=U94qtGErpCCuLF+GLMAsnA832MXhHyOKQFHCn7x9SPQ=; b=
-	F1lNU2V/VutQn3zzTx6QlUkp1bPzjstDiA7oIFE8StwSN789q7pXeB9NWgc8DdwF
-	ZcoX8gxjaqu7Wyn1t+n/nNH1m5VdBvUYG+IYPN1NsOT/Pl5+Zy0QWPtaQouQP9xJ
-	iPPr9MWKbjv/ceNm48IlLnqgw/bxQV7qc4qdA4Qu1pFfBOK5W/VCh28XN/4VSnvx
-	7PmTWr258Rw6p3cSeQIq0eBHsAgI6qMR2lh7ti0K3yZJOJdiHFukxQrylQIRCNEc
-	SjnRhcj2B4iyoZWR5936OeK9klPu3/UerGXHgrn8jG6xFaZ0i4HWwbE70cbf8Si0
-	tpMoM+ce/ZpP9nwpeUrsew==
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3wku36cnj4-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 07 Mar 2024 03:21:09 +0000 (GMT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Wed, 6 Mar 2024 19:21:08 -0800
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.35 via Frontend Transport; Wed, 6 Mar 2024 19:21:07 -0800
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH 2/2] re2: Upgrade 2023.03.01 -> 2024.03.01
-Date: Thu, 7 Mar 2024 11:21:05 +0800
-Message-ID: <20240307032105.1806173-2-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240307032105.1806173-1-mingli.yu@windriver.com>
-References: <20240307032105.1806173-1-mingli.yu@windriver.com>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=JG1QbqNp;
+ spf=pass (domain: gmail.com, ip: 209.85.128.179, mailfrom: ticotimo@gmail.com)
+Received: by mail-yw1-f179.google.com with SMTP id 00721157ae682-609acac53d0so4482277b3.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Mar 2024 20:24:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1709785448; x=1710390248; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=/LJPoC+S6cJ8GRr9nSk9paE1wARwCL+CnYedABXVhpU=;
+        b=JG1QbqNpf9Llgi53Fyq3JZt0cW9vB1eaO/XGbfLNG6EDDVpoHZWPbUsAkcbyc9zKem
+         9Cfh+70tSIDomEtjGcK23eW7dn3vyrtzQ6U4nz3Yd/UYQyXZoZXGmkV+UKZ6Ov0KHy2s
+         8LeqKtnbZKnh4BOVcRZxcecwW7eDSRiwl496Qi9Lg8HmcI6zkfc7eUtUDNM9C8J5sVXv
+         7ir2MBHiLo8srmoNYUnUbdxo7dpAQH5Le8CFnC0qK0Ri7+BWUAH6skuD/uzyNPKo8g5t
+         iOsVubafmMaOMNYThaEYa3pKopLW3Umu0tm/QbgiLWNU2e1qh2KF5WqIsJH0XJMynXbH
+         Uitw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1709785448; x=1710390248;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=/LJPoC+S6cJ8GRr9nSk9paE1wARwCL+CnYedABXVhpU=;
+        b=N/T1efHmshhXyYx/f+El7mHda2l5g7obHsLaeNt0/zEu+jJ/eoZxL+28HtWSqFvKfE
+         ac9gm0MLyiSWobZJVLp7Fr2higGMVv0AWaiskl7P86X6sl1EBib52CgrvPgkRoHRe40U
+         nvp6xdREAt489AV/3iOn4myhYId5mYHLXus/AYASm4imZBYt0gdrIT6l8K2vNHpxKL5p
+         WRkboDCMk3rV1EUkxx8Ar5ifuvCdrOt9tYe0484akjOAbdXWMeWIgL4FkbcFI42P0jHc
+         eGQuMzQiL2nkJzQ3tfLUjBkjBkPkgU7FPy06S3gycolUXnKWjz17tC3X4BKgMWEua+6i
+         WtBA==
+X-Gm-Message-State: AOJu0YxGxKYHNnjXefNmv5cZMgQGAoWpew6kbmbDZXgvfOIR1CPwuoGZ
+	AQkEAsWoKCFKq683jgvVDpqiWf5xwBMZcaVfVenYT/R+LlWRgD5UG9qW10WPFeYuPeAM00q9DDv
+	cO+0xtLTDNQ5ZvT1/9kd+7+mPdK8=
+X-Google-Smtp-Source: AGHT+IHr8Sm2yynDYN+837kNCQW0XK8MLEZgAD07sEorqsdvvrYSBmvScJ5VvZUpzFwq+KQsFFFTwg49B9HOMzpZFhc=
+X-Received: by 2002:a0d:cb12:0:b0:609:f5b6:f105 with SMTP id
+ n18-20020a0dcb12000000b00609f5b6f105mr127982ywd.2.1709785447952; Wed, 06 Mar
+ 2024 20:24:07 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: 23PUJSc9ut1eJTRfBxgYtvIXHsvR0kTJ
-X-Proofpoint-GUID: 23PUJSc9ut1eJTRfBxgYtvIXHsvR0kTJ
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-03-06_14,2024-03-06_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 spamscore=0
- phishscore=0 priorityscore=1501 malwarescore=0 bulkscore=0 adultscore=0
- mlxlogscore=999 suspectscore=0 impostorscore=0 mlxscore=0
- lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2402120000 definitions=main-2403070020
+References: <20240306165441.429620-1-alperyasinak1@gmail.com>
+In-Reply-To: <20240306165441.429620-1-alperyasinak1@gmail.com>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Wed, 6 Mar 2024 20:23:57 -0800
+Message-ID: <CANx9H-ABQQiTUTQKsN2DEjmw0d4Pu3eiHEeSesdfHtLwzcOkCw@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH] python3-invoke: add recipe
+To: Alper Ak <alperyasinak1@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000447af506130a725b"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 07 Mar 2024 03:21:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109188
+ <openembedded-devel@lists.openembedded.org>; Thu, 07 Mar 2024 04:24:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109189
 
-From: Mingli Yu <mingli.yu@windriver.com>
+--000000000000447af506130a725b
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-1, Add abseil-cpp, gtest and benchmark to DEPENDS to fix the below
-kind configure error.
+On Wed, Mar 6, 2024 at 8:55=E2=80=AFAM Alper Ak <alperyasinak1@gmail.com> w=
+rote:
 
-CMake Error at CMakeLists.txt:81 (find_package):
-  By not providing "Findabsl.cmake" in CMAKE_MODULE_PATH this project has
-  asked CMake to find a package configuration file provided by "absl", but
-  CMake did not find one.
+> Invoke is a Python library for managing shell-oriented subprocesses and
+> organizing executable Python code into CLI-invokable tasks. It draws
+> inspiration from various sources (make/rake, Fabric 1.x, etc) to arrive a=
+t
+> a powerful & clean feature set.
 
-  Could not find a package configuration file provided by "absl" with any of
-  the following names:
 
-    abslConfig.cmake
-    absl-config.cmake
+We should really gently judge upstream to update their pyproject.toml to
+use a proper build-backend. There is nothing special in their setup.py
 
-2, Install libtesting.so to target to fix the below QA issue.
-ERROR: re2-2024.03.01-r0 do_package_qa: QA Issue: /usr/lib64/re2/ptest/string_generator_test contained in package re2-ptest requires libtesting.so()(64bit), but no providers found in RDEPENDS:re2-ptest? [file-rdeps]
+>
+>
+> Signed-off-by: alperak <alperyasinak1@gmail.com>
+> ---
+>  .../python/python3-invoke_2.2.0.bb             | 18 ++++++++++++++++++
+>  1 file changed, 18 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/
+> python3-invoke_2.2.0.bb
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-invoke_2.2.0.bb
+> b/meta-python/recipes-devtools/python/python3-invoke_2.2.0.bb
+> new file mode 100644
+> index 000000000..3f2e6232d
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-invoke_2.2.0.bb
+> @@ -0,0 +1,18 @@
+> +SUMMARY =3D "Pythonic task execution"
+> +HOMEPAGE =3D "https://www.pyinvoke.org/"
+> +LICENSE =3D "BSD-2-Clause"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Da8815068973f31b78c328dc067e29=
+7ab"
+> +
+> +SRC_URI[sha256sum] =3D
+> "ee6cbb101af1a859c7fe84f2a264c059020b0cb7fe3535f9424300ab568f6bd5"
+> +
+> +inherit pypi setuptools3
+> +
+> +RDEPENDS:${PN} +=3D " \
+> +        python3-fcntl \
+> +        python3-json \
+> +        python3-logging \
+> +        python3-pprint \
+> +        python3-terminal \
+> +        python3-unittest \
+> +        python3-unixadmin \
+> +"
+> --
+> 2.25.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#109172):
+> https://lists.openembedded.org/g/openembedded-devel/message/109172
+> Mute This Topic: https://lists.openembedded.org/mt/104769770/924729
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> ticotimo@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
 
-3, Add abseil-cpp-dev to RDEPENDS to fix the below QA issue.
-ERROR: re2-2024.03.01-r0 do_package_qa: QA Issue: re2 rdepends on abseil-cpp-dev [dev-deps]
+--000000000000447af506130a725b
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-4, The ptest output as below:
- # ./run-ptest
-PASS: charclass_test
-PASS: compile_test
-PASS: filtered_re2_test
-PASS: mimics_pcre_test
-PASS: parse_test
-PASS: possible_match_test
-PASS: re2_test
-PASS: re2_arg_test
-PASS: regexp_test
-PASS: required_prefix_test
-PASS: search_test
-PASS: set_test
-PASS: simplify_test
-PASS: string_generator_test
-PASS: dfa_test
-PASS: exhaustive1_test
-PASS: exhaustive2_test
-PASS: exhaustive3_test
-PASS: exhaustive_test
-PASS: random_test
+<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Wed, Mar 6, 2024 at 8:55=E2=80=AFAM Alper Ak &lt;<a href=
+=3D"mailto:alperyasinak1@gmail.com">alperyasinak1@gmail.com</a>&gt; wrote:<=
+br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
+x;border-left-width:1px;border-left-style:solid;padding-left:1ex;border-lef=
+t-color:rgb(204,204,204)">Invoke is a Python library for managing shell-ori=
+ented subprocesses and organizing executable Python code into CLI-invokable=
+ tasks. It draws inspiration from various sources (make/rake, Fabric 1.x, e=
+tc) to arrive at a powerful &amp; clean feature set.</blockquote><div dir=
+=3D"auto"><br></div><div dir=3D"auto">We should really gently judge upstrea=
+m to update their pyproject.toml to use a proper build-backend. There is no=
+thing special in their setup.py</div><blockquote class=3D"gmail_quote" styl=
+e=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-style:solid=
+;padding-left:1ex;border-left-color:rgb(204,204,204)" dir=3D"auto"><br>
+<br>
+Signed-off-by: alperak &lt;<a href=3D"mailto:alperyasinak1@gmail.com" targe=
+t=3D"_blank">alperyasinak1@gmail.com</a>&gt;<br>
+---<br>
+=C2=A0.../python/<a href=3D"http://python3-invoke_2.2.0.bb" rel=3D"noreferr=
+er" target=3D"_blank">python3-invoke_2.2.0.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0| 18 ++++++++++++++++++<br>
+=C2=A01 file changed, 18 insertions(+)<br>
+=C2=A0create mode 100644 meta-python/recipes-devtools/python/<a href=3D"htt=
+p://python3-invoke_2.2.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-i=
+nvoke_2.2.0.bb</a><br>
+<br>
+diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
+invoke_2.2.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-invoke_2.2.0.=
+bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://python3-invo=
+ke_2.2.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-invoke_2.2.0.bb</=
+a><br>
+new file mode 100644<br>
+index 000000000..3f2e6232d<br>
+--- /dev/null<br>
++++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-invoke_=
+2.2.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-invoke_2.2.0.bb</a><=
+br>
+@@ -0,0 +1,18 @@<br>
++SUMMARY =3D &quot;Pythonic task execution&quot;<br>
++HOMEPAGE =3D &quot;<a href=3D"https://www.pyinvoke.org/" rel=3D"noreferrer=
+" target=3D"_blank">https://www.pyinvoke.org/</a>&quot;<br>
++LICENSE =3D &quot;BSD-2-Clause&quot;<br>
++LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3Da8815068973f31b78c328dc067=
+e297ab&quot;<br>
++<br>
++SRC_URI[sha256sum] =3D &quot;ee6cbb101af1a859c7fe84f2a264c059020b0cb7fe353=
+5f9424300ab568f6bd5&quot;<br>
++<br>
++inherit pypi setuptools3<br>
++<br>
++RDEPENDS:${PN} +=3D &quot; \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 python3-fcntl \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 python3-json \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 python3-logging \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 python3-pprint \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 python3-terminal \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 python3-unittest \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 python3-unixadmin \<br>
++&quot;<br>
+-- <br>
+2.25.1<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#109172): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/109172" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/109172</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/104769770/924=
+729" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
+/104769770/924729</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
+et=3D"_blank">ticotimo@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
----
- .../re2/{re2_2023.03.01.bb => re2_2024.03.01.bb}    | 13 ++++++++++---
- 1 file changed, 10 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-support/re2/{re2_2023.03.01.bb => re2_2024.03.01.bb} (62%)
-
-diff --git a/meta-oe/recipes-support/re2/re2_2023.03.01.bb b/meta-oe/recipes-support/re2/re2_2024.03.01.bb
-similarity index 62%
-rename from meta-oe/recipes-support/re2/re2_2023.03.01.bb
-rename to meta-oe/recipes-support/re2/re2_2024.03.01.bb
-index fe210d510..192fe265f 100644
---- a/meta-oe/recipes-support/re2/re2_2023.03.01.bb
-+++ b/meta-oe/recipes-support/re2/re2_2024.03.01.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/google/re2/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3b5c31eb512bdf3cb11ffd5713963760"
- 
--# tag 2023-03-01
--SRCREV = "241e2e430836e80f93d704d1f06cd3e7fe3100f5"
-+# tag 2024-03-01
-+SRCREV = "2d866a3d0753f4f4fce93cccc6c59c4b052d7db4"
- 
- SRC_URI = "git://github.com/google/re2.git;branch=main;protocol=https \
-            ${@bb.utils.contains('PTEST_ENABLED', '1', 'file://run-ptest', '', d)} \
-@@ -12,12 +12,17 @@ SRC_URI = "git://github.com/google/re2.git;branch=main;protocol=https \
- 
- S = "${WORKDIR}/git"
- 
-+DEPENDS = "abseil-cpp ${@bb.utils.contains('PTEST_ENABLED', '1', 'gtest googlebenchmark', '', d)}"
-+
- inherit cmake ptest
- RDEPENDS:${PN}-ptest += "cmake sed"
-+RDEPENDS:${PN} += "abseil-cpp-dev"
-+
-+INSANE_SKIP:${PN} += "dev-deps"
- 
- EXTRA_OECMAKE += " \
- 	-DBUILD_SHARED_LIBS=ON \
--        ${@bb.utils.contains('PTEST_ENABLED', '1', '-DRE2_BUILD_TESTING=ON', '-DRE2_BUILD_TESTING=OFF', d)} \
-+	${@bb.utils.contains('PTEST_ENABLED', '1', '-DRE2_BUILD_TESTING=ON', '-DRE2_BUILD_TESTING=OFF', d)} \
- "
- 
- do_install_ptest () {
-@@ -25,6 +30,8 @@ do_install_ptest () {
-     cp -r ${B}/CTestTestfile.cmake ${D}${PTEST_PATH}
-     sed -i -e 's#${B}#${PTEST_PATH}#g' `find ${D}${PTEST_PATH} -name CTestTestfile.cmake`
-     sed -i -e 's#${S}#${PTEST_PATH}#g' `find ${D}${PTEST_PATH} -name CTestTestfile.cmake`
-+    # ERROR: re2-2024.03.01-r0 do_package_qa: QA Issue: /usr/lib64/re2/ptest/string_generator_test contained in package re2-ptest requires libtesting.so()(64bit), but no providers found in RDEPENDS:re2-ptest? [file-rdeps]
-+    cp -r ${B}/libtesting.so ${D}${PTEST_PATH}
- }
- 
- # ignore .so in /usr/lib64
--- 
-2.25.1
-
+--000000000000447af506130a725b--
 
