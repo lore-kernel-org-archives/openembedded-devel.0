@@ -1,169 +1,140 @@
-Return-Path: <alperyasinak1@gmail.com>
+Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E6F86C54798
-	for <webhook@archiver.kernel.org>; Thu,  7 Mar 2024 15:58:40 +0000 (UTC)
-Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
- by mx.groups.io with SMTP id smtpd.web11.26906.1709827114902115965
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C1F32C48BF6
+	for <webhook@archiver.kernel.org>; Thu,  7 Mar 2024 15:59:40 +0000 (UTC)
+Received: from EUR03-DBA-obe.outbound.protection.outlook.com (EUR03-DBA-obe.outbound.protection.outlook.com [40.107.104.87])
+ by mx.groups.io with SMTP id smtpd.web10.26838.1709827178673470231
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 07 Mar 2024 07:58:35 -0800
+ Thu, 07 Mar 2024 07:59:39 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=LSy6BGq1;
- spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-a458b6d9cfeso159782566b.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 07 Mar 2024 07:58:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1709827113; x=1710431913; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=+ykjpl9K7wFyowPptK2Wr9QyuReX3p+8mlDpoJRs7O0=;
-        b=LSy6BGq1UwSouhYBPPwtxRl2s7JWU3XRzUhexGJFTqSaE85aNxF4jlVAgTeSVYnQVj
-         GtFhqDNy/j3rAF/XXS2Wq4tKFr8ujPz77P7E2solsEZs1czDh08CRv0KEs2QDrC07tac
-         q3E9EzUrZeCm+tCy/BQIpNh8X6ZoNdXBJLE7PfTiPFYesoAxgb54GGm+qvA+5L0a8z/O
-         Bcghi8ArkwLWg+mAuflZHyjUqCjcH/0BkadFyV6LA1BvWXi3EN83K0xmt8Do3Zgic+kR
-         dKYeLltwYum4Gsm629vZ0ocQD1Uw5gOWUJZlhI2d9J0++CcnBmjTOlMJssbXt660om7E
-         Ydhw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1709827113; x=1710431913;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=+ykjpl9K7wFyowPptK2Wr9QyuReX3p+8mlDpoJRs7O0=;
-        b=OnY8J2LyJvn8c8vMr8XbPhvCxMFph4i6J4kMXOq65Vksd6pMUkum/msJy/rWDkgNoh
-         qf8jImes2k/I3TEBleqjAvc806yqUFPJMIhg6FdJroyaUkmawdfFoTM6FMKdVNsZ4yVJ
-         plCo0R8XpjoQvtXIN/3hsm3iXEEJYtczEhjEbSbnWuvuCfSxth02Qx9f7RKgR/q5oK1y
-         CSAYE4U1dEVYb5HkAYPM5Qe+T27YGyXsbwArLHolAFnoni7orgMYSQ4HIAxmBkU+NYZC
-         LJuwDoePERUjI5Zn2f1N10f8c4axf1w0aBi6PDsSD6WmuIRww18aDpqxxbgZQDMDUTCY
-         MqHA==
-X-Gm-Message-State: AOJu0YwUGJHPlbLzQ+qsemBWlTXyPe9SBj856HWnENvV+bM6SOeAmfXf
-	Z9zzAm7sbeJLmlYpmymTrXhhsGNBQwMm0hZh00gNVlnmJwyXb1xK7a7MyY6x8L8=
-X-Google-Smtp-Source: AGHT+IFtaDAtu6Z5vOUNC5hxx4VToGTkGRdN2qRAhQyVTH+Lo77KzseKa9v6/hW4FeQjpzU9mtTDxw==
-X-Received: by 2002:a17:906:4109:b0:a45:a3e9:debd with SMTP id j9-20020a170906410900b00a45a3e9debdmr6028303ejk.59.1709827112517;
-        Thu, 07 Mar 2024 07:58:32 -0800 (PST)
-Received: from localhost.localdomain ([176.33.65.159])
-        by smtp.gmail.com with ESMTPSA id js20-20020a170906ca9400b00a3e643e61e1sm8345238ejb.214.2024.03.07.07.58.31
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 07 Mar 2024 07:58:31 -0800 (PST)
-From: alperak <alperyasinak1@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-python][PATCH] python3-google-auth-oauthlib: add ptest
-Date: Thu,  7 Mar 2024 18:58:26 +0300
-Message-Id: <20240307155826.363179-1-alperyasinak1@gmail.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=fail reason="dkim: body hash did not verify" header.i=@axis.com header.s=selector1 header.b=lBf8QTmn;
+ spf=pass (domain: axis.com, ip: 40.107.104.87, mailfrom: peter.kjellerstedt@axis.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=O+DmQI+vWRDQ9ER6c+b695rWR/p/DLUbQBoKiM/qgsBK3jvnt9Kytl7GrpFma4FYgNyjGmAnB3J2UPDSn+75kgftOGEoLiZwavBD9hVKLOZWs/nLSGD/i7ugbBTzpPaRqk8FGgUSbHyoM8HcwA6oshyLodCFOIPbBz8yOcChCD0+VpdCEUbsvN0fMrAVzxMc+yQIou35WmpJBDrftXwIpTmAABfACd4LKKk6zNHqIRFnHwAYd+P+r5ICkWtdK519GzdeLUsBuzOaFjviCvm/zs4BIb+TFSyXecP3JPP3Uk5cfQu7R1cpcsNlBtai2OXirMtjVQGDv/5Bd2p9tDYaKw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=heJXi0l/WV+izQKBG/xYQAGR4Vx9N+gjqZa/hMK/lOk=;
+ b=epXenU/bxBduS6dQSCfxKmatZSP1Q3qYsl4jh4rpBYRUP/NgzckL3iNvI9Ax1k/JDOJn5hifbsZxTt+4dGM6+PC4pPIuemJdlvtGh7NALElaQEyOXY0QMHGn0tFbONTFtVyhplRixJk5F8w4pF9oIIYquoSAiKcOk4+YCJDrx/0x2I6CvIBw9u3Ue2tm2DYLzxUfPzmRd2r3I3Y+K+8+6rnmSgnjjpi8PF4sYoV7j4qnX0iU0fPBErISRtllNszsXGc9uOGqBctgTgq2ceWhD7ThhbMPAk5Qlm1+UFaelQQTBNdJFhnaW/TWJ83LDAWHyiIvJUYYT8cvgmHIY6u5ew==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 195.60.68.100) smtp.rcpttodomain=lists.openembedded.org
+ smtp.mailfrom=axis.com; dmarc=fail (p=none sp=none pct=100) action=none
+ header.from=axis.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axis.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=heJXi0l/WV+izQKBG/xYQAGR4Vx9N+gjqZa/hMK/lOk=;
+ b=lBf8QTmnUWcLGXq5MtvgVxt+1sxpm81ctWsM6ZnVg8NqjGG5ihvqTreLaI0Z1t2arP5u3oyo0XgWHn706/JV9w6sm5cpm4Cn6w4Sp8ciE2WWxy45SRqD7SvGGpxXqTu4+vCCKzV55MM3YrdfpVEBULuFPkP7YNjHivKt/OAaH4w=
+Received: from DB7PR05CA0057.eurprd05.prod.outlook.com (2603:10a6:10:2e::34)
+ by AS8PR02MB9139.eurprd02.prod.outlook.com (2603:10a6:20b:5b3::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7339.39; Thu, 7 Mar
+ 2024 15:59:35 +0000
+Received: from DU2PEPF00028D11.eurprd03.prod.outlook.com
+ (2603:10a6:10:2e:cafe::bc) by DB7PR05CA0057.outlook.office365.com
+ (2603:10a6:10:2e::34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7339.39 via Frontend
+ Transport; Thu, 7 Mar 2024 15:59:35 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 195.60.68.100)
+ smtp.mailfrom=axis.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=axis.com;
+Received-SPF: Fail (protection.outlook.com: domain of axis.com does not
+ designate 195.60.68.100 as permitted sender) receiver=protection.outlook.com;
+ client-ip=195.60.68.100; helo=mail.axis.com;
+Received: from mail.axis.com (195.60.68.100) by
+ DU2PEPF00028D11.mail.protection.outlook.com (10.167.242.25) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7292.25 via Frontend Transport; Thu, 7 Mar 2024 15:59:35 +0000
+Received: from se-mail02w.axis.com (10.20.40.8) by se-mail01w.axis.com
+ (10.20.40.7) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Thu, 7 Mar
+ 2024 16:59:34 +0100
+Received: from se-intmail01x.se.axis.com (10.0.5.60) by se-mail02w.axis.com
+ (10.20.40.8) with Microsoft SMTP Server id 15.1.2375.34 via Frontend
+ Transport; Thu, 7 Mar 2024 16:59:34 +0100
+Received: from saur.se.axis.com (saur.se.axis.com [10.92.3.10])
+	by se-intmail01x.se.axis.com (Postfix) with ESMTP id CB21815D4C
+	for <openembedded-devel@lists.openembedded.org>; Thu,  7 Mar 2024 16:59:34 +0100 (CET)
+Received: from saur.se.axis.com (localhost [127.0.0.1])
+	by saur.se.axis.com (8.17.1/8.15.2) with ESMTPS id 427FxY5o3626432
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 7 Mar 2024 16:59:34 +0100
+Received: (from pkj@localhost)
+	by saur.se.axis.com (8.17.1/8.17.1/Submit) id 427FxYu03626431
+	for openembedded-devel@lists.openembedded.org; Thu, 7 Mar 2024 16:59:34 +0100
+From: Peter Kjellerstedt <pkj@axis.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] libnice: Disable the examples and the tests
+Date: Thu, 7 Mar 2024 16:59:29 +0100
+Message-ID: <20240307155929.3626419-1-pkj@axis.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DU2PEPF00028D11:EE_|AS8PR02MB9139:EE_
+X-MS-Office365-Filtering-Correlation-Id: 40f9f29c-cb10-46a9-387e-08dc3ebf95d6
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	SH2c2rREYk0pDZ9/AH9hLkIYmw0D3e89K0GPNVK7l66MBpRxhgEnlX6RyXMLs/jxYqlJn62Xb5BSc460nE7+NX3KvKHXPtWnlVQEEV/nj+6+NtxP/rctp5XmzBfRxe5cVnhT9Whfz6JRMrbtb9mbRbjGUyW/XSmmj7n/QqsKT5QgU+8KmSjcC2W739PIp7gJP81k1SyF3zpDdVmOxtK7VEAe9monnzT2kQSctNntu8JvHMUeMXUyCiypH+1FWMs2wmUSo32kF7INx9m7snTKTDOZA48s0slb+7F1s5pQJU+q5NXX38gSHxf5a9vX+WmcDI0ZzfqzctO0SpqlgatZuLJ/HGyBRdannmEvASZshnEWCoxJetmWyIdaYvYL8r9xGKcoP8Z5//uuJV0h8ikqwmda2Mbrd2zkWMaTl1GIU6Kl4S+hYIL8fZOL66PQrj2b8D0FfO1roimnoUdmBJmwLm0XNV13+dqPif5KlGLppTujMZfFnMtBfbIEpdDs8NOrF6FOIS00inYb0+WTKlQgcGJRxaWBJw/RLl+ITR5qOJoqoRN8HsKNWlveRZriQQeLGnCpPyJfSEzs8U5RM/krp6xqYLQNTkfYS1MMwaawaBg8/zB/ntS8s5f8TmVz7UKFv2UoFW1CdFiXtqfWGTDVHheY6G7fkQOlPg2wHxyTR7DoNUpDOrmtfacN6tXoPYEHN5N22+L09NHT6CRyvJGluLeFyKbpiHvCg1uSMo04Kx3mhalYQw5MUTakKzVG7Zkr
+X-Forefront-Antispam-Report: 
+	CIP:195.60.68.100;CTRY:SE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.axis.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230031)(36860700004)(82310400014)(376005);DIR:OUT;SFP:1101;
+X-OriginatorOrg: axis.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Mar 2024 15:59:35.2506
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 40f9f29c-cb10-46a9-387e-08dc3ebf95d6
+X-MS-Exchange-CrossTenant-Id: 78703d3c-b907-432f-b066-88f7af9ca3af
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=78703d3c-b907-432f-b066-88f7af9ca3af;Ip=[195.60.68.100];Helo=[mail.axis.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	DU2PEPF00028D11.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR02MB9139
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 07 Mar 2024 15:58:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109198
+ <openembedded-devel@lists.openembedded.org>; Thu, 07 Mar 2024 15:59:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109199
 
-* Tested on qemux86-64 and qemuarm64
+They are not used, and if the `gstreamer` PACKAGECONFIG is enabled, the
+tests require gstreamer-check-1.0 to be available, which it isn't if
+gstreamer-1.0 is built without the `check` PACKAGECONFIG.
 
-* Add ptest into PTESTS_FAST_META_PYTHON
+Also remove adding -Dgstreamer=3Ddisabled to EXTRA_OEMESON as it is
+already covered by the `gstreamer` PACKAGECONFIG.
 
-Ptest result:
-==============
-qemux86-64:
-
-Testsuite summary
-TOTAL: 37
-PASS: 37
-SKIP: 0
-XFAIL: 0
-FAIL: 0
-XPASS: 0
-ERROR: 0
-DURATION: 15
-END: /usr/lib/python3-google-auth-oauthlib/ptest
-2024-03-07T15:48
-STOP: ptest-runner
-TOTAL: 1 FAIL: 0
-
-qemuarm64:
-
-Testsuite summary
-TOTAL: 37
-PASS: 37
-SKIP: 0
-XFAIL: 0
-FAIL: 0
-XPASS: 0
-ERROR: 0
-DURATION: 15
-END: /usr/lib/python3-google-auth-oauthlib/ptest
-2024-03-07T15:54
-STOP: ptest-runner
-TOTAL: 1 FAIL: 0
-
-Signed-off-by: alperak <alperyasinak1@gmail.com>
+Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 ---
- .../ptest-packagelists-meta-python.inc        |  1 +
- .../python3-google-auth-oauthlib/run-ptest    |  4 +++
- .../python3-google-auth-oauthlib_1.2.0.bb     | 25 ++++++++++++++++---
- 3 files changed, 26 insertions(+), 4 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-google-auth-oauthlib/run-ptest
+ meta-oe/recipes-support/farsight/libnice_0.1.21.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-index d3096039b..0cb3046cf 100644
---- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
-+++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-@@ -19,6 +19,7 @@ PTESTS_FAST_META_PYTHON = "\
-     python3-execnet \
-     python3-freezegun \
-     python3-geojson \
-+    python3-google-auth-oauthlib \
-     python3-gpiod \
-     python3-gunicorn \
-     python3-html2text \
-diff --git a/meta-python/recipes-devtools/python/python3-google-auth-oauthlib/run-ptest b/meta-python/recipes-devtools/python/python3-google-auth-oauthlib/run-ptest
-new file mode 100644
-index 000000000..f1c8729f0
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-google-auth-oauthlib/run-ptest
-@@ -0,0 +1,4 @@
-+#!/bin/sh
+diff --git a/meta-oe/recipes-support/farsight/libnice_0.1.21.bb b/meta-oe/r=
+ecipes-support/farsight/libnice_0.1.21.bb
+index 4a5227f20..646dcb28c 100644
+--- a/meta-oe/recipes-support/farsight/libnice_0.1.21.bb
++++ b/meta-oe/recipes-support/farsight/libnice_0.1.21.bb
+@@ -18,14 +18,14 @@ PACKAGECONFIG[gupnp] =3D "-Dgupnp=3Denabled,-Dgupnp=3Dd=
+isabled,gupnp"
+ PACKAGECONFIG[gstreamer] =3D "-Dgstreamer=3Denabled,-Dgstreamer=3Ddisabled=
+,gstreamer1.0"
+ PACKAGECONFIG[introspection] =3D "-Dintrospection=3Denabled,-Dintrospectio=
+n=3Ddisabled,"
+=20
+-EXTRA_OEMESON =3D "-Dgstreamer=3Ddisabled"
+-
+ GTKDOC_MESON_OPTION =3D "gtk_doc"
+ GTKDOC_MESON_ENABLE_FLAG =3D "enabled"
+ GTKDOC_MESON_DISABLE_FLAG =3D "disabled"
+=20
+ inherit meson gtk-doc gobject-introspection
+=20
++EXTRA_OEMESON =3D "-Dexamples=3Ddisabled -Dtests=3Ddisabled"
 +
-+pytest --automake
-+
-diff --git a/meta-python/recipes-devtools/python/python3-google-auth-oauthlib_1.2.0.bb b/meta-python/recipes-devtools/python/python3-google-auth-oauthlib_1.2.0.bb
-index 5c071ac41..70e843a09 100644
---- a/meta-python/recipes-devtools/python/python3-google-auth-oauthlib_1.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-google-auth-oauthlib_1.2.0.bb
-@@ -6,9 +6,26 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
- 
- SRC_URI[sha256sum] = "292d2d3783349f2b0734a0a0207b1e1e322ac193c2c09d8f7c613fb7cc501ea8"
- 
--inherit pypi setuptools3
-+inherit pypi setuptools3 ptest
- 
--RDEPENDS:${PN} = " \
--    python3-google-auth \
--    python3-requests-oauthlib \
-+SRC_URI += " \
-+        file://run-ptest \
-+"
-+
-+RDEPENDS:${PN}-ptest += " \
-+        python3-click \
-+        python3-mock \
-+        python3-pytest \
-+        python3-unittest-automake-output \
-+        python3-unixadmin \
-+"
-+
-+do_install_ptest() {
-+        install -d ${D}${PTEST_PATH}/tests
-+        cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-+}
-+
-+RDEPENDS:${PN} += " \
-+        python3-google-auth \
-+        python3-requests-oauthlib \
- "
--- 
-2.25.1
-
+ FILES:${PN} +=3D "${libdir}/gstreamer-1.0/*.so"
+ FILES:${PN}-dev +=3D "${libdir}/gstreamer-1.0/*.la"
+ FILES:${PN}-staticdev +=3D "${libdir}/gstreamer-1.0/*.a"
 
