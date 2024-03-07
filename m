@@ -1,105 +1,136 @@
-Return-Path: <joe.slater@windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C80BC5475B
-	for <webhook@archiver.kernel.org>; Wed,  6 Mar 2024 22:23:35 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.9177.1709763810466906398
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 353CDC54E4A
+	for <webhook@archiver.kernel.org>; Thu,  7 Mar 2024 00:11:56 +0000 (UTC)
+Received: from mail-oo1-f43.google.com (mail-oo1-f43.google.com [209.85.161.43])
+ by mx.groups.io with SMTP id smtpd.web11.11662.1709770309669487183
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 06 Mar 2024 14:23:30 -0800
+ Wed, 06 Mar 2024 16:11:49 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=VWvrDnL6;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=37952b81c9=joe.slater@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 426H3S3M007780
-	for <openembedded-devel@lists.openembedded.org>; Wed, 6 Mar 2024 14:23:30 -0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=xmGsr
-	CiyNe/oPVcOpbGaN0IaFSi8XAY1iCVUmhMC82E=; b=VWvrDnL6GYhbg0avoz5X0
-	kfHMmcx/ydKKCJ00xfUgZdg2PDtGaPwsiPXBvpf+rboC+70BRey4zgtrdxa2r1Rs
-	QVqWEeL7toz9vrSkLL7xquey7ebiOg9+UVqXOna9LhaMWYFSENLUB3IKcg3C2oos
-	i2nbs1PMrulsR3KkCq3qHKK9rNPTRF8P+fJzxRBEO9+ji5Du59FrJs44GyZnIIJC
-	fmsypBDxFia2BOq2oPKhmhRwqsFm48GoEvr9NyGyeEXhear7P3PaYSvSrgbpH/Lf
-	Y8ZDMmLRmJPXuljoat/ES6XKFUkDDzfurbLfQABCPL6NcMYG/FoL2LROw6Y66k3w
-	A==
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3wm093vbph-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 06 Mar 2024 14:23:29 -0800 (PST)
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Wed, 6 Mar 2024 14:23:29 -0800
-Received: from ala-jslater-lx2.corp.ad.wrs.com (147.11.136.210) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
- 15.1.2507.35 via Frontend Transport; Wed, 6 Mar 2024 14:23:29 -0800
-From: <joe.slater@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: <joe.slater@windriver.com>, <randy.macleod@windriver.com>
-Subject: [v2][meta-oe][PATCH 1/1] googletest: allow for shared libraries
-Date: Wed, 6 Mar 2024 14:23:29 -0800
-Message-ID: <20240306222329.1876779-1-joe.slater@windriver.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=WEj0mJts;
+ spf=pass (domain: gmail.com, ip: 209.85.161.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f43.google.com with SMTP id 006d021491bc7-5a11b781a79so155919eaf.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 06 Mar 2024 16:11:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1709770309; x=1710375109; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=4PuQmvqHWGU3KwPyZ+twkBUfdet9pykZmDhaCq5WeRI=;
+        b=WEj0mJtsgDrb0PDnhXdFkpaxR6qh5aOwj1Ej5EmIej+1FEmlU7hI/jK+wpyLU9ET4w
+         NBrouARaYa1RsSvoQoIZDiZm2g05LuU9+3pYmJH3FprRUE3W41/sxuxTypD0LfYzCfLR
+         h9V6brNlwv7uleb4Fc9gW5AcOU65b8igY50APcFT4KR7uyVVSF//re2A3nCtFADE2vJ+
+         QTB/CsRyhhljoYGbwKUwKuN5zlpEG01/wBky+i77y5mEtaTXYJ+vTUaupDFtDzzv22k6
+         cVY9ecbP1nkvwVCASXwxq1zRQgXxHPd5XjBDCySt6XKEXAfqDfNEHZk7XaUCZgakCRBn
+         yp8A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1709770309; x=1710375109;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=4PuQmvqHWGU3KwPyZ+twkBUfdet9pykZmDhaCq5WeRI=;
+        b=cYibEyJ7TXI61L6FRnq83LGj2Yv5VjEzhj322Q/nwdEHjKimEJ3bRMkZ53QMW8H57v
+         GEvY7NKgf9sR97EptI2vAImYoc6yMFCu3iyGfYAMgUX7j34bw4p4x1Z3RrKecvxykKws
+         zsvErFqx4Inmd6ffr1I36p84cqG217rq3Yrooo/6uHRIOCA8rtQP2Ei27VxENs3Y5Clo
+         XBYEpeHdsdY7VrTnq9OC9HKYN22S7+Hm/4xlENe1KjHUWB5V9FPmG2cJv0QUDhghtM1y
+         7r6EsaDWhsyuwfaa7NEi5pbCn+x02HC8qSWgaRkFYycxLFShDx1JaAJCaYLiACx53vEG
+         Pqbw==
+X-Gm-Message-State: AOJu0YwnBrVm4yaQqjuFcCC2EPSXJnM/w+W9oG+XTNNzgsKLephQcUG/
+	Q5UC8V+F8sOHemQZ+Ktl0ExAYTUKWFH8p5HgIUw3nLCdiUVgOJPnZpqDXHRVcsQwvikuaiBB3gq
+	P88MgH/O/0iFInmMdKREKvtyt1eQ=
+X-Google-Smtp-Source: AGHT+IGt+rspxWLzAGpf9hBHooVj8y2OztycGx4vrkNiIC+l/pjZ6NwfqvhOBcBZ79Botlqr2u6tolYDBGujLFxZa8s=
+X-Received: by 2002:a05:6870:461b:b0:21e:4a2a:f060 with SMTP id
+ z27-20020a056870461b00b0021e4a2af060mr7177485oao.13.1709770308722; Wed, 06
+ Mar 2024 16:11:48 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: Lk3By0f1MeH6Gs-FUF0NMy5oECBpvTzs
-X-Proofpoint-ORIG-GUID: Lk3By0f1MeH6Gs-FUF0NMy5oECBpvTzs
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-03-06_12,2024-03-05_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0 spamscore=0
- lowpriorityscore=0 impostorscore=0 clxscore=1015 adultscore=0
- mlxlogscore=973 mlxscore=0 malwarescore=0 phishscore=0 priorityscore=1501
- suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2402120000 definitions=main-2403060181
+References: <1709714608-19296-1-git-send-email-wangmy@fujitsu.com>
+In-Reply-To: <1709714608-19296-1-git-send-email-wangmy@fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 6 Mar 2024 16:11:22 -0800
+Message-ID: <CAMKF1srDE-sYhh0Mgi+tWm7GF=yvuNB5JEQO55OqHgTZtqcJEA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe] [PATCH 01/26] abseil-cpp: upgrade 20230802.1 -> 20240116.1
+To: wangmy@fujitsu.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 06 Mar 2024 22:23:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109181
+ <openembedded-devel@lists.openembedded.org>; Thu, 07 Mar 2024 00:11:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109182
 
-From: Joe Slater <joe.slater@windriver.com>
+I am seeing below error. How do you test your patches ?
 
-Add a PACKAGECONFIG option to produce shared libraries.
-Change the -dev RDEPENDS because -staticdev is not created
-if shared libraries are built.
+stdio: ERROR: abseil-cpp-native-20240116.1-r0 do_patch: Applying patch
+'0004-Avoid-using-both-Win32Waiter-and-PthreadWaiter-on-Mi.patch' on
+target directory
+'/home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/x86_64-linux/abs=
+eil-cpp-native/20240116.1/git'
+stdio: ERROR: abseil-cpp-20240116.1-r0 do_patch: Applying patch
+'0004-Avoid-using-both-Win32Waiter-and-PthreadWaiter-on-Mi.patch' on
+target directory
+'/home/pokybuild/yocto-worker/meta-oe/build/build/tmp/work/core2-64-poky-li=
+nux/abseil-cpp/20240116.1/git'
 
-Signed-off-by: Joe Slater <joe.slater@windriver.com>
----
- meta-oe/recipes-test/googletest/googletest_1.14.0.bb | 12 ++++++++++--
- 1 file changed, 10 insertions(+), 2 deletions(-)
-
-diff --git a/meta-oe/recipes-test/googletest/googletest_1.14.0.bb b/meta-oe/recipes-test/googletest/googletest_1.14.0.bb
-index 8c75f936de..e9df082d32 100644
---- a/meta-oe/recipes-test/googletest/googletest_1.14.0.bb
-+++ b/meta-oe/recipes-test/googletest/googletest_1.14.0.bb
-@@ -10,12 +10,20 @@ S = "${WORKDIR}/git"
- SRCREV = "f8d7d77c06936315286eb55f8de22cd23c188571"
- SRC_URI = "git://github.com/google/googletest.git;branch=main;protocol=https"
- 
--inherit cmake
-+inherit cmake pkgconfig
-+
-+# allow for shared libraries, but do not default to them
-+#
-+PACKAGECONFIG[shared] = "-DBUILD_SHARED_LIBS=ON,-DBUILD_SHARED_LIBS=OFF,,"
-+
- 
- ALLOW_EMPTY:${PN} = "1"
- ALLOW_EMPTY:${PN}-dbg = "1"
- 
--RDEPENDS:${PN}-dev += "${PN}-staticdev"
-+# -staticdev will not be implicitly put into an SDK, so we add an rdepend
-+# if we are not building shared libraries
-+#
-+RDEPENDS:${PN}-dev += "${@bb.utils.contains("PACKAGECONFIG","shared","","${PN}-staticdev",d)}"
- 
- BBCLASSEXTEND = "native nativesdk"
- 
--- 
-2.25.1
-
+On Wed, Mar 6, 2024 at 12:43=E2=80=AFAM wangmy via lists.openembedded.org
+<wangmy=3Dfujitsu.com@lists.openembedded.org> wrote:
+>
+> From: Wang Mingyu <wangmy@fujitsu.com>
+>
+> Changelog:
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> -Added absl::NoDestructor<T> to simplify defining static types that do no=
+t need
+>  to be destructed upon program exit.
+> -Added configurable verbose logging (also known as VLOG).
+> -Added absl::Overload(), which returns a functor that provides overloads =
+based
+>  on the functors passed to it.
+> -Bzlmod is now officially supported (previously it was supported by the c=
+ommunity).
+>
+> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+> ---
+>  .../{abseil-cpp_20230802.1.bb =3D> abseil-cpp_20240116.1.bb}    | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-oe/recipes-devtools/abseil-cpp/{abseil-cpp_20230802.1.bb =3D=
+> abseil-cpp_20240116.1.bb} (94%)
+>
+> diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20230802.1.bb=
+ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20240116.1.bb
+> similarity index 94%
+> rename from meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20230802.1.bb
+> rename to meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20240116.1.bb
+> index 1ce6ff3fc..9f44d6790 100644
+> --- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20230802.1.bb
+> +++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20240116.1.bb
+> @@ -7,8 +7,8 @@ SECTION =3D "libs"
+>  LICENSE =3D "Apache-2.0"
+>  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Ddf52c6edb7adc22e533b2bacc3bd3=
+915"
+>
+> -SRCREV =3D "fb3621f4f897824c0dbe0615fa94543df6192f30"
+> -BRANCH =3D "lts_2023_08_02"
+> +SRCREV =3D "2f9e432cce407ce0ae50676696666f33a77d42ac"
+> +BRANCH =3D "lts_2024_01_16"
+>  SRC_URI =3D "git://github.com/abseil/abseil-cpp;branch=3D${BRANCH};proto=
+col=3Dhttps \
+>             file://0001-absl-always-use-asm-sgidefs.h.patch             \
+>             file://0002-Remove-maes-option-from-cross-compilation.patch \
+> --
+> 2.34.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#109141): https://lists.openembedded.org/g/openembedde=
+d-devel/message/109141
+> Mute This Topic: https://lists.openembedded.org/mt/104762423/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
