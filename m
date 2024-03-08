@@ -2,169 +2,195 @@ Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 500D2C54E41
-	for <webhook@archiver.kernel.org>; Fri,  8 Mar 2024 05:51:55 +0000 (UTC)
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
- by mx.groups.io with SMTP id smtpd.web10.14763.1709877105256740361
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2CCC3C5475B
+	for <webhook@archiver.kernel.org>; Fri,  8 Mar 2024 05:52:05 +0000 (UTC)
+Received: from mail-lf1-f43.google.com (mail-lf1-f43.google.com [209.85.167.43])
+ by mx.groups.io with SMTP id smtpd.web10.14765.1709877116706783048
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 07 Mar 2024 21:51:45 -0800
+ Thu, 07 Mar 2024 21:51:57 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=FCQYhwDk;
- spf=pass (domain: gmail.com, ip: 209.85.221.50, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-33e686d60eeso536193f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 07 Mar 2024 21:51:45 -0800 (PST)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=LEDerx8N;
+ spf=pass (domain: gmail.com, ip: 209.85.167.43, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-lf1-f43.google.com with SMTP id 2adb3069b0e04-51344bebe2fso493457e87.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 07 Mar 2024 21:51:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1709877103; x=1710481903; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=9TqvYij3EsRhYPwlkGoE0GTCwt0gGNfI6SbRa6ci2l8=;
-        b=FCQYhwDk/Z3uMLKMEkwWodCtjQ9C99qOKp1jNGWdZL8U2tLlX8vnwKnH+Xw+2gnFda
-         8zEZCvGWb2rO3FZ7dpBhihTluXLKuf39AU2hRtZutWAqeuzrrptn/HBzsv/pmQRmbdYa
-         qTXd9fBwG3Ll/byqKkE05bCJvrqvocVw9Kp6BWEz3+sVcivBpjoxwlc0CRYR/iX+kfYA
-         DcHu+2dxSkqZ7EW6rOIgP4HwyZ1OEeprNSibcDhQYdnYYWtoggjvA2tLXqG1zfCZusLP
-         eFjb63UDPCbZRuOfcAiWsITjB5ch+dpgimxoJ0ftT9EI8T6lmDtbEdJts8S4Pr9nsvaM
-         UEzw==
+        d=gmail.com; s=20230601; t=1709877114; x=1710481914; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=AFdFJYDjwin/iY4vqluigpzqfDfI35FSJqYg0NbKwEc=;
+        b=LEDerx8NA9/tQMyTCepYePWHhi6oYkYaP/lFAt2QkwYgDpaMdFjmsPb6S9hkx0ZO9L
+         XCtLfj0ISWtUciKU4kC1spUyE74mlb9Zt40OYxCOg/CQmTyQsY/SOjILAOLDlFfXum10
+         8gsMO3G1YMz42pYnakzKCR/AU9W3EZaV2Fy9PFaHJhWWPRQH7MK/aisDJSu+zUCfat7p
+         TBVKRmvmJq6EJXuhFTNE/nLhTOLhSRrY9nN5xKUfQfmYuh7NzPys/d0SOrLAaQopq6S5
+         BQjOd5CoIKnr5OlW19qolHYUZ//8w/83STgvTsn2THo/GHv6Hd9xTS9NNSvNtmN/pGDg
+         U6WA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1709877103; x=1710481903;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=9TqvYij3EsRhYPwlkGoE0GTCwt0gGNfI6SbRa6ci2l8=;
-        b=lmZTA846z2/Si8R6dlynVcZQUbKrbGxuix+vVrvh5/XWDiixI8KLp15yG0jaxIT6ZF
-         pkUKH3kVaMxFs8w5Uj86mmk/0+k7eUSaihzYcN6R9bbV4SeHg0pPFrVGCY4knUDf+KjL
-         nne7Skiz+AiTc8M/Nem4Bgy8c0BUdN/jlKDu/xiQyXWr8DyXR+x6rDgCI+kiVp+Xembh
-         H56b7lCwolOHeknbJlohfKLaxfU54hvZgfczXL+bMJsZLHEt6g7vzNwYObGZDbKLn60t
-         059NDp65pJw+1QGxfa3SYMm9F5g8PKA4Fmt76Y7bwz97aXCnfbH4wJNWIz0hNPNLipBC
-         UJVg==
-X-Gm-Message-State: AOJu0YyXYe9iguGCb5IkgvNVwGHVQ3ytGC2NQJitNbB1HKabxw+1Pdm4
-	mnbuJ+//4NqX9GNC5Nzk/XuVscO7+a+KNjjwBtCUW2ocXlMxreVaaBUpptzPKqE=
-X-Google-Smtp-Source: AGHT+IEjSvt4GBMMUHcdBkpbdCZPrp7abuJsXeWK6mniquWjwGHTFfqOMlGoQuNnZ5wdxHfsx1f/aQ==
-X-Received: by 2002:adf:c846:0:b0:33d:77e:43ab with SMTP id e6-20020adfc846000000b0033d077e43abmr12797116wrh.34.1709877102656;
-        Thu, 07 Mar 2024 21:51:42 -0800 (PST)
+        d=1e100.net; s=20230601; t=1709877114; x=1710481914;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=AFdFJYDjwin/iY4vqluigpzqfDfI35FSJqYg0NbKwEc=;
+        b=ovTP6tzx+VW00hOIdtJR8LYg7l5aWOCxrl2beVXQ/kyfU1qVRsCYXYxPRZh6ebqw5e
+         eXIHpP+W95Ldu0gUgvvfR60Vqa+PIibvQeDGXCny3DyXDiaGOlFt+2DQd4SdRbTOfhyg
+         m3illbkF5U/2UcTg1mwBjz3ez99OGNRXi8daybtw5ECQtrjKKbSyUO5km1PhMujdwBX9
+         xKE2On5ITWTiyNNUVV4dxlEzcSViezn2pPOVq8BbMvl9Vl3kjKrOajwkqbdN9IZiHKWb
+         WCRO+BzWTlU7IaXoOI02AmOC8yrTifLETNKHhzJ4mf2wzRzsgiFWdU58L+KM+rqjSB8Y
+         vPFQ==
+X-Gm-Message-State: AOJu0YxkX9CEWcUjrLSkt07ZX9+Su+x+uAGzJfyZ/FF7Mb8X1ByJIHER
+	ZZ4gyfAHu41iJp7HGhbHVnOc8AKSLjbx+JWPnoCYGZsbDhiP5ZIj0wY74YqBZ18=
+X-Google-Smtp-Source: AGHT+IGAIbvkEIcfES8Xd8nudsrhT8eL2KRJZaBHHSkp5TnuHli1wfDbncX2GsqgK3uSijFFY4VClw==
+X-Received: by 2002:a05:6512:3194:b0:513:8318:c6ea with SMTP id i20-20020a056512319400b005138318c6eamr2648653lfe.39.1709877113805;
+        Thu, 07 Mar 2024 21:51:53 -0800 (PST)
 Received: from localhost.localdomain ([176.33.65.159])
-        by smtp.gmail.com with ESMTPSA id bt12-20020a056000080c00b0033e3a110d7fsm13829593wrb.71.2024.03.07.21.51.41
+        by smtp.gmail.com with ESMTPSA id bt12-20020a056000080c00b0033e3a110d7fsm13829593wrb.71.2024.03.07.21.51.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 07 Mar 2024 21:51:42 -0800 (PST)
+        Thu, 07 Mar 2024 21:51:53 -0800 (PST)
 From: alperak <alperyasinak1@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-python][PATCH 1/3] python3-pytest-localserver: added recipe which is also include ptest
-Date: Fri,  8 Mar 2024 08:51:34 +0300
-Message-Id: <20240308055136.81476-1-alperyasinak1@gmail.com>
+Subject: [meta-python][PATCH 3/3] python3-google-auth: add ptest and update runtime dependencies
+Date: Fri,  8 Mar 2024 08:51:36 +0300
+Message-Id: <20240308055136.81476-3-alperyasinak1@gmail.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20240308055136.81476-1-alperyasinak1@gmail.com>
+References: <20240308055136.81476-1-alperyasinak1@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 08 Mar 2024 05:51:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109219
+ <openembedded-devel@lists.openembedded.org>; Fri, 08 Mar 2024 05:52:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109221
 
-pytest-localserver is a plugin for the pytest testing framework which enables you to test server connections locally.
+* Generally we want to keep images as small as possible. RDEPENDS should not contains nothing except what is absolutely needed for a recipe.
 
 * Tested on qemux86-64 and qemuarm64
 
 * Add ptest into PTESTS_SLOW_META_PYTHON
 
-Ptest result:
+Ptest results:
 ==============
 qemux86-64:
 
 Testsuite summary
-TOTAL: 55
-PASS: 54
-SKIP: 1
+TOTAL: 1074
+PASS: 1074
+SKIP: 0
 XFAIL: 0
 FAIL: 0
 XPASS: 0
 ERROR: 0
-DURATION: 44
-END: /usr/lib/python3-pytest-localserver/ptest
-2024-03-07T20:33
+DURATION: 227
+END: /usr/lib/python3-google-auth/ptest
+2024-03-07T21:30
 STOP: ptest-runner
 TOTAL: 1 FAIL: 0
 
 qemuarm64:
 
 Testsuite summary
-TOTAL: 55
-PASS: 54
-SKIP: 1
+TOTAL: 1074
+PASS: 1074
+SKIP: 0
 XFAIL: 0
 FAIL: 0
 XPASS: 0
 ERROR: 0
-DURATION: 38
-END: /usr/lib/python3-pytest-localserver/ptest
-2024-03-07T20:41
+DURATION: 184
+END: /usr/lib/python3-google-auth/ptest
+2024-03-07T21:15
 STOP: ptest-runner
 TOTAL: 1 FAIL: 0
 
 Signed-off-by: alperak <alperyasinak1@gmail.com>
 ---
  .../ptest-packagelists-meta-python.inc        |  1 +
- .../python3-pytest-localserver/run-ptest      |  3 ++
- .../python3-pytest-localserver_0.8.1.bb       | 29 +++++++++++++++++++
- 3 files changed, 33 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-pytest-localserver/run-ptest
- create mode 100644 meta-python/recipes-devtools/python/python3-pytest-localserver_0.8.1.bb
+ .../python/python3-google-auth/run-ptest      |  4 ++
+ .../python/python3-google-auth_2.28.1.bb      | 43 +++++++++++++------
+ 3 files changed, 34 insertions(+), 14 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-google-auth/run-ptest
 
 diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-index 20ca2763c..ce5ccf22d 100644
+index ce5ccf22d..63457189e 100644
 --- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
 +++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-@@ -80,6 +80,7 @@ PTESTS_SLOW_META_PYTHON = "\
+@@ -78,6 +78,7 @@ PTESTS_FAST_META_PYTHON = "\
+ 
+ PTESTS_SLOW_META_PYTHON = "\
      python3-arrow \
++    python3-google-auth \
      python3-lz4 \
      python3-marshmallow \
-+    python3-pytest-localserver \
-     python3-traitlets \
-     python3-yappi \
- "
-diff --git a/meta-python/recipes-devtools/python/python3-pytest-localserver/run-ptest b/meta-python/recipes-devtools/python/python3-pytest-localserver/run-ptest
+     python3-pytest-localserver \
+diff --git a/meta-python/recipes-devtools/python/python3-google-auth/run-ptest b/meta-python/recipes-devtools/python/python3-google-auth/run-ptest
 new file mode 100644
-index 000000000..8d2017d39
+index 000000000..f1c8729f0
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pytest-localserver/run-ptest
-@@ -0,0 +1,3 @@
++++ b/meta-python/recipes-devtools/python/python3-google-auth/run-ptest
+@@ -0,0 +1,4 @@
 +#!/bin/sh
 +
 +pytest --automake
-diff --git a/meta-python/recipes-devtools/python/python3-pytest-localserver_0.8.1.bb b/meta-python/recipes-devtools/python/python3-pytest-localserver_0.8.1.bb
-new file mode 100644
-index 000000000..669817829
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pytest-localserver_0.8.1.bb
-@@ -0,0 +1,29 @@
-+SUMMARY = "pytest plugin to test server connections locally."
-+HOMEPAGE = "https://github.com/pytest-dev/pytest-localserver"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=b8da7a541d738b054dcbf70c31530432"
 +
-+DEPENDS += "python3-setuptools-scm-native"
-+
-+inherit pypi python_setuptools_build_meta ptest
-+
-+SRC_URI[sha256sum] = "66569c34fef31a5750b16effd1cd1288a7a90b59155d005e7f916accd3dee4f1"
-+
+diff --git a/meta-python/recipes-devtools/python/python3-google-auth_2.28.1.bb b/meta-python/recipes-devtools/python/python3-google-auth_2.28.1.bb
+index 4524cca48..1f37544d2 100644
+--- a/meta-python/recipes-devtools/python/python3-google-auth_2.28.1.bb
++++ b/meta-python/recipes-devtools/python/python3-google-auth_2.28.1.bb
+@@ -3,24 +3,39 @@ HOMEPAGE = "https://github.com/googleapis/google-auth-library-python"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+ 
+-inherit pypi setuptools3
++inherit pypi setuptools3 ptest
+ 
+ SRC_URI[sha256sum] = "34fc3046c257cedcf1622fc4b31fc2be7923d9b4d44973d481125ecc50d83885"
+ 
+-RDEPENDS:${PN} += "\
+-    python3-asyncio \
+-    python3-datetime \
+-    python3-io \
+-    python3-json \
+-    python3-logging \
+-    python3-netclient \
+-    python3-numbers \
 +SRC_URI += " \
 +        file://run-ptest \
 +"
 +
 +RDEPENDS:${PN}-ptest += " \
-+	python3-pytest \
-+	python3-requests \
-+	python3-unittest-automake-output \
-+"
-+
++        python3-cryptography \
++        python3-flask \
++        python3-freezegun \
++        python3-grpcio \
++        python3-mock \
++        python3-oauth2client \
++        python3-pyopenssl \
++        python3-pytest \
++        python3-pytest-localserver \
++        python3-pyu2f \
++        python3-requests \
++        python3-responses \
++        python3-unittest-automake-output \
++        python3-unixadmin \
+ "
+ 
 +do_install_ptest() {
 +        install -d ${D}${PTEST_PATH}/tests
 +        cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
 +}
 +
-+RDEPENDS:${PN} += " \
-+	python3-werkzeug \
-+"
+ RDEPENDS:${PN} += "\
+-    python3-aiohttp \
+-    python3-cachetools \
+-    python3-pyasn1-modules \
+-    python3-rsa \
+-    python3-six \
++        python3-cachetools \
++        python3-json \
++        python3-pyasn1-modules \
++        python3-rsa \
+ "
 -- 
 2.25.1
 
