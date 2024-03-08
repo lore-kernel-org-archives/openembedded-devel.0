@@ -1,234 +1,200 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B0D6C54798
-	for <webhook@archiver.kernel.org>; Fri,  8 Mar 2024 00:15:33 +0000 (UTC)
-Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
- by mx.groups.io with SMTP id smtpd.web10.9156.1709856925418102321
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 58603C54798
+	for <webhook@archiver.kernel.org>; Fri,  8 Mar 2024 01:24:34 +0000 (UTC)
+Received: from mail-oa1-f44.google.com (mail-oa1-f44.google.com [209.85.160.44])
+ by mx.groups.io with SMTP id smtpd.web11.10718.1709861072240614263
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 07 Mar 2024 16:15:25 -0800
+ Thu, 07 Mar 2024 17:24:32 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=Jkrkbic/;
- spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1709856925; x=1741392925;
-  h=from:to:cc:subject:date:message-id;
-  bh=H4X5WG6U2IC5Yyrb6SYIhijNfXf7qk7B55jC0Em6LnE=;
-  b=Jkrkbic/gyY8F8fgvSp5Ucaf9cS/T4NRkQ61h4BPE935OHG7BQog9U0c
-   z99YwAb6MgB0W4rO+Dj2FzQKTMVj9jFf+ADAUTE1KMGNZj12G99CR/DAV
-   whH7M5hlkpYXCsjHV+OKHuvA8xnwec+XcSVcOl1mRVpQmKOv5uJcgphWk
-   A9JNrLjFeKZzqMPgULKOOJP7mSGwxl6lBFMMkgb0cEAG1SflpD4eV/Ezb
-   259WEUvF5USi3IWBIDVD+HODaBb/3VhuPQPE9ZLa/wY1CJ4mwpKCv4oah
-   +j4XFMEymzfpxHXbcjlUzbYnDG8vwPtAgSZ+fYJgvQiVl65plF5JK/kOx
-   A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,11006"; a="140043912"
-X-IronPort-AV: E=Sophos;i="6.07,107,1708354800"; 
-   d="scan'208";a="140043912"
-Received: from unknown (HELO yto-r3.gw.nic.fujitsu.com) ([218.44.52.219])
-  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 Mar 2024 09:15:22 +0900
-Received: from yto-m4.gw.nic.fujitsu.com (yto-nat-yto-m4.gw.nic.fujitsu.com [192.168.83.67])
-	by yto-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 265C310A8C7
-	for <openembedded-devel@lists.openembedded.org>; Fri,  8 Mar 2024 09:15:20 +0900 (JST)
-Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
-	by yto-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 592D6F6B5
-	for <openembedded-devel@lists.openembedded.org>; Fri,  8 Mar 2024 09:15:19 +0900 (JST)
-Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id DC9A52C59C4
-	for <openembedded-devel@lists.openembedded.org>; Fri,  8 Mar 2024 09:15:18 +0900 (JST)
-Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 669081A006B;
-	Fri,  8 Mar 2024 08:15:18 +0800 (CST)
-From: wangmy@fujitsu.com
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=c+bCPLB+;
+ spf=pass (domain: gmail.com, ip: 209.85.160.44, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f44.google.com with SMTP id 586e51a60fabf-22002fbbd6bso725897fac.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 07 Mar 2024 17:24:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1709861071; x=1710465871; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=iUcrMXOkSHDD7BchTmEEqoqprDtsVmWjPGUMrrNRF1o=;
+        b=c+bCPLB+3zVYtoKMF6VqEvw08Y/9XbEgHiDH1eFzpGNJq7WgirRVMlhKTxQDQQ1ENZ
+         lUeDnrUzjJTUK/RpT4GpXUDK/kdO7Z743w5s0Mkg3+4xl0/st4w120DBJhik7475+GH/
+         Q5LhJlbDez6ICB/NNH353wkYMElSknnwr0Z/OFseURnJvVvDxMvBCoApET+hr7NHkLIb
+         w/aeujZU91E0RuFlOtCGaCsqSXsviDsl9E0o042DJ4XmgIvCBwu8oZNGw/2Yiq4gyyJv
+         hh1Ctk67JmQn7Fvp7EXnEzXqLkxuljEY0PNa4m+ZOxhKOTMMIvpeIrB2pp/a1lMCs1e4
+         cSSQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1709861071; x=1710465871;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=iUcrMXOkSHDD7BchTmEEqoqprDtsVmWjPGUMrrNRF1o=;
+        b=h3rK16AW3Y110ToNYYgYwtUCT1OAWxHmypfhqvLyTCE2J7s7oc+pfTPNEHk4OiGkvG
+         4boWZJCGMyvEG4P6BPM0A51xOxelSFcDyasZQHNAjlGHcmO61fkbl6I02Nhu7/OEGD74
+         yUry4DWSippSmf6WWDUCRYI1cPM6Rozw3oFeLpcmX8/df2oFxd8jAIJBlH+D+yxmj6mt
+         Z2QkeKpq5GQhaLeksszGPlngL6IqSrVYHGCymKR63VVoGJKT2VHlHPnlWatvrdHRK9KH
+         pZAUgdH6c2OAAy/yrz7PW/TGm8kryGAwgPK7RCSZf8ZDTp5xkDxDOOiNXJy44RR42YQr
+         FE8w==
+X-Gm-Message-State: AOJu0YxAKosTZLADB5a6cC2p+a9uNaYdzbsze9tFQQ8mRZfokWMhFK4E
+	tLt/aO86//96RklsWVzYDV7DEwpjjlDXqw1TZtUZeww4YfQRMHYK0sXMY7u6
+X-Google-Smtp-Source: AGHT+IGeybXEcTsX6fP9iqT+C4IRtwz4V6JRs1Q1RfOrYqKnMIMD+tq8ZCqV9mrn+4nS4aRb0n5nfA==
+X-Received: by 2002:a05:6870:4c13:b0:221:491b:28dc with SMTP id pk19-20020a0568704c1300b00221491b28dcmr1907154oab.41.1709861071150;
+        Thu, 07 Mar 2024 17:24:31 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::682a])
+        by smtp.gmail.com with ESMTPSA id k4-20020aa79984000000b006e559bc3250sm10649731pfh.68.2024.03.07.17.24.30
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 07 Mar 2024 17:24:30 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH V2] abseil-cpp: upgrade 20230802.1 -> 20240116.1
-Date: Fri,  8 Mar 2024 08:15:10 +0800
-Message-Id: <1709856910-618-1-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-X-TM-AS-GCONF: 00
-X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28238.003
-X-TM-AS-User-Approved-Sender: Yes
-X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28238.003
-X-TMASE-Result: 10--5.808800-10.000000
-X-TMASE-MatchedRID: N25sXaafkGCjz0nOeth/yTo39wOA02LhpxAd6mi1Ga1ULhp+W/a9mcLc
-	MUuTFJzB0IbXXp0CcMwSuJRtSU84o+CnSW1s2x7bzYK5U+QI3O43l2plwgrtWDBwx50fHFECIUt
-	KH5AJM9ki+t+0AiFaYsrbguuTTSDuTBhdFGvbKad9zRQbgSRmsfiDc5Dxk7dHdcfU63y8xPDr6l
-	sDXOZho1D1Abw8VvNQDvg2AyPRTe+UUpG8SniXOOOnF2j8nBWbJScvOTX4jHP447xhO06ewi15I
-	FUNL+ETxO4FvTZs+ZxszYb0YTsqV3T+rpu/K1HOxqtsVI8KrJpdZBUXm5+cmsicqvB+icULaRnu
-	wdqIKHsWdkA+xaE9xfD/aJAhh3s4rsq/7BhdGyASEYfcJF0pRVn4Ir4HFD2TNBBNXB5b9MwqmL1
-	cVOc1wAFGg5z5A0y4MVgWP2b5R3gJubTjnUZUjd0KiTeJteVBfS0Ip2eEHnz3IzXlXlpamPoLR4
-	+zsDTtD12T7q2dIUsCBgrWML7y/d6Ic7SEv5VC7/xCxKX3rRjodRyLWmDzjA==
-X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 1/5] layer.conf: Update for the scarthgap release series
+Date: Thu,  7 Mar 2024 17:24:23 -0800
+Message-ID: <20240308012429.577792-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.44.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 08 Mar 2024 00:15:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109211
+ <openembedded-devel@lists.openembedded.org>; Fri, 08 Mar 2024 01:24:34 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109212
 
-From: Wang Mingyu <wangmy@fujitsu.com>
-
-0004-Avoid-using-both-Win32Waiter-and-PthreadWaiter-on-Mi.patch
-revmoed since it's included in 20240116.1.
-
-Changelog:
-===========
--Added absl::NoDestructor<T> to simplify defining static types that do not need
- to be destructed upon program exit.
--Added configurable verbose logging (also known as VLOG).
--Added absl::Overload(), which returns a functor that provides overloads based
- on the functors passed to it.
--Bzlmod is now officially supported (previously it was supported by the community).
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...-Win32Waiter-and-PthreadWaiter-on-Mi.patch | 62 -------------------
- ...20230802.1.bb => abseil-cpp_20240116.1.bb} | 37 +++--------
- 2 files changed, 9 insertions(+), 90 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0004-Avoid-using-both-Win32Waiter-and-PthreadWaiter-on-Mi.patch
- rename meta-oe/recipes-devtools/abseil-cpp/{abseil-cpp_20230802.1.bb => abseil-cpp_20240116.1.bb} (59%)
+ meta-filesystems/conf/layer.conf | 2 +-
+ meta-gnome/conf/layer.conf       | 2 +-
+ meta-initramfs/conf/layer.conf   | 2 +-
+ meta-multimedia/conf/layer.conf  | 2 +-
+ meta-networking/conf/layer.conf  | 2 +-
+ meta-oe/conf/layer.conf          | 2 +-
+ meta-perl/conf/layer.conf        | 2 +-
+ meta-python/conf/layer.conf      | 2 +-
+ meta-webserver/conf/layer.conf   | 2 +-
+ meta-xfce/conf/layer.conf        | 2 +-
+ 10 files changed, 10 insertions(+), 10 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0004-Avoid-using-both-Win32Waiter-and-PthreadWaiter-on-Mi.patch b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0004-Avoid-using-both-Win32Waiter-and-PthreadWaiter-on-Mi.patch
-deleted file mode 100644
-index db559bb16..000000000
---- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0004-Avoid-using-both-Win32Waiter-and-PthreadWaiter-on-Mi.patch
-+++ /dev/null
-@@ -1,62 +0,0 @@
--From cb7665f39e23e95e2466390c60ee5a410780a3ed Mon Sep 17 00:00:00 2001
--From: Derek Mauro <dmauro@google.com>
--Date: Wed, 8 Nov 2023 09:55:31 -0800
--Subject: [PATCH] Avoid using both Win32Waiter and PthreadWaiter on MinGW, and
-- use StdcppWaiter instead.
--
--There are various flavors of MinGW, some of which support pthread,
--and some of which support Win32. Instead of figuring out which
--platform is being used, just use the generic implementation.
--
--PiperOrigin-RevId: 580565507
--Change-Id: Ia85fd7496f1e6ebdeadb95202f0039e844826118
--Upstream-Status: Backport
-----
-- absl/synchronization/internal/pthread_waiter.h | 4 ++--
-- absl/synchronization/internal/win32_waiter.h   | 6 ++++--
-- 2 files changed, 6 insertions(+), 4 deletions(-)
--
--diff --git a/absl/synchronization/internal/pthread_waiter.h b/absl/synchronization/internal/pthread_waiter.h
--index 206aefa4..23db76ad 100644
----- a/absl/synchronization/internal/pthread_waiter.h
--+++ b/absl/synchronization/internal/pthread_waiter.h
--@@ -16,7 +16,7 @@
-- #ifndef ABSL_SYNCHRONIZATION_INTERNAL_PTHREAD_WAITER_H_
-- #define ABSL_SYNCHRONIZATION_INTERNAL_PTHREAD_WAITER_H_
-- 
---#ifndef _WIN32
--+#if !defined(_WIN32) && !defined(__MINGW32__)
-- #include <pthread.h>
-- 
-- #include "absl/base/config.h"
--@@ -55,6 +55,6 @@ class PthreadWaiter : public WaiterCrtp<PthreadWaiter> {
-- ABSL_NAMESPACE_END
-- }  // namespace absl
-- 
---#endif  // ndef _WIN32
--+#endif  // !defined(_WIN32) && !defined(__MINGW32__)
-- 
-- #endif  // ABSL_SYNCHRONIZATION_INTERNAL_PTHREAD_WAITER_H_
--diff --git a/absl/synchronization/internal/win32_waiter.h b/absl/synchronization/internal/win32_waiter.h
--index 87eb617c..fdab264e 100644
----- a/absl/synchronization/internal/win32_waiter.h
--+++ b/absl/synchronization/internal/win32_waiter.h
--@@ -20,7 +20,8 @@
-- #include <sdkddkver.h>
-- #endif
-- 
---#if defined(_WIN32) && _WIN32_WINNT >= _WIN32_WINNT_VISTA
--+#if defined(_WIN32) && !defined(__MINGW32__) && \
--+    _WIN32_WINNT >= _WIN32_WINNT_VISTA
-- 
-- #include "absl/base/config.h"
-- #include "absl/synchronization/internal/kernel_timeout.h"
--@@ -65,6 +66,7 @@ class Win32Waiter : public WaiterCrtp<Win32Waiter> {
-- ABSL_NAMESPACE_END
-- }  // namespace absl
-- 
---#endif  // defined(_WIN32) && _WIN32_WINNT >= _WIN32_WINNT_VISTA
--+#endif  // defined(_WIN32) && !defined(__MINGW32__) &&
--+        // _WIN32_WINNT >= _WIN32_WINNT_VISTA
-- 
-- #endif  // ABSL_SYNCHRONIZATION_INTERNAL_WIN32_WAITER_H_
-diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20230802.1.bb b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20240116.1.bb
-similarity index 59%
-rename from meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20230802.1.bb
-rename to meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20240116.1.bb
-index 17db7b2e4..82b2d20e0 100644
---- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20230802.1.bb
-+++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20240116.1.bb
-@@ -1,24 +1,26 @@
- SUMMARY = "Abseil is a cpp library like STL"
- DESCRIPTION = "Abseil provides pieces missing from the C++ standard. Contains \
- additional useful libraries like algorithm, container, debugging, hash, memory, \
--meta, numeric, strings, synchronization, time, types and utility."
-+meta, numeric, strings, synchronization, time, types and utility"
- HOMEPAGE = "https://abseil.io/"
- SECTION = "libs"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=df52c6edb7adc22e533b2bacc3bd3915"
+diff --git a/meta-filesystems/conf/layer.conf b/meta-filesystems/conf/layer.conf
+index 4f13bd911c..c2263c899b 100644
+--- a/meta-filesystems/conf/layer.conf
++++ b/meta-filesystems/conf/layer.conf
+@@ -15,4 +15,4 @@ LAYERVERSION_filesystems-layer = "1"
  
--SRCREV = "fb3621f4f897824c0dbe0615fa94543df6192f30"
--BRANCH = "lts_2023_08_02"
-+SRCREV = "2f9e432cce407ce0ae50676696666f33a77d42ac"
-+BRANCH = "lts_2024_01_16"
- SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH};protocol=https \
-            file://0001-absl-always-use-asm-sgidefs.h.patch             \
-            file://0002-Remove-maes-option-from-cross-compilation.patch \
-            file://abseil-ppc-fixes.patch \
-            file://0003-Remove-neon-option-from-cross-compilation.patch \
--           file://0004-Avoid-using-both-Win32Waiter-and-PthreadWaiter-on-Mi.patch \
-           "
+ LAYERDEPENDS_filesystems-layer = "core openembedded-layer networking-layer"
  
- S = "${WORKDIR}/git"
+-LAYERSERIES_COMPAT_filesystems-layer = "nanbield"
++LAYERSERIES_COMPAT_filesystems-layer = "scarthgap"
+diff --git a/meta-gnome/conf/layer.conf b/meta-gnome/conf/layer.conf
+index 1674283d51..75764e64c7 100644
+--- a/meta-gnome/conf/layer.conf
++++ b/meta-gnome/conf/layer.conf
+@@ -17,7 +17,7 @@ LAYERVERSION_gnome-layer = "1"
  
-+ASNEEDED:class-native = ""
-+ASNEEDED:class-nativesdk = ""
-+
- inherit cmake
+ LAYERDEPENDS_gnome-layer = "core openembedded-layer networking-layer meta-python"
  
- EXTRA_OECMAKE = "-DBUILD_SHARED_LIBS=ON \
-@@ -26,29 +28,8 @@ EXTRA_OECMAKE = "-DBUILD_SHARED_LIBS=ON \
-                  -DABSL_ENABLE_INSTALL=ON \
-                 "
+-LAYERSERIES_COMPAT_gnome-layer = "nanbield"
++LAYERSERIES_COMPAT_gnome-layer = "scarthgap"
  
--SYSROOT_DIRS:append:class-nativesdk:mingw32 = " ${bindir}"
--
--PACKAGES_DYNAMIC = "^libabsl-*"
--PACKAGES_DYNAMIC:class-native = ""
--
--PACKAGESPLITFUNCS =+ "split_dynamic_packages"
--
--python split_dynamic_packages() {
--    libdir = d.getVar('libdir')
--
--    libpackages = do_split_packages(
--        d,
--        root=libdir,
--        file_regex=r'^libabsl_(.*)\.so\..*$',
--        output_pattern='libabsl-%s',
--        description="abseil shared library %s",
--        prepend=True,
--        extra_depends='',
--    )
--    if libpackages:
--        d.appendVar('RDEPENDS:' + d.getVar('PN'), ' ' + ' '.join(libpackages))
--}
-+BBCLASSEXTEND = "native nativesdk"
+ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += "\
+   faenza-icon-theme->gdk-pixbuf \
+diff --git a/meta-initramfs/conf/layer.conf b/meta-initramfs/conf/layer.conf
+index ef12daf53f..25023cfc64 100644
+--- a/meta-initramfs/conf/layer.conf
++++ b/meta-initramfs/conf/layer.conf
+@@ -16,7 +16,7 @@ BBFILE_PATTERN_meta-initramfs := "^${LAYERDIR}/"
+ BBFILE_PRIORITY_meta-initramfs = "5"
+ LAYERDEPENDS_meta-initramfs = "core"
  
--ALLOW_EMPTY:${PN} = "1"
-+SYSROOT_DIRS:append:class-nativesdk:mingw32 = " ${bindir}"
+-LAYERSERIES_COMPAT_meta-initramfs = "nanbield"
++LAYERSERIES_COMPAT_meta-initramfs = "scarthgap"
  
--BBCLASSEXTEND = "native nativesdk"
-+FILES:${PN}-dev += "${includedir} ${libdir}/cmake ${libdir}/pkgconfig"
+ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
+   dracut->virtual/kernel \
+diff --git a/meta-multimedia/conf/layer.conf b/meta-multimedia/conf/layer.conf
+index 99f4987179..82e6f3629f 100644
+--- a/meta-multimedia/conf/layer.conf
++++ b/meta-multimedia/conf/layer.conf
+@@ -31,4 +31,4 @@ LAYERVERSION_multimedia-layer = "1"
+ 
+ LAYERDEPENDS_multimedia-layer = "core openembedded-layer meta-python"
+ 
+-LAYERSERIES_COMPAT_multimedia-layer = "nanbield"
++LAYERSERIES_COMPAT_multimedia-layer = "scarthgap"
+diff --git a/meta-networking/conf/layer.conf b/meta-networking/conf/layer.conf
+index a9088eece4..ac5d15a0c0 100644
+--- a/meta-networking/conf/layer.conf
++++ b/meta-networking/conf/layer.conf
+@@ -15,7 +15,7 @@ LAYERVERSION_networking-layer = "1"
+ 
+ LAYERDEPENDS_networking-layer = "core meta-python openembedded-layer"
+ 
+-LAYERSERIES_COMPAT_networking-layer = "nanbield"
++LAYERSERIES_COMPAT_networking-layer = "scarthgap"
+ 
+ LICENSE_PATH += "${LAYERDIR}/licenses"
+ 
+diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
+index 732a7e5d01..4d9acb8cc8 100644
+--- a/meta-oe/conf/layer.conf
++++ b/meta-oe/conf/layer.conf
+@@ -44,7 +44,7 @@ LAYERVERSION_openembedded-layer = "1"
+ 
+ LAYERDEPENDS_openembedded-layer = "core"
+ 
+-LAYERSERIES_COMPAT_openembedded-layer = "nanbield"
++LAYERSERIES_COMPAT_openembedded-layer = "scarthgap"
+ 
+ LICENSE_PATH += "${LAYERDIR}/licenses"
+ 
+diff --git a/meta-perl/conf/layer.conf b/meta-perl/conf/layer.conf
+index 1b130b9e60..20a6a4239f 100644
+--- a/meta-perl/conf/layer.conf
++++ b/meta-perl/conf/layer.conf
+@@ -15,4 +15,4 @@ LAYERVERSION_perl-layer = "1"
+ 
+ LAYERDEPENDS_perl-layer = "core openembedded-layer"
+ 
+-LAYERSERIES_COMPAT_perl-layer = "nanbield"
++LAYERSERIES_COMPAT_perl-layer = "scarthgap"
+diff --git a/meta-python/conf/layer.conf b/meta-python/conf/layer.conf
+index add78013b9..f48b28b958 100644
+--- a/meta-python/conf/layer.conf
++++ b/meta-python/conf/layer.conf
+@@ -14,6 +14,6 @@ LAYERVERSION_meta-python = "1"
+ 
+ LAYERDEPENDS_meta-python = "core (>= 12) openembedded-layer"
+ 
+-LAYERSERIES_COMPAT_meta-python = "nanbield"
++LAYERSERIES_COMPAT_meta-python = "scarthgap"
+ 
+ LICENSE_PATH += "${LAYERDIR}/licenses"
+diff --git a/meta-webserver/conf/layer.conf b/meta-webserver/conf/layer.conf
+index 066165b5d4..c0896f1a2d 100644
+--- a/meta-webserver/conf/layer.conf
++++ b/meta-webserver/conf/layer.conf
+@@ -17,7 +17,7 @@ LAYERVERSION_webserver = "1"
+ 
+ LAYERDEPENDS_webserver = "core openembedded-layer"
+ 
+-LAYERSERIES_COMPAT_webserver = "nanbield"
++LAYERSERIES_COMPAT_webserver = "scarthgap"
+ 
+ LICENSE_PATH += "${LAYERDIR}/licenses"
+ 
+diff --git a/meta-xfce/conf/layer.conf b/meta-xfce/conf/layer.conf
+index aeaf9617ee..944bd57d1f 100644
+--- a/meta-xfce/conf/layer.conf
++++ b/meta-xfce/conf/layer.conf
+@@ -19,7 +19,7 @@ LAYERDEPENDS_xfce-layer += "multimedia-layer"
+ LAYERDEPENDS_xfce-layer += "meta-python"
+ LAYERDEPENDS_xfce-layer += "networking-layer"
+ 
+-LAYERSERIES_COMPAT_xfce-layer = "nanbield"
++LAYERSERIES_COMPAT_xfce-layer = "scarthgap"
+ 
+ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += "\
+   openzone->gdk-pixbuf \
 -- 
-2.34.1
+2.44.0
 
 
