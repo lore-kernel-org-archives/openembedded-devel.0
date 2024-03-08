@@ -1,160 +1,234 @@
-Return-Path: <ross.burton@arm.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 12CF0C54798
-	for <webhook@archiver.kernel.org>; Thu,  7 Mar 2024 22:40:33 +0000 (UTC)
-Received: from EUR04-HE1-obe.outbound.protection.outlook.com (EUR04-HE1-obe.outbound.protection.outlook.com [40.107.7.42])
- by mx.groups.io with SMTP id smtpd.web11.7318.1709851231905126961
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B0D6C54798
+	for <webhook@archiver.kernel.org>; Fri,  8 Mar 2024 00:15:33 +0000 (UTC)
+Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
+ by mx.groups.io with SMTP id smtpd.web10.9156.1709856925418102321
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 07 Mar 2024 14:40:32 -0800
+ Thu, 07 Mar 2024 16:15:25 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@armh.onmicrosoft.com header.s=selector2-armh-onmicrosoft-com header.b=RUDx63NE;
- dkim=pass header.i=@armh.onmicrosoft.com header.s=selector2-armh-onmicrosoft-com header.b=RUDx63NE;
- spf=pass (domain: arm.com, ip: 40.107.7.42, mailfrom: ross.burton@arm.com)
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=pass;
- b=IAIDp7Jfcqv0kK3OD6eaHwDsriaFqaxqo6/2NULNRPrPEHIiCxbxIShst2Ge/80QnhmHBx05Y9O7J9B/Zlj9W6smBCl/9CrnoVV94TiTQ9k+hzGuM7wSYE6SUmi1VQjRpfhC8Q+hQJOwfYeB7/rGny+Ki7L3yE3CnDpvAKxFDkf0j12AG7wn8jG9awMcjwpZuVHd2O5evHJdRFbB6sPcsjeG/ql4dY5nyt1+VWK0OJEPpu2Uqj6Phk2XG5pwE2CPJ3fPIYHBsmxXz/8g6xl+bAzpcXq2RcVKhmDYYmBrRldZB/rx9q1Lk+BMo77ssOAudcRnfqbXd3BQpc1goPAgrw==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=S1ZozvykBxvfrGV5mR4Gw8mAcZ/V1DLGO3RcJP3/a/Y=;
- b=IXwC5QBLV0UOIum1fJOgc8x4Ttwfu6du+vRpPiRG0PIYW0J/1Obo2Ra4RtpaaNaB/ybGp9SynreQF1ts7P2DAhlmcKwJ67JnLC5Yl1yzNT9b5/PqGSgpHmnNhotkR0tJFnMA5EVEPOFECafMpCe96tVOEwJ52ogPDfzz3QEGPnU2Q9ZeeiV4UJ5FOWRDGJx3OTomv1wtAVXVdnM4qjgaVnZz9cN5MTGPJw9DAj38HuHLGKtsvcy0ZaX0h+oX6jsi80bSJL0kM16qckrzsNDbSF0eSsfoMT689VXALxvKNGDhRA5JxGQ8s+a0hHhA2ULpwxUmVyt1K4N6JBJKsA4sHg==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 63.35.35.123) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=arm.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
- dkim=pass (signature was verified) header.d=armh.onmicrosoft.com; arc=pass (0
- oda=1 ltdi=1 spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
- dmarc=[1,1,header.from=arm.com])
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=S1ZozvykBxvfrGV5mR4Gw8mAcZ/V1DLGO3RcJP3/a/Y=;
- b=RUDx63NEerhAUY8A2fgeqT6aO4+fzo+yw/azfmieQLINoUHjJjENSRk3nrJNuN2Jr9FRsGuertwHSMmS+c32hG85vw0kVRTNQEqs37zIMRRhIe7kxjYLPWSK9YlPgXCi5dBS2Antp5gWpwHrIzTVILs/b2e8NYJaPp2SRAKh/oo=
-Received: from DUZPR01CA0277.eurprd01.prod.exchangelabs.com
- (2603:10a6:10:4b9::21) by AM9PR08MB6129.eurprd08.prod.outlook.com
- (2603:10a6:20b:284::8) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7362.27; Thu, 7 Mar
- 2024 22:40:28 +0000
-Received: from DU6PEPF00009526.eurprd02.prod.outlook.com
- (2603:10a6:10:4b9:cafe::6d) by DUZPR01CA0277.outlook.office365.com
- (2603:10a6:10:4b9::21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7362.26 via Frontend
- Transport; Thu, 7 Mar 2024 22:40:27 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
- client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
- pr=C
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- DU6PEPF00009526.mail.protection.outlook.com (10.167.8.7) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7362.11 via Frontend Transport; Thu, 7 Mar 2024 22:40:27 +0000
-Received: ("Tessian outbound 5fdc1e2b2c35:v276"); Thu, 07 Mar 2024 22:40:27 +0000
-X-CheckRecipientChecked: true
-X-CR-MTA-CID: 4511daaee7ee3e77
-X-CR-MTA-TID: 64aa7808
-Received: from ef96e808dc41.1
-	by 64aa7808-outbound-1.mta.getcheckrecipient.com id 0704F827-2F41-4463-98DB-04664F4B5C07.1;
-	Thu, 07 Mar 2024 22:40:21 +0000
-Received: from EUR02-VI1-obe.outbound.protection.outlook.com
-    by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id ef96e808dc41.1
-    (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
-    Thu, 07 Mar 2024 22:40:21 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=RK+XWNqn8Ued5M+mAPfL9We5q1jZNBeQxHkgOkYk88BpK8UPb0wLF3Q69ypk8lMVY1m/v0XNPVlcsdColEIogP4n49aZts/PSqdWU3Rs/2FwBkn+q3fLogjCdhGwcx9wnMF2kXsOc4IrHllw8/BRw/aBW9TOV6Nb0BnkDM2lhPQUSE+zyuMX9896wdspuQh+IOErVW3oqM7gBhIQlyhkZiDypHJ5EUqY1Y42xyjocbRblZW+veDd7PYCk30qHCay0ooYjvKM+YlHPSdUiKGuRbCaur1byTHKiXAsTUO/S+DnN1IRDqYH/EPHMB6IVtI5Scdw3m/t54Lnk/L0k5Il1w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=S1ZozvykBxvfrGV5mR4Gw8mAcZ/V1DLGO3RcJP3/a/Y=;
- b=clCzj9JkuH5nLh2Jnk5Aj+ej+MrclcxvtDIb1zkIwfVd6I5ueiEaMsAkSZtkN96ASVddeoAQTXiSTnriSfF/3fmRCqUATQMNpmzWbxsvL0EzFMuAvfAGcGI1f4kL7fjr2EIfyWJhze/Gr9k1qinfdAmI5NDdv9y66d8vkz6ee4rW7LrmIGlVMkbMIBYlvKxJ38wbixYC8CXoEYG3iJmQFNoK0eAJTjBR8Bs+1zpvDtoYfydFlEc8rqMes+YLmEU3V1AJA8OiQP2Q8FqbG+tx+wrnM8d2hoai/GdETRQHY+vE+XkRKSHqLG/st54OUJcHbBM394V6aoWntF+03YKqbg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=S1ZozvykBxvfrGV5mR4Gw8mAcZ/V1DLGO3RcJP3/a/Y=;
- b=RUDx63NEerhAUY8A2fgeqT6aO4+fzo+yw/azfmieQLINoUHjJjENSRk3nrJNuN2Jr9FRsGuertwHSMmS+c32hG85vw0kVRTNQEqs37zIMRRhIe7kxjYLPWSK9YlPgXCi5dBS2Antp5gWpwHrIzTVILs/b2e8NYJaPp2SRAKh/oo=
-Received: from PA4PR08MB7411.eurprd08.prod.outlook.com (2603:10a6:102:2a3::12)
- by PAXPR08MB6560.eurprd08.prod.outlook.com (2603:10a6:102:12d::23) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7362.27; Thu, 7 Mar
- 2024 22:40:19 +0000
-Received: from PA4PR08MB7411.eurprd08.prod.outlook.com
- ([fe80::36de:39f1:4d:5228]) by PA4PR08MB7411.eurprd08.prod.outlook.com
- ([fe80::36de:39f1:4d:5228%5]) with mapi id 15.20.7362.024; Thu, 7 Mar 2024
- 22:40:19 +0000
-From: Ross Burton <Ross.Burton@arm.com>
-To: "andre.paiusco@gmail.com" <andre.paiusco@gmail.com>
-CC: openembedded-devel <openembedded-devel@lists.openembedded.org>, Khem Raj
-	<raj.khem@gmail.com>
-Subject: Re: [oe] [PATCH v4] ydotool: Add new package
-Thread-Topic: [oe] [PATCH v4] ydotool: Add new package
-Thread-Index: AQHacMssOPmiszhCxE6SpQX888WbPbEs3zkA
-Date: Thu, 7 Mar 2024 22:40:19 +0000
-Message-ID: <BF0ED5F2-9D1F-44AA-843B-048FD6D88683@arm.com>
-References: <20240307200746.26808-1-andre.paiusco@gmail.com>
-In-Reply-To: <20240307200746.26808-1-andre.paiusco@gmail.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-mailer: Apple Mail (2.3774.400.31)
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-x-ms-traffictypediagnostic: 
-	PA4PR08MB7411:EE_|PAXPR08MB6560:EE_|DU6PEPF00009526:EE_|AM9PR08MB6129:EE_
-X-MS-Office365-Filtering-Correlation-Id: 12ee93e7-a4e8-4217-54a6-08dc3ef7963c
-x-checkrecipientrouted: true
-nodisclaimer: true
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;
-X-Microsoft-Antispam-Message-Info-Original: 
- k9UXBQj8VSbev7ocQa5UjKkStKxormFCpBsU4qNREwHxJJdnySlaRu+Q7ZqIfP99JlPhaVoLdg2k46g7CSt1mXSc2rOw7Yn0vp5JeHpjmNcT5kleq6C/LCIBDa+Hfj7jSIOa7kFb4X4rtWnM2AAOeq3fLe3GVLg0po0CW+/vud6Lt0Sa4OsPGjcFpd1w4V9p1uaxdpHDRwKLMK3GpCYAnHKUiS0ln7zFamnoXr7ALh90qCxRYjnTSdzsqHXBihreVwAe1Tl+HhK04efVxwV0r/oFiHeefIL/5P9v3dnYPtiCdefWibEqmSuB8SSolbObzMcgX0TnY0NyNr/IgRT7MtOyH4VgvBKdYGpJMntGz+hdAyvs2wCESJOiQl2DMsgGUviKw1yulsJMVCNLcW0G1wXoLxNgPd9IZ4E5losTXVKD++T65kpzOUcHqeVjJHlik3U5QlsGiAvt94k6pGQIX9miMOedbYPtgRG6VmaPphnXV191QrCRdtRHICTTrKM4EcctctH933ND8XMIOR4aT+Sq7To1AUfzSABLF0FXQ38nksZW+Opf9aNBBe1LXTodoHTjCxA/LmBQ5OfHPGD1akZZvOWBApU/DxFw4TTKnwly3uWPKuaKHKIajK7GtABfz5AgSmyHZqwbnt8CW11wo81myGhYwNZ8rdEi+KykQGb13bqbKkpkJEast4W+wEEAAGh74u50rlx06BHjO3BPoIuogp6JVi8wqVDpnKWj/vA=
-X-Forefront-Antispam-Report-Untrusted: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA4PR08MB7411.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(376005)(38070700009);DIR:OUT;SFP:1101;
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <30DA6D7B26DA5F449F82D657D8FBF144@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: base64
-MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR08MB6560
-Original-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: 
- DU6PEPF00009526.eurprd02.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: 
-	71e0a136-b726-49dc-1452-08dc3ef79127
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	wDhJEJxy/IFaEQWf5qhGQSQpeWs2m1QZYtUsPXAKddOmTAK/2hO69Ut1zWgYvwKdpmqtzNU6nff0EZVIEVpgZeZuGSyhPRydZGOu4X/4FY+7Bukc6RvT9zPyu9ZTD+MedILNZUku43cbOPJY51nqEAAHbDqyB3TzxJA197uAzzYEbM1l+C0fmFU7D22mGnjGMCW0j4H2oY/EDPNyIrnZOCdSm6i3sK3GS/KS6W2aixVJq1wP528sOr/+/YZo9/pkjrQlG4z/mcz5peac5rvb7dmF+oouIqoJA/cI5l2xjeXOBBLqBewbLilF/8zP8XPI0muP+64lZeLU49HcKeOQZkFZnWP6m+wrxVj+MupWYWOZVQGhcicolTcfNQTarx7F01YmW/pEYcMcIH3oL0A3tRqTnJpjkpcJuouQM9GE+INU62eKmDDKREzFyQXfhT41Bf8BtbGVum9ZF1LyftdizF0LLHF63H82n6CA/6KmPaRWGbWchu+dM3LtS0qLoMoSh534Jgfpm7jSI5kid7doRU8DR6TkHLp1Cx7SFgN2uaS1OXYOnhgetnmrH3gybZ/ooN5IR61LBuIf9turslVtectHz1MnZDpKqhblEv1KDlOH/Kcedp7wzBchweFAvlF7HpWySuvbn1jGAAzZixVVBFVFcTNR/JGJugFkhDiEEo/l4IbdKKMEhdTcWzKkxiWEb4uqTbc3QuPKZAeV1Q+vv6auUHESGyrJ3BAB+dGsqXLnXlH272qNMK2XJk+2Hq4N
-X-Forefront-Antispam-Report: 
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230031)(36860700004)(82310400014)(376005);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Mar 2024 22:40:27.8148
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 12ee93e7-a4e8-4217-54a6-08dc3ef7963c
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	DU6PEPF00009526.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR08MB6129
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=Jkrkbic/;
+ spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1709856925; x=1741392925;
+  h=from:to:cc:subject:date:message-id;
+  bh=H4X5WG6U2IC5Yyrb6SYIhijNfXf7qk7B55jC0Em6LnE=;
+  b=Jkrkbic/gyY8F8fgvSp5Ucaf9cS/T4NRkQ61h4BPE935OHG7BQog9U0c
+   z99YwAb6MgB0W4rO+Dj2FzQKTMVj9jFf+ADAUTE1KMGNZj12G99CR/DAV
+   whH7M5hlkpYXCsjHV+OKHuvA8xnwec+XcSVcOl1mRVpQmKOv5uJcgphWk
+   A9JNrLjFeKZzqMPgULKOOJP7mSGwxl6lBFMMkgb0cEAG1SflpD4eV/Ezb
+   259WEUvF5USi3IWBIDVD+HODaBb/3VhuPQPE9ZLa/wY1CJ4mwpKCv4oah
+   +j4XFMEymzfpxHXbcjlUzbYnDG8vwPtAgSZ+fYJgvQiVl65plF5JK/kOx
+   A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,11006"; a="140043912"
+X-IronPort-AV: E=Sophos;i="6.07,107,1708354800"; 
+   d="scan'208";a="140043912"
+Received: from unknown (HELO yto-r3.gw.nic.fujitsu.com) ([218.44.52.219])
+  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 Mar 2024 09:15:22 +0900
+Received: from yto-m4.gw.nic.fujitsu.com (yto-nat-yto-m4.gw.nic.fujitsu.com [192.168.83.67])
+	by yto-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 265C310A8C7
+	for <openembedded-devel@lists.openembedded.org>; Fri,  8 Mar 2024 09:15:20 +0900 (JST)
+Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
+	by yto-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 592D6F6B5
+	for <openembedded-devel@lists.openembedded.org>; Fri,  8 Mar 2024 09:15:19 +0900 (JST)
+Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id DC9A52C59C4
+	for <openembedded-devel@lists.openembedded.org>; Fri,  8 Mar 2024 09:15:18 +0900 (JST)
+Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 669081A006B;
+	Fri,  8 Mar 2024 08:15:18 +0800 (CST)
+From: wangmy@fujitsu.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH V2] abseil-cpp: upgrade 20230802.1 -> 20240116.1
+Date: Fri,  8 Mar 2024 08:15:10 +0800
+Message-Id: <1709856910-618-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28238.003
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28238.003
+X-TMASE-Result: 10--5.808800-10.000000
+X-TMASE-MatchedRID: N25sXaafkGCjz0nOeth/yTo39wOA02LhpxAd6mi1Ga1ULhp+W/a9mcLc
+	MUuTFJzB0IbXXp0CcMwSuJRtSU84o+CnSW1s2x7bzYK5U+QI3O43l2plwgrtWDBwx50fHFECIUt
+	KH5AJM9ki+t+0AiFaYsrbguuTTSDuTBhdFGvbKad9zRQbgSRmsfiDc5Dxk7dHdcfU63y8xPDr6l
+	sDXOZho1D1Abw8VvNQDvg2AyPRTe+UUpG8SniXOOOnF2j8nBWbJScvOTX4jHP447xhO06ewi15I
+	FUNL+ETxO4FvTZs+ZxszYb0YTsqV3T+rpu/K1HOxqtsVI8KrJpdZBUXm5+cmsicqvB+icULaRnu
+	wdqIKHsWdkA+xaE9xfD/aJAhh3s4rsq/7BhdGyASEYfcJF0pRVn4Ir4HFD2TNBBNXB5b9MwqmL1
+	cVOc1wAFGg5z5A0y4MVgWP2b5R3gJubTjnUZUjd0KiTeJteVBfS0Ip2eEHnz3IzXlXlpamPoLR4
+	+zsDTtD12T7q2dIUsCBgrWML7y/d6Ic7SEv5VC7/xCxKX3rRjodRyLWmDzjA==
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 07 Mar 2024 22:40:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109210
+ <openembedded-devel@lists.openembedded.org>; Fri, 08 Mar 2024 00:15:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109211
 
-T24gNyBNYXIgMjAyNCwgYXQgMjA6MDcsIEFuZHLDqSBQYWl1c2NvIHZpYSBsaXN0cy5vcGVuZW1i
-ZWRkZWQub3JnIDxhbmRyZS5wYWl1c2NvPWdtYWlsLmNvbUBsaXN0cy5vcGVuZW1iZWRkZWQub3Jn
-PiB3cm90ZToNCj4gK0RFUEVORFMgPSAic3lzdGVtZCINCg0KSSBjYW7igJl0IHNlZSB3aGVyZSB0
-aGUgaW4gc291cmNlIHRoaXMgaXMgYSBoYXJkIHJlcXVpcmVtZW50PyAgSXQgc2hpcHMgYSBzeXN0
-ZW1kIHNlcnZpY2UgZmlsZSwgYnV0IGl0IGNhbiBhbHNvIHNoaXAgYW4gb3BlbnJjIHNlcnZpY2Ug
-ZmlsZS4NCg0KUm9zcw0KDQo=
+From: Wang Mingyu <wangmy@fujitsu.com>
+
+0004-Avoid-using-both-Win32Waiter-and-PthreadWaiter-on-Mi.patch
+revmoed since it's included in 20240116.1.
+
+Changelog:
+===========
+-Added absl::NoDestructor<T> to simplify defining static types that do not need
+ to be destructed upon program exit.
+-Added configurable verbose logging (also known as VLOG).
+-Added absl::Overload(), which returns a functor that provides overloads based
+ on the functors passed to it.
+-Bzlmod is now officially supported (previously it was supported by the community).
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+---
+ ...-Win32Waiter-and-PthreadWaiter-on-Mi.patch | 62 -------------------
+ ...20230802.1.bb => abseil-cpp_20240116.1.bb} | 37 +++--------
+ 2 files changed, 9 insertions(+), 90 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0004-Avoid-using-both-Win32Waiter-and-PthreadWaiter-on-Mi.patch
+ rename meta-oe/recipes-devtools/abseil-cpp/{abseil-cpp_20230802.1.bb => abseil-cpp_20240116.1.bb} (59%)
+
+diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0004-Avoid-using-both-Win32Waiter-and-PthreadWaiter-on-Mi.patch b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0004-Avoid-using-both-Win32Waiter-and-PthreadWaiter-on-Mi.patch
+deleted file mode 100644
+index db559bb16..000000000
+--- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0004-Avoid-using-both-Win32Waiter-and-PthreadWaiter-on-Mi.patch
++++ /dev/null
+@@ -1,62 +0,0 @@
+-From cb7665f39e23e95e2466390c60ee5a410780a3ed Mon Sep 17 00:00:00 2001
+-From: Derek Mauro <dmauro@google.com>
+-Date: Wed, 8 Nov 2023 09:55:31 -0800
+-Subject: [PATCH] Avoid using both Win32Waiter and PthreadWaiter on MinGW, and
+- use StdcppWaiter instead.
+-
+-There are various flavors of MinGW, some of which support pthread,
+-and some of which support Win32. Instead of figuring out which
+-platform is being used, just use the generic implementation.
+-
+-PiperOrigin-RevId: 580565507
+-Change-Id: Ia85fd7496f1e6ebdeadb95202f0039e844826118
+-Upstream-Status: Backport
+----
+- absl/synchronization/internal/pthread_waiter.h | 4 ++--
+- absl/synchronization/internal/win32_waiter.h   | 6 ++++--
+- 2 files changed, 6 insertions(+), 4 deletions(-)
+-
+-diff --git a/absl/synchronization/internal/pthread_waiter.h b/absl/synchronization/internal/pthread_waiter.h
+-index 206aefa4..23db76ad 100644
+---- a/absl/synchronization/internal/pthread_waiter.h
+-+++ b/absl/synchronization/internal/pthread_waiter.h
+-@@ -16,7 +16,7 @@
+- #ifndef ABSL_SYNCHRONIZATION_INTERNAL_PTHREAD_WAITER_H_
+- #define ABSL_SYNCHRONIZATION_INTERNAL_PTHREAD_WAITER_H_
+- 
+--#ifndef _WIN32
+-+#if !defined(_WIN32) && !defined(__MINGW32__)
+- #include <pthread.h>
+- 
+- #include "absl/base/config.h"
+-@@ -55,6 +55,6 @@ class PthreadWaiter : public WaiterCrtp<PthreadWaiter> {
+- ABSL_NAMESPACE_END
+- }  // namespace absl
+- 
+--#endif  // ndef _WIN32
+-+#endif  // !defined(_WIN32) && !defined(__MINGW32__)
+- 
+- #endif  // ABSL_SYNCHRONIZATION_INTERNAL_PTHREAD_WAITER_H_
+-diff --git a/absl/synchronization/internal/win32_waiter.h b/absl/synchronization/internal/win32_waiter.h
+-index 87eb617c..fdab264e 100644
+---- a/absl/synchronization/internal/win32_waiter.h
+-+++ b/absl/synchronization/internal/win32_waiter.h
+-@@ -20,7 +20,8 @@
+- #include <sdkddkver.h>
+- #endif
+- 
+--#if defined(_WIN32) && _WIN32_WINNT >= _WIN32_WINNT_VISTA
+-+#if defined(_WIN32) && !defined(__MINGW32__) && \
+-+    _WIN32_WINNT >= _WIN32_WINNT_VISTA
+- 
+- #include "absl/base/config.h"
+- #include "absl/synchronization/internal/kernel_timeout.h"
+-@@ -65,6 +66,7 @@ class Win32Waiter : public WaiterCrtp<Win32Waiter> {
+- ABSL_NAMESPACE_END
+- }  // namespace absl
+- 
+--#endif  // defined(_WIN32) && _WIN32_WINNT >= _WIN32_WINNT_VISTA
+-+#endif  // defined(_WIN32) && !defined(__MINGW32__) &&
+-+        // _WIN32_WINNT >= _WIN32_WINNT_VISTA
+- 
+- #endif  // ABSL_SYNCHRONIZATION_INTERNAL_WIN32_WAITER_H_
+diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20230802.1.bb b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20240116.1.bb
+similarity index 59%
+rename from meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20230802.1.bb
+rename to meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20240116.1.bb
+index 17db7b2e4..82b2d20e0 100644
+--- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20230802.1.bb
++++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20240116.1.bb
+@@ -1,24 +1,26 @@
+ SUMMARY = "Abseil is a cpp library like STL"
+ DESCRIPTION = "Abseil provides pieces missing from the C++ standard. Contains \
+ additional useful libraries like algorithm, container, debugging, hash, memory, \
+-meta, numeric, strings, synchronization, time, types and utility."
++meta, numeric, strings, synchronization, time, types and utility"
+ HOMEPAGE = "https://abseil.io/"
+ SECTION = "libs"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=df52c6edb7adc22e533b2bacc3bd3915"
+ 
+-SRCREV = "fb3621f4f897824c0dbe0615fa94543df6192f30"
+-BRANCH = "lts_2023_08_02"
++SRCREV = "2f9e432cce407ce0ae50676696666f33a77d42ac"
++BRANCH = "lts_2024_01_16"
+ SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH};protocol=https \
+            file://0001-absl-always-use-asm-sgidefs.h.patch             \
+            file://0002-Remove-maes-option-from-cross-compilation.patch \
+            file://abseil-ppc-fixes.patch \
+            file://0003-Remove-neon-option-from-cross-compilation.patch \
+-           file://0004-Avoid-using-both-Win32Waiter-and-PthreadWaiter-on-Mi.patch \
+           "
+ 
+ S = "${WORKDIR}/git"
+ 
++ASNEEDED:class-native = ""
++ASNEEDED:class-nativesdk = ""
++
+ inherit cmake
+ 
+ EXTRA_OECMAKE = "-DBUILD_SHARED_LIBS=ON \
+@@ -26,29 +28,8 @@ EXTRA_OECMAKE = "-DBUILD_SHARED_LIBS=ON \
+                  -DABSL_ENABLE_INSTALL=ON \
+                 "
+ 
+-SYSROOT_DIRS:append:class-nativesdk:mingw32 = " ${bindir}"
+-
+-PACKAGES_DYNAMIC = "^libabsl-*"
+-PACKAGES_DYNAMIC:class-native = ""
+-
+-PACKAGESPLITFUNCS =+ "split_dynamic_packages"
+-
+-python split_dynamic_packages() {
+-    libdir = d.getVar('libdir')
+-
+-    libpackages = do_split_packages(
+-        d,
+-        root=libdir,
+-        file_regex=r'^libabsl_(.*)\.so\..*$',
+-        output_pattern='libabsl-%s',
+-        description="abseil shared library %s",
+-        prepend=True,
+-        extra_depends='',
+-    )
+-    if libpackages:
+-        d.appendVar('RDEPENDS:' + d.getVar('PN'), ' ' + ' '.join(libpackages))
+-}
++BBCLASSEXTEND = "native nativesdk"
+ 
+-ALLOW_EMPTY:${PN} = "1"
++SYSROOT_DIRS:append:class-nativesdk:mingw32 = " ${bindir}"
+ 
+-BBCLASSEXTEND = "native nativesdk"
++FILES:${PN}-dev += "${includedir} ${libdir}/cmake ${libdir}/pkgconfig"
+-- 
+2.34.1
+
 
