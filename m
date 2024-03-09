@@ -2,14 +2,14 @@ Return-Path: <rpjday@crashcourse.ca>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 94D14C54E41
-	for <webhook@archiver.kernel.org>; Sat,  9 Mar 2024 11:03:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 503BFC54798
+	for <webhook@archiver.kernel.org>; Sat,  9 Mar 2024 13:44:26 +0000 (UTC)
 Received: from cpanel10.indieserve.net (cpanel10.indieserve.net [199.212.143.9])
- by mx.groups.io with SMTP id smtpd.web11.10540.1709982200054499790
+ by mx.groups.io with SMTP id smtpd.web10.12391.1709991859502194911
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 09 Mar 2024 03:03:20 -0800
+ Sat, 09 Mar 2024 05:44:20 -0800
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@crashcourse.ca header.s=default header.b=nxj+HSSU;
+ dkim=pass header.i=@crashcourse.ca header.s=default header.b=R2jDIA+E;
  spf=pass (domain: crashcourse.ca, ip: 199.212.143.9, mailfrom: rpjday@crashcourse.ca)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=crashcourse.ca; s=default; h=Content-Type:MIME-Version:Message-ID:Subject:
@@ -17,24 +17,24 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
 	:Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
 	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=XFOH81rjIsnu00GxSk6powyKf3g+GDeANBwwgG/Gnqg=; b=nxj+HSSUKWqiNNVXOpBVubjA1Y
-	CXOVvl6dJNtKlZ7FXTqKyDYm55/awWLoo6KymK9uGO0luISqUA+kmvKAo0sT/5Mhcg8hbS2HIbm5B
-	jC7G5lULm3rov6VoxF8Fhg+24Es9J5vixSQmRy1J8x9XFNVHb/lNHCb7pmtTvnu+K9xlKG+BInUPy
-	2fAn+CDkGeGy0aas1re/zEZLK5q3/Bczbm/H3XkVmvWRBZ2ZoOo/ZAcyOCjvj5ILEGmGiIyxDVR2w
-	5WFzARM2+Dsqj67WHAWUvG4QV6ed+lt78gIm3XZoXqKMDhqr01wWI8xsKP2WgJIDKaWXMXZXKsIsJ
-	Sqc/K2bw==;
-Received: from cpeac202e043973-cmac202e043970.sdns.net.rogers.com ([174.114.102.5]:47452 helo=fedora)
+	bh=jWRIMn1Z1+R3KR2MX8XVMxDocaxeuq0TjO7vkYxuwEs=; b=R2jDIA+EZcstlA7SmInTkVGE4z
+	mYQXlnnHwfQGVCD4y+Pe5C7oIbrAiNq3ZOHnHAgeg8Tan9Dh2XQEyCw4JQ7/b4XiUe06eHF0YP1qp
+	YKtidxTC3V99ZJXlJCcfop0zLVYj4XDrfLRdMUvsfttKFPHMdNU5jy4aNK75uIjUzpvRsBCT9mGjy
+	gQ9weN4Vq35otv9RVF7pAQbnLwO2HdPatrDa9rX0rELeNbDw0fdsuCV7pYkRI6kuqP4ojboaregQW
+	Z2Qr1YEjBX5ddX71gfUeH3zlJy+v47BFWi464wrnSvUK/o/Yj7+oyLa28r5RG/4EfGFhzqOswGKDy
+	H8sOm9OA==;
+Received: from cpeac202e043973-cmac202e043970.sdns.net.rogers.com ([174.114.102.5]:47730 helo=fedora)
 	by cpanel10.indieserve.net with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
 	(Exim 4.96.2)
 	(envelope-from <rpjday@crashcourse.ca>)
-	id 1riuU0-00A71u-0U
+	id 1riwzn-00ANF3-1u
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Mar 2024 06:03:18 -0500
-Date: Sat, 9 Mar 2024 06:03:11 -0500 (EST)
+	Sat, 09 Mar 2024 08:44:17 -0500
+Date: Sat, 9 Mar 2024 08:44:11 -0500 (EST)
 From: "Robert P. J. Day" <rpjday@crashcourse.ca>
 To: OpenEmbedded Development mailing list <openembedded-devel@lists.openembedded.org>
-Subject: "fmt" recipe inherits ptest while having no ptest content
-Message-ID: <5e5b1265-8ad5-659a-72d7-15861ce55f50@crashcourse.ca>
+Subject: short list of strange ptest recipes from meta-oe/recipes-support
+Message-ID: <1c6cd1af-7c7e-b97b-549a-3efe4e38aac8@crashcourse.ca>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
@@ -50,18 +50,24 @@ X-Source-Dir:
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 09 Mar 2024 11:03:25 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109243
+ <openembedded-devel@lists.openembedded.org>; Sat, 09 Mar 2024 13:44:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109244
 
 
-  just noticed here:
+  in my travels, i ran across the following odd allegedly ptest
+enabled recipes:
 
-https://github.com/openembedded/meta-openembedded/blob/master/meta-oe/recipes-support/fmt/fmt_10.2.1.bb
+https://git.openembedded.org/meta-openembedded/tree/meta-oe/recipes-support/fmt/fmt_10.2.1.bb
+https://git.openembedded.org/meta-openembedded/tree/meta-oe/recipes-support/function2/function2_4.2.4.bb
+https://git.openembedded.org/meta-openembedded/tree/meta-oe/recipes-support/libmanette/libmanette_0.2.7.bb
 
-that that recipe inherits "ptest" while not even supplying a run-ptest
-utility, or anything else normally required by ptest. yes, that recipe
-does provide a test suite, but without wrapping it in a ptest harness,
-it's not clear what this means.
+  - inherits ptest while not providing the requisite ptest harness
+
+and one more equally odd:
+
+https://git.openembedded.org/meta-openembedded/tree/meta-oe/recipes-support/websocketpp/websocketpp_0.8.2.bb
+
+  - tests DISTRO_FEATURES for ptest without even inheriting ptest
 
 rday
 
