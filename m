@@ -1,91 +1,123 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <asharma@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0AD5AC54E58
-	for <webhook@archiver.kernel.org>; Sun, 10 Mar 2024 14:40:53 +0000 (UTC)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.web11.38752.1710081647656191829
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 11D65C54791
+	for <webhook@archiver.kernel.org>; Sun, 10 Mar 2024 17:55:54 +0000 (UTC)
+Received: from mail-oi1-f182.google.com (mail-oi1-f182.google.com [209.85.167.182])
+ by mx.groups.io with SMTP id smtpd.web11.43002.1710093346625686427
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 10 Mar 2024 07:40:47 -0700
+ Sun, 10 Mar 2024 10:55:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=T11fNVnh;
- spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-412f62ee005so25225115e9.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 10 Mar 2024 07:40:47 -0700 (PDT)
+ dkim=pass header.i=@mvista.com header.s=google header.b=W4KhrC6B;
+ spf=pass (domain: mvista.com, ip: 209.85.167.182, mailfrom: asharma@mvista.com)
+Received: by mail-oi1-f182.google.com with SMTP id 5614622812f47-3c20cd7ab33so1313830b6e.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 10 Mar 2024 10:55:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1710081646; x=1710686446; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=LMrst3C80V7PWWwTVNqQpclYHL3ee+i679vTUSffmsM=;
-        b=T11fNVnhjj3LBkoj8dz1v+jsGUpzGwPmy8qVJO/aKbggqxmIrP6I0I6q6snZakehOF
-         lnhjjP6K9Hw60g5pOoKz0U9b9DcS9B2C/3dUp38N2GVLHFkbKArDODxZVpdIlEGeZBXy
-         1tTMxsb2JE7W7BJ1KE6uq1E5cN3dmcmGNtpRo8Sa0It6sQnRowXqyY8510ytR1kwvtnh
-         2dwSCdFTip2YkPmS18JbUXeOL06bqEP7uyVyk2QA7cdAi5uxF5I/OYiYApKF83WOmSfO
-         GMbk8k8LmTYkV05BPWg7zEWaP3KEYGjUIr0PbaxfhHiT67alTlCRhZW59aUhIR0SfdbA
-         PkOg==
+        d=mvista.com; s=google; t=1710093346; x=1710698146; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=s/ZdGy73e8a7E2X3fB1D4I2cu04sA0YsDrz0hd0ZPx0=;
+        b=W4KhrC6BCD3xgEFWRZwCKO5ezzcdpdNolWzmtC5xrdH31aQp0/uguBdjM2E3tRn81M
+         xqu1k9cR1c5GzTMP15HNe4QX7dcrL6TmvMczKUkv58edIcAJMBdPPZfAZ++TjzWSIFHX
+         VEuc948wf/K93F+i9Ox3TaA/h0XLoVdtUYw2k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710081646; x=1710686446;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=LMrst3C80V7PWWwTVNqQpclYHL3ee+i679vTUSffmsM=;
-        b=aN9R+YxFYk6uphkVKSExuPuBcG+o9p+OpqCGZePsf0Fq2OwjU2ldH2faZp6PHSTBgU
-         Bh5BPMPVb0qoVCS30OBMCbT+pTFEN0FOzN0aBx2ftCVFy+K57ywEO6M1hOc9WJcVxogq
-         02gK8fIWlySBRuqd6KrLkeWKy97lrHT3XhT2pF9r+QNoud9dF1Y/whRKPPENPoBlTiin
-         N6XWCLdYZbr8Xi8lQXJABXXN8+k8YAzTGGiBBm6zQx3xrkJ8aeXGgEPK8FzXdeKuCN5S
-         D9s9nu0x45yGAATlYJVvAEQU1Lp01uj4OTG+BgWqG1/PINVD31Bn0QMMSaMcUdt0BGqx
-         o3cg==
-X-Forwarded-Encrypted: i=1; AJvYcCXPWSP6S3guRM+I5jDqPho7Bd6dosSd+9JgAX/pMDZlVsDLYoRRIRLRAwvFCEvBIRBDIqLDWaWz92CbB83nEcJGqmA/m0QY10yPh7kgGpFWPon8/shOoAG1JQ==
-X-Gm-Message-State: AOJu0YweAnhK8OTNTLcOnqToC/K7lY5VYBDkKtWJ3tZJiN6pK19waiYx
-	HxK8jGFZlTSZSeQJDonZDqN9rE5KyRo9T4mCMQKgGBFo9XLDdAALxv1fJCULyHoNE4vAZ97D5tN
-	4iyYcjFzEjNdmQwzfTiUDmAd4Xhg=
-X-Google-Smtp-Source: AGHT+IGWxcd4N2TknADP+YVVHZWgQrICftxzurwOscCa4CqchZzSFjon3vjost5BEZBYfjHDd1+NgPb5B+gXP3TG0LI=
-X-Received: by 2002:a05:600c:45cd:b0:412:ef25:aaa5 with SMTP id
- s13-20020a05600c45cd00b00412ef25aaa5mr3210366wmo.36.1710081645942; Sun, 10
- Mar 2024 07:40:45 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1710093346; x=1710698146;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=s/ZdGy73e8a7E2X3fB1D4I2cu04sA0YsDrz0hd0ZPx0=;
+        b=l6NQJEz+f/MmWyWnJbzXcVvgD7StH7V5AKD2uEoFHOBQvivyZE54mRxbKywJV1i2b7
+         kjq5FOkEq429q/XDP9DayIHYEC8WgQacR4fxohfgO+Ce1DoP92mY1TCA/TMXHVLcswt/
+         SWnq9mk8Cf7ABkY1NqXgZfzwsorQNfgDSQp2P/Vgzn1O7Em7HZ1RbtmZSeBelhymw0ld
+         kaNiBvYNTW5lUqNhGCbBDmeCscXP6ftBfhAsyQUcWsHEdKdNiYlDzZbDesjXusRp6p+r
+         abmEavFHqsR7UTTtzzux1lHx50u/5ZTzS9bxFhEuOLS0Mu/wOfX2xI83D7qMd78TJy9L
+         tQlg==
+X-Gm-Message-State: AOJu0YzCCuBn+GLWm0vDWxN8C8yM+1sGnA8B8gG8RNaIT2JVZ44jY4q4
+	7FYC6h1PdeDgS2jccrB+XJ7kCHNNvVQfPRsHoBla5cQA/BP63EUaGeM7w7ImIHmC0wbXrStBUMH
+	R
+X-Google-Smtp-Source: AGHT+IGl8rmsCMod7IxbVZ2orMJYjmdKI96Ja8yTsVlJwGIUMFpEMNCZsxeFPhul4cEJk9Txl+pZoA==
+X-Received: by 2002:a05:6808:eca:b0:3c2:1659:5957 with SMTP id q10-20020a0568080eca00b003c216595957mr6864955oiv.13.1710093345710;
+        Sun, 10 Mar 2024 10:55:45 -0700 (PDT)
+Received: from asharma-Latitude-3400 ([223.190.82.28])
+        by smtp.gmail.com with ESMTPSA id e10-20020a170902f1ca00b001dd75d4c78csm2944316plc.221.2024.03.10.10.55.43
+        (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+        Sun, 10 Mar 2024 10:55:45 -0700 (PDT)
+Received: by asharma-Latitude-3400 (sSMTP sendmail emulation); Sun, 10 Mar 2024 23:23:30 +0530
+From: Ashish Sharma <asharma@mvista.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Ashish Sharma <asharma@mvista.com>
+Subject: [oe][meta-oe][dunfell][PATCH] c-ares: Backport fix for CVE-2024-25629
+Date: Sun, 10 Mar 2024 23:23:27 +0530
+Message-Id: <20240310175327.3201-1-asharma@mvista.com>
+X-Mailer: git-send-email 2.24.4
 MIME-Version: 1.0
-References: <1709856910-618-1-git-send-email-wangmy@fujitsu.com> <17BB6BA45241C005.5850@lists.openembedded.org>
-In-Reply-To: <17BB6BA45241C005.5850@lists.openembedded.org>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sun, 10 Mar 2024 15:40:29 +0100
-Message-ID: <CA+chaQeGXkdZVZTCp+GZVE4KKxnbcwqqJAGi0Qivqf5u9a59vA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe] [PATCH V2] abseil-cpp: upgrade 20230802.1 -> 20240116.1
-To: martin.jansa@gmail.com
-Cc: wangmy@fujitsu.com, Peter Kjellerstedt <pkj@axis.com>, 
-	openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 10 Mar 2024 14:40:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109258
+ <openembedded-devel@lists.openembedded.org>; Sun, 10 Mar 2024 17:55:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109259
 
-On Sun, Mar 10, 2024 at 2:54=E2=80=AFPM Martin Jansa via
-lists.openembedded.org <martin.jansa=3Dgmail.com@lists.openembedded.org>
-wrote:
->
-> Does this intentionally undo last 2 changes from Peter? The commit
-> message doesn't mention it
->
-> https://git.openembedded.org/meta-openembedded/commit/?id=3D32eefcf1ca97a=
-08ea85f62a72b676e447f1b79a0
-> https://git.openembedded.org/meta-openembedded/commit/?id=3D5c554c9b8cb63=
-b5d0d5f434c28dd71c0f1843448
->
-> also looks like libabsl_flags is no longer provided by this version
-> (got failure from one recipe, will check if it's expected).
+Upstream-Status: Backport from debian [https://git.launchpad.net/ubuntu/+source/c-ares/commit/?h=applied/ubuntu/jammy-devel&id=3701814ad9f8570e0142f4b2bf79a32472fe89d6]
+CVE: CVE-2024-25629
+Signed-off-by: Ashish Sharma <asharma@mvista.com>
+---
+ .../c-ares/c-ares/CVE-2024-25629.patch        | 31 +++++++++++++++++++
+ .../recipes-support/c-ares/c-ares_1.18.1.bb   |  1 +
+ 2 files changed, 32 insertions(+)
+ create mode 100644 meta-oe/recipes-support/c-ares/c-ares/CVE-2024-25629.patch
 
-this last part was expected, absl_flags was removed in:
-https://github.com/abseil/abseil-cpp/commit/4038192a57cb75f7ee671f81a3378ff=
-4c74c4f8e
+diff --git a/meta-oe/recipes-support/c-ares/c-ares/CVE-2024-25629.patch b/meta-oe/recipes-support/c-ares/c-ares/CVE-2024-25629.patch
+new file mode 100644
+index 000000000..76f8b7c3b
+--- /dev/null
++++ b/meta-oe/recipes-support/c-ares/c-ares/CVE-2024-25629.patch
+@@ -0,0 +1,31 @@
++From a804c04ddc8245fc8adf0e92368709639125e183 Mon Sep 17 00:00:00 2001
++From: Brad House <brad@brad-house.com>
++Date: Thu, 22 Feb 2024 16:23:33 -0500
++Subject: [PATCH] Merge pull request from GHSA-mg26-v6qh-x48q
++
++Upstream-Status: Backport from debian [https://git.launchpad.net/ubuntu/+source/c-ares/commit/?h=applied/ubuntu/jammy-devel&id=3701814ad9f8570e0142f4b2bf79a32472fe89d6]
++CVE: CVE-2024-25629
++Signed-off-by: Ashish Sharma <asharma@mvista.com>
++
++ src/lib/ares__read_line.c | 8 ++++++++
++ 1 file changed, 8 insertions(+)
++
++Index: c-ares-1.18.1/src/lib/ares__read_line.c
++===================================================================
++--- c-ares-1.18.1.orig/src/lib/ares__read_line.c
+++++ c-ares-1.18.1/src/lib/ares__read_line.c
++@@ -49,6 +49,14 @@ int ares__read_line(FILE *fp, char **buf
++       if (!fgets(*buf + offset, bytestoread, fp))
++         return (offset != 0) ? 0 : (ferror(fp)) ? ARES_EFILE : ARES_EOF;
++       len = offset + strlen(*buf + offset);
+++
+++      /* Probably means there was an embedded NULL as the first character in
+++      * the line, throw away line */
+++      if (len == 0) {
+++        offset = 0;
+++        continue;
+++      }
+++
++       if ((*buf)[len - 1] == '\n')
++         {
++           (*buf)[len - 1] = 0;
+diff --git a/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb b/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb
+index 2aa789760..b5936e1ad 100644
+--- a/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb
++++ b/meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb
+@@ -10,6 +10,7 @@ SRC_URI = "git://github.com/c-ares/c-ares.git;branch=main;protocol=https \
+            file://CVE-2023-31130.patch \
+            file://CVE-2023-31147.patch \
+            file://CVE-2023-32067.patch \
++           file://CVE-2024-25629.patch \
+           "
+ SRCREV = "2aa086f822aad5017a6f2061ef656f237a62d0ed"
+ 
+-- 
+2.24.4
 
-Luckily the library wasn't really needed in our libedgetpu, so I could
-just remove it from LDFLAGS as in:
-https://github.com/shr-project/meta-webosose/commit/58c1ee08b35a5ffb3b3ef2f=
-e142d1a78585aafcc
-
-Regards,
 
