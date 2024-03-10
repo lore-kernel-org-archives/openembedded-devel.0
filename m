@@ -1,275 +1,145 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CD5D5C54791
-	for <webhook@archiver.kernel.org>; Sun, 10 Mar 2024 13:54:02 +0000 (UTC)
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
- by mx.groups.io with SMTP id smtpd.web11.37236.1710078836629915960
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BDCF4C54E58
+	for <webhook@archiver.kernel.org>; Sun, 10 Mar 2024 14:01:42 +0000 (UTC)
+Received: from mo4-p00-ob.smtp.rzone.de (mo4-p00-ob.smtp.rzone.de [85.215.255.23])
+ by mx.groups.io with SMTP id smtpd.web11.31335.1710066215417561684
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 10 Mar 2024 06:53:56 -0700
+ Sun, 10 Mar 2024 03:23:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=VHfm3X93;
- spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-33e7946bddfso1530361f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 10 Mar 2024 06:53:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1710078835; x=1710683635; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=+9dI1WASZnAMDzppVYxSlodz3GC/JTd9S+GO9tiMQzw=;
-        b=VHfm3X93IWfpTANcT4uUIpHZwVxYqvQWgWlCRm4zpdlYxwu5R1eLVuu+HX7vezqO6O
-         peWMEtyf3c1QQxV1IZFnd2plnQ0Ewm8rDzLqD1qQqlZ5otVbTabuGRHJ43pYA3cByAuf
-         6D7lrK007K0bAaPsLmUyY+xjE9Gubk5TH5KXD9vs0sNCgOUnaQ+rfTuZntBBDQh304HX
-         6czLM6062+84IvLC6/3IMkD1Kdfkm/MqNLYjyvQ6sTXGfCo50BEJvgTBdbg5ziaIAHkf
-         qQJXp5wfD+qSI0D3hSljjqeRGgp/QSQ8RSzK8FjpvYzs5PVoYDRwf/LK3Fov9wsIW7W8
-         v9uA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710078835; x=1710683635;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=+9dI1WASZnAMDzppVYxSlodz3GC/JTd9S+GO9tiMQzw=;
-        b=tjJJZk2RTE/lLM0kBTs8R0KO8ht1q0bP9pKhCQsYjRYRRESnkYfB3GGwckO3K8aTLn
-         XZP2Xp6j3bOe6dyU/x9LCrKrQjKNzQqTe4/EQ6FUbMGf9KLvYPmCdareipcXlCJpbAKQ
-         Im/jL9bKviSZRPhqacrl4aOX0s6Igb3HidSIib9kFjl6N3VzzLtRO//iRHEgmEZSTL+h
-         xD7kBi/BaAaU4gbCFC11xvaAVwB3JHokXeKkrQ3yrAolt4yW1apQu3PKg1I4ICH+AWEN
-         T0x+w5G0/i9BLJTme8bBRxHn6CcPx0BzMybHjxJUehB/iwDwMtkZ8nsNWoDS5lTLF3/K
-         2Jkw==
-X-Gm-Message-State: AOJu0Yxx5Lmkv8wUqxErcEVorHKhEpzMDxEuBeqv7oqWyJyqw1TBqwQM
-	WOniHDiUFQ7hjoB5CCE9oM09yBKTVn73mOD+eAzmhmtF4+Vi+2gWi9VZCWIR94VG6+K/BZ61CkP
-	1ze1evKf/QXKbhu4mtgjKwPZRhzc=
-X-Google-Smtp-Source: AGHT+IFFADQN5ecuSvaK7jFkGdaa8bRc9k49LotvbjQehLeh09q689Nu6eyRMCGDQ6HsKrAj2kSFsAGCwPSkUe6kWuM=
-X-Received: by 2002:a5d:4e08:0:b0:33e:38f1:77f6 with SMTP id
- p8-20020a5d4e08000000b0033e38f177f6mr2852320wrt.39.1710078834751; Sun, 10 Mar
- 2024 06:53:54 -0700 (PDT)
+ dkim=pass header.i=@heimpold.de header.s=strato-dkim-0002 header.b=Oe8fCmRC;
+ dkim=pass header.i=@heimpold.de header.s=strato-dkim-0003 header.b=kZl7YYIa;
+ spf=pass (domain: heimpold.de, ip: 85.215.255.23, mailfrom: mhei@heimpold.de)
+ARC-Seal: i=1; a=rsa-sha256; t=1710066213; cv=none;
+    d=strato.com; s=strato-dkim-0002;
+    b=UGSLj6opksPwuwJ9NWB8568QeuhPy7OyOjXdmEYSx2p9hF939z6T8Sp8ikZ2MAv0Sx
+    O/k2XwXF2pJ9oB4snp9YdBJ1sKg1iftqo3ao23YtVo+lji5ymGdcoSNxPqiKuEyLHwKM
+    E1M4ZslhBHZ6rbBuWI7NnhVI9dzCESPwUfsJiEJ9VxiwXc+DLSbpIasgTvS0M1O+KOmN
+    /VI0+vXC8uhG8zInc63PXingg2gRqAP2Qu755ekL6/ZLcAws3jKA68aPlK9WZFCbsiDy
+    bTaMdMSjZ31EBg7momGJrjSm0P+BqBhLuleHJHOYWARtLNSfsRotEc/zVK2TJsFsuqco
+    K5vg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1710066213;
+    s=strato-dkim-0002; d=strato.com;
+    h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
+    bh=ZcOAwjjyRya+HvDhdtZ3H84S+R34ao35Q3MlOaNYvsk=;
+    b=htUn/R5TjKi6/C3b6ckT9Iq4xxG1Rd22yUBWA3TV1Ng5RaXp8za1MGoDEOsUf4/wnE
+    M/U3BKQLRdzuizoUz5DX8T3J5CZUTalZ5UjfCNF6JFWVxiTFHd+tbXz2aMfBk70lu0zV
+    eQd0xnC2F1mhHJIe1y8dWz5lB/ddvA/BBk+O7XmmaBRhOCnaiJ3vookBE7OD2bGFRFDJ
+    fP87+aHc41FYONXCRpJfWXQFt7mTHNM9lgjAkIdakRx4RrdMXFqJe0/piCnQAlp4TMvz
+    A+wSkssU5CP6tIDHWNmCJBbmINN8tTLVtvtPSa7BQL8mAHcJHh9CxkehNSCoo+9XCgq1
+    xBoQ==
+ARC-Authentication-Results: i=1; strato.com;
+    arc=none;
+    dkim=none
+X-RZG-CLASS-ID: mo00
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1710066213;
+    s=strato-dkim-0002; d=heimpold.de;
+    h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
+    bh=ZcOAwjjyRya+HvDhdtZ3H84S+R34ao35Q3MlOaNYvsk=;
+    b=Oe8fCmRCtqcjSL56IU/HDcm7vBwG1M3jpw+ETxTSYVanC/IZCnK2WHiE3LuclfSCKO
+    aYkxOBjq8ZhovdjoD/JL130NQsu0+QUczCGlc2uZ6mSpHB/PuOImQUFA3vvvXcqow1BL
+    WIEF7KZOQarYLzaQez85lydMfLtCR2aO+Mrw29NX9BVHnlKa2h2tSj3ElNNpsSbgnVfA
+    QkzKxqGXh4bsriTxNG30LIc/QjowG3Y0ZY93K+mmxe5bLj1ZRs7pJFYSzlb4QQoH5Qef
+    sXT+qDq63Ws23wsLL/okAjTirNve7XSAqbsfYSbXjJAjADAt+A3wc02Fa8Ac6oR3jm+Y
+    FM7Q==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1710066213;
+    s=strato-dkim-0003; d=heimpold.de;
+    h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
+    bh=ZcOAwjjyRya+HvDhdtZ3H84S+R34ao35Q3MlOaNYvsk=;
+    b=kZl7YYIaGarluFWwVHTLUPrUvG8WU7z8bjNdUe98/HYlkt61XFe9JrTMgUZAK3SqoZ
+    18dFOPmaFj48AFtoqGDA==
+X-RZG-AUTH: ":O2kGeEG7b/pS1EW8QnKjhhg/vO4pzqdNytq77N6ZKUSN7PfdWTGQORRBv+hBJ4HuTjU1tSIhFDMWzcNP501bqk0f9XZ4duqo7mTX"
+Received: from tonne.mhei.heimpold.itr
+    by smtp.strato.de (RZmta 50.2.0 AUTH)
+    with ESMTPSA id c6248902AANXnNw
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (curve X9_62_prime256v1 with 256 ECDH bits, eq. 3072 bits RSA))
+	(Client did not present a certificate);
+    Sun, 10 Mar 2024 11:23:33 +0100 (CET)
+Received: from kerker.mhei.heimpold.itr (kerker.mhei.heimpold.itr [192.168.8.1])
+	by tonne.mhei.heimpold.itr (Postfix) with ESMTP id F2BDC154C7C;
+	Sun, 10 Mar 2024 11:24:46 +0100 (CET)
+From: "Michael Heimpold" <mhei@heimpold.de>
+To: openembedded-devel@lists.openembedded.org
+Cc: Michael Heimpold <mhei@heimpold.de>
+Subject: [meta-oe][PATCH] ser2net: add a systemd service file
+Date: Sun, 10 Mar 2024 11:23:06 +0100
+Message-Id: <20240310102306.570073-1-mhei@heimpold.de>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <1709856910-618-1-git-send-email-wangmy@fujitsu.com>
-In-Reply-To: <1709856910-618-1-git-send-email-wangmy@fujitsu.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sun, 10 Mar 2024 14:53:43 +0100
-Message-ID: <CA+chaQfzxU-v-S0rVjFfH6pX87Z8zMsmmnKXz2o7ofKyGdh_dA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe] [PATCH V2] abseil-cpp: upgrade 20230802.1 -> 20240116.1
-To: wangmy@fujitsu.com, Peter Kjellerstedt <pkj@axis.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 10 Mar 2024 13:54:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109254
+ <openembedded-devel@lists.openembedded.org>; Sun, 10 Mar 2024 14:01:42 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109256
 
-Does this intentionally undo last 2 changes from Peter? The commit
-message doesn't mention it
+This adds and installs a simple systemd service for ser2net.
+The service is only started in case a non-zero configuration file
+/etc/ser2net/ser2net.yaml exists.
 
-https://git.openembedded.org/meta-openembedded/commit/?id=3D32eefcf1ca97a08=
-ea85f62a72b676e447f1b79a0
-https://git.openembedded.org/meta-openembedded/commit/?id=3D5c554c9b8cb63b5=
-d0d5f434c28dd71c0f1843448
+Additionally, this configuration file a marked as such in the recipe.
 
-also looks like libabsl_flags is no longer provided by this version
-(got failure from one recipe, will check if it's expected).
+Signed-off-by: Michael Heimpold <mhei@heimpold.de>
+---
+ .../ser2net/files/ser2net.service              | 13 +++++++++++++
+ .../ser2net/ser2net_4.6.1.bb                   | 18 ++++++++++++++++--
+ 2 files changed, 29 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-connectivity/ser2net/files/ser2net.service
 
-Regards,
+diff --git a/meta-oe/recipes-connectivity/ser2net/files/ser2net.service b/meta-oe/recipes-connectivity/ser2net/files/ser2net.service
+new file mode 100644
+index 000000000000..13d8ee4ff3e3
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/ser2net/files/ser2net.service
+@@ -0,0 +1,13 @@
++[Unit]
++Description=Serial port to network proxy
++Documentation=man:ser2net(8)
++After=network.target
++Wants=network.target
++ConditionFileNotEmpty=@SYSCONFDIR@/ser2net/ser2net.yaml
++
++[Service]
++Type=exec
++ExecStart=@SBINDIR@/ser2net -n
++
++[Install]
++WantedBy=multi-user.target
+diff --git a/meta-oe/recipes-connectivity/ser2net/ser2net_4.6.1.bb b/meta-oe/recipes-connectivity/ser2net/ser2net_4.6.1.bb
+index 108647bdd6f5..e5ebafa54fc5 100644
+--- a/meta-oe/recipes-connectivity/ser2net/ser2net_4.6.1.bb
++++ b/meta-oe/recipes-connectivity/ser2net/ser2net_4.6.1.bb
+@@ -7,10 +7,24 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+ DEPENDS = "gensio libyaml"
+ 
+-SRC_URI = "${SOURCEFORGE_MIRROR}/project/ser2net/ser2net/ser2net-${PV}.tar.gz"
++SRC_URI = "${SOURCEFORGE_MIRROR}/project/ser2net/ser2net/ser2net-${PV}.tar.gz \
++    file://ser2net.service \
++"
+ 
+ SRC_URI[sha256sum] = "78ffee19d9b97e93ae65b5cec072da2b7b947fc484e9ccb3f535702f36f6ed19"
+ 
+ UPSTREAM_CHECK_URI = "http://sourceforge.net/projects/ser2net/files/ser2net"
+ 
+-inherit autotools pkgconfig
++inherit autotools pkgconfig systemd
++
++SYSTEMD_SERVICE:${PN} = "ser2net.service"
++
++CONFFILES:${PN} += "${sysconfdir}/ser2net/ser2net.yaml"
++
++do_install:append() {
++    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
++        install -d ${D}${systemd_unitdir}/system
++        install -m 0644 ${WORKDIR}/ser2net.service ${D}${systemd_unitdir}/system/
++        sed -i -e 's,@SBINDIR@,${sbindir},g' -e 's,@SYSCONFDIR@,${sysconfdir},g' ${D}${systemd_unitdir}/system/ser2net.service
++    fi
++}
+-- 
+2.34.1
 
-On Fri, Mar 8, 2024 at 1:15=E2=80=AFAM wangmy via lists.openembedded.org
-<wangmy=3Dfujitsu.com@lists.openembedded.org> wrote:
->
-> From: Wang Mingyu <wangmy@fujitsu.com>
->
-> 0004-Avoid-using-both-Win32Waiter-and-PthreadWaiter-on-Mi.patch
-> revmoed since it's included in 20240116.1.
->
-> Changelog:
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> -Added absl::NoDestructor<T> to simplify defining static types that do no=
-t need
->  to be destructed upon program exit.
-> -Added configurable verbose logging (also known as VLOG).
-> -Added absl::Overload(), which returns a functor that provides overloads =
-based
->  on the functors passed to it.
-> -Bzlmod is now officially supported (previously it was supported by the c=
-ommunity).
->
-> Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
-> ---
->  ...-Win32Waiter-and-PthreadWaiter-on-Mi.patch | 62 -------------------
->  ...20230802.1.bb =3D> abseil-cpp_20240116.1.bb} | 37 +++--------
->  2 files changed, 9 insertions(+), 90 deletions(-)
->  delete mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0004-A=
-void-using-both-Win32Waiter-and-PthreadWaiter-on-Mi.patch
->  rename meta-oe/recipes-devtools/abseil-cpp/{abseil-cpp_20230802.1.bb =3D=
-> abseil-cpp_20240116.1.bb} (59%)
->
-> diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0004-Avoid-us=
-ing-both-Win32Waiter-and-PthreadWaiter-on-Mi.patch b/meta-oe/recipes-devtoo=
-ls/abseil-cpp/abseil-cpp/0004-Avoid-using-both-Win32Waiter-and-PthreadWaite=
-r-on-Mi.patch
-> deleted file mode 100644
-> index db559bb16..000000000
-> --- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0004-Avoid-using-bot=
-h-Win32Waiter-and-PthreadWaiter-on-Mi.patch
-> +++ /dev/null
-> @@ -1,62 +0,0 @@
-> -From cb7665f39e23e95e2466390c60ee5a410780a3ed Mon Sep 17 00:00:00 2001
-> -From: Derek Mauro <dmauro@google.com>
-> -Date: Wed, 8 Nov 2023 09:55:31 -0800
-> -Subject: [PATCH] Avoid using both Win32Waiter and PthreadWaiter on MinGW=
-, and
-> - use StdcppWaiter instead.
-> -
-> -There are various flavors of MinGW, some of which support pthread,
-> -and some of which support Win32. Instead of figuring out which
-> -platform is being used, just use the generic implementation.
-> -
-> -PiperOrigin-RevId: 580565507
-> -Change-Id: Ia85fd7496f1e6ebdeadb95202f0039e844826118
-> -Upstream-Status: Backport
-> ----
-> - absl/synchronization/internal/pthread_waiter.h | 4 ++--
-> - absl/synchronization/internal/win32_waiter.h   | 6 ++++--
-> - 2 files changed, 6 insertions(+), 4 deletions(-)
-> -
-> -diff --git a/absl/synchronization/internal/pthread_waiter.h b/absl/synch=
-ronization/internal/pthread_waiter.h
-> -index 206aefa4..23db76ad 100644
-> ---- a/absl/synchronization/internal/pthread_waiter.h
-> -+++ b/absl/synchronization/internal/pthread_waiter.h
-> -@@ -16,7 +16,7 @@
-> - #ifndef ABSL_SYNCHRONIZATION_INTERNAL_PTHREAD_WAITER_H_
-> - #define ABSL_SYNCHRONIZATION_INTERNAL_PTHREAD_WAITER_H_
-> -
-> --#ifndef _WIN32
-> -+#if !defined(_WIN32) && !defined(__MINGW32__)
-> - #include <pthread.h>
-> -
-> - #include "absl/base/config.h"
-> -@@ -55,6 +55,6 @@ class PthreadWaiter : public WaiterCrtp<PthreadWaiter>=
- {
-> - ABSL_NAMESPACE_END
-> - }  // namespace absl
-> -
-> --#endif  // ndef _WIN32
-> -+#endif  // !defined(_WIN32) && !defined(__MINGW32__)
-> -
-> - #endif  // ABSL_SYNCHRONIZATION_INTERNAL_PTHREAD_WAITER_H_
-> -diff --git a/absl/synchronization/internal/win32_waiter.h b/absl/synchro=
-nization/internal/win32_waiter.h
-> -index 87eb617c..fdab264e 100644
-> ---- a/absl/synchronization/internal/win32_waiter.h
-> -+++ b/absl/synchronization/internal/win32_waiter.h
-> -@@ -20,7 +20,8 @@
-> - #include <sdkddkver.h>
-> - #endif
-> -
-> --#if defined(_WIN32) && _WIN32_WINNT >=3D _WIN32_WINNT_VISTA
-> -+#if defined(_WIN32) && !defined(__MINGW32__) && \
-> -+    _WIN32_WINNT >=3D _WIN32_WINNT_VISTA
-> -
-> - #include "absl/base/config.h"
-> - #include "absl/synchronization/internal/kernel_timeout.h"
-> -@@ -65,6 +66,7 @@ class Win32Waiter : public WaiterCrtp<Win32Waiter> {
-> - ABSL_NAMESPACE_END
-> - }  // namespace absl
-> -
-> --#endif  // defined(_WIN32) && _WIN32_WINNT >=3D _WIN32_WINNT_VISTA
-> -+#endif  // defined(_WIN32) && !defined(__MINGW32__) &&
-> -+        // _WIN32_WINNT >=3D _WIN32_WINNT_VISTA
-> -
-> - #endif  // ABSL_SYNCHRONIZATION_INTERNAL_WIN32_WAITER_H_
-> diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20230802.1.bb=
- b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20240116.1.bb
-> similarity index 59%
-> rename from meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20230802.1.bb
-> rename to meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20240116.1.bb
-> index 17db7b2e4..82b2d20e0 100644
-> --- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20230802.1.bb
-> +++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_20240116.1.bb
-> @@ -1,24 +1,26 @@
->  SUMMARY =3D "Abseil is a cpp library like STL"
->  DESCRIPTION =3D "Abseil provides pieces missing from the C++ standard. C=
-ontains \
->  additional useful libraries like algorithm, container, debugging, hash, =
-memory, \
-> -meta, numeric, strings, synchronization, time, types and utility."
-> +meta, numeric, strings, synchronization, time, types and utility"
->  HOMEPAGE =3D "https://abseil.io/"
->  SECTION =3D "libs"
->  LICENSE =3D "Apache-2.0"
->  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Ddf52c6edb7adc22e533b2bacc3bd3=
-915"
->
-> -SRCREV =3D "fb3621f4f897824c0dbe0615fa94543df6192f30"
-> -BRANCH =3D "lts_2023_08_02"
-> +SRCREV =3D "2f9e432cce407ce0ae50676696666f33a77d42ac"
-> +BRANCH =3D "lts_2024_01_16"
->  SRC_URI =3D "git://github.com/abseil/abseil-cpp;branch=3D${BRANCH};proto=
-col=3Dhttps \
->             file://0001-absl-always-use-asm-sgidefs.h.patch             \
->             file://0002-Remove-maes-option-from-cross-compilation.patch \
->             file://abseil-ppc-fixes.patch \
->             file://0003-Remove-neon-option-from-cross-compilation.patch \
-> -           file://0004-Avoid-using-both-Win32Waiter-and-PthreadWaiter-on=
--Mi.patch \
->            "
->
->  S =3D "${WORKDIR}/git"
->
-> +ASNEEDED:class-native =3D ""
-> +ASNEEDED:class-nativesdk =3D ""
-> +
->  inherit cmake
->
->  EXTRA_OECMAKE =3D "-DBUILD_SHARED_LIBS=3DON \
-> @@ -26,29 +28,8 @@ EXTRA_OECMAKE =3D "-DBUILD_SHARED_LIBS=3DON \
->                   -DABSL_ENABLE_INSTALL=3DON \
->                  "
->
-> -SYSROOT_DIRS:append:class-nativesdk:mingw32 =3D " ${bindir}"
-> -
-> -PACKAGES_DYNAMIC =3D "^libabsl-*"
-> -PACKAGES_DYNAMIC:class-native =3D ""
-> -
-> -PACKAGESPLITFUNCS =3D+ "split_dynamic_packages"
-> -
-> -python split_dynamic_packages() {
-> -    libdir =3D d.getVar('libdir')
-> -
-> -    libpackages =3D do_split_packages(
-> -        d,
-> -        root=3Dlibdir,
-> -        file_regex=3Dr'^libabsl_(.*)\.so\..*$',
-> -        output_pattern=3D'libabsl-%s',
-> -        description=3D"abseil shared library %s",
-> -        prepend=3DTrue,
-> -        extra_depends=3D'',
-> -    )
-> -    if libpackages:
-> -        d.appendVar('RDEPENDS:' + d.getVar('PN'), ' ' + ' '.join(libpack=
-ages))
-> -}
-> +BBCLASSEXTEND =3D "native nativesdk"
->
-> -ALLOW_EMPTY:${PN} =3D "1"
-> +SYSROOT_DIRS:append:class-nativesdk:mingw32 =3D " ${bindir}"
->
-> -BBCLASSEXTEND =3D "native nativesdk"
-> +FILES:${PN}-dev +=3D "${includedir} ${libdir}/cmake ${libdir}/pkgconfig"
-> --
-> 2.34.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#109211): https://lists.openembedded.org/g/openembedde=
-d-devel/message/109211
-> Mute This Topic: https://lists.openembedded.org/mt/104800225/3617156
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
-artin.jansa@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
 
