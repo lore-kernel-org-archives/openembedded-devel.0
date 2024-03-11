@@ -1,111 +1,95 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <brgl@bgdev.pl>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ED139C5475B
-	for <webhook@archiver.kernel.org>; Mon, 11 Mar 2024 07:56:17 +0000 (UTC)
-Received: from mailout09.t-online.de (mailout09.t-online.de [194.25.134.84])
- by mx.groups.io with SMTP id smtpd.web10.57072.1710143776526205597
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 01096C54E58
+	for <webhook@archiver.kernel.org>; Mon, 11 Mar 2024 08:19:28 +0000 (UTC)
+Received: from mail-lj1-f181.google.com (mail-lj1-f181.google.com [209.85.208.181])
+ by mx.groups.io with SMTP id smtpd.web10.57469.1710145167241243037
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 11 Mar 2024 00:56:17 -0700
+ Mon, 11 Mar 2024 01:19:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.84, mailfrom: f_l_k@t-online.de)
-Received: from fwd76.aul.t-online.de (fwd76.aul.t-online.de [10.223.144.102])
-	by mailout09.t-online.de (Postfix) with SMTP id 94A6B49317
-	for <openembedded-devel@lists.openembedded.org>; Mon, 11 Mar 2024 08:56:12 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.154.172.233]) by fwd76.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1rjaW3-2NXHu50; Mon, 11 Mar 2024 08:56:11 +0100
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] polkit: remove unneeded workaround
-Date: Mon, 11 Mar 2024 08:56:31 +0100
-Message-ID: <20240311075631.943227-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.44.0
+ dkim=pass header.i=@bgdev-pl.20230601.gappssmtp.com header.s=20230601 header.b=IPX3wkqD;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.208.181, mailfrom: brgl@bgdev.pl)
+Received: by mail-lj1-f181.google.com with SMTP id 38308e7fff4ca-2d3fae963a8so38335031fa.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 11 Mar 2024 01:19:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bgdev-pl.20230601.gappssmtp.com; s=20230601; t=1710145165; x=1710749965; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=kSF+VPD51HcvJmOdpmWKjVpQ9NWYq9idx8Vdg1HaeMI=;
+        b=IPX3wkqDCKUdSH4sIDnNx2yMUso0xw8QDvJt0FJrXNBylfpFx1nyA7UgDjFnHyf12m
+         RY2uqocGuI2fCum5ichz03jTqS4r0oIEAnXIcy6DTvlaz4wSzHZEuh9hMT6Au2GgN3ks
+         ZuJDSGJbKpJEUIQqA4IX3pTjKoH3HcPxTCJ8XVaUHv0m+Iryggj73Lmdx2xLkE1Cl7wk
+         uRQvuTjsu7NEI2sVywy5NeD50qPoLkd3lQkvwbX3BOVPKTq0SsUQpNX7HSTpFDQAuf6U
+         7pumHJKmco6ZfY7bUiV/0yLzFcGFLUYZ5XLHjLl68GqeEhKkDL5FvQULzYmppOqCGxZA
+         c40Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1710145165; x=1710749965;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=kSF+VPD51HcvJmOdpmWKjVpQ9NWYq9idx8Vdg1HaeMI=;
+        b=oOZeaNPDWZWDcdRD5Y3mh015ca8655ql4BIEwFK7TfOvTonF7LuXBm3lBhOIIELt+1
+         UT9JG1PGztiFGYjg2JkbPTqc6BCsV+ZdTiZg4Z2Ex2+qEj1isb3l+nksGo+V1JW1aWeo
+         c1LKqaQJdgZ5tt5PSRS4hM4NmLOMCxW8olZPTR/weMOTSNbcskEeYEyzNoQosxxc002+
+         tuLc2nybiIXV11f9MoANjSYUAb9W2hhqOqxM1yGwerrU8D+4XmYHUC8Q122WxB5Kd7FE
+         3JCC9Dc1X3394wOJobH7iHhK8byFBW8F3XCS6gQHZzobk3sFTVYSdNpQcX062VK4Bn3o
+         dWHA==
+X-Forwarded-Encrypted: i=1; AJvYcCX6Yt/5XrnSIAx6J5XfK7foCU4Ony2AHD6l6MFROZ28oPnCAmrzkYoiheWaWXsAkbTJdn90D8W4HO+TMM2IeNheJdxZLwFPitNETsAGIVtNUQSRp2Y/7/TO+g==
+X-Gm-Message-State: AOJu0YzD0+h6HCGEOeSZCMXEZ6y0kn3ChU+5fWzRCFraHPkLJzKh0Dfq
+	jxv4lYBF+9y16Re6P3ctQ/5JkrhwZc+KS6GBbb9nEYlJnJzI52Y0Xg/B0sjJeDE=
+X-Google-Smtp-Source: AGHT+IGPNxQQZNQ2nXy+afbIeC5Z3ivKvVQ+GRnIMA0AvywAffFNheGpyMdQZD0w+o6q9AdFt1nPCw==
+X-Received: by 2002:a2e:be27:0:b0:2d2:a3bb:e319 with SMTP id z39-20020a2ebe27000000b002d2a3bbe319mr3722110ljq.1.1710145165259;
+        Mon, 11 Mar 2024 01:19:25 -0700 (PDT)
+Received: from brgl-uxlite.home ([2a01:cb1d:334:ac00:2647:282c:79b0:93ed])
+        by smtp.gmail.com with ESMTPSA id g13-20020a05600c310d00b004131bb71c07sm8246601wmo.11.2024.03.11.01.19.24
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 11 Mar 2024 01:19:24 -0700 (PDT)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>,
+	Bruce Ashfield <bruce.ashfield@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Subject: [meta-oe][PATCH] libgpiod: update to v2.1.1
+Date: Mon, 11 Mar 2024 09:19:20 +0100
+Message-Id: <20240311081920.5978-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1710143771-DA7FB94C-B08C6B00/0/0 CLEAN NORMAL
-X-TOI-MSGID: 544722ce-4d09-4318-99b4-0e995e04c345
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 11 Mar 2024 07:56:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109265
+ <openembedded-devel@lists.openembedded.org>; Mon, 11 Mar 2024 08:19:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109266
 
-polkitd doesn't segfault with MemoryDenyWriteExecute=3Dyes anymore
+From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+This is a bug-fix release addressing a couple issues in core libgpiod.
+
+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 ---
- ...ce.in-disable-MemoryDenyWriteExecute.patch | 30 -------------------
- meta-oe/recipes-extended/polkit/polkit_124.bb |  4 +--
- 2 files changed, 1 insertion(+), 33 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/polkit/polkit/0001-polkit.se=
-rvice.in-disable-MemoryDenyWriteExecute.patch
+ .../libgpiod/{libgpiod_2.1.bb => libgpiod_2.1.1.bb}             | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/libgpiod/{libgpiod_2.1.bb => libgpiod_2.1.1.bb} (93%)
 
-diff --git a/meta-oe/recipes-extended/polkit/polkit/0001-polkit.service.i=
-n-disable-MemoryDenyWriteExecute.patch b/meta-oe/recipes-extended/polkit/=
-polkit/0001-polkit.service.in-disable-MemoryDenyWriteExecute.patch
-deleted file mode 100644
-index 4f008f7a9..000000000
---- a/meta-oe/recipes-extended/polkit/polkit/0001-polkit.service.in-disab=
-le-MemoryDenyWriteExecute.patch
-+++ /dev/null
-@@ -1,30 +0,0 @@
--From 95148a804be66092564f81306a02f625d5b8a5d0 Mon Sep 17 00:00:00 2001
--From: Markus Volk <f_l_k@t-online.de>
--Date: Sun, 17 Sep 2023 23:26:59 +0200
--Subject: [PATCH] polkit.service.in: disable MemoryDenyWriteExecute
--
--A few momths ago some hardening options have been added to polkit.servic=
-e.in
--https://gitlab.freedesktop.org/polkit/polkit/-/merge_requests/177/diffs?=
-commit_id=3Dafecbd53696e32bbadd60f431fc7d285f3edd265
--
--and polkitd segfaults with MemoryDenyWriteExecute=3Dyes, at least in my =
-environment
--
--Upstream-Status: Inappropriate [needs further investigation]
--
--Signed-off-by: Markus Volk <f_l_k@t-online.de>
-----
-- data/polkit.service.in | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/data/polkit.service.in b/data/polkit.service.in
--index e6db351..4390cce 100644
----- a/data/polkit.service.in
--+++ b/data/polkit.service.in
--@@ -12,7 +12,7 @@ ExecStart=3D@libprivdir@/polkitd --no-debug
-- User=3D@polkitd_user@
-- LimitMEMLOCK=3D0
-- LockPersonality=3Dyes
---MemoryDenyWriteExecute=3Dyes
--+#MemoryDenyWriteExecute=3Dyes
-- NoNewPrivileges=3Dyes
-- PrivateDevices=3Dyes
-- PrivateNetwork=3Dyes
-diff --git a/meta-oe/recipes-extended/polkit/polkit_124.bb b/meta-oe/reci=
-pes-extended/polkit/polkit_124.bb
-index 3eb0d5280..9e2eb05c6 100644
---- a/meta-oe/recipes-extended/polkit/polkit_124.bb
-+++ b/meta-oe/recipes-extended/polkit/polkit_124.bb
-@@ -4,9 +4,7 @@ HOMEPAGE =3D "http://www.freedesktop.org/wiki/Software/po=
-lkit"
- LICENSE =3D "LGPL-2.0-or-later"
- LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D155db86cdbafa7532b41f39040928=
-3eb"
-=20
--SRC_URI =3D "git://gitlab.freedesktop.org/polkit/polkit.git;protocol=3Dh=
-ttps;branch=3Dmaster \
--           file://0001-polkit.service.in-disable-MemoryDenyWriteExecute.=
-patch \
--           "
-+SRC_URI =3D "git://gitlab.freedesktop.org/polkit/polkit.git;protocol=3Dh=
-ttps;branch=3Dmaster"
-=20
- S =3D "${WORKDIR}/git"
- SRCREV =3D "82f0924dc0eb23b9df68e88dbaf9e07c81940a5a"
---=20
-2.44.0
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_2.1.bb b/meta-oe/recipes-support/libgpiod/libgpiod_2.1.1.bb
+similarity index 93%
+rename from meta-oe/recipes-support/libgpiod/libgpiod_2.1.bb
+rename to meta-oe/recipes-support/libgpiod/libgpiod_2.1.1.bb
+index 33df709a6..c62c9a356 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_2.1.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_2.1.1.bb
+@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = " \
+ 
+ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-2.x:"
+ 
+-SRC_URI[sha256sum] = "fa4024a080121c958502f9a46a5bda44bea85e7a4dd7fcb3dead463b6fc4261c"
++SRC_URI[sha256sum] = "b21913f469d3135680d5516f00fdf9f81d5e564e19ffb690927ea7f1d7e312cb"
+ 
+ # Enable all project features for ptest
+ PACKAGECONFIG[tests] = "--enable-tests --enable-tools --enable-bindings-cxx --enable-gpioset-interactive,--disable-tests,kmod util-linux glib-2.0 catch2 libedit"
+-- 
+2.40.1
 
 
