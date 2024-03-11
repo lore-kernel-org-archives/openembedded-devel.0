@@ -2,39 +2,38 @@ Return-Path: <yi.zhao@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B7FAC54E49
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A850C54791
 	for <webhook@archiver.kernel.org>; Mon, 11 Mar 2024 01:25:36 +0000 (UTC)
 Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.51849.1710120335317073791
+ by mx.groups.io with SMTP id smtpd.web10.51686.1710120334193825550
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 10 Mar 2024 18:25:35 -0700
+ Sun, 10 Mar 2024 18:25:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=oPBpYVJ5;
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=d8U/+kDR;
  spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=3800741b93=yi.zhao@windriver.com)
 Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 42B0vSS2025600
-	for <openembedded-devel@lists.openembedded.org>; Mon, 11 Mar 2024 01:25:34 GMT
+	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 42B0o3Jv015578
+	for <openembedded-devel@lists.openembedded.org>; Mon, 11 Mar 2024 01:25:33 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:in-reply-to:references
-	:content-transfer-encoding:content-type:mime-version; s=
-	PPS06212021; bh=0n0LbxmeARl8+J2N0O9UIBWCIlf+Rf1ujJlEcuNPgg8=; b=
-	oPBpYVJ5WktG0VMTnKakmtsgxHeB7wTaUJMxmSpTdGe+jOjUt2xv1zy3NxipTcTe
-	Wuq+U0bvttQazUYm2qPOwWO8VeUyp3U50hghkPfnvGXqWCz+hH0XsGDahlwjzKfx
-	1g+dxlH7j+ac9gfgvnUGFt8KNGD6UplTvjMdt6tmXVf2BkQo9oygueXIQeDDnJAI
-	cHKfWFUaorVHNMGaKRDGdiQg5qQkiK78B/16cPjwvi7+31cloiX+p6+cs221e8VB
-	MRSxkiG83rm+gNkP7QqE0F1rcY6qTJdVuOF30/aEF92k/nyUyRUidcVh9yCbeeNQ
-	QgUHPH790B8GTHSrm2Y7ow==
-Received: from nam04-dm6-obe.outbound.protection.outlook.com (mail-dm6nam04lp2040.outbound.protection.outlook.com [104.47.73.40])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3wrer6976t-1
+	 h=from:to:subject:date:message-id:content-transfer-encoding
+	:content-type:mime-version; s=PPS06212021; bh=VaRm7aiO8TtZmDjyrQ
+	CPig2RC7/AvaVM3H34y1kfUsk=; b=d8U/+kDRLKrKpHKSmVh78EvwMz8gdXl0VD
+	2sZuCFi4+zkRucWpk7WJ+bPul7JcryX3W9438H1PpD8RhyMYORralM24d+xfD/BB
+	RC4T8rEkC86bSlba0fxJ/1vd73emmT020dZGlctlhdZop+/vstkEiLc1Uqdeuj9+
+	dGMNJyiYg/vedMUcbep6mZEYg46HsbVrCNCM16rbc0Z3IPC70HgKdUIsInsBMHI3
+	ZkwjsyeB6T8gzOYKre+dr6WgFfbVtktfT7B/S4tBUAMbYzEcyYePse1evhxOvaXk
+	RuG9b/Up0VbWhpxkc7uglbwKg1dxpyWzH605pWHriJA30SicwKoQ==
+Received: from nam04-dm6-obe.outbound.protection.outlook.com (mail-dm6nam04lp2041.outbound.protection.outlook.com [104.47.73.41])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3wrer6976s-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 11 Mar 2024 01:25:34 +0000 (GMT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 11 Mar 2024 01:25:33 +0000 (GMT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=TKUytq8+YYJ5Be2hzhl39FYekg6f0AUY6fkiO1iIllT+L/QqvWAcvLGUtlh/SbZgBxIh8/TgKxr8Hmmo1ZASndIGveDjnsymrS/EoZu0hVkpC57dzF0ydUGvB+Ve/VqtCi5aHUS9L+9CJySyhH0Z10zCkfK8kXtpjqtifbB0dtU6pYWFrohCLIFt7luwCWCtcE91n+LNpMyHStVpsK+8G9Dm0JbNRdwXCz9RXnO6B9r7zX4RNqm06BHS+/LM8hSexXYPLDIQjo0oQihlNxnFNtoZ+oicc+JdEnH/lCumGu5cbI7X5BIYOGOUEtpN3uft6zN6JoCLkqDH+FI7X/rrCg==
+ b=Av6w6jfiTM8jQcQXTjJ/VdR2ZZq73LjTHwwLr/jKbaBneCGIsdHG5EJnZOMpDujEqURAsTWHFjr34OnqBt+vxa0qzs18oTcP/NflTjda3KDWWY1WobRWhTJxMXsj2qeNnGA3Y3bESLMPysU+ZZjVggRpNtjFDWuTCUMWauReOG9F/i1sjip8fmHfFAan5d3HO00CDoDqfHEhjOlve172YMLd3K4bkmwLO+5QxYzgU5OEvh8H/Jx3nisOVAcXVi0uqU+0g3ja0yGRuvT3ADEOXyRoQXlqB+Vh/duSNRhQicnsVnCU6TyqBlC6gREh78JVurVpSQVhC5EVELYNvxjQpA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0n0LbxmeARl8+J2N0O9UIBWCIlf+Rf1ujJlEcuNPgg8=;
- b=Hcy/jt1VImZtneidadj39y3JHMeAIGjNrUl3xgzZD+EEnUSewjlMIqikwuCtHqhhGAb5yQ1puftECOH36mIVEhT13+0vdMb/K5esPiMvbCESPe0AX7Kf8eRUx+D7sLybTtmNoPZ0gfSQKx2N+SsI7DLfbHnHTlkKnoTakj7hBGr+r/uSgVQl4DgEhNr9yL9A+60OlvNik8OlwVEQ0bL9vRIZRaF57GFBbf6axNECqQ4jk+AIf8dpaf5c5kXvioIZbbgf4JYhlbrvhEK/Ihxr2xRczNJQvtBj84LypTDmrzc8qK5Aj8neC+8eB3un9xp4TqgxoyuJpGw0jSvxUh8C1A==
+ bh=VaRm7aiO8TtZmDjyrQCPig2RC7/AvaVM3H34y1kfUsk=;
+ b=Ihbp9LaJUjUs34WzlB3nCyQ8yTonozDigPMuEPF95gd8vb7otkMSesih0tebGkTgwnD8YMtTdpigPIWmXhl43rzQ421BZnRdH1To0dTdlCyGwu07KZ1EROnPTI+wyvty/xw2E3DAkYW5M1mhWCPeYZbTkn+OGsb7UJ9csUVFTAVmLfkFzj5CE9KSOfzgBMpmNAgn0Z4Zsl7pzxlfhFZYOSf1JJlsa21BZEHTbU8JzxX/kim78W+1vzPb75gWSKcCHb+4kFyb8upnBHRQN5G0lDt0lzC+AyGgcWDkSr0kp5aXto1Lsm2EiXXW8Khlh2unTHaKe87vgAwd4iO2mWVCfw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -42,19 +41,17 @@ Received: from DS0PR11MB7484.namprd11.prod.outlook.com (2603:10b6:8:14c::10)
  by PH7PR11MB6401.namprd11.prod.outlook.com (2603:10b6:510:1fb::12) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7386.14; Mon, 11 Mar
- 2024 01:25:33 +0000
+ 2024 01:25:31 +0000
 Received: from DS0PR11MB7484.namprd11.prod.outlook.com
  ([fe80::97da:833f:8511:a558]) by DS0PR11MB7484.namprd11.prod.outlook.com
  ([fe80::97da:833f:8511:a558%6]) with mapi id 15.20.7386.014; Mon, 11 Mar 2024
- 01:25:33 +0000
+ 01:25:31 +0000
 From: Yi Zhao <yi.zhao@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH] samba: upgrade 4.19.4 -> 4.19.5
-Date: Mon, 11 Mar 2024 09:25:20 +0800
-Message-Id: <20240311012520.1516794-2-yi.zhao@windriver.com>
+Subject: [meta-oe][PATCH] cryptsetup: upgrade 2.7.0 -> 2.7.1
+Date: Mon, 11 Mar 2024 09:25:19 +0800
+Message-Id: <20240311012520.1516794-1-yi.zhao@windriver.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240311012520.1516794-1-yi.zhao@windriver.com>
-References: <20240311012520.1516794-1-yi.zhao@windriver.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-ClientProxiedBy: SG2PR01CA0133.apcprd01.prod.exchangelabs.com
@@ -63,56 +60,56 @@ X-ClientProxiedBy: SG2PR01CA0133.apcprd01.prod.exchangelabs.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DS0PR11MB7484:EE_|PH7PR11MB6401:EE_
-X-MS-Office365-Filtering-Correlation-Id: be387f0e-8f1b-4c69-be3d-08dc416a2542
+X-MS-Office365-Filtering-Correlation-Id: 32c1a981-edac-475f-ea13-08dc416a245c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	67D/wCq2tsDMnoCHBRLo3RwADqBihdbceof3ugKg4eIjqcf3XbbpZZIyaa/1gcEevH0HrKGIm50JpkJ9USDuQhWxPhE/LZhfCuESpSRUVh7fgN5OZrZE58JqoV+Qd9dCmepxVenrnnZyjdt1vf/Qqt3BvSjnGMcDflC9CsPg5spRvUPvwXogzbJuopwYyg8ogZ+bNpKZJWG5M2XVWlJHQfNRMtkIKIxlMVEgz6PVzed7tuSUsoCaMG0K9ILLQw4M2Wa+IbuSz+B5eF57eiEOvkMIAivTV9QvB42yFFnWdfILi7w9OLizSSVMXHCHn3LewXVTA9H+AfHntmoB5ao8RIVybfi4LmG3fCfBqQZVFYsPnp5bo1HAZCsKY/k3jA5sjlWeDLTxPzmnvlnOZyl5HRYii8RhX2IVAgox0F7dpJ19fPuh4ex5Mm+PIGS34DqJcQv3gSaP0vO7Id122FxVMCGcyykssyR4IFLgnkcu1UC7mU5U8bIziYfXh7FhHo57vUqB8JH29Aqk2PqWaABhNaFdT2LN5RfArr4FOZpN0a3GI2hA0oy8e5rID4sTQbkYa4g8cRMYmfDqj6BFIb9Jg+6YJn19P+Ke7EW41y5uXeffqvquVgj3N4Bf7p3wgPUdCpU/6KTyXouqo7kg2pmOX7wF5bYs81BUIKZlruBce/w=
+	oPzZdRbjeTKzeoy1Mv8ryV3GkM9jz2NDp5AGQ6NserZGvWPmQarfN+sHaUMqE8bUKqGRtiCdmMKYHlkADaN2eG7IMlrUDH69TGRzZDOZeEtkxoTRXkBO4GJJbH9/yKKbR/xcZFYA3ylCZ9Y1i4O9cbvpyE/06EDb8zzjEaWxg4efZ3uqBcOi8hiPMHy8aelZPgdgt/voSwJLCjztkza3p4z2aCrvzOwESY1EQgmEExPUsSP1jM0aElom9AebhbHqG5t9tn8CPhy9v60SMf20nZTI+JAXRYBZ5AH7WWr2/2zgE89ol33ztQGoeoKcmxqHRuxydtquELrvJu9bwBNHxTg8qmBCiKGS33eV+yzvDcyHH37X/Ptit0KGnBpdpA1pewY+4YOhu9I6EV6Y03eSADftEL4FBtCzOA3zd7mJqRIkY6Lk6nL2h6+3+7weUFus1Byi3w3WR7xDcxCMsgfQYrGiuFDyUkdfobkeoSbiu8tkSMlG7X1H6l9Q/imNzzC2eHoKt4/1Oecdj8ZHXAbbZrE7eu16/TxoPnGjORzs/ncqRj/4LE2mr9fmdD2OEuAHpv6q7xyAXsPHIdtgKus3Nb3xdjUOgYJFUlitu3tyVu9vlHAGFSduKW/t+EEXx2d7IZgWa8IfMQSUeQEjC+8elnS+oMuoa32TCDHl1D/DavTUv7htnuVHdXJuptTGDprnGi+eKH/EJucAwyGVjH/5sg==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB7484.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(52116005)(1800799015)(376005)(38350700005);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?SkmNyeQBtjVY4aTHWdfdN7v2g04g+IXTSxJITQEeA1SaGTRnETO8PbC+Az8y?=
- =?us-ascii?Q?BKNhOT2xDothHeOJE+8vX4vKI6k2oXEsZKLzkjqq7p79TpLf7UurcMMiH9t2?=
- =?us-ascii?Q?ZJloNuV0XyghWUR20XCYjszBtHcdBHXlvyD3lkaU7U1rgv5CvVE6Vk2aSSRO?=
- =?us-ascii?Q?csA4Lti4sovlUFYylbqbCEedzvW8775JYtNcRSJyFIw+asFd80SDt70beYrO?=
- =?us-ascii?Q?mCnlhDNuj/BzqmaZacjYVRLG5gHwaUSD5/icXpt0bpcNfJWLANT+E5iD6QJ6?=
- =?us-ascii?Q?F5rS96cIhGlpgfkCPSA2ivnnex3hvsFqiyi7xrAVPv+zP59Qt7BV+FVPSAiy?=
- =?us-ascii?Q?DfHDlVPtGaoh0CZlIfiEyMYgwnVy8wL94QbnWJb8anrBQWrAmMxPCPEKzRVW?=
- =?us-ascii?Q?AxnMX/J1G5VFpavqP4gxAQ9hR3wC3Z1HuEA7N1USluPApRcC4tQoZGhMOvv+?=
- =?us-ascii?Q?OVXysQI9eZWNawW9PXt6Uweqw1YJdVsDdiKG+1/HyxFU4SjkR1QEqgoiQjII?=
- =?us-ascii?Q?3VktTMnVX3rRuEPrIInoK2bzRUMw5s6d+fgeVe0a3mnb12zne0QdVx9SO9tV?=
- =?us-ascii?Q?euWJRUhf17GW9Yk6oSo4OUk54gOpIrFP/VHmo5GvTt5zJBqxjiSIM/Tt3ti0?=
- =?us-ascii?Q?y02ARrM+/Hvh78SYYCzjcWsXu2osGrdmtroMVpzP0yRAGcrD9biYlmcinxkz?=
- =?us-ascii?Q?XLutEtBc62yNx7R8cDSuLr4OKYjhYSrarLFWBc5glvZtPTZg4Pl7FuXmVDq3?=
- =?us-ascii?Q?+IonJI7E62OMxzavKCT35pXGKN1/4si2aNbafQF/anYHRbQsIz4U7gEhhJTM?=
- =?us-ascii?Q?tpYYde81024Vm0XAo25j0gPM5IfLZLV+8jsenlIcgGDRtBxx7wSRR80GyNpU?=
- =?us-ascii?Q?Tn9IPeJMlv7896kyg/BkgumPfaGNplH8DAVL8Knw9s0ASBDL3QTJjXTT8UMH?=
- =?us-ascii?Q?DOVaMk2f5ETA7DEozPBHpvJ7b9GGbDWgd8motdv9WjqWYZa+PhI/vBZA/aZV?=
- =?us-ascii?Q?jsl8ts+Sia7Hq2i2P3L9+FoJasL8/cb7ni8Uje6ZWbKJC2N/5tGORHiJbq4F?=
- =?us-ascii?Q?gIhUZGspCTJ4OQX4M+e/DvsdukolD9BFe9N/ckmkycgZth+vK04N/JngAFsg?=
- =?us-ascii?Q?aKvnJ8JbKAqYJYJxPRetZrf3OTteaUKjw39zmJBfFQFwXiD91qmkhLaE7+7O?=
- =?us-ascii?Q?ozo4Y6DyoF2mGsJcOgVdBHk85Q/bcXMG8uwKOlDGMTCG+g2lnHJJw6H4fKi9?=
- =?us-ascii?Q?XUk0Wy4JqyJhNFVi0XE1t79v0ZECKpUaS6Vu3Cic3R3IxpaEmIqh/MIn30o8?=
- =?us-ascii?Q?Jod3E32WFpkjGiy/FMwHk3CsYKcsEltgc0Pam4CnvQN31bmNVpmgPTtjKQZq?=
- =?us-ascii?Q?aQwPBuZeiG7JofQUcDQjl/d2e4WCpWHi5dBlGOX4YYTxk9hzhH2bP7h+Lueg?=
- =?us-ascii?Q?uyVhVd2EKkmr5R9s6T7uSr0CDv6bOqravQUd3I5M+f+YtjGsPKADKN2htGwk?=
- =?us-ascii?Q?04Omhcb7M35M8ywUqXfjSv4p0W2e/gCnxczA5g2LV2dxVoBpaXoTWIHZKdIu?=
- =?us-ascii?Q?DDJjOwWnXqti5vMAuWM6Bf14VuhDcerDSOatXfpt?=
+	=?us-ascii?Q?wIxd0LBLIFLFBjX4mSXlMfpMN5UGt9phmMdiQJtBOJ+NFoWnh3hZGP4P/5FN?=
+ =?us-ascii?Q?eABAG/dsC/5EVxq8q7+be1HNbQr1kJMHKzPtYQTI235o/hZyb7TyMmyraC7z?=
+ =?us-ascii?Q?9fiJbVs55NaJrwSqbj1Kj9iHq/z43LluHKpa1P/UVw2rMwkHynu/dvvRY14g?=
+ =?us-ascii?Q?ZvTHprYJKgueYB7UmDUDTj59Qru+VrNLJd2B58x2wgO4zpWJgmA1BBsl7YiJ?=
+ =?us-ascii?Q?uMqeTd6t/LpVybMXW9VOZ3ZWwNqPmB7C9gbzTZi7d6OMN9JacqRKnzXJ1tQF?=
+ =?us-ascii?Q?h/j7RBtFgC+D+EBfYttoCfS/jjazBLsjdJXhv+Cja2R+f9Kc/6Bw/Jhsazbr?=
+ =?us-ascii?Q?Mt16zATWVj/S1ZUCNziZp6sEnK29jf/MCQ4r/Am4rKDrsRLhs8ZDDu00Xx2i?=
+ =?us-ascii?Q?R/z3ZPjekBgkuUYLX0Iv2PI/ZuHxBer7f8jGNaNKDCu+KHy7u0yScAMvBQU2?=
+ =?us-ascii?Q?nwXr2DXglXIe4Bs5pXCqmUXB9Hafe9Ed5F9zp8YTSdqKjI0GLu0WLeIKSHxq?=
+ =?us-ascii?Q?0pmD+7LCOQdlhX/8t4OEkOAIURZxuNXNJKEgyYO7dSp3LosEd1IB3IEPjd/R?=
+ =?us-ascii?Q?UPYyOiAo3Sn+5z7OmSAR8YxoTEl0xCeg+7Le9l2gznkOSaCA8bDni7mNN1io?=
+ =?us-ascii?Q?4yGikNmlMve4XcktxCEMOisSE9RkaYH9pG/Xa3o5NuTba9AWN6aTC+pwqs0N?=
+ =?us-ascii?Q?DTc77j1ER6vfiCoimqbf4SfpdLkKagnBCkc0gibZBtnM2HPBk2XYlChAE49R?=
+ =?us-ascii?Q?lsKlnny0O3fUGFu2rXTItfCKx+rYXQfvn+segd1D94VIy2QVH3zpOolOHM2g?=
+ =?us-ascii?Q?DYs/2ZF79X0FVlu1HMI8luAuTPybqJSQNZy65U+2spHyeWBdvdWdYZGT/fhx?=
+ =?us-ascii?Q?Gng86xcJV9lfce3Teab7Ka6zJlUagz+ygMdUX83Hd+yEGzns63AQPQNbOYv7?=
+ =?us-ascii?Q?MdMUY+5mhfHnEc83DOKchnVLzE5cGlEJj/rHqeuwSLJ98dxyiXKeo4cle86+?=
+ =?us-ascii?Q?aF1gs6yEPAhX5HWgaiwDykpZbzJrszO92nmoA7qAFxsmQ/21zG4MPBnPm9d9?=
+ =?us-ascii?Q?pKWXvdD6np5X77IXzUHIkVROld2M3twRbRHQLlFqPHXL+GlDscVPTwbz/b/3?=
+ =?us-ascii?Q?T78z5+XR0Hy1qYKiZO4hMICgZzcOOlTcgH3cwA8Emd5q2hkdb6y/ePsPuTA6?=
+ =?us-ascii?Q?xoPO/YbVrAWAmNr2FeYuZHhexOF9orq0/DaWNOJy3QUWCXnqq5GrA1fTnvme?=
+ =?us-ascii?Q?2uhq2Bfs1Y41SqOwaIF4lM5/CCnrTR5i2xRPtvTRVgExPv+vXTDkHSJQfmvF?=
+ =?us-ascii?Q?zFIqyhXSL4PKrz/N7OsmK7v4k+Koq0Em0Qw75jwh4DWrBWB+9hrwuEGHt5pS?=
+ =?us-ascii?Q?7EDiR7ScYnqF7WrlgPj1zFmPsbY7Tw0XuCcS9sH34qBJ6XwtTQvEDgxQI0q8?=
+ =?us-ascii?Q?Glh5j8v+IGSXxPYrTLsYc8fo6rv1dU6hJTuzszcCSjr1w5cs4lZn/C1kVvZG?=
+ =?us-ascii?Q?upCrYS6Oh6tpsjS/QBhcBeuMhbg4Sde34oax55QDzSSIhDkWdlWK/qvYRXcc?=
+ =?us-ascii?Q?Hu3XNxPzPCvUyMmGSmfXVQsBz84xgLOAro7jVg+Q?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: be387f0e-8f1b-4c69-be3d-08dc416a2542
+X-MS-Exchange-CrossTenant-Network-Message-Id: 32c1a981-edac-475f-ea13-08dc416a245c
 X-MS-Exchange-CrossTenant-AuthSource: DS0PR11MB7484.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Mar 2024 01:25:32.9239
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Mar 2024 01:25:31.4111
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: nMuhAd4gvMtcgMIoNgZnK1gOtOtRJ9XBJ1WOHImg0+8Nua9S+5cOBh5K2t8d4hDIKoGhWCpcfV29w11vAJjjdQ==
+X-MS-Exchange-CrossTenant-UserPrincipalName: uNZ9yiBlAXcyrbbtdAtnh9w46kNj14kMbdVPoSw1zjEj3iG+D1jPFbaTtomKZqunU1aodv7I+x76fdelDKyMpg==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR11MB6401
-X-Proofpoint-ORIG-GUID: -ou649DKQME-X3Ff-G0PMt1wq96nvyNN
-X-Proofpoint-GUID: -ou649DKQME-X3Ff-G0PMt1wq96nvyNN
+X-Proofpoint-ORIG-GUID: WokM-bFTHua6og7tORmgIyzhdDiXpcRI
+X-Proofpoint-GUID: WokM-bFTHua6og7tORmgIyzhdDiXpcRI
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2024-03-10_16,2024-03-06_01,2023-05-22_02
@@ -125,46 +122,57 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 11 Mar 2024 01:25:36 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109261
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109260
 
-Release Notes:
-https://www.samba.org/samba/history/samba-4.19.5.html
+Cryptsetup 2.7.1 Release Notes
+==============================
+Stable bug-fix release with minor extensions.
 
-Specify --pythondir to fix do_package_qa QA Issue:
-WARNING: samba-4.19.5-r0 do_package_qa: QA Issue: File
-/usr/lib/libsamba-util.so.0.0.1 in package libsamba-util contains
-reference to TMPDIR [buildpaths]
+Changes since version 2.7.0
+* Fix interrupted LUKS1 decryption resume.
+  With the replacement of the cryptsetup-reencrypt tool by the cryptsetup
+  reencrypt command, resuming the interrupted LUKS1 decryption operation
+  could fail. LUKS2 was not affected.
+
+* Allow --link-vk-to-keyring with --test-passphrase option.
+  This option allows uploading the volume key in a user-specified kernel
+  keyring without activating the device.
+
+* Fix crash when --active-name was used in decryption initialization.
+
+* Updates and changes to man pages, including indentation, sorting options
+  alphabetically, fixing mistakes in crypt_set_keyring_to_link, and
+  fixing some typos.
+
+* Fix compilation with libargon2 when --disable-internal-argon2 was used.
+
+* Do not require installed argon2.h header and never compile internal
+  libargon2 code if the crypto library directly supports Argon2.
+
+* Fixes to regression tests to support older Linux distributions.
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- .../samba/{samba_4.19.4.bb => samba_4.19.5.bb}                 | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
- rename meta-networking/recipes-connectivity/samba/{samba_4.19.4.bb => samba_4.19.5.bb} (98%)
+ .../cryptsetup/{cryptsetup_2.7.0.bb => cryptsetup_2.7.1.bb}     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-crypto/cryptsetup/{cryptsetup_2.7.0.bb => cryptsetup_2.7.1.bb} (98%)
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.19.4.bb b/meta-networking/recipes-connectivity/samba/samba_4.19.5.bb
+diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.7.0.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.7.1.bb
 similarity index 98%
-rename from meta-networking/recipes-connectivity/samba/samba_4.19.4.bb
-rename to meta-networking/recipes-connectivity/samba/samba_4.19.5.bb
-index 9e02afd0f..f5ef86dd4 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.19.4.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.19.5.bb
-@@ -31,7 +31,7 @@ SRC_URI:append:libc-musl = " \
-            file://samba-4.3.9-remove-getpwent_r.patch \
-            "
+rename from meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.7.0.bb
+rename to meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.7.1.bb
+index c5e84b1f0..53162cb94 100644
+--- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.7.0.bb
++++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.7.1.bb
+@@ -20,7 +20,7 @@ DEPENDS:append:libc-musl = " argp-standalone"
+ LDFLAGS:append:libc-musl = " -largp"
  
--SRC_URI[sha256sum] = "4026d93b866db198c8ca1685b0f5d52793f65c6e63cb364163af661fdff0968c"
-+SRC_URI[sha256sum] = "0e2405b4cec29d0459621f4340a1a74af771ec7cffedff43250cad7f1f87605e"
+ SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}/${BP}.tar.xz"
+-SRC_URI[sha256sum] = "94003a00cd5a81944f45e8dc529e0cfd2a6ff629bd2cd21cf5e574e465daf795"
++SRC_URI[sha256sum] = "da5d1419e2a86e01aa32fd79582cd54d208857cb541bca2fd426a5ff1aaabbc3"
  
- UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.19(\.\d+)+).tar.gz"
+ inherit autotools gettext pkgconfig
  
-@@ -122,6 +122,7 @@ EXTRA_OECONF += "--enable-fhs \
-                  --with-profiling-data \
-                  --with-libiconv=${STAGING_DIR_HOST}${prefix} \
-                  --with-pam --with-pammodulesdir=${base_libdir}/security \
-+                 --pythondir=${PYTHON_SITEPACKAGES_DIR} \
-                 "
- 
- LDFLAGS += "-Wl,-z,relro,-z,now ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
 -- 
 2.25.1
 
