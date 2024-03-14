@@ -2,213 +2,513 @@ Return-Path: <danismostlikely@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D107C54E66
-	for <webhook@archiver.kernel.org>; Thu, 14 Mar 2024 01:05:32 +0000 (UTC)
-Received: from mail-il1-f171.google.com (mail-il1-f171.google.com [209.85.166.171])
- by mx.groups.io with SMTP id smtpd.web10.711.1710378330443285925
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 63D7BC54E58
+	for <webhook@archiver.kernel.org>; Thu, 14 Mar 2024 01:08:22 +0000 (UTC)
+Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com [209.85.128.178])
+ by mx.groups.io with SMTP id smtpd.web11.779.1710378495930684037
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 13 Mar 2024 18:05:30 -0700
+ Wed, 13 Mar 2024 18:08:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=S3WqxMXU;
- spf=pass (domain: gmail.com, ip: 209.85.166.171, mailfrom: danismostlikely@gmail.com)
-Received: by mail-il1-f171.google.com with SMTP id e9e14a558f8ab-36524116e30so1376575ab.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 13 Mar 2024 18:05:30 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=H4uNIx9p;
+ spf=pass (domain: gmail.com, ip: 209.85.128.178, mailfrom: danismostlikely@gmail.com)
+Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-60a3c48e70fso5465567b3.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 13 Mar 2024 18:08:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1710378329; x=1710983129; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=6JP/1akvVswSpWq+lXspPvpermPkbV8jYUSAvWKxbFc=;
-        b=S3WqxMXUUxF9KWVfgkVFceF1ejE4c1IUwhBKs1lGpn1xe80ze+lPZttHceFAxKt2sn
-         BX08s39c3y7wg2HL9yx1x1IX6Mm1AikwBOPwjxmfVLPc3m01E4xbmbBOZANG8wb3LffG
-         rIciP7qbvH58CZL4bjHxb9sZTsV5wlIPhF8aymrqT3jptC8qCq07EsBQKMaxUPXvdoFm
-         R4Sn+TgKDx2JwlawcarXVhcNuKyB5RkPT0ONNlIvPlm0c73A+cB3rDZN/3ULzMTcy1k2
-         APPEkBlEZVStUlpvUoCOlM1w7Omx0LqUJYvusCh3Glhaf8Sb9y/L+9t1gfvv6XdNyQg8
-         fHZA==
+        d=gmail.com; s=20230601; t=1710378495; x=1710983295; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=5xxWHMmmXnXyBzZhjsnjmradchvTwv5EQ0E0mrL4hFQ=;
+        b=H4uNIx9p0KEz5jRGK9aMzvRvoDZzMY0YWMTpeHtLiYieRoq1XkcXzqshYgrGicsbMb
+         SeCYemJv+H6yurBgWqSPrjEddefIFhcBvnuZ8s+NZ0sXYf7dczBKszvBP3adVWx7VTdn
+         bsGvJG1EHbybPZyWUtAEZqDe/c1fFHKb/v1r/zoO9XhoE6Z9+B/vCDy5UR9h1RjeneBz
+         R5Shr0Q5Yzkrn8tRfhW9sVWUtEYCpeScwJVfgplwIcAEKHnfDPIQqSneVVu630XNJRj+
+         2RXfwEfKZeYxKt7bsb+dUTF+pV7JtH/Kp/oGIN2dw5/vL1cI5S+XXjUHWyoFY9Exeer8
+         GoSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710378329; x=1710983129;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1710378495; x=1710983295;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=6JP/1akvVswSpWq+lXspPvpermPkbV8jYUSAvWKxbFc=;
-        b=uMN4jbnkCIyfVkcqBm/m3ZIMQwG28Tue/VtK1U8T5o/J7vtQqJCBnPdpmi7QgW6By4
-         In5zqGDsIlo/bbSoY0FYqYxq0jz5UbzTgh/XvwtBkPyni1I443SJcBcrtauyeDgnPb3j
-         am0pSUiQJk3uSigQ8+Nou5yq3+n/DUlhwcRGgmQ1IXDTPZYFl5ge9yyiMMMeKDfmKRr4
-         eXFdyMyQ0LAr8UqGoHjNLJkd3w/4XpkTtHFJe4nWJsQRpoSQzMG/Mxo0xbogxeyua+0g
-         lp9Fkv61GxfTTuy9BhzUYng4SGpnbZHVZgO5xSWmUJPVO8UjUbCggaF7lPzu2gQ+oqt6
-         S9AA==
-X-Gm-Message-State: AOJu0YxJdI4hLRDn4PG30YDLtLpzeq+wBQguF9uP/pqp334K0C6tuPtq
-	Uyi4+tcjy5g53l4MDz4PKechnL2mkGO8rLjCZaDs5biGp2kmtbF64PwdtnEQAio=
-X-Google-Smtp-Source: AGHT+IHZzdE8VAOm6pmH1tkZEAKRu4KPplaOgke4rmKpt85DfRZZLl+XCIAUhSg/pY+EbRFE/MjMaA==
-X-Received: by 2002:a92:d78e:0:b0:366:4ca0:c290 with SMTP id d14-20020a92d78e000000b003664ca0c290mr291882iln.11.1710378329488;
-        Wed, 13 Mar 2024 18:05:29 -0700 (PDT)
-Received: from nebuchadnezzar.home.dankm.pro ([204.83.204.143])
-        by smtp.gmail.com with ESMTPSA id m18-20020a92c532000000b003667fb9130bsm105701ili.85.2024.03.13.18.05.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 13 Mar 2024 18:05:29 -0700 (PDT)
-From: Dan McGregor <danismostlikely@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Dan McGregor <dan.mcgregor@vecima.com>
-Subject: [meta-python][PATCH v2] python3-pylint: Fix ptest failures
-Date: Wed, 13 Mar 2024 19:05:21 -0600
-Message-ID: <20240314010521.1841026-1-danismostlikely@gmail.com>
-X-Mailer: git-send-email 2.41.0
+        bh=5xxWHMmmXnXyBzZhjsnjmradchvTwv5EQ0E0mrL4hFQ=;
+        b=ZkO7XDMEoJINYIGd1EaH4ZvQ8TyEWRxr3Hha0jE3lV+OWbl5ML6CSl1tJy6ihWcf4f
+         V3gsIdNANNE1y51DBr0ebxZrYuP4xAkVcrcIKwFod+va8msJ3LLsCDdOsN6i7tK/WcKO
+         HOK8Wyj5Uaq6XhKZ/sddZdxoifqbDl40SVyO3y6x4Y59VfdN1vVMBRlrG6zCXxWUy/PI
+         R1JEJHGwCYHup5s2hTDzf+jVH08r4uqxu2BbZJ2G5Pl3uulXaVYSmSvQBUFZEtWFW95l
+         IEPD9rKkUyGh2tgNzEqow77bDDWKrwVmooQXkeeQQ6GgM5lV41KDEz7LojpSHAeRoeIp
+         5fJw==
+X-Gm-Message-State: AOJu0Yz5xonba3MuxFqV1V7PREB/aYtmwiktmndJb1D3Y4rWbIYGp1/4
+	wLRyuuK30sKFPhQUltOgfKeJDiNIL241RgN64ITvFHNx86wRa4Was77tHrusMJ8NKbQL+on2c8G
+	XoFFBhyIJscjj44viXCwYWP+BC2w=
+X-Google-Smtp-Source: AGHT+IFG5u2IhWHF9mhy+oD4YZ1eB49wV20toaOn7SYI5p9UdOAeIP3Im2ga1lNwUmN7XpqNCSwRX3Ii8+AatxqajMQ=
+X-Received: by 2002:a81:5c55:0:b0:60a:434b:ab29 with SMTP id
+ q82-20020a815c55000000b0060a434bab29mr330035ywb.26.1710378495032; Wed, 13 Mar
+ 2024 18:08:15 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: base64
+References: <17BC7C079BEBAD71.17826@lists.openembedded.org>
+In-Reply-To: <17BC7C079BEBAD71.17826@lists.openembedded.org>
+From: Dan McGregor <danismostlikely@gmail.com>
+Date: Wed, 13 Mar 2024 19:08:02 -0600
+Message-ID: <CACS+7ZT1A+kjJZFPO5KVbABwcx_=KfyM8eJOUp32jLHr-aqicw@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH v2] python3-pylint: Fix ptest failures
+To: Dan McGregor <danismostlikely@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
+	Dan McGregor <dan.mcgregor@vecima.com>
+Content-Type: multipart/alternative; boundary="000000000000a0c4d2061394861e"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 14 Mar 2024 01:05:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109307
+ <openembedded-devel@lists.openembedded.org>; Thu, 14 Mar 2024 01:08:22 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109308
 
-RnJvbTogRGFuIE1jR3JlZ29yIDxkYW4ubWNncmVnb3JAdmVjaW1hLmNvbT4KCkR1ZSB0byB0aGUg
-d2F5IHdlIGluc3RhbGwgcHRlc3RzLCBzb21lIGltcG9ydHMgc3dpdGNoIGZyb20KZmlyc3QgcGFy
-dHkgdG8gdGhpcmQgcGFydHkuIFVwZGF0ZSB0ZXN0IGV4cGVjdGF0aW9ucwoKU2lnbmVkLW9mZi1i
-eTogRGFuIE1jR3JlZ29yIDxkYW4ubWNncmVnb3JAdmVjaW1hLmNvbT4KLS0tCiAuLi4xLUFkanVz
-dC10ZXN0LWV4cGVjdGF0aW9ucy1mb3ItcHRlc3QucGF0Y2ggfCA0NCArKysrKysrKysrKysrKysr
-KysrCiAuLi4vcHl0aG9uL3B5dGhvbjMtcHlsaW50XzMuMS4wLmJiICAgICAgICAgICAgfCAgMSAr
-CiAyIGZpbGVzIGNoYW5nZWQsIDQ1IGluc2VydGlvbnMoKykKIGNyZWF0ZSBtb2RlIDEwMDY0NCBt
-ZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24zLXB5bGludC8wMDAxLUFk
-anVzdC10ZXN0LWV4cGVjdGF0aW9ucy1mb3ItcHRlc3QucGF0Y2gKCmRpZmYgLS1naXQgYS9tZXRh
-LXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24zLXB5bGludC8wMDAxLUFkanVz
-dC10ZXN0LWV4cGVjdGF0aW9ucy1mb3ItcHRlc3QucGF0Y2ggYi9tZXRhLXB5dGhvbi9yZWNpcGVz
-LWRldnRvb2xzL3B5dGhvbi9weXRob24zLXB5bGludC8wMDAxLUFkanVzdC10ZXN0LWV4cGVjdGF0
-aW9ucy1mb3ItcHRlc3QucGF0Y2gKbmV3IGZpbGUgbW9kZSAxMDA2NDQKaW5kZXggMDAwMDAwMDAw
-MDAuLjhlZGVjYmYxYmQxCi0tLSAvZGV2L251bGwKKysrIGIvbWV0YS1weXRob24vcmVjaXBlcy1k
-ZXZ0b29scy9weXRob24vcHl0aG9uMy1weWxpbnQvMDAwMS1BZGp1c3QtdGVzdC1leHBlY3RhdGlv
-bnMtZm9yLXB0ZXN0LnBhdGNoCkBAIC0wLDAgKzEsNDQgQEAKK0Zyb20gZjNhMjEzY2Y0OTIyYzEy
-MmU1NTQyNzdlYTIwMzFjMGM1NGNkM2ZlNSBNb24gU2VwIDE3IDAwOjAwOjAwIDIwMDEKK0Zyb206
-IERhbiBNY0dyZWdvciA8ZGFuLm1jZ3JlZ29yQHZlY2ltYS5jb20+CitEYXRlOiBXZWQsIDEzIE1h
-ciAyMDI0IDE0OjA4OjI1IC0wNjAwCitTdWJqZWN0OiBbUEFUQ0hdIEFkanVzdCB0ZXN0IGV4cGVj
-dGF0aW9ucyBmb3IgcHRlc3QKKworQmVjYXVzZSBvZiB0aGUgd2F5IHdlIGluc3RhbGwgcHRlc3Rz
-LCBzb21lIGZpcnN0IHBhcnR5IGltcG9ydHMKK2JlY2FtZSB0aGlyZCBwYXJ0eS4gUmVmbGVjdCB0
-aGF0IGluIHRoZSB0ZXN0IGNhc2UuCisKK1Vwc3RyZWFtLVN0YXR1czogSW5hcHByb3ByaWF0ZSAo
-ZW1iZWRkZWQgc3BlY2lmaWMpCitTaWduZWQtb2ZmLWJ5OiBEYW4gTWNHcmVnb3IgPGRhbi5tY2dy
-ZWdvckB2ZWNpbWEuY29tPgorLS0tCisgdGVzdHMvZnVuY3Rpb25hbC93L3dyb25nX2ltcG9ydF9v
-cmRlci50eHQgfCAyMiArKysrKysrKysrKy0tLS0tLS0tLS0tCisgMSBmaWxlIGNoYW5nZWQsIDEx
-IGluc2VydGlvbnMoKyksIDExIGRlbGV0aW9ucygtKQorCitkaWZmIC0tZ2l0IGEvdGVzdHMvZnVu
-Y3Rpb25hbC93L3dyb25nX2ltcG9ydF9vcmRlci50eHQgYi90ZXN0cy9mdW5jdGlvbmFsL3cvd3Jv
-bmdfaW1wb3J0X29yZGVyLnR4dAoraW5kZXggMDY4ZDIxNDBkLi45NTk0ZmY5ZTAgMTAwNjQ0Cist
-LS0gYS90ZXN0cy9mdW5jdGlvbmFsL3cvd3JvbmdfaW1wb3J0X29yZGVyLnR4dAorKysrIGIvdGVz
-dHMvZnVuY3Rpb25hbC93L3dyb25nX2ltcG9ydF9vcmRlci50eHQKK0BAIC0zLDE0ICszLDE0IEBA
-IHdyb25nLWltcG9ydC1vcmRlcjoxNDowOjE0OjEwOjoic3RhbmRhcmQgaW1wb3J0ICIic3lzIiIg
-c2hvdWxkIGJlIHBsYWNlZCBiZWZvcmUKKyB3cm9uZy1pbXBvcnQtb3JkZXI6MTU6MDoxNToxNTo6
-InN0YW5kYXJkIGltcG9ydCAiImRhdGV0aW1lIiIgc2hvdWxkIGJlIHBsYWNlZCBiZWZvcmUgdGhp
-cmQgcGFydHkgaW1wb3J0cyAiInNpeCIiLCAiImFzdHJvaWQuYXJlX2V4Y2x1c2l2ZSIiIjpVTkRF
-RklORUQNCisgd3JvbmctaW1wb3J0LW9yZGVyOjE4OjA6MTg6MjI6OiJ0aGlyZCBwYXJ0eSBpbXBv
-cnQgIiJ0b3RhbGx5X21pc3NpbmciIiBzaG91bGQgYmUgcGxhY2VkIGJlZm9yZSBsb2NhbCBpbXBv
-cnQgIiJwYWNrYWdlLkNsYXNzIiIiOlVOREVGSU5FRA0KKyB3cm9uZy1pbXBvcnQtb3JkZXI6MjA6
-MDoyMDoxNDo6InRoaXJkIHBhcnR5IGltcG9ydCAiImFzdHJvaWQiIiBzaG91bGQgYmUgcGxhY2Vk
-IGJlZm9yZSBsb2NhbCBpbXBvcnRzICIicGFja2FnZS5DbGFzcyIiLCAiIi5wYWNrYWdlIiIiOlVO
-REVGSU5FRA0KKy13cm9uZy1pbXBvcnQtb3JkZXI6MjI6MDoyMjoyMjo6ImZpcnN0IHBhcnR5IGlt
-cG9ydCAiInB5bGludC5jaGVja2VycyIiIHNob3VsZCBiZSBwbGFjZWQgYmVmb3JlIGxvY2FsIGlt
-cG9ydHMgIiJwYWNrYWdlLkNsYXNzIiIsICIiLnBhY2thZ2UiIiwgIiIucGFja2FnZTIiIiI6VU5E
-RUZJTkVEDQorLXdyb25nLWltcG9ydC1vcmRlcjoyMzowOjIzOjI1OjoiZmlyc3QgcGFydHkgaW1w
-b3J0ICIicHlsaW50LmNvbmZpZyIiIHNob3VsZCBiZSBwbGFjZWQgYmVmb3JlIGxvY2FsIGltcG9y
-dHMgIiJwYWNrYWdlLkNsYXNzIiIsICIiLnBhY2thZ2UiIiwgIiIucGFja2FnZTIiIiI6VU5ERUZJ
-TkVEDQorLXdyb25nLWltcG9ydC1vcmRlcjoyNDowOjI0OjE3OjoiZmlyc3QgcGFydHkgaW1wb3J0
-ICIicHlsaW50LnN5cyIiIHNob3VsZCBiZSBwbGFjZWQgYmVmb3JlIGxvY2FsIGltcG9ydHMgIiJw
-YWNrYWdlLkNsYXNzIiIsICIiLnBhY2thZ2UiIiwgIiIucGFja2FnZTIiIiI6VU5ERUZJTkVEDQor
-LXdyb25nLWltcG9ydC1vcmRlcjoyNTowOjI1OjI4OjoiZmlyc3QgcGFydHkgaW1wb3J0ICIicHls
-aW50LnB5cmV2ZXJzZSIiIHNob3VsZCBiZSBwbGFjZWQgYmVmb3JlIGxvY2FsIGltcG9ydHMgIiJw
-YWNrYWdlLkNsYXNzIiIsICIiLnBhY2thZ2UiIiwgIiIucGFja2FnZTIiIiI6VU5ERUZJTkVEDQor
-LXdyb25nLWltcG9ydC1vcmRlcjozMDowOjMwOjQwOjoidGhpcmQgcGFydHkgaW1wb3J0ICIic2l4
-Lm1vdmVzLnVybGxpYi5wYXJzZS5xdW90ZSIiIHNob3VsZCBiZSBwbGFjZWQgYmVmb3JlIGZpcnN0
-IHBhcnR5IGltcG9ydHMgIiJweWxpbnQuY2hlY2tlcnMiIiwgIiJweWxpbnQuY29uZmlnIiIsICIi
-cHlsaW50LnN5cyIiLCAiInB5bGludC5weXJldmVyc2UiIiBhbmQgbG9jYWwgaW1wb3J0cyAiInBh
-Y2thZ2UuQ2xhc3MiIiwgIiIucGFja2FnZSIiLCAiIi5wYWNrYWdlMiIiICguLi4pICIicGFja2Fn
-ZTMuQ2xhc3MzIiIsICIiLnBhY2thZ2U0IiIsICIicGFja2FnZTQuQ2xhc3M0IiIiOlVOREVGSU5F
-RA0KKy13cm9uZy1pbXBvcnQtb3JkZXI6MzE6MDozMToyMzo6ImZpcnN0IHBhcnR5IGltcG9ydCAi
-InB5bGludC5jb25zdGFudHMiIiBzaG91bGQgYmUgcGxhY2VkIGJlZm9yZSBsb2NhbCBpbXBvcnRz
-ICIicGFja2FnZS5DbGFzcyIiLCAiIi5wYWNrYWdlIiIsICIiLnBhY2thZ2UyIiIgKC4uLikgIiJw
-YWNrYWdlMy5DbGFzczMiIiwgIiIucGFja2FnZTQiIiwgIiJwYWNrYWdlNC5DbGFzczQiIiI6VU5E
-RUZJTkVEDQorLXdyb25nLWltcG9ydC1vcmRlcjozMjowOjMyOjE5Ojoic3RhbmRhcmQgaW1wb3J0
-ICIicmUiIiBzaG91bGQgYmUgcGxhY2VkIGJlZm9yZSB0aGlyZCBwYXJ0eSBpbXBvcnRzICIic2l4
-IiIsICIiYXN0cm9pZC5hcmVfZXhjbHVzaXZlIiIsICIidW51c2VkX2ltcG9ydCIiLCAiInRvdGFs
-bHlfbWlzc2luZyIiLCAiImFzdHJvaWQiIiwgIiJzaXgubW92ZXMudXJsbGliLnBhcnNlLnF1b3Rl
-IiIsIGZpcnN0IHBhcnR5IGltcG9ydHMgIiJweWxpbnQuY2hlY2tlcnMiIiwgIiJweWxpbnQuY29u
-ZmlnIiIsICIicHlsaW50LnN5cyIiLCAiInB5bGludC5weXJldmVyc2UiIiwgIiJweWxpbnQuY29u
-c3RhbnRzIiIsIGFuZCBsb2NhbCBpbXBvcnRzICIicGFja2FnZS5DbGFzcyIiLCAiIi5wYWNrYWdl
-IiIsICIiLnBhY2thZ2UyIiIgKC4uLikgIiJwYWNrYWdlMy5DbGFzczMiIiwgIiIucGFja2FnZTQi
-IiwgIiJwYWNrYWdlNC5DbGFzczQiIiI6VU5ERUZJTkVEDQorLXdyb25nLWltcG9ydC1vcmRlcjoz
-MjowOjMyOjE5OjoidGhpcmQgcGFydHkgaW1wb3J0ICIicmVxdWVzdHMiIiBzaG91bGQgYmUgcGxh
-Y2VkIGJlZm9yZSBmaXJzdCBwYXJ0eSBpbXBvcnRzICIicHlsaW50LmNoZWNrZXJzIiIsICIicHls
-aW50LmNvbmZpZyIiLCAiInB5bGludC5zeXMiIiwgIiJweWxpbnQucHlyZXZlcnNlIiIsICIicHls
-aW50LmNvbnN0YW50cyIiIGFuZCBsb2NhbCBpbXBvcnRzICIicGFja2FnZS5DbGFzcyIiLCAiIi5w
-YWNrYWdlIiIsICIiLnBhY2thZ2UyIiIgKC4uLikgIiJwYWNrYWdlMy5DbGFzczMiIiwgIiIucGFj
-a2FnZTQiIiwgIiJwYWNrYWdlNC5DbGFzczQiIiI6VU5ERUZJTkVEDQorLXdyb25nLWltcG9ydC1v
-cmRlcjozMzowOjMzOjI0OjoiZmlyc3QgcGFydHkgaW1wb3J0ICIicHlsaW50LmV4Y2VwdGlvbnMi
-IiBzaG91bGQgYmUgcGxhY2VkIGJlZm9yZSBsb2NhbCBpbXBvcnRzICIicGFja2FnZS5DbGFzcyIi
-LCAiIi5wYWNrYWdlIiIsICIiLnBhY2thZ2UyIiIgKC4uLikgIiJwYWNrYWdlMy5DbGFzczMiIiwg
-IiIucGFja2FnZTQiIiwgIiJwYWNrYWdlNC5DbGFzczQiIiI6VU5ERUZJTkVEDQorLXdyb25nLWlt
-cG9ydC1vcmRlcjozNDowOjM0OjIxOjoiZmlyc3QgcGFydHkgaW1wb3J0ICIicHlsaW50Lm1lc3Nh
-Z2UiIiBzaG91bGQgYmUgcGxhY2VkIGJlZm9yZSBsb2NhbCBpbXBvcnRzICIicGFja2FnZS5DbGFz
-cyIiLCAiIi5wYWNrYWdlIiIsICIiLnBhY2thZ2UyIiIgKC4uLikgIiJwYWNrYWdlMy5DbGFzczMi
-IiwgIiIucGFja2FnZTQiIiwgIiJwYWNrYWdlNC5DbGFzczQiIiI6VU5ERUZJTkVEDQorLXdyb25n
-LWltcG9ydC1vcmRlcjozNTowOjM1OjExOjoic3RhbmRhcmQgaW1wb3J0ICIidGltZSIiIHNob3Vs
-ZCBiZSBwbGFjZWQgYmVmb3JlIHRoaXJkIHBhcnR5IGltcG9ydHMgIiJzaXgiIiwgIiJhc3Ryb2lk
-LmFyZV9leGNsdXNpdmUiIiwgIiJ1bnVzZWRfaW1wb3J0IiIgKC4uLikgIiJhc3Ryb2lkIiIsICIi
-c2l4Lm1vdmVzLnVybGxpYi5wYXJzZS5xdW90ZSIiLCAiInJlcXVlc3RzIiIsIGZpcnN0IHBhcnR5
-IGltcG9ydHMgIiJweWxpbnQuY2hlY2tlcnMiIiwgIiJweWxpbnQuY29uZmlnIiIsICIicHlsaW50
-LnN5cyIiICguLi4pICIicHlsaW50LmNvbnN0YW50cyIiLCAiInB5bGludC5leGNlcHRpb25zIiIs
-ICIicHlsaW50Lm1lc3NhZ2UiIiwgYW5kIGxvY2FsIGltcG9ydHMgIiJwYWNrYWdlLkNsYXNzIiIs
-ICIiLnBhY2thZ2UiIiwgIiIucGFja2FnZTIiIiAoLi4uKSAiInBhY2thZ2UzLkNsYXNzMyIiLCAi
-Ii5wYWNrYWdlNCIiLCAiInBhY2thZ2U0LkNsYXNzNCIiIjpVTkRFRklORUQNCisrd3JvbmctaW1w
-b3J0LW9yZGVyOjIyOjA6MjI6MjI6OiJ0aGlyZCBwYXJ0eSBpbXBvcnQgIiJweWxpbnQuY2hlY2tl
-cnMiIiBzaG91bGQgYmUgcGxhY2VkIGJlZm9yZSBsb2NhbCBpbXBvcnRzICIicGFja2FnZS5DbGFz
-cyIiLCAiIi5wYWNrYWdlIiIsICIiLnBhY2thZ2UyIiIiOlVOREVGSU5FRA0KKyt3cm9uZy1pbXBv
-cnQtb3JkZXI6MjM6MDoyMzoyNTo6InRoaXJkIHBhcnR5IGltcG9ydCAiInB5bGludC5jb25maWci
-IiBzaG91bGQgYmUgcGxhY2VkIGJlZm9yZSBsb2NhbCBpbXBvcnRzICIicGFja2FnZS5DbGFzcyIi
-LCAiIi5wYWNrYWdlIiIsICIiLnBhY2thZ2UyIiIiOlVOREVGSU5FRA0KKyt3cm9uZy1pbXBvcnQt
-b3JkZXI6MjQ6MDoyNDoxNzo6InRoaXJkIHBhcnR5IGltcG9ydCAiInB5bGludC5zeXMiIiBzaG91
-bGQgYmUgcGxhY2VkIGJlZm9yZSBsb2NhbCBpbXBvcnRzICIicGFja2FnZS5DbGFzcyIiLCAiIi5w
-YWNrYWdlIiIsICIiLnBhY2thZ2UyIiIiOlVOREVGSU5FRA0KKyt3cm9uZy1pbXBvcnQtb3JkZXI6
-MjU6MDoyNToyODo6InRoaXJkIHBhcnR5IGltcG9ydCAiInB5bGludC5weXJldmVyc2UiIiBzaG91
-bGQgYmUgcGxhY2VkIGJlZm9yZSBsb2NhbCBpbXBvcnRzICIicGFja2FnZS5DbGFzcyIiLCAiIi5w
-YWNrYWdlIiIsICIiLnBhY2thZ2UyIiIiOlVOREVGSU5FRA0KKyt3cm9uZy1pbXBvcnQtb3JkZXI6
-MzA6MDozMDo0MDo6InRoaXJkIHBhcnR5IGltcG9ydCAiInNpeC5tb3Zlcy51cmxsaWIucGFyc2Uu
-cXVvdGUiIiBzaG91bGQgYmUgcGxhY2VkIGJlZm9yZSBsb2NhbCBpbXBvcnRzICIicGFja2FnZS5D
-bGFzcyIiLCAiIi5wYWNrYWdlIiIsICIiLnBhY2thZ2UyIiIgKC4uLikgIiJwYWNrYWdlMy5DbGFz
-czMiIiwgIiIucGFja2FnZTQiIiwgIiJwYWNrYWdlNC5DbGFzczQiIiI6VU5ERUZJTkVEDQorK3dy
-b25nLWltcG9ydC1vcmRlcjozMTowOjMxOjIzOjoidGhpcmQgcGFydHkgaW1wb3J0ICIicHlsaW50
-LmNvbnN0YW50cyIiIHNob3VsZCBiZSBwbGFjZWQgYmVmb3JlIGxvY2FsIGltcG9ydHMgIiJwYWNr
-YWdlLkNsYXNzIiIsICIiLnBhY2thZ2UiIiwgIiIucGFja2FnZTIiIiAoLi4uKSAiInBhY2thZ2Uz
-LkNsYXNzMyIiLCAiIi5wYWNrYWdlNCIiLCAiInBhY2thZ2U0LkNsYXNzNCIiIjpVTkRFRklORUQN
-Cisrd3JvbmctaW1wb3J0LW9yZGVyOjMyOjA6MzI6MTk6OiJzdGFuZGFyZCBpbXBvcnQgIiJyZSIi
-IHNob3VsZCBiZSBwbGFjZWQgYmVmb3JlIHRoaXJkIHBhcnR5IGltcG9ydHMgIiJzaXgiIiwgIiJh
-c3Ryb2lkLmFyZV9leGNsdXNpdmUiIiwgIiJ1bnVzZWRfaW1wb3J0IiIgKC4uLikgIiJweWxpbnQu
-cHlyZXZlcnNlIiIsICIic2l4Lm1vdmVzLnVybGxpYi5wYXJzZS5xdW90ZSIiLCAiInB5bGludC5j
-b25zdGFudHMiIiBhbmQgbG9jYWwgaW1wb3J0cyAiInBhY2thZ2UuQ2xhc3MiIiwgIiIucGFja2Fn
-ZSIiLCAiIi5wYWNrYWdlMiIiICguLi4pICIicGFja2FnZTMuQ2xhc3MzIiIsICIiLnBhY2thZ2U0
-IiIsICIicGFja2FnZTQuQ2xhc3M0IiIiOlVOREVGSU5FRA0KKyt3cm9uZy1pbXBvcnQtb3JkZXI6
-MzI6MDozMjoxOTo6InRoaXJkIHBhcnR5IGltcG9ydCAiInJlcXVlc3RzIiIgc2hvdWxkIGJlIHBs
-YWNlZCBiZWZvcmUgbG9jYWwgaW1wb3J0cyAiInBhY2thZ2UuQ2xhc3MiIiwgIiIucGFja2FnZSIi
-LCAiIi5wYWNrYWdlMiIiICguLi4pICIicGFja2FnZTMuQ2xhc3MzIiIsICIiLnBhY2thZ2U0IiIs
-ICIicGFja2FnZTQuQ2xhc3M0IiIiOlVOREVGSU5FRA0KKyt3cm9uZy1pbXBvcnQtb3JkZXI6MzM6
-MDozMzoyNDo6InRoaXJkIHBhcnR5IGltcG9ydCAiInB5bGludC5leGNlcHRpb25zIiIgc2hvdWxk
-IGJlIHBsYWNlZCBiZWZvcmUgbG9jYWwgaW1wb3J0cyAiInBhY2thZ2UuQ2xhc3MiIiwgIiIucGFj
-a2FnZSIiLCAiIi5wYWNrYWdlMiIiICguLi4pICIicGFja2FnZTMuQ2xhc3MzIiIsICIiLnBhY2th
-Z2U0IiIsICIicGFja2FnZTQuQ2xhc3M0IiIiOlVOREVGSU5FRA0KKyt3cm9uZy1pbXBvcnQtb3Jk
-ZXI6MzQ6MDozNDoyMTo6InRoaXJkIHBhcnR5IGltcG9ydCAiInB5bGludC5tZXNzYWdlIiIgc2hv
-dWxkIGJlIHBsYWNlZCBiZWZvcmUgbG9jYWwgaW1wb3J0cyAiInBhY2thZ2UuQ2xhc3MiIiwgIiIu
-cGFja2FnZSIiLCAiIi5wYWNrYWdlMiIiICguLi4pICIicGFja2FnZTMuQ2xhc3MzIiIsICIiLnBh
-Y2thZ2U0IiIsICIicGFja2FnZTQuQ2xhc3M0IiIiOlVOREVGSU5FRA0KKyt3cm9uZy1pbXBvcnQt
-b3JkZXI6MzU6MDozNToxMTo6InN0YW5kYXJkIGltcG9ydCAiInRpbWUiIiBzaG91bGQgYmUgcGxh
-Y2VkIGJlZm9yZSB0aGlyZCBwYXJ0eSBpbXBvcnRzICIic2l4IiIsICIiYXN0cm9pZC5hcmVfZXhj
-bHVzaXZlIiIsICIidW51c2VkX2ltcG9ydCIiICguLi4pICIicmVxdWVzdHMiIiwgIiJweWxpbnQu
-ZXhjZXB0aW9ucyIiLCAiInB5bGludC5tZXNzYWdlIiIgYW5kIGxvY2FsIGltcG9ydHMgIiJwYWNr
-YWdlLkNsYXNzIiIsICIiLnBhY2thZ2UiIiwgIiIucGFja2FnZTIiIiAoLi4uKSAiInBhY2thZ2Uz
-LkNsYXNzMyIiLCAiIi5wYWNrYWdlNCIiLCAiInBhY2thZ2U0LkNsYXNzNCIiIjpVTkRFRklORUQN
-CmRpZmYgLS1naXQgYS9tZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24z
-LXB5bGludF8zLjEuMC5iYiBiL21ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9uL3B5
-dGhvbjMtcHlsaW50XzMuMS4wLmJiCmluZGV4IDQ5ZjBiM2ViNmU0Li4xMmY0ZjkwOGFmNyAxMDA2
-NDQKLS0tIGEvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9uMy1weWxp
-bnRfMy4xLjAuYmIKKysrIGIvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0
-aG9uMy1weWxpbnRfMy4xLjAuYmIKQEAgLTQsNiArNCw3IEBAIExJQ0VOU0UgPSAiR1BMLTIuMC1v
-bmx5IgogTElDX0ZJTEVTX0NIS1NVTSA9ICJmaWxlOi8vTElDRU5TRTttZDU9YzEwN2NmNzU0NTUw
-ZTY1NzU1YzQyOTg1YTVkNGU5YzkiCiAKIFNSQ19VUkkgKz0gImdpdDovL2dpdGh1Yi5jb20vcHls
-aW50LWRldi9weWxpbnQ7YnJhbmNoPW1haW50ZW5hbmNlLzMuMS54O3Byb3RvY29sPWh0dHBzIFwK
-KyAgICAgICAgICAgZmlsZTovLzAwMDEtQWRqdXN0LXRlc3QtZXhwZWN0YXRpb25zLWZvci1wdGVz
-dC5wYXRjaCBcCiAgICAgICAgICAgIGZpbGU6Ly9ydW4tcHRlc3QgXAogICAgICAgICAgICAiCiBT
-UkNSRVYgPSAiMDUzYzJjM2EyNWY5N2YwNDNlMTBjZGQ0MWQyNjA5ZTQ5NWE2OGY1NyIKLS0gCjIu
-NDEuMAoK
+--000000000000a0c4d2061394861e
+Content-Type: text/plain; charset="UTF-8"
+
+Hopefully this works, used base64 encoding this time.
+
+Otherwise, you can pull from
+https://git.openembedded.org/meta-openembedded-contrib/log/?h=dankm/pylint
+
+On Wed, Mar 13, 2024, 19:05 Dan McGregor via lists.openembedded.org
+<danismostlikely=gmail.com@lists.openembedded.org> wrote:
+
+> From: Dan McGregor <dan.mcgregor@vecima.com>
+>
+> Due to the way we install ptests, some imports switch from
+> first party to third party. Update test expectations
+>
+> Signed-off-by: Dan McGregor <dan.mcgregor@vecima.com>
+> ---
+>  ...1-Adjust-test-expectations-for-ptest.patch | 44 +++++++++++++++++++
+>  .../python/python3-pylint_3.1.0.bb            |  1 +
+>  2 files changed, 45 insertions(+)
+>  create mode 100644
+> meta-python/recipes-devtools/python/python3-pylint/0001-Adjust-test-expectations-for-ptest.patch
+>
+> diff --git
+> a/meta-python/recipes-devtools/python/python3-pylint/0001-Adjust-test-expectations-for-ptest.patch
+> b/meta-python/recipes-devtools/python/python3-pylint/0001-Adjust-test-expectations-for-ptest.patch
+> new file mode 100644
+> index 00000000000..8edecbf1bd1
+> --- /dev/null
+> +++
+> b/meta-python/recipes-devtools/python/python3-pylint/0001-Adjust-test-expectations-for-ptest.patch
+> @@ -0,0 +1,44 @@
+> +From f3a213cf4922c122e554277ea2031c0c54cd3fe5 Mon Sep 17 00:00:00 2001
+> +From: Dan McGregor <dan.mcgregor@vecima.com>
+> +Date: Wed, 13 Mar 2024 14:08:25 -0600
+> +Subject: [PATCH] Adjust test expectations for ptest
+> +
+> +Because of the way we install ptests, some first party imports
+> +became third party. Reflect that in the test case.
+> +
+> +Upstream-Status: Inappropriate (embedded specific)
+> +Signed-off-by: Dan McGregor <dan.mcgregor@vecima.com>
+> +---
+> + tests/functional/w/wrong_import_order.txt | 22 +++++++++++-----------
+> + 1 file changed, 11 insertions(+), 11 deletions(-)
+> +
+> +diff --git a/tests/functional/w/wrong_import_order.txt
+> b/tests/functional/w/wrong_import_order.txt
+> +index 068d2140d..9594ff9e0 100644
+> +--- a/tests/functional/w/wrong_import_order.txt
+> ++++ b/tests/functional/w/wrong_import_order.txt
+> +@@ -3,14 +3,14 @@ wrong-import-order:14:0:14:10::"standard import ""sys""
+> should be placed before
+> + wrong-import-order:15:0:15:15::"standard import ""datetime"" should be
+> placed before third party imports ""six"",
+> ""astroid.are_exclusive""":UNDEFINED
+> + wrong-import-order:18:0:18:22::"third party import ""totally_missing""
+> should be placed before local import ""package.Class""":UNDEFINED
+> + wrong-import-order:20:0:20:14::"third party import ""astroid"" should be
+> placed before local imports ""package.Class"", "".package""":UNDEFINED
+> +-wrong-import-order:22:0:22:22::"first party import ""pylint.checkers""
+> should be placed before local imports ""package.Class"", "".package"",
+> "".package2""":UNDEFINED
+> +-wrong-import-order:23:0:23:25::"first party import ""pylint.config""
+> should be placed before local imports ""package.Class"", "".package"",
+> "".package2""":UNDEFINED
+> +-wrong-import-order:24:0:24:17::"first party import ""pylint.sys"" should
+> be placed before local imports ""package.Class"", "".package"",
+> "".package2""":UNDEFINED
+> +-wrong-import-order:25:0:25:28::"first party import ""pylint.pyreverse""
+> should be placed before local imports ""package.Class"", "".package"",
+> "".package2""":UNDEFINED
+> +-wrong-import-order:30:0:30:40::"third party import
+> ""six.moves.urllib.parse.quote"" should be placed before first party
+> imports ""pylint.checkers"", ""pylint.config"", ""pylint.sys"",
+> ""pylint.pyreverse"" and local imports ""package.Class"", "".package"",
+> "".package2"" (...) ""package3.Class3"", "".package4"",
+> ""package4.Class4""":UNDEFINED
+> +-wrong-import-order:31:0:31:23::"first party import ""pylint.constants""
+> should be placed before local imports ""package.Class"", "".package"",
+> "".package2"" (...) ""package3.Class3"", "".package4"",
+> ""package4.Class4""":UNDEFINED
+> +-wrong-import-order:32:0:32:19::"standard import ""re"" should be placed
+> before third party imports ""six"", ""astroid.are_exclusive"",
+> ""unused_import"", ""totally_missing"", ""astroid"",
+> ""six.moves.urllib.parse.quote"", first party imports ""pylint.checkers"",
+> ""pylint.config"", ""pylint.sys"", ""pylint.pyreverse"",
+> ""pylint.constants"", and local imports ""package.Class"", "".package"",
+> "".package2"" (...) ""package3.Class3"", "".package4"",
+> ""package4.Class4""":UNDEFINED
+> +-wrong-import-order:32:0:32:19::"third party import ""requests"" should
+> be placed before first party imports ""pylint.checkers"",
+> ""pylint.config"", ""pylint.sys"", ""pylint.pyreverse"",
+> ""pylint.constants"" and local imports ""package.Class"", "".package"",
+> "".package2"" (...) ""package3.Class3"", "".package4"",
+> ""package4.Class4""":UNDEFINED
+> +-wrong-import-order:33:0:33:24::"first party import ""pylint.exceptions""
+> should be placed before local imports ""package.Class"", "".package"",
+> "".package2"" (...) ""package3.Class3"", "".package4"",
+> ""package4.Class4""":UNDEFINED
+> +-wrong-import-order:34:0:34:21::"first party import ""pylint.message""
+> should be placed before local imports ""package.Class"", "".package"",
+> "".package2"" (...) ""package3.Class3"", "".package4"",
+> ""package4.Class4""":UNDEFINED
+> +-wrong-import-order:35:0:35:11::"standard import ""time"" should be
+> placed before third party imports ""six"", ""astroid.are_exclusive"",
+> ""unused_import"" (...) ""astroid"", ""six.moves.urllib.parse.quote"",
+> ""requests"", first party imports ""pylint.checkers"", ""pylint.config"",
+> ""pylint.sys"" (...) ""pylint.constants"", ""pylint.exceptions"",
+> ""pylint.message"", and local imports ""package.Class"", "".package"",
+> "".package2"" (...) ""package3.Class3"", "".package4"",
+> ""package4.Class4""":UNDEFINED
+> ++wrong-import-order:22:0:22:22::"third party import ""pylint.checkers""
+> should be placed before local imports ""package.Class"", "".package"",
+> "".package2""":UNDEFINED
+> ++wrong-import-order:23:0:23:25::"third party import ""pylint.config""
+> should be placed before local imports ""package.Class"", "".package"",
+> "".package2""":UNDEFINED
+> ++wrong-import-order:24:0:24:17::"third party import ""pylint.sys"" should
+> be placed before local imports ""package.Class"", "".package"",
+> "".package2""":UNDEFINED
+> ++wrong-import-order:25:0:25:28::"third party import ""pylint.pyreverse""
+> should be placed before local imports ""package.Class"", "".package"",
+> "".package2""":UNDEFINED
+> ++wrong-import-order:30:0:30:40::"third party import
+> ""six.moves.urllib.parse.quote"" should be placed before local imports
+> ""package.Class"", "".package"", "".package2"" (...) ""package3.Class3"",
+> "".package4"", ""package4.Class4""":UNDEFINED
+> ++wrong-import-order:31:0:31:23::"third party import ""pylint.constants""
+> should be placed before local imports ""package.Class"", "".package"",
+> "".package2"" (...) ""package3.Class3"", "".package4"",
+> ""package4.Class4""":UNDEFINED
+> ++wrong-import-order:32:0:32:19::"standard import ""re"" should be placed
+> before third party imports ""six"", ""astroid.are_exclusive"",
+> ""unused_import"" (...) ""pylint.pyreverse"",
+> ""six.moves.urllib.parse.quote"", ""pylint.constants"" and local imports
+> ""package.Class"", "".package"", "".package2"" (...) ""package3.Class3"",
+> "".package4"", ""package4.Class4""":UNDEFINED
+> ++wrong-import-order:32:0:32:19::"third party import ""requests"" should
+> be placed before local imports ""package.Class"", "".package"",
+> "".package2"" (...) ""package3.Class3"", "".package4"",
+> ""package4.Class4""":UNDEFINED
+> ++wrong-import-order:33:0:33:24::"third party import ""pylint.exceptions""
+> should be placed before local imports ""package.Class"", "".package"",
+> "".package2"" (...) ""package3.Class3"", "".package4"",
+> ""package4.Class4""":UNDEFINED
+> ++wrong-import-order:34:0:34:21::"third party import ""pylint.message""
+> should be placed before local imports ""package.Class"", "".package"",
+> "".package2"" (...) ""package3.Class3"", "".package4"",
+> ""package4.Class4""":UNDEFINED
+> ++wrong-import-order:35:0:35:11::"standard import ""time"" should be
+> placed before third party imports ""six"", ""astroid.are_exclusive"",
+> ""unused_import"" (...) ""requests"", ""pylint.exceptions"",
+> ""pylint.message"" and local imports ""package.Class"", "".package"",
+> "".package2"" (...) ""package3.Class3"", "".package4"",
+> ""package4.Class4""":UNDEFINED
+> diff --git a/meta-python/recipes-devtools/python/python3-pylint_3.1.0.bb
+> b/meta-python/recipes-devtools/python/python3-pylint_3.1.0.bb
+> index 49f0b3eb6e4..12f4f908af7 100644
+> --- a/meta-python/recipes-devtools/python/python3-pylint_3.1.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-pylint_3.1.0.bb
+> @@ -4,6 +4,7 @@ LICENSE = "GPL-2.0-only"
+>  LIC_FILES_CHKSUM = "file://LICENSE;md5=c107cf754550e65755c42985a5d4e9c9"
+>
+>  SRC_URI += "git://
+> github.com/pylint-dev/pylint;branch=maintenance/3.1.x;protocol=https \
+> +           file://0001-Adjust-test-expectations-for-ptest.patch \
+>             file://run-ptest \
+>             "
+>  SRCREV = "053c2c3a25f97f043e10cdd41d2609e495a68f57"
+> --
+> 2.41.0
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#109307):
+> https://lists.openembedded.org/g/openembedded-devel/message/109307
+> Mute This Topic: https://lists.openembedded.org/mt/104918714/3617261
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> danismostlikely@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
+>
+
+--000000000000a0c4d2061394861e
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto">Hopefully this works, used base64 encoding this time.<div=
+ dir=3D"auto"><br></div><div dir=3D"auto">Otherwise, you can pull from=C2=
+=A0<a href=3D"https://git.openembedded.org/meta-openembedded-contrib/log/?h=
+=3Ddankm/pylint">https://git.openembedded.org/meta-openembedded-contrib/log=
+/?h=3Ddankm/pylint</a></div></div><br><div class=3D"gmail_quote"><div dir=
+=3D"ltr" class=3D"gmail_attr">On Wed, Mar 13, 2024, 19:05 Dan McGregor via =
+<a href=3D"http://lists.openembedded.org">lists.openembedded.org</a> &lt;da=
+nismostlikely=3D<a href=3D"mailto:gmail.com@lists.openembedded.org">gmail.c=
+om@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmai=
+l_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left=
+:1ex">From: Dan McGregor &lt;<a href=3D"mailto:dan.mcgregor@vecima.com" tar=
+get=3D"_blank" rel=3D"noreferrer">dan.mcgregor@vecima.com</a>&gt;<br>
+<br>
+Due to the way we install ptests, some imports switch from<br>
+first party to third party. Update test expectations<br>
+<br>
+Signed-off-by: Dan McGregor &lt;<a href=3D"mailto:dan.mcgregor@vecima.com" =
+target=3D"_blank" rel=3D"noreferrer">dan.mcgregor@vecima.com</a>&gt;<br>
+---<br>
+=C2=A0...1-Adjust-test-expectations-for-ptest.patch | 44 ++++++++++++++++++=
++<br>
+=C2=A0.../python/<a href=3D"http://python3-pylint_3.1.0.bb" rel=3D"noreferr=
+er noreferrer" target=3D"_blank">python3-pylint_3.1.0.bb</a>=C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 1 +<br>
+=C2=A02 files changed, 45 insertions(+)<br>
+=C2=A0create mode 100644 meta-python/recipes-devtools/python/python3-pylint=
+/0001-Adjust-test-expectations-for-ptest.patch<br>
+<br>
+diff --git a/meta-python/recipes-devtools/python/python3-pylint/0001-Adjust=
+-test-expectations-for-ptest.patch b/meta-python/recipes-devtools/python/py=
+thon3-pylint/0001-Adjust-test-expectations-for-ptest.patch<br>
+new file mode 100644<br>
+index 00000000000..8edecbf1bd1<br>
+--- /dev/null<br>
++++ b/meta-python/recipes-devtools/python/python3-pylint/0001-Adjust-test-e=
+xpectations-for-ptest.patch<br>
+@@ -0,0 +1,44 @@<br>
++From f3a213cf4922c122e554277ea2031c0c54cd3fe5 Mon Sep 17 00:00:00 2001<br>
++From: Dan McGregor &lt;<a href=3D"mailto:dan.mcgregor@vecima.com" target=
+=3D"_blank" rel=3D"noreferrer">dan.mcgregor@vecima.com</a>&gt;<br>
++Date: Wed, 13 Mar 2024 14:08:25 -0600<br>
++Subject: [PATCH] Adjust test expectations for ptest<br>
++<br>
++Because of the way we install ptests, some first party imports<br>
++became third party. Reflect that in the test case.<br>
++<br>
++Upstream-Status: Inappropriate (embedded specific)<br>
++Signed-off-by: Dan McGregor &lt;<a href=3D"mailto:dan.mcgregor@vecima.com"=
+ target=3D"_blank" rel=3D"noreferrer">dan.mcgregor@vecima.com</a>&gt;<br>
++---<br>
++ tests/functional/w/wrong_import_order.txt | 22 +++++++++++-----------<br>
++ 1 file changed, 11 insertions(+), 11 deletions(-)<br>
++<br>
++diff --git a/tests/functional/w/wrong_import_order.txt b/tests/functional/=
+w/wrong_import_order.txt<br>
++index 068d2140d..9594ff9e0 100644<br>
++--- a/tests/functional/w/wrong_import_order.txt<br>
+++++ b/tests/functional/w/wrong_import_order.txt<br>
++@@ -3,14 +3,14 @@ wrong-import-order:14:0:14:10::&quot;standard import &qu=
+ot;&quot;sys&quot;&quot; should be placed before<br>
++ wrong-import-order:15:0:15:15::&quot;standard import &quot;&quot;datetime=
+&quot;&quot; should be placed before third party imports &quot;&quot;six&qu=
+ot;&quot;, &quot;&quot;astroid.are_exclusive&quot;&quot;&quot;:UNDEFINED<br=
+>
++ wrong-import-order:18:0:18:22::&quot;third party import &quot;&quot;total=
+ly_missing&quot;&quot; should be placed before local import &quot;&quot;pac=
+kage.Class&quot;&quot;&quot;:UNDEFINED<br>
++ wrong-import-order:20:0:20:14::&quot;third party import &quot;&quot;astro=
+id&quot;&quot; should be placed before local imports &quot;&quot;package.Cl=
+ass&quot;&quot;, &quot;&quot;.package&quot;&quot;&quot;:UNDEFINED<br>
++-wrong-import-order:22:0:22:22::&quot;first party import &quot;&quot;pylin=
+t.checkers&quot;&quot; should be placed before local imports &quot;&quot;pa=
+ckage.Class&quot;&quot;, &quot;&quot;.package&quot;&quot;, &quot;&quot;.pac=
+kage2&quot;&quot;&quot;:UNDEFINED<br>
++-wrong-import-order:23:0:23:25::&quot;first party import &quot;&quot;pylin=
+t.config&quot;&quot; should be placed before local imports &quot;&quot;pack=
+age.Class&quot;&quot;, &quot;&quot;.package&quot;&quot;, &quot;&quot;.packa=
+ge2&quot;&quot;&quot;:UNDEFINED<br>
++-wrong-import-order:24:0:24:17::&quot;first party import &quot;&quot;pylin=
+t.sys&quot;&quot; should be placed before local imports &quot;&quot;package=
+.Class&quot;&quot;, &quot;&quot;.package&quot;&quot;, &quot;&quot;.package2=
+&quot;&quot;&quot;:UNDEFINED<br>
++-wrong-import-order:25:0:25:28::&quot;first party import &quot;&quot;pylin=
+t.pyreverse&quot;&quot; should be placed before local imports &quot;&quot;p=
+ackage.Class&quot;&quot;, &quot;&quot;.package&quot;&quot;, &quot;&quot;.pa=
+ckage2&quot;&quot;&quot;:UNDEFINED<br>
++-wrong-import-order:30:0:30:40::&quot;third party import &quot;&quot;six.m=
+oves.urllib.parse.quote&quot;&quot; should be placed before first party imp=
+orts &quot;&quot;pylint.checkers&quot;&quot;, &quot;&quot;pylint.config&quo=
+t;&quot;, &quot;&quot;pylint.sys&quot;&quot;, &quot;&quot;pylint.pyreverse&=
+quot;&quot; and local imports &quot;&quot;package.Class&quot;&quot;, &quot;=
+&quot;.package&quot;&quot;, &quot;&quot;.package2&quot;&quot; (...) &quot;&=
+quot;package3.Class3&quot;&quot;, &quot;&quot;.package4&quot;&quot;, &quot;=
+&quot;package4.Class4&quot;&quot;&quot;:UNDEFINED<br>
++-wrong-import-order:31:0:31:23::&quot;first party import &quot;&quot;pylin=
+t.constants&quot;&quot; should be placed before local imports &quot;&quot;p=
+ackage.Class&quot;&quot;, &quot;&quot;.package&quot;&quot;, &quot;&quot;.pa=
+ckage2&quot;&quot; (...) &quot;&quot;package3.Class3&quot;&quot;, &quot;&qu=
+ot;.package4&quot;&quot;, &quot;&quot;package4.Class4&quot;&quot;&quot;:UND=
+EFINED<br>
++-wrong-import-order:32:0:32:19::&quot;standard import &quot;&quot;re&quot;=
+&quot; should be placed before third party imports &quot;&quot;six&quot;&qu=
+ot;, &quot;&quot;astroid.are_exclusive&quot;&quot;, &quot;&quot;unused_impo=
+rt&quot;&quot;, &quot;&quot;totally_missing&quot;&quot;, &quot;&quot;astroi=
+d&quot;&quot;, &quot;&quot;six.moves.urllib.parse.quote&quot;&quot;, first =
+party imports &quot;&quot;pylint.checkers&quot;&quot;, &quot;&quot;pylint.c=
+onfig&quot;&quot;, &quot;&quot;pylint.sys&quot;&quot;, &quot;&quot;pylint.p=
+yreverse&quot;&quot;, &quot;&quot;pylint.constants&quot;&quot;, and local i=
+mports &quot;&quot;package.Class&quot;&quot;, &quot;&quot;.package&quot;&qu=
+ot;, &quot;&quot;.package2&quot;&quot; (...) &quot;&quot;package3.Class3&qu=
+ot;&quot;, &quot;&quot;.package4&quot;&quot;, &quot;&quot;package4.Class4&q=
+uot;&quot;&quot;:UNDEFINED<br>
++-wrong-import-order:32:0:32:19::&quot;third party import &quot;&quot;reque=
+sts&quot;&quot; should be placed before first party imports &quot;&quot;pyl=
+int.checkers&quot;&quot;, &quot;&quot;pylint.config&quot;&quot;, &quot;&quo=
+t;pylint.sys&quot;&quot;, &quot;&quot;pylint.pyreverse&quot;&quot;, &quot;&=
+quot;pylint.constants&quot;&quot; and local imports &quot;&quot;package.Cla=
+ss&quot;&quot;, &quot;&quot;.package&quot;&quot;, &quot;&quot;.package2&quo=
+t;&quot; (...) &quot;&quot;package3.Class3&quot;&quot;, &quot;&quot;.packag=
+e4&quot;&quot;, &quot;&quot;package4.Class4&quot;&quot;&quot;:UNDEFINED<br>
++-wrong-import-order:33:0:33:24::&quot;first party import &quot;&quot;pylin=
+t.exceptions&quot;&quot; should be placed before local imports &quot;&quot;=
+package.Class&quot;&quot;, &quot;&quot;.package&quot;&quot;, &quot;&quot;.p=
+ackage2&quot;&quot; (...) &quot;&quot;package3.Class3&quot;&quot;, &quot;&q=
+uot;.package4&quot;&quot;, &quot;&quot;package4.Class4&quot;&quot;&quot;:UN=
+DEFINED<br>
++-wrong-import-order:34:0:34:21::&quot;first party import &quot;&quot;pylin=
+t.message&quot;&quot; should be placed before local imports &quot;&quot;pac=
+kage.Class&quot;&quot;, &quot;&quot;.package&quot;&quot;, &quot;&quot;.pack=
+age2&quot;&quot; (...) &quot;&quot;package3.Class3&quot;&quot;, &quot;&quot=
+;.package4&quot;&quot;, &quot;&quot;package4.Class4&quot;&quot;&quot;:UNDEF=
+INED<br>
++-wrong-import-order:35:0:35:11::&quot;standard import &quot;&quot;time&quo=
+t;&quot; should be placed before third party imports &quot;&quot;six&quot;&=
+quot;, &quot;&quot;astroid.are_exclusive&quot;&quot;, &quot;&quot;unused_im=
+port&quot;&quot; (...) &quot;&quot;astroid&quot;&quot;, &quot;&quot;six.mov=
+es.urllib.parse.quote&quot;&quot;, &quot;&quot;requests&quot;&quot;, first =
+party imports &quot;&quot;pylint.checkers&quot;&quot;, &quot;&quot;pylint.c=
+onfig&quot;&quot;, &quot;&quot;pylint.sys&quot;&quot; (...) &quot;&quot;pyl=
+int.constants&quot;&quot;, &quot;&quot;pylint.exceptions&quot;&quot;, &quot=
+;&quot;pylint.message&quot;&quot;, and local imports &quot;&quot;package.Cl=
+ass&quot;&quot;, &quot;&quot;.package&quot;&quot;, &quot;&quot;.package2&qu=
+ot;&quot; (...) &quot;&quot;package3.Class3&quot;&quot;, &quot;&quot;.packa=
+ge4&quot;&quot;, &quot;&quot;package4.Class4&quot;&quot;&quot;:UNDEFINED<br=
+>
+++wrong-import-order:22:0:22:22::&quot;third party import &quot;&quot;pylin=
+t.checkers&quot;&quot; should be placed before local imports &quot;&quot;pa=
+ckage.Class&quot;&quot;, &quot;&quot;.package&quot;&quot;, &quot;&quot;.pac=
+kage2&quot;&quot;&quot;:UNDEFINED<br>
+++wrong-import-order:23:0:23:25::&quot;third party import &quot;&quot;pylin=
+t.config&quot;&quot; should be placed before local imports &quot;&quot;pack=
+age.Class&quot;&quot;, &quot;&quot;.package&quot;&quot;, &quot;&quot;.packa=
+ge2&quot;&quot;&quot;:UNDEFINED<br>
+++wrong-import-order:24:0:24:17::&quot;third party import &quot;&quot;pylin=
+t.sys&quot;&quot; should be placed before local imports &quot;&quot;package=
+.Class&quot;&quot;, &quot;&quot;.package&quot;&quot;, &quot;&quot;.package2=
+&quot;&quot;&quot;:UNDEFINED<br>
+++wrong-import-order:25:0:25:28::&quot;third party import &quot;&quot;pylin=
+t.pyreverse&quot;&quot; should be placed before local imports &quot;&quot;p=
+ackage.Class&quot;&quot;, &quot;&quot;.package&quot;&quot;, &quot;&quot;.pa=
+ckage2&quot;&quot;&quot;:UNDEFINED<br>
+++wrong-import-order:30:0:30:40::&quot;third party import &quot;&quot;six.m=
+oves.urllib.parse.quote&quot;&quot; should be placed before local imports &=
+quot;&quot;package.Class&quot;&quot;, &quot;&quot;.package&quot;&quot;, &qu=
+ot;&quot;.package2&quot;&quot; (...) &quot;&quot;package3.Class3&quot;&quot=
+;, &quot;&quot;.package4&quot;&quot;, &quot;&quot;package4.Class4&quot;&quo=
+t;&quot;:UNDEFINED<br>
+++wrong-import-order:31:0:31:23::&quot;third party import &quot;&quot;pylin=
+t.constants&quot;&quot; should be placed before local imports &quot;&quot;p=
+ackage.Class&quot;&quot;, &quot;&quot;.package&quot;&quot;, &quot;&quot;.pa=
+ckage2&quot;&quot; (...) &quot;&quot;package3.Class3&quot;&quot;, &quot;&qu=
+ot;.package4&quot;&quot;, &quot;&quot;package4.Class4&quot;&quot;&quot;:UND=
+EFINED<br>
+++wrong-import-order:32:0:32:19::&quot;standard import &quot;&quot;re&quot;=
+&quot; should be placed before third party imports &quot;&quot;six&quot;&qu=
+ot;, &quot;&quot;astroid.are_exclusive&quot;&quot;, &quot;&quot;unused_impo=
+rt&quot;&quot; (...) &quot;&quot;pylint.pyreverse&quot;&quot;, &quot;&quot;=
+six.moves.urllib.parse.quote&quot;&quot;, &quot;&quot;pylint.constants&quot=
+;&quot; and local imports &quot;&quot;package.Class&quot;&quot;, &quot;&quo=
+t;.package&quot;&quot;, &quot;&quot;.package2&quot;&quot; (...) &quot;&quot=
+;package3.Class3&quot;&quot;, &quot;&quot;.package4&quot;&quot;, &quot;&quo=
+t;package4.Class4&quot;&quot;&quot;:UNDEFINED<br>
+++wrong-import-order:32:0:32:19::&quot;third party import &quot;&quot;reque=
+sts&quot;&quot; should be placed before local imports &quot;&quot;package.C=
+lass&quot;&quot;, &quot;&quot;.package&quot;&quot;, &quot;&quot;.package2&q=
+uot;&quot; (...) &quot;&quot;package3.Class3&quot;&quot;, &quot;&quot;.pack=
+age4&quot;&quot;, &quot;&quot;package4.Class4&quot;&quot;&quot;:UNDEFINED<b=
+r>
+++wrong-import-order:33:0:33:24::&quot;third party import &quot;&quot;pylin=
+t.exceptions&quot;&quot; should be placed before local imports &quot;&quot;=
+package.Class&quot;&quot;, &quot;&quot;.package&quot;&quot;, &quot;&quot;.p=
+ackage2&quot;&quot; (...) &quot;&quot;package3.Class3&quot;&quot;, &quot;&q=
+uot;.package4&quot;&quot;, &quot;&quot;package4.Class4&quot;&quot;&quot;:UN=
+DEFINED<br>
+++wrong-import-order:34:0:34:21::&quot;third party import &quot;&quot;pylin=
+t.message&quot;&quot; should be placed before local imports &quot;&quot;pac=
+kage.Class&quot;&quot;, &quot;&quot;.package&quot;&quot;, &quot;&quot;.pack=
+age2&quot;&quot; (...) &quot;&quot;package3.Class3&quot;&quot;, &quot;&quot=
+;.package4&quot;&quot;, &quot;&quot;package4.Class4&quot;&quot;&quot;:UNDEF=
+INED<br>
+++wrong-import-order:35:0:35:11::&quot;standard import &quot;&quot;time&quo=
+t;&quot; should be placed before third party imports &quot;&quot;six&quot;&=
+quot;, &quot;&quot;astroid.are_exclusive&quot;&quot;, &quot;&quot;unused_im=
+port&quot;&quot; (...) &quot;&quot;requests&quot;&quot;, &quot;&quot;pylint=
+.exceptions&quot;&quot;, &quot;&quot;pylint.message&quot;&quot; and local i=
+mports &quot;&quot;package.Class&quot;&quot;, &quot;&quot;.package&quot;&qu=
+ot;, &quot;&quot;.package2&quot;&quot; (...) &quot;&quot;package3.Class3&qu=
+ot;&quot;, &quot;&quot;.package4&quot;&quot;, &quot;&quot;package4.Class4&q=
+uot;&quot;&quot;:UNDEFINED<br>
+diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
+pylint_3.1.0.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">python3-py=
+lint_3.1.0.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://p=
+ython3-pylint_3.1.0.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">pyt=
+hon3-pylint_3.1.0.bb</a><br>
+index 49f0b3eb6e4..12f4f908af7 100644<br>
+--- a/meta-python/recipes-devtools/python/<a href=3D"http://python3-pylint_=
+3.1.0.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">python3-pylint_3.=
+1.0.bb</a><br>
++++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-pylint_=
+3.1.0.bb" rel=3D"noreferrer noreferrer" target=3D"_blank">python3-pylint_3.=
+1.0.bb</a><br>
+@@ -4,6 +4,7 @@ LICENSE =3D &quot;GPL-2.0-only&quot;<br>
+=C2=A0LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3Dc107cf754550e65755c42=
+985a5d4e9c9&quot;<br>
+<br>
+=C2=A0SRC_URI +=3D &quot;git://<a href=3D"http://github.com/pylint-dev/pyli=
+nt;branch=3Dmaintenance/3.1.x;protocol=3Dhttps" rel=3D"noreferrer noreferre=
+r" target=3D"_blank">github.com/pylint-dev/pylint;branch=3Dmaintenance/3.1.=
+x;protocol=3Dhttps</a> \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://0001-Adjust-test-expectati=
+ons-for-ptest.patch \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://run-ptest \<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;<br>
+=C2=A0SRCREV =3D &quot;053c2c3a25f97f043e10cdd41d2609e495a68f57&quot;<br>
+-- <br>
+2.41.0<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#109307): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/109307" rel=3D"noreferrer noreferrer" target=3D"_b=
+lank">https://lists.openembedded.org/g/openembedded-devel/message/109307</a=
+><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/104918714/361=
+7261" rel=3D"noreferrer noreferrer" target=3D"_blank">https://lists.openemb=
+edded.org/mt/104918714/3617261</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank" rel=3D"noreferrer">openembedded-devel+owner@lists.=
+openembedded.org</a><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer noreferrer" target=3D"_blank">https://lists.opene=
+mbedded.org/g/openembedded-devel/unsub</a> [<a href=3D"mailto:danismostlike=
+ly@gmail.com" target=3D"_blank" rel=3D"noreferrer">danismostlikely@gmail.co=
+m</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div>
+
+--000000000000a0c4d2061394861e--
 
