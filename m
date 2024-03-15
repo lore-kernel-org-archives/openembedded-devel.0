@@ -1,462 +1,371 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <changqing.li@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5576DC54E66
-	for <webhook@archiver.kernel.org>; Fri, 15 Mar 2024 04:38:28 +0000 (UTC)
-Received: from mail-oa1-f48.google.com (mail-oa1-f48.google.com [209.85.160.48])
- by mx.groups.io with SMTP id smtpd.web10.13322.1710477503884199246
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 71926C54E66
+	for <webhook@archiver.kernel.org>; Fri, 15 Mar 2024 05:01:28 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.13628.1710478883459683857
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 14 Mar 2024 21:38:24 -0700
+ Thu, 14 Mar 2024 22:01:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=FNrv9yJr;
- spf=pass (domain: gmail.com, ip: 209.85.160.48, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f48.google.com with SMTP id 586e51a60fabf-22181888b88so1353286fac.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 14 Mar 2024 21:38:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1710477503; x=1711082303; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=jjDeczdkTeV/Wkvm7+y4d/XaNal6L50cPbFLxwVK2zY=;
-        b=FNrv9yJr20XED/3DhLQEwB2KbchfwIPejtEi3trH0cJCQb2YM36xrGOb5E8U0owZ2L
-         8UoQSFsLlM2EKWWhRllnOQOFI1UxOI2UnCQCh+j/N2ZDPHV7lZr6omq69Yu3B1WPbrDU
-         xseed4u85ENPIhl0zLca104iW0g2Tlryjk8YfR1R121RI3WWkOE/dGHCNVzlLnd2SKoQ
-         ui1NWNV1wLx+Nm/ak4mSYrMWUqRoRASIJCCVCWKJemo2dMnxvSoFtFMhLBPCwIPJmLFx
-         FP54rCR4JBvWrydZujrOR/OrzJYkgn1xOgmj+E3YgNk36Lps1NdoR6WpeBSzlZNqOURN
-         uEZg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710477503; x=1711082303;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=jjDeczdkTeV/Wkvm7+y4d/XaNal6L50cPbFLxwVK2zY=;
-        b=Bw/fXH5HGspMlnXgo1FL1045GEy6uEljw5VrTykHTOxl9Y3pbfsXQF3DCoIE2BnU4w
-         BFAH1U5960I3iVW+HvfbUW8lPTQ23FImUXZkm3tTtNeISgI3BRQuQaCn53+FBzsXw5DM
-         uX2DudLaKXDOVnimjdRGntMNpKqkvSlzdzWdMb/nmMEv6NkCU7Kw6FBd5tvat6wjuhWv
-         IBbpjthYaOT4YBD/CzyUs+lQgH2AAX0Y99+U4NjenGwtCp9x5OeK8W8qc7xEhwRV+Hh5
-         CIJd/WFfhWyQScEBI2J8zkQl43Tptjs0U/2TkxTZIvKclHsHS8djZLut8AEF+HXlPM/x
-         u2Jg==
-X-Gm-Message-State: AOJu0YxvJvRWn49s3jy6RC8EoMt3rh/EhRP6vj4DO66zGtJscvDAhQsM
-	CHTzrWPQfe3MrvxlrOiTX6xpN7mr7EvLT/ni/4vkZHxQvNv7IMzdmQnpGFkDURBSq/PzN43OXfc
-	RNfGTeBejizIjJd1BxLjY6qX3/Xu2QotVqsI=
-X-Google-Smtp-Source: AGHT+IEsO1QyEhWI4Fbi4nRjKTeANHFKebByW2jk4s1bI6YV3smNhCloQMQTaAODDYpZhrg2SRTMiCUEEVTvrM4JlAM=
-X-Received: by 2002:a05:6870:ac27:b0:21e:e5db:7964 with SMTP id
- kw39-20020a056870ac2700b0021ee5db7964mr4122594oab.23.1710477502861; Thu, 14
- Mar 2024 21:38:22 -0700 (PDT)
-MIME-Version: 1.0
-References: <0afe6e7d5c9f3de0c3b82a646236bb9bbbe8210f.1710445397.git.joerg.sommer@navimatix.de>
-In-Reply-To: <0afe6e7d5c9f3de0c3b82a646236bb9bbbe8210f.1710445397.git.joerg.sommer@navimatix.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 14 Mar 2024 21:37:56 -0700
-Message-ID: <CAMKF1sqA7eN1pMRKzeSQp8UZKhdADaW5yHLaXZHOd9+-jDaexA@mail.gmail.com>
-Subject: Re: [oe] [meta-multimedia][PATCH v2] spandsp: new telephony DSP library
-To: joerg.sommer@navimatix.de
+ dkim=fail reason="dkim: body hash did not verify" header.i=@windriver.com header.s=PPS06212021 header.b=IOdTS9GK;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=3804134e78=changqing.li@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 42F3qm3h015022
+	for <openembedded-devel@lists.openembedded.org>; Thu, 14 Mar 2024 22:01:23 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-type:message-id:date:from:subject:to:cc:references
+	:in-reply-to:mime-version; s=PPS06212021; bh=NyiTcpegc/4Ab9yUfL/
+	tmprffiuzTrvRlobANKmzves=; b=IOdTS9GKUlwJRw2gpdDUj9vos/GtsPUMk9h
+	cvljVDMlwxOwPcRkjAGo4wiXm1l4OQTQ59/BEBM93JJ+v8WtRM2ypxO0ieUxrycu
+	p9v/Jq+JZ/ptQqoHNQwVMeMYi3gJ6SLR9BatcRZeVlk/We2aXgG4LNX6yQr/tjGb
+	4tOulHjuj3exZiUX73c5J+IaSmpb131UHsEBF/Ddla2ADeUQaFBmrENZnTOfwoTA
+	u5QPP2k1w7TJRntDgLR1mqmJsUxfZsn7Y7HSTrgeRHmkPDas2o7UId6Y9Y9PxP/L
+	oW57yq1fQDS4NCkBZvTdxI/LYGGi+nuYzIOnLtcJMVaQ6Ynayew==
+Received: from pps.reinject (localhost [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3wva2wg7k0-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 14 Mar 2024 22:01:22 -0700 (PDT)
+Received: from m0250809.ppops.net (m0250809.ppops.net [127.0.0.1])
+	by pps.reinject (8.17.1.24/8.17.1.24) with ESMTP id 42F51MN7013314;
+	Thu, 14 Mar 2024 22:01:22 -0700
+Received: from nam10-mw2-obe.outbound.protection.outlook.com (mail-mw2nam10lp2101.outbound.protection.outlook.com [104.47.55.101])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3wva2wg7jy-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Thu, 14 Mar 2024 22:01:22 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=f31LNSbkoh2GO8eE/bDwKjkUlt4h+8Gh5fxhSpEDWvmgVV8hLKHc8/0b2eJzZYZhisPSJ5lawk1VB0m8KZrJSBdTRs4TPerQ9MknBIP4TaSFjePc/I9afUyFI6rhdM5m0DHH7kDjUzAKTXFo5uNfR3NqwaRmHO2H6sEjw0avwReRTK/YSnlblfUkAY5aQdZhKuLhLg6QUEKV9unsnbBixwKPkwT4TWVYxyAkUz/aI0HBcQVAPhuzbKEUiPa0CIedsqx4MuxeesKk86DRjhopo7I15R9GpJNVJOq3l/o3x6DLRkYr3bKqOtzLxltTkE8WfMiT0mC6Xq/5oc4of8EUUg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=NyiTcpegc/4Ab9yUfL/tmprffiuzTrvRlobANKmzves=;
+ b=ODd+Af/pEL0U7/Z9F7Ttcg6KG4bwTYqVOFKgVD5tBzM40e0x3uZMH71YpiCMU+hapU6jOAuwEhC/7Va3cmjtvbTVfgElfzsfMczjR7mh7itICX6LIST6kZyOM5LMNGJ/yoxthD2gQma2//+BAigciwICW3AeCOJSx+R/esVxTtwEsE+BIEHXggOErCUck7fWRFeV6+tjhBX78mK0Ox0btYcxQjztVtexWLkanJJvsUftRuoAxcJ5LBWmtgj0R9UAFKPBL5yjj47vdFJZDnKd5NitUtrGvfhZ/4x/DIluz7cIkgd/sqGrzNyDf4uDGAjUQUSgXg7qNZ/K1PnpY2kL0w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from DS0PR11MB7312.namprd11.prod.outlook.com (2603:10b6:8:11f::18)
+ by IA1PR11MB6124.namprd11.prod.outlook.com (2603:10b6:208:3ec::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7386.16; Fri, 15 Mar
+ 2024 05:01:18 +0000
+Received: from DS0PR11MB7312.namprd11.prod.outlook.com
+ ([fe80::d168:2e49:fb61:dc21]) by DS0PR11MB7312.namprd11.prod.outlook.com
+ ([fe80::d168:2e49:fb61:dc21%7]) with mapi id 15.20.7386.017; Fri, 15 Mar 2024
+ 05:01:17 +0000
+Content-Type: multipart/alternative;
+ boundary="------------3yiTooYzmVKNty2up0kU9Mjm"
+Message-ID: <b235f78f-1988-4ea3-b183-20cd9f2cc113@windriver.com>
+Date: Fri, 15 Mar 2024 13:01:10 +0800
+User-Agent: Mozilla Thunderbird
+From: Changqing Li <changqing.li@windriver.com>
+Subject: Re: [oe] [meta-oe][PATCH] postgresql: fix a runtime error
+To: Khem Raj <raj.khem@gmail.com>,
+        Changqing Li <changqing.li@eng.windriver.com>
 Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+References: <20240314072215.6854-1-changqing.li@windriver.com>
+ <CAMKF1srgr=EqeoZXiYLjzvjiQ_fH6csQHDayCQXX2rcED8ZVyA@mail.gmail.com>
+Content-Language: en-US
+In-Reply-To: <CAMKF1srgr=EqeoZXiYLjzvjiQ_fH6csQHDayCQXX2rcED8ZVyA@mail.gmail.com>
+X-ClientProxiedBy: SG2PR04CA0178.apcprd04.prod.outlook.com
+ (2603:1096:4:14::16) To DS0PR11MB7312.namprd11.prod.outlook.com
+ (2603:10b6:8:11f::18)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS0PR11MB7312:EE_|IA1PR11MB6124:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9b77ce9d-f86d-4f8c-827a-08dc44acf27e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	gSDqO1PHnp02sVJc2mBWd88Sf9o7B5qJZjfWN7HwVVloVShbZJ7sLcZBgPlKEdjnR1IEcsyQ++aKoYsL1rRe+26rzBwBVxZKrdHxilJgaUP6dJYuDxbciney8DYHshVN9h60n3UJmECJ5rH3KDp1d+O3wXHKr2tBSbLBfDDVGqCT5XXYST6pJAxHEy3F2Q8hLBesBKWbZXTDflnNBckH3jKAfAouha+xUEpWzwCyLb4v3u6yPuyOrVaXnG7mYk1KNc5OecZLilXuQxzd/DwC5ADJOLPY3WhWkbDdVMpzcrHQzA9Z6VByx78zTgtO/Otnk45zNxmmLd3rERrp6whEUoVKgx26JHEXuouZ2UPvRLuLR1sdP8xAUssK7pV4OOdXdwTj0VY0uFX7YUSrRDvYvZ5CZVwqgc7+J3/msLHPIFWvxwj0gq/bO2pAuIC+/d57Cbg14+UY2Yg0nYOdeuU7RBRk3Wiwp/c9W/CFA+PiFnFNWCXxr+aIdO429e7O5J22wedo2v1P2Hsr8ExHUx0s/lLvjfbk6oCHLEmRBfbM1FZ81mTv1dwNB/uQ3mZlCwGgiwWsD5qqCNFe9EK7CAfk07yekXJ7iTkhpphehi7cMnmfaCb0TmbafxD8BpvwbfaO
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB7312.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(366007)(376005)(1800799015);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?MFBZbTVJakp5SGFoQUdMOVFPSFRjOUhnSmFaMEFqVFc0T0ZZTEdzQ3JwcXBW?=
+ =?utf-8?B?RWROZUZiOUpxLzBOU3BjNEhBZnZNT2wwcmpmRmw2UE90UkFlbWpnMVlFZWlW?=
+ =?utf-8?B?K3lKMWFZMlhPUjBJeERSa0x1RHpBOFJoY0NubXRtTGR6R3VtdkdMREtWR3Q3?=
+ =?utf-8?B?amw0eXNhbmtJUlJwMTRhYSt3c2h6MHZiSGJxbzVJSnFUaXFIeVc2M1Boc2Jo?=
+ =?utf-8?B?c3BPL3hmWklEWHNINGNrV3dteVc5aEFUVEF1SVR2WUZwMWNiOGlyZXdwNDBz?=
+ =?utf-8?B?VEFEMEdrZ0l2OGRaRzZEc1dzUTh2dEI1MTVFR0lYN2k4UFBaYTBFV1RJV0d3?=
+ =?utf-8?B?dUJTV2dYcXJ6T2YrUHhud1p3eXYrcHhmMVVFaE1FMVc3UDRGc0t6OHdISGVY?=
+ =?utf-8?B?MlhGQTZoTGlxYVkzQkZYQml3RGRKZnFuR1RWUTYvVjRLc1lKa1c2ZGhoWWxr?=
+ =?utf-8?B?Z3FBNzYyZDVGWFFJSWJhYnpJRnp6TnFMNG43TGtvQVN6eG41TFR3a3NpejU2?=
+ =?utf-8?B?UkJOWHZZdWFGVExnN0hTVkZmNVpQd2RNeExaZmd6OXVha05tY2w5eUVvWkMx?=
+ =?utf-8?B?REt5dGtYOEM2NWlKNEZVeFVVaTE5bFdjVDlRRElEOUpnOVp1UWx6amU4UWh3?=
+ =?utf-8?B?eVNybVQ0QUNPMWk0VGtLWk1CdUFpUG5zV3hpRGpvcFJzUWhURTB0QXJmSWM1?=
+ =?utf-8?B?V1ZrYlBrcGpqTWxsSVRHdjJoQTBJeDZ2VGIrRTFJM1p6M0M5aUp2TkVFckxU?=
+ =?utf-8?B?K1ovbXc5VSs1Nm93dExGT2kxSUZwYWpYVzBNR29RQlNmbDBTQzhVeVlSbEEv?=
+ =?utf-8?B?ZG5BNUZPMm9nQVViOGp1WGp4YlJNU3Y3Rk5oTTYrek9qWmUxY0FlWkQ0WnFn?=
+ =?utf-8?B?YWUwbjZaL1BSYmVZMXhkQW84Wk41cnhKQitHUDFMTWJVS2hIbGxTYUZYSEdt?=
+ =?utf-8?B?YmlHT29BZXg1Z2hBV2ZIbHpuUXFFSXpZUHBjQXozYy9McWhPaGJvL0RKNGpF?=
+ =?utf-8?B?MVhFZThUR2FPYlRDUUhyMTREMk1xYjhuMmZRTndzbzkwZmYvZ05JMkJFb25W?=
+ =?utf-8?B?SjBqSUZJbzhMNTJqM0t4UExPNHNSOUo4dUxJUktYNFQ1WXR0N0VsSnhHOHpP?=
+ =?utf-8?B?TkFvU24vWVQxRkxCT1JiS1ZrM2ZQVzY1UFZzYkVGOVFyT0JpOGN5aHMrZSs4?=
+ =?utf-8?B?TE1PNTFrc3czN1piSDJZay9ZUWNBWmpGQXB1UDJSdCtrQ1dzaFkwRnpHZytS?=
+ =?utf-8?B?YldGd24zUzlCNHV3b2ZRQmQ4LzJSV3laSnVSRmE5NlM5bjdXMWNzLzhuYmFk?=
+ =?utf-8?B?dVhTWUYrajdaM0pCSGlabVd1YVBNMzdick9FQnFFblBEcFhqTUlNenN6ekxr?=
+ =?utf-8?B?MDB2ZWNLWUV2MHJzbnJoSk5GTjVZUnVOZUNxSDhTNEFJOVFiYm84QVpMRVB4?=
+ =?utf-8?B?Ky9Gd1dacHFLSUZFcnR1L0JTOVJENjFZQ3EycDRzZExrVnd2Uk5yZm5EQlZ3?=
+ =?utf-8?B?UE5oZHAzSDZmKzBwY0Q3YTZ3eDdpMDM3MEdtUDBrM0ZMM3Q3aDFDZzlWbjVM?=
+ =?utf-8?B?dElGU0Y1aHN5NXhKSDhtZ0ljUFcxNDBRZUtXaWppaEpQWk1xSyt3NVlxQS85?=
+ =?utf-8?B?STFiQkVrMldNeXNZamhUSGJaQXhxclhKWTZETXNyTjJRUTdiR3VUMDVPTEFX?=
+ =?utf-8?B?Y3RzaTZURDVZQnNudHI5aHVuMEM1VFk2ZFJpc0ptYVZPTGp5R2t1ZjZiSVBI?=
+ =?utf-8?B?czNxNDdNT3JnZWtpY25YR1FLQ3phbWtHSUlNN3A5d1RTaXZ3ZE5SMGFUSXFX?=
+ =?utf-8?B?alpIRHZvS3BhNktqOWMxMlZOa3ZqOFRpS1BIb2phL2VaVkxTWnRhWmt3NlNl?=
+ =?utf-8?B?VkhkMzNiVzFwZ2dSRXJxTlBmVWpDQXFmVkgwTW9mVFJXallmbEhXUnpHY2Fi?=
+ =?utf-8?B?WGc2bE1hVWczTUFScElxZDE3UGFWQXptMW9KbHNwZ3k5KytXREZnODcvWHVE?=
+ =?utf-8?B?SFAvcVNmWmt0SU1mUGd3VGRqak1SaHNodGxmYWx5RVJlcjlSVUpNTjFTZ2x2?=
+ =?utf-8?B?NVdnN2dMWVNjM01FemZ6SlUzZXZCSG1BUVZtNlNoYmVTL1VDZjdjRllteXl4?=
+ =?utf-8?B?SCs2N2JLWHN6dUhickZiOXlsY3FvbUpNckhQKy9QL1hnMkVCVmpMZjl4RUhC?=
+ =?utf-8?B?Qmc9PQ==?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9b77ce9d-f86d-4f8c-827a-08dc44acf27e
+X-MS-Exchange-CrossTenant-AuthSource: DS0PR11MB7312.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Mar 2024 05:01:17.6796
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: AQxzS2KIXOhIggzWUgvG9wrMGVSXSOIoZ527q32djSz9JoXfc4lsWwp43J2RpE37Fxke91FdbeZGu+tS4czZOlIfKAxjtQwp78IBiJvetbE=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR11MB6124
+X-Proofpoint-GUID: wzXUWAjsywrnnhv5A6vhCJUxn2-n-6hv
+X-Proofpoint-ORIG-GUID: i9LFoc5Jf52DQ1GIuGYUEzyuQT8Y7E-M
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-03-14_13,2024-03-13_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 clxscore=1015
+ phishscore=0 malwarescore=0 bulkscore=0 suspectscore=0 priorityscore=1501
+ mlxscore=0 impostorscore=0 lowpriorityscore=0 mlxlogscore=999 adultscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2403140001
+ definitions=main-2403150038
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 15 Mar 2024 04:38:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109325
+ <openembedded-devel@lists.openembedded.org>; Fri, 15 Mar 2024 05:01:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109326
 
-fails to build with musl/clang
+--------------3yiTooYzmVKNty2up0kU9Mjm
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 42F3qm3h015022
 
-https://snips.sh/f/qCR86Rwwz1
 
-On Thu, Mar 14, 2024 at 12:43=E2=80=AFPM J=C3=B6rg Sommer via
-lists.openembedded.org
-<joerg.sommer=3Dnavimatix.de@lists.openembedded.org> wrote:
+On 3/15/24 01:12, Khem Raj wrote:
+> CAUTION: This email comes from a non Wind River email account!
+> Do not click links or open attachments unless you recognize the sender =
+and know the content is safe.
 >
-> From: J=C3=B6rg Sommer <joerg.sommer@navimatix.de>
->
-> Signed-off-by: J=C3=B6rg Sommer <joerg.sommer@navimatix.de>
-> ---
->  .../spandsp/spandsp/configure.patch           |  56 ++++++
->  .../spandsp/spandsp/makefile.patch            | 161 ++++++++++++++++++
->  .../recipes-multimedia/spandsp/spandsp_git.bb |  47 +++++
->  3 files changed, 264 insertions(+)
->  create mode 100644 meta-multimedia/recipes-multimedia/spandsp/spandsp/co=
-nfigure.patch
->  create mode 100644 meta-multimedia/recipes-multimedia/spandsp/spandsp/ma=
-kefile.patch
->  create mode 100644 meta-multimedia/recipes-multimedia/spandsp/spandsp_gi=
-t.bb
->
-> diff --git a/meta-multimedia/recipes-multimedia/spandsp/spandsp/configure=
-.patch b/meta-multimedia/recipes-multimedia/spandsp/spandsp/configure.patch
-> new file mode 100644
-> index 000000000..af504be76
-> --- /dev/null
-> +++ b/meta-multimedia/recipes-multimedia/spandsp/spandsp/configure.patch
-> @@ -0,0 +1,56 @@
-> +From: =3D?UTF-8?q?J=3DC3=3DB6rg=3D20Sommer?=3D <joerg.sommer@navimatix.d=
-e>
-> +Date: Thu, 14 Mar 2024 09:41:57 +0100
-> +Subject: [PATCH 2/2] configure: Replace manual search for libxml by
-> + AC_CHECK_LIB
-> +MIME-Version: 1.0
-> +Content-Type: text/plain; charset=3DUTF-8
-> +Content-Transfer-Encoding: 8bit
-> +
-> +The manual search fails if the include directories (and build environmen=
-t)
-> +are located somewhere else.
-> +
-> +Signed-off-by: J=C3=B6rg Sommer <joerg.sommer@navimatix.de>
-> +Upstream-Status: Submitted [https://github.com/freeswitch/spandsp/pull/7=
-4]
-> +---
-> +
-> +ERROR: spandsp-3.0.0+git-r0 do_configure: QA Issue: This autoconf log in=
-dicates errors, it looked at host include and/or library paths while determ=
-ining system capabilities.
-> +
-> + configure.ac | 22 +++++-----------------
-> + 1 file changed, 5 insertions(+), 17 deletions(-)
-> +
-> +diff --git a/configure.ac b/configure.ac
-> +index 2140837..b5138d6 100644
-> +--- a/configure.ac
-> ++++ b/configure.ac
-> +@@ -185,23 +185,11 @@ then
-> + fi
-> +
-> + # Determine XML2 include path
-> +-AC_MSG_CHECKING(for libxml/xmlmemory.h)
-> +-
-> +-# Can we include headers using system include dirs?
-> +-AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <libxml/xmlmemory.h>]], [=
-[int a =3D 1;]])],[XML2_INCLUDE=3D" "],[XML2_INCLUDE=3D])
-> +-
-> +-# Hunt through several possible directories to find the includes for li=
-bxml2
-> +-if test "x$XML2_INCLUDE" =3D "x"; then
-> +-    old_CPPFLAGS=3D"$CPPFLAGS"
-> +-    for i in $xml2_include_dir /usr/include /usr/local/include /usr/inc=
-lude/libxml2 /usr/local/include/libxml2 ; do
-> +-        CPPFLAGS=3D"$old_CPPFLAGS -I$i"
-> +-        AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <libxml/xmlmemory=
-.h>]], [[int a =3D 1;]])],[XML2_INCLUDE=3D"-I$i"],[XML2_INCLUDE=3D
-> +-        ])
-> +-        if test "x$XML2_INCLUDE" !=3D "x"; then
-> +-            break;
-> +-        fi
-> +-    done
-> +-    CPPFLAGS=3D"$old_CPPFLAGS $XML2_INCLUDE"
-> ++AC_CHECK_LIB([xml2], [xmlParseFile], [libxml2_found=3Dyes])
-> ++if test "$libxml2_found" =3D "yes" ; then
-> ++    AC_DEFINE(HAVE_LIBXML2,1,[defined when libxml2 is available])
-> ++else
-> ++    AC_MSG_WARN([libxml2 not found. Disabling cache.])
-> + fi
-> +
-> + AC_CHECK_HEADERS([libxml/xmlmemory.h])
-> +--
-> +2.34.1
-> +
-> diff --git a/meta-multimedia/recipes-multimedia/spandsp/spandsp/makefile.=
-patch b/meta-multimedia/recipes-multimedia/spandsp/spandsp/makefile.patch
-> new file mode 100644
-> index 000000000..d3eb047fe
-> --- /dev/null
-> +++ b/meta-multimedia/recipes-multimedia/spandsp/spandsp/makefile.patch
-> @@ -0,0 +1,161 @@
-> +From: =3D?UTF-8?q?J=3DC3=3DB6rg=3D20Sommer?=3D <joerg.sommer@navimatix.d=
-e>
-> +Date: Thu, 14 Mar 2024 08:08:13 +0100
-> +Subject: [PATCH 1/2] configure: Use AX_PROG_CC_FOR_BUILD for cross compi=
-ling
-> +MIME-Version: 1.0
-> +Content-Type: text/plain; charset=3DUTF-8
-> +Content-Transfer-Encoding: 8bit
-> +
-> +The macro AX_PROG_CC_FOR_BUILD [1] sets the variables CC_FOR_BUILD and
-> +..._FLAGS_FOR_BUILD they can be used [2] to build binaries used at compi=
-le
-> +time.
-> +
-> +[1]: https://www.gnu.org/software/autoconf-archive/ax_prog_cc_for_build.=
-html
-> +[2]: https://stackoverflow.com/questions/24201260/autotools-cross-compil=
-ation-and-generated-sources/24208587#24208587
-> +
-> +Signed-off-by: J=C3=B6rg Sommer <joerg.sommer@navimatix.de>
-> +Upstream-Status: Submitted [https://github.com/freeswitch/spandsp/pull/7=
-4]
-> +---
-> + configure.ac    | 49 +-------------------------------------------
-> + src/Makefile.am | 54 +++++++++++++++++++++++++------------------------
-> + 2 files changed, 29 insertions(+), 74 deletions(-)
-> +
-> +diff --git a/configure.ac b/configure.ac
-> +index 96fd022..2140837 100644
-> +--- a/configure.ac
-> ++++ b/configure.ac
-> +@@ -55,54 +55,7 @@ AC_LANG([C])
-> +
-> + AX_COMPILER_VENDOR
-> +
-> +-if test "${build}" !=3D "${host}"
-> +-then
-> +-    # If we are doing a Canadian Cross, in which the host and build sys=
-tems
-> +-    # are not the same, we set reasonable default values for the tools.
-> +-
-> +-    CC_FOR_BUILD=3D${CC_FOR_BUILD-gcc}
-> +-    CPPFLAGS_FOR_BUILD=3D"\$(CPPFLAGS)"
-> +-    CC=3D${CC-${host_alias}-gcc}
-> +-    CFLAGS=3D${CFLAGS-"-g -O2"}
-> +-    CXX=3D${CXX-${host_alias}-c++}
-> +-    CXXFLAGS=3D${CXXFLAGS-"-g -O2"}
-> +-else
-> +-    # Set reasonable default values for some tools even if not Canadian=
-.
-> +-    # Of course, these are different reasonable default values, origina=
-lly
-> +-    # specified directly in the Makefile.
-> +-    # We don't export, so that autoconf can do its job.
-> +-    # Note that all these settings are above the fragment inclusion poi=
-nt
-> +-    # in Makefile.in, so can still be overridden by fragments.
-> +-    # This is all going to change when we autoconfiscate...
-> +-    CC_FOR_BUILD=3D"\$(CC)"
-> +-    CPPFLAGS_FOR_BUILD=3D"\$(CPPFLAGS)"
-> +-    AC_PROG_CC
-> +-
-> +-    # We must set the default linker to the linker used by gcc for the =
-correct
-> +-    # operation of libtool.  If LD is not defined and we are using gcc,=
- try to
-> +-    # set the LD default to the ld used by gcc.
-> +-    if test -z "$LD"
-> +-    then
-> +-        if test "$GCC" =3D yes
-> +-        then
-> +-            case $build in
-> +-            *-*-mingw*)
-> +-                gcc_prog_ld=3D`$CC -print-prog-name=3Dld 2>&1 | tr -d '=
-\015'` ;;
-> +-            *)
-> +-                gcc_prog_ld=3D`$CC -print-prog-name=3Dld 2>&1` ;;
-> +-            esac
-> +-            case $gcc_prog_ld in
-> +-            # Accept absolute paths.
-> +-            [[\\/]* | [A-Za-z]:[\\/]*)]
-> +-                LD=3D"$gcc_prog_ld" ;;
-> +-            esac
-> +-        fi
-> +-    fi
-> +-
-> +-    CXX=3D${CXX-"c++"}
-> +-    CFLAGS=3D${CFLAGS-"-g -O2"}
-> +-    CXXFLAGS=3D${CXXFLAGS-"-g -O2"}
-> +-fi
-> ++AX_PROG_CC_FOR_BUILD
-> +
-> + AC_DEFUN([REMOVE_FROM_VAR],[
-> +     new_val=3D""
-> +diff --git a/src/Makefile.am b/src/Makefile.am
-> +index e05fad5..9b409a1 100644
-> +--- a/src/Makefile.am
-> ++++ b/src/Makefile.am
-> +@@ -386,44 +386,46 @@ noinst_HEADERS =3D cielab_luts.h \
-> +                  v34_tx_pre_emphasis_filters.h \
-> +                  v34_tables.h
-> +
-> +-make_at_dictionary$(EXEEXT): $(top_srcdir)/src/make_at_dictionary.c
-> +-      $(CC_FOR_BUILD) -o make_at_dictionary$(EXEEXT) $(top_srcdir)/src/=
-make_at_dictionary.c -DHAVE_CONFIG_H -I$(top_builddir)/src
-> ++LINK_FOR_BUILD.c =3D $(CC_FOR_BUILD) -DHAVE_CONFIG_H -I$(top_builddir)/=
-src $(CFLAGS_FOR_BUILD) $(CPPFLAGS_FOR_BUILD) $(LDFLAGS_FOR_BUILD) $(TARGET=
-_ARCH_FOR_BUILD)
-> +
-> +-make_cielab_luts$(EXEEXT): $(top_srcdir)/src/make_cielab_luts.c
-> +-      $(CC_FOR_BUILD) -o make_cielab_luts$(EXEEXT) $(top_srcdir)/src/ma=
-ke_cielab_luts.c -DHAVE_CONFIG_H -I$(top_builddir)/src -lm
-> ++make_at_dictionary$(BUILD_EXEEXT): $(top_srcdir)/src/make_at_dictionary=
-.c
-> ++      $(LINK_FOR_BUILD.c) -o $@ $^
-> +
-> +-make_math_fixed_tables$(EXEEXT): $(top_srcdir)/src/make_math_fixed_tabl=
-es.c
-> +-      $(CC_FOR_BUILD) -o make_math_fixed_tables$(EXEEXT) $(top_srcdir)/=
-src/make_math_fixed_tables.c -DHAVE_CONFIG_H -I$(top_builddir)/src -lm
-> ++make_cielab_luts$(BUILD_EXEEXT): $(top_srcdir)/src/make_cielab_luts.c
-> ++      $(LINK_FOR_BUILD.c) -o $@ $^ -lm
-> +
-> +-make_modem_filter$(EXEEXT): $(top_srcdir)/src/make_modem_filter.c $(top=
-_srcdir)/src/filter_tools.c
-> +-      $(CC_FOR_BUILD) -o make_modem_filter$(EXEEXT) $(top_srcdir)/src/m=
-ake_modem_filter.c $(top_srcdir)/src/filter_tools.c -DHAVE_CONFIG_H -I$(top=
-_builddir)/src -lm
-> ++make_math_fixed_tables$(BUILD_EXEEXT): $(top_srcdir)/src/make_math_fixe=
-d_tables.c
-> ++      $(LINK_FOR_BUILD.c) -o $@ $^ -lm
-> +
-> +-make_modem_godard_coefficients$(EXEEXT): $(top_srcdir)/src/make_modem_g=
-odard_coefficients.c $(top_srcdir)/src/filter_tools.c
-> +-      $(CC_FOR_BUILD) -o make_modem_godard_coefficients$(EXEEXT) $(top_=
-srcdir)/src/make_modem_godard_coefficients.c $(top_srcdir)/src/filter_tools=
-.c -DHAVE_CONFIG_H -I$(top_builddir)/src -lm
-> ++make_modem_filter$(BUILD_EXEEXT): $(top_srcdir)/src/make_modem_filter.c=
- $(top_srcdir)/src/filter_tools.c
-> ++      $(LINK_FOR_BUILD.c) -o $@ $^ -lm
-> +
-> +-make_t43_gray_code_tables$(EXEEXT): $(top_srcdir)/src/make_t43_gray_cod=
-e_tables.c
-> +-      $(CC_FOR_BUILD) -o make_t43_gray_code_tables$(EXEEXT) $(top_srcdi=
-r)/src/make_t43_gray_code_tables.c -DHAVE_CONFIG_H -I$(top_builddir)/src -l=
-m
-> ++make_modem_godard_coefficients$(BUILD_EXEEXT): $(top_srcdir)/src/make_m=
-odem_godard_coefficients.c $(top_srcdir)/src/filter_tools.c
-> ++      $(LINK_FOR_BUILD.c) -o $@ $^ -lm
-> +
-> +-make_v17_v32_constellation_map$(EXEEXT): $(top_srcdir)/src/make_v17_v32=
-_constellation_map.c $(top_srcdir)/src/g711.c $(top_srcdir)/src/alloc.c
-> +-      $(CC_FOR_BUILD) -o make_v17_v32_constellation_map$(EXEEXT) $(top_=
-srcdir)/src/make_v17_v32_constellation_map.c $(top_srcdir)/src/g711.c $(top=
-_srcdir)/src/alloc.c -DHAVE_CONFIG_H -I$(top_builddir)/src -lm
-> ++make_t43_gray_code_tables$(BUILD_EXEEXT): $(top_srcdir)/src/make_t43_gr=
-ay_code_tables.c
-> ++      $(LINK_FOR_BUILD.c) -o $@ $^ -lm
-> +
-> +-make_v17_v32_convolutional_encoder$(EXEEXT): $(top_srcdir)/src/make_v17=
-_v32_convolutional_encoder.c $(top_srcdir)/src/g711.c $(top_srcdir)/src/all=
-oc.c
-> +-      $(CC_FOR_BUILD) -o make_v17_v32_convolutional_encoder$(EXEEXT) $(=
-top_srcdir)/src/make_v17_v32_convolutional_encoder.c $(top_srcdir)/src/g711=
-.c $(top_srcdir)/src/alloc.c -DHAVE_CONFIG_H -I$(top_builddir)/src -lm
-> ++make_v17_v32_constellation_map$(BUILD_EXEEXT): $(top_srcdir)/src/make_v=
-17_v32_constellation_map.c $(top_srcdir)/src/g711.c $(top_srcdir)/src/alloc=
-.c
-> ++      $(LINK_FOR_BUILD.c) -o $@ $^ -lm
-> +
-> +-make_v29_constellation_map$(EXEEXT): $(top_srcdir)/src/make_v29_constel=
-lation_map.c $(top_srcdir)/src/g711.c $(top_srcdir)/src/alloc.c
-> +-      $(CC_FOR_BUILD) -o make_v29_constellation_map$(EXEEXT) $(top_srcd=
-ir)/src/make_v29_constellation_map.c $(top_srcdir)/src/g711.c $(top_srcdir)=
-/src/alloc.c -DHAVE_CONFIG_H -I$(top_builddir)/src -lm
-> ++make_v17_v32_convolutional_encoder$(BUILD_EXEEXT): $(top_srcdir)/src/ma=
-ke_v17_v32_convolutional_encoder.c $(top_srcdir)/src/g711.c $(top_srcdir)/s=
-rc/alloc.c
-> ++      $(LINK_FOR_BUILD.c) -o $@ $^ -lm
-> +
-> +-make_v34_convolutional_coders$(EXEEXT): $(top_srcdir)/src/make_v34_conv=
-olutional_coders.c
-> +-      $(CC_FOR_BUILD) -o make_v34_convolutional_coders$(EXEEXT) $(top_s=
-rcdir)/src/make_v34_convolutional_coders.c -DHAVE_CONFIG_H -I$(top_builddir=
-)/src -lm
-> ++make_v29_constellation_map$(BUILD_EXEEXT): $(top_srcdir)/src/make_v29_c=
-onstellation_map.c $(top_srcdir)/src/g711.c $(top_srcdir)/src/alloc.c
-> ++      $(LINK_FOR_BUILD.c) -o $@ $^ -lm
-> +
-> +-make_v34_probe_signals$(EXEEXT): $(top_srcdir)/src/make_v34_probe_signa=
-ls.c $(top_srcdir)/src/g711.c $(top_srcdir)/src/alloc.c
-> +-      $(CC_FOR_BUILD) -o make_v34_probe_signals$(EXEEXT) $(top_srcdir)/=
-src/make_v34_probe_signals.c $(top_srcdir)/src/g711.c $(top_srcdir)/src/all=
-oc.c -DHAVE_CONFIG_H -I$(top_builddir)/src -lm
-> ++make_v34_convolutional_coders$(BUILD_EXEEXT): $(top_srcdir)/src/make_v3=
-4_convolutional_coders.c
-> ++      $(LINK_FOR_BUILD.c) -o $@ $^ -lm
-> +
-> +-make_v34_shell_map$(EXEEXT): $(top_srcdir)/src/make_v34_shell_map.c
-> +-      $(CC_FOR_BUILD) -o make_v34_shell_map$(EXEEXT) $(top_srcdir)/src/=
-make_v34_shell_map.c -DHAVE_CONFIG_H -I$(top_builddir)/src
-> ++make_v34_probe_signals$(BUILD_EXEEXT): $(top_srcdir)/src/make_v34_probe=
-_signals.c $(top_srcdir)/src/g711.c $(top_srcdir)/src/alloc.c
-> ++      $(LINK_FOR_BUILD.c) -o $@ $^ -I$(top_srcdir)/src -lm
-> +
-> +-make_v34_tx_pre_emphasis_filters$(EXEEXT): $(top_srcdir)/src/make_v34_t=
-x_pre_emphasis_filters.c $(top_srcdir)/tools/meteor-engine.c
-> +-      $(CC_FOR_BUILD) -o make_v34_tx_pre_emphasis_filters$(EXEEXT) $(to=
-p_srcdir)/src/make_v34_tx_pre_emphasis_filters.c $(top_srcdir)/tools/meteor=
--engine.c -DHAVE_CONFIG_H -I$(top_builddir)/src -I$(top_builddir)/tools -lm
-> ++make_v34_shell_map$(BUILD_EXEEXT): $(top_srcdir)/src/make_v34_shell_map=
-.c
-> ++      $(LINK_FOR_BUILD.c) -o $@ $^
-> ++
-> ++make_v34_tx_pre_emphasis_filters$(BUILD_EXEEXT): $(top_srcdir)/src/make=
-_v34_tx_pre_emphasis_filters.c $(top_srcdir)/tools/meteor-engine.c
-> ++      $(LINK_FOR_BUILD.c) -o $@ $^ -I$(top_srcdir)/tools -lm
-> +
-> + # We need to run make_at_dictionary, so it generates the
-> + # at_interpreter_dictionary.h file
-> +--
-> +2.34.1
-> +
-> diff --git a/meta-multimedia/recipes-multimedia/spandsp/spandsp_git.bb b/=
-meta-multimedia/recipes-multimedia/spandsp/spandsp_git.bb
-> new file mode 100644
-> index 000000000..84bc4a8f1
-> --- /dev/null
-> +++ b/meta-multimedia/recipes-multimedia/spandsp/spandsp_git.bb
-> @@ -0,0 +1,47 @@
-> +SUMMARY =3D "A DSP library for telephony"
-> +DESCRIPTION =3D "\
-> +    SpanDSP is a low-level signal processing library that modulates and =
-\
-> +    demodulates signals commonly used in telephony, such as the \"noise\=
-" \
-> +    generated by a fax modem or DTMF touchpad. \
-> +"
-> +HOMEPAGE =3D "https://www.soft-switch.org/"
-> +BUGTRACKER =3D "https://github.com/freeswitch/spandsp/issues"
-> +SECTION =3D "libs"
-> +LICENSE =3D "LGPL-2.1-only"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D8791c23ddf418deb5be264cffb5fa=
-6bc"
-> +
-> +DEPENDS =3D "\
-> +    libxml2 \
-> +    tiff \
-> +    tiff-native \
-> +"
-> +
-> +PV =3D "3.0.0+git"
-> +
-> +SRC_URI =3D "\
-> +    git://github.com/freeswitch/spandsp.git;protocol=3Dhttps;branch=3Dma=
-ster \
-> +    file://configure.patch \
-> +    file://makefile.patch \
-> +"
-> +SRCREV =3D "7b0b8cf3d42b725405bcc63145de5e280265ce4e"
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +inherit autotools
-> +
-> +PACKAGECONFIG ?=3D ""
-> +
-> +PACKAGECONFIG[mmx] =3D "--enable-mmx,--disable-mmx"
-> +PACKAGECONFIG[sse] =3D "--enable-sse,--disable-sse"
-> +PACKAGECONFIG[sse2] =3D "--enable-sse2,--disable-sse2"
-> +PACKAGECONFIG[sse3] =3D "--enable-sse3,--disable-sse3"
-> +PACKAGECONFIG[ssse3] =3D "--enable-ssse3,--disable-ssse3"
-> +PACKAGECONFIG[sse4-1] =3D "--enable-sse4-1,--disable-sse4-1"
-> +PACKAGECONFIG[sse4-2] =3D "--enable-sse4-2,--disable-sse4-2"
-> +PACKAGECONFIG[avx] =3D "--enable-avx,--disable-avx"
-> +PACKAGECONFIG[avx2] =3D "--enable-avx2,--disable-avx2"
-> +PACKAGECONFIG[neon] =3D "--enable-neon,--disable-neon"
-> +PACKAGECONFIG[fixed-point] =3D "--enable-fixed-point,--disable-fixed-poi=
-nt"
-> +PACKAGECONFIG[v32bis] =3D "--enable-v32bis,--disable-v32bis"
-> +PACKAGECONFIG[v34] =3D "--enable-v34,--disable-v34"
-> +PACKAGECONFIG[sslfax] =3D "--enable-sslfax,--disable-sslfax"
-> --
-> 2.34.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#109321): https://lists.openembedded.org/g/openembedde=
-d-devel/message/109321
-> Mute This Topic: https://lists.openembedded.org/mt/104933829/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+> On Thu, Mar 14, 2024 at 12:22=E2=80=AFAM Changqing Li
+> <changqing.li@eng.windriver.com>  wrote:
+>> From: Changqing Li<changqing.li@windriver.com>
+>>
+>> initdb on target will fail with below error:
+>> 2024-03-13 08:40:23.253 UTC [4410] FATAL:  could not load library "/us=
+r/lib64/postgresql/dict_snowball.so": /usr/lib64/postgresql/dict_snowball=
+.so: undefined symbol: CurrentMemoryContext
+>>
+>> Refer [1][2], for cross compile, --export-dynamic is assumed as not
+>> supported, and cause above error. For oe, both gcc and clang support
+>> --export-dynamic, fixed by set LDFLAGS_EX_BE directly
+>>
+>> [1]https://www.postgresql.org/message-id/79e63515-0f5e-30f4-136d-96e23=
+b1a817d%40posteo.de
+>> [2]https://github.com/postgres/postgres/commit/9db49fc5bfdc0126be03f4b=
+8986013e59d93b91d#diff-49473dca262eeab3b4a43002adb08b4db31020d190caaad159=
+4b47f1d5daa810
+>>
+>> Signed-off-by: Changqing Li<changqing.li@windriver.com>
+>> ---
+>>   meta-oe/recipes-dbs/postgresql/postgresql.inc | 1 +
+>>   1 file changed, 1 insertion(+)
+>>
+>> diff --git a/meta-oe/recipes-dbs/postgresql/postgresql.inc b/meta-oe/r=
+ecipes-dbs/postgresql/postgresql.inc
+>> index 868a2e443..e29a5bef7 100644
+>> --- a/meta-oe/recipes-dbs/postgresql/postgresql.inc
+>> +++ b/meta-oe/recipes-dbs/postgresql/postgresql.inc
+>> @@ -35,6 +35,7 @@ LEAD_SONAME =3D "libpq.so"
+>>
+>>   # LDFLAGS for shared libraries
+>>   export LDFLAGS_SL =3D "${LDFLAGS}"
+>> +export LDFLAGS_EX_BE =3D "-Wl,--export-dynamic"
+> this will add all the symbols into dynamic symbol table which may not
+> be best scenario, can we just export the ones needed ?
+> perhaps look into using --dynamic-list.
+
+Hi, Khem
+
+I tried to use --dynamic-list as you recommended and test command=20
+"postgresql_setup initdb",
+
+after I added all the symbols in dict_snowball.so, it will report=20
+undefined symbolsfor another lib. I know I can try to
+
+add all the symbols for all the libs. but there are nearly 80+ libs=20
+generated by postgresql. There will be many symbols.
+
+And I also worried that, we may missing some symbols since I may cannot=20
+cover all the runtime cases.
+
+ From [2], we can know that postgresql use "-Wl,--export-dynamic" before.
+
+So maybe it is better to still use "-Wl,--export-dynamic" like before?=20
+what is your opinion?
+
+Thanks
+
+Changqing
+
+>>   inherit autotools pkgconfig perlnative python3native python3targetco=
+nfig useradd update-rc.d systemd gettext cpan-base multilib_header
+>>
+>> --
+>> 2.25.1
+>>
+>>
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>> Links: You receive all messages sent to this group.
+>> View/Reply Online (#109311):https://lists.openembedded.org/g/openembed=
+ded-devel/message/109311
+>> Mute This Topic:https://lists.openembedded.org/mt/104922226/1997914
+>> Group Owner:openembedded-devel+owner@lists.openembedded.org
+>> Unsubscribe:https://lists.openembedded.org/g/openembedded-devel/unsub =
+ [raj.khem@gmail.com]
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>>
+--------------3yiTooYzmVKNty2up0kU9Mjm
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 42F3qm3h015022
+
+<!DOCTYPE html><html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class=3D"moz-cite-prefix">On 3/15/24 01:12, Khem Raj wrote:<br>
+    </div>
+    <blockquote type=3D"cite" cite=3D"mid:CAMKF1srgr=3DEqeoZXiYLjzvjiQ_fH=
+6csQHDayCQXX2rcED8ZVyA@mail.gmail.com">
+      <pre class=3D"moz-quote-pre" wrap=3D"">CAUTION: This email comes fr=
+om a non Wind River email account!
+Do not click links or open attachments unless you recognize the sender an=
+d know the content is safe.
+
+On Thu, Mar 14, 2024 at 12:22=E2=80=AFAM Changqing Li
+<a class=3D"moz-txt-link-rfc2396E" href=3D"mailto:changqing.li@eng.windri=
+ver.com">&lt;changqing.li@eng.windriver.com&gt;</a> wrote:
+</pre>
+      <blockquote type=3D"cite">
+        <pre class=3D"moz-quote-pre" wrap=3D"">From: Changqing Li <a clas=
+s=3D"moz-txt-link-rfc2396E" href=3D"mailto:changqing.li@windriver.com">&l=
+t;changqing.li@windriver.com&gt;</a>
+
+initdb on target will fail with below error:
+2024-03-13 08:40:23.253 UTC [4410] FATAL:  could not load library &quot;/=
+usr/lib64/postgresql/dict_snowball.so&quot;: /usr/lib64/postgresql/dict_s=
+nowball.so: undefined symbol: CurrentMemoryContext
+
+Refer [1][2], for cross compile, --export-dynamic is assumed as not
+supported, and cause above error. For oe, both gcc and clang support
+--export-dynamic, fixed by set LDFLAGS_EX_BE directly
+
+[1] <a class=3D"moz-txt-link-freetext" href=3D"https://www.postgresql.org=
+/message-id/79e63515-0f5e-30f4-136d-96e23b1a817d%40posteo.de">https://www=
+.postgresql.org/message-id/79e63515-0f5e-30f4-136d-96e23b1a817d%40posteo.=
+de</a>
+[2] <a class=3D"moz-txt-link-freetext" href=3D"https://github.com/postgre=
+s/postgres/commit/9db49fc5bfdc0126be03f4b8986013e59d93b91d#diff-49473dca2=
+62eeab3b4a43002adb08b4db31020d190caaad1594b47f1d5daa810">https://github.c=
+om/postgres/postgres/commit/9db49fc5bfdc0126be03f4b8986013e59d93b91d#diff=
+-49473dca262eeab3b4a43002adb08b4db31020d190caaad1594b47f1d5daa810</a>
+
+Signed-off-by: Changqing Li <a class=3D"moz-txt-link-rfc2396E" href=3D"ma=
+ilto:changqing.li@windriver.com">&lt;changqing.li@windriver.com&gt;</a>
+---
+ meta-oe/recipes-dbs/postgresql/postgresql.inc | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/meta-oe/recipes-dbs/postgresql/postgresql.inc b/meta-oe/reci=
+pes-dbs/postgresql/postgresql.inc
+index 868a2e443..e29a5bef7 100644
+--- a/meta-oe/recipes-dbs/postgresql/postgresql.inc
++++ b/meta-oe/recipes-dbs/postgresql/postgresql.inc
+@@ -35,6 +35,7 @@ LEAD_SONAME =3D &quot;libpq.so&quot;
+
+ # LDFLAGS for shared libraries
+ export LDFLAGS_SL =3D &quot;${LDFLAGS}&quot;
++export LDFLAGS_EX_BE =3D &quot;-Wl,--export-dynamic&quot;
+</pre>
+      </blockquote>
+      <pre class=3D"moz-quote-pre" wrap=3D"">this will add all the symbol=
+s into dynamic symbol table which may not
+be best scenario, can we just export the ones needed ?
+perhaps look into using --dynamic-list.</pre>
+    </blockquote>
+    <p>Hi, Khem</p>
+    <p>I tried to use <span style=3D"white-space: pre-wrap">--dynamic-lis=
+t as you recommended and test command &quot;postgresql_setup initdb&quot;=
+, </span></p>
+    <p><span style=3D"white-space: pre-wrap">after I added all the symbol=
+s in dict_snowball.so, it will report undefined </span><span style=3D"whi=
+te-space: pre-wrap">symbols</span><span style=3D"white-space: pre-wrap"> =
+for another lib. I know I  can try to</span></p>
+    <p><span style=3D"white-space: pre-wrap">add all the </span><span sty=
+le=3D"white-space: pre-wrap">symbols for all the libs. but there are near=
+ly 80+ libs generated by postgresql.  There will be many </span><span sty=
+le=3D"white-space: pre-wrap">symbols.</span></p>
+    <p><span style=3D"white-space: pre-wrap">And I also worried that,  we=
+ may missing some </span><span style=3D"white-space: pre-wrap">symbols si=
+nce I may cannot cover all the runtime cases.</span></p>
+    <p><span style=3D"white-space: pre-wrap">From [2],  we can know  that=
+ postgresql use &quot;</span><span style=3D"white-space: pre-wrap">-Wl,--=
+export-dynamic&quot; before.  </span></p>
+    <p><span style=3D"white-space: pre-wrap">So maybe it is better to sti=
+ll use </span><span style=3D"white-space: pre-wrap">&quot;</span><span st=
+yle=3D"white-space: pre-wrap">-Wl,--export-dynamic&quot; like before?  wh=
+at is your opinion? </span></p>
+    <p><span style=3D"white-space: pre-wrap">Thanks</span></p>
+    <p><span style=3D"white-space: pre-wrap">Changqing=20
+</span></p>
+    <blockquote type=3D"cite" cite=3D"mid:CAMKF1srgr=3DEqeoZXiYLjzvjiQ_fH=
+6csQHDayCQXX2rcED8ZVyA@mail.gmail.com">
+      <blockquote type=3D"cite">
+        <pre class=3D"moz-quote-pre" wrap=3D""> inherit autotools pkgconf=
+ig perlnative python3native python3targetconfig useradd update-rc.d syste=
+md gettext cpan-base multilib_header
+
+--
+2.25.1
+
+
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+Links: You receive all messages sent to this group.
+View/Reply Online (#109311): <a class=3D"moz-txt-link-freetext" href=3D"h=
+ttps://lists.openembedded.org/g/openembedded-devel/message/109311">https:=
+//lists.openembedded.org/g/openembedded-devel/message/109311</a>
+Mute This Topic: <a class=3D"moz-txt-link-freetext" href=3D"https://lists=
+.openembedded.org/mt/104922226/1997914">https://lists.openembedded.org/mt=
+/104922226/1997914</a>
+Group Owner: <a class=3D"moz-txt-link-abbreviated moz-txt-link-freetext" =
+href=3D"mailto:openembedded-devel+owner@lists.openembedded.org">openembed=
+ded-devel+owner@lists.openembedded.org</a>
+Unsubscribe: <a class=3D"moz-txt-link-freetext" href=3D"https://lists.ope=
+nembedded.org/g/openembedded-devel/unsub">https://lists.openembedded.org/=
+g/openembedded-devel/unsub</a> [<a class=3D"moz-txt-link-abbreviated moz-=
+txt-link-freetext" href=3D"mailto:raj.khem@gmail.com">raj.khem@gmail.com<=
+/a>]
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+
+</pre>
+      </blockquote>
+    </blockquote>
+  </body>
+</html>
+
+--------------3yiTooYzmVKNty2up0kU9Mjm--
 
