@@ -1,477 +1,222 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 77EF7C54E58
-	for <webhook@archiver.kernel.org>; Fri, 15 Mar 2024 05:14:18 +0000 (UTC)
-Received: from mail-oa1-f42.google.com (mail-oa1-f42.google.com [209.85.160.42])
- by mx.groups.io with SMTP id smtpd.web10.13743.1710479652215656629
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 77205C54E58
+	for <webhook@archiver.kernel.org>; Fri, 15 Mar 2024 05:15:48 +0000 (UTC)
+Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
+ by mx.groups.io with SMTP id smtpd.web10.13760.1710479747622105106
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 14 Mar 2024 22:14:12 -0700
+ Thu, 14 Mar 2024 22:15:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=NEV5CMxM;
- spf=pass (domain: gmail.com, ip: 209.85.160.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f42.google.com with SMTP id 586e51a60fabf-221816e3ab9so995921fac.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 14 Mar 2024 22:14:12 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Ps0fYzsc;
+ spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-a468616ed70so29861366b.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 14 Mar 2024 22:15:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1710479651; x=1711084451; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=ly3SdPXGYvXt7zmiEuLD+IelCCgDtowEFWzJ7KcgG8s=;
-        b=NEV5CMxMJcmflxw0UOvUzj6Gq1IuAFj/bNpempjOzkkl2/c/F7f7+tdNHAC/ufksal
-         h0Oub1TNNE3gTPeKz2NVl+toui+FCIgJJsCZpWNDvlbxunSelCLPUXO8mVISsIRrd6Tx
-         VlJ0fprviN1Zsv9rTTSGLL9hrJlwntb58cDdFE9xyqhHujjwSDkt1aFtrl8mlkA4/Xky
-         3VcSeYowm/mCoSmc5fWfHw2i07cBGYGYZtPlgpMc6jgyWt6TpXrhApl5en619ZoR9ch/
-         Sdm+aji7ui+TDW+RavVO17MnIPFXhaB8Aan9PRFuHofuWMZRTTlnPek7Q034Bu4nGx6Q
-         ykGA==
+        d=gmail.com; s=20230601; t=1710479746; x=1711084546; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=rpR4MFay6Or1+i7ky1vkuhIPFYpLHXiXIalU8mtB20E=;
+        b=Ps0fYzscpOp2be6WBeLeHDW7+TTQQqOlLtK68BEtP++rOMKoZt4dDEwEP48wLqKbK8
+         8QJsjpplQD8ZjdcrgEa5r44VkebwA+kJJRf1tijSTAQiwejVF/pmKsbF0gWXHYG54kHa
+         TN07Vl14SQch1HjRoef3lsrchhjGgT7tq4F5tw94n0mDU7RhEOroJ4ShRSpwcMECcfnf
+         Re7XNyHiG+nKPdaCW31eoPAkrOT5Kyz0HuVpvjfVdYnoXgNZVjaire4p7vq8ptuVwHsH
+         zBp6hdmVbWacrBOig2/63Om+hk/Q/GEbhFACeY1OQqpbggVkTeVZQvDJG8DLPfaK524Q
+         762Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710479651; x=1711084451;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=ly3SdPXGYvXt7zmiEuLD+IelCCgDtowEFWzJ7KcgG8s=;
-        b=dqzu+3yjP9hdQdcsS5JwMoiAdyhboyU5OHVnoutAJb4VBJXhjfL5ASATb0WCS7H1Th
-         gnbIDO2dyqW1xjR49gMj+9ryBDqddJIv5XzHzSLNPzqCawA0BNTZQAKn7lHxoz+NTaw3
-         BL+3ycG8NxUQ/q4XuCPiLF3Y1buWgyzDrUNlOBwiFH9hhcZaJmTBXxqRVbNaJUmREVOW
-         ed0n8DldTM3x6lK2nDvI/HZNCYWVZReM1j34CAu1NzMxP3x19HtQPIIQEk0BPXCSKoLR
-         uXumuF5Knms7OhncHXx9sCV7AercTKgNw2L0sax+JaYSHbvQrxvsRZr1P/yrRvfg+ax9
-         U06g==
-X-Gm-Message-State: AOJu0Yx/SNFiHgu6qjTLj8kG1AcaskQ150ORjcXfsjvE/MtWR9VATK3p
-	ED6dZQEEpSvyuFS9qpNGxuLuUlZVTqunBjQQxUvqn25N5EmenN01d3a3FgpyVB1owXRgvdQOWgf
-	hQk00ZC8NIEBZ5KFZI/TT+2PLa25i2/zN
-X-Google-Smtp-Source: AGHT+IHBXyXILV6oPxSww+heFeAsv8yKHxUornvPBJaJFD/1AtjRvBg99G1/B0B4V9VpE93TUnQzXoWptKy/9nBP11g=
-X-Received: by 2002:a05:6870:f14f:b0:222:4cb3:4e79 with SMTP id
- l15-20020a056870f14f00b002224cb34e79mr4249595oac.12.1710479651375; Thu, 14
- Mar 2024 22:14:11 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1710479746; x=1711084546;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=rpR4MFay6Or1+i7ky1vkuhIPFYpLHXiXIalU8mtB20E=;
+        b=dMgYwGq1iE9Nz6/pcg5u0J+SarcK2lLyU0X0jDUb/TV6T5gnxHn06flmmlWtdnLA5M
+         d6mo07VF3jR4Y+Zsdl60uUIWZ65+M+fm8Baqakmjj7+RsH0l++k0N18BFoupSTvDFyg0
+         UUTW3oPqzFZIeZDv8Fz+qwxD+VEDfamT5dE+b8AstUp8xy5NqHAv7fzWEJBW3hMy8lRF
+         1x2zLl24j5ikLen9jb7QRVVDIGJdVeoJR8yW/HND2Q0nW879vtFUr197QhWr8f8OcjHy
+         siEMbVAl5rOwhxKmTML5PPa8Ku649NTEOHPm2TLohYYuknazyjQAldQcjNUqW0fp+PaV
+         rJJg==
+X-Gm-Message-State: AOJu0YybawddyrlYv3REp2Q0AvNPHgHFBW4l1IGs2CYOXzTNwcbhGVVp
+	UUtIrlktjoythY8/LFOdWMijQppkfGVVEdd3G5k4EjJozYIdTttqBfIrqkJQ
+X-Google-Smtp-Source: AGHT+IH2e7VGCJORWjOMx3dopSRNNw9K+RQFQyCZuP+SIkUUepNNPjxPfM5eq/F+y6h6IB4pnRTJSw==
+X-Received: by 2002:a17:906:3716:b0:a46:5b72:6d38 with SMTP id d22-20020a170906371600b00a465b726d38mr2324201ejc.63.1710479745651;
+        Thu, 14 Mar 2024 22:15:45 -0700 (PDT)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id k4-20020a170906578400b00a464b3ee655sm1378909ejq.13.2024.03.14.22.15.44
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 14 Mar 2024 22:15:44 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: changqing.li@windriver.com,
+	alperyasinak1@gmail.com,
+	chen_heyun@163.com,
+	omatiush@cisco.com,
+	niko.mauno@vaisala.com,
+	Martin Jansa <martin.jansa@gmail.com>
+Subject: [meta-oe][PATCH] unionfs-fuse, dropwatch, postgresql, yasm, multipath-tools, python3-pybind11: add missing Upstream-Status
+Date: Fri, 15 Mar 2024 06:15:29 +0100
+Message-ID: <20240315051529.3751-1-martin.jansa@gmail.com>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
-References: <0afe6e7d5c9f3de0c3b82a646236bb9bbbe8210f.1710445397.git.joerg.sommer@navimatix.de>
- <CAMKF1sqA7eN1pMRKzeSQp8UZKhdADaW5yHLaXZHOd9+-jDaexA@mail.gmail.com>
-In-Reply-To: <CAMKF1sqA7eN1pMRKzeSQp8UZKhdADaW5yHLaXZHOd9+-jDaexA@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 14 Mar 2024 22:13:45 -0700
-Message-ID: <CAMKF1sozBtpLKoYQRribC2+58bcsaDSRC9A6acNVAQuC_9KFjg@mail.gmail.com>
-Subject: Re: [oe] [meta-multimedia][PATCH v2] spandsp: new telephony DSP library
-To: joerg.sommer@navimatix.de
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 15 Mar 2024 05:14:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109328
+ <openembedded-devel@lists.openembedded.org>; Fri, 15 Mar 2024 05:15:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109329
 
-Not much to do with musl, it fails when I use clang on my desktop as
-well. you can see the same errors with clang on host
+* add Pending to .patch files where it was accidentally droped
+  with upgrades or modifications in:
 
-CC=3Dclang ./configure
-make
+  f88e5b146e postgresql: upgrade 15.5 -> 16.2
+  c904e169db multipath-tools: upgrade 0.9.3 -> 0.9.8
+  105be9b3d9 unionfs-fuse: upgrade 2.2 --> 3.4
 
-On Thu, Mar 14, 2024 at 9:37=E2=80=AFPM Khem Raj <raj.khem@gmail.com> wrote=
-:
->
-> fails to build with musl/clang
->
-> https://snips.sh/f/qCR86Rwwz1
->
-> On Thu, Mar 14, 2024 at 12:43=E2=80=AFPM J=C3=B6rg Sommer via
-> lists.openembedded.org
-> <joerg.sommer=3Dnavimatix.de@lists.openembedded.org> wrote:
-> >
-> > From: J=C3=B6rg Sommer <joerg.sommer@navimatix.de>
-> >
-> > Signed-off-by: J=C3=B6rg Sommer <joerg.sommer@navimatix.de>
-> > ---
-> >  .../spandsp/spandsp/configure.patch           |  56 ++++++
-> >  .../spandsp/spandsp/makefile.patch            | 161 ++++++++++++++++++
-> >  .../recipes-multimedia/spandsp/spandsp_git.bb |  47 +++++
-> >  3 files changed, 264 insertions(+)
-> >  create mode 100644 meta-multimedia/recipes-multimedia/spandsp/spandsp/=
-configure.patch
-> >  create mode 100644 meta-multimedia/recipes-multimedia/spandsp/spandsp/=
-makefile.patch
-> >  create mode 100644 meta-multimedia/recipes-multimedia/spandsp/spandsp_=
-git.bb
-> >
-> > diff --git a/meta-multimedia/recipes-multimedia/spandsp/spandsp/configu=
-re.patch b/meta-multimedia/recipes-multimedia/spandsp/spandsp/configure.pat=
-ch
-> > new file mode 100644
-> > index 000000000..af504be76
-> > --- /dev/null
-> > +++ b/meta-multimedia/recipes-multimedia/spandsp/spandsp/configure.patc=
-h
-> > @@ -0,0 +1,56 @@
-> > +From: =3D?UTF-8?q?J=3DC3=3DB6rg=3D20Sommer?=3D <joerg.sommer@navimatix=
-.de>
-> > +Date: Thu, 14 Mar 2024 09:41:57 +0100
-> > +Subject: [PATCH 2/2] configure: Replace manual search for libxml by
-> > + AC_CHECK_LIB
-> > +MIME-Version: 1.0
-> > +Content-Type: text/plain; charset=3DUTF-8
-> > +Content-Transfer-Encoding: 8bit
-> > +
-> > +The manual search fails if the include directories (and build environm=
-ent)
-> > +are located somewhere else.
-> > +
-> > +Signed-off-by: J=C3=B6rg Sommer <joerg.sommer@navimatix.de>
-> > +Upstream-Status: Submitted [https://github.com/freeswitch/spandsp/pull=
-/74]
-> > +---
-> > +
-> > +ERROR: spandsp-3.0.0+git-r0 do_configure: QA Issue: This autoconf log =
-indicates errors, it looked at host include and/or library paths while dete=
-rmining system capabilities.
-> > +
-> > + configure.ac | 22 +++++-----------------
-> > + 1 file changed, 5 insertions(+), 17 deletions(-)
-> > +
-> > +diff --git a/configure.ac b/configure.ac
-> > +index 2140837..b5138d6 100644
-> > +--- a/configure.ac
-> > ++++ b/configure.ac
-> > +@@ -185,23 +185,11 @@ then
-> > + fi
-> > +
-> > + # Determine XML2 include path
-> > +-AC_MSG_CHECKING(for libxml/xmlmemory.h)
-> > +-
-> > +-# Can we include headers using system include dirs?
-> > +-AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <libxml/xmlmemory.h>]],=
- [[int a =3D 1;]])],[XML2_INCLUDE=3D" "],[XML2_INCLUDE=3D])
-> > +-
-> > +-# Hunt through several possible directories to find the includes for =
-libxml2
-> > +-if test "x$XML2_INCLUDE" =3D "x"; then
-> > +-    old_CPPFLAGS=3D"$CPPFLAGS"
-> > +-    for i in $xml2_include_dir /usr/include /usr/local/include /usr/i=
-nclude/libxml2 /usr/local/include/libxml2 ; do
-> > +-        CPPFLAGS=3D"$old_CPPFLAGS -I$i"
-> > +-        AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <libxml/xmlmemo=
-ry.h>]], [[int a =3D 1;]])],[XML2_INCLUDE=3D"-I$i"],[XML2_INCLUDE=3D
-> > +-        ])
-> > +-        if test "x$XML2_INCLUDE" !=3D "x"; then
-> > +-            break;
-> > +-        fi
-> > +-    done
-> > +-    CPPFLAGS=3D"$old_CPPFLAGS $XML2_INCLUDE"
-> > ++AC_CHECK_LIB([xml2], [xmlParseFile], [libxml2_found=3Dyes])
-> > ++if test "$libxml2_found" =3D "yes" ; then
-> > ++    AC_DEFINE(HAVE_LIBXML2,1,[defined when libxml2 is available])
-> > ++else
-> > ++    AC_MSG_WARN([libxml2 not found. Disabling cache.])
-> > + fi
-> > +
-> > + AC_CHECK_HEADERS([libxml/xmlmemory.h])
-> > +--
-> > +2.34.1
-> > +
-> > diff --git a/meta-multimedia/recipes-multimedia/spandsp/spandsp/makefil=
-e.patch b/meta-multimedia/recipes-multimedia/spandsp/spandsp/makefile.patch
-> > new file mode 100644
-> > index 000000000..d3eb047fe
-> > --- /dev/null
-> > +++ b/meta-multimedia/recipes-multimedia/spandsp/spandsp/makefile.patch
-> > @@ -0,0 +1,161 @@
-> > +From: =3D?UTF-8?q?J=3DC3=3DB6rg=3D20Sommer?=3D <joerg.sommer@navimatix=
-.de>
-> > +Date: Thu, 14 Mar 2024 08:08:13 +0100
-> > +Subject: [PATCH 1/2] configure: Use AX_PROG_CC_FOR_BUILD for cross com=
-piling
-> > +MIME-Version: 1.0
-> > +Content-Type: text/plain; charset=3DUTF-8
-> > +Content-Transfer-Encoding: 8bit
-> > +
-> > +The macro AX_PROG_CC_FOR_BUILD [1] sets the variables CC_FOR_BUILD and
-> > +..._FLAGS_FOR_BUILD they can be used [2] to build binaries used at com=
-pile
-> > +time.
-> > +
-> > +[1]: https://www.gnu.org/software/autoconf-archive/ax_prog_cc_for_buil=
-d.html
-> > +[2]: https://stackoverflow.com/questions/24201260/autotools-cross-comp=
-ilation-and-generated-sources/24208587#24208587
-> > +
-> > +Signed-off-by: J=C3=B6rg Sommer <joerg.sommer@navimatix.de>
-> > +Upstream-Status: Submitted [https://github.com/freeswitch/spandsp/pull=
-/74]
-> > +---
-> > + configure.ac    | 49 +-------------------------------------------
-> > + src/Makefile.am | 54 +++++++++++++++++++++++++-----------------------=
--
-> > + 2 files changed, 29 insertions(+), 74 deletions(-)
-> > +
-> > +diff --git a/configure.ac b/configure.ac
-> > +index 96fd022..2140837 100644
-> > +--- a/configure.ac
-> > ++++ b/configure.ac
-> > +@@ -55,54 +55,7 @@ AC_LANG([C])
-> > +
-> > + AX_COMPILER_VENDOR
-> > +
-> > +-if test "${build}" !=3D "${host}"
-> > +-then
-> > +-    # If we are doing a Canadian Cross, in which the host and build s=
-ystems
-> > +-    # are not the same, we set reasonable default values for the tool=
-s.
-> > +-
-> > +-    CC_FOR_BUILD=3D${CC_FOR_BUILD-gcc}
-> > +-    CPPFLAGS_FOR_BUILD=3D"\$(CPPFLAGS)"
-> > +-    CC=3D${CC-${host_alias}-gcc}
-> > +-    CFLAGS=3D${CFLAGS-"-g -O2"}
-> > +-    CXX=3D${CXX-${host_alias}-c++}
-> > +-    CXXFLAGS=3D${CXXFLAGS-"-g -O2"}
-> > +-else
-> > +-    # Set reasonable default values for some tools even if not Canadi=
-an.
-> > +-    # Of course, these are different reasonable default values, origi=
-nally
-> > +-    # specified directly in the Makefile.
-> > +-    # We don't export, so that autoconf can do its job.
-> > +-    # Note that all these settings are above the fragment inclusion p=
-oint
-> > +-    # in Makefile.in, so can still be overridden by fragments.
-> > +-    # This is all going to change when we autoconfiscate...
-> > +-    CC_FOR_BUILD=3D"\$(CC)"
-> > +-    CPPFLAGS_FOR_BUILD=3D"\$(CPPFLAGS)"
-> > +-    AC_PROG_CC
-> > +-
-> > +-    # We must set the default linker to the linker used by gcc for th=
-e correct
-> > +-    # operation of libtool.  If LD is not defined and we are using gc=
-c, try to
-> > +-    # set the LD default to the ld used by gcc.
-> > +-    if test -z "$LD"
-> > +-    then
-> > +-        if test "$GCC" =3D yes
-> > +-        then
-> > +-            case $build in
-> > +-            *-*-mingw*)
-> > +-                gcc_prog_ld=3D`$CC -print-prog-name=3Dld 2>&1 | tr -d=
- '\015'` ;;
-> > +-            *)
-> > +-                gcc_prog_ld=3D`$CC -print-prog-name=3Dld 2>&1` ;;
-> > +-            esac
-> > +-            case $gcc_prog_ld in
-> > +-            # Accept absolute paths.
-> > +-            [[\\/]* | [A-Za-z]:[\\/]*)]
-> > +-                LD=3D"$gcc_prog_ld" ;;
-> > +-            esac
-> > +-        fi
-> > +-    fi
-> > +-
-> > +-    CXX=3D${CXX-"c++"}
-> > +-    CFLAGS=3D${CFLAGS-"-g -O2"}
-> > +-    CXXFLAGS=3D${CXXFLAGS-"-g -O2"}
-> > +-fi
-> > ++AX_PROG_CC_FOR_BUILD
-> > +
-> > + AC_DEFUN([REMOVE_FROM_VAR],[
-> > +     new_val=3D""
-> > +diff --git a/src/Makefile.am b/src/Makefile.am
-> > +index e05fad5..9b409a1 100644
-> > +--- a/src/Makefile.am
-> > ++++ b/src/Makefile.am
-> > +@@ -386,44 +386,46 @@ noinst_HEADERS =3D cielab_luts.h \
-> > +                  v34_tx_pre_emphasis_filters.h \
-> > +                  v34_tables.h
-> > +
-> > +-make_at_dictionary$(EXEEXT): $(top_srcdir)/src/make_at_dictionary.c
-> > +-      $(CC_FOR_BUILD) -o make_at_dictionary$(EXEEXT) $(top_srcdir)/sr=
-c/make_at_dictionary.c -DHAVE_CONFIG_H -I$(top_builddir)/src
-> > ++LINK_FOR_BUILD.c =3D $(CC_FOR_BUILD) -DHAVE_CONFIG_H -I$(top_builddir=
-)/src $(CFLAGS_FOR_BUILD) $(CPPFLAGS_FOR_BUILD) $(LDFLAGS_FOR_BUILD) $(TARG=
-ET_ARCH_FOR_BUILD)
-> > +
-> > +-make_cielab_luts$(EXEEXT): $(top_srcdir)/src/make_cielab_luts.c
-> > +-      $(CC_FOR_BUILD) -o make_cielab_luts$(EXEEXT) $(top_srcdir)/src/=
-make_cielab_luts.c -DHAVE_CONFIG_H -I$(top_builddir)/src -lm
-> > ++make_at_dictionary$(BUILD_EXEEXT): $(top_srcdir)/src/make_at_dictiona=
-ry.c
-> > ++      $(LINK_FOR_BUILD.c) -o $@ $^
-> > +
-> > +-make_math_fixed_tables$(EXEEXT): $(top_srcdir)/src/make_math_fixed_ta=
-bles.c
-> > +-      $(CC_FOR_BUILD) -o make_math_fixed_tables$(EXEEXT) $(top_srcdir=
-)/src/make_math_fixed_tables.c -DHAVE_CONFIG_H -I$(top_builddir)/src -lm
-> > ++make_cielab_luts$(BUILD_EXEEXT): $(top_srcdir)/src/make_cielab_luts.c
-> > ++      $(LINK_FOR_BUILD.c) -o $@ $^ -lm
-> > +
-> > +-make_modem_filter$(EXEEXT): $(top_srcdir)/src/make_modem_filter.c $(t=
-op_srcdir)/src/filter_tools.c
-> > +-      $(CC_FOR_BUILD) -o make_modem_filter$(EXEEXT) $(top_srcdir)/src=
-/make_modem_filter.c $(top_srcdir)/src/filter_tools.c -DHAVE_CONFIG_H -I$(t=
-op_builddir)/src -lm
-> > ++make_math_fixed_tables$(BUILD_EXEEXT): $(top_srcdir)/src/make_math_fi=
-xed_tables.c
-> > ++      $(LINK_FOR_BUILD.c) -o $@ $^ -lm
-> > +
-> > +-make_modem_godard_coefficients$(EXEEXT): $(top_srcdir)/src/make_modem=
-_godard_coefficients.c $(top_srcdir)/src/filter_tools.c
-> > +-      $(CC_FOR_BUILD) -o make_modem_godard_coefficients$(EXEEXT) $(to=
-p_srcdir)/src/make_modem_godard_coefficients.c $(top_srcdir)/src/filter_too=
-ls.c -DHAVE_CONFIG_H -I$(top_builddir)/src -lm
-> > ++make_modem_filter$(BUILD_EXEEXT): $(top_srcdir)/src/make_modem_filter=
-.c $(top_srcdir)/src/filter_tools.c
-> > ++      $(LINK_FOR_BUILD.c) -o $@ $^ -lm
-> > +
-> > +-make_t43_gray_code_tables$(EXEEXT): $(top_srcdir)/src/make_t43_gray_c=
-ode_tables.c
-> > +-      $(CC_FOR_BUILD) -o make_t43_gray_code_tables$(EXEEXT) $(top_src=
-dir)/src/make_t43_gray_code_tables.c -DHAVE_CONFIG_H -I$(top_builddir)/src =
--lm
-> > ++make_modem_godard_coefficients$(BUILD_EXEEXT): $(top_srcdir)/src/make=
-_modem_godard_coefficients.c $(top_srcdir)/src/filter_tools.c
-> > ++      $(LINK_FOR_BUILD.c) -o $@ $^ -lm
-> > +
-> > +-make_v17_v32_constellation_map$(EXEEXT): $(top_srcdir)/src/make_v17_v=
-32_constellation_map.c $(top_srcdir)/src/g711.c $(top_srcdir)/src/alloc.c
-> > +-      $(CC_FOR_BUILD) -o make_v17_v32_constellation_map$(EXEEXT) $(to=
-p_srcdir)/src/make_v17_v32_constellation_map.c $(top_srcdir)/src/g711.c $(t=
-op_srcdir)/src/alloc.c -DHAVE_CONFIG_H -I$(top_builddir)/src -lm
-> > ++make_t43_gray_code_tables$(BUILD_EXEEXT): $(top_srcdir)/src/make_t43_=
-gray_code_tables.c
-> > ++      $(LINK_FOR_BUILD.c) -o $@ $^ -lm
-> > +
-> > +-make_v17_v32_convolutional_encoder$(EXEEXT): $(top_srcdir)/src/make_v=
-17_v32_convolutional_encoder.c $(top_srcdir)/src/g711.c $(top_srcdir)/src/a=
-lloc.c
-> > +-      $(CC_FOR_BUILD) -o make_v17_v32_convolutional_encoder$(EXEEXT) =
-$(top_srcdir)/src/make_v17_v32_convolutional_encoder.c $(top_srcdir)/src/g7=
-11.c $(top_srcdir)/src/alloc.c -DHAVE_CONFIG_H -I$(top_builddir)/src -lm
-> > ++make_v17_v32_constellation_map$(BUILD_EXEEXT): $(top_srcdir)/src/make=
-_v17_v32_constellation_map.c $(top_srcdir)/src/g711.c $(top_srcdir)/src/all=
-oc.c
-> > ++      $(LINK_FOR_BUILD.c) -o $@ $^ -lm
-> > +
-> > +-make_v29_constellation_map$(EXEEXT): $(top_srcdir)/src/make_v29_const=
-ellation_map.c $(top_srcdir)/src/g711.c $(top_srcdir)/src/alloc.c
-> > +-      $(CC_FOR_BUILD) -o make_v29_constellation_map$(EXEEXT) $(top_sr=
-cdir)/src/make_v29_constellation_map.c $(top_srcdir)/src/g711.c $(top_srcdi=
-r)/src/alloc.c -DHAVE_CONFIG_H -I$(top_builddir)/src -lm
-> > ++make_v17_v32_convolutional_encoder$(BUILD_EXEEXT): $(top_srcdir)/src/=
-make_v17_v32_convolutional_encoder.c $(top_srcdir)/src/g711.c $(top_srcdir)=
-/src/alloc.c
-> > ++      $(LINK_FOR_BUILD.c) -o $@ $^ -lm
-> > +
-> > +-make_v34_convolutional_coders$(EXEEXT): $(top_srcdir)/src/make_v34_co=
-nvolutional_coders.c
-> > +-      $(CC_FOR_BUILD) -o make_v34_convolutional_coders$(EXEEXT) $(top=
-_srcdir)/src/make_v34_convolutional_coders.c -DHAVE_CONFIG_H -I$(top_buildd=
-ir)/src -lm
-> > ++make_v29_constellation_map$(BUILD_EXEEXT): $(top_srcdir)/src/make_v29=
-_constellation_map.c $(top_srcdir)/src/g711.c $(top_srcdir)/src/alloc.c
-> > ++      $(LINK_FOR_BUILD.c) -o $@ $^ -lm
-> > +
-> > +-make_v34_probe_signals$(EXEEXT): $(top_srcdir)/src/make_v34_probe_sig=
-nals.c $(top_srcdir)/src/g711.c $(top_srcdir)/src/alloc.c
-> > +-      $(CC_FOR_BUILD) -o make_v34_probe_signals$(EXEEXT) $(top_srcdir=
-)/src/make_v34_probe_signals.c $(top_srcdir)/src/g711.c $(top_srcdir)/src/a=
-lloc.c -DHAVE_CONFIG_H -I$(top_builddir)/src -lm
-> > ++make_v34_convolutional_coders$(BUILD_EXEEXT): $(top_srcdir)/src/make_=
-v34_convolutional_coders.c
-> > ++      $(LINK_FOR_BUILD.c) -o $@ $^ -lm
-> > +
-> > +-make_v34_shell_map$(EXEEXT): $(top_srcdir)/src/make_v34_shell_map.c
-> > +-      $(CC_FOR_BUILD) -o make_v34_shell_map$(EXEEXT) $(top_srcdir)/sr=
-c/make_v34_shell_map.c -DHAVE_CONFIG_H -I$(top_builddir)/src
-> > ++make_v34_probe_signals$(BUILD_EXEEXT): $(top_srcdir)/src/make_v34_pro=
-be_signals.c $(top_srcdir)/src/g711.c $(top_srcdir)/src/alloc.c
-> > ++      $(LINK_FOR_BUILD.c) -o $@ $^ -I$(top_srcdir)/src -lm
-> > +
-> > +-make_v34_tx_pre_emphasis_filters$(EXEEXT): $(top_srcdir)/src/make_v34=
-_tx_pre_emphasis_filters.c $(top_srcdir)/tools/meteor-engine.c
-> > +-      $(CC_FOR_BUILD) -o make_v34_tx_pre_emphasis_filters$(EXEEXT) $(=
-top_srcdir)/src/make_v34_tx_pre_emphasis_filters.c $(top_srcdir)/tools/mete=
-or-engine.c -DHAVE_CONFIG_H -I$(top_builddir)/src -I$(top_builddir)/tools -=
-lm
-> > ++make_v34_shell_map$(BUILD_EXEEXT): $(top_srcdir)/src/make_v34_shell_m=
-ap.c
-> > ++      $(LINK_FOR_BUILD.c) -o $@ $^
-> > ++
-> > ++make_v34_tx_pre_emphasis_filters$(BUILD_EXEEXT): $(top_srcdir)/src/ma=
-ke_v34_tx_pre_emphasis_filters.c $(top_srcdir)/tools/meteor-engine.c
-> > ++      $(LINK_FOR_BUILD.c) -o $@ $^ -I$(top_srcdir)/tools -lm
-> > +
-> > + # We need to run make_at_dictionary, so it generates the
-> > + # at_interpreter_dictionary.h file
-> > +--
-> > +2.34.1
-> > +
-> > diff --git a/meta-multimedia/recipes-multimedia/spandsp/spandsp_git.bb =
-b/meta-multimedia/recipes-multimedia/spandsp/spandsp_git.bb
-> > new file mode 100644
-> > index 000000000..84bc4a8f1
-> > --- /dev/null
-> > +++ b/meta-multimedia/recipes-multimedia/spandsp/spandsp_git.bb
-> > @@ -0,0 +1,47 @@
-> > +SUMMARY =3D "A DSP library for telephony"
-> > +DESCRIPTION =3D "\
-> > +    SpanDSP is a low-level signal processing library that modulates an=
-d \
-> > +    demodulates signals commonly used in telephony, such as the \"nois=
-e\" \
-> > +    generated by a fax modem or DTMF touchpad. \
-> > +"
-> > +HOMEPAGE =3D "https://www.soft-switch.org/"
-> > +BUGTRACKER =3D "https://github.com/freeswitch/spandsp/issues"
-> > +SECTION =3D "libs"
-> > +LICENSE =3D "LGPL-2.1-only"
-> > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D8791c23ddf418deb5be264cffb5=
-fa6bc"
-> > +
-> > +DEPENDS =3D "\
-> > +    libxml2 \
-> > +    tiff \
-> > +    tiff-native \
-> > +"
-> > +
-> > +PV =3D "3.0.0+git"
-> > +
-> > +SRC_URI =3D "\
-> > +    git://github.com/freeswitch/spandsp.git;protocol=3Dhttps;branch=3D=
-master \
-> > +    file://configure.patch \
-> > +    file://makefile.patch \
-> > +"
-> > +SRCREV =3D "7b0b8cf3d42b725405bcc63145de5e280265ce4e"
-> > +
-> > +S =3D "${WORKDIR}/git"
-> > +
-> > +inherit autotools
-> > +
-> > +PACKAGECONFIG ?=3D ""
-> > +
-> > +PACKAGECONFIG[mmx] =3D "--enable-mmx,--disable-mmx"
-> > +PACKAGECONFIG[sse] =3D "--enable-sse,--disable-sse"
-> > +PACKAGECONFIG[sse2] =3D "--enable-sse2,--disable-sse2"
-> > +PACKAGECONFIG[sse3] =3D "--enable-sse3,--disable-sse3"
-> > +PACKAGECONFIG[ssse3] =3D "--enable-ssse3,--disable-ssse3"
-> > +PACKAGECONFIG[sse4-1] =3D "--enable-sse4-1,--disable-sse4-1"
-> > +PACKAGECONFIG[sse4-2] =3D "--enable-sse4-2,--disable-sse4-2"
-> > +PACKAGECONFIG[avx] =3D "--enable-avx,--disable-avx"
-> > +PACKAGECONFIG[avx2] =3D "--enable-avx2,--disable-avx2"
-> > +PACKAGECONFIG[neon] =3D "--enable-neon,--disable-neon"
-> > +PACKAGECONFIG[fixed-point] =3D "--enable-fixed-point,--disable-fixed-p=
-oint"
-> > +PACKAGECONFIG[v32bis] =3D "--enable-v32bis,--disable-v32bis"
-> > +PACKAGECONFIG[v34] =3D "--enable-v34,--disable-v34"
-> > +PACKAGECONFIG[sslfax] =3D "--enable-sslfax,--disable-sslfax"
-> > --
-> > 2.34.1
-> >
-> >
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#109321): https://lists.openembedded.org/g/openembed=
-ded-devel/message/109321
-> > Mute This Topic: https://lists.openembedded.org/mt/104933829/1997914
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[raj.khem@gmail.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
+  or new patches where the author didn't notice/care:
+
+  2a7f74cdb0 dropwatch: Use header files from sysroot instead of build host
+  f5cc9f272a yasm: improve reproducibility
+  39028d0d9d python3-pybind11: Restore strip prevention patch
+
+  authors of these added to CC, please be more careful with removing
+  or not adding these or enable patch-status in ERROR_QA for your
+  builds, see:
+  https://lists.openembedded.org/g/openembedded-core/topic/104922136#197113
+
+* added with:
+  for p in `/OE/layers/openembedded-core/scripts/contrib/patchreview.py -v . | grep Missing.Upstream-Status.tag | sed 's/.*(//g;s/)$//g'`; do grep -q ^Upstream-Status: $p || sed -i "s/^---$/\nUpstream-Status: Pending\n---/g" $p;         grep -q ^Upstream-Status: $p || sed -i "1iUpstream-Status: Pending\n" $p;     done
+
+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+---
+ .../unionfs-fuse/files/0001-support-cross-compiling.patch       | 2 ++
+ ...1-fix-bug-build-with-sysroot-head-file-instead-of-loca.patch | 2 ++
+ .../postgresql/files/0001-Add-support-for-RISC-V.patch          | 2 ++
+ .../yasm/0001-yasm-Set-build-date-to-SOURCE_DATE_EPOCH.patch    | 2 ++
+ .../yasm/0002-yasm-Use-BUILD_DATE-for-reproducibility.patch     | 2 ++
+ .../files/0001-RH-fixup-udev-rules-for-redhat.patch             | 2 ++
+ ...002-RH-Remove-the-property-blacklist-exception-builtin.patch | 2 ++
+ .../files/0011-fix-bug-of-do_compile-and-do_install.patch       | 2 ++
+ .../python/python3-pybind11/0001-Do-not-strip-binaries.patch    | 2 ++
+ 9 files changed, 18 insertions(+)
+
+diff --git a/meta-filesystems/recipes-filesystems/unionfs-fuse/files/0001-support-cross-compiling.patch b/meta-filesystems/recipes-filesystems/unionfs-fuse/files/0001-support-cross-compiling.patch
+index 13e782fa70..9b4d0f6cae 100644
+--- a/meta-filesystems/recipes-filesystems/unionfs-fuse/files/0001-support-cross-compiling.patch
++++ b/meta-filesystems/recipes-filesystems/unionfs-fuse/files/0001-support-cross-compiling.patch
+@@ -7,6 +7,8 @@ Do not override OE CMAKE variables
+ 
+ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+ Signed-off-by: Alper Ak <alperyasinak1@gmail.com>
++
++Upstream-Status: Pending
+ ---
+  src/CMakeLists.txt | 4 ++--
+  1 file changed, 2 insertions(+), 2 deletions(-)
+diff --git a/meta-networking/recipes-support/dropwatch/dropwatch/0001-fix-bug-build-with-sysroot-head-file-instead-of-loca.patch b/meta-networking/recipes-support/dropwatch/dropwatch/0001-fix-bug-build-with-sysroot-head-file-instead-of-loca.patch
+index 33b72e05f0..d0baceb15b 100755
+--- a/meta-networking/recipes-support/dropwatch/dropwatch/0001-fix-bug-build-with-sysroot-head-file-instead-of-loca.patch
++++ b/meta-networking/recipes-support/dropwatch/dropwatch/0001-fix-bug-build-with-sysroot-head-file-instead-of-loca.patch
+@@ -5,6 +5,8 @@ Subject: [PATCH] fix bug: build with sysroot head file instead of local head
+  file:net_dropmon.h
+ 
+ Signed-off-by: chenheyun <chen_heyun@163.com>
++
++Upstream-Status: Pending
+ ---
+  src/main.c | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+diff --git a/meta-oe/recipes-dbs/postgresql/files/0001-Add-support-for-RISC-V.patch b/meta-oe/recipes-dbs/postgresql/files/0001-Add-support-for-RISC-V.patch
+index 34d34ecad9..ebd3e03685 100644
+--- a/meta-oe/recipes-dbs/postgresql/files/0001-Add-support-for-RISC-V.patch
++++ b/meta-oe/recipes-dbs/postgresql/files/0001-Add-support-for-RISC-V.patch
+@@ -5,6 +5,8 @@ Subject: [PATCH 1/5] Add support for RISC-V.
+ 
+ The architecture is sufficiently similar to aarch64 that simply
+ extending the existing aarch64 macro works.
++
++Upstream-Status: Pending
+ ---
+  src/include/storage/s_lock.h | 5 +++--
+  1 file changed, 3 insertions(+), 2 deletions(-)
+diff --git a/meta-oe/recipes-devtools/yasm/yasm/0001-yasm-Set-build-date-to-SOURCE_DATE_EPOCH.patch b/meta-oe/recipes-devtools/yasm/yasm/0001-yasm-Set-build-date-to-SOURCE_DATE_EPOCH.patch
+index e65c9853e0..42f5559e3f 100644
+--- a/meta-oe/recipes-devtools/yasm/yasm/0001-yasm-Set-build-date-to-SOURCE_DATE_EPOCH.patch
++++ b/meta-oe/recipes-devtools/yasm/yasm/0001-yasm-Set-build-date-to-SOURCE_DATE_EPOCH.patch
+@@ -7,6 +7,8 @@ If SOURCE_DATE_EPOCH is set, use it to generate a reproducible
+ string for BUILD_DATE.
+ 
+ Signed-off-by: Oleh Matiusha <omatiush@cisco.com>
++
++Upstream-Status: Pending
+ ---
+  configure.ac | 8 ++++++++
+  1 file changed, 8 insertions(+)
+diff --git a/meta-oe/recipes-devtools/yasm/yasm/0002-yasm-Use-BUILD_DATE-for-reproducibility.patch b/meta-oe/recipes-devtools/yasm/yasm/0002-yasm-Use-BUILD_DATE-for-reproducibility.patch
+index 665f3afc9f..4b9c933d01 100644
+--- a/meta-oe/recipes-devtools/yasm/yasm/0002-yasm-Use-BUILD_DATE-for-reproducibility.patch
++++ b/meta-oe/recipes-devtools/yasm/yasm/0002-yasm-Use-BUILD_DATE-for-reproducibility.patch
+@@ -7,6 +7,8 @@ Use reproducible build date instead of compilation time and date.
+ 
+ Signed-off-by: Oleh Matiusha <omatiush@cisco.com>
+ 
++
++Upstream-Status: Pending
+ ---
+  tools/re2c/parser.c | 5 +++++
+  1 file changed, 5 insertions(+)
+diff --git a/meta-oe/recipes-support/multipath-tools/files/0001-RH-fixup-udev-rules-for-redhat.patch b/meta-oe/recipes-support/multipath-tools/files/0001-RH-fixup-udev-rules-for-redhat.patch
+index 0ec5b5b1cd..74ae1530cb 100644
+--- a/meta-oe/recipes-support/multipath-tools/files/0001-RH-fixup-udev-rules-for-redhat.patch
++++ b/meta-oe/recipes-support/multipath-tools/files/0001-RH-fixup-udev-rules-for-redhat.patch
+@@ -16,6 +16,8 @@ Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
+ 
+ Rebase to 0.9.8
+ Signed-off-by: Changqing Li <changqing.li@windriver.com>
++
++Upstream-Status: Pending
+ ---
+  Makefile.inc        | 2 +-
+  kpartx/kpartx.rules | 2 +-
+diff --git a/meta-oe/recipes-support/multipath-tools/files/0002-RH-Remove-the-property-blacklist-exception-builtin.patch b/meta-oe/recipes-support/multipath-tools/files/0002-RH-Remove-the-property-blacklist-exception-builtin.patch
+index a24c827dc7..4b24bd2d35 100644
+--- a/meta-oe/recipes-support/multipath-tools/files/0002-RH-Remove-the-property-blacklist-exception-builtin.patch
++++ b/meta-oe/recipes-support/multipath-tools/files/0002-RH-Remove-the-property-blacklist-exception-builtin.patch
+@@ -20,6 +20,8 @@ Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
+ 
+ Rebase to 0.9.8
+ Signed-off-by: Changqing Li <changqing.li@windriver.com>
++
++Upstream-Status: Pending
+ ---
+  libmultipath/blacklist.c | 16 +++++-----------
+  1 file changed, 5 insertions(+), 11 deletions(-)
+diff --git a/meta-oe/recipes-support/multipath-tools/files/0011-fix-bug-of-do_compile-and-do_install.patch b/meta-oe/recipes-support/multipath-tools/files/0011-fix-bug-of-do_compile-and-do_install.patch
+index f32d789b04..abaea2cfb6 100644
+--- a/meta-oe/recipes-support/multipath-tools/files/0011-fix-bug-of-do_compile-and-do_install.patch
++++ b/meta-oe/recipes-support/multipath-tools/files/0011-fix-bug-of-do_compile-and-do_install.patch
+@@ -11,6 +11,8 @@ Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+ [OP: Rebase to 0.9.3]
+ [OP: Drop dependencies that are already present in the 0.9.3 Makefile]
+ Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
++
++Upstream-Status: Pending
+ ---
+  Makefile | 10 ++++++++++
+  1 file changed, 10 insertions(+)
+diff --git a/meta-python/recipes-devtools/python/python3-pybind11/0001-Do-not-strip-binaries.patch b/meta-python/recipes-devtools/python/python3-pybind11/0001-Do-not-strip-binaries.patch
+index 37cb78a308..91575d2712 100644
+--- a/meta-python/recipes-devtools/python/python3-pybind11/0001-Do-not-strip-binaries.patch
++++ b/meta-python/recipes-devtools/python/python3-pybind11/0001-Do-not-strip-binaries.patch
+@@ -7,6 +7,8 @@ Subject: [PATCH] Do not strip binaries.
+ 
+ Signed-off-by: Philip Balister <philip@balister.org>
+ Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
++
++Upstream-Status: Pending
+ ---
+  tools/pybind11NewTools.cmake | 7 -------
+  tools/pybind11Tools.cmake    | 6 ------
+-- 
+2.44.0
+
 
