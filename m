@@ -2,50 +2,50 @@ Return-Path: <chris.chapuis@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5A10EC54E58
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D3DDC54E72
 	for <webhook@archiver.kernel.org>; Fri, 15 Mar 2024 18:03:28 +0000 (UTC)
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
- by mx.groups.io with SMTP id smtpd.web10.5.1710525802419274946
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
+ by mx.groups.io with SMTP id smtpd.web10.8.1710525804201449587
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 15 Mar 2024 11:03:22 -0700
+ Fri, 15 Mar 2024 11:03:24 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Sq7qwcoK;
- spf=pass (domain: gmail.com, ip: 209.85.128.41, mailfrom: chris.chapuis@gmail.com)
-Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-413f8f5541eso11173425e9.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 15 Mar 2024 11:03:22 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=dLD14W7a;
+ spf=pass (domain: gmail.com, ip: 209.85.221.52, mailfrom: chris.chapuis@gmail.com)
+Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-33e1d327595so1583392f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 15 Mar 2024 11:03:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1710525800; x=1711130600; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1710525802; x=1711130602; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=uEMNIYuT6HFCBLlCQpWio72tqdEdrIFsZUhBn9QiA2c=;
-        b=Sq7qwcoKQg8ixKXe0mIWeRxfaI6fR6oze7QaA0kcgRljkLkQpbg4cZi43fyTS10snU
-         trCOO4AyI9oPinnywYpkSgiPMxPcg/D4Zs8AAiNP+xySQzPMPauRBuavBl55vzlVF4Zy
-         /hKnR6ep0rP/a+j2K/76dWNafzGSnJpelZwVv7vt2MX5ZXeOYsBcSTA7LEfYJ8VfJmsl
-         2CuSyN4HLXLUIAyHGJSA7Jkko0dO6S2QfJc+X8rlq8rxTMtdl81Q1nbNT05qPe45ClyN
-         g5aSA/ROAu9+VkUgckD8GJ0Pqa7TU23CMoxp/Q8Q8d0wp3fHhlw4cGXcbJZ61jibZd/H
-         1rzg==
+        bh=PzYJwpSaPIDs/hg4loV10dQbVh5hWgQ4H4jCLagEYw4=;
+        b=dLD14W7aOu8bVlbOuAx55/WFPUW4MBexhntlM6NorYoYhctMGWx8lwFwCCpC45Vss9
+         YIbpA3a1dUtP3fB0HLCFdAsHxQg1kbiLrz8bqGWvvuowNmWMl5lv+WHJyics448W2z1W
+         IkMs8AXqvF5iLyosHd9QOWw77eOQH8pjRIkzMX92fM8xgUJTAiRjuL1YdnYf7iwN+Wp1
+         CCWy/Pq0dlkwd63iCuq1x1Unx5NPWWVseL83/fDwjyUE/8GgMPT8fcHRQ04K0igCHAJ+
+         +78CBW5hGNcSB72pP4vSw/UbD5rTasbTF7wXtj14QgJg83PvUM9nKnQv6q7mjxWemN9J
+         eZSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710525800; x=1711130600;
+        d=1e100.net; s=20230601; t=1710525802; x=1711130602;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=uEMNIYuT6HFCBLlCQpWio72tqdEdrIFsZUhBn9QiA2c=;
-        b=CyyUSdPAOW9Wf0+B050v6Js2oygOtZb6aWqLO8W1GSVKbk7NxgEhMpvMQxrqqOngJR
-         XpnOfNFslZQ8ECOtkWUJZi/rXEnoktGSggVg7h6zO/9vAuu/7GOWJawvprLq2A5lCt0E
-         oLCt1ED+J1AIMTYaYoc5sA95qZ1XcIaZ/wrq7fUavfUSJymhbYJQQUtieeFt7R/LFexd
-         Q2idHR2xLAtMu01+oi8rLfW5alAo1oPcphIZ+I2S5tqvdcIqQdQ3+1KWSd4Qv00CoKjf
-         jYlPQW0RE7XQIVARbAUiISYvhc3cd7Ro6G24qge0LSgKpUEYQEMWvuw8pTkSBMoWWhHM
-         dJaQ==
-X-Gm-Message-State: AOJu0YwBsAdIIst8S7Nf74j0wSAlX8MJYWYGYe3hhusxpW/WuCsa5isS
-	MA/akAMIzONhM/hz0odq5lMfs16C901MEb7G47tF3+PnFT9fQVTtgDEODH9UScs=
-X-Google-Smtp-Source: AGHT+IHxvIwwJJ6O31fKebj6l+uL8nD5ESt4JJf1NzYV8dISKKlBpi2AhaId5qUOam/jyw4FwYwBPw==
-X-Received: by 2002:adf:fe89:0:b0:33e:73e8:c1e1 with SMTP id l9-20020adffe89000000b0033e73e8c1e1mr4339153wrr.18.1710525800381;
-        Fri, 15 Mar 2024 11:03:20 -0700 (PDT)
+        bh=PzYJwpSaPIDs/hg4loV10dQbVh5hWgQ4H4jCLagEYw4=;
+        b=HdbChzVijiDmrZxnxtB+QCa1Oim4IMVTPl/Z5XH3tcezo6culdSYDMILVxVf+R+s5K
+         j3zdVk44vDA3eH41NKXBUW1hveb8aofMPVpBgy/T4Rwwm7VbsD8EjugLKtIGqW0lDVkT
+         dvpjIB0RG86mUQ2FKhjtC4dwo1Xg/C17P/jDBFtql35FEsAnbeJJylIbBGzP7LbftYSW
+         0aS0CciAbk2MwEB2HUEJB2kK4pTG7m1V27drDDnMew+05rDHyF+JRYAgtYuwwIoky5U6
+         FUIJw4ghOAFyN077VLm/5d//cV03iePLZDHRj+d1xTwqq7u3+M+UwYBK4lxpuY/QzOyj
+         fpCA==
+X-Gm-Message-State: AOJu0YwPDZN1fe5Vr9AxcBZCTI4MvEHupa9bgoISgg1fiVv+/t8tzWF7
+	sxAOTfDiqs2P7E2W87OPXahV8C+OGhdVSxrJbUitogCCtA6ly4LMd3+EKJ2UmrU=
+X-Google-Smtp-Source: AGHT+IHOpKLMSGXaA3Ft1AUqtc+p/qmCorx7LwT1C55WKJ8rLliUoWTNqbyGMOQCCDhbXoIdcN5gmQ==
+X-Received: by 2002:adf:e392:0:b0:33e:9dd3:5998 with SMTP id e18-20020adfe392000000b0033e9dd35998mr3574007wrm.49.1710525802040;
+        Fri, 15 Mar 2024 11:03:22 -0700 (PDT)
 Received: from localhost.localdomain ([2a01:e0a:5d9:6330:4d5:74f6:de66:f26e])
-        by smtp.gmail.com with ESMTPSA id bu27-20020a056000079b00b0033ecbfc6941sm3366832wrb.110.2024.03.15.11.03.19
+        by smtp.gmail.com with ESMTPSA id bu27-20020a056000079b00b0033ecbfc6941sm3366832wrb.110.2024.03.15.11.03.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 15 Mar 2024 11:03:20 -0700 (PDT)
+        Fri, 15 Mar 2024 11:03:21 -0700 (PDT)
 From: Christophe Chapuis <chris.chapuis@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Marek Vasut <marex@denx.de>,
@@ -53,9 +53,9 @@ Cc: Marek Vasut <marex@denx.de>,
 	Fabio Estevam <festevam@denx.de>,
 	Martin Jansa <martin.jansa@gmail.com>,
 	Christophe Chapuis <chris.chapuis@gmail.com>
-Subject: [meta-oe][PATCH v3 2/5] lvgl: install lv_conf.h
-Date: Fri, 15 Mar 2024 19:03:11 +0100
-Message-ID: <20240315180314.9111-2-chris.chapuis@gmail.com>
+Subject: [meta-oe][PATCH v3 5/5] lvgl: add more variables to lv-conf.inc
+Date: Fri, 15 Mar 2024 19:03:14 +0100
+Message-ID: <20240315180314.9111-5-chris.chapuis@gmail.com>
 X-Mailer: git-send-email 2.44.0
 In-Reply-To: <20240315180314.9111-1-chris.chapuis@gmail.com>
 References: <20240315180314.9111-1-chris.chapuis@gmail.com>
@@ -65,30 +65,60 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 15 Mar 2024 18:03:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109341
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109344
 
-Add an install append to copy the generated lv_conf.h as part of the
-lvgl package, so that it will be found and used by the recipes that
-want to use lvgl.
+As it can be usefull to customize these other variables, let's
+add them in lv-conf.inc.
 
 Signed-off-by: Christophe Chapuis <chris.chapuis@gmail.com>
 ---
- meta-oe/recipes-graphics/lvgl/lv-conf.inc | 5 +++++
- 1 file changed, 5 insertions(+)
+ meta-oe/recipes-graphics/lvgl/lv-conf.inc | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
 
 diff --git a/meta-oe/recipes-graphics/lvgl/lv-conf.inc b/meta-oe/recipes-graphics/lvgl/lv-conf.inc
-index 3dbdf769f..6bcead628 100644
+index f5a93dcae..088842490 100644
 --- a/meta-oe/recipes-graphics/lvgl/lv-conf.inc
 +++ b/meta-oe/recipes-graphics/lvgl/lv-conf.inc
-@@ -52,3 +52,8 @@ do_configure:append() {
+@@ -12,8 +12,17 @@ LVGL_CONFIG_USE_SDL = "${@bb.utils.contains('PACKAGECONFIG', 'sdl', '1', '0', d)
+ LVGL_CONFIG_SDL_FULLSCREEN ?= "0"
+ 
+ LVGL_CONFIG_LV_MEM_CUSTOM ?= "0"
++LVGL_CONFIG_LV_MEM_SIZE ?= "(64 * 1024U)"
+ LVGL_CONFIG_LV_COLOR_DEPTH ?= "32"
+ 
++LVGL_CONFIG_LV_USE_LOG    ?= "0"
++LVGL_CONFIG_LV_LOG_LEVEL  ?= "LV_LOG_LEVEL_WARN"
++LVGL_CONFIG_LV_LOG_PRINTF ?= "0"
++
++LVGL_CONFIG_LV_USE_FONT_COMPRESSED ?= "0"
++
++LVGL_CONFIG_LV_THEME_DEFAULT_DARK ?= "0"
++
+ DEBUG_BUILD ??= "0"
+ 
+ ALLOW_EMPTY:${PN} = "1"
+@@ -37,6 +46,7 @@ do_configure:append() {
          \
+         -e "s|\(^#define LV_COLOR_DEPTH \).*|\1${LVGL_CONFIG_LV_COLOR_DEPTH}|g" \
+         -e "s|\(#define LV_MEM_CUSTOM .*\).*|\1${LVGL_CONFIG_LV_MEM_CUSTOM}|g" \
++        -e "s|\(^ \+#define LV_MEM_SIZE \).*|\1${LVGL_CONFIG_LV_MEM_SIZE}|g" \
+         \
+         -e "s|\(#define LV_TICK_CUSTOM \).*|\1 1|g" \
+         -e "s|\(#define LV_TICK_CUSTOM_INCLUDE \).*|\1 <stdint.h>|g" \
+@@ -50,6 +60,13 @@ do_configure:append() {
+         -e "s|\(^#define LV_USE_ASSERT_MEM_INTEGRITY \).*|\1${DEBUG_BUILD}|g" \
+         -e "s|\(^#define LV_USE_ASSERT_OBJ \).*|\1${DEBUG_BUILD}|g" \
+         \
++        -e "s|\(^#define LV_USE_LOG \).*|\1${LVGL_CONFIG_LV_USE_LOG}|g" \
++        -e "s|\(^ \+#define LV_LOG_LEVEL \).*|\1${LVGL_CONFIG_LV_LOG_LEVEL}|g" \
++        -e "s|\(^ \+#define LV_LOG_PRINTF \).*|\1${LVGL_CONFIG_LV_LOG_PRINTF}|g" \
++        \
++        -e "s|\(^#define LV_USE_FONT_COMPRESSED \).*|\1${LVGL_CONFIG_LV_USE_FONT_COMPRESSED}|g" \
++        -e "s|\(^ \+#define LV_THEME_DEFAULT_DARK \).*|\1${LVGL_CONFIG_LV_THEME_DEFAULT_DARK}|g" \
++        \
          -i "${S}/lv_conf.h"
  }
-+
-+do_install:append() {
-+    install -d "${D}${includedir}/${PN}"
-+    install -m 0644 "${S}/lv_conf.h" "${D}${includedir}/${PN}/lv_conf.h"
-+}
+ 
 -- 
 2.44.0
 
