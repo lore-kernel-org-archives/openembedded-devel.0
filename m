@@ -2,57 +2,59 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C0B2DC54E68
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EC298C54E73
 	for <webhook@archiver.kernel.org>; Sun, 17 Mar 2024 20:18:28 +0000 (UTC)
-Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
- by mx.groups.io with SMTP id smtpd.web11.27100.1710706708175660841
+Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
+ by mx.groups.io with SMTP id smtpd.web11.27095.1710706702339043145
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 17 Mar 2024 13:18:28 -0700
+ Sun, 17 Mar 2024 13:18:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Se/weRwO;
- spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-1e00d1e13a2so2546575ad.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 17 Mar 2024 13:18:28 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=djzcqIsH;
+ spf=pass (domain: gmail.com, ip: 209.85.215.182, mailfrom: raj.khem@gmail.com)
+Received: by mail-pg1-f182.google.com with SMTP id 41be03b00d2f7-5cfd95130c6so2183641a12.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 17 Mar 2024 13:18:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1710706707; x=1711311507; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1710706702; x=1711311502; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:date:message-id:subject
-         :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=19n4FL6Aj8OJcDCffdb9REOOXVqTEQREl/d6vWFhN0o=;
-        b=Se/weRwOkduWrE0lB/DVVjIjO2lQ1bwK9KIDjbiv4Mps77DK+4bxfCsfia8QvzT8wn
-         npLA9pyvskW42SorMxFOIrNCEeHoJiidteIrVrugl1TJCUL2M01FFLSF3MuI56bF4nzZ
-         9ChuLhUaCb63A3fiDH+duZFe5Yorj80lfCGFV7+IS/qt41gqwgit2bixoJ2nLn1zUSFd
-         ZC5TogjMo7c29hhbUCErmUgnQVQPQMK2Z1xOaIlju+6hfdu3V99PPPaYO5Xk0DXHpjlb
-         fm+cHG04fGUxlr9+8KNZyyrA7slERa9Dup5B+kHoJJHdhrHWYW9q9ZBlVeRP0WwEbjGo
-         zRsg==
+         :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=OsHWXGxw0Oha5tvDFHVG6LWlZPvjgNEMqK+Tm8r70Hc=;
+        b=djzcqIsH5H87fDhr5LiWpRGxQzl7JIom8OYXnwt5u4AxQ/Qms5laP5xohGd91oRTSD
+         uLOVm6C9+vqcrYDyJqCbRyz/hjT7pvWUPfYBYG7zLQ73LJRXDgnVr0hZ5YGn0g53mzu3
+         89oX0arrg6oofeD3S1H74Zq27btI5cOClVG0FGcGPbM3QvyEwl5PMBkapff7sAWPQVNP
+         aWyouQ2tmnvLCh57kJmejR4ulWE2oy+g1Brj0Qd68VagcF4qKVoWh5pqn/NHD1aXBEKz
+         BFqeqFJH0+DV9ctAaKw6tey61n609x3V47MBdbIp16pQ6r9Scz9YXBMKGoka5WcRoABS
+         klPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710706707; x=1711311507;
+        d=1e100.net; s=20230601; t=1710706702; x=1711311502;
         h=content-transfer-encoding:mime-version:date:message-id:subject
-         :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+         :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=19n4FL6Aj8OJcDCffdb9REOOXVqTEQREl/d6vWFhN0o=;
-        b=ZIB8MiXoJh4bwxez+KGuJRrsEHVVuQ+XT406RWi70+WPswFaMyqdHspc6M4wP2x2B4
-         R/7+vVNdkTi4lmhLwEwX7qawsGGNuvvMNicKAbY3kzecmlT+bL9B1YLi1WX0W7VAQ8N7
-         DByNQ3Bp+r2QLRf4sD7FDvGEJTWZUZbCMHyKnouKPU7puCfDWF3TNHYeEDsQDRTdDPVX
-         eUtKh112LnKc4rx1QxXLi8QL5LEfN9wugH0IXgu1YgOBXeekUYGvVdbNtE5EH9oP7tn9
-         484EdIT76OKc1k1ABsZmu8WmJQisSA7rgV53rZ72XZzDkwKpDBK0n8uLWQ2h3GAZcRtV
-         puIQ==
-X-Gm-Message-State: AOJu0Yx82X+swjWb+qv9CeYcWun0hqIK6FG4udfRgEzPuXppBWtK6enR
-	sXLFpeC7JDCllDHENnS1geTL0m5B0GDC1PkFEFu5BGgqZg6LA3JENtdimdim
-X-Google-Smtp-Source: AGHT+IExxARCoC1d7EwUHiG4KHEG9yFvu7d6jmCXH6T2qu6IaA1Q2uRZLhWG/vVwXIkUf8+Vjwu82A==
-X-Received: by 2002:a17:902:f544:b0:1de:fbc3:8e4a with SMTP id h4-20020a170902f54400b001defbc38e4amr7091571plf.52.1710706707337;
-        Sun, 17 Mar 2024 13:18:27 -0700 (PDT)
+        bh=OsHWXGxw0Oha5tvDFHVG6LWlZPvjgNEMqK+Tm8r70Hc=;
+        b=vvfJgmR6Ej7oMhHACdbASte7/BSw8k+oRaUofM0dxUurcDqbRytR0xqPSUDsTgnIK4
+         CWBNjS70XCOMUupuXcFyTGTAzvkoSPg2+3RsaMvb5NpxdttMAN/G6yBi8HKjl+/hILrz
+         hDdMTfCwQF6iluqBUB8h3v1klrFiJcHHBbfeRu+2lbEoUoz1WJvU1bt1ydp/mmXTm7N3
+         72xI+Ss0RXPGPyKCDoWqDzlVKOdhzghEauvK8vfVwLqo1r64YaJx71+tfodovMkhUW5D
+         +AK5qFfBNMAt+1TPeZx96b2fpUsEvuC0oup79Pcguw3C9AEUqwhvaBvn4vLvgFa+XLN2
+         gp+Q==
+X-Gm-Message-State: AOJu0Yy39psJkx38/CWYezA3Hf8AMxGBNkw7NVkvCWscwxyEAWFStaQn
+	4zw/9DgIawvMclCQOd4Otue3a3MFDYPqSdDa++fae+w5/XanEbsC
+X-Google-Smtp-Source: AGHT+IGmkAeNzQ1XSl5hMHixY8vd45Fd9GdT4Ax+en15wFmLqbnXJ1rdllzOtK6vm7nLRbHZR6fvPw==
+X-Received: by 2002:a17:902:b414:b0:1dd:c93c:580c with SMTP id x20-20020a170902b41400b001ddc93c580cmr9896686plr.4.1710706701727;
+        Sun, 17 Mar 2024 13:18:21 -0700 (PDT)
 Received: from apollo.localdomain ([2601:646:9d80:4380::68dc])
-        by smtp.gmail.com with ESMTPSA id i10-20020a170902c94a00b001db717d2dbbsm1465604pla.210.2024.03.17.13.18.26
+        by smtp.gmail.com with ESMTPSA id i10-20020a170902c94a00b001db717d2dbbsm1465604pla.210.2024.03.17.13.18.20
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 17 Mar 2024 13:18:26 -0700 (PDT)
+        Sun, 17 Mar 2024 13:18:20 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org, joerg.sommer@navimatix.de
-In-Reply-To: <0afe6e7d5c9f3de0c3b82a646236bb9bbbe8210f.1710445397.git.joerg.sommer@navimatix.de>
-References: <0afe6e7d5c9f3de0c3b82a646236bb9bbbe8210f.1710445397.git.joerg.sommer@navimatix.de>
-Subject: Re: [meta-multimedia][PATCH v2] spandsp: new telephony DSP library
-Message-Id: <171070670648.939783.2740565730085400999.b4-ty@gmail.com>
-Date: Sun, 17 Mar 2024 13:18:26 -0700
+To: openembedded-devel@lists.openembedded.org, 
+ Dan McGregor <danismostlikely@gmail.com>
+Cc: Dan McGregor <dan.mcgregor@vecima.com>
+In-Reply-To: <20240314010521.1841026-1-danismostlikely@gmail.com>
+References: <20240314010521.1841026-1-danismostlikely@gmail.com>
+Subject: Re: [meta-python][PATCH v2] python3-pylint: Fix ptest failures
+Message-Id: <171070670062.939783.16852229385647319379.b4-ty@gmail.com>
+Date: Sun, 17 Mar 2024 13:18:20 -0700
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -61,17 +63,19 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 17 Mar 2024 20:18:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109385
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109380
 
 
-On Thu, 14 Mar 2024 20:43:17 +0100, joerg.sommer@navimatix.de wrote:
+On Wed, 13 Mar 2024 19:05:21 -0600, Dan McGregor wrote:
+> Due to the way we install ptests, some imports switch from
+> first party to third party. Update test expectations
 > 
-
+> 
 
 Applied, thanks!
 
-[1/1] spandsp: new telephony DSP library
-      commit: 6a2b29e98d77de46a2885eff15bc8e4bc42e9396
+[1/1] python3-pylint: Fix ptest failures
+      commit: 0c428fac857d5cdb90862431c34bec1b76bb7cba
 
 Best regards,
 -- 
