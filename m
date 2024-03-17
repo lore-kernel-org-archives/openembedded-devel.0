@@ -2,59 +2,59 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A6A1C54E71
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 16BB9C54E6A
 	for <webhook@archiver.kernel.org>; Sun, 17 Mar 2024 20:18:39 +0000 (UTC)
-Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
- by mx.groups.io with SMTP id smtpd.web10.27248.1710706712228224526
+Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
+ by mx.groups.io with SMTP id smtpd.web11.27102.1710706710170692072
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 17 Mar 2024 13:18:32 -0700
+ Sun, 17 Mar 2024 13:18:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=BArOK9Ck;
- spf=pass (domain: gmail.com, ip: 209.85.216.54, mailfrom: raj.khem@gmail.com)
-Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-29c71c6e20cso3112672a91.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 17 Mar 2024 13:18:32 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=SNtsjZf6;
+ spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f176.google.com with SMTP id d2e1a72fcca58-6e6cadfffdbso3279693b3a.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 17 Mar 2024 13:18:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1710706711; x=1711311511; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1710706709; x=1711311509; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=J4C/uNnhko0hPyPuoT849WezEcHLsCy1SmuqVeuvYB8=;
-        b=BArOK9CkDjka5j0sTMfp0EFGU64pngHWrqvHxxt/glf4HRtFuqJkKT9IR9HPVKuNYx
-         m4KsPbC4Kc1hmwq4wWP710frAPMM7D75635V6KkvHa7hLAm01rKorFecUz6KOKL8Unxn
-         HqCYImn1jvbUMkUHJ4ctUkC/qu1gqIvTmoy6J5CYgOwKATu8A/WFDAnONovRQyM0hGW2
-         KI1+7nbtOzKJsB0M5WQZ8wF6Q29RhNXX2zWuEiak534v30rREpx0WiEdyMUNxx0vUP8C
-         Qz/adAw5aDudqrggIVIhyKK+u7MIUlgWcVfwqyB35GoB+5rRem2ujMv7aEeQvXnwKvns
-         GhKA==
+        bh=KxPimnzgNc7b3giEKPJl6stDj9hjV3fNcGL7Le3oU/Y=;
+        b=SNtsjZf69msIj/lxPyRJGV0CNYNAeT85BLDvd/ek9rHEDQTzzUxyGHzXqamg/8osex
+         aNoC+Z5LFIi4x8ZjbrHbMZoy0inZrdXXn4IMLI7liXGMTLEKMtidVqu5PVA27XxQVKjC
+         REdYAZsI0yZIQbLc47sA95sAR6d3efBUyLdzDA9nY2FJZIzNPohLkccs1NpaDdEn2Aki
+         1AgyYQmKcQTr51p40WcqDpzwQXhthPIc22nwkztHxwqgeehU+BUoiVADg9JV9E2xVdV2
+         9RoAQp2hiOWhwU+1EgdXWTtu5/Pwwpjoc7Ndg6PltE6Tm8fU/IYHauh551MyM9NtK1Ch
+         dTyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710706711; x=1711311511;
+        d=1e100.net; s=20230601; t=1710706709; x=1711311509;
         h=content-transfer-encoding:mime-version:date:message-id:subject
          :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=J4C/uNnhko0hPyPuoT849WezEcHLsCy1SmuqVeuvYB8=;
-        b=KqpPSpBF8BFzJ2hYucVxbwOi0BEkPBFrLvdzF7lKw5mLxH3mHjIx0J6VifP4fqO7ih
-         cJsxZ4ZLTGYAUhZM52tHGegbBUMDvRrvl+YSh/wqO/t1ShH+8Ig3iOqC2E3NgJVSxUA+
-         jx82uLb5FDWVPkwEmadp5zB3qeBcoACgZavYy1WSXuEAEnCnpfcdvVgaMjSzTfGzjcVh
-         Bh7lqOGRawrrW+8MWLI12yhOARYi8qJAE1jO9lH35yF3wNjFir/xFnDmJCOkBUI6UmYS
-         avezDW3DL9FBFM5nqTV075VCsBa/d33C/x3+YJyssBCSRXI+8HWDf9vI/UIbIK0lQBl6
-         cAJA==
-X-Gm-Message-State: AOJu0YzwwlhHEKX2dMHSMG5TOoWI5ehVWYqiYlmgxUozfZED6ybuKLeL
-	06YyQ2I0egaXAHigIC/pNqxekU/jylFGeRD29dc7Kyvc3NrQMgz99znboE9h
-X-Google-Smtp-Source: AGHT+IHy7J3OJ/9ZywZouvM4DuvM+uES2edMnr/BaTOdjluBFnQ7bKIoi6oH92AlJHb9nzdg6zInag==
-X-Received: by 2002:a05:6a20:c505:b0:1a0:adbc:7a96 with SMTP id gm5-20020a056a20c50500b001a0adbc7a96mr6226021pzb.36.1710706711389;
-        Sun, 17 Mar 2024 13:18:31 -0700 (PDT)
+        bh=KxPimnzgNc7b3giEKPJl6stDj9hjV3fNcGL7Le3oU/Y=;
+        b=ovZgrlnToFFMflimuJ8zAlc+qmUnxR88GjWp56wfIeVNWhWrrc/gVw1hc6kNhJtFrZ
+         9kenTe26tQVaeFdIakEDjKEiH4ccN1lXMyiXO3NqY8xsWSq6l26EdiTc5/f6d5EeVdxV
+         OzH2AYL4qep/nhdXEuD6N7z/ZDZjTJuo4UAvi4Ma6SbeHDK/gNRHJqeYVM8Mmya/YmKE
+         AcXcnRNe59WhZTGbUYEMYrZ39oGOu/0G+yJI4vsj5Rr8FFBPanwWAByk3G4+VMZ4OooV
+         /reCD+xaJ+tcA46y6mQ+2/ATkmZTj5lI/xxj6fZEBd23RuIY0P2OZIa62TWvPp/in5uG
+         9KUg==
+X-Gm-Message-State: AOJu0Yz77Mb4Ye09BYTLfN7aiImSAwoduRKE8de2sKRWCJDTvpKm4DgZ
+	c/vSUbs0mY+gwSy7qCzWqjIdSh49ah9JK6Ko7GqcOPrNfcVwKj+Ou2vJ4ncZ
+X-Google-Smtp-Source: AGHT+IEU4iRI0FLYlCKfZShGH0Y7VsFwnbF3br3agtFn3iGyBr6ctpUZLSGlnaklF1vgUG29B7QwxQ==
+X-Received: by 2002:a05:6a20:1450:b0:1a3:2fc0:5468 with SMTP id a16-20020a056a20145000b001a32fc05468mr8343029pzi.17.1710706709395;
+        Sun, 17 Mar 2024 13:18:29 -0700 (PDT)
 Received: from apollo.localdomain ([2601:646:9d80:4380::68dc])
-        by smtp.gmail.com with ESMTPSA id i10-20020a170902c94a00b001db717d2dbbsm1465604pla.210.2024.03.17.13.18.30
+        by smtp.gmail.com with ESMTPSA id i10-20020a170902c94a00b001db717d2dbbsm1465604pla.210.2024.03.17.13.18.28
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 17 Mar 2024 13:18:30 -0700 (PDT)
+        Sun, 17 Mar 2024 13:18:28 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org, 
- Richard Purdie <richard.purdie@linuxfoundation.org>
-In-Reply-To: <20240315171651.3850535-1-richard.purdie@linuxfoundation.org>
-References: <20240315171651.3850535-1-richard.purdie@linuxfoundation.org>
-Subject: Re: [meta-openembedded] [PATCH 1/2] imagemagick/lcms/fftw: Allow
- nativesdk versions to exist
-Message-Id: <171070671075.939783.13852084190218855667.b4-ty@gmail.com>
-Date: Sun, 17 Mar 2024 13:18:30 -0700
+ Martin Jansa <martin.jansa@gmail.com>
+In-Reply-To: <20240315053721.5782-1-martin.jansa@gmail.com>
+References: <20240315053721.5782-1-martin.jansa@gmail.com>
+Subject: Re: [meta-oe][PATCH] recipes: Drop remaining PR values from
+ recipes
+Message-Id: <171070670838.939783.15550677693931997646.b4-ty@gmail.com>
+Date: Sun, 17 Mar 2024 13:18:28 -0700
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -63,22 +63,23 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Sun, 17 Mar 2024 20:18:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109389
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109387
 
 
-On Fri, 15 Mar 2024 17:16:50 +0000, Richard Purdie wrote:
-> These allow the use of imagemagick in SDKs where it is useful to perform
-> image analysis such as on the autobuilder for screenshot processing
-> during QA testing.
+On Fri, 15 Mar 2024 06:37:21 +0100, Martin Jansa wrote:
+> * as oe-core did in:
+>   https://git.openembedded.org/openembedded-core/commit/?id=d4c346e8ab
 > 
+> * when people are have to maintain own PRs for recipes in oe-core, they
+>   might add them for meta-oe recipes at the same time when upgrading
+>   to next LTS
 > 
+> [...]
 
 Applied, thanks!
 
-[1/2] imagemagick/lcms/fftw: Allow nativesdk versions to exist
-      commit: ee2001b3037a6767ad0f46721b3b8fcef140c12f
-[2/2] buildtools-imagemagick: Add new recipe
-      commit: 2e3a4b155cd997dca51ff4be42233ada0e54eec6
+[1/1] recipes: Drop remaining PR values from recipes
+      commit: e722be5facd8bdfb43ee08665dc2e2d38d6d5853
 
 Best regards,
 -- 
