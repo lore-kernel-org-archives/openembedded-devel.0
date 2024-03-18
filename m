@@ -1,88 +1,149 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 16BB9C54E6A
-	for <webhook@archiver.kernel.org>; Sun, 17 Mar 2024 20:18:39 +0000 (UTC)
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
- by mx.groups.io with SMTP id smtpd.web11.27102.1710706710170692072
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B894C54E68
+	for <webhook@archiver.kernel.org>; Mon, 18 Mar 2024 00:09:20 +0000 (UTC)
+Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
+ by mx.groups.io with SMTP id smtpd.web11.31696.1710720549765960074
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 17 Mar 2024 13:18:30 -0700
+ Sun, 17 Mar 2024 17:09:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=SNtsjZf6;
- spf=pass (domain: gmail.com, ip: 209.85.210.176, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f176.google.com with SMTP id d2e1a72fcca58-6e6cadfffdbso3279693b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 17 Mar 2024 13:18:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1710706709; x=1711311509; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:date:message-id:subject
-         :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=KxPimnzgNc7b3giEKPJl6stDj9hjV3fNcGL7Le3oU/Y=;
-        b=SNtsjZf69msIj/lxPyRJGV0CNYNAeT85BLDvd/ek9rHEDQTzzUxyGHzXqamg/8osex
-         aNoC+Z5LFIi4x8ZjbrHbMZoy0inZrdXXn4IMLI7liXGMTLEKMtidVqu5PVA27XxQVKjC
-         REdYAZsI0yZIQbLc47sA95sAR6d3efBUyLdzDA9nY2FJZIzNPohLkccs1NpaDdEn2Aki
-         1AgyYQmKcQTr51p40WcqDpzwQXhthPIc22nwkztHxwqgeehU+BUoiVADg9JV9E2xVdV2
-         9RoAQp2hiOWhwU+1EgdXWTtu5/Pwwpjoc7Ndg6PltE6Tm8fU/IYHauh551MyM9NtK1Ch
-         dTyw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710706709; x=1711311509;
-        h=content-transfer-encoding:mime-version:date:message-id:subject
-         :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=KxPimnzgNc7b3giEKPJl6stDj9hjV3fNcGL7Le3oU/Y=;
-        b=ovZgrlnToFFMflimuJ8zAlc+qmUnxR88GjWp56wfIeVNWhWrrc/gVw1hc6kNhJtFrZ
-         9kenTe26tQVaeFdIakEDjKEiH4ccN1lXMyiXO3NqY8xsWSq6l26EdiTc5/f6d5EeVdxV
-         OzH2AYL4qep/nhdXEuD6N7z/ZDZjTJuo4UAvi4Ma6SbeHDK/gNRHJqeYVM8Mmya/YmKE
-         AcXcnRNe59WhZTGbUYEMYrZ39oGOu/0G+yJI4vsj5Rr8FFBPanwWAByk3G4+VMZ4OooV
-         /reCD+xaJ+tcA46y6mQ+2/ATkmZTj5lI/xxj6fZEBd23RuIY0P2OZIa62TWvPp/in5uG
-         9KUg==
-X-Gm-Message-State: AOJu0Yz77Mb4Ye09BYTLfN7aiImSAwoduRKE8de2sKRWCJDTvpKm4DgZ
-	c/vSUbs0mY+gwSy7qCzWqjIdSh49ah9JK6Ko7GqcOPrNfcVwKj+Ou2vJ4ncZ
-X-Google-Smtp-Source: AGHT+IEU4iRI0FLYlCKfZShGH0Y7VsFwnbF3br3agtFn3iGyBr6ctpUZLSGlnaklF1vgUG29B7QwxQ==
-X-Received: by 2002:a05:6a20:1450:b0:1a3:2fc0:5468 with SMTP id a16-20020a056a20145000b001a32fc05468mr8343029pzi.17.1710706709395;
-        Sun, 17 Mar 2024 13:18:29 -0700 (PDT)
-Received: from apollo.localdomain ([2601:646:9d80:4380::68dc])
-        by smtp.gmail.com with ESMTPSA id i10-20020a170902c94a00b001db717d2dbbsm1465604pla.210.2024.03.17.13.18.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 17 Mar 2024 13:18:28 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org, 
- Martin Jansa <martin.jansa@gmail.com>
-In-Reply-To: <20240315053721.5782-1-martin.jansa@gmail.com>
-References: <20240315053721.5782-1-martin.jansa@gmail.com>
-Subject: Re: [meta-oe][PATCH] recipes: Drop remaining PR values from
- recipes
-Message-Id: <171070670838.939783.15550677693931997646.b4-ty@gmail.com>
-Date: Sun, 17 Mar 2024 13:18:28 -0700
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
+Received: from fwd84.aul.t-online.de (fwd84.aul.t-online.de [10.223.144.110])
+	by mailout03.t-online.de (Postfix) with SMTP id A7AC33E17A
+	for <openembedded-devel@lists.openembedded.org>; Mon, 18 Mar 2024 01:09:05 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([79.219.225.66]) by fwd84.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1rm0Yq-0G0gYT0; Mon, 18 Mar 2024 01:09:04 +0100
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-multimedia][PATCH] pipewire: update 1.0.3 -> 1.0.4
+Date: Mon, 18 Mar 2024 01:09:25 +0100
+Message-ID: <20240318000925.1163548-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+X-TOI-EXPURGATEID: 150726::1710720544-3DA409FB-8D67AF9A/0/0 CLEAN NORMAL
+X-TOI-MSGID: 91445667-9d07-4672-8d9b-6f8a51bce1a8
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 17 Mar 2024 20:18:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109387
+ <openembedded-devel@lists.openembedded.org>; Mon, 18 Mar 2024 00:09:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109391
 
+This is a bugfix release that is API and ABI compatible with previous
+1.0.x releases.
 
-On Fri, 15 Mar 2024 06:37:21 +0100, Martin Jansa wrote:
-> * as oe-core did in:
->   https://git.openembedded.org/openembedded-core/commit/?id=d4c346e8ab
-> 
-> * when people are have to maintain own PRs for recipes in oe-core, they
->   might add them for meta-oe recipes at the same time when upgrading
->   to next LTS
-> 
-> [...]
+Highlights
 
-Applied, thanks!
+  - Track memfd better to avoid inconsistent memory. Also make sure the
+    mixer info is removed correctly in all cases on destroyed ports.
+  - Correctly handle removed objects in the metadata.
+  - Add an option to set the server and client priorities instead of usin=
+g
+    a hardcoded value of 88.
+  - The FFADO module has been fixed. Audio and MIDI now works with
+    the same latency as the JACK driver. This has now also been
+    tested with a Focusrite Saffire Pro 14.
+  - The JACK library has seen some important fixes. Some ardour crackling
+    has been fixed when looping and multiple MIDI ports on a client shoul=
+d
+    now work.
+  - Small bugfixes and improvements.
 
-[1/1] recipes: Drop remaining PR values from recipes
-      commit: e722be5facd8bdfb43ee08665dc2e2d38d6d5853
+PipeWire
+  - Track memfd better to avoid inconsistent memory. Also make sure the
+    mixer info is removed correctly in all cases on destroyed ports.
+  - Fix Props param emission again in pw_stream. (#3833)
+  - Add MAPPABLE flag to buffer data to indicate that the fd can be
+    mmapped directly. Use this on DMABUF from v4l2. (#3840)
+  - Correctly handle removed object in the metadata.
+  - FreeBSD build and compatibility fixes.
+  - Add an option to set the server and client priorities instead of usin=
+g
+    a hardcoded value of 88.
+  - Read config overrides in the right order.
+  - Fix PIPEWIRE_QUANTUM rate handling in pw_stream and pw_filter.
+  - Fix pw_context_parse_conf_section(), actually use the conf argument.
+  - A new pw_stream_get_nsec() and pw_filter_get_nsec() function was adde=
+d
+    to get the current time of the stream/filter without having to assume=
+ a
+    particular clock.
+  - A new default.clock.quantum-floor property was added to configure the
+    absolute lowest buffer-size. (#3908)
 
-Best regards,
--- 
-Khem Raj <raj.khem@gmail.com>
+docs
+  - Many doc updates.
+
+tools
+  - Make sure we always quit pw-cli when the server stops. (#3837)
+  - pw-top now prints all drivers in batch mode. (#3899)
+
+modules
+  - Don't destroy the client in protocol-simple on EAGAIN.
+  - Handle IPv6 better in the RTP modules. Fix IPv6 SAP header
+    parsing. (#3851)
+  - The FFADO module has been fixed. Audio and MIDI now works with
+    the same latency as the JACK driver. This has now also been
+    tested with a Focusrite Saffire Pro 14. (#3558)
+
+pulse-server
+  - Make sure the peer_name is filled to avoid protocol errors.
+
+SPA
+  - Small resampler tweaks to improve stability of adaptive resampler.
+  - Add ALSA option to control htimestamp autodisable.
+  - Avoid some potential crashes in audioconvert when ports are removed.
+  - Improve HDMI jack detection on some SOCs.
+  - The audioconvert now has a monitor.passthrough option to pass the
+    latency information on the monitor ports. (#3888)
+
+GStreamer
+  - Don't use timeouts when autoconnect=3Dfalse in pipewiresrc. (#3884)
+  - pipewiresrc and pipewiresink can now be automatically selected as
+    audio source and sink.
+  - An invalid memory access was fixed when destroying the device
+    provider.
+
+JACK
+  - Remove properties correctly with the object id, not serial.
+  - Improve sync with the data thread by pausing the core. Also improve
+    handling of port io to avoid invalid buffer access.
+  - Fix PIPEWIRE_QUANTUM rate handling.
+  - Support multiple MIDI input ports per client. (#3901)
+  - The output buffer size is now always correctly set. (#3892)
+
+ALSA
+  - Handle errors from eventfd_create correctly.
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ .../pipewire/{pipewire_1.0.3.bb =3D> pipewire_1.0.4.bb}           | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_1.0.3.bb =3D=
+> pipewire_1.0.4.bb} (99%)
+
+diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.0.3.b=
+b b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.0.4.bb
+similarity index 99%
+rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_1.0.3.bb
+rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_1.0.4.bb
+index f1c9f8556..e9c83dd23 100644
+--- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.0.3.bb
++++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.0.4.bb
+@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM =3D " \
+=20
+ DEPENDS =3D "dbus ncurses"
+=20
+-SRCREV =3D "6ab86209f23a841de7eac6bc0c1009aceb9ffd87"
++SRCREV =3D "f2874ad1c2f7f0b9a1da05cc4f402b3ea3761ee6"
+ SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
+1.0;protocol=3Dhttps"
+=20
+ S =3D "${WORKDIR}/git"
+--=20
+2.44.0
 
 
