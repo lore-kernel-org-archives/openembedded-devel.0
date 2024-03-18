@@ -2,64 +2,64 @@ Return-Path: <quaresma.jose@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4BEFEC54E69
-	for <webhook@archiver.kernel.org>; Mon, 18 Mar 2024 18:01:56 +0000 (UTC)
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
- by mx.groups.io with SMTP id smtpd.web10.52188.1710784911110773314
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5525CC54E58
+	for <webhook@archiver.kernel.org>; Mon, 18 Mar 2024 18:11:56 +0000 (UTC)
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+ by mx.groups.io with SMTP id smtpd.web10.52454.1710785508190356149
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Mar 2024 11:01:51 -0700
+ Mon, 18 Mar 2024 11:11:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=fdMq2ziV;
- spf=pass (domain: gmail.com, ip: 209.85.128.43, mailfrom: quaresma.jose@gmail.com)
-Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-4140870914fso16566305e9.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 18 Mar 2024 11:01:50 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZCLMPONW;
+ spf=pass (domain: gmail.com, ip: 209.85.128.42, mailfrom: quaresma.jose@gmail.com)
+Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-4140a259a54so13812665e9.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 18 Mar 2024 11:11:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1710784909; x=1711389709; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1710785506; x=1711390306; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=n6tXDLflicFoPZKeCGAt6V3T1oN+/DNUcHy+5v3aM/k=;
-        b=fdMq2ziVVoCVk+vi/arf5dFvcJ1E/tm/io3g4vNaOJs5AUh3tvlTc1/yJ8+a7tNDZL
-         R1JUYAY1nzrYu3fwX3s0yA8OciMYc1aRa2iET8zrCjYO4U1mgIWNX66394mY9fzA1/7t
-         f8IzzKwcKg/NUD6IK7mnVg4c7KK5ivCiMd9vVi0SyBU03NkFf2s5CyHGxx/23I2AqgFC
-         ElP5sYxjEuIQjvByFPPe//Owg2VZA7z8gDftrGTyDA1tmmsynz9C97y8h+nKsGlL6ocI
-         K83HxTZvZNIvO5kulGA711o43bjdNfFUH0Zab6QW8Sh4VBghqYC2elY/uXvd6iP+5nKp
-         ObkA==
+        bh=jqy/CSKCIx+iY5qTXgbzbDdExjuKZ/lB3L3seOW8SCs=;
+        b=ZCLMPONWuZO18BZtR+UFndGSmSKWu2a9JMAGkyoAY/7DZfijWTDNoigkvIYd+zKc90
+         LVVVJZ7qJ4q0z+NpAcRzLdRP8HsKvWuIkQQDUBlYHqKDeJG+xS63I+Z21Bjefnp0yERQ
+         513QVzVtOWHmaoyLiMHEfJtrBXkB++oJHccev7PtkEqlfJgeJn/6DURR45SexkyostK+
+         C6yz9SsQBssHB17v0UsiIlzTb4pB6HRG1PjiLa0L1atjSAs7Ve8ayVUzWpaIkSPq1+ea
+         TAxsSG27DnbxfjDI90b5zuH8pb8d6XwFfelfZxtDcFHTuzx9vTshQNT0g7Em04amewI2
+         pFnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710784909; x=1711389709;
+        d=1e100.net; s=20230601; t=1710785506; x=1711390306;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=n6tXDLflicFoPZKeCGAt6V3T1oN+/DNUcHy+5v3aM/k=;
-        b=Mnk29XbBxAqdMf5NQv7Viifi3MixbMjXiuQxko4kRrFjNOl0pGYo8dJJlPHFV5itK+
-         wwIPE/OFkn1+pXQkrqdg8xAup5VvvUI/XQHaCpslcC7JpA34P9TGkAqFtR61S/8eAUTb
-         dtptu2YhaI0Znj5jFovCMRWg6gudyPoSGbg1GyVb9Sm8KoQ6MkFrljCXO70bvLq+GS1P
-         rYkciSAmROS3eHRr0HD1C4JEHNmDsfSFDgN75XMyGOfxuGa3lXIUmdtDdtihYDNVrI8j
-         kvy7Coo7DipizKwtPQ8d31rw93zw4iYdxKQajbfGvCWp7bXa0wTZfZh8dOdmllQF0yaR
-         E1LA==
-X-Gm-Message-State: AOJu0YzGTU4E2+lBf+HfIS/nLGprvP6KclAElnh1mQHxMfpAn1HXoMqF
-	vH3zff5ASSTBHlG943vrKFIgJpMa9SsoTd16IVn7bFbDr7uGjIDAWxvFkDLa
-X-Google-Smtp-Source: AGHT+IHElzR+ZoW8IxX87klMMTWMOpvvnks5X0bphbdKE3F72bhAwJ6X+23TSMN0TOUnpZklcCMP9g==
-X-Received: by 2002:a05:600c:3548:b0:414:60fe:8f2b with SMTP id i8-20020a05600c354800b0041460fe8f2bmr839148wmq.18.1710784908828;
-        Mon, 18 Mar 2024 11:01:48 -0700 (PDT)
+        bh=jqy/CSKCIx+iY5qTXgbzbDdExjuKZ/lB3L3seOW8SCs=;
+        b=PR8APf6ncmrqD1BDzSJSfRgQFZZu19k/ycvAFBAUokQQmxU1vr2w9xq6r2THc+o2kp
+         hkZ1cqT6fweHR1Y5OKJW/ItN7LkdIymxlI2gY1O+K5L6vYAVV81vIq1UGWip4iMYwGm4
+         MlN94isKV0QhoU5Vqb1PZKEPwBfw508w120eyizujWX8qF8UbVFe8dVvL9U4rSULQ24B
+         xJ6t1h2L8IM4ex6tsvlC15CTfZo/dH2XpxGV9fyzQhoK3wjQtPNHfSvGVoCLUc6BcwWC
+         I3j8TVOEL5LFOvBgMS0hUiUNR+6HFr5UbW82HCjF1dWou3iSrcv6qOxx596w5QBqSWxQ
+         huwQ==
+X-Gm-Message-State: AOJu0Ywz+W5xwtcSA4F/8AJylW7Y5g4A7cPXce2oxLvPzmSdZHO9hQQB
+	rjqbcXh4hfS8IoTdYnDOz6nl3797wT7zq1n7HKoyrHAIKHJXror0bD5MGX8U
+X-Google-Smtp-Source: AGHT+IHvH+D5EdYWjCQlhJbacnQXa9BSL0ZWB9qFyKlUFn+9gg8OeufqpmbmAoubRaXTmF3ZVAee/w==
+X-Received: by 2002:a05:600c:4f8a:b0:414:239:40cc with SMTP id n10-20020a05600c4f8a00b00414023940ccmr7707096wmq.12.1710785505941;
+        Mon, 18 Mar 2024 11:11:45 -0700 (PDT)
 Received: from toster.lan (bl15-243-112.dsl.telepac.pt. [188.80.243.112])
-        by smtp.gmail.com with ESMTPSA id f10-20020adffcca000000b0033d640c8942sm10340634wrs.10.2024.03.18.11.01.47
+        by smtp.gmail.com with ESMTPSA id u19-20020a05600c19d300b004101f27737asm18636855wmq.29.2024.03.18.11.11.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 18 Mar 2024 11:01:48 -0700 (PDT)
+        Mon, 18 Mar 2024 11:11:45 -0700 (PDT)
 From: Jose Quaresma <quaresma.jose@gmail.com>
 X-Google-Original-From: Jose Quaresma <jose.quaresma@foundries.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Jose Quaresma <jose.quaresma@foundries.io>
-Subject: [oe][meta-oe][PATCH] ostree: Upgrade 2024.4 -> 2024.5
-Date: Mon, 18 Mar 2024 18:01:42 +0000
-Message-ID: <20240318180142.700900-1-jose.quaresma@foundries.io>
+Subject: [oe][meta-oe][PATCH v1] ostree: Upgrade 2024.4 -> 2024.5
+Date: Mon, 18 Mar 2024 18:11:19 +0000
+Message-ID: <20240318181118.764056-2-jose.quaresma@foundries.io>
 X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 18 Mar 2024 18:01:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109408
+ <openembedded-devel@lists.openembedded.org>; Mon, 18 Mar 2024 18:11:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109409
 
 $ git --no-pager log --oneline v2023.8...v2024.1
 f3b66e8c (tag: v2024.5) Release 2024.5
@@ -87,14 +87,29 @@ cdb4cad4 Merge pull request #3197 from cgwalters/release
 
 Signed-off-by: Jose Quaresma <jose.quaresma@foundries.io>
 ---
- .../ostree/{ostree_2024.4.bb => ostree_2024.5.bb}                 | 0
- 1 file changed, 0 insertions(+), 0 deletions(-)
- rename meta-oe/recipes-extended/ostree/{ostree_2024.4.bb => ostree_2024.5.bb} (100%)
+
+v1: change sha256sum which was only local
+
+ .../ostree/{ostree_2024.4.bb => ostree_2024.5.bb}               | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/ostree/{ostree_2024.4.bb => ostree_2024.5.bb} (98%)
 
 diff --git a/meta-oe/recipes-extended/ostree/ostree_2024.4.bb b/meta-oe/recipes-extended/ostree/ostree_2024.5.bb
-similarity index 100%
+similarity index 98%
 rename from meta-oe/recipes-extended/ostree/ostree_2024.4.bb
 rename to meta-oe/recipes-extended/ostree/ostree_2024.5.bb
+index b01337c94..0e098109c 100644
+--- a/meta-oe/recipes-extended/ostree/ostree_2024.4.bb
++++ b/meta-oe/recipes-extended/ostree/ostree_2024.5.bb
+@@ -22,7 +22,7 @@ GITHUB_BASE_URI = "https://github.com/ostreedev/ostree/releases"
+ SRC_URI = "${GITHUB_BASE_URI}/download/v${PV}/libostree-${PV}.tar.xz \
+            file://run-ptest \
+            "
+-SRC_URI[sha256sum] = "63c9190821333ac7373e0d923e4c2766b25ebdcfdf4efb44cb5928c6589d9fcb"
++SRC_URI[sha256sum] = "bc12d8493db64152093ee5be77cf62a29cc67a4a9e430dc987103e78aada4a6f"
+ 
+ S = "${WORKDIR}/libostree-${PV}"
+ 
 -- 
 2.44.0
 
