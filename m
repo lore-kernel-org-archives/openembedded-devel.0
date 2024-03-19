@@ -2,51 +2,51 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D6DC0C54E5D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C4D36C54E60
 	for <webhook@archiver.kernel.org>; Tue, 19 Mar 2024 05:46:46 +0000 (UTC)
-Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
- by mx.groups.io with SMTP id smtpd.web11.8157.1710827200499274846
+Received: from esa1.hc1455-7.c3s2.iphmx.com (esa1.hc1455-7.c3s2.iphmx.com [207.54.90.47])
+ by mx.groups.io with SMTP id smtpd.web11.8153.1710827196730195418
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 18 Mar 2024 22:46:41 -0700
+ Mon, 18 Mar 2024 22:46:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=mWoRAGBH;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=kspA2fsj;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.47, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1710827200; x=1742363200;
+  t=1710827197; x=1742363197;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=/KvUBc1OPRm6Q1M+LQrT1ikJ8tbWsEa8WKqQM/ZHzrs=;
-  b=mWoRAGBHFS9jdqpxwfwS58+e1KdpV9pnj/IZMMCVVebOKt3utaVVIB2C
-   erluQf19cq//mmD1DQd6NBNZxiMoaW1s+dd4HppsrgxA6W6KhJQCHzCuN
-   XwYisDWNTuP5wHBf0NhdUVqN6udl7lVyns/UobAzztDRJ2MmdJQ2v2MmU
-   w7a7fOU/jYmqMr7qov7rGyGs1d3aekLHQYvWSFm/6G2J3JSjglpYBFPnL
-   o1aOdt/73pX8xwhP0OjpFkI4vkhwPCTfze+IADOC9tOqkm/o6Y7AO1abj
-   UebOPiaeHFfAbXhthX3uMPZ2+/AwE27jM3V8YyAwT/FfYspZIVvGSrXj1
+  bh=zr6STOB+xQhB2gjhWD96WDSsQJKZDGceUZ8znte7WFQ=;
+  b=kspA2fsj0gBEoXQpbsuiUoeUgGxbA5IuaaIsEdNcTRGOP9DvQI1Wq/yv
+   xAaEKIvqz/LHym8MSV2dgZqXtR3Ivp0SPNd8SmW186c6svnsYLE+wbIGL
+   IqyAC8mzsFk8nO6PhMHN3cM1S9Oh3S+PXjlP30Xxg0+8pOcKHQzTym64s
+   ffHKst2SmEHeMcGUynfBje1ZwX3gl1dfep6lV6VRSeOIKiBTjh4M2ckOU
+   MFSlIU+ViNVpcJUsDoVc9b4Kaei2XKiReGkYvappYIQT5747LM8mG/wmm
+   XASGnwT1LDMDxxhXs//6p4RROzWhuNvEmuVFNLvt2p1g6MJCWd0LrfZ+W
    A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,11017"; a="154544213"
+X-IronPort-AV: E=McAfee;i="6600,9927,11017"; a="152562799"
 X-IronPort-AV: E=Sophos;i="6.07,136,1708354800"; 
-   d="scan'208";a="154544213"
-Received: from unknown (HELO oym-r2.gw.nic.fujitsu.com) ([210.162.30.90])
-  by esa6.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Mar 2024 14:46:37 +0900
-Received: from oym-m2.gw.nic.fujitsu.com (oym-nat-oym-m2.gw.nic.fujitsu.com [192.168.87.59])
-	by oym-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id A2D42F2648
-	for <openembedded-devel@lists.openembedded.org>; Tue, 19 Mar 2024 14:46:35 +0900 (JST)
+   d="scan'208";a="152562799"
+Received: from unknown (HELO yto-r1.gw.nic.fujitsu.com) ([218.44.52.217])
+  by esa1.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Mar 2024 14:46:35 +0900
+Received: from yto-m1.gw.nic.fujitsu.com (yto-nat-yto-m1.gw.nic.fujitsu.com [192.168.83.64])
+	by yto-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id 8415927A8AB
+	for <openembedded-devel@lists.openembedded.org>; Tue, 19 Mar 2024 14:46:32 +0900 (JST)
 Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id D5CEBBF4B6
-	for <openembedded-devel@lists.openembedded.org>; Tue, 19 Mar 2024 14:46:34 +0900 (JST)
+	by yto-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id B9B97D1F47
+	for <openembedded-devel@lists.openembedded.org>; Tue, 19 Mar 2024 14:46:31 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 7369A2009325C
-	for <openembedded-devel@lists.openembedded.org>; Tue, 19 Mar 2024 14:46:34 +0900 (JST)
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 4E27A2009325D
+	for <openembedded-devel@lists.openembedded.org>; Tue, 19 Mar 2024 14:46:31 +0900 (JST)
 Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 1CD8C1A006B;
-	Tue, 19 Mar 2024 13:46:34 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id EB7121A006B;
+	Tue, 19 Mar 2024 13:46:30 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 25/50] python3-eth-abi: upgrade 5.0.0 -> 5.0.1
-Date: Tue, 19 Mar 2024 13:45:14 +0800
-Message-Id: <1710827139-30056-25-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 23/50] python3-django: upgrade 5.0.2 -> 5.0.3
+Date: Tue, 19 Mar 2024 13:45:12 +0800
+Message-Id: <1710827139-30056-23-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1710827139-30056-1-git-send-email-wangmy@fujitsu.com>
 References: <1710827139-30056-1-git-send-email-wangmy@fujitsu.com>
@@ -54,50 +54,59 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28260.005
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28260.005
-X-TMASE-Result: 10--2.368800-10.000000
-X-TMASE-MatchedRID: wbL0rUvz+3Cjz0nOeth/yUIIxwDaU5mreJmCRwMRpHO3Stk62MqiCBk+
-	ZWK1ZVUWXa45Y5Hu1svrpnIVl2wOj8W51zD3Zy7XqhcdnP91eXGiGsyrScSFBzPJJylm6P+evqn
-	FtM6Nq/L7tBxFpWhrycYoh/qEF/tVoYY7KoErjW8ReM8i8p3vgK7YaZ2V2aJQYA3qL69rXq4Gp0
-	VGMd0huFslxAfd+6tXeTjw/FyRX6QfE8yM4pjsD67rlQMPRoOCxEHRux+uk8hxKpvEGAbTDjXpA
-	lXFm2O5PSDFPVhhszuqIVp5ZHzV2WXN1YmtlcHD4lWYTve4dmH7YMIzyP/89RKaakLjpny5S/Ng
-	iLJEWq4hNMuAKAEB6IK+pasWyF5Rwt7TMGN5mtsVA4/nYFEFckxOwqPXyr98
+X-TMASE-Result: 10-0.524200-10.000000
+X-TMASE-MatchedRID: wgzGQ0X+yFqjz0nOeth/yUIIxwDaU5mrrOCEGIPhtwiudK6ZkaOfBJmj
+	18Axvjh0hJtbBPDn7JutZpuP3DhCtuDLvvVL3eB4Wxfo7yZZDqZUENBIMyKD0QfxTM57BPHD7v0
+	MlFSLfmlNDQmQ8bbzv+affHI8kAmiL1vtt3X2p0WeAiCmPx4NwBnUJ0Ek6yhjxEHRux+uk8hxKp
+	vEGAbTDp/1vNvex/3VtqE77U7Z1DREoqRjkZXfaS2sDLWb5E1SDii56fLUsNR3cXTqcX5Cz1EcN
+	LGH/fOuR19nURvJbYbBm48w6YS8boK+pasWyF5Rwt7TMGN5mtsVA4/nYFEFckxOwqPXyr98
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 19 Mar 2024 05:46:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109443
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109439
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-===========
--During decoding, verify all pointers in arrays and tuples point to a valid location in the payload
--Fix memory leak warning in NodeVisitor and ABIRegistry
--Clear mypy misc-type errors and add top-level py.typed file back
+============
+-Fixed a regression in Django 5.0.2 where intcomma template filter could
+ return a leading comma for string representation of floats
+-Fixed a bug in Django 5.0 that caused a crash of Signal.asend() and
+ asend_robust() when all receivers were asynchronous functions
+-Fixed a regression in Django 5.0.1 where ModelAdmin.lookup_allowed() would
+ prevent filtering against foreign keys using lookups like __isnull when the
+ field was not included in ModelAdmin.list_filter
+-Fixed a regression in Django 5.0 that caused a crash of @sensitive_variables
+ and @sensitive_post_parameters decorators on functions loaded from .pyc files
+-Fixed a regression in Django 5.0 that caused a crash when reloading a test
+ database and a base queryset for a base manager used prefetch_related()
+-Fixed a bug in Django 5.0 where facet filters in the admin would crash on a
+ SimpleListFilter using a queryset without primary keys
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-eth-abi_5.0.0.bb => python3-eth-abi_5.0.1.bb}      | 2 +-
+ .../python/{python3-django_5.0.2.bb => python3-django_5.0.3.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-eth-abi_5.0.0.bb => python3-eth-abi_5.0.1.bb} (83%)
+ rename meta-python/recipes-devtools/python/{python3-django_5.0.2.bb => python3-django_5.0.3.bb} (56%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-eth-abi_5.0.0.bb b/meta-python/recipes-devtools/python/python3-eth-abi_5.0.1.bb
-similarity index 83%
-rename from meta-python/recipes-devtools/python/python3-eth-abi_5.0.0.bb
-rename to meta-python/recipes-devtools/python/python3-eth-abi_5.0.1.bb
-index 50b1340cb..a56296188 100644
---- a/meta-python/recipes-devtools/python/python3-eth-abi_5.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-eth-abi_5.0.1.bb
-@@ -4,7 +4,7 @@ SECTION = "devel/python"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=731f4de9c79bfeba6d8d55f83d0d2423"
+diff --git a/meta-python/recipes-devtools/python/python3-django_5.0.2.bb b/meta-python/recipes-devtools/python/python3-django_5.0.3.bb
+similarity index 56%
+rename from meta-python/recipes-devtools/python/python3-django_5.0.2.bb
+rename to meta-python/recipes-devtools/python/python3-django_5.0.3.bb
+index 3f61dabe0..14c41a626 100644
+--- a/meta-python/recipes-devtools/python/python3-django_5.0.2.bb
++++ b/meta-python/recipes-devtools/python/python3-django_5.0.3.bb
+@@ -1,7 +1,7 @@
+ require python-django.inc
+ inherit setuptools3
  
--SRC_URI[sha256sum] = "89c4454d794d9ed92ad5cb2794698c5cee6b7b3ca6009187d0e282adc7f9b6dc"
-+SRC_URI[sha256sum] = "e9425110c6120c585c9f0db2e8a33d76c4b886b148a65e68fc0035d3917a3b9c"
+-SRC_URI[sha256sum] = "b5bb1d11b2518a5f91372a282f24662f58f66749666b0a286ab057029f728080"
++SRC_URI[sha256sum] = "5fb37580dcf4a262f9258c1f4373819aacca906431f505e4688e37f3a99195df"
  
- PYPI_PACKAGE = "eth_abi"
- 
+ RDEPENDS:${PN} += "\
+     python3-sqlparse \
 -- 
 2.34.1
 
