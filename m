@@ -2,133 +2,69 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5DE75C6FD1F
-	for <webhook@archiver.kernel.org>; Wed, 20 Mar 2024 17:50:34 +0000 (UTC)
-Received: from mailout08.t-online.de (mailout08.t-online.de [194.25.134.20])
- by mx.groups.io with SMTP id smtpd.web10.52303.1710957033606926360
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 92E38C54E58
+	for <webhook@archiver.kernel.org>; Wed, 20 Mar 2024 18:10:44 +0000 (UTC)
+Received: from mailout06.t-online.de (mailout06.t-online.de [194.25.134.19])
+ by mx.groups.io with SMTP id smtpd.web11.52937.1710958238672632152
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Mar 2024 10:50:33 -0700
+ Wed, 20 Mar 2024 11:10:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.20, mailfrom: f_l_k@t-online.de)
-Received: from fwd75.aul.t-online.de (fwd75.aul.t-online.de [10.223.144.101])
-	by mailout08.t-online.de (Postfix) with SMTP id 776D32B542;
-	Wed, 20 Mar 2024 18:50:31 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.163.34.101]) by fwd75.t-online.de
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.19, mailfrom: f_l_k@t-online.de)
+Received: from fwd86.aul.t-online.de (fwd86.aul.t-online.de [10.223.144.112])
+	by mailout06.t-online.de (Postfix) with SMTP id AD1A15EDA;
+	Wed, 20 Mar 2024 19:10:36 +0100 (CET)
+Received: from [192.168.178.67] ([84.163.34.101]) by fwd86.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1rn058-4Pmf3J0; Wed, 20 Mar 2024 18:50:30 +0100
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCHv3] freerdp3: add recipe
-Date: Wed, 20 Mar 2024 18:50:43 +0100
-Message-ID: <20240320175043.3627066-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.44.0
+	esmtp id 1rn0OZ-0Sp6qe0; Wed, 20 Mar 2024 19:10:35 +0100
+Date: Wed, 20 Mar 2024 19:10:48 +0100
+From: f_l_k@t-online.de
+Subject: Re: [oe] [meta-gnome][PATCHv2] freerdp3: add recipe
+To: Markus Volk <f_l_k@t-online.de>
+Cc: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
+Message-Id: <0URNAS.2AWVCV53YYT41@t-online.de>
+In-Reply-To: <17BE8A4D584EEFD1.29196@lists.openembedded.org>
+References: <17BE205582F63951.29196@lists.openembedded.org>
+	<P19LAS.XNJ0HDKLN7IM@t-online.de>
+	<CAMKF1sr=j4b+r45zt+mvkD0kqUDoWofzLabiFhCDj=RFaDyq0g@mail.gmail.com>
+	<CAMKF1sqhYPiFY3AfwDzydNJaJuF8ye_ng2OuynGH6y+uyenKiA@mail.gmail.com>
+	<VVPNAS.FCPMXAAPQ9Y82@t-online.de>
+	<CAMKF1srGvQ3d-L=PR4r3H_tMvbb9jwcgMz6kx6FD1LuVebY-TA@mail.gmail.com>
+	<17BE8A4D584EEFD1.29196@lists.openembedded.org>
+X-Mailer: geary/44.1
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1710957030-FB7FD850-0AF9C3B6/0/0 CLEAN NORMAL
-X-TOI-MSGID: f7251f7d-ebe9-4cf9-a133-91a0632310ff
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/alternative; boundary="=-wSPTS/9cFPwYlPE8lNLg"
+X-TOI-EXPURGATEID: 150726::1710958236-2F7FDC95-D24B6074/0/0 CLEAN NORMAL
+X-TOI-MSGID: bc199251-ffde-4ab9-8698-66e860cdb470
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 20 Mar 2024 17:50:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109497
+ <openembedded-devel@lists.openembedded.org>; Wed, 20 Mar 2024 18:10:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109498
 
-freerdp3 is required to build gnome-remote-desktop-46.0
+--=-wSPTS/9cFPwYlPE8lNLg
+Content-Type: text/plain; charset=us-ascii; format=flowed
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../recipes-support/freerdp/freerdp3_3.4.0.bb | 61 +++++++++++++++++++
- 1 file changed, 61 insertions(+)
- create mode 100644 meta-oe/recipes-support/freerdp/freerdp3_3.4.0.bb
+On Wed, Mar 20 2024 at 06:49:43 PM +01:00:00, Markus Volk 
+<f_l_k@t-online.de> wrote:
+> their dependencies are which are not yet in master branch of the core
 
-diff --git a/meta-oe/recipes-support/freerdp/freerdp3_3.4.0.bb b/meta-oe/=
-recipes-support/freerdp/freerdp3_3.4.0.bb
-new file mode 100644
-index 000000000..55083d13c
---- /dev/null
-+++ b/meta-oe/recipes-support/freerdp/freerdp3_3.4.0.bb
-@@ -0,0 +1,61 @@
-+DESCRIPTION =3D "FreeRDP RDP client & server library"
-+HOMEPAGE =3D "http://www.freerdp.com"
-+LICENSE =3D "Apache-2.0"
-+LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D3b83ef96387f14655fc854ddc3c6b=
-d57"
-+
-+DEPENDS =3D "openssl libusb1 uriparser cairo icu pkcs11-helper zlib jpeg=
-"
-+
-+inherit pkgconfig cmake
-+
-+SRCREV =3D "708f3764897e06297469a7b0507b3c9ecc041ad7"
-+SRC_URI =3D "git://github.com/FreeRDP/FreeRDP.git;branch=3Dmaster;protoc=
-ol=3Dhttps"
-+
-+S =3D "${WORKDIR}/git"
-+
-+PACKAGECONFIG ??=3D " \
-+    ${@bb.utils.filter('DISTRO_FEATURES', 'pam pulseaudio wayland x11', =
-d)} \
-+    ${@bb.utils.contains('LICENSE_FLAGS_ACCEPTED', 'commercial', 'ffmpeg=
-', '', d)} \
-+    gstreamer cups pcsc \
-+"
-+
-+EXTRA_OECMAKE =3D " \
-+    -DRDTK_FORCE_STATIC_BUILD=3DON \
-+    -DUWAC_FORCE_STATIC_BUILD=3DON \
-+    -DWITH_ADD=3DON \
-+    -DWITH_BINARY_VERSIONING=3DON \
-+    -DWITH_CHANNELS=3DON \
-+    -DWITH_CLIENT_CHANNELS=3DON \
-+    -DWITH_JPEG=3DON \
-+    -DWITH_PKCS11=3DON \
-+    -DWITH_SERVER_CHANNELS=3DON \
-+    -DWITH_SERVER=3DON \
-+    -DPKG_CONFIG_RELOCATABLE=3DOFF \
-+    -DWITH_ALSA=3DOFF \
-+    -DWITH_CLIENT_SDL=3DOFF \
-+    -DWITH_SAMPLE=3DOFF \
-+ "
-+
-+X11_DEPS =3D "virtual/libx11 libxinerama libxext libxcursor libxv libxi =
-libxrender libxfixes libxdamage libxrandr libxkbfile"
-+PACKAGECONFIG[x11] =3D "-DWITH_X11=3DON -DWITH_XINERAMA=3DON -DWITH_XEXT=
-=3DON -DWITH_XCURSOR=3DON -DWITH_XV=3DON -DWITH_XI=3DON -DWITH_XRENDER=3D=
-ON -DWITH_XFIXES=3DON -DWITH_XDAMAGE=3DON -DWITH_XRANDR=3DON -DWITH_XKBFI=
-LE=3DON,-DWITH_X11=3DOFF,${X11_DEPS}"
-+PACKAGECONFIG[wayland] =3D "-DWITH_WAYLAND=3DON,-DWITH_WAYLAND=3DOFF,way=
-land wayland-native libxkbcommon"
-+PACKAGECONFIG[pam] =3D "-DWITH_PAM=3DON,-DWITH_PAM=3DOFF,libpam"
-+PACKAGECONFIG[pulseaudio] =3D "-DWITH_PULSEAUDIO=3DON,-DWITH_PULSEAUDIO=3D=
-OFF,pulseaudio"
-+PACKAGECONFIG[gstreamer] =3D "-DWITH_GSTREAMER_1_0=3DON,-DWITH_GSTREAMER=
-_1_0=3DOFF,gstreamer1.0 gstreamer1.0-plugins-base"
-+PACKAGECONFIG[cups] =3D "-DWITH_CUPS=3DON,-DWITH_CUPS=3DOFF,cups"
-+PACKAGECONFIG[fuse] =3D "-DWITH_FUSE=3DON,-DWITH_FUSE=3DOFF,fuse3,fuse3"
-+PACKAGECONFIG[pcsc] =3D "-DWITH_PCSC=3DON,-DWITH_PCSC=3DOFF,pcsc-lite"
-+PACKAGECONFIG[manpages] =3D "-DWITH_MANPAGES=3DON,-DWITH_MANPAGES=3DOFF,=
- libxslt-native docbook-xsl-stylesheets-native"
-+PACKAGECONFIG[ffmpeg] =3D "-DWITH_DSP_FFMPEG=3DON -DWITH_FFMPEG=3DON -DW=
-ITH_SWSCALE=3DON, -DWITH_DSP_FFMPEG=3DOFF -DWITH_FFMPEG=3DOFF -DWITH_SWSC=
-ALE=3DOFF,ffmpeg"
-+PACKAGECONFIG[krb5] =3D "-DWITH_KRB5=3DON -DWITH_KRB5_NO_NTLM_FALLBACK=3D=
-OFF,-DWITH_KRB5=3DOFF,krb5"
-+PACKAGECONFIG[openh264] =3D "-DWITH_OPENH264=3DON,-DWITH_OPENH264=3DOFF,=
-openh264"
-+PACKAGECONFIG[opencl] =3D "-DWITH_OPENCL=3DON,-DWITH_OPENCL=3DOFF,opencl=
--icd-loader"
-+PACKAGECONFIG[lame] =3D "-DWITH_LAME=3DON,-DWITH_LAME=3DOFF,lame"
-+PACKAGECONFIG[faad] =3D "-DWITH_FAAD=3DON,-DWITH_FAAD=3DOFF,faad2"
-+PACKAGECONFIG[faac] =3D "-DWITH_FAAC=3DON,-DWITH_FAAC=3DOFF,faac"
-+
-+do_configure:append() {
-+    sed -i -e 's|${WORKDIR}||g' ${B}/include/freerdp/buildflags.h
-+    sed -i -e 's|${WORKDIR}||g' ${B}/winpr/include/winpr/buildflags.h
-+}
-+
-+FILES:${PN} +=3D "${datadir}"
---=20
-2.44.0
+I tried to mention in the commit message, if an update requires a 
+change to oe-core.
+
+For now that would be
+gnome-settings-daemon, which requires gsettings-desktop-schemas 46.0
+gnome-calculator, which requires libsoup with vala support
+gnome-calendar, which requires libadwaita-1.5.0
+
+additionally to complete the gnome-46 port there would be
+nautilus, which will require glib-2.80
+gnome-console and gnome-terminal, which will require vte 0.76
+
+
+--=-wSPTS/9cFPwYlPE8lNLg
+Content-Type: text/html; charset=us-ascii
+
+<div id="geary-body" dir="auto">On Wed, Mar 20 2024 at 06:49:43 PM +01:00:00, Markus Volk &lt;f_l_k@t-online.de&gt; wrote:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">their dependencies are which are not yet in master branch of the core</div></blockquote><div><br></div><div>I tried to mention in the commit message, if an update requires a change to oe-core.</div><div><br></div><div>For now that would be</div><div>gnome-settings-daemon, which requires gsettings-desktop-schemas 46.0</div><div>gnome-calculator, which requires libsoup with vala support</div><div>gnome-calendar, which requires libadwaita-1.5.0</div><div><br></div><div>additionally to complete the gnome-46 port there would be</div><div>nautilus, which will require glib-2.80</div><div>gnome-console and gnome-terminal, which will require vte 0.76&nbsp;</div></div>
+--=-wSPTS/9cFPwYlPE8lNLg--
 
 
