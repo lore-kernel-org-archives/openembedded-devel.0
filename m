@@ -1,154 +1,139 @@
-Return-Path: <soumya.sambu@windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E68AC54E58
-	for <webhook@archiver.kernel.org>; Wed, 20 Mar 2024 12:37:02 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.43217.1710938220920464294
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EEC4AC54E58
+	for <webhook@archiver.kernel.org>; Wed, 20 Mar 2024 14:34:52 +0000 (UTC)
+Received: from mail-ot1-f41.google.com (mail-ot1-f41.google.com [209.85.210.41])
+ by mx.groups.io with SMTP id smtpd.web11.46451.1710945286441471192
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 20 Mar 2024 05:37:01 -0700
+ Wed, 20 Mar 2024 07:34:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=O7fae3r9;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=3809f77ee0=soumya.sambu@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 42K6xgeP012216
-	for <openembedded-devel@lists.openembedded.org>; Wed, 20 Mar 2024 12:37:00 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=HQKMK
-	tSK04G2BDxY2vJeHk3qkp6rgFNPjHWQAK+FyQA=; b=O7fae3r9TJRG0XlVIEPBq
-	H2ej+RE4v7e83iAcE1vEJhB20erzOHUCjAGb43W0ULhK8N3dzcMVbieVGpxpAbxI
-	pH6QTSiniVN73XRTdDhBYa9p8Pgf6mHt4o5v0tKupa7Q59q9eoeYlaJujkaY2s/F
-	BYnBpFA4iiyELa/KsSo8FXCCD5lhR5FHvlL8JGwrDAbBVLZ1ieuio9haaS9+gdwt
-	4Uxmfkbic2s0wdBo9bnA7GmS0Wyglgyh/+CWoIT47JMrr6CFdp0tPaBC/76pvDdb
-	iQMjqjwxipt64yUYKes76Q7+lrmrfdeKU7LLxrDEVxys8WAAB6kaDOE2RNy3rujg
-	Q==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3ww0mxkyh2-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 20 Mar 2024 12:37:00 +0000 (GMT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.37; Wed, 20 Mar 2024 05:36:57 -0700
-From: ssambu <soumya.sambu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][kirkstone][PATCH 1/1] unixodbc: Fix CVE-2024-1013
-Date: Wed, 20 Mar 2024 12:35:50 +0000
-Message-ID: <20240320123550.3378250-1-soumya.sambu@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=AJWh6Dma;
+ spf=pass (domain: gmail.com, ip: 209.85.210.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-ot1-f41.google.com with SMTP id 46e09a7af769-6e6969855c8so1901397a34.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 20 Mar 2024 07:34:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1710945285; x=1711550085; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=MjYMFU9TyXnY+LVo85LPHgourgEOZpFbuQG+USu2fUY=;
+        b=AJWh6DmaGjbHh29jLChnAwnsCcW8gEFQ40pt3J+beqGGUpjY3YtyjVyciQpTBHEKtF
+         sTRSLWMzT3LFRxYfX4xP+2shLnVIFGWmTO/lUckxrHvOz5PeaBeuTtZK++mTLdvyinsQ
+         GlUv3su0CQ8GkOLDtFCOs5WB4v3rhPV2GRrYXhMliyR1RcqirKYf+csUFtNPnMEb9fae
+         hpy1iMkjLEvKBY1ygN1QBbUpe+clZUsUxGkTwSPpewCbuVNptZaoWlkuDKRPFUYuHHm6
+         YUHAIR+MwuWkFRM5uUqETsLDKC2xfNicfqcxyywM9RmhXbZliWeInHyNdsBqLbnO5ocS
+         rF/w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1710945285; x=1711550085;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=MjYMFU9TyXnY+LVo85LPHgourgEOZpFbuQG+USu2fUY=;
+        b=jmb+NZ7+8VDiE0hnC1ir3IvpUuEoEq6g8AG28OX7rosJ8X6OYQ50+ptZUrLSjDxURJ
+         qNZfKczFqe6GV2OOK8ZnvCZrpKowpUoWzavf6IXtqkZz8fBnnwhYmPcCd6+AZlxTGMHY
+         1bcsO1LAho0lFMEPQCmb64oG+5RvlMG1JxLjuJwwt3LxjW0UQHiTFXTAnL5emZOpo6GK
+         WcmwWYjuD+Vg1YcpXsnTkedKoBIS18Er3UKMTV/JAaaGmTYr4XPXXYSN0NmsG6HkvkO/
+         U0nFKa3rBL0zGkheMwOazdGdjmbNGA3FFrtZfyfmtEqJUtibLTNk34LHcg5gm7aQleld
+         /qwg==
+X-Gm-Message-State: AOJu0Yz3twyBtXa11giioM/EfBTmYiRJQSxcVONdd15wAj/rM5NntxeD
+	o2URTSiUuYHTLuiIi4xQ7aS5rzVdQH2zU+1yo5PSHAPK3lMOWMzagFhNByzIeUTrmccY//0MGfg
+	lUYY7zqrzP8sF5IeG1Dbmdpp3378=
+X-Google-Smtp-Source: AGHT+IF18SYnIpRu6e4qf0aaUL/EDJvnQpfTb5fn2aGFH2V2bJjUFIy7Yb2MphTrbqUqyo7jCMG+T8pSgdgWaRhATM4=
+X-Received: by 2002:a05:6870:d215:b0:220:c3b8:16a5 with SMTP id
+ g21-20020a056870d21500b00220c3b816a5mr6488682oac.26.1710945285472; Wed, 20
+ Mar 2024 07:34:45 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-ORIG-GUID: ho76-hFswqj22Ljgvbofk_l7Vco21Srt
-X-Proofpoint-GUID: ho76-hFswqj22Ljgvbofk_l7Vco21Srt
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-03-20_08,2024-03-18_03,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0 mlxscore=0
- phishscore=0 priorityscore=1501 lowpriorityscore=0 spamscore=0
- mlxlogscore=999 malwarescore=0 adultscore=0 clxscore=1011 bulkscore=0
- suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2403140001 definitions=main-2403200099
+References: <17BE205582F63951.29196@lists.openembedded.org> <P19LAS.XNJ0HDKLN7IM@t-online.de>
+In-Reply-To: <P19LAS.XNJ0HDKLN7IM@t-online.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 20 Mar 2024 07:34:19 -0700
+Message-ID: <CAMKF1sr=j4b+r45zt+mvkD0kqUDoWofzLabiFhCDj=RFaDyq0g@mail.gmail.com>
+Subject: Re: [oe] [meta-gnome][PATCHv2] freerdp3: add recipe
+To: Markus Volk <f_l_k@t-online.de>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 20 Mar 2024 12:37:02 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109488
+ <openembedded-devel@lists.openembedded.org>; Wed, 20 Mar 2024 14:34:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109489
 
-From: Soumya Sambu <soumya.sambu@windriver.com>
+it ends in
 
-An out-of-bounds stack write flaw was found in unixODBC on 64-bit
-architectures where the caller has 4 bytes and callee writes 8 bytes.
-This issue may go unnoticed on little-endian architectures, while
-big-endian architectures can be broken.
+https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/3727
 
-References:
-https://nvd.nist.gov/vuln/detail/CVE-2024-1013
+I have pushed the fix for it into master-next to put ffmpeg dep as
+part of package config.
 
-Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
----
- .../unixodbc/files/CVE-2024-1013.patch        | 53 +++++++++++++++++++
- .../unixodbc/unixodbc_2.3.9.bb                |  1 +
- 2 files changed, 54 insertions(+)
- create mode 100644 meta-oe/recipes-support/unixodbc/files/CVE-2024-1013.patch
-
-diff --git a/meta-oe/recipes-support/unixodbc/files/CVE-2024-1013.patch b/meta-oe/recipes-support/unixodbc/files/CVE-2024-1013.patch
-new file mode 100644
-index 000000000..7d37ad604
---- /dev/null
-+++ b/meta-oe/recipes-support/unixodbc/files/CVE-2024-1013.patch
-@@ -0,0 +1,53 @@
-+From 45f501e1be2db6b017cc242c79bfb9de32b332a1 Mon Sep 17 00:00:00 2001
-+From: Florian Weimer <fweimer@redhat.com>
-+Date: Mon, 29 Jan 2024 08:27:29 +0100
-+Subject: [PATCH] PostgreSQL driver: Fix incompatible pointer-to-integer types
-+
-+These result in out-of-bounds stack writes on 64-bit architectures
-+(caller has 4 bytes, callee writes 8 bytes), and seem to have gone
-+unnoticed on little-endian architectures (although big-endian
-+architectures must be broken).
-+
-+This change is required to avoid a build failure with GCC 14.
-+
-+CVE: CVE-2024-1013
-+
-+Upstream-Status: Backport [https://github.com/lurcher/unixODBC/commit/45f501e1be2db6b017cc242c79bfb9de32b332a1]
-+
-+Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
-+---
-+ Drivers/Postgre7.1/info.c | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
-+
-+diff --git a/Drivers/Postgre7.1/info.c b/Drivers/Postgre7.1/info.c
-+index 63ac91f..2216ecd 100755
-+--- a/Drivers/Postgre7.1/info.c
-++++ b/Drivers/Postgre7.1/info.c
-+@@ -1779,14 +1779,14 @@ char *table_name;
-+ char index_name[MAX_INFO_STRING];
-+ short fields_vector[8];
-+ char isunique[10], isclustered[10];
-+-SDWORD index_name_len, fields_vector_len;
-++SQLLEN index_name_len, fields_vector_len;
-+ TupleNode *row;
-+ int i;
-+ HSTMT hcol_stmt;
-+ StatementClass *col_stmt, *indx_stmt;
-+ char column_name[MAX_INFO_STRING], relhasrules[MAX_INFO_STRING];
-+ char **column_names = 0;
-+-Int4 column_name_len;
-++SQLLEN column_name_len;
-+ int total_columns = 0;
-+ char error = TRUE;
-+ ConnInfo *ci;
-+@@ -2136,7 +2136,7 @@ HSTMT htbl_stmt;
-+ StatementClass *tbl_stmt;
-+ char tables_query[STD_STATEMENT_LEN];
-+ char attname[MAX_INFO_STRING];
-+-SDWORD attname_len;
-++SQLLEN attname_len;
-+ char pktab[MAX_TABLE_LEN + 1];
-+ Int2 result_cols;
-+
-+--
-+2.40.0
-diff --git a/meta-oe/recipes-support/unixodbc/unixodbc_2.3.9.bb b/meta-oe/recipes-support/unixodbc/unixodbc_2.3.9.bb
-index c194739cb..283546cf0 100644
---- a/meta-oe/recipes-support/unixodbc/unixodbc_2.3.9.bb
-+++ b/meta-oe/recipes-support/unixodbc/unixodbc_2.3.9.bb
-@@ -10,6 +10,7 @@ DEPENDS = "libtool readline"
- 
- SRC_URI = "http://ftp.unixodbc.org/unixODBC-${PV}.tar.gz \
-            file://do-not-use-libltdl-source-directory.patch \
-+           file://CVE-2024-1013.patch \
- "
- SRC_URI[sha256sum] = "52833eac3d681c8b0c9a5a65f2ebd745b3a964f208fc748f977e44015a31b207"
- 
--- 
-2.40.0
-
+On Tue, Mar 19, 2024 at 2:29=E2=80=AFAM Markus Volk <f_l_k@t-online.de> wro=
+te:
+>
+> v2 removes fuse3 as a hard dependency. ffmpeg is still needed in any case=
+ because of swscale
+>
+> On Tue, Mar 19 2024 at 10:27:58 AM +01:00:00, Markus Volk <f_l_k@t-online=
+.de> wrote:
+>
+> freerdp3 is required to build gnome-remote-desktop-46.0 Signed-off-by: Ma=
+rkus Volk <f_l_k@t-online.de> --- .../recipes-support/freerdp/freerdp3_3.4.=
+0.bb | 59 +++++++++++++++++++ 1 file changed, 59 insertions(+) create mode =
+100644 meta-oe/recipes-support/freerdp/freerdp3_3.4.0.bb diff --git a/meta-=
+oe/recipes-support/freerdp/freerdp3_3.4.0.bb b/meta-oe/recipes-support/free=
+rdp/freerdp3_3.4.0.bb new file mode 100644 index 000000000..f04be56c6 --- /=
+dev/null +++ b/meta-oe/recipes-support/freerdp/freerdp3_3.4.0.bb @@ -0,0 +1=
+,59 @@ +DESCRIPTION =3D "FreeRDP RDP client & server library" +HOMEPAGE =3D=
+ "http://www.freerdp.com" +LICENSE =3D "Apache-2.0" +LIC_FILES_CHKSUM =3D "=
+file://LICENSE;md5=3D3b83ef96387f14655fc854ddc3c6bd57" + +DEPENDS =3D "open=
+ssl ffmpeg libusb1 uriparser cairo icu pkcs11-helper zlib jpeg" + +inherit =
+pkgconfig cmake + +SRCREV =3D "708f3764897e06297469a7b0507b3c9ecc041ad7" +S=
+RC_URI =3D "git://github.com/FreeRDP/FreeRDP.git;branch=3Dmaster;protocol=
+=3Dhttps" + +S =3D "${WORKDIR}/git" + +PACKAGECONFIG ??=3D " \ + ${@bb.util=
+s.filter('DISTRO_FEATURES', 'pam pulseaudio wayland x11', d)} \ + gstreamer=
+ cups pcsc \ +" + +EXTRA_OECMAKE =3D " \ + -DRDTK_FORCE_STATIC_BUILD=3DON \=
+ + -DUWAC_FORCE_STATIC_BUILD=3DON \ + -DWITH_ADD=3DON \ + -DWITH_BINARY_VER=
+SIONING=3DON \ + -DWITH_CHANNELS=3DON \ + -DWITH_CLIENT_CHANNELS=3DON \ + -=
+DWITH_JPEG=3DON \ + -DWITH_PKCS11=3DON \ + -DWITH_SERVER_CHANNELS=3DON \ + =
+-DWITH_SERVER=3DON \ + -DPKG_CONFIG_RELOCATABLE=3DOFF \ + -DWITH_ALSA=3DOFF=
+ \ + -DWITH_CLIENT_SDL=3DOFF \ + -DWITH_SAMPLE=3DOFF \ + " + +X11_DEPS =3D =
+"virtual/libx11 libxinerama libxext libxcursor libxv libxi libxrender libxf=
+ixes libxdamage libxrandr libxkbfile" +PACKAGECONFIG[x11] =3D "-DWITH_X11=
+=3DON -DWITH_XINERAMA=3DON -DWITH_XEXT=3DON -DWITH_XCURSOR=3DON -DWITH_XV=
+=3DON -DWITH_XI=3DON -DWITH_XRENDER=3DON -DWITH_XFIXES=3DON -DWITH_XDAMAGE=
+=3DON -DWITH_XRANDR=3DON -DWITH_XKBFILE=3DON,-DWITH_X11=3DOFF,${X11_DEPS}" =
++PACKAGECONFIG[wayland] =3D "-DWITH_WAYLAND=3DON,-DWITH_WAYLAND=3DOFF,wayla=
+nd wayland-native libxkbcommon" +PACKAGECONFIG[pam] =3D "-DWITH_PAM=3DON,-D=
+WITH_PAM=3DOFF,libpam" +PACKAGECONFIG[pulseaudio] =3D "-DWITH_PULSEAUDIO=3D=
+ON,-DWITH_PULSEAUDIO=3DOFF,pulseaudio" +PACKAGECONFIG[gstreamer] =3D "-DWIT=
+H_GSTREAMER_1_0=3DON,-DWITH_GSTREAMER_1_0=3DOFF,gstreamer1.0 gstreamer1.0-p=
+lugins-base" +PACKAGECONFIG[cups] =3D "-DWITH_CUPS=3DON,-DWITH_CUPS=3DOFF,c=
+ups" +PACKAGECONFIG[fuse] =3D "-DWITH_FUSE=3DON,-DWITH_FUSE=3DOFF,fuse3,fus=
+e3" +PACKAGECONFIG[pcsc] =3D "-DWITH_PCSC=3DON,-DWITH_PCSC=3DOFF,pcsc-lite"=
+ +PACKAGECONFIG[manpages] =3D "-DWITH_MANPAGES=3DON,-DWITH_MANPAGES=3DOFF, =
+libxslt-native docbook-xsl-stylesheets-native" +PACKAGECONFIG[ffmpeg] =3D "=
+-DWITH_DSP_FFMPEG=3DON -DWITH_FFMPEG=3DON, -DWITH_DSP_FFMPEG=3DOFF -DWITH_F=
+FMPEG=3DOFF" +PACKAGECONFIG[openh264] =3D "-DWITH_OPENH264=3DON,-DWITH_OPEN=
+H264=3DOFF,openh264" +PACKAGECONFIG[opencl] =3D "-DWITH_OPENCL=3DON,-DWITH_=
+OPENCL=3DOFF,opencl-icd-loader" +PACKAGECONFIG[lame] =3D "-DWITH_LAME=3DON,=
+-DWITH_LAME=3DOFF,lame" +PACKAGECONFIG[faad] =3D "-DWITH_FAAD=3DON,-DWITH_F=
+AAD=3DOFF,faad2" +PACKAGECONFIG[faac] =3D "-DWITH_FAAD=3DON,-DWITH_FAAD=3DO=
+FF,faac" + +do_configure:append() { + sed -i -e 's|${WORKDIR}||g' ${B}/incl=
+ude/freerdp/buildflags.h + sed -i -e 's|${WORKDIR}||g' ${B}/winpr/include/w=
+inpr/buildflags.h +} + +FILES:${PN} +=3D "${datadir}"
+> --
+> 2.44.0
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#109477): https://lists.openembedded.org/g/openembedde=
+d-devel/message/109477
+> Mute This Topic: https://lists.openembedded.org/mt/105020833/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
