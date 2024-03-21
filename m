@@ -1,215 +1,151 @@
-Return-Path: <soumya.sambu@windriver.com>
+Return-Path: <peter.kjellerstedt@axis.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C2DCC54E58
-	for <webhook@archiver.kernel.org>; Thu, 21 Mar 2024 12:07:38 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.5655.1711022853901016872
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 46EB1C6FD1F
+	for <webhook@archiver.kernel.org>; Thu, 21 Mar 2024 20:50:05 +0000 (UTC)
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com (EUR05-DB8-obe.outbound.protection.outlook.com [40.107.20.89])
+ by mx.groups.io with SMTP id smtpd.web10.8535.1711054201030122366
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Mar 2024 05:07:34 -0700
+ Thu, 21 Mar 2024 13:50:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=YanWW1o8;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=381012e865=soumya.sambu@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id 42L6lkTd006469
-	for <openembedded-devel@lists.openembedded.org>; Thu, 21 Mar 2024 12:07:33 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=h6Uoh
-	4s1cdtdoG/FLPRQm8/Pizghkj3cH6gskFjQXf0=; b=YanWW1o8cplJvSaQKOVxS
-	kKz7/SY7u2dzeVpYDEXlhR7xD/DwUlPP1DwruPTHPc5yXcwGZ1Q+JvdHJ6RGR4eo
-	Fkvk4MH0SIs2p7cgwze3vzotwn6km8OLuiZN0Hja/eEmChnEUGtR62qou+9TTrdd
-	Y/Tsfj1P6cUoMysXWOlVOP9nNeYnLwBK3X7Uc5VPIc1U8Ep71WtbZpTG2bwOCvVE
-	iwspCoCqZrYpL85r+CRTDPFol3IYSY2G9P5PpuHZfF1WNESZXmYd6+RizW7l4Gcb
-	RWBtB06hhYQ0U71f3eaET3jwmpGgje6KnmTv1YFLRk45c4oLkLEpCL9dOlanXe7s
-	w==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3ww0mxn21e-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 21 Mar 2024 12:07:32 +0000 (GMT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.37; Thu, 21 Mar 2024 05:07:30 -0700
-From: ssambu <soumya.sambu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][kirkstone][PATCH 1/1] dnsmasq: Upgrade 2.87 -> 2.90
-Date: Thu, 21 Mar 2024 12:07:15 +0000
-Message-ID: <20240321120715.1890935-1-soumya.sambu@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@axis.com header.s=selector1 header.b=daX1eq7x;
+ spf=pass (domain: axis.com, ip: 40.107.20.89, mailfrom: peter.kjellerstedt@axis.com)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=BO04UnOmQZIMfNKrDGdCOMCGrUDr4xRRcbZXHPJGe58Rdk4+69FDH/Gjywyiv+ZCMZqZZnYOhBlkZz31l6czMl2mJ6wwnwo9V30UEasIGEQqVOnGnNrdEjwJQyRid/LjQds36ZDtY3ztt1EtDdzGoTQ3Aa0nFRASJLP3TpmOaoxQHUwWvlV7wC91DgWZLVAppeFe40pMQq5UVKIW6qJkAxGaNCT9iwV5E8V9T+qq1tXMh2DODuzxEpbFs9zJFbQjbgYyO4RDWfgTtmOHXi0psrcHcVw9vggIOvdIqrGOY/BeBXIPZ+ppWCdRFsqxPt1Lqs61RJVmk2tOgDddsINetg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=WGj1W6KT01fKBVZg58kiLjpchCi1YzpGpJbtIFTT45k=;
+ b=SOswnPBbCy1rDy8QOR2JA9l48YazOsUSTcSq17hlzqU+Iko2d373o4L5C8WQeZv6bpCdKDONDYe0ejrpNixduMrwkS3NP+z69t+zgziuGZmexhFK5Qnqdp+Uql75dLP5Wm2r5VKm70zphL9IXnZ7CQ0bzUAPV4i9h2/tTCf+bCWVwTB6ECI967W3DiKZpTl/NecS2zGkhl5Q4EqpbrF7zA0yTMx4Y03SbkKRnJjUqoFS9Wytr2GDPc6/uJRdx6obSgOm+iNfTQ0kJyKJqsD5RBhTiKKBHT6eUt6yYe4ZMXVhjV55e5szZ6vuF19PROd66UYrFB8J2O2uQBG3cP/G/Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=axis.com; dmarc=pass action=none header.from=axis.com;
+ dkim=pass header.d=axis.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=axis.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=WGj1W6KT01fKBVZg58kiLjpchCi1YzpGpJbtIFTT45k=;
+ b=daX1eq7xVep1dNYNK2Eb039Nc8WS4rHMDGzinOce9ucXIrN0Qd+3RebQ17m16hnNgBycarDyYYH6t0aJXuI1GO/vt3B0Mq5BWp7SyJg6XAHuzzxUBUBYCDQJMnZ744U+JPi/gq3QRM87s6WiYpYIeY1k8dPH0x4G3SS07qRKlgA=
+Received: from DB5PR02MB10213.eurprd02.prod.outlook.com (2603:10a6:10:4a8::17)
+ by DU0PR02MB9824.eurprd02.prod.outlook.com (2603:10a6:10:44b::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7386.31; Thu, 21 Mar
+ 2024 20:49:57 +0000
+Received: from DB5PR02MB10213.eurprd02.prod.outlook.com
+ ([fe80::fa03:deff:aae:c4d0]) by DB5PR02MB10213.eurprd02.prod.outlook.com
+ ([fe80::fa03:deff:aae:c4d0%7]) with mapi id 15.20.7386.025; Thu, 21 Mar 2024
+ 20:49:57 +0000
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: Marek Vasut <marex@denx.de>, Christophe Chapuis <chris.chapuis@gmail.com>
+CC: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, Khem Raj <raj.khem@gmail.com>,
+	Fabio Estevam <festevam@denx.de>
+Subject: RE: [oe] [meta-oe][PATCH v4 7/7] lvgl: lv-conf.inc: generalize sed
+ instructions
+Thread-Topic: [oe] [meta-oe][PATCH v4 7/7] lvgl: lv-conf.inc: generalize sed
+ instructions
+Thread-Index: AQHad4jxU+/FfskiNk+Mb43zXOkzIbE9c0QQgAAXKoCAABw4gIAAaXeAgAShYRA=
+Date: Thu, 21 Mar 2024 20:49:57 +0000
+Message-ID: 
+ <DB5PR02MB10213F0FA89170FB203B3E9F7EF322@DB5PR02MB10213.eurprd02.prod.outlook.com>
+References: <20240316100056.409758-1-chris.chapuis@gmail.com>
+ <20240316100056.409758-7-chris.chapuis@gmail.com>
+ <DB5PR02MB102132F3CAC801E36E7B462A7EF2D2@DB5PR02MB10213.eurprd02.prod.outlook.com>
+ <868000cd-9113-4615-89ac-e7d35a564937@denx.de>
+ <CACA7eUT_5948nd+rHtieSTrGmm1J6tjqQ8s8z7g0g5E+xAfkJA@mail.gmail.com>
+ <d66f8293-89ac-4d6c-80e6-94457b4cdbb7@denx.de>
+In-Reply-To: <d66f8293-89ac-4d6c-80e6-94457b4cdbb7@denx.de>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=axis.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DB5PR02MB10213:EE_|DU0PR02MB9824:EE_
+x-ms-office365-filtering-correlation-id: 49e77dcb-74c8-4fc4-5571-08dc49e8780f
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 
+ heNb5E4HPcqb6TiI/Ymxh6GvARaFaJCjQLc9d5w8/eOoa6fra3ZpfWONsCoWYCt5XDRiIYDvcIpSg/l3fEEwdbv1/ySURUZdgWC8EDnLj3eGGn2RZ54h4C7d5QYAtud72Qu3oToy83JSczU6bJF7t/sm7s9d3eZPt1zawRuxEdRR9AjCMAW6dfGloTpcmsgsZaV5GB2ED+68usfsp0oyOxhKgduiCgQFR60/RY4ugXgMIDOLfb7H1JJi+zwicr6/E9GhQYSxRiBgu//OKAnxUryzuMPcanA5sQM7K0s5VOKzddBMCA3ORA1AMDfwyu7udTmWhCYAi3/Mx3RQxvyvQrsx0zk60TukkRnmipG672t3J/+IT8qF71GSaromOotbLpqIJJB+tj/lJTVfm/ZO/a1B8FG8aMxO2wfrMgPsZQcSMk1RF3/C8g+85RWltELJkY2NA4/bC0w768vUBYiuMXm4UQVgCYcN8bd769dCQHS/Ig78BWuL9qimY7MvbM8713elrDgp9C2OwzjLkQqTAcXX2Oj28ARAlusa/uphFDsx50UuZ7qplXjvAZaViq3feFiu9+noyxAEhCzDlN/r09Q2dqabEk8M3pGUw+ttv2Z1tG2u/vkVbK5KHIOj4iUAp0rYM0ZO2keh7EO/GoAQGhTyht2D1XI2iTBeu7VqMfr9nvy6+aQGwY9tC4LrlGa8EQuIJF9TCo3gHWtAF+dnanNDIbZ+6bQhELjQGrqKVdk=
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB5PR02MB10213.eurprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(376005)(1800799015)(366007)(38070700009);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?utf-8?B?K3ZnMDduM0ZPdUl6RnVldUVUbGJlSXhRc2EyOFM5TkVTSGRZbGVUQjhabEFD?=
+ =?utf-8?B?aGlNWDdKZXdXbGM2S096a2FJRHNvMlZUczBUcHREZ2crcWlnV0VuVmpnMURX?=
+ =?utf-8?B?WmxXemVRRS9EbjNXSytyUU4rSmxQbklrbHgrWUdDdTlmTGpXcEFBZU5tWE9o?=
+ =?utf-8?B?Ym5lU3dmNFRqTTJrRUNodnZHM1UvbENiZFhkTTNTZHh5eU80N0hlbDYzTDRT?=
+ =?utf-8?B?cFNUV2ZsK0VOb0VoaHVibDBJcDhFTHVlZzEvZ1F6QVk0TVJqMnJreUpLWmtK?=
+ =?utf-8?B?RmZvdW1NczlyZzFuRjBUcU04aGFJWHFVSG03MTJ1VFR2MVdCRkNMT1hrbXNO?=
+ =?utf-8?B?RGpMbnRya1hDem5INmwvWUlNR0trT3RiYXhxUzE0Q2RqZGJZVFJjMUVqa1BC?=
+ =?utf-8?B?RWdrckFwNE94K1VEUnNweW84TnYyNDk1TTlRMnFQUEdDcXM5QlE1eVF2clBO?=
+ =?utf-8?B?d0tuZ01FNkwxRGhORUlVQTNuQVA5ZndsZHhEZEtFM21jbzA5ekZ6a0JDVFZD?=
+ =?utf-8?B?NCtpSGNOcmlLcko4ejZMQUMvcWtuQnhlaFBQa0grelJVZUYwSVlEVUdzTFZS?=
+ =?utf-8?B?Q213cDVISCt1dW5VL3duK24xNS9WTkU0MzJNbUVtckdjUERkditIS2RFazMw?=
+ =?utf-8?B?cWdvRUFWWWoyakQ3dGE3alJFTFBrMVFvSWEvem1hTDlkYmdUSXVQSXRHb0RB?=
+ =?utf-8?B?dnpRUG1vSTlGT2RrQ1VxSXUrazE0TVppdTQwNmRaRy9SeklBVWN3MjdJN2Nv?=
+ =?utf-8?B?czVQRGxFMDhrb05Ma1VUWmZ4UFo5VjZkK3pERDBaVVBBZVZSWm53STd5VEFE?=
+ =?utf-8?B?UkRMK0dBWmlyRmZoS3VVWE1OR09sQU1mNDRSYWtKZWZvaVV4ajVQVllHN0ts?=
+ =?utf-8?B?NGhneStadDFRWFU3a01QdVBaa0czVVpZcWptM056OWNIM0R4SUlVMWdtSnNY?=
+ =?utf-8?B?OWZtZ2tzY3p3MkRraUdVVnp4UUIwbjI2enMzaVdHTmkxcTRXQURZU2NQaHQ1?=
+ =?utf-8?B?VUZydkZ1TFo0dnVLWVVqVTZZaENDOUV4WWFES1FISXNJajJXcnozVjR4dU93?=
+ =?utf-8?B?TG1PbnhmZXZWYjVyd29HdkJLaDdlMHd4L1QwUlhXLzBzcmZMTFJBbnRaaDdl?=
+ =?utf-8?B?eWtkWUxyTmdOWFJnS3hVdk1Jb0NWemRFYjR0emxsbFlscDAvbkpqbjVBWmM3?=
+ =?utf-8?B?NjZYUmhENjNxb3paU2dGTG5QRXQrMXJnQktBdFllR1JoODBYSjNHWlFVRHBz?=
+ =?utf-8?B?SVFFaFNtL2tkbFB3N3lhRFR1NnpVbWVlM3AzcjVzalk3U3JqaEZUSWhaa3hR?=
+ =?utf-8?B?VG4xa05IYmhwSXJ6bnI1eTZibVplQnliamVjYjQya083bTlXMWp4VSswSTh1?=
+ =?utf-8?B?NHEyZnJDL2tpaW1tSlNXQ3RzVlVsTEptQUNPZnYwQW5ISE1aNnpmaWxiYXgr?=
+ =?utf-8?B?WE9QMmUvYTBzcUcvaSs0Sk5May9QTHliMFpIbm8vczNpSTFIdmkvTndTeDE2?=
+ =?utf-8?B?S1RReTN4OXhzRlMxb05aS09ZVGhEVmdRaUI4Rm5YL3RsdHdTdGF2aEt5anNs?=
+ =?utf-8?B?MzZTaStyMys0eEFnR1M5bWJnUVZQMk5xbXB6M0lSRTlMdXM4MGdCakdkbkUw?=
+ =?utf-8?B?eWd2Tk1kMkNad2xsbHJPMEdKenVCcVlobXJSREhXKzdabTRSV2hkUmVOdWt5?=
+ =?utf-8?B?NkdEZ05wVjgvVVMxQ0REall1c01ZTFlrZmVCSHhKNGlpa1BacDVjUWlwVlRr?=
+ =?utf-8?B?MkRGemFMRmkvTnBWcksrOG9NQUE4TTVQeDhJOXB6aTFZVE1hNlFtLzZUQm04?=
+ =?utf-8?B?Q2VuaDM1NUVjcmMxZ3M5VE5ZY2pDMzFaQ21ZYWs3RjhtYkNma3RhdjBoeTR6?=
+ =?utf-8?B?aFRhUjV6U2dBWE9Sem90eTh4OVF6Q1o3c3FVMlBmSXRpSEpFbmYyYTBsVmlV?=
+ =?utf-8?B?OUVnQ0ZLSkRha0JCRy8vZzcyRkR2RU8vcDdjU2dvRHh6MmF0UWtoNk5XTWp3?=
+ =?utf-8?B?UkRrOFNRVEYzZWFBc2RHQk1iWHc3a2xYTmhsT3dQRXlCMDVJcWNaU05wcnZK?=
+ =?utf-8?B?L2QrS3VQYmFCN25WSzEvZGNUdEVwZEwvNk1YVWw3cTFzUy9mbjlXN1gwWWJy?=
+ =?utf-8?Q?h2gQ=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-ORIG-GUID: ikxBXjPa3t6_3K286ljBfwMPHKccYFFB
-X-Proofpoint-GUID: ikxBXjPa3t6_3K286ljBfwMPHKccYFFB
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-03-21_08,2024-03-18_03,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0 mlxscore=0
- phishscore=0 priorityscore=1501 lowpriorityscore=0 spamscore=0
- mlxlogscore=999 malwarescore=0 adultscore=0 clxscore=1015 bulkscore=0
- suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2403140001 definitions=main-2403210085
+X-OriginatorOrg: axis.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DB5PR02MB10213.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 49e77dcb-74c8-4fc4-5571-08dc49e8780f
+X-MS-Exchange-CrossTenant-originalarrivaltime: 21 Mar 2024 20:49:57.4842
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 78703d3c-b907-432f-b066-88f7af9ca3af
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: oalAz++EXZdwGyG7q4t7etF/s5C6zRrDSdDFtD7h9Jpl0YMkNIB1/bslV1rDf2Mz
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR02MB9824
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 21 Mar 2024 12:07:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109504
+ <openembedded-devel@lists.openembedded.org>; Thu, 21 Mar 2024 20:50:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109505
 
-From: Soumya Sambu <soumya.sambu@windriver.com>
-
-Fixes CVE-2023-50387 and CVE-2023-50868
-
-Remove backported CVE patch.
-Remove patch for lua as hardcoding lua version was removed.
-
-Changelog:
-===========
-https://thekelleys.org.uk/dnsmasq/CHANGELOG
-
-Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
----
- .../recipes-support/dnsmasq/dnsmasq.inc       |  1 -
- .../recipes-support/dnsmasq/dnsmasq/lua.patch | 31 ------------
- .../recipes-support/dnsmasq/dnsmasq_2.87.bb   |  7 ---
- .../recipes-support/dnsmasq/dnsmasq_2.90.bb   |  3 ++
- .../dnsmasq/files/CVE-2023-28450.patch        | 48 -------------------
- 5 files changed, 3 insertions(+), 87 deletions(-)
- delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq/lua.patch
- delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.87.bb
- create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.90.bb
- delete mode 100644 meta-networking/recipes-support/dnsmasq/files/CVE-2023-28450.patch
-
-diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-index 9e0f529ec..a8ff21a12 100644
---- a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-+++ b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-@@ -14,7 +14,6 @@ SRC_URI = "http://www.thekelleys.org.uk/dnsmasq/${@['archive/', ''][float(d.getV
-            file://dnsmasq-resolvconf.service \
-            file://dnsmasq-noresolvconf.service \
-            file://dnsmasq-resolved.conf \
--           file://CVE-2023-28450.patch \
- "
- 
- inherit pkgconfig update-rc.d systemd
-diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq/lua.patch b/meta-networking/recipes-support/dnsmasq/dnsmasq/lua.patch
-deleted file mode 100644
-index be2bb42fc..000000000
---- a/meta-networking/recipes-support/dnsmasq/dnsmasq/lua.patch
-+++ /dev/null
-@@ -1,31 +0,0 @@
--From be1b3d2d0f1608cba5efee73d6aac5ad0709041b Mon Sep 17 00:00:00 2001
--From: Joe MacDonald <joe_macdonald@mentor.com>
--Date: Tue, 9 Sep 2014 10:24:58 -0400
--Subject: [PATCH] Upstream-Status: Inappropriate [OE specific]
--
--Signed-off-by: Christopher Larson <chris_larson@mentor.com>
--Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
--
-----
-- Makefile | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/Makefile b/Makefile
--index 73ea23e..ed3eeb9 100644
----- a/Makefile
--+++ b/Makefile
--@@ -60,8 +60,8 @@ idn2_cflags =   `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_LIBIDN2 $(PKG_CONFI
-- idn2_libs =     `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_LIBIDN2 $(PKG_CONFIG) --libs libidn2`
-- ct_cflags =     `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_CONNTRACK $(PKG_CONFIG) --cflags libnetfilter_conntrack`
-- ct_libs =       `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_CONNTRACK $(PKG_CONFIG) --libs libnetfilter_conntrack`
---lua_cflags =    `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_LUASCRIPT $(PKG_CONFIG) --cflags lua5.2` 
---lua_libs =      `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_LUASCRIPT $(PKG_CONFIG) --libs lua5.2` 
--+lua_cflags =    `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_LUASCRIPT $(PKG_CONFIG) --cflags lua`
--+lua_libs =      `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_LUASCRIPT $(PKG_CONFIG) --libs lua`
-- nettle_cflags = `echo $(COPTS) | $(top)/bld/pkg-wrapper HAVE_DNSSEC     $(PKG_CONFIG) --cflags 'nettle hogweed' \
--                                                         HAVE_CRYPTOHASH $(PKG_CONFIG) --cflags nettle \
--                                                         HAVE_NETTLEHASH $(PKG_CONFIG) --cflags nettle`
--
---- 
--2.9.5
--
-diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.87.bb b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.87.bb
-deleted file mode 100644
-index 793b61d71..000000000
---- a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.87.bb
-+++ /dev/null
-@@ -1,7 +0,0 @@
--require dnsmasq.inc
--
--SRC_URI[dnsmasq-2.87.sha256sum] = "ae39bffde9c37e4d64849b528afeb060be6bad6d1044a3bd94a49fce41357284"
--SRC_URI += "\
--    file://lua.patch \
--"
--
-diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.90.bb b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.90.bb
-new file mode 100644
-index 000000000..6e4c33110
---- /dev/null
-+++ b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.90.bb
-@@ -0,0 +1,3 @@
-+require dnsmasq.inc
-+
-+SRC_URI[dnsmasq-2.90.sha256sum] = "8f6666b542403b5ee7ccce66ea73a4a51cf19dd49392aaccd37231a2c51b303b"
-diff --git a/meta-networking/recipes-support/dnsmasq/files/CVE-2023-28450.patch b/meta-networking/recipes-support/dnsmasq/files/CVE-2023-28450.patch
-deleted file mode 100644
-index 129c9043e..000000000
---- a/meta-networking/recipes-support/dnsmasq/files/CVE-2023-28450.patch
-+++ /dev/null
-@@ -1,48 +0,0 @@
--From eb92fb32b746f2104b0f370b5b295bb8dd4bd5e5 Mon Sep 17 00:00:00 2001
--From: Simon Kelley <simon@thekelleys.org.uk>
--Date: Tue, 7 Mar 2023 22:07:46 +0000
--Subject: [PATCH] Set the default maximum DNS UDP packet size to 1232.
--
--http://www.dnsflagday.net/2020/ refers.
--
--Thanks to Xiang Li for the prompt.
--
--CVE: CVE-2023-28450
--Upstream-Status: Backport [https://thekelleys.org.uk/gitweb/?p=dnsmasq.git;a=commit;h=eb92fb32b746f2104b0f370b5b295bb8dd4bd5e5]
--
--Signed-off-by: Peter Marko <peter.marko@siemens.com>
-----
-- man/dnsmasq.8 | 3 ++-
-- src/config.h  | 2 +-
-- 2 files changed, 3 insertions(+), 2 deletions(-)
--
--diff --git a/man/dnsmasq.8 b/man/dnsmasq.8
--index 41e2e04..5acb935 100644
----- a/man/dnsmasq.8
--+++ b/man/dnsmasq.8
--@@ -183,7 +183,8 @@ to zero completely disables DNS function, leaving only DHCP and/or TFTP.
-- .TP
-- .B \-P, --edns-packet-max=<size>
-- Specify the largest EDNS.0 UDP packet which is supported by the DNS
---forwarder. Defaults to 4096, which is the RFC5625-recommended size.
--+forwarder. Defaults to 1232, which is the recommended size following the
--+DNS flag day in 2020. Only increase if you know what you are doing.
-- .TP
-- .B \-Q, --query-port=<query_port>
-- Send outbound DNS queries from, and listen for their replies on, the
--diff --git a/src/config.h b/src/config.h
--index 1e7b30f..37b374e 100644
----- a/src/config.h
--+++ b/src/config.h
--@@ -19,7 +19,7 @@
-- #define CHILD_LIFETIME 150 /* secs 'till terminated (RFC1035 suggests > 120s) */
-- #define TCP_MAX_QUERIES 100 /* Maximum number of queries per incoming TCP connection */
-- #define TCP_BACKLOG 32  /* kernel backlog limit for TCP connections */
---#define EDNS_PKTSZ 4096 /* default max EDNS.0 UDP packet from RFC5625 */
--+#define EDNS_PKTSZ 1232 /* default max EDNS.0 UDP packet from from  /dnsflagday.net/2020 */
-- #define SAFE_PKTSZ 1232 /* "go anywhere" UDP packet size, see https://dnsflagday.net/2020/ */
-- #define KEYBLOCK_LEN 40 /* choose to minimise fragmentation when storing DNSSEC keys */
-- #define DNSSEC_WORK 50 /* Max number of queries to validate one question */
---- 
--2.20.1
--
--- 
-2.40.0
-
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBNYXJlayBWYXN1dCA8bWFyZXhA
+ZGVueC5kZT4NCj4gU2VudDogZGVuIDE4IG1hcnMgMjAyNCAyMzowMA0KPiBUbzogQ2hyaXN0b3Bo
+ZSBDaGFwdWlzIDxjaHJpcy5jaGFwdWlzQGdtYWlsLmNvbT4NCj4gQ2M6IFBldGVyIEtqZWxsZXJz
+dGVkdCA8cGV0ZXIua2plbGxlcnN0ZWR0QGF4aXMuY29tPjsgb3BlbmVtYmVkZGVkLQ0KPiBkZXZl
+bEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnOyBLaGVtIFJhaiA8cmFqLmtoZW1AZ21haWwuY29tPjsg
+RmFiaW8gRXN0ZXZhbQ0KPiA8ZmVzdGV2YW1AZGVueC5kZT4NCj4gU3ViamVjdDogUmU6IFtvZV0g
+W21ldGEtb2VdW1BBVENIIHY0IDcvN10gbHZnbDogbHYtY29uZi5pbmM6IGdlbmVyYWxpemUNCj4g
+c2VkIGluc3RydWN0aW9ucw0KPiANCj4gT24gMy8xOC8yNCA0OjQyIFBNLCBDaHJpc3RvcGhlIENo
+YXB1aXMgd3JvdGU6DQo+ID4gSSBhdm9pZGVkIFxzIGJlY2F1c2UgaXQncyBub3Qgd2VsbCBrbm93
+biwgYW5kIEkgd291bGQgYWxzbyBwcmVmZXIgdXNpbmcNCj4gPiBbWzpzcGFjZTpdXSBhcyBpdCBp
+cyBQT1NJWCBjb21wbGlhbnQuDQoNClNlZSBjaGFwdGVyICI1LjYgcmVndWxhciBleHByZXNzaW9u
+IGV4dGVuc2lvbnMiIGluIHRoZSBzZWQgaW5mbyBwYWdlIGZvciBccyANCmFuZCBhIG51bWJlciBv
+ZiBvdGhlciBzaW1pbGFyIHNlcXVlbmNlcyAoZm9yIGFueW9uZSB1c2VkIHRvIFBlcmwncyByZWd1
+bGFyIA0KZXhwcmVzc2lvbnMsIFxzIGlzIHRoZSBub3JtYWwgd2F5IHRvIG1hdGNoIHdoaXRlc3Bh
+Y2UpLiBBbmQgdHJ1ZSwgdGhpcyBpcyANCm5vdCBQT1NJWCwgYnV0IG5laXRoZXIgaXMgdGhlIC1p
+IG9wdGlvbiB0aGF0IGlzIGFsc28gdXNlZCBieSB0aGUgc2FtZSANCmNvbW1hbmQuDQoNCj4gPg0K
+PiA+IEkgY2FuIHByb3Bvc2UgYSBwYXRjaCBmb3IgdGhpcywgdGFraW5nIFBldGVyJ3MgcmVtYXJr
+cyBpbnRvIGFjY291bnQuDQoNClRoYW5rIHlvdS4NCg0KPiANCj4gWWVzIHBsZWFzZSwgYWxyZWFk
+eSByZXZpZXdlZCB0b28uDQo+IA0KPiBidHcgcGxlYXNlIHN0b3AgdG9wLXBvc3RpbmcgLg0KDQov
+L1BldGVyDQoNCg==
 
