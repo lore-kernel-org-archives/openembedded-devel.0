@@ -1,870 +1,366 @@
-Return-Path: <derek@asterius.io>
+Return-Path: <randy.macleod@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A1ADAC6FD1F
-	for <webhook@archiver.kernel.org>; Thu, 21 Mar 2024 22:18:55 +0000 (UTC)
-Received: from mail-qv1-f41.google.com (mail-qv1-f41.google.com [209.85.219.41])
- by mx.groups.io with SMTP id smtpd.web10.10658.1711059532979360294
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4FD2AC6FD1F
+	for <webhook@archiver.kernel.org>; Fri, 22 Mar 2024 00:55:47 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.2520.1711068943503418594
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 21 Mar 2024 15:18:53 -0700
+ Thu, 21 Mar 2024 17:55:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: gmail.com, ip: 209.85.219.41, mailfrom: straka.derek@gmail.com)
-Received: by mail-qv1-f41.google.com with SMTP id 6a1803df08f44-6963c0c507eso16507216d6.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 21 Mar 2024 15:18:52 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1711059531; x=1711664331;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=xBOEgpiEZoNuN/CSzF/l5l8LYwkKHzFQFUfE0Lt4DCU=;
-        b=MldhRnJiquH8kJYOfG1+UaP0A4HZe6pIJx705MD5hq+0MhRCNCxNecv4ycGwQAnSHa
-         oFrjqNjnqz6muMk4hYWUK2LjxYnwNNdvWyj/LnVeaTeXr3H0mYiO9mBobmt6z8ygAct/
-         GzjQneYxZ/Vg8roNBbwACFutXI0nYNG+7NRYIcZSKUkSLqauIAF1wzdwDdOgdaWPqBWB
-         cShRKSwCr17T1UM/ras7O7HpUxynuM/og2FpkjGE3gxfHqc3TIhHm7s8WBFFkn3JOkcs
-         tpsXZS1e+dZXCzz56DOTHqpxt5rD3FPe4QV8ITPjLbhRiGy2RTl9uEuvCVJBszK3yqij
-         8NPg==
-X-Gm-Message-State: AOJu0YxHLsGpbHxeWKeLjhGcSgY6jTyRU2lBTRUGGokhbMvbMFJWQRW6
-	M3SJWNy/WN960QqqdtOvk8Hfqg5Vx5MMqH+KHGz3stDf0lFj9hXdVTo3ROcpxws=
-X-Google-Smtp-Source: AGHT+IFuqh45G/EZY+U1Z5E0w82uudTk0JbHNqOj2HQK7fbU6VzKia3gVYXs6b+Y4upbU3drL4o+vw==
-X-Received: by 2002:a05:6214:405:b0:696:2134:95e5 with SMTP id z5-20020a056214040500b00696213495e5mr654193qvx.3.1711059530914;
-        Thu, 21 Mar 2024 15:18:50 -0700 (PDT)
-Received: from sparta.internal.asterius.io (c-73-228-213-122.hsd1.mn.comcast.net. [73.228.213.122])
-        by smtp.gmail.com with ESMTPSA id o6-20020a0562140e4600b00691879d7a50sm363606qvc.115.2024.03.21.15.18.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 21 Mar 2024 15:18:50 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-python][PATCH] python3-dbus: re-add recipe with latest patches and add ptest
-Date: Thu, 21 Mar 2024 22:18:12 +0000
-Message-Id: <20240321221812.2714481-1-derek@asterius.io>
-X-Mailer: git-send-email 2.34.1
+ dkim=fail reason="dkim: body hash did not verify" header.i=@windriver.com header.s=PPS06212021 header.b=mgtfijlz;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=3811b56465=randy.macleod@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 42M0thpk012787
+	for <openembedded-devel@lists.openembedded.org>; Thu, 21 Mar 2024 17:55:43 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=content-type:message-id:date:subject:to:cc:references:from
+	:in-reply-to:mime-version; s=PPS06212021; bh=ePu71hCNTdnD2cvQ2BS
+	g5pF/0IAZENsXri+Z+n/kxsE=; b=mgtfijlzeXctbMA0U4uFWRfVAZyOKx21k9m
+	Re8QXUd40sXVWEZ+nAxEfXzP7epUxy3M6xS09vJqHrbzQ+WBlshK7H7HtGUlnhKD
+	vGCwqTig89Aa/hUDlq5Rfg/IJZ8PhVyAb0twRN/UIiQUE67oTopLL1nJRZnpIM21
+	cdvY8be9R4PWbZfQWT1vMBhZWupT6ZTgFILfnA3t6oOc24mESwNsa4NDQIi3a8fk
+	f3AXR3UIZ90/9XgdoH/FV651XaPwu4aTtznaFsJQmySf6uZPNENTm2J8syjdXcY2
+	XZR+ofGujsqFe1zqMH0RSu7IiEMSAqo7J0ytPKHlVTweSY7srPw==
+Received: from pps.reinject (localhost [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3x0yuj001c-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 21 Mar 2024 17:55:42 -0700 (PDT)
+Received: from m0250809.ppops.net (m0250809.ppops.net [127.0.0.1])
+	by pps.reinject (8.18.0.8/8.18.0.8) with ESMTP id 42M0tgWt012741
+	for <openembedded-devel@lists.openembedded.org>; Thu, 21 Mar 2024 17:55:42 -0700
+Received: from nam04-dm6-obe.outbound.protection.outlook.com (mail-dm6nam04lp2040.outbound.protection.outlook.com [104.47.73.40])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3x0yuj001b-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Thu, 21 Mar 2024 17:55:42 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=PyCdDQyCXY8N1Vt/4II/Wp8QPmwNmnlzd2nFoeYUWZYa2PKZuu7tUh9+twAK8hT4HNFByuOWy6ZevOFJ5Fd38OpnV+LX7Ngy0fMQ7tLiVsK7PpVRqiALo7EiEkD0XJ/KmCLiF53WpwI/6vBJMaFIccev5ZQX5rBQTFvHcWjVHHWELYzW915Pih+jsnTvVVM0a2hFE+fxjMIIPGrmUjjCSRoORVwx+Ywhulp7rVKgMIUuXmHFogJwUHVwSpVzoaPHRNk1RTNCmsrjYQW8Khsd0NUKuXdyYSwbd2HMBHT1epWZ1z3avM4pfZvea2ymX/5XTaCE6VC7NuOHTVRXOYM3iA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ePu71hCNTdnD2cvQ2BSg5pF/0IAZENsXri+Z+n/kxsE=;
+ b=FjJRrnw5mDtxl2eiJa1L2QYA5ZvK9VAcXuCHRFbk3UWBaJkVUbZIgysiyxQpf8RUKMEVQanjlzTQ9vCQGqUxREtJ1jiNO4kz4pF4fPAeoFOFAiG0KTERtMhd5/3SrUIkyW/DouC2sKNn9gPQp8KbwpQkJu5CfFzFZ8n/fclWIJbG8tSy7y51+8/SiiaAS1zpBjztCnbw606+Ku6g68SxyKGcX1JZLiNy8LCj9l7tVjH2J2AcdPlJRqoN+o+BZr5TQUiOzCGlqasWpBWiEuhvlCe6OAxhXhxFPnyjdO7FBlf+UU6Btna0UcN6ExjT1+pwqOqAVrK4Y2hppkKZFY/RoQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from SJ0PR11MB5920.namprd11.prod.outlook.com (2603:10b6:a03:42e::9)
+ by LV3PR11MB8603.namprd11.prod.outlook.com (2603:10b6:408:1b6::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.12; Fri, 22 Mar
+ 2024 00:55:38 +0000
+Received: from SJ0PR11MB5920.namprd11.prod.outlook.com
+ ([fe80::c613:f5c5:2c48:3f9d]) by SJ0PR11MB5920.namprd11.prod.outlook.com
+ ([fe80::c613:f5c5:2c48:3f9d%4]) with mapi id 15.20.7386.017; Fri, 22 Mar 2024
+ 00:55:37 +0000
+Content-Type: multipart/alternative;
+ boundary="------------UeTT4P2B83VXp6QZLK5pb4R4"
+Message-ID: <32b9a223-6f69-4ddc-98b3-e5a94d70080b@windriver.com>
+Date: Thu, 21 Mar 2024 20:55:35 -0400
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][PATCH 1/2] redis: restore Upstream-Status ->
+ LICENSE change for 7.4 and later !
+Content-Language: en-CA
+To: martin.jansa@gmail.com, Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org, wangmy@fujitsu.com
+References: <20240130103458.819774-1-martin.jansa@gmail.com>
+ <0b85cf93-421b-4c5c-ae46-515ebdb5cc38@gmail.com>
+ <CA+chaQcHdgbVOORRdeErRXT2FM+7QcOidaHEanskrqrocFN7xg@mail.gmail.com>
+From: Randy MacLeod <randy.macleod@windriver.com>
+In-Reply-To: <CA+chaQcHdgbVOORRdeErRXT2FM+7QcOidaHEanskrqrocFN7xg@mail.gmail.com>
+X-ClientProxiedBy: BY3PR10CA0012.namprd10.prod.outlook.com
+ (2603:10b6:a03:255::17) To SJ0PR11MB5920.namprd11.prod.outlook.com
+ (2603:10b6:a03:42e::9)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ0PR11MB5920:EE_|LV3PR11MB8603:EE_
+X-MS-Office365-Filtering-Correlation-Id: 11eb0e97-2534-402e-f028-08dc4a0ac9ef
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	9vn6Xt8E7FKW/ywAIeswkV5rPnOGRYuxeC6bksiYI52uSLcSNggEuQuN+P642BmyRKuV7OCaXmF45pibHHGbzApCeQzvc6EubrvYZQpusB4zeIbraEaBmfDvTHVeGgmy/yCJPvreB9VYfM3nTyw2DrXQ782MmS5q1YQ/y+atUGk4jYVfnsL01tP1tC9Zo+Bu/XqvuztHFoRSvMIm95lCepWHmngBtSBhK8IPWEbRGFkEXaBVLLjYmJxqDQAmXTGVKPwMTX1vlzoMQXaXkYznsBCfwIPtGGYyOyYOnvmqj8MWSNMrhIjZw/2XEWpG/1isylmzO19TWCkMaxeiWiQ9C3BSlhttj85AR+BdCJz3oZjrTOxy/vEnDqY0Zque+ES5l/bX2HZrX0U9fIscV+pcp17qyd4JwSPPMmXuqLGDiFqw2+8tkx2zt1ad9o+Pr7UAYMZfhuQ2br5LOyLIAB83PcLCx4qJDoEnVqNqtFgPbnku7f3/sfY1hBznPoMg1n32gIeyyZDsgjfyFlaNsHj744HGSwTbyQvtJkNIclf4ACncnf/Euitl31ysVsFoLMWwVGSuxTsxXGfVLXHW7Taqyyvq7irVAhE6Y2GkZnZrRFw=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ0PR11MB5920.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(1800799015)(366007)(376005);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?TkNGR1AwSjA0cFBkV1BCbmNSUERGUU1wN2RxMzBqbmpYKzFNMU1QbVV3SjJy?=
+ =?utf-8?B?MWhwbldJRHVqc2RadnV0eU1JMWN4WEFXd3pMWUlua2NaZWpxY1NON0pRdWhk?=
+ =?utf-8?B?SjlHR09sNjV2YmQ4VmNlSjR1eEQ0Vng4cGdOWXF4SUllZ3VhM2tvVWlYNVFv?=
+ =?utf-8?B?U3hJWGFwc21jRTAwNXpJc2E4cUJCY0FibTFMRElEUVB1aUdQeDlOUmt1Zmo2?=
+ =?utf-8?B?MkdyNWRxaU1OKzljZlE4YTNacUcrM2ZmeGk5czJqaHJ2R3BjV2FlUXplSXRn?=
+ =?utf-8?B?S1IydEx4U3pNbkFqVXh2YXpXLzUyTE5pY0VpZi91eVQ4bDZhZWdoaUtCd3JW?=
+ =?utf-8?B?ZWwyN0Q2UGNvL3ZiYnlrV3lzTDZQUGtTa1N3dXhUcDcyRGd3d1dmeUdoQnF1?=
+ =?utf-8?B?Wnp0ZFpIWExuVk1YcVhOQkUyNXZJenNMdDQ5OWJTZ3BvR1JQVjU5akIzZFJs?=
+ =?utf-8?B?Z1BsQlRXNE9ndEpqUWpWV1ZNRVJOcm1TdUgzZ2lheGM0MDBkb3ZqNE5OeThY?=
+ =?utf-8?B?c2sxbmc5YTBJbGt5NWZlNWNIbDlkM2ZPaURja01lcTdxNUhBRHZRVnZwMTVH?=
+ =?utf-8?B?cGR6VFVQbFdQS2w5dGF0RGhnam82ejVDN21LeTkzK2VXYy9PUS9DbWpOajRk?=
+ =?utf-8?B?VEtRMjM1NTdHbjdXRXRQNGl2M0J1NUFOTnlIR2Q5Vk1meFprSkZROFQvek9n?=
+ =?utf-8?B?SHhvWmNEWG5Hd1FsajJMdlkvMk1KZGJYSnNYNEoxWlpVaEQycXVNK0hPY004?=
+ =?utf-8?B?aEo5YU5XNmxvM3gxNmdUT01nWDhEUGd5VGZuUllSMHAyK01neU9WTTFuRnFX?=
+ =?utf-8?B?a2hzK2YzYnhMWnRyeUFIZGx2MnMwNFN2TC9xb0FnZ0xEUzlTb2pDUVVUeElz?=
+ =?utf-8?B?NTNhb0dyQVhXQWlpaGhET1lGTkQ3aERjbXFHLzQ1UGkrYTZ6c3d4OEFqYW83?=
+ =?utf-8?B?T1RLeGNLRndJb0ZFejVCN0crTkU1VWRzOVYweXZuL3lwMm1VWFUyaGJQQ1Rs?=
+ =?utf-8?B?aXNKWlVrQWh3VC8ra3BkQnN2UHBQR095SnBNYzB1dUY1SHpwamVkV014S0RQ?=
+ =?utf-8?B?OW9pQ2l4MW5MRFBwMlJoTXByYVFkMUhsNXVLL2FZYTdobnp5QXdYc3M2TjBU?=
+ =?utf-8?B?angvOVgvMkhnY2kyeHAxMlovRll4eWl5LzdtcHJYUmhRM1Y5T0RndUFZV1Q3?=
+ =?utf-8?B?c01vbGdOVnZPelZZd0JRWFZXeS83U0NHQlordkNRWnh2aTU3M1ZGbWxZekI4?=
+ =?utf-8?B?ZW1id0ZLd1dORytDRGpZWGZzeGlJSGltWmJ3dlV6TGhQWjkzRE1Qcnp6cmRy?=
+ =?utf-8?B?dTJtalZkR1VrWU5rN1lyc3h3c0llY2Y0VVQyN0pZc1hwMmNxSitpTzlyQUd2?=
+ =?utf-8?B?U0FFbmNvYjVwa0FjK3N5N21ra3lxelptejl4NGVuWkEvQkdMeFZmOTJKUTQz?=
+ =?utf-8?B?dFJVOU1sQVdQWTBvTHBsYWhkcXp4UjNHMHVSRlFLUEdVSVlCYWd3SVZaMEg3?=
+ =?utf-8?B?QzNUZ1FCN1k5aUZJN1JPSFp0TGdmZThJUDdmNFhqTlp4ME9GN1J0TUpZenEx?=
+ =?utf-8?B?RXI2MnZqOWxIb2s1UUhsc216UDZqRzNXQ3ovVU5DMXFpbzZGcTBZK1M2UUJS?=
+ =?utf-8?B?b2QvYjVyTUx5bWc2YU4wQUZYTXVGTC9lRmg4NGNnMnUyb2hLdytoZG5LSkNp?=
+ =?utf-8?B?bStkang2aGE1alROdHkvcC9vNkZoOWNWSU5zK3lHaXNPQzFmMWZPSzA3S0N5?=
+ =?utf-8?B?NW9RWjcxb1VNOHpsckZacWFpcFc5elR0Z3N2cUNqR01kNGs0ZlppcEhYUHdv?=
+ =?utf-8?B?TzVLVGRoVlFDOGVlaHlZL1ZURTdnUVFQMlJDL09sRTR2NUE5WDc0dnZsczZn?=
+ =?utf-8?B?dkZnek9vTDVDQ0xFc3UxR291WGdjTWx3aHdsd3BFU2RuNHcveFdkOGxTZitC?=
+ =?utf-8?B?Nk9sYWxuRVdQS2pjRGlmeE1CaWI2K25wZDM1a25NOFAzZTRTNkZnN1BUSFRu?=
+ =?utf-8?B?cjJkQTViaG40VlZsYThyN0hMcnJVaGowTldkRC9ta214RmVkZlR5V1JGVkJx?=
+ =?utf-8?B?bG05aUVPdGxaQUNTcGZ1Q3ZtZm5YL0RyTTNQMTZLNldXUUJpRlZ0emNxMUdv?=
+ =?utf-8?B?NzFCdlNNM2RZbHZidkI4aWt0cHNpZW5mdGFTejZHN21XTVJXRVdXdWNxR2g5?=
+ =?utf-8?B?dnc9PQ==?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 11eb0e97-2534-402e-f028-08dc4a0ac9ef
+X-MS-Exchange-CrossTenant-AuthSource: SJ0PR11MB5920.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Mar 2024 00:55:37.8995
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: KJYTo3ClRn5vgcVCVx1/SvKACEuAt0gJ7jfzmNDAoz0YQrsotPbCAu3UlJ/SkntXnWCu3Q1N/32Xut/O+LXBfg4Y4QpLxT/UrPHmAL7fC/s=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR11MB8603
+X-Proofpoint-ORIG-GUID: kriFmczc_RZvMlAPshTa_KQ0UdPrDbc8
+X-Proofpoint-GUID: Mfa2lTjTFBkuJ9qeFOwB_BOnG-RoV47A
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-03-21_14,2024-03-21_02,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0
+ lowpriorityscore=0 suspectscore=0 bulkscore=0 impostorscore=0
+ priorityscore=1501 adultscore=0 clxscore=1011 phishscore=0 spamscore=0
+ mlxlogscore=999 mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2403210001 definitions=main-2403220005
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 21 Mar 2024 22:18:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109506
+ <openembedded-devel@lists.openembedded.org>; Fri, 22 Mar 2024 00:55:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109507
 
-The python3-dbus package was removed in (dac933e).  While the upstream
-project isn't active, other distributions (e.g. Fedora, Debian, etc)
-continue to offer the package and apply patches to resolve reported issues.
+--------------UeTT4P2B83VXp6QZLK5pb4R4
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 42M0thpk012787
 
-While other packages offer similar functionality (e.g. dasbus), they are not
-drop in replacements and the general dbus functionality works out of the box.
-The python package has accomplished it's goal of providing useful functionality,
-and the proposal is to continue to have it available in meta-python for use.
+Would the new license scheme described here:
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- .../ptest-packagelists-meta-python.inc        |   1 +
- .../packagegroups/packagegroup-meta-python.bb |   1 +
- ...ttribute-conforming-to-introspect.dt.patch |   0
- .../0002-Support-asynchronous-calls-58.patch  | 204 ++++++++
- ...mation-between-D-Bus-errors-and-exce.patch | 493 ++++++++++++++++++
- .../python/python3-pydbus/run-ptest           |  15 +
- .../python/python3-pydbus_0.6.0.bb            |  26 +
- 7 files changed, 740 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-pydbus/0001-make-direction-attribute-conforming-to-introspect.dt.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-pydbus/0002-Support-asynchronous-calls-58.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-pydbus/0003-Support-transformation-between-D-Bus-errors-and-exce.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-pydbus/run-ptest
- create mode 100644 meta-python/recipes-devtools/python/python3-pydbus_0.6.0.bb
+https://redis.com/blog/redis-adopts-dual-source-available-licensing/
 
-diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-index 447e0b938..ec26f768e 100644
---- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
-+++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-@@ -53,6 +53,7 @@ PTESTS_FAST_META_PYTHON = "\
-     python3-pytest-mock \
-     python3-pytoml \
-     python3-pyyaml-include \
-+    python3-pydbus \
-     python3-rapidjson \
-     python3-requests-file \
-     python3-requests-toolbelt \
-diff --git a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-index eb5a26463..e0446da28 100644
---- a/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-+++ b/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb
-@@ -311,6 +311,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
-     python3-pycodestyle \
-     python3-pyconnman \
-     python3-pycurl \
-+    python3-pydbus \
-     python3-pydicti \
-     python3-pyephem \
-     python3-pyexpect \
-diff --git a/meta-python/recipes-devtools/python/python3-pydbus/0001-make-direction-attribute-conforming-to-introspect.dt.patch b/meta-python/recipes-devtools/python/python3-pydbus/0001-make-direction-attribute-conforming-to-introspect.dt.patch
-new file mode 100644
-index 000000000..e69de29bb
-diff --git a/meta-python/recipes-devtools/python/python3-pydbus/0002-Support-asynchronous-calls-58.patch b/meta-python/recipes-devtools/python/python3-pydbus/0002-Support-asynchronous-calls-58.patch
-new file mode 100644
-index 000000000..44600a8e6
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pydbus/0002-Support-asynchronous-calls-58.patch
-@@ -0,0 +1,204 @@
-+From 31d6dd7893a5e1bb9eb14bfcee861a5b62f64960 Mon Sep 17 00:00:00 2001
-+From: Vendula Poncova <vponcova@redhat.com>
-+Date: Thu, 27 Jul 2017 18:41:29 +0200
-+Subject: [PATCH 2/3] Support asynchronous calls (#58)
-+
-+Added support for asynchronous calls of methods. A method is called
-+synchronously unless its callback parameter is specified. A callback
-+is a function f(*args, returned=None, error=None), where args is
-+callback_args specified in the method call, returned is a return
-+value of the method and error is an exception raised by the method.
-+
-+Example of an asynchronous call:
-+
-+def func(x, y, returned=None, error=None):
-+  pass
-+
-+proxy.Method(a, b, callback=func, callback_args=(x, y))
-+
-+Upstream-Status: Backport [https://src.fedoraproject.org/cgit/rpms/python-pydbus.git/]
-+
-+Signed-off-by: Derek Straka <derek@asterius.io>
-+---
-+ doc/tutorial.rst       | 11 ++++++++-
-+ pydbus/proxy_method.py | 44 ++++++++++++++++++++++++++++++-----
-+ tests/publish_async.py | 63 ++++++++++++++++++++++++++++++++++++++++++++++++++
-+ tests/run.sh           |  1 +
-+ 4 files changed, 112 insertions(+), 7 deletions(-)
-+ create mode 100644 tests/publish_async.py
-+
-+diff --git a/doc/tutorial.rst b/doc/tutorial.rst
-+index 7474de3..b8479cf 100644
-+--- a/doc/tutorial.rst
-++++ b/doc/tutorial.rst
-+@@ -84,7 +84,8 @@ All objects have methods, properties and signals.
-+ Setting up an event loop
-+ ========================
-+ 
-+-To handle signals emitted by exported objects, or to export your own objects, you need to setup an event loop.
-++To handle signals emitted by exported objects, to asynchronously call methods
-++or to export your own objects, you need to setup an event loop.
-+ 
-+ The only main loop supported by ``pydbus`` is GLib.MainLoop.
-+ 
-+@@ -156,6 +157,14 @@ To call a method::
-+ 
-+     dev.Disconnect()
-+ 
-++To asynchronously call a method::
-++
-++    def print_result(returned=None, error=None):
-++        print(returned, error)
-++
-++    dev.GetAppliedConnection(0, callback=print_result)
-++    loop.run()
-++
-+ To read a property::
-+ 
-+     print(dev.Autoconnect)
-+diff --git a/pydbus/proxy_method.py b/pydbus/proxy_method.py
-+index 3e6e6ee..442fe07 100644
-+--- a/pydbus/proxy_method.py
-++++ b/pydbus/proxy_method.py
-+@@ -65,15 +65,34 @@ class ProxyMethod(object):
-+ 
-+ 		# Python 2 sux
-+ 		for kwarg in kwargs:
-+-			if kwarg not in ("timeout",):
-++			if kwarg not in ("timeout", "callback", "callback_args"):
-+ 				raise TypeError(self.__qualname__ + " got an unexpected keyword argument '{}'".format(kwarg))
-+ 		timeout = kwargs.get("timeout", None)
-++		callback = kwargs.get("callback", None)
-++		callback_args = kwargs.get("callback_args", tuple())
-++
-++		call_args = (
-++			instance._bus_name,
-++			instance._path,
-++			self._iface_name,
-++			self.__name__,
-++			GLib.Variant(self._sinargs, args),
-++			GLib.VariantType.new(self._soutargs),
-++			0,
-++			timeout_to_glib(timeout),
-++			None
-++		)
-++
-++		if callback:
-++			call_args += (self._finish_async_call, (callback, callback_args))
-++			instance._bus.con.call(*call_args)
-++			return None
-++		else:
-++			ret = instance._bus.con.call_sync(*call_args)
-++			return self._unpack_return(ret)
-+ 
-+-		ret = instance._bus.con.call_sync(
-+-			instance._bus_name, instance._path,
-+-			self._iface_name, self.__name__, GLib.Variant(self._sinargs, args), GLib.VariantType.new(self._soutargs),
-+-			0, timeout_to_glib(timeout), None).unpack()
-+-
-++	def _unpack_return(self, values):
-++		ret = values.unpack()
-+ 		if len(self._outargs) == 0:
-+ 			return None
-+ 		elif len(self._outargs) == 1:
-+@@ -81,6 +100,19 @@ class ProxyMethod(object):
-+ 		else:
-+ 			return ret
-+ 
-++	def _finish_async_call(self, source, result, user_data):
-++		error = None
-++		return_args = None
-++
-++		try:
-++			ret = source.call_finish(result)
-++			return_args = self._unpack_return(ret)
-++		except Exception as err:
-++			error = err
-++
-++		callback, callback_args = user_data
-++		callback(*callback_args, returned=return_args, error=error)
-++
-+ 	def __get__(self, instance, owner):
-+ 		if instance is None:
-+ 			return self
-+diff --git a/tests/publish_async.py b/tests/publish_async.py
-+new file mode 100644
-+index 0000000..3f79b62
-+--- /dev/null
-++++ b/tests/publish_async.py
-+@@ -0,0 +1,63 @@
-++from pydbus import SessionBus
-++from gi.repository import GLib
-++from threading import Thread
-++import sys
-++
-++done = 0
-++loop = GLib.MainLoop()
-++
-++class TestObject(object):
-++	'''
-++<node>
-++	<interface name='net.lew21.pydbus.tests.publish_async'>
-++		<method name='HelloWorld'>
-++			<arg type='i' name='x' direction='in'/>
-++			<arg type='s' name='response' direction='out'/>
-++		</method>
-++	</interface>
-++</node>
-++	'''
-++	def __init__(self, id):
-++		self.id = id
-++
-++	def HelloWorld(self, x):
-++		res = self.id + ": " + str(x)
-++		print(res)
-++		return res
-++
-++bus = SessionBus()
-++
-++with bus.publish("net.lew21.pydbus.tests.publish_async", TestObject("Obj")):
-++	remote = bus.get("net.lew21.pydbus.tests.publish_async")
-++
-++	def callback(x, returned=None, error=None):
-++		print("asyn: " + returned)
-++		assert (returned is not None)
-++		assert(error is None)
-++		assert(x == int(returned.split()[1]))
-++
-++		global done
-++		done += 1
-++		if done == 3:
-++			loop.quit()
-++
-++	def t1_func():
-++		remote.HelloWorld(1, callback=callback, callback_args=(1,))
-++		remote.HelloWorld(2, callback=callback, callback_args=(2,))
-++		print("sync: " + remote.HelloWorld(3))
-++		remote.HelloWorld(4, callback=callback, callback_args=(4,))
-++
-++	t1 = Thread(None, t1_func)
-++	t1.daemon = True
-++
-++	def handle_timeout():
-++		print("ERROR: Timeout.")
-++		sys.exit(1)
-++
-++	GLib.timeout_add_seconds(2, handle_timeout)
-++
-++	t1.start()
-++
-++	loop.run()
-++
-++	t1.join()
-+diff --git a/tests/run.sh b/tests/run.sh
-+index 8d93644..271c58a 100755
-+--- a/tests/run.sh
-++++ b/tests/run.sh
-+@@ -15,4 +15,5 @@ then
-+ 	"$PYTHON" $TESTS_DIR/publish.py
-+ 	"$PYTHON" $TESTS_DIR/publish_properties.py
-+ 	"$PYTHON" $TESTS_DIR/publish_multiface.py
-++	"$PYTHON" $TESTS_DIR/publish_async.py
-+ fi
-+-- 
-+2.13.5
-diff --git a/meta-python/recipes-devtools/python/python3-pydbus/0003-Support-transformation-between-D-Bus-errors-and-exce.patch b/meta-python/recipes-devtools/python/python3-pydbus/0003-Support-transformation-between-D-Bus-errors-and-exce.patch
-new file mode 100644
-index 000000000..1d45470f0
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pydbus/0003-Support-transformation-between-D-Bus-errors-and-exce.patch
-@@ -0,0 +1,493 @@
-+From 773858e1afd21cdf3ceef2cd35509f0b4882bf16 Mon Sep 17 00:00:00 2001
-+From: Vendula Poncova <vponcova@redhat.com>
-+Date: Tue, 1 Aug 2017 16:54:24 +0200
-+Subject: [PATCH 3/3] Support transformation between D-Bus errors and
-+ exceptions.
-+
-+Exceptions can be registered with decorators, raised in a remote
-+method and recreated after return from the remote call.
-+
-+Upstream-Status: Backport [https://src.fedoraproject.org/cgit/rpms/python-pydbus.git/]
-+
-+Signed-off-by: Derek Straka <derek@asterius.io>
-+---
-+ doc/tutorial.rst       |  47 ++++++++++++++++++
-+ pydbus/error.py        |  97 ++++++++++++++++++++++++++++++++++++
-+ pydbus/proxy_method.py |  18 +++++--
-+ pydbus/registration.py |  16 ++++--
-+ tests/error.py         |  67 +++++++++++++++++++++++++
-+ tests/publish_error.py | 132 +++++++++++++++++++++++++++++++++++++++++++++++++
-+ tests/run.sh           |   2 +
-+ 7 files changed, 371 insertions(+), 8 deletions(-)
-+ create mode 100644 pydbus/error.py
-+ create mode 100644 tests/error.py
-+ create mode 100644 tests/publish_error.py
-+
-+diff --git a/doc/tutorial.rst b/doc/tutorial.rst
-+index b8479cf..7fe55e1 100644
-+--- a/doc/tutorial.rst
-++++ b/doc/tutorial.rst
-+@@ -341,6 +341,53 @@ See ``help(bus.request_name)`` and ``help(bus.register_object)`` for details.
-+ 
-+ .. --------------------------------------------------------------------
-+ 
-++Error handling
-++==============
-++
-++You can map D-Bus errors to your exception classes for better error handling.
-++To handle D-Bus errors, use the ``@map_error`` decorator::
-++
-++    from pydbus.error import map_error
-++
-++    @map_error("org.freedesktop.DBus.Error.InvalidArgs")
-++    class InvalidArgsException(Exception):
-++        pass
-++
-++    try:
-++        ...
-++    catch InvalidArgsException as e:
-++        print(e)
-++
-++To register new D-Bus errors, use the ``@register_error`` decorator::
-++
-++    from pydbus.error import register_error
-++
-++    @map_error("net.lew21.pydbus.TutorialExample.MyError", MY_DOMAIN, MY_EXCEPTION_CODE)
-++    class MyException(Exception):
-++        pass
-++
-++Then you can raise ``MyException`` from the D-Bus method of the remote object::
-++
-++    def Method():
-++        raise MyException("Message")
-++
-++And catch the same exception on the client side::
-++
-++    try:
-++        proxy.Method()
-++    catch MyException as e:
-++        print(e)
-++
-++To handle all unknown D-Bus errors, use the ``@map_by_default`` decorator to specify the default exception::
-++
-++    from pydbus.error import map_by_default
-++
-++    @map_by_default
-++    class DefaultException(Exception):
-++        pass
-++
-++.. --------------------------------------------------------------------
-++
-+ Data types
-+ ==========
-+ 
-+diff --git a/pydbus/error.py b/pydbus/error.py
-+new file mode 100644
-+index 0000000..aaa3510
-+--- /dev/null
-++++ b/pydbus/error.py
-+@@ -0,0 +1,97 @@
-++from gi.repository import GLib, Gio
-++
-++
-++def register_error(name, domain, code):
-++	"""Register and map decorated exception class to a DBus error."""
-++	def decorated(cls):
-++		error_registration.register_error(cls, name, domain, code)
-++		return cls
-++
-++	return decorated
-++
-++
-++def map_error(error_name):
-++	"""Map decorated exception class to a DBus error."""
-++	def decorated(cls):
-++		error_registration.map_error(cls, error_name)
-++		return cls
-++
-++	return decorated
-++
-++
-++def map_by_default(cls):
-++	"""Map decorated exception class to all unknown DBus errors."""
-++	error_registration.map_by_default(cls)
-++	return cls
-++
-++
-++class ErrorRegistration(object):
-++	"""Class for mapping exceptions to DBus errors."""
-++
-++	_default = None
-++	_map = dict()
-++	_reversed_map = dict()
-++
-++	def map_by_default(self, exception_cls):
-++		"""Set the exception class as a default."""
-++		self._default = exception_cls
-++
-++	def map_error(self, exception_cls, name):
-++		"""Map the exception class to a DBus name."""
-++		self._map[name] = exception_cls
-++		self._reversed_map[exception_cls] = name
-++
-++	def register_error(self, exception_cls, name, domain, code):
-++		"""Map and register the exception class to a DBus name."""
-++		self.map_error(exception_cls, name)
-++		return Gio.DBusError.register_error(domain, code, name)
-++
-++	def is_registered_exception(self, obj):
-++		"""Is the exception registered?"""
-++		return obj.__class__ in self._reversed_map
-++
-++	def get_dbus_name(self, obj):
-++		"""Get the DBus name of the exception."""
-++		return self._reversed_map.get(obj.__class__)
-++
-++	def get_exception_class(self, name):
-++		"""Get the exception class mapped to the DBus name."""
-++		return self._map.get(name, self._default)
-++
-++	def transform_message(self, name, message):
-++		"""Transform the message of the exception."""
-++		prefix = "{}:{}: ".format("GDBus.Error", name)
-++
-++		if message.startswith(prefix):
-++			return message[len(prefix):]
-++
-++		return message
-++
-++	def transform_exception(self, e):
-++		"""Transform the remote error to the exception."""
-++		if not isinstance(e, GLib.Error):
-++			return e
-++
-++		if not Gio.DBusError.is_remote_error(e):
-++			return e
-++
-++		# Get DBus name of the error.
-++		name = Gio.DBusError.get_remote_error(e)
-++		# Get the exception class.
-++		exception_cls = self.get_exception_class(name)
-++
-++		# Return the original exception.
-++		if not exception_cls:
-++			return e
-++
-++		# Return new exception.
-++		message = self.transform_message(name, e.message)
-++		exception = exception_cls(message)
-++		exception.dbus_name = name
-++		exception.dbus_domain = e.domain
-++		exception.dbus_code = e.code
-++		return exception
-++
-++
-++# Default error registration.
-++error_registration = ErrorRegistration()
-+diff --git a/pydbus/proxy_method.py b/pydbus/proxy_method.py
-+index 442fe07..a73f9eb 100644
-+--- a/pydbus/proxy_method.py
-++++ b/pydbus/proxy_method.py
-+@@ -2,6 +2,7 @@ from gi.repository import GLib
-+ from .generic import bound_method
-+ from .identifier import filter_identifier
-+ from .timeout import timeout_to_glib
-++from .error import error_registration
-+ 
-+ try:
-+ 	from inspect import Signature, Parameter
-+@@ -87,9 +88,20 @@ class ProxyMethod(object):
-+ 			call_args += (self._finish_async_call, (callback, callback_args))
-+ 			instance._bus.con.call(*call_args)
-+ 			return None
-++
-+ 		else:
-+-			ret = instance._bus.con.call_sync(*call_args)
-+-			return self._unpack_return(ret)
-++			result = None
-++			error = None
-++
-++			try:
-++				result = instance._bus.con.call_sync(*call_args)
-++			except Exception as e:
-++				error = error_registration.transform_exception(e)
-++
-++			if error:
-++				raise error
-++
-++			return self._unpack_return(result)
-+ 
-+ 	def _unpack_return(self, values):
-+ 		ret = values.unpack()
-+@@ -108,7 +120,7 @@ class ProxyMethod(object):
-+ 			ret = source.call_finish(result)
-+ 			return_args = self._unpack_return(ret)
-+ 		except Exception as err:
-+-			error = err
-++			error = error_registration.transform_exception(err)
-+ 
-+ 		callback, callback_args = user_data
-+ 		callback(*callback_args, returned=return_args, error=error)
-+diff --git a/pydbus/registration.py b/pydbus/registration.py
-+index f531539..1d2cbcb 100644
-+--- a/pydbus/registration.py
-++++ b/pydbus/registration.py
-+@@ -5,6 +5,7 @@ from . import generic
-+ from .exitable import ExitableWithAliases
-+ from functools import partial
-+ from .method_call_context import MethodCallContext
-++from .error import error_registration
-+ import logging
-+ 
-+ try:
-+@@ -91,11 +92,16 @@ class ObjectWrapper(ExitableWithAliases("unwrap")):
-+ 			logger = logging.getLogger(__name__)
-+ 			logger.exception("Exception while handling %s.%s()", interface_name, method_name)
-+ 
-+-			#TODO Think of a better way to translate Python exception types to DBus error types.
-+-			e_type = type(e).__name__
-+-			if not "." in e_type:
-+-				e_type = "unknown." + e_type
-+-			invocation.return_dbus_error(e_type, str(e))
-++			if error_registration.is_registered_exception(e):
-++				name = error_registration.get_dbus_name(e)
-++				invocation.return_dbus_error(name, str(e))
-++			else:
-++				logger.info("name is not registered")
-++				e_type = type(e).__name__
-++				if not "." in e_type:
-++					e_type = "unknown." + e_type
-++
-++				invocation.return_dbus_error(e_type, str(e))
-+ 
-+ 	def Get(self, interface_name, property_name):
-+ 		type = self.readable_properties[interface_name + "." + property_name]
-+diff --git a/tests/error.py b/tests/error.py
-+new file mode 100644
-+index 0000000..3ec507d
-+--- /dev/null
-++++ b/tests/error.py
-+@@ -0,0 +1,67 @@
-++from pydbus.error import ErrorRegistration
-++
-++
-++class ExceptionA(Exception):
-++	pass
-++
-++
-++class ExceptionB(Exception):
-++	pass
-++
-++
-++class ExceptionC(Exception):
-++	pass
-++
-++
-++class ExceptionD(Exception):
-++	pass
-++
-++
-++class ExceptionE(Exception):
-++	pass
-++
-++
-++def test_error_mapping():
-++	r = ErrorRegistration()
-++	r.map_error(ExceptionA, "net.lew21.pydbus.tests.ErrorA")
-++	r.map_error(ExceptionB, "net.lew21.pydbus.tests.ErrorB")
-++	r.map_error(ExceptionC, "net.lew21.pydbus.tests.ErrorC")
-++
-++	assert r.is_registered_exception(ExceptionA("Test"))
-++	assert r.is_registered_exception(ExceptionB("Test"))
-++	assert r.is_registered_exception(ExceptionC("Test"))
-++	assert not r.is_registered_exception(ExceptionD("Test"))
-++	assert not r.is_registered_exception(ExceptionE("Test"))
-++
-++	assert r.get_dbus_name(ExceptionA("Test")) == "net.lew21.pydbus.tests.ErrorA"
-++	assert r.get_dbus_name(ExceptionB("Test")) == "net.lew21.pydbus.tests.ErrorB"
-++	assert r.get_dbus_name(ExceptionC("Test")) == "net.lew21.pydbus.tests.ErrorC"
-++
-++	assert r.get_exception_class("net.lew21.pydbus.tests.ErrorA") == ExceptionA
-++	assert r.get_exception_class("net.lew21.pydbus.tests.ErrorB") == ExceptionB
-++	assert r.get_exception_class("net.lew21.pydbus.tests.ErrorC") == ExceptionC
-++	assert r.get_exception_class("net.lew21.pydbus.tests.ErrorD") is None
-++	assert r.get_exception_class("net.lew21.pydbus.tests.ErrorE") is None
-++
-++	r.map_by_default(ExceptionD)
-++	assert not r.is_registered_exception(ExceptionD("Test"))
-++	assert r.get_exception_class("net.lew21.pydbus.tests.ErrorD") == ExceptionD
-++	assert r.get_exception_class("net.lew21.pydbus.tests.ErrorE") == ExceptionD
-++
-++
-++def test_transform_message():
-++	r = ErrorRegistration()
-++	n1 = "net.lew21.pydbus.tests.ErrorA"
-++	m1 = "GDBus.Error:net.lew21.pydbus.tests.ErrorA: Message1"
-++
-++	n2 = "net.lew21.pydbus.tests.ErrorB"
-++	m2 = "GDBus.Error:net.lew21.pydbus.tests.ErrorB: Message2"
-++
-++	assert r.transform_message(n1, m1) == "Message1"
-++	assert r.transform_message(n2, m2) == "Message2"
-++	assert r.transform_message(n1, m2) == m2
-++	assert r.transform_message(n2, m1) == m1
-++
-++
-++test_error_mapping()
-++test_transform_message()
-+diff --git a/tests/publish_error.py b/tests/publish_error.py
-+new file mode 100644
-+index 0000000..aa8a18a
-+--- /dev/null
-++++ b/tests/publish_error.py
-+@@ -0,0 +1,132 @@
-++import sys
-++from threading import Thread
-++from gi.repository import GLib, Gio
-++from pydbus import SessionBus
-++from pydbus.error import register_error, map_error, map_by_default, error_registration
-++
-++import logging
-++logger = logging.getLogger('pydbus.registration')
-++logger.disabled = True
-++
-++loop = GLib.MainLoop()
-++DOMAIN = Gio.DBusError.quark()  # TODO: Register new domain.
-++
-++
-++@register_error("net.lew21.pydbus.tests.ErrorA", DOMAIN, 1000)
-++class ExceptionA(Exception):
-++	pass
-++
-++
-++@register_error("net.lew21.pydbus.tests.ErrorB", DOMAIN, 2000)
-++class ExceptionB(Exception):
-++	pass
-++
-++
-++@map_error("org.freedesktop.DBus.Error.InvalidArgs")
-++class ExceptionC(Exception):
-++	pass
-++
-++
-++@map_by_default
-++class ExceptionD(Exception):
-++	pass
-++
-++
-++class ExceptionE(Exception):
-++	pass
-++
-++
-++class TestObject(object):
-++	'''
-++<node>
-++	<interface name='net.lew21.pydbus.tests.TestInterface'>
-++		<method name='RaiseA'>
-++			<arg type='s' name='msg' direction='in'/>
-++		</method>
-++		<method name='RaiseB'>
-++			<arg type='s' name='msg' direction='in'/>
-++		</method>
-++		<method name='RaiseD'>
-++			<arg type='s' name='msg' direction='in'/>
-++		</method>
-++		<method name='RaiseE'>
-++			<arg type='s' name='msg' direction='in'/>
-++		</method>
-++	</interface>
-++</node>
-++	'''
-++
-++	def RaiseA(self, msg):
-++		raise ExceptionA(msg)
-++
-++	def RaiseB(self, msg):
-++		raise ExceptionB(msg)
-++
-++	def RaiseD(self, msg):
-++		raise ExceptionD(msg)
-++
-++	def RaiseE(self, msg):
-++		raise ExceptionE(msg)
-++
-++bus = SessionBus()
-++
-++with bus.publish("net.lew21.pydbus.tests.Test", TestObject()):
-++	remote = bus.get("net.lew21.pydbus.tests.Test")
-++
-++	def t_func():
-++		# Test new registered errors.
-++		try:
-++			remote.RaiseA("Test A")
-++		except ExceptionA as e:
-++			assert str(e) == "Test A"
-++
-++		try:
-++			remote.RaiseB("Test B")
-++		except ExceptionB as e:
-++			assert str(e) == "Test B"
-++
-++		# Test mapped errors.
-++		try:
-++			remote.Get("net.lew21.pydbus.tests.TestInterface", "Foo")
-++		except ExceptionC as e:
-++			assert str(e) == "No such property 'Foo'"
-++
-++		# Test default errors.
-++		try:
-++			remote.RaiseD("Test D")
-++		except ExceptionD as e:
-++			assert str(e) == "Test D"
-++
-++		try:
-++			remote.RaiseE("Test E")
-++		except ExceptionD as e:
-++			assert str(e) == "Test E"
-++
-++		# Test with no default errors.
-++		error_registration.map_by_default(None)
-++
-++		try:
-++			remote.RaiseD("Test D")
-++		except Exception as e:
-++			assert not isinstance(e, ExceptionD)
-++
-++		try:
-++			remote.RaiseE("Test E")
-++		except Exception as e:
-++			assert not isinstance(e, ExceptionD)
-++			assert not isinstance(e, ExceptionE)
-++
-++		loop.quit()
-++
-++	t = Thread(None, t_func)
-++	t.daemon = True
-++
-++	def handle_timeout():
-++		print("ERROR: Timeout.")
-++		sys.exit(1)
-++
-++	GLib.timeout_add_seconds(4, handle_timeout)
-++
-++	t.start()
-++	loop.run()
-++	t.join()
-+diff --git a/tests/run.sh b/tests/run.sh
-+index 271c58a..a08baf8 100755
-+--- a/tests/run.sh
-++++ b/tests/run.sh
-+@@ -10,10 +10,11 @@ PYTHON=${1:-python}
-+ 
-+ "$PYTHON" $TESTS_DIR/context.py
-+ "$PYTHON" $TESTS_DIR/identifier.py
-++"$PYTHON" $TESTS_DIR/error.py
-+ if [ "$2" != "dontpublish" ]
-+ then
-+ 	"$PYTHON" $TESTS_DIR/publish.py
-+ 	"$PYTHON" $TESTS_DIR/publish_properties.py
-+ 	"$PYTHON" $TESTS_DIR/publish_multiface.py
-+ 	"$PYTHON" $TESTS_DIR/publish_async.py
-+ fi
-+-- 
-+2.13.5
-diff --git a/meta-python/recipes-devtools/python/python3-pydbus/run-ptest b/meta-python/recipes-devtools/python/python3-pydbus/run-ptest
-new file mode 100644
-index 000000000..782ceed3b
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pydbus/run-ptest
-@@ -0,0 +1,15 @@
-+#!/bin/sh
-+
-+for case in `find tests -type f -name '*.sh'`; do
-+    bash $case python3 >$case.output 2>&1
-+    ret=$?
-+    if [ $ret -ne 0 ]; then
-+        cat $case.output
-+        echo "FAIL: ${case}"
-+    elif grep -i 'SKIP' $case.output; then
-+        echo "SKIP: ${case}"
-+    else
-+        echo "PASS: ${case}"
-+    fi
-+    rm -f $case.output
-+done
-\ No newline at end of file
-diff --git a/meta-python/recipes-devtools/python/python3-pydbus_0.6.0.bb b/meta-python/recipes-devtools/python/python3-pydbus_0.6.0.bb
-new file mode 100644
-index 000000000..ac9b8e8ab
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pydbus_0.6.0.bb
-@@ -0,0 +1,26 @@
-+DESCRIPTION = "Pythonic DBus library"
-+HOMEPAGE = "https://pypi.python.org/pypi/pydbus/"
-+LICENSE = "LGPL-2.1-only"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=a916467b91076e631dd8edb7424769c7"
-+
-+SRCREV = "f2e6355a88351e7d644ccb2b4d67b19305507312"
-+SRC_URI = " \
-+    git://github.com/LEW21/pydbus.git;protocol=https;branch=master \
-+    file://0001-make-direction-attribute-conforming-to-introspect.dt.patch \
-+    file://0002-Support-asynchronous-calls-58.patch \
-+    file://0003-Support-transformation-between-D-Bus-errors-and-exce.patch \
-+    file://run-ptest \
-+"
-+
-+inherit ptest setuptools3
-+
-+S = "${WORKDIR}/git"
-+
-+RDEPENDS:${PN} = "${PYTHON_PN}-pygobject \
-+                  ${PYTHON_PN}-io \
-+                  ${PYTHON_PN}-logging"
-+
-+do_install_ptest() {
-+        install -d ${D}${PTEST_PATH}/tests
-+        cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-+}
-\ No newline at end of file
--- 
-2.34.1
+prevent us from accepting the 7.4 release? I suspect it should but I=20
+need more time to
+read the new terms.
 
+../Randy
+
+
+On 2024-01-30 1:23 p.m., Martin Jansa via lists.openembedded.org wrote:
+> On Tue, Jan 30, 2024 at 6:28=E2=80=AFPM Khem Raj <raj.khem@gmail.com> w=
+rote:
+>
+>     On 1/30/24 2:34 AM, Martin Jansa wrote:
+>     > * accidentally dropped in:
+>     >
+>     https://git.openembedded.org/meta-openembedded/commit/?id=3De91fa66=
+8ed1dd4a3f6b06bcb099f70dbdd2a50b4
+>     > ---
+>     > =C2=A0.../lua-update-Makefile-to-use-environment-build-setting.pa=
+tch
+>     | 2 ++
+>     >=C2=A0 =C2=A01 file changed, 2 insertions(+)
+>     >
+>     > diff --git
+>     a/meta-oe/recipes-extended/redis/redis-7.2.4/lua-update-Makefile-to=
+-use-environment-build-setting.patch
+>     b/meta-oe/recipes-extended/redis/redis-7.2.4/lua-update-Makefile-to=
+-use-environment-build-setting.patch
+>     > index b562e2522c..48a8bb5b4b 100644
+>     > ---
+>     a/meta-oe/recipes-extended/redis/redis-7.2.4/lua-update-Makefile-to=
+-use-environment-build-setting.patch
+>     > +++
+>     b/meta-oe/recipes-extended/redis/redis-7.2.4/lua-update-Makefile-to=
+-use-environment-build-setting.patch
+>     > @@ -16,6 +16,8 @@ updated to work wtih 6.2.1
+>     >=C2=A0 =C2=A0Signed-off-by: Yi Fan Yu <yifan.yu@windriver.com>
+>     >
+>     >=C2=A0 =C2=A0---
+>     > +Upstream-Status: Pending
+>
+>     I think it might be better to move it above the scissor to avoid
+>     getting
+>     lost in next devtool based upgrade.
+>
+>
+> As you wish, resent all 3 as v2 with it moved.
+>
+> FWIW: in=20
+> https://github.com/webosose/meta-webosose/commit/2c78e37ad9ceb9e236c03b=
+44cca5b38e9d9eb2fc=20
+> I've moved all Upstream-Statuses in LGE layers bellow, because too=20
+> often developers applied them with Upstream-Status into the component=20
+> source git repo where it doesn't belong and then it was already too=20
+> late to remove it there (while with Upstream-Status lost in=20
+> rebase/devtool there is still time to get warning from QA check and=20
+> once this check is enabled by default in all the builds it will=20
+> prevent people overlooking this by accident).
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#108499):https://lists.openembedded.org/g/openembedd=
+ed-devel/message/108499
+> Mute This Topic:https://lists.openembedded.org/mt/104051095/3616765
+> Group Owner:openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe:https://lists.openembedded.org/g/openembedded-devel/unsub  =
+[randy.macleod@windriver.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+
+--=20
+# Randy MacLeod
+# Wind River Linux
+
+--------------UeTT4P2B83VXp6QZLK5pb4R4
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 42M0thpk012787
+
+<!DOCTYPE html><html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8">
+  </head>
+  <body>
+    <div class=3D"moz-cite-prefix">Would the new license scheme described
+      here:<br>
+      <br>
+    </div>
+    <div class=3D"moz-cite-prefix"><a class=3D"moz-txt-link-freetext" hre=
+f=3D"https://redis.com/blog/redis-adopts-dual-source-available-licensing/=
+">https://redis.com/blog/redis-adopts-dual-source-available-licensing/</a=
+></div>
+    <div class=3D"moz-cite-prefix"><br>
+    </div>
+    <div class=3D"moz-cite-prefix">prevent us from accepting the 7.4
+      release? I suspect it should but I need more time to <br>
+      read the new terms.<br>
+    </div>
+    <div class=3D"moz-cite-prefix"><br>
+    </div>
+    <div class=3D"moz-cite-prefix">../Randy</div>
+    <div class=3D"moz-cite-prefix"><br>
+    </div>
+    <div class=3D"moz-cite-prefix"><br>
+    </div>
+    <div class=3D"moz-cite-prefix">On 2024-01-30 1:23 p.m., Martin Jansa
+      via lists.openembedded.org wrote:<br>
+    </div>
+    <blockquote type=3D"cite" cite=3D"mid:CA+chaQcHdgbVOORRdeErRXT2FM+7Qc=
+OidaHEanskrqrocFN7xg@mail.gmail.com">
+     =20
+      <div dir=3D"ltr">
+        <div dir=3D"ltr">On Tue, Jan 30, 2024 at 6:28=E2=80=AFPM Khem Raj=
+ &lt;<a href=3D"mailto:raj.khem@gmail.com" moz-do-not-send=3D"true" class=
+=3D"moz-txt-link-freetext">raj.khem@gmail.com</a>&gt;
+          wrote:<br>
+        </div>
+        <div class=3D"gmail_quote">
+          <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0=
+.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">On
+            1/30/24 2:34 AM, Martin Jansa wrote:<br>
+            &gt; * accidentally dropped in:<br>
+            &gt;&nbsp; &nbsp; <a href=3D"https://git.openembedded.org/met=
+a-openembedded/commit/?id=3De91fa668ed1dd4a3f6b06bcb099f70dbdd2a50b4" rel=
+=3D"noreferrer" target=3D"_blank" moz-do-not-send=3D"true" class=3D"moz-t=
+xt-link-freetext">https://git.openembedded.org/meta-openembedded/commit/?=
+id=3De91fa668ed1dd4a3f6b06bcb099f70dbdd2a50b4</a><br>
+            &gt; ---<br>
+            &gt;&nbsp;
+            &nbsp;.../lua-update-Makefile-to-use-environment-build-settin=
+g.patch&nbsp;
+            | 2 ++<br>
+            &gt;&nbsp; &nbsp;1 file changed, 2 insertions(+)<br>
+            &gt; <br>
+            &gt; diff --git
+a/meta-oe/recipes-extended/redis/redis-7.2.4/lua-update-Makefile-to-use-e=
+nvironment-build-setting.patch
+b/meta-oe/recipes-extended/redis/redis-7.2.4/lua-update-Makefile-to-use-e=
+nvironment-build-setting.patch<br>
+            &gt; index b562e2522c..48a8bb5b4b 100644<br>
+            &gt; ---
+a/meta-oe/recipes-extended/redis/redis-7.2.4/lua-update-Makefile-to-use-e=
+nvironment-build-setting.patch<br>
+            &gt; +++
+b/meta-oe/recipes-extended/redis/redis-7.2.4/lua-update-Makefile-to-use-e=
+nvironment-build-setting.patch<br>
+            &gt; @@ -16,6 +16,8 @@ updated to work wtih 6.2.1<br>
+            &gt;&nbsp; &nbsp;Signed-off-by: Yi Fan Yu &lt;<a href=3D"mail=
+to:yifan.yu@windriver.com" target=3D"_blank" moz-do-not-send=3D"true" cla=
+ss=3D"moz-txt-link-freetext">yifan.yu@windriver.com</a>&gt;<br>
+            &gt;&nbsp; &nbsp;<br>
+            &gt;&nbsp; &nbsp;---<br>
+            &gt; +Upstream-Status: Pending<br>
+            <br>
+            I think it might be better to move it above the scissor to
+            avoid getting <br>
+            lost in next devtool based upgrade.<br>
+          </blockquote>
+          <div><br>
+          </div>
+          <div>As you wish, resent all 3 as v2 with it moved.</div>
+          <div><br>
+          </div>
+          <div>FWIW: in&nbsp;<a href=3D"https://github.com/webosose/meta-=
+webosose/commit/2c78e37ad9ceb9e236c03b44cca5b38e9d9eb2fc" moz-do-not-send=
+=3D"true" class=3D"moz-txt-link-freetext">https://github.com/webosose/met=
+a-webosose/commit/2c78e37ad9ceb9e236c03b44cca5b38e9d9eb2fc</a>
+            I've moved all Upstream-Statuses in LGE layers bellow,
+            because too often developers applied them with
+            Upstream-Status into the component source git repo where it
+            doesn't belong and then it was already too late to remove it
+            there (while with Upstream-Status lost in rebase/devtool
+            there is still time to get warning from QA check and once
+            this check is enabled by default in all the builds it will
+            prevent people overlooking this by accident).</div>
+        </div>
+      </div>
+      <br>
+      <fieldset class=3D"moz-mime-attachment-header"></fieldset>
+      <pre class=3D"moz-quote-pre" wrap=3D"">-=3D-=3D-=3D-=3D-=3D-=3D-=3D=
+-=3D-=3D-=3D-=3D-
+Links: You receive all messages sent to this group.
+View/Reply Online (#108499): <a class=3D"moz-txt-link-freetext" href=3D"h=
+ttps://lists.openembedded.org/g/openembedded-devel/message/108499">https:=
+//lists.openembedded.org/g/openembedded-devel/message/108499</a>
+Mute This Topic: <a class=3D"moz-txt-link-freetext" href=3D"https://lists=
+.openembedded.org/mt/104051095/3616765">https://lists.openembedded.org/mt=
+/104051095/3616765</a>
+Group Owner: <a class=3D"moz-txt-link-abbreviated" href=3D"mailto:openemb=
+edded-devel+owner@lists.openembedded.org">openembedded-devel+owner@lists.=
+openembedded.org</a>
+Unsubscribe: <a class=3D"moz-txt-link-freetext" href=3D"https://lists.ope=
+nembedded.org/g/openembedded-devel/unsub">https://lists.openembedded.org/=
+g/openembedded-devel/unsub</a> [<a class=3D"moz-txt-link-abbreviated" hre=
+f=3D"mailto:randy.macleod@windriver.com">randy.macleod@windriver.com</a>]
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+
+</pre>
+    </blockquote>
+    <p><br>
+    </p>
+    <pre class=3D"moz-signature" cols=3D"72">--=20
+# Randy MacLeod
+# Wind River Linux</pre>
+  </body>
+</html>
+
+--------------UeTT4P2B83VXp6QZLK5pb4R4--
 
