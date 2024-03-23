@@ -1,92 +1,141 @@
-Return-Path: <jermain.horsman@nedap.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 85751C54E58
-	for <webhook@archiver.kernel.org>; Sat, 23 Mar 2024 07:59:16 +0000 (UTC)
-Received: from mail-io1-f49.google.com (mail-io1-f49.google.com [209.85.166.49])
- by mx.groups.io with SMTP id smtpd.web10.4836.1711180753484143956
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E4CF5CD11DF
+	for <webhook@archiver.kernel.org>; Sat, 23 Mar 2024 08:41:26 +0000 (UTC)
+Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
+ by mx.groups.io with SMTP id smtpd.web10.5244.1711183282393499526
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 23 Mar 2024 00:59:13 -0700
+ Sat, 23 Mar 2024 01:41:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=UuRh5032;
- spf=pass (domain: gmail.com, ip: 209.85.166.49, mailfrom: jhatnedap@gmail.com)
-Received: by mail-io1-f49.google.com with SMTP id ca18e2360f4ac-7cc77c19a19so120363239f.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 23 Mar 2024 00:59:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1711180752; x=1711785552; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:reply-to:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=Rgc3+gFnw7xDflcrB3OaGXsSh+ivSR0oU+K3HOyJNTc=;
-        b=UuRh5032ciwDbh5aTctsOfv/9YlubjLA9RWbMuOgwiTuqIsJShNVz+FnHZ2Zev7N9L
-         xErh2h1zIwxYy58E8Z8fNccVsjGFsKeaOwTD1UjyWGoQFH1Y/j3vNGFkCz9Kg8kSLuy/
-         nXalOcdFe/D0PQUXFoiy/H6lnxxLfBldKipO+bRQm7IQpqcT1btBmoyoXzic52BrxGh/
-         U6akcW2pBxhDB6XzmtkYldWyo/jZAARNUSxsX+R9ChKUWV/Oqq6ObJrRnunxMfnk//QQ
-         Ui98Ll9tclaqmRj4EzI5rwXTsSEc0CN5yaYHFumBauHQFzxtlo8T0DZxSAZWUmusGtLj
-         J8GQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1711180752; x=1711785552;
-        h=content-transfer-encoding:mime-version:reply-to:message-id:date
-         :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=Rgc3+gFnw7xDflcrB3OaGXsSh+ivSR0oU+K3HOyJNTc=;
-        b=B+65sAy4cKuLJwq2fQhV25Kw3BZ5A7u4TiARqmRsP5DsNSXBfVAmJ+aWZZgTvA1RTW
-         D72IQJuORobiFZHrTzD/atwTwaHAzB0SoBQdyLcjZhUhWNKVxgi8FXl155NvNHS0CLTA
-         4T7cj/JqyEEFd+HB4OoWjDr2UPkwWPv8h2RZLoYaEZjTiaVTJeynfEI18V4f/Fv0Mdp3
-         1AXtqXsZwsiGyabbokQVRaeCY+Rzn6b516RwuZbuqCs3w+V5xAJC3pzEWY+3aKBub0Ak
-         SgQMTDCRQzD93k8VF7z4282oZKbpMRDffhyTcQP8P5T2w0YAtFtxXI05d8BV45a9T3XT
-         Hbvw==
-X-Gm-Message-State: AOJu0YyFJj3vnQtknWqwLKk/LUYeC9UFtjvuNnUaAzZqhx6Tfbs2bb0D
-	LGaZFFh2ywp/sjg3h46wS3NWHjFpoNllRCa/nf05nH60TJIurhcu0s4wpFw0Tz8=
-X-Google-Smtp-Source: AGHT+IHIn3mitrezI2kAIZlRXVAaPcJZsKP3eTPGbymXyBv0nnQuF88JDeah5XZqjC0gJOLilj9jGw==
-X-Received: by 2002:a05:6602:1789:b0:7cf:16d0:44ea with SMTP id y9-20020a056602178900b007cf16d044eamr1843025iox.7.1711180752486;
-        Sat, 23 Mar 2024 00:59:12 -0700 (PDT)
-Received: from NVC4181.nedap.local (187-224-179-143.ftth.glasoperator.nl. [143.179.224.187])
-        by smtp.gmail.com with ESMTPSA id g8-20020a6b7608000000b007cbf94d8698sm1122548iom.4.2024.03.23.00.59.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 23 Mar 2024 00:59:12 -0700 (PDT)
-From: jhatnedap@gmail.com
-X-Google-Original-From: jermain.horsman@nedap.com
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
+Received: from fwd75.aul.t-online.de (fwd75.aul.t-online.de [10.223.144.101])
+	by mailout03.t-online.de (Postfix) with SMTP id 4E60C5AAC3
+	for <openembedded-devel@lists.openembedded.org>; Sat, 23 Mar 2024 09:41:18 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.154.167.162]) by fwd75.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1rnwwE-1MMRGl0; Sat, 23 Mar 2024 09:41:14 +0100
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jermain Horsman <jermain.horsman@nedap.com>
-Subject: [meta-java][PATCH] xom: Update github SRC_URI
-Date: Sat, 23 Mar 2024 08:58:50 +0100
-Message-ID: <20240323075850.453-1-jermain.horsman@nedap.com>
-X-Mailer: git-send-email 2.43.0.windows.1
-Reply-To: jermain.horsman@nedap.com
+Subject: [meta-gnome][PATCH 11/13] gnome-shell-extensions: update 45.2 -> 46.0
+Date: Sat, 23 Mar 2024 09:41:36 +0100
+Message-ID: <20240323084138.178281-11-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.44.0
+In-Reply-To: <20240323084138.178281-1-f_l_k@t-online.de>
+References: <20240323084138.178281-1-f_l_k@t-online.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=UTF-8
+X-TOI-EXPURGATEID: 150726::1711183274-0CA7E850-89752E9D/0/0 CLEAN NORMAL
+X-TOI-MSGID: 58d77cf0-3138-4676-b9d6-f5a353db127d
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 23 Mar 2024 07:59:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109531
+ <openembedded-devel@lists.openembedded.org>; Sat, 23 Mar 2024 08:41:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109542
 
-From: Jermain Horsman <jermain.horsman@nedap.com>
+46.0
+=3D=3D=3D=3D
+* system-monitor: Fix net speed [Florian; !313]
+* Misc. bug fixes and cleanups [Aral; !311]
 
-This prevents warnings about:
-- git protocol which is no longer supported by github
-- branch parameter not being set
+Contributors:
+  Aral Balkan, Florian M=C3=BCllner
 
-Signed-off-by: Jermain Horsman <jermain.horsman@nedap.com>
+Translators:
+  Anders Jonsson [sv], Piotr Dr=C4=85g [pl], Bal=C3=A1zs =C3=9Ar [hu], Mi=
+lo Casagrande [it],
+  Quentin PAG=C3=88S [oc], Athmane MOKRAOUI [kab], Changwoo Ryu [ko],
+  Ask Hjorth Larsen [da]
+
+46.rc
+=3D=3D=3D=3D=3D
+* Fix window previews in workspace indicator [Florian; !304]
+* Fix menu ornament in workspace indicator [Florian; !305]
+* Misc. bug fixes and cleanups [Florian; !306, !309]
+
+Contributors:
+  Florian M=C3=BCllner
+
+Translators:
+  Danial Behzadi [fa], Ekaterine Papava [ka], Sabri =C3=9Cnal [tr], Artur=
+ S0 [ru],
+  Yuri Chornoivan [uk], Vasil Pupkin [be], Asier Sarasua Garmendia [eu],
+  Yaron Shahrabani [he], Brage Fuglseth [nb], Nathan Follens [nl],
+  Aurimas =C4=8Cernius [lt], Matej Urban=C4=8Di=C4=8D [sl], Boyuan Yang [=
+zh_CN],
+  Kukuh Syafaat [id], Fran Dieguez [gl], Andi Chandler [en_GB],
+  Baurzhan Muftakhidinov [kk], R=C5=ABdolfs Mazurs [lv], Guillaume Bernar=
+d [fr],
+  Daniel Mustieles [es], Jiri Gr=C3=B6nroos [fi]
+
+46.beta
+=3D=3D=3D=3D=3D=3D=3D
+* apps-menu: Rename Applications to Apps [Allan; !299]
+* Misc. bug fixes and cleanups [Florian; !296, !297, !300, !301, !302]
+
+Contributors:
+  Allan Day, Florian M=C3=BCllner
+
+Translators:
+  Gabriel Brand [de], Daniel Rusek [cs], Fran Dieguez [gl],
+  Aefgh Threenine [th], Vasil Pupkin [be], Artur S0 [ru], Yosef Or Boczko=
+ [he],
+  Sabri =C3=9Cnal [tr]
+
+46.alpha
+=3D=3D=3D=3D=3D=3D=3D=3D
+* workspace-indicator: Fix initial preview visibility [Florian; !280, !29=
+2]
+* screenshot-window-sizer: Fix cycling between sizes backwards [Florian; =
+!284]
+* Add back overview in Classic session [Florian; !287]
+* Allow running Classic session headless [Jonas; !289]
+* window-list: Fix buttons not being clickable at the screen edge
+  [Florian; !291]
+* Add system-monitor extension [Florian; !277]
+* Fixed crash [Florian; !290]
+* Misc. bug fixes and cleanups [Florian; !276, !275, !278, !281, !286, !2=
+88]
+
+Contributors:
+  Jonas =C3=85dahl, Florian M=C3=BCllner
+
+Translators:
+  Kristjan SCHMIDT [eo], Brage Fuglseth [nb]
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- recipes-core/xml-commons/xom_1.2.10.bb | 2 +-
+ ...-shell-extensions_45.2.bb =3D> gnome-shell-extensions_46.0.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/gnome-shell/{gnome-shell-extensions_45.2=
+.bb =3D> gnome-shell-extensions_46.0.bb} (84%)
 
-diff --git a/recipes-core/xml-commons/xom_1.2.10.bb b/recipes-core/xml-commons/xom_1.2.10.bb
-index 42ad957..9b09e4d 100644
---- a/recipes-core/xml-commons/xom_1.2.10.bb
-+++ b/recipes-core/xml-commons/xom_1.2.10.bb
-@@ -14,7 +14,7 @@ PV_jaxen = "1.1.6"
- 
- SRC_URI = "\
- 	http://www.cafeconleche.org/XOM/${P}-src.tar.gz;name=archive \
--	git://github.com/codehaus/${SRCNAME_jaxen};name=jaxen \
-+	git://github.com/codehaus/${SRCNAME_jaxen};name=jaxen;branch=master;protocol=https \
- 	file://04_remove_sun_import.patch \
- "
- SRC_URI[archive.md5sum] = "9f3a2ae827a9f6826fe76e4b7b0c22b3"
--- 
-2.43.0.windows.1
+diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_=
+45.2.bb b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_46.=
+0.bb
+similarity index 84%
+rename from meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_4=
+5.2.bb
+rename to meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_46.=
+0.bb
+index 49cd6b810..eff5fecff 100644
+--- a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_45.2.bb
++++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_46.0.bb
+@@ -6,7 +6,7 @@ inherit gnomebase gettext gsettings features_check
+=20
+ REQUIRED_DISTRO_FEATURES =3D "x11 polkit systemd pam gobject-introspecti=
+on-data"
+=20
+-SRC_URI[archive.sha256sum] =3D "ee32f6387a2d18adbff7a956689bc747866b4a87=
+12d73790c002abeae4ccaaaf"
++SRC_URI[archive.sha256sum] =3D "d8138f88cd92df9f932309149c236fbdd77c1bc0=
+95445036ab7eb0ecda53c01a"
+=20
+ EXTRA_OEMESON +=3D " \
+     -Dextension_set=3Dall \
+--=20
+2.44.0
 
 
