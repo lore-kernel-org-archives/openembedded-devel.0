@@ -1,149 +1,131 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 81F50C54E64
-	for <webhook@archiver.kernel.org>; Mon, 25 Mar 2024 15:36:43 +0000 (UTC)
-Received: from mail-oi1-f169.google.com (mail-oi1-f169.google.com [209.85.167.169])
- by mx.groups.io with SMTP id smtpd.web10.55629.1711380998148618495
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7DD47C54E64
+	for <webhook@archiver.kernel.org>; Mon, 25 Mar 2024 15:57:43 +0000 (UTC)
+Received: from mail-yw1-f179.google.com (mail-yw1-f179.google.com [209.85.128.179])
+ by mx.groups.io with SMTP id smtpd.web11.56131.1711382253480556489
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Mar 2024 08:36:38 -0700
+ Mon, 25 Mar 2024 08:57:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=GnY47BlE;
- spf=pass (domain: gmail.com, ip: 209.85.167.169, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f169.google.com with SMTP id 5614622812f47-3c3ac720bceso2727048b6e.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 08:36:38 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=eL+nYvuP;
+ spf=pass (domain: gmail.com, ip: 209.85.128.179, mailfrom: ticotimo@gmail.com)
+Received: by mail-yw1-f179.google.com with SMTP id 00721157ae682-60a434ea806so48921837b3.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 08:57:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1711380997; x=1711985797; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=tnjQPFZU2TyvMfb+h2hInQjIWepb0CS1SA1r15MufLY=;
-        b=GnY47BlEfzgaBvVubTzA2s7yw2jA96x85tNbZq8XW3phwiIdH2edJ8A3eUbVwYXQ3d
-         XOLbokFhJIXPAHdg3wKw4s60bN9SEZbvqNkEsor9wFN6vcePi1tIGb7RAE052DI/KMOd
-         5/qZ0zrUsvV79VFvn/LdLrYXMDPfEmT4/7AMvbjV/XgJmPHOh5JcK+P/vigbSNmy4kfC
-         zSYmUVs6vxEUmWYx4xIviG7O6M9wHfeIw4s+lrDOpTgmwtjYhKjtd8Spmpqf8g6DVqPO
-         uWMGcq1jaz4fi31ZJ5myp4Erdl0QyO2C6583i+p/9HbjpY9Bb5sbA9dTum0Tx+eqrLRs
-         5hng==
+        d=gmail.com; s=20230601; t=1711382252; x=1711987052; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=i7Mj00PD7E5jlg7eNmieGkiBGEGPCKH45n0d9IkdoXQ=;
+        b=eL+nYvuPrBZ7jxGtDxnakMzYPpyGCsnLhao546XjMYx3mGogDz8nSQ23pZhSvWjiWx
+         qtFHNsAx/XMT/f9awqWPOxNDzB8uQbywjk0sMaynjI01BaABMamB+/FJvPPtIZifY4Ch
+         jQaIyV3ESbitXXqkjywTUCCe2LZ8foUCovh2ieEDIsXHJ3u1eH2ZckHObYQ+iJsezB8O
+         pUYkeC5FQ5LYdxVHGxdQmYpYrSdszU6VuDI2SwIWNkXDkH3+kbuOCn8iAAwL9UvIhj+p
+         DDi7cehkFlSQ/uTLTRG0Tk3uzeRNpvxsqOpzvZgwv7j+vAuTwCsY8FF4QtAOqr9PHD+J
+         cicw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1711380997; x=1711985797;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=tnjQPFZU2TyvMfb+h2hInQjIWepb0CS1SA1r15MufLY=;
-        b=AO1qWkW//nzVH1tK5jpwI0gbHrBqyTr+6V19HZe1hYki3KZx5cqj8sAF6Lg1pURi0Q
-         hwk9/3/4zeux08siCc1CU+X2+lTnoKDk+xkM+sOVvvIXaarZdIa9I7ELq2hosTrJqZWT
-         iPlGHoXRJbQaDU50KkCRzgl5qg4YPp0oTKrEk1kfP1HVDbQctTjt8G5OlCA2k7FyDsgv
-         RJcWvGA+7NDtsSCZ41xF1oJu3QnwMmxcLdQzwZY6HSpFAfjqzXahOr7acnno7n8JHfF5
-         ituCqoATtZK4M97k6P0ZUE1a9XYc/27EKw7zCoC1BYbZN9cA5ivho49E1N65Z/WqkPuE
-         b5EQ==
-X-Gm-Message-State: AOJu0Yw569rOeUC4dQ0RYdksB4t3bGzi7ZOSm4ccZY36+s42RXMPgLaC
-	0V1zKtjoZYeteky1AYLBLs1W5rG1ztR9T0UdHiP2XqT/Uyt4tc/G/IURABYQa3tYCZ8yV/+fc0V
-	wz4O88F18Skq1afe+eZL6EyifBOY=
-X-Google-Smtp-Source: AGHT+IFG+UCkDaaCVVba4XNseKTcq0INrK71XUrS7s+74WQoBuKbKiyp4rW6Pa+aT3+BG8wHbE+/puFfzMc7RWC/j/E=
-X-Received: by 2002:a05:6870:7252:b0:220:a0b0:6d4a with SMTP id
- y18-20020a056870725200b00220a0b06d4amr8651287oaf.57.1711380997336; Mon, 25
- Mar 2024 08:36:37 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1711382252; x=1711987052;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=i7Mj00PD7E5jlg7eNmieGkiBGEGPCKH45n0d9IkdoXQ=;
+        b=WiDA0GygTx88TugEzSKB9qjScJHKuJt0zfDq7ZV2pPHlRiLhg9xazIvCGG9LKtW3kh
+         H4b4WkXATGDC/ujteXaKcvkPE8IuNEQwBKeNCq6VsZcv/VQUtCIrWoOjCJKO8pG2M0f8
+         CtqFlc8HPYyqSXvgdY9lgJ80FgW7bnAgYBZsfVjupSKUA7aVn+ptUOmJy1DHhCKDEJAR
+         DeqrISsaTiyHSFow5Hzp1WdjjS/IKb0eblnhxEhPLfE05atV1+uNHsG9YN9L6cYLmam7
+         hU7JuThJWN7BvRUwwuR1m9GC4c+M8mpQHCkMejBaeRMRZObvy0ApVO68YlBaLmcq0g0H
+         B+Wg==
+X-Forwarded-Encrypted: i=1; AJvYcCWU9vgTIBdXSRHBWA7Hw+t/Q9nDiSD+jIQYkrR+O1cFPF5z8HB2BuWdQs/NAtQD8jSJ0Aht99perNcxcT4zEfd4yEirvLmohv53z1aII2WrnE8+DN37d+fPFQ==
+X-Gm-Message-State: AOJu0YyOW1Z8TTPcI2ZgFWPnzVW93F8WOYyGupT3OOmuFbo4lhdQtmc9
+	APWMxq5Wf+qMJTYyofPKMTi3E5etUS8zFwbRkdSWWVhWrfmA9Y6lyDNr/3fFbNdKE8HOd8CMxEA
+	RHoUYnje+RmX71FXss7exfdGKASA=
+X-Google-Smtp-Source: AGHT+IFxSnHJ4pB3TkM7iuskEl5FqWWmwMnZjUWK4q2k1a3IoneX2pFZDbUSzo+Ie3Zy/6GCAVnuaF0nQwnos2MoO/k=
+X-Received: by 2002:a0d:c487:0:b0:60a:67fb:146 with SMTP id
+ g129-20020a0dc487000000b0060a67fb0146mr6899954ywd.17.1711382252657; Mon, 25
+ Mar 2024 08:57:32 -0700 (PDT)
 MIME-Version: 1.0
-References: <4d9e595a-b765-4364-b92c-18deebdc7ce0@gmail.com>
-In-Reply-To: <4d9e595a-b765-4364-b92c-18deebdc7ce0@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 25 Mar 2024 08:36:10 -0700
-Message-ID: <CAMKF1sqgkN0OFs4LwwC57=_GDDr+zJ+We_mgyy4y4DfUxK45Yw@mail.gmail.com>
-Subject: Re: kirkstone merge request: Marck 25th
-To: akuster808 <akuster808@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+References: <20230609144646.1977-1-jermain.horsman@nedap.com>
+ <20230609144646.1977-3-jermain.horsman@nedap.com> <CANx9H-DSMeHjAyVTeLKzPCxEd9UASas5nO4tdctN7H2HTeFERg@mail.gmail.com>
+ <VI1PR10MB3182BB9126E26C25D17EEB72F7362@VI1PR10MB3182.EURPRD10.PROD.OUTLOOK.COM>
+In-Reply-To: <VI1PR10MB3182BB9126E26C25D17EEB72F7362@VI1PR10MB3182.EURPRD10.PROD.OUTLOOK.COM>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Mon, 25 Mar 2024 08:57:21 -0700
+Message-ID: <CANx9H-B5ZttP=mhRvJh8JHTMnhzBiEb4cqGFgx7jEWrG=o3O+A@mail.gmail.com>
+Subject: Re: [oe] [meta-java][PATCH 3/3] rxtx: Remove obsolete rename of libtool
+To: Jermain Horsman <jermain.horsman@nedap.com>
+Cc: "henning@itconsulting-heinold.de" <henning@itconsulting-heinold.de>, 
+	"openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>, 
+	"otavio@ossystems.com.br" <otavio@ossystems.com.br>, 
+	"richard.leitner@skidata.com" <richard.leitner@skidata.com>
+Content-Type: multipart/alternative; boundary="0000000000003ea41206147e3bb8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 15:36:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109593
+ <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 15:57:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109594
 
-merged thanks Armin
+--0000000000003ea41206147e3bb8
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Mar 25, 2024 at 4:14=E2=80=AFAM akuster808 <akuster808@gmail.com> w=
-rote:
+On Mon, Mar 25, 2024 at 3:40=E2=80=AFAM Jermain Horsman <jermain.horsman@ne=
+dap.com>
+wrote:
+
+> > Still seeing a do_compile failure (attached)
 >
-> The following changes since commit fda737ec0cc1d2a5217548a560074a8e4d5ec5=
-80:
+> I believe this is caused by sstate being incorrect,
+> If you do a clean build this should not happen.
 >
->    mbedtls: Upgrade 3.5.0 -> 3.5.2 (2024-02-28 08:18:18 -0500)
+> > Can you investigate and send a revised solution?
 >
-> are available in the Git repository at:
+> I could increase the PR, I believe that should prevent the issue.
+> Would that be acceptable?
+
+
+Ah. Good points/ideas. Let me test that after my current build/test run
+completes.
+
+I=E2=80=99ll just add the PR bump to this commit.
+
+
 >
->    https://git.openembedded.org/meta-openembedded kirkstone-next
+> Sincerely,
 >
-> for you to fetch changes up to 8bb16533532b6abc2eded7d9961ab2a108fd7a5b:
+> Jermain Horsman
 >
->    dnsmasq: Upgrade 2.87 -> 2.90 (2024-03-25 07:11:05 -0400)
->
-> ----------------------------------------------------------------
-> Anuj Mittal (1):
->        opencv: fix reproducibility issues
->
-> Soumya Sambu (4):
->        openvpn: ignore CVE-2023-7235
->        postgresql: Upgrade to 14.11
->        unixodbc: Fix CVE-2024-1013
->        dnsmasq: Upgrade 2.87 -> 2.90
->
-> Vivek Kumbhar (1):
->        openjpeg: Backport fix CVE-2021-3575
->
-> Yogita Urade (1):
->        c-ares: fix CVE-2024-25629
->
->   meta-networking/recipes-support/dnsmasq/dnsmasq.inc             | 1 -
->   meta-networking/recipes-support/dnsmasq/dnsmasq/lua.patch       | 31 --=
--
->   meta-networking/recipes-support/dnsmasq/dnsmasq_2.87.bb         | 7 -
->   meta-networking/recipes-support/dnsmasq/dnsmasq_2.90.bb         | 3 +
->   .../recipes-support/dnsmasq/files/CVE-2023-28450.patch          | 48 --=
----
->   meta-networking/recipes-support/openvpn/openvpn_2.5.6.bb        | 3 +
->   .../0001-configure.ac-bypass-autoconf-2.69-version-check.patch  | 6 +-
->   meta-oe/recipes-dbs/postgresql/files/CVE-2023-5868.patch        | 125
-> ------------
->   meta-oe/recipes-dbs/postgresql/files/CVE-2023-5869.patch        | 294
-> ----------------------------
->   meta-oe/recipes-dbs/postgresql/files/CVE-2023-5870.patch        | 108
-> ----------
->   .../postgresql/{postgresql_14.9.bb =3D> postgresql_14.11.bb} |   7 +-
->   meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2021-3575.patch  | 45 ++=
-+++
->   meta-oe/recipes-graphics/openjpeg/openjpeg_2.4.0.bb             | 1 +
->   meta-oe/recipes-support/c-ares/c-ares/CVE-2024-25629.patch      | 34 ++=
-++
->   meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb                 | 1 +
->   meta-oe/recipes-support/opencv/opencv_4.5.5.bb                  | 34 ++=
---
->   meta-oe/recipes-support/unixodbc/files/CVE-2024-1013.patch      | 53 ++=
-+++
->   meta-oe/recipes-support/unixodbc/unixodbc_2.3.9.bb              | 1 +
->   18 files changed, 163 insertions(+), 639 deletions(-)
->   delete mode 100644
-> meta-networking/recipes-support/dnsmasq/dnsmasq/lua.patch
->   delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.87=
-.bb
->   create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.90=
-.bb
->   delete mode 100644
-> meta-networking/recipes-support/dnsmasq/files/CVE-2023-28450.patch
->   delete mode 100644
-> meta-oe/recipes-dbs/postgresql/files/CVE-2023-5868.patch
->   delete mode 100644
-> meta-oe/recipes-dbs/postgresql/files/CVE-2023-5869.patch
->   delete mode 100644
-> meta-oe/recipes-dbs/postgresql/files/CVE-2023-5870.patch
->   rename meta-oe/recipes-dbs/postgresql/{postgresql_14.9.bb =3D>
-> postgresql_14.11.bb} (61%)
->   create mode 100644
-> meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2021-3575.patch
->   create mode 100644
-> meta-oe/recipes-support/c-ares/c-ares/CVE-2024-25629.patch
->   create mode 100644
-> meta-oe/recipes-support/unixodbc/files/CVE-2024-1013.patch
->
+
+--0000000000003ea41206147e3bb8
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Mon, Mar 25, 2024 at 3:40=E2=80=AFAM Jermain Horsman &lt=
+;<a href=3D"mailto:jermain.horsman@nedap.com">jermain.horsman@nedap.com</a>=
+&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px =
+0px 0px 0.8ex;border-left-width:1px;border-left-style:solid;padding-left:1e=
+x;border-left-color:rgb(204,204,204)">&gt; Still seeing a do_compile failur=
+e (attached)<br>
+<br>
+I believe this is caused by sstate being incorrect,<br>
+If you do a clean build this should not happen.<br>
+<br>
+&gt; Can you investigate and send a revised solution?<br>
+<br>
+I could increase the PR, I believe that should prevent the issue.<br>
+Would that be acceptable?</blockquote><div dir=3D"auto"><br></div><div dir=
+=3D"auto">Ah. Good points/ideas. Let me test that after my current build/te=
+st run completes.</div><div dir=3D"auto"><br></div><div dir=3D"auto">I=E2=
+=80=99ll just add the PR bump to this commit.</div><div dir=3D"auto"><br></=
+div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bor=
+der-left-width:1px;border-left-style:solid;padding-left:1ex;border-left-col=
+or:rgb(204,204,204)" dir=3D"auto"><br>
+<br>
+Sincerely,<br>
+<br>
+Jermain Horsman<br>
+</blockquote></div></div>
+
+--0000000000003ea41206147e3bb8--
 
