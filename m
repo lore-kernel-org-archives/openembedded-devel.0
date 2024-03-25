@@ -1,203 +1,224 @@
-Return-Path: <sjolley.yp.pm@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D848CD11DC
-	for <webhook@archiver.kernel.org>; Mon, 25 Mar 2024 20:47:32 +0000 (UTC)
-Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
- by mx.groups.io with SMTP id smtpd.web10.2907.1711399648256264303
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A70DC54E58
+	for <webhook@archiver.kernel.org>; Mon, 25 Mar 2024 21:14:52 +0000 (UTC)
+Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
+ by mx.groups.io with SMTP id smtpd.web10.3612.1711401283835242024
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Mar 2024 13:47:28 -0700
+ Mon, 25 Mar 2024 14:14:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=b4U4itdR;
- spf=pass (domain: gmail.com, ip: 209.85.218.42, mailfrom: sjolley.yp.pm@gmail.com)
-Received: by mail-ej1-f42.google.com with SMTP id a640c23a62f3a-a46dd7b4bcbso584708866b.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 13:47:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1711399646; x=1712004446; darn=lists.openembedded.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=0Ds9Y3PGkheywlc2gLvUfFD9DG6BMs71jqnzNvW9J4I=;
-        b=b4U4itdRp07dz3b0FpgtbybljDyuynKVWtVFxkMPtfxUu8rapzruT4n32bfwnWJjau
-         1OBi66Tp7WZKfuPBLNb5LuZSST/T3j0aRKqPCRmePtf1FneeqHZjTC6pPwThivJdaLr7
-         srrRppygs0v+nCHUYov9vcEhxGpNtc+DHYU/dVuStN5+9gAct6gJb93sCjNvnC2JDGOC
-         xbd6IOsoocV2pwbDyX/gzhbZERdMdUjHDUJr3ejWYJZirEfETCWBMkm+iUZDbgRBPIFC
-         N+w9k3OomtpAYBpN+K51RlD4QDsxvI5bgTmz5cl+5biWwO8pp2xwQ+xhBgqNjvAotNWA
-         NCFA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1711399646; x=1712004446;
-        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=0Ds9Y3PGkheywlc2gLvUfFD9DG6BMs71jqnzNvW9J4I=;
-        b=VmkE6yoe8RPuDg1eCINLfIFODuTIdmIXgbuUHjp6MiWknY6qA95etX570VatlQyPxI
-         hyivlAYcYcs6PoCFgR0F9Wy3c1KSzcJY23LHEzUHCNQKA02HUeqbCD3N/dupm0tFDzgs
-         jkd741pdz6JJzWxP2GZAx5vHE9HQEFjr1a7V6MrGguIP5SAMcYLCcunAfGT+YaW46Wt3
-         +gc7vHhuSTN8dUZ/uVe/laMlkSjXJ7VcfO/DU4Qh8VMty9ydpguVgMrz/Tjf7BtkQvrh
-         aQBMPn5y2diGZ1Ld/V6rxeJwa+X7D10O0C3apERWCUTpHe+mM+r1EIFB/uow5Ftf2gCF
-         Yx7w==
-X-Gm-Message-State: AOJu0YzUpdwiOxk1MYhFge0jErBuVp5cJB8rCF7PP9AozwdP3o8bPQ6Y
-	bHTdC579TLpWPrRTg57VfLuXU8SlLFecVPjmveJ/CVcQiKLMO3xCxZksiE7xXtlEx3Pkrmcz0eC
-	KwwDII93WL5h+U3Mr1ucx58vx2zv3wm29dVI=
-X-Google-Smtp-Source: AGHT+IGhdBiDd1syU3qBSLTrinqJhl2NCPKogfpbaR7U0tzyYtCIzn1sa5rXWrdqyNcslpxixL1lSQ35CKeCUwh7j9Y=
-X-Received: by 2002:a17:906:c003:b0:a45:b91f:2f95 with SMTP id
- e3-20020a170906c00300b00a45b91f2f95mr5005892ejz.72.1711399645975; Mon, 25 Mar
- 2024 13:47:25 -0700 (PDT)
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
+Received: from fwd78.aul.t-online.de (fwd78.aul.t-online.de [10.223.144.104])
+	by mailout05.t-online.de (Postfix) with SMTP id 2CD1E2DD0
+	for <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 22:14:21 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.163.34.236]) by fwd78.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1rore8-0pBZRJ0; Mon, 25 Mar 2024 22:14:20 +0100
+From: Markus Volk <f_l_k@t-online.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-gnome][PATCH] file-roller: update 43.1 -> 44.0
+Date: Mon, 25 Mar 2024 22:14:42 +0100
+Message-ID: <20240325211442.15463-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
-From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
-Date: Mon, 25 Mar 2024 13:47:16 -0700
-Message-ID: <CAK5yBb-SU2r+NrhoQ2GEVVLahVimL7KwFOY2quVavPWCE-L_gQ@mail.gmail.com>
-Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
-To: openembedded-devel@lists.openembedded.org, 
-	Yocto-mailing-list <yocto@lists.yoctoproject.org>
-Content-Type: multipart/alternative; boundary="000000000000f79eb3061482470a"
+Content-Type: text/plain; charset=UTF-8
+X-TOI-EXPURGATEID: 150726::1711401260-5DF5F979-B679CF54/0/0 CLEAN NORMAL
+X-TOI-MSGID: 259dda99-ada7-4973-95bf-a50f5af1a081
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 20:47:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109608
+ <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 21:14:52 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109609
 
---000000000000f79eb3061482470a
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+- file-roller was ported to gtk4
+- use the git fetcher because there is not (yet?) a tarball release
 
-All,
+Version 44
+~~~~~~~~~~
+Released: 2024-03-24
 
-The triage team is starting to try and collect up and classify bugs which a
-newcomer to the project would be able to work on in a way which means
-people can find them. They're being listed on the triage page under the
-appropriate heading:
-https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
-review:
-https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
-how to create a bugzilla account at:
-https://bugzilla.yoctoproject.org/createaccount.cgi
+Bugfixes:
+ * Fixes compilation when native app chooser is disabled
+   (Amin Bandali) (!227)
 
-The idea is these bugs should be straight forward for a person to help work
-on who doesn't have deep experience with the project. If anyone can help,
-please take ownership of the bug and send patches! If anyone needs
-help/advice there are people on irc who can likely do so, or some of the
-more experienced contributors will likely be happy to help too.
+Translations:
+ * French - France (Jean-Marc Tissi=C3=A8res)
+ * Hungarian (Bal=C3=A1zs =C3=9Ar)
+ * Kabyle (ButterflyOfFire)
+ * Slovenian (Martin Srebotnjak)
 
-Also, the triage team meets weekly and does its best to handle the bugs
-reported into the Bugzilla. The number of people attending that meeting has
-fallen, as have the number of people available to help fix bugs. One of the
-things we hear users report is they don't know how to help. We (the triage
-team) are therefore going to start reporting out the currently 411
-unassigned or newcomer bugs.
+Version 44.beta
+~~~~~~~~~~~~~~~
+Released: 2024-03-10
 
-We're hoping people may be able to spare some time now and again to help
-out with these. Bugs are split into two types, "true bugs" where things
-don't work as they should and "enhancements" which are features we'd want
-to add to the system. There are also roughly four different "priority"
-classes right now, =E2=80=9C5.0=E2=80=9D, =E2=80=9C5.1=E2=80=9D, "5.99" and=
- "Future", the more
-pressing/urgent issues being in "5.0" and then =E2=80=9C5.1=E2=80=9D.
+Bugfixes:
+ * window: Fix incompatible pointer types (David King) (!225)
+ * appdata: Fix reverse DNS developer id (Maximiliano Sandoval)
 
-Please review this link and if a bug is something you would be able to help
-with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
-an e-mail with the bug number you would like and I will assign it to you
-(please make sure you have a Bugzilla account). The list is at:
-https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
-r_Bugs
+Translations:
+ * Catalan (Jordi Mas i Hern=C3=A0ndez)
+ * Kazakh (Baurzhan Muftakhidinov)
+ * Latvian (R=C5=ABdolfs Mazurs)
 
-Thanks,
+Version 44.alpha
+~~~~~~~~~~~~~~~~
+Released: 2024-02-18
 
+Features:
+ * Ported to GTK4
 
+Bugfixes:
+ * Fixed filenames when opening from google-drive. (FeRD (Frank Dana)) (!=
+212)
+ * Disable broken deb package support. (Bastien Nocera) (!14)
+ * properties.ui: fixed typo (!215)
+ * new-archive-dialog: fixed untranslatable row name (!213)
+ * Retire AppMenu and remove redundant codes. (Sabri =C3=9Cnal) (!63)
+ * appdata: file-roller is no longer default in GNOME (Anders Jonsson)
+   (!210)
+ * Redo the headerbar button tooltips to follow the GNOME HIG recommendat=
+ions.
+   (Jake Dane) (!189)
+ * doap: Remove rdf resource (Maximiliano Sandoval R) (!35)
 
-*Stephen K. Jolley*
+Translations:
+ * Abkhazian (=D0=9D=D0=B0=D0=BD=D0=B1=D0=B0 =D0=9D=D0=B0=D0=B0=D0=BB=D0=B0=
+)
+ * Basque (Asier Sarasua Garmendia)
+ * Belarusian (Yuras Shumovich)
+ * Catalan (Jordi Mas i Hern=C3=A0ndez)
+ * Chinese (Traditional) <http://darkbear.mercusysddns.com/ (Cheng-Chia
+   Tseng)
+ * Chinese - China (lumingzh)
+ * Danish (Alan Mortensen)
+ * Deutsch (J=C3=BCrgen Benvenuti)
+ * Dutch (Nathan Follens)
+ * Friulian (Fabio Tomat)
+ * Galician (Fran Dieguez)
+ * Georgian (Ekaterine Papava)
+ * Hebrew (Yosef Or Boczko)
+ * Hungarian (Bal=C3=A1zs =C3=9Ar)
+ * Icelandic (Sveinn =C3=AD Felli)
+ * IE (OIS)
+ * Indonesian (Kukuh Syafaat)
+ * Kazakh (Baurzhan Muftakhidinov)
+ * Nepali (Pawan Chitrakar)
+ * Persian (Danial Behzadi)
+ * Polish (Piotr Dr=C4=85g)
+ * Romanian (Florentina Mu=C8=99at)
+ * Slovak (Du=C5=A1an Kazik)
+ * Slovenian (Martin Srebotnjak)
+ * Spanish - Spain (Daniel Mustieles)
+ * suomi (Jiri Gr=C3=B6nroos)
+ * Swedish (Anders Jonsson)
+ * Turkish (Sabri =C3=9Cnal)
+ * Ukrainian (Yuri Chornoivan)
+ * Vietnamese (Tr=E1=BA=A7n Ng=E1=BB=8Dc Qu=C3=A2n)
+ * =C4=8De=C5=A1tina (Daniel Rusek)
+ * =CE=95=CE=BB=CE=BB=CE=B7=CE=BD=CE=B9=CE=BA=CE=AC (Efstathios Iosifidis=
+)
+ * =D0=A0=D1=83=D1=81=D1=81=D0=BA=D0=B8=D0=B9 (Ser82-png)
 
-*Yocto Project Program Manager*
+Help translations:
+ * Chinese (China) (Boyuan Yang)
+ * Galician <Proxecto Trasno (Fran Dieguez)
+ * Polish (Piotr Dr=C4=85g)
+ * Swedish (Anders Jonsson)
+ * Turkish (Sabri =C3=9Cnal)
+ * Ukrainian (Yuri Chornoivan)
+ * =D1=80=D1=83=D1=81=D1=81=D0=BA=D0=B8=D0=B9 (Ser82-png)
 
-(    *Cell*:                (208) 244-4460
+Version 43.0
+----------------
+Released: 2022-09-17
 
-* *Email*:                 *s
-<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
-*
+New features and user visible changes:
 
---000000000000f79eb3061482470a
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+- Add read-only support for Apple=E2=80=99s `dmg` image format through 7-=
+zip (!85)
 
-<div dir=3D"ltr"><span style=3D"font-size:11pt;font-family:Calibri,Arial">A=
-ll,<br><br>The triage team is starting to try and collect up and classify b=
-ugs which a newcomer to the project would be able to work on in a way which=
- means people can find them. They&#39;re being listed on the triage page un=
-der the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/wiki/=
-Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage#New=
-comer_Bugs</a>  Also please review: <a href=3D"https://www.openembedded.org=
-/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.org/w=
-iki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugzilla =
-account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount.cgi"=
->https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The idea is=
- these bugs should be straight forward for a person to help work on who doe=
-sn&#39;t have deep experience with the project.  If anyone can help, please=
- take ownership of the bug and send patches!  If anyone needs help/advice t=
-here are people on irc who can likely do so, or some of the more experience=
-d contributors will likely be happy to help too.<br><br>Also, the triage te=
-am meets weekly and does its best to handle the bugs reported into the Bugz=
-illa. The number of people attending that meeting has fallen, as have the n=
-umber of people available to help fix bugs. One of the things we hear users=
- report is they don&#39;t know how to help. We (the triage team) are theref=
-ore going to start reporting out the currently 411 unassigned or newcomer b=
-ugs.<br><br>We&#39;re hoping people may be able to spare some time now and =
-again to help out with these.  Bugs are split into two types, &quot;true bu=
-gs&quot; where things don&#39;t work as they should and &quot;enhancements&=
-quot; which are features we&#39;d want to add to the system.  There are als=
-o roughly four different &quot;priority&quot; classes right now, =E2=80=9C5=
-.0=E2=80=9D, =E2=80=9C5.1=E2=80=9D, &quot;5.99&quot; and &quot;Future&quot;=
-, the more pressing/urgent issues being in &quot;5.0&quot; and then =E2=80=
-=9C5.1=E2=80=9D.<br><br>Please review this link and if a bug is something y=
-ou would be able to help with either take ownership of the bug, or send me =
-(<a href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>) an=
- e-mail with the bug number you would like and I will assign it to you (ple=
-ase make sure you have a Bugzilla account).  The list is at: <a href=3D"htt=
-ps://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcomer_B=
-ugs">https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Ne=
-wcomer_Bugs</a></span><br><div dir=3D"ltr" class=3D"gmail_signature" data-s=
-martmail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p class=3D"=
-MsoNormal" style=3D"background-image:initial;background-position:initial;ba=
-ckground-repeat:initial"><span style=3D"font-size:12pt;font-family:Arial,sa=
-ns-serif">Thanks,<span></span></span></p>
+Bugs fixed:
 
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
-ily:Arial,sans-serif">=C2=A0<span></span></span></p>
+- Prevent libarchive backend from writing endless padding when extracting=
+ RAR archives (!87)
 
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
-lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
-ont-family:Arial,sans-serif"><span></span></span></p>
+Other changes:
 
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
-amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
-an></b></p>
+- Various source code clean-ups (!86)
 
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
-&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
-<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
-:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
-s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
--size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
-><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
-/span></p>
+Translation updates:
 
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
-t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
-=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
-color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
-uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
- lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
-erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
-phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
-.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
-u></p></div></div></div></div>
+- Abkhazian (Nart Tlisha)
+- Basque (Asier Sarasua Garmendia)
+- Brazilian Portuguese (Enrico Nicoletto)
+- Bulgarian (Alexander Shopov)
+- Catalan (Jordi Mas)
+- Chinese (China) (Luming Zh)
+- Czech (Marek =C4=8Cernock=C3=BD)
+- Danish (Alan Mortensen)
+- Finnish (Jiri Gr=C3=B6nroos)
+- French (Ir=C3=A9n=C3=A9e THIRION)
+- Galician (Fran Dieguez)
+- German (J=C3=BCrgen Benvenuti)
+- Hungarian (Bal=C3=A1zs =C3=9Ar)
+- Indonesian (Kukuh Syafaat)
+- Korean (Seong-ho Cho)
+- Latvian (R=C5=ABdolfs Mazurs)
+- Lithuanian (Aurimas =C4=8Cernius)
+- Occitan (Quentin PAG=C3=88S)
+- Persian (Danial Behzadi)
+- Polish (Piotr Dr=C4=85g)
+- Portuguese (Hugo Carvalho)
+- Russian (Aleksandr Melman)
+- Serbian (=D0=9C=D0=B0=D1=80=D0=BA=D0=BE =D0=9A=D0=BE=D1=81=D1=82=D0=B8=D1=
+=9B)
+- Slovenian (Matej Urban=C4=8Di=C4=8D)
+- Spanish (Daniel Mustieles)
+- Turkish (Sabri =C3=9Cnal)
+- Ukrainian (Yuri Chornoivan)
 
---000000000000f79eb3061482470a--
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+---
+ .../{file-roller_43.1.bb =3D> file-roller_44.0.bb}           | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+ rename meta-gnome/recipes-gnome/file-roller/{file-roller_43.1.bb =3D> fi=
+le-roller_44.0.bb} (84%)
+
+diff --git a/meta-gnome/recipes-gnome/file-roller/file-roller_43.1.bb b/m=
+eta-gnome/recipes-gnome/file-roller/file-roller_44.0.bb
+similarity index 84%
+rename from meta-gnome/recipes-gnome/file-roller/file-roller_43.1.bb
+rename to meta-gnome/recipes-gnome/file-roller/file-roller_44.0.bb
+index 0b9dd741f..3daa1b570 100644
+--- a/meta-gnome/recipes-gnome/file-roller/file-roller_43.1.bb
++++ b/meta-gnome/recipes-gnome/file-roller/file-roller_44.0.bb
+@@ -8,7 +8,8 @@ DEPENDS =3D " \
+     glib-2.0-native \
+     glib-2.0 \
+     json-glib \
+-    gtk+3 \
++    gtk4 \
++    libadwaita \
+     libarchive \
+     libhandy \
+     libportal \
+@@ -20,7 +21,9 @@ REQUIRED_DISTRO_FEATURES =3D "opengl"
+=20
+ EXTRA_OEMESON +=3D "-Dintrospection=3Denabled"
+=20
+-SRC_URI[archive.sha256sum] =3D "84994023997293beb345d9793db8f5f0bbb41faa=
+155c6ffb48328f203957ad08"
++SRC_URI =3D "git://gitlab.gnome.org/GNOME/file-roller.git;protocol=3Dhtt=
+ps;branch=3Dmaster"
++SRCREV =3D "f1c7714cf4c8989b9f3fa4c611887c29cf6df343"
++S =3D "${WORKDIR}/git"
+=20
+ PACKAGECONFIG ??=3D ""
+=20
+--=20
+2.44.0
+
 
