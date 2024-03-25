@@ -1,145 +1,149 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 57BCAC54E58
-	for <webhook@archiver.kernel.org>; Mon, 25 Mar 2024 15:23:23 +0000 (UTC)
-Received: from mail-yb1-f174.google.com (mail-yb1-f174.google.com [209.85.219.174])
- by mx.groups.io with SMTP id smtpd.web10.55168.1711380196649361072
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 81F50C54E64
+	for <webhook@archiver.kernel.org>; Mon, 25 Mar 2024 15:36:43 +0000 (UTC)
+Received: from mail-oi1-f169.google.com (mail-oi1-f169.google.com [209.85.167.169])
+ by mx.groups.io with SMTP id smtpd.web10.55629.1711380998148618495
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Mar 2024 08:23:16 -0700
+ Mon, 25 Mar 2024 08:36:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=jXPYgLuv;
- spf=pass (domain: gmail.com, ip: 209.85.219.174, mailfrom: ticotimo@gmail.com)
-Received: by mail-yb1-f174.google.com with SMTP id 3f1490d57ef6-dc74e33fe1bso4400078276.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 08:23:16 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=GnY47BlE;
+ spf=pass (domain: gmail.com, ip: 209.85.167.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f169.google.com with SMTP id 5614622812f47-3c3ac720bceso2727048b6e.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 08:36:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1711380196; x=1711984996; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=BXGpzQMPniNmghpsxdby9wvm3iI6VKf9WjapNu9iZHM=;
-        b=jXPYgLuvYRmn0n58T2RW+B7SwwSkrBGRryBkaRG0hiKMWCjQd1o6MXwD5FoLH+/DPp
-         YNTXEUtOcpNdzu40qzxUYU6LTCTiLs3dDaByJMSne04C4Ad99ZVNBiWrjJn0n0SYSpJE
-         BD3doS/HBSujEtiZRSNyr8ozB6zMFcH3uOlt6GIZfJ/OBFngxpxdtfRmIYn1kdCqOXMA
-         cPGWp1tDCtoGaDoQIRo8TszzbXXrxeOhCZ9K09q6qUz1R5fdexVtUIpfzBEifhAK8F+T
-         s9RTSaEZByIibS7bAwcYdXEoHrTuyVfgMGe1pKmUhrtGS1vjtPOT8TWyKe22r6aFKvVC
-         gJtw==
+        d=gmail.com; s=20230601; t=1711380997; x=1711985797; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=tnjQPFZU2TyvMfb+h2hInQjIWepb0CS1SA1r15MufLY=;
+        b=GnY47BlEfzgaBvVubTzA2s7yw2jA96x85tNbZq8XW3phwiIdH2edJ8A3eUbVwYXQ3d
+         XOLbokFhJIXPAHdg3wKw4s60bN9SEZbvqNkEsor9wFN6vcePi1tIGb7RAE052DI/KMOd
+         5/qZ0zrUsvV79VFvn/LdLrYXMDPfEmT4/7AMvbjV/XgJmPHOh5JcK+P/vigbSNmy4kfC
+         zSYmUVs6vxEUmWYx4xIviG7O6M9wHfeIw4s+lrDOpTgmwtjYhKjtd8Spmpqf8g6DVqPO
+         uWMGcq1jaz4fi31ZJ5myp4Erdl0QyO2C6583i+p/9HbjpY9Bb5sbA9dTum0Tx+eqrLRs
+         5hng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1711380196; x=1711984996;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=BXGpzQMPniNmghpsxdby9wvm3iI6VKf9WjapNu9iZHM=;
-        b=iCaSzi25RF90o2G+YykG1cVQeKDR+Y9Y8S15qKig6/YdaGUgxni6ILIjdASAdM4HSw
-         /Nt5gYvPF5vY/lHKAL+Po8fQhX5h0MRbfYT7bvTdZi3kKrdpipaglkM28aLR+jRQeYtD
-         dfwgm1ph+upJO5aDMOP6VmWVsH76nmE6HSvn/Qi55pO+iHNBPxD/X22BgD0O4bsTXVYY
-         +EAEnq07Z2jgRusHahJX3zep0ARkDBw+ndy8/H0XNU5ffirQtRwTahbZQscQozfw/04V
-         x2WOpdZGKK6KTo+Qgd6ZF71OaX43185wKnqXOwKYluJuargqme8GLOrT5j+n5ZfRsMOZ
-         dm6w==
-X-Gm-Message-State: AOJu0Yz5CDj51kd7ZAPN5O8w6EU2YkOHWzuHBr0U9EuJ5cNUUVXgj1XY
-	PxAbj0ie6UwJ1Kdr6Xa9DMvYSjNUrwczjSh26HihAbpHfhXVaBmGwu/8K+smDWCUdU3U6ezef9C
-	zSCC3QEArs9lF3HKAmD/2huPbuaQ=
-X-Google-Smtp-Source: AGHT+IHsulRMLIy0WiU/neSGefy+0qIUyt0+iKXMJoqcOrX14t+zrZPI2wZ2YAQe/lm0n5qlHYt9yiP4lB6L/gkWEJ8=
-X-Received: by 2002:a25:aac6:0:b0:dc7:3166:ad25 with SMTP id
- t64-20020a25aac6000000b00dc73166ad25mr5033054ybi.25.1711380195693; Mon, 25
- Mar 2024 08:23:15 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1711380997; x=1711985797;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=tnjQPFZU2TyvMfb+h2hInQjIWepb0CS1SA1r15MufLY=;
+        b=AO1qWkW//nzVH1tK5jpwI0gbHrBqyTr+6V19HZe1hYki3KZx5cqj8sAF6Lg1pURi0Q
+         hwk9/3/4zeux08siCc1CU+X2+lTnoKDk+xkM+sOVvvIXaarZdIa9I7ELq2hosTrJqZWT
+         iPlGHoXRJbQaDU50KkCRzgl5qg4YPp0oTKrEk1kfP1HVDbQctTjt8G5OlCA2k7FyDsgv
+         RJcWvGA+7NDtsSCZ41xF1oJu3QnwMmxcLdQzwZY6HSpFAfjqzXahOr7acnno7n8JHfF5
+         ituCqoATtZK4M97k6P0ZUE1a9XYc/27EKw7zCoC1BYbZN9cA5ivho49E1N65Z/WqkPuE
+         b5EQ==
+X-Gm-Message-State: AOJu0Yw569rOeUC4dQ0RYdksB4t3bGzi7ZOSm4ccZY36+s42RXMPgLaC
+	0V1zKtjoZYeteky1AYLBLs1W5rG1ztR9T0UdHiP2XqT/Uyt4tc/G/IURABYQa3tYCZ8yV/+fc0V
+	wz4O88F18Skq1afe+eZL6EyifBOY=
+X-Google-Smtp-Source: AGHT+IFG+UCkDaaCVVba4XNseKTcq0INrK71XUrS7s+74WQoBuKbKiyp4rW6Pa+aT3+BG8wHbE+/puFfzMc7RWC/j/E=
+X-Received: by 2002:a05:6870:7252:b0:220:a0b0:6d4a with SMTP id
+ y18-20020a056870725200b00220a0b06d4amr8651287oaf.57.1711380997336; Mon, 25
+ Mar 2024 08:36:37 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240325132603.2477-1-jermain.horsman@nedap.com>
- <20240325132603.2477-2-jermain.horsman@nedap.com> <CANx9H-DS7wfF2U5DrfTOM+GrxsufdW2J+VgHioUer03bbho=Uw@mail.gmail.com>
- <VI1PR10MB318284DFD0ECDE612997D104F7362@VI1PR10MB3182.EURPRD10.PROD.OUTLOOK.COM>
-In-Reply-To: <VI1PR10MB318284DFD0ECDE612997D104F7362@VI1PR10MB3182.EURPRD10.PROD.OUTLOOK.COM>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Mon, 25 Mar 2024 08:23:04 -0700
-Message-ID: <CANx9H-Ax+KFHkkmEMEUrpp69j_8-=Jwg7WQ2a6wnZiZi_7vh1Q@mail.gmail.com>
-Subject: Re: [oe] [meta-java][PATCH 2/7] icedtea: Update URL for source downloads
-To: Jermain Horsman <jermain.horsman@nedap.com>
-Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="000000000000a3dd1406147dc091"
+References: <4d9e595a-b765-4364-b92c-18deebdc7ce0@gmail.com>
+In-Reply-To: <4d9e595a-b765-4364-b92c-18deebdc7ce0@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 25 Mar 2024 08:36:10 -0700
+Message-ID: <CAMKF1sqgkN0OFs4LwwC57=_GDDr+zJ+We_mgyy4y4DfUxK45Yw@mail.gmail.com>
+Subject: Re: kirkstone merge request: Marck 25th
+To: akuster808 <akuster808@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 15:23:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109592
+ <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 15:36:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109593
 
---000000000000a3dd1406147dc091
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+merged thanks Armin
 
-On Mon, Mar 25, 2024 at 8:22=E2=80=AFAM Jermain Horsman <jermain.horsman@ne=
-dap.com>
-wrote:
-
-> > > The old http://icedtea.classpath.org URL does not work anymore,
-> > > update this to the http://icedtea.wildebeest.org URL used for other
-> > > download sources.
-> >
-> > http://icedtea.wildebeest.org has some older sources, but not the
-> newest.
-> >
-> > https://icedtea.classpath.org/download/source/ has some newer sources,
-> but perhaps the
-> > path has changed?
+On Mon, Mar 25, 2024 at 4:14=E2=80=AFAM akuster808 <akuster808@gmail.com> w=
+rote:
 >
-> You are correct, it seems the downloads are still updated (or at least
-> more up-to-date)
-> on icedtea.classpath.org, maybe I should have been more specific in the
-> patch in saying
-> the sources, at icedtea.wildebeest.org/hg/ specifically, are no longer
-> available.
+> The following changes since commit fda737ec0cc1d2a5217548a560074a8e4d5ec5=
+80:
 >
-
-Yeah exactly. And I think using wildebeest for both in the recipe is less
-confusing.
-
-
+>    mbedtls: Upgrade 3.5.0 -> 3.5.2 (2024-02-28 08:18:18 -0500)
 >
-> Sincerely,
+> are available in the Git repository at:
 >
-> Jermain Horsman
+>    https://git.openembedded.org/meta-openembedded kirkstone-next
 >
-
---000000000000a3dd1406147dc091
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Mon, Mar 25, 2024 at 8:22=E2=80=AF=
-AM Jermain Horsman &lt;<a href=3D"mailto:jermain.horsman@nedap.com">jermain=
-.horsman@nedap.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote=
-" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);=
-padding-left:1ex">&gt; &gt; The old <a href=3D"http://icedtea.classpath.org=
-" rel=3D"noreferrer" target=3D"_blank">http://icedtea.classpath.org</a> URL=
- does not work anymore,<br>
-&gt; &gt; update this to the <a href=3D"http://icedtea.wildebeest.org" rel=
-=3D"noreferrer" target=3D"_blank">http://icedtea.wildebeest.org</a> URL use=
-d for other<br>
-&gt; &gt; download sources.<br>
-&gt; <br>
-&gt; <a href=3D"http://icedtea.wildebeest.org" rel=3D"noreferrer" target=3D=
-"_blank">http://icedtea.wildebeest.org</a> has some older sources, but not =
-the newest.<br>
-&gt; <br>
-&gt; <a href=3D"https://icedtea.classpath.org/download/source/" rel=3D"nore=
-ferrer" target=3D"_blank">https://icedtea.classpath.org/download/source/</a=
-> has some newer sources, but perhaps the<br>
-&gt; path has changed?<br>
-<br>
-You are correct, it seems the downloads are still updated (or at least more=
- up-to-date)<br>
-on <a href=3D"http://icedtea.classpath.org" rel=3D"noreferrer" target=3D"_b=
-lank">icedtea.classpath.org</a>, maybe I should have been more specific in =
-the patch in saying<br>
-the sources, at <a href=3D"http://icedtea.wildebeest.org/hg/" rel=3D"norefe=
-rrer" target=3D"_blank">icedtea.wildebeest.org/hg/</a> specifically, are no=
- longer available.<br></blockquote><div><br></div><div>Yeah exactly. And I =
-think using wildebeest for both in the recipe is less confusing.</div><div>=
-=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0=
-.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-<br>
-Sincerely,<br>
-<br>
-Jermain Horsman<br>
-</blockquote></div></div>
-
---000000000000a3dd1406147dc091--
+> for you to fetch changes up to 8bb16533532b6abc2eded7d9961ab2a108fd7a5b:
+>
+>    dnsmasq: Upgrade 2.87 -> 2.90 (2024-03-25 07:11:05 -0400)
+>
+> ----------------------------------------------------------------
+> Anuj Mittal (1):
+>        opencv: fix reproducibility issues
+>
+> Soumya Sambu (4):
+>        openvpn: ignore CVE-2023-7235
+>        postgresql: Upgrade to 14.11
+>        unixodbc: Fix CVE-2024-1013
+>        dnsmasq: Upgrade 2.87 -> 2.90
+>
+> Vivek Kumbhar (1):
+>        openjpeg: Backport fix CVE-2021-3575
+>
+> Yogita Urade (1):
+>        c-ares: fix CVE-2024-25629
+>
+>   meta-networking/recipes-support/dnsmasq/dnsmasq.inc             | 1 -
+>   meta-networking/recipes-support/dnsmasq/dnsmasq/lua.patch       | 31 --=
+-
+>   meta-networking/recipes-support/dnsmasq/dnsmasq_2.87.bb         | 7 -
+>   meta-networking/recipes-support/dnsmasq/dnsmasq_2.90.bb         | 3 +
+>   .../recipes-support/dnsmasq/files/CVE-2023-28450.patch          | 48 --=
+---
+>   meta-networking/recipes-support/openvpn/openvpn_2.5.6.bb        | 3 +
+>   .../0001-configure.ac-bypass-autoconf-2.69-version-check.patch  | 6 +-
+>   meta-oe/recipes-dbs/postgresql/files/CVE-2023-5868.patch        | 125
+> ------------
+>   meta-oe/recipes-dbs/postgresql/files/CVE-2023-5869.patch        | 294
+> ----------------------------
+>   meta-oe/recipes-dbs/postgresql/files/CVE-2023-5870.patch        | 108
+> ----------
+>   .../postgresql/{postgresql_14.9.bb =3D> postgresql_14.11.bb} |   7 +-
+>   meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2021-3575.patch  | 45 ++=
++++
+>   meta-oe/recipes-graphics/openjpeg/openjpeg_2.4.0.bb             | 1 +
+>   meta-oe/recipes-support/c-ares/c-ares/CVE-2024-25629.patch      | 34 ++=
+++
+>   meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb                 | 1 +
+>   meta-oe/recipes-support/opencv/opencv_4.5.5.bb                  | 34 ++=
+--
+>   meta-oe/recipes-support/unixodbc/files/CVE-2024-1013.patch      | 53 ++=
++++
+>   meta-oe/recipes-support/unixodbc/unixodbc_2.3.9.bb              | 1 +
+>   18 files changed, 163 insertions(+), 639 deletions(-)
+>   delete mode 100644
+> meta-networking/recipes-support/dnsmasq/dnsmasq/lua.patch
+>   delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.87=
+.bb
+>   create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.90=
+.bb
+>   delete mode 100644
+> meta-networking/recipes-support/dnsmasq/files/CVE-2023-28450.patch
+>   delete mode 100644
+> meta-oe/recipes-dbs/postgresql/files/CVE-2023-5868.patch
+>   delete mode 100644
+> meta-oe/recipes-dbs/postgresql/files/CVE-2023-5869.patch
+>   delete mode 100644
+> meta-oe/recipes-dbs/postgresql/files/CVE-2023-5870.patch
+>   rename meta-oe/recipes-dbs/postgresql/{postgresql_14.9.bb =3D>
+> postgresql_14.11.bb} (61%)
+>   create mode 100644
+> meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2021-3575.patch
+>   create mode 100644
+> meta-oe/recipes-support/c-ares/c-ares/CVE-2024-25629.patch
+>   create mode 100644
+> meta-oe/recipes-support/unixodbc/files/CVE-2024-1013.patch
+>
 
