@@ -1,141 +1,284 @@
-Return-Path: <jermain.horsman@nedap.com>
+Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D311C54E64
-	for <webhook@archiver.kernel.org>; Mon, 25 Mar 2024 15:22:13 +0000 (UTC)
-Received: from EUR04-VI1-obe.outbound.protection.outlook.com (EUR04-VI1-obe.outbound.protection.outlook.com [40.107.8.100])
- by mx.groups.io with SMTP id smtpd.web10.55136.1711380127775804265
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 56C69C54E64
+	for <webhook@archiver.kernel.org>; Mon, 25 Mar 2024 15:22:33 +0000 (UTC)
+Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com [209.85.128.177])
+ by mx.groups.io with SMTP id smtpd.web10.55145.1711380147375656145
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Mar 2024 08:22:08 -0700
+ Mon, 25 Mar 2024 08:22:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@nedap.com header.s=selector2 header.b=NhSEzLwh;
- spf=pass (domain: nedap.com, ip: 40.107.8.100, mailfrom: jermain.horsman@nedap.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Amq5K3OT5wHoNfB4kUxeyZNvklFFfSajCHUPVtLqeA7/9rSgkz3KnW50p3RlOhozRo+bSCgvC89E7JGrl1Hm5Hh71CaG8YSErNLDbxziCDrhI7EBYPryBkeAWyxdV4UhCeA+4xG2Sf5GiDYoxKQXwuQ5o7TMXHvVYpXRh2qkFnW9rLzAxwkXDwNnH31KYPEnFn5Xbk9zmfTCvKyrNnmRiXuZ1wqTX+UcPRkvoSl8/Af1bSS3LHDtHoUN9RHR7zPIekggo4/Q22RVLW2cl42168JSPTUbfroweJg5Lhigd2IEEdNNKsmvBcIgGlE8pFv5oLiraI1/Q2lmOe/XDTNLzA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=uQuFHH8bT5KNauRSfT4Be7V9fJXDL3Vgac+4UIFHxKY=;
- b=i9kMTClbgvnV/vzgjRFJiE350yRIVYbKH2QQexBRlftAEsaaUPxf2iiRwgmD1rjBKb5Ws58QMOutDRv9S0fygSpzuQgOu/l6eIvTkhkMAS2rcCP+mCIMFDYmUaX7gdpLjLw279BXXz/UtDQdVwZsgs1LILNJe0Izl52cAtAFqoKWMv+toJ6nQoDGEP/M3sV5bIgq/bEKXOkM5fu3GlY0D59IXDMusftcfL3HwxFITIzpqAtRo55uVDsNCEpN+Sk59so9GxOFJKEaGIPGDfJoGxH2mtfV722JmlaaIrZzVX9nocv5F+GboK2/VY5AHi5+JVaZ3GexGeYM+gO0uGkUeg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nedap.com; dmarc=pass action=none header.from=nedap.com;
- dkim=pass header.d=nedap.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nedap.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uQuFHH8bT5KNauRSfT4Be7V9fJXDL3Vgac+4UIFHxKY=;
- b=NhSEzLwhS2JN3FubSjbiAPKxGfUFt8ATiCGPaoupj64wGzTHju+D1k/j5CljfVfFN7q7xeellU+HZo7WMFRR4mCUm+EYbxb1Lh5+905iAO7SlRu7bfvigwuvyCK7D86Es5mReXlGL78jjQHwbUC7YwpsdgnK0Wj6lISpc9h5HiQ=
-Received: from VI1PR10MB3182.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:803:137::14)
- by AS2PR10MB7761.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:644::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.31; Mon, 25 Mar
- 2024 15:22:04 +0000
-Received: from VI1PR10MB3182.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::fcf4:a83d:66b1:796a]) by VI1PR10MB3182.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::fcf4:a83d:66b1:796a%5]) with mapi id 15.20.7409.028; Mon, 25 Mar 2024
- 15:22:03 +0000
-From: Jermain Horsman <jermain.horsman@nedap.com>
-To: Tim Orling <ticotimo@gmail.com>
-CC: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: RE: [oe] [meta-java][PATCH 2/7] icedtea: Update URL for source
- downloads
-Thread-Topic: [oe] [meta-java][PATCH 2/7] icedtea: Update URL for source
- downloads
-Thread-Index: AQHafrhrjW5MdEekN0uU55gdHdvRyLFIjHaAgAAFbjA=
-Date: Mon, 25 Mar 2024 15:22:03 +0000
-Message-ID: 
- <VI1PR10MB318284DFD0ECDE612997D104F7362@VI1PR10MB3182.EURPRD10.PROD.OUTLOOK.COM>
-References: <20240325132603.2477-1-jermain.horsman@nedap.com>
- <20240325132603.2477-2-jermain.horsman@nedap.com>
- <CANx9H-DS7wfF2U5DrfTOM+GrxsufdW2J+VgHioUer03bbho=Uw@mail.gmail.com>
-In-Reply-To: 
- <CANx9H-DS7wfF2U5DrfTOM+GrxsufdW2J+VgHioUer03bbho=Uw@mail.gmail.com>
-Accept-Language: nl-NL, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nedap.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: VI1PR10MB3182:EE_|AS2PR10MB7761:EE_
-x-ms-office365-filtering-correlation-id: dd265f9a-0341-43f1-c4a2-08dc4cdf5319
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- iYgRxYjMoPqwF3+cMDcWKb0FS5Pptwb0jM14+9zP3g0sVetlUNN8qqyWhIH83HQirqeRQwJ9Z+ccm7doMgn2WJl7IcEvEqnDM7KpwWlMAWVlFGTcbb6gD3mxZJERTmABfIHkuyS1/v55V2d2dBlf/dfyo0dRQdQmOfZQ5CYcnAB5LL/sjwZrAA/XlgkVymrnfiIod1lETi9/G44kI0s7Ec+dW19IfLBUH2ShJdiPCiuSMLndEAYqaT5lcvA4qsIPE5ELN6TsLLC/SmCAX7AT6o5h2wbvjVfta2mQg12YEKxyTUMx+XUk6q/W9nRTc0FvL07eW71NoylV40fbJ61yM2fdtYjmq8gGStHXdcb9+NZ/RApvS1jgMHfnNexDLXmlLsaK9dSLFhBa02ZBKQMmOG2W39XlOXhBD3tpt4LCFL2EBkX/AyW3dvAXHRPUAs6fM0jYjRGbP26L2xNy5nsl3Z46+hA/ESt3EH22I8bZMz8cxYdRJfoQHmtkj8t/8nzOLpsbgcH1c/jSAr4D7EUVggvPmWZvem5WnMzN0LNp7GDtQ6peJQ5l7/YmpPcaBCUCCHheXO07v4tILRSN4xR5nvwLJ6UT7rdwCcai6iO6U+FvnAZ3AWpywEKzPo0VGgeJNgGiNQmHyDUlV76EiggbMHvgD/h1Hk2a/fVG6hsD93M=
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR10MB3182.EURPRD10.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230031)(366007)(376005)(1800799015)(38070700009);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?utf-8?B?dU1QMlVNQVJVUGNHeWFRQzVVRW5rc3dyMjJaaTNvdEsyWmRyOEd0VHlVaXg0?=
- =?utf-8?B?ajRHNWc4aWpyLzdLd0NQNnRMWEYrYUI3Y1pGTXlvb0NVOVZHaEcrcEF4eDAr?=
- =?utf-8?B?ZEpTeU51SzRJa01wdDBqZERmUWUyZ05QQThmU2NqQk0waStFRFFQTEhSYWFu?=
- =?utf-8?B?azRxMlFzOElkc0Z1ZzBRakhmdDVNdDFrcU9OVE1GSzAxL0FORUpSd1VpRjFX?=
- =?utf-8?B?cHcyYitYRExZUFNtYzd3KzhuYzNuWDdLdVRrQWFNNllvNWFMRjlpOEZzNDZp?=
- =?utf-8?B?bTQvek5UQkwvcE42UjdvbHVuT0VGZmVsdTB6UXNSekw2TUd1MzVITHg0TWlR?=
- =?utf-8?B?YlFabFBKNklPT29LRDhUSHcwYnlBbTA1VXo2MkdKRkkzUkFFeGwxSnluaktS?=
- =?utf-8?B?S3FPVzJzei84Q0loMzREOEo5QmlhN3M2eE1YaVFyZURlS1l6TEIyYS9Tb0ha?=
- =?utf-8?B?YzQ1WXd4ZTgyRTl0dGhmcWp5eHJDaDBTVGg4OWxsNSsyWEljd3JyejdwejZT?=
- =?utf-8?B?ZExxMitwZS90UGxIZVNqRStQRnQxVG81ZjFUTGFuanF2ckIxajZWTmxhczQ0?=
- =?utf-8?B?Tmk0S0tXdWFvaDV0V1Bhc3lxeTNxNm8zbnlmaEFiWkhDUnBaOWVjdmt3a0VZ?=
- =?utf-8?B?a2NuZnpkb241OTl1b0I0QWQ0a21RVk9LK3orWEhWeWZua2hQT3RLUzJRRTRq?=
- =?utf-8?B?anNRKy8yMUZhbTBidmQxekJUSWNac3p1WFhJTkZGa3ZWaWRQc0d0YzE0MDNW?=
- =?utf-8?B?N1VML0lUTU5sYStIWTRNYXBHSEM0bllwWFNUdDh2dkMvaitFK3ZqYk0yWUwv?=
- =?utf-8?B?bllDTnhwb0lrNzIvMUtDWTNOdWpBajRHYUdyamRuUDFnWlY4RDI2RGJFUzl6?=
- =?utf-8?B?RmlHbzJrTTMzYk52eVhSbXc5N2xiYS9lK0R5VDMwaTE0eDJqNy93aTVHWUxy?=
- =?utf-8?B?Z1lKSmtlTUZSUjhDLzZXR3dnenI2TDRTRFo0QVcreTh5bkpmdDZmN3BvV3Zh?=
- =?utf-8?B?VkJBd2d1eDNsNm1FWEkxMlplNUJET3hTZysvallnTHdJbEx2SXI0d013dWJW?=
- =?utf-8?B?eS9IOVo3bmF5Q0ZiSnRtT3FrZnBaNklGWDhERlQwUGdwRklUV2tPay85WmdI?=
- =?utf-8?B?Rmh1YmpzZVBMaUw4ZzR4c3VtUE0vTENoNnE5WUZKSXVuR3pSSkVQK09RQThV?=
- =?utf-8?B?NVI1eDVVekhMMThYRW1sbFMrME1xV3VrMSthcVowb1Y1cFVnUHNVdTN4ODhQ?=
- =?utf-8?B?N3lPQ2dTRFoxOU1zN3V0a3kxVUN5Q0FQbXZYMGxDSmRkSUVLRnB3cUJZTnBX?=
- =?utf-8?B?YnZEOTAyWm1vWnJnRmhJTkpvbFkrS0hBcE1vLzdCV1JINjIzTXFLY2MwbmhT?=
- =?utf-8?B?TDIrYmEzVUhzSmJ6c2lNMStYT1RJWmk3UEh2R1JYV2JMNkdXNkFQcVIyZ2Y0?=
- =?utf-8?B?anhiaGNzS2J3UnV6OWRnL0hHeGg1N0lpNE9NSy9pa2p0aVphMUcyQ0JTRFZn?=
- =?utf-8?B?STMzRVd0MWdiRkR3c1ZMWlRUNWpVQW44WmU5bGMydXE1SStkSlExNzBNQ2pS?=
- =?utf-8?B?OVFSV3M1U1gzUy9tUzZxbG9UR0s2dE5oOUdCYTJBS1JtN0p1SWZzYWxONEw2?=
- =?utf-8?B?YzFFalpRK1M1dHFtRndlN2tKUnE1Z09QVmRNb3I3VFU5SEN4eWJpRVFyNTBi?=
- =?utf-8?B?dHR4YUx0T251TC9TUHZjTXdOc1dhdXhWVTVzN3FvV0lNZ0JwcUludWEzNkYv?=
- =?utf-8?B?NlZHdXhxN1hWTjRsSVZyeUF5ZXhDemNYc2NnYUtpQ3NVTDM3bVRjQkdDbWRN?=
- =?utf-8?B?VzV6VVE3ZmhXUTY4UUY4dUFwWVJjSEE0Z25hYlJWNVZHZ3FvQnQrMnFRWWlY?=
- =?utf-8?B?WnNkbm1Ya2xiaDBIVDR1N055dlZQRFNIL2k4MzUxYmYrMlR6THpHbE1Pelgv?=
- =?utf-8?B?Umo5eHB2SkNaTzZ5M05TQXVCTXRrSitmbjVJRjU0cVpLeHA2TUJZdWFNN0VX?=
- =?utf-8?B?UzdEcVlTMnIzUllHZ29tWUNNVHd0cmh2RjhsY1JKaEpXYSsyM3k2aGNDeGsx?=
- =?utf-8?B?WTVBaXZDaFNGS2MxUlNKRDkrTjcyRUY2SVR2MlBxNUZnU3JudDNOV1JoWWxG?=
- =?utf-8?Q?tMShTvszWaAMMy9lMTYoSnHeW?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=QjEpXlSY;
+ spf=pass (domain: gmail.com, ip: 209.85.128.177, mailfrom: ticotimo@gmail.com)
+Received: by mail-yw1-f177.google.com with SMTP id 00721157ae682-60a068e26d8so50747857b3.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 08:22:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1711380146; x=1711984946; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=/a1DtPcNzO26H6nXxsQAsp4Inz/dJeETzwdA3bY67EE=;
+        b=QjEpXlSYyzp+zSLWF+yo9pOElSobVec/YsbKiQTgs6X2OPT8Cq+jRmnRGyHg3YfnHp
+         3tMPbzOK1xxyezB3kMm7DFGlVrdDtNZP2C2qM2soiFNXRmDDRmFGa+TaUHi5W6jJ0k6c
+         Fl2UVRsoPcQp9IlzaIY3EOy8COXK6o1byhBH+y/bKBkpPbOnxaHhd6Ox4kVzZiPfg21R
+         +k2j3Ar4IfAdN/yhI7420YMlO3rSOOG6TVdXbWZ12D0Fy+subXIbyHVxv0GDJy/+rK0m
+         Y8z61gAMBo60IMld8LOuNgdYkEB3MKdQypmni/NnulcvhUFTwbr2F/uzjGL9lU0GAzsf
+         5tzw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1711380146; x=1711984946;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=/a1DtPcNzO26H6nXxsQAsp4Inz/dJeETzwdA3bY67EE=;
+        b=RCo053mmoSZePJJkj7ugeYzkMoqLZIoWdNrdc8OUWflnIGg2JiNvoeuSPTgJkX1fD0
+         xe5PoJEWJ1tz9TOdb54722mCaOMHsG0Ywqm0bK7R8gNhsm52B8iIHMRzuTl5CP1kblWB
+         1ICnfteUHbvrPpW5J7ezG9LWZxnrflGlZbs25FjbbVZUF/C7nOhVOONzONjRPMO0tCe/
+         gTLkrHOuiojGf+HIvravV+y7Hk/mMx17vpmoaY8bz2pSGcndH8KtDhQnCxoDymfuW0q9
+         10qq6Fw0KVNODPoN/d8hH4VINz0jbdo40QkqZhaNc9i7oZleP4XiZp/g23u8ZcTEUman
+         fB6A==
+X-Forwarded-Encrypted: i=1; AJvYcCVho03I9LzHynD4hZRNz0puGcg0CxXFFiM+J+iiemsE8Mt0Ks6IovPy99ccwn49mQAihY0WQ57/BVuFTPeIoDL1FVmusAo5xeWXjrpgkr3Jqk4j1Pbn8i9gZA==
+X-Gm-Message-State: AOJu0YxVXyWZfKDRn1Z4XFpw97Zfq84JAEiP/8gaVYtCUPMYGCJKfDqQ
+	UEpnSTxVBR0CrG1hH8Amq/QWMzzdA+ygW1CAXO+tXA2y6gE7hzv2H71soGHCfMIVmLPSb9tEyPH
+	8WZx3Ap+qafpkBEjSwzN/m4kQGlM=
+X-Google-Smtp-Source: AGHT+IHwdnzTqZSWpUQ4jPnLjPpAu76+DTSmmi63t+KSW7Y2zu+/x8mDkPCT4d1O85SDcTPKKmqeBw86mHoEmVKU1dw=
+X-Received: by 2002:a0d:d48a:0:b0:60a:16b8:1042 with SMTP id
+ w132-20020a0dd48a000000b0060a16b81042mr5752836ywd.16.1711380146422; Mon, 25
+ Mar 2024 08:22:26 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: nedap.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: VI1PR10MB3182.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: dd265f9a-0341-43f1-c4a2-08dc4cdf5319
-X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Mar 2024 15:22:03.5243
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 6d21d161-0ae7-4a24-94cf-df0881e2fa96
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 6eyfBAKrv0AAg8bfKkgZbK/kftEYNmTWHCAMwMMtJAv8O44tM04gA9VSt4ylAgwlWVnuoXxe8fJBQK1iW0tKFYIRo133kKJODle5hWphGAA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR10MB7761
+References: <20240325132603.2477-1-jermain.horsman@nedap.com>
+ <20240325132603.2477-2-jermain.horsman@nedap.com> <17C009E70F37F98C.21233@lists.openembedded.org>
+In-Reply-To: <17C009E70F37F98C.21233@lists.openembedded.org>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Mon, 25 Mar 2024 08:22:15 -0700
+Message-ID: <CANx9H-DO7uWu1sp7jx4b6rwTqcMK--2MMFQnazmkEZ6tFLbpKg@mail.gmail.com>
+Subject: Re: [oe] [meta-java][PATCH 2/7] icedtea: Update URL for source downloads
+To: ticotimo@gmail.com
+Cc: jermain.horsman@nedap.com, openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000b40d2006147dbdf7"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 15:22:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109590
+ <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 15:22:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109591
 
-PiA+IFRoZSBvbGQgaHR0cDovL2ljZWR0ZWEuY2xhc3NwYXRoLm9yZyBVUkwgZG9lcyBub3Qgd29y
-ayBhbnltb3JlLA0KPiA+IHVwZGF0ZSB0aGlzIHRvIHRoZSBodHRwOi8vaWNlZHRlYS53aWxkZWJl
-ZXN0Lm9yZyBVUkwgdXNlZCBmb3Igb3RoZXINCj4gPiBkb3dubG9hZCBzb3VyY2VzLg0KPiANCj4g
-aHR0cDovL2ljZWR0ZWEud2lsZGViZWVzdC5vcmcgaGFzIHNvbWUgb2xkZXIgc291cmNlcywgYnV0
-IG5vdCB0aGUgbmV3ZXN0Lg0KPiANCj4gaHR0cHM6Ly9pY2VkdGVhLmNsYXNzcGF0aC5vcmcvZG93
-bmxvYWQvc291cmNlLyBoYXMgc29tZSBuZXdlciBzb3VyY2VzLCBidXQgcGVyaGFwcyB0aGUNCj4g
-cGF0aCBoYXMgY2hhbmdlZD8NCg0KWW91IGFyZSBjb3JyZWN0LCBpdCBzZWVtcyB0aGUgZG93bmxv
-YWRzIGFyZSBzdGlsbCB1cGRhdGVkIChvciBhdCBsZWFzdCBtb3JlIHVwLXRvLWRhdGUpDQpvbiBp
-Y2VkdGVhLmNsYXNzcGF0aC5vcmcsIG1heWJlIEkgc2hvdWxkIGhhdmUgYmVlbiBtb3JlIHNwZWNp
-ZmljIGluIHRoZSBwYXRjaCBpbiBzYXlpbmcNCnRoZSBzb3VyY2VzLCBhdCBpY2VkdGVhLndpbGRl
-YmVlc3Qub3JnL2hnLyBzcGVjaWZpY2FsbHksIGFyZSBubyBsb25nZXIgYXZhaWxhYmxlLg0KDQpT
-aW5jZXJlbHksDQoNCkplcm1haW4gSG9yc21hbg0K
+--000000000000b40d2006147dbdf7
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Mar 25, 2024 at 7:59=E2=80=AFAM Tim Orling via lists.openembedded.o=
+rg
+<ticotimo=3Dgmail.com@lists.openembedded.org> wrote:
+
+>
+>
+> On Mon, Mar 25, 2024 at 6:27=E2=80=AFAM Jermain Horsman <jermain.horsman@=
+nedap.com>
+> wrote:
+>
+>> From: Jermain Horsman <jermain.horsman@nedap.com>
+>>
+>> The old icedtea.classpath.org URL does not work anymore,
+>> update this to the icedtea.wildebeest.org URL used for other
+>> download sources.
+>>
+>
+> icedtea.wildebeest.org has some older sources, but not the newest.
+>
+> https://icedtea.classpath.org/download/source/ has some newer sources,
+> but perhaps the
+> path has changed?
+>
+> https://icedtea.classpath.org/download/source/icedtea-2.1.3.tar.gz
+>
+> I'll take this under review anyway, as is, since the old 2.1.3 version of
+> iceatea7-native we
+> are building still works from icedtea.wildebeest.org
+>
+>
+>
+>> Also update both to use https.
+>>
+>> Signed-off-by: Jermain Horsman <jermain.horsman@nedap.com>
+>> ---
+>>  recipes-core/icedtea/openjdk-7-release-03b147.inc | 4 ++--
+>>  1 file changed, 2 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/recipes-core/icedtea/openjdk-7-release-03b147.inc
+>> b/recipes-core/icedtea/openjdk-7-release-03b147.inc
+>> index 16bf592..379fd9e 100644
+>> --- a/recipes-core/icedtea/openjdk-7-release-03b147.inc
+>> +++ b/recipes-core/icedtea/openjdk-7-release-03b147.inc
+>> @@ -7,10 +7,10 @@ FILESPATH =3D. "${FILE_DIRNAME}/openjdk-7-03b147:"
+>>  # Force arm mode for now
+>>  ARM_INSTRUCTION_SET:armv4t =3D "ARM"
+>>
+>> -ICEDTEA_URI =3D "
+>> http://icedtea.wildebeest.org/download/source/${ICEDTEA}.tar.gz;name=3Di=
+ced
+>> "
+>> +ICEDTEA_URI =3D "
+>> https://icedtea.wildebeest.org/download/source/${ICEDTEA}.tar.gz;name=3D=
+iced
+>> "
+>>
+>
+This one should be able to be
+https://icedtea.classpath.org/download/source/icedtea-2.1.3.tar.gz
+
+
+>
+>>  ICEDTEA_PREFIX =3D "icedtea7-forest-2.1"
+>> -ICEDTEA_HG_URL =3D "
+>> http://icedtea.classpath.org/hg/release/${ICEDTEA_PREFIX}"
+>> +ICEDTEA_HG_URL =3D "
+>> https://icedtea.wildebeest.org/hg/release/${ICEDTEA_PREFIX}"
+>>
+>
+I think this is the problem-child URL. I don't see "forest" in the revived
+https://icedtea.classpath.org/ site.
+We probably need to reach out to the site/organization to remind them of
+the oversight.
+
+
+>>  OPENJDK_CHANGESET =3D "22cc03983e20"
+>>  OPENJDK_FILE_UPSTREAM =3D "${OPENJDK_CHANGESET}.tar.bz2"
+>> --
+>> 2.43.0.windows.1
+>>
+>>
+>>
+>>
+>>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#109589):
+> https://lists.openembedded.org/g/openembedded-devel/message/109589
+> Mute This Topic: https://lists.openembedded.org/mt/105137637/924729
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> ticotimo@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--000000000000b40d2006147dbdf7
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
+<div dir=3D"ltr" class=3D"gmail_attr">On Mon, Mar 25, 2024 at 7:59=E2=80=AF=
+AM Tim Orling via <a href=3D"http://lists.openembedded.org">lists.openembed=
+ded.org</a> &lt;ticotimo=3D<a href=3D"mailto:gmail.com@lists.openembedded.o=
+rg">gmail.com@lists.openembedded.org</a>&gt; wrote:<br></div><blockquote cl=
+ass=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid=
+ rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr"><div dir=3D"ltr"><br><=
+/div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">O=
+n Mon, Mar 25, 2024 at 6:27=E2=80=AFAM Jermain Horsman &lt;<a href=3D"mailt=
+o:jermain.horsman@nedap.com" target=3D"_blank">jermain.horsman@nedap.com</a=
+>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px=
+ 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Fro=
+m: Jermain Horsman &lt;<a href=3D"mailto:jermain.horsman@nedap.com" target=
+=3D"_blank">jermain.horsman@nedap.com</a>&gt;<br>
+<br>
+The old <a href=3D"http://icedtea.classpath.org" rel=3D"noreferrer" target=
+=3D"_blank">icedtea.classpath.org</a> URL does not work anymore,<br>
+update this to the <a href=3D"http://icedtea.wildebeest.org" rel=3D"norefer=
+rer" target=3D"_blank">icedtea.wildebeest.org</a> URL used for other<br>
+download sources.<br></blockquote><div><br></div><div><a href=3D"http://ice=
+dtea.wildebeest.org" target=3D"_blank">icedtea.wildebeest.org</a> has some =
+older sources, but not the newest.</div><div><br></div><div><a href=3D"http=
+s://icedtea.classpath.org/download/source/" target=3D"_blank">https://icedt=
+ea.classpath.org/download/source/</a> has some newer sources, but perhaps t=
+he<br></div><div>path has changed?</div><div><br></div><div><a href=3D"http=
+s://icedtea.classpath.org/download/source/icedtea-2.1.3.tar.gz" target=3D"_=
+blank">https://icedtea.classpath.org/download/source/icedtea-2.1.3.tar.gz</=
+a><br></div><div><br></div><div>I&#39;ll take this under review anyway, as =
+is, since the old 2.1.3 version of iceatea7-native we</div><div>are buildin=
+g still works from <a href=3D"http://icedtea.wildebeest.org" target=3D"_bla=
+nk">icedtea.wildebeest.org</a></div><div><br></div><div><br></div><blockquo=
+te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
+solid rgb(204,204,204);padding-left:1ex">
+<br>
+Also update both to use https.<br>
+<br>
+Signed-off-by: Jermain Horsman &lt;<a href=3D"mailto:jermain.horsman@nedap.=
+com" target=3D"_blank">jermain.horsman@nedap.com</a>&gt;<br>
+---<br>
+=C2=A0recipes-core/icedtea/openjdk-7-release-03b147.inc | 4 ++--<br>
+=C2=A01 file changed, 2 insertions(+), 2 deletions(-)<br>
+<br>
+diff --git a/recipes-core/icedtea/openjdk-7-release-03b147.inc b/recipes-co=
+re/icedtea/openjdk-7-release-03b147.inc<br>
+index 16bf592..379fd9e 100644<br>
+--- a/recipes-core/icedtea/openjdk-7-release-03b147.inc<br>
++++ b/recipes-core/icedtea/openjdk-7-release-03b147.inc<br>
+@@ -7,10 +7,10 @@ FILESPATH =3D. &quot;${FILE_DIRNAME}/openjdk-7-03b147:&qu=
+ot;<br>
+=C2=A0# Force arm mode for now<br>
+=C2=A0ARM_INSTRUCTION_SET:armv4t =3D &quot;ARM&quot;<br>
+<br>
+-ICEDTEA_URI =3D &quot;<a href=3D"http://icedtea.wildebeest.org/download/so=
+urce/$%7BICEDTEA%7D.tar.gz;name=3Diced" rel=3D"noreferrer" target=3D"_blank=
+">http://icedtea.wildebeest.org/download/source/${ICEDTEA}.tar.gz;name=3Dic=
+ed</a>&quot;<br>
++ICEDTEA_URI =3D &quot;<a href=3D"https://icedtea.wildebeest.org/download/s=
+ource/$%7BICEDTEA%7D.tar.gz;name=3Diced" rel=3D"noreferrer" target=3D"_blan=
+k">https://icedtea.wildebeest.org/download/source/${ICEDTEA}.tar.gz;name=3D=
+iced</a>&quot;<br></blockquote></div></div></blockquote><div><br></div><div=
+>This one should be able to be=C2=A0<a href=3D"https://icedtea.classpath.or=
+g/download/source/icedtea-2.1.3.tar.gz" target=3D"_blank">https://icedtea.c=
+lasspath.org/download/source/icedtea-2.1.3.tar.gz</a></div><div>=C2=A0</div=
+><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border=
+-left:1px solid rgb(204,204,204);padding-left:1ex"><div dir=3D"ltr"><div cl=
+ass=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0=
+px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
+<br>
+=C2=A0ICEDTEA_PREFIX =3D &quot;icedtea7-forest-2.1&quot;<br>
+-ICEDTEA_HG_URL =3D &quot;<a href=3D"http://icedtea.classpath.org/hg/releas=
+e/$%7BICEDTEA_PREFIX%7D" rel=3D"noreferrer" target=3D"_blank">http://icedte=
+a.classpath.org/hg/release/${ICEDTEA_PREFIX}</a>&quot;<br>
++ICEDTEA_HG_URL =3D &quot;<a href=3D"https://icedtea.wildebeest.org/hg/rele=
+ase/$%7BICEDTEA_PREFIX%7D" rel=3D"noreferrer" target=3D"_blank">https://ice=
+dtea.wildebeest.org/hg/release/${ICEDTEA_PREFIX}</a>&quot;<br></blockquote>=
+</div></div></blockquote><div>=C2=A0</div><div>I think this is the problem-=
+child URL. I don&#39;t see &quot;forest&quot; in the revived <a href=3D"htt=
+ps://icedtea.classpath.org/">https://icedtea.classpath.org/</a> site.</div>=
+<div>We probably need to reach out to the site/organization to remind them =
+of the oversight.</div><div><br></div><blockquote class=3D"gmail_quote" sty=
+le=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddi=
+ng-left:1ex"><div dir=3D"ltr"><div class=3D"gmail_quote"><blockquote class=
+=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
+b(204,204,204);padding-left:1ex">
+<br>
+=C2=A0OPENJDK_CHANGESET =3D &quot;22cc03983e20&quot;<br>
+=C2=A0OPENJDK_FILE_UPSTREAM =3D &quot;${OPENJDK_CHANGESET}.tar.bz2&quot;<br=
+>
+-- <br>
+2.43.0.windows.1<br>
+<br>
+<br>
+<br>
+<br>
+</blockquote></div></div>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#109589): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/109589" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/109589</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/105137637/924=
+729" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
+/105137637/924729</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
+et=3D"_blank">ticotimo@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
+
+--000000000000b40d2006147dbdf7--
 
