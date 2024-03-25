@@ -1,279 +1,140 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <randy.macleod@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 37A98C54E58
-	for <webhook@archiver.kernel.org>; Mon, 25 Mar 2024 18:23:40 +0000 (UTC)
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
- by mx.groups.io with SMTP id smtpd.web10.2896.1711391017012272954
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8AEF6C54E58
+	for <webhook@archiver.kernel.org>; Mon, 25 Mar 2024 19:48:11 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.1452.1711396082845733518
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Mar 2024 11:23:37 -0700
+ Mon, 25 Mar 2024 12:48:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=XASFwvHP;
- spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-33ececeb19eso3062747f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 11:23:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1711391015; x=1711995815; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=XPnsk5Tv/260bfCyR6zqAqjCQOjw3fMLE3rX8N5MaPc=;
-        b=XASFwvHPSt9ZCpyabRHH2XvUTEfg125KtrbIZN7+d7+rDyQkuZrdoMek8bBsWTSQGL
-         h5fEbsWtq9HRPCYp6U+gdDUAeySiMIzTx5nXGvjgsEfERw3CZSdwWUi+ZrTX0Y3mIySN
-         hdCDQad/ghSwPqs8KdLH6iRYpswAFt3NmRgyxxijIktqXr7HEK6C2PK/TEwnlyZjm2Gw
-         6YYGjbNsHm8BiZ2AbvTGUC6I16Ch5y7XXGz+UM4HKcpiAdPpM8jqieJ1OJqrqDDXst4t
-         6GxLFV479Z8b6VoMVQm+PjuSxvoCEoVFYZEbiTifbCw0u/bDkMWHvAUG6hSQ0VNQFB+n
-         3y0w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1711391015; x=1711995815;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=XPnsk5Tv/260bfCyR6zqAqjCQOjw3fMLE3rX8N5MaPc=;
-        b=i78PbrGEPmGuLvGsXDCYaYtbxI+Qjg/2/eYoDK52QWiHFLqEzCBfMVsnH0AWU+IRpG
-         fzKTFpFCe2lI043xtSWu4uu/VE54Dm1ObO0h+ZQJcPC9m6f2ryaE10dcMLtPkHDPHwFi
-         wrlLAq9tY3OjMC6cbW/J3ZliDX1poNA8tNiyxUQi0vzVETpCZ82VyoGQHfpPg3EPGR4t
-         Jdpug1AS6u0/h52Okjfk9yQb2TvrNpzBhA752YeXP6E3z/9R417BGZRhHgcG5UW3BAKT
-         1hnveZlSuEl75NCRjRpdNiZPAd8GZUfO61nep+WI3+jRoZmk9BBw+5mIDymzkVpmhRSn
-         rjwg==
-X-Gm-Message-State: AOJu0Yzdc/0JR9uXnQUWHr94By13PiCEs3VYNvvvhFW/SMBs5X4kf42K
-	5NJa+iQK2qb19pRf8MXf4fUPkKNA8W+LD3gOt1T+/9AAGyaEgHH9jI3EQdH3YXuJXzAnSNvxUQ+
-	B8M2e7L6V8Elvx8SHrzz1oHHEOpU=
-X-Google-Smtp-Source: AGHT+IH0fBm63VK6GWcqc0Rww19gfiso2chwX79xINZC9kJhm7dsN+J45JyvTJgWC1vPy/dFphAeJa0drW6TtjxyU/c=
-X-Received: by 2002:adf:e011:0:b0:33e:c604:dd50 with SMTP id
- s17-20020adfe011000000b0033ec604dd50mr5273718wrh.51.1711391015072; Mon, 25
- Mar 2024 11:23:35 -0700 (PDT)
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=mS2jscvM;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=3814fe1ce9=randy.macleod@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 42P9ahoV024239
+	for <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 12:48:02 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=8Oxml
+	Bow+m5A0stFQDglExsjvgiV/W4HXwljRPjUwuQ=; b=mS2jscvMBVo7MDGPlJcqP
+	gZqXU/Be68aUOoUpJdo3De2wikZmABFCZyqEXfy83KRxFKE7MxhSLc0WV1iSGsVE
+	f+sWzqavmsz6DrKQYb3y8SEbwDQt9FY/x8TzQ4MNVYBTRpDP5sMdNZnVCojDe+wF
+	Hw9KyEZDNYbUGYBHFQ5GW3WqpxpQ77jHxZR3nWZ3/Jl2RQFecgnNzqTjz/TsK6I9
+	C8JuX/Y6VSEDeyVlMJD/5/onMN2F5ehgvniZpdvikwLAZAlBvZWX5MojLyPK5min
+	P+0+LD/zmeWW3tBiXwVw7J1hsSemNW9x9irwn+gCj2lvBM/IXVj0taaDBzNG9APl
+	Q==
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3x1tc0tq5h-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 12:48:02 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.37; Mon, 25 Mar 2024 12:48:01 -0700
+Received: from ala-lpggp3.wrs.com (147.11.105.124) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.37 via Frontend Transport; Mon, 25 Mar 2024 12:48:01 -0700
+From: <Randy.MacLeod@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [PATCH] rsyslog: update from 8.2306.0 to 8.2402.0
+Date: Mon, 25 Mar 2024 12:48:01 -0700
+Message-ID: <20240325194801.1873730-1-Randy.MacLeod@windriver.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20240325175753.3507115-1-raj.khem@gmail.com> <20240325175753.3507115-2-raj.khem@gmail.com>
-In-Reply-To: <20240325175753.3507115-2-raj.khem@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 25 Mar 2024 19:23:22 +0100
-Message-ID: <CA+chaQe+9CVNQU6gJZNX5KGZRaPYBAVN0Y76af9njuCP4Lcsrw@mail.gmail.com>
-Subject: Re: [oe] [meta-filesystems][PATCH 2/2] xfstests: Fix build with musl
- >= 1.2.5
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-GUID: U6pSfke6V3Au6cw477YJBiLOqjaaCi8P
+X-Proofpoint-ORIG-GUID: U6pSfke6V3Au6cw477YJBiLOqjaaCi8P
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-03-25_18,2024-03-21_02,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 malwarescore=0
+ suspectscore=0 mlxlogscore=999 clxscore=1015 impostorscore=0
+ priorityscore=1501 spamscore=0 adultscore=0 lowpriorityscore=0 bulkscore=0
+ phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2403210001 definitions=main-2403250120
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 18:23:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109598
+ <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 19:48:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109599
 
-On Mon, Mar 25, 2024 at 6:57=E2=80=AFPM Khem Raj <raj.khem@gmail.com> wrote=
-:
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  ...-libgen.h-for-basename-API-prototype.patch | 84 +++++++++++++++++++
->  ...X_ATTR_-defines-from-musl-sys-stat.h.patch | 42 ++++++++++
->  .../xfstests/xfstests_2024.03.03.bb           |  2 +
->  3 files changed, 128 insertions(+)
->  create mode 100644 meta-filesystems/recipes-utils/xfstests/xfstests/0001=
--include-libgen.h-for-basename-API-prototype.patch
->  create mode 100644 meta-filesystems/recipes-utils/xfstests/xfstests/0002=
--Add-missing-STATX_ATTR_-defines-from-musl-sys-stat.h.patch
->
-> diff --git a/meta-filesystems/recipes-utils/xfstests/xfstests/0001-includ=
-e-libgen.h-for-basename-API-prototype.patch b/meta-filesystems/recipes-util=
-s/xfstests/xfstests/0001-include-libgen.h-for-basename-API-prototype.patch
-> new file mode 100644
-> index 0000000000..1f7ae32f04
-> --- /dev/null
-> +++ b/meta-filesystems/recipes-utils/xfstests/xfstests/0001-include-libge=
-n.h-for-basename-API-prototype.patch
-> @@ -0,0 +1,84 @@
-> +From 37caab7a43da5ede0ff1eb700f0257a213ac4b18 Mon Sep 17 00:00:00 2001
-> +From: Khem Raj <raj.khem@gmail.com>
-> +Date: Mon, 25 Mar 2024 10:46:50 -0700
-> +Subject: [PATCH 1/2] include libgen.h for basename API prototype
-> +
-> +basename prototype has been removed from string.h from latest musl [1]
-> +compilers e.g. clang-18 flags the absense of prototype as error. therefo=
-re
-> +include libgen.h for providing it.
-> +
-> +[1] https://git.musl-libc.org/cgit/musl/commit/?id=3D725e17ed6dff4d0cd22=
-487bb64470881e86a92e7
-> +
-> +Upstream-Status: [https://lore.kernel.org/fstests/20240325175323.3450750=
--1-raj.khem@gmail.com/T/#t]
+From: Randy MacLeod <Randy.MacLeod@windriver.com>
 
-You forgot "Submitted" here.
+Change the PACKAGECONFIG[systemd] that wrapped --with-systemdsystemunitdir
+to use the new --enable-libsystemd option:
+   acb62dfda remove systemd embedded code, use library instead
 
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +---
-> + src/splice-test.c                   | 1 +
-> + src/stat_test.c                     | 1 +
-> + src/t_ext4_dax_inline_corruption.c  | 1 +
-> + src/t_ext4_dax_journal_corruption.c | 1 +
-> + src/t_mmap_collision.c              | 1 +
-> + 5 files changed, 5 insertions(+)
-> +
-> +diff --git a/src/splice-test.c b/src/splice-test.c
-> +index eb863673..7b7094f5 100644
-> +--- a/src/splice-test.c
-> ++++ b/src/splice-test.c
-> +@@ -11,6 +11,7 @@
-> + #include <unistd.h>
-> + #include <fcntl.h>
-> + #include <err.h>
-> ++#include <libgen.h>
-> +
-> + #include <stdlib.h>
-> + #include <stdio.h>
-> +diff --git a/src/stat_test.c b/src/stat_test.c
-> +index 95cfdc4f..77e1acdd 100644
-> +--- a/src/stat_test.c
-> ++++ b/src/stat_test.c
-> +@@ -4,6 +4,7 @@
-> +  * Written by David Howells (dhowells@redhat.com)
-> +  */
-> +
-> ++#include <libgen.h>
-> + #include <stdarg.h>
-> + #include <stdio.h>
-> + #include <stdlib.h>
-> +diff --git a/src/t_ext4_dax_inline_corruption.c b/src/t_ext4_dax_inline_=
-corruption.c
-> +index e1a39a6c..a40c5df5 100644
-> +--- a/src/t_ext4_dax_inline_corruption.c
-> ++++ b/src/t_ext4_dax_inline_corruption.c
-> +@@ -2,6 +2,7 @@
-> + /* Copyright (c) 2018 Intel Corporation. */
-> + #include <errno.h>
-> + #include <fcntl.h>
-> ++#include <libgen.h>
-> + #include <stdio.h>
-> + #include <stdlib.h>
-> + #include <string.h>
-> +diff --git a/src/t_ext4_dax_journal_corruption.c b/src/t_ext4_dax_journa=
-l_corruption.c
-> +index ba7a96e4..53be10c2 100644
-> +--- a/src/t_ext4_dax_journal_corruption.c
-> ++++ b/src/t_ext4_dax_journal_corruption.c
-> +@@ -2,6 +2,7 @@
-> + /* Copyright (c) 2018 Intel Corporation. */
-> + #include <errno.h>
-> + #include <fcntl.h>
-> ++#include <libgen.h>
-> + #include <stdio.h>
-> + #include <stdlib.h>
-> + #include <string.h>
-> +diff --git a/src/t_mmap_collision.c b/src/t_mmap_collision.c
-> +index c872f4e2..d9315fcf 100644
-> +--- a/src/t_mmap_collision.c
-> ++++ b/src/t_mmap_collision.c
-> +@@ -15,6 +15,7 @@
-> +  */
-> + #include <errno.h>
-> + #include <fcntl.h>
-> ++#include <libgen.h>
-> + #include <pthread.h>
-> + #include <stdbool.h>
-> + #include <stdio.h>
-> +--
-> +2.44.0
-> +
-> diff --git a/meta-filesystems/recipes-utils/xfstests/xfstests/0002-Add-mi=
-ssing-STATX_ATTR_-defines-from-musl-sys-stat.h.patch b/meta-filesystems/rec=
-ipes-utils/xfstests/xfstests/0002-Add-missing-STATX_ATTR_-defines-from-musl=
--sys-stat.h.patch
-> new file mode 100644
-> index 0000000000..20095c86ab
-> --- /dev/null
-> +++ b/meta-filesystems/recipes-utils/xfstests/xfstests/0002-Add-missing-S=
-TATX_ATTR_-defines-from-musl-sys-stat.h.patch
-> @@ -0,0 +1,42 @@
-> +From 052818e91314b797d96d87672c60f6784160f935 Mon Sep 17 00:00:00 2001
-> +From: Khem Raj <raj.khem@gmail.com>
-> +Date: Mon, 25 Mar 2024 10:50:59 -0700
-> +Subject: [PATCH 2/2] Add missing STATX_ATTR_* defines from musl sys/stat=
-.h
-> +
-> +These defines are not provided by sys/stat.h on musl but are
-> +in glibc's sys/stat.h, therefore to compile the tests on musl
-> +based systems add the missing defines from linux/stat.h
-> +if they are not provided
-> +
-> +Upstream-Status: Submitted [https://lore.kernel.org/fstests/202403251753=
-23.3450750-2-raj.khem@gmail.com/T/#u]
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +---
-> + src/statx.h | 12 ++++++++++++
-> + 1 file changed, 12 insertions(+)
-> +
-> +diff --git a/src/statx.h b/src/statx.h
-> +index 3f239d79..12599f5b 100644
-> +--- a/src/statx.h
-> ++++ b/src/statx.h
-> +@@ -12,6 +12,18 @@
-> + #define AT_STATX_DONT_SYNC      0x4000  /* - Don't sync attributes with=
- the server */
-> + #endif
-> +
-> ++#ifndef STATX_ATTR_COMPRESSED
-> ++#define STATX_ATTR_COMPRESSED         0x00000004 /* [I] File is compres=
-sed by the fs */
-> ++#define STATX_ATTR_IMMUTABLE          0x00000010 /* [I] File is marked =
-immutable */
-> ++#define STATX_ATTR_APPEND             0x00000020 /* [I] File is append-=
-only */
-> ++#define STATX_ATTR_NODUMP             0x00000040 /* [I] File is not to =
-be dumped */
-> ++#define STATX_ATTR_ENCRYPTED          0x00000800 /* [I] File requires k=
-ey to decrypt in fs */
-> ++#define STATX_ATTR_AUTOMOUNT          0x00001000 /* Dir: Automount trig=
-ger */
-> ++#define STATX_ATTR_MOUNT_ROOT         0x00002000 /* Root of a mount */
-> ++#define STATX_ATTR_VERITY             0x00100000 /* [I] Verity protecte=
-d file */
-> ++#define STATX_ATTR_DAX                        0x00200000 /* File is cur=
-rently in DAX state */
-> ++#endif
-> ++
-> + #ifndef AT_NO_AUTOMOUNT
-> + #define AT_NO_AUTOMOUNT               0x800   /* Suppress terminal auto=
-mount traversal */
-> + #endif
-> +--
-> +2.44.0
-> +
-> diff --git a/meta-filesystems/recipes-utils/xfstests/xfstests_2024.03.03.=
-bb b/meta-filesystems/recipes-utils/xfstests/xfstests_2024.03.03.bb
-> index 2d5fedb417..c8a80523dd 100644
-> --- a/meta-filesystems/recipes-utils/xfstests/xfstests_2024.03.03.bb
-> +++ b/meta-filesystems/recipes-utils/xfstests/xfstests_2024.03.03.bb
-> @@ -10,6 +10,8 @@ SRC_URI =3D "git://git.kernel.org/pub/scm/fs/xfs/xfstes=
-ts-dev.git;branch=3Dmaster \
->             git://github.com/amir73il/unionmount-testsuite.git;branch=3Dm=
-aster;protocol=3Dhttps;name=3Dunionmount;destsuffix=3Dunionmount-testsuite =
-\
->             file://0001-add-missing-FTW_-macros-when-not-available-in-lib=
-c.patch \
->             file://0002-Drop-detached_mounts_propagation-and-remove-sys-m=
-oun.patch \
-> +           file://0001-include-libgen.h-for-basename-API-prototype.patch=
- \
-> +           file://0002-Add-missing-STATX_ATTR_-defines-from-musl-sys-sta=
-t.h.patch \
->             "
->
->  S =3D "${WORKDIR}/git"
-> --
-> 2.44.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#109597): https://lists.openembedded.org/g/openembedde=
-d-devel/message/109597
-> Mute This Topic: https://lists.openembedded.org/mt/105143486/3617156
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
-artin.jansa@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+The bug related to using libcap-ng has beeen fixed:
+   https://github.com/rsyslog/rsyslog/pull/5166/commits/030e047fd0c896b4cb2433bab853321eff6f8ec9
+so use that library by default now to allow rsyslog to run with fewer privileges.
+
+PTest results: sysvinit, systemd
+ TOTAL: 462, 462
+ PASS:  457, 459
+ SKIP:  5, 3
+ XFAIL: 0, 0
+ FAIL:  0, 0
+ XPASS: 0, 0
+ ERROR: 0, 0
+
+Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+---
+ .../rsyslog/{rsyslog_8.2306.0.bb => rsyslog_8.2402.0.bb} | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
+ rename meta-oe/recipes-extended/rsyslog/{rsyslog_8.2306.0.bb => rsyslog_8.2402.0.bb} (95%)
+
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2306.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2402.0.bb
+similarity index 95%
+rename from meta-oe/recipes-extended/rsyslog/rsyslog_8.2306.0.bb
+rename to meta-oe/recipes-extended/rsyslog/rsyslog_8.2402.0.bb
+index c3948a40e..af46cc14d 100644
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.2306.0.bb
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.2402.0.bb
+@@ -32,7 +32,7 @@ SRC_URI:append:libc-musl = " \
+     file://disable-omfile-outchannel.patch \
+ "
+ 
+-SRC_URI[sha256sum] = "f6283efaadc609540a56e6bec88a362c966e77f29fe48e6b734bd6c1123e0be5"
++SRC_URI[sha256sum] = "acbdd8579489df36b4a383dc6909a61b7623807f0aff54c062115f2de7ea85ba"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/releases"
+ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+@@ -47,7 +47,7 @@ EXTRA_OECONF:remove:riscv32 = "ap_cv_atomic_builtins=yes"
+ 
+ # first line is default yes in configure
+ PACKAGECONFIG ??= " \
+-    rsyslogd rsyslogrt klog inet regexp uuid libgcrypt \
++    rsyslogd rsyslogrt klog inet regexp uuid libcap-ng libgcrypt \
+     fmhttp imdiag openssl imfile \
+     ${@bb.utils.filter('DISTRO_FEATURES', 'snmp systemd', d)} \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'testbench relp ${VALGRIND}', '', d)} \
+@@ -60,6 +60,7 @@ PACKAGECONFIG[rsyslogrt] = "--enable-rsyslogrt,--disable-rsyslogrt,,"
+ PACKAGECONFIG[fmhttp] = "--enable-fmhttp,--disable-fmhttp,curl,"
+ PACKAGECONFIG[inet] = "--enable-inet,--disable-inet,,"
+ PACKAGECONFIG[klog] = "--enable-klog,--disable-klog,,"
++PACKAGECONFIG[libcap-ng] = "--enable-libcap-ng,--disable-libcap-ng,libcap-ng,"
+ PACKAGECONFIG[regexp] = "--enable-regexp,--disable-regexp,,"
+ PACKAGECONFIG[uuid] = "--enable-uuid,--disable-uuid,util-linux,"
+ PACKAGECONFIG[libgcrypt] = "--enable-libgcrypt,--disable-libgcrypt,libgcrypt,"
+@@ -72,14 +73,12 @@ PACKAGECONFIG[imfile] = "--enable-imfile,--disable-imfile,,"
+ PACKAGECONFIG[snmp] = "--enable-snmp,--disable-snmp,net-snmp,"
+ PACKAGECONFIG[gnutls] = "--enable-gnutls,--disable-gnutls,gnutls,"
+ PACKAGECONFIG[openssl] = "--enable-openssl,--disable-openssl,openssl,"
+-PACKAGECONFIG[systemd] = "--with-systemdsystemunitdir=${systemd_unitdir}/system/,--without-systemdsystemunitdir,systemd,"
++PACKAGECONFIG[systemd] = "--enable-libsystemd,--disable-libsystemd,systemd,"
+ PACKAGECONFIG[imjournal] = "--enable-imjournal,--disable-imjournal,"
+ PACKAGECONFIG[mmjsonparse] = "--enable-mmjsonparse,--disable-mmjsonparse,"
+ PACKAGECONFIG[mysql] = "--enable-mysql,--disable-mysql,mysql5,"
+ PACKAGECONFIG[postgresql] = "--enable-pgsql,--disable-pgsql,postgresql,"
+ PACKAGECONFIG[libdbi] = "--enable-libdbi,--disable-libdbi,libdbi,"
+-# For libcap-ng, see commit log and  https://github.com/rsyslog/rsyslog/issues/5091
+-PACKAGECONFIG[libcap-ng] = "--enable-libcap-ng,--disable-libcap-ng,libcap-ng,"
+ PACKAGECONFIG[mail] = "--enable-mail,--disable-mail,,"
+ PACKAGECONFIG[valgrind] = ",--without-valgrind-testbench,valgrind,"
+ PACKAGECONFIG[imhttp] = "--enable-imhttp,--disable-imhttp,civetweb,"
+-- 
+2.43.0
+
 
