@@ -1,222 +1,99 @@
-Return-Path: <meenali.gupta@windriver.com>
+Return-Path: <vanusuri@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6BE18C54E58
-	for <webhook@archiver.kernel.org>; Mon, 25 Mar 2024 07:16:10 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.46267.1711350966762958322
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 431DECD11DB
+	for <webhook@archiver.kernel.org>; Mon, 25 Mar 2024 10:17:31 +0000 (UTC)
+Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
+ by mx.groups.io with SMTP id smtpd.web11.48318.1711361849590961566
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Mar 2024 00:16:06 -0700
+ Mon, 25 Mar 2024 03:17:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=HVLctOS4;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=3814f74163=meenali.gupta@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 42P6oVVG011974
-	for <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 00:16:06 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=z1BwW
-	JG/TCZbpBPLjMpHH/tkLEPHwr2D9tw/ImgTEhw=; b=HVLctOS45EVkRAMvIXqaL
-	tbPRrQtjPFfeXTCqSgA+eCa/linFa/mWxaIxvCrwQ8vhoUSW/FWWuPENIatQ6bCy
-	CYdrxY3x+nfldVsJmVBG4o8N8zcNOjcblHi+Q5R9ow2TLsXiP0sZNmYL9XLv4Jcx
-	VjsviSMnjCfm4/cpr+juxL7nxZr0lgdZYg9UnFZw1hxcJkRTtvzoE/aDdu1zsAND
-	sLm8C67pHf4DgbusUHfKlL4OrS2+LG3BcAAuMj5GgDJ4Fo7aqqqXhAmzHuUhEWwp
-	XsBREM/4PMMXdsCWyr9V7nVyMInHmOineYoCTV5QajWx/MqOwSKPbqWqzbWkM0vC
-	g==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3x1xkgsrkx-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 00:16:06 -0700 (PDT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.37; Mon, 25 Mar 2024 00:16:04 -0700
-From: mgupta1 <meenali.gupta@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][kirkstone][PATCH 1/1] graphviz: fix CVE-2023-46045
-Date: Mon, 25 Mar 2024 07:15:46 +0000
-Message-ID: <20240325071546.640286-1-meenali.gupta@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@mvista.com header.s=google header.b=MqR04xPX;
+ spf=pass (domain: mvista.com, ip: 209.85.210.179, mailfrom: vanusuri@mvista.com)
+Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-6e6a9fafacdso3102594b3a.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 03:17:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mvista.com; s=google; t=1711361848; x=1711966648; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=aPRtArUQ33+r0tPGNNVggNlBGvJzSDFUqhYHVhTwduk=;
+        b=MqR04xPXehbLQI14g2ZC8C0QZbroC8RIbkbnLJe5Q6cfC9Mcx/3ijNvhkBHxVquzfn
+         e861J6T2oB63/qfJwcIv0Y0dBysxrOPYvYAdrhAInbXgYKmBtUo18qgXnrAEHx9cbfv5
+         1tLYxXescIz9GkUjnxBVR5pvaHuF0x9BEm5Co=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1711361848; x=1711966648;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=aPRtArUQ33+r0tPGNNVggNlBGvJzSDFUqhYHVhTwduk=;
+        b=ctc8LICfDPV0fzGjyOLKpk8yIfpkHx8gpEKqHznoJslqRUMIjdz49F2uwiRvM+X/Z0
+         AYSKr7JRSpbgzCJhFrY4jCllaLwTfp5WrgyW6VR4F7RUI1R0XzjJfCpPpQkBSJ8Y7h9o
+         Af5Hv1KfTxgCdV4S6c3TjpfSzQvKpUpEsL6z+UKJEoDQkdeWs2ULe28POkjQm7nEPXX0
+         BiwPXlWhFDnjVAh2vDrdBSGJ+imyTQEVs0Rx7SDrZ4zswnd8alFz3l98OD+Mi1mnXWiq
+         H5Qk+7RDNSR18lyTbCxHoH9QfwGPtvO8usToq5j16Jk7RdqSyZ7J9iMaPdq1LiIqTT3R
+         FXig==
+X-Gm-Message-State: AOJu0Yxqex0HWqLe6klpyTSu/32r4cq26nk5H8L6xGUtnznj+MGZamcE
+	LbJg1hH8w1cLhfv8B2azhDP+XSQuSeiWIu9Ho97Og2LBojjZj6CNhNvKUxSqm1O6EZ+8A15RB5z
+	6
+X-Google-Smtp-Source: AGHT+IGH9vRYck0riTNEsG6Nhw5An++jmLD/TpfHxZzcx02XH94+9NK301in6O8OeXNziM8kQE6Paw==
+X-Received: by 2002:a05:6a20:244d:b0:1a3:c8bf:737b with SMTP id t13-20020a056a20244d00b001a3c8bf737bmr1866410pzc.46.1711361847796;
+        Mon, 25 Mar 2024 03:17:27 -0700 (PDT)
+Received: from MVIN00020.mvista.com ([2401:4900:1cb1:ffb5:58d2:2c62:d37e:ba2f])
+        by smtp.gmail.com with ESMTPSA id qd13-20020a17090b3ccd00b002a058159ff8sm3226955pjb.8.2024.03.25.03.17.25
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 25 Mar 2024 03:17:27 -0700 (PDT)
+From: vanusuri@mvista.com
+To: openembedded-devel@lists.openembedded.org
+Cc: akuster808@gmail.com,
+	Vijay Anusuri <vanusuri@mvista.com>
+Subject: [oe][meta-oe][dunfell][PATCH] postgresql: Update to 12.18
+Date: Mon, 25 Mar 2024 15:47:17 +0530
+Message-Id: <20240325101717.580147-1-vanusuri@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-ORIG-GUID: wiKmMtg2vGDnTbiNqXnlUni7FitgT-F7
-X-Proofpoint-GUID: wiKmMtg2vGDnTbiNqXnlUni7FitgT-F7
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-03-25_04,2024-03-21_02,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
- adultscore=0 impostorscore=0 spamscore=0 priorityscore=1501 bulkscore=0
- suspectscore=0 mlxscore=0 mlxlogscore=999 phishscore=0 malwarescore=0
- clxscore=1011 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2403210001 definitions=main-2403250038
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 07:16:10 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109572
+ <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 10:17:31 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109573
 
-From: Meenali Gupta <meenali.gupta@windriver.com>
+From: Vijay Anusuri <vanusuri@mvista.com>
 
-Graphviz 2.36 before 10.0.0 has an out-of-bounds read via a crafted config6a file.
-NOTE: exploitability may be uncommon because this file is typically owned by root.
+Minor security and bugfix release. Fixes CVE-2024-0985.
 
-Signed-off-by: Meenali Gupta <meenali.gupta@windriver.com>
+Additional information is available in the release notes:
+https://www.postgresql.org/docs/release/12.18/
+
+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
 ---
- .../graphviz/graphviz/CVE-2023-46045-1.patch  | 38 ++++++++++++++++++
- .../graphviz/graphviz/CVE-2023-46045-2.patch  | 39 +++++++++++++++++++
- .../graphviz/graphviz/CVE-2023-46045-3.patch  | 31 +++++++++++++++
- .../graphviz/graphviz_2.50.0.bb               |  3 ++
- 4 files changed, 111 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/graphviz/graphviz/CVE-2023-46045-1.patch
- create mode 100644 meta-oe/recipes-graphics/graphviz/graphviz/CVE-2023-46045-2.patch
- create mode 100644 meta-oe/recipes-graphics/graphviz/graphviz/CVE-2023-46045-3.patch
+ .../postgresql/{postgresql_12.17.bb => postgresql_12.18.bb}   | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-dbs/postgresql/{postgresql_12.17.bb => postgresql_12.18.bb} (51%)
 
-diff --git a/meta-oe/recipes-graphics/graphviz/graphviz/CVE-2023-46045-1.patch b/meta-oe/recipes-graphics/graphviz/graphviz/CVE-2023-46045-1.patch
-new file mode 100644
-index 000000000..a48f8aa06
---- /dev/null
-+++ b/meta-oe/recipes-graphics/graphviz/graphviz/CVE-2023-46045-1.patch
-@@ -0,0 +1,38 @@
-+From 361f274ca901c3c476697a6404662d95f4dd43cb Mon Sep 17 00:00:00 2001
-+From: Matthew Fernandez <matthew.fernandez@gmail.com>
-+Date: Fri, 12 Jan 2024 17:06:17 +1100
-+Subject: [PATCH] gvc gvconfig_plugin_install_from_config: more tightly scope 
-+ 'gv_api'
-+
-+Upstream-Status: Backport [https://gitlab.com/graphviz/graphviz/-/commit/361f274ca901c3c476697a6404662d95f4dd43cb]
-+CVE: CVE-2023-46045
-+ 
-+Signed-off-by: Meenali Gupta <meenali.gupta@windriver.com>
-+---
-+ lib/gvc/gvconfig.c | 3 +--
-+ 1 file changed, 1 insertion(+), 2 deletions(-)
-+
-+diff --git a/lib/gvc/gvconfig.c b/lib/gvc/gvconfig.c
-+index 2d86321..f9d1dcc 100644
-+--- a/lib/gvc/gvconfig.c
-++++ b/lib/gvc/gvconfig.c
-+@@ -173,7 +173,6 @@ static int gvconfig_plugin_install_from_config(GVC_t * gvc, char *s)
-+ {
-+     char *package_path, *name, *api;
-+     const char *type;
-+-    api_t gv_api;
-+     int quality, rc;
-+     int nest = 0;
-+     gvplugin_package_t *package;
-+@@ -188,7 +187,7 @@ static int gvconfig_plugin_install_from_config(GVC_t * gvc, char *s)
-+         package = gvplugin_package_record(gvc, package_path, name);
-+ 	do {
-+ 	    api = token(&nest, &s);
-+-	    gv_api = gvplugin_api(api);
-++	    const api_t gv_api = gvplugin_api(api);
-+ 	    do {
-+ 		if (nest == 2) {
-+ 		    type = token(&nest, &s);
-+-- 
-+2.40.0
-+
-diff --git a/meta-oe/recipes-graphics/graphviz/graphviz/CVE-2023-46045-2.patch b/meta-oe/recipes-graphics/graphviz/graphviz/CVE-2023-46045-2.patch
-new file mode 100644
-index 000000000..4c70b1a87
---- /dev/null
-+++ b/meta-oe/recipes-graphics/graphviz/graphviz/CVE-2023-46045-2.patch
-@@ -0,0 +1,39 @@
-+From 3f31704cafd7da3e86bb2861accf5e90c973e62a Mon Sep 17 00:00:00 2001
-+From: Matthew Fernandez <matthew.fernandez@gmail.com>
-+Date: Fri, 12 Jan 2024 17:06:17 +1100
-+Subject: [PATCH] gvc gvconfig_plugin_install_from_config: more tightly scope 
-+ 'api'
-+
-+Upstream-Status: Backport [https://gitlab.com/graphviz/graphviz/-/commit/3f31704cafd7da3e86bb2861accf5e90c973e62a]
-+CVE: CVE-2023-46045
-+
-+Signed-off-by: Meenali Gupta <meenali.gupta@windriver.com>
-+---
-+ lib/gvc/gvconfig.c | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/lib/gvc/gvconfig.c b/lib/gvc/gvconfig.c
-+index f9d1dcc..95e8c6c 100644
-+--- a/lib/gvc/gvconfig.c
-++++ b/lib/gvc/gvconfig.c
-+@@ -171,7 +171,7 @@ static char *token(int *nest, char **tokens)
-+ 
-+ static int gvconfig_plugin_install_from_config(GVC_t * gvc, char *s)
-+ {
-+-    char *package_path, *name, *api;
-++    char *package_path, *name;
-+     const char *type;
-+     int quality, rc;
-+     int nest = 0;
-+@@ -186,7 +186,7 @@ static int gvconfig_plugin_install_from_config(GVC_t * gvc, char *s)
-+ 	    name = "x";
-+         package = gvplugin_package_record(gvc, package_path, name);
-+ 	do {
-+-	    api = token(&nest, &s);
-++	    const char *api = token(&nest, &s);
-+ 	    const api_t gv_api = gvplugin_api(api);
-+ 	    do {
-+ 		if (nest == 2) {
-+-- 
-+2.40.0
-+
-diff --git a/meta-oe/recipes-graphics/graphviz/graphviz/CVE-2023-46045-3.patch b/meta-oe/recipes-graphics/graphviz/graphviz/CVE-2023-46045-3.patch
-new file mode 100644
-index 000000000..4746265ee
---- /dev/null
-+++ b/meta-oe/recipes-graphics/graphviz/graphviz/CVE-2023-46045-3.patch
-@@ -0,0 +1,31 @@
-+From a95f977f5d809915ec4b14836d2b5b7f5e74881e Mon Sep 17 00:00:00 2001
-+From: Matthew Fernandez <matthew.fernandez@gmail.com>
-+Date: Fri, 12 Jan 2024 17:06:17 +1100
-+Subject: [PATCH] gvc: detect plugin installation failure and display an error
-+
-+Upstream-Status: Backport [https://gitlab.com/graphviz/graphviz/-/commit/a95f977f5d809915ec4b14836d2b5b7f5e74881e]
-+CVE: CVE-2023-46045
-+
-+Signed-off-by: Meenali Gupta <meenali.gupta@windriver.com>
-+---
-+ lib/gvc/gvconfig.c | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/lib/gvc/gvconfig.c b/lib/gvc/gvconfig.c
-+index 95e8c6c..77d0865 100644
-+--- a/lib/gvc/gvconfig.c
-++++ b/lib/gvc/gvconfig.c
-+@@ -188,6 +188,10 @@ static int gvconfig_plugin_install_from_config(GVC_t * gvc, char *s)
-+ 	do {
-+ 	    const char *api = token(&nest, &s);
-+ 	    const api_t gv_api = gvplugin_api(api);
-++	    if (gv_api == (api_t)-1) {
-++		agerr(AGERR, "config error: %s %s not found\n", package_path, api);
-++		return 0;
-++	    }
-+ 	    do {
-+ 		if (nest == 2) {
-+ 		    type = token(&nest, &s);
-+-- 
-+2.40.0
-+
-diff --git a/meta-oe/recipes-graphics/graphviz/graphviz_2.50.0.bb b/meta-oe/recipes-graphics/graphviz/graphviz_2.50.0.bb
-index 4c51af669..f06e2adb0 100644
---- a/meta-oe/recipes-graphics/graphviz/graphviz_2.50.0.bb
-+++ b/meta-oe/recipes-graphics/graphviz/graphviz_2.50.0.bb
-@@ -20,6 +20,9 @@ DEPENDS:append:class-nativesdk = " ${BPN}-native"
- inherit autotools-brokensep pkgconfig gettext qemu
+diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_12.17.bb b/meta-oe/recipes-dbs/postgresql/postgresql_12.18.bb
+similarity index 51%
+rename from meta-oe/recipes-dbs/postgresql/postgresql_12.17.bb
+rename to meta-oe/recipes-dbs/postgresql/postgresql_12.18.bb
+index e9f9f50a2..44074a233 100644
+--- a/meta-oe/recipes-dbs/postgresql/postgresql_12.17.bb
++++ b/meta-oe/recipes-dbs/postgresql/postgresql_12.18.bb
+@@ -1,6 +1,6 @@
+ require postgresql.inc
  
- SRC_URI = "https://gitlab.com/api/v4/projects/4207231/packages/generic/${BPN}-releases/${PV}/${BP}.tar.xz \
-+	   file://CVE-2023-46045-1.patch \
-+           file://CVE-2023-46045-2.patch \
-+           file://CVE-2023-46045-3.patch \
-            "
- # Use native mkdefs
- SRC_URI:append:class-target = "\
+-LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=c31f662bb2bfb3b4187fe9a53e0ffe7c"
++LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=89afbb2d7716371015101c2b2cb4297a"
+ 
+ SRC_URI += "\
+    file://not-check-libperl.patch \
+@@ -8,4 +8,4 @@ SRC_URI += "\
+    file://0001-Improve-reproducibility.patch \
+ "
+ 
+-SRC_URI[sha256sum] = "93e8e1b23981d5f03c6c5763f77b28184c1ce4db7194fa466e2edb65d9c1c5f6"
++SRC_URI[sha256sum] = "4f9919725d941ce9868e07fe1ed1d3a86748599b483386547583928b74c3918a"
 -- 
-2.40.0
+2.25.1
 
 
