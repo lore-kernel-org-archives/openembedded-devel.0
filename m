@@ -1,437 +1,203 @@
-Return-Path: <leon.anavi@konsulko.com>
+Return-Path: <sjolley.yp.pm@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B9639C54E64
-	for <webhook@archiver.kernel.org>; Mon, 25 Mar 2024 19:58:31 +0000 (UTC)
-Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com [209.85.208.48])
- by mx.groups.io with SMTP id smtpd.web10.1679.1711396700938323626
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D848CD11DC
+	for <webhook@archiver.kernel.org>; Mon, 25 Mar 2024 20:47:32 +0000 (UTC)
+Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
+ by mx.groups.io with SMTP id smtpd.web10.2907.1711399648256264303
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Mar 2024 12:58:21 -0700
+ Mon, 25 Mar 2024 13:47:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=bUFAQSTu;
- spf=pass (domain: konsulko.com, ip: 209.85.208.48, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-ed1-f48.google.com with SMTP id 4fb4d7f45d1cf-56c28b368efso19897a12.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 12:58:20 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=b4U4itdR;
+ spf=pass (domain: gmail.com, ip: 209.85.218.42, mailfrom: sjolley.yp.pm@gmail.com)
+Received: by mail-ej1-f42.google.com with SMTP id a640c23a62f3a-a46dd7b4bcbso584708866b.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 13:47:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google; t=1711396699; x=1712001499; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=AEf3pPKpgdfAn02D/H5LZ+juTmaDteag6GXMjSUT8VQ=;
-        b=bUFAQSTuGwJU8Qj/V9DSguicuIod1W4VOUK3bv6shHUq+JjWZrwbEeX+Q51X1K61si
-         dob9uVawzyzXxQYmRFx2Mcd1kQTaAvajn1N67iFLaO1jeRXqBYV+3Ivde6hK6MNtN0Pb
-         6d8Ef9F3EsTpVZeBNd74PERqFBDUCpYpbx9q4=
+        d=gmail.com; s=20230601; t=1711399646; x=1712004446; darn=lists.openembedded.org;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=0Ds9Y3PGkheywlc2gLvUfFD9DG6BMs71jqnzNvW9J4I=;
+        b=b4U4itdRp07dz3b0FpgtbybljDyuynKVWtVFxkMPtfxUu8rapzruT4n32bfwnWJjau
+         1OBi66Tp7WZKfuPBLNb5LuZSST/T3j0aRKqPCRmePtf1FneeqHZjTC6pPwThivJdaLr7
+         srrRppygs0v+nCHUYov9vcEhxGpNtc+DHYU/dVuStN5+9gAct6gJb93sCjNvnC2JDGOC
+         xbd6IOsoocV2pwbDyX/gzhbZERdMdUjHDUJr3ejWYJZirEfETCWBMkm+iUZDbgRBPIFC
+         N+w9k3OomtpAYBpN+K51RlD4QDsxvI5bgTmz5cl+5biWwO8pp2xwQ+xhBgqNjvAotNWA
+         NCFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1711396699; x=1712001499;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=AEf3pPKpgdfAn02D/H5LZ+juTmaDteag6GXMjSUT8VQ=;
-        b=Pmdkce97SlukaHtF2yNq6yauK7PSDtzydtg52pNzI6UXProKuhX9fK+cKllLuNpEXa
-         9OFlxdz4wHFLYmjxVfgbicPL6J9OH+KkQP0zmOlbmrHy43ZNUFE3/QMA+NfcqCR4d2uk
-         LhlP/Cxgqt/1CDAKECqs07sU1Cb1wleLFCrPZZCIcERWg7d1isl3vrvRzKfScnrctOtG
-         TBsL8y4CsTJ9NO06Gdt8tFqaf72b2z4zeFrKSEe5yY4DiiuF+v6P1E5YyvI/PIc1ghz8
-         q722qu9RJzgXEF/J0Z71JWBzM+bsm4wicpXTPDpXbGkyI/mjAgrH3vqL7nN8vW384nWi
-         W0TQ==
-X-Gm-Message-State: AOJu0Yxaj29S4HilZO9WhCxx1BBNW4mBZUntn00swtHtAS6M0Bq8Cncl
-	49k3gpNQsuKiyTZ3ShCohdmMMD3MXLbA5wpfETrZ7GZ++1phMvC1AxTiWavlysMPLSNoWGUy/QD
-	/
-X-Google-Smtp-Source: AGHT+IFQp9wTB76ZwtpwbZXDausovo/4FsQrVcgfJwFURkMC5ZB+vYNp3rgiEe3VWDWlhU/MT8ZIiA==
-X-Received: by 2002:a50:9e65:0:b0:568:b5ce:14f9 with SMTP id z92-20020a509e65000000b00568b5ce14f9mr550262ede.38.1711396698703;
-        Mon, 25 Mar 2024 12:58:18 -0700 (PDT)
-Received: from tone.k.g (lan.nucleusys.com. [92.247.61.126])
-        by smtp.gmail.com with ESMTPSA id r13-20020a056402018d00b0056c18b79cd3sm898574edv.22.2024.03.25.12.58.18
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 25 Mar 2024 12:58:18 -0700 (PDT)
-From: Leon Anavi <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 1/3] python3-multidict: Upgrade 6.0.4 -> 6.0.5
-Date: Mon, 25 Mar 2024 21:58:12 +0200
-Message-Id: <20240325195814.2825816-1-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.39.2
+        d=1e100.net; s=20230601; t=1711399646; x=1712004446;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=0Ds9Y3PGkheywlc2gLvUfFD9DG6BMs71jqnzNvW9J4I=;
+        b=VmkE6yoe8RPuDg1eCINLfIFODuTIdmIXgbuUHjp6MiWknY6qA95etX570VatlQyPxI
+         hyivlAYcYcs6PoCFgR0F9Wy3c1KSzcJY23LHEzUHCNQKA02HUeqbCD3N/dupm0tFDzgs
+         jkd741pdz6JJzWxP2GZAx5vHE9HQEFjr1a7V6MrGguIP5SAMcYLCcunAfGT+YaW46Wt3
+         +gc7vHhuSTN8dUZ/uVe/laMlkSjXJ7VcfO/DU4Qh8VMty9ydpguVgMrz/Tjf7BtkQvrh
+         aQBMPn5y2diGZ1Ld/V6rxeJwa+X7D10O0C3apERWCUTpHe+mM+r1EIFB/uow5Ftf2gCF
+         Yx7w==
+X-Gm-Message-State: AOJu0YzUpdwiOxk1MYhFge0jErBuVp5cJB8rCF7PP9AozwdP3o8bPQ6Y
+	bHTdC579TLpWPrRTg57VfLuXU8SlLFecVPjmveJ/CVcQiKLMO3xCxZksiE7xXtlEx3Pkrmcz0eC
+	KwwDII93WL5h+U3Mr1ucx58vx2zv3wm29dVI=
+X-Google-Smtp-Source: AGHT+IGhdBiDd1syU3qBSLTrinqJhl2NCPKogfpbaR7U0tzyYtCIzn1sa5rXWrdqyNcslpxixL1lSQ35CKeCUwh7j9Y=
+X-Received: by 2002:a17:906:c003:b0:a45:b91f:2f95 with SMTP id
+ e3-20020a170906c00300b00a45b91f2f95mr5005892ejz.72.1711399645975; Mon, 25 Mar
+ 2024 13:47:25 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
+Date: Mon, 25 Mar 2024 13:47:16 -0700
+Message-ID: <CAK5yBb-SU2r+NrhoQ2GEVVLahVimL7KwFOY2quVavPWCE-L_gQ@mail.gmail.com>
+Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
+To: openembedded-devel@lists.openembedded.org, 
+	Yocto-mailing-list <yocto@lists.yoctoproject.org>
+Content-Type: multipart/alternative; boundary="000000000000f79eb3061482470a"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 19:58:31 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109605
+ <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 20:47:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109608
 
-Upgrade to version 6.0.5:
+--000000000000f79eb3061482470a
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-- Upgraded the C-API macros that have been deprecated in Python 3.9
-  and later removed in 3.13
-- Reverted to using the public argument parsing API
-  PyArg_ParseTupleAndKeywords() under Python 3.12.
-- The effect is that this change prevents build failures with clang
-  16.9.6 and gcc-14. It also fixes a segmentation fault crash
-  caused by passing keyword arguments to MultiDict.getall().
-- Fixed a SystemError: null argument to internal routine error on a
-  MultiDict.items().isdisjoint() call when using C Extensions.
-- On the Contributing docs age, a link to the Towncrier philosophy
-  has been fixed.
+All,
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
----
- ...multidict-909-to-3.12-as-well-to-add.patch | 324 ------------------
- ...ct_6.0.4.bb => python3-multidict_6.0.5.bb} |   3 +-
- 2 files changed, 1 insertion(+), 326 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-multidict/0001-Extend-aio-libs-multidict-909-to-3.12-as-well-to-add.patch
- rename meta-python/recipes-devtools/python/{python3-multidict_6.0.4.bb => python3-multidict_6.0.5.bb} (84%)
+The triage team is starting to try and collect up and classify bugs which a
+newcomer to the project would be able to work on in a way which means
+people can find them. They're being listed on the triage page under the
+appropriate heading:
+https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
+review:
+https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
+how to create a bugzilla account at:
+https://bugzilla.yoctoproject.org/createaccount.cgi
 
-diff --git a/meta-python/recipes-devtools/python/python3-multidict/0001-Extend-aio-libs-multidict-909-to-3.12-as-well-to-add.patch b/meta-python/recipes-devtools/python/python3-multidict/0001-Extend-aio-libs-multidict-909-to-3.12-as-well-to-add.patch
-deleted file mode 100644
-index c3cee4643..000000000
---- a/meta-python/recipes-devtools/python/python3-multidict/0001-Extend-aio-libs-multidict-909-to-3.12-as-well-to-add.patch
-+++ /dev/null
-@@ -1,324 +0,0 @@
--From 44eaa60cc6c86951ce36811e80c3411d1b1e4c39 Mon Sep 17 00:00:00 2001
--From: Charles Duffy <charles@dyfis.net>
--Date: Fri, 19 Jan 2024 17:47:59 -0600
--Subject: [PATCH] Extend aio-libs/multidict#909 to 3.12 as well to address aio-libs/multidict#926
--
--Upstream-Status: Submitted [https://github.com/aio-libs/multidict/pull/929]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- multidict/_multidict.c | 68 +++++++++++++++++++++---------------------
-- 1 file changed, 34 insertions(+), 34 deletions(-)
--
--diff --git a/multidict/_multidict.c b/multidict/_multidict.c
--index 228d4df..6086495 100644
----- a/multidict/_multidict.c
--+++ b/multidict/_multidict.c
--@@ -9,7 +9,7 @@
-- #include "_multilib/iter.h"
-- #include "_multilib/views.h"
-- 
---#if PY_MAJOR_VERSION < 3 || PY_MINOR_VERSION < 13
--+#if PY_MAJOR_VERSION < 3 || PY_MINOR_VERSION < 12
-- #ifndef _PyArg_UnpackKeywords
-- #define FASTCALL_OLD
-- #endif
--@@ -444,7 +444,7 @@ fail:
-- static inline PyObject *
-- multidict_getall(
--     MultiDictObject *self,
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--     PyObject *args,
--     PyObject *kwds
-- #else
--@@ -458,7 +458,7 @@ multidict_getall(
--              *key      = NULL,
--              *_default = NULL;
-- 
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--     static char *getall_keywords[] = {"key", "default", NULL};
-- 
--     if (!PyArg_ParseTupleAndKeywords(args, kwds, "O|O:getall",
--@@ -509,7 +509,7 @@ skip_optional_pos:
-- static inline PyObject *
-- multidict_getone(
--     MultiDictObject *self,
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--     PyObject *args,
--     PyObject *kwds
-- #else
--@@ -522,7 +522,7 @@ multidict_getone(
--     PyObject *key      = NULL,
--              *_default = NULL;
-- 
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--     static char *getone_keywords[] = {"key", "default", NULL};
-- 
--     if (!PyArg_ParseTupleAndKeywords(args, kwds, "O|O:getone",
--@@ -563,7 +563,7 @@ skip_optional_pos:
-- static inline PyObject *
-- multidict_get(
--     MultiDictObject *self,
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--     PyObject *args,
--     PyObject *kwds
-- #else
--@@ -577,7 +577,7 @@ multidict_get(
--              *_default = Py_None,
--              *ret;
-- 
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--     static char *getone_keywords[] = {"key", "default", NULL};
-- 
--     if (!PyArg_ParseTupleAndKeywords(args, kwds, "O|O:getone",
--@@ -833,7 +833,7 @@ multidict_tp_init(MultiDictObject *self, PyObject *args, PyObject *kwds)
-- static inline PyObject *
-- multidict_add(
--     MultiDictObject *self,
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--     PyObject *args,
--     PyObject *kwds
-- #else
--@@ -846,7 +846,7 @@ multidict_add(
--     PyObject *key = NULL,
--              *val = NULL;
-- 
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--     static char *kwlist[] = {"key", "value", NULL};
--     if (!PyArg_ParseTupleAndKeywords(args, kwds, "OO:add",
--                                      kwlist, &key, &val))
--@@ -913,7 +913,7 @@ multidict_clear(MultiDictObject *self)
-- static inline PyObject *
-- multidict_setdefault(
--     MultiDictObject *self,
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--     PyObject *args,
--     PyObject *kwds
-- #else
--@@ -926,7 +926,7 @@ multidict_setdefault(
--     PyObject *key      = NULL,
--              *_default = NULL;
-- 
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--     static char *setdefault_keywords[] = {"key", "default", NULL};
-- 
--     if (!PyArg_ParseTupleAndKeywords(args, kwds, "O|O:setdefault",
--@@ -967,7 +967,7 @@ skip_optional_pos:
-- static inline PyObject *
-- multidict_popone(
--     MultiDictObject *self,
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--     PyObject *args,
--     PyObject *kwds
-- #else
--@@ -981,7 +981,7 @@ multidict_popone(
--              *_default = NULL,
--              *ret_val  = NULL;
-- 
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--     static char *popone_keywords[] = {"key", "default", NULL};
-- 
--     if (!PyArg_ParseTupleAndKeywords(args, kwds, "O|O:popone",
--@@ -1046,7 +1046,7 @@ skip_optional_pos:
-- static inline PyObject *
-- multidict_pop(
--     MultiDictObject *self,
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--     PyObject *args,
--     PyObject *kwds
-- #else
--@@ -1060,7 +1060,7 @@ multidict_pop(
--              *_default = NULL,
--              *ret_val  = NULL;
-- 
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--     static char *pop_keywords[] = {"key", "default", NULL};
-- 
--     if (!PyArg_ParseTupleAndKeywords(args, kwds, "O|O:popone",
--@@ -1113,7 +1113,7 @@ skip_optional_pos:
-- static inline PyObject *
-- multidict_popall(
--     MultiDictObject *self,
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--     PyObject *args,
--     PyObject *kwds
-- #else
--@@ -1128,7 +1128,7 @@ multidict_popall(
--              *ret_val  = NULL;
-- 
-- 
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--     static char *popall_keywords[] = {"key", "default", NULL};
-- 
--     if (!PyArg_ParseTupleAndKeywords(args, kwds, "O|O:popall",
--@@ -1270,7 +1270,7 @@ static PyMethodDef multidict_methods[] = {
--     {
--         "getall",
--         (PyCFunction)multidict_getall,
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--         METH_VARARGS
-- #else
--         METH_FASTCALL
--@@ -1281,7 +1281,7 @@ static PyMethodDef multidict_methods[] = {
--     {
--         "getone",
--         (PyCFunction)multidict_getone,
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--         METH_VARARGS
-- #else
--         METH_FASTCALL
--@@ -1292,7 +1292,7 @@ static PyMethodDef multidict_methods[] = {
--     {
--         "get",
--         (PyCFunction)multidict_get,
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--         METH_VARARGS
-- #else
--         METH_FASTCALL
--@@ -1321,7 +1321,7 @@ static PyMethodDef multidict_methods[] = {
--     {
--         "add",
--         (PyCFunction)multidict_add,
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--         METH_VARARGS
-- #else
--         METH_FASTCALL
--@@ -1350,7 +1350,7 @@ static PyMethodDef multidict_methods[] = {
--     {
--         "setdefault",
--         (PyCFunction)multidict_setdefault,
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--         METH_VARARGS
-- #else
--         METH_FASTCALL
--@@ -1361,7 +1361,7 @@ static PyMethodDef multidict_methods[] = {
--     {
--         "popone",
--         (PyCFunction)multidict_popone,
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--         METH_VARARGS
-- #else
--         METH_FASTCALL
--@@ -1372,7 +1372,7 @@ static PyMethodDef multidict_methods[] = {
--     {
--         "pop",
--         (PyCFunction)multidict_pop,
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--         METH_VARARGS
-- #else
--         METH_FASTCALL
--@@ -1383,7 +1383,7 @@ static PyMethodDef multidict_methods[] = {
--     {
--         "popall",
--         (PyCFunction)multidict_popall,
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--         METH_VARARGS
-- #else
--         METH_FASTCALL
--@@ -1559,7 +1559,7 @@ multidict_proxy_tp_init(MultiDictProxyObject *self, PyObject *args,
-- static inline PyObject *
-- multidict_proxy_getall(
--     MultiDictProxyObject *self,
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--     PyObject *args,
--     PyObject *kwds
-- #else
--@@ -1572,7 +1572,7 @@ multidict_proxy_getall(
--     return multidict_getall(
--         self->md,
--         args,
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--         kwds
-- #else
--         nargs,
--@@ -1584,7 +1584,7 @@ multidict_proxy_getall(
-- static inline PyObject *
-- multidict_proxy_getone(
--     MultiDictProxyObject *self,
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--     PyObject *args,
--     PyObject *kwds
-- #else
--@@ -1596,7 +1596,7 @@ multidict_proxy_getone(
-- {
--     return multidict_getone(
--         self->md, args,
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--         kwds
-- #else
--         nargs, kwnames
--@@ -1607,7 +1607,7 @@ multidict_proxy_getone(
-- static inline PyObject *
-- multidict_proxy_get(
--     MultiDictProxyObject *self,
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--     PyObject *args,
--     PyObject *kwds
-- #else
--@@ -1620,7 +1620,7 @@ multidict_proxy_get(
--     return multidict_get(
--         self->md,
--         args,
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--         kwds
-- #else
--         nargs,
--@@ -1734,7 +1734,7 @@ static PyMethodDef multidict_proxy_methods[] = {
--     {
--         "getall",
--         (PyCFunction)multidict_proxy_getall,
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--         METH_VARARGS
-- #else
--         METH_FASTCALL
--@@ -1745,7 +1745,7 @@ static PyMethodDef multidict_proxy_methods[] = {
--     {
--         "getone",
--         (PyCFunction)multidict_proxy_getone,
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--         METH_VARARGS
-- #else
--         METH_FASTCALL
--@@ -1756,7 +1756,7 @@ static PyMethodDef multidict_proxy_methods[] = {
--     {
--         "get",
--         (PyCFunction)multidict_proxy_get,
---#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 13
--+#if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 12
--         METH_VARARGS
-- #else
--         METH_FASTCALL
---- 
--2.43.0
--
-diff --git a/meta-python/recipes-devtools/python/python3-multidict_6.0.4.bb b/meta-python/recipes-devtools/python/python3-multidict_6.0.5.bb
-similarity index 84%
-rename from meta-python/recipes-devtools/python/python3-multidict_6.0.4.bb
-rename to meta-python/recipes-devtools/python/python3-multidict_6.0.5.bb
-index 19b94dee0..b12e180d0 100644
---- a/meta-python/recipes-devtools/python/python3-multidict_6.0.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-multidict_6.0.5.bb
-@@ -8,12 +8,11 @@ inherit pypi setuptools3 ptest
- 
- PV .= "+git"
- 
--SRCREV = "82b559cdd0b41548f3dadc5561a9aaaa7f93ae14"
-+SRCREV = "a9b281b2ef4ab25d95d6b268aa88c428e75c3696"
- PYPI_SRC_URI = "git://github.com/aio-libs/multidict;branch=master;protocol=https"
- S = "${WORKDIR}/git"
- 
- SRC_URI += " \
--  file://0001-Extend-aio-libs-multidict-909-to-3.12-as-well-to-add.patch \
- 	file://run-ptest \
- "
- 
--- 
-2.39.2
+The idea is these bugs should be straight forward for a person to help work
+on who doesn't have deep experience with the project. If anyone can help,
+please take ownership of the bug and send patches! If anyone needs
+help/advice there are people on irc who can likely do so, or some of the
+more experienced contributors will likely be happy to help too.
 
+Also, the triage team meets weekly and does its best to handle the bugs
+reported into the Bugzilla. The number of people attending that meeting has
+fallen, as have the number of people available to help fix bugs. One of the
+things we hear users report is they don't know how to help. We (the triage
+team) are therefore going to start reporting out the currently 411
+unassigned or newcomer bugs.
+
+We're hoping people may be able to spare some time now and again to help
+out with these. Bugs are split into two types, "true bugs" where things
+don't work as they should and "enhancements" which are features we'd want
+to add to the system. There are also roughly four different "priority"
+classes right now, =E2=80=9C5.0=E2=80=9D, =E2=80=9C5.1=E2=80=9D, "5.99" and=
+ "Future", the more
+pressing/urgent issues being in "5.0" and then =E2=80=9C5.1=E2=80=9D.
+
+Please review this link and if a bug is something you would be able to help
+with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
+an e-mail with the bug number you would like and I will assign it to you
+(please make sure you have a Bugzilla account). The list is at:
+https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
+r_Bugs
+
+Thanks,
+
+
+
+*Stephen K. Jolley*
+
+*Yocto Project Program Manager*
+
+(    *Cell*:                (208) 244-4460
+
+* *Email*:                 *s
+<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
+*
+
+--000000000000f79eb3061482470a
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><span style=3D"font-size:11pt;font-family:Calibri,Arial">A=
+ll,<br><br>The triage team is starting to try and collect up and classify b=
+ugs which a newcomer to the project would be able to work on in a way which=
+ means people can find them. They&#39;re being listed on the triage page un=
+der the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/wiki/=
+Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage#New=
+comer_Bugs</a>  Also please review: <a href=3D"https://www.openembedded.org=
+/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.org/w=
+iki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugzilla =
+account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount.cgi"=
+>https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The idea is=
+ these bugs should be straight forward for a person to help work on who doe=
+sn&#39;t have deep experience with the project.  If anyone can help, please=
+ take ownership of the bug and send patches!  If anyone needs help/advice t=
+here are people on irc who can likely do so, or some of the more experience=
+d contributors will likely be happy to help too.<br><br>Also, the triage te=
+am meets weekly and does its best to handle the bugs reported into the Bugz=
+illa. The number of people attending that meeting has fallen, as have the n=
+umber of people available to help fix bugs. One of the things we hear users=
+ report is they don&#39;t know how to help. We (the triage team) are theref=
+ore going to start reporting out the currently 411 unassigned or newcomer b=
+ugs.<br><br>We&#39;re hoping people may be able to spare some time now and =
+again to help out with these.  Bugs are split into two types, &quot;true bu=
+gs&quot; where things don&#39;t work as they should and &quot;enhancements&=
+quot; which are features we&#39;d want to add to the system.  There are als=
+o roughly four different &quot;priority&quot; classes right now, =E2=80=9C5=
+.0=E2=80=9D, =E2=80=9C5.1=E2=80=9D, &quot;5.99&quot; and &quot;Future&quot;=
+, the more pressing/urgent issues being in &quot;5.0&quot; and then =E2=80=
+=9C5.1=E2=80=9D.<br><br>Please review this link and if a bug is something y=
+ou would be able to help with either take ownership of the bug, or send me =
+(<a href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>) an=
+ e-mail with the bug number you would like and I will assign it to you (ple=
+ase make sure you have a Bugzilla account).  The list is at: <a href=3D"htt=
+ps://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcomer_B=
+ugs">https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Ne=
+wcomer_Bugs</a></span><br><div dir=3D"ltr" class=3D"gmail_signature" data-s=
+martmail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p class=3D"=
+MsoNormal" style=3D"background-image:initial;background-position:initial;ba=
+ckground-repeat:initial"><span style=3D"font-size:12pt;font-family:Arial,sa=
+ns-serif">Thanks,<span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
+ily:Arial,sans-serif">=C2=A0<span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
+lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
+ont-family:Arial,sans-serif"><span></span></span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
+amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
+an></b></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
+ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
+&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
+<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
+:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
+s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
+-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
+><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
+/span></p>
+
+<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
+n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
+ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
+t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
+=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
+color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
+uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
+ lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
+erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
+phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
+.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
+u></p></div></div></div></div>
+
+--000000000000f79eb3061482470a--
 
