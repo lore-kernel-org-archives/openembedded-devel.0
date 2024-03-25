@@ -1,131 +1,92 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7DD47C54E64
-	for <webhook@archiver.kernel.org>; Mon, 25 Mar 2024 15:57:43 +0000 (UTC)
-Received: from mail-yw1-f179.google.com (mail-yw1-f179.google.com [209.85.128.179])
- by mx.groups.io with SMTP id smtpd.web11.56131.1711382253480556489
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BF311C54E58
+	for <webhook@archiver.kernel.org>; Mon, 25 Mar 2024 16:51:09 +0000 (UTC)
+Received: from mail-oa1-f49.google.com (mail-oa1-f49.google.com [209.85.160.49])
+ by mx.groups.io with SMTP id smtpd.web11.340.1711385464435517961
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Mar 2024 08:57:33 -0700
+ Mon, 25 Mar 2024 09:51:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=eL+nYvuP;
- spf=pass (domain: gmail.com, ip: 209.85.128.179, mailfrom: ticotimo@gmail.com)
-Received: by mail-yw1-f179.google.com with SMTP id 00721157ae682-60a434ea806so48921837b3.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 08:57:33 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=C3/B5shl;
+ spf=pass (domain: gmail.com, ip: 209.85.160.49, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f49.google.com with SMTP id 586e51a60fabf-2218da9620cso2613074fac.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 09:51:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1711382252; x=1711987052; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=i7Mj00PD7E5jlg7eNmieGkiBGEGPCKH45n0d9IkdoXQ=;
-        b=eL+nYvuPrBZ7jxGtDxnakMzYPpyGCsnLhao546XjMYx3mGogDz8nSQ23pZhSvWjiWx
-         qtFHNsAx/XMT/f9awqWPOxNDzB8uQbywjk0sMaynjI01BaABMamB+/FJvPPtIZifY4Ch
-         jQaIyV3ESbitXXqkjywTUCCe2LZ8foUCovh2ieEDIsXHJ3u1eH2ZckHObYQ+iJsezB8O
-         pUYkeC5FQ5LYdxVHGxdQmYpYrSdszU6VuDI2SwIWNkXDkH3+kbuOCn8iAAwL9UvIhj+p
-         DDi7cehkFlSQ/uTLTRG0Tk3uzeRNpvxsqOpzvZgwv7j+vAuTwCsY8FF4QtAOqr9PHD+J
-         cicw==
+        d=gmail.com; s=20230601; t=1711385463; x=1711990263; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=O010wsrS8IigzmHt4hXaeCz8+7HzkQsknQ3GFp/Kx9I=;
+        b=C3/B5shlgpr6ItY996ad5BMNtY4ep9ZOVbLtvQidx8jer/CP4Uvg1GynbsNHWtIiK8
+         xK2crD+t+dj+qJz8DcwNKQ441STSIpm66r+nn5ZzfbQ4aHhkoF6yHZEOZqm/LLSb3vuX
+         m5WPPw22rIDvbnp7v1XwPDq+GBVpzohOmptODX50veWIcSBBfBIkNdMJBuzCx3qpu7vr
+         rST/LJVRr+QnHg0eYI0jy5FPBjghqRfvUMNuGilmHiOmvzSyubAv6o+IV/UUW+BIFai/
+         d70hGM7c6/vtw7JXCOgjD+UjYlECZ8T7oT9ziJou0zkoK3oJQ1Y9WxIsmPlWE7qe/h1H
+         Cwaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1711382252; x=1711987052;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=i7Mj00PD7E5jlg7eNmieGkiBGEGPCKH45n0d9IkdoXQ=;
-        b=WiDA0GygTx88TugEzSKB9qjScJHKuJt0zfDq7ZV2pPHlRiLhg9xazIvCGG9LKtW3kh
-         H4b4WkXATGDC/ujteXaKcvkPE8IuNEQwBKeNCq6VsZcv/VQUtCIrWoOjCJKO8pG2M0f8
-         CtqFlc8HPYyqSXvgdY9lgJ80FgW7bnAgYBZsfVjupSKUA7aVn+ptUOmJy1DHhCKDEJAR
-         DeqrISsaTiyHSFow5Hzp1WdjjS/IKb0eblnhxEhPLfE05atV1+uNHsG9YN9L6cYLmam7
-         hU7JuThJWN7BvRUwwuR1m9GC4c+M8mpQHCkMejBaeRMRZObvy0ApVO68YlBaLmcq0g0H
-         B+Wg==
-X-Forwarded-Encrypted: i=1; AJvYcCWU9vgTIBdXSRHBWA7Hw+t/Q9nDiSD+jIQYkrR+O1cFPF5z8HB2BuWdQs/NAtQD8jSJ0Aht99perNcxcT4zEfd4yEirvLmohv53z1aII2WrnE8+DN37d+fPFQ==
-X-Gm-Message-State: AOJu0YyOW1Z8TTPcI2ZgFWPnzVW93F8WOYyGupT3OOmuFbo4lhdQtmc9
-	APWMxq5Wf+qMJTYyofPKMTi3E5etUS8zFwbRkdSWWVhWrfmA9Y6lyDNr/3fFbNdKE8HOd8CMxEA
-	RHoUYnje+RmX71FXss7exfdGKASA=
-X-Google-Smtp-Source: AGHT+IFxSnHJ4pB3TkM7iuskEl5FqWWmwMnZjUWK4q2k1a3IoneX2pFZDbUSzo+Ie3Zy/6GCAVnuaF0nQwnos2MoO/k=
-X-Received: by 2002:a0d:c487:0:b0:60a:67fb:146 with SMTP id
- g129-20020a0dc487000000b0060a67fb0146mr6899954ywd.17.1711382252657; Mon, 25
- Mar 2024 08:57:32 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1711385463; x=1711990263;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=O010wsrS8IigzmHt4hXaeCz8+7HzkQsknQ3GFp/Kx9I=;
+        b=QYEjhUSSykqiIQUGk6yZEZ+1aoRuSMj6777IawMkrdfHt8Xj0CN4ogu76jf6q7q846
+         /sQ7pc5boCb1UDk5d0rA/zlvPXZMh4KGNZJBjysmI1ayeYmEr4PNRng9Ae9U4qd5S+7p
+         kB+3GRgwcT/7Z2CE2PMtyB2e76Y1vN1CH/RdxeuMFdmtyiPLm+iDTLDqVLMmb98qhFd3
+         I2W0o5KD9YnfZpM8/ja/9SoBBDfq/TL3wDKjlDiHzZ18oxpkqgOBXKwi6hxe/gef/gmw
+         u1o6PHtSZbQ/JJE7yuj193IYqpLsvxpr5rX/h7ev0tlHl678sQQ758bXPKnNf6vMR+17
+         HDng==
+X-Gm-Message-State: AOJu0YzBvplE9Qby9qjChw7jp0RLMV6lUGGJ5OqwPDaVJPB+9/ajFk0j
+	DHTU8r4DV50K/UCipy+8DIrinHBEP5Fq0U6mH3UfMDSH7d5JM6AP7f39Pui2TP7TFm/UO5KfhGX
+	H/tY6uU60Z0xV5sN5SOFPLaV2jcw=
+X-Google-Smtp-Source: AGHT+IH56x8YqQZ3T6cg7wFCSZufO8khj39VuzktbflQwIYSKMGJMOmrt1+7qXjptBZ046DTUq+AvkuhBxLeVbH/5to=
+X-Received: by 2002:a05:6871:31af:b0:229:800f:3ed6 with SMTP id
+ lv47-20020a05687131af00b00229800f3ed6mr6626090oac.36.1711385463642; Mon, 25
+ Mar 2024 09:51:03 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230609144646.1977-1-jermain.horsman@nedap.com>
- <20230609144646.1977-3-jermain.horsman@nedap.com> <CANx9H-DSMeHjAyVTeLKzPCxEd9UASas5nO4tdctN7H2HTeFERg@mail.gmail.com>
- <VI1PR10MB3182BB9126E26C25D17EEB72F7362@VI1PR10MB3182.EURPRD10.PROD.OUTLOOK.COM>
-In-Reply-To: <VI1PR10MB3182BB9126E26C25D17EEB72F7362@VI1PR10MB3182.EURPRD10.PROD.OUTLOOK.COM>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Mon, 25 Mar 2024 08:57:21 -0700
-Message-ID: <CANx9H-B5ZttP=mhRvJh8JHTMnhzBiEb4cqGFgx7jEWrG=o3O+A@mail.gmail.com>
-Subject: Re: [oe] [meta-java][PATCH 3/3] rxtx: Remove obsolete rename of libtool
-To: Jermain Horsman <jermain.horsman@nedap.com>
-Cc: "henning@itconsulting-heinold.de" <henning@itconsulting-heinold.de>, 
-	"openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>, 
-	"otavio@ossystems.com.br" <otavio@ossystems.com.br>, 
-	"richard.leitner@skidata.com" <richard.leitner@skidata.com>
-Content-Type: multipart/alternative; boundary="0000000000003ea41206147e3bb8"
+References: <29470.1711345175727733393@lists.openembedded.org> <29470.1711374964855578067@lists.openembedded.org>
+In-Reply-To: <29470.1711374964855578067@lists.openembedded.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 25 Mar 2024 09:50:37 -0700
+Message-ID: <CAMKF1srWVvy9tME92yc16tPVRyjELep1m90ew+ev=9+dtgY9+Q@mail.gmail.com>
+Subject: Re: [oe] [[meta-oe][PATCH]aer-inject:add new recipe]
+ [[meta-oe][PATCH]aer-inject:add new recipe]
+To: chenheyun <chen_heyun@163.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 15:57:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109594
+ <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 16:51:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109595
 
---0000000000003ea41206147e3bb8
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+there is another issue
 
-On Mon, Mar 25, 2024 at 3:40=E2=80=AFAM Jermain Horsman <jermain.horsman@ne=
-dap.com>
-wrote:
+WARNING: aer-inject-1.0-r0 do_package_qa: QA Issue: Recipe LICENSE
+includes obsolete licenses GPL-2.0 [obsolete-license]
+WARNING: aer-inject-1.0-r0 do_package_qa: QA Issue: File
+/usr/.debug/aer-inject in package aer-inject-dbg contains reference to
+TMPDIR [buildpaths]
 
-> > Still seeing a do_compile failure (attached)
+Please look into these too.
+
+On Mon, Mar 25, 2024 at 6:56=E2=80=AFAM chenheyun <chen_heyun@163.com> wrot=
+e:
 >
-> I believe this is caused by sstate being incorrect,
-> If you do a clean build this should not happen.
+> hi
+>     i fix it in 109586=EF=BC=9B
+> https://lists.openembedded.org/g/openembedded-devel/message/109586
+>    thanks=E3=80=82
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#109587): https://lists.openembedded.org/g/openembedde=
+d-devel/message/109587
+> Mute This Topic: https://lists.openembedded.org/mt/105119602/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
-> > Can you investigate and send a revised solution?
->
-> I could increase the PR, I believe that should prevent the issue.
-> Would that be acceptable?
-
-
-Ah. Good points/ideas. Let me test that after my current build/test run
-completes.
-
-I=E2=80=99ll just add the PR bump to this commit.
-
-
->
-> Sincerely,
->
-> Jermain Horsman
->
-
---0000000000003ea41206147e3bb8
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Mon, Mar 25, 2024 at 3:40=E2=80=AFAM Jermain Horsman &lt=
-;<a href=3D"mailto:jermain.horsman@nedap.com">jermain.horsman@nedap.com</a>=
-&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px =
-0px 0px 0.8ex;border-left-width:1px;border-left-style:solid;padding-left:1e=
-x;border-left-color:rgb(204,204,204)">&gt; Still seeing a do_compile failur=
-e (attached)<br>
-<br>
-I believe this is caused by sstate being incorrect,<br>
-If you do a clean build this should not happen.<br>
-<br>
-&gt; Can you investigate and send a revised solution?<br>
-<br>
-I could increase the PR, I believe that should prevent the issue.<br>
-Would that be acceptable?</blockquote><div dir=3D"auto"><br></div><div dir=
-=3D"auto">Ah. Good points/ideas. Let me test that after my current build/te=
-st run completes.</div><div dir=3D"auto"><br></div><div dir=3D"auto">I=E2=
-=80=99ll just add the PR bump to this commit.</div><div dir=3D"auto"><br></=
-div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bor=
-der-left-width:1px;border-left-style:solid;padding-left:1ex;border-left-col=
-or:rgb(204,204,204)" dir=3D"auto"><br>
-<br>
-Sincerely,<br>
-<br>
-Jermain Horsman<br>
-</blockquote></div></div>
-
---0000000000003ea41206147e3bb8--
 
