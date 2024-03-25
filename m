@@ -2,151 +2,287 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D06DC54E58
-	for <webhook@archiver.kernel.org>; Mon, 25 Mar 2024 19:48:41 +0000 (UTC)
-Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
- by mx.groups.io with SMTP id smtpd.web11.1513.1711396111760566688
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 95B7EC54E64
+	for <webhook@archiver.kernel.org>; Mon, 25 Mar 2024 19:53:21 +0000 (UTC)
+Received: from mail-oi1-f174.google.com (mail-oi1-f174.google.com [209.85.167.174])
+ by mx.groups.io with SMTP id smtpd.web10.1590.1711396392973263911
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Mar 2024 12:48:31 -0700
+ Mon, 25 Mar 2024 12:53:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=XNaukiwU;
- spf=pass (domain: gmail.com, ip: 209.85.210.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f175.google.com with SMTP id d2e1a72fcca58-6ea80de0e97so1963246b3a.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 12:48:31 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=e/BR799S;
+ spf=pass (domain: gmail.com, ip: 209.85.167.174, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f174.google.com with SMTP id 5614622812f47-3c36dcb305cso2141662b6e.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 12:53:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1711396111; x=1712000911; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1711396392; x=1712001192; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=UZOISbR+A8ODp2C6rwPmFra+PQQwpuT2CJvbv//kEAE=;
-        b=XNaukiwUmgaxLlNXEyPOQBnLYvyqQDO+OSJCE9SnrWJvp8rbdN5A41wCtLHLzob6Z+
-         0u+mvSKyB5FPlVpXEAa1xtcxXKm0tLQInSQ8rYVOerGhzPk/ryJrrsXs2MJGqzTDBHLi
-         vesqjsIlPD6/iL3p3k5ehfbMm+HriJY6FjNGupyQUBb2/T/4kyespNsMkxbflYVSiC6u
-         fBuJEgpHF85DKuBgw9evREEos2pUChTZZQxWmeC6Bt9Fw9hZs0ueZgWRfOhFaD/yIecS
-         +xy1Rk7iKblD5yTxbipTQWGlVmsz9nl/YudS04ZZuStL9ayibKQjMxBydwsJcYe5lu2e
-         MZbQ==
+        bh=/Qb28F8JZf97pbuxibUalZI7wet7+vqgkvg7VbQfpZ0=;
+        b=e/BR799SChShKau8yqSazlBLWA1EH35NyUcuLUoaqyraG1+TGROWzZs5hBHdPIe49J
+         HBa8SQqbUVag/GyuDyNDQOq4Mdh6nxjmiZCT52y24SjuRWG4E3RYssnM4RYaL+WG7Kl3
+         IumH0Pp6cazN/EFvEK924w77gQfYTgb3YIXs5KyjsCYIkxHL8/a7+dARDAldYXJAQ4oE
+         otv62WIJ0iF85ByMsxPTWyh+ZtsjSqlQS/u9Bi6TgXS/XfgfSEYw7OPlK5/4O1sWvjZ2
+         C64i1UkXHG+zZJKvmkU2bYOg/lvzwVhN3dCoiA+kq0Mli+HPAfpUqkVuxACjt184tBSP
+         6m+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1711396111; x=1712000911;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1711396392; x=1712001192;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=UZOISbR+A8ODp2C6rwPmFra+PQQwpuT2CJvbv//kEAE=;
-        b=ZolhWFJX708TMBQ2dv2lyVUl9kyULhLHOlLRMm5wUZ+GVcVkPEWn6nmJNEIKvMJjLN
-         0joj8IjZzwsNA6RwhoLaKdRsI3mLJRxu9OnSdbcDTpp01OYWY9yDyAnjCZxwomniFRdg
-         8MUDqZvplaj3j8gafpXwdfGr+1URTVYTD9gowzxJ6rC1Oe0EFdPcm8FI8uV/76P2X4fS
-         UIvlyZLDrtQB2ql7N1jrSdgBfKoJEjoOgvzVojO03uSlgoZHrYxCOi5CpwIwffh98wv/
-         /2kQemPsWesuTiukQyYVHm4ZqI9roQEFfI13OeEVyQU+hENbvcUZIGPMF3jm1MpPZcCd
-         vORQ==
-X-Gm-Message-State: AOJu0Yxd4IonyeFVtIrKiWEYIQRQt1ZRPMYAqdzpUwiRIxE9wj4Ewpbe
-	OIJfKBZtNV+Fmcl+kQH4AWS0iYkQjLMITzh9iw7BpdM+eeiHjiaAAdH9ZvnA
-X-Google-Smtp-Source: AGHT+IFQnUYeudRdVP/OWsiIcrRRqqF06Yi9ShJAXbi4QecXEdIsDltKPNO3cIq7Tc4jhuiPKwW1ng==
-X-Received: by 2002:a05:6a00:b43:b0:6e4:62ed:23c3 with SMTP id p3-20020a056a000b4300b006e462ed23c3mr11737673pfo.9.1711396110812;
-        Mon, 25 Mar 2024 12:48:30 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::5eba])
-        by smtp.gmail.com with ESMTPSA id r14-20020a6560ce000000b005ce472f2d0fsm5122282pgv.66.2024.03.25.12.48.29
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 25 Mar 2024 12:48:30 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 4/4] autofs: Fix build with musl >= 1.2.5
-Date: Mon, 25 Mar 2024 12:48:25 -0700
-Message-ID: <20240325194825.641241-4-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.44.0
-In-Reply-To: <20240325194825.641241-1-raj.khem@gmail.com>
-References: <20240325194825.641241-1-raj.khem@gmail.com>
+        bh=/Qb28F8JZf97pbuxibUalZI7wet7+vqgkvg7VbQfpZ0=;
+        b=XjeTYyHEihnwBMB4r/ZUKaBEYAjIt4TZ/nbtCYQ4eOpqpDOmV1ZNiu9MKdqlBFizj3
+         UrPd7BeKfZktp1UKFg0Fgi6jyEjvswvgvafgxXRRjaosjE+J2FKPwNT0opM0iBf1zPIV
+         Pv0MsNi7I5OaH55kpIQv1bXmnqT1c0jXQDL7a/C68A4k/T2M45LKrcJyT4X5RWQIRsvR
+         zKB8w+tqWwA+b7BaIvdXB9uAlFSXa8MFdE33woFCEYK6YYRa94BdyZBLBUf+mOwqpHBp
+         Do/4b+EK0M/bT7Owsned0N1xbJ9ZeAKkOtSdgNSOF/iaTEZrmMfY9Y7H7ThZZWLWkyne
+         l/mQ==
+X-Gm-Message-State: AOJu0Yx0zAlfzUwFRbbLtvhoVuzeknUd4RVXUaX8U5U8Not7Y8p1okfn
+	OzY+97VD0LCC1wqsx05blWvLk+fljkOsGJo+uwM+v2YWRWnIksUN6fHCWM/hbI93oDQUDwXP40j
+	nxOmrYD+hoQvHz/98iuWRxjct9sBvPujW
+X-Google-Smtp-Source: AGHT+IEs3uDQVIjPXJeICGlAx3YRJFUacbLuAA5keAxU517RToA/D6wJjL5VOKALMgMgvOBs7nS4QDhktkA1r1CxoPw=
+X-Received: by 2002:a05:6808:2224:b0:3c3:7e24:6d34 with SMTP id
+ bd36-20020a056808222400b003c37e246d34mr3137587oib.21.1711396392171; Mon, 25
+ Mar 2024 12:53:12 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240325175753.3507115-1-raj.khem@gmail.com> <20240325175753.3507115-2-raj.khem@gmail.com>
+ <CA+chaQe+9CVNQU6gJZNX5KGZRaPYBAVN0Y76af9njuCP4Lcsrw@mail.gmail.com>
+In-Reply-To: <CA+chaQe+9CVNQU6gJZNX5KGZRaPYBAVN0Y76af9njuCP4Lcsrw@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 25 Mar 2024 12:52:45 -0700
+Message-ID: <CAMKF1sqCbJMtOByvqM9Gqq-XmssW_R4F9y_t1Kb-_=adjSwxOw@mail.gmail.com>
+Subject: Re: [oe] [meta-filesystems][PATCH 2/2] xfstests: Fix build with musl
+ >= 1.2.5
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 19:48:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109603
+ <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 19:53:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109604
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../0001-include-libgen.h-for-basename.patch  | 58 +++++++++++++++++++
- .../recipes-daemons/autofs/autofs_5.1.8.bb    |  1 +
- 2 files changed, 59 insertions(+)
- create mode 100644 meta-networking/recipes-daemons/autofs/autofs/0001-include-libgen.h-for-basename.patch
+On Mon, Mar 25, 2024 at 11:23=E2=80=AFAM Martin Jansa <martin.jansa@gmail.c=
+om> wrote:
+>
+> On Mon, Mar 25, 2024 at 6:57=E2=80=AFPM Khem Raj <raj.khem@gmail.com> wro=
+te:
+> >
+> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > ---
+> >  ...-libgen.h-for-basename-API-prototype.patch | 84 +++++++++++++++++++
+> >  ...X_ATTR_-defines-from-musl-sys-stat.h.patch | 42 ++++++++++
+> >  .../xfstests/xfstests_2024.03.03.bb           |  2 +
+> >  3 files changed, 128 insertions(+)
+> >  create mode 100644 meta-filesystems/recipes-utils/xfstests/xfstests/00=
+01-include-libgen.h-for-basename-API-prototype.patch
+> >  create mode 100644 meta-filesystems/recipes-utils/xfstests/xfstests/00=
+02-Add-missing-STATX_ATTR_-defines-from-musl-sys-stat.h.patch
+> >
+> > diff --git a/meta-filesystems/recipes-utils/xfstests/xfstests/0001-incl=
+ude-libgen.h-for-basename-API-prototype.patch b/meta-filesystems/recipes-ut=
+ils/xfstests/xfstests/0001-include-libgen.h-for-basename-API-prototype.patc=
+h
+> > new file mode 100644
+> > index 0000000000..1f7ae32f04
+> > --- /dev/null
+> > +++ b/meta-filesystems/recipes-utils/xfstests/xfstests/0001-include-lib=
+gen.h-for-basename-API-prototype.patch
+> > @@ -0,0 +1,84 @@
+> > +From 37caab7a43da5ede0ff1eb700f0257a213ac4b18 Mon Sep 17 00:00:00 2001
+> > +From: Khem Raj <raj.khem@gmail.com>
+> > +Date: Mon, 25 Mar 2024 10:46:50 -0700
+> > +Subject: [PATCH 1/2] include libgen.h for basename API prototype
+> > +
+> > +basename prototype has been removed from string.h from latest musl [1]
+> > +compilers e.g. clang-18 flags the absense of prototype as error. there=
+fore
+> > +include libgen.h for providing it.
+> > +
+> > +[1] https://git.musl-libc.org/cgit/musl/commit/?id=3D725e17ed6dff4d0cd=
+22487bb64470881e86a92e7
+> > +
+> > +Upstream-Status: [https://lore.kernel.org/fstests/20240325175323.34507=
+50-1-raj.khem@gmail.com/T/#t]
+>
+> You forgot "Submitted" here.
 
-diff --git a/meta-networking/recipes-daemons/autofs/autofs/0001-include-libgen.h-for-basename.patch b/meta-networking/recipes-daemons/autofs/autofs/0001-include-libgen.h-for-basename.patch
-new file mode 100644
-index 0000000000..4c8b4ef779
---- /dev/null
-+++ b/meta-networking/recipes-daemons/autofs/autofs/0001-include-libgen.h-for-basename.patch
-@@ -0,0 +1,58 @@
-+From 1651e7a35be8b3e2fa90ca57b073f6944664fa62 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 25 Mar 2024 12:04:03 -0700
-+Subject: [PATCH] include libgen.h for basename
-+
-+basename prototype has been removed from string.h from latest musl [1]
-+compilers e.g. clang-18 flags the absense of prototype as error. therefore
-+include libgen.h for providing it.
-+
-+[1] https://git.musl-libc.org/cgit/musl/commit/?id=725e17ed6dff4d0cd22487bb64470881e86a92e7
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ daemon/automount.c    | 1 +
-+ daemon/master.c       | 1 +
-+ modules/lookup_file.c | 1 +
-+ 3 files changed, 3 insertions(+)
-+
-+diff --git a/daemon/automount.c b/daemon/automount.c
-+index 3d9461d..61b3478 100644
-+--- a/daemon/automount.c
-++++ b/daemon/automount.c
-+@@ -21,6 +21,7 @@
-+ 
-+ #include <dirent.h>
-+ #include <getopt.h>
-++#include <libgen.h>
-+ #include <signal.h>
-+ #include <stdio.h>
-+ #include <stdlib.h>
-+diff --git a/daemon/master.c b/daemon/master.c
-+index f99359c..3f56499 100644
-+--- a/daemon/master.c
-++++ b/daemon/master.c
-+@@ -21,6 +21,7 @@
-+ #include <string.h>
-+ #include <memory.h>
-+ #include <limits.h>
-++#include <libgen.h>
-+ #include <signal.h>
-+ #include <sys/types.h>
-+ #include <sys/stat.h>
-+diff --git a/modules/lookup_file.c b/modules/lookup_file.c
-+index 6afc558..82b1f28 100644
-+--- a/modules/lookup_file.c
-++++ b/modules/lookup_file.c
-+@@ -15,6 +15,7 @@
-+ 
-+ #include <stdio.h>
-+ #include <malloc.h>
-++#include <libgen.h>
-+ #include <stdlib.h>
-+ #include <string.h>
-+ #include <time.h>
-+-- 
-+2.44.0
-+
-diff --git a/meta-networking/recipes-daemons/autofs/autofs_5.1.8.bb b/meta-networking/recipes-daemons/autofs/autofs_5.1.8.bb
-index ca11f1a170..e3f9777380 100644
---- a/meta-networking/recipes-daemons/autofs/autofs_5.1.8.bb
-+++ b/meta-networking/recipes-daemons/autofs/autofs_5.1.8.bb
-@@ -29,6 +29,7 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.gz \
-            file://mount_conflict.patch \
-            file://0001-autofs-5.1.8-add-autofs_strerror_r-helper-for-musl.patch \
-            file://0002-autofs-5.1.8-handle-innetgr-not-present-in-musl.patch \
-+           file://0001-include-libgen.h-for-basename.patch \
-            "
- SRC_URI[sha256sum] = "0bd401c56f0eb1ca6251344c3a3d70bface3eccf9c67117cd184422c4cace30c"
- 
--- 
-2.44.0
+indeed, Fixed in master-next
 
+>
+> > +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > +---
+> > + src/splice-test.c                   | 1 +
+> > + src/stat_test.c                     | 1 +
+> > + src/t_ext4_dax_inline_corruption.c  | 1 +
+> > + src/t_ext4_dax_journal_corruption.c | 1 +
+> > + src/t_mmap_collision.c              | 1 +
+> > + 5 files changed, 5 insertions(+)
+> > +
+> > +diff --git a/src/splice-test.c b/src/splice-test.c
+> > +index eb863673..7b7094f5 100644
+> > +--- a/src/splice-test.c
+> > ++++ b/src/splice-test.c
+> > +@@ -11,6 +11,7 @@
+> > + #include <unistd.h>
+> > + #include <fcntl.h>
+> > + #include <err.h>
+> > ++#include <libgen.h>
+> > +
+> > + #include <stdlib.h>
+> > + #include <stdio.h>
+> > +diff --git a/src/stat_test.c b/src/stat_test.c
+> > +index 95cfdc4f..77e1acdd 100644
+> > +--- a/src/stat_test.c
+> > ++++ b/src/stat_test.c
+> > +@@ -4,6 +4,7 @@
+> > +  * Written by David Howells (dhowells@redhat.com)
+> > +  */
+> > +
+> > ++#include <libgen.h>
+> > + #include <stdarg.h>
+> > + #include <stdio.h>
+> > + #include <stdlib.h>
+> > +diff --git a/src/t_ext4_dax_inline_corruption.c b/src/t_ext4_dax_inlin=
+e_corruption.c
+> > +index e1a39a6c..a40c5df5 100644
+> > +--- a/src/t_ext4_dax_inline_corruption.c
+> > ++++ b/src/t_ext4_dax_inline_corruption.c
+> > +@@ -2,6 +2,7 @@
+> > + /* Copyright (c) 2018 Intel Corporation. */
+> > + #include <errno.h>
+> > + #include <fcntl.h>
+> > ++#include <libgen.h>
+> > + #include <stdio.h>
+> > + #include <stdlib.h>
+> > + #include <string.h>
+> > +diff --git a/src/t_ext4_dax_journal_corruption.c b/src/t_ext4_dax_jour=
+nal_corruption.c
+> > +index ba7a96e4..53be10c2 100644
+> > +--- a/src/t_ext4_dax_journal_corruption.c
+> > ++++ b/src/t_ext4_dax_journal_corruption.c
+> > +@@ -2,6 +2,7 @@
+> > + /* Copyright (c) 2018 Intel Corporation. */
+> > + #include <errno.h>
+> > + #include <fcntl.h>
+> > ++#include <libgen.h>
+> > + #include <stdio.h>
+> > + #include <stdlib.h>
+> > + #include <string.h>
+> > +diff --git a/src/t_mmap_collision.c b/src/t_mmap_collision.c
+> > +index c872f4e2..d9315fcf 100644
+> > +--- a/src/t_mmap_collision.c
+> > ++++ b/src/t_mmap_collision.c
+> > +@@ -15,6 +15,7 @@
+> > +  */
+> > + #include <errno.h>
+> > + #include <fcntl.h>
+> > ++#include <libgen.h>
+> > + #include <pthread.h>
+> > + #include <stdbool.h>
+> > + #include <stdio.h>
+> > +--
+> > +2.44.0
+> > +
+> > diff --git a/meta-filesystems/recipes-utils/xfstests/xfstests/0002-Add-=
+missing-STATX_ATTR_-defines-from-musl-sys-stat.h.patch b/meta-filesystems/r=
+ecipes-utils/xfstests/xfstests/0002-Add-missing-STATX_ATTR_-defines-from-mu=
+sl-sys-stat.h.patch
+> > new file mode 100644
+> > index 0000000000..20095c86ab
+> > --- /dev/null
+> > +++ b/meta-filesystems/recipes-utils/xfstests/xfstests/0002-Add-missing=
+-STATX_ATTR_-defines-from-musl-sys-stat.h.patch
+> > @@ -0,0 +1,42 @@
+> > +From 052818e91314b797d96d87672c60f6784160f935 Mon Sep 17 00:00:00 2001
+> > +From: Khem Raj <raj.khem@gmail.com>
+> > +Date: Mon, 25 Mar 2024 10:50:59 -0700
+> > +Subject: [PATCH 2/2] Add missing STATX_ATTR_* defines from musl sys/st=
+at.h
+> > +
+> > +These defines are not provided by sys/stat.h on musl but are
+> > +in glibc's sys/stat.h, therefore to compile the tests on musl
+> > +based systems add the missing defines from linux/stat.h
+> > +if they are not provided
+> > +
+> > +Upstream-Status: Submitted [https://lore.kernel.org/fstests/2024032517=
+5323.3450750-2-raj.khem@gmail.com/T/#u]
+> > +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > +---
+> > + src/statx.h | 12 ++++++++++++
+> > + 1 file changed, 12 insertions(+)
+> > +
+> > +diff --git a/src/statx.h b/src/statx.h
+> > +index 3f239d79..12599f5b 100644
+> > +--- a/src/statx.h
+> > ++++ b/src/statx.h
+> > +@@ -12,6 +12,18 @@
+> > + #define AT_STATX_DONT_SYNC      0x4000  /* - Don't sync attributes wi=
+th the server */
+> > + #endif
+> > +
+> > ++#ifndef STATX_ATTR_COMPRESSED
+> > ++#define STATX_ATTR_COMPRESSED         0x00000004 /* [I] File is compr=
+essed by the fs */
+> > ++#define STATX_ATTR_IMMUTABLE          0x00000010 /* [I] File is marke=
+d immutable */
+> > ++#define STATX_ATTR_APPEND             0x00000020 /* [I] File is appen=
+d-only */
+> > ++#define STATX_ATTR_NODUMP             0x00000040 /* [I] File is not t=
+o be dumped */
+> > ++#define STATX_ATTR_ENCRYPTED          0x00000800 /* [I] File requires=
+ key to decrypt in fs */
+> > ++#define STATX_ATTR_AUTOMOUNT          0x00001000 /* Dir: Automount tr=
+igger */
+> > ++#define STATX_ATTR_MOUNT_ROOT         0x00002000 /* Root of a mount *=
+/
+> > ++#define STATX_ATTR_VERITY             0x00100000 /* [I] Verity protec=
+ted file */
+> > ++#define STATX_ATTR_DAX                        0x00200000 /* File is c=
+urrently in DAX state */
+> > ++#endif
+> > ++
+> > + #ifndef AT_NO_AUTOMOUNT
+> > + #define AT_NO_AUTOMOUNT               0x800   /* Suppress terminal au=
+tomount traversal */
+> > + #endif
+> > +--
+> > +2.44.0
+> > +
+> > diff --git a/meta-filesystems/recipes-utils/xfstests/xfstests_2024.03.0=
+3.bb b/meta-filesystems/recipes-utils/xfstests/xfstests_2024.03.03.bb
+> > index 2d5fedb417..c8a80523dd 100644
+> > --- a/meta-filesystems/recipes-utils/xfstests/xfstests_2024.03.03.bb
+> > +++ b/meta-filesystems/recipes-utils/xfstests/xfstests_2024.03.03.bb
+> > @@ -10,6 +10,8 @@ SRC_URI =3D "git://git.kernel.org/pub/scm/fs/xfs/xfst=
+ests-dev.git;branch=3Dmaster \
+> >             git://github.com/amir73il/unionmount-testsuite.git;branch=
+=3Dmaster;protocol=3Dhttps;name=3Dunionmount;destsuffix=3Dunionmount-testsu=
+ite \
+> >             file://0001-add-missing-FTW_-macros-when-not-available-in-l=
+ibc.patch \
+> >             file://0002-Drop-detached_mounts_propagation-and-remove-sys=
+-moun.patch \
+> > +           file://0001-include-libgen.h-for-basename-API-prototype.pat=
+ch \
+> > +           file://0002-Add-missing-STATX_ATTR_-defines-from-musl-sys-s=
+tat.h.patch \
+> >             "
+> >
+> >  S =3D "${WORKDIR}/git"
+> > --
+> > 2.44.0
+> >
+> >
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > Links: You receive all messages sent to this group.
+> > View/Reply Online (#109597): https://lists.openembedded.org/g/openembed=
+ded-devel/message/109597
+> > Mute This Topic: https://lists.openembedded.org/mt/105143486/3617156
+> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
+[martin.jansa@gmail.com]
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >
 
