@@ -1,172 +1,104 @@
-Return-Path: <akuster808@gmail.com>
+Return-Path: <throos@amazon.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 67CCCCD11DB
-	for <webhook@archiver.kernel.org>; Mon, 25 Mar 2024 11:15:01 +0000 (UTC)
-Received: from mail-yb1-f173.google.com (mail-yb1-f173.google.com [209.85.219.173])
- by mx.groups.io with SMTP id smtpd.web10.49189.1711365292234608449
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EEAE2C54E58
+	for <webhook@archiver.kernel.org>; Mon, 25 Mar 2024 13:18:01 +0000 (UTC)
+Received: from smtp-fw-52005.amazon.com (smtp-fw-52005.amazon.com [52.119.213.156])
+ by mx.groups.io with SMTP id smtpd.web11.51849.1711372677497872742
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Mar 2024 04:14:52 -0700
+ Mon, 25 Mar 2024 06:17:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=PIGIKVYm;
- spf=pass (domain: gmail.com, ip: 209.85.219.173, mailfrom: akuster808@gmail.com)
-Received: by mail-yb1-f173.google.com with SMTP id 3f1490d57ef6-dcc80d6006aso3906301276.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 04:14:52 -0700 (PDT)
+ dkim=pass header.i=@amazon.de header.s=amazon201209 header.b=IhLtjfqf;
+ spf=pass (domain: amazon.de, ip: 52.119.213.156, mailfrom: prvs=807c6bc3f=throos@amazon.de)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1711365291; x=1711970091; darn=lists.openembedded.org;
-        h=content-transfer-encoding:autocrypt:subject:from:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=ufMZp3hP/dBKfbc8sCWrUM6zKMnbE7x318F3G+LZvBk=;
-        b=PIGIKVYmrAJ/AJ5TAXVOnySN/EtqGZOfj/tXOwggNfI4nmvVwwOJCejjgen8mhIWK5
-         ZrLBdKj1SEz5PwMDjDUpiV4S2gCZVeWj9GpTHE1NKFES7G7nqP1pGAv9eBfEh0WRtKiO
-         4gyZPTbaV0kD9fCdD421yK+W3EzwVqVHf4aLIvFnNdhq4UIzxufMaSgp9CLoRUueYfXY
-         CXoUZ7DrntSzHBH1yUCr48Ppc0pjl9K6q+sOHqAtmZL4GgCiYnwMRVW6K2OV1WsyWMPV
-         iQaPyu5XIsySbeJEdnoKdUd5S6mDey2X7KyxyuDbxsgE0jw35TT5WsPdoE/jUpzzNG1m
-         lW4A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1711365291; x=1711970091;
-        h=content-transfer-encoding:autocrypt:subject:from:to
-         :content-language:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=ufMZp3hP/dBKfbc8sCWrUM6zKMnbE7x318F3G+LZvBk=;
-        b=B6fXLwuy+XIydx0Dpu3yocMbAZJJzCNKQYsYCII52PiwGlQ73AlXpM/MUyGAYxri1M
-         h7GO6NpnWCwcHZBS2SwkdC5NXBz/Yk+zX5TYm+BSO3D62XwlS3A1WwX5Vu7JB0SBecb5
-         AKgZ+0GMoaet9joLArTCCQNNhLcjztWDw4Hqg/thwvVYlV1xKzx8E85qcJV25OQ9Cs93
-         YFqubQXFam22kIKA2DHQOgurGPbtMb4CeyrKrll8OesjOXq1gsV612IRJRR+C/SamD8I
-         It3PyUXTn4nPoQ21vb1KbAYz9UXMvceDG7pJjpCJk6vx8p/+y94qmZBo1gUSTAhodgHX
-         O56A==
-X-Forwarded-Encrypted: i=1; AJvYcCU/vHxbyN/WDIOp5Rxn7/SiSilk0H657cIKoJEW3BFL8ypQ82euOSZVRwGzsNFBzxcHukLS8HI2OikZyUW3m5cwQEYFvWQYzzCDldG9V4mnqnTxFIfejBDrJg==
-X-Gm-Message-State: AOJu0YzW6/am/oLYLNCEq9cyLn+DaVeHLApM2kqe5alSJNuhLuYpzUgF
-	MopIv/7Kh5XGWC9nKVmGsaryBvHTvBs0nFUmed/bgakLZPdLTyyl
-X-Google-Smtp-Source: AGHT+IEcvH1c5p2NQQ/9TsDtmlfv8nL8j/ER5gxvnHQzm7KYai7YLEoXKWft1ckEP3eiXKVgmyhGLg==
-X-Received: by 2002:a25:8e10:0:b0:dcd:ef35:91d5 with SMTP id p16-20020a258e10000000b00dcdef3591d5mr4496456ybl.2.1711365291318;
-        Mon, 25 Mar 2024 04:14:51 -0700 (PDT)
-Received: from ?IPV6:2600:1700:45dd:7000:a44a:c9fd:554f:a28a? ([2600:1700:45dd:7000:a44a:c9fd:554f:a28a])
-        by smtp.gmail.com with ESMTPSA id d127-20020a254f85000000b00dcdb990f93bsm991950ybb.64.2024.03.25.04.14.50
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 25 Mar 2024 04:14:50 -0700 (PDT)
-Message-ID: <4d9e595a-b765-4364-b92c-18deebdc7ce0@gmail.com>
-Date: Mon, 25 Mar 2024 07:14:50 -0400
+  d=amazon.de; i=@amazon.de; q=dns/txt; s=amazon201209;
+  t=1711372678; x=1742908678;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=wZABM0OoVYWS7AZWVnlhP3KJQSxGwU0S106485Tuf0M=;
+  b=IhLtjfqfSJqWvKkjEo/M/t4zVEH2nKD6FGxho/DyZurMth0OK0Eyu2uK
+   xmI/BGMXKa+LtrFJnxPKYOhWsAkgPTAGA/IVfYLISjqqdomC2O9zYdVhT
+   +G1lGJNefLPGHttuxBbAQXtqO/qizNMrb/iwaUsO755cGru+cR2jqf2Mv
+   k=;
+X-IronPort-AV: E=Sophos;i="6.07,153,1708387200"; 
+   d="scan'208";a="643359295"
+Received: from iad12-co-svc-p1-lb1-vlan3.amazon.com (HELO smtpout.prod.us-west-2.prod.farcaster.email.amazon.dev) ([10.43.8.6])
+  by smtp-border-fw-52005.iad7.amazon.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Mar 2024 13:17:56 +0000
+Received: from EX19MTAEUA002.ant.amazon.com [10.0.43.254:61069]
+ by smtpin.naws.eu-west-1.prod.farcaster.email.amazon.dev [10.0.1.9:2525] with esmtp (Farcaster)
+ id e9f9402b-8dfb-4cda-9df8-2ce4f2a2483e; Mon, 25 Mar 2024 13:17:53 +0000 (UTC)
+X-Farcaster-Flow-ID: e9f9402b-8dfb-4cda-9df8-2ce4f2a2483e
+Received: from EX19D016EUC001.ant.amazon.com (10.252.51.169) by
+ EX19MTAEUA002.ant.amazon.com (10.252.50.126) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1258.28; Mon, 25 Mar 2024 13:17:53 +0000
+Received: from u182adcbddbfb55.ant.amazon.com.amazon.com (10.1.212.29) by
+ EX19D016EUC001.ant.amazon.com (10.252.51.169) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1258.28; Mon, 25 Mar 2024 13:17:52 +0000
+From: <throos@amazon.de>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Thomas Roos <throos@amazon.de>
+Subject: [PATCH] usrsctp: upgrade version to a0cbf4681474fab1e89d9e9e2d5c3694fce50359
+Date: Mon, 25 Mar 2024 14:17:40 +0100
+Message-ID: <20240325131740.247464-1-throos@amazon.de>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-From: akuster808 <akuster808@gmail.com>
-Subject: kirkstone merge request: Marck 25th
-Autocrypt: addr=akuster808@gmail.com; keydata=
- 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
- ApZ86eOP
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.1.212.29]
+X-ClientProxiedBy: EX19D040UWA001.ant.amazon.com (10.13.139.22) To
+ EX19D016EUC001.ant.amazon.com (10.252.51.169)
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 11:15:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109576
+ <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 13:18:01 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109577
 
-The following changes since commit fda737ec0cc1d2a5217548a560074a8e4d5ec580:
+From: Thomas Roos <throos@amazon.de>
 
-   mbedtls: Upgrade 3.5.0 -> 3.5.2 (2024-02-28 08:18:18 -0500)
+Signed-off-by: Thomas Roos <throos@amazon.de>
+---
+ meta-networking/recipes-protocols/usrsctp/usrsctp_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-are available in the Git repository at:
+diff --git a/meta-networking/recipes-protocols/usrsctp/usrsctp_git.bb b/meta-networking/recipes-protocols/usrsctp/usrsctp_git.bb
+index dcfa7406d..85742d509 100644
+--- a/meta-networking/recipes-protocols/usrsctp/usrsctp_git.bb
++++ b/meta-networking/recipes-protocols/usrsctp/usrsctp_git.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "This is a userland SCTP stack supporting FreeBSD, Linux, Mac OS X
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=ffcf846341f3856d79a483eafa18e2a5"
+ 
+-SRCREV = "a10cd498d964508c0e6ec6bd2be9dd4afcbb4d86"
++SRCREV = "a0cbf4681474fab1e89d9e9e2d5c3694fce50359"
+ SRC_URI = "git://github.com/sctplab/usrsctp;protocol=https;branch=master \
+           "
+ 
+@@ -24,4 +24,4 @@ PACKAGECONFIG[inet6] = "--enable-inet6,--disable-inet6,"
+ 
+ EXTRA_OECONF += "--disable-debug"
+ 
+-CVE_VERSION = "0.9.3.0"
++CVE_VERSION = "0.9.5.0"
+-- 
+2.34.1
 
-   https://git.openembedded.org/meta-openembedded kirkstone-next
 
-for you to fetch changes up to 8bb16533532b6abc2eded7d9961ab2a108fd7a5b:
 
-   dnsmasq: Upgrade 2.87 -> 2.90 (2024-03-25 07:11:05 -0400)
 
-----------------------------------------------------------------
-Anuj Mittal (1):
-       opencv: fix reproducibility issues
+Amazon Web Services EMEA SARL
+38 avenue John F. Kennedy, L-1855 Luxembourg
+Sitz der Gesellschaft: L-1855 Luxemburg
+eingetragen im Luxemburgischen Handelsregister unter R.C.S. B186284
 
-Soumya Sambu (4):
-       openvpn: ignore CVE-2023-7235
-       postgresql: Upgrade to 14.11
-       unixodbc: Fix CVE-2024-1013
-       dnsmasq: Upgrade 2.87 -> 2.90
+Amazon Web Services EMEA SARL, Niederlassung Deutschland
+Marcel-Breuer-Str. 12, D-80807 Muenchen
+Sitz der Zweigniederlassung: Muenchen
+eingetragen im Handelsregister des Amtsgerichts Muenchen unter HRB 242240, USt-ID DE317013094
 
-Vivek Kumbhar (1):
-       openjpeg: Backport fix CVE-2021-3575
 
-Yogita Urade (1):
-       c-ares: fix CVE-2024-25629
 
-  meta-networking/recipes-support/dnsmasq/dnsmasq.inc             | 1 -
-  meta-networking/recipes-support/dnsmasq/dnsmasq/lua.patch       | 31 ---
-  meta-networking/recipes-support/dnsmasq/dnsmasq_2.87.bb         | 7 -
-  meta-networking/recipes-support/dnsmasq/dnsmasq_2.90.bb         | 3 +
-  .../recipes-support/dnsmasq/files/CVE-2023-28450.patch          | 48 -----
-  meta-networking/recipes-support/openvpn/openvpn_2.5.6.bb        | 3 +
-  .../0001-configure.ac-bypass-autoconf-2.69-version-check.patch  | 6 +-
-  meta-oe/recipes-dbs/postgresql/files/CVE-2023-5868.patch        | 125 
-------------
-  meta-oe/recipes-dbs/postgresql/files/CVE-2023-5869.patch        | 294 
-----------------------------
-  meta-oe/recipes-dbs/postgresql/files/CVE-2023-5870.patch        | 108 
-----------
-  .../postgresql/{postgresql_14.9.bb => postgresql_14.11.bb} |   7 +-
-  meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2021-3575.patch  | 45 +++++
-  meta-oe/recipes-graphics/openjpeg/openjpeg_2.4.0.bb             | 1 +
-  meta-oe/recipes-support/c-ares/c-ares/CVE-2024-25629.patch      | 34 ++++
-  meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb                 | 1 +
-  meta-oe/recipes-support/opencv/opencv_4.5.5.bb                  | 34 ++--
-  meta-oe/recipes-support/unixodbc/files/CVE-2024-1013.patch      | 53 +++++
-  meta-oe/recipes-support/unixodbc/unixodbc_2.3.9.bb              | 1 +
-  18 files changed, 163 insertions(+), 639 deletions(-)
-  delete mode 100644 
-meta-networking/recipes-support/dnsmasq/dnsmasq/lua.patch
-  delete mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.87.bb
-  create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq_2.90.bb
-  delete mode 100644 
-meta-networking/recipes-support/dnsmasq/files/CVE-2023-28450.patch
-  delete mode 100644 
-meta-oe/recipes-dbs/postgresql/files/CVE-2023-5868.patch
-  delete mode 100644 
-meta-oe/recipes-dbs/postgresql/files/CVE-2023-5869.patch
-  delete mode 100644 
-meta-oe/recipes-dbs/postgresql/files/CVE-2023-5870.patch
-  rename meta-oe/recipes-dbs/postgresql/{postgresql_14.9.bb => 
-postgresql_14.11.bb} (61%)
-  create mode 100644 
-meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2021-3575.patch
-  create mode 100644 
-meta-oe/recipes-support/c-ares/c-ares/CVE-2024-25629.patch
-  create mode 100644 
-meta-oe/recipes-support/unixodbc/files/CVE-2024-1013.patch
 
 
