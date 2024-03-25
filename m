@@ -1,91 +1,94 @@
-Return-Path: <jermain.horsman@nedap.com>
+Return-Path: <chen_heyun@163.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DB8FBC54E58
-	for <webhook@archiver.kernel.org>; Mon, 25 Mar 2024 13:27:41 +0000 (UTC)
-Received: from mail-io1-f47.google.com (mail-io1-f47.google.com [209.85.166.47])
- by mx.groups.io with SMTP id smtpd.web10.51961.1711373254034295660
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1C3BAC54E64
+	for <webhook@archiver.kernel.org>; Mon, 25 Mar 2024 13:54:43 +0000 (UTC)
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.2])
+ by mx.groups.io with SMTP id smtpd.web10.52759.1711374874582144267
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Mar 2024 06:27:34 -0700
+ Mon, 25 Mar 2024 06:54:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=bWtzTy4w;
- spf=pass (domain: gmail.com, ip: 209.85.166.47, mailfrom: jhatnedap@gmail.com)
-Received: by mail-io1-f47.google.com with SMTP id ca18e2360f4ac-7d03a66e895so56407339f.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 06:27:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1711373253; x=1711978053; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:reply-to:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=i1a6xpmdrZNJjlAoE6fJhsIoxtAQVEVS+gZWmsxZ/KU=;
-        b=bWtzTy4wtH+p8AkDZs+xAoQBt7dmDEGtAwy8UU/IHTft22G9HduDWiXSiYEvU8Wkrv
-         bUFbXd65jvlSbhIiq7ejeF3Lk4BKlk9wp1sz/n7hGMv7o3qiu5uYr9v8zEBha3PM11s+
-         jDEzMDvoVKaHss1/wpv5vnfqqx1iCGqW1RGCZqurU6KUkyexqqxfm0n45HINelqS+Tsr
-         zaecA/e3G2ArxQzq7jlXJVzNLu9ZuQdg7c8kszARK7M+kWtyLrPmgyofg54J5NpPLmGf
-         G2bi0ffi0E81+blyBG2pXbQtGxi2HvwUEQsW9SiidJsfZoy5jhg9aM7dhpYsoQDdI3/P
-         wftQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1711373253; x=1711978053;
-        h=content-transfer-encoding:mime-version:reply-to:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=i1a6xpmdrZNJjlAoE6fJhsIoxtAQVEVS+gZWmsxZ/KU=;
-        b=tJNT7DhVVR9JnBUy2i6IfvDlXt473sA16owDIJNqIYrRGQGBY0qgQhYqx9unBWyGwO
-         u7KtK/Wg3fEpRJhhhRCytlhFqmHtlY5wvuBxI5+ktIEX4rxOxichKQ3Q9O+etWWW7DsG
-         AFgaAVkXRUlwWuFxcAO55DOnuuptrDM/rdfjPD0vbpuNwrDiSykzbst6Bd9fPHReYDYH
-         bk6Kb43cEHkXf/C4YpHIIKj5KUcxxWwv2cHxY6TnWTBjcnVbJyjcuj2ZvwqrwB4I79ll
-         uhMT1IM9Sqix0mSyKAqC6EPJ2uQEiiejU1nljpueY9NL8A5R2mPcxJS2oKnqIqhkYzX9
-         7p9g==
-X-Gm-Message-State: AOJu0Yy/9R6nGjJbIYLa2nhbOcS8DYtgVag9ehJJ6pOI8lOIr2jAEiQc
-	ggLuIy+v4d3Auz9XJbpYCB7UJD4fM3sMBiLWbRNVWcczkqFAsb002osfRmHD
-X-Google-Smtp-Source: AGHT+IHglFaAYSLxCqtq1YcZd2dTItQiilY+PimooMC+J/dgMSJH6CSckJW/rIXlXCGprwdOv4PjXA==
-X-Received: by 2002:a05:6e02:1302:b0:368:79dd:ee32 with SMTP id g2-20020a056e02130200b0036879ddee32mr5277478ilr.12.1711373253287;
-        Mon, 25 Mar 2024 06:27:33 -0700 (PDT)
-Received: from NVC4181.nedap.local ([149.3.168.10])
-        by smtp.gmail.com with ESMTPSA id q4-20020a056e02106400b0036862333c77sm2390379ilj.33.2024.03.25.06.27.32
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 25 Mar 2024 06:27:33 -0700 (PDT)
-From: jhatnedap@gmail.com
-X-Google-Original-From: jermain.horsman@nedap.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Jermain Horsman <jermain.horsman@nedap.com>
-Subject: [meta-java][PATCH 7/7] jacl: Update SRC_URI to use https
-Date: Mon, 25 Mar 2024 14:26:02 +0100
-Message-ID: <20240325132603.2477-7-jermain.horsman@nedap.com>
-X-Mailer: git-send-email 2.43.0.windows.1
-In-Reply-To: <20240325132603.2477-1-jermain.horsman@nedap.com>
-References: <20240325132603.2477-1-jermain.horsman@nedap.com>
-Reply-To: jermain.horsman@nedap.com
+ dkim=pass header.i=@163.com header.s=s110527 header.b=FdwDG0PH;
+ spf=pass (domain: 163.com, ip: 220.197.31.2, mailfrom: chen_heyun@163.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=From:Subject:Date:Message-Id:MIME-Version; bh=QBNTg
+	p5/77H856sFw/qM+VhdIWFP5ym+aHTTx3WB/oA=; b=FdwDG0PHDq/KsrgJfVZ60
+	iJ2uzxDXfd8mCc/x27PdlY1Od1cQp4AD5JOTh19bMODVeQOyEe45osUx49M8KzzJ
+	pfuA0pUzyVg8Hf7smxtSPlAYMjfI+F8bt2r0sGXdmpoR0+4MxHgpf/g5raNWVFkJ
+	MKWofEil23Rt25+bl7HCjM=
+Received: from ubuntu.localdomain (unknown [119.86.40.242])
+	by gzga-smtp-mta-g1-3 (Coremail) with SMTP id _____wBnblgSggFm6wb8Bw--.19028S2;
+	Mon, 25 Mar 2024 21:54:27 +0800 (CST)
+From: chenheyun <chen_heyun@163.com>
+To: openembedded-devel@lists.openembedded.org,
+	819869652@qq.com
+Cc: chenheyun <chen_heyun@163.com>
+Subject: [PATCH] [[meta-oe][PATCH]aer-inject:add new recipe]
+Date: Mon, 25 Mar 2024 06:54:24 -0700
+Message-Id: <20240325135424.279201-1-chen_heyun@163.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: _____wBnblgSggFm6wb8Bw--.19028S2
+X-Coremail-Antispam: 1Uf129KBjvJXoW7tFWkZryDtrW8Jry7JFWkWFg_yoW8Cr4kpa
+	yfGwn5JrW8t34fA3Z3uFWUWFy5Wr95Ar15W3W7ur1Svas0vrn8Xw18uFy2kFsFkrZagr4U
+	Aw4kXrsFk34fuaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0JUUHUfUUUUU=
+X-Originating-IP: [119.86.40.242]
+X-CM-SenderInfo: xfkh0spkh130i6rwjhhfrp/1tbiThasRmVOB6cmqwAAs0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 13:27:41 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109585
+ <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 13:54:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109586
 
-From: Jermain Horsman <jermain.horsman@nedap.com>
+aer-inject allows to inject PCIE AER errors on the software
+level into a running Linux kernel. This is intended for validation of the
+PCIE driver error recovery handler and CIE AER core handler.
 
-Signed-off-by: Jermain Horsman <jermain.horsman@nedap.com>
+References:
+    https://git.kernel.org/cgit/linux/kernel/git/gong.chen/aer-inject.git/
+
+Signed-off-by: chenheyun <chen_heyun@163.com>
 ---
- recipes-core/jacl/jacl_1.4.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../aer-inject/aer-inject_1.0.bb              | 25 +++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/aer-inject/aer-inject_1.0.bb
 
-diff --git a/recipes-core/jacl/jacl_1.4.1.bb b/recipes-core/jacl/jacl_1.4.1.bb
-index d510cc8..2b811c7 100644
---- a/recipes-core/jacl/jacl_1.4.1.bb
-+++ b/recipes-core/jacl/jacl_1.4.1.bb
-@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = " \
- 
- HOMEPAGE = "http://sourceforge.net/projects/tcljava"
- 
--SRC_URI = "http://downloads.sourceforge.net/tcljava/jacl${PV}.tar.gz"
-+SRC_URI = "https://downloads.sourceforge.net/tcljava/jacl${PV}.tar.gz"
- 
- inherit java-library
- 
+diff --git a/meta-oe/recipes-devtools/aer-inject/aer-inject_1.0.bb b/meta-oe/recipes-devtools/aer-inject/aer-inject_1.0.bb
+new file mode 100644
+index 000000000..5d260567f
+--- /dev/null
++++ b/meta-oe/recipes-devtools/aer-inject/aer-inject_1.0.bb
+@@ -0,0 +1,25 @@
++SUMMARY = "Inject PCIE AER errors on the software level into a running Linux kernel."
++DESCRIPTION = "\
++aer-inject allows to inject PCIE AER errors on the software \
++level into a running Linux kernel. This is intended for \
++validation of the PCIE driver error recovery handler and \
++PCIE AER core handler."
++HOMEPAGE = "https://git.kernel.org/cgit/linux/kernel/git/gong.chen/aer-inject.git/"
++SECTION = "pcie/misc"
++LICENSE = "GPL-2.0"
++
++LIC_FILES_CHKSUM = "file://README;beginline=25;endline=38;md5=643c2332ec702691a87ba6ea9499b2d6"
++
++SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/gong.chen/aer-inject.git;protocol=https;branch=master \
++"
++SRCREV = "9bd5e2c7886fca72f139cd8402488a2235957d41"
++
++S = "${WORKDIR}/git"
++
++DEPENDS = "bison-native"
++
++do_install() {
++    oe_runmake 'DESTDIR=${D}' 'PREFIX=/usr/' install
++}
++FILES:${PN} += "/usr/aer-inject"
++BBCLASSEXTEND = "native nativesdk"
+\ No newline at end of file
 -- 
-2.43.0.windows.1
+2.25.1
 
 
