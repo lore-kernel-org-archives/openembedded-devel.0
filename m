@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E3913C54E58
-	for <webhook@archiver.kernel.org>; Tue, 26 Mar 2024 01:51:04 +0000 (UTC)
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
- by mx.groups.io with SMTP id smtpd.web11.9274.1711417857891234869
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1ECDCCD1281
+	for <webhook@archiver.kernel.org>; Tue, 26 Mar 2024 01:51:05 +0000 (UTC)
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.web10.9184.1711417856129346533
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 25 Mar 2024 18:50:57 -0700
+ Mon, 25 Mar 2024 18:50:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=OYNGfZZo;
- spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-1e0000cdf99so39096345ad.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 18:50:57 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=XktZdUhw;
+ spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-1def142ae7bso44203415ad.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 25 Mar 2024 18:50:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1711417857; x=1712022657; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1711417855; x=1712022655; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=iZ3sQJYhiMFP55gpQ24LpiZj3ArZD0ZzSKQ2j7MfJas=;
-        b=OYNGfZZoZU3Tcc7lvKqA8Ah3VPPDxL/rwiSvPOF8NY6YPuQ7X8jwNCdY3+HuBTbWH0
-         7xgxNCtokPr1olHx0JRrzWbb48ITY99vOh/EQE6sWeEJgULlMbWSzVWpnL1PA3NIwgwS
-         nopdDARwLNsT5liuLyMprerhWBeSrOK0738FMN4gAmO9H5lS9sYgCiZAW/04xkLSnJLh
-         H3FdYqAazYY5ZpJAnjVMWUvznjNE3bptmltusG4x5/XBUcbqVoQDgdwH6qFNDCoYoTJx
-         /W7ULhFbWsGMCYjngso1sKalHpGbMD9dy1T1zXN2NAg+1yXxjUfYix1SHi/lB2P6MfN6
-         jJ+A==
+        bh=rpS5kj6ZzX6PdjJh4FZ/9eWOjjXX04NmJeQ7lPhdG6o=;
+        b=XktZdUhw0xR/94XsQxqzKevJtcESIeeKQx7Xlu8FwF/IKOxBIAEgISgz+vLD+JM/dB
+         xOelsI5VQBIeTUdNC89b5DS/PETRomIMrYVW3vV4X10WHvH/twQGgMGxgUdDc6DTgj/u
+         sj2KcJWX0QLIKK71saGQqXH1SPgGEdm4rLWg4plua4g9WqGMBU73cEOHRsrejsAQ7G/y
+         GkullQAHpPwJH6yRLlkhofycc1gvVMQnQ87mQowIwr4a1jsktJkrSQZv4qvzpMKTu2yD
+         V+dhaHcbYAwe+Rgf55wrpGKjwlUdU2KYNayb+cVn25rKirV/v0XfqpnxT+n2RIJjElyW
+         plCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1711417857; x=1712022657;
+        d=1e100.net; s=20230601; t=1711417855; x=1712022655;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=iZ3sQJYhiMFP55gpQ24LpiZj3ArZD0ZzSKQ2j7MfJas=;
-        b=kwsPjQoOHCiJXRijfICtDAOxeoG5clGMJJPtZ0tDMoHyLvWZW6UflazTzCWjWN6jcY
-         T42p/MS/ME3XipXpu6IPAjdHmB0/hnwLIHwbqyokoUlROZae87LjbBIBmF7pty7vcgCL
-         IUwWyx/Oe2Tw7xWHsa1DdjRaj+kUAUUTZHhec3V4i+u/+iCo+n2DMZA5Rrn7DPFmC4A4
-         xZKJY91P3c3HqQ7U0A91+cn78Icx3CIMqrv7M5MKTIo95BMe6q50cwxpbezfrgxPOvqt
-         XK5MqDxCEiCG3wzx6Fstv5vbZKlPPEMU5d1dosx+jxRplaHklvRUU0S5jowAahsiawTz
-         Zpzw==
-X-Gm-Message-State: AOJu0Yx4oTpTl2QGPvQl5XAsY27qG94gcIgxv+miLYofCpe+r430mCnk
-	85b0aEfmIj9jjlL/A5v+G+4uhPPoug7FIh+AUQNZ6V6sTVYzPl5R2yl+Doy3
-X-Google-Smtp-Source: AGHT+IFktvyeMf/7vEJkbLBnkKV/hxxb8/u18JsU4d+43t6HfPE3oD3yfbWsjbvQR8gU0J+qXG9+1w==
-X-Received: by 2002:a17:902:e952:b0:1e0:c571:d644 with SMTP id b18-20020a170902e95200b001e0c571d644mr4713721pll.8.1711417857089;
-        Mon, 25 Mar 2024 18:50:57 -0700 (PDT)
+        bh=rpS5kj6ZzX6PdjJh4FZ/9eWOjjXX04NmJeQ7lPhdG6o=;
+        b=UXhgyzal7ckVFq/XUe7Rue7o7dTDWnUogsxQIYJD7Tq5DP2pJtKfCcDLOF/jIzlFXJ
+         6P1xI1gOqTx69HpzEnH4fELeAib4FNmx3t+NAiVi6E9vRbOu2AmNLtgd54oUkzIg2uAD
+         4fHphgood3M3FHNQQs/5rWCLYTQ38wrbPnip/I/Lv3PvKe/1a3K7KZ+VdV/affgqHYiN
+         scJgGzIfuY8bGtGMK7aKiAKMX3+7QLmlxnhlcvw/n+g8B2cmg0JZdV1/oC29b85PeaC7
+         TF6tVE1b58T6B32pP/AK7hmaK6ZlJhGWknK1QpG34yRRY4UZkGlgajWrufpzmJ4qq2Hx
+         iGBQ==
+X-Gm-Message-State: AOJu0Yxphh/5g5AgZB39j7JjDkK0xKl+lJ+Z65AWs4T94s2Yv5N1dUQd
+	zCUwaa8zuLJDPx6WQN+dMmEQ0wV5HldfkSB0LIztfX0JuejEnZuodsM6Ulav
+X-Google-Smtp-Source: AGHT+IG2M0TkDlGeZdxO8vFo+UwYMP0IWItTmKfd++N8t8cCUofwvF/cP/fJ2GCi3znvtkm0twE/9w==
+X-Received: by 2002:a17:902:8bc8:b0:1dd:c24d:4d1f with SMTP id r8-20020a1709028bc800b001ddc24d4d1fmr7225868plo.67.1711417855120;
+        Mon, 25 Mar 2024 18:50:55 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::5eba])
-        by smtp.gmail.com with ESMTPSA id n1-20020a170902e54100b001dcfc68e7desm5425070plf.75.2024.03.25.18.50.55
+        by smtp.gmail.com with ESMTPSA id n1-20020a170902e54100b001dcfc68e7desm5425070plf.75.2024.03.25.18.50.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 25 Mar 2024 18:50:56 -0700 (PDT)
+        Mon, 25 Mar 2024 18:50:54 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 08/10] i2cdev: Include libgen.h on musl
-Date: Mon, 25 Mar 2024 18:50:43 -0700
-Message-ID: <20240326015047.543274-8-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 06/10] uftrace: Fix build with musl >= 1.2.5
+Date: Mon, 25 Mar 2024 18:50:41 -0700
+Message-ID: <20240326015047.543274-6-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.44.0
 In-Reply-To: <20240326015047.543274-1-raj.khem@gmail.com>
 References: <20240326015047.543274-1-raj.khem@gmail.com>
@@ -60,113 +60,72 @@ Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 26 Mar 2024 01:51:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109617
+ <openembedded-devel@lists.openembedded.org>; Tue, 26 Mar 2024 01:51:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109615
 
-This helps in getting prototype for basename() and fix build errors
-on clang-18+
+The famous basename API fallout
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-bsp/i2cdev/i2cdev/fix-musl.patch  | 28 ++++++-------------
- 1 file changed, 8 insertions(+), 20 deletions(-)
+ .../0001-include-libgen.h-for-basename.patch  | 34 +++++++++++++++++++
+ .../uftrace/uftrace_0.15.2.bb                 |  3 +-
+ 2 files changed, 36 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-devtools/uftrace/uftrace/0001-include-libgen.h-for-basename.patch
 
-diff --git a/meta-oe/recipes-bsp/i2cdev/i2cdev/fix-musl.patch b/meta-oe/recipes-bsp/i2cdev/i2cdev/fix-musl.patch
-index 59fd379dec..a15514bafe 100644
---- a/meta-oe/recipes-bsp/i2cdev/i2cdev/fix-musl.patch
-+++ b/meta-oe/recipes-bsp/i2cdev/i2cdev/fix-musl.patch
-@@ -20,8 +20,6 @@ Upstream-Status: Submitted [https://github.com/costad2/i2cdev/pull/5]
-  lsi2c/lsi2c.c              | 4 ++--
-  7 files changed, 2 insertions(+), 9 deletions(-)
+diff --git a/meta-oe/recipes-devtools/uftrace/uftrace/0001-include-libgen.h-for-basename.patch b/meta-oe/recipes-devtools/uftrace/uftrace/0001-include-libgen.h-for-basename.patch
+new file mode 100644
+index 0000000000..4844003517
+--- /dev/null
++++ b/meta-oe/recipes-devtools/uftrace/uftrace/0001-include-libgen.h-for-basename.patch
+@@ -0,0 +1,34 @@
++From 8e4e5479cee153db7315d5134663fa87082b39fc Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 25 Mar 2024 17:46:24 -0700
++Subject: [PATCH] include libgen.h for basename
++
++basename prototype has been removed from string.h from latest musl [1]
++compilers e.g. clang-18 flags the absense of prototype as error. therefore
++include libgen.h for providing it.
++
++[1] https://git.musl-libc.org/cgit/musl/commit/?id=725e17ed6dff4d0cd22487bb64470881e86a92e7
++
++Upstream-Status: Submitted [https://github.com/namhyung/uftrace/pull/1909]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ utils/utils.h | 3 +++
++ 1 file changed, 3 insertions(+)
++
++diff --git a/utils/utils.h b/utils/utils.h
++index 69a6072b..60265431 100644
++--- a/utils/utils.h
+++++ b/utils/utils.h
++@@ -11,6 +11,9 @@
++ 
++ #include <ctype.h>
++ #include <endian.h>
+++#ifndef __GLIBC__
+++#include <libgen.h>
+++#endif
++ #include <limits.h>
++ #include <signal.h>
++ #include <stdbool.h>
++-- 
++2.44.0
++
+diff --git a/meta-oe/recipes-devtools/uftrace/uftrace_0.15.2.bb b/meta-oe/recipes-devtools/uftrace/uftrace_0.15.2.bb
+index ff04d40eaf..60436025a3 100644
+--- a/meta-oe/recipes-devtools/uftrace/uftrace_0.15.2.bb
++++ b/meta-oe/recipes-devtools/uftrace/uftrace_0.15.2.bb
+@@ -11,7 +11,8 @@ DEPENDS:append:libc-musl = " argp-standalone"
+ inherit autotools
  
--diff --git a/libi2cdev/access.c b/libi2cdev/access.c
--index 62a3f59..2e77659 100644
- --- a/libi2cdev/access.c
- +++ b/libi2cdev/access.c
- @@ -16,7 +16,6 @@
-@@ -32,20 +30,19 @@ index 62a3f59..2e77659 100644
-  #include "sysfs.h"
-  
-  #include "i2cdiscov.h"
--diff --git a/libi2cdev/i2c-bus-parser.c b/libi2cdev/i2c-bus-parser.c
--index c4b8688..8c760e0 100644
- --- a/libi2cdev/i2c-bus-parser.c
- +++ b/libi2cdev/i2c-bus-parser.c
--@@ -27,7 +27,6 @@
-+@@ -27,9 +27,9 @@
-  #include <dirent.h>
-  #include <fcntl.h>
-  #include <errno.h>
- -#include <error.h>
-  #include <alloca.h>
-  #include <search.h>
-++#include <libgen.h>
-  
--diff --git a/libi2cdev/i2c-dev-path.c b/libi2cdev/i2c-dev-path.c
--index b156db7..361761c 100644
-+ #include "common.h"
-+ #include "sysfs.h"
- --- a/libi2cdev/i2c-dev-path.c
- +++ b/libi2cdev/i2c-dev-path.c
- @@ -11,7 +11,6 @@
-@@ -56,8 +53,6 @@ index b156db7..361761c 100644
-  
-  #include <linux/limits.h>
-  
--diff --git a/libi2cdev/i2c-error.c b/libi2cdev/i2c-error.c
--index f92fb6b..540c112 100644
- --- a/libi2cdev/i2c-error.c
- +++ b/libi2cdev/i2c-error.c
- @@ -9,7 +9,6 @@
-@@ -68,8 +63,6 @@ index f92fb6b..540c112 100644
-  #include <errno.h>
-  #include <stdbool.h>
-  #include <stdarg.h>
--diff --git a/libi2cdev/init.c b/libi2cdev/init.c
--index 99a7edd..dfc4090 100644
- --- a/libi2cdev/init.c
- +++ b/libi2cdev/init.c
- @@ -16,10 +16,8 @@
-@@ -83,20 +76,18 @@ index 99a7edd..dfc4090 100644
-  #include <fcntl.h>
-  #include <assert.h>
-  
--diff --git a/libi2cdev/sysfs.c b/libi2cdev/sysfs.c
--index 2811500..a7e13a8 100644
- --- a/libi2cdev/sysfs.c
- +++ b/libi2cdev/sysfs.c
--@@ -17,7 +17,6 @@
-+@@ -17,8 +17,8 @@
-  #include <assert.h>
-  #include <string.h>
-  #include <fcntl.h>
- -#include <error.h>
-  #include <errno.h>
-++#include <libgen.h>
-  
-  #include <sys/types.h>
--diff --git a/lsi2c/lsi2c.c b/lsi2c/lsi2c.c
--index 7af5313..34c6225 100644
-+ #include <sys/stat.h>
- --- a/lsi2c/lsi2c.c
- +++ b/lsi2c/lsi2c.c
- @@ -38,7 +38,6 @@
-@@ -107,7 +98,7 @@ index 7af5313..34c6225 100644
-  #include <getopt.h>
-  #include <stdbool.h>
-  
--@@ -205,7 +204,8 @@ static int read_config_file(const char *config_file_name)
-+@@ -205,7 +204,8 @@ static int read_config_file(const char *
-          if (err < 0) {
-              err = -err;
-          }
-@@ -117,6 +108,3 @@ index 7af5313..34c6225 100644
-          if (config_file) {
-              fclose(config_file);
-          }
---- 
--2.34.1
--
+ SRCREV = "9d8657e90b918994d7d2bcf6dd2cc7354c35a1b4"
+-SRC_URI = "git://github.com/namhyung/${BPN};branch=master;protocol=https"
++SRC_URI = "git://github.com/namhyung/${BPN};branch=master;protocol=https \
++           file://0001-include-libgen.h-for-basename.patch"
+ S = "${WORKDIR}/git"
+ 
+ LDFLAGS:append:libc-musl = " -largp"
 -- 
 2.44.0
 
