@@ -1,101 +1,89 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <randy.macleod@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0E717C54E67
-	for <webhook@archiver.kernel.org>; Tue, 26 Mar 2024 15:44:30 +0000 (UTC)
-Received: from mail-oo1-f49.google.com (mail-oo1-f49.google.com [209.85.161.49])
- by mx.groups.io with SMTP id smtpd.web11.12575.1711467866636327663
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CEDB1C54E67
+	for <webhook@archiver.kernel.org>; Tue, 26 Mar 2024 18:18:40 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web10.17798.1711477120275606871
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Mar 2024 08:44:26 -0700
+ Tue, 26 Mar 2024 11:18:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZjoSOgWL;
- spf=pass (domain: gmail.com, ip: 209.85.161.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f49.google.com with SMTP id 006d021491bc7-5a485724ddaso3296450eaf.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 26 Mar 2024 08:44:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1711467866; x=1712072666; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=FBLU5hZCDP5Ke1bBOqs2frjw8QxbI7dfk81rGXbwoz0=;
-        b=ZjoSOgWLQ90ggcw7VSNiKQ1iH/LPnSHW+iFUttkbP6sC+O3ivO+G4gLsOOC3gXx65t
-         ZSUWFVQFk7j43zP5S25/JYa978FZnvqdeuDyRXlDl8ZJTghqDV2oB3Nf7PQNg/0I131+
-         34w0v+cQWfoSxCgOKb9Z9z8T7LKcNhQw0vJhOW8TvMos6+zvIzYL1M8qyMSYaOZ8tWGu
-         YhG8TfJPbozYUEGZ95C6XkdrpiUZOvgxNKqLEKq1AOvYdaIFFPuV/lX1ofn0yaPMKr2j
-         SozCe4ORbc0Raxg3FmUF8tglVuGXmKUZjCW5UmjFZ/hFc+zoMY368/R7K0CJpRadJDhy
-         8sDA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1711467866; x=1712072666;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=FBLU5hZCDP5Ke1bBOqs2frjw8QxbI7dfk81rGXbwoz0=;
-        b=MbsqkgSxoY5i5eg69cI2ZHcB4S2OHPMRPr9R182sMU/4fc4pob9Vt792A9A4fupr3f
-         cnbDGGV90Fi8XCvdee8ke91MPNNHWf7Hq7TsnvxBUb4PXPc0ijCvLRxlG/AHZLIWbqM7
-         6QEkL1fhGDHdEeW06eTsGrYYS951IU30Kz29dtMNuPiMgvktdvYMWQVHkFW8f4OVUn4i
-         0EktmnHethNtZh7FexkoucDnyK+bac7Ho1XBJCkd7ZwXaEYwcVVmIAtWssqz9hQ3qVP7
-         y8nEJQvfRLhddwyBeE5UWahDQfbJaWJ77u6KB/rEQFDzXMg/y6ELno+CSdf+4fBdCXhR
-         vhlQ==
-X-Gm-Message-State: AOJu0YwqFFssSEUbWq7gAGydsXW+4DzdQpE8Od2PoZesk8iKM8b5Nne0
-	2eaHhZ6/AyK9HBOju5LxJKNOwLLebhsbklmy1GEH1HhX4lUFcULd1Qnfe3SwNBFTi8Jx8OHEp5T
-	3GS/g1m9Vf+fwb7B4MbnaxCKCGH8=
-X-Google-Smtp-Source: AGHT+IFrJo2lpuiCEYDx7MIVGc0l+Zf6xq+xtjlcW+Myn8FFKTf2irM7MI5riBrTHgPJERl81AOzs44n1fCcy2iZyMU=
-X-Received: by 2002:a4a:e910:0:b0:5a4:6e43:3518 with SMTP id
- bx16-20020a4ae910000000b005a46e433518mr1708378oob.6.1711467865732; Tue, 26
- Mar 2024 08:44:25 -0700 (PDT)
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=WV2rwT7W;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=3815b0b2f8=randy.macleod@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 42QBhdFo007466
+	for <openembedded-devel@lists.openembedded.org>; Tue, 26 Mar 2024 11:18:40 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=vO4IV
+	42fDn3Ck6N9wVPo6W9xpW+oJeZNmitc/yIV48U=; b=WV2rwT7WQriBzLGM3mmW0
+	ZBWCfySkuxLfUueHKTYGSWeZTBEw/caIHtb8g1VcjLueBq2fVKZ+dX9B2pln/Nsr
+	Qh26sBiT7g1TY7phvKiaeWFZSaGDtFoggi/g31XkrisdV/00LnxzbIp6vxkL/uRs
+	EyCfqW367lTOh0CkKzGkgcFEw/REVmzQMXR2u2U0nYx/J1IUA1ufkn0hkB5YqXzx
+	1ONx/PLMkSnDC1kmg4IRJRvYdJQp/VHhQlPOrDVepC1WKsh3Nl2ro7nM4aQaZPc3
+	iCZ0yioSqpgRNt5MlNfvvofgTn1e9y52/FTjrrM+5okySIuTYczB0ZHxi2XgLUBj
+	Q==
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3x1xkguu11-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 26 Mar 2024 11:18:39 -0700 (PDT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.37; Tue, 26 Mar 2024 11:18:39 -0700
+Received: from pop-os.wrs.com (172.25.44.5) by ala-exchng01.corp.ad.wrs.com
+ (147.11.82.252) with Microsoft SMTP Server id 15.1.2507.37 via Frontend
+ Transport; Tue, 26 Mar 2024 11:18:38 -0700
+From: <Randy.MacLeod@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [PATCH] nftables: Add DESCRIPTION and HOMEPAGE
+Date: Tue, 26 Mar 2024 14:18:38 -0400
+Message-ID: <20240326181838.3853211-1-Randy.MacLeod@windriver.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <CAMKF1srWVvy9tME92yc16tPVRyjELep1m90ew+ev=9+dtgY9+Q@mail.gmail.com>
- <28797.1711464201221257265@lists.openembedded.org>
-In-Reply-To: <28797.1711464201221257265@lists.openembedded.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 26 Mar 2024 08:43:59 -0700
-Message-ID: <CAMKF1srJ-hbp2fKy=XZOWiLYJQ_QPEc1f=hjAywaB6V94A4vXg@mail.gmail.com>
-Subject: Re: [oe] [[meta-oe][PATCH]aer-inject:add new recipe]
- [[meta-oe][PATCH]aer-inject:add new recipe]
-To: chenheyun <chen_heyun@163.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: NyrFbg7AIGj1ksx-rP0aPt1wqhnTtwLe
+X-Proofpoint-GUID: NyrFbg7AIGj1ksx-rP0aPt1wqhnTtwLe
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-03-26_07,2024-03-21_02,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
+ adultscore=0 impostorscore=0 spamscore=0 priorityscore=1501 bulkscore=0
+ suspectscore=0 mlxscore=0 mlxlogscore=887 phishscore=0 malwarescore=0
+ clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2403210001 definitions=main-2403260130
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 26 Mar 2024 15:44:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109623
+ <openembedded-devel@lists.openembedded.org>; Tue, 26 Mar 2024 18:18:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109624
 
-On Tue, Mar 26, 2024 at 7:43=E2=80=AFAM chenheyun <chen_heyun@163.com> wrot=
-e:
->
-> sorry, i run it on older meta-openembedded,so i dont find this WARNING. n=
-ow, i know it ,thanks.
->
-> this is note in README:
-> "You should find a copy of v2 of the GNU General Public License
->    somewhere on your Linux system; if not, write to the Free Software
->    Foundation,"
->
-> then,can i copy  "kernel-source\LICENSES\preferred\GPL-2.0" to files to f=
-ix "obsolete licenses GPL-2.0"?
->
+From: Randy MacLeod <Randy.MacLeod@windriver.com>
 
-I think you should change
+Add DESCRIPTION and HOMEPAGE.
 
-LICENSE =3D "GPL-2.0" to
-LICENSE =3D "GPL-2.0-only"
+Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+---
+ meta-networking/recipes-filter/nftables/nftables_1.0.9.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-That should fix one problem, for the second problem some object file
-is encoding paths into it.
-so things like __FILE__ macros in code can do so, they must be removed.
+diff --git a/meta-networking/recipes-filter/nftables/nftables_1.0.9.bb b/meta-networking/recipes-filter/nftables/nftables_1.0.9.bb
+index 43d606f5d..906d1b4f6 100644
+--- a/meta-networking/recipes-filter/nftables/nftables_1.0.9.bb
++++ b/meta-networking/recipes-filter/nftables/nftables_1.0.9.bb
+@@ -1,4 +1,9 @@
+ SUMMARY = "Netfilter Tables userspace utillites"
++DESCRIPTION = "nftables replaces the popular {ip,ip6,arp,eb}tables. \
++               This software provides an in-kernel packet classification framework \
++               that is based on a network-specific Virtual Machine (VM), \
++               nft, a userspace command line tool and libnftables, a high-level userspace library."
++HOMEPAGE = "https://netfilter.org/projects/nftables"
+ SECTION = "net"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=81ec33bb3e47b460fc993ac768c74b62"
+-- 
+2.34.1
 
-> thanks for your suggestions very much!
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#109622): https://lists.openembedded.org/g/openembedde=
-d-devel/message/109622
-> Mute This Topic: https://lists.openembedded.org/mt/105119602/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
 
