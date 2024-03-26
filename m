@@ -1,171 +1,67 @@
-Return-Path: <alperyasinak1@gmail.com>
+Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 44D11C6FD1F
-	for <webhook@archiver.kernel.org>; Tue, 26 Mar 2024 19:26:01 +0000 (UTC)
-Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
- by mx.groups.io with SMTP id smtpd.web11.19372.1711481157413149647
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9E61FC6FD1F
+	for <webhook@archiver.kernel.org>; Tue, 26 Mar 2024 20:19:21 +0000 (UTC)
+Received: from mta-65-227.siemens.flowmailer.net (mta-65-227.siemens.flowmailer.net [185.136.65.227])
+ by mx.groups.io with SMTP id smtpd.web11.20684.1711484354813477686
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Mar 2024 12:25:57 -0700
+ Tue, 26 Mar 2024 13:19:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=EkqALgC8;
- spf=pass (domain: gmail.com, ip: 209.85.218.54, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-a46ba938de0so796812666b.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 26 Mar 2024 12:25:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1711481155; x=1712085955; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=MrUkrSnHZM+5jOJv++LNsc6trbNHGfgGwUdhljFGvCw=;
-        b=EkqALgC80H4gMN+YEXE3J1daa3d/1U5j05uIj3iS6ZxbeEsX8V5ea68h7DyYPUvOfb
-         8v+SAVRVDlLQkkcHElwZNtdvKZQsWEgOAw5deutyfHk8e42x/TSGn2wa2Pm7IUbkXJXV
-         ljDPnf1lcJIIMl3kClCk/TJbYTSZ+gKCfJ7fR4GRrmTibIiGCGuV7YXwVhdLabsbUabA
-         785HJsFyhjaTdhFRcED7bdZhuTndGRUxglrSJJ0YDoYlFBltajiZCcIymSeNkhsWZySZ
-         kZYcqM5RNSdRQBQgvuToUdbmVG35UfhZCmLcATkc3Gc8Z+mPB4ud3GWMHIV+tBoUBcgo
-         MQfg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1711481155; x=1712085955;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=MrUkrSnHZM+5jOJv++LNsc6trbNHGfgGwUdhljFGvCw=;
-        b=BOg8xYaxKeGm1xWwH2AvVyB8fDFFU5Jxtbks7DBUJEYbSZbA09Fx3kevOyL34XdDNY
-         zPJNN4+OpcWvw6flTRyHquPqBfr7ielDIWyvJFE/zSsiSbL6pyhsKOndxiLncYGjv22Q
-         R2DPXVR5axoaktdEDP42Ven145LAqIsqMniRlXfPY6LcRfaTZKVRKdv3LRRFXo0Haoiu
-         0ZWf6f+16rzCmn0Acxh9oNbBX36+yh4M5hTHCyMJrkPlL57fy/mPyfj5E2E+fomoB5Gf
-         69DHkfiQvznCXH7BONyY2t0qiexQwCxvTo9YaG3KI6RlabgJLYvtHLJibon0Kt7cwowF
-         IKGw==
-X-Gm-Message-State: AOJu0YxI7vRUSdu4T+ePETKUj0VU7zfZ5JI1aLnaCTL+XGtVALEx8T0T
-	swFhQRp3oaL/YBz7scbQ1HdxhHGVx93VMmllaN8jt3td5MPcv8nm2qqPdUixs1Q=
-X-Google-Smtp-Source: AGHT+IFbH9O/siPJbut/uf/nLQdFmw0Q9u8Tk7L3GFsHFRgdSpGVC1LBEav+x3//XXTiPZ1Tcrbegw==
-X-Received: by 2002:a17:906:2457:b0:a46:e51a:466e with SMTP id a23-20020a170906245700b00a46e51a466emr2302873ejb.64.1711481154965;
-        Tue, 26 Mar 2024 12:25:54 -0700 (PDT)
-Received: from localhost.localdomain ([176.33.68.217])
-        by smtp.gmail.com with ESMTPSA id zh20-20020a170906881400b00a47531764fdsm3127167ejb.65.2024.03.26.12.25.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 26 Mar 2024 12:25:54 -0700 (PDT)
-From: alperak <alperyasinak1@gmail.com>
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=cLKxuV5s;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.227, mailfrom: fm-256628-202403262019105c9cd788355a65aee7-__qewn@rts-flowmailer.siemens.com)
+Received: by mta-65-227.siemens.flowmailer.net with ESMTPSA id 202403262019105c9cd788355a65aee7
+        for <openembedded-devel@lists.openembedded.org>;
+        Tue, 26 Mar 2024 21:19:11 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
+ d=siemens.com; i=peter.marko@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=RSznwQhxsb9PWpQUPts09t2PS1IhAuYMFJnFLs6RWk0=;
+ b=cLKxuV5sbViQS2By4NXcPUBPS5FrU9swdqil2Y3wJ+Wm48ABTvzauXbWIWOAiSSE/2tdZU
+ jE7fjqFyd2jZrCFWMwhiWh6ic97mbP0K9SseNlwzFDPRIpsTU1IYczK5lOXi/kLwhSP4KLwd
+ prNTlL/F+S5SV2M4ASaTI+FJIyB4s=;
+From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-python][PATCH] python3-portalocker: enable ptest
-Date: Tue, 26 Mar 2024 22:25:23 +0300
-Message-Id: <20240326192523.116673-1-alperyasinak1@gmail.com>
-X-Mailer: git-send-email 2.25.1
+Cc: Peter Marko <peter.marko@siemens.com>
+Subject: [meta-oe][PATCH] soci: fix buildpaths warning
+Date: Tue, 26 Mar 2024 21:18:22 +0100
+Message-Id: <20240326201822.530736-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 26 Mar 2024 19:26:01 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109626
+ <openembedded-devel@lists.openembedded.org>; Tue, 26 Mar 2024 20:19:21 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109627
 
-* test_combined.py deleted because it is not a functional test. It checks if the 'combine' function work correctly which is parse README.rst and LICENSE.
+From: Peter Marko <peter.marko@siemens.com>
 
-* Ptest and library example tested on qemux86-64 and qemuarm64
+WARNING: soci-4.0.3-r0 do_package_qa: QA Issue: File /usr/lib/cmake/SOCI/SOCITargets-noconfig.cmake in package soci-dev contains reference to TMPDIR [buildpaths]
 
-* Add ptest into PTESTS_FAST_META_PYTHON
+This is causing build failures in components depending on soci
+when building with rm_work or from sstate-cache.
 
-qemux86-64:
-
-Testsuite summary
-TOTAL: 21
-PASS: 21
-SKIP: 0
-XFAIL: 0
-FAIL: 0
-XPASS: 0
-ERROR: 0
-DURATION: 11
-END: /usr/lib/python3-portalocker/ptest
-2024-03-26T18:47
-STOP: ptest-runner
-TOTAL: 1 FAIL: 0
-
-qemuarm64:
-
-Testsuite summary
-TOTAL: 21
-PASS: 21
-SKIP: 0
-XFAIL: 0
-FAIL: 0
-XPASS: 0
-ERROR: 0
-DURATION: 11
-END: /usr/lib/python3-portalocker/ptest
-2024-03-26T18:52
-STOP: ptest-runner
-TOTAL: 1 FAIL: 0
-
-Signed-off-by: alperak <alperyasinak1@gmail.com>
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- .../ptest-packagelists-meta-python.inc        |  1 +
- .../python3-portalocker/run-ptest             |  3 +++
- .../python3-portalocker_2.8.2.bb              | 26 ++++++++++++++++---
- 3 files changed, 26 insertions(+), 4 deletions(-)
- create mode 100644 meta-python/recipes-extended/python3-portalocker/python3-portalocker/run-ptest
+ meta-oe/recipes-dbs/soci/soci_4.0.3.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-index ec26f768e..ccb443182 100644
---- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
-+++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
-@@ -40,6 +40,7 @@ PTESTS_FAST_META_PYTHON = "\
-     python3-parse-type \
-     python3-platformdirs \
-     python3-polyline \
-+    python3-portalocker \
-     python3-precise-runner \
-     python3-prettytable \
-     python3-pydantic \
-diff --git a/meta-python/recipes-extended/python3-portalocker/python3-portalocker/run-ptest b/meta-python/recipes-extended/python3-portalocker/python3-portalocker/run-ptest
-new file mode 100644
-index 000000000..8d2017d39
---- /dev/null
-+++ b/meta-python/recipes-extended/python3-portalocker/python3-portalocker/run-ptest
-@@ -0,0 +1,3 @@
-+#!/bin/sh
+diff --git a/meta-oe/recipes-dbs/soci/soci_4.0.3.bb b/meta-oe/recipes-dbs/soci/soci_4.0.3.bb
+index 71ab80c48..25d67ff8b 100644
+--- a/meta-oe/recipes-dbs/soci/soci_4.0.3.bb
++++ b/meta-oe/recipes-dbs/soci/soci_4.0.3.bb
+@@ -43,3 +43,7 @@ FILES:${PN}-mysql = "${libdir}/lib${BPN}_mysql.so.*"
+ FILES:${PN}-postgresql = "${libdir}/lib${BPN}_postgresql.so.*"
+ FILES:${PN}-odbc = "${libdir}/lib${BPN}_odbc.so.*"
+ FILES:${PN}-oracle = "${libdir}/lib${BPN}_oracle.so.*"
 +
-+pytest --automake
-diff --git a/meta-python/recipes-extended/python3-portalocker/python3-portalocker_2.8.2.bb b/meta-python/recipes-extended/python3-portalocker/python3-portalocker_2.8.2.bb
-index 69578ba84..c45a3fcda 100644
---- a/meta-python/recipes-extended/python3-portalocker/python3-portalocker_2.8.2.bb
-+++ b/meta-python/recipes-extended/python3-portalocker/python3-portalocker_2.8.2.bb
-@@ -8,11 +8,29 @@ SRC_URI[sha256sum] = "2b035aa7828e46c58e9b31390ee1f169b98e1066ab10b9a6a861fe7e25
- 
- DEPENDS += "python3-setuptools-scm-native"
- 
--inherit pypi python_setuptools_build_meta
-+inherit pypi python_setuptools_build_meta ptest
- 
--BBCLASSEXTEND = "native nativesdk"
-+SRC_URI += " \
-+	file://run-ptest \
-+"
-+
-+RDEPENDS:${PN}-ptest += " \
-+	python3-multiprocessing \
-+	python3-pytest \
-+	python3-redis \
-+	python3-unittest-automake-output \
-+	redis \
-+"
-+
-+do_install_ptest() {
-+	install -d ${D}${PTEST_PATH}/tests
-+	cp -rf ${S}/portalocker_tests/* ${D}${PTEST_PATH}/tests/
-+	rm -rf ${D}${PTEST_PATH}/tests/test_combined.py
++do_install:append() {
++    sed -i 's|${RECIPE_SYSROOT}${prefix}|${_IMPORT_PREFIX}|g' ${D}${libdir}/cmake/SOCI/SOCITargets*.cmake
 +}
- 
- RDEPENDS:${PN} += " \
--        python3-fcntl \
--        python3-logging \
-+	python3-fcntl \
-+	python3-logging \
- "
-+
-+BBCLASSEXTEND = "native nativesdk"
 -- 
-2.25.1
+2.30.2
 
 
