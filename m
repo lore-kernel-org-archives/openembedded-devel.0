@@ -1,103 +1,133 @@
-Return-Path: <kai.kang@eng.windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0454EC54E67
-	for <webhook@archiver.kernel.org>; Wed, 27 Mar 2024 01:48:13 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.27483.1711504083432381652
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1BD54CD11DD
+	for <webhook@archiver.kernel.org>; Wed, 27 Mar 2024 02:05:03 +0000 (UTC)
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
+ by mx.groups.io with SMTP id smtpd.web11.27757.1711505095753767836
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 26 Mar 2024 18:48:03 -0700
+ Tue, 26 Mar 2024 19:04:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=b0G3u+Or;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=38165489da=kai.kang@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 42R1l3sh014778
-	for <openembedded-devel@lists.openembedded.org>; Wed, 27 Mar 2024 01:48:02 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=V5ZWD
-	SQqV4xHOEwgHhAM32GKght6igLmEovNJArpb/A=; b=b0G3u+OrMtO/0fAGs6oLO
-	tZTyq6NFSnK+6Cjrq6/NnlPxnWVrFF2fi5WMKQz8aKPNqMmdqYXS2p+iV8OMGbKV
-	+dvR83h/Z/NwL27ze5r5rib2Hv4nJhiK6ikelfd6Ij/HcDP/oSZ3joXCKq/cskrw
-	M9DrKQdeUH9fYRzBt4VLXpjhg4omAIyJer10XMgibBiFRQdSri5c6bEQCsZUd+3T
-	QdkZLVduN4nCsfdT9z9Tm4PjjZlo8STqD7E6Ou5tJe7C6a+Vmz8nKIwAxRNAg/eB
-	w79RYGGsipSg7lfOQO7RczMx+XkpB9A65wdMf7sWcnf+mx0RKE7fSI/k/H/keKGt
-	w==
-Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3x1m9xmndg-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 27 Mar 2024 01:48:02 +0000 (GMT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.37; Tue, 26 Mar 2024 18:48:01 -0700
-Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.37 via Frontend Transport; Tue, 26 Mar 2024 18:48:00 -0700
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] thin-provisioning-tools: install binary to ${sbindir}
-Date: Wed, 27 Mar 2024 09:47:57 +0800
-Message-ID: <20240327014757.1817465-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=CD+h1xLW;
+ spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-6e7425a6714so4076624b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 26 Mar 2024 19:04:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1711505095; x=1712109895; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=izB+j7PEe2FlasFHpMNGxb1iiju4v/HvVz5wH76VHUs=;
+        b=CD+h1xLWt5CRwfkiddv4KJXv6FwIcO0I95dB/6aA+/lb6Iw6uHtftuUQX1WQ70jO1b
+         X8ypyTmxzktgfoLolqc6p7Vg8Ez93+8RePEwSLqGiAG3z1WtEuQMz6PxF9NloUKYJKk5
+         6gXqegJeCvDQOIpzEwsvps5Jmg2JdE5BY0MDdukn3PhkwzxIPfr5YDNgWmRyAerk53vW
+         5G25Kbii9zP89ovx9EyKDPMVt3k07vFItypIexnZbe9snNLKbfMoXXFVMdxrZ92SbgxU
+         TPXyNr9lIdKAGppmOwgFasxYAt2AxjuhBSt/7eAoPtRTDeLud5m8uhCzXXndxxKZV10W
+         SB0A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1711505095; x=1712109895;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=izB+j7PEe2FlasFHpMNGxb1iiju4v/HvVz5wH76VHUs=;
+        b=KDocMrwR+whiAl6ifYU023qjUSfex6dm+ts/gfWqZq1wnT5GD9djkRkzx2b6T7MMUJ
+         oAfAEM8+E1ytneOSYVe4cu9QxdlmVOCN1B0YvZP1j8RXdcQmXghJVduyU6BkIRgi+o9j
+         T39GohK0YETxuAvYrkb+Uwa2ICIQ99tCSyUH/8o2TRzXxe968WR+F+e0Dq9O3kNNEgPn
+         B17L5savJ78Lbs+zPDVRc3llgp4gacc+jNBiid85Cblbd0e9T3SQSBiNkgGcjTdYMmLE
+         UrvA+HtyC7naRlK7y/5z/wZMXvyOeKrMQTyKjDSCLILU2TUYLSQfwN1jOgUejauIiZKW
+         5hDQ==
+X-Gm-Message-State: AOJu0YzXlUntClLHHBC0HOAErZiD1R2WQQ1Zycc2W3HU+n4f9nJEq16B
+	WpXKw/FzQFTqchITcl5rNb2xHt8YyiR99HpMHYQ/uMJBbqcNf7996wLLxIl6
+X-Google-Smtp-Source: AGHT+IFFpzyJA4wkSBuIcoJ0AHAd6ue9agtDKX70CNOYxFQzeGDEWZkooKSkLt05b6c2suJZi51duw==
+X-Received: by 2002:a05:6a20:2d23:b0:1a3:e681:29ce with SMTP id g35-20020a056a202d2300b001a3e68129cemr92885pzl.52.1711505094914;
+        Tue, 26 Mar 2024 19:04:54 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::7a27])
+        by smtp.gmail.com with ESMTPSA id k19-20020a170902f29300b001dd6f305a81sm7607425plc.293.2024.03.26.19.04.54
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 26 Mar 2024 19:04:54 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] multipath-tools: Fix build with musl >= 1.2.5
+Date: Tue, 26 Mar 2024 19:04:52 -0700
+Message-ID: <20240327020452.1437678-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-GUID: e_2FmS35Af1Ty8TyMr2Gp295hAWlRwKj
-X-Proofpoint-ORIG-GUID: e_2FmS35Af1Ty8TyMr2Gp295hAWlRwKj
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-03-26_12,2024-03-21_02,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxlogscore=999 phishscore=0
- lowpriorityscore=0 suspectscore=0 clxscore=1015 malwarescore=0 mlxscore=0
- spamscore=0 impostorscore=0 bulkscore=0 priorityscore=1501 adultscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2403210001
- definitions=main-2403270010
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 27 Mar 2024 01:48:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109633
+ <openembedded-devel@lists.openembedded.org>; Wed, 27 Mar 2024 02:05:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109634
 
-From: Kai Kang <kai.kang@windriver.com>
-
-The binaries of thin-provisioning-tools 0.9.0 are installed to
-${sbindir}. And it also set BINDIR in the Makefile in the git repo:
-
-BINDIR:=$(DESTDIR)$(PREFIX)/sbin
-
-Tweak to install binary to ${sbindir} and create link files there.
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../thin-provisioning-tools_1.0.12.bb                       | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ ...bmultipath-always-use-glibc-basename.patch | 42 +++++++++++++++++++
+ .../multipath-tools/multipath-tools_0.9.8.bb  |  1 +
+ 2 files changed, 43 insertions(+)
+ create mode 100644 meta-oe/recipes-support/multipath-tools/files/0001-libmultipath-always-use-glibc-basename.patch
 
-diff --git a/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_1.0.12.bb b/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_1.0.12.bb
-index 11b5866189..09b91f6b37 100644
---- a/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_1.0.12.bb
-+++ b/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_1.0.12.bb
-@@ -20,6 +20,10 @@ require ${BPN}-crates.inc
- require ${BPN}-git-crates.inc
- 
- do_install:append() {
-+	install -d ${D}${sbindir}
-+	mv ${D}${bindir}/pdata_tools ${D}${sbindir}/pdata_tools
-+	rmdir --ignore-fail-on-non-empty ${D}${bindir}
+diff --git a/meta-oe/recipes-support/multipath-tools/files/0001-libmultipath-always-use-glibc-basename.patch b/meta-oe/recipes-support/multipath-tools/files/0001-libmultipath-always-use-glibc-basename.patch
+new file mode 100644
+index 0000000000..0365a7ef64
+--- /dev/null
++++ b/meta-oe/recipes-support/multipath-tools/files/0001-libmultipath-always-use-glibc-basename.patch
+@@ -0,0 +1,42 @@
++From 389286b25a903be62ce7f964246824fcc20c4c67 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 26 Mar 2024 18:56:55 -0700
++Subject: [PATCH] libmultipath: always use glibc basename()
 +
- 	for tool in cache_check \
- 	    cache_dump \
- 	    cache_metadata_size \
-@@ -41,6 +45,6 @@ do_install:append() {
- 	    era_dump \
- 	    era_invalidate \
- 	    era_restore; do
--                ln -sf pdata_tools ${D}${bindir}/$tool
-+                ln -sf pdata_tools ${D}${sbindir}/$tool
-             done
- }
++There is a use of basename() which expects it to be GNU version of
++basename, which is not available in other libcs e.g. musl on Linux
++therefore provide a version for such cases
++
++Upstream-Status: Submitted [https://github.com/opensvc/multipath-tools/pull/84]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ libmultipath/configure.c | 13 +++++++++++++
++ 1 file changed, 13 insertions(+)
++
++diff --git a/libmultipath/configure.c b/libmultipath/configure.c
++index 4ecf6ba4..e81cc67c 100644
++--- a/libmultipath/configure.c
+++++ b/libmultipath/configure.c
++@@ -43,6 +43,19 @@
++ #include "sysfs.h"
++ #include "io_err_stat.h"
++ 
+++#ifndef __GLIBC__
+++/*
+++ * glibc's non-destructive version of basename()
+++ * License: LGPL-2.1-or-later
+++ */
+++static const char *__basename(const char *filename)
+++{
+++	char *p = strrchr(filename, '/');
+++	return p ? p + 1 : filename;
+++}
+++#define basename(x) __basename(x)
+++#endif
+++
++ /* group paths in pg by host adapter
++  */
++ int group_by_host_adapter(struct pathgroup *pgp, vector adapters)
++-- 
++2.44.0
++
+diff --git a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.9.8.bb b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.9.8.bb
+index df95df6f70..e9f01bd1fe 100644
+--- a/meta-oe/recipes-support/multipath-tools/multipath-tools_0.9.8.bb
++++ b/meta-oe/recipes-support/multipath-tools/multipath-tools_0.9.8.bb
+@@ -44,6 +44,7 @@ SRC_URI = "git://github.com/opensvc/multipath-tools.git;protocol=https;branch=ma
+            file://0010-Subject-PATCH-Always-use-devmapper.patch \
+            file://0011-fix-bug-of-do_compile-and-do_install.patch \
+            file://0012-add-explicit-dependency-on-libraries.patch \
++           file://0001-libmultipath-always-use-glibc-basename.patch \
+            "
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
 -- 
-2.34.1
+2.44.0
 
 
