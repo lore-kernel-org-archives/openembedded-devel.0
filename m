@@ -1,144 +1,143 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <tim.orling@konsulko.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 65F13CD1283
-	for <webhook@archiver.kernel.org>; Thu, 28 Mar 2024 16:12:45 +0000 (UTC)
-Received: from mailout07.t-online.de (mailout07.t-online.de [194.25.134.83])
- by mx.groups.io with SMTP id smtpd.web10.441.1711642360908649524
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 79DA1CD11DD
+	for <webhook@archiver.kernel.org>; Thu, 28 Mar 2024 16:29:45 +0000 (UTC)
+Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com [209.85.215.196])
+ by mx.groups.io with SMTP id smtpd.web11.965.1711643379144472523
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 28 Mar 2024 09:12:41 -0700
+ Thu, 28 Mar 2024 09:29:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.83, mailfrom: f_l_k@t-online.de)
-Received: from fwd85.aul.t-online.de (fwd85.aul.t-online.de [10.223.144.111])
-	by mailout07.t-online.de (Postfix) with SMTP id EA0781A0AF
-	for <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 17:12:38 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.163.41.230]) by fwd85.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1rpsMn-150QtN0; Thu, 28 Mar 2024 17:12:37 +0100
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@konsulko.com header.s=google header.b=X0NGTM6S;
+ spf=pass (domain: konsulko.com, ip: 209.85.215.196, mailfrom: tim.orling@konsulko.com)
+Received: by mail-pg1-f196.google.com with SMTP id 41be03b00d2f7-5e4613f2b56so774394a12.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 09:29:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=konsulko.com; s=google; t=1711643378; x=1712248178; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=SqTsLZkNv0V6cGdYAheWWcLA6yehhxuxwc/SxyyPhfU=;
+        b=X0NGTM6SLdnVzgdj7mepK1t1HYUyrIYGEaP346kovsX2cvCWRCWzDXIGitt9CJp0mk
+         xnD8Mx8vPBKbZ8XsHtLjtTG3HbGRRyEU0ppiSBnhhe740cy9+Afje0cjcI1k8ou53VCE
+         cVt7wdYi08HxbXQUc5J+9T4F1HP5mmmYk7fhM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1711643378; x=1712248178;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=SqTsLZkNv0V6cGdYAheWWcLA6yehhxuxwc/SxyyPhfU=;
+        b=B5+z6VaE/xjSbuPGyy1AFC6qxXHTPUXMU+RVNPqkF5YlTxJ90QS5eZAMpabOfmomkW
+         Jpj+fCWZ9BrkFofeTBCaG5oLjvZ0yMg3vJY1JSgAtLYnjwdpS1tgenZvfsOfuGr5Acva
+         NBOS/6+5OPecF39dj4PMUlpSkcsoakCd/ys/BYrcYIdfknefb07KYgtGmzYBaLW9fcon
+         1uV1+a6Pqcxmp5kWQmW3e2288Og4ef3qmIs1aHT5sKKlyLW8qGmq8Ys5nV9icPM1u6eu
+         J/YbXpxVkuFqHBP5WbLck6Gxi/mHFdl3hHKtSsSf6/lPS2RclgbNDK0wx+Ul2tCQneiw
+         u40w==
+X-Gm-Message-State: AOJu0YwK0U5Z0uKK2EOUSH0+etygicum6c8lhEVUROlKA5z9V769DKrW
+	+lEzZj39mwmcAlz3x6rHxgabiVriJBkJHQcmRoTjJJuANYbA1J9J5CJDk65Lmck1IK+Prucp8a/
+	gCVcTIK/o
+X-Google-Smtp-Source: AGHT+IH+3LzghlsNxf22M6muUCBC9eCKpcP6yGdDkBC0eyVcssLkJ9D6aX6OiF3Ha+vDwUJL/6Cjbg==
+X-Received: by 2002:a05:6a20:1e52:b0:1a3:5c61:159 with SMTP id cy18-20020a056a201e5200b001a35c610159mr3127895pzb.53.1711643377774;
+        Thu, 28 Mar 2024 09:29:37 -0700 (PDT)
+Received: from localhost ([2601:1c0:ca00:bd60:6ae3:9cc1:54c1:30c])
+        by smtp.gmail.com with ESMTPSA id l18-20020a170903245200b001e09322cd01sm1807213pls.45.2024.03.28.09.29.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 28 Mar 2024 09:29:37 -0700 (PDT)
+From: Tim Orling <tim.orling@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCHv7] gnome-user-share: add recipe
-Date: Thu, 28 Mar 2024 17:12:58 +0100
-Message-ID: <20240328161258.1027540-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.44.0
+Cc: Tim Orling <tim.orling@konsulko.com>
+Subject: [meta-perl][PATCH] liberror-perl: move recipe from oe-core
+Date: Thu, 28 Mar 2024 09:28:50 -0700
+Message-Id: <20240328162849.1523339-1-tim.orling@konsulko.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1711642357-82D859D7-CA285BAC/0/0 CLEAN NORMAL
-X-TOI-MSGID: c844a5f9-a726-43fe-873f-360a4fe68223
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 16:12:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109674
+ <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 16:29:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109675
 
-- add it as runtime dependency to gnome-control-center because without it=
-,
-  the file sharing options are hidden.
-- configure the paths to fit to openembedded env
-- add mod_dnssd runtime dependency for apache2 as this is a requirement
+While this package is deprecated by the upstream maintainer,
+we do not know if there are any users in the wider OpenEmbedded
+ecosystem, so move the recipe from oe-core to meta-perl.
 
-To enable the feature, PACKAGECONFIG httpd needs to be added.
-This is not done by default to avoid apache2 runtime dependency just by
-including this recipe.
-NOTE: Apache2 httpd doesn't need to be running. It'll get
-      started and stopped on demand by systemd.
+[YOCTO #15461]
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Tim Orling <tim.orling@konsulko.com>
 ---
- .../gnome-control-center_46.0.bb              |  2 +-
- .../gnome-user-share/gnome-user-share_43.0.bb | 24 +++++++++++++++++++
- .../recipes-httpd/apache-mod/mod-dnssd_0.6.bb | 20 ++++++++++++++++
- 3 files changed, 45 insertions(+), 1 deletion(-)
- create mode 100644 meta-gnome/recipes-gnome/gnome-user-share/gnome-user-=
-share_43.0.bb
- create mode 100644 meta-webserver/recipes-httpd/apache-mod/mod-dnssd_0.6=
-.bb
+ .../include/ptest-packagelists-meta-perl.inc  |  1 +
+ .../liberror/liberror-perl_0.17029.bb         | 48 +++++++++++++++++++
+ 2 files changed, 49 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/liberror/liberror-perl_0.17029.bb
 
-diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-=
-center_46.0.bb b/meta-gnome/recipes-gnome/gnome-control-center/gnome-cont=
-rol-center_46.0.bb
-index a691b8d3f..fe9f1efbc 100644
---- a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_=
-46.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_=
-46.0.bb
-@@ -69,4 +69,4 @@ FILES:${PN} +=3D " \
-=20
- FILES:${PN}-dev +=3D "${datadir}/gettext"
-=20
--RDEPENDS:${PN} +=3D "gsettings-desktop-schemas tecla system-config-print=
-er cups-pk-helper"
-+RDEPENDS:${PN} +=3D "gsettings-desktop-schemas tecla system-config-print=
-er cups-pk-helper ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'gno=
-me-user-share', '' , d)}"
-diff --git a/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share_4=
-3.0.bb b/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share_43.0.=
-bb
+diff --git a/meta-perl/conf/include/ptest-packagelists-meta-perl.inc b/meta-perl/conf/include/ptest-packagelists-meta-perl.inc
+index 29a2b2e66..842f817f1 100644
+--- a/meta-perl/conf/include/ptest-packagelists-meta-perl.inc
++++ b/meta-perl/conf/include/ptest-packagelists-meta-perl.inc
+@@ -11,6 +11,7 @@ PTESTS_FAST_META_PERL = "\
+     libcgi-perl \
+     libcrypt-openssl-random-perl \
+     libdigest-hmac-perl \
++    liberror-perl \
+     libextutils-config-perl \
+     libextutils-installpaths-perl \
+     libhtml-tagset-perl \
+diff --git a/meta-perl/recipes-perl/liberror/liberror-perl_0.17029.bb b/meta-perl/recipes-perl/liberror/liberror-perl_0.17029.bb
 new file mode 100644
-index 000000000..3ff8f938a
+index 000000000..e54bb11cc
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share_43.0.bb
-@@ -0,0 +1,24 @@
-+SUMMARY =3D "This is gnome-user-share 43.0, a system for easy sharing of=
- user files."
-+LICENSE=3D"GPL-2.0-only"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
-19f"
++++ b/meta-perl/recipes-perl/liberror/liberror-perl_0.17029.bb
+@@ -0,0 +1,48 @@
++SUMMARY = "Error - Error/exception handling in an OO-ish way"
++DESCRIPTION = "The Error package provides two interfaces. Firstly \
++Error provides a procedural interface to exception handling. \
++Secondly Error is a base class for errors/exceptions that can \
++either be thrown, for subsequent catch, or can simply be recorded."
++HOMEPAGE = "https://github.com/shlomif/perl-error.pm"
++SECTION = "libs"
++LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
++
++LIC_FILES_CHKSUM = "file://LICENSE;md5=8f3499d09ee74a050c0319391ff9d100"
 +
 +
-+DEPENDS =3D " \
-+    glib-2.0-native \
-+    glib-2.0 \
-+    systemd \
++DEPENDS += "perl"
++
++RDEPENDS:${PN} += " \
++    perl-module-carp \
++    perl-module-exporter \
++    perl-module-scalar-util \
++    perl-module-overload \
++    perl-module-strict \
++    perl-module-vars \
++    perl-module-warnings \
 +"
 +
-+inherit gnomebase gsettings features_check
++RDEPENDS:${PN}-ptest += " \
++    perl-module-base \
++    perl-module-file-spec \
++    perl-module-io-handle \
++    perl-module-ipc-open3 \
++    perl-module-lib \
++    perl-module-test-more \
++"
 +
-+REQUIRED_DISTRO_FEATURES =3D "systemd"
++SRC_URI = "http://cpan.metacpan.org/authors/id/S/SH/SHLOMIF/Error-${PV}.tar.gz"
 +
-+SRC_URI =3D "git://gitlab.gnome.org/GNOME/gnome-user-share.git;protocol=3D=
-https;branch=3Dmaster"
-+SRCREV =3D "a0e790aa9494db9d1b1f48b4fc0d2f78e112044d"
-+S =3D "${WORKDIR}/git"
++SRC_URI[md5sum] = "6732b1c6207e4a9a3e2987c88368039a"
++SRC_URI[sha256sum] = "1a23f7913032aed6d4b68321373a3899ca66590f4727391a091ec19c95bf7adc"
 +
-+PACKAGECONFIG ??=3D "modules"
-+PACKAGECONFIG[httpd] =3D "-Dhttpd=3D/usr/sbin/httpd,,,apache2 mod-dnssd"
-+PACKAGECONFIG[modules] =3D "-Dmodules_path=3D/usr/libexec/apache2/module=
-s"
++S = "${WORKDIR}/Error-${PV}"
 +
-+FILES:${PN} +=3D "${systemd_user_unitdir}"
-diff --git a/meta-webserver/recipes-httpd/apache-mod/mod-dnssd_0.6.bb b/m=
-eta-webserver/recipes-httpd/apache-mod/mod-dnssd_0.6.bb
-new file mode 100644
-index 000000000..5fac0a6ed
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/apache-mod/mod-dnssd_0.6.bb
-@@ -0,0 +1,20 @@
-+DESCRIPTION =3D "Avahi Module for Apache2."
-+HOMEPAGE =3D "https://0pointer.de/lennart/projects/mod_dnssd/"
-+LICENSE =3D "Apache-2.0"
-+LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D3b83ef96387f14655fc854ddc3c6b=
-d57"
++inherit cpan ptest-perl
 +
-+DEPENDS =3D "apache2 avahi"
-+
-+SRC_URI =3D "git://git.0pointer.de/mod_dnssd;protocol=3Dgit;branch=3Dmas=
-ter"
-+SRCREV =3D "be2fb9f6158f800685de7a1bc01c39b6cf1fa12c"
-+
-+S =3D "${WORKDIR}/git"
-+
-+EXTRA_OECONF =3D "--disable-lynx"
-+
-+inherit autotools pkgconfig
-+
-+do_install() {
-+	install -Dm755 ${S}/src/.libs/mod_dnssd.so ${D}${libexecdir}/apache2/mo=
-dules/mod_dnssd.so
++do_install:prepend() {
++	# test requires "-T" (taint) command line option
++	rm -rf ${B}/t/pod-coverage.t
 +}
 +
---=20
-2.44.0
++BBCLASSEXTEND = "native"
+-- 
+2.34.1
 
 
