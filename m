@@ -1,145 +1,154 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <soumya.sambu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D344C54E64
-	for <webhook@archiver.kernel.org>; Thu, 28 Mar 2024 12:13:18 +0000 (UTC)
-Received: from mailout08.t-online.de (mailout08.t-online.de [194.25.134.20])
- by mx.groups.io with SMTP id smtpd.web10.14225.1711627997561049267
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4990CC54E67
+	for <webhook@archiver.kernel.org>; Thu, 28 Mar 2024 12:14:18 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.14142.1711628055853150648
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 28 Mar 2024 05:13:17 -0700
+ Thu, 28 Mar 2024 05:14:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.20, mailfrom: f_l_k@t-online.de)
-Received: from fwd87.aul.t-online.de (fwd87.aul.t-online.de [10.223.144.113])
-	by mailout08.t-online.de (Postfix) with SMTP id 9A8DB154EA
-	for <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 13:13:15 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.163.41.230]) by fwd87.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1rpod8-2G7W890; Thu, 28 Mar 2024 13:13:14 +0100
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCHv5] gnome-user-share: add recipe
-Date: Thu, 28 Mar 2024 13:13:37 +0100
-Message-ID: <20240328121337.29507-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.44.0
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=m4Mh57cM;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=4817690a73=soumya.sambu@windriver.com)
+Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 42SA1Tlo009662
+	for <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 05:14:15 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=lZmHt
+	U2YTnsXYFdFZncxJRWet17NevHizItS9KMwpu8=; b=m4Mh57cM/x6xo8WD7PhlX
+	8O0HNztqmSQvMyTXDhSr95u0oocfrqcS3aViNb9R6Z5bMV8TJFRN8rO82RA4Ip91
+	KL5Wq0JuosqivT/5YrRGjIOf1IOnzysN97/vMzjb4PG+GkRpavLQl0uo7ruZjFRd
+	HPqnb0riuJL0domYakLfF2GB+8EsspHrs3YKgvCg01gpVRDNaWFC6tGBHJc5YqLJ
+	IlI347NBY6YP/o33iPtvHGUQu0KaUnL6cxEYxCounkhGaPkWx5V16B9QUF5yY+ER
+	BnU9tIF2vmXGRF6HCmf2EiN4K0OkwmRDuK/5rpizxWH+PlVyO02Ee2ZujfcEVQuV
+	A==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3x1tc0xp96-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 05:14:15 -0700 (PDT)
+Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.37; Thu, 28 Mar 2024 05:14:13 -0700
+From: ssambu <soumya.sambu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe][meta-oe][kirkstone][PATCH 1/1] iniparser: Fix CVE-2023-33461
+Date: Thu, 28 Mar 2024 12:13:56 +0000
+Message-ID: <20240328121356.2365164-1-soumya.sambu@windriver.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1711627994-867FB9CB-62B64247/0/0 CLEAN NORMAL
-X-TOI-MSGID: cfdf35b1-5765-4cd4-96c3-262c4e4979ef
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [147.11.136.210]
+X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252)
+X-Proofpoint-GUID: OBSQn47LJOsPbqRuV99EbSC3yKMhjFex
+X-Proofpoint-ORIG-GUID: OBSQn47LJOsPbqRuV99EbSC3yKMhjFex
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-03-28_12,2024-03-27_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 malwarescore=0
+ suspectscore=0 mlxlogscore=912 clxscore=1015 impostorscore=0
+ priorityscore=1501 spamscore=0 adultscore=0 lowpriorityscore=0 bulkscore=0
+ phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2403210001 definitions=main-2403280083
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 12:13:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109662
+ <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 12:14:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109663
 
-- add it as runtime dependency to gnome-control-center because without it=
-,
-  the file sharing options are hidden.
-- configure the paths to fit to openembedded env
-- add mod_dnssd runtime dependency for apache2 as this is a requirement
+From: Soumya Sambu <soumya.sambu@windriver.com>
 
-To enable the feature, PACKAGECONFIG httpd needs to be added.
-This is not done by default to avoid apache2 runtime dependency just by
-including this recipe.
-NOTE: Apache2 httpd doesn't need to be running on boot time. It'll get
-      started and stopped on demand by systemd.
+iniparser v4.1 is vulnerable to NULL Pointer Dereference
+in function iniparser_getlongint which misses check NULL
+for function iniparser_getstring's return.
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+References:
+https://nvd.nist.gov/vuln/detail/CVE-2023-33461
+
+Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
 ---
- .../gnome-control-center_46.0.bb              |  2 +-
- .../gnome-user-share/gnome-user-share_43.0.bb | 24 +++++++++++++++++++
- .../mod-dnssd/mod-dnssd_git.bb                | 21 ++++++++++++++++
- 3 files changed, 46 insertions(+), 1 deletion(-)
- create mode 100644 meta-gnome/recipes-gnome/gnome-user-share/gnome-user-=
-share_43.0.bb
- create mode 100644 meta-webserver/recipes-support/mod-dnssd/mod-dnssd_gi=
-t.bb
+ .../iniparser/iniparser/CVE-2023-33461.patch  | 51 +++++++++++++++++++
+ .../iniparser/iniparser_4.1.bb                |  4 +-
+ 2 files changed, 54 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/iniparser/iniparser/CVE-2023-33461.patch
 
-diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-=
-center_46.0.bb b/meta-gnome/recipes-gnome/gnome-control-center/gnome-cont=
-rol-center_46.0.bb
-index a691b8d3f..fe9f1efbc 100644
---- a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_=
-46.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_=
-46.0.bb
-@@ -69,4 +69,4 @@ FILES:${PN} +=3D " \
-=20
- FILES:${PN}-dev +=3D "${datadir}/gettext"
-=20
--RDEPENDS:${PN} +=3D "gsettings-desktop-schemas tecla system-config-print=
-er cups-pk-helper"
-+RDEPENDS:${PN} +=3D "gsettings-desktop-schemas tecla system-config-print=
-er cups-pk-helper ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'gno=
-me-user-share', '' , d)}"
-diff --git a/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share_4=
-3.0.bb b/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share_43.0.=
-bb
+diff --git a/meta-oe/recipes-support/iniparser/iniparser/CVE-2023-33461.patch b/meta-oe/recipes-support/iniparser/iniparser/CVE-2023-33461.patch
 new file mode 100644
-index 000000000..3ff8f938a
+index 000000000..1b577fa33
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share_43.0.bb
-@@ -0,0 +1,24 @@
-+SUMMARY =3D "This is gnome-user-share 43.0, a system for easy sharing of=
- user files."
-+LICENSE=3D"GPL-2.0-only"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
-19f"
++++ b/meta-oe/recipes-support/iniparser/iniparser/CVE-2023-33461.patch
+@@ -0,0 +1,51 @@
++From ace9871f65d11b5d73f0b9ee8cf5d2807439442d Mon Sep 17 00:00:00 2001
++From: Antonio <antoniolrt@gmail.com>
++Date: Fri, 2 Jun 2023 15:03:10 -0300
++Subject: [PATCH] Handle null return from iniparser_getstring
 +
++Fix handling of NULL returns from iniparser_getstring in
++iniparser_getboolean, iniparser_getlongint and iniparser_getdouble,
++avoiding a crash.
 +
-+DEPENDS =3D " \
-+    glib-2.0-native \
-+    glib-2.0 \
-+    systemd \
++CVE: CVE-2023-33461
++
++Upstream-Status: Backport [https://github.com/ndevilla/iniparser/commit/ace9871f65d11b5d73f0b9ee8cf5d2807439442d]
++
++Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
++---
++ src/iniparser.c | 6 +++---
++ 1 file changed, 3 insertions(+), 3 deletions(-)
++
++diff --git a/src/iniparser.c b/src/iniparser.c
++index f1d1658..dbceb20 100644
++--- a/src/iniparser.c
+++++ b/src/iniparser.c
++@@ -456,7 +456,7 @@ long int iniparser_getlongint(const dictionary * d, const char * key, long int n
++     const char * str ;
++
++     str = iniparser_getstring(d, key, INI_INVALID_KEY);
++-    if (str==INI_INVALID_KEY) return notfound ;
+++    if (str==NULL || str==INI_INVALID_KEY) return notfound ;
++     return strtol(str, NULL, 0);
++ }
++
++@@ -511,7 +511,7 @@ double iniparser_getdouble(const dictionary * d, const char * key, double notfou
++     const char * str ;
++
++     str = iniparser_getstring(d, key, INI_INVALID_KEY);
++-    if (str==INI_INVALID_KEY) return notfound ;
+++    if (str==NULL || str==INI_INVALID_KEY) return notfound ;
++     return atof(str);
++ }
++
++@@ -553,7 +553,7 @@ int iniparser_getboolean(const dictionary * d, const char * key, int notfound)
++     const char * c ;
++
++     c = iniparser_getstring(d, key, INI_INVALID_KEY);
++-    if (c==INI_INVALID_KEY) return notfound ;
+++    if (c==NULL || c==INI_INVALID_KEY) return notfound ;
++     if (c[0]=='y' || c[0]=='Y' || c[0]=='1' || c[0]=='t' || c[0]=='T') {
++         ret = 1 ;
++     } else if (c[0]=='n' || c[0]=='N' || c[0]=='0' || c[0]=='f' || c[0]=='F') {
++--
++2.40.0
+diff --git a/meta-oe/recipes-support/iniparser/iniparser_4.1.bb b/meta-oe/recipes-support/iniparser/iniparser_4.1.bb
+index 2810a4f65..7c23b514b 100644
+--- a/meta-oe/recipes-support/iniparser/iniparser_4.1.bb
++++ b/meta-oe/recipes-support/iniparser/iniparser_4.1.bb
+@@ -10,7 +10,9 @@ PV .= "+git${SRCPV}"
+ 
+ SRC_URI = "git://github.com/ndevilla/iniparser.git;protocol=https;branch=master \
+            file://0001-iniparser.pc-Make-libpath-a-variable.patch \
+-	   file://Add-CMake-support.patch"
++	   file://Add-CMake-support.patch \
++           file://CVE-2023-33461.patch \
 +"
-+
-+inherit gnomebase gsettings features_check
-+
-+REQUIRED_DISTRO_FEATURES =3D "systemd"
-+
-+SRC_URI =3D "git://gitlab.gnome.org/GNOME/gnome-user-share.git;protocol=3D=
-https;branch=3Dmaster"
-+SRCREV =3D "a0e790aa9494db9d1b1f48b4fc0d2f78e112044d"
-+S =3D "${WORKDIR}/git"
-+
-+PACKAGECONFIG ??=3D "modules"
-+PACKAGECONFIG[httpd] =3D "-Dhttpd=3D/usr/sbin/httpd,,,apache2 mod-dnssd"
-+PACKAGECONFIG[modules] =3D "-Dmodules_path=3D/usr/libexec/apache2/module=
-s"
-+
-+FILES:${PN} +=3D "${systemd_user_unitdir}"
-diff --git a/meta-webserver/recipes-support/mod-dnssd/mod-dnssd_git.bb b/=
-meta-webserver/recipes-support/mod-dnssd/mod-dnssd_git.bb
-new file mode 100644
-index 000000000..25bd5f201
---- /dev/null
-+++ b/meta-webserver/recipes-support/mod-dnssd/mod-dnssd_git.bb
-@@ -0,0 +1,21 @@
-+DESCRIPTION =3D "Avahi Module for Apache2."
-+HOMEPAGE =3D "https://0pointer.de/lennart/projects/mod_dnssd/"
-+LICENSE =3D "Apache-2.0"
-+LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D3b83ef96387f14655fc854ddc3c6b=
-d57"
-+
-+DEPENDS =3D "apache2 avahi"
-+
-+SRC_URI =3D "git://git.0pointer.de/mod_dnssd;protocol=3Dgit;branch=3Dmas=
-ter"
-+SRCREV =3D "be2fb9f6158f800685de7a1bc01c39b6cf1fa12c"
-+PV =3D "0.6"
-+
-+S =3D "${WORKDIR}/git"
-+
-+EXTRA_OECONF =3D "--disable-lynx"
-+
-+inherit autotools pkgconfig
-+
-+do_install() {
-+	install -Dm755 ${S}/src/.libs/mod_dnssd.so ${D}${libexecdir}/apache2/mo=
-dules/mod_dnssd.so
-+}
-+
---=20
-2.44.0
+ 
+ SRCREV= "deb85ad4936d4ca32cc2260ce43323d47936410d"
+ 
+-- 
+2.40.0
 
 
