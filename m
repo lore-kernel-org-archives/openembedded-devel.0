@@ -1,144 +1,201 @@
-Return-Path: <asharma@mvista.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E90A0C54E67
-	for <webhook@archiver.kernel.org>; Thu, 28 Mar 2024 10:35:17 +0000 (UTC)
-Received: from mail-oa1-f51.google.com (mail-oa1-f51.google.com [209.85.160.51])
- by mx.groups.io with SMTP id smtpd.web10.12618.1711622111121605734
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 62C47C54E67
+	for <webhook@archiver.kernel.org>; Thu, 28 Mar 2024 12:11:48 +0000 (UTC)
+Received: from mailout07.t-online.de (mailout07.t-online.de [194.25.134.83])
+ by mx.groups.io with SMTP id smtpd.web10.14203.1711627901624295694
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 28 Mar 2024 03:35:11 -0700
+ Thu, 28 Mar 2024 05:11:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=kf4LM9xV;
- spf=pass (domain: mvista.com, ip: 209.85.160.51, mailfrom: asharma@mvista.com)
-Received: by mail-oa1-f51.google.com with SMTP id 586e51a60fabf-22963f0e12cso402297fac.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 03:35:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1711622110; x=1712226910; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=BVkmwRHi6SJBgv2N2wgHser3jH+vt5jLcrVQTbtr4l4=;
-        b=kf4LM9xVm1gAqf/tAn5nlWM+dLC4rO94ODU+zYbj3EePR0yHwX/CybKWC6Z7LO9Knz
-         WkFWQW3HhyvIOyKNPo6xj7IrcY1brssZX1AWG+85UGI9Qo+gqD7MlWUwbzSvQHReUtN2
-         rHWLqqmj4bWR2RGNrATsLZZ+vEaiGbLj8ghV8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1711622110; x=1712226910;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=BVkmwRHi6SJBgv2N2wgHser3jH+vt5jLcrVQTbtr4l4=;
-        b=Oq3F2E6z6IC6hX/8qgyrn1WfSW1pjow220mIRTuNFlI+mk5y6XSQWA4uzNEum1JuSj
-         E0hD29JGZ2p8r6NgyprTw+NS//lgeHk8fSeblNgyQoaxFC4RGIVv71eyzX56JhKwFw5D
-         EaeJIDc5rq9DnpIvCpXhZyJMgcWG9FuXWtKYjzRR6soKDEH8vroj/OJPmK04drVh5fnR
-         wp6E3FKDwUV/nHFmhOlAbyjWlAHMGq1gU7cDl+cGByif38A9uSMHaUJjfleZV+Dmr//M
-         CcHSLJE3SNiUhEO+GbfVWicLN8UcDPuxa502Xh0IgV4rc1f50MSfTWfioKx/M213Eg9C
-         dXqA==
-X-Gm-Message-State: AOJu0YzA6fbpraxv55hLQAztu2492xdKffXiE4/mYY8UsWTQ/RPt2I59
-	xBENQ/v403CA4FlLDoZCaySAKH8o664MDK0+EhHykqjyjb+nNt9ECBAD/cKiuy3S0CJ3QekPjEN
-	+
-X-Google-Smtp-Source: AGHT+IH/Oq6ZhZq7dxBbSdnfgH58PV40qQA812wgRQ+cWeBHtJTL2MWODu28tnrSP9ZPnOR/xGwURA==
-X-Received: by 2002:a05:6871:a90f:b0:229:f4b8:2dcf with SMTP id wn15-20020a056871a90f00b00229f4b82dcfmr2369630oab.44.1711622109942;
-        Thu, 28 Mar 2024 03:35:09 -0700 (PDT)
-Received: from asharma-Latitude-3400 ([2401:4900:1c67:8415:6942:d0d5:ad4f:de86])
-        by smtp.gmail.com with ESMTPSA id v17-20020aa78091000000b006e6a684a6ddsm1043304pff.220.2024.03.28.03.35.07
-        (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
-        Thu, 28 Mar 2024 03:35:09 -0700 (PDT)
-Received: by asharma-Latitude-3400 (sSMTP sendmail emulation); Thu, 28 Mar 2024 16:05:03 +0530
-From: Ashish Sharma <asharma@mvista.com>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.83, mailfrom: f_l_k@t-online.de)
+Received: from fwd76.aul.t-online.de (fwd76.aul.t-online.de [10.223.144.102])
+	by mailout07.t-online.de (Postfix) with SMTP id 02E852ACC3
+	for <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 13:11:38 +0100 (CET)
+Received: from [192.168.178.67] ([84.163.41.230]) by fwd76.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1rpobZ-42n9W40; Thu, 28 Mar 2024 13:11:37 +0100
+Date: Thu, 28 Mar 2024 09:44:31 +0100
+From: f_l_k@t-online.de
+Subject: Re: [oe] [meta-gnome][PATCHv4] gnome-user-share: add recipe
 To: openembedded-devel@lists.openembedded.org
-Cc: Ashish Sharma <asharma@mvista.com>
-Subject: [oe][meta-networking][dunfell][PATCH] wireshark: Backport fix for CVE-2024-2955
-Date: Thu, 28 Mar 2024 16:05:02 +0530
-Message-Id: <20240328103502.1939-1-asharma@mvista.com>
-X-Mailer: git-send-email 2.24.4
+Message-Id: <7YU1BS.5SX6P7AAVGQP2@t-online.de>
+In-Reply-To: <17C0E11CB4FEFB3F.24962@lists.openembedded.org>
+References: <17C0E11CB4FEFB3F.24962@lists.openembedded.org>
+X-Mailer: geary/44.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/alternative; boundary="=-9kGu3OFs2mRc/+Anjy7E"
+X-TOI-EXPURGATEID: 150726::1711627897-E8C27D1B-7ECDC8F5/0/0 CLEAN NORMAL
+X-TOI-MSGID: 420b8928-0b51-4968-9c3c-e88457a642c4
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 10:35:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109660
+ <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 12:11:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109661
 
-Upstream-Status: Backport [https://gitlab.com/wireshark/wireshark/-/commit/6fd3af5e999c71df67c2cdcefb96d0dc4afa5341]
+--=-9kGu3OFs2mRc/+Anjy7E
+Content-Type: text/plain; charset=us-ascii; format=flowed
 
-Signed-off-by: Ashish Sharma <asharma@mvista.com>
+v4 fixes a typo
+
+On Thu, Mar 28 2024 at 09:43:11 AM +01:00:00, Markus Volk 
+<f_l_k@t-online.de> wrote:
+> - add it as runtime dependency to gnome-control-center because 
+> without it,
+>   the file sharing options are hidden.
+> 
+> Signed-off-by: Markus Volk <f_l_k@t-online.de 
+> <mailto:f_l_k@t-online.de>>
+> ---
+>  .../gnome-control-center_46.0.bb              |  2 +-
+>  .../gnome-user-share/gnome-user-share_43.0.bb | 25 
+> +++++++++++++++++++
+>  2 files changed, 26 insertions(+), 1 deletion(-)
+>  create mode 100644 
+> meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share_43.0.bb
+> 
+> diff --git 
+> a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_46.0.bb 
+> b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_46.0.bb
+> index a691b8d3f..fe9f1efbc 100644
+> --- 
+> a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_46.0.bb
+> +++ 
+> b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_46.0.bb
+> @@ -69,4 +69,4 @@ FILES:${PN} += " \
+> 
+>  FILES:${PN}-dev += "${datadir}/gettext"
+> 
+> -RDEPENDS:${PN} += "gsettings-desktop-schemas tecla 
+> system-config-printer cups-pk-helper"
+> +RDEPENDS:${PN} += "gsettings-desktop-schemas tecla 
+> system-config-printer cups-pk-helper ${@bb.utils.contains 
+> <mailto:${@bb.utils.contains>('DISTRO_FEATURES', 'systemd', 
+> 'gnome-user-share', '' , d)}"
+> diff --git 
+> a/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share_43.0.bb 
+> b/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share_43.0.bb
+> new file mode 100644
+> index 000000000..7c4e85dae
+> --- /dev/null
+> +++ 
+> b/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share_43.0.bb
+> @@ -0,0 +1,25 @@
+> +SUMMARY = "This is gnome-user-share 43.0, a system for easy sharing 
+> of user files."
+> +LICENSE="GPL-2.0-only"
+> +LIC_FILES_CHKSUM = 
+> "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f" 
+> <file://copying;md5=94d55d512a9ba36caa9b7df079bae19f/>
+> +
+> +
+> +DEPENDS = " \
+> +    glib-2.0-native \
+> +    glib-2.0 \
+> +    systemd \
+> +"
+> +
+> +inherit gnomebase gsettings features_check
+> +
+> +REQUIRED_DISTRO_FEATURES = "systemd"
+> +
+> +SRC_URI = 
+> "git://gitlab.gnome.org/GNOME/gnome-user-share.git;protocol=https;branch=master"
+> +SRCREV = "a0e790aa9494db9d1b1f48b4fc0d2f78e112044d"
+> +S = "${WORKDIR}/git"
+> +
+> +PACKAGECONFIG ??= ""
+> +# default path is /usr/sbin/httpd
+> +PACKAGECONFIG[httpd2] = "-Dhttpd=httpd2,,,apache2"
+> +PACKAGECONFIG[apache2] = "-Dhttpd=apache2,,,apache2"
+> +
+> +FILES:${PN} += "${systemd_user_unitdir}"
+> --
+> 2.44.0
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#109657): 
+> <https://lists.openembedded.org/g/openembedded-devel/message/109657>
+> Mute This Topic: <https://lists.openembedded.org/mt/105193246/3618223>
+> Group Owner: openembedded-devel+owner@lists.openembedded.org 
+> <mailto:openembedded-devel+owner@lists.openembedded.org>
+> Unsubscribe: 
+> <https://lists.openembedded.org/g/openembedded-devel/unsub> 
+> [f_l_k@t-online.de <mailto:f_l_k@t-online.de>]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
+
+
+--=-9kGu3OFs2mRc/+Anjy7E
+Content-Type: text/html; charset=us-ascii
+
+<div id="geary-body" dir="auto"><div>v4 fixes a typo</div></div><div id="geary-quote" dir="auto"><br>On Thu, Mar 28 2024 at 09:43:11 AM +01:00:00, Markus Volk &lt;f_l_k@t-online.de&gt; wrote:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">- add it as runtime dependency to gnome-control-center because without it,
+  the file sharing options are hidden.
+
+Signed-off-by: Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;
 ---
- .../wireshark/files/CVE-2024-2955.patch       | 52 +++++++++++++++++++
- .../wireshark/wireshark_3.2.18.bb             |  1 +
- 2 files changed, 53 insertions(+)
- create mode 100644 meta-networking/recipes-support/wireshark/files/CVE-2024-2955.patch
+ .../gnome-control-center_46.0.bb              |  2 +-
+ .../gnome-user-share/gnome-user-share_43.0.bb | 25 +++++++++++++++++++
+ 2 files changed, 26 insertions(+), 1 deletion(-)
+ create mode 100644 meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share_43.0.bb
 
-diff --git a/meta-networking/recipes-support/wireshark/files/CVE-2024-2955.patch b/meta-networking/recipes-support/wireshark/files/CVE-2024-2955.patch
-new file mode 100644
-index 000000000..347943d42
---- /dev/null
-+++ b/meta-networking/recipes-support/wireshark/files/CVE-2024-2955.patch
-@@ -0,0 +1,52 @@
-+From 6fd3af5e999c71df67c2cdcefb96d0dc4afa5341 Mon Sep 17 00:00:00 2001
-+From: John Thacker <johnthacker@gmail.com>
-+Date: Wed, 6 Mar 2024 20:40:42 -0500
-+Subject: [PATCH] t38: Allocate forced defragmented memory in correct scope
-+
-+Fragment data can't be allocated in pinfo->pool scope, as it
-+outlives the frame. Set it to be freed when the associated tvb
-+is freed, as done in the main reassemble.c code.
-+
-+Fix #19695
-+
-+CVE: CVE-2024-2955
-+Upstream-Status: Backport [https://gitlab.com/wireshark/wireshark/-/commit/6fd3af5e999c71df67c2cdcefb96d0dc4afa5341]
-+Signed-off-by: Ashish Sharma <asharma@mvista.com>
-+
-+ epan/dissectors/asn1/t38/packet-t38-template.c | 3 ++-
-+ epan/dissectors/packet-t38.c                   | 3 ++-
-+ 2 files changed, 4 insertions(+), 2 deletions(-)
-+
-+diff --git a/epan/dissectors/asn1/t38/packet-t38-template.c b/epan/dissectors/asn1/t38/packet-t38-template.c
-+index 7b856626865..526b313d054 100644
-+--- a/epan/dissectors/asn1/t38/packet-t38-template.c
-++++ b/epan/dissectors/asn1/t38/packet-t38-template.c
-+@@ -325,8 +325,9 @@ force_reassemble_seq(reassembly_table *table, packet_info *pinfo, guint32 id)
-+ 	  last_fd=fd_i;
-+ 	}
-+ 
-+-	data = (guint8 *) wmem_alloc(pinfo->pool, size);
-++	data = (guint8 *) g_malloc(size);
-+ 	fd_head->tvb_data = tvb_new_real_data(data, size, size);
-++        tvb_set_free_cb(fd_head->tvb_data, g_free);
-+ 	fd_head->len = size;		/* record size for caller	*/
-+ 
-+ 	/* add all data fragments */
-+diff --git a/epan/dissectors/packet-t38.c b/epan/dissectors/packet-t38.c
-+index ca95ae8b64e..5083c936c5a 100644
-+--- a/epan/dissectors/packet-t38.c
-++++ b/epan/dissectors/packet-t38.c
-+@@ -355,8 +355,9 @@ force_reassemble_seq(reassembly_table *table, packet_info *pinfo, guint32 id)
-+ 	  last_fd=fd_i;
-+ 	}
-+ 
-+-	data = (guint8 *) wmem_alloc(pinfo->pool, size);
-++	data = (guint8 *) g_malloc(size);
-+ 	fd_head->tvb_data = tvb_new_real_data(data, size, size);
-++        tvb_set_free_cb(fd_head->tvb_data, g_free);
-+ 	fd_head->len = size;		/* record size for caller	*/
-+ 
-+ 	/* add all data fragments */
-+-- 
-+GitLab
-+
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb b/meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb
-index 8054cbb5a..6e1e23e1d 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb
-@@ -23,6 +23,7 @@ SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz
-            file://CVE-2022-4345.patch \
-            file://CVE-2024-0208.patch \
-            file://CVE-2023-1992.patch \
-+           file://CVE-2024-2955.patch \
-            "
- UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
+diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_46.0.bb b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_46.0.bb
+index a691b8d3f..fe9f1efbc 100644
+--- a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_46.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_46.0.bb
+@@ -69,4 +69,4 @@ FILES:${PN} += " \
  
--- 
-2.24.4
+ FILES:${PN}-dev += "${datadir}/gettext"
+ 
+-RDEPENDS:${PN} += "gsettings-desktop-schemas tecla system-config-printer cups-pk-helper"
++RDEPENDS:${PN} += "gsettings-desktop-schemas tecla system-config-printer cups-pk-helper <a href="mailto:${@bb.utils.contains">${@bb.utils.contains</a>('DISTRO_FEATURES', 'systemd', 'gnome-user-share', '' , d)}"
+diff --git a/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share_43.0.bb b/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share_43.0.bb
+new file mode 100644
+index 000000000..7c4e85dae
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share_43.0.bb
+@@ -0,0 +1,25 @@
++SUMMARY = "This is gnome-user-share 43.0, a system for easy sharing of user files."
++LICENSE="GPL-2.0-only"
++LIC_FILES_CHKSUM = "<a href="file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f" "="">file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"</a>
++
++
++DEPENDS = " \
++    glib-2.0-native \
++    glib-2.0 \
++    systemd \
++"
++
++inherit gnomebase gsettings features_check
++
++REQUIRED_DISTRO_FEATURES = "systemd"
++
++SRC_URI = "git://gitlab.gnome.org/GNOME/gnome-user-share.git;protocol=https;branch=master"
++SRCREV = "a0e790aa9494db9d1b1f48b4fc0d2f78e112044d"
++S = "${WORKDIR}/git"
++
++PACKAGECONFIG ??= ""
++# default path is /usr/sbin/httpd
++PACKAGECONFIG[httpd2] = "-Dhttpd=httpd2,,,apache2"
++PACKAGECONFIG[apache2] = "-Dhttpd=apache2,,,apache2"
++
++FILES:${PN} += "${systemd_user_unitdir}"
+<div>-- 
+</div>2.44.0
+
+</div><div class="plaintext" style="white-space: break-spaces;">
+-=-=-=-=-=-=-=-=-=-=-=-
+Links: You receive all messages sent to this group.
+View/Reply Online (#109657): <a href="https://lists.openembedded.org/g/openembedded-devel/message/109657">https://lists.openembedded.org/g/openembedded-devel/message/109657</a>
+Mute This Topic: <a href="https://lists.openembedded.org/mt/105193246/3618223">https://lists.openembedded.org/mt/105193246/3618223</a>
+Group Owner: <a href="mailto:openembedded-devel+owner@lists.openembedded.org">openembedded-devel+owner@lists.openembedded.org</a>
+Unsubscribe: <a href="https://lists.openembedded.org/g/openembedded-devel/unsub">https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>]
+-=-=-=-=-=-=-=-=-=-=-=-
+
+</div></blockquote></div>
+--=-9kGu3OFs2mRc/+Anjy7E--
 
 
