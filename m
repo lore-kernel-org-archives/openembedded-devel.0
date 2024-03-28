@@ -2,56 +2,143 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 48C5DC54E67
-	for <webhook@archiver.kernel.org>; Thu, 28 Mar 2024 12:22:58 +0000 (UTC)
-Received: from mailout08.t-online.de (mailout08.t-online.de [194.25.134.20])
- by mx.groups.io with SMTP id smtpd.web11.14299.1711628568001813763
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 91C8AC54E67
+	for <webhook@archiver.kernel.org>; Thu, 28 Mar 2024 13:01:28 +0000 (UTC)
+Received: from mailout06.t-online.de (mailout06.t-online.de [194.25.134.19])
+ by mx.groups.io with SMTP id smtpd.web11.15169.1711630885368788725
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 28 Mar 2024 05:22:48 -0700
+ Thu, 28 Mar 2024 06:01:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.20, mailfrom: f_l_k@t-online.de)
-Received: from fwd89.aul.t-online.de (fwd89.aul.t-online.de [10.223.144.115])
-	by mailout08.t-online.de (Postfix) with SMTP id 8DF5A3BCC
-	for <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 13:22:46 +0100 (CET)
-Received: from intel-corei7-64.fritz.box ([84.163.41.230]) by fwd89.t-online.de
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.19, mailfrom: f_l_k@t-online.de)
+Received: from fwd74.aul.t-online.de (fwd74.aul.t-online.de [10.223.144.100])
+	by mailout06.t-online.de (Postfix) with SMTP id 412BD25E38
+	for <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 14:01:23 +0100 (CET)
+Received: from intel-corei7-64.fritz.box ([84.163.41.230]) by fwd74.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1rpomK-3DTber0; Thu, 28 Mar 2024 13:22:44 +0100
+	esmtp id 1rppNg-1hseZ70; Thu, 28 Mar 2024 14:01:20 +0100
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-webserver][PATCH] apache2: preset mpm=prefork by default
-Date: Thu, 28 Mar 2024 13:23:05 +0100
-Message-ID: <20240328122305.30205-1-f_l_k@t-online.de>
+Subject: [meta-gnome][PATCHv6] gnome-user-share: add recipe
+Date: Thu, 28 Mar 2024 14:01:44 +0100
+Message-ID: <20240328130144.23609-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1711628564-E7FFC9C0-E61128EE/0/0 CLEAN NORMAL
-X-TOI-MSGID: 74982eae-935b-4e1e-8d6a-e7dea8528bc7
+X-TOI-EXPURGATEID: 150726::1711630880-537FD837-EA2A39E3/0/0 CLEAN NORMAL
+X-TOI-MSGID: 861c626a-3c54-4496-82ee-4c71fb38f831
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 12:22:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109665
+ <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 13:01:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109666
 
-currently this is chosen depending on machine at do_configure
+- add it as runtime dependency to gnome-control-center because without it=
+,
+  the file sharing options are hidden.
+- configure the paths to fit to openembedded env
+- add mod_dnssd runtime dependency for apache2 as this is a requirement
+
+To enable the feature, PACKAGECONFIG httpd needs to be added.
+This is not done by default to avoid apache2 runtime dependency just by
+including this recipe.
+NOTE: Apache2 httpd doesn't need to be running. It'll get
+      started and stopped on demand by systemd.
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- meta-webserver/recipes-httpd/apache2/apache2_2.4.58.bb | 1 +
- 1 file changed, 1 insertion(+)
+ .../gnome-control-center_46.0.bb              |  2 +-
+ .../gnome-user-share/gnome-user-share_43.0.bb | 24 +++++++++++++++++++
+ .../recipes-httpd/apache-mod/mod-dnssd_git.bb | 21 ++++++++++++++++
+ 3 files changed, 46 insertions(+), 1 deletion(-)
+ create mode 100644 meta-gnome/recipes-gnome/gnome-user-share/gnome-user-=
+share_43.0.bb
+ create mode 100644 meta-webserver/recipes-httpd/apache-mod/mod-dnssd_git=
+.bb
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.58.bb b/met=
-a-webserver/recipes-httpd/apache2/apache2_2.4.58.bb
-index e4f7e1ceb..a6cdfd165 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.58.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.58.bb
-@@ -63,6 +63,7 @@ EXTRA_OECONF:class-target =3D "\
-     --with-berkeley-db=3Dno \
-     --enable-info \
-     --enable-rewrite \
-+    --with-mpm=3Dprefork \
-     --enable-mpms-shared \
-     ap_cv_void_ptr_lt_long=3Dno \
-     ac_cv_have_threadsafe_pollset=3Dno \
+diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-=
+center_46.0.bb b/meta-gnome/recipes-gnome/gnome-control-center/gnome-cont=
+rol-center_46.0.bb
+index a691b8d3f..fe9f1efbc 100644
+--- a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_=
+46.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_=
+46.0.bb
+@@ -69,4 +69,4 @@ FILES:${PN} +=3D " \
+=20
+ FILES:${PN}-dev +=3D "${datadir}/gettext"
+=20
+-RDEPENDS:${PN} +=3D "gsettings-desktop-schemas tecla system-config-print=
+er cups-pk-helper"
++RDEPENDS:${PN} +=3D "gsettings-desktop-schemas tecla system-config-print=
+er cups-pk-helper ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'gno=
+me-user-share', '' , d)}"
+diff --git a/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share_4=
+3.0.bb b/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share_43.0.=
+bb
+new file mode 100644
+index 000000000..3ff8f938a
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gnome-user-share/gnome-user-share_43.0.bb
+@@ -0,0 +1,24 @@
++SUMMARY =3D "This is gnome-user-share 43.0, a system for easy sharing of=
+ user files."
++LICENSE=3D"GPL-2.0-only"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
+19f"
++
++
++DEPENDS =3D " \
++    glib-2.0-native \
++    glib-2.0 \
++    systemd \
++"
++
++inherit gnomebase gsettings features_check
++
++REQUIRED_DISTRO_FEATURES =3D "systemd"
++
++SRC_URI =3D "git://gitlab.gnome.org/GNOME/gnome-user-share.git;protocol=3D=
+https;branch=3Dmaster"
++SRCREV =3D "a0e790aa9494db9d1b1f48b4fc0d2f78e112044d"
++S =3D "${WORKDIR}/git"
++
++PACKAGECONFIG ??=3D "modules"
++PACKAGECONFIG[httpd] =3D "-Dhttpd=3D/usr/sbin/httpd,,,apache2 mod-dnssd"
++PACKAGECONFIG[modules] =3D "-Dmodules_path=3D/usr/libexec/apache2/module=
+s"
++
++FILES:${PN} +=3D "${systemd_user_unitdir}"
+diff --git a/meta-webserver/recipes-httpd/apache-mod/mod-dnssd_git.bb b/m=
+eta-webserver/recipes-httpd/apache-mod/mod-dnssd_git.bb
+new file mode 100644
+index 000000000..25bd5f201
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/apache-mod/mod-dnssd_git.bb
+@@ -0,0 +1,21 @@
++DESCRIPTION =3D "Avahi Module for Apache2."
++HOMEPAGE =3D "https://0pointer.de/lennart/projects/mod_dnssd/"
++LICENSE =3D "Apache-2.0"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D3b83ef96387f14655fc854ddc3c6b=
+d57"
++
++DEPENDS =3D "apache2 avahi"
++
++SRC_URI =3D "git://git.0pointer.de/mod_dnssd;protocol=3Dgit;branch=3Dmas=
+ter"
++SRCREV =3D "be2fb9f6158f800685de7a1bc01c39b6cf1fa12c"
++PV =3D "0.6"
++
++S =3D "${WORKDIR}/git"
++
++EXTRA_OECONF =3D "--disable-lynx"
++
++inherit autotools pkgconfig
++
++do_install() {
++	install -Dm755 ${S}/src/.libs/mod_dnssd.so ${D}${libexecdir}/apache2/mo=
+dules/mod_dnssd.so
++}
++
 --=20
 2.44.0
 
