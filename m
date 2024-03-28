@@ -2,69 +2,69 @@ Return-Path: <asharma@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DF426C54E67
-	for <webhook@archiver.kernel.org>; Thu, 28 Mar 2024 10:21:57 +0000 (UTC)
-Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
- by mx.groups.io with SMTP id smtpd.web10.12427.1711621309681572252
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E90A0C54E67
+	for <webhook@archiver.kernel.org>; Thu, 28 Mar 2024 10:35:17 +0000 (UTC)
+Received: from mail-oa1-f51.google.com (mail-oa1-f51.google.com [209.85.160.51])
+ by mx.groups.io with SMTP id smtpd.web10.12618.1711622111121605734
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 28 Mar 2024 03:21:49 -0700
+ Thu, 28 Mar 2024 03:35:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=YQT8jMJO;
- spf=pass (domain: mvista.com, ip: 209.85.210.171, mailfrom: asharma@mvista.com)
-Received: by mail-pf1-f171.google.com with SMTP id d2e1a72fcca58-6e782e955adso738643b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 03:21:49 -0700 (PDT)
+ dkim=pass header.i=@mvista.com header.s=google header.b=kf4LM9xV;
+ spf=pass (domain: mvista.com, ip: 209.85.160.51, mailfrom: asharma@mvista.com)
+Received: by mail-oa1-f51.google.com with SMTP id 586e51a60fabf-22963f0e12cso402297fac.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 03:35:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1711621309; x=1712226109; darn=lists.openembedded.org;
+        d=mvista.com; s=google; t=1711622110; x=1712226910; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=oRLFxkyXz70Cx4Eo+88QNtKc3lI5OYLDpxG3GFpeMAA=;
-        b=YQT8jMJOwdwHNyEumuuhBrl3MwygtizwvAtUIu27cr/B3HKDXZoRdFJ93GVvGOT62A
-         tGUQqXbM+kPNRJnxiDoq3BPAW1Obz7bpp2t3+MAXY8+MOWmAbiuPS9BC5PmMx35T1/9W
-         jw8Z5cevwdW5gwlqLEpk9ftYGao63vH2eersA=
+        bh=BVkmwRHi6SJBgv2N2wgHser3jH+vt5jLcrVQTbtr4l4=;
+        b=kf4LM9xVm1gAqf/tAn5nlWM+dLC4rO94ODU+zYbj3EePR0yHwX/CybKWC6Z7LO9Knz
+         WkFWQW3HhyvIOyKNPo6xj7IrcY1brssZX1AWG+85UGI9Qo+gqD7MlWUwbzSvQHReUtN2
+         rHWLqqmj4bWR2RGNrATsLZZ+vEaiGbLj8ghV8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1711621309; x=1712226109;
+        d=1e100.net; s=20230601; t=1711622110; x=1712226910;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=oRLFxkyXz70Cx4Eo+88QNtKc3lI5OYLDpxG3GFpeMAA=;
-        b=ApzYmhkTxfPspj41X7Tczfp86xAPL8L9cD/fmc/4REshioBvixjvxwJs18NDKgCpkM
-         ur4P3T2OmQzF5fWxMeSxVc3XoLFoFEgTqPXGbP139Dl9lavcWVxvCkQXEC5huwZZHIFe
-         wREbHH9XfY/Gs0zpI9k6ml1qEp/WxHBhUHc5ARK0gADOsPtbOw18JvA7fuUULgXkK7Nq
-         ru0SWg67n5WgdzRyXPWWHDco3rocGJSRUAq3kEqtagY4yKAoxNz4xEIAnT+GGxdbCqQ6
-         o6QJXX7KwmDmVeaV3ItQ51UVJDRc8x4W520/sM5YCv+OzqDcsfduv5G2TqVbTwx2JXEk
-         3Krw==
-X-Gm-Message-State: AOJu0Yy56VbzTvX0zBTXDq+jXXBDpJLszXsa/U/8fI3FYEBCZESpjp7P
-	A7/l0wdTXsor7uJ8J287WhFSFuL0tEbR+af3xWZU32WMZG4tQED64cB8HOGknIJU4YziAhlGIQn
-	W
-X-Google-Smtp-Source: AGHT+IF6g2jef+3lWUDg8s6hfn6+5n0eXSo1jNpnULUCMPkhkIjGkcvWgSPDDKjCn6ray4dA/yt2LA==
-X-Received: by 2002:a05:6a20:958f:b0:1a1:87b5:298b with SMTP id iu15-20020a056a20958f00b001a187b5298bmr3286972pzb.21.1711621308646;
-        Thu, 28 Mar 2024 03:21:48 -0700 (PDT)
-Received: from asharma-Latitude-3400 ([223.190.84.27])
-        by smtp.gmail.com with ESMTPSA id o8-20020a170902d4c800b001e0294f17b7sm1193334plg.1.2024.03.28.03.21.46
+        bh=BVkmwRHi6SJBgv2N2wgHser3jH+vt5jLcrVQTbtr4l4=;
+        b=Oq3F2E6z6IC6hX/8qgyrn1WfSW1pjow220mIRTuNFlI+mk5y6XSQWA4uzNEum1JuSj
+         E0hD29JGZ2p8r6NgyprTw+NS//lgeHk8fSeblNgyQoaxFC4RGIVv71eyzX56JhKwFw5D
+         EaeJIDc5rq9DnpIvCpXhZyJMgcWG9FuXWtKYjzRR6soKDEH8vroj/OJPmK04drVh5fnR
+         wp6E3FKDwUV/nHFmhOlAbyjWlAHMGq1gU7cDl+cGByif38A9uSMHaUJjfleZV+Dmr//M
+         CcHSLJE3SNiUhEO+GbfVWicLN8UcDPuxa502Xh0IgV4rc1f50MSfTWfioKx/M213Eg9C
+         dXqA==
+X-Gm-Message-State: AOJu0YzA6fbpraxv55hLQAztu2492xdKffXiE4/mYY8UsWTQ/RPt2I59
+	xBENQ/v403CA4FlLDoZCaySAKH8o664MDK0+EhHykqjyjb+nNt9ECBAD/cKiuy3S0CJ3QekPjEN
+	+
+X-Google-Smtp-Source: AGHT+IH/Oq6ZhZq7dxBbSdnfgH58PV40qQA812wgRQ+cWeBHtJTL2MWODu28tnrSP9ZPnOR/xGwURA==
+X-Received: by 2002:a05:6871:a90f:b0:229:f4b8:2dcf with SMTP id wn15-20020a056871a90f00b00229f4b82dcfmr2369630oab.44.1711622109942;
+        Thu, 28 Mar 2024 03:35:09 -0700 (PDT)
+Received: from asharma-Latitude-3400 ([2401:4900:1c67:8415:6942:d0d5:ad4f:de86])
+        by smtp.gmail.com with ESMTPSA id v17-20020aa78091000000b006e6a684a6ddsm1043304pff.220.2024.03.28.03.35.07
         (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
-        Thu, 28 Mar 2024 03:21:48 -0700 (PDT)
-Received: by asharma-Latitude-3400 (sSMTP sendmail emulation); Thu, 28 Mar 2024 15:49:33 +0530
+        Thu, 28 Mar 2024 03:35:09 -0700 (PDT)
+Received: by asharma-Latitude-3400 (sSMTP sendmail emulation); Thu, 28 Mar 2024 16:05:03 +0530
 From: Ashish Sharma <asharma@mvista.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Ashish Sharma <asharma@mvista.com>
-Subject: [oe][meta-networking][kirkstone][PATCH] wireshark: Backport fix for CVE-2024-2955
-Date: Thu, 28 Mar 2024 15:49:31 +0530
-Message-Id: <20240328101931.31732-1-asharma@mvista.com>
-X-Mailer: git-send-email 2.35.7
+Subject: [oe][meta-networking][dunfell][PATCH] wireshark: Backport fix for CVE-2024-2955
+Date: Thu, 28 Mar 2024 16:05:02 +0530
+Message-Id: <20240328103502.1939-1-asharma@mvista.com>
+X-Mailer: git-send-email 2.24.4
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 10:21:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109659
+ <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 10:35:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109660
 
 Upstream-Status: Backport [https://gitlab.com/wireshark/wireshark/-/commit/6fd3af5e999c71df67c2cdcefb96d0dc4afa5341]
 
 Signed-off-by: Ashish Sharma <asharma@mvista.com>
 ---
  .../wireshark/files/CVE-2024-2955.patch       | 52 +++++++++++++++++++
- .../wireshark/wireshark_3.4.12.bb             |  1 +
+ .../wireshark/wireshark_3.2.18.bb             |  1 +
  2 files changed, 53 insertions(+)
  create mode 100644 meta-networking/recipes-support/wireshark/files/CVE-2024-2955.patch
 
@@ -126,19 +126,19 @@ index 000000000..347943d42
 +-- 
 +GitLab
 +
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb b/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
-index 41c363ad3..75c353283 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
-@@ -29,6 +29,7 @@ SRC_URI += " \
-     file://CVE-2022-4345.patch \
-     file://CVE-2024-0208.patch \
-     file://CVE-2023-4511.patch \
-+    file://CVE-2024-2955.patch \
- "
- 
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb b/meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb
+index 8054cbb5a..6e1e23e1d 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb
+@@ -23,6 +23,7 @@ SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz
+            file://CVE-2022-4345.patch \
+            file://CVE-2024-0208.patch \
+            file://CVE-2023-1992.patch \
++           file://CVE-2024-2955.patch \
+            "
  UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
+ 
 -- 
-2.35.7
+2.24.4
 
 
