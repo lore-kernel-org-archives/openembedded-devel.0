@@ -2,38 +2,38 @@ Return-Path: <archana.polampalli@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C47F6C54E64
-	for <webhook@archiver.kernel.org>; Thu, 28 Mar 2024 13:22:28 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.15898.1711632140287903041
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 99127C54E67
+	for <webhook@archiver.kernel.org>; Thu, 28 Mar 2024 13:22:58 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.16053.1711632173599568867
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 28 Mar 2024 06:22:20 -0700
+ Thu, 28 Mar 2024 06:22:53 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=kGDBaaLt;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=481736fa43=archana.polampalli@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 42SA1R4B013588
-	for <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 06:22:20 -0700
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=RTJqO6h4;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=481736fa43=archana.polampalli@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 42SChqEs016017
+	for <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 13:22:53 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
 	 h=from:to:subject:date:message-id:references:in-reply-to
-	:content-type:mime-version; s=PPS06212021; bh=TN/OmG+ccc9wyXZSFL
-	bM1pf3t6fCGJEHiHC8vvUI3l0=; b=kGDBaaLtA9Pv+2DNyQZDyuAam+1cvP91As
-	nlPM33m4RRmLKzYS3i62DXGX9sfLfkf86GxdFtsLdNbEY2OOjMK+s8Mp9Tn5QISu
-	uH9XFrrzeQxm43TktJ3h/xqEjtMQdYNoiALHxJKTGHduJk92WinaQ0ho04z4KJo3
-	Vb6pmSjXXwxOaY1hc2+M0FUIOG+8jF8SY+BcS523DKPKARHPdLIj067Wk3zOh7sp
-	N1Fz/gsJHTPkfeiHEIxlSg5cC22OUviX5uWQMQJX4ikpDC4S4bfuh6eZtLHWEeUI
-	u9k8XfcNpSXHMGWLg1Zg4Ezv0alYr9wmZN6Xar+vgKgGUvGOindg==
-Received: from nam04-mw2-obe.outbound.protection.outlook.com (mail-mw2nam04lp2168.outbound.protection.outlook.com [104.47.73.168])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3x1xkgxh10-1
+	:content-type:mime-version; s=PPS06212021; bh=vHcuGPGj6mkxS4TpCX
+	WJSSuEgN0sUBHdM9bAc7/yrg0=; b=RTJqO6h4vjDqOyYLsZ9OzJSxNqQTNQmq+N
+	kg9AQGBrGr7VVIJrN3qU9Y6ZHbfRiFvycUBvpPzSdhur3NXiRxSe7gvvyIXmsoc5
+	Zoq+hUlBYOo9KITPIlY5N69gHabtBd1NY58KNKGNbgQXFtje/syB+DqcupxFpzzw
+	MF/9OaGGMiE9jzsqUNfIakQZl2RPwKLcfuN9lVGtERhUGkRUCjTR+vwLg5LwR1pw
+	qp/FGh0xP5CNJQ/fixoquChW3UdM5oHcmJP2SKb8IfwuM7XvSvBkFoTvOm9xDn2+
+	AkZgm4cfCFGdiObw/dSqVrI+jIJUhz59PJt43Au+8GnB6adth/lA==
+Received: from nam04-mw2-obe.outbound.protection.outlook.com (mail-mw2nam04lp2169.outbound.protection.outlook.com [104.47.73.169])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3x1p26pve5-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 06:22:19 -0700 (PDT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 13:22:52 +0000 (GMT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=mBa0hvotI6ehYbMtPJ3Qo1+GJkJKFBPgveoL7k3U5Ul/PF8GyfjE2bmoY5BVdazjrz3OOotYz69h0cyh4GD6hfhwaaW9JNput3JB4qFUa1V8M7Ry8d3fPxOLzbD1QR2jiij6z3U7dp1g/gnCDnhDLS4GAyjrp5vamgD/Yeixj+2WGXK9xrelUCSwA8rQB1N8mbs4lhwmC7QXwYZurUwT6bosKEdeOYIM7N42J+LbA2iCXgtlqdot8kXq4fZtK+BoGe1p4x+uWBYo0RwD4AJK282TcQWuiKnkWcBnhdlr8Gf6oh6C5iZUa4uGu73TZISN8jM+Z6OUUtvdKRjMlku2pA==
+ b=ZdBbIK1a2gQdDMhJED+KNBfTrDNiVjRS78AslMSJKGmfPsaqyhwSPHJLYuiyr9jiUvfL8hJTYKEaxmuiIWLNkHqyahectTobMHC3fTFVxZa6Bkn/zah0NLSw3veMm6aFaNexuee8LuYnP//2ul3AoXTpo5pJ3Xu+/C5w7u0VmQMm/CH8hv7w1Uh0G71bkzHjUZRRm6rj5wTLCRg8F4qtrlUX/FZlkIuFNrDZFiPDohFm7sIRooa1UR4cUTZQscT7LiDla5W8bXPx/rHCJqKmf9jr0OUJaNyAuJ71eLWP7U+6MuFXrbjjasDZvyUfqpeQd5OntxEfwJL8uyBAM6GUgg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=TN/OmG+ccc9wyXZSFLbM1pf3t6fCGJEHiHC8vvUI3l0=;
- b=HI+oU21FwAapUcwvb+BJ0JxSUHwrZb1UJ8PoguAgQ2P0KrYA6VzFzj22P+Jlrvwj8JC7I5rO5Etaq3g/zqsJ7+hESGgC8rjK1HkyiSYlbrdUPFIqxgDCKZQSkFgbhzvYrqFNpDRYlxAYKFN8lwtx1Mjh4oz2+cCAfMwqg2yJHjI2id1qiCaRUhIb2JLCeoh4uyLQ3tL478qRYztznajjQFoba/rn+kWddeaoVBsrydlZkfWoTFo0C6HbD7f/lDWf9SWX4NW7KyiJI9i9SMYNegWcB1dHY5s0EX47PelWRC3upXEjoWfmj6cAz2/RpZyfYjlFTbprLVKY57R4jyKYEg==
+ bh=vHcuGPGj6mkxS4TpCXWJSSuEgN0sUBHdM9bAc7/yrg0=;
+ b=NAbf2TJEv8YhHntwgnO7anCEsE8bdjrcdkdvPqQReBuRmtk3ZtpTEGVcANhgxstvitnmqudh90RZQkfsd0F1doUivMa8ec9GyP3EPB1hQjtVAItNww6Y8XTcOltMEr9BqcRLejVqpCHEf+iGHquOmLIfq/SmW61Ix47ZNJPik8j1tQKouUTULFCG3QeExa2B3miP3Nfqw44H+9eR+X2u4p991Xhmy5UMMczH5b6YKhVXm6roUgXo474awLLfF0Bc04QmxSbLD9yO9CwgQHBYMqM/qSAeQxrUHMu6WOd+Hj8u0hotPXc6u9Fe0qaI4UH7UFvGdVUA1F3m7BkvRUHNCg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -41,26 +41,25 @@ Received: from MW4PR11MB5822.namprd11.prod.outlook.com (2603:10b6:303:185::9)
  by DM6PR11MB4594.namprd11.prod.outlook.com (2603:10b6:5:2a0::12) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.39; Thu, 28 Mar
- 2024 13:22:16 +0000
+ 2024 13:22:49 +0000
 Received: from MW4PR11MB5822.namprd11.prod.outlook.com
  ([fe80::ac1c:eab6:e008:9b74]) by MW4PR11MB5822.namprd11.prod.outlook.com
  ([fe80::ac1c:eab6:e008:9b74%5]) with mapi id 15.20.7409.031; Thu, 28 Mar 2024
- 13:22:16 +0000
+ 13:22:49 +0000
 From: "Polampalli, Archana" <Archana.Polampalli@windriver.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>,
         "Polampalli, Archana"
 	<Archana.Polampalli@windriver.com>
-Subject: Re: [oe][meta-oe][kirkstone][PATCH V2 2/2] nodejs: fix CVE-2023-46809
-Thread-Topic: [oe][meta-oe][kirkstone][PATCH V2 2/2] nodejs: fix
- CVE-2023-46809
-Thread-Index: AQHaaXGimACCUlVvAUCoi+uYLSQC4rFNUuyW
-Date: Thu, 28 Mar 2024 13:22:16 +0000
+Subject: Re: [oe][meta-oe][kirkstone][PATCH V2 1/1] nodejs: fix CVE-2024-22019
+Thread-Topic: [oe][meta-oe][kirkstone][PATCH V2 1/1] nodejs: fix
+ CVE-2024-22019
+Thread-Index: AQHaaSNAX5BQ4TKrD0qkZR5YaWQAJrFNU6jF
+Date: Thu, 28 Mar 2024 13:22:49 +0000
 Message-ID: 
- <MW4PR11MB5822BBAF493E7DFFC71B449A843B2@MW4PR11MB5822.namprd11.prod.outlook.com>
-References: <20240227113717.1068213-1-archana.polampalli@windriver.com>
- <17B7B53C5C511BAF.14830@lists.openembedded.org>
-In-Reply-To: <17B7B53C5C511BAF.14830@lists.openembedded.org>
+ <MW4PR11MB58220DFA642C684908FF9DAB843B2@MW4PR11MB5822.namprd11.prod.outlook.com>
+References: <17B796B477775AF6.14830@lists.openembedded.org>
+In-Reply-To: <17B796B477775AF6.14830@lists.openembedded.org>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -68,779 +67,698 @@ X-MS-TNEF-Correlator:
 msip_labels: 
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: MW4PR11MB5822:EE_|DM6PR11MB4594:EE_
-x-ms-office365-filtering-correlation-id: 5af29985-f04d-42ce-dc47-08dc4f2a1673
+x-ms-office365-filtering-correlation-id: 7b29d1f8-9c4c-44bd-c677-08dc4f2a2a34
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
 x-microsoft-antispam-message-info: 
- Z+papwRySpzgozqOycUCIXgdgENGHkOaqLwn+6ePokd3dTQmiVSFgxizvkNMVfmwjCHNC/zKsuMqUygM8kNDRoqJ45Cz2o0JSDoAXJP2LcI4Mbe1OIHM0WixFNxhhNkjg/tE2PByVo3Lm0A/t4C1UatbtO8aLnbIjWYN/BbAKQ4wrA78i9qOO8Q5C59O1kj1nsGgm5m1nPqss4KZ4xGz7oVWGEIEl4Jn2H1bGnUoxMKf1B5o07/D7P/RaNBv1FDDs4WGohFUFOODxWDtx9VflURGzNzSjFVKZ7gUp/abmL7ybtQjLv9RZjUbBCOC/alDAzG+Lm/cYVXeISveCvo3b0rjh1a3LlyFrlzA6cdWAGjS1rrvPmvJ8yDsQy1cy4C4yROw7hBwEjU/0Klvd8ndAm0n5TkumNr+5GfgOPAV/Mxmu4dMIIwsE6EfiaWXdCOCEXqebK42YUhZBPR2PW5tR2FnQ+a4g5gJub77OEO4mxtfT10zbe4NKxBjpQ0e7cTHoDpMbd6bjnZi4tbTR7RPQ8okxyD7rMbDGQXWvA1Ebqtft6BNNJnvkQT9uyPfM3VfWPOLiqf09sXlKHJsMaWzXbsnUMT+IGXpVvIbdnEl9AGHcDO8hZ4IwffUcQZ0eNXB1n0/z1yeihyZ9IYEKRt8KBC+DjYQJl3dtgTMDJrOti+9T4IL51VbLRvYF1Qagt4R
+ 937xJkxYp9PsSFriiqBALTpmtyrPoq/AXM/b/tk5L06FdRIfi2lecOKNO+I0QYdM9tWxpqLqvSu/9T8RX70WxK5tV7zepgaAW4iDPwANaY7ZXoSeXSrMlf5B1gBGNurCAR32asFx58S+K0TFLrx1NxTBkTGn+az02VK2wJkXF27547uP2ACC2T5/X2E0szygsq/pAwA7IXsLUJaVb8xYmUNpTUzj7fQvhO0k4DvA3+ynCA2HgYbKU5BO94OInN+OqBbI3+Rt4kcd7s7b/sTgNwIQNrVOcH4JXsPjMmKAWjjkTIlgJkQld38DJ+6VIfuZYn3HH9vjzpir5mKxovaJu6yEssdOvJVMveZSZUyws8kbuWFRdvf5rFivNQtzssLPqFX+3vFSHAuJ0+pZDLo/n+F9blfIrGQCL9fXksWLE12R6El/5tuNqQHRRWLxBSqDF5Zm5Q1LGyN+tgxJWpEKGUeNN+WgY9dt6xTctm2t/9RufQ34GMOQhZLkQksqZObKeLyT/JdQQ4QHn2nQ4vh/CQ4xam9BwsItHr6KtiFr8f1dbaxr41l77/ujqERpXqFAi3I+q41eAmuc8pKmfJQYEG6AUtDWmCk21aUdcvLbHpSZXnQp44G8gjxJQ8S5JRvCqvFufH+62j9a7dpm0HPGuyaDaIA8Jk5aVvzPDZfitao=
 x-forefront-antispam-report: 
  CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MW4PR11MB5822.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(1800799015)(366007)(376005)(38070700009);DIR:OUT;SFP:1102;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0: 
- =?us-ascii?Q?2bUH0ZD+2h01jYY3YkbOZkMNtxz0V5nr9Vehbbk1g2pCV81z3y4t81y1YVqu?=
- =?us-ascii?Q?KsLB8xUYiohGBIeS31N0JlQ/H2FMIiR2HGQjgd97R4magHcoRgRFYj2/ioNq?=
- =?us-ascii?Q?85RqiofwZbWdBr5iAVlpDTdKwKhZEIw80hu05gBu/psemtx85x3NyEmm7Gmf?=
- =?us-ascii?Q?QAFScK7n1+4QKtH2nwUNsLKijASQdLWhoFvFFJzOzd5dD6oJfil8acL/vSh5?=
- =?us-ascii?Q?WxZ7fmOsi/aW9ojc0jYs6sMxZK3lPf/QkcZPLIztBZutIdvj0JcpVeaqsGPn?=
- =?us-ascii?Q?z6Fqc3MPrGbcUaRBjpPB6ueDKz3+PtKC54i0y4nrAaHvPDIUN7w0kknwMoP0?=
- =?us-ascii?Q?062OBmnzIajxMeZbau0kZ7LfH5JoX9ea5GKnjp+GDouo0quLs9Y6DnWpBNU2?=
- =?us-ascii?Q?R/6XiradpZkSyFSZcv8Q0baL9CigDIvk8W5eq790hbOejRjVSDJAj9DrsaTI?=
- =?us-ascii?Q?5cHnsonmcQgNhvZHnfEdxlEetK7PF2mdSF4JUKTBnHt5BeWva374v/ghvEXo?=
- =?us-ascii?Q?vY+On2cto4P38F3CXyYSUQas/IaRIsp7G+1Bs7KL5HJNEHqt/m32dWR8UWDG?=
- =?us-ascii?Q?Pf/mip0hgxotGO4/QSO+xIxQOGwCV0XnmJjoXJPG2lIt6qPx5BMIo25ctqfq?=
- =?us-ascii?Q?/qKDTQYsUd6UAhqdvshj3frbbraPl2bV2hJw+sweB1Rne8Tz/DXIMGUCF4QY?=
- =?us-ascii?Q?Lnr9AcsqeBfEfWCUw7q7AP3BZvXcdDTz0GTv3P7Tfz4rdFwLfSF/M+Zx2PV3?=
- =?us-ascii?Q?AFzM9uMAZ0/dZz/zR6Zo5Zpth4Tudn+Cay+iSt+SuMQIPVH76XX7CeTVbkpp?=
- =?us-ascii?Q?f0CYL5r9Am+deSTHPaVVjejrD++J+dQd5cIAluyeV7tA5g64O/M2DFzFGL5d?=
- =?us-ascii?Q?UxPuOsMC6iTLTPReCZkBM0wy1SBHoN5DDh8Omif1xeFgKpgugAmEgS7YQZw3?=
- =?us-ascii?Q?3VekSdWYHahs4FazrtcsRedGN8NNWGKkhJr0knqQdWDVfcUZqut2glhVz3rV?=
- =?us-ascii?Q?RSvl5CJvufmQkxqyMwOytcpxewBVhaAYLReraj+0NKOLhACAoehfNUI8zYls?=
- =?us-ascii?Q?oIBPfFVi/PRGvY0bGNYzoRWEh9ghKb96pxkv0yGTeooV/g6KMPkULBrPN1mB?=
- =?us-ascii?Q?JPRtexpteoRfzDtZZPqnIDa0YzC/CfPn5Y1nvs6hbBkyERRDrepxD0Hop5Le?=
- =?us-ascii?Q?vnyjm4Cw3TjMoZ/0yb0PjCGYvPvRG8+87qTU+FaOC0nHqeR7otm1HC+K/5SY?=
- =?us-ascii?Q?6mOJVBsl3vPYEDBN7kPu9DVb06JLUOAfeGzIUMs+eHn1mWBpthnaOBQTVJzV?=
- =?us-ascii?Q?TSIyP4kqknChLh4ssVEX209dFvvX3oSEvPQD3ZAWnaYaOjqmSF1EaqHy5UJL?=
- =?us-ascii?Q?aidWBi+NmGXrbpC/Tu92O7VIeyLJ3AkbjVcqb4c/QBE6du3JmLXF/O4lESM5?=
- =?us-ascii?Q?uGwp+vdA8hpcXnmNQZzOzTK1mAO5wkcehQVLQuZcoI7pIdGUF/sQYLupxPwp?=
- =?us-ascii?Q?3GmTrz+iDwkLoJv5CkKi3myKfzlCw+Y+dCgbg2OI6yH0qF6y7Afd+4qlYjsF?=
- =?us-ascii?Q?xP5QUl7KscJE2nV0+F1s/a8/I5nI+D27q9UjCN5x/1PtOxZfFzUy1nRAy0UW?=
- =?us-ascii?Q?Ow=3D=3D?=
+ =?us-ascii?Q?6RWWiOBJjKpQ1GNLDVd+Fp/B7jtBcp14gUfsY71i0IoRAN3NrnpqN7A7XOTR?=
+ =?us-ascii?Q?sdiCJ5gyThTSkYOxJaqenNPOcTJZD6XvoPMVbHKwzsMXq0fuU0ktb3FgxVAf?=
+ =?us-ascii?Q?o11MOmnJP2yH3WyqjhjVGNt2FvAzXEMRir5jkanbH6QOTF+24o1sfxKIBA/S?=
+ =?us-ascii?Q?UIMW01XsK+Lffxh/DYxhmCONJejAxCPmbHqif8GOKjojasaMtwOQGFL0Lzz3?=
+ =?us-ascii?Q?kyJwMy+VlLSbcMhPad7GjLYzVMGLKgTVLdh/lw1gY7ReDQa30l8HQ5vhMxgm?=
+ =?us-ascii?Q?SJq+OF2p1dWz+yXef3LkKYlg1TpBhByH7ozPTa+yPli4SStAo0iix3EdWwOR?=
+ =?us-ascii?Q?UyLv5BgmVKSfbyNeHj/Q85ADxkSrOvd2aJ1sQK27LAc8gMLZRY+SOYoG7f0c?=
+ =?us-ascii?Q?DhI4CVOybZGpbKyZJSo2DKPdxU0SshIFvqbvV2zhwIzpaRMV2a2dVmhXIL5+?=
+ =?us-ascii?Q?bK6VFe2mI5FlXVIb4LCCRXtZ6NZrsCm16JATHo2Q3UH5560O8zSPQwNCQs8a?=
+ =?us-ascii?Q?pYEk6ggNE1iOXB6ALVOhR1c2NiK837oKMYISKc7SYGKl4LpCtAd8+pb7DkpZ?=
+ =?us-ascii?Q?BaVuOhCpB4fHpxUOTnY2RwGi461pxQfT9a1fXljJBcqqeMgwa82whghZyUc8?=
+ =?us-ascii?Q?XeC7f3mcShsoGemg/mIzgT1u9KOqgDL7gG1657gRl3Dm8viEzcBBQrE+JKf/?=
+ =?us-ascii?Q?odQbJEMFswSxL/3s1/VfISt2UdA3Wwbr//KPAUSuKsdlfOFoslHzPIFYMl03?=
+ =?us-ascii?Q?G3G9aBK8LREhhDVn3tBbx7wWjlgb/bjjNm9VjuZcFp5RLWJRutbH99GQqITT?=
+ =?us-ascii?Q?v3Tc8ApI5+Tu3PVAqX8kEJ2gvud1jgcb6VRLGCv7AEMTS1Yijh5oaSoQYbnO?=
+ =?us-ascii?Q?Jp94yB8MgAxnIBMTlAQ8BBUaOZbnMW3pXZPCfsbOQ5V1eNv6VKBjD7IcL26m?=
+ =?us-ascii?Q?Kaj7SIsIZ0QwUjMbtvp++8HGDNWeBXcOuKIjZ2ri3T4/zsnIF+lf9bDgkIAu?=
+ =?us-ascii?Q?q1yMSdRqt89DcamexvEWVBDUIOf0TuFmFqf6A+spHE5vb1fBDGoQhoSX93C5?=
+ =?us-ascii?Q?VBTcudsUq+KOtfmt2JqV0Ce6V8wlxCSv3niw59QLK7uN46l/gYkyBbUVph2b?=
+ =?us-ascii?Q?Xknd2zpToW3vQMteApGGwLfWNzny2DjbRNYRLQyiyxUiFafHAVTEt8/szIVe?=
+ =?us-ascii?Q?YLJyKitav+7nHjmFhSbJYBaiQsBu9M1w2s1Jm8dPjtsT2+m3Q733ZJUL4rvs?=
+ =?us-ascii?Q?XebK91ClpCHZmU5/SGAf7gd64IqWB4BRveQtj1oaZL7zP8rFqHKw5JOmpD5K?=
+ =?us-ascii?Q?NRpKROvTU7emh3dUz1ZuKYgzshrqlpTaW/YCkCB5qHWVpmtfQhj7U3uqiatM?=
+ =?us-ascii?Q?F9PaDgFayuhPOPaaXINQ+jOAVidCEg3jZsdnGIwxzZcPydgSxO6bEyASJO82?=
+ =?us-ascii?Q?3VyHet+Au09XsSNfXBdFcm1nHwwhveigrKi7GxR58gWwNjDzkm8azPuofR1F?=
+ =?us-ascii?Q?NbaA0lfZmMldsk3eOZHJ8ikPd6iOYZtQMzpUXk3XVW6NzDL5K0fCJzM+VzdP?=
+ =?us-ascii?Q?AgE7pcCKkXIC/vYc3aKeerI1yh0apDcAsuwU6kKAzxjCxSJInbLDDsZjJdxX?=
+ =?us-ascii?Q?wg=3D=3D?=
 Content-Type: multipart/alternative;
-	boundary="_000_MW4PR11MB5822BBAF493E7DFFC71B449A843B2MW4PR11MB5822namp_"
+	boundary="_000_MW4PR11MB58220DFA642C684908FF9DAB843B2MW4PR11MB5822namp_"
 MIME-Version: 1.0
 X-OriginatorOrg: windriver.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: MW4PR11MB5822.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5af29985-f04d-42ce-dc47-08dc4f2a1673
-X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Mar 2024 13:22:16.3275
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7b29d1f8-9c4c-44bd-c677-08dc4f2a2a34
+X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Mar 2024 13:22:49.4801
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Kbep+6egXcxrqSTE1vm4mZaKOD2F6aRwnaKtumiUhjXDq3SJimWh3hWEb8OqxRGrjkRjQLOQOVLY+PTnRmBpmrxpG+kPowwIgxx8j/nvdWRpfuRE2SaVZv68EEV/9zym
+X-MS-Exchange-CrossTenant-userprincipalname: hEVyRGbqExtcbdwvlS8/GDs/7gXDn3j/7k+evf9yp0wNMXoBl8TFvrmYCleDYLAHDsj+5S5VtTx3QIau2ABoJbIRyZbjRp4ewOUivi4h4m21ndMuye0nbAJ0OOwXbHpI
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR11MB4594
-X-Proofpoint-ORIG-GUID: u79xuX-znJjLrZog1ljfqup_B0YQ8bvF
-X-Proofpoint-GUID: u79xuX-znJjLrZog1ljfqup_B0YQ8bvF
+X-Proofpoint-ORIG-GUID: TqJ8ViZrFYnVAGo_nHO1H6MQnLV9KwHd
+X-Proofpoint-GUID: TqJ8ViZrFYnVAGo_nHO1H6MQnLV9KwHd
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2024-03-28_13,2024-03-27_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
- adultscore=0 impostorscore=0 spamscore=0 priorityscore=1501 bulkscore=0
- suspectscore=0 mlxscore=0 mlxlogscore=999 phishscore=0 malwarescore=0
- clxscore=1011 classifier=spam adjust=0 reason=mlx scancount=1
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxlogscore=999
+ impostorscore=0 adultscore=0 mlxscore=0 priorityscore=1501 malwarescore=0
+ lowpriorityscore=0 clxscore=1015 phishscore=0 bulkscore=0 suspectscore=0
+ spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.19.0-2403210001 definitions=main-2403280091
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 13:22:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109668
+ <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 13:22:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109669
 
---_000_MW4PR11MB5822BBAF493E7DFFC71B449A843B2MW4PR11MB5822namp_
+--_000_MW4PR11MB58220DFA642C684908FF9DAB843B2MW4PR11MB5822namp_
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-Is there any issue with this patch?
-
-Regards,
-Archana
+Reminder!
 ________________________________
 From: openembedded-devel@lists.openembedded.org <openembedded-devel@lists.o=
 penembedded.org> on behalf of Polampalli, Archana via lists.openembedded.or=
 g <archana.polampalli=3Dwindriver.com@lists.openembedded.org>
-Sent: Tuesday, February 27, 2024 17:07
+Sent: Tuesday, February 27, 2024 07:47
 To: openembedded-devel@lists.openembedded.org <openembedded-devel@lists.ope=
 nembedded.org>
-Subject: [oe][meta-oe][kirkstone][PATCH V2 2/2] nodejs: fix CVE-2023-46809
+Subject: [oe][meta-oe][kirkstone][PATCH V2 1/1] nodejs: fix CVE-2024-22019
 
 From: Archana Polampalli <archana.polampalli@windriver.com>
 
 Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
 ---
- .../nodejs/nodejs/CVE-2023-46809.patch        | 625 ++++++++++++++++++
+ .../nodejs/nodejs/CVE-2024-22019.patch        | 556 ++++++++++++++++++
  .../recipes-devtools/nodejs/nodejs_16.20.2.bb |   1 +
- 2 files changed, 626 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/CVE-2023-46809.p=
+ 2 files changed, 557 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/CVE-2024-22019.p=
 atch
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2023-46809.patch b/=
-meta-oe/recipes-devtools/nodejs/nodejs/CVE-2023-46809.patch
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2024-22019.patch b/=
+meta-oe/recipes-devtools/nodejs/nodejs/CVE-2024-22019.patch
 new file mode 100644
-index 000000000..991d39fcf
+index 000000000..ca1c7981c
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2023-46809.patch
-@@ -0,0 +1,625 @@
-+From d3d357ab096884f10f5d2f164149727eea875635 Mon Sep 17 00:00:00 2001
-+From: Michael Dawson <midawson@redhat.com>
-+Date: Thu, 4 Jan 2024 21:32:51 +0000
-+Subject: [PATCH] crypto: disable PKCS#1 padding for privateDecrypt
++++ b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2024-22019.patch
+@@ -0,0 +1,556 @@
++From 911cb33cdadab57a75f97186290ea8f3903a6171 Mon Sep 17 00:00:00 2001
++From: Paolo Insogna <paolo@cowtech.it>
++Date: Tue, 9 Jan 2024 18:10:04 +0100
++Subject: [PATCH] http: add maximum chunk extension size
 +
-+Refs: https://hackerone.com/bugs?subject=3Dnodejs&report_id=3D2269177
++PR-URL: https://github.com/nodejs-private/node-private/pull/520
++Refs: https://github.com/nodejs-private/node-private/pull/518
 +
-+Disable RSA_PKCS1_PADDING for crypto.privateDecrypt() in order
-+to protect against the Marvin attack.
++CVE-ID: CVE-2024-22019
 +
-+Includes a security revert flag that can be used to restore
-+support.
++Upstream-Status: Backport [https://github.com/nodejs/node/commit/911cb33cd=
+adab57a]
 +
-+Signed-off-by: Michael Dawson <midawson@redhat.com>
-+PR-URL: https://github.com/nodejs-private/node-private/pull/525
-+Reviewed-By: Rafael Gonzaga <rafael.nunu@hotmail.com>
-+Reviewed-By: Matteo Collina <matteo.collina@gmail.com>
-+
-+CVE-ID: CVE-2023-46809
-+
-+Upstream-Status: Backport [https://github.com/nodejs/node/commit/d3d357ab0=
-96884f1]
 +Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
 +---
-+ src/crypto/crypto_cipher.cc                 |  28 ++
-+ src/node_revert.h                           |   1 +
-+ test/parallel/test-crypto-rsa-dsa-revert.js | 475 ++++++++++++++++++++
-+ test/parallel/test-crypto-rsa-dsa.js        |  42 +-
-+ 4 files changed, 533 insertions(+), 13 deletions(-)
-+ create mode 100644 test/parallel/test-crypto-rsa-dsa-revert.js
++ deps/llhttp/CMakeLists.txt                    |   2 +-
++ deps/llhttp/include/llhttp.h                  |   7 +-
++ deps/llhttp/src/api.c                         |   7 +
++ deps/llhttp/src/llhttp.c                      | 122 ++++++++++++++--
++ doc/api/errors.md                             |  12 ++
++ lib/_http_server.js                           |   8 ++
++ src/node_http_parser.cc                       |  20 ++-
++ .../test-http-chunk-extensions-limit.js       | 131 ++++++++++++++++++
++ tools/update-llhttp.sh                        |   2 +-
++ 9 files changed, 292 insertions(+), 19 deletions(-)
++ create mode 100644 test/parallel/test-http-chunk-extensions-limit.js
 +
-+diff --git a/src/crypto/crypto_cipher.cc b/src/crypto/crypto_cipher.cc
-+index 10579ce..0311c68 100644
-+--- a/src/crypto/crypto_cipher.cc
-++++ b/src/crypto/crypto_cipher.cc
-+@@ -6,6 +6,7 @@
-+ #include "node_buffer.h"
-+ #include "node_internals.h"
-+ #include "node_process-inl.h"
-++#include "node_revert.h"
-+ #include "v8.h"
++diff --git a/deps/llhttp/CMakeLists.txt b/deps/llhttp/CMakeLists.txt
++index d038203..747564a 100644
++--- a/deps/llhttp/CMakeLists.txt
+++++ b/deps/llhttp/CMakeLists.txt
++@@ -1,7 +1,7 @@
++ cmake_minimum_required(VERSION 3.5.1)
++ cmake_policy(SET CMP0069 NEW)
 +
-+ namespace node {
-+@@ -1061,6 +1062,33 @@ void PublicKeyCipher::Cipher(const FunctionCallback=
-Info<Value>& args) {
-+   uint32_t padding;
-+   if (!args[offset + 1]->Uint32Value(env->context()).To(&padding)) return=
-;
++-project(llhttp VERSION 6.0.11)
+++project(llhttp VERSION 6.1.0)
++ include(GNUInstallDirs)
 +
-++  if (EVP_PKEY_cipher =3D=3D EVP_PKEY_decrypt &&
-++      operation =3D=3D PublicKeyCipher::kPrivate && padding =3D=3D RSA_PK=
-CS1_PADDING &&
-++      !IsReverted(SECURITY_REVERT_CVE_2023_46809)) {
-++    EVPKeyCtxPointer ctx(EVP_PKEY_CTX_new(pkey.get(), nullptr));
-++    CHECK(ctx);
-++
-++    if (EVP_PKEY_decrypt_init(ctx.get()) <=3D 0) {
-++      return ThrowCryptoError(env, ERR_get_error());
-++    }
-++
-++    int rsa_pkcs1_implicit_rejection =3D
-++        EVP_PKEY_CTX_ctrl_str(ctx.get(), "rsa_pkcs1_implicit_rejection", =
-"1");
-++    // From the doc -2 means that the option is not supported.
-++    // The default for the option is enabled and if it has been
-++    // specifically disabled we want to respect that so we will
-++    // not throw an error if the option is supported regardless
-++    // of how it is set. The call to set the value
-++    // will not affect what is used since a different context is
-++    // used in the call if the option is supported
-++    if (rsa_pkcs1_implicit_rejection <=3D 0) {
-++      return THROW_ERR_INVALID_ARG_VALUE(
-++          env,
-++          "RSA_PKCS1_PADDING is no longer supported for private decryptio=
-n,"
-++          " this can be reverted with --security-revert=3DCVE-2023-46809"=
-);
-++    }
-++  }
-++
-+   const EVP_MD* digest =3D nullptr;
-+   if (args[offset + 2]->IsString()) {
-+     const Utf8Value oaep_str(env->isolate(), args[offset + 2]);
-+diff --git a/src/node_revert.h b/src/node_revert.h
-+index 83dcb62..bc2a288 100644
-+--- a/src/node_revert.h
-++++ b/src/node_revert.h
-+@@ -18,6 +18,7 @@ namespace node {
-+ #define SECURITY_REVERSIONS(XX)                                          =
-  \
-+   XX(CVE_2021_44531, "CVE-2021-44531", "Cert Verif Bypass via URI SAN")  =
-  \
-+   XX(CVE_2021_44532, "CVE-2021-44532", "Cert Verif Bypass via Str Inject"=
-) \
-++  XX(CVE_2023_46809, "CVE-2023-46809", "Marvin attack on PKCS#1 padding")=
- \
-+ //  XX(CVE_2016_PEND, "CVE-2016-PEND", "Vulnerability Title")
++ set(CMAKE_C_STANDARD 99)
++diff --git a/deps/llhttp/include/llhttp.h b/deps/llhttp/include/llhttp.h
++index 2da66f1..78f27ab 100644
++--- a/deps/llhttp/include/llhttp.h
+++++ b/deps/llhttp/include/llhttp.h
++@@ -2,8 +2,8 @@
++ #define INCLUDE_LLHTTP_H_
 +
-+ enum reversion {
-+diff --git a/test/parallel/test-crypto-rsa-dsa-revert.js b/test/parallel/t=
-est-crypto-rsa-dsa-revert.js
-+new file mode 100644
-+index 0000000..84ec8f6
-+--- /dev/null
-++++ b/test/parallel/test-crypto-rsa-dsa-revert.js
-+@@ -0,0 +1,475 @@
-++'use strict';
-++// Flags: --security-revert=3DCVE-2023-46809
-++const common =3D require('../common');
-++if (!common.hasCrypto)
-++  common.skip('missing crypto');
-++
-++const assert =3D require('assert');
-++const crypto =3D require('crypto');
-++
-++const constants =3D crypto.constants;
-++
-++const fixtures =3D require('../common/fixtures');
-++
-++// Test certificates
-++const certPem =3D fixtures.readKey('rsa_cert.crt');
-++const keyPem =3D fixtures.readKey('rsa_private.pem');
-++const rsaKeySize =3D 2048;
-++const rsaPubPem =3D fixtures.readKey('rsa_public.pem', 'ascii');
-++const rsaKeyPem =3D fixtures.readKey('rsa_private.pem', 'ascii');
-++const rsaKeyPemEncrypted =3D fixtures.readKey('rsa_private_encrypted.pem'=
-,
-++                                            'ascii');
-++const dsaPubPem =3D fixtures.readKey('dsa_public.pem', 'ascii');
-++const dsaKeyPem =3D fixtures.readKey('dsa_private.pem', 'ascii');
-++const dsaKeyPemEncrypted =3D fixtures.readKey('dsa_private_encrypted.pem'=
-,
-++                                            'ascii');
-++const rsaPkcs8KeyPem =3D fixtures.readKey('rsa_private_pkcs8.pem');
-++const dsaPkcs8KeyPem =3D fixtures.readKey('dsa_private_pkcs8.pem');
-++
-++const ec =3D new TextEncoder();
-++
-++const openssl1DecryptError =3D {
-++  message: 'error:06065064:digital envelope routines:EVP_DecryptFinal_ex:=
-' +
-++    'bad decrypt',
-++  code: 'ERR_OSSL_EVP_BAD_DECRYPT',
-++  reason: 'bad decrypt',
-++  function: 'EVP_DecryptFinal_ex',
-++  library: 'digital envelope routines',
-++};
-++
-++const decryptError =3D common.hasOpenSSL3 ?
-++  { message: 'error:1C800064:Provider routines::bad decrypt' } :
-++  openssl1DecryptError;
-++
-++const decryptPrivateKeyError =3D common.hasOpenSSL3 ? {
-++  message: 'error:1C800064:Provider routines::bad decrypt',
-++} : openssl1DecryptError;
-++
-++function getBufferCopy(buf) {
-++  return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength=
-);
-++}
-++
-++// Test RSA encryption/decryption
-++{
-++  const input =3D 'I AM THE WALRUS';
-++  const bufferToEncrypt =3D Buffer.from(input);
-++  const bufferPassword =3D Buffer.from('password');
-++
-++  let encryptedBuffer =3D crypto.publicEncrypt(rsaPubPem, bufferToEncrypt=
-);
-++
-++  // Test other input types
-++  let otherEncrypted;
-++  {
-++    const ab =3D getBufferCopy(ec.encode(rsaPubPem));
-++    const ab2enc =3D getBufferCopy(bufferToEncrypt);
-++
-++    crypto.publicEncrypt(ab, ab2enc);
-++    crypto.publicEncrypt(new Uint8Array(ab), new Uint8Array(ab2enc));
-++    crypto.publicEncrypt(new DataView(ab), new DataView(ab2enc));
-++    otherEncrypted =3D crypto.publicEncrypt({
-++      key: Buffer.from(ab).toString('hex'),
-++      encoding: 'hex'
-++    }, Buffer.from(ab2enc).toString('hex'));
-++  }
-++
-++  let decryptedBuffer =3D crypto.privateDecrypt(rsaKeyPem, encryptedBuffe=
-r);
-++  const otherDecrypted =3D crypto.privateDecrypt(rsaKeyPem, otherEncrypte=
-d);
-++  assert.strictEqual(decryptedBuffer.toString(), input);
-++  assert.strictEqual(otherDecrypted.toString(), input);
-++
-++  decryptedBuffer =3D crypto.privateDecrypt(rsaPkcs8KeyPem, encryptedBuff=
-er);
-++  assert.strictEqual(decryptedBuffer.toString(), input);
-++
-++  let decryptedBufferWithPassword =3D crypto.privateDecrypt({
-++    key: rsaKeyPemEncrypted,
-++    passphrase: 'password'
-++  }, encryptedBuffer);
-++
-++  const otherDecryptedBufferWithPassword =3D crypto.privateDecrypt({
-++    key: rsaKeyPemEncrypted,
-++    passphrase: ec.encode('password')
-++  }, encryptedBuffer);
-++
-++  assert.strictEqual(
-++    otherDecryptedBufferWithPassword.toString(),
-++    decryptedBufferWithPassword.toString());
-++
-++  decryptedBufferWithPassword =3D crypto.privateDecrypt({
-++    key: rsaKeyPemEncrypted,
-++    passphrase: 'password'
-++  }, encryptedBuffer);
-++
-++  assert.strictEqual(decryptedBufferWithPassword.toString(), input);
-++
-++  encryptedBuffer =3D crypto.publicEncrypt({
-++    key: rsaKeyPemEncrypted,
-++    passphrase: 'password'
-++  }, bufferToEncrypt);
-++
-++  decryptedBufferWithPassword =3D crypto.privateDecrypt({
-++    key: rsaKeyPemEncrypted,
-++    passphrase: 'password'
-++  }, encryptedBuffer);
-++  assert.strictEqual(decryptedBufferWithPassword.toString(), input);
-++
-++  encryptedBuffer =3D crypto.privateEncrypt({
-++    key: rsaKeyPemEncrypted,
-++    passphrase: bufferPassword
-++  }, bufferToEncrypt);
-++
-++  decryptedBufferWithPassword =3D crypto.publicDecrypt({
-++    key: rsaKeyPemEncrypted,
-++    passphrase: bufferPassword
-++  }, encryptedBuffer);
-++  assert.strictEqual(decryptedBufferWithPassword.toString(), input);
-++
-++  // Now with explicit RSA_PKCS1_PADDING.
-++  encryptedBuffer =3D crypto.privateEncrypt({
-++    padding: crypto.constants.RSA_PKCS1_PADDING,
-++    key: rsaKeyPemEncrypted,
-++    passphrase: bufferPassword
-++  }, bufferToEncrypt);
-++
-++  decryptedBufferWithPassword =3D crypto.publicDecrypt({
-++    padding: crypto.constants.RSA_PKCS1_PADDING,
-++    key: rsaKeyPemEncrypted,
-++    passphrase: bufferPassword
-++  }, encryptedBuffer);
-++  assert.strictEqual(decryptedBufferWithPassword.toString(), input);
-++
-++  // Omitting padding should be okay because RSA_PKCS1_PADDING is the def=
-ault.
-++  decryptedBufferWithPassword =3D crypto.publicDecrypt({
-++    key: rsaKeyPemEncrypted,
-++    passphrase: bufferPassword
-++  }, encryptedBuffer);
-++  assert.strictEqual(decryptedBufferWithPassword.toString(), input);
-++
-++  // Now with RSA_NO_PADDING. Plaintext needs to match key size.
-++  // OpenSSL 3.x has a rsa_check_padding that will cause an error if
-++  // RSA_NO_PADDING is used.
-++  if (!common.hasOpenSSL3) {
-++    {
-++      const plaintext =3D 'x'.repeat(rsaKeySize / 8);
-++      encryptedBuffer =3D crypto.privateEncrypt({
-++        padding: crypto.constants.RSA_NO_PADDING,
-++        key: rsaKeyPemEncrypted,
-++        passphrase: bufferPassword
-++      }, Buffer.from(plaintext));
-++
-++      decryptedBufferWithPassword =3D crypto.publicDecrypt({
-++        padding: crypto.constants.RSA_NO_PADDING,
-++        key: rsaKeyPemEncrypted,
-++        passphrase: bufferPassword
-++      }, encryptedBuffer);
-++      assert.strictEqual(decryptedBufferWithPassword.toString(), plaintex=
-t);
-++    }
-++  }
-++
-++  encryptedBuffer =3D crypto.publicEncrypt(certPem, bufferToEncrypt);
-++
-++  decryptedBuffer =3D crypto.privateDecrypt(keyPem, encryptedBuffer);
-++  assert.strictEqual(decryptedBuffer.toString(), input);
-++
-++  encryptedBuffer =3D crypto.publicEncrypt(keyPem, bufferToEncrypt);
-++
-++  decryptedBuffer =3D crypto.privateDecrypt(keyPem, encryptedBuffer);
-++  assert.strictEqual(decryptedBuffer.toString(), input);
-++
-++  encryptedBuffer =3D crypto.privateEncrypt(keyPem, bufferToEncrypt);
-++
-++  decryptedBuffer =3D crypto.publicDecrypt(keyPem, encryptedBuffer);
-++  assert.strictEqual(decryptedBuffer.toString(), input);
-++
-++  assert.throws(() =3D> {
-++    crypto.privateDecrypt({
-++      key: rsaKeyPemEncrypted,
-++      passphrase: 'wrong'
-++    }, bufferToEncrypt);
-++  }, decryptError);
-++
-++  assert.throws(() =3D> {
-++    crypto.publicEncrypt({
-++      key: rsaKeyPemEncrypted,
-++      passphrase: 'wrong'
-++    }, encryptedBuffer);
-++  }, decryptError);
-++
-++  encryptedBuffer =3D crypto.privateEncrypt({
-++    key: rsaKeyPemEncrypted,
-++    passphrase: Buffer.from('password')
-++  }, bufferToEncrypt);
-++
-++  assert.throws(() =3D> {
-++    crypto.publicDecrypt({
-++      key: rsaKeyPemEncrypted,
-++      passphrase: Buffer.from('wrong')
-++    }, encryptedBuffer);
-++  }, decryptError);
-++}
-++
-++function test_rsa(padding, encryptOaepHash, decryptOaepHash) {
-++  const size =3D (padding =3D=3D=3D 'RSA_NO_PADDING') ? rsaKeySize / 8 : =
-32;
-++  const input =3D Buffer.allocUnsafe(size);
-++  for (let i =3D 0; i < input.length; i++)
-++    input[i] =3D (i * 7 + 11) & 0xff;
-++  const bufferToEncrypt =3D Buffer.from(input);
-++
-++  padding =3D constants[padding];
-++
-++  const encryptedBuffer =3D crypto.publicEncrypt({
-++    key: rsaPubPem,
-++    padding: padding,
-++    oaepHash: encryptOaepHash
-++  }, bufferToEncrypt);
-++
-++  let decryptedBuffer =3D crypto.privateDecrypt({
-++    key: rsaKeyPem,
-++    padding: padding,
-++    oaepHash: decryptOaepHash
-++  }, encryptedBuffer);
-++  assert.deepStrictEqual(decryptedBuffer, input);
-++
-++  decryptedBuffer =3D crypto.privateDecrypt({
-++    key: rsaPkcs8KeyPem,
-++    padding: padding,
-++    oaepHash: decryptOaepHash
-++  }, encryptedBuffer);
-++  assert.deepStrictEqual(decryptedBuffer, input);
-++}
-++
-++test_rsa('RSA_NO_PADDING');
-++test_rsa('RSA_PKCS1_PADDING');
-++test_rsa('RSA_PKCS1_OAEP_PADDING');
-++
-++// Test OAEP with different hash functions.
-++test_rsa('RSA_PKCS1_OAEP_PADDING', undefined, 'sha1');
-++test_rsa('RSA_PKCS1_OAEP_PADDING', 'sha1', undefined);
-++test_rsa('RSA_PKCS1_OAEP_PADDING', 'sha256', 'sha256');
-++test_rsa('RSA_PKCS1_OAEP_PADDING', 'sha512', 'sha512');
-++assert.throws(() =3D> {
-++  test_rsa('RSA_PKCS1_OAEP_PADDING', 'sha256', 'sha512');
-++}, {
-++  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
-++});
-++
-++// The following RSA-OAEP test cases were created using the WebCrypto API=
- to
-++// ensure compatibility when using non-SHA1 hash functions.
-++{
-++  const { decryptionTests } =3D
-++      JSON.parse(fixtures.readSync('rsa-oaep-test-vectors.js', 'utf8'));
-++
-++  for (const { ct, oaepHash, oaepLabel } of decryptionTests) {
-++    const label =3D oaepLabel ? Buffer.from(oaepLabel, 'hex') : undefined=
-;
-++    const copiedLabel =3D oaepLabel ? getBufferCopy(label) : undefined;
-++
-++    const decrypted =3D crypto.privateDecrypt({
-++      key: rsaPkcs8KeyPem,
-++      oaepHash,
-++      oaepLabel: oaepLabel ? label : undefined
-++    }, Buffer.from(ct, 'hex'));
-++
-++    assert.strictEqual(decrypted.toString('utf8'), 'Hello Node.js');
-++
-++    const otherDecrypted =3D crypto.privateDecrypt({
-++      key: rsaPkcs8KeyPem,
-++      oaepHash,
-++      oaepLabel: copiedLabel
-++    }, Buffer.from(ct, 'hex'));
-++
-++    assert.strictEqual(otherDecrypted.toString('utf8'), 'Hello Node.js');
-++  }
-++}
-++
-++// Test invalid oaepHash and oaepLabel options.
-++for (const fn of [crypto.publicEncrypt, crypto.privateDecrypt]) {
-++  assert.throws(() =3D> {
-++    fn({
-++      key: rsaPubPem,
-++      oaepHash: 'Hello world'
-++    }, Buffer.alloc(10));
-++  }, {
-++    code: 'ERR_OSSL_EVP_INVALID_DIGEST'
-++  });
-++
-++  for (const oaepHash of [0, false, null, Symbol(), () =3D> {}]) {
-++    assert.throws(() =3D> {
-++      fn({
-++        key: rsaPubPem,
-++        oaepHash
-++      }, Buffer.alloc(10));
-++    }, {
-++      code: 'ERR_INVALID_ARG_TYPE'
-++    });
-++  }
-++
-++  for (const oaepLabel of [0, false, null, Symbol(), () =3D> {}, {}]) {
-++    assert.throws(() =3D> {
-++      fn({
-++        key: rsaPubPem,
-++        oaepLabel
-++      }, Buffer.alloc(10));
-++    }, {
-++      code: 'ERR_INVALID_ARG_TYPE'
-++    });
-++  }
-++}
-++
-++// Test RSA key signing/verification
-++let rsaSign =3D crypto.createSign('SHA1');
-++let rsaVerify =3D crypto.createVerify('SHA1');
-++assert.ok(rsaSign);
-++assert.ok(rsaVerify);
-++
-++const expectedSignature =3D fixtures.readKey(
-++  'rsa_public_sha1_signature_signedby_rsa_private_pkcs8.sha1',
-++  'hex'
-++);
-++
-++rsaSign.update(rsaPubPem);
-++let rsaSignature =3D rsaSign.sign(rsaKeyPem, 'hex');
-++assert.strictEqual(rsaSignature, expectedSignature);
-++
-++rsaVerify.update(rsaPubPem);
-++assert.strictEqual(rsaVerify.verify(rsaPubPem, rsaSignature, 'hex'), true=
-);
-++
-++// Test RSA PKCS#8 key signing/verification
-++rsaSign =3D crypto.createSign('SHA1');
-++rsaSign.update(rsaPubPem);
-++rsaSignature =3D rsaSign.sign(rsaPkcs8KeyPem, 'hex');
-++assert.strictEqual(rsaSignature, expectedSignature);
-++
-++rsaVerify =3D crypto.createVerify('SHA1');
-++rsaVerify.update(rsaPubPem);
-++assert.strictEqual(rsaVerify.verify(rsaPubPem, rsaSignature, 'hex'), true=
-);
-++
-++// Test RSA key signing/verification with encrypted key
-++rsaSign =3D crypto.createSign('SHA1');
-++rsaSign.update(rsaPubPem);
-++const signOptions =3D { key: rsaKeyPemEncrypted, passphrase: 'password' }=
-;
-++rsaSignature =3D rsaSign.sign(signOptions, 'hex');
-++assert.strictEqual(rsaSignature, expectedSignature);
-++
-++rsaVerify =3D crypto.createVerify('SHA1');
-++rsaVerify.update(rsaPubPem);
-++assert.strictEqual(rsaVerify.verify(rsaPubPem, rsaSignature, 'hex'), true=
-);
-++
-++rsaSign =3D crypto.createSign('SHA1');
-++rsaSign.update(rsaPubPem);
-++assert.throws(() =3D> {
-++  const signOptions =3D { key: rsaKeyPemEncrypted, passphrase: 'wrong' };
-++  rsaSign.sign(signOptions, 'hex');
-++}, decryptPrivateKeyError);
-++
-++//
-++// Test RSA signing and verification
-++//
-++{
-++  const privateKey =3D fixtures.readKey('rsa_private_b.pem');
-++  const publicKey =3D fixtures.readKey('rsa_public_b.pem');
-++
-++  const input =3D 'I AM THE WALRUS';
-++
-++  const signature =3D fixtures.readKey(
-++    'I_AM_THE_WALRUS_sha256_signature_signedby_rsa_private_b.sha256',
-++    'hex'
-++  );
-++
-++  const sign =3D crypto.createSign('SHA256');
-++  sign.update(input);
-++
-++  const output =3D sign.sign(privateKey, 'hex');
-++  assert.strictEqual(output, signature);
-++
-++  const verify =3D crypto.createVerify('SHA256');
-++  verify.update(input);
-++
-++  assert.strictEqual(verify.verify(publicKey, signature, 'hex'), true);
-++
-++  // Test the legacy signature algorithm name.
-++  const sign2 =3D crypto.createSign('RSA-SHA256');
-++  sign2.update(input);
-++
-++  const output2 =3D sign2.sign(privateKey, 'hex');
-++  assert.strictEqual(output2, signature);
-++
-++  const verify2 =3D crypto.createVerify('SHA256');
-++  verify2.update(input);
-++
-++  assert.strictEqual(verify2.verify(publicKey, signature, 'hex'), true);
-++}
-++
-++
-++//
-++// Test DSA signing and verification
-++//
-++{
-++  const input =3D 'I AM THE WALRUS';
-++
-++  // DSA signatures vary across runs so there is no static string to veri=
-fy
-++  // against.
-++  const sign =3D crypto.createSign('SHA1');
-++  sign.update(input);
-++  const signature =3D sign.sign(dsaKeyPem, 'hex');
-++
-++  const verify =3D crypto.createVerify('SHA1');
-++  verify.update(input);
-++
-++  assert.strictEqual(verify.verify(dsaPubPem, signature, 'hex'), true);
-++
-++  // Test the legacy 'DSS1' name.
-++  const sign2 =3D crypto.createSign('DSS1');
-++  sign2.update(input);
-++  const signature2 =3D sign2.sign(dsaKeyPem, 'hex');
-++
-++  const verify2 =3D crypto.createVerify('DSS1');
-++  verify2.update(input);
-++
-++  assert.strictEqual(verify2.verify(dsaPubPem, signature2, 'hex'), true);
-++}
-++
-++
-++//
-++// Test DSA signing and verification with PKCS#8 private key
-++//
-++{
-++  const input =3D 'I AM THE WALRUS';
-++
-++  // DSA signatures vary across runs so there is no static string to veri=
-fy
-++  // against.
-++  const sign =3D crypto.createSign('SHA1');
-++  sign.update(input);
-++  const signature =3D sign.sign(dsaPkcs8KeyPem, 'hex');
-++
-++  const verify =3D crypto.createVerify('SHA1');
-++  verify.update(input);
-++
-++  assert.strictEqual(verify.verify(dsaPubPem, signature, 'hex'), true);
-++}
-++
-++
-++//
-++// Test DSA signing and verification with encrypted key
-++//
-++const input =3D 'I AM THE WALRUS';
-++
-++{
-++  const sign =3D crypto.createSign('SHA1');
-++  sign.update(input);
-++  assert.throws(() =3D> {
-++    sign.sign({ key: dsaKeyPemEncrypted, passphrase: 'wrong' }, 'hex');
-++  }, decryptPrivateKeyError);
-++}
-++
-++{
-++  // DSA signatures vary across runs so there is no static string to veri=
-fy
-++  // against.
-++  const sign =3D crypto.createSign('SHA1');
-++  sign.update(input);
-++  const signOptions =3D { key: dsaKeyPemEncrypted, passphrase: 'password'=
- };
-++  const signature =3D sign.sign(signOptions, 'hex');
-++
-++  const verify =3D crypto.createVerify('SHA1');
-++  verify.update(input);
-++
-++  assert.strictEqual(verify.verify(dsaPubPem, signature, 'hex'), true);
-++}
-+diff --git a/test/parallel/test-crypto-rsa-dsa.js b/test/parallel/test-cry=
-pto-rsa-dsa.js
-+index 9afcb38..fd27827 100644
-+--- a/test/parallel/test-crypto-rsa-dsa.js
-++++ b/test/parallel/test-crypto-rsa-dsa.js
-+@@ -220,20 +220,36 @@ function test_rsa(padding, encryptOaepHash, decryptO=
-aepHash) {
-+     padding: padding,
-+     oaepHash: encryptOaepHash
-+   }, bufferToEncrypt);
-++  if (padding =3D=3D=3D constants.RSA_PKCS1_PADDING) {
-++    assert.throws(() =3D> {
-++      crypto.privateDecrypt({
-++        key: rsaKeyPem,
-++        padding: padding,
-++        oaepHash: decryptOaepHash
-++      }, encryptedBuffer);
-++    }, { code: 'ERR_INVALID_ARG_VALUE' });
-++    assert.throws(() =3D> {
-++      crypto.privateDecrypt({
-++        key: rsaPkcs8KeyPem,
-++        padding: padding,
-++        oaepHash: decryptOaepHash
-++      }, encryptedBuffer);
-++    }, { code: 'ERR_INVALID_ARG_VALUE' });
-++  } else {
-++    let decryptedBuffer =3D crypto.privateDecrypt({
-++      key: rsaKeyPem,
-++      padding: padding,
-++      oaepHash: decryptOaepHash
-++    }, encryptedBuffer);
-++    assert.deepStrictEqual(decryptedBuffer, input);
++ #define LLHTTP_VERSION_MAJOR 6
++-#define LLHTTP_VERSION_MINOR 0
++-#define LLHTTP_VERSION_PATCH 11
+++#define LLHTTP_VERSION_MINOR 1
+++#define LLHTTP_VERSION_PATCH 0
 +
-+-  let decryptedBuffer =3D crypto.privateDecrypt({
-+-    key: rsaKeyPem,
-+-    padding: padding,
-+-    oaepHash: decryptOaepHash
-+-  }, encryptedBuffer);
-+-  assert.deepStrictEqual(decryptedBuffer, input);
-+-
-+-  decryptedBuffer =3D crypto.privateDecrypt({
-+-    key: rsaPkcs8KeyPem,
-+-    padding: padding,
-+-    oaepHash: decryptOaepHash
-+-  }, encryptedBuffer);
-+-  assert.deepStrictEqual(decryptedBuffer, input);
-++    decryptedBuffer =3D crypto.privateDecrypt({
-++      key: rsaPkcs8KeyPem,
-++      padding: padding,
-++      oaepHash: decryptOaepHash
-++    }, encryptedBuffer);
-++    assert.deepStrictEqual(decryptedBuffer, input);
-++  }
++ #ifndef LLHTTP_STRICT_MODE
++ # define LLHTTP_STRICT_MODE 0
++@@ -348,6 +348,9 @@ struct llhttp_settings_s {
++    */
++   llhttp_cb      on_headers_complete;
++
+++  /* Possible return values 0, -1, HPE_USER */
+++  llhttp_data_cb on_chunk_parameters;
+++
++   /* Possible return values 0, -1, HPE_USER */
++   llhttp_data_cb on_body;
++
++diff --git a/deps/llhttp/src/api.c b/deps/llhttp/src/api.c
++index c4ce197..d3065b3 100644
++--- a/deps/llhttp/src/api.c
+++++ b/deps/llhttp/src/api.c
++@@ -355,6 +355,13 @@ int llhttp__on_chunk_header(llhttp_t* s, const char* =
+p, const char* endp) {
 + }
 +
-+ test_rsa('RSA_NO_PADDING');
++
+++int llhttp__on_chunk_parameters(llhttp_t* s, const char* p, const char* e=
+ndp) {
+++  int err;
+++  SPAN_CALLBACK_MAYBE(s, on_chunk_parameters, p, endp - p);
+++  return err;
+++}
+++
+++
++ int llhttp__on_chunk_complete(llhttp_t* s, const char* p, const char* end=
+p) {
++   int err;
++   CALLBACK_MAYBE(s, on_chunk_complete);
++diff --git a/deps/llhttp/src/llhttp.c b/deps/llhttp/src/llhttp.c
++index 5e7c5d1..5eb19f6 100644
++--- a/deps/llhttp/src/llhttp.c
+++++ b/deps/llhttp/src/llhttp.c
++@@ -340,6 +340,8 @@ enum llparse_state_e {
++   s_n_llhttp__internal__n_invoke_is_equal_content_length,
++   s_n_llhttp__internal__n_chunk_size_almost_done,
++   s_n_llhttp__internal__n_chunk_parameters,
+++  s_n_llhttp__internal__n_span_start_llhttp__on_chunk_parameters,
+++  s_n_llhttp__internal__n_chunk_parameters_ows,
++   s_n_llhttp__internal__n_chunk_size_otherwise,
++   s_n_llhttp__internal__n_chunk_size,
++   s_n_llhttp__internal__n_chunk_size_digit,
++@@ -539,6 +541,10 @@ int llhttp__on_body(
++     llhttp__internal_t* s, const unsigned char* p,
++     const unsigned char* endp);
++
+++int llhttp__on_chunk_parameters(
+++    llhttp__internal_t* s, const unsigned char* p,
+++    const unsigned char* endp);
+++
++ int llhttp__on_status(
++     llhttp__internal_t* s, const unsigned char* p,
++     const unsigned char* endp);
++@@ -1226,8 +1232,7 @@ static llparse_state_t llhttp__internal__run(
++           goto s_n_llhttp__internal__n_chunk_parameters;
++         }
++         case 2: {
++-          p++;
++-          goto s_n_llhttp__internal__n_chunk_size_almost_done;
+++        goto s_n_llhttp__internal__n_span_end_llhttp__on_chunk_parameters=
+;
++         }
++         default: {
++           goto s_n_llhttp__internal__n_error_10;
++@@ -1236,6 +1241,34 @@ static llparse_state_t llhttp__internal__run(
++       /* UNREACHABLE */;
++       abort();
++     }
+++    case s_n_llhttp__internal__n_span_start_llhttp__on_chunk_parameters:
+++    s_n_llhttp__internal__n_span_start_llhttp__on_chunk_parameters: {
+++      if (p =3D=3D endp) {
+++        return s_n_llhttp__internal__n_span_start_llhttp__on_chunk_parame=
+ters;
+++      }
+++      state->_span_pos0 =3D (void*) p;
+++      state->_span_cb0 =3D llhttp__on_chunk_parameters;
+++      goto s_n_llhttp__internal__n_chunk_parameters;
+++      /* UNREACHABLE */;
+++      abort();
+++    }
+++    case s_n_llhttp__internal__n_chunk_parameters_ows:
+++    s_n_llhttp__internal__n_chunk_parameters_ows: {
+++      if (p =3D=3D endp) {
+++        return s_n_llhttp__internal__n_chunk_parameters_ows;
+++      }
+++      switch (*p) {
+++        case ' ': {
+++          p++;
+++          goto s_n_llhttp__internal__n_chunk_parameters_ows;
+++        }
+++        default: {
+++          goto s_n_llhttp__internal__n_span_start_llhttp__on_chunk_parame=
+ters;
+++        }
+++      }
+++      /* UNREACHABLE */;
+++      abort();
+++    }
++     case s_n_llhttp__internal__n_chunk_size_otherwise:
++     s_n_llhttp__internal__n_chunk_size_otherwise: {
++       if (p =3D=3D endp) {
++@@ -1246,13 +1279,9 @@ static llparse_state_t llhttp__internal__run(
++           p++;
++           goto s_n_llhttp__internal__n_chunk_size_almost_done;
++         }
++-        case ' ': {
++-          p++;
++-          goto s_n_llhttp__internal__n_chunk_parameters;
++-        }
++         case ';': {
++           p++;
++-          goto s_n_llhttp__internal__n_chunk_parameters;
+++          goto s_n_llhttp__internal__n_chunk_parameters_ows;
++         }
++         default: {
++           goto s_n_llhttp__internal__n_error_11;
++@@ -6074,6 +6103,24 @@ static llparse_state_t llhttp__internal__run(
++     /* UNREACHABLE */;
++     abort();
++   }
+++  s_n_llhttp__internal__n_span_end_llhttp__on_chunk_parameters: {
+++    const unsigned char* start;
+++    int err;
+++
+++    start =3D state->_span_pos0;
+++    state->_span_pos0 =3D NULL;
+++    err =3D llhttp__on_chunk_parameters(state, start, p);
+++    if (err !=3D 0) {
+++      state->error =3D err;
+++      state->error_pos =3D (const char*) (p + 1);
+++      state->_current =3D (void*) (intptr_t) s_n_llhttp__internal__n_chun=
+k_size_almost_done;
+++      return s_error;
+++    }
+++    p++;
+++    goto s_n_llhttp__internal__n_chunk_size_almost_done;
+++    /* UNREACHABLE */;
+++    abort();
+++  }
++   s_n_llhttp__internal__n_error_10: {
++     state->error =3D 0x2;
++     state->reason =3D "Invalid character in chunk parameters";
++@@ -8441,6 +8488,8 @@ enum llparse_state_e {
++   s_n_llhttp__internal__n_invoke_is_equal_content_length,
++   s_n_llhttp__internal__n_chunk_size_almost_done,
++   s_n_llhttp__internal__n_chunk_parameters,
+++  s_n_llhttp__internal__n_span_start_llhttp__on_chunk_parameters,
+++  s_n_llhttp__internal__n_chunk_parameters_ows,
++   s_n_llhttp__internal__n_chunk_size_otherwise,
++   s_n_llhttp__internal__n_chunk_size,
++   s_n_llhttp__internal__n_chunk_size_digit,
++@@ -8635,6 +8684,10 @@ int llhttp__on_body(
++     llhttp__internal_t* s, const unsigned char* p,
++     const unsigned char* endp);
++
+++int llhttp__on_chunk_parameters(
+++    llhttp__internal_t* s, const unsigned char* p,
+++    const unsigned char* endp);
+++
++ int llhttp__on_status(
++     llhttp__internal_t* s, const unsigned char* p,
++     const unsigned char* endp);
++@@ -9299,8 +9352,7 @@ static llparse_state_t llhttp__internal__run(
++           goto s_n_llhttp__internal__n_chunk_parameters;
++         }
++         case 2: {
++-          p++;
++-          goto s_n_llhttp__internal__n_chunk_size_almost_done;
+++        goto s_n_llhttp__internal__n_span_end_llhttp__on_chunk_parameters=
+;
++         }
++         default: {
++           goto s_n_llhttp__internal__n_error_6;
++@@ -9309,6 +9361,34 @@ static llparse_state_t llhttp__internal__run(
++       /* UNREACHABLE */;
++       abort();
++     }
+++    case s_n_llhttp__internal__n_span_start_llhttp__on_chunk_parameters:
+++    s_n_llhttp__internal__n_span_start_llhttp__on_chunk_parameters: {
+++      if (p =3D=3D endp) {
+++        return s_n_llhttp__internal__n_span_start_llhttp__on_chunk_parame=
+ters;
+++      }
+++      state->_span_pos0 =3D (void*) p;
+++      state->_span_cb0 =3D llhttp__on_chunk_parameters;
+++      goto s_n_llhttp__internal__n_chunk_parameters;
+++      /* UNREACHABLE */;
+++      abort();
+++    }
+++    case s_n_llhttp__internal__n_chunk_parameters_ows:
+++    s_n_llhttp__internal__n_chunk_parameters_ows: {
+++      if (p =3D=3D endp) {
+++        return s_n_llhttp__internal__n_chunk_parameters_ows;
+++      }
+++      switch (*p) {
+++        case ' ': {
+++          p++;
+++          goto s_n_llhttp__internal__n_chunk_parameters_ows;
+++        }
+++        default: {
+++          goto s_n_llhttp__internal__n_span_start_llhttp__on_chunk_parame=
+ters;
+++        }
+++      }
+++      /* UNREACHABLE */;
+++      abort();
+++    }
++     case s_n_llhttp__internal__n_chunk_size_otherwise:
++     s_n_llhttp__internal__n_chunk_size_otherwise: {
++       if (p =3D=3D endp) {
++@@ -9319,13 +9399,9 @@ static llparse_state_t llhttp__internal__run(
++           p++;
++           goto s_n_llhttp__internal__n_chunk_size_almost_done;
++         }
++-        case ' ': {
++-          p++;
++-          goto s_n_llhttp__internal__n_chunk_parameters;
++-        }
++         case ';': {
++           p++;
++-          goto s_n_llhttp__internal__n_chunk_parameters;
+++          goto s_n_llhttp__internal__n_chunk_parameters_ows;
++         }
++         default: {
++           goto s_n_llhttp__internal__n_error_7;
++@@ -13951,6 +14027,24 @@ static llparse_state_t llhttp__internal__run(
++     /* UNREACHABLE */;
++     abort();
++   }
+++  s_n_llhttp__internal__n_span_end_llhttp__on_chunk_parameters: {
+++    const unsigned char* start;
+++    int err;
+++
+++    start =3D state->_span_pos0;
+++    state->_span_pos0 =3D NULL;
+++    err =3D llhttp__on_chunk_parameters(state, start, p);
+++    if (err !=3D 0) {
+++      state->error =3D err;
+++      state->error_pos =3D (const char*) (p + 1);
+++      state->_current =3D (void*) (intptr_t) s_n_llhttp__internal__n_chun=
+k_size_almost_done;
+++      return s_error;
+++    }
+++    p++;
+++    goto s_n_llhttp__internal__n_chunk_size_almost_done;
+++    /* UNREACHABLE */;
+++    abort();
+++  }
++   s_n_llhttp__internal__n_error_6: {
++     state->error =3D 0x2;
++     state->reason =3D "Invalid character in chunk parameters";
++diff --git a/doc/api/errors.md b/doc/api/errors.md
++index dcf8744..a76bfe5 100644
++--- a/doc/api/errors.md
+++++ b/doc/api/errors.md
++@@ -3043,6 +3043,18 @@ malconfigured clients, if more than 8 KiB of HTTP h=
+eader data is received then
++ HTTP parsing will abort without a request or response object being create=
+d, and
++ an `Error` with this code will be emitted.
++
+++<a id=3D"HPE_CHUNK_EXTENSIONS_OVERFLOW"></a>
+++
+++### `HPE_CHUNK_EXTENSIONS_OVERFLOW`
+++
+++<!-- YAML
+++added: REPLACEME
+++-->
+++
+++Too much data was received for a chunk extensions. In order to protect ag=
+ainst
+++malicious or malconfigured clients, if more than 16 KiB of data is receiv=
+ed
+++then an `Error` with this code will be emitted.
+++
++ <a id=3D"HPE_UNEXPECTED_CONTENT_LENGTH"></a>
++
++ ### `HPE_UNEXPECTED_CONTENT_LENGTH`
++diff --git a/lib/_http_server.js b/lib/_http_server.js
++index 4e23266..263bb52 100644
++--- a/lib/_http_server.js
+++++ b/lib/_http_server.js
++@@ -706,6 +706,11 @@ const requestHeaderFieldsTooLargeResponse =3D Buffer.=
+from(
++   `HTTP/1.1 431 ${STATUS_CODES[431]}\r\n` +
++   'Connection: close\r\n\r\n', 'ascii'
++ );
+++const requestChunkExtensionsTooLargeResponse =3D Buffer.from(
+++  `HTTP/1.1 413 ${STATUS_CODES[413]}\r\n` +
+++  'Connection: close\r\n\r\n', 'ascii',
+++);
+++
++ function socketOnError(e) {
++   // Ignore further errors
++   this.removeListener('error', socketOnError);
++@@ -719,6 +724,9 @@ function socketOnError(e) {
++         case 'HPE_HEADER_OVERFLOW':
++           response =3D requestHeaderFieldsTooLargeResponse;
++           break;
+++      case 'HPE_CHUNK_EXTENSIONS_OVERFLOW':
+++          response =3D requestChunkExtensionsTooLargeResponse;
+++          break;
++         case 'ERR_HTTP_REQUEST_TIMEOUT':
++           response =3D requestTimeoutResponse;
++           break;
++diff --git a/src/node_http_parser.cc b/src/node_http_parser.cc
++index 74f3248..b92e848 100644
++--- a/src/node_http_parser.cc
+++++ b/src/node_http_parser.cc
++@@ -79,6 +79,8 @@ const uint32_t kOnExecute =3D 5;
++ const uint32_t kOnTimeout =3D 6;
++ // Any more fields than this will be flushed into JS
++ const size_t kMaxHeaderFieldsCount =3D 32;
+++// Maximum size of chunk extensions
+++const size_t kMaxChunkExtensionsSize =3D 16384;
++
++ const uint32_t kLenientNone =3D 0;
++ const uint32_t kLenientHeaders =3D 1 << 0;
++@@ -206,6 +208,7 @@ class Parser : public AsyncWrap, public StreamListener=
+ {
++
++   int on_message_begin() {
++     num_fields_ =3D num_values_ =3D 0;
+++    chunk_extensions_nread_ =3D 0;
++     url_.Reset();
++     status_message_.Reset();
++     header_parsing_start_time_ =3D uv_hrtime();
++@@ -443,9 +446,22 @@ class Parser : public AsyncWrap, public StreamListene=
+r {
++     return 0;
++   }
++
++-  // Reset nread for the next chunk
+++  int on_chunk_extension(const char* at, size_t length) {
+++    chunk_extensions_nread_ +=3D length;
+++
+++    if (chunk_extensions_nread_ > kMaxChunkExtensionsSize) {
+++      llhttp_set_error_reason(&parser_,
+++        "HPE_CHUNK_EXTENSIONS_OVERFLOW:Chunk extensions overflow");
+++      return HPE_USER;
+++    }
+++
+++    return 0;
+++  }
+++
+++  // Reset nread for the next chunk and also reset the extensions counter
++   int on_chunk_header() {
++     header_nread_ =3D 0;
+++    chunk_extensions_nread_ =3D 0;
++     return 0;
++   }
++
++@@ -887,6 +903,7 @@ class Parser : public AsyncWrap, public StreamListener=
+ {
++   const char* current_buffer_data_;
++   bool pending_pause_ =3D false;
++   uint64_t header_nread_ =3D 0;
+++  uint64_t chunk_extensions_nread_ =3D 0;
++   uint64_t max_http_header_size_;
++   uint64_t headers_timeout_;
++   uint64_t header_parsing_start_time_ =3D 0;
++@@ -921,6 +938,7 @@ const llhttp_settings_t Parser::settings =3D {
++   Proxy<DataCall, &Parser::on_header_field>::Raw,
++   Proxy<DataCall, &Parser::on_header_value>::Raw,
++   Proxy<Call, &Parser::on_headers_complete>::Raw,
+++  Proxy<DataCall, &Parser::on_chunk_extension>::Raw,
++   Proxy<DataCall, &Parser::on_body>::Raw,
++   Proxy<Call, &Parser::on_message_complete>::Raw,
++   Proxy<Call, &Parser::on_chunk_header>::Raw,
++diff --git a/test/parallel/test-http-chunk-extensions-limit.js b/test/para=
+llel/test-http-chunk-extensions-limit.js
++new file mode 100644
++index 0000000..6868b3d
++--- /dev/null
+++++ b/test/parallel/test-http-chunk-extensions-limit.js
++@@ -0,0 +1,131 @@
+++'use strict';
+++
+++const common =3D require('../common');
+++const http =3D require('http');
+++const net =3D require('net');
+++const assert =3D require('assert');
+++
+++// Verify that chunk extensions are limited in size when sent all togethe=
+r.
+++{
+++  const server =3D http.createServer((req, res) =3D> {
+++    req.on('end', () =3D> {
+++      res.writeHead(200, { 'Content-Type': 'text/plain' });
+++      res.end('bye');
+++    });
+++
+++    req.resume();
+++  });
+++
+++  server.listen(0, () =3D> {
+++    const sock =3D net.connect(server.address().port);
+++    let data =3D '';
+++
+++    sock.on('data', (chunk) =3D> data +=3D chunk.toString('utf-8'));
+++
+++    sock.on('end', common.mustCall(function() {
+++      assert.strictEqual(data, 'HTTP/1.1 413 Payload Too Large\r\nConnect=
+ion: close\r\n\r\n');
+++      server.close();
+++    }));
+++
+++    sock.end('' +
+++      'GET / HTTP/1.1\r\n' +
+++      'Host: localhost:8080\r\n' +
+++      'Transfer-Encoding: chunked\r\n\r\n' +
+++      '2;' + 'A'.repeat(20000) + '=3Dbar\r\nAA\r\n' +
+++      '0\r\n\r\n'
+++    );
+++  });
+++}
+++
+++// Verify that chunk extensions are limited in size when sent in interval=
+s.
+++{
+++  const server =3D http.createServer((req, res) =3D> {
+++    req.on('end', () =3D> {
+++      res.writeHead(200, { 'Content-Type': 'text/plain' });
+++      res.end('bye');
+++    });
+++
+++    req.resume();
+++  });
+++
+++  server.listen(0, () =3D> {
+++    const sock =3D net.connect(server.address().port);
+++    let remaining =3D 20000;
+++    let data =3D '';
+++
+++    const interval =3D setInterval(
+++      () =3D> {
+++        if (remaining > 0) {
+++          sock.write('A'.repeat(1000));
+++        } else {
+++          sock.write('=3Dbar\r\nAA\r\n0\r\n\r\n');
+++          clearInterval(interval);
+++        }
+++
+++        remaining -=3D 1000;
+++      },
+++      common.platformTimeout(20),
+++    ).unref();
+++
+++    sock.on('data', (chunk) =3D> data +=3D chunk.toString('utf-8'));
+++
+++    sock.on('end', common.mustCall(function() {
+++      assert.strictEqual(data, 'HTTP/1.1 413 Payload Too Large\r\nConnect=
+ion: close\r\n\r\n');
+++      server.close();
+++    }));
+++
+++    sock.write('' +
+++    'GET / HTTP/1.1\r\n' +
+++    'Host: localhost:8080\r\n' +
+++    'Transfer-Encoding: chunked\r\n\r\n' +
+++    '2;'
+++    );
+++  });
+++}
+++
+++// Verify the chunk extensions is correctly reset after a chunk
+++{
+++  const server =3D http.createServer((req, res) =3D> {
+++    req.on('end', () =3D> {
+++      res.writeHead(200, { 'content-type': 'text/plain', 'connection': 'c=
+lose', 'date': 'now' });
+++      res.end('bye');
+++    });
+++
+++    req.resume();
+++  });
+++
+++  server.listen(0, () =3D> {
+++    const sock =3D net.connect(server.address().port);
+++    let data =3D '';
+++
+++    sock.on('data', (chunk) =3D> data +=3D chunk.toString('utf-8'));
+++
+++    sock.on('end', common.mustCall(function() {
+++      assert.strictEqual(
+++        data,
+++        'HTTP/1.1 200 OK\r\n' +
+++        'content-type: text/plain\r\n' +
+++        'connection: close\r\n' +
+++        'date: now\r\n' +
+++        'Transfer-Encoding: chunked\r\n' +
+++        '\r\n' +
+++        '3\r\n' +
+++        'bye\r\n' +
+++        '0\r\n' +
+++        '\r\n',
+++      );
+++
+++      server.close();
+++    }));
+++
+++    sock.end('' +
+++      'GET / HTTP/1.1\r\n' +
+++      'Host: localhost:8080\r\n' +
+++      'Transfer-Encoding: chunked\r\n\r\n' +
+++      '2;' + 'A'.repeat(10000) + '=3Dbar\r\nAA\r\n' +
+++      '2;' + 'A'.repeat(10000) + '=3Dbar\r\nAA\r\n' +
+++      '2;' + 'A'.repeat(10000) + '=3Dbar\r\nAA\r\n' +
+++      '0\r\n\r\n'
+++    );
+++  });
+++}
++diff --git a/tools/update-llhttp.sh b/tools/update-llhttp.sh
++index 12e2f46..a95eef1 100755
++--- a/tools/update-llhttp.sh
+++++ b/tools/update-llhttp.sh
++@@ -59,5 +59,5 @@ echo ""
++ echo "Please git add llhttp, commit the new version:"
++ echo ""
++ echo "$ git add -A deps/llhttp"
++-echo "$ git commit -m \"deps: update nghttp2 to $LLHTTP_VERSION\""
+++echo "$ git commit -m \"deps: update llhttp to $LLHTTP_VERSION\""
++ echo ""
 +--
 +2.40.0
 diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_16.20.2.bb b/meta-oe/re=
 cipes-devtools/nodejs/nodejs_16.20.2.bb
-index b4261eaf8..c03461df4 100644
+index 16593a0fe..b786c0273 100644
 --- a/meta-oe/recipes-devtools/nodejs/nodejs_16.20.2.bb
 +++ b/meta-oe/recipes-devtools/nodejs/nodejs_16.20.2.bb
-@@ -29,6 +29,7 @@ SRC_URI =3D "http://nodejs.org/dist/v${PV}/node-v${PV}.ta=
+@@ -27,6 +27,7 @@ SRC_URI =3D "http://nodejs.org/dist/v${PV}/node-v${PV}.ta=
 r.xz \
+            file://0001-mips-Use-32bit-cast-for-operand-on-mips32.patch \
+            file://0001-Nodejs-Fixed-pipes-DeprecationWarning.patch \
             file://CVE-2022-25883.patch \
-            file://CVE-2024-22019.patch \
-            file://CVE-2024-22025.patch \
-+           file://CVE-2023-46809.patch \
++           file://CVE-2024-22019.patch \
             "
  SRC_URI:append:class-target =3D " \
             file://0001-Using-native-binaries.patch \
@@ -848,7 +766,7 @@ r.xz \
 2.40.0
 
 
---_000_MW4PR11MB5822BBAF493E7DFFC71B449A843B2MW4PR11MB5822namp_
+--_000_MW4PR11MB58220DFA642C684908FF9DAB843B2MW4PR11MB5822namp_
 Content-Type: text/html; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
@@ -863,20 +781,7 @@ ttom:0;} </style>
 <div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
 nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
 olor: rgb(0, 0, 0);">
-Is there any issue with this patch?</div>
-<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
-nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
-olor: rgb(0, 0, 0);">
-<br>
-</div>
-<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
-nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
-olor: rgb(0, 0, 0);">
-Regards,</div>
-<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
-nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
-olor: rgb(0, 0, 0);">
-Archana</div>
+Reminder!</div>
 <div id=3D"appendonsend"></div>
 <hr style=3D"display:inline-block;width:98%" tabindex=3D"-1">
 <div id=3D"divRplyFwdMsg" dir=3D"ltr"><font face=3D"Calibri, sans-serif" st=
@@ -884,11 +789,11 @@ yle=3D"font-size:11pt" color=3D"#000000"><b>From:</b> openembedded-devel@li=
 sts.openembedded.org &lt;openembedded-devel@lists.openembedded.org&gt; on b=
 ehalf of Polampalli, Archana via lists.openembedded.org
  &lt;archana.polampalli=3Dwindriver.com@lists.openembedded.org&gt;<br>
-<b>Sent:</b> Tuesday, February 27, 2024 17:07<br>
+<b>Sent:</b> Tuesday, February 27, 2024 07:47<br>
 <b>To:</b> openembedded-devel@lists.openembedded.org &lt;openembedded-devel=
 @lists.openembedded.org&gt;<br>
-<b>Subject:</b> [oe][meta-oe][kirkstone][PATCH V2 2/2] nodejs: fix CVE-2023=
--46809</font>
+<b>Subject:</b> [oe][meta-oe][kirkstone][PATCH V2 1/1] nodejs: fix CVE-2024=
+-22019</font>
 <div>&nbsp;</div>
 </div>
 <div class=3D"BodyFragment"><font size=3D"2"><span style=3D"font-size:11pt;=
@@ -899,759 +804,714 @@ ndriver.com&gt;<br>
 Signed-off-by: Archana Polampalli &lt;archana.polampalli@windriver.com&gt;<=
 br>
 ---<br>
-&nbsp;.../nodejs/nodejs/CVE-2023-46809.patch&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp; | 625 ++++++++++++++++++<br>
+&nbsp;.../nodejs/nodejs/CVE-2024-22019.patch&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp; | 556 ++++++++++++++++++<br>
 &nbsp;.../recipes-devtools/nodejs/nodejs_16.20.2.bb |&nbsp;&nbsp; 1 +<br>
-&nbsp;2 files changed, 626 insertions(+)<br>
-&nbsp;create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/CVE-2023-46=
-809.patch<br>
+&nbsp;2 files changed, 557 insertions(+)<br>
+&nbsp;create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/CVE-2024-22=
+019.patch<br>
 <br>
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2023-46809.patch b/=
-meta-oe/recipes-devtools/nodejs/nodejs/CVE-2023-46809.patch<br>
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2024-22019.patch b/=
+meta-oe/recipes-devtools/nodejs/nodejs/CVE-2024-22019.patch<br>
 new file mode 100644<br>
-index 000000000..991d39fcf<br>
+index 000000000..ca1c7981c<br>
 --- /dev/null<br>
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2023-46809.patch<br>
-@@ -0,0 +1,625 @@<br>
-+From d3d357ab096884f10f5d2f164149727eea875635 Mon Sep 17 00:00:00 2001<br>
-+From: Michael Dawson &lt;midawson@redhat.com&gt;<br>
-+Date: Thu, 4 Jan 2024 21:32:51 +0000<br>
-+Subject: [PATCH] crypto: disable PKCS#1 padding for privateDecrypt<br>
++++ b/meta-oe/recipes-devtools/nodejs/nodejs/CVE-2024-22019.patch<br>
+@@ -0,0 +1,556 @@<br>
++From 911cb33cdadab57a75f97186290ea8f3903a6171 Mon Sep 17 00:00:00 2001<br>
++From: Paolo Insogna &lt;paolo@cowtech.it&gt;<br>
++Date: Tue, 9 Jan 2024 18:10:04 +0100<br>
++Subject: [PATCH] http: add maximum chunk extension size<br>
 +<br>
-+Refs: <a href=3D"https://hackerone.com/bugs?subject=3Dnodejs&amp;report_id=
-=3D2269177">https://hackerone.com/bugs?subject=3Dnodejs&amp;report_id=3D226=
-9177</a><br>
++PR-URL: <a href=3D"https://github.com/nodejs-private/node-private/pull/520=
+">https://github.com/nodejs-private/node-private/pull/520</a><br>
++Refs: <a href=3D"https://github.com/nodejs-private/node-private/pull/518">=
+https://github.com/nodejs-private/node-private/pull/518</a><br>
 +<br>
-+Disable RSA_PKCS1_PADDING for crypto.privateDecrypt() in order<br>
-+to protect against the Marvin attack.<br>
-+<br>
-+Includes a security revert flag that can be used to restore<br>
-+support.<br>
-+<br>
-+Signed-off-by: Michael Dawson &lt;midawson@redhat.com&gt;<br>
-+PR-URL: <a href=3D"https://github.com/nodejs-private/node-private/pull/525=
-">https://github.com/nodejs-private/node-private/pull/525</a><br>
-+Reviewed-By: Rafael Gonzaga &lt;rafael.nunu@hotmail.com&gt;<br>
-+Reviewed-By: Matteo Collina &lt;matteo.collina@gmail.com&gt;<br>
-+<br>
-+CVE-ID: CVE-2023-46809<br>
++CVE-ID: CVE-2024-22019<br>
 +<br>
 +Upstream-Status: Backport [<a href=3D"https://github.com/nodejs/node/commi=
-t/d3d357ab096884f1">https://github.com/nodejs/node/commit/d3d357ab096884f1<=
+t/911cb33cdadab57a">https://github.com/nodejs/node/commit/911cb33cdadab57a<=
 /a>]<br>
++<br>
 +Signed-off-by: Archana Polampalli &lt;archana.polampalli@windriver.com&gt;=
 <br>
 +---<br>
-+ src/crypto/crypto_cipher.cc&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp; 28 ++<br>
-+ src/node_revert.h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
++ deps/llhttp/CMakeLists.txt&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;=
+&nbsp; 2 +-<br>
++ deps/llhttp/include/llhttp.h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp; 7 +=
+-<br>
++ deps/llhttp/src/api.c&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp; |&nbsp;&nbsp; 7 +<br>
++ deps/llhttp/src/llhttp.c&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p; | 122 ++++++++++++++--<br>
++ doc/api/errors.md&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
 bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp; 1 +<br>
-+ test/parallel/test-crypto-rsa-dsa-revert.js | 475 ++++++++++++++++++++<br=
->
-+ test/parallel/test-crypto-rsa-dsa.js&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp; |&nbsp; 42 +-<br>
-+ 4 files changed, 533 insertions(+), 13 deletions(-)<br>
-+ create mode 100644 test/parallel/test-crypto-rsa-dsa-revert.js<br>
-+<br>
-+diff --git a/src/crypto/crypto_cipher.cc b/src/crypto/crypto_cipher.cc<br>
-+index 10579ce..0311c68 100644<br>
-+--- a/src/crypto/crypto_cipher.cc<br>
-++++ b/src/crypto/crypto_cipher.cc<br>
-+@@ -6,6 +6,7 @@<br>
-+ #include &quot;node_buffer.h&quot;<br>
-+ #include &quot;node_internals.h&quot;<br>
-+ #include &quot;node_process-inl.h&quot;<br>
-++#include &quot;node_revert.h&quot;<br>
-+ #include &quot;v8.h&quot;<br>
-+<br>
-+ namespace node {<br>
-+@@ -1061,6 +1062,33 @@ void PublicKeyCipher::Cipher(const FunctionCallback=
-Info&lt;Value&gt;&amp; args) {<br>
-+&nbsp;&nbsp; uint32_t padding;<br>
-+&nbsp;&nbsp; if (!args[offset + 1]-&gt;Uint32Value(env-&gt;context()).To(&=
-amp;padding)) return;<br>
-+<br>
-++&nbsp; if (EVP_PKEY_cipher =3D=3D EVP_PKEY_decrypt &amp;&amp;<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; operation =3D=3D PublicKeyCipher::kPrivate=
- &amp;&amp; padding =3D=3D RSA_PKCS1_PADDING &amp;&amp;<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; !IsReverted(SECURITY_REVERT_CVE_2023_46809=
-)) {<br>
-++&nbsp;&nbsp;&nbsp; EVPKeyCtxPointer ctx(EVP_PKEY_CTX_new(pkey.get(), null=
-ptr));<br>
-++&nbsp;&nbsp;&nbsp; CHECK(ctx);<br>
-++<br>
-++&nbsp;&nbsp;&nbsp; if (EVP_PKEY_decrypt_init(ctx.get()) &lt;=3D 0) {<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return ThrowCryptoError(env, ERR_get_error=
-());<br>
-++&nbsp;&nbsp;&nbsp; }<br>
-++<br>
-++&nbsp;&nbsp;&nbsp; int rsa_pkcs1_implicit_rejection =3D<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; EVP_PKEY_CTX_ctrl_str(ctx.get(=
-), &quot;rsa_pkcs1_implicit_rejection&quot;, &quot;1&quot;);<br>
-++&nbsp;&nbsp;&nbsp; // From the doc -2 means that the option is not suppor=
-ted.<br>
-++&nbsp;&nbsp;&nbsp; // The default for the option is enabled and if it has=
- been<br>
-++&nbsp;&nbsp;&nbsp; // specifically disabled we want to respect that so we=
- will<br>
-++&nbsp;&nbsp;&nbsp; // not throw an error if the option is supported regar=
-dless<br>
-++&nbsp;&nbsp;&nbsp; // of how it is set. The call to set the value<br>
-++&nbsp;&nbsp;&nbsp; // will not affect what is used since a different cont=
-ext is<br>
-++&nbsp;&nbsp;&nbsp; // used in the call if the option is supported<br>
-++&nbsp;&nbsp;&nbsp; if (rsa_pkcs1_implicit_rejection &lt;=3D 0) {<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return THROW_ERR_INVALID_ARG_VALUE(<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; env,<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;RSA_PKCS1_PA=
-DDING is no longer supported for private decryption,&quot;<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot; this can be=
- reverted with --security-revert=3DCVE-2023-46809&quot;);<br>
-++&nbsp;&nbsp;&nbsp; }<br>
-++&nbsp; }<br>
-++<br>
-+&nbsp;&nbsp; const EVP_MD* digest =3D nullptr;<br>
-+&nbsp;&nbsp; if (args[offset + 2]-&gt;IsString()) {<br>
-+&nbsp;&nbsp;&nbsp;&nbsp; const Utf8Value oaep_str(env-&gt;isolate(), args[=
-offset + 2]);<br>
-+diff --git a/src/node_revert.h b/src/node_revert.h<br>
-+index 83dcb62..bc2a288 100644<br>
-+--- a/src/node_revert.h<br>
-++++ b/src/node_revert.h<br>
-+@@ -18,6 +18,7 @@ namespace node {<br>
-+ #define SECURITY_REVERSIONS(XX)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp; 12 ++<br>
++ lib/_http_server.js&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;&nbsp; 8 ++<br>
++ src/node_http_parser.cc&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp; |&nbsp; 20 ++-<br>
++ .../test-http-chunk-extensions-limit.js&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p; | 131 ++++++++++++++++++<br>
++ tools/update-llhttp.sh&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
 sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \<br>
-+&nbsp;&nbsp; XX(CVE_2021_44531, &quot;CVE-2021-44531&quot;, &quot;Cert Ver=
-if Bypass via URI SAN&quot;)&nbsp;&nbsp;&nbsp; \<br>
-+&nbsp;&nbsp; XX(CVE_2021_44532, &quot;CVE-2021-44532&quot;, &quot;Cert Ver=
-if Bypass via Str Inject&quot;) \<br>
-++&nbsp; XX(CVE_2023_46809, &quot;CVE-2023-46809&quot;, &quot;Marvin attack=
- on PKCS#1 padding&quot;) \<br>
-+ //&nbsp; XX(CVE_2016_PEND, &quot;CVE-2016-PEND&quot;, &quot;Vulnerability=
- Title&quot;)<br>
+&nbsp;&nbsp; |&nbsp;&nbsp; 2 +-<br>
++ 9 files changed, 292 insertions(+), 19 deletions(-)<br>
++ create mode 100644 test/parallel/test-http-chunk-extensions-limit.js<br>
 +<br>
-+ enum reversion {<br>
-+diff --git a/test/parallel/test-crypto-rsa-dsa-revert.js b/test/parallel/t=
-est-crypto-rsa-dsa-revert.js<br>
-+new file mode 100644<br>
-+index 0000000..84ec8f6<br>
-+--- /dev/null<br>
-++++ b/test/parallel/test-crypto-rsa-dsa-revert.js<br>
-+@@ -0,0 +1,475 @@<br>
-++'use strict';<br>
-++// Flags: --security-revert=3DCVE-2023-46809<br>
-++const common =3D require('../common');<br>
-++if (!common.hasCrypto)<br>
-++&nbsp; common.skip('missing crypto');<br>
-++<br>
-++const assert =3D require('assert');<br>
-++const crypto =3D require('crypto');<br>
-++<br>
-++const constants =3D crypto.constants;<br>
-++<br>
-++const fixtures =3D require('../common/fixtures');<br>
-++<br>
-++// Test certificates<br>
-++const certPem =3D fixtures.readKey('rsa_cert.crt');<br>
-++const keyPem =3D fixtures.readKey('rsa_private.pem');<br>
-++const rsaKeySize =3D 2048;<br>
-++const rsaPubPem =3D fixtures.readKey('rsa_public.pem', 'ascii');<br>
-++const rsaKeyPem =3D fixtures.readKey('rsa_private.pem', 'ascii');<br>
-++const rsaKeyPemEncrypted =3D fixtures.readKey('rsa_private_encrypted.pem'=
-,<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'ascii');<br>
-++const dsaPubPem =3D fixtures.readKey('dsa_public.pem', 'ascii');<br>
-++const dsaKeyPem =3D fixtures.readKey('dsa_private.pem', 'ascii');<br>
-++const dsaKeyPemEncrypted =3D fixtures.readKey('dsa_private_encrypted.pem'=
-,<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'ascii');<br>
-++const rsaPkcs8KeyPem =3D fixtures.readKey('rsa_private_pkcs8.pem');<br>
-++const dsaPkcs8KeyPem =3D fixtures.readKey('dsa_private_pkcs8.pem');<br>
-++<br>
-++const ec =3D new TextEncoder();<br>
-++<br>
-++const openssl1DecryptError =3D {<br>
-++&nbsp; message: 'error:06065064:digital envelope routines:EVP_DecryptFina=
-l_ex:' +<br>
-++&nbsp;&nbsp;&nbsp; 'bad decrypt',<br>
-++&nbsp; code: 'ERR_OSSL_EVP_BAD_DECRYPT',<br>
-++&nbsp; reason: 'bad decrypt',<br>
-++&nbsp; function: 'EVP_DecryptFinal_ex',<br>
-++&nbsp; library: 'digital envelope routines',<br>
-++};<br>
-++<br>
-++const decryptError =3D common.hasOpenSSL3 ?<br>
-++&nbsp; { message: 'error:1C800064:Provider routines::bad decrypt' } :<br>
-++&nbsp; openssl1DecryptError;<br>
-++<br>
-++const decryptPrivateKeyError =3D common.hasOpenSSL3 ? {<br>
-++&nbsp; message: 'error:1C800064:Provider routines::bad decrypt',<br>
-++} : openssl1DecryptError;<br>
-++<br>
-++function getBufferCopy(buf) {<br>
-++&nbsp; return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteL=
-ength);<br>
-++}<br>
-++<br>
-++// Test RSA encryption/decryption<br>
-++{<br>
-++&nbsp; const input =3D 'I AM THE WALRUS';<br>
-++&nbsp; const bufferToEncrypt =3D Buffer.from(input);<br>
-++&nbsp; const bufferPassword =3D Buffer.from('password');<br>
-++<br>
-++&nbsp; let encryptedBuffer =3D crypto.publicEncrypt(rsaPubPem, bufferToEn=
-crypt);<br>
-++<br>
-++&nbsp; // Test other input types<br>
-++&nbsp; let otherEncrypted;<br>
-++&nbsp; {<br>
-++&nbsp;&nbsp;&nbsp; const ab =3D getBufferCopy(ec.encode(rsaPubPem));<br>
-++&nbsp;&nbsp;&nbsp; const ab2enc =3D getBufferCopy(bufferToEncrypt);<br>
-++<br>
-++&nbsp;&nbsp;&nbsp; crypto.publicEncrypt(ab, ab2enc);<br>
-++&nbsp;&nbsp;&nbsp; crypto.publicEncrypt(new Uint8Array(ab), new Uint8Arra=
-y(ab2enc));<br>
-++&nbsp;&nbsp;&nbsp; crypto.publicEncrypt(new DataView(ab), new DataView(ab=
-2enc));<br>
-++&nbsp;&nbsp;&nbsp; otherEncrypted =3D crypto.publicEncrypt({<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key: Buffer.from(ab).toString('hex'),<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; encoding: 'hex'<br>
-++&nbsp;&nbsp;&nbsp; }, Buffer.from(ab2enc).toString('hex'));<br>
-++&nbsp; }<br>
-++<br>
-++&nbsp; let decryptedBuffer =3D crypto.privateDecrypt(rsaKeyPem, encrypted=
-Buffer);<br>
-++&nbsp; const otherDecrypted =3D crypto.privateDecrypt(rsaKeyPem, otherEnc=
-rypted);<br>
-++&nbsp; assert.strictEqual(decryptedBuffer.toString(), input);<br>
-++&nbsp; assert.strictEqual(otherDecrypted.toString(), input);<br>
-++<br>
-++&nbsp; decryptedBuffer =3D crypto.privateDecrypt(rsaPkcs8KeyPem, encrypte=
-dBuffer);<br>
-++&nbsp; assert.strictEqual(decryptedBuffer.toString(), input);<br>
-++<br>
-++&nbsp; let decryptedBufferWithPassword =3D crypto.privateDecrypt({<br>
-++&nbsp;&nbsp;&nbsp; key: rsaKeyPemEncrypted,<br>
-++&nbsp;&nbsp;&nbsp; passphrase: 'password'<br>
-++&nbsp; }, encryptedBuffer);<br>
-++<br>
-++&nbsp; const otherDecryptedBufferWithPassword =3D crypto.privateDecrypt({=
-<br>
-++&nbsp;&nbsp;&nbsp; key: rsaKeyPemEncrypted,<br>
-++&nbsp;&nbsp;&nbsp; passphrase: ec.encode('password')<br>
-++&nbsp; }, encryptedBuffer);<br>
-++<br>
-++&nbsp; assert.strictEqual(<br>
-++&nbsp;&nbsp;&nbsp; otherDecryptedBufferWithPassword.toString(),<br>
-++&nbsp;&nbsp;&nbsp; decryptedBufferWithPassword.toString());<br>
-++<br>
-++&nbsp; decryptedBufferWithPassword =3D crypto.privateDecrypt({<br>
-++&nbsp;&nbsp;&nbsp; key: rsaKeyPemEncrypted,<br>
-++&nbsp;&nbsp;&nbsp; passphrase: 'password'<br>
-++&nbsp; }, encryptedBuffer);<br>
-++<br>
-++&nbsp; assert.strictEqual(decryptedBufferWithPassword.toString(), input);=
-<br>
-++<br>
-++&nbsp; encryptedBuffer =3D crypto.publicEncrypt({<br>
-++&nbsp;&nbsp;&nbsp; key: rsaKeyPemEncrypted,<br>
-++&nbsp;&nbsp;&nbsp; passphrase: 'password'<br>
-++&nbsp; }, bufferToEncrypt);<br>
-++<br>
-++&nbsp; decryptedBufferWithPassword =3D crypto.privateDecrypt({<br>
-++&nbsp;&nbsp;&nbsp; key: rsaKeyPemEncrypted,<br>
-++&nbsp;&nbsp;&nbsp; passphrase: 'password'<br>
-++&nbsp; }, encryptedBuffer);<br>
-++&nbsp; assert.strictEqual(decryptedBufferWithPassword.toString(), input);=
-<br>
-++<br>
-++&nbsp; encryptedBuffer =3D crypto.privateEncrypt({<br>
-++&nbsp;&nbsp;&nbsp; key: rsaKeyPemEncrypted,<br>
-++&nbsp;&nbsp;&nbsp; passphrase: bufferPassword<br>
-++&nbsp; }, bufferToEncrypt);<br>
-++<br>
-++&nbsp; decryptedBufferWithPassword =3D crypto.publicDecrypt({<br>
-++&nbsp;&nbsp;&nbsp; key: rsaKeyPemEncrypted,<br>
-++&nbsp;&nbsp;&nbsp; passphrase: bufferPassword<br>
-++&nbsp; }, encryptedBuffer);<br>
-++&nbsp; assert.strictEqual(decryptedBufferWithPassword.toString(), input);=
-<br>
-++<br>
-++&nbsp; // Now with explicit RSA_PKCS1_PADDING.<br>
-++&nbsp; encryptedBuffer =3D crypto.privateEncrypt({<br>
-++&nbsp;&nbsp;&nbsp; padding: crypto.constants.RSA_PKCS1_PADDING,<br>
-++&nbsp;&nbsp;&nbsp; key: rsaKeyPemEncrypted,<br>
-++&nbsp;&nbsp;&nbsp; passphrase: bufferPassword<br>
-++&nbsp; }, bufferToEncrypt);<br>
-++<br>
-++&nbsp; decryptedBufferWithPassword =3D crypto.publicDecrypt({<br>
-++&nbsp;&nbsp;&nbsp; padding: crypto.constants.RSA_PKCS1_PADDING,<br>
-++&nbsp;&nbsp;&nbsp; key: rsaKeyPemEncrypted,<br>
-++&nbsp;&nbsp;&nbsp; passphrase: bufferPassword<br>
-++&nbsp; }, encryptedBuffer);<br>
-++&nbsp; assert.strictEqual(decryptedBufferWithPassword.toString(), input);=
-<br>
-++<br>
-++&nbsp; // Omitting padding should be okay because RSA_PKCS1_PADDING is th=
-e default.<br>
-++&nbsp; decryptedBufferWithPassword =3D crypto.publicDecrypt({<br>
-++&nbsp;&nbsp;&nbsp; key: rsaKeyPemEncrypted,<br>
-++&nbsp;&nbsp;&nbsp; passphrase: bufferPassword<br>
-++&nbsp; }, encryptedBuffer);<br>
-++&nbsp; assert.strictEqual(decryptedBufferWithPassword.toString(), input);=
-<br>
-++<br>
-++&nbsp; // Now with RSA_NO_PADDING. Plaintext needs to match key size.<br>
-++&nbsp; // OpenSSL 3.x has a rsa_check_padding that will cause an error if=
-<br>
-++&nbsp; // RSA_NO_PADDING is used.<br>
-++&nbsp; if (!common.hasOpenSSL3) {<br>
-++&nbsp;&nbsp;&nbsp; {<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; const plaintext =3D 'x'.repeat(rsaKeySize =
-/ 8);<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; encryptedBuffer =3D crypto.privateEncrypt(=
-{<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; padding: crypto.constants.RSA_=
-NO_PADDING,<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key: rsaKeyPemEncrypted,<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; passphrase: bufferPassword<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }, Buffer.from(plaintext));<br>
-++<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; decryptedBufferWithPassword =3D crypto.pub=
-licDecrypt({<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; padding: crypto.constants.RSA_=
-NO_PADDING,<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key: rsaKeyPemEncrypted,<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; passphrase: bufferPassword<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }, encryptedBuffer);<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; assert.strictEqual(decryptedBufferWithPass=
-word.toString(), plaintext);<br>
-++&nbsp;&nbsp;&nbsp; }<br>
-++&nbsp; }<br>
-++<br>
-++&nbsp; encryptedBuffer =3D crypto.publicEncrypt(certPem, bufferToEncrypt)=
-;<br>
-++<br>
-++&nbsp; decryptedBuffer =3D crypto.privateDecrypt(keyPem, encryptedBuffer)=
-;<br>
-++&nbsp; assert.strictEqual(decryptedBuffer.toString(), input);<br>
-++<br>
-++&nbsp; encryptedBuffer =3D crypto.publicEncrypt(keyPem, bufferToEncrypt);=
-<br>
-++<br>
-++&nbsp; decryptedBuffer =3D crypto.privateDecrypt(keyPem, encryptedBuffer)=
-;<br>
-++&nbsp; assert.strictEqual(decryptedBuffer.toString(), input);<br>
-++<br>
-++&nbsp; encryptedBuffer =3D crypto.privateEncrypt(keyPem, bufferToEncrypt)=
-;<br>
-++<br>
-++&nbsp; decryptedBuffer =3D crypto.publicDecrypt(keyPem, encryptedBuffer);=
-<br>
-++&nbsp; assert.strictEqual(decryptedBuffer.toString(), input);<br>
-++<br>
-++&nbsp; assert.throws(() =3D&gt; {<br>
-++&nbsp;&nbsp;&nbsp; crypto.privateDecrypt({<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key: rsaKeyPemEncrypted,<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; passphrase: 'wrong'<br>
-++&nbsp;&nbsp;&nbsp; }, bufferToEncrypt);<br>
-++&nbsp; }, decryptError);<br>
-++<br>
-++&nbsp; assert.throws(() =3D&gt; {<br>
-++&nbsp;&nbsp;&nbsp; crypto.publicEncrypt({<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key: rsaKeyPemEncrypted,<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; passphrase: 'wrong'<br>
-++&nbsp;&nbsp;&nbsp; }, encryptedBuffer);<br>
-++&nbsp; }, decryptError);<br>
-++<br>
-++&nbsp; encryptedBuffer =3D crypto.privateEncrypt({<br>
-++&nbsp;&nbsp;&nbsp; key: rsaKeyPemEncrypted,<br>
-++&nbsp;&nbsp;&nbsp; passphrase: Buffer.from('password')<br>
-++&nbsp; }, bufferToEncrypt);<br>
-++<br>
-++&nbsp; assert.throws(() =3D&gt; {<br>
-++&nbsp;&nbsp;&nbsp; crypto.publicDecrypt({<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key: rsaKeyPemEncrypted,<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; passphrase: Buffer.from('wrong')<br>
-++&nbsp;&nbsp;&nbsp; }, encryptedBuffer);<br>
-++&nbsp; }, decryptError);<br>
-++}<br>
-++<br>
-++function test_rsa(padding, encryptOaepHash, decryptOaepHash) {<br>
-++&nbsp; const size =3D (padding =3D=3D=3D 'RSA_NO_PADDING') ? rsaKeySize /=
- 8 : 32;<br>
-++&nbsp; const input =3D Buffer.allocUnsafe(size);<br>
-++&nbsp; for (let i =3D 0; i &lt; input.length; i++)<br>
-++&nbsp;&nbsp;&nbsp; input[i] =3D (i * 7 + 11) &amp; 0xff;<br>
-++&nbsp; const bufferToEncrypt =3D Buffer.from(input);<br>
-++<br>
-++&nbsp; padding =3D constants[padding];<br>
-++<br>
-++&nbsp; const encryptedBuffer =3D crypto.publicEncrypt({<br>
-++&nbsp;&nbsp;&nbsp; key: rsaPubPem,<br>
-++&nbsp;&nbsp;&nbsp; padding: padding,<br>
-++&nbsp;&nbsp;&nbsp; oaepHash: encryptOaepHash<br>
-++&nbsp; }, bufferToEncrypt);<br>
-++<br>
-++&nbsp; let decryptedBuffer =3D crypto.privateDecrypt({<br>
-++&nbsp;&nbsp;&nbsp; key: rsaKeyPem,<br>
-++&nbsp;&nbsp;&nbsp; padding: padding,<br>
-++&nbsp;&nbsp;&nbsp; oaepHash: decryptOaepHash<br>
-++&nbsp; }, encryptedBuffer);<br>
-++&nbsp; assert.deepStrictEqual(decryptedBuffer, input);<br>
-++<br>
-++&nbsp; decryptedBuffer =3D crypto.privateDecrypt({<br>
-++&nbsp;&nbsp;&nbsp; key: rsaPkcs8KeyPem,<br>
-++&nbsp;&nbsp;&nbsp; padding: padding,<br>
-++&nbsp;&nbsp;&nbsp; oaepHash: decryptOaepHash<br>
-++&nbsp; }, encryptedBuffer);<br>
-++&nbsp; assert.deepStrictEqual(decryptedBuffer, input);<br>
-++}<br>
-++<br>
-++test_rsa('RSA_NO_PADDING');<br>
-++test_rsa('RSA_PKCS1_PADDING');<br>
-++test_rsa('RSA_PKCS1_OAEP_PADDING');<br>
-++<br>
-++// Test OAEP with different hash functions.<br>
-++test_rsa('RSA_PKCS1_OAEP_PADDING', undefined, 'sha1');<br>
-++test_rsa('RSA_PKCS1_OAEP_PADDING', 'sha1', undefined);<br>
-++test_rsa('RSA_PKCS1_OAEP_PADDING', 'sha256', 'sha256');<br>
-++test_rsa('RSA_PKCS1_OAEP_PADDING', 'sha512', 'sha512');<br>
-++assert.throws(() =3D&gt; {<br>
-++&nbsp; test_rsa('RSA_PKCS1_OAEP_PADDING', 'sha256', 'sha512');<br>
-++}, {<br>
-++&nbsp; code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'<br>
-++});<br>
-++<br>
-++// The following RSA-OAEP test cases were created using the WebCrypto API=
- to<br>
-++// ensure compatibility when using non-SHA1 hash functions.<br>
-++{<br>
-++&nbsp; const { decryptionTests } =3D<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; JSON.parse(fixtures.readSync('rsa-oaep-tes=
-t-vectors.js', 'utf8'));<br>
-++<br>
-++&nbsp; for (const { ct, oaepHash, oaepLabel } of decryptionTests) {<br>
-++&nbsp;&nbsp;&nbsp; const label =3D oaepLabel ? Buffer.from(oaepLabel, 'he=
-x') : undefined;<br>
-++&nbsp;&nbsp;&nbsp; const copiedLabel =3D oaepLabel ? getBufferCopy(label)=
- : undefined;<br>
-++<br>
-++&nbsp;&nbsp;&nbsp; const decrypted =3D crypto.privateDecrypt({<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key: rsaPkcs8KeyPem,<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; oaepHash,<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; oaepLabel: oaepLabel ? label : undefined<b=
++diff --git a/deps/llhttp/CMakeLists.txt b/deps/llhttp/CMakeLists.txt<br>
++index d038203..747564a 100644<br>
++--- a/deps/llhttp/CMakeLists.txt<br>
+++++ b/deps/llhttp/CMakeLists.txt<br>
++@@ -1,7 +1,7 @@<br>
++ cmake_minimum_required(VERSION 3.5.1)<br>
++ cmake_policy(SET CMP0069 NEW)<br>
++<br>
++-project(llhttp VERSION 6.0.11)<br>
+++project(llhttp VERSION 6.1.0)<br>
++ include(GNUInstallDirs)<br>
++<br>
++ set(CMAKE_C_STANDARD 99)<br>
++diff --git a/deps/llhttp/include/llhttp.h b/deps/llhttp/include/llhttp.h<b=
 r>
-++&nbsp;&nbsp;&nbsp; }, Buffer.from(ct, 'hex'));<br>
-++<br>
-++&nbsp;&nbsp;&nbsp; assert.strictEqual(decrypted.toString('utf8'), 'Hello =
-Node.js');<br>
-++<br>
-++&nbsp;&nbsp;&nbsp; const otherDecrypted =3D crypto.privateDecrypt({<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key: rsaPkcs8KeyPem,<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; oaepHash,<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; oaepLabel: copiedLabel<br>
-++&nbsp;&nbsp;&nbsp; }, Buffer.from(ct, 'hex'));<br>
-++<br>
-++&nbsp;&nbsp;&nbsp; assert.strictEqual(otherDecrypted.toString('utf8'), 'H=
-ello Node.js');<br>
-++&nbsp; }<br>
-++}<br>
-++<br>
-++// Test invalid oaepHash and oaepLabel options.<br>
-++for (const fn of [crypto.publicEncrypt, crypto.privateDecrypt]) {<br>
-++&nbsp; assert.throws(() =3D&gt; {<br>
-++&nbsp;&nbsp;&nbsp; fn({<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key: rsaPubPem,<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; oaepHash: 'Hello world'<br>
-++&nbsp;&nbsp;&nbsp; }, Buffer.alloc(10));<br>
-++&nbsp; }, {<br>
-++&nbsp;&nbsp;&nbsp; code: 'ERR_OSSL_EVP_INVALID_DIGEST'<br>
-++&nbsp; });<br>
-++<br>
-++&nbsp; for (const oaepHash of [0, false, null, Symbol(), () =3D&gt; {}]) =
-{<br>
-++&nbsp;&nbsp;&nbsp; assert.throws(() =3D&gt; {<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fn({<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key: rsaPubPem,<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; oaepHash<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }, Buffer.alloc(10));<br>
-++&nbsp;&nbsp;&nbsp; }, {<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; code: 'ERR_INVALID_ARG_TYPE'<br>
-++&nbsp;&nbsp;&nbsp; });<br>
-++&nbsp; }<br>
-++<br>
-++&nbsp; for (const oaepLabel of [0, false, null, Symbol(), () =3D&gt; {}, =
-{}]) {<br>
-++&nbsp;&nbsp;&nbsp; assert.throws(() =3D&gt; {<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fn({<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key: rsaPubPem,<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; oaepLabel<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }, Buffer.alloc(10));<br>
-++&nbsp;&nbsp;&nbsp; }, {<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; code: 'ERR_INVALID_ARG_TYPE'<br>
-++&nbsp;&nbsp;&nbsp; });<br>
-++&nbsp; }<br>
-++}<br>
-++<br>
-++// Test RSA key signing/verification<br>
-++let rsaSign =3D crypto.createSign('SHA1');<br>
-++let rsaVerify =3D crypto.createVerify('SHA1');<br>
-++assert.ok(rsaSign);<br>
-++assert.ok(rsaVerify);<br>
-++<br>
-++const expectedSignature =3D fixtures.readKey(<br>
-++&nbsp; 'rsa_public_sha1_signature_signedby_rsa_private_pkcs8.sha1',<br>
-++&nbsp; 'hex'<br>
-++);<br>
-++<br>
-++rsaSign.update(rsaPubPem);<br>
-++let rsaSignature =3D rsaSign.sign(rsaKeyPem, 'hex');<br>
-++assert.strictEqual(rsaSignature, expectedSignature);<br>
-++<br>
-++rsaVerify.update(rsaPubPem);<br>
-++assert.strictEqual(rsaVerify.verify(rsaPubPem, rsaSignature, 'hex'), true=
-);<br>
-++<br>
-++// Test RSA PKCS#8 key signing/verification<br>
-++rsaSign =3D crypto.createSign('SHA1');<br>
-++rsaSign.update(rsaPubPem);<br>
-++rsaSignature =3D rsaSign.sign(rsaPkcs8KeyPem, 'hex');<br>
-++assert.strictEqual(rsaSignature, expectedSignature);<br>
-++<br>
-++rsaVerify =3D crypto.createVerify('SHA1');<br>
-++rsaVerify.update(rsaPubPem);<br>
-++assert.strictEqual(rsaVerify.verify(rsaPubPem, rsaSignature, 'hex'), true=
-);<br>
-++<br>
-++// Test RSA key signing/verification with encrypted key<br>
-++rsaSign =3D crypto.createSign('SHA1');<br>
-++rsaSign.update(rsaPubPem);<br>
-++const signOptions =3D { key: rsaKeyPemEncrypted, passphrase: 'password' }=
-;<br>
-++rsaSignature =3D rsaSign.sign(signOptions, 'hex');<br>
-++assert.strictEqual(rsaSignature, expectedSignature);<br>
-++<br>
-++rsaVerify =3D crypto.createVerify('SHA1');<br>
-++rsaVerify.update(rsaPubPem);<br>
-++assert.strictEqual(rsaVerify.verify(rsaPubPem, rsaSignature, 'hex'), true=
-);<br>
-++<br>
-++rsaSign =3D crypto.createSign('SHA1');<br>
-++rsaSign.update(rsaPubPem);<br>
-++assert.throws(() =3D&gt; {<br>
-++&nbsp; const signOptions =3D { key: rsaKeyPemEncrypted, passphrase: 'wron=
-g' };<br>
-++&nbsp; rsaSign.sign(signOptions, 'hex');<br>
-++}, decryptPrivateKeyError);<br>
-++<br>
-++//<br>
-++// Test RSA signing and verification<br>
-++//<br>
-++{<br>
-++&nbsp; const privateKey =3D fixtures.readKey('rsa_private_b.pem');<br>
-++&nbsp; const publicKey =3D fixtures.readKey('rsa_public_b.pem');<br>
-++<br>
-++&nbsp; const input =3D 'I AM THE WALRUS';<br>
-++<br>
-++&nbsp; const signature =3D fixtures.readKey(<br>
-++&nbsp;&nbsp;&nbsp; 'I_AM_THE_WALRUS_sha256_signature_signedby_rsa_private=
-_b.sha256',<br>
-++&nbsp;&nbsp;&nbsp; 'hex'<br>
-++&nbsp; );<br>
-++<br>
-++&nbsp; const sign =3D crypto.createSign('SHA256');<br>
-++&nbsp; sign.update(input);<br>
-++<br>
-++&nbsp; const output =3D sign.sign(privateKey, 'hex');<br>
-++&nbsp; assert.strictEqual(output, signature);<br>
-++<br>
-++&nbsp; const verify =3D crypto.createVerify('SHA256');<br>
-++&nbsp; verify.update(input);<br>
-++<br>
-++&nbsp; assert.strictEqual(verify.verify(publicKey, signature, 'hex'), tru=
-e);<br>
-++<br>
-++&nbsp; // Test the legacy signature algorithm name.<br>
-++&nbsp; const sign2 =3D crypto.createSign('RSA-SHA256');<br>
-++&nbsp; sign2.update(input);<br>
-++<br>
-++&nbsp; const output2 =3D sign2.sign(privateKey, 'hex');<br>
-++&nbsp; assert.strictEqual(output2, signature);<br>
-++<br>
-++&nbsp; const verify2 =3D crypto.createVerify('SHA256');<br>
-++&nbsp; verify2.update(input);<br>
-++<br>
-++&nbsp; assert.strictEqual(verify2.verify(publicKey, signature, 'hex'), tr=
-ue);<br>
-++}<br>
-++<br>
-++<br>
-++//<br>
-++// Test DSA signing and verification<br>
-++//<br>
-++{<br>
-++&nbsp; const input =3D 'I AM THE WALRUS';<br>
-++<br>
-++&nbsp; // DSA signatures vary across runs so there is no static string to=
- verify<br>
-++&nbsp; // against.<br>
-++&nbsp; const sign =3D crypto.createSign('SHA1');<br>
-++&nbsp; sign.update(input);<br>
-++&nbsp; const signature =3D sign.sign(dsaKeyPem, 'hex');<br>
-++<br>
-++&nbsp; const verify =3D crypto.createVerify('SHA1');<br>
-++&nbsp; verify.update(input);<br>
-++<br>
-++&nbsp; assert.strictEqual(verify.verify(dsaPubPem, signature, 'hex'), tru=
-e);<br>
-++<br>
-++&nbsp; // Test the legacy 'DSS1' name.<br>
-++&nbsp; const sign2 =3D crypto.createSign('DSS1');<br>
-++&nbsp; sign2.update(input);<br>
-++&nbsp; const signature2 =3D sign2.sign(dsaKeyPem, 'hex');<br>
-++<br>
-++&nbsp; const verify2 =3D crypto.createVerify('DSS1');<br>
-++&nbsp; verify2.update(input);<br>
-++<br>
-++&nbsp; assert.strictEqual(verify2.verify(dsaPubPem, signature2, 'hex'), t=
-rue);<br>
-++}<br>
-++<br>
-++<br>
-++//<br>
-++// Test DSA signing and verification with PKCS#8 private key<br>
-++//<br>
-++{<br>
-++&nbsp; const input =3D 'I AM THE WALRUS';<br>
-++<br>
-++&nbsp; // DSA signatures vary across runs so there is no static string to=
- verify<br>
-++&nbsp; // against.<br>
-++&nbsp; const sign =3D crypto.createSign('SHA1');<br>
-++&nbsp; sign.update(input);<br>
-++&nbsp; const signature =3D sign.sign(dsaPkcs8KeyPem, 'hex');<br>
-++<br>
-++&nbsp; const verify =3D crypto.createVerify('SHA1');<br>
-++&nbsp; verify.update(input);<br>
-++<br>
-++&nbsp; assert.strictEqual(verify.verify(dsaPubPem, signature, 'hex'), tru=
-e);<br>
-++}<br>
-++<br>
-++<br>
-++//<br>
-++// Test DSA signing and verification with encrypted key<br>
-++//<br>
-++const input =3D 'I AM THE WALRUS';<br>
-++<br>
-++{<br>
-++&nbsp; const sign =3D crypto.createSign('SHA1');<br>
-++&nbsp; sign.update(input);<br>
-++&nbsp; assert.throws(() =3D&gt; {<br>
-++&nbsp;&nbsp;&nbsp; sign.sign({ key: dsaKeyPemEncrypted, passphrase: 'wron=
-g' }, 'hex');<br>
-++&nbsp; }, decryptPrivateKeyError);<br>
-++}<br>
-++<br>
-++{<br>
-++&nbsp; // DSA signatures vary across runs so there is no static string to=
- verify<br>
-++&nbsp; // against.<br>
-++&nbsp; const sign =3D crypto.createSign('SHA1');<br>
-++&nbsp; sign.update(input);<br>
-++&nbsp; const signOptions =3D { key: dsaKeyPemEncrypted, passphrase: 'pass=
-word' };<br>
-++&nbsp; const signature =3D sign.sign(signOptions, 'hex');<br>
-++<br>
-++&nbsp; const verify =3D crypto.createVerify('SHA1');<br>
-++&nbsp; verify.update(input);<br>
-++<br>
-++&nbsp; assert.strictEqual(verify.verify(dsaPubPem, signature, 'hex'), tru=
-e);<br>
-++}<br>
-+diff --git a/test/parallel/test-crypto-rsa-dsa.js b/test/parallel/test-cry=
-pto-rsa-dsa.js<br>
-+index 9afcb38..fd27827 100644<br>
-+--- a/test/parallel/test-crypto-rsa-dsa.js<br>
-++++ b/test/parallel/test-crypto-rsa-dsa.js<br>
-+@@ -220,20 +220,36 @@ function test_rsa(padding, encryptOaepHash, decryptO=
-aepHash) {<br>
-+&nbsp;&nbsp;&nbsp;&nbsp; padding: padding,<br>
-+&nbsp;&nbsp;&nbsp;&nbsp; oaepHash: encryptOaepHash<br>
-+&nbsp;&nbsp; }, bufferToEncrypt);<br>
-++&nbsp; if (padding =3D=3D=3D constants.RSA_PKCS1_PADDING) {<br>
-++&nbsp;&nbsp;&nbsp; assert.throws(() =3D&gt; {<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; crypto.privateDecrypt({<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key: rsaKeyPem,<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; padding: padding,<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; oaepHash: decryptOaepHash<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }, encryptedBuffer);<br>
-++&nbsp;&nbsp;&nbsp; }, { code: 'ERR_INVALID_ARG_VALUE' });<br>
-++&nbsp;&nbsp;&nbsp; assert.throws(() =3D&gt; {<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; crypto.privateDecrypt({<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key: rsaPkcs8KeyPem,<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; padding: padding,<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; oaepHash: decryptOaepHash<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }, encryptedBuffer);<br>
-++&nbsp;&nbsp;&nbsp; }, { code: 'ERR_INVALID_ARG_VALUE' });<br>
-++&nbsp; } else {<br>
-++&nbsp;&nbsp;&nbsp; let decryptedBuffer =3D crypto.privateDecrypt({<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key: rsaKeyPem,<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; padding: padding,<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; oaepHash: decryptOaepHash<br>
-++&nbsp;&nbsp;&nbsp; }, encryptedBuffer);<br>
-++&nbsp;&nbsp;&nbsp; assert.deepStrictEqual(decryptedBuffer, input);<br>
++index 2da66f1..78f27ab 100644<br>
++--- a/deps/llhttp/include/llhttp.h<br>
+++++ b/deps/llhttp/include/llhttp.h<br>
++@@ -2,8 +2,8 @@<br>
++ #define INCLUDE_LLHTTP_H_<br>
 +<br>
-+-&nbsp; let decryptedBuffer =3D crypto.privateDecrypt({<br>
-+-&nbsp;&nbsp;&nbsp; key: rsaKeyPem,<br>
-+-&nbsp;&nbsp;&nbsp; padding: padding,<br>
-+-&nbsp;&nbsp;&nbsp; oaepHash: decryptOaepHash<br>
-+-&nbsp; }, encryptedBuffer);<br>
-+-&nbsp; assert.deepStrictEqual(decryptedBuffer, input);<br>
-+-<br>
-+-&nbsp; decryptedBuffer =3D crypto.privateDecrypt({<br>
-+-&nbsp;&nbsp;&nbsp; key: rsaPkcs8KeyPem,<br>
-+-&nbsp;&nbsp;&nbsp; padding: padding,<br>
-+-&nbsp;&nbsp;&nbsp; oaepHash: decryptOaepHash<br>
-+-&nbsp; }, encryptedBuffer);<br>
-+-&nbsp; assert.deepStrictEqual(decryptedBuffer, input);<br>
-++&nbsp;&nbsp;&nbsp; decryptedBuffer =3D crypto.privateDecrypt({<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key: rsaPkcs8KeyPem,<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; padding: padding,<br>
-++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; oaepHash: decryptOaepHash<br>
-++&nbsp;&nbsp;&nbsp; }, encryptedBuffer);<br>
-++&nbsp;&nbsp;&nbsp; assert.deepStrictEqual(decryptedBuffer, input);<br>
-++&nbsp; }<br>
++ #define LLHTTP_VERSION_MAJOR 6<br>
++-#define LLHTTP_VERSION_MINOR 0<br>
++-#define LLHTTP_VERSION_PATCH 11<br>
+++#define LLHTTP_VERSION_MINOR 1<br>
+++#define LLHTTP_VERSION_PATCH 0<br>
++<br>
++ #ifndef LLHTTP_STRICT_MODE<br>
++ # define LLHTTP_STRICT_MODE 0<br>
++@@ -348,6 +348,9 @@ struct llhttp_settings_s {<br>
++&nbsp;&nbsp;&nbsp; */<br>
++&nbsp;&nbsp; llhttp_cb&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; on_headers_complete;<=
+br>
++<br>
+++&nbsp; /* Possible return values 0, -1, HPE_USER */<br>
+++&nbsp; llhttp_data_cb on_chunk_parameters;<br>
+++<br>
++&nbsp;&nbsp; /* Possible return values 0, -1, HPE_USER */<br>
++&nbsp;&nbsp; llhttp_data_cb on_body;<br>
++<br>
++diff --git a/deps/llhttp/src/api.c b/deps/llhttp/src/api.c<br>
++index c4ce197..d3065b3 100644<br>
++--- a/deps/llhttp/src/api.c<br>
+++++ b/deps/llhttp/src/api.c<br>
++@@ -355,6 +355,13 @@ int llhttp__on_chunk_header(llhttp_t* s, const char* =
+p, const char* endp) {<br>
 + }<br>
 +<br>
-+ test_rsa('RSA_NO_PADDING');<br>
++<br>
+++int llhttp__on_chunk_parameters(llhttp_t* s, const char* p, const char* e=
+ndp) {<br>
+++&nbsp; int err;<br>
+++&nbsp; SPAN_CALLBACK_MAYBE(s, on_chunk_parameters, p, endp - p);<br>
+++&nbsp; return err;<br>
+++}<br>
+++<br>
+++<br>
++ int llhttp__on_chunk_complete(llhttp_t* s, const char* p, const char* end=
+p) {<br>
++&nbsp;&nbsp; int err;<br>
++&nbsp;&nbsp; CALLBACK_MAYBE(s, on_chunk_complete);<br>
++diff --git a/deps/llhttp/src/llhttp.c b/deps/llhttp/src/llhttp.c<br>
++index 5e7c5d1..5eb19f6 100644<br>
++--- a/deps/llhttp/src/llhttp.c<br>
+++++ b/deps/llhttp/src/llhttp.c<br>
++@@ -340,6 +340,8 @@ enum llparse_state_e {<br>
++&nbsp;&nbsp; s_n_llhttp__internal__n_invoke_is_equal_content_length,<br>
++&nbsp;&nbsp; s_n_llhttp__internal__n_chunk_size_almost_done,<br>
++&nbsp;&nbsp; s_n_llhttp__internal__n_chunk_parameters,<br>
+++&nbsp; s_n_llhttp__internal__n_span_start_llhttp__on_chunk_parameters,<br=
+>
+++&nbsp; s_n_llhttp__internal__n_chunk_parameters_ows,<br>
++&nbsp;&nbsp; s_n_llhttp__internal__n_chunk_size_otherwise,<br>
++&nbsp;&nbsp; s_n_llhttp__internal__n_chunk_size,<br>
++&nbsp;&nbsp; s_n_llhttp__internal__n_chunk_size_digit,<br>
++@@ -539,6 +541,10 @@ int llhttp__on_body(<br>
++&nbsp;&nbsp;&nbsp;&nbsp; llhttp__internal_t* s, const unsigned char* p,<br=
+>
++&nbsp;&nbsp;&nbsp;&nbsp; const unsigned char* endp);<br>
++<br>
+++int llhttp__on_chunk_parameters(<br>
+++&nbsp;&nbsp;&nbsp; llhttp__internal_t* s, const unsigned char* p,<br>
+++&nbsp;&nbsp;&nbsp; const unsigned char* endp);<br>
+++<br>
++ int llhttp__on_status(<br>
++&nbsp;&nbsp;&nbsp;&nbsp; llhttp__internal_t* s, const unsigned char* p,<br=
+>
++&nbsp;&nbsp;&nbsp;&nbsp; const unsigned char* endp);<br>
++@@ -1226,8 +1232,7 @@ static llparse_state_t llhttp__internal__run(<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; goto s_n_llht=
+tp__internal__n_chunk_parameters;<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case 2: {<br>
++-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p++;<br>
++-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; goto s_n_llhttp__i=
+nternal__n_chunk_size_almost_done;<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; goto s_n_llhttp__internal__n_s=
+pan_end_llhttp__on_chunk_parameters;<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; default: {<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; goto s_n_llht=
+tp__internal__n_error_10;<br>
++@@ -1236,6 +1241,34 @@ static llparse_state_t llhttp__internal__run(<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* UNREACHABLE */;<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; abort();<br>
++&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+++&nbsp;&nbsp;&nbsp; case s_n_llhttp__internal__n_span_start_llhttp__on_chu=
+nk_parameters:<br>
+++&nbsp;&nbsp;&nbsp; s_n_llhttp__internal__n_span_start_llhttp__on_chunk_pa=
+rameters: {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (p =3D=3D endp) {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return s_n_llhttp__internal__n=
+_span_start_llhttp__on_chunk_parameters;<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; state-&gt;_span_pos0 =3D (void*) p;<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; state-&gt;_span_cb0 =3D llhttp__on_chunk_p=
+arameters;<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; goto s_n_llhttp__internal__n_chunk_paramet=
+ers;<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* UNREACHABLE */;<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; abort();<br>
+++&nbsp;&nbsp;&nbsp; }<br>
+++&nbsp;&nbsp;&nbsp; case s_n_llhttp__internal__n_chunk_parameters_ows:<br>
+++&nbsp;&nbsp;&nbsp; s_n_llhttp__internal__n_chunk_parameters_ows: {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (p =3D=3D endp) {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return s_n_llhttp__internal__n=
+_chunk_parameters_ows;<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; switch (*p) {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case ' ': {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p++;<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; goto s_n_llhttp__i=
+nternal__n_chunk_parameters_ows;<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; default: {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; goto s_n_llhttp__i=
+nternal__n_span_start_llhttp__on_chunk_parameters;<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* UNREACHABLE */;<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; abort();<br>
+++&nbsp;&nbsp;&nbsp; }<br>
++&nbsp;&nbsp;&nbsp;&nbsp; case s_n_llhttp__internal__n_chunk_size_otherwise=
+:<br>
++&nbsp;&nbsp;&nbsp;&nbsp; s_n_llhttp__internal__n_chunk_size_otherwise: {<b=
+r>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (p =3D=3D endp) {<br>
++@@ -1246,13 +1279,9 @@ static llparse_state_t llhttp__internal__run(<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p++;<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; goto s_n_llht=
+tp__internal__n_chunk_size_almost_done;<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
++-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case ' ': {<br>
++-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p++;<br>
++-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; goto s_n_llhttp__i=
+nternal__n_chunk_parameters;<br>
++-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case ';': {<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p++;<br>
++-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; goto s_n_llhttp__i=
+nternal__n_chunk_parameters;<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; goto s_n_llhttp__i=
+nternal__n_chunk_parameters_ows;<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; default: {<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; goto s_n_llht=
+tp__internal__n_error_11;<br>
++@@ -6074,6 +6103,24 @@ static llparse_state_t llhttp__internal__run(<br>
++&nbsp;&nbsp;&nbsp;&nbsp; /* UNREACHABLE */;<br>
++&nbsp;&nbsp;&nbsp;&nbsp; abort();<br>
++&nbsp;&nbsp; }<br>
+++&nbsp; s_n_llhttp__internal__n_span_end_llhttp__on_chunk_parameters: {<br=
+>
+++&nbsp;&nbsp;&nbsp; const unsigned char* start;<br>
+++&nbsp;&nbsp;&nbsp; int err;<br>
+++<br>
+++&nbsp;&nbsp;&nbsp; start =3D state-&gt;_span_pos0;<br>
+++&nbsp;&nbsp;&nbsp; state-&gt;_span_pos0 =3D NULL;<br>
+++&nbsp;&nbsp;&nbsp; err =3D llhttp__on_chunk_parameters(state, start, p);<=
+br>
+++&nbsp;&nbsp;&nbsp; if (err !=3D 0) {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; state-&gt;error =3D err;<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; state-&gt;error_pos =3D (const char*) (p +=
+ 1);<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; state-&gt;_current =3D (void*) (intptr_t) =
+s_n_llhttp__internal__n_chunk_size_almost_done;<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return s_error;<br>
+++&nbsp;&nbsp;&nbsp; }<br>
+++&nbsp;&nbsp;&nbsp; p++;<br>
+++&nbsp;&nbsp;&nbsp; goto s_n_llhttp__internal__n_chunk_size_almost_done;<b=
+r>
+++&nbsp;&nbsp;&nbsp; /* UNREACHABLE */;<br>
+++&nbsp;&nbsp;&nbsp; abort();<br>
+++&nbsp; }<br>
++&nbsp;&nbsp; s_n_llhttp__internal__n_error_10: {<br>
++&nbsp;&nbsp;&nbsp;&nbsp; state-&gt;error =3D 0x2;<br>
++&nbsp;&nbsp;&nbsp;&nbsp; state-&gt;reason =3D &quot;Invalid character in c=
+hunk parameters&quot;;<br>
++@@ -8441,6 +8488,8 @@ enum llparse_state_e {<br>
++&nbsp;&nbsp; s_n_llhttp__internal__n_invoke_is_equal_content_length,<br>
++&nbsp;&nbsp; s_n_llhttp__internal__n_chunk_size_almost_done,<br>
++&nbsp;&nbsp; s_n_llhttp__internal__n_chunk_parameters,<br>
+++&nbsp; s_n_llhttp__internal__n_span_start_llhttp__on_chunk_parameters,<br=
+>
+++&nbsp; s_n_llhttp__internal__n_chunk_parameters_ows,<br>
++&nbsp;&nbsp; s_n_llhttp__internal__n_chunk_size_otherwise,<br>
++&nbsp;&nbsp; s_n_llhttp__internal__n_chunk_size,<br>
++&nbsp;&nbsp; s_n_llhttp__internal__n_chunk_size_digit,<br>
++@@ -8635,6 +8684,10 @@ int llhttp__on_body(<br>
++&nbsp;&nbsp;&nbsp;&nbsp; llhttp__internal_t* s, const unsigned char* p,<br=
+>
++&nbsp;&nbsp;&nbsp;&nbsp; const unsigned char* endp);<br>
++<br>
+++int llhttp__on_chunk_parameters(<br>
+++&nbsp;&nbsp;&nbsp; llhttp__internal_t* s, const unsigned char* p,<br>
+++&nbsp;&nbsp;&nbsp; const unsigned char* endp);<br>
+++<br>
++ int llhttp__on_status(<br>
++&nbsp;&nbsp;&nbsp;&nbsp; llhttp__internal_t* s, const unsigned char* p,<br=
+>
++&nbsp;&nbsp;&nbsp;&nbsp; const unsigned char* endp);<br>
++@@ -9299,8 +9352,7 @@ static llparse_state_t llhttp__internal__run(<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; goto s_n_llht=
+tp__internal__n_chunk_parameters;<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case 2: {<br>
++-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p++;<br>
++-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; goto s_n_llhttp__i=
+nternal__n_chunk_size_almost_done;<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; goto s_n_llhttp__internal__n_s=
+pan_end_llhttp__on_chunk_parameters;<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; default: {<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; goto s_n_llht=
+tp__internal__n_error_6;<br>
++@@ -9309,6 +9361,34 @@ static llparse_state_t llhttp__internal__run(<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* UNREACHABLE */;<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; abort();<br>
++&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+++&nbsp;&nbsp;&nbsp; case s_n_llhttp__internal__n_span_start_llhttp__on_chu=
+nk_parameters:<br>
+++&nbsp;&nbsp;&nbsp; s_n_llhttp__internal__n_span_start_llhttp__on_chunk_pa=
+rameters: {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (p =3D=3D endp) {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return s_n_llhttp__internal__n=
+_span_start_llhttp__on_chunk_parameters;<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; state-&gt;_span_pos0 =3D (void*) p;<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; state-&gt;_span_cb0 =3D llhttp__on_chunk_p=
+arameters;<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; goto s_n_llhttp__internal__n_chunk_paramet=
+ers;<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* UNREACHABLE */;<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; abort();<br>
+++&nbsp;&nbsp;&nbsp; }<br>
+++&nbsp;&nbsp;&nbsp; case s_n_llhttp__internal__n_chunk_parameters_ows:<br>
+++&nbsp;&nbsp;&nbsp; s_n_llhttp__internal__n_chunk_parameters_ows: {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (p =3D=3D endp) {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return s_n_llhttp__internal__n=
+_chunk_parameters_ows;<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; switch (*p) {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case ' ': {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p++;<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; goto s_n_llhttp__i=
+nternal__n_chunk_parameters_ows;<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; default: {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; goto s_n_llhttp__i=
+nternal__n_span_start_llhttp__on_chunk_parameters;<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* UNREACHABLE */;<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; abort();<br>
+++&nbsp;&nbsp;&nbsp; }<br>
++&nbsp;&nbsp;&nbsp;&nbsp; case s_n_llhttp__internal__n_chunk_size_otherwise=
+:<br>
++&nbsp;&nbsp;&nbsp;&nbsp; s_n_llhttp__internal__n_chunk_size_otherwise: {<b=
+r>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (p =3D=3D endp) {<br>
++@@ -9319,13 +9399,9 @@ static llparse_state_t llhttp__internal__run(<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p++;<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; goto s_n_llht=
+tp__internal__n_chunk_size_almost_done;<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
++-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case ' ': {<br>
++-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p++;<br>
++-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; goto s_n_llhttp__i=
+nternal__n_chunk_parameters;<br>
++-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case ';': {<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p++;<br>
++-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; goto s_n_llhttp__i=
+nternal__n_chunk_parameters;<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; goto s_n_llhttp__i=
+nternal__n_chunk_parameters_ows;<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; default: {<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; goto s_n_llht=
+tp__internal__n_error_7;<br>
++@@ -13951,6 +14027,24 @@ static llparse_state_t llhttp__internal__run(<br>
++&nbsp;&nbsp;&nbsp;&nbsp; /* UNREACHABLE */;<br>
++&nbsp;&nbsp;&nbsp;&nbsp; abort();<br>
++&nbsp;&nbsp; }<br>
+++&nbsp; s_n_llhttp__internal__n_span_end_llhttp__on_chunk_parameters: {<br=
+>
+++&nbsp;&nbsp;&nbsp; const unsigned char* start;<br>
+++&nbsp;&nbsp;&nbsp; int err;<br>
+++<br>
+++&nbsp;&nbsp;&nbsp; start =3D state-&gt;_span_pos0;<br>
+++&nbsp;&nbsp;&nbsp; state-&gt;_span_pos0 =3D NULL;<br>
+++&nbsp;&nbsp;&nbsp; err =3D llhttp__on_chunk_parameters(state, start, p);<=
+br>
+++&nbsp;&nbsp;&nbsp; if (err !=3D 0) {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; state-&gt;error =3D err;<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; state-&gt;error_pos =3D (const char*) (p +=
+ 1);<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; state-&gt;_current =3D (void*) (intptr_t) =
+s_n_llhttp__internal__n_chunk_size_almost_done;<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return s_error;<br>
+++&nbsp;&nbsp;&nbsp; }<br>
+++&nbsp;&nbsp;&nbsp; p++;<br>
+++&nbsp;&nbsp;&nbsp; goto s_n_llhttp__internal__n_chunk_size_almost_done;<b=
+r>
+++&nbsp;&nbsp;&nbsp; /* UNREACHABLE */;<br>
+++&nbsp;&nbsp;&nbsp; abort();<br>
+++&nbsp; }<br>
++&nbsp;&nbsp; s_n_llhttp__internal__n_error_6: {<br>
++&nbsp;&nbsp;&nbsp;&nbsp; state-&gt;error =3D 0x2;<br>
++&nbsp;&nbsp;&nbsp;&nbsp; state-&gt;reason =3D &quot;Invalid character in c=
+hunk parameters&quot;;<br>
++diff --git a/doc/api/errors.md b/doc/api/errors.md<br>
++index dcf8744..a76bfe5 100644<br>
++--- a/doc/api/errors.md<br>
+++++ b/doc/api/errors.md<br>
++@@ -3043,6 +3043,18 @@ malconfigured clients, if more than 8 KiB of HTTP h=
+eader data is received then<br>
++ HTTP parsing will abort without a request or response object being create=
+d, and<br>
++ an `Error` with this code will be emitted.<br>
++<br>
+++&lt;a id=3D&quot;HPE_CHUNK_EXTENSIONS_OVERFLOW&quot;&gt;&lt;/a&gt;<br>
+++<br>
+++### `HPE_CHUNK_EXTENSIONS_OVERFLOW`<br>
+++<br>
+++&lt;!-- YAML<br>
+++added: REPLACEME<br>
+++--&gt;<br>
+++<br>
+++Too much data was received for a chunk extensions. In order to protect ag=
+ainst<br>
+++malicious or malconfigured clients, if more than 16 KiB of data is receiv=
+ed<br>
+++then an `Error` with this code will be emitted.<br>
+++<br>
++ &lt;a id=3D&quot;HPE_UNEXPECTED_CONTENT_LENGTH&quot;&gt;&lt;/a&gt;<br>
++<br>
++ ### `HPE_UNEXPECTED_CONTENT_LENGTH`<br>
++diff --git a/lib/_http_server.js b/lib/_http_server.js<br>
++index 4e23266..263bb52 100644<br>
++--- a/lib/_http_server.js<br>
+++++ b/lib/_http_server.js<br>
++@@ -706,6 +706,11 @@ const requestHeaderFieldsTooLargeResponse =3D Buffer.=
+from(<br>
++&nbsp;&nbsp; `HTTP/1.1 431 ${STATUS_CODES[431]}\r\n` +<br>
++&nbsp;&nbsp; 'Connection: close\r\n\r\n', 'ascii'<br>
++ );<br>
+++const requestChunkExtensionsTooLargeResponse =3D Buffer.from(<br>
+++&nbsp; `HTTP/1.1 413 ${STATUS_CODES[413]}\r\n` +<br>
+++&nbsp; 'Connection: close\r\n\r\n', 'ascii',<br>
+++);<br>
+++<br>
++ function socketOnError(e) {<br>
++&nbsp;&nbsp; // Ignore further errors<br>
++&nbsp;&nbsp; this.removeListener('error', socketOnError);<br>
++@@ -719,6 +724,9 @@ function socketOnError(e) {<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case 'HPE_HEADER_OVERFLOW=
+':<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; response =3D =
+requestHeaderFieldsTooLargeResponse;<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break;<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case 'HPE_CHUNK_EXTENSIONS_OVERFLOW':<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; response =3D reque=
+stChunkExtensionsTooLargeResponse;<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break;<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case 'ERR_HTTP_REQUEST_TI=
+MEOUT':<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; response =3D =
+requestTimeoutResponse;<br>
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break;<br>
++diff --git a/src/node_http_parser.cc b/src/node_http_parser.cc<br>
++index 74f3248..b92e848 100644<br>
++--- a/src/node_http_parser.cc<br>
+++++ b/src/node_http_parser.cc<br>
++@@ -79,6 +79,8 @@ const uint32_t kOnExecute =3D 5;<br>
++ const uint32_t kOnTimeout =3D 6;<br>
++ // Any more fields than this will be flushed into JS<br>
++ const size_t kMaxHeaderFieldsCount =3D 32;<br>
+++// Maximum size of chunk extensions<br>
+++const size_t kMaxChunkExtensionsSize =3D 16384;<br>
++<br>
++ const uint32_t kLenientNone =3D 0;<br>
++ const uint32_t kLenientHeaders =3D 1 &lt;&lt; 0;<br>
++@@ -206,6 +208,7 @@ class Parser : public AsyncWrap, public StreamListener=
+ {<br>
++<br>
++&nbsp;&nbsp; int on_message_begin() {<br>
++&nbsp;&nbsp;&nbsp;&nbsp; num_fields_ =3D num_values_ =3D 0;<br>
+++&nbsp;&nbsp;&nbsp; chunk_extensions_nread_ =3D 0;<br>
++&nbsp;&nbsp;&nbsp;&nbsp; url_.Reset();<br>
++&nbsp;&nbsp;&nbsp;&nbsp; status_message_.Reset();<br>
++&nbsp;&nbsp;&nbsp;&nbsp; header_parsing_start_time_ =3D uv_hrtime();<br>
++@@ -443,9 +446,22 @@ class Parser : public AsyncWrap, public StreamListene=
+r {<br>
++&nbsp;&nbsp;&nbsp;&nbsp; return 0;<br>
++&nbsp;&nbsp; }<br>
++<br>
++-&nbsp; // Reset nread for the next chunk<br>
+++&nbsp; int on_chunk_extension(const char* at, size_t length) {<br>
+++&nbsp;&nbsp;&nbsp; chunk_extensions_nread_ +=3D length;<br>
+++<br>
+++&nbsp;&nbsp;&nbsp; if (chunk_extensions_nread_ &gt; kMaxChunkExtensionsSi=
+ze) {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; llhttp_set_error_reason(&amp;parser_,<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;HPE_CHUNK_EXTENSIONS_OVE=
+RFLOW:Chunk extensions overflow&quot;);<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return HPE_USER;<br>
+++&nbsp;&nbsp;&nbsp; }<br>
+++<br>
+++&nbsp;&nbsp;&nbsp; return 0;<br>
+++&nbsp; }<br>
+++<br>
+++&nbsp; // Reset nread for the next chunk and also reset the extensions co=
+unter<br>
++&nbsp;&nbsp; int on_chunk_header() {<br>
++&nbsp;&nbsp;&nbsp;&nbsp; header_nread_ =3D 0;<br>
+++&nbsp;&nbsp;&nbsp; chunk_extensions_nread_ =3D 0;<br>
++&nbsp;&nbsp;&nbsp;&nbsp; return 0;<br>
++&nbsp;&nbsp; }<br>
++<br>
++@@ -887,6 +903,7 @@ class Parser : public AsyncWrap, public StreamListener=
+ {<br>
++&nbsp;&nbsp; const char* current_buffer_data_;<br>
++&nbsp;&nbsp; bool pending_pause_ =3D false;<br>
++&nbsp;&nbsp; uint64_t header_nread_ =3D 0;<br>
+++&nbsp; uint64_t chunk_extensions_nread_ =3D 0;<br>
++&nbsp;&nbsp; uint64_t max_http_header_size_;<br>
++&nbsp;&nbsp; uint64_t headers_timeout_;<br>
++&nbsp;&nbsp; uint64_t header_parsing_start_time_ =3D 0;<br>
++@@ -921,6 +938,7 @@ const llhttp_settings_t Parser::settings =3D {<br>
++&nbsp;&nbsp; Proxy&lt;DataCall, &amp;Parser::on_header_field&gt;::Raw,<br>
++&nbsp;&nbsp; Proxy&lt;DataCall, &amp;Parser::on_header_value&gt;::Raw,<br>
++&nbsp;&nbsp; Proxy&lt;Call, &amp;Parser::on_headers_complete&gt;::Raw,<br>
+++&nbsp; Proxy&lt;DataCall, &amp;Parser::on_chunk_extension&gt;::Raw,<br>
++&nbsp;&nbsp; Proxy&lt;DataCall, &amp;Parser::on_body&gt;::Raw,<br>
++&nbsp;&nbsp; Proxy&lt;Call, &amp;Parser::on_message_complete&gt;::Raw,<br>
++&nbsp;&nbsp; Proxy&lt;Call, &amp;Parser::on_chunk_header&gt;::Raw,<br>
++diff --git a/test/parallel/test-http-chunk-extensions-limit.js b/test/para=
+llel/test-http-chunk-extensions-limit.js<br>
++new file mode 100644<br>
++index 0000000..6868b3d<br>
++--- /dev/null<br>
+++++ b/test/parallel/test-http-chunk-extensions-limit.js<br>
++@@ -0,0 +1,131 @@<br>
+++'use strict';<br>
+++<br>
+++const common =3D require('../common');<br>
+++const http =3D require('http');<br>
+++const net =3D require('net');<br>
+++const assert =3D require('assert');<br>
+++<br>
+++// Verify that chunk extensions are limited in size when sent all togethe=
+r.<br>
+++{<br>
+++&nbsp; const server =3D http.createServer((req, res) =3D&gt; {<br>
+++&nbsp;&nbsp;&nbsp; req.on('end', () =3D&gt; {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; res.writeHead(200, { 'Content-Type': 'text=
+/plain' });<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; res.end('bye');<br>
+++&nbsp;&nbsp;&nbsp; });<br>
+++<br>
+++&nbsp;&nbsp;&nbsp; req.resume();<br>
+++&nbsp; });<br>
+++<br>
+++&nbsp; server.listen(0, () =3D&gt; {<br>
+++&nbsp;&nbsp;&nbsp; const sock =3D net.connect(server.address().port);<br>
+++&nbsp;&nbsp;&nbsp; let data =3D '';<br>
+++<br>
+++&nbsp;&nbsp;&nbsp; sock.on('data', (chunk) =3D&gt; data +=3D chunk.toStri=
+ng('utf-8'));<br>
+++<br>
+++&nbsp;&nbsp;&nbsp; sock.on('end', common.mustCall(function() {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; assert.strictEqual(data, 'HTTP/1.1 413 Pay=
+load Too Large\r\nConnection: close\r\n\r\n');<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; server.close();<br>
+++&nbsp;&nbsp;&nbsp; }));<br>
+++<br>
+++&nbsp;&nbsp;&nbsp; sock.end('' +<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'GET / HTTP/1.1\r\n' +<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'Host: localhost:8080\r\n' +<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'Transfer-Encoding: chunked\r\n\r\n' +<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '2;' + 'A'.repeat(20000) + '=3Dbar\r\nAA\r=
+\n' +<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '0\r\n\r\n'<br>
+++&nbsp;&nbsp;&nbsp; );<br>
+++&nbsp; });<br>
+++}<br>
+++<br>
+++// Verify that chunk extensions are limited in size when sent in interval=
+s.<br>
+++{<br>
+++&nbsp; const server =3D http.createServer((req, res) =3D&gt; {<br>
+++&nbsp;&nbsp;&nbsp; req.on('end', () =3D&gt; {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; res.writeHead(200, { 'Content-Type': 'text=
+/plain' });<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; res.end('bye');<br>
+++&nbsp;&nbsp;&nbsp; });<br>
+++<br>
+++&nbsp;&nbsp;&nbsp; req.resume();<br>
+++&nbsp; });<br>
+++<br>
+++&nbsp; server.listen(0, () =3D&gt; {<br>
+++&nbsp;&nbsp;&nbsp; const sock =3D net.connect(server.address().port);<br>
+++&nbsp;&nbsp;&nbsp; let remaining =3D 20000;<br>
+++&nbsp;&nbsp;&nbsp; let data =3D '';<br>
+++<br>
+++&nbsp;&nbsp;&nbsp; const interval =3D setInterval(<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; () =3D&gt; {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (remaining &gt; 0) {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sock.write('A'.rep=
+eat(1000));<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sock.write('=3Dbar=
+\r\nAA\r\n0\r\n\r\n');<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; clearInterval(inte=
+rval);<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+++<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; remaining -=3D 1000;<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; },<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; common.platformTimeout(20),<br>
+++&nbsp;&nbsp;&nbsp; ).unref();<br>
+++<br>
+++&nbsp;&nbsp;&nbsp; sock.on('data', (chunk) =3D&gt; data +=3D chunk.toStri=
+ng('utf-8'));<br>
+++<br>
+++&nbsp;&nbsp;&nbsp; sock.on('end', common.mustCall(function() {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; assert.strictEqual(data, 'HTTP/1.1 413 Pay=
+load Too Large\r\nConnection: close\r\n\r\n');<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; server.close();<br>
+++&nbsp;&nbsp;&nbsp; }));<br>
+++<br>
+++&nbsp;&nbsp;&nbsp; sock.write('' +<br>
+++&nbsp;&nbsp;&nbsp; 'GET / HTTP/1.1\r\n' +<br>
+++&nbsp;&nbsp;&nbsp; 'Host: localhost:8080\r\n' +<br>
+++&nbsp;&nbsp;&nbsp; 'Transfer-Encoding: chunked\r\n\r\n' +<br>
+++&nbsp;&nbsp;&nbsp; '2;'<br>
+++&nbsp;&nbsp;&nbsp; );<br>
+++&nbsp; });<br>
+++}<br>
+++<br>
+++// Verify the chunk extensions is correctly reset after a chunk<br>
+++{<br>
+++&nbsp; const server =3D http.createServer((req, res) =3D&gt; {<br>
+++&nbsp;&nbsp;&nbsp; req.on('end', () =3D&gt; {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; res.writeHead(200, { 'content-type': 'text=
+/plain', 'connection': 'close', 'date': 'now' });<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; res.end('bye');<br>
+++&nbsp;&nbsp;&nbsp; });<br>
+++<br>
+++&nbsp;&nbsp;&nbsp; req.resume();<br>
+++&nbsp; });<br>
+++<br>
+++&nbsp; server.listen(0, () =3D&gt; {<br>
+++&nbsp;&nbsp;&nbsp; const sock =3D net.connect(server.address().port);<br>
+++&nbsp;&nbsp;&nbsp; let data =3D '';<br>
+++<br>
+++&nbsp;&nbsp;&nbsp; sock.on('data', (chunk) =3D&gt; data +=3D chunk.toStri=
+ng('utf-8'));<br>
+++<br>
+++&nbsp;&nbsp;&nbsp; sock.on('end', common.mustCall(function() {<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; assert.strictEqual(<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; data,<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'HTTP/1.1 200 OK\r\n' +<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'content-type: text/plain\r\n'=
+ +<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'connection: close\r\n' +<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'date: now\r\n' +<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'Transfer-Encoding: chunked\r\=
+n' +<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '\r\n' +<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '3\r\n' +<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'bye\r\n' +<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '0\r\n' +<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '\r\n',<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; );<br>
+++<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; server.close();<br>
+++&nbsp;&nbsp;&nbsp; }));<br>
+++<br>
+++&nbsp;&nbsp;&nbsp; sock.end('' +<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'GET / HTTP/1.1\r\n' +<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'Host: localhost:8080\r\n' +<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'Transfer-Encoding: chunked\r\n\r\n' +<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '2;' + 'A'.repeat(10000) + '=3Dbar\r\nAA\r=
+\n' +<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '2;' + 'A'.repeat(10000) + '=3Dbar\r\nAA\r=
+\n' +<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '2;' + 'A'.repeat(10000) + '=3Dbar\r\nAA\r=
+\n' +<br>
+++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '0\r\n\r\n'<br>
+++&nbsp;&nbsp;&nbsp; );<br>
+++&nbsp; });<br>
+++}<br>
++diff --git a/tools/update-llhttp.sh b/tools/update-llhttp.sh<br>
++index 12e2f46..a95eef1 100755<br>
++--- a/tools/update-llhttp.sh<br>
+++++ b/tools/update-llhttp.sh<br>
++@@ -59,5 +59,5 @@ echo &quot;&quot;<br>
++ echo &quot;Please git add llhttp, commit the new version:&quot;<br>
++ echo &quot;&quot;<br>
++ echo &quot;$ git add -A deps/llhttp&quot;<br>
++-echo &quot;$ git commit -m \&quot;deps: update nghttp2 to $LLHTTP_VERSION=
+\&quot;&quot;<br>
+++echo &quot;$ git commit -m \&quot;deps: update llhttp to $LLHTTP_VERSION\=
+&quot;&quot;<br>
++ echo &quot;&quot;<br>
 +--<br>
 +2.40.0<br>
 diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_16.20.2.bb b/meta-oe/re=
 cipes-devtools/nodejs/nodejs_16.20.2.bb<br>
-index b4261eaf8..c03461df4 100644<br>
+index 16593a0fe..b786c0273 100644<br>
 --- a/meta-oe/recipes-devtools/nodejs/nodejs_16.20.2.bb<br>
 +++ b/meta-oe/recipes-devtools/nodejs/nodejs_16.20.2.bb<br>
-@@ -29,6 +29,7 @@ SRC_URI =3D &quot;<a href=3D""></a>http://nodejs.org/dist=
+@@ -27,6 +27,7 @@ SRC_URI =3D &quot;<a href=3D""></a>http://nodejs.org/dist=
 /v${PV}/node-v${PV}.tar.xz \<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href=
+=3D"file://0001-mips-Use-32bit-cast-for-operand-on-mips32.patch">
+file://0001-mips-Use-32bit-cast-for-operand-on-mips32.patch</a> \<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href=
+=3D"file://0001-Nodejs-Fixed-pipes-DeprecationWarning.patch">file://0001-No=
+dejs-Fixed-pipes-DeprecationWarning.patch</a> \<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href=
 =3D"file://CVE-2022-25883.patch">file://CVE-2022-25883.patch</a> \<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href=
-=3D"file://CVE-2024-22019.patch">file://CVE-2024-22019.patch</a> \<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href=
-=3D"file://CVE-2024-22025.patch">file://CVE-2024-22025.patch</a> \<br>
 +&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href=3D"fi=
-le://CVE-2023-46809.patch">file://CVE-2023-46809.patch</a> \<br>
+le://CVE-2024-22019.patch">file://CVE-2024-22019.patch</a> \<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;<b=
 r>
 &nbsp;SRC_URI:append:class-target =3D &quot; \<br>
@@ -1666,5 +1526,5 @@ ies.patch</a> \<br>
 </body>
 </html>
 
---_000_MW4PR11MB5822BBAF493E7DFFC71B449A843B2MW4PR11MB5822namp_--
+--_000_MW4PR11MB58220DFA642C684908FF9DAB843B2MW4PR11MB5822namp_--
 
