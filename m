@@ -1,505 +1,309 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <meenali.gupta@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E1141C47DD9
-	for <webhook@archiver.kernel.org>; Thu, 28 Mar 2024 03:11:45 +0000 (UTC)
-Received: from mail-ot1-f49.google.com (mail-ot1-f49.google.com [209.85.210.49])
- by mx.groups.io with SMTP id smtpd.web11.7229.1711595495814328933
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3BFF2C54E67
+	for <webhook@archiver.kernel.org>; Thu, 28 Mar 2024 04:16:46 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.8083.1711599396581799959
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 27 Mar 2024 20:11:35 -0700
+ Wed, 27 Mar 2024 21:16:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=J8B6p0tI;
- spf=pass (domain: gmail.com, ip: 209.85.210.49, mailfrom: raj.khem@gmail.com)
-Received: by mail-ot1-f49.google.com with SMTP id 46e09a7af769-6e695b7391dso243497a34.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 27 Mar 2024 20:11:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1711595495; x=1712200295; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=2KhRIQaZxHYh55qsSaJwWo6eHlR5Jq91BMt9xoxtQkM=;
-        b=J8B6p0tI+rCSuLRlwplxKBAoil+5CpbwqT3tYLQZpu/KCnXnSTnTbijaEviQXKQnYW
-         GtOY42pblcdhkn0II4OJtUHWkXMRtXHqWcWemek1+yAj8n/1csBSyeWB2CHY5+d6UaxY
-         NesvUa03hPrjXqWhgPHI+YxRZ6KNZdCxbykSC2SBvMumPXq+i0YMSy/2ws9yIWDK6j5Q
-         m0EQvvo5wf+r1D1j0iZVAx4wc6pkqeTyz4ILXFW+vmExK0NfHupcsxrGLCHv1/wJTAWh
-         uziG6lZhWnfGiR6ETika1enoYhcMVD0VCdL4TdhayfxSUpycjp9RkGVXRdhLhYZ1gOzO
-         Vs0g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1711595495; x=1712200295;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=2KhRIQaZxHYh55qsSaJwWo6eHlR5Jq91BMt9xoxtQkM=;
-        b=Gn2IrQtuGq4O9uHd+3UTC5uQCGam07ZB/3PEI9pUYbZWZn61QIhmtscgwwURMPlPCv
-         uDBeuvYPTol9XrX/d0uTtQqUbBc0BD5k3fd6ujK4W0lo66zvEwmhArsXnw174+eY3ihq
-         9omVgoPoTncYv6pai68plUw9naRdyWP0cDOdpES56LsLhzLhvQROogcp/dWrAZ7FkFl/
-         0FJc5+nk2tyX0gdX0Cc965HRNxdSiFWKpeOheV7d7p1LEdqmjjsfPaVCdDrPSuzR/o+Z
-         3AE40yy1J/+GJN6/hAG37lC6VQvX1ahGfsr3Jeghzzn2M3YJdAIVVm6qzbW+PVKoSjyR
-         6fOQ==
-X-Gm-Message-State: AOJu0YwqZP2QNFfHl5S/zhUOBMCtwG3Y/m8pVEtJRDAB1R+SVtutIUt8
-	0+wiXsnBfjR/DKmJ4jmBamFFjjIVOCJcIKnJa/SzicVfvTzOgM2ahkElauY8UIoGO4s6Q7Fdmo5
-	V0fLNibzl73yekIUWlZk/1YYBL8k=
-X-Google-Smtp-Source: AGHT+IEVUrs6v0nwRa6hqRwXD07B1WRRZdyWkhYZ3hqPtb3PB13YswTBn9hrpc7EgNOlKH5MxeIlwZ50V28mTpxvbuk=
-X-Received: by 2002:a05:6870:17a3:b0:22a:6ce3:d57 with SMTP id
- r35-20020a05687017a300b0022a6ce30d57mr1606969oae.25.1711595494586; Wed, 27
- Mar 2024 20:11:34 -0700 (PDT)
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=fodd9Mkc;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=3817a233e2=meenali.gupta@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 42S0n3B5031774
+	for <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 04:16:35 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:cc:subject:date:message-id:references:in-reply-to
+	:content-type:mime-version; s=PPS06212021; bh=nbUuPD2yhOp53l/fKv
+	/mXGUylBlzdvTZXUFwfI39JAI=; b=fodd9Mkc7NS5XPg7P9LNhViu92FUoQKYl1
+	XlYroozPUXOMo/kNJA+EmhfFb7JIBCZb/zMH/H4k+6SEvzFteWKEISiprV/wmwx5
+	OzD8oyRPUuPmZNIwVOzyFksfAeupMdJgrvRF6PXv5JzzAYrm3+sydeaSMoPemBpR
+	Kd6/iCgtExRvY5LLyD4a6rhvtRJWLkI/ijm8Ejmxw7jIau0OefrvoWuZnc3FNraX
+	IcolEUSTKI1xfaH7y86ABJR/Bnd1bqs3J0KIRiRxWEyRH314Y2O8nstlejuROcoG
+	KEYG6J3f08diQkjl0a0tguBO/S/SCqs+RwFAGuocDNbATcGeCwGA==
+Received: from pps.reinject (localhost [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3x1m9xpad7-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 04:16:35 +0000 (GMT)
+Received: from m0250811.ppops.net (m0250811.ppops.net [127.0.0.1])
+	by pps.reinject (8.18.0.8/8.18.0.8) with ESMTP id 42S4GYhs018186
+	for <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 04:16:35 GMT
+Received: from nam12-dm6-obe.outbound.protection.outlook.com (mail-dm6nam12lp2168.outbound.protection.outlook.com [104.47.59.168])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3x1m9xpad3-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Thu, 28 Mar 2024 04:16:34 +0000 (GMT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=gdFWnx7Xml7y1LojbjrCXDxNmQrOCrDJSUG2e3egliYkeUg4/0VJrF23VSbLIL8tlsyLUHkjmoKCgGWjqnc1muIX0tBoip+2clk0cRC+dYldKjydsfJY+EocdA1fxZYIxGk3v6h1P+c/Ye4wJlzWN2pqeEz70IPxPt5x05nnfKfsNLLIYl8fkAN7Eeh5JLxfWg+t1qxA1vxDba+taPB6D5uVjMRavtDzXwHZCcV36u2/Tv5Eq+NlqFlgVbDP+Lf0NBXEn8i1qa/RzmpgY1vRRJKwAQ30eBoFZ8BQJbiX9QrMuEOGjWdR0NL5V3feq3F6BCemMeFSOzYFyDmyLObrKA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=nbUuPD2yhOp53l/fKv/mXGUylBlzdvTZXUFwfI39JAI=;
+ b=dmcDp0qeO78991KwOJArzlZUlAfWw6OdP89cRlhEoe5Hr87WCQWoKjcGzDI0O+bih1QU8pOGz8WQkicB1A+PCp2/NOb5XDiYrpY5cswgNu/agi5G1JjJatveYUQ7hStLTbuOloir82sz6lE7O30wMijdbScNecWSxbL1iS1IS+/b3UbT1HCZs3Zzi86PK7q4UIuUqaJGaDee3cJDAGu0H19aylVm8OpzUi/kHRpcI0Fq0Qp8cMZykAFylwWH+yoOGWW/FJDcYjOBRFj4tRwnT4C22pVeNtDBQeOXY0/MIUjySPD7uCMzC2Og6wr7zANAnTtQAhINExMlJejlVmGUUA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from BY1PR11MB8005.namprd11.prod.outlook.com (2603:10b6:a03:523::18)
+ by MN2PR11MB4583.namprd11.prod.outlook.com (2603:10b6:208:26a::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.39; Thu, 28 Mar
+ 2024 04:16:31 +0000
+Received: from BY1PR11MB8005.namprd11.prod.outlook.com
+ ([fe80::145d:b485:ef6e:8fc5]) by BY1PR11MB8005.namprd11.prod.outlook.com
+ ([fe80::145d:b485:ef6e:8fc5%3]) with mapi id 15.20.7409.031; Thu, 28 Mar 2024
+ 04:16:30 +0000
+From: "Gupta, Meenali" <Meenali.Gupta@windriver.com>
+To: Khem Raj <raj.khem@gmail.com>
+CC: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe][meta-webserver][kirkstone][PATCH 1/1] nginx: upgrade 1.25.2
+ -> 1.25.3
+Thread-Topic: [oe][meta-webserver][kirkstone][PATCH 1/1] nginx: upgrade 1.25.2
+ -> 1.25.3
+Thread-Index: AQHaLq0yL3AbXtBE7USzi6kug2i3GrFNMAqf
+Date: Thu, 28 Mar 2024 04:16:30 +0000
+Message-ID: 
+ <BY1PR11MB800512F6778B619835B895CDE53B2@BY1PR11MB8005.namprd11.prod.outlook.com>
+References: <20231214103812.512113-1-meenali.gupta@windriver.com>
+ <CAMKF1spE4bd8H3ATZOKcxYP01Cstp2hvBXZ9Qc9DeC8pQtoVWw@mail.gmail.com>
+In-Reply-To: 
+ <CAMKF1spE4bd8H3ATZOKcxYP01Cstp2hvBXZ9Qc9DeC8pQtoVWw@mail.gmail.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-GB
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: BY1PR11MB8005:EE_|MN2PR11MB4583:EE_
+x-ms-office365-filtering-correlation-id: 23ee69d9-fcab-403d-c5d3-08dc4eddd874
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 
+ V26Si8lJEVogQF45G3UjcppOdPdB2JMf/bv/LtBSUa+sIwPu0px2DN5+Xot1eKZ/Fncl94dq4ADDgKPj9ZT9KCp1QuEdFUbhiMQ/F8iFZ3sRUV2cI85zEyXpfhmNJxzqpLW8m+4gEtegjCavHQJMzfb3e1tvUMCQqL9l2AJYccK1QwKZOR6HG7HH0uSZ04HWYTD5RrCmbxwfbY5skhAe7V7avR7g0aGluVorzYP7IeNUPyEOeNIl8bFl10bX2CeiqHxFjAQfhXhMJ/Fra72066CEFGXQbaUCLINx3QWPLvHgrrTAn3Tl//xx5JnXPm63ruadfqEqRAT1isCh5fNN+PFL2AY+k6zrES9nTONjyWNsG/j0X7FzC+tz/tztxTxctqmf7pdT1DHLgqQMfPyBzz2kOLFhpGiLq7oIEzUSMDcFe9oFdUwHHugkPNFkxbUIlkNeKcCCSeh2HFmAlIpR/tHhHtXMpj/6yXY2Pa57jS+OK/4Fz94G35hyMmhUaKVZHuI4fbPEJkrUeghtm3HWa5f8I6YLsgh0PPjFirjeGrceZtguK184EtlgTcNHjQjb+mg4rLs8VMJK+bsYI9MDdh3MKQSzkssWlpeYr+kDLl9/kapIfcu9WmfU1X3owklEnmtvdrDSDU3tNl3uqwzrlNRTKjDZ3qlsDhGm7gTyHXk=
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY1PR11MB8005.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(366007)(1800799015)(376005)(38070700009);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?utf-8?B?R3RoTUozWGNmdXRqaGtSdHVwczNXQlZtdzR6d2ZvN2F3UzhscG5QSGwvOVc4?=
+ =?utf-8?B?bEc0OERITlRXc0Mzb202b0dpd0NpQVhmU3Y3MTNsVFlFTldiVjNVMmZlVjEw?=
+ =?utf-8?B?bzQwZnhZUFFVbndiTWVvV25MeUVORFF5R3hIc2VoMHhDY0t4eEtVYXNMTS9y?=
+ =?utf-8?B?YlJlZ3VEek5tSFMyVkIyNmlDeUpWeVVCUHJDQzNXMXpWYjFBSXlLNXFiNHhN?=
+ =?utf-8?B?NVlpS05TMzIrZUJ2WlZBU3o3Q1pYR2Y1a3Y2OTdvVEVQME9SN1lOU0plZFlV?=
+ =?utf-8?B?VlNuWXJaYmJLSTNmT014QUhsL0tIVFdESUFicUw4L3NwUWxNQW52b2RIdm1D?=
+ =?utf-8?B?dXZkZmhISHhaZzd4bkNhaHhXakdiTDVleXBTcFE3VkZUekRGa20yQVJkVCtC?=
+ =?utf-8?B?dHcrY2dKc0RBWmJUcTJjTm1DUno4N0drK3NjSVJTOU12Wm9lN3VYd1I5L1Ns?=
+ =?utf-8?B?ZzdIUHFtYkxZTFpteWhYeWQxcTRuK255L1NjOTNSNVBMSDVMWUhCTC9PTnFJ?=
+ =?utf-8?B?K3drbDA1U1RhVEtIOEZYV1dTWDBUazF5dUw3TVJ5WCtBRHlCOUVYei91Ny93?=
+ =?utf-8?B?anZSRDhVZXlvSzNjM3djK01wem5XbENIMytxYnRSekY5S0N2Y0VtNnovZlM1?=
+ =?utf-8?B?emZFT05UVWVBYjBYZ252OVBoaXR6WU9KR05zd1N5SUN1dDh3azJWdGQwUzlD?=
+ =?utf-8?B?dE50WFJoaWFRK0Rid2lSQXpEbFZxT1FXc2VSWFE0NmZXN0dQaEZDU3BZeS8w?=
+ =?utf-8?B?ZEttZXF1My9UTHVpK1M4ODNUWjdwT0Y0RHNzL3ZMbjlHNjhBM0RMZUdaNmp0?=
+ =?utf-8?B?QjhvcHY4VDJySWRoMUVPby9hWXQ3SnJGYlJ6ZGc0b1hRRVVHSjEwSjNHTlFK?=
+ =?utf-8?B?amJ6UDg3aGZmemFMaWcyR1lSYWZnekd3ZEJxUVlZVzZOTnFtOHhOZ1hRU0Ni?=
+ =?utf-8?B?WFZWNEx2cEluaFpCNldkOGI1cUtsMzRrOEdudW9YdEplYmhkVmVwWC93WHRr?=
+ =?utf-8?B?L2JiSVRTZHBja3R2c2NrbjRRczQxalp5ZzU1MHF0OVl0MkpobVI2TkgrWXp1?=
+ =?utf-8?B?TzVnblNlcmhCMnROdktZclhwSGxvNzdPSzVBeU5wdlZGRHd5RVRaN09hcHQ5?=
+ =?utf-8?B?bHVsenpuQnFFdFIrWkV0N0EzL2JYM2xGT3hIUERwcG5wS3FZNDRPa2NUVlNF?=
+ =?utf-8?B?bG5KTWFINzM4ZUt5bVBPMnYrUXJYSHV6S2hiS2NuT3BtRkZwcS9KVFFXNFdh?=
+ =?utf-8?B?N0l3VS9IQkdlSXR1L1hVM3lzNC9NTmEyYzhid1BuK0grNHNmTDVWZ29DS1B0?=
+ =?utf-8?B?enNwcGdTZVZldlU1ZXFZNlI0Z28wOGM2S0MzaDh4OFk0MmxjSHBub0RDREJj?=
+ =?utf-8?B?UHYrTnVCSk8xMGQrT1hkMVNmYWNucmRFNDBRWDBKbVk4UUMyajRkeVdnY0J1?=
+ =?utf-8?B?OVlacHhNUGx5TFNMZUg0TElZaEk2bk9rL01KaGc1MU5PVWRnZTlUSG9mYlky?=
+ =?utf-8?B?NlN1RDFNT1pUOE9JT3o5cVB0VzhMVURheUF6d2F6VkxhdWFDdHFSQTNUQUtD?=
+ =?utf-8?B?cTFIUXZnZFdLSlpwOHBUSUtKWk8yMzZOdHR5emJpWHNOaURHQm93azRSdDVz?=
+ =?utf-8?B?cHMyL2o1dWhUVW4rVU5CWE0vanh0NmNUeENPbjZmUzY2SUFtbEc1WDh1aUd2?=
+ =?utf-8?B?Nk1Ub21JdHRadjY5cG03SUMvMW10TjJJeWJLT1dwQXFVY0JnOTJER1dXZ0RO?=
+ =?utf-8?B?OUtHZUVlWWp6V21QOW1vKzVIZEtYNXA4NDIyOW84NDZZZlJwN0JmYmc4V2U0?=
+ =?utf-8?B?aVQ3ZTFNKzNRNXZqSHN2YzZQVUxQaUR5RTR1WGp5bnVrbFdYaVQwZjNLWlQz?=
+ =?utf-8?B?dzU2ZW5taTZMdzBsMWl3YTFGeE4wVUo2ZG93R1dDMUxPZk5BMGlOQlJFczUy?=
+ =?utf-8?B?QVp4TFVYOEk2MG9LYVdIanQ5NWxJRk82dUhrOGV2cXFqY25oK2NzQlM1TExY?=
+ =?utf-8?B?ZHkwd2lPc2NYV2xDeHAvTmxqanozcWE1VEMzWG9HcGdROWxLdFZ3T1MzOFRP?=
+ =?utf-8?B?eVN4VUVVOGJTdlR0ZmFoeDY4L2JiQzhRdEx5RVA4cFlucnZNMXRNaklJMnA0?=
+ =?utf-8?B?K3RIdUhzNGRzaHRHaWtjZk9EcXJBbDAxRUVBL2RWQkRkNGkzTkg0TmhHUjcr?=
+ =?utf-8?B?NUE9PQ==?=
+Content-Type: multipart/alternative;
+	boundary="_000_BY1PR11MB800512F6778B619835B895CDE53B2BY1PR11MB8005namp_"
 MIME-Version: 1.0
-References: <20240304154540.747063-1-akuster808@gmail.com>
-In-Reply-To: <20240304154540.747063-1-akuster808@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 27 Mar 2024 20:11:08 -0700
-Message-ID: <CAMKF1sp_XwDQVaOwFuy5f5TMXaAwjjtS=druvtyyQJb-yLSdLA@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][scarthgap][PATCH] meta-openemnedded: Add myself as
- scarthgap maintainer
-To: Armin Kuster <akuster808@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BY1PR11MB8005.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 23ee69d9-fcab-403d-c5d3-08dc4eddd874
+X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Mar 2024 04:16:30.5790
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: KyYg1V58/Y4M7bZJL9Vl2D0KhtEUZr1onavueoEzRLbobPgyWcoEA93xFLNQGzBZtsAZEpexqFuNGLkNCeAKsY4UljDcFG6qgM/VuDKQwIo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR11MB4583
+X-Proofpoint-GUID: rVJLcfk4x7IQEnCxyW0nPANBWr6BB0vY
+X-Proofpoint-ORIG-GUID: A1YhGs8QvGCRZcbBiJRWCtbMma6sixqY
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-03-28_03,2024-03-27_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxlogscore=999 phishscore=0
+ lowpriorityscore=0 suspectscore=0 clxscore=1015 malwarescore=0 mlxscore=0
+ spamscore=0 impostorscore=0 bulkscore=0 priorityscore=1501 adultscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2403210001
+ definitions=main-2403280023
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 03:11:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109649
+ <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 04:16:46 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109650
 
-Thanks Armin for maintaining upcoming scarthgap release, its an LTS, I
-have applied this patch to scarthgap branch now.
-its currently in sync with master branch but I expect some
-cherry-picks before the final release.
+--_000_BY1PR11MB800512F6778B619835B895CDE53B2BY1PR11MB8005namp_
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Mon, Mar 4, 2024 at 7:45=E2=80=AFAM Armin Kuster <akuster808@gmail.com> =
-wrote:
->
-> Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> ---
->  README.md                   |  2 +-
->  meta-filesystems/README.md  | 10 +++++-----
->  meta-gnome/README.md        | 10 +++++-----
->  meta-initramfs/README.md    |  8 ++++----
->  meta-multimedia/README.md   | 10 +++++-----
->  meta-networking/MAINTAINERS | 11 +++--------
->  meta-networking/README.md   |  8 ++++----
->  meta-oe/README.md           |  8 ++++----
->  meta-perl/README.md         | 11 +++++------
->  meta-python/README.md       | 12 +++++-------
->  meta-webserver/README.md    | 11 +++++++----
->  meta-xfce/README.md         | 11 +++++------
->  12 files changed, 53 insertions(+), 59 deletions(-)
->
-> diff --git a/README.md b/README.md
-> index 7318f09cdb..82f2e9699a 100644
-> --- a/README.md
-> +++ b/README.md
-> @@ -1,6 +1,6 @@
->  Collection of layers for the OE-core universe
->
-> -Main layer maintainer: Khem Raj <raj.khem@gmail.com>
-> +Main layer maintainer: Armin Kuster <akuster808@gmail.com>
->
->  This repository is a collection of layers to suppliment OE-Core
->  with additional packages, Each layer have designated maintainer
-> diff --git a/meta-filesystems/README.md b/meta-filesystems/README.md
-> index 78a4429ce2..bf48806035 100644
-> --- a/meta-filesystems/README.md
-> +++ b/meta-filesystems/README.md
-> @@ -11,26 +11,26 @@ This layer depends on:
->
->    URI: git://git.openembedded.org/openembedded-core
->    layers: meta
-> -  branch: master
-> +  branch: scarthgap
->
->    URI: git://git.openembedded.org/meta-openembedded
->    layers: meta-oe
-> -  branch: master
-> +  branch: scarthgap
->
->  Patches
->  =3D=3D=3D=3D=3D=3D=3D
->
->  Please submit any patches against the filesystems layer to the
->  OpenEmbedded development mailing list (openembedded-devel@lists.openembe=
-dded.org)
-> -with '[meta-filesystems]' in the subject.
-> +with '[meta-filesystems][scarthgap]' in the subject.
->
-> -Layer maintainer: Khem Raj <raj.khem@gmail.com>
-> +Layer maintainer: Armin Kuster <akuster808@gmail.com>
->
->  When sending single patches, please use something like:
->
->     git send-email -1 -M \
->          --to openembedded-devel@lists.openembedded.org \
-> -        --subject-prefix=3D'meta-filesystems][PATCH'
-> +        --subject-prefix=3D'meta-filesystems][scarthgap][PATCH'
->
->
->  Table of Contents
-> diff --git a/meta-gnome/README.md b/meta-gnome/README.md
-> index fbb0d72476..2125c36df3 100644
-> --- a/meta-gnome/README.md
-> +++ b/meta-gnome/README.md
-> @@ -3,14 +3,14 @@ Dependencies
->  This layer depends on:
->
->  URI: git://git.openembedded.org/openembedded-core
-> -branch: master
-> +branch: scarthgap
->
->  URI: git://git.openembedded.org/meta-openembedded
-> -branch: master
-> +branch: scarthgap
->
-> -Send pull requests to openembedded-devel@lists.openembedded.org with '[m=
-eta-gnome]' in the subject'
-> +Send pull requests to openembedded-devel@lists.openembedded.org with '[m=
-eta-gnome][scarthgap]' in the subject'
->
->  When sending single patches, please using something like:
-> -git send-email -M -1 --to openembedded-devel@lists.openembedded.org --su=
-bject-prefix=3D'meta-gnome][PATCH'
-> +git send-email -M -1 --to openembedded-devel@lists.openembedded.org --su=
-bject-prefix=3D'meta-gnome][scarthgap][PATCH'
->
-> -Layer maintainer: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> +Layer maintainer: Armin Kuster <akuster808@gmail.com>
-> diff --git a/meta-initramfs/README.md b/meta-initramfs/README.md
-> index 119293a741..da7acfca62 100644
-> --- a/meta-initramfs/README.md
-> +++ b/meta-initramfs/README.md
-> @@ -12,19 +12,19 @@ Dependencies
->  This layer depends on:
->
->  URI: git://git.openembedded.org/meta-openembedded
-> -branch: master
-> +branch: scarthgap
->
->
->  Maintenance
->  -----------
->
->  Send patches / pull requests to openembedded-devel@lists.openembedded.or=
-g
-> -with '[meta-initramfs]' in the subject.
-> +with '[meta-initramfs][scarthgap]' in the subject.
->
->  When sending single patches, please using something like:
-> -git send-email -M -1 --to openembedded-devel@lists.openembedded.org --su=
-bject-prefix=3D'meta-initramfs][PATCH'
-> +git send-email -M -1 --to openembedded-devel@lists.openembedded.org --su=
-bject-prefix=3D'meta-initramfs][scarthgap][PATCH'
->
-> -Interm layer maintainer: Khem Raj <raj.khem@gmail.com>
-> +Interm layer maintainer: Armin Kuster <akuster808@gmail.com>
->
->
->  License
-> diff --git a/meta-multimedia/README.md b/meta-multimedia/README.md
-> index 235c34331b..66c139ac9c 100644
-> --- a/meta-multimedia/README.md
-> +++ b/meta-multimedia/README.md
-> @@ -1,17 +1,17 @@
->  This layer depends on:
->
->  URI: git://git.openembedded.org/openembedded-core
-> -branch: master
-> +branch: scarthgap
->
->  URI: git://git.openembedded.org/meta-openembedded
->  layers: meta-oe
-> -branch: master
-> +branch: scarthgap
->
-> -Send pull requests to openembedded-devel@lists.openembedded.org with '[m=
-eta-multimedia]' in the subject
-> +Send pull requests to openembedded-devel@lists.openembedded.org with '[m=
-eta-multimedia][scarthgap]' in the subject
->
->  When sending single patches, please use something like:
-> -git send-email -M -1 --to openembedded-devel@lists.openembedded.org --su=
-bject-prefix=3D'meta-multimedia][PATCH'
-> +git send-email -M -1 --to openembedded-devel@lists.openembedded.org --su=
-bject-prefix=3D'meta-multimedia][scarthgap][PATCH'
->
->  You are encouraged to fork the mirror on github https://github.com/opene=
-mbedded/meta-openembedded to share your patches, this is preferred for patc=
-h sets consisting of more than one patch. Other services like GitLab, repo.=
-or.cz or self hosted setups are of course accepted as well, 'git fetch <rem=
-ote>' works the same on all of them. We recommend github because it is free=
-, easy to use, has been proven to be reliable and has a really good web GUI=
-.
->
-> -Layer maintainer: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> +Layer maintainer: Armin Kuster <akuster808@gmail.com>
-> diff --git a/meta-networking/MAINTAINERS b/meta-networking/MAINTAINERS
-> index dc549d7582..a424ab9cdd 100644
-> --- a/meta-networking/MAINTAINERS
-> +++ b/meta-networking/MAINTAINERS
-> @@ -2,13 +2,13 @@ This file contains a list of maintainers for the meta-n=
-etworking layer.
->
->  Please submit any patches against meta-networking to the OpenEmbedded
->  development mailing list (openembedded-devel@lists.openembedded.org) wit=
-h
-> -'[meta-networking]' in the subject.
-> +'[meta-networking][scarthgap]' in the subject.
->
->  When sending single patches, please use something like:
->
->     git send-email -1 -M \
->          --to openembedded-devel@lists.openembedded.org \
-> -        --subject-prefix=3D'meta-networking][PATCH'
-> +        --subject-prefix=3D'meta-networking][scarthgap][PATCH'
->
->  You may also contact the maintainers directly.
->
-> @@ -26,14 +26,9 @@ Please keep this list in alphabetical order.
->  Maintainers List (try to look for most precise areas first)
->
->  COMMON
-> -M:      Khem Raj <raj.khem@gmail.com>
-> -M:      "Joe MacDonald (backup)" <joe@deserted.net>
-> +M:      Armin Kuster <akuster808@gmail.com>
->  L:      openembedded-devel@lists.openembedded.org
->  Q:      https://patchwork.openembedded.org/project/oe/
->  S:      Maintained
->  F:      conf
->  F:      recipes-*
-> -
-> -OPENTHREAD
-> -M:      Stefan Schmidt <stefan@datenfreihafen.org>
-> -F:      recipes-connectivity/openthread/
-> diff --git a/meta-networking/README.md b/meta-networking/README.md
-> index ab2640618f..ef7933e319 100644
-> --- a/meta-networking/README.md
-> +++ b/meta-networking/README.md
-> @@ -18,21 +18,21 @@ Dependencies
->  This layer depends on:
->
->  URI: git://git.openembedded.org/openembedded-core
-> -branch: master
-> +branch: Scarthgap
->
->  For some recipes, the meta-oe layer is required:
->
->  URI: git://git.openembedded.org/meta-openembedded
->  subdirectory: meta-oe
-> -branch: master
-> +branch: Scarthgap
->
->  URI: git://git.openembedded.org/meta-openembedded
->  subdirectory: meta-python
-> -branch: master
-> +branch: Scarthgap
->
->  Maintenance
->  -----------
-> -Layer maintainers: Khem Raj <raj.khem@gmail.com>
-> +Stable Layer maintainer: Armin Kuster <akuster808@gmail.com>
->
->
->  Please see the MAINTAINERS file for information on contacting the
-> diff --git a/meta-oe/README.md b/meta-oe/README.md
-> index 676a2c8925..9bc68a86c7 100644
-> --- a/meta-oe/README.md
-> +++ b/meta-oe/README.md
-> @@ -4,7 +4,7 @@ meta-oe
->  This layer depends on:
->
->  URI: git://github.com/openembedded/openembedded-core.git
-> -branch: master
-> +branch: scarthgap
->
->  luajit recipe requires host compiler to be able to generate 32bit code w=
-hen target is 32bit
->  e.g. arm, so ensure that $CC -m32 is functional on build host, if buildi=
-ng this recipe, needed
-> @@ -16,10 +16,10 @@ pacman -S lib32-gcc-libs lib32-glibc
->  Ubuntu
->  sudo apt-get install gcc-multilib linux-libc-dev:i386
->
-> -Send pull requests to openembedded-devel@lists.openembedded.org with '[m=
-eta-oe]' in the subject'
-> +Send pull requests to openembedded-devel@lists.openembedded.org with '[m=
-eta-oe][scarthgap]' in the subject'
->
->  When sending single patches, please use something like:
-> -'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --s=
-ubject-prefix=3D"meta-oe][PATCH"'
-> +'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --s=
-ubject-prefix=3D"meta-oe][scarthgap][PATCH"'
->
->  You are encouraged to fork the mirror on GitHub https://github.com/opene=
-mbedded/meta-openembedded
->  to share your patches, this is preferred for patch sets consisting of mo=
-re than one patch.
-> @@ -28,4 +28,4 @@ Other services like GitLab, repo.or.cz or self-hosted s=
-etups are of course accep
->  'git fetch <remote>' works the same on all of them. We recommend GitHub =
-because it is free, easy
->  to use, has been proven to be reliable and has a really good web GUI.
->
-> -layer maintainer: Khem Raj <raj.khem@gmail.com>
-> +layer maintainer: Armin Kuster <akuster808@gmail.com>
-> diff --git a/meta-perl/README.md b/meta-perl/README.md
-> index 13014b0ff3..4ad9915146 100644
-> --- a/meta-perl/README.md
-> +++ b/meta-perl/README.md
-> @@ -52,7 +52,7 @@ Dependencies
->  This layer depends on:
->
->    URI: git://git.openembedded.org/openembedded-core
-> -  branch: master
-> +  branch: scarthgap
->
->  Adding the meta-perl layer to your build
->  ---------------------------------------
-> @@ -73,14 +73,13 @@ Maintenance
->  -----------
->
->  Send patches / pull requests to openembedded-devel@lists.openembedded.or=
-g with
-> -'[meta-perl]' in the subject.
-> +'[meta-perl][scarthgap]' in the subject.
->
->  When sending single patches, please using something like:
-> -git send-email -M -1 --to openembedded-devel@lists.openembedded.org --su=
-bject-prefix=3D'meta-perl][PATCH'
-> +git send-email -M -1 --to openembedded-devel@lists.openembedded.org --su=
-bject-prefix=3D'meta-perl][scarthgap][PATCH'
->
-> -Layer maintainers:
-> -    Hongxu Jia <hongxu.jia@windriver.com>
-> -    Tim "moto-timo" Orling <ticotimo@gmail.com>
-> +Layer maintainers: Armin Kuster <akuster808@gmail.com>
-> +
->
->  License
->  -------
-> diff --git a/meta-python/README.md b/meta-python/README.md
-> index 36c193957c..b29ccf3453 100644
-> --- a/meta-python/README.md
-> +++ b/meta-python/README.md
-> @@ -13,11 +13,11 @@ The meta-python layer depends on:
->
->         URI: git://git.openembedded.org/openembedded-core
->         layers: meta
-> -       branch: master
-> +       branch: scarthgap
->
->         URI: git://git.openembedded.org/meta-openembedded
->         layers: meta-oe
-> -       branch: master
-> +       branch: scarthgap
->
->  Contributing
->  -------------------------
-> @@ -28,14 +28,12 @@ comments and patch review. It is subscriber only, so =
-please register
->  before posting.
->
->  Send pull requests to openembedded-devel@lists.openembedded.org with
-> -'[meta-python]' in the subject.
-> +'[meta-python][scarthgap]' in the subject.
->
->  When sending single patches, please use something like:
-> -git send-email -M -1 --to=3Dopenembedded-devel@lists.openembedded.org --=
-subject-prefix=3D'meta-python][PATCH'
-> +git send-email -M -1 --to=3Dopenembedded-devel@lists.openembedded.org --=
-subject-prefix=3D'meta-python][scarthgap][PATCH'
->
->  Maintenance
->  -------------------------
->
-> -Layer maintainers:
-> -        Tim "moto-timo" Orling <TicoTimo@gmail.com>
-> -        Derek Straka <derek@asterius.io>
-> +Layer maintainers: Armin Kuster <akuster808@gmail.com>
-> diff --git a/meta-webserver/README.md b/meta-webserver/README.md
-> index d1b743887c..caa70acdef 100644
-> --- a/meta-webserver/README.md
-> +++ b/meta-webserver/README.md
-> @@ -13,13 +13,13 @@ This layer depends on:
->
->  URI: git://git.openembedded.org/openembedded-core
->  subdirectory: meta
-> -branch: master
-> +branch: scarthgap
->
->  For some recipes, the meta-oe layer is required:
->
->  URI: git://git.openembedded.org/meta-openembedded
->  subdirectory: meta-oe
-> -branch: master
-> +branch: scarthgap
->
->
->
-> @@ -50,9 +50,12 @@ Maintenance
->  -----------
->
->  Send patches / pull requests to openembedded-devel@lists.openembedded.or=
-g
-> -with '[meta-webserver]' in the subject.
-> +with '[meta-webserver][scarthgap]' in the subject.
->
-> -Layer maintainer: Derek Straka <derek@asterius.io>
-> +When sending single patches, please using something like:
-> +git send-email -M -1 --to openembedded-devel@lists.openembedded.org --su=
-bject-prefix=3D'meta-webserver][scarthgap][PATCH'
-> +
-> +Layer maintainer: Armin Kuster <akuster808@gmail.com>
->
->
->  License
-> diff --git a/meta-xfce/README.md b/meta-xfce/README.md
-> index 3d6158628f..92c2e65584 100644
-> --- a/meta-xfce/README.md
-> +++ b/meta-xfce/README.md
-> @@ -1,10 +1,10 @@
->  This layer depends on:
->
->  URI: git://git.openembedded.org/openembedded-core
-> -branch: master
-> +branch: scarthgap
->
->  URI: git://git.openembedded.org/meta-openembedded
-> -branch: master
-> +branch: scarthgap
->
->  meta-xfce depends on meta-oe, meta-gnome and meta-multimedia in this rep=
-ository.
->
-> @@ -13,10 +13,9 @@ this to local.conf:
->
->  BBMASK =3D "meta-xfce/recipes-multimedia"
->
-> -Send pull requests to openembedded-devel@lists.openembedded.org with '[m=
-eta-xfce]' in the subject'
-> +Send pull requests to openembedded-devel@lists.openembedded.org with '[m=
-eta-xfce][scarthgap]' in the subject'
->
->  When sending single patches, please using something like:
-> -git send-email -M -1 --to openembedded-devel@lists.openembedded.org --su=
-bject-prefix=3D'meta-xfce][PATCH'
-> +git send-email -M -1 --to openembedded-devel@lists.openembedded.org --su=
-bject-prefix=3D'meta-xfce][scarthgap][PATCH'
->
-> -Layer maintainer: Kai Kang <kai.kang@windriver.com>
-> -Layer maintainer: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> +Layer maintainer: Armin Kuster <akuster808@gmail.com>
-> --
-> 2.34.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#109098): https://lists.openembedded.org/g/openembedde=
-d-devel/message/109098
-> Mute This Topic: https://lists.openembedded.org/mt/104724589/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+UmVtaW5kZXIhDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KRnJvbTogS2hlbSBS
+YWogPHJhai5raGVtQGdtYWlsLmNvbT4NClNlbnQ6IDE0IERlY2VtYmVyIDIwMjMgMjI6MTYNClRv
+OiBHdXB0YSwgTWVlbmFsaSA8TWVlbmFsaS5HdXB0YUB3aW5kcml2ZXIuY29tPg0KQ2M6IG9wZW5l
+bWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnIDxvcGVuZW1iZWRkZWQtZGV2ZWxA
+bGlzdHMub3BlbmVtYmVkZGVkLm9yZz4NClN1YmplY3Q6IFJlOiBbb2VdW21ldGEtd2Vic2VydmVy
+XVtraXJrc3RvbmVdW1BBVENIIDEvMV0gbmdpbng6IHVwZ3JhZGUgMS4yNS4yIC0+IDEuMjUuMw0K
+DQpDQVVUSU9OOiBUaGlzIGVtYWlsIGNvbWVzIGZyb20gYSBub24gV2luZCBSaXZlciBlbWFpbCBh
+Y2NvdW50IQ0KRG8gbm90IGNsaWNrIGxpbmtzIG9yIG9wZW4gYXR0YWNobWVudHMgdW5sZXNzIHlv
+dSByZWNvZ25pemUgdGhlIHNlbmRlciBhbmQga25vdyB0aGUgY29udGVudCBpcyBzYWZlLg0KDQp3
+ZSBuZWVkIHRoaXMgb24gbWFzdGVyIGFzIHdlbGwuIEl0cyBnb29kIHRvIG1lbnRpb24gdGhlIGJy
+YW5jaGVzIGENCnBhdGNoIGlzIG5lZWRlZCBpbiBzdWJqZWN0LiBJdHMgZmluZSB0byBtZW50aW9u
+IG1vcmUgdGhhbiBvbmUgaWYgaXQNCmFwcGxpZWQgZGlyZWN0bHkgdG8gYWxsIG9mIHRoZSByZXF1
+ZXN0ZWQgYnJhbmNoZXMuDQpJIGFsbW9zdCBpZ25vcmVkIGl0IGFzIGl0IHNhaWQga2lya3N0b25l
+IGFsb25lLg0KDQpPbiBUaHUsIERlYyAxNCwgMjAyMyBhdCAyOjM44oCvQU0gTWVlbmFsaSBHdXB0
+YSB2aWENCmxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCjxtZWVuYWxpLmd1cHRhPXdpbmRyaXZlci5j
+b21AbGlzdHMub3BlbmVtYmVkZGVkLm9yZz4gd3JvdGU6DQo+DQo+IEZyb206IE1lZW5hbGkgR3Vw
+dGEgPG1lZW5hbGkuZ3VwdGFAd2luZHJpdmVyLmNvbT4NCj4NCj4gQ2hhbmdlbG9nOg0KPiA9PT09
+PT09PT09PQ0KPiBodHRwczovL25naW54Lm9yZy9lbi9DSEFOR0VTDQo+DQo+ICopIENoYW5nZTog
+aW1wcm92ZWQgZGV0ZWN0aW9uIG9mIG1pc2JlaGF2aW5nIGNsaWVudHMgd2hlbiB1c2luZyBIVFRQ
+LzIuDQo+DQo+ICopIEZlYXR1cmU6IHN0YXJ0dXAgc3BlZWR1cCB3aGVuIHVzaW5nIGEgbGFyZ2Ug
+bnVtYmVyIG9mIGxvY2F0aW9ucy4NCj4gICAgICAgIFRoYW5rcyB0byBZdXN1a2UgTm9qaW1hLg0K
+Pg0KPiAqKSBCdWdmaXg6IGEgc2VnbWVudGF0aW9uIGZhdWx0IG1pZ2h0IG9jY3VyIGluIGEgd29y
+a2VyIHByb2Nlc3Mgd2hlbg0KPiAgICAgICAgdXNpbmcgSFRUUC8yIHdpdGhvdXQgU1NMOyB0aGUg
+YnVnIGhhZCBhcHBlYXJlZCBpbiAxLjI1LjEuDQo+DQo+ICopIEJ1Z2ZpeDogdGhlICJTdGF0dXMi
+IGJhY2tlbmQgcmVzcG9uc2UgaGVhZGVyIGxpbmUgd2l0aCBhbiBlbXB0eQ0KPiAgICAgICAgcmVh
+c29uIHBocmFzZSB3YXMgaGFuZGxlZCBpbmNvcnJlY3RseS4NCj4NCj4gKikgQnVnZml4OiBtZW1v
+cnkgbGVhayBkdXJpbmcgcmVjb25maWd1cmF0aW9uIHdoZW4gdXNpbmcgdGhlIFBDUkUyDQo+ICAg
+ICAgICBsaWJyYXJ5Lg0KPiAgICAgICAgVGhhbmtzIHRvIFpoZW5aaG9uZyBXdS4NCj4NCj4gKikg
+QnVnZml4ZXMgYW5kIGltcHJvdmVtZW50cyBpbiBIVFRQLzMuDQo+DQo+IFNpZ25lZC1vZmYtYnk6
+IE1lZW5hbGkgR3VwdGEgPG1lZW5hbGkuZ3VwdGFAd2luZHJpdmVyLmNvbT4NCj4gLS0tDQo+ICAu
+Li4vcmVjaXBlcy1odHRwZC9uZ2lueC97bmdpbnhfMS4yNS4yLmJiID0+IG5naW54XzEuMjUuMy5i
+Yn0gICAgfCAyICstDQo+ICAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRp
+b24oLSkNCj4gIHJlbmFtZSBtZXRhLXdlYnNlcnZlci9yZWNpcGVzLWh0dHBkL25naW54L3tuZ2lu
+eF8xLjI1LjIuYmIgPT4gbmdpbnhfMS4yNS4zLmJifSAoNTElKQ0KPg0KPiBkaWZmIC0tZ2l0IGEv
+bWV0YS13ZWJzZXJ2ZXIvcmVjaXBlcy1odHRwZC9uZ2lueC9uZ2lueF8xLjI1LjIuYmIgYi9tZXRh
+LXdlYnNlcnZlci9yZWNpcGVzLWh0dHBkL25naW54L25naW54XzEuMjUuMy5iYg0KPiBzaW1pbGFy
+aXR5IGluZGV4IDUxJQ0KPiByZW5hbWUgZnJvbSBtZXRhLXdlYnNlcnZlci9yZWNpcGVzLWh0dHBk
+L25naW54L25naW54XzEuMjUuMi5iYg0KPiByZW5hbWUgdG8gbWV0YS13ZWJzZXJ2ZXIvcmVjaXBl
+cy1odHRwZC9uZ2lueC9uZ2lueF8xLjI1LjMuYmINCj4gaW5kZXggNjZlZWYyMzg5NS4uOGFhOWZh
+MDI2NyAxMDA2NDQNCj4gLS0tIGEvbWV0YS13ZWJzZXJ2ZXIvcmVjaXBlcy1odHRwZC9uZ2lueC9u
+Z2lueF8xLjI1LjIuYmINCj4gKysrIGIvbWV0YS13ZWJzZXJ2ZXIvcmVjaXBlcy1odHRwZC9uZ2lu
+eC9uZ2lueF8xLjI1LjMuYmINCj4gQEAgLTIsNSArMiw1IEBAIHJlcXVpcmUgbmdpbnguaW5jDQo+
+DQo+ICBMSUNfRklMRVNfQ0hLU1VNID0gImZpbGU6Ly9MSUNFTlNFO21kNT03OWFkMmViODM3Mjk5
+NDIxYzQ0MzVkZWRjODg5N2IzZCINCj4NCj4gLVNSQ19VUklbc2hhMjU2c3VtXSA9ICIwNWRkNmQ5
+MzU2ZDY2YTc0ZTYxMDM1ZjJhNDIxNjJmOGM3NTRjOTdjZjFiYTY0ZTdhODAxYmExNThkNmMwNzEx
+Ig0KPiArU1JDX1VSSVtzaGEyNTZzdW1dID0gIjY0YzViOTc1Y2EyODc5MzllODI4MzAzZmE4NTdk
+MjJmMTQyYjI1MWYxNzgwOGRmZTQxNzMzNTEyZDljZGVkODYiDQo+DQo+IC0tDQo+IDIuNDAuMA0K
+Pg0KPg0KPiAtPS09LT0tPS09LT0tPS09LT0tPS09LQ0KPiBMaW5rczogWW91IHJlY2VpdmUgYWxs
+IG1lc3NhZ2VzIHNlbnQgdG8gdGhpcyBncm91cC4NCj4gVmlldy9SZXBseSBPbmxpbmUgKCMxMDc0
+NTEpOiBodHRwczovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvZy9vcGVuZW1iZWRkZWQtZGV2ZWwv
+bWVzc2FnZS8xMDc0NTENCj4gTXV0ZSBUaGlzIFRvcGljOiBodHRwczovL2xpc3RzLm9wZW5lbWJl
+ZGRlZC5vcmcvbXQvMTAzMTY3NTI5LzE5OTc5MTQNCj4gR3JvdXAgT3duZXI6IG9wZW5lbWJlZGRl
+ZC1kZXZlbCtvd25lckBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFVuc3Vic2NyaWJlOiBodHRw
+czovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvZy9vcGVuZW1iZWRkZWQtZGV2ZWwvdW5zdWIgW3Jh
+ai5raGVtQGdtYWlsLmNvbV0NCj4gLT0tPS09LT0tPS09LT0tPS09LT0tPS0NCj4NCg==
+
+--_000_BY1PR11MB800512F6778B619835B895CDE53B2BY1PR11MB8005namp_
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: base64
+
+PGh0bWw+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIgY29udGVudD0i
+dGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04Ij4NCjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyIgc3R5bGU9
+ImRpc3BsYXk6bm9uZTsiPiBQIHttYXJnaW4tdG9wOjA7bWFyZ2luLWJvdHRvbTowO30gPC9zdHls
+ZT4NCjwvaGVhZD4NCjxib2R5IGRpcj0ibHRyIj4NCjxkaXYgY2xhc3M9ImVsZW1lbnRUb1Byb29m
+IiBzdHlsZT0iZm9udC1mYW1pbHk6IEFwdG9zLCBBcHRvc19FbWJlZGRlZEZvbnQsIEFwdG9zX01T
+Rm9udFNlcnZpY2UsIENhbGlicmksIEhlbHZldGljYSwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAx
+MnB0OyBjb2xvcjogcmdiKDAsIDAsIDApOyI+DQpSZW1pbmRlciE8L2Rpdj4NCjxkaXYgaWQ9ImFw
+cGVuZG9uc2VuZCI+PC9kaXY+DQo8aHIgc3R5bGU9ImRpc3BsYXk6aW5saW5lLWJsb2NrO3dpZHRo
+Ojk4JSIgdGFiaW5kZXg9Ii0xIj4NCjxkaXYgaWQ9ImRpdlJwbHlGd2RNc2ciIGRpcj0ibHRyIj48
+Zm9udCBmYWNlPSJDYWxpYnJpLCBzYW5zLXNlcmlmIiBzdHlsZT0iZm9udC1zaXplOjExcHQiIGNv
+bG9yPSIjMDAwMDAwIj48Yj5Gcm9tOjwvYj4gS2hlbSBSYWogJmx0O3Jhai5raGVtQGdtYWlsLmNv
+bSZndDs8YnI+DQo8Yj5TZW50OjwvYj4gMTQgRGVjZW1iZXIgMjAyMyAyMjoxNjxicj4NCjxiPlRv
+OjwvYj4gR3VwdGEsIE1lZW5hbGkgJmx0O01lZW5hbGkuR3VwdGFAd2luZHJpdmVyLmNvbSZndDs8
+YnI+DQo8Yj5DYzo8L2I+IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3Jn
+ICZsdDtvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyZndDs8YnI+DQo8
+Yj5TdWJqZWN0OjwvYj4gUmU6IFtvZV1bbWV0YS13ZWJzZXJ2ZXJdW2tpcmtzdG9uZV1bUEFUQ0gg
+MS8xXSBuZ2lueDogdXBncmFkZSAxLjI1LjIgLSZndDsgMS4yNS4zPC9mb250Pg0KPGRpdj4mbmJz
+cDs8L2Rpdj4NCjwvZGl2Pg0KPGRpdiBjbGFzcz0iQm9keUZyYWdtZW50Ij48Zm9udCBzaXplPSIy
+Ij48c3BhbiBzdHlsZT0iZm9udC1zaXplOjExcHQ7Ij4NCjxkaXYgY2xhc3M9IlBsYWluVGV4dCI+
+Q0FVVElPTjogVGhpcyBlbWFpbCBjb21lcyBmcm9tIGEgbm9uIFdpbmQgUml2ZXIgZW1haWwgYWNj
+b3VudCE8YnI+DQpEbyBub3QgY2xpY2sgbGlua3Mgb3Igb3BlbiBhdHRhY2htZW50cyB1bmxlc3Mg
+eW91IHJlY29nbml6ZSB0aGUgc2VuZGVyIGFuZCBrbm93IHRoZSBjb250ZW50IGlzIHNhZmUuPGJy
+Pg0KPGJyPg0Kd2UgbmVlZCB0aGlzIG9uIG1hc3RlciBhcyB3ZWxsLiBJdHMgZ29vZCB0byBtZW50
+aW9uIHRoZSBicmFuY2hlcyBhPGJyPg0KcGF0Y2ggaXMgbmVlZGVkIGluIHN1YmplY3QuIEl0cyBm
+aW5lIHRvIG1lbnRpb24gbW9yZSB0aGFuIG9uZSBpZiBpdDxicj4NCmFwcGxpZWQgZGlyZWN0bHkg
+dG8gYWxsIG9mIHRoZSByZXF1ZXN0ZWQgYnJhbmNoZXMuPGJyPg0KSSBhbG1vc3QgaWdub3JlZCBp
+dCBhcyBpdCBzYWlkIGtpcmtzdG9uZSBhbG9uZS48YnI+DQo8YnI+DQpPbiBUaHUsIERlYyAxNCwg
+MjAyMyBhdCAyOjM44oCvQU0gTWVlbmFsaSBHdXB0YSB2aWE8YnI+DQpsaXN0cy5vcGVuZW1iZWRk
+ZWQub3JnPGJyPg0KJmx0O21lZW5hbGkuZ3VwdGE9d2luZHJpdmVyLmNvbUBsaXN0cy5vcGVuZW1i
+ZWRkZWQub3JnJmd0OyB3cm90ZTo8YnI+DQomZ3Q7PGJyPg0KJmd0OyBGcm9tOiBNZWVuYWxpIEd1
+cHRhICZsdDttZWVuYWxpLmd1cHRhQHdpbmRyaXZlci5jb20mZ3Q7PGJyPg0KJmd0Ozxicj4NCiZn
+dDsgQ2hhbmdlbG9nOjxicj4NCiZndDsgPT09PT09PT09PT08YnI+DQomZ3Q7IDxhIGhyZWY9Imh0
+dHBzOi8vbmdpbngub3JnL2VuL0NIQU5HRVMiPmh0dHBzOi8vbmdpbngub3JnL2VuL0NIQU5HRVM8
+L2E+PGJyPg0KJmd0Ozxicj4NCiZndDsgKikgQ2hhbmdlOiBpbXByb3ZlZCBkZXRlY3Rpb24gb2Yg
+bWlzYmVoYXZpbmcgY2xpZW50cyB3aGVuIHVzaW5nIEhUVFAvMi48YnI+DQomZ3Q7PGJyPg0KJmd0
+OyAqKSBGZWF0dXJlOiBzdGFydHVwIHNwZWVkdXAgd2hlbiB1c2luZyBhIGxhcmdlIG51bWJlciBv
+ZiBsb2NhdGlvbnMuPGJyPg0KJmd0OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNw
+OyZuYnNwOyBUaGFua3MgdG8gWXVzdWtlIE5vamltYS48YnI+DQomZ3Q7PGJyPg0KJmd0OyAqKSBC
+dWdmaXg6IGEgc2VnbWVudGF0aW9uIGZhdWx0IG1pZ2h0IG9jY3VyIGluIGEgd29ya2VyIHByb2Nl
+c3Mgd2hlbjxicj4NCiZndDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJz
+cDsgdXNpbmcgSFRUUC8yIHdpdGhvdXQgU1NMOyB0aGUgYnVnIGhhZCBhcHBlYXJlZCBpbiAxLjI1
+LjEuPGJyPg0KJmd0Ozxicj4NCiZndDsgKikgQnVnZml4OiB0aGUgJnF1b3Q7U3RhdHVzJnF1b3Q7
+IGJhY2tlbmQgcmVzcG9uc2UgaGVhZGVyIGxpbmUgd2l0aCBhbiBlbXB0eTxicj4NCiZndDsmbmJz
+cDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsgcmVhc29uIHBocmFzZSB3YXMg
+aGFuZGxlZCBpbmNvcnJlY3RseS48YnI+DQomZ3Q7PGJyPg0KJmd0OyAqKSBCdWdmaXg6IG1lbW9y
+eSBsZWFrIGR1cmluZyByZWNvbmZpZ3VyYXRpb24gd2hlbiB1c2luZyB0aGUgUENSRTI8YnI+DQom
+Z3Q7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7IGxpYnJhcnkuPGJy
+Pg0KJmd0OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyBUaGFua3Mg
+dG8gWmhlblpob25nIFd1Ljxicj4NCiZndDs8YnI+DQomZ3Q7ICopIEJ1Z2ZpeGVzIGFuZCBpbXBy
+b3ZlbWVudHMgaW4gSFRUUC8zLjxicj4NCiZndDs8YnI+DQomZ3Q7IFNpZ25lZC1vZmYtYnk6IE1l
+ZW5hbGkgR3VwdGEgJmx0O21lZW5hbGkuZ3VwdGFAd2luZHJpdmVyLmNvbSZndDs8YnI+DQomZ3Q7
+IC0tLTxicj4NCiZndDsmbmJzcDsgLi4uL3JlY2lwZXMtaHR0cGQvbmdpbngve25naW54XzEuMjUu
+Mi5iYiA9Jmd0OyBuZ2lueF8xLjI1LjMuYmJ9Jm5ic3A7Jm5ic3A7Jm5ic3A7IHwgMiArLTxicj4N
+CiZndDsmbmJzcDsgMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0p
+PGJyPg0KJmd0OyZuYnNwOyByZW5hbWUgbWV0YS13ZWJzZXJ2ZXIvcmVjaXBlcy1odHRwZC9uZ2lu
+eC97bmdpbnhfMS4yNS4yLmJiID0mZ3Q7IG5naW54XzEuMjUuMy5iYn0gKDUxJSk8YnI+DQomZ3Q7
+PGJyPg0KJmd0OyBkaWZmIC0tZ2l0IGEvbWV0YS13ZWJzZXJ2ZXIvcmVjaXBlcy1odHRwZC9uZ2lu
+eC9uZ2lueF8xLjI1LjIuYmIgYi9tZXRhLXdlYnNlcnZlci9yZWNpcGVzLWh0dHBkL25naW54L25n
+aW54XzEuMjUuMy5iYjxicj4NCiZndDsgc2ltaWxhcml0eSBpbmRleCA1MSU8YnI+DQomZ3Q7IHJl
+bmFtZSBmcm9tIG1ldGEtd2Vic2VydmVyL3JlY2lwZXMtaHR0cGQvbmdpbngvbmdpbnhfMS4yNS4y
+LmJiPGJyPg0KJmd0OyByZW5hbWUgdG8gbWV0YS13ZWJzZXJ2ZXIvcmVjaXBlcy1odHRwZC9uZ2lu
+eC9uZ2lueF8xLjI1LjMuYmI8YnI+DQomZ3Q7IGluZGV4IDY2ZWVmMjM4OTUuLjhhYTlmYTAyNjcg
+MTAwNjQ0PGJyPg0KJmd0OyAtLS0gYS9tZXRhLXdlYnNlcnZlci9yZWNpcGVzLWh0dHBkL25naW54
+L25naW54XzEuMjUuMi5iYjxicj4NCiZndDsgKysrIGIvbWV0YS13ZWJzZXJ2ZXIvcmVjaXBlcy1o
+dHRwZC9uZ2lueC9uZ2lueF8xLjI1LjMuYmI8YnI+DQomZ3Q7IEBAIC0yLDUgKzIsNSBAQCByZXF1
+aXJlIG5naW54LmluYzxicj4NCiZndDs8YnI+DQomZ3Q7Jm5ic3A7IExJQ19GSUxFU19DSEtTVU0g
+PSAmcXVvdDs8YSBocmVmPSJmaWxlOi8vTElDRU5TRTttZDU9NzlhZDJlYjgzNzI5OTQyMWM0NDM1
+ZGVkYzg4OTdiM2QiPmZpbGU6Ly9MSUNFTlNFO21kNT03OWFkMmViODM3Mjk5NDIxYzQ0MzVkZWRj
+ODg5N2IzZDwvYT4mcXVvdDs8YnI+DQomZ3Q7PGJyPg0KJmd0OyAtU1JDX1VSSVtzaGEyNTZzdW1d
+ID0gJnF1b3Q7MDVkZDZkOTM1NmQ2NmE3NGU2MTAzNWYyYTQyMTYyZjhjNzU0Yzk3Y2YxYmE2NGU3
+YTgwMWJhMTU4ZDZjMDcxMSZxdW90Ozxicj4NCiZndDsgK1NSQ19VUklbc2hhMjU2c3VtXSA9ICZx
+dW90OzY0YzViOTc1Y2EyODc5MzllODI4MzAzZmE4NTdkMjJmMTQyYjI1MWYxNzgwOGRmZTQxNzMz
+NTEyZDljZGVkODYmcXVvdDs8YnI+DQomZ3Q7PGJyPg0KJmd0OyAtLTxicj4NCiZndDsgMi40MC4w
+PGJyPg0KJmd0Ozxicj4NCiZndDs8YnI+DQomZ3Q7IC09LT0tPS09LT0tPS09LT0tPS09LT0tPGJy
+Pg0KJmd0OyBMaW5rczogWW91IHJlY2VpdmUgYWxsIG1lc3NhZ2VzIHNlbnQgdG8gdGhpcyBncm91
+cC48YnI+DQomZ3Q7IFZpZXcvUmVwbHkgT25saW5lICgjMTA3NDUxKTogPGEgaHJlZj0iaHR0cHM6
+Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL2cvb3BlbmVtYmVkZGVkLWRldmVsL21lc3NhZ2UvMTA3
+NDUxIj4NCmh0dHBzOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9nL29wZW5lbWJlZGRlZC1kZXZl
+bC9tZXNzYWdlLzEwNzQ1MTwvYT48YnI+DQomZ3Q7IE11dGUgVGhpcyBUb3BpYzogPGEgaHJlZj0i
+aHR0cHM6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL210LzEwMzE2NzUyOS8xOTk3OTE0Ij4NCmh0
+dHBzOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tdC8xMDMxNjc1MjkvMTk5NzkxNDwvYT48YnI+
+DQomZ3Q7IEdyb3VwIE93bmVyOiBvcGVuZW1iZWRkZWQtZGV2ZWwrb3duZXJAbGlzdHMub3BlbmVt
+YmVkZGVkLm9yZzxicj4NCiZndDsgVW5zdWJzY3JpYmU6IDxhIGhyZWY9Imh0dHBzOi8vbGlzdHMu
+b3BlbmVtYmVkZGVkLm9yZy9nL29wZW5lbWJlZGRlZC1kZXZlbC91bnN1YiI+DQpodHRwczovL2xp
+c3RzLm9wZW5lbWJlZGRlZC5vcmcvZy9vcGVuZW1iZWRkZWQtZGV2ZWwvdW5zdWI8L2E+IFtyYWou
+a2hlbUBnbWFpbC5jb21dPGJyPg0KJmd0OyAtPS09LT0tPS09LT0tPS09LT0tPS09LTxicj4NCiZn
+dDs8YnI+DQo8L2Rpdj4NCjwvc3Bhbj48L2ZvbnQ+PC9kaXY+DQo8L2JvZHk+DQo8L2h0bWw+DQo=
+
+--_000_BY1PR11MB800512F6778B619835B895CDE53B2BY1PR11MB8005namp_--
 
