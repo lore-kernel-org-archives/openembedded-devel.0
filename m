@@ -1,176 +1,337 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <hprajapati@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 711F2CD1288
-	for <webhook@archiver.kernel.org>; Thu, 28 Mar 2024 23:34:33 +0000 (UTC)
-Received: from mailout11.t-online.de (mailout11.t-online.de [194.25.134.85])
- by mx.groups.io with SMTP id smtpd.web10.5883.1711668868601657298
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5AD7CCD11DD
+	for <webhook@archiver.kernel.org>; Fri, 29 Mar 2024 09:32:16 +0000 (UTC)
+Received: from mail-oa1-f51.google.com (mail-oa1-f51.google.com [209.85.160.51])
+ by mx.groups.io with SMTP id smtpd.web11.13189.1711704733926536487
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 28 Mar 2024 16:34:29 -0700
+ Fri, 29 Mar 2024 02:32:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.85, mailfrom: f_l_k@t-online.de)
-Received: from fwd73.aul.t-online.de (fwd73.aul.t-online.de [10.223.144.99])
-	by mailout11.t-online.de (Postfix) with SMTP id A272E209FE;
-	Fri, 29 Mar 2024 00:34:26 +0100 (CET)
-Received: from [192.168.178.67] ([84.163.41.230]) by fwd73.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1rpzGM-04GG000; Fri, 29 Mar 2024 00:34:26 +0100
-Date: Fri, 29 Mar 2024 00:34:45 +0100
-From: f_l_k@t-online.de
-Subject: Re: [oe] [meta-gnome][PATCH] gnome-control-center: update 46.0 ->
- 46.0.1
-To: Markus Volk <f_l_k@t-online.de>
-Cc: openembedded-devel@lists.openembedded.org, Khem Raj <raj.khem@gmail.com>
-Message-Id: <X503BS.CX5H6LUE55HM1@t-online.de>
-In-Reply-To: <17C10EA23D8426A5.32709@lists.openembedded.org>
-References: <17C10EA23D8426A5.32709@lists.openembedded.org>
-X-Mailer: geary/44.1
+ dkim=pass header.i=@mvista.com header.s=google header.b=gv6AoZva;
+ spf=pass (domain: mvista.com, ip: 209.85.160.51, mailfrom: hprajapati@mvista.com)
+Received: by mail-oa1-f51.google.com with SMTP id 586e51a60fabf-22a353217c3so937047fac.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 29 Mar 2024 02:32:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mvista.com; s=google; t=1711704733; x=1712309533; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=uFuBF7quGCVShrPRNrHZyzhnJpgd1t1n4aQRFTSeJhI=;
+        b=gv6AoZva44DVSrIR2fPoItiBVgh0IG+4bRN+ZoP78oas+WioffibX6m8lDPv0lAbQd
+         jSBsEPbg2jVyd7IQ16dX6nOzd6NiBLS1VimVVpTMg4pG1sZ/ESvkXaXUm9iMxyfFBWen
+         EybNfhHxZ7FE0pM+DF6Tk1zCOHhLAGOoiVKdo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1711704733; x=1712309533;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=uFuBF7quGCVShrPRNrHZyzhnJpgd1t1n4aQRFTSeJhI=;
+        b=gjdQaYd3Ic6IMt6tpexbzhOUii9JSyLh1/gBlA4S8teokd2GE2iJEvujhM7sywt/YZ
+         TatwbVhojrG6YYEsvhbNshtW78ad/NJkFnVOxiT7jDYZ1NXNGSajGk07rpVs/Rvzzbw5
+         r9ZLaSnhG2n/DVT1xZRVALKZFhp0pyMBvL3jj8auIqKpgtxNpB1eiCwkUtU8Ax1C8Omc
+         VpvK9VTeQnfZjYvIWLNLAcSWxTC6sMm5X/52BmHZl81BVOUcYSYl13oZefUg3y8I+g51
+         q/Tp/utvnzIMUXW6FRdRJbN3EnYT4tAaXu0mismsxoQ0HSrLC1WRqVMDS8MbvuNpmv3R
+         I9cA==
+X-Gm-Message-State: AOJu0YydnAGs/1qOzGPbvD4MUEYd3mZl2jcyWePth57tRAtv3VAkPTEp
+	X9DqGYRLcL2T8JFLp1szva64BZxR6p9K2PrprwvhZpGUWk6yy3JvLcCJdz/E1IFP5JuheM6oeEJ
+	p
+X-Google-Smtp-Source: AGHT+IHb/Sft8ltQaFmZnCEu+13Wwq0HHMEfwJ9KuB4ckAjJYE+Du8fql3cE4npMDdt6eA8SaSvGpw==
+X-Received: by 2002:a05:6870:c05:b0:22a:b414:f79e with SMTP id le5-20020a0568700c0500b0022ab414f79emr1663641oab.0.1711704732804;
+        Fri, 29 Mar 2024 02:32:12 -0700 (PDT)
+Received: from MVIN00016.mvista.com ([43.249.234.133])
+        by smtp.gmail.com with ESMTPSA id z6-20020aa791c6000000b006eac44e402csm2673813pfa.23.2024.03.29.02.32.10
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 29 Mar 2024 02:32:12 -0700 (PDT)
+From: Hitendra Prajapati <hprajapati@mvista.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Hitendra Prajapati <hprajapati@mvista.com>
+Subject: []meta-networking[kirkstone][PATCH] wireshark: fix CVE-2023-6175
+Date: Fri, 29 Mar 2024 15:01:51 +0530
+Message-Id: <20240329093151.164030-1-hprajapati@mvista.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-PlTpNx23RmMNVjWXZXyr"
-X-TOI-EXPURGATEID: 150726::1711668866-EFFFC9B6-728C71D2/0/0 CLEAN NORMAL
-X-TOI-MSGID: 075df677-c4d1-48d4-9f06-60b0ee028bf8
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 28 Mar 2024 23:34:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109679
+ <openembedded-devel@lists.openembedded.org>; Fri, 29 Mar 2024 09:32:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109680
 
---=-PlTpNx23RmMNVjWXZXyr
-Content-Type: text/plain; charset=us-ascii; format=flowed
+Upstream-Status: Backport from https://gitlab.com/wireshark/wireshark/-/commit/3be1c99180a6fc48c34ae4bfc79bfd840b29ae3e
 
-This was the last missing puzzle part. gnome-46 is running great for me 
-now
-
-On Thu, Mar 28 2024 at 11:37:18 PM +01:00:00, Markus Volk 
-<f_l_k@t-online.de> wrote:
-> This is an important update, because it fixes a segfault in a new
-> settings tab 'system' that segfaulted, if it was selected.
-> 
-> This was horrible in two ways. A lot of important options were 
-> unaccessable
-> and also quite annoying ... if selected, gnome-control-center 
-> constantly
-> crashed on execution, unless started from shell with a working tab 
-> like
-> 'gnome-control-center wifi'
-> 
-> 46.0.1 confuses the gnomebase class. Workaround this by using git 
-> fetcher,
-> at least until they go back to normal xx.x scheme
-> 
-> Signed-off-by: Markus Volk <f_l_k@t-online.de 
-> <mailto:f_l_k@t-online.de>>
-> ---
->  ...control-center_46.0.bb => gnome-control-center_46.0.1.bb} | 5 
-> ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
->  rename 
-> meta-gnome/recipes-gnome/gnome-control-center/{gnome-control-center_46.0.bb 
-> => gnome-control-center_46.0.1.bb} (92%)
-> 
-> diff --git 
-> a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_46.0.bb 
-> b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_46.0.1.bb
-> similarity index 92%
-> rename from 
-> meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_46.0.bb
-> rename to 
-> meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_46.0.1.bb
-> index fe9f1efbc..de11239ed 100644
-> --- 
-> a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_46.0.bb
-> +++ 
-> b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_46.0.1.bb
-> @@ -37,8 +37,11 @@ inherit gtk-icon-cache pkgconfig gnomebase 
-> gsettings gettext upstream-version-is
-> 
->  REQUIRED_DISTRO_FEATURES += "opengl polkit pulseaudio systemd x11"
-> 
-> +SRC_URI = 
-> "gitsm://gitlab.gnome.org/GNOME/gnome-control-center.git;protocol=https;nobranch=1"
->  SRC_URI += "file://0001-Add-meson-option-to-pass-sysroot.patch" 
-> <file://0001-add-meson-option-to-pass-sysroot.patch/>
-> -SRC_URI[archive.sha256sum] = 
-> "25f67de05897868b2e97eaa0ecc986a408af08d4985c8a9da44f0d7bd8fea7a4"
-> +
-> +S = "${WORKDIR}/git"
-> +SRCREV = "005f40dcfa464f113a1c95f97673bc5505fc15ad"
-> 
->  PACKAGECONFIG ??= "ibus ${@bb.utils.filter 
-> <mailto:${@bb.utils.filter>('DISTRO_FEATURES', 'wayland', d)}"
->  PACKAGECONFIG[cups] = ",,cups,cups"
-> --
-> 2.44.0
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#109678): 
-> <https://lists.openembedded.org/g/openembedded-devel/message/109678>
-> Mute This Topic: <https://lists.openembedded.org/mt/105207028/3618223>
-> Group Owner: openembedded-devel+owner@lists.openembedded.org 
-> <mailto:openembedded-devel+owner@lists.openembedded.org>
-> Unsubscribe: 
-> <https://lists.openembedded.org/g/openembedded-devel/unsub> 
-> [f_l_k@t-online.de <mailto:f_l_k@t-online.de>]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
-
-
---=-PlTpNx23RmMNVjWXZXyr
-Content-Type: text/html; charset=us-ascii
-
-<div id="geary-body" dir="auto"><div>This was the last missing puzzle part. gnome-46 is running great for me now</div></div><div id="geary-quote" dir="auto"><br>On Thu, Mar 28 2024 at 11:37:18 PM +01:00:00, Markus Volk &lt;f_l_k@t-online.de&gt; wrote:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">This is an important update, because it fixes a segfault in a new
-settings tab 'system' that segfaulted, if it was selected.
-
-This was horrible in two ways. A lot of important options were unaccessable
-and also quite annoying ... if selected, gnome-control-center constantly
-crashed on execution, unless started from shell with a working tab like
-'gnome-control-center wifi'
-
-46.0.1 confuses the gnomebase class. Workaround this by using git fetcher,
-at least until they go back to normal xx.x scheme
-
-Signed-off-by: Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;
+Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
 ---
- ...control-center_46.0.bb =&gt; gnome-control-center_46.0.1.bb} | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
- rename meta-gnome/recipes-gnome/gnome-control-center/{gnome-control-center_46.0.bb =&gt; gnome-control-center_46.0.1.bb} (92%)
+ .../wireshark/files/CVE-2023-6175.patch       | 246 ++++++++++++++++++
+ .../wireshark/wireshark_3.4.12.bb             |   1 +
+ 2 files changed, 247 insertions(+)
+ create mode 100644 meta-networking/recipes-support/wireshark/files/CVE-2023-6175.patch
 
-diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_46.0.bb b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_46.0.1.bb
-similarity index 92%
-rename from meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_46.0.bb
-rename to meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_46.0.1.bb
-index fe9f1efbc..de11239ed 100644
---- a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_46.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_46.0.1.bb
-@@ -37,8 +37,11 @@ inherit gtk-icon-cache pkgconfig gnomebase gsettings gettext upstream-version-is
- 
- REQUIRED_DISTRO_FEATURES += "opengl polkit pulseaudio systemd x11"
- 
-+SRC_URI = "gitsm://gitlab.gnome.org/GNOME/gnome-control-center.git;protocol=https;nobranch=1"
- SRC_URI += "<a href="file://0001-Add-meson-option-to-pass-sysroot.patch" "="">file://0001-Add-meson-option-to-pass-sysroot.patch"</a>
--SRC_URI[archive.sha256sum] = "25f67de05897868b2e97eaa0ecc986a408af08d4985c8a9da44f0d7bd8fea7a4"
+diff --git a/meta-networking/recipes-support/wireshark/files/CVE-2023-6175.patch b/meta-networking/recipes-support/wireshark/files/CVE-2023-6175.patch
+new file mode 100644
+index 0000000000..a08610f8d2
+--- /dev/null
++++ b/meta-networking/recipes-support/wireshark/files/CVE-2023-6175.patch
+@@ -0,0 +1,246 @@
++From 2d59b26d3b554960c777003c431add89d018b0a6 Mon Sep 17 00:00:00 2001
++From: Guy Harris <gharris@sonic.net>
++Date: Tue, 17 Oct 2023 22:08:42 -0700
++Subject: [PATCH] netscreen: do bounds checking for each byte of packet data.
 +
-+S = "${WORKDIR}/git"
-+SRCREV = "005f40dcfa464f113a1c95f97673bc5505fc15ad"
++Make sure each byte we add to the packet data from the file fits in the
++buffer, rather than stuffing bytes into the buffer and checking
++afterwards.
++
++This prevents a buffer overflow.
++
++Fixes #19404, which was filed as part of Trend Micro's Zero Day
++Initiative as ZDI-CAN-22164.
++
++While we're at it, expand a comment and make error messages give some
++more detail.
++
++Upstream-Status: Backport [https://gitlab.com/wireshark/wireshark/-/commit/3be1c99180a6fc48c34ae4bfc79bfd840b29ae3e]
++CVE: CVE-2023-6175
++Signed-off-by: Hitendra Prajapati <hprajapati@mvista.com>
++---
++ wiretap/netscreen.c | 125 +++++++++++++++++++++++++++++++++-----------
++ 1 file changed, 94 insertions(+), 31 deletions(-)
++
++diff --git a/wiretap/netscreen.c b/wiretap/netscreen.c
++index 9ad825f..ffcb689 100644
++--- a/wiretap/netscreen.c
+++++ b/wiretap/netscreen.c
++@@ -59,7 +59,12 @@ static gboolean netscreen_seek_read(wtap *wth, gint64 seek_off,
++ static gboolean parse_netscreen_packet(FILE_T fh, wtap_rec *rec,
++ 	Buffer* buf, char *line, int *err, gchar **err_info);
++ static int parse_single_hex_dump_line(char* rec, guint8 *buf,
++-	guint byte_offset);
+++	guint byte_offset, guint pkt_len);
+++
+++/* Error returns from parse_single_hex_dump_line() */
+++#define PARSE_LINE_INVALID_CHARACTER	-1
+++#define PARSE_LINE_NO_BYTES_SEEN	-2
+++#define PARSE_LINE_TOO_MANY_BYTES_SEEN	-3
++ 
++ /* Returns TRUE if the line appears to be a line with protocol info.
++    Otherwise it returns FALSE. */
++@@ -241,13 +246,40 @@ netscreen_seek_read(wtap *wth, gint64 seek_off,	wtap_rec *rec, Buffer *buf,
++               2c 21 b6 d3 20 60 0c 8c 35 98 88 cf 20 91 0e a9     ,!...`..5.......
++               1d 0b                                               ..
++ 
+++ * The first line of a packet is in the form
+++
+++<secs>.<dsecs>: <iface>({i,o}) len=<length>:<llinfo>>
++ 
+++ * where:
+++ *
+++ *   <secs> and <dsecs> are a time stamp in seconds and deciseconds,
+++ *     giving the time since the firewall was booted;
+++ *
+++ *   <iface> is the name of the interface on which the packet was
+++ *     received or on which it was transmitted;
+++ *
+++ *   {i,o} is i for a received packet and o for a transmitted packet;
+++ *
+++ *   <length> is the length of the packet on the network;
+++ *
+++ *   <llinfo>, at least for Ethernet, appears to be a source MAC
+++ *     address, folowed by "->", folowed by a destination MAC
+++ *     address, followed by a sequence of Ethertypes, each
+++ *     preceded by a "/" (multiple Ethertypes if there are VLAN
+++ *     tags and the like), possibly followed by ", tag <tag>".
+++ *
+++ * Following that may be some "info lines", each of which is indented
+++ * by 14 spaces, giving a dissection of the payload after the
+++ * link-layer header.
+++ *
+++ * Following that is a hex/ASCII dump of the contents of the
+++ * packet, with 16 octets per line.
++  */
++ static gboolean
++ parse_netscreen_packet(FILE_T fh, wtap_rec *rec, Buffer* buf,
++     char *line, int *err, gchar **err_info)
++ {
++-	int		pkt_len;
+++	guint		pkt_len;
++ 	int		sec;
++ 	int		dsec;
++ 	char		cap_int[NETSCREEN_MAX_INT_NAME_LENGTH];
++@@ -266,17 +298,12 @@ parse_netscreen_packet(FILE_T fh, wtap_rec *rec, Buffer* buf,
++ 	memset(cap_int, 0, sizeof(cap_int));
++ 	memset(cap_dst, 0, sizeof(cap_dst));
++ 
++-	if (sscanf(line, "%9d.%9d: %15[a-z0-9/:.-](%1[io]) len=%9d:%12s->%12s/",
+++	if (sscanf(line, "%9d.%9d: %15[a-z0-9/:.-](%1[io]) len=%9u:%12s->%12s/",
++ 		   &sec, &dsec, cap_int, direction, &pkt_len, cap_src, cap_dst) < 5) {
++ 		*err = WTAP_ERR_BAD_FILE;
++ 		*err_info = g_strdup("netscreen: Can't parse packet-header");
++ 		return -1;
++ 	}
++-	if (pkt_len < 0) {
++-		*err = WTAP_ERR_BAD_FILE;
++-		*err_info = g_strdup("netscreen: packet header has a negative packet length");
++-		return FALSE;
++-	}
++ 	if (pkt_len > WTAP_MAX_PACKET_SIZE_STANDARD) {
++ 		/*
++ 		 * Probably a corrupt capture file; don't blow up trying
++@@ -323,44 +350,71 @@ parse_netscreen_packet(FILE_T fh, wtap_rec *rec, Buffer* buf,
++ 			break;
++ 		}
++ 
++-		n = parse_single_hex_dump_line(p, pd, offset);
+++		n = parse_single_hex_dump_line(p, pd, offset, pkt_len);
++ 
++-		/* the smallest packet has a length of 6 bytes, if
++-		 * the first hex-data is less then check whether
++-		 * it is a info-line and act accordingly
+++		/*
+++		 * The smallest packet has a length of 6 bytes.
+++		 * If the first line either gets an error when
+++		 * parsed as hex data, or has fewer than 6
+++		 * bytes of hex data, check whether it's an
+++		 * info line by see if it has at least
+++		 * NETSCREEN_SPACES_ON_INFO_LINE spaces at the
+++		 * beginning.
+++		 *
+++		 * If it does, count this line and, if we have,
+++		 * so far, skipped no more than NETSCREEN_MAX_INFOLINES
+++		 * lines, skip this line.
++ 		 */
++ 		if (offset == 0 && n < 6) {
++ 			if (info_line(line)) {
+++				/* Info line */
++ 				if (++i <= NETSCREEN_MAX_INFOLINES) {
+++					/* Skip this line */
++ 					continue;
++ 				}
++ 			} else {
++-				*err = WTAP_ERR_BAD_FILE;
++-				*err_info = g_strdup("netscreen: cannot parse hex-data");
++-				return FALSE;
+++				if (n >= 0) {
+++					*err = WTAP_ERR_BAD_FILE;
+++					*err_info = g_strdup("netscreen: first line of packet data has only %d hex bytes, < 6");
+++					return FALSE;
+++				}
+++				/* Otherwise, fall through to report error */
++ 			}
++ 		}
++ 
++ 		/* If there is no more data and the line was not empty,
++ 		 * then there must be an error in the file
++ 		 */
++-		if (n == -1) {
++-			*err = WTAP_ERR_BAD_FILE;
++-			*err_info = g_strdup("netscreen: cannot parse hex-data");
+++		if (n < 0) {
+++			switch (n) {
+++
+++			case PARSE_LINE_INVALID_CHARACTER:
+++				*err = WTAP_ERR_BAD_FILE;
+++				*err_info = g_strdup("netscreen: invalid character in hex data");
+++				break;
+++
+++			case PARSE_LINE_NO_BYTES_SEEN:
+++				*err = WTAP_ERR_BAD_FILE;
+++				*err_info = g_strdup("netscreen: no hex bytes seen in hex data");
+++				break;
+++
+++			case PARSE_LINE_TOO_MANY_BYTES_SEEN:
+++				*err = WTAP_ERR_BAD_FILE;
+++				*err_info = g_strdup("netscreen: number of hex bytes seen in hex data is greater than the packet length");
+++				break;
+++
+++			default:
+++				*err = WTAP_ERR_INTERNAL;
+++				*err_info = g_strdup_printf("netscreen: unknown error %d from parse_single_hex_dump_line()", n);
+++				break;
+++			}
+++
++ 			return FALSE;
++ 		}
++ 
++ 		/* Adjust the offset to the data that was just added to the buffer */
++ 		offset += n;
++ 
++-		/* If there was more hex-data than was announced in the len=x
++-		 * header, then then there must be an error in the file
++-		 */
++-		if (offset > pkt_len) {
++-			*err = WTAP_ERR_BAD_FILE;
++-			*err_info = g_strdup("netscreen: too much hex-data");
++-			return FALSE;
++-		}
++ 	}
++ 
++ 	/*
++@@ -400,7 +454,7 @@ parse_netscreen_packet(FILE_T fh, wtap_rec *rec, Buffer* buf,
++  *
++  * Returns number of bytes successfully read, -1 if bad.  */
++ static int
++-parse_single_hex_dump_line(char* rec, guint8 *buf, guint byte_offset)
+++parse_single_hex_dump_line(char* rec, guint8 *buf, guint byte_offset, guint pkt_len)
++ {
++ 	int num_items_scanned;
++ 	guint8 character;
++@@ -419,7 +473,7 @@ parse_single_hex_dump_line(char* rec, guint8 *buf, guint byte_offset)
++ 			/* Nothing more to parse */
++ 			break;
++ 		} else
++-			return -1; /* not a hex digit, space before ASCII dump, or EOL */
+++			return PARSE_LINE_INVALID_CHARACTER; /* not a hex digit, space before ASCII dump, or EOL */
++ 		byte <<= 4;
++ 		character = *rec++ & 0xFF;
++ 		if (character >= '0' && character <= '9')
++@@ -429,7 +483,16 @@ parse_single_hex_dump_line(char* rec, guint8 *buf, guint byte_offset)
++ 		else if (character >= 'a' && character <= 'f')
++ 			byte += character - 'a' + 0xa;
++ 		else
++-			return -1; /* not a hex digit */
+++			return PARSE_LINE_INVALID_CHARACTER; /* not a hex digit */
+++
+++		/* If there was more hex-data than was announced in the len=x
+++		 * header, then there must be an error in the file; quit
+++		 * now, as adding this byte will overflow the buffer.
+++		 */
+++		if (byte_offset + num_items_scanned >= pkt_len) {
+++			return PARSE_LINE_TOO_MANY_BYTES_SEEN;
+++		}
+++
++ 		buf[byte_offset + num_items_scanned] = byte;
++ 		character = *rec++ & 0xFF;
++ 		if (character == '\0' || character == '\r' || character == '\n') {
++@@ -437,11 +500,11 @@ parse_single_hex_dump_line(char* rec, guint8 *buf, guint byte_offset)
++ 			break;
++ 		} else if (character != ' ') {
++ 			/* not space before ASCII dump */
++-			return -1;
+++			return PARSE_LINE_INVALID_CHARACTER;
++ 		}
++ 	}
++ 	if (num_items_scanned == 0)
++-		return -1;
+++		return PARSE_LINE_NO_BYTES_SEEN;
++ 
++ 	return num_items_scanned;
++ }
++-- 
++2.25.1
++
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb b/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
+index 41c363ad30..7e6182f51c 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_3.4.12.bb
+@@ -29,6 +29,7 @@ SRC_URI += " \
+     file://CVE-2022-4345.patch \
+     file://CVE-2024-0208.patch \
+     file://CVE-2023-4511.patch \
++    file://CVE-2023-6175.patch \
+ "
  
- PACKAGECONFIG ??= "ibus <a href="mailto:${@bb.utils.filter">${@bb.utils.filter</a>('DISTRO_FEATURES', 'wayland', d)}"
- PACKAGECONFIG[cups] = ",,cups,cups"
-<div>-- 
-</div>2.44.0
-
-</div><div class="plaintext" style="white-space: break-spaces;">
--=-=-=-=-=-=-=-=-=-=-=-
-Links: You receive all messages sent to this group.
-View/Reply Online (#109678): <a href="https://lists.openembedded.org/g/openembedded-devel/message/109678">https://lists.openembedded.org/g/openembedded-devel/message/109678</a>
-Mute This Topic: <a href="https://lists.openembedded.org/mt/105207028/3618223">https://lists.openembedded.org/mt/105207028/3618223</a>
-Group Owner: <a href="mailto:openembedded-devel+owner@lists.openembedded.org">openembedded-devel+owner@lists.openembedded.org</a>
-Unsubscribe: <a href="https://lists.openembedded.org/g/openembedded-devel/unsub">https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>]
--=-=-=-=-=-=-=-=-=-=-=-
-
-</div></blockquote></div>
---=-PlTpNx23RmMNVjWXZXyr--
+ UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
+-- 
+2.25.1
 
 
