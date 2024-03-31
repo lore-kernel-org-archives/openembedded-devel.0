@@ -1,166 +1,90 @@
-Return-Path: <gudnimar@noxmedical.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3718DCD1284
-	for <webhook@archiver.kernel.org>; Sun, 31 Mar 2024 12:42:45 +0000 (UTC)
-Received: from usb-smtp-delivery-118.mimecast.com (usb-smtp-delivery-118.mimecast.com [170.10.153.118])
- by mx.groups.io with SMTP id smtpd.web10.16275.1711888956622929136
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EA993CD128A
+	for <webhook@archiver.kernel.org>; Sun, 31 Mar 2024 15:31:55 +0000 (UTC)
+Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com [209.85.216.51])
+ by mx.groups.io with SMTP id smtpd.web10.18934.1711899112499568434
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 31 Mar 2024 05:42:36 -0700
+ Sun, 31 Mar 2024 08:31:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@noxmedical.com header.s=mimecast20231107 header.b=L6XpGPLF;
- spf=pass (domain: noxmedical.com, ip: 170.10.153.118, mailfrom: gudnimar@noxmedical.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=noxmedical.com;
-	s=mimecast20231107; t=1711888956;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type;
-	bh=ojWJLctY132x+pBULeGCuKzcjhEB32fa4FeeQw3JhBg=;
-	b=L6XpGPLFkuZhtYjOIrO00xOczMuCZLddD6lRuRdGsNsrsP5std05tqlz85+iCYD9Wh+YuO
-	i8KwXKUiyEwUO3s2OIJHQYQxZl4Sk6Ky2yeoAA/CfFW84X3tRmUb9HEG2h3BywhHOPxh9e
-	JnFCY2TJwTZ7wvFVRjBpxN0eaQlOhDY=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- usb-mta-40-sU_mTrAtPKifLA8VqBGbyQ-1; Sun, 31 Mar 2024 05:42:34 -0700
-X-MC-Unique: sU_mTrAtPKifLA8VqBGbyQ-1
-Received: by mail-wr1-f71.google.com with SMTP id ffacd0b85a97d-3418f237c0bso2069158f8f.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 31 Mar 2024 05:42:33 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=FrI6bSuu;
+ spf=pass (domain: gmail.com, ip: 209.85.216.51, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f51.google.com with SMTP id 98e67ed59e1d1-29df3333d30so2433740a91.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 31 Mar 2024 08:31:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1711899111; x=1712503911; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=mfxGJvFPJt76ACBtRA9uPzoaeQmjyjJy6W1lGXc4ViM=;
+        b=FrI6bSuu6IJ6a1TZx7FmzljYd18sTq9BMgPrfs+4KjWwGuIFfTYTsIphzwh+q0cX5T
+         2TgGC5bxnnY4AkftKF+WOlbN6zWiqaVOXxjpiyJbYlmKzzmEtzeg3XiPrW3hZ7ONQfcS
+         0LuhwqfQajRqJug/vWdyZwvm2p9PA4YkCq78C8m2j5yAJiU2p5HrwZ3mPPL4o4anpTsF
+         5BSNlfcq+0JUGZGX7fGSOc5TgJFF1bVRNUTTIvI3108brgokgt7153tJcqKYunZk5phk
+         xsGAujbyuFDOeJG8sqwqVJH6zk/JhgeZtrSBhH3D7W9blAH+Y5HvuDkrrc2S0e4n2Kg4
+         uN5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1711888952; x=1712493752;
+        d=1e100.net; s=20230601; t=1711899111; x=1712503911;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=Cdrpigru6j9HVzlKuxIsBlKjPA/kXezM1Ue9mVft+lI=;
-        b=HELv950of70hl6Cj98z79taHhVFt/1sCfy95a88QHMbRQeud72QNXEerZLXhZvTH3W
-         g8WTf/nJUrUFhUMjc3ktgZKo4d6pQhaCkuxVvl2DurHSQd1BTfVblHoalQYruJweRa2F
-         u1R/Vk2notOxuM9ym27mAAdQhMrR6vo3dcdRM724bd7UxIoSHXbEJC23JRISnYm/eeiA
-         tgQtYuref3KSEewU20G/SJF2SLNs8lAuWe5ObH13f64hQ41nU5clr04nckInjT9+83o0
-         a/Md+w+SY8RMDpjHP/9hKds+IIEQEd/SwXMQsR7Cd89R4znvew9xxc5gZRI+zDOszzmP
-         isYA==
-X-Gm-Message-State: AOJu0YyKp6800T9O/ns/50QIrZmXoloQ/NlnEk//3JYuA5J5NVGYFMEO
-	Yf/eT+IQeQAjFdMJsI4nZHNKHGI2Tu7g0pkSWCNndeENZvZpYwHtzQ0xaCF31rQ1kJE/6SuLDJc
-	UizxuZfKsahyjS2seEKxhoiWmo6z9FllkaiZ3CW5/yVOYgVxCQ+UeS1L2lOUzDP2QPNrwQAxvjQ
-	BQLG4QefMsz0eqo6p6SK7i4HVOi2ZxnAAi7XxSkqT0deS9LR7/yVzh3yJBAhp13PEMTfzE
-X-Received: by 2002:adf:fac4:0:b0:33e:c316:2a51 with SMTP id a4-20020adffac4000000b0033ec3162a51mr3429674wrs.27.1711888952160;
-        Sun, 31 Mar 2024 05:42:32 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IETVVHrLvdRUbJmr/DNXggStRqm0CoOe7rBB9UeGtLa3dZhDiUBLnYrUKaZqPIWBYFe0t3cEA==
-X-Received: by 2002:adf:fac4:0:b0:33e:c316:2a51 with SMTP id a4-20020adffac4000000b0033ec3162a51mr3429658wrs.27.1711888951545;
-        Sun, 31 Mar 2024 05:42:31 -0700 (PDT)
-Received: from gudni-virtual-machine.localdomain ([81.15.100.92])
-        by smtp.gmail.com with ESMTPSA id e1-20020adff341000000b0033dd2a7167fsm8885057wrp.29.2024.03.31.05.42.30
+        bh=mfxGJvFPJt76ACBtRA9uPzoaeQmjyjJy6W1lGXc4ViM=;
+        b=lz+uy62GPS75ymQbIIVaBAVaO1nUD5TQoIC36n0SpQXWkDg1pc4atveQJ2ZG6WbqTz
+         yWNCpeTG9kqimqUppSlpmqXY+lc0W5QtAp3584vN883994z+yA82JHxqNNHMV6Roqwy/
+         fydmsaLuZKz2BxWUQ7wEQNyZ4pfcz0JPmwJftYd2RS+KIZrB0yvjBTMbdbxCq9X2rqCl
+         QNxaSCFjnXmL4y31a7eRHxZx7ggqWYQR3jEbSCYy4vMNApOdlp/Qm0EJB6R6A3zAqv0d
+         /a8DdXbamoOGmSK/9psYLKhqc+yxG7r2VzR8Hn8LQsNjDCAgzVbm3reHLPQA2oX9Qllc
+         C20Q==
+X-Gm-Message-State: AOJu0YzgfwtTBnSyZojQzm6m1QJHK42r4UTwPQKKcOMKjKlYD+nyisEz
+	KuWwn/nadT2BaYAIJBuJ/nn16WykYPfZZQt/PkOyZlaHNuCY1PFfg0i8zIXt
+X-Google-Smtp-Source: AGHT+IF924htEqnrIiMaVpzWSCPQY4mnaLJB65Csm9/4BRf4o2ciMjQPRxw1s/Rw0nHY+/FDpk/lXA==
+X-Received: by 2002:a17:90a:5416:b0:2a2:2d11:c63b with SMTP id z22-20020a17090a541600b002a22d11c63bmr1879591pjh.31.1711899111310;
+        Sun, 31 Mar 2024 08:31:51 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::dfbb])
+        by smtp.gmail.com with ESMTPSA id gm3-20020a17090b100300b002a232d495f0sm1350753pjb.29.2024.03.31.08.31.50
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 31 Mar 2024 05:42:31 -0700 (PDT)
-From: =?UTF-8?q?Gu=C3=B0ni=20M=C3=A1r=20Gilbert?= <gudnimar@noxmedical.com>
+        Sun, 31 Mar 2024 08:31:50 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: =?UTF-8?q?Gu=C3=B0ni=20M=C3=A1r=20Gilbert?= <gudnimar@noxmedical.com>
-Subject: [meta-python][PATCH] python3-ecdsa: remove python3-pbr
-Date: Sun, 31 Mar 2024 12:42:13 +0000
-Message-Id: <20240331124213.2542824-1-gudnimar@noxmedical.com>
-X-Mailer: git-send-email 2.34.1
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH] meta-python-image-ptest: Use 2G RAM for some demanding tests
+Date: Sun, 31 Mar 2024 08:31:48 -0700
+Message-ID: <20240331153148.324399-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: noxmedical.com
-Content-Type: multipart/alternative;
-	boundary="MCBoundary=_12403310542350211"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 31 Mar 2024 12:42:45 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109689
+ <openembedded-devel@lists.openembedded.org>; Sun, 31 Mar 2024 15:31:55 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109690
 
---MCBoundary=_12403310542350211
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+scrypt/fastjsonschema/pillow run into OOM on some qemu
+architectures e.g. RISCV64. Raise the memory to be atleast 2G
+for running these ptest images
 
-python3-pbr is not a runtime dependency or a buildtime dependency.
-The reason for this change is not only to clean up the RDEPENDS list.
-But also because python3-pbr adds pip as a runtime dependency which
-is not always desireable.
-
-Signed-off-by: Gu=C3=B0ni M=C3=A1r Gilbert <gudnimar@noxmedical.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-ecdsa_0.18.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-python/recipes-core/images/meta-python-image-ptest.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-ecdsa_0.18.0.bb b/=
-meta-python/recipes-devtools/python/python3-ecdsa_0.18.0.bb
-index d1022891b..ea175d214 100644
---- a/meta-python/recipes-devtools/python/python3-ecdsa_0.18.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-ecdsa_0.18.0.bb
-@@ -10,7 +10,7 @@ SRC_URI[sha256sum] =3D "190348041559e21b22a1d65cee485282c=
-a11a6f81d503fddb84d5017e9
-=20
- inherit pypi setuptools3 python3native
-=20
--RDEPENDS:${PN} +=3D "python3-six python3-gmpy2 python3-pbr"
-+RDEPENDS:${PN} +=3D "python3-six python3-gmpy2"
-=20
- BBCLASSEXTEND =3D "native nativesdk"
-=20
---=20
-2.34.1
-
-Disclaimer
-
-The information contained in this communication from the sender is confiden=
-tial. It is intended solely for use by the recipient and others authorized =
-to receive it. If you are not the recipient, you are hereby notified that a=
-ny disclosure, copying, distribution or taking action in relation of the co=
-ntents of this information is strictly prohibited and may be unlawful.
-
-This email has been scanned for viruses and malware, and may have been auto=
-matically archived by Mimecast, a leader in email security and cyber resili=
-ence. Mimecast integrates email defenses with brand protection, security aw=
-areness training, web security, compliance and other essential capabilities=
-. Mimecast helps protect large and small organizations from malicious activ=
-ity, human error and technology failure; and to lead the movement toward bu=
-ilding a more resilient world. To find out more, visit our website.
-
---MCBoundary=_12403310542350211
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/html; charset=UTF-8
-
-<html><head><style type=3D"text/css">.style1 {font-family: "Times New Roman=
-";}</style></head><body>python3-pbr is not a runtime dependency or a buildt=
-ime dependency.<BR>
-The reason for this change is not only to clean up the RDEPENDS list.<BR>
-But also because python3-pbr adds pip as a runtime dependency which<BR>
-is not always desireable.<BR>
-<BR>
-Signed-off-by: Gu&eth;ni M&aacute;r Gilbert &lt;gudnimar@noxmedical.com&gt;=
-<BR>
----<BR>
- meta-python/recipes-devtools/python/python3-ecdsa_0.18.0.bb | 2 +-<BR>
- 1 file changed, 1 insertion(+), 1 deletion(-)<BR>
-<BR>
-diff --git a/meta-python/recipes-devtools/python/python3-ecdsa_0.18.0.bb b/=
-meta-python/recipes-devtools/python/python3-ecdsa_0.18.0.bb<BR>
-index d1022891b..ea175d214 100644<BR>
---- a/meta-python/recipes-devtools/python/python3-ecdsa_0.18.0.bb<BR>
-+++ b/meta-python/recipes-devtools/python/python3-ecdsa_0.18.0.bb<BR>
-@@ -10,7 +10,7 @@ SRC_URI[sha256sum] =3D &quot;190348041559e21b22a1d65cee48=
-5282ca11a6f81d503fddb84d5017e9<BR>
- <BR>
- inherit pypi setuptools3 python3native<BR>
- <BR>
--RDEPENDS:${PN} +=3D &quot;python3-six python3-gmpy2 python3-pbr&quot;<BR>
-+RDEPENDS:${PN} +=3D &quot;python3-six python3-gmpy2&quot;<BR>
- <BR>
- BBCLASSEXTEND =3D &quot;native nativesdk&quot;<BR>
- <BR>
--- <BR>
-2.34.1<BR>
-
-<br><br><p style=3D"font-family: Verdana; font-size:10pt; color:#666666;"><=
-/p><p style=3D"font-family: Verdana; font-size:8pt; color:#666666;">Warning=
-:  Copyright Nox Health.  This communication is confidential and may contai=
-n privileged information.  By the use of email over the Internet or other c=
-ommunication systems, Nox Health is not waiving either confidentiality of, =
-or legal privilege in, the content of the email and of any attachments.  If=
- the recipient of this message is not the intended addressee, please call N=
-ox Health immediately by calling (+1) 888.505.0280</p></body></html>
-
---MCBoundary=_12403310542350211--
+diff --git a/meta-python/recipes-core/images/meta-python-image-ptest.bb b/meta-python/recipes-core/images/meta-python-image-ptest.bb
+index 9c542855a2..002bd7a39e 100644
+--- a/meta-python/recipes-core/images/meta-python-image-ptest.bb
++++ b/meta-python/recipes-core/images/meta-python-image-ptest.bb
+@@ -27,6 +27,10 @@ IMAGE_ROOTFS_EXTRA_SPACE = "324288"
+ QB_MEM = "-m 1024"
+ # If a particular ptest needs more memory, it can be customized:
+ #QB_MEM:virtclass-mcextend-<pn> = "-m 4096"
++# python3-scrypt ptests run into OOMs on RISCV64 qemu
++QB_MEM:virtclass-mcextend-python3-scrypt = "-m 2048"
++QB_MEM:virtclass-mcextend-python3-fastjsonschema = "-m 2048"
++QB_MEM:virtclass-mcextend-python3-pillow = "-m 2048"
+ 
+ TEST_SUITES = "ping ssh parselogs ptest"
+ 
+-- 
+2.44.0
 
 
