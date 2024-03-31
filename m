@@ -2,43 +2,41 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 54DA9CD1284
-	for <webhook@archiver.kernel.org>; Sun, 31 Mar 2024 17:04:06 +0000 (UTC)
-Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
- by mx.groups.io with SMTP id smtpd.web11.20461.1711904641195428106
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 51197CD128A
+	for <webhook@archiver.kernel.org>; Sun, 31 Mar 2024 17:07:16 +0000 (UTC)
+Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
+ by mx.groups.io with SMTP id smtpd.web11.20511.1711904829927099634
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 31 Mar 2024 10:04:01 -0700
+ Sun, 31 Mar 2024 10:07:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
-Received: from fwd82.aul.t-online.de (fwd82.aul.t-online.de [10.223.144.108])
-	by mailout03.t-online.de (Postfix) with SMTP id 59969C387
-	for <openembedded-devel@lists.openembedded.org>; Sun, 31 Mar 2024 19:03:51 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.163.46.245]) by fwd82.t-online.de
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
+Received: from fwd79.aul.t-online.de (fwd79.aul.t-online.de [10.223.144.105])
+	by mailout05.t-online.de (Postfix) with SMTP id 81272E692
+	for <openembedded-devel@lists.openembedded.org>; Sun, 31 Mar 2024 19:07:08 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.163.46.245]) by fwd79.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1rqyb0-1pAiy90; Sun, 31 Mar 2024 19:03:50 +0200
+	esmtp id 1rqye8-44nzij0; Sun, 31 Mar 2024 19:07:04 +0200
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] webkitgtk3: update 2.42.5 -> 2.44.0
-Date: Sun, 31 Mar 2024 19:03:51 +0200
-Message-ID: <20240331170351.2537906-1-f_l_k@t-online.de>
+Subject: [meta-oe][PATCHv2] webkitgtk3: update 2.42.5 -> 2.44.0
+Date: Sun, 31 Mar 2024 19:07:06 +0200
+Message-ID: <20240331170706.2539338-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1711904630-1549193C-80B48DC9/0/0 CLEAN NORMAL
-X-TOI-MSGID: acbd7351-ffda-4e8c-a299-8894f64f55e0
+X-TOI-EXPURGATEID: 150726::1711904825-25A84909-FD37A4AD/0/0 CLEAN NORMAL
+X-TOI-MSGID: 9bacbbb5-aae4-448d-a528-9612e4da2109
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 31 Mar 2024 17:04:06 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109691
+ <openembedded-devel@lists.openembedded.org>; Sun, 31 Mar 2024 17:07:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109692
 
 - add a PACKAGECONFIG for libbacktrace to avoid:
   | -- Could NOT find LibBacktrace (missing: LIBBACKTRACE_INCLUDE_DIR LIB=
 BACKTRACE_LIBRARY)
   | CMake Error at Source/cmake/OptionsGTK.cmake:425 (message):
   |   libbacktrace is required for USE_LIBBACKTRACE
-
-- while at it also add a PACKAGECONFIG for gamepad
 
 - remove submitted patch. Issue seems to be fixed. Not entirely
   sure about that, but there has been rework:
@@ -151,8 +149,8 @@ What's new in WebKitGTK 2.43.1?
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
  ...44e17d258106617b0e6d783d073b188a2548.patch | 312 ------------------
- ...kitgtk3_2.42.5.bb =3D> webkitgtk3_2.44.0.bb} |  32 +-
- 2 files changed, 18 insertions(+), 326 deletions(-)
+ ...kitgtk3_2.42.5.bb =3D> webkitgtk3_2.44.0.bb} |  31 +-
+ 2 files changed, 17 insertions(+), 326 deletions(-)
  delete mode 100644 meta-oe/recipes-support/webkitgtk/webkitgtk3/0d3344e1=
 7d258106617b0e6d783d073b188a2548.patch
  rename meta-oe/recipes-support/webkitgtk/{webkitgtk3_2.42.5.bb =3D> webk=
@@ -541,7 +539,7 @@ a-oe/recipes-support/webkitgtk/webkitgtk3_2.44.0.bb
 similarity index 89%
 rename from meta-oe/recipes-support/webkitgtk/webkitgtk3_2.42.5.bb
 rename to meta-oe/recipes-support/webkitgtk/webkitgtk3_2.44.0.bb
-index 234ecfae0..d947c6579 100644
+index 234ecfae0..e5d53329d 100644
 --- a/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.42.5.bb
 +++ b/meta-oe/recipes-support/webkitgtk/webkitgtk3_2.44.0.bb
 @@ -12,11 +12,10 @@ LIC_FILES_CHKSUM =3D "file://Source/JavaScriptCore/CO=
@@ -596,7 +594,7 @@ engl-or-es', '', d)} \
 D_TARGET=3DOFF,wayland libwpe wpebackend-fdo wayland-native"
  PACKAGECONFIG[angle] =3D "-DUSE_ANGLE_WEBGL=3DON,-DUSE_ANGLE_WEBGL=3DOFF=
 "
-@@ -81,12 +81,16 @@ PACKAGECONFIG[media-recorder] =3D "-DENABLE_MEDIA_REC=
+@@ -81,12 +81,15 @@ PACKAGECONFIG[media-recorder] =3D "-DENABLE_MEDIA_REC=
 ORDER=3DON,-DENABLE_MEDIA_RECOR
  PACKAGECONFIG[gamepad] =3D "-DENABLE_GAMEPAD=3DON,-DENABLE_GAMEPAD=3DOFF=
 ,libmanette"
@@ -606,8 +604,6 @@ EXECUTABLE=3D${bindir}/bwrap -DDBUS_PROXY_EXECUTABLE=3D${bindir}/xdg-dbus=
 -proxy,-DENABLE_BUBBLEWRAP_SANDBOX=3DOFF,,bubblewrap xdg-dbus-proxy"
 +PACKAGECONFIG[backtrace] =3D "-DUSE_LIBBACKTRACE=3DON,-DUSE_LIBBACKTRACE=
 =3DOFF,libbacktrace"
-+PACKAGECONFIG[gamepad] =3D "-DENABLE_GAMEPAD=3DOFF=3DON,-DENABLE_GAMEPAD=
-=3DOFF=3DOFF,libmanette"
 =20
  EXTRA_OECMAKE =3D " \
 -		-DPORT=3DGTK \
