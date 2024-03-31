@@ -1,117 +1,166 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <gudnimar@noxmedical.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 973A3C6FD1F
-	for <webhook@archiver.kernel.org>; Sat, 30 Mar 2024 17:04:29 +0000 (UTC)
-Received: from mail-oa1-f50.google.com (mail-oa1-f50.google.com [209.85.160.50])
- by mx.groups.io with SMTP id smtpd.web11.1540.1711818264086871248
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3718DCD1284
+	for <webhook@archiver.kernel.org>; Sun, 31 Mar 2024 12:42:45 +0000 (UTC)
+Received: from usb-smtp-delivery-118.mimecast.com (usb-smtp-delivery-118.mimecast.com [170.10.153.118])
+ by mx.groups.io with SMTP id smtpd.web10.16275.1711888956622929136
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 30 Mar 2024 10:04:24 -0700
+ Sun, 31 Mar 2024 05:42:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=e02Yt1Xf;
- spf=pass (domain: gmail.com, ip: 209.85.160.50, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f50.google.com with SMTP id 586e51a60fabf-229a90b7aa9so1466584fac.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 30 Mar 2024 10:04:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1711818263; x=1712423063; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=EzhWHY6iATtuZ/T7CTIdi+5etNMlP0Ql14zCnRAvGb8=;
-        b=e02Yt1XfyA3VCsuPrMR8w8Fqz7nfpzwQmo4KS1dGC6RsW2QRxKzQtilnvRJ3A92igc
-         I5CQnsh25ki+Mx08h4idTe2N0M3IbgHINQKMH/rdvoG1jau5p/85w40K8N2uOXWYHmJM
-         1ItKGJtZydXF+QBn7j0I7CpGnGP2qqFHF7JDtL1cUghAOZL5i62XH0jsDwyVByubYWMW
-         wR62tJeQjZlaQ/r44jouDX1S1VmjdcNi0Vt8ek2GaWqcRrJc9Ptui0/ohgF6dZktltVQ
-         MxSqNAuXwV0b/E8HN8fV2kEa79tPyNMm3d53eNeTUjHd+WfqjjG6vqkgF9h9BBnxZTBD
-         vDHA==
+ dkim=pass header.i=@noxmedical.com header.s=mimecast20231107 header.b=L6XpGPLF;
+ spf=pass (domain: noxmedical.com, ip: 170.10.153.118, mailfrom: gudnimar@noxmedical.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=noxmedical.com;
+	s=mimecast20231107; t=1711888956;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type;
+	bh=ojWJLctY132x+pBULeGCuKzcjhEB32fa4FeeQw3JhBg=;
+	b=L6XpGPLFkuZhtYjOIrO00xOczMuCZLddD6lRuRdGsNsrsP5std05tqlz85+iCYD9Wh+YuO
+	i8KwXKUiyEwUO3s2OIJHQYQxZl4Sk6Ky2yeoAA/CfFW84X3tRmUb9HEG2h3BywhHOPxh9e
+	JnFCY2TJwTZ7wvFVRjBpxN0eaQlOhDY=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ usb-mta-40-sU_mTrAtPKifLA8VqBGbyQ-1; Sun, 31 Mar 2024 05:42:34 -0700
+X-MC-Unique: sU_mTrAtPKifLA8VqBGbyQ-1
+Received: by mail-wr1-f71.google.com with SMTP id ffacd0b85a97d-3418f237c0bso2069158f8f.3
+        for <openembedded-devel@lists.openembedded.org>; Sun, 31 Mar 2024 05:42:33 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1711818263; x=1712423063;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=EzhWHY6iATtuZ/T7CTIdi+5etNMlP0Ql14zCnRAvGb8=;
-        b=fkvCqIM4KtQhUQgW11bNHw2JZnN4ZDt+Qcea6NGRbcWR/YYvz+PtysVW4lOHzHJpDh
-         PZTJLXQg5TPshx6rahuGTzievbizfbyyWRG6dqpXYoWp3rzO2UoK83qRwY96Z674dTtp
-         sNsq/kwWP2QSfM/gavh+gfDoL8CgbLkM5ilCYxEfQgPzk5q/n/kbLcksYWvS3W6GULsH
-         C+95OTCezZjarKoH8wQnmnvxTQfZOYB8ZwSGHHwLmHYAJkKALGpEXTZbzy5h5vbhE8QW
-         RyOiFiYw257v3u+ts6NcLIvKLhzrXkFMo8t8lV2cAi6zCc49+Eh9A1EyrpIN9xnFZgHn
-         6jFA==
-X-Forwarded-Encrypted: i=1; AJvYcCWkputjkAp/yO0FEh8UqdDPkUpWE9qjOq1CxyYwzh9ztXCeUJYBgLYLnNZQH1Z/BEN6p7Ol3vohQv3sW4iX6QWlf+EOzUdQEjZGscw/c/1G7TBEQ4RBDmeyxg==
-X-Gm-Message-State: AOJu0Yy3Kq0Kpoj6SiNBi9lUnuNafce60I/34ao+T13dYVxYpS8z9V/l
-	U/zBUZTqlmzNg9l45qOJ5jdMciZcqPzWeCYuAnjtLR/UiNkqpnI2wuYFaVDwh7vl4b0JipL/vPd
-	K/j3dJ9IR7c/SaT9VNaWHs/pjG9axDHrw
-X-Google-Smtp-Source: AGHT+IHyzzVMGArbYrNgdXLtIBfoefPaRGr/3im3RDLilofpVMWTTG7pU/DwAWs/BUOHVxpt7gojbtpeLSMPj9KWgs8=
-X-Received: by 2002:a05:6871:3309:b0:22e:1de:e18f with SMTP id
- nf9-20020a056871330900b0022e01dee18fmr4149848oac.13.1711818263250; Sat, 30
- Mar 2024 10:04:23 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1711888952; x=1712493752;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Cdrpigru6j9HVzlKuxIsBlKjPA/kXezM1Ue9mVft+lI=;
+        b=HELv950of70hl6Cj98z79taHhVFt/1sCfy95a88QHMbRQeud72QNXEerZLXhZvTH3W
+         g8WTf/nJUrUFhUMjc3ktgZKo4d6pQhaCkuxVvl2DurHSQd1BTfVblHoalQYruJweRa2F
+         u1R/Vk2notOxuM9ym27mAAdQhMrR6vo3dcdRM724bd7UxIoSHXbEJC23JRISnYm/eeiA
+         tgQtYuref3KSEewU20G/SJF2SLNs8lAuWe5ObH13f64hQ41nU5clr04nckInjT9+83o0
+         a/Md+w+SY8RMDpjHP/9hKds+IIEQEd/SwXMQsR7Cd89R4znvew9xxc5gZRI+zDOszzmP
+         isYA==
+X-Gm-Message-State: AOJu0YyKp6800T9O/ns/50QIrZmXoloQ/NlnEk//3JYuA5J5NVGYFMEO
+	Yf/eT+IQeQAjFdMJsI4nZHNKHGI2Tu7g0pkSWCNndeENZvZpYwHtzQ0xaCF31rQ1kJE/6SuLDJc
+	UizxuZfKsahyjS2seEKxhoiWmo6z9FllkaiZ3CW5/yVOYgVxCQ+UeS1L2lOUzDP2QPNrwQAxvjQ
+	BQLG4QefMsz0eqo6p6SK7i4HVOi2ZxnAAi7XxSkqT0deS9LR7/yVzh3yJBAhp13PEMTfzE
+X-Received: by 2002:adf:fac4:0:b0:33e:c316:2a51 with SMTP id a4-20020adffac4000000b0033ec3162a51mr3429674wrs.27.1711888952160;
+        Sun, 31 Mar 2024 05:42:32 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IETVVHrLvdRUbJmr/DNXggStRqm0CoOe7rBB9UeGtLa3dZhDiUBLnYrUKaZqPIWBYFe0t3cEA==
+X-Received: by 2002:adf:fac4:0:b0:33e:c316:2a51 with SMTP id a4-20020adffac4000000b0033ec3162a51mr3429658wrs.27.1711888951545;
+        Sun, 31 Mar 2024 05:42:31 -0700 (PDT)
+Received: from gudni-virtual-machine.localdomain ([81.15.100.92])
+        by smtp.gmail.com with ESMTPSA id e1-20020adff341000000b0033dd2a7167fsm8885057wrp.29.2024.03.31.05.42.30
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 31 Mar 2024 05:42:31 -0700 (PDT)
+From: =?UTF-8?q?Gu=C3=B0ni=20M=C3=A1r=20Gilbert?= <gudnimar@noxmedical.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: =?UTF-8?q?Gu=C3=B0ni=20M=C3=A1r=20Gilbert?= <gudnimar@noxmedical.com>
+Subject: [meta-python][PATCH] python3-ecdsa: remove python3-pbr
+Date: Sun, 31 Mar 2024 12:42:13 +0000
+Message-Id: <20240331124213.2542824-1-gudnimar@noxmedical.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20230109152538.896240-1-yi.zhao@windriver.com> <1ae2a64e-1796-4989-9157-a6b9ece677d3@windriver.com>
-In-Reply-To: <1ae2a64e-1796-4989-9157-a6b9ece677d3@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 30 Mar 2024 10:03:57 -0700
-Message-ID: <CAMKF1sp4hVLRx8qwsOC3H564DtyqrtxptUSY4=SC=Y3mtDF7aQ@mail.gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH] freeradius: upgrade 3.0.21 ->
- 3.0.26 --> Should we update to 3.2.x?
-To: Randy MacLeod <randy.macleod@windriver.com>
-Cc: yi.zhao@eng.windriver.com, openembedded-devel@lists.openembedded.org, 
-	"Yang, Liezhi" <Liezhi.Yang@windriver.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: noxmedical.com
+Content-Type: multipart/alternative;
+	boundary="MCBoundary=_12403310542350211"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 30 Mar 2024 17:04:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109688
+ <openembedded-devel@lists.openembedded.org>; Sun, 31 Mar 2024 12:42:45 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109689
 
-last three point releases of 3.2.x series has been stability releases,
-and I think it will become next stable following the release pattern,
-so I am fine with upgrading to 3.2.3, please rebase the patch on top
-of master-next and send here please.
+--MCBoundary=_12403310542350211
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Sat, Mar 30, 2024 at 8:05=E2=80=AFAM Randy MacLeod
-<randy.macleod@windriver.com> wrote:
->
-> Robert and I had an internal discussion about whether we should update
-> freeradius to the 3.2.x branch. See below. If there's no objection,
-> Robert please send you local update to the list so that it makes it into =
-5.0.
->
->
-> Robert said:
->
-> I've updated it to 3.2.3 in my local repo, but 3.2.x are 'Features' relea=
-se,
-> and 3.0.x are 'Stable' release:
->
-> https://freeradius.org/releases/
->
-> I think that keep it as 3.0.x is better than 3.2.x for LTS24 (YP-5.0)?
->
->
-> I think it's a judgment call.
->
-> You are right that there are new features being introduced:
->    https://freeradius.org/release_notes/?br=3D3.2.x
-> but there is also a dedciated branch for 3.2.x:
->    https://github.com/FreeRADIUS/freeradius-server/tree/v3.2.x
->
-> separate from the master branch and there's talk of a major update happen=
-ing for the 4.0 release:
->    https://freeradius.org/4.0/alpha.html
->
-> If you look around at what other distros are carrying, the more recently =
-updated/released
-> distros (Fedora 39, Debian 12) have 3.2.x:
->    https://pkgs.org/download/freeradius
-> and ubuntu-24.04, will ship 3.2:
->    https://repology.org/project/freeradius/versions
->
->
-> I wasn't able to find a document about FR's release schedule or EOL dates
->
-> but it seems to me that we should add 3.2.x.
->
->
-> ../Randy
+python3-pbr is not a runtime dependency or a buildtime dependency.
+The reason for this change is not only to clean up the RDEPENDS list.
+But also because python3-pbr adds pip as a runtime dependency which
+is not always desireable.
+
+Signed-off-by: Gu=C3=B0ni M=C3=A1r Gilbert <gudnimar@noxmedical.com>
+---
+ meta-python/recipes-devtools/python/python3-ecdsa_0.18.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-python/recipes-devtools/python/python3-ecdsa_0.18.0.bb b/=
+meta-python/recipes-devtools/python/python3-ecdsa_0.18.0.bb
+index d1022891b..ea175d214 100644
+--- a/meta-python/recipes-devtools/python/python3-ecdsa_0.18.0.bb
++++ b/meta-python/recipes-devtools/python/python3-ecdsa_0.18.0.bb
+@@ -10,7 +10,7 @@ SRC_URI[sha256sum] =3D "190348041559e21b22a1d65cee485282c=
+a11a6f81d503fddb84d5017e9
+=20
+ inherit pypi setuptools3 python3native
+=20
+-RDEPENDS:${PN} +=3D "python3-six python3-gmpy2 python3-pbr"
++RDEPENDS:${PN} +=3D "python3-six python3-gmpy2"
+=20
+ BBCLASSEXTEND =3D "native nativesdk"
+=20
+--=20
+2.34.1
+
+Disclaimer
+
+The information contained in this communication from the sender is confiden=
+tial. It is intended solely for use by the recipient and others authorized =
+to receive it. If you are not the recipient, you are hereby notified that a=
+ny disclosure, copying, distribution or taking action in relation of the co=
+ntents of this information is strictly prohibited and may be unlawful.
+
+This email has been scanned for viruses and malware, and may have been auto=
+matically archived by Mimecast, a leader in email security and cyber resili=
+ence. Mimecast integrates email defenses with brand protection, security aw=
+areness training, web security, compliance and other essential capabilities=
+. Mimecast helps protect large and small organizations from malicious activ=
+ity, human error and technology failure; and to lead the movement toward bu=
+ilding a more resilient world. To find out more, visit our website.
+
+--MCBoundary=_12403310542350211
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=UTF-8
+
+<html><head><style type=3D"text/css">.style1 {font-family: "Times New Roman=
+";}</style></head><body>python3-pbr is not a runtime dependency or a buildt=
+ime dependency.<BR>
+The reason for this change is not only to clean up the RDEPENDS list.<BR>
+But also because python3-pbr adds pip as a runtime dependency which<BR>
+is not always desireable.<BR>
+<BR>
+Signed-off-by: Gu&eth;ni M&aacute;r Gilbert &lt;gudnimar@noxmedical.com&gt;=
+<BR>
+---<BR>
+ meta-python/recipes-devtools/python/python3-ecdsa_0.18.0.bb | 2 +-<BR>
+ 1 file changed, 1 insertion(+), 1 deletion(-)<BR>
+<BR>
+diff --git a/meta-python/recipes-devtools/python/python3-ecdsa_0.18.0.bb b/=
+meta-python/recipes-devtools/python/python3-ecdsa_0.18.0.bb<BR>
+index d1022891b..ea175d214 100644<BR>
+--- a/meta-python/recipes-devtools/python/python3-ecdsa_0.18.0.bb<BR>
++++ b/meta-python/recipes-devtools/python/python3-ecdsa_0.18.0.bb<BR>
+@@ -10,7 +10,7 @@ SRC_URI[sha256sum] =3D &quot;190348041559e21b22a1d65cee48=
+5282ca11a6f81d503fddb84d5017e9<BR>
+ <BR>
+ inherit pypi setuptools3 python3native<BR>
+ <BR>
+-RDEPENDS:${PN} +=3D &quot;python3-six python3-gmpy2 python3-pbr&quot;<BR>
++RDEPENDS:${PN} +=3D &quot;python3-six python3-gmpy2&quot;<BR>
+ <BR>
+ BBCLASSEXTEND =3D &quot;native nativesdk&quot;<BR>
+ <BR>
+-- <BR>
+2.34.1<BR>
+
+<br><br><p style=3D"font-family: Verdana; font-size:10pt; color:#666666;"><=
+/p><p style=3D"font-family: Verdana; font-size:8pt; color:#666666;">Warning=
+:  Copyright Nox Health.  This communication is confidential and may contai=
+n privileged information.  By the use of email over the Internet or other c=
+ommunication systems, Nox Health is not waiving either confidentiality of, =
+or legal privilege in, the content of the email and of any attachments.  If=
+ the recipient of this message is not the intended addressee, please call N=
+ox Health immediately by calling (+1) 888.505.0280</p></body></html>
+
+--MCBoundary=_12403310542350211--
+
 
