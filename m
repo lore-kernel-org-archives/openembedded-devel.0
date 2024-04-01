@@ -2,117 +2,100 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 557E5CD1299
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6F15ECD1297
 	for <webhook@archiver.kernel.org>; Mon,  1 Apr 2024 14:51:33 +0000 (UTC)
-Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
- by mx.groups.io with SMTP id smtpd.web10.39469.1711983091346785953
+Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
+ by mx.groups.io with SMTP id smtpd.web11.39353.1711983090546859826
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 01 Apr 2024 07:51:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=rkTwoHpw;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=X0RGZo31;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1711983092; x=1743519092;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references;
-  bh=ij0hOTgCfDveb5D7UQ/HneCQ2ieMw9NVNxhLghuIMYQ=;
-  b=rkTwoHpwlA66nVhB/x9lnBHBoMHP2lrzscaQwXpYQ5Gdbzvzt1Qd/QWr
-   CZd4Q3E8Fo5+ijzagQ0IEbKo08TPeExVhUakFWGq4ZpEk0q3toWuRkJia
-   ocZ7BcRCb8sApVjahSBy/Ju0Up9ftzDzYXwItbjGz/0qV0EXyBnDGPRYE
-   wemDgYkCCEsV1TotDfV2xY8szE3zF+OLYYSts0OtaUE9XwBD/1zfLJHjc
-   AjFSXrPpvZ1HgK52M/Tw41QRY/Ne2y53Czvg3LTmsmn+EXaTIv4H3pJTk
-   jumhaPxd3BhebaJw7dwyGuWwK9xHPXLgSDiz/5TUbvtw8wAJLhdvVCrxD
+  t=1711983091; x=1743519091;
+  h=from:to:cc:subject:date:message-id;
+  bh=+7Q8Xkx2t9gTx6DeYuGUe41MWECY2ze6YRgoyPRVbG0=;
+  b=X0RGZo31Vu3gXOahja90YCjDArnbkqaZn+QegyzJfG10AReN4w/WwlSW
+   7LEF+w0cK1Sx8wm5gks6QUPa+vYwkHo6l2umBiT335BemigrIKo3am5nk
+   R66cjs5l70/7zBovyn4PSBs31FA5Ef4zSvwEycFi+Ryf3NvhzQSPVB0uo
+   ATYeBwI0BGGaQ2kHei8edOQrzDz/rZADtpFoX6dj5y7gDDm3k/aWw2rm+
+   P3VQTn9lXyyW1E/VIN2weK/yvXyA1YwgfF71m3eFH6KN9C5eEdlcxuC+9
+   pZGhWyJNQIBb9Q4/Og92acTXS6Et6Q6yikaJEVfmxb/ZhphEbkb6SQxMu
    g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,11031"; a="154246615"
+X-IronPort-AV: E=McAfee;i="6600,9927,11031"; a="156148770"
 X-IronPort-AV: E=Sophos;i="6.07,172,1708354800"; 
-   d="scan'208";a="154246615"
+   d="scan'208";a="156148770"
 Received: from unknown (HELO yto-r4.gw.nic.fujitsu.com) ([218.44.52.220])
-  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Apr 2024 23:51:30 +0900
-Received: from yto-m2.gw.nic.fujitsu.com (yto-nat-yto-m2.gw.nic.fujitsu.com [192.168.83.65])
-	by yto-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 0D426D3EAC
-	for <openembedded-devel@lists.openembedded.org>; Mon,  1 Apr 2024 23:51:27 +0900 (JST)
-Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
-	by yto-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 53962D5006
-	for <openembedded-devel@lists.openembedded.org>; Mon,  1 Apr 2024 23:51:26 +0900 (JST)
-Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id E49B140FF7
+  by esa6.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Apr 2024 23:51:28 +0900
+Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
+	by yto-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id B6FEDD3EAF
 	for <openembedded-devel@lists.openembedded.org>; Mon,  1 Apr 2024 23:51:25 +0900 (JST)
+Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
+	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 0CE1020825
+	for <openembedded-devel@lists.openembedded.org>; Mon,  1 Apr 2024 23:51:25 +0900 (JST)
+Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 989A021EEEF
+	for <openembedded-devel@lists.openembedded.org>; Mon,  1 Apr 2024 23:51:24 +0900 (JST)
 Received: from vm4860.g01.fujitsu.local (unknown [10.167.225.33])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 9B13D1A000A;
-	Mon,  1 Apr 2024 22:51:25 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 202401A000A;
+	Mon,  1 Apr 2024 22:51:24 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 04/47 v2] libblockdev: upgrade 3.1.0 -> 3.1.1
-Date: Mon,  1 Apr 2024 22:50:36 +0800
-Message-Id: <1711983079-16849-4-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-gnome] [PATCH 01/47 v2] gjs: upgrade 1.80.0 -> 1.80.2
+Date: Mon,  1 Apr 2024 22:50:33 +0800
+Message-Id: <1711983079-16849-1-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1711983079-16849-1-git-send-email-wangmy@fujitsu.com>
-References: <1711983079-16849-1-git-send-email-wangmy@fujitsu.com>
 X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28292.000
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28292.000
-X-TMASE-Result: 10--2.827000-10.000000
-X-TMASE-MatchedRID: sujxEcxUy52jz0nOeth/yUIIxwDaU5mrIr/9+EuvVI14YeSlHZYFogC7
-	AZSleJMNCoAIIxVkzthSe3BBwR1DvFSYAx1RhJuHPKN38CLPK0EXivwflisSrC99T+uJIleRQ31
-	PMmlnGr0vumwb4GCEKqkL7/CyCvA7mDcRJzGLWpLfSQNpZkETVFQQ0EgzIoPRB/FMznsE8cPu/Q
-	yUVIt+aU0NCZDxtvO/5p98cjyQCaI2YNXUKC1G1rGWmeVAULKHWQ+QsDdwtAedAuliTV06YmsWZ
-	V9YMDBb1fdm2d1zfYYEtpFZR0iFe/Q/jeowsLZFb056mCmF00Z9LQinZ4QefPcjNeVeWlqY+gtH
-	j7OwNO0JC+VZi2gQEXqpqehG4sP7a5T39/UwQiwFrsF3U4iMXtPBNEKJrliYCbT6FEQiGk0oaQu
-	tBvz7fB9nZYO61TAa+RH5d4MO0YhWtHB0/a/I8/IMFg0InOPqz5gAnmajvOU4qCidlj1MUy0uAB
-	Di47cA
+X-TMASE-Result: 10--4.617900-10.000000
+X-TMASE-MatchedRID: rofoCPeR2CGjz0nOeth/yUIIxwDaU5mrG1cxYvrc7y94YeSlHZYFonOw
+	/jufb+urTptYrOcS6MXGKIf6hBf7VQE4dbnyjMJaTuctSpiuWyUUi4Ehat05499RlPzeVuQQSex
+	PoTd4iBbxgwYhHpmqNXQmGQD0noq1q4N42xndcTc6N/cDgNNi4ReK/B+WKxKse695NaA0UscHZg
+	aK9LR/zbF9uGobEuT7gDLqnrRlXrbIDt27MLDp0t0H8LFZNFG76sBnwpOylLMD6HSJgWcNNCZb2
+	N19WeBNXSjvkPK6KFSIRElupea+LLC3txdT+sSmtc7BKbDOQLASoDYxBGNdkwI9kqg54ZtuB6Gz
+	1kY/HMGIHqaUMp7VXtL/LK0d4I30Ze/gJB41STsbqpM7Cr+fvX7cGd19dSFd
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 01 Apr 2024 14:51:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109721
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109719
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-===========
-- Use glib2 G_GNUC_UNUSED in place of UNUSED locally defined
-- Port to G_GNUC_INTERNAL for controlling symbols visibility
-- Fix some more occurrences of missing port to G_GNUC_UNUSED
-- dm_logging: Annotate redirect_dm_log() printf format
-- tests: Add NVMe persistent discovery controller tests
-- tests: Add NVMe controller type checks
-- Makefile: Fix bumpver to work with micro versions
-- tests: Manually remove removed PVs from LVM devices file
-- tests: Ignore LVM devices file for non-LVM tests
-- tests: Fix removing custom LVM devices file
-- nvme: Add bd_nvme_is_tech_avail to the API file
-- lvm-dbus: Fix passing size for pvresize over DBus
+============
+- Quick follow-up release to fix crash on ppc64.
+- 1.79.90 failing tests on ppc64
+- Quick follow-up release to fix build failure on MacPorts and Homebrew.
+- 1.79.90: gi/arg-inl.h: expression is not assignable
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{libblockdev_3.1.0.bb => libblockdev_3.1.1.bb}            | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-extended/libblockdev/{libblockdev_3.1.0.bb => libblockdev_3.1.1.bb} (96%)
+ meta-gnome/recipes-gnome/gjs/{gjs_1.80.0.bb => gjs_1.80.2.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/gjs/{gjs_1.80.0.bb => gjs_1.80.2.bb} (92%)
 
-diff --git a/meta-oe/recipes-extended/libblockdev/libblockdev_3.1.0.bb b/meta-oe/recipes-extended/libblockdev/libblockdev_3.1.1.bb
-similarity index 96%
-rename from meta-oe/recipes-extended/libblockdev/libblockdev_3.1.0.bb
-rename to meta-oe/recipes-extended/libblockdev/libblockdev_3.1.1.bb
-index 60182d84e..dd1514628 100644
---- a/meta-oe/recipes-extended/libblockdev/libblockdev_3.1.0.bb
-+++ b/meta-oe/recipes-extended/libblockdev/libblockdev_3.1.1.bb
-@@ -12,10 +12,10 @@ inherit autotools gobject-introspection pkgconfig lib_package
+diff --git a/meta-gnome/recipes-gnome/gjs/gjs_1.80.0.bb b/meta-gnome/recipes-gnome/gjs/gjs_1.80.2.bb
+similarity index 92%
+rename from meta-gnome/recipes-gnome/gjs/gjs_1.80.0.bb
+rename to meta-gnome/recipes-gnome/gjs/gjs_1.80.2.bb
+index 602149fad..1d781d078 100644
+--- a/meta-gnome/recipes-gnome/gjs/gjs_1.80.0.bb
++++ b/meta-gnome/recipes-gnome/gjs/gjs_1.80.2.bb
+@@ -7,7 +7,7 @@ DEPENDS = "mozjs-115 cairo"
  
- DEPENDS = "autoconf-archive-native glib-2.0 kmod udev libnvme"
+ inherit gnomebase gsettings gobject-introspection gettext features_check upstream-version-is-even pkgconfig
  
--SRC_URI = "git://github.com/storaged-project/libblockdev;branch=master;protocol=https \
-+SRC_URI = "git://github.com/storaged-project/libblockdev;branch=3.1.x-devel;protocol=https \
-            file://0001-fix-pythondir-for-multilib-when-cross-compiling.patch \
-            "
--SRCREV = "65f50bf912374b85d673f2716ea0c8306980c95b"
-+SRCREV = "68aaff5556afe26be749c29a2b7cbd714dce3050"
- S = "${WORKDIR}/git"
- 
- FILES:${PN} += "${libdir}/python3.*/site-packages"
+-SRC_URI[archive.sha256sum] = "0f78cd3f0e8eb446517d665e4fde1d66302b0c283bbe87b78e9cbfd4d86ed576"
++SRC_URI[archive.sha256sum] = "135e39c5ac591096233e557cfe577d64093f5054411d47cb2e214bad7d4199bd"
+ SRC_URI += " \
+     file://0001-Support-cross-builds-a-bit-better.patch \
+     file://0002-meson.build-Do-not-add-dir-installed-tests-when-inst.patch \
 -- 
 2.34.1
 
