@@ -1,392 +1,1126 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <liezhi.yang@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 50F70CD1283
-	for <webhook@archiver.kernel.org>; Mon,  1 Apr 2024 07:50:40 +0000 (UTC)
-Received: from mail-oa1-f53.google.com (mail-oa1-f53.google.com [209.85.160.53])
- by mx.groups.io with SMTP id smtpd.web11.32616.1711957833558645635
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BED9BCD1283
+	for <webhook@archiver.kernel.org>; Mon,  1 Apr 2024 09:22:40 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.33605.1711963349281107989
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Apr 2024 00:50:33 -0700
+ Mon, 01 Apr 2024 02:22:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=FwsZx+7R;
- spf=pass (domain: gmail.com, ip: 209.85.160.53, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f53.google.com with SMTP id 586e51a60fabf-22a8df1df8fso2394411fac.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Apr 2024 00:50:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1711957833; x=1712562633; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=tQo7xRoM67AY1/HghjixEOu/2PbRSZs/Na+Apk0nkn4=;
-        b=FwsZx+7Rnql9ywYovUbulmzrA87Xyex+UhHLyMnKjg0dVhnzeALdGQvcU3ULWr2BlM
-         BVM6HK0PkpCZsNAHvbeV1AmCRDd62PG8u2AR0KITOzCZTEHaFgYJ1a5rLenarufDbAlq
-         CdnGfOkM6BFL5QQ+Xg0UEVtMIQNBxGswLRFuXFehd86gOLq6li9vG/aQStRSWDNi8iuW
-         qVGBEfX1p97vThc6PAm7xexiHQmZ2ZkPlBSub1ld2GJdRdCIh4NCN95NIHcMHsENu+BA
-         80cP1e1vngVm5uRPD+8OghloTB2MdFdlsi6IxgzDuJmmxTrfKwyLa86TR0qxCI/Isz2+
-         AaoA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1711957833; x=1712562633;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=tQo7xRoM67AY1/HghjixEOu/2PbRSZs/Na+Apk0nkn4=;
-        b=Y4vfbqKLinDaSLbGHrJGC8ZjaVsieQCG28WuEJMY3EHjXdjhEi8ayrWU7raFDWYfC2
-         MWdzxSdbA9w+Fj97CNieHL7Qt/4+tYbA5tPjP3ql9tFTxV4NhFTl4EF04CKoznUTzwEJ
-         Vk6HfscpSWHcp4/WZCT597UD/dUquhQ/xRmNNo2Y7pDG5A+w4Rk9r3oe49/9RrW+dtwF
-         1y4szPcMV1tJAb0KPdMod2L8sMAUwQukWxib+oz5tp/MQwYCGzXuZwDDYBJlXxmcGqHT
-         u1vwoDduTcoPfWgGIpg7FwbdPJhaYNhOWzUGxx+RCy4RBujr+qQjo28Kp+/UoUl0fqhy
-         UiNA==
-X-Gm-Message-State: AOJu0YzbfGEVe/tu+qxsr2KZStzmkNHgJhT5Avb+p/c81l4aceHkQ26i
-	IayHE8A2A8E+tbQfasro9atatm25s+2jxTVk80AFY3yLmee80GVreysh5D69nDEmUB2eZE5zc6T
-	Ic7F/jcoJ3s0tAh+uMhGtK8xhTFFg3I1kC2c=
-X-Google-Smtp-Source: AGHT+IG2oCBILkkMswKxr/eqrauR76Tq0nq/BJxdqSmDkFy6h9ThwnU31u8FW3+WGpUdnrm41PZXqFz8KO12oxgBR0o=
-X-Received: by 2002:a05:6870:2153:b0:22a:5ffd:5e40 with SMTP id
- g19-20020a056870215300b0022a5ffd5e40mr9450176oae.59.1711957832516; Mon, 01
- Apr 2024 00:50:32 -0700 (PDT)
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=lmk/BCpj;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=4821fd9b1d=liezhi.yang@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4315q3S2009309;
+	Mon, 1 Apr 2024 09:22:27 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
+	 h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=jKymX
+	cWirprjjmOtD/02bjvBtUc2z1JtR7Yn+S2b02M=; b=lmk/BCpjzWcqlCeN3nvvL
+	os9YhtTAftEMIAdyB7+JdLEnlyXk/Foti7OFv/5wnhXUKgX8NWK/UlV7WthSOq8L
+	kaVUpOInUkDIAVG1/WebFVvciYMdB9t+vZgK61dzyYtFhfzhrXxaXJicprikI+S0
+	njQt9pzbmfhk5Oh9vlZlq9bBo38Ls6+0V8xOAnnRFIY8kJoRe0WP5K1RevJ8Orj3
+	Sf5FM5ulTJK1WBceZ0fXGdYjEYIXJvrF+X53hcdY4qEWA6jDbNwFquv93kvhQOZv
+	AaYYlxzulkmcd2ie/jBspv5lAqH+ur4Zm5VEkRrxqaxlsVlPcxIVdRjq7312n0IN
+	A==
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3x69q6sq5u-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT);
+	Mon, 01 Apr 2024 09:22:27 +0000 (GMT)
+Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.37; Mon, 1 Apr 2024 02:22:25 -0700
+Received: from ala-lpggp7.wrs.com (147.11.136.210) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
+ 15.1.2507.37 via Frontend Transport; Mon, 1 Apr 2024 02:22:25 -0700
+From: <liezhi.yang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <raj.khem@gmail.com>
+Subject: [meta-networking][PATCH] freeradius: 3.0.26 -> 3.2.3
+Date: Mon, 1 Apr 2024 02:22:25 -0700
+Message-ID: <20240401092225.3866820-1-liezhi.yang@windriver.com>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
-References: <17C1E85F8DD9714E.22094@lists.openembedded.org> <WA28BS.9S3CRT19L8PE3@t-online.de>
-In-Reply-To: <WA28BS.9S3CRT19L8PE3@t-online.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 1 Apr 2024 00:50:06 -0700
-Message-ID: <CAMKF1spybZvGM16RBfhdrKFVOvx2U0zk8EVvFBv7CVkimOxm5g@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCHv2] webkitgtk3: update 2.42.5 -> 2.44.0
-To: Markus Volk <f_l_k@t-online.de>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: 7SIHnRP-lh9J7n_Iat9mB5zTf9Ck9O9g
+X-Proofpoint-GUID: 7SIHnRP-lh9J7n_Iat9mB5zTf9Ck9O9g
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-04-01_06,2024-03-28_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501 mlxscore=0
+ bulkscore=0 spamscore=0 suspectscore=0 phishscore=0 adultscore=0
+ lowpriorityscore=0 malwarescore=0 clxscore=1011 mlxlogscore=999
+ impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2403210001 definitions=main-2404010067
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 01 Apr 2024 07:50:40 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109696
+ <openembedded-devel@lists.openembedded.org>; Mon, 01 Apr 2024 09:22:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109697
 
-fails to build with clang on riscv64 and x86
+From: Robert Yang <liezhi.yang@windriver.com>
 
-https://errors.yoctoproject.org/Errors/Details/761343/
-https://errors.yoctoproject.org/Errors/Details/761342/
+* Add --without-rlm_json to fix:
+  configure: error: set --without-rlm_json to disable it explicitly
 
-On Sun, Mar 31, 2024 at 10:08=E2=80=AFAM Markus Volk <f_l_k@t-online.de> wr=
-ote:
->
-> The webkitgtk3 variant already contains PACKAGECONFIG for gamepad. Remove=
- the duplicate
->
-> On Sun, Mar 31 2024 at 07:07:06 PM +02:00:00, Markus Volk <f_l_k@t-online=
-.de> wrote:
->
-> - add a PACKAGECONFIG for libbacktrace to avoid: | -- Could NOT find LibB=
-acktrace (missing: LIBBACKTRACE_INCLUDE_DIR LIBBACKTRACE_LIBRARY) | CMake E=
-rror at Source/cmake/OptionsGTK.cmake:425 (message): | libbacktrace is requ=
-ired for USE_LIBBACKTRACE - remove submitted patch. Issue seems to be fixed=
-. Not entirely sure about that, but there has been rework: [https://bugs.we=
-bkit.org/show_bug.cgi?id=3D267349] I also did a test build with oe-core/pok=
-y for qemuarm. It completed without error - There is an issue with creating=
- the json files if CMAKE_EXPORT_COMPILE_COMMANDS is enabled. Disable this f=
-or now to fix the build: FAILED: CMakeFiles/RewriteCompileCommands Develope=
-rTools/compile_commands.json /home/flk/poky/build-hypr/tmp/work/corei7-64-p=
-oky-linux/webkitgtk/2.44.0/build/CMakeFiles/RewriteCompileCommands /home/fl=
-k/poky/build-hypr/tmp/work/corei7-64-poky-linux/webkitgtk/2.44.0/build/Deve=
-loperTools/compile_commands.json cd /home/flk/poky/build-hypr/tmp/work/core=
-i7-64-poky-linux/webkitgtk/2.44.0/build && /home/flk/poky/build-hypr/tmp/wo=
-rk/corei7-64-poky-linux/webkitgtk/2.44.0/recipe-sysroot-native/usr/bin/pyth=
-on3-native/python3 /home/flk/poky/build-hypr/tmp/work/corei7-64-poky-linux/=
-webkitgtk/2.44.0/webkitgtk-2.44.0/Tools/Scripts/rewrite-compile-commands /h=
-ome/flk/poky/build-hypr/tmp/work/corei7-64-poky-linux/webkitgtk/2.44.0/buil=
-d/compile_commands.json /home/flk/poky/build-hypr/tmp/work/corei7-64-poky-l=
-inux/webkitgtk/2.44.0/build/DeveloperTools/compile_commands.json /home/flk/=
-poky/build-hypr/tmp/work/corei7-64-poky-linux/webkitgtk/2.44.0/webkitgtk-2.=
-44.0 /home/flk/poky/build-hypr/tmp/work/corei7-64-poky-linux/webkitgtk/2.44=
-.0/build /home/flk/poky/build-hypr/tmp/work/corei7-64-poky-linux/webkitgtk/=
-2.44.0/recipe-sysroot-native/usr/bin/python3-native/python3: can't open fil=
-e '/home/flk/poky/build-hypr/tmp/work/corei7-64-poky-linux/webkitgtk/2.44.0=
-/webkitgtk-2.44.0/Tools/Scripts/rewrite-compile-commands': [Errno 2] No suc=
-h file or directory - Explicitly disable gtk4 to avoid: | CMake Error at /h=
-ome/flk/poky/build-hypr/tmp/work/corei7-64-poky-linux/webkitgtk3/2.44.0/rec=
-ipe-sysroot-native/usr/shar> | Could NOT find GTK (missing: GTK_VERSION) (R=
-equired is at least version | "4.6.0") =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D WebKitGTK 2.44.0 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D What's new in WebKitGTK 2.44.0? - Fix connection of UI and web process =
-accessibility tree in GTK4. - Add BubblewrapLauncher sandbox directory for =
-the gstreamer user registry cache directory. - Fix bug causing preferred la=
-nguage to not be passed to NetworkProcess if set in WebContext before creat=
-ing WebView. - Do not use real time priority for the display link thread. -=
- Use a shorter web process cache lifetime. - Fix several crashes and render=
-ing issues. - Translation updates: German, Polish, Swedish, Turkish. =3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D WebKitGTK 2.43.4 =3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D What's new in WebKitGTK 2.43.4? - Remove =
-key event reinjection in GTK4 to make keyboard shortcuts work in web sites.=
- - Use the new GTK API to create a GdkTexture from a DMA-BUF buffer when av=
-ailable. - Fix rendering when GTK is using the vulkan renderer. - Fix gamep=
-ads detection by correctly handling focused window in GTK4. - Fix rendering=
- after history navigation. - Write bwrapinfo.json to disk for xdg-desktop-p=
-ortal. - Fixed several memory leaks in media backend. - Fix several crashes=
- and rendering issues. =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D Web=
-KitGTK 2.43.3 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D What's new i=
-n WebKitGTK 2.43.3? - Show vblank monitor information in webkit://gpu. - Fa=
-llback to timer based vblank monitor if drmWaitVBlank fails. - Fix several =
-memory leaks in media backend. - Fix several crashes and rendering issues. =
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D WebKitGTK 2.43.2 =3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D What's new in WebKitGTK 2.43.2? - R=
-emove the X11 and WPE renderers. - Release unused buffers when the view is =
-hidden. - Fix flickering while playing videos with DMA-BUF sink. - Do not s=
-pecial case the "sans" font family name. - Fix webkit_web_context_allow_tls=
-_certificate_for_host() for IPv6 URIs produced by SoupURI. - Fix several cr=
-ashes and rendering issues. =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D WebKitGTK 2.43.1 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D What'=
-s new in WebKitGTK 2.43.1? - Improve vblank synchronization when rendering.=
- - Improve DMA-BUF buffers handling for video frames. - Use the buffer form=
-at preferred by the driver in DMA-BUF renderer. - Do not block the composit=
-ing thread waiting for rendering threads. - Improve performance when scalin=
-g images in a canvas. - Fix several crashes and rendering Signed-off-by: Ma=
-rkus Volk <f_l_k@t-online.de> --- ...44e17d258106617b0e6d783d073b188a2548.p=
-atch | 312 ------------------ ...kitgtk3_2.42.5.bb =3D> webkitgtk3_2.44.0.b=
-b} | 31 +- 2 files changed, 17 insertions(+), 326 deletions(-) delete mode =
-100644 meta-oe/recipes-support/webkitgtk/webkitgtk3/0d3344e17d258106617b0e6=
-d783d073b188a2548.patch rename meta-oe/recipes-support/webkitgtk/{webkitgtk=
-3_2.42.5.bb =3D> webkitgtk3_2.44.0.bb} (89%) diff --git a/meta-oe/recipes-s=
-upport/webkitgtk/webkitgtk3/0d3344e17d258106617b0e6d783d073b188a2548.patch =
-b/meta-oe/recipes-support/webkitgtk/webkitgtk3/0d3344e17d258106617b0e6d783d=
-073b188a2548.patch deleted file mode 100644 index d19d1e117..000000000 --- =
-a/meta-oe/recipes-support/webkitgtk/webkitgtk3/0d3344e17d258106617b0e6d783d=
-073b188a2548.patch +++ /dev/null @@ -1,312 +0,0 @@ -From e3c12b38037b4bb305=
-3c440e4bd22c36c1dc576b Mon Sep 17 00:00:00 2001 -From: Adrian Perez de Cast=
-ro <aperez@igalia.com> -Date: Thu, 2 Jun 2022 11:19:06 +0300 -Subject: [PAT=
-CH] FELightningNEON.cpp fails to build, NEON fast path seems - - unused htt=
-ps://bugs.webkit.org/show_bug.cgi?id=3D241182 - -Reviewed by NOBODY (OOPS!)=
-. - -Move the NEON fast path for the SVG lighting filter effects into -FELi=
-ghtingSoftwareApplier, and arrange to actually use them by -forwarding call=
-s to applyPlatformGeneric() into applyPlatformNeon(). - -Some changes were =
-needed to adapt platformApplyNeon() to the current -state of filters after =
-r286140. This was not detected because the code -bitrotted due to it being =
-guarded with CPU(ARM_TRADITIONAL), which does -not get used much these days=
-: CPU(ARM_THUMB2) is more common. It should -be possible to use the NEON fa=
-st paths also in Thumb mode, but that is -left for a follow-up fix. - -* So=
-urce/WebCore/platform/graphics/cpu/arm/filters/FELightingNEON.cpp: -(WebCor=
-e::FELightingSoftwareApplier::platformApplyNeonWorker): -(WebCore::FELighti=
-ngSoftwareApplier::getPowerCoefficients): -(WebCore::FELighting::platformAp=
-plyNeonWorker): Deleted. -(WebCore::FELighting::getPowerCoefficients): Dele=
-ted. -* Source/WebCore/platform/graphics/cpu/arm/filters/FELightingNEON.h: =
--(WebCore::FELightingSoftwareApplier::applyPlatformNeon): -(WebCore::FELigh=
-ting::platformApplyNeon): Deleted. -* Source/WebCore/platform/graphics/filt=
-ers/DistantLightSource.h: -* Source/WebCore/platform/graphics/filters/FELig=
-hting.h: -* Source/WebCore/platform/graphics/filters/PointLightSource.h: -*=
- Source/WebCore/platform/graphics/filters/SpotLightSource.h: -* Source/WebC=
-ore/platform/graphics/filters/software/FELightingSoftwareApplier.h: - -Upst=
-ream-Status: Submitted [https://github.com/WebKit/WebKit/pull/1233] -Signed=
--off-by: Khem Raj <raj.khem@gmail.com> - ---- - .../cpu/arm/filters/FELight=
-ingNEON.cpp | 4 +- - .../graphics/cpu/arm/filters/FELightingNEON.h | 52 +++=
-++++++---------- - .../graphics/filters/DistantLightSource.h | 4 ++ - .../p=
-latform/graphics/filters/FELighting.h | 7 --- - .../graphics/filters/PointL=
-ightSource.h | 4 ++ - .../graphics/filters/SpotLightSource.h | 4 ++ - .../s=
-oftware/FELightingSoftwareApplier.h | 16 ++++++ - 7 files changed, 56 inser=
-tions(+), 35 deletions(-) - -diff --git a/Source/WebCore/platform/graphics/=
-cpu/arm/filters/FELightingNEON.cpp b/Source/WebCore/platform/graphics/cpu/a=
-rm/filters/FELightingNEON.cpp -index f6ff8c20..42a97ffc 100644 ---- a/Sourc=
-e/WebCore/platform/graphics/cpu/arm/filters/FELightingNEON.cpp -+++ b/Sourc=
-e/WebCore/platform/graphics/cpu/arm/filters/FELightingNEON.cpp -@@ -49,7 +4=
-9,7 @@ short* feLightingConstantsForNeon() - return s_FELightingConstantsFo=
-rNeon; - } - --void FELighting::platformApplyNeonWorker(FELightingPaintingD=
-ataForNeon* parameters) -+void FELightingSoftwareApplier::platformApplyNeon=
-Worker(FELightingPaintingDataForNeon* parameters) - { - neonDrawLighting(pa=
-rameters); - } -@@ -464,7 +464,7 @@ TOSTRING(neonDrawLighting) ":" NL - "b =
-.lightStrengthCalculated" NL - ); // NOLINT - --int FELighting::getPowerCoe=
-fficients(float exponent) -+int FELightingSoftwareApplier::getPowerCoeffici=
-ents(float exponent) - { - // Calling a powf function from the assembly cod=
-e would require to save - // and reload a lot of NEON registers. Since the =
-base is in range [0..1] -diff --git a/Source/WebCore/platform/graphics/cpu/=
-arm/filters/FELightingNEON.h b/Source/WebCore/platform/graphics/cpu/arm/fil=
-ters/FELightingNEON.h -index b17c603d..e4629cda 100644 ---- a/Source/WebCor=
-e/platform/graphics/cpu/arm/filters/FELightingNEON.h -+++ b/Source/WebCore/=
-platform/graphics/cpu/arm/filters/FELightingNEON.h -@@ -24,14 +24,15 @@ - *=
- OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. - */ =
-- --#ifndef FELightingNEON_h --#define FELightingNEON_h -+#pragma once - - =
-#if CPU(ARM_NEON) && CPU(ARM_TRADITIONAL) && COMPILER(GCC_COMPATIBLE) - --#=
-include "FELighting.h" -+#include "FELightingSoftwareApplier.h" -+#include =
-"ImageBuffer.h" - #include "PointLightSource.h" - #include "SpotLightSource=
-.h" -+#include <wtf/ObjectIdentifier.h> - #include <wtf/ParallelJobs.h> - -=
- namespace WebCore { -@@ -93,14 +94,14 @@ extern "C" { - void neonDrawLight=
-ing(FELightingPaintingDataForNeon*); - } - --inline void FELighting::platfo=
-rmApplyNeon(const LightingData& data, const LightSource::PaintingData& pain=
-tingData) -+inline void FELightingSoftwareApplier::applyPlatformNeon(const =
-FELightingSoftwareApplier::LightingData& data, const LightSource::PaintingD=
-ata& paintingData) - { -- alignas(16) FELightingFloatArgumentsForNeon float=
-Arguments; -- FELightingPaintingDataForNeon neonData =3D { -+ WebCore::FELi=
-ghtingFloatArgumentsForNeon alignas(16) floatArguments; -+ WebCore::FELight=
-ingPaintingDataForNeon neonData =3D { - data.pixels->data(), - 1, -- data.w=
-idthDecreasedByOne - 1, -- data.heightDecreasedByOne - 1, -+ data.width - 2=
-, -+ data.height - 2, - 0, - 0, - 0, -@@ -111,23 +112,23 @@ inline void FEL=
-ighting::platformApplyNeon(const LightingData& data, const LightS - // Set =
-light source arguments. - floatArguments.constOne =3D 1; - -- auto color =
-=3D m_lightingColor.toColorTypeLossy<SRGBA<uint8_t>>().resolved(); -+ auto =
-color =3D data.lightingColor.toColorTypeLossy<SRGBA<uint8_t>>().resolved();=
- - - floatArguments.colorRed =3D color.red; - floatArguments.colorGreen =3D=
- color.green; - floatArguments.colorBlue =3D color.blue; - floatArguments.p=
-adding4 =3D 0; - -- if (m_lightSource->type() =3D=3D LS_POINT) { -+ if (dat=
-a.lightSource->type() =3D=3D LS_POINT) { - neonData.flags |=3D FLAG_POINT_L=
-IGHT; -- PointLightSource& pointLightSource =3D static_cast<PointLightSourc=
-e&>(m_lightSource.get()); -+ const auto& pointLightSource =3D *static_cast<=
-const PointLightSource*>(data.lightSource); - floatArguments.lightX =3D poi=
-ntLightSource.position().x(); - floatArguments.lightY =3D pointLightSource.=
-position().y(); - floatArguments.lightZ =3D pointLightSource.position().z()=
-; - floatArguments.padding2 =3D 0; -- } else if (m_lightSource->type() =3D=
-=3D LS_SPOT) { -+ } else if (data.lightSource->type() =3D=3D LS_SPOT) { - n=
-eonData.flags |=3D FLAG_SPOT_LIGHT; -- SpotLightSource& spotLightSource =3D=
- static_cast<SpotLightSource&>(m_lightSource.get()); -+ const auto& spotLig=
-htSource =3D *static_cast<const SpotLightSource*>(data.lightSource); - floa=
-tArguments.lightX =3D spotLightSource.position().x(); - floatArguments.ligh=
-tY =3D spotLightSource.position().y(); - floatArguments.lightZ =3D spotLigh=
-tSource.position().z(); -@@ -145,7 +146,7 @@ inline void FELighting::platfo=
-rmApplyNeon(const LightingData& data, const LightS - if (spotLightSource.sp=
-ecularExponent() =3D=3D 1) - neonData.flags |=3D FLAG_CONE_EXPONENT_IS_1; -=
- } else { -- ASSERT(m_lightSource->type() =3D=3D LS_DISTANT); -+ ASSERT(dat=
-a.lightSource->type() =3D=3D LS_DISTANT); - floatArguments.lightX =3D paint=
-ingData.initialLightingData.lightVector.x(); - floatArguments.lightY =3D pa=
-intingData.initialLightingData.lightVector.y(); - floatArguments.lightZ =3D=
- paintingData.initialLightingData.lightVector.z(); -@@ -155,38 +156,39 @@ i=
-nline void FELighting::platformApplyNeon(const LightingData& data, const Li=
-ghtS - // Set lighting arguments. - floatArguments.surfaceScale =3D data.su=
-rfaceScale; - floatArguments.minusSurfaceScaleDividedByFour =3D -data.surfa=
-ceScale / 4; -- if (m_lightingType =3D=3D FELighting::DiffuseLighting) -- f=
-loatArguments.diffuseConstant =3D m_diffuseConstant; -+ if (data.filterType=
- =3D=3D FilterEffect::Type::FEDiffuseLighting) -+ floatArguments.diffuseCon=
-stant =3D data.diffuseConstant; - else { - neonData.flags |=3D FLAG_SPECULA=
-R_LIGHT; -- floatArguments.diffuseConstant =3D m_specularConstant; -- neonD=
-ata.specularExponent =3D getPowerCoefficients(m_specularExponent); -- if (m=
-_specularExponent =3D=3D 1) -+ floatArguments.diffuseConstant =3D data.spec=
-ularConstant; -+ neonData.specularExponent =3D getPowerCoefficients(data.sp=
-ecularExponent); -+ if (data.specularExponent =3D=3D 1) - neonData.flags |=
-=3D FLAG_SPECULAR_EXPONENT_IS_1; - } - if (floatArguments.diffuseConstant =
-=3D=3D 1) - neonData.flags |=3D FLAG_DIFFUSE_CONST_IS_1; - -- int optimalTh=
-readNumber =3D ((data.widthDecreasedByOne - 1) * (data.heightDecreasedByOne=
- - 1)) / s_minimalRectDimension; -+ static constexpr int minimalRectDimensi=
-on =3D 100 * 100; // Empirical data limit for parallel jobs -+ int optimalT=
-hreadNumber =3D ((data.width - 2) * (data.height - 2)) / minimalRectDimensi=
-on; - if (optimalThreadNumber > 1) { - // Initialize parallel jobs -- Paral=
-lelJobs<FELightingPaintingDataForNeon> parallelJobs(&WebCore::FELighting::p=
-latformApplyNeonWorker, optimalThreadNumber); -+ ParallelJobs<FELightingPai=
-ntingDataForNeon> parallelJobs(&FELightingSoftwareApplier::platformApplyNeo=
-nWorker, optimalThreadNumber); - - // Fill the parameter array - int job =
-=3D parallelJobs.numberOfJobs(); - if (job > 1) { - int yStart =3D 1; -- in=
-t yStep =3D (data.heightDecreasedByOne - 1) / job; -+ int yStep =3D (data.h=
-eight - 2) / job; - for (--job; job >=3D 0; --job) { - FELightingPaintingDa=
-taForNeon& params =3D parallelJobs.parameter(job); - params =3D neonData; -=
- params.yStart =3D yStart; -- params.pixels +=3D (yStart - 1) * (data.width=
-DecreasedByOne + 1) * 4; -+ params.pixels +=3D (yStart - 1) * data.width * =
-4; - if (job > 0) { - params.absoluteHeight =3D yStep; - yStart +=3D yStep;=
- - } else -- params.absoluteHeight =3D data.heightDecreasedByOne - yStart; =
--+ params.absoluteHeight =3D (data.height - 1) - yStart; - } - parallelJobs=
-.execute(); - return; -@@ -199,5 +201,3 @@ inline void FELighting::platform=
-ApplyNeon(const LightingData& data, const LightS - } // namespace WebCore -=
- - #endif // CPU(ARM_NEON) && COMPILER(GCC_COMPATIBLE) -- --#endif // FELig=
-htingNEON_h -diff --git a/Source/WebCore/platform/graphics/filters/DistantL=
-ightSource.h b/Source/WebCore/platform/graphics/filters/DistantLightSource.=
-h -index 70f583b3..7d5d27e5 100644 ---- a/Source/WebCore/platform/graphics/=
-filters/DistantLightSource.h -+++ b/Source/WebCore/platform/graphics/filter=
-s/DistantLightSource.h -@@ -26,6 +26,10 @@ - #include <wtf/ArgumentCoder.h>=
- - #include <wtf/Ref.h> - -+namespace WTF { -+class TextStream; -+} // name=
-space WTF -+ - namespace WebCore { - - class DistantLightSource : public Li=
-ghtSource { -diff --git a/Source/WebCore/platform/graphics/filters/FELighti=
-ng.h b/Source/WebCore/platform/graphics/filters/FELighting.h -index 179edf6=
-d..694d712d 100644 ---- a/Source/WebCore/platform/graphics/filters/FELighti=
-ng.h -+++ b/Source/WebCore/platform/graphics/filters/FELighting.h -@@ -35,8=
- +35,6 @@ - - namespace WebCore { - --struct FELightingPaintingDataForNeon;=
- -- - class FELighting : public FilterEffect { - public: - bool operator=3D=
-=3D(const FELighting&) const; -@@ -68,11 +66,6 @@ protected: - - std::uniqu=
-e_ptr<FilterEffectApplier> createSoftwareApplier() const override; - --#if =
-CPU(ARM_NEON) && CPU(ARM_TRADITIONAL) && COMPILER(GCC_COMPATIBLE) -- static=
- int getPowerCoefficients(float exponent); -- inline void platformApplyNeon=
-(const LightingData&, const LightSource::PaintingData&); --#endif -- - Colo=
-r m_lightingColor; - float m_surfaceScale; - float m_diffuseConstant; -diff=
- --git a/Source/WebCore/platform/graphics/filters/PointLightSource.h b/Sour=
-ce/WebCore/platform/graphics/filters/PointLightSource.h -index a8cfdab8..34=
-f867bb 100644 ---- a/Source/WebCore/platform/graphics/filters/PointLightSou=
-rce.h -+++ b/Source/WebCore/platform/graphics/filters/PointLightSource.h -@=
-@ -26,6 +26,10 @@ - #include "LightSource.h" - #include <wtf/Ref.h> - -+nam=
-espace WTF { -+class TextStream; -+} // namespace WTF -+ - namespace WebCor=
-e { - - class PointLightSource : public LightSource { -diff --git a/Source/=
-WebCore/platform/graphics/filters/SpotLightSource.h b/Source/WebCore/platfo=
-rm/graphics/filters/SpotLightSource.h -index 6404467a..5cac38f2 100644 ----=
- a/Source/WebCore/platform/graphics/filters/SpotLightSource.h -+++ b/Source=
-/WebCore/platform/graphics/filters/SpotLightSource.h -@@ -26,6 +26,10 @@ - =
-#include "LightSource.h" - #include <wtf/Ref.h> - -+namespace WTF { -+class=
- TextStream; -+} // namespace WTF -+ - namespace WebCore { - - class SpotLi=
-ghtSource : public LightSource { -diff --git a/Source/WebCore/platform/grap=
-hics/filters/software/FELightingSoftwareApplier.h b/Source/WebCore/platform=
-/graphics/filters/software/FELightingSoftwareApplier.h -index c974d921..e28=
-96660 100644 ---- a/Source/WebCore/platform/graphics/filters/software/FELig=
-htingSoftwareApplier.h -+++ b/Source/WebCore/platform/graphics/filters/soft=
-ware/FELightingSoftwareApplier.h -@@ -36,6 +36,7 @@ - namespace WebCore { -=
- - class FELighting; -+struct FELightingPaintingDataForNeon; - - class FELi=
-ghtingSoftwareApplier final : public FilterEffectConcreteApplier<FELighting=
-> { - WTF_MAKE_FAST_ALLOCATED; -@@ -132,8 +133,23 @@ private: - - static vo=
-id applyPlatformGenericPaint(const LightingData&, const LightSource::Painti=
-ngData&, int startY, int endY); - static void applyPlatformGenericWorker(Ap=
-plyParameters*); -+ -+#if CPU(ARM_NEON) && CPU(ARM_TRADITIONAL) && COMPILER=
-(GCC_COMPATIBLE) -+ static int getPowerCoefficients(float exponent); -+ sta=
-tic void platformApplyNeonWorker(FELightingPaintingDataForNeon*); -+ inline=
- static void applyPlatformNeon(const LightingData&, const LightSource::Pain=
-tingData&); -+ -+ inline static void applyPlatformGeneric(const LightingDat=
-a& data, const LightSource::PaintingData& paintingData) -+ { -+ applyPlatfo=
-rmNeon(data, paintingData); -+ } -+#else - static void applyPlatformGeneric=
-(const LightingData&, const LightSource::PaintingData&); -+#endif -+ - stat=
-ic void applyPlatform(const LightingData&); - }; - - } // namespace WebCore=
- -+ -+#include "FELightingNEON.h" diff --git a/meta-oe/recipes-support/webk=
-itgtk/webkitgtk3_2.42.5.bb b/meta-oe/recipes-support/webkitgtk/webkitgtk3_2=
-.44.0.bb similarity index 89% rename from meta-oe/recipes-support/webkitgtk=
-/webkitgtk3_2.42.5.bb rename to meta-oe/recipes-support/webkitgtk/webkitgtk=
-3_2.44.0.bb index 234ecfae0..e5d53329d 100644 --- a/meta-oe/recipes-support=
-/webkitgtk/webkitgtk3_2.42.5.bb +++ b/meta-oe/recipes-support/webkitgtk/web=
-kitgtk3_2.44.0.bb @@ -12,11 +12,10 @@ LIC_FILES_CHKSUM =3D "file://Source/J=
-avaScriptCore/COPYING.LIB;md5=3Dd0c6d6397a5d842 SRC_URI =3D "https://www.we=
-bkitgtk.org/releases/webkitgtk-${PV}.tar.xz \ file://0001-FindGObjectIntros=
-pection.cmake-prefix-variables-obta.patch \ file://reproducibility.patch \ =
-- file://0d3344e17d258106617b0e6d783d073b188a2548.patch \ file://no-musttai=
-l-arm.patch \ file://0001-LowLevelInterpreter.cpp-339-21-error-t6-was-not-d=
-ecl.patch \ " -SRC_URI[sha256sum] =3D "b64278c1f20b8cfdbfb5ff573c37d871aba7=
-4a1db26d9b39f74e8953fe61e749" +SRC_URI[sha256sum] =3D "c66530e41ba59b1edba4=
-ee89ef20b2188e273bed0497e95084729e3cfbe30c87" inherit cmake pkgconfig gobje=
-ct-introspection perlnative features_check upstream-version-is-even gi-docg=
-en @@ -47,14 +46,15 @@ DEPENDS +=3D " \ " PACKAGECONFIG_SOUP ?=3D "soup3" -=
-PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'systemd wayland=
- x11', d)} \ - ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'webgl=
- opengl', '', d)} \ - ${@bb.utils.contains('DISTRO_FEATURES', 'x11', '', 'w=
-ebgl gles2', d)} \ - ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'ope=
-ngl-or-es', '', d)} \ - enchant \ - libsecret \ - ${PACKAGECONFIG_SOUP} \ -=
- " +PACKAGECONFIG ??=3D " \ + ${@bb.utils.filter('DISTRO_FEATURES', 'system=
-d wayland x11', d)} \ + ${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl=
-', 'webgl opengl', '', d)} \ + ${@bb.utils.contains('DISTRO_FEATURES', 'x11=
-', '', 'webgl gles2', d)} \ + ${@bb.utils.contains('DISTRO_FEATURES', 'open=
-gl', 'opengl-or-es', '', d)} \ + enchant \ + libsecret \ + ${PACKAGECONFIG_=
-SOUP} \ + " PACKAGECONFIG[wayland] =3D "-DENABLE_WAYLAND_TARGET=3DON,-DENAB=
-LE_WAYLAND_TARGET=3DOFF,wayland libwpe wpebackend-fdo wayland-native" PACKA=
-GECONFIG[angle] =3D "-DUSE_ANGLE_WEBGL=3DON,-DUSE_ANGLE_WEBGL=3DOFF" @@ -81=
-,12 +81,15 @@ PACKAGECONFIG[media-recorder] =3D "-DENABLE_MEDIA_RECORDER=3D=
-ON,-DENABLE_MEDIA_RECOR PACKAGECONFIG[gamepad] =3D "-DENABLE_GAMEPAD=3DON,-=
-DENABLE_GAMEPAD=3DOFF,libmanette" PACKAGECONFIG[webrtc] =3D "-DENABLE_WEB_R=
-TC=3DON,-DENABLE_WEB_RTC=3DOFF" PACKAGECONFIG[bubblewrap] =3D "-DENABLE_BUB=
-BLEWRAP_SANDBOX=3DON -DBWRAP_EXECUTABLE=3D${bindir}/bwrap -DDBUS_PROXY_EXEC=
-UTABLE=3D${bindir}/xdg-dbus-proxy,-DENABLE_BUBBLEWRAP_SANDBOX=3DOFF,,bubble=
-wrap xdg-dbus-proxy" +PACKAGECONFIG[backtrace] =3D "-DUSE_LIBBACKTRACE=3DON=
-,-DUSE_LIBBACKTRACE=3DOFF,libbacktrace" EXTRA_OECMAKE =3D " \ - -DPORT=3DGT=
-K \ - ${@bb.utils.contains('GI_DATA_ENABLED', 'True', '-DENABLE_INTROSPECTI=
-ON=3DON', '-DENABLE_INTROSPECTION=3DOFF', d)} \ - ${@bb.utils.contains('GID=
-OCGEN_ENABLED', 'True', '-DENABLE_DOCUMENTATION=3DON', '-DENABLE_DOCUMENTAT=
-ION=3DOFF', d)} \ - -DENABLE_MINIBROWSER=3DON \ + -DPORT=3DGTK \ + -DUSE_GT=
-K4=3DOFF \ + ${@bb.utils.contains('GI_DATA_ENABLED', 'True', '-DENABLE_INTR=
-OSPECTION=3DON', '-DENABLE_INTROSPECTION=3DOFF', d)} \ + ${@bb.utils.contai=
-ns('GIDOCGEN_ENABLED', 'True', '-DENABLE_DOCUMENTATION=3DON', '-DENABLE_DOC=
-UMENTATION=3DOFF', d)} \ + -DENABLE_MINIBROWSER=3DON \ + -DCMAKE_EXPORT_COM=
-PILE_COMMANDS=3DOFF \ " # Unless DEBUG_BUILD is enabled, pass -g1 to massiv=
-ely reduce the size of the # debug symbols (4.3GB to 700M at time of writin=
-g)
-> --
-> 2.44.0
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D- Links: You receive all mess=
-ages sent to this group. View/Reply Online (#109692): https://lists.openemb=
-edded.org/g/openembedded-devel/message/109692 Mute This Topic: https://list=
-s.openembedded.org/mt/105250406/3618223 Group Owner: openembedded-devel+own=
-er@lists.openembedded.org Unsubscribe: https://lists.openembedded.org/g/ope=
-nembedded-devel/unsub [f_l_k@t-online.de] -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=
-=3D-=3D-=3D-
+* Add --without-rlm_cache_redis to fix:
+  configure: error: set --without-rlm_cache_redis to disable it explicitly.
+
+* Drop 0017-add-python.m4-for-detecting-python-3.10.patch and add
+  0017-Add-acinclude.m4-to-include-required-macros.patch to fix python3 related
+  build errors
+
+* Rebased other patches for 3.2.3.
+
+Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+---
+ ...configure.ac-allow-cross-compilation.patch |  32 +-
+ .../0006-Avoid-searching-host-dirs.patch      | 331 +++++++-------
+ ..._python-add-PY_INC_DIR-in-search-dir.patch |  19 +-
+ ...ncludedir-instead-of-hardcoding-usr-.patch |  21 +-
+ ...nclude.m4-to-include-required-macros.patch |  61 +++
+ ...-python.m4-for-detecting-python-3.10.patch | 427 ------------------
+ ...eeradius_3.0.26.bb => freeradius_3.2.3.bb} |   9 +-
+ 7 files changed, 278 insertions(+), 622 deletions(-)
+ create mode 100644 meta-networking/recipes-connectivity/freeradius/files/0017-Add-acinclude.m4-to-include-required-macros.patch
+ delete mode 100644 meta-networking/recipes-connectivity/freeradius/files/0017-add-python.m4-for-detecting-python-3.10.patch
+ rename meta-networking/recipes-connectivity/freeradius/{freeradius_3.0.26.bb => freeradius_3.2.3.bb} (97%)
+
+diff --git a/meta-networking/recipes-connectivity/freeradius/files/0003-configure.ac-allow-cross-compilation.patch b/meta-networking/recipes-connectivity/freeradius/files/0003-configure.ac-allow-cross-compilation.patch
+index e5442360b..3635412d3 100644
+--- a/meta-networking/recipes-connectivity/freeradius/files/0003-configure.ac-allow-cross-compilation.patch
++++ b/meta-networking/recipes-connectivity/freeradius/files/0003-configure.ac-allow-cross-compilation.patch
+@@ -12,26 +12,28 @@ Upstream-Status: Inappropriate [embedded specific]
+ Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+ 
+-update to new version 3.0.17 to fix patch warning
++Update to new version 3.0.17 to fix patch warning
+ Signed-off-by: Changqing Li <changqing.li@windriver.com>
++
++Rebased for 3.2.3
++Signed-off-by: Randy MacLeod <randy.macleod@windriver.com>
++Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
++
+ ---
+  src/modules/rlm_krb5/configure.ac | 3 ++-
+  1 file changed, 2 insertions(+), 1 deletion(-)
+ 
+ diff --git a/src/modules/rlm_krb5/configure.ac b/src/modules/rlm_krb5/configure.ac
+-index a0f510cfb3..d2f3eca03e 100644
++index 9ee6379ea4..1dad481da8 100644
+ --- a/src/modules/rlm_krb5/configure.ac
+ +++ b/src/modules/rlm_krb5/configure.ac
+-@@ -140,7 +140,8 @@ if test x$with_[]modname != xno; then
+- 		FR_SMART_CHECK_LIB(krb5, krb5_is_thread_safe)
+- 		if test "x$ac_cv_lib_krb5_krb5_is_thread_safe" = xyes; then
+- 			AC_RUN_IFELSE([AC_LANG_PROGRAM([[#include <krb5.h>]], [[return krb5_is_thread_safe() ? 0 : 1]])],
+--				[krb5threadsafe="-DKRB5_IS_THREAD_SAFE"], [AC_MSG_WARN([[libkrb5 is not threadsafe]])])
+-+				[krb5threadsafe="-DKRB5_IS_THREAD_SAFE"], [AC_MSG_WARN([[libkrb5 is not threadsafe]])],
+-+				[AC_MSG_WARN(cross compiling: not checking)])
+- 		fi
+- 	else
+- 		krb5threadsafe=""
+--- 
+-2.25.1
+-
++@@ -143,7 +143,8 @@ if test "$krb5threadsafe" != "no"; then
++ 	FR_SMART_CHECK_LIB(krb5, krb5_is_thread_safe)
++ 	if test "x$ac_cv_lib_krb5_krb5_is_thread_safe" = xyes; then
++ 		AC_RUN_IFELSE([AC_LANG_PROGRAM([[#include <krb5.h>]], [[return krb5_is_thread_safe() ? 0 : 1]])],
++-			[krb5threadsafe="-DKRB5_IS_THREAD_SAFE"], [AC_MSG_WARN([[libkrb5 is not threadsafe]])])
+++			[krb5threadsafe="-DKRB5_IS_THREAD_SAFE"], [AC_MSG_WARN([[libkrb5 is not threadsafe]])],
+++			[AC_MSG_WARN(cross compiling: not checking)])
++ 	fi
++ else
++ 	krb5threadsafe=""
+diff --git a/meta-networking/recipes-connectivity/freeradius/files/0006-Avoid-searching-host-dirs.patch b/meta-networking/recipes-connectivity/freeradius/files/0006-Avoid-searching-host-dirs.patch
+index 8fd0dca44..510136da1 100644
+--- a/meta-networking/recipes-connectivity/freeradius/files/0006-Avoid-searching-host-dirs.patch
++++ b/meta-networking/recipes-connectivity/freeradius/files/0006-Avoid-searching-host-dirs.patch
+@@ -10,189 +10,214 @@ Upstream-Status: Inappropriate [embedded specific]
+ 
+ Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
++
++Rebased for 3.2.3
++Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+ ---
+- acinclude.m4                                                | 4 ++--
+- src/modules/rlm_sql/drivers/rlm_sql_db2/configure.ac        | 4 ++--
+- src/modules/rlm_sql/drivers/rlm_sql_firebird/configure.ac   | 4 ++--
+- src/modules/rlm_sql/drivers/rlm_sql_iodbc/configure.ac      | 4 ++--
+- src/modules/rlm_sql/drivers/rlm_sql_mysql/configure.ac      | 6 +++---
+- src/modules/rlm_sql/drivers/rlm_sql_oracle/configure.ac     | 2 +-
+- src/modules/rlm_sql/drivers/rlm_sql_postgresql/configure.ac | 4 ++--
+- src/modules/rlm_sql/drivers/rlm_sql_unixodbc/configure.ac   | 4 ++--
+- 8 files changed, 16 insertions(+), 16 deletions(-)
++ m4/fr_smart_check_include.m4                                |    2 +-
++ m4/fr_smart_check_lib.m4                                    |   22 ----------------------
++ src/modules/rlm_sql/drivers/rlm_sql_db2/configure.ac        |    4 ++--
++ src/modules/rlm_sql/drivers/rlm_sql_firebird/configure.ac   |    4 ++--
++ src/modules/rlm_sql/drivers/rlm_sql_iodbc/configure.ac      |    4 ++--
++ src/modules/rlm_sql/drivers/rlm_sql_mysql/configure.ac      |    6 +++---
++ src/modules/rlm_sql/drivers/rlm_sql_oracle/configure.ac     |    2 +-
++ src/modules/rlm_sql/drivers/rlm_sql_postgresql/configure.ac |    4 ++--
++ src/modules/rlm_sql/drivers/rlm_sql_unixodbc/configure.ac   |    4 ++--
++ 9 files changed, 15 insertions(+), 37 deletions(-)
+ 
+-diff --git a/acinclude.m4 b/acinclude.m4
+-index a953d0e1b6..ede143d3c2 100644
+---- a/acinclude.m4
+-+++ b/acinclude.m4
+-@@ -115,7 +115,7 @@ dnl #
+- dnl #  Try to guess possible locations.
+- dnl #
+- if test "x$smart_lib" = "x"; then
+--  for try in /usr/local/lib /opt/lib; do
+-+  for try in $smart_lib_dir; do
+-     AC_MSG_CHECKING([for $2 in -l$1 in $try])
+-     LIBS="-l$1 $old_LIBS"
+-     CPPFLAGS="-L$try -Wl,-rpath,$try $old_CPPFLAGS"
+-@@ -155,7 +155,7 @@ ac_safe=`echo "$1" | sed 'y%./+-%__pm%'`
++diff --git a/m4/fr_smart_check_include.m4 b/m4/fr_smart_check_include.m4
++index e7d4443f9c..2b69704f98 100644
++--- a/m4/fr_smart_check_include.m4
+++++ b/m4/fr_smart_check_include.m4
++@@ -9,7 +9,7 @@ ac_safe=`echo "$1" | sed 'y%./+-%__pm%'`
+  old_CPPFLAGS="$CPPFLAGS"
+  smart_include=
+  dnl #  The default directories we search in (in addition to the compilers search path)
+ -smart_include_dir="/usr/local/include /opt/include"
+-+smart_include_dir=
+++smart_include_dir=""
+  
+  dnl #  Our local versions
+  _smart_try_dir=
+ diff --git a/src/modules/rlm_sql/drivers/rlm_sql_db2/configure.ac b/src/modules/rlm_sql/drivers/rlm_sql_db2/configure.ac
+-index 44f84aa27e..23a1899591 100644
++index 0d94ee9bf6..6108e62054 100644
+ --- a/src/modules/rlm_sql/drivers/rlm_sql_db2/configure.ac
+ +++ b/src/modules/rlm_sql/drivers/rlm_sql_db2/configure.ac
+-@@ -61,14 +61,14 @@ if test x$with_[]modname != xno; then
+- 		esac])
+- 
+- 	dnl Check for SQLConnect in -ldb2
+--	smart_try_dir="$ibmdb2_lib_dir /usr/local/db2/lib /usr/IBMdb2/V7.1/lib"
+-+	smart_try_dir="$ibmdb2_lib_dir"
+- 	FR_SMART_CHECK_LIB(db2, SQLConnect)
+- 	if test "x$ac_cv_lib_db2_SQLConnect" != xyes; then
+- 		fail="$fail libdb2"
+- 	fi
+- 
+- 	dnl Check for sqlcli.h
+--	smart_try_dir="$ibmdb2_include_dir /usr/local/db2/include /usr/IBMdb2/V7.1/include"
+-+	smart_try_dir="$ibmdb2_include_dir"
+- 	FR_SMART_CHECK_INCLUDE(sqlcli.h)
+- 	if test "x$ac_cv_header_sqlcli_h" != xyes; then
+- 		fail="$fail sqlcli.h"
++@@ -58,14 +58,14 @@ AC_ARG_WITH(ibmdb2-dir,
++ 	esac])
++ 
++ dnl Check for SQLConnect in -ldb2
++-smart_try_dir="$ibmdb2_lib_dir /usr/local/db2/lib /usr/IBMdb2/V7.1/lib"
+++smart_try_dir="$ibmdb2_lib_dir"
++ FR_SMART_CHECK_LIB(db2, SQLConnect)
++ if test "x$ac_cv_lib_db2_SQLConnect" != xyes; then
++ 	FR_MODULE_FAIL([libdb2])
++ fi
++ 
++ dnl Check for sqlcli.h
++-smart_try_dir="$ibmdb2_include_dir /usr/local/db2/include /usr/IBMdb2/V7.1/include"
+++smart_try_dir="$ibmdb2_include_dir"
++ FR_SMART_CHECK_INCLUDE(sqlcli.h)
++ if test "x$ac_cv_header_sqlcli_h" != xyes; then
++ 	FR_MODULE_FAIL([sqlcli.h])
+ diff --git a/src/modules/rlm_sql/drivers/rlm_sql_firebird/configure.ac b/src/modules/rlm_sql/drivers/rlm_sql_firebird/configure.ac
+-index 4c2fd7ba9e..10c864def5 100644
++index 5aa7b4b6ee..2eda5b6cc5 100644
+ --- a/src/modules/rlm_sql/drivers/rlm_sql_firebird/configure.ac
+ +++ b/src/modules/rlm_sql/drivers/rlm_sql_firebird/configure.ac
+-@@ -60,14 +60,14 @@ if test x$with_[]modname != xno; then
+- 		esac])
+- 
+- 	dnl Check for isc_attach_database in -lfbclient
+--	smart_try_dir="$firebird_lib_dir /usr/lib/firebird2/lib /usr/local/firebird/lib"
+-+	smart_try_dir="$firebird_lib_dir"
+- 	FR_SMART_CHECK_LIB(fbclient, isc_attach_database)
+- 	if test "x$ac_cv_lib_fbclient_isc_attach_database" != xyes; then
+- 		fail="$fail libfbclient"
+- 	fi
+- 
+- 	dnl Check for ibase.h
+--	smart_try_dir="$firebird_include_dir /usr/lib/firebird2/include /usr/local/firebird/include"
+-+	smart_try_dir="$firebird_include_dir"
+- 	FR_SMART_CHECK_INCLUDE(ibase.h)
+- 	if test "x$ac_cv_header_ibase_h" != xyes; then
+- 		fail="$fail ibase.h"
++@@ -58,14 +58,14 @@ AC_ARG_WITH(firebird-dir,
++ 	esac])
++ 
++ dnl Check for isc_attach_database in -lfbclient
++-smart_try_dir="$firebird_lib_dir /usr/lib/firebird2/lib /usr/local/firebird/lib"
+++smart_try_dir="$firebird_lib_dir"
++ FR_SMART_CHECK_LIB(fbclient, isc_attach_database)
++ if test "x$ac_cv_lib_fbclient_isc_attach_database" != xyes; then
++ 	FR_MODULE_FAIL([libfbclient])
++ fi
++ 
++ dnl Check for ibase.h
++-smart_try_dir="$firebird_include_dir /usr/lib/firebird2/include /usr/local/firebird/include"
+++smart_try_dir="$firebird_include_dir"
++ FR_SMART_CHECK_INCLUDE(ibase.h)
++ if test "x$ac_cv_header_ibase_h" != xyes; then
++ 	FR_MODULE_FAIL([ibase.h])
+ diff --git a/src/modules/rlm_sql/drivers/rlm_sql_iodbc/configure.ac b/src/modules/rlm_sql/drivers/rlm_sql_iodbc/configure.ac
+-index d26ac9c431..6e4500e948 100644
++index d96216aca8..88cbc469f7 100644
+ --- a/src/modules/rlm_sql/drivers/rlm_sql_iodbc/configure.ac
+ +++ b/src/modules/rlm_sql/drivers/rlm_sql_iodbc/configure.ac
+-@@ -61,14 +61,14 @@ if test x$with_[]modname != xno; then
+- 		esac])
+- 
+- 	dnl Check for SQLConnect in -liodbc
+--	smart_try_dir="$iodbc_lib_dir /usr/lib /usr/lib/iodbc /usr/local/lib/iodbc /usr/local/iodbc/lib/iodbc"
+-+	smart_try_dir="$iodbc_lib_dir"
+- 	FR_SMART_CHECK_LIB(iodbc, SQLConnect)
+- 	if test "x$ac_cv_lib_iodbc_SQLConnect" != xyes; then
+- 		fail="$fail libiodbc"
+- 	fi
+- 
+- 	dnl Check for isql.h
+--	smart_try_dir="$iodbc_include_dir /usr/include /usr/include/iodbc /usr/local/iodbc/include"
+-+	smart_try_dir="$iodbc_include_dir"
+- 	FR_SMART_CHECK_INCLUDE(isql.h)
+- 	if test "x$ac_cv_header_isql_h" != xyes; then
+- 		fail="$fail isql.h"
++@@ -58,14 +58,14 @@ AC_ARG_WITH(iodbc-dir,
++ 	esac])
++ 
++ dnl Check for SQLConnect in -liodbc
++-smart_try_dir="$iodbc_lib_dir /usr/lib /usr/lib/iodbc /usr/local/lib/iodbc /usr/local/iodbc/lib/iodbc"
+++smart_try_dir="$iodbc_lib_dir"
++ FR_SMART_CHECK_LIB(iodbc, SQLConnect)
++ if test "x$ac_cv_lib_iodbc_SQLConnect" != xyes; then
++ 	FR_MODULE_FAIL([libiodbc])
++ fi
++ 
++ dnl Check for isql.h
++-smart_try_dir="$iodbc_include_dir /usr/include /usr/include/iodbc /usr/local/iodbc/include"
+++smart_try_dir="$iodbc_include_dir"
++ FR_SMART_CHECK_INCLUDE(isql.h)
++ if test "x$ac_cv_header_isql_h" != xyes; then
++ 	FR_MODULE_FAIL([isql.h])
+ diff --git a/src/modules/rlm_sql/drivers/rlm_sql_mysql/configure.ac b/src/modules/rlm_sql/drivers/rlm_sql_mysql/configure.ac
+-index df36da77bf..31359041c7 100644
++index d36aecbda6..201a623d4e 100644
+ --- a/src/modules/rlm_sql/drivers/rlm_sql_mysql/configure.ac
+ +++ b/src/modules/rlm_sql/drivers/rlm_sql_mysql/configure.ac
+-@@ -140,7 +140,7 @@ if test x$with_[]modname != xno; then
+- 
+- 	dnl # Check for libmysqlclient_r
+- 	if test "x$have_a_libmysqlclient" != "xyes"; then
+--	    smart_try_dir="$mysql_lib_dir /usr/lib /usr/lib/mysql /usr/local/lib/mysql /usr/local/mysql/lib/mysql"
+-+	    smart_try_dir="$mysql_lib_dir"
+- 	    FR_SMART_CHECK_LIB(mysqlclient_r, mysql_init)
+- 	    if test "x$ac_cv_lib_mysqlclient_r_mysql_init" = "xyes"; then
+- 			have_a_libmysqlclient='yes'
+-@@ -149,7 +149,7 @@ if test x$with_[]modname != xno; then
+- 
+- 	dnl # Check for libmysqlclient
+- 	if test "x$have_a_libmysqlclient" != "xyes"; then
+--	    smart_try_dir="$mysql_lib_dir /usr/lib /usr/lib/mysql /usr/local/lib/mysql /usr/local/mysql/lib/mysql"
+-+	    smart_try_dir="$mysql_lib_dir"
+- 	    FR_SMART_CHECK_LIB(mysqlclient, mysql_init)
+- 	    if test "x$ac_cv_lib_mysqlclient_mysql_init" = "xyes"; then
+- 			have_a_libmysqlclient='yes'
+-@@ -243,7 +243,7 @@ if test x$with_[]modname != xno; then
+-     fi
+- 
+-     if test "x$have_mysql_h" != "xyes"; then
+--		smart_try_dir="$mysql_include_dir /usr/local/include /usr/local/mysql/include"
+-+		smart_try_dir="$mysql_include_dir"
+- 		FR_SMART_CHECK_INCLUDE(mysql/mysql.h)
+- 		if test "x$ac_cv_header_mysql_mysql_h" = "xyes"; then
+- 	    	AC_DEFINE(HAVE_MYSQL_MYSQL_H, [], [Define if you have <mysql/mysql.h>])
++@@ -138,7 +138,7 @@ fi
++ 
++ dnl # Check for libmysqlclient_r
++ if test "x$have_a_libmysqlclient" != "xyes"; then
++-    smart_try_dir="$mysql_lib_dir /usr/lib /usr/lib/mysql /usr/local/lib/mysql /usr/local/mysql/lib/mysql"
+++    smart_try_dir="$mysql_lib_dir"
++     FR_SMART_CHECK_LIB(mysqlclient_r, mysql_init)
++     if test "x$ac_cv_lib_mysqlclient_r_mysql_init" = "xyes"; then
++ 		have_a_libmysqlclient='yes'
++@@ -147,7 +147,7 @@ fi
++ 
++ dnl # Check for libmysqlclient
++ if test "x$have_a_libmysqlclient" != "xyes"; then
++-    smart_try_dir="$mysql_lib_dir /usr/lib /usr/lib/mysql /usr/local/lib/mysql /usr/local/mysql/lib/mysql"
+++    smart_try_dir="$mysql_lib_dir"
++     FR_SMART_CHECK_LIB(mysqlclient, mysql_init)
++     if test "x$ac_cv_lib_mysqlclient_mysql_init" = "xyes"; then
++ 		have_a_libmysqlclient='yes'
++@@ -242,7 +242,7 @@ if test "x$have_mysql_h" != "xyes"; then
++ fi
++ 
++ if test "x$have_mysql_h" != "xyes"; then
++-	smart_try_dir="$mysql_include_dir /usr/local/include /usr/local/mysql/include"
+++	smart_try_dir="$mysql_include_dir"
++ 	FR_SMART_CHECK_INCLUDE(mysql/mysql.h)
++ 	if test "x$ac_cv_header_mysql_mysql_h" = "xyes"; then
++ 	AC_DEFINE(HAVE_MYSQL_MYSQL_H, [], [Define if you have <mysql/mysql.h>])
+ diff --git a/src/modules/rlm_sql/drivers/rlm_sql_oracle/configure.ac b/src/modules/rlm_sql/drivers/rlm_sql_oracle/configure.ac
+-index 3b45da582a..03e6607d2b 100644
++index f31b7d2c5a..67bbf66df5 100644
+ --- a/src/modules/rlm_sql/drivers/rlm_sql_oracle/configure.ac
+ +++ b/src/modules/rlm_sql/drivers/rlm_sql_oracle/configure.ac
+-@@ -68,7 +68,7 @@ if test x$with_[]modname != xno; then
+-     dnl # Check for header files
+-     dnl ############################################################
++@@ -66,7 +66,7 @@ dnl ############################################################
++ dnl # Check for header files
++ dnl ############################################################
+  
+--    smart_try_dir="$oracle_include_dir /usr/local/instaclient/include"
+-+    smart_try_dir="$oracle_include_dir"
++-smart_try_dir="$oracle_include_dir /usr/local/instaclient/include"
+++smart_try_dir="$oracle_include_dir"
+  
+-     if test "x$ORACLE_HOME" != "x"; then
++ if test "x$ORACLE_HOME" != "x"; then
+  	smart_try_dir="${smart_try_dir} ${ORACLE_HOME}/include"
+ diff --git a/src/modules/rlm_sql/drivers/rlm_sql_postgresql/configure.ac b/src/modules/rlm_sql/drivers/rlm_sql_postgresql/configure.ac
+-index 8ac1022e89..d46c0f66bf 100644
++index 46587e4099..b41c51bda7 100644
+ --- a/src/modules/rlm_sql/drivers/rlm_sql_postgresql/configure.ac
+ +++ b/src/modules/rlm_sql/drivers/rlm_sql_postgresql/configure.ac
+-@@ -45,7 +45,7 @@ if test x$with_[]modname != xno; then
+- 	  esac ]
+- 	)
+- 
+--	smart_try_dir="$rlm_sql_postgresql_include_dir /usr/include/postgresql /usr/local/pgsql/include /usr/include/pgsql"
+-+	smart_try_dir="$rlm_sql_postgresql_include_dir"
+- 	FR_SMART_CHECK_INCLUDE(libpq-fe.h)
+- 	if test "x$ac_cv_header_libpqmfe_h" != "xyes"; then
+- 		fail="$fail libpq-fe.h"
+-@@ -94,7 +94,7 @@ if test x$with_[]modname != xno; then
+- 		  ])
+- 	fi
+- 
+--	smart_try_dir="$rlm_sql_postgresql_lib_dir /usr/lib /usr/local/pgsql/lib"
+-+	smart_try_dir="$rlm_sql_postgresql_lib_dir"
+- 	FR_SMART_CHECK_LIB(pq, PQconnectdb)
+- 	if test "x$ac_cv_lib_pq_PQconnectdb" != "xyes"; then
+- 		fail="$fail libpq"
++@@ -43,7 +43,7 @@ AC_ARG_WITH(rlm-sql-postgresql-include-dir,
++ 		;;
++ 	esac])
++ 
++-smart_try_dir="$rlm_sql_postgresql_include_dir /usr/include/postgresql /usr/local/pgsql/include /usr/include/pgsql"
+++smart_try_dir="$rlm_sql_postgresql_include_dir"
++ FR_SMART_CHECK_INCLUDE(libpq-fe.h)
++ if test "x$ac_cv_header_libpqmfe_h" != "xyes"; then
++ 	FR_MODULE_FAIL([libpq-fe.h])
++@@ -95,7 +95,7 @@ else
++ 		])
++ fi
++ 
++-smart_try_dir="$rlm_sql_postgresql_lib_dir /usr/lib /usr/local/pgsql/lib"
+++smart_try_dir="$rlm_sql_postgresql_lib_dir"
++ FR_SMART_CHECK_LIB(pq, PQconnectdb)
++ if test "x$ac_cv_lib_pq_PQconnectdb" != "xyes"; then
++ 	FR_MODULE_FAIL([libpq])
+ diff --git a/src/modules/rlm_sql/drivers/rlm_sql_unixodbc/configure.ac b/src/modules/rlm_sql/drivers/rlm_sql_unixodbc/configure.ac
+-index f10279fe1f..0081a338c8 100644
++index 3bdfae6032..ce68c312c6 100644
+ --- a/src/modules/rlm_sql/drivers/rlm_sql_unixodbc/configure.ac
+ +++ b/src/modules/rlm_sql/drivers/rlm_sql_unixodbc/configure.ac
+-@@ -61,14 +61,14 @@ if test x$with_[]modname != xno; then
+- 		esac])
+- 
+- 	dnl Check for SQLConnect in -lodbc
+--	smart_try_dir="$unixodbc_lib_dir /usr/local/unixodbc/lib"
+-+	smart_try_dir="$unixodbc_lib_dir"
+- 	FR_SMART_CHECK_LIB(odbc, SQLConnect)
+- 	if test "x$ac_cv_lib_odbc_SQLConnect" != xyes; then
+- 		fail="$fail libodbc"
+- 	fi
+- 
+- 	dnl Check for sql.h
+--	smart_try_dir="$unixodbc_include_dir /usr/local/unixodbc/include"
+-+	smart_try_dir="$unixodbc_include_dir"
+- 	FR_SMART_CHECK_INCLUDE(sql.h)
+- 	if test "x$ac_cv_header_sql_h" != xyes; then
+- 		fail="$fail sql.h"
+--- 
+-2.25.1
+-
++@@ -58,14 +58,14 @@ AC_ARG_WITH(unixodbc-dir,
++ 	esac])
++ 
++ dnl Check for SQLConnect in -lodbc
++-smart_try_dir="$unixodbc_lib_dir /usr/local/unixodbc/lib"
+++smart_try_dir="$unixodbc_lib_dir"
++ FR_SMART_CHECK_LIB(odbc, SQLConnect)
++ if test "x$ac_cv_lib_odbc_SQLConnect" != xyes; then
++ 	FR_MODULE_FAIL([libodbc])
++ fi
++ 
++ dnl Check for sql.h
++-smart_try_dir="$unixodbc_include_dir /usr/local/unixodbc/include"
+++smart_try_dir="$unixodbc_include_dir"
++ FR_SMART_CHECK_INCLUDE(sql.h)
++ if test "x$ac_cv_header_sql_h" != xyes; then
++ 	FR_MODULE_FAIL([sql.h])
++diff --git a/m4/fr_smart_check_lib.m4 b/m4/fr_smart_check_lib.m4
++index 16ac5b3c5e..0f5e9fc6d6 100644
++--- a/m4/fr_smart_check_lib.m4
+++++ b/m4/fr_smart_check_lib.m4
++@@ -64,28 +64,6 @@ if test "x$smart_lib" = "x"; then
++   LIBS="$old_LIBS"
++ fi
++ 
++-dnl #
++-dnl #  Try to guess possible locations.
++-dnl #
++-if test "x$smart_lib" = "x"; then
++-  for try in /usr/local/lib /opt/lib; do
++-    AC_MSG_CHECKING([for $2 in -l$1 in $try])
++-    LIBS="-l$1 $old_LIBS"
++-    CPPFLAGS="-L$try -Wl,-rpath,$try $old_CPPFLAGS"
++-    AC_TRY_LINK([extern char $2();],
++-		[$2()],
++-		[
++-		  smart_lib="-l$1"
++-		  smart_ldflags="-L$try -Wl,-rpath,$try"
++-		  AC_MSG_RESULT(yes)
++-		  break
++-		],
++-		[AC_MSG_RESULT(no)])
++-  done
++-  LIBS="$old_LIBS"
++-  CPPFLAGS="$old_CPPFLAGS"
++-fi
++-
++ dnl #
++ dnl #  Found it, set the appropriate variable.
++ dnl #
+diff --git a/meta-networking/recipes-connectivity/freeradius/files/0007-rlm_python-add-PY_INC_DIR-in-search-dir.patch b/meta-networking/recipes-connectivity/freeradius/files/0007-rlm_python-add-PY_INC_DIR-in-search-dir.patch
+index cb71fb137..78259d7d7 100644
+--- a/meta-networking/recipes-connectivity/freeradius/files/0007-rlm_python-add-PY_INC_DIR-in-search-dir.patch
++++ b/meta-networking/recipes-connectivity/freeradius/files/0007-rlm_python-add-PY_INC_DIR-in-search-dir.patch
+@@ -16,18 +16,15 @@ Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/src/modules/rlm_python/configure.ac b/src/modules/rlm_python/configure.ac
+-index 08ecb62518..d5c0944ff1 100644
++index c79c327064..5f4d274990 100644
+ --- a/src/modules/rlm_python/configure.ac
+ +++ b/src/modules/rlm_python/configure.ac
+-@@ -98,7 +98,7 @@ if test x$with_[]modname != xno; then
++@@ -103,7 +103,7 @@ FR_MODULE_TEST_PASS_DO([
+  
+- 		old_CFLAGS=$CFLAGS
+- 		CFLAGS="$CFLAGS $PY_CFLAGS"
+--		smart_try_dir="$PY_PREFIX/include/python$PY_SYS_VERSION"
+-+		smart_try_dir="$PY_PREFIX/include/python$PY_SYS_VERSION $PY_INC_DIR"
+- 		FR_SMART_CHECK_INCLUDE(Python.h)
+- 		CFLAGS=$old_CFLAGS
++ 	old_CFLAGS=$CFLAGS
++ 	CFLAGS="$CFLAGS $PY_CFLAGS"
++-	smart_try_dir="$PY_PREFIX/include/python$PY_SYS_VERSION"
+++	smart_try_dir="$PY_PREFIX/include/python$PY_SYS_VERSION $PY_INC_DIR"
++ 	FR_SMART_CHECK_INCLUDE(Python.h)
++ 	CFLAGS=$old_CFLAGS
+  
+--- 
+-2.25.1
+-
+diff --git a/meta-networking/recipes-connectivity/freeradius/files/0011-rlm_mschap-Use-includedir-instead-of-hardcoding-usr-.patch b/meta-networking/recipes-connectivity/freeradius/files/0011-rlm_mschap-Use-includedir-instead-of-hardcoding-usr-.patch
+index 69125eb3c..efa5c53c9 100644
+--- a/meta-networking/recipes-connectivity/freeradius/files/0011-rlm_mschap-Use-includedir-instead-of-hardcoding-usr-.patch
++++ b/meta-networking/recipes-connectivity/freeradius/files/0011-rlm_mschap-Use-includedir-instead-of-hardcoding-usr-.patch
+@@ -14,18 +14,15 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/src/modules/rlm_mschap/configure.ac b/src/modules/rlm_mschap/configure.ac
+-index 0fd105d7e6..6ab15509e5 100644
++index 953336f475..77a18af55d 100644
+ --- a/src/modules/rlm_mschap/configure.ac
+ +++ b/src/modules/rlm_mschap/configure.ac
+-@@ -75,7 +75,7 @@ if test x$with_[]modname != xno; then
+-         mod_ldflags="-F /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -framework DirectoryService"
+-     fi
++@@ -77,7 +77,7 @@ else
++         FR_MODULE_FEATURE([opendirectory], [without opendirectory support])
++ fi
+  
+--    smart_try_dir="$winbind_include_dir /usr/include/samba-4.0"
+-+    smart_try_dir="$winbind_include_dir =/usr/include/samba-4.0"
+-     FR_SMART_CHECK_INCLUDE(wbclient.h, [#include <stdint.h>
+- 					#include <stdbool.h>])
+-     if test "x$ac_cv_header_wbclient_h" != "xyes"; then
+--- 
+-2.25.1
+-
++-smart_try_dir="$winbind_include_dir /usr/include/samba-4.0"
+++smart_try_dir="$winbind_include_dir =/usr/include/samba-4.0"
++ FR_SMART_CHECK_INCLUDE(wbclient.h, [#include <stdint.h>
++ 				#include <stdbool.h>])
++ if test "x$ac_cv_header_wbclient_h" != "xyes"; then
+diff --git a/meta-networking/recipes-connectivity/freeradius/files/0017-Add-acinclude.m4-to-include-required-macros.patch b/meta-networking/recipes-connectivity/freeradius/files/0017-Add-acinclude.m4-to-include-required-macros.patch
+new file mode 100644
+index 000000000..f5c399e58
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/freeradius/files/0017-Add-acinclude.m4-to-include-required-macros.patch
+@@ -0,0 +1,61 @@
++From 40abff4062d0521cf2b2a8a4660a3d2933f86f9d Mon Sep 17 00:00:00 2001
++From: Robert Yang <liezhi.yang@windriver.com>
++Date: Mon, 1 Apr 2024 09:09:07 +0000
++Subject: [PATCH] Add acinclude.m4 to include required macros
++
++* These micro files are in the m4 directories, but the aclocal didn't
++  add them to aclocal.m4 automatically, so add them to acinclude.m4
++  manually.
++
++* The runlog.m4 is added for python.m4.
++
++Upstream-Status: Inappropriate [OE Specific]
++
++Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
++---
++ acinclude.m4 |  8 ++++++++
++ m4/runlog.m4 | 17 +++++++++++++++++
++ 2 files changed, 25 insertions(+)
++ create mode 100644 acinclude.m4
++ create mode 100644 m4/runlog.m4
++
++diff --git a/acinclude.m4 b/acinclude.m4
++new file mode 100644
++index 0000000000..118b7f0e5f
++--- /dev/null
+++++ b/acinclude.m4
++@@ -0,0 +1,8 @@
+++m4_include([m4/fr_init_module.m4])
+++m4_include([m4/ax_with_prog.m4])
+++m4_include([m4/runlog.m4])
+++m4_include([m4/python.m4])
+++m4_include([m4/ax_compare_version.m4])
+++m4_include([m4/libcurl_check_config.m4])
+++m4_include([m4/ax_ruby_devel.m4])
+++m4_include([m4/ax_prog_ruby_version.m4])
++diff --git a/m4/runlog.m4 b/m4/runlog.m4
++new file mode 100644
++index 0000000000..690efc3258
++--- /dev/null
+++++ b/m4/runlog.m4
++@@ -0,0 +1,17 @@
+++##                                                          -*- Autoconf -*-
+++# Copyright (C) 2001-2018 Free Software Foundation, Inc.
+++#
+++# This file is free software; the Free Software Foundation
+++# gives unlimited permission to copy and/or distribute it,
+++# with or without modifications, as long as this notice is preserved.
+++
+++# AM_RUN_LOG(COMMAND)
+++# -------------------
+++# Run COMMAND, save the exit status in ac_status, and log it.
+++# (This has been adapted from Autoconf's _AC_RUN_LOG macro.)
+++AC_DEFUN([AM_RUN_LOG],
+++[{ echo "$as_me:$LINENO: $1" >&AS_MESSAGE_LOG_FD
+++   ($1) >&AS_MESSAGE_LOG_FD 2>&AS_MESSAGE_LOG_FD
+++   ac_status=$?
+++   echo "$as_me:$LINENO: \$? = $ac_status" >&AS_MESSAGE_LOG_FD
+++   (exit $ac_status); }])
++-- 
++2.35.5
++
+diff --git a/meta-networking/recipes-connectivity/freeradius/files/0017-add-python.m4-for-detecting-python-3.10.patch b/meta-networking/recipes-connectivity/freeradius/files/0017-add-python.m4-for-detecting-python-3.10.patch
+deleted file mode 100644
+index 62a4869c9..000000000
+--- a/meta-networking/recipes-connectivity/freeradius/files/0017-add-python.m4-for-detecting-python-3.10.patch
++++ /dev/null
+@@ -1,427 +0,0 @@
+-From f1418e1b46cb1cbd130935b76f5c78c577d1ad28 Mon Sep 17 00:00:00 2001
+-From: Matthew Newton <matthew-git@newtoncomputing.co.uk>
+-Date: Wed, 28 Sep 2022 23:49:32 +0100
+-Subject: [PATCH] add python.m4 for detecting python > 3.10
+-
+-Upstream-Status: Backport
+-[https://github.com/FreeRADIUS/freeradius-server/commit/86584d2753829756cc73aadce5d48f703af472b1]
+-
+-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+----
+- src/modules/rlm_python3/configure.ac |   4 +
+- src/modules/rlm_python3/m4/python.m4 | 363 +++++++++++++++++++++++++++
+- src/modules/rlm_python3/m4/runlog.m4 |  17 ++
+- 3 files changed, 384 insertions(+)
+- create mode 100644 src/modules/rlm_python3/m4/python.m4
+- create mode 100644 src/modules/rlm_python3/m4/runlog.m4
+-
+-diff --git a/src/modules/rlm_python3/configure.ac b/src/modules/rlm_python3/configure.ac
+-index bc0e97f9ba..90f2116e73 100644
+---- a/src/modules/rlm_python3/configure.ac
+-+++ b/src/modules/rlm_python3/configure.ac
+-@@ -3,6 +3,10 @@ AC_INIT(rlm_python3.c)
+- AC_REVISION($Revision$)
+- AC_DEFUN(modname,[rlm_python3])
+- 
+-+m4_include([ax_compare_version.m4])
+-+m4_include([runlog.m4])
+-+m4_include([python.m4])
+-+
+- AC_ARG_WITH([]modname,
+- [  --with-[]modname              build []modname. (default=yes)])
+- 
+-diff --git a/src/modules/rlm_python3/m4/python.m4 b/src/modules/rlm_python3/m4/python.m4
+-new file mode 100644
+-index 0000000000..78ca7635ab
+---- /dev/null
+-+++ b/src/modules/rlm_python3/m4/python.m4
+-@@ -0,0 +1,363 @@
+-+## ------------------------                                 -*- Autoconf -*-
+-+## Python file handling
+-+## From Andrew Dalke
+-+## Updated by James Henstridge and other contributors.
+-+## ------------------------
+-+# Copyright (C) 1999-2021 Free Software Foundation, Inc.
+-+#
+-+# This file is free software; the Free Software Foundation
+-+# gives unlimited permission to copy and/or distribute it,
+-+# with or without modifications, as long as this notice is preserved.
+-+
+-+
+-+# AM_PATH_PYTHON([MINIMUM-VERSION], [ACTION-IF-FOUND], [ACTION-IF-NOT-FOUND])
+-+# ---------------------------------------------------------------------------
+-+# Adds support for distributing Python modules and packages.  To
+-+# install modules, copy them to $(pythondir), using the python_PYTHON
+-+# automake variable.  To install a package with the same name as the
+-+# automake package, install to $(pkgpythondir), or use the
+-+# pkgpython_PYTHON automake variable.
+-+#
+-+# The variables $(pyexecdir) and $(pkgpyexecdir) are provided as
+-+# locations to install python extension modules (shared libraries).
+-+# Another macro is required to find the appropriate flags to compile
+-+# extension modules.
+-+#
+-+# If your package is configured with a different prefix to python,
+-+# users will have to add the install directory to the PYTHONPATH
+-+# environment variable, or create a .pth file (see the python
+-+# documentation for details).
+-+#
+-+# If the MINIMUM-VERSION argument is passed, AM_PATH_PYTHON will
+-+# cause an error if the version of python installed on the system
+-+# doesn't meet the requirement.  MINIMUM-VERSION should consist of
+-+# numbers and dots only.
+-+AC_DEFUN([AM_PATH_PYTHON],
+-+ [
+-+  dnl Find a Python interpreter.  Python versions prior to 2.0 are not
+-+  dnl supported. (2.0 was released on October 16, 2000).
+-+  m4_define_default([_AM_PYTHON_INTERPRETER_LIST],
+-+[python python2 python3 dnl
+-+ python3.11 python3.10 dnl
+-+ python3.9 python3.8 python3.7 python3.6 python3.5 python3.4 python3.3 dnl
+-+ python3.2 python3.1 python3.0 dnl
+-+ python2.7 python2.6 python2.5 python2.4 python2.3 python2.2 python2.1 dnl
+-+ python2.0])
+-+
+-+  AC_ARG_VAR([PYTHON], [the Python interpreter])
+-+
+-+  m4_if([$1],[],[
+-+    dnl No version check is needed.
+-+    # Find any Python interpreter.
+-+    if test -z "$PYTHON"; then
+-+      AC_PATH_PROGS([PYTHON], _AM_PYTHON_INTERPRETER_LIST, :)
+-+    fi
+-+    am_display_PYTHON=python
+-+  ], [
+-+    dnl A version check is needed.
+-+    if test -n "$PYTHON"; then
+-+      # If the user set $PYTHON, use it and don't search something else.
+-+      AC_MSG_CHECKING([whether $PYTHON version is >= $1])
+-+      AM_PYTHON_CHECK_VERSION([$PYTHON], [$1],
+-+			      [AC_MSG_RESULT([yes])],
+-+			      [AC_MSG_RESULT([no])
+-+			       AC_MSG_ERROR([Python interpreter is too old])])
+-+      am_display_PYTHON=$PYTHON
+-+    else
+-+      # Otherwise, try each interpreter until we find one that satisfies
+-+      # VERSION.
+-+      AC_CACHE_CHECK([for a Python interpreter with version >= $1],
+-+	[am_cv_pathless_PYTHON],[
+-+	for am_cv_pathless_PYTHON in _AM_PYTHON_INTERPRETER_LIST none; do
+-+	  test "$am_cv_pathless_PYTHON" = none && break
+-+	  AM_PYTHON_CHECK_VERSION([$am_cv_pathless_PYTHON], [$1], [break])
+-+	done])
+-+      # Set $PYTHON to the absolute path of $am_cv_pathless_PYTHON.
+-+      if test "$am_cv_pathless_PYTHON" = none; then
+-+	PYTHON=:
+-+      else
+-+        AC_PATH_PROG([PYTHON], [$am_cv_pathless_PYTHON])
+-+      fi
+-+      am_display_PYTHON=$am_cv_pathless_PYTHON
+-+    fi
+-+  ])
+-+
+-+  if test "$PYTHON" = :; then
+-+    dnl Run any user-specified action, or abort.
+-+    m4_default([$3], [AC_MSG_ERROR([no suitable Python interpreter found])])
+-+  else
+-+
+-+  dnl Query Python for its version number.  Although site.py simply uses
+-+  dnl sys.version[:3], printing that failed with Python 3.10, since the
+-+  dnl trailing zero was eliminated. So now we output just the major
+-+  dnl and minor version numbers, as numbers. Apparently the tertiary
+-+  dnl version is not of interest.
+-+  dnl
+-+  AC_CACHE_CHECK([for $am_display_PYTHON version], [am_cv_python_version],
+-+    [am_cv_python_version=`$PYTHON -c "import sys; print ('%u.%u' % sys.version_info[[:2]])"`])
+-+  AC_SUBST([PYTHON_VERSION], [$am_cv_python_version])
+-+
+-+  dnl At times, e.g., when building shared libraries, you may want
+-+  dnl to know which OS platform Python thinks this is.
+-+  dnl
+-+  AC_CACHE_CHECK([for $am_display_PYTHON platform], [am_cv_python_platform],
+-+    [am_cv_python_platform=`$PYTHON -c "import sys; sys.stdout.write(sys.platform)"`])
+-+  AC_SUBST([PYTHON_PLATFORM], [$am_cv_python_platform])
+-+
+-+  dnl emacs-page
+-+  dnl If --with-python-sys-prefix is given, use the values of sys.prefix
+-+  dnl and sys.exec_prefix for the corresponding values of PYTHON_PREFIX
+-+  dnl and PYTHON_EXEC_PREFIX. Otherwise, use the GNU ${prefix} and
+-+  dnl ${exec_prefix} variables.
+-+  dnl
+-+  dnl The two are made distinct variables so they can be overridden if
+-+  dnl need be, although general consensus is that you shouldn't need
+-+  dnl this separation.
+-+  dnl
+-+  dnl Also allow directly setting the prefixes via configure options,
+-+  dnl overriding any default.
+-+  dnl
+-+  if test "x$prefix" = xNONE; then
+-+    am__usable_prefix=$ac_default_prefix
+-+  else
+-+    am__usable_prefix=$prefix
+-+  fi
+-+
+-+  # Allow user to request using sys.* values from Python,
+-+  # instead of the GNU $prefix values.
+-+  AC_ARG_WITH([python-sys-prefix],
+-+  [AS_HELP_STRING([--with-python-sys-prefix],
+-+                  [use Python's sys.prefix and sys.exec_prefix values])],
+-+  [am_use_python_sys=:],
+-+  [am_use_python_sys=false])
+-+
+-+  # Allow user to override whatever the default Python prefix is.
+-+  AC_ARG_WITH([python_prefix],
+-+  [AS_HELP_STRING([--with-python_prefix],
+-+                  [override the default PYTHON_PREFIX])],
+-+  [am_python_prefix_subst=$withval
+-+   am_cv_python_prefix=$withval
+-+   AC_MSG_CHECKING([for explicit $am_display_PYTHON prefix])
+-+   AC_MSG_RESULT([$am_cv_python_prefix])],
+-+  [
+-+   if $am_use_python_sys; then
+-+     # using python sys.prefix value, not GNU
+-+     AC_CACHE_CHECK([for python default $am_display_PYTHON prefix],
+-+     [am_cv_python_prefix],
+-+     [am_cv_python_prefix=`$PYTHON -c "import sys; sys.stdout.write(sys.prefix)"`])
+-+
+-+     dnl If sys.prefix is a subdir of $prefix, replace the literal value of
+-+     dnl $prefix with a variable reference so it can be overridden.
+-+     case $am_cv_python_prefix in
+-+     $am__usable_prefix*)
+-+       am__strip_prefix=`echo "$am__usable_prefix" | sed 's|.|.|g'`
+-+       am_python_prefix_subst=`echo "$am_cv_python_prefix" | sed "s,^$am__strip_prefix,\\${prefix},"`
+-+       ;;
+-+     *)
+-+       am_python_prefix_subst=$am_cv_python_prefix
+-+       ;;
+-+     esac
+-+   else # using GNU prefix value, not python sys.prefix
+-+     am_python_prefix_subst='${prefix}'
+-+     am_python_prefix=$am_python_prefix_subst
+-+     AC_MSG_CHECKING([for GNU default $am_display_PYTHON prefix])
+-+     AC_MSG_RESULT([$am_python_prefix])
+-+   fi])
+-+  # Substituting python_prefix_subst value.
+-+  AC_SUBST([PYTHON_PREFIX], [$am_python_prefix_subst])
+-+
+-+  # emacs-page Now do it all over again for Python exec_prefix, but with yet
+-+  # another conditional: fall back to regular prefix if that was specified.
+-+  AC_ARG_WITH([python_exec_prefix],
+-+  [AS_HELP_STRING([--with-python_exec_prefix],
+-+                  [override the default PYTHON_EXEC_PREFIX])],
+-+  [am_python_exec_prefix_subst=$withval
+-+   am_cv_python_exec_prefix=$withval
+-+   AC_MSG_CHECKING([for explicit $am_display_PYTHON exec_prefix])
+-+   AC_MSG_RESULT([$am_cv_python_exec_prefix])],
+-+  [
+-+   # no explicit --with-python_exec_prefix, but if
+-+   # --with-python_prefix was given, use its value for python_exec_prefix too.
+-+   AS_IF([test -n "$with_python_prefix"],
+-+   [am_python_exec_prefix_subst=$with_python_prefix
+-+    am_cv_python_exec_prefix=$with_python_prefix
+-+    AC_MSG_CHECKING([for python_prefix-given $am_display_PYTHON exec_prefix])
+-+    AC_MSG_RESULT([$am_cv_python_exec_prefix])],
+-+   [
+-+    # Set am__usable_exec_prefix whether using GNU or Python values,
+-+    # since we use that variable for pyexecdir.
+-+    if test "x$exec_prefix" = xNONE; then
+-+      am__usable_exec_prefix=$am__usable_prefix
+-+    else
+-+      am__usable_exec_prefix=$exec_prefix
+-+    fi
+-+    #
+-+    if $am_use_python_sys; then # using python sys.exec_prefix, not GNU
+-+      AC_CACHE_CHECK([for python default $am_display_PYTHON exec_prefix],
+-+      [am_cv_python_exec_prefix],
+-+      [am_cv_python_exec_prefix=`$PYTHON -c "import sys; sys.stdout.write(sys.exec_prefix)"`])
+-+      dnl If sys.exec_prefix is a subdir of $exec_prefix, replace the
+-+      dnl literal value of $exec_prefix with a variable reference so it can
+-+      dnl be overridden.
+-+      case $am_cv_python_exec_prefix in
+-+      $am__usable_exec_prefix*)
+-+        am__strip_prefix=`echo "$am__usable_exec_prefix" | sed 's|.|.|g'`
+-+        am_python_exec_prefix_subst=`echo "$am_cv_python_exec_prefix" | sed "s,^$am__strip_prefix,\\${exec_prefix},"`
+-+        ;;
+-+      *)
+-+        am_python_exec_prefix_subst=$am_cv_python_exec_prefix
+-+        ;;
+-+     esac
+-+   else # using GNU $exec_prefix, not python sys.exec_prefix
+-+     am_python_exec_prefix_subst='${exec_prefix}'
+-+     am_python_exec_prefix=$am_python_exec_prefix_subst
+-+     AC_MSG_CHECKING([for GNU default $am_display_PYTHON exec_prefix])
+-+     AC_MSG_RESULT([$am_python_exec_prefix])
+-+   fi])])
+-+  # Substituting python_exec_prefix_subst.
+-+  AC_SUBST([PYTHON_EXEC_PREFIX], [$am_python_exec_prefix_subst])
+-+
+-+  # Factor out some code duplication into this shell variable.
+-+  am_python_setup_sysconfig="\
+-+import sys
+-+# Prefer sysconfig over distutils.sysconfig, for better compatibility
+-+# with python 3.x.  See automake bug#10227.
+-+try:
+-+    import sysconfig
+-+except ImportError:
+-+    can_use_sysconfig = 0
+-+else:
+-+    can_use_sysconfig = 1
+-+# Can't use sysconfig in CPython 2.7, since it's broken in virtualenvs:
+-+# <https://github.com/pypa/virtualenv/issues/118>
+-+try:
+-+    from platform import python_implementation
+-+    if python_implementation() == 'CPython' and sys.version[[:3]] == '2.7':
+-+        can_use_sysconfig = 0
+-+except ImportError:
+-+    pass"
+-+
+-+  dnl emacs-page Set up 4 directories:
+-+
+-+  dnl 1. pythondir: where to install python scripts.  This is the
+-+  dnl    site-packages directory, not the python standard library
+-+  dnl    directory like in previous automake betas.  This behavior
+-+  dnl    is more consistent with lispdir.m4 for example.
+-+  dnl Query distutils for this directory.
+-+  dnl
+-+  AC_CACHE_CHECK([for $am_display_PYTHON script directory (pythondir)],
+-+  [am_cv_python_pythondir],
+-+  [if test "x$am_cv_python_prefix" = x; then
+-+     am_py_prefix=$am__usable_prefix
+-+   else
+-+     am_py_prefix=$am_cv_python_prefix
+-+   fi
+-+   am_cv_python_pythondir=`$PYTHON -c "
+-+$am_python_setup_sysconfig
+-+if can_use_sysconfig:
+-+  if hasattr(sysconfig, 'get_default_scheme'):
+-+    scheme = sysconfig.get_default_scheme()
+-+  else:
+-+    scheme = sysconfig._get_default_scheme()
+-+  if scheme == 'posix_local':
+-+    # Debian's default scheme installs to /usr/local/ but we want to find headers in /usr/
+-+    scheme = 'posix_prefix'
+-+  sitedir = sysconfig.get_path('purelib', scheme, vars={'base':'$am_py_prefix'})
+-+else:
+-+  from distutils import sysconfig
+-+  sitedir = sysconfig.get_python_lib(0, 0, prefix='$am_py_prefix')
+-+sys.stdout.write(sitedir)"`
+-+   #
+-+   case $am_cv_python_pythondir in
+-+   $am_py_prefix*)
+-+     am__strip_prefix=`echo "$am_py_prefix" | sed 's|.|.|g'`
+-+     am_cv_python_pythondir=`echo "$am_cv_python_pythondir" | sed "s,^$am__strip_prefix,\\${PYTHON_PREFIX},"`
+-+     ;;
+-+   *)
+-+     case $am_py_prefix in
+-+       /usr|/System*) ;;
+-+       *) am_cv_python_pythondir="\${PYTHON_PREFIX}/lib/python$PYTHON_VERSION/site-packages"
+-+          ;;
+-+     esac
+-+     ;;
+-+   esac
+-+  ])
+-+  AC_SUBST([pythondir], [$am_cv_python_pythondir])
+-+
+-+  dnl 2. pkgpythondir: $PACKAGE directory under pythondir.  Was
+-+  dnl    PYTHON_SITE_PACKAGE in previous betas, but this naming is
+-+  dnl    more consistent with the rest of automake.
+-+  dnl
+-+  AC_SUBST([pkgpythondir], [\${pythondir}/$PACKAGE])
+-+
+-+  dnl 3. pyexecdir: directory for installing python extension modules
+-+  dnl    (shared libraries).
+-+  dnl Query distutils for this directory.
+-+  dnl
+-+  AC_CACHE_CHECK([for $am_display_PYTHON extension module directory (pyexecdir)],
+-+  [am_cv_python_pyexecdir],
+-+  [if test "x$am_cv_python_exec_prefix" = x; then
+-+     am_py_exec_prefix=$am__usable_exec_prefix
+-+   else
+-+     am_py_exec_prefix=$am_cv_python_exec_prefix
+-+   fi
+-+   am_cv_python_pyexecdir=`$PYTHON -c "
+-+$am_python_setup_sysconfig
+-+if can_use_sysconfig:
+-+  if hasattr(sysconfig, 'get_default_scheme'):
+-+    scheme = sysconfig.get_default_scheme()
+-+  else:
+-+    scheme = sysconfig._get_default_scheme()
+-+  if scheme == 'posix_local':
+-+    # Debian's default scheme installs to /usr/local/ but we want to find headers in /usr/
+-+    scheme = 'posix_prefix'
+-+  sitedir = sysconfig.get_path('platlib', scheme, vars={'platbase':'$am_py_exec_prefix'})
+-+else:
+-+  from distutils import sysconfig
+-+  sitedir = sysconfig.get_python_lib(1, 0, prefix='$am_py_exec_prefix')
+-+sys.stdout.write(sitedir)"`
+-+   #
+-+   case $am_cv_python_pyexecdir in
+-+   $am_py_exec_prefix*)
+-+     am__strip_prefix=`echo "$am_py_exec_prefix" | sed 's|.|.|g'`
+-+     am_cv_python_pyexecdir=`echo "$am_cv_python_pyexecdir" | sed "s,^$am__strip_prefix,\\${PYTHON_EXEC_PREFIX},"`
+-+     ;;
+-+   *)
+-+     case $am_py_exec_prefix in
+-+       /usr|/System*) ;;
+-+       *) am_cv_python_pyexecdir="\${PYTHON_EXEC_PREFIX}/lib/python$PYTHON_VERSION/site-packages"
+-+          ;;
+-+     esac
+-+     ;;
+-+   esac
+-+  ])
+-+  AC_SUBST([pyexecdir], [$am_cv_python_pyexecdir])
+-+
+-+  dnl 4. pkgpyexecdir: $(pyexecdir)/$(PACKAGE)
+-+  dnl
+-+  AC_SUBST([pkgpyexecdir], [\${pyexecdir}/$PACKAGE])
+-+
+-+  dnl Run any user-specified action.
+-+  $2
+-+  fi
+-+])
+-+
+-+
+-+# AM_PYTHON_CHECK_VERSION(PROG, VERSION, [ACTION-IF-TRUE], [ACTION-IF-FALSE])
+-+# ---------------------------------------------------------------------------
+-+# Run ACTION-IF-TRUE if the Python interpreter PROG has version >= VERSION.
+-+# Run ACTION-IF-FALSE otherwise.
+-+# This test uses sys.hexversion instead of the string equivalent (first
+-+# word of sys.version), in order to cope with versions such as 2.2c1.
+-+# This supports Python 2.0 or higher. (2.0 was released on October 16, 2000).
+-+AC_DEFUN([AM_PYTHON_CHECK_VERSION],
+-+ [prog="import sys
+-+# split strings by '.' and convert to numeric.  Append some zeros
+-+# because we need at least 4 digits for the hex conversion.
+-+# map returns an iterator in Python 3.0 and a list in 2.x
+-+minver = list(map(int, '$2'.split('.'))) + [[0, 0, 0]]
+-+minverhex = 0
+-+# xrange is not present in Python 3.0 and range returns an iterator
+-+for i in list(range(0, 4)): minverhex = (minverhex << 8) + minver[[i]]
+-+sys.exit(sys.hexversion < minverhex)"
+-+  AS_IF([AM_RUN_LOG([$1 -c "$prog"])], [$3], [$4])])
+-diff --git a/src/modules/rlm_python3/m4/runlog.m4 b/src/modules/rlm_python3/m4/runlog.m4
+-new file mode 100644
+-index 0000000000..690efc3258
+---- /dev/null
+-+++ b/src/modules/rlm_python3/m4/runlog.m4
+-@@ -0,0 +1,17 @@
+-+##                                                          -*- Autoconf -*-
+-+# Copyright (C) 2001-2018 Free Software Foundation, Inc.
+-+#
+-+# This file is free software; the Free Software Foundation
+-+# gives unlimited permission to copy and/or distribute it,
+-+# with or without modifications, as long as this notice is preserved.
+-+
+-+# AM_RUN_LOG(COMMAND)
+-+# -------------------
+-+# Run COMMAND, save the exit status in ac_status, and log it.
+-+# (This has been adapted from Autoconf's _AC_RUN_LOG macro.)
+-+AC_DEFUN([AM_RUN_LOG],
+-+[{ echo "$as_me:$LINENO: $1" >&AS_MESSAGE_LOG_FD
+-+   ($1) >&AS_MESSAGE_LOG_FD 2>&AS_MESSAGE_LOG_FD
+-+   ac_status=$?
+-+   echo "$as_me:$LINENO: \$? = $ac_status" >&AS_MESSAGE_LOG_FD
+-+   (exit $ac_status); }])
+--- 
+-2.25.1
+-
+diff --git a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.26.bb b/meta-networking/recipes-connectivity/freeradius/freeradius_3.2.3.bb
+similarity index 97%
+rename from meta-networking/recipes-connectivity/freeradius/freeradius_3.0.26.bb
+rename to meta-networking/recipes-connectivity/freeradius/freeradius_3.2.3.bb
+index e3730cfaa..7ea63a65d 100644
+--- a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.26.bb
++++ b/meta-networking/recipes-connectivity/freeradius/freeradius_3.2.3.bb
+@@ -13,7 +13,7 @@ LICENSE = "GPL-2.0-only & LGPL-2.0-or-later"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=eb723b61539feef013de476e68b5c50a"
+ DEPENDS = "openssl-native openssl libidn libtool libpcap libtalloc"
+ 
+-SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.0.x;lfs=0;;protocol=https \
++SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.2.x;lfs=0;;protocol=https \
+     file://freeradius \
+     file://volatiles.58_radiusd \
+     file://radiusd.service \
+@@ -34,12 +34,12 @@ SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.0.x;lfs=0
+     file://0014-Workaround-error-with-autoconf-2.7.patch \
+     file://0015-bootstrap-check-commands-of-openssl-exist.patch \
+     file://0016-version.c-don-t-print-build-flags.patch \
+-    file://0017-add-python.m4-for-detecting-python-3.10.patch \
++    file://0017-Add-acinclude.m4-to-include-required-macros.patch \
+ "
+ 
+ raddbdir = "${sysconfdir}/${MLPREFIX}raddb"
+ 
+-SRCREV = "d956f683d37ea40e7977cc5907361f3e6988a439"
++SRCREV = "db3d1924d9a2e8d37c43872932621f69cfdbb099"
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "release_(?P<pver>\d+(\_\d+)+)"
+ 
+@@ -69,6 +69,7 @@ EXTRA_OECONF = " --enable-strict-dependencies \
+         --without-rlm_opendirectory \
+         --without-rlm_redis \
+         --without-rlm_rediswho \
++        --without-rlm_cache_redis \
+         --without-rlm_sql_db2 \
+         --without-rlm_sql_firebird \
+         --without-rlm_sql_freetds \
+@@ -103,7 +104,7 @@ PACKAGECONFIG[postgresql] = "--with-rlm_sql_postgresql,--without-rlm_sql_postgre
+ PACKAGECONFIG[pcre] = "--with-pcre,--without-pcre,libpcre"
+ PACKAGECONFIG[perl] = "--with-perl=${STAGING_BINDIR_NATIVE}/perl-native/perl --with-rlm_perl,--without-rlm_perl,perl-native perl,perl"
+ PACKAGECONFIG[python3] = "--with-rlm_python3 --with-rlm-python3-bin=${STAGING_BINDIR_NATIVE}/python3-native/python3 --with-rlm-python3-include-dir=${STAGING_INCDIR}/${PYTHON_DIR},--without-rlm_python3,python3-native python3"
+-PACKAGECONFIG[rest] = "--with-rlm_rest,--without-rlm_rest,curl json-c"
++PACKAGECONFIG[rest] = "--with-rlm_rest,--without-rlm_rest --without-rlm_json,curl json-c"
+ PACKAGECONFIG[ruby] = "--with-rlm_ruby,--without-rlm_ruby,ruby"
+ PACKAGECONFIG[openssl] = "--with-openssl, --without-openssl"
+ PACKAGECONFIG[rlm-eap-fast] = "--with-rlm_eap_fast, --without-rlm_eap_fast"
+-- 
+2.42.0
+
 
