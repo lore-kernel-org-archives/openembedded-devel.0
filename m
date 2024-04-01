@@ -2,51 +2,51 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 763AFCD129B
-	for <webhook@archiver.kernel.org>; Mon,  1 Apr 2024 14:51:33 +0000 (UTC)
-Received: from esa1.hc1455-7.c3s2.iphmx.com (esa1.hc1455-7.c3s2.iphmx.com [207.54.90.47])
- by mx.groups.io with SMTP id smtpd.web10.39470.1711983091759055255
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7460DCD1288
+	for <webhook@archiver.kernel.org>; Mon,  1 Apr 2024 14:51:43 +0000 (UTC)
+Received: from esa10.hc1455-7.c3s2.iphmx.com (esa10.hc1455-7.c3s2.iphmx.com [139.138.36.225])
+ by mx.groups.io with SMTP id smtpd.web10.39483.1711983102108014469
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Apr 2024 07:51:32 -0700
+ Mon, 01 Apr 2024 07:51:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=TM6JYukS;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.47, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=WYE6stes;
+ spf=pass (domain: fujitsu.com, ip: 139.138.36.225, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1711983093; x=1743519093;
+  t=1711983103; x=1743519103;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=yVrgepCpJJ2OmFO5dp626rx94yD326bi97gXGBLEXsk=;
-  b=TM6JYukSOe0Oq1ilRiOmqdHBeAYu2RklILtGHktlHRCB0czOUDsCxIwz
-   sWJ/09++6MYFtjENB5hCNT1M7mDn5ThgQRDf3xDSyoOkvhozuKWnxA80j
-   sc71/KLb+G/HkQSYopdIP0RfpTpdDUpYsSQRs4O1qpOhTKl7FOlKv/vL6
-   svBfNO9gxJGqWP9EEfC81xnoNtvCZIJEf3qEoa2wRaneucZpe7+uDSmNb
-   xXtgc2wRl3NKrhEqMwUCWUGZngA61QSbj7kOmzaGQekB5Pc11I60HuPiJ
-   Q/g+FNYz1g4ya9Lg5rWFJvwmscCl6fMaRtkzmW6133O1tR6QHh8p2zuAI
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,11031"; a="154135861"
+  bh=nTK4TOV+W4fM/2Ibj48+TqzgLaE5QN3IvNLJh2Nt7Ps=;
+  b=WYE6stesq7z5xK3gbaRxmsC8LTbjPzwrRNYVUNTUmdA3EVDAsF3X1E73
+   24y6wryQTjwqK0r8GW4OcHB/glGvrCtOL7KxrehsZGlnfGS5xfLA6tBy0
+   /D5apkOAAxXhpZeb1orRzvpxU22RLf1Ug9e9Iei05kX8PCNOA1399hs0I
+   hAdg/UTUtD20eO47B/bWgX7YbxUlYJjqnJurDLBgir3OFqzLcx1ZfyrhY
+   k/SuuBAExxM1hH2rVS7vi6huTYHkuAvYpm0QLPGUxBC086rRNJJCuCBjD
+   yQEG+T22qgn/aUeyW6FH/C+RcvypQyXEUxvuglmUObUbDL73pB5WxARff
+   w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,11031"; a="141867302"
 X-IronPort-AV: E=Sophos;i="6.07,172,1708354800"; 
-   d="scan'208";a="154135861"
-Received: from unknown (HELO oym-r1.gw.nic.fujitsu.com) ([210.162.30.89])
-  by esa1.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Apr 2024 23:51:31 +0900
-Received: from oym-m3.gw.nic.fujitsu.com (oym-nat-oym-m3.gw.nic.fujitsu.com [192.168.87.60])
-	by oym-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id 4B294D4801
-	for <openembedded-devel@lists.openembedded.org>; Mon,  1 Apr 2024 23:51:29 +0900 (JST)
+   d="scan'208";a="141867302"
+Received: from unknown (HELO yto-r2.gw.nic.fujitsu.com) ([218.44.52.218])
+  by esa10.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Apr 2024 23:51:41 +0900
+Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
+	by yto-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 19D9FC680B
+	for <openembedded-devel@lists.openembedded.org>; Mon,  1 Apr 2024 23:51:39 +0900 (JST)
 Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
-	by oym-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 755BAD620F
-	for <openembedded-devel@lists.openembedded.org>; Mon,  1 Apr 2024 23:51:28 +0900 (JST)
+	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 5844C1B860
+	for <openembedded-devel@lists.openembedded.org>; Mon,  1 Apr 2024 23:51:38 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 0A4B421BEA8
-	for <openembedded-devel@lists.openembedded.org>; Mon,  1 Apr 2024 23:51:28 +0900 (JST)
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id DC51E21EEEF
+	for <openembedded-devel@lists.openembedded.org>; Mon,  1 Apr 2024 23:51:37 +0900 (JST)
 Received: from vm4860.g01.fujitsu.local (unknown [10.167.225.33])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id B4F761A000A;
-	Mon,  1 Apr 2024 22:51:27 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 922DF1A000A;
+	Mon,  1 Apr 2024 22:51:37 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 08/47 v2] libtommath: upgrade 1.2.1 -> 1.3.0
-Date: Mon,  1 Apr 2024 22:50:40 +0800
-Message-Id: <1711983079-16849-8-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 28/47] python3-pymisp: upgrade 2.4.187 -> 2.4.188
+Date: Mon,  1 Apr 2024 22:51:00 +0800
+Message-Id: <1711983079-16849-28-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1711983079-16849-1-git-send-email-wangmy@fujitsu.com>
 References: <1711983079-16849-1-git-send-email-wangmy@fujitsu.com>
@@ -54,48 +54,53 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28292.000
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28292.000
-X-TMASE-Result: 10--0.718200-10.000000
-X-TMASE-MatchedRID: 6e3s/u+cBDSjz0nOeth/yUIIxwDaU5mregIHHX2L4YyU8ftiyKjZrdMj
-	jwb9QfV2CC8aAmGeO6lV00+whwxVQy/7QU2czuUNCTeoveN0UE0NVHotTvuv68EguqiGeZ5Jo8W
-	MkQWv6iV3LAytsQR4e1cppCzPq+1UxlblqLlYqXLOYfSow2Vhi5U6SpNa639+9YUK+DuJiKVNnr
-	hhDwqARmlsajYnuBj34mvICQ7IRWgTypwN4HOX45s14Leh5MrwXVkPA313tVP+v9v52ZIoWjoAf
-	389xF3XFSk9HhUZnw7OGIWnws4LoyHWPYzouJUy
+X-TMASE-Result: 10--5.630000-10.000000
+X-TMASE-MatchedRID: EzAtoNUuirijz0nOeth/yUIIxwDaU5mr1jd10P+8LE94s/vUphzuiiLm
+	4/WzmuzLq9YyptElK5cWRRjCZKJSZA3/BHoVlrMzA9lly13c/gHVy4hHC3/gyLKw8Hx0EGitcqf
+	oMGP+CwQi+t+0AiFaYgB/8cibO8IYRY1tl9vG/AY7Cl8sx4HBG4OpkJE16YK7Ahn751acftuem2
+	vw+cenKeLzNWBegCW24nmFeyfGnuMLbigRnpKlKSPzRlrdFGDw14kt+hArEP4ZH8NBXU0eZNTRK
+	AL9aISUecLyUCry3MxoqF8S0ulM0w==
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 01 Apr 2024 14:51:33 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109725
+ <openembedded-devel@lists.openembedded.org>; Mon, 01 Apr 2024 14:51:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109745
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-===========
-- Deprecate more APIs which are replaced in develop
-- Add support for CMake
-- Add support for GitHub Actions
+==========
+- Support X-MISP-AUTH Header.
+- Bump changelog.
+- Bump deps.
+- Bump version, templates.
+- Strip API key before setting it.
+- Python 3.8 support & typing.
+- Typing for Python < 3.10.
+- Avoid issue when payload ist a list.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../libtommath/{libtommath_1.2.1.bb => libtommath_1.3.0.bb}     | 2 +-
+ .../{python3-pymisp_2.4.187.bb => python3-pymisp_2.4.188.bb}    | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/libtommath/{libtommath_1.2.1.bb => libtommath_1.3.0.bb} (91%)
+ rename meta-python/recipes-devtools/python/{python3-pymisp_2.4.187.bb => python3-pymisp_2.4.188.bb} (85%)
 
-diff --git a/meta-oe/recipes-support/libtommath/libtommath_1.2.1.bb b/meta-oe/recipes-support/libtommath/libtommath_1.3.0.bb
-similarity index 91%
-rename from meta-oe/recipes-support/libtommath/libtommath_1.2.1.bb
-rename to meta-oe/recipes-support/libtommath/libtommath_1.3.0.bb
-index 32ec290c1..4d6c06240 100644
---- a/meta-oe/recipes-support/libtommath/libtommath_1.2.1.bb
-+++ b/meta-oe/recipes-support/libtommath/libtommath_1.3.0.bb
-@@ -8,7 +8,7 @@ DEPENDS = "libtool-cross"
+diff --git a/meta-python/recipes-devtools/python/python3-pymisp_2.4.187.bb b/meta-python/recipes-devtools/python/python3-pymisp_2.4.188.bb
+similarity index 85%
+rename from meta-python/recipes-devtools/python/python3-pymisp_2.4.187.bb
+rename to meta-python/recipes-devtools/python/python3-pymisp_2.4.188.bb
+index 31b0d6446..59a00be15 100644
+--- a/meta-python/recipes-devtools/python/python3-pymisp_2.4.187.bb
++++ b/meta-python/recipes-devtools/python/python3-pymisp_2.4.188.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/MISP/PyMISP"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a3639cf5780f71b125d3e9d1dc127c20"
  
- SRC_URI = "git://github.com/libtom/libtommath.git;protocol=https;branch=master"
+-SRC_URI[sha256sum] = "6880aa07cc6ed08f6d99df74c310839bce229e2031e1aa24311c74d8b01937f3"
++SRC_URI[sha256sum] = "c2313d059a9f4d1221243fcda64fb8ae11603c1745e92d57c4071aad04336696"
  
--SRCREV = "97e500351e653472b2ea00b37137ad0414165efe"
-+SRCREV = "95d80fd8229d05dd6cb4ec88bc8d4f5377ff00ef"
- 
- S = "${WORKDIR}/git"
+ inherit python_poetry_core pypi
  
 -- 
 2.34.1
