@@ -1,180 +1,527 @@
-Return-Path: <gudnimar@noxmedical.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D007BCD128A
-	for <webhook@archiver.kernel.org>; Mon,  1 Apr 2024 16:44:35 +0000 (UTC)
-Received: from usb-smtp-delivery-118.mimecast.com (usb-smtp-delivery-118.mimecast.com [170.10.151.118])
- by mx.groups.io with SMTP id smtpd.web10.99.1711989874166167254
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 14CC2CD128A
+	for <webhook@archiver.kernel.org>; Mon,  1 Apr 2024 17:27:36 +0000 (UTC)
+Received: from mail-oa1-f54.google.com (mail-oa1-f54.google.com [209.85.160.54])
+ by mx.groups.io with SMTP id smtpd.web10.958.1711992450038023900
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Apr 2024 09:44:34 -0700
+ Mon, 01 Apr 2024 10:27:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@noxmedical.com header.s=mimecast20231107 header.b=hJHV7B7E;
- spf=pass (domain: noxmedical.com, ip: 170.10.151.118, mailfrom: gudnimar@noxmedical.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=noxmedical.com;
-	s=mimecast20231107; t=1711989873;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type;
-	bh=Z3yQXHiMCxAPEWXE2qzpkfhtRti1CHIlUEjrH1uUiGc=;
-	b=hJHV7B7EPVSYZ6soGp2gTkj1uIlaf6tFJnds3TFe6l+0BGbb2nWtEbNbS1kyyhB92TK6lq
-	UTRg2wggbQDIVChO0PUFXdi+BsPjtdmppAehubSQa+8ezi4/DdAS7InId/tlcwp4w7M1ZI
-	dvjzN/nRB2AiAz8h21gthaLkGgI8TFs=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- usb-mta-25-FIvcyiJSNbKjlk9r2-Mj2Q-1; Mon, 01 Apr 2024 09:44:29 -0700
-X-MC-Unique: FIvcyiJSNbKjlk9r2-Mj2Q-1
-Received: by mail-wm1-f69.google.com with SMTP id 5b1f17b1804b1-4155db7b58cso6695315e9.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Apr 2024 09:44:29 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=WdGbHOXA;
+ spf=pass (domain: gmail.com, ip: 209.85.160.54, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f54.google.com with SMTP id 586e51a60fabf-2220a389390so1891880fac.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 01 Apr 2024 10:27:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1711992449; x=1712597249; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=mvcF4E7nVlmhrOWlPMTXwZsIGKbijORmS31pShqUDp4=;
+        b=WdGbHOXAObgjpAVl4PA25x8Igiz512sntKBP9Enb95n+1l0US1r9eDkv2TfDA4g/nU
+         KMaufYIEYiIceZ3/hxEzjUI/0PK0UZnPS5C1GqZFX/chd2JV5/Uk9zdcqAJxYxPIyPsi
+         3HqzxBuUXLzdGZB0f+h1BbKgerxYfo61V838Rk8HaPjr9J0I7+TctedvsRYbiq5BvLDi
+         kIJSL2ROPfWjsmuKGWFlU4oSt6ksqPnxbzsCYVrsalN0SALrdFO24j4LH2Kd3gixAc/P
+         7M77XnKv8F5TJ9/44b1HzRnujFPAErcQAAtiyEh3x3d9axuoWzUwv6Ec28295TiPMtaA
+         Vfww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1711989867; x=1712594667;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=bT6nXT86YgMp6a/QCR/X4S72yoxusSJBK+XfkTaR/Xg=;
-        b=ZDd4YBWNIpDXHbRoH8H2KKN/+21DzApKubyPDgiWi4JeknMode4XN5IIXgZ58JOKu5
-         Yo0E9HkQOXgrpzQDdmQgtBryNyTlnW9y1Unbr9gs9mkkCmaK3pMBpy1DgTsvHF/ZcaDh
-         vpOHzzXw3Jjp/kdmxQsB5zoc5BmMvUlYKQ/0i5udbCNTQf6kd4HbFW16QLyRdQwMx/B6
-         C214BuhxsZvexUOgAf8VIUKzKuDWbnsgocUYuLx4VYSUnU4RSvpD8vsQ/cFNAGP4H9RQ
-         PT9ikxMy4EYCiEmuB1tqJ/mHkk+xIR5rh1DZmlE3zAgIEJgLVGfUblgmE/sbDbhFHRBh
-         1qZA==
-X-Gm-Message-State: AOJu0YwkgrVR0FND9KrpNojUaGaErCabyM+g5x9p+WbC2o1kgVVy8JZP
-	VXk173o8KKt8rpZDTWS4BUqDpmuxrFoKJnMLqw1FGYe+InX3QPeZtltWbV1cUMUIUiK8EAsfJeg
-	KYjH6zKMXUOGvzFTNjFOFFTPHHEXcN/aXYbiUK29HWwkXpfjoFdheZCZ+TRCpFwEGtiYivn/9pn
-	/fRZBXGlcvoKFVuxPc9L4F3sUeVAA9oqtBYsWM3eSyLToEQ/q8x6oIJcvq1AdCSeAneZN5
-X-Received: by 2002:a05:600c:3556:b0:414:f58:a086 with SMTP id i22-20020a05600c355600b004140f58a086mr7738540wmq.6.1711989867422;
-        Mon, 01 Apr 2024 09:44:27 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEIhGKaMPonz+sSbyfnAPDptuEj9nnOSGRr6A+yyxwmwtCescaYL9QjjqUO4NfED0A04KYevw==
-X-Received: by 2002:a05:600c:3556:b0:414:f58:a086 with SMTP id i22-20020a05600c355600b004140f58a086mr7738521wmq.6.1711989866790;
-        Mon, 01 Apr 2024 09:44:26 -0700 (PDT)
-Received: from gudni-virtual-machine.localdomain ([81.15.100.92])
-        by smtp.gmail.com with ESMTPSA id n18-20020a05600c4f9200b004148c3685ffsm15430613wmq.3.2024.04.01.09.44.26
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 01 Apr 2024 09:44:26 -0700 (PDT)
-From: =?UTF-8?q?Gu=C3=B0ni=20M=C3=A1r=20Gilbert?= <gudnimar@noxmedical.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: =?UTF-8?q?Gu=C3=B0ni=20M=C3=A1r=20Gilbert?= <gudnimar@noxmedical.com>
-Subject: [meta-python][PATCH] python3-ecdsa: cleanup DEPENDS
-Date: Mon,  1 Apr 2024 16:44:04 +0000
-Message-Id: <20240401164404.7440-1-gudnimar@noxmedical.com>
-X-Mailer: git-send-email 2.34.1
+        d=1e100.net; s=20230601; t=1711992449; x=1712597249;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=mvcF4E7nVlmhrOWlPMTXwZsIGKbijORmS31pShqUDp4=;
+        b=WVBD0LOGSpOtXOMwUfZfjb9QbYFyg6b0C4wqt/GwuFilkKqVkK3zoc8moMYO2LI637
+         e86R31UzCKNXF/9fc31Zssv55CZICgGy1TXOLnrV4lHKOGRjqYrHIdqHcVpIXcdhLVDF
+         FDmV3eGBxaAdmGqHm1S2Hwf/l+6/TvZLiDfImVgOZMx5IyqKDgQ0jalA1i8fu24hSRLF
+         d5Snom78fiR2Wofpv8aZAvDhfuIp4+o4fWbCyRGbS91trbqes/mDHpZypZZGifxx8rdB
+         KQcAdF03iUi41abI6/hAxROViJhQE/MhPrkS/dusztdFK2sxRvI6JG4p34RC+mUT230d
+         hsFQ==
+X-Gm-Message-State: AOJu0YwDp1xRJhhbthvl8gmRWH4BQAKf/9tlofMPqBUlrXkEje38SPuM
+	GEVZK5TQvWqzzbIrLEJmLxTQoQ44phI18dOb7iaUYGpjETyIlE3fg+jPkzXTVr7aUJHFGG+9ODs
+	VJo22tKBxHAJaqNWypBHlOSOsEjc=
+X-Google-Smtp-Source: AGHT+IF/8brcCPUfJ4jtVW2T1GAh08jZ6YZYd4i3kJLe/+U6Fgm3eiTD3gPkI67LI8/m9m9Iv6vrhlBr6fKs1gzUFKM=
+X-Received: by 2002:a05:6871:14f:b0:22a:4e66:9356 with SMTP id
+ z15-20020a056871014f00b0022a4e669356mr5371416oab.20.1711992449144; Mon, 01
+ Apr 2024 10:27:29 -0700 (PDT)
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: noxmedical.com
-Content-Type: multipart/alternative;
-	boundary="MCBoundary=_12404010944317611"
+References: <20240401071500.15097-1-f_l_k@t-online.de>
+In-Reply-To: <20240401071500.15097-1-f_l_k@t-online.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 1 Apr 2024 10:27:02 -0700
+Message-ID: <CAMKF1srvTN7vcF9OyBmF5OAetyQWeuRRVdq5QWO1z9uW7RDWFQ@mail.gmail.com>
+Subject: Re: [oe] [meta-networking][RFC][PATCH] blueman: update 2.3.5 -> 2.4
+To: Markus Volk <f_l_k@t-online.de>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 01 Apr 2024 16:44:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109767
+ <openembedded-devel@lists.openembedded.org>; Mon, 01 Apr 2024 17:27:36 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109768
 
---MCBoundary=_12404010944317611
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+I am seeing do_install error on yocto AB builds
 
-Remove python3-pbr from DEPENDS: when looking at the source code
-it looks like pbr is used in the CI process when building for
-Python 2.6 only. Python 2 is no longer supported in the Yocto
-project so it can be safely removed.
+| chown: invalid user: =E2=80=98polkitd:root=E2=80=99
 
-Remove python3-pip from DEPENDS: pip is not a build time
-dependency.
+https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/3761/step=
+s/15/logs/stdio
 
-Changes were tested on Kirkstone. The requirements for
-python3-ecdsa v0.18 are exactly the same.
-
-Signed-off-by: Gu=C3=B0ni M=C3=A1r Gilbert <gudnimar@noxmedical.com>
----
- meta-python/recipes-devtools/python/python3-ecdsa_0.18.0.bb | 2 --
- 1 file changed, 2 deletions(-)
-
-diff --git a/meta-python/recipes-devtools/python/python3-ecdsa_0.18.0.bb b/=
-meta-python/recipes-devtools/python/python3-ecdsa_0.18.0.bb
-index ea175d214..12dd51e79 100644
---- a/meta-python/recipes-devtools/python/python3-ecdsa_0.18.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-ecdsa_0.18.0.bb
-@@ -3,8 +3,6 @@ SECTION =3D "devel/python"
- LICENSE =3D "MIT"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D66ffc5e30f76cbb5358fe54b645e5a1=
-d"
-=20
--DEPENDS +=3D "python3-pip python3-pbr"
--
- PYPI_PACKAGE =3D "ecdsa"
- SRC_URI[sha256sum] =3D "190348041559e21b22a1d65cee485282ca11a6f81d503fddb8=
-4d5017e9ed1e49"
-=20
---=20
-2.34.1
-
-Disclaimer
-
-The information contained in this communication from the sender is confiden=
-tial. It is intended solely for use by the recipient and others authorized =
-to receive it. If you are not the recipient, you are hereby notified that a=
-ny disclosure, copying, distribution or taking action in relation of the co=
-ntents of this information is strictly prohibited and may be unlawful.
-
-This email has been scanned for viruses and malware, and may have been auto=
-matically archived by Mimecast, a leader in email security and cyber resili=
-ence. Mimecast integrates email defenses with brand protection, security aw=
-areness training, web security, compliance and other essential capabilities=
-. Mimecast helps protect large and small organizations from malicious activ=
-ity, human error and technology failure; and to lead the movement toward bu=
-ilding a more resilient world. To find out more, visit our website.
-
---MCBoundary=_12404010944317611
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/html; charset=UTF-8
-
-<html><head><style type=3D"text/css">.style1 {font-family: "Times New Roman=
-";}</style></head><body>Remove python3-pbr from DEPENDS: when looking at th=
-e source code<BR>
-it looks like pbr is used in the CI process when building for<BR>
-Python 2.6 only. Python 2 is no longer supported in the Yocto<BR>
-project so it can be safely removed.<BR>
-<BR>
-Remove python3-pip from DEPENDS: pip is not a build time<BR>
-dependency.<BR>
-<BR>
-Changes were tested on Kirkstone. The requirements for<BR>
-python3-ecdsa v0.18 are exactly the same.<BR>
-<BR>
-Signed-off-by: Gu&eth;ni M&aacute;r Gilbert &lt;gudnimar@noxmedical.com&gt;=
-<BR>
----<BR>
- meta-python/recipes-devtools/python/python3-ecdsa_0.18.0.bb | 2 --<BR>
- 1 file changed, 2 deletions(-)<BR>
-<BR>
-diff --git a/meta-python/recipes-devtools/python/python3-ecdsa_0.18.0.bb b/=
-meta-python/recipes-devtools/python/python3-ecdsa_0.18.0.bb<BR>
-index ea175d214..12dd51e79 100644<BR>
---- a/meta-python/recipes-devtools/python/python3-ecdsa_0.18.0.bb<BR>
-+++ b/meta-python/recipes-devtools/python/python3-ecdsa_0.18.0.bb<BR>
-@@ -3,8 +3,6 @@ SECTION =3D &quot;devel/python&quot;<BR>
- LICENSE =3D &quot;MIT&quot;<BR>
- LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D66ffc5e30f76cbb5358fe54b64=
-5e5a1d&quot;<BR>
- <BR>
--DEPENDS +=3D &quot;python3-pip python3-pbr&quot;<BR>
--<BR>
- PYPI_PACKAGE =3D &quot;ecdsa&quot;<BR>
- SRC_URI[sha256sum] =3D &quot;190348041559e21b22a1d65cee485282ca11a6f81d503=
-fddb84d5017e9ed1e49&quot;<BR>
- <BR>
--- <BR>
-2.34.1<BR>
-
-<br><br><p style=3D"font-family: Verdana; font-size:10pt; color:#666666;"><=
-/p><p style=3D"font-family: Verdana; font-size:8pt; color:#666666;">Warning=
-:  Copyright Nox Health.  This communication is confidential and may contai=
-n privileged information.  By the use of email over the Internet or other c=
-ommunication systems, Nox Health is not waiving either confidentiality of, =
-or legal privilege in, the content of the email and of any attachments.  If=
- the recipient of this message is not the intended addressee, please call N=
-ox Health immediately by calling (+1) 888.505.0280</p></body></html>
-
---MCBoundary=_12404010944317611--
-
+On Mon, Apr 1, 2024 at 12:14=E2=80=AFAM Markus Volk <f_l_k@t-online.de> wro=
+te:
+>
+> - rebase patches
+> - remove 0001-Search-for-cython3.patch, cython3 is the default now
+> - dont create polkit rule, meanwhile it is contained in the package
+> - simplify the injection of python paths by patching the .in files
+>   at do_configure
+>
+> This adds a reproducibility issue where I haven't yet been able to
+> figure out the root cause, so this is marked RFC
+> WARNING: blueman-2.4-r0 do_package_qa: QA Issue: File /usr/src/debug/blue=
+man/2.4/module/_blueman.c in package blueman-src contains reference to TMPD=
+IR [buildpaths]
+> WARNING: blueman-2.4-r0 do_package_qa: QA Issue: File /usr/lib/python3.12=
+/site-packages/_blueman.so in package blueman contains reference to TMPDIR =
+[buildpaths]
+>
+> I've tested the rc version for quite some time now and its working
+> well for me. It increases the short search timeout and includes
+> matching polkit rule by default. Also it now bluetooth on/off switch,
+> which is working great.
+> Note: after disabling bluetooth the icon disappears immediately from e.g.
+> waybar, but due to the lack of dbus communication it will be needed to
+> restart waybar, to get it back visible after reactivating bluez again
+>
+> New features
+> Audio profile switcher in applet menu (@abhijeetviswa)
+> Set router address as DNS server instead of loopback addresses
+> Enable dnsmasq DNS service if possible and add DNS servers otherwise
+> Reconfigure DHCP service on local nameserver changes
+> Support for systemd-resolved for getting nameservers for NAP clients
+> List connected devices in status icon tooltip
+> Support for nautilus 43 and later
+> Copy bleutooth address to clipboard in devicelist
+> Add battery levels to status icon tooltip
+> Changes
+> Raise minimum Python version to 3.8
+> Raise minumum Gtk+ version to 3.24
+> Hide recent connections associated with unavailable adapters
+> Store network configuration in GSettings instead of /var/lib/blueman/netw=
+ork.state.
+> Replace custom MessageArea widget with regular Gtk.InfoBar
+> Drop auto-power feature. BlueZ now has the AutoEnable setting for even be=
+tter auto-powering.
+> Do not use pointless link quality value
+> Recent connections in toplevel applet menu
+> Never hide keyboard and combos, see #1954 for more info
+> Do not close blueman-manager from applet
+> Add Switch to blueman-manager to set bluetooth on/off
+> Remove broken check for bluetooth status
+> PluginDialog: Replace custom list with Gtk.ListBox
+> Ignore double-click for connect when unpowered
+> Drop homgeneous from statusbar
+> PulseAudioUtils: Use python enums in several places
+> Use operator convenience functions
+> Cleanup PluginDialog UI
+> Show HCI device in blueman-adapers tabs
+> Show different icon for the active audio profile @localevil
+> Make blueman-services a notebook
+> Use the TypedDict as constructor
+> Bugs fixed
+> Fix device-selected handlers
+> Fix deprecations in tests
+> Fix showing -1 seconds when discovering @kuraga
+> Tray: Let dbus call end and reply to caller
+> Get the image-missing icon if lookup failed to avoid crash
+>
+> Signed-off-by: Markus Volk <f_l_k@t-online.de>
+> ---
+>  .../blueman/0001-Search-for-cython3.patch     | 24 -----
+>  ...01-meson-add-pythoninstalldir-option.patch | 29 +++---
+>  .../0002-fix-fail-to-enable-bluetooth.patch   | 20 ++---
+>  .../blueman/blueman_2.3.5.bb                  | 88 -------------------
+>  .../blueman/blueman_2.4.bb                    | 57 ++++++++++++
+>  5 files changed, 85 insertions(+), 133 deletions(-)
+>  delete mode 100644 meta-networking/recipes-connectivity/blueman/blueman/=
+0001-Search-for-cython3.patch
+>  delete mode 100644 meta-networking/recipes-connectivity/blueman/blueman_=
+2.3.5.bb
+>  create mode 100644 meta-networking/recipes-connectivity/blueman/blueman_=
+2.4.bb
+>
+> diff --git a/meta-networking/recipes-connectivity/blueman/blueman/0001-Se=
+arch-for-cython3.patch b/meta-networking/recipes-connectivity/blueman/bluem=
+an/0001-Search-for-cython3.patch
+> deleted file mode 100644
+> index 913566dce..000000000
+> --- a/meta-networking/recipes-connectivity/blueman/blueman/0001-Search-fo=
+r-cython3.patch
+> +++ /dev/null
+> @@ -1,24 +0,0 @@
+> -Subject: [PATCH] Search for cython3
+> -MIME-Version: 1.0
+> -Content-Type: text/plain; charset=3DUTF-8
+> -Content-Transfer-Encoding: 8bit
+> -
+> -Upstream-Status: Inappropriate
+> -
+> -Signed-off-by: Markus Volk <f_l_k@gmx.net>
+> ----
+> - meson.build | 2 +-
+> - 1 file changed, 1 insertion(+), 1 deletion(-)
+> -
+> ---- a/module/meson.build        2022-02-10 08:49:35.000000000 +0100
+> -+++ b/module/meson.build        2022-03-29 12:58:03.456193737 +0200
+> -@@ -1,4 +1,4 @@
+> --cython =3D find_program('cython', required: true)
+> -+cython =3D find_program('cython3', required: true)
+> -
+> - blueman_c =3D custom_target(
+> -     'blueman_c',
+> -
+> ---
+> -2.14.3
+> -
+> diff --git a/meta-networking/recipes-connectivity/blueman/blueman/0001-me=
+son-add-pythoninstalldir-option.patch b/meta-networking/recipes-connectivit=
+y/blueman/blueman/0001-meson-add-pythoninstalldir-option.patch
+> index cc448b4ff..3e9543410 100644
+> --- a/meta-networking/recipes-connectivity/blueman/blueman/0001-meson-add=
+-pythoninstalldir-option.patch
+> +++ b/meta-networking/recipes-connectivity/blueman/blueman/0001-meson-add=
+-pythoninstalldir-option.patch
+> @@ -1,4 +1,4 @@
+> -From 37f24a9bd62f0a8f3e37eaddd33f2f0c9d3aaa0a Mon Sep 17 00:00:00 2001
+> +From 3d0cc8aae6de1b0a3b3dc87cdadc80199980783c Mon Sep 17 00:00:00 2001
+>  From: Chen Qi <Qi.Chen@windriver.com>
+>  Date: Fri, 1 Apr 2022 23:12:17 -0700
+>  Subject: [PATCH] meson: add pythoninstalldir option
+> @@ -16,13 +16,13 @@ Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+>   2 files changed, 7 insertions(+), 1 deletion(-)
+>
+>  diff --git a/meson.build b/meson.build
+> -index e12d0ce6..e84457a5 100644
+> +index 2a4303ce..5154b2ad 100644
+>  --- a/meson.build
+>  +++ b/meson.build
+> -@@ -26,7 +26,12 @@ pkgdatadir =3D join_paths([prefix, get_option('datadi=
+r'), package_name])
+> - bindir =3D join_paths([prefix, get_option('bindir')])
+> - libexecdir =3D join_paths([prefix, get_option('libexecdir')])
+> - schemadir =3D join_paths(['share', 'glib-2.0', 'schemas'])
+> +@@ -29,7 +29,12 @@ dbusdir =3D join_paths([datadir, 'dbus-1'])
+> + libexecdir =3D get_option('libexecdir')
+> + schemadir =3D join_paths([datadir, 'glib-2.0', 'schemas'])
+> + polkitdir =3D join_paths([datadir, 'polkit-1'])
+>  -pythondir =3D pyinstall.get_install_dir()
+>  +pythoninstalldir =3D get_option('pythoninstalldir')
+>  +if pythoninstalldir !=3D ''
+> @@ -30,11 +30,20 @@ index e12d0ce6..e84457a5 100644
+>  +else
+>  +    pythondir =3D join_paths([prefix, python.sysconfig_path('purelib')]=
+)
+>  +endif
+> + systemd_base_path =3D join_paths(libdir, 'systemd')
+>
+>   if get_option('policykit')
+> -     have_polkit =3D 'True'
+> +@@ -51,7 +56,7 @@ conf_data.set('icondir', join_paths(prefix, datadir, '=
+icons'))
+> + conf_data.set('dhconfig', get_option('dhcp-config-path'))
+> + conf_data.set('POLKIT', have_polkit)
+> + conf_data.set('GETTEXT_PACKAGE', package_name)
+> +-conf_data.set('PYTHON', pyinstall.full_path())
+> ++conf_data.set('PYTHON', pyinstall.path())
+> +
+> + # Check for build dependencies
+> + pythonlib =3D pyinstall.dependency()
+>  diff --git a/meson_options.txt b/meson_options.txt
+> -index 177d9ab8..3e397d8e 100644
+> +index 177d9ab8..87d73872 100644
+>  --- a/meson_options.txt
+>  +++ b/meson_options.txt
+>  @@ -2,6 +2,7 @@ option('runtime_deps_check', type: 'boolean', value: tru=
+e, description: 'Disable
+> @@ -45,6 +54,4 @@ index 177d9ab8..3e397d8e 100644
+>   option('systemdsystemunitdir', type: 'string', description: 'Path to sy=
+stemd system unit dir relative to ${prefix}')
+>   option('systemduserunitdir', type: 'string', description: 'Path to syst=
+emd user unit dir relative to ${prefix}')
+>   option('sendto-plugins', type: 'array', choices: ['Caja', 'Nemo', 'Naut=
+ilus'], value: ['Caja', 'Nemo', 'Nautilus'], description: 'Install sendto p=
+lugins for various filemanagers')
+> ---
+> -2.34.1
+> -
+> +
+> diff --git a/meta-networking/recipes-connectivity/blueman/blueman/0002-fi=
+x-fail-to-enable-bluetooth.patch b/meta-networking/recipes-connectivity/blu=
+eman/blueman/0002-fix-fail-to-enable-bluetooth.patch
+> index 282d82137..8a18600dd 100644
+> --- a/meta-networking/recipes-connectivity/blueman/blueman/0002-fix-fail-=
+to-enable-bluetooth.patch
+> +++ b/meta-networking/recipes-connectivity/blueman/blueman/0002-fix-fail-=
+to-enable-bluetooth.patch
+> @@ -1,4 +1,7 @@
+> -Fix fail to enable bluetooth issue
+> +From 37c5f0e9741e8a07114ab6120a74affadf0a453e Mon Sep 17 00:00:00 2001
+> +From: Kai Kang <kai.kang@windriver.com>
+> +Date: Fri, 25 Oct 2019 12:56:48 +0800
+> +Subject: [PATCH] Fix fail to enable bluetooth issue
+>
+>  When launch blueman-manager while bluetooth is disable, it may fails
+>  with error:
+> @@ -25,10 +28,10 @@ Signed-off-by: Kai Kang <kai.kang@windriver.com>
+>   2 files changed, 14 insertions(+)
+>
+>  diff --git a/blueman/Functions.py b/blueman/Functions.py
+> -index 3917f42..b4d5eae 100644
+> +index 018ffaed..f4fdca41 100644
+>  --- a/blueman/Functions.py
+>  +++ b/blueman/Functions.py
+> -@@ -80,6 +80,16 @@ def check_bluetooth_status(message: str, exitfunc: Ca=
+llable[[], Any]) -> None:
+> +@@ -79,6 +79,16 @@ def check_bluetooth_status(message: str, exitfunc: Ca=
+llable[[], Any]) -> None:
+>               return
+>
+>       applet.SetBluetoothStatus('(b)', True)
+> @@ -46,18 +49,18 @@ index 3917f42..b4d5eae 100644
+>           print('Failed to enable bluetooth')
+>           exitfunc()
+>  diff --git a/blueman/plugins/applet/PowerManager.py b/blueman/plugins/ap=
+plet/PowerManager.py
+> -index c2f7bc3..bf6c99f 100644
+> +index 8c3991e4..57c1aa57 100644
+>  --- a/blueman/plugins/applet/PowerManager.py
+>  +++ b/blueman/plugins/applet/PowerManager.py
+> -@@ -63,6 +63,7 @@ class PowerManager(AppletPlugin, StatusIconProvider):
+> -         self._add_dbus_signal("BluetoothStatusChanged", "b")
+> +@@ -49,6 +49,7 @@ class PowerManager(AppletPlugin, StatusIconProvider):
+> +
+>           self._add_dbus_method("SetBluetoothStatus", ("b",), "", self.re=
+quest_power_state)
+>           self._add_dbus_method("GetBluetoothStatus", (), "b", self.get_b=
+luetooth_status)
+>  +        self._add_dbus_method("GetRequestStatus", (), "b", self.get_req=
+uest_status)
+>
+>       def on_unload(self) -> None:
+>           self.parent.Plugins.Menu.unregister(self)
+> -@@ -196,6 +197,9 @@ class PowerManager(AppletPlugin, StatusIconProvider)=
+:
+> +@@ -178,6 +179,9 @@ class PowerManager(AppletPlugin, StatusIconProvider)=
+:
+>       def get_bluetooth_status(self) -> bool:
+>           return self.current_state
+>
+> @@ -67,6 +70,3 @@ index c2f7bc3..bf6c99f 100644
+>       def on_adapter_property_changed(self, _path: str, key: str, value: =
+Any) -> None:
+>           if key =3D=3D "Powered":
+>               if value and not self.current_state:
+> ---
+> -2.31.1
+> -
+> diff --git a/meta-networking/recipes-connectivity/blueman/blueman_2.3.5.b=
+b b/meta-networking/recipes-connectivity/blueman/blueman_2.3.5.bb
+> deleted file mode 100644
+> index 0374d23f0..000000000
+> --- a/meta-networking/recipes-connectivity/blueman/blueman_2.3.5.bb
+> +++ /dev/null
+> @@ -1,88 +0,0 @@
+> -DESCRIPTION =3D "Blueman is a GTK+ Bluetooth Manager"
+> -LICENSE =3D "GPL-3.0-only"
+> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd32239bcb673463ab874e80d47fae=
+504"
+> -
+> -DEPENDS =3D "gtk+3 glib-2.0 bluez5 python3-pygobject python3-cython-nati=
+ve"
+> -
+> -inherit meson gettext systemd gsettings pkgconfig python3native gtk-icon=
+-cache useradd features_check
+> -
+> -REQUIRED_DISTRO_FEATURES =3D "gobject-introspection-data"
+> -
+> -SRC_URI =3D " \
+> -    git://github.com/blueman-project/blueman.git;protocol=3Dhttps;branch=
+=3D2-3-stable \
+> -    file://0001-Search-for-cython3.patch \
+> -    file://0002-fix-fail-to-enable-bluetooth.patch \
+> -    file://0001-meson-add-pythoninstalldir-option.patch \
+> -"
+> -S =3D "${WORKDIR}/git"
+> -SRCREV =3D "c85e7afb8d6547d4c35b7b639124de8e999c3650"
+> -
+> -EXTRA_OEMESON =3D "-Druntime_deps_check=3Dfalse -Dpythoninstalldir=3D${@=
+noprefix('PYTHON_SITEPACKAGES_DIR', d)}"
+> -
+> -SYSTEMD_SERVICE:${PN} =3D "${BPN}-mechanism.service"
+> -SYSTEMD_AUTO_ENABLE:${PN} =3D "disable"
+> -
+> -RRECOMMENDS:${PN} +=3D "adwaita-icon-theme"
+> -RDEPENDS:${PN} +=3D " \
+> -    python3-core \
+> -    python3-ctypes \
+> -    python3-dbus \
+> -    python3-pygobject \
+> -    python3-terminal \
+> -    python3-fcntl \
+> -    packagegroup-tools-bluetooth \
+> -"
+> -
+> -PACKAGECONFIG ??=3D " \
+> -    ${@bb.utils.filter('DISTRO_FEATURES', 'polkit pulseaudio ', d)} \
+> -    thunar \
+> -"
+> -PACKAGECONFIG[thunar] =3D "-Dthunar-sendto=3Dtrue,-Dthunar-sendto=3Dfals=
+e"
+> -PACKAGECONFIG[pulseaudio] =3D "-Dpulseaudio=3Dtrue,-Dpulseaudio=3Dfalse"
+> -PACKAGECONFIG[polkit] =3D "-Dpolicykit=3Dtrue,-Dpolicykit=3Dfalse"
+> -
+> -FILES:${PN} +=3D " \
+> -    ${datadir} \
+> -    ${systemd_user_unitdir} \
+> -    ${PYTHON_SITEPACKAGES_DIR} \
+> -"
+> -
+> -# In code, path to python is a variable that is replaced with path to na=
+tive version of it
+> -# during the configure stage, e.g ../recipe-sysroot-native/usr/bin/pytho=
+n3-native/python3.
+> -# Replace it with #!/usr/bin/env python3
+> -do_install:append() {
+> -    sed -i "1s/.*/#!\/usr\/bin\/env python3/" ${D}${prefix}/libexec/blue=
+man-rfcomm-watcher \
+> -                                              ${D}${prefix}/libexec/blue=
+man-mechanism \
+> -                                              ${D}${bindir}/blueman-adap=
+ters \
+> -                                              ${D}${bindir}/blueman-appl=
+et \
+> -                                              ${D}${bindir}/blueman-mana=
+ger \
+> -                                              ${D}${bindir}/blueman-send=
+to \
+> -                                              ${D}${bindir}/blueman-serv=
+ices \
+> -                                              ${D}${bindir}/blueman-tray
+> -}
+> -
+> -do_install:append() {
+> -    install -d ${D}${datadir}/polkit-1/rules.d
+> -    cat >${D}${datadir}/polkit-1/rules.d/51-blueman.rules <<EOF
+> -/* Allow users in wheel group to use blueman feature requiring root with=
+out authentication */
+> -polkit.addRule(function(action, subject) {
+> -    if ((action.id =3D=3D "org.blueman.network.setup" ||
+> -         action.id =3D=3D "org.blueman.dhcp.client" ||
+> -         action.id =3D=3D "org.blueman.rfkill.setstate" ||
+> -         action.id =3D=3D "org.blueman.pppd.pppconnect") &&
+> -        subject.isInGroup("wheel")) {
+> -
+> -        return polkit.Result.YES;
+> -    }
+> -});
+> -EOF
+> -}
+> -
+> -USERADD_PACKAGES =3D "${PN}"
+> -USERADD_PARAM:${PN} =3D "--system --no-create-home --user-group --home-d=
+ir ${sysconfdir}/polkit-1 --shell /bin/nologin polkitd"
+> -
+> -do_install:append() {
+> -        # Fix up permissions on polkit rules.d to work with rpm4 constra=
+ints
+> -        chmod 700 ${D}/${datadir}/polkit-1/rules.d
+> -        chown polkitd:root ${D}/${datadir}/polkit-1/rules.d
+> -}
+> diff --git a/meta-networking/recipes-connectivity/blueman/blueman_2.4.bb =
+b/meta-networking/recipes-connectivity/blueman/blueman_2.4.bb
+> new file mode 100644
+> index 000000000..71fa0317d
+> --- /dev/null
+> +++ b/meta-networking/recipes-connectivity/blueman/blueman_2.4.bb
+> @@ -0,0 +1,57 @@
+> +DESCRIPTION =3D "Blueman is a GTK+ Bluetooth Manager"
+> +LICENSE =3D "GPL-3.0-only"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd32239bcb673463ab874e80d47fae=
+504"
+> +
+> +DEPENDS =3D "gtk+3 glib-2.0 bluez5 python3-pygobject python3-cython-nati=
+ve"
+> +
+> +inherit meson gettext systemd gsettings pkgconfig python3native gtk-icon=
+-cache features_check
+> +
+> +REQUIRED_DISTRO_FEATURES =3D "gobject-introspection-data"
+> +
+> +SRC_URI =3D " \
+> +    git://github.com/blueman-project/blueman.git;protocol=3Dhttps;branch=
+=3D2-4-stable \
+> +    file://0002-fix-fail-to-enable-bluetooth.patch \
+> +    file://0001-meson-add-pythoninstalldir-option.patch \
+> +"
+> +S =3D "${WORKDIR}/git"
+> +SRCREV =3D "71948d45d5b23d58f4be03543570d256faa45cc4"
+> +
+> +EXTRA_OEMESON =3D "-Druntime_deps_check=3Dfalse -Dpythoninstalldir=3D${@=
+noprefix('PYTHON_SITEPACKAGES_DIR', d)}"
+> +
+> +SYSTEMD_SERVICE:${PN} =3D "${BPN}-mechanism.service"
+> +SYSTEMD_AUTO_ENABLE:${PN} =3D "disable"
+> +
+> +RRECOMMENDS:${PN} +=3D "adwaita-icon-theme"
+> +RDEPENDS:${PN} +=3D " \
+> +    python3-core \
+> +    python3-ctypes \
+> +    python3-dbus \
+> +    python3-pygobject \
+> +    python3-terminal \
+> +    python3-fcntl \
+> +    packagegroup-tools-bluetooth \
+> +"
+> +
+> +do_configure:prepend() {
+> +       for file in ${S}/apps/*.in; do
+> +               sed -i "s|@PYTHON@|\/usr\/bin\/env python3|" "$file"
+> +       done
+> +}
+> +
+> +PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'polkit pulse=
+audio ', d)}"
+> +
+> +PACKAGECONFIG[thunar] =3D "-Dthunar-sendto=3Dtrue,-Dthunar-sendto=3Dfals=
+e"
+> +PACKAGECONFIG[pulseaudio] =3D "-Dpulseaudio=3Dtrue,-Dpulseaudio=3Dfalse"
+> +PACKAGECONFIG[polkit] =3D "-Dpolicykit=3Dtrue,-Dpolicykit=3Dfalse"
+> +
+> +do_install:append() {
+> +        # Fix up permissions on polkit rules.d to work with rpm4 constra=
+ints
+> +        chmod 700 ${D}/${datadir}/polkit-1/rules.d
+> +        chown polkitd:root ${D}/${datadir}/polkit-1/rules.d
+> +}
+> +
+> +FILES:${PN} +=3D " \
+> +    ${datadir} \
+> +    ${systemd_user_unitdir} \
+> +    ${PYTHON_SITEPACKAGES_DIR} \
+> +"
+> --
+> 2.44.0
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#109695): https://lists.openembedded.org/g/openembedde=
+d-devel/message/109695
+> Mute This Topic: https://lists.openembedded.org/mt/105259533/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
