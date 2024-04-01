@@ -2,51 +2,51 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 64A88CD1298
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 90ABCCD129B
 	for <webhook@archiver.kernel.org>; Mon,  1 Apr 2024 14:35:22 +0000 (UTC)
-Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
- by mx.groups.io with SMTP id smtpd.web10.39025.1711982118010852197
+Received: from esa12.hc1455-7.c3s2.iphmx.com (esa12.hc1455-7.c3s2.iphmx.com [139.138.37.100])
+ by mx.groups.io with SMTP id smtpd.web11.38880.1711982116528295747
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Apr 2024 07:35:18 -0700
+ Mon, 01 Apr 2024 07:35:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=mvGipOiU;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=Fs3rYZAR;
+ spf=pass (domain: fujitsu.com, ip: 139.138.37.100, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1711982119; x=1743518119;
+  t=1711982116; x=1743518116;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=ij0hOTgCfDveb5D7UQ/HneCQ2ieMw9NVNxhLghuIMYQ=;
-  b=mvGipOiUH83CoJpFqwbEo5v9pJX4NKYiT16JrW53loTPVqGhKH2oeeFZ
-   2+xyqFQJWZfPYNSM0BFNH/oxjGIY/FFHuFRImk/wAaE9KcYUu3iY4Ax08
-   nHRSr9SfdBA+7qdI9RixNo6ZcbMaNRcI9nDiDFkaXYsEdsQsn7kL13/vF
-   LZD6ZuZlcMXb5MxaHBf95Tz1QhY+g9aIRAA5hAmtdyauGjfVcWqa809ZY
-   Blyb/W6rVx6nG0dm9taFWpTvIqTxSHyIc2HVGTxbV2299TGgDbJn0QnTg
-   8oP5XywmcoHp7ENsBLYvn0zxB/kJSIj1t4YNqCAVAI+YVpdCMATLwkRzR
+  bh=hATGU916xOHOaAP2QtPq+KGrjRWlBMnUShvriFrgaww=;
+  b=Fs3rYZAROdew/7aKSlcFgQpE9dJBURd6JTmPofVE7vr9/rTMOTGx2HRF
+   hCLqy7sKpyscu7zpWytb6CWb87rjs2pvRL6RqE4AL2JIjoHBOxxuAUqIB
+   wpXASprH7ovD4AKoV9+3wh7yqsc+BuQnfSAK/qpFtAlcp695Wcei/pl+G
+   XGpRIAWJRcowbadUK2OvVOjvPmMYAS3zdzXm/ZH3nQRN13U1ANF7GkouP
+   kuQ9h+n78E8knYfeMiSjJlPdDKbUTzezvvFKrGwX4RU6mnE+6wn3PQcUa
+   QOJIjqlVEDfKt41nGG3hFTYWXrweKvEFX6CVTQftI3uhbQqtpGOVKln0j
    w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,11031"; a="154246085"
+X-IronPort-AV: E=McAfee;i="6600,9927,11031"; a="133563455"
 X-IronPort-AV: E=Sophos;i="6.07,172,1708354800"; 
-   d="scan'208";a="154246085"
-Received: from unknown (HELO yto-r1.gw.nic.fujitsu.com) ([218.44.52.217])
-  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Apr 2024 23:35:16 +0900
-Received: from yto-m4.gw.nic.fujitsu.com (yto-nat-yto-m4.gw.nic.fujitsu.com [192.168.83.67])
-	by yto-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id 3CEEDE48C7
-	for <openembedded-devel@lists.openembedded.org>; Mon,  1 Apr 2024 23:35:13 +0900 (JST)
+   d="scan'208";a="133563455"
+Received: from unknown (HELO oym-r3.gw.nic.fujitsu.com) ([210.162.30.91])
+  by esa12.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Apr 2024 23:35:13 +0900
+Received: from oym-m3.gw.nic.fujitsu.com (oym-nat-oym-m3.gw.nic.fujitsu.com [192.168.87.60])
+	by oym-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 92C0AC2263
+	for <openembedded-devel@lists.openembedded.org>; Mon,  1 Apr 2024 23:35:11 +0900 (JST)
 Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
-	by yto-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 71F3DD7B62
-	for <openembedded-devel@lists.openembedded.org>; Mon,  1 Apr 2024 23:35:12 +0900 (JST)
+	by oym-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id BEB3CD6215
+	for <openembedded-devel@lists.openembedded.org>; Mon,  1 Apr 2024 23:35:10 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 0B0CC1EBBEB
-	for <openembedded-devel@lists.openembedded.org>; Mon,  1 Apr 2024 23:35:12 +0900 (JST)
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 519D6E60B
+	for <openembedded-devel@lists.openembedded.org>; Mon,  1 Apr 2024 23:35:10 +0900 (JST)
 Received: from vm4860.g01.fujitsu.local (unknown [10.167.225.33])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id B5E9B1A000A;
-	Mon,  1 Apr 2024 22:35:11 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id F36411A000B;
+	Mon,  1 Apr 2024 22:35:09 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [PATCH 04/47] libblockdev: upgrade 3.1.0 -> 3.1.1
-Date: Mon,  1 Apr 2024 22:34:21 +0800
-Message-Id: <1711982104-16711-4-git-send-email-wangmy@fujitsu.com>
+Subject: [PATCH 02/47] gnome-backgrounds: upgrade 45.0 -> 46.0
+Date: Mon,  1 Apr 2024 22:34:19 +0800
+Message-Id: <1711982104-16711-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1711982104-16711-1-git-send-email-wangmy@fujitsu.com>
 References: <1711982104-16711-1-git-send-email-wangmy@fujitsu.com>
@@ -54,65 +54,55 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28292.000
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28292.000
-X-TMASE-Result: 10--2.827000-10.000000
-X-TMASE-MatchedRID: sujxEcxUy52jz0nOeth/yUIIxwDaU5mrIr/9+EuvVI14YeSlHZYFogC7
-	AZSleJMNCoAIIxVkzthSe3BBwR1DvFSYAx1RhJuHPKN38CLPK0EXivwflisSrC99T+uJIleRQ31
-	PMmlnGr0vumwb4GCEKqkL7/CyCvA7mDcRJzGLWpLfSQNpZkETVFQQ0EgzIoPRB/FMznsE8cPu/Q
-	yUVIt+aU0NCZDxtvO/5p98cjyQCaI2YNXUKC1G1rGWmeVAULKHWQ+QsDdwtAedAuliTV06YmsWZ
-	V9YMDBb1fdm2d1zfYYEtpFZR0iFe/Q/jeowsLZFb056mCmF00Z9LQinZ4QefPcjNeVeWlqY+gtH
-	j7OwNO0JC+VZi2gQEXqpqehG4sP7a5T39/UwQiwFrsF3U4iMXtPBNEKJrliYCbT6FEQiGk0oaQu
-	tBvz7fB9nZYO61TAa+RH5d4MO0YhWtHB0/a/I8/IMFg0InOPqz5gAnmajvOU4qCidlj1MUy0uAB
-	Di47cA
+X-TMASE-Result: 10--3.909700-10.000000
+X-TMASE-MatchedRID: n7p0zKhDeQSjz0nOeth/yUIIxwDaU5mrmZiw53dqSN9uS8Amg5D32YMs
+	9Lfjm5sbjO6ZHXjUwWf7TVaLsInK92lIIURgzYWVxvp0tuDMx3lUENBIMyKD0QfxTM57BPHD7v0
+	MlFSLfmlNDQmQ8bbzv+affHI8kAmifnzmcpBzOruxlpnlQFCyhzX8AUEphxj0gW6bY8SOq3WjxY
+	yRBa/qJcFwgTvxipFajoczmuoPCq0jrWZhRCFL73FnPJIjcNWF2s+8qUWUbYBK86UTCB/erGqi/
+	SHoytheRTmdu5VkB1z8lgz2Z2Zi9/kDVtekws0PZ3/efZ5tveodJuEZuYbKVcUkrvIudlEZl07d
+	DrsiYvyCLhFTP3QRDAbYwClu/qh3
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 01 Apr 2024 14:35:22 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109705
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109702
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-===========
-- Use glib2 G_GNUC_UNUSED in place of UNUSED locally defined
-- Port to G_GNUC_INTERNAL for controlling symbols visibility
-- Fix some more occurrences of missing port to G_GNUC_UNUSED
-- dm_logging: Annotate redirect_dm_log() printf format
-- tests: Add NVMe persistent discovery controller tests
-- tests: Add NVMe controller type checks
-- Makefile: Fix bumpver to work with micro versions
-- tests: Manually remove removed PVs from LVM devices file
-- tests: Ignore LVM devices file for non-LVM tests
-- tests: Fix removing custom LVM devices file
-- nvme: Add bd_nvme_is_tech_avail to the API file
-- lvm-dbus: Fix passing size for pvresize over DBus
+============
+- default: less lens distortion
+- symbolics: updated icons & tweaks to the layout
+- glass chip: improved compression
+- New default. Embrace the rounded triangle!
+- Updated Amber, Pills
+- New additions -- Gometrics, Glass chip, Neogeo, Ring and Tarka
+- Departures -- Keys, Truchet, Rounded Rectangles
+- JPEG XL favored as a format, with banding-bustin' client side grain
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{libblockdev_3.1.0.bb => libblockdev_3.1.1.bb}            | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-extended/libblockdev/{libblockdev_3.1.0.bb => libblockdev_3.1.1.bb} (96%)
+ .../{gnome-backgrounds_45.0.bb => gnome-backgrounds_46.0.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/gnome-backgrounds/{gnome-backgrounds_45.0.bb => gnome-backgrounds_46.0.bb} (74%)
 
-diff --git a/meta-oe/recipes-extended/libblockdev/libblockdev_3.1.0.bb b/meta-oe/recipes-extended/libblockdev/libblockdev_3.1.1.bb
-similarity index 96%
-rename from meta-oe/recipes-extended/libblockdev/libblockdev_3.1.0.bb
-rename to meta-oe/recipes-extended/libblockdev/libblockdev_3.1.1.bb
-index 60182d84e..dd1514628 100644
---- a/meta-oe/recipes-extended/libblockdev/libblockdev_3.1.0.bb
-+++ b/meta-oe/recipes-extended/libblockdev/libblockdev_3.1.1.bb
-@@ -12,10 +12,10 @@ inherit autotools gobject-introspection pkgconfig lib_package
+diff --git a/meta-gnome/recipes-gnome/gnome-backgrounds/gnome-backgrounds_45.0.bb b/meta-gnome/recipes-gnome/gnome-backgrounds/gnome-backgrounds_46.0.bb
+similarity index 74%
+rename from meta-gnome/recipes-gnome/gnome-backgrounds/gnome-backgrounds_45.0.bb
+rename to meta-gnome/recipes-gnome/gnome-backgrounds/gnome-backgrounds_46.0.bb
+index 704a0b645..5d6c5d31e 100644
+--- a/meta-gnome/recipes-gnome/gnome-backgrounds/gnome-backgrounds_45.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-backgrounds/gnome-backgrounds_46.0.bb
+@@ -7,7 +7,7 @@ SECTION = "x11/gnome"
  
- DEPENDS = "autoconf-archive-native glib-2.0 kmod udev libnvme"
+ inherit gnomebase gettext allarch
  
--SRC_URI = "git://github.com/storaged-project/libblockdev;branch=master;protocol=https \
-+SRC_URI = "git://github.com/storaged-project/libblockdev;branch=3.1.x-devel;protocol=https \
-            file://0001-fix-pythondir-for-multilib-when-cross-compiling.patch \
-            "
--SRCREV = "65f50bf912374b85d673f2716ea0c8306980c95b"
-+SRCREV = "68aaff5556afe26be749c29a2b7cbd714dce3050"
- S = "${WORKDIR}/git"
+-SRC_URI[archive.sha256sum] = "cee0e688fbae5ef7a75f335ada2d10779e08ebca9445f1586de32c5a9b6dee2d"
++SRC_URI[archive.sha256sum] = "4ddd3ac439a4a067876805921bb75f4d3c8b85a218d47c276dddde8928443c2e"
  
- FILES:${PN} += "${libdir}/python3.*/site-packages"
+ FILES:${PN} += " \
+     ${datadir}/backgrounds \
 -- 
 2.34.1
 
