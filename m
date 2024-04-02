@@ -1,119 +1,113 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <jaeyoon.jung@lge.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 42A1BCD1284
-	for <webhook@archiver.kernel.org>; Tue,  2 Apr 2024 18:24:24 +0000 (UTC)
-Received: from mail-oa1-f45.google.com (mail-oa1-f45.google.com [209.85.160.45])
- by mx.groups.io with SMTP id smtpd.web10.2685.1712082259406408314
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3A32CC6FD1F
+	for <webhook@archiver.kernel.org>; Tue,  2 Apr 2024 21:30:54 +0000 (UTC)
+Received: from lgeamrelo11.lge.com (lgeamrelo11.lge.com [156.147.23.51])
+ by mx.groups.io with SMTP id smtpd.web10.204.1712093445197462960
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 02 Apr 2024 11:24:19 -0700
+ Tue, 02 Apr 2024 14:30:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=QmhyF8UE;
- spf=pass (domain: gmail.com, ip: 209.85.160.45, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f45.google.com with SMTP id 586e51a60fabf-2282597eff5so4147104fac.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 02 Apr 2024 11:24:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1712082258; x=1712687058; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=nLFOu/3B8bl8mrKKTwqOx0+68hKJbqBubLBFUD8UYNw=;
-        b=QmhyF8UExu5o0dUF1sbkKQyHOs0xIJe711nO4pODjaJVrGkLBD6reRe1OjIpBpgfcJ
-         H++TkMxOufYsiENoiVT5Ms5kfLTTJwyG7pFb6IScL+lfvdKuVOljvRYucZ5kl4mr/ahy
-         +J6WHI+ZOPTQiyhKW+IKi1LV+nHSZoyLWy2QlwmmxgMCRlLbZzVE82aWUWTe8QlnuEQl
-         yGp3UvPPC0iticzTLUunNCDwlgIcX2W+jFfsY7sCd3o3+k266Oq9jKXpR8CTvBXVR7iy
-         Jby5ukwWH5RGgn//d7jsbLrZ6y467hLIv2x7OZpn2UChJZ+Vh4drijqAJWEQ3xzGNWMW
-         U1QA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1712082258; x=1712687058;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=nLFOu/3B8bl8mrKKTwqOx0+68hKJbqBubLBFUD8UYNw=;
-        b=bTNl59F/sVU+XWzLmByQFzODqqfBlSpM4aquXdYYiq1W8xqX8cQB5l2XRKTCDrDm1Q
-         W0T/gzb79bl2tHr+y/wTg3urkf2AlY2YmniyitlC0I6MWzdhXQuTCziDhTJmEZl02RX0
-         WCGnEKgYVOoJH5mH6lsyWXiPp587OL61xE5VhiH3IepPzFq1aVlR/1hwJS2rUwF0K3Pm
-         OmTu5saKRCrRqRGiHE/MgXsSX605jZa87wydDBk6B3neJB77/t8Ee5UjHCZ5k37M2Jdi
-         PMjUZ5OF7/INeI5j/1u1UudEKoQ4fgLpB1gmrU5iDcNzolqYqt2HulU7akeXAui+bAnx
-         eA3w==
-X-Gm-Message-State: AOJu0Yynu9ZKsVhi/A4nQWKKD8eHYm4tBVxIv838Vr7j5aufNmPJp7MR
-	JKQ2FFyayL1zKTBF1y17uOFxgKb8JA7lzxiwsxe2UmcH3wE+klM779eXu88E3eCMOPyIRz12fOb
-	CDdyoUgEXPhhVHouYfZZ+rQp3wX4=
-X-Google-Smtp-Source: AGHT+IEUz4+IwqyeDaC+gUeLqpjHjay5HwS/sxLfpi7S6esb+w0GGxmyXby5zId3cMXPlw5wKGmgJIHXKB9F8hAl4yU=
-X-Received: by 2002:a05:6870:858b:b0:22a:516b:2284 with SMTP id
- f11-20020a056870858b00b0022a516b2284mr14152424oal.30.1712082258628; Tue, 02
- Apr 2024 11:24:18 -0700 (PDT)
+ dkim=none (message not signed); spf=pass (domain: lge.com, ip: 156.147.23.51, mailfrom: jaeyoon.jung@lge.com)
+Received: from unknown (HELO lgeamrelo01.lge.com) (156.147.1.125)
+	by 156.147.23.51 with ESMTP; 3 Apr 2024 06:30:43 +0900
+X-Original-SENDERIP: 156.147.1.125
+X-Original-MAILFROM: jaeyoon.jung@lge.com
+Received: from unknown (HELO magneto.lge.net) (10.177.227.48)
+	by 156.147.1.125 with ESMTP; 3 Apr 2024 06:30:43 +0900
+X-Original-SENDERIP: 10.177.227.48
+X-Original-MAILFROM: jaeyoon.jung@lge.com
+From: jaeyoon.jung@lge.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Jaeyoon Jung <jaeyoon.jung@lge.com>
+Subject: [meta-oe][PATCH] lvgl: Set resolution prior to buffer
+Date: Wed,  3 Apr 2024 06:30:57 +0900
+Message-ID: <20240402213057.15641-1-jaeyoon.jung@lge.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20240402080426.28248-1-f_l_k@t-online.de>
-In-Reply-To: <20240402080426.28248-1-f_l_k@t-online.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 2 Apr 2024 11:23:52 -0700
-Message-ID: <CAMKF1soKVnqALOdcWcjOrfNddJSbSxAJk9ja6-M6eJOwzVtM-Q@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] highway: add recipe
-To: Markus Volk <f_l_k@t-online.de>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 02 Apr 2024 18:24:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109788
+ <openembedded-devel@lists.openembedded.org>; Tue, 02 Apr 2024 21:30:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109789
 
-On Tue, Apr 2, 2024 at 1:04=E2=80=AFAM Markus Volk <f_l_k@t-online.de> wrot=
-e:
->
-> add google highway as a dependency for libjxl
->
-> Signed-off-by: Markus Volk <f_l_k@t-online.de>
-> ---
->  meta-oe/recipes-extended/highway/highway.1.1.0.bb | 15 +++++++++++++++
->  1 file changed, 15 insertions(+)
->  create mode 100644 meta-oe/recipes-extended/highway/highway.1.1.0.bb
->
-> diff --git a/meta-oe/recipes-extended/highway/highway.1.1.0.bb b/meta-oe/=
-recipes-extended/highway/highway.1.1.0.bb
-> new file mode 100644
-> index 000000000..ec9d8f742
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/highway/highway.1.1.0.bb
-> @@ -0,0 +1,15 @@
-> +SUMMARY =3D "Highway is a C++ library for SIMD (Single Instruction, Mult=
-iple Data)"
-> +HOMEPAGE =3D "https://github.com/google/highway/"
-> +
-> +LICENSE =3D "Apache-2.0"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D2b42edef8fa55315f34f2370b4715=
-ca9"
-> +
-> +inherit cmake
-> +
-> +SRC_URI =3D "git://github.com/google/highway.git;protocol=3Dhttps;branch=
-=3Dmaster"
-> +
-> +SRCREV =3D "58b52a717469e62b2d9b8eaa2f5dddb44d4a4cbf"
-> +S =3D "${WORKDIR}/git"
-> +
-> +EXTRA_OECMAKE =3D "-DBUILD_TESTING=3D0 -DCMAKE_BUILD_TYPE=3DRelease"
-> +CXXFLAGS:append:arm =3D " -mfp16-format=3Dieee"
+From: Jaeyoon Jung <jaeyoon.jung@lge.com>
 
-This is a gcc specific option and not supported by clang, however
-clang defaults to ieee format for
-__fp16 so this works without specifying this option in case of clang.
+It fixes an issue where the fbdev driver fails to set up a buffer due to
+buffer size mismatch. It happens when the actual screen resolution is
+smaller than the default one 800x480 because the actual resolution was
+being set after lv_display_set_buffers.
 
-> --
-> 2.44.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#109777): https://lists.openembedded.org/g/openembedde=
-d-devel/message/109777
-> Mute This Topic: https://lists.openembedded.org/mt/105283871/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Signed-off-by: Jaeyoon Jung <jaeyoon.jung@lge.com>
+---
+ ...fbdev-set-resolution-prior-to-buffer.patch | 29 +++++++++++++++++++
+ .../lvgl/lvgl-demo-fb_9.1.0.bb                |  1 +
+ meta-oe/recipes-graphics/lvgl/lvgl_9.1.0.bb   |  1 +
+ 3 files changed, 31 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/lvgl/files/0008-fix-fbdev-set-resolution-prior-to-buffer.patch
+
+diff --git a/meta-oe/recipes-graphics/lvgl/files/0008-fix-fbdev-set-resolution-prior-to-buffer.patch b/meta-oe/recipes-graphics/lvgl/files/0008-fix-fbdev-set-resolution-prior-to-buffer.patch
+new file mode 100644
+index 000000000..449db53df
+--- /dev/null
++++ b/meta-oe/recipes-graphics/lvgl/files/0008-fix-fbdev-set-resolution-prior-to-buffer.patch
+@@ -0,0 +1,29 @@
++From a6f822f75b3ba01b00c028608c93160d09a6ffd1 Mon Sep 17 00:00:00 2001
++From: Jaeyoon Jung <jaeyoon.jung@lge.com>
++Date: Mon, 1 Apr 2024 18:00:39 +0900
++Subject: [PATCH] fix(fbdev): set resolution prior to buffer
++
++Otherwise it ends up with using the default value 800x480 and may fail
++at lv_display_set_buffers due to incorrect resolution.
++
++Upstream-Status: Submitted [https://github.com/lvgl/lvgl/pull/6004]
++Signed-off-by: Jaeyoon Jung <jaeyoon.jung@lge.com>
++---
++
++ src/drivers/display/fb/lv_linux_fbdev.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/drivers/display/fb/lv_linux_fbdev.c b/src/drivers/display/fb/lv_linux_fbdev.c
++index b3cc89199..5fb4c5c9f 100644
++--- a/src/drivers/display/fb/lv_linux_fbdev.c
+++++ b/src/drivers/display/fb/lv_linux_fbdev.c
++@@ -233,8 +233,8 @@ void lv_linux_fbdev_set_file(lv_display_t * disp, const char * file)
++         draw_buf_2 = malloc(draw_buf_size);
++     }
++ 
++-    lv_display_set_buffers(disp, draw_buf, draw_buf_2, draw_buf_size, LV_LINUX_FBDEV_RENDER_MODE);
++     lv_display_set_resolution(disp, hor_res, ver_res);
+++    lv_display_set_buffers(disp, draw_buf, draw_buf_2, draw_buf_size, LV_LINUX_FBDEV_RENDER_MODE);
++ 
++     if(width > 0) {
++         lv_display_set_dpi(disp, DIV_ROUND_UP(hor_res * 254, width * 10));
+diff --git a/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_9.1.0.bb b/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_9.1.0.bb
+index 3fc3f9286..6e8371baa 100644
+--- a/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_9.1.0.bb
++++ b/meta-oe/recipes-graphics/lvgl/lvgl-demo-fb_9.1.0.bb
+@@ -13,6 +13,7 @@ SRC_URI = "\
+ 	file://0005-Add-DRM-KMS-example-support.patch \
+ 	file://0006-Add-SDL2-example-support.patch \
+ 	file://0007-fix-cmake-generate-versioned-shared-libraries.patch;patchdir=lvgl \
++	file://0008-fix-fbdev-set-resolution-prior-to-buffer.patch;patchdir=lvgl \
+ 	"
+ SRCREV_demo = "dccc6a1ca48372aa993dbea7a8e17dec6f42df6a"
+ SRCREV_lvgl = "e1c0b21b2723d391b885de4b2ee5cc997eccca91"
+diff --git a/meta-oe/recipes-graphics/lvgl/lvgl_9.1.0.bb b/meta-oe/recipes-graphics/lvgl/lvgl_9.1.0.bb
+index 0ebd6ec42..4435c4077 100644
+--- a/meta-oe/recipes-graphics/lvgl/lvgl_9.1.0.bb
++++ b/meta-oe/recipes-graphics/lvgl/lvgl_9.1.0.bb
+@@ -12,6 +12,7 @@ SRC_URI = "\
+ 	git://github.com/lvgl/lvgl;protocol=https;branch=master \
+ 	file://0002-fix-sdl-handle-both-LV_IMAGE_SRC_FILE-and-LV_IMAGE_S.patch \
+ 	file://0007-fix-cmake-generate-versioned-shared-libraries.patch \
++	file://0008-fix-fbdev-set-resolution-prior-to-buffer.patch \
+ 	"
+ SRCREV = "e1c0b21b2723d391b885de4b2ee5cc997eccca91"
+ 
+-- 
+2.43.0
+
 
