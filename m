@@ -2,39 +2,38 @@ Return-Path: <william.lyu@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D9FCC6FD1F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B00D2CD1284
 	for <webhook@archiver.kernel.org>; Tue,  2 Apr 2024 13:34:20 +0000 (UTC)
 Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.12064.1712064858682936518
+ by mx.groups.io with SMTP id smtpd.web11.12451.1712064858132184424
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 02 Apr 2024 06:34:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=aQU9g0Ey;
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=ZWYas/4X;
  spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=4822a20b16=william.lyu@windriver.com)
 Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4326EObw008128
-	for <openembedded-devel@lists.openembedded.org>; Tue, 2 Apr 2024 06:34:18 -0700
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4326EObv008128
+	for <openembedded-devel@lists.openembedded.org>; Tue, 2 Apr 2024 06:34:17 -0700
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:in-reply-to:references
-	:content-transfer-encoding:content-type:mime-version; s=
-	PPS06212021; bh=ntRIMKH0CtUjV4Ng/3SO+zDsm3U6AHJHkqPPVQETX/0=; b=
-	aQU9g0EywmbiVBwsqDUqeN6dbs5v19ZsFeHQFXmDLGurJothXsDpQCbyFY8ng606
-	jl6vY6M8BxGyDQvJmLkAJ9zFOPuOP+a0pFsVRvdcEtFhwEUcHK7siXScz67N8mr7
-	4CBw0/nfOXAHH4L/kQrYcWC7wCreDPlwP4k5iGzMKe+eZ3ixUwzPHD1Rn4klvkoC
-	xBgcBV++9USvNMBCkvQP2oRZ/D1dn7SRdnmbaNznRIzipCKDWcJ9yP8LSj+eRBqQ
-	F1LZGMfRE0T0rTkjxZOZia0P3M5vUMK55QBmoguamgXq1W5zMLdnJ+8dvXuseS6/
-	c6pLcNXwLODsAIysqda7cw==
+	 h=from:to:subject:date:message-id:content-transfer-encoding
+	:content-type:mime-version; s=PPS06212021; bh=GVpNAUvsgmByIdseDm
+	ENC8vUW1jVjaENQjlZU72nbBM=; b=ZWYas/4XZBxKZfapv1ZUrRGfZk7cU1Sscx
+	Grmd0kf5loS5Go2EX+1Itd34p5tFd0DA76qrnnOmMgx7XkCj6dYcZUlOk6Jh8X8R
+	WRSAk8isLzXCHozXcKA2TrSr3mlcvSt4Tfa39jN98+9svmCctxxIfz4YDWwVOvAd
+	a/tZsGp4YC6G+3o5RrXdESZPHdiZtsfqCFfLxUdyUQFEP/F4m6lCdwAD+zUNxZMM
+	CdvERQOP+IsZBF629pdnUwLW5lvT2QSEDO9cEvIjaBpFF111lu7yYEdvTNG0tEHG
+	II2C0Fb5i6ZquT7wDB82MEUCyn1lSy6LdeB4S77+nhtb4gZZcD0Q==
 Received: from nam12-dm6-obe.outbound.protection.outlook.com (mail-dm6nam12lp2168.outbound.protection.outlook.com [104.47.59.168])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3x6e10k2mc-3
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3x6e10k2mc-2
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 02 Apr 2024 06:34:18 -0700 (PDT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 02 Apr 2024 06:34:17 -0700 (PDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=M7dbkr6poIn9Ho7Bvr/V9H/2dtKa2+OzpY1XkEUmSSODsD0kIkXwoIqYmbkF0HnfCm7iHhVIOWMc/a0ug6Ayw4nOD6rIXUouwthBm8RRWK0t2Bo1FtiVpCihbsFmcVR0OtpEzpiSTgl/ev8lpofcNIntnqlhekveAsY/9YxYI3yE+ICgYQayVTe3Hy+T3yRj5Q3QmpBU+O5OycqBvmIYy/KJadPUASJ1DSYxhgvnpzKvBAysBvtMb/m5NvrIvzVZ9y4Lu77FBdRA95emFaiPUqtiCUegNzC8Gf2s4vlxxXrlINBGxsC54vmRsHOolzMGzUH3mV4AIAGf0PTOmBBRqw==
+ b=dkMtq5Apk5DqE/nYDgGTcCaFmhoPEwS4QcBS5TpnOD5KVw104StBLmh83YchkpRi+cYTGDii+rw+qmYzt0BO/vJjKwn2MsUTi1fSFHbvXLIjprFoOdzFMggz4jdlcB7+nf8h3709XPwmueSHJGEu95pZ21CPLO99qcz72j//RdU3Pg619aPonUQqJ+UNjabQb5vKvRqzCPk3Bh18jnuexreiafrnYC5Hbwf6xXIT1Fb6Utjv324gm3boIvc9Uzptp6oniNhz4gzhBxydyuIuKdHj/NdorY5M+muzbnrMRxS+qSU0utyOK5otJdIkZ/A1Q0/ZfpLHgpujiS2GNiUsJg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ntRIMKH0CtUjV4Ng/3SO+zDsm3U6AHJHkqPPVQETX/0=;
- b=LM3G8ikruH6MlB+TxxO8Zx6awP3xuv9YN8vgXFZEyiqHqQ+O1/1gitW/mfPEVesQTqQqIWhzzwF/2Cea5mLdV5oY17OGCmWTNmcqtNuQ+xyZg7YywGoOH2geWX1Dq/Qt4LgxB81CM4ct04+QK8/8DENI5EZWz5mzg0Yf/AuGsDb3B0qtwFl0GGvJR3HCdaNIL8Ig8V2l9W6+VuJAhu89C16GhneU+iI9J+BuVxRMhR/u8m5nk4v8g7MHQWi+wxoIk8KHtJ2Di/ytbVo7MK5Su7VARuDC+oLJcB3sdswj7vKxANp0+yYfntWBY5KP5Nls1ium+1rRR6Rnw2UPoP43bw==
+ bh=GVpNAUvsgmByIdseDmENC8vUW1jVjaENQjlZU72nbBM=;
+ b=m7RNWJhR7JLi577WG5JR1mmIiv2l6qHS6bI6nVujwitsXkoDkUIUwJ/txRffcLURkjnO+9z+4oseS9/MCx/QhXfI+yGyJVT0qjyS/Zr8YppNVYbLsoRcIXfbAE2u7jtJDTGzamLJoFFMBlb5ktMRieiETV8ixdcBdKKLkz/j96AJC8xjVbLyEI2Mu31n+PekLFURG1XHVSU9reH7h6W8xCzllxxDLEfPXE4r/xgB0lp5XEtjLatX+SsYf9Pk/u5AxprsToiz0yS3K4M8wP1Ej4NSNNql9b0CBv5/xJ0+zmLiQGjEP7gV4B3rEFu+rFIO2AH0wtHYjB+BFYmYLntWVA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -42,19 +41,17 @@ Received: from LV3PR11MB8767.namprd11.prod.outlook.com (2603:10b6:408:215::11)
  by CO1PR11MB5090.namprd11.prod.outlook.com (2603:10b6:303:96::21) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7452.22; Tue, 2 Apr
- 2024 13:34:14 +0000
+ 2024 13:34:13 +0000
 Received: from LV3PR11MB8767.namprd11.prod.outlook.com
  ([fe80::6730:81e2:544b:1379]) by LV3PR11MB8767.namprd11.prod.outlook.com
  ([fe80::6730:81e2:544b:1379%4]) with mapi id 15.20.7452.019; Tue, 2 Apr 2024
- 13:34:14 +0000
+ 13:34:13 +0000
 From: William.Lyu@windriver.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH 3/3] nftables: Fix failed ptest testcases
-Date: Tue,  2 Apr 2024 06:34:00 -0700
-Message-ID: <20240402133400.3347547-3-William.Lyu@windriver.com>
+Subject: [meta-networking][PATCH 1/3] nftables: Fix ptest output format issues
+Date: Tue,  2 Apr 2024 06:33:58 -0700
+Message-ID: <20240402133400.3347547-1-William.Lyu@windriver.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240402133400.3347547-1-William.Lyu@windriver.com>
-References: <20240402133400.3347547-1-William.Lyu@windriver.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-ClientProxiedBy: BY3PR04CA0001.namprd04.prod.outlook.com
@@ -67,52 +64,52 @@ X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	R78nhWjLqjW6Zvo0ifOBuuFTumtVZVZmeSb7urFjiCtQwLYBqynm45/c82su9Jc7hep/NKArPdt9g7kh5cpEin2Qwqnkgx7x9sA0slmLI87IiwINGsng/gNfB0MqxPNTBqE0w5gItLnDv566p92jdjkQneqX26RBJuufCnahRaZpKgbBM79FpL0kz9WNv/zERB4TBtWCNNHU2h2Rp27raw5g/1GGcWtKrxPTxIJGvMAROIjJ6q9qKeJt9WNcz/f9n2vA6TgeyZwMXkNLKvpFGuqGD1uXwXzHohSDfOGZPEg521UCpCNWmjePiPajmjijNPqHwKG5rX/MG9a+hMB+LOACTAsycarFUP6E8dTwvNW4TqYs6LVc3ox/c9rIGIRLCwZ1EKJbhDc0XrdLyZCtmuMZJHWTHs/5ciRWjc732pFnJb9/ob9l0vWaFAbMn9HnAx46KS7fL4HSVA4yqAR5zA/25deBP0RepXy4vlxww8TWt4bEEllHOpHSdK8V42WFQK/FTg0aIY65/SIg3PEJHptckLYgkdyToCOughvK3Jwu801wMnp9aafDZb5Y8AH0H2LgvhPuS5chQLbTj9MXCKMWyrcCU2hCxgfS+am/SMfduvR0vlNjbm6U77WpAMKICJDvi0yVriUD7MBv44GcAFx6Tij7T+e9ZrELcUC/9dQ=
+	un05t+9dAYMtX8Lya3WO6HQaHJ3ZvrpcwEvZTRxdpreLL9Lajhyo295ZuHSXc69DxF0bg8qQZkvD6vQWxGBPghvX0+zR5Bi3LQ8MTze+MNvqzXx7KIBBBSgbx6MzogD+Mp8yH7u0IzXEscZ13ObNdwMrYDp8HJb9+LeBlkw0EN/ouwV/hfpU1pTLsxZNuZxgQOyipFK8PsCtktM4FoqsYxhNS/Cq/PtYemmF3ncM9TsJkze90qTHwI42bD1ShP61ZRs7GsEQoK0swaLa+aAdjovytxdlE/TeOygg5YojE3A3YMby4jBfrlgJtfu8RJetiRtvY/3R/juZe9PS8KPbP64YoxuFNyJdPVgIvQ58WfJwLeWpRVW7PdDBn0jZMy9PrpT8fp1gSqapYiBrmMC2hBF1aPMjZBRA5NUPSMjB2gh4dbGCuAq+Jx9/wz+OxSevp9SJUqTaJtiPS4pVvdDA86Mag/D1zo0YN/qkjOBzQEcvsCWoa0CdLVH06FtsqLzzpVt4vN4v0GjKTAQ5Qx6GTsh1jgoSsikjsxP8PuC7TctpdCB9j7Fj/SqT/zf96oG3sXMctNFfVX77FY40VrJWOk/9oHUMtJHB0wjAeMKPZ95J9wk8F2MfI2SH9/1+5LpKoSWXhO+b3ti5gALvYxpfkbmfLJAlp7LDIzN50TVwSC71PfXedPPlBmrNhoKPZzsY8vKjbMGqe3LyGwlxMi8jsw==
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LV3PR11MB8767.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(1800799015)(52116005)(376005)(366007)(38350700005);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?U4fJEAlklo/hM21vEzrc2UFtjMorjO7MFuiL3yDMjmisLSJvdUlNDdk+rKS0?=
- =?us-ascii?Q?T5n0se1I2KJ691u8zOffdhrsTGK348jDN/62BFvBfiTJu6ikwYkYKlEXoy7v?=
- =?us-ascii?Q?B7O/SxRVmlmvhUiRKvk/7rDVX7lpBgrGF2rglZDrankv8Rw2f0pwdu0WlvyT?=
- =?us-ascii?Q?TgmI8cOwEd0vvR8ojWah0daXaRHdrSE2/ys0L1hIP5pXFzkemDjP/lBkHmE5?=
- =?us-ascii?Q?2eCAs0jAhR/hnZNZnMgI1LrWdmXDRaEaKKujpFVDYGOMJPirpDgVJGJGL1af?=
- =?us-ascii?Q?Ybk8QwLWbDZJzt3JN+UdcpoALez6GxE+RXthTJhDrHcEnNQ6S0z4NLTXRCcE?=
- =?us-ascii?Q?ok+HlKR+Wr6i40RAbnzI/oU3SVR54mgYbcgcXDfa1ptjSUzb+0d8V7uBg/6f?=
- =?us-ascii?Q?hvrnoyJ7xWlvKmNj8+2VeKyDQvljPxCtFIzlVhIM6wLinVnrKGX9fuI84h7x?=
- =?us-ascii?Q?H6dljBFkmgJQmta2qLspd5vmXKKVxdsHcutWMuo3c5LWgXcBD1nJyepDgomA?=
- =?us-ascii?Q?iDJzyVHyznZjy2Sc3wphAS0k1wN5VG0gpAxz5S91HzeYhNFivVVs8PuO15iY?=
- =?us-ascii?Q?2MfopMisZVxL+felMj/m0ZfH1klTGCZ3IF/luAXYHbC14En/KqBRC1RQe2DM?=
- =?us-ascii?Q?Wh7R0mucjsgR91Ee4rRf6G191lfvu8wuZ661cR/hHz8phF9d66PJhBwlsypx?=
- =?us-ascii?Q?ZZpZ2+9Q85nDp2slGqxrTlOSPtSFpkbDop7WSibgZT80GQY7+Dm+o9NwhTNt?=
- =?us-ascii?Q?iuqS01qD3XAvJIHUE+zcPBGl5Mur5lcU1UPFYqlwFHAQTZudeEVsWt2eoNfk?=
- =?us-ascii?Q?EVlMdKqJy8/fe2id7lnj8EbiMQzn8isDoFTkClOBrGO77hJ9WuwM37Y+3lSO?=
- =?us-ascii?Q?jFpLeQsECCUXAkYixu9O5GfC9HY/TwKii+1iGBssRijN0MrhHkwDYCXsNUy2?=
- =?us-ascii?Q?vsqpB8RYbJNNHi453W7b7XfAOnFCXeXqMyQSlxii/EOqOXWT0sBYTP7rde2r?=
- =?us-ascii?Q?eso+ItHmePQKHBJDSwzk0dHJL+T02LOkP4qaYPlHBT4solv1JHhN0cVoFr8O?=
- =?us-ascii?Q?djXbn+P02y3sAT9jmqQfJax25b3HvK5lCTz4zZUhw6sKXcwdwXJgGF+U5Kfv?=
- =?us-ascii?Q?HkwGG7SsUjoerAsVZu0VAElnBNr5vzIlzIftu1GGBN6lOzbnIEdkAfQanUuL?=
- =?us-ascii?Q?nHZ2VckXwuAtagagV5QM5HW/2G8WxOQNdMNYNxNfT9jEj4ZXx1qUXXo+ex/l?=
- =?us-ascii?Q?/lFnrG2NerTPY1Ebnrr9WFtZEakHv6cS4tf8BpESggi6itVt5qXZJmO7t0wJ?=
- =?us-ascii?Q?PTRkreRIIPm19grIfrzBFDjNJ98JCBZSqZHDpWz8viVnqXb1WPeuzBs1WlgS?=
- =?us-ascii?Q?OBgXl4QP5WDXdhalV9QZI1eqJKR26fJXedw58bc38yTFSSDw+ptIpyqnNNYX?=
- =?us-ascii?Q?HZW0jHdfenN5nWK1eHE+3Q4Xz5fKsww+cHpw0KbHFjWTZ6RY55OdFFGkReRp?=
- =?us-ascii?Q?vafrLbbRCLulyMrMiD4eKj3YgchVaSqU/s2cZav61SU76yd6ZT4ZA86WXmY4?=
- =?us-ascii?Q?Yjviqj8kFLYyuM683sGaZX4MnX3o0OdH1UQke9SfIu+WOVqGC91lX7Rg9QEK?=
- =?us-ascii?Q?QQ=3D=3D?=
+	=?us-ascii?Q?Qga6z75TwOvJLCsZFCjr9ug48G5b/b/IbRzTSANu4Kg2GgEsc89l1jUJfpdj?=
+ =?us-ascii?Q?dkRkW7uiaZYKPD9lkjGKwG9AlgwSeU55ukFkZOOZHFcb6fcGSu07TvzGN/CY?=
+ =?us-ascii?Q?DHDL/m/hLoUVSCz+5qMHqHyvsEBZjrLDl6LyghQhr/TQpLm7M8HZqWOWq9J2?=
+ =?us-ascii?Q?e+QCu7+uiEm34ksJNazhA6i+MQa6KWjDFOR7qKL6wOhgI3vHVQWB2nQ9Fm0c?=
+ =?us-ascii?Q?AZkubqII4PHT+xpbT0eX9cdQDBYJH6p0rG7PatU4Mk7rtvsPRpyjUqPAtmYr?=
+ =?us-ascii?Q?64ZOhZ4e+BlE7VH8Zuzxqb0V3o9iwzbykaInXmWk7o1xufxGg7xKwah9ovdN?=
+ =?us-ascii?Q?VlfGuS0LlffHIwtbhN0UOmxtcrPt0raF0rmb9rrfBwTZsjdZsxLeH4vDWrnR?=
+ =?us-ascii?Q?mx2W9rU0hUXXYmo5nsrR+EUXUfHeZcA3DCGopP+TUA/y1cttVMIPUHtU8d+B?=
+ =?us-ascii?Q?5XeqlsHxNoYnGkVm8rynWZdIm/+UU35GmhXgZwTAZ/+i5Gd4ZAquKn/f5WYb?=
+ =?us-ascii?Q?I3MAH2ynLrhvhksjLe/uMQiM/1ssrKbsV2/9+lAQRXv03Jnhq8DxuvKrgxZe?=
+ =?us-ascii?Q?PlpayXf2d61IPoylZX3aBRJm10un66WoFOmTecwEx4/FLKKjS/PyDpPfXAx3?=
+ =?us-ascii?Q?IwFVuIdNvO1DvQ8ZCPGgC2J3M41UYBPd2fQ1Bs660AvbWgupoCzL/IG8wORd?=
+ =?us-ascii?Q?gCHoo7mELRu036JSCsCpCCuQGGoUyjWcgaVilg9caMM3369RyInu+npDZw0n?=
+ =?us-ascii?Q?HVSseyWZEL48nJQkEvqLmqrKP05xWZ113I69RMuqsHpR4sLShf1OIH8foMOO?=
+ =?us-ascii?Q?3ywnNEAAR85nOj3iv+A+9abLWLq/XgAGW809iBmDKcXYhwu7OX0jVu1VVS7j?=
+ =?us-ascii?Q?vD9szTikVULVUPY+xYIYVuAZ/UN3xCIyp4fxCbBU5lktUtXGTEaid/1YDF4V?=
+ =?us-ascii?Q?2H4cYy4aqCaRQpwGmXsfESafQHt5l7BmyMJtSNYTgQJglxzWge7XVJ5ThwbE?=
+ =?us-ascii?Q?kXem1X3a8w6OB/d2Vs/fWknPe7nmrbKy8bIMFaCLSFRzDxkct73gGua07IaA?=
+ =?us-ascii?Q?PWIpa9rmku4gtSJyQ+7xbAiV7LKnBVXVCmJqDVbPiu/e/6VYUk/guCWouDHG?=
+ =?us-ascii?Q?8lS7yaDAoVfGOfibFMKvckc8NIrZPWbCd7LDgz8zqvg2aBlpLia1eoIZWjRp?=
+ =?us-ascii?Q?PL+ruw9cv+671XTcycElNgt0nwIAuB5f7Fg5AnIkCO2oFEZqUyrlzI2ZW0Vj?=
+ =?us-ascii?Q?xIN5L9Hmw8CP1V2S7XRbXieb8w7C7gd9R9gVaBXWNRKY8Ku1MhMay8CuDvLU?=
+ =?us-ascii?Q?2JCBhqtV7UQKOaJvia1KFG4zD9AO7QpwasDM2dIcjxSpEYlTUhvY3UQtiGZF?=
+ =?us-ascii?Q?74Xn2oCAYdetk0YUDYmGySlA/R6LZCnqsE1/Z+oQ6BWyOteGcfnANdtvmS2E?=
+ =?us-ascii?Q?Vxqv3Jco67gf/XKlevWs+CSAAJ6PgLZ12ZABJqbcXrDM6hS2MmBs/1qtjNRR?=
+ =?us-ascii?Q?QaM9T9vmbF6CGyKN7TpMxjo5ZyKjidiI/Af6n02G6npD+09wj2jZouQppQ9Z?=
+ =?us-ascii?Q?oXQqG18Aug0MXebeJSfR3wSf57cwq2FmqoOPyD/6uc0NKjghccPwoRiwDohC?=
+ =?us-ascii?Q?hQ=3D=3D?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 723b2049-3bae-4155-4ca1-08dc5319961a
+X-MS-Exchange-CrossTenant-Network-Message-Id: f8b3a529-3c57-4c6d-2652-08dc5319958e
 X-MS-Exchange-CrossTenant-AuthSource: LV3PR11MB8767.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Apr 2024 13:34:13.8374
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Apr 2024 13:34:12.9590
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Lc+4q+KFZA+y7tKr7qa8QviS9Ne9CQN38kI3pi45c/IxTXpljybB5rz1wa4vmUPOZhQOS6zyjXAbDCyp6UQrYewSnrXuVHN68+aCHckBXTw=
+X-MS-Exchange-CrossTenant-UserPrincipalName: XVIfv1ojfMbwRM1ytrtWovMTLAA/1wdvs084KVsnp6rY44WVU+k7Kck0ZNkwFsOSgrzir9g9cfm+LXd3m1fi4mducIoflQlWBfk7ZmBPYd8=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR11MB5090
-X-Proofpoint-ORIG-GUID: No_68GtFPpK9C3bU-vIol9EmV2tjwpuq
-X-Proofpoint-GUID: No_68GtFPpK9C3bU-vIol9EmV2tjwpuq
+X-Proofpoint-ORIG-GUID: wPYyc0X0BbOBldztTinf8l5CvzhoUIHI
+X-Proofpoint-GUID: wPYyc0X0BbOBldztTinf8l5CvzhoUIHI
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2024-04-02_06,2024-04-01_01,2023-05-22_02
@@ -125,153 +122,61 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 02 Apr 2024 13:34:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109782
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109781
 
 From: William Lyu <William.Lyu@windriver.com>
 
-There are 2 failed ptest testcases. They fail because they are broken,
-but the fix from the upstream is not yet available in version 1.0.9.
-These testcases are:
--   tests/shell/testcases/sets/reset_command_0
-    Fix from the upstream:
-    https://git.netfilter.org/nftables/commit/?id=7a6089a400a573b9a4fd92f29c00a6be7b8ef269
--   tests/shell/testcases/json/0005secmark_objref_0
-    Fix from the upstream:
-    https://git.netfilter.org/nftables/commit/?id=fff913c1eefbc84eb2d9c52038ef29fe881e9ee9
+Fix the following ptest output format issues:
+
+-   For "sed" command, change "-e" option to "-E" option. I believe the
+    previous "-e" option is a typo based on the manual page of "sed":
+
+        -e script, --expression=script
+            add the script to the commands to be executed
+
+    "-E" option, on the other hand, makes "sed" "use extended regular
+    expressions in the script" according to the manual page.
+
+-   The test result summary line is being treated as both a passed
+    testcase and a failed testcase due to this line containing substring
+    "[OK]" and "[FAILED]". The following is a sample test result summary
+    line:
+
+        I: results: [OK] 379 [SKIPPED] 1 [FAILED] 0 [TOTAL] 380
+
+    The fix is to change run-ptest to look for "I: [OK]" and
+    "W: [FAILED]" when determining which lines correspond to
+    passed/failed testcases.
+
+-   Previously, only "W: [FAILED]" out of the following testcase failure
+    prompts is parsed:
+
+        W: [CHK DUMP]
+        W: [VALGRIND]
+        W: [TAINTED]
+        W: [DUMP FAIL]
+        W: [FAILED]
+
+    Adding parsing for all testcase failure prompts.
 
 Signed-off-by: William Lyu <William.Lyu@windriver.com>
 ---
- ...sets-reset_command_0-for-current-ker.patch | 53 +++++++++++++++++++
- ...-secmark-tests-if-kernel-does-not-su.patch | 46 ++++++++++++++++
- .../recipes-filter/nftables/nftables_1.0.9.bb |  2 +
- 3 files changed, 101 insertions(+)
- create mode 100644 meta-networking/recipes-filter/nftables/nftables/0001-tests-shell-Fix-sets-reset_command_0-for-current-ker.patch
- create mode 100644 meta-networking/recipes-filter/nftables/nftables/0001-tests-shell-skip-secmark-tests-if-kernel-does-not-su.patch
+ meta-networking/recipes-filter/nftables/nftables/run-ptest | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-filter/nftables/nftables/0001-tests-shell-Fix-sets-reset_command_0-for-current-ker.patch b/meta-networking/recipes-filter/nftables/nftables/0001-tests-shell-Fix-sets-reset_command_0-for-current-ker.patch
-new file mode 100644
-index 000000000..164182bb1
---- /dev/null
-+++ b/meta-networking/recipes-filter/nftables/nftables/0001-tests-shell-Fix-sets-reset_command_0-for-current-ker.patch
-@@ -0,0 +1,53 @@
-+From 7a6089a400a573b9a4fd92f29c00a6be7b8ef269 Mon Sep 17 00:00:00 2001
-+From: Phil Sutter <phil@nwl.cc>
-+Date: Thu, 2 Nov 2023 16:02:14 +0100
-+Subject: [PATCH] tests: shell: Fix sets/reset_command_0 for current kernels
-+
-+Since kernel commit 4c90bba60c26 ("netfilter: nf_tables: do not refresh
-+timeout when resetting element"), element reset won't touch expiry
-+anymore. Invert the one check to make sure it remains unaltered, drop
-+the other testing behaviour for per-element timeouts.
-+
-+Signed-off-by: Phil Sutter <phil@nwl.cc>
-+
-+Upstream-Status: Backport
-+[https://git.netfilter.org/nftables/commit/?id=7a6089a400a573b9a4fd92f29c00a6be7b8ef269]
-+
-+Signed-off-by: William Lyu <William.Lyu@windriver.com>
-+---
-+ tests/shell/testcases/sets/reset_command_0 | 10 ++--------
-+ 1 file changed, 2 insertions(+), 8 deletions(-)
-+
-+diff --git a/tests/shell/testcases/sets/reset_command_0 b/tests/shell/testcases/sets/reset_command_0
-+index e663dac8..d38ddb3f 100755
-+--- a/tests/shell/testcases/sets/reset_command_0
-++++ b/tests/shell/testcases/sets/reset_command_0
-+@@ -44,10 +44,10 @@ elem='element t s { 1.0.0.1 . udp . 53 }'
-+ 	grep 'elements = ' | drop_seconds | uniq | wc -l) == 1 ]]
-+ echo OK
-+ 
-+-echo -n "counters and expiry are reset: "
-++echo -n "counters are reset, expiry left alone: "
-+ NEW=$($NFT "get $elem")
-+ grep -q 'counter packets 0 bytes 0' <<< "$NEW"
-+-[[ $(expires_minutes <<< "$NEW") -gt 20 ]]
-++[[ $(expires_minutes <<< "$NEW") -lt 20 ]]
-+ echo OK
-+ 
-+ echo -n "get map elem matches reset map elem: "
-+@@ -80,12 +80,6 @@ OUT=$($NFT reset map t m)
-+ $DIFF -u <(echo "$EXP") <(echo "$OUT")
-+ echo OK
-+ 
-+-echo -n "reset command respects per-element timeout: "
-+-VAL=$($NFT get element t s '{ 2.0.0.2 . tcp . 22 }' | expires_minutes)
-+-[[ $VAL -lt 15 ]]	# custom timeout applies
-+-[[ $VAL -gt 10 ]]	# expires was reset
-+-echo OK
-+-
-+ echo -n "remaining elements are reset: "
-+ OUT=$($NFT list ruleset)
-+ grep -q '2.0.0.2 . tcp . 22 counter packets 0 bytes 0' <<< "$OUT"
-+-- 
-+2.43.0
-+
-diff --git a/meta-networking/recipes-filter/nftables/nftables/0001-tests-shell-skip-secmark-tests-if-kernel-does-not-su.patch b/meta-networking/recipes-filter/nftables/nftables/0001-tests-shell-skip-secmark-tests-if-kernel-does-not-su.patch
-new file mode 100644
-index 000000000..2a966ab44
---- /dev/null
-+++ b/meta-networking/recipes-filter/nftables/nftables/0001-tests-shell-skip-secmark-tests-if-kernel-does-not-su.patch
-@@ -0,0 +1,46 @@
-+From fff913c1eefbc84eb2d9c52038ef29fe881e9ee9 Mon Sep 17 00:00:00 2001
-+From: Pablo Neira Ayuso <pablo@netfilter.org>
-+Date: Tue, 21 Nov 2023 21:16:38 +0100
-+Subject: [PATCH] tests: shell: skip secmark tests if kernel does not support
-+ it
-+
-+Signed-off-by: Pablo Neira Ayuso <pablo@netfilter.org>
-+
-+Upstream-Status: Backport
-+[https://git.netfilter.org/nftables/commit/?id=fff913c1eefbc84eb2d9c52038ef29fe881e9ee9]
-+
-+Signed-off-by: William Lyu <William.Lyu@windriver.com>
-+---
-+ tests/shell/features/secmark.nft                | 7 +++++++
-+ tests/shell/testcases/json/0005secmark_objref_0 | 1 +
-+ 2 files changed, 8 insertions(+)
-+ create mode 100644 tests/shell/features/secmark.nft
-+
-+diff --git a/tests/shell/features/secmark.nft b/tests/shell/features/secmark.nft
-+new file mode 100644
-+index 00000000..ccbb572f
-+--- /dev/null
-++++ b/tests/shell/features/secmark.nft
-+@@ -0,0 +1,7 @@
-++# fb961945457f ("netfilter: nf_tables: add SECMARK support")
-++# v4.20-rc1~14^2~125^2~5
-++table inet x {
-++	secmark ssh_server {
-++		"system_u:object_r:ssh_server_packet_t:s0"
-++	}
-++}
-+diff --git a/tests/shell/testcases/json/0005secmark_objref_0 b/tests/shell/testcases/json/0005secmark_objref_0
-+index 992d1b00..5c44f093 100755
-+--- a/tests/shell/testcases/json/0005secmark_objref_0
-++++ b/tests/shell/testcases/json/0005secmark_objref_0
-+@@ -1,6 +1,7 @@
-+ #!/bin/bash
-+ 
-+ # NFT_TEST_REQUIRES(NFT_TEST_HAVE_json)
-++# NFT_TEST_REQUIRES(NFT_TEST_HAVE_secmark)
-+ 
-+ set -e
-+ 
-+-- 
-+2.43.0
-+
-diff --git a/meta-networking/recipes-filter/nftables/nftables_1.0.9.bb b/meta-networking/recipes-filter/nftables/nftables_1.0.9.bb
-index 906d1b4f6..ad99a80a6 100644
---- a/meta-networking/recipes-filter/nftables/nftables_1.0.9.bb
-+++ b/meta-networking/recipes-filter/nftables/nftables_1.0.9.bb
-@@ -12,6 +12,8 @@ DEPENDS = "libmnl libnftnl bison-native \
-            ${@bb.utils.contains('PACKAGECONFIG', 'mini-gmp', '', 'gmp', d)}"
+diff --git a/meta-networking/recipes-filter/nftables/nftables/run-ptest b/meta-networking/recipes-filter/nftables/nftables/run-ptest
+index 27d780ace..3217c743d 100644
+--- a/meta-networking/recipes-filter/nftables/nftables/run-ptest
++++ b/meta-networking/recipes-filter/nftables/nftables/run-ptest
+@@ -4,7 +4,7 @@ NFTABLESLIB=@libdir@/nftables
+ cd ${NFTABLESLIB}/ptest
  
- SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.xz \
-+           file://0001-tests-shell-Fix-sets-reset_command_0-for-current-ker.patch \
-+           file://0001-tests-shell-skip-secmark-tests-if-kernel-does-not-su.patch \
-            file://run-ptest \
-           "
- SRC_URI[sha256sum] = "a3c304cd9ba061239ee0474f9afb938a9bb99d89b960246f66f0c3a0a85e14cd"
+ LOG="${NFTABLESLIB}/ptest/nftables_ptest_$(date +%Y%m%d-%H%M%S).log"
+-tests/shell/run-tests.sh -v | sed  -e '/OK/ s/^/PASS: / ; /FAILED/ s/^/FAIL: /' | sed "s,\x1B\[[0-9;]*[a-zA-Z],,g" | tee -a ${LOG}
++tests/shell/run-tests.sh -v | sed -E '/I: \[OK\]/ s/^/PASS: / ; /W: \[(CHK DUMP|VALGRIND|TAINTED|DUMP FAIL|FAILED)\]/ s/^/FAIL: /' | sed "s,\x1B\[[0-9;]*[a-zA-Z],,g" | tee -a ${LOG}
+ 
+ passed=`grep PASS: ${LOG}|wc -l`
+ failed=`grep FAIL: ${LOG}|wc -l`
 -- 
 2.43.0
 
