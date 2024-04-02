@@ -2,102 +2,69 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D504CD1284
-	for <webhook@archiver.kernel.org>; Tue,  2 Apr 2024 05:54:58 +0000 (UTC)
-Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
- by mx.groups.io with SMTP id smtpd.web10.5616.1712037297414462964
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 25B48C6FD1F
+	for <webhook@archiver.kernel.org>; Tue,  2 Apr 2024 08:04:39 +0000 (UTC)
+Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
+ by mx.groups.io with SMTP id smtpd.web10.7049.1712045069816765157
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 01 Apr 2024 22:54:57 -0700
+ Tue, 02 Apr 2024 01:04:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
-Received: from fwd86.aul.t-online.de (fwd86.aul.t-online.de [10.223.144.112])
-	by mailout05.t-online.de (Postfix) with SMTP id 925BE5D60
-	for <openembedded-devel@lists.openembedded.org>; Tue,  2 Apr 2024 07:54:55 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.154.174.110]) by fwd86.t-online.de
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
+Received: from fwd76.aul.t-online.de (fwd76.aul.t-online.de [10.223.144.102])
+	by mailout03.t-online.de (Postfix) with SMTP id AE8113681A
+	for <openembedded-devel@lists.openembedded.org>; Tue,  2 Apr 2024 10:04:12 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.154.174.110]) by fwd76.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1rrX6i-16LTf70; Tue, 2 Apr 2024 07:54:52 +0200
+	esmtp id 1rrZ7q-1XJe4H0; Tue, 2 Apr 2024 10:04:10 +0200
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCHv3] libjxl: add recipe
-Date: Tue,  2 Apr 2024 07:55:10 +0200
-Message-ID: <20240402055510.11498-1-f_l_k@t-online.de>
+Subject: [meta-oe][PATCH] highway: add recipe
+Date: Tue,  2 Apr 2024 10:04:26 +0200
+Message-ID: <20240402080426.28248-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1712037292-A37FD941-57000662/0/0 CLEAN NORMAL
-X-TOI-MSGID: f53c9ba4-31f8-4353-a4d1-3209ca87d2a7
+X-TOI-EXPURGATEID: 150726::1712045050-E9C29D1B-01EAE84A/0/0 CLEAN NORMAL
+X-TOI-MSGID: a494e061-51a3-4fef-8cf5-5c1b4d3e40e1
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 02 Apr 2024 05:54:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109776
+ <openembedded-devel@lists.openembedded.org>; Tue, 02 Apr 2024 08:04:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109777
 
-Import this recipe from meta-wayland, because it is a prerequisite
-for the Gnome desktop. The recently updated gnome-backgrounds package
-has converted most of the backgrounds to jxl and to keep them usable
-the gdk-pixbuf-loader for jpegxl must be provided. This is included
-in the libjxl package itself.
+add google highway as a dependency for libjxl
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../libjxl/libjxl_0.10.2.bb                   | 42 +++++++++++++++++++
- 1 file changed, 42 insertions(+)
- create mode 100644 meta-oe/recipes-multimedia/libjxl/libjxl_0.10.2.bb
+ meta-oe/recipes-extended/highway/highway.1.1.0.bb | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/highway/highway.1.1.0.bb
 
-diff --git a/meta-oe/recipes-multimedia/libjxl/libjxl_0.10.2.bb b/meta-oe=
-/recipes-multimedia/libjxl/libjxl_0.10.2.bb
+diff --git a/meta-oe/recipes-extended/highway/highway.1.1.0.bb b/meta-oe/=
+recipes-extended/highway/highway.1.1.0.bb
 new file mode 100644
-index 000000000..0c4f79fdb
+index 000000000..ec9d8f742
 --- /dev/null
-+++ b/meta-oe/recipes-multimedia/libjxl/libjxl_0.10.2.bb
-@@ -0,0 +1,42 @@
-+SUMMARY =3D "Reference implementation of JPEG XL (encoder and decoder)"
-+HOMEPAGE =3D "https://github.com/libjxl/libjxl/"
++++ b/meta-oe/recipes-extended/highway/highway.1.1.0.bb
+@@ -0,0 +1,15 @@
++SUMMARY =3D "Highway is a C++ library for SIMD (Single Instruction, Mult=
+iple Data)"
++HOMEPAGE =3D "https://github.com/google/highway/"
 +
-+LICENSE =3D "BSD-3-Clause"
-+LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D6a905a337cc228a1f68f0b5416f52=
-a7f"
++LICENSE =3D "Apache-2.0"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D2b42edef8fa55315f34f2370b4715=
+ca9"
 +
-+inherit cmake pkgconfig mime
++inherit cmake
 +
-+DEPENDS =3D "highway brotli"
++SRC_URI =3D "git://github.com/google/highway.git;protocol=3Dhttps;branch=
+=3Dmaster"
 +
-+SRC_URI =3D "gitsm://github.com/libjxl/libjxl.git;protocol=3Dhttps;nobra=
-nch=3D1"
-+
-+SRCREV =3D "e1489592a770b989303b0edc5cc1dc447bbe0515"
++SRCREV =3D "58b52a717469e62b2d9b8eaa2f5dddb44d4a4cbf"
 +S =3D "${WORKDIR}/git"
 +
-+EXTRA_OECMAKE =3D " \
-+	-DCMAKE_BUILD_TYPE=3DRelease \
-+	-DJPEGXL_ENABLE_PLUGINS=3DON \
-+	-DBUILD_TESTING=3DOFF \
-+	-DJPEGXL_WARNINGS_AS_ERRORS=3DOFF \
-+	-DJPEGXL_ENABLE_SIZELESS_VECTORS=3DON \
-+	-DJPEGXL_ENABLE_SJPEG=3DOFF \
-+	-DJPEGXL_ENABLE_BENCHMARK=3DOFF \
-+	-DJPEGXL_ENABLE_EXAMPLES=3DOFF \
-+	-DJPEGXL_ENABLE_MANPAGES=3DOFF \
-+	-DJPEGXL_ENABLE_SKCMS=3DON \
-+	-DJPEGXL_FORCE_SYSTEM_BROTLI=3DON \
-+	-DJPEGXL_FORCE_SYSTEM_HWY=3DON \
-+	-DJPEGXL_ENABLE_JNI=3DOFF \
-+	-DJPEGXL_ENABLE_TCMALLOC=3DOFF \
-+	-DJPEGXL_ENABLE_TOOLS=3DOFF \
-+"
-+
-+PACKAGECONFIG ?=3D "mime gdk-pixbuf-loader"
-+PACKAGECONFIG[gdk-pixbuf-loader] =3D "-DJPEGXL_ENABLE_PLUGIN_GDKPIXBUF=3D=
-ON,-DJPEGXL_ENABLE_PLUGIN_GDKPIXBUF=3DOFF,gdk-pixbuf"
-+PACKAGECONFIG[gimp] =3D "-DJPEGXL_ENABLE_PLUGIN_GIMP210=3DON,-DJPEGXL_EN=
-ABLE_PLUGIN_GIMP210=3DOFF,gimp"
-+PACKAGECONFIG[mime] =3D "-DJPEGXL_ENABLE_PLUGIN_MIME=3DON,-DJPEGXL_ENABL=
-E_PLUGIN_MIME=3DOFF"
-+
-+FILES:${PN} +=3D "${libdir}/gdk-pixbuf-2.0 ${datadir}"
-+
++EXTRA_OECMAKE =3D "-DBUILD_TESTING=3D0 -DCMAKE_BUILD_TYPE=3DRelease"
 +CXXFLAGS:append:arm =3D " -mfp16-format=3Dieee"
-+
 --=20
 2.44.0
 
