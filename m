@@ -1,123 +1,204 @@
-Return-Path: <chaitanya.vadrevu@ni.com>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EF94CCD1284
-	for <webhook@archiver.kernel.org>; Thu,  4 Apr 2024 12:52:23 +0000 (UTC)
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com (NAM11-DM6-obe.outbound.protection.outlook.com [40.107.223.77])
- by mx.groups.io with SMTP id smtpd.web10.37208.1712235139638213102
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3FB3ECD1292
+	for <webhook@archiver.kernel.org>; Thu,  4 Apr 2024 16:39:15 +0000 (UTC)
+Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com [209.85.167.44])
+ by mx.groups.io with SMTP id smtpd.web11.43393.1712248753567760270
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Apr 2024 05:52:19 -0700
+ Thu, 04 Apr 2024 09:39:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="dkim: body hash did not verify" header.i=@ni.com header.s=selector1 header.b=F4YpknKw;
- spf=pass (domain: ni.com, ip: 40.107.223.77, mailfrom: chaitanya.vadrevu@ni.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Tm7A1tMeXbhjV6RfCxypCYF72FwbUGIoig4q5HLsmmcddP/3KaSZ3wsrveR9we9J0kp9ETN91CGhumCsMkK9KfwWAlMfJXZMLptJYodBAN8IoWhgp5cZU0UYHwOI/IQsb4vejYvAN2NZdtb4E7dLesc7XS3wv1MjLLCVdiu2pfVEyV1Lbef9YaSWwW/AYhmKo8bq2/nt7vrAriyzFWP0iYDWgG0aBMX0VyKYgzUCZha5m4f9yxgvpKMtLSn5VaWXQpWHUgIUVIp2su0Ct5LdMwiIt+HMS3VJl8pG2+pOL8SdRK+PhMBAAUqoP0nR8THt6f5yusLE/zu4HdfzoNmvSQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=kdcYDiVuKGtdoVrxvNVS3e/lfNxUhEQJ9ERNSo0u8Bk=;
- b=WmhUv2KKerQ7+xyJuXWDUh8TUYd1kvvH2qsdtCRKVOkuHyPIyHezaCMxVrenTBPOJZjptL+e+ABGRocIP2dX+F1XUpgGvyX9RfdnqOCGdvsvBBpcYDP6sfBHilxY77IraQ8hp+P/s+haQDIgQsQkeJCdtudm96Ccr7G9jnVTL8HeTbRRFXYSWxZpBNcDuPRlk7PN1/oPAzzUIZoHPf7/dcxiu+hKtl8oYR/y6Xpx2y4P7cKyoftNGbdp3xIv0GEg66X5YmgTgpe0DCz3GjIIGxQrX4mPCGRaQxLOWoFY7cfwkm+6JbqGOVs/QNz+RS8A4Hptftmk/onT3UXWPwyeSg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 130.164.94.73) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=ni.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=ni.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ni.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kdcYDiVuKGtdoVrxvNVS3e/lfNxUhEQJ9ERNSo0u8Bk=;
- b=F4YpknKwRJmExhFFEI396dtFAbvZ3qIjIM0gR68POkfsrHrsPkbeaRj7GSN1mJjb0QQIvOUOz4/qU3/0foah5pXO3IzrQT77eoUA1R+SzZZmEss/MmTnLqpPswe5fMABt1pn8dOB1vM0Z4KUfexyj2g42BGZ8kxUJ9j7POTFeHw=
-Received: from BN9PR03CA0629.namprd03.prod.outlook.com (2603:10b6:408:106::34)
- by BL3PR04MB7995.namprd04.prod.outlook.com (2603:10b6:208:346::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.46; Thu, 4 Apr
- 2024 12:52:17 +0000
-Received: from BN2PEPF000044A1.namprd02.prod.outlook.com
- (2603:10b6:408:106:cafe::b5) by BN9PR03CA0629.outlook.office365.com
- (2603:10b6:408:106::34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.46 via Frontend
- Transport; Thu, 4 Apr 2024 12:52:17 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 130.164.94.73)
- smtp.mailfrom=ni.com; dkim=none (message not signed) header.d=none;dmarc=pass
- action=none header.from=ni.com;
-Received-SPF: Pass (protection.outlook.com: domain of ni.com designates
- 130.164.94.73 as permitted sender) receiver=protection.outlook.com;
- client-ip=130.164.94.73; helo=us-aus-excas-p1.ni.corp.natinst.com; pr=C
-Received: from us-aus-excas-p1.ni.corp.natinst.com (130.164.94.73) by
- BN2PEPF000044A1.mail.protection.outlook.com (10.167.243.152) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7452.22 via Frontend Transport; Thu, 4 Apr 2024 12:52:16 +0000
-Received: from us-aus-excas-p1.ni.corp.natinst.com (130.164.68.17) by
- us-aus-excas-p1.ni.corp.natinst.com (130.164.68.17) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1258.28; Thu, 4 Apr 2024 07:52:15 -0500
-Received: from cvadrevu-p620.natinst.com (172.18.68.32) by
- us-aus-excas-p1.ni.corp.natinst.com (130.164.68.17) with Microsoft SMTP
- Server id 15.2.1258.28 via Frontend Transport; Thu, 4 Apr 2024 07:52:15 -0500
-From: Chaitanya Vadrevu <chaitanya.vadrevu@ni.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Chaitanya Vadrevu <chaitanya.vadrevu@ni.com>
-Subject: [meta-oe][PATCH] mariadb: Use inherit_defer for native class
-Date: Thu, 4 Apr 2024 07:52:10 -0500
-Message-ID: <20240404125210.3365296-1-chaitanya.vadrevu@ni.com>
-X-Mailer: git-send-email 2.34.1
+ dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=AC8VZDVq;
+ spf=pass (domain: smile.fr, ip: 209.85.167.44, mailfrom: yoann.congal@smile.fr)
+Received: by mail-lf1-f44.google.com with SMTP id 2adb3069b0e04-516d04fc04bso1188672e87.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Apr 2024 09:39:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1712248751; x=1712853551; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=6nAjUCEebgkPZgUAAlndD7wito3vwkiXcb3eI7ZetOY=;
+        b=AC8VZDVqDSHlSojUP/WO2s5xg+herQurXYey2kLMXfrwTyF66R2FMy9UiC+q6HTQsm
+         J3VBTjoVt24vE6ZD6yQ5vu4WdlsUX9rEH5lzGbwUSKHCTeBdy/vBTK/t9gjPe+u688HK
+         JTZ0LfiXTtHUtoASsJoC2HGo+UCci48+Jl6AJ7L6Pvi9QI21Gqt1UUtXJazL+GUZwoqJ
+         Mi/gtxl2tYSFAQY7oVFXAIIpc0EKPd3shKebPO29xGoLFKRki+yY5Grx4D6d3xF9PZx1
+         BKA1WZGnAtOJ5VQbOtvm8/w/aMKP1otTdnyhnaFnbUI86ltGWzTBM4AlqrxqU8yQh+Ug
+         vuIw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1712248751; x=1712853551;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=6nAjUCEebgkPZgUAAlndD7wito3vwkiXcb3eI7ZetOY=;
+        b=AzvSNBDDAGpTuDWcBzbKHhBtEJ7AlhaqBL7lZJpgnINh8JTm0gEXje7V/Irjw04kZj
+         UsqNWqms+hdz2FUj67uQF3unUv4sHnOIV7VWQ8xDRpaQ1GIsohp7cXx04OGHLs03cNJD
+         MMYKLWtqaQ4Er/6nNFJpssi7yQaO6tmu3l6as/eIxw7XRWhB7LWhRLbOV1SiwSIitmZQ
+         Ux1NWn89pUL4BIE68P/oDnqoiyXurCzhMLMDph8p2iRZxg60Dhk7zAlFv3rDgY/R4QM8
+         BweBS2GjnDi3owcq/hT7rZ0c7+9Sg3biLmOjjeZ/deMtrVL97Ovif/NnovgkZEywOMS8
+         3P2Q==
+X-Gm-Message-State: AOJu0YzNu44nhz+7O9eZUXiNQknXKqoouox94S1Rq1GGaNzOJ6pU1EJ6
+	Oh9Zu5lZ3h9lprNT0PTMn4DdNm2k0CEEzwUt++UY/BFsHc6wJP0fVJX62tuL1wEtk9PnpeKSyVy
+	EvZwB7GDp5j1u+Yb7F7zvYP4N2iF9EfwI/Ox5+A==
+X-Google-Smtp-Source: AGHT+IHGiHFFE1tFu3pgD1ZomK+u3QIxlZGjh6ndhlyigElf2t4J1BMZ76mYcQDOCwXhsJybNMdeaDvF/WXTiuTSch4=
+X-Received: by 2002:ac2:43b9:0:b0:516:d26e:ea6f with SMTP id
+ t25-20020ac243b9000000b00516d26eea6fmr125034lfl.35.1712248751446; Thu, 04 Apr
+ 2024 09:39:11 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF000044A1:EE_|BL3PR04MB7995:EE_
-X-MS-Office365-Filtering-Correlation-Id: e0df6053-9813-4a14-a107-08dc54a60e72
-x-ni-monitor: EOP Exclude NI Domains ETR True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	lOtT+XmaSwnu1njd4++wAY253suLtOoFXxnIG6092rmsyokFjLeU5xu8djKEfXGoq/EirxTiaihYu2Oaccj3StPG6/M9Ze+Pc8VcmtD5VpPDk3TauKCZ6zjfRRqjokw8yIT3u4c5zvaQHdeO8N0roP1DB0FtJIikf0KFpEADAwPaBaqtvRVBWrVm+ZawzAXeGGvjuer7ucaBmtgzx3S1Z1VdyF7E3lbupeQqoVdiA+AmnYCLx4KVp9Cxt/GOL0vrsZIzda6LxWGY+uL7L/vX3kx2rfjITkc7HCh21J6AMitD22+VVV31ZzunRkGyn+mVel4wcuOd1X5txvcUt5Bm6TzxcXR+kirhihbvDFeppajENl7c4u7qiFmaw/1s3rZJtg+28hu4VV0Ro5e0JEhvG9LD+HtPhgRSTROymrnsORPR8c0MtY3wjNWcgrBSTs2Hi+pEJZs6NpjoxvLD2RLIW4uJEbc8ak1vTzt6XRZMABLwFPEdbnS09kfK35qeWkZXOlyeTmAlous7zaMLCfETT9kfgXjj4nRGlKyRcmLUEHN/nviKlrbwOwGW5gSppJgZSousbeyVPJijZf5Pw9e9uoyhOpzYuk1Cw+DdiodPDVUF0p7hWTSXyKSsKDnf9gFQ0R0TaAiJNO6g1RFZ/eo9tQC2ik56xhW+eTcniEwK7abASuHY5bNcuhno3Y7rBs1QAMVSlzJU5bux/UPdUp4IJV+o5PQbUqrDR9OZ4+ONxH4Irr3RXLRFCPBLebpIZ8Ru
-X-Forefront-Antispam-Report: 
-	CIP:130.164.94.73;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:us-aus-excas-p1.ni.corp.natinst.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230031)(36860700004)(376005)(82310400014)(1800799015);DIR:OUT;SFP:1101;
-X-OriginatorOrg: ni.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Apr 2024 12:52:16.2371
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e0df6053-9813-4a14-a107-08dc54a60e72
-X-MS-Exchange-CrossTenant-Id: 87ba1f9a-44cd-43a6-b008-6fdb45a5204e
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=87ba1f9a-44cd-43a6-b008-6fdb45a5204e;Ip=[130.164.94.73];Helo=[us-aus-excas-p1.ni.corp.natinst.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	BN2PEPF000044A1.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL3PR04MB7995
+References: <20240404125210.3365296-1-chaitanya.vadrevu@ni.com>
+In-Reply-To: <20240404125210.3365296-1-chaitanya.vadrevu@ni.com>
+From: Yoann CONGAL <yoann.congal@smile.fr>
+Date: Thu, 4 Apr 2024 18:38:45 +0200
+Message-ID: <CAMSfU+4f33EZozrWGMLn96i=hTxSXDgp6=5o_006L+XCs1Wp7g@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] mariadb: Use inherit_defer for native class
+To: Chaitanya Vadrevu <chaitanya.vadrevu@ni.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000992b96061547fa2a"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 04 Apr 2024 12:52:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109797
+ <openembedded-devel@lists.openembedded.org>; Thu, 04 Apr 2024 16:39:15 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109798
 
-Since useradd.bbclass is using inherit_defer in oe-core, some classes are n=
-ow
-appearing after native resulting in QA errors
+--000000000000992b96061547fa2a
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+Le jeu. 4 avr. 2024 =C3=A0 14:52, Chaitanya Vadrevu <chaitanya.vadrevu@ni.c=
+om> a
+=C3=A9crit :
+
+> Since useradd.bbclass is using inherit_defer in oe-core, some classes are
+> now
+> appearing after native resulting in QA errors
+>
+> QA Issue: mariadb-native: native/nativesdk class is not inherited last,
+> this can result in unexpected behaviour. Classes inherited after
+> native/nativesdk: useradd-staticids.bbclass [native-last]
+>
+> Signed-off-by: Chaitanya Vadrevu <chaitanya.vadrevu@ni.com>
+>
+
+Hi!
+
+I believed I fixed this on master since
+https://git.openembedded.org/meta-openembedded/commit/?id=3D065d6496e4af178=
+e5b1f8e4e3c5f17ac587717a6
+
+I just tested this again : no QA issue on master on my local build.
+Are you targeting a non-master branch?
+
+
+> ---
+>  meta-oe/recipes-dbs/mysql/mariadb-native_10.11.7.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.11.7.bb
+> b/meta-oe/recipes-dbs/mysql/mariadb-native_10.11.7.bb
+> index 578357b48..04380eb43 100644
+> --- a/meta-oe/recipes-dbs/mysql/mariadb-native_10.11.7.bb
+> +++ b/meta-oe/recipes-dbs/mysql/mariadb-native_10.11.7.bb
+> @@ -1,5 +1,5 @@
+>  require mariadb.inc
+> -inherit native
+> +inherit_defer native
+>
+>  PROVIDES +=3D "mysql5-native"
+>  DEPENDS =3D "ncurses-native zlib-native bison-native libpcre2-native \
+> --
+> 2.34.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#109797):
+> https://lists.openembedded.org/g/openembedded-devel/message/109797
+> Mute This Topic: https://lists.openembedded.org/mt/105327970/4316185
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> yoann.congal@smile.fr]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
+
+--=20
+Yoann Congal
+Smile ECS - Tech expert
+
+--000000000000992b96061547fa2a
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">Le=C2=A0jeu. 4 avr. 2024 =C3=A0=C2=A014:5=
+2, Chaitanya Vadrevu &lt;<a href=3D"mailto:chaitanya.vadrevu@ni.com" target=
+=3D"_blank">chaitanya.vadrevu@ni.com</a>&gt; a =C3=A9crit=C2=A0:</div><div =
+class=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=3D"margin:0px=
+ 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Sin=
+ce useradd.bbclass is using inherit_defer in oe-core, some classes are now<=
+br>
+appearing after native resulting in QA errors<br>
+<br>
 QA Issue: mariadb-native: native/nativesdk class is not inherited last, thi=
 s can result in unexpected behaviour. Classes inherited after native/native=
-sdk: useradd-staticids.bbclass [native-last]
+sdk: useradd-staticids.bbclass [native-last]<br>
+<br>
+Signed-off-by: Chaitanya Vadrevu &lt;<a href=3D"mailto:chaitanya.vadrevu@ni=
+.com" target=3D"_blank">chaitanya.vadrevu@ni.com</a>&gt;<br>
+</blockquote><div><br></div><div>Hi!</div><div><br></div><div>I believed I =
+fixed this on master since <a href=3D"https://git.openembedded.org/meta-ope=
+nembedded/commit/?id=3D065d6496e4af178e5b1f8e4e3c5f17ac587717a6">https://gi=
+t.openembedded.org/meta-openembedded/commit/?id=3D065d6496e4af178e5b1f8e4e3=
+c5f17ac587717a6</a></div><div><br></div><div>I just tested this again : no =
+QA issue on master on my local build.</div><div>Are you targeting a non-mas=
+ter branch?</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
+-left:1ex">---<br>
+=C2=A0meta-oe/recipes-dbs/mysql/<a href=3D"http://mariadb-native_10.11.7.bb=
+" rel=3D"noreferrer" target=3D"_blank">mariadb-native_10.11.7.bb</a> | 2 +-=
+<br>
+=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
+<br>
+diff --git a/meta-oe/recipes-dbs/mysql/<a href=3D"http://mariadb-native_10.=
+11.7.bb" rel=3D"noreferrer" target=3D"_blank">mariadb-native_10.11.7.bb</a>=
+ b/meta-oe/recipes-dbs/mysql/<a href=3D"http://mariadb-native_10.11.7.bb" r=
+el=3D"noreferrer" target=3D"_blank">mariadb-native_10.11.7.bb</a><br>
+index 578357b48..04380eb43 100644<br>
+--- a/meta-oe/recipes-dbs/mysql/<a href=3D"http://mariadb-native_10.11.7.bb=
+" rel=3D"noreferrer" target=3D"_blank">mariadb-native_10.11.7.bb</a><br>
++++ b/meta-oe/recipes-dbs/mysql/<a href=3D"http://mariadb-native_10.11.7.bb=
+" rel=3D"noreferrer" target=3D"_blank">mariadb-native_10.11.7.bb</a><br>
+@@ -1,5 +1,5 @@<br>
+=C2=A0require mariadb.inc<br>
+-inherit native<br>
++inherit_defer native<br>
+<br>
+=C2=A0PROVIDES +=3D &quot;mysql5-native&quot;<br>
+=C2=A0DEPENDS =3D &quot;ncurses-native zlib-native bison-native libpcre2-na=
+tive \<br>
+-- <br>
+2.34.1<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#109797): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/109797" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/109797</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/105327970/431=
+6185" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/105327970/4316185</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:yoann.congal@smile.fr" t=
+arget=3D"_blank">yoann.congal@smile.fr</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div><br clear=3D"all"><br><span class=3D"gmail_signature_pre=
+fix">-- </span><br><div dir=3D"ltr" class=3D"gmail_signature"><div dir=3D"l=
+tr"><font face=3D"Raleway, regular">Yoann Congal</font><div><font face=3D"R=
+aleway, regular">Smile ECS - Tech expert<br></font></div></div></div></div>
 
-Signed-off-by: Chaitanya Vadrevu <chaitanya.vadrevu@ni.com>
----
- meta-oe/recipes-dbs/mysql/mariadb-native_10.11.7.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.11.7.bb b/meta-oe/=
-recipes-dbs/mysql/mariadb-native_10.11.7.bb
-index 578357b48..04380eb43 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb-native_10.11.7.bb
-+++ b/meta-oe/recipes-dbs/mysql/mariadb-native_10.11.7.bb
-@@ -1,5 +1,5 @@
- require mariadb.inc
--inherit native
-+inherit_defer native
-=20
- PROVIDES +=3D "mysql5-native"
- DEPENDS =3D "ncurses-native zlib-native bison-native libpcre2-native \
---=20
-2.34.1
-
+--000000000000992b96061547fa2a--
 
