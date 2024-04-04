@@ -1,92 +1,112 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <peter.marko@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C315ACD1288
-	for <webhook@archiver.kernel.org>; Thu,  4 Apr 2024 20:35:53 +0000 (UTC)
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
- by mx.groups.io with SMTP id smtpd.web10.3322.1712262949316404103
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 339A0CD1292
+	for <webhook@archiver.kernel.org>; Thu,  4 Apr 2024 21:19:54 +0000 (UTC)
+Received: from mta-65-227.siemens.flowmailer.net (mta-65-227.siemens.flowmailer.net [185.136.65.227])
+ by mx.groups.io with SMTP id smtpd.web10.4379.1712265590049073630
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Apr 2024 13:35:49 -0700
+ Thu, 04 Apr 2024 14:19:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=MPRbDmMk;
- spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-1e0878b76f3so12705535ad.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Apr 2024 13:35:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1712262948; x=1712867748; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=wz5v+HoZSEKWEJ4v2J0i18Lu78LTo719a17Vb5kmLb4=;
-        b=MPRbDmMkozXO5WejWVMaFp/e18BPj8kHSQ5RXRvLtaLR5RLkqRzX6N+Yh3PQrWtpcg
-         BtPzT3ug/1SjRPqWAA5utWwMb1YPsH6VnBPNLzkS4RNmM9oYhzcAXPJBTsxUWwEpqrtM
-         RSoXIUQkxSBrBnvATbvjrsW7PkUQE18RAkBjC3xG/vOWifVp1shiEUtlo4R60RM3mWj6
-         hBbP6GcJjCvNLG1wk/W8p7uTwEl1xthFYRRzrCcqZRvlDWyEffYPK6mGtZcVauo9u/sE
-         mY7bhdFPYV5js5Vxu02fFNwZ1YLArwsS/xZmKs8qufu/6Lxd3qsIeASlZQqEK4QXKshi
-         9tYg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1712262948; x=1712867748;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=wz5v+HoZSEKWEJ4v2J0i18Lu78LTo719a17Vb5kmLb4=;
-        b=IBgqZYwsotzahJRtJnpj1eLUMqGQ9A5kFDCKdGA5poNkpLxfdE23nxwGFdCyZArVrS
-         vIqHeYUc+d32PyU0MHpa6zRhtW5E5phzZWz+BSlhskDCUnw+JH89kKW0U9iU71fCmJET
-         W9W/XKu1vbBL+pZKB1ocTv01EJ8ZR7Xx+q+EOeDdotDPvSP1vQAD9udljpaI9hXu36Wc
-         p0Lei1Bza2RNRfiWK0C6G+jcElET26IIo3QNR2BeoksyZ1KLbfjT96qa52vkAkV9vZuQ
-         kirmwgr/8RA17NqhdwYt4RUSBy6ftcWVWrVe6/8t7Y9oCBc4G82SOx2kq31sUQHXBPJm
-         lz8w==
-X-Gm-Message-State: AOJu0YwTVGyDjzRShNS3UgynXwVtv8Tq81qUGh/SFiNiPMcgl5G9HHvK
-	yeJX+APoN1It0I4UZgntlVvU6L9EahOOgVDEEv/4SGkPyOZRfjBRMh38bTvU
-X-Google-Smtp-Source: AGHT+IHXkagkalT3N5OSX9H/vBc0cgzEXRfOJNEt3NV7Bd/pMlAJ2EAiD4FwqseAcSMK3EOSh8tJMA==
-X-Received: by 2002:a17:902:c405:b0:1e2:a077:1c8e with SMTP id k5-20020a170902c40500b001e2a0771c8emr632902plk.26.1712262948318;
-        Thu, 04 Apr 2024 13:35:48 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::5077])
-        by smtp.gmail.com with ESMTPSA id v12-20020a170902d08c00b001e06c1eee22sm39764plv.74.2024.04.04.13.35.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 04 Apr 2024 13:35:48 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+ dkim=pass header.i=peter.marko@siemens.com header.s=fm1 header.b=nXtwDle/;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.65.227, mailfrom: fm-256628-202404042119461a0a8f6ca3f8374c2f-7hrwbe@rts-flowmailer.siemens.com)
+Received: by mta-65-227.siemens.flowmailer.net with ESMTPSA id 202404042119461a0a8f6ca3f8374c2f
+        for <openembedded-devel@lists.openembedded.org>;
+        Thu, 04 Apr 2024 23:19:47 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
+ d=siemens.com; i=peter.marko@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=DsZauLax8Zqw7v+hqe2Rk0ifJGbIpmjJsJR28u/gOuQ=;
+ b=nXtwDle/kNMb+hgb4epweujxG39nkrUftW1FIJXhrW/jkrPU2E6q22ehy66fh0rTqaaDNo
+ byZhcUy1R/XgpSs9+21pXTomjkjbraLJzJfc69ubq6UyOX2PJLF3d2VrLFLjKNOJF1CeECey
+ nv71VUAY9+0Bt/PxcT9DiU8SRGlrA=;
+From: Peter Marko <peter.marko@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][PATCH 1/5] python3-pydantic-core: Enable benchmark tests
-Date: Thu,  4 Apr 2024 13:35:42 -0700
-Message-ID: <20240404203546.285796-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.44.0
+Cc: Peter Marko <peter.marko@siemens.com>
+Subject: [meta-oe][PATCH] syslog-ng: fix build without ipv6 in distro features
+Date: Thu,  4 Apr 2024 23:18:57 +0200
+Message-Id: <20240404211857.105186-1-peter.marko@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-256628:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 04 Apr 2024 20:35:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109802
+ <openembedded-devel@lists.openembedded.org>; Thu, 04 Apr 2024 21:19:54 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109807
 
-Add missing dependencies for additional ptests
+From: Peter Marko <peter.marko@siemens.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Sumbitted to https://github.com/syslog-ng/syslog-ng/pull/4880
+
+Signed-off-by: Peter Marko <peter.marko@siemens.com>
 ---
- .../recipes-devtools/python/python3-pydantic-core_2.16.3.bb    | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ ...ipv6-code-with-SYSLOG_NG_ENABLE_IPV6.patch | 40 +++++++++++++++++++
+ .../syslog-ng/syslog-ng_4.6.0.bb              |  1 +
+ 2 files changed, 41 insertions(+)
+ create mode 100644 meta-oe/recipes-support/syslog-ng/files/0001-macros-guard-ipv6-code-with-SYSLOG_NG_ENABLE_IPV6.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-pydantic-core_2.16.3.bb b/meta-python/recipes-devtools/python/python3-pydantic-core_2.16.3.bb
-index 2086091d63..40478cdbb6 100644
---- a/meta-python/recipes-devtools/python/python3-pydantic-core_2.16.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-pydantic-core_2.16.3.bb
-@@ -30,6 +30,8 @@ RDEPENDS:${PN}-ptest += "\
-     python3-hypothesis \
-     python3-pytest \
-     python3-pytest-mock \
-+    python3-pytest-timeout \
-+    python3-pytest-benchmark \
-     python3-unittest-automake-output \
+diff --git a/meta-oe/recipes-support/syslog-ng/files/0001-macros-guard-ipv6-code-with-SYSLOG_NG_ENABLE_IPV6.patch b/meta-oe/recipes-support/syslog-ng/files/0001-macros-guard-ipv6-code-with-SYSLOG_NG_ENABLE_IPV6.patch
+new file mode 100644
+index 000000000..f21ad5d70
+--- /dev/null
++++ b/meta-oe/recipes-support/syslog-ng/files/0001-macros-guard-ipv6-code-with-SYSLOG_NG_ENABLE_IPV6.patch
+@@ -0,0 +1,40 @@
++From 896d77dd949b52d6ea5798e5a038ba97d6b802be Mon Sep 17 00:00:00 2001
++From: Peter Marko <peter.marko@siemens.com>
++Date: Thu, 4 Apr 2024 15:44:18 +0200
++Subject: [PATCH] macros: guard ipv6 code with SYSLOG_NG_ENABLE_IPV6
++
++With ipv6 disabled, there are linking errors currently.
++This fixes it by not using the symbols when IPv6 is disabled.
++
++Solves #4810 with my config options
++https://github.com/openembedded/meta-openembedded/blob/2487e65ee3842b6ae0c7a2628985be6189ed9ebf/meta-oe/recipes-support/syslog-ng/syslog-ng_4.6.0.bb
++
++Upstream-Status: Submitted [https://github.com/syslog-ng/syslog-ng/pull/4880]
++
++Signed-off-by: Peter Marko <peter.marko@siemens.com>
++---
++ lib/template/macros.c | 2 ++
++ 1 file changed, 2 insertions(+)
++
++diff --git a/lib/template/macros.c b/lib/template/macros.c
++index 54142706c..fcb83637f 100644
++--- a/lib/template/macros.c
+++++ b/lib/template/macros.c
++@@ -277,12 +277,14 @@ _get_originating_ip_protocol(const LogMessage *msg)
++     return 0;
++   if (g_sockaddr_inet_check(msg->saddr))
++     return 4;
+++#if SYSLOG_NG_ENABLE_IPV6
++   if (g_sockaddr_inet6_check(msg->saddr))
++     {
++       if (g_sockaddr_inet6_is_v4_mapped(msg->saddr))
++         return 4;
++       return 6;
++     }
+++#endif
++   return 0;
++ }
++ 
++-- 
++2.30.2
++
+diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng_4.6.0.bb b/meta-oe/recipes-support/syslog-ng/syslog-ng_4.6.0.bb
+index 4cc5d8451..458494415 100644
+--- a/meta-oe/recipes-support/syslog-ng/syslog-ng_4.6.0.bb
++++ b/meta-oe/recipes-support/syslog-ng/syslog-ng_4.6.0.bb
+@@ -23,6 +23,7 @@ SRC_URI = "https://github.com/balabit/syslog-ng/releases/download/${BP}/${BP}.ta
+            file://syslog-ng-tmp.conf \
+            file://syslog-ng.service-the-syslog-ng-service.patch \
+            file://0001-Fix-buildpaths-warning.patch \
++           file://0001-macros-guard-ipv6-code-with-SYSLOG_NG_ENABLE_IPV6.patch \
  "
+ SRC_URI:append:powerpc64le = " file://0001-plugin.c-workaround-powerpc64le-segfaults-error.patch"
  
-@@ -46,5 +48,4 @@ do_install:append() {
- 
- do_install_ptest() {
-     cp -rf ${S}/tests/ ${D}${PTEST_PATH}/
--    rm -rf ${D}${PTEST_PATH}/tests/benchmarks
- }
 -- 
-2.44.0
+2.30.2
 
 
