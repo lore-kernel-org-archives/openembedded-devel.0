@@ -1,165 +1,123 @@
-Return-Path: <yi.zhao@eng.windriver.com>
+Return-Path: <chaitanya.vadrevu@ni.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 15150CD1284
-	for <webhook@archiver.kernel.org>; Thu,  4 Apr 2024 12:51:44 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.37049.1712235096556854847
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EF94CCD1284
+	for <webhook@archiver.kernel.org>; Thu,  4 Apr 2024 12:52:23 +0000 (UTC)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com (NAM11-DM6-obe.outbound.protection.outlook.com [40.107.223.77])
+ by mx.groups.io with SMTP id smtpd.web10.37208.1712235139638213102
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Apr 2024 05:51:36 -0700
+ Thu, 04 Apr 2024 05:52:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=CPO/VC6i;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=4824332259=yi.zhao@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4347jjFg020589
-	for <openembedded-devel@lists.openembedded.org>; Thu, 4 Apr 2024 12:51:35 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:content-transfer-encoding
-	:content-type:mime-version; s=PPS06212021; bh=Q0pkHsIfT+07S8lyOR
-	JZKksGxClBlLA5OHnCMHWwx4s=; b=CPO/VC6izHUAaSzQqNhSN4Z79mLlePR8t/
-	b6f5vs+aFo+cwxgqhcMx8AyeGQ+mqi06gLfmOohXoC90BbY4vD+XubP4+tfbLr2A
-	vyS/h5YtTiUqXrmp3RRb0dzQYNXOrX4htr+B5TtOPApszTuJavp6J4w/G1qtrMZ1
-	QfbxOC53U0++cnQPcbtP9ukT7zCFue1CbPKlFrtP/Hj2kYaXqcoEBE7Mvh3QE/VO
-	69AaBlXl7cGtKIFt6PfX6J6U6rq69vqL6vZN3N6lK585400APPRY06Bg432B5Rq8
-	SFRvskcq5EFy5DPcBdqWrZZrUngqpGTlOai6S/C+iNwCyMsC16PA==
-Received: from nam11-co1-obe.outbound.protection.outlook.com (mail-co1nam11lp2169.outbound.protection.outlook.com [104.47.56.169])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3x9epd8k3w-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 04 Apr 2024 12:51:35 +0000 (GMT)
+ dkim=fail reason="dkim: body hash did not verify" header.i=@ni.com header.s=selector1 header.b=F4YpknKw;
+ spf=pass (domain: ni.com, ip: 40.107.223.77, mailfrom: chaitanya.vadrevu@ni.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ScH9a4zAL69wnmgXvJSFeQ80T/dorw88taLSXn9qwj88goPIP3KCBj5hZlPnv5wv1qz9DDBrT8EPGwWzLhrWOOl3zJiH1P5CQ5TZjStRJF6ocCEVw85FS5zMvTIAGDvjovDbS7a75gFAyLMqtqjKNILyraOdFRUNxnXyQt/HTk0FSFmXxaBlLD5y3nVTV9TpEctOHTTHAdrZm7jx3PTDDkgX+4fcX+Ea3dnnmJ/FTrMf3BPJbn0tqugpC/SArVHg22v+J/aOldtHh8IAXPKcVtNNIu0kUyeHY+FwClnxzB9CaH/CDQ8FQQB4nPKKE2NJNsA4jxbAtcj+V2XAsE/WyA==
+ b=Tm7A1tMeXbhjV6RfCxypCYF72FwbUGIoig4q5HLsmmcddP/3KaSZ3wsrveR9we9J0kp9ETN91CGhumCsMkK9KfwWAlMfJXZMLptJYodBAN8IoWhgp5cZU0UYHwOI/IQsb4vejYvAN2NZdtb4E7dLesc7XS3wv1MjLLCVdiu2pfVEyV1Lbef9YaSWwW/AYhmKo8bq2/nt7vrAriyzFWP0iYDWgG0aBMX0VyKYgzUCZha5m4f9yxgvpKMtLSn5VaWXQpWHUgIUVIp2su0Ct5LdMwiIt+HMS3VJl8pG2+pOL8SdRK+PhMBAAUqoP0nR8THt6f5yusLE/zu4HdfzoNmvSQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Q0pkHsIfT+07S8lyORJZKksGxClBlLA5OHnCMHWwx4s=;
- b=Sy+jXMToiJhOHcgaSnWo3YFt3/O8GmwjOPJmMUtVhkALRJ+9YWkcc9C+QAmQhRoWsTvz4kHHyk/pMBQIVgJY/KPwIgVAfKXsPiqeEhgmTmZMi+wdDIa6OGQnp45HJL+DUiFKrlP/eQVodemuwZVec6xspAOCwd/gwEPQ9rC8loYbggxd92r0yev9KccqmDoIKTB4kxeNNXsxba0gJF/h/39z5FBLC0LEK7puKdHY2Rcl4ZPlj/u0kgIAnPBarGml1klkNsNqg4xwdz8SH6VtnwHIWVqkSDrQgR+FT2MaVfO8o6liLcl4rTeiJ1VAsnxCRZ+PsSIb9Ztg7j/ufcPbUA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-Received: from DS0PR11MB7484.namprd11.prod.outlook.com (2603:10b6:8:14c::10)
- by SN7PR11MB8110.namprd11.prod.outlook.com (2603:10b6:806:2e1::5) with
+ bh=kdcYDiVuKGtdoVrxvNVS3e/lfNxUhEQJ9ERNSo0u8Bk=;
+ b=WmhUv2KKerQ7+xyJuXWDUh8TUYd1kvvH2qsdtCRKVOkuHyPIyHezaCMxVrenTBPOJZjptL+e+ABGRocIP2dX+F1XUpgGvyX9RfdnqOCGdvsvBBpcYDP6sfBHilxY77IraQ8hp+P/s+haQDIgQsQkeJCdtudm96Ccr7G9jnVTL8HeTbRRFXYSWxZpBNcDuPRlk7PN1/oPAzzUIZoHPf7/dcxiu+hKtl8oYR/y6Xpx2y4P7cKyoftNGbdp3xIv0GEg66X5YmgTgpe0DCz3GjIIGxQrX4mPCGRaQxLOWoFY7cfwkm+6JbqGOVs/QNz+RS8A4Hptftmk/onT3UXWPwyeSg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 130.164.94.73) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=ni.com;
+ dmarc=pass (p=none sp=none pct=100) action=none header.from=ni.com; dkim=none
+ (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ni.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=kdcYDiVuKGtdoVrxvNVS3e/lfNxUhEQJ9ERNSo0u8Bk=;
+ b=F4YpknKwRJmExhFFEI396dtFAbvZ3qIjIM0gR68POkfsrHrsPkbeaRj7GSN1mJjb0QQIvOUOz4/qU3/0foah5pXO3IzrQT77eoUA1R+SzZZmEss/MmTnLqpPswe5fMABt1pn8dOB1vM0Z4KUfexyj2g42BGZ8kxUJ9j7POTFeHw=
+Received: from BN9PR03CA0629.namprd03.prod.outlook.com (2603:10b6:408:106::34)
+ by BL3PR04MB7995.namprd04.prod.outlook.com (2603:10b6:208:346::15) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.33; Thu, 4 Apr
- 2024 12:51:32 +0000
-Received: from DS0PR11MB7484.namprd11.prod.outlook.com
- ([fe80::97da:833f:8511:a558]) by DS0PR11MB7484.namprd11.prod.outlook.com
- ([fe80::97da:833f:8511:a558%6]) with mapi id 15.20.7452.019; Thu, 4 Apr 2024
- 12:51:30 +0000
-From: Yi Zhao <yi.zhao@windriver.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] rocksdb: fix build error for DEBUG_BUILD
-Date: Thu,  4 Apr 2024 20:51:18 +0800
-Message-Id: <20240404125118.3067969-1-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.25.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SG3P274CA0011.SGPP274.PROD.OUTLOOK.COM (2603:1096:4:be::23)
- To DS0PR11MB7484.namprd11.prod.outlook.com (2603:10b6:8:14c::10)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.46; Thu, 4 Apr
+ 2024 12:52:17 +0000
+Received: from BN2PEPF000044A1.namprd02.prod.outlook.com
+ (2603:10b6:408:106:cafe::b5) by BN9PR03CA0629.outlook.office365.com
+ (2603:10b6:408:106::34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.46 via Frontend
+ Transport; Thu, 4 Apr 2024 12:52:17 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 130.164.94.73)
+ smtp.mailfrom=ni.com; dkim=none (message not signed) header.d=none;dmarc=pass
+ action=none header.from=ni.com;
+Received-SPF: Pass (protection.outlook.com: domain of ni.com designates
+ 130.164.94.73 as permitted sender) receiver=protection.outlook.com;
+ client-ip=130.164.94.73; helo=us-aus-excas-p1.ni.corp.natinst.com; pr=C
+Received: from us-aus-excas-p1.ni.corp.natinst.com (130.164.94.73) by
+ BN2PEPF000044A1.mail.protection.outlook.com (10.167.243.152) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7452.22 via Frontend Transport; Thu, 4 Apr 2024 12:52:16 +0000
+Received: from us-aus-excas-p1.ni.corp.natinst.com (130.164.68.17) by
+ us-aus-excas-p1.ni.corp.natinst.com (130.164.68.17) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1258.28; Thu, 4 Apr 2024 07:52:15 -0500
+Received: from cvadrevu-p620.natinst.com (172.18.68.32) by
+ us-aus-excas-p1.ni.corp.natinst.com (130.164.68.17) with Microsoft SMTP
+ Server id 15.2.1258.28 via Frontend Transport; Thu, 4 Apr 2024 07:52:15 -0500
+From: Chaitanya Vadrevu <chaitanya.vadrevu@ni.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Chaitanya Vadrevu <chaitanya.vadrevu@ni.com>
+Subject: [meta-oe][PATCH] mariadb: Use inherit_defer for native class
+Date: Thu, 4 Apr 2024 07:52:10 -0500
+Message-ID: <20240404125210.3365296-1-chaitanya.vadrevu@ni.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS0PR11MB7484:EE_|SN7PR11MB8110:EE_
+X-MS-TrafficTypeDiagnostic: BN2PEPF000044A1:EE_|BL3PR04MB7995:EE_
+X-MS-Office365-Filtering-Correlation-Id: e0df6053-9813-4a14-a107-08dc54a60e72
+x-ni-monitor: EOP Exclude NI Domains ETR True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	7lQUUSn3O+Ep4VtevclLdGL09DTp5ifyGrpVn1P9mqK/qsud+0fS9k6gWnmEZrUqYxZaICARK8XijLGER95MkxUbuRZ5SAeLJ9o4ntV8Msm2SJv5WNll/DcoGCfj5/j1B878j1izsTKkqkakbjL7WWOTeDcD+FjtMN9ASm8j/o0gKRfPV4Vqb3BJEjBUlnMuFeNc8gNXPv/bwJsxCDSOzeBWrdkSj/CdCTNCJCkD6Zo21juFkyfYlKoQuWPe6XWr7t6q/hagIPJXj+1rStxEzVcULsKz0nsTCTQGDcag0HM8pok4qmrq5f/fdbRREbtDTZlymOZv+9hO5zkgUPtyjn4m9zl1UD3ch3Mz6a7PHdHydC++Q8kQKPoGueBVMdTsll0Z+WMy4+8XaSjRfkTSOAJRVTZbrFAiXtlWn9+LkqB6HnsyM9DPKYBaBduvs1Taz3jyJaX2YlItRhpxPR+hUiazhRuJWIcFCVcM8vC3uvsLvDZCJZX8jPmaHpQh/aCaIiaId6BgqUHDU1qHSeb3blgFRuKtYxmoPDi9fpZiS8UJ7GCmLQS9GlvVDm7IT5wZ3Qz5NS/W+farT31k4Z2zbG0zbdHPNnqQBXc1uIRJJuSQ+6i1xAhKzH9tIznbN7Biy33TpjPdb7L9jX4mIsQbVwlaHgs5omOlzo7bk97xOuV4YwhV+v6TZ4rvfNzwVCTV9rIhd8CPeeLSGzJkxvLDaQgOHXT735Yf7zSRFKCZkdg=
+	lOtT+XmaSwnu1njd4++wAY253suLtOoFXxnIG6092rmsyokFjLeU5xu8djKEfXGoq/EirxTiaihYu2Oaccj3StPG6/M9Ze+Pc8VcmtD5VpPDk3TauKCZ6zjfRRqjokw8yIT3u4c5zvaQHdeO8N0roP1DB0FtJIikf0KFpEADAwPaBaqtvRVBWrVm+ZawzAXeGGvjuer7ucaBmtgzx3S1Z1VdyF7E3lbupeQqoVdiA+AmnYCLx4KVp9Cxt/GOL0vrsZIzda6LxWGY+uL7L/vX3kx2rfjITkc7HCh21J6AMitD22+VVV31ZzunRkGyn+mVel4wcuOd1X5txvcUt5Bm6TzxcXR+kirhihbvDFeppajENl7c4u7qiFmaw/1s3rZJtg+28hu4VV0Ro5e0JEhvG9LD+HtPhgRSTROymrnsORPR8c0MtY3wjNWcgrBSTs2Hi+pEJZs6NpjoxvLD2RLIW4uJEbc8ak1vTzt6XRZMABLwFPEdbnS09kfK35qeWkZXOlyeTmAlous7zaMLCfETT9kfgXjj4nRGlKyRcmLUEHN/nviKlrbwOwGW5gSppJgZSousbeyVPJijZf5Pw9e9uoyhOpzYuk1Cw+DdiodPDVUF0p7hWTSXyKSsKDnf9gFQ0R0TaAiJNO6g1RFZ/eo9tQC2ik56xhW+eTcniEwK7abASuHY5bNcuhno3Y7rBs1QAMVSlzJU5bux/UPdUp4IJV+o5PQbUqrDR9OZ4+ONxH4Irr3RXLRFCPBLebpIZ8Ru
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB7484.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(366007)(1800799015)(52116005)(376005)(38350700005);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?JBAmWWh53xQODqfz6X168cqawpEeFHIg+yxkCBgF9craz01BD1Y5Ipd9jPpT?=
- =?us-ascii?Q?1IoufUfLkflkyBnijaTAyo6nZTT+xoGQQBQf3P1bRrtEEGUnNH1L9hNLUOcz?=
- =?us-ascii?Q?rn9UZwDD9ftaIoyxCn3kWkhDQaSSlrF7IvF3Lv3bP5VCvNVmsW+vpWbJKMB3?=
- =?us-ascii?Q?u7k0O/UKLejHIo6Mkh9eAsSSAQyIOHlv1MvLMKC6v860BTMAhHP+QjKiz/x8?=
- =?us-ascii?Q?efAbeWCqGo0ZwUJx8V506t09hFqoZbFsS+1qS5TdxQRrf1nB7ZQE1faDT5Yf?=
- =?us-ascii?Q?9HjYYQF9Avx5sJZF8oGTmY0ZYE9fZs3ams0EuNtjNhb8RLV0pBW0IacZiWZY?=
- =?us-ascii?Q?yvKdhZedhCjfLjm/79wQLrMnbkofGWEZeHg4KExV3pVnlhQBWrdn4NlZOx2N?=
- =?us-ascii?Q?9QgZG0sq/2TVs2lno8sp5KQFSI1RdB+JkW3GA5q3DwFQYilN/6acMbXzm2/a?=
- =?us-ascii?Q?AttKvZQ/yxNC4ThCSgbxO4OUGb5EAzDyLKAAO82IKFJKNMY1YmZrLYkvYvHk?=
- =?us-ascii?Q?LIhhpp66XNDcM65Rw/jbV7dO8ZRqX4iPDWu0eySZ5Ev6qWt+x8cyof/jOQgV?=
- =?us-ascii?Q?RSWQKV2y5GBwZc+/FwoZdldbcjIFe6QM9lzTbvQPAYKJilbgr55ZC54vATed?=
- =?us-ascii?Q?cogLSTS4szNjuId8XU8GWjXHHzZx80g9fwU6HqAny1pNXfDHOcBJYZQakPlq?=
- =?us-ascii?Q?YxxfggmHClft79nMywnYz5YF2ML6oqkGShqXgPHVV7zU/LQ9x4eTsi8PSKlo?=
- =?us-ascii?Q?09QIkLxU5/sAvbgtx4VZzPdXfBB0mz6HqWK/jbXMEnA8NfBZi8ktfyRHsH4f?=
- =?us-ascii?Q?/T6jpuvCBLW3o+qtc8XsGeT55s/dU17BoulzSAT5kAQB08IxPYu4C3IvnFME?=
- =?us-ascii?Q?J9Qq5kFpAFfNaaEt/MRcRjpZoWdgukjQgUDFmEfCNAUyFCJYSJCBsNTQicKF?=
- =?us-ascii?Q?KkEKKb5ynqGogR6cvogHRYR7YWtAeVd6/qWDbOiQKtZp039fy27Fkw3cVMgj?=
- =?us-ascii?Q?Q3H2uB0DbAx1pLmxvLaenM0G+RpQUcjjdG+98tisPMLQt0pNxTYe7j34mr12?=
- =?us-ascii?Q?fUlc1e71jJhCp/he+VAmWdWJG3mCgdTlPtAjCLbny0q6885u2S2iGXm6iVNj?=
- =?us-ascii?Q?bW1fN4IwIHLa3hV/W/f0cYKyMNS6r1ziZ54XSkGupUKdVZ9oKDmSztSylZv7?=
- =?us-ascii?Q?e/ijtReXTGUo03trZ0fy9C3OOusXSWzQNZePMtZukP8b8gaE/cUHz/CXhl/W?=
- =?us-ascii?Q?2XS9uPl2lJI5NbQR7IRsg96KfZ0p2uDsyMXs9zsYNLZBAQ6gfo7BIyjvkIkC?=
- =?us-ascii?Q?x7tPlJhFvpo2VR54RTpMI9uylmMCS41KCJecSJByKPr8eXCy0t4lIXnmu7vW?=
- =?us-ascii?Q?pgzw0ZYxiH97IgkW8sPBgjxjuHm7m99tr6lFuYDI/3oT5SFFs1hORkRFHpvG?=
- =?us-ascii?Q?gZFmO1ab7HwLGElj9A9goPt0N9gGQarBYNr5tESPLGQlGL6/JLrwZfwnXE7J?=
- =?us-ascii?Q?Yyl3TFpQxQwH3fidE3Fgx8n+FNcVF8Io2Bz3WUaWEQ7kzJDYu+cWrAldaCBC?=
- =?us-ascii?Q?YUZ7X4IcIXhjNaxbqqRdLegXcy1CSnfLWqHHRolI?=
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a2bb4b94-ce32-48dc-2669-08dc54a5f2e8
-X-MS-Exchange-CrossTenant-AuthSource: DS0PR11MB7484.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Apr 2024 12:51:30.3270
+	CIP:130.164.94.73;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:us-aus-excas-p1.ni.corp.natinst.com;PTR:ErrorRetry;CAT:NONE;SFS:(13230031)(36860700004)(376005)(82310400014)(1800799015);DIR:OUT;SFP:1101;
+X-OriginatorOrg: ni.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Apr 2024 12:52:16.2371
  (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: taWI5jNnoZSV+8TP2VJBC0sHiRDt5iDa7lKaxv/LB4NLOoOmuoyad5o4I+P+8k9DrVzbUbp7LK+ifdDPyJQBIg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR11MB8110
-X-Proofpoint-ORIG-GUID: CbYKFkw4X-i4dZ3hJ2KVTEsBTQ-jmgJs
-X-Proofpoint-GUID: CbYKFkw4X-i4dZ3hJ2KVTEsBTQ-jmgJs
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-04-04_08,2024-04-04_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- spamscore=0 bulkscore=0 mlxlogscore=751 adultscore=0 lowpriorityscore=0
- clxscore=1015 mlxscore=0 impostorscore=0 phishscore=0 suspectscore=0
- malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2404010003 definitions=main-2404040086
+X-MS-Exchange-CrossTenant-Network-Message-Id: e0df6053-9813-4a14-a107-08dc54a60e72
+X-MS-Exchange-CrossTenant-Id: 87ba1f9a-44cd-43a6-b008-6fdb45a5204e
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=87ba1f9a-44cd-43a6-b008-6fdb45a5204e;Ip=[130.164.94.73];Helo=[us-aus-excas-p1.ni.corp.natinst.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	BN2PEPF000044A1.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL3PR04MB7995
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 04 Apr 2024 12:51:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109796
+ <openembedded-devel@lists.openembedded.org>; Thu, 04 Apr 2024 12:52:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109797
 
-It fails to build rocksdb when '-Og' is set in CXXFLAGS (e.g.
-DEBUG_BUILD = '1' in local.conf):
+Since useradd.bbclass is using inherit_defer in oe-core, some classes are n=
+ow
+appearing after native resulting in QA errors
 
-rocksdb/9.0.0/git/util/xxhash.h:4491:1: error: inlining failed in call
-to 'always_inline' 'void XXH3_scrambleAcc_sse2(void*, const void*)':
-function not considered for inlining
- 4491 | XXH3_scrambleAcc_sse2(void* XXH_RESTRICT acc, const void* XXH_RESTRICT secret)
-      | ^~~~~~~~~~~~~~~~~~~~~
-rocksdb/9.0.0/git/util/xxhash.h:5139:19: note: called from here
- 5139 |         f_scramble(acc, secret + secretSize - XXH_STRIPE_LEN);
-      |         ~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-rocksdb/9.0.0/git/util/xxhash.h:4177:1: error: inlining failed in call
-to 'always_inline' 'void XXH3_accumulate_sse2(xxh_u64*, const xxh_u8*, const xxh_u8*, size_t)':
-function not considered for inlining
- 4177 | XXH3_accumulate_##name(xxh_u64* XXH_RESTRICT acc,           \
-      | ^~~~~~~~~~~~~~~~
+QA Issue: mariadb-native: native/nativesdk class is not inherited last, thi=
+s can result in unexpected behaviour. Classes inherited after native/native=
+sdk: useradd-staticids.bbclass [native-last]
 
-Check and disable inlining when "-Og" is present.
-
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Signed-off-by: Chaitanya Vadrevu <chaitanya.vadrevu@ni.com>
 ---
- meta-oe/recipes-dbs/rocksdb/rocksdb_9.0.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-oe/recipes-dbs/mysql/mariadb-native_10.11.7.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_9.0.0.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_9.0.0.bb
-index 76d75f2b5..ee007acfa 100644
---- a/meta-oe/recipes-dbs/rocksdb/rocksdb_9.0.0.bb
-+++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_9.0.0.bb
-@@ -44,6 +44,8 @@ EXTRA_OECMAKE = "\
-     -DFAIL_ON_WARNINGS=OFF \
- "
- 
-+CXXFLAGS += "${@bb.utils.contains('SELECTED_OPTIMIZATION', '-Og', '-DXXH_NO_INLINE_HINTS', '', d)}"
-+
- do_install:append() {
-     # Fix for qa check buildpaths
-     sed -i "s#${RECIPE_SYSROOT}##g" ${D}${libdir}/cmake/rocksdb/RocksDBTargets.cmake
--- 
-2.25.1
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.11.7.bb b/meta-oe/=
+recipes-dbs/mysql/mariadb-native_10.11.7.bb
+index 578357b48..04380eb43 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb-native_10.11.7.bb
++++ b/meta-oe/recipes-dbs/mysql/mariadb-native_10.11.7.bb
+@@ -1,5 +1,5 @@
+ require mariadb.inc
+-inherit native
++inherit_defer native
+=20
+ PROVIDES +=3D "mysql5-native"
+ DEPENDS =3D "ncurses-native zlib-native bison-native libpcre2-native \
+--=20
+2.34.1
 
 
