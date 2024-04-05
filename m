@@ -1,181 +1,123 @@
-Return-Path: <gudnimar@noxmedical.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E6FCCD1284
-	for <webhook@archiver.kernel.org>; Thu,  4 Apr 2024 22:47:04 +0000 (UTC)
-Received: from usb-smtp-delivery-118.mimecast.com (usb-smtp-delivery-118.mimecast.com [170.10.151.118])
- by mx.groups.io with SMTP id smtpd.web11.6042.1712270823872174226
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8F433CD1292
+	for <webhook@archiver.kernel.org>; Fri,  5 Apr 2024 02:07:14 +0000 (UTC)
+Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
+ by mx.groups.io with SMTP id smtpd.web11.2168.1712282830690675644
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 04 Apr 2024 15:47:03 -0700
+ Thu, 04 Apr 2024 19:07:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@noxmedical.com header.s=mimecast20231107 header.b=HwyFDxKo;
- spf=pass (domain: noxmedical.com, ip: 170.10.151.118, mailfrom: gudnimar@noxmedical.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=noxmedical.com;
-	s=mimecast20231107; t=1712270823;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=vQ++wl/LFuzXwu9c7/do92/iE4u4lkrj15rQ7xUdOmo=;
-	b=HwyFDxKo1efac6NpK9PN1mGHDNGWUzBIajQG1hzopdub8K2mYM2Rs26wLuf2HqPsK9iMa4
-	ao5N2qjD4VoZgVzXrl2oYpulay/C2E+Tja0SQfZRVD7zKWLr6YPOgLbIDvYD7jxsH9w+oa
-	bNllwtGwohwS9bVxV29C3YQccZ3W6Gw=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- usb-mta-37-Wa5_mrawMqqUG-uRilHbGw-1; Thu, 04 Apr 2024 15:47:00 -0700
-X-MC-Unique: Wa5_mrawMqqUG-uRilHbGw-1
-Received: by mail-wr1-f71.google.com with SMTP id ffacd0b85a97d-343d6732721so256071f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Apr 2024 15:47:00 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Ng4Zv6PU;
+ spf=pass (domain: gmail.com, ip: 209.85.216.48, mailfrom: raj.khem@gmail.com)
+Received: by mail-pj1-f48.google.com with SMTP id 98e67ed59e1d1-2a28b11db68so1076592a91.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 04 Apr 2024 19:07:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1712282830; x=1712887630; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=G/iI+HEeZGcZXZUaURSyXdfTy75Q7ZBc/DYpYsXeQ0w=;
+        b=Ng4Zv6PUrBfKfOnFBqmWczsLwB4n5goPdW0OVvviRN8Xxb80IknBB5HICZYxuwZNgy
+         2vI6Upu2K0WCM1EuSUr+SVPmfU6hXPAXa6Hz8j/qK+9HGlrVhFijGeGLinrThyS8CBF5
+         GqevStRrPA1u4nZfDYGYWHAvSo1nVqJqCKb0Jmx2bu4LBIS7eGq1I+ybPbNGRxXPIaMe
+         YV5fGp8hzsLMTpICVfZL+G3rg++7EoM4fViEyedMKs5Gg10uahyGNzPikqs4TMpPQLtw
+         DaG8h7TZB5QSspvF4qE6Jwh0bOjrPI4ZIQSi8Cqre0fUjuuTEPnBHKO4QEP8qMS2eItS
+         WVdg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1712270818; x=1712875618;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=HGlol2rvLpLTkp7+lzJv1AweNtXPQWjgDP8QDB5S/y0=;
-        b=AaZkplqY/IX4tw+oh0mOQ1e5HLIy6/vC+i67z5jBLqceTIKVAytT9OHj4pB7gI0tOq
-         7hQkIYbXK0MwolUY0kgkXAjrn/+UC2nrYVRN65cOPJq0ng8yBAK+QmK70TBFkjXxPJQE
-         EUMLmm1eSY3dpfa/LY1Oa76B1NYvpgZgEYfkc4Fpt9ZR79LTpmEzTjnvL7snLD4Zbc3F
-         oHarj4b2HhTxVk7jJnnDjJOkDsMrRbs9QLxdGvXpHp8jdZKfqT5WPPApTmkpxaUYjTn0
-         /zil7dKt3dr9aUraWMXCiJAWC0Jl1CXdyGTZ3uP08KGSXGIdyhZpI3AoaWDs2JBHTHTc
-         u85Q==
-X-Gm-Message-State: AOJu0Yz8CBdmKt36g2xcVJJWJc/rru+S7JgviIQofZttMd+L1vs5CCFF
-	tG8aJ9cvZXtfDEC2/reimj7MzRwgXmIdRjD+dG16E0SsXM+kLpbOISVdwjZKR4qw8+YIYSllBBs
-	8IYI5WRNK4tEfboa1V9ORvkk7D+n+ZTBpMd/ZRY7YbNCf7bF1q05I9J8qMYNIrphXg0/O1Gc89G
-	BidO7lORRA/dLBn4qND6xC/mPoLORmAmUxr1+JuVio8jC6WM1K8s5mro8H1LXJASJbgDvr
-X-Received: by 2002:a5d:65c4:0:b0:343:7abf:1a9d with SMTP id e4-20020a5d65c4000000b003437abf1a9dmr681819wrw.14.1712270818348;
-        Thu, 04 Apr 2024 15:46:58 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IH44UvcFm/UucWcWD4BOR/hMF+a6VWrL5NNcQJQP2XIsAU5vEd4rAdOCbodyriRgmCmLp4cSw==
-X-Received: by 2002:a5d:65c4:0:b0:343:7abf:1a9d with SMTP id e4-20020a5d65c4000000b003437abf1a9dmr681808wrw.14.1712270818035;
-        Thu, 04 Apr 2024 15:46:58 -0700 (PDT)
-Received: from gudni-virtual-machine.localdomain ([81.15.100.92])
-        by smtp.gmail.com with ESMTPSA id u12-20020a05600c19cc00b0041469869d11sm4132492wmq.47.2024.04.04.15.46.57
+        d=1e100.net; s=20230601; t=1712282830; x=1712887630;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=G/iI+HEeZGcZXZUaURSyXdfTy75Q7ZBc/DYpYsXeQ0w=;
+        b=Ix92NUSXSsofZ91S7NzJxUTcK2lXHnkbur01iGoXY+s3t1FVOQ2O2g0XluTj6HtbjK
+         hNdpzynI81qquLnNITdXsQN2sOPA0a0qpdYXROWem3oL+M485KqYEWJaC6IYp/XgGcFl
+         S+3nDLpWOy3NfIDKFiaIpA1huLcanPt/O3HfZQerOzS0NjSbgkkbYwwNEyuKTAXvz/b8
+         hLsUOFB1D5gl02lWaoP8Lnz/0r7MFeLh+gjJQCAfary6+Ft531qfzjtkVMas1DsYWvTI
+         eSEBrOV6nF9bBouetsINtwmjphuVcTKYcaI5CsuMi1ymGvIw8G/nU2f946af307gEC0n
+         efaw==
+X-Gm-Message-State: AOJu0YyLnHXpXnv4aok88JVmljfHm/aC4Sz8ApFBTXgH0Zic7lpSfGUR
+	ER+Bm241PtrCWCYDYBdkmYbLnK8INenDT8k8hEGOUPWkRcs/25MT8W7/HG9G
+X-Google-Smtp-Source: AGHT+IH6BND3ce1uUBv9nrjbUGPfB2QtfHyuPFz+Td9Fc++fDc8pfM6jdGbEKmL125Rmb4XEOSCSCA==
+X-Received: by 2002:a17:90b:3c10:b0:29f:f1f0:88c2 with SMTP id pb16-20020a17090b3c1000b0029ff1f088c2mr151947pjb.4.1712282829745;
+        Thu, 04 Apr 2024 19:07:09 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::5077])
+        by smtp.gmail.com with ESMTPSA id v12-20020a17090a898c00b0029df9355e79sm367672pjn.13.2024.04.04.19.07.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 04 Apr 2024 15:46:57 -0700 (PDT)
-From: =?UTF-8?q?Gu=C3=B0ni=20M=C3=A1r=20Gilbert?= <gudnimar@noxmedical.com>
+        Thu, 04 Apr 2024 19:07:09 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Hains van den Bosch <hainsvdbosch@ziggo.nl>,
-	Khem Raj <raj.khem@gmail.com>,
-	=?UTF-8?q?Gu=C3=B0ni=20M=C3=A1r=20Gilbert?= <gudnimar@noxmedical.com>
-Subject: [meta-python][kirkstone][PATCH 2/2] python3-twisted: Add python3-asyncio to RDEPENDS
-Date: Thu,  4 Apr 2024 22:45:22 +0000
-Message-Id: <20240404224522.4303-2-gudnimar@noxmedical.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240404224522.4303-1-gudnimar@noxmedical.com>
-References: <20240404224522.4303-1-gudnimar@noxmedical.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-python][PATCH] python3-whoosh: Fix an intermittent ptest
+Date: Thu,  4 Apr 2024 19:07:07 -0700
+Message-ID: <20240405020707.424596-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: noxmedical.com
-Content-Type: multipart/alternative;
-	boundary="MCBoundary=_12404041547022411"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 04 Apr 2024 22:47:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109809
+ <openembedded-devel@lists.openembedded.org>; Fri, 05 Apr 2024 02:07:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109810
 
---MCBoundary=_12404041547022411
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+It fails sometimes when system is under stress
 
-From: Hains van den Bosch <hainsvdbosch@ziggo.nl>
-
-To fix crash due to missing module:
-
-from twisted.internet import defer
-File "/usr/lib/python3.11/site-packages/twisted/internet/defer.py", line 14=
-, in <module>
-from asyncio import AbstractEventLoop, Future, iscoroutine
-ModuleNotFoundError: No module named 'asyncio'
-
-Signed-off-by: Hains van den Bosch <hainsvdbosch@ziggo.nl>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Gu=C3=B0ni M=C3=A1r Gilbert <gudnimar@noxmedical.com>
 ---
- meta-python/recipes-devtools/python/python3-twisted_22.2.0.bb | 1 +
- 1 file changed, 1 insertion(+)
+ ...nstic-test_minimize_dfa-test-as-XFAI.patch | 29 +++++++++++++++++++
+ .../python/python3-whoosh_2.7.4.bb            |  2 ++
+ 2 files changed, 31 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-whoosh/0001-Mark-non-determinstic-test_minimize_dfa-test-as-XFAI.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-twisted_22.2.0.bb =
-b/meta-python/recipes-devtools/python/python3-twisted_22.2.0.bb
-index 3225b6c98..c55c86ea5 100644
---- a/meta-python/recipes-devtools/python/python3-twisted_22.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-twisted_22.2.0.bb
-@@ -57,6 +57,7 @@ RDEPENDS:${PN} =3D "\
- "
-=20
- RDEPENDS:${PN}-core =3D "${PYTHON_PN}-appdirs \
-+                       ${PYTHON_PN}-asyncio \
-                        ${PYTHON_PN}-automat \
-                        ${PYTHON_PN}-constantly \
-                        ${PYTHON_PN}-core \
---=20
-2.34.1
-
-Disclaimer
-
-The information contained in this communication from the sender is confiden=
-tial. It is intended solely for use by the recipient and others authorized =
-to receive it. If you are not the recipient, you are hereby notified that a=
-ny disclosure, copying, distribution or taking action in relation of the co=
-ntents of this information is strictly prohibited and may be unlawful.
-
-This email has been scanned for viruses and malware, and may have been auto=
-matically archived by Mimecast, a leader in email security and cyber resili=
-ence. Mimecast integrates email defenses with brand protection, security aw=
-areness training, web security, compliance and other essential capabilities=
-. Mimecast helps protect large and small organizations from malicious activ=
-ity, human error and technology failure; and to lead the movement toward bu=
-ilding a more resilient world. To find out more, visit our website.
-
---MCBoundary=_12404041547022411
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/html; charset=UTF-8
-
-<html><head><style type=3D"text/css">.style1 {font-family: "Times New Roman=
-";}</style></head><body>From: Hains van den Bosch &lt;hainsvdbosch@ziggo.nl=
-&gt;<BR>
-<BR>
-To fix crash due to missing module:<BR>
-<BR>
-from twisted.internet import defer<BR>
-File &quot;/usr/lib/python3.11/site-packages/twisted/internet/defer.py&quot=
-;, line 14, in &lt;module&gt;<BR>
-from asyncio import AbstractEventLoop, Future, iscoroutine<BR>
-ModuleNotFoundError: No module named 'asyncio'<BR>
-<BR>
-Signed-off-by: Hains van den Bosch &lt;hainsvdbosch@ziggo.nl&gt;<BR>
-Signed-off-by: Khem Raj &lt;raj.khem@gmail.com&gt;<BR>
-Signed-off-by: Gu&eth;ni M&aacute;r Gilbert &lt;gudnimar@noxmedical.com&gt;=
-<BR>
----<BR>
- meta-python/recipes-devtools/python/python3-twisted_22.2.0.bb | 1 +<BR>
- 1 file changed, 1 insertion(+)<BR>
-<BR>
-diff --git a/meta-python/recipes-devtools/python/python3-twisted_22.2.0.bb =
-b/meta-python/recipes-devtools/python/python3-twisted_22.2.0.bb<BR>
-index 3225b6c98..c55c86ea5 100644<BR>
---- a/meta-python/recipes-devtools/python/python3-twisted_22.2.0.bb<BR>
-+++ b/meta-python/recipes-devtools/python/python3-twisted_22.2.0.bb<BR>
-@@ -57,6 +57,7 @@ RDEPENDS:${PN} =3D &quot;\<BR>
- &quot;<BR>
- <BR>
- RDEPENDS:${PN}-core =3D &quot;${PYTHON_PN}-appdirs \<BR>
-+                       ${PYTHON_PN}-asyncio \<BR>
-                        ${PYTHON_PN}-automat \<BR>
-                        ${PYTHON_PN}-constantly \<BR>
-                        ${PYTHON_PN}-core \<BR>
--- <BR>
-2.34.1<BR>
-
-<br><br><p style=3D"font-family: Verdana; font-size:10pt; color:#666666;"><=
-/p><p style=3D"font-family: Verdana; font-size:8pt; color:#666666;">Warning=
-:  Copyright Nox Health.  This communication is confidential and may contai=
-n privileged information.  By the use of email over the Internet or other c=
-ommunication systems, Nox Health is not waiving either confidentiality of, =
-or legal privilege in, the content of the email and of any attachments.  If=
- the recipient of this message is not the intended addressee, please call N=
-ox Health immediately by calling (+1) 888.505.0280</p></body></html>
-
---MCBoundary=_12404041547022411--
+diff --git a/meta-python/recipes-devtools/python/python3-whoosh/0001-Mark-non-determinstic-test_minimize_dfa-test-as-XFAI.patch b/meta-python/recipes-devtools/python/python3-whoosh/0001-Mark-non-determinstic-test_minimize_dfa-test-as-XFAI.patch
+new file mode 100644
+index 0000000000..91fea24524
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-whoosh/0001-Mark-non-determinstic-test_minimize_dfa-test-as-XFAI.patch
+@@ -0,0 +1,29 @@
++From ede95a4f4487b4fc3cad8452ae388376966fca0e Mon Sep 17 00:00:00 2001
++From: Chris Lamb <lamby@debian.org>
++Date: Fri, 5 Apr 2019 15:48:23 +0200
++Subject: [PATCH] Mark non-determinstic test_minimize_dfa test as XFAIL
++
++Sourced from Debian [1]
++[1] https://sources.debian.org/src/python-whoosh/2.7.4%2Bgit6-g9134ad92-8/debian/patches/0003-Mark-non-determinstic-test_minimize_dfa-test-as-XFAI.patch/
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ tests/test_automata.py | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/tests/test_automata.py b/tests/test_automata.py
++index daab96c..7031dc3 100644
++--- a/tests/test_automata.py
+++++ b/tests/test_automata.py
++@@ -327,6 +327,7 @@ def test_regular():
++     assert not ex.accept("bc")
++ 
++ 
+++@pytest.mark.xfail(strict=False)
++ def test_minimize_dfa():
++     # Example from www.cs.odu.edu/~toida/nerzic/390teched/regular/fa/min-fa.html
++ 
++-- 
++2.44.0
++
+diff --git a/meta-python/recipes-devtools/python/python3-whoosh_2.7.4.bb b/meta-python/recipes-devtools/python/python3-whoosh_2.7.4.bb
+index 38d3e1cecd..406de2e525 100644
+--- a/meta-python/recipes-devtools/python/python3-whoosh_2.7.4.bb
++++ b/meta-python/recipes-devtools/python/python3-whoosh_2.7.4.bb
+@@ -7,6 +7,8 @@ Whoosh works can be extended or replaced to meet your needs exactly."
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=05303186defc6141143629961c7c8a60"
+ 
++SRC_URI += "file://0001-Mark-non-determinstic-test_minimize_dfa-test-as-XFAI.patch"
++
+ SRC_URI[md5sum] = "893433e9c0525ac043df33e6e04caab2"
+ SRC_URI[sha256sum] = "e0857375f63e9041e03fedd5b7541f97cf78917ac1b6b06c1fcc9b45375dda69"
+ 
+-- 
+2.44.0
 
 
