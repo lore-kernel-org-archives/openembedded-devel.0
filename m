@@ -1,218 +1,111 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <fathi.boudra@linaro.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 24E70CD11C2
-	for <webhook@archiver.kernel.org>; Fri,  5 Apr 2024 15:18:28 +0000 (UTC)
-Received: from mail-oo1-f42.google.com (mail-oo1-f42.google.com [209.85.161.42])
- by mx.groups.io with SMTP id smtpd.web11.15056.1712330305900773670
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 648D3C67861
+	for <webhook@archiver.kernel.org>; Fri,  5 Apr 2024 16:25:18 +0000 (UTC)
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+ by mx.groups.io with SMTP id smtpd.web10.17032.1712334315563428636
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 05 Apr 2024 08:18:26 -0700
+ Fri, 05 Apr 2024 09:25:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZSSaix+L;
- spf=pass (domain: gmail.com, ip: 209.85.161.42, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f42.google.com with SMTP id 006d021491bc7-5a4d3b82e53so1308559eaf.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 05 Apr 2024 08:18:25 -0700 (PDT)
+ dkim=pass header.i=@linaro.org header.s=google header.b=ZHWcGJUD;
+ spf=pass (domain: linaro.org, ip: 209.85.221.53, mailfrom: fathi.boudra@linaro.org)
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-33ddd1624beso1357642f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 05 Apr 2024 09:25:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1712330305; x=1712935105; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=wxE3/zL08C0yV/ACF2SLggmm5pfy8G07o6HaEtTfAag=;
-        b=ZSSaix+LTOMFwUdnh2GQ/J5o43N3xOtKheUs0tSC5dqV8Cr1c7q3FreKv0JktoO4vi
-         b/CCf5SFItD+Lb316lIRXyTng/ZvLcGgH3dOEbcTJGXP2dI0p7iDXo1ueQM+8QQGJBmE
-         FxHWM/rqP0FBXqIv1wmkJoJTPGt7cuuRezPaoLsiUjseVYgLLzHL27og0HqvS3Guuucp
-         WeLBZok1w5fSZbOARe2LMuM3iBpqQqHJNpVTUpw5oLykQXd+NO5TKWB92jmwOo3kg1ko
-         /SYYxZHYf91LHUj1Crl3Ngw3laJY+IHHMZIc+QXBMuCrZaUvrA3SevTF70NdYxMFDl68
-         bBiA==
+        d=linaro.org; s=google; t=1712334312; x=1712939112; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=DPuH7H5lT3pZkRRl1ZPXhuzj5+JQs2cGcB2hZIuGgf8=;
+        b=ZHWcGJUDjKiwbQWvkjBureAqU6Me6xBhrIZVxmS+36mG/+pJmBzosdpMsCwYMvFGyv
+         zFZK4y3bMi9U+WMIWlqmRNuF/MQ9Za2K1fGKDeWv3JnoaJ9IfBjIs19OXIonJlHQdekA
+         BQO22XclLn/uzzl2yfI4oAsMekN2jhBXO/9AuzLqDMF3N5XKAXmIauZ1lLk4X+Z6NUeh
+         tIIi01M0FIK9XWV2YkDOPw4/6ecXXA15zzhyheS4SERZbknSqoFyRPkuAVSGi6b/U6w6
+         pnNd4PA2bMS8p38Lyc+/TyGSUoAiiYmCODrKgbPvmM5JtKEvMOVo2UWW9N2EfmXYZVJq
+         lNIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1712330305; x=1712935105;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=wxE3/zL08C0yV/ACF2SLggmm5pfy8G07o6HaEtTfAag=;
-        b=b6RMq2pv/gX/cuU9Qhbx3np5nF5KXQlT0wvzMWKyzKhdKYr4YUrXaDQH5nUpi3obzM
-         tCDmmhxMHmQrbM0FrTz0Ag8n2Xg+ptIJEo8LGZOft/ONDsOFsjKHOlpCyZHriDLXRZW4
-         v4Z5Gg3o4ze6YzaKn48aXx/RVykel6p+vp+MRAu6X7P05AR1NQA4zhowjrYPh1XVKdYp
-         Zb9iyhx++/0W8wKbvAWANqqLhp0N9nyvbjltZDyCPYm2BeyQRzVRVVjrm9nuYwMJPBXr
-         US2n1TV/20O8jtJCvH/If1RZLIXHttPrIxKu2K+mW22DYZ+POWWnxZAGa13LqiPzpR1n
-         363g==
-X-Forwarded-Encrypted: i=1; AJvYcCUimwg/Tn1vBLjQKODEe/RiQuo1USHmmH3ibErUcp48dxWKyZopyMHQzp/vAaGchMuAhF5H34IgG1zhn9lVe/IWPodOFOGL7gbe7/59E9Hbzs1BmVxhq29/LA==
-X-Gm-Message-State: AOJu0YwwHXCB9ksl6H/9UEYsCsCXmvtWG+PnvpGoJGA5ln553zyR27dd
-	G1PEhq79bENg6abALtoHB4RieuYAJ7m1HLzxEK6IbZdhAS8rlbbvMQ/4UlylIPMQu6W1JFmK26R
-	1eOsGVPdGgnIVP3gP6T0WabiRbQ/Wfzmjfak=
-X-Google-Smtp-Source: AGHT+IEGccbDlrPENgI9XFzFwS2uzABYZzSJJPwBxpRMbViAbiOAqSOM1GENZVkzvQGkkck6Ypijq1oTxxCeR0hCSkU=
-X-Received: by 2002:a05:6870:548a:b0:22a:6e6c:28f2 with SMTP id
- f10-20020a056870548a00b0022a6e6c28f2mr1208876oan.18.1712330305049; Fri, 05
- Apr 2024 08:18:25 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1712334312; x=1712939112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=DPuH7H5lT3pZkRRl1ZPXhuzj5+JQs2cGcB2hZIuGgf8=;
+        b=VSRkw2u44umzzUZiRrOnQtqjULq3g5xwoQRXdTLZUfzB2d2WOHwTQ+TJ4Fica1PI3H
+         SCQ6xJyMHBNaTJt3CvVV0JtNmE8U3sdMoM1OhbBcL9WT/PmGpgqsQTYML1aBQRR9+mZ9
+         u9F1f9aCAho/9cjVChnc9aEWHmFoGfaZJSUpIv2DujQB1m63ES2mDdpqXhQZtajaRkdV
+         8JRSEaSotcdx0b2tDsL0H3T+ugtw7HiXBXpUqsUQN1ZkDJeOrvkB5JXK+ju9cExjqIwT
+         wjD639QwTeGFkLkXhtE79aVfVJp5+fK/E+dWXMK9cWS5VjEJ9b1TzeNg5pAK3ZF1XIOx
+         Uq+g==
+X-Gm-Message-State: AOJu0Yy7hYEb8OYlD9TxdypSIn+PBtl3ZLIodU8/ltPsnvcH1wrKVrla
+	i6c0YOU6/gxdP56JR9ohi8rbUjRn0sCiKT+2cWQeQ2fjCl7Lp5H4ejjbMqrs3rb3pLMfltpuZmP
+	GUUA=
+X-Google-Smtp-Source: AGHT+IFdZK4LyCjl0uUB57HtDcxfngMSBomnQoTUNETcZrehPLjD8h5ayOYBKv/7uPoG9JwaimD4kw==
+X-Received: by 2002:a5d:6107:0:b0:33e:c68d:d536 with SMTP id v7-20020a5d6107000000b0033ec68dd536mr1911926wrt.15.1712334311816;
+        Fri, 05 Apr 2024 09:25:11 -0700 (PDT)
+Received: from corsair.. (88-169-167-85.subs.proxad.net. [88.169.167.85])
+        by smtp.gmail.com with ESMTPSA id s7-20020a5d4ec7000000b0033dd2a7167fsm2361712wrv.29.2024.04.05.09.25.11
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 05 Apr 2024 09:25:11 -0700 (PDT)
+From: Fathi Boudra <fathi.boudra@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Cc: Fathi Boudra <fathi.boudra@linaro.org>
+Subject: [oe][meta-oe][PATCH] composefs: add a new recipe
+Date: Fri,  5 Apr 2024 18:24:59 +0200
+Message-ID: <20240405162459.1286945-1-fathi.boudra@linaro.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20240402054947.10487-1-f_l_k@t-online.de> <CA+chaQe_3orTvmZcOJ1f0zaVSs4rPa0ySFZimpbfpiBKvitLgg@mail.gmail.com>
- <0YIGBS.J01SL0J2C2S41@t-online.de> <CA+chaQfiFbHWuRX2B01LF=Oe=M5vjMDNndo3O5GcY1QDS97deA@mail.gmail.com>
-In-Reply-To: <CA+chaQfiFbHWuRX2B01LF=Oe=M5vjMDNndo3O5GcY1QDS97deA@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 5 Apr 2024 08:17:59 -0700
-Message-ID: <CAMKF1sr5Qbj34qjh3OSZLyPiDUnZduHTuDxqJJ_61htCMm6_oQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCHv2] libjxl: add recipe
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: f_l_k@t-online.de, openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 05 Apr 2024 15:18:28 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109824
+ <openembedded-devel@lists.openembedded.org>; Fri, 05 Apr 2024 16:25:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109825
 
-Can you try to comment out
+Tools to handle creating and mounting composefs images
 
-   CXXFLAGS:append:arm =3D " -mfp16-format=3Dieee"
+Flexible mechanism to support read-only mountable filesystem trees,
+stacking on top of Linux filesystem.
 
-for a test ?
+It will allow to enable filesystem integrity by leveraging the stack:
+ostree -> composefs -> fs-verity
 
-On Fri, Apr 5, 2024 at 12:13=E2=80=AFAM Martin Jansa <martin.jansa@gmail.co=
-m> wrote:
->
-> qemuarm build log:
-> http://errors.yoctoproject.org/Errors/Details/761504/
->
-> shows -mfpu=3Dneon was already used.
->
-> FAILED: lib/CMakeFiles/jxl_cms.dir/__/third_party/skcms/skcms.cc.o
-> TOPDIR/tmp-glibc/work/cortexa15t2hf-neon-oe-linux-gnueabi/libjxl/0.10.2/r=
-ecipe-sysroot-native/usr/bin/arm-oe-linux-gnueabi/arm-oe-linux-gnueabi-g++
-> --sysroot=3DTOPDIR/tmp-glibc/work/cortexa15t2hf-neon-oe-linux-gnueabi/lib=
-jxl/0.10.2/recipe-sysroot
-> -DFJXL_ENABLE_AVX512=3D0
-> -DHWY_DISABLED_TARGETS=3D"(HWY_SSSE3|HWY_AVX3|HWY_AVX3_SPR|HWY_AVX3_ZEN4)=
-"
-> -D__DATE__=3D\"redacted\" -D__TIMESTAMP__=3D\"redacted\"
-> -D__TIME__=3D\"redacted\" -Djxl_cms_EXPORTS
-> -ITOPDIR/tmp-glibc/work/cortexa15t2hf-neon-oe-linux-gnueabi/libjxl/0.10.2=
-/git
-> -ITOPDIR/tmp-glibc/work/cortexa15t2hf-neon-oe-linux-gnueabi/libjxl/0.10.2=
-/git/third_party/skcms
-> -isystem TOPDIR/tmp-glibc/work/cortexa15t2hf-neon-oe-linux-gnueabi/libjxl=
-/0.10.2/build/lib/include
-> -mthumb -mfpu=3Dneon -mfloat-abi=3Dhard -mcpu=3Dcortex-a15 -D_TIME_BITS=
-=3D64
-> -D_FILE_OFFSET_BITS=3D64
-> --sysroot=3DTOPDIR/tmp-glibc/work/cortexa15t2hf-neon-oe-linux-gnueabi/lib=
-jxl/0.10.2/recipe-sysroot
->  -O2 -pipe -g -feliminate-unused-debug-types -fcanon-prefix-map
-> -fmacro-prefix-map=3DTOPDIR/tmp-glibc/work/cortexa15t2hf-neon-oe-linux-gn=
-ueabi/libjxl/0.10.2/git=3D/usr/src/debug/libjxl/0.10.2
->  -fdebug-prefix-map=3DTOPDIR/tmp-glibc/work/cortexa15t2hf-neon-oe-linux-g=
-nueabi/libjxl/0.10.2/git=3D/usr/src/debug/libjxl/0.10.2
->  -fmacro-prefix-map=3DTOPDIR/tmp-glibc/work/cortexa15t2hf-neon-oe-linux-g=
-nueabi/libjxl/0.10.2/build=3D/usr/src/debug/libjxl/0.10.2
->  -fdebug-prefix-map=3DTOPDIR/tmp-glibc/work/cortexa15t2hf-neon-oe-linux-g=
-nueabi/libjxl/0.10.2/build=3D/usr/src/debug/libjxl/0.10.2
->  -fdebug-prefix-map=3DTOPDIR/tmp-glibc/work/cortexa15t2hf-neon-oe-linux-g=
-nueabi/libjxl/0.10.2/recipe-sysroot=3D
->  -fmacro-prefix-map=3DTOPDIR/tmp-glibc/work/cortexa15t2hf-neon-oe-linux-g=
-nueabi/libjxl/0.10.2/recipe-sysroot=3D
->  -fdebug-prefix-map=3DTOPDIR/tmp-glibc/work/cortexa15t2hf-neon-oe-linux-g=
-nueabi/libjxl/0.10.2/recipe-sysroot-native=3D
->  -fvisibility-inlines-hidden -mfp16-format=3Dieee -fno-rtti -DNDEBUG
-> -std=3Dc++11 -fPIC -fvisibility=3Dhidden -fvisibility-inlines-hidden
-> -fmacro-prefix-map=3DTOPDIR/tmp-glibc/work/cortexa15t2hf-neon-oe-linux-gn=
-ueabi/libjxl/0.10.2/git=3D.
-> -funwind-tables -fno-omit-frame-pointer -Wno-builtin-macro-redefined
-> -Wall -fmerge-all-constants -fno-builtin-fwrite -fno-builtin-fread
-> -Wextra -Wc++11-compat -Warray-bounds -Wformat-security
-> -Wimplicit-fallthrough -Wno-register -Wno-unused-function
-> -Wno-unused-parameter -Wnon-virtual-dtor -Woverloaded-virtual -Wvla
-> -fsized-deallocation -fno-exceptions -fmath-errno
-> -DJPEGXL_ENABLE_SKCMS=3D1 -DHWY_STATIC_DEFINE -Wno-psabi -MD -MT
-> lib/CMakeFiles/jxl_cms.dir/__/third_party/skcms/skcms.cc.o -MF
-> lib/CMakeFiles/jxl_cms.dir/__/third_party/skcms/skcms.cc.o.d -o
-> lib/CMakeFiles/jxl_cms.dir/__/third_party/skcms/skcms.cc.o -c
-> TOPDIR/tmp-glibc/work/cortexa15t2hf-neon-oe-linux-gnueabi/libjxl/0.10.2/g=
-it/third_party/skcms/skcms.cc
-> In file included from
-> TOPDIR/tmp-glibc/work/cortexa15t2hf-neon-oe-linux-gnueabi/libjxl/0.10.2/g=
-it/third_party/skcms/skcms.cc:18:
-> TOPDIR/tmp-glibc/work/cortexa15t2hf-neon-oe-linux-gnueabi/libjxl/0.10.2/r=
-ecipe-sysroot-native/usr/lib/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/=
-14.0.1/include/arm_neon.h:
-> In function 'baseline::F baseline::F_from_Half(U16)':
-> TOPDIR/tmp-glibc/work/cortexa15t2hf-neon-oe-linux-gnueabi/libjxl/0.10.2/r=
-ecipe-sysroot-native/usr/lib/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/=
-14.0.1/include/arm_neon.h:7526:1:
-> error: inlining failed in call to 'always_inline' 'float32x4_t
-> vcvt_f32_f16(float16x4_t)': target specific option mismatch
->  7526 | vcvt_f32_f16 (float16x4_t __a)
->       | ^~~~~~~~~~~~
-> In file included from
-> TOPDIR/tmp-glibc/work/cortexa15t2hf-neon-oe-linux-gnueabi/libjxl/0.10.2/g=
-it/third_party/skcms/skcms.cc:2315:
-> TOPDIR/tmp-glibc/work/cortexa15t2hf-neon-oe-linux-gnueabi/libjxl/0.10.2/g=
-it/third_party/skcms/src/Transform_inl.h:155:24:
-> note: called from here
->   155 |     return vcvt_f32_f16((float16x4_t)half);
->       |            ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~
->
-> On Fri, Apr 5, 2024 at 8:48=E2=80=AFAM <f_l_k@t-online.de> wrote:
-> >
-> > Does this also happen if you add '-mfpu=3Dneon' to CXXFLAGS ?
-> >
-> > On Fri, Apr 5 2024 at 07:54:47 AM +02:00:00, Martin Jansa <martin.jansa=
-@gmail.com> wrote:
-> >
-> > I'm seeing build failure in 32bit arm builds (with multilib): lib32-lib=
-jxl/0.10.2/recipe-sysroot-native/usr/lib/arm-oemllib32-linux-gnueabi/gcc/ar=
-m-oemllib32-linux-gnueabi/13.2.0/include/arm_neon.h:7526:1: error: inlining=
- failed in call to 'always_inline' 'float32x4_t vcvt_f32_f16(float16x4_t)':=
- target specific option mismatch 7526 | vcvt_f32_f16 (float16x4_t __a) | ^~=
-~~~~~~~~~~ In file included from TOPDIR/BUILD/work/mach-oemllib32-linux-gnu=
-eabi/lib32-libjxl/0.10.2/git/third_party/skcms/skcms.cc:2315: TOPDIR/BUILD/=
-work/mach-oemllib32-linux-gnueabi/lib32-libjxl/0.10.2/git/third_party/skcms=
-/src/Transform_inl.h:155:24: note: called from here 155 | return vcvt_f32_f=
-16((float16x4_t)half); | ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~ should I try to re=
-produce on some publicly available arm MACHINE (like qemuarm) or is someone=
- else seeing this as well? On Tue, Apr 2, 2024 at 7:50=E2=80=AFAM Markus Vo=
-lk <f_l_k@t-online.de> wrote:
-> >
-> > Import this recipe from meta-wayland, because it is a prerequisite for =
-the Gnome desktop. The recently updated gnome-backgrounds package has conve=
-rted most of the backgrounds to jxl and to keep them usable the gdk-pixbuf-=
-loader for jpegxl must be provided. This is included in the libjxl package =
-itself. Signed-off-by: Markus Volk <f_l_k@t-online.de> --- .../libjxl/libjx=
-l_2.10.0.bb | 42 +++++++++++++++++++ 1 file changed, 42 insertions(+) creat=
-e mode 100644 meta-oe/recipes-multimedia/libjxl/libjxl_2.10.0.bb diff --git=
- a/meta-oe/recipes-multimedia/libjxl/libjxl_2.10.0.bb b/meta-oe/recipes-mul=
-timedia/libjxl/libjxl_2.10.0.bb new file mode 100644 index 000000000..0c4f7=
-9fdb --- /dev/null +++ b/meta-oe/recipes-multimedia/libjxl/libjxl_2.10.0.bb=
- @@ -0,0 +1,42 @@ +SUMMARY =3D "Reference implementation of JPEG XL (encode=
-r and decoder)" +HOMEPAGE =3D "https://github.com/libjxl/libjxl/" + +LICENS=
-E =3D "BSD-3-Clause" +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D6a905a337c=
-c228a1f68f0b5416f52a7f" + +inherit cmake pkgconfig mime + +DEPENDS =3D "hig=
-hway brotli" + +SRC_URI =3D "gitsm://github.com/libjxl/libjxl.git;protocol=
-=3Dhttps;nobranch=3D1" + +SRCREV =3D "e1489592a770b989303b0edc5cc1dc447bbe0=
-515" +S =3D "${WORKDIR}/git" + +EXTRA_OECMAKE =3D " \ + -DCMAKE_BUILD_TYPE=
-=3DRelease \ + -DJPEGXL_ENABLE_PLUGINS=3DON \ + -DBUILD_TESTING=3DOFF \ + -=
-DJPEGXL_WARNINGS_AS_ERRORS=3DOFF \ + -DJPEGXL_ENABLE_SIZELESS_VECTORS=3DON =
-\ + -DJPEGXL_ENABLE_SJPEG=3DOFF \ + -DJPEGXL_ENABLE_BENCHMARK=3DOFF \ + -DJ=
-PEGXL_ENABLE_EXAMPLES=3DOFF \ + -DJPEGXL_ENABLE_MANPAGES=3DOFF \ + -DJPEGXL=
-_ENABLE_SKCMS=3DON \ + -DJPEGXL_FORCE_SYSTEM_BROTLI=3DON \ + -DJPEGXL_FORCE=
-_SYSTEM_HWY=3DON \ + -DJPEGXL_ENABLE_JNI=3DOFF \ + -DJPEGXL_ENABLE_TCMALLOC=
-=3DOFF \ + -DJPEGXL_ENABLE_TOOLS=3DOFF \ +" + +PACKAGECONFIG ?=3D "mime gdk=
--pixbuf-loader" +PACKAGECONFIG[gdk-pixbuf-loader] =3D "-DJPEGXL_ENABLE_PLUG=
-IN_GDKPIXBUF=3DON,-DJPEGXL_ENABLE_PLUGIN_GDKPIXBUF=3DOFF,gdk-pixbuf" +PACKA=
-GECONFIG[gimp] =3D "-DJPEGXL_ENABLE_PLUGIN_GIMP210=3DON,-DJPEGXL_ENABLE_PLU=
-GIN_GIMP210=3DOFF,gimp" +PACKAGECONFIG[mime] =3D "-DJPEGXL_ENABLE_PLUGIN_MI=
-ME=3DON,-DJPEGXL_ENABLE_PLUGIN_MIME=3DOFF" + +FILES:${PN} +=3D "${libdir}/g=
-dk-pixbuf-2.0 ${datadir}" + +CXXFLAGS:append:arm =3D " -mfp16-format=3Dieee=
-" + -- 2.44.0
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#109816): https://lists.openembedded.org/g/openembedde=
-d-devel/message/109816
-> Mute This Topic: https://lists.openembedded.org/mt/105282918/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+For reference:
+https://github.com/containers/composefs?tab=readme-ov-file#filesystem-integrity
+https://ostreedev.github.io/ostree/composefs/#using-composefs-with-ostree
+
+Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
+---
+ .../composefs/composefs_1.0.3.bb              | 20 +++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/composefs/composefs_1.0.3.bb
+
+diff --git a/meta-oe/recipes-extended/composefs/composefs_1.0.3.bb b/meta-oe/recipes-extended/composefs/composefs_1.0.3.bb
+new file mode 100644
+index 0000000000..ddc67d9b57
+--- /dev/null
++++ b/meta-oe/recipes-extended/composefs/composefs_1.0.3.bb
+@@ -0,0 +1,20 @@
++SUMMARY = "Tools to handle creating and mounting composefs images"
++HOMEPAGE = "https://github.com/containers/composefs"
++LICENSE = "GPL-3.0-or-later & LGPL-2.0-or-later & Apache-2.0"
++LIC_FILES_CHKSUM = "\
++    file://BSD-2-Clause.txt;md5=121c8a0a8fa5961a26b7863034ebcce8 \
++    file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
++    file://COPYING.LESSERv3;md5=6a6a8e020838b23406c81b19c1d46df6 \
++    file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
++    file://COPYINGv3;md5=d32239bcb673463ab874e80d47fae504 \
++    file://LICENSE.Apache-2.0;md5=3b83ef96387f14655fc854ddc3c6bd57 \
++"
++DEPENDS = "fuse3 openssl"
++SRCREV = "2d5cdcb9176cfe4ccf1761ef6d78e1c48de35649"
++PV = "1.0.3"
++
++SRC_URI = "git://github.com/containers/composefs.git;protocol=https;branch=main"
++
++S = "${WORKDIR}/git"
++
++inherit autotools pkgconfig
+-- 
+2.43.0
+
 
