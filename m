@@ -1,419 +1,146 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 19A2DC67861
-	for <webhook@archiver.kernel.org>; Sat,  6 Apr 2024 14:13:29 +0000 (UTC)
-Received: from mail-yb1-f175.google.com (mail-yb1-f175.google.com [209.85.219.175])
- by mx.groups.io with SMTP id smtpd.web10.26163.1712412806394932469
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CD5ECC67861
+	for <webhook@archiver.kernel.org>; Sat,  6 Apr 2024 17:03:49 +0000 (UTC)
+Received: from mail-oa1-f43.google.com (mail-oa1-f43.google.com [209.85.160.43])
+ by mx.groups.io with SMTP id smtpd.web10.36758.1712423020380240723
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 06 Apr 2024 07:13:26 -0700
+ Sat, 06 Apr 2024 10:03:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=mClPA4Zh;
- spf=pass (domain: gmail.com, ip: 209.85.219.175, mailfrom: ticotimo@gmail.com)
-Received: by mail-yb1-f175.google.com with SMTP id 3f1490d57ef6-dcd9e34430cso3554489276.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 06 Apr 2024 07:13:26 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=hB+b8jQA;
+ spf=pass (domain: gmail.com, ip: 209.85.160.43, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f43.google.com with SMTP id 586e51a60fabf-229661f57cbso1629040fac.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 06 Apr 2024 10:03:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1712412805; x=1713017605; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=yspFh+S+XaCsSjihEquYMMFn7yKSf9Ox/Lisbrg15tI=;
-        b=mClPA4Zhk92EmaKUDkcMFxXLGPmLQo5Sy+rf9cNf8eUMB/EGo75m1rX/4eo3aAh7gZ
-         cONoUHSjSNapSNi/He4+27P+k4kWTZRcODtxcg3DomaC7XcGq5FIGlLr0hyfVb5QaFdX
-         WWWIciqHEYHYV48VKUC4xKoa5v1zw8Y1q5W+AQeVPoRHCwEF8SMJ5pSs4c/iCeBd+oW9
-         mHDo0oGa8emtymKVHSNRZqnVhlS15C5S6A0HzAolBbiwyAGqjE9DIDTXvWfVzMviN9zR
-         gEMYkz2gjEhJ32r2D9sT/tMgMXOMmg5z03/wBx0DbZTLB0wiD0uEZuL5g5NojLTBnCQF
-         i0Iw==
+        d=gmail.com; s=20230601; t=1712423019; x=1713027819; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=uHeqUsmfOr3U4pC3fAkMNPYZpscUKLuBWtiXWIUg+0M=;
+        b=hB+b8jQAIqtZ+V8uJrvVLSAuC8B8C1CyymUXYxQ4UPsxk7t4Ag4Sx5sBmNvbLgcAIq
+         mBszhmRiZwgFnlrSBXN9njOh1dGF+zAaZqE9Lh7Kiix1cDtAFlUsrHN/YW6qpeMFp6Bu
+         NNwoIyHFxzD/VIUIn18VnpVixGZdbkCOzNppq3xboRZ2eyGxQ59YM6eqdYQj8UmyF5TJ
+         heBNREUPkHyz1N6AEYqrNl9SbaMJLK9poCo3oD4rAbpuZF/WOYR0yyFbe9m11EJhNGJN
+         kZrKFUg0hwUtyWdj2i6tz2xjc9mLqEAqZoC502Wt07XFaIxkMaNNmtq1AQhE/28qwvSz
+         O+2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1712412805; x=1713017605;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=yspFh+S+XaCsSjihEquYMMFn7yKSf9Ox/Lisbrg15tI=;
-        b=HWlqaPMJrASv8g3K4uoIjbWVCpTHVQZ8u+9aKlLSt1Psra5rgs295QuEN4SQBc9kVC
-         MJ2YeAuodfYWwv1n+rTs1WSWw2dwwHeoYHub2KfPh3VkOH7RCH9Y6HdEt+b4GlzQN8FW
-         Scr286Y2DVChuQhilKgep/EtpLfpW690s/8u0OGMSeYp85dHMPqUVvxJJ7L9gIYvPMci
-         glZDG+7D1HrqdEhsd+vTb58Q4cwHq4MzwVkEVIPFdMXjyqZcB6KWEbwiPAq+xLKKRZKo
-         434OuyknSvy8n8J8Nz33mQPTJyX2g1k3VAjKPt8Y4pd/BB/V/UCWuFq513m6KKuziJKQ
-         Ui2w==
-X-Forwarded-Encrypted: i=1; AJvYcCUhQEYRw8HebYUfrCEn7Wuoh7fy1jJoSujezCOJni02E7JXAOG9zvr85chndSMK01FuUsy/W3kQScgevONT5Zd28Pvgi1YjwpXZCz5atrJZeZllUa1pE0Vi1w==
-X-Gm-Message-State: AOJu0YzHdXe1PmRmnEFMFJva0pISFxtd7JS+o/sHnfCPdd3FZHQjfMd2
-	jIQEfdx5bq02iS9yOPvfvjIxvDNbX9t6dhjYQxD2jMpEF0kK4O9ZcNg/37uEdah3+hv/J4U6LsM
-	84BFuf0FoGKbNic6BLWXYS5D8Fks=
-X-Google-Smtp-Source: AGHT+IEghw47AEF1vvnhBRcT0AAWJhWaG/H/+SYQmRk3R79QawfrgSJGBjTdtGTyl/GgTROq3XIqrHvaLEdxOCYQ2ZQ=
-X-Received: by 2002:a25:ae0a:0:b0:dcc:99b6:830b with SMTP id
- a10-20020a25ae0a000000b00dcc99b6830bmr3879951ybj.19.1712412805183; Sat, 06
- Apr 2024 07:13:25 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1712423019; x=1713027819;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=uHeqUsmfOr3U4pC3fAkMNPYZpscUKLuBWtiXWIUg+0M=;
+        b=dFev5cV6x1M0L+iE0TdnjwvaZGBwSiQQRggacO/LcoMeUOnKEzcxJ+gbiTqbkqz5x5
+         XxN0tR4zVS7tb9+nNmfDPo9E8YjsHGrwcI+2/zB+JTizprNIJWy7XWU3/THb6ZKErYyZ
+         I3ckXcCd3Rx4Ly/QZYp2zXLuUZ1mdCJSJrbVfbnbzRsjAg+RPhEQDxFzLvTqckYAo/It
+         8jQHD/8/aKW5LnzNU9RZAhYcrvZ0zDMdFaPQyKUX0iIoo+cZdB7R8nAqFORq+AQmuRRG
+         V23haXXTRqjdhLA8eGb01m23i8SBgCDwnnWBJJKhkEuwLvk0pHFcmmaWvtNcK9dtuI12
+         r6BQ==
+X-Gm-Message-State: AOJu0YwrhqfxDqhChZqzuuU4mxszpoaZ12SvY57rUAub8SjzB0tbAqEd
+	Ouor8DAjmvpzTL37JTrkmRCakVZj/rj+IjyRle8zBnnQyLb+BNIRTlYP7XO0xTJfwkFWeY85Azm
+	GCIKYmLXytQl1lrtRMAoV6Dg0AvE=
+X-Google-Smtp-Source: AGHT+IH3VewZYOxwSRqLBhwqjFUfrZ42+3s3JkAiPhb3nxdIjVk7q7vO4k+Ub5fnEma6vXruh317wd1ZKc+PfEFQl2E=
+X-Received: by 2002:a05:6870:819d:b0:22e:bcfd:debc with SMTP id
+ k29-20020a056870819d00b0022ebcfddebcmr5278195oae.13.1712423019624; Sat, 06
+ Apr 2024 10:03:39 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240405215254.1338168-1-alperyasinak1@gmail.com>
- <CAMKF1sp0N4cVm=qmz=Gh6MOQQXgMMtWB-9TAPMd8x-F0O+zjPw@mail.gmail.com> <CAGpma=61Z11fO0w_m9dL_+cZeJq4xU3z4X2pgr1b+V=tvwAAaA@mail.gmail.com>
-In-Reply-To: <CAGpma=61Z11fO0w_m9dL_+cZeJq4xU3z4X2pgr1b+V=tvwAAaA@mail.gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Sat, 6 Apr 2024 07:13:14 -0700
-Message-ID: <CANx9H-Cz8DH3DkKPJh5toZAxKJ9+vmaMYA0Z+Ge+zG++PiV0Vg@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH] python3-bleak: enable ptest and add
- missing runtime dependency
-To: Alper Ak <alperyasinak1@gmail.com>
-Cc: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000f6418806156e2c09"
+References: <20240405162459.1286945-1-fathi.boudra@linaro.org> <CAMKF1soBViCDq1i8+ZS8k32U3rV5Hb4DbqPCXZy-+qeEgaMPtg@mail.gmail.com>
+In-Reply-To: <CAMKF1soBViCDq1i8+ZS8k32U3rV5Hb4DbqPCXZy-+qeEgaMPtg@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 6 Apr 2024 10:03:13 -0700
+Message-ID: <CAMKF1spPChTZ2j0QUzWVamSKzZPCPuX9R+eOe=04qXfef7ecFg@mail.gmail.com>
+Subject: Re: [oe][meta-oe][PATCH] composefs: add a new recipe
+To: Fathi Boudra <fathi.boudra@linaro.org>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 06 Apr 2024 14:13:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109833
+ <openembedded-devel@lists.openembedded.org>; Sat, 06 Apr 2024 17:03:49 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109834
 
---000000000000f6418806156e2c09
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+also fails
 
-On Fri, Apr 5, 2024 at 10:34=E2=80=AFPM Alper Ak <alperyasinak1@gmail.com> =
-wrote:
+stdio: ERROR: Nothing PROVIDES 'fuse3' (but
+/home/pokybuild/yocto-worker/meta-oe/build/meta-openembedded/meta-oe/recipe=
+s-extended/composefs/composefs_1.0.3.bb
+DEPENDS on or otherwise requires it)
 
-> Sorry, I overlooked it. The tests directory was not present in the packag=
-e
-> downloaded with the default PYPI_SRC_URI value.
+this is because fuse3 is in meta-filesystem and meta-oe does not depend on =
+it.
+
+On Fri, Apr 5, 2024 at 6:03=E2=80=AFPM Khem Raj <raj.khem@gmail.com> wrote:
 >
-
-Unfortunately, many pypi.org tarballs exclude tests. So switching to git
-fetcher will make sense in those cases.
-Given the =E2=80=9Cxz backdoor=E2=80=9D incident, we might decide to prefer=
- git.
-
+> fails with latest musl
 >
-> Khem Raj <raj.khem@gmail.com>, 6 Nis 2024 Cmt, 01:46 tarihinde =C5=9Funu =
-yazd=C4=B1:
+> https://errors.yoctoproject.org/Errors/Details/761688/
 >
->> On Fri, Apr 5, 2024 at 2:53=E2=80=AFPM Alper Ak <alperyasinak1@gmail.com=
-> wrote:
->> >
->> > * Ptest tested on qemux86-64 and qemuarm64
->> >
->> > * Add ptest into PTESTS_FAST_META_PYTHON
->> >
->> > qemux86-64:
->> >
->> > Testsuite summary
->> > TOTAL: 14
->> > PASS: 14
->> > SKIP: 0
->> > XFAIL: 0
->> > FAIL: 0
->> > XPASS: 0
->> > ERROR: 0
->> > DURATION: 9
->> > END: /usr/lib/python3-bleak/ptest
->> > 2024-04-05T18:44
->> > STOP: ptest-runner
->> > TOTAL: 1 FAIL: 0
->> >
->> > qemuarm64:
->> >
->> > Testsuite summary
->> > TOTAL: 14
->> > PASS: 14
->> > SKIP: 0
->> > XFAIL: 0
->> > FAIL: 0
->> > XPASS: 0
->> > ERROR: 0
->> > DURATION: 8
->> > END: /usr/lib/python3-bleak/ptest
->> > 2024-04-05T21:15
->> > STOP: ptest-runner
->> > TOTAL: 1 FAIL: 0
->> >
->> > Signed-off-by: alperak <alperyasinak1@gmail.com>
->> > ---
->> >  .../ptest-packagelists-meta-python.inc        |  1 +
->> >  .../python/python3-bleak/run-ptest            |  3 ++
->> >  .../python/python3-bleak_0.21.1.bb            | 29 +++++++++++++++---=
--
->> >  3 files changed, 27 insertions(+), 6 deletions(-)
->> >  create mode 100644
->> meta-python/recipes-devtools/python/python3-bleak/run-ptest
->> >
->> > diff --git
->> a/meta-python/conf/include/ptest-packagelists-meta-python.inc
->> b/meta-python/conf/include/ptest-packagelists-meta-python.inc
->> > index 2f7babe48..63f312b45 100644
->> > --- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
->> > +++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
->> > @@ -12,6 +12,7 @@ PTESTS_FAST_META_PYTHON =3D "\
->> >      python3-ansicolors \
->> >      python3-asgiref \
->> >      python3-aspectlib \
->> > +    python3-bleak \
->> >      python3-blinker \
->> >      python3-cachetools \
->> >      python3-cbor2 \
->> > diff --git
->> a/meta-python/recipes-devtools/python/python3-bleak/run-ptest
->> b/meta-python/recipes-devtools/python/python3-bleak/run-ptest
->> > new file mode 100644
->> > index 000000000..8d2017d39
->> > --- /dev/null
->> > +++ b/meta-python/recipes-devtools/python/python3-bleak/run-ptest
->> > @@ -0,0 +1,3 @@
->> > +#!/bin/sh
->> > +
->> > +pytest --automake
->> > diff --git a/meta-python/recipes-devtools/python/
->> python3-bleak_0.21.1.bb b/meta-python/recipes-devtools/python/
->> python3-bleak_0.21.1.bb
->> > index 4a1fafb5d..96f3fcbcf 100644
->> > --- a/meta-python/recipes-devtools/python/python3-bleak_0.21.1.bb
->> > +++ b/meta-python/recipes-devtools/python/python3-bleak_0.21.1.bb
->> > @@ -3,14 +3,31 @@ HOMEPAGE =3D "https://github.com/hbldh/bleak"
->> >  LICENSE =3D "MIT"
->> >  LIC_FILES_CHKSUM =3D
->> "file://LICENSE;md5=3Dbcbc2069a86cba1b5e47253679f66ed7"
->> >
->> > -SRC_URI[sha256sum] =3D
->> "ec4a1a2772fb315b992cbaa1153070c7e26968a52b0e2727035f443a1af5c18f"
->> > +SRCREV =3D "054b092e19c7a45d5ea07d8948022f54117fe5e8"
->> > +PYPI_SRC_URI =3D "git://
->> github.com/hbldh/bleak.git;protocol=3Dhttps;branch=3Ddevelop"
->>
->> why do we need this change if we are not bumping versions ?
->>
->> >
->> > -PYPI_PACKAGE =3D "bleak"
->> > +inherit pypi python_poetry_core ptest
->> >
->> > -inherit pypi python_poetry_core
->> > +S =3D "${WORKDIR}/git"
->> > +
->> > +SRC_URI +=3D " \
->> > +       file://run-ptest \
->> > +"
->> > +
->> > +RDEPENDS:${PN}-ptest +=3D " \
->> > +       python3-pytest \
->> > +       python3-pytest-asyncio \
->> > +       python3-unittest-automake-output \
->> > +"
->> > +
->> > +do_install_ptest() {
->> > +       install -d ${D}${PTEST_PATH}/tests
->> > +       cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
->> > +}
->> >
->> >  RDEPENDS:${PN} +=3D " \
->> > -    python3-core (>3.7) \
->> > -    python3-async-timeout \
->> > -    python3-dbus-fast \
->> > +       python3-core (>3.7) \
->> > +       python3-async-timeout \
->> > +       python3-dbus-fast \
->> > +       python3-xml \
->> >  "
->> > --
->> > 2.25.1
->> >
->> >
->> >
->> >
->>
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#109831):
-> https://lists.openembedded.org/g/openembedded-devel/message/109831
-> Mute This Topic: https://lists.openembedded.org/mt/105358066/924729
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> ticotimo@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
-
---000000000000f6418806156e2c09
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Fri, Apr 5, 2024 at 10:34=E2=80=AFPM Alper Ak &lt;<a hre=
-f=3D"mailto:alperyasinak1@gmail.com">alperyasinak1@gmail.com</a>&gt; wrote:=
-<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8=
-ex;border-left-width:1px;border-left-style:solid;padding-left:1ex;border-le=
-ft-color:rgb(204,204,204)"><div dir=3D"ltr">Sorry, I overlooked it. The tes=
-ts directory was not present in the package downloaded with the default PYP=
-I_SRC_URI value.</div></blockquote><div dir=3D"auto"><br></div><div dir=3D"=
-auto">Unfortunately, many <a href=3D"http://pypi.org">pypi.org</a> tarballs=
- exclude tests. So switching to git fetcher will make sense in those cases.=
-=C2=A0</div><div dir=3D"auto">Given the =E2=80=9Cxz backdoor=E2=80=9D incid=
-ent, we might decide to prefer git.</div><blockquote class=3D"gmail_quote" =
-style=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-style:s=
-olid;padding-left:1ex;border-left-color:rgb(204,204,204)"><div dir=3D"ltr">=
-</div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">=
-Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_blank">raj.kh=
-em@gmail.com</a>&gt;, 6 Nis 2024 Cmt, 01:46 tarihinde =C5=9Funu yazd=C4=B1:=
-<br></div></div><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote=
-" style=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-style=
-:solid;padding-left:1ex;border-left-color:rgb(204,204,204)">On Fri, Apr 5, =
-2024 at 2:53=E2=80=AFPM Alper Ak &lt;<a href=3D"mailto:alperyasinak1@gmail.=
-com" target=3D"_blank">alperyasinak1@gmail.com</a>&gt; wrote:<br>
-&gt;<br>
-&gt; * Ptest tested on qemux86-64 and qemuarm64<br>
-&gt;<br>
-&gt; * Add ptest into PTESTS_FAST_META_PYTHON<br>
-&gt;<br>
-&gt; qemux86-64:<br>
-&gt;<br>
-&gt; Testsuite summary<br>
-&gt; TOTAL: 14<br>
-&gt; PASS: 14<br>
-&gt; SKIP: 0<br>
-&gt; XFAIL: 0<br>
-&gt; FAIL: 0<br>
-&gt; XPASS: 0<br>
-&gt; ERROR: 0<br>
-&gt; DURATION: 9<br>
-&gt; END: /usr/lib/python3-bleak/ptest<br>
-&gt; 2024-04-05T18:44<br>
-&gt; STOP: ptest-runner<br>
-&gt; TOTAL: 1 FAIL: 0<br>
-&gt;<br>
-&gt; qemuarm64:<br>
-&gt;<br>
-&gt; Testsuite summary<br>
-&gt; TOTAL: 14<br>
-&gt; PASS: 14<br>
-&gt; SKIP: 0<br>
-&gt; XFAIL: 0<br>
-&gt; FAIL: 0<br>
-&gt; XPASS: 0<br>
-&gt; ERROR: 0<br>
-&gt; DURATION: 8<br>
-&gt; END: /usr/lib/python3-bleak/ptest<br>
-&gt; 2024-04-05T21:15<br>
-&gt; STOP: ptest-runner<br>
-&gt; TOTAL: 1 FAIL: 0<br>
-&gt;<br>
-&gt; Signed-off-by: alperak &lt;<a href=3D"mailto:alperyasinak1@gmail.com" =
-target=3D"_blank">alperyasinak1@gmail.com</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 .../ptest-packagelists-meta-python.inc=C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 |=C2=A0 1 +<br>
-&gt;=C2=A0 .../python/python3-bleak/run-ptest=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 |=C2=A0 3 ++<br>
-&gt;=C2=A0 .../python/<a href=3D"http://python3-bleak_0.21.1.bb" rel=3D"nor=
-eferrer" target=3D"_blank">python3-bleak_0.21.1.bb</a>=C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 | 29 +++++++++++++++----<br>
-&gt;=C2=A0 3 files changed, 27 insertions(+), 6 deletions(-)<br>
-&gt;=C2=A0 create mode 100644 meta-python/recipes-devtools/python/python3-b=
-leak/run-ptest<br>
-&gt;<br>
-&gt; diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.i=
-nc b/meta-python/conf/include/ptest-packagelists-meta-python.inc<br>
-&gt; index 2f7babe48..63f312b45 100644<br>
-&gt; --- a/meta-python/conf/include/ptest-packagelists-meta-python.inc<br>
-&gt; +++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc<br>
-&gt; @@ -12,6 +12,7 @@ PTESTS_FAST_META_PYTHON =3D &quot;\<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 python3-ansicolors \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 python3-asgiref \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 python3-aspectlib \<br>
-&gt; +=C2=A0 =C2=A0 python3-bleak \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 python3-blinker \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 python3-cachetools \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 python3-cbor2 \<br>
-&gt; diff --git a/meta-python/recipes-devtools/python/python3-bleak/run-pte=
-st b/meta-python/recipes-devtools/python/python3-bleak/run-ptest<br>
-&gt; new file mode 100644<br>
-&gt; index 000000000..8d2017d39<br>
-&gt; --- /dev/null<br>
-&gt; +++ b/meta-python/recipes-devtools/python/python3-bleak/run-ptest<br>
-&gt; @@ -0,0 +1,3 @@<br>
-&gt; +#!/bin/sh<br>
-&gt; +<br>
-&gt; +pytest --automake<br>
-&gt; diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://pyt=
-hon3-bleak_0.21.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-bleak_0.=
-21.1.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://python3=
--bleak_0.21.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-bleak_0.21.1=
-.bb</a><br>
-&gt; index 4a1fafb5d..96f3fcbcf 100644<br>
-&gt; --- a/meta-python/recipes-devtools/python/<a href=3D"http://python3-bl=
-eak_0.21.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-bleak_0.21.1.bb=
-</a><br>
-&gt; +++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-bl=
-eak_0.21.1.bb" rel=3D"noreferrer" target=3D"_blank">python3-bleak_0.21.1.bb=
-</a><br>
-&gt; @@ -3,14 +3,31 @@ HOMEPAGE =3D &quot;<a href=3D"https://github.com/hbl=
-dh/bleak" rel=3D"noreferrer" target=3D"_blank">https://github.com/hbldh/ble=
-ak</a>&quot;<br>
-&gt;=C2=A0 LICENSE =3D &quot;MIT&quot;<br>
-&gt;=C2=A0 LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3Dbcbc2069a86cba1b=
-5e47253679f66ed7&quot;<br>
-&gt;<br>
-&gt; -SRC_URI[sha256sum] =3D &quot;ec4a1a2772fb315b992cbaa1153070c7e26968a5=
-2b0e2727035f443a1af5c18f&quot;<br>
-&gt; +SRCREV =3D &quot;054b092e19c7a45d5ea07d8948022f54117fe5e8&quot;<br>
-&gt; +PYPI_SRC_URI =3D &quot;git://<a href=3D"http://github.com/hbldh/bleak=
-.git;protocol=3Dhttps;branch=3Ddevelop" rel=3D"noreferrer" target=3D"_blank=
-">github.com/hbldh/bleak.git;protocol=3Dhttps;branch=3Ddevelop</a>&quot;<br=
->
-<br>
-why do we need this change if we are not bumping versions ?<br>
-<br>
-&gt;<br>
-&gt; -PYPI_PACKAGE =3D &quot;bleak&quot;<br>
-&gt; +inherit pypi python_poetry_core ptest<br>
-&gt;<br>
-&gt; -inherit pypi python_poetry_core<br>
-&gt; +S =3D &quot;${WORKDIR}/git&quot;<br>
-&gt; +<br>
-&gt; +SRC_URI +=3D &quot; \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0file://run-ptest \<br>
-&gt; +&quot;<br>
-&gt; +<br>
-&gt; +RDEPENDS:${PN}-ptest +=3D &quot; \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0python3-pytest \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0python3-pytest-asyncio \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0python3-unittest-automake-output \<br>
-&gt; +&quot;<br>
-&gt; +<br>
-&gt; +do_install_ptest() {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0install -d ${D}${PTEST_PATH}/tests<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0cp -rf ${S}/tests/* ${D}${PTEST_PATH}/test=
-s/<br>
-&gt; +}<br>
-&gt;<br>
-&gt;=C2=A0 RDEPENDS:${PN} +=3D &quot; \<br>
-&gt; -=C2=A0 =C2=A0 python3-core (&gt;3.7) \<br>
-&gt; -=C2=A0 =C2=A0 python3-async-timeout \<br>
-&gt; -=C2=A0 =C2=A0 python3-dbus-fast \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0python3-core (&gt;3.7) \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0python3-async-timeout \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0python3-dbus-fast \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0python3-xml \<br>
-&gt;=C2=A0 &quot;<br>
-&gt; --<br>
-&gt; 2.25.1<br>
-&gt;<br>
-&gt;<br>
-&gt; <br>
-&gt;<br>
-</blockquote></div><div class=3D"gmail_quote"></div>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#109831): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/109831" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/109831</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/105358066/924=
-729" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
-/105358066/924729</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
-et=3D"_blank">ticotimo@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
-
---000000000000f6418806156e2c09--
+> On Fri, Apr 5, 2024 at 9:25=E2=80=AFAM Fathi Boudra <fathi.boudra@linaro.=
+org> wrote:
+> >
+> > Tools to handle creating and mounting composefs images
+> >
+> > Flexible mechanism to support read-only mountable filesystem trees,
+> > stacking on top of Linux filesystem.
+> >
+> > It will allow to enable filesystem integrity by leveraging the stack:
+> > ostree -> composefs -> fs-verity
+> >
+> > For reference:
+> > https://github.com/containers/composefs?tab=3Dreadme-ov-file#filesystem=
+-integrity
+> > https://ostreedev.github.io/ostree/composefs/#using-composefs-with-ostr=
+ee
+> >
+> > Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
+> > ---
+> >  .../composefs/composefs_1.0.3.bb              | 20 +++++++++++++++++++
+> >  1 file changed, 20 insertions(+)
+> >  create mode 100644 meta-oe/recipes-extended/composefs/composefs_1.0.3.=
+bb
+> >
+> > diff --git a/meta-oe/recipes-extended/composefs/composefs_1.0.3.bb b/me=
+ta-oe/recipes-extended/composefs/composefs_1.0.3.bb
+> > new file mode 100644
+> > index 0000000000..ddc67d9b57
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-extended/composefs/composefs_1.0.3.bb
+> > @@ -0,0 +1,20 @@
+> > +SUMMARY =3D "Tools to handle creating and mounting composefs images"
+> > +HOMEPAGE =3D "https://github.com/containers/composefs"
+> > +LICENSE =3D "GPL-3.0-or-later & LGPL-2.0-or-later & Apache-2.0"
+> > +LIC_FILES_CHKSUM =3D "\
+> > +    file://BSD-2-Clause.txt;md5=3D121c8a0a8fa5961a26b7863034ebcce8 \
+> > +    file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4263 \
+> > +    file://COPYING.LESSERv3;md5=3D6a6a8e020838b23406c81b19c1d46df6 \
+> > +    file://COPYING.LIB;md5=3D4fbd65380cdd255951079008b364516c \
+> > +    file://COPYINGv3;md5=3Dd32239bcb673463ab874e80d47fae504 \
+> > +    file://LICENSE.Apache-2.0;md5=3D3b83ef96387f14655fc854ddc3c6bd57 \
+> > +"
+> > +DEPENDS =3D "fuse3 openssl"
+> > +SRCREV =3D "2d5cdcb9176cfe4ccf1761ef6d78e1c48de35649"
+> > +PV =3D "1.0.3"
+> > +
+> > +SRC_URI =3D "git://github.com/containers/composefs.git;protocol=3Dhttp=
+s;branch=3Dmain"
+> > +
+> > +S =3D "${WORKDIR}/git"
+> > +
+> > +inherit autotools pkgconfig
+> > --
+> > 2.43.0
+> >
+> >
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > Links: You receive all messages sent to this group.
+> > View/Reply Online (#109825): https://lists.openembedded.org/g/openembed=
+ded-devel/message/109825
+> > Mute This Topic: https://lists.openembedded.org/mt/105351850/1997914
+> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
+[raj.khem@gmail.com]
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >
 
