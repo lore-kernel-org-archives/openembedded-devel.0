@@ -2,89 +2,113 @@ Return-Path: <t.f.g.geelen@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E57EDCD128A
-	for <webhook@archiver.kernel.org>; Sun,  7 Apr 2024 21:25:57 +0000 (UTC)
-Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
- by mx.groups.io with SMTP id smtpd.web11.92290.1712525152933887030
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7EE47CD1292
+	for <webhook@archiver.kernel.org>; Sun,  7 Apr 2024 23:14:58 +0000 (UTC)
+Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com [209.85.218.52])
+ by mx.groups.io with SMTP id smtpd.web11.94326.1712531697180873567
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 07 Apr 2024 14:25:53 -0700
+ Sun, 07 Apr 2024 16:14:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=NF0YmoTX;
- spf=pass (domain: gmail.com, ip: 209.85.218.49, mailfrom: t.f.g.geelen@gmail.com)
-Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-a51d83fafa8so17997766b.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Apr 2024 14:25:52 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=SuS8nUUH;
+ spf=pass (domain: gmail.com, ip: 209.85.218.52, mailfrom: t.f.g.geelen@gmail.com)
+Received: by mail-ej1-f52.google.com with SMTP id a640c23a62f3a-a51d90def9eso18169066b.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Apr 2024 16:14:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1712525151; x=1713129951; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=1T7Ji+/DX5FViXlTAuorBbWDHcPODXQINDiDpPadnqA=;
-        b=NF0YmoTXASbeZ36Gq4DVUesIDlJZe88nutf6SpbxJ5yg4Snw2oPOO53O9pa2nyo3Yw
-         U8kNjXtVRVlqrNyaiwZwi7HjwnZW5D+EvOfOZ9amRtBioLNd6pmMVHfHLEcYNuN16pwa
-         holNVtV+YHPH95oqOCbozJZxLncExKEPI3sO0pwvsw1jbQmx5aMupy3EstEvGq7Kh34U
-         NPQtnvfsOB/27fXg5w55VXTasGVbFHf+DiVtsqWqMCBl9ge7qRr8CK+QGTJzYeIbUGlm
-         k0EQQJ02s+GTVkvyEo/5wN6fagvCKc8LNJFGm0cuF8uxUIUX3DSj+GXxCOtGCHIe4LSz
-         xNiQ==
+        d=gmail.com; s=20230601; t=1712531695; x=1713136495; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=U1TzuPOzxRisPWgS+2RWZK7jc8RUts/z5anpAdEpEXw=;
+        b=SuS8nUUHbmavVeuWZFpEJGQ2Rb53bXG+dbzR5mC4kHq9RVy+u9pTThFgcr2Y7HXDSg
+         Gv8kjPjadhSC5J6iEbvgmiCJYo4EZ2iT/2X/IGSlTLZiT8KLUnV8K0BEHgj2yZXkTOiO
+         r/55tTMRrNaRTi1sUpPVfZ2KFIVBiZX/acMUhmg++yTbm7E3yFJRrU7xJnGmUaAJyy+n
+         6hXrOb5JLNQ55KlS2e1dXrY6JnNsICt4tr7Hvi/ejnRVVibQUiaCfPvIz/PsyZ2xfxul
+         7z1x0gj7JkX/pnphr/VQS8EKPy6h/BE/blrG9Pw01OiNiTVrb+vhttMxgJdZ5W360QD9
+         xhrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1712525151; x=1713129951;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=1T7Ji+/DX5FViXlTAuorBbWDHcPODXQINDiDpPadnqA=;
-        b=TkJLI/CUK9q/8stdW1AnVrCgUaxTuikzZBeQtPjcnsNRShuFbXDGLv7kYsWkRQWVY9
-         qxhSUGgE2oAFQewu/nKXwWiq3NgH/N80RaLImxHFFy+TMtwe0s0VCkDm6pArQqMRioEY
-         1V9J8HxVMalmr9nkRmE9qY8xpVsmIqMZ4KWp2NwT+VwOL/aBCBUSpjZ+dl2KD/+QtsoX
-         L5qEC5WWNzej+4m8haubtSst9U9cgRz+rfigDommODJPfZTJnoasO31U1DV96wsSRsJd
-         jgwq8KZbzrIA0LcamATYSS5sDZwP+wnY1BKmE48qUGfFFe5AGVgVb0jzRKjlDL/J4Vow
-         VG7Q==
-X-Gm-Message-State: AOJu0Yz4B2GmRY8xnntWq0HSh7x6dEPXA/33D9045NQ+ngFFAde7tjsE
-	A3RAA/S/Woxq/7A71sbUWCmZP6hwiKcUqV4P0hoyCrkhO2ysE2zaSOnoxXIueuI=
-X-Google-Smtp-Source: AGHT+IECK8e2Gknwbe15Nini+/fL9JncRQE0wypRgQunzE5ohFAXwaLq+qTXHpjiRrQC8HVIU3JjKA==
-X-Received: by 2002:a17:906:565a:b0:a4e:1109:9007 with SMTP id v26-20020a170906565a00b00a4e11099007mr4677405ejr.19.1712525150656;
-        Sun, 07 Apr 2024 14:25:50 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1712531695; x=1713136495;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=U1TzuPOzxRisPWgS+2RWZK7jc8RUts/z5anpAdEpEXw=;
+        b=q36MQaSP2phuBAVlJqX82SCiiyHegVi8faS0wvDUWzT8aGSzeLMqZbJ0sZIZfD9Kxx
+         VkxQfjxdoWOWqB8E7z1udD1Mqi2k3fmz1szvOTAKvDPb3ZR3hOAEZlnI1YmuqV2PLGrF
+         PuNNz2xNUnCLicxKvkgyVbdbvXEH97WtiionHZwBzAvVavubT/stJEXQ/tyMV952PVM3
+         kREmwzskgGp6iQS/2eEm/nBQPOUVHPJv//K4W01ACXc4JZhXfvnqP5dUWRRVs3/IH7q0
+         I8Om0WfBI/LnXnIUzLRMxPJ2FtM7GbWy46ybQYZtm9ub27ow7Fz6Zr6NDqAzq8roHawT
+         cIRg==
+X-Gm-Message-State: AOJu0YzwtlNZNlmtfQaY2zeLsJP/6QQrbBj7n/gLoJsa9Z5fsAZhyVJF
+	fDHsK8/qEi+2XplYzNNXjAYo9yrBGT3IW3ltzzTYHf6xjTympEclalDbZKln9FU=
+X-Google-Smtp-Source: AGHT+IEHBbR0rzW/vOMVz2CRoVtz2fnPT25J3uh7YBEpgZGAWoIJ7iNQDXorRGw1umFD9LCGKuNigg==
+X-Received: by 2002:a17:906:3941:b0:a51:99ec:7062 with SMTP id g1-20020a170906394100b00a5199ec7062mr5229241eje.66.1712531694819;
+        Sun, 07 Apr 2024 16:14:54 -0700 (PDT)
 Received: from control-center.home (58-175-98-95.ftth.glasoperator.nl. [95.98.175.58])
-        by smtp.gmail.com with ESMTPSA id dr20-20020a170907721400b00a518c69c4e3sm3560974ejc.23.2024.04.07.14.25.50
+        by smtp.gmail.com with ESMTPSA id hg13-20020a1709072ccd00b00a4660b63502sm3736566ejc.12.2024.04.07.16.14.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 07 Apr 2024 14:25:50 -0700 (PDT)
+        Sun, 07 Apr 2024 16:14:54 -0700 (PDT)
 From: Tom Geelen <t.f.g.geelen@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Tom Geelen <t.f.g.geelen@gmail.com>
-Subject: [meta-python][PATCH 3/4] python3-sqlalchemy: upgrade 2.0.25 --> 2.0.27
-Date: Sun,  7 Apr 2024 21:24:44 +0000
-Message-Id: <20240407212445.667665-3-t.f.g.geelen@gmail.com>
+Subject: [meta-python][PATCH v2 1/4] python3-casttube: upgrade 0.2.0 -> 0.2.1
+Date: Sun,  7 Apr 2024 23:13:40 +0000
+Message-Id: <20240407231343.999886-1-t.f.g.geelen@gmail.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240407212445.667665-1-t.f.g.geelen@gmail.com>
-References: <20240407212445.667665-1-t.f.g.geelen@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 07 Apr 2024 21:25:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109854
+ <openembedded-devel@lists.openembedded.org>; Sun, 07 Apr 2024 23:14:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109856
 
 Signed-off-by: Tom Geelen <t.f.g.geelen@gmail.com>
 ---
- ...ython3-sqlalchemy_2.0.25.bb => python3-sqlalchemy_2.0.27.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-sqlalchemy_2.0.25.bb => python3-sqlalchemy_2.0.27.bb} (87%)
+ .../python/python3-casttube_0.2.0.bb             | 13 -------------
+ .../python/python3-casttube_0.2.1.bb             | 16 ++++++++++++++++
+ 2 files changed, 16 insertions(+), 13 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-casttube_0.2.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-casttube_0.2.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-sqlalchemy_2.0.25.bb b/meta-python/recipes-devtools/python/python3-sqlalchemy_2.0.27.bb
-similarity index 87%
-rename from meta-python/recipes-devtools/python/python3-sqlalchemy_2.0.25.bb
-rename to meta-python/recipes-devtools/python/python3-sqlalchemy_2.0.27.bb
-index 35011553c..e5a837659 100644
---- a/meta-python/recipes-devtools/python/python3-sqlalchemy_2.0.25.bb
-+++ b/meta-python/recipes-devtools/python/python3-sqlalchemy_2.0.27.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "http://www.sqlalchemy.org/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=c78b979ae6c20775a28a287d32092cbb"
- 
--SRC_URI[sha256sum] = "a2c69a7664fb2d54b8682dd774c3b54f67f84fa123cf84dda2a5f40dcaa04e08"
-+SRC_URI[sha256sum] = "86a6ed69a71fe6b88bf9331594fa390a2adda4a49b5c06f98e47bf0d392534f8"
- 
- PYPI_PACKAGE = "SQLAlchemy"
- inherit pypi setuptools3
+diff --git a/meta-python/recipes-devtools/python/python3-casttube_0.2.0.bb b/meta-python/recipes-devtools/python/python3-casttube_0.2.0.bb
+deleted file mode 100644
+index 64948d2e9..000000000
+--- a/meta-python/recipes-devtools/python/python3-casttube_0.2.0.bb
++++ /dev/null
+@@ -1,13 +0,0 @@
+-SUMMARY = "YouTube Chromecast API"
+-HOMEPAGE = "https://github.com/ur1katz/casttube"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489"
+-
+-SRC_URI[md5sum] = "4bb24ba1639d16c8fa367537bf3b88a6"
+-SRC_URI[sha256sum] = "f25b3c634efe702896233690f7590e8d6311590910f18dbb763b90419d9ef53c"
+-
+-inherit pypi setuptools3
+-
+-RDEPENDS:${PN} = "\
+-    python3-requests \
+-"
+diff --git a/meta-python/recipes-devtools/python/python3-casttube_0.2.1.bb b/meta-python/recipes-devtools/python/python3-casttube_0.2.1.bb
+new file mode 100644
+index 000000000..af3daf016
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-casttube_0.2.1.bb
+@@ -0,0 +1,16 @@
++SUMMARY = "YouTube Chromecast API"
++HOMEPAGE = "https://github.com/ur1katz/casttube"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=d3aafde5479a4102b867156e2527a34e"
++
++SRC_URI[sha256sum] = "54d2af8c7949aa9c5db87fb11ef0a478a5d3e7ac6d2d2ac8dd1711e3a516fc82"
++
++inherit pypi setuptools3
++
++FILES:${PN} += "\
++    /usr/LICENSE \
++"
++
++RDEPENDS:${PN} = "\
++    python3-requests \
++"
 -- 
 2.34.1
 
