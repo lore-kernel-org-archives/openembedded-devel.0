@@ -1,74 +1,81 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 00020CD11C2
-	for <webhook@archiver.kernel.org>; Sun,  7 Apr 2024 12:11:24 +0000 (UTC)
-Received: from mailout09.t-online.de (mailout09.t-online.de [194.25.134.84])
- by mx.groups.io with SMTP id smtpd.web10.74797.1712491877610010771
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ECBC7CD11C2
+	for <webhook@archiver.kernel.org>; Sun,  7 Apr 2024 15:43:05 +0000 (UTC)
+Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com [209.85.210.169])
+ by mx.groups.io with SMTP id smtpd.web11.82093.1712504584755119686
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 07 Apr 2024 05:11:17 -0700
+ Sun, 07 Apr 2024 08:43:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.84, mailfrom: f_l_k@t-online.de)
-Received: from fwd84.aul.t-online.de (fwd84.aul.t-online.de [10.223.144.110])
-	by mailout09.t-online.de (Postfix) with SMTP id C460B132D4
-	for <openembedded-devel@lists.openembedded.org>; Sun,  7 Apr 2024 14:11:15 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.163.46.221]) by fwd84.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1rtRMd-2Lu5uD0; Sun, 7 Apr 2024 14:11:12 +0200
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH] dav1d: update 1.4.0 -> 1.4.1
-Date: Sun,  7 Apr 2024 14:11:25 +0200
-Message-ID: <20240407121125.470013-1-f_l_k@t-online.de>
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=PrOos6i7;
+ spf=pass (domain: gmail.com, ip: 209.85.210.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f169.google.com with SMTP id d2e1a72fcca58-6ed0e9ccca1so1045042b3a.0
+        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Apr 2024 08:43:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1712504584; x=1713109384; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=HiSyR4naG7YMofFZfyrO4rtACOew1tncDPLqLP1bdy8=;
+        b=PrOos6i7dUPLnOTRuNeM9CDbS6/kVEXEgHbQ+NN706d7zQg9XtheAUvgyAfJLpSQC3
+         U5xpJeFHX46BSr5lrsIDu8jjQPCCq8Gcs0nX0ZtKOc3imY1wk76J6cEgzxDp9UhC0Adf
+         arx0LdfE/Qw6OvRGJYBA9M6+33Q3wx9SCIaK5fk94WDUyH2vK2p6dDnQ9n3fVsas50cP
+         i9TPWIOMkNFfZUzYUnofgx+9XkXFVdUpYntLBVv8z1/IpCcMoffHO5coExQMKT5ElQ9N
+         8ay/i3CovfHZCSKfqGdN1fvew3Db0Tp0vwZsHsFiQUn9zpr8vd6Ld2/Q9Rtm5GTBALUS
+         hX+A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1712504584; x=1713109384;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=HiSyR4naG7YMofFZfyrO4rtACOew1tncDPLqLP1bdy8=;
+        b=TYQy+EwOu/9Beu0w1xmtuVfNMF9sRteOqvmSxsnOCrVhi+2mQyq7POTXFOjZvLODQy
+         hwMwCwbvhSJ2QTDvqZSh0sRNveg7Atu9h+shI+Nyd1BmsrleCaifSCK9zQExcRhglic2
+         E0ayhq8wTnzJZxdH/fS2vYzyK7TXDTypa1kppjVl1fe+UtfsnZrSSNfVuyx2GJ9EvGBJ
+         wfqq7mjFEhCvIE3rGsLRN6b8TdbzJS5cEO3pfAULCk5U0iqNYkzkasp9+qJogNhPiAhU
+         D3bEoBOHJ/ySvLDShDN8TjLndbFAjHKRzvhgl8S7Gg6mWBLv/trukd4nbpyJz3rB2H0z
+         v9hg==
+X-Gm-Message-State: AOJu0YyIoAbJwhZjvm3uPigpEQtPA/2vdl6Cb15M8Gzk3V6W1bKxgZTv
+	z3KwJmHB2KqlmLwot8mGsTrLufQrkZ5O6NkTL4DYdG7yE8en5gDftGmJ/hu6
+X-Google-Smtp-Source: AGHT+IFMxT8cYVZw5jhL/NcudwW/o7meR7WsJpvMl5Yal+xj/Kn0s8t7/n5zFrlPviIugs5NAcFfkA==
+X-Received: by 2002:a05:6a00:3a03:b0:6ea:aaf5:9e00 with SMTP id fj3-20020a056a003a0300b006eaaaf59e00mr6085561pfb.33.1712504583740;
+        Sun, 07 Apr 2024 08:43:03 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::8384])
+        by smtp.gmail.com with ESMTPSA id a23-20020a62e217000000b006e71aec34a8sm4760473pfi.167.2024.04.07.08.43.02
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 07 Apr 2024 08:43:03 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	Alex Kiernan <alex.kiernan@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: Re: [meta-networking][PATCH] mdns: Upgrade 2200.80.16 -> 2200.100.94.0.2
+Date: Sun,  7 Apr 2024 08:42:50 -0700
+Message-ID: <171250415787.900727.18037713105725640455.b4-ty@gmail.com>
 X-Mailer: git-send-email 2.44.0
+In-Reply-To: <20240405073025.16939-1-alex.kiernan@gmail.com>
+References: <20240405073025.16939-1-alex.kiernan@gmail.com>
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1712491872-E6FFA906-5D5F5624/0/0 CLEAN NORMAL
-X-TOI-MSGID: 749baeb4-369c-4464-8511-713535db8a67
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 07 Apr 2024 12:11:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109840
+ <openembedded-devel@lists.openembedded.org>; Sun, 07 Apr 2024 15:43:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109841
 
-dav1d 1.4.1 'Road Runner'
 
-1.4.1 is a small release of dav1d, improving notably ARM and RISC-V
-speed and fixing a small security issue.
+On Fri, 05 Apr 2024 07:30:26 +0000, Alex Kiernan wrote:
+> 
 
-The ARM speed improvements can be significative, depening on the
-samples.
 
-Finally, the binary size of dav1d was reduced on ARM and RISC-V
+Applied, thanks!
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- .../recipes-multimedia/dav1d/{dav1d_1.4.0.bb =3D> dav1d_1.4.1.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-multimedia/recipes-multimedia/dav1d/{dav1d_1.4.0.bb =3D> dav=
-1d_1.4.1.bb} (90%)
+[1/1] mdns: Upgrade 2200.80.16 -> 2200.100.94.0.2
+      commit: 2061a94d2a4c947a447f28b0e74a0ebe2b8984c0
 
-diff --git a/meta-multimedia/recipes-multimedia/dav1d/dav1d_1.4.0.bb b/me=
-ta-multimedia/recipes-multimedia/dav1d/dav1d_1.4.1.bb
-similarity index 90%
-rename from meta-multimedia/recipes-multimedia/dav1d/dav1d_1.4.0.bb
-rename to meta-multimedia/recipes-multimedia/dav1d/dav1d_1.4.1.bb
-index e503af44c..08607acd8 100644
---- a/meta-multimedia/recipes-multimedia/dav1d/dav1d_1.4.0.bb
-+++ b/meta-multimedia/recipes-multimedia/dav1d/dav1d_1.4.1.bb
-@@ -7,7 +7,7 @@ LICENSE =3D "BSD-2-Clause"
- LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc8055cfe7548dfdaa3a6dc45d8793=
-669"
-=20
- SRC_URI =3D "git://code.videolan.org/videolan/dav1d.git;protocol=3Dhttps=
-;branch=3Dmaster"
--SRCREV =3D "bb645893f374ab694b10a79f1205a728e010f2c9"
-+SRCREV =3D "872e470ebf3e65b0b956f3a70329e885a2df1c2a"
-=20
- S =3D "${WORKDIR}/git"
-=20
---=20
-2.44.0
-
+Best regards,
+-- 
+Khem Raj <raj.khem@gmail.com>
 
