@@ -1,94 +1,153 @@
-Return-Path: <qiaoyongchang@gmail.com>
+Return-Path: <fathi.boudra@linaro.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EB166C67861
-	for <webhook@archiver.kernel.org>; Mon,  8 Apr 2024 16:43:42 +0000 (UTC)
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
- by mx.groups.io with SMTP id smtpd.web11.112224.1712594612942694128
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3EB6ACD1292
+	for <webhook@archiver.kernel.org>; Mon,  8 Apr 2024 16:58:13 +0000 (UTC)
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
+ by mx.groups.io with SMTP id smtpd.web11.112653.1712595490106793873
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 08 Apr 2024 09:43:32 -0700
+ Mon, 08 Apr 2024 09:58:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=lFZyvs79;
- spf=pass (domain: gmail.com, ip: 209.85.214.178, mailfrom: qiaoyongchang@gmail.com)
-Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-1e419d203bdso8579525ad.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 08 Apr 2024 09:43:32 -0700 (PDT)
+ dkim=pass header.i=@linaro.org header.s=google header.b=VpbOanjr;
+ spf=pass (domain: linaro.org, ip: 209.85.208.51, mailfrom: fathi.boudra@linaro.org)
+Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-56e509baddaso1463504a12.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 08 Apr 2024 09:58:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1712594612; x=1713199412; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=4Zlp2of5fIHjOmaBTf2G8L2nGq0BVK75asFzlLir1wU=;
-        b=lFZyvs79edQS/GGGncOOlJYLfxZConrkhdOaUWrZMjsBeSCGrjRmWap0bC110ZoBFe
-         8+ZJEpGnELXunM6ly8J2+H8d/bz0W+zuQoBMgvrV/hp5XVZktCJ7klPpYqa46u9VcvHK
-         k7YlYEaB3PwthtXjUzJimTdVVe+GsGbRxaYtrSIWRt3Zyone1cdjS7xJj6oa1fEBt1vj
-         qd83cpXcN5QEhRXVZnHwuKO1fEW0ZeUQiy3SGz+G/0zSAhz1kDhyPFl+lNo2q2sgTDFc
-         /6+lMtrJxGnkX2Si9I82wR6R4DFzrtrpVbyp2fYMcVYuDK65cmBtl/m5rsKGxM56BW8r
-         P3xw==
+        d=linaro.org; s=google; t=1712595488; x=1713200288; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=eqC67nD2jl/uyM2q9V5z/YpmHoroclGsq1VurYaUKc4=;
+        b=VpbOanjr16JhjW9DEPd1cOEQ35R1uKtxskelGdb8UtoWJ0Hm1Nu1UERvpivmYGC6Rd
+         9lwInStb2xa19RBBj3DdhFjErCu7hGgVKH/OPplmSPGCCzTvOL5pT5mEXjv8fNnmW7R0
+         8peOqsItqKh2tOmV5TXiAQ4vQdmvhPs0xftkJ5HPGxe4VJ1QBXc14MxQa8Cz80E5NVHx
+         Q4xdXlD1J+G5z2JtAJb7ooovU8BCYx5k65/oZkvv2p4xpY+QqUYbXEvM0b7w/vQddCnW
+         shDeydZTbU2cPW67eE8ma0LZLqOrbNR0M5cQI+c/4c/mUA5Tbt5lEXzaxOdszRDMip+C
+         paUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1712594612; x=1713199412;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=4Zlp2of5fIHjOmaBTf2G8L2nGq0BVK75asFzlLir1wU=;
-        b=BsBqwy3H8h2Vg1GX9gIW4ExM1upRsTuiD2f4RMDzBqMaKMR5TzWD0TirtwwAa+I+E3
-         0dBy0oLA1KBs832sD9UDmrRXd5NXIA0J6WTgGWiKSr1Bi507dEv6Y50jCjKQLJWWCFgk
-         y+rAXIu/ZmT43+YDXKTYPlBIZubotCby5WB1hJEeHKaPpjPJJp2YDwvj+QBncXu/FGz1
-         YlrN6zPIOPoqCJUSKvr07NtxKUeXaS2ZLYCKTduuTutUJG5dSFVvsTE9ci9tjCCfkdaa
-         8TwmAfjTTO0B/UF+ggARaYy7cjQierl4jlNf+PyR+lJQhoNdlPYqj1PmUilR1FR/5GaM
-         0kfw==
-X-Gm-Message-State: AOJu0Yz3ah2axq3sn+8TwT5Xg7U0K0dQ2BL9b1JTSd5LVuXzkSLwPf1g
-	Izx2BxeJvNQoVjIgjAUg5RectlYjP4in38QVZBPssly6tbBtNyI0JuDNe7z/nHetK1UDUBQ=
-X-Google-Smtp-Source: AGHT+IG7BioCANcLqcKhLh/yOVieQipum6FX3cPLWA+GA0QOZCfHi8boeH/4mby8Mett09M6YuwaIw==
-X-Received: by 2002:a17:902:dac8:b0:1e2:8c12:aac0 with SMTP id q8-20020a170902dac800b001e28c12aac0mr11881738plx.28.1712594612044;
-        Mon, 08 Apr 2024 09:43:32 -0700 (PDT)
-Received: from instance-20220825-1141.vcn.oraclevcn.com ([146.56.169.81])
-        by smtp.gmail.com with ESMTPSA id y11-20020a17090322cb00b001e107222eb5sm7182802plg.191.2024.04.08.09.43.30
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 08 Apr 2024 09:43:31 -0700 (PDT)
-From: Yongchang Qiao <qiaoyongchang@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	raj.khem@gmail.com
-Cc: Yongchang Qiao <qiaoyongchang@gmail.com>
-Subject: [meta-filesystems][PATCH] packagegroup-meta-filesystems: Fix utils typo
-Date: Mon,  8 Apr 2024 16:43:25 +0000
-Message-Id: <20240408164325.112745-1-qiaoyongchang@gmail.com>
-X-Mailer: git-send-email 2.34.1
+        d=1e100.net; s=20230601; t=1712595488; x=1713200288;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=eqC67nD2jl/uyM2q9V5z/YpmHoroclGsq1VurYaUKc4=;
+        b=VUlXlmmKJCEQ05ee3XJSYCpYWYc6d9f55k/hmmGwcsUmXln0j7meYnXL9KKbZ3jGog
+         ysTmUdbk7ktITaiwa6/wi3exgVm4sD0ACNd9Y+E6RIxarNcGer93Q+Y4BY3T4ZUPdDI7
+         3FHylkX1jw0aw4OcUQ9W4fz8szfvRuj6iv2sHu1xn/5OM3IOXu+1ainABgOop72KPJVb
+         ne33Dk3jfa1BNrBWPyes9PJE2Zp3uZnp3nok5yTf6a8EOS4+gEGZkgyhAWzodR+yutMs
+         JqW73pGkcR0QHBBHdIxwXX2NCfDsdaztELtW8Kx9iXX3ONwNTNWoAf1g4d7QukBmPaBM
+         vjPg==
+X-Forwarded-Encrypted: i=1; AJvYcCV8ucJhNnFjJLKiiKQThzh9nkN9tV/wTc2Zm7T6NWPXRRID3wQ8rJ/75Bv8XCLJLiMOjmrjJAAk197HX30BT0tyin42FppSJyKRcrWRUhXcrSmJpXsvLdDvyg==
+X-Gm-Message-State: AOJu0YyP079HizRK65b7YC4UJiQEPqI7FsAoUH5WiYg9V99ffhlHWR72
+	DSc1Lla1i64nfjpGttY/kZSR/w6XgS1752W0N1zROeDAjg2cmKT85NOpT4dYW6kpqP55qvG3S4B
+	cJAC8X2HsmZ/DST283T1mdF2IWzpunzGiBS9KkQ==
+X-Google-Smtp-Source: AGHT+IGz2sRTJ8qlM+GZtwXRLny7ON3HKPGNFgvpyeU2QDxyyVxv+7sb+H1dc5OD75h2qIteI9QTT3D/CRmFPDMK1R0=
+X-Received: by 2002:a50:c30c:0:b0:56c:5a49:736 with SMTP id
+ a12-20020a50c30c000000b0056c5a490736mr6669741edb.9.1712595488395; Mon, 08 Apr
+ 2024 09:58:08 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240405162459.1286945-1-fathi.boudra@linaro.org>
+ <CAMKF1soBViCDq1i8+ZS8k32U3rV5Hb4DbqPCXZy-+qeEgaMPtg@mail.gmail.com>
+ <CAGNsrLBXGFP01o43JG8DKaLWhV9vr+cJUFaMYr=E9i5=010Cgw@mail.gmail.com>
+ <CA+chaQeG4kwGjZOi4VNmk_sjQijwX_fq0s+vpZCWrqi9CXjv_g@mail.gmail.com>
+ <CAGNsrLAdPdE+zqUHn-n9rjWLRMS5565EmCG3X2wkd6Ve+yF=Bg@mail.gmail.com>
+ <CA+chaQfhknEQc+A9+BU7an1ywv-_F3Qd+jnX9ppvv0m3YYqg0g@mail.gmail.com> <CANPvuR=+3kp7AiyxQ8w=065eK4y0ULZcoo_zS0sTTVy_3XM_og@mail.gmail.com>
+In-Reply-To: <CANPvuR=+3kp7AiyxQ8w=065eK4y0ULZcoo_zS0sTTVy_3XM_og@mail.gmail.com>
+From: Fathi Boudra <fathi.boudra@linaro.org>
+Date: Mon, 8 Apr 2024 18:57:56 +0200
+Message-ID: <CAGNsrLCBCsDoo2=LU8BYstPbxgTiNPphbtS6a0AwbQqqbP88SQ@mail.gmail.com>
+Subject: Re: [oe][meta-oe][PATCH] composefs: add a new recipe
+To: Jose Quaresma <quaresma.jose@gmail.com>
+Cc: Martin Jansa <martin.jansa@gmail.com>, Khem Raj <raj.khem@gmail.com>, 
+	openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 08 Apr 2024 16:43:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109870
+ <openembedded-devel@lists.openembedded.org>; Mon, 08 Apr 2024 16:58:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109871
 
-This typo would cause all utils tools to be missing in the image when only installing packagegroup-meta-filesystems
+Thanks Jos=C3=A9 for the pointer!
 
-Signed-off-by: Yongchang Qiao <qiaoyongchang@gmail.com>
----
- .../packageconfigs/packagegroup-meta-filesystems.bb           | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+I'm retrying to reproduce with yoe/mut. Build is in progress:
 
-diff --git a/meta-filesystems/recipes-filesystems/packageconfigs/packagegroup-meta-filesystems.bb b/meta-filesystems/recipes-filesystems/packageconfigs/packagegroup-meta-filesystems.bb
-index 361972a45..40f851364 100644
---- a/meta-filesystems/recipes-filesystems/packageconfigs/packagegroup-meta-filesystems.bb
-+++ b/meta-filesystems/recipes-filesystems/packageconfigs/packagegroup-meta-filesystems.bb
-@@ -7,13 +7,13 @@ PROVIDES = "${PACKAGES}"
- PACKAGES = ' \
-     packagegroup-meta-filesystems \
-     packagegroup-meta-filesystems-support \
--    packagegroup-meta-filesystems-utls \
-+    packagegroup-meta-filesystems-utils \
- '
- 
- RDEPENDS:packagegroup-meta-filesystems = "\
-     packagegroup-meta-filesystems \
-     packagegroup-meta-filesystems-support \
--    packagegroup-meta-filesystems-utls \
-+    packagegroup-meta-filesystems-utils \
- "
- 
- RDEPENDS:packagegroup-meta-filesystems = "\
--- 
-2.34.1
+Build Configuration:
+BB_VERSION           =3D "2.7.3"
+BUILD_SYS            =3D "x86_64-linux"
+NATIVELSBSTRING      =3D "debian"
+TARGET_SYS           =3D "aarch64-yoe-linux-musl"
+MACHINE              =3D "qemuarm64"
+DISTRO               =3D "yoe"
+DISTRO_VERSION       =3D "2024.04-rc.1"
+TUNE_FEATURES        =3D "aarch64 crc cortexa57"
+TARGET_FPU           =3D ""
+meta-yoe             =3D "yoe/mut:3a9ae512457c59118b66f57a0db0b09cee6bd757"
+meta-clang           =3D "HEAD:13dcab852c5bcd51fd75ae84ace9eddd99254653"
+meta-qt6             =3D "HEAD:0de8ffa779c1400795f8ff3a768c2dd9fa41b579"
+meta-filesystems
+meta-gnome
+meta-initramfs
+meta-multimedia
+meta-networking
+meta-oe
+meta-perl
+meta-python
+meta-webserver
+meta-xfce            =3D "HEAD:9b51108d77419943c967ed1bebd734acc827568d"
+meta                 =3D "HEAD:e602713fe6987d0512d368409946fee56c67caf7"
 
+
+On Mon, 8 Apr 2024 at 16:56, Jose Quaresma <quaresma.jose@gmail.com> wrote:
+>
+> Hi Fathi,
+>
+> To reproduce the musl issue maybe you need to use the yoe/mut branch.
+>
+> https://git.yoctoproject.org/poky-contrib/log/?h=3Dyoe/mut
+>
+> Jose
+>
+>
+> Martin Jansa <martin.jansa@gmail.com> escreveu (segunda, 8/04/2024 =C3=A0=
+(s) 15:40):
+>>
+>> > > >
+>> > > > I couldn't reproduce the build failure. What am I missing?
+>> > >
+>> > > removing meta-filesystems from your bblayers.conf
+>> >
+>> > no, I'm asking about the musl basename() related build failure.
+>> >
+>> > The build failure about fuse3 dependency is quite obvious.
+>> > In my local build, I moved the recipe to
+>> > meta-filesystems/recipes-support/composefs/
+>> > I'll submit a v2 for the latter but if I can reproduce the musl issue
+>> > and get it fixed for v2 that would be great.
+>>
+>> Hi Fathi,
+>>
+>> I'm sorry, I've realized it just after sending the reply, gmail was
+>> showing your mail as a reply to the one about meta-filesystem and I
+>> didn't notice the musl issue before sending the reply, will fix that
+>> with another (6th) coffee :).
+>>
+>> Cheers,
+>>
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>> Links: You receive all messages sent to this group.
+>> View/Reply Online (#109867): https://lists.openembedded.org/g/openembedd=
+ed-devel/message/109867
+>> Mute This Topic: https://lists.openembedded.org/mt/105351850/5052612
+>> Group Owner: openembedded-devel+owner@lists.openembedded.org
+>> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [=
+quaresma.jose@gmail.com]
+>> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>>
+>
+>
+> --
+> Best regards,
+>
+> Jos=C3=A9 Quaresma
 
