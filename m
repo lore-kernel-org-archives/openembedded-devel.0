@@ -1,86 +1,72 @@
-Return-Path: <t.f.g.geelen@gmail.com>
+Return-Path: <m.perevozchikov@yadro.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 585D0CD128A
-	for <webhook@archiver.kernel.org>; Sun,  7 Apr 2024 23:15:18 +0000 (UTC)
-Received: from mail-lf1-f51.google.com (mail-lf1-f51.google.com [209.85.167.51])
- by mx.groups.io with SMTP id smtpd.web11.94331.1712531708126243164
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C2C89C67861
+	for <webhook@archiver.kernel.org>; Mon,  8 Apr 2024 08:03:20 +0000 (UTC)
+Received: from mta-04.yadro.com (mta-04.yadro.com [89.207.88.248])
+ by mx.groups.io with SMTP id smtpd.web11.101382.1712563397849741548
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 07 Apr 2024 16:15:08 -0700
+ Mon, 08 Apr 2024 01:03:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Dfn5iPVt;
- spf=pass (domain: gmail.com, ip: 209.85.167.51, mailfrom: t.f.g.geelen@gmail.com)
-Received: by mail-lf1-f51.google.com with SMTP id 2adb3069b0e04-516d727074eso2408041e87.0
-        for <openembedded-devel@lists.openembedded.org>; Sun, 07 Apr 2024 16:15:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1712531706; x=1713136506; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=/5JuklimNceLxm+/Pa1oUnrIOBblOLzzs9klaU5d0WI=;
-        b=Dfn5iPVtYd4oji3/0/QhqXu3cJZ9Azvq95/j3nB2Y8vxLR5h3AHY4JQdxsRpPOuK2W
-         fkMhsVC3U1NOwz74+5YQrbV5uXEN9ayNeNfSRT8GoY8Z+fGHpyY49FzginX+z+FNjWa2
-         +JdMa/Y0f1FD157317IGDkBjb+2QO5KTPPQPU8NVRBIetwhOpZFk7Rp9/MmLViYA5ZbA
-         NHzx7w/QaMB2Var4CSbDzQFwJtIFgEuUJ0k5o4Y5Rc1ds/Jo8MS/yB+/x7hOCKnXT5El
-         soB8FB7l3fp6OAgrK8AWFhMfK6/Q/Uiytz/NCbdtczsYeahKOGF4p9tJyFxqp7PEjR3d
-         feAA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1712531706; x=1713136506;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=/5JuklimNceLxm+/Pa1oUnrIOBblOLzzs9klaU5d0WI=;
-        b=LKnCNValeazk7GDK0Be3xc94A2fl4NcXX5515WQjLM60olo3IZZqn8YerRvvAjZnDP
-         XLCPMnL3QG0pOnPaFWlUVzwLgeIjEElMD8lLQJcCRwBI4N7z67txYDu5C5X2b7v2V0OL
-         1bNEkabSwYBXYGwrgqQH0KQZ6HjlWI0BXZhiXW8JInFOPlZf4IEBepOrWoHjhfYuQUzW
-         pvzlWrkLCp8GCKY1fsw7g3HlCQt8HeQ8JLxl5HYaf8cSef0BusKpzhuEZrJMffM6qrdg
-         GD+77zMsh6sPRXGt7iVhdv576V/teekA5lgWQzwDrjfIsCcr0c1iMfpRu2Qo1UB2pBUP
-         Z69A==
-X-Gm-Message-State: AOJu0YwCr7McanM4VxSlQA7BSwQ1zVCaIV6/l/+uieYtAUcp2yeTd9NE
-	uDHYmlFNIxdeRCig3R8dN6jj0c0Esm/2GPmAEpEdB3o/QYiUiFrYHC5sgt4ckPI=
-X-Google-Smtp-Source: AGHT+IFHW7YZK7BBXrOjz5kModLcwfYUjrsNmwWveegq30PF9DoPM25OuuNR/iEqnrqUh2P2nvoj2g==
-X-Received: by 2002:a19:5e51:0:b0:516:cdfa:17f6 with SMTP id z17-20020a195e51000000b00516cdfa17f6mr4582831lfi.67.1712531705640;
-        Sun, 07 Apr 2024 16:15:05 -0700 (PDT)
-Received: from control-center.home (58-175-98-95.ftth.glasoperator.nl. [95.98.175.58])
-        by smtp.gmail.com with ESMTPSA id hg13-20020a1709072ccd00b00a4660b63502sm3736566ejc.12.2024.04.07.16.15.04
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 07 Apr 2024 16:15:04 -0700 (PDT)
-From: Tom Geelen <t.f.g.geelen@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Tom Geelen <t.f.g.geelen@gmail.com>
-Subject: [meta-python][PATCH v2 4/4] python3-charset-normalizer: add native build option to recipe
-Date: Sun,  7 Apr 2024 23:13:43 +0000
-Message-Id: <20240407231343.999886-4-t.f.g.geelen@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240407231343.999886-1-t.f.g.geelen@gmail.com>
-References: <20240407231343.999886-1-t.f.g.geelen@gmail.com>
+ dkim=fail reason="dkim: body hash did not verify" header.i=@yadro.com header.s=mta-04 header.b=P/hJFtfR;
+ dkim=fail reason="dkim: body hash did not verify" header.i=@yadro.com header.s=mta-03 header.b=dtsrV1Sa;
+ spf=pass (domain: yadro.com, ip: 89.207.88.248, mailfrom: m.perevozchikov@yadro.com)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mta-04.yadro.com 42689C0002
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yadro.com; s=mta-04;
+	t=1712563396; bh=bedkk/YmnhwLmvoBEsV+dF4D50vblbNktiCetzPWr24=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+	b=P/hJFtfRrFnFzRrgZyypMomvnKxW0SWQFuUkhIQ7XKPkW3LjxcB+G8eRspwcy2HUR
+	 CvnrKT8kyiL3VVu8MPG9Z4cDKHaJvSmJiN407Nt6d9snG837542UmpR4CMB/YYJ2Xj
+	 gPLk4KjuOyyEyHHeP5E8DjcKOLR3J4QO1vKBt/vosVGXnYaWX9blSR4sCXu24JRTeh
+	 TIohd5bZyator0MJLf4Cro7Gny6uGxB7BHMXBdyzAOtOt3NXLpT7/Uteqo7JVzmVOs
+	 ZMJgzQFjz9g+ebnljAJpVxLX/Kn7SeXYLa30YPhB4bbfABoZAmM/j0LinyO5BcMb+C
+	 KaTe8q3mYKiWw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yadro.com; s=mta-03;
+	t=1712563396; bh=bedkk/YmnhwLmvoBEsV+dF4D50vblbNktiCetzPWr24=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+	b=dtsrV1SaThuiljldAb+4yp7dXC4MBmupeqcqYjh5fi9xmHNzYi2Ct7l84e0bYg4Hj
+	 e9C8WW3Ph3MFRLNaVGnA97rQapj7pgdfmnpL1yvA+yj3X99kZwl/yY8BcnUetZUfFo
+	 nKPh6ANgctmO+Ij2cIguMAa0sGy6rz2ZCWAqyJjW/NQzx++blRZD9lWM+Ze/hDSj0F
+	 Ct4Gdc9rygt4Mm4eyZMPTqdgd61vKwUqB8nsnmqKhXzNo/svO7hNgpy/Kdb4tFX0Ss
+	 l0Ee+Izcwe9w+T6R21Ff7wvc3iOvn8SyEDxLGvwffDxjwYDfMvyECa35Y8xUcIZ5aJ
+	 QYRKKRBJYLRcw==
+From: Maxim Perevozchikov <m.perevozchikov@yadro.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Maxim Perevozchikov <m.perevozchikov@yadro.com>
+Subject: [PATCH] nginx: Disable login for www user
+Date: Mon, 8 Apr 2024 11:01:52 +0300
+Message-ID: <20240408080152.3028549-1-m.perevozchikov@yadro.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: T-EXCH-06.corp.yadro.com (172.17.10.110) To
+ T-EXCH-10.corp.yadro.com (172.17.11.60)
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 07 Apr 2024 23:15:18 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109859
+ <openembedded-devel@lists.openembedded.org>; Mon, 08 Apr 2024 08:03:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109860
 
-Packages such as aiooui need charset-normalizer as a DEPENDS instead of RDEPENDS. Therefore a the charset-normalizer recipe is extended.
-
-Signed-off-by: Tom Geelen <t.f.g.geelen@gmail.com>
+Signed-off-by: Maxim Perevozchikov <m.perevozchikov@yadro.com>
 ---
- .../recipes-devtools/python/python3-charset-normalizer_3.3.2.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-webserver/recipes-httpd/nginx/nginx.inc | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-charset-normalizer_3.3.2.bb b/meta-python/recipes-devtools/python/python3-charset-normalizer_3.3.2.bb
-index 0e6d62fc2..ca9a88ccf 100644
---- a/meta-python/recipes-devtools/python/python3-charset-normalizer_3.3.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-charset-normalizer_3.3.2.bb
-@@ -13,3 +13,5 @@ RDEPENDS:${PN} += " \
- 	python3-codecs \
- 	python3-json \
- "
-+
-+BBCLASSEXTEND = "native nativesdk"
--- 
-2.34.1
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserve=
+r/recipes-httpd/nginx/nginx.inc
+index f65c20971..439e28a8f 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx.inc
++++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
+@@ -186,4 +186,5 @@ USERADD_PARAM:${PN} =3D " \
+     --system --no-create-home \
+     --home ${NGINX_WWWDIR} \
+     --groups www-data \
+-    --user-group ${NGINX_USER}"
++    --user-group ${NGINX_USER} \
++    --shell ${base_sbindir}/nologin"
+--=20
+2.30.2
 
 
