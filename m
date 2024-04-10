@@ -2,87 +2,88 @@ Return-Path: <ninette@thehoodiefirm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 30CE0CD129A
-	for <webhook@archiver.kernel.org>; Wed, 10 Apr 2024 14:38:50 +0000 (UTC)
-Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
- by mx.groups.io with SMTP id smtpd.web11.1520.1712759928215196920
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D886CD128A
+	for <webhook@archiver.kernel.org>; Wed, 10 Apr 2024 14:49:10 +0000 (UTC)
+Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com [209.85.208.54])
+ by mx.groups.io with SMTP id smtpd.web11.1803.1712760541991094349
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 10 Apr 2024 07:38:48 -0700
+ Wed, 10 Apr 2024 07:49:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@thehoodiefirm-com.20230601.gappssmtp.com header.s=20230601 header.b=ZgMvDylU;
- spf=neutral (domain: thehoodiefirm.com, ip: 209.85.218.48, mailfrom: ninette@thehoodiefirm.com)
-Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-a450bedffdfso950510066b.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Apr 2024 07:38:47 -0700 (PDT)
+ dkim=pass header.i=@thehoodiefirm-com.20230601.gappssmtp.com header.s=20230601 header.b=05ogySXh;
+ spf=neutral (domain: thehoodiefirm.com, ip: 209.85.208.54, mailfrom: ninette@thehoodiefirm.com)
+Received: by mail-ed1-f54.google.com with SMTP id 4fb4d7f45d1cf-56e6646d78bso3613596a12.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 10 Apr 2024 07:49:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=thehoodiefirm-com.20230601.gappssmtp.com; s=20230601; t=1712759926; x=1713364726; darn=lists.openembedded.org;
+        d=thehoodiefirm-com.20230601.gappssmtp.com; s=20230601; t=1712760540; x=1713365340; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Rm3+iFROmgSXfrDCvfHP8vTfBsBgCt+aOVvV1smJzYw=;
-        b=ZgMvDylUmqkcNNmVdja1o9SEZFjj6tKbrZLoByZAiwi5gtmnqi2KL8XoIx0DnMS+gU
-         hiPwbZ12skORQMWI2aJPUDnGKMrNRuzKgz36GiP7XevX61jgrVk3/rQ7oNFGrThmZJci
-         j+s078kIcUcdEQ9OhxT5H5uoLK4ZTh0b+4KTIlZ8Q2wAiD0KiOkO91f+UiuF/TmiHVQ+
-         9JaSnAgfBSPTmVhORJRTiKiJBm0/5LM9FOS32Uo1jvvYS+HWZW43s14CHUShAS432rIZ
-         74vyXrnJMe9Es1dXVqNs7aUphfDHIO9xZRXwaeXaIULrUrwRZI2F0IOJreryo9U+GiVq
-         JFhw==
+        bh=GMk9ZBu/yvRc/OjW9QqpwvzT6omX1dkFbQx7nphstaw=;
+        b=05ogySXh0QR1PPYDyGEZHLbj6y9eIg1T3UedhvlfbPen9/2bwR72Ue/LBiKo1H0uoA
+         5IY8eP6Adahr5vQWeShhzCxmnO/f7uWc/LmS3T/C+iwFmNYCjCmPzQsl992P/Z7Zog+k
+         7UCEXxSDWeE4HOE6OQKUlsGuZh6LD5oJKrQZ1CMiqd1wTkapFp7x6YZkrjkDklqXboEK
+         xDLK8WPHTfD4ciuA/NBw+z1Gz+gXbEYviySL7pnyriRQLTvs9aA+goPhsgl6dfxiD5yY
+         hdYhKRie0NOQT+2YOM0gOKlyzKt+batX67CoKGfNFfzLWqxUNlCDFejRKoYFSbPEO2pc
+         CdgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1712759926; x=1713364726;
+        d=1e100.net; s=20230601; t=1712760540; x=1713365340;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Rm3+iFROmgSXfrDCvfHP8vTfBsBgCt+aOVvV1smJzYw=;
-        b=fwECQDNC+2rlD634KptSowtFpCWcww9rdqHXGYMJ3271WIcjGYMOFldU4NqPBe360N
-         XfWtWNqiePIPO4RdV38HuFQQICsr1Q4mxfuB/rJuwAjmiOxFRb0NVIeWWJENGgAxBWc7
-         qhKeDtVhNfVLwrqE5+nBd1pbAQYBGxIHTfowes6M5Sb9aKNAJ2WT6RBxLrbmMn40x7o2
-         Wd9xwunntWISd8cy/VeFs6scqSkQwTCGdtA4IbRAya5D8JsMH6PCFE/x9BSDePok+aaB
-         KrI6J7XUBPnltJAAnjfsbyatLuUKiSi7U9XPFduk9SEi33S8/irYT+AzXdD9gLr4TUDL
-         q1Xw==
-X-Gm-Message-State: AOJu0YzALWzP41xgWGPzItIOs/1HSOW0KoXuV2dgWLkl3+aEdp0McT2f
-	Dvg1pFDyRiI9vyKmENGnFSsYCDsnzSF3rMwjT1RsWB7hEuuPCSY9wWiSYU5oGmubMtpcynSrwSc
-	K
-X-Google-Smtp-Source: AGHT+IGahe1IawRW67vdhVFnuII5SaZIDPz/hqq5J6S01H8pSHyA4AmxjahKIJEjMVocxDiXLr4itA==
-X-Received: by 2002:a17:906:4c4f:b0:a52:10c9:661f with SMTP id d15-20020a1709064c4f00b00a5210c9661fmr1226769ejw.62.1712759926662;
-        Wed, 10 Apr 2024 07:38:46 -0700 (PDT)
+        bh=GMk9ZBu/yvRc/OjW9QqpwvzT6omX1dkFbQx7nphstaw=;
+        b=JV4q867dJnWecjITB0wiW6Az333KnNJv6zUq3jg8T14qtlC77/mmjoUySQXv4lJiuO
+         UGYt7AeixeXrLBAYv+W+bBsdNi/+50yUJrs/8DngXUaPtPTmthxQODXY+u1Cs3yM1g/5
+         2f8AQUSz+qbP+Br79/08pC3JdEXmEQ+dAhewQUeus6zj3/5HPwuyLWaBTYYWlUFMmNDU
+         j+7k7xyvwVcWHngxtEFINiXiviD1UmKBes3Os0uKDR0+qrnAecFxppBX5a7thG0wNJzU
+         0FusTmo5etaxW2pY4JIzpu7lQT/MFwVaO56Nmn3MhVvk+/FBpYFJTLegktx2d6HZAjCT
+         fhxg==
+X-Gm-Message-State: AOJu0Yz3KCYPVaaECwQsbRKu/saBuvJCvNCfzuKjxuP+d2lW/8V1PbW3
+	Qvqu35nUsgCeqyPb4y26X/A5TDls+escc5/0rhaxBWF2LjMz8KvYeGYrOhnZJ1lWMZjdRuMphOy
+	g
+X-Google-Smtp-Source: AGHT+IHm9CXLB6gRjxXfAymaZQeKAQoxXZ0YCwoUIfGaxf6qhyy8sV7IcxkUlKr9f2wpMH4MkQHcuw==
+X-Received: by 2002:a50:9fc1:0:b0:56d:f00c:2b13 with SMTP id c59-20020a509fc1000000b0056df00c2b13mr1600959edf.32.1712760540242;
+        Wed, 10 Apr 2024 07:49:00 -0700 (PDT)
 Received: from localhost.localdomain ([62.72.77.226])
-        by smtp.gmail.com with ESMTPSA id en19-20020a17090728d300b00a51a74409dcsm6873416ejc.221.2024.04.10.07.38.46
+        by smtp.gmail.com with ESMTPSA id dd13-20020a056402312d00b0056dc0e21a7dsm6516977edb.4.2024.04.10.07.48.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 10 Apr 2024 07:38:46 -0700 (PDT)
+        Wed, 10 Apr 2024 07:49:00 -0700 (PDT)
 From: Ninette Adhikari <ninette@thehoodiefirm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Ninette Adhikari <ninette@thehoodiefirm.com>
-Subject: [PATCH 1/1] memcached: Update CVE-2022-26635 status
-Date: Wed, 10 Apr 2024 16:38:43 +0200
-Message-ID: <20240410143843.77108-2-ninette@thehoodiefirm.com>
+Subject: [PATCH 1/1] graphviz: Update CVE-2014-9157 status
+Date: Wed, 10 Apr 2024 16:48:56 +0200
+Message-ID: <20240410144856.90991-2-ninette@thehoodiefirm.com>
 X-Mailer: git-send-email 2.44.0
-In-Reply-To: <20240410143843.77108-1-ninette@thehoodiefirm.com>
-References: <20240410143843.77108-1-ninette@thehoodiefirm.com>
+In-Reply-To: <20240410144856.90991-1-ninette@thehoodiefirm.com>
+References: <20240410144856.90991-1-ninette@thehoodiefirm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 10 Apr 2024 14:38:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109900
+ <openembedded-devel@lists.openembedded.org>; Wed, 10 Apr 2024 14:49:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109902
 
-This issue is for php-memcached and this is not relevant for meta-openembedded.
+Current version 8.1.0 is not affected by this issue.
+Affected versions: 8.0.*
 
 Signed-off-by: Ninette Adhikari <ninette@thehoodiefirm.com>
 ---
- meta-networking/recipes-support/memcached/memcached_1.6.17.bb | 2 ++
+ meta-oe/recipes-graphics/graphviz/graphviz_8.1.0.bb | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-support/memcached/memcached_1.6.17.bb b/meta-networking/recipes-support/memcached/memcached_1.6.17.bb
-index 270ad5486..c63f530e0 100644
---- a/meta-networking/recipes-support/memcached/memcached_1.6.17.bb
-+++ b/meta-networking/recipes-support/memcached/memcached_1.6.17.bb
-@@ -25,6 +25,8 @@ SRC_URI = "http://www.memcached.org/files/${BP}.tar.gz \
-            "
- SRC_URI[sha256sum] = "2055e373613d8fc21529aff9f0adce3e23b9ce01ba0478d30e7941d9f2bd1224"
+diff --git a/meta-oe/recipes-graphics/graphviz/graphviz_8.1.0.bb b/meta-oe/recipes-graphics/graphviz/graphviz_8.1.0.bb
+index 4d40ee4de..5166b1fe3 100644
+--- a/meta-oe/recipes-graphics/graphviz/graphviz_8.1.0.bb
++++ b/meta-oe/recipes-graphics/graphviz/graphviz_8.1.0.bb
+@@ -30,6 +30,8 @@ SRC_URI:append:class-nativesdk = "\
+ "
+ SRC_URI[sha256sum] = "d593695fdaa8a19297523b679ad13d3ef2027b0b7f14cc2bc23e77969ed81565"
  
-+CVE_STATUS[CVE-2022-26635] = "cpe-incorrect: This issue is for php-memcached and this is not relevant for meta-openembedded."
++CVE_STATUS[CVE-2014-9157] = "cpe-incorrect: Current version 8.1.0 is not affected by the issue."
 +
- # set the same COMPATIBLE_HOST as libhugetlbfs
- COMPATIBLE_HOST = "(i.86|x86_64|powerpc|powerpc64|aarch64|arm).*-linux*"
+ PACKAGECONFIG ??= "librsvg"
+ PACKAGECONFIG[librsvg] = "--with-librsvg,--without-librsvg,librsvg"
  
 -- 
 2.44.0
