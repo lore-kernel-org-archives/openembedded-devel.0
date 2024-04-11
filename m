@@ -1,232 +1,190 @@
-Return-Path: <ninette@neighbourhood.ie>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A6B8EC4345F
-	for <webhook@archiver.kernel.org>; Thu, 11 Apr 2024 16:18:57 +0000 (UTC)
-Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com [209.85.208.50])
- by mx.groups.io with SMTP id smtpd.web11.22417.1712852333131139008
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 038F3C4345F
+	for <webhook@archiver.kernel.org>; Thu, 11 Apr 2024 17:29:38 +0000 (UTC)
+Received: from mail-oo1-f45.google.com (mail-oo1-f45.google.com [209.85.161.45])
+ by mx.groups.io with SMTP id smtpd.web11.24383.1712856570429558005
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 11 Apr 2024 09:18:53 -0700
+ Thu, 11 Apr 2024 10:29:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@thehoodiefirm-com.20230601.gappssmtp.com header.s=20230601 header.b=zOIZ8pUM;
- spf=neutral (domain: thehoodiefirm.com, ip: 209.85.208.50, mailfrom: ninette@thehoodiefirm.com)
-Received: by mail-ed1-f50.google.com with SMTP id 4fb4d7f45d1cf-56e6646d78bso5013173a12.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 11 Apr 2024 09:18:52 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=VXCHGUzC;
+ spf=pass (domain: gmail.com, ip: 209.85.161.45, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f45.google.com with SMTP id 006d021491bc7-5aa25e99414so54842eaf.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 11 Apr 2024 10:29:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=thehoodiefirm-com.20230601.gappssmtp.com; s=20230601; t=1712852331; x=1713457131; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=CTFItBtVdTgtW+lH9GezWD+/sY7Qh6o3BDudntHu0Oo=;
-        b=zOIZ8pUMHemF0+FWMeO4cPofHwY8vks6fQdZuQK7YyZy1J47XYShg8djMDN8dOnw3p
-         x7MPPYnchWvFvJRdfOqqLel+hE5o6wY5jEseObV2pOR4AeaaRANWEDNr3/CM8vNOp8Nk
-         u6nluTZv1kDCxL8jxC6spNzkHaZ43ezAZ0T+9eWou+hC/Qy3chSWOHiOKzBp5MHjfX17
-         87ZsNyDvw+WG5qTATbEVG4wuPGxE1l36UUOaNq+PcJ3ZAWzHfMoqnSkumaoyZocm/eZU
-         wBSGzgazPJJlSI/Jta/Hrl09XQOP9orZ8OvB+ahDXMy3TDnziBWUdnksWQgcNzSbyeqZ
-         kKgw==
+        d=gmail.com; s=20230601; t=1712856570; x=1713461370; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=jtb/eqgkCvvN6b9Qxe/84cGM1b/WjwIiq4Ur6dOPSuQ=;
+        b=VXCHGUzClKwNxWRHT2ZrtxiGISJvqGmx6Bp/9XKf7TKkJb4JuxKEq/xAXzi8xZGLYX
+         zhg3EVvxiU6tvFZWcF2xc+ZW5+1NTolwN7Z8LHfRr+PNT+QyNEUn2jGFwkLDZen7nz8B
+         6trPwI2gkJKrWHE+V3YkjKO1VU6P7xH1Pc0HS60imiZlxAMJLYnuZaGpVk96cTTlueqT
+         xro1OIWCxYxbWm1t0n8MlSAUhm4ICyCGLj1NTuXqH0AjToMo6iWzL7/H8H2k8Ee2i3nR
+         JO8BO30BigoOiMCJ+rZoC8U5QKeMMpZeWIdmPJskUX3/054Tt13hsBDktiBIOVTb8jYp
+         x0kQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1712852331; x=1713457131;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=CTFItBtVdTgtW+lH9GezWD+/sY7Qh6o3BDudntHu0Oo=;
-        b=lE0D91fr/tXTX/rVHhWRS6WaAZAgeErwYMZ/Z4RcS9aqKCX1NLCFvmwHhk57cs2FKa
-         IoR2cM16PGXpoSGsy6gk/GhNsGGYxpB/q6v1C/B1Zz8yPC24S0wL5gN6L+2xa6fiQaJd
-         Yh7zGc9HMXlp+OLC9HYBf+9f1aCAQvL2lk9yXn+FqUOeCbDoz21VtEwgmw5ch3iMupI4
-         0pfMYJR5kMDSBXMHr5MOARmdFJiOvvhVqY52N4yWAD3UEGvNYE95hP/qnmst0RKGKVKt
-         74T5aiLzyeNGtCt3/nD9rv701aVyseLsGCODDUBhQCHLzsAx+xIg5SxorxgZqlc9VTgY
-         6yVA==
-X-Gm-Message-State: AOJu0YwemCDLhdT7pEZqmO+1LR1jPU0ZIzVCpsmcJL+eknp5JFW071Qc
-	y8L+WkvEuI/Rz1rJq6ttnO6mquV/NQH4W3xhzkrn3Mlv09vO7CdYtuIUIoyZUhJWj9zDGDkHPnk
-	bUMIPujtqQ/XmQ1vcP1I8pxM+dGiuTjkVsr/lxA==
-X-Google-Smtp-Source: AGHT+IHX/Sn3kVzLhH9ZDrbLtbPGxXOcO+J5mhbA8FYUgKUGpGnrShsVNvajQNtkVPkJQb0PH+u+IWFg6XVV8Krqido=
-X-Received: by 2002:a17:906:b187:b0:a51:ddc6:e00d with SMTP id
- w7-20020a170906b18700b00a51ddc6e00dmr142751ejy.26.1712852331091; Thu, 11 Apr
- 2024 09:18:51 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1712856570; x=1713461370;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=jtb/eqgkCvvN6b9Qxe/84cGM1b/WjwIiq4Ur6dOPSuQ=;
+        b=rEikbwrOq+TVzGmALLey6eckECKz87q4W0aC2n5s1cXc5gToNKA6ezLWaWsyZH5HkN
+         a/lrLSSGqmHHnlTJElylY+cjnqkL35qZq9m+YKmmYp1ePuPBSI/Crs0xCZmsYfaOh1zv
+         8LWwPJygXuEGzgtZu+Dn6e1kY4/PlYAqDw5c62n8YfKnIHVrdGDyVNnsMhHSUSiVN1M3
+         l3q4SVM7wPGuaYFatjnf4XSfi8RhDDTwv3mYVMhVoAQ8t3e5vWqseHz1hTJije5Y9u4k
+         1DGq22BMu2O+ouyjm2oBDVeDAXmNFhLEB+HDbRX1xrj5Zp6FYvv046TdCAlTrKdXwVGa
+         JiRg==
+X-Gm-Message-State: AOJu0YyEKlfdSip24/ZlPkeerzXy/CAxh5PfdP6E92KIL0u6Evo6kLtF
+	m4bIg9jXYPb8Zt8RmX6kaqeqeIg9AqeT6S+GT+XQgYevrzm85Row3xUPALejCcV2R88zI5nPZox
+	5EBvjJYwlyTrbdbSq4gtVkfw2Lks=
+X-Google-Smtp-Source: AGHT+IEBwawB9xqdgXZyMUV3jcotWcU8q+nc074ycvr2aNVkveAqtTvjwgeC1aREZeoj6MrdBbHHf1Un1pRJR9w+yo4=
+X-Received: by 2002:a05:6870:2b1c:b0:22a:a40c:4bde with SMTP id
+ ld28-20020a0568702b1c00b0022aa40c4bdemr224921oab.11.1712856569629; Thu, 11
+ Apr 2024 10:29:29 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240410150453.12726-1-ninette@thehoodiefirm.com>
- <20240410150453.12726-2-ninette@thehoodiefirm.com> <AS1PR10MB5697292F84DCD4311F1227C7FD062@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM>
-In-Reply-To: <AS1PR10MB5697292F84DCD4311F1227C7FD062@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM>
-From: Ninette Adhikari <ninette@neighbourhood.ie>
-Date: Thu, 11 Apr 2024 18:18:40 +0200
-Message-ID: <CAG1aeW3if2t3Taf0ti3O3xjQX4jot1kArKSdDLYb6ZaSD26a2w@mail.gmail.com>
-Subject: Re: [oe] [PATCH 1/1] exiv2: Update CVE-2007-6353 status
-To: "Marko, Peter" <Peter.Marko@siemens.com>
-Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
-Content-Type: multipart/alternative; boundary="000000000000bf75e10615d4828c"
+References: <20240411112318.167362-1-alperyasinak1@gmail.com>
+In-Reply-To: <20240411112318.167362-1-alperyasinak1@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 11 Apr 2024 10:29:03 -0700
+Message-ID: <CAMKF1srk1y01auNxgbKQrTK0NKZ_BKBTQFJeVKQKSM9MgD0NSw@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH] python3-flexparser: enable ptest and
+ add missing runtime dependencies
+To: Alper Ak <alperyasinak1@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 11 Apr 2024 16:18:57 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109921
+ <openembedded-devel@lists.openembedded.org>; Thu, 11 Apr 2024 17:29:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109922
 
---000000000000bf75e10615d4828c
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+thanks for doing this.
 
-Hi Peter,
-
-Thanks so much for your response. Many apologies for the confusion, I was
-trying to follow the example here
-<https://git.yoctoproject.org/poky/commit/?id=3D378bc2f8e3ac393d89a6d2e5209=
-4478fb3879ef7>
-to report a CVE issue but clearly I chose an incorrect classification.
-
-I meant to say that the 7 CVEs are invalid or not relevant any more. I can
-make new patches marking them as "cve-invalid" instead of "cpe-incorrect".
-Would that be okay? Let me know.
-
-Thanks again!
-Ninette
-
-On Wed, Apr 10, 2024 at 6:54=E2=80=AFPM Marko, Peter <Peter.Marko@siemens.c=
-om>
+On Thu, Apr 11, 2024 at 4:23=E2=80=AFAM Alper Ak <alperyasinak1@gmail.com> =
 wrote:
-
-> Hello,
 >
-> May I ask what are you trying to achieve?
-> These entries fix incorrect CPE mapping so they are still needed.
-> So by removing these 7 CVE_STATUS entries via your 7 contributions, you
-> are marking the CVEs as relevant for the components.
-> Basically direct opposite of what your commit messages are saying.
+> * Ptest and library example tested on qemux86-64 and qemuarm64
 >
-> Peter
+> * Add ptest into PTESTS_FAST_META_PYTHON
 >
-> -----Original Message-----
-> From: openembedded-devel@lists.openembedded.org <
-> openembedded-devel@lists.openembedded.org> On Behalf Of Ninette Adhikari
-> via lists.openembedded.org
-> Sent: Wednesday, April 10, 2024 17:05
-> To: openembedded-devel@lists.openembedded.org
-> Cc: Ninette Adhikari <ninette@thehoodiefirm.com>
-> Subject: [oe] [PATCH 1/1] exiv2: Update CVE-2007-6353 status
+> Ptest result:
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 >
-> > Current version 0.28.0 is not affected by the issue.
-> > Affected version: < 0.13-r1
-> >
-> > Signed-off-by: Ninette Adhikari <ninette@thehoodiefirm.com>
-> > ---
-> >  meta-oe/recipes-support/exiv2/exiv2_0.28.0.bb | 2 ++
-> >  1 file changed, 2 insertions(+)
-> >
-> > diff --git a/meta-oe/recipes-support/exiv2/exiv2_0.28.0.bb
-> b/meta-oe/recipes-support/exiv2/exiv2_0.28.0.bb
-> > index 958810cf7..ad99d0bf4 100644
-> > --- a/meta-oe/recipes-support/exiv2/exiv2_0.28.0.bb
-> > +++ b/meta-oe/recipes-support/exiv2/exiv2_0.28.0.bb
-> > @@ -10,6 +10,8 @@ SRC_URI[sha256sum] =3D
-> "89af3b5ef7277753ef7a7b5374ae017c6b9e304db3b688f1948e73e103
-> >  # inherit dos2unix
-> >  S =3D "${WORKDIR}/${BP}-Source"
-> >
-> > +CVE_STATUS[CVE-2007-6353] =3D "cpe-incorrect: Current version 0.28.0 i=
-s
-> not affected by the issue."
-> > +
-> >  inherit cmake gettext
-> >
-> >  do_install:append:class-target() {
-> > --
-> > 2.44.0
+> qemux86-64:
+>
+> Testsuite summary
+> TOTAL: 59
+> PASS: 59
+> SKIP: 0
+> XFAIL: 0
+> FAIL: 0
+> XPASS: 0
+> ERROR: 0
+> DURATION: 12
+> END: /usr/lib/python3-flexparser/ptest
+> 2024-04-11T11:06
+> STOP: ptest-runner
+> TOTAL: 1 FAIL: 0
+>
+> qemuarm64:
+>
+> Testsuite summary
+> TOTAL: 59
+> PASS: 59
+> SKIP: 0
+> XFAIL: 0
+> FAIL: 0
+> XPASS: 0
+> ERROR: 0
+> DURATION: 11
+> END: /usr/lib/python3-flexparser/ptest
+> 2024-04-11T11:09
+> STOP: ptest-runner
+> TOTAL: 1 FAIL: 0
+>
+> Signed-off-by: alperak <alperyasinak1@gmail.com>
+> ---
+>  .../ptest-packagelists-meta-python.inc        |  1 +
+>  .../python/python3-flexparser/run-ptest       |  3 +++
+>  .../python/python3-flexparser_0.3.bb          | 22 ++++++++++++++++++-
+>  3 files changed, 25 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-python/recipes-devtools/python/python3-flexparse=
+r/run-ptest
+>
+> diff --git a/meta-python/conf/include/ptest-packagelists-meta-python.inc =
+b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+> index acb09aaca..6bd48156d 100644
+> --- a/meta-python/conf/include/ptest-packagelists-meta-python.inc
+> +++ b/meta-python/conf/include/ptest-packagelists-meta-python.inc
+> @@ -20,6 +20,7 @@ PTESTS_FAST_META_PYTHON =3D "\
+>      python3-dominate \
+>      python3-execnet \
+>      python3-flexcache \
+> +    python3-flexparser \
+>      python3-freezegun \
+>      python3-geojson \
+>      python3-google-auth-oauthlib \
+> diff --git a/meta-python/recipes-devtools/python/python3-flexparser/run-p=
+test b/meta-python/recipes-devtools/python/python3-flexparser/run-ptest
+> new file mode 100644
+> index 000000000..8d2017d39
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-flexparser/run-ptest
+> @@ -0,0 +1,3 @@
+> +#!/bin/sh
+> +
+> +pytest --automake
+> diff --git a/meta-python/recipes-devtools/python/python3-flexparser_0.3.b=
+b b/meta-python/recipes-devtools/python/python3-flexparser_0.3.bb
+> index fb94235f0..e45175f5a 100644
+> --- a/meta-python/recipes-devtools/python/python3-flexparser_0.3.bb
+> +++ b/meta-python/recipes-devtools/python/python3-flexparser_0.3.bb
+> @@ -6,6 +6,26 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D32f547dac365c=
+355d2cdbcd7ebea9144"
+>  DEPENDS +=3D "python3-setuptools-scm-native"
+>  SRC_URI[sha256sum] =3D "692e7524d9e14b2b1231b772b091d7d6296951deb383f5a6=
+7bfbd0ecb0b9fa9a"
+>
+> -inherit pypi python_setuptools_build_meta
+> +inherit pypi python_setuptools_build_meta ptest
+>
+>  PYPI_PACKAGE =3D "flexparser"
+> +
+> +SRC_URI +=3D " \
+> +       file://run-ptest \
+> +"
+> +
+> +RDEPENDS:${PN}-ptest +=3D " \
+> +       python3-pytest \
+> +       python3-unittest-automake-output \
+> +"
+> +
+> +do_install_ptest() {
+> +       install -d ${D}${PTEST_PATH}/testsuite
+> +       cp -rf ${S}/flexparser/testsuite/* ${D}${PTEST_PATH}/testsuite/
+> +}
+> +
+> +RDEPENDS:${PN} +=3D " \
+> +       python3-compression \
+> +       python3-email \
+> +       python3-logging \
+> +"
+> --
+> 2.25.1
 >
 >
-
---=20
-Ninette Adhikari
-Software developer
-The Neighbourhoodie Software GmbH
-Harzer Stra=C3=9Fe 39, 12059 Berlin
-neighbourhood.ie
-
-Handelsregister HRB 157851 B Amtsgericht Charlottenburg
-Gesch=C3=A4ftsf=C3=BChrung: Jan Lehnardt, Simone Haas
-
---000000000000bf75e10615d4828c
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Hi Peter,</div><div><br></div><div>Thanks so much for=
- your response. Many apologies for the confusion, I was trying to follow th=
-e example <a href=3D"https://git.yoctoproject.org/poky/commit/?id=3D378bc2f=
-8e3ac393d89a6d2e52094478fb3879ef7">here</a> to report a CVE issue but clear=
-ly I chose an incorrect classification.</div><div><br></div><div>I meant to=
- say that the 7 CVEs are invalid or not relevant any more. I can make new p=
-atches marking them as &quot;cve-invalid&quot; instead of &quot;cpe-incorre=
-ct&quot;. Would that be okay? Let me know.</div><div><br></div><div>Thanks =
-again!</div><div>Ninette<br></div></div><br><div class=3D"gmail_quote"><div=
- dir=3D"ltr" class=3D"gmail_attr">On Wed, Apr 10, 2024 at 6:54=E2=80=AFPM M=
-arko, Peter &lt;<a href=3D"mailto:Peter.Marko@siemens.com">Peter.Marko@siem=
-ens.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"=
-margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-lef=
-t:1ex">Hello,<br>
-<br>
-May I ask what are you trying to achieve?<br>
-These entries fix incorrect CPE mapping so they are still needed.<br>
-So by removing these 7 CVE_STATUS entries via your 7 contributions, you are=
- marking the CVEs as relevant for the components.<br>
-Basically direct opposite of what your commit messages are saying.<br>
-<br>
-Peter<br>
-<br>
------Original Message-----<br>
-From: <a href=3D"mailto:openembedded-devel@lists.openembedded.org" target=
-=3D"_blank">openembedded-devel@lists.openembedded.org</a> &lt;<a href=3D"ma=
-ilto:openembedded-devel@lists.openembedded.org" target=3D"_blank">openembed=
-ded-devel@lists.openembedded.org</a>&gt; On Behalf Of Ninette Adhikari via =
-<a href=3D"http://lists.openembedded.org" rel=3D"noreferrer" target=3D"_bla=
-nk">lists.openembedded.org</a><br>
-Sent: Wednesday, April 10, 2024 17:05<br>
-To: <a href=3D"mailto:openembedded-devel@lists.openembedded.org" target=3D"=
-_blank">openembedded-devel@lists.openembedded.org</a><br>
-Cc: Ninette Adhikari &lt;<a href=3D"mailto:ninette@thehoodiefirm.com" targe=
-t=3D"_blank">ninette@thehoodiefirm.com</a>&gt;<br>
-Subject: [oe] [PATCH 1/1] exiv2: Update CVE-2007-6353 status<br>
-<br>
-&gt; Current version 0.28.0 is not affected by the issue.<br>
-&gt; Affected version: &lt; 0.13-r1<br>
-&gt;<br>
-&gt; Signed-off-by: Ninette Adhikari &lt;<a href=3D"mailto:ninette@thehoodi=
-efirm.com" target=3D"_blank">ninette@thehoodiefirm.com</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 meta-oe/recipes-support/exiv2/<a href=3D"http://exiv2_0.28.0.bb"=
- rel=3D"noreferrer" target=3D"_blank">exiv2_0.28.0.bb</a> | 2 ++<br>
-&gt;=C2=A0 1 file changed, 2 insertions(+)<br>
-&gt;<br>
-&gt; diff --git a/meta-oe/recipes-support/exiv2/<a href=3D"http://exiv2_0.2=
-8.0.bb" rel=3D"noreferrer" target=3D"_blank">exiv2_0.28.0.bb</a> b/meta-oe/=
-recipes-support/exiv2/<a href=3D"http://exiv2_0.28.0.bb" rel=3D"noreferrer"=
- target=3D"_blank">exiv2_0.28.0.bb</a><br>
-&gt; index 958810cf7..ad99d0bf4 100644<br>
-&gt; --- a/meta-oe/recipes-support/exiv2/<a href=3D"http://exiv2_0.28.0.bb"=
- rel=3D"noreferrer" target=3D"_blank">exiv2_0.28.0.bb</a><br>
-&gt; +++ b/meta-oe/recipes-support/exiv2/<a href=3D"http://exiv2_0.28.0.bb"=
- rel=3D"noreferrer" target=3D"_blank">exiv2_0.28.0.bb</a><br>
-&gt; @@ -10,6 +10,8 @@ SRC_URI[sha256sum] =3D &quot;89af3b5ef7277753ef7a7b5=
-374ae017c6b9e304db3b688f1948e73e103<br>
-&gt;=C2=A0 # inherit dos2unix<br>
-&gt;=C2=A0 S =3D &quot;${WORKDIR}/${BP}-Source&quot;<br>
-&gt;=C2=A0 <br>
-&gt; +CVE_STATUS[CVE-2007-6353] =3D &quot;cpe-incorrect: Current version 0.=
-28.0 is not affected by the issue.&quot;<br>
-&gt; +<br>
-&gt;=C2=A0 inherit cmake gettext<br>
-&gt;=C2=A0 <br>
-&gt;=C2=A0 do_install:append:class-target() {<br>
-&gt; -- <br>
-&gt; 2.44.0<br>
-<br>
-</blockquote></div><br clear=3D"all"><br><span class=3D"gmail_signature_pre=
-fix">-- </span><br><div dir=3D"ltr" class=3D"gmail_signature"><div dir=3D"l=
-tr"><div><font color=3D"#666666">Ninette Adhikari</font></div><div><font co=
-lor=3D"#666666">Software developer</font></div><div><font color=3D"#666666"=
->The Neighbourhoodie Software GmbH</font></div><div><font color=3D"#666666"=
->Harzer Stra=C3=9Fe 39, 12059 Berlin</font></div><div><font color=3D"#66666=
-6"><a href=3D"http://neighbourhood.ie" target=3D"_blank">neighbourhood.ie</=
-a></font></div><div><font color=3D"#666666"><br></font></div><div><font col=
-or=3D"#666666">Handelsregister HRB 157851 B Amtsgericht Charlottenburg</fon=
-t></div><div><font color=3D"#666666">Gesch=C3=A4ftsf=C3=BChrung: Jan Lehnar=
-dt, Simone Haas</font></div></div></div>
-
---000000000000bf75e10615d4828c--
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#109919): https://lists.openembedded.org/g/openembedde=
+d-devel/message/109919
+> Mute This Topic: https://lists.openembedded.org/mt/105460442/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
