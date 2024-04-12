@@ -1,146 +1,96 @@
-Return-Path: <alperyasinak1@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 47756C4345F
-	for <webhook@archiver.kernel.org>; Fri, 12 Apr 2024 13:16:44 +0000 (UTC)
-Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
- by mx.groups.io with SMTP id smtpd.web10.46665.1712927801538589649
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 98362C4345F
+	for <webhook@archiver.kernel.org>; Fri, 12 Apr 2024 17:27:05 +0000 (UTC)
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
+ by mx.groups.io with SMTP id smtpd.web11.52578.1712942821182554907
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 12 Apr 2024 06:16:41 -0700
+ Fri, 12 Apr 2024 10:27:01 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=QyukuR3l;
- spf=pass (domain: gmail.com, ip: 209.85.208.46, mailfrom: alperyasinak1@gmail.com)
-Received: by mail-ed1-f46.google.com with SMTP id 4fb4d7f45d1cf-56e6a1edecfso1428065a12.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Apr 2024 06:16:41 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=fglt5Yi+;
+ spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-6ee13f19e7eso958877b3a.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Apr 2024 10:27:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1712927799; x=1713532599; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1712942820; x=1713547620; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=jsS8r2bnK4Y1z6m2XxpBFyaClnrZ77H0MZLkCMlNzlg=;
-        b=QyukuR3l87jfd/JF+k2mVCdpKTNxSkBgII75e0pCp3IL5Iy0zQVewJvScuwByjQZed
-         CdzOu6Ou8eCe2gDiPmL6nX0uBuacqf20HmciDZ5ezQL89WW0DGDxMK9l6jIs3Qwq0UjP
-         KuUFMaT4Vos/V0M8F2f+WsSlQH8MgtLKtMsuUoU9Z6t58Tb9QyBDAKWKALmOYaL39vk3
-         VoAAPQSa+Z10ZEfWDNfqQN0L3SLZUObUe68GYJhYSn17qZD5DYkEHUC2lKmuftEUNm8l
-         E0XBtDq/UFMzeXFvInjVj6dacsH1YvlWM/NLNyiZRoFZ0AH5skiSj3XR7N+mAuyMbcHh
-         6JWw==
+        bh=ggcL+dR+0dl5rr9Zj0tksg8RShr+gvfSpV3eC13NJSM=;
+        b=fglt5Yi+HyM0DnZhjJbHKf1ADGLveb/1A/kYuLfaGWCajj0+6R2E/iitHmsaGh6U/q
+         ds9Ta2c30XWdeG0+IoNRk6Cm51xwGTLHafgqHwzNqPsC1sKgE3tqrQHYHK/FvFVomA0Q
+         2NPMBv0FKrcxJ+CLGRlgdXP731dDV7La79ygaHpUo1xC9lpOPmAWnKzQb7zCwb3Nhjyu
+         7ijJJ3WiW7/vJ7uGN4N9503NTSFibffdFeG4QqN26AVkuRaJ8CoFvtfTll8pRupZfThR
+         IFCEqBPN68Uja4hZeznqW1hzpR6IweTna4EJjLtu0Zf2/oVauufcki+YSSCFtVgD5loF
+         bCQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1712927799; x=1713532599;
+        d=1e100.net; s=20230601; t=1712942820; x=1713547620;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=jsS8r2bnK4Y1z6m2XxpBFyaClnrZ77H0MZLkCMlNzlg=;
-        b=mDzqnFvT51yE9XfEMqN0U53o7AWCcaVyAyEeA4eET8glxRu8O6kiJitOS24uXcmaZ8
-         baP/ULEgH4YIbadzRzdlOMYwcuDr3cBU3nd9p3bWOe3NaidbobJhxr3zqyMUw2C0PY5q
-         urfwNLkde0FWUGnnqC6RgY6iHv6mR8fqkgogrJuBERF6EgQafbLIwmYxJsgax46L81QQ
-         +9b1Aycr1UDDjfS4+R4Yl020KYxSPZkODLkTgivohSCCTje+vxVJcYmo1/Ha6TvqSzSO
-         KkXHYWuc42zayJiKMyN25H8hbZHizTcH02DuC8hhlPrN0N08Iy0jMWMD+pgTZa+xBSal
-         1/Xg==
-X-Gm-Message-State: AOJu0Yx09hdsnosLIrid/r0Pj45a4jFli7/yemhuBN7JBttbMhDam/Bi
-	/JGVwygAbJpsEr2BkEE+4gD9v3Y0gAIxg5LOvOSsuJEIlBp4EsSNQ6I/uQ==
-X-Google-Smtp-Source: AGHT+IGvMKivm+s98nCpMnA6DgvGQkAxIieCIDpq8AbGHEZmetBy8x0Gr5pIWJQIjsv/3ENvgN4Isw==
-X-Received: by 2002:a17:907:94d5:b0:a52:2441:277 with SMTP id dn21-20020a17090794d500b00a5224410277mr2361679ejc.66.1712927799055;
-        Fri, 12 Apr 2024 06:16:39 -0700 (PDT)
-Received: from localhost.localdomain ([176.33.68.217])
-        by smtp.gmail.com with ESMTPSA id f17-20020a170906495100b00a51db91186fsm1831668ejt.119.2024.04.12.06.16.37
+        bh=ggcL+dR+0dl5rr9Zj0tksg8RShr+gvfSpV3eC13NJSM=;
+        b=HIXf0ARo2XjMj0LyLisXJ0s5BAPB1GgtzCteW3WopsG0lKHQyTC6zdQCfIw1XcwU9E
+         UKGndXhw/bH1lEXiw2qdWAtJhuUBu7vzVBuEPbt+V/5iNKU0nub3HbNeYj1xNffbrRyQ
+         1miqDqu9cILfX4p6bfl5drpyt8eWesY9AO59OgYoEI3siLZ3SqoT8QlBcW/OwHrtUjAD
+         J2/veWqAXzofPPr257eyoFvwIZ+D4iYAZCrggnbIPNpBw0H5ek5ylDVdaxStyqjYZgRo
+         +wKB2FJ0U0L4aofti2DgqSMc3VzVHEJF8yfxgKfgDF3HEweZfWP5i/Ak/CYPDckVRDHe
+         pAiQ==
+X-Gm-Message-State: AOJu0YwJsoZiTJHsRxw+6fEfX+h6Ckuo5y86dlMXE4QKx5VTBk5R8gwx
+	gnH/0ypXslI9OhRDEhIg+reKRyX+bv8NnzcCNzwdUbUqLu5Gq33N9xog7HLM
+X-Google-Smtp-Source: AGHT+IHmWSPaFBEOOwnZqGK86hHN/L0de774bQJL06V+x4UG7/o5SKx+VeWZgGP9PPMKDTGfMz8c0w==
+X-Received: by 2002:a05:6a21:498a:b0:1a7:56d2:66c1 with SMTP id ax10-20020a056a21498a00b001a756d266c1mr3817606pzc.29.1712942820248;
+        Fri, 12 Apr 2024 10:27:00 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::d35b])
+        by smtp.gmail.com with ESMTPSA id f9-20020a056a001ac900b006ece7286c68sm3108258pfv.41.2024.04.12.10.26.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 12 Apr 2024 06:16:38 -0700 (PDT)
-From: alperak <alperyasinak1@gmail.com>
+        Fri, 12 Apr 2024 10:26:59 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: alperak <alperyasinak1@gmail.com>
-Subject: [meta-networking][PATCH] libcoap: fix CVE-2024-0962
-Date: Fri, 12 Apr 2024 16:16:33 +0300
-Message-Id: <20240412131633.153539-1-alperyasinak1@gmail.com>
-X-Mailer: git-send-email 2.25.1
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Jose Quaresma <quaresma.jose@gmail.com>
+Subject: [meta-oe][PATCH] ostree: Add missing dependencies for ptests
+Date: Fri, 12 Apr 2024 10:26:57 -0700
+Message-ID: <20240412172657.638653-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 12 Apr 2024 13:16:44 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109943
+ <openembedded-devel@lists.openembedded.org>; Fri, 12 Apr 2024 17:27:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109944
 
-CVE-2024-0962:
+When running ptests using meta-oe-image-ptest-ostree image
+these packageconfig/soup3 and utf8 locale is needed
 
-A vulnerability was found in obgm libcoap 4.3.4. It has been rated as critical. Affected by this issue is the function get_split_entry of the file src/coap_oscore.c of the component Configuration File Handler. The manipulation leads to stack-based buffer overflow.
-
-Upstream-Status: Backport [https://github.com/obgm/libcoap/pull/1311]
-
-WARNING: libcoap-4.3.4-r0 do_cve_check: Found unpatched CVE (CVE-2024-0962)
-
-This vulnerability is only exist in 4.3.4.
-
-Signed-off-by: alperak <alperyasinak1@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Jose Quaresma <quaresma.jose@gmail.com>
 ---
- .../libcoap/libcoap/CVE-2024-0962.patch       | 45 +++++++++++++++++++
- .../recipes-devtools/libcoap/libcoap_4.3.4.bb |  1 +
- 2 files changed, 46 insertions(+)
- create mode 100644 meta-networking/recipes-devtools/libcoap/libcoap/CVE-2024-0962.patch
+ meta-oe/recipes-extended/ostree/ostree_2024.5.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-devtools/libcoap/libcoap/CVE-2024-0962.patch b/meta-networking/recipes-devtools/libcoap/libcoap/CVE-2024-0962.patch
-new file mode 100644
-index 000000000..add52483b
---- /dev/null
-+++ b/meta-networking/recipes-devtools/libcoap/libcoap/CVE-2024-0962.patch
-@@ -0,0 +1,45 @@
-+From bf6a303883bde40cf96b960c8574cddd89e71701 Mon Sep 17 00:00:00 2001
-+From: Jon Shallow <supjps-libcoap@jpshallow.com>
-+Date: Thu, 25 Jan 2024 18:03:17 +0000
-+Subject: [PATCH] coap_oscore.c: Fix parsing OSCORE configuration information
-+
-+A vulnerability was found in obgm libcoap 4.3.4. It has been rated as critical.
-+Affected by this issue is the function get_split_entry of the file src/coap_oscore.c of the component Configuration File Handler.
-+The manipulation leads to stack-based buffer overflow.
-+
-+CVE: CVE-2024-0962
-+
-+Upstream-Status: Backport [https://github.com/obgm/libcoap/pull/1311]
-+
-+Signed-off-by: alperak <alperyasinak1@gmail.com>
-+---
-+ src/coap_oscore.c | 5 +++--
-+ 1 file changed, 3 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/coap_oscore.c b/src/coap_oscore.c
-+index 83f785c92..e0fb22947 100644
-+--- a/src/coap_oscore.c
-++++ b/src/coap_oscore.c
-+@@ -1678,11 +1678,12 @@ get_split_entry(const char **start,
-+                 oscore_value_t *value) {
-+   const char *begin = *start;
-+   const char *end;
-++  const char *kend;
-+   const char *split;
-+   size_t i;
-+
-+ retry:
-+-  end = memchr(begin, '\n', size);
-++  kend = end = memchr(begin, '\n', size);
-+   if (end == NULL)
-+     return 0;
-+
-+@@ -1693,7 +1694,7 @@ get_split_entry(const char **start,
-+
-+   if (begin[0] == '#' || (end - begin) == 0) {
-+     /* Skip comment / blank line */
-+-    size -= end - begin + 1;
-++    size -= kend - begin + 1;
-+     begin = *start;
-+     goto retry;
-+   }
-diff --git a/meta-networking/recipes-devtools/libcoap/libcoap_4.3.4.bb b/meta-networking/recipes-devtools/libcoap/libcoap_4.3.4.bb
-index 20bdbee25..98f0f02fb 100644
---- a/meta-networking/recipes-devtools/libcoap/libcoap_4.3.4.bb
-+++ b/meta-networking/recipes-devtools/libcoap/libcoap_4.3.4.bb
-@@ -9,6 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1978dbc41673ab1c20e64b287c8317bc"
- 
- SRC_URI = "git://github.com/obgm/libcoap.git;branch=main;protocol=https \
-            file://run-ptest \
-+           file://CVE-2024-0962.patch \
-            "
- SRCREV = "5fd2f89ef068214130e5d60b7087ef48711fa615"
- 
+diff --git a/meta-oe/recipes-extended/ostree/ostree_2024.5.bb b/meta-oe/recipes-extended/ostree/ostree_2024.5.bb
+index 0e098109c8..2ea92f190c 100644
+--- a/meta-oe/recipes-extended/ostree/ostree_2024.5.bb
++++ b/meta-oe/recipes-extended/ostree/ostree_2024.5.bb
+@@ -45,6 +45,7 @@ BUILD_OPTIMIZATION:append = " -O2"
+ PACKAGECONFIG ??= " \
+     ${@bb.utils.filter('DISTRO_FEATURES', 'selinux smack', d)} \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd libmount', '', d)} \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'soup3', '', d)} \
+     glib \
+     gpgme \
+     curl \
+@@ -192,6 +193,7 @@ RDEPENDS:${PN}-ptest += " \
+     diffutils \
+     findutils \
+     grep \
++    locale-base-en-us \
+     python3-core \
+     python3-multiprocessing \
+     strace \
 -- 
-2.25.1
+2.44.0
 
 
