@@ -2,94 +2,85 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 98362C4345F
-	for <webhook@archiver.kernel.org>; Fri, 12 Apr 2024 17:27:05 +0000 (UTC)
-Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
- by mx.groups.io with SMTP id smtpd.web11.52578.1712942821182554907
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D9D4C04FF0
+	for <webhook@archiver.kernel.org>; Sat, 13 Apr 2024 06:07:06 +0000 (UTC)
+Received: from mail-oo1-f52.google.com (mail-oo1-f52.google.com [209.85.161.52])
+ by mx.groups.io with SMTP id smtpd.web11.5630.1712988419561549921
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 12 Apr 2024 10:27:01 -0700
+ Fri, 12 Apr 2024 23:06:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=fglt5Yi+;
- spf=pass (domain: gmail.com, ip: 209.85.210.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f173.google.com with SMTP id d2e1a72fcca58-6ee13f19e7eso958877b3a.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Apr 2024 10:27:01 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=HmjlWn3O;
+ spf=pass (domain: gmail.com, ip: 209.85.161.52, mailfrom: raj.khem@gmail.com)
+Received: by mail-oo1-f52.google.com with SMTP id 006d021491bc7-5aa27dba8a1so997919eaf.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 12 Apr 2024 23:06:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1712942820; x=1713547620; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ggcL+dR+0dl5rr9Zj0tksg8RShr+gvfSpV3eC13NJSM=;
-        b=fglt5Yi+HyM0DnZhjJbHKf1ADGLveb/1A/kYuLfaGWCajj0+6R2E/iitHmsaGh6U/q
-         ds9Ta2c30XWdeG0+IoNRk6Cm51xwGTLHafgqHwzNqPsC1sKgE3tqrQHYHK/FvFVomA0Q
-         2NPMBv0FKrcxJ+CLGRlgdXP731dDV7La79ygaHpUo1xC9lpOPmAWnKzQb7zCwb3Nhjyu
-         7ijJJ3WiW7/vJ7uGN4N9503NTSFibffdFeG4QqN26AVkuRaJ8CoFvtfTll8pRupZfThR
-         IFCEqBPN68Uja4hZeznqW1hzpR6IweTna4EJjLtu0Zf2/oVauufcki+YSSCFtVgD5loF
-         bCQQ==
+        d=gmail.com; s=20230601; t=1712988418; x=1713593218; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=SMvBox8x6vE2N7uJBEnFI8kuulj/0gxbbTB1Ao9SAwY=;
+        b=HmjlWn3OhYF7jjtYqCQyUzzMyRIaOTrpxYLdBCqTCPikEW6tAQwPpJeCBCycNeblaj
+         NM1MwLY9C6IE7jZbPDIEUjesxgF0HTw6p5sJOISupR8b+o7qRBwLEA3wo+ITuO3/57lF
+         BK9JWbNSlKiFmzBk2CmSVMe9W5gq04Z8y/tHD6hi3+lv8piXyOu/Kg/h75z7G1SWuY2F
+         8TOF/k6g4kjrYfiwvtqa7tSmERPBkTyCxU3wxRHlx0TSTBfN+oDZv0PRXuThF77uwZ87
+         Qgy6hYTlwSuqJsT1wZpJZSuyGeg8pN1bd6XN+NrSh+2r2WM4oHoWOvEO+rVhBgsAck7j
+         zihg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1712942820; x=1713547620;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ggcL+dR+0dl5rr9Zj0tksg8RShr+gvfSpV3eC13NJSM=;
-        b=HIXf0ARo2XjMj0LyLisXJ0s5BAPB1GgtzCteW3WopsG0lKHQyTC6zdQCfIw1XcwU9E
-         UKGndXhw/bH1lEXiw2qdWAtJhuUBu7vzVBuEPbt+V/5iNKU0nub3HbNeYj1xNffbrRyQ
-         1miqDqu9cILfX4p6bfl5drpyt8eWesY9AO59OgYoEI3siLZ3SqoT8QlBcW/OwHrtUjAD
-         J2/veWqAXzofPPr257eyoFvwIZ+D4iYAZCrggnbIPNpBw0H5ek5ylDVdaxStyqjYZgRo
-         +wKB2FJ0U0L4aofti2DgqSMc3VzVHEJF8yfxgKfgDF3HEweZfWP5i/Ak/CYPDckVRDHe
-         pAiQ==
-X-Gm-Message-State: AOJu0YwJsoZiTJHsRxw+6fEfX+h6Ckuo5y86dlMXE4QKx5VTBk5R8gwx
-	gnH/0ypXslI9OhRDEhIg+reKRyX+bv8NnzcCNzwdUbUqLu5Gq33N9xog7HLM
-X-Google-Smtp-Source: AGHT+IHmWSPaFBEOOwnZqGK86hHN/L0de774bQJL06V+x4UG7/o5SKx+VeWZgGP9PPMKDTGfMz8c0w==
-X-Received: by 2002:a05:6a21:498a:b0:1a7:56d2:66c1 with SMTP id ax10-20020a056a21498a00b001a756d266c1mr3817606pzc.29.1712942820248;
-        Fri, 12 Apr 2024 10:27:00 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1712988418; x=1713593218;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=SMvBox8x6vE2N7uJBEnFI8kuulj/0gxbbTB1Ao9SAwY=;
+        b=wDByTzyNsWLMQ4asr0MFrTYLm5Hmz8g2M2yQDCIYagFKDqc+cKsYq45W/UunpdzxF6
+         3CTxwodP//RnY49qJQQc2cb7FMqEIPlNbebGEIs2YVgZkR0pbYmFEkTdHbWKQfCM13Dx
+         eS411zYwJJKrP71v3jIAeuywQa/azoAefsfHYPLkpS1N/66t9mm/rPSHY6NCjGvVUcDG
+         UF5bXp+KMpw67dRdA/9olJtZVdruts/NA7uaFmNBvvwSFkGmQ/9W3g1NgFHGeeVfmVlA
+         yQjOH+IzumtwbPTTYGGfx7oNjfF3yz2Xr7klzEBu2n/EXuOiiw6nqqC3PGXhVQBl5c9v
+         Sz+A==
+X-Gm-Message-State: AOJu0Yw9dvAc9ehb8iqWIR5A3uAPVhaWyBOQsr8cNdpkKEYYLnxIpjQ1
+	ZzgVjAZ0EWDZHVdfFMBR4epeVEiBOg7cEs+DADnYxT+KuDTi9aoiwnbweuL4
+X-Google-Smtp-Source: AGHT+IHSEbzzsQcVT5bgop/+HqTdfxMjVZAn/0qQW447uMZekregmleY5c8skq8zgE2TMKe0p7hLFQ==
+X-Received: by 2002:a05:6359:4a43:b0:186:162b:50b5 with SMTP id nb3-20020a0563594a4300b00186162b50b5mr7459232rwb.4.1712988418369;
+        Fri, 12 Apr 2024 23:06:58 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::d35b])
-        by smtp.gmail.com with ESMTPSA id f9-20020a056a001ac900b006ece7286c68sm3108258pfv.41.2024.04.12.10.26.59
+        by smtp.gmail.com with ESMTPSA id ju17-20020a170903429100b001e49428f313sm3953366plb.261.2024.04.12.23.06.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 12 Apr 2024 10:26:59 -0700 (PDT)
+        Fri, 12 Apr 2024 23:06:57 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>,
-	Jose Quaresma <quaresma.jose@gmail.com>
-Subject: [meta-oe][PATCH] ostree: Add missing dependencies for ptests
-Date: Fri, 12 Apr 2024 10:26:57 -0700
-Message-ID: <20240412172657.638653-1-raj.khem@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 3/4] unixodbc: Enable UTF8 init
+Date: Fri, 12 Apr 2024 23:06:52 -0700
+Message-ID: <20240413060653.2147909-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.44.0
+In-Reply-To: <20240413060653.2147909-1-raj.khem@gmail.com>
+References: <20240413060653.2147909-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 12 Apr 2024 17:27:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109944
-
-When running ptests using meta-oe-image-ptest-ostree image
-these packageconfig/soup3 and utf8 locale is needed
+ <openembedded-devel@lists.openembedded.org>; Sat, 13 Apr 2024 06:07:06 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109947
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Jose Quaresma <quaresma.jose@gmail.com>
 ---
- meta-oe/recipes-extended/ostree/ostree_2024.5.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-oe/recipes-support/unixodbc/unixodbc_2.3.12.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/ostree/ostree_2024.5.bb b/meta-oe/recipes-extended/ostree/ostree_2024.5.bb
-index 0e098109c8..2ea92f190c 100644
---- a/meta-oe/recipes-extended/ostree/ostree_2024.5.bb
-+++ b/meta-oe/recipes-extended/ostree/ostree_2024.5.bb
-@@ -45,6 +45,7 @@ BUILD_OPTIMIZATION:append = " -O2"
- PACKAGECONFIG ??= " \
-     ${@bb.utils.filter('DISTRO_FEATURES', 'selinux smack', d)} \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd libmount', '', d)} \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'soup3', '', d)} \
-     glib \
-     gpgme \
-     curl \
-@@ -192,6 +193,7 @@ RDEPENDS:${PN}-ptest += " \
-     diffutils \
-     findutils \
-     grep \
-+    locale-base-en-us \
-     python3-core \
-     python3-multiprocessing \
-     strace \
+diff --git a/meta-oe/recipes-support/unixodbc/unixodbc_2.3.12.bb b/meta-oe/recipes-support/unixodbc/unixodbc_2.3.12.bb
+index ccdd666408..7819387c39 100644
+--- a/meta-oe/recipes-support/unixodbc/unixodbc_2.3.12.bb
++++ b/meta-oe/recipes-support/unixodbc/unixodbc_2.3.12.bb
+@@ -21,7 +21,7 @@ inherit autotools-brokensep multilib_header qemu
+ S = "${WORKDIR}/unixODBC-${PV}"
+ 
+ EXTRA_OEMAKE += "LIBS=-lltdl"
+-
++EXTRA_OECONF += "--enable-utf8ini"
+ DEPENDS:append:class-target = "${@' qemu-native' if bb.utils.contains('MACHINE_FEATURES', 'qemu-usermode', True, False, d) else ''}"
+ QEMU_WRAPPER = "${@qemu_wrapper_cmdline(d, '${STAGING_DIR_HOST}', ['${STAGING_DIR_HOST}/${libdir}','${STAGING_DIR_HOST}/${base_libdir}'])}"
+ 
 -- 
 2.44.0
 
