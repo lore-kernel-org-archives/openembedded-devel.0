@@ -1,166 +1,122 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <alex.kanavin@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8F34AC4345F
-	for <webhook@archiver.kernel.org>; Mon, 15 Apr 2024 15:20:58 +0000 (UTC)
-Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com [209.85.128.178])
- by mx.groups.io with SMTP id smtpd.web11.24121.1713194457929364908
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B3F0EC00A94
+	for <webhook@archiver.kernel.org>; Mon, 15 Apr 2024 17:17:24 +0000 (UTC)
+Received: from mail-lj1-f171.google.com (mail-lj1-f171.google.com [209.85.208.171])
+ by mx.groups.io with SMTP id smtpd.web11.1051.1713201439865511294
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Apr 2024 08:20:58 -0700
+ Mon, 15 Apr 2024 10:17:20 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=elRcUVuY;
- spf=pass (domain: gmail.com, ip: 209.85.128.178, mailfrom: ticotimo@gmail.com)
-Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-61aaf71c495so18003427b3.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 15 Apr 2024 08:20:57 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=PtRYbG3q;
+ spf=pass (domain: gmail.com, ip: 209.85.208.171, mailfrom: alex.kanavin@gmail.com)
+Received: by mail-lj1-f171.google.com with SMTP id 38308e7fff4ca-2da08b06e0dso37262431fa.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 15 Apr 2024 10:17:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1713194457; x=1713799257; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=4AIhzx7T4j1HaG04salp13Y/lJLm9WrB4Qxz6mUwcXA=;
-        b=elRcUVuYz8/FTitP45pgejT9vcuaXxhmgKu/1N6qUUoUZbRugboVBs12pE+LAexur0
-         IsqDfh37Wx6wW3VDS08idGlKttmum73ontIa7mixmOxnKC7FCn0nhecQdhaVcq+0F3Gx
-         iSZRSkjXUATVQ33J+2uuwMUPyg92TMXUFYbESveJmW57ppLTw1pKfcQoPaQPXIxKKWBQ
-         xTe4lT3pQ0e558X8SF2uBBUcUD62oAY5i9pN+9TtoPg3r3Z+rjZSZ57ohZIvjYKXrcq+
-         fuFH85ABggHGPAbMllCa6wUjfPsmAPRJEIoXYHR+YSwjYwz4+IAaoPAUznoKSVWeSGSH
-         wwow==
+        d=gmail.com; s=20230601; t=1713201438; x=1713806238; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=mkJtuxSx5FW6XdCYBdQZwsJiUMxZBuRvqc7k2pdidM4=;
+        b=PtRYbG3q43bde7A9wEHxQzL/8UDeGDPN7uUQAnZ100ozGXJ7BO2Z/SRuJ37WcW9XKR
+         lkjDvcB9r2XEu3ikHwXK2Bwi9mRRdAPlGwn+kdTXKBbtv7Fj2ftkZot3FrfDHhD/HN/M
+         v71+cWlTwPAoEyt+kfVkNss2W+LzahuWSmbTACh9tGXUhqK9K3giuyQ+tYx9m9025A4Q
+         iPSyBOZJnIgcX6Wg0l4zH9i7Yjl3bGZmJ91m9PEmrIetcQUDC3RXiBraPHUhvHZWwGba
+         hIDH5J8xYhQi0Mlg3GiRvfRCYqV5JhDNP3UTi7Ghf4YHkuHT7hXOXFAhVI44CQdzKvt1
+         AqdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1713194457; x=1713799257;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=4AIhzx7T4j1HaG04salp13Y/lJLm9WrB4Qxz6mUwcXA=;
-        b=Nh8WPs3Plm3LpEiQj7V1XCDG66gsShETcLZQ4DDcT7Te/VgVQwG93KYHXrvi/7olNQ
-         v/FfSL+g4u5bCdgrueK6vycAbYmqwX1WkLOHhZ781VY1wmhS/FZFe7d04t7+CP4hOZeo
-         3L35Fiaviu4H/f0a4qPwguDxBNUebK9Ls7oVS2GGeqrrkd87yq9YHxxCJOuh8HZO4/R2
-         +sfgXLWJlGRYfTorBkbdl6UiBTYRXxitU+3pkoY6D2newrc2/lZ5LeCWfGlpuUKh88vL
-         Uk8t4RpndIrB6c6J0ZNg/JS1KJNxOWkZYYDpJkUQny5wsIM3l9MEzFNF8ihvsDjnB8Z6
-         vGdQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXAw15uI5Py2dApfKPo6BftspfD0eV9hdNky7Ljn3kLSgB/fBLpKwRJAel0y3w9Kmi/QZUHSfsWLwHrkFOC4eVU0nYwqNUz1x2xdjFtwRJGYE9sBNeYWIB9Dw==
-X-Gm-Message-State: AOJu0YyPodeE0F8iCHGcg5s9xzfLdPgJa5hfhNoG9g2k0s2DYmeTmWz/
-	zpOVcOxdKUN83P+TRlQP2jEowiR0eoEz2w9ECeOx2rd+yBhsR7ETlXsDNnPXGwi5N8JbKHxc1j8
-	abxjyPd76s1n2XKCNcUzEKSL/p9M=
-X-Google-Smtp-Source: AGHT+IFDD55Wa6NUwDyzuoGm7fmbkVybnoqHTI6kZ9VSdgbjbSr4w9PEuUCvcF3eV1T9JLe7oysdB/IRTRQN0Ouyte4=
-X-Received: by 2002:a81:b3c5:0:b0:618:7a0d:554a with SMTP id
- r188-20020a81b3c5000000b006187a0d554amr8817323ywh.2.1713194456957; Mon, 15
- Apr 2024 08:20:56 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1713201438; x=1713806238;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=mkJtuxSx5FW6XdCYBdQZwsJiUMxZBuRvqc7k2pdidM4=;
+        b=vnw8cvcax0/lV6nBHuuXR57bI3kfUC/yHSk0pTKu10LYHzE9Quiuus7T2VX8XuKKwd
+         Tw7Szz8OPK43VYUPUoUaoOIIsY54mUdIOSh8IZE0yXNRqJ8GPcJPJZWjX0dP5wzzE08b
+         P1w9qJB89vNx4dmJGzfzKCZ8b4wImUiVJ4JRMpXslYtgP1M5Dvouo0HvBcDv9T83Utvn
+         EUqsJ5W99AUYGzN/WoPYd1EeNyQ4mMqN4c0sEdQBz0GfVKb+kyhXumM4yzHvDNK9iTBh
+         SCaZhxeqxREhWfMhzL1YZ3Pu/dK0wN76wKc+rUv/g3jLC/glhSMecUclqWuTP760fwNR
+         dNdw==
+X-Forwarded-Encrypted: i=1; AJvYcCX/MBh8LPYBXOoi8I6y5BSN6z8JKG5RrdIp/sl8y+7dx/pF3A4jOVjhd3LlPRAk2vQ7B4iavzw+pRyzjqC3/QoQtQUOB8Fh6gecRa0c99A69t7tHuexbdDBWw==
+X-Gm-Message-State: AOJu0YydUu6qoGhNenYyuFGOqv1+DcIfiP72r0mASvNFd8+cIA3I7gX+
+	8RJb7qsDHMbzzCh/i+JU7j3px+ygb1EQ8AnHWkFBUowYpy9zlbRZIuDdztrSqmTximX4/u5yl4v
+	79WQxV3OwG9fIR1fg88MltTGPlV3PefCE
+X-Google-Smtp-Source: AGHT+IFf0E1OuD4I4ljw5Chb4AJax3pnrx5g8s4NLw7NbSlzM0/QnaD72Ff7U+1YTbpYnwBZZXa5a2nhLTqhSnCC1TM=
+X-Received: by 2002:a2e:a99e:0:b0:2d8:270f:9764 with SMTP id
+ x30-20020a2ea99e000000b002d8270f9764mr8295553ljq.40.1713201437785; Mon, 15
+ Apr 2024 10:17:17 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240415131443.7295-1-marex@denx.de> <CANPvuR=KbhHUzs33CHSNut2Nx=fFLLu1NpMxYcJBM652DQ8bdQ@mail.gmail.com>
- <6153557a-8b52-4080-87c5-a427df64ba96@denx.de>
-In-Reply-To: <6153557a-8b52-4080-87c5-a427df64ba96@denx.de>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Mon, 15 Apr 2024 08:20:45 -0700
-Message-ID: <CANx9H-Da+bFvX6ogKNCkjONkESMfw1T47ncc+a6-mDoYg4pWYQ@mail.gmail.com>
+ <6153557a-8b52-4080-87c5-a427df64ba96@denx.de> <CANx9H-Da+bFvX6ogKNCkjONkESMfw1T47ncc+a6-mDoYg4pWYQ@mail.gmail.com>
+In-Reply-To: <CANx9H-Da+bFvX6ogKNCkjONkESMfw1T47ncc+a6-mDoYg4pWYQ@mail.gmail.com>
+From: Alexander Kanavin <alex.kanavin@gmail.com>
+Date: Mon, 15 Apr 2024 19:17:06 +0200
+Message-ID: <CANNYZj-3VJmQe0xXXBH6hr8G9_wdbBNYPnGggo9SnDOG2pKmKQ@mail.gmail.com>
 Subject: Re: [oe] [meta-python2][PATCH] layer.conf: update LAYERSERIES_COMPAT
  for scarthgap
-To: marex@denx.de
-Cc: Jose Quaresma <quaresma.jose@gmail.com>, Martin.Jansa@gmail.com, 
+To: ticotimo@gmail.com
+Cc: marex@denx.de, Jose Quaresma <quaresma.jose@gmail.com>, Martin.Jansa@gmail.com, 
 	openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="00000000000009cc290616242bb0"
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 15 Apr 2024 15:20:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109964
+ <openembedded-devel@lists.openembedded.org>; Mon, 15 Apr 2024 17:17:24 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109965
 
---00000000000009cc290616242bb0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Yes to Tim's hard no. Qt5 itself is EOL for almost a year now (don't
+tell me about their commercial offers, ok?).
 
-This is a hard no from me.
+I would put something similar to meta-gpl2 into that layer instead actually=
+:
+https://git.yoctoproject.org/meta-gplv2/commit/?id=3D43bf0e8d5985945d19d01f=
+94bfbbda420c4435f3
 
-On Mon, Apr 15, 2024 at 6:59=E2=80=AFAM Marek Vasut via lists.openembedded.=
-org
-<marex=3Ddenx.de@lists.openembedded.org> wrote:
+Alex
 
-> On 4/15/24 3:49 PM, Jose Quaresma wrote:
-> > Hi Marek,
+
+On Mon, 15 Apr 2024 at 17:21, Tim Orling via lists.openembedded.org
+<ticotimo=3Dgmail.com@lists.openembedded.org> wrote:
 >
-> Hi,
+> This is a hard no from me.
 >
-> > Last commit on this layer was done 2 years ago and it was at the time t=
-o
-> > add Kirkstone compatibility, nothing more since then.
-> > Python 2 is dead since 1/1/2020. That means that we (python dev) will n=
-ot
-> > improve it anymore after that day,
-> > even if someone finds a security problem in it. You should upgrade to
-> > Python 3 as soon as you can.
-> >
-> > https://www.python.org/doc/sunset-python-2
-> >
-> > In my opinion the OE community should no longer promote its use.
->
-> I am aware of this, for me this is just a band-aid to keep meta-qt5
-> building for a while longer. I can work around this in bblayers.conf or
-> local.conf too, I would like to avoid that however.
+> On Mon, Apr 15, 2024 at 6:59=E2=80=AFAM Marek Vasut via lists.openembedde=
+d.org <marex=3Ddenx.de@lists.openembedded.org> wrote:
+>>
+>> On 4/15/24 3:49 PM, Jose Quaresma wrote:
+>> > Hi Marek,
+>>
+>> Hi,
+>>
+>> > Last commit on this layer was done 2 years ago and it was at the time =
+to
+>> > add Kirkstone compatibility, nothing more since then.
+>> > Python 2 is dead since 1/1/2020. That means that we (python dev) will =
+not
+>> > improve it anymore after that day,
+>> > even if someone finds a security problem in it. You should upgrade to
+>> > Python 3 as soon as you can.
+>> >
+>> > https://www.python.org/doc/sunset-python-2
+>> >
+>> > In my opinion the OE community should no longer promote its use.
+>>
+>> I am aware of this, for me this is just a band-aid to keep meta-qt5
+>> building for a while longer. I can work around this in bblayers.conf or
+>> local.conf too, I would like to avoid that however.
+>>
+>>
+>>
 >
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#109963):
-> https://lists.openembedded.org/g/openembedded-devel/message/109963
-> Mute This Topic: https://lists.openembedded.org/mt/105535514/924729
+> View/Reply Online (#109964): https://lists.openembedded.org/g/openembedde=
+d-devel/message/109964
+> Mute This Topic: https://lists.openembedded.org/mt/105535514/1686489
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> ticotimo@gmail.com]
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [a=
+lex.kanavin@gmail.com]
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >
->
-
---00000000000009cc290616242bb0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"auto">This is a hard no from me.</div><div><br><div class=3D"gm=
-ail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Mon, Apr 15, 2024 at 6:=
-59=E2=80=AFAM Marek Vasut via <a href=3D"http://lists.openembedded.org">lis=
-ts.openembedded.org</a> &lt;marex=3D<a href=3D"mailto:denx.de@lists.openemb=
-edded.org">denx.de@lists.openembedded.org</a>&gt; wrote:<br></div><blockquo=
-te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left-widt=
-h:1px;border-left-style:solid;padding-left:1ex;border-left-color:rgb(204,20=
-4,204)">On 4/15/24 3:49 PM, Jose Quaresma wrote:<br>
-&gt; Hi Marek,<br>
-<br>
-Hi,<br>
-<br>
-&gt; Last commit on this layer was done 2 years ago and it was at the time =
-to<br>
-&gt; add Kirkstone compatibility, nothing more since then.<br>
-&gt; Python 2 is dead since 1/1/2020. That means that we (python dev) will =
-not<br>
-&gt; improve it anymore after that day,<br>
-&gt; even if someone finds a security problem in it. You should upgrade to<=
-br>
-&gt; Python 3 as soon as you can.<br>
-&gt; <br>
-&gt; <a href=3D"https://www.python.org/doc/sunset-python-2" rel=3D"noreferr=
-er" target=3D"_blank">https://www.python.org/doc/sunset-python-2</a><br>
-&gt; <br>
-&gt; In my opinion the OE community should no longer promote its use.<br>
-<br>
-I am aware of this, for me this is just a band-aid to keep meta-qt5 <br>
-building for a while longer. I can work around this in bblayers.conf or <br=
->
-local.conf too, I would like to avoid that however.<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#109963): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/109963" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/109963</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/105535514/924=
-729" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
-/105535514/924729</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
-et=3D"_blank">ticotimo@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
-
---00000000000009cc290616242bb0--
 
