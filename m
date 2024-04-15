@@ -1,103 +1,411 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EF1EBC4345F
-	for <webhook@archiver.kernel.org>; Mon, 15 Apr 2024 17:48:34 +0000 (UTC)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.web10.1847.1713203308577347523
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 833DFC4345F
+	for <webhook@archiver.kernel.org>; Mon, 15 Apr 2024 18:21:53 +0000 (UTC)
+Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com [209.85.208.49])
+ by mx.groups.io with SMTP id smtpd.web11.219.1713205303578954998
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 15 Apr 2024 10:48:28 -0700
+ Mon, 15 Apr 2024 11:21:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Z+OoMxlY;
- spf=pass (domain: gmail.com, ip: 209.85.128.48, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-41864cf2f5aso5354185e9.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 15 Apr 2024 10:48:28 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=GeqtceVQ;
+ spf=pass (domain: gmail.com, ip: 209.85.208.49, mailfrom: alperyasinak1@gmail.com)
+Received: by mail-ed1-f49.google.com with SMTP id 4fb4d7f45d1cf-56fff9d2651so3669528a12.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 15 Apr 2024 11:21:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1713203307; x=1713808107; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=WA6k0Zpkl6DKS8/EMytiujXHrkbND0F/JCCnyxSqD1s=;
-        b=Z+OoMxlYIphMKQTLBkgdFtYCtq51gFu2Dd1MErt2imVdktQWwq1YDQsqb7Y9dPlAAi
-         Cq+ml2DRXAIAKUbhAsQV0W4Ru/brfajYcf4qSS7dqZzHA9r022WmgsMrMW9JtwtH4DBM
-         Aj9eku8o+ci2S6xTdJfibDk8RW9r0ga3cKj+NzHZKP7RBnCjp6tulsPfoE3421Fo7vMq
-         ihd7fLYbD07PUBHYVAea+hNR25EVCj/VzJeTpHSyVvp2duN6e7l0d4dun6Cfdovb0Wvs
-         7CcPxv/I/HMtGcCPrssZmQ1KFkghsb+DMZEYd6JEfDnqjTAut7ojlvh7ZTOMYyekaHsj
-         +/SQ==
+        d=gmail.com; s=20230601; t=1713205301; x=1713810101; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=k6V5d9KtWY+GYLIlRFf34j/haG4Fwo+1HOrDuZonSak=;
+        b=GeqtceVQgkYfUzoLhMlSFPJazk/877pGyV4KiFp6xJwxv2dOc2fr6Rn7H0hgpN5zpu
+         n/U7+8r5u40RkIIKOYUReMtZzjHFrDz5GY/zwpO0k+1clWkx/nxWHoZhvDl9S9T2oQO3
+         5NWH3J1p8Xa4Dj2wLnLqKdXFT+6mJJpCrki2344y8JUL52fjU254J/2PJBuoFuOmbup4
+         5f7ZmIi4O9LxWrReWZXmU0fy/S5XTdgaEjiDOvndw81b0mlXumFLhSyqt0L4ZLrQLmtL
+         f2X+QvvYtqthElhl0xmR+Xxs8aJMKa9eGcE/yccZ6CI8Jn7/xhggShZN9KuH5BJxTwNt
+         dpUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1713203307; x=1713808107;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=WA6k0Zpkl6DKS8/EMytiujXHrkbND0F/JCCnyxSqD1s=;
-        b=O0ZKRP4G2Jdj4zJf3/WEnLjKu3SmKRqadWgMuyjSTezXhv+tGb12lNyEm48+9f8RPs
-         DhfzCpDpk25e1tGf7HXjnMGTz6wIZAs+Dn3l6tD/aFHISG/mGWnXhtyNkqznWBE3Hxv0
-         2VLKUbI4cxPQxknRM46V96yaSymYtdhBQA5K/51a+9RQZs2Fv8RTJbTi+J/LyZmiH/ZR
-         90U4LEpBTG8EI1PZGs5pz7Kaxf95SnBaWzoIT+bRaamWjWLPbBG9qgbKtZAixjR+Ma0R
-         ZeMjNrEJO6U3xgA4h3srIXbwiyScwrNPpTRriVmnnosas2CPfMrQVIuf8qe24q0RWC0q
-         dpXw==
-X-Gm-Message-State: AOJu0Yz6OEL9nDWEK8Sp2YshpW4Ost9gONE7sE+BsQCIS+yFmWGUIj9S
-	vVk7DqtpweobLQCWO6JqYxydA9yipfDDQZoHOgqjkIl/T/5X91rhZ5dWdQGgKAJyQpftP2hve1v
-	6wFs9BPe6lJHV9sZSOEZ76KusUbQ=
-X-Google-Smtp-Source: AGHT+IER6dSY5/t5AqN9jOMjeEimPYmZESRLDvf/vBQZRUlZJyE0FTkDx9XNkX22i+TOMzHc1vhl+rtr7E85GLN+3os=
-X-Received: by 2002:a05:600c:4e55:b0:418:4f7c:2c74 with SMTP id
- e21-20020a05600c4e5500b004184f7c2c74mr3019135wmq.20.1713203306756; Mon, 15
- Apr 2024 10:48:26 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1713205301; x=1713810101;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=k6V5d9KtWY+GYLIlRFf34j/haG4Fwo+1HOrDuZonSak=;
+        b=kOaBdL5uClA4GChLyLo2990CZWTDjq5WueKfKLKY5rsoJwnu5FByBZwY7TdX3FLYdE
+         /2H+6yLwVKeqKnF6G6aRoaqXl+A07QzRZOkbCAr2qOxR5GBRhG9dF+SMvrG7l3ampKw1
+         jTeQ4uPvIi2loMaryziyjXx5JJXmY3EMKmqGmj6x4eZgFfZ5OrBi0S8sNcxbxf7i951f
+         k3eyKoW/MFCMQGBdK25pZch8w54O8kbrYRF08pcutUILBDCXXpQfYOVGPT2ZikOpQYuR
+         4xjI7HOdGiFS/8T++84lweZ+7voRFrsfB/a11p9hEmUd5Jr32FK7s+JO27algP2apA99
+         AAzQ==
+X-Gm-Message-State: AOJu0YydHpr2fsl2DBAYFS4fFpsQ4aj5eaJ5Cf3r0wOUcN3rZmTRvm6Z
+	2s5v93j8WSupl0OqVTMiz2T+2eVSJ4SxwHqYli6mGeu9NAedtGImpZSo6w==
+X-Google-Smtp-Source: AGHT+IGSEB18VYhZl2pRLnWMg3Cv7BJKHoEQikNx1ttFSQ45IXPHyxNmHeKFdfAWF4AKP1EcTQjKyw==
+X-Received: by 2002:a17:907:724c:b0:a54:e183:6249 with SMTP id ds12-20020a170907724c00b00a54e1836249mr1533715ejc.56.1713205301111;
+        Mon, 15 Apr 2024 11:21:41 -0700 (PDT)
+Received: from localhost.localdomain ([176.33.68.217])
+        by smtp.gmail.com with ESMTPSA id r16-20020a170906281000b00a5267ee40efsm1913968ejc.18.2024.04.15.11.21.39
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 15 Apr 2024 11:21:40 -0700 (PDT)
+From: alperak <alperyasinak1@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: alperak <alperyasinak1@gmail.com>
+Subject: [meta-openembedded][PATCH] Use PYTHON_SITEPACKAGES_DIR instead of hard-coded site-packages directory path
+Date: Mon, 15 Apr 2024 21:19:59 +0300
+Message-Id: <20240415181959.734913-1-alperyasinak1@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20240415131443.7295-1-marex@denx.de>
-In-Reply-To: <20240415131443.7295-1-marex@denx.de>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 15 Apr 2024 19:48:15 +0200
-Message-ID: <CA+chaQcJXRzwTd4Hh=2gYZ7aQQDw3DAFSFq7=KH67-dhgODz1A@mail.gmail.com>
-Subject: Re: [meta-python2][PATCH] layer.conf: update LAYERSERIES_COMPAT for scarthgap
-To: Marek Vasut <marex@denx.de>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 15 Apr 2024 17:48:34 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109966
+ <openembedded-devel@lists.openembedded.org>; Mon, 15 Apr 2024 18:21:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109967
 
-If you need it just for some experiments than feel free to use:
-https://github.com/shr-project/meta-python2/commits/jansa/master/
-which I've already updated (for built time benchmark which
-historically included qtwebengine as well
-https://github.com/shr-project/test-oe-build-time).
+The following paths have been replaced with PYTHON_SITEPACKAGES_DIR:
 
-But for anything more serious work with your customer to switch to
-something more supported, there are still minor upgrades to meta-qt5
-(last in https://github.com/meta-qt5/meta-qt5/pull/556), but it's a
-dead end and switch to something else should have higher priority than
-switch to scarthgap (e.g. switching to meta-qt6).
+- "${libdir}/${PYTHON_DIR}/site-packages"
+- "${libdir}/python${PYTHON_BASEVERSION}/site-packages"
+- "${libdir}/python*/site-packages"
+- "${libdir}/python3.*/site-packages"
 
-Cheers,
+Signed-off-by: alperak <alperyasinak1@gmail.com>
+---
+ .../libiec61850/libiec61850_1.5.1.bb                 |  4 ++--
+ .../recipes-support/libldb/libldb_2.8.0.bb           |  4 ++--
+ .../recipes-support/libtalloc/libtalloc_2.4.2.bb     |  2 +-
+ .../recipes-support/libtdb/libtdb_1.4.10.bb          |  2 +-
+ .../recipes-support/libtevent/libtevent_0.16.0.bb    |  2 +-
+ .../recipes-connectivity/lirc/lirc_0.10.2.bb         |  2 +-
+ .../konkretcmpi/konkretcmpi_0.9.2.bb                 |  4 ++--
+ .../libblockdev/libblockdev_3.1.1.bb                 |  2 +-
+ .../libimobiledevice/libplist_2.3.0.bb               |  6 +++---
+ .../libimobiledevice/libplist_git.bb                 |  6 +++---
+ meta-oe/recipes-extended/rrdtool/rrdtool_1.8.0.bb    |  4 ++--
+ meta-oe/recipes-graphics/graphviz/graphviz_8.1.0.bb  |  2 +-
+ meta-oe/recipes-security/audit/audit_4.0.1.bb        |  4 ++--
+ .../canonical-multitouch/geis_2.2.17.bb              | 10 +++++-----
+ meta-oe/recipes-support/libftdi/libftdi_1.5.bb       |  2 +-
+ .../telepathy/telepathy-python3_0.15.19.bb           | 12 ++++++------
+ .../python/python3-dateutil_2.9.0.bb                 |  2 +-
+ .../python/python3-pydantic-core_2.16.3.bb           |  4 ++--
+ .../recipes-devtools/python/python3-pyzmq_25.1.2.bb  |  2 +-
+ .../recipes-devtools/python/python3-tornado_6.4.bb   |  2 +-
+ 20 files changed, 39 insertions(+), 39 deletions(-)
 
-On Mon, Apr 15, 2024 at 3:15=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
->
-> Support both kirkstone and scarthgap as that seems to work well.
->
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
->  conf/layer.conf | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/conf/layer.conf b/conf/layer.conf
-> index 38ef579..0f228ca 100644
-> --- a/conf/layer.conf
-> +++ b/conf/layer.conf
-> @@ -14,7 +14,7 @@ LAYERVERSION_meta-python2 =3D "1"
->
->  LAYERDEPENDS_meta-python2 =3D "core openembedded-layer"
->
-> -LAYERSERIES_COMPAT_meta-python2 =3D "kirkstone"
-> +LAYERSERIES_COMPAT_meta-python2 =3D "kirkstone scarthgap"
->
->  LICENSE_PATH +=3D "${LAYERDIR}/licenses"
->
-> --
-> 2.43.0
->
+diff --git a/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.5.1.bb b/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.5.1.bb
+index 3e5fc91da..63476d349 100644
+--- a/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.5.1.bb
++++ b/meta-networking/recipes-connectivity/libiec61850/libiec61850_1.5.1.bb
+@@ -33,6 +33,6 @@ RDEPENDS:${PN}-python = " python3-core "
+ RDEPENDS:${PN} = " python3-core "
+ 
+ FILES:${PN} += " \
+-    ${libdir}/${PYTHON_DIR}/site-packages/iec61850.py \
+-    ${libdir}/${PYTHON_DIR}/site-packages/_iec61850.so \
++    ${PYTHON_SITEPACKAGES_DIR}/iec61850.py \
++    ${PYTHON_SITEPACKAGES_DIR}/_iec61850.so \
+ "
+diff --git a/meta-networking/recipes-support/libldb/libldb_2.8.0.bb b/meta-networking/recipes-support/libldb/libldb_2.8.0.bb
+index 58d683eab..bdd87993d 100644
+--- a/meta-networking/recipes-support/libldb/libldb_2.8.0.bb
++++ b/meta-networking/recipes-support/libldb/libldb_2.8.0.bb
+@@ -63,10 +63,10 @@ FILES:${PN}-dbg += "${bindir}/.debug/* \
+                     ${libdir}/ldb/.debug/* \
+                     ${libdir}/ldb/modules/ldb/.debug/*"
+ 
+-FILES:pyldb = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/* \
++FILES:pyldb = "${PYTHON_SITEPACKAGES_DIR}/* \
+                ${libdir}/libpyldb-util.*.so.* \
+               "
+-FILES:pyldb-dbg = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/.debug \
++FILES:pyldb-dbg = "${PYTHON_SITEPACKAGES_DIR}/.debug \
+                    ${libdir}/.debug/libpyldb-util.*.so.*"
+ FILES:pyldb-dev = "${libdir}/libpyldb-util.*.so"
+ 
+diff --git a/meta-networking/recipes-support/libtalloc/libtalloc_2.4.2.bb b/meta-networking/recipes-support/libtalloc/libtalloc_2.4.2.bb
+index 394c17628..b617f097c 100644
+--- a/meta-networking/recipes-support/libtalloc/libtalloc_2.4.2.bb
++++ b/meta-networking/recipes-support/libtalloc/libtalloc_2.4.2.bb
+@@ -53,7 +53,7 @@ PACKAGES += "pytalloc pytalloc-dev"
+ 
+ RPROVIDES:${PN}-dbg += "pytalloc-dbg"
+ 
+-FILES:pytalloc = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/* \
++FILES:pytalloc = "${PYTHON_SITEPACKAGES_DIR}/* \
+                   ${libdir}/libpytalloc-util.so.2 \
+                   ${libdir}/libpytalloc-util.so.2.1.1 \
+                  "
+diff --git a/meta-networking/recipes-support/libtdb/libtdb_1.4.10.bb b/meta-networking/recipes-support/libtdb/libtdb_1.4.10.bb
+index f23b157e8..bd3f9f63a 100644
+--- a/meta-networking/recipes-support/libtdb/libtdb_1.4.10.bb
++++ b/meta-networking/recipes-support/libtdb/libtdb_1.4.10.bb
+@@ -58,6 +58,6 @@ RPROVIDES:${PN}-dbg += "python3-tdb-dbg"
+ 
+ FILES:${PN} = "${libdir}/*.so.*"
+ FILES:tdb-tools = "${bindir}/*"
+-FILES:python3-tdb = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*"
++FILES:python3-tdb = "${PYTHON_SITEPACKAGES_DIR}/*"
+ RDEPENDS:python3-tdb = "python3"
+ INSANE_SKIP:${MLPREFIX}python3-tdb = "dev-so"
+diff --git a/meta-networking/recipes-support/libtevent/libtevent_0.16.0.bb b/meta-networking/recipes-support/libtevent/libtevent_0.16.0.bb
+index 67f36083b..ac80f3733 100644
+--- a/meta-networking/recipes-support/libtevent/libtevent_0.16.0.bb
++++ b/meta-networking/recipes-support/libtevent/libtevent_0.16.0.bb
+@@ -57,6 +57,6 @@ PACKAGES += "python3-tevent"
+ 
+ RPROVIDES:${PN}-dbg += "python3-tevent-dbg"
+ 
+-FILES:python3-tevent = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*"
++FILES:python3-tevent = "${PYTHON_SITEPACKAGES_DIR}/*"
+ 
+ INSANE_SKIP:${MLPREFIX}python3-tevent = "dev-so"
+diff --git a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.2.bb b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.2.bb
+index 3d474305d..d348ef8be 100644
+--- a/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.2.bb
++++ b/meta-oe/dynamic-layers/meta-python/recipes-connectivity/lirc/lirc_0.10.2.bb
+@@ -101,7 +101,7 @@ FILES:${PN} += "${systemd_unitdir}/system/lircd.service"
+ FILES:${PN} += "${systemd_unitdir}/system/lircd.socket"
+ FILES:${PN} += "${libdir}/tmpfiles.d/lirc.conf"
+ FILES:${PN}-dbg += "${libdir}/lirc/plugins/.debug"
+-FILES:${PN}-python += "${bindir}/irdb-get ${bindir}/irtext2udp ${bindir}/lircd-setup ${bindir}/pronto2lirc ${libdir}/python*/site-packages"
++FILES:${PN}-python += "${bindir}/irdb-get ${bindir}/irtext2udp ${bindir}/lircd-setup ${bindir}/pronto2lirc ${PYTHON_SITEPACKAGES_DIR}"
+ 
+ INITSCRIPT_PACKAGES = "lirc lirc-exec"
+ INITSCRIPT_NAME:lirc-exec = "lircexec"
+diff --git a/meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb
+index 15a796593..6b60d8918 100644
+--- a/meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb
++++ b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb
+@@ -17,7 +17,7 @@ SRC_URI = "git://github.com/rnovacek/konkretcmpi.git;branch=master;protocol=http
+ SRCREV = "ad28225e6eceff88417a60c1ba8896c8e40f21a7"
+ S = "${WORKDIR}/git"
+ 
+-inherit cmake
++inherit cmake python3-dir
+ 
+ EXTRA_OECMAKE = "-DWITH_PYTHON=ON \
+                  ${@oe.utils.conditional("libdir", "/usr/lib64", "-DLIB_SUFFIX=64", "", d)} \
+@@ -34,6 +34,6 @@ PACKAGES =+ "${PN}-python"
+ 
+ RPROVIDES:${PN}-dbg += "${PN}-python-dbg"
+ 
+-FILES:${PN}-python = "${libdir}/python*/site-packages/konkretmof.py* ${libdir}/python*/site-packages/_konkretmof.so"
++FILES:${PN}-python = "${PYTHON_SITEPACKAGES_DIR}/konkretmof.py* ${PYTHON_SITEPACKAGES_DIR}/_konkretmof.so"
+ 
+ BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-extended/libblockdev/libblockdev_3.1.1.bb b/meta-oe/recipes-extended/libblockdev/libblockdev_3.1.1.bb
+index dd1514628..1ad8036d7 100644
+--- a/meta-oe/recipes-extended/libblockdev/libblockdev_3.1.1.bb
++++ b/meta-oe/recipes-extended/libblockdev/libblockdev_3.1.1.bb
+@@ -18,7 +18,7 @@ SRC_URI = "git://github.com/storaged-project/libblockdev;branch=3.1.x-devel;prot
+ SRCREV = "68aaff5556afe26be749c29a2b7cbd714dce3050"
+ S = "${WORKDIR}/git"
+ 
+-FILES:${PN} += "${libdir}/python3.*/site-packages"
++FILES:${PN} += "${PYTHON_SITEPACKAGES_DIR}"
+ 
+ PACKAGECONFIG ??= "python3 lvm lvm-dbus dm parted fs escrow btrfs crypto mdraid mpath nvdimm tools"
+ PACKAGECONFIG[python3] = "--with-python3, --without-python3,,python3"
+diff --git a/meta-oe/recipes-extended/libimobiledevice/libplist_2.3.0.bb b/meta-oe/recipes-extended/libimobiledevice/libplist_2.3.0.bb
+index 69e80ac0c..81a3c26e0 100644
+--- a/meta-oe/recipes-extended/libimobiledevice/libplist_2.3.0.bb
++++ b/meta-oe/recipes-extended/libimobiledevice/libplist_2.3.0.bb
+@@ -26,8 +26,8 @@ do_configure:prepend() {
+ }
+ 
+ do_install:append () {
+-    if [ -e ${D}${libdir}/python*/site-packages/plist/_plist.so ]; then
+-        chrpath -d ${D}${libdir}/python*/site-packages/plist/_plist.so
++    if [ -e ${D}${PYTHON_SITEPACKAGES_DIR}/plist/_plist.so ]; then
++        chrpath -d ${D}${PYTHON_SITEPACKAGES_DIR}/plist/_plist.so
+     fi
+ }
+ 
+@@ -38,4 +38,4 @@ PACKAGES =+ "${PN}-utils \
+ FILES:${PN} = "${libdir}/libplist-2.0${SOLIBS}"
+ FILES:${PN}++ = "${libdir}/libplist++-2.0${SOLIBS}"
+ FILES:${PN}-utils = "${bindir}/*"
+-FILES:${PN}-python = "${libdir}/python*/site-packages/*"
++FILES:${PN}-python = "${PYTHON_SITEPACKAGES_DIR}/*"
+diff --git a/meta-oe/recipes-extended/libimobiledevice/libplist_git.bb b/meta-oe/recipes-extended/libimobiledevice/libplist_git.bb
+index 26dd821f9..bfd4af053 100644
+--- a/meta-oe/recipes-extended/libimobiledevice/libplist_git.bb
++++ b/meta-oe/recipes-extended/libimobiledevice/libplist_git.bb
+@@ -28,8 +28,8 @@ do_configure:prepend() {
+ }
+ 
+ do_install:append () {
+-    if [ -e ${D}${libdir}/python*/site-packages/plist/_plist.so ]; then
+-        chrpath -d ${D}${libdir}/python*/site-packages/plist/_plist.so
++    if [ -e ${D}${PYTHON_SITEPACKAGES_DIR}/plist/_plist.so ]; then
++        chrpath -d ${D}${PYTHON_SITEPACKAGES_DIR}/plist/_plist.so
+     fi
+ }
+ 
+@@ -40,4 +40,4 @@ PACKAGES =+ "${PN}-utils \
+ FILES:${PN} = "${libdir}/libplist-2.0${SOLIBS}"
+ FILES:${PN}++ = "${libdir}/libplist++-2.0${SOLIBS}"
+ FILES:${PN}-utils = "${bindir}/*"
+-FILES:${PN}-python = "${libdir}/python*/site-packages/*"
++FILES:${PN}-python = "${PYTHON_SITEPACKAGES_DIR}/*"
+diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.8.0.bb b/meta-oe/recipes-extended/rrdtool/rrdtool_1.8.0.bb
+index f0c083c6d..cbe1af285 100644
+--- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.8.0.bb
++++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.8.0.bb
+@@ -124,8 +124,8 @@ RDEPENDS:${PN}-perl = "perl perl-module-lib perl-module-getopt-long perl-module-
+ 
+ DESCRIPTION:${PN}-python = \
+ "The ${PN}-python package includes RRDtool bindings for python."
+-FILES:${PN}-python = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*"
++FILES:${PN}-python = "${PYTHON_SITEPACKAGES_DIR}/*"
+ RDEPENDS:${PN}-python = "python3"
+ 
+ FILES:${PN}-dbg += "${libdir}/perl/vendor_perl/*/auto/RRDs/.debug \
+-    ${libdir}/python${PYTHON_BASEVERSION}/site-packages/.debug"
++    ${PYTHON_SITEPACKAGES_DIR}/.debug"
+diff --git a/meta-oe/recipes-graphics/graphviz/graphviz_8.1.0.bb b/meta-oe/recipes-graphics/graphviz/graphviz_8.1.0.bb
+index 4d40ee4de..2700142e5 100644
+--- a/meta-oe/recipes-graphics/graphviz/graphviz_8.1.0.bb
++++ b/meta-oe/recipes-graphics/graphviz/graphviz_8.1.0.bb
+@@ -101,7 +101,7 @@ PACKAGE_WRITE_DEPS += "qemu-native"
+ 
+ PACKAGES =+ "${PN}-python ${PN}-perl ${PN}-demo"
+ 
+-FILES:${PN}-python += "${libdir}/python*/site-packages/ ${libdir}/graphviz/python/"
++FILES:${PN}-python += "${PYTHON_SITEPACKAGES_DIR}/ ${libdir}/graphviz/python/"
+ FILES:${PN}-perl += "${libdir}/perl5/*/vendor_perl/ ${libdir}/graphviz/perl/"
+ FILES:${PN}-demo += "${datadir}/graphviz/demo/"
+ 
+diff --git a/meta-oe/recipes-security/audit/audit_4.0.1.bb b/meta-oe/recipes-security/audit/audit_4.0.1.bb
+index 96ed6ff3d..a37ae3bb8 100644
+--- a/meta-oe/recipes-security/audit/audit_4.0.1.bb
++++ b/meta-oe/recipes-security/audit/audit_4.0.1.bb
+@@ -44,8 +44,8 @@ EXTRA_OECONF = " \
+ 
+ EXTRA_OEMAKE = " \
+         PYTHON=python3 \
+-        pythondir=${libdir}/python${PYTHON_BASEVERSION}/site-packages \
+-        pyexecdir=${libdir}/python${PYTHON_BASEVERSION}/site-packages \
++        pythondir=${PYTHON_SITEPACKAGES_DIR} \
++        pyexecdir=${PYTHON_SITEPACKAGES_DIR} \
+         STDINC='${STAGING_INCDIR}' \
+         "
+ 
+diff --git a/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb b/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
+index aa595ebe5..139649b97 100644
+--- a/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
++++ b/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
+@@ -48,12 +48,12 @@ RDEPENDS:${PN}-bin = " \
+ 
+ FILES:${PN} += " \
+     ${datadir}/geisview \
+-    ${libdir}/${PYTHON_DIR}/site-packages/geis* \
+-    ${libdir}/${PYTHON_DIR}/site-packages/_*.so \
++    ${PYTHON_SITEPACKAGES_DIR}/geis* \
++    ${PYTHON_SITEPACKAGES_DIR}/_*.so \
+ "
+ 
+-FILES:${PN}-dbg += "${libdir}/${PYTHON_DIR}/site-packages/.debug"
++FILES:${PN}-dbg += "${PYTHON_SITEPACKAGES_DIR}/.debug"
+ 
+-FILES:${PN}-dev += "${libdir}/${PYTHON_DIR}/site-packages/_*.la"
++FILES:${PN}-dev += "${PYTHON_SITEPACKAGES_DIR}/_*.la"
+ 
+-FILES:${PN}-staticdev += "${libdir}/${PYTHON_DIR}/site-packages/_*.a"
++FILES:${PN}-staticdev += "${PYTHON_SITEPACKAGES_DIR}/_*.a"
+diff --git a/meta-oe/recipes-support/libftdi/libftdi_1.5.bb b/meta-oe/recipes-support/libftdi/libftdi_1.5.bb
+index 7f0cfa237..eae1c02f0 100644
+--- a/meta-oe/recipes-support/libftdi/libftdi_1.5.bb
++++ b/meta-oe/recipes-support/libftdi/libftdi_1.5.bb
+@@ -37,4 +37,4 @@ BBCLASSEXTEND = "native nativesdk"
+ PACKAGES =+ "${PN}-python ftdi-eeprom"
+ 
+ FILES:ftdi-eeprom = "${bindir}/ftdi_eeprom"
+-FILES:${PN}-python = "${libdir}/${PYTHON_DIR}/site-packages/"
++FILES:${PN}-python = "${PYTHON_SITEPACKAGES_DIR}/"
+diff --git a/meta-python/recipes-connectivity/telepathy/telepathy-python3_0.15.19.bb b/meta-python/recipes-connectivity/telepathy/telepathy-python3_0.15.19.bb
+index 31f6ae37f..23c216504 100644
+--- a/meta-python/recipes-connectivity/telepathy/telepathy-python3_0.15.19.bb
++++ b/meta-python/recipes-connectivity/telepathy/telepathy-python3_0.15.19.bb
+@@ -20,14 +20,14 @@ SRC_URI[md5sum] = "f7ca25ab3c88874015b7e9728f7f3017"
+ SRC_URI[sha256sum] = "244c0e1bf4bbd78ae298ea659fe10bf3a73738db550156767cc2477aedf72376"
+ 
+ FILES:${PN} += "\
+-    ${libdir}/python*/site-packages/telepathy/*.py \
+-    ${libdir}/python*/site-packages/telepathy/*/*.py \
++    ${PYTHON_SITEPACKAGES_DIR}/telepathy/*.py \
++    ${PYTHON_SITEPACKAGES_DIR}/telepathy/*/*.py \
+ "
+ 
+ do_install:append () {
+-    rm -fr ${D}${libdir}/python*/site-packages/telepathy/__pycache__
+-    rm -fr ${D}${libdir}/python*/site-packages/telepathy/__pycache__
+-    rm -fr ${D}${libdir}/python*/site-packages/telepathy/*/__pycache__
+-    rm -fr ${D}${libdir}/python*/site-packages/telepathy/*/__pycache__
++    rm -fr ${D}${PYTHON_SITEPACKAGES_DIR}/telepathy/__pycache__
++    rm -fr ${D}${PYTHON_SITEPACKAGES_DIR}/telepathy/__pycache__
++    rm -fr ${D}${PYTHON_SITEPACKAGES_DIR}/telepathy/*/__pycache__
++    rm -fr ${D}${PYTHON_SITEPACKAGES_DIR}/telepathy/*/__pycache__
+ }
+ RDEPENDS:${PN} += "python3-dbus"
+diff --git a/meta-python/recipes-devtools/python/python3-dateutil_2.9.0.bb b/meta-python/recipes-devtools/python/python3-dateutil_2.9.0.bb
+index ac76ccc96..1f7a4a03f 100644
+--- a/meta-python/recipes-devtools/python/python3-dateutil_2.9.0.bb
++++ b/meta-python/recipes-devtools/python/python3-dateutil_2.9.0.bb
+@@ -10,7 +10,7 @@ PYPI_PACKAGE = "python-dateutil"
+ inherit pypi python_setuptools_build_meta
+ 
+ PACKAGES =+ "${PN}-zoneinfo"
+-FILES:${PN}-zoneinfo = "${libdir}/${PYTHON_DIR}/site-packages/dateutil/zoneinfo"
++FILES:${PN}-zoneinfo = "${PYTHON_SITEPACKAGES_DIR}/dateutil/zoneinfo"
+ 
+ DEPENDS += "python3-setuptools-scm-native"
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-pydantic-core_2.16.3.bb b/meta-python/recipes-devtools/python/python3-pydantic-core_2.16.3.bb
+index 934e3e2bb..faa291ea6 100644
+--- a/meta-python/recipes-devtools/python/python3-pydantic-core_2.16.3.bb
++++ b/meta-python/recipes-devtools/python/python3-pydantic-core_2.16.3.bb
+@@ -36,12 +36,12 @@ RDEPENDS:${PN}-ptest += "\
+ "
+ 
+ do_install:append() {
+-    for f in ${D}/${libdir}/${PYTHON_DIR}/site-packages/pydantic_core/_pydantic_core.*.so
++    for f in ${D}/${PYTHON_SITEPACKAGES_DIR}/pydantic_core/_pydantic_core.*.so
+     do
+         fname=`basename $f`
+         lname=`echo $fname | sed 's/musl/gnu/'`
+         if [ "$fname" != "$lname" ]; then
+-            mv $f ${D}/${libdir}/${PYTHON_DIR}/site-packages/pydantic_core/$lname
++            mv $f ${D}/${PYTHON_SITEPACKAGES_DIR}/pydantic_core/$lname
+         fi
+     done
+ }
+diff --git a/meta-python/recipes-devtools/python/python3-pyzmq_25.1.2.bb b/meta-python/recipes-devtools/python/python3-pyzmq_25.1.2.bb
+index 540aa6200..2a6993c14 100644
+--- a/meta-python/recipes-devtools/python/python3-pyzmq_25.1.2.bb
++++ b/meta-python/recipes-devtools/python/python3-pyzmq_25.1.2.bb
+@@ -22,7 +22,7 @@ PACKAGES =+ "\
+ "
+ 
+ FILES:${PN}-test += "\
+-    ${libdir}/${PYTHON_DIR}/site-packages/*/tests \
++    ${PYTHON_SITEPACKAGES_DIR}/*/tests \
+ "
+ 
+ RDEPENDS:${PN} += "\
+diff --git a/meta-python/recipes-devtools/python/python3-tornado_6.4.bb b/meta-python/recipes-devtools/python/python3-tornado_6.4.bb
+index 08c8672eb..b01c1cec2 100644
+--- a/meta-python/recipes-devtools/python/python3-tornado_6.4.bb
++++ b/meta-python/recipes-devtools/python/python3-tornado_6.4.bb
+@@ -35,7 +35,7 @@ PACKAGES =+ "\
+ "
+ 
+ FILES:${PN}-test = " \
+-    ${libdir}/${PYTHON_DIR}/site-packages/*/test \
++    ${PYTHON_SITEPACKAGES_DIR}/*/test \
+ "
+ 
+ BBCLASSEXTEND  += "native nativesdk"
+-- 
+2.25.1
+
 
