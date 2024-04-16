@@ -1,52 +1,125 @@
-Return-Path: <RahulJanani.Pandi@windriver.com>
+Return-Path: <yi.zhao@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CCD88C4345F
-	for <webhook@archiver.kernel.org>; Tue, 16 Apr 2024 10:41:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D585BC04FFF
+	for <webhook@archiver.kernel.org>; Tue, 16 Apr 2024 10:45:30 +0000 (UTC)
 Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.16923.1713264079072033624
+ by mx.groups.io with SMTP id smtpd.web11.17094.1713264322554306089
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 16 Apr 2024 03:41:19 -0700
+ Tue, 16 Apr 2024 03:45:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=oJQh2D9W;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=4836aeed74=rahuljanani.pandi@windriver.com)
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=XaipJxF9;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=483622ef1f=yi.zhao@windriver.com)
 Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 43G5s6x8016109
-	for <openembedded-devel@lists.openembedded.org>; Tue, 16 Apr 2024 10:41:18 GMT
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 43G4P19Z027625
+	for <openembedded-devel@lists.openembedded.org>; Tue, 16 Apr 2024 10:45:20 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=BHf3q
-	wlpaPU3RiHHqEJCgCtL0lJelMh2ozYpUfobzHQ=; b=oJQh2D9WgdxMk2vNSn1fh
-	ZclOr1kj0TcetXWX90UIf6vaL0SF0tpig+oBbdB3VCQmEmSdAGDqm6EPmwHrAi0P
-	lPE2pYz7R3snK17EoVU/XUkzC4jyRTAW1ZHN5XZtihuxlo7mEHMZWivrMPCsRLen
-	J+Q3ptHPmfw7sVkh6jAn69J7veC8ww8qoA+W+UesPT1seZPk1dfzm9211DzJLmxu
-	x80kj+rmoZEPMUeB5mYOuISW6ltFM1iMVfKe0a7b1rV6t8kj8HextQB0ftDGoeZ4
-	wn1tlW77LW+YhKykXZcuawlBkE/0Bmatp68HT2seUCwlCvfnIy3t20uMGDyue5se
-	A==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3xff8yaqr1-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 16 Apr 2024 10:41:18 +0000 (GMT)
-Received: from ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.37; Tue, 16 Apr 2024 03:41:16 -0700
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server id
- 15.1.2507.37 via Frontend Transport; Tue, 16 Apr 2024 03:41:15 -0700
-From: Rahul Janani Pandi <RahulJanani.Pandi@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Rahul Janani Pandi <RahulJanani.Pandi@windriver.com>
-Subject: [oe][meta-python][kirkstone][PATCH 1/1] python3-django: fix CVE-2024-24680
-Date: Tue, 16 Apr 2024 10:40:54 +0000
-Message-ID: <20240416104054.2336674-1-RahulJanani.Pandi@windriver.com>
-X-Mailer: git-send-email 2.40.0
-MIME-Version: 1.0
+	 h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:content-transfer-encoding:content-type:mime-version; s=
+	PPS06212021; bh=tjW4EgxN2GmmPrzsQVWBuCVg++90Uvsizt0H2AwOYAg=; b=
+	XaipJxF9kgY3OFhTwihsp+958lRGBkGEggVVRE9uWimD7gVICWUugnap9qM14cti
+	CBd1MsOUur5exUaqMvsjsz2RGelTupyU5uNRhC3oRmfOKYgoOZGobzWMIzW2Wn/e
+	5IEJmT4DrET7zfdQXu7WscbMRwhUfKOGl3fq0gQMcyF8hdPdggvsgxMcucq2M7wJ
+	YLIA3aOkRtgobNZKLGWONb841G4nL+dDU+th7Phicb81tyzzdOQ0+Kcz4O+KsWqd
+	yERsU6kR0PIPYdKsw/OMunYouLVq/szCigwta/dyVTCsyzaPNyqf1N3rAbtbyJKy
+	D03paq1AeVMvE/WPEnRvJw==
+Received: from pps.reinject (localhost [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3xff8yaqts-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 16 Apr 2024 10:45:20 +0000 (GMT)
+Received: from m0250811.ppops.net (m0250811.ppops.net [127.0.0.1])
+	by pps.reinject (8.18.0.8/8.18.0.8) with ESMTP id 43GAjJqY029695
+	for <openembedded-devel@lists.openembedded.org>; Tue, 16 Apr 2024 10:45:19 GMT
+Received: from nam10-dm6-obe.outbound.protection.outlook.com (mail-dm6nam10lp2101.outbound.protection.outlook.com [104.47.58.101])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3xff8yaqtq-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Tue, 16 Apr 2024 10:45:19 +0000 (GMT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=FgRMcUBYRD+s061WRW6wrdvxMXSdc/VEDdJmkosdNsUsJhh4MVySMsUuToCABd1AxhpxdWPLUGl9qRZq/r+/AAgVKDQM3nPnI4rbGnGXilXTClxog/59Hu6Qde2WgLrFOJDUz2EGbXHO4PgoxwhOa6aOp0IceWyNAReDhEXnzoIAeWu/VK5Q0Bl9E6svEMLtA825kbacA+wCi7Fjrtp2EZePNFoari9F2/73cps9ZR1sio6XH8ypqdDLhvktunxKZlpWOL8McIFPTh2uySswMVmsMKqybItZX/AXT+lUuReOVkK4wx67tg5pLqS8ceZuEp9pmZhq2PSxSFoAU7xWwg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=tjW4EgxN2GmmPrzsQVWBuCVg++90Uvsizt0H2AwOYAg=;
+ b=KKoch7BbHlZO1YPyo5OoL7KmbejnJxlQAvql3O8qeHUqsxITuOyNldz1OkhYqlHvYQm87hGT5zEV2hpIU/ANjCcEWgBMvvgNtNZZ8boTvKPX6sCh0it4bVf3drbZiIUp41W6u31fvvGO/eA/k/PJIOGJJCTd0/sbVX4mphgWdfVsInxroZm60RnyhoPPgIBxYQaSzmY1QocPyxDBh5GptXjmezgJ5gtOW9/Y2UrQvnG/IkwsIU5g5NnGMpw9uG2iJ9FhsgkkzSRN4AYM2ilZ05Ukc6X2XEDgYDY9LLX9qKihmTrE2KwIjKQ511uYaf6Ln+wkLlamQSX3p27OLNn38w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from DS0PR11MB7484.namprd11.prod.outlook.com (2603:10b6:8:14c::10)
+ by PH7PR11MB6771.namprd11.prod.outlook.com (2603:10b6:510:1b5::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7452.50; Tue, 16 Apr
+ 2024 10:45:15 +0000
+Received: from DS0PR11MB7484.namprd11.prod.outlook.com
+ ([fe80::97da:833f:8511:a558]) by DS0PR11MB7484.namprd11.prod.outlook.com
+ ([fe80::97da:833f:8511:a558%6]) with mapi id 15.20.7452.041; Tue, 16 Apr 2024
+ 10:45:15 +0000
+From: Yi Zhao <yi.zhao@windriver.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: behzadshaheryar@gmail.com
+Subject: [meta-networking][PATCH 2/2] snort3: update to latest stable version 3.1.84.0
+Date: Tue, 16 Apr 2024 18:45:02 +0800
+Message-Id: <20240416104502.2401209-2-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20240416104502.2401209-1-yi.zhao@windriver.com>
+References: <20240416104502.2401209-1-yi.zhao@windriver.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Proofpoint-GUID: UlhKL5lT8YbMB1IQdLBJbXktC8rH0XMb
-X-Proofpoint-ORIG-GUID: UlhKL5lT8YbMB1IQdLBJbXktC8rH0XMb
+X-ClientProxiedBy: SG2P153CA0054.APCP153.PROD.OUTLOOK.COM (2603:1096:4:c6::23)
+ To DS0PR11MB7484.namprd11.prod.outlook.com (2603:10b6:8:14c::10)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS0PR11MB7484:EE_|PH7PR11MB6771:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6280a20f-9862-4a08-e745-08dc5e024cb0
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	CrVphjzSYSHQZpBtVBgkfDcHgIl+T0RgjQC60gtjViPIWYbOd081wpJCJiJWPU7C6uM71/m5wl5POBrqfbjz1BD0q77k3pXwapX6kznkxYkNLIenvwtqbpUB58LEGpSCLsFuT/VJpVznMR2Ro59+PgptZSNOftWW5kGhMLkfg8TNnL84ic0ga63ZN91BAAsfQuLKfZENsXCnFvKlflz9bS/DaeEzTOUViYz3dXkRgwAdHG/K8sDaKXLtYpzaCUmFEevYMkGbe9UerA+4etgIeCYKIHwFWOt+ahO1IiL234IKwWbux0eYOVeVjbi0y6Ca6BulW9jCVpw2FMKS1lcIiVr7Qu8/tofaPl4gF1kU9KJuQoUIWharSnfkTIJtkrtmeOQTkkwdSx+B+BbWSFiTl4zPzIEGlRMbdvQXY2NqyauajxYXy7CsDo3XiT8Hg6RLBlzlJg3mtmwEvu8RWGIYXZkOSRJdXOXroybd3e2Xk2/u5U2xTCKib2JH87Zc45JVcNWmz/MOcOfKiDD68KKHhGSCMD/K/+LH5E6TaJtEhXTpGPpyWMqOnPVWpOEKAfRGWlc+5BhTE+zLMpymWwMPQdoJN4D/mET2eC7wDb1c9N1oo0gS9KmkJkq1jB5KARq/sYU9tAewiSj0IAxQoH6E+kKm8j9r3eM5aFiE1DD1tFx8Cd1CoqfTdirNU6mBgBoDz2GWQK0Lk5aeYlNhmyUXy5QIlYI24JEeIRkDGyJkDf0=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR11MB7484.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(366007)(1800799015)(52116005)(376005)(38350700005);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?cPHn1umliKe14rjSOhCTAADZ17s44iH6OJoY6KFXCg4yCzhZYCsvP6RSiVTg?=
+ =?us-ascii?Q?goSEaCBYli1/B8Kd0MJ40m3oOBegBUjt5hz8FJFT4Ao2YGQP07wlqMZjROn9?=
+ =?us-ascii?Q?P6dqtI9Q7PaluDu7DsIlNYXL2o0LYA0CcUB2fbaS2NgeSIWK4U+LYIyyPTfy?=
+ =?us-ascii?Q?AKu0RJc9y8jv1h93KINKuS11TDcffQMzz3oQi0y3QyW7UD5qezJU64i5mAzJ?=
+ =?us-ascii?Q?0ENNimEaYKS4yOT36HuyjBiWVE0pn3v5LlRucLvhV2qBNG1jwhJU2+f4jWKk?=
+ =?us-ascii?Q?POXhFLqFB8UO0gho3oOZ26Xki2eidtA4Mc/mJm/metnFh6b4I3Q29Dcjd2nc?=
+ =?us-ascii?Q?lydKl6A8uCYX6p9UCN/LxCsri7WfRtx2LxS2ittmBWZsNb/NIwBJ109DisM0?=
+ =?us-ascii?Q?dr86XQ7xsmR4KZcpuJl550oSViGCF6avLw2Ng2ff8m8UMMzBeQ10ZhtgYbPW?=
+ =?us-ascii?Q?smhN19hDcogG1Q4/mDVaOGfiM+mS3oCnd/oA/wWQ8fvG7VVBm7ukx0Q29PG1?=
+ =?us-ascii?Q?wH2OVkkOLU5YzhhzY9lpXniGori1D4otFHe7pVDpp02kH1Z4bVAkYjWpxwXu?=
+ =?us-ascii?Q?y27YWl8qqYoKrFpT1ApjCudGLOc8gQpfV3lLNPiaLRR84QqQqzMi1FeIgSff?=
+ =?us-ascii?Q?/e7QKs5w4Oa5Iu/Zv+VGsz0ok1Rios5UoKw0lve1C8CRkp56R+f68uw3MkVS?=
+ =?us-ascii?Q?pAdNeAxbpCo2V6x/GnVvAObzwR4baObP0POBmS+uT9oeiBzcuoM2T+ajjRAN?=
+ =?us-ascii?Q?uYnxp8j/li9IrLgB47TNEUgvBelbG1SRPNsk4hOm8EyfX7QyxZYlVgLklZIh?=
+ =?us-ascii?Q?JqoCAk2oRUU63LO/GyTVMocnWAf392Y/1RWo0xcQkazPQ0tFql8aN9lM7uwv?=
+ =?us-ascii?Q?x29ehZmknQNMRYvzz7kUTstGPMXvKL1KOY1ggkK61TIIYkyKJbN5vGAodgeF?=
+ =?us-ascii?Q?A54R3SbPWSoJjade5lJQJr4vQgBoGIaHFPUH3+EO8RJ7kdRMzRH5eYyB2vJe?=
+ =?us-ascii?Q?nnwrYDiccRxDdopMp7YXz8kd6QRhYlGc3oLitseozddU48j/zTLFyFNUk877?=
+ =?us-ascii?Q?6J5ECTqswCfRxvau5pqLQzDXSiSttK4KempecroBUmoFb7NjQ+YaFQsWF8nn?=
+ =?us-ascii?Q?Xu7QY2O1RmeQdr0PuYHTgW3GaW4xxeIa7NhIEq7VtrI2GnOVSsDLii93yiVD?=
+ =?us-ascii?Q?MaNcoqCTSq3i6UHH7i9STQ8eQEAjpDCJSmVce2/cKYVJ0BvWnxI0uT8OFh10?=
+ =?us-ascii?Q?ej1NyTTu7B8imwXDNysdIvbI1dQWEAIkUYqZytqoz/woG3O6mkZjIfLUkwYr?=
+ =?us-ascii?Q?l4ytacw1UPXpyhLqIqd3latZvDET2jwAKjfKRmfacweAv+Ij6ct9tGSFffCn?=
+ =?us-ascii?Q?yGfsx2QEW7PHMEGVRoVovaBibqMEitA2f4wNNOcxa7YCQ1LyrIBiO9bvz/PB?=
+ =?us-ascii?Q?BszjusuiCQYxYdTpSlAX5v4fPDIH08zovx3Qb5a4kuC/pd1KtJWMJa5ku6+O?=
+ =?us-ascii?Q?mrH905FgfT3u5lu4EWrTMqqHN5iKmc2Yp/FBNgXfPXWly+Gr/MdLmOqZbBtN?=
+ =?us-ascii?Q?8tfi0V/ns1i6MgKtAoByjfUaJb5HgjK+4ZzW3bmF?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6280a20f-9862-4a08-e745-08dc5e024cb0
+X-MS-Exchange-CrossTenant-AuthSource: DS0PR11MB7484.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Apr 2024 10:45:15.0650
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Cxp83hpwtVtDczfoQt1z08jJjrTKWeCRHPzNTW+6yFBrpQ+6pptVnM2Ft5ydVPYKjeybDsP/0jUTLWN4vDQTEw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR11MB6771
+X-Proofpoint-GUID: WE0j8v2pmGMJX95pTk2pP2H4bwSgm2iO
+X-Proofpoint-ORIG-GUID: lZA74vWVQBSgbWNZ9HIgwy9WrL32-GC-
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2024-04-16_08,2024-04-15_01,2023-05-22_02
@@ -58,94 +131,42 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 imposto
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 16 Apr 2024 10:41:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109972
+ <openembedded-devel@lists.openembedded.org>; Tue, 16 Apr 2024 10:45:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/109974
 
-An issue was discovered in Django 3.2 before 3.2.24, 4.2 before 4.2.10,
-and Django 5.0 before 5.0.2. The intcomma template filter was subject
-to a potential denial-of-service attack when used with very long strings.
+ChangeLog:
+https://github.com/snort3/snort3/releases/tag/3.1.84.0
 
-Since, there is no ptest available for python3-django so have not
-tested the patch changes at runtime.
-
-References:
-https://security-tracker.debian.org/tracker/CVE-2024-24680
-https://docs.djangoproject.com/en/dev/releases/4.2.10/
-
-Signed-off-by: Rahul Janani Pandi <RahulJanani.Pandi@windriver.com>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- .../python3-django/CVE-2024-24680.patch       | 48 +++++++++++++++++++
- .../python/python3-django_2.2.28.bb           |  1 +
- 2 files changed, 49 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-django/CVE-2024-24680.patch
+ .../snort/{snort3_git.bb => snort3_3.1.84.0.bb}               | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+ rename meta-networking/recipes-connectivity/snort/{snort3_git.bb => snort3_3.1.84.0.bb} (94%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-django/CVE-2024-24680.patch b/meta-python/recipes-devtools/python/python3-django/CVE-2024-24680.patch
-new file mode 100644
-index 000000000..aec67453a
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-django/CVE-2024-24680.patch
-@@ -0,0 +1,48 @@
-+From 572ea07e84b38ea8de0551f4b4eda685d91d09d2
-+From: Adam Johnson <me@adamj.eu>
-+Date: Mon Jan 22 13:21:13 2024 +0000
-+Subject: [PATCH] Fixed CVE-2024-24680 -- Mitigated potential DoS in intcomma
-+ template filter
-+
-+Thanks Seokchan Yoon for the report.
-+
-+Co-authored-by: Mariusz Felisiak <felisiak.mariusz@gmail.com>
-+Co-authored-by: Natalia <124304+nessita@users.noreply.github.com>
-+Co-authored-by: Shai Berger <shai@platonix.com>
-+
-+CVE: CVE-2024-24680
-+
-+Upstream-Status: Backport [https://github.com/django/django/commit/572ea07e84b38ea8de0551f4b4eda685d91d09d2]
-+
-+Signed-off-by: Rahul Janani Pandi <RahulJanani.Pandi@windriver.com>
-+---
-+ django/contrib/humanize/templatetags/humanize.py | 13 +++++++------
-+ 1 file changed, 7 insertions(+), 6 deletions(-)
-+
-+diff --git a/django/contrib/humanize/templatetags/humanize.py b/django/contrib/humanize/templatetags/humanize.py
-+index 194c7e8..ee22a45 100644
-+--- a/django/contrib/humanize/templatetags/humanize.py
-++++ b/django/contrib/humanize/templatetags/humanize.py
-+@@ -71,13 +71,14 @@ def intcomma(value, use_l10n=True):
-+             return intcomma(value, False)
-+         else:
-+             return number_format(value, force_grouping=True)
-+-    orig = str(value)
-+-    new = re.sub(r"^(-?\d+)(\d{3})", r'\g<1>,\g<2>', orig)
-+-    if orig == new:
-+-        return new
-+-    else:
-+-        return intcomma(new, use_l10n)
-+
-++    result = str(value)
-++    match = re.match(r"-?\d+", result)
-++    if match:
-++        prefix = match[0]
-++        prefix_with_commas = re.sub(r"\d{3}", r"\g<0>,", prefix[::-1])[::-1]
-++        result = prefix_with_commas + result[len(prefix) :]
-++    return result
-+
-+ # A tuple of standard large number to their converters
-+ intword_converters = (
-+--
-+2.40.0
-diff --git a/meta-python/recipes-devtools/python/python3-django_2.2.28.bb b/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
-index 8c955e6bd..cbd2c69c0 100644
---- a/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
-+++ b/meta-python/recipes-devtools/python/python3-django_2.2.28.bb
-@@ -10,6 +10,7 @@ SRC_URI += "file://CVE-2023-31047.patch \
-             file://CVE-2023-41164.patch \
-             file://CVE-2023-43665.patch \
-             file://CVE-2023-46695.patch \
-+            file://CVE-2024-24680.patch \
-            "
+diff --git a/meta-networking/recipes-connectivity/snort/snort3_git.bb b/meta-networking/recipes-connectivity/snort/snort3_3.1.84.0.bb
+similarity index 94%
+rename from meta-networking/recipes-connectivity/snort/snort3_git.bb
+rename to meta-networking/recipes-connectivity/snort/snort3_3.1.84.0.bb
+index b8826b068..ee84aa17e 100644
+--- a/meta-networking/recipes-connectivity/snort/snort3_git.bb
++++ b/meta-networking/recipes-connectivity/snort/snort3_3.1.84.0.bb
+@@ -5,14 +5,12 @@ SECTION = "net"
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=78fa8ef966b48fbf9095e13cc92377c5"
  
- SRC_URI[sha256sum] = "0200b657afbf1bc08003845ddda053c7641b9b24951e52acd51f6abda33a7413"
+-PV = "3+git"
+-
+ DEPENDS = "flex-native hwloc libdaq libdnet libpcap libpcre libtirpc libunwind luajit zlib"
+ 
+ SRC_URI = "git://github.com/snort3/snort3.git;protocol=https;branch=master \
+            file://0001-cmake-Check-for-HP-libunwind.patch \
+            file://0001-cmake-Pass-noline-flag-to-flex.patch"
+-SRCREV = "e1760a8dbb829bb3fcf1a340ab6cc4bb80a47ecd"
++SRCREV = "e7312efd840d66a52a2019abe1db7cc89ca0f39a"
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
-2.40.0
+2.25.1
 
 
