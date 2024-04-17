@@ -2,86 +2,92 @@ Return-Path: <beniaminsandu@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A46CAC4345F
-	for <webhook@archiver.kernel.org>; Wed, 17 Apr 2024 22:32:04 +0000 (UTC)
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
- by mx.groups.io with SMTP id smtpd.web11.475.1713393119291298502
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 849C7C4345F
+	for <webhook@archiver.kernel.org>; Wed, 17 Apr 2024 22:32:44 +0000 (UTC)
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+ by mx.groups.io with SMTP id smtpd.web11.488.1713393160018792255
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 17 Apr 2024 15:31:59 -0700
+ Wed, 17 Apr 2024 15:32:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=c24kzpbx;
- spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: beniaminsandu@gmail.com)
-Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-343f1957ffcso161090f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 17 Apr 2024 15:31:59 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=lVJ6Lwlg;
+ spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: beniaminsandu@gmail.com)
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-41882c16824so2235315e9.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 17 Apr 2024 15:32:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1713393118; x=1713997918; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1713393158; x=1713997958; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=lqbFmy8duVUaipKh56SJ48iFFEw0sjG+MgC7LwlGhSg=;
-        b=c24kzpbxgi19//wT2g+gtMjX0UW+c/KeDsjAz4ekIRrL2qgo2CEsPZYlrfL5a70Bk3
-         8FwQMm/mip7jjFIk5k0Q0X0BEHHsMpAy6+Pu1KgoaYdBkG5meFsYUmqDL6hNgkARzfCY
-         2bvn7ne6ACveId5SQhi0gNKBik8mM2pU81wluoatAGnoIqKMfvsMqbORAsraq5IuDSpI
-         UnKfp2SJZVqoeqoB85qIK+ULwbxO0fhIIiygsEN/qxuxor4ycUJNqRRWGMef6ePNK/51
-         pw45mWAvXTBKHKqygmBC0FleVki5cwW8/hOB9sk8jfaXiYpNY2Hb+u3LXoAC1FEg9LV+
-         eg4g==
+        bh=u9Jm9/xHcTFYojXqO9pzTKv7Rgo9/o3cl/SEdeJMM2o=;
+        b=lVJ6LwlgkQ/wi0jXwCoIZ2AIuH1/IZQA5kcoL1pHrgyoIRoazuw6yFEOTC/E1/QlkU
+         4qBi/E59ZgRZ1cinrEE0JP/OMO9RF2/S0M36QOskyRr1z06EA3aFffBQ7ny+1bUDhZvX
+         dQO/7FNJcDvaghbLcqPU6yK/1wLyKN5zEvFH9nsZyM/bH1tNflYQfrGaB/KDgoDpycvF
+         qT6RiqpQoF2EEAp2K48LJoGjglhxDEcdb07vDqfbq2RHn634bC3Vu8VkvsFAeJStRkoR
+         nyYN5CP7wY80U/QBUsil80szQd1nA48ahWS6pNoDLoYbCoSLh7+qSvT9shg6GqNVqgJy
+         l4MQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1713393118; x=1713997918;
+        d=1e100.net; s=20230601; t=1713393158; x=1713997958;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=lqbFmy8duVUaipKh56SJ48iFFEw0sjG+MgC7LwlGhSg=;
-        b=aqiR+T8NfmJlmTT1UpN22vFJF6/Ha27NjwXp8jS0e0r4zRy+t4K/ukDRq9fBJBrZ5/
-         aSGBb08br2LOTplZ4M8c3m5muNEIhcJ/l+fZLskG1DS+1tWIn+4fSi3jGU0+Eiz0a6A0
-         BM9UQPpOIVHVPHm8kjs6Bojr3r8knF2EYVLbc4uxS/ObRUPs+Ot8aLb7+hcvYiDWlxa6
-         ki/drbr/o7SQNM5d9qnwiRIl1j7KxRlcTWkpQc/R0pZfeeV36VkTAk79szlv1wQEjyp/
-         wDBcItl6AvzrP015FTYIqBWcP9SFayOQYOsHC8UdLRov/yP6Vk9Ulvm9u9lM/LG0t3p9
-         82JA==
-X-Gm-Message-State: AOJu0YzMZMcqNMznM8Uhpy/4R8QS+1QJHTQq/WC/FqSi/NtaIHKCtzQ7
-	OVnPtaPACC8qrXvoAK86GEXSFgWtW1UAUP8mn0LhmljrKHFWuPctTIMaFQ==
-X-Google-Smtp-Source: AGHT+IEGct2mjG0Gi//WPAO+yTQQFdK586rOaX/4cIKRkVoTG1JOPiMPcn+HM8LPP32xZ+SXIufcSA==
-X-Received: by 2002:a5d:4ec4:0:b0:348:cd2c:d2fe with SMTP id s4-20020a5d4ec4000000b00348cd2cd2femr287876wrv.13.1713393117520;
-        Wed, 17 Apr 2024 15:31:57 -0700 (PDT)
+        bh=u9Jm9/xHcTFYojXqO9pzTKv7Rgo9/o3cl/SEdeJMM2o=;
+        b=jDqVn3oiGMjQYE47JIqgR/cjwBA+3RiVw7lIFTz8A0L/8evrdcS/rr6fp6tiVtjXgY
+         nxTSl0kmdavWhnKNxXX92b5klLCYWTKp7xfUHn9TaLHUpkMFgHlCV/2cDj9VuOAIFLgW
+         t0J5DevOrYOY5uF8uawnaRkfwpXnnha3EaBQuiFfj7TrfmfYuOhDmCtKqtiBvYKp6bty
+         1Zm9tB8ifzmejSdloyK3vXtj1A/fEDJbImagww/hoJwI3yGadb1Won/XB4wksIQc2Qls
+         TfN4EnoRDj2CYFS+J4ugQF9B79Oon2N05Ez+36E3HKJsg0e9Wjy0LpOIaQjdgEf1AL+2
+         zq8A==
+X-Gm-Message-State: AOJu0YzNGzijVO6ZdPd4sCd3JvOmC1OoVOXM/8rGDBftmvLn24ELDq0J
+	F7OsPx8oV25qzqPZbeILH3C/9ewuMxJOoH+85/vijNTsyCLcKDDsVaMy1g==
+X-Google-Smtp-Source: AGHT+IE3qzzJJRPK6dU1Og4DXDTgFvzdIcYRCYMo21wCxodfimXvlh/EvX+toKepgyP46yZ6S4zD9g==
+X-Received: by 2002:a05:600c:1914:b0:416:605b:584d with SMTP id j20-20020a05600c191400b00416605b584dmr670473wmq.3.1713393158400;
+        Wed, 17 Apr 2024 15:32:38 -0700 (PDT)
 Received: from localhost.localdomain ([2a01:4b00:8855:a800:57a8:4f82:7788:d99])
-        by smtp.gmail.com with ESMTPSA id cp37-20020a056000402500b00341de3abb0esm235625wrb.20.2024.04.17.15.31.56
+        by smtp.gmail.com with ESMTPSA id p2-20020a05600c358200b00418d391b09esm495428wmq.0.2024.04.17.15.32.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 17 Apr 2024 15:31:56 -0700 (PDT)
+        Wed, 17 Apr 2024 15:32:37 -0700 (PDT)
 From: Beniamin Sandu <beniaminsandu@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Beniamin Sandu <beniaminsandu@gmail.com>
-Subject: [meta-oe][PATCH] libtorrent: remove incorrect CVE mapping
-Date: Wed, 17 Apr 2024 23:31:32 +0100
-Message-Id: <20240417223132.893356-1-beniaminsandu@gmail.com>
+Subject: [meta-oe][PATCH] libtorrent-rasterbar: fix CVE mapping
+Date: Wed, 17 Apr 2024 23:32:19 +0100
+Message-Id: <20240417223219.893512-1-beniaminsandu@gmail.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 17 Apr 2024 22:32:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110046
+ <openembedded-devel@lists.openembedded.org>; Wed, 17 Apr 2024 22:32:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110047
 
-The CVE_PRODUCT variable is assigned automatically to BPN.
-Unset it for this recipe so the CVEs can be checked
-against the correct recipe.
+Set CVE_PRODUCT for this recipe to fix the mapping,
+as it was checking against the wrong recipe before.
+
+Log from cve_check after change:
+NOTE: libtorrent-rasterbar-2.0.10 is not vulnerable to CVE-2008-0646
+NOTE: libtorrent-rasterbar-2.0.10 is not vulnerable to CVE-2009-1760
+NOTE: libtorrent-rasterbar-2.0.10 is not vulnerable to CVE-2016-5301
+NOTE: libtorrent-rasterbar-2.0.10 is not vulnerable to CVE-2016-7164
+NOTE: libtorrent-rasterbar-2.0.10 is not vulnerable to CVE-2017-9847
 
 Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
 ---
- meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb | 2 ++
+ .../libtorrent-rasterbar/libtorrent-rasterbar_2.0.10.bb         | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb b/meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb
-index 38f5f63fc..6ddced57e 100644
---- a/meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb
-+++ b/meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb
-@@ -15,6 +15,8 @@ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+diff --git a/meta-oe/recipes-connectivity/libtorrent-rasterbar/libtorrent-rasterbar_2.0.10.bb b/meta-oe/recipes-connectivity/libtorrent-rasterbar/libtorrent-rasterbar_2.0.10.bb
+index 084e3c408..f2de1f468 100644
+--- a/meta-oe/recipes-connectivity/libtorrent-rasterbar/libtorrent-rasterbar_2.0.10.bb
++++ b/meta-oe/recipes-connectivity/libtorrent-rasterbar/libtorrent-rasterbar_2.0.10.bb
+@@ -17,6 +17,8 @@ S = "${WORKDIR}/git"
  
- S = "${WORKDIR}/git"
+ inherit cmake pkgconfig python3targetconfig
  
-+CVE_PRODUCT = ""
++CVE_PRODUCT = "libtorrent"
 +
- PACKAGECONFIG ??= "instrumentation aligned"
+ EXTRA_OECMAKE = "-DCMAKE_BUILD_TYPE=Release"
  
- PACKAGECONFIG:remove:mipsarch = "instrumentation"
+ PACKAGECONFIG ??= "python3"
 -- 
 2.34.1
 
