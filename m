@@ -1,57 +1,57 @@
-Return-Path: <ross.burton@arm.com>
+Return-Path: <gudnimar@noxmedical.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 145F1C4345F
-	for <webhook@archiver.kernel.org>; Thu, 18 Apr 2024 15:04:59 +0000 (UTC)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by mx.groups.io with SMTP id smtpd.web11.704.1713452691191624510
- for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Apr 2024 08:04:51 -0700
-Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: arm.com, ip: 217.140.110.172, mailfrom: ross.burton@arm.com)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 41A10339;
-	Thu, 18 Apr 2024 08:05:18 -0700 (PDT)
-Received: from cesw-amp-gbt-1s-m12830-04.oss.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E8D743F738;
-	Thu, 18 Apr 2024 08:04:49 -0700 (PDT)
-From: Ross Burton <ross.burton@arm.com>
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A2388C4345F
+	for <webhook@archiver.kernel.org>; Thu, 18 Apr 2024 21:38:04 +0000 (UTC)
+Subject: Re: [meta-python][PATCH] python3-twisted: upgrade 22.10.0 -> 24.3.0
 To: openembedded-devel@lists.openembedded.org
-Cc: nd@arm.com
-Subject: [PATCH] yajl: set correct homepage
-Date: Thu, 18 Apr 2024 15:04:47 +0000
-Message-Id: <20240418150447.3861626-1-ross.burton@arm.com>
-X-Mailer: git-send-email 2.34.1
+From: =?UTF-8?B?R3XDsG5pIE3DoXIgR2lsYmVydA==?= <gudnimar@noxmedical.com>
+X-Originating-Location: Vilnius, LT (213.197.160.147)
+X-Originating-Platform: Windows Chrome 123
+User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Date: Thu, 18 Apr 2024 14:37:58 -0700
+References: <CANx9H-DLauDMx75MsCqqm9LRSOm=mJ0RYcFTC2QFXNAgH04Zfw@mail.gmail.com>
+In-Reply-To: <CANx9H-DLauDMx75MsCqqm9LRSOm=mJ0RYcFTC2QFXNAgH04Zfw@mail.gmail.com>
+Message-ID: <7441.1713476278132057062@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="bwYjWSKD0ZWGF25Fv3iG"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 18 Apr 2024 15:04:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110054
+ <openembedded-devel@lists.openembedded.org>; Thu, 18 Apr 2024 21:38:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110055
 
-Signed-off-by: Ross Burton <ross.burton@arm.com>
----
- meta-oe/recipes-devtools/yajl/yajl_2.1.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+--bwYjWSKD0ZWGF25Fv3iG
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-oe/recipes-devtools/yajl/yajl_2.1.0.bb b/meta-oe/recipe=
-s-devtools/yajl/yajl_2.1.0.bb
-index 2a34210f3c..c5b5e60027 100644
---- a/meta-oe/recipes-devtools/yajl/yajl_2.1.0.bb
-+++ b/meta-oe/recipes-devtools/yajl/yajl_2.1.0.bb
-@@ -3,7 +3,7 @@ SUMMARY =3D "Yet Another JSON Library."
- DESCRIPTION =3D "YAJL is a small event-driven (SAX-style) JSON parser \
- written in ANSI C, and a small validating JSON generator."
-=20
--HOMEPAGE =3D "http://lloyd.github.com/yajl/"
-+HOMEPAGE =3D "https://lloyd.github.io/yajl/"
-=20
- LICENSE =3D "ISC"
- LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D39af6eb42999852bdd3ea00ad120a=
-36d"
---=20
-2.34.1
+Hi Tim, good to know :)
 
+I see this patch has already made it to master-next branch, I can remove th=
+e PYPI_PACKAGE line in a future patch after I have built it locally to veri=
+fy.
+
+I'm hoping to backport this upgrade to Scarthgap as well so the latest LTS =
+is not ~2 years out of date.
+
+I'm sure I will contribute more for the twisted recipe if I find any furthe=
+r improvements/cleanup. I believe we can split twisted-core into more indep=
+endent packages, but I will take my time with those changes before submitti=
+ng them so it may take a while.
+
+--bwYjWSKD0ZWGF25Fv3iG
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hi Tim, good to know :)<br /><br />I see this patch has already made it to =
+master-next branch, I can remove the PYPI_PACKAGE line in a future patch af=
+ter I have built it locally to verify.<br /><br />I'm hoping to backport th=
+is upgrade to Scarthgap as well so the latest LTS is not ~2 years out of da=
+te.<br /><br />I'm sure I will contribute more for the twisted recipe if I =
+find any further improvements/cleanup. I believe we can split twisted-core =
+into more independent packages, but I will take my time with those changes =
+before submitting them so it may take a while.<br />
+
+--bwYjWSKD0ZWGF25Fv3iG--
 
