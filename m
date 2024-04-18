@@ -1,167 +1,344 @@
-Return-Path: <gudnimar@noxmedical.com>
+Return-Path: <ticotimo@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 36959C4345F
-	for <webhook@archiver.kernel.org>; Thu, 18 Apr 2024 09:29:32 +0000 (UTC)
-Received: from usb-smtp-delivery-118.mimecast.com (usb-smtp-delivery-118.mimecast.com [170.10.151.118])
- by mx.groups.io with SMTP id smtpd.web11.8579.1713432571754557228
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C7391C4345F
+	for <webhook@archiver.kernel.org>; Thu, 18 Apr 2024 14:28:43 +0000 (UTC)
+Received: from mail-lj1-f180.google.com (mail-lj1-f180.google.com [209.85.208.180])
+ by mx.groups.io with SMTP id smtpd.web11.14555.1713450520630784269
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 18 Apr 2024 02:29:31 -0700
+ Thu, 18 Apr 2024 07:28:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@noxmedical.com header.s=mimecast20231107 header.b=g2f8xGvG;
- spf=pass (domain: noxmedical.com, ip: 170.10.151.118, mailfrom: gudnimar@noxmedical.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=noxmedical.com;
-	s=mimecast20231107; t=1713432571;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type;
-	bh=3wonqx5hKS/x/jOSkBIsY55npv8pv4PkUObo7f2QPo8=;
-	b=g2f8xGvGDDBYvCKfIOwGktqQWcZ+lRXOriwDYOthh/0aFnMct60PQAvlF5ua90PYnLUYgn
-	mHj+PwLdc6rWdRDcpyhMT73hssjhVFh5m1M0sR7rTVDz9IKu8+gWB4Tvh5SrvNPxhSsmKg
-	2L494Kj9xiLZ4HZw0vtC86gRKZFX69Y=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- usb-mta-37-k87IWL4kM8SnoxRs1KKIeg-1; Thu, 18 Apr 2024 02:29:26 -0700
-X-MC-Unique: k87IWL4kM8SnoxRs1KKIeg-1
-Received: by mail-wm1-f72.google.com with SMTP id 5b1f17b1804b1-4167351545cso5620115e9.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 18 Apr 2024 02:29:26 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=D6iTzItu;
+ spf=pass (domain: gmail.com, ip: 209.85.208.180, mailfrom: ticotimo@gmail.com)
+Received: by mail-lj1-f180.google.com with SMTP id 38308e7fff4ca-2d715638540so12276381fa.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 18 Apr 2024 07:28:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1713450519; x=1714055319; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=u9BVkD/sLx9B5azM4wAjUPr2cb1b96OroG4qQAqFYmM=;
+        b=D6iTzItuGmg6u1xe/FGF/pu3O7tCaz7+Zy2YKP5jbHz76A1il7xbb8LXv5FWtcaio5
+         VNnwo/mJIcjgWWV9zKAC7a5uCIRmQ6uhBj/FIM7BsTKmoci5Sy+A5uRiO6vKt55suodd
+         771BQogMOVrsDl7x02sekVQpEmpa2Dkp0Tr2i/ua2IOj5ldsgM6OSjFcVl5iY7bZRIHz
+         pnso/2e5YpOLMnRJaVVqsTFUgRWt4/OYQ0bORwVo9PzR1pQosPSRQUpKAmebbjxiTAWZ
+         pzF9PK4G9obwpgE+iy94IyuilBsvvphDwakw6GqM29LFXZUl4hAjKt2cIoAy/xHsv71U
+         C5tg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1713432564; x=1714037364;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1713450519; x=1714055319;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=PFtp2N7N5wX6MVDbaG7z98ndcIsTKEoTj8nV7pwkWkQ=;
-        b=xBSDpgSEqgl6YEgKI7/aaeBFaSLRIDZSMpmTUsp5F1ncB/o9XTqMEwOMrdwQRvG3+I
-         IBqvbbt+l1kYDhdwa537kSnY81PqQ7fxL6sHUffj6U5z63u7q76nq41BkKQpZgA69ERi
-         4DLGQ4E3yhs+cB6vFMysyOoQBy1a0OFnOgaSdQ797U6+lLwcBf3AwxiHxeI0ouUjupTy
-         TXfe5Q5KROo4r85pDvmXlb4vlyB8fgqJCu21Jkwik6rI4oxh+EZue/vLAwZX5RYNuVMf
-         0DXrulUcWRGT0MGcw6ymEP5BjeL2EgyLgaSO/cD3DxLa66Ar5p8of3q3z6lbDwfqod7y
-         wUhQ==
-X-Gm-Message-State: AOJu0YxrjHgNS0FTjVES9mn79mLt69KeRSWWf4alQkYcl5VYStQUZiFD
-	gzZpuVqEUfZgXV6JqMdJG5gYwFqzOaxYlAgaUTVVR6wyz9R/y4hIpYlG3GoFQC58ICK6y8/s/dc
-	RSCZ5ncHPeZFM3KJeUlYJ7iKLXNxLVsb+FyaSvaNpgGpzF95wpm3k7wNvaR5wahQEk0gz9Fck9g
-	lBEkNx0RVoMpgXLR2InlnkmGA9CljbRWer60znbGFzj9CiK6gaXbR42UwLKMPryC5zEBN+
-X-Received: by 2002:a05:600c:1da9:b0:418:e8bf:5e70 with SMTP id p41-20020a05600c1da900b00418e8bf5e70mr1042323wms.8.1713432564469;
-        Thu, 18 Apr 2024 02:29:24 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFg2MnU8333DN1vzBge89/PQlXwYmPEL5JZCl4bZp3HV3ikKrf/7+BuWNTRIFN5qil7HlKP9g==
-X-Received: by 2002:a05:600c:1da9:b0:418:e8bf:5e70 with SMTP id p41-20020a05600c1da900b00418e8bf5e70mr1042306wms.8.1713432564083;
-        Thu, 18 Apr 2024 02:29:24 -0700 (PDT)
-Received: from gudni-virtual-machine.localdomain ([81.15.100.92])
-        by smtp.gmail.com with ESMTPSA id r18-20020a05600c35d200b00418d434ae4esm2034551wmq.10.2024.04.18.02.29.23
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 18 Apr 2024 02:29:23 -0700 (PDT)
-From: =?UTF-8?q?Gu=C3=B0ni=20M=C3=A1r=20Gilbert?= <gudnimar@noxmedical.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: =?UTF-8?q?Gu=C3=B0ni=20M=C3=A1r=20Gilbert?= <gudnimar@noxmedical.com>
-Subject: [meta-python][PATCH] python3-incremental: cleanup RDEPENDS
-Date: Thu, 18 Apr 2024 09:29:10 +0000
-Message-Id: <20240418092910.3585-1-gudnimar@noxmedical.com>
-X-Mailer: git-send-email 2.34.1
+        bh=u9BVkD/sLx9B5azM4wAjUPr2cb1b96OroG4qQAqFYmM=;
+        b=DoZks9NZmh2BMf6GO3UEiecIhMrxg7meF/QKGhfUL6UEHj/Qdq1jEDPgC808jHRewJ
+         3eXCEYmCa7yZXkrdcVDb8Wk+mrgrzoxyjsFUqe94HnhoTqkdpM+V5hoa2dLpaKkbBJij
+         bRzAu8c9FIDt56KZc8KFg8Z9KPuktTr9ju963+xT1TCFvsEg9xVG8tAirUA3Oq6so/o9
+         GlFN89eVHNMEBltpmpNbdngmZVQsvI/75Et7hgQCeWzlJvIwO/JMyMB4ctQZBScIi/QX
+         o0LAX3p7qO2YAHj483PEhSyl5H0X1eS86XfSqv8KtexvP7TzlDJOvhSorzwd5zCmgX/p
+         cvkA==
+X-Gm-Message-State: AOJu0YwiEXMNyMXotcM9lK6fRM3OSaa4UiEX0lO7qu6iKsQaCycC64eF
+	KfChgrxBOSPAfyHI+oVIcSm79vPxa/d4WjnkTf9fNuaEUZthC/thg25s+6mQZ2LCCc5oRVkDJuu
+	kWzvmxFyNZzhd4PXHv4aZIoqo2sA=
+X-Google-Smtp-Source: AGHT+IEX+5xeW1Z1cku3Z8JQPfvgwhMKVil2xpAKgwPVYovI4frJaI4UMeZ0nLEZqQGoA2HA38mfsNtqpPA4uBWt5ME=
+X-Received: by 2002:a2e:b550:0:b0:2d8:da4c:5909 with SMTP id
+ a16-20020a2eb550000000b002d8da4c5909mr1598826ljn.51.1713450518210; Thu, 18
+ Apr 2024 07:28:38 -0700 (PDT)
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: noxmedical.com
-Content-Type: multipart/alternative;
-	boundary="MCBoundary=_12404180229290461"
+References: <20240418090122.3806-1-gudnimar@noxmedical.com>
+In-Reply-To: <20240418090122.3806-1-gudnimar@noxmedical.com>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Thu, 18 Apr 2024 07:28:26 -0700
+Message-ID: <CANx9H-DLauDMx75MsCqqm9LRSOm=mJ0RYcFTC2QFXNAgH04Zfw@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH] python3-twisted: upgrade 22.10.0 -> 24.3.0
+To: gudnimar@noxmedical.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="0000000000007a704c06165fc93a"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 18 Apr 2024 09:29:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110052
+ <openembedded-devel@lists.openembedded.org>; Thu, 18 Apr 2024 14:28:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110053
 
---MCBoundary=_12404180229290461
-Content-Type: text/plain; charset=UTF-8
+--0000000000007a704c06165fc93a
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-incremental package does not need all twisted packages. Only the core packa=
-ge is required.
-The goal with this change is to minimize dependency memory requirements.
+On Thu, Apr 18, 2024 at 2:01=E2=80=AFAM Gu=C3=B0ni M=C3=A1r Gilbert via lis=
+ts.openembedded.org
+<gudnimar=3Dnoxmedical.com@lists.openembedded.org> wrote:
 
-Signed-off-by: Gu=C3=B0ni M=C3=A1r Gilbert <gudnimar@noxmedical.com>
----
- .../recipes-devtools/python/python3-incremental_22.10.0.bb      | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> Changelogs between 22.10.0 and 24.3.0 can be found here:
+>
+> https://github.com/twisted/twisted/releases/tag/twisted-24.3.0
+> https://github.com/twisted/twisted/releases/tag/twisted-23.10.0
+> https://github.com/twisted/twisted/releases/tag/twisted-23.8.0
+>
+> Summary of changes relevant for the Yocto build:
+> - Brings official support for Python 3.11 and 3.12, only Python 3.8 and
+> above supported.
+> - python3-twisted-conch: python3-pyasn1 is no longer a runtime dependency
+> (23.8.0)
+> - PYPI_PACKAGE name was changed from 'Twisted' to 'twisted' to make
+> fetching work
+>
+> Signed-off-by: Gu=C3=B0ni M=C3=A1r Gilbert <gudnimar@noxmedical.com>
+> ---
+> ...twisted_22.10.0.bb =3D> python3-twisted_24.3.0.bb} | 13 ++++---------
+> 1 file changed, 4 insertions(+), 9 deletions(-)
+> rename meta-python/recipes-devtools/python/{python3-twisted_22.10.0.bb =
+=3D>
+> python3-twisted_24.3.0.bb} (93%)
+>
+> diff --git a/meta-python/recipes-devtools/python/
+> python3-twisted_22.10.0.bb b/meta-python/recipes-devtools/python/
+> python3-twisted_24.3.0.bb
+> similarity index 93%
+> rename from meta-python/recipes-devtools/python/python3-twisted_22.10.0.b=
+b
+> rename to meta-python/recipes-devtools/python/python3-twisted_24.3.0.bb
+> index 20b9ce254..be2246623 100644
+> --- a/meta-python/recipes-devtools/python/python3-twisted_22.10.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-twisted_24.3.0.bb
+> @@ -4,11 +4,11 @@ Twisted supports TCP, UDP, SSL/TLS, multicast, Unix
+> sockets, a large number of p
+> HOMEPAGE =3D "http://www.twistedmatrix.com"
+>
+> LICENSE =3D "MIT"
+> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D0f8d67f84b6e178c92d471011b224=
+5fc"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dc1c5d2c2493b848f83864bdedd67b=
+bf5"
+>
+> -SRC_URI[sha256sum] =3D
+> "32acbd40a94f5f46e7b42c109bfae2b302250945561783a8b7a059048f2d4d31"
+> +SRC_URI[sha256sum] =3D
+> "6b38b6ece7296b5e122c9eb17da2eeab3d98a198f50ca9efd00fb03e5b4fd4ae"
+>
+> -PYPI_PACKAGE =3D "Twisted"
+> +PYPI_PACKAGE =3D "twisted"
+>
 
-diff --git a/meta-python/recipes-devtools/python/python3-incremental_22.10.=
-0.bb b/meta-python/recipes-devtools/python/python3-incremental_22.10.0.bb
-index 3d93cc05e..79fa15311 100644
---- a/meta-python/recipes-devtools/python/python3-incremental_22.10.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-incremental_22.10.0.bb
-@@ -8,7 +8,7 @@ SRC_URI[sha256sum] =3D "912feeb5e0f7e0188e6f42241d2f450002e=
-11bbc0937c65865045854c2
- inherit pypi setuptools3
-=20
- RDEPENDS:${PN} +=3D " \
--    python3-twisted \
-+    python3-twisted-core \
-     python3-click \
- "
-=20
---=20
-2.34.1
+This is the default, so not explicitly needed. The capitalized name was
+previously needed to match the tarball file name.
 
-Disclaimer
 
-The information contained in this communication from the sender is confiden=
-tial. It is intended solely for use by the recipient and others authorized =
-to receive it. If you are not the recipient, you are hereby notified that a=
-ny disclosure, copying, distribution or taking action in relation of the co=
-ntents of this information is strictly prohibited and may be unlawful.
+>
+> inherit pypi python_setuptools_build_meta
+>
+> @@ -65,7 +65,7 @@ RDEPENDS:${PN}-core =3D "python3-appdirs \
+> python3-zopeinterface \
+> "
+> RDEPENDS:${PN}-test =3D "${PN}"
+> -RDEPENDS:${PN}-conch =3D "${PN}-core ${PN}-protocols python3-bcrypt
+> python3-cryptography python3-pyasn1 python3-pickle"
+> +RDEPENDS:${PN}-conch =3D "${PN}-core ${PN}-protocols python3-bcrypt
+> python3-cryptography python3-pickle"
+> RDEPENDS:${PN}-mail =3D "${PN}-core ${PN}-protocols"
+> RDEPENDS:${PN}-names =3D "${PN}-core"
+> RDEPENDS:${PN}-news =3D "${PN}-core ${PN}-protocols"
+> @@ -75,8 +75,6 @@ RDEPENDS:${PN}-words +=3D "${PN}-core"
+> RDEPENDS:${PN}-flow +=3D "${PN}-core"
+> RDEPENDS:${PN}-pair +=3D "${PN}-core"
+>
+> -FILES:${PN} =3D
+> "${PYTHON_SITEPACKAGES_DIR}/${PYPI_PACKAGE}-${PV}.dist-info/*"
+> -
+> FILES:${PN}-test =3D " \
+> ${PYTHON_SITEPACKAGES_DIR}/twisted/test \
+> ${PYTHON_SITEPACKAGES_DIR}/twisted/*/test \
+> @@ -85,8 +83,6 @@ FILES:${PN}-test =3D " \
+>
+> FILES:${PN}-protocols =3D " \
+> ${PYTHON_SITEPACKAGES_DIR}/twisted/protocols/*.py* \
+> - ${PYTHON_SITEPACKAGES_DIR}/twisted/protocols/gps/ \
+> - ${PYTHON_SITEPACKAGES_DIR}/twisted/protocols/mice/ \
+> ${PYTHON_SITEPACKAGES_DIR}/twisted/protocols/haproxy \
+> ${PYTHON_SITEPACKAGES_DIR}/twisted/protocols/__pycache__/*pyc \
+> "
+> @@ -124,7 +120,6 @@ FILES:${PN}-core =3D " \
+> ${PYTHON_SITEPACKAGES_DIR}/twisted/*.py* \
+> ${PYTHON_SITEPACKAGES_DIR}/twisted/python/*.py* \
+> ${PYTHON_SITEPACKAGES_DIR}/twisted/plugins/*.py* \
+> - ${PYTHON_SITEPACKAGES_DIR}/Twisted*egg-info \
+> ${PYTHON_SITEPACKAGES_DIR}/twisted/logger \
+> ${PYTHON_SITEPACKAGES_DIR}/twisted/_threads \
+> ${PYTHON_SITEPACKAGES_DIR}/twisted/positioning \
+> --
+> 2.34.1
+>
+>
+> Warning: Copyright Nox Health. This communication is confidential and may
+> contain privileged information. By the use of email over the Internet or
+> other communication systems, Nox Health is not waiving either
+> confidentiality of, or legal privilege in, the content of the email and o=
+f
+> any attachments. If the recipient of this message is not the intended
+> addressee, please call Nox Health immediately by calling (+1) 888.505.028=
+0
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#110049):
+> https://lists.openembedded.org/g/openembedded-devel/message/110049
+> Mute This Topic: https://lists.openembedded.org/mt/105594516/924729
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> ticotimo@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
 
-This email has been scanned for viruses and malware, and may have been auto=
-matically archived by Mimecast, a leader in email security and cyber resili=
-ence. Mimecast integrates email defenses with brand protection, security aw=
-areness training, web security, compliance and other essential capabilities=
-. Mimecast helps protect large and small organizations from malicious activ=
-ity, human error and technology failure; and to lead the movement toward bu=
-ilding a more resilient world. To find out more, visit our website.
-
---MCBoundary=_12404180229290461
+--0000000000007a704c06165fc93a
+Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/html; charset=UTF-8
 
-<html><head><style type=3D"text/css">.style1 {font-family: "Times New Roman=
-";}</style></head><body>incremental package does not need all twisted packa=
-ges. Only the core package is required.<BR>
-The goal with this change is to minimize dependency memory requirements.<BR=
->
-<BR>
-Signed-off-by: Gu&eth;ni M&aacute;r Gilbert &lt;gudnimar@noxmedical.com&gt;=
-<BR>
----<BR>
- .../recipes-devtools/python/python3-incremental_22.10.0.bb      | 2 +-<BR>
- 1 file changed, 1 insertion(+), 1 deletion(-)<BR>
-<BR>
-diff --git a/meta-python/recipes-devtools/python/python3-incremental_22.10.=
-0.bb b/meta-python/recipes-devtools/python/python3-incremental_22.10.0.bb<B=
-R>
-index 3d93cc05e..79fa15311 100644<BR>
---- a/meta-python/recipes-devtools/python/python3-incremental_22.10.0.bb<BR=
->
-+++ b/meta-python/recipes-devtools/python/python3-incremental_22.10.0.bb<BR=
->
-@@ -8,7 +8,7 @@ SRC_URI[sha256sum] =3D &quot;912feeb5e0f7e0188e6f42241d2f45=
-0002e11bbc0937c65865045854c2<BR>
- inherit pypi setuptools3<BR>
- <BR>
- RDEPENDS:${PN} +=3D &quot; \<BR>
--    python3-twisted \<BR>
-+    python3-twisted-core \<BR>
-     python3-click \<BR>
- &quot;<BR>
- <BR>
--- <BR>
-2.34.1<BR>
+<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Thu, Apr 18, 2024 at 2:01=E2=80=AFAM Gu=C3=B0ni M=C3=A1r=
+ Gilbert via <a href=3D"http://lists.openembedded.org">lists.openembedded.o=
+rg</a> &lt;gudnimar=3D<a href=3D"mailto:noxmedical.com@lists.openembedded.o=
+rg">noxmedical.com@lists.openembedded.org</a>&gt; wrote:<br></div><blockquo=
+te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left-widt=
+h:1px;border-left-style:solid;padding-left:1ex;border-left-color:rgb(204,20=
+4,204)"><div>Changelogs between 22.10.0 and 24.3.0 can be found here:<br>
+<br>
+<a href=3D"https://github.com/twisted/twisted/releases/tag/twisted-24.3.0" =
+target=3D"_blank">https://github.com/twisted/twisted/releases/tag/twisted-2=
+4.3.0</a><br>
+<a href=3D"https://github.com/twisted/twisted/releases/tag/twisted-23.10.0"=
+ target=3D"_blank">https://github.com/twisted/twisted/releases/tag/twisted-=
+23.10.0</a><br>
+<a href=3D"https://github.com/twisted/twisted/releases/tag/twisted-23.8.0" =
+target=3D"_blank">https://github.com/twisted/twisted/releases/tag/twisted-2=
+3.8.0</a><br>
+<br>
+Summary of changes relevant for the Yocto build:<br>
+- Brings official support for Python 3.11 and 3.12, only Python 3.8 and abo=
+ve supported.<br>
+- python3-twisted-conch: python3-pyasn1 is no longer a runtime dependency (=
+23.8.0)<br>
+- PYPI_PACKAGE name was changed from &#39;Twisted&#39; to &#39;twisted&#39;=
+ to make fetching work<br>
+<br>
+Signed-off-by: Gu=C3=B0ni M=C3=A1r Gilbert &lt;<a href=3D"mailto:gudnimar@n=
+oxmedical.com" target=3D"_blank">gudnimar@noxmedical.com</a>&gt;<br>
+---<br>
+ ...<a href=3D"http://twisted_22.10.0.bb" target=3D"_blank">twisted_22.10.0=
+.bb</a> =3D&gt; <a href=3D"http://python3-twisted_24.3.0.bb" target=3D"_bla=
+nk">python3-twisted_24.3.0.bb</a>} | 13 ++++---------<br>
+ 1 file changed, 4 insertions(+), 9 deletions(-)<br>
+ rename meta-python/recipes-devtools/python/{<a href=3D"http://python3-twis=
+ted_22.10.0.bb" target=3D"_blank">python3-twisted_22.10.0.bb</a> =3D&gt; <a=
+ href=3D"http://python3-twisted_24.3.0.bb" target=3D"_blank">python3-twiste=
+d_24.3.0.bb</a>} (93%)<br>
+<br>
+diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
+twisted_22.10.0.bb" target=3D"_blank">python3-twisted_22.10.0.bb</a> b/meta=
+-python/recipes-devtools/python/<a href=3D"http://python3-twisted_24.3.0.bb=
+" target=3D"_blank">python3-twisted_24.3.0.bb</a><br>
+similarity index 93%<br>
+rename from meta-python/recipes-devtools/python/<a href=3D"http://python3-t=
+wisted_22.10.0.bb" target=3D"_blank">python3-twisted_22.10.0.bb</a><br>
+rename to meta-python/recipes-devtools/python/<a href=3D"http://python3-twi=
+sted_24.3.0.bb" target=3D"_blank">python3-twisted_24.3.0.bb</a><br>
+index 20b9ce254..be2246623 100644<br>
+--- a/meta-python/recipes-devtools/python/<a href=3D"http://python3-twisted=
+_22.10.0.bb" target=3D"_blank">python3-twisted_22.10.0.bb</a><br>
++++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-twisted=
+_24.3.0.bb" target=3D"_blank">python3-twisted_24.3.0.bb</a><br>
+@@ -4,11 +4,11 @@ Twisted supports TCP, UDP, SSL/TLS, multicast, Unix socke=
+ts, a large number of p<br>
+ HOMEPAGE =3D &quot;<a href=3D"http://www.twistedmatrix.com" target=3D"_bla=
+nk">http://www.twistedmatrix.com</a>&quot;<br>
+ <br>
+ LICENSE =3D &quot;MIT&quot;<br>
+-LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D0f8d67f84b6e178c92d471011b=
+2245fc&quot;<br>
++LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3Dc1c5d2c2493b848f83864bdedd=
+67bbf5&quot;<br>
+ <br>
+-SRC_URI[sha256sum] =3D &quot;32acbd40a94f5f46e7b42c109bfae2b30225094556178=
+3a8b7a059048f2d4d31&quot;<br>
++SRC_URI[sha256sum] =3D &quot;6b38b6ece7296b5e122c9eb17da2eeab3d98a198f50ca=
+9efd00fb03e5b4fd4ae&quot;<br>
+ <br>
+-PYPI_PACKAGE =3D &quot;Twisted&quot;<br>
++PYPI_PACKAGE =3D &quot;twisted&quot;</div></blockquote><div dir=3D"auto"><=
+br></div><div dir=3D"auto">This is the default, so not explicitly needed. T=
+he capitalized name was previously needed to match the tarball file name.</=
+div><div dir=3D"auto"><br></div><blockquote class=3D"gmail_quote" style=3D"=
+margin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-style:solid;padd=
+ing-left:1ex;border-left-color:rgb(204,204,204)"><div dir=3D"auto"><br>
+ <br>
+ inherit pypi python_setuptools_build_meta<br>
+ <br>
+@@ -65,7 +65,7 @@ RDEPENDS:${PN}-core =3D &quot;python3-appdirs \<br>
+                        python3-zopeinterface \<br>
+ &quot;<br>
+ RDEPENDS:${PN}-test =3D &quot;${PN}&quot;<br>
+-RDEPENDS:${PN}-conch =3D &quot;${PN}-core ${PN}-protocols python3-bcrypt p=
+ython3-cryptography python3-pyasn1 python3-pickle&quot;<br>
++RDEPENDS:${PN}-conch =3D &quot;${PN}-core ${PN}-protocols python3-bcrypt p=
+ython3-cryptography python3-pickle&quot;<br>
+ RDEPENDS:${PN}-mail =3D &quot;${PN}-core ${PN}-protocols&quot;<br>
+ RDEPENDS:${PN}-names =3D &quot;${PN}-core&quot;<br>
+ RDEPENDS:${PN}-news =3D &quot;${PN}-core ${PN}-protocols&quot;<br>
+@@ -75,8 +75,6 @@ RDEPENDS:${PN}-words +=3D &quot;${PN}-core&quot;<br>
+ RDEPENDS:${PN}-flow +=3D &quot;${PN}-core&quot;<br>
+ RDEPENDS:${PN}-pair +=3D &quot;${PN}-core&quot;<br>
+ <br>
+-FILES:${PN} =3D &quot;${PYTHON_SITEPACKAGES_DIR}/${PYPI_PACKAGE}-${PV}.dis=
+t-info/*&quot;<br>
+-<br>
+ FILES:${PN}-test =3D &quot; \<br>
+     ${PYTHON_SITEPACKAGES_DIR}/twisted/test \<br>
+     ${PYTHON_SITEPACKAGES_DIR}/twisted/*/test \<br>
+@@ -85,8 +83,6 @@ FILES:${PN}-test =3D &quot; \<br>
+ <br>
+ FILES:${PN}-protocols =3D &quot; \<br>
+     ${PYTHON_SITEPACKAGES_DIR}/twisted/protocols/*.py* \<br>
+-    ${PYTHON_SITEPACKAGES_DIR}/twisted/protocols/gps/ \<br>
+-    ${PYTHON_SITEPACKAGES_DIR}/twisted/protocols/mice/ \<br>
+     ${PYTHON_SITEPACKAGES_DIR}/twisted/protocols/haproxy \<br>
+     ${PYTHON_SITEPACKAGES_DIR}/twisted/protocols/__pycache__/*pyc \<br>
+ &quot;<br>
+@@ -124,7 +120,6 @@ FILES:${PN}-core =3D &quot; \<br>
+     ${PYTHON_SITEPACKAGES_DIR}/twisted/*.py* \<br>
+     ${PYTHON_SITEPACKAGES_DIR}/twisted/python/*.py* \<br>
+     ${PYTHON_SITEPACKAGES_DIR}/twisted/plugins/*.py* \<br>
+-    ${PYTHON_SITEPACKAGES_DIR}/Twisted*egg-info \<br>
+     ${PYTHON_SITEPACKAGES_DIR}/twisted/logger \<br>
+     ${PYTHON_SITEPACKAGES_DIR}/twisted/_threads \<br>
+     ${PYTHON_SITEPACKAGES_DIR}/twisted/positioning \<br>
+-- <br>
+2.34.1<br>
 
-<br><br><p style=3D"font-family: Verdana; font-size:10pt; color:#666666;"><=
-/p><p style=3D"font-family: Verdana; font-size:8pt; color:#666666;">Warning=
-:  Copyright Nox Health.  This communication is confidential and may contai=
-n privileged information.  By the use of email over the Internet or other c=
-ommunication systems, Nox Health is not waiving either confidentiality of, =
-or legal privilege in, the content of the email and of any attachments.  If=
- the recipient of this message is not the intended addressee, please call N=
-ox Health immediately by calling (+1) 888.505.0280</p></body></html>
+<br><br><p style=3D"font-family:Verdana;font-size:10pt;color:rgb(102,102,10=
+2)"></p><p style=3D"font-family:Verdana;font-size:8pt;color:rgb(102,102,102=
+)">Warning:  Copyright Nox Health.  This communication is confidential and =
+may contain privileged information.  By the use of email over the Internet =
+or other communication systems, Nox Health is not waiving either confidenti=
+ality of, or legal privilege in, the content of the email and of any attach=
+ments.  If the recipient of this message is not the intended addressee, ple=
+ase call Nox Health immediately by calling (+1) 888.505.0280</p></div>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#110049): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/110049" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/110049</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/105594516/924=
+729" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
+/105594516/924729</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
+et=3D"_blank">ticotimo@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
 
---MCBoundary=_12404180229290461--
-
+--0000000000007a704c06165fc93a--
 
