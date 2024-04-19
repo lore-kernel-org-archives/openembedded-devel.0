@@ -1,113 +1,80 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <alperyasinak1@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D2CB2C4345F
-	for <webhook@archiver.kernel.org>; Fri, 19 Apr 2024 17:32:53 +0000 (UTC)
-Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
- by mx.groups.io with SMTP id smtpd.web10.27425.1713547964181309794
- for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 Apr 2024 10:32:44 -0700
-Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
-Received: from fwd75.aul.t-online.de (fwd75.aul.t-online.de [10.223.144.101])
-	by mailout03.t-online.de (Postfix) with SMTP id D38722AF2B
-	for <openembedded-devel@lists.openembedded.org>; Fri, 19 Apr 2024 19:32:41 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.163.36.159]) by fwd75.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1rxs6L-1XBwhN0; Fri, 19 Apr 2024 19:32:41 +0200
-From: Markus Volk <f_l_k@t-online.de>
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0D0D4C4345F
+	for <webhook@archiver.kernel.org>; Fri, 19 Apr 2024 18:22:32 +0000 (UTC)
+Subject: Re: [meta-python][PATCH] python3-incremental: cleanup RDEPENDS
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH] wireplumber: update 0.5.0 -> 0.5.1
-Date: Fri, 19 Apr 2024 19:33:01 +0200
-Message-ID: <20240419173301.447299-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.44.0
+From: "Alper Ak" <alperyasinak1@gmail.com>
+X-Originating-Location: Istanbul, TR (176.33.68.217)
+X-Originating-Platform: Linux Firefox 124
+User-Agent: GROUPS.IO Web Poster
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1713547961-3F9E2C7B-BBBE90E9/0/0 CLEAN NORMAL
-X-TOI-MSGID: 37e831b1-6fba-46a6-81fb-ad0cb5f4d9e1
-Content-Transfer-Encoding: quoted-printable
+Date: Fri, 19 Apr 2024 11:22:27 -0700
+References: <20240418092910.3585-1-gudnimar@noxmedical.com>
+In-Reply-To: <20240418092910.3585-1-gudnimar@noxmedical.com>
+Message-ID: <19341.1713550947178632768@lists.openembedded.org>
+Content-Type: multipart/alternative; boundary="fOTOEi6C09nJPoGZpzSg"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 19 Apr 2024 17:32:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110067
+ <openembedded-devel@lists.openembedded.org>; Fri, 19 Apr 2024 18:22:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110068
 
-WirePlumber 0.5.1
-~~~~~~~~~~~~~~~~~
+--fOTOEi6C09nJPoGZpzSg
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Highlights:
+Hi Gilbert,
 
-  - Added a guide documenting how to migrate configuration from 0.4 to 0.=
-5,
-    also available online at:
-    https://pipewire.pages.freedesktop.org/wireplumber/daemon/configurati=
-on/migration.html
-    If you are packaging WirePlumber for a distribution, please consider
-    informing users about this.
+First of all, thank you for your patch. But I'm getting error while buildin=
+g the recipe. Output:
 
-Fixes:
+ERROR: Nothing RPROVIDES 'python3-twisted-core-native' (but virtual:native:=
+/opt/yocto_co/sources/meta-openembedded/meta-python/recipes-devtools/python=
+/python3-incremental_22.10.0.bb RDEPENDS on or otherwise requires it)
 
-  - Fixed an odd issue where microphones would stop being usable when a
-    Bluetooth headset was connected in the HSP/HFP profile (#598, !620)
+NOTE: Runtime target 'python3-twisted-core-native' is unbuildable, removing=
+...
+Missing or unbuildable dependency chain was: ['python3-twisted-core-native'=
+]
 
-  - Fixed an issue where it was not possible to store the volume/mute sta=
-te of
-    system notifications (#604)
+NOTE: Runtime target 'python3-twisted-core' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['python3-twisted-core', 'pyth=
+on3-incremental-native', 'python3-twisted-core-native']
 
-  - Fixed a rare crash that could occur when a node was destroyed while t=
-he
-    'select-target' event was still being processed (!621)
+ERROR: Required build target 'python3-incremental' has no buildable provide=
+rs.
+Missing or unbuildable dependency chain was: ['python3-incremental', 'pytho=
+n3-twisted-core', 'python3-incremental-native', 'python3-twisted-core-nativ=
+e']
 
-  - Fixed deleting all the persistent settings via ``wpctl --delete`` (!6=
-22)
+It would be nice if you could take a look at your free time.
 
-  - Fixed using Bluetooth autoswitch with A2DP profiles that have an inpu=
-t route
-    (!624)
+Best Regards
 
-  - Fixed sending an error to clients when linking fails due to a format
-    mismatch (!625)
+--fOTOEi6C09nJPoGZpzSg
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Additions:
+<p>Hi Gilbert,</p>
+<p>First of all, thank you for your patch. But I'm getting error while buil=
+ding the recipe. Output:</p>
+<p>ERROR: Nothing RPROVIDES 'python3-twisted-core-native' (but virtual:nati=
+ve:/opt/yocto_co/sources/meta-openembedded/meta-python/recipes-devtools/pyt=
+hon/python3-incremental_22.10.0.bb RDEPENDS on or otherwise requires it)<br=
+ /><br />NOTE: Runtime target 'python3-twisted-core-native' is unbuildable,=
+ removing...<br />Missing or unbuildable dependency chain was: ['python3-tw=
+isted-core-native']<br /><br />NOTE: Runtime target 'python3-twisted-core' =
+is unbuildable, removing...<br />Missing or unbuildable dependency chain wa=
+s: ['python3-twisted-core', 'python3-incremental-native', 'python3-twisted-=
+core-native']<br /><br />ERROR: Required build target 'python3-incremental'=
+ has no buildable providers.<br />Missing or unbuildable dependency chain w=
+as: ['python3-incremental', 'python3-twisted-core', 'python3-incremental-na=
+tive', 'python3-twisted-core-native']</p>
+<p>It would be nice if you could take a look at your free time.</p>
+<p>Best Regards</p>
 
-  - Added a check that prints a verbose warning when old-style 0.4.x Lua
-    configuration files are found in the system. (#611)
-
-  - The "policy-dsp" script, used in Asahi Linux to provide a software DS=
-P
-    for Apple Sillicon devices, has now been ported to 0.5 properly and
-    documented (#619, !627)
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- .../wireplumber/{wireplumber_0.5.0.bb =3D> wireplumber_0.5.1.bb}  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-multimedia/recipes-multimedia/wireplumber/{wireplumber_0.5.0=
-.bb =3D> wireplumber_0.5.1.bb} (99%)
-
-diff --git a/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0=
-.5.0.bb b/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.=
-1.bb
-similarity index 99%
-rename from meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.=
-5.0.bb
-rename to meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.=
-1.bb
-index 8aa95a3e9..9115076a2 100644
---- a/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.0.bb
-+++ b/meta-multimedia/recipes-multimedia/wireplumber/wireplumber_0.5.1.bb
-@@ -10,7 +10,7 @@ DEPENDS =3D "glib-2.0 glib-2.0-native lua pipewire \
-     ${@bb.utils.contains("DISTRO_FEATURES", "gobject-introspection-data"=
-, "python3-native python3-lxml-native doxygen-native", "", d)} \
- "
-=20
--SRCREV =3D "59d190a2bd400f3b093f99b16fc0fb06f6cb2cfe"
-+SRCREV =3D "961450b2ac700e8c9c85a0beb2426b875fa08bff"
- SRC_URI =3D " \
-     git://gitlab.freedesktop.org/pipewire/wireplumber.git;branch=3Dmaste=
-r;protocol=3Dhttps \
-     file://90-OE-disable-session-dbus-dependent-features.lua \
---=20
-2.44.0
-
+--fOTOEi6C09nJPoGZpzSg--
 
