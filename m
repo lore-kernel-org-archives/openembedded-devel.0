@@ -1,209 +1,179 @@
-Return-Path: <perceval.arenou@ptxtrimble.com>
+Return-Path: <ross.burton@arm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 22420C4345F
-	for <webhook@archiver.kernel.org>; Fri, 19 Apr 2024 14:58:53 +0000 (UTC)
-Received: from us-smtp-delivery-109.mimecast.com (us-smtp-delivery-109.mimecast.com [170.10.129.109])
- by mx.groups.io with SMTP id smtpd.web11.23394.1713538732365489086
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 57A28C4345F
+	for <webhook@archiver.kernel.org>; Fri, 19 Apr 2024 15:40:53 +0000 (UTC)
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com (EUR04-HE1-obe.outbound.protection.outlook.com [40.107.7.50])
+ by mx.groups.io with SMTP id smtpd.web11.24540.1713541247192576944
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 Apr 2024 07:58:52 -0700
+ Fri, 19 Apr 2024 08:40:47 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@ptxtrimble.com header.s=mimecast20240319 header.b=kW/4spIE;
- spf=pass (domain: ptxtrimble.com, ip: 170.10.129.109, mailfrom: perceval.arenou@ptxtrimble.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ptxtrimble.com;
-	s=mimecast20240319; t=1713538731;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=wVDW/aYx06dOP2fBs/7/GfJ0ABVQNTIDdpyNLyOB8AI=;
-	b=kW/4spIEjFwHX42f9TQXx17UynDfTdhgSf5qGsAQDK0QQvgB1Qu2OoUOhsoX8KxCvRVZ1H
-	RdxqJABpZYvo+xoRi5PgZEQSwJqGmh/goAJg/xsLZkYxEC4kfgxhXAMDm0V8BRNMlZDISq
-	xYAGzfVXA5G4PN/QN85P2U4+CYXyYME=
-Received: from mail-oa1-f69.google.com (mail-oa1-f69.google.com
- [209.85.160.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-435-9VRVj3OGMmOrH0TXuZ-ytw-1; Fri, 19 Apr 2024 10:58:49 -0400
-X-MC-Unique: 9VRVj3OGMmOrH0TXuZ-ytw-1
-Received: by mail-oa1-f69.google.com with SMTP id 586e51a60fabf-22f264ea760so2359191fac.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Apr 2024 07:58:48 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1713538728; x=1714143528;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=Lj1BDYV0QNUdxBZRLSvuKEi4/GWUxZ+MTC1qHiEGbZ0=;
-        b=dk6v6kfwJKEO9ZdlXCbdTJ+tqkBixM4pPYD1ExQyqfWD8nlrD740nn4w/r25n2dxea
-         I0s3X1pF00ZhYD3btURME/jkng0OBvg7B+qkZmWhzXnK2NZHDJRxCpAF+rRZnPiQV/S4
-         zspg6ErMTOOMK/iGHl7c/ihuWl3RfJ+7PEKhdJLdCS9kvkqh2tYr0AWZeO3M2nVtviTH
-         /vM/V6/oZTckwMg1xbyvLF8VSxL20Dt40zojHnWqO4K/aO0BINt5ZntfRnKgQVTntcYV
-         uBE3TO/Y0mSuKO9hqFxo5Dlm+XMlb0+pjJmRB0vByWXHV1xG2nuzkfqCcWStJtm2Zs7J
-         Dvuw==
-X-Gm-Message-State: AOJu0Ywhon9nIE9bZOBiTwGvkfcSIEcHhtPVUjH3G82h1w/hQok1ePNK
-	xRzjvcqtcNqvUmbr7mjTPeZJkGhklcoB28tIfTAW5OPU5k53kRjcQ3CLPqaLOxfPC2Wx+Y3y5tT
-	YlSsk//ZVSq+nUjN8ZsEYkEitqNj1N8pMMG+1tq+9TAVqqKXZJ8WZmVNC0Tyw5ZP6WNHJ6E4llz
-	gBor0380dsyIXXM0BB5Wid6r7uPAsik7dVPWYPGlD/RFuGb8OtwYfZlN3wg5zP8Az5FBPgBKQNw
-	cLk1sKp0xbT1dH16NA=
-X-Received: by 2002:a05:6870:b487:b0:221:8e01:4c6f with SMTP id y7-20020a056870b48700b002218e014c6fmr3029290oap.36.1713538727872;
-        Fri, 19 Apr 2024 07:58:47 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IE2R93i7lucmtAOeVwLs5xCYfRWkq5Ax2j7BdgWnNDrAXxCCx9ToKLG4e8lpFySnZg1sWX5cwP0z9QuNxiCDbY=
-X-Received: by 2002:a05:6870:b487:b0:221:8e01:4c6f with SMTP id
- y7-20020a056870b48700b002218e014c6fmr3029199oap.36.1713538726339; Fri, 19 Apr
- 2024 07:58:46 -0700 (PDT)
-MIME-Version: 1.0
+ dkim=pass header.i=@armh.onmicrosoft.com header.s=selector2-armh-onmicrosoft-com header.b=Z97DlzN9;
+ dkim=pass header.i=@armh.onmicrosoft.com header.s=selector2-armh-onmicrosoft-com header.b=Z97DlzN9;
+ spf=pass (domain: arm.com, ip: 40.107.7.50, mailfrom: ross.burton@arm.com)
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=pass;
+ b=bItGV1jsFH18Vbu9qKmIKL4zy0o0z5rPi99q/nX23n1m7OFVMwH8NC4vLo57uHowrexmqNSkTnsZbYCrdcPzHkjwiPVDJNedVXWnKWvYNalxAI3nG9hefuLm8vqCyrMWcg/uAvfE/Hr4e/ay+HC9GUz4TFWe+zjqL3ov9yIPblmqVkjGubd2R3HsyJBQxzTX62Y53y8sPon/QS8DPY3dvhtTCoxWdAOROyWhM7iBcAK9sreXcugiytbRyTLw+iB0IdhfJvdgF0Rp6wzHgkhpil7wXODbogLk4iqfRDrTCC2WjFgwV7W7UQEZ+/G7Y6wHMJpbUpW0Bign2dj0672WBQ==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=eFUgzjldj9PmvOeKK3Pn+i9MLFX72zC3CGgJtWDvpNI=;
+ b=dUlmD10RpC7FtuawqQedDUduFrGWPgvl6U7zzgl+Q0F9lP9vyfmXKpRWtPvF0hpHNCY3Q6b2nYvUxGcYfr2Z0nJapgZIWTNvlH9ArMyAqUKfGpyYCEej9hAfQWo8+cTSzPRpcZGedaQtGeSnsCjkG+IM+OU64pXkc+Ovs83B45QSHTtgh+uzNis/8grk83W5f7Vrneme0nkKE2MGndSk70MCIaAyu3AMQevbd2wmA6oGCoSGPUG26s0/kts6NAJ2vw6nfNTNFeKH1OOhowOlVkOxw0nnqSUh9n9zO8ILESbrWDIS41C/++1EP3LsXzgszyvOJQabbG+hOE37vJGtvw==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 63.35.35.123) smtp.rcpttodomain=lists.openembedded.org smtp.mailfrom=arm.com;
+ dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
+ dkim=pass (signature was verified) header.d=armh.onmicrosoft.com; arc=pass (0
+ oda=1 ltdi=1 spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=eFUgzjldj9PmvOeKK3Pn+i9MLFX72zC3CGgJtWDvpNI=;
+ b=Z97DlzN9+n9ObNyigzKnJ+XJw09NK5l5UYNN1oPcrVQfDcIK4L4HJFoKuVnnjh60MRdYmpRrdlPvSqcgxOX1c1PM0xier7Gus9ARgkicdNDla9HKb2qdZNpuFfukZUzvTg4w43VSKpWAbyNsUfsAcKycuM5tVjxPedQqOJLoP7c=
+Received: from DUZPR01CA0121.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:4bc::11) by AM9PR08MB6004.eurprd08.prod.outlook.com
+ (2603:10a6:20b:285::5) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7452.50; Fri, 19 Apr
+ 2024 15:40:42 +0000
+Received: from DU6PEPF0000A7E0.eurprd02.prod.outlook.com
+ (2603:10a6:10:4bc:cafe::f1) by DUZPR01CA0121.outlook.office365.com
+ (2603:10a6:10:4bc::11) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7495.31 via Frontend
+ Transport; Fri, 19 Apr 2024 15:40:42 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
+ client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+ pr=C
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ DU6PEPF0000A7E0.mail.protection.outlook.com (10.167.8.42) with Microsoft SMTP
+ Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.7452.22 via
+ Frontend Transport; Fri, 19 Apr 2024 15:40:41 +0000
+Received: ("Tessian outbound 93e51b94fd50:v313"); Fri, 19 Apr 2024 15:40:41 +0000
+X-CheckRecipientChecked: true
+X-CR-MTA-CID: 2e8c883439c5a273
+X-CR-MTA-TID: 64aa7808
+Received: from 6c8c2e069f33.1
+	by 64aa7808-outbound-1.mta.getcheckrecipient.com id FE15948F-37CA-4877-BCEB-3F72893F5DFF.1;
+	Fri, 19 Apr 2024 15:40:00 +0000
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com
+    by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 6c8c2e069f33.1
+    (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+    Fri, 19 Apr 2024 15:40:00 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=bGBWuGhTvBhwDQME1Z44EZoJyEEB9hCn/zhp8ldsmnLcL3PFHYqPp7fxZOg8Y7JI9QBWppmKLzbXhU8ED2wZzaU8DTEad6eHloEnNMBKGuTPLeZcclPY9SdilVSyrK2MBMvpDtfxY5x7uT8Nrjdiq9MJ0LZhmJlsylMLkwwNbgtrOs19+Wzp5dizz+piQ3L1Owr1zGN02uEvyxUSyDFdT9yLm9ZknGphzBdgGDsssNE6cWdBL7oCB87tVe+omv/qMfuVuY+3U9GXpML1PNHl3istBGCsm6jRDp7tei5/0GBHyhZVtAlQCTez58nvQ2hJwChQvCbGFyyV4/Xoq5BBmw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=eFUgzjldj9PmvOeKK3Pn+i9MLFX72zC3CGgJtWDvpNI=;
+ b=e9NuQPVvntI/Q2iFGfth+5tG21rn3UL1NSpNn8sGsvaZv/KJCVWKG0McNQpBkRggotVNVS9rl4GrMyQDl0hlKLxBqpQO4/4Xm3QtkD0jfP0A9egI2USxO1ZowZbn/HCG9B1xzjNSs+EiT7o8SQ10BuU0cfuxvVDXM9yJVjMXnHCD9pXrsM/DZ+tmgHRPkzJQjiTteGQxIe6EYF70ej1jPYfZ6pK35x9+OIqqc7D9ZjveQUY8L9eAZuHWg4ibl/5GEO7GxuC0myMJOu9t4RmY6KzWkUFr2qBkrWKZDwVFLtyP6tRWVjHiDDU1lF+m1vnmmEuruUhRYiBzec8IBIBFDA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=eFUgzjldj9PmvOeKK3Pn+i9MLFX72zC3CGgJtWDvpNI=;
+ b=Z97DlzN9+n9ObNyigzKnJ+XJw09NK5l5UYNN1oPcrVQfDcIK4L4HJFoKuVnnjh60MRdYmpRrdlPvSqcgxOX1c1PM0xier7Gus9ARgkicdNDla9HKb2qdZNpuFfukZUzvTg4w43VSKpWAbyNsUfsAcKycuM5tVjxPedQqOJLoP7c=
+Received: from PA4PR08MB7411.eurprd08.prod.outlook.com (2603:10a6:102:2a3::12)
+ by AS2PR08MB9595.eurprd08.prod.outlook.com (2603:10a6:20b:609::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7472.43; Fri, 19 Apr
+ 2024 15:39:57 +0000
+Received: from PA4PR08MB7411.eurprd08.prod.outlook.com
+ ([fe80::9206:40ba:ef7e:729e]) by PA4PR08MB7411.eurprd08.prod.outlook.com
+ ([fe80::9206:40ba:ef7e:729e%4]) with mapi id 15.20.7472.042; Fri, 19 Apr 2024
+ 15:39:57 +0000
+From: Ross Burton <Ross.Burton@arm.com>
+To: "perceval.arenou@ptxtrimble.com" <perceval.arenou@ptxtrimble.com>
+CC: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>, Perceval Arenou
+	<perceval.arenou@gmail.com>
+Subject: Re: [oe] [meta-multimedia][PATCH] aravis: new recipe aravis is a
+ vision library for genicam based cameras. aravis project allows to stream
+ from genicam and GigE cameras
+Thread-Topic: [oe] [meta-multimedia][PATCH] aravis: new recipe aravis is a
+ vision library for genicam based cameras. aravis project allows to stream
+ from genicam and GigE cameras
+Thread-Index: AQHakmqH+ieEDtDi2EeFB6nlgy/gRrFvuscA
+Date: Fri, 19 Apr 2024 15:39:57 +0000
+Message-ID: <CA0E3994-47F0-424B-8116-445FE9A13982@arm.com>
 References: <17C71645B7063D93.20815@lists.openembedded.org>
-In-Reply-To: <17C71645B7063D93.20815@lists.openembedded.org>
-From: Perceval Arenou <perceval.arenou@ptxtrimble.com>
-Date: Fri, 19 Apr 2024 16:58:35 +0200
-Message-ID: <CAC=Bj8jjRVm_6DkhJN15ikuVobP+N0eN9QwKM_d9ZQ5yo6QWzg@mail.gmail.com>
-Subject: Re: [External] [oe] [meta-multimedia][PATCH] aravis: new recipe
- aravis is a vision library for genicam based cameras. aravis project allows
- to stream from genicam and GigE cameras
-To: openembedded-devel@lists.openembedded.org
-Cc: Perceval Arenou <perceval.arenou@gmail.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: ptxtrimble.com
-Content-Type: multipart/alternative; boundary="000000000000181f06061674539a"
+ <CAC=Bj8jjRVm_6DkhJN15ikuVobP+N0eN9QwKM_d9ZQ5yo6QWzg@mail.gmail.com>
+In-Reply-To: 
+ <CAC=Bj8jjRVm_6DkhJN15ikuVobP+N0eN9QwKM_d9ZQ5yo6QWzg@mail.gmail.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-mailer: Apple Mail (2.3774.500.171.1.1)
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+x-ms-traffictypediagnostic: 
+	PA4PR08MB7411:EE_|AS2PR08MB9595:EE_|DU6PEPF0000A7E0:EE_|AM9PR08MB6004:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5e29b796-85fd-42ae-61e4-08dc608711b5
+x-checkrecipientrouted: true
+nodisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original: 
+ qdJ1sdGJoJ5Z1bqqpkjt3YvT55iI3v5cJBZD49Es2EP08yCpP0l/2GUf6om4rHishXI2adbP5ZnWYehJ6aewq51Dq2gxxMubcRdB6UQt4awiGq6DdmYyJ25S8LpCTMkN0VizMasrCFuQD/eIdRNs4ll1rv/Kr9I7sLD0+IoIbprJqA7PehDXkr3Va7UQi2lcYbH+tNPomlZokinM8Eiv+cxoNMc7W3Oh3Mxr2siShUvalNYIrxxWOrGnNRKiRImriKBjC8HREqM0neCxn5tbdU28bBxqYiExBLaIh2K6XxHvx6fVc1vCQbzQ5IzJKXmAKYVgEAHQeRZPI8Wvm4mdD4rDXwRTQ3gEXGG/JrkAGBQZBPKvImqPoXIki9mKSZaIO4kG5Mo85PYsxNyUmAs1iT8Mq0QkytWH7saRd3Db54vaey+AV2TXB172VqrFJoGT7Ke4wFzoHPiOzqrNrnbWFUVGrrynvIYqX/Rh/JX3iF49TimP/xvHtR0QrdtZ0zS4jGSm9PjPqZfcgJAFXvQTscmpEjWS7YbTRPrJomLgQ0FobnYbLehuPWny8BAP6Q/kUUxDpMsaLDS4+O4cxOZwWK0yu/VJgpFfOx4AKosdtGlANG/pQFCKoDGzNNxyM/uVJIWMnRIuz45he6B326tnJnZoUzmfwpsq1ft1GD48orWpDSmRx+i+wikqK2N+66ATlUiHIyzI6FtvWN7n2DcBdk78ffYeTBz7M1tIZH/emKU=
+X-Forefront-Antispam-Report-Untrusted: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PA4PR08MB7411.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(1800799015)(376005)(366007)(38070700009);DIR:OUT;SFP:1101;
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <6C45CF16AF226647B33C74C97C8FD59B@eurprd08.prod.outlook.com>
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR08MB9595
+Original-Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: 
+ DU6PEPF0000A7E0.eurprd02.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 
+	9f843948-26dd-42f3-f48c-08dc6086f78b
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	oQrM2sw7KZPAY53L8ewfbd+/KyKAwC8KC3kufnxmH8sStw1M+7kQYoyMXjfKJXZ29Twsz0OkG1mfL1r1vKyufsmHR73sLAj8qiA75AlW0pf95eNXakJ8Q8aqRx93XHpDdFig+nQcCBSVcxWcTzNyI80DD8bOpHrtl6wgaDRo6NFkrC01Y5g/sw867NDnRD0hzrG5ItPyj/46WTsYVGWJ8fckligMuKz13cDIYNdKZn4DNbRwdcXXYohnWzoobWKZo2Cp4Ma7YBQFi1WlDgGaWpcbF/6j+PT57uRVnp+azsXolS7gxWsRaMeChhigb38elSjuRbxuG3Ry2gGON6Hwfi92F6w4NEfWZP56gpiOpOK4IOE46n8DHqvTYxO4kQ0Wx7NDJEcESnEj+CfP9xdLL6tFRrtyAFKLCtWMSjOeT9IV4gdpS3IyBxZOQrGiyNd28aaR368Hcom3kN7M2dfKHmhjTAZEuRSaFNn83lLxkVe9qB0143g1joJ/sqNn4QIJJ9OdZI3Ju2aSKblciwkupfOay3SVRCF4p7N8bz8Vd3FGXivhxShY9ZLXHeipwSSlHu9VZCOy5tTWiiE43pmGWR1QPDN9aBVAospXURFIEXCuIJb2SdG1qqq1kMZhQSXi0S5fjQ7cNndsdtkzEn54vuA8Nlu3H+CFGk7l+Hk/nNlwRWdqQ3sgIkujrwNWR9jKDFbZV1veIcmq8jE/+WCEbPfqBA7rdEnFiWb9eU9R79U5en7oZB6nrs/XyZBIrkeX
+X-Forefront-Antispam-Report: 
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230031)(82310400014)(36860700004)(1800799015)(376005);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Apr 2024 15:40:41.3719
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5e29b796-85fd-42ae-61e4-08dc608711b5
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	DU6PEPF0000A7E0.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR08MB6004
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 19 Apr 2024 14:58:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110062
+ <openembedded-devel@lists.openembedded.org>; Fri, 19 Apr 2024 15:40:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110063
 
---000000000000181f06061674539a
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-From: Perceval Arenou <perceval.arenou@gmail.com>
-
----
- .../aravis/aravis_0.8.31.bb                   | 41 +++++++++++++++++++
- 1 file changed, 41 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/aravis/
-aravis_0.8.31.bb
-
-diff --git a/meta-multimedia/recipes-multimedia/aravis/aravis_0.8.31.bb
-b/meta-multimedia/recipes-multimedia/aravis/aravis_0.8.31.bb
-new file mode 100644
-index 000000000..2cfe3fdfa
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/aravis/aravis_0.8.31.bb
-@@ -0,0 +1,41 @@
-+SUMMARY =3D "A vision library for genicam based cameras"
-+DESCRIPTION =3D "\
-+    Aravis is a glib/gobject based library for video acquisition using
-Genicam cameras.\
-+    It currently implements the gigabit ethernet and USB3 protocols used
-by industrial cameras.\
-+    It also provides a basic ethernet camera simulator and a simple video
-viewer.\
-+"
-+AUTHOR =3D "Emmanuel Pacaud"
-+HOMEPAGE =3D "https://github.com/AravisProject/aravis"
-+LICENSE =3D "LGPL-2.1"
-+LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd255951079008b364516=
-c"
-+
-+DEPENDS +=3D "\
-+    glib-2.0 \
-+    glib-2.0-native \
-+    libxml2 \
-+    zlib \
-+"
-+
-+SRC_URI =3D "
-https://github.com/AravisProject/aravis/releases/download/${PV}/${BPN}-${PV=
-}.tar.xz
-"
-+SRC_URI[sha256sum] =3D
-"9c4ebe6273ed3abe466cb6ed8fa5c132bdd7e9a9298ca43fa0212c4311a084da"
-+
-+# These options are found in AravisProject/aravis meson_options.txt
-+EXTRA_OEMESON +=3D "\
-+    -Ddocumentation=3Ddisabled \
-+    -Dfast-heartbeat=3Dfalse \
-+    -Dpacket-socket=3Denabled \
-+    -Dtests=3Dfalse \
-+"
-+
-+inherit_defer meson pkgconfig ${@bb.utils.contains('PACKAGECONFIG',
-'introspection', 'gobject-introspection', '', d)}
-+
-+PACKAGECONFIG ?=3D "gstreamer usb viewer"
-+PACKAGECONFIG[gstreamer] =3D "-Dgst-plugin=3Denabled, -Dgst-plugin=3Ddisab=
-led,
-gstreamer1.0 gstreamer1.0-plugins-base,"
-+PACKAGECONFIG[introspection] =3D "-Dintrospection=3Denabled,
--Dintrospection=3Ddisabled, gobject-introspection,"
-+PACKAGECONFIG[usb] =3D "-Dusb=3Denabled, -Dusb=3Ddisabled, libusb1,"
-+PACKAGECONFIG[viewer] =3D "-Dviewer=3Denabled, -Dviewer=3Ddisabled, gtk+3
-gstreamer1.0-plugins-base,"
-+
-+FILES:${PN} +=3D "\
-+    ${datadir} \
-+    ${libdir}/gstreamer-1.0/libgstaravis.0.8.so \
-+"
---=20
-2.43.0
-
-
-
---000000000000181f06061674539a
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-<html><head><style type=3D"text/css">.style1 {font-family: "Times New Roman=
-";}</style></head><body><div dir=3D"ltr"><div dir=3D"ltr"><div class=3D"gma=
-il_default" style=3D"color:rgb(0,0,0)">From: Perceval Arenou &lt;<a href=3D=
-"mailto:perceval.arenou@gmail.com">perceval.arenou@gmail.com</a>&gt;<br></d=
-iv><div class=3D"gmail_default" style=3D"color:rgb(0,0,0)"><br></div><div c=
-lass=3D"gmail_default" style=3D"color:rgb(0,0,0)">---<br>=C2=A0.../aravis/<=
-a href=3D"http://aravis_0.8.31.bb">aravis_0.8.31.bb</a> =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 41 +++++++++++++++++++<br>=
-=C2=A01 file changed, 41 insertions(+)<br>=C2=A0create mode 100644 meta-mul=
-timedia/recipes-multimedia/aravis/<a href=3D"http://aravis_0.8.31.bb">aravi=
-s_0.8.31.bb</a><br><br>diff --git a/meta-multimedia/recipes-multimedia/arav=
-is/<a href=3D"http://aravis_0.8.31.bb">aravis_0.8.31.bb</a> b/meta-multimed=
-ia/recipes-multimedia/aravis/<a href=3D"http://aravis_0.8.31.bb">aravis_0.8=
-.31.bb</a><br>new file mode 100644<br>index 000000000..2cfe3fdfa<br>--- /de=
-v/null<br>+++ b/meta-multimedia/recipes-multimedia/aravis/<a href=3D"http:/=
-/aravis_0.8.31.bb">aravis_0.8.31.bb</a><br>@@ -0,0 +1,41 @@<br>+SUMMARY =3D=
- &quot;A vision library for genicam based cameras&quot;<br>+DESCRIPTION =3D=
- &quot;\<br>+ =C2=A0 =C2=A0Aravis is a glib/gobject based library for video=
- acquisition using Genicam cameras.\<br>+ =C2=A0 =C2=A0It currently impleme=
-nts the gigabit ethernet and USB3 protocols used by industrial cameras.\<br=
->+ =C2=A0 =C2=A0It also provides a basic ethernet camera simulator and a si=
-mple video viewer.\<br>+&quot;<br>+AUTHOR =3D &quot;Emmanuel Pacaud&quot;<b=
-r>+HOMEPAGE =3D &quot;<a href=3D"https://github.com/AravisProject/aravis">h=
-ttps://github.com/AravisProject/aravis</a>&quot;<br>+LICENSE =3D &quot;LGPL=
--2.1&quot;<br>+LIC_FILES_CHKSUM =3D &quot;file://COPYING;md5=3D4fbd65380cdd=
-255951079008b364516c&quot;<br>+<br>+DEPENDS +=3D &quot;\<br>+ =C2=A0 =C2=A0=
-glib-2.0 \<br>+ =C2=A0 =C2=A0glib-2.0-native \<br>+ =C2=A0 =C2=A0libxml2 \<=
-br>+ =C2=A0 =C2=A0zlib \<br>+&quot;<br>+<br>+SRC_URI =3D &quot;<a href=3D"h=
-ttps://github.com/AravisProject/aravis/releases/download/${PV}/${BPN}-${PV}=
-.tar.xz">https://github.com/AravisProject/aravis/releases/download/${PV}/${=
-BPN}-${PV}.tar.xz</a>&quot;<br>+SRC_URI[sha256sum] =3D &quot;9c4ebe6273ed3a=
-be466cb6ed8fa5c132bdd7e9a9298ca43fa0212c4311a084da&quot;<br>+<br>+# These o=
-ptions are found in AravisProject/aravis meson_options.txt<br>+EXTRA_OEMESO=
-N +=3D &quot;\<br>+ =C2=A0 =C2=A0-Ddocumentation=3Ddisabled \<br>+ =C2=A0 =
-=C2=A0-Dfast-heartbeat=3Dfalse \<br>+ =C2=A0 =C2=A0-Dpacket-socket=3Denable=
-d \<br>+ =C2=A0 =C2=A0-Dtests=3Dfalse \<br>+&quot;<br>+<br>+inherit_defer m=
-eson pkgconfig ${@bb.utils.contains(&#39;PACKAGECONFIG&#39;, &#39;introspec=
-tion&#39;, &#39;gobject-introspection&#39;, &#39;&#39;, d)}<br>+<br>+PACKAG=
-ECONFIG ?=3D &quot;gstreamer usb viewer&quot;<br>+PACKAGECONFIG[gstreamer] =
-=3D &quot;-Dgst-plugin=3Denabled, -Dgst-plugin=3Ddisabled, gstreamer1.0 gst=
-reamer1.0-plugins-base,&quot;<br>+PACKAGECONFIG[introspection] =3D &quot;-D=
-introspection=3Denabled, -Dintrospection=3Ddisabled, gobject-introspection,=
-&quot;<br>+PACKAGECONFIG[usb] =3D &quot;-Dusb=3Denabled, -Dusb=3Ddisabled, =
-libusb1,&quot;<br>+PACKAGECONFIG[viewer] =3D &quot;-Dviewer=3Denabled, -Dvi=
-ewer=3Ddisabled, gtk+3 gstreamer1.0-plugins-base,&quot;<br>+<br>+FILES:${PN=
-} +=3D &quot;\<br>+ =C2=A0 =C2=A0${datadir} \<br>+ =C2=A0 =C2=A0${libdir}/g=
-streamer-1.0/<a href=3D"http://libgstaravis.0.8.so">libgstaravis.0.8.so</a>=
- \<br>+&quot;<br>-- <br>2.43.0<br><br></div></div></div>
-<br><br><p style=3D"font-family: Verdana; font-size:10pt; color:#666666;"><=
-b>   </b></p><p style=3D"font-family: Verdana; font-size:8pt; color:#666666=
-;"><br><br> </p></body></html>
-
---000000000000181f06061674539a--
-
+T24gMTkgQXByIDIwMjQsIGF0IDE1OjU4LCBQZXJjZXZhbCB2aWEgbGlzdHMub3BlbmVtYmVkZGVk
+Lm9yZyA8cGVyY2V2YWwuYXJlbm91PXB0eHRyaW1ibGUuY29tQGxpc3RzLm9wZW5lbWJlZGRlZC5v
+cmc+IHdyb3RlOg0KPiArIyBUaGVzZSBvcHRpb25zIGFyZSBmb3VuZCBpbiBBcmF2aXNQcm9qZWN0
+L2FyYXZpcyBtZXNvbl9vcHRpb25zLnR4dA0KDQpObyBuZWVkIHRvIGNvbW1lbnQgd2hlcmUgdGhl
+eSBjYW1lIGZyb20sIHRoaXMgaXMgdGhlIG9ubHkgcGxhY2UgdGhleSBjYW4gYmUgZGVmaW5lZC4N
+Cg0KPiArRVhUUkFfT0VNRVNPTiArPSAiXA0KPiArICAgIC1EZG9jdW1lbnRhdGlvbj1kaXNhYmxl
+ZCBcDQoNCklmIHdvdWxkIGJlIGdvb2QgdG8gdXNlIHRoZSBnaS1kb2NnZW4gY2xhc3MgYW5kIHJl
+c3BlY3QgdGhlIGFwaS1kb2N1bWVudGF0aW9uIERJU1RST19GRUFUVVJFIGluc3RlYWQgb2YganVz
+dCB0dXJuaW5nIHRoaXMgb2ZmLg0KDQo+ICsgICAgLURmYXN0LWhlYXJ0YmVhdD1mYWxzZSBcDQoN
+CkRlZmF1bHQgdmFsdWUsIHJlbW92ZS4NCg0KPiArICAgIC1EcGFja2V0LXNvY2tldD1lbmFibGVk
+IFwNCg0KQ2Fu4oCZdCB5b3UgbGVhdmUgdGhpcyBhcyB0aGUgZGVmYXVsdCBhbmQgbGV0IE1lc29u
+IGRldGVjdD8NCg0KPiAraW5oZXJpdF9kZWZlciBtZXNvbiBwa2djb25maWcgJHtAYmIudXRpbHMu
+Y29udGFpbnMoJ1BBQ0tBR0VDT05GSUcnLCAnaW50cm9zcGVjdGlvbicsICdnb2JqZWN0LWludHJv
+c3BlY3Rpb24nLCAnJywgZCl9DQoNCk9ubHkgZGVmZXIgZ29iamVjdC1pbnRyb3NwZWN0aW9uLCBu
+b3QgdGhlIG90aGVycy4NCg0KPiArUEFDS0FHRUNPTkZJR1tpbnRyb3NwZWN0aW9uXSA9ICItRGlu
+dHJvc3BlY3Rpb249ZW5hYmxlZCwgLURpbnRyb3NwZWN0aW9uPWRpc2FibGVkLCBnb2JqZWN0LWlu
+dHJvc3BlY3Rpb24s4oCdDQoNClRoZSBnb2JqZWN0LWludHJvc3BlY3Rpb24gY2xhc3Mgd2lsbCBk
+byB0aGlzIGZvciB5b3UsIHJlbW92ZSB0aGlzIGxpbmUuDQoNClJvc3M=
 
