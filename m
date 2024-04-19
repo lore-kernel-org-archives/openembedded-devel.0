@@ -1,121 +1,140 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C8C26C4345F
-	for <webhook@archiver.kernel.org>; Fri, 19 Apr 2024 17:26:23 +0000 (UTC)
-Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
- by mx.groups.io with SMTP id smtpd.web11.27251.1713547573546838384
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B50A7C4345F
+	for <webhook@archiver.kernel.org>; Fri, 19 Apr 2024 17:27:03 +0000 (UTC)
+Received: from mail-oa1-f51.google.com (mail-oa1-f51.google.com [209.85.160.51])
+ by mx.groups.io with SMTP id smtpd.web11.27269.1713547617559931641
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 Apr 2024 10:26:13 -0700
+ Fri, 19 Apr 2024 10:26:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
-Received: from fwd84.aul.t-online.de (fwd84.aul.t-online.de [10.223.144.110])
-	by mailout03.t-online.de (Postfix) with SMTP id C7B1439EA5
-	for <openembedded-devel@lists.openembedded.org>; Fri, 19 Apr 2024 19:26:11 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.163.36.159]) by fwd84.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1rxs03-1TUKrR0; Fri, 19 Apr 2024 19:26:11 +0200
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-multimedia][PATCH] pipewire: update 1.0.4 -> 1.0.5
-Date: Fri, 19 Apr 2024 19:26:30 +0200
-Message-ID: <20240419172630.384771-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.44.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=VRpuZ7kV;
+ spf=pass (domain: gmail.com, ip: 209.85.160.51, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f51.google.com with SMTP id 586e51a60fabf-238e171b118so1229415fac.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Apr 2024 10:26:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1713547617; x=1714152417; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=9wWuEbsEg408QZVRFPxanSQ7IRiZfKfLu6agWCkmGkc=;
+        b=VRpuZ7kVEs6Ir6sympK3Iks+x/QzsvYEoL11ylav6gDE4vYRYw39NUSJVBHTTkcS9B
+         /asPRyShym1HuhEbfDZlVHpUk4MyVG7ZdDq7PmHLm5v/LrA5juze+oUznfTxMJ1QkGDg
+         vBY7FUl37crCDT90bm8muVrTgdTGXCWyf0PdQaQFziLDZFLFTh6fBJRO4naDacP/8e+M
+         eyW/RPx8d8PfHerI03nzkCFcGMjxf3eQh2KX/tsahBaGd0N5gB9zv+NwQ7vBoeecLHR1
+         j04uB2/RULcWdHbd1/+aQzcE7ctmNjiARYnd/iWvO3+EopSNNPFLwCRZC8Kdaq7DqURP
+         OZNw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1713547617; x=1714152417;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=9wWuEbsEg408QZVRFPxanSQ7IRiZfKfLu6agWCkmGkc=;
+        b=OlJern6+JxXw9o+7OUpGURRe11THVD4n/VnmA2svukMrWAFCS6WamAq+MxKRzj2/GA
+         MU5vayTgRbNOBus/NqGPPTFYrWU+jSPoPjq1q8ahm9Uk3yqlLJtYSoRmUjwGNXzFkyjh
+         3mqPEAQ2vI6+/oCHPM2zWzLk3cDwGMgPAZh4g2oQ+gHNfBLFCCt7pKAOlVeC0kXYmjwd
+         Q9cGYMCPrpBD5MdjmaDbPmviegM79NXgCoqRvVAFqrfrO553Kzn0oQlH7cp2EfVC4l+Y
+         fcWyeWFE1C0GNm4VDH1z4fTzB7LZhsResAOKizvqjcWSe8OSEkLeO7JfXukFpUTgEtBo
+         j2UA==
+X-Gm-Message-State: AOJu0Yy8wav2vvHCozEgM5yW6KRalkKV7S700dzWuQBjU5o/3FJyRfA2
+	DYoR3bcKJVWRQxnmzl9gABEvYQmeVvLVlRph566q5nH71gXqCkKG1lwocLIPh4EpHlnTaUiYADy
+	qdldrGTHPxR7E0nB9trFk2nC7nC6cUz37
+X-Google-Smtp-Source: AGHT+IHupQgIMHxjDL3tTcwWXSPmuEOwN0uOnUyg6HCGkJ8rwnq4uouY+eiFel32CpBKY5QLU0j7e0YRI4HJmRVIOxw=
+X-Received: by 2002:a05:6870:658f:b0:21f:9c60:dba8 with SMTP id
+ fp15-20020a056870658f00b0021f9c60dba8mr3317439oab.4.1713547616781; Fri, 19
+ Apr 2024 10:26:56 -0700 (PDT)
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1713547571-CBFFCDF1-EA09E3A4/0/0 CLEAN NORMAL
-X-TOI-MSGID: 13add7e0-89ba-4b6f-9b7e-feea029d250a
-Content-Transfer-Encoding: quoted-printable
+References: <CAMKF1sp6qeka7U4Ocb1vfq5u+x4Fg-3F3vVs7L62QvH5KHfZ7g@mail.gmail.com>
+ <7441.1713513902920754891@lists.openembedded.org>
+In-Reply-To: <7441.1713513902920754891@lists.openembedded.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 19 Apr 2024 10:26:45 -0700
+Message-ID: <CAMKF1sqHHnvM-5k5ytSHwAkw_9mYTxkYZ_TB0PRaDBhZ5vbshw@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH] python3-twisted: upgrade 22.10.0 -> 24.3.0
+To: gudnimar@noxmedical.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000010c970616766544"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 19 Apr 2024 17:26:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110065
+ <openembedded-devel@lists.openembedded.org>; Fri, 19 Apr 2024 17:27:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110066
 
-PipeWire 1.0.5 (2024-04-15)
+--000000000000010c970616766544
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-This is a bugfix release that is API and ABI compatible with previous
-1.0.x releases.
+On Fri, Apr 19, 2024 at 1:05=E2=80=AFAM Gu=C3=B0ni M=C3=A1r Gilbert via lis=
+ts.openembedded.org
+<gudnimar=3Dnoxmedical.com@lists.openembedded.org> wrote:
 
-Highlights
-  - pw_stream can now report timestamps on buffers and the expected
-    amount of samples for the resampler.
-  - The GStreamer element now has more correct timestamps using the new
-    pw_stream timestamps as a fallback.
-  - The FFADO module now handles suspend and resume better.
-  - A regression in v4l2 was fixed when parsing malformed filters.
-  - A potential memory/fd leak was fixed in client-node.
-  - Many more small bugfixes and improvements.
+> On Thu, Apr 18, 2024 at 11:33 PM, Khem Raj wrote:
+>
+> master-next is staging many patches and is always in flux and
+> primarily meant for CI, so please send a v2 of this with the feedback
+> addressed.
+>
+> Hi Khem,
+> Thank you for the reply, I did not know this. I will then submit a new
+> patch. I'm currently travelling but will post the patch likely next Monda=
+y.
+> :)
 
-PipeWire
-  - pw_stream now reports the expected resampler input or output size in
-    the pw_time structure. (#3750)
-  - pw_stream now also adds a time field to the buffer, which contains th=
-e
-    time of the graph when the buffer was received in the stream.
-  - Fix a compiler error when compiling with -Werror=3Dshadow. (#3915)
-  - The config parser will warn when invalid config is detected.
 
-Modules
-  - The FFADO module now opens and closes when suspending. This fixes som=
-e
-    problems when FFADO properties are changed while suspended. (#3558)
-  - Filter-chain will now warn when invalid config is detected.
-  - Echo-cancel will now handle manage the state of the echo-cancel plugi=
-n
-    better, making sure run() is not called after deactivate().
-  - Fix some potential memory/fd leaks in client-node.
+That is fine
 
-SPA
-  - Improve reading the bound ALSA controls.
-  - The resampler can now also report the number of expected output sampl=
-es.
-  - The ALSA ACP device objects have some more properties like the card.i=
-d
-    and alsa.components. (#3912)
-  - Fix a potential string corruption when parsing JSON strings.
-  - V4l2 now sets the latency on the port. (#3910)
-  - alsa-udev now has an option to expose the device even if busy. (#3914=
-)
-  - Improve null-audio-sink channel handling. (#3931)
-  - v4l2 will now drop the first frame because it often contains wrong
-    timestamps or garbage. (#3910)
-  - A regression in v4l2 was fixed where invalid/empty properties in the
-    filter would make it error early. (#3959)
 
-GStreamer
-  - The source now falls back to the new pw_buffer time for the timestamp=
-s.
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#110057):
+> https://lists.openembedded.org/g/openembedded-devel/message/110057
+> Mute This Topic: https://lists.openembedded.org/mt/105594516/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
 
-Docs
-  - Sync with the master branch.
+--000000000000010c970616766544
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- .../pipewire/{pipewire_1.0.4.bb =3D> pipewire_1.0.5.bb}           | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-multimedia/recipes-multimedia/pipewire/{pipewire_1.0.4.bb =3D=
-> pipewire_1.0.5.bb} (99%)
+<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Fri, Apr 19, 2024 at 1:05=E2=80=AFAM Gu=C3=B0ni M=C3=A1r=
+ Gilbert via <a href=3D"http://lists.openembedded.org">lists.openembedded.o=
+rg</a> &lt;gudnimar=3D<a href=3D"mailto:noxmedical.com@lists.openembedded.o=
+rg">noxmedical.com@lists.openembedded.org</a>&gt; wrote:<br></div><blockquo=
+te class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc so=
+lid;padding-left:1ex">On Thu, Apr 18, 2024 at 11:33 PM, Khem Raj wrote:<br>
+<blockquote>master-next is staging many patches and is always in flux and<b=
+r>primarily meant for CI, so please send a v2 of this with the feedback<br>=
+addressed.</blockquote>
+Hi Khem,<br>Thank you for the reply, I did not know this. I will then submi=
+t a new patch. I&#39;m currently travelling but will post the patch likely =
+next Monday. :)
+</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">That is fine=C2=
+=A0</div><div dir=3D"auto"><br></div><blockquote class=3D"gmail_quote" styl=
+e=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex" dir=3D"=
+auto"><br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#110057): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/110057" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/110057</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/105594516/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/105594516/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
 
-diff --git a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.0.4.b=
-b b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.0.5.bb
-similarity index 99%
-rename from meta-multimedia/recipes-multimedia/pipewire/pipewire_1.0.4.bb
-rename to meta-multimedia/recipes-multimedia/pipewire/pipewire_1.0.5.bb
-index e9c83dd23..c8ac04d59 100644
---- a/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.0.4.bb
-+++ b/meta-multimedia/recipes-multimedia/pipewire/pipewire_1.0.5.bb
-@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM =3D " \
-=20
- DEPENDS =3D "dbus ncurses"
-=20
--SRCREV =3D "f2874ad1c2f7f0b9a1da05cc4f402b3ea3761ee6"
-+SRCREV =3D "a2287be601710eea0d073261223ec34b92384c8a"
- SRC_URI =3D "git://gitlab.freedesktop.org/pipewire/pipewire.git;branch=3D=
-1.0;protocol=3Dhttps"
-=20
- S =3D "${WORKDIR}/git"
---=20
-2.44.0
-
+--000000000000010c970616766544--
 
