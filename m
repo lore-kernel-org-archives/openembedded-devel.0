@@ -1,212 +1,209 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <perceval.arenou@ptxtrimble.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D7B8AC4345F
-	for <webhook@archiver.kernel.org>; Fri, 19 Apr 2024 14:08:32 +0000 (UTC)
-Received: from mail-yb1-f180.google.com (mail-yb1-f180.google.com [209.85.219.180])
- by mx.groups.io with SMTP id smtpd.web10.22089.1713535703009264696
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 22420C4345F
+	for <webhook@archiver.kernel.org>; Fri, 19 Apr 2024 14:58:53 +0000 (UTC)
+Received: from us-smtp-delivery-109.mimecast.com (us-smtp-delivery-109.mimecast.com [170.10.129.109])
+ by mx.groups.io with SMTP id smtpd.web11.23394.1713538732365489086
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 19 Apr 2024 07:08:23 -0700
+ Fri, 19 Apr 2024 07:58:52 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=m+s8ViLE;
- spf=pass (domain: gmail.com, ip: 209.85.219.180, mailfrom: ticotimo@gmail.com)
-Received: by mail-yb1-f180.google.com with SMTP id 3f1490d57ef6-de466c64161so1979478276.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Apr 2024 07:08:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1713535702; x=1714140502; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=ymY9AuoHtzYCEyQyoEZENi3c1In5Kmy1CJq/WB3A8mw=;
-        b=m+s8ViLE26s8VvhSd5wIbFkH/h8DDq+J9ibZBw6lgVJQkdoLzouFKED5kg6laBPaac
-         56uS44LLhieZ34riVTdG2GdPEJyhLX2JxL6wqoCypufrNjC8bk7PdKeSWmj1RrpHvzML
-         poZ1LYNPoJobFI7JbXtirlCjEEpe9jzmbXk2DKXox0k5+zVFRFJp3bmwE8ZZSpEIYcUL
-         816IWIV5GNCiumH16qgmUPXlcNU/1HpW7zwhn1FV1RTPiYviEHmeC4corrm6eqzWqsbe
-         8YVWoaANT/6O/Xs1o+N4yyW/DZ6ElSrAW1Zc9TF4S2Hj9MbVQ6fLK6pFYuBYYopr8ubQ
-         I0QQ==
+ dkim=pass header.i=@ptxtrimble.com header.s=mimecast20240319 header.b=kW/4spIE;
+ spf=pass (domain: ptxtrimble.com, ip: 170.10.129.109, mailfrom: perceval.arenou@ptxtrimble.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ptxtrimble.com;
+	s=mimecast20240319; t=1713538731;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=wVDW/aYx06dOP2fBs/7/GfJ0ABVQNTIDdpyNLyOB8AI=;
+	b=kW/4spIEjFwHX42f9TQXx17UynDfTdhgSf5qGsAQDK0QQvgB1Qu2OoUOhsoX8KxCvRVZ1H
+	RdxqJABpZYvo+xoRi5PgZEQSwJqGmh/goAJg/xsLZkYxEC4kfgxhXAMDm0V8BRNMlZDISq
+	xYAGzfVXA5G4PN/QN85P2U4+CYXyYME=
+Received: from mail-oa1-f69.google.com (mail-oa1-f69.google.com
+ [209.85.160.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-435-9VRVj3OGMmOrH0TXuZ-ytw-1; Fri, 19 Apr 2024 10:58:49 -0400
+X-MC-Unique: 9VRVj3OGMmOrH0TXuZ-ytw-1
+Received: by mail-oa1-f69.google.com with SMTP id 586e51a60fabf-22f264ea760so2359191fac.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 19 Apr 2024 07:58:48 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1713535702; x=1714140502;
+        d=1e100.net; s=20230601; t=1713538728; x=1714143528;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=ymY9AuoHtzYCEyQyoEZENi3c1In5Kmy1CJq/WB3A8mw=;
-        b=UZn39BOfbTSlun4cEEDxXMeoqBnSyOsB0pwucAaR/4XQ0RWYx1IGOomyvfIJ4qz1J9
-         m42QHs6sFMzy5c4qm6809TP5y0y05ROWgVmuu41b+WRq4KJvguo3h9pzCmnYxax/5uOP
-         MNyZ1Wk8unSM7R3YEThqTi1OIBJ/sF/6gl/ChdGzK9NOBWR/XARTLizKtoqoOIhedxGI
-         5kYa9eLu7/CdMTx6Ty2aOIjFgb1s2R6EL6+dkVh/vfgRp7P7HUXxPAV2he+0cYvsuklL
-         Zc7uPAm0Brc3/qD0DzEdMAa6+lB4lRHzw2wMv/IT05EbUcpuoEgUdUH2PpyuXhSLs2W6
-         e2Gg==
-X-Gm-Message-State: AOJu0Yz6wYXywz6//MlmJnDRgn4tBDmzm08Dun5EksxccVSaq2JUk4CS
-	XPXfI4+bO1B9iw4SwprcL+1Y3kJmotCYE+k5DY420nzHW2YkZ5iBZhUr9K/idIWx0QrIVZm8zOs
-	q/jdAIm1g0KjvhKVR1/i8JDOLB6lUaQ==
-X-Google-Smtp-Source: AGHT+IHAcbI0lBQBljZa+SmSzBxDotP2JHt6pF+j+N7Wz3vGTR70+7j4m1zgchzwh5XP+q2gUiyuTt7EZT2T13BTsRs=
-X-Received: by 2002:a25:b199:0:b0:de1:dcc:2a8b with SMTP id
- h25-20020a25b199000000b00de10dcc2a8bmr2344123ybj.59.1713535701946; Fri, 19
- Apr 2024 07:08:21 -0700 (PDT)
+        bh=Lj1BDYV0QNUdxBZRLSvuKEi4/GWUxZ+MTC1qHiEGbZ0=;
+        b=dk6v6kfwJKEO9ZdlXCbdTJ+tqkBixM4pPYD1ExQyqfWD8nlrD740nn4w/r25n2dxea
+         I0s3X1pF00ZhYD3btURME/jkng0OBvg7B+qkZmWhzXnK2NZHDJRxCpAF+rRZnPiQV/S4
+         zspg6ErMTOOMK/iGHl7c/ihuWl3RfJ+7PEKhdJLdCS9kvkqh2tYr0AWZeO3M2nVtviTH
+         /vM/V6/oZTckwMg1xbyvLF8VSxL20Dt40zojHnWqO4K/aO0BINt5ZntfRnKgQVTntcYV
+         uBE3TO/Y0mSuKO9hqFxo5Dlm+XMlb0+pjJmRB0vByWXHV1xG2nuzkfqCcWStJtm2Zs7J
+         Dvuw==
+X-Gm-Message-State: AOJu0Ywhon9nIE9bZOBiTwGvkfcSIEcHhtPVUjH3G82h1w/hQok1ePNK
+	xRzjvcqtcNqvUmbr7mjTPeZJkGhklcoB28tIfTAW5OPU5k53kRjcQ3CLPqaLOxfPC2Wx+Y3y5tT
+	YlSsk//ZVSq+nUjN8ZsEYkEitqNj1N8pMMG+1tq+9TAVqqKXZJ8WZmVNC0Tyw5ZP6WNHJ6E4llz
+	gBor0380dsyIXXM0BB5Wid6r7uPAsik7dVPWYPGlD/RFuGb8OtwYfZlN3wg5zP8Az5FBPgBKQNw
+	cLk1sKp0xbT1dH16NA=
+X-Received: by 2002:a05:6870:b487:b0:221:8e01:4c6f with SMTP id y7-20020a056870b48700b002218e014c6fmr3029290oap.36.1713538727872;
+        Fri, 19 Apr 2024 07:58:47 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IE2R93i7lucmtAOeVwLs5xCYfRWkq5Ax2j7BdgWnNDrAXxCCx9ToKLG4e8lpFySnZg1sWX5cwP0z9QuNxiCDbY=
+X-Received: by 2002:a05:6870:b487:b0:221:8e01:4c6f with SMTP id
+ y7-20020a056870b48700b002218e014c6fmr3029199oap.36.1713538726339; Fri, 19 Apr
+ 2024 07:58:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240418092910.3585-1-gudnimar@noxmedical.com>
-In-Reply-To: <20240418092910.3585-1-gudnimar@noxmedical.com>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Fri, 19 Apr 2024 07:08:10 -0700
-Message-ID: <CANx9H-DfZSKApi=KS2HK+pnrEuv799nn3_QrE76c5sMq57-8ZA@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH] python3-incremental: cleanup RDEPENDS
-To: gudnimar@noxmedical.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000d31a930616739e4f"
+References: <17C71645B7063D93.20815@lists.openembedded.org>
+In-Reply-To: <17C71645B7063D93.20815@lists.openembedded.org>
+From: Perceval Arenou <perceval.arenou@ptxtrimble.com>
+Date: Fri, 19 Apr 2024 16:58:35 +0200
+Message-ID: <CAC=Bj8jjRVm_6DkhJN15ikuVobP+N0eN9QwKM_d9ZQ5yo6QWzg@mail.gmail.com>
+Subject: Re: [External] [oe] [meta-multimedia][PATCH] aravis: new recipe
+ aravis is a vision library for genicam based cameras. aravis project allows
+ to stream from genicam and GigE cameras
+To: openembedded-devel@lists.openembedded.org
+Cc: Perceval Arenou <perceval.arenou@gmail.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: ptxtrimble.com
+Content-Type: multipart/alternative; boundary="000000000000181f06061674539a"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 19 Apr 2024 14:08:32 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110061
+ <openembedded-devel@lists.openembedded.org>; Fri, 19 Apr 2024 14:58:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110062
 
---000000000000d31a930616739e4f
-Content-Type: text/plain; charset="UTF-8"
+--000000000000181f06061674539a
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Apr 18, 2024 at 2:29=E2=80=AFAM Gu=C3=B0ni M=C3=A1r Gilbert via lis=
-ts.openembedded.org
-<gudnimar=3Dnoxmedical.com@lists.openembedded.org> wrote:
+From: Perceval Arenou <perceval.arenou@gmail.com>
 
-> incremental package does not need all twisted packages. Only the core
-> package is required.
-> The goal with this change is to minimize dependency memory requirements.
->
-> Signed-off-by: Gu=C3=B0ni M=C3=A1r Gilbert <gudnimar@noxmedical.com>
-> ---
-> .../recipes-devtools/python/python3-incremental_22.10.0.bb | 2 +-
-> 1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-python/recipes-devtools/python/
-> python3-incremental_22.10.0.bb b/meta-python/recipes-devtools/python/
-> python3-incremental_22.10.0.bb
-> index 3d93cc05e..79fa15311 100644
-> --- a/meta-python/recipes-devtools/python/python3-incremental_22.10.0.bb
-> +++ b/meta-python/recipes-devtools/python/python3-incremental_22.10.0.bb
-> @@ -8,7 +8,7 @@ SRC_URI[sha256sum] =3D
-> "912feeb5e0f7e0188e6f42241d2f450002e11bbc0937c65865045854c2
-> inherit pypi setuptools3
->
+---
+ .../aravis/aravis_0.8.31.bb                   | 41 +++++++++++++++++++
+ 1 file changed, 41 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/aravis/
+aravis_0.8.31.bb
 
-This package defines a proper build-backend, so we should also consider
-=E2=80=9Cinherit python_setuptools_build_meta=E2=80=9D instead of setuptool=
-s.
-https://github.com/twisted/incremental/blob/19a308d70d72d0aa95380125988d60a=
-bb23b64e3/pyproject.toml#L7
+diff --git a/meta-multimedia/recipes-multimedia/aravis/aravis_0.8.31.bb
+b/meta-multimedia/recipes-multimedia/aravis/aravis_0.8.31.bb
+new file mode 100644
+index 000000000..2cfe3fdfa
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/aravis/aravis_0.8.31.bb
+@@ -0,0 +1,41 @@
++SUMMARY =3D "A vision library for genicam based cameras"
++DESCRIPTION =3D "\
++    Aravis is a glib/gobject based library for video acquisition using
+Genicam cameras.\
++    It currently implements the gigabit ethernet and USB3 protocols used
+by industrial cameras.\
++    It also provides a basic ethernet camera simulator and a simple video
+viewer.\
++"
++AUTHOR =3D "Emmanuel Pacaud"
++HOMEPAGE =3D "https://github.com/AravisProject/aravis"
++LICENSE =3D "LGPL-2.1"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd255951079008b364516=
+c"
++
++DEPENDS +=3D "\
++    glib-2.0 \
++    glib-2.0-native \
++    libxml2 \
++    zlib \
++"
++
++SRC_URI =3D "
+https://github.com/AravisProject/aravis/releases/download/${PV}/${BPN}-${PV=
+}.tar.xz
+"
++SRC_URI[sha256sum] =3D
+"9c4ebe6273ed3abe466cb6ed8fa5c132bdd7e9a9298ca43fa0212c4311a084da"
++
++# These options are found in AravisProject/aravis meson_options.txt
++EXTRA_OEMESON +=3D "\
++    -Ddocumentation=3Ddisabled \
++    -Dfast-heartbeat=3Dfalse \
++    -Dpacket-socket=3Denabled \
++    -Dtests=3Dfalse \
++"
++
++inherit_defer meson pkgconfig ${@bb.utils.contains('PACKAGECONFIG',
+'introspection', 'gobject-introspection', '', d)}
++
++PACKAGECONFIG ?=3D "gstreamer usb viewer"
++PACKAGECONFIG[gstreamer] =3D "-Dgst-plugin=3Denabled, -Dgst-plugin=3Ddisab=
+led,
+gstreamer1.0 gstreamer1.0-plugins-base,"
++PACKAGECONFIG[introspection] =3D "-Dintrospection=3Denabled,
+-Dintrospection=3Ddisabled, gobject-introspection,"
++PACKAGECONFIG[usb] =3D "-Dusb=3Denabled, -Dusb=3Ddisabled, libusb1,"
++PACKAGECONFIG[viewer] =3D "-Dviewer=3Denabled, -Dviewer=3Ddisabled, gtk+3
+gstreamer1.0-plugins-base,"
++
++FILES:${PN} +=3D "\
++    ${datadir} \
++    ${libdir}/gstreamer-1.0/libgstaravis.0.8.so \
++"
+--=20
+2.43.0
 
 
->
-> RDEPENDS:${PN} +=3D " \
-> - python3-twisted \
-> + python3-twisted-core \
-> python3-click \
-> "
->
-> --
-> 2.34.1
->
->
-> Warning: Copyright Nox Health. This communication is confidential and may
-> contain privileged information. By the use of email over the Internet or
-> other communication systems, Nox Health is not waiving either
-> confidentiality of, or legal privilege in, the content of the email and o=
-f
-> any attachments. If the recipient of this message is not the intended
-> addressee, please call Nox Health immediately by calling (+1) 888.505.028=
-0
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#110052):
-> https://lists.openembedded.org/g/openembedded-devel/message/110052
-> Mute This Topic: https://lists.openembedded.org/mt/105594757/924729
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> ticotimo@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
 
---000000000000d31a930616739e4f
-Content-Type: text/html; charset="UTF-8"
+--000000000000181f06061674539a
+Content-Type: text/html; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
-=3D"gmail_attr">On Thu, Apr 18, 2024 at 2:29=E2=80=AFAM Gu=C3=B0ni M=C3=A1r=
- Gilbert via <a href=3D"http://lists.openembedded.org">lists.openembedded.o=
-rg</a> &lt;gudnimar=3D<a href=3D"mailto:noxmedical.com@lists.openembedded.o=
-rg">noxmedical.com@lists.openembedded.org</a>&gt; wrote:<br></div><blockquo=
-te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left-widt=
-h:1px;border-left-style:solid;padding-left:1ex;border-left-color:rgb(204,20=
-4,204)"><div>incremental package does not need all twisted packages. Only t=
-he core package is required.<br>
-The goal with this change is to minimize dependency memory requirements.<br=
->
-<br>
-Signed-off-by: Gu=C3=B0ni M=C3=A1r Gilbert &lt;<a href=3D"mailto:gudnimar@n=
-oxmedical.com" target=3D"_blank">gudnimar@noxmedical.com</a>&gt;<br>
----<br>
- .../recipes-devtools/python/<a href=3D"http://python3-incremental_22.10.0.=
-bb" target=3D"_blank">python3-incremental_22.10.0.bb</a>      | 2 +-<br>
- 1 file changed, 1 insertion(+), 1 deletion(-)<br>
-<br>
-diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
-incremental_22.10.0.bb" target=3D"_blank">python3-incremental_22.10.0.bb</a=
-> b/meta-python/recipes-devtools/python/<a href=3D"http://python3-increment=
-al_22.10.0.bb" target=3D"_blank">python3-incremental_22.10.0.bb</a><br>
-index 3d93cc05e..79fa15311 100644<br>
---- a/meta-python/recipes-devtools/python/<a href=3D"http://python3-increme=
-ntal_22.10.0.bb" target=3D"_blank">python3-incremental_22.10.0.bb</a><br>
-+++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-increme=
-ntal_22.10.0.bb" target=3D"_blank">python3-incremental_22.10.0.bb</a><br>
-@@ -8,7 +8,7 @@ SRC_URI[sha256sum] =3D &quot;912feeb5e0f7e0188e6f42241d2f45=
-0002e11bbc0937c65865045854c2<br>
- inherit pypi setuptools3</div></blockquote><div dir=3D"auto"><br></div><di=
-v dir=3D"auto">This package defines a proper build-backend, so we should al=
-so consider =E2=80=9Cinherit python_setuptools_build_meta=E2=80=9D instead =
-of setuptools.</div><div dir=3D"auto"><div><a href=3D"https://github.com/tw=
-isted/incremental/blob/19a308d70d72d0aa95380125988d60abb23b64e3/pyproject.t=
-oml#L7">https://github.com/twisted/incremental/blob/19a308d70d72d0aa9538012=
-5988d60abb23b64e3/pyproject.toml#L7</a></div><br></div><blockquote class=3D=
-"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left-width:1px;borde=
-r-left-style:solid;padding-left:1ex;border-left-color:rgb(204,204,204)"><di=
-v dir=3D"auto"><br>
- <br>
- RDEPENDS:${PN} +=3D &quot; \<br>
--    python3-twisted \<br>
-+    python3-twisted-core \<br>
-     python3-click \<br>
- &quot;<br>
- <br>
--- <br>
-2.34.1<br>
+<html><head><style type=3D"text/css">.style1 {font-family: "Times New Roman=
+";}</style></head><body><div dir=3D"ltr"><div dir=3D"ltr"><div class=3D"gma=
+il_default" style=3D"color:rgb(0,0,0)">From: Perceval Arenou &lt;<a href=3D=
+"mailto:perceval.arenou@gmail.com">perceval.arenou@gmail.com</a>&gt;<br></d=
+iv><div class=3D"gmail_default" style=3D"color:rgb(0,0,0)"><br></div><div c=
+lass=3D"gmail_default" style=3D"color:rgb(0,0,0)">---<br>=C2=A0.../aravis/<=
+a href=3D"http://aravis_0.8.31.bb">aravis_0.8.31.bb</a> =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 41 +++++++++++++++++++<br>=
+=C2=A01 file changed, 41 insertions(+)<br>=C2=A0create mode 100644 meta-mul=
+timedia/recipes-multimedia/aravis/<a href=3D"http://aravis_0.8.31.bb">aravi=
+s_0.8.31.bb</a><br><br>diff --git a/meta-multimedia/recipes-multimedia/arav=
+is/<a href=3D"http://aravis_0.8.31.bb">aravis_0.8.31.bb</a> b/meta-multimed=
+ia/recipes-multimedia/aravis/<a href=3D"http://aravis_0.8.31.bb">aravis_0.8=
+.31.bb</a><br>new file mode 100644<br>index 000000000..2cfe3fdfa<br>--- /de=
+v/null<br>+++ b/meta-multimedia/recipes-multimedia/aravis/<a href=3D"http:/=
+/aravis_0.8.31.bb">aravis_0.8.31.bb</a><br>@@ -0,0 +1,41 @@<br>+SUMMARY =3D=
+ &quot;A vision library for genicam based cameras&quot;<br>+DESCRIPTION =3D=
+ &quot;\<br>+ =C2=A0 =C2=A0Aravis is a glib/gobject based library for video=
+ acquisition using Genicam cameras.\<br>+ =C2=A0 =C2=A0It currently impleme=
+nts the gigabit ethernet and USB3 protocols used by industrial cameras.\<br=
+>+ =C2=A0 =C2=A0It also provides a basic ethernet camera simulator and a si=
+mple video viewer.\<br>+&quot;<br>+AUTHOR =3D &quot;Emmanuel Pacaud&quot;<b=
+r>+HOMEPAGE =3D &quot;<a href=3D"https://github.com/AravisProject/aravis">h=
+ttps://github.com/AravisProject/aravis</a>&quot;<br>+LICENSE =3D &quot;LGPL=
+-2.1&quot;<br>+LIC_FILES_CHKSUM =3D &quot;file://COPYING;md5=3D4fbd65380cdd=
+255951079008b364516c&quot;<br>+<br>+DEPENDS +=3D &quot;\<br>+ =C2=A0 =C2=A0=
+glib-2.0 \<br>+ =C2=A0 =C2=A0glib-2.0-native \<br>+ =C2=A0 =C2=A0libxml2 \<=
+br>+ =C2=A0 =C2=A0zlib \<br>+&quot;<br>+<br>+SRC_URI =3D &quot;<a href=3D"h=
+ttps://github.com/AravisProject/aravis/releases/download/${PV}/${BPN}-${PV}=
+.tar.xz">https://github.com/AravisProject/aravis/releases/download/${PV}/${=
+BPN}-${PV}.tar.xz</a>&quot;<br>+SRC_URI[sha256sum] =3D &quot;9c4ebe6273ed3a=
+be466cb6ed8fa5c132bdd7e9a9298ca43fa0212c4311a084da&quot;<br>+<br>+# These o=
+ptions are found in AravisProject/aravis meson_options.txt<br>+EXTRA_OEMESO=
+N +=3D &quot;\<br>+ =C2=A0 =C2=A0-Ddocumentation=3Ddisabled \<br>+ =C2=A0 =
+=C2=A0-Dfast-heartbeat=3Dfalse \<br>+ =C2=A0 =C2=A0-Dpacket-socket=3Denable=
+d \<br>+ =C2=A0 =C2=A0-Dtests=3Dfalse \<br>+&quot;<br>+<br>+inherit_defer m=
+eson pkgconfig ${@bb.utils.contains(&#39;PACKAGECONFIG&#39;, &#39;introspec=
+tion&#39;, &#39;gobject-introspection&#39;, &#39;&#39;, d)}<br>+<br>+PACKAG=
+ECONFIG ?=3D &quot;gstreamer usb viewer&quot;<br>+PACKAGECONFIG[gstreamer] =
+=3D &quot;-Dgst-plugin=3Denabled, -Dgst-plugin=3Ddisabled, gstreamer1.0 gst=
+reamer1.0-plugins-base,&quot;<br>+PACKAGECONFIG[introspection] =3D &quot;-D=
+introspection=3Denabled, -Dintrospection=3Ddisabled, gobject-introspection,=
+&quot;<br>+PACKAGECONFIG[usb] =3D &quot;-Dusb=3Denabled, -Dusb=3Ddisabled, =
+libusb1,&quot;<br>+PACKAGECONFIG[viewer] =3D &quot;-Dviewer=3Denabled, -Dvi=
+ewer=3Ddisabled, gtk+3 gstreamer1.0-plugins-base,&quot;<br>+<br>+FILES:${PN=
+} +=3D &quot;\<br>+ =C2=A0 =C2=A0${datadir} \<br>+ =C2=A0 =C2=A0${libdir}/g=
+streamer-1.0/<a href=3D"http://libgstaravis.0.8.so">libgstaravis.0.8.so</a>=
+ \<br>+&quot;<br>-- <br>2.43.0<br><br></div></div></div>
+<br><br><p style=3D"font-family: Verdana; font-size:10pt; color:#666666;"><=
+b>   </b></p><p style=3D"font-family: Verdana; font-size:8pt; color:#666666=
+;"><br><br> </p></body></html>
 
-<br><br><p style=3D"font-family:Verdana;font-size:10pt;color:rgb(102,102,10=
-2)"></p><p style=3D"font-family:Verdana;font-size:8pt;color:rgb(102,102,102=
-)">Warning:  Copyright Nox Health.  This communication is confidential and =
-may contain privileged information.  By the use of email over the Internet =
-or other communication systems, Nox Health is not waiving either confidenti=
-ality of, or legal privilege in, the content of the email and of any attach=
-ments.  If the recipient of this message is not the intended addressee, ple=
-ase call Nox Health immediately by calling (+1) 888.505.0280</p></div>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#110052): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/110052" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/110052</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/105594757/924=
-729" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
-/105594757/924729</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
-et=3D"_blank">ticotimo@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
+--000000000000181f06061674539a--
 
---000000000000d31a930616739e4f--
 
