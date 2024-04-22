@@ -2,51 +2,51 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 30858C10F19
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 055A2C10F16
 	for <webhook@archiver.kernel.org>; Mon, 22 Apr 2024 09:16:21 +0000 (UTC)
-Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
- by mx.groups.io with SMTP id smtpd.web10.14073.1713777373314830962
+Received: from esa7.hc1455-7.c3s2.iphmx.com (esa7.hc1455-7.c3s2.iphmx.com [139.138.61.252])
+ by mx.groups.io with SMTP id smtpd.web10.14075.1713777375537617673
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Apr 2024 02:16:13 -0700
+ Mon, 22 Apr 2024 02:16:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=gqGuaw8m;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=gA9wcMR2;
+ spf=pass (domain: fujitsu.com, ip: 139.138.61.252, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1713777373; x=1745313373;
+  t=1713777375; x=1745313375;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=jidZN6RR0m8qpxgPtDclWBMuwVj4ijtRM5METzWC+rE=;
-  b=gqGuaw8mU8FQV/cvobQ8miqNzI00ShtErGYvF4qhq3tS6qw+YezB0TWz
-   7nWUjUp0hRyQ4pw6iLR6G1oxE5GllwpXVUkJIudfAw1Zo22iwqwcYbN8Z
-   6owQYYucFQ83GT9ts1d4myPGYrTlkuGVPAJij10RiHc46i3Z67LDvg4yD
-   EU8dd9ry6Fzje7Gzoed0vG3vNYXRQo2nO9AKhj6FWq06H9mSVlGlicFPA
-   VZV1ATIp09ZvfM17vyVjpbo8G01eNgeHYzdy0IF2iA3OZz+Yq6m4V3qyt
-   3Vi3sAR8YLq7fgxzhsR5zgQvcwjWVzD6sQf13vb+HGz5F0E0KMcsICFJW
-   w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,11051"; a="156594051"
+  bh=/ByiZm/SLHCwokjApr7uBYCTaMH4xj9W0wEW1U7NTtw=;
+  b=gA9wcMR2Ndwe0YCGuhvjQJKFVveMa9uL5Xt6d2NnCTMbF0R81tLmaWQq
+   BkvIMSWzTs2CeiDpm9sQfdvxbpxki4sLPtAIjTVfrl5NMXuPpLAD2RAvo
+   OzEanSrpcSY+jqDggA2fcSU7Eok/6rPcpdNIbE6x1N/2lPrpyFwnY0SKH
+   VFmC7EE/GnZgRSF4Z2kXfXCOhqlPfVD7ufnKmVp+nDkGWrvo2U+5XooxY
+   fxh4Wo5BcE6pEwtsVui9WUXQLtPd9AqS6+ReHh8XNukyaa+4igv8sJ+t7
+   itwo9wxN231J+xfZYPDrDMXaAKeMkKnx1suTKjutfXBK/An/HSStnr328
+   Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,11051"; a="135129205"
 X-IronPort-AV: E=Sophos;i="6.07,220,1708354800"; 
-   d="scan'208";a="156594051"
-Received: from unknown (HELO yto-r3.gw.nic.fujitsu.com) ([218.44.52.219])
-  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Apr 2024 18:16:10 +0900
-Received: from yto-m3.gw.nic.fujitsu.com (yto-nat-yto-m3.gw.nic.fujitsu.com [192.168.83.66])
-	by yto-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 8D057C2ABE
-	for <openembedded-devel@lists.openembedded.org>; Mon, 22 Apr 2024 18:16:08 +0900 (JST)
-Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by yto-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id CFD6F1590B
-	for <openembedded-devel@lists.openembedded.org>; Mon, 22 Apr 2024 18:16:07 +0900 (JST)
+   d="scan'208";a="135129205"
+Received: from unknown (HELO oym-r3.gw.nic.fujitsu.com) ([210.162.30.91])
+  by esa7.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Apr 2024 18:16:13 +0900
+Received: from oym-m4.gw.nic.fujitsu.com (oym-nat-oym-m4.gw.nic.fujitsu.com [192.168.87.61])
+	by oym-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 2758AD64BE
+	for <openembedded-devel@lists.openembedded.org>; Mon, 22 Apr 2024 18:16:11 +0900 (JST)
+Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
+	by oym-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 42EBBD4C0B
+	for <openembedded-devel@lists.openembedded.org>; Mon, 22 Apr 2024 18:16:10 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 6AE9B20093278
-	for <openembedded-devel@lists.openembedded.org>; Mon, 22 Apr 2024 18:16:07 +0900 (JST)
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id D08816BD75
+	for <openembedded-devel@lists.openembedded.org>; Mon, 22 Apr 2024 18:16:09 +0900 (JST)
 Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 152781A000B;
-	Mon, 22 Apr 2024 17:16:07 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 79A361A000B;
+	Mon, 22 Apr 2024 17:16:09 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 10/15] python3-pymisp: upgrade 2.4.188 -> 2.4.190
-Date: Mon, 22 Apr 2024 17:15:40 +0800
-Message-Id: <1713777345-29264-10-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 15/15] sanlock: upgrade 3.9.1 -> 3.9.2
+Date: Mon, 22 Apr 2024 17:15:45 +0800
+Message-Id: <1713777345-29264-15-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1713777345-29264-1-git-send-email-wangmy@fujitsu.com>
 References: <1713777345-29264-1-git-send-email-wangmy@fujitsu.com>
@@ -54,45 +54,89 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28336.006
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28336.006
-X-TMASE-Result: 10-1.229000-10.000000
-X-TMASE-MatchedRID: S9L8qTrmXfGjz0nOeth/yUIIxwDaU5mrVBDQSDMig9EH8UzOewTxw+79
-	DJRUi35pTQ0JkPG287/mn3xyPJAJorNUVnqixiMOuce7gFxhKa2+OGVbYwYsiZtwlo64JqFBlIO
-	VA+gJRdKxfbhqGxLk+4Ay6p60ZV62yA7duzCw6dLdB/CxWTRRu+rAZ8KTspSzSrDj4F59F0wJ2S
-	7R2nk1L+Alts/thJ8OmarA14M04UL/4kNzDHClWwX7fLt2V7cD6HZbLpFhJq0lZbHCv5snMODAK
-	BXptdEgiB6mlDKe1V7S/yytHeCN9GXv4CQeNUk7G6qTOwq/n71+3BndfXUhXQ==
+X-TMASE-Result: 10--5.033500-10.000000
+X-TMASE-MatchedRID: xNkyGzs1zQGjz0nOeth/yTo39wOA02LhGEfoClqBl87fUZT83lbkEJYv
+	gWqjMEzaNYCBzzxsUnvZ5eN1eJMdpVpCIuRr0RxKP0HVIeixJdDBOVz0Jwcxl0fyM5VfgjG209D
+	6Rw2zIrPxq3ixYTmGC+jks7hOzqOfl1bc/4UP/k6dVNZaI2n6/8oioCrSMgeKYUdWP7oX6sgD2d
+	r8AN36j6YgFpxfciFKSBiMsK47m3VtdctxAOiWFqoXHZz/dXlxcycts50tWT8CGfvnVpx+256ba
+	/D5x6cp4vM1YF6AJbbCCfuIMF6xLSAHAopEd76v0OjVSt/dbdLKD/79cx3Ljwrh+eLBs53D0kbg
+	it/iCUGRwWyHq6zJQw==
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Mon, 22 Apr 2024 09:16:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110094
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110097
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Changelog:
- Correct way to convert bytes to string if orjson exists.
+0001-include-libgen.h-for-basename.patch
+removed since it's included in 3.9.2
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{python3-pymisp_2.4.188.bb => python3-pymisp_2.4.190.bb}    | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-pymisp_2.4.188.bb => python3-pymisp_2.4.190.bb} (85%)
+ .../0001-include-libgen.h-for-basename.patch  | 32 -------------------
+ .../{sanlock_3.9.1.bb => sanlock_3.9.2.bb}    |  5 ++-
+ 2 files changed, 2 insertions(+), 35 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/sanlock/sanlock/0001-include-libgen.h-for-basename.patch
+ rename meta-oe/recipes-extended/sanlock/{sanlock_3.9.1.bb => sanlock_3.9.2.bb} (93%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pymisp_2.4.188.bb b/meta-python/recipes-devtools/python/python3-pymisp_2.4.190.bb
-similarity index 85%
-rename from meta-python/recipes-devtools/python/python3-pymisp_2.4.188.bb
-rename to meta-python/recipes-devtools/python/python3-pymisp_2.4.190.bb
-index 59a00be15..c1389982d 100644
---- a/meta-python/recipes-devtools/python/python3-pymisp_2.4.188.bb
-+++ b/meta-python/recipes-devtools/python/python3-pymisp_2.4.190.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/MISP/PyMISP"
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a3639cf5780f71b125d3e9d1dc127c20"
+diff --git a/meta-oe/recipes-extended/sanlock/sanlock/0001-include-libgen.h-for-basename.patch b/meta-oe/recipes-extended/sanlock/sanlock/0001-include-libgen.h-for-basename.patch
+deleted file mode 100644
+index 439ffc647..000000000
+--- a/meta-oe/recipes-extended/sanlock/sanlock/0001-include-libgen.h-for-basename.patch
++++ /dev/null
+@@ -1,32 +0,0 @@
+-From c955ac2a4d57f21351e53a5209346fdc2325a747 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Mon, 25 Mar 2024 15:12:02 -0700
+-Subject: [PATCH] include libgen.h for basename
+-
+-basename prototype has been removed from string.h from latest musl [1]
+-compilers e.g. clang-18 flags the absense of prototype as error. therefore
+-include libgen.h for providing it.
+-
+-[1] https://git.musl-libc.org/cgit/musl/commit/?id=725e17ed6dff4d0cd22487bb64470881e86a92e7
+-
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- wdmd/main.c | 1 +
+- 1 file changed, 1 insertion(+)
+-
+-diff --git a/wdmd/main.c b/wdmd/main.c
+-index 38a99f3..7014462 100644
+---- a/wdmd/main.c
+-+++ b/wdmd/main.c
+-@@ -15,6 +15,7 @@
+- #include <stddef.h>
+- #include <grp.h>
+- #include <fcntl.h>
+-+#include <libgen.h>
+- #include <string.h>
+- #include <errno.h>
+- #include <limits.h>
+--- 
+-2.44.0
+-
+diff --git a/meta-oe/recipes-extended/sanlock/sanlock_3.9.1.bb b/meta-oe/recipes-extended/sanlock/sanlock_3.9.2.bb
+similarity index 93%
+rename from meta-oe/recipes-extended/sanlock/sanlock_3.9.1.bb
+rename to meta-oe/recipes-extended/sanlock/sanlock_3.9.2.bb
+index 1d0f8b010..d369af1c6 100644
+--- a/meta-oe/recipes-extended/sanlock/sanlock_3.9.1.bb
++++ b/meta-oe/recipes-extended/sanlock/sanlock_3.9.2.bb
+@@ -16,9 +16,8 @@ PV .= "+git"
+ SRC_URI = "git://pagure.io/sanlock.git;protocol=http;branch=master \
+            file://0001-sanlock-Replace-cp-a-with-cp-R-no-dereference-preser.patch \
+            file://0001-add-missing-system-header-string.h.patch \
+-           file://0001-include-libgen.h-for-basename.patch \
+-          "
+-SRCREV = "ecf30a1ccf756776dfea440e4cf9b0b54581075f"
++           "
++SRCREV = "e005fbec2324aa8de7e2f302e5a17483c525b1d1"
  
--SRC_URI[sha256sum] = "c2313d059a9f4d1221243fcda64fb8ae11603c1745e92d57c4071aad04336696"
-+SRC_URI[sha256sum] = "e7374295bfd8c7d25f56867e4395a029433360d95420e39b7f78eb1d4f8b48b4"
- 
- inherit python_poetry_core pypi
+ S = "${WORKDIR}/git"
  
 -- 
 2.34.1
