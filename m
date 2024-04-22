@@ -2,76 +2,82 @@ Return-Path: <gudnimar@noxmedical.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BE3FBC4345F
-	for <webhook@archiver.kernel.org>; Mon, 22 Apr 2024 20:50:17 +0000 (UTC)
-Received: from usb-smtp-delivery-118.mimecast.com (usb-smtp-delivery-118.mimecast.com [170.10.151.118])
- by mx.groups.io with SMTP id smtpd.web11.3302.1713819013206347226
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BD6EDC4345F
+	for <webhook@archiver.kernel.org>; Mon, 22 Apr 2024 21:00:57 +0000 (UTC)
+Received: from usb-smtp-delivery-118.mimecast.com (usb-smtp-delivery-118.mimecast.com [170.10.153.118])
+ by mx.groups.io with SMTP id smtpd.web11.3559.1713819649826539927
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Apr 2024 13:50:13 -0700
+ Mon, 22 Apr 2024 14:00:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@noxmedical.com header.s=mimecast20231107 header.b=fc1iwhlG;
- spf=pass (domain: noxmedical.com, ip: 170.10.151.118, mailfrom: gudnimar@noxmedical.com)
+ dkim=pass header.i=@noxmedical.com header.s=mimecast20231107 header.b=Gai0tW1N;
+ spf=pass (domain: noxmedical.com, ip: 170.10.153.118, mailfrom: gudnimar@noxmedical.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=noxmedical.com;
-	s=mimecast20231107; t=1713819012;
+	s=mimecast20231107; t=1713819649;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type;
-	bh=Hlh0ayPDqb/28RmJKpI80eOLU0ev5L5yKkn3Bbx5xkQ=;
-	b=fc1iwhlGolYVo+YRiORK/XEygfzePKjhPwTfu/rcGpC26sCLY2b3+uh9vBIMA4gPe+2Vj3
-	qzNu0rfuKp/KfIysLdyUCFiJJC2xOX1Sl5eCRB2PcaVB8SUTu2i5Z48ZOLLoU5Dec+UGZR
-	YaOxS28+XnI0TrEoOPF+9nTWrcDv7NA=
-Received: from mail-lf1-f72.google.com (mail-lf1-f72.google.com
- [209.85.167.72]) by relay.mimecast.com with ESMTP with STARTTLS
+	bh=0ndncfHmdrcjrnIHL+dDE5CGFX68vNYjnKmx+gDHd0w=;
+	b=Gai0tW1NyOYmGOLl6n/EdrJGpOZKgKE1QqqUcFfx++E7o0Fp1t/kB6ov9qacnLin5MDlnx
+	ztJmgYHooIT4HJp2F5T1DYb6eBUCk0g9zmXco6haFFbkpxhVRGs4UH8Ma97yExPnfe49Zc
+	oKNHoCphOMVQkuEd2ergCLFO3OetjcQ=
+Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
+ [209.85.218.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- usb-mta-13-m8DWSdOuNIS2rIynTPSbBQ-1; Mon, 22 Apr 2024 13:50:07 -0700
-X-MC-Unique: m8DWSdOuNIS2rIynTPSbBQ-1
-Received: by mail-lf1-f72.google.com with SMTP id 2adb3069b0e04-518c3c6e757so3975168e87.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 22 Apr 2024 13:50:06 -0700 (PDT)
+ usb-mta-24-0c98KXpMO1ae2j4mKd9TiA-1; Mon, 22 Apr 2024 14:00:43 -0700
+X-MC-Unique: 0c98KXpMO1ae2j4mKd9TiA-1
+Received: by mail-ej1-f69.google.com with SMTP id a640c23a62f3a-a5199cc13b2so459017466b.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 22 Apr 2024 14:00:42 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1713819005; x=1714423805;
+        d=1e100.net; s=20230601; t=1713819641; x=1714424441;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=ng/1sD2/stkZWiFpXpFBYIj+gMRwtCUnk/1Kw7sXsMY=;
-        b=eOLC4RZ3VL7aqHPr3tIGARvptC1HufOzLIz06CTFNGBR/z5/YYAPgcVieUUkn3kUw3
-         it2j/wkRknkRMZNfrPvEBbnMtMqqIzZRmAF8UUjlZmHCUgeib/9i7FgXZ/DOyCGj8q/p
-         G05nxxcQW2VqszUWxKvZTkeW3gfldoOJUPSvU0g4T0oV5s318AtZxjj7in3gvf2EjAmp
-         74zwkOSszkoQgx7n6LpnyPA5rWQFzr8Y4OnbpzP5lLFW7mYT789n6XjrM0ixY5C6LuxM
-         jAkmiG2J1zdtCY/nvIDnsBVB3pGMgYG0kiwnzezestleAHi62/4Yc9bmdZd+Xwrw65pE
-         D8rA==
-X-Gm-Message-State: AOJu0YwkO4IZ7RB9sXSK3Ub5ntR4yLdoDKwNxKArRrP0gKS7o/CwYHKd
-	LJkBXNXT7exDMVDV59ljbyAr+84pfz/xzsjZzUpSXXl2nVe2qZPL0YfeLp4gg5Ys4kBXKdl5edt
-	ylHoc8hZ9qmCrlZPS3ZfD0epD2/egNs/p4BdoYLQ8KBxk+8SeKurWLiTWy2XTgZJktK2fOs500i
-	1OJtF3EmqSkBy85uZ0EJKNPv0P8XMZ3lNacXUJ4bT3Je2mL3lQiAEHjko+WALe5L1Ciz/t
-X-Received: by 2002:a05:6512:3054:b0:516:e8b1:177d with SMTP id b20-20020a056512305400b00516e8b1177dmr8989663lfb.65.1713819004918;
-        Mon, 22 Apr 2024 13:50:04 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IF5tAIGtCMdKcPqijdCrO13o3X4D/qMvfOBIeahY23do5RoHkN7sS5/w24D1IwJ29j+y2IrmA==
-X-Received: by 2002:a05:6512:3054:b0:516:e8b1:177d with SMTP id b20-20020a056512305400b00516e8b1177dmr8989646lfb.65.1713819004241;
-        Mon, 22 Apr 2024 13:50:04 -0700 (PDT)
+        bh=qny8bdVF6C/iI+o2Bs+yaBWIHLl7DLi9DrjkNN8wsi4=;
+        b=ayCEBXF584C3cjvBqIy7O2C7zw4e+g8xuSvsJpUI3iLa+WWSM7cVyEUrINQzKL63yO
+         cIsxM9bRcTOnG85H17j2xiMzU+BmyaR/Itod8zFJlHdPCVElo3HbmbmOccU2GF91hPcc
+         vAz2MHu9+wKMyQuAyZlJFsKPrXZafb7Vd5GPFr9ZAMQQiq80Cj25ebsc6eo09NQ0ju0E
+         aMRSmZY+Ecx7ssUQEBoNVa2h4FaS0G8yWcPEqa3PnalMa8Wyr5qxtphtP5oB2g3ze4vB
+         98Y/M7c4kmRcuJR3VAmpTUFX/rBaS4XDSdmnWbilT79TwjLLAwxi81X7kx/6VGPEfjZf
+         9ZBA==
+X-Gm-Message-State: AOJu0Yy1NvpunBKTetJ/JHLAV44fXmvHJqMUk589826Gd6VGLJYtRGrE
+	iOyqwPvE2sPTUEDq0Oltv8qWI/FL21amjjiPU8FRFtGYTSBhMzwHU1DWuaq+jmqJBeNIGtQRxBA
+	pW3pOvWvIyInyd43miMzfQfxn5DEc1kfAkKQjk/RfsHAVaAUwpMUyM+i8b4oSDsiZCQa/whOUtI
+	WvltP6E14QV4e/FxDu75RoUMc+hUxz1KQQEEG3AihoQKEDqaLQIOueEYGAF8hhPkDLIokL
+X-Received: by 2002:a17:906:d0c2:b0:a55:b8b7:1971 with SMTP id bq2-20020a170906d0c200b00a55b8b71971mr759945ejb.32.1713819641122;
+        Mon, 22 Apr 2024 14:00:41 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHB+flPUOTsE9d+I+j3Of1Y0J6Q5tAC9+upuKo0xJDVuSmpW/hkc7qnRNuIVPT4nG1GT2nJww==
+X-Received: by 2002:a17:906:d0c2:b0:a55:b8b7:1971 with SMTP id bq2-20020a170906d0c200b00a55b8b71971mr759912ejb.32.1713819640611;
+        Mon, 22 Apr 2024 14:00:40 -0700 (PDT)
 Received: from gudni-virtual-machine.localdomain ([81.15.100.92])
-        by smtp.gmail.com with ESMTPSA id x21-20020a170906299500b00a5875dd74c2sm282446eje.131.2024.04.22.13.50.03
+        by smtp.gmail.com with ESMTPSA id g2-20020a170906348200b00a51da296f66sm6128251ejb.41.2024.04.22.14.00.28
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 22 Apr 2024 13:50:03 -0700 (PDT)
+        Mon, 22 Apr 2024 14:00:28 -0700 (PDT)
 From: =?UTF-8?q?Gu=C3=B0ni=20M=C3=A1r=20Gilbert?= <gudnimar@noxmedical.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: =?UTF-8?q?Gu=C3=B0ni=20M=C3=A1r=20Gilbert?= <gudnimar@noxmedical.com>
-Subject: [meta-python][PATCHv2] python3-twisted: upgrade 22.10.0 -> 24.3.0
-Date: Mon, 22 Apr 2024 20:49:50 +0000
-Message-Id: <20240422204950.1619661-1-gudnimar@noxmedical.com>
+Subject: [meta-python][PATCH V3] python3-twisted: upgrade 22.10.0 -> 24.3.0
+Date: Mon, 22 Apr 2024 21:00:12 +0000
+Message-Id: <20240422210012.1619924-1-gudnimar@noxmedical.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: noxmedical.com
 Content-Type: multipart/alternative;
-	boundary="MCBoundary=_12404221350111931"
+	boundary="MCBoundary=_12404221400477961"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 22 Apr 2024 20:50:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110107
+ <openembedded-devel@lists.openembedded.org>; Mon, 22 Apr 2024 21:00:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110108
 
---MCBoundary=_12404221350111931
+--MCBoundary=_12404221400477961
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
+
+Changelogs between 22.10.0 and 24.3.0 can be found here:
+
+https://github.com/twisted/twisted/releases/tag/twisted-24.3.0
+https://github.com/twisted/twisted/releases/tag/twisted-23.10.0
+https://github.com/twisted/twisted/releases/tag/twisted-23.8.0
 
 Summary of changes relevant for the Yocto build:
 - Brings official support for Python 3.11 and 3.12, only Python 3.8 and abo=
@@ -195,13 +201,25 @@ areness training, web security, compliance and other essential capabilities=
 ity, human error and technology failure; and to lead the movement toward bu=
 ilding a more resilient world. To find out more, visit our website.
 
---MCBoundary=_12404221350111931
+--MCBoundary=_12404221400477961
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/html; charset=UTF-8
 
 <html><head><style type=3D"text/css">.style1 {font-family: "Times New Roman=
-";}</style></head><body>Summary of changes relevant for the Yocto build:<BR=
->
+";}</style></head><body>Changelogs between 22.10.0 and 24.3.0 can be found =
+here:<BR>
+<BR>
+<a href=3D"https://github.com/twisted/twisted/releases/tag/twisted-24.3.0" =
+target=3D"_blank">https://github.com/twisted/twisted/releases/tag/twisted-2=
+4.3.0</a><BR>
+<a href=3D"https://github.com/twisted/twisted/releases/tag/twisted-23.10.0"=
+ target=3D"_blank">https://github.com/twisted/twisted/releases/tag/twisted-=
+23.10.0</a><BR>
+<a href=3D"https://github.com/twisted/twisted/releases/tag/twisted-23.8.0" =
+target=3D"_blank">https://github.com/twisted/twisted/releases/tag/twisted-2=
+3.8.0</a><BR>
+<BR>
+Summary of changes relevant for the Yocto build:<BR>
 - Brings official support for Python 3.11 and 3.12, only Python 3.8 and abo=
 ve supported.<BR>
 - python3-twisted-conch: python3-pyasn1 is no longer a runtime dependency (=
@@ -320,6 +338,6 @@ or legal privilege in, the content of the email and of any attachments.  If=
  the recipient of this message is not the intended addressee, please call N=
 ox Health immediately by calling (+1) 888.505.0280</p></body></html>
 
---MCBoundary=_12404221350111931--
+--MCBoundary=_12404221400477961--
 
 
