@@ -1,203 +1,221 @@
-Return-Path: <sjolley.yp.pm@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 09DE9C4345F
-	for <webhook@archiver.kernel.org>; Tue, 23 Apr 2024 05:02:20 +0000 (UTC)
-Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
- by mx.groups.io with SMTP id smtpd.web11.11460.1713848529668378647
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1BC68C4345F
+	for <webhook@archiver.kernel.org>; Tue, 23 Apr 2024 05:40:10 +0000 (UTC)
+Received: from mail-oi1-f169.google.com (mail-oi1-f169.google.com [209.85.167.169])
+ by mx.groups.io with SMTP id smtpd.web11.11767.1713850808233344729
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 22 Apr 2024 22:02:10 -0700
+ Mon, 22 Apr 2024 22:40:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=VXNUR+jJ;
- spf=pass (domain: gmail.com, ip: 209.85.218.43, mailfrom: sjolley.yp.pm@gmail.com)
-Received: by mail-ej1-f43.google.com with SMTP id a640c23a62f3a-a55911bff66so395184066b.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 22 Apr 2024 22:02:09 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=SlzsZ/e+;
+ spf=pass (domain: gmail.com, ip: 209.85.167.169, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f169.google.com with SMTP id 5614622812f47-3c70ef25e19so2634295b6e.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 22 Apr 2024 22:40:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1713848528; x=1714453328; darn=lists.openembedded.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=KPz/kIEVE7QSPMD/p38Jnp4NDt+ocJus/DAMXdTIYME=;
-        b=VXNUR+jJw83dwUhxeg2aJQRJVf4nzvK6Bkj4DmwLLzbhpdwclbE8PevRrWgl86S3Sf
-         tNjKmZa9x1y7vBb8oMWqGm8DdWerKrqewUGwq7WptzIX931w1Kc8Ld0m7lQaZzENrXHe
-         nAIP0RyHtvpIVJElUd/q4TgEBQ5UhrJSDauqQxSYw/MfxgKP48T+HSLn2yD19k9OW+8n
-         6V1P88cSou7nWrSHqus07aiNdDey6dMN4NEhCyYljiRcnUqaCphhBv/oMpsdjzpPZowG
-         gEWco3uiehfhz413uz5AWb8+eS9WkggxQqbdT6U0AQnYiUEiV8drEacg7fayAV6CNslY
-         zwSA==
+        d=gmail.com; s=20230601; t=1713850807; x=1714455607; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=GmUriTL6rWv5ClMrguhqT9S9qELrAmQ4mOfLi06DtWQ=;
+        b=SlzsZ/e+CxmooO63TfSiJgaXAriRwiV5ISWmvBC2KLMd6qr2UgHzJBFtYJNJRciV2m
+         CbtxTNzk+FVbpFyAcVYV/DC5THwxmSEywSdz3GYRRaZvvB3+Za8OKyC0xWNaQTwoBrnd
+         zTsW+3UX9lRSZvMrXnAxPAcZFzbBaQZedFp++k7L9xkvhSMmFHy6v36JaxP3v3HfpTvt
+         rdhtQTud7CIYzkjuRicSF2t8XEw//1Iuxw82DCY4WZYWQAWVkjqf5dRLKh30+D8E6mgG
+         tLktpzJ/nPZRy/gScnIB7af7lMreKz0Tf3cslFxLsggN41RMy9tQCtFfXjBJzDhIhg2T
+         Ryhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1713848528; x=1714453328;
-        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=KPz/kIEVE7QSPMD/p38Jnp4NDt+ocJus/DAMXdTIYME=;
-        b=oJMfBiCnyswxEtuvYc2y3xdB47dbVdColz6nx9tsxSxnbyScSbx8l4/eULIumCMOw2
-         oVFyrsqfYP4B/lF+CVBdUAiVf1de6c0coTFS4YSCDKvzHzv++1++nad+4wuM9fQfieGi
-         gEnj4O1qXbM93o5m40bkH0dT/i3MP6ZTRebg+7cr+Cn6ITcaW+ab581ZLrGlyX93/Vi8
-         vhq6TZnR1CXBwcIX0UWgGhNkGWXTIJieCIDiFthPRZJqc7nZKv0pYmEnHpDaOZ2QuAo0
-         BTIeHne78KYSmeVFN0ort5WpYZ5DfdjVV1TThxx2fbFkgZ8a5bygP9cJ4mPG7FhMH38n
-         Da+g==
-X-Gm-Message-State: AOJu0Ywuh6d0tGkgTqOfFgMrJ/kdjw+SQe3pxs6sGOQpnIkgavgSXa06
-	gaa5bqYZmDcVjQPXACYCvsDmmEayLN/QBAHtmpFTnI7XflU0y8aPYuiu7hgJcRL5fbwAIzMveIm
-	PQPHPv0y4d8Ac/0WpkNUQsOSMqi+UigBy
-X-Google-Smtp-Source: AGHT+IGXVz/5J6Ue62br7Dy4LeegATpb829rGnqIN3shKM0x8f5YhIjELgVwVqFxiP+qWGicHrHvAjn7MirSV4Jzuv0=
-X-Received: by 2002:a17:906:f58d:b0:a58:7e16:4233 with SMTP id
- cm13-20020a170906f58d00b00a587e164233mr561694ejd.64.1713848527235; Mon, 22
- Apr 2024 22:02:07 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1713850807; x=1714455607;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=GmUriTL6rWv5ClMrguhqT9S9qELrAmQ4mOfLi06DtWQ=;
+        b=CBrglUD4mO6CBvPfcKyEmbYSrU9S1UIU4DOePNXSRypHmUgZsQSKQXBv8/J92gDUSq
+         e98EzWG67p5qTJuNbDFQt22y9o02BDRX3OOIlMg2bnUQUm736Grnz0i1JOReuj2qq/TJ
+         F3bKjaebIQuU1tJ3306c8uKbb901Ieb4qPcw8zRL50/gb+y09qlt9Gz9b9pn6yEumeoD
+         SzGGcmUtMfKS2o7UhAkullvTiC7fOsX3Sp119IJQt7dDKbZtFb71p+kujWPuwYWDNLo3
+         5mT/jWP04gUUhccC0MWIA8Lq6ZPMpVK3GMRhCAAH0Dz8UFnqBI3+l41LhUcjGU82uCHa
+         DvNw==
+X-Gm-Message-State: AOJu0Yw/DELnqOegzbxwZFtSQDRfrVYIybkh+oCezNRU/WRB/xQNaePc
+	yjOnD6g92++4L/+zdPmdQdC+wP+C4qRMpwHHdAmRvL72iWJUOjKDXqLE0C+CEUsqYbIwGZ6l8B6
+	Ed8rNhv1JDbRyaA5FKkFYqQKIjvWhwFDsTffXBQ==
+X-Google-Smtp-Source: AGHT+IGh6p8B6IG9OYNyxldB401U5n2UHtKFZdwyd+5YeRL5foATvax9ZQalDdB0gAFs6EewOWWCyQBG2rR00O3Ck24=
+X-Received: by 2002:a05:6870:c194:b0:238:ffae:4562 with SMTP id
+ h20-20020a056870c19400b00238ffae4562mr15033414oad.18.1713850807279; Mon, 22
+ Apr 2024 22:40:07 -0700 (PDT)
 MIME-Version: 1.0
-From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
-Date: Mon, 22 Apr 2024 22:01:56 -0700
-Message-ID: <CAK5yBb8XM9zgEnyBDRyQysEAQ3z9wSXHJd=Jj3fgqHvMv6bnCQ@mail.gmail.com>
-Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
-To: openembedded-devel@lists.openembedded.org, 
-	Yocto-mailing-list <yocto@lists.yoctoproject.org>
-Content-Type: multipart/alternative; boundary="000000000000aa33290616bc746d"
+References: <20240419132231.2631375-1-soumya.sambu@windriver.com>
+In-Reply-To: <20240419132231.2631375-1-soumya.sambu@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 23 Apr 2024 07:39:40 +0200
+Message-ID: <CAMKF1soBJgee=WZzt8p1fDfTvrRv21OGkxBHKDqz6OV4kPE1RA@mail.gmail.com>
+Subject: Re: [oe][meta-oe][PATCH 1/1] apache2: Upgrade v2.4.58 -> v2.4.59
+To: soumya.sambu@windriver.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 23 Apr 2024 05:02:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110112
+ <openembedded-devel@lists.openembedded.org>; Tue, 23 Apr 2024 05:40:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110113
 
---000000000000aa33290616bc746d
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+fails builds with clang
 
-All,
+https://errors.yoctoproject.org/Errors/Details/763327/
 
-The triage team is starting to try and collect up and classify bugs which a
-newcomer to the project would be able to work on in a way which means
-people can find them. They're being listed on the triage page under the
-appropriate heading:
-https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
-review:
-https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
-how to create a bugzilla account at:
-https://bugzilla.yoctoproject.org/createaccount.cgi
-
-The idea is these bugs should be straight forward for a person to help work
-on who doesn't have deep experience with the project. If anyone can help,
-please take ownership of the bug and send patches! If anyone needs
-help/advice there are people on irc who can likely do so, or some of the
-more experienced contributors will likely be happy to help too.
-
-Also, the triage team meets weekly and does its best to handle the bugs
-reported into the Bugzilla. The number of people attending that meeting has
-fallen, as have the number of people available to help fix bugs. One of the
-things we hear users report is they don't know how to help. We (the triage
-team) are therefore going to start reporting out the currently 415
-unassigned or newcomer bugs.
-
-We're hoping people may be able to spare some time now and again to help
-out with these. Bugs are split into two types, "true bugs" where things
-don't work as they should and "enhancements" which are features we'd want
-to add to the system. There are also roughly four different "priority"
-classes right now, =E2=80=9C5.0=E2=80=9D, =E2=80=9C5.1=E2=80=9D, "5.99" and=
- "Future", the more
-pressing/urgent issues being in "5.0" and then =E2=80=9C5.1=E2=80=9D.
-
-Please review this link and if a bug is something you would be able to help
-with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
-an e-mail with the bug number you would like and I will assign it to you
-(please make sure you have a Bugzilla account). The list is at:
-https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
-r_Bugs
-
-Thanks,
-
-
-
-*Stephen K. Jolley*
-
-*Yocto Project Program Manager*
-
-(    *Cell*:                (208) 244-4460
-
-* *Email*:                 *s
-<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
-*
-
---000000000000aa33290616bc746d
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><span style=3D"font-size:11pt;font-family:Calibri,Arial">A=
-ll,<br><br>The triage team is starting to try and collect up and classify b=
-ugs which a newcomer to the project would be able to work on in a way which=
- means people can find them. They&#39;re being listed on the triage page un=
-der the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/wiki/=
-Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage#New=
-comer_Bugs</a>  Also please review: <a href=3D"https://www.openembedded.org=
-/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.org/w=
-iki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugzilla =
-account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount.cgi"=
->https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The idea is=
- these bugs should be straight forward for a person to help work on who doe=
-sn&#39;t have deep experience with the project.  If anyone can help, please=
- take ownership of the bug and send patches!  If anyone needs help/advice t=
-here are people on irc who can likely do so, or some of the more experience=
-d contributors will likely be happy to help too.<br><br>Also, the triage te=
-am meets weekly and does its best to handle the bugs reported into the Bugz=
-illa. The number of people attending that meeting has fallen, as have the n=
-umber of people available to help fix bugs. One of the things we hear users=
- report is they don&#39;t know how to help. We (the triage team) are theref=
-ore going to start reporting out the currently 415 unassigned or newcomer b=
-ugs.<br><br>We&#39;re hoping people may be able to spare some time now and =
-again to help out with these.  Bugs are split into two types, &quot;true bu=
-gs&quot; where things don&#39;t work as they should and &quot;enhancements&=
-quot; which are features we&#39;d want to add to the system.  There are als=
-o roughly four different &quot;priority&quot; classes right now, =E2=80=9C5=
-.0=E2=80=9D, =E2=80=9C5.1=E2=80=9D, &quot;5.99&quot; and &quot;Future&quot;=
-, the more pressing/urgent issues being in &quot;5.0&quot; and then =E2=80=
-=9C5.1=E2=80=9D.<br><br>Please review this link and if a bug is something y=
-ou would be able to help with either take ownership of the bug, or send me =
-(<a href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>) an=
- e-mail with the bug number you would like and I will assign it to you (ple=
-ase make sure you have a Bugzilla account).  The list is at: <a href=3D"htt=
-ps://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcomer_B=
-ugs">https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Ne=
-wcomer_Bugs</a></span><br><div dir=3D"ltr" class=3D"gmail_signature" data-s=
-martmail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p class=3D"=
-MsoNormal" style=3D"background-image:initial;background-position:initial;ba=
-ckground-repeat:initial"><span style=3D"font-size:12pt;font-family:Arial,sa=
-ns-serif">Thanks,<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
-ily:Arial,sans-serif">=C2=A0<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
-lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
-ont-family:Arial,sans-serif"><span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
-amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
-an></b></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
-&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
-<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
-:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
-s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
--size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
-><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
-/span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
-t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
-=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
-color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
-uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
- lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
-erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
-phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
-.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
-u></p></div></div></div></div>
-
---000000000000aa33290616bc746d--
+On Fri, Apr 19, 2024 at 3:22=E2=80=AFPM Soumya via lists.openembedded.org
+<soumya.sambu=3Dwindriver.com@lists.openembedded.org> wrote:
+>
+> From: Soumya Sambu <soumya.sambu@windriver.com>
+>
+> This upgrade incorporates the fixes for CVE-2024-27316,
+> CVE-2024-24795,CVE-2023-38709 and other bugfixes.
+>
+> Adjusted 0004-apache2-log-the-SELinux-context-at-startup.patch
+> and 0007-apache2-allow-to-disable-selinux-support.patch to
+> align with upgraded version.
+>
+> Changelog:
+> https://downloads.apache.org/httpd/CHANGES_2.4.59
+>
+> Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
+> ---
+>  ...he2-log-the-SELinux-context-at-startup.patch | 17 +++++++++--------
+>  ...ache2-allow-to-disable-selinux-support.patch | 10 +++++-----
+>  .../{apache2_2.4.58.bb =3D> apache2_2.4.59.bb}    |  2 +-
+>  3 files changed, 15 insertions(+), 14 deletions(-)
+>  rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.58.bb =3D> apac=
+he2_2.4.59.bb} (99%)
+>
+> diff --git a/meta-webserver/recipes-httpd/apache2/apache2/0004-apache2-lo=
+g-the-SELinux-context-at-startup.patch b/meta-webserver/recipes-httpd/apach=
+e2/apache2/0004-apache2-log-the-SELinux-context-at-startup.patch
+> index 3b080f54f..1abbe0c41 100644
+> --- a/meta-webserver/recipes-httpd/apache2/apache2/0004-apache2-log-the-S=
+ELinux-context-at-startup.patch
+> +++ b/meta-webserver/recipes-httpd/apache2/apache2/0004-apache2-log-the-S=
+ELinux-context-at-startup.patch
+> @@ -8,17 +8,16 @@ Log the SELinux context at startup.
+>  Upstream-Status: Inappropriate [other]
+>
+>  Note: unlikely to be any interest in this upstream
+> -
+>  ---
+>   configure.in  |  5 +++++
+>   server/core.c | 26 ++++++++++++++++++++++++++
+>   2 files changed, 31 insertions(+)
+>
+>  diff --git a/configure.in b/configure.in
+> -index ea6cec3..92b74b7 100644
+> +index 352711a..f58620f 100644
+>  --- a/configure.in
+>  +++ b/configure.in
+> -@@ -491,6 +491,11 @@ getloadavg
+> +@@ -514,6 +514,11 @@ gettid
+>   dnl confirm that a void pointer is large enough to store a long integer
+>   APACHE_CHECK_VOID_PTR_LEN
+>
+> @@ -27,11 +26,11 @@ index ea6cec3..92b74b7 100644
+>  +   APR_ADDTO(AP_LIBS, [-lselinux])
+>  +])
+>  +
+> - AC_CACHE_CHECK([for gettid()], ac_cv_gettid,
+> - [AC_TRY_RUN(#define _GNU_SOURCE
+> - #include <unistd.h>
+> + if test $ac_cv_func_gettid =3D no; then
+> +   # On Linux before glibc 2.30, gettid() is only usable via syscall()
+> +   AC_CACHE_CHECK([for gettid() via syscall], ap_cv_gettid,
+>  diff --git a/server/core.c b/server/core.c
+> -index 4da7209..d3ca25b 100644
+> +index 30b317e..81f145f 100644
+>  --- a/server/core.c
+>  +++ b/server/core.c
+>  @@ -65,6 +65,10 @@
+> @@ -45,7 +44,7 @@ index 4da7209..d3ca25b 100644
+>   /* LimitRequestBody handling */
+>   #define AP_LIMIT_REQ_BODY_UNSET         ((apr_off_t) -1)
+>   #define AP_DEFAULT_LIMIT_REQ_BODY       ((apr_off_t) 1<<30) /* 1GB */
+> -@@ -5126,6 +5130,28 @@ static int core_post_config(apr_pool_t *pconf, ap=
+r_pool_t *plog, apr_pool_t *pte
+> +@@ -5139,6 +5143,28 @@ static int core_post_config(apr_pool_t *pconf, ap=
+r_pool_t *plog, apr_pool_t *pte
+>       }
+>   #endif
+>
+> @@ -74,3 +73,5 @@ index 4da7209..d3ca25b 100644
+>       return OK;
+>   }
+>
+> +--
+> +2.40.0
+> diff --git a/meta-webserver/recipes-httpd/apache2/apache2/0007-apache2-al=
+low-to-disable-selinux-support.patch b/meta-webserver/recipes-httpd/apache2=
+/apache2/0007-apache2-allow-to-disable-selinux-support.patch
+> index 3ff689440..7163dc2b8 100644
+> --- a/meta-webserver/recipes-httpd/apache2/apache2/0007-apache2-allow-to-=
+disable-selinux-support.patch
+> +++ b/meta-webserver/recipes-httpd/apache2/apache2/0007-apache2-allow-to-=
+disable-selinux-support.patch
+> @@ -11,10 +11,10 @@ Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com=
+>
+>   1 file changed, 10 insertions(+), 4 deletions(-)
+>
+>  diff --git a/configure.in b/configure.in
+> -index 76811e7..4df3ff3 100644
+> +index f58620f..b5971b7 100644
+>  --- a/configure.in
+>  +++ b/configure.in
+> -@@ -491,10 +491,16 @@ getloadavg
+> +@@ -514,10 +514,16 @@ gettid
+>   dnl confirm that a void pointer is large enough to store a long integer
+>   APACHE_CHECK_VOID_PTR_LEN
+>
+> @@ -33,8 +33,8 @@ index 76811e7..4df3ff3 100644
+>  +    ])
+>  +fi
+>
+> - AC_CACHE_CHECK([for gettid()], ac_cv_gettid,
+> - [AC_TRY_RUN(#define _GNU_SOURCE
+> + if test $ac_cv_func_gettid =3D no; then
+> +   # On Linux before glibc 2.30, gettid() is only usable via syscall()
+>  --
+> -2.25.1
+> +2.40.0
+>
+> diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.58.bb b/met=
+a-webserver/recipes-httpd/apache2/apache2_2.4.59.bb
+> similarity index 99%
+> rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.58.bb
+> rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.59.bb
+> index a6cdfd165..b96e8b4e1 100644
+> --- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.58.bb
+> +++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.59.bb
+> @@ -27,7 +27,7 @@ SRC_URI:append:class-target =3D " \
+>             "
+>
+>  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dbddeddfac80b2c9a882241d008bb4=
+1c3"
+> -SRC_URI[sha256sum] =3D "fa16d72a078210a54c47dd5bef2f8b9b8a01d94909a51453=
+956b3ec6442ea4c5"
+> +SRC_URI[sha256sum] =3D "ec51501ec480284ff52f637258135d333230a7d229c3afa6=
+f6c2f9040e321323"
+>
+>  S =3D "${WORKDIR}/httpd-${PV}"
+>
+> --
+> 2.40.0
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#110058): https://lists.openembedded.org/g/openembedde=
+d-devel/message/110058
+> Mute This Topic: https://lists.openembedded.org/mt/105617674/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
