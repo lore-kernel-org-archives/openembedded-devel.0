@@ -1,181 +1,210 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D92B7C10F15
-	for <webhook@archiver.kernel.org>; Wed, 24 Apr 2024 13:32:56 +0000 (UTC)
-Received: from mailout10.t-online.de (mailout10.t-online.de [194.25.134.21])
- by mx.groups.io with SMTP id smtpd.web10.16550.1713965569797038142
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 366B0C07E8E
+	for <webhook@archiver.kernel.org>; Wed, 24 Apr 2024 14:40:37 +0000 (UTC)
+Received: from mail-yw1-f179.google.com (mail-yw1-f179.google.com [209.85.128.179])
+ by mx.groups.io with SMTP id smtpd.web11.18114.1713969634829606831
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Apr 2024 06:32:50 -0700
+ Wed, 24 Apr 2024 07:40:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.21, mailfrom: f_l_k@t-online.de)
-Received: from fwd87.aul.t-online.de (fwd87.aul.t-online.de [10.223.144.113])
-	by mailout10.t-online.de (Postfix) with SMTP id 40C5714DC5
-	for <openembedded-devel@lists.openembedded.org>; Wed, 24 Apr 2024 15:32:48 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.163.39.163]) by fwd87.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1rzcju-1LHtQn0; Wed, 24 Apr 2024 15:32:46 +0200
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-gnome][PATCHv2] gnome-control-center: update 46.0.1 -> 46.1
-Date: Wed, 24 Apr 2024 15:33:10 +0200
-Message-ID: <20240424133310.3660-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.44.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=RLiU/tkd;
+ spf=pass (domain: gmail.com, ip: 209.85.128.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-yw1-f179.google.com with SMTP id 00721157ae682-617d25b2bc4so72417987b3.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Apr 2024 07:40:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1713969634; x=1714574434; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=bLJQU7/RF5PIcXSq4Gymk6YjfohtQgGdbkH//PGnTsY=;
+        b=RLiU/tkdHo49qdryKb270nME9//o25XXcbUijqSNgXixGcQkheCtypsQjuRobwg4LE
+         38pZRCbmMZ6P8Rsj6gwaP/7ILsS7H1n5kqtgndBOjBK9T9sGZjITV/3RmPKIz7gEl4vK
+         DY2+R6rDiw84zuqCJzzqP1kNeonb9Rzt4K5+ukXDOpTos9iVwzHhGkMf120kFj6i4KGV
+         D49ta2Epo2Ct9/Yi5uJ+1FYdwL6EhL7NI/BJtgPTUGQgcdxGIv1h0esWLWaMok0lMbtI
+         lRIiFF5PlzTxv3mbSu50X+F1N/fjPfemxR/gA90+5/eb4GZ4EAl4Gt22Wwfxsw1tpTec
+         GocQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1713969634; x=1714574434;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=bLJQU7/RF5PIcXSq4Gymk6YjfohtQgGdbkH//PGnTsY=;
+        b=CMGdznLY3Xbk1Y3I3In6euPtIRyKPTmet1DGsJr537On74ttgMIYsStU97x9FVGCf3
+         kNnz5smqo4HBPUEBy6uJtjT9uo7MlKz+eMQvcxQypJu543t/YPEl/Ru7aqxXdS4bHtdl
+         aIuvuHggY1A1+cETnTpwY+VdNQjt9a3Ng0YLC8lNluX/veKHjZVlfewTocmUacZ0dD+H
+         Sr4AIFkqyxCoSay9MaXNujlydng45o89BW0pvnutnoi44j0bRCLhWcKcKY9Z9Nkl8hNc
+         4r1sbFHE+jDVD6N7HR/EqQgJ/L1ayJvwt/qVMjZ8WMyjj7ORzvfBLwoyN7ermW+/GcrI
+         7NKQ==
+X-Gm-Message-State: AOJu0YyI+4t9yoVN0fYmHcN4KZqdqSPZjkERbcvLCWyj37I/w45fXNzs
+	3l27um29bTVQW/OXh0yrlZhlnPsd/MBRFBw8f75neelZ8iivlhOnif11qDa2IhWw4dxyG0jqdDq
+	FIUbIuU1hZEeb1aoIU5Gabll0mW4=
+X-Google-Smtp-Source: AGHT+IGqPZQrYqZm9KwQyB7h3wrNLLMup2UdXlWI9G1Qr/WR/OlX4Zdr95/JCb3+ZDDrERxEoO8E3xUFb77NdJu0Cr0=
+X-Received: by 2002:a05:690c:ecd:b0:61b:1c75:2077 with SMTP id
+ cs13-20020a05690c0ecd00b0061b1c752077mr3293511ywb.7.1713969633853; Wed, 24
+ Apr 2024 07:40:33 -0700 (PDT)
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1713965566-215BAE88-A10C1F13/0/0 CLEAN NORMAL
-X-TOI-MSGID: c7b138d6-275a-4886-9e68-5e875dc9a328
-Content-Transfer-Encoding: quoted-printable
+References: <20240424132329.2706-1-f_l_k@t-online.de>
+In-Reply-To: <20240424132329.2706-1-f_l_k@t-online.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 24 Apr 2024 16:40:21 +0200
+Message-ID: <CAMKF1so6r93QEzxrMV_j5EieO_vvbLkC0PgfBSmrh2K2SqqoQA@mail.gmail.com>
+Subject: Re: [oe] [meta-gnome][PATCH 1/3] gupnp: dont package source
+To: f_l_k@t-online.de
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="0000000000002e8af30616d8a7ab"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 Apr 2024 13:32:56 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110129
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 Apr 2024 14:40:37 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110130
 
-- add PACKAGECONFIGS for file-share and media-share
+--0000000000002e8af30616d8a7ab
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-46.1
+On Wed, Apr 24, 2024 at 3:23=E2=80=AFPM Markus Volk via lists.openembedded.=
+org
+<f_l_k=3Dt-online.de@lists.openembedded.org> wrote:
 
-* Accessibility
- - Improve accessibility of "Typing" settings sliders
+> Source code contains reference to tmpdir. Dont package to avoid
+> reproducibility issue
 
-* Display
- - Fix crash when pressing Escape in the display settings
 
-* Network
- - Add stable-ssid support for cloned-mac
+Can we root cause it instead ? Removing sources from debug info might fix
+this issue but degrade debugging experience
 
-* Privacy
- - Add build option to enable Location services
- - Fix opening of Help pages while viewing Privacy settings
+>
+>
+> Signed-off-by: Markus Volk <f_l_k@t-online.de>
+> ---
+>  meta-multimedia/recipes-connectivity/gupnp/gssdp_1.6.3.bb | 1 +
+>  meta-multimedia/recipes-connectivity/gupnp/gupnp_1.6.6.bb | 1 +
+>  2 files changed, 2 insertions(+)
+>
+> diff --git a/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.6.3.bb
+> b/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.6.3.bb
+> index f2e27622c..c7fee78a8 100644
+> --- a/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.6.3.bb
+> +++ b/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.6.3.bb
+> @@ -28,5 +28,6 @@ PACKAGECONFIG[sniffer] =3D
+> "-Dsniffer=3Dtrue,-Dsniffer=3Dfalse,gtk4,"
+>  REQUIRED_DISTRO_FEATURES =3D "${@bb.utils.contains('PACKAGECONFIG',
+> 'sniffer', 'opengl', '', d)}"
+>
+>  PACKAGES =3D+ "gssdp-tools"
+> +PACKAGE_DEBUG_SPLIT_STYLE =3D "debug-without-src"
+>
+>  FILES:gssdp-tools =3D "${bindir}/gssdp* ${datadir}/gssdp/*.glade"
+> diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.6.6.bb
+> b/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.6.6.bb
+> index f1628d82e..80d0b3e2d 100644
+> --- a/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.6.6.bb
+> +++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.6.6.bb
+> @@ -18,4 +18,5 @@ gupnp_sysroot_preprocess () {
+>
+>  FILES:${PN}-dev +=3D "${bindir}/gupnp-binding-tool*"
+>
+> +PACKAGE_DEBUG_SPLIT_STYLE =3D "debug-without-src"
+>  RDEPENDS:${PN}-dev +=3D "python3-core python3-xml"
+> --
+> 2.44.0
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#110125):
+> https://lists.openembedded.org/g/openembedded-devel/message/110125
+> Mute This Topic: https://lists.openembedded.org/mt/105709729/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
 
-* Sharing
- - Auto hide Sharing panel when Rygel AND gnome-user-share are not availa=
-ble
+--0000000000002e8af30616d8a7ab
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-* System
- - Don't show auto-timezone setting when Location services unavailable
- - Avoid unnecessary time-change requests
- - Fix issue with sensitivity of "Add" and "Enroll" Enterprise Login butt=
-ons
- - Improve generated passwords capacity in Remote Desktop settings
+<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Wed, Apr 24, 2024 at 3:23=E2=80=AFPM Markus Volk via <a =
+href=3D"http://lists.openembedded.org">lists.openembedded.org</a> &lt;f_l_k=
+=3D<a href=3D"mailto:t-online.de@lists.openembedded.org">t-online.de@lists.=
+openembedded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" =
+style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">Sou=
+rce code contains reference to tmpdir. Dont package to avoid<br>
+reproducibility issue</blockquote><div dir=3D"auto"><br></div><div dir=3D"a=
+uto">Can we root cause it instead ? Removing sources from debug info might =
+fix this issue but degrade debugging experience=C2=A0</div><blockquote clas=
+s=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;pad=
+ding-left:1ex" dir=3D"auto"><br>
+<br>
+Signed-off-by: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de" target=
+=3D"_blank">f_l_k@t-online.de</a>&gt;<br>
+---<br>
+=C2=A0meta-multimedia/recipes-connectivity/gupnp/<a href=3D"http://gssdp_1.=
+6.3.bb" rel=3D"noreferrer" target=3D"_blank">gssdp_1.6.3.bb</a> | 1 +<br>
+=C2=A0meta-multimedia/recipes-connectivity/gupnp/<a href=3D"http://gupnp_1.=
+6.6.bb" rel=3D"noreferrer" target=3D"_blank">gupnp_1.6.6.bb</a> | 1 +<br>
+=C2=A02 files changed, 2 insertions(+)<br>
+<br>
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/<a href=3D"http://g=
+ssdp_1.6.3.bb" rel=3D"noreferrer" target=3D"_blank">gssdp_1.6.3.bb</a> b/me=
+ta-multimedia/recipes-connectivity/gupnp/<a href=3D"http://gssdp_1.6.3.bb" =
+rel=3D"noreferrer" target=3D"_blank">gssdp_1.6.3.bb</a><br>
+index f2e27622c..c7fee78a8 100644<br>
+--- a/meta-multimedia/recipes-connectivity/gupnp/<a href=3D"http://gssdp_1.=
+6.3.bb" rel=3D"noreferrer" target=3D"_blank">gssdp_1.6.3.bb</a><br>
++++ b/meta-multimedia/recipes-connectivity/gupnp/<a href=3D"http://gssdp_1.=
+6.3.bb" rel=3D"noreferrer" target=3D"_blank">gssdp_1.6.3.bb</a><br>
+@@ -28,5 +28,6 @@ PACKAGECONFIG[sniffer] =3D &quot;-Dsniffer=3Dtrue,-Dsniff=
+er=3Dfalse,gtk4,&quot;<br>
+=C2=A0REQUIRED_DISTRO_FEATURES =3D &quot;${@bb.utils.contains(&#39;PACKAGEC=
+ONFIG&#39;, &#39;sniffer&#39;, &#39;opengl&#39;, &#39;&#39;, d)}&quot;<br>
+<br>
+=C2=A0PACKAGES =3D+ &quot;gssdp-tools&quot;<br>
++PACKAGE_DEBUG_SPLIT_STYLE =3D &quot;debug-without-src&quot;<br>
+<br>
+=C2=A0FILES:gssdp-tools =3D &quot;${bindir}/gssdp* ${datadir}/gssdp/*.glade=
+&quot;<br>
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/<a href=3D"http://g=
+upnp_1.6.6.bb" rel=3D"noreferrer" target=3D"_blank">gupnp_1.6.6.bb</a> b/me=
+ta-multimedia/recipes-connectivity/gupnp/<a href=3D"http://gupnp_1.6.6.bb" =
+rel=3D"noreferrer" target=3D"_blank">gupnp_1.6.6.bb</a><br>
+index f1628d82e..80d0b3e2d 100644<br>
+--- a/meta-multimedia/recipes-connectivity/gupnp/<a href=3D"http://gupnp_1.=
+6.6.bb" rel=3D"noreferrer" target=3D"_blank">gupnp_1.6.6.bb</a><br>
++++ b/meta-multimedia/recipes-connectivity/gupnp/<a href=3D"http://gupnp_1.=
+6.6.bb" rel=3D"noreferrer" target=3D"_blank">gupnp_1.6.6.bb</a><br>
+@@ -18,4 +18,5 @@ gupnp_sysroot_preprocess () {<br>
+<br>
+=C2=A0FILES:${PN}-dev +=3D &quot;${bindir}/gupnp-binding-tool*&quot;<br>
+<br>
++PACKAGE_DEBUG_SPLIT_STYLE =3D &quot;debug-without-src&quot;<br>
+=C2=A0RDEPENDS:${PN}-dev +=3D &quot;python3-core python3-xml&quot;<br>
+-- <br>
+2.44.0<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#110125): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/110125" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/110125</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/105709729/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/105709729/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
 
-* Wacom
- - Check for the right output connector name
-
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- .../0001-Add-meson-option-to-pass-sysroot.patch     | 13 +++++--------
- ...enter_46.0.1.bb =3D> gnome-control-center_46.1.bb} |  9 ++++-----
- 2 files changed, 9 insertions(+), 13 deletions(-)
- rename meta-gnome/recipes-gnome/gnome-control-center/{gnome-control-cent=
-er_46.0.1.bb =3D> gnome-control-center_46.1.bb} (87%)
-
-diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-=
-center/0001-Add-meson-option-to-pass-sysroot.patch b/meta-gnome/recipes-g=
-nome/gnome-control-center/gnome-control-center/0001-Add-meson-option-to-p=
-ass-sysroot.patch
-index 4ae923f87..7d17817bc 100644
---- a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center/=
-0001-Add-meson-option-to-pass-sysroot.patch
-+++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center/=
-0001-Add-meson-option-to-pass-sysroot.patch
-@@ -1,4 +1,4 @@
--From 1a48df2a8da44410bbd767c2420d363f6180c79a Mon Sep 17 00:00:00 2001
-+From 8e542784b8ca49c655df0f251a1a1dec724a522e Mon Sep 17 00:00:00 2001
- From: Markus Volk <f_l_k@t-online.de>
- Date: Mon, 18 Mar 2024 05:50:21 +0100
- Subject: [PATCH] Add meson option to pass sysroot
-@@ -13,16 +13,16 @@ Upstream-Status: Inappropriate [OE specific]
-  3 files changed, 3 insertions(+), 2 deletions(-)
-=20
- diff --git a/meson_options.txt b/meson_options.txt
--index e53d6e3f3..8fae4c824 100644
-+index f415a7e..8966632 100644
- --- a/meson_options.txt
- +++ b/meson_options.txt
- @@ -1,3 +1,4 @@
- +option('oe_sysroot', type: 'string', value: '', description: 'Directory=
- for OE-sysroot')
-  option('deprecated-declarations', type: 'feature', value: 'disabled', d=
-escription: 'build with deprecated declaration warnings')
-  option('documentation', type: 'boolean', value: false, description: 'bu=
-ild documentation')
-- option('ibus', type: 'boolean', value: true, description: 'build with I=
-Bus support')
-+ option('location-services', type: 'feature', value: 'disabled', descrip=
-tion: 'build with location services')
- diff --git a/panels/background/meson.build b/panels/background/meson.bui=
-ld
--index 6ced050f9..df1f80896 100644
-+index 6ced050..df1f808 100644
- --- a/panels/background/meson.build
- +++ b/panels/background/meson.build
- @@ -24,7 +24,7 @@ common_sources +=3D gnome.mkenums_simple(
-@@ -35,7 +35,7 @@ index 6ced050f9..df1f80896 100644
- =20
-  common_sources +=3D gnome.mkenums(
- diff --git a/panels/system/meson.build b/panels/system/meson.build
--index 4fee82210..979332a0e 100644
-+index 4fee822..979332a 100644
- --- a/panels/system/meson.build
- +++ b/panels/system/meson.build
- @@ -73,7 +73,7 @@ sources +=3D gnome.compile_resources(
-@@ -47,6 +47,3 @@ index 4fee82210..979332a0e 100644
-    'datetime/cc-datetime-page.h'
-  )
- =20
----=20
--2.44.0
--
-diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-=
-center_46.0.1.bb b/meta-gnome/recipes-gnome/gnome-control-center/gnome-co=
-ntrol-center_46.1.bb
-similarity index 87%
-rename from meta-gnome/recipes-gnome/gnome-control-center/gnome-control-c=
-enter_46.0.1.bb
-rename to meta-gnome/recipes-gnome/gnome-control-center/gnome-control-cen=
-ter_46.1.bb
-index de11239ed..87daec0c2 100644
---- a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_=
-46.0.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_=
-46.1.bb
-@@ -37,16 +37,15 @@ inherit gtk-icon-cache pkgconfig gnomebase gsettings =
-gettext upstream-version-is
-=20
- REQUIRED_DISTRO_FEATURES +=3D "opengl polkit pulseaudio systemd x11"
-=20
--SRC_URI =3D "gitsm://gitlab.gnome.org/GNOME/gnome-control-center.git;pro=
-tocol=3Dhttps;nobranch=3D1"
- SRC_URI +=3D "file://0001-Add-meson-option-to-pass-sysroot.patch"
--
--S =3D "${WORKDIR}/git"
--SRCREV =3D "005f40dcfa464f113a1c95f97673bc5505fc15ad"
-+SRC_URI[archive.sha256sum] =3D "81792423019deda1d2a074c1ecf6a7e6ef3172c0=
-9cbe6f4d7995a4b5dea28312"
-=20
- PACKAGECONFIG ??=3D "ibus ${@bb.utils.filter('DISTRO_FEATURES', 'wayland=
-', d)}"
- PACKAGECONFIG[cups] =3D ",,cups,cups"
- PACKAGECONFIG[ibus] =3D "-Dibus=3Dtrue, -Dibus=3Dfalse, ibus"
- PACKAGECONFIG[wayland] =3D "-Dwayland=3Dtrue, -Dwayland=3Dfalse, wayland=
-"
-+PACKAGECONFIG[file-share] =3D ",,,gnome-user-share"
-+PACKAGECONFIG[media-share] =3D ",,,rygel-meta tumbler"
-=20
- EXTRA_OEMESON +=3D "-Doe_sysroot=3D${STAGING_DIR_HOST}"
-=20
-@@ -72,4 +71,4 @@ FILES:${PN} +=3D " \
-=20
- FILES:${PN}-dev +=3D "${datadir}/gettext"
-=20
--RDEPENDS:${PN} +=3D "gsettings-desktop-schemas tecla system-config-print=
-er cups-pk-helper ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'gno=
-me-user-share', '' , d)}"
-+RDEPENDS:${PN} +=3D "gsettings-desktop-schemas tecla system-config-print=
-er cups-pk-helper"
---=20
-2.44.0
-
+--0000000000002e8af30616d8a7ab--
 
