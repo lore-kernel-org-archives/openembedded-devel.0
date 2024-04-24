@@ -1,102 +1,150 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AAC4FC4345F
-	for <webhook@archiver.kernel.org>; Wed, 24 Apr 2024 12:48:16 +0000 (UTC)
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
- by mx.groups.io with SMTP id smtpd.web11.15365.1713962893824358934
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D12F8C4345F
+	for <webhook@archiver.kernel.org>; Wed, 24 Apr 2024 13:19:56 +0000 (UTC)
+Received: from mail-oa1-f49.google.com (mail-oa1-f49.google.com [209.85.160.49])
+ by mx.groups.io with SMTP id smtpd.web10.16242.1713964790451238163
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 24 Apr 2024 05:48:14 -0700
+ Wed, 24 Apr 2024 06:19:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linuxfoundation.org header.s=google header.b=iTGduSUZ;
- spf=pass (domain: linuxfoundation.org, ip: 209.85.128.41, mailfrom: richard.purdie@linuxfoundation.org)
-Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-41a7ae25d53so23497385e9.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Apr 2024 05:48:13 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=X89x+ezV;
+ spf=pass (domain: gmail.com, ip: 209.85.160.49, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f49.google.com with SMTP id 586e51a60fabf-238fd648224so3561325fac.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 24 Apr 2024 06:19:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linuxfoundation.org; s=google; t=1713962892; x=1714567692; darn=lists.openembedded.org;
-        h=mime-version:user-agent:content-transfer-encoding:autocrypt
-         :references:in-reply-to:date:cc:to:from:subject:message-id:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=h2b1r3GQEyw1bu4GOm4da+6eWdS9ykLmAT0Y3xDl50Q=;
-        b=iTGduSUZRaSWxuhc1R0e2clSakRH70IFbf6RdEMonQjUJfbbkoy3x8Z882N4kqMsQb
-         Ylaruo/XHi7U5eECBJSoghhz6QbaZo6De762Yvr9C6ues9OgzXBpLqUCaCtUpcVRKIhL
-         yINsX+ctFiXB3JJYFAmNorufjdkc27Q5qca4k=
+        d=gmail.com; s=20230601; t=1713964790; x=1714569590; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=Yx1fnnKHVLAOnTCC6qEx8DQCcSPpqZBa5+99v1Z4mX4=;
+        b=X89x+ezVf0zwpUpT8Pbx7Orge3KCF4/bxxX3JjLMl86uyzR9DLsGUoRjhd6k32slqi
+         w1deZi+1qGZ5t3sAU5Q+97U5SXr8cErSBZVPaOdLtRQzICi6uUA7tLuiDjY1Thxo5BON
+         vm5O+1vByq4ftIXjdVBkLRkvpZuebMDpdhE9dn+CCsWKB/OVWeV1peCEhc1WfFhtbU3Y
+         zR2xixbfezHRoGdKsBjYKDKN18AzTicgnumVVG2it3izxt8iIzW6P6DWeFarUyN+XSBM
+         ObQJ8HgM68cEDkDB5enCINlx2IR0hqGhthHCKxfKS29tw2eJ4914JZHyeBt3yYDefKUr
+         1+YA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1713962892; x=1714567692;
-        h=mime-version:user-agent:content-transfer-encoding:autocrypt
-         :references:in-reply-to:date:cc:to:from:subject:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=h2b1r3GQEyw1bu4GOm4da+6eWdS9ykLmAT0Y3xDl50Q=;
-        b=LTAGb+Q4zoW4ymvxQDKyvMqXMZoAIphpwsE7i7CM/Yk41SX7qOagwX8Fe0oQ28j00r
-         0Iqt2TwMcNIAkL3W3rYf8BmuFSC0hmIbxwbw3nxTljG0xHc4oEdcmp7sBUmIoIZpcWnF
-         pCIY41jcHkm8oaBLgXOkSkVqkFFa6wxsuBXXuwbM5XlVxvivWu2WaENEw8qfboS06nrI
-         C4KwEeUySYfH/YIkFG6wqUWMsA7pgivL69jLt0YvjzgL4hrAq1qTNiWwbi2bQYTcrML+
-         vNQ6ZtOPlIMglZI8ux498LU5R2m56aMCFprjuN6N78a9UxwkmoHhY3FlB3OK/C1wPgIZ
-         wFAw==
-X-Forwarded-Encrypted: i=1; AJvYcCUfz4+wsTDBqWq26NnW9au7vei9uk5C2oVWJ4dpSlP+2dY308oNU0Wc8rXloDGNhEem+EJDNGjoK8XveYgcbTFCZOc2VbcgSwWFOK+HQFz2aXkWKijAC06B+w==
-X-Gm-Message-State: AOJu0YzRFGB3qguVUIQo4L7Fz8DJCB/ACwMhjH4jZakGA/z6SlEf5ruS
-	YF2R/il8PGUZuq7btd1I3RWKVUxBuFCW1vp3Cc8VzcxG02mSNlzQptF7/gaBsP8=
-X-Google-Smtp-Source: AGHT+IFwfTGXFxURS2Sekm795R9pN0Gn6UJL72ni8+W0BRfsyKUPSCCCB3ollaRWSQ2w7ssvCtSPLg==
-X-Received: by 2002:adf:e5c6:0:b0:34a:687a:8f66 with SMTP id a6-20020adfe5c6000000b0034a687a8f66mr1447726wrn.45.1713962892036;
-        Wed, 24 Apr 2024 05:48:12 -0700 (PDT)
-Received: from ?IPv6:2001:8b0:aba:5f3c:5d1f:71e0:6a7a:a96f? ([2001:8b0:aba:5f3c:5d1f:71e0:6a7a:a96f])
-        by smtp.gmail.com with ESMTPSA id a12-20020adfed0c000000b0034635bd6ba5sm17065417wro.92.2024.04.24.05.48.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 24 Apr 2024 05:48:11 -0700 (PDT)
-Message-ID: <053892adff2c9f1d3c80dc3e37a583bc669c01d4.camel@linuxfoundation.org>
+        d=1e100.net; s=20230601; t=1713964790; x=1714569590;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Yx1fnnKHVLAOnTCC6qEx8DQCcSPpqZBa5+99v1Z4mX4=;
+        b=guGtr/q2p4IEtimHTC6ef7SVyjgUe0G0nRbRXPAFZfRJneBS3H0LI1vGk7psgDXAg6
+         wUpNu8e4r3yzkIP7uUrMHqk++RhRpG2UqtG3iiJ9xf4laiXyet3J8NDMwXv7mxwyeENb
+         bVzge0lygpez3LWlyglRRT4qLkRoEa3Y/KAhSnhHHtqtObjsKa3ABBaoXbSv6zupr0hw
+         VgNXBmRkGlCyY9hhnVvsm17ISAFgKknfduaYnb9h065t4lKnofdRcAFunqgz1SS/lF3m
+         qD3Apl/iA0ds02+IPo5lYGl/t5OF1OFp1LmbNo+vy3jFws1KrehqsUqhN7mkuKS1BjUU
+         lJhA==
+X-Forwarded-Encrypted: i=1; AJvYcCVQvnMm9baTDQJKP6qgw4vjJRKyh28HH1cV/57mEZ/sH2yipoEDwmUkyLZgfa0ghtIjSPf9oeJ6XcioV62NEzK2i4MZjXVEyQ0w2Euw3GxUByguxXHzpVPQAg==
+X-Gm-Message-State: AOJu0YxgyNYWBIBj/kl2LTbG53GdmBHd+GfGrU/8A6hGZ/gLV+ZPVb9L
+	45k0nY4zMnfJlTK+wH9MzPf0R2piwZAtQI3A55rPS25ksEy7/zfS7LuGL54GgzeTpEW0rfUq/lk
+	dCS+DqlSB5koDuwWH01Zo+U14ay0=
+X-Google-Smtp-Source: AGHT+IG03pAtjkVfk4dNQ4iI7OYGusqAUihEuCsE65G/pNgjtUr9/kuKBjk8xD85CMlYr5x7g8cURY611iiP/gCcnCc=
+X-Received: by 2002:a05:6870:a345:b0:238:b140:1ab with SMTP id
+ y5-20020a056870a34500b00238b14001abmr2540615oak.48.1713964789720; Wed, 24 Apr
+ 2024 06:19:49 -0700 (PDT)
+MIME-Version: 1.0
+References: <20240424114158.4102856-1-yoann.congal@smile.fr> <053892adff2c9f1d3c80dc3e37a583bc669c01d4.camel@linuxfoundation.org>
+In-Reply-To: <053892adff2c9f1d3c80dc3e37a583bc669c01d4.camel@linuxfoundation.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 24 Apr 2024 15:19:38 +0200
+Message-ID: <CAMKF1sr3q+BzmoUGCaQPtgq9Z_t=OxaUz9BY8TZ+PC7udK91dQ@mail.gmail.com>
 Subject: Re: [meta-*][PATCH] reproducibility: move repro excludes from AB
  config.json to meta-oe
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Yoann Congal <yoann.congal@smile.fr>, 
-	openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 24 Apr 2024 13:48:10 +0100
-In-Reply-To: <20240424114158.4102856-1-yoann.congal@smile.fr>
-References: <20240424114158.4102856-1-yoann.congal@smile.fr>
-Autocrypt: addr=richard.purdie@linuxfoundation.org; prefer-encrypt=mutual; keydata=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
- YNvg==
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.50.0-1 
-MIME-Version: 1.0
+To: Richard Purdie <richard.purdie@linuxfoundation.org>
+Cc: Yoann Congal <yoann.congal@smile.fr>, openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="00000000000072efd70616d78666"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 24 Apr 2024 12:48:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110123
+ <openembedded-devel@lists.openembedded.org>; Wed, 24 Apr 2024 13:19:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110124
 
-On Wed, 2024-04-24 at 13:41 +0200, Yoann Congal wrote:
-> For now, the known non-reproducible packages list is stored inside
-> the
-> autobuilder config.json file. This is not ideal. Let's move this list
-> into each layers of meta-openembedded.
->=20
-> These lists can be used with, in local.conf:
-> =C2=A0 include conf/include/non-repro-meta-oe.inc
-> =C2=A0 OEQA_REPRODUCIBLE_EXCLUDED_PACKAGES =3D "${KNOWN_NON_REPRO_META_OE=
-}"
->=20
-> Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
-> ---
-> Cc: Richard Purdie <richard.purdie@linuxfoundation.org>
-> Cc: Khem Raj <raj.khem@gmail.com>
-> Richard, Khem: The next step will be to move the current AB config to
-> use these
-> files. And then, continue to cleanup reproducibility errors.
+--00000000000072efd70616d78666
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Acked-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+On Wed, Apr 24, 2024 at 2:48=E2=80=AFPM Richard Purdie <
+richard.purdie@linuxfoundation.org> wrote:
 
-Thanks for doing this, this should make issues more visible to people
-and easier to update the lists as things change!
+> On Wed, 2024-04-24 at 13:41 +0200, Yoann Congal wrote:
+> > For now, the known non-reproducible packages list is stored inside
+> > the
+> > autobuilder config.json file. This is not ideal. Let's move this list
+> > into each layers of meta-openembedded.
+> >
+> > These lists can be used with, in local.conf:
+> >   include conf/include/non-repro-meta-oe.inc
+> >   OEQA_REPRODUCIBLE_EXCLUDED_PACKAGES =3D "${KNOWN_NON_REPRO_META_OE}"
+> >
+> > Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+> > ---
+> > Cc: Richard Purdie <richard.purdie@linuxfoundation.org>
+> > Cc: Khem Raj <raj.khem@gmail.com>
+> > Richard, Khem: The next step will be to move the current AB config to
+> > use these
+> > files. And then, continue to cleanup reproducibility errors.
+>
+> Acked-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+>
+> Thanks for doing this, this should make issues more visible to people
+> and easier to update the lists as things change!
+>
 
-Cheers,
+Agreed
 
-Richard
+
+> Cheers,
+>
+> Richard
+>
+
+--00000000000072efd70616d78666
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div><br></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">On Wed, Apr 24, 2024 at 2:48=E2=80=AFPM Richard Purdie &lt;=
+<a href=3D"mailto:richard.purdie@linuxfoundation.org">richard.purdie@linuxf=
+oundation.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" sty=
+le=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">On Wed=
+, 2024-04-24 at 13:41 +0200, Yoann Congal wrote:<br>
+&gt; For now, the known non-reproducible packages list is stored inside<br>
+&gt; the<br>
+&gt; autobuilder config.json file. This is not ideal. Let&#39;s move this l=
+ist<br>
+&gt; into each layers of meta-openembedded.<br>
+&gt; <br>
+&gt; These lists can be used with, in local.conf:<br>
+&gt; =C2=A0 include conf/include/non-repro-meta-oe.inc<br>
+&gt; =C2=A0 OEQA_REPRODUCIBLE_EXCLUDED_PACKAGES =3D &quot;${KNOWN_NON_REPRO=
+_META_OE}&quot;<br>
+&gt; <br>
+&gt; Signed-off-by: Yoann Congal &lt;<a href=3D"mailto:yoann.congal@smile.f=
+r" target=3D"_blank">yoann.congal@smile.fr</a>&gt;<br>
+&gt; ---<br>
+&gt; Cc: Richard Purdie &lt;<a href=3D"mailto:richard.purdie@linuxfoundatio=
+n.org" target=3D"_blank">richard.purdie@linuxfoundation.org</a>&gt;<br>
+&gt; Cc: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" target=3D"_blan=
+k">raj.khem@gmail.com</a>&gt;<br>
+&gt; Richard, Khem: The next step will be to move the current AB config to<=
+br>
+&gt; use these<br>
+&gt; files. And then, continue to cleanup reproducibility errors.<br>
+<br>
+Acked-by: Richard Purdie &lt;<a href=3D"mailto:richard.purdie@linuxfoundati=
+on.org" target=3D"_blank">richard.purdie@linuxfoundation.org</a>&gt;<br>
+<br>
+Thanks for doing this, this should make issues more visible to people<br>
+and easier to update the lists as things change!<br>
+</blockquote><div dir=3D"auto"><br></div><div dir=3D"auto">Agreed=C2=A0</di=
+v><div dir=3D"auto"><br></div><blockquote class=3D"gmail_quote" style=3D"ma=
+rgin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"><br>
+Cheers,<br>
+<br>
+Richard<br>
+</blockquote></div></div>
+
+--00000000000072efd70616d78666--
 
