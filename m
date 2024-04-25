@@ -2,60 +2,65 @@ Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C9573C4345F
-	for <webhook@archiver.kernel.org>; Thu, 25 Apr 2024 12:31:30 +0000 (UTC)
-Received: from mail-yw1-f172.google.com (mail-yw1-f172.google.com [209.85.128.172])
- by mx.groups.io with SMTP id smtpd.web11.15690.1714048286850649398
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E7E70C4345F
+	for <webhook@archiver.kernel.org>; Thu, 25 Apr 2024 12:58:20 +0000 (UTC)
+Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com [209.85.128.178])
+ by mx.groups.io with SMTP id smtpd.web11.16266.1714049898332721581
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Apr 2024 05:31:26 -0700
+ Thu, 25 Apr 2024 05:58:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=PtPGNHTb;
- spf=pass (domain: gmail.com, ip: 209.85.128.172, mailfrom: akuster808@gmail.com)
-Received: by mail-yw1-f172.google.com with SMTP id 00721157ae682-61ab6faf179so9097527b3.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 25 Apr 2024 05:31:26 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=aD2ijZZs;
+ spf=pass (domain: gmail.com, ip: 209.85.128.178, mailfrom: akuster808@gmail.com)
+Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-61804067da0so8846247b3.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 25 Apr 2024 05:58:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1714048286; x=1714653086; darn=lists.openembedded.org;
-        h=content-transfer-encoding:autocrypt:subject:from:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=QgWE0wlSolt3cW6RTTwrlQ9WPp8YEBD9AcvAZ7zhQHo=;
-        b=PtPGNHTblL34nIanb4G0R6iKtm8Jes0jpTA/Y45gTV9Mk/JhH7eTLv+8EUbTymZQrG
-         J6aiWH7+QjxCvE7fvN1ZMvU+nmMkCX3sCUEvjMzr1JBDx97PsA4vXlCFnq8nGlyTZxQR
-         F3Gsl1D4NOcAtUyzu4xEhc0KuhKPzUt+Ewh7Vxh427CM0XD06mQua/b4EzTbchZZ9WpJ
-         DpOuQ4vtbqyhXMe/qGmSSMynHZbew5JM/OdfqRNDzcUKMwW4S5vvjWAzi7VI7DGnDsdv
-         lRcZTR+VwgZFPmkdKsmbkuI7alPyB1u7EmleERYn65w/6reTEbFAqIpNniYK+xmPB8gL
-         ZWIQ==
+        d=gmail.com; s=20230601; t=1714049897; x=1714654697; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=HMkfm9cg3/p5uEGDkGMJ9DIvGxQ5l55AJT20mzBWJRg=;
+        b=aD2ijZZsVztG3OsBX55dpOYmYoevXQdpGFUan2bNN95Z/yyM4mof7sCsooMO7QsCKC
+         +pBylQE8p985fZj0uAlJO6S4zdR0jE8bINiOkN/BTiLsCNOK5zH8qp+lbCxGlQDCXSQN
+         iS9IXEr1FTdykp71HDGV3QqnhiSpA7r7GEwRvQWVNtegjMCrOHhpWCDY15QituRPOJ6u
+         Bd62oxX22OLamul5NwNJM0OHZ5aFDkuJ7qhiS4VnS0TdD8pzoWF5BFwVaRuOYur435hv
+         QqO/zZfMwLbK6vG22q0yPkywqgMhMyM5VVYRQaANlEGWpXVIaBYI+fXTtv2xlE9NZkZ6
+         GWkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1714048286; x=1714653086;
-        h=content-transfer-encoding:autocrypt:subject:from:to
-         :content-language:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=QgWE0wlSolt3cW6RTTwrlQ9WPp8YEBD9AcvAZ7zhQHo=;
-        b=KKglaa6CCJR4aS+26+80Mde/JguJkUsto/gWiwjBSCYl8ibXrsl/twF6OrtW1aluj8
-         0tdES+LpEVUjp9QnNzcLXmv42JIUNhw+acOyPQmB50Brqh2qc67u6MJhwm8Bb0xsEs1d
-         xd2PHw6TzTGiPLl+7PV90zy1tv/rvf5nI3ZGLTjoZ7nqbtYC8OfE7ftum1fr0JxA6IhR
-         21oXOaxjLxgX63gQnHsNTORCWkbfBc6yAqfR8eGwCz/jgywXIbZnkMmgM95epFlV89+Y
-         WAQJTvXOJ+nRicHkwHc4sZr4800o9U5GPDDElkpYpv0rZ6LlVlFHLOk3fxXzhGKpHBzP
-         8TAw==
-X-Forwarded-Encrypted: i=1; AJvYcCWpYIEtlLJ+9q0yW++oewtCKQ7cOkve/60dROIDx206LaUnvDRpSpnSPC+wte8As/TSGUuNXbmi7joJVYva6ZfcKbIpa28Vu2VjglD82+6wO4WWgvJesxtB+Q==
-X-Gm-Message-State: AOJu0YzNPbTv+ZYg1pfvrGlafVKrD/QJIqPvuFdqLcR22FhDgfoaY4D4
-	EhWyYBfQ1YgTAJsx8J8QLDEkGHVLeuVZidBaz3UNt3LYmS7XT9oV1MpZcQ==
-X-Google-Smtp-Source: AGHT+IHYm1BzwfVrxEgr9Pk/4wc6YE61nXmQ8QYZyVBtFBulVohXA1AEKwnSah6I/hbXF5v8yz/KIg==
-X-Received: by 2002:a05:690c:360f:b0:611:191e:1de8 with SMTP id ft15-20020a05690c360f00b00611191e1de8mr6741736ywb.18.1714048285912;
-        Thu, 25 Apr 2024 05:31:25 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1714049897; x=1714654697;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=HMkfm9cg3/p5uEGDkGMJ9DIvGxQ5l55AJT20mzBWJRg=;
+        b=M4kcxxDodP1rYcXeroSvLIDufdPJP987Xnmzlie0Sd4MfV9sLujWc+HwZ3i6HrH2+V
+         39fXECpsWAnxCG2+UAx1KdDJaxJP0Y36dIh9b1YaJCj3FKUdxxN4OTTR5sdwu8sM4iRD
+         i9KGqDei8JaMGRUuPJxMuKDNtEYaFkIav07b1f0gbqIr+PXTv1s7fRQb7355/dthjAaU
+         +1516JUhbdhp5q7Oq1nomcoyamVj0K2Jng5ZnqEjzpJJdcy+NMDcn0i+qkmUtIvluwig
+         pKdXMDxOv3ZS28p/bugUvFVonNcv0xhfrSNQApGdTc3yyMkmQurDYxE5Wqbsz6WoOoK6
+         3Qnw==
+X-Gm-Message-State: AOJu0YzpgR7Cr28sbAMUdbuLbxuex8/lbQPLPxx3d/UVWJZpSLFOIk+Z
+	eFB5Ft1Rhf89fp2GI6yQVpbJkRT6GmrHk09D9k3U0cI+wsydTU0B
+X-Google-Smtp-Source: AGHT+IEf7X5vmJbUvql8X6At6Z/ZF4ju8KWl7jYk9FKwV9tlXax3bW53iUrnOzj3njnbKeaQ45grew==
+X-Received: by 2002:a05:690c:338e:b0:61a:c976:a485 with SMTP id fl14-20020a05690c338e00b0061ac976a485mr6606090ywb.26.1714049897444;
+        Thu, 25 Apr 2024 05:58:17 -0700 (PDT)
 Received: from ?IPV6:2600:1700:45dd:7000:9865:f36b:a613:88e9? ([2600:1700:45dd:7000:9865:f36b:a613:88e9])
-        by smtp.gmail.com with ESMTPSA id c10-20020a81e54a000000b0061447e2be82sm3076486ywm.51.2024.04.25.05.31.25
+        by smtp.gmail.com with ESMTPSA id l64-20020a819443000000b00614f87bd41asm3557290ywg.56.2024.04.25.05.58.16
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 25 Apr 2024 05:31:25 -0700 (PDT)
-Message-ID: <67e563c5-65d4-4dec-bda7-8cb82d393067@gmail.com>
-Date: Thu, 25 Apr 2024 08:31:24 -0400
+        Thu, 25 Apr 2024 05:58:17 -0700 (PDT)
+Message-ID: <bcd560e9-1be0-4106-8846-94c729af6601@gmail.com>
+Date: Thu, 25 Apr 2024 08:58:16 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Subject: Re: [oe][meta-webserver][kirkstone][PATCH 1/1] nginx: upgrade 1.25.2
+ -> 1.25.3
+To: meenali.gupta@windriver.com, Khem Raj <raj.khem@gmail.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+ <openembedded-devel@lists.openembedded.org>
+References: <20231214103812.512113-1-meenali.gupta@windriver.com>
+ <CAMKF1spE4bd8H3ATZOKcxYP01Cstp2hvBXZ9Qc9DeC8pQtoVWw@mail.gmail.com>
+ <BY1PR11MB800512F6778B619835B895CDE53B2@BY1PR11MB8005.namprd11.prod.outlook.com>
 Content-Language: en-US
-To: Khem Raj <raj.khem@gmail.com>,
- OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 From: akuster808 <akuster808@gmail.com>
-Subject: Dunfell merge request: April 25
 Autocrypt: addr=akuster808@gmail.com; keydata=
  xsDNBGNNaZMBDAC6/Mhpw3EGOOTPtIpcUHT4lI974zN/QqccMPxH4oyBPRJbjVImYs9avXwV
  Ae9xoWKMM/vocEZWm6SOESZSGf+7l05Eo6MxU50cIQh0/bcOcdDAtFRDk4pZIL6X7vGzvFe6
@@ -90,66 +95,108 @@ Autocrypt: addr=akuster808@gmail.com; keydata=
  itDSpYIEGrZObj82rX1wvxf/ZQ8VXS+owIR2F4yeeqPH/CyrPA1ASdtt+Am28/dJ2krr72at
  J++uLxA0cein1kjcosFDpQscnDcPzohnGyyjgEd6VwelZboIS1jt4lIa1badtV+cWMGMgM8W
  ApZ86eOP
+In-Reply-To: <BY1PR11MB800512F6778B619835B895CDE53B2@BY1PR11MB8005.namprd11.prod.outlook.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 25 Apr 2024 12:31:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110152
+ <openembedded-devel@lists.openembedded.org>; Thu, 25 Apr 2024 12:58:20 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110153
 
-The following changes since commit c74ebbddfd9dbe02d3f7422016324451eb218e1e:
 
-   python3-pillow: Fix for CVE-2023-50447 (2024-03-03 16:38:27 -0500)
 
-are available in the Git repository at:
+On 3/28/24 12:16 AM, Meenali Gupta via lists.openembedded.org wrote:
+> Reminder!
 
-   https://git.openembedded.org/meta-openembedded dunfell-next
+Kirkstone has three versions of nginx: 1.20.1, 1.21.0 and 1.24.0. This 
+is a package upgrade and I don't want a fourth version.
 
-for you to fetch changes up to 01358b6d705071cc0ac5aefa7670ab235709729a:
-
-   wireshark: fix CVE-2023-6175 (2024-04-25 08:27:27 -0400)
-
-----------------------------------------------------------------
-Ashish Sharma (2):
-       c-ares: Backport fix for CVE-2024-25629
-       wireshark: Backport fix for CVE-2024-2955
-
-Hitendra Prajapati (2):
-       python3-cryptography: fix CVE-2024-26130 NULL pointer dereference
-       wireshark: fix CVE-2023-6175
-
-Matthias Schmitz (1):
-       postgresql: Update to 12.18
-
-Vijay Anusuri (1):
-       wireshark: Fix for CVE-2023-4511
-
-  .../recipes-support/wireshark/files/CVE-2023-4511.patch         | 81 
-+++++++++
-  .../recipes-support/wireshark/files/CVE-2023-6175.patch         | 246 
-++++++++++++++++++++++++++++
-  .../recipes-support/wireshark/files/CVE-2024-2955.patch         | 52 
-++++++
-  meta-networking/recipes-support/wireshark/wireshark_3.2.18.bb   | 3 +
-  .../postgresql/{postgresql_12.17.bb => postgresql_12.18.bb} |   4 +-
-  meta-oe/recipes-support/c-ares/c-ares/CVE-2024-25629.patch      | 32 ++++
-  meta-oe/recipes-support/c-ares/c-ares_1.18.1.bb                 | 1 +
-  .../python/python3-cryptography/CVE-2024-26130.patch            | 66 
-++++++++
-  meta-python/recipes-devtools/python/python3-cryptography_2.8.bb | 1 +
-  9 files changed, 484 insertions(+), 2 deletions(-)
-  create mode 100644 
-meta-networking/recipes-support/wireshark/files/CVE-2023-4511.patch
-  create mode 100644 
-meta-networking/recipes-support/wireshark/files/CVE-2023-6175.patch
-  create mode 100644 
-meta-networking/recipes-support/wireshark/files/CVE-2024-2955.patch
-  rename meta-oe/recipes-dbs/postgresql/{postgresql_12.17.bb => 
-postgresql_12.18.bb} (51%)
-  create mode 100644 
-meta-oe/recipes-support/c-ares/c-ares/CVE-2024-25629.patch
-  create mode 100644 
-meta-python/recipes-devtools/python/python3-cryptography/CVE-2024-26130.patch
+- armin
+> ------------------------------------------------------------------------
+> *From:* Khem Raj <raj.khem@gmail.com>
+> *Sent:* 14 December 2023 22:16
+> *To:* Gupta, Meenali <Meenali.Gupta@windriver.com>
+> *Cc:* openembedded-devel@lists.openembedded.org 
+> <openembedded-devel@lists.openembedded.org>
+> *Subject:* Re: [oe][meta-webserver][kirkstone][PATCH 1/1] nginx: 
+> upgrade 1.25.2 -> 1.25.3
+> CAUTION: This email comes from a non Wind River email account!
+> Do not click links or open attachments unless you recognize the sender 
+> and know the content is safe.
+>
+> we need this on master as well. Its good to mention the branches a
+> patch is needed in subject. Its fine to mention more than one if it
+> applied directly to all of the requested branches.
+> I almost ignored it as it said kirkstone alone.
+>
+> On Thu, Dec 14, 2023 at 2:38 AM Meenali Gupta via
+> lists.openembedded.org
+> <meenali.gupta=windriver.com@lists.openembedded.org> wrote:
+> >
+> > From: Meenali Gupta <meenali.gupta@windriver.com>
+> >
+> > Changelog:
+> > ===========
+> > https://nginx.org/en/CHANGES
+> >
+> > *) Change: improved detection of misbehaving clients when using HTTP/2.
+> >
+> > *) Feature: startup speedup when using a large number of locations.
+> >        Thanks to Yusuke Nojima.
+> >
+> > *) Bugfix: a segmentation fault might occur in a worker process when
+> >        using HTTP/2 without SSL; the bug had appeared in 1.25.1.
+> >
+> > *) Bugfix: the "Status" backend response header line with an empty
+> >        reason phrase was handled incorrectly.
+> >
+> > *) Bugfix: memory leak during reconfiguration when using the PCRE2
+> >        library.
+> >        Thanks to ZhenZhong Wu.
+> >
+> > *) Bugfixes and improvements in HTTP/3.
+> >
+> > Signed-off-by: Meenali Gupta <meenali.gupta@windriver.com>
+> > ---
+> >  .../recipes-httpd/nginx/{nginx_1.25.2.bb => nginx_1.25.3.bb}    | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >  rename meta-webserver/recipes-httpd/nginx/{nginx_1.25.2.bb => 
+> nginx_1.25.3.bb} (51%)
+> >
+> > diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.25.2.bb 
+> b/meta-webserver/recipes-httpd/nginx/nginx_1.25.3.bb
+> > similarity index 51%
+> > rename from meta-webserver/recipes-httpd/nginx/nginx_1.25.2.bb
+> > rename to meta-webserver/recipes-httpd/nginx/nginx_1.25.3.bb
+> > index 66eef23895..8aa9fa0267 100644
+> > --- a/meta-webserver/recipes-httpd/nginx/nginx_1.25.2.bb
+> > +++ b/meta-webserver/recipes-httpd/nginx/nginx_1.25.3.bb
+> > @@ -2,5 +2,5 @@ require nginx.inc
+> >
+> >  LIC_FILES_CHKSUM = 
+> "file://LICENSE;md5=79ad2eb837299421c4435dedc8897b3d 
+> <file://LICENSE;md5=79ad2eb837299421c4435dedc8897b3d>"
+> >
+> > -SRC_URI[sha256sum] = 
+> "05dd6d9356d66a74e61035f2a42162f8c754c97cf1ba64e7a801ba158d6c0711"
+> > +SRC_URI[sha256sum] = 
+> "64c5b975ca287939e828303fa857d22f142b251f17808dfe41733512d9cded86"
+> >
+> > --
+> > 2.40.0
+> >
+> >
+> >
+> >
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#109650): https://lists.openembedded.org/g/openembedded-devel/message/109650
+> Mute This Topic: https://lists.openembedded.org/mt/103167529/3616698
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
 
