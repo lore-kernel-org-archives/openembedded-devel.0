@@ -1,124 +1,202 @@
-Return-Path: <archana.polampalli@windriver.com>
+Return-Path: <xiangyu.chen@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EE0BEC4345F
-	for <webhook@archiver.kernel.org>; Thu, 25 Apr 2024 08:25:58 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.12043.1714033553124019510
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 095ABC4345F
+	for <webhook@archiver.kernel.org>; Thu, 25 Apr 2024 11:14:40 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.14281.1714043672678207195
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 25 Apr 2024 01:25:53 -0700
+ Thu, 25 Apr 2024 04:14:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=ozdF5p6e;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=484590994e=archana.polampalli@windriver.com)
-Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 43P6jYbI007264
-	for <openembedded-devel@lists.openembedded.org>; Thu, 25 Apr 2024 01:25:52 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=aVRqg
-	kbMl1TodONg7r+DCcWzxixkZyvAPawvx0nCDWI=; b=ozdF5p6eiCEpILqIkp6UX
-	bxjkGxG1mjerblr6oPi+7rYlh0yFqhDxbPmqFKbNMYu5hSVedvev1JPhIrDvsScc
-	J98ymJTSDVHuChdOYUJmFWH+vQO2icRcks1AJpQ1CNg9MO5KHbiWCN6QQ9vC4YGs
-	EbR+zhDaeVYKsvLG/pEuf8pf8GpsSQgTUvNZ1+ei7FxOzSJiaaLFis24Ec1Xj1YJ
-	isCupcGcqQy7Z67Uq774xxqDne5EMBTgQAGu3x5LFS+zp47X5E1rw/woi+Vr1J7C
-	3wQdIGOKANpLYE2Zb0e8ltTZD/iSX5aKKVVzlSRbcj/aQOJUwWEmpKDQvvfqULul
-	g==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3xm900w2wb-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 25 Apr 2024 01:25:52 -0700 (PDT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.37; Thu, 25 Apr 2024 01:25:49 -0700
-From: <archana.polampalli@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][PATCH 1/1] nodejs: upgrade 20.11.1 -> 20.12.2
-Date: Thu, 25 Apr 2024 08:25:19 +0000
-Message-ID: <20240425082519.2888002-1-archana.polampalli@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=48457086c7=xiangyu.chen@windriver.com)
+Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 43P5Afx4020274
+	for <openembedded-devel@lists.openembedded.org>; Thu, 25 Apr 2024 11:14:32 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3xm4p7dmxj-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 25 Apr 2024 11:14:31 +0000 (GMT)
+Received: from m0250812.ppops.net (m0250812.ppops.net [127.0.0.1])
+	by pps.reinject (8.18.0.8/8.18.0.8) with ESMTP id 43PBEVSR027469
+	for <openembedded-devel@lists.openembedded.org>; Thu, 25 Apr 2024 11:14:31 GMT
+Received: from nam02-dm3-obe.outbound.protection.outlook.com (mail-dm3nam02lp2040.outbound.protection.outlook.com [104.47.56.40])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3xm4p7dmxg-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Thu, 25 Apr 2024 11:14:31 +0000 (GMT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Ls7vt6F3r3FGkV6RJM18WnBhNh1TnjWTffJRCBbjCMmQSvRSkxDiqDaUUZp8B0FqlhCvVJw4daFn0AtoGx/RDiIZhOLwE7L21ClpVcfUV9TX8nWDWam4S6v4DARCODPOCXygSzYiRxekSYE60oCqw9A6dNGXrPHlmnny6si+3lcQjOpj1hbOacJdkbTIyZPWplEwfXmdSkPB9F/mXmGWPpsZA5jBbOS5ohR0/Y+jmHbPu/QyOW23AL66nl00jywaOatwpmZlGKPAnP+wRccYkuM2Ym5LOr65ZvgnQ3ue199XFum8xweHwL3UvD4D8GNbAMd1KBcG+IH+yuKf+0cVAA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=xFHMWSR3JDeyFadiCU3/tmGzm0xK9rnYu4+k8UIu4Ao=;
+ b=ECLX67ZPzlTRCYlk4XTOxk8P2Lk414Chels1M4K/7nx5oButk4Byc46UHAg3LQ4LLzexKtQJT8lOf6i2VnVa7QojjptzFT0X7vLVQduPdKU29J9/hBg9SyqAZKTkdFdUX8rG50M66MgucLh+TFqCeZ8uRAdGpCPUyyvXi4l3qsIfBmNfcBc/K4dTnqEeu5gj+j1zGnXzpYJbAy9qKPp4Wd9alkoikvzVoL7f1wJw/bwdbd1R7QvEGWLFeRMiW85xIWRanae3Ggyxcw3IkLfV88EXyPUKXnxsVCW0w9diT2gjrirS4RcVts0dnvH+vqIXsjMEAdDh4mXawekfzsn/xQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=eng.windriver.com; dkim=pass header.d=eng.windriver.com; arc=none
+Received: from MW4PR11MB5824.namprd11.prod.outlook.com (2603:10b6:303:187::19)
+ by MN2PR11MB4582.namprd11.prod.outlook.com (2603:10b6:208:265::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7519.22; Thu, 25 Apr
+ 2024 11:14:27 +0000
+Received: from MW4PR11MB5824.namprd11.prod.outlook.com
+ ([fe80::e7b2:a7c6:5d72:2855]) by MW4PR11MB5824.namprd11.prod.outlook.com
+ ([fe80::e7b2:a7c6:5d72:2855%4]) with mapi id 15.20.7519.020; Thu, 25 Apr 2024
+ 11:14:27 +0000
+Message-ID: <b415a0f7-c4be-49ac-acdb-e4c7849093e7@eng.windriver.com>
+Date: Thu, 25 Apr 2024 19:14:21 +0800
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe][meta-oe][kirkstone][PATCH] bats: fix bats-format-pretty
+ report error when multilib enabled
+To: openembedded-devel@lists.openembedded.org, akuster808@gmail.com
+References: <17C65EAB22B5C2FF.10598@lists.openembedded.org>
+Content-Language: en-US
+From: Xiangyu Chen <xiangyu.chen@eng.windriver.com>
+In-Reply-To: <17C65EAB22B5C2FF.10598@lists.openembedded.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: TYCP286CA0290.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:400:3c8::7) To MW4PR11MB5824.namprd11.prod.outlook.com
+ (2603:10b6:303:187::19)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-GUID: VrFvd4Me_CyfArcOw30zIDUlEJJ7yEB7
-X-Proofpoint-ORIG-GUID: VrFvd4Me_CyfArcOw30zIDUlEJJ7yEB7
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MW4PR11MB5824:EE_|MN2PR11MB4582:EE_
+X-MS-Office365-Filtering-Correlation-Id: baeecee3-4eeb-4c34-f5dc-08dc6518deaf
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230031|366007|1800799015|376005;
+X-Microsoft-Antispam-Message-Info: 
+	=?utf-8?B?S3ZIVHpDZkxKVEpLM0lNdGwwT2VudFBYS2Q4eVJaTDhwT3RFZ25HS1BoeFhU?=
+ =?utf-8?B?VGg4UCszNTMra2E5N0U0V01WdkxIWWNDQmVDM0pna1RpRDZyeU53RDhhSU5H?=
+ =?utf-8?B?ZnRZVXRoL01qQW5pQTREaUdTcU5yMFVqTGZRQ2dmcE5naGorU29LM2x1RDBr?=
+ =?utf-8?B?MlBpZmNwS24zMXc0a25UMDZ0NnVCTHVCMDBFQTVzcHNEeW1rQ2VCdjdHMDUx?=
+ =?utf-8?B?SE9XYTFKNTJmQXp2S3VyWWREdVAxaVFMRXA2V3Y3V1B2SlZZVmJPZitSR1ZL?=
+ =?utf-8?B?aUYweUFYWnNxUWRqN1l2aCtUOGNNLzlGQUpoV241ZGdraklZU1FFUHBFcUtS?=
+ =?utf-8?B?MmgyMCs1UlF1K2ZNeUViSGFYMlRraXRJMGFuN2RnYXA5TUlFaE1qYzlseW5M?=
+ =?utf-8?B?VmlJb0crYk9NQXNrODZ5K1FzWDR4YTh2VEFRQUJ1c2FvSDRub0hobzBhVXAr?=
+ =?utf-8?B?WERYVSttLzFhemE2WlZveEswWEp5WG03bm12TXBBZFBwc3dJSHFCeDQ5RUNt?=
+ =?utf-8?B?VnRtK1VLa01EbTg0aHJwaXlhcEFSZGhzYXFTVTl6dG1lemcvZnVldUN5SVZF?=
+ =?utf-8?B?TDd4ZVlMVERoWTJTZmVselZkeE9uQjhaN2JXc3dlK24rbUFEa1BlQVB5Snda?=
+ =?utf-8?B?dmVLOTN3STlSVjFXdVdMOVpRMWsxSmJTQ0lQNFNKM3ZuenBhb1hsTTJhNHd5?=
+ =?utf-8?B?aG9OaERUTXdXci9mdnBWRGhFdUl5bWZSK2FUSVRHclZTOUxYdkVRK3IwaGJm?=
+ =?utf-8?B?R0o5Ym1OeVp5SEtuclQ3RGQxQm9WVkdKNStpV2N2QU1zM1ZzQkYxZ01UcUkz?=
+ =?utf-8?B?WE1HK1UxVFVZc1E1VEEvelpUZTRGUlV0VDdybDl2Nmk4VzlWWitSaTdHWWxL?=
+ =?utf-8?B?THdwU2N0LzdSUjRodG9qc2ptUEF1MjZaSlhXcDU2di9xOWhGKzNRbUNWWGZa?=
+ =?utf-8?B?d0EvNFdJU1ZJc1FQOVYyOWUxTGY1OVZtZTcxaUJoT3d0ZmtRSU1OODlGaGVV?=
+ =?utf-8?B?eVpQRHo0V2VEb3pOZjFqb3V4SmpkT0Z0cFhVOTdDMDY2TVFjZWwzUTV4VFJN?=
+ =?utf-8?B?TnNybTZDWUlKblM1eDRmKzJOSGE0ZW16OVJ1dFZEVDY1ZkdEcHUxMmJCc1hQ?=
+ =?utf-8?B?emRRNWF4VmhoNkF5aGxZaTdYYVIzYytlb1phbnU0RnVDUFF4NTVBeGVyMmJO?=
+ =?utf-8?B?N3NSQ2RNZnpqTlRrWnlRblBNN3lkaU5LTW5NRS9INkNJRXNwUlJvMFpMU3Uv?=
+ =?utf-8?B?UUdWb3JBNzF5S0VsVFQzLzNuWm5BdkRKSm1SMndyaEZhOFBIenhjaEFVaGZo?=
+ =?utf-8?B?ZUVkSE84SFpzYkZMdExSS1JWV0J1Vm1mYmNIWGVEbS9KMmIyQW9iV1FhZUE0?=
+ =?utf-8?B?aUZkclRKd2FWZStBTDY5T2FMRXVYdW9tbTloUHc3cDBaM29ZbExZVGxyQ2pV?=
+ =?utf-8?B?alpxNVVoUk0xVlhLQzJnb2VnNXNVRzdJUjExQVdpVGNtVGtDaUs1MFZJU095?=
+ =?utf-8?B?V214NzBQaDNOZDM2YzlUeTRCbmFNQm0vUFJ5Q3lpTHpnSlB3eit2Rjh6YmlG?=
+ =?utf-8?B?d05ERU9yeWlmSDdvZ1hWWkZtbG9GMnpndjR2UmdDMHYySUtya2dKbEUzYXBm?=
+ =?utf-8?Q?j/Af3S7RkNtBXORKceZTqR0NGiJlFJbhfOxw5As97vpc=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MW4PR11MB5824.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(366007)(1800799015)(376005);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?cXgzd0ZmdWd1K2phZVRYOGREdWFYU2pWTHRUMVRKdzlUcUIxc0hYSnlrdzFR?=
+ =?utf-8?B?YVltczhRc0l1SW5yZ3A2cFNEcloxSmVNKzhTSC9RV0dRVTBhbElvb29pem1w?=
+ =?utf-8?B?bUNHNTZ5dWxVVmpCdi9xcjBHaDRHT2d4K2g4bm14d1piYWZrL1RIZ0sxWjc5?=
+ =?utf-8?B?WXN4Yy8ybE5od0VJczlLT2U3dlZkc0tQeG5ENW9PRS82RjhNM2JzR1RHdnFZ?=
+ =?utf-8?B?NWNYb3pkdk8yREN1NEd1anRhaXRSNWVLQW5VTmtwZmlSZXhENHdaQXMvNXps?=
+ =?utf-8?B?RlFncitEKzNLelh6UUF6L0dFMWxkV1N2ZXBhZ0p1OG4zekE1a3Y5MEs4Z2Vm?=
+ =?utf-8?B?aHEwRm9aQ0phM2RRQXFOd1Q1bUUrdXlsSW9VUXhha0ZLdCt0UHNWQ1NaTVh3?=
+ =?utf-8?B?Ym1aUTlxMGcxNnhkYkk3MTN3QWVxUUc3VVZHWXVNcElSTW5NNTVSVmFTQ1da?=
+ =?utf-8?B?czdvaSsxUzIvdzVPaFUwN2E4WTl0Tm5qWm9oWHF3TUE3aEVFdmtTNWI3Qith?=
+ =?utf-8?B?TU1iOU95NVk4eURUYTNtV09IdDRJYkg0VlprZXFrWU5qZnpNLzhUa1c0cXAw?=
+ =?utf-8?B?bFRiYWRoVGpnWU1pdGJUMHA3eFBnTzhWOU8yRjFJc29vdTlZT0RpZ0xUcy9z?=
+ =?utf-8?B?Z1pFSWVQT3lXN2lFaHNCZkV3enBjUjQyazJFS3lpY1FodDZCS3Y2Y0pheElS?=
+ =?utf-8?B?V21sNkw5K0ViYllaL0hIL3NyZDQ0V1BTSlFJdnh4czVoY3NONWExaW5vOUNl?=
+ =?utf-8?B?QUJBNGhFY1hwWDZRMzZWTE00cUdpVWhRWVo1UUVFWmwycEdqQllOZjhmMkM5?=
+ =?utf-8?B?WTVSVW12UHh3ZWJ2QUF3UTJvS29VQnpSWCttMVYvU2xHcVJBbWwrZUpFNktR?=
+ =?utf-8?B?eTUvN1Z4VUhOaU1iNU5SRjVBeUlLWVQyc0QrVE5hZlc4clYxR0VkSUJEaVRF?=
+ =?utf-8?B?MXYzNmxEWEdrRGJZQTlmT0xDMlNNemN0MS9EaTZBZmhjT1JKNlE4WkJQMCs1?=
+ =?utf-8?B?c3pGazgxeFlKaWV5VmNVUkZ0Q3MyQ2JTMEpOc3crV2taQXNsTk1zcFk5aVV0?=
+ =?utf-8?B?L2lXM0xsbGV1Um5aVjV0SjdRTnVLMFh1MkF5RFJ5OUxSU3dZNDNud0NvSWpV?=
+ =?utf-8?B?WXJvSGMvUE84T0N2aXpXNnVJRlZhaXppTVYxK0JwWTVFTEpZZXBmZERUbTlm?=
+ =?utf-8?B?Tm9ydjd1SlVTT2tUelQ1WE95VWpiYlRVT3lIc3k3NnRmMjFIdmpucDlJTEVj?=
+ =?utf-8?B?NVFRNDhsNVNyM3RxMElGSU5LUkZqM0Zhem9wU2JXYWRJNHpadWZSVUZ2Z3Jh?=
+ =?utf-8?B?aFpoV0p4RDFWQ2x0cXNEcFBINDRYNnZFQlVNZ0dRZ2JvTVFMSGlQR0dZQjhL?=
+ =?utf-8?B?aXdra3dpWHdsNUpqaHJmbi9TNlFRMm5wSkIxLzJTK2RJY3kyNzhmTHUwWHlJ?=
+ =?utf-8?B?bDdUR003R3FRZEQ0TkcvMDRhempiQmNCaUsvWHFvWFVrNC84bHhrOFk1ci9r?=
+ =?utf-8?B?VklRc0Y5cXVpb0ZEVUY1a2lXaU5mOTNYYkdrQUdjNlB0S1IzcWNHenBud01C?=
+ =?utf-8?B?OGQ4Q1ZTa2lkb3I1Q1hYTnhYb1k2RklCK1JGM0NNZFNWSUVUMjNlY1Axbkoy?=
+ =?utf-8?B?ZVgwZEJRWlllQzJBR3B4N3JjQTZ6Uk9oOWlLMDZMYUtWK1dNdDZVVjJkeU9h?=
+ =?utf-8?B?blcvZXo0RXNvSFhPZ3poazhFWForVW8rS0dIVDdvdFM5UXN0ZlM3L3U3d2xh?=
+ =?utf-8?B?WElmSncramNDTW03TXdpZlNvSHA0QzBaRngremNvUGNjWUJSR0F0Z2NJS2hF?=
+ =?utf-8?B?Z3RBMjBqUWluTVBhL05tNFZ3NUZOeXBLdHFTUkNmcC95b0lUSkF6d0loSkZt?=
+ =?utf-8?B?cUFxekttMm45V2pKWTJxSzNYSlpDOUlCSXlQY1BCVWxQQUZOMWh4cjRYWFFB?=
+ =?utf-8?B?czVxaEZxb3R3dnZUbEtPSG1odHZpQzMwSGFRcEUxQVZTbG1hSUFRMDNVcDhn?=
+ =?utf-8?B?YXlWK2grMC9HRzU2MTNaQ0c4azZ4Vk5UVmlvRXBlNnZveE1OS1dHamVPWHBY?=
+ =?utf-8?B?WE13QUlkU3pLWWZ2YUF2KytpM2lzMm1VczQxMjJmeEp3MS9peHlTenpyZUZ5?=
+ =?utf-8?B?SHJqKy9GK1MxT2VndnpFOUNuQ0tFTG9PdGtZYkliaUdNVXc5Y01VcUdlWFdT?=
+ =?utf-8?B?cnc9PQ==?=
+X-OriginatorOrg: eng.windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: baeecee3-4eeb-4c34-f5dc-08dc6518deaf
+X-MS-Exchange-CrossTenant-AuthSource: MW4PR11MB5824.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Apr 2024 11:14:27.1887
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: wMHxqlfDD42NAxBAPzCQa5EMdKy1m7HSHXauzdmQMOBMA9rss9iYjHAg9bQ25HnRDoxk07P6oxzk9+WjActmew0WWEFHhvshZfgqLuzBHwk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR11MB4582
+X-Proofpoint-ORIG-GUID: bSfeXALqW3p7uA9Rk8juI1G5VH0UPPlw
+X-Proofpoint-GUID: E-8Ecw0G2LZvOb5JcFCfKChI0KzKPqqT
 X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.650,FMLib:17.11.176.26
- definitions=2024-04-25_07,2024-04-25_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 phishscore=0
- clxscore=1011 lowpriorityscore=0 mlxscore=0 priorityscore=1501
- suspectscore=0 mlxlogscore=999 bulkscore=0 impostorscore=0 spamscore=0
- malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2404010003 definitions=main-2404250060
+ engine=ICAP:2.0.293,Aquarius:18.0.1011,Hydra:6.0.650,FMLib:17.11.176.26
+ definitions=2024-04-25_10,2024-04-25_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
+ adultscore=0 malwarescore=0 phishscore=0 clxscore=1011 suspectscore=0
+ impostorscore=0 mlxscore=0 mlxlogscore=999 priorityscore=1501 spamscore=0
+ bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2404010003 definitions=main-2404250079
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 25 Apr 2024 08:25:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110150
+ <openembedded-devel@lists.openembedded.org>; Thu, 25 Apr 2024 11:14:40 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110151
 
-From: Archana Polampalli <archana.polampalli@windriver.com>
 
-License-Update:
-    Copyright year updated
-    zlib version updated
-    GN files License update
+On 4/15/24 13:59, Xiangyu Chen wrote:
+> From: Xiangyu Chen <xiangyu.chen@windriver.com>
+>
+> bat-format-pretty hardcoded the lib folder that cause it reports
+> missing formatter.bash error when multilib is enabled.
+>
+> Signed-off-by: Xiangyu Chen <xiangyu.chen@windriver.com>
 
-https://github.com/nodejs/node/commit/b5bc597871ca701bab750c46d31ed626decd7f89
-https://github.com/nodejs/node/commit/c8233912e9fd7464898b549d6762130722bf0bf4
+Friendly ping, thanks.
 
-Changelog:
-https://github.com/nodejs/node/releases/tag/v20.12.2
-https://github.com/nodejs/node/releases/tag/v20.12.1
-https://github.com/nodejs/node/releases/tag/v20.12.0
 
-Signed-off-by: Archana Polampalli <archana.polampalli@windriver.com>
----
- .../oe-npm-cache                                              | 0
- ...-cache-native_20.11.bb => nodejs-oe-cache-native_20.12.bb} | 0
- .../nodejs/{nodejs_20.11.1.bb => nodejs_20.12.2.bb}           | 4 ++--
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-20.11 => nodejs-oe-cache-20.12}/oe-npm-cache (100%)
- rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-native_20.11.bb => nodejs-oe-cache-native_20.12.bb} (100%)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_20.11.1.bb => nodejs_20.12.2.bb} (97%)
-
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-20.11/oe-npm-cache b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-20.12/oe-npm-cache
-similarity index 100%
-rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-20.11/oe-npm-cache
-rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-20.12/oe-npm-cache
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_20.11.bb b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_20.12.bb
-similarity index 100%
-rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_20.11.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_20.12.bb
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_20.11.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_20.12.2.bb
-similarity index 97%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_20.11.1.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_20.12.2.bb
-index 9a61cfcf7..d86c38f2f 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_20.11.1.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_20.12.2.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
- HOMEPAGE = "http://nodejs.org"
- LICENSE = "MIT & ISC & BSD-2-Clause & BSD-3-Clause & Artistic-2.0 & Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=78ad16dab3c1d15d4878c81770be0be7"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=9a7fcce64128730251dbc58aa41b4674"
- 
- CVE_PRODUCT = "nodejs node.js"
- 
-@@ -36,7 +36,7 @@ SRC_URI:append:toolchain-clang:x86 = " \
- SRC_URI:append:toolchain-clang:powerpc64le = " \
-            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
-            "
--SRC_URI[sha256sum] = "77813edbf3f7f16d2d35d3353443dee4e61d5ee84d9e3138c7538a3c0ca5209e"
-+SRC_URI[sha256sum] = "d7cbcc5fbfb31e9001f3f0150bbeda59abe5dd7137aaa6273958cd59ce35ced7"
- 
- S = "${WORKDIR}/node-v${PV}"
- 
--- 
-2.40.0
-
+> ---
+>   meta-oe/recipes-test/bats/bats_1.6.1.bb | 1 +
+>   1 file changed, 1 insertion(+)
+>
+> diff --git a/meta-oe/recipes-test/bats/bats_1.6.1.bb b/meta-oe/recipes-test/bats/bats_1.6.1.bb
+> index 7d72a5198b..3dcb51972d 100644
+> --- a/meta-oe/recipes-test/bats/bats_1.6.1.bb
+> +++ b/meta-oe/recipes-test/bats/bats_1.6.1.bb
+> @@ -19,6 +19,7 @@ do_configure:prepend() {
+>   	sed -i 's:\$BATS_ROOT/lib:\$BATS_ROOT/${baselib}:g' ${S}/libexec/bats-core/bats
+>   	sed -i 's:\$BATS_ROOT/lib:\$BATS_ROOT/${baselib}:g' ${S}/libexec/bats-core/bats-exec-file
+>   	sed -i 's:\$BATS_ROOT/lib:\$BATS_ROOT/${baselib}:g' ${S}/libexec/bats-core/bats-exec-test
+> +	sed -i 's:\$BATS_ROOT/lib:\$BATS_ROOT/${baselib}:g' ${S}/libexec/bats-core/bats-format-pretty
+>   }
+>   
+>   do_install() {
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#109952): https://lists.openembedded.org/g/openembedded-devel/message/109952
+> Mute This Topic: https://lists.openembedded.org/mt/105530685/7175143
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [xiangyu.chen@eng.windriver.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
