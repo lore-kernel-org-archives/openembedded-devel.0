@@ -2,65 +2,65 @@ Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8F87FC4345F
-	for <webhook@archiver.kernel.org>; Sat, 27 Apr 2024 21:36:26 +0000 (UTC)
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
- by mx.groups.io with SMTP id smtpd.web11.20600.1714253784302966700
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B1BAC4345F
+	for <webhook@archiver.kernel.org>; Sat, 27 Apr 2024 21:37:26 +0000 (UTC)
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+ by mx.groups.io with SMTP id smtpd.web10.20400.1714253840831053576
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 27 Apr 2024 14:36:24 -0700
+ Sat, 27 Apr 2024 14:37:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=PmU8+Uj3;
- spf=pass (domain: smile.fr, ip: 209.85.221.54, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-346359c8785so2787055f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 27 Apr 2024 14:36:23 -0700 (PDT)
+ dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=KGsMbQYY;
+ spf=pass (domain: smile.fr, ip: 209.85.128.47, mailfrom: yoann.congal@smile.fr)
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-41ba1ba55ffso8735285e9.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 27 Apr 2024 14:37:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1714253782; x=1714858582; darn=lists.openembedded.org;
+        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1714253839; x=1714858639; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
         bh=ujl5gT8BocjVw2IX9gdSIYSthwmljxjbshWYNvYdqaE=;
-        b=PmU8+Uj3pxFMO8jNnrwfkCF7su+gY5CrUzT622cMeg6y27sMk9ywuqTPUeZuo7Ecqz
-         FAl70A9uNlYYiwGfPrKGS4OXKW+nRUOi0Y5xsqx67zNN7hZGNtmYRCdx6d4OHWBI25ss
-         2OANfJdcMN//tjae0d3413AILFNRpgNU8gCJji4uE99CLcMQctmVMDHRbUusxeYlCvz8
-         k2DlwfmDY+EEDLwPRrhYumLnGiX9gq62EL2X9EuLHGe945+K7A0I+bANbloIZ9vhx7vf
-         sNNJr1FM6v0NXtD72uY6+277wiI+dCoFnLJ88hYf8UAT5uerVWMOzc1P3hgoTOYnurqT
-         smcg==
+        b=KGsMbQYYqnKVbpEYJtSYgjRgnK4dNVy2TcLtW60wb5H76qdzABz6WJqPPhdMEFUwY4
+         f3zIq3tpjXn0FmUn6INaCnikkjJFaa3DP9CBGQ+DfMhABuAdFqUOcfK747eylo1l9up4
+         w+qanTdEl3D3HMZB0drXa2wNNBvBKO28TKxBxK0YiWdDRrpT8Qgu5WQZTnSCK8nhBjmc
+         D5U+ST/vdNyqbHC5cNTwdg689NTBAlkis1q6r9g2QUuyWlkhLnZZtRa8Prlpi6EfLdCT
+         aq5Oro6BtKxomKbo9z9+YzVkzyP3ZcWalQ+rXx3IRvwHHmj6VkUoKgbtaHk9NMOzKX1k
+         MDeQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1714253782; x=1714858582;
+        d=1e100.net; s=20230601; t=1714253839; x=1714858639;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
         bh=ujl5gT8BocjVw2IX9gdSIYSthwmljxjbshWYNvYdqaE=;
-        b=nSZBUBowMCqC81+qeL26bXDqs1Vm0y140+oDfcfvo1mMR1N+EYq59jK+4cU6x3YBaC
-         f7oaKKf3RWGZNZe3aDqVg0JVGhloWjVm5TdjZ004lmi6u7tzHF0tY9W6QootuKnvdnHS
-         WlZdexcyP8dm9CCtjoxZoZXnQkgEwwKO+w0TTJ2TLzvFpLhkqu8EN4yAG4yVfDnA3GhR
-         PHCErr7CxmJUdMNCjMH8eCGCerdndv2QEGOQ7z+JDqofOO2f24NXTaanr3wzwY7NeuYH
-         /2gGq8YjAc3f7LPPjgqaGVOdM/ntbmqHr6/3H8RJ7T51GP/pTBsQOvpr2QA8fKq7Nony
-         vtEA==
-X-Gm-Message-State: AOJu0Yy3c/tQaTs2jb6OwpAFFe8yEeswphNQjpj9jKkIctXae0EbAt8Z
-	xt1YxLZxucNreJP62uQDZQVJyMZEYjbCaKMAevIG/WDY2c+xNADHiTiL1WemZYiBLfSkBE29xi/
-	Baxc=
-X-Google-Smtp-Source: AGHT+IHed1fEnpta0wbMvaWdadVJAEM6ABPBLayft+C1zXFgMh9om7rnjmFlpMQZXpCTxak8UaJriQ==
-X-Received: by 2002:a5d:63d2:0:b0:34c:97e7:af6c with SMTP id c18-20020a5d63d2000000b0034c97e7af6cmr1955968wrw.59.1714253781692;
-        Sat, 27 Apr 2024 14:36:21 -0700 (PDT)
+        b=GPby3on96UHJgYGiSyeZ1OizU1bU9sD5p8V2jfYYUPs8MHh0sFkq3FSpekvxnuMeAu
+         8v2cuM++TA0zU9N3sOxwb/JfAOMp2Er/JLo1DZpfLHQAv5Qpe/UwfYTw4H6AwWfQm09v
+         o0HHH+4WidKJfJ5L9HnfXR2bDEngh+MvtTMc1GM0/Ci7NwLPsio58cT23n99KgfZZO6M
+         8ZBRQNY6SxUwP4362A3OtRiN9tp1jzlKlKDbcpE/r0pTS9VUBPpTCF1Hih2qR0G1bZKE
+         CLPQJlSDSBQr7gx5sXlgd4fscFs9EiirjCsMt34w5509+XSubQwUqjZUHVQIG90u2c8b
+         4itw==
+X-Gm-Message-State: AOJu0YyqbGV4+aojnt5QdbvcjhPWlnmp38lyG2LxU11QnSei/oitwVvB
+	U/Gyb9kroepval81439oyzXpBzG1WTK5LYVhDFpsRUdKpOzwUDVawtOrSwN+PTLMjlm5gFT1gPn
+	5CdY=
+X-Google-Smtp-Source: AGHT+IEmq6uPqXdKdSxDywPQiuTKdoh7DYD6jsGjqknKFntbwGBaWSg5VKBcXuD0HKEytSWAqM2lNg==
+X-Received: by 2002:a05:600c:35d4:b0:41c:a9:26b3 with SMTP id r20-20020a05600c35d400b0041c00a926b3mr736765wmq.19.1714253838588;
+        Sat, 27 Apr 2024 14:37:18 -0700 (PDT)
 Received: from P-ASN-ECS-830T8C3.local ([89.159.1.53])
-        by smtp.gmail.com with ESMTPSA id d23-20020adfa357000000b0034cceee9051sm851599wrb.105.2024.04.27.14.36.21
+        by smtp.gmail.com with ESMTPSA id n22-20020a05600c3b9600b0041c12324eb6sm336413wms.22.2024.04.27.14.37.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 27 Apr 2024 14:36:21 -0700 (PDT)
+        Sat, 27 Apr 2024 14:37:18 -0700 (PDT)
 From: Yoann Congal <yoann.congal@smile.fr>
 To: openembedded-devel@lists.openembedded.org
 Cc: Yoann Congal <yoann.congal@smile.fr>,
 	Richard Purdie <richard.purdie@linuxfoundation.org>
-Subject: [meta-*][PATCH] reproducibility: move repro excludes from AB config.json to meta-oe
-Date: Sat, 27 Apr 2024 23:35:50 +0200
-Message-Id: <20240427213549.3458829-1-yoann.congal@smile.fr>
+Subject: [meta-*][PATCH v2] reproducibility: move repro excludes from AB config.json to meta-oe
+Date: Sat, 27 Apr 2024 23:37:14 +0200
+Message-Id: <20240427213714.3458893-1-yoann.congal@smile.fr>
 X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 27 Apr 2024 21:36:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110159
+ <openembedded-devel@lists.openembedded.org>; Sat, 27 Apr 2024 21:37:26 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110160
 
 For now, the known non-reproducible packages list is stored inside the
 autobuilder config.json file. This is not ideal. Let's move this list
