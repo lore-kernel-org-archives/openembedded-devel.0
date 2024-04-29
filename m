@@ -2,89 +2,87 @@ Return-Path: <ninette@thehoodiefirm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DE7D1C04FFE
-	for <webhook@archiver.kernel.org>; Mon, 29 Apr 2024 15:12:38 +0000 (UTC)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.web11.23851.1714403549476790903
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 39F12C4345F
+	for <webhook@archiver.kernel.org>; Mon, 29 Apr 2024 15:26:39 +0000 (UTC)
+Received: from mail-lj1-f180.google.com (mail-lj1-f180.google.com [209.85.208.180])
+ by mx.groups.io with SMTP id smtpd.web10.24430.1714404395090468901
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Apr 2024 08:12:29 -0700
+ Mon, 29 Apr 2024 08:26:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@thehoodiefirm-com.20230601.gappssmtp.com header.s=20230601 header.b=EjZ91gGp;
- spf=neutral (domain: thehoodiefirm.com, ip: 209.85.128.42, mailfrom: ninette@thehoodiefirm.com)
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-41bca450fa3so17109055e9.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Apr 2024 08:12:29 -0700 (PDT)
+ dkim=pass header.i=@thehoodiefirm-com.20230601.gappssmtp.com header.s=20230601 header.b=SUgnnkBK;
+ spf=neutral (domain: thehoodiefirm.com, ip: 209.85.208.180, mailfrom: ninette@thehoodiefirm.com)
+Received: by mail-lj1-f180.google.com with SMTP id 38308e7fff4ca-2db13ca0363so73541291fa.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Apr 2024 08:26:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=thehoodiefirm-com.20230601.gappssmtp.com; s=20230601; t=1714403548; x=1715008348; darn=lists.openembedded.org;
+        d=thehoodiefirm-com.20230601.gappssmtp.com; s=20230601; t=1714404393; x=1715009193; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:reply-to:references
          :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
          :date:message-id:reply-to;
-        bh=o1ov96Oh44uYKgjSrVEQR2R3w3PZebRY4rgl3NDXdyc=;
-        b=EjZ91gGpEOGPFL+NYBwoXG2HSNPBJ0eDins+rrrAllv07p6p56giL+FeWoThXCacPb
-         GDU5aZ3/E4ExwnrqPnL1LvLk+lLubiP4cVpk2fb20fTDciqTRWCYs63eFBDue3PyOE/w
-         SHYCMC2Y/vFmJ+SWh2kEaBwrl/B8Ka/CLqrbeq/K0504Ei8RTiAuIPABXvt41nVYTiWr
-         HmOHmfGJiRrvPRPXXnlfg13A1c+4ajebrpxz6QnixPTNxSlI/5RMlZ3qiGR5YgTvFUyd
-         TSjWrZp7DPxiH/454LrdHnDGtw4ZmTg0Q/hskYSmBd2WLPJNswsl3UaxagP7T/vYrbfB
-         GSZA==
+        bh=1s220a3fkeKaYPeNwbl2XAhY1onC2Yh+Od1hAiIBADw=;
+        b=SUgnnkBKvzjRzr64O8vpGECTkoWZg82ZAD5PJkKahT28oNsxd4H0Z8a220A1uGCom5
+         vha2gDXhUWVehyGFI3ThDA9+lsO+rI/Z4Lm0ps/WIHnO8fTmMeLVmlYyh0bkZCLBJoIG
+         XsIof8ENqLQY1AOjPlq7nQ2NtRAoeOW8RyaJ2o+UnK9+M9WaV5MYftLU+9aYS2uqcs8g
+         Uc1VLGgCi2pAXZLOfhTdsjBBsyW6IaYWN+m6x8WRMe+Fmg3OIEm2F28sKKM/fcdFHZBQ
+         R3Su04h+t/FzMWgBGx+uGGSfhB61WuGOCQqXj3/Osgui2w68pZsKJEgCBTAe/5Ait0DG
+         cutg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1714403548; x=1715008348;
+        d=1e100.net; s=20230601; t=1714404393; x=1715009193;
         h=content-transfer-encoding:mime-version:reply-to:references
          :in-reply-to:message-id:date:subject:cc:to:from:x-gm-message-state
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=o1ov96Oh44uYKgjSrVEQR2R3w3PZebRY4rgl3NDXdyc=;
-        b=wPM1Fh3NdRXIVy7KpJXlXLXPoIm6yahvvigzUFFyfVkugD7ig97WWAnd4r486ndVLn
-         QAanHxWaeDBmob7gw7faTIbzAkIUuXkZD0IXiJUSlWXkYUNfn1rle6XW4c+lEbY9tyQi
-         rZg9o5h7vRuLg+9SjG4iwo0D4mRCIGo1i6C+OTGzUZiCB9oFvBAVZzssurlWo1C6kktx
-         N5pB7M3YHhITl9kQagZ3zNp7Hgv+KXEiIVyqMP/U8+wdG+JNuJ4oOBzAIHmlMiif4kuW
-         oR+NCd53Xoyppygyw7a6QYvdEZINNA6fKHVh1fZw8RM70V7nSm6vsmeZFoA76vAAf1TK
-         W2GA==
-X-Gm-Message-State: AOJu0Yx1pZTdJ8rAgkyK8v/Z++WUr2yRlQhc8LkDWanwathoJUja2bFE
-	6vyAP6G9uRJehUkDrgihNfHxDta+H5NzSj5IXXNoUCVt2lp8fULl8JcJoKdI6yn0V2K5j1atS7l
-	V/cE=
-X-Google-Smtp-Source: AGHT+IECuUdItmBMa5klcHbYZd+fNtcYVFCoG7ttofrzGyXzQOk0PpkmHTVpi37BgLAD+2k/BwCpww==
-X-Received: by 2002:a05:600c:4e94:b0:41c:83aa:18b7 with SMTP id f20-20020a05600c4e9400b0041c83aa18b7mr63737wmq.33.1714403547831;
-        Mon, 29 Apr 2024 08:12:27 -0700 (PDT)
+        bh=1s220a3fkeKaYPeNwbl2XAhY1onC2Yh+Od1hAiIBADw=;
+        b=l6EG7FMktVh6KkscrRktP2G5IRAA8DsX5aeD0e0GQLyTlgYIxTDcvw/NZCtbeE5Cty
+         TP7h1TwLzClXRVC3EbQfCYh8/tIECc7NzzmJxFtdpz32qA+S0c9aGyWJHNgYVbuGFGii
+         wxhRA1V/BDSwmwXhwfdH1waAZG81ACr+DOYJC9j/Hre6ZQozrJSjUJvjyQFiiU3D/ywc
+         IUGtNdhkQ42c/RMonWusJGB7qjpxJF1D9zksSrLNhnUBgOnkW/+90haQWel7uD+UuCQ4
+         OQDAgDUo+Fj7ZH+14a7lM+mGkLAzLUveBmwBnK8q8Prl0ndR8y8cPBTKLGqNiNVmRffl
+         bPSg==
+X-Gm-Message-State: AOJu0YwTdOao0afocE1bbD6Ys1Q7jslwHW+0n+95kv+KXRY7iZWhIjLG
+	dJPAzfuEbCqAiDWMfgZ6ELCV2lO5v6CnkYouvSngXgI/ic9d6FCqgui8co38DF+OJPC2DVl4Gdi
+	ZrSM=
+X-Google-Smtp-Source: AGHT+IGIeC50KGDJGlVIrV45myw5qEYaxm7+kmhkIzW8puPlshoGukB/rQ/cZayadiYQ/zpKobr7ig==
+X-Received: by 2002:a2e:2203:0:b0:2e0:3ad2:b371 with SMTP id i3-20020a2e2203000000b002e03ad2b371mr3361686lji.25.1714404393015;
+        Mon, 29 Apr 2024 08:26:33 -0700 (PDT)
 Received: from Ninettes-MBP.fritz.box (pd9ebc533.dip0.t-ipconnect.de. [217.235.197.51])
-        by smtp.gmail.com with ESMTPSA id v17-20020a05600c445100b0041c130520fbsm6384560wmn.46.2024.04.29.08.12.27
+        by smtp.gmail.com with ESMTPSA id fw24-20020a170906c95800b00a58ff4d4869sm1503265ejb.123.2024.04.29.08.26.32
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 29 Apr 2024 08:12:27 -0700 (PDT)
+        Mon, 29 Apr 2024 08:26:32 -0700 (PDT)
 From: Ninette Adhikari <ninette@thehoodiefirm.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: engineering@neighbourhood.ie,
 	Peter.Marko@siemens.com,
 	Ninette Adhikari <ninette@thehoodiefirm.com>
-Subject: [PATCH v2] sthttpd: Update status for CVE-2017-10671
-Date: Mon, 29 Apr 2024 17:12:24 +0200
-Message-ID: <20240429151224.19406-1-ninette@thehoodiefirm.com>
+Subject: [PATCH v2] open-vm-tools: Update status for CVE-2014-4199 and CVE-2014-4200
+Date: Mon, 29 Apr 2024 17:26:30 +0200
+Message-ID: <20240429152630.29780-1-ninette@thehoodiefirm.com>
 X-Mailer: git-send-email 2.44.0
-In-Reply-To: <AS1PR10MB56973220F2C667576A4CAB35FD1B2@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM>
-References: <AS1PR10MB56973220F2C667576A4CAB35FD1B2@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM>
+In-Reply-To: <AS1PR10MB5697918A4420D720F71CE2E0FD1B2@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM>
+References: <AS1PR10MB5697918A4420D720F71CE2E0FD1B2@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM>
 Reply-To: engineering@neighbourhood.ie
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 29 Apr 2024 15:12:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110188
+ <openembedded-devel@lists.openembedded.org>; Mon, 29 Apr 2024 15:26:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110189
 
-Current version 2.27.1 is not affected by the issue.
-Affected versions: Up to (excl.) 2.27.1
-
-Signed-off-by: Ninette Adhikari <ninette@thehoodiefirm.com>
+Current version 12.3.5 is not affected by the issue.
+Affected versions: Up to (incl) 10.0.3
 ---
- meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.1.bb | 2 ++
+ .../recipes-support/open-vm-tools/open-vm-tools_12.3.5.bb       | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.1.bb b/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.1.bb
-index b40b14851..601ec7bcd 100644
---- a/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.1.bb
-+++ b/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.1.bb
-@@ -57,3 +57,5 @@ SYSTEMD_SERVICE:${PN} = "thttpd.service"
+diff --git a/meta-networking/recipes-support/open-vm-tools/open-vm-tools_12.3.5.bb b/meta-networking/recipes-support/open-vm-tools/open-vm-tools_12.3.5.bb
+index 6696e552c..82aab051f 100644
+--- a/meta-networking/recipes-support/open-vm-tools/open-vm-tools_12.3.5.bb
++++ b/meta-networking/recipes-support/open-vm-tools/open-vm-tools_12.3.5.bb
+@@ -120,3 +120,5 @@ python() {
+ }
  
- FILES:${PN} += "${SRV_DIR}"
- FILES:${PN}-dbg += "${SRV_DIR}/cgi-bin/.debug"
-+
-+CVE_STATUS[CVE-2017-10671] = "fixed-version: No action required. The current version (2.27.1) is not affected by the CVE."
+ CVE_PRODUCT = "open-vm-tools vmware:tools"
++CVE_STATUS[CVE-2014-4199] = "fixed-version: No action required. The current version (12.3.5) is not affected by the CVE which affects version 10.0.3"
++CVE_STATUS[CVE-2014-4200] = "fixed-version: No action required. The current version (12.3.5) is not affected by the CVE which affects version 10.0.3"
 -- 
 2.44.0
 
