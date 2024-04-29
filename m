@@ -1,179 +1,93 @@
-Return-Path: <meenali.gupta@windriver.com>
+Return-Path: <mingli.yu@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7CEF0C4345F
-	for <webhook@archiver.kernel.org>; Mon, 29 Apr 2024 06:24:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 48773C04FFE
+	for <webhook@archiver.kernel.org>; Mon, 29 Apr 2024 08:54:17 +0000 (UTC)
 Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.14393.1714371852527321132
+ by mx.groups.io with SMTP id smtpd.web10.15924.1714380847416147728
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 28 Apr 2024 23:24:12 -0700
+ Mon, 29 Apr 2024 01:54:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=XxwDr2jM;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=5849bdb194=meenali.gupta@windriver.com)
+ dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=O7+fsmAJ;
+ spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=584906f8e5=mingli.yu@windriver.com)
 Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 43T6DpJA000381
-	for <openembedded-devel@lists.openembedded.org>; Mon, 29 Apr 2024 06:24:11 GMT
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 43T5w250012196
+	for <openembedded-devel@lists.openembedded.org>; Mon, 29 Apr 2024 08:54:06 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
 	 h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=Fj+oV
-	Bg/IPbRmbJKWdrEteSvpd5FzPvNQahAhz7DXGo=; b=XxwDr2jMkr0kl+tRAzDXk
-	h5MkNF759uN1NPx3lc0tc0kRIGi60b+WhqGhyEppkhfZNCwaNZe3eOYVAOmKmixk
-	yyAb5jtEBrCrY4ux3fH+yzsrhE4Y86IwZ54L8SNlrSy1yDJv4TKlnbhN+DwLcDEg
-	vo2fiBgkqiz7FyMgjgO+0tD8J4+1L9Xg97LcmO9xkEbQjhvvBTFTWPv5S4B7+dRX
-	ujVWl9NpDLp8JiWKTw7XD2qhw4gDqIUDPYG5pRD3KhXu0EKXvHFt5OBicr5rRbAu
-	2xgLYtyczRC31Wge+xzkbgRQOWZJAM+rFgKDcdeuulUMDQwWug9Or3xQVSK9+3vj
-	w==
+	:content-transfer-encoding:content-type; s=PPS06212021; bh=9yB6x
+	9r3xsxxdYXb3951UNtPsjCX/LDW1tQOhPpbO7A=; b=O7+fsmAJ5QnbKsQCZEHvn
+	7hjEOOAMMCf6cGB1UD/AHz6hSUORZgr+B/16EjkP1Ew/8vS2JqQ7P3NG+rL/0KT/
+	DoQHHK1WSaHjZcvEXj0/D6HSvrhSgmxjOelg3Uv/q0l8Qygu7u2rWNFyrO1Oxc+a
+	sSi5Q9tGngUK/6Y9FrZaTdhSFxpzelvbwnCsu6FtXKe5JgFBmSsQ7pgTdB+EkxN8
+	gqPZwUd3+BEHZBB7JOBsic+sqd2AlLr7tCt9YFvT0fAT1eeNYUj8mh21/63Am5ge
+	g6c7A55SzEhiZbaulDRXWHkp2Bkn0E8Hi6zpG9r+XKS6nZ5n9Pe69RgmIyZFYfKM
+	Q==
 Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3xrpjx9ewm-1
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3xrpjx9jdw-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 29 Apr 2024 06:24:11 +0000 (GMT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
+	for <openembedded-devel@lists.openembedded.org>; Mon, 29 Apr 2024 08:54:06 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
  ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.37; Sun, 28 Apr 2024 23:24:08 -0700
-From: mgupta1 <meenali.gupta@windriver.com>
+ 15.1.2507.37; Mon, 29 Apr 2024 01:54:05 -0700
+Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.37 via Frontend Transport; Mon, 29 Apr 2024 01:54:04 -0700
+From: <mingli.yu@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-webserver][kirkstone][PATCH 1/1] nginx: fix CVE-2023-44487
-Date: Mon, 29 Apr 2024 06:23:51 +0000
-Message-ID: <20240429062351.187817-1-meenali.gupta@windriver.com>
-X-Mailer: git-send-email 2.40.0
+Subject: [meta-gnome][PATCH] msgraph: Add opengl to REQUIRED_DISTRO_FEATURES
+Date: Mon, 29 Apr 2024 16:54:03 +0800
+Message-ID: <20240429085403.1279175-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-ORIG-GUID: 9TFrYGUmKCMHac-66CWziE_9oqGkHFXr
-X-Proofpoint-GUID: 9TFrYGUmKCMHac-66CWziE_9oqGkHFXr
+X-Proofpoint-ORIG-GUID: _JM6zZa_I8UbsqaIg-kdgLwek4Z7krp7
+X-Proofpoint-GUID: _JM6zZa_I8UbsqaIg-kdgLwek4Z7krp7
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1011,Hydra:6.0.650,FMLib:17.11.176.26
- definitions=2024-04-29_03,2024-04-26_02,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 mlxlogscore=999
+ definitions=2024-04-29_06,2024-04-26_02,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 mlxlogscore=965
  clxscore=1011 mlxscore=0 spamscore=0 impostorscore=0 suspectscore=0
  adultscore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0
  malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2404010003 definitions=main-2404290040
+ engine=8.19.0-2404010003 definitions=main-2404290055
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 29 Apr 2024 06:24:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110166
+ <openembedded-devel@lists.openembedded.org>; Mon, 29 Apr 2024 08:54:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110167
 
-From: Meenali Gupta <meenali.gupta@windriver.com>
+From: Mingli Yu <mingli.yu@windriver.com>
 
-The HTTP/2 protocol allows a denial of service (server resource consumption)
-because request cancellation can reset many streams quickly, as exploited in
-the wild in August through October 2023.
+Fixes the below yocto compliance issue:
+  ERROR: Nothing PROVIDES 'rest' (but /build/layers/meta-openembedded/meta-gnome/recipes-gnome/msgraph/msgraph_0.2.1.bb DEPENDS on or otherwise requires it)
+  rest was skipped: missing required distro feature 'opengl' (not in DISTRO_FEATURES)
+  ERROR: Required build target 'meta-world-pkgdata' has no buildable providers.
+  Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'msgraph', 'rest']
 
-References:
-https://nvd.nist.gov/vuln/detail/CVE-2023-44487
-
-Signed-off-by: Meenali Gupta <meenali.gupta@windriver.com>
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- .../nginx/files/CVE-2023-44487.patch          | 79 +++++++++++++++++++
- meta-webserver/recipes-httpd/nginx/nginx.inc  |  1 +
- 2 files changed, 80 insertions(+)
- create mode 100644 meta-webserver/recipes-httpd/nginx/files/CVE-2023-44487.patch
+ meta-gnome/recipes-gnome/msgraph/msgraph_0.2.1.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-webserver/recipes-httpd/nginx/files/CVE-2023-44487.patch b/meta-webserver/recipes-httpd/nginx/files/CVE-2023-44487.patch
-new file mode 100644
-index 0000000000..7df62fd61a
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/files/CVE-2023-44487.patch
-@@ -0,0 +1,79 @@
-+From 95d09cafae12d4b314df32027b97e828ecf798de Mon Sep 17 00:00:00 2001
-+From: Maxim Dounin <mdounin@mdounin.ru>
-+Date: Tue, 10 Oct 2023 15:13:39 +0300
-+Subject: [PATCH] HTTP/2: per-iteration stream handling limit. To ensure that
-+attempts to flood servers with many streams are detected early, a limit of no
-+more than 2 * max_concurrent_streams new streams per one event loop iteration
-+was introduced.  This limit is applied even if max_concurrent_streams is not
-+yet reached - for example, if corresponding streams are handled synchronously
-+or reset.
-+
-+Further, refused streams are now limited to maximum of max_concurrent_streams
-+and 100, similarly to priority_limit initial value, providing some tolerance
-+to clients trying to open several streams at the connection start, yet
-+low tolerance to flooding attempts.
-+
-+Upstream-Status: Backport [https://github.com/nginx/nginx/commit/6ceef192e7af1c507826ac38a2d43f08bf265fb9]
-+CVE: CVE-2023-44487
-+
-+Signed-off-by: Meenali Gupta <meenali.gupta@windriver.com>
-+---
-+ src/http/v2/ngx_http_v2.c | 15 +++++++++++++++
-+ src/http/v2/ngx_http_v2.h |  2 ++
-+ 2 files changed, 17 insertions(+)
-+
-+diff --git a/src/http/v2/ngx_http_v2.c b/src/http/v2/ngx_http_v2.c
-+index ea3f27c..1116e56 100644
-+--- a/src/http/v2/ngx_http_v2.c
-++++ b/src/http/v2/ngx_http_v2.c
-+@@ -361,6 +361,7 @@ ngx_http_v2_read_handler(ngx_event_t *rev)
-+     ngx_log_debug0(NGX_LOG_DEBUG_HTTP, c->log, 0, "http2 read handler");
-+
-+     h2c->blocked = 1;
-++    h2c->new_streams = 0;
-+
-+     if (c->close) {
-+         c->close = 0;
-+@@ -1321,6 +1322,14 @@ ngx_http_v2_state_headers(ngx_http_v2_connection_t *h2c, u_char *pos,
-+         goto rst_stream;
-+     }
-+
-++    if (h2c->new_streams++ >= 2 * h2scf->concurrent_streams) {
-++        ngx_log_error(NGX_LOG_INFO, h2c->connection->log, 0,
-++                      "client sent too many streams at once");
-++
-++        status = NGX_HTTP_V2_REFUSED_STREAM;
-++        goto rst_stream;
-++    }
-++
-+     if (!h2c->settings_ack
-+         && !(h2c->state.flags & NGX_HTTP_V2_END_STREAM_FLAG)
-+         && h2scf->preread_size < NGX_HTTP_V2_DEFAULT_WINDOW)
-+@@ -1386,6 +1395,12 @@ ngx_http_v2_state_headers(ngx_http_v2_connection_t *h2c, u_char *pos,
-+
-+ rst_stream:
-+
-++    if (h2c->refused_streams++ > ngx_max(h2scf->concurrent_streams, 100)) {
-++        ngx_log_error(NGX_LOG_INFO, h2c->connection->log, 0,
-++                      "client sent too many refused streams");
-++        return ngx_http_v2_connection_error(h2c, NGX_HTTP_V2_NO_ERROR);
-++    }
-++
-+     if (ngx_http_v2_send_rst_stream(h2c, h2c->state.sid, status) != NGX_OK) {
-+         return ngx_http_v2_connection_error(h2c, NGX_HTTP_V2_INTERNAL_ERROR);
-+     }
-+diff --git a/src/http/v2/ngx_http_v2.h b/src/http/v2/ngx_http_v2.h
-+index 4e25293..b9daf92 100644
-+--- a/src/http/v2/ngx_http_v2.h
-++++ b/src/http/v2/ngx_http_v2.h
-+@@ -124,6 +124,8 @@ struct ngx_http_v2_connection_s {
-+     ngx_uint_t                       processing;
-+     ngx_uint_t                       frames;
-+     ngx_uint_t                       idle;
-++    ngx_uint_t                       new_streams;
-++    ngx_uint_t                       refused_streams;
-+     ngx_uint_t                       priority_limit;
-+
-+     ngx_uint_t                       pushing;
-+--
-+2.40.0
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
-index 9f93c7051d..9cbe35a13a 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx.inc
-+++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
-@@ -23,6 +23,7 @@ SRC_URI = " \
-     file://nginx.service \
-     file://nginx-fix-pidfile.patch \
-     file://0001-configure-libxslt-conf.patch \
-+    file://CVE-2023-44487.patch \
- "
+diff --git a/meta-gnome/recipes-gnome/msgraph/msgraph_0.2.1.bb b/meta-gnome/recipes-gnome/msgraph/msgraph_0.2.1.bb
+index 4c11a8d13..9b4a8a035 100644
+--- a/meta-gnome/recipes-gnome/msgraph/msgraph_0.2.1.bb
++++ b/meta-gnome/recipes-gnome/msgraph/msgraph_0.2.1.bb
+@@ -2,7 +2,8 @@ SUMMARY = "libmsgraph is a GLib-based library for accessing online serive APIs u
+ LICENSE = "LGPL-3.0-only"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=3000208d539ec061b899bce1d9ce9404"
  
- inherit siteinfo update-rc.d useradd systemd
+-inherit gnomebase gobject-introspection gi-docgen
++inherit gnomebase gobject-introspection gi-docgen features_check
++REQUIRED_DISTRO_FEATURES = "opengl"
+ 
+ SRC_URI[archive.sha256sum] = "e0e59eaa8ae3e0a48ec0a6c2fed0470856a709248e9212b6a1d037de5792ecbb"
+ 
 -- 
-2.40.0
+2.25.1
 
 
