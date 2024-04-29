@@ -1,93 +1,80 @@
-Return-Path: <mingli.yu@eng.windriver.com>
+Return-Path: <ninette@thehoodiefirm.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 48773C04FFE
-	for <webhook@archiver.kernel.org>; Mon, 29 Apr 2024 08:54:17 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.15924.1714380847416147728
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BA2C1C4345F
+	for <webhook@archiver.kernel.org>; Mon, 29 Apr 2024 11:02:17 +0000 (UTC)
+Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
+ by mx.groups.io with SMTP id smtpd.web11.17866.1714388533651639356
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Apr 2024 01:54:07 -0700
+ Mon, 29 Apr 2024 04:02:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=O7+fsmAJ;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=584906f8e5=mingli.yu@windriver.com)
-Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 43T5w250012196
-	for <openembedded-devel@lists.openembedded.org>; Mon, 29 Apr 2024 08:54:06 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=9yB6x
-	9r3xsxxdYXb3951UNtPsjCX/LDW1tQOhPpbO7A=; b=O7+fsmAJ5QnbKsQCZEHvn
-	7hjEOOAMMCf6cGB1UD/AHz6hSUORZgr+B/16EjkP1Ew/8vS2JqQ7P3NG+rL/0KT/
-	DoQHHK1WSaHjZcvEXj0/D6HSvrhSgmxjOelg3Uv/q0l8Qygu7u2rWNFyrO1Oxc+a
-	sSi5Q9tGngUK/6Y9FrZaTdhSFxpzelvbwnCsu6FtXKe5JgFBmSsQ7pgTdB+EkxN8
-	gqPZwUd3+BEHZBB7JOBsic+sqd2AlLr7tCt9YFvT0fAT1eeNYUj8mh21/63Am5ge
-	g6c7A55SzEhiZbaulDRXWHkp2Bkn0E8Hi6zpG9r+XKS6nZ5n9Pe69RgmIyZFYfKM
-	Q==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3xrpjx9jdw-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Mon, 29 Apr 2024 08:54:06 +0000 (GMT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.37; Mon, 29 Apr 2024 01:54:05 -0700
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.37 via Frontend Transport; Mon, 29 Apr 2024 01:54:04 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-gnome][PATCH] msgraph: Add opengl to REQUIRED_DISTRO_FEATURES
-Date: Mon, 29 Apr 2024 16:54:03 +0800
-Message-ID: <20240429085403.1279175-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@thehoodiefirm-com.20230601.gappssmtp.com header.s=20230601 header.b=Xd0jeHrF;
+ spf=neutral (domain: thehoodiefirm.com, ip: 209.85.218.41, mailfrom: ninette@thehoodiefirm.com)
+Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-a58772187d8so518926266b.3
+        for <openembedded-devel@lists.openembedded.org>; Mon, 29 Apr 2024 04:02:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=thehoodiefirm-com.20230601.gappssmtp.com; s=20230601; t=1714388532; x=1714993332; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:reply-to:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Py+w34m8LyyhQNkdX75EYXmcR8ymhKbM8LJsm0Ro2UQ=;
+        b=Xd0jeHrFrMjqT83OWc7frGgzCAwAY1Fsc5zk+SNz0yeUSgS7Gzq/Jk+tmXFqKmMDnc
+         sps8HK1eiW5b/gGTXYkfxGRERHmafGIgqXtbYpXj4sG14xXGFwdfM5YPXvfDYJwElyuV
+         h49lfpZs9qoCAP2jOzBnAt5xNHxXly4+3lGi30O63mh8eXgbg7UvoAL3dLnK+ItQ/fYe
+         AGDDU/am4IUE5Hpp8fszrSybFCqn4cO0wClK+bcxFccHVSRXCMOgyizNdExru401l6OK
+         SjCaL/Szb0AyZwa5ZeCeVhHgqj8rSw0Srqbsz83iUqML/sC1hZRuWEHL0dob6bfK9/ML
+         LiTg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1714388532; x=1714993332;
+        h=content-transfer-encoding:mime-version:reply-to:message-id:date
+         :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=Py+w34m8LyyhQNkdX75EYXmcR8ymhKbM8LJsm0Ro2UQ=;
+        b=cGLecIZKzO29WnoVRr54G8uUe1pkjIgfWuRPKU0M9iCciny9UsjJIi9IddBc2VclV1
+         1w4EqssZXTZsXWa9Irb6Ub91h/sx8hsxpnticbCvXoUIVKGwRj5tqpvc12pM0xTOtXqZ
+         cZDPDhPAoJzj5bbCh5NNZSvDriGvP33A8B3CuZTmy2OJS22QeGU1jaSYeHC71zKIYIoh
+         WIAZ3LnDdMr4WyQcL9z5wyyFUmAFUKiX8VLXBJnAfrqOLulXffIQFva0SBVxeKYogDki
+         NVx2gO0Q+TGW6StrnQM2BKCAasKoZmUoA2OvAa5+8nMHtFZLei7XcjxlLotR1n8j9s+6
+         ULTw==
+X-Gm-Message-State: AOJu0YwHcnhwDov6BvHJX5JcXuHK4rv8yu7Cac3g+oZSkmZcoh1LBFEw
+	rvLKVy1CoNZYWmL8fBLiE+eRcAhZ6drQr81VYRyL+snXk+4tRoajMAgXjnxDWPXlcHSIit8ILNm
+	Td+s=
+X-Google-Smtp-Source: AGHT+IFfmV/hmV5O9CZNs/9hpJVcPNsVwLTqLIFhcF77LvadyT1oSM/GNx9qb/N/olSSXwc4ZoCwNQ==
+X-Received: by 2002:a17:907:bb97:b0:a51:dcda:dcde with SMTP id xo23-20020a170907bb9700b00a51dcdadcdemr8472887ejc.70.1714388531831;
+        Mon, 29 Apr 2024 04:02:11 -0700 (PDT)
+Received: from Ninettes-MBP.fritz.box (pd9ebc533.dip0.t-ipconnect.de. [217.235.197.51])
+        by smtp.gmail.com with ESMTPSA id mc11-20020a170906eb4b00b00a5256d8c956sm13733353ejb.61.2024.04.29.04.02.11
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 29 Apr 2024 04:02:11 -0700 (PDT)
+From: Ninette Adhikari <ninette@thehoodiefirm.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: engineering@neighbourhood.ie,
+	Ninette Adhikari <ninette@thehoodiefirm.com>
+Subject: [PATCH 0/1] st: Update status for CVE-2017-16224
+Date: Mon, 29 Apr 2024 13:02:06 +0200
+Message-ID: <20240429110207.50187-1-ninette@thehoodiefirm.com>
+X-Mailer: git-send-email 2.44.0
+Reply-To: engineering@neighbourhood.ie
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: _JM6zZa_I8UbsqaIg-kdgLwek4Z7krp7
-X-Proofpoint-GUID: _JM6zZa_I8UbsqaIg-kdgLwek4Z7krp7
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1011,Hydra:6.0.650,FMLib:17.11.176.26
- definitions=2024-04-29_06,2024-04-26_02,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 mlxlogscore=965
- clxscore=1011 mlxscore=0 spamscore=0 impostorscore=0 suspectscore=0
- adultscore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0
- malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2404010003 definitions=main-2404290055
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 29 Apr 2024 08:54:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110167
+ <openembedded-devel@lists.openembedded.org>; Mon, 29 Apr 2024 11:02:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110168
 
-From: Mingli Yu <mingli.yu@windriver.com>
+The recipe used in the meta-openembedded is a different st package compared to the one which has the CVE issue.
+Package used in meta-embedded: https://st.suckless.org/
+Package with CVE issue: https://www.npmjs.com/package/st
+No action required.
 
-Fixes the below yocto compliance issue:
-  ERROR: Nothing PROVIDES 'rest' (but /build/layers/meta-openembedded/meta-gnome/recipes-gnome/msgraph/msgraph_0.2.1.bb DEPENDS on or otherwise requires it)
-  rest was skipped: missing required distro feature 'opengl' (not in DISTRO_FEATURES)
-  ERROR: Required build target 'meta-world-pkgdata' has no buildable providers.
-  Missing or unbuildable dependency chain was: ['meta-world-pkgdata', 'msgraph', 'rest']
+Ninette Adhikari (1):
+  st: Update status for CVE-2017-16224
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
----
- meta-gnome/recipes-gnome/msgraph/msgraph_0.2.1.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ meta-oe/recipes-graphics/suckless/st_0.9.2.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-gnome/recipes-gnome/msgraph/msgraph_0.2.1.bb b/meta-gnome/recipes-gnome/msgraph/msgraph_0.2.1.bb
-index 4c11a8d13..9b4a8a035 100644
---- a/meta-gnome/recipes-gnome/msgraph/msgraph_0.2.1.bb
-+++ b/meta-gnome/recipes-gnome/msgraph/msgraph_0.2.1.bb
-@@ -2,7 +2,8 @@ SUMMARY = "libmsgraph is a GLib-based library for accessing online serive APIs u
- LICENSE = "LGPL-3.0-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=3000208d539ec061b899bce1d9ce9404"
- 
--inherit gnomebase gobject-introspection gi-docgen
-+inherit gnomebase gobject-introspection gi-docgen features_check
-+REQUIRED_DISTRO_FEATURES = "opengl"
- 
- SRC_URI[archive.sha256sum] = "e0e59eaa8ae3e0a48ec0a6c2fed0470856a709248e9212b6a1d037de5792ecbb"
- 
 -- 
-2.25.1
+2.44.0
 
 
