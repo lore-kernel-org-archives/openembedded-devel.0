@@ -1,84 +1,128 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2EF6EC4345F
-	for <webhook@archiver.kernel.org>; Tue, 30 Apr 2024 06:47:07 +0000 (UTC)
-Received: from mailout11.t-online.de (mailout11.t-online.de [194.25.134.85])
- by mx.groups.io with SMTP id smtpd.web11.9108.1714459623348184177
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 438DAC4345F
+	for <webhook@archiver.kernel.org>; Tue, 30 Apr 2024 07:16:27 +0000 (UTC)
+Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com [209.85.167.52])
+ by mx.groups.io with SMTP id smtpd.web10.9630.1714461377614610473
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 29 Apr 2024 23:47:03 -0700
+ Tue, 30 Apr 2024 00:16:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.85, mailfrom: f_l_k@t-online.de)
-Received: from fwd79.aul.t-online.de (fwd79.aul.t-online.de [10.223.144.105])
-	by mailout11.t-online.de (Postfix) with SMTP id 3D58482BA
-	for <openembedded-devel@lists.openembedded.org>; Tue, 30 Apr 2024 08:47:01 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.163.33.47]) by fwd79.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1s1hGW-1IYVIv0; Tue, 30 Apr 2024 08:47:00 +0200
-From: Markus Volk <f_l_k@t-online.de>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH] networkmanager: fix gir build
-Date: Tue, 30 Apr 2024 08:47:21 +0200
-Message-ID: <20240430064721.164017-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.44.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=I2RXwUtC;
+ spf=pass (domain: gmail.com, ip: 209.85.167.52, mailfrom: martin.jansa@gmail.com)
+Received: by mail-lf1-f52.google.com with SMTP id 2adb3069b0e04-51ae315bb20so6550853e87.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 30 Apr 2024 00:16:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1714461375; x=1715066175; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=SJaDRMuxV2LCjtC0wOLiSyOoEvFMyMe/g8uwoaq02Gs=;
+        b=I2RXwUtCKfBJB0RaG7NphDE3rBrDfsa+Pgt8m2stUfOKQrk+xMpj9jaZm0HMWRphX/
+         2wjx8gBhFq12SnNFFUs8cYKDjJsMB8n3Co/WWRZGospgHq58e/GOsK4+hrod24MUH3Cj
+         ZYeO7wP1Hj+zaSRtOoiEv/YfqtrmgoxcJsqMb0xUKMmE2ioYy6g/mxq8oxGSRU94ZAJY
+         jbdFzfmYUxaxNq4qImv5/HTtQACNv5jjq/oTfTV7EPA02xRY02QfuYLo7ori9fYqKU25
+         6YIziYqAKQJcGUaY3Dfb07Qd3PEa1yAMlGjQ34nKk0E4wGdI4ydVhKbUKw6DxIxhmm/3
+         M+qw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1714461375; x=1715066175;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=SJaDRMuxV2LCjtC0wOLiSyOoEvFMyMe/g8uwoaq02Gs=;
+        b=hb5I0PL6lvm0DYEs5mO/EdeoGnpcYR1Mh0HBQvIzE99LtrRP30OF7R5p1Ara74Ph5r
+         JKTefL9kRwpaVX+Yas+p0y6yr5WPlkCuX8dJDl6QjR7cACYHUJLhieeSyVLhJGH/J6aI
+         XWVUmCb8ha3rsRBXitr5wfdoD9WAu4pa9PvARFplO6XWwmvi/kUyZAKe4XplVtcQC99L
+         Y31TcuGJdiVxDrzOClmk4s20iKEUEuPaP54R39R+cEZGVS5X7vfnB5iLYxptGDPmeevt
+         3i+m5F6kk5018oCD/lT1E4m53nvnmWhz5EGYd0l4VF1Lxlw8NdztwHKi+F9maRsvsEkT
+         zeDg==
+X-Gm-Message-State: AOJu0YziZ1lh/UZP9WUeeEqHLU2tAMPgYsDIu+xszVMxdCe+s+dCm852
+	eEGR6SOcJUsnaFC8XljhWsGkVar0jrF7VZ6p7H6u2AQ9Qn6f9m0Dm0uE5ifDsDcV81OO6av/ra2
+	Roc/Z73ASC88e9OY1Hl2YkGNtdfw=
+X-Google-Smtp-Source: AGHT+IHiNPCQ5lfG8VTiHGZm25IQ08Y3n2LPR+Of/jtwJrBg1XGcmtaEDrLzV4rT06GWtDeS/cs+vqV2IAifZUIWpXc=
+X-Received: by 2002:a05:6512:4cb:b0:518:b144:9020 with SMTP id
+ w11-20020a05651204cb00b00518b1449020mr1176926lfq.61.1714461375154; Tue, 30
+ Apr 2024 00:16:15 -0700 (PDT)
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1714459620-637FC3C7-7D585F74/0/0 CLEAN NORMAL
-X-TOI-MSGID: 8dde3ddf-b54a-4b1a-8861-8aaad738fae5
+References: <20240327071636.2207445-1-mingli.yu@windriver.com> <20240327071636.2207445-2-mingli.yu@windriver.com>
+In-Reply-To: <20240327071636.2207445-2-mingli.yu@windriver.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Tue, 30 Apr 2024 09:16:03 +0200
+Message-ID: <CA+chaQdkCsa2P-qJ5A-fQ5=n-sAmeHXLooBW3nsbrrLHPgSLjw@mail.gmail.com>
+Subject: Re: [oe] [meta-python][kirkstone][PATCH 2/3] python3-pyyaml-include:
+ switch to pytest --automake
+To: "Yu, Mingli" <mingli.yu@eng.windriver.com>, tim.orling@konsulko.com, 
+	Ross Burton <ross.burton@arm.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 30 Apr 2024 06:47:07 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110190
+ <openembedded-devel@lists.openembedded.org>; Tue, 30 Apr 2024 07:16:27 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110191
 
-Basically what is done in:
-https://git.openembedded.org/meta-openembedded/commit/?h=3Dmaster-next&id=
-=3D4c40897893f43a99e6ae12e652c0cf789d89df90
+On Wed, Mar 27, 2024 at 8:16=E2=80=AFAM Yu, Mingli <mingli.yu@eng.windriver=
+.com> wrote:
+>
+> From: Tim Orling <ticotimo@gmail.com>
+>
+> * Also replace ${PYTHON_PN} with python3
+>
+> Signed-off-by: Tim Orling <tim.orling@konsulko.com>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> (cherry picked from commit 182f31a182f6572a3538b875cec7ee761e2da1e6)
+> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+...
+> diff --git a/meta-python/recipes-devtools/python/python3-pyyaml-include_1=
+.3.2.bb b/meta-python/recipes-devtools/python/python3-pyyaml-include_1.3.2.=
+bb
+> index 9bfaa2194..3a5bd99a7 100644
+> --- a/meta-python/recipes-devtools/python/python3-pyyaml-include_1.3.2.bb
+> +++ b/meta-python/recipes-devtools/python/python3-pyyaml-include_1.3.2.bb
+> @@ -2,7 +2,7 @@ SUMMARY =3D "Extending PyYAML with a custom constructor f=
+or including YAML files w
+>  HOMEPAGE =3D "https://github.com/tanbro/pyyaml-include"
+>  LICENSE =3D "GPL-3.0-only"
+>  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dd32239bcb673463ab874e80d47fae=
+504"
+> -DEPENDS +=3D "${PYTHON_PN}-setuptools-scm-native"
+> +DEPENDS +=3D "python3-setuptools-scm-native"
+>  SRCREV =3D "36b6975aa8fc7a6cbf37de40aa2ed6d996b2f7be"
+>
+>  SRC_URI =3D " \
+> @@ -20,9 +20,10 @@ do_install_ptest() {
+>  }
+>
+>  RDEPENDS:${PN} +=3D " \
+> -    ${PYTHON_PN}-pyyaml \
+> +    python3-pyyaml \
+>  "
+>  RDEPENDS:${PN}-ptest +=3D " \
+> -    ${PYTHON_PN}-pytest \
+> +    python3-pytest \
+> +    python3-unittest-automake-output \
+>  "
 
-This fixes:
-| gi.RepositoryError: Typelib file for namespace 'Gobject', version '2.0'=
- not found
-| gi.RepositoryError: Typelib file for namespace 'Gio', version '2.0' not=
- found
-| gi.RepositoryError: Typelib file for namespace 'GModule', version '2.0'=
- not found
+This was now merged to meta-oe kirkstone, but the
+python3-unittest-automake-output isn't available in oe-core kirkstone,
+causing:
+ERROR: Nothing RPROVIDES 'python3-unittest-automake-output' (but
+meta-oe/meta-python/recipes-devtools/python/python3-pyyaml-include_1.4.1.bb
+RDEPENDS on or otherwise requires it)
 
-- Remove uneeded do_compile:prepend. It was broken because of {B}} and se=
-ems to be unneeded anyway
+python3-unittest-automake-output was added to oe-core in mickledore:
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
----
- .../networkmanager/networkmanager_1.46.0.bb                | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+openembedded-core $ git log --oneline --
+./meta/recipes-devtools/python/python3-unittest-automake-output_0.1.bb
+db0e82135c python3-unittest-automake-output: upgrade to 0.2
+961e4f3fc7 python3-unittest-automake-output: add new recipe for ptest
+integration
 
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkm=
-anager_1.46.0.bb b/meta-networking/recipes-connectivity/networkmanager/ne=
-tworkmanager_1.46.0.bb
-index be30154a3..8184fcf1a 100644
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_=
-1.46.0.bb
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_=
-1.46.0.bb
-@@ -76,9 +76,10 @@ EXTRA_OEMESON =3D "\
- CFLAGS:append:libc-musl =3D " \
-     -DRTLD_DEEPBIND=3D0 \
- "
--
--do_compile:prepend() {
--    export GI_TYPELIB_PATH=3D"${B}}/src/libnm-client-impl${GI_TYPELIB_PA=
-TH:+:$GI_TYPELIB_PATH}"
-+do_configure:prepend() {
-+    cp -f ${STAGING_LIBDIR}/girepository-1.0/GObject*typelib ${STAGING_L=
-IBDIR_NATIVE}/girepository-1.0/
-+    cp -f ${STAGING_LIBDIR}/girepository-1.0/Gio*typelib ${STAGING_LIBDI=
-R_NATIVE}/girepository-1.0/
-+    cp -f ${STAGING_LIBDIR}/girepository-1.0/GModule*typelib ${STAGING_L=
-IBDIR_NATIVE}/girepository-1.0/
- }
-=20
- PACKAGECONFIG ??=3D "readline nss ifupdown dnsmasq nmcli vala \
---=20
-2.44.0
+Please revert this (if the newer python3-pyyaml-include works without
+this change) or add python3-unittest-automake-output to kirkstone as
+well.
 
+Cheers,
 
