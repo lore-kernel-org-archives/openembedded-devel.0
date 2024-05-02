@@ -1,97 +1,92 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <alexandre.truong@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8908CC25B10
-	for <webhook@archiver.kernel.org>; Thu,  2 May 2024 05:49:53 +0000 (UTC)
-Received: from esa3.hc1455-7.c3s2.iphmx.com (esa3.hc1455-7.c3s2.iphmx.com [207.54.90.49])
- by mx.groups.io with SMTP id smtpd.web11.6691.1714628986112840832
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A08ABC4345F
+	for <webhook@archiver.kernel.org>; Thu,  2 May 2024 09:56:05 +0000 (UTC)
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+ by mx.groups.io with SMTP id smtpd.web10.1407.1714643756295092025
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 May 2024 22:49:48 -0700
+ Thu, 02 May 2024 02:55:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=Xr7EiEPV;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.49, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1714628988; x=1746164988;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=Dm7sJqLySQbXjPxstlDy0aAvdfvKNqkQg/fAwmjxOQk=;
-  b=Xr7EiEPVi1ddPXNmZyG163+jPDJjfUe/KJlFcne+AwlomMHn3HlaH27G
-   HtN7c76vdpU1JXfVNPY5iF0qU3dRhZmaif1NDLbrhIMotBMCJy/KdKmRz
-   U9tLBD8C53atWsrl3IUTJyb0ehFsXUIv2+XQiM22JG9mysrmsAoh8SOmp
-   wOd5O5R7wKCRyavxwdiEpo9ARLen0WLtiXI/AW7id224mnJ4U0D5f1OLG
-   s2/h0OmD5X8KS/4UStoadRWkpLwBA6lzpPKCyHRYMN9maSnkLTgdzpCZU
-   F8VU8KGyxvFDp8i6j2S2kgQwJxormRQny7sCrOkosI09TK5sIx9rEkSA+
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,11061"; a="157231734"
-X-IronPort-AV: E=Sophos;i="6.07,247,1708354800"; 
-   d="scan'208";a="157231734"
-Received: from unknown (HELO oym-r1.gw.nic.fujitsu.com) ([210.162.30.89])
-  by esa3.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 May 2024 14:49:36 +0900
-Received: from oym-m2.gw.nic.fujitsu.com (oym-nat-oym-m2.gw.nic.fujitsu.com [192.168.87.59])
-	by oym-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id ADDDBE8FC0
-	for <openembedded-devel@lists.openembedded.org>; Thu,  2 May 2024 14:49:33 +0900 (JST)
-Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id AE8CBBF4B0
-	for <openembedded-devel@lists.openembedded.org>; Thu,  2 May 2024 14:49:32 +0900 (JST)
-Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 4D9C72008BCDC
-	for <openembedded-devel@lists.openembedded.org>; Thu,  2 May 2024 14:49:32 +0900 (JST)
-Received: from wangmy-QiTianM610-N000.g08.fujitsu.local (unknown [10.167.225.86])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id E650A1A0002;
-	Thu,  2 May 2024 13:49:31 +0800 (CST)
-From: wangmy@fujitsu.com
+ dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=2eEsL06j;
+ spf=pass (domain: smile.fr, ip: 209.85.128.50, mailfrom: alexandre.truong@smile.fr)
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-41b21ed19f5so53611905e9.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 02 May 2024 02:55:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1714643754; x=1715248554; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=V2A07FjRWkBWugLuLm25ArVmg/szIc+dGnNt8gML9dU=;
+        b=2eEsL06jYKVw27LVu+/v65Jo0305LCtdSQTwiku8epANptEgxEvpA+VlDnBXHL5EQX
+         lbnoOrj4qMtbzYre7HvFXcUA9InifG8yd4Sh/plGxB/+NY0k00FEhIwbYiN43QWsinhz
+         tdXHq058HoDePJEOQmfW7ADMwjboLsIYqbG7aOHWiyb4mphbyESRMJ1kJYgaLGOAwRjS
+         gEBTuN97ATR3FUWXVqDMkTTCLs2j6u5noqLf82SYFzSVCZ2YeCrixj8zPvSuq6IE+gv6
+         IywnqsDKOq/qycnGE92DgWsjkxgcUND9GLt53CXgqRZxCrnnZUBCCcutqCt1DudtoQKG
+         uKAg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1714643754; x=1715248554;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=V2A07FjRWkBWugLuLm25ArVmg/szIc+dGnNt8gML9dU=;
+        b=gxHpXQ3LOE4l+g3/g353yccGFMGtck16bTwwbgVBt9rc5/qCnQKHirKvIx5/aveIQX
+         +vFmBP3pY2mvXipCqb5OJ2veaSyozUxv79w/XR82Ci4u6IG2tAZ2YL9cHnLo2Fa0GqEE
+         TCIVwS5VFbPKgDTjk0qQ/QGYxo4Xdrm2B6ImlRmzIVcLq/DeFKqXxOvZid9iHMekor+/
+         sHLWptIw1SoKGnmoyYdgv1YyrooJNTNhb37jzi4UfVa6gkI6PMXzMEZrNJB7t9hCpBd3
+         07Qa+KBMmYmWS8281sGfoN+wu+84R9kcLS9S2OYjmTq2WK8hJgBBXpwFvz94c/m0BIDE
+         6wVw==
+X-Gm-Message-State: AOJu0YxbVFDUTDLqxBITkdSyvYPe8TdAK/sVEOnl+QmtDV1F9FfCl6Vv
+	i6vLFWK/wcRSAcE/4I4qXmXn5IU3vg1ZkiWQ5fohOLBGEKQZ8zSDO3AYcplqywwTTJG0Mq7R5Ym
+	v
+X-Google-Smtp-Source: AGHT+IFSIDYmQK3sj30K0VH6PDX0+Pxdgw8Lw2HMrvadAsjqZnpm1GlgRrzFh9V+/RdbhlTN2/+xJw==
+X-Received: by 2002:adf:facf:0:b0:34d:a23c:cb4a with SMTP id a15-20020adffacf000000b0034da23ccb4amr1270710wrs.7.1714643754410;
+        Thu, 02 May 2024 02:55:54 -0700 (PDT)
+Received: from P-ASN-MOON.idf.intranet (static-css-ccs-204145.business.bouyguestelecom.com. [176.157.204.145])
+        by smtp.gmail.com with ESMTPSA id h1-20020a056000000100b0034e0b56a62bsm857766wrx.44.2024.05.02.02.55.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 02 May 2024 02:55:54 -0700 (PDT)
+From: Alexandre Truong <alexandre.truong@smile.fr>
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 26/30] ser2net: upgrade 4.6.1 -> 4.6.2
-Date: Thu,  2 May 2024 10:48:25 -0400
-Message-Id: <20240502144829.241208-26-wangmy@fujitsu.com>
+Cc: Alexandre Truong <alexandre.truong@smile.fr>,
+	Yoann Congal <yoann.congal@smile.fr>
+Subject: [meta-gnome][PATCH] evince: Update status for CVE-2011-0433 and CVE-2011-5244
+Date: Thu,  2 May 2024 11:55:23 +0200
+Message-Id: <20240502095523.19940-1-alexandre.truong@smile.fr>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240502144829.241208-1-wangmy@fujitsu.com>
-References: <20240502144829.241208-1-wangmy@fujitsu.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-TM-AS-GCONF: 00
-X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28356.005
-X-TM-AS-User-Approved-Sender: Yes
-X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28356.005
-X-TMASE-Result: 10-7.416300-10.000000
-X-TMASE-MatchedRID: 6e3s/u+cBDSjz0nOeth/yQPZZctd3P4B1cuIRwt/4MiysPB8dBBorXKn
-	6DBj/gsEIvrftAIhWmJwk5p7o69tnZcLewwAa76fIbyXNwz2gvs1/AFBKYcY9IFum2PEjqt1o8W
-	MkQWv6iV3LAytsQR4e1cppCzPq+1UsjvNV98mpPPFwnV2m9VBHNzui9Rugb9PQyHilz6rGT6D/h
-	VSfQpxK8pUB/z9mT6SIpX67aIKkdMt608HJ1ElKkNJHsgeOgyTIdfrJ12aY8E=
-X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 02 May 2024 05:49:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110240
+ <openembedded-devel@lists.openembedded.org>; Thu, 02 May 2024 09:56:05 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110241
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+The current version 46.0 is not affected by the issues.
+Both issues have been fixed in commit [0].
+The fix is in effect since early versions of evince (3.1.2).
+Thus, both can be safely ignored.
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+[0]: https://gitlab.gnome.org/GNOME/evince/-/commit/efadec4ffcdde3373f6f4ca0eaac98dc963c4fd5
+
+Signed-off-by: Alexandre Truong <alexandre.truong@smile.fr>
+Reviewed-by: Yoann Congal <yoann.congal@smile.fr>
 ---
- .../ser2net/{ser2net_4.6.1.bb => ser2net_4.6.2.bb}              | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-connectivity/ser2net/{ser2net_4.6.1.bb => ser2net_4.6.2.bb} (91%)
+ meta-gnome/recipes-gnome/evince/evince_46.0.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-oe/recipes-connectivity/ser2net/ser2net_4.6.1.bb b/meta-oe/recipes-connectivity/ser2net/ser2net_4.6.2.bb
-similarity index 91%
-rename from meta-oe/recipes-connectivity/ser2net/ser2net_4.6.1.bb
-rename to meta-oe/recipes-connectivity/ser2net/ser2net_4.6.2.bb
-index e5ebafa54..21066b10f 100644
---- a/meta-oe/recipes-connectivity/ser2net/ser2net_4.6.1.bb
-+++ b/meta-oe/recipes-connectivity/ser2net/ser2net_4.6.2.bb
-@@ -11,7 +11,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/project/ser2net/ser2net/ser2net-${PV}.tar.gz \
-     file://ser2net.service \
+diff --git a/meta-gnome/recipes-gnome/evince/evince_46.0.bb b/meta-gnome/recipes-gnome/evince/evince_46.0.bb
+index 57eb994e1..291d32584 100644
+--- a/meta-gnome/recipes-gnome/evince/evince_46.0.bb
++++ b/meta-gnome/recipes-gnome/evince/evince_46.0.bb
+@@ -56,3 +56,7 @@ FILES:${PN} += "${datadir}/dbus-1 \
+                 ${systemd_user_unitdir} \
  "
- 
--SRC_URI[sha256sum] = "78ffee19d9b97e93ae65b5cec072da2b7b947fc484e9ccb3f535702f36f6ed19"
-+SRC_URI[sha256sum] = "63bafcd65bb9270a93b7d5cdde58ccf4d279603ff6d044ac4b484a257cda82ce"
- 
- UPSTREAM_CHECK_URI = "http://sourceforge.net/projects/ser2net/files/ser2net"
- 
+ FILES:${PN}-nautilus-extension = "${libdir}/nautilus/*/*so"
++
++CVE_PRODUCT = "evince"
++CVE_STATUS[CVE-2011-0433] = "fixed-version: No action required. The current version (46.0) is not affected by the CVE which has been patched since version 3.1.2"
++CVE_STATUS[CVE-2011-5244] = "fixed-version: No action required. The current version (46.0) is not affected by the CVE which has been patched since version 3.1.2"
 -- 
 2.34.1
 
