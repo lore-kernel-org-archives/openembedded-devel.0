@@ -2,51 +2,51 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E9103C25B75
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E9445C25B77
 	for <webhook@archiver.kernel.org>; Thu,  2 May 2024 05:49:42 +0000 (UTC)
-Received: from esa11.hc1455-7.c3s2.iphmx.com (esa11.hc1455-7.c3s2.iphmx.com [207.54.90.137])
- by mx.groups.io with SMTP id smtpd.web11.6688.1714628980012248970
+Received: from esa1.hc1455-7.c3s2.iphmx.com (esa1.hc1455-7.c3s2.iphmx.com [207.54.90.47])
+ by mx.groups.io with SMTP id smtpd.web10.6641.1714628972752084489
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 May 2024 22:49:40 -0700
+ Wed, 01 May 2024 22:49:37 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=npAqVHYe;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.137, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=CGFECXrQ;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.47, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1714628981; x=1746164981;
+  t=1714628977; x=1746164977;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=8GL3WLO96H7AQSjvzeaNJbc/oAAO9rNZ8wqiAH/zn4A=;
-  b=npAqVHYev0TXU9JdLeX/GuRJJpdRI7ZZ5sJoHRKUoGjf4x1Vk19kb0LG
-   DTK32YnckNaLyvhVl+R9K/Jwhc1yjZA/9Maa2bM8ZUaGOvx3u1YX67b+4
-   AKumM9llAxqSxYO5nc47twPQooyDVH1plwPiu0rsQ31GQiLHhuu6xxtV/
-   qi8OHw2f+Xr0xWgtam0/2NFvdo4VKXK8K+U5uPE6J90UPDeIpcnTamhfB
-   M5UUpvdtwi2IPs6qumP9RtMdghvo3F7FhkZkFtAf7o7gnzixZIgcU3GuQ
-   cI9lR9n9XY2OQn5/ESMthg1fV4sJvvPUrjyj02WAo91HW3Dk/drU3E/TU
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,11061"; a="136608499"
+  bh=0SHJjjUNV8sgXdxgLX/OiiHEuMJNZoxPogOVVxntUYo=;
+  b=CGFECXrQIHcAohEc07e7IZXFgpFZn+tYxF+/IAE1Tn67sA6kYiIKbvxg
+   JA0t1HfCOkjHEl5FwGQ8bFsSjjaOXkffEwGU88OkyxPU4WILkRlpw6QzW
+   hRmU99dOSxR8I9ZVjy7Ytna3oTmPDjCGWEKCXgCguOkPVcBW21uues9Qz
+   uSPNK0zvAXQct6ow6HcujvrwC+BtDdosi+OFjp7CGRWRFMrMiIS+LZ6gq
+   VAfyUZ717XbAErpEJowAbnoB6omiHsc1v7aGu52L9Huw0k7JGQN3q3yoO
+   QtkTEb7ga252TYl0ETcYOWlNkEzyAnrDGIxeJnXiY+JxLs8JXIqH3cAfJ
+   w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,11061"; a="157117704"
 X-IronPort-AV: E=Sophos;i="6.07,247,1708354800"; 
-   d="scan'208";a="136608499"
-Received: from unknown (HELO oym-r2.gw.nic.fujitsu.com) ([210.162.30.90])
-  by esa11.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 May 2024 14:49:27 +0900
-Received: from oym-m1.gw.nic.fujitsu.com (oym-nat-oym-m1.gw.nic.fujitsu.com [192.168.87.58])
-	by oym-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 0BBD2D4C2C
-	for <openembedded-devel@lists.openembedded.org>; Thu,  2 May 2024 14:49:25 +0900 (JST)
-Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by oym-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id 48A74C19D2
-	for <openembedded-devel@lists.openembedded.org>; Thu,  2 May 2024 14:49:24 +0900 (JST)
+   d="scan'208";a="157117704"
+Received: from unknown (HELO yto-r3.gw.nic.fujitsu.com) ([218.44.52.219])
+  by esa1.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 May 2024 14:49:36 +0900
+Received: from yto-m1.gw.nic.fujitsu.com (yto-nat-yto-m1.gw.nic.fujitsu.com [192.168.83.64])
+	by yto-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id DC8D0C2ABE
+	for <openembedded-devel@lists.openembedded.org>; Thu,  2 May 2024 14:49:33 +0900 (JST)
+Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
+	by yto-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id 25CA5CFBBF
+	for <openembedded-devel@lists.openembedded.org>; Thu,  2 May 2024 14:49:33 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id D0D362008BCDC
-	for <openembedded-devel@lists.openembedded.org>; Thu,  2 May 2024 14:49:23 +0900 (JST)
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id B46C8223FE0
+	for <openembedded-devel@lists.openembedded.org>; Thu,  2 May 2024 14:49:32 +0900 (JST)
 Received: from wangmy-QiTianM610-N000.g08.fujitsu.local (unknown [10.167.225.86])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 7F2A01A0002;
-	Thu,  2 May 2024 13:49:23 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 621B51A000C;
+	Thu,  2 May 2024 13:49:32 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 09/30] python3-google-api-python-client: upgrade 2.125.0 -> 2.127.0
-Date: Thu,  2 May 2024 10:48:08 -0400
-Message-Id: <20240502144829.241208-9-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 27/30] spdlog: upgrade 1.13.0 -> 1.14.0
+Date: Thu,  2 May 2024 10:48:26 -0400
+Message-Id: <20240502144829.241208-27-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240502144829.241208-1-wangmy@fujitsu.com>
 References: <20240502144829.241208-1-wangmy@fujitsu.com>
@@ -56,46 +56,67 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28356.005
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28356.005
-X-TMASE-Result: 10--1.526300-10.000000
-X-TMASE-MatchedRID: hsQjHHSArR6jz0nOeth/yUIIxwDaU5mr+KgiyLtJrSCTxayZGvX2Dr6p
-	xbTOjavy+7QcRaVoa8nGKIf6hBf7VaGGOyqBK41vEXjPIvKd74BuTKBinxl/umAN6i+va16uBqd
-	FRjHdIbhbJcQH3furV3k48PxckV+kHxPMjOKY7A+u65UDD0aDgsRB0bsfrpPIcSqbxBgG0w7m+u
-	73sRwrcVk4cmAsm0DhlTt5xKJKvUpFlUsXlcneXFoSedi1ABoLM8CLPJFCVDRDb9S/zxGxkpesH
-	D91sB7jXkNacJLt/j9bjBuldNvkMkoq97WSHdFjfupJaud1uZCfRs6uIbkFVw==
+X-TMASE-Result: 10--3.288400-10.000000
+X-TMASE-MatchedRID: AFiVwG0qm0+jz0nOeth/yUIIxwDaU5mrK2GKtdiFmTm/KKbZKt0GTmmK
+	T/2E8HDdmzlkx0DCIOtiSPqA3YPKL2+q6t+f1BKUw2hGLzP0sw4XivwflisSrKpJJeOmt6X/AHT
+	QICrB0hGEkt/L8HtAJ5lPyeZmj2J3NBtwY9jrji6OjIrMSa2sR9hQO8CvZj/XsMZG2pUzAfO0pv
+	xdZww2r/+cwEGCDjTvLJE/uNR38CjkWQ892nFTzKwBF+5NRZ1arOCEGIPhtwial2k3ufmkfb6px
+	bTOjavy+7QcRaVoa8nGKIf6hBf7VaGGOyqBK41vEXjPIvKd74D4qCLIu0mtIGAN6i+va16ukWNC
+	cn0XQOLegKf/r6b46i5rYfHE0OO95UcZtwNsCroURSScn+QSXt0H8LFZNFG76sBnwpOylLM1Z8R
+	Ujs2+c8Vfls4kVRNs09KA7G0+n7/6JSCGTSUsMgI9H4XZPDWGfqj9WM5o09MzqVtx+eaRKKkEgD
+	hulju0ZN708x0rYoQhyadlGFXHKsTgfCdKUS4cicSkmYsAV+kLUU1zqiphVX7cGd19dSFd
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 02 May 2024 05:49:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110233
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110230
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
- https://github.com/googleapis/google-api-python-client/releases/tag/v2.127.0
+===========
+-Updated bundled fmt to version 10.2.1.
+-Mapped Diagnostic Context (MDC) support
+-MDC is a simple map of key->string values stored in thread local storage whose content will be printed by the loggers.
+-spdlog::mdc::put("mdc_key_1", "mdc_value_1");
+-spdlog::info("Hello, {}", "World!");  // => [2024-04-26 02:08:05.040] [info] [mdc_key_1:mdc_value_1] Hello, World!
+-Add milliseconds support to stopwatch
+-Add std::string_view overloads for logger accessor
+-Make async_logger::flush() synchronous - wait for the flush operation to complete before returning
+-Use _stat() on Windows to be more UTF8 friendly
+-Add details about how compile time macros work
+-Fix typos found by codespell
+-Expose the flusher thread object to user in order to allow setting of thread name and thread affinity when needed
+-Fix the problem of compilation failure under MINGW
+-Add missing include in circular_q.h
+-Don't remove previous defaullt logger from registry in set_default_logger.
+-Remove the legacy AnalyzeTemporaryDtors option from .clang-tidy.
+-Updated INSTALL.md has to better reflect compiler info
+-Fixed README.md example
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...t_2.125.0.bb => python3-google-api-python-client_2.127.0.bb} | 2 +-
+ .../spdlog/{spdlog_1.13.0.bb => spdlog_1.14.0.bb}               | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-google-api-python-client_2.125.0.bb => python3-google-api-python-client_2.127.0.bb} (85%)
+ rename meta-oe/recipes-support/spdlog/{spdlog_1.13.0.bb => spdlog_1.14.0.bb} (91%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-google-api-python-client_2.125.0.bb b/meta-python/recipes-devtools/python/python3-google-api-python-client_2.127.0.bb
-similarity index 85%
-rename from meta-python/recipes-devtools/python/python3-google-api-python-client_2.125.0.bb
-rename to meta-python/recipes-devtools/python/python3-google-api-python-client_2.127.0.bb
-index 8abe4699e..4c9bbc6cf 100644
---- a/meta-python/recipes-devtools/python/python3-google-api-python-client_2.125.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-google-api-python-client_2.127.0.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/googleapis/google-api-python-client"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+diff --git a/meta-oe/recipes-support/spdlog/spdlog_1.13.0.bb b/meta-oe/recipes-support/spdlog/spdlog_1.14.0.bb
+similarity index 91%
+rename from meta-oe/recipes-support/spdlog/spdlog_1.13.0.bb
+rename to meta-oe/recipes-support/spdlog/spdlog_1.14.0.bb
+index c6a0881db..aa55171f3 100644
+--- a/meta-oe/recipes-support/spdlog/spdlog_1.13.0.bb
++++ b/meta-oe/recipes-support/spdlog/spdlog_1.14.0.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/gabime/spdlog/wiki"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=9573510928429ad0cbe5ba4de77546e9"
  
--SRC_URI[sha256sum] = "51a0385cff65ec135106e8be60ee7112557396dde5f44113ae23912baddda143"
-+SRC_URI[sha256sum] = "bbb51b0fbccdf40e536c26341e372d7800f09afebb53103bbcc94e08f14b523b"
+-SRCREV = "7c02e204c92545f869e2f04edaab1f19fe8b19fd"
++SRCREV = "238c9ffa5d1a14226eeabe10c9b63ffff3ed8b8e"
+ SRC_URI = "git://github.com/gabime/spdlog.git;protocol=https;branch=v1.x"
  
- inherit pypi setuptools3
- 
+ DEPENDS = "fmt"
 -- 
 2.34.1
 
