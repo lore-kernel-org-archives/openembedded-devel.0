@@ -2,51 +2,51 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3045CC25B79
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 187A6C25B78
 	for <webhook@archiver.kernel.org>; Thu,  2 May 2024 05:49:43 +0000 (UTC)
-Received: from esa10.hc1455-7.c3s2.iphmx.com (esa10.hc1455-7.c3s2.iphmx.com [139.138.36.225])
- by mx.groups.io with SMTP id smtpd.web11.6687.1714628976236244315
+Received: from esa2.hc1455-7.c3s2.iphmx.com (esa2.hc1455-7.c3s2.iphmx.com [207.54.90.48])
+ by mx.groups.io with SMTP id smtpd.web11.6686.1714628974573610003
  for <openembedded-devel@lists.openembedded.org>;
  Wed, 01 May 2024 22:49:36 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=CH+mc4oN;
- spf=pass (domain: fujitsu.com, ip: 139.138.36.225, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=lSXr7k8g;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.48, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
   t=1714628976; x=1746164976;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=uUySc32TbDQXNULaYVOdsEDT5esAX++qTqoxyt+Ij5Y=;
-  b=CH+mc4oN/rp07kP7rr8Xfbk4enPi1mUJDcn/OJrbp0MUrRasX3/2Pf4W
-   xcnCHNhibFnRbVXf3RKwLQjZB0qwFwrpxdXsD/yWMzEI3rQCQM3XBl+sa
-   Ag6yIf0S+sSQiuX7pupJEEONZeOxkwS2+1aN8NaYxymCuOlR3hhppn/ZI
-   huFH2fvfVvJdtmLAB5nD+h6p/sNYMm27YX3sjOhPNzV9gE7ygmYcP+vKy
-   Z235lc+zZUY/2no/RRfiojEgHy/dKVZ9JIYOtQNJSUX2nwsjJyiHFIN36
-   Vq9ceNoAC/yLM8k/40LF3TmFQvK/dV7+0jBxbeH/cKX5GAtqgfSSztKTb
+  bh=axHih6PFSoaDKTOpJiE5FqYkR557hv5S/akKp27+4u8=;
+  b=lSXr7k8gENT2hsVHzwt3dvg88yFMIW25phrGyy0vQvJHsJUTGf9qRLFs
+   GE/qgc53kzodFYP/kgBTQpfGak6gYyVoxSBlrUXKTUy2bHIGfWPi7HJgK
+   8pkqsvJYIKzhr3ZkhjJbKYhC3uJh8Dtg84ITv580oo8YHm/SU8mh7T1jK
+   da+mwrwfLOM3iTulyuOXlDQmTDMIE2QKYCp8p+r3znhd3vRcENJV7S53b
+   jdTLl9medndOjBZmR2YcMIVWcLjQP7yCVLMuRrhG0IFbVThX5W9kQIVyM
+   YAoND8b0lI0kSfB08mJ1yAaRs4yGV2BIVunXa1S8raEs6ZqABNr/FVg5Y
    w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,11061"; a="144837169"
+X-IronPort-AV: E=McAfee;i="6600,9927,11061"; a="157281968"
 X-IronPort-AV: E=Sophos;i="6.07,247,1708354800"; 
-   d="scan'208";a="144837169"
+   d="scan'208";a="157281968"
 Received: from unknown (HELO oym-r1.gw.nic.fujitsu.com) ([210.162.30.89])
-  by esa10.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 May 2024 14:49:33 +0900
-Received: from oym-m1.gw.nic.fujitsu.com (oym-nat-oym-m1.gw.nic.fujitsu.com [192.168.87.58])
-	by oym-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id 80870E8FBF
-	for <openembedded-devel@lists.openembedded.org>; Thu,  2 May 2024 14:49:31 +0900 (JST)
-Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by oym-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id B2074FCEC8
-	for <openembedded-devel@lists.openembedded.org>; Thu,  2 May 2024 14:49:30 +0900 (JST)
+  by esa2.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 May 2024 14:49:35 +0900
+Received: from oym-m4.gw.nic.fujitsu.com (oym-nat-oym-m4.gw.nic.fujitsu.com [192.168.87.61])
+	by oym-r1.gw.nic.fujitsu.com (Postfix) with ESMTP id E7BD0E8FBD
+	for <openembedded-devel@lists.openembedded.org>; Thu,  2 May 2024 14:49:32 +0900 (JST)
+Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
+	by oym-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 269FAD5B51
+	for <openembedded-devel@lists.openembedded.org>; Thu,  2 May 2024 14:49:32 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 463102008BCDD
-	for <openembedded-devel@lists.openembedded.org>; Thu,  2 May 2024 14:49:30 +0900 (JST)
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id BE0D7223FE0
+	for <openembedded-devel@lists.openembedded.org>; Thu,  2 May 2024 14:49:31 +0900 (JST)
 Received: from wangmy-QiTianM610-N000.g08.fujitsu.local (unknown [10.167.225.86])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id E86651A0002;
-	Thu,  2 May 2024 13:49:29 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 6BA8C1A0002;
+	Thu,  2 May 2024 13:49:31 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 22/30] python3-virtualenv: upgrade 20.25.0 -> 20.26.0
-Date: Thu,  2 May 2024 10:48:21 -0400
-Message-Id: <20240502144829.241208-22-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 25/30] qcbor: upgrade 1.2 -> 1.3
+Date: Thu,  2 May 2024 10:48:24 -0400
+Message-Id: <20240502144829.241208-25-wangmy@fujitsu.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240502144829.241208-1-wangmy@fujitsu.com>
 References: <20240502144829.241208-1-wangmy@fujitsu.com>
@@ -56,49 +56,72 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28356.005
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28356.005
-X-TMASE-Result: 10-4.103400-10.000000
-X-TMASE-MatchedRID: n7p0zKhDeQSjz0nOeth/yUIIxwDaU5mrrOCEGIPhtwgDBQ+XBh4YJbOE
-	dy34ZwwEynJamoOoK2YVDQr3tunC4G94Ipa1otxoP0HVIeixJdA3l2plwgrtWCD1HdXyqDnEvwU
-	evDt+uW6vBQc3bCgEsHqYviVWLIXKeBzEkCCpnRlvTnqYKYXTRlXgGeVUh3WdmyiLZetSf8nyb6
-	HMFK1qe11j5mhaIsibJ0RPnyOnrZJoY9TLJt4hY6vzFXadcrPDbSJySLYV4H5xBPco8X9FwaoyQ
-	HhyNahX/Zm4LX5R53TMMEFTW6OlX7hIydW6ONV07RDZ5u+Ndf/AYLx7rnbR8rDQ8m3TqgloelpC
-	XnG+JjvDGBZ1G8r1Sf2D6gx/0ozp
+X-TMASE-Result: 10--8.309600-10.000000
+X-TMASE-MatchedRID: KEcVumlYY7qjz0nOeth/yc5sKZgBbe5FpxAd6mi1Ga23Stk62MqiCH6n
+	Yzcz2aO7ASI+oQT4NGpatsDGACw+J1aBvJpACoM8e015woyPLfY/2Qj6F/US6tsR/Qrmuhw1n+n
+	rvjaMDYG6s3pcSyWQTZ+lLx92IzG5Y6Il5j+kaFc4hD0Y/Y/a70yQ5fRSh265MHDHnR8cUQLTI4
+	8G/UH1dpR1R/1BwwfR5p98cjyQCaLshae+2j71nZ1U1lojafr/EITY2UGMiNy0TybP6vL8lCGOn
+	vl4tWofWyXEB937q1d5OPD8XJFfpB8TzIzimOwPC24oEZ6SpSkj80Za3RRg8Kq+t5hTYAdo7wre
+	NwWRWuWnC/rQYk1/4B4tnb1g0YDQwSxytdWZQvg=
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 02 May 2024 05:49:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110227
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110228
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
+License-Update: Update the LICENSE file from README.md to LICENSE
+
 Changelog:
-============
-- Fixed a case when template variable is WindowsPath
-- Allow builtin interpreter discovery to find specific Python versions given a general spec
+==========
+- Floating-point conversion between half, single and double-precision for
+  subnormal values and NaN payloads is completed. These are relatively obscure
+  unused parts of IEEE754 floats.
+- QCBOREncode_GetErrorState() can now be called after QCBOREncode_Finish() and
+  it will always return the correct error.
+- User-defined error codes are now supported. The error state can be set with
+  the new function QCBORDecode_SetError().
+- Fixed a rare condition where QCBORDecode_ VGetNext() would not set the
+  Item.uDataType to QCBOR_TYPE_NONE on error.
+- Function naming changed to better avoid name collision. This includes internal
+  functions. This is to compensate for C not having name spaces like C++.
+- Documentation correctly describes mixing of traversal cursor used by GetNext
+  with fetch by label in entered maps
+- Some increase in test coverage
+- A bunch of "TODO:" items were addressed. Most result in no change to the code,
+  just changes to documentation and test coverage.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...hon3-virtualenv_20.25.0.bb => python3-virtualenv_20.26.0.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-virtualenv_20.25.0.bb => python3-virtualenv_20.26.0.bb} (85%)
+ .../recipes-extended/qcbor/{qcbor_git.bb => qcbor_1.3.bb}   | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-extended/qcbor/{qcbor_git.bb => qcbor_1.3.bb} (79%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-virtualenv_20.25.0.bb b/meta-python/recipes-devtools/python/python3-virtualenv_20.26.0.bb
-similarity index 85%
-rename from meta-python/recipes-devtools/python/python3-virtualenv_20.25.0.bb
-rename to meta-python/recipes-devtools/python/python3-virtualenv_20.26.0.bb
-index 1858fee25..55f7f4611 100644
---- a/meta-python/recipes-devtools/python/python3-virtualenv_20.25.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-virtualenv_20.26.0.bb
-@@ -6,7 +6,7 @@ HOMEPAGE = "https://github.com/pypa/virtualenv"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=0ce089158cf60a8ab6abb452b6405538"
+diff --git a/meta-oe/recipes-extended/qcbor/qcbor_git.bb b/meta-oe/recipes-extended/qcbor/qcbor_1.3.bb
+similarity index 79%
+rename from meta-oe/recipes-extended/qcbor/qcbor_git.bb
+rename to meta-oe/recipes-extended/qcbor/qcbor_1.3.bb
+index a87454fa9..f90e814f7 100644
+--- a/meta-oe/recipes-extended/qcbor/qcbor_git.bb
++++ b/meta-oe/recipes-extended/qcbor/qcbor_1.3.bb
+@@ -6,13 +6,11 @@ DESCRIPTION = " \
+ HOMEPAGE = "https://github.com/laurencelundblade/QCBOR"
  
--SRC_URI[sha256sum] = "bf51c0d9c7dd63ea8e44086fa1e4fb1093a31e963b86959257378aef020e1f1b"
-+SRC_URI[sha256sum] = "ec25a9671a5102c8d2657f62792a27b48f016664c6873f6beed3800008577210"
+ LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://README.md;beginline=442;endline=463;md5=b55643261d6d221dac2b7a395105af62"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=498c298542365dfcfe29948c72a5849b"
  
- BBCLASSEXTEND = "native nativesdk"
- inherit pypi python_hatchling
+ SRC_URI = "git://github.com/laurencelundblade/QCBOR;protocol=https;branch=master"
+ 
+-SRCREV = "44754f738c6534a4304a83d4c6e97b3d3193d887"
+-
+-PV = "1.2+git"
++SRCREV = "1eba85dbbe78fc1938f8aba2112ba1b228caed30"
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
 2.34.1
 
