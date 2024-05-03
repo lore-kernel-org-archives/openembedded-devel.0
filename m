@@ -2,118 +2,74 @@ Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BF927C4345F
-	for <webhook@archiver.kernel.org>; Fri,  3 May 2024 09:52:17 +0000 (UTC)
-Received: from mail-lj1-f173.google.com (mail-lj1-f173.google.com [209.85.208.173])
- by mx.groups.io with SMTP id smtpd.web11.8915.1714729929473898048
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C23ACC4345F
+	for <webhook@archiver.kernel.org>; Fri,  3 May 2024 12:43:38 +0000 (UTC)
+Received: from mail-lj1-f181.google.com (mail-lj1-f181.google.com [209.85.208.181])
+ by mx.groups.io with SMTP id smtpd.web11.11639.1714740208455493000
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 May 2024 02:52:09 -0700
+ Fri, 03 May 2024 05:43:28 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=NbetqOfk;
- spf=pass (domain: gmail.com, ip: 209.85.208.173, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lj1-f173.google.com with SMTP id 38308e7fff4ca-2d8b2389e73so106837621fa.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 03 May 2024 02:52:09 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=duN8LuNv;
+ spf=pass (domain: gmail.com, ip: 209.85.208.181, mailfrom: martin.jansa@gmail.com)
+Received: by mail-lj1-f181.google.com with SMTP id 38308e7fff4ca-2df9af57b5eso92547751fa.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 03 May 2024 05:43:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1714729927; x=1715334727; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1714740206; x=1715345006; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=9+4jJOXAMaaeoFJnHcYCA61XBRDenl+BIQgX/KILV08=;
-        b=NbetqOfkam/97rUHy/tkFdHXDfp+wtBTu7vQmeZc2Edi8IxmDlObqUNxzbhacE5tCe
-         x+zHQYddxciTUA8g/N/++9r1NwojAEHL2IJ3yOLn73r4u2yKtD2zt7kT7zJMQDNOoDxC
-         /LFf/Vib4EXYLzZi5AFvXC9uuxvTFf3VQU4+WNEXGy3JBcOTqR36mzSI6zdJuvWF/yvh
-         hF/DkICI5FlOmdh7+h0sBXlUi7KeQV1jNOjCPACJEP/5gCWhSbXZaLcyTE5XEuLw/kiS
-         e0fSFWkiGAYqzpT1ZS0QcJ5Y6yaRAwWGYhFxwYW7zobWrLQnVKvlL0UEcuHiPWyG33Tt
-         rVVw==
+        bh=Yt3pGUgZVngKuV1DbS597n5X4i2I692SZ4uYM7cveBY=;
+        b=duN8LuNvM3490G5Z2e4k1zoMRfsjA+jrFiaPPz1GSq6IHUJAWlig0gWTY6TTZpo2Yj
+         fCjj69I9Q9IbaCkzr1HAqHHSdqSh0zZqYIBciIhA57gfXSBNjZO0pBCcF1WbkjBh7K0G
+         jCz7eCJ7G24uF2Ql4hQ78Psm8DdDq8uPdSDGlEscmg/SSrA+G9OfHvqKnf3ihNCOslMs
+         7EUNb4/HVPRQ2Shh5PrSusrWvChC+ZQcvmeUPrP57r+6v4suRSBVbkM4A/zC0VnmmWL6
+         yUMvwQ6UpmU/fukuVn82Vu0Gow3+i+sA8cy/MKmZSwGMnOYLJJf7i8BrAm2v16YAuvm4
+         1Sjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1714729927; x=1715334727;
+        d=1e100.net; s=20230601; t=1714740207; x=1715345007;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=9+4jJOXAMaaeoFJnHcYCA61XBRDenl+BIQgX/KILV08=;
-        b=bIluT80aeMYoytBfKOSZOxGp9Ks+tNChZuQZ+n59HR+dcIUpCPRKPw0q1OpO3hB0xj
-         uaT9IqAOrEOuf/xZD6LqnZodAouxVZh6kovNj1OEvkjVjBufCltIsTgkGbVlTcKmRXgZ
-         UPLFwpWllTsnaQP9zlafB+mxmGHhnqzVHF8Si/L6sCo3vv6rksZ8lvFmaX1SQw/pYc76
-         uY8ITRZ01VhV6AS0dzKq1isWd1zdzxfVCWj3JwC6dY88Ub5yULkr0WURJub6UIxkqxsv
-         unauOqJERoedHenVh2BRTaLcq5ZaVq2PR4fQ4QIAoJRAPp7LKd0w+c0AKu/qqxUDO8qE
-         r07w==
-X-Gm-Message-State: AOJu0YzhwtEump1zjgNRaB5w4NXJOC6hNOu0T6K8ke9dC4upWUu4eD/u
-	FY/wiZHksp5GpNQ2JQmHmHhKXaea5httoyAY0Khhd+zKnmtS6h8JlJQ8Krb7rBl38jL+G2n8Ctk
-	5Ykgf4W1kzcCTL58yfVfczpnbm5a1Zw==
-X-Google-Smtp-Source: AGHT+IEauaGZ4GJe0IgebiqPSwLEJaQ61nyKPBJIjAtVpmEdhHBrp2svd7fu6qE3cgiwJLCAZBdhZsZxbRQAgehSAPs=
-X-Received: by 2002:a2e:9ccd:0:b0:2e2:466b:1a68 with SMTP id
- g13-20020a2e9ccd000000b002e2466b1a68mr819511ljj.41.1714729927422; Fri, 03 May
- 2024 02:52:07 -0700 (PDT)
+        bh=Yt3pGUgZVngKuV1DbS597n5X4i2I692SZ4uYM7cveBY=;
+        b=oOuAtM0GiLt8KVtwJJ3uawZdPeLWcXp4Evd7itYcSC38ua3V7MGXOMpsde5uZ/UhDH
+         b+a//s3XTylErhzPEbQNDRVTiiGYELRqme8Y4/DTgLRQwuvyBwEYUm6zV911fsA/1/bt
+         CSmdHDfmwnuK2UnkdY0/bpvxX4XVyKrE0id3rvS2JwwkmiPi48IrjTYhWVeirx6dl4Cm
+         KKX9QTMqV5HdHVfOrbHSsylgzd4bIoaQJPal/bCYXiIicRhnw9BwC7uWvUVU7LHw3VSP
+         D71EajW0vgLvNA1k8VBD3w88J4FUO17us6ZY+YLdOj35XQZ1m/+SV430YRdLPYmNc6eI
+         vLvg==
+X-Forwarded-Encrypted: i=1; AJvYcCUvO0DmaUcROWxH4bPZRcsO8Bw/0Sfg1qOKwK3/TUzLJmLSWM+eDRnsFUOG7s92dvyOgOkS8JTP0Y+daRHRPg+FaMDyvm0WrAj12CKrWn+ZHQAA0JxBDfgDOA==
+X-Gm-Message-State: AOJu0YwVH4URhU/2fbJPjizHk33WpnXTTpICqg3up7xWfzLFAWUB5dmV
+	ZW2wMU/SYOOn2Fsqmg3rRWGcgRggpMi5y30MdCBQghH8s727K+tMPukgPvykP1Y1gT0pARU3LCv
+	6X8PFuZ8lSvHRcF0Nx/56BRxkraskvg==
+X-Google-Smtp-Source: AGHT+IFYbP5QP6mge7MOs/GMki3MhCYBPf2v9GS6EpS4TqF9w+YZZLC5lsWKefCCZyxcTuogmaQN+c+Vjjde7bG8cPU=
+X-Received: by 2002:a05:651c:199f:b0:2e1:dfa2:15f3 with SMTP id
+ bx31-20020a05651c199f00b002e1dfa215f3mr2797227ljb.21.1714740206425; Fri, 03
+ May 2024 05:43:26 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240503094232.2114574-1-martin@geanix.com>
-In-Reply-To: <20240503094232.2114574-1-martin@geanix.com>
+References: <20240503094232.2114574-1-martin@geanix.com> <17CBF1C9439E153E.14737@lists.openembedded.org>
+In-Reply-To: <17CBF1C9439E153E.14737@lists.openembedded.org>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Fri, 3 May 2024 11:51:55 +0200
-Message-ID: <CA+chaQcPpjj4uqa2U2OtQt8pAHshAVj--2u0r2kKczSbKUWDKg@mail.gmail.com>
+Date: Fri, 3 May 2024 14:43:13 +0200
+Message-ID: <CA+chaQdxAdEAe3DXWKmcD5HTv85SRZUHyRhedZHrw6XYedqToQ@mail.gmail.com>
 Subject: Re: [oe] [PATCH] nodejs-oe-cache: fix offline install of dependencies
-To: martin@geanix.com
-Cc: openembedded-devel@lists.openembedded.org
+To: martin.jansa@gmail.com
+Cc: martin@geanix.com, openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 03 May 2024 09:52:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110247
+ <openembedded-devel@lists.openembedded.org>; Fri, 03 May 2024 12:43:38 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110248
 
-Thanks, perfect timing, I've just sent e-mail reply to nodejs upgrade
-that npm-10.5.0 upgrade broke this. Will test your change now. Thanks!
-
-On Fri, May 3, 2024 at 11:42=E2=80=AFAM Martin Hundeb?ll via
-lists.openembedded.org <martin=3Dgeanix.com@lists.openembedded.org>
+On Fri, May 3, 2024 at 11:52=E2=80=AFAM Martin Jansa via
+lists.openembedded.org <martin.jansa=3Dgmail.com@lists.openembedded.org>
 wrote:
 >
-> Apparently, npm has changed its request accept header, so that cache
-> lookup misses. This causes an ENOTCACHED error when doing the offline
-> install in do_compile() from npm.bbclass.
->
-> Fix it by updating the fake cache entry to match the newest behaviour
-> from npm.
->
-> Note that npm doesn't agree with itself, as it still uses the previous
-> header value when doing `npm cache add <pkg>`, but the new value when
-> doing `npm install <pkg>`.
->
-> Bug submitted upstream:
-> https://github.com/npm/cli/issues/7465
->
-> Signed-off-by: Martin Hundeb=C3=B8ll <martin@geanix.com>
-> ---
->  .../recipes-devtools/nodejs/nodejs-oe-cache-20.12/oe-npm-cache  | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-20.12/oe-npm=
--cache b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-20.12/oe-npm-cache
-> index f59620764..eb0f143ea 100755
-> --- a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-20.12/oe-npm-cache
-> +++ b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-20.12/oe-npm-cache
-> @@ -30,7 +30,7 @@ const xlate =3D {
->                 time: Date.now(),
->                 url:  key,
->                 reqHeaders: {
-> -                   'accept': 'application/vnd.npm.install-v1+json; q=3D1=
-.0, application/json; q=3D0.8, */*',
-> +                   'accept': 'application/json',
->                 },
->                 resHeaders: {
->                     "content-type": "application/json",
-> --
-> 2.44.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#110244): https://lists.openembedded.org/g/openembedde=
-d-devel/message/110244
-> Mute This Topic: https://lists.openembedded.org/mt/105884883/3617156
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
-artin.jansa@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+> Thanks, perfect timing, I've just sent e-mail reply to nodejs upgrade
+> that npm-10.5.0 upgrade broke this. Will test your change now. Thanks!
+
+And it works for me, thanks again.
+
+Cheers,
 
