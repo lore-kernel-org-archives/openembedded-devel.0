@@ -1,272 +1,87 @@
-Return-Path: <gudnimar@noxmedical.com>
+Return-Path: <t.f.g.geelen@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DBC01C25B4F
-	for <webhook@archiver.kernel.org>; Mon,  6 May 2024 18:55:38 +0000 (UTC)
-Received: from usb-smtp-delivery-118.mimecast.com (usb-smtp-delivery-118.mimecast.com [170.10.153.118])
- by mx.groups.io with SMTP id smtpd.web10.1177.1715021736090892814
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B457C25B4F
+	for <webhook@archiver.kernel.org>; Mon,  6 May 2024 20:54:53 +0000 (UTC)
+Received: from mail-lj1-f178.google.com (mail-lj1-f178.google.com [209.85.208.178])
+ by mx.groups.io with SMTP id smtpd.web10.2157.1715028888290172879
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 06 May 2024 11:55:36 -0700
+ Mon, 06 May 2024 13:54:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@noxmedical.com header.s=mimecast20231107 header.b=atQHKA6I;
- spf=pass (domain: noxmedical.com, ip: 170.10.153.118, mailfrom: gudnimar@noxmedical.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=noxmedical.com;
-	s=mimecast20231107; t=1715021735;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type;
-	bh=6BlN9RXb9R5Xvsj7kxz9Tc29OXMKaq9tHYR/rGi2i6w=;
-	b=atQHKA6IR+zPdS0AaAYISW6ZsRN408Ox63yfHtW1+dIBzDBwWaJkNWxod4NfTLR18gGA4Q
-	J4odfLvK6ukJtzRy/L3+BBRzkNGaJ7rhQy2Y437biP6IgJDZOMR4bsL9ABfhNlDJ1kSD9t
-	bTE2y9CEGcGaYtkl9kAUE73KG8gYZk8=
-Received: from mail-lj1-f199.google.com (mail-lj1-f199.google.com
- [209.85.208.199]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- usb-mta-48-gIqIHsruPnKRwISh1_8cgQ-1; Mon, 06 May 2024 11:55:32 -0700
-X-MC-Unique: gIqIHsruPnKRwISh1_8cgQ-1
-Received: by mail-lj1-f199.google.com with SMTP id 38308e7fff4ca-2e3208c29abso14499941fa.2
-        for <openembedded-devel@lists.openembedded.org>; Mon, 06 May 2024 11:55:32 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=CCh1ni7x;
+ spf=pass (domain: gmail.com, ip: 209.85.208.178, mailfrom: t.f.g.geelen@gmail.com)
+Received: by mail-lj1-f178.google.com with SMTP id 38308e7fff4ca-2e1fa1f1d9bso45818841fa.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 06 May 2024 13:54:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1715028886; x=1715633686; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=0dYm7CgT9N3CfLtJcW3AmnrSLreaC1McsCoyco752Tc=;
+        b=CCh1ni7xZqx7LXcKAruwFJGKjI6E9XnDrKPfncfMocltkaUlSy8doNeA50AUe5J4VR
+         JxsyJyRq0fqZsqx+jWtvlgWd0zFLxQzRbfVi8iP3onu3duJBxyJm7HzDqhbCIJWe/qg+
+         xk3C4Wo1nC1/qFynOEE2RStDrHwPnC1zn7ECu/BS8Vr9OJHD4RFNt9ur47lBb5kyON+q
+         T37uESDgNtbhqny3UPcSfT/+2zGz9gh718IwA/H4rovcpdfEsxbgqirkHb611qP6R3Wk
+         VvHvbH18UrqEKGIBgdJtM0v9SQDe682ugMN9loPN7k8MvbX4xf9h/Gc4soUEKK5L/3po
+         cv6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1715021730; x=1715626530;
+        d=1e100.net; s=20230601; t=1715028886; x=1715633686;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=IbVvaoMkZU1rPVcHv0Opa9FkDsTLu0Z9FCWzxXTcO4s=;
-        b=UACyUAoIGhftOjlPAgkvPUVd7gyKsU6e7YFeZt+k6AMViK60bPpSLN4nlb3uFl8/Z4
-         Sz7rNy6a8SXZOtr2Nd+i3jJDMIxey3NBpJT1ydZPPCFc1cnlZogyTNM2vxCJerMmkSOI
-         iXtfZytkwxDJqlJtw7pP+wpiWqQDLHZlYSMV9zGuHDAJJfFwEhPLu55OLyWxm+hqZOdK
-         w00jcMP2+ASONx+AunpDlF0Psbxb2F7jVSddb6TdoTXnAhY652K3hZ4Mph3MeRG2OhWx
-         MXwNQxTjOKNPtZFrY2gesGxRf53T6VdKxcZTE99ZeMw0KuOID2pYYr4EyI+tC3ZwzcuC
-         1W2A==
-X-Gm-Message-State: AOJu0YzqEPltXpCpnERVSlg8WpcIyEnhdIuj7CU9dVwxZfqg9sQOkD+i
-	9/SQC1tO0S6MRA9J+ZRQIjP9wPWzyTTuQmt6ZL9gG087hmRI2oyHwBqdZTRs8s/sxZZl1nmulFg
-	pcKjY/m/9sf0+CnRYqKscKswbSj2TlSl4PdM/niV0gSlE8TWxH1BhCE8YL3I3IBuazgaERsC+qN
-	QHtMiEccNvQ6RyL5Q8z9G6xFf6Tokd9PXB4N3OvbkvzPO71X3ibpOGDW1RDLUuGlhu3KuJ
-X-Received: by 2002:a05:651c:552:b0:2d9:f818:1748 with SMTP id q18-20020a05651c055200b002d9f8181748mr11006430ljp.42.1715021730417;
-        Mon, 06 May 2024 11:55:30 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEPsZYJ573lp2EgPr0JQR8qKbSoMiRz6jtYR4qG9KrVi1iV88Z1XCXtIrCvRMXIGaY3AMvTcw==
-X-Received: by 2002:a05:651c:552:b0:2d9:f818:1748 with SMTP id q18-20020a05651c055200b002d9f8181748mr11006410ljp.42.1715021729820;
-        Mon, 06 May 2024 11:55:29 -0700 (PDT)
-Received: from gudni-virtual-machine.localdomain ([81.15.100.92])
-        by smtp.gmail.com with ESMTPSA id je8-20020a05600c1f8800b0041bf28aa11dsm16919356wmb.42.2024.05.06.11.55.28
+        bh=0dYm7CgT9N3CfLtJcW3AmnrSLreaC1McsCoyco752Tc=;
+        b=NNk2ypFMnJGtYYcog6ZMaT8YcUDIXNgtGcqJorwxorbej/kUHVGfHP+hj/Ikf7nh6e
+         B5VluK2sLfzB455fQN6uvmPRjpQl8BkD4H1XQjUmTErlabkqyKCjxA2ZPvAk0e3MdeEj
+         9GO3WO3p4h0hlt0N9S1p1uWdsPoGFLnb+M+jeO3Clamzt/Veir7dt35xnKFbUrHsD3FY
+         FQv9RFEr/+1mkXuzRgJnglkxqLP65jJ+DK9mi8FGeMPxO4v38z59KXW2rHHMhovgXHm6
+         vyAyf2njLNw1wWEsH1T1L+cvFbLvlhWHNR3GmtpKpdPAvMIyVQIlik7gnA9DT9gOat9q
+         S70Q==
+X-Gm-Message-State: AOJu0Yxl5GTKxygAfxhvTrasB6Ua1uwB5us9vYZcrm5MCL6SC8sET8b8
+	CAB7T8iaYKCt6oZ+aMHATFSle/0uqo1c28tFVkqsLE6PPc/5cmrRbO9wVIED
+X-Google-Smtp-Source: AGHT+IHFFNr1PGaawh3OZ9ueXkzNIBYtPbCELq1zbxi09abGnOzYjFcH9nyXOUMI4u/yoDfyY9TiLQ==
+X-Received: by 2002:a2e:bb85:0:b0:2e0:c363:f9dc with SMTP id y5-20020a2ebb85000000b002e0c363f9dcmr7953206lje.40.1715028885530;
+        Mon, 06 May 2024 13:54:45 -0700 (PDT)
+Received: from control-center.home (58-175-98-95.ftth.glasoperator.nl. [95.98.175.58])
+        by smtp.gmail.com with ESMTPSA id fi24-20020a056402551800b005727dc26598sm5550179edb.13.2024.05.06.13.54.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 06 May 2024 11:55:29 -0700 (PDT)
-From: =?UTF-8?q?Gu=C3=B0ni=20M=C3=A1r=20Gilbert?= <gudnimar@noxmedical.com>
+        Mon, 06 May 2024 13:54:45 -0700 (PDT)
+From: Tom Geelen <t.f.g.geelen@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: =?UTF-8?q?Gu=C3=B0ni=20M=C3=A1r=20Gilbert?= <gudnimar@noxmedical.com>,
-	Khem Raj <raj.khem@gmail.com>
-Subject: [meta-python][scarthgap][PATCH 1/2] python3-twisted: remove obsolete python3-twisted-flow
-Date: Mon,  6 May 2024 18:54:42 +0000
-Message-Id: <20240506185443.3715-1-gudnimar@noxmedical.com>
+Cc: Tom Geelen <t.f.g.geelen@gmail.com>
+Subject: [meta-python][PATCH] python3-zeroconf 0.132.0 -> 0.132.2
+Date: Mon,  6 May 2024 20:54:40 +0000
+Message-Id: <20240506205439.431315-1-t.f.g.geelen@gmail.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: noxmedical.com
-Content-Type: multipart/alternative;
-	boundary="MCBoundary=_12405061155344851"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 06 May 2024 18:55:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110261
+ <openembedded-devel@lists.openembedded.org>; Mon, 06 May 2024 20:54:53 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110263
 
---MCBoundary=_12405061155344851
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-The flow module was removed in Twisted 9.0.0 a long time
-and currently does not install anything. Let's remove it
-to cleanup the recipe.
-
-This commit also removes python3-twisted-news package because
-the source files were removed in Twisted 21.2.0. All other
-files which no longer exist in the source are also removed from FILES.
-
-Signed-off-by: Gu=C3=B0ni M=C3=A1r Gilbert <gudnimar@noxmedical.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../python/python3-twisted_24.3.0.bb           | 18 ------------------
- 1 file changed, 18 deletions(-)
+ ...{python3-zeroconf_0.132.0.bb => python3-zeroconf_0.132.2.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-devtools/python/{python3-zeroconf_0.132.0.bb => python3-zeroconf_0.132.2.bb} (82%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-twisted_24.3.0.bb =
-b/meta-python/recipes-devtools/python/python3-twisted_24.3.0.bb
-index e5223ccd6..ba5bb04db 100644
---- a/meta-python/recipes-devtools/python/python3-twisted_24.3.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-twisted_24.3.0.bb
-@@ -22,11 +22,9 @@ PACKAGES +=3D "\
-     ${PN}-conch \
-     ${PN}-mail \
-     ${PN}-names \
--    ${PN}-news \
-     ${PN}-runner \
-     ${PN}-web \
-     ${PN}-words \
--    ${PN}-flow \
-     ${PN}-pair \
-     ${PN}-core \
- "
-@@ -66,11 +64,9 @@ RDEPENDS:${PN}-test =3D "${PN} python3-pyhamcrest"
- RDEPENDS:${PN}-conch =3D "${PN}-core ${PN}-protocols python3-bcrypt python=
-3-cryptography python3-pickle"
- RDEPENDS:${PN}-mail =3D "${PN}-core ${PN}-protocols"
- RDEPENDS:${PN}-names =3D "${PN}-core"
--RDEPENDS:${PN}-news =3D "${PN}-core ${PN}-protocols"
- RDEPENDS:${PN}-runner =3D "${PN}-core ${PN}-protocols"
- RDEPENDS:${PN}-web +=3D "${PN}-core ${PN}-protocols"
- RDEPENDS:${PN}-words +=3D "${PN}-core"
--RDEPENDS:${PN}-flow +=3D "${PN}-core"
- RDEPENDS:${PN}-pair +=3D "${PN}-core"
-=20
- FILES:${PN}-test =3D " \
-@@ -152,12 +148,6 @@ FILES:${PN}-names =3D " \
-     ${PYTHON_SITEPACKAGES_DIR}/twisted/names \
- "
-=20
--FILES:${PN}-news =3D " \
--    ${PYTHON_SITEPACKAGES_DIR}/twisted/plugins/twisted_news.py* \
--    ${PYTHON_SITEPACKAGES_DIR}/twisted/plugins/__pycache__/twisted_news*.p=
-yc \
--    ${PYTHON_SITEPACKAGES_DIR}/twisted/news \
--"
--
- FILES:${PN}-runner =3D " \
-     ${PYTHON_SITEPACKAGES_DIR}/twisted/plugins/twisted_runner.py* \
-     ${PYTHON_SITEPACKAGES_DIR}/twisted/plugins/__pycache__/twisted_runner*=
-.pyc \
-@@ -176,15 +166,7 @@ FILES:${PN}-words =3D " \
-     ${PYTHON_SITEPACKAGES_DIR}/twisted/words \
- "
-=20
--FILES:${PN}-flow =3D " \
--    ${PYTHON_SITEPACKAGES_DIR}/twisted/plugins/twisted_flow.py* \
--    ${PYTHON_SITEPACKAGES_DIR}/twisted/plugins/__pycache__/twisted_flow*.p=
-yc \
--    ${PYTHON_SITEPACKAGES_DIR}/twisted/flow \
--"
--
- FILES:${PN}-pair =3D " \
--    ${PYTHON_SITEPACKAGES_DIR}/twisted/plugins/twisted_pair.py* \
--    ${PYTHON_SITEPACKAGES_DIR}/twisted/plugins/__pycache__/twisted_pair*.p=
-yc \
-     ${PYTHON_SITEPACKAGES_DIR}/twisted/pair \
- "
-=20
---=20
+diff --git a/meta-python/recipes-devtools/python/python3-zeroconf_0.132.0.bb b/meta-python/recipes-devtools/python/python3-zeroconf_0.132.2.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python3-zeroconf_0.132.0.bb
+rename to meta-python/recipes-devtools/python/python3-zeroconf_0.132.2.bb
+index ea8ef1cb9..421bd3b6c 100644
+--- a/meta-python/recipes-devtools/python/python3-zeroconf_0.132.0.bb
++++ b/meta-python/recipes-devtools/python/python3-zeroconf_0.132.2.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/jstasiak/python-zeroconf"
+ LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=6;endline=6;md5=6517bdc8f2416f27ab725d4702f7aac3"
+ 
+-SRC_URI[sha256sum] = "e2dddb9b8e6a9de3c43f943d8547300e6bd49b2043fd719ae830cfe0f2908a5c"
++SRC_URI[sha256sum] = "9ad8bc6e3f168fe8c164634c762d3265c775643defff10e26273623a12d73ae1"
+ 
+ DEPENDS += "python3-cython-native"
+ 
+-- 
 2.34.1
-
-Disclaimer
-
-The information contained in this communication from the sender is confiden=
-tial. It is intended solely for use by the recipient and others authorized =
-to receive it. If you are not the recipient, you are hereby notified that a=
-ny disclosure, copying, distribution or taking action in relation of the co=
-ntents of this information is strictly prohibited and may be unlawful.
-
-This email has been scanned for viruses and malware, and may have been auto=
-matically archived by Mimecast, a leader in email security and cyber resili=
-ence. Mimecast integrates email defenses with brand protection, security aw=
-areness training, web security, compliance and other essential capabilities=
-. Mimecast helps protect large and small organizations from malicious activ=
-ity, human error and technology failure; and to lead the movement toward bu=
-ilding a more resilient world. To find out more, visit our website.
-
---MCBoundary=_12405061155344851
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/html; charset=UTF-8
-
-<html><head><style type=3D"text/css">.style1 {font-family: "Times New Roman=
-";}</style></head><body>The flow module was removed in Twisted 9.0.0 a long=
- time<BR>
-and currently does not install anything. Let's remove it<BR>
-to cleanup the recipe.<BR>
-<BR>
-This commit also removes python3-twisted-news package because<BR>
-the source files were removed in Twisted 21.2.0. All other<BR>
-files which no longer exist in the source are also removed from FILES.<BR>
-<BR>
-Signed-off-by: Gu&eth;ni M&aacute;r Gilbert &lt;gudnimar@noxmedical.com&gt;=
-<BR>
-Signed-off-by: Khem Raj &lt;raj.khem@gmail.com&gt;<BR>
----<BR>
- .../python/python3-twisted_24.3.0.bb           | 18 ------------------<BR>
- 1 file changed, 18 deletions(-)<BR>
-<BR>
-diff --git a/meta-python/recipes-devtools/python/python3-twisted_24.3.0.bb =
-b/meta-python/recipes-devtools/python/python3-twisted_24.3.0.bb<BR>
-index e5223ccd6..ba5bb04db 100644<BR>
---- a/meta-python/recipes-devtools/python/python3-twisted_24.3.0.bb<BR>
-+++ b/meta-python/recipes-devtools/python/python3-twisted_24.3.0.bb<BR>
-@@ -22,11 +22,9 @@ PACKAGES +=3D &quot;\<BR>
-     ${PN}-conch \<BR>
-     ${PN}-mail \<BR>
-     ${PN}-names \<BR>
--    ${PN}-news \<BR>
-     ${PN}-runner \<BR>
-     ${PN}-web \<BR>
-     ${PN}-words \<BR>
--    ${PN}-flow \<BR>
-     ${PN}-pair \<BR>
-     ${PN}-core \<BR>
- &quot;<BR>
-@@ -66,11 +64,9 @@ RDEPENDS:${PN}-test =3D &quot;${PN} python3-pyhamcrest&q=
-uot;<BR>
- RDEPENDS:${PN}-conch =3D &quot;${PN}-core ${PN}-protocols python3-bcrypt p=
-ython3-cryptography python3-pickle&quot;<BR>
- RDEPENDS:${PN}-mail =3D &quot;${PN}-core ${PN}-protocols&quot;<BR>
- RDEPENDS:${PN}-names =3D &quot;${PN}-core&quot;<BR>
--RDEPENDS:${PN}-news =3D &quot;${PN}-core ${PN}-protocols&quot;<BR>
- RDEPENDS:${PN}-runner =3D &quot;${PN}-core ${PN}-protocols&quot;<BR>
- RDEPENDS:${PN}-web +=3D &quot;${PN}-core ${PN}-protocols&quot;<BR>
- RDEPENDS:${PN}-words +=3D &quot;${PN}-core&quot;<BR>
--RDEPENDS:${PN}-flow +=3D &quot;${PN}-core&quot;<BR>
- RDEPENDS:${PN}-pair +=3D &quot;${PN}-core&quot;<BR>
- <BR>
- FILES:${PN}-test =3D &quot; \<BR>
-@@ -152,12 +148,6 @@ FILES:${PN}-names =3D &quot; \<BR>
-     ${PYTHON_SITEPACKAGES_DIR}/twisted/names \<BR>
- &quot;<BR>
- <BR>
--FILES:${PN}-news =3D &quot; \<BR>
--    ${PYTHON_SITEPACKAGES_DIR}/twisted/plugins/twisted_news.py* \<BR>
--    ${PYTHON_SITEPACKAGES_DIR}/twisted/plugins/__pycache__/twisted_news*.p=
-yc \<BR>
--    ${PYTHON_SITEPACKAGES_DIR}/twisted/news \<BR>
--&quot;<BR>
--<BR>
- FILES:${PN}-runner =3D &quot; \<BR>
-     ${PYTHON_SITEPACKAGES_DIR}/twisted/plugins/twisted_runner.py* \<BR>
-     ${PYTHON_SITEPACKAGES_DIR}/twisted/plugins/__pycache__/twisted_runner*=
-.pyc \<BR>
-@@ -176,15 +166,7 @@ FILES:${PN}-words =3D &quot; \<BR>
-     ${PYTHON_SITEPACKAGES_DIR}/twisted/words \<BR>
- &quot;<BR>
- <BR>
--FILES:${PN}-flow =3D &quot; \<BR>
--    ${PYTHON_SITEPACKAGES_DIR}/twisted/plugins/twisted_flow.py* \<BR>
--    ${PYTHON_SITEPACKAGES_DIR}/twisted/plugins/__pycache__/twisted_flow*.p=
-yc \<BR>
--    ${PYTHON_SITEPACKAGES_DIR}/twisted/flow \<BR>
--&quot;<BR>
--<BR>
- FILES:${PN}-pair =3D &quot; \<BR>
--    ${PYTHON_SITEPACKAGES_DIR}/twisted/plugins/twisted_pair.py* \<BR>
--    ${PYTHON_SITEPACKAGES_DIR}/twisted/plugins/__pycache__/twisted_pair*.p=
-yc \<BR>
-     ${PYTHON_SITEPACKAGES_DIR}/twisted/pair \<BR>
- &quot;<BR>
- <BR>
--- <BR>
-2.34.1<BR>
-
-<br><br><p style=3D"font-family: Verdana; font-size:10pt; color:#666666;"><=
-/p><p style=3D"font-family: Verdana; font-size:8pt; color:#666666;">Warning=
-:  Copyright Nox Health.  This communication is confidential and may contai=
-n privileged information.  By the use of email over the Internet or other c=
-ommunication systems, Nox Health is not waiving either confidentiality of, =
-or legal privilege in, the content of the email and of any attachments.  If=
- the recipient of this message is not the intended addressee, please call N=
-ox Health immediately by calling (+1) 888.505.0280</p></body></html>
-
---MCBoundary=_12405061155344851--
 
 
