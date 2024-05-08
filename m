@@ -1,98 +1,113 @@
-Return-Path: <soumya.sambu@windriver.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 45B17C04FFE
-	for <webhook@archiver.kernel.org>; Wed,  8 May 2024 11:26:12 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.9740.1715167562453196681
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 696BDC19F4F
+	for <webhook@archiver.kernel.org>; Wed,  8 May 2024 15:07:23 +0000 (UTC)
+Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
+ by mx.groups.io with SMTP id smtpd.web11.15083.1715180836390554306
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 May 2024 04:26:02 -0700
+ Wed, 08 May 2024 08:07:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriver.com header.s=PPS06212021 header.b=hLMF0ylD;
- spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=58581b9602=soumya.sambu@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4484P2UQ016660
-	for <openembedded-devel@lists.openembedded.org>; Wed, 8 May 2024 11:26:01 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=windriver.com;
-	 h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding:content-type; s=PPS06212021; bh=Kupvx
-	WpbvC/bpX5jAX8RfmDev0zsD/TdF6r0GWgp9dc=; b=hLMF0ylD21WjasAY+HJDC
-	8i/xZU3wPZHN9QVcj5NVQzj9ZiGvYb5u9ltxZKw6uNKVjqk9fQLBTi/gRiOhuYuV
-	Wk9ukwh9oH9jhRDvw1+2UD9UpYWJFp8R2HgitHmm8Fj9V6H1N65YRUfVYShyy0/J
-	Puw+BC1y2lZyuDjLd9kZfD1H1TGjHZeRq0tOCCSwW4HYGnIFIgv5+jkwMl4+aUm6
-	gHmINxpfmFUwNCh2G72g46DFMIuax94XzGpNISag4CFZCvsYZfigsUAUYLUONksx
-	+7OADb2/5o0cb9YX1vai1wl40XlBu7XcdDvZsNkaARFXNtXAPJU0uNAVrLciuRqO
-	g==
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3xysjxrpg4-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 08 May 2024 11:26:01 +0000 (GMT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.37; Wed, 8 May 2024 04:25:59 -0700
-From: ssambu <soumya.sambu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][kirkstone][PATCH 1/1] php: upgrade 8.1.22 -> 8.1.28
-Date: Wed, 8 May 2024 11:25:43 +0000
-Message-ID: <20240508112543.1554894-1-soumya.sambu@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=RmpIXuiO;
+ spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-1eeabda8590so9683695ad.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 08 May 2024 08:07:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1715180836; x=1715785636; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=XNIifRWqPWVc+Bf2WdadWBl8PuL66vETwNhcjCBmFbc=;
+        b=RmpIXuiOSmeddNx4jE+AAezAzFFr7FNVnKpmXoNvtCFUUWKRvaxTw4BtfQdkH07SHl
+         qtK53TEsF3j0r0GwKIBVYUyTzZiTrdvJKk3ZXroykI6en+7BC9XrBCJJH5KMfUmGiU5P
+         dMP8B6+VrMIPGP/gy1WJ1tZEFMIjwDvfUz3omhFWXH053xy3/rhdRtMYzwk0rsf9Mqj/
+         bX7ImQMdksvPFjyuoak/Xfd3uHb/xv58EOi7mXKhqqQnbPsCIcCAhgkcKPI8iRYvuzFR
+         +SMX5eTMjgdzwZmxgihu9ZeuSIPBIkFNl+a7Qufrl1rAGFZoNTO8gjYnqBK3uVhqVxhm
+         4GYA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1715180836; x=1715785636;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=XNIifRWqPWVc+Bf2WdadWBl8PuL66vETwNhcjCBmFbc=;
+        b=Ttc/cTwJXSVz8X+eIV/rlHbc9zq4fPuAy/TMdJDJNawe3Zv3kSsXzBY2kIYEsRx9uP
+         82iBcABRsVQT1tFkR5ln0INKUZePXK/VDV9tZzFsbk+0NiNt4CLnoHgXhJARdfM5QeH2
+         expW36ffBKHqPwFpYJo03oQCjQ5A7Ger8MFcixKR5WWL3fIF6C1ttvpbGo1UUWobzlPi
+         BIiCbHR7k5cvp9MaABK4+5xlSAcgIdcrc9TzBxwIpalj8jiB9hWvrXRddR4olZCAlcjn
+         X+h+L06el3IeCKwBoci+eEdKN3n2sbgOwazRLjaHcFp6qGy73sD6QzeCEoSuQZTqzpCB
+         dRTA==
+X-Gm-Message-State: AOJu0Ywj7jO8mk3d14WHHKbGpY+NAqgxweqSOat3eUzT2/Q2blsBD6NM
+	4rqxt7IqGcnlhrN+z9ieoLtHGRLSW11BE3T08X5aoIETz/yPFUISqL+ZSb42
+X-Google-Smtp-Source: AGHT+IFkG9mKmCdCjNtFtlMMuog+PsPdSU5ZZxk7u2LBHDbF1EF168YrYUElNl3lFdfha9Dc+jEWoA==
+X-Received: by 2002:a17:902:b7c1:b0:1e4:9ad5:7522 with SMTP id d9443c01a7336-1eeb0592106mr28686835ad.21.1715180835531;
+        Wed, 08 May 2024 08:07:15 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::af2d])
+        by smtp.gmail.com with ESMTPSA id t15-20020a170902e84f00b001db5fc51d71sm12054658plg.160.2024.05.08.08.07.14
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 08 May 2024 08:07:15 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] nodejs: Upgrade to 20.13.0 release
+Date: Wed,  8 May 2024 08:07:13 -0700
+Message-ID: <20240508150713.2626431-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.45.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-GUID: tQmJ9hkLPW-Su4Oh9lrtWZUq-_M_NIQ7
-X-Proofpoint-ORIG-GUID: tQmJ9hkLPW-Su4Oh9lrtWZUq-_M_NIQ7
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.650,FMLib:17.11.176.26
- definitions=2024-05-08_07,2024-05-08_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
- priorityscore=1501 phishscore=0 spamscore=0 mlxscore=0 impostorscore=0
- mlxlogscore=974 bulkscore=0 malwarescore=0 suspectscore=0 adultscore=0
- clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2405010000 definitions=main-2405080081
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 08 May 2024 11:26:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110277
+ <openembedded-devel@lists.openembedded.org>; Wed, 08 May 2024 15:07:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110278
 
-From: Soumya Sambu <soumya.sambu@windriver.com>
+nodejs release notes [1]
 
-Upgrade php to 8.1.28
+[1] https://nodejs.org/en/blog/release/v20.13.0
 
-Security fixes:
-    CVE-2024-3096
-    CVE-2024-2756
-
-https://www.php.net/ChangeLog-8.php#8.1.28
-
-Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-devtools/php/{php_8.1.22.bb => php_8.1.28.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/php/{php_8.1.22.bb => php_8.1.28.bb} (99%)
+ .../oe-npm-cache                                              | 0
+ ...-cache-native_20.12.bb => nodejs-oe-cache-native_20.13.bb} | 0
+ .../nodejs/{nodejs_20.12.2.bb => nodejs_20.13.0.bb}           | 4 ++--
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-20.12 => nodejs-oe-cache-20.13}/oe-npm-cache (100%)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs-oe-cache-native_20.12.bb => nodejs-oe-cache-native_20.13.bb} (100%)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_20.12.2.bb => nodejs_20.13.0.bb} (97%)
 
-diff --git a/meta-oe/recipes-devtools/php/php_8.1.22.bb b/meta-oe/recipes-devtools/php/php_8.1.28.bb
-similarity index 99%
-rename from meta-oe/recipes-devtools/php/php_8.1.22.bb
-rename to meta-oe/recipes-devtools/php/php_8.1.28.bb
-index ffa331844..e7eb75c1a 100644
---- a/meta-oe/recipes-devtools/php/php_8.1.22.bb
-+++ b/meta-oe/recipes-devtools/php/php_8.1.28.bb
-@@ -33,7 +33,7 @@ SRC_URI:append:class-target = " \
-           "
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-20.12/oe-npm-cache b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-20.13/oe-npm-cache
+similarity index 100%
+rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-20.12/oe-npm-cache
+rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-20.13/oe-npm-cache
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_20.12.bb b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_20.13.bb
+similarity index 100%
+rename from meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_20.12.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_20.13.bb
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_20.12.2.bb b/meta-oe/recipes-devtools/nodejs/nodejs_20.13.0.bb
+similarity index 97%
+rename from meta-oe/recipes-devtools/nodejs/nodejs_20.12.2.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs_20.13.0.bb
+index 232df24baa..df68b5f77d 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_20.12.2.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_20.13.0.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
+ HOMEPAGE = "http://nodejs.org"
+ LICENSE = "MIT & ISC & BSD-2-Clause & BSD-3-Clause & Artistic-2.0 & Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=9a7fcce64128730251dbc58aa41b4674"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=cef54676c547a5bbab44aa8be3be9ef7"
  
- S = "${WORKDIR}/php-${PV}"
--SRC_URI[sha256sum] = "992354e382c6c618d01ed4be06beea8dec3178b14153df64d3c8c48b85e9fbc2"
-+SRC_URI[sha256sum] = "8be450096e0153c47d75384e7dd595cc897f1d53ce0060708ce9589bcc3141ee"
+ CVE_PRODUCT = "nodejs node.js"
  
- CVE_CHECK_IGNORE += "\
-     CVE-2007-2728 \
+@@ -36,7 +36,7 @@ SRC_URI:append:toolchain-clang:x86 = " \
+ SRC_URI:append:toolchain-clang:powerpc64le = " \
+            file://0001-ppc64-Do-not-use-mminimal-toc-with-clang.patch \
+            "
+-SRC_URI[sha256sum] = "d7cbcc5fbfb31e9001f3f0150bbeda59abe5dd7137aaa6273958cd59ce35ced7"
++SRC_URI[sha256sum] = "11d229fcad7e6e10f450301223c602043f021cda51259ffafc7e55e484b37dc7"
+ 
+ S = "${WORKDIR}/node-v${PV}"
+ 
 -- 
-2.40.0
+2.45.0
 
 
