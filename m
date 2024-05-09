@@ -1,180 +1,94 @@
-Return-Path: <zboszor@gmail.com>
+Return-Path: <quaresma.jose@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9CB76C10F1A
-	for <webhook@archiver.kernel.org>; Thu,  9 May 2024 06:56:08 +0000 (UTC)
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
- by mx.groups.io with SMTP id smtpd.web11.4175.1715237761677117825
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 573BFC10F1A
+	for <webhook@archiver.kernel.org>; Thu,  9 May 2024 09:31:39 +0000 (UTC)
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
+ by mx.groups.io with SMTP id smtpd.web11.5957.1715247098506403309
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 May 2024 23:56:02 -0700
+ Thu, 09 May 2024 02:31:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=YCe/oHAk;
- spf=pass (domain: gmail.com, ip: 209.85.128.46, mailfrom: zboszor@gmail.com)
-Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-41b794510cdso4601005e9.2
-        for <openembedded-devel@lists.openembedded.org>; Wed, 08 May 2024 23:56:01 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=eaz02uNX;
+ spf=pass (domain: gmail.com, ip: 209.85.221.49, mailfrom: quaresma.jose@gmail.com)
+Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-34e7a35d5d4so478138f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 09 May 2024 02:31:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1715237760; x=1715842560; darn=lists.openembedded.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=gjiWte/oqjgLQpjdlwI/3pvF2wAOS1/xHXy5EjWvPZI=;
-        b=YCe/oHAkEx68VC1MknqJBEJfo+IcQGWD1d4yjuS2F1VWpCnbrIWuaPxK06CVoPdXDn
-         56XtMIp3LWY21PYr36Wp2nHxcHWwl/p/wqXc3x618/SXQngrTAK+yiEdnCNfUeF0SA36
-         EJQ23YysNXrFgj8ihlu0hY3y88LlAN4wehtzbkVU6wgIQFBOaDs4GRggeORdFDLxObJH
-         u5Vdr9bxwRh0YzRQEriOb5/nMVqxYYtEjtAN4KfaJNr715cvRIefxgoUtgQByi5mz/g3
-         JfKWIEmI/Mjh9B3lujaRZQTSp9Xc1cDlRiAcs59M7K8mtmsAjABqVT0ALKntsin9IE7z
-         i05w==
+        d=gmail.com; s=20230601; t=1715247096; x=1715851896; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=pLf7ajHMyqIQN8SBUlW1sVWsWbRXdixMd83YnxcmmSo=;
+        b=eaz02uNX2epDgMbardjfJiCqRSQcgkNT3HocEtbCrL30E7b57W43Q5qYCtUo1HWTvr
+         cGkio2FNZvOVvkowr+QJbF8bxHXPeNzUHtGnV5Hv8YLe23YljiSvXukh+OHWCP72XUML
+         VqtDVTrX9IS+sc/vCZzMCMlTCXsqQpWZT6FDT+dY4vgy2wQ1q1oe65qZZFCTEw7Nuox7
+         wsABsaWRyiopT7NGu/4E9K1/msW2OB8a3i2+GaG8GN7EuoPY2bQhD8kTOql/55gXGZax
+         b+4jej/mR8ktpbUVL/j3deKBT/TevYBzpiEzjiO0rTzbCBvx1DJvigcomvjK0TJUtYd6
+         XjAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1715237760; x=1715842560;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=gjiWte/oqjgLQpjdlwI/3pvF2wAOS1/xHXy5EjWvPZI=;
-        b=n+LwafJ7DLKxNEzugBkHXycxGbDDQoboCfly5ram/gla0mBoefEvUNXT/ID8vIg0MJ
-         P4ucruG1PtaPw+Y0IvT8kL4Fr2PCKOellvN0eVGyvr/21wV53fnLn4NqXG9EVl6yX2rw
-         UpYEL8pi5GjyINaneO+iX5YObeuZcu0+h019IyDRDw1/LPg5c5zjeT4l2L77vraNBNND
-         sKD/ix1vq5i6AvBFGn8s/UyEyQyfSfhUAXZB6RFP05DE57Q0UAbak/RZkI5A9MSSfrsp
-         2kIVGI2R7aDmaUdJx/fkbkJP0id1h2NP6bGz8nDEqKDGRjG6heAFjiC2IekRkOCrhXTR
-         lDFA==
-X-Gm-Message-State: AOJu0YyqNB/yPav43ps5RNU57zTAohk3XXOvLKITwwrRxtazS1jcZQ4K
-	k7hNqeYIVOLpUcoxg7EsL7N2w0gl9Sbksk7SVwc43RFD9DyzE5iP
-X-Google-Smtp-Source: AGHT+IEBQ80PmMfEBxPrCOR9OYytnY0XjJGn6Ivk03kyz50kt5KkfsoK1YRLWCz3ZtiG9khnqNE3iQ==
-X-Received: by 2002:a05:600c:1d95:b0:41c:3e1:9db9 with SMTP id 5b1f17b1804b1-41f719d62c8mr33087315e9.27.1715237759722;
-        Wed, 08 May 2024 23:55:59 -0700 (PDT)
-Received: from [192.168.2.143] (dsl51B7D2F9.fixip.t-online.hu. [81.183.210.249])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-41fccee9326sm13686535e9.35.2024.05.08.23.55.59
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 08 May 2024 23:55:59 -0700 (PDT)
-Message-ID: <7606b07a-2501-4a4c-9c46-731d45fe081c@gmail.com>
-Date: Thu, 9 May 2024 08:55:59 +0200
+        d=1e100.net; s=20230601; t=1715247096; x=1715851896;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=pLf7ajHMyqIQN8SBUlW1sVWsWbRXdixMd83YnxcmmSo=;
+        b=xF83wAQlGv6GyjFpulJQ45wJT/ZDI4xJ6CPp28AfYWcV96zBYgpoHPRaC69INq0HCG
+         HSdaNEwQNhO1A+nv9yLhVu2FuefJgL3xFmHHg36E/oChOwmB8/kq6RDywRmZZfS+xGfw
+         1bjPt2D1PAqXupdStoCiF6cFFprS14aH4Ac2icnhNFkyVGapz5w86WwUE6LyrgvhTn8+
+         EjVhWGljfFNkaMoeFfvj3dwPb2e/ALOsMHoQ+M16ql11ZvyGbABkacd9xPwXzrVAfkvB
+         xQXL0nlcUTd99yD2/K0+9/rWkgVhpBjOuouuMCgtYZ534FaUvpTXjO2Hy//E5mdK47gn
+         hHvw==
+X-Gm-Message-State: AOJu0YziqD8GrzaarL9lOxZ3aRP5NpAUYylB8nuFs4FlzyQhPy7XAAUr
+	llc+BJjMtZxBK6x7KbhDYdvrgHNa6s8ORXM4XLUCK1y0wd+wZKNpEMKzFQ==
+X-Google-Smtp-Source: AGHT+IGGKBxGE/6JFqssXbek/etdgaOdJnU1VjHgwmmrP1kxFc3BSF2fLmZoIF20zXE5PPzcNlGGCQ==
+X-Received: by 2002:a5d:538b:0:b0:34d:8450:c668 with SMTP id ffacd0b85a97d-34fca81033cmr3492710f8f.59.1715247096341;
+        Thu, 09 May 2024 02:31:36 -0700 (PDT)
+Received: from toster.lan (bl15-243-112.dsl.telepac.pt. [188.80.243.112])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-41f42e74625sm62391655e9.0.2024.05.09.02.31.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 09 May 2024 02:31:35 -0700 (PDT)
+From: Jose Quaresma <quaresma.jose@gmail.com>
+X-Google-Original-From: Jose Quaresma <jose.quaresma@foundries.io>
+To: openembedded-devel@lists.openembedded.org
+Cc: Jose Quaresma <jose.quaresma@foundries.io>
+Subject: [oe][master][scarthgap][PATCH 1/5] composefs: remove fuse3 dependencie
+Date: Thu,  9 May 2024 10:31:22 +0100
+Message-ID: <20240509093126.503764-1-jose.quaresma@foundries.io>
+X-Mailer: git-send-email 2.45.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][PATCH] uw-imap: Add a patch to support newer than
- TLSv1.0
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-References: <20240509060755.3072961-1-zboszor@gmail.com>
- <CAMKF1soh_kJQe=_cVp3uDK0shNq49WBbbsXrf_FS8TUvcW54sQ@mail.gmail.com>
- <17CDBE76878542B7.5110@lists.openembedded.org>
-Content-Language: en-US
-From: =?UTF-8?B?QsO2c3rDtnJtw6lueWkgWm9sdMOhbg==?= <zboszor@gmail.com>
-In-Reply-To: <17CDBE76878542B7.5110@lists.openembedded.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 09 May 2024 06:56:08 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110285
+ <openembedded-devel@lists.openembedded.org>; Thu, 09 May 2024 09:31:39 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110286
 
-2024. 05. 09. 8:34 keltezéssel, Zoltan Boszormenyi via lists.openembedded.org írta:
-> 2024. 05. 09. 8:12 keltezéssel, Khem Raj írta:
->> On Wed, May 8, 2024 at 11:08 PM Zoltan Boszormenyi via
->> lists.openembedded.org <zboszor=gmail.com@lists.openembedded.org>
->> wrote:
->>> The patch 0001-Support-OpenSSL-1.1.patch enabled building
->>> uw-imap against OpenSSL 1.1.0 or later.
->>>
->>> However, TLSv1_client_method() and TLSv1_server_method()
->>> restricts uw-imap to TLSv1.0.
->>>
->>> These APIs, along with explicitly versioned APIs like
->>> TLSv1_1_*_method() and TLSv1_2_*_method() are deprecated
->>> in OpenSSL 1.1.0 or later. The replacements are unversioned
->>> API functions: TLS_client_method() and TLS_server_method()
->>> which support TLS version autonegotiation.
->>>
->>> This allows the PHP IMAP extension to work with IMAP servers
->>> that enforce TLSv1.2 or higher.
->>>
->>> Fixes: https://bugs.php.net/bug.php?id=76928
->>> Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
->>> ---
->>>   .../uw-imap/uw-imap/uw-imap-newer-tls.patch   | 29 +++++++++++++++++++
->>>   .../recipes-devtools/uw-imap/uw-imap_2007f.bb |  1 +
->>>   2 files changed, 30 insertions(+)
->>>   create mode 100644 meta-oe/recipes-devtools/uw-imap/uw-imap/uw-imap-newer-tls.patch
->>>
->>> diff --git a/meta-oe/recipes-devtools/uw-imap/uw-imap/uw-imap-newer-tls.patch 
->>> b/meta-oe/recipes-devtools/uw-imap/uw-imap/uw-imap-newer-tls.patch
->>> new file mode 100644
->>> index 000000000..958abc90f
->>> --- /dev/null
->>> +++ b/meta-oe/recipes-devtools/uw-imap/uw-imap/uw-imap-newer-tls.patch
->>> @@ -0,0 +1,29 @@
->>> +Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
->>> +Upstream-Status: Pending
->>> +
->> I think it will be good to submit this patch upstream to uw as well,
->
-> Is upstream maintained?
->
-> The complaints at https://bugs.php.net/bug.php?id=76928 indicate that it's not and the 
-> situation of forks is a mess. For one, the seemingly most uptodate fork at 
-> https://repo.or.cz/alpine.git contains changes that break building the PHP IMAP extension.
+The fuse3 is only used for development purposes and the composefs uses
+the kernel overlayfs and erofs on the target.
 
-Not sure how "upstream" https://github.com/uw-imap/imap is
-(https://en.wikipedia.org/wiki/UW_IMAP mentions it)
-but the patch is now submitted there.
+The composefs-fuse [1] tool is not even installed by default
+So  all the files installed on the target are the same
+with and without the fuse, this can be checked with buildhistory.
 
-Thanks.
+[1] https://github.com/containers/composefs/commit/f5fed9ff093ac57967a4c5253bae3ae294dd8cd9
 
->>
->>> +--- imap-2007f/src/osdep/unix/ssl_unix.c.old   2024-05-08 09:41:06.183450584 +0200
->>> ++++ imap-2007f/src/osdep/unix/ssl_unix.c       2024-05-08 09:43:38.512931933 +0200
->>> +@@ -220,7 +220,11 @@
->>> +   if (ssl_last_error) fs_give ((void **) &ssl_last_error);
->>> +   ssl_last_host = host;
->>> +   if (!(stream->context = SSL_CTX_new ((flags & NET_TLSCLIENT) ?
->>> ++#if OPENSSL_VERSION_NUMBER >= 0x10100000
->>> ++                                     TLS_client_method () :
->>> ++#else
->>> +                                      TLSv1_client_method () :
->>> ++#endif
->>> +                                      SSLv23_client_method ())))
->>> +     return "SSL context failed";
->>> +   SSL_CTX_set_options (stream->context,0);
->>> +@@ -703,7 +707,11 @@
->>> +   }
->>> +                               /* create context */
->>> +   if (!(stream->context = SSL_CTX_new (start_tls ?
->>> ++#if OPENSSL_VERSION_NUMBER >= 0x10100000
->>> ++                                     TLS_server_method () :
->>> ++#else
->>> +                                      TLSv1_server_method () :
->>> ++#endif
->>> +                                      SSLv23_server_method ())))
->>> +     syslog (LOG_ALERT,"Unable to create SSL context, host=%.80s",
->>> +           tcp_clienthost ());
->>> diff --git a/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb 
->>> b/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb
->>> index dcb59f4ea..17faa3aa6 100644
->>> --- a/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb
->>> +++ b/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb
->>> @@ -15,6 +15,7 @@ SRC_URI = "https://fossies.org/linux/misc/old/imap-${PV}.tar.gz \
->>>              file://0001-Do-not-build-mtest.patch \
->>> file://0002-tmail-Include-ctype.h-for-isdigit.patch \
->>> file://0001-Fix-Wincompatible-function-pointer-types.patch \
->>> +           file://uw-imap-newer-tls.patch \
->>>              "
->>>
->>>   SRC_URI[md5sum] = "2126fd125ea26b73b20f01fcd5940369"
->>> -- 
->>> 2.45.0
->>>
->>>
->>>
->>>
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#110284): https://lists.openembedded.org/g/openembedded-devel/message/110284
-> Mute This Topic: https://lists.openembedded.org/mt/105996685/3617728
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [zboszor@gmail.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
->
+Signed-off-by: Jose Quaresma <jose.quaresma@foundries.io>
+---
+ meta-filesystems/recipes-support/composefs/composefs_1.0.3.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-filesystems/recipes-support/composefs/composefs_1.0.3.bb b/meta-filesystems/recipes-support/composefs/composefs_1.0.3.bb
+index 7607b0a12..98eb3e1b3 100644
+--- a/meta-filesystems/recipes-support/composefs/composefs_1.0.3.bb
++++ b/meta-filesystems/recipes-support/composefs/composefs_1.0.3.bb
+@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "\
+     file://COPYINGv3;md5=d32239bcb673463ab874e80d47fae504 \
+     file://LICENSE.Apache-2.0;md5=3b83ef96387f14655fc854ddc3c6bd57 \
+ "
+-DEPENDS = "fuse3 openssl"
++DEPENDS = "openssl"
+ SRCREV = "2d5cdcb9176cfe4ccf1761ef6d78e1c48de35649"
+ PV = "1.0.3"
+ 
+-- 
+2.45.0
 
 
