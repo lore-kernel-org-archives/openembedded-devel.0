@@ -1,103 +1,137 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <zboszor@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D8C4C25B4F
-	for <webhook@archiver.kernel.org>; Wed,  8 May 2024 22:00:20 +0000 (UTC)
-Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com [209.85.167.50])
- by mx.groups.io with SMTP id smtpd.web11.25.1715205614795266798
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 884DCC10F1A
+	for <webhook@archiver.kernel.org>; Thu,  9 May 2024 06:08:08 +0000 (UTC)
+Received: from mail-lj1-f174.google.com (mail-lj1-f174.google.com [209.85.208.174])
+ by mx.groups.io with SMTP id smtpd.web10.3795.1715234884782665541
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 08 May 2024 15:00:15 -0700
+ Wed, 08 May 2024 23:08:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Oa8G6EJ3;
- spf=pass (domain: gmail.com, ip: 209.85.167.50, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lf1-f50.google.com with SMTP id 2adb3069b0e04-51f74fa2a82so243456e87.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 08 May 2024 15:00:14 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=WZbQebKN;
+ spf=pass (domain: gmail.com, ip: 209.85.208.174, mailfrom: zboszor@gmail.com)
+Received: by mail-lj1-f174.google.com with SMTP id 38308e7fff4ca-2e3e18c24c1so4914331fa.1
+        for <openembedded-devel@lists.openembedded.org>; Wed, 08 May 2024 23:08:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1715205613; x=1715810413; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=OYc9hYyuKmEn29mCRokGVPV+LEn3JQQdZDN5RKGKqyE=;
-        b=Oa8G6EJ3qIvWok6qFvq5CpL0Dub82dm4I2YhR4qC2dh+X73iitmArhRgyBbeAu+URA
-         6YgZzXDHR8pw8Dy6kKdbfDXvBboPjrJIgEkQSW9Xv5Gz+kQ+kydVRb3zbMq5kw2IVcZE
-         aKTQ+Ri/s+remMv/vP1QxMdmdBH0OqMZ5/mPZYiavdqlJd7KV05sTTOwy993up6TH7Kg
-         RvY1raYlYjVmax4rIdnDWOXwTHAaB8EF2Lr0llRsOow8Jm8TQfN5T32S9T7qn2xdzW/Y
-         yWfoGpl/5ILd20cmnM1Bhws2qq55g5HyMgVD/mPa6BMyQv8IOk96f12mqRz8aF455MOH
-         ID1w==
+        d=gmail.com; s=20230601; t=1715234883; x=1715839683; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=f2uCF30kv6s82ZNWJzOApl3GFZ6133p2ROLDzZMiMBI=;
+        b=WZbQebKNEfYd4Ec3j8sCa1kOSwuRj8I7qcon8FnjProBwnSCdymkccvjBv0ZqFXhl9
+         O3Cq1p4fQTNrmVOzilsueqprxzqmLPvwU6lbsEx1YPPQOqJT1FIwjtAJpG8bIEztcfmL
+         sKpbwthgyEnUdyffN6aVKsDl/8L/7WpmLjy60x5TXbVB9QhdcuTURPWTeOyM4nL6jias
+         Z2YVdK3De4HW18VkOxKER09kzMNXIAhn998IXCk5pijh/SHLZ7J+RNaGd8zDjzkBTmjW
+         iv7rl4EZkCzjewZErWVm6ePn/oJCezXUJ9RBFjrNDC9L5Mh3LBUil6scq+tXxwM4W3r5
+         wVZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1715205613; x=1715810413;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=OYc9hYyuKmEn29mCRokGVPV+LEn3JQQdZDN5RKGKqyE=;
-        b=TMVvvfVG9sH0nijNBmdf01Qvw24CLG9zTB97CqQ/xqLni6nWLBCTunwAC2yqz8UqAr
-         T8P8NYIParu5K0D6Y1pEm3MMaN3/foefQ1A/MVy1HTokYcV5ATfLum2eLwaQuZC52Aaw
-         +asDRW1LK0hhhZgokG2UhCZv/pks8aSQB1rDvr8eVfbt596JB4FlUU+ASzEv8oTXSAsR
-         OlFeTCd0fUMSpXnVndcJ5c3QVJf07iDPxK23gqvh8QH/XmK7XnM8QLpys1J4HCkwlRXx
-         o+Oq8WSF29JVIOiUot6F77DLL6rK4cudaS/Pz4kSB77D8xsQ0gG4dFjqJL771BPNNxtX
-         FOYA==
-X-Gm-Message-State: AOJu0YwqeIDKDuKy+P0Un6stiaDi0jF0h3J6k7tPmgrzyGZrkYkKwR17
-	s18NVa5NeV4jLKIjb20nHaPiwJsIAEOtqABOZE8JqOvdf/8F+SVRrN/GYo4KlpaoRtCpOHXznN1
-	Vqgc90VXMSpEWJrXHtXC74CnHsyY=
-X-Google-Smtp-Source: AGHT+IEkKxIQ7dCzHQlCWuevN+0LfBu/xJiBuFZq9d3H6DmN+nsdkxCGrMB21FuTM9twsviTSeeoMNsGabpus6IHeZA=
-X-Received: by 2002:a05:6512:29b:b0:51d:a541:733 with SMTP id
- 2adb3069b0e04-5217cf3bad4mr2909220e87.66.1715205612449; Wed, 08 May 2024
- 15:00:12 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1715234883; x=1715839683;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=f2uCF30kv6s82ZNWJzOApl3GFZ6133p2ROLDzZMiMBI=;
+        b=RHoPIDViHAmU2GaUjy4J0cM03B+EbgeuERe9h115EdNakADGRyRDoT580RNaAWleTC
+         k/wMbAcb9Db9mkc/9UB7LdsusWeSgJMvMpgnJIV5GDi0WmwCQ9NCwknPaRzA0EzL9Dzl
+         l+nN/athPm+hGFvo3QJyGJvmBrh6B144NC98AwZhz+L/sRDN6D2JmDbiGqXM8Acfvcp6
+         Cr5a4YGuSON7Y3/BpUhEYe9gmmnavB26UNWYVH9kUaxoVwT4xc+PXqWmcc5+OVHL6rFz
+         yYskhbkugzajtanl0feodJGB/zwQo2Hh7wMt/4PFqq0rJ5vFQsA+8C3psGJHGzbvK5xD
+         CA2A==
+X-Gm-Message-State: AOJu0YztC+uohXPqvzs8bEWnZja5W2Tv18vNAysY+ub0ANZzQqooFyJw
+	NbDZwpAY1bL7SLTyIFk0E9ERSbJDG6QeWDCT3Fxa6SzXRnZEbsR5a4YqiJ2q
+X-Google-Smtp-Source: AGHT+IEpU9MHviJZD2zx3sd44ejOBAOG+54aSt104s9R4QmQ71G4ewAQGK/WKYtQx9cJ/GQ3J4p0iQ==
+X-Received: by 2002:a05:651c:10cc:b0:2e2:176b:9e98 with SMTP id 38308e7fff4ca-2e4479a316emr27003431fa.45.1715234882291;
+        Wed, 08 May 2024 23:08:02 -0700 (PDT)
+Received: from localhost.lan (dsl51B7D2F9.fixip.t-online.hu. [81.183.210.249])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-41facbd295fsm28922845e9.36.2024.05.08.23.08.01
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 08 May 2024 23:08:02 -0700 (PDT)
+From: =?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: =?UTF-8?q?Zolt=C3=A1n=20B=C3=B6sz=C3=B6rm=C3=A9nyi?= <zboszor@gmail.com>
+Subject: [meta-oe][PATCH] uw-imap: Add a patch to support newer than TLSv1.0
+Date: Thu,  9 May 2024 08:07:55 +0200
+Message-ID: <20240509060755.3072961-1-zboszor@gmail.com>
+X-Mailer: git-send-email 2.45.0
 MIME-Version: 1.0
-References: <20240508214503193c3316@mail.local>
-In-Reply-To: <20240508214503193c3316@mail.local>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 9 May 2024 00:00:00 +0200
-Message-ID: <CA+chaQfqLEBPSUqrJFLoBLT2eUKd9Cx=FkyPuRgqFW8dCwn2VQ@mail.gmail.com>
-Subject: Re: [oe] CVE checks failures for meta-oe
-To: alexandre.belloni@bootlin.com, akuster808 <akuster808@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 08 May 2024 22:00:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110280
+ <openembedded-devel@lists.openembedded.org>; Thu, 09 May 2024 06:08:08 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110281
 
-see https://lists.openembedded.org/g/openembedded-devel/message/110191
-and https://github.com/openembedded/meta-openembedded/issues/817
-and https://lists.openembedded.org/g/openembedded-devel/message/110196
+The patch 0001-Support-OpenSSL-1.1.patch enabled building
+uw-imap against OpenSSL 1.1.0 or later.
 
-we're just waiting for Armin to merge the fix.
+However, TLSv1_client_method() and TLSv1_server_method()
+restricts uw-imap to TLSv1.0.
 
-On Wed, May 8, 2024 at 11:45=E2=80=AFPM Alexandre Belloni via
-lists.openembedded.org
-<alexandre.belloni=3Dbootlin.com@lists.openembedded.org> wrote:
->
-> https://autobuilder.yoctoproject.org/typhoon/#/builders/138/builds/1612/s=
-teps/16/logs/stdio
->
-> ERROR: Nothing RPROVIDES 'python3-unittest-automake-output' (but /home/po=
-kybuild/yocto-worker/metrics/build/meta-openembedded/meta-python/recipes-de=
-vtools/python/python3-pyyaml-include_1.4.1.bb RDEPENDS on or otherwise requ=
-ires it)
-> NOTE: Runtime target 'python3-unittest-automake-output' is unbuildable, r=
-emoving...
-> Missing or unbuildable dependency chain was: ['python3-unittest-automake-=
-output']
-> ERROR: Required build target 'meta-world-pkgdata' has no buildable provid=
-ers.
->
-> --
-> Alexandre Belloni, co-owner and COO, Bootlin
-> Embedded Linux and Kernel engineering
-> https://bootlin.com
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#110279): https://lists.openembedded.org/g/openembedde=
-d-devel/message/110279
-> Mute This Topic: https://lists.openembedded.org/mt/105990476/3617156
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
-artin.jansa@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+These APIs, along with explicitly versioned APIs like
+TLSv1_1_*_method() and TLSv1_2_*_method() are deprecated
+in OpenSSL 1.1.0 or later. The replacements are unversioned
+API functions: TLS_client_method() and TLS_server_method()
+which support TLS version autonegotiation.
+
+This allows the PHP IMAP extension to work with IMAP servers
+that enforce TLSv1.2 or higher.
+
+Fixes: https://bugs.php.net/bug.php?id=76928
+Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
+---
+ .../uw-imap/uw-imap/uw-imap-newer-tls.patch   | 29 +++++++++++++++++++
+ .../recipes-devtools/uw-imap/uw-imap_2007f.bb |  1 +
+ 2 files changed, 30 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/uw-imap/uw-imap/uw-imap-newer-tls.patch
+
+diff --git a/meta-oe/recipes-devtools/uw-imap/uw-imap/uw-imap-newer-tls.patch b/meta-oe/recipes-devtools/uw-imap/uw-imap/uw-imap-newer-tls.patch
+new file mode 100644
+index 000000000..958abc90f
+--- /dev/null
++++ b/meta-oe/recipes-devtools/uw-imap/uw-imap/uw-imap-newer-tls.patch
+@@ -0,0 +1,29 @@
++Signed-off-by: Zoltán Böszörményi <zboszor@gmail.com>
++Upstream-Status: Pending
++
++--- imap-2007f/src/osdep/unix/ssl_unix.c.old	2024-05-08 09:41:06.183450584 +0200
+++++ imap-2007f/src/osdep/unix/ssl_unix.c	2024-05-08 09:43:38.512931933 +0200
++@@ -220,7 +220,11 @@
++   if (ssl_last_error) fs_give ((void **) &ssl_last_error);
++   ssl_last_host = host;
++   if (!(stream->context = SSL_CTX_new ((flags & NET_TLSCLIENT) ?
+++#if OPENSSL_VERSION_NUMBER >= 0x10100000
+++				       TLS_client_method () :
+++#else
++ 				       TLSv1_client_method () :
+++#endif
++ 				       SSLv23_client_method ())))
++     return "SSL context failed";
++   SSL_CTX_set_options (stream->context,0);
++@@ -703,7 +707,11 @@
++   }
++ 				/* create context */
++   if (!(stream->context = SSL_CTX_new (start_tls ?
+++#if OPENSSL_VERSION_NUMBER >= 0x10100000
+++				       TLS_server_method () :
+++#else
++ 				       TLSv1_server_method () :
+++#endif
++ 				       SSLv23_server_method ())))
++     syslog (LOG_ALERT,"Unable to create SSL context, host=%.80s",
++ 	    tcp_clienthost ());
+diff --git a/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb b/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb
+index dcb59f4ea..17faa3aa6 100644
+--- a/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb
++++ b/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb
+@@ -15,6 +15,7 @@ SRC_URI = "https://fossies.org/linux/misc/old/imap-${PV}.tar.gz \
+            file://0001-Do-not-build-mtest.patch \
+            file://0002-tmail-Include-ctype.h-for-isdigit.patch \
+            file://0001-Fix-Wincompatible-function-pointer-types.patch \
++           file://uw-imap-newer-tls.patch \
+            "
+ 
+ SRC_URI[md5sum] = "2126fd125ea26b73b20f01fcd5940369"
+-- 
+2.45.0
+
 
