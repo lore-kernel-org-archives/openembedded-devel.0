@@ -2,89 +2,147 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 249AEC25B10
-	for <webhook@archiver.kernel.org>; Thu,  9 May 2024 19:25:54 +0000 (UTC)
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
- by mx.groups.io with SMTP id smtpd.web11.492.1715282745484333046
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5C42DC10F1A
+	for <webhook@archiver.kernel.org>; Thu,  9 May 2024 19:59:14 +0000 (UTC)
+Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
+ by mx.groups.io with SMTP id smtpd.web10.1273.1715284751036907498
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 May 2024 12:25:45 -0700
+ Thu, 09 May 2024 12:59:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Y4deIQFM;
- spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f174.google.com with SMTP id d9443c01a7336-1ed96772f92so10592685ad.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 09 May 2024 12:25:45 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=aunXGT0q;
+ spf=pass (domain: gmail.com, ip: 209.85.214.170, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-1ec41d82b8bso11561905ad.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 09 May 2024 12:59:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1715282745; x=1715887545; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=lvILus228S+mP9cPw1jaLtA7pQxaucn/vBjktlLis0I=;
-        b=Y4deIQFMHuGl5aub8jo/KNO8auUEg+V07zcBTTUqDIBMCsb6VIHqA8SRTpMvtjfNnR
-         0MZnANfNofB+RFdO8Rf7ulmpYILxrzmBnUd61n0LR9SDFjDOO0dC+Of6Z//54RbbRdxP
-         UqIctjxs1esuHNtg6XQ3W9OGQZPm6GB0OPf2lCxcFadzyuNwMbMSNMpWxxXGXuTLP13X
-         +qcUr3o9QC0HCRIB2DHufxIZTiXqIq8Z0+2UOxr9dhGKBcbnUWX+uNG/pkCVfJZHE7Cf
-         oY53CukNslII+b11GWPvrYxPwLXIWyW0bS0KlmI0mtwfQV0Tvl9wX35ymTCinaJb0tTX
-         9LCg==
+        d=gmail.com; s=20230601; t=1715284750; x=1715889550; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=vO9OC3SsOG/AMd0jrRQHkFN70vh2X8O52feLIKRi6gk=;
+        b=aunXGT0qaAizc3xq+W/VysbLtk8O62RgxZ+v9VXOpy/kXBic188GAtHRcyRch3CxH+
+         DV5j2irHSskMgjx8rkbEXMy2XPQtofOmk+YSmjvCwJ8zHQgzigkQPAFjpA9rT5U0k1o6
+         5k1/CkbTb1gLzWirMg7Fdh1CopNoMIPKztadj9zMyJP4DVrTUD0gjyx1zBEFI6XgE+v6
+         Kf0F6/3qmbAcwcpt3QAQkdvWtQ3XC6twk1Nf4IjHqePyZ+nbHNt6u98p5V8m3xSuO00p
+         7RP3qiqqdddm5KR7z0zoIDUkOQgkm8WX5HnSHqpIRUCUa1YSgja9skmB7GuGqZDiVtAs
+         L7cg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1715282745; x=1715887545;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=lvILus228S+mP9cPw1jaLtA7pQxaucn/vBjktlLis0I=;
-        b=PtAekT+/WbjWPznah+L+5gtmLtNdi2SpFaptBRJZGitTHfVxXHBnxn2sCDZwx8WUzt
-         1Dhz/M5K6G6o6lMDfQKDvucwTGyDMfHvjJDqowVLJscN8aqSTTRr3WaXQDTX6LSqX/R1
-         Q2UWUFviq/kTzEFEmRWpR6hZJvvdecElXMPKKSOQSpxX0gfKJFzRiCTm1GphqPb01xZD
-         gadvGp5HDAIMlmONSsjJi65N3nL5my/7hiTFpnvY9QzTGCLQQj5+0AKcKf/Ccx5B7xGW
-         qrrP4YvKV1aYFEDOc4/hiMC4ZLEk25le+uCjLZXP67I4k8ZoC3odoLofHEIwNb0gHtwF
-         32Pg==
-X-Gm-Message-State: AOJu0YzvT1l31od76KMZrkoHKt4/vpeaJHKV99M+oWJiWI3pK2Zfm5PF
-	adED/uDqHtqvEF0cjmhW2SVWDlZ7sKSQVPCaxOusEAwJXWd9o+R+tQHyOE2aCQ4=
-X-Google-Smtp-Source: AGHT+IF10KQlpq7USEFC0+67cUulPSsFRz/ArqFfz/AlNdLw7sKeB1UDQCDB1c6N16s5KwRX+MW9wg==
-X-Received: by 2002:a17:902:f80f:b0:1e4:7adf:b85d with SMTP id d9443c01a7336-1ef43d17fbdmr5128575ad.17.1715282744685;
-        Thu, 09 May 2024 12:25:44 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1715284750; x=1715889550;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=vO9OC3SsOG/AMd0jrRQHkFN70vh2X8O52feLIKRi6gk=;
+        b=USQ8bbIh+e5BnXpVHy+IUMyT17fm4rJmovvCZYckZJh9Uti2G0vcnl0t6jgnUCBohl
+         EmxiUkpCb7eomANpDYfJ+6nyMojQzs5PzrdX7eNme7OUt5kQvjdc6ROt7ImlmuYhNEx3
+         6cX92uwzEHACWJ8zTGIit78fvxdeQ4AJeik9Zk8Ky26pNqFm9/GPj8ugUirNUjGDHcg8
+         acrpu9Xh1xVtR7H/XnwwOob7lOObKuM75N8MvRmJEq4kzjwQ0dpF/QOrF5YvCeDMG2vd
+         906ukFRtHFS1vPlc2SDmiEGfrlIH5zx3CoslhXDMYpVI+v56kVIIUQh9uUR98H8rm5MY
+         EHrA==
+X-Gm-Message-State: AOJu0YyO60fig4BV+6s4GPJXlTJa2/8WXu+ujxsQsULcvVBhzCzupcok
+	aICPmvGu1eRe036zv66yuzs8pZODbxUkiPlG4QaZUoPLYz2b1TyTyUUxBlT66Lo=
+X-Google-Smtp-Source: AGHT+IE9g5pic2+Sq5ypiQ1bEzDcLmuyh6LjjaEUqo13jpg6IyvLmm8M+kF2FX5LXGOg+16ZQoEpOA==
+X-Received: by 2002:a17:902:d48c:b0:1eb:4c47:3454 with SMTP id d9443c01a7336-1ef434d2774mr8307705ad.0.1715284750140;
+        Thu, 09 May 2024 12:59:10 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::f4db])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-1ef0bad62fesm17991855ad.83.2024.05.09.12.25.44
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-1ef0bf30cbasm18042455ad.126.2024.05.09.12.59.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 09 May 2024 12:25:44 -0700 (PDT)
+        Thu, 09 May 2024 12:59:09 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/2] freerdp3: Upgrade to 3.5.1 release
-Date: Thu,  9 May 2024 12:25:37 -0700
-Message-ID: <20240509192537.1639358-2-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] transmission: Upgrade to 4.0.5
+Date: Thu,  9 May 2024 12:59:07 -0700
+Message-ID: <20240509195907.1863061-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.45.0
-In-Reply-To: <20240509192537.1639358-1-raj.khem@gmail.com>
-References: <20240509192537.1639358-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 09 May 2024 19:25:54 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110295
+ <openembedded-devel@lists.openembedded.org>; Thu, 09 May 2024 19:59:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110296
+
+License-Update: Copyright Years updated
+
+Add missing MIT license,see COPYING file
+
+Switch to cmake build system as thats the new and only
+build system supported.
+
+Use gtk4 when selecting gtk knob, it can support gtk3 as well
+however, its not added as knob, if needed someone should send
+a patch
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../freerdp/{freerdp3_3.4.0.bb => freerdp3_3.5.1.bb}            | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/freerdp/{freerdp3_3.4.0.bb => freerdp3_3.5.1.bb} (98%)
+ ...nsmission_git.bb => transmission_4.0.5.bb} | 31 +++++--------------
+ 1 file changed, 8 insertions(+), 23 deletions(-)
+ rename meta-oe/recipes-connectivity/transmission/{transmission_git.bb => transmission_4.0.5.bb} (72%)
 
-diff --git a/meta-oe/recipes-support/freerdp/freerdp3_3.4.0.bb b/meta-oe/recipes-support/freerdp/freerdp3_3.5.1.bb
-similarity index 98%
-rename from meta-oe/recipes-support/freerdp/freerdp3_3.4.0.bb
-rename to meta-oe/recipes-support/freerdp/freerdp3_3.5.1.bb
-index 537d19263d..b6974af739 100644
---- a/meta-oe/recipes-support/freerdp/freerdp3_3.4.0.bb
-+++ b/meta-oe/recipes-support/freerdp/freerdp3_3.5.1.bb
-@@ -7,7 +7,7 @@ DEPENDS = "openssl libusb1 uriparser cairo icu pkcs11-helper zlib jpeg"
+diff --git a/meta-oe/recipes-connectivity/transmission/transmission_git.bb b/meta-oe/recipes-connectivity/transmission/transmission_4.0.5.bb
+similarity index 72%
+rename from meta-oe/recipes-connectivity/transmission/transmission_git.bb
+rename to meta-oe/recipes-connectivity/transmission/transmission_4.0.5.bb
+index 735db1441e..62e066c91c 100644
+--- a/meta-oe/recipes-connectivity/transmission/transmission_git.bb
++++ b/meta-oe/recipes-connectivity/transmission/transmission_4.0.5.bb
+@@ -1,50 +1,35 @@
+ DESCRIPTION = "Transmission is a fast, easy, and free BitTorrent client"
+ SECTION = "network"
+ HOMEPAGE = "https://transmissionbt.com/"
+-LICENSE = "GPL-2.0-only"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=73f535ddffcf2a0d3af4f381f84f9b33"
++LICENSE = "MIT & GPL-2.0-only"
++LIC_FILES_CHKSUM = "file://COPYING;md5=ba8199e739948e198310093de27175fa"
  
- inherit pkgconfig cmake
+ DEPENDS = "curl libevent gnutls openssl libtool intltool-native glib-2.0-native"
+ RDEPENDS:${PN}-web = "${PN}"
  
--SRCREV = "708f3764897e06297469a7b0507b3c9ecc041ad7"
-+SRCREV = "eda5c99686e15327f2f37b9cadf307e852b96adf"
- SRC_URI = "git://github.com/FreeRDP/FreeRDP.git;branch=master;protocol=https"
+ SRC_URI = " \
+-	gitsm://github.com/transmission/transmission;branch=master;protocol=https \
++	gitsm://github.com/transmission/transmission;branch=4.0.x;protocol=https \
+ 	file://transmission-daemon \
+ "
+ 
+-# Transmission release 3.00
+-SRCREV = "bb6b5a062ee594dfd4b7a12a6b6e860c43849bfd"
+-PV = "3.00"
++# Transmission release 4.0.5
++SRCREV = "a6fe2a64aa7eca089f96006cf082a12f0cde937f"
  
  S = "${WORKDIR}/git"
+ 
+-inherit autotools-brokensep gettext update-rc.d pkgconfig systemd mime-xdg
++inherit cmake gettext update-rc.d pkgconfig systemd mime-xdg
+ 
+ PACKAGECONFIG = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk', '', d)} \
+                  ${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)}"
+ 
+-PACKAGECONFIG[gtk] = " --with-gtk,--without-gtk,gtk+3,"
+-PACKAGECONFIG[systemd] = "--with-systemd,--without-systemd,systemd,"
++PACKAGECONFIG[gtk] = "-DENABLE_GTK=ON,-DENABLE_GTK=OFF,gtk4 gtkmm4,"
++PACKAGECONFIG[systemd] = "-DWITH_SYSTEMD=ON,-DWITH_SYSTEMD=OFF,systemd,"
+ 
+ # Weak default values for transmission user and group
+ # Change them in bbappend if needed
+ TRANSMISSION_USER ??= "root"
+ TRANSMISSION_GROUP ??= "root"
+ 
+-# Configure aborts with:
+-# config.status: error: po/Makefile.in.in was not created by intltoolize.
+-do_configure() {
+-	sed -i /AM_GLIB_GNU_GETTEXT/d ${S}/configure.ac
+-	cd ${S}
+-	./update-version-h.sh
+-	intltoolize --copy --force --automake
+-        aclocal
+-        libtoolize --automake --copy --force
+-        autoconf
+-        automake -a
+-        oe_runconf
+-}
+-
+ do_install:append() {
+ 	if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
+ 		sed -i '/USERNAME=/c\USERNAME=${TRANSMISSION_USER}' ${WORKDIR}/transmission-daemon
 -- 
 2.45.0
 
