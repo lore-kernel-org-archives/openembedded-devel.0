@@ -2,153 +2,221 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C0A1BC41513
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BE65FC25B74
 	for <webhook@archiver.kernel.org>; Fri, 10 May 2024 00:57:39 +0000 (UTC)
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com [209.85.214.175])
- by mx.groups.io with SMTP id smtpd.web11.2226.1715302657847642810
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+ by mx.groups.io with SMTP id smtpd.web10.2336.1715302655310051997
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 May 2024 17:57:37 -0700
+ Thu, 09 May 2024 17:57:35 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=mVXltQre;
- spf=pass (domain: gmail.com, ip: 209.85.214.175, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f175.google.com with SMTP id d9443c01a7336-1ec69e3dbcfso12161215ad.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 09 May 2024 17:57:37 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=DM9gDL13;
+ spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-1e3ca546d40so12628765ad.3
+        for <openembedded-devel@lists.openembedded.org>; Thu, 09 May 2024 17:57:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1715302657; x=1715907457; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=8DS3nBbr1wJ4XndT0Ht5MzUuHxeGfPcbMJNfE+1Ym1o=;
-        b=mVXltQreNq7CICk/FurKRI9sq9D9y+yRQrHhKCzHEp3EHKclt7o4PGEMRQIE/IgvvY
-         Yd7jRPsEaLDxguGUMSxal9ZCdrqkPUTvyDqSHNzLi0cShRQN3rjXNoLWADrOesF6Tr0o
-         aC9giLd+0SFBACXVKPR/zGlJfh1RPBDjoIZO6mjhMsBZ6MKkVH5JV8h7kbyN7slb57jQ
-         wXwc60iKzBbSDI/bNObCKUOM91RjVoDzCw9vuwMKOmWFsSN5Rd8ISff9hBqIpUZfrpwX
-         pTf3nWzf9lp9NJKSF4TxxsPhgDzwn/OxIpKf8vxW57hutV+rN7k57VZbDGWKUY14Ae4Q
-         PsGA==
+        d=gmail.com; s=20230601; t=1715302654; x=1715907454; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=OJ8YnLoWs3288cG0Fv/JqOBQk1Bd3MiPgJnn076ZgRQ=;
+        b=DM9gDL13R3i5wlPP5sqMneDK7E3nRJ9XubdmUsbmqDxfUz5VEx/W4pNf4hi5Btv/fn
+         wwjQyl4K22iA8rz1Dg0UqNTUO87afsm3yOgwqbpDMPitwYes2/m/tbRYzjr4J9KCCiiR
+         Gqxp5ldBH6H+4cnykJeKWDAG+Z5lfvLF+95NpAdeHwvMP0BRFaBGlK1aEVi27MIBoX6y
+         uAuRW6OIxKcQWpkWxBK0yU3+Ne2JO0ywEKWx4fgFgWqD7EuRNKGCYbiu+EpVtzmQsR/y
+         VmhpBFcfvrGYVDo+8PSHRDMKF85NXV4zJHhgrVRPr8xsAOn7qbT43qtK3f2Mf4TB70qS
+         clog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1715302657; x=1715907457;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=8DS3nBbr1wJ4XndT0Ht5MzUuHxeGfPcbMJNfE+1Ym1o=;
-        b=VmT59CfjCa2yhEC9iuV2pirj6oWF8ooKDgZtNsb3eI5QYjyOcBl4c03xRo3pt2jpKO
-         A/ZcmxUSYuLpizdnVbAi++L4L50rv843P01bC+ViLhMlmpoJoTuCtubJSDfYmwEa6qJP
-         VOeJ3PizBNGyHgigsNmpansO0eZIfXzcfalaE26lp9JAyOchKspipQUdrCbM8S5VV6W3
-         xLrAvhTKR12l3/GnpfMspibWNU+IgBTV7ylrymI+FaolZ6f2IaOJ9pBtXVRZHF1nUTvs
-         yuk9z7xPYet6RcrQF4a2ZDkCciDg+zMBRBs8Rni81kvJw7UDjuXzRT1msKVeHL/cvXrd
-         NgXA==
-X-Gm-Message-State: AOJu0Yxxv6MdX9vggix0ihVmj4RmOAGtE584xaXprGEJ5dENCe4lbnKc
-	Ho+duSiUMSVGOFa54ZsWbZOMcJdUy2nV+NbofwoMasyehnMAyRooHu0/esDKe4U=
-X-Google-Smtp-Source: AGHT+IGLaJEJNZGN7sP1ZMdx7X5lK0hv/Kq5g504p5J2kzhvg8uDPI9jE6EWdyBbigwFTmKXwDStJQ==
-X-Received: by 2002:a17:902:a602:b0:1ed:a862:170f with SMTP id d9443c01a7336-1ef43d2e92dmr11691635ad.32.1715302657013;
-        Thu, 09 May 2024 17:57:37 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1715302654; x=1715907454;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=OJ8YnLoWs3288cG0Fv/JqOBQk1Bd3MiPgJnn076ZgRQ=;
+        b=f12QvjDSTd8iqI0EdsLYsirfBKUFkxsE4XlWZCITJx3aKAtk63PnMWEJcqN6Nl+Vn7
+         aj5haqJuHpR6em3y61mXL5WxDVcgUPUIl5mVxqtL3LIHigHzCWVjieLXWJAAJhYHQHIU
+         siEp+B1ID09rgzHFq3bg+2eZ9TiXSeNxqvP2B/wDw2y4jdIXl8zoFK1Y5lU2rcSNMiu+
+         ARfG4aIalveXzmutFoVu7glXKIyyXotvOsZnCxTlQML9j44hMd+k6M5dSRQ2Pk3NCWuz
+         OlXK+LEtcJYw3O6f0snAPJ1BlFcLHK3nN7d2F3qDbNvQ9vqv9IlgaQ/olcTFh3bkyA7K
+         6pcA==
+X-Gm-Message-State: AOJu0YxbcT+BuaUR0I+pPHYu5XlQ8awWOB/W03JW5irRrms7GGkBvsnX
+	Yf+dkj0q1qw4pTP+C/uyFTikPc2MFXoq03VqVr4dl0tq2IAEbEeZ5lfDyH9XVVo=
+X-Google-Smtp-Source: AGHT+IFkkjMhQstf/YBOCFYUlbYXMsWGHcARICvjjXcLXlqiGHzMYqJYZofzuJvKiBikjCLom+Feww==
+X-Received: by 2002:a17:902:6ac1:b0:1e2:7dc7:477 with SMTP id d9443c01a7336-1ef440583dbmr11503255ad.57.1715302654198;
+        Thu, 09 May 2024 17:57:34 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::f4db])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-1ef0c13823asm20508605ad.263.2024.05.09.17.57.36
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-1ef0c13823asm20508605ad.263.2024.05.09.17.57.33
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 09 May 2024 17:57:36 -0700 (PDT)
+        Thu, 09 May 2024 17:57:33 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 4/4] fluentbit: Upgrade to 1.9.9
-Date: Thu,  9 May 2024 17:57:31 -0700
-Message-ID: <20240510005731.2074507-4-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 1/4] fvwm: Fix build with gcc-14
+Date: Thu,  9 May 2024 17:57:28 -0700
+Message-ID: <20240510005731.2074507-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.45.0
-In-Reply-To: <20240510005731.2074507-1-raj.khem@gmail.com>
-References: <20240510005731.2074507-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Fri, 10 May 2024 00:57:39 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110303
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110300
 
-Disable incompatible-pointer-types warning as error to fix build
-with gcc-14
+Fixes for C99 compatibility
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...xt-Do-not-use-private-makefile-target.patch | 18 ++++++------------
- .../{fluentbit_1.9.7.bb => fluentbit_1.9.9.bb} |  5 ++++-
- 2 files changed, 10 insertions(+), 13 deletions(-)
- rename meta-oe/recipes-extended/fluentbit/{fluentbit_1.9.7.bb => fluentbit_1.9.9.bb} (95%)
+ ...ot-require-support-for-implicit-ints.patch | 45 +++++++++++++++++++
+ ...-missing-unistd.h-to-AM_SAFETY_CHECK.patch | 32 +++++++++++++
+ ...gure-Further-defang-the-Werror-check.patch | 35 +++++++++++++++
+ meta-oe/recipes-graphics/fvwm/fvwm_2.7.0.bb   |  3 ++
+ 4 files changed, 115 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/fvwm/fvwm/0001-configure-Do-not-require-support-for-implicit-ints.patch
+ create mode 100644 meta-oe/recipes-graphics/fvwm/fvwm/0002-acinclude.m4-Add-missing-unistd.h-to-AM_SAFETY_CHECK.patch
+ create mode 100644 meta-oe/recipes-graphics/fvwm/fvwm/0003-configure-Further-defang-the-Werror-check.patch
 
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0001-CMakeLists.txt-Do-not-use-private-makefile-target.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/0001-CMakeLists.txt-Do-not-use-private-makefile-target.patch
-index f5a1716c07..0cabed9633 100644
---- a/meta-oe/recipes-extended/fluentbit/fluentbit/0001-CMakeLists.txt-Do-not-use-private-makefile-target.patch
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit/0001-CMakeLists.txt-Do-not-use-private-makefile-target.patch
-@@ -15,8 +15,6 @@ Upstream-Status: Pending [https://github.com/fluent/fluent-bit/issues/5492]
-  lib/cmetrics/CMakeLists.txt | 7 +------
-  3 files changed, 3 insertions(+), 17 deletions(-)
- 
--diff --git a/CMakeLists.txt b/CMakeLists.txt
--index 3dba5a8..d94b988 100644
- --- a/CMakeLists.txt
- +++ b/CMakeLists.txt
- @@ -46,11 +46,7 @@ else()
-@@ -32,8 +30,6 @@ index 3dba5a8..d94b988 100644
-  
-  if(${CMAKE_SYSTEM_PROCESSOR} MATCHES "armv7l")
-    set(CMAKE_C_LINK_FLAGS "${CMAKE_C_LINK_FLAGS} -latomic")
--diff --git a/lib/chunkio/CMakeLists.txt b/lib/chunkio/CMakeLists.txt
--index bbe1f39..809ea93 100644
- --- a/lib/chunkio/CMakeLists.txt
- +++ b/lib/chunkio/CMakeLists.txt
- @@ -14,12 +14,7 @@ else()
-@@ -50,21 +46,19 @@ index bbe1f39..809ea93 100644
-  
-  include(cmake/macros.cmake)
-  
--diff --git a/lib/cmetrics/CMakeLists.txt b/lib/cmetrics/CMakeLists.txt
--index 60e8774..e3d6149 100644
- --- a/lib/cmetrics/CMakeLists.txt
- +++ b/lib/cmetrics/CMakeLists.txt
- @@ -34,12 +34,7 @@ set(CMT_VERSION_MINOR  3)
-- set(CMT_VERSION_PATCH  5)
-+ set(CMT_VERSION_PATCH  7)
-  set(CMT_VERSION_STR "${CMT_VERSION_MAJOR}.${CMT_VERSION_MINOR}.${CMT_VERSION_PATCH}")
-  
---# Define __FILENAME__ consistently across Operating Systems
-+-# Define __CMT_FILENAME__ consistently across Operating Systems
- -if(NOT ${CMAKE_SYSTEM_NAME} MATCHES "Windows")
---  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__FILENAME__='\"$(subst ${CMAKE_SOURCE_DIR}/,,$(abspath $<))\"'")
-+-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__CMT_FILENAME__='\"$(subst ${CMAKE_SOURCE_DIR}/,,$(abspath $<))\"'")
- -else()
---  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__FILENAME__=__FILE__")
-+-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__CMT_FILENAME__=__FILE__")
- -endif()
--+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__FILENAME__=__FILE__")
-++set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__CMT_FILENAME__=__FILE__")
-  
-  # Configuration options
-- option(CMT_DEV             "Enable development mode"                   No)
-+ option(CMT_DEV                       "Enable development mode"                   No)
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_1.9.7.bb b/meta-oe/recipes-extended/fluentbit/fluentbit_1.9.9.bb
-similarity index 95%
-rename from meta-oe/recipes-extended/fluentbit/fluentbit_1.9.7.bb
-rename to meta-oe/recipes-extended/fluentbit/fluentbit_1.9.9.bb
-index fc06095475..ef04111131 100644
---- a/meta-oe/recipes-extended/fluentbit/fluentbit_1.9.7.bb
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit_1.9.9.bb
-@@ -29,7 +29,7 @@ SRC_URI:append:libc-musl = "\
-            file://0001-Use-posix-strerror_r-with-musl.patch \
-            file://0002-chunkio-Link-with-fts-library-with-musl.patch \
-            "
--SRC_URI[sha256sum] = "8ca2ac081d7eee717483c06608adcb5e3d5373e182ad87dba21a23f8278c6540"
-+SRC_URI[sha256sum] = "3f6cd4bd1894cda16b465aef6ffec7e920d54c4209b3e2320fcffe7ae345700e"
- S = "${WORKDIR}/fluent-bit-${PV}"
- 
- DEPENDS = "zlib bison-native flex-native openssl"
-@@ -84,6 +84,9 @@ EXTRA_OECMAKE:append:x86 = " -DCMAKE_C_STANDARD_LIBRARIES=-latomic"
- 
- CFLAGS:append:x86 = " -DMBEDTLS_HAVE_SSE2"
- 
-+# Fixes build with GCC-14
-+CFLAGS += "-Wno-error=incompatible-pointer-types"
+diff --git a/meta-oe/recipes-graphics/fvwm/fvwm/0001-configure-Do-not-require-support-for-implicit-ints.patch b/meta-oe/recipes-graphics/fvwm/fvwm/0001-configure-Do-not-require-support-for-implicit-ints.patch
+new file mode 100644
+index 0000000000..356bd73f88
+--- /dev/null
++++ b/meta-oe/recipes-graphics/fvwm/fvwm/0001-configure-Do-not-require-support-for-implicit-ints.patch
+@@ -0,0 +1,45 @@
++From cbba378a23410241176d62f3bb43965c044615e3 Mon Sep 17 00:00:00 2001
++From: Florian Weimer <fweimer@redhat.com>
++Date: Thu, 24 Nov 2022 13:06:50 +0100
++Subject: [PATCH 1/3] configure: Do not require support for implicit ints
 +
- inherit cmake systemd pkgconfig
++Implicit ints  have not been part of C since 1999, and future
++compilers will disable support for them by default.  Fortunatenly,
++only one configure check needs adjusting.
++
++Upstream-Status: Submitted [https://github.com/fvwmorg/fvwm/pull/100]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ acinclude.m4 | 2 +-
++ configure.ac | 2 +-
++ 2 files changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/acinclude.m4 b/acinclude.m4
++index 8b74ff1e..b66042f9 100644
++--- a/acinclude.m4
+++++ b/acinclude.m4
++@@ -30,7 +30,7 @@ if test "$ac_cv_func_select" = yes; then
++ #ifdef HAVE_SYS_SOCKET_H
++ #include <sys/socket.h>
++ #endif],
++-[extern select ($ac_cv_type_fd_set_size_t,
+++[extern int select ($ac_cv_type_fd_set_size_t,
++  $ac_cv_type_fd_set *,	$ac_cv_type_fd_set *, $ac_cv_type_fd_set *,
++  $ac_type_timeval *);],
++ [ac_found=yes ; break 3],ac_found=no)
++diff --git a/configure.ac b/configure.ac
++index 97ab9e7a..c9fcede6 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -220,7 +220,7 @@ AC_MINIX
++ 
++ # catch -Werror and similar options when running configure
++ AC_TRY_COMPILE([#include <stdio.h>],
++-[int i; static j; int *p; char *c;
+++[int i; int *p; char *c;
++   switch (*p = p = *c) { case 0: printf("%Q", c, p); }
++   *c = &i; c = p;
++   while (1 || (unsigned int)3 >= 0 || ((int)-1) == ((unsigned int)1));
++-- 
++2.45.0
++
+diff --git a/meta-oe/recipes-graphics/fvwm/fvwm/0002-acinclude.m4-Add-missing-unistd.h-to-AM_SAFETY_CHECK.patch b/meta-oe/recipes-graphics/fvwm/fvwm/0002-acinclude.m4-Add-missing-unistd.h-to-AM_SAFETY_CHECK.patch
+new file mode 100644
+index 0000000000..50ecb20c72
+--- /dev/null
++++ b/meta-oe/recipes-graphics/fvwm/fvwm/0002-acinclude.m4-Add-missing-unistd.h-to-AM_SAFETY_CHECK.patch
+@@ -0,0 +1,32 @@
++From 51287fb60263530f61b14df5519e10dabe67d2ad Mon Sep 17 00:00:00 2001
++From: Florian Weimer <fweimer@redhat.com>
++Date: Thu, 24 Nov 2022 13:07:56 +0100
++Subject: [PATCH 2/3] acinclude.m4: Add missing <unistd.h> to
++ AM_SAFETY_CHECK_MKSTEMP
++
++Otherwise, the check fails on a compiler which does not support
++implicit function declarations (a language feature removed in 1999).
++
++Upstream-Status: Submitted [https://github.com/fvwmorg/fvwm/pull/100]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ acinclude.m4 | 3 +++
++ 1 file changed, 3 insertions(+)
++
++diff --git a/acinclude.m4 b/acinclude.m4
++index b66042f9..4dee2abe 100644
++--- a/acinclude.m4
+++++ b/acinclude.m4
++@@ -1154,6 +1154,9 @@ AC_DEFUN([AM_SAFETY_CHECK_MKSTEMP],[
++ #include <stdio.h>
++ #include <stdlib.h>
++ #include <string.h>
+++#ifdef HAVE_UNISTD_H
+++#include <unistd.h>
+++#endif
++ int main(void)
++ {
++   char template[128];
++-- 
++2.45.0
++
+diff --git a/meta-oe/recipes-graphics/fvwm/fvwm/0003-configure-Further-defang-the-Werror-check.patch b/meta-oe/recipes-graphics/fvwm/fvwm/0003-configure-Further-defang-the-Werror-check.patch
+new file mode 100644
+index 0000000000..e9d780ddc6
+--- /dev/null
++++ b/meta-oe/recipes-graphics/fvwm/fvwm/0003-configure-Further-defang-the-Werror-check.patch
+@@ -0,0 +1,35 @@
++From 542c6f25327587d5a6bffb8a45b457ec85dcf8e1 Mon Sep 17 00:00:00 2001
++From: Florian Weimer <fweimer@redhat.com>
++Date: Tue, 19 Dec 2023 13:24:50 +0100
++Subject: [PATCH 3/3] configure: Further defang the -Werror check
++
++Incompatible pointer types are actually errors (in the sense
++that they are invalid C).  Compilers have merely tolerated them as
++warnings for backwards compatibility.  This is changing with Clang 16
++and GCC 14, so relax the check a little.
++
++Upstream-Status: Submitted [https://github.com/fvwmorg/fvwm/pull/100]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ configure.ac | 5 ++---
++ 1 file changed, 2 insertions(+), 3 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index c9fcede6..2e9615b2 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -220,9 +220,8 @@ AC_MINIX
++ 
++ # catch -Werror and similar options when running configure
++ AC_TRY_COMPILE([#include <stdio.h>],
++-[int i; int *p; char *c;
++-  switch (*p = p = *c) { case 0: printf("%Q", c, p); }
++-  *c = &i; c = p;
+++[int unused; int *p; char *c;
+++  printf("%Q", c, p);
++   while (1 || (unsigned int)3 >= 0 || ((int)-1) == ((unsigned int)1));
++ ], , AC_MSG_ERROR("
++ configure is not able to compile programs with warnings.  Please
++-- 
++2.45.0
++
+diff --git a/meta-oe/recipes-graphics/fvwm/fvwm_2.7.0.bb b/meta-oe/recipes-graphics/fvwm/fvwm_2.7.0.bb
+index 8daf38a0ba..df349494aa 100644
+--- a/meta-oe/recipes-graphics/fvwm/fvwm_2.7.0.bb
++++ b/meta-oe/recipes-graphics/fvwm/fvwm_2.7.0.bb
+@@ -34,6 +34,9 @@ DEPENDS = " \
+ SRC_URI = " \
+     git://github.com/fvwmorg/fvwm.git;protocol=https;branch=master \
+     file://0001-Fix-compilation-for-disabled-gnome.patch \
++    file://0001-configure-Do-not-require-support-for-implicit-ints.patch \
++    file://0002-acinclude.m4-Add-missing-unistd.h-to-AM_SAFETY_CHECK.patch \
++    file://0003-configure-Further-defang-the-Werror-check.patch \
+ "
  
- SYSTEMD_SERVICE:${PN} = "td-agent-bit.service"
+ SRCREV = "7baf540e56fb1a3e91752acba872a88543529d46"
 -- 
 2.45.0
 
