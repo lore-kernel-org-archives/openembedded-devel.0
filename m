@@ -2,81 +2,88 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 816A3C25B10
-	for <webhook@archiver.kernel.org>; Fri, 10 May 2024 05:46:51 +0000 (UTC)
-Received: from mailout09.t-online.de (mailout09.t-online.de [194.25.134.84])
- by mx.groups.io with SMTP id smtpd.web11.5994.1715320008221130112
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C33ACC25B4F
+	for <webhook@archiver.kernel.org>; Fri, 10 May 2024 06:51:41 +0000 (UTC)
+Received: from mailout12.t-online.de (mailout12.t-online.de [194.25.134.22])
+ by mx.groups.io with SMTP id smtpd.web10.6809.1715323889379250941
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 09 May 2024 22:46:48 -0700
+ Thu, 09 May 2024 23:51:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.84, mailfrom: f_l_k@t-online.de)
-Received: from fwd70.aul.t-online.de (fwd70.aul.t-online.de [10.223.144.96])
-	by mailout09.t-online.de (Postfix) with SMTP id 65FB16CE8D
-	for <openembedded-devel@lists.openembedded.org>; Fri, 10 May 2024 07:46:46 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([79.219.232.205]) by fwd70.t-online.de
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.22, mailfrom: f_l_k@t-online.de)
+Received: from fwd79.aul.t-online.de (fwd79.aul.t-online.de [10.223.144.105])
+	by mailout12.t-online.de (Postfix) with SMTP id 5EB91EC94
+	for <openembedded-devel@lists.openembedded.org>; Fri, 10 May 2024 08:51:27 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([79.219.232.205]) by fwd79.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1s5J5h-00nUnp0; Fri, 10 May 2024 07:46:45 +0200
+	esmtp id 1s5K6I-0ilffd0; Fri, 10 May 2024 08:51:26 +0200
 From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 1/2] fuse3: move from meta-filesystems to meta-oe
-Date: Fri, 10 May 2024 07:47:08 +0200
-Message-ID: <20240510054709.4044191-1-f_l_k@t-online.de>
+Subject: [meta-gnome][PATCH] gnome-software: update 46.0 -> 46.1
+Date: Fri, 10 May 2024 08:51:49 +0200
+Message-ID: <20240510065149.1800819-1-f_l_k@t-online.de>
 X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1715320006-224FF89A-44744492/0/0 CLEAN NORMAL
-X-TOI-MSGID: 847a4270-6e9a-42f0-b787-5dc201497267
+Content-Type: text/plain; charset=UTF-8
+X-TOI-EXPURGATEID: 150726::1715323886-617F83C7-7E5C6F14/0/0 CLEAN NORMAL
+X-TOI-MSGID: def2b82e-975b-45a1-a08c-126a96e2d72e
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 10 May 2024 05:46:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110306
+ <openembedded-devel@lists.openembedded.org>; Fri, 10 May 2024 06:51:41 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110308
 
-Technically flatpak and xdg-desktop-portal have a runtime dependency on
-fuse3-utils. I was worried that adding it might cause problems with CI si=
-nce fuse3
-is not included in meta-oe.
+Version 46.1
+~~~~~~~~~~~~
+Released: 2024-04-25
 
-Given that both packages also require fuse3 at buildtime it could be a go=
-od
-idea to move fuse3 to avoid a meta-filesystems dependency for meta-oe
+This is a stable release with the following changes:
+ * Fix a crash when updating apps when built with Mogwai
+ * Fix a crash when installing flatpak application
+ * Correct desktop/mobile hardware support detection
+ * Correct state of Fedora upgrade
+ * Several fixes in historical updates for rpm-ostree
+
+This release also updates translations:
+ * Catalan (Jordi Mas i Hernandez)
+ * Czech (Daniel Rusek)
+ * Dutch (Nathan Follens)
+ * Friulian (Fabio Tomat)
+ * Hindi (Guntupalli Karunakar)
+ * Kabyle (Athmane MOKRAOUI)
+ * Panjabi (A S Alam)
+ * Russian (Artur S0)
+ * Serbian (=D0=9C=D0=B8=D0=BB=D0=BE=D1=88 =D0=9F=D0=BE=D0=BF=D0=BE=D0=B2=
+=D0=B8=D1=9B)
 
 Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../recipes-support/fuse/fuse3/run-ptest                       | 0
- .../recipes-support/fuse/fuse3_3.16.2.bb                       | 3 +--
- 2 files changed, 1 insertion(+), 2 deletions(-)
- rename {meta-filesystems =3D> meta-oe}/recipes-support/fuse/fuse3/run-pt=
-est (100%)
- rename {meta-filesystems =3D> meta-oe}/recipes-support/fuse/fuse3_3.16.2=
-.bb (98%)
+ .../{gnome-software_46.0.bb =3D> gnome-software_46.1.bb}          | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-gnome/recipes-gnome/gnome-software/{gnome-software_46.0.bb =3D=
+> gnome-software_46.1.bb} (93%)
 
-diff --git a/meta-filesystems/recipes-support/fuse/fuse3/run-ptest b/meta=
--oe/recipes-support/fuse/fuse3/run-ptest
-similarity index 100%
-rename from meta-filesystems/recipes-support/fuse/fuse3/run-ptest
-rename to meta-oe/recipes-support/fuse/fuse3/run-ptest
-diff --git a/meta-filesystems/recipes-support/fuse/fuse3_3.16.2.bb b/meta=
--oe/recipes-support/fuse/fuse3_3.16.2.bb
-similarity index 98%
-rename from meta-filesystems/recipes-support/fuse/fuse3_3.16.2.bb
-rename to meta-oe/recipes-support/fuse/fuse3_3.16.2.bb
-index 2b0797a6f..307544bf3 100644
---- a/meta-filesystems/recipes-support/fuse/fuse3_3.16.2.bb
-+++ b/meta-oe/recipes-support/fuse/fuse3_3.16.2.bb
-@@ -13,8 +13,7 @@ LIC_FILES_CHKSUM =3D " \
-     file://LICENSE;md5=3Da55c12a2d7d742ecb41ca9ae0a6ddc66 \
- "
+diff --git a/meta-gnome/recipes-gnome/gnome-software/gnome-software_46.0.=
+bb b/meta-gnome/recipes-gnome/gnome-software/gnome-software_46.1.bb
+similarity index 93%
+rename from meta-gnome/recipes-gnome/gnome-software/gnome-software_46.0.b=
+b
+rename to meta-gnome/recipes-gnome/gnome-software/gnome-software_46.1.bb
+index 40a7141fc..2327a6640 100644
+--- a/meta-gnome/recipes-gnome/gnome-software/gnome-software_46.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-software/gnome-software_46.1.bb
+@@ -28,7 +28,7 @@ RDEPENDS:${PN} =3D "iso-codes"
 =20
--SRC_URI =3D "https://github.com/libfuse/libfuse/releases/download/fuse-$=
-{PV}/fuse-${PV}.tar.gz \
--"
-+SRC_URI =3D "https://github.com/libfuse/libfuse/releases/download/fuse-$=
-{PV}/fuse-${PV}.tar.gz"
- SRC_URI[sha256sum] =3D "f797055d9296b275e981f5f62d4e32e089614fc253d1ef29=
-85851025b8a0ce87"
+ EXTRA_OEMESON +=3D "-Dtests=3Dfalse -Dsoup2=3Dfalse"
 =20
- S =3D "${WORKDIR}/fuse-${PV}"
+-SRC_URI[archive.sha256sum] =3D "11893002bbb54082896683707bc3991ae55a2f30=
+40811a760e3a92c96544f86e"
++SRC_URI[archive.sha256sum] =3D "b6eeb789100de94b50ebe2e77f16b26be4c2db15=
+489905f198d060c425e19076"
+=20
+ PACKAGECONFIG ?=3D "flatpak"
+ PACKAGECONFIG[flatpak] =3D "-Dflatpak=3Dtrue,-Dflatpak=3Dfalse,flatpak o=
+stree"
 --=20
 2.44.0
 
