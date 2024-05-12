@@ -2,246 +2,73 @@ Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 967AAC10F1A
-	for <webhook@archiver.kernel.org>; Sun, 12 May 2024 11:52:52 +0000 (UTC)
-Received: from mailout08.t-online.de (mailout08.t-online.de [194.25.134.20])
- by mx.groups.io with SMTP id smtpd.web10.33432.1715514770840808499
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 19B51C10F1A
+	for <webhook@archiver.kernel.org>; Sun, 12 May 2024 12:47:33 +0000 (UTC)
+Received: from mailout02.t-online.de (mailout02.t-online.de [194.25.134.17])
+ by mx.groups.io with SMTP id smtpd.web10.34171.1715518046963085683
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 12 May 2024 04:52:51 -0700
+ Sun, 12 May 2024 05:47:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.20, mailfrom: f_l_k@t-online.de)
-Received: from fwd76.aul.t-online.de (fwd76.aul.t-online.de [10.223.144.102])
-	by mailout08.t-online.de (Postfix) with SMTP id 6DD0818316
-	for <openembedded-devel@lists.openembedded.org>; Sun, 12 May 2024 13:52:49 +0200 (CEST)
-Received: from [192.168.178.67] ([84.163.32.90]) by fwd76.t-online.de
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.17, mailfrom: f_l_k@t-online.de)
+Received: from fwd87.aul.t-online.de (fwd87.aul.t-online.de [10.223.144.113])
+	by mailout02.t-online.de (Postfix) with SMTP id B8FEC11D00
+	for <openembedded-devel@lists.openembedded.org>; Sun, 12 May 2024 14:47:09 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.163.32.90]) by fwd87.t-online.de
 	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1s67l1-0rN8YC0; Sun, 12 May 2024 13:52:47 +0200
-Date: Sun, 12 May 2024 13:53:19 +0200
+	esmtp id 1s68bc-0phT730; Sun, 12 May 2024 14:47:08 +0200
 From: Markus Volk <f_l_k@t-online.de>
-Subject: Re: [oe] [meta-oe][PATCHv4] malcontent: add recipe
 To: openembedded-devel@lists.openembedded.org
-Message-Id: <VOFDDS.YCLQ7HLIMQ9W@t-online.de>
-In-Reply-To: <17CEBB8BE93D8361.21609@lists.openembedded.org>
-References: <17CEBB8BE93D8361.21609@lists.openembedded.org>
-X-Mailer: geary/44.1
+Subject: [meta-oe][PATCHv5] malcontent: add recipe
+Date: Sun, 12 May 2024 14:47:43 +0200
+Message-ID: <20240512124743.15379-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-B1qowklhSRuydNSNBXS1"
-X-TOI-EXPURGATEID: 150726::1715514767-A540BED6-C0C8369A/0/0 CLEAN NORMAL
-X-TOI-MSGID: 98a12737-f62f-4768-8f2d-e990de902cdd
+X-TOI-EXPURGATEID: 150726::1715518028-22DBFE88-E46243A1/0/0 CLEAN NORMAL
+X-TOI-MSGID: b9f37b09-fa40-478e-b131-b13a65ebeb44
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 12 May 2024 11:52:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110321
+ <openembedded-devel@lists.openembedded.org>; Sun, 12 May 2024 12:47:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110322
 
---=-B1qowklhSRuydNSNBXS1
-Content-Type: text/plain; charset=us-ascii; format=flowed
+malcontent is an optional dependency for flatpak and gnome-software
 
-v4 adds gobject-introspection to required distrofeatures for 
-malcontent-ui
-
-On Sun, May 12 2024 at 01:52:26 PM +02:00:00, Markus Volk 
-<f_l_k@t-online.de> wrote:
-> malcontent is an optional dependency for flatpak and gnome-software
-> 
-> - Building the malcontent gtk4-ui leads to circular dependency 
-> malcontent <-> flatpak
->   Add a separate package for malcontent-ui to avoid this and to make 
-> malcontent-control
->   buildable.
-> 
-> Signed-off-by: Markus Volk <f_l_k@t-online.de 
-> <mailto:f_l_k@t-online.de>>
-> ---
->  .../malcontent/malcontent-ui_0.12.0.bb        | 49 
-> +++++++++++++++++++
->  .../malcontent/malcontent_0.12.0.bb           | 41 ++++++++++++++++
->  2 files changed, 90 insertions(+)
->  create mode 100644 
-> meta-oe/recipes-gnome/malcontent/malcontent-ui_0.12.0.bb
->  create mode 100644 
-> meta-oe/recipes-gnome/malcontent/malcontent_0.12.0.bb
-> 
-> diff --git a/meta-oe/recipes-gnome/malcontent/malcontent-ui_0.12.0.bb 
-> b/meta-oe/recipes-gnome/malcontent/malcontent-ui_0.12.0.bb
-> new file mode 100644
-> index 000000000..effd181b1
-> --- /dev/null
-> +++ b/meta-oe/recipes-gnome/malcontent/malcontent-ui_0.12.0.bb
-> @@ -0,0 +1,49 @@
-> +SUMMARY = "User-Interface for malcontent."
-> +HOMEPAGE = "<https://gitlab.freedesktop.org/pwithnall/malcontent>"
-> +LICENSE = "LGPL-2.1-only"
-> +LIC_FILES_CHKSUM = 
-> "file://COPYING;md5=4fbd65380cdd255951079008b364516c" 
-> <file://copying;md5=4fbd65380cdd255951079008b364516c/>
-> +
-> +SRC_URI = 
-> "git://gitlab.freedesktop.org/pwithnall/malcontent.git;protocol=https;branch=main"
-> +
-> +S = "${WORKDIR}/git"
-> +SRCREV = "3ba80995bb25b7aeda7e21d547f9e39ff9a81736"
-> +
-> +DEPENDS = " \
-> +	accountsservice \
-> +	glib-2.0 \
-> +	glib-testing \
-> +	dbus \
-> +	desktop-file-utils-native \
-> +	itstool-native \
-> +	libpam \
-> +	malcontent \
-> +	polkit \
-> +	appstream \
-> +	flatpak \
-> +	libadwaita \
-> +	gtk4 \
-> +"
-> +
-> +GIR_MESON_OPTION = ""GTKIC_VERSION = "4"
-> +inherit  meson pkgconfig gtk-icon-cache gobject-introspection 
-> gettext features_check
-> +
-> +REQUIRED_DISTRO_FEATURES = "pam polkit gobject-introspection"
-> +
-> +EXTRA_OEMESON = "-Dui=enabled"
-> +
-> +do_install() {
-> +	install -d ${D}${datadir}/gir-1.0 ${D}${libdir}/girepository-1.0 
-> ${D}${bindir}
-> +	install -d ${D}${datadir}/polkit-1/actions ${D}${datadir}/metainfo 
-> ${D}${datadir}/applications
-> +	install -m 0644 ${B}/libmalcontent-ui/MalcontentUi-1.gir 
-> ${D}${datadir}/gir-1.0
-> +	install -m 0644 ${B}/libmalcontent-ui/MalcontentUi-1.typelib 
-> ${D}${libdir}/girepository-1.0
-> +	ln -sf libmalcontent-ui-1.so.1 ${D}${libdir}/libmalcontent-ui-1.so
-> +	install -m 0644 ${B}/libmalcontent-ui/libmalcontent-ui-1.so.1 
-> ${D}${libdir}
-> +	install -m 0644 ${B}/libmalcontent-ui/libmalcontent-ui-1.so.0.12.0 
-> ${D}${libdir}
-> +	install -m 0755 ${B}/malcontent-control/malcontent-control 
-> ${D}${bindir}
-> +	install -m 0644 
-> ${B}/malcontent-control/org.freedesktop.MalcontentControl.policy 
-> ${D}${datadir}/polkit-1/actions
-> +	install -m 0644 
-> ${B}/malcontent-control/org.freedesktop.MalcontentControl.appdata.xml 
-> ${D}${datadir}/metainfo
-> +	install -m 0644 
-> ${B}/malcontent-control/org.freedesktop.MalcontentControl.desktop 
-> ${D}${datadir}/applications
-> +}
-> +
-> +FILES:${PN} = "${bindir} ${libdir} ${datadir}"
-> +
-> diff --git a/meta-oe/recipes-gnome/malcontent/malcontent_0.12.0.bb 
-> b/meta-oe/recipes-gnome/malcontent/malcontent_0.12.0.bb
-> new file mode 100644
-> index 000000000..416751423
-> --- /dev/null
-> +++ b/meta-oe/recipes-gnome/malcontent/malcontent_0.12.0.bb
-> @@ -0,0 +1,41 @@
-> +SUMMARY = "malcontent implements support for restricting the type of 
-> content."
-> +HOMEPAGE = "<https://gitlab.freedesktop.org/pwithnall/malcontent>"
-> +LICENSE = "LGPL-2.1-only"
-> +LIC_FILES_CHKSUM = 
-> "file://COPYING;md5=4fbd65380cdd255951079008b364516c" 
-> <file://copying;md5=4fbd65380cdd255951079008b364516c/>
-> +
-> +SRC_URI = 
-> "git://gitlab.freedesktop.org/pwithnall/malcontent.git;protocol=https;branch=main"
-> +
-> +S = "${WORKDIR}/git"
-> +SRCREV = "3ba80995bb25b7aeda7e21d547f9e39ff9a81736"
-> +
-> +DEPENDS = " \
-> +	accountsservice \
-> +	glib-2.0 \
-> +	glib-testing \
-> +	dbus \
-> +	itstool-native \
-> +	libpam \
-> +	polkit \
-> +"
-> +
-> +GIR_MESON_OPTION = ""
-> +
-> +inherit  meson pkgconfig gobject-introspection gettext 
-> features_check useradd
-> +
-> +REQUIRED_DISTRO_FEATURES = "pam polkit gobject-introspection"
-> +
-> +PACKAGECONFIG ?= "ui"
-> +PACKAGECONFIG[ui] = ",,,malcontent-ui"
-> +
-> +EXTRA_OEMESON = "-Dui=disabled"
-> +
-> +USERADD_PACKAGES = "${PN}"
-> +USERADD_PARAM:${PN} = "--system --no-create-home --user-group 
-> --home-dir ${sysconfdir}/polkit-1 --shell /bin/nologin polkitd"
-> +
-> +do_install:append() {
-> +        # Fix up permissions on polkit rules.d to work with rpm4 
-> constraints
-> +        chmod 700 ${D}/${datadir}/polkit-1/rules.d
-> +        chown polkitd:root ${D}/${datadir}/polkit-1/rules.d
-> +}
-> +
-> +FILES:${PN} += "${libdir} ${datadir}"
-> --
-> 2.44.0
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#110320): 
-> <https://lists.openembedded.org/g/openembedded-devel/message/110320>
-> Mute This Topic: <https://lists.openembedded.org/mt/106053575/3618223>
-> Group Owner: openembedded-devel+owner@lists.openembedded.org 
-> <mailto:openembedded-devel+owner@lists.openembedded.org>
-> Unsubscribe: 
-> <https://lists.openembedded.org/g/openembedded-devel/unsub> 
-> [f_l_k@t-online.de <mailto:f_l_k@t-online.de>]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
-
-
---=-B1qowklhSRuydNSNBXS1
-Content-Type: text/html; charset=us-ascii
-
-<div id="geary-body" dir="auto"><div>v4 adds gobject-introspection to required distrofeatures for malcontent-ui</div></div><div id="geary-quote" dir="auto"><br>On Sun, May 12 2024 at 01:52:26 PM +02:00:00, Markus Volk &lt;f_l_k@t-online.de&gt; wrote:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">malcontent is an optional dependency for flatpak and gnome-software
-
-- Building the malcontent gtk4-ui leads to circular dependency malcontent &lt;-&gt; flatpak
-  Add a separate package for malcontent-ui to avoid this and to make malcontent-control
+- Building the malcontent gtk4-ui leads to circular dependency malcontent=
+ <-> flatpak
+  Add a separate package for malcontent-ui to avoid this and to make malc=
+ontent-control
   buildable.
 
-Signed-off-by: Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
 ---
- .../malcontent/malcontent-ui_0.12.0.bb        | 49 +++++++++++++++++++
- .../malcontent/malcontent_0.12.0.bb           | 41 ++++++++++++++++
- 2 files changed, 90 insertions(+)
- create mode 100644 meta-oe/recipes-gnome/malcontent/malcontent-ui_0.12.0.bb
+ .../malcontent/malcontent-ui_0.12.0.bb        | 50 +++++++++++++++++++
+ .../malcontent/malcontent_0.12.0.bb           | 41 +++++++++++++++
+ 2 files changed, 91 insertions(+)
+ create mode 100644 meta-oe/recipes-gnome/malcontent/malcontent-ui_0.12.0=
+.bb
  create mode 100644 meta-oe/recipes-gnome/malcontent/malcontent_0.12.0.bb
 
-diff --git a/meta-oe/recipes-gnome/malcontent/malcontent-ui_0.12.0.bb b/meta-oe/recipes-gnome/malcontent/malcontent-ui_0.12.0.bb
+diff --git a/meta-oe/recipes-gnome/malcontent/malcontent-ui_0.12.0.bb b/m=
+eta-oe/recipes-gnome/malcontent/malcontent-ui_0.12.0.bb
 new file mode 100644
-index 000000000..effd181b1
+index 000000000..4ff16a82d
 --- /dev/null
 +++ b/meta-oe/recipes-gnome/malcontent/malcontent-ui_0.12.0.bb
-@@ -0,0 +1,49 @@
-+SUMMARY = "User-Interface for malcontent."
-+HOMEPAGE = "<a href="https://gitlab.freedesktop.org/pwithnall/malcontent">https://gitlab.freedesktop.org/pwithnall/malcontent</a>"
-+LICENSE = "LGPL-2.1-only"
-+LIC_FILES_CHKSUM = "<a href="file://COPYING;md5=4fbd65380cdd255951079008b364516c" "="">file://COPYING;md5=4fbd65380cdd255951079008b364516c"</a>
+@@ -0,0 +1,50 @@
++SUMMARY =3D "User-Interface for malcontent."
++HOMEPAGE =3D "https://gitlab.freedesktop.org/pwithnall/malcontent"
++LICENSE =3D "LGPL-2.1-only"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd255951079008b3645=
+16c"
 +
-+SRC_URI = "git://gitlab.freedesktop.org/pwithnall/malcontent.git;protocol=https;branch=main"
++SRC_URI =3D "git://gitlab.freedesktop.org/pwithnall/malcontent.git;proto=
+col=3Dhttps;branch=3Dmain"
 +
-+S = "${WORKDIR}/git"
-+SRCREV = "3ba80995bb25b7aeda7e21d547f9e39ff9a81736"
++S =3D "${WORKDIR}/git"
++SRCREV =3D "3ba80995bb25b7aeda7e21d547f9e39ff9a81736"
 +
-+DEPENDS = " \
++DEPENDS =3D " \
 +	accountsservice \
 +	glib-2.0 \
 +	glib-testing \
@@ -249,7 +76,6 @@ index 000000000..effd181b1
 +	desktop-file-utils-native \
 +	itstool-native \
 +	libpam \
-+	malcontent \
 +	polkit \
 +	appstream \
 +	flatpak \
@@ -257,46 +83,63 @@ index 000000000..effd181b1
 +	gtk4 \
 +"
 +
-+GIR_MESON_OPTION = ""GTKIC_VERSION = "4"
-+inherit  meson pkgconfig gtk-icon-cache gobject-introspection gettext features_check
++GIR_MESON_OPTION =3D ""
 +
-+REQUIRED_DISTRO_FEATURES = "pam polkit gobject-introspection"
++GTKIC_VERSION =3D "4"
++inherit  meson pkgconfig gtk-icon-cache gobject-introspection gettext fe=
+atures_check
 +
-+EXTRA_OEMESON = "-Dui=enabled"
++REQUIRED_DISTRO_FEATURES =3D "pam polkit gobject-introspection"
++
++EXTRA_OEMESON =3D "-Dui=3Denabled"
 +
 +do_install() {
-+	install -d ${D}${datadir}/gir-1.0 ${D}${libdir}/girepository-1.0 ${D}${bindir}
-+	install -d ${D}${datadir}/polkit-1/actions ${D}${datadir}/metainfo ${D}${datadir}/applications
-+	install -m 0644 ${B}/libmalcontent-ui/MalcontentUi-1.gir ${D}${datadir}/gir-1.0
-+	install -m 0644 ${B}/libmalcontent-ui/MalcontentUi-1.typelib ${D}${libdir}/girepository-1.0
++	install -d ${D}${datadir}/gir-1.0 ${D}${libdir}/girepository-1.0 ${D}${=
+bindir}
++	install -d ${D}${datadir}/polkit-1/actions ${D}${datadir}/metainfo ${D}=
+${datadir}/applications
++	install -m 0644 ${B}/libmalcontent-ui/MalcontentUi-1.gir ${D}${datadir}=
+/gir-1.0
++	install -m 0644 ${B}/libmalcontent-ui/MalcontentUi-1.typelib ${D}${libd=
+ir}/girepository-1.0
 +	ln -sf libmalcontent-ui-1.so.1 ${D}${libdir}/libmalcontent-ui-1.so
-+	install -m 0644 ${B}/libmalcontent-ui/libmalcontent-ui-1.so.1 ${D}${libdir}
-+	install -m 0644 ${B}/libmalcontent-ui/libmalcontent-ui-1.so.0.12.0 ${D}${libdir}
-+	install -m 0755 ${B}/malcontent-control/malcontent-control ${D}${bindir}
-+	install -m 0644 ${B}/malcontent-control/org.freedesktop.MalcontentControl.policy ${D}${datadir}/polkit-1/actions
-+	install -m 0644 ${B}/malcontent-control/org.freedesktop.MalcontentControl.appdata.xml ${D}${datadir}/metainfo
-+	install -m 0644 ${B}/malcontent-control/org.freedesktop.MalcontentControl.desktop ${D}${datadir}/applications
++	install -m 0644 ${B}/libmalcontent-ui/libmalcontent-ui-1.so.1 ${D}${lib=
+dir}
++	install -m 0644 ${B}/libmalcontent-ui/libmalcontent-ui-1.so.0.12.0 ${D}=
+${libdir}
++	install -m 0755 ${B}/malcontent-control/malcontent-control ${D}${bindir=
+}
++	install -m 0644 ${B}/malcontent-control/org.freedesktop.MalcontentContr=
+ol.policy ${D}${datadir}/polkit-1/actions
++	install -m 0644 ${B}/malcontent-control/org.freedesktop.MalcontentContr=
+ol.appdata.xml ${D}${datadir}/metainfo
++	install -m 0644 ${B}/malcontent-control/org.freedesktop.MalcontentContr=
+ol.desktop ${D}${datadir}/applications
 +}
 +
-+FILES:${PN} = "${bindir} ${libdir} ${datadir}"
++FILES:${PN} =3D "${bindir} ${libdir} ${datadir}"
 +
-diff --git a/meta-oe/recipes-gnome/malcontent/malcontent_0.12.0.bb b/meta-oe/recipes-gnome/malcontent/malcontent_0.12.0.bb
+diff --git a/meta-oe/recipes-gnome/malcontent/malcontent_0.12.0.bb b/meta=
+-oe/recipes-gnome/malcontent/malcontent_0.12.0.bb
 new file mode 100644
 index 000000000..416751423
 --- /dev/null
 +++ b/meta-oe/recipes-gnome/malcontent/malcontent_0.12.0.bb
 @@ -0,0 +1,41 @@
-+SUMMARY = "malcontent implements support for restricting the type of content."
-+HOMEPAGE = "<a href="https://gitlab.freedesktop.org/pwithnall/malcontent">https://gitlab.freedesktop.org/pwithnall/malcontent</a>"
-+LICENSE = "LGPL-2.1-only"
-+LIC_FILES_CHKSUM = "<a href="file://COPYING;md5=4fbd65380cdd255951079008b364516c" "="">file://COPYING;md5=4fbd65380cdd255951079008b364516c"</a>
++SUMMARY =3D "malcontent implements support for restricting the type of c=
+ontent."
++HOMEPAGE =3D "https://gitlab.freedesktop.org/pwithnall/malcontent"
++LICENSE =3D "LGPL-2.1-only"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd255951079008b3645=
+16c"
 +
-+SRC_URI = "git://gitlab.freedesktop.org/pwithnall/malcontent.git;protocol=https;branch=main"
++SRC_URI =3D "git://gitlab.freedesktop.org/pwithnall/malcontent.git;proto=
+col=3Dhttps;branch=3Dmain"
 +
-+S = "${WORKDIR}/git"
-+SRCREV = "3ba80995bb25b7aeda7e21d547f9e39ff9a81736"
++S =3D "${WORKDIR}/git"
++SRCREV =3D "3ba80995bb25b7aeda7e21d547f9e39ff9a81736"
 +
-+DEPENDS = " \
++DEPENDS =3D " \
 +	accountsservice \
 +	glib-2.0 \
 +	glib-testing \
@@ -306,40 +149,31 @@ index 000000000..416751423
 +	polkit \
 +"
 +
-+GIR_MESON_OPTION = ""
++GIR_MESON_OPTION =3D ""
 +
-+inherit  meson pkgconfig gobject-introspection gettext features_check useradd
++inherit  meson pkgconfig gobject-introspection gettext features_check us=
+eradd
 +
-+REQUIRED_DISTRO_FEATURES = "pam polkit gobject-introspection"
++REQUIRED_DISTRO_FEATURES =3D "pam polkit gobject-introspection"
 +
-+PACKAGECONFIG ?= "ui"
-+PACKAGECONFIG[ui] = ",,,malcontent-ui"
++PACKAGECONFIG ?=3D "ui"
++PACKAGECONFIG[ui] =3D ",,,malcontent-ui"
 +
-+EXTRA_OEMESON = "-Dui=disabled"
++EXTRA_OEMESON =3D "-Dui=3Ddisabled"
 +
-+USERADD_PACKAGES = "${PN}"
-+USERADD_PARAM:${PN} = "--system --no-create-home --user-group --home-dir ${sysconfdir}/polkit-1 --shell /bin/nologin polkitd"
++USERADD_PACKAGES =3D "${PN}"
++USERADD_PARAM:${PN} =3D "--system --no-create-home --user-group --home-d=
+ir ${sysconfdir}/polkit-1 --shell /bin/nologin polkitd"
 +
 +do_install:append() {
-+        # Fix up permissions on polkit rules.d to work with rpm4 constraints
++        # Fix up permissions on polkit rules.d to work with rpm4 constra=
+ints
 +        chmod 700 ${D}/${datadir}/polkit-1/rules.d
 +        chown polkitd:root ${D}/${datadir}/polkit-1/rules.d
 +}
 +
-+FILES:${PN} += "${libdir} ${datadir}"
-<div>-- 
-</div>2.44.0
-
-</div><div class="plaintext" style="white-space: break-spaces;">
--=-=-=-=-=-=-=-=-=-=-=-
-Links: You receive all messages sent to this group.
-View/Reply Online (#110320): <a href="https://lists.openembedded.org/g/openembedded-devel/message/110320">https://lists.openembedded.org/g/openembedded-devel/message/110320</a>
-Mute This Topic: <a href="https://lists.openembedded.org/mt/106053575/3618223">https://lists.openembedded.org/mt/106053575/3618223</a>
-Group Owner: <a href="mailto:openembedded-devel+owner@lists.openembedded.org">openembedded-devel+owner@lists.openembedded.org</a>
-Unsubscribe: <a href="https://lists.openembedded.org/g/openembedded-devel/unsub">https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>]
--=-=-=-=-=-=-=-=-=-=-=-
-
-</div></blockquote></div>
---=-B1qowklhSRuydNSNBXS1--
++FILES:${PN} +=3D "${libdir} ${datadir}"
+--=20
+2.44.0
 
 
