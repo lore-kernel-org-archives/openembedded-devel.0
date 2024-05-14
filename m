@@ -1,115 +1,220 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A8046C27C4E
-	for <webhook@archiver.kernel.org>; Tue, 14 May 2024 09:10:52 +0000 (UTC)
-Received: from esa4.hc1455-7.c3s2.iphmx.com (esa4.hc1455-7.c3s2.iphmx.com [68.232.139.117])
- by mx.groups.io with SMTP id smtpd.web10.10792.1715677842681277931
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 90748C04FFE
+	for <webhook@archiver.kernel.org>; Tue, 14 May 2024 11:44:23 +0000 (UTC)
+Received: from mail-oi1-f179.google.com (mail-oi1-f179.google.com [209.85.167.179])
+ by mx.groups.io with SMTP id smtpd.web10.13199.1715687053309210554
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 May 2024 02:10:43 -0700
+ Tue, 14 May 2024 04:44:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=Y5aQnH0T;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.117, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1715677842; x=1747213842;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references;
-  bh=gI50WhTDeXZcgV+xG2H0Lyp1UPQAxsb61+J0mGY5nIA=;
-  b=Y5aQnH0Tuebr34npJ2IEtDhOkqTg9TbE4oYZZVCeT+Xl7+dD6rlHhtzK
-   8cDpNoGud6KtHtSnSnWXjA51dKg+NXK90PWzXmIDPILSHBpGNiC0ttBLz
-   TCpS85Sbqkv6FBp2mm4huPbIir5amzyCQzG/WqkGAChteR+xknQazaVse
-   q07HciBFfjRcPVrNuYkqAdmLYvEMPryQ9FKeqpFNh5NVeES0TzGrYuE6n
-   8ZQB7wLlcsYYl5obRb+4KXZAVG6P7jDxRBxnRqOhJd5LPZaBWxhJ3Xceo
-   Cqg77el938chUN6LdJUFYIaZiIOhNYrkeiIt/2vXXxtDgrGHsJT01mADs
-   g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,11072"; a="158534874"
-X-IronPort-AV: E=Sophos;i="6.08,159,1712588400"; 
-   d="scan'208";a="158534874"
-Received: from unknown (HELO oym-r2.gw.nic.fujitsu.com) ([210.162.30.90])
-  by esa4.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 May 2024 18:10:39 +0900
-Received: from oym-m2.gw.nic.fujitsu.com (oym-nat-oym-m2.gw.nic.fujitsu.com [192.168.87.59])
-	by oym-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 90A3EDC144
-	for <openembedded-devel@lists.openembedded.org>; Tue, 14 May 2024 18:10:37 +0900 (JST)
-Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
-	by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 82078BF4A9
-	for <openembedded-devel@lists.openembedded.org>; Tue, 14 May 2024 18:10:31 +0900 (JST)
-Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 11C0970BFE
-	for <openembedded-devel@lists.openembedded.org>; Tue, 14 May 2024 18:10:31 +0900 (JST)
-Received: from vm4860.g01.fujitsu.local (unknown [10.193.161.161])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id B2E341A000C;
-	Tue, 14 May 2024 17:10:30 +0800 (CST)
-From: wangmy@fujitsu.com
-To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 19/44] python3-django: upgrade 5.0.4 -> 5.0.6
-Date: Tue, 14 May 2024 17:09:52 +0800
-Message-Id: <1715677817-2223-19-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1715677817-2223-1-git-send-email-wangmy@fujitsu.com>
-References: <1715677817-2223-1-git-send-email-wangmy@fujitsu.com>
-X-TM-AS-GCONF: 00
-X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28384.006
-X-TM-AS-User-Approved-Sender: Yes
-X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28384.006
-X-TMASE-Result: 10--1.359600-10.000000
-X-TMASE-MatchedRID: /gZnudouedqjz0nOeth/yUIIxwDaU5mrrOCEGIPhtwgDezsyoVAx0qF3
-	5mbpOvU8NlKrnI9GBJ/YJntPQVVxFJwsaabgZtY0+s0+QZYAcN8WUg/hm489yNfVxEPp7g/kCmL
-	ENVLWzfdYkE8hEisGyEvQhHUGJX4N7VrXqiqnwHX8dMpK2wMYwkc1DwKoQo7YiPJyaz6JjGKem2
-	vw+cenKeLzNWBegCW2wgn7iDBesS0nRE+fI6etkhu00ydz04Hl0myLo7E86LFLuHYS1G+9YgGVp
-	hK/CBQxVV03EHwWXeOZB60iq3KiZ+naiCB9uhQpEEZI8Yv2BArw8sm+tjywHEu/kTKv9giuqwOH
-	O1Fdn0Kb4tj0DvxRUIs9ro6z1cfchCFNTbTJJtE=
-X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=fX2nwgG0;
+ spf=pass (domain: gmail.com, ip: 209.85.167.179, mailfrom: akuster808@gmail.com)
+Received: by mail-oi1-f179.google.com with SMTP id 5614622812f47-3c9936cb7a8so2529366b6e.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 14 May 2024 04:44:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1715687052; x=1716291852; darn=lists.openembedded.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=Yp++Ak0AIxzqJXF0H8g7eUch1EdwQxglSKLbZdgfAQE=;
+        b=fX2nwgG0tdCFgREFB6QGo6yuxPyVPml3OmCA7wlmUPDCjnBsINn+AP+4bzi5dky5+M
+         FZz3xmQZR3zm8AuyF9rz84DuhHQnm/NnPAEEHJFIdz+lzzSODD4V9zgy+XTgz+50I5e0
+         Qi80zhS+pZopEVXBqlBoNvWhImY55YqaBdWHHBY5laJe4tnjC7sISHv4RC2RKixNnLc0
+         l2AGoctG9c2NmYLEN7mCaFXMlDEB9Rvd9nuNOEY0tK8WRauX6YfNbZr2jN7KiEMxctZu
+         upahaQoE/f3IJj4i4d82bmEUwXpSDxLTpWozvbino4zslU572Z0QZhLD5w3xk+L4tC18
+         ygDw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1715687052; x=1716291852;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from
+         :content-language:references:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Yp++Ak0AIxzqJXF0H8g7eUch1EdwQxglSKLbZdgfAQE=;
+        b=qDAYl9bzu1o2prfXPCWZzC7IUBfI5RQi7DlT0V4TdEYjDSJsdJiRo1rM7Xnz2WI8a5
+         SpnvHpwfjPJXfhiny6jgb2+tbpLGI6lsXZAj72F9L1tOdoT4VaXFdmLuR/YbUbXZotgo
+         wzw1MU0R3U8gSMtvaM/osAhZHOgG+YhSh4te26pDz3Gnn8kXVbCqEcA4MfT1bbEb3pWi
+         g12r/RVFjuzefyyDFbJ2PqT3CzwRP0lKAbso+i6aJVMGkla7tuAtjPm3ErHzhvqjksC3
+         1aP4TTnXrYJhfz6Iq/KkaQsft6LwlTopweLRcQc287fJ5eZNgRFMagjE/fs9IzOsZAgZ
+         wwIA==
+X-Forwarded-Encrypted: i=1; AJvYcCUcUVVdn9xBY+oLveg3XI3WtaoPoykxy3HPjFu7Tyf+SyuIZc7qSdHpPcoHrTv20cDfOmuBqQ8xTPFhez/4wwHVnYt+r+NmsLE6h5VVaV3hg7TuVviH37RI+A==
+X-Gm-Message-State: AOJu0YyI7EtfAtn/3fxOPIuhlwqPGoRA0v1LqzzR8360sAslVs2IDu8H
+	7nj3kzsuAiOIqMGw1WWKiNeBezwFk2+Co4pNo/0wtVUiajE87/jXw11qWA==
+X-Google-Smtp-Source: AGHT+IHbkLit6P++sqdSRNItekoA4VUXB7HquoZwdHED4JLKA942YppnlLkE0tDTO53T5OYg56L1Yg==
+X-Received: by 2002:a05:6808:2186:b0:3c9:66bf:870a with SMTP id 5614622812f47-3c9970b9c13mr15734163b6e.46.1715687052423;
+        Tue, 14 May 2024 04:44:12 -0700 (PDT)
+Received: from ?IPV6:2600:1700:45dd:7000:6fe3:6698:9ae1:494a? ([2600:1700:45dd:7000:6fe3:6698:9ae1:494a])
+        by smtp.gmail.com with ESMTPSA id 5614622812f47-3c9938915e5sm1666419b6e.52.2024.05.14.04.44.11
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 14 May 2024 04:44:11 -0700 (PDT)
+Message-ID: <4d9f62b3-747f-4d43-ab1f-17b50cf60d75@gmail.com>
+Date: Tue, 14 May 2024 07:44:11 -0400
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [meta-oe][kirkstone][PATCH V1] ITS#10094 libldap/OpenSSL:
+ fix setting ciphersuites
+To: pdoshi@mvista.com, openembedded-devel@lists.openembedded.org
+References: <1715602845-8547-1-git-send-email-pdoshi@mvista.com>
+Content-Language: en-US
+From: akuster808 <akuster808@gmail.com>
+Autocrypt: addr=akuster808@gmail.com; keydata=
+ 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
+ ApZ86eOP
+In-Reply-To: <1715602845-8547-1-git-send-email-pdoshi@mvista.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 14 May 2024 09:10:52 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110380
+ <openembedded-devel@lists.openembedded.org>; Tue, 14 May 2024 11:44:23 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110392
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+Priyal,
 
-Changelog:
-=============
-- Fixed a bug in Django 5.0 that caused a crash of Model.save() when creating an
-  instance of a model with a GeneratedField and providing a primary key
-- Fixed a compatibility issue encountered in Python 3.11.9+ and 3.12.3+ when
-  validating email max line lengths with content decoded using the
-  surrogateescape error handling scheme
-- Fixed a bug in Django 5.0 that caused a crash when applying migrations
-  including alterations to GeneratedField such as setting db_index=True on SQLite
-- Allowed importing aprefetch_related_objects from django.db.models
-- Fixed a bug in Django 5.0 that caused a migration crash when a GeneratedField
-  was added before any of the referenced fields from its expression definition
-- Fixed a bug in Django 5.0 that caused a migration crash when altering a
-  GeneratedField referencing a renamed field
-- Fixed a bug in Django 5.0 where the querysets argument of GenericPrefetch was
-  not required
+What versions of openldap does this affect? Do we need this in other 
+branches like master or scarthgap?
 
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
----
- .../python/{python3-django_5.0.4.bb => python3-django_5.0.6.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-django_5.0.4.bb => python3-django_5.0.6.bb} (56%)
+- armin
 
-diff --git a/meta-python/recipes-devtools/python/python3-django_5.0.4.bb b/meta-python/recipes-devtools/python/python3-django_5.0.6.bb
-similarity index 56%
-rename from meta-python/recipes-devtools/python/python3-django_5.0.4.bb
-rename to meta-python/recipes-devtools/python/python3-django_5.0.6.bb
-index 3139ed468..69b25742d 100644
---- a/meta-python/recipes-devtools/python/python3-django_5.0.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-django_5.0.6.bb
-@@ -1,7 +1,7 @@
- require python-django.inc
- inherit setuptools3
- 
--SRC_URI[sha256sum] = "4bd01a8c830bb77a8a3b0e7d8b25b887e536ad17a81ba2dce5476135c73312bd"
-+SRC_URI[sha256sum] = "ff1b61005004e476e0aeea47c7f79b85864c70124030e95146315396f1e7951f"
- 
- RDEPENDS:${PN} += "\
-     python3-sqlparse \
--- 
-2.34.1
+On 5/13/24 8:20 AM, Priyal Doshi via lists.openembedded.org wrote:
+> From: Priyal Doshi <pdoshi@mvista.com>
+>
+> Backport-from: https://git.openldap.org/openldap/openldap/-/merge_requests/654/diffs?commit_id=8c482cec9a68e74b3609b1e44738bee352f6577a
+>
+> Signed-off-by: Priyal Doshi <pdoshi@mvista.com>
+> ---
+>   ...-libldap-OpenSSL-fix-setting-ciphersuites.patch | 69 ++++++++++++++++++++++
+>   .../recipes-support/openldap/openldap_2.5.16.bb    |  1 +
+>   2 files changed, 70 insertions(+)
+>   create mode 100644 meta-oe/recipes-support/openldap/openldap/0001-ITS-10094-libldap-OpenSSL-fix-setting-ciphersuites.patch
+>
+> diff --git a/meta-oe/recipes-support/openldap/openldap/0001-ITS-10094-libldap-OpenSSL-fix-setting-ciphersuites.patch b/meta-oe/recipes-support/openldap/openldap/0001-ITS-10094-libldap-OpenSSL-fix-setting-ciphersuites.patch
+> new file mode 100644
+> index 0000000..211dbe9
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/openldap/openldap/0001-ITS-10094-libldap-OpenSSL-fix-setting-ciphersuites.patch
+> @@ -0,0 +1,69 @@
+> +From 7cee69298857e2393799780ee472dfe0a378ee2d Mon Sep 17 00:00:00 2001
+> +From: Howard Chu <hyc@openldap.org>
+> +Date: Thu, 12 Oct 2023 17:22:48 +0100
+> +Subject: [PATCH] ITS#10094 libldap/OpenSSL: fix setting ciphersuites
+> +
+> +Don't try old-style ciphersuite list if only v1.3 or newer ciphers were specified
+> +
+> +Upstream-Status: Backport from https://git.openldap.org/openldap/openldap/-/merge_requests/654/diffs?commit_id=8c482cec9a68e74b3609b1e44738bee352f6577a
+> +
+> +Signed-off-by: Priyal Doshi <pdoshi@mvista.com>
+> +---
+> + libraries/libldap/tls_o.c | 16 +++++++++++++---
+> + 1 file changed, 13 insertions(+), 3 deletions(-)
+> +
+> +diff --git a/libraries/libldap/tls_o.c b/libraries/libldap/tls_o.c
+> +index d6405bc..4123a9b 100644
+> +--- a/libraries/libldap/tls_o.c
+> ++++ b/libraries/libldap/tls_o.c
+> +@@ -294,7 +294,7 @@ tlso_stecpy( char *dst, const char *src, const char *end )
+> +  * Try to find any TLS1.3 ciphers in the given list of suites.
+> +  */
+> + static void
+> +-tlso_ctx_cipher13( tlso_ctx *ctx, char *suites )
+> ++tlso_ctx_cipher13( tlso_ctx *ctx, char *suites, char **oldsuites )
+> + {
+> + 	char tls13_suites[1024], *ts = tls13_suites, *te = tls13_suites + sizeof(tls13_suites);
+> + 	char *ptr, *colon, *nptr;
+> +@@ -303,6 +303,8 @@ tlso_ctx_cipher13( tlso_ctx *ctx, char *suites )
+> + 	SSL *s = SSL_new( ctx );
+> + 	int ret;
+> +
+> ++	*oldsuites = NULL;
+> ++
+> + 	if ( !s )
+> + 		return;
+> +
+> +@@ -334,8 +336,15 @@ tlso_ctx_cipher13( tlso_ctx *ctx, char *suites )
+> + 					if ( tls13_suites[0] )
+> + 						ts = tlso_stecpy( ts, ":", te );
+> + 					ts = tlso_stecpy( ts, nptr, te );
+> ++				} else if (! *oldsuites) {
+> ++					/* should never happen, set_ciphersuites should
+> ++					 * only succeed for TLSv1.3 and above
+> ++					 */
+> ++					*oldsuites = ptr;
+> + 				}
+> + 			}
+> ++		} else if (! *oldsuites) {
+> ++			*oldsuites = ptr;
+> + 		}
+> + 		if ( !colon || ts >= te )
+> + 			break;
+> +@@ -415,10 +424,11 @@ tlso_ctx_init( struct ldapoptions *lo, struct ldaptls *lt, int is_server )
+> + 	}
+> +
+> + 	if ( lo->ldo_tls_ciphersuite ) {
+> ++		char *oldsuites = lt->lt_ciphersuite;
+> + #if OPENSSL_VERSION_NUMBER >= 0x10101000
+> +-		tlso_ctx_cipher13( ctx, lt->lt_ciphersuite );
+> ++		tlso_ctx_cipher13( ctx, lt->lt_ciphersuite, &oldsuites );
+> + #endif
+> +-		if ( !SSL_CTX_set_cipher_list( ctx, lt->lt_ciphersuite ) )
+> ++		if ( oldsuites && !SSL_CTX_set_cipher_list( ctx, oldsuites ) )
+> + 		{
+> + 			Debug1( LDAP_DEBUG_ANY,
+> + 				   "TLS: could not set cipher list %s.\n",
+> +--
+> +2.34.1
+> +
+> diff --git a/meta-oe/recipes-support/openldap/openldap_2.5.16.bb b/meta-oe/recipes-support/openldap/openldap_2.5.16.bb
+> index 9e9d059..7e1c8fd 100644
+> --- a/meta-oe/recipes-support/openldap/openldap_2.5.16.bb
+> +++ b/meta-oe/recipes-support/openldap/openldap_2.5.16.bb
+> @@ -20,6 +20,7 @@ SRC_URI = "http://www.openldap.org/software/download/OpenLDAP/openldap-release/$
+>       file://slapd.service \
+>       file://remove-user-host-pwd-from-version.patch \
+>       file://0001-build-top.mk-unset-STRIP_OPTS.patch \
+> +    file://0001-ITS-10094-libldap-OpenSSL-fix-setting-ciphersuites.patch \
+>   "
+>   
+>   SRC_URI[sha256sum] = "546ba591822e8bb0e467d40c4d4a30f89d937c3a507fe83a578f582f6a211327"
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#110338): https://lists.openembedded.org/g/openembedded-devel/message/110338
+> Mute This Topic: https://lists.openembedded.org/mt/106071184/3616698
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [akuster808@gmail.com]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
 
 
