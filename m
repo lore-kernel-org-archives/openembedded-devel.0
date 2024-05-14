@@ -2,63 +2,63 @@ Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A14F9C04FFE
-	for <webhook@archiver.kernel.org>; Tue, 14 May 2024 15:48:24 +0000 (UTC)
-Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
- by mx.groups.io with SMTP id smtpd.web11.19443.1715701694311401386
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C68C3C04FFE
+	for <webhook@archiver.kernel.org>; Tue, 14 May 2024 15:50:14 +0000 (UTC)
+Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com [209.85.208.50])
+ by mx.groups.io with SMTP id smtpd.web10.19472.1715701805127671633
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 May 2024 08:48:14 -0700
+ Tue, 14 May 2024 08:50:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Jkh+C5TU;
- spf=pass (domain: gmail.com, ip: 209.85.218.42, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f42.google.com with SMTP id a640c23a62f3a-a59a352bbd9so55536266b.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 14 May 2024 08:48:14 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=cF6t0v2L;
+ spf=pass (domain: gmail.com, ip: 209.85.208.50, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ed1-f50.google.com with SMTP id 4fb4d7f45d1cf-572d2461001so382744a12.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 14 May 2024 08:50:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1715701693; x=1716306493; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1715701803; x=1716306603; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=myluoNQ+WtaxSN/tELtbmDnG3sXqtojnkr/qIEyH+gQ=;
-        b=Jkh+C5TUuBnI3rCv4lK7+2PUoHmn3Kurqf/SkedmfA35gIoOVgRK/14li7HuGGfAEk
-         UR4Gpa+If00duqHYb4VR9PEEMfM3gRTvaJejYW0FgiZahMICjvkOGW4X+I5u6QSyVa+0
-         uj5p0LJ1KzmGsHdrR+Hwp975vGFNP4mSUUG5EFw47U3B5lndt/HFyF2uFhN5J8SvOZ82
-         W1GZh4gbFXbCYy2IQ0U/GiQklsqX6n5GE4nKyrXt5RiwWHrJLUz5K4ZWBpNwUKlaKbBi
-         +/W3I9pMu5wW9OYQpfIENdCoKtvSi5xrsRiBV4PQxkokdNEhjYJCnLOeno9Tx+b8sQvQ
-         I1Uw==
+        bh=Gv+131uf/+zTE0wvk5WanILYGEeVB6wCC2mJCrbVRkE=;
+        b=cF6t0v2L1r5HkC39NhbJWp/2UVMk8UzYrxywcw+0nP9Gb7CsbHMJhFXWvtaVPuXE27
+         LHwj00p+p5c6/yoxxYE2GuQUeTbXcU89FxkfJxlysRJFle5Yn87VHQzhtncO7fyzHUzm
+         nj5SpoQHZ46w1nGWzr/Xr/9qUS6YDUtEQ2fQWVVxWqSRxpwnTg6OF5lVep5cG7HNX/X8
+         zZBi/0oyQW6i6ntFQ02udTtJMWLnu0AY2AdH0U493EuWxoOU1VonCrOe5CqIPdB19eEJ
+         iQZNoP4/zqY9uq+lpSiBeVaa0DMHNFSzIErGnGgpf670EtN0O86brkBX3KMXuTcRVbyv
+         +8oQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1715701693; x=1716306493;
+        d=1e100.net; s=20230601; t=1715701803; x=1716306603;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=myluoNQ+WtaxSN/tELtbmDnG3sXqtojnkr/qIEyH+gQ=;
-        b=gQrAmtRnb2NWmnA8amenS2bjPCp9FG+PmBJDZQzwSw3aEClEEwQeOMOJQIRu/UmrI4
-         Q6BbGORSyxRzAL9DEz31/Et96XcrRA5+rmBCw1Mm/Xpp7XA7bYj0MKawQ1ZLnKicvm3v
-         44AsLeec7Iax3+ik4tVK/2hLyzVF7BbYaV2lgGui6guyz2+8ubpE0pZnIoMVg0XgyCWE
-         sk/hKWA3oaAbMPTfYYeBA5M3CHBfwn9aB0zoPHrxWceIdX8e6h+Ee6A2W6E3fB/KCREi
-         dDs1ErZ22eMKkheDnfYwk94ol/fK5FWa9rH4Bgu9d8F8SHMSAfbhuRd0mkm4/mnSAkL2
-         JvdQ==
-X-Gm-Message-State: AOJu0YwulcNdYoZNooiFK90VyWCa5gRhBmcABSRdZd/jT8VZ/Z403SF4
-	uZJW+0U5JLVNAY/u3o9skT4JzsjpLNqVBUGM4vz1QeNNspmYWWfPyINrqg==
-X-Google-Smtp-Source: AGHT+IH9vaqprMwg9nyDWZBdwB5RBtLkT1J/sSDgiWzfum/gzX0eKJEASCU3qWZhCVcPOHPl8n2thQ==
-X-Received: by 2002:a17:906:19d0:b0:a59:fb06:5d35 with SMTP id a640c23a62f3a-a5a1156665fmr1235956666b.8.1715701692386;
-        Tue, 14 May 2024 08:48:12 -0700 (PDT)
+        bh=Gv+131uf/+zTE0wvk5WanILYGEeVB6wCC2mJCrbVRkE=;
+        b=LnzKW9Cv6PxMZvL4A4TS/kXKOf8TC7VXsHViOLvEDd3hW8lJ9LD88lJyR4DNVNoXRU
+         eqzdWkjdn0oybAQ2RHhvkD4gGd02hGghkSZrlEtUp+q6wY4gMXPdOBJ7/5d16vIsuJ0c
+         k+f/tOgWtoMgDNATFMWIH15fjBop01vFTtKm6qNEKxOrbgLq+llhj2QcqwLY/nlYOt/K
+         MM465OGqJppu5CCRVHivFCmCY66/zVfpfZ4S/51O/EPh9K/FI4v1bFNrWDubQlG2cHFy
+         JOy6CwOPI129cNucG8PpkC+fpO6mNxWSXlShSqfjKdYb7WKpKYeBQXYHgqymlBzExN9R
+         yfuA==
+X-Gm-Message-State: AOJu0Yw5hkd/oMIkiQO9geK7ooLtUBIPFFj45zw5mINZNtUBDgKAv7ib
+	4bkQxrFcShX/J0EHo4r9KuPxZmT+TojdJJefKd6oTurjpxheHKhUCj50yg==
+X-Google-Smtp-Source: AGHT+IGoswypq/IGvqwYE6wgUWcclgsXxoZLuoUyaLhTorgmfLtW7N0jTqzYI6cj1T0zxI9YNwIUuw==
+X-Received: by 2002:a17:906:d8cd:b0:a5a:5985:706c with SMTP id a640c23a62f3a-a5a598586f0mr630790166b.36.1715701803028;
+        Tue, 14 May 2024 08:50:03 -0700 (PDT)
 Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a5a179c7f78sm730698166b.133.2024.05.14.08.48.11
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a5a17b1771bsm729890766b.215.2024.05.14.08.50.02
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 May 2024 08:48:11 -0700 (PDT)
+        Tue, 14 May 2024 08:50:02 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][PATCH] freerdp: fix build with gcc-14
-Date: Tue, 14 May 2024 17:48:08 +0200
-Message-ID: <20240514154808.1175313-1-martin.jansa@gmail.com>
+Subject: [meta-oe][PATCHv2] freerdp: fix build with gcc-14
+Date: Tue, 14 May 2024 17:49:58 +0200
+Message-ID: <20240514154958.1175925-1-martin.jansa@gmail.com>
 X-Mailer: git-send-email 2.45.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 14 May 2024 15:48:24 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110397
+ <openembedded-devel@lists.openembedded.org>; Tue, 14 May 2024 15:50:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110398
 
 * bump SRCREV to get more gcc-14 fixes already merged upstream:
 
@@ -84,8 +84,8 @@ a383740a2 next-dev-2.11.8-dev
 Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 ---
  ...mpilation-warnings-in-ainput-channel.patch | 72 +++++++++++++++++++
- .../recipes-support/freerdp/freerdp_2.11.7.bb |  5 +-
- 2 files changed, 75 insertions(+), 2 deletions(-)
+ .../recipes-support/freerdp/freerdp_2.11.7.bb |  3 +-
+ 2 files changed, 74 insertions(+), 1 deletion(-)
  create mode 100644 meta-oe/recipes-support/freerdp/freerdp/0001-Fixed-compilation-warnings-in-ainput-channel.patch
 
 diff --git a/meta-oe/recipes-support/freerdp/freerdp/0001-Fixed-compilation-warnings-in-ainput-channel.patch b/meta-oe/recipes-support/freerdp/freerdp/0001-Fixed-compilation-warnings-in-ainput-channel.patch
@@ -167,7 +167,7 @@ index 0000000000..62600cddab
 +2.43.0
 +
 diff --git a/meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb b/meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb
-index cbf29baa31..5aa88fbb99 100644
+index 37a28bfecf..ee4d4530d6 100644
 --- a/meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb
 +++ b/meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb
 @@ -13,12 +13,13 @@ inherit pkgconfig cmake gitpkgv
@@ -185,12 +185,6 @@ index cbf29baa31..5aa88fbb99 100644
             "
  
  S = "${WORKDIR}/git"
-@@ -94,4 +95,4 @@ python populate_packages:prepend () {
- 
- # http://errors.yoctoproject.org/Errors/Details/766906/
- # freerdp/2.11.2/git/libfreerdp/core/info.c:88:39: error: initialization of 'const WCHAR *' {aka 'const short unsigned int *'} from incompatible pointer type 'BYTE *' {aka 'unsigned char *'} [-Wincompatible-pointer-types]
--CFLAGS += "-Wno-error=incompatible-pointer-types"
-+# CFLAGS += "-Wno-error=incompatible-pointer-types"
 -- 
 2.45.0
 
