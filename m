@@ -1,164 +1,100 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A870C04FFE
-	for <webhook@archiver.kernel.org>; Tue, 14 May 2024 06:39:20 +0000 (UTC)
-Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com [209.85.167.53])
- by mx.groups.io with SMTP id smtpd.web11.8805.1715668755690455939
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A0140C41513
+	for <webhook@archiver.kernel.org>; Tue, 14 May 2024 09:10:30 +0000 (UTC)
+Received: from esa10.hc1455-7.c3s2.iphmx.com (esa10.hc1455-7.c3s2.iphmx.com [139.138.36.225])
+ by mx.groups.io with SMTP id smtpd.web10.10784.1715677829831592765
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 13 May 2024 23:39:16 -0700
+ Tue, 14 May 2024 02:10:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=jGNRAbco;
- spf=pass (domain: gmail.com, ip: 209.85.167.53, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lf1-f53.google.com with SMTP id 2adb3069b0e04-51fdc9af005so8330670e87.3
-        for <openembedded-devel@lists.openembedded.org>; Mon, 13 May 2024 23:39:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1715668754; x=1716273554; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=KPbFfsBwmKYcNf2FCGUFwltKilcBPoYzIO+KiemBN1k=;
-        b=jGNRAbcoiocP46Fpp5+Zbw0qJoYkko5Y2taaPlTqIPOUOpIWT4AdKcyTf/FfOz6k4Y
-         QMPdtqveA7SYKX7BRWgOekYDU4dryhlUnFyPkuRVU6NPioSffFchpEv/ONinZTYizBCt
-         I38fh50mOzpCbLUMxqlvR6ZuzSkG6MOEzgPuHDKJtPGKlFfRJ/mBE1woy3o6hd1uEvwo
-         KcsVaBEr2D5phHjoB6Q50qbMSCjlXZy5MQ4dVf4z7Oya4aS+dmC9GYHWTjUbIDmYNL+1
-         jGt33f6no/+S9CkjpZv1eRkFCneIvHQx1MS9tCHSGLpa/nLtbtMeDSUflHhpYCzr0U0E
-         LuWg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1715668754; x=1716273554;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=KPbFfsBwmKYcNf2FCGUFwltKilcBPoYzIO+KiemBN1k=;
-        b=VKbXvKvJgQA9I8g+u5+wfSmFofCD8T3uMPa4MhbNxVNdIhFqAA4ip5hg4VSCS89fyA
-         fVqz+JfYRtTB3K/PYty3xOgZwp32Ew3G/ZVdwJQeg5TlH+OMgQ7BUmkbNraGgoIHaUXV
-         fcO/jgR4+wNRydAuobTYItRNVgMypSRfalgPshuztPg+jGK6EJihyPoKVPOxamoOBvfV
-         WuAD+TfZWWIMbWipf4cFtlrauoDs56mLMyZceAqs2IKprJ1AkIT4PCrnhZ06JxdnlUKN
-         eU2b22IgmlnOJvJcw+HhrFzsGZLhvFNNman+AWKTgximtAFewCIIdkYA7DLUSDAJTd0c
-         hjiA==
-X-Gm-Message-State: AOJu0YzRWBezdbXP1rQwj/veOD8K92ksMaykh/TMG6EqLvk8zwZG62zf
-	gqU+kYmdDH/p+yY8/2k3uWZNAWesh2mj7fwCuv78USLv/mQBEEKWguCjg0zLCk5phvHwQyW+ONA
-	80i3LmgKeaka1Wliio4032WpqIrQ=
-X-Google-Smtp-Source: AGHT+IEnSIwUyEGcwcX8gCT/VWBJZ10tkkDJPTpCJNyAq4l9a9F9PjzazWYZuuRFXtM4DBgLnV6rR+MaTjSzcBm0wG4=
-X-Received: by 2002:a05:6512:33cf:b0:51d:9291:6945 with SMTP id
- 2adb3069b0e04-522102785abmr12025311e87.44.1715668753485; Mon, 13 May 2024
- 23:39:13 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240509192537.1639358-1-raj.khem@gmail.com>
-In-Reply-To: <20240509192537.1639358-1-raj.khem@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 14 May 2024 08:39:00 +0200
-Message-ID: <CA+chaQc2R1MGecp6CMXwDT_28gzgzfcG+wJb_pXNOPM99R_ofQ@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 1/2] freerdp: Upgrade to 2.11.7
-To: raj.khem@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=hUZHOoGZ;
+ spf=pass (domain: fujitsu.com, ip: 139.138.36.225, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1715677829; x=1747213829;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references;
+  bh=OtVLnpHhpgoKMX9H3c4y8dhVTXK8ZVny2t6veMgzpNg=;
+  b=hUZHOoGZoX23iqGDZ+vHfGEQVQ5EYuFH++n/iDn0YE4MqucMn51UqZHm
+   Xbuq+oMYfQD17Z95b0aHCK8ZDa0txzfrp8tHGJ13sd/TFsktvlJBxFgzm
+   0GZJ/PttDqEt3JXcPKv13LP/dIJb3b6FSUXWWKl+YbbB/O85GOZptOn5j
+   CEIfHnnPHdsJD83roJ3duiWiOb33OLITpSR/gfT5IGODD+lCjdifGY7Hc
+   Rdhbv97LzK9i0KwxIKnEaJlyvriTkLl8xxezquqJ6ggRZoMy5IX5qgWvD
+   o1dqXMiL7fa4Ji0NK2PWYlcB0nrbJ2Bxx7N3dmV8HZrz3gXX4JCC7YhDY
+   Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,11072"; a="145839658"
+X-IronPort-AV: E=Sophos;i="6.08,159,1712588400"; 
+   d="scan'208";a="145839658"
+Received: from unknown (HELO oym-r3.gw.nic.fujitsu.com) ([210.162.30.91])
+  by esa10.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 May 2024 18:10:27 +0900
+Received: from oym-m1.gw.nic.fujitsu.com (oym-nat-oym-m1.gw.nic.fujitsu.com [192.168.87.58])
+	by oym-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 16DAAD64A6
+	for <openembedded-devel@lists.openembedded.org>; Tue, 14 May 2024 18:10:25 +0900 (JST)
+Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
+	by oym-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id 4E35931AE4
+	for <openembedded-devel@lists.openembedded.org>; Tue, 14 May 2024 18:10:24 +0900 (JST)
+Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id DF59220076D15
+	for <openembedded-devel@lists.openembedded.org>; Tue, 14 May 2024 18:10:23 +0900 (JST)
+Received: from vm4860.g01.fujitsu.local (unknown [10.193.161.161])
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 8CB4D1A000B;
+	Tue, 14 May 2024 17:10:23 +0800 (CST)
+From: wangmy@fujitsu.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 03/44] hwdata: upgrade 0.381 -> 0.382
+Date: Tue, 14 May 2024 17:09:36 +0800
+Message-Id: <1715677817-2223-3-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1715677817-2223-1-git-send-email-wangmy@fujitsu.com>
+References: <1715677817-2223-1-git-send-email-wangmy@fujitsu.com>
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28384.006
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28384.006
+X-TMASE-Result: 10-0.353800-10.000000
+X-TMASE-MatchedRID: wgzGQ0X+yFqjz0nOeth/yUIIxwDaU5mrTJDl9FKHbrkwcMedHxxRAtMj
+	jwb9QfV2lHVH/UHDB9Hmn3xyPJAJon585nKQczq746cXaPycFZvzWEMQjooUzWAN6i+va16ukWN
+	Ccn0XQOLegKf/r6b46i5rYfHE0OO95UcZtwNsCroURSScn+QSXpjDMT0TyDk5+gtHj7OwNO25V9
+	z3vqk3KqPn7MxzjFgIZ+aIQAWMxj/YB9m3uJ7kvtOWvF6eATMqZZVDrgsbRDQ/7y6a43/Uh2J5C
+	5Zd1TUnoivsj2+Fcwl/vwVeOTRRxfIMFg0InOPqz5gAnmajvOU4qCidlj1MUy0uABDi47cA
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 14 May 2024 06:39:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110347
+ <openembedded-devel@lists.openembedded.org>; Tue, 14 May 2024 09:10:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110350
 
-On Thu, May 9, 2024 at 9:25=E2=80=AFPM Khem Raj via lists.openembedded.org
-<raj.khem=3Dgmail.com@lists.openembedded.org> wrote:
->
-> Partially backport a fix to build with gcc-14
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-It fixes it only partially, right?
+Changelog:
+ Update pci and vendor ids
 
-I'm stills seeing:
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+---
+ .../recipes-support/hwdata/{hwdata_0.381.bb => hwdata_0.382.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/hwdata/{hwdata_0.381.bb => hwdata_0.382.bb} (91%)
 
-freerdp/2.11.7/git/libfreerdp/core/info.c:88:39: error: initialization
-of 'const WCHAR *' {aka 'const short unsigned int *'} from
-incompatible pointer type 'BYTE *' {aka 'unsigned char *'}
-[-Wincompatible-pointer-types]
-   88 |                 const WCHAR* domain =3D Stream_Pointer(s);
-      |                                       ^~~~~~~~~~~~~~
+diff --git a/meta-oe/recipes-support/hwdata/hwdata_0.381.bb b/meta-oe/recipes-support/hwdata/hwdata_0.382.bb
+similarity index 91%
+rename from meta-oe/recipes-support/hwdata/hwdata_0.381.bb
+rename to meta-oe/recipes-support/hwdata/hwdata_0.382.bb
+index 291b27372..a2bb7a334 100644
+--- a/meta-oe/recipes-support/hwdata/hwdata_0.381.bb
++++ b/meta-oe/recipes-support/hwdata/hwdata_0.382.bb
+@@ -5,7 +5,7 @@ SECTION = "System/Base"
+ LICENSE = "GPL-2.0-or-later | XFree86-1.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=1556547711e8246992b999edd9445a57"
+ 
+-SRCREV = "4463530857af32d9dbfcfa9939c2304b51e5e58d"
++SRCREV = "94b82b56d6ee7c7ada381b3b02fecfca4ff7af1c"
+ SRC_URI = "git://github.com/vcrhonek/${BPN}.git;branch=master;protocol=https"
+ 
+ S = "${WORKDIR}/git"
+-- 
+2.34.1
 
-
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  .../0001-Fixed-compilation-warnings.patch     | 27 +++++++++++++++++++
->  .../{freerdp_2.11.2.bb =3D> freerdp_2.11.7.bb}  |  3 ++-
->  2 files changed, 29 insertions(+), 1 deletion(-)
->  create mode 100644 meta-oe/recipes-support/freerdp/freerdp/0001-Fixed-co=
-mpilation-warnings.patch
->  rename meta-oe/recipes-support/freerdp/{freerdp_2.11.2.bb =3D> freerdp_2=
-.11.7.bb} (97%)
->
-> diff --git a/meta-oe/recipes-support/freerdp/freerdp/0001-Fixed-compilati=
-on-warnings.patch b/meta-oe/recipes-support/freerdp/freerdp/0001-Fixed-comp=
-ilation-warnings.patch
-> new file mode 100644
-> index 0000000000..7fae2703f8
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/freerdp/freerdp/0001-Fixed-compilation-warn=
-ings.patch
-> @@ -0,0 +1,27 @@
-> +From 75fa1fa5bd5ef2350390564245fd0984209ac092 Mon Sep 17 00:00:00 2001
-> +From: akallabeth <akallabeth@posteo.net>
-> +Date: Mon, 4 Jul 2022 14:34:46 +0200
-> +Subject: [PATCH] Fixed compilation warnings
-> +
-> +Upstream-Status: Backport [https://github.com/FreeRDP/FreeRDP/commit/2da=
-280b8a1748052b70b3f5a1ef0d8e932c33adc]
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +---
-> + client/X11/xf_graphics.c | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/client/X11/xf_graphics.c b/client/X11/xf_graphics.c
-> +index 5aa1fd48b..fe81e0ed9 100644
-> +--- a/client/X11/xf_graphics.c
-> ++++ b/client/X11/xf_graphics.c
-> +@@ -438,7 +438,7 @@ static BOOL xf_Pointer_New(rdpContext* context, rdpP=
-ointer* pointer)
-> +
-> + #endif
-> + fail:
-> +-      WLog_DBG(TAG, "%s: %ld", __func__, rc ? pointer : -1);
-> ++      WLog_DBG(TAG, "%s: %p", __func__, rc ? pointer : NULL);
-> +       return rc;
-> + }
-> +
-> +--
-> +2.45.0
-> +
-> diff --git a/meta-oe/recipes-support/freerdp/freerdp_2.11.2.bb b/meta-oe/=
-recipes-support/freerdp/freerdp_2.11.7.bb
-> similarity index 97%
-> rename from meta-oe/recipes-support/freerdp/freerdp_2.11.2.bb
-> rename to meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb
-> index 3319488051..43c38bf9c9 100644
-> --- a/meta-oe/recipes-support/freerdp/freerdp_2.11.2.bb
-> +++ b/meta-oe/recipes-support/freerdp/freerdp_2.11.7.bb
-> @@ -13,9 +13,10 @@ inherit pkgconfig cmake gitpkgv
->  PE =3D "1"
->  PKGV =3D "${GITPKGVTAG}"
->
-> -SRCREV =3D "a38c1be9eee39a9bc22b511fffe96e63fdf8ebe7"
-> +SRCREV =3D "7f6cc93c21d7f0faad6daacca06f494f29ce882c"
->  SRC_URI =3D "git://github.com/FreeRDP/FreeRDP.git;branch=3Dstable-2.0;pr=
-otocol=3Dhttps \
->             file://winpr-makecert-Build-with-install-RPATH.patch \
-> +           file://0001-Fixed-compilation-warnings.patch \
->             file://0001-Fix-const-qualifier-error.patch \
->             file://0002-Do-not-install-tools-a-CMake-targets.patch \
->             "
-> --
-> 2.45.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#110294): https://lists.openembedded.org/g/openembedde=
-d-devel/message/110294
-> Mute This Topic: https://lists.openembedded.org/mt/106007932/3617156
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
-artin.jansa@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
 
