@@ -1,156 +1,98 @@
-Return-Path: <soumya.sambu@windriver.com>
+Return-Path: <abhilash.kollam@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A7509C25B75
-	for <webhook@archiver.kernel.org>; Wed, 15 May 2024 04:08:49 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web10.6647.1715746125731494693
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 23F3AC25B75
+	for <webhook@archiver.kernel.org>; Wed, 15 May 2024 05:20:10 +0000 (UTC)
+Received: from mail-oi1-f181.google.com (mail-oi1-f181.google.com [209.85.167.181])
+ by mx.groups.io with SMTP id smtpd.web10.7359.1715750409529585241
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 14 May 2024 21:08:45 -0700
+ Tue, 14 May 2024 22:20:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=5865944998=soumya.sambu@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 44F3oTHE021874
-	for <openembedded-devel@lists.openembedded.org>; Wed, 15 May 2024 04:08:45 GMT
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3y1yn53qcg-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 15 May 2024 04:08:44 +0000 (GMT)
-Received: from blr-linux-engg1.wrs.com (147.11.136.210) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Tue, 14 May 2024 21:08:42 -0700
-From: ssambu <soumya.sambu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][scarthgap][PATCH 1/1] php: Upgrade to 8.2.18
-Date: Wed, 15 May 2024 04:08:19 +0000
-Message-ID: <20240515040819.3739982-1-soumya.sambu@windriver.com>
-X-Mailer: git-send-email 2.40.0
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=BcZHDCik;
+ spf=pass (domain: gmail.com, ip: 209.85.167.181, mailfrom: abhilash.kollam@gmail.com)
+Received: by mail-oi1-f181.google.com with SMTP id 5614622812f47-3c9b94951cfso528368b6e.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 14 May 2024 22:20:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1715750408; x=1716355208; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=bEl4NxG/f1qN58yLu8GWIalhO6BniAruFV9EyLSR2hA=;
+        b=BcZHDCikqihr7UnkMVLLudd4YM8LBm8asKCaXOf1GvcqQK6ZpIYeGuboh/yqdDI5Jk
+         ty4Chotm3mzPoA/Y87REFkfSwCMUO/pTRhm8HqGnWhWk8xtsSEmaptUKCBazvPYQ54G0
+         br200F94A4RLMYKIqBFQN+uaYkVtCJcYiQBWjRPwUscilVro46GPhIblPFZKYhoYaGyQ
+         6ELxsPJ0CB6GSt7hatC7ggamuyYk8bcD4sDHGi3Jy5O2ugeRK9xVFAiSOyEn04CWVYPJ
+         xL1MLZcWvSEHOq4D5dxShDSHI7lHIKEcGD5jPZGXCOdSd6VbEGXarUaRc/qHWDaEx3yT
+         u90w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1715750408; x=1716355208;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=bEl4NxG/f1qN58yLu8GWIalhO6BniAruFV9EyLSR2hA=;
+        b=Q93UEkDFXzkZ5m9aL/zUFMUpkKBABuxAvxcRsUsivYSoo72p3Yi3ePath2RQJUpO9q
+         x5rM74FPkEbKm/ijo41uhhsMzfRFDKHAQsrkhO1wxHJlLDfGOk9itBLv+ue8DEEVuRpY
+         SjD7pHnBJQb38rHuSDy524ScT6GmyH8LJyUXoc7W1p3+RvE5/tDIJFYDYWXCkxMpDCxo
+         FNRWkaRdmjyhbDzW+HPkxbcV3iJgi6RClxGtrc5K77xxpQi7oE+V8dG4NUsVNonoxwC7
+         Q4B/MVsIVscW4SOWPocJ/dOlpWjzkRdM3F/LGIORpISRtmyQ/dRyPq07nQu5okZVv6V0
+         D++g==
+X-Gm-Message-State: AOJu0YzTkgy+7PDxZp6H3cvXaTAi+wQq1bVQbz04UUex4rSWJdirNaX/
+	8Ub/pGnw6zeAm4PAWDEDOourqDHjci5XZR30pvsxTuFLwhsGpSusePW/PyCvn1M=
+X-Google-Smtp-Source: AGHT+IEJLTVqcW/YIm9tObIr8czlbP4b+X8noRv6IoIny26924SisOCT56nFTLUlPmlTStICA7uJbA==
+X-Received: by 2002:aca:f13:0:b0:3c9:70ea:b5b7 with SMTP id 5614622812f47-3c99704cf96mr17378368b6e.19.1715750407047;
+        Tue, 14 May 2024 22:20:07 -0700 (PDT)
+Received: from gfwa129.aus.stglabs.ibm.com ([129.41.86.5])
+        by smtp.gmail.com with ESMTPSA id 5614622812f47-3c992d8a3d2sm1957391b6e.22.2024.05.14.22.20.06
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 14 May 2024 22:20:06 -0700 (PDT)
+From: Abhilash Raju <abhilash.kollam@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Abhilash Raju <abhilash.kollam@gmail.com>
+Subject: [PATCH] opentelemetry-cpp: add opentelemtry recipe
+Date: Wed, 15 May 2024 00:20:02 -0500
+Message-Id: <20240515052002.3843823-1-abhilash.kollam@gmail.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [147.11.136.210]
-X-ClientProxiedBy: ala-exchng01.corp.ad.wrs.com (147.11.82.252) To
- ala-exchng01.corp.ad.wrs.com (147.11.82.252)
-X-Proofpoint-GUID: wBP5hUm0CqEceRn7ASVO_G4rfPX4xbfP
-X-Proofpoint-ORIG-GUID: wBP5hUm0CqEceRn7ASVO_G4rfPX4xbfP
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.650,FMLib:17.11.176.26
- definitions=2024-05-14_16,2024-05-14_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 mlxscore=0
- phishscore=0 priorityscore=1501 lowpriorityscore=0 bulkscore=0
- mlxlogscore=999 impostorscore=0 malwarescore=0 suspectscore=0 spamscore=0
- clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2405010000 definitions=main-2405150028
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 15 May 2024 04:08:49 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110400
+ <openembedded-devel@lists.openembedded.org>; Wed, 15 May 2024 05:20:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110401
 
-From: Soumya Sambu <soumya.sambu@windriver.com>
+An Observability framework to create and manage telemetry data such as
+traces, metrics, and logs
 
-Includes fixes for CVE-2024-3096, CVE-2024-2756 and other bugs.
-
-Changelog:
-https://www.php.net/ChangeLog-8.php#8.2.18
-
-Rebase 0001-ext-opcache-config.m4-enable-opcache.patch to new version
-
-Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
+Signed-off-by: Abhilash Raju <abhilash.kollam@gmail.com>
 ---
- ...ext-opcache-config.m4-enable-opcache.patch | 21 +++++++++++--------
- .../php/{php_8.2.16.bb => php_8.2.18.bb}      |  2 +-
- 2 files changed, 13 insertions(+), 10 deletions(-)
- rename meta-oe/recipes-devtools/php/{php_8.2.16.bb => php_8.2.18.bb} (99%)
+ .../opentelemetry/opentelemetry-cpp_1.15.0.bb   | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+ create mode 100644 meta-oe/recipes-support/opentelemetry/opentelemetry-cpp_1.15.0.bb
 
-diff --git a/meta-oe/recipes-devtools/php/php/0001-ext-opcache-config.m4-enable-opcache.patch b/meta-oe/recipes-devtools/php/php/0001-ext-opcache-config.m4-enable-opcache.patch
-index a967d6412..c74369746 100644
---- a/meta-oe/recipes-devtools/php/php/0001-ext-opcache-config.m4-enable-opcache.patch
-+++ b/meta-oe/recipes-devtools/php/php/0001-ext-opcache-config.m4-enable-opcache.patch
-@@ -1,6 +1,6 @@
--From ca9b419f2c146061f73ee045cb0a069c18b40cd0 Mon Sep 17 00:00:00 2001
--From: Mingli Yu <mingli.yu@windriver.com>
--Date: Wed, 15 Dec 2021 14:00:08 +0800
-+From 889583912ddd7abc628f2703892ec4884db6419a Mon Sep 17 00:00:00 2001
-+From: Soumya Sambu <soumya.sambu@windriver.com>
-+Date: Tue, 7 May 2024 08:39:16 +0000
- Subject: [PATCH 01/11] ext/opcache/config.m4: enable opcache
- 
- We can't use AC_TRY_RUN to run programs in a cross compile
-@@ -20,15 +20,18 @@ Signed-off-by: Claude Bing <cbing@cybernetics.com>
- 
- update patch to version 8.1.0
- Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+diff --git a/meta-oe/recipes-support/opentelemetry/opentelemetry-cpp_1.15.0.bb b/meta-oe/recipes-support/opentelemetry/opentelemetry-cpp_1.15.0.bb
+new file mode 100644
+index 000000000..85df5be82
+--- /dev/null
++++ b/meta-oe/recipes-support/opentelemetry/opentelemetry-cpp_1.15.0.bb
+@@ -0,0 +1,17 @@
++SUMMARY = "Open Telemetry Library"
++DESCRIPTION = "An Observability framework to create and manage telemetry data \
++such as traces, metrics, and logs."
++HOMEPAGE = "https://github.com/open-telemetry/opentelemetry-cpp"
++SECTION = "libs"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://${S}/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 +
-+update patch to version 8.2.18
-+Signed-off-by: Soumya Sambu <soumya.sambu@windriver.com>
- ---
-  ext/opcache/config.m4 | 204 ++----------------------------------------
-  1 file changed, 8 insertions(+), 196 deletions(-)
- 
- diff --git a/ext/opcache/config.m4 b/ext/opcache/config.m4
--index 2a83fa2..9471b5d 100644
-+index 6bf07ad3..5d645b86 100644
- --- a/ext/opcache/config.m4
- +++ b/ext/opcache/config.m4
--@@ -108,209 +108,21 @@ if test "$PHP_OPCACHE" != "no"; then
-+@@ -113,209 +113,21 @@ if test "$PHP_OPCACHE" != "no"; then
-    AC_CHECK_FUNCS([mprotect])
-  
-    AC_MSG_CHECKING(for sysvipc shared memory support)
-@@ -40,7 +43,7 @@ index 2a83fa2..9471b5d 100644
- -#include <unistd.h>
- -#include <string.h>
- -
---int main() {
-+-int main(void) {
- -  pid_t pid;
- -  int status;
- -  int ipc_id;
-@@ -121,7 +124,7 @@ index 2a83fa2..9471b5d 100644
- -# define MAP_FAILED ((void*)-1)
- -#endif
- -
---int main() {
-+-int main(void) {
- -  pid_t pid;
- -  int status;
- -  char *shm;
-@@ -185,7 +188,7 @@ index 2a83fa2..9471b5d 100644
- -# define MAP_FAILED ((void*)-1)
- -#endif
- -
---int main() {
-+-int main(void) {
- -  pid_t pid;
- -  int status;
- -  int fd;
-@@ -247,5 +250,5 @@ index 2a83fa2..9471b5d 100644
-    PHP_NEW_EXTENSION(opcache,
-  	ZendAccelerator.c \
- -- 
--2.17.1
-+2.40.0
- 
-diff --git a/meta-oe/recipes-devtools/php/php_8.2.16.bb b/meta-oe/recipes-devtools/php/php_8.2.18.bb
-similarity index 99%
-rename from meta-oe/recipes-devtools/php/php_8.2.16.bb
-rename to meta-oe/recipes-devtools/php/php_8.2.18.bb
-index 1cb378fb9..da04ffba6 100644
---- a/meta-oe/recipes-devtools/php/php_8.2.16.bb
-+++ b/meta-oe/recipes-devtools/php/php_8.2.18.bb
-@@ -34,7 +34,7 @@ SRC_URI:append:class-target = " \
-           "
- 
- S = "${WORKDIR}/php-${PV}"
--SRC_URI[sha256sum] = "2658c1b8935ab6b53a7f209354602761ab07066e66920bc472b8815fd1b43f71"
-+SRC_URI[sha256sum] = "ca0b07c254200320f518ac5b3df540a9cf14d866f3c93edc3013b52e06fac796"
- 
- CVE_STATUS_GROUPS += "CVE_STATUS_PHP"
- CVE_STATUS_PHP[status] = "fixed-version: The name of this product is exactly the same as github.com/emlog/emlog. CVE can be safely ignored."
++DEPENDS = "nlohmann-json"
++
++SRC_URI = "https://github.com/open-telemetry/opentelemetry-cpp/archive/refs/tags/v${PV}.tar.gz"
++SRC_URI[sha256sum] = "69b0fef380658e15be9d817bfcb32e3f5de96da652bcdce77b4e750ed8beddee"
++
++S = "${WORKDIR}/opentelemetry-cpp-${PV}"
++
++inherit cmake pkgconfig lib_package
++EXTRA_OECMAKE = "-DOPENTELEMETRY_INSTALL=ON -DBUILD_PACKAGE=OFF -DWITH_OTLP_API=ON -DWITH_OTLP_GRPC=OFF -DWITH_OTLP_HTTP=OFF -DWITH_PROMETHEUS=OFF -DWITH_BENCHMARK=OFF -DBUILD_TESTING=OFF"
 -- 
-2.40.0
+2.40.1
 
 
