@@ -1,121 +1,93 @@
-Return-Path: <changqing.li@eng.windriver.com>
+Return-Path: <beniaminsandu@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 71DFBC25B74
-	for <webhook@archiver.kernel.org>; Thu, 16 May 2024 09:37:16 +0000 (UTC)
-Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web11.9359.1715852232197702960
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1EEFAC25B74
+	for <webhook@archiver.kernel.org>; Thu, 16 May 2024 15:36:19 +0000 (UTC)
+Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
+ by mx.groups.io with SMTP id smtpd.web10.17213.1715873778226784722
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 May 2024 02:37:12 -0700
+ Thu, 16 May 2024 08:36:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=5866f41437=changqing.li@windriver.com)
-Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 44G6MieM005766
-	for <openembedded-devel@lists.openembedded.org>; Thu, 16 May 2024 02:37:11 -0700
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3y286fv43g-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 16 May 2024 02:37:11 -0700 (PDT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Thu, 16 May 2024 02:37:11 -0700
-Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.39 via Frontend Transport; Thu, 16 May 2024 02:37:10 -0700
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [master][meta-python][PATCH] python3-grpcio: fix do_compile failure for qemuppc64/qemuppc
-Date: Thu, 16 May 2024 17:37:09 +0800
-Message-ID: <20240516093709.2613717-1-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.25.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=LjAECrFh;
+ spf=pass (domain: gmail.com, ip: 209.85.218.49, mailfrom: beniaminsandu@gmail.com)
+Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-a59b178b75bso277425166b.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 16 May 2024 08:36:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1715873776; x=1716478576; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=uOMlXSMKs0muGpi5jBrzpa7R3nqhJ6Y1hKpGVPNeeEQ=;
+        b=LjAECrFhVwNdC0sPS5m04gdJJv9QN6GJtbQASKSwFsc49irxi/aQOfLDADiXA/RTDc
+         3FWrw6SLQAE+rDJ3ej8em0X5jA83e7IxtNurkJZ9WQtmrz/3XQ9rCsc3+1lrx0lWnEkl
+         DH0AU6psQWwnOFEtjf9Hl+L2U2prEjP5MepubWkQ7MO4KCAxdgSPtfaEN5/H+Dd9GF1N
+         hlVvkP4U9zX15nV/FJdRGRYDOpGjol2HCvhV3671HjeUiAxvSx9oJts3Du6BhDBvfJ6A
+         CzADx02aJttPlsIBPIbuYdukK6GR4PHsSGiy+9vQI4h2Cule4LeyDDJ45ENUeVR3C24H
+         +M1A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1715873776; x=1716478576;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=uOMlXSMKs0muGpi5jBrzpa7R3nqhJ6Y1hKpGVPNeeEQ=;
+        b=TCoGVhFsSSf3FlRz0MKMjtbmsz32jTTx8JTA1XsBwa2AeUlKP2JRg+ODXHBMFh0/km
+         eqhi4oaHnxz5P5uh2jaAHS3EbiNN+v9zOiPhtCddGbuAG/WH1r+x/l7w0vGaChrfF4N+
+         ACUI7HfztjFisiys99JTbdWFbJ7JQekdMEJshFHzFAxtdUtvwZBQB9q2kk76T0rsVmzF
+         Q9bs3fP9RmpAjstRO3+BdjmyyBZ5u1ISN3zP4oGlxTP45MJvE/zrbLloPNMO4VvVM1JH
+         jMNQuwLZm3C6cPFYzEQQ5mC2tpM26njM4HqKBZd4bJ9VF1fkHCCiJFJoKchpTlKyzkHk
+         IMwQ==
+X-Gm-Message-State: AOJu0YzWA7FSyG0+YGinYFSeJUB0wqh8ExnWCVNkZ72Exnyka1xdWib9
+	5b0EfSPBr06Z1Nsvf6lybIqnpEhx7oBHqoXRlT6gLH7Jqu7fRd/h3Qm0NpYThoc=
+X-Google-Smtp-Source: AGHT+IEZQKddmoFrrjVcg0AEWoqFb3roekODIB+geqTIvlyNvntcT1T9crIhOApe0kB7r7DTEoT9ug==
+X-Received: by 2002:a17:906:5393:b0:a59:bacc:b07f with SMTP id a640c23a62f3a-a5a2d672f6bmr1342811566b.52.1715873776256;
+        Thu, 16 May 2024 08:36:16 -0700 (PDT)
+Received: from localhost.localdomain ([5.13.213.164])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a5cdce8f916sm150610966b.223.2024.05.16.08.36.15
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 16 May 2024 08:36:15 -0700 (PDT)
+From: Beniamin Sandu <beniaminsandu@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Beniamin Sandu <beniaminsandu@gmail.com>
+Subject: [meta-networking][PATCH] unbound: upgrade 1.19.3 -> 1.20.0
+Date: Thu, 16 May 2024 16:35:59 +0100
+Message-Id: <20240516153559.1320799-1-beniaminsandu@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Proofpoint-ORIG-GUID: lsKfI_QXm95WGDBCSWvFhZWqF63tAeUl
-X-Proofpoint-GUID: lsKfI_QXm95WGDBCSWvFhZWqF63tAeUl
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1039,Hydra:6.0.650,FMLib:17.11.176.26
- definitions=2024-05-16_05,2024-05-15_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 bulkscore=0
- spamscore=0 suspectscore=0 impostorscore=0 adultscore=0 lowpriorityscore=0
- phishscore=0 mlxlogscore=999 mlxscore=0 malwarescore=0 priorityscore=1501
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2405010000
- definitions=main-2405160068
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 16 May 2024 09:37:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110414
+ <openembedded-devel@lists.openembedded.org>; Thu, 16 May 2024 15:36:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110415
 
-From: Changqing Li <changqing.li@windriver.com>
+Full changelog:
+https://github.com/NLnetLabs/unbound/releases/tag/release-1.20.0
 
-define proper macro for ppc/ppc64 to fix compile error
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
 ---
- ....h-define-proper-macro-for-ppc-ppc64.patch | 37 +++++++++++++++++++
- .../python/python3-grpcio_1.62.2.bb           |  1 +
- 2 files changed, 38 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-grpcio/0001-target.h-define-proper-macro-for-ppc-ppc64.patch
+ .../unbound/{unbound_1.19.3.bb => unbound_1.20.0.bb}          | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/unbound/{unbound_1.19.3.bb => unbound_1.20.0.bb} (95%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio/0001-target.h-define-proper-macro-for-ppc-ppc64.patch b/meta-python/recipes-devtools/python/python3-grpcio/0001-target.h-define-proper-macro-for-ppc-ppc64.patch
-new file mode 100644
-index 000000000..0b512b1d0
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-grpcio/0001-target.h-define-proper-macro-for-ppc-ppc64.patch
-@@ -0,0 +1,37 @@
-+From b3bca013007a4a66703573d243e433f22e1e6684 Mon Sep 17 00:00:00 2001
-+From: Changqing Li <changqing.li@windriver.com>
-+Date: Wed, 15 May 2024 16:55:09 +0800
-+Subject: [PATCH] target.h: define proper macro for ppc/ppc64
-+
-+Fix error:
-+third_party/boringssl-with-bazel/src/include/openssl/target.h:74:2: error: #error "Unknown target CPU"
-+third_party/boringssl-with-bazel/src/include/openssl/bn.h:172:2: error: #error "Must define either OPENSSL_32_BIT or OPENSSL_64_BIT"
-+third_party/boringssl-with-bazel/src/include/openssl/bn.h:230:44: error: 'BN_ULONG' has not been declared
-+
-+BN_ULONG will be defined after set proper OPENSSL_32_BIT or OPENSSL_64_BIT
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+---
-+ third_party/boringssl-with-bazel/src/include/openssl/target.h | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/third_party/boringssl-with-bazel/src/include/openssl/target.h b/third_party/boringssl-with-bazel/src/include/openssl/target.h
-+index 29b1dc6..d779813 100644
-+--- a/third_party/boringssl-with-bazel/src/include/openssl/target.h
-++++ b/third_party/boringssl-with-bazel/src/include/openssl/target.h
-+@@ -54,6 +54,10 @@
-+ #define OPENSSL_32_BIT
-+ #elif defined(__myriad2__)
-+ #define OPENSSL_32_BIT
-++#elif defined(__PPC64__)
-++#define OPENSSL_64_BIT
-++#elif defined(__PPC__)
-++#define OPENSSL_32_BIT
-+ #else
-+ // The list above enumerates the platforms that BoringSSL supports. For these
-+ // platforms we keep a reasonable bar of not breaking them: automated test
-+-- 
-+2.25.1
-+
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio_1.62.2.bb b/meta-python/recipes-devtools/python/python3-grpcio_1.62.2.bb
-index 3cee8ab10..47f3b2ea2 100644
---- a/meta-python/recipes-devtools/python/python3-grpcio_1.62.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-grpcio_1.62.2.bb
-@@ -10,6 +10,7 @@ SRC_URI += "file://0001-Include-missing-cstdint-header.patch \
-            file://abseil-ppc-fixes.patch \
-            file://0001-zlib-Include-unistd.h-for-open-close-C-APIs.patch \
-            file://0001-crypto-use-_Generic-only-if-defined-__cplusplus.patch;patchdir=third_party/boringssl-with-bazel/src/ \
-+           file://0001-target.h-define-proper-macro-for-ppc-ppc64.patch \
-            "
- SRC_URI[sha256sum] = "c77618071d96b7a8be2c10701a98537823b9c65ba256c0b9067e0594cdbd954d"
+diff --git a/meta-networking/recipes-support/unbound/unbound_1.19.3.bb b/meta-networking/recipes-support/unbound/unbound_1.20.0.bb
+similarity index 95%
+rename from meta-networking/recipes-support/unbound/unbound_1.19.3.bb
+rename to meta-networking/recipes-support/unbound/unbound_1.20.0.bb
+index ffdc78e9d..fe0111f59 100644
+--- a/meta-networking/recipes-support/unbound/unbound_1.19.3.bb
++++ b/meta-networking/recipes-support/unbound/unbound_1.20.0.bb
+@@ -9,8 +9,8 @@ SECTION = "net"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=5308494bc0590c0cb036afd781d78f06"
+ 
+-SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;branch=branch-1.19.3"
+-SRCREV = "48b6c60a24e9a5d6d369a7a37c9fe2a767f26abd"
++SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;branch=branch-1.20.0"
++SRCREV = "b9525c5fd47ba481a29b90109017d2253beb105d"
+ 
+ inherit autotools pkgconfig systemd update-rc.d
  
 -- 
-2.25.1
+2.34.1
 
 
