@@ -1,93 +1,65 @@
-Return-Path: <beniaminsandu@gmail.com>
+Return-Path: <gerard.salvatella@siemens.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1EEFAC25B74
-	for <webhook@archiver.kernel.org>; Thu, 16 May 2024 15:36:19 +0000 (UTC)
-Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
- by mx.groups.io with SMTP id smtpd.web10.17213.1715873778226784722
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 57BB1C25B77
+	for <webhook@archiver.kernel.org>; Thu, 16 May 2024 16:30:19 +0000 (UTC)
+Received: from mta-64-227.siemens.flowmailer.net (mta-64-227.siemens.flowmailer.net [185.136.64.227])
+ by mx.groups.io with SMTP id smtpd.web11.18823.1715877008901197210
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 May 2024 08:36:18 -0700
+ Thu, 16 May 2024 09:30:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=LjAECrFh;
- spf=pass (domain: gmail.com, ip: 209.85.218.49, mailfrom: beniaminsandu@gmail.com)
-Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-a59b178b75bso277425166b.0
-        for <openembedded-devel@lists.openembedded.org>; Thu, 16 May 2024 08:36:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1715873776; x=1716478576; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=uOMlXSMKs0muGpi5jBrzpa7R3nqhJ6Y1hKpGVPNeeEQ=;
-        b=LjAECrFhVwNdC0sPS5m04gdJJv9QN6GJtbQASKSwFsc49irxi/aQOfLDADiXA/RTDc
-         3FWrw6SLQAE+rDJ3ej8em0X5jA83e7IxtNurkJZ9WQtmrz/3XQ9rCsc3+1lrx0lWnEkl
-         DH0AU6psQWwnOFEtjf9Hl+L2U2prEjP5MepubWkQ7MO4KCAxdgSPtfaEN5/H+Dd9GF1N
-         hlVvkP4U9zX15nV/FJdRGRYDOpGjol2HCvhV3671HjeUiAxvSx9oJts3Du6BhDBvfJ6A
-         CzADx02aJttPlsIBPIbuYdukK6GR4PHsSGiy+9vQI4h2Cule4LeyDDJ45ENUeVR3C24H
-         +M1A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1715873776; x=1716478576;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=uOMlXSMKs0muGpi5jBrzpa7R3nqhJ6Y1hKpGVPNeeEQ=;
-        b=TCoGVhFsSSf3FlRz0MKMjtbmsz32jTTx8JTA1XsBwa2AeUlKP2JRg+ODXHBMFh0/km
-         eqhi4oaHnxz5P5uh2jaAHS3EbiNN+v9zOiPhtCddGbuAG/WH1r+x/l7w0vGaChrfF4N+
-         ACUI7HfztjFisiys99JTbdWFbJ7JQekdMEJshFHzFAxtdUtvwZBQB9q2kk76T0rsVmzF
-         Q9bs3fP9RmpAjstRO3+BdjmyyBZ5u1ISN3zP4oGlxTP45MJvE/zrbLloPNMO4VvVM1JH
-         jMNQuwLZm3C6cPFYzEQQ5mC2tpM26njM4HqKBZd4bJ9VF1fkHCCiJFJoKchpTlKyzkHk
-         IMwQ==
-X-Gm-Message-State: AOJu0YzWA7FSyG0+YGinYFSeJUB0wqh8ExnWCVNkZ72Exnyka1xdWib9
-	5b0EfSPBr06Z1Nsvf6lybIqnpEhx7oBHqoXRlT6gLH7Jqu7fRd/h3Qm0NpYThoc=
-X-Google-Smtp-Source: AGHT+IEZQKddmoFrrjVcg0AEWoqFb3roekODIB+geqTIvlyNvntcT1T9crIhOApe0kB7r7DTEoT9ug==
-X-Received: by 2002:a17:906:5393:b0:a59:bacc:b07f with SMTP id a640c23a62f3a-a5a2d672f6bmr1342811566b.52.1715873776256;
-        Thu, 16 May 2024 08:36:16 -0700 (PDT)
-Received: from localhost.localdomain ([5.13.213.164])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a5cdce8f916sm150610966b.223.2024.05.16.08.36.15
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 May 2024 08:36:15 -0700 (PDT)
-From: Beniamin Sandu <beniaminsandu@gmail.com>
+ dkim=pass header.i=gerard.salvatella@siemens.com header.s=fm1 header.b=Dv8Cmw+A;
+ spf=pass (domain: rts-flowmailer.siemens.com, ip: 185.136.64.227, mailfrom: fm-1321161-202405161630052fd4f02cf3011b99b4-_bmry4@rts-flowmailer.siemens.com)
+Received: by mta-64-227.siemens.flowmailer.net with ESMTPSA id 202405161630052fd4f02cf3011b99b4
+        for <openembedded-devel@lists.openembedded.org>;
+        Thu, 16 May 2024 18:30:06 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
+ d=siemens.com; i=gerard.salvatella@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=TPrIu8+YAGqt6w1N4WxqDlC3nGD4xf2HTHYHuhTCxvE=;
+ b=Dv8Cmw+AgOKg5tB/SXu8R5wktwGKtH38SjPM7bVOnOVc6v2OP9Z1+DTklOJu7rnitgqqYs
+ /Q0Wc0Nyh8uKwerjrqv++UqeEA0aTLAapuliwbvRypuUqOImT/GsPy/HDw1vS41iaBd9AbUg
+ R9JYBawMC6xvSzmSHQQHdDUj2tYtc=;
+From: "G. Salvatella" <gerard.salvatella@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Beniamin Sandu <beniaminsandu@gmail.com>
-Subject: [meta-networking][PATCH] unbound: upgrade 1.19.3 -> 1.20.0
-Date: Thu, 16 May 2024 16:35:59 +0100
-Message-Id: <20240516153559.1320799-1-beniaminsandu@gmail.com>
-X-Mailer: git-send-email 2.34.1
+Cc: Gerard Salvatella <gerard.salvatella@siemens.com>
+Subject: [meta-oe][PATCH] libwebsockets: fix buildpath warnings
+Date: Thu, 16 May 2024 18:30:58 +0200
+Message-ID: <20240516163058.465553-1-gerard.salvatella@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-1321161:519-21489:flowmailer
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 16 May 2024 15:36:19 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110415
+ <openembedded-devel@lists.openembedded.org>; Thu, 16 May 2024 16:30:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110416
 
-Full changelog:
-https://github.com/NLnetLabs/unbound/releases/tag/release-1.20.0
+From: Gerard Salvatella <gerard.salvatella@siemens.com>
 
-Signed-off-by: Beniamin Sandu <beniaminsandu@gmail.com>
+In order to remove absolute paths from the cmake artifacts, paths from
+the `$lib` folder should also be stripped off, otherwise internally
+linked libraries (e.g. libz) may appear.
 ---
- .../unbound/{unbound_1.19.3.bb => unbound_1.20.0.bb}          | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/unbound/{unbound_1.19.3.bb => unbound_1.20.0.bb} (95%)
+ .../recipes-connectivity/libwebsockets/libwebsockets_4.3.3.bb   | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-support/unbound/unbound_1.19.3.bb b/meta-networking/recipes-support/unbound/unbound_1.20.0.bb
-similarity index 95%
-rename from meta-networking/recipes-support/unbound/unbound_1.19.3.bb
-rename to meta-networking/recipes-support/unbound/unbound_1.20.0.bb
-index ffdc78e9d..fe0111f59 100644
---- a/meta-networking/recipes-support/unbound/unbound_1.19.3.bb
-+++ b/meta-networking/recipes-support/unbound/unbound_1.20.0.bb
-@@ -9,8 +9,8 @@ SECTION = "net"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=5308494bc0590c0cb036afd781d78f06"
+diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.3.bb b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.3.bb
+index 4518e2faa..8f8b70421 100644
+--- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.3.bb
++++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.3.bb
+@@ -42,6 +42,8 @@ do_install:append() {
+     sed -i -e 's|${STAGING_LIBDIR}/libuv.so|uv|g' ${D}${libdir}/cmake/libwebsockets/LibwebsocketsTargets.cmake
+     sed -i -e 's|${STAGING_INCDIR}||g' ${D}${libdir}/cmake/libwebsockets/LibwebsocketsTargets.cmake \
+                                        ${D}${libdir}/cmake/libwebsockets/libwebsockets-config.cmake
++    sed -i -e 's|${STAGING_LIBDIR}||g' ${D}${libdir}/cmake/libwebsockets/LibwebsocketsTargets.cmake \
++                                       ${D}${libdir}/cmake/libwebsockets/libwebsockets-config.cmake
+ }
  
--SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;branch=branch-1.19.3"
--SRCREV = "48b6c60a24e9a5d6d369a7a37c9fe2a767f26abd"
-+SRC_URI = "git://github.com/NLnetLabs/unbound.git;protocol=https;branch=branch-1.20.0"
-+SRCREV = "b9525c5fd47ba481a29b90109017d2253beb105d"
- 
- inherit autotools pkgconfig systemd update-rc.d
- 
+ PACKAGES =+ "${PN}-testapps ${PN}-evlib-event ${PN}-evlib-uv ${PN}-evlib-ev ${PN}-evlib-sd"
 -- 
-2.34.1
+2.44.0
 
 
