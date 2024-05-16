@@ -1,107 +1,115 @@
-Return-Path: <abhilash.kollam@gmail.com>
+Return-Path: <fathi.boudra@linaro.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 95920C25B74
-	for <webhook@archiver.kernel.org>; Thu, 16 May 2024 06:26:55 +0000 (UTC)
-Received: from mail-ot1-f43.google.com (mail-ot1-f43.google.com [209.85.210.43])
- by mx.groups.io with SMTP id smtpd.web10.6728.1715840798453553561
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 03808C25B79
+	for <webhook@archiver.kernel.org>; Thu, 16 May 2024 07:22:56 +0000 (UTC)
+Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com [209.85.208.54])
+ by mx.groups.io with SMTP id smtpd.web10.7466.1715844168560135983
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 15 May 2024 23:26:38 -0700
+ Thu, 16 May 2024 00:22:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=VC/JenTA;
- spf=pass (domain: gmail.com, ip: 209.85.210.43, mailfrom: abhilash.kollam@gmail.com)
-Received: by mail-ot1-f43.google.com with SMTP id 46e09a7af769-6f12eb91ec7so42972a34.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 15 May 2024 23:26:38 -0700 (PDT)
+ dkim=pass header.i=@linaro.org header.s=google header.b=cBoZDVLi;
+ spf=pass (domain: linaro.org, ip: 209.85.208.54, mailfrom: fathi.boudra@linaro.org)
+Received: by mail-ed1-f54.google.com with SMTP id 4fb4d7f45d1cf-572b37afd73so3362897a12.2
+        for <openembedded-devel@lists.openembedded.org>; Thu, 16 May 2024 00:22:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1715840797; x=1716445597; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=bq98J4W0SEU9CuZqPOc3khR9aL18/jQ6XKMFAKSKej4=;
-        b=VC/JenTAjt+FbVvk06MA7e9mJeINzpsV7GDcSslYIByL1nA4HNNIl4jddHZddTeabf
-         VqUwbNRzx7YgimK+zmbl/tqbA+800d6Xco9onzHxIGvMsTvr2KylDw1KI2HG2KFRjW5S
-         DYq4tjO+pv4UB5bak5p6EfP2BFRQC2WqlH2ItZX89blsmUKMlSSw+nnYTRRSzugjVFtD
-         iYzQGzhi4YSnR6YQtkO7c+SqxchzpoWFn2Q+RTc5uG/3wgY78FcAKe2U4ZaBJ4bJAnYv
-         /coZAU3N/IVFTnoY2xaDRToRtRlJzfde5O93kS8jEJ26bkqFQvqEBzDwl70Hc/i4HYtU
-         hq+w==
+        d=linaro.org; s=google; t=1715844167; x=1716448967; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=QclWyBUyLmOxjOtZlKhNT4jQuXPf6AA1MPjg9pkTbP4=;
+        b=cBoZDVLij7RuR9/D9Ej+QWRhkHXmD+qXW8F7t01wEoe8VxsOxg2hZuNe8EZ1UxIJwv
+         1MQdnN9sU3HyZR++sfgFr7CLOjL+tkixJEKl58/wwNWTiPv1xzdtVMUcR17A4eTY5yE6
+         CtMQwOEHjigXC9GG5PwcZmVId+ajNeAigeLXfyBue8yN/mZ8TGgrxY3a5dAJMeIOyop+
+         LJsmoqhe0KNWiv3WT/hSgRDG+Slsr9wuaWNM+nmCwSWYd63z1MlyJzz8h46G2ejSIbNS
+         29cwyS4dZ9j3cJdJj8tloVdvb9g00qWR032C6Nvw7ldS71+nzDkug15B0sjQjNTCi84K
+         5VWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1715840797; x=1716445597;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1715844167; x=1716448967;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=bq98J4W0SEU9CuZqPOc3khR9aL18/jQ6XKMFAKSKej4=;
-        b=HOUo0NObJhWWOIYru7p0gs4fak8/XlUk2y01PGG7xC0i6gaxMhc9NG3a0F3N5U9OLc
-         Lt8YduzqKbLnjTJjxUJFzOBCOdCNK20b/9j2jbz4LDXpVHiR2WldHcijqMCXVsTgg9Ix
-         W1GotXqY8zzpBFs6sDZX/u/NeUODy5109oKIRClcba1ck7oaWo+IqpTM3qI/yIGnJkFz
-         cxqAZd2FIClSkhDFyb4K3fYI/LCh2xULBbwJvID9Mlx1d6b7p6QmPFVxyxby9Nv+FNZp
-         tkfy6vDl9D5Q7JPIoeukTuqUQ3m16plthbRA9HEbuRk84dOuo+iNWPK44Rn5eR88pk9V
-         4/Tw==
-X-Gm-Message-State: AOJu0YwOiukNEoEeWGzRigaUUT5V7SMvQvWIVZO1iPrkh2H67u1nBGZO
-	nTmQ0js7WEKZptxdI6BVOJI1WGRpX6KTee8kEAV/RC2yTwCWjFZ4AB6dLA==
-X-Google-Smtp-Source: AGHT+IHU/Qv+Jf1SV+g3Epk8YPt9l5zbG+eakIy43raNujzGeKmyzAN8MX05jKpkWIxjxtOg9itzOw==
-X-Received: by 2002:a9d:7ac7:0:b0:6f1:32:c929 with SMTP id 46e09a7af769-6f10032da02mr12517299a34.36.1715840797474;
-        Wed, 15 May 2024 23:26:37 -0700 (PDT)
-Received: from gfwa129.aus.stglabs.ibm.com ([129.41.86.5])
-        by smtp.gmail.com with ESMTPSA id 46e09a7af769-6f0e4d0193csm2470450a34.78.2024.05.15.23.26.36
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 15 May 2024 23:26:36 -0700 (PDT)
-From: Abhilash Raju <abhilash.kollam@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Abhilash Raju <abhilash.kollam@gmail.com>
-Subject: [[meta-oe][PATCH v2]] opentelemetry-cpp: add opentelemtry recipe
-Date: Thu, 16 May 2024 01:26:31 -0500
-Message-Id: <20240516062631.3994402-1-abhilash.kollam@gmail.com>
-X-Mailer: git-send-email 2.40.1
+        bh=QclWyBUyLmOxjOtZlKhNT4jQuXPf6AA1MPjg9pkTbP4=;
+        b=Zpt/eSA0gWSu6ud+CizvvlNb74Q9X6l5Cy6cELq5Yj6CZZnxy2t6VWeIxb2w06RG/n
+         2UUlrv1ps3+DLgQyQBz7HsRroIdHHEOzafECD/yLBGXfUkfPDcCoQws/vur+x3aRrPAJ
+         dpJZvrMKo7b7ym9+ZC2bdgdYEKv7ZPo6Z7gJ8n8MG8lKtpZCWmmXvNlfG7IvPhfzjK/G
+         6NgpogOOlsyQO8Q0xIBMZ9IbOHuwyzrDHW28S5uL1didggTObFu/FJCEbkD5VtVkfuSr
+         KE/YeB7oBynmIfslUf9YDRqxhfhU66dy+9tLFzoqMfDyPOgVy5lsy5JYDRsf4QEQOewq
+         K0CQ==
+X-Gm-Message-State: AOJu0YxVpBR/6oXtFC1gfBJgdWT9j7yS/C0OVYABsIESdVYJ5Pm60eX+
+	Rayu6vaqRj+KSB19tV5ov6uuFzXLKt5E9oZl6EM9RFw+845Fe4m9vc9Wl3lS++v/LSD2FSCVULa
+	wX1j6Wbf31fB5tCv9Gkxrqq9+Xr8mrWBNtNqIWw==
+X-Google-Smtp-Source: AGHT+IGqBRLKjY5H0fvS7/Yk3fq5Kct9v+4KVDmqQb2NlhKhfGYAIIdRhKLjVSyrHoxvKkIueTCxM/x6CIp7KDEY540=
+X-Received: by 2002:a50:c002:0:b0:572:7c5d:6ed5 with SMTP id
+ 4fb4d7f45d1cf-5734d5ce3demr11940463a12.22.1715844166919; Thu, 16 May 2024
+ 00:22:46 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240503061507.585375-1-mikko.rapeli@linaro.org>
+In-Reply-To: <20240503061507.585375-1-mikko.rapeli@linaro.org>
+From: Fathi Boudra <fathi.boudra@linaro.org>
+Date: Thu, 16 May 2024 09:22:36 +0200
+Message-ID: <CAGNsrLDh=ZxpgJO+O5bXbZ0DedCKX6NXT3=qvAKV9wS7h0LFjQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] fwupd: fix uefi capsule update build error
+To: mikko.rapeli@linaro.org, Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 16 May 2024 06:26:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110410
+ <openembedded-devel@lists.openembedded.org>; Thu, 16 May 2024 07:22:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110411
 
-An Observability framework to create and manage telemetry data such as
-traces, metrics, and logs
+Hi Khem,
 
-Signed-off-by: Abhilash Raju <abhilash.kollam@gmail.com>
----
- .../opentelemetry/opentelemetry-cpp_1.15.0.bb | 26 +++++++++++++++++++
- 1 file changed, 26 insertions(+)
- create mode 100644 meta-oe/recipes-support/opentelemetry/opentelemetry-cpp_1.15.0.bb
+Can you cherry-pick this commit to the scarthgap branch?
 
-diff --git a/meta-oe/recipes-support/opentelemetry/opentelemetry-cpp_1.15.0.bb b/meta-oe/recipes-support/opentelemetry/opentelemetry-cpp_1.15.0.bb
-new file mode 100644
-index 000000000..bb2b09e5a
---- /dev/null
-+++ b/meta-oe/recipes-support/opentelemetry/opentelemetry-cpp_1.15.0.bb
-@@ -0,0 +1,26 @@
-+SUMMARY = "Open Telemetry Library"
-+DESCRIPTION = "An Observability framework to create and manage telemetry data \
-+such as traces, metrics, and logs."
-+HOMEPAGE = "https://github.com/open-telemetry/opentelemetry-cpp"
-+SECTION = "libs"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
-+
-+DEPENDS = "nlohmann-json"
-+
-+SRC_URI = "git://github.com/open-telemetry/opentelemetry-cpp.git;protocol=https;branch=main;"
-+SRCREV = "054b0dc207c1f58e290d78cdaac5f314bc328b31"
-+SRC_URI[sha256sum] = "69b0fef380658e15be9d817bfcb32e3f5de96da652bcdce77b4e750ed8beddee"
-+S = "${WORKDIR}/git"
-+inherit cmake pkgconfig lib_package
-+
-+PACKAGECONFIG ?= "opentelemety_install otlp_api"
-+
-+PACKAGECONFIG[opentelemety_install]="-DOPENTELEMETRY_INSTALL=ON,-DOPENTELEMETRY_INSTALL=OFF"
-+PACKAGECONFIG[build_package]="-DBUILD_PACKAGE=ON,-DBUILD_PACKAGE=OFF"
-+PACKAGECONFIG[otlp_api]="-DWITH_OTLP_API=ON,-DWITH_OTLP_API=OFF"
-+PACKAGECONFIG[otlp_grpc]="-DWITH_OTLP_GRPC=ON,-DWITH_OTLP_GRPC=OFF"
-+PACKAGECONFIG[otlp_http]="-DWITH_OTLP_HTTP=ON,-DWITH_OTLP_HTTP=OFF"
-+PACKAGECONFIG[otlp_prometheus]="-DWITH_PROMETHEUS=ON,-DWITH_PROMETHEUS=OFF"
-+PACKAGECONFIG[benchmark]="-DWITH_BENCHMARK=ON,-DWITH_BENCHMARK=OFF"
-+PACKAGECONFIG[testing]="-DBUILD_TESTING=ON,-DBUILD_TESTING=OFF"
+https://git.openembedded.org/meta-openembedded/commit/meta-oe/recipes-bsp/fwupd/fwupd_1.9.18.bb?id=80719a61a53dcabf7d114712ffdc8fc9c3428bd5
+
+The issue is affecting the LTS release.Thanks.
+
+On Fri, 3 May 2024 at 08:15, Mikko Rapeli via lists.openembedded.org
+<mikko.rapeli=linaro.org@lists.openembedded.org> wrote:
+>
+> plugin_uefi_capsule_splash does not provide "enabled" or "disabled"
+> options but only basic bool "true" and "false". Fixes do_configure()
+> failure with
+> PACKAGECONFIG:append = " plugin_tpm plugin_uefi_pk plugin_uefi_capsule ":
+>
+> | ../fwupd-1.9.18/meson.build:1:0: ERROR: Value disabled is not boolean (true or false).
+>
+> Signed-off-by: Mikko Rapeli <mikko.rapeli@linaro.org>
+> ---
+>  meta-oe/recipes-bsp/fwupd/fwupd_1.9.18.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-bsp/fwupd/fwupd_1.9.18.bb b/meta-oe/recipes-bsp/fwupd/fwupd_1.9.18.bb
+> index d20d5ed2a..e6c276ba4 100644
+> --- a/meta-oe/recipes-bsp/fwupd/fwupd_1.9.18.bb
+> +++ b/meta-oe/recipes-bsp/fwupd/fwupd_1.9.18.bb
+> @@ -104,7 +104,7 @@ PACKAGECONFIG[plugin_synaptics_mst] = "-Dplugin_synaptics_mst=enabled,-Dplugin_s
+>  PACKAGECONFIG[plugin_synaptics_rmi] = "-Dplugin_synaptics_rmi=enabled,-Dplugin_synaptics_rmi=disabled"
+>  PACKAGECONFIG[plugin_tpm] = "-Dplugin_tpm=enabled,-Dplugin_tpm=disabled,tpm2-tss"
+>  # Turn off the capsule splash as it needs G-I at buildtime, which isn't currently supported
+> -PACKAGECONFIG[plugin_uefi_capsule] = "-Dplugin_uefi_capsule=enabled -Dplugin_uefi_capsule_splash=disabled,-Dplugin_uefi_capsule=disabled,efivar fwupd-efi"
+> +PACKAGECONFIG[plugin_uefi_capsule] = "-Dplugin_uefi_capsule=enabled -Dplugin_uefi_capsule_splash=false,-Dplugin_uefi_capsule=disabled,efivar fwupd-efi"
+>  PACKAGECONFIG[plugin_uefi_pk] = "-Dplugin_uefi_pk=enabled,-Dplugin_uefi_pk=disabled"
+>  PACKAGECONFIG[plugin_uf2] = "-Dplugin_uf2=enabled,-Dplugin_uf2=disabled"
+>  PACKAGECONFIG[plugin_upower] = "-Dplugin_upower=enabled,-Dplugin_upower=disabled"
+> --
+> 2.34.1
+>
+>
+> -=-=-=-=-=-=-=-=-=-=-=-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#110243): https://lists.openembedded.org/g/openembedded-devel/message/110243
+> Mute This Topic: https://lists.openembedded.org/mt/105883191/900901
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [fathi.boudra@linaro.org]
+> -=-=-=-=-=-=-=-=-=-=-=-
+>
+
+Cheers,
 -- 
-2.40.1
-
+Fathi Boudra
+Linaro.org | Open source software for ARM SoCs
 
