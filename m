@@ -1,102 +1,104 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <alexandre.truong@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 06070C04FFE
-	for <webhook@archiver.kernel.org>; Fri, 17 May 2024 06:39:53 +0000 (UTC)
-Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
- by mx.groups.io with SMTP id smtpd.web10.34065.1715927979733634984
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0D761C41513
+	for <webhook@archiver.kernel.org>; Fri, 17 May 2024 09:48:04 +0000 (UTC)
+Received: from mail-lj1-f182.google.com (mail-lj1-f182.google.com [209.85.208.182])
+ by mx.groups.io with SMTP id smtpd.web11.36582.1715939277322069067
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 May 2024 23:39:39 -0700
+ Fri, 17 May 2024 02:47:57 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Ut7Nnq1p;
- spf=pass (domain: gmail.com, ip: 209.85.215.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f179.google.com with SMTP id 41be03b00d2f7-61be599ab77so597254a12.1
-        for <openembedded-devel@lists.openembedded.org>; Thu, 16 May 2024 23:39:39 -0700 (PDT)
+ dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=vNlqQgqa;
+ spf=pass (domain: smile.fr, ip: 209.85.208.182, mailfrom: alexandre.truong@smile.fr)
+Received: by mail-lj1-f182.google.com with SMTP id 38308e7fff4ca-2e45c0a8360so4307301fa.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 17 May 2024 02:47:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1715927979; x=1716532779; darn=lists.openembedded.org;
+        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1715939275; x=1716544075; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=8w8MRQwY8XR0RgcPsZ0fT/YY/F9eEluj6owZn6faXLs=;
-        b=Ut7Nnq1pmoYe3HLCtADrf6mhYC5uteJbWtFi3w5qNwCB6LS+31RCozhbV+qxsA27+w
-         UYROnwqAw/OjFo8kYwJXhHJCcVjazpFwJ7xevignAEnQPWhFR51Queotu5guEHTy8GIS
-         EWy3wKabpX2w3uZ6buHBp0Tp+5MTvg0f20rxZiW9mvhKkCxICmR8kl/xCwhq5bNERlt1
-         rYGpS0XKp29eWvn8Yk6s6FHyeNVW9YCOcJlXsOeUNtRERBKifYjk399wj0SSvUaw59YW
-         iNNvtvFWDtNb45/nFTASqhopROmPZk0AJex5I20ye//ypt/y6V8EETXzwnmOgA/1c0Zw
-         19Hg==
+        bh=NKsu2LYHyYrvaLzY5hfHcPxtyuBWip2bzMINfysTTvQ=;
+        b=vNlqQgqaTtkyjTA4DIZcJFGVXGZI/3noBeLtjmAjR2nBoY36LwgFrCAX+OUovAkDN8
+         8GpK02e+otHwasEBy3U11R0CZvyHTFxv0CJhuOgT6k0B4jZPXtyxr+OTMlTMq1qUShGA
+         rpkotS8HGRXdebmsnY8YxBpu7hz8UDsDwXC4wdQ6SB5MtuWYvHMLOeM/D3jKn1ugC9Oo
+         Fuiy/VqBZotXoESDaB7KbkYOn/FQ0ZHnDCMi886A+ew7o51LzkF3Rmk2gjtbdSe///dZ
+         twHfyqrmnmz/0l0CAs6Xj1WdMIjZ8Y5GTlQAglCLoJk4kJ5FSx0LNBVeSt+dGDVnNw04
+         XWMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1715927979; x=1716532779;
+        d=1e100.net; s=20230601; t=1715939275; x=1716544075;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=8w8MRQwY8XR0RgcPsZ0fT/YY/F9eEluj6owZn6faXLs=;
-        b=eJOosw93DlNlr4VmupO2bup8io+XFAfapcbE4MLZB20dkBohEgiuHQL4857nPRsHZ6
-         TDUI0+rqRp/9vDIWbn6lfcx40YfCn5+AYHUzVgdJ2wv5478Iya/Hc449Np5Phoa/ZpuF
-         DrTnr+smF+JVVoUocyRC1LKv4Lf6QmL5ve48agRSJRMqRBDTtPivSF1WjTEzTmfYGVV6
-         +ny8Q13BkMmQxBh2vxy55h495Dcke4277MqgwjEWIkRP/JLrMZZI/lT0VvdhEHhPplh9
-         69GtDdbbQ/tgMIi3hOI8EErVsEU7V2DgRX17zVlyo2tL57Zifty7FgX+3/jnPWuZtJRO
-         ukZQ==
-X-Gm-Message-State: AOJu0Yy/roskBz7mXRjrd83AAg3CvMV7rXbfhstfZKvNQHVL0k9jGTc5
-	DAwspwA90yeSbyZsuVd3uqvVq8B2xdacVOf8wwimwxZK+oZHTCYsM6OJKqUxq5E=
-X-Google-Smtp-Source: AGHT+IFrrlQOfl9csA0bKPVtpDB5pSsJaqrE8wtJo5EbSwNIeD/BjnfMF9EbtcWaGLNIbB9nxlsZow==
-X-Received: by 2002:a17:90a:c284:b0:2b4:39dc:8639 with SMTP id 98e67ed59e1d1-2b6ccfed238mr17826640a91.46.1715927978800;
-        Thu, 16 May 2024 23:39:38 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::e372])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2b62886b669sm16622575a91.24.2024.05.16.23.39.38
+        bh=NKsu2LYHyYrvaLzY5hfHcPxtyuBWip2bzMINfysTTvQ=;
+        b=KzflX8vcx680Ajj2wRe4QxlDk/UMjMU+YqCuPFRnGE2ldURI0RhQcAR7XZuXmGNe3U
+         +qGz39ordroLTUpHW0entjwTykSGJHav1JuQRlYeNfL62AHtyQv+MMMQeD3S3D1myEka
+         9Rz9s2WDjue+R3Amegz2cVfyoUTjDkJ2zk+cU5tSWjmp0MGSd3FvF8h9N/1XUbYMR8+s
+         QzCEZ5Gn2dX6RNw3osz3yUfFpENA139LArrZB+htj3qeLuN54wdL9ASjCrrU/mWockNW
+         fpncSVrI6mD55FvuYc5D/ZRZGpVozBLwyeEzOaIB699K9OhgpzECA7ETOb3gugKz4KVd
+         QWPg==
+X-Gm-Message-State: AOJu0Ywb3Pw7rBtnvyCDRgk8rypHgDylXPEpwWZdROo7Kfb48JxXNWpJ
+	NZ7oGoLNXcIuvQNUPff5P6gwHAwoJ8VPjN15JgLM9fYSo+DtxPJ7ACxNwGP+dDt1fl63ZlAwnP2
+	7
+X-Google-Smtp-Source: AGHT+IHC29+WnGrVsG7VCEk9glFtihGSKkWn1WqedcR732nHRcGF4oG3w8uFxGshgtTaXBmCA0ki9A==
+X-Received: by 2002:a2e:b618:0:b0:2da:50f8:dfab with SMTP id 38308e7fff4ca-2e51fd4a80bmr132410001fa.7.1715939275529;
+        Fri, 17 May 2024 02:47:55 -0700 (PDT)
+Received: from P-ASN-MOON.idf.intranet (static-css-ccs-204145.business.bouyguestelecom.com. [176.157.204.145])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3502bbbc887sm21047406f8f.98.2024.05.17.02.47.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 May 2024 23:39:38 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+        Fri, 17 May 2024 02:47:55 -0700 (PDT)
+From: Alexandre Truong <alexandre.truong@smile.fr>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH 2/3] tinyalsa: Upgrade to tip of trunk
-Date: Thu, 16 May 2024 23:39:33 -0700
-Message-ID: <20240517063934.753527-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.45.1
-In-Reply-To: <20240517063934.753527-1-raj.khem@gmail.com>
-References: <20240517063934.753527-1-raj.khem@gmail.com>
+Cc: Alexandre Truong <alexandre.truong@smile.fr>,
+	Yoann Congal <yoann.congal@smile.fr>
+Subject: [meta-oe][PATCH 2/4] source-han-sans-jp-fonts: fix url
+Date: Fri, 17 May 2024 11:47:00 +0200
+Message-Id: <20240517094702.9246-3-alexandre.truong@smile.fr>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240517094702.9246-1-alexandre.truong@smile.fr>
+References: <20240517094702.9246-1-alexandre.truong@smile.fr>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 May 2024 06:39:53 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110421
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 May 2024 09:48:04 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110425
 
-This fixes build with musl + gcc14
+We get fetch errors from the SRC_URI provided. svn protocol was used
+but it's deprecated. So, a http url will be passed instead.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+The sha256sum has also been changed since the previous one was
+for the 1.004 release's archive, while we are on 2.004.
+
+Signed-off-by: Alexandre Truong <alexandre.truong@smile.fr>
+Reviewed-by: Yoann Congal <yoann.congal@smile.fr>
 ---
- .../recipes-multimedia/tinyalsa/tinyalsa_2.0.0.bb     | 11 +++++------
- 1 file changed, 5 insertions(+), 6 deletions(-)
+ .../ttf-fonts/source-han-sans-jp-fonts_2.004.bb            | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/tinyalsa/tinyalsa_2.0.0.bb b/meta-multimedia/recipes-multimedia/tinyalsa/tinyalsa_2.0.0.bb
-index e261611afd..b513e959d3 100644
---- a/meta-multimedia/recipes-multimedia/tinyalsa/tinyalsa_2.0.0.bb
-+++ b/meta-multimedia/recipes-multimedia/tinyalsa/tinyalsa_2.0.0.bb
-@@ -4,16 +4,15 @@ HOMEPAGE = "https://github.com/tinyalsa/tinyalsa"
- SECTION = "libs/multimedia"
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_2.004.bb b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_2.004.bb
+index 6a4509048..8a2caa44b 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_2.004.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_2.004.bb
+@@ -11,13 +11,12 @@ inherit allarch fontcache
+ #EXCLUDE_FROM_WORLD = "1"
  
- LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://NOTICE;md5=e04cd6fa58488e016f7fb648ebea1db4"
-+LIC_FILES_CHKSUM = "file://NOTICE;md5=d2918795d9185efcbf430b9ad5cda46d"
+ SRC_URI = " \
+-    svn://github.com/adobe-fonts/source-han-sans;module=branches/release/SubsetOTF/JP;protocol=http;rev=82 \
++    https://github.com/adobe-fonts/source-han-sans/releases/download/2.004R/SourceHanSansJP.zip;subdir=${BP} \
+     file://44-source-han-sans-jp.conf \
+ "
+-SRC_URI[md5sum] = "908fbf97f3df04a6838708c093f1e900"
+-SRC_URI[sha256sum] = "dc6dbae3fba35f220bac88ba7130b826c7efe1282f472788fae3628b79be3f54"
++SRC_URI[sha256sum] = "1ae9f62ad620d686c4a049ce25cf54e3afd8fefc954a678c644cf9802750c17e"
  
--SRCREV = "1c5fb68ced57d838f2b7ecd0c00bc1fefc9ab60d"
--SRC_URI = "git://github.com/tinyalsa/tinyalsa;branch=master;protocol=https \
--	   	    file://0001-fixed-compilation-error-caused-by-strncpy.patch \
--          "
-+PV .= "+git"
-+SRCREV = "f78ed25aced2dfea743867b8205a787bfb091340"
-+SRC_URI = "git://github.com/tinyalsa/tinyalsa;branch=master;protocol=https"
+-S = "${WORKDIR}/SourceHanSansJP"
++S = "${WORKDIR}/${BP}"
  
- S = "${WORKDIR}/git"
- 
--inherit cmake
-+inherit meson
- 
- # tinyalsa is built as a static library. Enable PIC to avoid relocation
- # errors like these:
+ do_install() {
+     install -d ${D}${sysconfdir}/fonts/conf.d/
 -- 
-2.45.1
+2.34.1
 
 
