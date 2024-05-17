@@ -1,104 +1,130 @@
-Return-Path: <alexandre.truong@smile.fr>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 22381C04FFE
-	for <webhook@archiver.kernel.org>; Fri, 17 May 2024 09:48:04 +0000 (UTC)
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
- by mx.groups.io with SMTP id smtpd.web10.36006.1715939277573329517
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 740D8C25B78
+	for <webhook@archiver.kernel.org>; Fri, 17 May 2024 10:06:14 +0000 (UTC)
+Received: from mail-lj1-f179.google.com (mail-lj1-f179.google.com [209.85.208.179])
+ by mx.groups.io with SMTP id smtpd.web11.37050.1715940371526734866
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 May 2024 02:47:57 -0700
+ Fri, 17 May 2024 03:06:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=bUexmGAt;
- spf=pass (domain: smile.fr, ip: 209.85.221.41, mailfrom: alexandre.truong@smile.fr)
-Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-3535fdf5ab0so228858f8f.1
-        for <openembedded-devel@lists.openembedded.org>; Fri, 17 May 2024 02:47:57 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=O9NcVHFj;
+ spf=pass (domain: gmail.com, ip: 209.85.208.179, mailfrom: martin.jansa@gmail.com)
+Received: by mail-lj1-f179.google.com with SMTP id 38308e7fff4ca-2e538a264e0so23303801fa.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 17 May 2024 03:06:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1715939276; x=1716544076; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1715940370; x=1716545170; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=RDZ/Ki9lVIIlsNVxdQ49MOadPfTEO5gB6xWzpmDh+GQ=;
-        b=bUexmGAtCvuQKGbBy4as+wj4YgapHjjYh7OEbzKmKniavl8A+LkgOS1N4Url1e5/Of
-         XoNj0Dy8s7YJtl8PH9wi5Wn8ajEUabPQhADilGoelLqRn8LnupDrucA2epg+I9FGWJ23
-         NDlvfJ6Ls14dbVUcrfqFtQMKWU3/QFhlQRmczyz0Hi9AHbXBTssZ86jChH6uNcCdYZLg
-         u07cJmVKY35Qlhr6ZiyhY2Ry7Si6Y3xw+sQ/F5a3rrZm+UwIogOq+KJ9Pwh24k9/jYDd
-         E9nXOnSfRFiFHnACnQEnJjGR0d1eAD7lVzUX/4Qe675fdkNEaI0DRamkwWuvR/olbsFH
-         2zDw==
+        bh=HCa2qdQfLteM8FYfcWl3JlSY9KGwNboNY8R31TwDz2c=;
+        b=O9NcVHFjWF2CYgavHuXOEInTfH20HAstgSm8T8LaB72IwerEvz35yWWD3QJuewfQ+Y
+         l4SfJJqGna6alJI3xjZoPzXiFshr+6jhYhgkFuXWsRoUrpJEnV6o0EKlyJAMKNK9ZcHr
+         toPnhEer6T6Y1qsqabfIEAxl8W03Ak3883K9Qp714nE/dyVAxcGgrquYqtjaFonlIVso
+         d+gVJVvZxUbnay6PAoqIqqq4dSeVXiavM5ybU5kfK5gOHjiyLWHqPL4bxNXD9k2b4WcZ
+         jLEkfwldH/gJ8yGXLdQm6U1GtGL/+Fj2z5e5MMWljv7DwESJAUxvy22Ka0XVu77cz9rZ
+         LTDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1715939276; x=1716544076;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1715940370; x=1716545170;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=RDZ/Ki9lVIIlsNVxdQ49MOadPfTEO5gB6xWzpmDh+GQ=;
-        b=F5hn42wRxGhIy1i/sylFrt7j3AkVGrVayCkU4IJ33cm1GmpmZdlWE+yFnpWGnp6Iyx
-         AfULLk4uUK1z+4zdyJFb5DC/76oUYKz65Ht/3ZQ+O7CuIQCnmk1FtgcMRXiJg/gVJUm2
-         1iv9lvdbLhTbHLr0aJO7net+i/N0J5ha218GjUxOZ+hpnzmOzUfsQCxH4FyvzzIrJcS8
-         fnhwxOAUYRsAKGKetd4EnWMovA4EF0UWWZZB2J4ixPFe1xRSBmVnFBS8PoaJXKVvm5AM
-         /Ij4+t7VQgxLhCoFNq/iWsmlc1mbNfnCPitPh/5eQr1cs07c6BE/wDvuvGTiBYwdhXmK
-         DcAw==
-X-Gm-Message-State: AOJu0YxwD2Y0w+mcrmL4D8kLoaryYxx1Q9x1A0oBEA+M0E5OY75BU52H
-	44YEt8xSred4FcqpwROQV2w8KBRSO2L0Xh+TYkfu8rzx4raUBc0s+h2Z97yKIk7je2/PyN0ldcc
-	I
-X-Google-Smtp-Source: AGHT+IGZqHqkuNQsRezWp1eGTe34Mm/9mxahGgNQbSkU27EuDv2z96fTTXkA3/05rn9gH2O/qwoZ8A==
-X-Received: by 2002:a5d:4b0f:0:b0:346:bc1b:4efa with SMTP id ffacd0b85a97d-3504a73bc7dmr16218729f8f.32.1715939276011;
-        Fri, 17 May 2024 02:47:56 -0700 (PDT)
-Received: from P-ASN-MOON.idf.intranet (static-css-ccs-204145.business.bouyguestelecom.com. [176.157.204.145])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3502bbbc887sm21047406f8f.98.2024.05.17.02.47.55
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 17 May 2024 02:47:55 -0700 (PDT)
-From: Alexandre Truong <alexandre.truong@smile.fr>
-To: openembedded-devel@lists.openembedded.org
-Cc: Alexandre Truong <alexandre.truong@smile.fr>,
-	Yoann Congal <yoann.congal@smile.fr>
-Subject: [meta-oe][PATCH 3/4] source-han-sans-cn-fonts: fix url
-Date: Fri, 17 May 2024 11:47:01 +0200
-Message-Id: <20240517094702.9246-4-alexandre.truong@smile.fr>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240517094702.9246-1-alexandre.truong@smile.fr>
-References: <20240517094702.9246-1-alexandre.truong@smile.fr>
+        bh=HCa2qdQfLteM8FYfcWl3JlSY9KGwNboNY8R31TwDz2c=;
+        b=JGAIbL/Rx2650BvpPwTDnS4/yJ3V9bGl3v5b6ll7qaEVwinsdid3FR32nxk7wcDoep
+         c6ZowebmYrMDo4JUB458RjOTMuSbl9T9psNN14hRIEEt1PZs1ylZCmbDQw1qOnVWP666
+         YSF3+8SyRqlvZKIcNDEIGC3wijHa3oqzzdQFZOo+PbPyEI2W/WoNaZr3+7jHaRVDarjR
+         QUBA8ek2FM0/1Nwg9werewq2eobkyoVYBUCZOIy45h8+jZ6NuKBzUNLqsdCGnl+Dp0Ug
+         PRKPyvA4qKdZ5VVyxW+OtjkttnffOxrQo7TOb7lCU5zcowff5MbA52t7ebKhtP0HCqmE
+         oc/A==
+X-Gm-Message-State: AOJu0YyUqkCIXOduLgW7XJFdhqixNBQKy0DCIpzVZsmtms0D9KzeX3Vt
+	o0uFyIOqAaPbrm1joUJiLKv23800zxKJOIdGSnmodOaC4FDX98Afkc2uNpWnntegp7cPeK0+2ro
+	rFEKIIzTScVf4kkYKD91Kh61X9S8=
+X-Google-Smtp-Source: AGHT+IGA72RMN9RSY5+mgABEu2FhYaRSVCh99LeVLA1mRzXqYAh7p5wjlWJjfqE36MpdokEz2xHV8rowbIpepYo9NQc=
+X-Received: by 2002:a2e:3515:0:b0:2da:a3ff:5254 with SMTP id
+ 38308e7fff4ca-2e51fd3feccmr182673891fa.1.1715940369437; Fri, 17 May 2024
+ 03:06:09 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240517094702.9246-1-alexandre.truong@smile.fr> <20240517094702.9246-2-alexandre.truong@smile.fr>
+In-Reply-To: <20240517094702.9246-2-alexandre.truong@smile.fr>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Fri, 17 May 2024 12:05:52 +0200
+Message-ID: <CA+chaQfdiz6AVn3VU8zQ=QKWcZKjOPEox43q05tZuPri3Jh1+w@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH 1/4] source-han-sans-tw-fonts: fix url
+To: alexandre.truong@smile.fr
+Cc: openembedded-devel@lists.openembedded.org, 
+	Yoann Congal <yoann.congal@smile.fr>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 May 2024 09:48:04 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110426
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 May 2024 10:06:14 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110428
 
-We get fetch errors from the SRC_URI provided. svn protocol was used
-but it's deprecated. So, a http url will be passed instead.
+S =3D "${WORKDIR}/${BP}"
 
-The sha256sum has also been changed since the previous one was
-for the 1.004 release's archive, while we are on 2.004.
+This is the default, so you can just drop this and I would squash all
+4 as it's almost the same change across 4 almost identical recipes.
 
-Signed-off-by: Alexandre Truong <alexandre.truong@smile.fr>
-Reviewed-by: Yoann Congal <yoann.congal@smile.fr>
----
- .../ttf-fonts/source-han-sans-cn-fonts_2.004.bb            | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-cn-fonts_2.004.bb b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-cn-fonts_2.004.bb
-index b4a598527..981d0d3c0 100644
---- a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-cn-fonts_2.004.bb
-+++ b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-cn-fonts_2.004.bb
-@@ -11,13 +11,12 @@ inherit allarch fontcache
- #EXCLUDE_FROM_WORLD = "1"
- 
- SRC_URI = " \
--    svn://github.com/adobe-fonts/source-han-sans;module=branches/release/SubsetOTF/CN;protocol=http;rev=82 \
-+    https://github.com/adobe-fonts/source-han-sans/releases/download/2.004R/SourceHanSansCN.zip;subdir=${BP} \
-     file://44-source-han-sans-cn.conf \
- "
--SRC_URI[md5sum] = "d16abc21f6575bb08894efedbed484a2"
--SRC_URI[sha256sum] = "0a0e1d8e52833bc352d454d8242da03b82c0efc41323fb66f7435e5b39734a4f"
-+SRC_URI[sha256sum] = "6841fc13f1c0d255cfeb33d2a2c68d24bbebd94ae2c070347a2b2b200a1db4d6"
- 
--S = "${WORKDIR}/SourceHanSansCN"
-+S = "${WORKDIR}/${BP}"
- 
- do_install() {
-     install -d ${D}${sysconfdir}/fonts/conf.d/
--- 
-2.34.1
-
+On Fri, May 17, 2024 at 11:48=E2=80=AFAM Alexandre Truong via
+lists.openembedded.org
+<alexandre.truong=3Dsmile.fr@lists.openembedded.org> wrote:
+>
+> We get fetch errors from the SRC_URI provided. svn protocol was used
+> but it's deprecated. So, a http url will be passed instead.
+>
+> The sha256sum has also been changed since the previous one was
+> for the 1.004 release's archive, while we are on 2.004.
+>
+> Signed-off-by: Alexandre Truong <alexandre.truong@smile.fr>
+> Reviewed-by: Yoann Congal <yoann.congal@smile.fr>
+> ---
+>  .../ttf-fonts/source-han-sans-tw-fonts_2.004.bb            | 7 +++----
+>  1 file changed, 3 insertions(+), 4 deletions(-)
+>
+> diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts_=
+2.004.bb b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts_2.00=
+4.bb
+> index a2b3fff07..563bd6a47 100644
+> --- a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts_2.004.b=
+b
+> +++ b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts_2.004.b=
+b
+> @@ -11,13 +11,12 @@ inherit allarch fontcache
+>  #EXCLUDE_FROM_WORLD =3D "1"
+>
+>  SRC_URI =3D " \
+> -    svn://github.com/adobe-fonts/source-han-sans;module=3Dbranches/relea=
+se/SubsetOTF/TW;protocol=3Dhttp;rev=3D82 \
+> +    https://github.com/adobe-fonts/source-han-sans/releases/download/2.0=
+04R/SourceHanSansTW.zip;subdir=3D${BP} \
+>      file://44-source-han-sans-tw.conf \
+>  "
+> -SRC_URI[md5sum] =3D "6533b71b31c19e548768f0fc963202f3"
+> -SRC_URI[sha256sum] =3D "92ba161921c5cdec5a8f8d5711676f0865b50cee071c25eb=
+4bd4125b5af59fd0"
+> +SRC_URI[sha256sum] =3D "11d78c8fbc1a4bb04a453cdd65c99db8d41ec5cd6ba6d68c=
+8638e6ba170de806"
+>
+> -S =3D "${WORKDIR}/SourceHanSansTW"
+> +S =3D "${WORKDIR}/${BP}"
+>
+>  do_install() {
+>      install -d ${D}${sysconfdir}/fonts/conf.d/
+> --
+> 2.34.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#110423): https://lists.openembedded.org/g/openembedde=
+d-devel/message/110423
+> Mute This Topic: https://lists.openembedded.org/mt/106150787/3617156
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
+artin.jansa@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
