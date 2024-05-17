@@ -1,107 +1,193 @@
-Return-Path: <abhilash.kollam@gmail.com>
+Return-Path: <f_l_k@t-online.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B341DC04FFE
-	for <webhook@archiver.kernel.org>; Fri, 17 May 2024 04:35:42 +0000 (UTC)
-Received: from mail-oo1-f45.google.com (mail-oo1-f45.google.com [209.85.161.45])
- by mx.groups.io with SMTP id smtpd.web10.32711.1715920538112225111
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B7DBC04FFE
+	for <webhook@archiver.kernel.org>; Fri, 17 May 2024 06:09:13 +0000 (UTC)
+Received: from mailout03.t-online.de (mailout03.t-online.de [194.25.134.81])
+ by mx.groups.io with SMTP id smtpd.web11.34283.1715926143070689298
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 16 May 2024 21:35:38 -0700
+ Thu, 16 May 2024 23:09:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Iaus4E2u;
- spf=pass (domain: gmail.com, ip: 209.85.161.45, mailfrom: abhilash.kollam@gmail.com)
-Received: by mail-oo1-f45.google.com with SMTP id 006d021491bc7-5b21e393debso639502eaf.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 16 May 2024 21:35:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1715920537; x=1716525337; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=TcjDb3aE1Ftdmie7C0HU3ErsFqq6w264ahTWQ9u2/50=;
-        b=Iaus4E2uGPxDGuRHfDbt25HKBoyKx0HUJigzui9SgAbia2cZfdV9raESavzxzSxCzc
-         PfNCoZEPwAUidHTymvyIV9LViL5HwSN5Mh6g1lCzcGdIAIdTkY8ju1Ssrx0iDUhKhfBG
-         6WQN6vqNbkVhEGLwcr8VabgjjgViKvq3XpycGRZR7GjgyoWZ+GNYAgNSMIP+uOeSMtWX
-         +v+bvhk0ANIodqczb9mJ0spXN2l2+ElUjcGb3Y8MELkpmtp2KD+wV0j3DACo+F6OiedP
-         n0Bs1Vg27M9SUnzy5BNsGA3TMG/r/zPxkSY+1/4nYPzyWIVfQrCHG1fKJzDF9MVxpJJ7
-         10nQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1715920537; x=1716525337;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=TcjDb3aE1Ftdmie7C0HU3ErsFqq6w264ahTWQ9u2/50=;
-        b=vZxmO8d23twFu5Bkz+bWgV3TRDtsQJC1zQ8emu9dbAfCttUBsBgJHJkeBOTO6XRwgh
-         QnU8cHPUSRGOryCAt99flJ1Er8/+zliTA17w6DYhYfJ5o2YCT/RaAoeNMMRFm+oQYWVa
-         GIcrnwV4O0N/3WQE1M5rqSwZDQRyhcIVoQYaKMfETWnhnuk7oXYzyDrp2t/i4aEsFZNU
-         ujjUZQwPhzwNujkqStma969J3l6uOe0cy7lNPjcwCu34gZTXyAPZjcmTQVccbag9DUMW
-         kUU+GrBtdUm5U5GlHmLgY/Fuv13E4FjbmZGmST/5fe1+FAd/2+l0xRNfM7rdE5dYq/+S
-         0l0g==
-X-Gm-Message-State: AOJu0YzG5Gf4agx10n8dN9eYCd4K0ICqiDQvej3iX7hNeZ5pqEOUXLsS
-	+26jiceWus62mmjjE/+KW98LVhypLK/zqO0TuXrLKgllK9Be3hqJa4SYSf9ZC0A=
-X-Google-Smtp-Source: AGHT+IF9zTdd1gNy1quXm9x/EW2cGZJX/uBRRbzYQxjRwPtpbV10eSMcqN4Q+5MGASdc7mW+cP6EZw==
-X-Received: by 2002:a05:6870:b14e:b0:23f:a83b:29c with SMTP id 586e51a60fabf-24172a22848mr24489289fac.11.1715920537000;
-        Thu, 16 May 2024 21:35:37 -0700 (PDT)
-Received: from gfwa129.aus.stglabs.ibm.com ([129.41.86.5])
-        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-2412acd6e14sm3883218fac.52.2024.05.16.21.35.36
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 May 2024 21:35:36 -0700 (PDT)
-From: Abhilash Raju <abhilash.kollam@gmail.com>
+ dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.81, mailfrom: f_l_k@t-online.de)
+Received: from fwd74.aul.t-online.de (fwd74.aul.t-online.de [10.223.144.100])
+	by mailout03.t-online.de (Postfix) with SMTP id 29D1B473C6;
+	Fri, 17 May 2024 08:09:01 +0200 (CEST)
+Received: from intel-corei7-64.fritz.box ([84.163.32.200]) by fwd74.t-online.de
+	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
+	esmtp id 1s7qm4-2J8mR70; Fri, 17 May 2024 08:09:00 +0200
+From: Markus Volk <f_l_k@t-online.de>
 To: openembedded-devel@lists.openembedded.org
-Cc: Abhilash Raju <abhilash.kollam@gmail.com>
-Subject: [meta-oe][PATCH v3
-Date: Thu, 16 May 2024 23:35:32 -0500
-Message-Id: <20240517043532.4070180-1-abhilash.kollam@gmail.com>
-X-Mailer: git-send-email 2.40.1
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCHv3] malcontent: add recipe
+Date: Fri, 17 May 2024 08:09:32 +0200
+Message-ID: <20240517060932.52641-1-f_l_k@t-online.de>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-TOI-EXPURGATEID: 150726::1715926140-627FBD2B-B99F6DB9/0/0 CLEAN NORMAL
+X-TOI-MSGID: 5509728e-9ca0-4d62-bf06-ff2a244abe52
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 May 2024 04:35:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110418
+ <openembedded-devel@lists.openembedded.org>; Fri, 17 May 2024 06:09:13 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110419
 
-An Observability framework to create and manage telemetry data such as
-traces, metrics, and logs
+malcontent is an optional dependency for flatpak and gnome-software
 
-Signed-off-by: Abhilash Raju <abhilash.kollam@gmail.com>
+- Building the malcontent gtk4-ui leads to circular dependency malcontent=
+ <-> flatpak
+  Add a separate package for malcontent-ui to avoid this and to make malc=
+ontent-control
+  buildable.
+
+Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../opentelemetry/opentelemetry-cpp_1.15.0.bb | 26 +++++++++++++++++++
- 1 file changed, 26 insertions(+)
- create mode 100644 meta-oe/recipes-support/opentelemetry/opentelemetry-cpp_1.15.0.bb
+ .../malcontent/malcontent-ui_0.12.0.bb        | 48 +++++++++++++++++++
+ .../recipes-gnome/malcontent/malcontent.inc   |  3 ++
+ .../malcontent/malcontent_0.12.0.bb           | 44 +++++++++++++++++
+ 3 files changed, 95 insertions(+)
+ create mode 100644 meta-oe/recipes-gnome/malcontent/malcontent-ui_0.12.0=
+.bb
+ create mode 100644 meta-oe/recipes-gnome/malcontent/malcontent.inc
+ create mode 100644 meta-oe/recipes-gnome/malcontent/malcontent_0.12.0.bb
 
-diff --git a/meta-oe/recipes-support/opentelemetry/opentelemetry-cpp_1.15.0.bb b/meta-oe/recipes-support/opentelemetry/opentelemetry-cpp_1.15.0.bb
+diff --git a/meta-oe/recipes-gnome/malcontent/malcontent-ui_0.12.0.bb b/m=
+eta-oe/recipes-gnome/malcontent/malcontent-ui_0.12.0.bb
 new file mode 100644
-index 000000000..88033e58c
+index 000000000..13bfe7853
 --- /dev/null
-+++ b/meta-oe/recipes-support/opentelemetry/opentelemetry-cpp_1.15.0.bb
-@@ -0,0 +1,26 @@
-+SUMMARY = "Open Telemetry Library"
-+DESCRIPTION = "An Observability framework to create and manage telemetry data \
-+such as traces, metrics, and logs."
-+HOMEPAGE = "https://github.com/open-telemetry/opentelemetry-cpp"
-+SECTION = "libs"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
++++ b/meta-oe/recipes-gnome/malcontent/malcontent-ui_0.12.0.bb
+@@ -0,0 +1,48 @@
++SUMMARY =3D "User-Interface for malcontent."
++HOMEPAGE =3D "https://gitlab.freedesktop.org/pwithnall/malcontent"
++LICENSE =3D "LGPL-2.1-only"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd255951079008b3645=
+16c"
 +
-+DEPENDS = "nlohmann-json"
++require malcontent.inc
 +
-+SRC_URI = "git://github.com/open-telemetry/opentelemetry-cpp.git;protocol=https;branch=main;"
-+SRCREV = "054b0dc207c1f58e290d78cdaac5f314bc328b31"
++DEPENDS =3D " \
++	malcontent \
++	accountsservice \
++	glib-2.0 \
++	glib-testing \
++	dbus \
++	desktop-file-utils-native \
++	itstool-native \
++	libpam \
++	polkit \
++	appstream \
++	flatpak \
++	libadwaita \
++	gtk4 \
++"
 +
-+S = "${WORKDIR}/git"
-+inherit cmake pkgconfig lib_package
++GIR_MESON_OPTION =3D ""
 +
-+PACKAGECONFIG ?= "opentelemety_install otlp_api"
++GTKIC_VERSION =3D "4"
++inherit  meson pkgconfig gtk-icon-cache gobject-introspection gettext fe=
+atures_check
 +
-+PACKAGECONFIG[opentelemety_install]="-DOPENTELEMETRY_INSTALL=ON,-DOPENTELEMETRY_INSTALL=OFF"
-+PACKAGECONFIG[build_package]="-DBUILD_PACKAGE=ON,-DBUILD_PACKAGE=OFF"
-+PACKAGECONFIG[otlp_api]="-DWITH_OTLP_API=ON,-DWITH_OTLP_API=OFF"
-+PACKAGECONFIG[otlp_grpc]="-DWITH_OTLP_GRPC=ON,-DWITH_OTLP_GRPC=OFF"
-+PACKAGECONFIG[otlp_http]="-DWITH_OTLP_HTTP=ON,-DWITH_OTLP_HTTP=OFF"
-+PACKAGECONFIG[otlp_prometheus]="-DWITH_PROMETHEUS=ON,-DWITH_PROMETHEUS=OFF"
-+PACKAGECONFIG[benchmark]="-DWITH_BENCHMARK=ON,-DWITH_BENCHMARK=OFF"
-+PACKAGECONFIG[testing]="-DBUILD_TESTING=ON,-DBUILD_TESTING=OFF"
--- 
-2.40.1
++REQUIRED_DISTRO_FEATURES =3D "pam polkit gobject-introspection"
++
++EXTRA_OEMESON =3D "-Dui=3Denabled"
++
++do_install() {
++	install -d ${D}${datadir}/gir-1.0 ${D}${libdir}/girepository-1.0 ${D}${=
+bindir}
++	install -d ${D}${datadir}/polkit-1/actions ${D}${datadir}/metainfo ${D}=
+${datadir}/applications
++	install -m 0644 ${B}/libmalcontent-ui/MalcontentUi-1.gir ${D}${datadir}=
+/gir-1.0
++	install -m 0644 ${B}/libmalcontent-ui/MalcontentUi-1.typelib ${D}${libd=
+ir}/girepository-1.0
++	ln -sf libmalcontent-ui-1.so.1 ${D}${libdir}/libmalcontent-ui-1.so
++	install -m 0644 ${B}/libmalcontent-ui/libmalcontent-ui-1.so.1 ${D}${lib=
+dir}
++	install -m 0644 ${B}/libmalcontent-ui/libmalcontent-ui-1.so.0.12.0 ${D}=
+${libdir}
++	install -m 0755 ${B}/malcontent-control/malcontent-control ${D}${bindir=
+}
++	install -m 0644 ${B}/malcontent-control/org.freedesktop.MalcontentContr=
+ol.policy ${D}${datadir}/polkit-1/actions
++	install -m 0644 ${B}/malcontent-control/org.freedesktop.MalcontentContr=
+ol.appdata.xml ${D}${datadir}/metainfo
++	install -m 0644 ${B}/malcontent-control/org.freedesktop.MalcontentContr=
+ol.desktop ${D}${datadir}/applications
++}
++
++FILES:${PN} +=3D "${bindir} ${libdir} ${datadir}"
++
+diff --git a/meta-oe/recipes-gnome/malcontent/malcontent.inc b/meta-oe/re=
+cipes-gnome/malcontent/malcontent.inc
+new file mode 100644
+index 000000000..0446005a3
+--- /dev/null
++++ b/meta-oe/recipes-gnome/malcontent/malcontent.inc
+@@ -0,0 +1,3 @@
++SRC_URI =3D "git://gitlab.freedesktop.org/pwithnall/malcontent.git;proto=
+col=3Dhttps;branch=3Dmain"
++S =3D "${WORKDIR}/git"
++SRCREV =3D "3ba80995bb25b7aeda7e21d547f9e39ff9a81736"
+diff --git a/meta-oe/recipes-gnome/malcontent/malcontent_0.12.0.bb b/meta=
+-oe/recipes-gnome/malcontent/malcontent_0.12.0.bb
+new file mode 100644
+index 000000000..c4bc50fa8
+--- /dev/null
++++ b/meta-oe/recipes-gnome/malcontent/malcontent_0.12.0.bb
+@@ -0,0 +1,44 @@
++SUMMARY =3D "malcontent implements support for restricting the type of c=
+ontent."
++HOMEPAGE =3D "https://gitlab.freedesktop.org/pwithnall/malcontent"
++LICENSE =3D "LGPL-2.1-only"
++LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd255951079008b3645=
+16c"
++
++require malcontent.inc
++
++DEPENDS =3D " \
++	accountsservice \
++	glib-2.0 \
++	glib-testing \
++	dbus \
++	itstool-native \
++	libpam \
++	polkit \
++"
++
++GIR_MESON_OPTION =3D ""
++
++inherit  meson pkgconfig gobject-introspection gettext features_check us=
+eradd
++
++REQUIRED_DISTRO_FEATURES =3D "pam polkit gobject-introspection"
++
++PACKAGECONFIG ?=3D "ui"
++PACKAGECONFIG[ui] =3D ",,,malcontent-ui"
++
++EXTRA_OEMESON =3D "-Dui=3Ddisabled"
++
++USERADD_PACKAGES =3D "${PN}"
++USERADD_PARAM:${PN} =3D "--system --no-create-home --user-group --home-d=
+ir ${sysconfdir}/polkit-1 --shell /bin/nologin polkitd"
++
++do_install:append() {
++        # Fix up permissions on polkit rules.d to work with rpm4 constra=
+ints
++        chmod 700 ${D}/${datadir}/polkit-1/rules.d
++        chown polkitd:root ${D}/${datadir}/polkit-1/rules.d
++}
++
++FILES:${PN} +=3D " \
++	${libdir}/security/pam_malcontent.so \
++	${datadir}/accountsservice \
++	${datadir}/help \
++	${datadir}/dbus-1 \
++	${datadir}/polkit-1 \
++"
+--=20
+2.44.0
 
 
