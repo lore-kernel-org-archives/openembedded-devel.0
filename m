@@ -1,108 +1,163 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E27ABC25B79
-	for <webhook@archiver.kernel.org>; Fri, 17 May 2024 15:12:55 +0000 (UTC)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
- by mx.groups.io with SMTP id smtpd.web11.43201.1715958766157167631
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8E90CC25B74
+	for <webhook@archiver.kernel.org>; Sat, 18 May 2024 17:47:32 +0000 (UTC)
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.web10.23116.1716054452033117757
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 17 May 2024 08:12:46 -0700
+ Sat, 18 May 2024 10:47:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=vCb96J6x;
- spf=pass (domain: smile.fr, ip: 209.85.128.48, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-4202c1d19d5so1873085e9.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 17 May 2024 08:12:45 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=eEz7tL/s;
+ spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-1f2f566a7c7so7313645ad.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 18 May 2024 10:47:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1715958764; x=1716563564; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1716054451; x=1716659251; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=yjXfc9ZtttW/OnOdWPMO3SZe3lMwX+K2MEu3gZOHUPU=;
-        b=vCb96J6xUQpIjrZVkNDwgL0fxS3n/5mqyo4gKQdzei9DwuAh1O7/g9cXPMEsSlSpa7
-         JlxuQE0L5TCBLqUnAz8rSFnpV9sejiQVV+avrwKvmdzDQ543hiRLco8rZITFedOsgnWC
-         B2h2WztRF0Ko4S68dkOh0w35i9KJtQgrIF4+oGbpedZfHmK7HNAe+d8NguetYXMlgVDB
-         He5BpNP411d4tlU6DmigazMAN2j08GqRfolNd866x6tPxoZWEDFrFyANbGhc+ehrzmDq
-         vPXpvuBwwZbYN8vnMkHIgbHVW/zU7K2xY1EXwtGiQOhLatRBqjyfKqJpjRT/5hXRL+0T
-         12Gg==
+        bh=elu1KSvE3EKMpmFlhHxGfuqOzyHCX5iN6MafcWd2MTA=;
+        b=eEz7tL/s0sWLRewhdffNyGSxCacRY+Ten+OpMOUnTo0e/tLH7EzekluRf28CT5+Ehy
+         on6c0eDCbUcWpUa3Vi/YwEqKww6UMPWe0Lv0LUIp9vFzV9hZ5pi29ymJA5mmoL0fEUKL
+         GtL94htVndaeiUCJgweDLzrqvBU/+Ye/6RTVTyEUHl5GD0LRtVH4aecOuXG/6JoHT3Xr
+         jGyG7IQecytmvpCYr8TIOb2Zk5NcKHxS7W/gBVaeltK4U0+G/6BXnzKbjUiqh6FHHaAu
+         U+J581HZMhQ/M9SlqwuOWzL2Rdnw5xt86WWcSRJ2e5FHjzC6omDFV6swKqwOJMzQnPPU
+         Nvmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1715958764; x=1716563564;
+        d=1e100.net; s=20230601; t=1716054451; x=1716659251;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=yjXfc9ZtttW/OnOdWPMO3SZe3lMwX+K2MEu3gZOHUPU=;
-        b=CqsBTpbx/JDqO6+5QLzCul0A7vb1Q5cTwQIqc1lP5e+ldKzSMLzu58ybRAg/sIgUQZ
-         YgF2WRS46Y2I9Ib8zT1EMW1mIBddsn478dsikMIMj847Kdd0kAdhKR9I/aov4jpKjHhv
-         6k/Xa0NNslMbJix6Flc/I8RsiqsBD0j1GdjSn/P38lvLiQaFRvyswWrIyxtd7Wg2Eudc
-         SbhBm/VA0O+eoN6EZgjOdXiR1Rp+ox/e2UGb0G/373DD8yz2aiR3Frw/j4k2k0LZSXtW
-         TF+o7aPKW1Jgp5BRVwACSKAlWRoLN7sET7fpRyvJjTi47GimAGSL1uQmv1b29HMCn/y+
-         txeg==
-X-Gm-Message-State: AOJu0YxGqn7l3V/k6KgW82FNpcrZJdumoTeTLPrHgGNy+C6w1bMFcss3
-	JhctfePVgDaYw2XpMmoFVMkGP4KmlPHFRgFF5HzQN7X4VjRjd0Ynu1txbeS6EYfvnL65wNlu3iv
-	Y474=
-X-Google-Smtp-Source: AGHT+IHVYom1vYZq/1eBGtEVg51p1bAgoOV01acxsBFDTKPMZiqv8a2ixGrDL+R9E1Izq6+53eaT4g==
-X-Received: by 2002:a05:600c:1d21:b0:41a:c592:64ff with SMTP id 5b1f17b1804b1-41fead61bfbmr172575635e9.35.1715958763985;
-        Fri, 17 May 2024 08:12:43 -0700 (PDT)
-Received: from P-ASN-ECS-830T8C3.local ([89.159.1.53])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-41f88110f3esm345754935e9.29.2024.05.17.08.12.43
+        bh=elu1KSvE3EKMpmFlhHxGfuqOzyHCX5iN6MafcWd2MTA=;
+        b=xEgVKJoA7FXhs7BoHyJEuvPUrodjKDmm/yGLiNDcgUcLvhDNSFg5B//49CZOOWCOVg
+         tUDtbwO6MxDqDqmMgvm5tQRDBQXqjOjkYBmwB7rOtx4RHgDHB2sL2lIbmzzJAdt72Fbg
+         v2h+mCTTiSJmy1rjNjwanF/p9mN8IqiZIoRiYRgKs5UPjjQ/TtkIetHvpUUlH6Y/87+G
+         8hU7WD4MZSi4Et/SwDUJIxzxpKXXYB3uCK1hyOpw49odO9ZlBd0d8aRkEVh+g0ocuAfA
+         t5delXT+aqfcBlh0wEnnGSLdZlc8gJWPDZXHHL5Zthsu6huX27Ak07bYJRsHTGqygcMg
+         ABdg==
+X-Gm-Message-State: AOJu0Yw0Lftf61uqboI3X/NthoKmSnoSym1UBS5ZLZwSV9a7yRVXRLw/
+	R3pg8NkPHL+lqqPYHy+3u4OAGisQFg2yI7lqFcp/p03Vn/XjaC8YyKpvS8oUec4=
+X-Google-Smtp-Source: AGHT+IFEl9UDoTm98+ZEVdpql8InnSV0ksghrxSE3ovw1gLiLbg8+T8QREYx+Bs2Ui/Z2pM8kd2X4A==
+X-Received: by 2002:a05:6a21:788e:b0:1af:a5b1:290a with SMTP id adf61e73a8af0-1afde0a994amr28539850637.13.1716054451018;
+        Sat, 18 May 2024 10:47:31 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::e8eb])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2ba378088efsm5274691a91.15.2024.05.18.10.47.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 17 May 2024 08:12:43 -0700 (PDT)
-From: Yoann Congal <yoann.congal@smile.fr>
+        Sat, 18 May 2024 10:47:30 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Yoann Congal <yoann.congal@smile.fr>,
-	Alexandre Truong <alexandre.truong@smile.fr>
-Subject: [meta-networking][PATCH] squid: workaround a build failure with native gcc10
-Date: Fri, 17 May 2024 17:12:15 +0200
-Message-Id: <20240517151215.162628-1-yoann.congal@smile.fr>
-X-Mailer: git-send-email 2.39.2
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-networking][PATCH] openflow: Fix build build with musl/gcc14
+Date: Sat, 18 May 2024 10:47:27 -0700
+Message-ID: <20240518174727.2643414-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.45.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 17 May 2024 15:12:55 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110431
+ <openembedded-devel@lists.openembedded.org>; Sat, 18 May 2024 17:47:32 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110432
 
-When build on Debian 11 (gcc10), squid fails to build[0] because of a
-bug[1] in the configure step (it mixes options between old native compiler
-and recent target compiler: the former needs the std=c++17 option, the latter
-doesn't).
-
-The workaround is to force the "-std=c++17" option for the native build.
-
-NB: Our Buildroot friends have the same workaround[2].
-
-[0]: https://autobuilder.yoctoproject.org/typhoon/#/builders/155/builds/23/steps/28/logs/stdio
-[1]: https://bugs.squid-cache.org/show_bug.cgi?id=5376
-     Bug closed as invalid by upstream
-[2]: https://github.com/buildroot/buildroot/blob/932b52fad87d79d9f26a343edafe2981079de16e/package/squid/squid.mk#L24
-
-Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
-Reviewed-by: Alexandre Truong <alexandre.truong@smile.fr>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
-I'm not 100% sure that all the host compiler of all the supported
-distributions take the "-std=c++17" option. I've tested it only on
-Debian11&12.
----
- meta-networking/recipes-daemons/squid/squid_6.9.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+ ...-libexecinfo-if-it-has-backtrace-API.patch | 62 +++++++++++++++++++
+ .../openflow/openflow_git.bb                  |  3 +-
+ 2 files changed, 63 insertions(+), 2 deletions(-)
+ create mode 100644 meta-networking/recipes-protocols/openflow/openflow/0001-Link-in-libexecinfo-if-it-has-backtrace-API.patch
 
-diff --git a/meta-networking/recipes-daemons/squid/squid_6.9.bb b/meta-networking/recipes-daemons/squid/squid_6.9.bb
-index f0663a5e04..33d286e122 100644
---- a/meta-networking/recipes-daemons/squid/squid_6.9.bb
-+++ b/meta-networking/recipes-daemons/squid/squid_6.9.bb
-@@ -68,6 +68,11 @@ EXTRA_OECONF += "--with-default-user=squid \
-                  --with-logdir=${localstatedir}/log/${BPN} \
-                  'PERL=${USRBINPATH}/env perl'"
- 
-+# Workaround a build failure when using a native compiler that need -std=c++17
-+# with a cross-compiler that doesn't.
-+# Upstream issue closed as invalid : https://bugs.squid-cache.org/show_bug.cgi?id=5376
-+BUILD_CXXFLAGS += "-std=c++17"
+diff --git a/meta-networking/recipes-protocols/openflow/openflow/0001-Link-in-libexecinfo-if-it-has-backtrace-API.patch b/meta-networking/recipes-protocols/openflow/openflow/0001-Link-in-libexecinfo-if-it-has-backtrace-API.patch
+new file mode 100644
+index 0000000000..6382c2a9a6
+--- /dev/null
++++ b/meta-networking/recipes-protocols/openflow/openflow/0001-Link-in-libexecinfo-if-it-has-backtrace-API.patch
+@@ -0,0 +1,62 @@
++From 2272df8407d86519d72504d6468b710e7eb56de8 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 18 May 2024 00:23:43 -0700
++Subject: [PATCH] Link in libexecinfo if it has backtrace() API
 +
- export BUILDCXXFLAGS="${BUILD_CXXFLAGS}"
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ m4/libopenflow.m4     | 5 +++++
++ tests/automake.mk     | 2 +-
++ utilities/automake.mk | 4 ++--
++ 3 files changed, 8 insertions(+), 3 deletions(-)
++
++diff --git a/m4/libopenflow.m4 b/m4/libopenflow.m4
++index 58014ed..c9302b8 100644
++--- a/m4/libopenflow.m4
+++++ b/m4/libopenflow.m4
++@@ -96,6 +96,11 @@ AC_DEFUN([OFP_CHECK_FAULT_LIBS],
++   [AC_CHECK_LIB([dl], [dladdr], [FAULT_LIBS=-ldl])
++    AC_SUBST([FAULT_LIBS])])
++ 
+++dnl Checks for libraries needed by lib/fault.c.
+++AC_DEFUN([OFP_CHECK_FAULT_LIBS],
+++  [AC_CHECK_LIB([execinfo], [backtrace], [FAULT_LIBS=-lexecinfo])
+++   AC_SUBST([FAULT_LIBS])])
+++
++ dnl Checks for libraries needed by lib/socket-util.c.
++ AC_DEFUN([OFP_CHECK_SOCKET_LIBS],
++   [AC_CHECK_LIB([socket], [connect])
++diff --git a/tests/automake.mk b/tests/automake.mk
++index a4e945a..0944275 100644
++--- a/tests/automake.mk
+++++ b/tests/automake.mk
++@@ -27,7 +27,7 @@ EXTRA_DIST += tests/test-stp.sh
++ noinst_PROGRAMS += tests/test-stp
++ 
++ tests_test_stp_SOURCES = tests/test-stp.c
++-tests_test_stp_LDADD = lib/libopenflow.a
+++tests_test_stp_LDADD = lib/libopenflow.a $(FAULT_LIBS)
++ stp_files = \
++ 	tests/test-stp-ieee802.1d-1998 \
++ 	tests/test-stp-ieee802.1d-2004-fig17.4 \
++diff --git a/utilities/automake.mk b/utilities/automake.mk
++index d6f79a8..0608655 100644
++--- a/utilities/automake.mk
+++++ b/utilities/automake.mk
++@@ -36,10 +36,10 @@ utilities_dpctl_SOURCES = utilities/dpctl.c
++ utilities_dpctl_LDADD = lib/libopenflow.a $(FAULT_LIBS) $(SSL_LIBS)
++ 
++ utilities_vlogconf_SOURCES = utilities/vlogconf.c
++-utilities_vlogconf_LDADD = lib/libopenflow.a
+++utilities_vlogconf_LDADD = lib/libopenflow.a $(FAULT_LIBS)
++ 
++ utilities_ofp_discover_SOURCES = utilities/ofp-discover.c
++-utilities_ofp_discover_LDADD = lib/libopenflow.a
+++utilities_ofp_discover_LDADD = lib/libopenflow.a $(FAULT_LIBS)
++ 
++ utilities_ofp_kill_SOURCES = utilities/ofp-kill.c
++ utilities_ofp_kill_LDADD = lib/libopenflow.a
++-- 
++2.45.1
++
+diff --git a/meta-networking/recipes-protocols/openflow/openflow_git.bb b/meta-networking/recipes-protocols/openflow/openflow_git.bb
+index 1ee8a702ff..0061565f90 100644
+--- a/meta-networking/recipes-protocols/openflow/openflow_git.bb
++++ b/meta-networking/recipes-protocols/openflow/openflow_git.bb
+@@ -21,6 +21,7 @@ SRC_URI = "git://github.com/mininet/openflow;protocol=https;branch=master \
+            file://0001-generate-not-static-get_dh-functions.patch \
+            file://0001-socket-util-Include-sys-stat.h-for-fchmod.patch \
+            file://0001-Makefile.am-Specify-export-dynamic-directly-to-linke.patch \
++           file://0001-Link-in-libexecinfo-if-it-has-backtrace-API.patch \
+ "
+ CVE_STATUS[CVE-2015-1611] = "not-applicable-config: Not referred to our implementation of openflow"
+ CVE_STATUS[CVE-2015-1612] = "not-applicable-config: Not referred to our implementation of openflow"
+@@ -34,9 +35,7 @@ EXTRA_OECONF += " \
+                  KARCH=${TARGET_ARCH} \
+                  ${@bb.utils.contains('PACKAGECONFIG', 'openssl', 'SSL_LIBS="-lssl -lcrypto"', '', d)} \
+                 "
+-
+ DEPENDS:append:libc-musl = " libexecinfo"
+-LDFLAGS:append:libc-musl = " -lexecinfo"
  
- TESTDIR = "test-suite"
+ S = "${WORKDIR}/git"
+ 
 -- 
-2.39.2
+2.45.1
 
 
