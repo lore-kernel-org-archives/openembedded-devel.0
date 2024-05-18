@@ -1,131 +1,226 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C587C25B74
-	for <webhook@archiver.kernel.org>; Sat, 18 May 2024 17:49:12 +0000 (UTC)
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
- by mx.groups.io with SMTP id smtpd.web10.23144.1716054542477999449
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3E31BC25B77
+	for <webhook@archiver.kernel.org>; Sat, 18 May 2024 20:22:43 +0000 (UTC)
+Received: from mail-lj1-f172.google.com (mail-lj1-f172.google.com [209.85.208.172])
+ by mx.groups.io with SMTP id smtpd.web11.26395.1716063760783856250
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 18 May 2024 10:49:02 -0700
+ Sat, 18 May 2024 13:22:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=m032gvif;
- spf=pass (domain: gmail.com, ip: 209.85.210.179, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-6f4603237e0so833341b3a.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 18 May 2024 10:49:02 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=I2RiUOB9;
+ spf=pass (domain: gmail.com, ip: 209.85.208.172, mailfrom: martin.jansa@gmail.com)
+Received: by mail-lj1-f172.google.com with SMTP id 38308e7fff4ca-2e716e3030aso8576901fa.2
+        for <openembedded-devel@lists.openembedded.org>; Sat, 18 May 2024 13:22:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1716054542; x=1716659342; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=XYwJ4zLkf+W/yuz1enIdyRkiT2UFULtowsreQcmDfWM=;
-        b=m032gvifVrGLvNWFBzQQF0O4W/lX44XDWQ0gkUZtNWvdm4GHkecqTu5tsR12KCcpVG
-         2UIaFWkoR4nRFZ+F3AOKYlpdxq1xikp9XPC5Cdhu4QrjGvkZ/c9TJqnGQsXAgRR3TP/2
-         2pGgtYJ63kJCtpb4IEN1ua2B822M/eqMatpzTNp6wLSxZw3JX72AOP28UVjY2vtGtp81
-         ouYcB/KkANIwIO51Qq0w+Sqf677QNen9CNNN95+DBYyHe6Tla2SDgMFmqEms2pjAgiVx
-         w1T5KQwDRwIoli4y2EmcgSIfm+reD9IiNyqqe/dTmOdD7LrjVtBcYfrNgtpUuUtmf/Ob
-         RVjA==
+        d=gmail.com; s=20230601; t=1716063759; x=1716668559; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=hFMg3FZjf0/kh0J04zudSLjz1amvA8HvOg5LEtJFdSk=;
+        b=I2RiUOB9S7dXU6jlUovrXpGNmEGi56HCD51003tenc1fnRaGGJ9JRZowsINaDmlbQU
+         48fRBqLYkKksEpY7DJYDqto0c1Db45kJZgfTPwlNMkEqp96j/d8cPsLsapvp55ET47Yz
+         ie19zhofqEdouax/ieGIQi5s4PLYTkYKgdnPivDzuvfrpckQunsB3nM0Xj22mJVYxSi3
+         lsx9ODrB0lTwcxgKfTBJI9nM8WCXiZIcL8aN7wLJda1F6It57N9lvrprbdtyQtK+g55L
+         y9CMy38l8ydqpxb2rqpOGhDP2fcfqlAfRpmbIZGlCPaJeoSryYercxeMaAvgvH0eOMNy
+         cD5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1716054542; x=1716659342;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=XYwJ4zLkf+W/yuz1enIdyRkiT2UFULtowsreQcmDfWM=;
-        b=mhTVU4iaS73g1xo6L/WnqMfU1+2DZyevMH8Yo/duS9QZIFzBijiO58W0Rj4T5R6CnQ
-         PbVBNwJGQNyeQRh+B2qhSiToma1Lts04FHQ2SFj7fbqBJ1uCoxTSLjC92d3g5UhrkQms
-         e7FgXfsW3+sOcwsYie5ke2uhg8Pc8oHXiRxic1lByH0HCmS4T8umKBUCJO0KhKLhNtAA
-         yfn9urlOO9slAL7YKlSkRYMVKR1JvPwrESGbWSC7UzEjDv+YLvV2IwI2SsqGVt1did2y
-         I07ddmWl1ITAyG5FlrDHucA9otCuYpK5bE+mXxMppnyNmFutCsGT4wH7yahhdZmhuOw8
-         jDgg==
-X-Gm-Message-State: AOJu0YzfrqZNF/1A+y3kl/EB8oQQaAe1E5u8F71T+VBalzyBFJ07uCO0
-	SZvbayr4py+xX2LY+W6u5KpG6AcHMcnGwnyi0J1Wk0V6jptCeW7mrVkjl1wVNV4=
-X-Google-Smtp-Source: AGHT+IHjXiWG6BZNshI4myHs7ukCWlu1dSN7VUgLWcJD8+zQKn/q7tuNCTCD0eXjJsmUBnTMysXz/w==
-X-Received: by 2002:a05:6a20:432b:b0:1ad:7e4f:9564 with SMTP id adf61e73a8af0-1b1ca3c3e80mr3273862637.9.1716054541563;
-        Sat, 18 May 2024 10:49:01 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::e8eb])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-6f4fa8db6a2sm12822449b3a.177.2024.05.18.10.49.00
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 18 May 2024 10:49:01 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] libndp: Fix build with gcc-14/musl
-Date: Sat, 18 May 2024 10:48:59 -0700
-Message-ID: <20240518174859.2644879-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.45.1
+        d=1e100.net; s=20230601; t=1716063759; x=1716668559;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=hFMg3FZjf0/kh0J04zudSLjz1amvA8HvOg5LEtJFdSk=;
+        b=RdeyoQN70CNP+6MgoicFagGYfA6O5numpJj6AaIgKqwAgHGxIWR6mqlZPrl1PIUKB3
+         T3R3tj2E43l6UeIj73edTjPGbUWkL+j7LXI1rjv1SAxcwGlp4NuBst1pKuj94VZoS76i
+         XVRe5adSr0pKtX9Y+HEN1VXSlXxKBp1/LqGVkqNOj4mXvcC1x2RfUCuZYmhxvmg6PrsJ
+         jYp1Qq3IWzf47RdGt5rwMpj3U7yaNRboylcnvhjUeI5YpKYBzPUaRJxbsmUahbrSheV/
+         vsfKugZ9cgAKc9QV9YR4QIC40uYA1OIzw3NsbY1w+9NvafPP5VJb3n37AiKjMZVoKHU7
+         ZUnA==
+X-Gm-Message-State: AOJu0YwiyvGpt6pkmrHFVeYeqjH4XE3IDefPRyaelXnUYay7VDTbjGXs
+	0SIPvmYAwW0aALbZKzVxKwXYFROLHEn46kQjD0ZRVzV4J2nmhCn4IN3JjHcgKfwjZsVMtcq10QG
+	iqPFEk+mF0CIW1kXUxIcDKTpdSk0=
+X-Google-Smtp-Source: AGHT+IHn45yuhD7692gUSArdNt1ii/kdZG7dmy/XuznDtQzLA6pg8ypU+MsdiPSqM6MDoovlehBaa0x6rJ5kt5P+tmc=
+X-Received: by 2002:a05:651c:2114:b0:2df:76ab:4e69 with SMTP id
+ 38308e7fff4ca-2e5205ec99amr174980141fa.46.1716063758571; Sat, 18 May 2024
+ 13:22:38 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240517130700.16442-1-alexandre.truong@smile.fr>
+In-Reply-To: <20240517130700.16442-1-alexandre.truong@smile.fr>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Sat, 18 May 2024 22:22:26 +0200
+Message-ID: <CA+chaQdyBMUhKLbHYbYWRy=yB=Oh+ruarj+_i=azyyyvAB_e6A@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH v2] source-han-sans-*-fonts: fix SRC_URI
+To: alexandre.truong@smile.fr
+Cc: openembedded-devel@lists.openembedded.org, 
+	Yoann Congal <yoann.congal@smile.fr>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 18 May 2024 17:49:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110433
+ <openembedded-devel@lists.openembedded.org>; Sat, 18 May 2024 20:22:43 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110434
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...1-libndp-Fix-signature-of-sendto-API.patch | 40 +++++++++++++++++++
- .../recipes-connectivity/libndp/libndp_1.8.bb |  1 +
- 2 files changed, 41 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/libndp/libndp/0001-libndp-Fix-signature-of-sendto-API.patch
+On Fri, May 17, 2024 at 3:07=E2=80=AFPM Alexandre Truong via
+lists.openembedded.org
+<alexandre.truong=3Dsmile.fr@lists.openembedded.org> wrote:
+>
+> We get fetch errors from the SRC_URI provided. See errors at [0].
+> svn protocol was used but it's deprecated.
 
-diff --git a/meta-oe/recipes-connectivity/libndp/libndp/0001-libndp-Fix-signature-of-sendto-API.patch b/meta-oe/recipes-connectivity/libndp/libndp/0001-libndp-Fix-signature-of-sendto-API.patch
-new file mode 100644
-index 0000000000..f625416acf
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/libndp/libndp/0001-libndp-Fix-signature-of-sendto-API.patch
-@@ -0,0 +1,40 @@
-+From 14e036b5daf6b72483a1a21054b5133acabceabe Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 17 May 2024 18:14:04 -0700
-+Subject: [PATCH] libndp: Fix signature of sendto API
-+
-+This fixes build with musl/gcc-14
-+
-+| ../../git/libndp/libndp.c: In function 'mysendto6':
-+| ../../git/libndp/libndp.c:212:50: error: passing argument 5 of 'sendto' from incompatible pointer type [-Wincompatible-pointer-types]
-+|   212 |         ret = sendto(sockfd, buf, buflen, flags, &sin6, sizeof(sin6));
-+|       |                                                  ^~~~~
-+|       |                                                  |
-+|       |                                                  struct sockaddr_in6 *
-+| In file included from ../../git/libndp/libndp.c:27:
-+| /mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux-musl/libndp/1.8/recipe-sysroot/usr/include/sys/socket.h:396:49: note: expected 'const struct sockaddr *' but argument is of type 'struct sockaddr_in6 *'
-+|   396 | ssize_t sendto (int, const void *, size_t, int, const struct sockaddr *, socklen_t);
-+|       |                                                 ^~~~~~~~~~~~~~~~~~~~~~~
-+
-+Upstream-Status: Submitted [Sent to maintainer]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ libndp/libndp.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/libndp/libndp.c b/libndp/libndp.c
-+index 6314717..056df0f 100644
-+--- a/libndp/libndp.c
-++++ b/libndp/libndp.c
-+@@ -209,7 +209,7 @@ static int mysendto6(int sockfd, void *buf, size_t buflen, int flags,
-+ 	memcpy(&sin6.sin6_addr, addr, sizeof(sin6.sin6_addr));
-+ 	sin6.sin6_scope_id = ifindex;
-+ resend:
-+-	ret = sendto(sockfd, buf, buflen, flags, &sin6, sizeof(sin6));
-++	ret = sendto(sockfd, buf, buflen, flags, (struct sockaddr*)&sin6, sizeof(sin6));
-+ 	if (ret == -1) {
-+ 		switch(errno) {
-+ 		case EINTR:
-+-- 
-+2.45.1
-+
-diff --git a/meta-oe/recipes-connectivity/libndp/libndp_1.8.bb b/meta-oe/recipes-connectivity/libndp/libndp_1.8.bb
-index 4d4d3e51cd..80946317e4 100644
---- a/meta-oe/recipes-connectivity/libndp/libndp_1.8.bb
-+++ b/meta-oe/recipes-connectivity/libndp/libndp_1.8.bb
-@@ -4,6 +4,7 @@ LICENSE = "LGPL-2.1-only"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
- 
- SRC_URI = "git://github.com/jpirko/libndp;branch=master;protocol=https \
-+           file://0001-libndp-Fix-signature-of-sendto-API.patch \
-            "
- # tag for v1.8
- SRCREV = "009ce9cd9b950ffa1f4f94c9436027b936850d0c"
--- 
-2.45.1
+For the record the svn protocol itself isn't deprecated in bitbake
+fetcher, just github no longer provides a svn access as mentioned in:
+https://git.openembedded.org/bitbake/commit/?h=3Dmaster&id=3Da735898abcf056=
+f897c9350bb128a5637e6b4617
 
+* github no longer provides support for subversion clients:
+https://docs.github.com/en/enterprise-server@3.11/get-started/working-with-=
+subversion-on-github/support-for-subversion-clients
+it was shut down on 2024-01-08:
+https://github.blog/2023-01-20-sunsetting-subversion-support/
+
+> So, a http url will be passed instead.
+>
+> The sha256sum has also been changed since the previous one was
+> for the 1.004 release's archive, while we are on 2.004.
+>
+> [0]: https://autobuilder.yoctoproject.org/typhoon/#/builders/156/builds/3=
+53/steps/16/logs/errors
+>
+> Signed-off-by: Alexandre Truong <alexandre.truong@smile.fr>
+> Reviewed-by: Yoann Congal <yoann.congal@smile.fr>
+> ---
+>  .../ttf-fonts/source-han-sans-cn-fonts_2.004.bb            | 7 ++-----
+>  .../ttf-fonts/source-han-sans-jp-fonts_2.004.bb            | 7 ++-----
+>  .../ttf-fonts/source-han-sans-kr-fonts_2.004.bb            | 7 ++-----
+>  .../ttf-fonts/source-han-sans-tw-fonts_2.004.bb            | 7 ++-----
+>  4 files changed, 8 insertions(+), 20 deletions(-)
+>
+> diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-cn-fonts_=
+2.004.bb b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-cn-fonts_2.00=
+4.bb
+> index b4a598527..391d46557 100644
+> --- a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-cn-fonts_2.004.b=
+b
+> +++ b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-cn-fonts_2.004.b=
+b
+> @@ -11,13 +11,10 @@ inherit allarch fontcache
+>  #EXCLUDE_FROM_WORLD =3D "1"
+>
+>  SRC_URI =3D " \
+> -    svn://github.com/adobe-fonts/source-han-sans;module=3Dbranches/relea=
+se/SubsetOTF/CN;protocol=3Dhttp;rev=3D82 \
+> +    https://github.com/adobe-fonts/source-han-sans/releases/download/2.0=
+04R/SourceHanSansCN.zip;subdir=3D${BP} \
+>      file://44-source-han-sans-cn.conf \
+>  "
+> -SRC_URI[md5sum] =3D "d16abc21f6575bb08894efedbed484a2"
+> -SRC_URI[sha256sum] =3D "0a0e1d8e52833bc352d454d8242da03b82c0efc41323fb66=
+f7435e5b39734a4f"
+> -
+> -S =3D "${WORKDIR}/SourceHanSansCN"
+> +SRC_URI[sha256sum] =3D "6841fc13f1c0d255cfeb33d2a2c68d24bbebd94ae2c07034=
+7a2b2b200a1db4d6"
+>
+>  do_install() {
+>      install -d ${D}${sysconfdir}/fonts/conf.d/
+> diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_=
+2.004.bb b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_2.00=
+4.bb
+> index 6a4509048..f940478a8 100644
+> --- a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_2.004.b=
+b
+> +++ b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_2.004.b=
+b
+> @@ -11,13 +11,10 @@ inherit allarch fontcache
+>  #EXCLUDE_FROM_WORLD =3D "1"
+>
+>  SRC_URI =3D " \
+> -    svn://github.com/adobe-fonts/source-han-sans;module=3Dbranches/relea=
+se/SubsetOTF/JP;protocol=3Dhttp;rev=3D82 \
+> +    https://github.com/adobe-fonts/source-han-sans/releases/download/2.0=
+04R/SourceHanSansJP.zip;subdir=3D${BP} \
+>      file://44-source-han-sans-jp.conf \
+>  "
+> -SRC_URI[md5sum] =3D "908fbf97f3df04a6838708c093f1e900"
+> -SRC_URI[sha256sum] =3D "dc6dbae3fba35f220bac88ba7130b826c7efe1282f472788=
+fae3628b79be3f54"
+> -
+> -S =3D "${WORKDIR}/SourceHanSansJP"
+> +SRC_URI[sha256sum] =3D "1ae9f62ad620d686c4a049ce25cf54e3afd8fefc954a678c=
+644cf9802750c17e"
+>
+>  do_install() {
+>      install -d ${D}${sysconfdir}/fonts/conf.d/
+> diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts_=
+2.004.bb b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts_2.00=
+4.bb
+> index 5ab5057d8..f536d1b61 100644
+> --- a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts_2.004.b=
+b
+> +++ b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts_2.004.b=
+b
+> @@ -11,13 +11,10 @@ inherit allarch fontcache
+>  #EXCLUDE_FROM_WORLD =3D "1"
+>
+>  SRC_URI =3D " \
+> -    svn://github.com/adobe-fonts/source-han-sans;module=3Dbranches/relea=
+se/SubsetOTF/TW;protocol=3Dhttp;rev=3D82 \
+> +    https://github.com/adobe-fonts/source-han-sans/releases/download/2.0=
+04R/SourceHanSansKR.zip;subdir=3D${BP} \
+>      file://44-source-han-sans-kr.conf \
+>  "
+> -SRC_URI[md5sum] =3D "f8d1bd6c87d8575afdb25e2f46bd81d4"
+> -SRC_URI[sha256sum] =3D "38fd15c80f9980492faaa1af39ff873d8a38e45027023fb1=
+7d5b10d4b4b0e6af"
+> -
+> -S =3D "${WORKDIR}/SourceHanSansKR"
+> +SRC_URI[sha256sum] =3D "02fe28a48c6381c49d61c27a1b173c77f0e6f2b9f2b68e79=
+f076f10a6a8f4bfe"
+>
+>  do_install() {
+>      install -d ${D}${sysconfdir}/fonts/conf.d/
+> diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts_=
+2.004.bb b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts_2.00=
+4.bb
+> index a2b3fff07..0a4aff5e3 100644
+> --- a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts_2.004.b=
+b
+> +++ b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts_2.004.b=
+b
+> @@ -11,13 +11,10 @@ inherit allarch fontcache
+>  #EXCLUDE_FROM_WORLD =3D "1"
+>
+>  SRC_URI =3D " \
+> -    svn://github.com/adobe-fonts/source-han-sans;module=3Dbranches/relea=
+se/SubsetOTF/TW;protocol=3Dhttp;rev=3D82 \
+> +    https://github.com/adobe-fonts/source-han-sans/releases/download/2.0=
+04R/SourceHanSansTW.zip;subdir=3D${BP} \
+>      file://44-source-han-sans-tw.conf \
+>  "
+> -SRC_URI[md5sum] =3D "6533b71b31c19e548768f0fc963202f3"
+> -SRC_URI[sha256sum] =3D "92ba161921c5cdec5a8f8d5711676f0865b50cee071c25eb=
+4bd4125b5af59fd0"
+> -
+> -S =3D "${WORKDIR}/SourceHanSansTW"
+> +SRC_URI[sha256sum] =3D "11d78c8fbc1a4bb04a453cdd65c99db8d41ec5cd6ba6d68c=
+8638e6ba170de806"
+>
+>  do_install() {
+>      install -d ${D}${sysconfdir}/fonts/conf.d/
+> --
+> 2.34.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#110429): https://lists.openembedded.org/g/openembedde=
+d-devel/message/110429
+> Mute This Topic: https://lists.openembedded.org/mt/106153340/3617156
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
+artin.jansa@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
