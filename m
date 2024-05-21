@@ -1,203 +1,128 @@
-Return-Path: <sjolley.yp.pm@gmail.com>
+Return-Path: <yoann.congal@smile.fr>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AC5A4C25B7A
-	for <webhook@archiver.kernel.org>; Mon, 20 May 2024 22:38:30 +0000 (UTC)
-Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
- by mx.groups.io with SMTP id smtpd.web10.6327.1716244708181461161
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 355C8C25B74
+	for <webhook@archiver.kernel.org>; Tue, 21 May 2024 08:08:33 +0000 (UTC)
+Received: from mail-lj1-f172.google.com (mail-lj1-f172.google.com [209.85.208.172])
+ by mx.groups.io with SMTP id smtpd.web10.14668.1716278912445278097
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 20 May 2024 15:38:28 -0700
+ Tue, 21 May 2024 01:08:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=GKRsjBRx;
- spf=pass (domain: gmail.com, ip: 209.85.218.50, mailfrom: sjolley.yp.pm@gmail.com)
-Received: by mail-ej1-f50.google.com with SMTP id a640c23a62f3a-a59a609dd3fso1055813266b.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 20 May 2024 15:38:27 -0700 (PDT)
+ dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=ejYJG5tp;
+ spf=pass (domain: smile.fr, ip: 209.85.208.172, mailfrom: yoann.congal@smile.fr)
+Received: by mail-lj1-f172.google.com with SMTP id 38308e7fff4ca-2e45c0a8360so39099021fa.3
+        for <openembedded-devel@lists.openembedded.org>; Tue, 21 May 2024 01:08:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1716244706; x=1716849506; darn=lists.openembedded.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=yLC9nhZaRrINPgrM2TGMKeoCW4O9lsE09YI9wNiTKZE=;
-        b=GKRsjBRxxu0hoNszPaMt7ZWK96pnwrndLQU+en3th4C73bfc8McSnmRMN5qgjO1C7O
-         SUeQpPq2e8F1KC4tlNWv8TzG+8AJhqyeNn5akIDmUdEMf4OmTNAI8B9mk5tITNpF8gTV
-         DlMoFSfIbZGjtgYJQhw6eVM4at7zU/3qgUB+AgMjHfOVpW+vQ/AGWdD8BaZ2Fnu6+Ior
-         QQeoQCzyf9GxtNlkP6cSnCL3W1Y3vPFGTGwJnZGoqcaB9PIFpDXgiDfD7G4JXxNmi/+Z
-         NeOX39JE1zPzJGa0XKVfflAS1wlAf3sSxtGAZgOKgYLkMYB7V0IlMmh9hzMJ8QnhR8vW
-         Uggg==
+        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1716278910; x=1716883710; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=mYcK+VYVeIp0LKZbOgNcLQFxD750rTAVbe0cnc64X9w=;
+        b=ejYJG5tpzhvO27E25n2NfThdZloEPrNYhPwr+6zj8Juhl3ZusHKrT3KPA8WhQj4zkM
+         KBBWH4N/w9sz4Qokmf2FbNlhD05f7XCjJA+s9JnllwQ6Kruwyjg1e57rr6PjAvdJFI63
+         SH1LJ2RUNi7ddCJmiMqmMqlBk5XpTxPsdCsvYkwzE2ztmZQBCDmVSIeNxBWfbBZ7ToPF
+         Q7iVL14FFVHo4pUHLKkJCEFid0cdzD64ADqYyvfiNqeB3mm7RV6oPU0l5R/CwVlS7e3n
+         Ttxho6ImgbipyiCJp2ayONx2eQI63OXhjeRU2Rk0DVk8pv30RqADD3wEsQWAkm42QMVI
+         X6IA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1716244706; x=1716849506;
-        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=yLC9nhZaRrINPgrM2TGMKeoCW4O9lsE09YI9wNiTKZE=;
-        b=V2hIl4YlTw540UOhA8vyVLf4Bfq3kL2tn44gn31nHPi1ymqm/OCHa9MvLwkv4M18+0
-         Otm0P7CAC5izZxz3c0nPFWgu5sBSEw5rmay7qukmMS+H0bl/uRkzhEvZFo8PQl0eefYY
-         B5Va+CxbrSIgTXQE1Q+HLFb9xV4QSHHIQmXIGyIZ0JJC4p1wuFdTt9Uxdk/hxquuV8Rx
-         nwvW2xsBTA5/Y9QF7VZpMhVCK44SlPKI2l0eeQbBD3oTVlGHJOhgCoOTPfTHptZnemIb
-         /K2LXWP+nKJcc2cWhT2d0sNX17M3tYs4OHCq0VkLuLOPdDzZSI+slonz4IZZH+CEKjNK
-         J1TQ==
-X-Gm-Message-State: AOJu0YxJX2LjBQO5rJQjgMEXmOgn5dweQ+Q7uBjf+zCoXXYORCQc5i2G
-	pT8NFgvOHSZ2s6tZNK+NKqZzC6nQacOiyvEtn9QSNUbwq3ux9qosmFU8riGK1TrVZJnHBiCUbTH
-	bp/JPI5+pH/uU83Zj9f0pg+AbtVgtPQ2a
-X-Google-Smtp-Source: AGHT+IHKDlptMGFwXiUinHhVJYQWgD4yvLFZ0QrYe3tQpSMJWKObnvuhlerUdeTwEJpfMm0L5VeujWWHsupXtRrYNFs=
-X-Received: by 2002:a17:907:c91b:b0:a5c:e82c:42da with SMTP id
- a640c23a62f3a-a5d5903b785mr604824466b.6.1716244705950; Mon, 20 May 2024
- 15:38:25 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1716278910; x=1716883710;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=mYcK+VYVeIp0LKZbOgNcLQFxD750rTAVbe0cnc64X9w=;
+        b=ifmcU/cXx3Yi30fuFbGyYAVt7TcI+WeaeYG/mNSH3mThQ7YnxE5Lnan52mDeRFlD8d
+         V3ylkIC8C18XXS1nhim041AFPLWEjqLvqtg+3jAi9oagBNi57WrWYUyNaTphx0NZIS/l
+         hDMisU/qLtOMh+KAtOpSQq9y+9N4hO93FuVHBZNIR74Go3xEQuop5vmhWlChihE/CGFK
+         UKMI4VsyoGagwlw1lIB2YiE2HARyDMwcLFuPAQND2Co0YcAUuRfdenYRBqu7jTYK4xGY
+         LZKkpg8+0ygGPlZeep2yH8uwYYAqPUUc42+HYDXX0onv0cmbTsx5/5ihwRXaz9BQmSUT
+         +3CA==
+X-Gm-Message-State: AOJu0YwFzeahYDKsDoHWerpdCq+zw1Em3kSjWSmSwhwrDi3HgTBE7TWA
+	uhZFauMFKXKcnj/Pqmdnbj8xj5AbouvIhLeicWLvSmBVcWR0A8ItTW+Vcxq8colQnoAZ/IlWuck
+	jT9Y=
+X-Google-Smtp-Source: AGHT+IH+GjkGJzYdv5JhJTDjvkStniLeW+TsiSkolfvD2OJ321LbumAavpi1gIUCx/nt5xoo69x0uQ==
+X-Received: by 2002:a2e:a555:0:b0:2e1:a8db:2bca with SMTP id 38308e7fff4ca-2e5205e2972mr242579441fa.48.1716278910298;
+        Tue, 21 May 2024 01:08:30 -0700 (PDT)
+Received: from P-ASN-ECS-830T8C3.local ([89.159.1.53])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-41fccee934csm454838225e9.38.2024.05.21.01.08.29
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 21 May 2024 01:08:29 -0700 (PDT)
+From: Yoann Congal <yoann.congal@smile.fr>
+To: openembedded-devel@lists.openembedded.org
+Cc: Yoann Congal <yoann.congal@smile.fr>,
+	Alexandre Truong <alexandre.truong@smile.fr>
+Subject: [meta-networking][PATCH] mdio-tools: fix mdio-netlink kernel module reproducibility
+Date: Tue, 21 May 2024 10:08:05 +0200
+Message-Id: <20240521080805.1415945-1-yoann.congal@smile.fr>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
-Date: Mon, 20 May 2024 15:38:15 -0700
-Message-ID: <CAK5yBb-UOg9PZ1=j7s4JxFZQocWZ2Lq=u7y1n-GqWuQqNTu-yA@mail.gmail.com>
-Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
-To: openembedded-devel@lists.openembedded.org, 
-	Yocto-mailing-list <yocto@lists.yoctoproject.org>
-Content-Type: multipart/alternative; boundary="0000000000000bc5f20618ea5cf6"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 20 May 2024 22:38:30 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110442
+ <openembedded-devel@lists.openembedded.org>; Tue, 21 May 2024 08:08:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110443
 
---0000000000000bc5f20618ea5cf6
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+mdio-netlink source make reference to ${S}/.. which breaks
+-fdebug-prefix-map and results in the full TMPDIR path being present in
+the -dbg package and, also, change a related CRC in the main package.
 
-All,
+This changes ${S} to enclose the whole SRC_URI repo and adapt relative paths to
+build (MODULES_MODULE_SYMVERS_LOCATION)
 
-The triage team is starting to try and collect up and classify bugs which a
-newcomer to the project would be able to work on in a way which means
-people can find them. They're being listed on the triage page under the
-appropriate heading:
-https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
-review:
-https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
-how to create a bugzilla account at:
-https://bugzilla.yoctoproject.org/createaccount.cgi
+This make mdio-netlink reproducible and fixes this warning:
+WARNING: mdio-netlink-1.3.1-r0 do_package_qa: QA Issue: File /lib/modules/6.6.29-yocto-standard/updates/.debug/mdio-netlink.ko in package mdio-netlink-dbg contains reference to TMPDIR [buildpaths]
 
-The idea is these bugs should be straight forward for a person to help work
-on who doesn't have deep experience with the project. If anyone can help,
-please take ownership of the bug and send patches! If anyone needs
-help/advice there are people on irc who can likely do so, or some of the
-more experienced contributors will likely be happy to help too.
+Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
+Reviewed-by: Alexandre Truong <alexandre.truong@smile.fr>
+---
+NB: I could only test that the module does load correctly and works for
+an empty MDIO bus. But, diffoscope of before/after the patch show only
+change on the debug side, so it should be safe enough.
+---
+ meta-networking/conf/include/non-repro-meta-networking.inc   | 2 --
+ .../recipes-support/mdio-tools/mdio-netlink_1.3.1.bb         | 5 +++--
+ 2 files changed, 3 insertions(+), 4 deletions(-)
 
-Also, the triage team meets weekly and does its best to handle the bugs
-reported into the Bugzilla. The number of people attending that meeting has
-fallen, as have the number of people available to help fix bugs. One of the
-things we hear users report is they don't know how to help. We (the triage
-team) are therefore going to start reporting out the currently 417
-unassigned or newcomer bugs.
+diff --git a/meta-networking/conf/include/non-repro-meta-networking.inc b/meta-networking/conf/include/non-repro-meta-networking.inc
+index e0f448fe31..45eed5398e 100755
+--- a/meta-networking/conf/include/non-repro-meta-networking.inc
++++ b/meta-networking/conf/include/non-repro-meta-networking.inc
+@@ -15,7 +15,6 @@ KNOWN_NON_REPRO_META_NETWORKING = " \
+     htpdate-doc \
+     keepalived \
+     keepalived-dbg \
+-    kernel-module-mdio-netlink-6.6.17-yocto-standard \
+     libbearssl-staticdev \
+     libfko3 \
+     libfko-client \
+@@ -25,7 +24,6 @@ KNOWN_NON_REPRO_META_NETWORKING = " \
+     libowfat-staticdev \
+     libruli-staticdev \
+     libsamba-util0 \
+-    mdio-netlink-dbg \
+     mosquitto \
+     mosquitto-dbg \
+     ncftp \
+diff --git a/meta-networking/recipes-support/mdio-tools/mdio-netlink_1.3.1.bb b/meta-networking/recipes-support/mdio-tools/mdio-netlink_1.3.1.bb
+index b50d33f908..3867b89052 100644
+--- a/meta-networking/recipes-support/mdio-tools/mdio-netlink_1.3.1.bb
++++ b/meta-networking/recipes-support/mdio-tools/mdio-netlink_1.3.1.bb
+@@ -3,11 +3,12 @@ require mdio-tools.inc
+ DEPENDS += "virtual/kernel libmnl"
+ # This module requires Linux 5.6 higher
+ 
+-S = "${WORKDIR}/git/kernel"
++S = "${WORKDIR}/git"
+ 
+ inherit module
+ 
+-EXTRA_OEMAKE = "KDIR=${STAGING_KERNEL_DIR}"
++EXTRA_OEMAKE = "-C kernel/ KDIR=${STAGING_KERNEL_DIR}"
++MODULES_MODULE_SYMVERS_LOCATION="kernel"
+ MODULES_INSTALL_TARGET = "install"
+ 
+ RPROVIDES:${PN} += "kernel-module-mdio-netlink"
+-- 
+2.39.2
 
-We're hoping people may be able to spare some time now and again to help
-out with these. Bugs are split into two types, "true bugs" where things
-don't work as they should and "enhancements" which are features we'd want
-to add to the system. There are also roughly four different "priority"
-classes right now, =E2=80=9C5.0=E2=80=9D, =E2=80=9C5.1=E2=80=9D, "5.99" and=
- "Future", the more
-pressing/urgent issues being in "5.0" and then =E2=80=9C5.1=E2=80=9D.
-
-Please review this link and if a bug is something you would be able to help
-with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
-an e-mail with the bug number you would like and I will assign it to you
-(please make sure you have a Bugzilla account). The list is at:
-https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
-r_Bugs
-
-Thanks,
-
-
-
-*Stephen K. Jolley*
-
-*Yocto Project Program Manager*
-
-(    *Cell*:                (208) 244-4460
-
-* *Email*:                 *s
-<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
-*
-
---0000000000000bc5f20618ea5cf6
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><span style=3D"font-size:11pt;font-family:Calibri,Arial">A=
-ll,<br><br>The triage team is starting to try and collect up and classify b=
-ugs which a newcomer to the project would be able to work on in a way which=
- means people can find them. They&#39;re being listed on the triage page un=
-der the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/wiki/=
-Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage#New=
-comer_Bugs</a>  Also please review: <a href=3D"https://www.openembedded.org=
-/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.org/w=
-iki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugzilla =
-account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount.cgi"=
->https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The idea is=
- these bugs should be straight forward for a person to help work on who doe=
-sn&#39;t have deep experience with the project.  If anyone can help, please=
- take ownership of the bug and send patches!  If anyone needs help/advice t=
-here are people on irc who can likely do so, or some of the more experience=
-d contributors will likely be happy to help too.<br><br>Also, the triage te=
-am meets weekly and does its best to handle the bugs reported into the Bugz=
-illa. The number of people attending that meeting has fallen, as have the n=
-umber of people available to help fix bugs. One of the things we hear users=
- report is they don&#39;t know how to help. We (the triage team) are theref=
-ore going to start reporting out the currently 417 unassigned or newcomer b=
-ugs.<br><br>We&#39;re hoping people may be able to spare some time now and =
-again to help out with these.  Bugs are split into two types, &quot;true bu=
-gs&quot; where things don&#39;t work as they should and &quot;enhancements&=
-quot; which are features we&#39;d want to add to the system.  There are als=
-o roughly four different &quot;priority&quot; classes right now, =E2=80=9C5=
-.0=E2=80=9D, =E2=80=9C5.1=E2=80=9D, &quot;5.99&quot; and &quot;Future&quot;=
-, the more pressing/urgent issues being in &quot;5.0&quot; and then =E2=80=
-=9C5.1=E2=80=9D.<br><br>Please review this link and if a bug is something y=
-ou would be able to help with either take ownership of the bug, or send me =
-(<a href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>) an=
- e-mail with the bug number you would like and I will assign it to you (ple=
-ase make sure you have a Bugzilla account).  The list is at: <a href=3D"htt=
-ps://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcomer_B=
-ugs">https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Ne=
-wcomer_Bugs</a></span><br><div dir=3D"ltr" class=3D"gmail_signature" data-s=
-martmail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p class=3D"=
-MsoNormal" style=3D"background-image:initial;background-position:initial;ba=
-ckground-repeat:initial"><span style=3D"font-size:12pt;font-family:Arial,sa=
-ns-serif">Thanks,<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
-ily:Arial,sans-serif">=C2=A0<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
-lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
-ont-family:Arial,sans-serif"><span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
-amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
-an></b></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
-&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
-<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
-:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
-s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
--size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
-><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
-/span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
-t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
-=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
-color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
-uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
- lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
-erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
-phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
-.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
-u></p></div></div></div></div>
-
---0000000000000bc5f20618ea5cf6--
 
