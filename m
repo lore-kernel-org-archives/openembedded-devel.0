@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5732CC25B78
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7C745C27C43
 	for <webhook@archiver.kernel.org>; Tue, 21 May 2024 18:10:38 +0000 (UTC)
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
- by mx.groups.io with SMTP id smtpd.web10.3049.1716315034240279483
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+ by mx.groups.io with SMTP id smtpd.web11.3090.1716315030234051887
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 21 May 2024 11:10:34 -0700
+ Tue, 21 May 2024 11:10:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=deMl2Wwi;
- spf=pass (domain: gmail.com, ip: 209.85.214.171, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-1f2f566a7c7so76364405ad.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 21 May 2024 11:10:34 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=mwEzpP5a;
+ spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-1ec4dc64c6cso3505405ad.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 21 May 2024 11:10:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1716315033; x=1716919833; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1716315029; x=1716919829; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=k76fqCJFiRpRZb3G68sq4uFV46wTEHHGVijUbYtO32s=;
-        b=deMl2Wwiz8hXzKJRjkDWEf4UUE06Wn6X8BlsRO1lhookeLBOygVuzwq502Pvz2q886
-         qfZovKKOH0UzDi9ILTKdofgaLHBi6aLW27/gIYu5pMKFmheIeLGQYlM61GYh0FBq2taO
-         VS18WJueFj7fWKxzrssQJOyxfZ+Msu/li9P0lKl5sKagbL6Lb8Xib3wM7Nw3F3RyJc/4
-         njYPGOhe1bNuahBdFiDMupq5C4O2lJL8DhdOoJuJ3dd0dAzyKA53IUYk61zXzm2s8CAu
-         p6V15DOdynu8F65YQ4NIdAOgRwog0EUKvqJmBGhiwc2EeHxE7r2sC6pd7azf3SNjZpXY
-         SqBg==
+        bh=jRtaQ5HluQak9rMe3/ErNqMR1MLJzdOvV0Adr+bdlFM=;
+        b=mwEzpP5aBCgU/EoEmnAHLfILrw7GV8XyavkedDH8MZMW5VD5toGUjom0VQeZM8/puf
+         El2YVRygkDjoz02V5Vbnoly5pFrJs6q+CBd/GjvCfnNWfjF1ooiAUqdpeja/Hw94gxt9
+         Wqtx1DpI8hBW5MM1XGYDst/VSq5nHIn8/TRnfh0F4M0hXlKFo5CA6e/tViyLsfiVcXMX
+         9EXSncBn6S6nCsCWEqRc56QO7YFVscNjEeN8wu7NbVU0DB3K48FqvkNZ0h78CMgKA/Vq
+         difibpho770ogjD9gswrCAWRDVi0PXnF9F06ok22Vhz3/KLRBzJsc8vJBkeXSrmWc3yb
+         79Pg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1716315033; x=1716919833;
+        d=1e100.net; s=20230601; t=1716315029; x=1716919829;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=k76fqCJFiRpRZb3G68sq4uFV46wTEHHGVijUbYtO32s=;
-        b=dPEyvphhi4myejYjL3yiR9kObKm8WBhF1DUqBijXUj6ujTVUhbMvl06XXT3DZB2PIj
-         b80sXqn7cmNyyOzhYvNvxCSmwpZOrH8xnUhEBIuig3OPOLGhwP07DuI211AinclcjLgi
-         ax6i8NoxbVTsgkJkf/o3hNCZu18mFEIoKGk1GCdI22RWT3miOred0Ki+7XwyY57TSTvM
-         07bM5yfnuWKtuXb9KVmLBjGNpRMbRBwDQ3EWMcHxpwn3pHHDUkHBSRz/3iKohQoO2Vdb
-         fhDfOPw34u6QiXqs3DO+IoKTrHE6rJbl09H9W3MO4o4A8Xb+zTxByLz7T6cfE03qANxz
-         dZXw==
-X-Gm-Message-State: AOJu0Yz2z/zvGIFGjpiM3yAUhSDDVIcMr/vM9vUcWIkjc7n2N1zqAPrf
-	Lh7lCdEE1mba41qOKuK2N0B8HJsv90RNQEp5Mpipj00HBMktMIXksUMXpZAEOHA=
-X-Google-Smtp-Source: AGHT+IFuG2a7ITeUURRqo8F00hELGZDFF/6WOh9IWVPusJ4HRB9B5fOlLB5rqTq6S1zQZ50zGUNNxw==
-X-Received: by 2002:a17:902:cecd:b0:1f3:4c1:83ec with SMTP id d9443c01a7336-1f304c18438mr68466625ad.26.1716315033173;
-        Tue, 21 May 2024 11:10:33 -0700 (PDT)
+        bh=jRtaQ5HluQak9rMe3/ErNqMR1MLJzdOvV0Adr+bdlFM=;
+        b=bamX/J9i6jqrTNG0hX6FNlaX6j80zs3GLDDMZFS3HMPf/2Xlv0d6DHlGURxzZTwahk
+         OUEuA80sHDiNnKUkhTNC9MLmYuvHicYz3BCIme66YYqZwPY3Zh/fo6ysyOofAdwMr3kC
+         AFdvJOyCv1g5zcozowM/PuIaRE9CM7EcUTEGX/2QM5kEa5C28Fsccd2waSk5scgyDDFN
+         LU+NDC6ht/3JVWpsMfa2eoFudaFD5Jtqn+Jo5R5pnjOyy0n5P3nsU9QXteNMTrKcrz0S
+         2alDrKPdSJNTutalA7qrgVCJ+A+N4TaLjoPuZ9PDCO8RqMnP/tt1dusUFyFXxxttShUn
+         McuQ==
+X-Gm-Message-State: AOJu0Yx+7geL2zOrz8V8v0ME4vlw5yFA1VshDXfLk1QZfAM3TnJhrXsn
+	JkHUQvQjpSSPVqEUr6yIZKLZwVqlXZI+Uzo9+5q+144WLuzHffxh4yFl7Tn+GV8=
+X-Google-Smtp-Source: AGHT+IF2ULkei/IFrSW3DnjrogOajxMm4qAZdT37soSdc/67LVgPOJmp2SgIkdC0YAYowg/CoSoLQg==
+X-Received: by 2002:a17:902:e809:b0:1f3:695:eeda with SMTP id d9443c01a7336-1f30695f16bmr58094775ad.61.1716315029415;
+        Tue, 21 May 2024 11:10:29 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::e8eb])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-1ef0c136354sm224799075ad.244.2024.05.21.11.10.32
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-1ef0c136354sm224799075ad.244.2024.05.21.11.10.28
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 21 May 2024 11:10:32 -0700 (PDT)
+        Tue, 21 May 2024 11:10:29 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][ 07/22] influxdb: Do not remove non-existing files
-Date: Tue, 21 May 2024 11:10:08 -0700
-Message-ID: <20240521181024.426176-7-raj.khem@gmail.com>
+Subject: [meta-xfce][ 03/22] xfce4-notes-plugin: Upgrade to 1.11.0
+Date: Tue, 21 May 2024 11:10:04 -0700
+Message-ID: <20240521181024.426176-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.45.1
 In-Reply-To: <20240521181024.426176-1-raj.khem@gmail.com>
 References: <20240521181024.426176-1-raj.khem@gmail.com>
@@ -61,43 +61,31 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 21 May 2024 18:10:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110456
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110452
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
+ ...-notes-plugin_1.10.0.bb => xfce4-notes-plugin_1.11.0.bb} | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+ rename meta-xfce/recipes-panel-plugins/notes/{xfce4-notes-plugin_1.10.0.bb => xfce4-notes-plugin_1.11.0.bb} (57%)
 
-diff --git a/meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb b/meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb
-index 5301071516..9506d0e55d 100644
---- a/meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb
-+++ b/meta-oe/recipes-dbs/influxdb/influxdb_1.8.10.bb
-@@ -38,19 +38,20 @@ USERADD_PACKAGES = "${PN}"
- USERADD_PARAM:${PN} = "--system -d /var/lib/influxdb -m -s /bin/nologin influxdb"
+diff --git a/meta-xfce/recipes-panel-plugins/notes/xfce4-notes-plugin_1.10.0.bb b/meta-xfce/recipes-panel-plugins/notes/xfce4-notes-plugin_1.11.0.bb
+similarity index 57%
+rename from meta-xfce/recipes-panel-plugins/notes/xfce4-notes-plugin_1.10.0.bb
+rename to meta-xfce/recipes-panel-plugins/notes/xfce4-notes-plugin_1.11.0.bb
+index 8c9768b1e3..0262620e6c 100644
+--- a/meta-xfce/recipes-panel-plugins/notes/xfce4-notes-plugin_1.10.0.bb
++++ b/meta-xfce/recipes-panel-plugins/notes/xfce4-notes-plugin_1.11.0.bb
+@@ -7,4 +7,8 @@ inherit xfce-panel-plugin
  
- do_install:prepend() {
--    rm ${B}/src/${GO_IMPORT}/build.py
--    rm ${B}/src/${GO_IMPORT}/build.sh
--    rm ${B}/src/${GO_IMPORT}/Dockerfile*
-+    test -e ${B}/src/${GO_IMPORT}/build.py && rm ${B}/src/${GO_IMPORT}/build.py 
-+    test -e ${B}/src/${GO_IMPORT}/build.sh && rm ${B}/src/${GO_IMPORT}/build.sh
-+    rm -rf ${B}/src/${GO_IMPORT}/Dockerfile*
+ DEPENDS += "gtk+3 libxfce4ui xfce4-panel xfconf"
+ 
+-SRC_URI[sha256sum] = "2ee4406042edd352a91e166c83b60d13220ef04dce3fa6b9e0eb13636d636929"
++CFLAGS += "-Wno-error=incompatible-pointer-types"
++SRC_URI[sha256sum] = "eb38246deb0fc89535fa9ff9b953c762cece232b5585d8210fab9abbf282aae3"
 +
-     sed -i -e "s#usr/bin/sh#bin/sh#g" ${B}/src/${GO_IMPORT}/scripts/ci/run_perftest.sh
- }
- 
- do_install:append() {
-     install -d ${D}${sysconfdir}/influxdb
--    install -m 0644 ${WORKDIR}/influxdb.conf ${D}${sysconfdir}/influxdb
-+    install -m 0644 ${UNPACKDIR}/influxdb.conf ${D}${sysconfdir}/influxdb
-     chown -R root:influxdb ${D}${sysconfdir}/influxdb
- 
-     install -d ${D}${sysconfdir}/init.d
--    install -m 0755 ${WORKDIR}/influxdb ${D}${sysconfdir}/init.d/influxdb
-+    install -m 0755 ${UNPACKDIR}/influxdb ${D}${sysconfdir}/init.d/influxdb
- 
-     if [ "${@bb.utils.filter('DISTRO_FEATURES', 'sysvinit', d)}" ] ; then
-         install -d ${D}${sysconfdir}/logrotate.d
++# Add /usr/share/xfce4/notes/gtk-3.0/gtk.css
++FILES:${PN} += "${datadir}/xfce4/notes"
 -- 
 2.45.1
 
