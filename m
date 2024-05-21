@@ -2,56 +2,56 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C2D4FC27C43
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EF0ECC27C44
 	for <webhook@archiver.kernel.org>; Tue, 21 May 2024 18:10:48 +0000 (UTC)
-Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
- by mx.groups.io with SMTP id smtpd.web10.3057.1716315042737186306
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+ by mx.groups.io with SMTP id smtpd.web11.3097.1716315041792470212
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 21 May 2024 11:10:42 -0700
+ Tue, 21 May 2024 11:10:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=DKChAg/T;
- spf=pass (domain: gmail.com, ip: 209.85.214.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f182.google.com with SMTP id d9443c01a7336-1ec92e355bfso4550535ad.3
-        for <openembedded-devel@lists.openembedded.org>; Tue, 21 May 2024 11:10:42 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=SHjWtF5p;
+ spf=pass (domain: gmail.com, ip: 209.85.214.179, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-1eb24e3a2d9so117775125ad.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 21 May 2024 11:10:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1716315042; x=1716919842; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1716315041; x=1716919841; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=uGjxXjIdO3/i/aW1nDrInHMsu1mRrFsJths3OaRHbbM=;
-        b=DKChAg/TaCS5el3GbXiW2xUxpYXTPgKJEWKwm4+7DIO3SoYCbP0uOxV5nogjO6DdJs
-         DLI6QA+8sW1OnFsBchyJdaEVeD8QfGbPi1o7u1PSeIsqa/iK197gftusBCGI5TJJeIjS
-         fGM9NX1kzlRCtns63PNKtYCgW02toFFxQAtMyTG/A70BQbrQz3u+7HLtRy/BZC7tUgml
-         8CuOYyzkoXvVWHKV1HpS+gnUR8tUwZ3R0WWxdCY1UB5sDbKLR5PQ4iSTwbo3Q+UAcXmo
-         9/+8eoVcOKNDls1ymGAu+0Smmn602q6uou8R277oxFLFVdCoKPwWdga+cqake+PSW+Hs
-         8H/w==
+        bh=J+vnGrvCBmOHwK7GpMg1WXyUg3XMXG/lg4oOUcpDSEk=;
+        b=SHjWtF5pdRbM94C/aWwHokOUOdS2mpialYwrKKezbVw1qTY8wcDHl17MgYA6moCYlj
+         UQPeQp1lFX3ejlkaDdQDG5kSD5JnO+cetbx+2loc2WWvlfU9Y4bYYm6P1VO0BCEYhfqK
+         k32EEq4f3wM7cIBUzd9ZCpSmOOxhc8bSJnEUgQYcfYpgtAMvV5H7tHAilx330XiGUE1c
+         KMxcjjJaIXOHA+mZ720PBuA8E52RDPkn9aRwQQl9+uhX7jQ5/LbH/95GBtgBeMLKl9Tw
+         626BE4K66i2OuypKkNT2S0sCBqQsxygr3/59Dq0CyhZvJfAbo9oKqgCkHuwGy0IcBWeg
+         UajA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1716315042; x=1716919842;
+        d=1e100.net; s=20230601; t=1716315041; x=1716919841;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=uGjxXjIdO3/i/aW1nDrInHMsu1mRrFsJths3OaRHbbM=;
-        b=NdkmmoKBRTXGAH03GBc7poRO1GjYt9S/k+pGbNc2aLyIC1xECDUozL9kZDMRo8yy7r
-         FH5PZiQNqBxm6a6MleKnYSRWcqdeFYAFj3LT5jTdGBDQBv0N8s3PInz1Th5D4XMq8Sug
-         ttcSoO/f0aLFInUZJTdJ0q8jVY3PTX0lq17zyRZzUZjaLgLu6eBh5tZmFiYzeHWQk1wt
-         WQ0UGTkAE/4OjIZ3BuE7Ug2sGiAIuk0VRCdpevlPxhwn9E9H0rbA0uqkKFdikXR5mE+g
-         g/75wkkz5Ka6MtIEEyFxieBQ1ptbhuD9N9MJLlO/82hrp0/Vz5ERPDQZu9abzmdYgxmX
-         q0VQ==
-X-Gm-Message-State: AOJu0Yw3/2oWGL4BrAXVBaDFx3h11/CWu7WySmrEl0c3WsvGsLThIi+X
-	dp1kRyXbDoqjB0rdVmfbQgzjVhCs0fbI+Lkz1kUntFRQ1XdPmwrfvOFuUhaZgjY=
-X-Google-Smtp-Source: AGHT+IHrr2puydKIPn1WkXu9VCBdEDwuXArspQuOcZDFVD/ZJsSfwhMw5bTQIX8/tzCNIXaA7c9urw==
-X-Received: by 2002:a17:902:7248:b0:1ee:2a58:cb7c with SMTP id d9443c01a7336-1ef43e26586mr316780905ad.35.1716315041924;
+        bh=J+vnGrvCBmOHwK7GpMg1WXyUg3XMXG/lg4oOUcpDSEk=;
+        b=Z6pugmqJZsdEgv+csKnU2xKpXXPqKVoz599/3PrphR0Sot+BqrVps5slEyXb8/wIZS
+         bGVkPLdtJWwBn1S9kLPeT+Vd4I1xSMljf/CAZGdu71RCVv3sh77UWSAs2N6bVzp+sBSa
+         6o9lDSgrmdpEDYqejuhv1MGoZiFul175KaO2T7qB80Ji4OG9r/lPb+hilVaWp5Jug2/q
+         gjS6Senp7arNW8H0zYAFepb0FA99CDvbL6S1+D1KPJESowSQ0Q+Ob4/sxVCn7MOdFK+t
+         JKoAwTEufl3mXPOfTp2UYOo390gtvqFSCVpS85ZxEmnjFbqJqFhbznwY1CzAUs9glxGR
+         YzMw==
+X-Gm-Message-State: AOJu0Ywt1UUEZC1om9D13Knh7a7m05FK4rOIu6wK6Nm0CaEU59dhF6BZ
+	TTl0vucsyYxK7+037ysovfwoWRvghISo2gZfrWUrnYK/zcWgMpvO+XlFvouQanE=
+X-Google-Smtp-Source: AGHT+IFAQjSuD4xpTbmMzQdNtA4uqZVBBtvcYlShPlje02naik3SRflermudtQXE4IViiXffSd4vLg==
+X-Received: by 2002:a17:903:2350:b0:1f2:f7ea:125c with SMTP id d9443c01a7336-1f2f7ea14ecmr123068665ad.10.1716315041028;
         Tue, 21 May 2024 11:10:41 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::e8eb])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-1ef0c136354sm224799075ad.244.2024.05.21.11.10.41
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-1ef0c136354sm224799075ad.244.2024.05.21.11.10.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 21 May 2024 11:10:41 -0700 (PDT)
+        Tue, 21 May 2024 11:10:40 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-networking][ 16/22] nbd: Fix build with GCC14 on musl targets
-Date: Tue, 21 May 2024 11:10:17 -0700
-Message-ID: <20240521181024.426176-16-raj.khem@gmail.com>
+Subject: [meta-gnome][ 15/22] gimp: Upgrade to 2.10.38
+Date: Tue, 21 May 2024 11:10:16 -0700
+Message-ID: <20240521181024.426176-15-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.45.1
 In-Reply-To: <20240521181024.426176-1-raj.khem@gmail.com>
 References: <20240521181024.426176-1-raj.khem@gmail.com>
@@ -61,79 +61,99 @@ List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 21 May 2024 18:10:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110465
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110464
+
+Fix build with GCC-14 with few backports while here
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...1-nbd-client-Fix-build-on-musl-gcc14.patch | 43 +++++++++++++++++++
- .../recipes-support/nbd/nbd_3.26.1.bb         |  4 +-
- 2 files changed, 46 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-support/nbd/nbd/0001-nbd-client-Fix-build-on-musl-gcc14.patch
+ ...f-load-fix-mismatching-variable-type.patch | 24 +++++++++++++++++++
+ ...001-metadata-shut-up-a-weird-warning.patch | 22 +++++++++++++++++
+ .../gimp/{gimp_2.10.36.bb => gimp_2.10.38.bb} |  7 ++++--
+ 3 files changed, 51 insertions(+), 2 deletions(-)
+ create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-file-tiff-load-fix-mismatching-variable-type.patch
+ create mode 100644 meta-gnome/recipes-gimp/gimp/gimp/0001-metadata-shut-up-a-weird-warning.patch
+ rename meta-gnome/recipes-gimp/gimp/{gimp_2.10.36.bb => gimp_2.10.38.bb} (87%)
 
-diff --git a/meta-networking/recipes-support/nbd/nbd/0001-nbd-client-Fix-build-on-musl-gcc14.patch b/meta-networking/recipes-support/nbd/nbd/0001-nbd-client-Fix-build-on-musl-gcc14.patch
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0001-file-tiff-load-fix-mismatching-variable-type.patch b/meta-gnome/recipes-gimp/gimp/gimp/0001-file-tiff-load-fix-mismatching-variable-type.patch
 new file mode 100644
-index 0000000000..15b439e255
+index 0000000000..13b3dda144
 --- /dev/null
-+++ b/meta-networking/recipes-support/nbd/nbd/0001-nbd-client-Fix-build-on-musl-gcc14.patch
-@@ -0,0 +1,43 @@
-+From 909d20a2ee4afecd5ae4cc5950c8ee599f72972d Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 20 May 2024 17:48:13 -0700
-+Subject: [PATCH] nbd-client: Fix build on musl + gcc14
++++ b/meta-gnome/recipes-gimp/gimp/gimp/0001-file-tiff-load-fix-mismatching-variable-type.patch
+@@ -0,0 +1,24 @@
++From a2458f1528e5733574bb26ff5452b1329116e6db Mon Sep 17 00:00:00 2001
++From: Simon Budig <simon@budig.de>
++Date: Sat, 20 May 2023 18:40:41 +0200
++Subject: [PATCH] file-tiff-load: fix mismatching variable type
 +
-+GCC-14 has promoted incompatible-pointer-types warning into error which is
-+now flagged especially with when building on musl
++Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gimp/-/commit/a2458f1528e5733574bb26ff5452b1329116e6db]
++Signed-off-by: Khem Raj <raj.khem@gmai.com>
++---
++ plug-ins/file-tiff/file-tiff-load.c | 6 +++---
++ 1 file changed, 3 insertions(+), 3 deletions(-)
 +
-+Fixes following error
++--- a/plug-ins/file-tiff/file-tiff-load.c
+++++ b/plug-ins/file-tiff/file-tiff-load.c
++@@ -1301,8 +1301,8 @@ load_image (GFile        *file,
++ 
++       /* any resolution info in the file? */
++       {
++-        gfloat   xres = 72.0;
++-        gfloat   yres = 72.0;
+++        gdouble   xres = 72.0;
+++        gdouble   yres = 72.0;
++         gushort  read_unit;
++         GimpUnit unit = GIMP_UNIT_PIXEL; /* invalid unit */
++ 
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp/0001-metadata-shut-up-a-weird-warning.patch b/meta-gnome/recipes-gimp/gimp/gimp/0001-metadata-shut-up-a-weird-warning.patch
+new file mode 100644
+index 0000000000..4f04ac8250
+--- /dev/null
++++ b/meta-gnome/recipes-gimp/gimp/gimp/0001-metadata-shut-up-a-weird-warning.patch
+@@ -0,0 +1,22 @@
++From 51311f913d9f417d121f59b83d560c7b4b853d1c Mon Sep 17 00:00:00 2001
++From: Simon Budig <simon@budig.de>
++Date: Sat, 20 May 2023 22:25:40 +0200
++Subject: [PATCH] metadata: shut up a weird warning
 +
-+| ../nbd-3.26.1/nbd-client.c: In function 'openunix':
-+| ../nbd-3.26.1/nbd-client.c:345:27: error: passing argument 2 of 'connect' from incompatible pointer type [-Wincompatible-pointer-types]
-+|   345 |         if (connect(sock, &un_addr, sizeof(un_addr)) == -1) {
-+|       |                           ^~~~~~~~
-+|       |                           |
-+|       |                           struct sockaddr_un *
-+| In file included from ../nbd-3.26.1/nbd-client.c:25:
-+| /mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux-musl/nbd/3.26.1/recipe-sysroot/usr/include/sys/socket.h:386:19: note: expected 'const struct sockaddr *' but argument is of type 'struct sockaddr_un *'
-+|   386 | int connect (int, const struct sockaddr *, socklen_t);
-+|       |                   ^~~~~~~~~~~~~~~~~~~~~~~
-+
-+Upstream-Status: Submitted [https://lists.debian.org/nbd/2024/05/msg00012.html]
++Upstream-Status: Backport [https://gitlab.gnome.org/GNOME/gimp/-/commit/51311f913d9f417d121f59b83d560c7b4b853d1c]
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ nbd-client.c | 2 +-
++ plug-ins/metadata/metadata-editor.c | 2 +-
 + 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/nbd-client.c b/nbd-client.c
-+index 8d1101b..7b25c67 100644
-+--- a/nbd-client.c
-++++ b/nbd-client.c
-+@@ -342,7 +342,7 @@ int openunix(const char *path) {
-+ 		return -1;
-+ 	};
++--- a/plug-ins/metadata/metadata-editor.c
+++++ b/plug-ins/metadata/metadata-editor.c
++@@ -2140,7 +2140,7 @@ metadata_dialog_editor_set_metadata (GEx
++                             }
++                           else
++                             {
++-                              if (! g_strv_contains (values, equiv_values[evi]))
+++                              if (! g_strv_contains ((const gchar * const *) values, equiv_values[evi]))
++                                 {
++                                   gchar *tmpvalue;
 + 
-+-	if (connect(sock, &un_addr, sizeof(un_addr)) == -1) {
-++	if (connect(sock, (struct sockaddr*)&un_addr, sizeof(un_addr)) == -1) {
-+ 		err_nonfatal("CONNECT failed");
-+ 		close(sock);
-+ 		return -1;
-+-- 
-+2.45.1
-+
-diff --git a/meta-networking/recipes-support/nbd/nbd_3.26.1.bb b/meta-networking/recipes-support/nbd/nbd_3.26.1.bb
-index 15d5f8b36b..a67b087f74 100644
---- a/meta-networking/recipes-support/nbd/nbd_3.26.1.bb
-+++ b/meta-networking/recipes-support/nbd/nbd_3.26.1.bb
-@@ -7,7 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- DEPENDS = "autoconf-archive bison-native glib-2.0 libnl zlib bison-native"
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp_2.10.36.bb b/meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb
+similarity index 87%
+rename from meta-gnome/recipes-gimp/gimp/gimp_2.10.36.bb
+rename to meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb
+index 4526839ad6..833341f850 100644
+--- a/meta-gnome/recipes-gimp/gimp/gimp_2.10.36.bb
++++ b/meta-gnome/recipes-gimp/gimp/gimp_2.10.38.bb
+@@ -46,8 +46,11 @@ SHPV = "${@gnome_verdir("${PV}")}"
  
- SRC_URI = "https://github.com/NetworkBlockDevice/${BPN}/releases/download/${BP}/${BP}.tar.xz \
--           file://f0418b0d8b54c21a1e5b0c6dce3277e938d07e7c.patch"
-+           file://f0418b0d8b54c21a1e5b0c6dce3277e938d07e7c.patch \
-+           file://0001-nbd-client-Fix-build-on-musl-gcc14.patch \
+ SRC_URI = "https://download.gimp.org/pub/${BPN}/v${SHPV}/${BP}.tar.bz2 \
+            file://0001-configure-Keep-first-line-of-compiler-version-string.patch \
+-           file://0001-libtool-Do-not-add-build-time-library-paths-to-LD_LI.patch"
+-SRC_URI[sha256sum] = "3d3bc3c69a4bdb3aea9ba2d5385ed98ea03953f3857aafd1d6976011ed7cdbb2"
++           file://0001-libtool-Do-not-add-build-time-library-paths-to-LD_LI.patch \
++           file://0001-file-tiff-load-fix-mismatching-variable-type.patch \
++           file://0001-metadata-shut-up-a-weird-warning.patch \
 +           "
- SRC_URI[sha256sum] = "f0cf509fa5b20b1a07f7904eb637e9b47d3e30b6ed6f00075af5d8b701c78fef"
++SRC_URI[sha256sum] = "50a845eec11c8831fe8661707950f5b8446e35f30edfb9acf98f85c1133f856e"
  
- inherit autotools pkgconfig systemd
+ EXTRA_OECONF = "--disable-python \
+                 --without-webkit \
 -- 
 2.45.1
 
