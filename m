@@ -1,123 +1,85 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <jan.vermaete@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0D516C25B78
-	for <webhook@archiver.kernel.org>; Tue, 21 May 2024 18:13:29 +0000 (UTC)
-Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
- by mx.groups.io with SMTP id smtpd.web11.3163.1716315203626722661
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 38180C25B78
+	for <webhook@archiver.kernel.org>; Tue, 21 May 2024 18:45:19 +0000 (UTC)
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+ by mx.groups.io with SMTP id smtpd.web10.3906.1716317117720359041
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 21 May 2024 11:13:24 -0700
+ Tue, 21 May 2024 11:45:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
-Received: from fwd70.aul.t-online.de (fwd70.aul.t-online.de [10.223.144.96])
-	by mailout05.t-online.de (Postfix) with SMTP id 8C5141DB23;
-	Tue, 21 May 2024 20:13:20 +0200 (CEST)
-Received: from [192.168.178.67] ([84.154.175.137]) by fwd70.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1s9TzD-2tAjlA0; Tue, 21 May 2024 20:13:20 +0200
-Date: Tue, 21 May 2024 20:13:58 +0200
-From: Markus Volk <f_l_k@t-online.de>
-Subject: Re: [oe] [meta-gnome][PATCHv2] gnome-control-center: add
- PACKAGECONFIG knob for malcontent
-To: openembedded-devel@lists.openembedded.org, Khem Raj <raj.khem@gmail.com>
-Message-Id: <ABLUDS.YFB34V0ZIK2U1@t-online.de>
-In-Reply-To: <17D193737019FCE3.27972@lists.openembedded.org>
-References: <17D193737019FCE3.27972@lists.openembedded.org>
-X-Mailer: geary/44.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=Sw8jQha5;
+ spf=pass (domain: gmail.com, ip: 209.85.221.53, mailfrom: jan.vermaete@gmail.com)
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-34e0d8b737eso66906f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Tue, 21 May 2024 11:45:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1716317116; x=1716921916; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=UCBuNzRgPKnhRkbViXd07PNf+lQF0vG+6opzOvDuf6s=;
+        b=Sw8jQha5j95EvDVWjgp/mUOhP3lg3lKHwRlyc2jIey7aEiIxQ2S5h29K8FpCC2YanW
+         pg/2hAyBSP7MwE81obiV2BIU9wERXgvplGhA5s+7HXF6bCZDxsA1uZQnul5bY8D4ZCig
+         6yqK71hrFt1uXzrgbOubGqzpESQcfLjPj9JA7g8SWpJvV9MD9Is1oU119E0O/CISTVQz
+         /SMhRapzaXf1uagA4swdG6A7YE8epNhiat4xaz/b25WRcGMvFEM/H5RxNhXuYz9fTXAJ
+         OY4NRMta9khGATMcrB7eo3K72MS8WJKq/gzAfbpAGHynzzkwYjsNyYR3Tyw0uOAA4WZc
+         34aQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1716317116; x=1716921916;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=UCBuNzRgPKnhRkbViXd07PNf+lQF0vG+6opzOvDuf6s=;
+        b=t80VHuOLBp88XNvA5Qz2pkdfftmj6/WYerUiHIgN0V1qFtCrkrmszt+xn/zGXdn8vy
+         EK77tdQbENtaXv6UY2tDrRMmpCujLtkgrlnmUUo+d//KeaQhwYRYJBhx3LxHP//q0RTW
+         hkZnDZYgFFuu2vC4Wzjqj3SYZRwCSGoUWpj9i9gMe0PbiplGxhxVDp1yRRiMiZ+CNgcj
+         Zcm7rBdWJ3WdQIHkAmPJ4uyO79V3Uvcgrot3PEy54YVRn5KlZlMPPCqTzg83M/k3UZj+
+         gCcFDuHUGDdiGcc1I4xw1O4R2544MEvQ9A3IMaKttrYbzw0tnRHv8lbeaJnP9+ZDySf9
+         OJbg==
+X-Gm-Message-State: AOJu0YxMEc8G9GgycUVdEW1NWiM9mHGykedGH4ney2s6+y3rqD6TUC2G
+	ENrsxrKUw5D0ZvVb81cpDmNbe/zirUw2kSGduP1CnbteZUMvLKjWf92GAA==
+X-Google-Smtp-Source: AGHT+IE9xM7n7a2FcgqH3jmxw5KV2wTpKdbBFMotHobS/eiZZ+YHS8ke6WUCsSbIR6unAU8Z1xBTwA==
+X-Received: by 2002:adf:e8d0:0:b0:34d:93c1:c7d8 with SMTP id ffacd0b85a97d-354b8deaf60mr9467054f8f.4.1716317115686;
+        Tue, 21 May 2024 11:45:15 -0700 (PDT)
+Received: from localhost.localdomain (78-20-160-86.access.telenet.be. [78.20.160.86])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-354bd2e2a5asm9482943f8f.45.2024.05.21.11.45.14
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 21 May 2024 11:45:15 -0700 (PDT)
+From: Jan Vermaete <jan.vermaete@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Jan Vermaete <jan.vermaete@gmail.com>
+Subject: [meta-python][PATCH] python3-werkzeug: added python3-difflib as RDEPENDS
+Date: Tue, 21 May 2024 20:43:06 +0200
+Message-Id: <20240521184306.1937606-1-jan.vermaete@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-zZHsezQGLYS4WUcEKHgj"
-X-TOI-EXPURGATEID: 150726::1716315200-4EF73D42-95486808/0/0 CLEAN NORMAL
-X-TOI-MSGID: 272ac7de-205f-45f9-88e7-ede2402bdaa6
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 21 May 2024 18:13:29 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110473
+ <openembedded-devel@lists.openembedded.org>; Tue, 21 May 2024 18:45:19 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110474
 
---=-zZHsezQGLYS4WUcEKHgj
-Content-Type: text/plain; charset=us-ascii; format=flowed
+  File "/usr/lib/python3.12/site-packages/werkzeug/routing/exceptions.py", line 3, in <module>
+    import difflib
+ModuleNotFoundError: No module named 'difflib'
 
-avoid autoselect
-
-On Tue, May 21 2024 at 08:11:23 PM +02:00:00, Markus Volk 
-<f_l_k@t-online.de> wrote:
-> Signed-off-by: Markus Volk <f_l_k@t-online.de 
-> <mailto:f_l_k@t-online.de>>
-> ---
->  .../gnome-control-center/gnome-control-center_46.1.bb            | 1 
-> +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git 
-> a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_46.1.bb 
-> b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_46.1.bb
-> index 9b54a00e6..d88c42531 100644
-> --- 
-> a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_46.1.bb
-> +++ 
-> b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_46.1.bb
-> @@ -46,6 +46,7 @@ PACKAGECONFIG[ibus] = "-Dibus=true, -Dibus=false, 
-> ibus"
->  PACKAGECONFIG[wayland] = "-Dwayland=true, -Dwayland=false, wayland"
->  PACKAGECONFIG[file-share] = ",,,gnome-user-share"
->  PACKAGECONFIG[media-share] = ",,,rygel-meta tumbler"
-> +PACKAGECONFIG[malcontent] = 
-> "-Dmalcontent=true,-Dmalcontent=false,malcontent,malcontent-ui"
-> 
->  EXTRA_OEMESON += "-Doe_sysroot=${STAGING_DIR_HOST}"
-> 
-> --
-> 2.44.0
-> 
-> 
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#110472): 
-> <https://lists.openembedded.org/g/openembedded-devel/message/110472>
-> Mute This Topic: <https://lists.openembedded.org/mt/106228511/3618223>
-> Group Owner: openembedded-devel+owner@lists.openembedded.org 
-> <mailto:openembedded-devel+owner@lists.openembedded.org>
-> Unsubscribe: 
-> <https://lists.openembedded.org/g/openembedded-devel/unsub> 
-> [f_l_k@t-online.de <mailto:f_l_k@t-online.de>]
-> -=-=-=-=-=-=-=-=-=-=-=-
-> 
-
-
---=-zZHsezQGLYS4WUcEKHgj
-Content-Type: text/html; charset=us-ascii
-
-<div id="geary-body" dir="auto"><div>avoid autoselect</div></div><div id="geary-quote" dir="auto"><br>On Tue, May 21 2024 at 08:11:23 PM +02:00:00, Markus Volk &lt;f_l_k@t-online.de&gt; wrote:<br><blockquote type="cite"><div class="plaintext" style="white-space: break-spaces;">Signed-off-by: Markus Volk &lt;<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>&gt;
+Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
 ---
- .../gnome-control-center/gnome-control-center_46.1.bb            | 1 +
+ meta-python/recipes-devtools/python/python3-werkzeug_3.0.1.bb | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_46.1.bb b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_46.1.bb
-index 9b54a00e6..d88c42531 100644
---- a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_46.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_46.1.bb
-@@ -46,6 +46,7 @@ PACKAGECONFIG[ibus] = "-Dibus=true, -Dibus=false, ibus"
- PACKAGECONFIG[wayland] = "-Dwayland=true, -Dwayland=false, wayland"
- PACKAGECONFIG[file-share] = ",,,gnome-user-share"
- PACKAGECONFIG[media-share] = ",,,rygel-meta tumbler"
-+PACKAGECONFIG[malcontent] = "-Dmalcontent=true,-Dmalcontent=false,malcontent,malcontent-ui"
- 
- EXTRA_OEMESON += "-Doe_sysroot=${STAGING_DIR_HOST}"
- 
-<div>-- 
-</div>2.44.0
-
-</div><div class="plaintext" style="white-space: break-spaces;">
--=-=-=-=-=-=-=-=-=-=-=-
-Links: You receive all messages sent to this group.
-View/Reply Online (#110472): <a href="https://lists.openembedded.org/g/openembedded-devel/message/110472">https://lists.openembedded.org/g/openembedded-devel/message/110472</a>
-Mute This Topic: <a href="https://lists.openembedded.org/mt/106228511/3618223">https://lists.openembedded.org/mt/106228511/3618223</a>
-Group Owner: <a href="mailto:openembedded-devel+owner@lists.openembedded.org">openembedded-devel+owner@lists.openembedded.org</a>
-Unsubscribe: <a href="https://lists.openembedded.org/g/openembedded-devel/unsub">https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a href="mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>]
--=-=-=-=-=-=-=-=-=-=-=-
-
-</div></blockquote></div>
---=-zZHsezQGLYS4WUcEKHgj--
+diff --git a/meta-python/recipes-devtools/python/python3-werkzeug_3.0.1.bb b/meta-python/recipes-devtools/python/python3-werkzeug_3.0.1.bb
+index f8d2769b4..448abe189 100644
+--- a/meta-python/recipes-devtools/python/python3-werkzeug_3.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-werkzeug_3.0.1.bb
+@@ -20,4 +20,5 @@ RDEPENDS:${PN} += " \
+     python3-profile \
+     python3-compression \
+     python3-json \
++    python3-difflib \
+ "
+-- 
+2.39.2
 
 
