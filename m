@@ -2,229 +2,81 @@ Return-Path: <philip@balister.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 18F49C25B77
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B37EC25B7C
 	for <webhook@archiver.kernel.org>; Wed, 22 May 2024 11:48:23 +0000 (UTC)
-Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.17.13])
- by mx.groups.io with SMTP id smtpd.web10.7520.1716376495318066126
+Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.126.135])
+ by mx.groups.io with SMTP id smtpd.web11.7448.1716376511964815375
  for <Openembedded-Devel@Lists.Openembedded.Org>;
- Wed, 22 May 2024 04:14:55 -0700
+ Wed, 22 May 2024 04:15:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: moellendorf.eu, ip: 212.227.17.13, mailfrom: mail@moellendorf.eu)
+ dkim=none (message not signed); spf=pass (domain: moellendorf.eu, ip: 212.227.126.135, mailfrom: mail@moellendorf.eu)
 Received: from localhost ([78.43.203.234]) by mrelayeu.kundenserver.de
- (mreue108 [212.227.15.183]) with ESMTPSA (Nemesis) id
- 1MGz9p-1sNEBk0l63-00E3vE; Wed, 22 May 2024 13:14:51 +0200
+ (mreue012 [212.227.15.167]) with ESMTPSA (Nemesis) id
+ 1N45th-1sZgpl2ThJ-0107pQ; Wed, 22 May 2024 13:15:04 +0200
 From: =?UTF-8?B?TGFycyBNw7ZsbGVuZG9yZg==?= <openembedded@moellendorf.eu>
 To: Openembedded-Devel@Lists.Openembedded.Org
 Cc: =?UTF-8?q?Lars=20M=C3=B6llendorf?= <lars.moellendorf@plating.de>
-Subject: [PATCH 1/2] iniparser: upgrade 4.2 -> 4.2.1
-Date: Wed, 22 May 2024 13:13:47 +0200
-Message-ID: <20240522111348.6109-2-openembedded@moellendorf.eu>
+Subject: [PATCH 2/2] iniparser: remove dependency on doxygen-native
+Date: Wed, 22 May 2024 13:13:48 +0200
+Message-ID: <20240522111348.6109-3-openembedded@moellendorf.eu>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240522111348.6109-1-openembedded@moellendorf.eu>
 References: <20240522111348.6109-1-openembedded@moellendorf.eu>
 MIME-Version: 1.0
-X-Provags-ID: V03:K1:fNzWqgr/ZqRBSBhYnVEs33d4yDYUMV/ghscmQgh9Uu7nxsTe5Rl
- 7kUKXUbn63vPZKrEvirnq/ajPqO6UhzQlaLbDJ5V0dqqvg3/DDMVRFXM5igu7EnwyqPSdgB
- x8yxbYuIVdIvril18N7QEqFFUqL0cp5utptwQbX/QZ1yQvHERX8zRVCv43TjmCV+nY6y0Jk
- bOQTop7gbujmc+Dgb0/pg==
-UI-OutboundReport: notjunk:1;M01:P0:ugUSWDPxx84=;A7jjyYfO5ldVHrFx9LCzb+3/oo5
- Gtzj2mqiaR9+UEKX3uZml1EjT91B1hYgiilcb+gzWDed2nOsbRfzRACm2d+g+xPvKq6EQUbx7
- L+HJwSjWPP0nPxp1lJNAqFhPPpeu9cVRfUvoYqHA6HEdAzxPMJr9GWlQ4STM50ApS60fEeCi4
- hWJjevTEYTAAkzHEg1glI0CR1gsu9aYeBC4W/WoEdXl3IZq/8DPKpjaC5tQbF6QxAdmTz4gbu
- HmtUhCTm2fsUAO21kH41rSDkwgxqtTfoaQ2q8H8SSB0ZLyQmF46ElGhE25fgl3YyyQSg1f1Bf
- 4rYObkLKPQGmvL1BeAYY8vY9zP00HVnWF0Cor5m5hpB30uNC6LmYCwhUFCQftRXMK+0VKzj2+
- Cqii1R7v4scHcTD51EnQBuw8OJmugrrZsoiFKY4cEsI4JKe3siJP0Fu3bJlbuC01rBh5iaUBz
- LnIT6kPJDh17gRSErrysGqRN34kZ81kTGxTdfxSs77LfjE4AY56985fyqdj57eW76T30j3DMs
- ihMHZpEMbfQd7W4czo1m74N44TbIz8C4TAkAxV4zhI3lxtRWDNbkxsJqPKX7SNIoQm2JcQNdv
- TcI+nYTJZTnINqpajPhfbBD3zJiOvSg7w5Xpl5GeddxoX+LWoNvlrDjQBXJxmF0+HRwm338zA
- +Y6bfjevxEMkEigcBbuC4L/2tGwCwop6xqAuoUU/FTRJeAkELYfkK3GdIE6rMJDuHQhY5uZR4
- KyEtCxCYbhV1bBv0XITc4fV4UBh+AlGdyW163hg1pMyXLlNPKwnDcI=
+X-Provags-ID: V03:K1:ygDkwxHJWYBCe9JQIceRyuLMM/RW/uJwf+whliGdXfnciImvXcJ
+ Drx/DqMOwEB7X4WmclfHcCsC0as9xZUuctooIjsENUaFbVqkFvgYbN6goaR9G4x6l5FnLFd
+ Dbio9v6INoiO7eXmNzSNYdc9cxW3tMaoCExVLCItMk4gJxFAlOApVTbkDcS3D9cTc+y9qEr
+ D9lRmWnBMHQx1sS7ZfG6g==
+UI-OutboundReport: notjunk:1;M01:P0:TN11OQMLBqM=;9kNkk5GTMhok26USrYbBdVjzWsO
+ MSjkMhiOTz7Fl+77gqADFXml/ijxUZDWHRIer2xQrSWLGOtCfzwIwNlbojYS0PoCWrIPh+b6c
+ I3qk5ThbQcD3oYZ2fgMcrug9GW0AtuwuWCmCD6KHCRAanU0XCkw/6pyTmyxNwsYkkzRST6fMM
+ scUMOtL+eKr+O2PBOFGlYXgkN/oGV330WoHGLD9Z/02BWUleBGNp4T5Fjmpz9WFJ/+TuwX3Ws
+ TDHgPyjqmtalgq4/PVOp2DLbmRzlHu0zsKY+je+e/KJMiTEVU1qqV8DcV93PXKGl7SBVIj4p9
+ IkGStPp/m9sBNr59AB86m8j+YDz2k4sGukuPGDTQcU1E1ZT8FCfJVxFlYx9DH+K6pYkDtbbk/
+ q8ctwuZYkej7B/UyrJ0gePE1Eir+XjMCYRA1eqjMOjecB0oGNPCLZTFtuNlCvsjjjFsSEyMk2
+ sBZlbkTPv9lLa+LGLCLN+zQyNbJXDGgRqTvJ3oCL3RSf2RTNOvdEESkiYwVAnz+Cn/L2MXj63
+ q0SBXL5VIbw+6ag+jjXQzsGMd75ylWn1x80NWj6Np+ZqWI+DAxaUPqlatvGlaFtffMNCU74ef
+ KD0HbhYNJ8q/FQ8OiC0/kIZGBZVE/Nm0YvHubrVA9splCiI+UXzVqlb2BHA+cD2VOKTRS9Ph6
+ MvjvuTlM0b50wAI4VsJHWQIKg1V5nC9Ppn5XMBRLS6rJJ5PxCsdjagoK1bxf3tY1O7k+zrHJm
+ WZR2clGgNDT38mdUSlHZ0K75AyF297zy91Zdq/iIGnHsKegWNuWFM4=
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Wed, 22 May 2024 11:48:23 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110485
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110486
 
 From: Lars Möllendorf <lars.moellendorf@plating.de>
 
-Hompage-Upgrade: upstream iniparser moved to Gitlab
-
-
-Add-CMake-support.patch
-removed since CMake support is now provided upstream
-
-0001-iniparser.pc-Make-libpath-a-variable.patch
-removed since pkg-config file is now generated by CMake
+This is an extra commit since I am not sure if documentation is wanted or
+not.
 
 Signed-off-by: Lars Möllendorf <lars.moellendorf@plating.de>
 ---
- ...iniparser.pc-Make-libpath-a-variable.patch | 23 -------
- .../iniparser/Add-CMake-support.patch         | 65 -------------------
- .../iniparser/iniparser_4.2.2.bb              | 16 +++++
- .../iniparser/iniparser_4.2.bb                | 27 --------
- 4 files changed, 16 insertions(+), 115 deletions(-)
- delete mode 100644 meta-oe/recipes-support/iniparser/iniparser/0001-iniparser.pc-Make-libpath-a-variable.patch
- delete mode 100644 meta-oe/recipes-support/iniparser/iniparser/Add-CMake-support.patch
- create mode 100644 meta-oe/recipes-support/iniparser/iniparser_4.2.2.bb
- delete mode 100644 meta-oe/recipes-support/iniparser/iniparser_4.2.bb
+ meta-oe/recipes-support/iniparser/iniparser_4.2.2.bb | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/iniparser/iniparser/0001-iniparser.pc-Make-libpath-a-variable.patch b/meta-oe/recipes-support/iniparser/iniparser/0001-iniparser.pc-Make-libpath-a-variable.patch
-deleted file mode 100644
-index 4824344f0..000000000
---- a/meta-oe/recipes-support/iniparser/iniparser/0001-iniparser.pc-Make-libpath-a-variable.patch
-+++ /dev/null
-@@ -1,23 +0,0 @@
--From 1761298b73c759c07e4652ada307f68512a75ff1 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Fri, 25 Mar 2022 20:44:41 -0700
--Subject: [PATCH] iniparser.pc: Make libpath a variable
--
--Will set according to baselib that yocto exports.
--
--Upstream-Status: Inappropriate [OE-specific]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- iniparser.pc | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
----- a/iniparser.pc
--+++ b/iniparser.pc
--@@ -1,6 +1,6 @@
-- prefix=/usr
-- exec_prefix=/usr
---libdir=${exec_prefix}/lib
--+libdir=${exec_prefix}/@baselib@
-- includedir=${prefix}/include
-- datarootdir=${prefix}/share
-- datadir=${datarootdir}
-diff --git a/meta-oe/recipes-support/iniparser/iniparser/Add-CMake-support.patch b/meta-oe/recipes-support/iniparser/iniparser/Add-CMake-support.patch
-deleted file mode 100644
-index 46c1b0f7a..000000000
---- a/meta-oe/recipes-support/iniparser/iniparser/Add-CMake-support.patch
-+++ /dev/null
-@@ -1,65 +0,0 @@
--Origin: Debian packaging
--From: Klee Dienes <klee@mit.edu>
--Date: Thu, 13 Feb 2014 07:03:26 -0500
--Subject: Add CMake support.
--
-----
--Upstream-Status: Pending
--
-- CMakeLists.txt | 44 ++++++++++++++++++++++++++++++++++++++++++++
-- 1 file changed, 44 insertions(+)
-- create mode 100644 CMakeLists.txt
--
----- /dev/null
--+++ b/CMakeLists.txt
--@@ -0,0 +1,50 @@
--+cmake_minimum_required (VERSION 2.8.8)
--+
--+project (iniparser)
--+include (GNUInstallDirs)
--+
--+include_directories (src)
--+
--+set(INIPARSER_SRCS src/dictionary.c src/iniparser.c)
--+set(INIPARSER_HDRS src/dictionary.h src/iniparser.h)
--+
--+add_library(iniparser-shared SHARED ${INIPARSER_SRCS} ${INIPARSER_HDRS})
--+add_library(iniparser-static STATIC ${INIPARSER_SRCS} ${INIPARSER_HDRS})
--+
--+set_target_properties(iniparser-shared PROPERTIES SOVERSION 1)
--+set_target_properties(iniparser-shared PROPERTIES OUTPUT_NAME iniparser)
--+set_target_properties(iniparser-static PROPERTIES OUTPUT_NAME iniparser)
--+
--+install (TARGETS iniparser-shared
--+  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
--+  DESTINATION ${CMAKE_INSTALL_LIBDIR}
--+  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
--+
--+install (TARGETS iniparser-static
--+  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
--+  DESTINATION ${CMAKE_INSTALL_LIBDIR}
--+  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
--+
--+find_package(Doxygen)
--+if (NOT DOXYGEN_FOUND)
--+message(FATAL_ERROR "Doxygen is needed to build the documentation. Please install it correctly")
--+endif()
--+
--+file (WRITE ${CMAKE_CURRENT_BINARY_DIR}/iniparser.dox
--+  "@INCLUDE = ${CMAKE_CURRENT_SOURCE_DIR}/doc/iniparser.dox\n"
--+  "OUTPUT_DIRECTORY = ${CMAKE_CURRENT_BINARY_DIR}\n"
--+  )
--+
--+add_custom_target (doc ALL 
--+  COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/iniparser.dox
--+  SOURCES doc/iniparser.dox)
--+
--+enable_testing()
--+
--+add_test(NAME testsuite
--+  COMMAND make
--+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/test)
--+
--+install (FILES ${INIPARSER_HDRS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iniparser)
--+
--+install (DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/html DESTINATION ${CMAKE_INSTALL_DOCDIR})
 diff --git a/meta-oe/recipes-support/iniparser/iniparser_4.2.2.bb b/meta-oe/recipes-support/iniparser/iniparser_4.2.2.bb
-new file mode 100644
-index 000000000..a8f7947c8
---- /dev/null
+index a8f7947c8..4a1c6db15 100644
+--- a/meta-oe/recipes-support/iniparser/iniparser_4.2.2.bb
 +++ b/meta-oe/recipes-support/iniparser/iniparser_4.2.2.bb
-@@ -0,0 +1,16 @@
-+SUMMARY = "The iniParser library is a simple C library offering INI file parsing services (both reading and writing)."
-+SECTION = "libs"
-+HOMEPAGE = "https://gitlab.com/iniparser/iniparser"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=8474d3b745f77e203f1fc82fb0bb7678"
-+SRCBRANCH = "main"
-+SRCREV = "v${PV}"
-+
-+DEPENDS = "doxygen-native"
-+
-+SRC_URI = "git://gitlab.com/iniparser/iniparser.git;protocol=https;branch=${SRCBRANCH}"
-+S = "${WORKDIR}/git"
-+
-+inherit cmake
-+
-+FILES_${PN}-staticdev += "${libdir}/cmake/iniparser/iniparser-staticTargets*.cmake"
-diff --git a/meta-oe/recipes-support/iniparser/iniparser_4.2.bb b/meta-oe/recipes-support/iniparser/iniparser_4.2.bb
-deleted file mode 100644
-index d44772590..000000000
---- a/meta-oe/recipes-support/iniparser/iniparser_4.2.bb
-+++ /dev/null
-@@ -1,27 +0,0 @@
--SUMMARY = "The iniParser library is a simple C library offering INI file parsing services (both reading and writing)."
--SECTION = "libs"
--HOMEPAGE = "https://github.com/ndevilla/iniparser"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=8474d3b745f77e203f1fc82fb0bb7678"
--
+@@ -6,11 +6,13 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8474d3b745f77e203f1fc82fb0bb7678"
+ SRCBRANCH = "main"
+ SRCREV = "v${PV}"
+ 
 -DEPENDS = "doxygen-native"
 -
--PV .= "+git"
--
--SRC_URI = "git://github.com/ndevilla/iniparser.git;protocol=https;branch=master \
--           file://0001-iniparser.pc-Make-libpath-a-variable.patch \
--           file://Add-CMake-support.patch \
--"
--
--SRCREV = "9f5a6da1c245b44f49a46212ec0d81ffb1f821aa"
--
--S = "${WORKDIR}/git"
--
--inherit cmake
--
--do_install:append() {
--    install -Dm 0644 ${S}/iniparser.pc ${D}${libdir}/pkgconfig/iniparser.pc
--    sed -i -e 's,@baselib@,${baselib},g' ${D}${libdir}/pkgconfig/iniparser.pc
--}
--
--BBCLASSEXTEND += "native"
+ SRC_URI = "git://gitlab.com/iniparser/iniparser.git;protocol=https;branch=${SRCBRANCH}"
+ S = "${WORKDIR}/git"
+ 
+ inherit cmake
+ 
++EXTRA_OECMAKE = " \
++	-DBUILD_DOCS=OFF \
++	"
++
+ FILES_${PN}-staticdev += "${libdir}/cmake/iniparser/iniparser-staticTargets*.cmake"
 -- 
 2.43.2
 
