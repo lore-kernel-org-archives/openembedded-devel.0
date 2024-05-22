@@ -2,98 +2,128 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5ED77C25B79
-	for <webhook@archiver.kernel.org>; Wed, 22 May 2024 17:04:26 +0000 (UTC)
-Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com [209.85.210.177])
- by mx.groups.io with SMTP id smtpd.web11.91.1716397459937700299
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D3805C25B78
+	for <webhook@archiver.kernel.org>; Wed, 22 May 2024 18:46:16 +0000 (UTC)
+Received: from mail-oa1-f52.google.com (mail-oa1-f52.google.com [209.85.160.52])
+ by mx.groups.io with SMTP id smtpd.web11.2576.1716403574006635093
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 May 2024 10:04:19 -0700
+ Wed, 22 May 2024 11:46:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=S6YvU62Z;
- spf=pass (domain: gmail.com, ip: 209.85.210.177, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f177.google.com with SMTP id d2e1a72fcca58-6f44881ad9eso1473639b3a.3
-        for <openembedded-devel@lists.openembedded.org>; Wed, 22 May 2024 10:04:19 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=ZkjHt2Xe;
+ spf=pass (domain: gmail.com, ip: 209.85.160.52, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f52.google.com with SMTP id 586e51a60fabf-241572c02efso2935185fac.3
+        for <openembedded-devel@lists.openembedded.org>; Wed, 22 May 2024 11:46:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1716397459; x=1717002259; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=ZQj86n4bn9CTYZwx2xYYeH3NDXg3DU5dmQD0iGiEfS0=;
-        b=S6YvU62Zfx8FbAMqCqvHcKtK46N3PxVXwJjq+ZQyifxlCp6dS25yzQdHj7op9rotQu
-         /kxnyMc7H7KzNqR79aLLMFkV0tL9MkTB/9hd6XmnB0+uzYZt1VAM8j4azu2iqq+6WYxT
-         w8cC+ZK0P3kbDwgC2FGJDr26y+KicS+yZgXoOYsE/1a/p4Oijo/oiP86o+3gbLmZY6tE
-         9qG7IssSrA5KD7S6vXECrddyHaMcGdACdVR+L4SbpIGcuSHRXeQKEyU238TmgZjdcozh
-         wnAxWEGIUSIpOvvjXcIpbwMaiaPCsoJSVlaOhK2qBC2PIFQSfys/3NkkEWei4f8YTJiZ
-         KABQ==
+        d=gmail.com; s=20230601; t=1716403573; x=1717008373; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=DQ1bfig/7XYqqDTtRXgDNAUS40CNpyERlQIqgPffISs=;
+        b=ZkjHt2Xe5d98a9HpCQszfMpcs+sMtnkwvrpatjjVpC5yjPorLMUEKJFuykCiWFOa5+
+         5MT04F7qhL5gpRHQ5kgRGAx74vmO8oTRMxFrKIZgLhPv/b83clfaMpxThB09S516NbKg
+         V4s80cl1tx7FpeJ7TPRNa06kjbMHNZSXDqqnI53EUCzyBySGr/I5YdWqXiF/vjlCxUXB
+         HS6Bo0tN0+YX5LXm09GAgtDf9+zbszpF3LqTAb0oWtCBiMwg4Dg2yicIKuJoCjAbAl0W
+         fUdq46ca/eiaPNmUo3vZ+uZNEr4H1BGqKTRjw36MmcOjh6p5lm4fH88TEp7EfO4xy6jp
+         xaog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1716397459; x=1717002259;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=ZQj86n4bn9CTYZwx2xYYeH3NDXg3DU5dmQD0iGiEfS0=;
-        b=pPIbqVTq+x+UUx8pTvxkOxVSZ0bLly7f9oz6PAuN/cQ8K6LezoHyqXmwo/jc56H6AE
-         XhIn99Pl/GVKYvalTIPGkw7Z/X8+zQbBdyEZpMT5pCXja/ZxeBrzsUo/FHQp6I5bUzIb
-         tNwLct8PKJYxUuDLFuHmp76uiitJPO2ClSlXK2P+wObGykFYnCOsuIlozAqXKBrgl7B9
-         8PSAWQyglnwWdsO9b8P6atuHaU3UB49fgaJqO5FvlPOADdH+NBJtfJ5/6/Mco/rrtgs3
-         ueEzS8EAF3cDhopa0u7/FHzo5TZaS4T5j6It0ILyUQTGGM/rJJ5AnnHo5RlcFcY5fOl9
-         9vgw==
-X-Gm-Message-State: AOJu0YwkL4rgOrgShUTIf+eciDQ0Kl0R27Jp1uBfHnYpr/ql4NXPeFIA
-	ytON+uOuxIV2wikoi1R5yeM3agNy+h0orUoCrHfNtKXBPyrXPkzueb0ntTNR2nM=
-X-Google-Smtp-Source: AGHT+IGFUp4KQan9E7aFIEXbfZ0owkZet4NHMb9cw5WLT9xikDSxXvQeDQiqxAbdPEJrcGgtcI40JA==
-X-Received: by 2002:a05:6a00:4fd5:b0:6f3:ebc4:4407 with SMTP id d2e1a72fcca58-6f6d5ffbf67mr2915059b3a.4.1716397458978;
-        Wed, 22 May 2024 10:04:18 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::e8eb])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-676fc4c98d6sm1310198a12.81.2024.05.22.10.04.18
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 May 2024 10:04:18 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH] oscam: Upgrade to 1.20
-Date: Wed, 22 May 2024 10:04:16 -0700
-Message-ID: <20240522170416.131041-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.45.1
+        d=1e100.net; s=20230601; t=1716403573; x=1717008373;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=DQ1bfig/7XYqqDTtRXgDNAUS40CNpyERlQIqgPffISs=;
+        b=cLh4C1+4Fs2AelwyciH77j0pSZo9yBJOc/r5cdtj8zwDgM43gg5jgFRXus1mSrM3yN
+         u1MyMoN6oZ1HDLfs486TCfEwACVbOHbio5Fa8fYRqFlwwuVushP2zlBLxajxU52D5yW6
+         DVItCgaj9/Xm4hcgNpWs67tBzFTyls6wATSMWRFkZDndYHjxKSZ9UMoAdAVfb+0RTMtI
+         4VZNP/R2ScLh4MOa/ZJZLDHKoUn8yFTF3gUmxNnKyDxphjV4q/QeEyQj9lnL4DelbhV4
+         ZBKpHFteoiXNuRSbIj06yMGaFWcUeMT8uOPM4kDC3xrrEc2a8CCc5bUMc4NRJesKyEvd
+         A65g==
+X-Gm-Message-State: AOJu0Yxm+eBYQAv7hXOWWd/G484DZpmxgPnCMYDch9LYmwXp+CHCHnUO
+	g3vjoxZvMucqdAF6tvp2HsS+g0KWd95x20LwXnP2UsPFIyR++HrjuAH9bJ5AqZ7wSkLAnMP5pMu
+	TZaL/EgoQM92FsNVCxpryEs2xRhU=
+X-Google-Smtp-Source: AGHT+IGs8dFmguh5lq9/iiFBNc+ZnqaeWOQCrlFjphMR5wyTwAhFdc2LlJaRD+GbF0yOT2p+37RX9zqBX0iFOexvxtk=
+X-Received: by 2002:a05:6870:780b:b0:24c:4f95:cd93 with SMTP id
+ 586e51a60fabf-24c68cd0806mr2821594fac.31.1716403572902; Wed, 22 May 2024
+ 11:46:12 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240417063502.6985-1-peter.marko@siemens.com> <AS1PR10MB5697AC61E6595506A658B336FDEA2@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM>
+In-Reply-To: <AS1PR10MB5697AC61E6595506A658B336FDEA2@AS1PR10MB5697.EURPRD10.PROD.OUTLOOK.COM>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 22 May 2024 11:45:45 -0700
+Message-ID: <CAMKF1sq8qBXNmYV8GxFxkibbvwBi5WDA=RBUewVTs5qHSt9itQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][master][scarthgap][PATCH] jemalloc: add +git to version
+To: peter.marko@siemens.com
+Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 22 May 2024 17:04:26 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110487
+ <openembedded-devel@lists.openembedded.org>; Wed, 22 May 2024 18:46:16 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110488
 
-Switch SRC_URI away from svn and use git fetcher
-streamboard.tv svn server seems to be not accessible
-all the time reliably
+I am seeing configure errors
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../recipes-dvb/oscam/{oscam_svn.bb => oscam_1.20.bb}     | 8 +++-----
- 1 file changed, 3 insertions(+), 5 deletions(-)
- rename meta-multimedia/recipes-dvb/oscam/{oscam_svn.bb => oscam_1.20.bb} (74%)
+| checking for x86_64-yoe-linux-nm... x86_64-yoe-linux-gcc-nm
+| checking for gawk... gawk
+| configure: error:
+5.3.0+git-0-g630434bb0ac619f7beec927569782d924c459385 does not match
+<major>.<minor>.<bugfix>-<nrev>-g<gid> or VERSION
+| NOTE: The following config.log files may provide further information.
+| NOTE: /mnt/b/yoe/master/build/tmp/work/core2-64-yoe-linux/jemalloc/5.3.0+=
+git/build/config.log
 
-diff --git a/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb b/meta-multimedia/recipes-dvb/oscam/oscam_1.20.bb
-similarity index 74%
-rename from meta-multimedia/recipes-dvb/oscam/oscam_svn.bb
-rename to meta-multimedia/recipes-dvb/oscam/oscam_1.20.bb
-index 0a9a7499ac..e20358955a 100644
---- a/meta-multimedia/recipes-dvb/oscam/oscam_svn.bb
-+++ b/meta-multimedia/recipes-dvb/oscam/oscam_1.20.bb
-@@ -6,12 +6,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
- DEPENDS = "libusb1 openssl pcsc-lite"
- 
--SRC_URI = "svn://www.streamboard.tv/svn/oscam;module=trunk;protocol=http \
--           "
--SRCREV = "11718"
--PV = "1.10+"
-+SRCREV = "190d6dee96ca70f8b614932b1498332b1504632b"
-+SRC_URI = "git://repo.or.cz/oscam.git;protocol=https;nobranch=1"
- 
--S = "${UNPACKDIR}/trunk"
-+S = "${UNPACKDIR}/git"
- 
- inherit cmake
- 
--- 
-2.45.1
 
+On Tue, May 21, 2024 at 2:19=E2=80=AFPM Peter Marko via lists.openembedded.=
+org
+<peter.marko=3Dsiemens.com@lists.openembedded.org> wrote:
+>
+> Gentle ping
+>
+> -----Original Message-----
+> From: Marko, Peter (ADV D EU SK BFS1) <Peter.Marko@siemens.com>
+> Sent: Wednesday, April 17, 2024 8:35
+> To: openembedded-devel@lists.openembedded.org
+> Cc: Marko, Peter (ADV D EU SK BFS1) <Peter.Marko@siemens.com>
+> Subject: [meta-oe][master][scarthgap][PATCH] jemalloc: add +git to versio=
+n
+>
+> > From: Peter Marko <peter.marko@siemens.com>
+> >
+> > jemalloc was switched from tag to development branch
+> > 171 commits ahead.
+> > Adapt PV accordingly.
+> >
+> > Signed-off-by: Peter Marko <peter.marko@siemens.com>
+> > ---
+> >  meta-oe/recipes-devtools/jemalloc/jemalloc_5.3.0.bb | 1 +
+> >  1 file changed, 1 insertion(+)
+> >
+> > diff --git a/meta-oe/recipes-devtools/jemalloc/jemalloc_5.3.0.bb b/meta=
+-oe/recipes-devtools/jemalloc/jemalloc_5.3.0.bb
+> > index 7e0272f89..dca8de461 100644
+> > --- a/meta-oe/recipes-devtools/jemalloc/jemalloc_5.3.0.bb
+> > +++ b/meta-oe/recipes-devtools/jemalloc/jemalloc_5.3.0.bb
+> > @@ -17,6 +17,7 @@ SRC_URI =3D "git://github.com/jemalloc/jemalloc.git;b=
+ranch=3Ddev;protocol=3Dhttps \
+> >             file://run-ptest \
+> >             "
+> >  SRCREV =3D "630434bb0ac619f7beec927569782d924c459385"
+> > +PV .=3D "+git"
+> >
+> >  S =3D "${WORKDIR}/git"
+> >
+> > --
+> > 2.30.2
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#110477): https://lists.openembedded.org/g/openembedde=
+d-devel/message/110477
+> Mute This Topic: https://lists.openembedded.org/mt/105572435/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
