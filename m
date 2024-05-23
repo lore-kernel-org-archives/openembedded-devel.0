@@ -1,98 +1,109 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <changqing.li@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B6C25C25B7C
-	for <webhook@archiver.kernel.org>; Wed, 22 May 2024 22:09:46 +0000 (UTC)
-Received: from mail-lj1-f171.google.com (mail-lj1-f171.google.com [209.85.208.171])
- by mx.groups.io with SMTP id smtpd.web10.1800.1716415779214479161
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 04FB3C25B7C
+	for <webhook@archiver.kernel.org>; Thu, 23 May 2024 01:55:18 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web10.5888.1716429313575342803
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 22 May 2024 15:09:39 -0700
+ Wed, 22 May 2024 18:55:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=LPx6IcTr;
- spf=pass (domain: gmail.com, ip: 209.85.208.171, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lj1-f171.google.com with SMTP id 38308e7fff4ca-2e73359b979so33329731fa.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 22 May 2024 15:09:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1716415777; x=1717020577; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=LO2nix1oMhXpWYaOO5JXYFZKEHQjpUB6Vm39D+Lu8dQ=;
-        b=LPx6IcTrKL1LMVpgWM95DkTVB4gbQ1I7D9pShLY2UQNTaZMJ55yHQRKlaJVsl6M/RM
-         v3+rxuXWUAjFCHxagwMEQZR5M0CM9onVqmP5kH2oYwn8tWbkKSoHPycMQvEg2BT+kXLC
-         EnsHst5Vhgw57Yirg3EP1mMs1dLa6HqWaGwhxn93YH0pXICODaeNZTPxvQGQNZJpu4D9
-         Y+12boSH4fvuv/1lalXgfL2CK38LzNLQSoWV+B9NH1AqwdwoZzgLDZKnDn1X3eY+pOT/
-         rtikbZHhil5OZY9RbAt8iEI306t5MShZSCoSZGYRIqpwcox4dcfVKhnhkCp6kGx55L82
-         j9mg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1716415777; x=1717020577;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=LO2nix1oMhXpWYaOO5JXYFZKEHQjpUB6Vm39D+Lu8dQ=;
-        b=PZFH7u+zfYs3p3luWg5kw/BtsJjutvdZ29rfrTH1kJa4tbJ5Rh7smGpZQNgPGXSoDg
-         jgbfWdH7xsd6evega5mAXvaIrzQbpecrD+p7eNLQ9umsbwzm7BAejQE6Ne4l3w0vcF0P
-         2CiV/yBc46OtIaSHIRtv6BPNFnk/U8Fr7sQn7BVFF+ZwHdups/bMYQVPdpTKK/aFu9Be
-         mhV64KFPzH1h+3P6NKVi+hFL8CO0WC8dZIJcJE+bfQBfe0vVddTV43C+KxkJehJYO8wo
-         u5AGR3moC2xrhRDvzXd+wikAkhdSKsU6vNgHIy0+Ueljn/HSh9dFPXXu5eZt0XSn/gTW
-         hhoA==
-X-Gm-Message-State: AOJu0YywQ2vQRzfK/KP7K5PRPBpnlPCX7bM3YQ4gXXOXy3J0P5UqKS6n
-	hH63Rspn3jOtnrfuIOoltBKR/U8Tb0KuyYvLNKUGyAAn0ex0ZqjRHRHqug==
-X-Google-Smtp-Source: AGHT+IHnQyjfgq7Wx9ahSV/OxN8TWvZcDVgwAAmuXiIDa8v+yGdig2R4xo/N0femwUzLoZjVdTi3gQ==
-X-Received: by 2002:a2e:9119:0:b0:2e2:113c:cbab with SMTP id 38308e7fff4ca-2e9494efc0fmr21664321fa.21.1716415776704;
-        Wed, 22 May 2024 15:09:36 -0700 (PDT)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-5734d4cf324sm18171737a12.24.2024.05.22.15.09.36
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 May 2024 15:09:36 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][PATCH] nodejs-oe-cache-native: use UNPACKDIR
-Date: Thu, 23 May 2024 00:09:30 +0200
-Message-ID: <20240522220930.3077640-1-martin.jansa@gmail.com>
-X-Mailer: git-send-email 2.45.1
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=58736b22d2=changqing.li@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 44N13v88005188
+	for <openembedded-devel@lists.openembedded.org>; Thu, 23 May 2024 01:55:12 GMT
+Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3y9utd00wu-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 23 May 2024 01:55:12 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39; Wed, 22 May 2024 18:55:11 -0700
+Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.39 via Frontend Transport; Wed, 22 May 2024 18:55:10 -0700
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [master][meta-oe][PATCH V2] fuse3: remove sysv init script and install fuse kernel module explictly
+Date: Thu, 23 May 2024 09:55:10 +0800
+Message-ID: <20240523015510.1988259-1-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-ORIG-GUID: tqcOE3lFk4F4TbXIDPPEazx-1AJgxEzG
+X-Proofpoint-GUID: tqcOE3lFk4F4TbXIDPPEazx-1AJgxEzG
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.650,FMLib:17.12.28.16
+ definitions=2024-05-22_14,2024-05-22_01,2024-05-17_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 adultscore=0
+ suspectscore=0 malwarescore=0 lowpriorityscore=0 phishscore=0
+ clxscore=1015 mlxlogscore=999 spamscore=0 priorityscore=1501 bulkscore=0
+ impostorscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2405010000 definitions=main-2405230012
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 22 May 2024 22:09:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110491
+ <openembedded-devel@lists.openembedded.org>; Thu, 23 May 2024 01:55:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110492
 
-* oe-npm-cache is now in UNPACKDIR not WORKDIR
-* fixes:
-  http://errors.yoctoproject.org/Errors/Details/771012/
-  /OE/build/oe-core/tmp-glibc/work/x86_64-linux/nodejs-oe-cache-native/20.13/temp/run.do_configure.1268826: line 142: /OE/build/oe-core/tmp-glibc/work/x86_64-linux/nodejs-oe-cache-native/20.13/oe-npm-cache: No such file or directory
+From: Changqing Li <changqing.li@windriver.com>
 
-* set S and UNPACKDIR to avoid this as well:
-  WARNING: nodejs-oe-cache-native-20.13-r0 do_unpack: nodejs-oe-cache-native: the directory ${WORKDIR}/${BP} (/OE/build/oe-core/tmp-glibc/work/x86_64-linux/nodejs-oe-cache-native/20.13/nodejs-oe-cache-20.13) pointed to by the S variable doesn't exist - please set S within the recipe to point to where the source has been unpacked to
+For systemd, there is not a fuse.service since systemd provides
+sys-fs-fuse-connections.mount to mount the fuse control filesystem, so
+instead, only fuse3.conf is added to modules-load.d to load the required
+fuse kernel module.
 
-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- .../recipes-devtools/nodejs/nodejs-oe-cache-native_20.13.bb  | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ meta-oe/recipes-support/fuse/fuse3/fuse3.conf |  1 +
+ meta-oe/recipes-support/fuse/fuse3_3.16.2.bb  | 15 +++++++++++++++
+ 2 files changed, 16 insertions(+)
+ create mode 100644 meta-oe/recipes-support/fuse/fuse3/fuse3.conf
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_20.13.bb b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_20.13.bb
-index a61dd5018f..d4b818f967 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_20.13.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs-oe-cache-native_20.13.bb
-@@ -8,10 +8,13 @@ SRC_URI = "\
+diff --git a/meta-oe/recipes-support/fuse/fuse3/fuse3.conf b/meta-oe/recipes-support/fuse/fuse3/fuse3.conf
+new file mode 100644
+index 000000000..a517c488f
+--- /dev/null
++++ b/meta-oe/recipes-support/fuse/fuse3/fuse3.conf
+@@ -0,0 +1 @@
++fuse
+diff --git a/meta-oe/recipes-support/fuse/fuse3_3.16.2.bb b/meta-oe/recipes-support/fuse/fuse3_3.16.2.bb
+index 307544bf3..b799b2c6b 100644
+--- a/meta-oe/recipes-support/fuse/fuse3_3.16.2.bb
++++ b/meta-oe/recipes-support/fuse/fuse3_3.16.2.bb
+@@ -27,6 +27,7 @@ inherit meson pkgconfig ptest
  
- inherit native
+ SRC_URI += " \
+     file://run-ptest \
++    file://fuse3.conf \
+ "
  
-+S = "${WORKDIR}/sources"
-+UNPACKDIR = "${S}"
+ RDEPENDS:${PN}-ptest += " \
+@@ -78,6 +79,20 @@ FILES:fuse3-utils = "${bindir} ${base_sbindir}"
+ DEBIAN_NOAUTONAME:fuse3-utils = "1"
+ DEBIAN_NOAUTONAME:${PN}-dbg = "1"
+ 
++SYSTEMD_SERVICE:${PN} = ""
 +
- B = "${WORKDIR}/build"
- 
- do_configure() {
--    sed -e 's!@@libdir@@!${libdir}!g' < '${WORKDIR}/oe-npm-cache' > '${B}/oe-npm-cache'
-+    sed -e 's!@@libdir@@!${libdir}!g' < '${UNPACKDIR}/oe-npm-cache' > '${B}/oe-npm-cache'
+ do_install:append() {
+     rm -rf ${D}${base_prefix}/dev
++
++    # systemd class remove the sysv_initddir only if systemd_system_unitdir
++    # contains anything, but it's not needed if sysvinit is not in DISTRO_FEATURES
++    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'false', 'true', d)}; then
++        rm -rf ${D}${sysconfdir}/init.d/
++    fi
++
++    # Install systemd related configuration file
++    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
++        install -d ${D}${sysconfdir}/modules-load.d
++        install -m 0644 ${WORKDIR}/fuse3.conf ${D}${sysconfdir}/modules-load.d
++    fi
  }
- 
- do_install() {
 -- 
-2.45.1
+2.25.1
 
 
