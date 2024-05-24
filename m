@@ -1,125 +1,95 @@
-Return-Path: <dbaryshkov@gmail.com>
+Return-Path: <t.f.g.geelen@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C4B43C25B74
-	for <webhook@archiver.kernel.org>; Fri, 24 May 2024 17:44:20 +0000 (UTC)
-Received: from mail-lj1-f173.google.com (mail-lj1-f173.google.com [209.85.208.173])
- by mx.groups.io with SMTP id smtpd.web10.1779.1716572659822961525
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A22C0C25B7C
+	for <webhook@archiver.kernel.org>; Fri, 24 May 2024 17:44:30 +0000 (UTC)
+Received: from mail-lj1-f181.google.com (mail-lj1-f181.google.com [209.85.208.181])
+ by mx.groups.io with SMTP id smtpd.web10.1782.1716572665377039240
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 May 2024 10:44:20 -0700
+ Fri, 24 May 2024 10:44:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ed4e21pU;
- spf=pass (domain: gmail.com, ip: 209.85.208.173, mailfrom: dbaryshkov@gmail.com)
-Received: by mail-lj1-f173.google.com with SMTP id 38308e7fff4ca-2e95a74d51fso19327911fa.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 24 May 2024 10:44:19 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=WmJ4J1QM;
+ spf=pass (domain: gmail.com, ip: 209.85.208.181, mailfrom: t.f.g.geelen@gmail.com)
+Received: by mail-lj1-f181.google.com with SMTP id 38308e7fff4ca-2e576057c2bso135547911fa.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 24 May 2024 10:44:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1716572658; x=1717177458; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1716572663; x=1717177463; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=RBmN6P4GrLBjcdGJdbU2B98w/BxY+Nww++luptJ11f8=;
-        b=ed4e21pUGCJiFWD1orQyBMeJj1ScQYxTpssizL8diyLkAhffmLqHA2Tpfl3DUsbfec
-         xeXImur43TtJg/bZ5vBJSz9SPB1xCynsh6AINBoGiBWV2mwuPuaY06IdJ8mItLVFVclO
-         i14WkFCgbOvsIYr1tkDAxFkO8uJFaMJwWVE+HAqtixeB4Q0c7AGA7EhPpfpyOKTtFCGV
-         mYZ6fYB2x4tYbnOwObXVeFE7lcNV5JqxUBl6bYEHwvYWw9Rqy09GCdyKynT+8EJox33r
-         Q1gZ/AilppJzd3YayQgXsMFROurbIiinXNB2KBauMOpYWj6crftqp8gBjLhExwX9ppfL
-         yjow==
+        bh=Q7VswT+G63uEibXcbgPaOkSM+uQIniXeZTxq7Scr6H8=;
+        b=WmJ4J1QMQ6YXchz77SpTVnl1mfh7I60Bd8BaBlHJRQxdpe38jN1anrnLHkawPZwVfK
+         mi26G9T3jfN1XHBhUulzGe+RfZydtm2Ca8k/MeZMiF3vI7f5Ff2OTM+Ka80shvZvolys
+         uF1wtq4S2x14Rq9bJ2eFNwWqdm+i0qaR8nsYrN9ZeVlagT8Q7eFViv21DbX9GRmfnM+/
+         bcTXbgk3fAM7XilcZx1WvcR2+TnlUk48WirHN5WUZZkJU5YAXOTK/biCYGhw58ehiwbt
+         bzZjmikjd90rde+0coS+PxMy1cvES+8d9wn6qauKRodHgFUkMYu1kP8YHWGyZ+Nr1mlQ
+         4f+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1716572658; x=1717177458;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1716572663; x=1717177463;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=RBmN6P4GrLBjcdGJdbU2B98w/BxY+Nww++luptJ11f8=;
-        b=a3XnTNZUw+DysAn9+r6kNmLgZoxYaw9PAoZXlmHWbgWV2PKBPfrJ3v/7NeUTiTEy5K
-         4EM6mUNwKWAQ/bjk6ufp+W+qeRWcNWxwJhIHev+pqw14oJOUWVy0k+p1LQ+jGKimo796
-         am8SgWIgi1JO+CuOGSxrK9zLqG+f0y0iv1dDgt0x6aGvVXr5utAu26QZ5jyoqFmhHEj2
-         BpjX0+b7H3Cg1XeGQ40zjLkhHoFC/BClb6qNBa5cljpd9igs1qjMRwroOfual9f4ZCpG
-         uwGvUhEaa3Edy2a2d0WPG3Rl43c+VlObywIjnmE58rCB5kkwnZVbDOMWVWzEdic74WJ+
-         OW9Q==
-X-Gm-Message-State: AOJu0YwnNKXFgy63FLkDdMvwsCtr+9UwICKitOJmBez345kIvIKNMU4o
-	+9wcuaf5v/kN/5TIS3V59nFKA9yCDiqmeJh90e3U4fY9aOOCqUQM8TA/g9Qv/nXAdE6ISTG/+Ng
-	redDiSlR5S/eksfusTGzghF2Enjs=
-X-Google-Smtp-Source: AGHT+IEAH9O8QUgHnLNPATzAr4Eh91RBSWvjhollw2wNEq3BeVhpZzLzg7ZIp/XYrnjd0a9ZP2/LV/3DlQpoM31hW3E=
-X-Received: by 2002:a05:6512:4010:b0:51d:4c8a:bbdb with SMTP id
- 2adb3069b0e04-529652905b0mr3116612e87.3.1716572657500; Fri, 24 May 2024
- 10:44:17 -0700 (PDT)
+        bh=Q7VswT+G63uEibXcbgPaOkSM+uQIniXeZTxq7Scr6H8=;
+        b=r2h2DXXycFVzOzjoxFlBCF1G19GTNKoeKQ8a8pl+L5qP2dyswh40yeiNPQ/qAck+Fv
+         7pTTAuEb3/Y9ugwgglGZXKLYB7iXRPBC0CRdSMQc69PvcWEn9072nJGiunjQg96fdT2H
+         nh/hz7lQJzNYhVMkwseDeXb/lfwvswQPnDEvVpehZqL5XU6swSYnuK8o/m1s16cELf0A
+         Sd6S56UwzBFku1KPdnMGVlSRFCZ4sO1QkHHD3Ji/HnH1HiyGEXJkVMSxMEjapUaEXp0f
+         RQdluTffgkFhQF1bMj0efrXQlnm7nGBLH2zd1upNlycWyNZWJ8CiquwjwHe8eOJ6nvTR
+         UMfA==
+X-Gm-Message-State: AOJu0Ywo4woAfgUMym0ULenDZs/R8KEb4ckIQpgYDF8+xnACwLSbMpKh
+	TmzTJwZwbQaJ2Ad6z+ylB6dVFzMwCE5a5HtSN2OuKckrshQopQRGXHEQPQ==
+X-Google-Smtp-Source: AGHT+IGyKjcE2QWrQCLq+39ZZuD6K7fhz7yV6o27gjyr11rpMyWoFBPBUfKSUqBrCj/OJY5W3ESDeg==
+X-Received: by 2002:a2e:6802:0:b0:2db:a9c9:4c5e with SMTP id 38308e7fff4ca-2e95b096dbcmr25888391fa.21.1716572662440;
+        Fri, 24 May 2024 10:44:22 -0700 (PDT)
+Received: from control-center.home (232-13-20-31.ftth.glasoperator.nl. [31.20.13.232])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-57852495e01sm1979737a12.63.2024.05.24.10.44.21
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 24 May 2024 10:44:21 -0700 (PDT)
+From: Tom Geelen <t.f.g.geelen@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Tom Geelen <t.f.g.geelen@gmail.com>
+Subject: [meta-python][PATCH 2/4] python3-pytest-socket: new recipe
+Date: Fri, 24 May 2024 17:43:44 +0000
+Message-Id: <20240524174344.2105779-2-t.f.g.geelen@gmail.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240524174344.2105779-1-t.f.g.geelen@gmail.com>
+References: <20240524174344.2105779-1-t.f.g.geelen@gmail.com>
 MIME-Version: 1.0
-References: <20240524115920.2502043-1-dmitry.baryshkov@linaro.org> <CAMKF1spKLdVFz-XS4NCOfhC14OVOrnhPb261jKy6DKXaTCZxxQ@mail.gmail.com>
-In-Reply-To: <CAMKF1spKLdVFz-XS4NCOfhC14OVOrnhPb261jKy6DKXaTCZxxQ@mail.gmail.com>
-From: Dmitry Baryshkov <dbaryshkov@gmail.com>
-Date: Fri, 24 May 2024 20:44:06 +0300
-Message-ID: <CALT56yPgWn-korfO4MV5JN2+BWJJPE0_Dq2SSj4ZL7=cCzsdYw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] libcamera: update to 0.3.0
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 24 May 2024 17:44:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110519
+ <openembedded-devel@lists.openembedded.org>; Fri, 24 May 2024 17:44:30 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110520
 
-On Fri, 24 May 2024 at 20:40, Khem Raj <raj.khem@gmail.com> wrote:
->
-> fails to patch, I have to evict the whole CI pipeline,
-> https://errors.yoctoproject.org/Errors/Details/772780/
+Pytest Plugin to disable socket calls during tests
+---
+ .../python/python3-pytest-socket_0.7.0.bb          | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pytest-socket_0.7.0.bb
 
-Hmm, true. It makes me wonder how I tested it...
+diff --git a/meta-python/recipes-devtools/python/python3-pytest-socket_0.7.0.bb b/meta-python/recipes-devtools/python/python3-pytest-socket_0.7.0.bb
+new file mode 100644
+index 000000000..86b03724a
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pytest-socket_0.7.0.bb
+@@ -0,0 +1,14 @@
++SUMMARY = "Pytest Plugin to disable socket calls during tests"
++HOMEPAGE = "https://github.com/miketheman/pytest-socket"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=1752f63a3a8a02fed42e580e9b94a081"
++
++SRC_URI[sha256sum] = "71ab048cbbcb085c15a4423b73b619a8b35d6a307f46f78ea46be51b1b7e11b3"
++
++inherit pypi python_poetry_core
++
++RDEPENDS:${PN} = "python3-pytest"
++
++BBCLASSEXTEND = "native nativesdk"
++
++PYPI_PACKAGE = "pytest_socket"
+-- 
+2.34.1
 
->
-> On Fri, May 24, 2024 at 4:59=E2=80=AFAM Dmitry Baryshkov via
-> lists.openembedded.org <dbaryshkov=3Dgmail.com@lists.openembedded.org>
-> wrote:
-> >
-> > Upgrade libcamera to version 0.3.0, gaining support for SoftISP.
-> >
-> > Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-> > ---
-> >  .../libcamera/{libcamera_0.2.0.bb =3D> libcamera_0.3.0.bb}        | 2 =
-+-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >  rename meta-multimedia/recipes-multimedia/libcamera/{libcamera_0.2.0.b=
-b =3D> libcamera_0.3.0.bb} (97%)
-> >
-> > diff --git a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.2=
-.0.bb b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.3.0.bb
-> > similarity index 97%
-> > rename from meta-multimedia/recipes-multimedia/libcamera/libcamera_0.2.=
-0.bb
-> > rename to meta-multimedia/recipes-multimedia/libcamera/libcamera_0.3.0.=
-bb
-> > index 45d6be31ec95..11dd2ba56910 100644
-> > --- a/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.2.0.bb
-> > +++ b/meta-multimedia/recipes-multimedia/libcamera/libcamera_0.3.0.bb
-> > @@ -16,7 +16,7 @@ SRC_URI =3D " \
-> >          file://0001-ipu3-Use-posix-basename.patch \
-> >  "
-> >
-> > -SRCREV =3D "89227a428a82e724548399d35c98ea89566f9045"
-> > +SRCREV =3D "aee16c06913422a0ac84ee3217f87a9795e3c2d9"
-> >
-> >  PE =3D "1"
-> >
-> > --
-> > 2.39.2
-> >
-> >
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> > Links: You receive all messages sent to this group.
-> > View/Reply Online (#110513): https://lists.openembedded.org/g/openembed=
-ded-devel/message/110513
-> > Mute This Topic: https://lists.openembedded.org/mt/106279998/1997914
-> > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
-[raj.khem@gmail.com]
-> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> >
-
-
-
---=20
-With best wishes
-Dmitry
 
