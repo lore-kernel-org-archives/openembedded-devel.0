@@ -1,98 +1,92 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EF613C25B74
-	for <webhook@archiver.kernel.org>; Fri, 24 May 2024 18:28:20 +0000 (UTC)
-Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com [209.85.167.50])
- by mx.groups.io with SMTP id smtpd.web11.2643.1716575291736661672
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C7497C25B79
+	for <webhook@archiver.kernel.org>; Fri, 24 May 2024 21:31:51 +0000 (UTC)
+Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
+ by mx.groups.io with SMTP id smtpd.web10.6451.1716586303961890037
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 May 2024 11:28:12 -0700
+ Fri, 24 May 2024 14:31:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=dm6MVvOo;
- spf=pass (domain: gmail.com, ip: 209.85.167.50, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lf1-f50.google.com with SMTP id 2adb3069b0e04-5295ae273c8so1302654e87.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 24 May 2024 11:28:11 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=eSXnvdOc;
+ spf=pass (domain: gmail.com, ip: 209.85.214.181, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f181.google.com with SMTP id d9443c01a7336-1f32864bcc7so24537935ad.3
+        for <openembedded-devel@lists.openembedded.org>; Fri, 24 May 2024 14:31:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1716575290; x=1717180090; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1716586303; x=1717191103; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=I4AFWriykDY27mJd2vYsVNlOeqxB8/WaX28Y6TOdS2c=;
-        b=dm6MVvOou2ISs8hPmAFKU991UQoPjI5ChwuKlwioxjJl8pq6qoUh2L/CnXiyxhOVLO
-         NgNH+iTVCOMM1b9Vj7zXU92LizKqXwHmBQPlTzWKBxsHKFH8V3cCWAOornEouKW3/KlD
-         TT7BLBMC2ySNwfmDApd25X+F95s3yMNUoSrKRZC4fgTAMvpkdceD+SsIpsjcJhlddNAo
-         JqM/BCQebcdAj1Le/Y+DXC3mYM4zN2cvyykL2Xvo7A71gQ7UnJ5JEYe1KRUge9vZ+RgH
-         6CW2PncdxJGqZMMbtbNsDcUX1O5sDjK5fs/hOpUxXtYfrnKXtQrsD190/62VqWjA1dLL
-         GIzg==
+        bh=BPuru5WmsuzK/jlwMFnhjChOUkdO2zn40lLfPFgEg28=;
+        b=eSXnvdOcb1yQS7lXZ9JfEBl7VWNMEy+xdZfenJwM/6w++YbV7RZYD3qUqUENweAMMF
+         1fZehd/BnfLomH41d9isi9vDC7+msA0NS4QQ5kRRw+P0snTGhoNv8MXmH7R571wkUBFd
+         OPHYtpkWH9ryfk8m8v9rlJ6uGL9+RKy1jksKD24mirpaDAOGw1uHsqtHFmWgP/zQ8DDN
+         sh0Iw1Yrv3DqLVPvaa0fQIMOFbiqN4//qnW1EalOXBeuQSwoTirC9wnyN9gU3gD3KB2f
+         TRwnYOFyeAh7MzYMw38QjhZpTaiq+Gu+JmlLjTU1+bI4rmLNM60nXk6m/MH1lHFUgkZ0
+         +jcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1716575290; x=1717180090;
+        d=1e100.net; s=20230601; t=1716586303; x=1717191103;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=I4AFWriykDY27mJd2vYsVNlOeqxB8/WaX28Y6TOdS2c=;
-        b=unkXUOz1NA0xPwJ6qD3Kg/xyBbOBRAIWc0SJ0EDPlj9WvlC8OfeIhrzqvucb7sksQ1
-         KFcGd7f1kL3F6OQ0moKb2WLXMtgSmSVN18Tzu8XcNSdGwRJJcxH5OQ34XYyTNU7MkViv
-         YLr6nQplL01nJAbmjCRgKcbyfWfkiBy+Jw6cLDEUwP4nqrtdOj7xLESs/KSLOlXaRZ36
-         Km/b8R6I9wvS2gSD+sRSVNJ0ufuMfWUC+PSKIUVIn1E1wiVD2J7lZ2iW15Q7Yrfa+eBF
-         R2na+Ng7UAWx+0ZGatz/63dlwouaz+tvdGMOKM9ahg2I87eORDkUVBoG5gmpfukhEKJ4
-         A8TA==
-X-Gm-Message-State: AOJu0YwZ6mVCv/qD3Jyby4gMQALyBmA4gV28T85gmcVdYop3IKhKl4zH
-	Z7pNXxYL6Zg7z6uBt9q87dAb2jhp/eyea0RYzChPWfgrLmRSNILGLyPZJw==
-X-Google-Smtp-Source: AGHT+IEYNQZdo3sJ7JV6mbTumr0Y1ML4cZTn2UNM8AKx6Q1RGTLEcPTt1h1nYsiAQXb8JWDPeFGoww==
-X-Received: by 2002:a05:6512:3b20:b0:523:41ec:125a with SMTP id 2adb3069b0e04-529663e631amr2959151e87.46.1716575289172;
-        Fri, 24 May 2024 11:28:09 -0700 (PDT)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a626c8182edsm166254366b.9.2024.05.24.11.28.08
+        bh=BPuru5WmsuzK/jlwMFnhjChOUkdO2zn40lLfPFgEg28=;
+        b=HGFdccwkYseCi/dZii2hnTeHtx8A5SGQJhZYwgdn5zxDjPK+Jx3K4NBMKVifiVCtz+
+         Lxl+bDYTEhSWdIjoMnofrdkdKY28/P0ezynP4urVYHH8UdfqUnq30jXGQuM0lPe/IQcw
+         kHOjbvS+NcAbyAKDb86/F+jag3sdRImxPYIQIB/j9+NyzUr6W7vSAlq4AiKq4cRBMBPu
+         l8J31SmgVjvyTkBfJh/DwyRca9XTZqXPJmz8TVGus0ChwYRf1177lS+Gol4GnGp4+3hV
+         I/5YhOOx+QDwEMB1EUUUBQmgvv8EW2hBcbzLxHaSw0Y/PBpg3p1foWOjZbNVwOUclqvc
+         DMpA==
+X-Gm-Message-State: AOJu0YzhQI5Eu9g9fldx7ZK+3dAtlWH70b1jMiBhm238bCf0IbIE+daP
+	DwECheQS1pqaRCk5Tx/ZRZiXaw/NW7jEfZUMxbDz1xNFRSIuIpUbzytHwWqNV4Q=
+X-Google-Smtp-Source: AGHT+IF6Cu0wDPvXNHo6BUzlMBuBnc/I24cLtuntyf9TI0/u0LGaSYbL/BRHyS/xMsCih8pNXelahw==
+X-Received: by 2002:a17:902:fa07:b0:1f3:ea4:7ed6 with SMTP id d9443c01a7336-1f4497e5102mr27920235ad.61.1716586303045;
+        Fri, 24 May 2024 14:31:43 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::b2a9])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-1f44c7c3fa2sm18374295ad.104.2024.05.24.14.31.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 May 2024 11:28:08 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+        Fri, 24 May 2024 14:31:42 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Gerard Salvatella <gerard.salvatella@siemens.com>,
-	Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][PATCH] libwebsockets: remove STAGING_LIBDIR with /
-Date: Fri, 24 May 2024 20:28:00 +0200
-Message-ID: <20240524182800.1037957-1-martin.jansa@gmail.com>
+Cc: Khem Raj <raj.khem@gmail.com>
+Subject: [meta-oe][PATCH] liburing: Use libc on rv64/clang18
+Date: Fri, 24 May 2024 14:31:40 -0700
+Message-ID: <20240524213140.1856788-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.45.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 24 May 2024 18:28:20 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110524
+ <openembedded-devel@lists.openembedded.org>; Fri, 24 May 2024 21:31:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110525
 
-* after buildpath warnings fix from:
-  https://git.openembedded.org/meta-openembedded/commit/?id=eeef1fddd9052bed4b1a91565260518eb042fed2
-  the LibwebsocketsTargets.cmake ends with:
-  INTERFACE_LINK_LIBRARIES "ssl;crypto;ssl;crypto;/libcap.so;-lpthread"
-  instead of:
-  INTERFACE_LINK_LIBRARIES "ssl;crypto;ssl;crypto;/OE/build/.../libwebsockets/4.3.3/lib32-recipe-sysroot/usr/lib/libcap.so;-lpthread"
-  which causes e.g. mosquitto to fail in do_compile with:
-  ninja: error: '/libcap.so', needed by 'src/mosquitto', missing and no known rule to make it
+clang18 generates memset call which demands linking with libc
 
-* this happens only when libwebsocket is built with libcap enabled
-  (by libcap in DEPENDS)
-
-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-connectivity/libwebsockets/libwebsockets_4.3.3.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-support/liburing/liburing_2.6.bb | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.3.bb b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.3.bb
-index 8f8b70421c..3170d37f5b 100644
---- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.3.bb
-+++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.3.bb
-@@ -42,8 +42,8 @@ do_install:append() {
-     sed -i -e 's|${STAGING_LIBDIR}/libuv.so|uv|g' ${D}${libdir}/cmake/libwebsockets/LibwebsocketsTargets.cmake
-     sed -i -e 's|${STAGING_INCDIR}||g' ${D}${libdir}/cmake/libwebsockets/LibwebsocketsTargets.cmake \
-                                        ${D}${libdir}/cmake/libwebsockets/libwebsockets-config.cmake
--    sed -i -e 's|${STAGING_LIBDIR}||g' ${D}${libdir}/cmake/libwebsockets/LibwebsocketsTargets.cmake \
--                                       ${D}${libdir}/cmake/libwebsockets/libwebsockets-config.cmake
-+    sed -i -e 's|${STAGING_LIBDIR}/||g' ${D}${libdir}/cmake/libwebsockets/LibwebsocketsTargets.cmake \
-+                                        ${D}${libdir}/cmake/libwebsockets/libwebsockets-config.cmake
- }
+diff --git a/meta-oe/recipes-support/liburing/liburing_2.6.bb b/meta-oe/recipes-support/liburing/liburing_2.6.bb
+index b892ce4ac2..fc3fe1cac1 100644
+--- a/meta-oe/recipes-support/liburing/liburing_2.6.bb
++++ b/meta-oe/recipes-support/liburing/liburing_2.6.bb
+@@ -18,9 +18,14 @@ DEPENDS:append:libc-musl = " libucontext"
+ XCFLAGS = "-pthread"
+ XCFLAGS:append:libc-musl = " -lucontext"
  
- PACKAGES =+ "${PN}-testapps ${PN}-evlib-event ${PN}-evlib-uv ${PN}-evlib-ev ${PN}-evlib-sd"
++USELIBC = ""
++# clang-18 on RV64 emits memset for arch/riscv64/syscall.h provided __do_syscall4 macro
++# this does not happen for gcc or older clang, so link with libc since we need memset API
++# -fno-builtin-memset does not help
++USELIBC:riscv64:toolchain-clang = "--use-libc"
+ EXTRA_OEMAKE = "'CC=${CC}' 'RANLIB=${RANLIB}' 'AR=${AR}' 'CFLAGS=${CFLAGS} -I${S}/include -DWITHOUT_XATTR' 'LDFLAGS=${LDFLAGS}' 'XCFLAGS=${XCFLAGS}' 'BUILDDIR=${S}'"
+ do_configure() {
+-    ${S}/configure --prefix=${prefix} --libdir=${libdir} --libdevdir=${libdir} --mandir=${mandir} --datadir=${datadir} --includedir=${includedir}
++    ${S}/configure --prefix=${prefix} --libdir=${libdir} --libdevdir=${libdir} --mandir=${mandir} --datadir=${datadir} --includedir=${includedir} ${USELIBC}
+ }
+ do_install () {
+     oe_runmake install DESTDIR=${D}
 -- 
 2.45.1
 
