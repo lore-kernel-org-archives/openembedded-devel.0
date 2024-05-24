@@ -1,289 +1,109 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <changqing.li@eng.windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CBD8CC25B75
-	for <webhook@archiver.kernel.org>; Thu, 23 May 2024 23:28:16 +0000 (UTC)
-Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
- by mx.groups.io with SMTP id smtpd.web11.4507.1716506891852375431
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 89902C25B75
+	for <webhook@archiver.kernel.org>; Fri, 24 May 2024 02:23:57 +0000 (UTC)
+Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
+ by mx.groups.io with SMTP id smtpd.web11.7172.1716517434398061191
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 23 May 2024 16:28:12 -0700
+ Thu, 23 May 2024 19:23:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=QHpDTPbu;
- spf=pass (domain: gmail.com, ip: 209.85.218.48, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-a5ce2f0deffso798688666b.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 23 May 2024 16:28:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1716506890; x=1717111690; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=tpM5FgEeCN67TMqFO/Woqyw0HXRYT5pRQbyavhGlrXI=;
-        b=QHpDTPbueQ487YKciAFuPvEKp/20LDWtO/w92jS5NKaFnGcMTRQUGIsjSvsn7jl2dV
-         1DB4mTMDa6R59zlsQs9ksIiwB/2dSYGcSMGDrePiFesAkZeGV+ELeL26hv5KGjTdTXyQ
-         4DjXoICyZsStSzPDzqWR9kOMhwwxkENVwh0tf2rU52opAh7qTaeQZ/oWUEViUYbyCVrs
-         P6vteunwYkDZn4FO/vM/MNdwfcW9bdvGXL2fnW7vd2JZXv9WqMEBY4nErLmXI8v2z9En
-         5qflY7Z3yQlsXlP7b4FYqwHEGIj0sDnKLQ7Q7AvJd9P2aoqWgoo2VAnQrwDiHPrcPjbk
-         eeDw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1716506890; x=1717111690;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=tpM5FgEeCN67TMqFO/Woqyw0HXRYT5pRQbyavhGlrXI=;
-        b=QpxoALJpPX/jE4t2W8UuCBvl35tKuS8G9xVxvBDxmYeQ7Er4aNvu1LbWi1wfsYDL4u
-         FkNB+2eJIPb4q2CPdnYG1VBCyNhDSHftVWhhZFmfE3maPjGkhVT/HEjpWn0mx/b3UrNL
-         Xh59W1Odann1V8lJcWlvK12UnIAEyR3ZoFwRiHygoKX7rC5OEgxUs5HuDmT+k+ysUg3H
-         z6zlq7UzfMzQ5FRLWKCcXlGjuTXDnPqYksCZ08DJL7HXtgNjzD0BGB7fovRsGsWMlRd1
-         Emq9UaZ/v2OWBzfNIjqqil4P/A+rqO3NGSYxERJZ0N5+MQL99C0q+EB4Kr4IL89j85/K
-         sWHA==
-X-Gm-Message-State: AOJu0Yw4OUhZiYQx9Rx6qaGTCzCC12IayvRplDZ0aSqf7B6R/ky4OWpX
-	+yhqgE946P4edIVX26dbQvmxyDLLqEY/Rj0SKvOikFi30ZPrx4NO+UqcPQ==
-X-Google-Smtp-Source: AGHT+IFkjuv9IDn764Q7L7NWn6Y0BIru0npZdbkmoIpbtgmToPFg7eYEpg0QRa3PyxRukYRoWd5fhw==
-X-Received: by 2002:a17:907:3557:b0:a55:8f2a:950d with SMTP id a640c23a62f3a-a62641a33f3mr34007566b.16.1716506890006;
-        Thu, 23 May 2024 16:28:10 -0700 (PDT)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a626cda8cc5sm25903366b.222.2024.05.23.16.28.09
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 May 2024 16:28:09 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][master-next][PATCH] source-han-sans-*-fonts: move common part to .inc file
-Date: Fri, 24 May 2024 01:28:01 +0200
-Message-ID: <20240523232801.3259062-1-martin.jansa@gmail.com>
-X-Mailer: git-send-email 2.45.1
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=5874100442=changqing.li@windriver.com)
+Received: from pps.filterd (m0250811.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 44NN05al010632
+	for <openembedded-devel@lists.openembedded.org>; Fri, 24 May 2024 02:23:53 GMT
+Received: from ala-exchng02.corp.ad.wrs.com (ala-exchng02.wrs.com [147.11.82.254])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3yaa9mgbvr-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 24 May 2024 02:23:53 +0000 (GMT)
+Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
+ ALA-EXCHNG02.corp.ad.wrs.com (147.11.82.254) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.39; Thu, 23 May 2024 19:23:52 -0700
+Received: from pek-lpg-core2.wrs.com (128.224.153.41) by
+ ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
+ 15.1.2507.39 via Frontend Transport; Thu, 23 May 2024 19:23:51 -0700
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [scarthgap][meta-filesystems][PATCH V2] fuse3: remove sysv init script and install fuse kernel module explictly
+Date: Fri, 24 May 2024 10:23:50 +0800
+Message-ID: <20240524022350.2415086-1-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Proofpoint-GUID: vojsCuA7s0euUQQeFclFbqYb_QMXQymN
+X-Proofpoint-ORIG-GUID: vojsCuA7s0euUQQeFclFbqYb_QMXQymN
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.650,FMLib:17.12.28.16
+ definitions=2024-05-23_15,2024-05-23_01,2024-05-17_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1015 impostorscore=0
+ lowpriorityscore=0 adultscore=0 mlxlogscore=999 priorityscore=1501
+ phishscore=0 malwarescore=0 spamscore=0 suspectscore=0 bulkscore=0
+ mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2405170001 definitions=main-2405240015
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 23 May 2024 23:28:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110505
+ <openembedded-devel@lists.openembedded.org>; Fri, 24 May 2024 02:23:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110506
 
-* only SUMMARY, ZIPNAME and SRC_URI checksums are different
-* rename the .conf file to match BPN to simplify even more
+From: Changqing Li <changqing.li@windriver.com>
 
-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+For systemd, there is not a fuse.service since systemd provides
+sys-fs-fuse-connections.mount to mount the fuse control filesystem, so
+instead, only fuse3.conf is added to modules-load.d to load the required
+fuse kernel module.
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- ....conf => 44-source-han-sans-cn-fonts.conf} |  0
- .../source-han-sans-cn-fonts_2.004.bb         | 29 ++----------------
- .../ttf-fonts/source-han-sans-fonts.inc       | 26 ++++++++++++++++
- ....conf => 44-source-han-sans-jp-fonts.conf} |  0
- .../source-han-sans-jp-fonts_2.004.bb         | 29 ++----------------
- ....conf => 44-source-han-sans-kr-fonts.conf} |  0
- .../source-han-sans-kr-fonts_2.004.bb         | 30 ++-----------------
- ....conf => 44-source-han-sans-tw-fonts.conf} |  0
- .../source-han-sans-tw-fonts_2.004.bb         | 30 ++-----------------
- 9 files changed, 34 insertions(+), 110 deletions(-)
- rename meta-oe/recipes-graphics/ttf-fonts/source-han-sans-cn-fonts/{44-source-han-sans-cn.conf => 44-source-han-sans-cn-fonts.conf} (100%)
- create mode 100644 meta-oe/recipes-graphics/ttf-fonts/source-han-sans-fonts.inc
- rename meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts/{44-source-han-sans-jp.conf => 44-source-han-sans-jp-fonts.conf} (100%)
- rename meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts/{44-source-han-sans-kr.conf => 44-source-han-sans-kr-fonts.conf} (100%)
- rename meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts/{44-source-han-sans-tw.conf => 44-source-han-sans-tw-fonts.conf} (100%)
+ .../recipes-support/fuse/fuse3/fuse3.conf         |  1 +
+ .../recipes-support/fuse/fuse3_3.16.2.bb          | 15 +++++++++++++++
+ 2 files changed, 16 insertions(+)
+ create mode 100644 meta-filesystems/recipes-support/fuse/fuse3/fuse3.conf
 
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-cn-fonts/44-source-han-sans-cn.conf b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-cn-fonts/44-source-han-sans-cn-fonts.conf
-similarity index 100%
-rename from meta-oe/recipes-graphics/ttf-fonts/source-han-sans-cn-fonts/44-source-han-sans-cn.conf
-rename to meta-oe/recipes-graphics/ttf-fonts/source-han-sans-cn-fonts/44-source-han-sans-cn-fonts.conf
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-cn-fonts_2.004.bb b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-cn-fonts_2.004.bb
-index 0eeae9c2ee..c46952cce0 100644
---- a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-cn-fonts_2.004.bb
-+++ b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-cn-fonts_2.004.bb
-@@ -1,31 +1,6 @@
--require ttf.inc
-+require source-han-sans-fonts.inc
- 
- SUMMARY = "Adobe OpenType Pan-CJK font family for Simplified Chinese"
--HOMEPAGE = "https://github.com/adobe-fonts/source-han-sans"
--LICENSE = "OFL-1.1"
--LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=fac3a519e5e9eb96316656e0ca4f2b90"
-+ZIPNAME = "SourceHanSansCN"
- 
--inherit allarch fontcache
--
--# Download tends to break - so - or not?
--#EXCLUDE_FROM_WORLD = "1"
--
--SRC_URI = " \
--    https://github.com/adobe-fonts/source-han-sans/releases/download/2.004R/SourceHanSansCN.zip;subdir=${BP};downloadfilename=${BP}.zip \
--    file://44-source-han-sans-cn.conf \
--"
- SRC_URI[sha256sum] = "6841fc13f1c0d255cfeb33d2a2c68d24bbebd94ae2c070347a2b2b200a1db4d6"
--
--do_install() {
--    install -d ${D}${sysconfdir}/fonts/conf.d/
--    install -m 0644 ${UNPACKDIR}/44-source-han-sans-cn.conf ${D}${sysconfdir}/fonts/conf.d/
--
--    install -d ${D}${datadir}/fonts/truetype/
--    find ./ -name '*.otf' -exec install -m 0644 {} ${D}${datadir}/fonts/truetype/ \;
--}
--
--FILES:${PN} = " \
--    ${sysconfdir}/fonts \
--    ${datadir}/fonts \
--"
--
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-fonts.inc b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-fonts.inc
+diff --git a/meta-filesystems/recipes-support/fuse/fuse3/fuse3.conf b/meta-filesystems/recipes-support/fuse/fuse3/fuse3.conf
 new file mode 100644
-index 0000000000..03ca4c0902
+index 000000000..a517c488f
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-fonts.inc
-@@ -0,0 +1,26 @@
-+require ttf.inc
-+
-+HOMEPAGE = "https://github.com/adobe-fonts/source-han-sans"
-+LICENSE = "OFL-1.1"
-+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=fac3a519e5e9eb96316656e0ca4f2b90"
-+
-+inherit allarch fontcache
-+
-+SRC_URI = " \
-+    https://github.com/adobe-fonts/source-han-sans/releases/download/${PV}R/${ZIPNAME}.zip;subdir=${BP};downloadfilename=${BP}.zip \
-+    file://44-${BPN}.conf \
-+"
-+
-+do_install() {
-+    install -d ${D}${sysconfdir}/fonts/conf.d/
-+    install -m 0644 ${UNPACKDIR}/44-${BPN}.conf ${D}${sysconfdir}/fonts/conf.d/
-+
-+    install -d ${D}${datadir}/fonts/truetype/
-+    find ./ -name '*.otf' -exec install -m 0644 {} ${D}${datadir}/fonts/truetype/ \;
-+}
-+
-+FILES:${PN} = " \
-+    ${sysconfdir}/fonts \
-+    ${datadir}/fonts \
-+"
-+
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts/44-source-han-sans-jp.conf b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts/44-source-han-sans-jp-fonts.conf
-similarity index 100%
-rename from meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts/44-source-han-sans-jp.conf
-rename to meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts/44-source-han-sans-jp-fonts.conf
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_2.004.bb b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_2.004.bb
-index d75de154cd..40128f97d3 100644
---- a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_2.004.bb
-+++ b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-jp-fonts_2.004.bb
-@@ -1,31 +1,6 @@
--require ttf.inc
-+require source-han-sans-fonts.inc
++++ b/meta-filesystems/recipes-support/fuse/fuse3/fuse3.conf
+@@ -0,0 +1 @@
++fuse
+diff --git a/meta-filesystems/recipes-support/fuse/fuse3_3.16.2.bb b/meta-filesystems/recipes-support/fuse/fuse3_3.16.2.bb
+index 2b0797a6f..b946b63ee 100644
+--- a/meta-filesystems/recipes-support/fuse/fuse3_3.16.2.bb
++++ b/meta-filesystems/recipes-support/fuse/fuse3_3.16.2.bb
+@@ -14,6 +14,7 @@ LIC_FILES_CHKSUM = " \
+ "
  
- SUMMARY = "Adobe OpenType Pan-CJK font family for Japanese"
--HOMEPAGE = "https://github.com/adobe-fonts/source-han-sans"
--LICENSE = "OFL-1.1"
--LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=fac3a519e5e9eb96316656e0ca4f2b90"
-+ZIPNAME = "SourceHanSansJP"
+ SRC_URI = "https://github.com/libfuse/libfuse/releases/download/fuse-${PV}/fuse-${PV}.tar.gz \
++           file://fuse3.conf \
+ "
+ SRC_URI[sha256sum] = "f797055d9296b275e981f5f62d4e32e089614fc253d1ef2985851025b8a0ce87"
  
--inherit allarch fontcache
--
--# Download tends to break - so - or not?
--#EXCLUDE_FROM_WORLD = "1"
--
--SRC_URI = " \
--    https://github.com/adobe-fonts/source-han-sans/releases/download/2.004R/SourceHanSansJP.zip;subdir=${BP};downloadfilename=${BP}.zip \
--    file://44-source-han-sans-jp.conf \
--"
- SRC_URI[sha256sum] = "1ae9f62ad620d686c4a049ce25cf54e3afd8fefc954a678c644cf9802750c17e"
--
--do_install() {
--    install -d ${D}${sysconfdir}/fonts/conf.d/
--    install -m 0644 ${UNPACKDIR}/44-source-han-sans-jp.conf ${D}${sysconfdir}/fonts/conf.d/
--
--    install -d ${D}${datadir}/fonts/truetype/
--    find ./ -name '*.otf' -exec install -m 0644 {} ${D}${datadir}/fonts/truetype/ \;
--}
--
--FILES:${PN} = " \
--    ${sysconfdir}/fonts \
--    ${datadir}/fonts \
--"
--
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts/44-source-han-sans-kr.conf b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts/44-source-han-sans-kr-fonts.conf
-similarity index 100%
-rename from meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts/44-source-han-sans-kr.conf
-rename to meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts/44-source-han-sans-kr-fonts.conf
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts_2.004.bb b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts_2.004.bb
-index 582de03bdb..8b32ab82d2 100644
---- a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts_2.004.bb
-+++ b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-kr-fonts_2.004.bb
-@@ -1,32 +1,6 @@
--require ttf.inc
-+require source-han-sans-fonts.inc
+@@ -79,6 +80,20 @@ FILES:fuse3-utils = "${bindir} ${base_sbindir}"
+ DEBIAN_NOAUTONAME:fuse3-utils = "1"
+ DEBIAN_NOAUTONAME:${PN}-dbg = "1"
  
- SUMMARY = "Adobe OpenType Pan-CJK font family for Korean"
--HOMEPAGE = "https://github.com/adobe-fonts/source-han-sans"
--LICENSE = "OFL-1.1"
--LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=fac3a519e5e9eb96316656e0ca4f2b90"
-+ZIPNAME = "SourceHanSansKR"
- 
--inherit allarch fontcache
--
--# Download tends to break - so - or not?
--#EXCLUDE_FROM_WORLD = "1"
--
--SRC_URI = " \
--    https://github.com/adobe-fonts/source-han-sans/releases/download/2.004R/SourceHanSansKR.zip;subdir=${BP};downloadfilename=${BP}.zip \
--    file://44-source-han-sans-kr.conf \
--"
- SRC_URI[sha256sum] = "02fe28a48c6381c49d61c27a1b173c77f0e6f2b9f2b68e79f076f10a6a8f4bfe"
--S = "${UNPACKDIR}/branches"
--
--do_install() {
--    install -d ${D}${sysconfdir}/fonts/conf.d/
--    install -m 0644 ${UNPACKDIR}/44-source-han-sans-kr.conf ${D}${sysconfdir}/fonts/conf.d/
--
--    install -d ${D}${datadir}/fonts/truetype/
--    find ./ -name '*.otf' -exec install -m 0644 {} ${D}${datadir}/fonts/truetype/ \;
--}
--
--FILES:${PN} = " \
--    ${sysconfdir}/fonts \
--    ${datadir}/fonts \
--"
--
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts/44-source-han-sans-tw.conf b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts/44-source-han-sans-tw-fonts.conf
-similarity index 100%
-rename from meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts/44-source-han-sans-tw.conf
-rename to meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts/44-source-han-sans-tw-fonts.conf
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts_2.004.bb b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts_2.004.bb
-index 011d434190..b841660efd 100644
---- a/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts_2.004.bb
-+++ b/meta-oe/recipes-graphics/ttf-fonts/source-han-sans-tw-fonts_2.004.bb
-@@ -1,32 +1,6 @@
--require ttf.inc
-+require source-han-sans-fonts.inc
- 
- SUMMARY = "Adobe OpenType Pan-CJK font family for Traditional Chinese"
--HOMEPAGE = "https://github.com/adobe-fonts/source-han-sans"
--LICENSE = "OFL-1.1"
--LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=fac3a519e5e9eb96316656e0ca4f2b90"
-+ZIPNAME = "SourceHanSansTW"
- 
--inherit allarch fontcache
--
--# Download tends to break - so - or not?
--#EXCLUDE_FROM_WORLD = "1"
--
--SRC_URI = " \
--    https://github.com/adobe-fonts/source-han-sans/releases/download/2.004R/SourceHanSansTW.zip;subdir=${BP};downloadfilename=${BP}.zip \
--    file://44-source-han-sans-tw.conf \
--"
- SRC_URI[sha256sum] = "11d78c8fbc1a4bb04a453cdd65c99db8d41ec5cd6ba6d68c8638e6ba170de806"
--S = "${UNPACKDIR}/SourceHanSansTW"
--
--do_install() {
--    install -d ${D}${sysconfdir}/fonts/conf.d/
--    install -m 0644 ${UNPACKDIR}/44-source-han-sans-tw.conf ${D}${sysconfdir}/fonts/conf.d/
--
--    install -d ${D}${datadir}/fonts/truetype/
--    find ./ -name '*.otf' -exec install -m 0644 {} ${D}${datadir}/fonts/truetype/ \;
--}
--
--FILES:${PN} = " \
--    ${sysconfdir}/fonts \
--    ${datadir}/fonts \
--"
--
++SYSTEMD_SERVICE:${PN} = ""
++
+ do_install:append() {
+     rm -rf ${D}${base_prefix}/dev
++
++    # systemd class remove the sysv_initddir only if systemd_system_unitdir
++    # contains anything, but it's not needed if sysvinit is not in DISTRO_FEATURES
++    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'false', 'true', d)}; then
++        rm -rf ${D}${sysconfdir}/init.d/
++    fi
++
++    # Install systemd related configuration file
++    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
++        install -d ${D}${sysconfdir}/modules-load.d
++        install -m 0644 ${WORKDIR}/fuse3.conf ${D}${sysconfdir}/modules-load.d
++    fi
+ }
 -- 
-2.45.1
+2.25.1
 
 
