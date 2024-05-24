@@ -1,90 +1,138 @@
-Return-Path: <t.f.g.geelen@gmail.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A2308C25B74
-	for <webhook@archiver.kernel.org>; Fri, 24 May 2024 17:44:50 +0000 (UTC)
-Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
- by mx.groups.io with SMTP id smtpd.web11.1733.1716572684601273185
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0189CC25B74
+	for <webhook@archiver.kernel.org>; Fri, 24 May 2024 18:22:50 +0000 (UTC)
+Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com [209.85.167.53])
+ by mx.groups.io with SMTP id smtpd.web11.2528.1716574966418077596
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 May 2024 10:44:44 -0700
+ Fri, 24 May 2024 11:22:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=Fo87PG6j;
- spf=pass (domain: gmail.com, ip: 209.85.208.41, mailfrom: t.f.g.geelen@gmail.com)
-Received: by mail-ed1-f41.google.com with SMTP id 4fb4d7f45d1cf-5785e443cf4so1028679a12.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 24 May 2024 10:44:44 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=M4d3Do4o;
+ spf=pass (domain: gmail.com, ip: 209.85.167.53, mailfrom: martin.jansa@gmail.com)
+Received: by mail-lf1-f53.google.com with SMTP id 2adb3069b0e04-5295f201979so1395505e87.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 24 May 2024 11:22:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1716572682; x=1717177482; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+        d=gmail.com; s=20230601; t=1716574964; x=1717179764; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=XUfJQUZmPUD0rHL7kJqQCdKuM+xSO2eTyqonoMMVoo8=;
-        b=Fo87PG6jPhz8jPxwdqQQWAvrMJy7PVV4IU4arAY1EKsvcy6Ib8um/lDLpgI/r1XcDN
-         xIKyAiGV/LbGu+EfZHmWd+eqV/dJnqaruPHIeQOJxYzPHcxkHC6MV5o0WuPsuk3n4Fti
-         KcCu02XGfiU8ZmQRbyruBOqxqxHUt88RTTYlnn+LocgvJNz+X2NKmpRacvHpx6+zsa8v
-         HbU+BktBf3YE5ntvlEInuvAeZR8oWQ4A30XR5gi5I5slO/qCIp8PyBfmnOaP8ul6az/9
-         /Kp6NzHJCiIOAhjZ70qTIVGuTKI9nBthetTSVNV+NwizCrPnJJtucFBdARlas/jeiCLm
-         hk+g==
+        bh=Ebr5nJyje0+GEj75CNJniMXK6RmrOKp7PjzqkEV+K4A=;
+        b=M4d3Do4oLhu1YIEK2doL86aTOYusowLb+zyj+VoA32dq1X27LPUytzBaxriRZOrhBH
+         K21eG08IWXooKMc9YFHMEYExgXjjtj2+KOcn5BvGX14EaCjVpD/lba+/yb3InpNJFMUM
+         9DJIBgvwXCMLCRh9sP3g4kV6uNFDmnn3HHNhFNOAIGLe4WRaJQ8Iku6+dQ/IPltG+0LZ
+         UrYmV/HKn8n6aeRARNz1ZVyG0bGeUXdXVLbL9H4GKq24RkMpgR5Qp7z/PatjSuH9ZJzw
+         PQD5C5WPs3a7UvUOjSPd0ss2P0Bvi3RnzroEZ/IOv/9JelZtSTgzNKDOrGbf+CaNE4I9
+         7FBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1716572682; x=1717177482;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20230601; t=1716574964; x=1717179764;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=XUfJQUZmPUD0rHL7kJqQCdKuM+xSO2eTyqonoMMVoo8=;
-        b=PM6HhLY4AjjZU3FdcB7OtQItoT6OVfQY521UmVfw4qFZuYlWy8zup2CgZRVypE8Lc/
-         R6fYm6TSSDo+Hh34yzBRwh3csJV7uyZ7ACmWSC9oIA4hs4lPiwXyW3lyjNpuelTiEb5Y
-         UI3TyaKrFi+D3ppxNJ/h+niY2/YcwlQpW1JA9LinS8xiEqV2mLmzymMY5VXmO3XNxIdW
-         Op7lotnLae0L7l9wMUvq7nbIq/XYwx4USp9VMWXikN7HMUFj+m3rThRbGe0bROJN+aC7
-         CqZroqq28pRGkJpwBnWfFlV2kVdn+ttDc2QosgAxIhz5meB3Ynk5AYoX98A5IvKV77Pf
-         K6WQ==
-X-Gm-Message-State: AOJu0YxzHJmpmTmuWMYMJ8lwRzgIv4Yxv4cjb9xQ1HjpUEVuL7xKmFdj
-	4bahIrbYBdw+Q4yaVGrHxI8gP+PaeE+S/oqAIgh1UzJKlTL43mSCwr7NDg==
-X-Google-Smtp-Source: AGHT+IEHFWVkLLguSkMcIXrkJVV4Khxq+F2lbIl1Tae9zR+3itkl6LwRCnVYUUtJ+tcE9mkVzT+r9w==
-X-Received: by 2002:a50:9e69:0:b0:578:64b9:d02e with SMTP id 4fb4d7f45d1cf-57864b9d078mr302754a12.40.1716572681543;
-        Fri, 24 May 2024 10:44:41 -0700 (PDT)
-Received: from control-center.home (232-13-20-31.ftth.glasoperator.nl. [31.20.13.232])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-57852495e01sm1979737a12.63.2024.05.24.10.44.40
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 May 2024 10:44:41 -0700 (PDT)
-From: Tom Geelen <t.f.g.geelen@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Tom Geelen <t.f.g.geelen@gmail.com>
-Subject: [meta-python][PATCH 4/4] python3-requests-mock: new recipe
-Date: Fri, 24 May 2024 17:43:48 +0000
-Message-Id: <20240524174344.2105779-4-t.f.g.geelen@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240524174344.2105779-1-t.f.g.geelen@gmail.com>
-References: <20240524174344.2105779-1-t.f.g.geelen@gmail.com>
+        bh=Ebr5nJyje0+GEj75CNJniMXK6RmrOKp7PjzqkEV+K4A=;
+        b=O3AFuMaLY0g14IgKOgIc3HA+zHOmu4j+/g6s7o3H43jsnCB7ad1OZstWx1ASX9z/ex
+         jAvM13jc30+BdN1SmccP2CYskomMObjMAj1tWOXwA32IuPMIdHZSD3J3gTwKlmYNXWs2
+         IsB3EiaZPTEE32s5ZYlmbiCmSfrPe5t69zhNzN8fKZgQZN9uSzgKhfGdTAfvVblnn/6P
+         ECbO3oLSkIMkES9e7l0pGnkjuFz/scfJ5rvpWrMXRRQZx+a9NYx24gmvjp/EYe0h2Vxr
+         5Tepi3t3YeAnuMEvPs/rNsZ4V9G9Q6IfVBy8XpZWoMH+qSVkJF85bC2LFynDJ2dX0F9G
+         gDwg==
+X-Gm-Message-State: AOJu0Yw9rqQJ9s7SjCoRvO6wDFB7ofCXzXAIeDvPzhGqQg0ZmEyaLRpZ
+	NC9lEMy7jndikNUslvp9FkfJo9G/zZOnscRre+Gel1XZTLKRWX3G2lBM6157aV5xObF6nGXz7jV
+	GmnijWlRMNnVd0rvk0eg0YAoVDYw=
+X-Google-Smtp-Source: AGHT+IF8MiVjtMoC7FwT+vFM6xvc0s+MBEsYPcHkHs/3zKn2uEqMTu8+uPKDozNrkVP286LoyjOVaKZUXxKmhu+n1d8=
+X-Received: by 2002:a05:6512:4cc:b0:51e:f2bb:158a with SMTP id
+ 2adb3069b0e04-52966ca8c0fmr1819923e87.64.1716574964264; Fri, 24 May 2024
+ 11:22:44 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240516163058.465553-1-gerard.salvatella@siemens.com>
+In-Reply-To: <20240516163058.465553-1-gerard.salvatella@siemens.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Fri, 24 May 2024 20:22:25 +0200
+Message-ID: <CA+chaQen=WaddY8kr4K9hvVgjeEtU6GKoRb-FxAqTiYXqzSbZw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] libwebsockets: fix buildpath warnings
+To: gerard.salvatella@siemens.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 24 May 2024 17:44:50 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110522
+ <openembedded-devel@lists.openembedded.org>; Fri, 24 May 2024 18:22:50 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110523
 
-Mocked responses for the requests library
----
- .../python/python3-requests-mock_1.12.1.bb               | 9 +++++++++
- 1 file changed, 9 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-requests-mock_1.12.1.bb
+This breaks libcap dependency when libwebsocket is built with libcap in DEP=
+ENDS.
 
-diff --git a/meta-python/recipes-devtools/python/python3-requests-mock_1.12.1.bb b/meta-python/recipes-devtools/python/python3-requests-mock_1.12.1.bb
-new file mode 100644
-index 000000000..248526b00
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-requests-mock_1.12.1.bb
-@@ -0,0 +1,9 @@
-+SUMMARY = "Mocked responses for the requests library"
-+HOMEPAGE = "https://github.com/jamielennox/requests-mock"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=3b2eea41aec0f2973a45e1e45f28aa32"
-+
-+DEPENDS = "python3-setuptools-scm-native"
-+SRC_URI[sha256sum] = "e9e12e333b525156e82a3c852f22016b9158220d2f47454de9cae8a77d371401"
-+
-+inherit pypi python_setuptools_build_meta
--- 
-2.34.1
+mosquitto fails with:
+ninja: error: '/libcap.so', needed by 'src/mosquitto', missing and no
+known rule to make it
 
+because this change caused this diff:
++++ 4.3.3/image/usr/lib/cmake/libwebsockets/LibwebsocketsTargets.cmake
+ 2024-05-24 20:16:49.448901228 +0200
+@@ -69,7 +69,7 @@
+
+ set_target_properties(websockets_shared PROPERTIES
+   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include;"
+-  INTERFACE_LINK_LIBRARIES
+"ssl;crypto;ssl;crypto;/OE/lge/build/starfish/styhead/BUILD/work/o22-webosm=
+llib32-linux-gnueabi/lib32-libwebsockets/4.3.3/lib32-recipe-sysroot/usr/lib=
+/libcap.so;-lpthread"
++  INTERFACE_LINK_LIBRARIES "ssl;crypto;ssl;crypto;/libcap.so;-lpthread"
+)
+
+ if(CMAKE_VERSION VERSION_LESS 2.8.12)
+
+I don't see libz there, but /libcap.so is surely wrong, removing the /
+fixes the mosquitto build for me (I'm not using it, it just started to
+fail in world builds now), will send the fix shortly.
+
+On Thu, May 16, 2024 at 6:30=E2=80=AFPM Gerard Salvatella via
+lists.openembedded.org
+<gerard.salvatella=3Dsiemens.com@lists.openembedded.org> wrote:
+>
+> From: Gerard Salvatella <gerard.salvatella@siemens.com>
+>
+> In order to remove absolute paths from the cmake artifacts, paths from
+> the `$lib` folder should also be stripped off, otherwise internally
+> linked libraries (e.g. libz) may appear.
+> ---
+>  .../recipes-connectivity/libwebsockets/libwebsockets_4.3.3.bb   | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3=
+.3.bb b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.3.bb
+> index 4518e2faa..8f8b70421 100644
+> --- a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.3.bb
+> +++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_4.3.3.bb
+> @@ -42,6 +42,8 @@ do_install:append() {
+>      sed -i -e 's|${STAGING_LIBDIR}/libuv.so|uv|g' ${D}${libdir}/cmake/li=
+bwebsockets/LibwebsocketsTargets.cmake
+>      sed -i -e 's|${STAGING_INCDIR}||g' ${D}${libdir}/cmake/libwebsockets=
+/LibwebsocketsTargets.cmake \
+>                                         ${D}${libdir}/cmake/libwebsockets=
+/libwebsockets-config.cmake
+> +    sed -i -e 's|${STAGING_LIBDIR}||g' ${D}${libdir}/cmake/libwebsockets=
+/LibwebsocketsTargets.cmake \
+> +                                       ${D}${libdir}/cmake/libwebsockets=
+/libwebsockets-config.cmake
+>  }
+>
+>  PACKAGES =3D+ "${PN}-testapps ${PN}-evlib-event ${PN}-evlib-uv ${PN}-evl=
+ib-ev ${PN}-evlib-sd"
+> --
+> 2.44.0
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#110416): https://lists.openembedded.org/g/openembedde=
+d-devel/message/110416
+> Mute This Topic: https://lists.openembedded.org/mt/106138059/3617156
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
+artin.jansa@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
