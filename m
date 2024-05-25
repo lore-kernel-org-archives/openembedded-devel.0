@@ -2,92 +2,170 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C7497C25B79
-	for <webhook@archiver.kernel.org>; Fri, 24 May 2024 21:31:51 +0000 (UTC)
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
- by mx.groups.io with SMTP id smtpd.web10.6451.1716586303961890037
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1965AC25B74
+	for <webhook@archiver.kernel.org>; Sat, 25 May 2024 03:28:44 +0000 (UTC)
+Received: from mail-oa1-f49.google.com (mail-oa1-f49.google.com [209.85.160.49])
+ by mx.groups.io with SMTP id smtpd.web10.4888.1716607714826395923
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 24 May 2024 14:31:44 -0700
+ Fri, 24 May 2024 20:28:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=eSXnvdOc;
- spf=pass (domain: gmail.com, ip: 209.85.214.181, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f181.google.com with SMTP id d9443c01a7336-1f32864bcc7so24537935ad.3
-        for <openembedded-devel@lists.openembedded.org>; Fri, 24 May 2024 14:31:43 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=GmJbm4b7;
+ spf=pass (domain: gmail.com, ip: 209.85.160.49, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f49.google.com with SMTP id 586e51a60fabf-248f7fdc323so3980829fac.1
+        for <openembedded-devel@lists.openembedded.org>; Fri, 24 May 2024 20:28:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1716586303; x=1717191103; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=BPuru5WmsuzK/jlwMFnhjChOUkdO2zn40lLfPFgEg28=;
-        b=eSXnvdOcb1yQS7lXZ9JfEBl7VWNMEy+xdZfenJwM/6w++YbV7RZYD3qUqUENweAMMF
-         1fZehd/BnfLomH41d9isi9vDC7+msA0NS4QQ5kRRw+P0snTGhoNv8MXmH7R571wkUBFd
-         OPHYtpkWH9ryfk8m8v9rlJ6uGL9+RKy1jksKD24mirpaDAOGw1uHsqtHFmWgP/zQ8DDN
-         sh0Iw1Yrv3DqLVPvaa0fQIMOFbiqN4//qnW1EalOXBeuQSwoTirC9wnyN9gU3gD3KB2f
-         TRwnYOFyeAh7MzYMw38QjhZpTaiq+Gu+JmlLjTU1+bI4rmLNM60nXk6m/MH1lHFUgkZ0
-         +jcQ==
+        d=gmail.com; s=20230601; t=1716607714; x=1717212514; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=VVTPBRkzpvG6xTOuN8unRxuveiCMYn22Wkbnxl2rRBg=;
+        b=GmJbm4b74xM9KAAR3r3MGvymGqAmbEMNIdZBF9jQ/H/fmiLXHS4Qd8Yc1N4RdS9Yzg
+         vs80B3Sc4ZswwRb6TtwjdGCvvnFET48BZRjvy1dHgEkyvQQgojFh1oMVuB0sDXqfJyQY
+         eeXtwc7zBL2FnUBQHcX4gjVT2QNG5e/IKpyU0yqPgvcwb+vdVIU4/UB5YYmmfjpqla67
+         ymn+C1gGZX/AtECawZWba4p8kQ/z6zwQUD2kcegF4Jr5I7n+oImXv3ksXcUQ1g471fdX
+         I1WNGOko1nJ6htNThbXSbdmp3E0TWJNpr8VhZLpF/LjFnENmhLBNETuZPVrKcTATX5zb
+         khNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1716586303; x=1717191103;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=BPuru5WmsuzK/jlwMFnhjChOUkdO2zn40lLfPFgEg28=;
-        b=HGFdccwkYseCi/dZii2hnTeHtx8A5SGQJhZYwgdn5zxDjPK+Jx3K4NBMKVifiVCtz+
-         Lxl+bDYTEhSWdIjoMnofrdkdKY28/P0ezynP4urVYHH8UdfqUnq30jXGQuM0lPe/IQcw
-         kHOjbvS+NcAbyAKDb86/F+jag3sdRImxPYIQIB/j9+NyzUr6W7vSAlq4AiKq4cRBMBPu
-         l8J31SmgVjvyTkBfJh/DwyRca9XTZqXPJmz8TVGus0ChwYRf1177lS+Gol4GnGp4+3hV
-         I/5YhOOx+QDwEMB1EUUUBQmgvv8EW2hBcbzLxHaSw0Y/PBpg3p1foWOjZbNVwOUclqvc
-         DMpA==
-X-Gm-Message-State: AOJu0YzhQI5Eu9g9fldx7ZK+3dAtlWH70b1jMiBhm238bCf0IbIE+daP
-	DwECheQS1pqaRCk5Tx/ZRZiXaw/NW7jEfZUMxbDz1xNFRSIuIpUbzytHwWqNV4Q=
-X-Google-Smtp-Source: AGHT+IF6Cu0wDPvXNHo6BUzlMBuBnc/I24cLtuntyf9TI0/u0LGaSYbL/BRHyS/xMsCih8pNXelahw==
-X-Received: by 2002:a17:902:fa07:b0:1f3:ea4:7ed6 with SMTP id d9443c01a7336-1f4497e5102mr27920235ad.61.1716586303045;
-        Fri, 24 May 2024 14:31:43 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::b2a9])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-1f44c7c3fa2sm18374295ad.104.2024.05.24.14.31.42
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 May 2024 14:31:42 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] liburing: Use libc on rv64/clang18
-Date: Fri, 24 May 2024 14:31:40 -0700
-Message-ID: <20240524213140.1856788-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.45.1
+        d=1e100.net; s=20230601; t=1716607714; x=1717212514;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=VVTPBRkzpvG6xTOuN8unRxuveiCMYn22Wkbnxl2rRBg=;
+        b=O783xvVNQc2yheilKSRRwypqh8qFJU17YP4zjCFiNUqAqpozj6uCGmxexSWg6kTqAD
+         83wK19cHp+aQ8eNbKtfPqtFzTFQOrqWn4umxpmTREmq/llibWqwCc/b2rl9HwOb9H8pV
+         Ot7lRMPrhjR1hE5o+8Iw6VgzGKnDS585kFnUKnF5Kgs0Z/VXVKn2SBZqB8saPTRtVFc1
+         +xtcZNxgcxiwVkgl4Mi8yNN5KuheWJ7jfP0GM4AFoluFM2je9iNc2D4rFa7bQR2tukQY
+         lXTTDjXwZ+pG685WKk9pvTbYdxHYm4IZKPMThYVAjbLa99CkdTF7oXOUwm2+9z7/WeYg
+         13vQ==
+X-Gm-Message-State: AOJu0YxJNJ7QO1PnxnwmeKdUx4Yt4+UnEsEqIZ2NsBlKp2xEw/bXZWtJ
+	unNmkpZG7ie/wvgBQgK0S95iRzv0NDBlduniV4fwBy5XStOld8nsI720krp49pmzVKSJQ6Vh9S/
+	OKKNmodKsl8+C/PkeR56io764jV0=
+X-Google-Smtp-Source: AGHT+IEX8AQM3WjkD7tORLHng5+InSyAr5VjZS4KBlSUx+lNT3dmOKEnRHRs2eOaF1doMasPgbzoJKHq+IXr/uOzOjE=
+X-Received: by 2002:a05:6870:2193:b0:23d:417c:675 with SMTP id
+ 586e51a60fabf-24ca1380b4emr5114896fac.41.1716607713962; Fri, 24 May 2024
+ 20:28:33 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240524115815.2501861-1-dmitry.baryshkov@linaro.org> <CAMKF1srvShwtLG00xDdUdaRiY5+qukSFOyNbqPmWU8fH4cvnjA@mail.gmail.com>
+In-Reply-To: <CAMKF1srvShwtLG00xDdUdaRiY5+qukSFOyNbqPmWU8fH4cvnjA@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 24 May 2024 20:28:07 -0700
+Message-ID: <CAMKF1spUQuSrWcXo4Gy-yBari2pUdVrQaj7_-nLx8=AWEsDESw@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] lmsensors: fix building with GCC 14
+To: dbaryshkov@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 24 May 2024 21:31:51 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110525
+ <openembedded-devel@lists.openembedded.org>; Sat, 25 May 2024 03:28:44 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110526
 
-clang18 generates memset call which demands linking with libc
+On Fri, May 24, 2024 at 7:10=E2=80=AFAM Khem Raj <raj.khem@gmail.com> wrote=
+:
+>
+> On Fri, May 24, 2024 at 4:58=E2=80=AFAM Dmitry Baryshkov via
+> lists.openembedded.org <dbaryshkov=3Dgmail.com@lists.openembedded.org>
+> wrote:
+> >
+> > GCC 14 is more strict regarding const pointers conversion. Fix
+> > conversion to let lmsensors build with GCC 14.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-support/liburing/liburing_2.6.bb | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+Well it now fails with GCC14 itself so I wonder
 
-diff --git a/meta-oe/recipes-support/liburing/liburing_2.6.bb b/meta-oe/recipes-support/liburing/liburing_2.6.bb
-index b892ce4ac2..fc3fe1cac1 100644
---- a/meta-oe/recipes-support/liburing/liburing_2.6.bb
-+++ b/meta-oe/recipes-support/liburing/liburing_2.6.bb
-@@ -18,9 +18,14 @@ DEPENDS:append:libc-musl = " libucontext"
- XCFLAGS = "-pthread"
- XCFLAGS:append:libc-musl = " -lucontext"
- 
-+USELIBC = ""
-+# clang-18 on RV64 emits memset for arch/riscv64/syscall.h provided __do_syscall4 macro
-+# this does not happen for gcc or older clang, so link with libc since we need memset API
-+# -fno-builtin-memset does not help
-+USELIBC:riscv64:toolchain-clang = "--use-libc"
- EXTRA_OEMAKE = "'CC=${CC}' 'RANLIB=${RANLIB}' 'AR=${AR}' 'CFLAGS=${CFLAGS} -I${S}/include -DWITHOUT_XATTR' 'LDFLAGS=${LDFLAGS}' 'XCFLAGS=${XCFLAGS}' 'BUILDDIR=${S}'"
- do_configure() {
--    ${S}/configure --prefix=${prefix} --libdir=${libdir} --libdevdir=${libdir} --mandir=${mandir} --datadir=${datadir} --includedir=${includedir}
-+    ${S}/configure --prefix=${prefix} --libdir=${libdir} --libdevdir=${libdir} --mandir=${mandir} --datadir=${datadir} --includedir=${includedir} ${USELIBC}
- }
- do_install () {
-     oe_runmake install DESTDIR=${D}
--- 
-2.45.1
+https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/3879/step=
+s/14/logs/stdio
 
+> >
+> > Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+> > ---
+> >  .../0001-Fix-building-with-GCC-14.patch       | 36 +++++++++++++++++++
+> >  .../recipes-bsp/lm_sensors/lmsensors_3.6.0.bb |  1 +
+> >  2 files changed, 37 insertions(+)
+> >  create mode 100644 meta-oe/recipes-bsp/lm_sensors/lmsensors/0001-Fix-b=
+uilding-with-GCC-14.patch
+> >
+> > diff --git a/meta-oe/recipes-bsp/lm_sensors/lmsensors/0001-Fix-building=
+-with-GCC-14.patch b/meta-oe/recipes-bsp/lm_sensors/lmsensors/0001-Fix-buil=
+ding-with-GCC-14.patch
+> > new file mode 100644
+> > index 000000000000..73938e257708
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-bsp/lm_sensors/lmsensors/0001-Fix-building-with-G=
+CC-14.patch
+> > @@ -0,0 +1,36 @@
+> > +From fd49cbcb7f3402e1a4a99b71b901a564060039b4 Mon Sep 17 00:00:00 2001
+> > +From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+> > +Date: Fri, 24 May 2024 14:16:21 +0300
+> > +Subject: [PATCH] Fix building with GCC 14
+> > +
+> > +Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+> > +Upstream-Status: Pending
+>
+> This is a good patch to submit upstream as well please open a PR at
+> https://github.com/lm-sensors/lm-sensors/pulls
+>
+> > +---
+> > + prog/sensord/rrd.c | 4 ++--
+> > + 1 file changed, 2 insertions(+), 2 deletions(-)
+> > +
+> > +diff --git a/prog/sensord/rrd.c b/prog/sensord/rrd.c
+> > +index a531362bddd5..36d685fce514 100644
+> > +--- a/prog/sensord/rrd.c
+> > ++++ b/prog/sensord/rrd.c
+> > +@@ -299,7 +299,7 @@ int rrdInit(void)
+> > +               argv[argc++] =3D rraBuff;
+> > +               argv[argc] =3D NULL;
+> > +
+> > +-              ret =3D rrd_create(argc, (char**) argv);
+> > ++              ret =3D rrd_create(argc, (const char**) argv);
+> > +               if (ret =3D=3D -1) {
+> > +                       sensorLog(LOG_ERR, "Error creating RRD file: %s=
+: %s",
+> > +                                 sensord_args.rrdFile, rrd_get_error()=
+);
+> > +@@ -455,7 +455,7 @@ int rrdUpdate(void)
+> > +               const char *argv[] =3D {
+> > +                       "sensord", sensord_args.rrdFile, rrdBuff, NULL
+> > +               };
+> > +-              if ((ret =3D rrd_update(3, (char **) /* WEAK */ argv)))=
+ {
+> > ++              if ((ret =3D rrd_update(3, (const char **) /* WEAK */ a=
+rgv))) {
+> > +                       sensorLog(LOG_ERR, "Error updating RRD file: %s=
+: %s",
+> > +                                 sensord_args.rrdFile, rrd_get_error()=
+);
+> > +               }
+> > +--
+> > +2.39.2
+> > +
+> > diff --git a/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb b/meta-o=
+e/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb
+> > index f956224e1820..07027225c58b 100644
+> > --- a/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb
+> > +++ b/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.6.0.bb
+> > @@ -14,6 +14,7 @@ SRC_URI =3D "git://github.com/lm-sensors/lm-sensors.g=
+it;protocol=3Dhttps;branch=3Dmast
+> >             file://fancontrol.init \
+> >             file://sensord.init \
+> >             file://0001-Change-PIDFile-path-from-var-run-to-run.patch \
+> > +           file://0001-Fix-building-with-GCC-14.patch \
+> >  "
+> >  SRCREV =3D "1667b850a1ce38151dae17156276f981be6fb557"
+> >
+> > --
+> > 2.39.2
+> >
+> >
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > Links: You receive all messages sent to this group.
+> > View/Reply Online (#110512): https://lists.openembedded.org/g/openembed=
+ded-devel/message/110512
+> > Mute This Topic: https://lists.openembedded.org/mt/106279990/1997914
+> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
+[raj.khem@gmail.com]
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >
 
