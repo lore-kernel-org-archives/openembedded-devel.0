@@ -1,99 +1,93 @@
-Return-Path: <yoann.congal@smile.fr>
+Return-Path: <robert.joslyn@redrectangle.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 39FAEC25B78
-	for <webhook@archiver.kernel.org>; Sat, 25 May 2024 07:22:05 +0000 (UTC)
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
- by mx.groups.io with SMTP id smtpd.web10.7120.1716621721490333890
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B717CC25B75
+	for <webhook@archiver.kernel.org>; Sun, 26 May 2024 20:32:18 +0000 (UTC)
+Received: from wilbur.contactoffice.com (wilbur.contactoffice.com [212.3.242.68])
+ by mx.groups.io with SMTP id smtpd.web10.14011.1716755513848152719
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 25 May 2024 00:22:02 -0700
+ Sun, 26 May 2024 13:31:54 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile-fr.20230601.gappssmtp.com header.s=20230601 header.b=zMErJpfc;
- spf=pass (domain: smile.fr, ip: 209.85.128.53, mailfrom: yoann.congal@smile.fr)
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-420180b58c3so74041875e9.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 25 May 2024 00:22:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile-fr.20230601.gappssmtp.com; s=20230601; t=1716621719; x=1717226519; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=aJcSQViLTjySoL12aQhu7BSKhCkBY/lY/G5AfVSp5Io=;
-        b=zMErJpfcHoT9J3Khvo3+fDDHvlt7MVYQ4dBgcSCQ8pscRGaNXuNiSq6LF1dHsa3dlh
-         Q73Xfpsjm+0JxoGuzh0tZl9ealt4k0twtfhF7fXYTMqpSKuXsj5sZclOUXokp/L4BwID
-         YTnq4Nt9uMsKc2m//P1sGWG11ZFT3i3+UOQ/SnRLST/vMaQdtk4NGhfWL7ZN7QKhQ56W
-         ud40R2zQyFCjfaLBEldlFU/wHOemKWQfDFEHjkeAOMrJX6ehUGjQXx1mrQ7q9mm4xOFC
-         y1Rmee03stWg8cTYko1GekqZXuwnLYROBoUz8/1bv1zGpgS43kxz05pnC9yKMXVuCJsV
-         xBsw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1716621719; x=1717226519;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=aJcSQViLTjySoL12aQhu7BSKhCkBY/lY/G5AfVSp5Io=;
-        b=lN08yJgYDhq7H92mcqcMwPLfPSx8kSPWc8m2jPVhYXQJ9AxlxHt2DQ8XnoXPXuQKCJ
-         jop5a95PqiMKG5np/ZKhHGMKxfWGTTfKcufjz5cG7NpWrVnYYJRN1vm8lMz8axhOZ2Bj
-         RLPb+z+4cmooNSNnHL0rVjB6eaB+PWtx6iYwRY+/JN0SLz5wFN0Tbcc817fXDLxHFoYi
-         k7FtnvImDTHa7Go3zaReEK05IdVMlj0Cf3zg3UGPdVjncXU82rAmOro0VM0mwhCSEwfB
-         ey8J0uF54pepwSV6k6nNCkw3HumMVdbqs+gkJxuxPhsyNLnKqde3ACKz991F/cXS+mT8
-         r7mQ==
-X-Gm-Message-State: AOJu0YxqZ1QRh15lV8z4Vm58C1iLK42cgsMP4FQuHEZfJxqSV7gPZjDS
-	XPr6WGU76MMw01EPKWoWcEXvoIa43HGzMMn2QuVUOXMZzxYfIPOUclM7fu8MIeDJ5W4SFwhFPLx
-	9
-X-Google-Smtp-Source: AGHT+IGVWWw6WEtayc4m53dPJkHtaCYaPx6BJCuUYUwwmbXiSMCGMa1S84Azw8ZhAI1ja2j/FLsXug==
-X-Received: by 2002:a05:600c:2282:b0:416:bc18:2a00 with SMTP id 5b1f17b1804b1-42108aba991mr34158685e9.38.1716621718674;
-        Sat, 25 May 2024 00:21:58 -0700 (PDT)
-Received: from P-ASN-ECS-830T8C3.local ([89.159.1.53])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-42100f1399asm72793405e9.11.2024.05.25.00.21.58
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 25 May 2024 00:21:58 -0700 (PDT)
-From: Yoann Congal <yoann.congal@smile.fr>
+ dkim=fail reason="dkim: message contains an insecure body length tag" header.i=robert.joslyn@redrectangle.org header.s=20230812-3u04 header.b=mGW3xfL1;
+ spf=pass (domain: redrectangle.org, ip: 212.3.242.68, mailfrom: robert.joslyn@redrectangle.org)
+Received: from smtpauth1.co-bxl (smtpauth1.co-bxl [10.2.0.15])
+	by wilbur.contactoffice.com (Postfix) with ESMTP id 0123A38AE;
+	Sun, 26 May 2024 22:31:51 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1716755511;
+	s=20230812-3u04; d=redrectangle.org;
+	i=robert.joslyn@redrectangle.org;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Transfer-Encoding;
+	l=1827; bh=/TMevMyAUSnbNlur+vLq1FRpX+0qjj3Ppd6gcZSPNFE=;
+	b=mGW3xfL1enlvtiOiPUsBoe6tP2PuG/O5L1f0RCkndLmipRzuhnUHnyzNMZCh0/Jx
+	do4fSxnuGEYe+jOwGWHKaX1giyCGKrFZrM5j6X03odQ7S8J+n1Bk1twxKgxLx4Hys58
+	9dINdoBZowoV9Eri9Ya4zjF2tlWHxV5EEXc7qwHfBIwNEXJxMLXcZOzt/5qllX7+rLu
+	CEpoRpDV8X0MmZS3/xBDxdqoziQOSQJJRGN/Gv848nWyU9naZ+2dxIu87/YA/BbAbTf
+	GFyyNDRBElfWh2FXmXqN/XPmHKuGRxw+27MwX9r2VxYT7MSfDNsREzn0Ro5FoHTKUBj
+	SAqNnRoO2A==
+Received: by smtp.mailfence.com with ESMTPSA ; Sun, 26 May 2024 22:31:49 +0200 (CEST)
+From: robert.joslyn@redrectangle.org
 To: openembedded-devel@lists.openembedded.org
-Cc: Yoann Congal <yoann.congal@smile.fr>,
-	Dan McGregor <dan.mcgregor@usask.ca>
-Subject: [meta-oe][PATCH] libfido2: remove non-functional native and nativesdk BBCLASSEXTEND
-Date: Sat, 25 May 2024 09:21:20 +0200
-Message-Id: <20240525072120.2058734-1-yoann.congal@smile.fr>
-X-Mailer: git-send-email 2.39.2
+Cc: Mikko Rapeli <mikko.rapeli@linaro.org>,
+	Khem Raj <raj.khem@gmail.com>,
+	Robert Joslyn <robert.joslyn@redrectangle.org>
+Subject: [meta-oe][scarthgap][PATCH] fwupd: fix uefi capsule update build error
+Date: Sun, 26 May 2024 13:31:20 -0700
+Message-ID: <20240526203120.2867389-1-robert.joslyn@redrectangle.org>
+X-Mailer: git-send-email 2.44.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-ContactOffice-Account: com:454140407
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 25 May 2024 07:22:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110531
+ <openembedded-devel@lists.openembedded.org>; Sun, 26 May 2024 20:32:18 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110532
 
-libfido2 depends on udev and libcbor which do not exist for native and
-nativesdk targets.
-Remove native & nativesdk from BBCLASSEXTEND to avoid hitting these in
-world/universe builds.
+From: Mikko Rapeli <mikko.rapeli@linaro.org>
 
-Fixes these warnings (as seen on AB[0]):
-  WARNING: Nothing PROVIDES 'nativesdk-udev' (but virtual:nativesdk:[...]/libfido2_1.14.0.bb DEPENDS on or otherwise requires it). Close matches:
-  WARNING: Nothing PROVIDES 'nativesdk-libcbor' (but virtual:nativesdk:[...]/libfido2_1.14.0.bb DEPENDS on or otherwise requires it). Close matches:
-  WARNING: Nothing PROVIDES 'libcbor-native' (but virtual:native:[...]/libfido2_1.14.0.bb DEPENDS on or otherwise requires it). Close matches:
-  WARNING: Nothing PROVIDES 'udev-native' (but virtual:native:[...]/libfido2_1.14.0.bb DEPENDS on or otherwise requires it). Close matches:
-  WARNING: Nothing RPROVIDES 'nativesdk-libfido2-dev' (but virtual:nativesdk:[...]/libfido2_1.14.0.bb RDEPENDS on or otherwise requires it)
-  WARNING: Nothing RPROVIDES 'nativesdk-libfido2' (but virtual:nativesdk:[...]/libfido2_1.14.0.bb RDEPENDS on or otherwise requires it)
+plugin_uefi_capsule_splash does not provide "enabled" or "disabled"
+options but only basic bool "true" and "false". Fixes do_configure()
+failure with
+PACKAGECONFIG:append =3D " plugin_tpm plugin_uefi_pk plugin_uefi_capsule =
+":
 
-[0]: https://autobuilder.yoctoproject.org/typhoon/#/builders/156/builds/367/steps/12/logs/warnings
+| ../fwupd-1.9.18/meson.build:1:0: ERROR: Value disabled is not boolean (=
+true or false).
 
-Signed-off-by: Yoann Congal <yoann.congal@smile.fr>
-Cc: Dan McGregor <dan.mcgregor@usask.ca>
+Signed-off-by: Mikko Rapeli <mikko.rapeli@linaro.org>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Robert Joslyn <robert.joslyn@redrectangle.org>
 ---
- meta-oe/recipes-support/libfido2/libfido2_1.14.0.bb | 2 --
- 1 file changed, 2 deletions(-)
+ meta-oe/recipes-bsp/fwupd/fwupd_1.9.18.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/libfido2/libfido2_1.14.0.bb b/meta-oe/recipes-support/libfido2/libfido2_1.14.0.bb
-index 08d3f4e84d..d453d0ab97 100644
---- a/meta-oe/recipes-support/libfido2/libfido2_1.14.0.bb
-+++ b/meta-oe/recipes-support/libfido2/libfido2_1.14.0.bb
-@@ -21,5 +21,3 @@ EXTRA_OECMAKE = "-DUDEV_RULES_DIR=${nonarch_base_libdir}/udev/rules.d -DBUILD_EX
- PACKAGE_BEFORE_PN = "${PN}-tools"
- 
- FILES:${PN}-tools = "${bindir}/fido2-*"
--
--BBCLASSEXTEND = "native nativesdk"
--- 
-2.39.2
+diff --git a/meta-oe/recipes-bsp/fwupd/fwupd_1.9.18.bb b/meta-oe/recipes-=
+bsp/fwupd/fwupd_1.9.18.bb
+index d20d5ed2a..e6c276ba4 100644
+--- a/meta-oe/recipes-bsp/fwupd/fwupd_1.9.18.bb
++++ b/meta-oe/recipes-bsp/fwupd/fwupd_1.9.18.bb
+@@ -104,7 +104,7 @@ PACKAGECONFIG[plugin_synaptics_mst] =3D "-Dplugin_syn=
+aptics_mst=3Denabled,-Dplugin_s
+ PACKAGECONFIG[plugin_synaptics_rmi] =3D "-Dplugin_synaptics_rmi=3Denable=
+d,-Dplugin_synaptics_rmi=3Ddisabled"
+ PACKAGECONFIG[plugin_tpm] =3D "-Dplugin_tpm=3Denabled,-Dplugin_tpm=3Ddis=
+abled,tpm2-tss"
+ # Turn off the capsule splash as it needs G-I at buildtime, which isn't =
+currently supported
+-PACKAGECONFIG[plugin_uefi_capsule] =3D "-Dplugin_uefi_capsule=3Denabled =
+-Dplugin_uefi_capsule_splash=3Ddisabled,-Dplugin_uefi_capsule=3Ddisabled,=
+efivar fwupd-efi"
++PACKAGECONFIG[plugin_uefi_capsule] =3D "-Dplugin_uefi_capsule=3Denabled =
+-Dplugin_uefi_capsule_splash=3Dfalse,-Dplugin_uefi_capsule=3Ddisabled,efi=
+var fwupd-efi"
+ PACKAGECONFIG[plugin_uefi_pk] =3D "-Dplugin_uefi_pk=3Denabled,-Dplugin_u=
+efi_pk=3Ddisabled"
+ PACKAGECONFIG[plugin_uf2] =3D "-Dplugin_uf2=3Denabled,-Dplugin_uf2=3Ddis=
+abled"
+ PACKAGECONFIG[plugin_upower] =3D "-Dplugin_upower=3Denabled,-Dplugin_upo=
+wer=3Ddisabled"
+--=20
+2.44.1
 
 
