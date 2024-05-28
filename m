@@ -2,103 +2,104 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A44D0C25B7C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A445AC25B74
 	for <webhook@archiver.kernel.org>; Tue, 28 May 2024 01:48:58 +0000 (UTC)
-Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
- by mx.groups.io with SMTP id smtpd.web11.12839.1716860928144359796
+Received: from esa2.hc1455-7.c3s2.iphmx.com (esa2.hc1455-7.c3s2.iphmx.com [207.54.90.48])
+ by mx.groups.io with SMTP id smtpd.web10.12674.1716860935808592565
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 May 2024 18:48:48 -0700
+ Mon, 27 May 2024 18:48:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=K6MMhbTA;
- spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=VLWp90Cl;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.48, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1716860928; x=1748396928;
-  h=from:to:cc:subject:date:message-id;
-  bh=IGTvyCLhZyFnZbTbqHgZJ6FwzJR0EwmBPDdyytqbDXA=;
-  b=K6MMhbTAo4GV5eMGcrGlXs7t0OQGA569mZb9pvjl1fKH6C7TTDqAE6e0
-   DHN7592iPhfgyGpw0s3ZLLN6nzPhSuWVZd/NLasKL7qVjTWyFNUiGJUHC
-   qDCxbUDTv5oRqtcbXsWhs5Up9rzEiQly/RvnAs13PWYQjOyjFiXdlgNY6
-   2wFjZAJOO3wJfkxNkKd+ubLEPXmMAjsARZ1hzvsalc0/2B/xQXoj9/H6o
-   aLW4TDZFRd9d1k+BIiRJhvg2xXsQ00GM9irG/jIt5Rzi/YiB6GmFYysMs
-   pWGyh3N31MSUHxJquNFUSdPdGdXZXdbeuEVse+qBdjx84JxeINLaC0Ec3
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,11085"; a="162370433"
+  t=1716860937; x=1748396937;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references;
+  bh=nIOpMUOy2p6P5g09tPXT0pqohNb3yBbpAPgd+HtxHA8=;
+  b=VLWp90ClNDP2iA6rLo0M5cCLpFoX5dP+KfRqrtaY3G4srjYRTRqV7y/g
+   nVQ5288VNkv0hmfspc2VIUADhIIrhaTwaYWuj0fHfy5xmrHcRH8bfq1gG
+   ECQLL1ck+YzJ1/fjknu0Zg6WevYkqBuqXolphCQ1uUjxsBYQKRWaOUXzB
+   EDyJG4Q9+FiVfTbAI8bxNVemdQPG84fQNJ5z7siXppYbKn8Lj0yvE+/7s
+   KgmpEiviB4mSlEgZ1aS3PYXkGGTEca/TZ/Mz87/++EiVmpTs8k8Kzet36
+   Ue/5kkr+zeK5BOYxApgIGfUXvADc++FqTuno0eHSXb6CBeCzZKXtpgW4d
+   w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,11085"; a="160573415"
 X-IronPort-AV: E=Sophos;i="6.08,194,1712588400"; 
-   d="scan'208";a="162370433"
-Received: from unknown (HELO yto-r2.gw.nic.fujitsu.com) ([218.44.52.218])
-  by esa6.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 May 2024 10:48:45 +0900
+   d="scan'208";a="160573415"
+Received: from unknown (HELO yto-r4.gw.nic.fujitsu.com) ([218.44.52.220])
+  by esa2.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 May 2024 10:48:54 +0900
 Received: from yto-m4.gw.nic.fujitsu.com (yto-nat-yto-m4.gw.nic.fujitsu.com [192.168.83.67])
-	by yto-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 8B686C68E9
-	for <openembedded-devel@lists.openembedded.org>; Tue, 28 May 2024 10:48:43 +0900 (JST)
-Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
-	by yto-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id BAB4ED7B6D
-	for <openembedded-devel@lists.openembedded.org>; Tue, 28 May 2024 10:48:42 +0900 (JST)
+	by yto-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 0C0CED3EA3
+	for <openembedded-devel@lists.openembedded.org>; Tue, 28 May 2024 10:48:51 +0900 (JST)
+Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
+	by yto-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 451F4D7B6C
+	for <openembedded-devel@lists.openembedded.org>; Tue, 28 May 2024 10:48:50 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 271F241063
-	for <openembedded-devel@lists.openembedded.org>; Tue, 28 May 2024 10:48:42 +0900 (JST)
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id C40242008BCCC
+	for <openembedded-devel@lists.openembedded.org>; Tue, 28 May 2024 10:48:49 +0900 (JST)
 Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id C2F071A000A;
-	Tue, 28 May 2024 09:48:41 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 71F761A000A;
+	Tue, 28 May 2024 09:48:49 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-networking] [PATCH 01/40] arno-iptables-firewall: upgrade 2.1.1 -> 2.1.2
-Date: Tue, 28 May 2024 09:47:42 +0800
-Message-Id: <1716860901-863-1-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 02/40] cjson: upgrade 1.7.17 -> 1.7.18
+Date: Tue, 28 May 2024 09:47:43 +0800
+Message-Id: <1716860901-863-2-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1716860901-863-1-git-send-email-wangmy@fujitsu.com>
+References: <1716860901-863-1-git-send-email-wangmy@fujitsu.com>
 X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28414.004
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28414.004
-X-TMASE-Result: 10--4.547800-10.000000
-X-TMASE-MatchedRID: 51ABSdwnBXSjz0nOeth/yUIIxwDaU5mrKcDLnhS00Sv+Aw16GgqpOxej
-	jpE4hp171ZJ1UkQkpjoa5XBBN5aBAW94Ipa1otxoUu+cAEmvA8fVy4hHC3/gyLKw8Hx0EGitcqf
-	oMGP+CwQi+t+0AiFaYgB/8cibO8IYFS1+qCxplos5ZRbFNAl0j4hIo00fWURJxKLCLOyCW5DW9n
-	uzdghUMjeWrdgSBjomYWn2p9yKOL2R9GF2J2xqMxRFJJyf5BJeAaUQk5EZOUn6C0ePs7A07Z5Vb
-	9l0vnaPvsctELGQ9V3d7Tdkk1NJF8xMogikx729pQMwi+0RaKUoHz+iyMI8zYBvCWr4vRLipZRQ
-	G8OLzPustT/ZLfXNUuiICF7Vusfq8gwWDQic4+rPmACeZqO85TioKJ2WPUxTLS4AEOLjtwA=
+X-TMASE-Result: 10--0.165500-10.000000
+X-TMASE-MatchedRID: 51ABSdwnBXSjz0nOeth/yUIIxwDaU5mrF4r8H5YrEqw1L0DdfW644E8J
+	U10YmY3Bp7V+pIANDRpO+o7Dw7WB4dS9oJl2R9IciV0ptmwZhq2R3FxNiThSbeX3QlUHePIKu+l
+	p6DMJ7P6N/ziTW5bneOpe9co8GDkGbRev5+PfDD9O5y1KmK5bJTZlY6a4lRLZYA3qL69rXq6RY0
+	JyfRdA4jhvgt8hlMsuLWHV5Rz6nryR9GF2J2xqMxRFJJyf5BJeZVXUb4KTaXv6C0ePs7A07X1Hh
+	KzShSYnP/BCJ6Ic5nHXLMpmYUfxxPdkOy23QAIw6BQ1quwCaCRj/cXrgwb0UFYukEVEVimYipu1
+	pBEfdsWfJ7mBpeW4NKWABUtrVACt8gwWDQic4+rPmACeZqO85TioKJ2WPUxTLS4AEOLjtwA=
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 28 May 2024 01:48:58 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110536
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110537
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
 ============
-* Enable IPv6 name record lookups for dig-wrapper. This indirectly enables
-  IPv6/AAAA-record support for dyndns-host-open (& traffic-accounting) plugin
-! Prevent systemd from terminating the job manager when some rules fail
-* Renamed xxx_OUTPUT to INET_OUTPUT_xxx for clarity/consistency
-+ Additional INET_OUTPUT_xxx settings to have better control
-  of internet access on this machine
-* Reorder some code/settings for clarity/consistency
+* Add NULL check to cJSON_SetValuestring()(CVE-2024-31755)
+* Remove non-functional list handling of compiler flags
+* Fix heap buffer overflow
+* remove misused optimization flag -01
+* Set free'd pointers to NULL whenever they are not reassigned immediately after
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...tables-firewall_2.1.1.bb => arno-iptables-firewall_2.1.2.bb} | 2 +-
+ .../recipes-devtools/cjson/{cjson_1.7.17.bb => cjson_1.7.18.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-filter/arno-iptables-firewall/{arno-iptables-firewall_2.1.1.bb => arno-iptables-firewall_2.1.2.bb} (97%)
+ rename meta-oe/recipes-devtools/cjson/{cjson_1.7.17.bb => cjson_1.7.18.bb} (96%)
 
-diff --git a/meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.1.1.bb b/meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.1.2.bb
-similarity index 97%
-rename from meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.1.1.bb
-rename to meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.1.2.bb
-index e124fd290..940454c3a 100644
---- a/meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.1.1.bb
-+++ b/meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.1.2.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "http://rocky.eld.leidenuniv.nl/joomla/index.php?option=com_content&v
- LICENSE = "GPL-2.0-only"
- LIC_FILES_CHKSUM = "file://gpl_license.txt;md5=11c7b65c4a4acb9d5175f7e9bf99c403"
- 
--SRCREV = "a96b81da4a9b619e4045805f5f13a1e982c95663"
-+SRCREV = "c8dfd85b9e8e453e279525f30c1e3184c092f036"
- SRC_URI = "git://github.com/arno-iptables-firewall/aif;branch=master;protocol=https"
+diff --git a/meta-oe/recipes-devtools/cjson/cjson_1.7.17.bb b/meta-oe/recipes-devtools/cjson/cjson_1.7.18.bb
+similarity index 96%
+rename from meta-oe/recipes-devtools/cjson/cjson_1.7.17.bb
+rename to meta-oe/recipes-devtools/cjson/cjson_1.7.18.bb
+index 6c8934b34..5e992845a 100644
+--- a/meta-oe/recipes-devtools/cjson/cjson_1.7.17.bb
++++ b/meta-oe/recipes-devtools/cjson/cjson_1.7.18.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=218947f77e8cb8e2fa02918dc41c50d0"
+ SRC_URI = "git://github.com/DaveGamble/cJSON.git;branch=master;protocol=https \
+            file://run-ptest \
+          "
+-SRCREV = "87d8f0961a01bf09bef98ff89bae9fdec42181ee"
++SRCREV = "acc76239bee01d8e9c858ae2cab296704e52d916"
  
  S = "${WORKDIR}/git"
+ 
 -- 
 2.34.1
 
