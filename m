@@ -1,93 +1,134 @@
-Return-Path: <alexandre.truong@smile.fr>
+Return-Path: <dbaryshkov@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 782EAC25B78
-	for <webhook@archiver.kernel.org>; Tue, 28 May 2024 15:59:13 +0000 (UTC)
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
- by mx.groups.io with SMTP id smtpd.web10.25962.1716911948521510237
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 834EDC25B78
+	for <webhook@archiver.kernel.org>; Tue, 28 May 2024 16:08:03 +0000 (UTC)
+Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com [209.85.208.48])
+ by mx.groups.io with SMTP id smtpd.web11.26447.1716912482649174159
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 28 May 2024 08:59:09 -0700
+ Tue, 28 May 2024 09:08:02 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@smile.fr header.s=google header.b=sR/t3M8h;
- spf=pass (domain: smile.fr, ip: 209.85.221.46, mailfrom: alexandre.truong@smile.fr)
-Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-354f51ac110so964192f8f.0
-        for <openembedded-devel@lists.openembedded.org>; Tue, 28 May 2024 08:59:08 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=c3npmnKY;
+ spf=pass (domain: gmail.com, ip: 209.85.208.48, mailfrom: dbaryshkov@gmail.com)
+Received: by mail-ed1-f48.google.com with SMTP id 4fb4d7f45d1cf-578972defb3so1246604a12.2
+        for <openembedded-devel@lists.openembedded.org>; Tue, 28 May 2024 09:08:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=smile.fr; s=google; t=1716911947; x=1717516747; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=8n2aG2a7jP9KYMdJ/eDeN6/gHbLEP07TbPdcVwueCxA=;
-        b=sR/t3M8hr26myTtpVr8wD/AroqnmCIJ9vN+VKj0LUWAU65jJWuR1lf8udb/a4EsM3E
-         rQJg8RR6Gq97xtF/EHoZ9ApS+m/UHPgrzU0oGaYLcRJwIxySE8Qkq1SpeDqmwG3it4AC
-         /Od8FCr8fS91LeCpZWUeLG1aYkLCg43i2YmMY=
+        d=gmail.com; s=20230601; t=1716912481; x=1717517281; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=O2JZOxkwz6WajyoitK15X+Qz8rhsbF9Me2KYF2aurjQ=;
+        b=c3npmnKYL7r989nVDVYyPxuTAPfxy/5Mf2kcruYrVlh1/uT99ZfaksIdekdeg/U5L7
+         SHhKT+2U5SB2PdlMOA9wZrnqU9P35dMR6JCljMnuzcH69Y5Hryy5Z++QFaUPjoBzwP12
+         +VFnfLk9JHumNlbmWa+WF46xvNY37wq3adFeqRJO98zHKc274e8kJxE6sfwbLCQJPnCB
+         EJt9inPGvvOAetOLsJB11WNO17iWF4WgBHIjCiCovcu3DuANAn/RTJ64E83kubxUdKIP
+         1Dyp7yc/0nfZchBlBrl217e95w5w+EviWIV5TgSiYohspJKpv9vddPJyg9l9+c4GIBuU
+         QQIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1716911947; x=1717516747;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=8n2aG2a7jP9KYMdJ/eDeN6/gHbLEP07TbPdcVwueCxA=;
-        b=Da/kkG1/Ol9EFolLrE1l10bDyGRtCEE/2j6t/J7tFzttlHORrP9nT5v4CuZEtqBPKI
-         MM+ZB5f3pXCj4rjmeFfy00qLdIYKyNOvc/kX3VW6FdJpFqt6H7Eo1cIR0p5O205gR0GN
-         E3P4Rf1y+f26SZwFLYXbJpDKINXcNCNfJeyXRaXQOeJcwbVTYBBtZWTXqHRxC9Irxu+a
-         IA6yxPaYoV36eJFhn/2AIFv0XPkvBgWEFUhFYMEhdu4fh5mvDP2shVmRidp1wjP4rLco
-         ltBdizNy0x4PgV7a/TzXoeOEwjl0Qv1kNa8Vj7dWFubH2BCZrnH2rxDBeMfBDEIqTKzT
-         lORg==
-X-Gm-Message-State: AOJu0YzszoBo59DnBlMWASpalwp0UOLr7fEAgXYqBB8rTeb1wDqRn9Xf
-	lDs45scIRE8s8zVZn7osgpgmHlNqcGws5HymKL3N0HvTDEu0YfmrQ9yetkveBhTPvncV/C4n574
-	n
-X-Google-Smtp-Source: AGHT+IFG7KgVQnGAbwMB3i7/A+nLGIDHdUk8cOm2so2kKiPvoqGW/wfgwp0ELw/guhx4gxR/rM5GaA==
-X-Received: by 2002:adf:fe91:0:b0:355:2cc:2f3a with SMTP id ffacd0b85a97d-3552f4fd766mr10297712f8f.18.1716911946867;
-        Tue, 28 May 2024 08:59:06 -0700 (PDT)
-Received: from P-ASN-MOON.idf.intranet (static-css-ccs-204145.business.bouyguestelecom.com. [176.157.204.145])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-35579d7de62sm12136753f8f.6.2024.05.28.08.59.06
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 28 May 2024 08:59:06 -0700 (PDT)
-From: Alexandre Truong <alexandre.truong@smile.fr>
-To: openembedded-devel@lists.openembedded.org
-Cc: Alexandre Truong <alexandre.truong@smile.fr>,
-	Yoann Congal <yoann.congal@smile.fr>
-Subject: [meta-oe][PATCH] iniparser: use SHA hash for srcrev
-Date: Tue, 28 May 2024 17:58:53 +0200
-Message-Id: <20240528155853.1121622-1-alexandre.truong@smile.fr>
-X-Mailer: git-send-email 2.34.1
+        d=1e100.net; s=20230601; t=1716912481; x=1717517281;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=O2JZOxkwz6WajyoitK15X+Qz8rhsbF9Me2KYF2aurjQ=;
+        b=Myhz3uByCSLUQlSJ9MXgrSkUSL63kDHjehyV3P1fgKZoQLJHEMDtlqrm+NT3VGplkY
+         bU6Yfzi8mpc+o1RyCydVo7Yurtm+q54JWdCVv38eLmJLW/SbeJX8PsSSAu1plXSTEVpH
+         yF8/1OfKXDYVAYb3cXdBxmRgB7BVM0qI+aD4JYCzvRjye6iWTpH373ZzEt6Hphj/nIE9
+         oqfrHdTNQPEMoDQ57iyFPTRbTUkUXgNnWLDqbvnFCSHFwEq+sZAp0nh2V67Oim6OrD1C
+         j8jsFoh6iJpF/RuTo+ctmMRPYiukxTCx2HAiWswU74Z5WHSymeCYFWdpG1fl4v0KWxm3
+         p5gQ==
+X-Gm-Message-State: AOJu0YyyfBymShuB06c9NaCGQ55gt1W+RnFdR85Y7P9oWRvulQQpslsI
+	9M4oNCTR3j6Uomt7bDDGxFdUn43pHek+dHx8vrRm4aMuyU1y9+w8dAc2qtXKi1XgBp0njgO+lHH
+	frhbKDQhqO6ySzeBXYq19C8EBkac=
+X-Google-Smtp-Source: AGHT+IE4gJi5PcUkQu9qZFac9RbqBrddJJt7MDUTdjlqQumZCIwvMvz/yui78cbkhf0SgWJ7tLaQTnoAfynlea48REk=
+X-Received: by 2002:a17:906:3881:b0:a59:a078:9e41 with SMTP id
+ a640c23a62f3a-a62645d6362mr801647066b.45.1716912480586; Tue, 28 May 2024
+ 09:08:00 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240528091459.3885623-1-dmitry.baryshkov@linaro.org> <CAMKF1sqd_8++4Z6orBcD8-jJ+72=WyOJ0kJ5typvXcoeSoGyYQ@mail.gmail.com>
+In-Reply-To: <CAMKF1sqd_8++4Z6orBcD8-jJ+72=WyOJ0kJ5typvXcoeSoGyYQ@mail.gmail.com>
+From: Dmitry Baryshkov <dbaryshkov@gmail.com>
+Date: Tue, 28 May 2024 19:07:49 +0300
+Message-ID: <CALT56yOEuj_CNLVd2RsL6fq4dMwjMsLxJSwb8kPsGvhK62G0-Q@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] android-tools-configfs: point S to UNPACKDIR
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 28 May 2024 15:59:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110593
+ <openembedded-devel@lists.openembedded.org>; Tue, 28 May 2024 16:08:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110594
 
-A tag was previously passed which needs a network access to identify the
-exact SRCREV (SHA1). This network access breaks mirror testing and is
-generaly not considered a good practice. See errors at [0].
-Thus, a full SHA hash is being passed. Please have a look at [1]
-for further information on the use of SRCREV.
+On Tue, 28 May 2024 at 18:42, Khem Raj <raj.khem@gmail.com> wrote:
+>
+> On Tue, May 28, 2024 at 2:15=E2=80=AFAM Dmitry Baryshkov via
+> lists.openembedded.org <dbaryshkov=3Dgmail.com@lists.openembedded.org>
+> wrote:
+> >
+> > android-tools-configfs doesn't have any checked out source files, which
+> > results in a warning regarding S not existing. Fix the warning by
+> > pointing S to UNPACKDIR.
+> >
+> > The warning text:
+> >
+> > WARNING: android-tools-conf-configfs-1.0-r0 do_unpack:
+> > android-tools-conf-configfs: the directory ${WORKDIR}/${BP} (<scrubbed>=
+)
+> > pointed to by the S variable doesn't exist - please set S within the
+> > recipe to point to where the source has been unpacked to
+> >
+> > Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+> > ---
+> >  .../android-tools/android-tools-conf-configfs_1.0.bb            | 2 ++
+> >  1 file changed, 2 insertions(+)
+> >
+> > diff --git a/meta-oe/recipes-devtools/android-tools/android-tools-conf-=
+configfs_1.0.bb b/meta-oe/recipes-devtools/android-tools/android-tools-conf=
+-configfs_1.0.bb
+> > index 430b53c4d0cf..b50437615ebf 100644
+> > --- a/meta-oe/recipes-devtools/android-tools/android-tools-conf-configf=
+s_1.0.bb
+> > +++ b/meta-oe/recipes-devtools/android-tools/android-tools-conf-configf=
+s_1.0.bb
+> > @@ -3,6 +3,8 @@ SECTION =3D "console/utils"
+> >  LICENSE =3D "MIT"
+> >  LIC_FILES_CHKSUM =3D "file://${COMMON_LICENSE_DIR}/MIT;md5=3D0835ade69=
+8e0bcf8506ecda2f7b4f302"
+> >
+> > +S =3D "${UNPACKDIR}"
+> > +
+>
+> perhaps follow the pattern we are using elsewhere
+>
+> S =3D "${WORKDIR}/sources"
+> UNPACKDIR =3D "${S}"
 
-[0]: https://autobuilder.yoctoproject.org/typhoon/#/builders/156/builds/374/steps/17/logs/stdio
-[1]: https://docs.yoctoproject.org/ref-manual/variables.html?#term-SRCREV
+Hmm. Why not.
 
-Signed-off-by: Alexandre Truong <alexandre.truong@smile.fr>
-Reviewed-by: Yoann Congal <yoann.congal@smile.fr>
----
- meta-oe/recipes-support/iniparser/iniparser_4.2.2.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> >  SRC_URI =3D " \
+> >      file://android-gadget-setup \
+> >      file://android-gadget-start \
+> > --
+> > 2.39.2
+> >
+> >
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> > Links: You receive all messages sent to this group.
+> > View/Reply Online (#110579): https://lists.openembedded.org/g/openembed=
+ded-devel/message/110579
+> > Mute This Topic: https://lists.openembedded.org/mt/106345437/1997914
+> > Group Owner: openembedded-devel+owner@lists.openembedded.org
+> > Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub =
+[raj.khem@gmail.com]
+> > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> >
 
-diff --git a/meta-oe/recipes-support/iniparser/iniparser_4.2.2.bb b/meta-oe/recipes-support/iniparser/iniparser_4.2.2.bb
-index 4a1c6db15..8c6c60a79 100644
---- a/meta-oe/recipes-support/iniparser/iniparser_4.2.2.bb
-+++ b/meta-oe/recipes-support/iniparser/iniparser_4.2.2.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "https://gitlab.com/iniparser/iniparser"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=8474d3b745f77e203f1fc82fb0bb7678"
- SRCBRANCH = "main"
--SRCREV = "v${PV}"
-+SRCREV = "762715ca6cdba9dcf31a5af9297b444f3b5b8c00"
- 
- SRC_URI = "git://gitlab.com/iniparser/iniparser.git;protocol=https;branch=${SRCBRANCH}"
- S = "${WORKDIR}/git"
--- 
-2.34.1
 
+
+--=20
+With best wishes
+Dmitry
 
