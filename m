@@ -2,51 +2,51 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9CC14C41513
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9CBE7C25B74
 	for <webhook@archiver.kernel.org>; Tue, 28 May 2024 01:49:38 +0000 (UTC)
-Received: from esa8.hc1455-7.c3s2.iphmx.com (esa8.hc1455-7.c3s2.iphmx.com [139.138.61.253])
- by mx.groups.io with SMTP id smtpd.web11.12852.1716860968821000879
+Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
+ by mx.groups.io with SMTP id smtpd.web10.12689.1716860973809280849
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 May 2024 18:49:29 -0700
+ Mon, 27 May 2024 18:49:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=QpLRuf09;
- spf=pass (domain: fujitsu.com, ip: 139.138.61.253, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=TT8p08F9;
+ spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1716860968; x=1748396968;
+  t=1716860973; x=1748396973;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=BBffySjlONusmtA/s0kVBpj1XoMcW6gm815KC5+Kzk8=;
-  b=QpLRuf09uNLFy4DgVMnX7LjM+0qxQrqmqoRpX8fCwYfZ0jRu4bfq1+11
-   qXC2wgFCdSZmls8O72rKSGoq8FFSUWmpXF55uvD8hBUR9m4o7BZulO3Vy
-   MPEWPiG3yp+NQsXO5SJHN3xUbhnRhmVNMUyNXRJvk4D5i19q3UZdv3BEn
-   whLLKeUcW8gcS926Lnz1w/Ux+OvBu7Gend3qLSYQZ9vle2xj2+/8LlWT6
-   9/JcYUJJ1jK9weMK9FNc2iZrzLpaiGCXubKr+t9YBIdbOTvYdgs/+Ck8z
-   fnLswOaiY2Uqv7215740aYiH23bXqTyv5qwmk3DDWJ4pVoVC9t7Ms3PBw
-   w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,11085"; a="148492624"
+  bh=neFcdPrv/I6hjf2rHq+XpixhezDR6W9ahsqbaA0bvMY=;
+  b=TT8p08F9cY9IyHCuYzdvGaYOAc+9bKtiFiHHThBH3pGX+XRwSO+SM902
+   i9NOQ75x9BWHpZe4Neq/H7PD3BUmY+ZdOEarnxMyq6lsCbZDE9UC+TUbY
+   hKriA1x1APWl1zPF3R2lqJ4/NmsbcF1ajeAlGjRhYS/EhIpVwxedcBt5T
+   L+ag3UANofvy9aZRN7WM+oV4xUeu5FnckCZ1Fy1EdQxouCbaJlPbJ8lWX
+   bYCFf9oWSO/SjipD/gIrE9sjDe3nYFYA8/wXzo6kJxhfPK9Ke3JlLyPwL
+   dO3VJJlWRhQoTK3T7LRerTN9ZpzzFu0bJQzz2lkNXzRPjSV/dYJpeEQRJ
+   Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,11085"; a="148784753"
 X-IronPort-AV: E=Sophos;i="6.08,194,1712588400"; 
-   d="scan'208";a="148492624"
+   d="scan'208";a="148784753"
 Received: from unknown (HELO oym-r2.gw.nic.fujitsu.com) ([210.162.30.90])
-  by esa8.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 May 2024 10:49:26 +0900
+  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 May 2024 10:49:31 +0900
 Received: from oym-m4.gw.nic.fujitsu.com (oym-nat-oym-m4.gw.nic.fujitsu.com [192.168.87.61])
-	by oym-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 7CD3AD424D
-	for <openembedded-devel@lists.openembedded.org>; Tue, 28 May 2024 10:49:24 +0900 (JST)
-Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by oym-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 77BEBD6308
-	for <openembedded-devel@lists.openembedded.org>; Tue, 28 May 2024 10:49:23 +0900 (JST)
+	by oym-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 3EDAED424F
+	for <openembedded-devel@lists.openembedded.org>; Tue, 28 May 2024 10:49:29 +0900 (JST)
+Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
+	by oym-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id 6A65C4D4F4
+	for <openembedded-devel@lists.openembedded.org>; Tue, 28 May 2024 10:49:28 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 026EB2007FADB
-	for <openembedded-devel@lists.openembedded.org>; Tue, 28 May 2024 10:49:23 +0900 (JST)
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id E851D41063
+	for <openembedded-devel@lists.openembedded.org>; Tue, 28 May 2024 10:49:27 +0900 (JST)
 Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id A0F8A1A000A;
-	Tue, 28 May 2024 09:49:22 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 968341A000A;
+	Tue, 28 May 2024 09:49:27 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-python] [PATCH 12/40] python3-annotated-types: upgrade 0.6.0 -> 0.7.0
-Date: Tue, 28 May 2024 09:47:53 +0800
-Message-Id: <1716860901-863-12-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-python] [PATCH 13/40] python3-astroid: upgrade 3.2.0 -> 3.2.2
+Date: Tue, 28 May 2024 09:47:54 +0800
+Message-Id: <1716860901-863-13-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1716860901-863-1-git-send-email-wangmy@fujitsu.com>
 References: <1716860901-863-1-git-send-email-wangmy@fujitsu.com>
@@ -54,55 +54,46 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28414.004
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28414.004
-X-TMASE-Result: 10--0.617900-10.000000
-X-TMASE-MatchedRID: R9NZgeCyXhKjz0nOeth/yUIIxwDaU5mrXs5nqGvDCfPozDhGeQC9EpZh
-	jmb07zEXn/EJVrBwPHwjunjFlOjV5/Bas+2FzMVN/HTKStsDGMJHNQ8CqEKO2MC5DTEMxpeQRBg
-	61kSK4DiBkESMI05d4iiOf1NDnCI+rWL/xQJnm46eAiCmPx4NwGmRqNBHmBveVDC1CbuJXmMqtq
-	5d3cxkNY68bpVbgWY5kN37rIZn+GWRby4x9UowTa/bLyPH2RFM6rUaBPfrDGhSY6SE5EtfkY0el
-	XlmxitvVcQSZGybnktRGX4zj9hXTZltc/b1pfHmU8mdcvbI1h2S6jzjuXTm0MTMzICazP4UehYt
-	aVdyxm8=
+X-TMASE-Result: 10-1.471100-10.000000
+X-TMASE-MatchedRID: 4E21WKQgrFSjz0nOeth/yUIIxwDaU5mrDcK8n+cR7XKU8ftiyKjZrdMj
+	jwb9QfV2CC8aAmGeO6lV00+whwxVQy/7QU2czuUN3IFFT9wqfr0QhNjZQYyI3Cl6ppmExqcYnpt
+	r8PnHpyni8zVgXoAltuJ5hXsnxp7jC24oEZ6SpSmcfuxsiY4QFDr0p3stvDTnijMVSMxqpEcI8p
+	W3dIynFfwGKCs+jpsSvHnKmDGlKzhUCbWmXYQnj9DL3A1Xqf0nPV8I6oxtsiS1lvBDdF8NO+x9n
+	1XpDqsJmC9SiJioatWbjnu8jwgbwH9jicWwFYB0PpCuffGH9zI=
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Tue, 28 May 2024 01:49:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110547
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110548
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
 Changelog:
-==========
-- Allow tzinfo objects for Timezone
-- add URLs to pyproject.toml
-- suggested fix on typo
-- Correct misstatement in README
-- Fix IsDigit -> IsDigits
-- Add Unit type
-- Improve handling of GroupedMetadata (First try)
-- Prepare for 0.7.0 release
+ Improve inference for generic classes using the PEP 695 syntax (Python 3.12).
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...nnotated-types_0.6.0.bb => python3-annotated-types_0.7.0.bb} | 2 +-
+ .../{python3-astroid_3.2.0.bb => python3-astroid_3.2.2.bb}      | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-annotated-types_0.6.0.bb => python3-annotated-types_0.7.0.bb} (79%)
+ rename meta-python/recipes-devtools/python/{python3-astroid_3.2.0.bb => python3-astroid_3.2.2.bb} (90%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-annotated-types_0.6.0.bb b/meta-python/recipes-devtools/python/python3-annotated-types_0.7.0.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python3-annotated-types_0.6.0.bb
-rename to meta-python/recipes-devtools/python/python3-annotated-types_0.7.0.bb
-index 79cbb66bc..53552d0b7 100644
---- a/meta-python/recipes-devtools/python/python3-annotated-types_0.6.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-annotated-types_0.7.0.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = ""
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=c6afb13fdc220497ee5cded1e717ed67"
+diff --git a/meta-python/recipes-devtools/python/python3-astroid_3.2.0.bb b/meta-python/recipes-devtools/python/python3-astroid_3.2.2.bb
+similarity index 90%
+rename from meta-python/recipes-devtools/python/python3-astroid_3.2.0.bb
+rename to meta-python/recipes-devtools/python/python3-astroid_3.2.2.bb
+index e97494fd9..d7e7f5698 100644
+--- a/meta-python/recipes-devtools/python/python3-astroid_3.2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-astroid_3.2.2.bb
+@@ -4,7 +4,7 @@ SECTION = "devel/python"
+ LICENSE = "LGPL-2.1-only"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a70cf540abf41acb644ac3b621b2fad1"
  
--SRC_URI[sha256sum] = "563339e807e53ffd9c267e99fc6d9ea23eb8443c08f112651963e24e22f84a5d"
-+SRC_URI[sha256sum] = "aff07c09a53a08bc8cfccb9c85b05f1aa9a2a6f23728d790723543408344ce89"
+-SRC_URI[sha256sum] = "f7f829f8506ade59f1b3c6c93d8fac5b1ebc721685fa9af23e9794daf1d450a3"
++SRC_URI[sha256sum] = "8ead48e31b92b2e217b6c9733a21afafe479d52d6e164dd25fb1a770c7c3cf94"
  
- S = "${WORKDIR}/annotated_types-${PV}"
- PYPI_PACKAGE = "annotated_types"
+ inherit pypi python_setuptools_build_meta
+ 
 -- 
 2.34.1
 
