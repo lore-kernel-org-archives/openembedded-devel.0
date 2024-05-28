@@ -1,269 +1,122 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 48FACC25B7C
-	for <webhook@archiver.kernel.org>; Tue, 28 May 2024 11:54:42 +0000 (UTC)
-Received: from mailout02.t-online.de (mailout02.t-online.de [194.25.134.17])
- by mx.groups.io with SMTP id smtpd.web11.20351.1716897274679566285
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 61D81C25B78
+	for <webhook@archiver.kernel.org>; Tue, 28 May 2024 15:42:33 +0000 (UTC)
+Received: from mail-ot1-f46.google.com (mail-ot1-f46.google.com [209.85.210.46])
+ by mx.groups.io with SMTP id smtpd.web10.25555.1716910950827601299
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 28 May 2024 04:54:35 -0700
+ Tue, 28 May 2024 08:42:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.17, mailfrom: f_l_k@t-online.de)
-Received: from fwd77.aul.t-online.de (fwd77.aul.t-online.de [10.223.144.103])
-	by mailout02.t-online.de (Postfix) with SMTP id 7581626083;
-	Tue, 28 May 2024 13:54:23 +0200 (CEST)
-Received: from [192.168.178.67] ([84.163.40.240]) by fwd77.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1sBvPL-2AIjxo0; Tue, 28 May 2024 13:54:23 +0200
-Date: Tue, 28 May 2024 13:54:59 +0200
-From: Markus Volk <f_l_k@t-online.de>
-Subject: Re: [oe] [meta-gnome][PATCHv2] gnome-remote-desktop: update 46.1 ->
- 46.2
-To: openembedded-devel@lists.openembedded.org, Khem Raj <raj.khem@gmail.com>
-Message-Id: <NF27ES.VN54M0OVYXAJ3@t-online.de>
-In-Reply-To: <17D3A4E1A62AAF09.7888@lists.openembedded.org>
-References: <17D3A4E1A62AAF09.7888@lists.openembedded.org>
-X-Mailer: geary/44.1
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=IgHQxCal;
+ spf=pass (domain: gmail.com, ip: 209.85.210.46, mailfrom: raj.khem@gmail.com)
+Received: by mail-ot1-f46.google.com with SMTP id 46e09a7af769-6f264d5dadaso556870a34.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 28 May 2024 08:42:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1716910950; x=1717515750; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ZG5+P++eRC4u8jzRYV50hIwY84DDhrw3PFWFLXbIzyc=;
+        b=IgHQxCalUvsHHVRco4xRH6hJHysOba9cAahCkKmI8NiEDvzylYWro1PC+TjnOdHY6G
+         L7hywUbs/naMQTI5MtVLEEJEwkZI3Yn8t/ElYsLrCTXFxx6wW358FxixzOF7raxHQD0a
+         KcuLoNI8eVSycRgxlUFEYKTTNUsK903SzSD0YOL59hIwqBoTTZwJDr7AYtvb7cC3mXVO
+         fvUwMpRCf2aYLY+I7AmOoG59rklb5MnefC8pY6hBYHT+NqjgxH3sKCf/Oo7F2m4fge5Y
+         YW9bHWagbesCq5symfmtjWHWtFdAQ7d6XIhWh3HRU/ClyaI6WYUUnktp1PDhyg6Xlsr2
+         a3bA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1716910950; x=1717515750;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=ZG5+P++eRC4u8jzRYV50hIwY84DDhrw3PFWFLXbIzyc=;
+        b=EUZ6mEB1qC7tIZLJkNXvxqZYGUlvnGlMN9DaHDVOEIVaP/uL6de4M6avu5jSlMSlYs
+         LcxEQ9wIi3sGZ4QMo2YGX2QTPG657ALGRSWaVoZuxjGFv4cCiR8NZnPh093ssY1snVr2
+         76uqUHADTQRqJUKTNkhc8RYZ8YpvgTzwthCGiZCa1Ef2P7Sv/4YI6uXsKoXSVBMSZumb
+         PJ+yzhlE9BS31fmX2eRy8xB9AuIhL26z51TDuCkHeJVLMloL0DKRns7TVaN5uy6K3qFe
+         LW83h7z99edjwff0TY09iQWDKLoItA/js5O8lTPf9j3tX1nE6W5TCuKQ1ozIKCFyuP54
+         YmXQ==
+X-Gm-Message-State: AOJu0YzUC/kO3BcfMO4M551y5eDCMrTI2K7CLNXTeI/FfhAXsI54A3vx
+	BdIUOlmErt+9mL01KD2YwZv248oaeAL57zRSf4bCydge6ER5ki6iwvzEV6g1hGCmdzx6yxVrrCo
+	jgsuammZuQk8CE+JJmvButq3OMYw=
+X-Google-Smtp-Source: AGHT+IEW4bf+6c3GAltFdu8pxx+JHN7kQemo0Rdepli4ENxdgEUvJgVw+/cLmtboerR6NncDsAjHpwOJ5pvHidKpPmc=
+X-Received: by 2002:a05:6870:3927:b0:250:16f8:87b4 with SMTP id
+ 586e51a60fabf-25016f887fbmr3551482fac.15.1716910949805; Tue, 28 May 2024
+ 08:42:29 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/alternative; boundary="=-slH6iU27w5ZywKL5Lj+f"
-X-TOI-EXPURGATEID: 150726::1716897263-427FBD34-1A654871/0/0 CLEAN NORMAL
-X-TOI-MSGID: a0895ad1-886d-4073-a1e7-c07315746efa
+References: <20240528091459.3885623-1-dmitry.baryshkov@linaro.org>
+In-Reply-To: <20240528091459.3885623-1-dmitry.baryshkov@linaro.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 28 May 2024 08:42:02 -0700
+Message-ID: <CAMKF1sqd_8++4Z6orBcD8-jJ+72=WyOJ0kJ5typvXcoeSoGyYQ@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] android-tools-configfs: point S to UNPACKDIR
+To: dbaryshkov@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 28 May 2024 11:54:42 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110590
+ <openembedded-devel@lists.openembedded.org>; Tue, 28 May 2024 15:42:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110591
 
---=-slH6iU27w5ZywKL5Lj+f
-Content-Type: text/plain; charset=iso-8859-1; format=flowed
-Content-Transfer-Encoding: quoted-printable
-
-v2 fixes transaction test error because of wrong permissions of=20
-/usr/share/polkit-1/rules.d
-
-On Tue, May 28 2024 at 01:53:26 PM +02:00:00, Markus Volk=20
-<f_l_k@t-online.de> wrote:
-> 46.2
-> =3D=3D=3D=3D
-> * Potential crasher fix
-> * Improved disconnection messages
-> * Broader client compatibility support
-> * Various security hardening improvements
-> * CVE-2024-5148 Limit login screen->user session handover access to=20
-> appropriate user
->=20
-> Contributors:
->  Pascal Nowack, Ray Strode
->=20
-> Translators:
->   Bal=E1zs =DAr [hu], Efstathios Iosifidis [el], Fabio Tomat [fur],
->   Hugo Carvalho [pt], Jordi Mas i Hernandez [ca],
->   Juliano de Souza Camargo [pt_BR]
->=20
-> - add polkitd user and fix permissions to avoid:
-> Error: Transaction test error:
->   file /usr/share/polkit-1/rules.d conflicts between attempted=20
-> installs of gnome-remote-desktop-46.2-r0.corei7_64 and=20
-> gnome-control-center-46.2-r0.corei7_64
->=20
-> Signed-off-by: Markus Volk <f_l_k@t-online.de=20
-> <mailto:f_l_k@t-online.de>>
+On Tue, May 28, 2024 at 2:15=E2=80=AFAM Dmitry Baryshkov via
+lists.openembedded.org <dbaryshkov=3Dgmail.com@lists.openembedded.org>
+wrote:
+>
+> android-tools-configfs doesn't have any checked out source files, which
+> results in a warning regarding S not existing. Fix the warning by
+> pointing S to UNPACKDIR.
+>
+> The warning text:
+>
+> WARNING: android-tools-conf-configfs-1.0-r0 do_unpack:
+> android-tools-conf-configfs: the directory ${WORKDIR}/${BP} (<scrubbed>)
+> pointed to by the S variable doesn't exist - please set S within the
+> recipe to point to where the source has been unpacked to
+>
+> Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
 > ---
->  ...ktop_46.1.bb =3D> gnome-remote-desktop_46.2.bb} | 16=20
-> +++++++++++++---
->  1 file changed, 13 insertions(+), 3 deletions(-)
->  rename=20
-> meta-gnome/dynamic-layers/meta-security/recipes-gnome/gnome-remote-deskto=
-p/{gnome-remote-desktop_46.1.bb=20
-> =3D> gnome-remote-desktop_46.2.bb} (64%)
->=20
-> diff --git=20
-> a/meta-gnome/dynamic-layers/meta-security/recipes-gnome/gnome-remote-desk=
-top/gnome-remote-desktop_46.1.bb=20
-> b/meta-gnome/dynamic-layers/meta-security/recipes-gnome/gnome-remote-desk=
-top/gnome-remote-desktop_46.2.bb
-> similarity index 64%
-> rename from=20
-> meta-gnome/dynamic-layers/meta-security/recipes-gnome/gnome-remote-deskto=
-p/gnome-remote-desktop_46.1.bb
-> rename to=20
-> meta-gnome/dynamic-layers/meta-security/recipes-gnome/gnome-remote-deskto=
-p/gnome-remote-desktop_46.2.bb
-> index 634b37971..59ae9383d 100644
-> ---=20
-> a/meta-gnome/dynamic-layers/meta-security/recipes-gnome/gnome-remote-desk=
-top/gnome-remote-desktop_46.1.bb
-> +++=20
-> b/meta-gnome/dynamic-layers/meta-security/recipes-gnome/gnome-remote-desk=
-top/gnome-remote-desktop_46.2.bb
-> @@ -4,11 +4,11 @@ LIC_FILES_CHKSUM =3D=20
-> "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4263"
->=20
->  GNOMEBASEBUILDCLASS =3D "meson"
->=20
-> -inherit gnomebase gettext gsettings features_check
-> +inherit gnomebase gettext gsettings features_check useradd
->=20
-> -REQUIRED_DISTRO_FEATURES =3D "opengl"
-> +REQUIRED_DISTRO_FEATURES =3D "opengl polkit"
->=20
-> -SRC_URI[archive.sha256sum] =3D=20
-> "7c62a4281fdfa9522110affbf75d09973035f2adc7fa4577511d733186beb68f"
-> +SRC_URI[archive.sha256sum] =3D=20
-> "97443eaffe4b1a69626886a41d25cbeb2c148d3fed43d92115c1b7d20d5238ab"
->=20
->  DEPENDS =3D " \
->      asciidoc-native \
-> @@ -36,5 +36,15 @@ PACKAGECONFIG[vnc] =3D=20
-> "-Dvnc=3Dtrue,-Dvnc=3Dfalse,libvncserver"
->  PACKAGECONFIG[rdp] =3D "-Drdp=3Dtrue,-Drdp=3Dfalse,freerdp3 fuse3=20
-> libxkbcommon"
->  PACKAGECONFIG[systemd] =3D "-Dsystemd=3Dtrue,-Dsystemd=3Dfalse,systemd"
->=20
-> +USERADD_PACKAGES =3D "${PN}"
-> +USERADD_PARAM:${PN} =3D "--system --no-create-home --user-group=20
-> --home-dir ${sysconfdir}/polkit-1 polkitd"
+>  .../android-tools/android-tools-conf-configfs_1.0.bb            | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/meta-oe/recipes-devtools/android-tools/android-tools-conf-co=
+nfigfs_1.0.bb b/meta-oe/recipes-devtools/android-tools/android-tools-conf-c=
+onfigfs_1.0.bb
+> index 430b53c4d0cf..b50437615ebf 100644
+> --- a/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs_=
+1.0.bb
+> +++ b/meta-oe/recipes-devtools/android-tools/android-tools-conf-configfs_=
+1.0.bb
+> @@ -3,6 +3,8 @@ SECTION =3D "console/utils"
+>  LICENSE =3D "MIT"
+>  LIC_FILES_CHKSUM =3D "file://${COMMON_LICENSE_DIR}/MIT;md5=3D0835ade698e=
+0bcf8506ecda2f7b4f302"
+>
+> +S =3D "${UNPACKDIR}"
 > +
-> +do_install:append() {
-> +    if [ -d ${D}${datadir}/polkit-1/rules.d ]; then
-> +        chmod 700 ${D}${datadir}/polkit-1/rules.d
-> +        chown polkitd:root ${D}${datadir}/polkit-1/rules.d
-> +    fi
-> +}
-> +
->  PACKAGE_DEBUG_SPLIT_STYLE =3D "debug-without-src"
->  FILES:${PN} +=3D "${systemd_user_unitdir} ${systemd_system_unitdir}=20
-> ${datadir} ${libdir}/sysusers.d ${libdir}/tmpfiles.d"
+
+perhaps follow the pattern we are using elsewhere
+
+S =3D "${WORKDIR}/sources"
+UNPACKDIR =3D "${S}"
+
+>  SRC_URI =3D " \
+>      file://android-gadget-setup \
+>      file://android-gadget-start \
 > --
-> 2.45.1
->=20
->=20
+> 2.39.2
+>
+>
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#110589):=20
-> <https://lists.openembedded.org/g/openembedded-devel/message/110589>
-> Mute This Topic: <https://lists.openembedded.org/mt/106346808/3618223>
-> Group Owner: openembedded-devel+owner@lists.openembedded.org=20
-> <mailto:openembedded-devel+owner@lists.openembedded.org>
-> Unsubscribe:=20
-> <https://lists.openembedded.org/g/openembedded-devel/unsub>=20
-> [f_l_k@t-online.de <mailto:f_l_k@t-online.de>]
+> View/Reply Online (#110579): https://lists.openembedded.org/g/openembedde=
+d-devel/message/110579
+> Mute This Topic: https://lists.openembedded.org/mt/106345437/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
 > -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->=20
-
-
---=-slH6iU27w5ZywKL5Lj+f
-Content-Type: text/html; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
-
-<div id=3D"geary-body" dir=3D"auto"><div>v2 fixes transaction test error be=
-cause of wrong permissions of /usr/share/polkit-1/rules.d</div></div><div i=
-d=3D"geary-quote" dir=3D"auto"><br>On Tue, May 28 2024 at 01:53:26 PM +02:0=
-0:00, Markus Volk &lt;f_l_k@t-online.de&gt; wrote:<br><blockquote type=3D"c=
-ite"><div class=3D"plaintext" style=3D"white-space: break-spaces;">46.2
-=3D=3D=3D=3D
-* Potential crasher fix
-* Improved disconnection messages
-* Broader client compatibility support
-* Various security hardening improvements
-* CVE-2024-5148 Limit login screen-&gt;user session handover access to appr=
-opriate user
-
-Contributors:
- Pascal Nowack, Ray Strode
-
-Translators:
-  Bal=E1zs =DAr [hu], Efstathios Iosifidis [el], Fabio Tomat [fur],
-  Hugo Carvalho [pt], Jordi Mas i Hernandez [ca],
-  Juliano de Souza Camargo [pt_BR]
-
-- add polkitd user and fix permissions to avoid:
-Error: Transaction test error:
-  file /usr/share/polkit-1/rules.d conflicts between attempted installs of =
-gnome-remote-desktop-46.2-r0.corei7_64 and gnome-control-center-46.2-r0.cor=
-ei7_64
-
-Signed-off-by: Markus Volk &lt;<a href=3D"mailto:f_l_k@t-online.de">f_l_k@t=
--online.de</a>&gt;
----
- ...ktop_46.1.bb =3D&gt; gnome-remote-desktop_46.2.bb} | 16 +++++++++++++--=
--
- 1 file changed, 13 insertions(+), 3 deletions(-)
- rename meta-gnome/dynamic-layers/meta-security/recipes-gnome/gnome-remote-=
-desktop/{gnome-remote-desktop_46.1.bb =3D&gt; gnome-remote-desktop_46.2.bb}=
- (64%)
-
-diff --git a/meta-gnome/dynamic-layers/meta-security/recipes-gnome/gnome-re=
-mote-desktop/gnome-remote-desktop_46.1.bb b/meta-gnome/dynamic-layers/meta-=
-security/recipes-gnome/gnome-remote-desktop/gnome-remote-desktop_46.2.bb
-similarity index 64%
-rename from meta-gnome/dynamic-layers/meta-security/recipes-gnome/gnome-rem=
-ote-desktop/gnome-remote-desktop_46.1.bb
-rename to meta-gnome/dynamic-layers/meta-security/recipes-gnome/gnome-remot=
-e-desktop/gnome-remote-desktop_46.2.bb
-index 634b37971..59ae9383d 100644
---- a/meta-gnome/dynamic-layers/meta-security/recipes-gnome/gnome-remote-de=
-sktop/gnome-remote-desktop_46.1.bb
-+++ b/meta-gnome/dynamic-layers/meta-security/recipes-gnome/gnome-remote-de=
-sktop/gnome-remote-desktop_46.2.bb
-@@ -4,11 +4,11 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fc=
-e4486a80fdaf4a4263"
-=20
- GNOMEBASEBUILDCLASS =3D "meson"
-=20
--inherit gnomebase gettext gsettings features_check
-+inherit gnomebase gettext gsettings features_check useradd
-=20
--REQUIRED_DISTRO_FEATURES =3D "opengl"
-+REQUIRED_DISTRO_FEATURES =3D "opengl polkit"
-=20
--SRC_URI[archive.sha256sum] =3D "7c62a4281fdfa9522110affbf75d09973035f2adc7=
-fa4577511d733186beb68f"
-+SRC_URI[archive.sha256sum] =3D "97443eaffe4b1a69626886a41d25cbeb2c148d3fed=
-43d92115c1b7d20d5238ab"
-=20
- DEPENDS =3D " \
-     asciidoc-native \
-@@ -36,5 +36,15 @@ PACKAGECONFIG[vnc] =3D "-Dvnc=3Dtrue,-Dvnc=3Dfalse,libvn=
-cserver"
- PACKAGECONFIG[rdp] =3D "-Drdp=3Dtrue,-Drdp=3Dfalse,freerdp3 fuse3 libxkbco=
-mmon"
- PACKAGECONFIG[systemd] =3D "-Dsystemd=3Dtrue,-Dsystemd=3Dfalse,systemd"
-=20
-+USERADD_PACKAGES =3D "${PN}"
-+USERADD_PARAM:${PN} =3D "--system --no-create-home --user-group --home-dir=
- ${sysconfdir}/polkit-1 polkitd"
-+
-+do_install:append() {
-+    if [ -d ${D}${datadir}/polkit-1/rules.d ]; then
-+        chmod 700 ${D}${datadir}/polkit-1/rules.d
-+        chown polkitd:root ${D}${datadir}/polkit-1/rules.d
-+    fi
-+}
-+
- PACKAGE_DEBUG_SPLIT_STYLE =3D "debug-without-src"
- FILES:${PN} +=3D "${systemd_user_unitdir} ${systemd_system_unitdir} ${data=
-dir} ${libdir}/sysusers.d ${libdir}/tmpfiles.d"
-<div>--=20
-</div>2.45.1
-
-</div><div class=3D"plaintext" style=3D"white-space: break-spaces;">
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-Links: You receive all messages sent to this group.
-View/Reply Online (#110589): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/110589">https://lists.openembedded.org/g/openembed=
-ded-devel/message/110589</a>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/106346808/361=
-8223">https://lists.openembedded.org/mt/106346808/3618223</a>
-Group Owner: <a href=3D"mailto:openembedded-devel+owner@lists.openembedded.=
-org">openembedded-devel+owner@lists.openembedded.org</a>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub">https://lists.openembedded.org/g/openembedded-devel/unsub</a> [<a h=
-ref=3D"mailto:f_l_k@t-online.de">f_l_k@t-online.de</a>]
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-
-</div></blockquote></div>
---=-slH6iU27w5ZywKL5Lj+f--
-
+>
 
