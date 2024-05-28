@@ -1,68 +1,105 @@
-Return-Path: <f_l_k@t-online.de>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CF460C25B74
-	for <webhook@archiver.kernel.org>; Mon, 27 May 2024 12:23:12 +0000 (UTC)
-Received: from mailout05.t-online.de (mailout05.t-online.de [194.25.134.82])
- by mx.groups.io with SMTP id smtpd.web11.26233.1716812588805111194
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A44D0C25B7C
+	for <webhook@archiver.kernel.org>; Tue, 28 May 2024 01:48:58 +0000 (UTC)
+Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
+ by mx.groups.io with SMTP id smtpd.web11.12839.1716860928144359796
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 27 May 2024 05:23:09 -0700
+ Mon, 27 May 2024 18:48:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=pass (domain: t-online.de, ip: 194.25.134.82, mailfrom: f_l_k@t-online.de)
-Received: from fwd72.aul.t-online.de (fwd72.aul.t-online.de [10.223.144.98])
-	by mailout05.t-online.de (Postfix) with SMTP id 8593E4C3B
-	for <openembedded-devel@lists.openembedded.org>; Mon, 27 May 2024 14:23:06 +0200 (CEST)
-Received: from intel-corei7-64.fritz.box ([84.163.33.219]) by fwd72.t-online.de
-	with (TLSv1.3:TLS_AES_256_GCM_SHA384 encrypted)
-	esmtp id 1sBZNW-3HbL8r0; Mon, 27 May 2024 14:23:02 +0200
-From: Markus Volk <f_l_k@t-online.de>
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=K6MMhbTA;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1716860928; x=1748396928;
+  h=from:to:cc:subject:date:message-id;
+  bh=IGTvyCLhZyFnZbTbqHgZJ6FwzJR0EwmBPDdyytqbDXA=;
+  b=K6MMhbTAo4GV5eMGcrGlXs7t0OQGA569mZb9pvjl1fKH6C7TTDqAE6e0
+   DHN7592iPhfgyGpw0s3ZLLN6nzPhSuWVZd/NLasKL7qVjTWyFNUiGJUHC
+   qDCxbUDTv5oRqtcbXsWhs5Up9rzEiQly/RvnAs13PWYQjOyjFiXdlgNY6
+   2wFjZAJOO3wJfkxNkKd+ubLEPXmMAjsARZ1hzvsalc0/2B/xQXoj9/H6o
+   aLW4TDZFRd9d1k+BIiRJhvg2xXsQ00GM9irG/jIt5Rzi/YiB6GmFYysMs
+   pWGyh3N31MSUHxJquNFUSdPdGdXZXdbeuEVse+qBdjx84JxeINLaC0Ec3
+   Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,11085"; a="162370433"
+X-IronPort-AV: E=Sophos;i="6.08,194,1712588400"; 
+   d="scan'208";a="162370433"
+Received: from unknown (HELO yto-r2.gw.nic.fujitsu.com) ([218.44.52.218])
+  by esa6.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 May 2024 10:48:45 +0900
+Received: from yto-m4.gw.nic.fujitsu.com (yto-nat-yto-m4.gw.nic.fujitsu.com [192.168.83.67])
+	by yto-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id 8B686C68E9
+	for <openembedded-devel@lists.openembedded.org>; Tue, 28 May 2024 10:48:43 +0900 (JST)
+Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
+	by yto-m4.gw.nic.fujitsu.com (Postfix) with ESMTP id BAB4ED7B6D
+	for <openembedded-devel@lists.openembedded.org>; Tue, 28 May 2024 10:48:42 +0900 (JST)
+Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
+	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id 271F241063
+	for <openembedded-devel@lists.openembedded.org>; Tue, 28 May 2024 10:48:42 +0900 (JST)
+Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id C2F071A000A;
+	Tue, 28 May 2024 09:48:41 +0800 (CST)
+From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] unicode-ucd: fix UNPACKDIR conversion leftovers
-Date: Mon, 27 May 2024 14:23:37 +0200
-Message-ID: <20240527122337.959894-1-f_l_k@t-online.de>
-X-Mailer: git-send-email 2.44.0
-MIME-Version: 1.0
-X-TOI-EXPURGATEID: 150726::1716812582-C57F9D1D-598D4695/0/0 CLEAN NORMAL
-X-TOI-MSGID: 39cc5bfa-46d1-47ec-b3c1-dffba1a41f25
-Content-Transfer-Encoding: quoted-printable
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-networking] [PATCH 01/40] arno-iptables-firewall: upgrade 2.1.1 -> 2.1.2
+Date: Tue, 28 May 2024 09:47:42 +0800
+Message-Id: <1716860901-863-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28414.004
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28414.004
+X-TMASE-Result: 10--4.547800-10.000000
+X-TMASE-MatchedRID: 51ABSdwnBXSjz0nOeth/yUIIxwDaU5mrKcDLnhS00Sv+Aw16GgqpOxej
+	jpE4hp171ZJ1UkQkpjoa5XBBN5aBAW94Ipa1otxoUu+cAEmvA8fVy4hHC3/gyLKw8Hx0EGitcqf
+	oMGP+CwQi+t+0AiFaYgB/8cibO8IYFS1+qCxplos5ZRbFNAl0j4hIo00fWURJxKLCLOyCW5DW9n
+	uzdghUMjeWrdgSBjomYWn2p9yKOL2R9GF2J2xqMxRFJJyf5BJeAaUQk5EZOUn6C0ePs7A07Z5Vb
+	9l0vnaPvsctELGQ9V3d7Tdkk1NJF8xMogikx729pQMwi+0RaKUoHz+iyMI8zYBvCWr4vRLipZRQ
+	G8OLzPustT/ZLfXNUuiICF7Vusfq8gwWDQic4+rPmACeZqO85TioKJ2WPUxTLS4AEOLjtwA=
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 27 May 2024 12:23:12 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110535
+ <openembedded-devel@lists.openembedded.org>; Tue, 28 May 2024 01:48:58 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110536
 
-this avoids:
-WARNING: unicode-ucd-14.0.0-r0 do_unpack: unicode-ucd: the directory ${WO=
-RKDIR}/${BP}
-(/home/flk/poky/build-hypr/tmp/work/all-poky-linux/unicode-ucd/14.0.0/uni=
-code-ucd-14.0.0)
-pointed to by the S variable doesn't exist - please set S within the reci=
-pe to point to
-where the source has been unpacked to
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-Signed-off-by: Markus Volk <f_l_k@t-online.de>
+Changelog:
+============
+* Enable IPv6 name record lookups for dig-wrapper. This indirectly enables
+  IPv6/AAAA-record support for dyndns-host-open (& traffic-accounting) plugin
+! Prevent systemd from terminating the job manager when some rules fail
+* Renamed xxx_OUTPUT to INET_OUTPUT_xxx for clarity/consistency
++ Additional INET_OUTPUT_xxx settings to have better control
+  of internet access on this machine
+* Reorder some code/settings for clarity/consistency
+
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- meta-oe/recipes-support/unicode-ucd/unicode-ucd_14.0.0.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ ...tables-firewall_2.1.1.bb => arno-iptables-firewall_2.1.2.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-filter/arno-iptables-firewall/{arno-iptables-firewall_2.1.1.bb => arno-iptables-firewall_2.1.2.bb} (97%)
 
-diff --git a/meta-oe/recipes-support/unicode-ucd/unicode-ucd_14.0.0.bb b/=
-meta-oe/recipes-support/unicode-ucd/unicode-ucd_14.0.0.bb
-index 0c8a10e0e..026d4ffe0 100644
---- a/meta-oe/recipes-support/unicode-ucd/unicode-ucd_14.0.0.bb
-+++ b/meta-oe/recipes-support/unicode-ucd/unicode-ucd_14.0.0.bb
-@@ -12,6 +12,9 @@ SRC_URI[ucd-license.sha256sum] =3D "f7830d126f59d838425=
-65d3dddedc79db4ca978ed52aee
-=20
- inherit allarch
-=20
-+S =3D "${WORKDIR}/sources"
-+UNPACKDIR =3D "${S}"
-+
- do_configure[noexec] =3D "1"
-=20
- do_install() {
---=20
-2.44.0
+diff --git a/meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.1.1.bb b/meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.1.2.bb
+similarity index 97%
+rename from meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.1.1.bb
+rename to meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.1.2.bb
+index e124fd290..940454c3a 100644
+--- a/meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.1.1.bb
++++ b/meta-networking/recipes-filter/arno-iptables-firewall/arno-iptables-firewall_2.1.2.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "http://rocky.eld.leidenuniv.nl/joomla/index.php?option=com_content&v
+ LICENSE = "GPL-2.0-only"
+ LIC_FILES_CHKSUM = "file://gpl_license.txt;md5=11c7b65c4a4acb9d5175f7e9bf99c403"
+ 
+-SRCREV = "a96b81da4a9b619e4045805f5f13a1e982c95663"
++SRCREV = "c8dfd85b9e8e453e279525f30c1e3184c092f036"
+ SRC_URI = "git://github.com/arno-iptables-firewall/aif;branch=master;protocol=https"
+ 
+ S = "${WORKDIR}/git"
+-- 
+2.34.1
 
 
