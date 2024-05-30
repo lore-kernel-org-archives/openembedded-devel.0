@@ -2,110 +2,141 @@ Return-Path: <jan.vermaete@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 21C68C25B7E
-	for <webhook@archiver.kernel.org>; Thu, 30 May 2024 19:07:43 +0000 (UTC)
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
- by mx.groups.io with SMTP id smtpd.web11.94.1717096062180126832
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 147E4C25B7E
+	for <webhook@archiver.kernel.org>; Thu, 30 May 2024 19:13:33 +0000 (UTC)
+Received: from mail-yw1-f181.google.com (mail-yw1-f181.google.com [209.85.128.181])
+ by mx.groups.io with SMTP id smtpd.web10.262.1717096412676942950
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 May 2024 12:07:42 -0700
+ Thu, 30 May 2024 12:13:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=HqKMLVf5;
- spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: jan.vermaete@gmail.com)
-Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-35dd0c06577so97610f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 30 May 2024 12:07:41 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=SbQZHPD4;
+ spf=pass (domain: gmail.com, ip: 209.85.128.181, mailfrom: jan.vermaete@gmail.com)
+Received: by mail-yw1-f181.google.com with SMTP id 00721157ae682-62a2424ecdaso12785967b3.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 30 May 2024 12:13:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1717096060; x=1717700860; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=WVfSSaaisuE7E6MBVXMf+M/jNWNSIere3VzXZCvRGBA=;
-        b=HqKMLVf5emXtE9VtIP1DCLO1WFQm6A+QA+Ob9duyT+Y6mRU5gI5KA2PZtDk0STxiPo
-         1DCyxxspMc0QwALXhmaBs7/p8t1mjq2JWXo73MBFMlPrjDFGoZYpJAV5QN34ZgncQeld
-         PVY5Y3m0rXqXjXK5gX69jiWwPvEpdyUxgyNVXpNPoa5ntjnqjqHJtOyGcLYWXaDvcR+W
-         EJfFNbrtq3XVAwAjN6nGC3AYvrconpXtNgbt1mev2kVVAJxIZDq1amzDG11IFtdNE6ix
-         +WNvLrovu9naut6KiKQfE8q/e9/EodyIyVMMhQJIvlVAdqAALxEbiAZ7EViBcL/O+ua1
-         6n5g==
+        d=gmail.com; s=20230601; t=1717096412; x=1717701212; darn=lists.openembedded.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=5eslX9/iE2zzKDf12Qj6HjWypvvk2U9dpVuiZsqsnUM=;
+        b=SbQZHPD4l9aDR+RJDM+o//wwWQsnv6NOOKCLHerrMJXBJFYwdQfJL5mFDRTHj/9+cS
+         35d/f4b+NrIs0rGznT+JiV9oG5ZL0gtFQpOsAMtwlWhOUMFvnVyrESyO+IoMAWfdXZHy
+         tXd+ifvbqL2q3LBJuuZFHn8FBSDO75zi9iuFuA4Is3zTlPaeLPPprC7oO71c9seEuaNb
+         xuvylpW7QZlP0QLDbP19WRXOiiJScJW+eS85IV/NSyPWZ/dJnri4q5MnMCA/OcolW0tf
+         fOWwBlubJF+Bu6/LpDUR1y74WvB6TlxhC7Jwl+hD4KcduYpvK3VFd6eeLPl4yFkY5LFQ
+         aKOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1717096060; x=1717700860;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=WVfSSaaisuE7E6MBVXMf+M/jNWNSIere3VzXZCvRGBA=;
-        b=cNccnJISSE3aij1nAXPF/zo6lwDivXtgVjXDrV3aXtlX0RkfrEU3yttG7z8U6Ui1se
-         nEKetArO0hUjX9umvR1HXnX+nTfsbYjmWigmnBvgAWRPxRuJBGtMdMDiifwWz1bl1V3R
-         CY1pyLXch4Or53STppfZOfc+u3gQhR+TGOErnkqm5i2uGdkPQvuqx4kuSSmjWZsst1QX
-         VuGB1ZHFd2qFgEYhWFFKabsjoBlX0gDgdCw1j0Fte3zOLuHLcjCKFGrpM+CvK7Tfkvl6
-         YxAJ9aq1Gt+iHY/GoumWBtBKcxuctfkAuCysDzV+6N+w3BXkAQeo8oCdphI3RiFVM+iG
-         KaoQ==
-X-Gm-Message-State: AOJu0YwYrAoHw3nOubJW9tE8mvlUHQgZIyMLrvxOCZWtsjABvoAnmZPr
-	9NyBlTADuFLsS+aseQkQ3mavJxU5R5pUY6mJvK1xZGJM37EpMpN8k9EzHw==
-X-Google-Smtp-Source: AGHT+IFVklnm0gMmSlMuBtC5tfopXwjuK8nZ3SX+POxU5DH9poo5QF4lG3Jk3cj/9NL0YiknsaUW5Q==
-X-Received: by 2002:a5d:6888:0:b0:355:2ad:cca4 with SMTP id ffacd0b85a97d-35dc02b7b97mr2126617f8f.55.1717096060105;
-        Thu, 30 May 2024 12:07:40 -0700 (PDT)
-Received: from localhost.localdomain (ptr-fij45qxtdobqrxrcewr.18120a2.ip6.access.telenet.be. [2a02:1812:512:2c00:6021:e9a4:5aa0:257b])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-35dd04d9c89sm170275f8f.60.2024.05.30.12.07.39
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 30 May 2024 12:07:39 -0700 (PDT)
-From: Jan Vermaete <jan.vermaete@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Jan Vermaete <jan.vermaete@gmail.com>
-Subject: [meta-python][PATCH] python3-flask: add ptest
-Date: Thu, 30 May 2024 21:07:33 +0200
-Message-Id: <20240530190733.693155-1-jan.vermaete@gmail.com>
-X-Mailer: git-send-email 2.39.2
+        d=1e100.net; s=20230601; t=1717096412; x=1717701212;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=5eslX9/iE2zzKDf12Qj6HjWypvvk2U9dpVuiZsqsnUM=;
+        b=M3NhiFimO8dnxqo1orxeIY0iRPv7ey+NKG3ykwMto0ZnYmPzycYJj0EjPv8o98G4Ii
+         6jiNBLSd2tNe93VqcWwLqmaWyKsESlf8M0136s54ynxLXmCy9EO+/xBKIkUOUIdIxCSN
+         mqce/gVIRzfiJY0qjyZIxKZcm/JIuMGYfkOFp+ivl4Hp1fJVdg1PCHYbEKcoBZ3j+3Ha
+         HMvTXlyYvYTCsVtxfMjT4/wWadN9vThw3kVELKSrK3+9YnRK904vLppVjt1rGaMBOT+c
+         RzFEY9oyX63YYrPH75prtIBTSlDwKnLX4GprnJOxhcHW3F2t5PZRXdAVc5fzt9iBnnIg
+         4HJw==
+X-Gm-Message-State: AOJu0YxDOorw8PeMcjs8VcD8ELDyJMtnsuouRJ4ljcxS2kizSatzDSAU
+	FErvmFti4s9aJZQK88pHBkBcsH+aSXzPWvCWRWRR/IhNgxyRSu/rl4fmlZ1OIsGTdqfk5ELysgs
+	fzxfP/YKH3H6YbFEcsk6jUnqRmhk=
+X-Google-Smtp-Source: AGHT+IFOIXcYazmVJSNEVhYc11CymhcxHpUjZ1fIHcP9M0nlTS+85+uL7CtnEOeiQNRuAp4iMA4uBku3oOML/H61jSU=
+X-Received: by 2002:a0d:eb42:0:b0:61b:2b7:27d8 with SMTP id
+ 00721157ae682-62c6bc1495dmr32912087b3.23.1717096411506; Thu, 30 May 2024
+ 12:13:31 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <17D459C574195D27.22027@lists.openembedded.org>
+In-Reply-To: <17D459C574195D27.22027@lists.openembedded.org>
+From: jan vermaete <jan.vermaete@gmail.com>
+Date: Thu, 30 May 2024 21:13:20 +0200
+Message-ID: <CABF_=yh3jq-qrS_Z+SrQfxfQzZxTskpEM9D--YKhaKvGD+HK6Q@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH] python3-flask: add ptest
+To: jan.vermaete@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 30 May 2024 19:07:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110641
+ <openembedded-devel@lists.openembedded.org>; Thu, 30 May 2024 19:13:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110642
 
-Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
----
- .../recipes-devtools/python/python3-flask/run-ptest   |  3 +++
- .../recipes-devtools/python/python3-flask_3.0.2.bb    | 11 ++++++++++-
- 2 files changed, 13 insertions(+), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-flask/run-ptest
+Question: should I add to the list in
+conf/include/ptest-packagelists-meta-python.inc?  Or will the
+maintainer do this?
+It took about 60sec in qemu on a slow machine.
 
-diff --git a/meta-python/recipes-devtools/python/python3-flask/run-ptest b/meta-python/recipes-devtools/python/python3-flask/run-ptest
-new file mode 100644
-index 000000000..8d2017d39
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-flask/run-ptest
-@@ -0,0 +1,3 @@
-+#!/bin/sh
-+
-+pytest --automake
-diff --git a/meta-python/recipes-devtools/python/python3-flask_3.0.2.bb b/meta-python/recipes-devtools/python/python3-flask_3.0.2.bb
-index 300ca99dd..99524b437 100644
---- a/meta-python/recipes-devtools/python/python3-flask_3.0.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-flask_3.0.2.bb
-@@ -8,10 +8,14 @@ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=ffeffa59c90c9c4a033c7574f8f3fb75"
- 
- SRC_URI[sha256sum] = "822c03f4b799204250a7ee84b1eddc40665395333973dfb9deebfe425fefcb7d"
- 
-+SRC_URI += " \
-+        file://run-ptest \
-+"
-+
- UPSTREAM_CHECK_URI = "https://pypi.python.org/pypi/Flask"
- UPSTREAM_CHECK_REGEX = "/Flask/(?P<pver>(\d+[\.\-_]*)+)"
- 
--inherit pypi python_setuptools_build_meta
-+inherit pypi python_setuptools_build_meta ptest
- 
- CLEANBROKEN = "1"
- 
-@@ -23,3 +27,8 @@ RDEPENDS:${PN} = " \
-     python3-profile \
-     python3-werkzeug \
- "
-+
-+do_install_ptest() {
-+        install -d ${D}${PTEST_PATH}/tests
-+        cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-+}
--- 
-2.39.2
+On Thu, May 30, 2024 at 9:07=E2=80=AFPM Jan Vermaete via
+lists.openembedded.org <jan.vermaete=3Dgmail.com@lists.openembedded.org>
+wrote:
+>
+> Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
+> ---
+>  .../recipes-devtools/python/python3-flask/run-ptest   |  3 +++
+>  .../recipes-devtools/python/python3-flask_3.0.2.bb    | 11 ++++++++++-
+>  2 files changed, 13 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-python/recipes-devtools/python/python3-flask/run=
+-ptest
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-flask/run-ptest =
+b/meta-python/recipes-devtools/python/python3-flask/run-ptest
+> new file mode 100644
+> index 000000000..8d2017d39
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-flask/run-ptest
+> @@ -0,0 +1,3 @@
+> +#!/bin/sh
+> +
+> +pytest --automake
+> diff --git a/meta-python/recipes-devtools/python/python3-flask_3.0.2.bb b=
+/meta-python/recipes-devtools/python/python3-flask_3.0.2.bb
+> index 300ca99dd..99524b437 100644
+> --- a/meta-python/recipes-devtools/python/python3-flask_3.0.2.bb
+> +++ b/meta-python/recipes-devtools/python/python3-flask_3.0.2.bb
+> @@ -8,10 +8,14 @@ LIC_FILES_CHKSUM =3D "file://LICENSE.rst;md5=3Dffeffa59=
+c90c9c4a033c7574f8f3fb75"
+>
+>  SRC_URI[sha256sum] =3D "822c03f4b799204250a7ee84b1eddc40665395333973dfb9=
+deebfe425fefcb7d"
+>
+> +SRC_URI +=3D " \
+> +        file://run-ptest \
+> +"
+> +
+>  UPSTREAM_CHECK_URI =3D "https://pypi.python.org/pypi/Flask"
+>  UPSTREAM_CHECK_REGEX =3D "/Flask/(?P<pver>(\d+[\.\-_]*)+)"
+>
+> -inherit pypi python_setuptools_build_meta
+> +inherit pypi python_setuptools_build_meta ptest
+>
+>  CLEANBROKEN =3D "1"
+>
+> @@ -23,3 +27,8 @@ RDEPENDS:${PN} =3D " \
+>      python3-profile \
+>      python3-werkzeug \
+>  "
+> +
+> +do_install_ptest() {
+> +        install -d ${D}${PTEST_PATH}/tests
+> +        cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+> +}
+> --
+> 2.39.2
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#110641): https://lists.openembedded.org/g/openembedde=
+d-devel/message/110641
+> Mute This Topic: https://lists.openembedded.org/mt/106394805/2167232
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [j=
+an.vermaete@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
+
+--=20
+Jan Vermaete
+=E2=80=9CSuccess is a self-correcting phenomenom.=E2=80=9D -- Gary Hamel
 
