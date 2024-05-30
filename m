@@ -2,133 +2,151 @@ Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 24EF8C27C44
-	for <webhook@archiver.kernel.org>; Thu, 30 May 2024 19:13:43 +0000 (UTC)
-Received: from mail-oi1-f174.google.com (mail-oi1-f174.google.com [209.85.167.174])
- by mx.groups.io with SMTP id smtpd.web11.258.1717096421222163855
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2CC38C25B74
+	for <webhook@archiver.kernel.org>; Thu, 30 May 2024 19:15:03 +0000 (UTC)
+Received: from mail-oi1-f173.google.com (mail-oi1-f173.google.com [209.85.167.173])
+ by mx.groups.io with SMTP id smtpd.web10.307.1717096496781365232
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 May 2024 12:13:41 -0700
+ Thu, 30 May 2024 12:14:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=LDwnsYfK;
- spf=pass (domain: gmail.com, ip: 209.85.167.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-oi1-f174.google.com with SMTP id 5614622812f47-3c9d70d93dbso800556b6e.3
-        for <openembedded-devel@lists.openembedded.org>; Thu, 30 May 2024 12:13:41 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=WsFkUAY7;
+ spf=pass (domain: gmail.com, ip: 209.85.167.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-oi1-f173.google.com with SMTP id 5614622812f47-3d1c051a9e7so197783b6e.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 30 May 2024 12:14:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1717096420; x=1717701220; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1717096496; x=1717701296; darn=lists.openembedded.org;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=IR0o+KR70u3MzAgoybIbtK+mmM/VSuBXrfpk3Mtkab4=;
-        b=LDwnsYfKHyueGaq/Q+mas4YHtvM7RPbWOeMYEYpC1wshboB0mnA1CjoQ6k68Ti6xY8
-         UyFA8/qY0sBlV5qiVayY+HVEJVOH6mjY2dGiN8pIJNq1ns/lmqGnE/iFETfTFmsyQxYT
-         zpjSgqLtEp7HlREppr8Vrily72PuPfDOz+34XdWM8VJjWP/cUodXYAm1PBG0seSRH3B5
-         OpaeKKiQrSufoJIU8MUKdta3LwUEvwjQG8yPM/dHvhkEhRrM2ffXsq08Ee9lLsLUALgg
-         JsULKV4SDXqW9k8C2s1UV0x1JvjzxPcvBM7MZoWKN4mXdqF8bF4qa/XNrASjjeYxtOSQ
-         8rrw==
+        bh=SZeNo80eS77pirJ977hFVIIGHvenTaobX3jor6rcCT0=;
+        b=WsFkUAY7k1Vj9X6CO1gcXdgsgzhBZtmM/3JCf+Qef7w7GZCXh2HhmNpMfXucrFszd3
+         gZt4CykW1t2Dv7ToS5NvIt4ljyt1ohLKnNSx3aP4v6J0Ytvn7/Y9cjvjMBdizAc5F1BH
+         imkd0swz1cetetDyNajhbasUxPXJZejQv7BtzhDmnFjkAEFyXsyC5FXk7qpCATWRzgqR
+         Pb220+gSCNE1/gEWdme56RHSllinIc/RdnmkxA5sDuXOU4RI1HUAyrNYSDKXwpvkKWvp
+         FGNtUpPNEebhsf9yYjBtP1904wF7GjqmeK+I869nRxGfsLBqfGEuiwaBvUGMaEQbYKre
+         CXfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1717096420; x=1717701220;
+        d=1e100.net; s=20230601; t=1717096496; x=1717701296;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=IR0o+KR70u3MzAgoybIbtK+mmM/VSuBXrfpk3Mtkab4=;
-        b=dlz/oZiwbUcgwtElhzG7ABbGIqvfjPPdu2G4wD1ZO9Ok4nZE7eh9+e7yIXF/obziv5
-         cFRsDxS6bpXlOvE5I01qEUK1TtSrRUDpWQMCI4zJa1wnOKlmKT3BQunjsr3jUZcUYWS7
-         JhG+kmMnOlX4nMCW8UZyqoE17HW+Rvt6u8KeMwn66odoyiOqkJ2VDL2zC4j+k35hxgIZ
-         z1gMfGCOYjJhf0aONyaWob8uckRSWwp22ybNQOB2N2fqQU54OySEcsC3TVge4LnYcxPW
-         ALCzwoMAwNpDZsO0RnaDhFRc2x8ZTknOfi6WkWq7lSAl7qFDBdMqkHgpSobALowcdfYW
-         Q3ew==
-X-Gm-Message-State: AOJu0YwPQ5lLsP3y0wq9K//O6eXAsCTFIT5Wb9iKluyr5H88F/+QaRXu
-	/X4PaZMAz2KoD5qgAPMSF3cF2kREW7I17SRRXl0OVFP3En6j+nPB+suM3WMYYL9EX5TLIUX1zFg
-	WgQt+B68bS5lKcpCXI/+vO5FPpl4=
-X-Google-Smtp-Source: AGHT+IF7D0p0oGyx3Xh+SGDjgZ1criBKu3OGfvpYaG2KaiQTiUeut84Ql+0+g/0+CstC45UPzenjhV4lpc+gCCUc8/Y=
-X-Received: by 2002:a05:6808:8e2:b0:3c9:bcf1:96a8 with SMTP id
- 5614622812f47-3d1dcd0c162mr3025577b6e.39.1717096420300; Thu, 30 May 2024
- 12:13:40 -0700 (PDT)
+        bh=SZeNo80eS77pirJ977hFVIIGHvenTaobX3jor6rcCT0=;
+        b=nwsJbexVINnbNL3CnzkQEeudTXtW4NEs57GLx5upO4EpEuBnxIrOfSr00eAvwldM4u
+         0GQ5cCmYBI9fad65feJVEXP41MNXB9RflpdWt3rQCzcSnKO6W3Gf/Tk4y3b4R3Y5HnGy
+         sO1xy9C/YTHXsXVBYycCkSmOvmuAZ8+hTbdg2e316V67kdqb5hT4z0U9CtmS0jsx5kbY
+         AvFMkIwAM56VFFYEP8iiEZn/82Yr7zMkh2JlhEoXbaQZ87IfdzvwqUEmgZycPKdPhwnO
+         b3L/flZ3e9cKoSK2YNuKF1mwszfFzSQpczhwHHuyB1YX/WpwebvOeVsGPoZxCmlr5XZX
+         jZpg==
+X-Gm-Message-State: AOJu0Yz+lllnd7c1tXPaKgKhkL+OIAdrvhrk+MHGNxZjcYR4T/fFu0Oh
+	fUus9F5kQXWfc24mu2XTE5gnwmr4lfiNANDfNuI9xkB5L/1U2D1qVXFwZNW0d7jrMuQ1CNDDpgE
+	xV5rKFEmam3bJibuBVgRkcJP5RFoPEvHM3R4=
+X-Google-Smtp-Source: AGHT+IF5tIemC6k1DPuM2oWklkVlVv6wf1d0IFo2mzLxZJ2k376kett5zXFlQyUm+tjIAZ+0thhzfhkuYbJ+56el2BY=
+X-Received: by 2002:a05:6808:23d1:b0:3d1:e014:a8a7 with SMTP id
+ 5614622812f47-3d1e014aa41mr2153654b6e.3.1717096495853; Thu, 30 May 2024
+ 12:14:55 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240529010328.2079536-1-raj.khem@gmail.com> <CAFMvBt3FTDitezHMgmM4MydPmmbSZa5_gjox4DdqOW7Dxk2waQ@mail.gmail.com>
-In-Reply-To: <CAFMvBt3FTDitezHMgmM4MydPmmbSZa5_gjox4DdqOW7Dxk2waQ@mail.gmail.com>
+References: <17D459C574195D27.22027@lists.openembedded.org> <CABF_=yh3jq-qrS_Z+SrQfxfQzZxTskpEM9D--YKhaKvGD+HK6Q@mail.gmail.com>
+In-Reply-To: <CABF_=yh3jq-qrS_Z+SrQfxfQzZxTskpEM9D--YKhaKvGD+HK6Q@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 30 May 2024 12:13:13 -0700
-Message-ID: <CAMKF1srOFq7D5DzG+Q9Xja62LVbLbnhykwEbf8Raxzwje3yBJw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] catch2: Upgrade to 3.x release series
-To: "Theodore A. Roth" <troth@openavr.org>
+Date: Thu, 30 May 2024 12:14:29 -0700
+Message-ID: <CAMKF1spcoqc4sHZSruJ=6Xgii3bT0BAzTje8UYK2+7JjRf7EKA@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH] python3-flask: add ptest
+To: jan.vermaete@gmail.com
 Cc: openembedded-devel@lists.openembedded.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 30 May 2024 19:13:43 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110643
+ <openembedded-devel@lists.openembedded.org>; Thu, 30 May 2024 19:15:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110644
 
-On Thu, May 30, 2024 at 12:05=E2=80=AFPM Theodore A. Roth <troth@openavr.or=
-g> wrote:
+On Thu, May 30, 2024 at 12:13=E2=80=AFPM Jan Vermaete via
+lists.openembedded.org <jan.vermaete=3Dgmail.com@lists.openembedded.org>
+wrote:
 >
-> FYI: Updating catch2 to v3 breaks the ptest build for libgpiod-1.6.4.
->
-> I needed to disable ptests to get it to work for our builds.
-> The real fix would be to port the libgpiod-1.6.4 code to catch2 v3, but w=
-e want to migrate to libgpiod-2.x soon anyways.
->
+> Question: should I add to the list in
+> conf/include/ptest-packagelists-meta-python.inc?  Or will the
+> maintainer do this?
+> It took about 60sec in qemu on a slow machine.
 
-Yes, I see it break ptest builds as well that's why I have withheld it for =
-now.
-
-> Just giving folks using libgpiod-1.6.4 a heads up on what I found.
-
-Thanks
+yes please add it to fast section,
 
 >
-> Ted Roth
+> On Thu, May 30, 2024 at 9:07=E2=80=AFPM Jan Vermaete via
+> lists.openembedded.org <jan.vermaete=3Dgmail.com@lists.openembedded.org>
+> wrote:
+> >
+> > Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
+> > ---
+> >  .../recipes-devtools/python/python3-flask/run-ptest   |  3 +++
+> >  .../recipes-devtools/python/python3-flask_3.0.2.bb    | 11 ++++++++++-
+> >  2 files changed, 13 insertions(+), 1 deletion(-)
+> >  create mode 100644 meta-python/recipes-devtools/python/python3-flask/r=
+un-ptest
+> >
+> > diff --git a/meta-python/recipes-devtools/python/python3-flask/run-ptes=
+t b/meta-python/recipes-devtools/python/python3-flask/run-ptest
+> > new file mode 100644
+> > index 000000000..8d2017d39
+> > --- /dev/null
+> > +++ b/meta-python/recipes-devtools/python/python3-flask/run-ptest
+> > @@ -0,0 +1,3 @@
+> > +#!/bin/sh
+> > +
+> > +pytest --automake
+> > diff --git a/meta-python/recipes-devtools/python/python3-flask_3.0.2.bb=
+ b/meta-python/recipes-devtools/python/python3-flask_3.0.2.bb
+> > index 300ca99dd..99524b437 100644
+> > --- a/meta-python/recipes-devtools/python/python3-flask_3.0.2.bb
+> > +++ b/meta-python/recipes-devtools/python/python3-flask_3.0.2.bb
+> > @@ -8,10 +8,14 @@ LIC_FILES_CHKSUM =3D "file://LICENSE.rst;md5=3Dffeffa=
+59c90c9c4a033c7574f8f3fb75"
+> >
+> >  SRC_URI[sha256sum] =3D "822c03f4b799204250a7ee84b1eddc40665395333973df=
+b9deebfe425fefcb7d"
+> >
+> > +SRC_URI +=3D " \
+> > +        file://run-ptest \
+> > +"
+> > +
+> >  UPSTREAM_CHECK_URI =3D "https://pypi.python.org/pypi/Flask"
+> >  UPSTREAM_CHECK_REGEX =3D "/Flask/(?P<pver>(\d+[\.\-_]*)+)"
+> >
+> > -inherit pypi python_setuptools_build_meta
+> > +inherit pypi python_setuptools_build_meta ptest
+> >
+> >  CLEANBROKEN =3D "1"
+> >
+> > @@ -23,3 +27,8 @@ RDEPENDS:${PN} =3D " \
+> >      python3-profile \
+> >      python3-werkzeug \
+> >  "
+> > +
+> > +do_install_ptest() {
+> > +        install -d ${D}${PTEST_PATH}/tests
+> > +        cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
+> > +}
+> > --
+> > 2.39.2
+> >
+> >
+> >
+> >
 >
-> On Tue, May 28, 2024 at 7:03=E2=80=AFPM Khem Raj via lists.openembedded.o=
-rg <raj.khem=3Dgmail.com@lists.openembedded.org> wrote:
->>
->> It supports C++20 better and newer compilers e.g. clang19
->> works better with 3.x series.
->>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->>  .../catch2/{catch2_2.13.10.bb =3D> catch2_3.6.0.bb}             | 4 ++-=
--
->>  1 file changed, 2 insertions(+), 2 deletions(-)
->>  rename meta-oe/recipes-test/catch2/{catch2_2.13.10.bb =3D> catch2_3.6.0=
-.bb} (87%)
->>
->> diff --git a/meta-oe/recipes-test/catch2/catch2_2.13.10.bb b/meta-oe/rec=
-ipes-test/catch2/catch2_3.6.0.bb
->> similarity index 87%
->> rename from meta-oe/recipes-test/catch2/catch2_2.13.10.bb
->> rename to meta-oe/recipes-test/catch2/catch2_3.6.0.bb
->> index f8080c8f97..52045bd144 100644
->> --- a/meta-oe/recipes-test/catch2/catch2_2.13.10.bb
->> +++ b/meta-oe/recipes-test/catch2/catch2_3.6.0.bb
->> @@ -4,8 +4,8 @@ HOMEPAGE =3D "https://github.com/catchorg/Catch2"
->>  LICENSE =3D "BSL-1.0"
->>  LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3De4224ccaecb14d942c71d31b=
-ef20d78c"
->>
->> -SRC_URI =3D "git://github.com/catchorg/Catch2.git;branch=3Dv2.x;protoco=
-l=3Dhttps"
->> -SRCREV =3D "182c910b4b63ff587a3440e08f84f70497e49a81"
->> +SRC_URI =3D "git://github.com/catchorg/Catch2.git;branch=3Ddevel;protoc=
-ol=3Dhttps"
->> +SRCREV =3D "4e8d92bf02f7d1c8006a0e7a5ecabd8e62d98502"
->>
->>  S =3D "${WORKDIR}/git"
->>
->> --
->> 2.45.1
->>
->>
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->> Links: You receive all messages sent to this group.
->> View/Reply Online (#110598): https://lists.openembedded.org/g/openembedd=
-ed-devel/message/110598
->> Mute This Topic: https://lists.openembedded.org/mt/106361394/3617677
->> Group Owner: openembedded-devel+owner@lists.openembedded.org
->> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [=
-troth@openavr.org]
->> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->>
+>
+> --
+> Jan Vermaete
+> =E2=80=9CSuccess is a self-correcting phenomenom.=E2=80=9D -- Gary Hamel
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#110642): https://lists.openembedded.org/g/openembedde=
+d-devel/message/110642
+> Mute This Topic: https://lists.openembedded.org/mt/106394805/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
+aj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
 
