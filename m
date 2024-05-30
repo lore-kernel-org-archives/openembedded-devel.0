@@ -1,92 +1,212 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 86E26C25B74
-	for <webhook@archiver.kernel.org>; Thu, 30 May 2024 20:34:13 +0000 (UTC)
-Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com [209.85.208.44])
- by mx.groups.io with SMTP id smtpd.web10.2049.1717101245841005114
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A862FC25B7E
+	for <webhook@archiver.kernel.org>; Thu, 30 May 2024 20:56:03 +0000 (UTC)
+Received: from mail-oa1-f41.google.com (mail-oa1-f41.google.com [209.85.160.41])
+ by mx.groups.io with SMTP id smtpd.web10.2691.1717102556516506852
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 30 May 2024 13:34:06 -0700
+ Thu, 30 May 2024 13:55:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=m/rA77ZY;
- spf=pass (domain: gmail.com, ip: 209.85.208.44, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ed1-f44.google.com with SMTP id 4fb4d7f45d1cf-57a32b0211aso152373a12.2
-        for <openembedded-devel@lists.openembedded.org>; Thu, 30 May 2024 13:34:05 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=YzStIqju;
+ spf=pass (domain: gmail.com, ip: 209.85.160.41, mailfrom: raj.khem@gmail.com)
+Received: by mail-oa1-f41.google.com with SMTP id 586e51a60fabf-24c9f73ccaaso755110fac.1
+        for <openembedded-devel@lists.openembedded.org>; Thu, 30 May 2024 13:55:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1717101244; x=1717706044; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=tQeBgh50BaFP+MepI+zr2wepqcBlbKj5ptHVncYUpxY=;
-        b=m/rA77ZYey4qllp+5uuoyvdspQxCpIOKMOUWy06hlOuc94coOVQIsCvVojUKdy/N1u
-         ijcKyjMoHAnA5nEOIXy1Xgj0Uz36T5MSS007D9NLIhomoCPQtNdz3wte62OSkisTEJla
-         zMGyqtQkMXqA3SjuQEOTBvxEaV37V7JUVXwACahCaPT8tHZq3BcWpLL3CCMM0ExjcftP
-         2VSDnye/J7N7uThliQbYKLII50ds0mNhan3Q9iBl76LcgN77EipTfAkBBYsaVgT1hGwT
-         aHAndVhIsEiX6jyIivQnCeNEMlYIPP+tM+sJR4Dkq27UbJaPbw8dGNInJrE1hql2AXpU
-         V0gg==
+        d=gmail.com; s=20230601; t=1717102556; x=1717707356; darn=lists.openembedded.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=vHxKwtzUxo9Y3f0OkFXAQna+RAw5aET88Yl8vglK4O4=;
+        b=YzStIqjuth+5/qUrXR7UTMUT3nL9vwi6A+eX3nzrueFqi+8+bPPUKKJLSszR7uzneM
+         VitvKB36u0m5VZ0ZTTJ+Yu3F2eY3fasohHlIib0P0TGiI7EI8z9+e0dqvap+broh5ZsW
+         Aqj3CAmuSNWLKRup4Zpzu8FvQn2P+fMCQwt3OVrDLtpAeDDFwZrBMxz2/71LexRtYFhE
+         qzMcmC922ltutB+tuQljDqeXsFPNGtRIt/Cgg5xK6PFAQ9JEomPiptrZ4KJOlm3BgXqX
+         SDGglpnwduRc36oGjz1Om1dfvoGT93WvMLzQSmBdA3fp1evA4aIvtBsE3JjEG89oc4e8
+         o1/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1717101244; x=1717706044;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+        d=1e100.net; s=20230601; t=1717102556; x=1717707356;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=tQeBgh50BaFP+MepI+zr2wepqcBlbKj5ptHVncYUpxY=;
-        b=QYUpdrkZljtpEL95B83/iy09aIne8hHdQqWWyrLlvsQIJo0YYgr6d0tzleXzrMHxKK
-         ljcUfAC6Qv89QQrahlKJtMlOIoVz22mExuKWSL5FfjuHbw+I0hFZJYqB0Yw8fQGc2TFW
-         xGs6iZbXO9eeiEu5TS2Lp8H2/00carDnMyuVzOTtQ7MtUzRlRdPxRLDED9rLpqV8ZtYl
-         YN9ranSIPK/tmGSMUbRAj1Lawq6G5hqOti/H9n1lRBZS18x13iGlThBtVYHWUq7MEY0O
-         tSuTdYGViiJsFCs3Ju2b14Jm2IozfUMAPTZkcqcyI3ll5czwB2Fse3B0dXejqqw+u00H
-         5cIA==
-X-Gm-Message-State: AOJu0YwTbLowcbA5mfOgr/VKqzTTVPfrgCmOVY6v1wvp65/atrv3WDdc
-	P92LKbbca+4ACteI9IhZL/C74rtwzYTZk4wBOERIQhL2/ms2cgK5jQuvuA==
-X-Google-Smtp-Source: AGHT+IHSfS4aICAOlB9BdZ4pDsxXqyUIq1ckhxTif6wr0sCR/Ple3yUG9pcfjItiocljshm0aUVyaA==
-X-Received: by 2002:a50:d498:0:b0:57a:31a3:f4e6 with SMTP id 4fb4d7f45d1cf-57a363c0bc8mr40631a12.2.1717101243797;
-        Thu, 30 May 2024 13:34:03 -0700 (PDT)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-57a31c9c17asm186493a12.92.2024.05.30.13.34.03
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 30 May 2024 13:34:03 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][PATCH] lvm2: restore Upstream-Status
-Date: Thu, 30 May 2024 22:33:49 +0200
-Message-ID: <20240530203349.641537-1-martin.jansa@gmail.com>
-X-Mailer: git-send-email 2.45.1
+        bh=vHxKwtzUxo9Y3f0OkFXAQna+RAw5aET88Yl8vglK4O4=;
+        b=UEN2j1bwUG/prITv4fRddYzOhNDgyAlG3oaRQ7zPwL2genIost85k+/cnrW4Y9qoxN
+         HawrsKbOyo7aK1rb1ZniYNOSzEGoOuM4893pr5BkYcs2n2FAkx+eCXz98Cpw6DmXlfvG
+         atzzIxas1sqhAGvquv6LfesWmZR/we368XYPqSpn2qVs0EoaWKThUb5csaTj8UTw768W
+         LEtocIEp+ok8dVfcqdxPHDCBL8+IslxUT6IWG0PQudNS8O9RxIu1P3ECxdFCQfdyxi3x
+         Xyru6sLE0GpOLumUHpmqRk8Zw2bAZ1GGGOs/hO2ZItLXA4RC7uO7TSb3MZom+VHUoCoL
+         k0jA==
+X-Gm-Message-State: AOJu0Yw+FdtTAqoOZ2LHqobdifv1RSe48BOnBpgJtIjGVzM9x2cRD+OS
+	+223+coOaCD1WaizKPbt1XO7eIcy5wAbedbwBxIiKmSsdzmC6f/h85Vh/qIgU4yrF6BdcNMbmyD
+	Yl8x7LTRha/XEJqMncXWhSKAh7jw=
+X-Google-Smtp-Source: AGHT+IEX0SE0XO7yyzbN14Ij/ZDQKRi3UfhMtzRa9mTnKstZBRQaXZx/ybBaJtQOeE/0JreWQtL2bwTZQ5oR9Dmx1/8=
+X-Received: by 2002:a05:6870:7010:b0:250:7e5f:5c73 with SMTP id
+ 586e51a60fabf-2508baa84f7mr48648fac.31.1717102555551; Thu, 30 May 2024
+ 13:55:55 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240530203349.641537-1-martin.jansa@gmail.com>
+In-Reply-To: <20240530203349.641537-1-martin.jansa@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 30 May 2024 13:55:43 -0700
+Message-ID: <CAMKF1sp-dK-gKXDaaDPvvJ1tynW_O3G_JU8MmqASf=W1r+DvoA@mail.gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] lvm2: restore Upstream-Status
+To: martin.jansa@gmail.com
+Cc: openembedded-devel@lists.openembedded.org
+Content-Type: multipart/alternative; boundary="000000000000dde1820619b21793"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 30 May 2024 20:34:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110648
+ <openembedded-devel@lists.openembedded.org>; Thu, 30 May 2024 20:56:03 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110649
 
-* accidentally removed in:
-  https://git.openembedded.org/meta-openembedded/diff/meta-oe/recipes-support/lvm2/files/0001-implement-libc-specific-reopen_stream.patch?id=cc4e9fbd823a9af1f6b8f622ce86d62172ee9ade
+--000000000000dde1820619b21793
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-* fixes:
-  ERROR: QA Issue: Missing Upstream-Status in patch
-  TOPDIR/meta-oe/meta-oe/recipes-support/lvm2/files/0001-implement-libc-specific-reopen_stream.patch
-  Please add according to https://docs.yoctoproject.org/contributor-guide/recipe-style-guide.html#patch-upstream-status . [patch-status]
+Thanks for taking care of this
 
-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
----
- .../lvm2/files/0001-implement-libc-specific-reopen_stream.patch | 2 ++
- 1 file changed, 2 insertions(+)
+On Thu, May 30, 2024 at 1:34=E2=80=AFPM Martin Jansa via lists.openembedded=
+.org
+<martin.jansa=3Dgmail.com@lists.openembedded.org> wrote:
 
-diff --git a/meta-oe/recipes-support/lvm2/files/0001-implement-libc-specific-reopen_stream.patch b/meta-oe/recipes-support/lvm2/files/0001-implement-libc-specific-reopen_stream.patch
-index a064516e32..e11ac5ac08 100644
---- a/meta-oe/recipes-support/lvm2/files/0001-implement-libc-specific-reopen_stream.patch
-+++ b/meta-oe/recipes-support/lvm2/files/0001-implement-libc-specific-reopen_stream.patch
-@@ -13,6 +13,8 @@ http://git.alpinelinux.org/cgit/aports/tree/main/lvm2/fix-stdio-usage.patch
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- Signed-off-by: Dengke Du <dengke.du@windriver.com>
-+
-+Upstream-Status: Pending
- ---
-  lib/log/log.c      | 6 ++++++
-  tools/lvmcmdline.c | 6 +++---
--- 
-2.45.1
+> * accidentally removed in:
+>
+> https://git.openembedded.org/meta-openembedded/diff/meta-oe/recipes-suppo=
+rt/lvm2/files/0001-implement-libc-specific-reopen_stream.patch?id=3Dcc4e9fb=
+d823a9af1f6b8f622ce86d62172ee9ade
+>
+> * fixes:
+>   ERROR: QA Issue: Missing Upstream-Status in patch
+>
+> TOPDIR/meta-oe/meta-oe/recipes-support/lvm2/files/0001-implement-libc-spe=
+cific-reopen_stream.patch
+>   Please add according to
+> https://docs.yoctoproject.org/contributor-guide/recipe-style-guide.html#p=
+atch-upstream-status
+> . [patch-status]
+>
+> Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+> ---
+>  .../lvm2/files/0001-implement-libc-specific-reopen_stream.patch | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git
+> a/meta-oe/recipes-support/lvm2/files/0001-implement-libc-specific-reopen_=
+stream.patch
+> b/meta-oe/recipes-support/lvm2/files/0001-implement-libc-specific-reopen_=
+stream.patch
+> index a064516e32..e11ac5ac08 100644
+> ---
+> a/meta-oe/recipes-support/lvm2/files/0001-implement-libc-specific-reopen_=
+stream.patch
+> +++
+> b/meta-oe/recipes-support/lvm2/files/0001-implement-libc-specific-reopen_=
+stream.patch
+> @@ -13,6 +13,8 @@
+> http://git.alpinelinux.org/cgit/aports/tree/main/lvm2/fix-stdio-usage.pat=
+ch
+>
+>  Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>  Signed-off-by: Dengke Du <dengke.du@windriver.com>
+> +
+> +Upstream-Status: Pending
+>  ---
+>   lib/log/log.c      | 6 ++++++
+>   tools/lvmcmdline.c | 6 +++---
+> --
+> 2.45.1
+>
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Links: You receive all messages sent to this group.
+> View/Reply Online (#110648):
+> https://lists.openembedded.org/g/openembedded-devel/message/110648
+> Mute This Topic: https://lists.openembedded.org/mt/106396150/1997914
+> Group Owner: openembedded-devel+owner@lists.openembedded.org
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
+> raj.khem@gmail.com]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+>
+>
 
+--000000000000dde1820619b21793
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto">Thanks for taking care of this</div><div><br><div class=
+=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, May 30, 2024=
+ at 1:34=E2=80=AFPM Martin Jansa via <a href=3D"http://lists.openembedded.o=
+rg">lists.openembedded.org</a> &lt;martin.jansa=3D<a href=3D"mailto:gmail.c=
+om@lists.openembedded.org">gmail.com@lists.openembedded.org</a>&gt; wrote:<=
+br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;borde=
+r-left:1px #ccc solid;padding-left:1ex">* accidentally removed in:<br>
+=C2=A0 <a href=3D"https://git.openembedded.org/meta-openembedded/diff/meta-=
+oe/recipes-support/lvm2/files/0001-implement-libc-specific-reopen_stream.pa=
+tch?id=3Dcc4e9fbd823a9af1f6b8f622ce86d62172ee9ade" rel=3D"noreferrer" targe=
+t=3D"_blank">https://git.openembedded.org/meta-openembedded/diff/meta-oe/re=
+cipes-support/lvm2/files/0001-implement-libc-specific-reopen_stream.patch?i=
+d=3Dcc4e9fbd823a9af1f6b8f622ce86d62172ee9ade</a><br>
+<br>
+* fixes:<br>
+=C2=A0 ERROR: QA Issue: Missing Upstream-Status in patch<br>
+=C2=A0 TOPDIR/meta-oe/meta-oe/recipes-support/lvm2/files/0001-implement-lib=
+c-specific-reopen_stream.patch<br>
+=C2=A0 Please add according to <a href=3D"https://docs.yoctoproject.org/con=
+tributor-guide/recipe-style-guide.html#patch-upstream-status" rel=3D"norefe=
+rrer" target=3D"_blank">https://docs.yoctoproject.org/contributor-guide/rec=
+ipe-style-guide.html#patch-upstream-status</a> . [patch-status]<br>
+<br>
+Signed-off-by: Martin Jansa &lt;<a href=3D"mailto:martin.jansa@gmail.com" t=
+arget=3D"_blank">martin.jansa@gmail.com</a>&gt;<br>
+---<br>
+=C2=A0.../lvm2/files/0001-implement-libc-specific-reopen_stream.patch | 2 +=
++<br>
+=C2=A01 file changed, 2 insertions(+)<br>
+<br>
+diff --git a/meta-oe/recipes-support/lvm2/files/0001-implement-libc-specifi=
+c-reopen_stream.patch b/meta-oe/recipes-support/lvm2/files/0001-implement-l=
+ibc-specific-reopen_stream.patch<br>
+index a064516e32..e11ac5ac08 100644<br>
+--- a/meta-oe/recipes-support/lvm2/files/0001-implement-libc-specific-reope=
+n_stream.patch<br>
++++ b/meta-oe/recipes-support/lvm2/files/0001-implement-libc-specific-reope=
+n_stream.patch<br>
+@@ -13,6 +13,8 @@ <a href=3D"http://git.alpinelinux.org/cgit/aports/tree/ma=
+in/lvm2/fix-stdio-usage.patch" rel=3D"noreferrer" target=3D"_blank">http://=
+git.alpinelinux.org/cgit/aports/tree/main/lvm2/fix-stdio-usage.patch</a><br=
+>
+<br>
+=C2=A0Signed-off-by: Khem Raj &lt;<a href=3D"mailto:raj.khem@gmail.com" tar=
+get=3D"_blank">raj.khem@gmail.com</a>&gt;<br>
+=C2=A0Signed-off-by: Dengke Du &lt;<a href=3D"mailto:dengke.du@windriver.co=
+m" target=3D"_blank">dengke.du@windriver.com</a>&gt;<br>
++<br>
++Upstream-Status: Pending<br>
+=C2=A0---<br>
+=C2=A0 lib/log/log.c=C2=A0 =C2=A0 =C2=A0 | 6 ++++++<br>
+=C2=A0 tools/lvmcmdline.c | 6 +++---<br>
+-- <br>
+2.45.1<br>
+<br>
+<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+Links: You receive all messages sent to this group.<br>
+View/Reply Online (#110648): <a href=3D"https://lists.openembedded.org/g/op=
+enembedded-devel/message/110648" rel=3D"noreferrer" target=3D"_blank">https=
+://lists.openembedded.org/g/openembedded-devel/message/110648</a><br>
+Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/106396150/199=
+7914" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/m=
+t/106396150/1997914</a><br>
+Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
+d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
+><br>
+Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
+/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
+/g/openembedded-devel/unsub</a> [<a href=3D"mailto:raj.khem@gmail.com" targ=
+et=3D"_blank">raj.khem@gmail.com</a>]<br>
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
+<br>
+</blockquote></div></div>
+
+--000000000000dde1820619b21793--
 
