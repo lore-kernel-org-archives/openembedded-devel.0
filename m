@@ -1,91 +1,96 @@
-Return-Path: <andre.draszik@linaro.org>
+Return-Path: <jan.vermaete@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DE52EC25B7C
-	for <webhook@archiver.kernel.org>; Fri, 31 May 2024 11:32:05 +0000 (UTC)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
- by mx.groups.io with SMTP id smtpd.web11.9283.1717155115692752552
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A55FFC25B75
+	for <webhook@archiver.kernel.org>; Fri, 31 May 2024 16:57:17 +0000 (UTC)
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+ by mx.groups.io with SMTP id smtpd.web11.18288.1717174635236669154
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 31 May 2024 04:31:56 -0700
+ Fri, 31 May 2024 09:57:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=fU9VRPc4;
- spf=pass (domain: linaro.org, ip: 209.85.128.42, mailfrom: andre.draszik@linaro.org)
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-4212e341818so4964455e9.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 31 May 2024 04:31:55 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=BIFo3fie;
+ spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: jan.vermaete@gmail.com)
+Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-35dce610207so1577136f8f.2
+        for <openembedded-devel@lists.openembedded.org>; Fri, 31 May 2024 09:57:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1717155114; x=1717759914; darn=lists.openembedded.org;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:to:from:subject:message-id:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=m0sz9kflT8Aja45D+Fa37awllKvLm7mEDbu2gDvElGc=;
-        b=fU9VRPc4ciI0lCnmhl67jDTXtm/3Bh/z3ACowx+si0Nataajn0r/tqzrngoT0cFpGt
-         HXXsz7RziGDZ+ESswf0XEEgCdEZvL+E8nbzTJfJ9SHiUZ3i7Mya8A/UPzIP8LeW2AmQP
-         XjtE9pLYMNjjyyW89ZfJz2460qd/t2Fd13x8n1OxGNFe8CMqYnL8uwDhuFfZldJekHqm
-         QAM+FjVix5SCwjaRSotzz94BRFtN6glE6KSE0rwmztr4CLlVamTWcRCAqo1EUOM5Y0LT
-         bntxqjRmlNGBf+SVAxOPAX456BWaDw/4rw6dNEhHLNmLwP/GbNtuCG4JyKT1Au6NIwRy
-         nRbQ==
+        d=gmail.com; s=20230601; t=1717174633; x=1717779433; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=lDpefX8I8dKKf2DRUIerqaG59Yy8pOoEXRZkzLtgH6I=;
+        b=BIFo3fieBI2RN3qTXJJE57Oy7ZnVRfVJhjStrg3Vkk/H+2wOeSl8tKKxeUP5iRe2al
+         zng8o8tG8R1OFdJW11ELbT5jPLlkpvvtBqVdKrLq5retC/iumpcVDHq+JjaiNFUNN+Av
+         ZkpkhL9T/myPZtQkv7v2eQ+SRb5Ih4QM9B/TE8HhtLPzCGKekhSbhCRxFd2GvT3i0yGW
+         bTiuSGT+cRmouW/86zDFnmh0SYURusictnnTX3plHnIKjYeui8i/mdwVcNllnWXJn40D
+         1XhQgzDEI2L8mOvAVTPcqd3UBX3lbrLYZjpRSw4c9vRDEXqnjAqupD5ft1MPJF1ghfOF
+         6nRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1717155114; x=1717759914;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:to:from:subject:message-id:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=m0sz9kflT8Aja45D+Fa37awllKvLm7mEDbu2gDvElGc=;
-        b=geP1UzrQ1oKHwHghw7ErOArR11ycpUxTgCrYZH26hEtADNdo0nD4si2MKlbKB+sFMX
-         QiGB0Qve8buZdT+IN5066M2nYAhNrkTPlHNSo8TBXqULy6YlCJ2v1D824bwiZxyg2Ubz
-         7JYGTw650rww7Mnxdz14ynQSIfsnBCGE0H7zkxEowL88OhqJOq/aKLFEKa+cLBf/y6z+
-         x8tXYp8pneqxr6tkAOJyCVhqX3RKI4zRdmbH6FhKz7WBgpE5rLUX/V2J3ZlQ4NCYrsXD
-         LiHq//K3tjiiO7Phln7sj4LgYjNahYRSv8ehHJpHuFaCMvjDD3Sls1iUQfvk3WYkcIQk
-         UcOQ==
-X-Gm-Message-State: AOJu0Yw13RTKgyAcJPe83iZksXuM119Yzbw9aTEj3OvsKTt6kpeoIlyU
-	TqBiJETxGC3SSTsvXysrrimcBMbfZ0fGC19RcWfVle47ix+TGvAGFQ8PskbbABlNGBdKDIisXje
-	4
-X-Google-Smtp-Source: AGHT+IEt5F8dI+ShNarQy1H9vAoqccZsiKmtQotFCwEhiLK33tQEQ7QFPL/SM7+ixUOPX27JVbj0lA==
-X-Received: by 2002:a05:6000:1745:b0:349:d810:9974 with SMTP id ffacd0b85a97d-35e0f2709b0mr1010027f8f.17.1717155113418;
-        Fri, 31 May 2024 04:31:53 -0700 (PDT)
-Received: from draszik.lan ([80.111.64.44])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-35dd062ea98sm1645602f8f.71.2024.05.31.04.31.52
-        for <openembedded-devel@lists.openembedded.org>
+        d=1e100.net; s=20230601; t=1717174633; x=1717779433;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=lDpefX8I8dKKf2DRUIerqaG59Yy8pOoEXRZkzLtgH6I=;
+        b=Y1DRc0olArfoCIKNY+d4gcZkfUOwfpc3hBTbDAHj4V4wvF3DFbghfw9+Z+xq/i/gpq
+         taUIFjGwPRcJ5LyC6rG3x18lZHQWhmL1t/KTb4PI3qBQnvRMC9n+Lp158uqD/r7F2hTA
+         iJeomWJ2SvZ5kmf2xeCHY0j6uQB+nG4Yt4zj7/7UpspxnL148UtFpNAY/iqi5J9sUB8Z
+         w5/sIfRJqcHMi16b1b8u6JtMKarH8/W4nhmGxkxrpt2ylRwwEL4AuFw16ocLoq9Na3Zs
+         a84JSBX84VSJdImpPWqObOMS6pRaBeHORL1NcoQmAifP4dZM7As/ayLj838/mZjQ8qMz
+         PR4A==
+X-Gm-Message-State: AOJu0YzLKbdlz5sh1Z7gk+VIg0C0HU/MijzZ4zI6iym3kOmtX+aDX81w
+	bNUX3jxzgMCq/UI736Q8ULWUWC2VMSzGxa+jQ3wt/tA5f1u2RSjTGfr6JA==
+X-Google-Smtp-Source: AGHT+IF2tdQzMmF5nMi0gF7eisze3bC+KwQ4Cj3WS+8s58RAi0rGVnbd2l7SxfKbZQNHbpSaofS59Q==
+X-Received: by 2002:adf:ee0b:0:b0:35d:bfe2:baaa with SMTP id ffacd0b85a97d-35e0f255209mr2549028f8f.13.1717174632612;
+        Fri, 31 May 2024 09:57:12 -0700 (PDT)
+Received: from localhost.localdomain (78-20-160-86.access.telenet.be. [78.20.160.86])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-35dd04d9364sm2229508f8f.53.2024.05.31.09.57.11
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 31 May 2024 04:31:52 -0700 (PDT)
-Message-ID: <239ce5e43a976dbbef3c74a90bd4812970f92282.camel@linaro.org>
-Subject: Re: [oe][meta-oe][PATCH] android-tools: fix adb OpenSSL patch
- (really make compatible with >= v1.1)
-From: =?ISO-8859-1?Q?Andr=E9?= Draszik <andre.draszik@linaro.org>
+        Fri, 31 May 2024 09:57:12 -0700 (PDT)
+From: Jan Vermaete <jan.vermaete@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 31 May 2024 12:31:51 +0100
-In-Reply-To: <17D4393E139617B4.15404@lists.openembedded.org>
-References: <17D4393E139617B4.15404@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.50.3-1 
+Cc: Jan Vermaete <jan.vermaete@gmail.com>
+Subject: [meta-python][PATCH] python3-flask: added the async packageconfig
+Date: Fri, 31 May 2024 18:55:08 +0200
+Message-Id: <20240531165508.755680-1-jan.vermaete@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 31 May 2024 11:32:05 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110654
+ <openembedded-devel@lists.openembedded.org>; Fri, 31 May 2024 16:57:17 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110655
 
-On Thu, 2024-05-30 at 10:11 +0100, Andr=C3=A9 Draszik via lists.openembedde=
-d.org wrote:
-> As per the inlined patch commit message, gcc 14 is highlighting a few
-> issues with the existing patch and it doesn't compile.
->=20
-> Update the patch to fix.
->=20
-> Note there are two recipes for android-tools in this layer - the recipe
-> here and another one in
-> meta-oe/dynamic-layers/selinux/recipes-devtool/android-tools. A patch
-> for the alternative android-tools version had already been posted, so
-> this patch only deals with the remaining one.
->=20
-> Signed-off-by: Andr=C3=A9 Draszik <andre.draszik@linaro.org>
+The ptests did pass and some extra tests where added when the async option is enabled.
 
-I can see this has also been fixed shortly after I had last checked, please
-ignore this patch.
+PASS: tests/test_async.py:test_async_route[/]
+PASS: tests/test_async.py:test_async_route[/home]
+PASS: tests/test_async.py:test_async_route[/bp/]
+PASS: tests/test_async.py:test_async_route[/view]
+PASS: tests/test_async.py:test_async_route[/methodview]
+PASS: tests/test_async.py:test_async_error_handler[/error]
+PASS: tests/test_async.py:test_async_error_handler[/bp/error]
+PASS: tests/test_async.py:test_async_before_after_request
 
+Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
+---
+ meta-python/recipes-devtools/python/python3-flask_3.0.2.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-Cheers,
-Andre'
+diff --git a/meta-python/recipes-devtools/python/python3-flask_3.0.2.bb b/meta-python/recipes-devtools/python/python3-flask_3.0.2.bb
+index 99524b437..1de1a827d 100644
+--- a/meta-python/recipes-devtools/python/python3-flask_3.0.2.bb
++++ b/meta-python/recipes-devtools/python/python3-flask_3.0.2.bb
+@@ -19,6 +19,9 @@ inherit pypi python_setuptools_build_meta ptest
+ 
+ CLEANBROKEN = "1"
+ 
++PACKAGECONFIG ??= "async"
++PACKAGECONFIG[async] = ",,,python3-asgiref"
++
+ RDEPENDS:${PN} = " \
+     python3-blinker \
+     python3-click \
+-- 
+2.39.2
 
 
