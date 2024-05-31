@@ -2,94 +2,96 @@ Return-Path: <jan.vermaete@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A55FFC25B75
-	for <webhook@archiver.kernel.org>; Fri, 31 May 2024 16:57:17 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
- by mx.groups.io with SMTP id smtpd.web11.18288.1717174635236669154
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8A4A2C25B75
+	for <webhook@archiver.kernel.org>; Fri, 31 May 2024 19:49:11 +0000 (UTC)
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+ by mx.groups.io with SMTP id smtpd.web11.22860.1717184942971478090
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 31 May 2024 09:57:15 -0700
+ Fri, 31 May 2024 12:49:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=BIFo3fie;
- spf=pass (domain: gmail.com, ip: 209.85.221.48, mailfrom: jan.vermaete@gmail.com)
-Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-35dce610207so1577136f8f.2
-        for <openembedded-devel@lists.openembedded.org>; Fri, 31 May 2024 09:57:15 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=W7QF+ai3;
+ spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: jan.vermaete@gmail.com)
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-42101a2ac2cso13983225e9.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 31 May 2024 12:49:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1717174633; x=1717779433; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1717184941; x=1717789741; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=lDpefX8I8dKKf2DRUIerqaG59Yy8pOoEXRZkzLtgH6I=;
-        b=BIFo3fieBI2RN3qTXJJE57Oy7ZnVRfVJhjStrg3Vkk/H+2wOeSl8tKKxeUP5iRe2al
-         zng8o8tG8R1OFdJW11ELbT5jPLlkpvvtBqVdKrLq5retC/iumpcVDHq+JjaiNFUNN+Av
-         ZkpkhL9T/myPZtQkv7v2eQ+SRb5Ih4QM9B/TE8HhtLPzCGKekhSbhCRxFd2GvT3i0yGW
-         bTiuSGT+cRmouW/86zDFnmh0SYURusictnnTX3plHnIKjYeui8i/mdwVcNllnWXJn40D
-         1XhQgzDEI2L8mOvAVTPcqd3UBX3lbrLYZjpRSw4c9vRDEXqnjAqupD5ft1MPJF1ghfOF
-         6nRg==
+        bh=9illaEObLHRv6khyfyph9mep+F1r8osFvBHikwYPH9I=;
+        b=W7QF+ai3C7JRpJ7DOQDeCF89a5xxBiF/0lXSNUthwbG6jmxkenWQTPle/j+WScdB0X
+         qGQydni++1z+uVqkB+EnwFchyCSxqH/kdVkfI7v7tgJ0HBhyecbcwEu0iWVBmCbii6TG
+         0HUvdW9yJBl1AIIRqthxbHMhfhgrbtwYiTOuJXVE090/XphS7CwC6kb8x7e03wr/R328
+         6ftF/sB6w1XEbc9GComTDd9+SuPnN5MJo1/E+ZayhA8N55+ieEV5Dk5dOH/GZRS7AOWE
+         2ZwWYJwN395tEtovbqKIBxLIH38bODFF/X5yR1zb+V5qatSTSoPsGicdInk/V3OP1S1P
+         Kl+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1717174633; x=1717779433;
+        d=1e100.net; s=20230601; t=1717184941; x=1717789741;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=lDpefX8I8dKKf2DRUIerqaG59Yy8pOoEXRZkzLtgH6I=;
-        b=Y1DRc0olArfoCIKNY+d4gcZkfUOwfpc3hBTbDAHj4V4wvF3DFbghfw9+Z+xq/i/gpq
-         taUIFjGwPRcJ5LyC6rG3x18lZHQWhmL1t/KTb4PI3qBQnvRMC9n+Lp158uqD/r7F2hTA
-         iJeomWJ2SvZ5kmf2xeCHY0j6uQB+nG4Yt4zj7/7UpspxnL148UtFpNAY/iqi5J9sUB8Z
-         w5/sIfRJqcHMi16b1b8u6JtMKarH8/W4nhmGxkxrpt2ylRwwEL4AuFw16ocLoq9Na3Zs
-         a84JSBX84VSJdImpPWqObOMS6pRaBeHORL1NcoQmAifP4dZM7As/ayLj838/mZjQ8qMz
-         PR4A==
-X-Gm-Message-State: AOJu0YzLKbdlz5sh1Z7gk+VIg0C0HU/MijzZ4zI6iym3kOmtX+aDX81w
-	bNUX3jxzgMCq/UI736Q8ULWUWC2VMSzGxa+jQ3wt/tA5f1u2RSjTGfr6JA==
-X-Google-Smtp-Source: AGHT+IF2tdQzMmF5nMi0gF7eisze3bC+KwQ4Cj3WS+8s58RAi0rGVnbd2l7SxfKbZQNHbpSaofS59Q==
-X-Received: by 2002:adf:ee0b:0:b0:35d:bfe2:baaa with SMTP id ffacd0b85a97d-35e0f255209mr2549028f8f.13.1717174632612;
-        Fri, 31 May 2024 09:57:12 -0700 (PDT)
+        bh=9illaEObLHRv6khyfyph9mep+F1r8osFvBHikwYPH9I=;
+        b=IdB/IiFQB6drIfjCPDspkOIsHRdMq5z80ll0k4mKu8X0aiPZPTs7pEW0jwK7vhkJi9
+         67ygBzPqUHHXTd6oJ8AV4vg7IlDxADs3AAeL8guX6KhwpYJA8EjJZEHSSv1a2SejtjvI
+         oZr/MmhCJ/eIYvMXmFto+22PYdhtHvRljV0xR7aYyJEsrhi6POWbvteH1pKSQovrat9T
+         RpKf1/AZZEvT0y3GetXy3EGvFCTyZTD9JBm0/RA1xDo6mYkbeus+pOTcubWiDgtkWoay
+         gCB38Azd9E/FPRmWjfssu1rEp5rdkmbosXPwRnrkXA5nGqIx0VE4PbZ4Q/uManbmA1SN
+         eT3g==
+X-Gm-Message-State: AOJu0Ywuvf+Vl6JEayO6cKtgZ5SMQ5JRUkOlh53d0bMCM+Orvus9Z0By
+	7MQW2yHP3j0+C1IBCZI0QRGvLwAmx/1mNZDtt+GMxDVe/ok/wGc1bGpy9A==
+X-Google-Smtp-Source: AGHT+IHpTKGIL0CqO62i5OCByQq5ABp5TLMyiDCO51lcAeuiZ1vz3AxpXcKTYcOuYp+pyR6Z0Upr/g==
+X-Received: by 2002:a05:600c:4f46:b0:416:536b:683a with SMTP id 5b1f17b1804b1-4212e0ae76fmr23360115e9.32.1717184940684;
+        Fri, 31 May 2024 12:49:00 -0700 (PDT)
 Received: from localhost.localdomain (78-20-160-86.access.telenet.be. [78.20.160.86])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-35dd04d9364sm2229508f8f.53.2024.05.31.09.57.11
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4212b8a5658sm34697745e9.34.2024.05.31.12.48.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 31 May 2024 09:57:12 -0700 (PDT)
+        Fri, 31 May 2024 12:49:00 -0700 (PDT)
 From: Jan Vermaete <jan.vermaete@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Jan Vermaete <jan.vermaete@gmail.com>
-Subject: [meta-python][PATCH] python3-flask: added the async packageconfig
-Date: Fri, 31 May 2024 18:55:08 +0200
-Message-Id: <20240531165508.755680-1-jan.vermaete@gmail.com>
+Subject: [meta-python][PATCH] python3-flask: upgrade 3.0.2 -> 3.0.3
+Date: Fri, 31 May 2024 21:46:50 +0200
+Message-Id: <20240531194650.3279149-1-jan.vermaete@gmail.com>
 X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 31 May 2024 16:57:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110655
+ <openembedded-devel@lists.openembedded.org>; Fri, 31 May 2024 19:49:11 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110656
 
-The ptests did pass and some extra tests where added when the async option is enabled.
+Changelog:
+  The default hashlib.sha1 may not be available in FIPS builds. Don't access it at import time so the developer has time to change the default. #5448
+  Don't initialize the cli attribute in the sansio scaffold, but rather in the Flask concrete class. #5270
 
-PASS: tests/test_async.py:test_async_route[/]
-PASS: tests/test_async.py:test_async_route[/home]
-PASS: tests/test_async.py:test_async_route[/bp/]
-PASS: tests/test_async.py:test_async_route[/view]
-PASS: tests/test_async.py:test_async_route[/methodview]
-PASS: tests/test_async.py:test_async_error_handler[/error]
-PASS: tests/test_async.py:test_async_error_handler[/bp/error]
-PASS: tests/test_async.py:test_async_before_after_request
+The license file was renamed from LICENSE.rst to LICENSE.txt without changing the content.
 
 Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
 ---
- meta-python/recipes-devtools/python/python3-flask_3.0.2.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ .../python/{python3-flask_3.0.2.bb => python3-flask_3.0.3.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-flask_3.0.2.bb => python3-flask_3.0.3.bb} (85%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-flask_3.0.2.bb b/meta-python/recipes-devtools/python/python3-flask_3.0.2.bb
-index 99524b437..1de1a827d 100644
+diff --git a/meta-python/recipes-devtools/python/python3-flask_3.0.2.bb b/meta-python/recipes-devtools/python/python3-flask_3.0.3.bb
+similarity index 85%
+rename from meta-python/recipes-devtools/python/python3-flask_3.0.2.bb
+rename to meta-python/recipes-devtools/python/python3-flask_3.0.3.bb
+index 1de1a827d..fa2ade536 100644
 --- a/meta-python/recipes-devtools/python/python3-flask_3.0.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-flask_3.0.2.bb
-@@ -19,6 +19,9 @@ inherit pypi python_setuptools_build_meta ptest
++++ b/meta-python/recipes-devtools/python/python3-flask_3.0.3.bb
+@@ -4,9 +4,9 @@ Flask is a microframework for Python based on Werkzeug, Jinja 2 and good \
+ intentions. And before you ask: It’s BSD licensed!"
+ HOMEPAGE = "https://github.com/mitsuhiko/flask/"
+ LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=ffeffa59c90c9c4a033c7574f8f3fb75"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ffeffa59c90c9c4a033c7574f8f3fb75"
  
- CLEANBROKEN = "1"
+-SRC_URI[sha256sum] = "822c03f4b799204250a7ee84b1eddc40665395333973dfb9deebfe425fefcb7d"
++SRC_URI[sha256sum] = "ceb27b0af3823ea2737928a4d99d125a06175b8512c445cbd9a9ce200ef76842"
  
-+PACKAGECONFIG ??= "async"
-+PACKAGECONFIG[async] = ",,,python3-asgiref"
-+
- RDEPENDS:${PN} = " \
-     python3-blinker \
-     python3-click \
+ SRC_URI += " \
+         file://run-ptest \
 -- 
 2.39.2
 
