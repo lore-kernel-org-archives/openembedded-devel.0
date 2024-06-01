@@ -1,111 +1,620 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A069AC25B76
-	for <webhook@archiver.kernel.org>; Sat,  1 Jun 2024 13:50:17 +0000 (UTC)
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
- by mx.groups.io with SMTP id smtpd.web11.37772.1717249807777603499
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C9EE6C25B76
+	for <webhook@archiver.kernel.org>; Sat,  1 Jun 2024 14:22:57 +0000 (UTC)
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
+ by mx.groups.io with SMTP id smtpd.web10.38555.1717251771711697362
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 01 Jun 2024 06:50:08 -0700
+ Sat, 01 Jun 2024 07:22:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=bu63WfwE;
- spf=pass (domain: gmail.com, ip: 209.85.218.53, mailfrom: martin.jansa@gmail.com)
-Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-a6266ffdba8so252060466b.1
-        for <openembedded-devel@lists.openembedded.org>; Sat, 01 Jun 2024 06:50:07 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=dJ+qXkcv;
+ spf=pass (domain: gmail.com, ip: 209.85.214.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-1f44b4404dfso26451135ad.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 01 Jun 2024 07:22:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1717249806; x=1717854606; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1717251771; x=1717856571; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=0jnoeYf/sXjGJe4PaySGlybbSmZU2NlqF8H6lX6Mbz4=;
-        b=bu63WfwEz7alCof4gZ/RgzebIU2iZ7b8taEiRE17I1lGiBy0LZZqNpqWFnDSNiBfL4
-         S7jr50LKYh16MyamA64wMlNLMk4KAYjCBcATohMQgDFiKpNbm7Ah2+8E1XeaEUQGgnut
-         +wcuDBc0IVSfw3WR6O/3E7ncDJZ5HjAR/+sgQ1rwczfI/+mMZ1NqA5dKbuteUUMDJ7a2
-         za2FflO5vpi7acR+WQvfYsURLsFbBrAN97dm+rVHGUnCdVUF51lv3xhJXzjn+uXIqKIK
-         GSrAhoAfNVhs2rjm0lQE6hVfrXQ6Mm7rI+6L8PQa1ukjGgULKCw3WprR46WgF67LBuxQ
-         kSnA==
+        bh=3Ossts4uyqz87JcYv4NjhTw30xM8w67FLc2TSle31hc=;
+        b=dJ+qXkcv3Fk1dR4DtHEM56IQ4hrXAlrwV4hwNLagqIlfUM0hWrR/f8gQllKaJXG86+
+         +L1NcjrDOFbuOL/CZrctvBIh51TDQveP30hiIXtwBkXPrcMXU9lAwKpDpL+imBib2G5K
+         i7LlhozEI5jPtHQmBZ1Cnp9PgMcBFCfDRXvuo/fsXRrNqzWRCeyLHQtcpRDY02ty9I4w
+         o6iGy2zmyKjvAAshcacud1rDgROTsHZ5MUT7GCkA8WDKPchrEeaTgmgqduTAnbAGqzaE
+         qRM8rqaZC+JVP+BdNV7OJxKbkJQzcEtO4FhbqdJrr0210Zdy6zNjKYzFJUTQtj/XF54x
+         JuPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1717249806; x=1717854606;
+        d=1e100.net; s=20230601; t=1717251771; x=1717856571;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=0jnoeYf/sXjGJe4PaySGlybbSmZU2NlqF8H6lX6Mbz4=;
-        b=inSZ6pPNNcuwKPK/J/HZaw55KLIajBCvt7f0KbknejB2Uitqk+joLEzkzU7Kaav1ec
-         iGMFF76Wgw/ynyuyS7YJ2VRATj3gXg6yzuuJiwsUXN16YgOXS6kgE2ZvYkB6c/uHuuWN
-         WzyM6UInETT2UUYgIar/pjpwV4DWWWVCSjvTMZXQHg8xzM+otqpNXrN+1DPSIL65ec1N
-         2eoH1RycO4vNpSph6l2Np5mWwnVGJOGop/EcsOVmCd9xF0d6Hhc7RiumzQgGvmfSBySj
-         eTTnfGSBqUbCDUZGGG6HBvmshQ5MxAbCq7AbzRr/XnPZzPMBXSn8M7+Y1RVVjhTUu3cn
-         hBrw==
-X-Gm-Message-State: AOJu0Yx7+9oPJvsjWaE/A6adc0COZfmkqs+mIPCAmVbqKAFdfABcr4Wt
-	PPrHRonqlNZ79k8y41QnrAaux1Uc+9L7qq8KFyPpkGSC/6zGOg+s/g2c6w==
-X-Google-Smtp-Source: AGHT+IGLEZG+x8UoBWd3gaVHqiSLI6yCLm1biTjl3elyvuDfLuLhRFyTPpIcpI2ZbXsuo84nxFXNPQ==
-X-Received: by 2002:a17:906:c797:b0:a63:3586:a4ca with SMTP id a640c23a62f3a-a681fe4e68amr308206366b.11.1717249805799;
-        Sat, 01 Jun 2024 06:50:05 -0700 (PDT)
-Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a68b4b1f225sm71716866b.25.2024.06.01.06.50.05
+        bh=3Ossts4uyqz87JcYv4NjhTw30xM8w67FLc2TSle31hc=;
+        b=n3S11jETvG+I2WzRelkxYWIaQQMhu0heAftkBvXG9VBGXa4Bq92rApKL2VKXYKNBcb
+         iwKTyBOEKqa+IYMVAPMd57eKK3K0zn6cIQxYMdz3CH5goVMT9kVrVMnmMNiQKBZEiRMY
+         H18YJpl/mZb5Ut8Du+1NMURew4US3IyO+MD8SZd8sz+RwXOghI7WlxGACrAZ+92HlAsD
+         M2Lhq1qszzCW08KwXNlOzLJTGVdIE2CbgXMkpgP2n6HCYq1m/1NkcjMVgHcYKTGxo0OA
+         oAlHBIlXFl8UKVFwlV9VjccFV7WdBOxqiKZgRgEUubVdpz4aRm8xevDtmO4k+w9dtHPC
+         GrgQ==
+X-Gm-Message-State: AOJu0YyY/1yH5FJZef8vaGbUpD/p7Xb/cWdvqtX/8M+qC4HLw/8Mz5mG
+	X4OTgjzGsgCc42KoN+WAQ8GSA55dRICxr5XsFXlBo+QkPavErYPJumVYz3E4X3M=
+X-Google-Smtp-Source: AGHT+IH0LvO5BWdjasU21iuqDHJsKwQJKwct2SuwRFuVXx44eNX1+eoIxf0uOCPMSXKIUYhRx7/1/A==
+X-Received: by 2002:a17:902:f54c:b0:1f6:1c78:7037 with SMTP id d9443c01a7336-1f63704b40cmr58754205ad.37.1717251770434;
+        Sat, 01 Jun 2024 07:22:50 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::3972])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2c1c28316d0sm3147200a91.40.2024.06.01.07.22.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 01 Jun 2024 06:50:05 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+        Sat, 01 Jun 2024 07:22:49 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: [meta-oe][PATCH] python3-icu: upgrade from 2.12 to 2.13.1 to fix build with icu-75
-Date: Sat,  1 Jun 2024 15:49:49 +0200
-Message-ID: <20240601134949.3057658-1-martin.jansa@gmail.com>
-X-Mailer: git-send-email 2.45.2
+Cc: Khem Raj <raj.khem@gmail.com>,
+	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
+Subject: [meta-oe][PATCH] libgpiod: Migrate to catch2 v3
+Date: Sat,  1 Jun 2024 07:22:47 -0700
+Message-ID: <20240601142247.4047887-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.45.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 01 Jun 2024 13:50:17 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110658
+ <openembedded-devel@lists.openembedded.org>; Sat, 01 Jun 2024 14:22:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110659
 
-Version 2.13 -> 2.13.1
-----------------------
-  - change c++11 to c++17 in setup.py as current versions of ICU require it
-
-Version 2.12 -> 2.13
---------------------
-  - fixed build issues on Windows
-  - added wrappers for MeasureUnit(locale, width) and getUnitDisplayName()
-  - added wrappers for DateFormatSymbols.getEra|ZodiacNames()
-  - added wrappers for DateFormatSymbols.getZoneStrings()
-  - added wrappers for LocaleDisplayNames
-  - fixed bug dealloc calling wrong destructor on most types (Fredrik Roubert)
-  - added support for ICU 75.1
-  - added wrappers for LocalizedNumber|Range|Formatter.withoutLocale()
-  - added wrappers for UIdentifierType, Char.hasIDType(), Char.getIDTypes()
-  - added wrappers for UIdentifierStatus
-  - added wrappers for UProperty.IDENTIFIER_TYPE, UProperty.IDENTIFIER_STATUS
-
-Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 ---
- .../python/{python3-icu_2.12.bb => python3-icu_2.13.1.bb}   | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
- rename meta-python/recipes-devtools/python/{python3-icu_2.12.bb => python3-icu_2.13.1.bb} (70%)
+ ...cxx-Migrate-C-tests-to-use-Catch2-v3.patch | 530 ++++++++++++++++++
+ .../libgpiod/libgpiod_2.1.2.bb                |   1 +
+ 2 files changed, 531 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-bindings-cxx-Migrate-C-tests-to-use-Catch2-v3.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-icu_2.12.bb b/meta-python/recipes-devtools/python/python3-icu_2.13.1.bb
-similarity index 70%
-rename from meta-python/recipes-devtools/python/python3-icu_2.12.bb
-rename to meta-python/recipes-devtools/python/python3-icu_2.13.1.bb
-index 6394db4e9e..6a590de5fd 100644
---- a/meta-python/recipes-devtools/python/python3-icu_2.12.bb
-+++ b/meta-python/recipes-devtools/python/python3-icu_2.13.1.bb
-@@ -8,8 +8,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0724597863f1581ab01429e0423e779f"
- DEPENDS += "icu"
- 
- PYPI_PACKAGE = "PyICU"
--SRC_URI[sha256sum] = "bd7ab5efa93ad692e6daa29cd249364e521218329221726a113ca3cb281c8611"
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-bindings-cxx-Migrate-C-tests-to-use-Catch2-v3.patch b/meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-bindings-cxx-Migrate-C-tests-to-use-Catch2-v3.patch
+new file mode 100644
+index 0000000000..ac1eff510b
+--- /dev/null
++++ b/meta-oe/recipes-support/libgpiod/libgpiod-2.x/0001-bindings-cxx-Migrate-C-tests-to-use-Catch2-v3.patch
+@@ -0,0 +1,530 @@
++From 0d3e1b3923a1fac80e9d75d8b5e33cd36f4fe659 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Fri, 31 May 2024 09:03:22 -0700
++Subject: [PATCH] bindings: cxx: Migrate C++ tests to use Catch2 v3
 +
-+SRC_URI[sha256sum] = "d4919085eaa07da12bade8ee721e7bbf7ade0151ca0f82946a26c8f4b98cdceb"
- 
- SRC_URI += "file://0001-Fix-host-contamination-of-include-files.patch"
- 
- inherit pkgconfig pypi python_setuptools_build_meta
++Catch2 v3.x has API changes which needs to be addressed
++in the tests themselves, hence this changeset is to fix
++those.
 +
-+# it's lowercase pyicu instead of ${PYPI_PACKAGE} in this version
-+S = "${WORKDIR}/pyicu-${PV}"
--- 
-2.45.2
-
++Upstream-Status: Submitted [https://lore.kernel.org/linux-gpio/20240531184223.3949069-1-raj.khem@gmail.com/T/#u]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Cc: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
++---
++ bindings/cxx/tests/Makefile.am              |  2 +-
++ bindings/cxx/tests/gpiod-cxx-test-main.cpp  |  3 +--
++ bindings/cxx/tests/helpers.hpp              |  8 +++---
++ bindings/cxx/tests/tests-chip-info.cpp      | 30 ++++++++++-----------
++ bindings/cxx/tests/tests-chip.cpp           | 14 +++++-----
++ bindings/cxx/tests/tests-edge-event.cpp     |  2 +-
++ bindings/cxx/tests/tests-info-event.cpp     |  2 +-
++ bindings/cxx/tests/tests-line-config.cpp    |  2 +-
++ bindings/cxx/tests/tests-line-info.cpp      | 22 +++++++--------
++ bindings/cxx/tests/tests-line-request.cpp   | 16 +++++------
++ bindings/cxx/tests/tests-line-settings.cpp  |  2 +-
++ bindings/cxx/tests/tests-line.cpp           |  2 +-
++ bindings/cxx/tests/tests-misc.cpp           |  2 +-
++ bindings/cxx/tests/tests-request-config.cpp | 10 +++----
++ configure.ac                                |  4 +--
++ 15 files changed, 60 insertions(+), 61 deletions(-)
++
++diff --git a/bindings/cxx/tests/Makefile.am b/bindings/cxx/tests/Makefile.am
++index fbf80a1..d9284da 100644
++--- a/bindings/cxx/tests/Makefile.am
+++++ b/bindings/cxx/tests/Makefile.am
++@@ -4,7 +4,7 @@
++ AM_CXXFLAGS = -I$(top_srcdir)/bindings/cxx/ -I$(top_srcdir)/include
++ AM_CXXFLAGS += -I$(top_srcdir)/tests/gpiosim/
++ AM_CXXFLAGS += -Wall -Wextra -g -std=gnu++17 $(CATCH2_CFLAGS)
++-AM_LDFLAGS = -pthread
+++AM_LDFLAGS = -pthread $(CATCH2_LIBS)
++ LDADD = $(top_builddir)/bindings/cxx/libgpiodcxx.la
++ LDADD += $(top_builddir)/tests/gpiosim/libgpiosim.la
++ 
++diff --git a/bindings/cxx/tests/gpiod-cxx-test-main.cpp b/bindings/cxx/tests/gpiod-cxx-test-main.cpp
++index 11bf8e5..ec48286 100644
++--- a/bindings/cxx/tests/gpiod-cxx-test-main.cpp
+++++ b/bindings/cxx/tests/gpiod-cxx-test-main.cpp
++@@ -1,5 +1,4 @@
++ // SPDX-License-Identifier: GPL-2.0-or-later
++ // SPDX-FileCopyrightText: 2017-2021 Bartosz Golaszewski <bartekgola@gmail.com>
++ 
++-#define CATCH_CONFIG_MAIN
++-#include <catch2/catch.hpp>
+++#include <catch2/catch_all.hpp>
++diff --git a/bindings/cxx/tests/helpers.hpp b/bindings/cxx/tests/helpers.hpp
++index 62d9827..62bbdf5 100644
++--- a/bindings/cxx/tests/helpers.hpp
+++++ b/bindings/cxx/tests/helpers.hpp
++@@ -4,13 +4,13 @@
++ #ifndef __GPIOD_CXX_TEST_HELPERS_HPP__
++ #define __GPIOD_CXX_TEST_HELPERS_HPP__
++ 
++-#include <catch2/catch.hpp>
+++#include <catch2/catch_all.hpp>
++ #include <regex>
++ #include <string>
++ #include <sstream>
++ #include <system_error>
++ 
++-class system_error_matcher : public Catch::MatcherBase<::std::system_error>
+++class system_error_matcher : public Catch::Matchers::MatcherBase<::std::system_error>
++ {
++ public:
++ 	explicit system_error_matcher(int expected_errno);
++@@ -21,7 +21,7 @@ private:
++ 	::std::error_condition _m_cond;
++ };
++ 
++-class regex_matcher : public Catch::MatcherBase<::std::string>
+++class regex_matcher : public Catch::Matchers::MatcherBase<::std::string>
++ {
++ public:
++ 	explicit regex_matcher(const ::std::string& pattern);
++@@ -33,7 +33,7 @@ private:
++ 	::std::string _m_repr;
++ };
++ 
++-template<class T> class stringify_matcher : public Catch::MatcherBase<T>
+++template<class T> class stringify_matcher : public Catch::Matchers::MatcherBase<T>
++ {
++ public:
++ 	explicit stringify_matcher(const ::std::string& expected) : _m_expected(expected)
++diff --git a/bindings/cxx/tests/tests-chip-info.cpp b/bindings/cxx/tests/tests-chip-info.cpp
++index 717c387..2c54f53 100644
++--- a/bindings/cxx/tests/tests-chip-info.cpp
+++++ b/bindings/cxx/tests/tests-chip-info.cpp
++@@ -1,7 +1,7 @@
++ // SPDX-License-Identifier: GPL-2.0-or-later
++ // SPDX-FileCopyrightText: 2021-2022 Bartosz Golaszewski <brgl@bgdev.pl>
++ 
++-#include <catch2/catch.hpp>
+++#include <catch2/catch_all.hpp>
++ #include <gpiod.hpp>
++ #include <sstream>
++ 
++@@ -24,12 +24,12 @@ TEST_CASE("chip_info properties can be read", "[chip-info][chip]")
++ 
++ 	SECTION("get chip name")
++ 	{
++-		REQUIRE_THAT(info.name(), Catch::Equals(sim.name()));
+++		REQUIRE_THAT(info.name(), Catch::Matchers::Equals(sim.name()));
++ 	}
++ 
++ 	SECTION("get chip label")
++ 	{
++-		REQUIRE_THAT(info.label(), Catch::Equals("foobar"));
+++		REQUIRE_THAT(info.label(), Catch::Matchers::Equals("foobar"));
++ 	}
++ 
++ 	SECTION("get num_lines")
++@@ -52,12 +52,12 @@ TEST_CASE("chip_info can be copied and moved", "[chip-info]")
++ 	{
++ 		auto copy(info);
++ 
++-		REQUIRE_THAT(copy.name(), Catch::Equals(sim.name()));
++-		REQUIRE_THAT(copy.label(), Catch::Equals("foobar"));
+++		REQUIRE_THAT(copy.name(), Catch::Matchers::Equals(sim.name()));
+++		REQUIRE_THAT(copy.label(), Catch::Matchers::Equals("foobar"));
++ 		REQUIRE(copy.num_lines() == 4);
++ 
++-		REQUIRE_THAT(info.name(), Catch::Equals(sim.name()));
++-		REQUIRE_THAT(info.label(), Catch::Equals("foobar"));
+++		REQUIRE_THAT(info.name(), Catch::Matchers::Equals(sim.name()));
+++		REQUIRE_THAT(info.label(), Catch::Matchers::Equals("foobar"));
++ 		REQUIRE(info.num_lines() == 4);
++ 	}
++ 
++@@ -67,12 +67,12 @@ TEST_CASE("chip_info can be copied and moved", "[chip-info]")
++ 
++ 		copy = info;
++ 
++-		REQUIRE_THAT(copy.name(), Catch::Equals(sim.name()));
++-		REQUIRE_THAT(copy.label(), Catch::Equals("foobar"));
+++		REQUIRE_THAT(copy.name(), Catch::Matchers::Equals(sim.name()));
+++		REQUIRE_THAT(copy.label(), Catch::Matchers::Equals("foobar"));
++ 		REQUIRE(copy.num_lines() == 4);
++ 
++-		REQUIRE_THAT(info.name(), Catch::Equals(sim.name()));
++-		REQUIRE_THAT(info.label(), Catch::Equals("foobar"));
+++		REQUIRE_THAT(info.name(), Catch::Matchers::Equals(sim.name()));
+++		REQUIRE_THAT(info.label(), Catch::Matchers::Equals("foobar"));
++ 		REQUIRE(info.num_lines() == 4);
++ 	}
++ 
++@@ -80,8 +80,8 @@ TEST_CASE("chip_info can be copied and moved", "[chip-info]")
++ 	{
++ 		auto moved(std::move(info));
++ 
++-		REQUIRE_THAT(moved.name(), Catch::Equals(sim.name()));
++-		REQUIRE_THAT(moved.label(), Catch::Equals("foobar"));
+++		REQUIRE_THAT(moved.name(), Catch::Matchers::Equals(sim.name()));
+++		REQUIRE_THAT(moved.label(), Catch::Matchers::Equals("foobar"));
++ 		REQUIRE(moved.num_lines() == 4);
++ 	}
++ 
++@@ -91,8 +91,8 @@ TEST_CASE("chip_info can be copied and moved", "[chip-info]")
++ 
++ 		moved = ::std::move(info);
++ 
++-		REQUIRE_THAT(moved.name(), Catch::Equals(sim.name()));
++-		REQUIRE_THAT(moved.label(), Catch::Equals("foobar"));
+++		REQUIRE_THAT(moved.name(), Catch::Matchers::Equals(sim.name()));
+++		REQUIRE_THAT(moved.label(), Catch::Matchers::Equals("foobar"));
++ 		REQUIRE(moved.num_lines() == 4);
++ 	}
++ }
++diff --git a/bindings/cxx/tests/tests-chip.cpp b/bindings/cxx/tests/tests-chip.cpp
++index c5ec19b..1ab7add 100644
++--- a/bindings/cxx/tests/tests-chip.cpp
+++++ b/bindings/cxx/tests/tests-chip.cpp
++@@ -1,7 +1,7 @@
++ // SPDX-License-Identifier: GPL-2.0-or-later
++ // SPDX-FileCopyrightText: 2021-2022 Bartosz Golaszewski <brgl@bgdev.pl>
++ 
++-#include <catch2/catch.hpp>
+++#include <catch2/catch_all.hpp>
++ #include <gpiod.hpp>
++ #include <sstream>
++ #include <system_error>
++@@ -48,9 +48,9 @@ TEST_CASE("chip constructor works", "[chip]")
++ 			.build();
++ 
++ 		::gpiod::chip first(sim.dev_path());
++-		REQUIRE_THAT(first.get_info().label(), Catch::Equals("foobar"));
+++		REQUIRE_THAT(first.get_info().label(), Catch::Matchers::Equals("foobar"));
++ 		::gpiod::chip second(::std::move(first));
++-		REQUIRE_THAT(second.get_info().label(), Catch::Equals("foobar"));
+++		REQUIRE_THAT(second.get_info().label(), Catch::Matchers::Equals("foobar"));
++ 	}
++ }
++ 
++@@ -70,9 +70,9 @@ TEST_CASE("chip operators work", "[chip]")
++ 
++ 		::gpiod::chip moved_chip(moved_sim.dev_path());
++ 
++-		REQUIRE_THAT(chip.get_info().label(), Catch::Equals("foobar"));
+++		REQUIRE_THAT(chip.get_info().label(), Catch::Matchers::Equals("foobar"));
++ 		chip = ::std::move(moved_chip);
++-		REQUIRE_THAT(chip.get_info().label(), Catch::Equals("moved"));
+++		REQUIRE_THAT(chip.get_info().label(), Catch::Matchers::Equals("moved"));
++ 	}
++ 
++ 	SECTION("boolean operator")
++@@ -94,7 +94,7 @@ TEST_CASE("chip properties can be read", "[chip]")
++ 
++ 	SECTION("get device path")
++ 	{
++-		REQUIRE_THAT(chip.path(), Catch::Equals(sim.dev_path()));
+++		REQUIRE_THAT(chip.path(), Catch::Matchers::Equals(sim.dev_path()));
++ 	}
++ 
++ 	SECTION("get file descriptor")
++@@ -169,7 +169,7 @@ TEST_CASE("stream insertion operator works for chip", "[chip]")
++ 			    "\", label=\"foobar\", num_lines=4))";
++ 
++ 		buf << chip;
++-		REQUIRE_THAT(buf.str(), Catch::Equals(expected.str()));
+++		REQUIRE_THAT(buf.str(), Catch::Matchers::Equals(expected.str()));
++ 	}
++ 
++ 	SECTION("closed chip")
++diff --git a/bindings/cxx/tests/tests-edge-event.cpp b/bindings/cxx/tests/tests-edge-event.cpp
++index 19a6ab3..db387be 100644
++--- a/bindings/cxx/tests/tests-edge-event.cpp
+++++ b/bindings/cxx/tests/tests-edge-event.cpp
++@@ -1,7 +1,7 @@
++ // SPDX-License-Identifier: GPL-2.0-or-later
++ // SPDX-FileCopyrightText: 2022 Bartosz Golaszewski <brgl@bgdev.pl>
++ 
++-#include <catch2/catch.hpp>
+++#include <catch2/catch_all.hpp>
++ #include <chrono>
++ #include <gpiod.hpp>
++ #include <sstream>
++diff --git a/bindings/cxx/tests/tests-info-event.cpp b/bindings/cxx/tests/tests-info-event.cpp
++index 21c0ef0..f7ae309 100644
++--- a/bindings/cxx/tests/tests-info-event.cpp
+++++ b/bindings/cxx/tests/tests-info-event.cpp
++@@ -1,7 +1,7 @@
++ // SPDX-License-Identifier: GPL-2.0-or-later
++ // SPDX-FileCopyrightText: 2022 Bartosz Golaszewski <brgl@bgdev.pl>
++ 
++-#include <catch2/catch.hpp>
+++#include <catch2/catch_all.hpp>
++ #include <chrono>
++ #include <filesystem>
++ #include <gpiod.hpp>
++diff --git a/bindings/cxx/tests/tests-line-config.cpp b/bindings/cxx/tests/tests-line-config.cpp
++index 5e439a1..2f510fb 100644
++--- a/bindings/cxx/tests/tests-line-config.cpp
+++++ b/bindings/cxx/tests/tests-line-config.cpp
++@@ -1,7 +1,7 @@
++ // SPDX-License-Identifier: GPL-2.0-or-later
++ // SPDX-FileCopyrightText: 2022 Bartosz Golaszewski <brgl@bgdev.pl>
++ 
++-#include <catch2/catch.hpp>
+++#include <catch2/catch_all.hpp>
++ #include <gpiod.hpp>
++ 
++ #include "gpiosim.hpp"
++diff --git a/bindings/cxx/tests/tests-line-info.cpp b/bindings/cxx/tests/tests-line-info.cpp
++index 21211f2..8589da3 100644
++--- a/bindings/cxx/tests/tests-line-info.cpp
+++++ b/bindings/cxx/tests/tests-line-info.cpp
++@@ -1,7 +1,7 @@
++ // SPDX-License-Identifier: GPL-2.0-or-later
++ // SPDX-FileCopyrightText: 2022 Bartosz Golaszewski <brgl@bgdev.pl>
++ 
++-#include <catch2/catch.hpp>
+++#include <catch2/catch_all.hpp>
++ #include <gpiod.hpp>
++ #include <string>
++ 
++@@ -35,9 +35,9 @@ TEST_CASE("get_line_info() works", "[chip][line-info]")
++ 		auto info = chip.get_line_info(0);
++ 
++ 		REQUIRE(info.offset() == 0);
++-		REQUIRE_THAT(info.name(), Catch::Equals("foobar"));
+++		REQUIRE_THAT(info.name(), Catch::Matchers::Equals("foobar"));
++ 		REQUIRE(info.used());
++-		REQUIRE_THAT(info.consumer(), Catch::Equals("hog"));
+++		REQUIRE_THAT(info.consumer(), Catch::Matchers::Equals("hog"));
++ 		REQUIRE(info.direction() == ::gpiod::line::direction::OUTPUT);
++ 		REQUIRE_FALSE(info.active_low());
++ 		REQUIRE(info.bias() == ::gpiod::line::bias::UNKNOWN);
++@@ -74,9 +74,9 @@ TEST_CASE("line properties can be retrieved", "[line-info]")
++ 		auto info6 = chip.get_line_info(6);
++ 
++ 		REQUIRE(info4.offset() == 4);
++-		REQUIRE_THAT(info4.name(), Catch::Equals("baz"));
+++		REQUIRE_THAT(info4.name(), Catch::Matchers::Equals("baz"));
++ 		REQUIRE(info4.used());
++-		REQUIRE_THAT(info4.consumer(), Catch::Equals("hog4"));
+++		REQUIRE_THAT(info4.consumer(), Catch::Matchers::Equals("hog4"));
++ 		REQUIRE(info4.direction() == direction::OUTPUT);
++ 		REQUIRE(info4.edge_detection() == edge::NONE);
++ 		REQUIRE_FALSE(info4.active_low());
++@@ -102,10 +102,10 @@ TEST_CASE("line_info can be copied and moved")
++ 	{
++ 		auto copy(info);
++ 		REQUIRE(copy.offset() == 2);
++-		REQUIRE_THAT(copy.name(), Catch::Equals("foobar"));
+++		REQUIRE_THAT(copy.name(), Catch::Matchers::Equals("foobar"));
++ 		/* info can still be used */
++ 		REQUIRE(info.offset() == 2);
++-		REQUIRE_THAT(info.name(), Catch::Equals("foobar"));
+++		REQUIRE_THAT(info.name(), Catch::Matchers::Equals("foobar"));
++ 	}
++ 
++ 	SECTION("assignment operator works")
++@@ -113,17 +113,17 @@ TEST_CASE("line_info can be copied and moved")
++ 		auto copy = chip.get_line_info(0);
++ 		copy = info;
++ 		REQUIRE(copy.offset() == 2);
++-		REQUIRE_THAT(copy.name(), Catch::Equals("foobar"));
+++		REQUIRE_THAT(copy.name(), Catch::Matchers::Equals("foobar"));
++ 		/* info can still be used */
++ 		REQUIRE(info.offset() == 2);
++-		REQUIRE_THAT(info.name(), Catch::Equals("foobar"));
+++		REQUIRE_THAT(info.name(), Catch::Matchers::Equals("foobar"));
++ 	}
++ 
++ 	SECTION("move constructor works")
++ 	{
++ 		auto copy(::std::move(info));
++ 		REQUIRE(copy.offset() == 2);
++-		REQUIRE_THAT(copy.name(), Catch::Equals("foobar"));
+++		REQUIRE_THAT(copy.name(), Catch::Matchers::Equals("foobar"));
++ 	}
++ 
++ 	SECTION("move assignment operator works")
++@@ -131,7 +131,7 @@ TEST_CASE("line_info can be copied and moved")
++ 		auto copy = chip.get_line_info(0);
++ 		copy = ::std::move(info);
++ 		REQUIRE(copy.offset() == 2);
++-		REQUIRE_THAT(copy.name(), Catch::Equals("foobar"));
+++		REQUIRE_THAT(copy.name(), Catch::Matchers::Equals("foobar"));
++ 	}
++ }
++ 
++diff --git a/bindings/cxx/tests/tests-line-request.cpp b/bindings/cxx/tests/tests-line-request.cpp
++index 9632ae0..af8b979 100644
++--- a/bindings/cxx/tests/tests-line-request.cpp
+++++ b/bindings/cxx/tests/tests-line-request.cpp
++@@ -1,7 +1,7 @@
++ // SPDX-License-Identifier: GPL-2.0-or-later
++ // SPDX-FileCopyrightText: 2022 Bartosz Golaszewski <brgl@bgdev.pl>
++ 
++-#include <catch2/catch.hpp>
+++#include <catch2/catch_all.hpp>
++ #include <gpiod.hpp>
++ #include <sstream>
++ #include <stdexcept>
++@@ -20,7 +20,7 @@ using pull = ::gpiosim::chip::pull;
++ 
++ namespace {
++ 
++-class value_matcher : public Catch::MatcherBase<value>
+++class value_matcher : public Catch::Matchers::MatcherBase<value>
++ {
++ public:
++ 	value_matcher(pull pull, bool active_low = false)
++@@ -117,7 +117,7 @@ TEST_CASE("consumer string is set correctly", "[line-request]")
++ 		auto info = chip.get_line_info(2);
++ 
++ 		REQUIRE(info.used());
++-		REQUIRE_THAT(info.consumer(), Catch::Equals("foobar"));
+++		REQUIRE_THAT(info.consumer(), Catch::Matchers::Equals("foobar"));
++ 	}
++ 
++ 	SECTION("empty consumer")
++@@ -130,7 +130,7 @@ TEST_CASE("consumer string is set correctly", "[line-request]")
++ 		auto info = chip.get_line_info(2);
++ 
++ 		REQUIRE(info.used());
++-		REQUIRE_THAT(info.consumer(), Catch::Equals("?"));
+++		REQUIRE_THAT(info.consumer(), Catch::Matchers::Equals("?"));
++ 	}
++ }
++ 
++@@ -380,7 +380,7 @@ TEST_CASE("line_request can be moved", "[line-request]")
++ 		auto moved(::std::move(request));
++ 
++ 		REQUIRE(moved.fd() == fd);
++-		REQUIRE_THAT(moved.offsets(), Catch::Equals(offs));
+++		REQUIRE_THAT(moved.offsets(), Catch::Matchers::Equals(offs));
++ 	}
++ 
++ 	SECTION("move assignment operator works")
++@@ -388,7 +388,7 @@ TEST_CASE("line_request can be moved", "[line-request]")
++ 		another = ::std::move(request);
++ 
++ 		REQUIRE(another.fd() == fd);
++-		REQUIRE_THAT(another.offsets(), Catch::Equals(offs));
+++		REQUIRE_THAT(another.offsets(), Catch::Matchers::Equals(offs));
++ 	}
++ }
++ 
++@@ -484,7 +484,7 @@ TEST_CASE("line_request stream insertion operator works", "[line-request]")
++ 	{
++ 		buf << request;
++ 
++-		REQUIRE_THAT(buf.str(), Catch::Equals(expected.str()));
+++		REQUIRE_THAT(buf.str(), Catch::Matchers::Equals(expected.str()));
++ 	}
++ 
++ 	SECTION("request released")
++@@ -493,7 +493,7 @@ TEST_CASE("line_request stream insertion operator works", "[line-request]")
++ 
++ 		buf << request;
++ 
++-		REQUIRE_THAT(buf.str(), Catch::Equals("gpiod::line_request(released)"));
+++		REQUIRE_THAT(buf.str(), Catch::Matchers::Equals("gpiod::line_request(released)"));
++ 	}
++ }
++ 
++diff --git a/bindings/cxx/tests/tests-line-settings.cpp b/bindings/cxx/tests/tests-line-settings.cpp
++index dc821bb..2690331 100644
++--- a/bindings/cxx/tests/tests-line-settings.cpp
+++++ b/bindings/cxx/tests/tests-line-settings.cpp
++@@ -1,7 +1,7 @@
++ // SPDX-License-Identifier: GPL-2.0-or-later
++ // SPDX-FileCopyrightText: 2022 Bartosz Golaszewski <brgl@bgdev.pl>
++ 
++-#include <catch2/catch.hpp>
+++#include <catch2/catch_all.hpp>
++ #include <gpiod.hpp>
++ 
++ #include "helpers.hpp"
++diff --git a/bindings/cxx/tests/tests-line.cpp b/bindings/cxx/tests/tests-line.cpp
++index 319012a..abd0e08 100644
++--- a/bindings/cxx/tests/tests-line.cpp
+++++ b/bindings/cxx/tests/tests-line.cpp
++@@ -1,7 +1,7 @@
++ // SPDX-License-Identifier: GPL-2.0-or-later
++ // SPDX-FileCopyrightText: 2021-2022 Bartosz Golaszewski <brgl@bgdev.pl>
++ 
++-#include <catch2/catch.hpp>
+++#include <catch2/catch_all.hpp>
++ #include <gpiod.hpp>
++ 
++ #include "helpers.hpp"
++diff --git a/bindings/cxx/tests/tests-misc.cpp b/bindings/cxx/tests/tests-misc.cpp
++index f06dc39..33fc3fa 100644
++--- a/bindings/cxx/tests/tests-misc.cpp
+++++ b/bindings/cxx/tests/tests-misc.cpp
++@@ -1,7 +1,7 @@
++ // SPDX-License-Identifier: GPL-2.0-or-later
++ // SPDX-FileCopyrightText: 2021-2022 Bartosz Golaszewski <brgl@bgdev.pl>
++ 
++-#include <catch2/catch.hpp>
+++#include <catch2/catch_all.hpp>
++ #include <filesystem>
++ #include <gpiod.hpp>
++ #include <string>
++diff --git a/bindings/cxx/tests/tests-request-config.cpp b/bindings/cxx/tests/tests-request-config.cpp
++index 66eb748..d71e91b 100644
++--- a/bindings/cxx/tests/tests-request-config.cpp
+++++ b/bindings/cxx/tests/tests-request-config.cpp
++@@ -1,7 +1,7 @@
++ // SPDX-License-Identifier: GPL-2.0-or-later
++ // SPDX-FileCopyrightText: 2021-2022 Bartosz Golaszewski <brgl@bgdev.pl>
++ 
++-#include <catch2/catch.hpp>
+++#include <catch2/catch_all.hpp>
++ #include <cstddef>
++ #include <gpiod.hpp>
++ #include <string>
++@@ -33,7 +33,7 @@ TEST_CASE("request_config can be moved", "[request-config]")
++ 	SECTION("move constructor works")
++ 	{
++ 		auto moved(::std::move(cfg));
++-		REQUIRE_THAT(moved.consumer(), Catch::Equals("foobar"));
+++		REQUIRE_THAT(moved.consumer(), Catch::Matchers::Equals("foobar"));
++ 		REQUIRE(moved.event_buffer_size() == 64);
++ 	}
++ 
++@@ -43,7 +43,7 @@ TEST_CASE("request_config can be moved", "[request-config]")
++ 
++ 		moved = ::std::move(cfg);
++ 
++-		REQUIRE_THAT(moved.consumer(), Catch::Equals("foobar"));
+++		REQUIRE_THAT(moved.consumer(), Catch::Matchers::Equals("foobar"));
++ 		REQUIRE(moved.event_buffer_size() == 64);
++ 	}
++ }
++@@ -55,7 +55,7 @@ TEST_CASE("request_config mutators work", "[request-config]")
++ 	SECTION("set consumer")
++ 	{
++ 		cfg.set_consumer("foobar");
++-		REQUIRE_THAT(cfg.consumer(), Catch::Equals("foobar"));
+++		REQUIRE_THAT(cfg.consumer(), Catch::Matchers::Equals("foobar"));
++ 	}
++ 
++ 	SECTION("set event_buffer_size")
++@@ -77,7 +77,7 @@ TEST_CASE("request_config stream insertion operator works", "[request-config]")
++ 
++ 	::std::string expected("gpiod::request_config(consumer='foobar', event_buffer_size=32)");
++ 
++-	REQUIRE_THAT(buf.str(), Catch::Equals(expected));
+++	REQUIRE_THAT(buf.str(), Catch::Matchers::Equals(expected));
++ }
++ 
++ } /* namespace */
++diff --git a/configure.ac b/configure.ac
++index a2370c5..216007e 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -206,9 +206,9 @@ then
++ 
++ 	if test "x$with_tests" = xtrue
++ 	then
++-		PKG_CHECK_MODULES([CATCH2], [catch2],, [
+++		PKG_CHECK_MODULES([CATCH2], [catch2-with-main],, [
++ 			AC_LANG_PUSH([C++])
++-			AC_CHECK_HEADERS([catch2/catch.hpp], [], [HEADER_NOT_FOUND_CXX([catch2/catch.hpp])])
+++			AC_CHECK_HEADERS([catch2/catch_all.hpp], [], [HEADER_NOT_FOUND_CXX([catch2/catch_all.hpp])])
++ 			AC_LANG_POP([C++])
++ 		])
++ 	fi
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_2.1.2.bb b/meta-oe/recipes-support/libgpiod/libgpiod_2.1.2.bb
+index 6e4fbd2a3b..8eb41753c8 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod_2.1.2.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod_2.1.2.bb
+@@ -9,6 +9,7 @@ LIC_FILES_CHKSUM = " \
+ 
+ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-2.x:"
+ 
++SRC_URI += "file://0001-bindings-cxx-Migrate-C-tests-to-use-Catch2-v3.patch"
+ SRC_URI[sha256sum] = "7a148a5a7d1c97a1abb40474b9a392b6edd7a42fe077dfd7ff42cfba24308548"
+ 
+ # Enable all project features for ptest
 
