@@ -1,98 +1,133 @@
-Return-Path: <jan.vermaete@gmail.com>
+Return-Path: <martin.jansa@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8A4A2C25B75
-	for <webhook@archiver.kernel.org>; Fri, 31 May 2024 19:49:11 +0000 (UTC)
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
- by mx.groups.io with SMTP id smtpd.web11.22860.1717184942971478090
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7670AC25B76
+	for <webhook@archiver.kernel.org>; Sat,  1 Jun 2024 13:15:57 +0000 (UTC)
+Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
+ by mx.groups.io with SMTP id smtpd.web10.37134.1717247749992134505
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 31 May 2024 12:49:03 -0700
+ Sat, 01 Jun 2024 06:15:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=W7QF+ai3;
- spf=pass (domain: gmail.com, ip: 209.85.128.53, mailfrom: jan.vermaete@gmail.com)
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-42101a2ac2cso13983225e9.0
-        for <openembedded-devel@lists.openembedded.org>; Fri, 31 May 2024 12:49:02 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=YTkKUFcm;
+ spf=pass (domain: gmail.com, ip: 209.85.218.51, mailfrom: martin.jansa@gmail.com)
+Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-a635a74e031so375883066b.0
+        for <openembedded-devel@lists.openembedded.org>; Sat, 01 Jun 2024 06:15:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1717184941; x=1717789741; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1717247748; x=1717852548; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=9illaEObLHRv6khyfyph9mep+F1r8osFvBHikwYPH9I=;
-        b=W7QF+ai3C7JRpJ7DOQDeCF89a5xxBiF/0lXSNUthwbG6jmxkenWQTPle/j+WScdB0X
-         qGQydni++1z+uVqkB+EnwFchyCSxqH/kdVkfI7v7tgJ0HBhyecbcwEu0iWVBmCbii6TG
-         0HUvdW9yJBl1AIIRqthxbHMhfhgrbtwYiTOuJXVE090/XphS7CwC6kb8x7e03wr/R328
-         6ftF/sB6w1XEbc9GComTDd9+SuPnN5MJo1/E+ZayhA8N55+ieEV5Dk5dOH/GZRS7AOWE
-         2ZwWYJwN395tEtovbqKIBxLIH38bODFF/X5yR1zb+V5qatSTSoPsGicdInk/V3OP1S1P
-         Kl+Q==
+        bh=l4MNOPFxWiT3jJESDqIJi5iSgDf8vz4X7AnJyhNSSO8=;
+        b=YTkKUFcmi7/zCfxd7lilAgJF4vpsluykP+djIzc7vaK2g2w9R886fjMiYkdtsNb0b8
+         r4gi5at+HhYgjqj3HAA577bIDOEeqCadp0VnVLrXRBhL0kAn3CKJs8eVf6udBkenCJs4
+         F5bzXvX864gpyPJS+GMmqD4ziQ9aT/sn7yx+a2knPFfXXMzko2WUcN4XWy9C1dv8WlhH
+         LDnz6rv8HeNEFP/YPQWSDiBGJK8rAxj7HUrK/ovA5QqEJUoEL/pZv/ozTZSew+g2Edk5
+         rM2NTp1mrAdmm4PYfZ7uuzVEoHZyZbyRD9PR5RMpW24M1xcuDP7f0A0Zv1L+MBHoxiCl
+         3WaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1717184941; x=1717789741;
+        d=1e100.net; s=20230601; t=1717247748; x=1717852548;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=9illaEObLHRv6khyfyph9mep+F1r8osFvBHikwYPH9I=;
-        b=IdB/IiFQB6drIfjCPDspkOIsHRdMq5z80ll0k4mKu8X0aiPZPTs7pEW0jwK7vhkJi9
-         67ygBzPqUHHXTd6oJ8AV4vg7IlDxADs3AAeL8guX6KhwpYJA8EjJZEHSSv1a2SejtjvI
-         oZr/MmhCJ/eIYvMXmFto+22PYdhtHvRljV0xR7aYyJEsrhi6POWbvteH1pKSQovrat9T
-         RpKf1/AZZEvT0y3GetXy3EGvFCTyZTD9JBm0/RA1xDo6mYkbeus+pOTcubWiDgtkWoay
-         gCB38Azd9E/FPRmWjfssu1rEp5rdkmbosXPwRnrkXA5nGqIx0VE4PbZ4Q/uManbmA1SN
-         eT3g==
-X-Gm-Message-State: AOJu0Ywuvf+Vl6JEayO6cKtgZ5SMQ5JRUkOlh53d0bMCM+Orvus9Z0By
-	7MQW2yHP3j0+C1IBCZI0QRGvLwAmx/1mNZDtt+GMxDVe/ok/wGc1bGpy9A==
-X-Google-Smtp-Source: AGHT+IHpTKGIL0CqO62i5OCByQq5ABp5TLMyiDCO51lcAeuiZ1vz3AxpXcKTYcOuYp+pyR6Z0Upr/g==
-X-Received: by 2002:a05:600c:4f46:b0:416:536b:683a with SMTP id 5b1f17b1804b1-4212e0ae76fmr23360115e9.32.1717184940684;
-        Fri, 31 May 2024 12:49:00 -0700 (PDT)
-Received: from localhost.localdomain (78-20-160-86.access.telenet.be. [78.20.160.86])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4212b8a5658sm34697745e9.34.2024.05.31.12.48.59
+        bh=l4MNOPFxWiT3jJESDqIJi5iSgDf8vz4X7AnJyhNSSO8=;
+        b=rpjNKYxcRreeoG9vHtGWagWGOJk1iKT9whA4RU5KhnwRm9WLCgZlGX3YcEZRR6sWI2
+         GnddwpNK7KlErLqB2p7liHXRVKCoz7JfhIkRRyz0JZGG2qpLfBuOS+1ImsILzZPb7Uuw
+         3/hUInLuz5ud0OcXKTjBQhPRxI+7TCSU/skqZelpcnygnwKhii5EEClCYkX9G3kxYajL
+         JqqIpWiwBuHa/ZyjBxoZOhlXoS9bpohBgsriIFViJcyW0zOIFzncu2rs7IPLzBbsV8JC
+         FX8+Uq45jXJFOmMVc3JIo+Xp6RJQx80p/mlYcaUHbjFHdHA1qux0UyQT2xtO0NcvVwFe
+         GR3w==
+X-Gm-Message-State: AOJu0YyMHPFEva53ZL5bx3o5EK5wcs4FJEHblrrjzb4EjtxTGvHdZy+W
+	40360BxFGKdtfl6Dbswhx9n0NqrSoY1+SYZ4ntV9ro2C3q0MP8njz2o8nA==
+X-Google-Smtp-Source: AGHT+IFPNH5GBwdcfFzZR1hdvjUeCl1znq7palryv8pnwbwox0NeaqvuIouxpgqLl9QNzd6f6KeH+w==
+X-Received: by 2002:a17:907:9708:b0:a62:ddc2:8493 with SMTP id a640c23a62f3a-a682022f5cbmr481820566b.20.1717247748219;
+        Sat, 01 Jun 2024 06:15:48 -0700 (PDT)
+Received: from localhost (ip-109-238-218-228.aim-net.cz. [109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a68b2ed4294sm71582366b.21.2024.06.01.06.15.47
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 31 May 2024 12:49:00 -0700 (PDT)
-From: Jan Vermaete <jan.vermaete@gmail.com>
+        Sat, 01 Jun 2024 06:15:47 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Jan Vermaete <jan.vermaete@gmail.com>
-Subject: [meta-python][PATCH] python3-flask: upgrade 3.0.2 -> 3.0.3
-Date: Fri, 31 May 2024 21:46:50 +0200
-Message-Id: <20240531194650.3279149-1-jan.vermaete@gmail.com>
-X-Mailer: git-send-email 2.39.2
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: [meta-oe][PATCH] libgphoto2: fix build with gcc-14
+Date: Sat,  1 Jun 2024 15:15:31 +0200
+Message-ID: <20240601131531.2655190-1-martin.jansa@gmail.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 31 May 2024 19:49:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110656
+ <openembedded-devel@lists.openembedded.org>; Sat, 01 Jun 2024 13:15:57 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110657
 
-Changelog:
-  The default hashlib.sha1 may not be available in FIPS builds. Don't access it at import time so the developer has time to change the default. #5448
-  Don't initialize the cli attribute in the sansio scaffold, but rather in the Flask concrete class. #5270
+Fixes:
+libgphoto2-2.5.31/camlibs/ptp2/chdk.c:1187:41: error: passing argument 3 of 'jpeg_mem_dest' from incompatible pointer type [-Wincompatible-pointer-types]
 
-The license file was renamed from LICENSE.rst to LICENSE.txt without changing the content.
+https://github.com/gphoto/libgphoto2/issues/959
+https://github.com/gphoto/libgphoto2/issues/941
 
-Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
+Signed-off-by: Martin Jansa <martin.jansa@gmail.com>
 ---
- .../python/{python3-flask_3.0.2.bb => python3-flask_3.0.3.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-flask_3.0.2.bb => python3-flask_3.0.3.bb} (85%)
+ .../libgphoto2/fix-build-with-gcc-14.patch    | 36 +++++++++++++++++++
+ .../gphoto2/libgphoto2_2.5.31.bb              |  1 +
+ 2 files changed, 37 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/gphoto2/libgphoto2/fix-build-with-gcc-14.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-flask_3.0.2.bb b/meta-python/recipes-devtools/python/python3-flask_3.0.3.bb
-similarity index 85%
-rename from meta-python/recipes-devtools/python/python3-flask_3.0.2.bb
-rename to meta-python/recipes-devtools/python/python3-flask_3.0.3.bb
-index 1de1a827d..fa2ade536 100644
---- a/meta-python/recipes-devtools/python/python3-flask_3.0.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-flask_3.0.3.bb
-@@ -4,9 +4,9 @@ Flask is a microframework for Python based on Werkzeug, Jinja 2 and good \
- intentions. And before you ask: It’s BSD licensed!"
- HOMEPAGE = "https://github.com/mitsuhiko/flask/"
- LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=ffeffa59c90c9c4a033c7574f8f3fb75"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ffeffa59c90c9c4a033c7574f8f3fb75"
+diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2/fix-build-with-gcc-14.patch b/meta-oe/recipes-graphics/gphoto2/libgphoto2/fix-build-with-gcc-14.patch
+new file mode 100644
+index 0000000000..0c2a8d4bd0
+--- /dev/null
++++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2/fix-build-with-gcc-14.patch
+@@ -0,0 +1,36 @@
++From 721f7f8c3ec8058d504607873e4c317aac0c99c5 Mon Sep 17 00:00:00 2001
++From: Marcus Meissner <marcus@jet.franken.de>
++Date: Mon, 4 Dec 2023 13:26:08 +0100
++Subject: [PATCH] align outlen length with jpeg jeaders. fixes
++ https://github.com/gphoto/libgphoto2/issues/941
++
++---
++Upstream-Status: Backport [https://github.com/gphoto/libgphoto2/commit/721f7f8c3ec8058d504607873e4c317aac0c99c5]
++
++ camlibs/ptp2/chdk.c | 6 +++---
++ 1 file changed, 3 insertions(+), 3 deletions(-)
++
++diff --git a/camlibs/ptp2/chdk.c b/camlibs/ptp2/chdk.c
++index e1d898f378..e775ea1d4b 100644
++--- a/camlibs/ptp2/chdk.c
+++++ b/camlibs/ptp2/chdk.c
++@@ -1150,7 +1150,7 @@ static void yuv_live_to_jpeg(unsigned char *p_yuv,
++ 	struct		jpeg_error_mgr jerr;
++ 	JSAMPROW	row_ptr[1];
++ 	uint8_t		*outbuf = NULL, *tmprowbuf = NULL;
++-	uint64_t	outlen = 0;
+++	unsigned long	outlen = 0;
++ 	unsigned int	row_inc;
++ 	int		sshift, dshift, xshift, skip;
++ 
++@@ -1161,8 +1161,8 @@ static void yuv_live_to_jpeg(unsigned char *p_yuv,
++ 		sshift = 6;
++ 		dshift = (width/height > 2) ? 6 : 12;
++ 		xshift = 4;
++-	/* Digic 6 cameras: 8 bit per element UYVY,
++-	 * 4 bytes used to encode 2 pixels, need 6 bytes raw YUV data for jpeg encoding */
+++		/* Digic 6 cameras: 8 bit per element UYVY,
+++		 * 4 bytes used to encode 2 pixels, need 6 bytes raw YUV data for jpeg encoding */
++ 	} else {
++ 		row_inc = buf_width*2;
++ 		sshift = 4;
+diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.31.bb b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.31.bb
+index 1d0b37826d..57c9d199eb 100644
+--- a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.31.bb
++++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.31.bb
+@@ -13,6 +13,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/gphoto/libgphoto2-${PV}.tar.bz2;name=libgphoto2
+            file://40-libgphoto2.rules \
+            file://0001-configure.ac-remove-AM_PO_SUBDIRS.patch \
+            file://0001-configure-Filter-out-buildpaths-from-CC.patch \
++           file://fix-build-with-gcc-14.patch \
+ "
+ SRC_URI[libgphoto2.sha256sum] = "4f81c34c0b812bee67afd5f144940fbcbe01a2055586a6a1fa2d0626024a545b"
  
--SRC_URI[sha256sum] = "822c03f4b799204250a7ee84b1eddc40665395333973dfb9deebfe425fefcb7d"
-+SRC_URI[sha256sum] = "ceb27b0af3823ea2737928a4d99d125a06175b8512c445cbd9a9ce200ef76842"
- 
- SRC_URI += " \
-         file://run-ptest \
 -- 
-2.39.2
+2.45.2
 
 
