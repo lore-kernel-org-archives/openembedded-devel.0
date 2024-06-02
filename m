@@ -1,223 +1,201 @@
-Return-Path: <ticotimo@gmail.com>
+Return-Path: <akuster808@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EBE5DC25B74
-	for <webhook@archiver.kernel.org>; Sun,  2 Jun 2024 20:20:11 +0000 (UTC)
-Received: from mail-yb1-f181.google.com (mail-yb1-f181.google.com [209.85.219.181])
- by mx.groups.io with SMTP id smtpd.web11.67318.1717359606104104938
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2AF43C27C44
+	for <webhook@archiver.kernel.org>; Sun,  2 Jun 2024 20:56:12 +0000 (UTC)
+Received: from mail-yb1-f177.google.com (mail-yb1-f177.google.com [209.85.219.177])
+ by mx.groups.io with SMTP id smtpd.web11.68176.1717361771500015566
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 02 Jun 2024 13:20:06 -0700
+ Sun, 02 Jun 2024 13:56:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=neL2ZC3l;
- spf=pass (domain: gmail.com, ip: 209.85.219.181, mailfrom: ticotimo@gmail.com)
-Received: by mail-yb1-f181.google.com with SMTP id 3f1490d57ef6-df771b6cc9cso3594672276.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 02 Jun 2024 13:20:06 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=g5ICmNWL;
+ spf=pass (domain: gmail.com, ip: 209.85.219.177, mailfrom: akuster808@gmail.com)
+Received: by mail-yb1-f177.google.com with SMTP id 3f1490d57ef6-dfa48f505a3so3757325276.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 02 Jun 2024 13:56:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1717359605; x=1717964405; darn=lists.openembedded.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=1yRuXLfiNtTO1c1jipqxeo1n67xvm4sCQIjZ90nnJXc=;
-        b=neL2ZC3lSCEMl0IMLhk94nI4UicZCK6AMdPBQd5a6P0hlt+BQb00yiwTIzjEnoQ1v7
-         h++WNGWwpQSxxxoDfZ3ZHht8Wjvch3J6c44n+KO7P/E0rPPDbjP69Fq+Jm07hWcEV7NU
-         VyV/wt1yF6hI00kj4WkOe0hVc29amymOFVHOgjvDLWn6mxDDOEehLCdlmw/MGwP04rOb
-         zWA3qtUYuM952Q43ImaTwfamT0foR3Ok8ohQI107G+wi76Lxrgd7vp+J2HQ1xLTeD2yo
-         EUIp2Kg5sD6srtfIZWcFoLYIDkQKnMnFZ+aJKQZsT2k1wW6GL2gwbU8Or258CWVZ/9ZL
-         4jEA==
+        d=gmail.com; s=20230601; t=1717361770; x=1717966570; darn=lists.openembedded.org;
+        h=content-transfer-encoding:autocrypt:subject:from:to
+         :content-language:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=71dqtdjBp16LD8J7fO9FCTHgpahuBOfGNfqv7Eu1g6w=;
+        b=g5ICmNWLVoJ/GF+IiOGoPOGSlDrsAVt1TRNQOXx7hD+ZioON0G+FHc8dm0sab8VhdV
+         dNLrz9+qn8cvrKj8n2+9z5+m8GykQs7JxaZoOsEyQTMLNutW9Aty99pR5hAko4WZdVdX
+         klAiawG3K4/2/CoWM5BHFpkIahs+XcBTywFwzHQ9E9YszRgWOiYrmRIFqto1mNrOj87h
+         EEhUDlvtFQ7CP/qSW27H3gDxA0yh6eiHF9YPZRUt0slpVcb83yNe9ZK6qwhXsDvk+vFv
+         ZYQhHU/6pREgPkdvmbSTe7swPB/zyj9642yzrK3uJhPoK/UmXhcpLwSbYzeSs6ObcPnc
+         Xpsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1717359605; x=1717964405;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=1yRuXLfiNtTO1c1jipqxeo1n67xvm4sCQIjZ90nnJXc=;
-        b=eIJc4HvI14CzBJo7xNttiRryB8JfLjhx9S1OkUp5kiPPiqPd2cH/hHVoAXVKcpvnpA
-         CB2kdfKsp/IyVdPOdtZpYnx2MIrGVfvR/N6FxODL45xfduHS5dNXCjas0u3C0D78Jgat
-         NG0m+hCu3tSUthXm4UaangnWdGyskfsdFhJhEm8s0FRn2koi60kaug8Ca9YFiz1McYQV
-         xOQFylFs6DeKL4Nh+SvNoGW/3tNxDcaYuCQM2hUm03q9eBFQZLglXbCX1Oryox1Ix5Qn
-         tKymvQT0P7D8FBKO3odWCLvQIF34enNQR2Qtxm76GHBydtPa3yV9yuE7Turs2ZmJ8MKC
-         PwPQ==
-X-Gm-Message-State: AOJu0YwCizB2mJbU6LzyU7WN/PhnsdNfxkIk0nD+vpWQsKK331w0tJFG
-	JTYeurvEyIpxZupSU+MT04N/FulGQLT8NH79jNLMrGKGbFbxUrguKPoQEyrGni6QxmNSF01WFre
-	B3cDFSESVYm38EBzS7XtHPRxsAR+xLg==
-X-Google-Smtp-Source: AGHT+IGDu4o00wJzcykdUiu03rVok7as/Zz9c+kgJ9yZ0i8KGbvcJvjaNYUBnp24mpgbQiEdq2iPXDCqNd+jeoA+vG8=
-X-Received: by 2002:a25:e905:0:b0:df4:d889:a086 with SMTP id
- 3f1490d57ef6-dfa73c15865mr7453873276.32.1717359605131; Sun, 02 Jun 2024
- 13:20:05 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1717361770; x=1717966570;
+        h=content-transfer-encoding:autocrypt:subject:from:to
+         :content-language:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=71dqtdjBp16LD8J7fO9FCTHgpahuBOfGNfqv7Eu1g6w=;
+        b=Xyro7j8jmvUKvY0pzOaKJN/XL1q3LRvv/yWRxBhKuBr/FGlU+pEqQN/qVRanT8Yndr
+         bdjr0x4TX/NNAMGq0yTm5RCA2lQCd0lrdv8MYi4bgXr5MBri1sKF+K29ibypnXEasHxF
+         tpoGz4qbpSI4hDujLFHE/4lyF8+DY1NbUwgfCXH82NyOgsr2SGWxseJytL2CBylU04FS
+         1a8alfynXR37mckNLaLtRfWZalU14ZKRH/+v4DIq6JxbdC+IrOyMLejHK7KWUkeRDfs4
+         W0YdL6KhWIJYzVnG5+XUSSYLzoxgLjdcl4rsWvmoJDrnLLQGX5NwYqWp6bJj3QRAIOXw
+         qT0Q==
+X-Forwarded-Encrypted: i=1; AJvYcCVZWw3khipvqfFLqYUOzUU60jkHyz1rw1APfS9sFXNDFT9xwE7Qkgly3hlf9gvdlsnY6lHmlpuFHSCnR6FtTZku1KjgemG1V8pNn3+hS4jRujZjJABT6WGbgw==
+X-Gm-Message-State: AOJu0YyAIIwC4MttZgGDsEe94wn9OCVdKSjUBDmj24NqKMHd5c89fLuZ
+	F79Rv843/5uAIx20Gf5POwQJaM/JRjr948iNHzJrptIu+nJycf7G
+X-Google-Smtp-Source: AGHT+IExvTPAXFyHFDp1k79CVa8g+5d2vsmaVBhkO6bsF+9DN03Rjc9FeLvBK0FXzWL6IZTgb80mAA==
+X-Received: by 2002:a25:8203:0:b0:de4:738b:c2e4 with SMTP id 3f1490d57ef6-dfa73c451b3mr6707531276.28.1717361770469;
+        Sun, 02 Jun 2024 13:56:10 -0700 (PDT)
+Received: from ?IPV6:2600:1700:45dd:7000::29? ([2600:1700:45dd:7000::29])
+        by smtp.gmail.com with ESMTPSA id 3f1490d57ef6-dfa6f11d729sm1349324276.50.2024.06.02.13.56.09
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 02 Jun 2024 13:56:09 -0700 (PDT)
+Message-ID: <3c8e03bc-511f-4669-8062-c00d49a86140@gmail.com>
+Date: Sun, 2 Jun 2024 16:56:08 -0400
 MIME-Version: 1.0
-References: <20240602123659.254606-1-jan.vermaete@gmail.com>
-In-Reply-To: <20240602123659.254606-1-jan.vermaete@gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Sun, 2 Jun 2024 13:19:54 -0700
-Message-ID: <CANx9H-A7OWRwHhUDaejRy1kqqcH4feTMxDK7Ki2OQ0Gnx6xWog@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH] python3-typer: add new recipe
-To: jan.vermaete@gmail.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="0000000000003730800619edf1b9"
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Khem Raj <raj.khem@gmail.com>,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: akuster808 <akuster808@gmail.com>
+Subject: Scarthgap merge request: June 2nd
+Autocrypt: addr=akuster808@gmail.com; keydata=
+ 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
+ ApZ86eOP
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sun, 02 Jun 2024 20:20:11 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110663
+ <openembedded-devel@lists.openembedded.org>; Sun, 02 Jun 2024 20:56:12 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110664
 
---0000000000003730800619edf1b9
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+The following changes since commit 6de0ab744341ad61b0661aa28d78dc6767ce0786:
 
-Can you look into adding ptest? We need to not keep adding that technical
-debt when adding new recipes.
+   nodejs-oe-cache: fix offline install of dependencies (2024-05-22 
+12:44:19 -0700)
 
+are available in the Git repository at:
 
-On Sun, Jun 2, 2024 at 5:39=E2=80=AFAM Jan Vermaete via lists.openembedded.=
-org
-<jan.vermaete=3Dgmail.com@lists.openembedded.org> wrote:
+   https://git.openembedded.org/meta-openembedded scarthgap-next
 
-> Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
-> ---
->  .../python/python3-typer_0.12.3.bb            | 23 +++++++++++++++++++
->  1 file changed, 23 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/
-> python3-typer_0.12.3.bb
->
-> diff --git a/meta-python/recipes-devtools/python/python3-typer_0.12.3.bb
-> b/meta-python/recipes-devtools/python/python3-typer_0.12.3.bb
-> new file mode 100644
-> index 000000000..a4b45f367
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-typer_0.12.3.bb
-> @@ -0,0 +1,23 @@
-> +SUMMARY =3D "Typer, build great CLIs. Easy to code. Based on Python type
-> hints."
-> +DESCRIPTION =3D "\
-> +    Typer is a library for building CLI applications that users will lov=
-e
-> using and developers will love creating. Based on Python type hints. \
-> +    It's also a command line tool to run scripts, automatically
-> converting them to CLI applications. \
-> +"
-> +HOMEPAGE =3D "https://github.com/tiangolo/typer"
-> +LICENSE =3D "MIT"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D173d405eb704b1499218013178722=
-617"
-> +
-> +SRC_URI[sha256sum] =3D
-> "49e73131481d804288ef62598d97a1ceef3058905aa536a1134f90891ba35482"
-> +
-> +inherit pypi python_setuptools_build_meta
-> +
-> +DEPENDS +=3D "\
-> +        python3-pdm-backend-native \
-> +        python3-pdm-native \
-> +"
-> +
-> +PYPI_PACKAGE =3D "typer"
-> +
-> +RDEPENDS:${PN} +=3D "\
-> +    python3-click \
-> +"
-> --
-> 2.39.2
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#110661):
-> https://lists.openembedded.org/g/openembedded-devel/message/110661
-> Mute This Topic: https://lists.openembedded.org/mt/106442651/924729
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [
-> ticotimo@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
->
+for you to fetch changes up to 4a7bb77f7ebe0ac8be5bab5103d8bd993e17e18d:
 
---0000000000003730800619edf1b9
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+   pcapplusplus: Fix build with gcc14 (2024-06-02 14:57:06 -0400)
 
-<div dir=3D"auto">Can you look into adding ptest? We need to not keep addin=
-g that technical debt when adding new recipes.</div><div dir=3D"auto"><br><=
-/div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_at=
-tr">On Sun, Jun 2, 2024 at 5:39=E2=80=AFAM Jan Vermaete via <a href=3D"http=
-://lists.openembedded.org">lists.openembedded.org</a> &lt;jan.vermaete=3D<a=
- href=3D"mailto:gmail.com@lists.openembedded.org">gmail.com@lists.openembed=
-ded.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"=
-margin:0px 0px 0px 0.8ex;border-left-width:1px;border-left-style:solid;padd=
-ing-left:1ex;border-left-color:rgb(204,204,204)">Signed-off-by: Jan Vermaet=
-e &lt;<a href=3D"mailto:jan.vermaete@gmail.com" target=3D"_blank">jan.verma=
-ete@gmail.com</a>&gt;<br>
----<br>
-=C2=A0.../python/<a href=3D"http://python3-typer_0.12.3.bb" rel=3D"noreferr=
-er" target=3D"_blank">python3-typer_0.12.3.bb</a>=C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 | 23 +++++++++++++++++++<br>
-=C2=A01 file changed, 23 insertions(+)<br>
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/<a href=3D"htt=
-p://python3-typer_0.12.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-t=
-yper_0.12.3.bb</a><br>
-<br>
-diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3-=
-typer_0.12.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-typer_0.12.3.=
-bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://python3-type=
-r_0.12.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-typer_0.12.3.bb</=
-a><br>
-new file mode 100644<br>
-index 000000000..a4b45f367<br>
---- /dev/null<br>
-+++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-typer_0=
-.12.3.bb" rel=3D"noreferrer" target=3D"_blank">python3-typer_0.12.3.bb</a><=
-br>
-@@ -0,0 +1,23 @@<br>
-+SUMMARY =3D &quot;Typer, build great CLIs. Easy to code. Based on Python t=
-ype hints.&quot;<br>
-+DESCRIPTION =3D &quot;\<br>
-+=C2=A0 =C2=A0 Typer is a library for building CLI applications that users =
-will love using and developers will love creating. Based on Python type hin=
-ts. \<br>
-+=C2=A0 =C2=A0 It&#39;s also a command line tool to run scripts, automatica=
-lly converting them to CLI applications. \<br>
-+&quot;<br>
-+HOMEPAGE =3D &quot;<a href=3D"https://github.com/tiangolo/typer" rel=3D"no=
-referrer" target=3D"_blank">https://github.com/tiangolo/typer</a>&quot;<br>
-+LICENSE =3D &quot;MIT&quot;<br>
-+LIC_FILES_CHKSUM =3D &quot;file://LICENSE;md5=3D173d405eb704b1499218013178=
-722617&quot;<br>
-+<br>
-+SRC_URI[sha256sum] =3D &quot;49e73131481d804288ef62598d97a1ceef3058905aa53=
-6a1134f90891ba35482&quot;<br>
-+<br>
-+inherit pypi python_setuptools_build_meta<br>
-+<br>
-+DEPENDS +=3D &quot;\<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 python3-pdm-backend-native \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 python3-pdm-native \<br>
-+&quot;<br>
-+<br>
-+PYPI_PACKAGE =3D &quot;typer&quot;<br>
-+<br>
-+RDEPENDS:${PN} +=3D &quot;\<br>
-+=C2=A0 =C2=A0 python3-click \<br>
-+&quot;<br>
--- <br>
-2.39.2<br>
-<br>
-<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-Links: You receive all messages sent to this group.<br>
-View/Reply Online (#110661): <a href=3D"https://lists.openembedded.org/g/op=
-enembedded-devel/message/110661" rel=3D"noreferrer" target=3D"_blank">https=
-://lists.openembedded.org/g/openembedded-devel/message/110661</a><br>
-Mute This Topic: <a href=3D"https://lists.openembedded.org/mt/106442651/924=
-729" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org/mt=
-/106442651/924729</a><br>
-Group Owner: <a href=3D"mailto:openembedded-devel%2Bowner@lists.openembedde=
-d.org" target=3D"_blank">openembedded-devel+owner@lists.openembedded.org</a=
-><br>
-Unsubscribe: <a href=3D"https://lists.openembedded.org/g/openembedded-devel=
-/unsub" rel=3D"noreferrer" target=3D"_blank">https://lists.openembedded.org=
-/g/openembedded-devel/unsub</a> [<a href=3D"mailto:ticotimo@gmail.com" targ=
-et=3D"_blank">ticotimo@gmail.com</a>]<br>
--=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-<br>
-<br>
-</blockquote></div></div>
+----------------------------------------------------------------
+Changqing Li (1):
+       fuse3: remove sysv init script and install fuse kernel module 
+explictly
 
---0000000000003730800619edf1b9--
+Khem Raj (1):
+       pcapplusplus: Fix build with gcc14
+
+Markus Volk (1):
+       flatpak: update 1.15.6 -> 1.15.8
+
+Martin Jansa (1):
+       libdeflate: fix build with -mcpu=cortex-a76+crypto without 
+-march=armv8.2-a+crypto
+
+Mikko Rapeli (1):
+       fwupd: fix uefi capsule update build error
+
+Peter Marko (1):
+       gnome-shell: correct regression with glib-2.0 2.78.5
+
+Soumya Sambu (1):
+       php: Upgrade to 8.2.18
+
+Wang Mingyu (1):
+       postgresql: upgrade 16.2 -> 16.3
+
+Yi Zhao (2):
+       libtevent: upgrade 0.16.0 -> 0.16.1
+       samba: upgrade 4.19.5 -> 4.19.6
+
+Yoann Congal (1):
+       squid: workaround a build failure with native gcc10
+
+  meta-filesystems/recipes-support/fuse/fuse3/fuse3.conf          | 1 +
+  meta-filesystems/recipes-support/fuse/fuse3_3.16.2.bb           | 15 
+++++++++
+  .../0002-screencast-Correct-expected-bus-name-for-streams.patch | 38 
++++++++++++++++++++
+  meta-gnome/recipes-gnome/gnome-shell/gnome-shell_46.1.bb        | 1 +
+  .../samba/{samba_4.19.5.bb => samba_4.19.6.bb} |  2 +-
+  meta-networking/recipes-daemons/squid/squid_6.9.bb              | 5 +++
+  .../libtevent/{libtevent_0.16.0.bb => libtevent_0.16.1.bb} |  2 +-
+  meta-oe/recipes-bsp/fwupd/fwupd_1.9.18.bb                       | 2 +-
+  .../pcapplusplus/0001-initialize-timespec-variable.patch        | 35 
+++++++++++++++++++
+  ...1-packet-Initialize-m_ExternalRawData-in-IDnsResource-.patch | 34 
++++++++++++++++++
+  meta-oe/recipes-connectivity/pcapplusplus/pcapplusplus_23.09.bb | 5 ++-
+  .../0003-configure.ac-bypass-autoconf-2.69-version-check.patch  | 2 +-
+  meta-oe/recipes-dbs/postgresql/files/not-check-libperl.patch    | 2 +-
+  .../postgresql/{postgresql_16.2.bb => postgresql_16.3.bb} |  2 +-
+  .../php/php/0001-ext-opcache-config.m4-enable-opcache.patch     | 21 
+++++++-----
+  meta-oe/recipes-devtools/php/{php_8.2.16.bb => php_8.2.18.bb} |  2 +-
+  .../0001-meson.build-require-for-native-wayland-scanner.patch   | 28 
+--------------
+  .../flatpak/0001-meson.build-require-native-gtkdoc.patch        | 33 
+-----------------
+  .../flatpak/{flatpak_1.15.6.bb => flatpak_1.15.8.bb} |  6 +--
+  ...1-lib-arm-don-t-use-explicit-armv8.2-a-on-gcc-13.2-and.patch | 57 
++++++++++++++++++++++++++++++
+  meta-oe/recipes-extended/libdeflate/libdeflate_1.20.bb          | 5 ++-
+  21 files changed, 215 insertions(+), 83 deletions(-)
+  create mode 100644 meta-filesystems/recipes-support/fuse/fuse3/fuse3.conf
+  create mode 100644 
+meta-gnome/recipes-gnome/gnome-shell/gnome-shell/0002-screencast-Correct-expected-bus-name-for-streams.patch
+  rename meta-networking/recipes-connectivity/samba/{samba_4.19.5.bb => 
+samba_4.19.6.bb} (99%)
+  rename meta-networking/recipes-support/libtevent/{libtevent_0.16.0.bb 
+=> libtevent_0.16.1.bb} (95%)
+  create mode 100644 
+meta-oe/recipes-connectivity/pcapplusplus/pcapplusplus/0001-initialize-timespec-variable.patch
+  create mode 100644 
+meta-oe/recipes-connectivity/pcapplusplus/pcapplusplus/0001-packet-Initialize-m_ExternalRawData-in-IDnsResource-.patch
+  rename meta-oe/recipes-dbs/postgresql/{postgresql_16.2.bb => 
+postgresql_16.3.bb} (86%)
+  rename meta-oe/recipes-devtools/php/{php_8.2.16.bb => php_8.2.18.bb} (99%)
+  delete mode 100644 
+meta-oe/recipes-extended/flatpak/flatpak/0001-meson.build-require-for-native-wayland-scanner.patch
+  delete mode 100644 
+meta-oe/recipes-extended/flatpak/flatpak/0001-meson.build-require-native-gtkdoc.patch
+  rename meta-oe/recipes-extended/flatpak/{flatpak_1.15.6.bb => 
+flatpak_1.15.8.bb} (92%)
+  create mode 100644 
+meta-oe/recipes-extended/libdeflate/libdeflate/0001-lib-arm-don-t-use-explicit-armv8.2-a-on-gcc-13.2-and.patch
+
 
