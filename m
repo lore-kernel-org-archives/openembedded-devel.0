@@ -1,87 +1,101 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <jan.vermaete@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B3A0C25B76
-	for <webhook@archiver.kernel.org>; Sat,  1 Jun 2024 17:49:14 +0000 (UTC)
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
- by mx.groups.io with SMTP id smtpd.web10.42595.1717264147563174358
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EB245C25B74
+	for <webhook@archiver.kernel.org>; Sun,  2 Jun 2024 12:39:09 +0000 (UTC)
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
+ by mx.groups.io with SMTP id smtpd.web11.57821.1717331948570759737
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 01 Jun 2024 10:49:07 -0700
+ Sun, 02 Jun 2024 05:39:08 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=C2wn8b75;
- spf=pass (domain: gmail.com, ip: 209.85.215.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-6c57fa82fdbso1082876a12.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 01 Jun 2024 10:49:07 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20230601 header.b=BWz1h63z;
+ spf=pass (domain: gmail.com, ip: 209.85.221.42, mailfrom: jan.vermaete@gmail.com)
+Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-35dc36b107fso2538733f8f.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 02 Jun 2024 05:39:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1717264146; x=1717868946; darn=lists.openembedded.org;
+        d=gmail.com; s=20230601; t=1717331947; x=1717936747; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=7hNyR3NvnnweMFbindO/vElk2PBzXcUwtmUAapJiq7I=;
-        b=C2wn8b75fH7tXaS29D29jpfodqeIC+5TJoydBGaZvx7i/2x0o6oN71rZJ9+drKyH9L
-         wcq1gQU9FOl9czQc9DXkcTwzE2jz718Xrmz2s6NXsjr03XeDdjX+qLlL00LtRgi0Uayq
-         I+ZppXfJalR8G7iMRDIC6mWN7NBt8lFBb27rIpkDKhiNF6CFJNfCFR9WnibSIy5+oGLA
-         8qwUVfKdQjOpHRSosArDnQ9vM9D3IgiUeDZkP+yChp4xe2NASWckcck+JGViuYMa/Vvw
-         jG38NWJ5xbhUPeonBbhLf6Dpx1VuF5wvQky9mM1HX9uj5TGdm6851z/Khpk3m44GEfE0
-         Hulg==
+        bh=0i0fbtOwwY3W62nUwXolFofcI4Hh4Org2+CAGSi6LiM=;
+        b=BWz1h63zE7ilNLjtb9FrA5i4zPo8LKRXODV+cZgF4qW5rGyRA8X72paGU5W/f3qcFv
+         hX0IJ4FIJAuJLAmus3bew4SKKeOYH5JLCtLbLyESSHMRztkaHWuuKu4cm16AcpLacoSl
+         nqFRhzTAcNCMgLqiKmVOWsWdz/ioL9dh/j8FQKqysU0uTUVDEJFocm8IxtsgJXSlyups
+         mwSChconBEX1AZ2k+3RrPwBHD8hwHYIIfEKWriPuvqciQfBnoWzWip7cGFTde9olFRJs
+         IKnh9FU0N54lxS+WEGXvcF31B5vl9Ss1mzqTMTLgVt1trVqrpAk2rEt5O5RygzbkbbuC
+         LyAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1717264146; x=1717868946;
+        d=1e100.net; s=20230601; t=1717331947; x=1717936747;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=7hNyR3NvnnweMFbindO/vElk2PBzXcUwtmUAapJiq7I=;
-        b=DiQABSp0uMrC1S8h/+UZcEWDvvKgzjPLssbtV98f1p17W4rHGsAimtusvU+UBFOG6W
-         o3QC/V4LDDCl68dP7z1nciYoCSQz8oJxyd6c2hif18dtpEZu+NoVMGLAnRfKvkDqcvsq
-         A5MLkhmHBuh1mjHy/gurm0gOmerYSRNIV1lFqa+qI9sVK9TKX2cOImCkIDCCB1/0j6fo
-         0aaIgOXM8AQFEBc933R6WMI+flSH2jc2trucIfDfqCR2wyTge0pKF9N+kuxt47Xolo++
-         oXdCmgh+7LgPnj4p6ROb/01Rn3JUMzjZ3nX+PxOPrCn6ZmMkjxlfME6EsNLbbZ9JprR7
-         L7mQ==
-X-Gm-Message-State: AOJu0YwlgjYV1gVNhHAs3ae1F81PwY+P1KRvppK+My5DAvmtCgMJeese
-	++ItkBPYfpaXqALxSmFSnI7YxNumB4Hb90SjzOvdVg3nFaNEr4/PkMUjTw7ENYI=
-X-Google-Smtp-Source: AGHT+IGsGGiDj3wqzei/CXKyGN875L9oXEc22B80lf/XNtwlw4o41afEKWtW13xvIV0SgRvxaw3jxA==
-X-Received: by 2002:a05:6a20:8420:b0:1b2:1ae6:2ccc with SMTP id adf61e73a8af0-1b26f17caf5mr5974891637.7.1717264146535;
-        Sat, 01 Jun 2024 10:49:06 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9d80:4380::6d8c])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2c1a77afb24sm5444493a91.46.2024.06.01.10.49.05
+        bh=0i0fbtOwwY3W62nUwXolFofcI4Hh4Org2+CAGSi6LiM=;
+        b=JuD2PmJrfCg7LKAnKZIMa7jToIUbJhXghhFpoznYV2NyEXj7KB9R5mnLEPFvbUIW99
+         Nrhxq8tdhgwckYDZcrAudrp5ed1tao/pzI3vAFcadNb9g55LvXFbHeh/hMKtT7dRyio7
+         0slZWsXCwDChjubE0/rDc3mXmvM+V0hDqHzyB3UabphjJmFlCudKuIeeDONVy5iWHR2M
+         MEGDFdVArKOygN1C1CXqmkc5iy4yy7zR55Wp1yCBzBKd2ZMRT4BRhQzQCiylNVqU3gjU
+         0DUd9dbLXXPaApY5agLeF1NixOuM7F+BsCqYL+Ifi5kfcX2GZLaM2xV9WS6fy82nw8lh
+         +XJQ==
+X-Gm-Message-State: AOJu0Yy6dhSXoU4bY7makMpmcOG7qSCiffV42gCOtO5lbPs21T8+RIMw
+	U1TNFrf9h1xqjISZxHRQ5IMAeMEiZ89a4eFEquVN0Q6zy4/NABPYAt6gJg==
+X-Google-Smtp-Source: AGHT+IGiTor+02cIcc/BnXKkkq4NIKAGRD04TZV3jXvogDSOrgJ8T1rOF0MH6OScPy8Psstkmi/IPQ==
+X-Received: by 2002:adf:ce91:0:b0:355:161:b7e3 with SMTP id ffacd0b85a97d-35e0f316a57mr4546246f8f.48.1717331946509;
+        Sun, 02 Jun 2024 05:39:06 -0700 (PDT)
+Received: from localhost.localdomain (78-20-160-86.access.telenet.be. [78.20.160.86])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-35dd04c9d26sm6075576f8f.25.2024.06.02.05.39.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 01 Jun 2024 10:49:06 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+        Sun, 02 Jun 2024 05:39:06 -0700 (PDT)
+From: Jan Vermaete <jan.vermaete@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH] sdbus-c++-libsystemd: Upgrade to 255.6
-Date: Sat,  1 Jun 2024 10:49:03 -0700
-Message-ID: <20240601174903.3990426-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.45.1
+Cc: Jan Vermaete <jan.vermaete@gmail.com>
+Subject: [meta-python][PATCH] python3-typer: add new recipe
+Date: Sun,  2 Jun 2024 14:36:59 +0200
+Message-Id: <20240602123659.254606-1-jan.vermaete@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Sat, 01 Jun 2024 17:49:14 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110660
+ <openembedded-devel@lists.openembedded.org>; Sun, 02 Jun 2024 12:39:09 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110661
 
-Fixes build with kernel-headers from 6.9+ kernel
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Jan Vermaete <jan.vermaete@gmail.com>
 ---
- ...us-c++-libsystemd_255.4.bb => sdbus-c++-libsystemd_255.6.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-core/sdbus-c++/{sdbus-c++-libsystemd_255.4.bb => sdbus-c++-libsystemd_255.6.bb} (98%)
+ .../python/python3-typer_0.12.3.bb            | 23 +++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-typer_0.12.3.bb
 
-diff --git a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_255.4.bb b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_255.6.bb
-similarity index 98%
-rename from meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_255.4.bb
-rename to meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_255.6.bb
-index 3b44e02376..ceb422325c 100644
---- a/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_255.4.bb
-+++ b/meta-oe/recipes-core/sdbus-c++/sdbus-c++-libsystemd_255.6.bb
-@@ -10,7 +10,7 @@ inherit meson pkgconfig
- 
- DEPENDS += "gperf-native gettext-native util-linux libcap util-linux python3-jinja2-native"
- 
--SRCREV = "387a14a7b67b8b76adaed4175e14bb7e39b2f738"
-+SRCREV = "5810c25792d4268282dd3892af1a253b690423c9"
- SRCBRANCH = "v255-stable"
- SRC_URI = "git://github.com/systemd/systemd-stable.git;protocol=https;branch=${SRCBRANCH} \
-            file://static-libsystemd-pkgconfig.patch \
+diff --git a/meta-python/recipes-devtools/python/python3-typer_0.12.3.bb b/meta-python/recipes-devtools/python/python3-typer_0.12.3.bb
+new file mode 100644
+index 000000000..a4b45f367
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-typer_0.12.3.bb
+@@ -0,0 +1,23 @@
++SUMMARY = "Typer, build great CLIs. Easy to code. Based on Python type hints."
++DESCRIPTION = "\
++    Typer is a library for building CLI applications that users will love using and developers will love creating. Based on Python type hints. \
++    It's also a command line tool to run scripts, automatically converting them to CLI applications. \
++"
++HOMEPAGE = "https://github.com/tiangolo/typer"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=173d405eb704b1499218013178722617"
++
++SRC_URI[sha256sum] = "49e73131481d804288ef62598d97a1ceef3058905aa536a1134f90891ba35482"
++
++inherit pypi python_setuptools_build_meta
++
++DEPENDS += "\
++        python3-pdm-backend-native \
++        python3-pdm-native \
++"
++
++PYPI_PACKAGE = "typer"
++
++RDEPENDS:${PN} += "\
++    python3-click \
++"
+-- 
+2.39.2
+
 
