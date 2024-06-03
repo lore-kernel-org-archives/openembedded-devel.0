@@ -1,203 +1,339 @@
-Return-Path: <sjolley.yp.pm@gmail.com>
+Return-Path: <dbaryshkov@gmail.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C3B0C41513
-	for <webhook@archiver.kernel.org>; Mon,  3 Jun 2024 22:47:46 +0000 (UTC)
-Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
- by mx.groups.io with SMTP id smtpd.web11.7700.1717454864097365054
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 90B7FC25B75
+	for <webhook@archiver.kernel.org>; Mon,  3 Jun 2024 22:50:56 +0000 (UTC)
+Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com [209.85.167.48])
+ by mx.groups.io with SMTP id smtpd.web11.7770.1717455047637450646
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 Jun 2024 15:47:44 -0700
+ Mon, 03 Jun 2024 15:50:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=RseyEWOH;
- spf=pass (domain: gmail.com, ip: 209.85.218.48, mailfrom: sjolley.yp.pm@gmail.com)
-Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-a68b5f18fc5so287470066b.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 03 Jun 2024 15:47:43 -0700 (PDT)
+ dkim=pass header.i=@linaro.org header.s=google header.b=b8hI5nHR;
+ spf=pass (domain: linaro.org, ip: 209.85.167.48, mailfrom: dmitry.baryshkov@linaro.org)
+Received: by mail-lf1-f48.google.com with SMTP id 2adb3069b0e04-52b992fd796so453106e87.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 03 Jun 2024 15:50:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1717454862; x=1718059662; darn=lists.openembedded.org;
-        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=29H4ubSobtqz1xXKHyDFNbfFtTkgIePUtb9Kby2aYPw=;
-        b=RseyEWOHcjd1yTjJSOlZdvSkSqmIgPsAoprYovFEhaUz+5oDtLEF3DxttG2UUEq5cw
-         nejuIK3o4QIkv2ZqeX0VxAU/lIx6S+9bjVXjYQV9rjrWuTDZ8trq03DEYIP9QeMCMNjs
-         XR2+ZmHdz5xTcu9xeKhdbv++esILInzyBosusgmCUcz9vRo/qo6AKm6AZtc60oSAtG1i
-         PlLi9EsG+z+eHnHraBM89kErMFAnBe4SdCHv4FoWRNbXmmptvdvvNOTNvp+mRZX+P9TA
-         hi8fOF50d2M4PiaFEdRF7W6NOnWuKCq5Fm6fZf26WtusuSU0haxCRixU3hDuHj+nsFXh
-         HRFA==
+        d=linaro.org; s=google; t=1717455046; x=1718059846; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=vcVqu1Pw5jcbV1Kn0vjWkWggGLXN81JS79zLoaAun48=;
+        b=b8hI5nHRygzZsCshm5JrJ4Y9XQiB1ThNj/Vk7KNJvVZu3z1A9eIbbz0ntgyPh3XsAs
+         4m3duPFKd6+m/8eghPrpZwnJRqtYyQtUoHKc6Cou7L5nhNaPeGLPAjMbiExr9BtwNvW4
+         FRHCD4mEK2mYChDK8Q+RNpR4PTgeT2fdrma0wQKuacBIqDOjSJTDh9anMRctBqEmBx9V
+         P8iufLoEslvdXWmj8Ky25RXnrXKcjVs7vcR/lP0b+6yicmW69mwiJ1ppo/qp5ltFb9GQ
+         TePb81POIE2IhQj8f5cTdWPtG/Sk+JIPDntqnNjli4owokZCyfSpVbvfjbqdrPqXJRP8
+         /zWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1717454862; x=1718059662;
-        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=29H4ubSobtqz1xXKHyDFNbfFtTkgIePUtb9Kby2aYPw=;
-        b=QYH1bA75LXShgB/751kldNvAY2n0QS1ArlQJY+JyQLO3ZNtzsSnKQulvFAfBLBZlM2
-         S5tV+9r0qCnUiMNHMzHZKnEXbgbRSKbWYUBlFrxCc5BdC5MI0fMpNpXSe46aVthonX22
-         hNwMct2Gw215OMJBzxK75FU/KS9ySml4Vs9Po/Xb1B0va30M4tQ8yo2fdGQAaEJwWo1v
-         4uZEYlSR81EZkRezTjUwKE5ENxKTz5ShzjL9bAInGe6vbcN8Ofcn74uMgFOqNMHDDJwK
-         YjZK8z+E+kplquM7w3Sp0DI4+GaDlkvWUj6x4ED/lcVy7Yqw3TcjQe/21r/NftTAKhN8
-         Ha5Q==
-X-Gm-Message-State: AOJu0YxFtpmEIJ8fqOgbbrJOCYroBN8Q/78CPOx5NtDx/zemf9LGeP97
-	0AQEa1Mf1Dp8t1/uGfs6IBvwP83sFttODULkKd74nq92Y+YjncwaMPoJp6VihxL4auAlOjKIb08
-	hnk+c4Bj90dCDwv7FoGupn+ajtFQixxZz
-X-Google-Smtp-Source: AGHT+IEcFxlyJNeJoYxtrtGcJPVD8RyZcymCitxpZz2C0Ajvx2nI6yj9+xlvRCvraDBPzGFpWqlrekmrH8H6gFju1Qk=
-X-Received: by 2002:a17:906:af10:b0:a68:f02d:4550 with SMTP id
- a640c23a62f3a-a68f02d4885mr358923666b.57.1717454862004; Mon, 03 Jun 2024
- 15:47:42 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1717455046; x=1718059846;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=vcVqu1Pw5jcbV1Kn0vjWkWggGLXN81JS79zLoaAun48=;
+        b=OVPjg53KFyckPlNLmGUgmh6hH3K8ZwD/YSvBf/1MVyNk3N5iZMHEfBA7Z5cELn34B5
+         jtjRl2zNBRWoyXV4lWcUUTfEGEQJY1QpUUrypHJyZLr0lxAq57BamnvDJII0ZZDz8rih
+         +XNkkZL3R+sT7m9lWUms5d6ngzyWU3BjUnfcGUE3YXSyvLVvlAN6PBp9mnvfcwjssPUi
+         4lynBEeDpL0FqzYbaxl9pQJGj1UlXS+i9kZHRD7c9UDNhMFOOsf9UJzLX1Q/hMsaFpAb
+         3+wo/p6O7alY3Q7kguxFlj8IhEtJo7dy2VR2SWDTU4AmdfXNdtAMEosRsSJ8Rgt3piWy
+         Xpog==
+X-Gm-Message-State: AOJu0YyvI2dEkjkjpCtRo2R3p4kRuYuZpIMA0ZgrwzYd8A9pG4mJNdCC
+	s7XcqVANGeempN4bbtv9+Ye0eu3IJ+qGa1yoWPn3u508FPBR21d/8TiyoUrU3kJthS7aoOeJNdB
+	I
+X-Google-Smtp-Source: AGHT+IHHM7lMb2LLpB6J0Kh7dD+lrTlsnvdTISLHJhdum9njYmIn6PFqMdOkrfj7xRMlKRJHPD6BoA==
+X-Received: by 2002:a19:e05a:0:b0:51d:8d56:6b15 with SMTP id 2adb3069b0e04-52b8958ba20mr6195872e87.1.1717455045135;
+        Mon, 03 Jun 2024 15:50:45 -0700 (PDT)
+Received: from umbar.unikie.fi ([192.130.178.91])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-52b84d8016fsm1335726e87.214.2024.06.03.15.50.44
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 03 Jun 2024 15:50:44 -0700 (PDT)
+From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] dhrystone: fix building with the GCC 14
+Date: Tue,  4 Jun 2024 01:50:44 +0300
+Message-Id: <20240603225044.4098258-1-dmitry.baryshkov@linaro.org>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-From: Stephen K Jolley <sjolley.yp.pm@gmail.com>
-Date: Mon, 3 Jun 2024 15:47:32 -0700
-Message-ID: <CAK5yBb9F-rQM4cqi_9k6=r965NOvkfN1HdfFsMKHx+f_E4cdKg@mail.gmail.com>
-Subject: Yocto Project Newcomer & Unassigned Bugs - Help Needed
-To: openembedded-devel@lists.openembedded.org, 
-	Yocto-mailing-list <yocto@lists.yoctoproject.org>
-Content-Type: multipart/alternative; boundary="000000000000f7b7c8061a041e4b"
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Mon, 03 Jun 2024 22:47:46 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110679
+ <openembedded-devel@lists.openembedded.org>; Mon, 03 Jun 2024 22:50:56 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110680
 
---000000000000f7b7c8061a041e4b
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Update dhrystone sources to use C89 instead of K&R C in order to fix
+build issues with the recent GCC.
 
-All,
+Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+---
+ .../dhrystone-2.1/dhrystone-c89.patch         | 242 ++++++++++++++++++
+ .../dhrystone/dhrystone_2.1.bb                |   4 +-
+ 2 files changed, 245 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-benchmark/dhrystone/dhrystone-2.1/dhrystone-c89.patch
 
-The triage team is starting to try and collect up and classify bugs which a
-newcomer to the project would be able to work on in a way which means
-people can find them. They're being listed on the triage page under the
-appropriate heading:
-https://wiki.yoctoproject.org/wiki/Bug_Triage#Newcomer_Bugs Also please
-review:
-https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded and
-how to create a bugzilla account at:
-https://bugzilla.yoctoproject.org/createaccount.cgi
+diff --git a/meta-oe/recipes-benchmark/dhrystone/dhrystone-2.1/dhrystone-c89.patch b/meta-oe/recipes-benchmark/dhrystone/dhrystone-2.1/dhrystone-c89.patch
+new file mode 100644
+index 000000000000..faf710fe1286
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/dhrystone/dhrystone-2.1/dhrystone-c89.patch
+@@ -0,0 +1,242 @@
++dhrystone: make it speak C89
++
++Update Dhrystone sources to stop using K&R C and use something close to C89.
++This fixes compilation errors reported by the GCC 14.
++
++Upstream-Status: Pending
++Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
++
++Index: dhrystone-2.1/dhry.h
++===================================================================
++--- dhrystone-2.1.orig/dhry.h
+++++ dhrystone-2.1/dhry.h
++@@ -423,3 +423,13 @@ typedef struct record
++ #ifndef HZ
++    extern long HZ;
++ #endif
+++
+++void Proc_2 (One_Fifty   *Int_Par_Ref);
+++void Proc_3 (Rec_Pointer *Ptr_Ref_Par);
+++void Proc_4();
+++void Proc_5();
+++void Proc_6 (Enumeration  Enum_Val_Par, Enumeration *Enum_Ref_Par);
+++void Proc_7 (One_Fifty Int_1_Par_Val, One_Fifty Int_2_Par_Val, One_Fifty *Int_Par_Ref);
+++void Proc_8 (Arr_1_Dim Arr_1_Par_Ref, Arr_2_Dim Arr_2_Par_Ref, int Int_1_Par_Val, int Int_2_Par_Val);
+++
+++Boolean Func_2 (Str_30  Str_1_Par_Ref, Str_30  Str_2_Par_Ref);
++Index: dhrystone-2.1/dhry_1.c
++===================================================================
++--- dhrystone-2.1.orig/dhry_1.c
+++++ dhrystone-2.1/dhry_1.c
++@@ -14,6 +14,8 @@
++  *
++  ****************************************************************************
++  */
+++#include <stdlib.h>
+++#include <string.h>
++ 
++ #include "dhry.h"
++ 
++@@ -28,7 +30,6 @@ char            Ch_1_Glob,
++ int             Arr_1_Glob [50];
++ int             Arr_2_Glob [50] [50];
++ 
++-extern char     *malloc ();
++ Enumeration     Func_1 ();
++   /* forward declaration necessary since Enumeration may not simply be int */
++ 
++@@ -41,6 +42,8 @@ Enumeration     Func_1 ();
++         Boolean Reg = true;
++ #endif
++ 
+++void Proc_1 (REG Rec_Pointer Ptr_Val_Par);
+++
++ /* variables for time measurement: */
++ 
++ #ifdef TIMES
++@@ -70,7 +73,7 @@ float           Microseconds,
++ /* end of variables for time measurement */
++ 
++ 
++-main ()
+++int main (void)
++ /*****/
++ 
++   /* main program, corresponds to procedures        */
++@@ -218,7 +221,7 @@ main ()
++   printf ("Arr_2_Glob[8][7]:    %d\n", Arr_2_Glob[8][7]);
++   printf ("        should be:   Number_Of_Runs + 10\n");
++   printf ("Ptr_Glob->\n");
++-  printf ("  Ptr_Comp:          %d\n", (int) Ptr_Glob->Ptr_Comp);
+++  printf ("  Ptr_Comp:          %lu\n", (unsigned long) Ptr_Glob->Ptr_Comp);
++   printf ("        should be:   (implementation-dependent)\n");
++   printf ("  Discr:             %d\n", Ptr_Glob->Discr);
++   printf ("        should be:   %d\n", 0);
++@@ -229,7 +232,7 @@ main ()
++   printf ("  Str_Comp:          %s\n", Ptr_Glob->variant.var_1.Str_Comp);
++   printf ("        should be:   DHRYSTONE PROGRAM, SOME STRING\n");
++   printf ("Next_Ptr_Glob->\n");
++-  printf ("  Ptr_Comp:          %d\n", (int) Next_Ptr_Glob->Ptr_Comp);
+++  printf ("  Ptr_Comp:          %lu\n", (unsigned long) Next_Ptr_Glob->Ptr_Comp);
++   printf ("        should be:   (implementation-dependent), same as above\n");
++   printf ("  Discr:             %d\n", Next_Ptr_Glob->Discr);
++   printf ("        should be:   %d\n", 0);
++@@ -280,14 +283,13 @@ main ()
++     printf ("%6.1f \n", Dhrystones_Per_Second);
++     printf ("\n");
++   }
++-  
+++  return 0;
++ }
++ 
++ 
++-Proc_1 (Ptr_Val_Par)
+++void Proc_1 (REG Rec_Pointer Ptr_Val_Par)
++ /******************/
++ 
++-REG Rec_Pointer Ptr_Val_Par;
++     /* executed once */
++ {
++   REG Rec_Pointer Next_Record = Ptr_Val_Par->Ptr_Comp;  
++@@ -318,12 +320,10 @@ REG Rec_Pointer Ptr_Val_Par;
++ } /* Proc_1 */
++ 
++ 
++-Proc_2 (Int_Par_Ref)
+++void Proc_2 (One_Fifty   *Int_Par_Ref)
++ /******************/
++     /* executed once */
++     /* *Int_Par_Ref == 1, becomes 4 */
++-
++-One_Fifty   *Int_Par_Ref;
++ {
++   One_Fifty  Int_Loc;  
++   Enumeration   Enum_Loc;
++@@ -341,13 +341,10 @@ One_Fifty   *Int_Par_Ref;
++ } /* Proc_2 */
++ 
++ 
++-Proc_3 (Ptr_Ref_Par)
+++void Proc_3 (Rec_Pointer *Ptr_Ref_Par)
++ /******************/
++     /* executed once */
++     /* Ptr_Ref_Par becomes Ptr_Glob */
++-
++-Rec_Pointer *Ptr_Ref_Par;
++-
++ {
++   if (Ptr_Glob != Null)
++     /* then, executed */
++@@ -356,7 +353,7 @@ Rec_Pointer *Ptr_Ref_Par;
++ } /* Proc_3 */
++ 
++ 
++-Proc_4 () /* without parameters */
+++void Proc_4 () /* without parameters */
++ /*******/
++     /* executed once */
++ {
++@@ -368,7 +365,7 @@ Proc_4 () /* without parameters */
++ } /* Proc_4 */
++ 
++ 
++-Proc_5 () /* without parameters */
+++void Proc_5 () /* without parameters */
++ /*******/
++     /* executed once */
++ {
++Index: dhrystone-2.1/dhry_2.c
++===================================================================
++--- dhrystone-2.1.orig/dhry_2.c
+++++ dhrystone-2.1/dhry_2.c
++@@ -14,6 +14,7 @@
++  *
++  ****************************************************************************
++  */
+++#include <string.h>
++ 
++ #include "dhry.h"
++ 
++@@ -26,14 +27,14 @@
++ extern  int     Int_Glob;
++ extern  char    Ch_1_Glob;
++ 
+++Boolean Func_3 (Enumeration Enum_Par_Val);
++ 
++-Proc_6 (Enum_Val_Par, Enum_Ref_Par)
+++
+++void Proc_6 (Enumeration  Enum_Val_Par, Enumeration *Enum_Ref_Par)
++ /*********************************/
++     /* executed once */
++     /* Enum_Val_Par == Ident_3, Enum_Ref_Par becomes Ident_2 */
++ 
++-Enumeration  Enum_Val_Par;
++-Enumeration *Enum_Ref_Par;
++ {
++   *Enum_Ref_Par = Enum_Val_Par;
++   if (! Func_3 (Enum_Val_Par))
++@@ -61,7 +62,7 @@ Enumeration *Enum_Ref_Par;
++ } /* Proc_6 */
++ 
++ 
++-Proc_7 (Int_1_Par_Val, Int_2_Par_Val, Int_Par_Ref)
+++void Proc_7 (One_Fifty Int_1_Par_Val, One_Fifty Int_2_Par_Val, One_Fifty *Int_Par_Ref)
++ /**********************************************/
++     /* executed three times                                      */ 
++     /* first call:      Int_1_Par_Val == 2, Int_2_Par_Val == 3,  */
++@@ -70,9 +71,6 @@ Proc_7 (Int_1_Par_Val, Int_2_Par_Val, In
++     /*                  Int_Par_Ref becomes 17                   */
++     /* third call:      Int_1_Par_Val == 6, Int_2_Par_Val == 10, */
++     /*                  Int_Par_Ref becomes 18                   */
++-One_Fifty       Int_1_Par_Val;
++-One_Fifty       Int_2_Par_Val;
++-One_Fifty      *Int_Par_Ref;
++ {
++   One_Fifty Int_Loc;
++ 
++@@ -81,15 +79,11 @@ One_Fifty      *Int_Par_Ref;
++ } /* Proc_7 */
++ 
++ 
++-Proc_8 (Arr_1_Par_Ref, Arr_2_Par_Ref, Int_1_Par_Val, Int_2_Par_Val)
+++void Proc_8 (Arr_1_Dim Arr_1_Par_Ref, Arr_2_Dim Arr_2_Par_Ref, int Int_1_Par_Val, int Int_2_Par_Val)
++ /*********************************************************************/
++     /* executed once      */
++     /* Int_Par_Val_1 == 3 */
++     /* Int_Par_Val_2 == 7 */
++-Arr_1_Dim       Arr_1_Par_Ref;
++-Arr_2_Dim       Arr_2_Par_Ref;
++-int             Int_1_Par_Val;
++-int             Int_2_Par_Val;
++ {
++   REG One_Fifty Int_Index;
++   REG One_Fifty Int_Loc;
++@@ -132,14 +126,11 @@ Capital_Letter   Ch_2_Par_Val;
++ } /* Func_1 */
++ 
++ 
++-Boolean Func_2 (Str_1_Par_Ref, Str_2_Par_Ref)
+++Boolean Func_2 (Str_30  Str_1_Par_Ref, Str_30  Str_2_Par_Ref)
++ /*************************************************/
++     /* executed once */
++     /* Str_1_Par_Ref == "DHRYSTONE PROGRAM, 1'ST STRING" */
++     /* Str_2_Par_Ref == "DHRYSTONE PROGRAM, 2'ND STRING" */
++-
++-Str_30  Str_1_Par_Ref;
++-Str_30  Str_2_Par_Ref;
++ {
++   REG One_Thirty        Int_Loc;
++       Capital_Letter    Ch_Loc;
++@@ -174,11 +165,10 @@ Str_30  Str_2_Par_Ref;
++ } /* Func_2 */
++ 
++ 
++-Boolean Func_3 (Enum_Par_Val)
+++Boolean Func_3 (Enumeration Enum_Par_Val)
++ /***************************/
++     /* executed once        */
++     /* Enum_Par_Val == Ident_3 */
++-Enumeration Enum_Par_Val;
++ {
++   Enumeration Enum_Loc;
++ 
+diff --git a/meta-oe/recipes-benchmark/dhrystone/dhrystone_2.1.bb b/meta-oe/recipes-benchmark/dhrystone/dhrystone_2.1.bb
+index d809a564e923..5d27acbdc054 100644
+--- a/meta-oe/recipes-benchmark/dhrystone/dhrystone_2.1.bb
++++ b/meta-oe/recipes-benchmark/dhrystone/dhrystone_2.1.bb
+@@ -3,7 +3,9 @@ LICENSE = "PD"
+ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/PD;md5=b3597d12946881e13cb3b548d1173851"
+ 
+ SRC_URI = "http://www.netlib.org/benchmark/dhry-c;downloadfilename=dhry-c.shar \
+-           file://dhrystone.patch"
++           file://dhrystone.patch \
++           file://dhrystone-c89.patch \
++"
+ SRC_URI[md5sum] = "75aa5909c174eed98c134be2f56307da"
+ SRC_URI[sha256sum] = "038a7e9169787125c3451a6c941f3aca5db2d2f3863871afcdce154ef17f4e3e"
+ 
+-- 
+2.39.2
 
-The idea is these bugs should be straight forward for a person to help work
-on who doesn't have deep experience with the project. If anyone can help,
-please take ownership of the bug and send patches! If anyone needs
-help/advice there are people on irc who can likely do so, or some of the
-more experienced contributors will likely be happy to help too.
-
-Also, the triage team meets weekly and does its best to handle the bugs
-reported into the Bugzilla. The number of people attending that meeting has
-fallen, as have the number of people available to help fix bugs. One of the
-things we hear users report is they don't know how to help. We (the triage
-team) are therefore going to start reporting out the currently 419
-unassigned or newcomer bugs.
-
-We're hoping people may be able to spare some time now and again to help
-out with these. Bugs are split into two types, "true bugs" where things
-don't work as they should and "enhancements" which are features we'd want
-to add to the system. There are also roughly four different "priority"
-classes right now, =E2=80=9C5.1=E2=80=9D, =E2=80=9C5.2=E2=80=9D, "5.99" and=
- "Future", the more
-pressing/urgent issues being in "5.1" and then =E2=80=9C5.2=E2=80=9D.
-
-Please review this link and if a bug is something you would be able to help
-with either take ownership of the bug, or send me (sjolley.yp.pm@gmail.com)
-an e-mail with the bug number you would like and I will assign it to you
-(please make sure you have a Bugzilla account). The list is at:
-https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcome=
-r_Bugs
-
-Thanks,
-
-
-
-*Stephen K. Jolley*
-
-*Yocto Project Program Manager*
-
-(    *Cell*:                (208) 244-4460
-
-* *Email*:                 *s
-<stephen.k.jolley@intel.com>jolley.yp.pm@gmail.com <jolley.yp.pm@gmail.com>=
-*
-
---000000000000f7b7c8061a041e4b
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><span style=3D"font-size:11pt;font-family:Calibri,Arial">A=
-ll,<br><br>The triage team is starting to try and collect up and classify b=
-ugs which a newcomer to the project would be able to work on in a way which=
- means people can find them. They&#39;re being listed on the triage page un=
-der the appropriate heading: <a href=3D"https://wiki.yoctoproject.org/wiki/=
-Bug_Triage#Newcomer_Bugs">https://wiki.yoctoproject.org/wiki/Bug_Triage#New=
-comer_Bugs</a>  Also please review: <a href=3D"https://www.openembedded.org=
-/wiki/How_to_submit_a_patch_to_OpenEmbedded">https://www.openembedded.org/w=
-iki/How_to_submit_a_patch_to_OpenEmbedded</a> and how to create a bugzilla =
-account at: <a href=3D"https://bugzilla.yoctoproject.org/createaccount.cgi"=
->https://bugzilla.yoctoproject.org/createaccount.cgi</a><br><br>The idea is=
- these bugs should be straight forward for a person to help work on who doe=
-sn&#39;t have deep experience with the project.  If anyone can help, please=
- take ownership of the bug and send patches!  If anyone needs help/advice t=
-here are people on irc who can likely do so, or some of the more experience=
-d contributors will likely be happy to help too.<br><br>Also, the triage te=
-am meets weekly and does its best to handle the bugs reported into the Bugz=
-illa. The number of people attending that meeting has fallen, as have the n=
-umber of people available to help fix bugs. One of the things we hear users=
- report is they don&#39;t know how to help. We (the triage team) are theref=
-ore going to start reporting out the currently 419 unassigned or newcomer b=
-ugs.<br><br>We&#39;re hoping people may be able to spare some time now and =
-again to help out with these.  Bugs are split into two types, &quot;true bu=
-gs&quot; where things don&#39;t work as they should and &quot;enhancements&=
-quot; which are features we&#39;d want to add to the system.  There are als=
-o roughly four different &quot;priority&quot; classes right now, =E2=80=9C5=
-.1=E2=80=9D, =E2=80=9C5.2=E2=80=9D, &quot;5.99&quot; and &quot;Future&quot;=
-, the more pressing/urgent issues being in &quot;5.1&quot; and then =E2=80=
-=9C5.2=E2=80=9D.<br><br>Please review this link and if a bug is something y=
-ou would be able to help with either take ownership of the bug, or send me =
-(<a href=3D"mailto:sjolley.yp.pm@gmail.com">sjolley.yp.pm@gmail.com</a>) an=
- e-mail with the bug number you would like and I will assign it to you (ple=
-ase make sure you have a Bugzilla account).  The list is at: <a href=3D"htt=
-ps://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Newcomer_B=
-ugs">https://wiki.yoctoproject.org/wiki/Bug_Triage_Archive#Unassigned_or_Ne=
-wcomer_Bugs</a></span><br><div dir=3D"ltr" class=3D"gmail_signature" data-s=
-martmail=3D"gmail_signature"><div dir=3D"ltr"><div dir=3D"ltr"><p class=3D"=
-MsoNormal" style=3D"background-image:initial;background-position:initial;ba=
-ckground-repeat:initial"><span style=3D"font-size:12pt;font-family:Arial,sa=
-ns-serif">Thanks,<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:12pt;font-fam=
-ily:Arial,sans-serif">=C2=A0<span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><i><span style=3D"font-size:16pt;co=
-lor:purple">Stephen K. Jolley</span></i></b><span style=3D"font-size:12pt;f=
-ont-family:Arial,sans-serif"><span></span></span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><b><span style=3D"font-size:8pt;font-f=
-amily:&quot;Courier New&quot;;color:blue">Yocto Project Program Manager</sp=
-an></b></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings;color:black">(</span><span style=3D"font-size:9pt;font-family:=
-&quot;MS Sans Serif&quot;,serif;color:teal">=C2=A0=C2=A0=C2=A0=C2=A0</span>=
-<b><span style=3D"font-size:8pt;font-family:&quot;Comic Sans MS&quot;;color=
-:teal">Cell</span></b><span style=3D"font-size:9pt;font-family:&quot;MS San=
-s Serif&quot;,serif;color:teal">:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 </span><span style=3D"font=
--size:9pt;font-family:&quot;MS Sans Serif&quot;,serif">(208) 244-4460</span=
-><span style=3D"font-size:12pt;font-family:Arial,sans-serif"><span></span><=
-/span></p>
-
-<p class=3D"MsoNormal" style=3D"background-image:initial;background-positio=
-n:initial;background-repeat:initial"><span style=3D"font-size:9pt;font-fami=
-ly:Wingdings">*=C2=A0</span><b><span lang=3D"FR" style=3D"font-size:8pt;fon=
-t-family:&quot;Comic Sans MS&quot;;color:teal">Email</span></b><span lang=
-=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,serif;=
-color:teal">:</span><span lang=3D"FR" style=3D"font-size:9pt;font-family:&q=
-uot;MS Sans Serif&quot;,serif">=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</span><u><span=
- lang=3D"FR" style=3D"font-size:9pt;font-family:&quot;MS Sans Serif&quot;,s=
-erif;color:blue"><span style=3D"color:rgb(17,85,204)"><a href=3D"mailto:ste=
-phen.k.jolley@intel.com" target=3D"_blank">s</a><a href=3D"mailto:jolley.yp=
-.pm@gmail.com" target=3D"_blank">jolley.yp.pm@gmail.com</a></span></span></=
-u></p></div></div></div></div>
-
---000000000000f7b7c8061a041e4b--
 
