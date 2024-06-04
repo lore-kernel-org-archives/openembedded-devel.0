@@ -1,99 +1,159 @@
-Return-Path: <Jiaying.Song.CN@windriver.com>
+Return-Path: <vanusuri@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BA704C25B74
-	for <webhook@archiver.kernel.org>; Tue,  4 Jun 2024 03:19:47 +0000 (UTC)
-Received: from mx0b-0064b401.pphosted.com (mx0b-0064b401.pphosted.com [205.220.178.238])
- by mx.groups.io with SMTP id smtpd.web11.12761.1717471178040530849
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0ECE2C25B74
+	for <webhook@archiver.kernel.org>; Tue,  4 Jun 2024 03:52:48 +0000 (UTC)
+Received: from mail-oa1-f51.google.com (mail-oa1-f51.google.com [209.85.160.51])
+ by mx.groups.io with SMTP id smtpd.web11.13137.1717473163313744826
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 Jun 2024 20:19:38 -0700
+ Mon, 03 Jun 2024 20:52:43 -0700
 Authentication-Results: mx.groups.io;
- dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.178.238, mailfrom: prvs=6885482200=jiaying.song.cn@windriver.com)
-Received: from pps.filterd (m0250812.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 453Nn3Pm020191
-	for <openembedded-devel@lists.openembedded.org>; Tue, 4 Jun 2024 03:19:37 GMT
-Received: from ala-exchng01.corp.ad.wrs.com (ala-exchng01.wrs.com [147.11.82.252])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3yftm7tenn-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 04 Jun 2024 03:19:37 +0000 (GMT)
-Received: from ala-exchng01.corp.ad.wrs.com (147.11.82.252) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39; Mon, 3 Jun 2024 20:19:35 -0700
-Received: from pek-lpg-core1.wrs.com (128.224.156.132) by
- ala-exchng01.corp.ad.wrs.com (147.11.82.252) with Microsoft SMTP Server id
- 15.1.2507.39 via Frontend Transport; Mon, 3 Jun 2024 20:19:35 -0700
-From: <jiaying.song.cn@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [scarthgap][master][meta-oe][PATCH] rrdtool: Fix do_populate_sysroot QA issues
-Date: Tue, 4 Jun 2024 11:20:18 +0800
-Message-ID: <20240604032018.419634-1-jiaying.song.cn@windriver.com>
+ dkim=pass header.i=@mvista.com header.s=google header.b=Cu0W5JVu;
+ spf=pass (domain: mvista.com, ip: 209.85.160.51, mailfrom: vanusuri@mvista.com)
+Received: by mail-oa1-f51.google.com with SMTP id 586e51a60fabf-250c0555a63so1011299fac.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 03 Jun 2024 20:52:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mvista.com; s=google; t=1717473161; x=1718077961; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Wze83i8A9b4FmeTLtq3ifQi5MmgtrBgK/4PD4Ltugr0=;
+        b=Cu0W5JVuxP8HaBDpGHgLK7Wz/zwmVUYJMECQ94DBtnLXLWmgLJxKjxlQL6s5ROsm9W
+         HfdVv0qN3pdZMOn5n2hZT38NaUXHqtBUfmeEkBXTSEkdLVO4sAge022vwHw8Ff+ybDo6
+         PkWBtfVHoqCyXU6mqqvQnWMwAvR6/eA6QPKzU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1717473161; x=1718077961;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Wze83i8A9b4FmeTLtq3ifQi5MmgtrBgK/4PD4Ltugr0=;
+        b=qn7jMiGWH/Wv276GIzu5By4ec62UJFUe4IcO1Kx1XOgxWN9+ZJBg8+7ImEs8U1RbUs
+         XFgHTYvQ4NrPj9xNKt0zzNJK4C7lPuUO4CeU7t0gT5p1KBcbG1WY9v/bYBXcLYuztgpz
+         2RsE8xp6IL3mfN1MO8vsKoV+7K/lRUnZuv39AVU3Mvf/A/rBbU1u0rzIdoGeZjJEKs6D
+         tXIaprv0EjCUxnwawCXwTkCeO9MZnCJV9Zvkn9VoGy2fHsIesp5axp4QtgjYXYchug/C
+         z8KNiyVSc96wQL/1T1eBRR68FeuyllsuILfvxuXAaQB1zy0qyyQTgSuf+d3N+4HV54FZ
+         ioQQ==
+X-Gm-Message-State: AOJu0Yy7rRyQxtOWDL3hKO095AzVe2day93iEwlREmoyhC2mJb+XMK5A
+	9ZTB6JauXHIKO7FRO6weTQm0uZi9HRRd8vEGTCA5hOcO4QIP1tqHAS9LNAQgAPfsziymhDWOkOV
+	S
+X-Google-Smtp-Source: AGHT+IG/3ZBFJe0pu+hTXnkz3QTtpMsZBss8QoIyynxCaimC0G1zZvs9eBJMS6fiYxMuA597FvwIlw==
+X-Received: by 2002:a05:6870:b156:b0:250:febf:3c6a with SMTP id 586e51a60fabf-250febf3ce9mr1776397fac.18.1717473161307;
+        Mon, 03 Jun 2024 20:52:41 -0700 (PDT)
+Received: from MVIN00020.mvista.com ([2401:4900:882d:b8b3:3ea4:d00d:5abe:5807])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-70242b09133sm6438248b3a.178.2024.06.03.20.52.39
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 03 Jun 2024 20:52:40 -0700 (PDT)
+From: vanusuri@mvista.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Vijay Anusuri <vanusuri@mvista.com>
+Subject: [OE-core][kirkstone][PATCH] yajl: backport Debian patch for CVE-2022-24795
+Date: Tue,  4 Jun 2024 09:22:31 +0530
+Message-Id: <20240604035231.9843-1-vanusuri@mvista.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-X-Proofpoint-GUID: EW-cc8-jzteVo2ULiiLkzsLFud4WPxNp
-X-Proofpoint-ORIG-GUID: EW-cc8-jzteVo2ULiiLkzsLFud4WPxNp
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.650,FMLib:17.12.28.16
- definitions=2024-06-03_17,2024-05-30_01,2024-05-17_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 malwarescore=0
- phishscore=0 suspectscore=0 mlxscore=0 lowpriorityscore=0 spamscore=0
- priorityscore=1501 bulkscore=0 clxscore=1015 impostorscore=0
- mlxlogscore=999 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.21.0-2405170001 definitions=main-2406040025
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 453Nn3Pm020191
+Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 04 Jun 2024 03:19:47 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110683
+ <openembedded-devel@lists.openembedded.org>; Tue, 04 Jun 2024 03:52:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110684
 
-From: Jiaying Song <jiaying.song.cn@windriver.com>
+From: Vijay Anusuri <vanusuri@mvista.com>
 
-This commit addresses the shebang size issue encountered in the
-do_populate_sysroot task of the rrdtool-native recipe. The issue
-was caused by the shebang line in the cgi-demo.cgi file exceeding
-the maximum allowed length of 128 characters.
+import patch from ubuntu to fix
+ CVE-2022-24795
 
-The following error was observed:
+Upstream-Status: Backport [import from ubuntu https://git.launchpad.net/ubuntu/+source/yajl/tree/debian/patches/?h=ubuntu%2Ffocal-security
+Upstream commit
+https://github.com/ppisar/yajl/commit/23cea2d7677e396efed78bbf1bf153961fab6bad]
 
-ERROR: rrdtool-native-1.8.0-r0 do_populate_sysroot: QA Issue: : /work/x86=
-_64-linux/rrdtool-native/1.8.0/sysroot-destdir/work/x86_64-linux/rrdtool-=
-native/1.8.0/recipe-sysroot-native/usr/share/rrdtool/examples/cgi-demo.cg=
-i maximum shebang size exceeded, the maximum size is 128. [shebang-size]
-ERROR: rrdtool-native-1.8.0-r0 do_populate_sysroot: do_populate_sysroot f=
-or this recipe installed files with QA issues
-=EF=BB=BF
-The solution implemented involves modifying the shebang line in the
-cgi-demo.cgi file to use '/usr/bin/env rrdcgi', ensuring it adheres
-to the length limit.
-
-Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
+Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
 ---
- meta-oe/recipes-extended/rrdtool/rrdtool_1.8.0.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+ .../yajl/yajl/CVE-2022-24795.patch            | 61 +++++++++++++++++++
+ meta-oe/recipes-devtools/yajl/yajl_2.1.0.bb   |  1 +
+ 2 files changed, 62 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/yajl/yajl/CVE-2022-24795.patch
 
-diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.8.0.bb b/meta-oe/=
-recipes-extended/rrdtool/rrdtool_1.8.0.bb
-index cbe1af285..5afb3f2f4 100644
---- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.8.0.bb
-+++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.8.0.bb
-@@ -103,6 +103,11 @@ do_configure() {
-         ${B}/examples/*.pl
- }
-=20
-+do_install:append:class-native() {
-+    # Replace the shebang line in cgi-demo.cgi
-+    sed -i '1s|^.*$|#!/usr/bin/env rrdcgi|' ${D}${datadir}/rrdtool/examp=
-les/cgi-demo.cgi
-+}
+diff --git a/meta-oe/recipes-devtools/yajl/yajl/CVE-2022-24795.patch b/meta-oe/recipes-devtools/yajl/yajl/CVE-2022-24795.patch
+new file mode 100644
+index 000000000..4de46e699
+--- /dev/null
++++ b/meta-oe/recipes-devtools/yajl/yajl/CVE-2022-24795.patch
+@@ -0,0 +1,61 @@
++From 23cea2d7677e396efed78bbf1bf153961fab6bad Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Petr=20P=C3=ADsa=C5=99?= <ppisar@redhat.com>
++Date: Thu, 7 Apr 2022 17:29:54 +0200
++Subject: [PATCH] Fix CVE-2022-24795
 +
- PACKAGES =3D+ "${PN}-perl ${PN}-python"
- PACKAGES =3D+ "rrdcached"
-=20
---=20
++There was an integer overflow in yajl_buf_ensure_available() leading
++to allocating less memory than requested. Then data were written past
++the allocated heap buffer in yajl_buf_append(), the only caller of
++yajl_buf_ensure_available(). Another result of the overflow was an
++infinite loop without a return from yajl_buf_ensure_available().
++
++yajl-ruby project, which bundles yajl, fixed it
++<https://github.com/brianmario/yajl-ruby/pull/211> by checking for the
++integer overflow, fortifying buffer allocations, and report the
++failures to a caller. But then the caller yajl_buf_append() skips
++a memory write if yajl_buf_ensure_available() failed leading to a data
++corruption.
++
++A yajl fork mainter recommended calling memory allocation callbacks with
++the large memory request and let them to handle it. But that has the
++problem that it's not possible pass the overely large size to the
++callbacks.
++
++This patch catches the integer overflow and terminates the process
++with abort().
++
++https://github.com/lloyd/yajl/issues/239
++https://github.com/brianmario/yajl-ruby/security/advisories/GHSA-jj47-x69x-mxrm
++
++Upstream-Status: Backport [import from ubuntu https://git.launchpad.net/ubuntu/+source/yajl/tree/debian/patches/CVE-2022-24795.patch
++Upstream commit
++https://github.com/ppisar/yajl/commit/23cea2d7677e396efed78bbf1bf153961fab6bad]
++CVE: CVE-2022-24795
++Signed-off-by: Vijay Anusuri <vanusuri@mvista.com>
++---
++ src/yajl_buf.c | 12 +++++++++++-
++ 1 file changed, 11 insertions(+), 1 deletion(-)
++
++diff --git a/src/yajl_buf.c b/src/yajl_buf.c
++index 1aeafde0..55c11add 100644
++--- a/src/yajl_buf.c
+++++ b/src/yajl_buf.c
++@@ -45,7 +45,17 @@ void yajl_buf_ensure_available(yajl_buf buf, size_t want)
++ 
++     need = buf->len;
++ 
++-    while (want >= (need - buf->used)) need <<= 1;
+++    if (((buf->used > want) ? buf->used : want) > (size_t)(buf->used + want)) {
+++        /* We cannot allocate more memory than SIZE_MAX. */
+++        abort();
+++    }
+++    while (want >= (need - buf->used)) {
+++        if (need >= (size_t)((size_t)(-1)<<1)>>1) {
+++            /* need would overflow. */
+++            abort();
+++        }
+++        need <<= 1;
+++    }
++ 
++     if (need != buf->len) {
++         buf->data = (unsigned char *) YA_REALLOC(buf->alloc, buf->data, need);
+diff --git a/meta-oe/recipes-devtools/yajl/yajl_2.1.0.bb b/meta-oe/recipes-devtools/yajl/yajl_2.1.0.bb
+index 697f54d9f..eca709cc1 100644
+--- a/meta-oe/recipes-devtools/yajl/yajl_2.1.0.bb
++++ b/meta-oe/recipes-devtools/yajl/yajl_2.1.0.bb
+@@ -10,6 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=39af6eb42999852bdd3ea00ad120a36d"
+ 
+ SRC_URI = "git://github.com/lloyd/yajl;branch=master;protocol=https \
+            file://CVE-2023-33460.patch \
++           file://CVE-2022-24795.patch \
+           "
+ SRCREV = "a0ecdde0c042b9256170f2f8890dd9451a4240aa"
+ 
+-- 
 2.25.1
 
 
