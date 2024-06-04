@@ -2,61 +2,61 @@ Return-Path: <vanusuri@mvista.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0ECE2C25B74
-	for <webhook@archiver.kernel.org>; Tue,  4 Jun 2024 03:52:48 +0000 (UTC)
-Received: from mail-oa1-f51.google.com (mail-oa1-f51.google.com [209.85.160.51])
- by mx.groups.io with SMTP id smtpd.web11.13137.1717473163313744826
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 03C8FC25B74
+	for <webhook@archiver.kernel.org>; Tue,  4 Jun 2024 03:55:48 +0000 (UTC)
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+ by mx.groups.io with SMTP id smtpd.web10.13324.1717473344860686653
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 03 Jun 2024 20:52:43 -0700
+ Mon, 03 Jun 2024 20:55:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@mvista.com header.s=google header.b=Cu0W5JVu;
- spf=pass (domain: mvista.com, ip: 209.85.160.51, mailfrom: vanusuri@mvista.com)
-Received: by mail-oa1-f51.google.com with SMTP id 586e51a60fabf-250c0555a63so1011299fac.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 03 Jun 2024 20:52:43 -0700 (PDT)
+ dkim=pass header.i=@mvista.com header.s=google header.b=irM1zw9W;
+ spf=pass (domain: mvista.com, ip: 209.85.214.180, mailfrom: vanusuri@mvista.com)
+Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-1f61f775738so36158235ad.2
+        for <openembedded-devel@lists.openembedded.org>; Mon, 03 Jun 2024 20:55:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=mvista.com; s=google; t=1717473161; x=1718077961; darn=lists.openembedded.org;
+        d=mvista.com; s=google; t=1717473343; x=1718078143; darn=lists.openembedded.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to;
         bh=Wze83i8A9b4FmeTLtq3ifQi5MmgtrBgK/4PD4Ltugr0=;
-        b=Cu0W5JVuxP8HaBDpGHgLK7Wz/zwmVUYJMECQ94DBtnLXLWmgLJxKjxlQL6s5ROsm9W
-         HfdVv0qN3pdZMOn5n2hZT38NaUXHqtBUfmeEkBXTSEkdLVO4sAge022vwHw8Ff+ybDo6
-         PkWBtfVHoqCyXU6mqqvQnWMwAvR6/eA6QPKzU=
+        b=irM1zw9WQbIeRKCwF4kfAXQDOx+2IimKex7l4GTvoNRXd1BFNa1HBvFxFSV5wFH3wt
+         M/f1CS8aRDuyQP29nFKf2vIyOxUjleIhek6y8m+qn/75RyTsMSWcAAlOBjEUYLNNCen1
+         LvADiKmShoimlnNYATOlcDWGFpcW1yRvx8cB8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1717473161; x=1718077961;
+        d=1e100.net; s=20230601; t=1717473343; x=1718078143;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
         bh=Wze83i8A9b4FmeTLtq3ifQi5MmgtrBgK/4PD4Ltugr0=;
-        b=qn7jMiGWH/Wv276GIzu5By4ec62UJFUe4IcO1Kx1XOgxWN9+ZJBg8+7ImEs8U1RbUs
-         XFgHTYvQ4NrPj9xNKt0zzNJK4C7lPuUO4CeU7t0gT5p1KBcbG1WY9v/bYBXcLYuztgpz
-         2RsE8xp6IL3mfN1MO8vsKoV+7K/lRUnZuv39AVU3Mvf/A/rBbU1u0rzIdoGeZjJEKs6D
-         tXIaprv0EjCUxnwawCXwTkCeO9MZnCJV9Zvkn9VoGy2fHsIesp5axp4QtgjYXYchug/C
-         z8KNiyVSc96wQL/1T1eBRR68FeuyllsuILfvxuXAaQB1zy0qyyQTgSuf+d3N+4HV54FZ
-         ioQQ==
-X-Gm-Message-State: AOJu0Yy7rRyQxtOWDL3hKO095AzVe2day93iEwlREmoyhC2mJb+XMK5A
-	9ZTB6JauXHIKO7FRO6weTQm0uZi9HRRd8vEGTCA5hOcO4QIP1tqHAS9LNAQgAPfsziymhDWOkOV
-	S
-X-Google-Smtp-Source: AGHT+IG/3ZBFJe0pu+hTXnkz3QTtpMsZBss8QoIyynxCaimC0G1zZvs9eBJMS6fiYxMuA597FvwIlw==
-X-Received: by 2002:a05:6870:b156:b0:250:febf:3c6a with SMTP id 586e51a60fabf-250febf3ce9mr1776397fac.18.1717473161307;
-        Mon, 03 Jun 2024 20:52:41 -0700 (PDT)
+        b=d2YA2aOctdSJfjKEodOvLZJw2q25+GLWMPPWZ6rD0+UGSIpY2tLvutL17UyuYNpw7i
+         nOQ6+D2/5nSOdRl/TBzUhyNdeqpE+tG9h2B/z+qQNmFxKkcApUCxOM916T5FN7WS7Dgj
+         8yp6ZYyJ8QpglK0hTU+qnGH0gDYJSNwfwIs9Vij7rDpfEVBk02A8xGrFi0idJjidrquE
+         cphjovdLfP447iUCqolVfakc3tmwNmfF8AZeUb2AkijLd1xU3BZOumFvVQxbO02qjCqX
+         jQYqjrapI78tGUZRBfh734YdasVEnJQo7oFF3jR9KQYs+Ag/2lKna5KWmp97DHhJNPsx
+         woEg==
+X-Gm-Message-State: AOJu0YzKzB1nRvSJEugju3VlYoycYv03Lvza48serITT+phKYuFtXbpz
+	cNTYfhwQNyzFqCNDgtVLdT/q/TEbAEz+B8YkwZO4d10Y/teLnCn7w0sh+7iuX3SoUsBQadSvr8y
+	l
+X-Google-Smtp-Source: AGHT+IH+wQj0Cx69EW2OPDbjj3VTQq8AXC4dwTctpMJ3/iYkaMZh1xnVhLufnh/1oLvWhVqs3igwEA==
+X-Received: by 2002:a17:902:ce82:b0:1f4:6948:1d49 with SMTP id d9443c01a7336-1f6371294ddmr101942155ad.33.1717473342747;
+        Mon, 03 Jun 2024 20:55:42 -0700 (PDT)
 Received: from MVIN00020.mvista.com ([2401:4900:882d:b8b3:3ea4:d00d:5abe:5807])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-70242b09133sm6438248b3a.178.2024.06.03.20.52.39
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-1f63232ddabsm72346505ad.28.2024.06.03.20.55.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 03 Jun 2024 20:52:40 -0700 (PDT)
+        Mon, 03 Jun 2024 20:55:42 -0700 (PDT)
 From: vanusuri@mvista.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Vijay Anusuri <vanusuri@mvista.com>
-Subject: [OE-core][kirkstone][PATCH] yajl: backport Debian patch for CVE-2022-24795
-Date: Tue,  4 Jun 2024 09:22:31 +0530
-Message-Id: <20240604035231.9843-1-vanusuri@mvista.com>
+Subject: [meta-oe][kirkstone][PATCH v2] yajl: backport Debian patch for CVE-2022-24795
+Date: Tue,  4 Jun 2024 09:25:27 +0530
+Message-Id: <20240604035527.9937-1-vanusuri@mvista.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 04 Jun 2024 03:52:48 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110684
+ <openembedded-devel@lists.openembedded.org>; Tue, 04 Jun 2024 03:55:48 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110685
 
 From: Vijay Anusuri <vanusuri@mvista.com>
 
