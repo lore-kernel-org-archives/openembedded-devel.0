@@ -1,137 +1,307 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <mark.hatle@kernel.crashing.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 914E1C27C53
-	for <webhook@archiver.kernel.org>; Tue,  4 Jun 2024 18:26:13 +0000 (UTC)
-Received: from mail-oa1-f46.google.com (mail-oa1-f46.google.com [209.85.160.46])
- by mx.groups.io with SMTP id smtpd.web10.3417.1717525563744748929
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BDD76C25B78
+	for <webhook@archiver.kernel.org>; Tue,  4 Jun 2024 19:06:33 +0000 (UTC)
+Received: from gate.crashing.org (gate.crashing.org [63.228.1.57])
+ by mx.groups.io with SMTP id smtpd.web10.4466.1717527986501832795
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 04 Jun 2024 11:26:03 -0700
+ Tue, 04 Jun 2024 12:06:26 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=PCpIcsUr;
- spf=pass (domain: gmail.com, ip: 209.85.160.46, mailfrom: raj.khem@gmail.com)
-Received: by mail-oa1-f46.google.com with SMTP id 586e51a60fabf-2510648fbacso556917fac.1
-        for <openembedded-devel@lists.openembedded.org>; Tue, 04 Jun 2024 11:26:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1717525563; x=1718130363; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=wlwazlSOPBrXnUQ4hi6M/yFQDVx6zCC1yATWpcljEDE=;
-        b=PCpIcsUriopgAUluRtP8D32DRVCT6aIbh+kweSlQqZmVzOExfqNlwhS99v6ZVxcsDu
-         tUrlZP+lWxvqEj7brJwQbiCV/JpEQd+2wB8+kUXTZBIcGW3+oqmSGOLJvbbQX5pCbHnv
-         SAvT80DAvbBnmU/dD7uvvJWb83LIFOWYcAeLEC6p6GW74leYGJW0Rybri/3A+UyZvPeP
-         lpqZW3pKDG396piA9nix7NblGOpMGw+vGy/wWF8fGPN1I0EFRhDDFYXct9S1iZO21TbN
-         y+ew1rDAMuRVM4Rb5DD9JEuuTgc1xoBvThlXGkF6HtBoFW7ZUVWMWpoyVWY3C9Hr/GlI
-         ihJg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1717525563; x=1718130363;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=wlwazlSOPBrXnUQ4hi6M/yFQDVx6zCC1yATWpcljEDE=;
-        b=O3GxPSRL0eanudSnwABVWZAt7BCCVgKxnlUYPEOK7uS0hGmYPRb5zxmjuUbKWVqbHh
-         lQQn+hQlclZxNd3KJ2mrbOqdCnCUcsqq5tjzyqUgjobuu1KeB5xxWkoG+rmwTaaUyfWN
-         lAK5mY6xeAzOzCcq0/GTvhqjObiLJU+pgUCbt2OVYEvwji9y3mgbWTeIcerjz+BR08ok
-         0AfMXh9+U+Yc8ci6zAZoUimzOgVxIIxqomnMPKgPNtDjcNS2E43Ae0zalhBj+mvwucOr
-         XbUDKtISC6xxZ6W6ki3D47b2YRXUMOzuxK/UQfaUaCpYBdGYQ5YJvQEJQWjBQFfH9+56
-         yDuw==
-X-Gm-Message-State: AOJu0YzMQOyC7BVnlXwKI3mZUMgtPM3OZicN8QLMQy0SdR8Xv2srKb33
-	a+HKTzw5pi9u1zwgdXHBh8l5ct6C6HriJhEaEtDlFh3XnEWDXtu491l/QqxLZXqcOG+XdrQ2i4G
-	gwARb4h52b0VyfSjkBD+wFL1fcfA=
-X-Google-Smtp-Source: AGHT+IEmnzkW6NQ6NtgHd0AfenCYXcRiBojRqjNIq/F4NHLMsNvDonhE+CJtzgUNTRVNc7FdqmSJJu4Rl4h9cPt5YQw=
-X-Received: by 2002:a05:6870:a687:b0:250:725f:ed4d with SMTP id
- 586e51a60fabf-25121c7e175mr491220fac.3.1717525562782; Tue, 04 Jun 2024
- 11:26:02 -0700 (PDT)
+ dkim=none (message not signed); spf=pass (domain: kernel.crashing.org, ip: 63.228.1.57, mailfrom: mark.hatle@kernel.crashing.org)
+Received: from kernel.crashing.org (70-99-78-136.nuveramail.net [70.99.78.136] (may be forged))
+	by gate.crashing.org (8.14.1/8.14.1) with ESMTP id 454J6JKQ029024;
+	Tue, 4 Jun 2024 14:06:20 -0500
+Received: from [192.168.3.156] ([192.168.3.156])
+	by kernel.crashing.org (8.14.7/8.14.7) with ESMTP id 454J6JVN021804;
+	Tue, 4 Jun 2024 14:06:19 -0500
+Message-ID: <05d8f051-111b-4bd0-a4d9-981ac9d6db2d@kernel.crashing.org>
+Date: Tue, 4 Jun 2024 14:06:18 -0500
 MIME-Version: 1.0
-References: <20240604032018.419634-1-jiaying.song.cn@windriver.com>
-In-Reply-To: <20240604032018.419634-1-jiaying.song.cn@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 4 Jun 2024 11:25:36 -0700
-Message-ID: <CAMKF1sqptwuzkEWc5=XjrF_YtMEXGdAW+ZO=tV32rs0OOyptjg@mail.gmail.com>
-Subject: Re: [oe] [scarthgap][master][meta-oe][PATCH] rrdtool: Fix
- do_populate_sysroot QA issues
-To: Jiaying.Song.CN@windriver.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [oe] [PATCH v2] v4l-utils: Update to 1.26.1
+Content-Language: en-US
+To: openembedded-devel@lists.openembedded.org
+References: <20240112125553.263105-1-festevam@gmail.com>
+Cc: Mark Hatle <mark.hatle@amd.com>
+From: Mark Hatle <mark.hatle@kernel.crashing.org>
+In-Reply-To: <20240112125553.263105-1-festevam@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Tue, 04 Jun 2024 18:26:13 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110687
+ <openembedded-devel@lists.openembedded.org>; Tue, 04 Jun 2024 19:06:33 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110688
 
-On Mon, Jun 3, 2024 at 8:19=E2=80=AFPM Song, Jiaying (CN) via
-lists.openembedded.org
-<Jiaying.Song.CN=3Dwindriver.com@lists.openembedded.org> wrote:
->
-> From: Jiaying Song <jiaying.song.cn@windriver.com>
->
-> This commit addresses the shebang size issue encountered in the
-> do_populate_sysroot task of the rrdtool-native recipe. The issue
-> was caused by the shebang line in the cgi-demo.cgi file exceeding
-> the maximum allowed length of 128 characters.
->
-> The following error was observed:
->
-> ERROR: rrdtool-native-1.8.0-r0 do_populate_sysroot: QA Issue: : /work/x86=
-_64-linux/rrdtool-native/1.8.0/sysroot-destdir/work/x86_64-linux/rrdtool-na=
-tive/1.8.0/recipe-sysroot-native/usr/share/rrdtool/examples/cgi-demo.cgi ma=
-ximum shebang size exceeded, the maximum size is 128. [shebang-size]
-> ERROR: rrdtool-native-1.8.0-r0 do_populate_sysroot: do_populate_sysroot f=
-or this recipe installed files with QA issues
-> =EF=BB=BF
-> The solution implemented involves modifying the shebang line in the
-> cgi-demo.cgi file to use '/usr/bin/env rrdcgi', ensuring it adheres
-> to the length limit.
->
-> Signed-off-by: Jiaying Song <jiaying.song.cn@windriver.com>
+I know this is months old, but I recently found an issue with this.  Below the 
+patch that ensured that 'metactl' headers were exported was removed.  This new 
+version no longer exports the headers required by components like gstreamer to 
+use the 'mediactrl' interface exported by libv4l.
+
+I'm not sure how to fix it at this point, but I wanted to report the issue.
+
+--Mark
+
+On 1/12/24 6:55 AM, Fabio Estevam wrote:
+> From: Fabio Estevam <festevam@denx.de>
+> 
+> Update to 1.26.1.
+> 
+> Remove the Makefile.am patches as they no longer apply due to
+> the switch to Meson.
+> 
+> Backport a fix that prevents installing 50-rc_keymap.conf in systems
+> without systemd.
+> 
+> Signed-off-by: Fabio Estevam <festevam@denx.de>
 > ---
->  meta-oe/recipes-extended/rrdtool/rrdtool_1.8.0.bb | 5 +++++
->  1 file changed, 5 insertions(+)
->
-> diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.8.0.bb b/meta-oe/=
-recipes-extended/rrdtool/rrdtool_1.8.0.bb
-> index cbe1af285..5afb3f2f4 100644
-> --- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.8.0.bb
-> +++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.8.0.bb
-> @@ -103,6 +103,11 @@ do_configure() {
->          ${B}/examples/*.pl
->  }
->
-> +do_install:append:class-native() {
-> +    # Replace the shebang line in cgi-demo.cgi
-> +    sed -i '1s|^.*$|#!/usr/bin/env rrdcgi|' ${D}${datadir}/rrdtool/examp=
-les/cgi-demo.cgi
-> +}
-
-I think this patch makes sense for non-native versions of this recipe
-as well. However, it will be good
-to see if we can do it as a patch to .in file itself, string
-substitution can cause unintended changes
-especially when the scripts change etc.
-
-https://github.com/oetiker/rrdtool-1.x/blob/master/examples/cgi-demo.cgi.in=
-#L1
-
-
-> +
->  PACKAGES =3D+ "${PN}-perl ${PN}-python"
->  PACKAGES =3D+ "rrdcached"
->
+> Changes since v1:
+> - Adjust SRCREV to point to the v4l-utils-1.26.1 tag insted of stable-1.26.
+> - Keep udevdir v4l2-compliance-32 and v4l2-ctl-32 options.
+> - Apply a backport fix.
+> 
+>   ...-Don-t-install-libmediactl-and-libv4.patch | 46 ------------------
+>   ...estrict-the-installation-of-50-rc_ke.patch | 47 +++++++++++++++++++
+>   ...02-original-patch-mediactl-pkgconfig.patch | 23 ---------
+>   ...iginal-patch-export-mediactl-headers.patch | 26 ----------
+>   ...4l-utils_1.24.1.bb => v4l-utils_1.26.1.bb} | 28 +++++------
+>   5 files changed, 59 insertions(+), 111 deletions(-)
+>   delete mode 100644 meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0001-Revert-media-ctl-Don-t-install-libmediactl-and-libv4.patch
+>   create mode 100644 meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0001-keytable-meson-Restrict-the-installation-of-50-rc_ke.patch
+>   delete mode 100644 meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0002-original-patch-mediactl-pkgconfig.patch
+>   delete mode 100644 meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0003-original-patch-export-mediactl-headers.patch
+>   rename meta-oe/recipes-multimedia/v4l2apps/{v4l-utils_1.24.1.bb => v4l-utils_1.26.1.bb} (77%)
+> 
+> diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0001-Revert-media-ctl-Don-t-install-libmediactl-and-libv4.patch b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0001-Revert-media-ctl-Don-t-install-libmediactl-and-libv4.patch
+> deleted file mode 100644
+> index 52f0cd338..000000000
+> --- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0001-Revert-media-ctl-Don-t-install-libmediactl-and-libv4.patch
+> +++ /dev/null
+> @@ -1,46 +0,0 @@
+> -From 0d5c0e9a75eca43667b0e29155b635e50622b66a Mon Sep 17 00:00:00 2001
+> -From: Khem Raj <raj.khem@gmail.com>
+> -Date: Fri, 27 Feb 2015 21:55:36 +0000
+> -Subject: [PATCH] Revert "media-ctl: Don't install libmediactl and
+> -
+> - libv4l2subdev"
+> -
+> -This reverts commit 0911dce53b08b0df3066be2c75f67e8a314d8729.
+> -
+> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> -
+> -Conflicts:
+> -	utils/media-ctl/Makefile.am
+> -
+> ----
+> -Upstream-Status: Pending
+> -
+> - utils/media-ctl/Makefile.am | 10 +++-------
+> - 1 file changed, 3 insertions(+), 7 deletions(-)
+> -
+> -diff --git a/utils/media-ctl/Makefile.am b/utils/media-ctl/Makefile.am
+> -index c48c8d6..e255e16 100644
+> ---- a/utils/media-ctl/Makefile.am
+> -+++ b/utils/media-ctl/Makefile.am
+> -@@ -1,8 +1,7 @@
+> --noinst_LTLIBRARIES = libmediactl.la libv4l2subdev.la
 > --
-> 2.25.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> -+lib_LTLIBRARIES = libmediactl.la libv4l2subdev.la
+> - libmediactl_la_SOURCES = libmediactl.c mediactl-priv.h
+> --libmediactl_la_CFLAGS = -static $(LIBUDEV_CFLAGS)
+> --libmediactl_la_LDFLAGS = -static $(LIBUDEV_LIBS)
+> -+libmediactl_la_CFLAGS = $(LIBUDEV_CFLAGS)
+> -+libmediactl_la_LDFLAGS = $(LIBUDEV_LIBS)
+> -
+> - media-bus-format-names.h: ../../include/linux/media-bus-format.h
+> - 	$(AM_V_GEN) sed -e '/#define MEDIA_BUS_FMT/ ! d; s/.*FMT_//; /FIXED/ d; s/\t.*//; s/.*/{ \"&\", MEDIA_BUS_FMT_& },/;' \
+> -@@ -18,9 +17,6 @@ CLEANFILES = $(BUILT_SOURCES)
+> - nodist_libv4l2subdev_la_SOURCES = $(BUILT_SOURCES)
+> - libv4l2subdev_la_SOURCES = libv4l2subdev.c
+> - libv4l2subdev_la_LIBADD = libmediactl.la
+> --libv4l2subdev_la_CFLAGS = -static
+> --libv4l2subdev_la_LDFLAGS = -static
+> --
+> - mediactl_includedir=$(includedir)/mediactl
+> - noinst_HEADERS = mediactl.h v4l2subdev.h
+> -
+> diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0001-keytable-meson-Restrict-the-installation-of-50-rc_ke.patch b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0001-keytable-meson-Restrict-the-installation-of-50-rc_ke.patch
+> new file mode 100644
+> index 000000000..6d06d826b
+> --- /dev/null
+> +++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0001-keytable-meson-Restrict-the-installation-of-50-rc_ke.patch
+> @@ -0,0 +1,46 @@
+> +From 502c0302827cec3d2b2a69fb25189646685ef2ff Mon Sep 17 00:00:00 2001
+> +From: Fabio Estevam <festevam@denx.de>
+> +Date: Fri, 12 Jan 2024 00:17:14 -0300
+> +Subject: [PATCH] keytable: meson: Restrict the installation of
+> + 50-rc_keymap.conf
+> +
+> +Currently, meson tries to install 50-rc_keymap.conf even if systemd
+> +is not used.
+> +
+> +Commit 01f2c6c58e6f ("keytable: restrict installation of 50-rc_keymap.conf"),
+> +only allowed 50-rc_keymap.conf to be installed when both BPF and systemd
+> +were used.
+> +
+> +Apply the same logic in meson to fix the problem.
+> +
+> +Signed-off-by: Fabio Estevam <festevam@denx.de>
+> +Signed-off-by: Sean Young <sean@mess.org>
+> +Upstream-Status: Backport [https://git.linuxtv.org/v4l-utils.git/commit/?id=a21924ec424c4744af6f2a794e0677eba35dd168]
+> +---
+> + utils/keytable/meson.build | 4 ++++
+> + 1 file changed, 4 insertions(+)
+> +
+> +diff --git a/utils/keytable/meson.build b/utils/keytable/meson.build
+> +index 4130a4bea514..76ce329eae8e 100644
+> +--- a/utils/keytable/meson.build
+> ++++ b/utils/keytable/meson.build
+> +@@ -69,6 +69,8 @@ ir_keytable_udev_rules = files(
+> + install_data(ir_keytable_udev_rules,
+> +              install_dir : ir_keytable_system_dir / 'rules.d')
+> +
+> ++if ir_bpf_enabled
+> ++if dep_systemd.found()
+> + if have_udevdsyscallfilter
+> +     ir_keytable_systemd_files = files(
+> +         '50-rc_keymap.conf',
+> +@@ -76,6 +78,8 @@ if have_udevdsyscallfilter
+> +     install_data(ir_keytable_systemd_files,
+> +                  install_dir : systemd_systemdir / 'systemd-udevd.service.d')
+> + endif
+> ++endif
+> ++endif
+> +
+> + # Install non-existing directory to create empty directory structure
+> + # See: https://github.com/mesonbuild/meson/issues/2904
+> +--
+> +2.34.1
+> diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0002-original-patch-mediactl-pkgconfig.patch b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0002-original-patch-mediactl-pkgconfig.patch
+> deleted file mode 100644
+> index d52475974..000000000
+> --- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0002-original-patch-mediactl-pkgconfig.patch
+> +++ /dev/null
+> @@ -1,23 +0,0 @@
+> -From 320b8378ee30eb5e0fe83a8b397f822f2f88a4c1 Mon Sep 17 00:00:00 2001
+> -From: Khem Raj <raj.khem@gmail.com>
+> -Date: Sun, 1 Mar 2015 22:25:07 +0000
+> -Subject: [PATCH] %% original patch: mediactl-pkgconfig.patch
+> -
+> ----
+> -Upstream-Status: Pending
+> -
+> - utils/media-ctl/Makefile.am | 1 +
+> - 1 file changed, 1 insertion(+)
+> -
+> -diff --git a/utils/media-ctl/Makefile.am b/utils/media-ctl/Makefile.am
+> -index e255e16..ff7b417 100644
+> ---- a/utils/media-ctl/Makefile.am
+> -+++ b/utils/media-ctl/Makefile.am
+> -@@ -20,6 +20,7 @@ libv4l2subdev_la_LIBADD = libmediactl.la
+> - mediactl_includedir=$(includedir)/mediactl
+> - noinst_HEADERS = mediactl.h v4l2subdev.h
+> -
+> -+pkgconfig_DATA = libmediactl.pc
+> - bin_PROGRAMS = media-ctl
+> - media_ctl_SOURCES = media-ctl.c options.c options.h tools.h
+> - media_ctl_LDADD = libmediactl.la libv4l2subdev.la
+> diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0003-original-patch-export-mediactl-headers.patch b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0003-original-patch-export-mediactl-headers.patch
+> deleted file mode 100644
+> index f6fcee92e..000000000
+> --- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0003-original-patch-export-mediactl-headers.patch
+> +++ /dev/null
+> @@ -1,26 +0,0 @@
+> -From f7109d6b2fcb291824d795071c04a492d9fbc45b Mon Sep 17 00:00:00 2001
+> -From: Khem Raj <raj.khem@gmail.com>
+> -Date: Sun, 1 Mar 2015 22:25:07 +0000
+> -Subject: [PATCH] %% original patch: export-mediactl-headers.patch
+> -
+> ----
+> -Upstream-Status: Pending
+> -
+> - utils/media-ctl/Makefile.am | 4 ++--
+> - 1 file changed, 2 insertions(+), 2 deletions(-)
+> -
+> -diff --git a/utils/media-ctl/Makefile.am b/utils/media-ctl/Makefile.am
+> -index ff7b417..6ce656f 100644
+> ---- a/utils/media-ctl/Makefile.am
+> -+++ b/utils/media-ctl/Makefile.am
+> -@@ -17,8 +17,8 @@ CLEANFILES = $(BUILT_SOURCES)
+> - nodist_libv4l2subdev_la_SOURCES = $(BUILT_SOURCES)
+> - libv4l2subdev_la_SOURCES = libv4l2subdev.c
+> - libv4l2subdev_la_LIBADD = libmediactl.la
+> --mediactl_includedir=$(includedir)/mediactl
+> --noinst_HEADERS = mediactl.h v4l2subdev.h
+> -+otherincludedir = $(includedir)/mediactl
+> -+otherinclude_HEADERS = mediactl.h v4l2subdev.h
+> -
+> - pkgconfig_DATA = libmediactl.pc
+> - bin_PROGRAMS = media-ctl
+> diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.24.1.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.26.1.bb
+> similarity index 77%
+> rename from meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.24.1.bb
+> rename to meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.26.1.bb
+> index f314d9b6a..4ae1a18c9 100644
+> --- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.24.1.bb
+> +++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.26.1.bb
+> @@ -18,34 +18,30 @@ LDFLAGS:append = " -pthread"
+>   # Needs further investigation
+>   GLIBC_64BIT_TIME_FLAGS = ""
+>   
+> -inherit autotools gettext pkgconfig
+> +inherit meson gettext pkgconfig
+>   
+> -PACKAGECONFIG ??= "media-ctl"
+> -PACKAGECONFIG[media-ctl] = "--enable-v4l-utils,--disable-v4l-utils,,"
+> -PACKAGECONFIG[qv4l2] = ",--disable-qv4l2"
+> -PACKAGECONFIG[qvidcap] = ",--disable-qvidcap"
+> -PACKAGECONFIG[v4l2-tracer] = ",--disable-v4l2-tracer,json-c"
+> +PACKAGECONFIG ??= ""
+> +PACKAGECONFIG[qv4l2] = ",-Dqv4l2=disabled"
+> +PACKAGECONFIG[qvidcap] = ",-Dqvidcap=disabled"
+> +PACKAGECONFIG[v4l2-tracer] = ",-Dv4l2-tracer=disabled,json-c"
+>   
+>   SRC_URI = "\
+> -    git://git.linuxtv.org/v4l-utils.git;protocol=https;branch=stable-1.24 \
+> -    file://0001-Revert-media-ctl-Don-t-install-libmediactl-and-libv4.patch \
+> -    file://0002-original-patch-mediactl-pkgconfig.patch \
+> -    file://0003-original-patch-export-mediactl-headers.patch \
+> +    git://git.linuxtv.org/v4l-utils.git;protocol=https;branch=stable-1.26 \
+> +    file://0001-keytable-meson-Restrict-the-installation-of-50-rc_ke.patch \
+>       file://0004-Do-not-use-getsubopt.patch \
+>   "
+>   
+> -SRCREV = "8799081b143627c9c09dea0c60ad3d1cc17cc848"
+> +SRCREV = "4aee01a027923cab1e40969f56f8ba58d3e6c0d1"
+>   
+>   PV .= "+git${SRCPV}"
+>   
+>   S = "${WORKDIR}/git"
+>   
+> -do_configure:prepend() {
+> -    cd ${S}; ./bootstrap.sh; cd -
+> -}
+> +EXTRA_OEMESON = "-Dudevdir=${base_libdir}/udev -Dv4l2-compliance-32=false -Dv4l2-ctl-32=false"
+>   
+> -EXTRA_OECONF = "--enable-shared --with-udevdir=${base_libdir}/udev \
+> -                --disable-v4l2-compliance-32 --disable-v4l2-ctl-32"
+> +# Disable the erroneous installation of gconv-modules that would break glib
+> +# like it is done in Debian and ArchLinux.
+> +EXTRA_OEMESON += "-Dgconv=disabled"
+>   
+>   VIRTUAL-RUNTIME_ir-keytable-keymaps ?= "rc-keymaps"
+>   
+> 
+> 
+> 
+> -=-=-=-=-=-=-=-=-=-=-=-
 > Links: You receive all messages sent to this group.
-> View/Reply Online (#110683): https://lists.openembedded.org/g/openembedde=
-d-devel/message/110683
-> Mute This Topic: https://lists.openembedded.org/mt/106476549/1997914
+> View/Reply Online (#108240): https://lists.openembedded.org/g/openembedded-devel/message/108240
+> Mute This Topic: https://lists.openembedded.org/mt/103681772/3616948
 > Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [mark.hatle@kernel.crashing.org]
+> -=-=-=-=-=-=-=-=-=-=-=-
+> 
 
