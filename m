@@ -1,1682 +1,220 @@
-Return-Path: <dbaryshkov@gmail.com>
+Return-Path: <leimaohui@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BC95BC25B76
-	for <webhook@archiver.kernel.org>; Wed,  5 Jun 2024 07:52:35 +0000 (UTC)
-Received: from mail-lf1-f43.google.com (mail-lf1-f43.google.com [209.85.167.43])
- by mx.groups.io with SMTP id smtpd.web10.9720.1717573951368440533
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E88FEC25B76
+	for <webhook@archiver.kernel.org>; Wed,  5 Jun 2024 08:27:25 +0000 (UTC)
+Received: from esa2.fujitsucc.c3s2.iphmx.com (esa2.fujitsucc.c3s2.iphmx.com [68.232.152.246])
+ by mx.groups.io with SMTP id smtpd.web10.10103.1717576039045997031
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 05 Jun 2024 00:52:32 -0700
+ Wed, 05 Jun 2024 01:27:19 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@linaro.org header.s=google header.b=vPzZSWVw;
- spf=pass (domain: linaro.org, ip: 209.85.167.43, mailfrom: dmitry.baryshkov@linaro.org)
-Received: by mail-lf1-f43.google.com with SMTP id 2adb3069b0e04-52b8b7b8698so6002351e87.1
-        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Jun 2024 00:52:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1717573949; x=1718178749; darn=lists.openembedded.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=SRoihq8mjKXCcKOhTNzRPIEHjbv0cBMHubECq2gbhC4=;
-        b=vPzZSWVwyaFzMQod8KDHYXKdQWA0AfUBffScuEhlRltJk70cLlrSph3UfEZbpMHTKV
-         7+YEHuqxHnmxFTzg08vaP1y2y7+b1fpsRrJvTb/k3+mtsWWc5+Y4W+V7v23r94iRR5X3
-         5tjTnhiimyFYpTHS1Op6aBt3ThVlEMQNJd1dRDhokM+CmjQK8WaQs4A1esdvm373Em/F
-         xl6PhphaM9B9I3rwiL6sFWcLSY+Ll+qZ1eNX8NWKQLxKRA7HD208pZHNJB6XZOhypmU8
-         G2FGRUwDx/5aM02jg3OGjEKV8Fsf5Y/0YxdokKxkS4awQHNodHPURZ0447dCq0U41SBo
-         7ZHA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1717573949; x=1718178749;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=SRoihq8mjKXCcKOhTNzRPIEHjbv0cBMHubECq2gbhC4=;
-        b=An/aKrXB3mfEhhYWnhQsIKevccZJoH6xxC9iSSx5GVFym6QJWkbBnQ1dEpRzvzTBEQ
-         XR+2Ym6LPR48pCdsHcvhn8/CBPbuxWBeoBLK2LGE8sZ42hKf6/Vj2AfOnQqgjY7teT4J
-         5948KroNGbb+b5iImYFoH8xSd+0HpWdgQ4c2sVdgGODiV39zZfWMAEntZTU08z6uhmXu
-         Vd0P52Bpr3hdko5HJ3bruOCTCFJEZEjdAV9VZotQgyKdZGD1dbNSVZtFiIlTvciogELz
-         hbwxU+D3acJAZt8LH3bkRFysKqxDODJbHnmS2J27o989B61ZyLS4DwSQAQD8prjppkJh
-         oriQ==
-X-Gm-Message-State: AOJu0YxzdxtFFLcKlbJL2AFGKy6/DO5oQ2i3jNIXScg3QSekBQDblcZO
-	ybO3w8+AFKLI2b/e0o+VP02oNDk65RM+L9lhO/XJhh63VztATqDhQpxuXbz/csIPBdzAAZE4SrZ
-	i
-X-Google-Smtp-Source: AGHT+IHx5C3J2DTWI10nxEhjj7EzY6NcJY9ETfRKGNNlHwevt93Hs+uAa6b9j8PqFGf0Ej8edsAxNQ==
-X-Received: by 2002:a19:ca4a:0:b0:523:b19a:2602 with SMTP id 2adb3069b0e04-52bab4f44f3mr1041282e87.54.1717573948177;
-        Wed, 05 Jun 2024 00:52:28 -0700 (PDT)
-Received: from umbar.unikie.fi ([192.130.178.91])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-52b9c8a7766sm690199e87.181.2024.06.05.00.52.27
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 05 Jun 2024 00:52:27 -0700 (PDT)
-From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH v4 1/3] rrdtool: fix compilation with GCC 14
-Date: Wed,  5 Jun 2024 10:52:25 +0300
-Message-Id: <20240605075227.1833641-1-dmitry.baryshkov@linaro.org>
-X-Mailer: git-send-email 2.39.2
+ dkim=pass header.i=@fujitsu.com header.s=fj1 header.b=Xs7jvfmT;
+ spf=neutral (domain: fujitsu.com, ip: 68.232.152.246, mailfrom: leimaohui@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj1;
+  t=1717576039; x=1749112039;
+  h=from:to:subject:date:message-id:references:in-reply-to:
+   content-transfer-encoding:mime-version;
+  bh=H9eTrpVqginZvlcjIPGezFaASuiInJ+6jHeyMaaRVK0=;
+  b=Xs7jvfmTGvVz7hmxwcocO5S2x/h+9ZCK/jrQ5oLPkSVo6L9/XoCqLuqM
+   okchtoSjFUtGGis7BhAo6xbuILCSCyzjoBTqW1FLqco2wqWeViUpmNMoA
+   MW3TfcSZS6N3JBWKtICpheX18nBqA9vNBhK5b3rdxHY007UI05yhKNEq0
+   S5Qv2L8ijxK2UsHHcaFUReP5UMNLtywimWWxbRnoS0xu/kiJ64UMJpSeQ
+   FEfJLw4QBwlqKY64jd/BB5O0BXA+Z0nMBQKufnh9b6pApshxQKg6yYu5X
+   L2fQqbxnFjOJByEj7m3WuGBliNOuR300s3CODphxWA/EyGCfuN33npB2c
+   w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,11093"; a="32490661"
+X-IronPort-AV: E=Sophos;i="6.08,216,1712588400"; 
+   d="scan'208";a="32490661"
+Received: from mail-japanwestazlp17011006.outbound.protection.outlook.com (HELO OS0P286CU011.outbound.protection.outlook.com) ([40.93.130.6])
+  by ob1.fujitsucc.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Jun 2024 17:27:16 +0900
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=ERKsqik3lIRwJiS9VfnSWBI6lox18frEIVIaUBQVjUmR5jwqE9jTHaYnuyA25j9lOgK7FI6TTA7miwHea/+kL0PIEpNh8lYTUU1+JtShtmZ1o1rQe7DNVWlqRsy49h5L2mHW5bFpxdIaDSA2OU18TfkTXz1BSiEvJ77RMcHXJ52RElLobSw/jDv7fSQZE49FYS+uDfpcUB46FTeihdWZfbe6UMtrWHFRhRB887RFXjtX3KLuteo7nTboAim4iZCX7nP7XXo9PVsWOjCIcTYzDct0/2V5FF8SOiEz0V8mSt36MrPdiFkgI6A/Z4p+MpFf/9G6mj5iDFrBTw5CbMpE+A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=H9eTrpVqginZvlcjIPGezFaASuiInJ+6jHeyMaaRVK0=;
+ b=LuvC8IESmWSvu3yHHL+uZ2nmeGE0NrgsntjH0FiTpsfGmONZR+h5xChUcw19eAmsC+RctObvQM1JhsvrkDLUWXXJpSj5852eETbNvfWTp3tpPg6C7AyB83QGBdyKR3oL0yLu39ixwYfJmLuC9k2Th/i0r64b6MiAUSbmSWgDQgERYjP+9NmBsireZMEfQNHlY+pVzs7oe32SCT0vYlkcsNXZPhrZNuLPmrpzcRvluX64WFZwpO20kDBSfmYNNust3j56vZZTTLdFBZvaII8IAbvjcVm7xjf//r8gb6ui4P4tngWQJumwc5XkJS6LH73qFPqIU11WuaDIt3PytgKMPw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=fujitsu.com; dmarc=pass action=none header.from=fujitsu.com;
+ dkim=pass header.d=fujitsu.com; arc=none
+Received: from TY3PR01MB11056.jpnprd01.prod.outlook.com
+ (2603:1096:400:3b4::12) by OS7PR01MB12065.jpnprd01.prod.outlook.com
+ (2603:1096:604:266::5) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.27; Wed, 5 Jun
+ 2024 08:27:13 +0000
+Received: from TY3PR01MB11056.jpnprd01.prod.outlook.com
+ ([fe80::c451:240d:2c34:96bc]) by TY3PR01MB11056.jpnprd01.prod.outlook.com
+ ([fe80::c451:240d:2c34:96bc%6]) with mapi id 15.20.7633.021; Wed, 5 Jun 2024
+ 08:27:13 +0000
+From: "Maohui Lei (Fujitsu)" <leimaohui@fujitsu.com>
+To: "Maohui Lei (Fujitsu)" <leimaohui@fujitsu.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: RE: [oe] [PATCH 1/2] cmpi-bindings: ignore incompatible-pointer-types
+ errors for now.
+Thread-Topic: [oe] [PATCH 1/2] cmpi-bindings: ignore
+ incompatible-pointer-types errors for now.
+Thread-Index: AQHatxM7Ycx4eKVc6Eadyx2KovdxsbG41MTg
+Date: Wed, 5 Jun 2024 08:27:12 +0000
+Message-ID: 
+ <TY3PR01MB11056F365C91CEB2A21ECDC85A0F92@TY3PR01MB11056.jpnprd01.prod.outlook.com>
+References: <17D60871905D8062.18873@lists.openembedded.org>
+In-Reply-To: <17D60871905D8062.18873@lists.openembedded.org>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+ MSIP_Label_1e92ef73-0ad1-40c5-ad55-46de3396802f_ActionId=ce573674-b95c-421e-bfc9-9373e6835304;MSIP_Label_1e92ef73-0ad1-40c5-ad55-46de3396802f_ContentBits=0;MSIP_Label_1e92ef73-0ad1-40c5-ad55-46de3396802f_Enabled=true;MSIP_Label_1e92ef73-0ad1-40c5-ad55-46de3396802f_Method=Privileged;MSIP_Label_1e92ef73-0ad1-40c5-ad55-46de3396802f_Name=FUJITSU-PUBLIC?;MSIP_Label_1e92ef73-0ad1-40c5-ad55-46de3396802f_SetDate=2024-06-05T08:26:26Z;MSIP_Label_1e92ef73-0ad1-40c5-ad55-46de3396802f_SiteId=a19f121d-81e1-4858-a9d8-736e267fd4c7;
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=fujitsu.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: TY3PR01MB11056:EE_|OS7PR01MB12065:EE_
+x-ms-office365-filtering-correlation-id: 35c98e44-dce9-4ced-ff9e-08dc85394cec
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: 
+ BCL:0;ARA:13230031|1800799015|366007|376005|38070700009|1580799018;
+x-microsoft-antispam-message-info: 
+ =?shift_jis?B?TktXM3dTL3Q2UUdwb2MySFlRbGRjNERTVlpGdW5iUVlXQ0FwcE9WNS9l?=
+ =?shift_jis?B?bnBzTkJpRDkyaHhrSStYMEVTbXNZdCtzT2krWmVRMlpBQ3JNSmU5Tjho?=
+ =?shift_jis?B?bmVDQkk2YXhlR2tEYUlvV0EwVHRPOXBDT2pRYkJCbVFYc0J4NHZKY2JM?=
+ =?shift_jis?B?NGllUmZDV2p2bnp3ajhzdW5IVVFFNE1ORm51cWkvNUU2TnlzeXBlWVo3?=
+ =?shift_jis?B?eTVnNFU1MXMveTh2VE9tSFJSK0tvYmEvZFRMaWZxeG1WUzRVNGxhQ3px?=
+ =?shift_jis?B?RDliL205NUhabEZjS3VxTDM2MElUdjB4bGhyQUd2ODNRZVZ5N1ZnaHpS?=
+ =?shift_jis?B?UlZJeU9sN2lTYndPczQyNnBlQUVDcVEyV3FDSUdIbzlwV1kvSjVhc0tF?=
+ =?shift_jis?B?U2E0c1NGYzA5cUc0eDFnM1Z3V2ZyUnFiWEF2dlQyckg0TWNPWmdsaGZK?=
+ =?shift_jis?B?V2czbUVOUTZzcEp6c0VhVGdnbjlONnZOTkM4Z2FHR1Q0VXU3MWFWZ3hC?=
+ =?shift_jis?B?dHhpUndUa09JWnFXdmFBZ3RmekpKRS94ZEdLOEpyWFFZcTFsa3AwSTVT?=
+ =?shift_jis?B?bmcvVDBENzRDUTJxMHZPYVd5dnhWdmdHSGxCQmZaVDlCbjEyVDdjblEw?=
+ =?shift_jis?B?MzlkM01lUVY4VjIzYkZjY3NyVzVzK0ZZQzVCa0ZpMGlkaEtQNE95UmdC?=
+ =?shift_jis?B?TWlnazcxNndKUTFMR2daOFkzcmM1R1l2VUhPaFl6TVhNVHNQMUtZeXpI?=
+ =?shift_jis?B?dTdSK1NrYTA4dXJPeFNFaDZ2ekhsNU5sQXVvemswUGN6UGl5aVp3dzBw?=
+ =?shift_jis?B?eTFEU2V5OXJ3Um1WNlM1UWExckhqNGhVeVJ6ekIva2dlcWJjQ0M2RHRL?=
+ =?shift_jis?B?dlFHOFJzaWhWM1hKalpBOXhvYUl0NjQ0ZGZINlZoYUgwUXN0R2VVQnNU?=
+ =?shift_jis?B?MzkrWEVwSHUyaHhIMFVvZkZqeXRaNHVkQlNJOUhJN2E5Y2ZLSFFEOVhz?=
+ =?shift_jis?B?WG5zNUl1dHBuWFBmVy9nc21HYXFzTDZTLzV2SUpTemhmUmMrd2RlK25Q?=
+ =?shift_jis?B?VFUyQnRhbTNWdXhiYXMzUm0xNjUzTzdrQ3A5QUtucmVWUTBJSXQxY0Yz?=
+ =?shift_jis?B?Nks2cFEvTk94OWliZ0c0UmR6cWloZGtaT2FrR1YwWW1OUXdzM0RsY0dF?=
+ =?shift_jis?B?UzFtMVd4SUEwM1Z4bUNFcWZ6NUdqU29SbVR3dmtCZDdDbzV0b0IrVUh3?=
+ =?shift_jis?B?L1I5SE1yZVliMG5ESzR2SENwNDk5bllZcEFLZW8vblZINDh4cUlvdlY4?=
+ =?shift_jis?B?T1RNQU9TQ3NqTHM1YW55b0JBMDlXbWZWb3hSZGQwUUpZRDNiNFJSWEZU?=
+ =?shift_jis?B?RVB3c1MvRG0xcWJ0QnBhVTFFTmxtSXg3T3ZiTFJQa3JUeUVOanhHZ1Rk?=
+ =?shift_jis?B?YWFLME5oS2YxUEthaloxUm9zN1BpU1FlMjJKQVFONnk2S0JmdERGWWNE?=
+ =?shift_jis?B?dC9mQmlSTHkyRGlDUzJCR2dIU1lUNzYrYW9GaE9hMFllQUxDS0xXc1Qr?=
+ =?shift_jis?B?c3kwS3JOWE9IWWFVUHZmN2xPMk83alkwM2EvZDhPRk5LUTRoOXBhMzZm?=
+ =?shift_jis?B?VVpTY0E3VVVyRGx5cUs5MVBxeEEwMS9ybnN1TXpUWWpwZFB2M3ZwQ0RJ?=
+ =?shift_jis?B?V29jWVd5QnBXZk9ZTmppVjl5YWtSQW91QnVMYzFLSzVnZEZkOWduelBL?=
+ =?shift_jis?B?bEFVK3l4ODhmU296ODQrKzFHTU1sakZ6aTVwZTRtS2YyMjZPajd0WmJW?=
+ =?shift_jis?B?NjRydjhETG8yeFRqMzRvQXAxTTQ3UTJEZjNFZElQNnpYTTlWWmpXa0dI?=
+ =?shift_jis?B?V0dFN08wMlVmYTdaOS9jTTJ0SXluR3pHOHFrOVdVbmhzSFJlbmJMZWdO?=
+ =?shift_jis?B?ZFI1Lys2d05jNlZmbGxBVW5ib3krTEVQN29LN1BuWVYwWE85bUcrQ1Z6?=
+ =?shift_jis?Q?4=3D?=
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:zh-cn;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TY3PR01MB11056.jpnprd01.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(1800799015)(366007)(376005)(38070700009)(1580799018);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?shift_jis?B?VjBqMlR4RVdLeiszVktNcFlvalF2Sm53NHdqVEFXOW8rajZNbno0TUhh?=
+ =?shift_jis?B?WXdVb1JMRWxyaGFmbWtuYXJqOUxxVVh6dlFsbEUxVVdvcHFiTG1CVmJW?=
+ =?shift_jis?B?MGlXaXg5N0FZV21EbitFd3lBSW41TEREd2wvYU0zdmpaTldjam9iQXd1?=
+ =?shift_jis?B?dEh0a3FXc3h2MnhsYVg1Q01OSkFrcDJBMkUrUFRBZVU4eFA0RG5OYjcx?=
+ =?shift_jis?B?cHRFRHJKQnowZG1OL25qN05vNFM2TTVFVXI1bUJOOSt5VkpqUEVTTlVC?=
+ =?shift_jis?B?c1ZnaE4zOWFwbk1NQlN5TWt0bzk3TGtqaXAwd042amgxSkFjQmZ6Rzlj?=
+ =?shift_jis?B?dmxYWHg2eThya2R3azRJQVBPNzFQTVVCbkFrbTZVQmJFQ2JtbE4zZUlS?=
+ =?shift_jis?B?cUFvTVJ2ZGtERlFTaS8wem1DMGVjN0U4eGtlTXBlRjdVaVJYQ253OFVB?=
+ =?shift_jis?B?UnN1aDlHbmt2enhoVXlIVlQxdWsxblIycGRCTmF4RlhqUW56QTErV1Bp?=
+ =?shift_jis?B?Q1pJN2JJQ0g0bEQvc2dBTVhKMTlla0JudjBLdk1BSitZWkF2d2YrN1Jj?=
+ =?shift_jis?B?akNhK3Z5aE9nSmZWNzZyR3RWaUdUK015M1c4S3hQeDEyelZUc2I3NThL?=
+ =?shift_jis?B?STJFOStxMFRTNUZpN0g0ZjVXc25NZE1oNmFpWGo5di9vMU9jOTQ5ay9N?=
+ =?shift_jis?B?LzIyWjd3V3ZkTFA5UUJuR2FLNWNsekx0QjNhLzVWWGhTd204d2hSc0xP?=
+ =?shift_jis?B?cGN1YXFsWVk0NU9IcHhudzdPd2VncWl0N0JadERGSDZKcllwZHdtc205?=
+ =?shift_jis?B?Yk9KNjhlb0xNQy9MUFBxaG00RVRwYitwRVVCZW9WZTJTU1hZNGhvWDdv?=
+ =?shift_jis?B?dThYRjd3dGlnS3B4ekI5K2JSUDNWdHZaRHdiY3gyU1c0WTYwakgvUXVu?=
+ =?shift_jis?B?ZDhMaUdGVWl4d1Y5Z3RaUVUvTjcxSlpIdWlKQTJhRko5MXc1b1Z1RjJ6?=
+ =?shift_jis?B?Q0lVcEFYL2VnZjRWUUgvN1Zpc2pBSlJGSithckY0N3lEeEU0cXZMVUdj?=
+ =?shift_jis?B?eVJQdDMzZUpFTXg3aUFOM1BuYUZyaDd6UHFGYjdCeG1TemxFNHNqcjIy?=
+ =?shift_jis?B?bjFaNldvbW5Hemw2QjcrK3RTVTBHc0QwMGsxZmwwczUrVHM2NmFZVmdm?=
+ =?shift_jis?B?b0JkNUgwR2U4RWw3aFAwMFgyazVCbkxEWnNaUU5rd0pHakF3Q01JVGd5?=
+ =?shift_jis?B?aGV3WWt3aDNBUHQyemFQNmF3N3dvaFg0SldtQW9xUy9hL3lQZzhhaUQz?=
+ =?shift_jis?B?cWprRTAzWmViZkJPdFk1cUw4YUo5cHVuS1RESWJWSHUyd2F3ZGk4eWpn?=
+ =?shift_jis?B?QmprOTMya1ozWkxTVkY1VjIwY1hwSUI4NmR5WTEzYmN0WnpXVm9GK01R?=
+ =?shift_jis?B?bE84dzE2emtjK3RIT0FGOHh5ejNaT285NnhhdFJoTlFuVzFmbmcrUzFN?=
+ =?shift_jis?B?VkhlUEh1MStmOUNobk1VWUt3cG1nVENsNnJKODNGYm9mcit5cUc5aW1S?=
+ =?shift_jis?B?S3ptNzQ4WEdIbUlHWXRIazVCeGw1V0hPMVBKNmpNZVpJQ3BMYTR0TTR4?=
+ =?shift_jis?B?N0Q0K0E2cDlYQTBGN1YwcVU2V0FZcDBJKzVMRklZSkFmNzQzR3JTR3Yy?=
+ =?shift_jis?B?L05VekxiWXN2blBJamxqWUd4eTJLQUYxWFJaYlRvUHFwcVFINWJiNFdt?=
+ =?shift_jis?B?Ujc1WnEvQUQxSUhOWGZDaDR2SVdBSXJxaW5LTmI0eGZ6RXFGeHJUUDNs?=
+ =?shift_jis?B?QnE1dkdrVXI0bWZLTUlUdXZYeVlyNU0wWlprQkIxZkFSd0hjbzgyVmVT?=
+ =?shift_jis?B?V1MvY0dFVlRsMWtLNUV5K0VFeVdQS2ZSZDNSblVZaVZBdHZySDNURUdz?=
+ =?shift_jis?B?MmJBSUdIaW95SHVrUlo3cHZyR2RvQ0NCMmtwSU1CeGthSStBSXRGQkhH?=
+ =?shift_jis?B?dUh5QnRYRXJsb2N2VUt5WG1ra3V0bVJyL25ubjY4Z3oycW8rRk5FakpO?=
+ =?shift_jis?B?S1BZOC9DcWVsbmc4NWdvNGpML0E3and4WjBzaUZld3JVK0Z3N1pTSDZ2?=
+ =?shift_jis?B?NnBkY1BLRHhHTTZXaThwSXVqaWQyNmtiLzFnalhQQWV0bHoyRlI5bWU5?=
+ =?shift_jis?B?OUNla1lseGRaM2NWOFRuN3hLQmhmU09QdlRBV2w1elBTeXUrSGZxWlJL?=
+ =?shift_jis?B?K0R4alN1eXdMTlF2RHNGUjVkaTRmYmxFOU84R0FuTzBwelViNVNiTkVW?=
+ =?shift_jis?Q?I2mF?=
+Content-Type: text/plain; charset="shift_jis"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: 
+	A+sGHRmWLt45+pSDh2oznJS4h5hpU0twKev698o0ufhdYlHIjBbRLRQJHtKtJ8q6i+VuhZGNXy8rNTbrsa+bXGAKlACcZU4zxx772MaQpO1NLVBmbqWMX4M2707pQXh2V2sHgsrT7XOvr71N6fJTYqr3VkiAns+/lHn8Z3n7absNKdeKHdTaCK7O0hUh573bVpQBvGbpwtWOd2hhnrNvJ7BCHRjxAo20yO86JuCSOZnNxTOWdeysXnJcbzhOmxYqqAE1u4u8ueKscgX5OoR1f5jhQHKp0fsBJepyxiRLFMkhTd50/TG6gGN+qLfbtuDhUubAHKkseW1ZWeYMYCM/jJxVTdwWRtvIVEAOfy86mnWqYBDKPJu8+hqd/M+pRAviyzfjH4FX5Q8Z9DBTW19Zu4xn6Ddq2SVNWBi7/OJIRHeVVGFACiIy+qp5e8TjgeEWWDpPO0dted7XacY7h819MgUDh55vooIc3MKEszdX49GqyJlCYmMbjvFcfAvsgG9p0NGd42VH5rKpxRKNvmdO0zLH2U+Zf7AatwCKDWmspS+il4Zzo9MnE0ga9+deStn7+mpwtojflzl4LH93tm/UCZniec6HdabEwtF5WDjfMmUMgJsukNpI9jMFtIP7hv3I
+X-OriginatorOrg: fujitsu.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: TY3PR01MB11056.jpnprd01.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 35c98e44-dce9-4ced-ff9e-08dc85394cec
+X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Jun 2024 08:27:12.9618
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: a19f121d-81e1-4858-a9d8-736e267fd4c7
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: ZyysT87gr4XV4DHFDhK1eRdnKp7Icc5Z8VpBYEc7/Gb1D4Brspsiu9hqMwdTKgqCagHoQy1TH//BV29cGFlFXg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: OS7PR01MB12065
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 05 Jun 2024 07:52:35 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110700
+ <openembedded-devel@lists.openembedded.org>; Wed, 05 Jun 2024 08:27:25 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110701
 
-Import patch from the rrdtool's git to fix building with GCC 14. Note,
-it also requires fixing other tools (like lmsensors) in a similar way.
-
-Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
----
-
-With this patchset the rrdtool and recipes depending on it (lm-sensors,
-ntopng, collectd) can be built w/o errors.
-
----
- ...3c578f1e9f582e9c28f50d82b1f569602075.patch | 1583 +++++++++++++++++
- .../recipes-extended/rrdtool/rrdtool_1.8.0.bb |    1 +
- 2 files changed, 1584 insertions(+)
- create mode 100644 meta-oe/recipes-extended/rrdtool/rrdtool/b76e3c578f1e9f582e9c28f50d82b1f569602075.patch
-
-diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool/b76e3c578f1e9f582e9c28f50d82b1f569602075.patch b/meta-oe/recipes-extended/rrdtool/rrdtool/b76e3c578f1e9f582e9c28f50d82b1f569602075.patch
-new file mode 100644
-index 000000000000..7f54a3723d55
---- /dev/null
-+++ b/meta-oe/recipes-extended/rrdtool/rrdtool/b76e3c578f1e9f582e9c28f50d82b1f569602075.patch
-@@ -0,0 +1,1583 @@
-+From b76e3c578f1e9f582e9c28f50d82b1f569602075 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Michal=20Such=C3=A1nek?= <hramrach@gmail.com>
-+Date: Fri, 5 Jan 2024 15:31:48 +0100
-+Subject: [PATCH] Constify argv, fix warnings. (#1242)
-+
-+* Fix perl warnings
-+
-+ - cast POPs to void to avoid unused value warning
-+ - declare functions that don't set RETVAL as returning void
-+
-+Signed-off-by: Michal Suchanek <msuchanek@suse.de>
-+
-+* Constify argv
-+
-+rrd has no business modifying the string pointed to by passed agrv, and
-+as far as gcc can see it does indeed not modify them because it compiles
-+with const argv.
-+
-+This fixes warnings when passing const strings into rrd, and avoids the
-+need to duplicate all strings in the tcl bindings.
-+
-+This fixes warnings like these:
-+[    3s] prog/sensord/rrd.c: In function 'rrdInit':
-+[    3s] prog/sensord/rrd.c:302:40: warning: cast discards 'const' qualifier from pointer target type [-Wcast-qual]
-+[    3s]   302 |                 ret = rrd_create(argc, (char**) argv);
-+[    3s]       |                                        ^
-+[    3s] prog/sensord/rrd.c: In function 'rrdUpdate':
-+[    3s] prog/sensord/rrd.c:458:42: warning: cast discards 'const' qualifier from pointer target type [-Wcast-qual]
-+[    3s]   458 |                 if ((ret = rrd_update(3, (char **) /* WEAK */ argv))) {
-+[    3s]       |                                          ^
-+
-+Signed-off-by: Michal Suchanek <msuchanek@suse.de>
-+
-+* tcl: Do not duplicate const strings
-+
-+---------
-+
-+Signed-off-by: Michal Suchanek <msuchanek@suse.de>
-+Upstream-Status: Backport [https://github.com/oetiker/rrdtool-1.x/commit/b76e3c578f1e9f582e9c28f50d82b1f569602075]
-+---
-+ CHANGES                         |  3 ++
-+ bindings/lua/rrdlua.c           | 25 +++++-----
-+ bindings/perl-shared/RRDs.xs    | 36 +++++++-------
-+ bindings/python/rrdtoolmodule.c | 38 +++++++--------
-+ bindings/ruby/main.c            | 10 ++--
-+ bindings/tcl/tclrrd.c           | 84 ++++++++-------------------------
-+ src/optparse.c                  | 14 +++---
-+ src/optparse.h                  |  6 +--
-+ src/rrd.h                       | 38 +++++++--------
-+ src/rrd_cgi.c                   | 24 +++++-----
-+ src/rrd_create.c                |  2 +-
-+ src/rrd_daemon.c                | 12 ++---
-+ src/rrd_dump.c                  |  4 +-
-+ src/rrd_fetch.c                 |  2 +-
-+ src/rrd_first.c                 |  2 +-
-+ src/rrd_flushcached.c           |  2 +-
-+ src/rrd_graph.c                 |  6 +--
-+ src/rrd_graph.h                 |  4 +-
-+ src/rrd_graph_helper.c          |  2 +-
-+ src/rrd_info.c                  |  2 +-
-+ src/rrd_last.c                  |  2 +-
-+ src/rrd_lastupdate.c            |  2 +-
-+ src/rrd_list.c                  |  6 +--
-+ src/rrd_modify.c                |  2 +-
-+ src/rrd_modify.h                |  2 +-
-+ src/rrd_resize.c                |  4 +-
-+ src/rrd_restore.c               |  2 +-
-+ src/rrd_tool.c                  | 26 +++++-----
-+ src/rrd_tune.c                  |  2 +-
-+ src/rrd_update.c                |  4 +-
-+ src/rrd_xport.c                 |  2 +-
-+ src/rrdupdate.c                 |  7 +--
-+ 32 files changed, 168 insertions(+), 209 deletions(-)
-+
-+diff --git a/bindings/lua/rrdlua.c b/bindings/lua/rrdlua.c
-+index d1a700641..2095c3b5b 100644
-+--- a/bindings/lua/rrdlua.c
-++++ b/bindings/lua/rrdlua.c
-+@@ -37,8 +37,8 @@
-+ extern void rrd_freemem(void *mem);
-+ 
-+ extern int luaopen_rrd (lua_State * L);
-+-typedef int (*RRD_FUNCTION)(int, char **);
-+-typedef rrd_info_t *(RRD_FUNCTION_V)(int, char **);
-++typedef int (*RRD_FUNCTION)(int, const char **);
-++typedef rrd_info_t *(RRD_FUNCTION_V)(int, const char **);
-+ 
-+ /**********************************************************/
-+ 
-+@@ -49,9 +49,9 @@ static void reset_rrd_state(void)
-+     rrd_clear_error();
-+ }
-+ 
-+-static char **make_argv(const char *cmd, lua_State * L)
-++static const char **make_argv(const char *cmd, lua_State * L)
-+ {
-+-  char **argv;
-++  const char **argv;
-+   int i;
-+   int argc = lua_gettop(L) + 1;
-+ 
-+@@ -60,13 +60,12 @@ static char **make_argv(const char *cmd, lua_State * L)
-+     luaL_error(L, "Can't allocate memory for arguments array", cmd);
-+ 
-+   /* fprintf(stderr, "Args:\n"); */
-+-  argv[0] = (char *) cmd; /* Dummy arg. Cast to (char *) because rrd */
-+-                          /* functions don't expect (const * char)   */
-++  argv[0] = cmd;
-+   /* fprintf(stderr, "%s\n", argv[0]); */
-+   for (i=1; i<argc; i++) {
-+     /* accepts string or number */
-+     if (lua_isstring(L, i) || lua_isnumber(L, i)) {
-+-      if (!(argv[i] = (char *) lua_tostring (L, i))) {
-++      if (!(argv[i] = lua_tostring (L, i))) {
-+         /* raise an error and never return */
-+         luaL_error(L, "%s - error duplicating string area for arg #%d",
-+                    cmd, i);
-+@@ -84,7 +83,7 @@ static char **make_argv(const char *cmd, lua_State * L)
-+ static int
-+ rrd_common_call (lua_State *L, const char *cmd, RRD_FUNCTION rrd_function)
-+ {
-+-  char **argv;
-++  const char **argv;
-+   int argc = lua_gettop(L) + 1;
-+ 
-+   argv = make_argv(cmd, L);
-+@@ -99,7 +98,7 @@ rrd_common_call (lua_State *L, const char *cmd, RRD_FUNCTION rrd_function)
-+ static int
-+ lua_rrd_infocall(lua_State *L, const char *cmd, RRD_FUNCTION_V rrd_function)
-+ {
-+-  char **argv;
-++  const char **argv;
-+   rrd_info_t *p, *data;
-+   int argc = lua_gettop(L) + 1;
-+ 
-+@@ -197,7 +196,7 @@ static int
-+ lua_rrd_fetch (lua_State * L)
-+ {
-+   int argc = lua_gettop(L) + 1;
-+-  char **argv = make_argv("fetch", L);
-++  const char **argv = make_argv("fetch", L);
-+   unsigned long i, j, step, ds_cnt;
-+   rrd_value_t *data, *p;
-+   char    **names;
-+@@ -246,7 +245,7 @@ lua_rrd_first (lua_State * L)
-+ {
-+   time_t first;
-+   int argc = lua_gettop(L) + 1;
-+-  char **argv = make_argv("first", L);
-++  const char **argv = make_argv("first", L);
-+   reset_rrd_state();
-+   first = rrd_first(argc, argv);
-+   free(argv);
-+@@ -260,7 +259,7 @@ lua_rrd_last (lua_State * L)
-+ {
-+   time_t last;
-+   int argc = lua_gettop(L) + 1;
-+-  char **argv = make_argv("last", L);
-++  const char **argv = make_argv("last", L);
-+   reset_rrd_state();
-+   last = rrd_last(argc, argv);
-+   free(argv);
-+@@ -275,7 +274,7 @@ static int
-+ lua_rrd_graph (lua_State * L)
-+ {
-+   int argc = lua_gettop(L) + 1;
-+-  char **argv = make_argv("last", L);
-++  const char **argv = make_argv("last", L);
-+   char **calcpr;
-+   int i, xsize, ysize;
-+   double ymin, ymax;
-+diff --git a/bindings/perl-shared/RRDs.xs b/bindings/perl-shared/RRDs.xs
-+index e233b5835..edce76ec4 100644
-+--- a/bindings/perl-shared/RRDs.xs
-++++ b/bindings/perl-shared/RRDs.xs
-+@@ -44,11 +44,11 @@ extern "C" {
-+ 		    strcpy(argv[i+1],handle); \
-+  	        } \
-+ 		rrd_clear_error();\
-+-		RETVAL=name(items+1,argv); \
-++		RETVAL = name(items + 1, (const char **)argv); \
-+ 		for (i=0; i < items; i++) {\
-+-		    free(argv[i+1]);\
-++		    free((void *)argv[i+1]);\
-+ 		} \
-+-		free(argv);\
-++		free((void *)argv);\
-+ 		\
-+ 		if (rrd_test_error()) XSRETURN_UNDEF;
-+ 
-+@@ -67,11 +67,11 @@ extern "C" {
-+ 		    strcpy(argv[i+1],handle); \
-+  	        } \
-+                 rrd_clear_error(); \
-+-                data=name(items+1, argv); \
-++                data = name(items + 1, (const char **)argv); \
-+                 for (i=0; i < items; i++) { \
-+-		    free(argv[i+1]); \
-++		    free((void *)argv[i+1]); \
-+ 		} \
-+-		free(argv); \
-++		free((void *)argv); \
-+                 if (rrd_test_error()) XSRETURN_UNDEF; \
-+                 hash = newHV(); \
-+    	        save=data; \
-+@@ -175,7 +175,7 @@ static int rrd_fetch_cb_wrapper(
-+     /* Check the eval first */
-+     if (SvTRUE(ERRSV)) {
-+         rrd_set_error("perl callback failed: %s",SvPV_nolen(ERRSV));
-+-        POPs; /* there is undef on top of the stack when there is an error
-++        (void)POPs; /* there is undef on top of the stack when there is an error
-+                  and call_sv was initiated with G_EVAL|G_SCALER */
-+         goto error_out;
-+     }
-+@@ -383,7 +383,7 @@ rrd_tune(...)
-+ 
-+ #ifdef HAVE_RRD_GRAPH
-+ 
-+-SV *
-++void
-+ rrd_graph(...)
-+ 	PROTOTYPE: @
-+ 	PREINIT:
-+@@ -404,7 +404,7 @@ rrd_graph(...)
-+ 		    strcpy(argv[i+1],handle);
-+  	        }
-+ 		rrd_clear_error();
-+-		rrd_graph(items+1,argv,&calcpr,&xsize,&ysize,NULL,&ymin,&ymax);
-++		rrd_graph(items+1,(const char **)argv,&calcpr,&xsize,&ysize,NULL,&ymin,&ymax);
-+ 		for (i=0; i < items; i++) {
-+ 		    free(argv[i+1]);
-+ 		}
-+@@ -433,7 +433,7 @@ rrd_graph(...)
-+ 
-+ #endif /* HAVE_RRD_GRAPH */
-+ 
-+-SV *
-++void
-+ rrd_fetch(...)
-+ 	PROTOTYPE: @
-+ 	PREINIT:
-+@@ -455,7 +455,7 @@ rrd_fetch(...)
-+ 		    strcpy(argv[i+1],handle);
-+  	        }
-+ 		rrd_clear_error();
-+-		rrd_fetch(items+1,argv,&start,&end,&step,&ds_cnt,&ds_namv,&data);
-++		rrd_fetch(items+1,(const char **)argv,&start,&end,&step,&ds_cnt,&ds_namv,&data);
-+ 		for (i=0; i < items; i++) {
-+ 		    free(argv[i+1]);
-+ 		}
-+@@ -486,7 +486,7 @@ rrd_fetch(...)
-+ 		PUSHs(sv_2mortal(newRV_noinc((SV*)names)));
-+ 		PUSHs(sv_2mortal(newRV_noinc((SV*)retar)));
-+ 
-+-SV *
-++void
-+ rrd_fetch_cb_register(cb)
-+     SV * cb
-+     CODE:
-+@@ -496,7 +496,7 @@ rrd_fetch_cb_register(cb)
-+             SvSetSV(rrd_fetch_cb_svptr,cb);
-+         rrd_fetch_cb_register(rrd_fetch_cb_wrapper);
-+ 
-+-SV *
-++void
-+ rrd_times(start, end)
-+ 	  char *start
-+ 	  char *end
-+@@ -521,7 +521,7 @@ rrd_times(start, end)
-+ 		PUSHs(sv_2mortal(newSVuv(start_tmp)));
-+ 		PUSHs(sv_2mortal(newSVuv(end_tmp)));
-+ 
-+-int
-++void
-+ rrd_xport(...)
-+ 	PROTOTYPE: @
-+ 	PREINIT:
-+@@ -543,7 +543,7 @@ rrd_xport(...)
-+ 		    strcpy(argv[i+1],handle);
-+  	        }
-+ 		rrd_clear_error();
-+-		rrd_xport(items+1,argv,&xsize,&start,&end,&step,&col_cnt,&legend_v,&data);
-++		rrd_xport(items+1,(const char **)argv,&xsize,&start,&end,&step,&col_cnt,&legend_v,&data);
-+ 		for (i=0; i < items; i++) {
-+ 		    free(argv[i+1]);
-+ 		}
-+@@ -657,7 +657,7 @@ rrd_flushcached(...)
-+ 	OUTPUT:
-+ 		RETVAL
-+ 
-+-SV*
-++void
-+ rrd_list(...)
-+ 	PROTOTYPE: @
-+ 	PREINIT:
-+@@ -667,7 +667,7 @@ rrd_list(...)
-+                 char **argv;
-+ 		AV *list;
-+ 	PPCODE:
-+-		argv = (char **) malloc((items+1)*sizeof(char *));
-++		argv = malloc((items+1)*sizeof(char *));
-+ 		argv[0] = "dummy";
-+ 
-+ 		for (i = 0; i < items; i++) {
-+@@ -681,7 +681,7 @@ rrd_list(...)
-+ 
-+                 rrd_clear_error();
-+ 
-+-		data = rrd_list(items+1, argv);
-++		data = rrd_list(items+1, (const char **)argv);
-+ 
-+                 for (i=0; i < items; i++) {
-+ 		    free(argv[i+1]);
-+diff --git a/bindings/python/rrdtoolmodule.c b/bindings/python/rrdtoolmodule.c
-+index 1ab463584..f255e65bc 100644
-+--- a/bindings/python/rrdtoolmodule.c
-++++ b/bindings/python/rrdtoolmodule.c
-+@@ -123,7 +123,7 @@ PyRRD_String_FromCF(enum cf_en cf)
-+  * @return Zero if the function succeeds, otherwise -1
-+  */
-+ static int
-+-convert_args(char *command, PyObject *args, char ***rrdtool_argv, int *rrdtool_argc)
-++convert_args(char *command, PyObject *args, const char ***rrdtool_argv, int *rrdtool_argc)
-+ {
-+     PyObject *o, *lo;
-+     int i, j, args_count, argv_count, element_count;
-+@@ -145,7 +145,7 @@ convert_args(char *command, PyObject *args, char ***rrdtool_argv, int *rrdtool_a
-+         }
-+     }
-+ 
-+-    *rrdtool_argv = PyMem_New(char *, element_count + 1);
-++    *rrdtool_argv = PyMem_New(const char *, element_count + 1);
-+ 
-+     if (*rrdtool_argv == NULL)
-+         return -1;
-+@@ -186,7 +186,7 @@ convert_args(char *command, PyObject *args, char ***rrdtool_argv, int *rrdtool_a
-+  * Destroy argument vector.
-+  */
-+ static void
-+-destroy_args(char ***rrdtool_argv)
-++destroy_args(const char ***rrdtool_argv)
-+ {
-+     PyMem_Del(*rrdtool_argv);
-+     *rrdtool_argv = NULL;
-+@@ -267,7 +267,7 @@ static char _rrdtool_create__doc__[] = "Create a new Round Robin Database.\n\n\
-+ static PyObject *
-+ _rrdtool_create(PyObject *Py_UNUSED(self), PyObject *args)
-+ {
-+-    char **rrdtool_argv = NULL;
-++    const char **rrdtool_argv = NULL;
-+     int    rrdtool_argc = 0;
-+     PyObject *ret;
-+     int status;
-+@@ -306,7 +306,7 @@ static char _rrdtool_dump__doc__[] = "Dump an RRD to XML.\n\n\
-+ static PyObject *
-+ _rrdtool_dump(PyObject *Py_UNUSED(self), PyObject *args)
-+ {
-+-    char **rrdtool_argv = NULL;
-++    const char **rrdtool_argv = NULL;
-+     int    rrdtool_argc = 0;
-+     PyObject *ret;
-+     int status;
-+@@ -345,7 +345,7 @@ static char _rrdtool_update__doc__[] = "Store a new set of values into\
-+ static PyObject *
-+ _rrdtool_update(PyObject *Py_UNUSED(self), PyObject *args)
-+ {
-+-    char **rrdtool_argv = NULL;
-++    const char **rrdtool_argv = NULL;
-+     int    rrdtool_argc = 0;
-+     PyObject *ret;
-+     int status;
-+@@ -378,7 +378,7 @@ static char _rrdtool_updatev__doc__[] = "Store a new set of values into "\
-+ static PyObject *
-+ _rrdtool_updatev(PyObject *Py_UNUSED(self), PyObject *args)
-+ {
-+-    char **rrdtool_argv = NULL;
-++    const char **rrdtool_argv = NULL;
-+     int    rrdtool_argc = 0;
-+     PyObject *ret;
-+     rrd_info_t *data;
-+@@ -419,7 +419,7 @@ static char _rrdtool_fetch__doc__[] = "Fetch data from an RRD.\n\n\
-+ static PyObject *
-+ _rrdtool_fetch(PyObject *Py_UNUSED(self), PyObject *args)
-+ {
-+-    char **rrdtool_argv = NULL;
-++    const char **rrdtool_argv = NULL;
-+     int    rrdtool_argc = 0;
-+     PyObject *ret, *range_tup, *dsnam_tup, *data_list, *t;
-+     rrd_value_t *data, *datai, dv;
-+@@ -497,7 +497,7 @@ static char _rrdtool_flushcached__doc__[] = "Flush RRD files from memory.\n\n\
-+ static PyObject *
-+ _rrdtool_flushcached(PyObject *Py_UNUSED(self), PyObject *args)
-+ {
-+-    char **rrdtool_argv = NULL;
-++    const char **rrdtool_argv = NULL;
-+     int    rrdtool_argc = 0;
-+     PyObject *ret;
-+     int status;
-+@@ -592,7 +592,7 @@ static char _rrdtool_graph__doc__[] = "Create a graph based on one or more " \
-+ static PyObject *
-+ _rrdtool_graph(PyObject *Py_UNUSED(self), PyObject *args)
-+ {
-+-    char **rrdtool_argv = NULL;
-++    const char **rrdtool_argv = NULL;
-+     int    rrdtool_argc = 0;
-+     PyObject *ret;
-+     int xsize, ysize, i, status;
-+@@ -650,7 +650,7 @@ static char _rrdtool_graphv__doc__[] = "Create a graph based on one or more " \
-+ static PyObject *
-+ _rrdtool_graphv(PyObject *Py_UNUSED(self), PyObject *args)
-+ {
-+-    char **rrdtool_argv = NULL;
-++    const char **rrdtool_argv = NULL;
-+     int    rrdtool_argc = 0;
-+     PyObject *ret;
-+     rrd_info_t *data;
-+@@ -695,7 +695,7 @@ static char _rrdtool_xport__doc__[] = "Dictionary representation of data " \
-+ static PyObject *
-+ _rrdtool_xport(PyObject *Py_UNUSED(self), PyObject *args)
-+ {
-+-    char **rrdtool_argv = NULL;
-++    const char **rrdtool_argv = NULL;
-+     int    rrdtool_argc = 0;
-+     PyObject *ret;
-+     int xsize, status;
-+@@ -793,7 +793,7 @@ static char _rrdtool_list__doc__[] = "List RRDs in storage.\n\n" \
-+ static PyObject *
-+ _rrdtool_list(PyObject *Py_UNUSED(self), PyObject *args)
-+ {
-+-    char **rrdtool_argv = NULL;
-++    const char **rrdtool_argv = NULL;
-+     int    rrdtool_argc = 0;
-+     PyObject *ret, *str;
-+     char *data, *ptr, *end;
-+@@ -855,7 +855,7 @@ static char _rrdtool_tune__doc__[] = "Modify some basic properties of a " \
-+ static PyObject *
-+ _rrdtool_tune(PyObject *Py_UNUSED(self), PyObject *args)
-+ {
-+-    char **rrdtool_argv = NULL;
-++    const char **rrdtool_argv = NULL;
-+     int    rrdtool_argc = 0;
-+     PyObject *ret;
-+     int status;
-+@@ -893,7 +893,7 @@ static char _rrdtool_first__doc__[] = "Get the first UNIX timestamp of the "\
-+ static PyObject *
-+ _rrdtool_first(PyObject *Py_UNUSED(self), PyObject *args)
-+ {
-+-    char **rrdtool_argv = NULL;
-++    const char **rrdtool_argv = NULL;
-+     int    rrdtool_argc = 0;
-+     PyObject *ret;
-+     int ts;
-+@@ -928,7 +928,7 @@ static char _rrdtool_last__doc__[] = "Get the UNIX timestamp of the most "\
-+ static PyObject *
-+ _rrdtool_last(PyObject *Py_UNUSED(self), PyObject *args)
-+ {
-+-    char **rrdtool_argv = NULL;
-++    const char **rrdtool_argv = NULL;
-+     int    rrdtool_argc = 0;
-+     PyObject *ret;
-+     int ts;
-+@@ -965,7 +965,7 @@ static char _rrdtool_resize__doc__[] = "Modify the number of rows in a "\
-+ static PyObject *
-+ _rrdtool_resize(PyObject *Py_UNUSED(self), PyObject *args)
-+ {
-+-    char **rrdtool_argv = NULL;
-++    const char **rrdtool_argv = NULL;
-+     int    rrdtool_argc = 0;
-+     PyObject *ret;
-+     int status;
-+@@ -1003,7 +1003,7 @@ static char _rrdtool_info__doc__[] = "Extract header information from an "\
-+ static PyObject *
-+ _rrdtool_info(PyObject *Py_UNUSED(self), PyObject *args)
-+ {
-+-    char **rrdtool_argv = NULL;
-++    const char **rrdtool_argv = NULL;
-+     int    rrdtool_argc = 0;
-+     PyObject *ret;
-+     rrd_info_t *data;
-+@@ -1040,7 +1040,7 @@ static char _rrdtool_lastupdate__doc__[] = "Returns datetime and value stored "\
-+ static PyObject *
-+ _rrdtool_lastupdate(PyObject *Py_UNUSED(self), PyObject *args)
-+ {
-+-    char **rrdtool_argv = NULL;
-++    const char **rrdtool_argv = NULL;
-+     int    rrdtool_argc = 0;
-+     PyObject *ret, *ds_dict, *lastupd;
-+     int status;
-+diff --git a/bindings/ruby/main.c b/bindings/ruby/main.c
-+index e4cc6443d..a036b7fb8 100644
-+--- a/bindings/ruby/main.c
-++++ b/bindings/ruby/main.c
-+@@ -9,7 +9,7 @@
-+ 
-+ typedef struct string_arr_t {
-+     int       len;
-+-    char    **strings;
-++    const char    **strings;
-+ } string_arr;
-+ 
-+ VALUE     mRRD;
-+@@ -18,12 +18,12 @@ VALUE     rb_eRRDError;
-+ typedef int (
-+     *RRDFUNC) (
-+     int argc,
-+-    char **argv);
-++    const char **argv);
-+ 
-+ typedef rrd_info_t *(
-+     *RRDINFOFUNC) (
-+     int argc,
-+-    char **argv);
-++    const char **argv);
-+ 
-+ #define RRD_CHECK_ERROR  \
-+     if (rrd_test_error()) \
-+@@ -72,10 +72,10 @@ void string_arr_delete(
-+ 
-+     /* skip dummy first entry */
-+     for (i = 1; i < a.len; i++) {
-+-        free(a.strings[i]);
-++        free((void *)a.strings[i]);
-+     }
-+ 
-+-    free(a.strings);
-++    free((void *)a.strings);
-+ }
-+ 
-+ void reset_rrd_state(
-+diff --git a/bindings/tcl/tclrrd.c b/bindings/tcl/tclrrd.c
-+index 2927d9251..58a4cef68 100644
-+--- a/bindings/tcl/tclrrd.c
-++++ b/bindings/tcl/tclrrd.c
-+@@ -22,6 +22,7 @@
-+ #include <stdlib.h>
-+ #include "../../src/rrd_tool.h"
-+ #include "../../src/rrd_format.h"
-++#include "../../src/unused.h"
-+ 
-+ /* support pre-8.4 tcl */
-+ 
-+@@ -41,47 +42,39 @@ extern int Tclrrd_SafeInit(
-+  * Hence, we need to do some preparation before
-+  * calling the rrd library functions.
-+  */
-+-static char **getopt_init(
-++static const char **getopt_init(
-+     int argc,
-+     CONST84 char *argv[])
-+ {
-+-    char    **argv2;
-++    const char    **argv2;
-+     int       i;
-+ 
-+     argv2 = calloc(argc, sizeof(char *));
-+     for (i = 0; i < argc; i++) {
-+-        argv2[i] = strdup(argv[i]);
-++        argv2[i] = argv[i];
-+     }
-+     return argv2;
-+ }
-+ 
-+ static void getopt_cleanup(
-+-    int argc,
-+-    char **argv2)
-++    int UNUSED(argc),
-++    const char **argv2)
-+ {
-+-    int       i;
-+-
-+-    for (i = 0; i < argc; i++) {
-+-        if (argv2[i] != NULL) {
-+-            free(argv2[i]);
-+-        }
-+-    }
-+-    free(argv2);
-++    free((void *)argv2);
-+ }
-+ 
-+ static void getopt_free_element(
-+-    char *argv2[],
-++    const char *argv2[],
-+     int argn)
-+ {
-+     if (argv2[argn] != NULL) {
-+-        free(argv2[argn]);
-+         argv2[argn] = NULL;
-+     }
-+ }
-+ 
-+ static void getopt_squieeze(
-+     int *argc,
-+-    char *argv2[])
-++    const char *argv2[])
-+ {
-+     int       i, null_i = 0, argc_tmp = *argc;
-+ 
-+@@ -104,7 +97,7 @@ static int Rrd_Create(
-+     CONST84 char *argv[])
-+ {
-+     int       argv_i;
-+-    char    **argv2;
-++    const char    **argv2;
-+     char     *parsetime_error = NULL;
-+     time_t    last_up = time(NULL) - 10;
-+     long int  long_tmp;
-+@@ -295,7 +288,7 @@ static int Rrd_Flushcached(
-+         return TCL_ERROR;
-+     }
-+ 
-+-    rrd_flushcached(argc, (char**)argv);
-++    rrd_flushcached(argc, argv);
-+ 
-+     if (rrd_test_error()) {
-+         Tcl_AppendResult(interp, "RRD Error: ",
-+@@ -380,7 +373,7 @@ static int Rrd_Update(
-+     CONST84 char *argv[])
-+ {
-+     int       argv_i;
-+-    char    **argv2, *template = NULL;
-++    const char    **argv2, *template = NULL;
-+ 
-+     argv2 = getopt_init(argc, argv);
-+ 
-+@@ -391,16 +384,10 @@ static int Rrd_Update(
-+                 Tcl_AppendResult(interp, "RRD Error: option '",
-+                                  argv2[argv_i - 1], "' needs an argument",
-+                                  (char *) NULL);
-+-                if (template != NULL) {
-+-                    free(template);
-+-                }
-+                 getopt_cleanup(argc, argv2);
-+                 return TCL_ERROR;
-+             }
-+-            if (template != NULL) {
-+-                free(template);
-+-            }
-+-            template = strdup(argv2[argv_i]);
-++            template = argv2[argv_i];
-+             getopt_free_element(argv2, argv_i - 1);
-+             getopt_free_element(argv2, argv_i);
-+         } else if (!strcmp(argv2[argv_i], "--")) {
-+@@ -409,9 +396,6 @@ static int Rrd_Update(
-+         } else if (argv2[argv_i][0] == '-') {
-+             Tcl_AppendResult(interp, "RRD Error: unknown option '",
-+                              argv2[argv_i], "'", (char *) NULL);
-+-            if (template != NULL) {
-+-                free(template);
-+-            }
-+             getopt_cleanup(argc, argv2);
-+             return TCL_ERROR;
-+         }
-+@@ -422,18 +406,12 @@ static int Rrd_Update(
-+     if (argc < 2) {
-+         Tcl_AppendResult(interp, "RRD Error: needs rrd filename",
-+                          (char *) NULL);
-+-        if (template != NULL) {
-+-            free(template);
-+-        }
-+         getopt_cleanup(argc, argv2);
-+         return TCL_ERROR;
-+     }
-+ 
-+     rrd_update_r(argv2[1], template, argc - 2, (const char **)argv2 + 2);
-+ 
-+-    if (template != NULL) {
-+-        free(template);
-+-    }
-+     getopt_cleanup(argc, argv2);
-+ 
-+     if (rrd_test_error()) {
-+@@ -454,7 +432,6 @@ static int Rrd_Info(
-+ {
-+     int status = TCL_OK;
-+     rrd_info_t *data;
-+-    char **argv2;
-+ 
-+     /* TODO: support for rrdcached */
-+     if (argc != 2) {
-+@@ -463,9 +440,7 @@ static int Rrd_Info(
-+         return TCL_ERROR;
-+     }
-+ 
-+-    argv2 = getopt_init(argc, argv);
-+-
-+-    data = rrd_info_r(argv2[1]);
-++    data = rrd_info_r(argv[1]);
-+ 
-+     if (data) {
-+ 	Tcl_SetObjResult(interp, convert_info(data));
-+@@ -477,7 +452,6 @@ static int Rrd_Info(
-+ 	status = TCL_ERROR;
-+     }
-+ 
-+-    getopt_cleanup(argc, argv2);
-+     return status;
-+ }
-+ 
-+@@ -488,7 +462,6 @@ static int Rrd_Lastupdate(
-+     CONST84 char *argv[])
-+ {
-+     time_t    last_update;
-+-    char    **argv2;
-+     char    **ds_namv;
-+     char    **last_ds;
-+     char      s[30];
-+@@ -502,8 +475,7 @@ static int Rrd_Lastupdate(
-+         return TCL_ERROR;
-+     }
-+ 
-+-    argv2 = getopt_init(argc, argv);
-+-    if (rrd_lastupdate_r(argv2[1], &last_update,
-++    if (rrd_lastupdate_r(argv[1], &last_update,
-+                        &ds_cnt, &ds_namv, &last_ds) == 0) {
-+         listPtr = Tcl_GetObjResult(interp);
-+         for (i = 0; i < ds_cnt; i++) {
-+@@ -527,7 +499,6 @@ static int Rrd_Lastupdate(
-+             free(ds_namv);
-+         }
-+     }
-+-    getopt_cleanup(argc, argv2);
-+     return TCL_OK;
-+ }
-+ 
-+@@ -543,10 +514,8 @@ static int Rrd_Fetch(
-+     char    **ds_namv;
-+     Tcl_Obj  *listPtr;
-+     char      s[30];
-+-    char    **argv2;
-+ 
-+-    argv2 = getopt_init(argc, argv);
-+-    if (rrd_fetch(argc, argv2, &start, &end, &step,
-++    if (rrd_fetch(argc, argv, &start, &end, &step,
-+                   &ds_cnt, &ds_namv, &data) != -1) {
-+         datai = data;
-+         listPtr = Tcl_GetObjResult(interp);
-+@@ -562,7 +531,6 @@ static int Rrd_Fetch(
-+         free(ds_namv);
-+         free(data);
-+     }
-+-    getopt_cleanup(argc, argv2);
-+ 
-+     if (rrd_test_error()) {
-+         Tcl_AppendResult(interp, "RRD Error: ",
-+@@ -590,7 +558,7 @@ static int Rrd_Graph(
-+     int       rc, xsize, ysize;
-+     double    ymin, ymax;
-+     char      dimensions[50];
-+-    char    **argv2;
-++    const char    **argv2;
-+     CONST84 char *save;
-+ 
-+     /*
-+@@ -692,11 +660,7 @@ static int Rrd_Tune(
-+     int argc,
-+     CONST84 char *argv[])
-+ {
-+-    char    **argv2;
-+-
-+-    argv2 = getopt_init(argc, argv);
-+-    rrd_tune(argc, argv2);
-+-    getopt_cleanup(argc, argv2);
-++    rrd_tune(argc, argv);
-+ 
-+     if (rrd_test_error()) {
-+         Tcl_AppendResult(interp, "RRD Error: ",
-+@@ -716,11 +680,7 @@ static int Rrd_Resize(
-+     int argc,
-+     CONST84 char *argv[])
-+ {
-+-    char    **argv2;
-+-
-+-    argv2 = getopt_init(argc, argv);
-+-    rrd_resize(argc, argv2);
-+-    getopt_cleanup(argc, argv2);
-++    rrd_resize(argc, argv);
-+ 
-+     if (rrd_test_error()) {
-+         Tcl_AppendResult(interp, "RRD Error: ",
-+@@ -740,11 +700,7 @@ static int Rrd_Restore(
-+     int argc,
-+     CONST84 char *argv[])
-+ {
-+-    char    **argv2;
-+-
-+-    argv2 = getopt_init(argc, argv);
-+-    rrd_restore(argc, argv2);
-+-    getopt_cleanup(argc, argv2);
-++    rrd_restore(argc, argv);
-+ 
-+     if (rrd_test_error()) {
-+         Tcl_AppendResult(interp, "RRD Error: ",
-+diff --git a/src/optparse.c b/src/optparse.c
-+index 9040ba8b2..79a3efe11 100644
-+--- a/src/optparse.c
-++++ b/src/optparse.c
-+@@ -10,7 +10,7 @@
-+ #define options_argv(i) \
-+     ((i) < options->argc ? options->argv[i] : NULL)
-+ 
-+-void optparse_init(struct optparse *options, int argc, char **argv)
-++void optparse_init(struct optparse *options, int argc, const char **argv)
-+ {
-+     options->argv = argv;
-+     options->argc = argc;
-+@@ -42,7 +42,7 @@ is_longopt(const char *arg)
-+ static void
-+ permute(struct optparse *options, int index)
-+ {
-+-    char *nonoption = options->argv[index];
-++    const char *nonoption = options->argv[index];
-+     for (int i = index; i < options->optind - 1; i++)
-+         options->argv[i] = options->argv[i + 1];
-+     options->argv[options->optind - 1] = nonoption;
-+@@ -67,7 +67,7 @@ int optparse(struct optparse *options, const char *optstring)
-+     options->errmsg[0] = '\0';
-+     options->optopt = 0;
-+     options->optarg = NULL;
-+-    char *option = options_argv(options->optind);
-++    const char *option = options_argv(options->optind);
-+     if (option == NULL) {
-+         return -1;
-+     } else if (is_dashdash(option)) {
-+@@ -88,7 +88,7 @@ int optparse(struct optparse *options, const char *optstring)
-+     option += options->subopt + 1;
-+     options->optopt = option[0];
-+     int type = argtype(optstring, option[0]);
-+-    char *next = options_argv(options->optind + 1);
-++    const char *next = options_argv(options->optind + 1);
-+     switch (type) {
-+     case -1:
-+         opterror(options, "invalid option -- '%c'", option[0]);
-+@@ -128,10 +128,10 @@ int optparse(struct optparse *options, const char *optstring)
-+     return 0;
-+ }
-+ 
-+-char *optparse_arg(struct optparse *options)
-++const char *optparse_arg(struct optparse *options)
-+ {
-+     options->subopt = 0;
-+-    char *option = options->argv[options->optind];
-++    const char *option = options->argv[options->optind];
-+     if (option != NULL)
-+         options->optind++;
-+     return option;
-+@@ -222,7 +222,7 @@ optparse_long(struct optparse *options,
-+               int *longindex)
-+ {
-+ //    printf("%i < %i\n",options->optind,options->argc);
-+-    char *option = options_argv(options->optind);
-++    const char *option = options_argv(options->optind);
-+     if (option == NULL) {
-+         return -1;
-+     } else if (is_dashdash(option)) {
-+diff --git a/src/optparse.h b/src/optparse.h
-+index c4b0ec19c..7a0bb3885 100644
-+--- a/src/optparse.h
-++++ b/src/optparse.h
-+@@ -44,7 +44,7 @@
-+  */
-+ 
-+ struct optparse {
-+-    char **argv;
-++    const char **argv;
-+     int argc;
-+     int permute;
-+     int optind;
-+@@ -65,7 +65,7 @@ struct optparse_long {
-+ /**
-+  * Initializes the parser state.
-+  */
-+-void optparse_init(struct optparse *options, int argc, char **argv);
-++void optparse_init(struct optparse *options, int argc, const char **argv);
-+ 
-+ /**
-+  * Read the next option in the argv array.
-+@@ -98,6 +98,6 @@ optparse_long(struct optparse *options,
-+  * subcommand returned by optparse_arg(). This function allows you to
-+  * ignore the value of optind.
-+  */
-+-char *optparse_arg(struct optparse *options);
-++const char *optparse_arg(struct optparse *options);
-+ 
-+ #endif
-+diff --git a/src/rrd.h b/src/rrd.h
-+index 184887ccc..b40f9a449 100644
-+--- a/src/rrd.h
-++++ b/src/rrd.h
-+@@ -155,10 +155,10 @@ extern    "C" {
-+ /* main function blocks */
-+     int       rrd_create(
-+     int,
-+-    char **);
-++    const char **);
-+     rrd_info_t *rrd_info(
-+     int,
-+-    char **);
-++    const char **);
-+     rrd_info_t *rrd_info_push(
-+     rrd_info_t *,
-+     char *,
-+@@ -170,19 +170,19 @@ extern    "C" {
-+     rrd_info_t *);
-+     char     *rrd_list(
-+     int,
-+-    char **);
-++    const char **);
-+     char     *rrd_list_r(
-+     int,
-+-    char *dirname);
-++    const char *dirname);
-+     int       rrd_update(
-+     int,
-+-    char **);
-++    const char **);
-+     rrd_info_t *rrd_update_v(
-+     int,
-+-    char **);
-++    const char **);
-+     int       rrd_graph(
-+     int,
-+-    char **,
-++    const char **,
-+     char ***,
-+     int *,
-+     int *,
-+@@ -191,11 +191,11 @@ extern    "C" {
-+     double *);
-+     rrd_info_t *rrd_graph_v(
-+     int,
-+-    char **);
-++    const char **);
-+ 
-+     int       rrd_fetch(
-+     int,
-+-    char **,
-++    const char **,
-+     time_t *,
-+     time_t *,
-+     unsigned long *,
-+@@ -204,32 +204,32 @@ extern    "C" {
-+     rrd_value_t **);
-+     int       rrd_restore(
-+     int,
-+-    char **);
-++    const char **);
-+     int       rrd_dump(
-+     int,
-+-    char **);
-++    const char **);
-+     int       rrd_tune(
-+     int,
-+-    char **);
-++    const char **);
-+     time_t    rrd_last(
-+     int,
-+-    char **);
-++    const char **);
-+     int       rrd_lastupdate(
-+     int argc,
-+-    char **argv);
-++    const char **argv);
-+     time_t    rrd_first(
-+     int,
-+-    char **);
-++    const char **);
-+     int       rrd_resize(
-+     int,
-+-    char **);
-++    const char **);
-+     char     *rrd_strversion(
-+     void);
-+     double    rrd_version(
-+     void);
-+     int       rrd_xport(
-+     int,
-+-    char **,
-++    const char **,
-+     int *,
-+     time_t *,
-+     time_t *,
-+@@ -239,7 +239,7 @@ extern    "C" {
-+     rrd_value_t **);
-+     int       rrd_flushcached(
-+     int argc,
-+-    char **argv);
-++    const char **argv);
-+ 
-+     void      rrd_freemem(
-+     void *mem);
-+@@ -323,7 +323,7 @@ extern    "C" {
-+     const char **argv);
-+     int       rrd_dump_opt_r(
-+     const char *filename,
-+-    char *outname,
-++    const char *outname,
-+     int opt_noheader);
-+     int       rrd_dump_r(
-+     const char *filename,
-+diff --git a/src/rrd_cgi.c b/src/rrd_cgi.c
-+index b82c310db..14a4f511a 100644
-+--- a/src/rrd_cgi.c
-++++ b/src/rrd_cgi.c
-+@@ -102,7 +102,7 @@ static char *rrdstrip(
-+ static char *scanargs(
-+     char *line,
-+     int *argc,
-+-    char ***args);
-++    const char ***args);
-+ 
-+ /* format at-time specified times using strftime */
-+ static char *printstrftime(
-+@@ -317,7 +317,7 @@ static const char *putvar(
-+ }
-+ 
-+ /* expand those RRD:* directives that can be used recursively */
-+-static char *rrd_expand_vars(
-++static const char *rrd_expand_vars(
-+     char *buffer)
-+ {
-+     int       i;
-+@@ -434,7 +434,7 @@ static int readfile(
-+ 
-+ int main(
-+     int argc,
-+-    char *argv[])
-++    const char *argv[])
-+ {
-+     char     *buffer;
-+     long      i;
-+@@ -926,7 +926,7 @@ static char *drawgraph(
-+     }
-+     calfree();
-+     if (rrd_graph
-+-        (argc + 1, (char **) args - 1, &calcpr, &xsize, &ysize, NULL, &ymin,
-++        (argc + 1, args - 1, &calcpr, &xsize, &ysize, NULL, &ymin,
-+          &ymax) != -1) {
-+         return stralloc(calcpr[0]);
-+     } else {
-+@@ -973,7 +973,7 @@ static char *printtimelast(
-+         /* not raising argc in step with args - 1 since the last argument
-+            will be used below for strftime  */
-+ 
-+-        last = rrd_last(argc, (char **) args - 1);
-++        last = rrd_last(argc, args - 1);
-+         if (rrd_test_error()) {
-+             char      err[4096];
-+ 
-+@@ -1027,7 +1027,7 @@ static char *printtimenow(
-+ static char *scanargs(
-+     char *line,
-+     int *argument_count,
-+-    char ***arguments)
-++    const char ***arguments)
-+ {
-+     char     *getP;     /* read cursor */
-+     char     *putP;     /* write cursor */
-+@@ -1039,8 +1039,8 @@ static char *scanargs(
-+ 
-+     /* local array of arguments while parsing */
-+     int       argc = 1;
-+-    char    **argv;
-+-    char    **argv_tmp; /* temp variable for realloc() */
-++    const char    **argv;
-++    const char    **argv_tmp; /* temp variable for realloc() */
-+ 
-+ #ifdef DEBUG_PARSER
-+     printf("<-- scanargs(%s) -->\n", line);
-+@@ -1051,7 +1051,7 @@ static char *scanargs(
-+ 
-+     /* create initial argument array of char pointers */
-+     argsz = 32;
-+-    argv = (char **) malloc(argsz * sizeof(char *));
-++    argv = malloc(argsz * sizeof(char *));
-+     if (!argv) {
-+         return NULL;
-+     }
-+@@ -1146,7 +1146,7 @@ static char *scanargs(
-+         if (argc == argsz - 2) {
-+             /* resize argument array */
-+             argsz *= 2;
-+-            argv_tmp = (char **) rrd_realloc(argv, argsz * sizeof(char *));
-++            argv_tmp = rrd_realloc(argv, argsz * sizeof(char *));
-+             if (*argv_tmp == NULL) {
-+                 return NULL;
-+             }
-+@@ -1213,7 +1213,7 @@ static int parse(
-+     /* the name of the vairable ... */
-+     char     *val;
-+     long      valln;
-+-    char    **args;
-++    const char    **args;
-+     char     *end;
-+     long      end_offset;
-+     int       argc;
-+@@ -1264,7 +1264,7 @@ static int parse(
-+         /* make sure we do not shrink the mallocd block */
-+         size_t    newbufsize = i + strlen(end) + valln + 1;
-+ 
-+-        *buf = (char *) rrd_realloc(*buf, newbufsize);
-++        *buf = rrd_realloc(*buf, newbufsize);
-+ 
-+         if (*buf == NULL) {
-+             perror("Realoc buf:");
-+diff --git a/src/rrd_create.c b/src/rrd_create.c
-+index f9bad0866..919b4195a 100644
-+--- a/src/rrd_create.c
-++++ b/src/rrd_create.c
-+@@ -76,7 +76,7 @@ static void parseGENERIC_DS(
-+ 
-+ int rrd_create(
-+     int argc,
-+-    char **argv)
-++    const char **argv)
-+ {
-+     struct optparse_long longopts[] = {
-+         {"start", 'b', OPTPARSE_REQUIRED},
-+diff --git a/src/rrd_daemon.c b/src/rrd_daemon.c
-+index 751798aa1..21c38a11d 100644
-+--- a/src/rrd_daemon.c
-++++ b/src/rrd_daemon.c
-+@@ -1877,7 +1877,7 @@ static int handle_request_tune(
-+     HANDLER_PROTO)
-+ {                       /* {{{ */
-+     int       status;
-+-    char**    argv = NULL;
-++    const char**    argv = NULL;
-+     int       argc, argc_tmp;
-+     char*     i;
-+     int       rc;
-+@@ -1916,7 +1916,7 @@ static int handle_request_tune(
-+         goto done;
-+     }
-+ 
-+-    if ((argv = (char **) malloc(argc * sizeof(char*))) == NULL) {
-++    if ((argv = malloc(argc * sizeof(char*))) == NULL) {
-+         rc = send_response(sock, RESP_ERR, "%s\n", rrd_strerror(ENOMEM));
-+         goto done;
-+     }
-+@@ -1927,7 +1927,7 @@ static int handle_request_tune(
-+         argc_tmp += 1;
-+     }
-+ 
-+-    status = rrd_tune_r(file, argc, (const char **)argv);
-++    status = rrd_tune_r(file, argc, argv);
-+     if (status != 0) {
-+         rc = send_response(sock, RESP_ERR, "Got error %s\n", rrd_get_error());
-+         goto done;   
-+@@ -1935,7 +1935,7 @@ static int handle_request_tune(
-+     rc = send_response(sock, RESP_OK, "Success\n");
-+     done:
-+     free(file);
-+-    free(argv);
-++    free((void *)argv);
-+     return rc;
-+ }  
-+ 
-+@@ -4505,7 +4505,7 @@ static int cleanup(
-+ 
-+ static int read_options(
-+     int argc,
-+-    char **argv)
-++    const char **argv)
-+ {                       /* {{{ */
-+     struct optparse_long longopts[] = {
-+         {NULL, 'a', OPTPARSE_REQUIRED},
-+@@ -5050,7 +5050,7 @@ static int read_options(
-+ 
-+ int main(
-+     int argc,
-+-    char **argv)
-++    const char **argv)
-+ {
-+     int       status;
-+ 
-+diff --git a/src/rrd_dump.c b/src/rrd_dump.c
-+index a4490d594..c58e0ee4a 100644
-+--- a/src/rrd_dump.c
-++++ b/src/rrd_dump.c
-+@@ -497,7 +497,7 @@ static size_t rrd_dump_opt_cb_fileout(
-+ 
-+ int rrd_dump_opt_r(
-+     const char *filename,
-+-    char *outname,
-++    const char *outname,
-+     int opt_noheader)
-+ {
-+     FILE     *out_file;
-+@@ -543,7 +543,7 @@ int rrd_dump_r(
-+ 
-+ int rrd_dump(
-+     int argc,
-+-    char **argv)
-++    const char **argv)
-+ {
-+     int       opt;
-+     struct optparse_long longopts[] = {
-+diff --git a/src/rrd_fetch.c b/src/rrd_fetch.c
-+index c739bfc45..54780f19b 100644
-+--- a/src/rrd_fetch.c
-++++ b/src/rrd_fetch.c
-+@@ -61,7 +61,7 @@
-+ 
-+ int rrd_fetch(
-+     int argc,
-+-    char **argv,
-++    const char **argv,
-+     time_t *start,
-+     time_t *end,        /* which time frame do you want ?
-+                          * will be changed to represent reality */
-+diff --git a/src/rrd_first.c b/src/rrd_first.c
-+index a696c5c38..f3dde5404 100644
-+--- a/src/rrd_first.c
-++++ b/src/rrd_first.c
-+@@ -13,7 +13,7 @@
-+ 
-+ time_t rrd_first(
-+     int argc,
-+-    char **argv)
-++    const char **argv)
-+ {
-+     struct optparse_long longopts[] = {
-+         {"rraindex", 129, OPTPARSE_REQUIRED},
-+diff --git a/src/rrd_flushcached.c b/src/rrd_flushcached.c
-+index 090bca749..3bf6cd29d 100644
-+--- a/src/rrd_flushcached.c
-++++ b/src/rrd_flushcached.c
-+@@ -22,7 +22,7 @@
-+ #include "rrd_tool.h"
-+ #include "rrd_client.h"
-+ 
-+-int rrd_flushcached (int argc, char **argv)
-++int rrd_flushcached (int argc, const char **argv)
-+ {
-+     struct optparse_long longopts[] = {
-+         {"daemon", 'd', OPTPARSE_REQUIRED},
-+diff --git a/src/rrd_graph.c b/src/rrd_graph.c
-+index b32d45085..46511e9a3 100644
-+--- a/src/rrd_graph.c
-++++ b/src/rrd_graph.c
-+@@ -4607,7 +4607,7 @@ int scan_for_col(
-+ /* Now just a wrapper around rrd_graph_v */
-+ int rrd_graph(
-+     int argc,
-+-    char **argv,
-++    const char **argv,
-+     char ***prdata,
-+     int *xsize,
-+     int *ysize,
-+@@ -4690,7 +4690,7 @@ int rrd_graph(
-+ 
-+ rrd_info_t *rrd_graph_v(
-+     int argc,
-+-    char **argv)
-++    const char **argv)
-+ {
-+     image_desc_t im;
-+     rrd_info_t *grinfo;
-+@@ -4953,7 +4953,7 @@ void rrd_graph_init(
-+ 
-+ void rrd_graph_options(
-+     int argc,
-+-    char *argv[],
-++    const char **argv,
-+     struct optparse *poptions,
-+     image_desc_t *im)
-+ {
-+diff --git a/src/rrd_graph.h b/src/rrd_graph.h
-+index 4df32ec66..083cf3800 100644
-+--- a/src/rrd_graph.h
-++++ b/src/rrd_graph.h
-+@@ -473,12 +473,12 @@ void      time_clean(
-+ 
-+ void      rrd_graph_options(
-+     int,
-+-    char **,
-++    const char **,
-+     struct optparse *,
-+     image_desc_t *);
-+ void      rrd_graph_script(
-+     int,
-+-    char **,
-++    const char **,
-+     image_desc_t *const,
-+     int);
-+ int       rrd_graph_color(
-+diff --git a/src/rrd_graph_helper.c b/src/rrd_graph_helper.c
-+index 99cdefa65..ba90e1a6c 100644
-+--- a/src/rrd_graph_helper.c
-++++ b/src/rrd_graph_helper.c
-+@@ -1952,7 +1952,7 @@ static int parse_xport(
-+ 
-+ void rrd_graph_script(
-+     int argc,
-+-    char *argv[],
-++    const char **argv,
-+     image_desc_t *const im,
-+     int optno)
-+ {
-+diff --git a/src/rrd_info.c b/src/rrd_info.c
-+index c0c6f68c7..eb0d4e4de 100644
-+--- a/src/rrd_info.c
-++++ b/src/rrd_info.c
-+@@ -82,7 +82,7 @@ rrd_info_t
-+ 
-+ rrd_info_t *rrd_info(
-+     int argc,
-+-    char **argv)
-++    const char **argv)
-+ {
-+     struct optparse_long longopts[] = {
-+         {"daemon", 'd', OPTPARSE_REQUIRED},
-+diff --git a/src/rrd_last.c b/src/rrd_last.c
-+index 026a1e828..1aae72512 100644
-+--- a/src/rrd_last.c
-++++ b/src/rrd_last.c
-+@@ -11,7 +11,7 @@
-+ 
-+ time_t rrd_last(
-+     int argc,
-+-    char **argv)
-++    const char **argv)
-+ {
-+     char *opt_daemon = NULL;
-+     time_t lastupdate;
-+diff --git a/src/rrd_lastupdate.c b/src/rrd_lastupdate.c
-+index ab30dcf67..4f7f4770e 100644
-+--- a/src/rrd_lastupdate.c
-++++ b/src/rrd_lastupdate.c
-+@@ -14,7 +14,7 @@
-+ #include "rrd_client.h"
-+ #include <stdarg.h>
-+ 
-+-int rrd_lastupdate (int argc, char **argv)
-++int rrd_lastupdate (int argc, const char **argv)
-+ {
-+     struct optparse_long longopts[] = {
-+         {"daemon", 'd', OPTPARSE_REQUIRED},
-+diff --git a/src/rrd_list.c b/src/rrd_list.c
-+index e743b9b7d..6e96220ea 100644
-+--- a/src/rrd_list.c
-++++ b/src/rrd_list.c
-+@@ -37,7 +37,7 @@ static char *move_past_prefix(const char *prefix, const char *string)
-+ 	return (char *)&(string[index]);
-+ }
-+ 
-+-static char *rrd_list_rec(int recursive, char *root, char *dirname)
-++static char *rrd_list_rec(int recursive, const char *root, const char *dirname)
-+ {
-+ #define SANE_ASPRINTF2(_dest_str, _format, ...)				\
-+ 	if (asprintf(&_dest_str, _format, __VA_ARGS__) == -1) {		\
-+@@ -138,7 +138,7 @@ static char *rrd_list_rec(int recursive, char *root, char *dirname)
-+ 	return out;
-+ }
-+ 
-+-char *rrd_list_r(int recursive, char *dirname)
-++char *rrd_list_r(int recursive, const char *dirname)
-+ {
-+ #define SANE_ASPRINTF(_dest_str, _format, ...)				\
-+ 	if (asprintf(&_dest_str, _format, __VA_ARGS__) == -1) {		\
-+@@ -240,7 +240,7 @@ char *rrd_list_r(int recursive, char *dirname)
-+ 	return rrd_list_rec(recursive, dirname, dirname);
-+ }
-+ 
-+-char *rrd_list(int argc, char **argv)
-++char *rrd_list(int argc, const char **argv)
-+ {
-+ 	char *opt_daemon = NULL;
-+ 	int status;
-+diff --git a/src/rrd_modify.c b/src/rrd_modify.c
-+index a2b07f640..70ac9e77f 100644
-+--- a/src/rrd_modify.c
-++++ b/src/rrd_modify.c
-+@@ -1297,7 +1297,7 @@ static int add_rras(const rrd_t *in, rrd_t *out, const int *ds_map,
-+ }
-+ 
-+ int handle_modify(const rrd_t *in, const char *outfilename,
-+-		  int argc, char **argv, int optidx,
-++		  int argc, const char **argv, int optidx,
-+ 		  int newstep) {
-+     // parse add/remove options
-+     int rc = -1;
-+diff --git a/src/rrd_modify.h b/src/rrd_modify.h
-+index 52d8789be..64a39926e 100644
-+--- a/src/rrd_modify.h
-++++ b/src/rrd_modify.h
-+@@ -28,7 +28,7 @@ typedef struct {
-+ } rra_mod_op_t;
-+ 
-+ int handle_modify(const rrd_t *in, const char *outfilename,
-+-		  int argc, char **argv, int optind,
-++		  int argc, const char **argv, int optind,
-+ 		  int newstep);
-+ 
-+ typedef union {
-+diff --git a/src/rrd_resize.c b/src/rrd_resize.c
-+index fb75d81ff..742e6d141 100644
-+--- a/src/rrd_resize.c
-++++ b/src/rrd_resize.c
-+@@ -12,9 +12,9 @@
-+ 
-+ int rrd_resize(
-+     int argc,
-+-    char **argv)
-++    const char **argv)
-+ {
-+-    char     *infilename, outfilename[11] = "resize.rrd";
-++    const char     *infilename, outfilename[11] = "resize.rrd";
-+     rrd_t     rrdold, rrdnew;
-+     rrd_value_t buffer;
-+     int       version;
-+diff --git a/src/rrd_restore.c b/src/rrd_restore.c
-+index 85d481e0c..ebef5efe8 100644
-+--- a/src/rrd_restore.c
-++++ b/src/rrd_restore.c
-+@@ -1378,7 +1378,7 @@ int write_file(
-+ 
-+ int rrd_restore(
-+     int argc,
-+-    char **argv)
-++    const char **argv)
-+ {
-+     struct optparse_long longopts[] = {
-+         {"range-check", 'r', OPTPARSE_NONE},
-+diff --git a/src/rrd_tool.c b/src/rrd_tool.c
-+index cc6119d9a..56321ee1a 100644
-+--- a/src/rrd_tool.c
-++++ b/src/rrd_tool.c
-+@@ -22,16 +22,16 @@
-+ 
-+ 
-+ static void PrintUsage(
-+-    char *cmd);
-++    const char *cmd);
-+ static int CountArgs(
-+     char *aLine);
-+ static int CreateArgs(
-++    const char *,
-+     char *,
-+-    char *,
-+-    char **);
-++    const char **);
-+ static int HandleInputLine(
-+     int,
-+-    char **,
-++    const char **,
-+     FILE *);
-+ int       RemoteMode = 0;
-+ int       ChangeRoot = 0;
-+@@ -42,7 +42,7 @@ int       ChangeRoot = 0;
-+ 
-+ 
-+ static void PrintUsage(
-+-    char *cmd)
-++    const char *cmd)
-+ {
-+ 
-+     const char *help_main =
-+@@ -443,11 +443,11 @@ static char *fgetslong(
-+ 
-+ int main(
-+     int argc,
-+-    char *argv[])
-++    const char *argv[])
-+ {
-+-    char    **myargv;
-++    const char    **myargv;
-+     char     *aLine;
-+-    char     *firstdir = "";
-++    const char     *firstdir = "";
-+ 
-+ #ifdef MUST_DISABLE_SIGFPE
-+     signal(SIGFPE, SIG_IGN);
-+@@ -526,7 +526,7 @@ int main(
-+                 printf("ERROR: not enough arguments\n");
-+                 continue;
-+             }
-+-            if ((myargv = (char **) malloc((argc + 1) *
-++            if ((myargv = malloc((argc + 1) *
-+                                            sizeof(char *))) == NULL) {
-+                 perror("malloc");
-+                 exit(1);
-+@@ -572,7 +572,7 @@ int main(
-+    resolving them portably is not really simple. */
-+ static int HandleInputLine(
-+     int argc,
-+-    char **argv,
-++    const char **argv,
-+     FILE * out)
-+ {
-+ #if defined(HAVE_OPENDIR) && defined (HAVE_READDIR)
-+@@ -887,12 +887,12 @@ static int CountArgs(
-+  * CreateArgs - take a string (aLine) and tokenize
-+  */
-+ static int CreateArgs(
-+-    char *pName,
-++    const char *pName,
-+     char *aLine,
-+-    char **argv)
-++    const char **argv)
-+ {
-+     char     *getP, *putP;
-+-    char    **pargv = argv;
-++    const char    **pargv = argv;
-+     char      Quote = 0;
-+     int       inArg = 0;
-+     int       len;
-+diff --git a/src/rrd_tune.c b/src/rrd_tune.c
-+index 198817f37..dd3f3f7cb 100644
-+--- a/src/rrd_tune.c
-++++ b/src/rrd_tune.c
-+@@ -71,7 +71,7 @@ static int set_hwsmootharg(
-+ 
-+ int rrd_tune(
-+     int argc,
-+-    char **argv)
-++    const char **argv)
-+ {
-+     char      *opt_daemon = NULL;
-+     const char *in_filename = NULL;
-+diff --git a/src/rrd_update.c b/src/rrd_update.c
-+index fbbe2820a..bb9a0602c 100644
-+--- a/src/rrd_update.c
-++++ b/src/rrd_update.c
-+@@ -299,7 +299,7 @@ static void initialize_time(
-+ 
-+ rrd_info_t *rrd_update_v(
-+     int argc,
-+-    char **argv)
-++    const char **argv)
-+ {
-+     struct optparse_long longopts[] = {
-+         {"template",          't', OPTPARSE_REQUIRED},
-+@@ -674,7 +674,7 @@ static int rrd_template_update(const char *filename,  /* {{{ */
-+ 
-+ int rrd_update(
-+     int argc,
-+-    char **argv)
-++    const char **argv)
-+ {
-+     struct optparse_long longopts[] = {
-+         {"template",          't', OPTPARSE_REQUIRED},
-+diff --git a/src/rrd_xport.c b/src/rrd_xport.c
-+index d15d33dd9..93c02f926 100644
-+--- a/src/rrd_xport.c
-++++ b/src/rrd_xport.c
-+@@ -73,7 +73,7 @@ static int rrd_xport_format_addprints(
-+ 
-+ int rrd_xport(
-+     int argc,
-+-    char **argv,
-++    const char **argv,
-+     int UNUSED(*xsize),
-+     time_t *start,
-+     time_t *end,        /* which time frame do you want ?
-+diff --git a/src/rrdupdate.c b/src/rrdupdate.c
-+index cbbf48cc1..e368516c8 100644
-+--- a/src/rrdupdate.c
-++++ b/src/rrdupdate.c
-+@@ -20,19 +20,20 @@ int main(
-+     int argc,
-+     char **argv)
-+ {
-++    const char **cargv = (const char **)argv;
-+     char *name=basename(argv[0]);
-+     rrd_info_t *info;
-+ 
-+     if (!strcmp(name, "rrdcreate")) {
-+-        rrd_create(argc, argv);
-++        rrd_create(argc, cargv);
-+     }
-+     else if (!strcmp(name, "rrdinfo")) {
-+-         info=rrd_info(argc, argv);
-++         info=rrd_info(argc, cargv);
-+          rrd_info_print(info);
-+          rrd_info_free(info);
-+     }
-+     else {
-+-        rrd_update(argc, argv);
-++        rrd_update(argc, cargv);
-+     }
-+ 
-+     if (rrd_test_error()) {
-diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.8.0.bb b/meta-oe/recipes-extended/rrdtool/rrdtool_1.8.0.bb
-index cbe1af2854f2..425a98f0c09b 100644
---- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.8.0.bb
-+++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.8.0.bb
-@@ -11,6 +11,7 @@ PV = "1.8.0"
- 
- SRC_URI = "\
-     git://github.com/oetiker/rrdtool-1.x.git;protocol=https;branch=master \
-+    file://b76e3c578f1e9f582e9c28f50d82b1f569602075.patch \
- "
- 
- S = "${WORKDIR}/git"
--- 
-2.39.2
-
+SGkNCg0KSXQgc2VlbXMgdGhlcmUgYXJlIG1hbnkgcmVjaXBlcyBoYXZlIHRoZSBzYW1lIGlzc3Vl
+LiBJIGZvdW5kIHRoZXJlIGFyZSB0d28gbWV0aG9kcyB0aGF0IGZpeCB0aGlzIGlzc3VlIGZyb20g
+Z2l0IGxvZyBvZiBwb2t5Lg0KT25lIGlzIGlnbm9yZSBpbmNvbXBhdGlibGUtcG9pbnRlci10eXBl
+cywgdGhlIG90aGVyIGlzIHN1Ym1pdHRpbmcgYSBwYXRjaCBvZiBzb3VyY2UgY29kZS4NCkknbSBu
+b3Qgc3VyZSB3aGljaCBtZXRob2QgaXMgbW9yZSBwb3B1bGFyLi4uDQoNCg0KQmVzdCByZWdhcmRz
+DQpMZWkNCg0KDQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IG9wZW5lbWJl
+ZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IDxvcGVuZW1iZWRkZWQtZGV2ZWxA
+bGlzdHMub3BlbmVtYmVkZGVkLm9yZz4gT24gQmVoYWxmIE9mIGxlaW1hb2h1aSB2aWENCj4gbGlz
+dHMub3BlbmVtYmVkZGVkLm9yZw0KPiBTZW50OiBXZWRuZXNkYXksIEp1bmUgNSwgMjAyNCAyOjQw
+IFBNDQo+IFRvOiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBD
+YzogTGVpLCBNYW9odWkgPGxlaW1hb2h1aUBmdWppdHN1LmNvbT4NCj4gU3ViamVjdDogW29lXSBb
+UEFUQ0ggMS8yXSBjbXBpLWJpbmRpbmdzOiBpZ25vcmUgaW5jb21wYXRpYmxlLXBvaW50ZXItdHlw
+ZXMNCj4gZXJyb3JzIGZvciBub3cuDQo+IA0KPiBGcm9tOiBMZWkgTWFvaHVpIDxsZWltYW9odWlA
+ZnVqaXRzdS5jb20+DQo+IA0KPiBHQ0MgMTQgaW1wbGljaXRseSB0dXJucyBhIHdhcm5pbmcgaW50
+byBhIGNvbXBpbGVyIGVycm9yOg0KPiANCj4gfA0KPiAvYnVpbGQtdWJpbnV4LWRhaWx5L3RtcC93
+b3JrL2FhcmNoNjQtdWJpbnV4LWxpbnV4L2NtcGktYmluZGluZ3MvMS4wLjQvZ2l0Lw0KPiBzd2ln
+L3B5dGhvbi8uLi8uLi9zcmMvdGFyZ2V0X3B5dGhvbi5jOjE2ODoyMTogZXJyb3I6IHBhc3Npbmcg
+YXJndW1lbnQgMSBvZg0KPiAnUHlfU2V0UHJvZ3JhbU5hbWUnIGZyb20gaW5jb21wYXRpYmxlIHBv
+aW50ZXIgdHlwZQ0KPiBbLVdpbmNvbXBhdGlibGUtcG9pbnRlci10eXBlc10NCj4gfCAgIDE2OCB8
+ICAgUHlfU2V0UHJvZ3JhbU5hbWUoImNtcGlfc3dpZyIpOw0KPiB8ICAgICAgIHwgICAgICAgICAg
+ICAgICAgICAgICBefn5+fn5+fn5+fg0KPiB8ICAgICAgIHwgICAgICAgICAgICAgICAgICAgICB8
+DQo+IHwgICAgICAgfCAgICAgICAgICAgICAgICAgICAgIGNoYXIgKg0KPiANCj4gU2lnbmVkLW9m
+Zi1ieTogTGVpIE1hb2h1aSA8bGVpbWFvaHVpQGZ1aml0c3UuY29tPg0KPiAtLS0NCj4gIG1ldGEt
+b2UvcmVjaXBlcy1leHRlbmRlZC9jbXBpLWJpbmRpbmdzL2NtcGktYmluZGluZ3NfMS4wLjQuYmIg
+fCAyICstDQo+ICAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkN
+Cj4gDQo+IGRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvY21waS1iaW5kaW5n
+cy9jbXBpLWJpbmRpbmdzXzEuMC40LmJiDQo+IGIvbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL2Nt
+cGktYmluZGluZ3MvY21waS1iaW5kaW5nc18xLjAuNC5iYg0KPiBpbmRleCA3ODFkYzgzZGE5Li5k
+MDYyZTQ2YmI5IDEwMDY0NA0KPiAtLS0gYS9tZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvY21waS1i
+aW5kaW5ncy9jbXBpLWJpbmRpbmdzXzEuMC40LmJiDQo+ICsrKyBiL21ldGEtb2UvcmVjaXBlcy1l
+eHRlbmRlZC9jbXBpLWJpbmRpbmdzL2NtcGktYmluZGluZ3NfMS4wLjQuYmINCj4gQEAgLTI3LDcg
+KzI3LDcgQEAgRVhUUkFfT0VDTUFLRSA9ICItRExJQj0nJHtiYXNlbGlifScgXCAgIyBXaXRoIE5p
+bmphDQo+IGl0IGZhaWxzIHdpdGg6DQo+ICAjIG5pbmphOiBlcnJvcjogYnVpbGQubmluamE6Mjgy
+OiBiYWQgJC1lc2NhcGUgKGxpdGVyYWwgJCBtdXN0IGJlIHdyaXR0ZW4gYXMgJCQpDQo+IE9FQ01B
+S0VfR0VORVJBVE9SID0gIlVuaXggTWFrZWZpbGVzIg0KPiAtDQo+ICtDRkxBR1MgKz0gIi1Xbm8t
+ZXJyb3I9aW5jb21wYXRpYmxlLXBvaW50ZXItdHlwZXMiDQo+ICBGSUxFUzoke1BOfSA9KyIke2xp
+YmRpcn0vY21waS9saWJweTNDbXBpUHJvdmlkZXIuc28NCj4gJHtQWVRIT05fU0lURVBBQ0tBR0VT
+X0RJUn0vKiINCj4gIEZJTEVTOiR7UE59LWRiZyA9KyAiJHtsaWJkaXJ9L2NtcGkvLmRlYnVnL2xp
+YnB5Q21waVByb3ZpZGVyLnNvIg0KPiANCj4gLS0NCj4gMi4zNC4xDQoNCg==
 
