@@ -1,168 +1,127 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <jonas.gorski@bisdn.de>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 48D13C27C52
-	for <webhook@archiver.kernel.org>; Wed,  5 Jun 2024 09:11:16 +0000 (UTC)
-Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com [209.85.167.44])
- by mx.groups.io with SMTP id smtpd.web10.10689.1717578674539692670
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 41E45C27C5E
+	for <webhook@archiver.kernel.org>; Wed,  5 Jun 2024 12:26:47 +0000 (UTC)
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+ by mx.groups.io with SMTP id smtpd.web10.13934.1717590399042029183
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 05 Jun 2024 02:11:14 -0700
+ Wed, 05 Jun 2024 05:26:40 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=KFNnff35;
- spf=pass (domain: gmail.com, ip: 209.85.167.44, mailfrom: martin.jansa@gmail.com)
-Received: by mail-lf1-f44.google.com with SMTP id 2adb3069b0e04-52b94ad88cbso5576905e87.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Jun 2024 02:11:14 -0700 (PDT)
+ dkim=pass header.i=@bisdn-de.20230601.gappssmtp.com header.s=20230601 header.b=g5c+2mGZ;
+ spf=none, err=SPF record not found (domain: bisdn.de, ip: 209.85.221.44, mailfrom: jonas.gorski@bisdn.de)
+Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-35e0f4e1821so4612099f8f.0
+        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Jun 2024 05:26:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1717578673; x=1718183473; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=WoHa1jk4+nR1QRPZ6zUvQ9F0lGXklC0dsE+2fMco5Jc=;
-        b=KFNnff3588nkc3VLwIeoQeQAG69X6AFJ1WI1wYzckt+dMK8ynOcIX7b5K5JneFlIhy
-         DFEK2G0roDg6+Qb6qtV6p0FpZxKRZNldpmbklawwj115HNiRrEuEUPzkhmyHTB4FhwoK
-         P48RZUz3nfMY4J2nhdO63ZH9UWNkyQvMOgamZbXRgaytM8eiB7WcFcNCjTwZhufqeRSa
-         B3KD0H483wpckSF6EaMaoyhE58dbfhHUN0blKlAustMganlgo8dHHQqq9zYhSrEHF5AB
-         IXDrwnkNfnboKxE3R/TVZP1MLiFBiG0F9hI+K4OKIsQ3IrpCV4bE+tM5+Q91cptge9SW
-         J6Mg==
+        d=bisdn-de.20230601.gappssmtp.com; s=20230601; t=1717590397; x=1718195197; darn=lists.openembedded.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=weKhZfOqqDyjFmbZyMY6zeMkhXcyJRQ+I1etQeeIra4=;
+        b=g5c+2mGZoYaVb2UZiKSngH+zHTJQFKpWXSah1vCsLFP3uMWFjTBlkqMhcaHveSV5Mb
+         8aAb56+3UslpTNM4TXsBs/sxQ1NmyWEXjyVlO7oQ8KohMrBMw8H8YRg6++ubkkI//ZTG
+         /Itsq5py5HwoTb5sUZzbzqzhyVrNK1VgvDlstB1VLI5HQxrYT8CYpr2STJwzxP+6U/Pf
+         /GWzk113KDnW8QXQXt15NIqIAqJDIsJWnmLAxFqpwsbnlL0e4arMj1KMs7XNSUDqj97/
+         0oAUBgy6TnbvHlCLpmWjGZwnHjbAaXjYz9t4TudnuFFoI6cYOq1iYJo5l+TCPcL3K1ZF
+         wDkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1717578673; x=1718183473;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=WoHa1jk4+nR1QRPZ6zUvQ9F0lGXklC0dsE+2fMco5Jc=;
-        b=I88LbadeXEdM412J+9O3zckI+GXyNt0MZJQqZ/E043rZeMt7t1EQePVgFvdC94/sq9
-         H+OseHKMTSkCxxBurDiOhijql+qC9FTQcTFIsdMRihX6iTxqBVK5oddCskgbNOMQQjLi
-         pAClJ8D5WffcipKPNzO4JMg2uagonCM7y8DfhQOCUSN0Ym1l+B7OJfIVjNH3rpISkPQN
-         YYFZe8fdQsNLGlY9QvVEZXapjjZXbysJUGDREuEcIMR2ncA38gt6Dw/ai9fB7fUVx000
-         fEQqMBsPEGDCxX6h/fJDN8Na3Sv83jzV6OoLc41R94ArA+uCBXUr6dtnsuCXt9b8GxKb
-         TiQA==
-X-Gm-Message-State: AOJu0YzkDhLewX4AkKLON9Z4INf1gK+wK+1jFkZXIW5gt5AGVaTId1Rm
-	8qrTfK2hh3VZBI/lMSzMskga2AXsf4i3D3acQxGBPkG/uodTN876SkKFgSNYvGTnhY8NiTCSIQM
-	BnaRGPerEPUQ7nCDH9gv3qeJsSHI=
-X-Google-Smtp-Source: AGHT+IGqdyzkWJVvGztWAebczeOU+rwePwHCqjOrjI3n7q2Bb73Y0Bmi5mX+pMA5XGMGmfnP/KvbJ/+jUudaXJihJ34=
-X-Received: by 2002:a05:6512:3194:b0:52b:9964:9dae with SMTP id
- 2adb3069b0e04-52bab50b1abmr1632220e87.57.1717578672388; Wed, 05 Jun 2024
- 02:11:12 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1717590397; x=1718195197;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=weKhZfOqqDyjFmbZyMY6zeMkhXcyJRQ+I1etQeeIra4=;
+        b=shBk/uk08W50/gw4LjWraSACNhW55AdyzPhmW8U/65AP6iZiD72dbW/eaZHH3b1FQy
+         SgCtlh3fAmsyfdIwP0F1SX3lHEVCmNNl+ODqtUeeGCEP+V0JdkUqsDXIE5Q56dkQ4i8e
+         zvm/d20y8XnJztVuKO6tEdqoJ7r6njk8RPexINhJsHsyWNJBxrJCGwQKBa8s0eEQ0HC9
+         o+T80sG/DrTrX9wiT+mbXIwJefLjZvZtBRILuC5WHr7PVbvW2Z1XYe30tbrUWfriYrI3
+         oU5bOW4jK6X35LbXPhIsGpStKCwmpmTs/mCaSWBIg89I3ljQDv5Km1P8xkEswco9w250
+         D5KQ==
+X-Gm-Message-State: AOJu0YyQMP0NPNfWfkTNWpBCfrnmJE0d8LZqxhntVifMOoiyOZe9kfNS
+	zpsT22tCXpSY6WskXZ0kler39wx3I2lWWrC3S66VkmGO8Cz1jQQVMWEUyndB1O6+Y/uB2JOlKSX
+	QcK/fve13CHk/PqvrL+vEAwnxW6GG+SlU4Av0hzq0v7Xywc3nLkzgTE9aCKtlkYDWJ/wmn2Hqhv
+	wYjli87RDq8g==
+X-Google-Smtp-Source: AGHT+IGGEy/CbQC7ADMrDg3bY3IvUaGzSCfjeEmaLs5NNdXYMtK1VGLHZpIgB0bzsbCMm+WdGvZFWg==
+X-Received: by 2002:adf:ee46:0:b0:357:7070:529 with SMTP id ffacd0b85a97d-35e8406898cmr1932090f8f.12.1717590397176;
+        Wed, 05 Jun 2024 05:26:37 -0700 (PDT)
+Received: from localhost (dslb-002-205-022-096.002.205.pools.vodafone-ip.de. [2.205.22.96])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-35dd04c0e84sm14493950f8f.13.2024.06.05.05.26.36
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 05 Jun 2024 05:26:36 -0700 (PDT)
+From: Jonas Gorski <jonas.gorski@bisdn.de>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-networking][PATCH] frr: update 9.1 to 10.0
+Date: Wed,  5 Jun 2024 14:26:31 +0200
+Message-ID: <20240605122631.17962-1-jonas.gorski@bisdn.de>
+X-Mailer: git-send-email 2.45.1
 MIME-Version: 1.0
-References: <17D60871905D8062.18873@lists.openembedded.org> <TY3PR01MB11056F365C91CEB2A21ECDC85A0F92@TY3PR01MB11056.jpnprd01.prod.outlook.com>
-In-Reply-To: <TY3PR01MB11056F365C91CEB2A21ECDC85A0F92@TY3PR01MB11056.jpnprd01.prod.outlook.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 5 Jun 2024 11:10:57 +0200
-Message-ID: <CA+chaQcF_iBmXThEFAV82tRHLW-qgVEUqMTV+4rbNGxMgV4ZCw@mail.gmail.com>
-Subject: Re: [oe] [PATCH 1/2] cmpi-bindings: ignore incompatible-pointer-types
- errors for now.
-To: leimaohui@fujitsu.com
-Cc: "openembedded-devel@lists.openembedded.org" <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="ISO-8859-1"
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Wed, 05 Jun 2024 09:11:16 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110702
+ <openembedded-devel@lists.openembedded.org>; Wed, 05 Jun 2024 12:26:47 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110703
 
-There is already patch covering all such cases detected in my world builds,=
- see
-"pidgin pidgin-sipe pidgin uw-imap rrdtool cmpi-bindings
-libdbd-mysql-perl daq" and
-"catch2 openldap microsoft-gsl scsirastools pam-ssh-agent-auth
-sblim-sfcb cker.."
-commits in:
-https://git.openembedded.org/meta-openembedded/log/?h=3Dmaster-next
+Update FRR from version 9.1 to newest 10.0.
 
-They weren't merged because I think khem wants to motivate people to
-fix these issues instead of just ignoring them and these 2 are just to
-keep world builds cleaner while incrementally working on detected
-issues.
+Signed-off-by: Jonas Gorski <jonas.gorski@bisdn.de>
+---
+ .../recipes-protocols/frr/{frr_9.1.bb =3D> frr_10.0.bb}         | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-protocols/frr/{frr_9.1.bb =3D> frr_10.0.bb}=
+ (98%)
 
-Please check if upstream already has a fix in newer version and
-backport that or submit fix to upstream and add it to meta-oe.
+diff --git a/meta-networking/recipes-protocols/frr/frr_9.1.bb b/meta-networ=
+king/recipes-protocols/frr/frr_10.0.bb
+similarity index 98%
+rename from meta-networking/recipes-protocols/frr/frr_9.1.bb
+rename to meta-networking/recipes-protocols/frr/frr_10.0.bb
+index b1c9153becf2..bdc359667a7e 100644
+--- a/meta-networking/recipes-protocols/frr/frr_9.1.bb
++++ b/meta-networking/recipes-protocols/frr/frr_10.0.bb
+@@ -10,12 +10,12 @@ LIC_FILES_CHKSUM =3D "file://doc/licenses/GPL-2.0;md5=
+=3Db234ee4d69f5fce4486a80fdaf4a
+                     file://doc/licenses/LGPL-2.1;md5=3D4fbd65380cdd2559510=
+79008b364516c"
+=20
+=20
+-SRC_URI =3D "git://github.com/FRRouting/frr.git;protocol=3Dhttps;branch=3D=
+stable/9.1 \
++SRC_URI =3D "git://github.com/FRRouting/frr.git;protocol=3Dhttps;branch=3D=
+stable/10.0 \
+            file://frr.pam \
+            file://0001-zebra-Mimic-GNU-basename-API-for-non-glibc-library-=
+e.patch \
+            "
+=20
+-SRCREV =3D "ca2d6f0f1e000951224a18973cc1827f7f5215b5"
++SRCREV =3D "03a143cd49ed1b190cb38f48a31ef4d71fa01a02"
+=20
+ UPSTREAM_CHECK_GITTAGREGEX =3D "frr-(?P<pver>\d+(\.\d+)+)$"
+=20
+--=20
+2.45.1
 
-Major distributions are now switching to gcc-14 as well so it is
-getting easier to find already created patches in upstream or distros,
-e.g. gentoo tracker:
-https://bugs.gentoo.org/showdependencytree.cgi?id=3D870412
 
-On Wed, Jun 5, 2024 at 10:27=E2=80=AFAM leimaohui via lists.openembedded.or=
-g
-<leimaohui=3Dfujitsu.com@lists.openembedded.org> wrote:
->
-> Hi
->
-> It seems there are many recipes have the same issue. I found there are tw=
-o methods that fix this issue from git log of poky.
-> One is ignore incompatible-pointer-types, the other is submitting a patch=
- of source code.
-> I'm not sure which method is more popular...
->
->
-> Best regards
-> Lei
->
->
-> > -----Original Message-----
-> > From: openembedded-devel@lists.openembedded.org
-> > <openembedded-devel@lists.openembedded.org> On Behalf Of leimaohui via
-> > lists.openembedded.org
-> > Sent: Wednesday, June 5, 2024 2:40 PM
-> > To: openembedded-devel@lists.openembedded.org
-> > Cc: Lei, Maohui <leimaohui@fujitsu.com>
-> > Subject: [oe] [PATCH 1/2] cmpi-bindings: ignore incompatible-pointer-ty=
-pes
-> > errors for now.
-> >
-> > From: Lei Maohui <leimaohui@fujitsu.com>
-> >
-> > GCC 14 implicitly turns a warning into a compiler error:
-> >
-> > |
-> > /build-ubinux-daily/tmp/work/aarch64-ubinux-linux/cmpi-bindings/1.0.4/g=
-it/
-> > swig/python/../../src/target_python.c:168:21: error: passing argument 1=
- of
-> > 'Py_SetProgramName' from incompatible pointer type
-> > [-Wincompatible-pointer-types]
-> > |   168 |   Py_SetProgramName("cmpi_swig");
-> > |       |                     ^~~~~~~~~~~
-> > |       |                     |
-> > |       |                     char *
-> >
-> > Signed-off-by: Lei Maohui <leimaohui@fujitsu.com>
-> > ---
-> >  meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_1.0.4.bb | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_1.0.4=
-.bb
-> > b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_1.0.4.bb
-> > index 781dc83da9..d062e46bb9 100644
-> > --- a/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_1.0.4.bb
-> > +++ b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_1.0.4.bb
-> > @@ -27,7 +27,7 @@ EXTRA_OECMAKE =3D "-DLIB=3D'${baselib}' \  # With Nin=
-ja
-> > it fails with:
-> >  # ninja: error: build.ninja:282: bad $-escape (literal $ must be writt=
-en as $$)
-> > OECMAKE_GENERATOR =3D "Unix Makefiles"
-> > -
-> > +CFLAGS +=3D "-Wno-error=3Dincompatible-pointer-types"
-> >  FILES:${PN} =3D+"${libdir}/cmpi/libpy3CmpiProvider.so
-> > ${PYTHON_SITEPACKAGES_DIR}/*"
-> >  FILES:${PN}-dbg =3D+ "${libdir}/cmpi/.debug/libpyCmpiProvider.so"
-> >
-> > --
-> > 2.34.1
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#110701): https://lists.openembedded.org/g/openembedde=
-d-devel/message/110701
-> Mute This Topic: https://lists.openembedded.org/mt/106498591/3617156
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [m=
-artin.jansa@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+--=20
+BISDN GmbH
+K=F6rnerstra=DFe 7-10
+10785 Berlin
+Germany
+
+
+Phone:=20
++49-30-6108-1-6100
+
+
+Managing Directors:=A0
+Dr.-Ing. Hagen Woesner, Andreas=20
+K=F6psel
+
+
+Commercial register:=A0
+Amtsgericht Berlin-Charlottenburg HRB 141569=20
+B
+VAT ID No:=A0DE283257294
+
 
