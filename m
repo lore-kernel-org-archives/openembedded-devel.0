@@ -2,51 +2,51 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 72AADC25B75
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 874ADC27C52
 	for <webhook@archiver.kernel.org>; Thu,  6 Jun 2024 09:07:21 +0000 (UTC)
-Received: from esa1.hc1455-7.c3s2.iphmx.com (esa1.hc1455-7.c3s2.iphmx.com [207.54.90.47])
- by mx.groups.io with SMTP id smtpd.web10.9756.1717664830964561522
+Received: from esa6.hc1455-7.c3s2.iphmx.com (esa6.hc1455-7.c3s2.iphmx.com [68.232.139.139])
+ by mx.groups.io with SMTP id smtpd.web11.9839.1717664832553913185
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 06 Jun 2024 02:07:11 -0700
+ Thu, 06 Jun 2024 02:07:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=UbzsdyaY;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.47, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=ADX6awbL;
+ spf=pass (domain: fujitsu.com, ip: 68.232.139.139, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1717664831; x=1749200831;
+  t=1717664833; x=1749200833;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=CQYesxFrGD6m+r3a9RnFKfO+b/HWLQpsEnqCshoHVYA=;
-  b=UbzsdyaYmsSDaM+xh/uUHxnR30am50TscBfJ9VWx12LvP7T/9lBLdooh
-   gFCotaFVOxEeTc1zeFvsn2TTmnajFAhPieaomQRfX5x2PVkwcoMNlWFt9
-   OOLSQHaaspwHh9ZEYuLZ3j2Ah6EKVq7Q0zslpcrQdTk5pGivVPaYoePRp
-   scf3HxQjuNrQ/IVYIr77X/o7clV0+oWae4vYjjkLmkssd+UAlP5MEd6OP
-   T3Byzasj0sHivwZoBzv2BHSN66g2o2PGXK0oCvO70WsbulV4af5u4me5K
-   u5U8rSxYeuK6WznN8/7xVSU75L5Z5BEWPwYnVNAWMQ3yVxKMlwUqJRs9I
-   w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,11094"; a="162136686"
+  bh=xdhnFSQ9rmw+0c5yZyK5ayQXfpO1ZrAlycOgK9VDWRM=;
+  b=ADX6awbLCZLzrMYFAoMIgslo+MyRLOCIly6yNboIEZnXYzh81y/IIIjM
+   rR9cECVnh4DorsIiFv85YmbKSVQ+o/+obCcGdZ8b+afb/yseORivi3Lld
+   UOKSAFacRsdp/YQX6GmgR/MK1EavkU3dNkAeQhz6ytQTvJOoQa4L9FVgN
+   X3CSSFUtZPLNTzqpI2E3Qd12ObdEQ/3n1nTMtHvCgvN3Np1IRKUqpo31y
+   z0EMganhhBARBvdrGnOr7f8FqCrDvlHZf9A+1B57CKMrhVTM/r6RrJTD3
+   aQxBCOR09HK3bG0OLzk3QgYD1Ll2/S5HUag3ZaPhwDRxZhYAQC+INWKFb
+   g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,11094"; a="164091945"
 X-IronPort-AV: E=Sophos;i="6.08,218,1712588400"; 
-   d="scan'208";a="162136686"
-Received: from unknown (HELO yto-r3.gw.nic.fujitsu.com) ([218.44.52.219])
-  by esa1.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Jun 2024 18:07:09 +0900
-Received: from yto-m1.gw.nic.fujitsu.com (yto-nat-yto-m1.gw.nic.fujitsu.com [192.168.83.64])
-	by yto-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 16315D500B
-	for <openembedded-devel@lists.openembedded.org>; Thu,  6 Jun 2024 18:07:07 +0900 (JST)
+   d="scan'208";a="164091945"
+Received: from unknown (HELO oym-r4.gw.nic.fujitsu.com) ([210.162.30.92])
+  by esa6.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Jun 2024 18:07:10 +0900
+Received: from oym-m1.gw.nic.fujitsu.com (oym-nat-oym-m1.gw.nic.fujitsu.com [192.168.87.58])
+	by oym-r4.gw.nic.fujitsu.com (Postfix) with ESMTP id 3C941D800D
+	for <openembedded-devel@lists.openembedded.org>; Thu,  6 Jun 2024 18:07:08 +0900 (JST)
 Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by yto-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id 5BDD1CFFA5
-	for <openembedded-devel@lists.openembedded.org>; Thu,  6 Jun 2024 18:07:06 +0900 (JST)
+	by oym-m1.gw.nic.fujitsu.com (Postfix) with ESMTP id 7B4E2D8B00
+	for <openembedded-devel@lists.openembedded.org>; Thu,  6 Jun 2024 18:07:07 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id E854A20081323
-	for <openembedded-devel@lists.openembedded.org>; Thu,  6 Jun 2024 18:07:05 +0900 (JST)
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 186A220081323
+	for <openembedded-devel@lists.openembedded.org>; Thu,  6 Jun 2024 18:07:07 +0900 (JST)
 Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 969A61A000A;
-	Thu,  6 Jun 2024 17:07:05 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id BAFED1A000A;
+	Thu,  6 Jun 2024 17:07:06 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-networking] [PATCH 32/36] openfortivpn: upgrade 1.22.0 -> 1.22.1
-Date: Thu,  6 Jun 2024 17:06:31 +0800
-Message-Id: <1717664795-13902-32-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 34/36] pmdk: upgrade 2.0.0 -> 2.1.0
+Date: Thu,  6 Jun 2024 17:06:33 +0800
+Message-Id: <1717664795-13902-34-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1717664795-13902-1-git-send-email-wangmy@fujitsu.com>
 References: <1717664795-13902-1-git-send-email-wangmy@fujitsu.com>
@@ -54,45 +54,50 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28434.006
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28434.006
-X-TMASE-Result: 10--3.455200-10.000000
-X-TMASE-MatchedRID: S9L8qTrmXfGjz0nOeth/yS2LzK6SyftmKopamxf5EWSU8ftiyKjZrdMj
-	jwb9QfV2CC8aAmGeO6lV00+whwxVQy/7QU2czuUNtw+xHnsmQjMQhNjZQYyI3LRPJs/q8vyUo8T
-	MutQL6LSE97yr4g+GPoAy6p60ZV62yA7duzCw6dLdB/CxWTRRu+rAZ8KTspSzZ5ZcAx/ID0WrPx
-	3ZhpCugPvIhopPFEuPUbqlCVyIXUSKYkqQD4rvhQ0AGMOzuQzsn+13pfxpJB1MfAQmR9oL6Zbob
-	7ckI1QsiB6mlDKe1V7S/yytHeCN9GXv4CQeNUk7G6qTOwq/n71+3BndfXUhXQ==
+X-TMASE-Result: 10--2.193500-10.000000
+X-TMASE-MatchedRID: R9NZgeCyXhKjz0nOeth/yUIIxwDaU5mrrECF/8Y+iZ9YC5LPd7Bvbbxg
+	LrBLgR3BGj3ZCIL3UrnqrT4uzWuVXVGrcTyHfARsZj7E6vHnuNY3l2plwgrtWDBwx50fHFECIUt
+	KH5AJM9ki+t+0AiFaYvL3NxFKQpq1TweK12oEGfueAiCmPx4NwGmRqNBHmBveVDC1CbuJXmMqtq
+	5d3cxkNe5+4KX96PVECx/v2KvyvFydAWZzV1f+tCrGSS8xbBGB20A0tLrI8tOJR2YgOLjpa89cd
+	xYYRs5vZ9GUCENuwp0OUMc3HbC2CQQ5WMx/hWiMU8mdcvbI1h2S6jzjuXTm0MTMzICazP4UehYt
+	aVdyxm8=
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
  <openembedded-devel@lists.openembedded.org>; Thu, 06 Jun 2024 09:07:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110741
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110743
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-Bugfix:
- do not advertise we talk compressed HTTP
+Changelog:
+==========
+Introduces the new logging subsystem in the release build for all libraries
+Introduces fuses against ill-considered use of NDCTL_ENABLE=n
+Does not allow create PMEMOBJ pool without unsafe shutdown counter (USC) if not explicitly disabled.
+Drops support for building without libpthread (NO_LIBPTHREAD build-time define)
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- .../{openfortivpn_1.22.0.bb => openfortivpn_1.22.1.bb}          | 2 +-
+ meta-oe/recipes-extended/pmdk/{pmdk_2.0.0.bb => pmdk_2.1.0.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-networking/recipes-connectivity/openfortivpn/{openfortivpn_1.22.0.bb => openfortivpn_1.22.1.bb} (93%)
+ rename meta-oe/recipes-extended/pmdk/{pmdk_2.0.0.bb => pmdk_2.1.0.bb} (96%)
 
-diff --git a/meta-networking/recipes-connectivity/openfortivpn/openfortivpn_1.22.0.bb b/meta-networking/recipes-connectivity/openfortivpn/openfortivpn_1.22.1.bb
-similarity index 93%
-rename from meta-networking/recipes-connectivity/openfortivpn/openfortivpn_1.22.0.bb
-rename to meta-networking/recipes-connectivity/openfortivpn/openfortivpn_1.22.1.bb
-index 568593b2d..b69a7e235 100644
---- a/meta-networking/recipes-connectivity/openfortivpn/openfortivpn_1.22.0.bb
-+++ b/meta-networking/recipes-connectivity/openfortivpn/openfortivpn_1.22.1.bb
-@@ -3,7 +3,7 @@ LICENSE = "GPL-3.0-or-later"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3d575262a651a6f1a17210ce41bf907d"
+diff --git a/meta-oe/recipes-extended/pmdk/pmdk_2.0.0.bb b/meta-oe/recipes-extended/pmdk/pmdk_2.1.0.bb
+similarity index 96%
+rename from meta-oe/recipes-extended/pmdk/pmdk_2.0.0.bb
+rename to meta-oe/recipes-extended/pmdk/pmdk_2.1.0.bb
+index aeda23690..100ff4200 100644
+--- a/meta-oe/recipes-extended/pmdk/pmdk_2.0.0.bb
++++ b/meta-oe/recipes-extended/pmdk/pmdk_2.1.0.bb
+@@ -12,7 +12,7 @@ DEPENDS:append:libc-musl = " fts"
+ S = "${WORKDIR}/git"
  
- SRC_URI = "git://github.com/adrienverge/openfortivpn.git;protocol=https;branch=master"
--SRCREV = "82e4401162fc65efad8267f4cb3287c6ab6fc088"
-+SRCREV = "388fa98f639ef91733461de50b06dd57f1ffb099"
+ SRC_URI = "git://github.com/pmem/pmdk.git;branch=master;protocol=https"
+-SRCREV = "ba92d6b469d52d16f26279bebaf317bbdbb3822c"
++SRCREV = "5705fdffa755d00b4dbb4d6c30eb49671436f961"
  
- DEPENDS = "openssl"
+ inherit autotools-brokensep pkgconfig
  
 -- 
 2.34.1
