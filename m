@@ -1,136 +1,105 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B9AFC25B75
-	for <webhook@archiver.kernel.org>; Thu,  6 Jun 2024 05:36:59 +0000 (UTC)
-Received: from mail-oo1-f43.google.com (mail-oo1-f43.google.com [209.85.161.43])
- by mx.groups.io with SMTP id smtpd.web11.7153.1717652210435346014
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F2D33C27C52
+	for <webhook@archiver.kernel.org>; Thu,  6 Jun 2024 09:06:59 +0000 (UTC)
+Received: from esa7.hc1455-7.c3s2.iphmx.com (esa7.hc1455-7.c3s2.iphmx.com [139.138.61.252])
+ by mx.groups.io with SMTP id smtpd.web11.9819.1717664810123751180
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 05 Jun 2024 22:36:50 -0700
+ Thu, 06 Jun 2024 02:06:50 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20230601 header.b=ghVY/ZdC;
- spf=pass (domain: gmail.com, ip: 209.85.161.43, mailfrom: raj.khem@gmail.com)
-Received: by mail-oo1-f43.google.com with SMTP id 006d021491bc7-5b2e93fddafso238846eaf.0
-        for <openembedded-devel@lists.openembedded.org>; Wed, 05 Jun 2024 22:36:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1717652209; x=1718257009; darn=lists.openembedded.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=+Nr+1EHlyMFco41P4Qje/1zg+7wavj3qR/SmkmyOQUU=;
-        b=ghVY/ZdCcmPg7aIQ3sPqII6nlEmiXHShQDJ95Fk+yng3bCZKuayc0jkY7naxokIyzx
-         Ijd6GvzJWhONGjbKosESrKg2ubV4AXuO0K+Kyhdfx76cMKeNYbqBkXrxsqfy2IQehRDt
-         l3YJqNC/jRGnX+X/5f31VTnVb2PJhVDo97PDIO2lgLqdeNlYegevf+csqMM8fZNJaxUy
-         UR96IG6dYc2L74HV2PybMwA3x/0fazTpYQc0JEl5ikfDLcsGmXMcUtZq8y99v6kn+neX
-         5qScMhDGmKTA+XQzOoURUsIrDCHUryk15KsaCsrg21f0EbpNjBkepiMfmbbVGndlwyzR
-         TrWg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1717652209; x=1718257009;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=+Nr+1EHlyMFco41P4Qje/1zg+7wavj3qR/SmkmyOQUU=;
-        b=hstzfjY0aGKegn8C3CInZ2kXNhXZjmqnI2ZBNHZKDUN8sGp3r1aTC6G+Kjcq5Gzc34
-         Rf7phwvoRRXHx+aEYmv6Ce1NFPr+fU7MBZsjBrnKSOcEb5V3OVCrRIsVX1j+yNv7Yynl
-         ZqJ+23U9M95Tc7ACZoOPiv7uUfNFcmn3g4OrYphTQ0UTwPeR9ZUE1TqUNLsWGm73WqcQ
-         cMSdEiqN+bP8v/qLEA1aMCdXBLIVNzIWs9ujiqsGQaqegALAO6nydS8LD6h0Y8SS9zCi
-         oWLSPgSkTW0Sv0R2825ZFaEChH8sOOPOnmTW5rSimHcZaJsug0mREzSq9VqA5+/TbqSj
-         kDkQ==
-X-Gm-Message-State: AOJu0YzkCJa4ISuumKHK7G+AR3KrpBxS7NMz07yhTEH+eIftHLdymP2b
-	WwXr9Esf7SwhBHiDX4Qz92nJdFVLzvNFfPEGlOs3UMxXYDvBS3zq9zA5swBCHzuILd++Z9M28FV
-	WvnjDS7JvOkmdfV38aYfC3X++Rm4LjQ==
-X-Google-Smtp-Source: AGHT+IEXRhCnQf3z86je+XYR9RdXNJmPKNCY5Rn9srNvf7VnPT4plpsP3JgJgTJb9lQnfJOEsDbYe4EgqO/dlvO9e58=
-X-Received: by 2002:a05:6870:7b46:b0:24f:c144:ea57 with SMTP id
- 586e51a60fabf-25440339583mr774036fac.9.1717652209476; Wed, 05 Jun 2024
- 22:36:49 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240606050222.2551532-1-kai.kang@windriver.com>
-In-Reply-To: <20240606050222.2551532-1-kai.kang@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 5 Jun 2024 22:36:23 -0700
-Message-ID: <CAMKF1sosZ+7FKSzusqN9VtT0W2Kig1eCua8iSfg506wgprpogw@mail.gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] usleep: fix compile errors
-To: kai.kang@windriver.com
-Cc: openembedded-devel@lists.openembedded.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=XPtSE8kM;
+ spf=pass (domain: fujitsu.com, ip: 139.138.61.252, mailfrom: wangmy@fujitsu.com)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
+  t=1717664809; x=1749200809;
+  h=from:to:cc:subject:date:message-id;
+  bh=gv9WKRZ7WHEhgszys/YKyjxYZ92Gj4cTZYHk33N5I8g=;
+  b=XPtSE8kM43B71JcxIgku0FIhGCVva1y86sw2PqabhTxtPhb7+Sp6AFu/
+   QgKseCLQJbL9az4BKW20m1pc41OHPTUXXwHe0uLQigAnFmIKJxvkfaWdK
+   qOd4DUVh8AWU0ytLNVhQ/to9KbfB0ZOPM0X+b+3ves4kFmQVyEOqYuIw5
+   gTyBzg/fkjUceXrCQAFMZnqCAlfqmSRQ4v1tNgHmwVJBi0Hwq55ouI4GF
+   +0khLnh1en8em6UXprZzwXX3TWD1QW+/SSrt3s/uVISZ+jydldC8vfgtg
+   wLnZSqFDj87Az1uKHRCqsZf0UkrdvYGZUbpjHsYM32SnefW0T29RJLUop
+   Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,11094"; a="141040276"
+X-IronPort-AV: E=Sophos;i="6.08,218,1712588400"; 
+   d="scan'208";a="141040276"
+Received: from unknown (HELO oym-r3.gw.nic.fujitsu.com) ([210.162.30.91])
+  by esa7.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Jun 2024 18:06:47 +0900
+Received: from oym-m3.gw.nic.fujitsu.com (oym-nat-oym-m3.gw.nic.fujitsu.com [192.168.87.60])
+	by oym-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id CFD08C53CD
+	for <openembedded-devel@lists.openembedded.org>; Thu,  6 Jun 2024 18:06:45 +0900 (JST)
+Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
+	by oym-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 17FA3D72A3
+	for <openembedded-devel@lists.openembedded.org>; Thu,  6 Jun 2024 18:06:45 +0900 (JST)
+Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 9696520081323
+	for <openembedded-devel@lists.openembedded.org>; Thu,  6 Jun 2024 18:06:44 +0900 (JST)
+Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id 446041A000A;
+	Thu,  6 Jun 2024 17:06:44 +0800 (CST)
+From: wangmy@fujitsu.com
+To: openembedded-devel@lists.openembedded.org
+Cc: Wang Mingyu <wangmy@fujitsu.com>
+Subject: [oe] [meta-oe] [PATCH 01/36] atkmm-2.36: upgrade 2.36.2 -> 2.36.3
+Date: Thu,  6 Jun 2024 17:06:00 +0800
+Message-Id: <1717664795-13902-1-git-send-email-wangmy@fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+X-TM-AS-GCONF: 00
+X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28434.006
+X-TM-AS-User-Approved-Sender: Yes
+X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28434.006
+X-TMASE-Result: 10--2.157000-10.000000
+X-TMASE-MatchedRID: /gZnudouedqjz0nOeth/yUIIxwDaU5mrF4r8H5YrEqwFk60oHehTzg1U
+	4SKH6t6vNtWYZmc8YCQHMSexFgmXDsOY7UMlS7FZvL/Dm1nUPdliMNd0z/HZUzPJJylm6P+evqn
+	FtM6Nq/L7tBxFpWhrycYoh/qEF/tVoYY7KoErjW8ReM8i8p3vgARryDXHx6oXQGXZZOuBkiOjxY
+	yRBa/qJXcsDK2xBHh7jaPj0W1qn0TGVuWouVipcqFsNMlqwlF3Yt6NfVz2XBwWgrZiBbdExDnw/
+	FDgwvoyZcGhzZNu1jwVKoIOS32uII8u4X8ELxqCuNiuoA7HzJXmBDdUTIFGT/6/2/nZkihaOgB/
+	fz3EXdcVKT0eFRmfDs4YhafCzgujIdY9jOi4lTI=
+X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 06 Jun 2024 05:36:59 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110708
+ <openembedded-devel@lists.openembedded.org>; Thu, 06 Jun 2024 09:06:59 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110709
 
-On Wed, Jun 5, 2024 at 10:02=E2=80=AFPM Kai Kang via lists.openembedded.org
-<kai.kang=3Dwindriver.com@lists.openembedded.org> wrote:
->
-> From: Kai Kang <kai.kang@windriver.com>
->
-> Update usleep.c to fix following compile error:
->
-> | usleep.c: In function 'main':
-> | usleep.c:47:43: error: passing argument 3 of 'poptGetContext' from inco=
-mpatible pointer type [-Wincompatible-pointer-types]
-> |    47 |   optCon =3D poptGetContext("usleep", argc, argv, options,0);
-> |       |                                           ^~~~
-> |       |                                           |
-> |       |                                           char **
-> | In file included from usleep.c:29:
-> | /path_to/tmp-glibc/work/core2-64-wrs-linux/usleep/1.2/recipe-sysroot/us=
-r/include/popt.h:217:41: note: expected 'const char **' but argument is of =
-type 'char **'
-> |   217 |                 int argc, const char ** argv,
-> |       |                           ~~~~~~~~~~~~~~^~~~
-> | usleep.c:68:12: warning: assignment discards 'const' qualifier from poi=
-nter target type [-Wdiscarded-qualifiers]
-> |    68 |   countStr =3D poptGetArg(optCon);
-> |       |            ^
->
+From: Wang Mingyu <wangmy@fujitsu.com>
 
-What is the upstream status of this patch ?
+Changelog:
+===========
+* atkmm.h: Update link to ATK
+* Add README.win32.md with Win32 build documentation
+* Remove AUTHORS and add general information to README.md
+* Detect if we build from a git subtree
+* Don't copy files with configure_file()
+* Fix the evaluation of is_git_build on Windows
+* Don't fail if warning_level=everything
 
-> Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> ---
->  meta-oe/recipes-core/usleep/files/usleep.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-oe/recipes-core/usleep/files/usleep.c b/meta-oe/recipes=
--core/usleep/files/usleep.c
-> index a5e7d9d715..dfa52ec19a 100644
-> --- a/meta-oe/recipes-core/usleep/files/usleep.c
-> +++ b/meta-oe/recipes-core/usleep/files/usleep.c
-> @@ -34,7 +34,7 @@ int main(int argc, char **argv) {
->    int showVersion =3D 0;
->    int showOot =3D 0;
->    int rc;
-> -  char * countStr =3D NULL;
-> +  const char * countStr =3D NULL;
->    struct poptOption options[] =3D {
->              { "version", 'v', POPT_ARG_NONE, &showVersion, 0,
->                         "Display the version of this program, and exit" }=
-,
-> @@ -44,7 +44,7 @@ int main(int argc, char **argv) {
->              { 0, 0, 0, 0, 0 }
->          };
->
-> -  optCon =3D poptGetContext("usleep", argc, argv, options,0);
-> +  optCon =3D poptGetContext("usleep", argc, (const char **)argv, options=
-,0);
->    /*poptReadDefaultConfig(optCon, 1);*/
->    poptSetOtherOptionHelp(optCon, "[microseconds]");
->
-> --
-> 2.42.0
->
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Links: You receive all messages sent to this group.
-> View/Reply Online (#110707): https://lists.openembedded.org/g/openembedde=
-d-devel/message/110707
-> Mute This Topic: https://lists.openembedded.org/mt/106517953/1997914
-> Group Owner: openembedded-devel+owner@lists.openembedded.org
-> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub [r=
-aj.khem@gmail.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+---
+ .../atk/{atkmm-2.36_2.36.2.bb => atkmm-2.36_2.36.3.bb}          | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-gnome/atk/{atkmm-2.36_2.36.2.bb => atkmm-2.36_2.36.3.bb} (84%)
+
+diff --git a/meta-oe/recipes-gnome/atk/atkmm-2.36_2.36.2.bb b/meta-oe/recipes-gnome/atk/atkmm-2.36_2.36.3.bb
+similarity index 84%
+rename from meta-oe/recipes-gnome/atk/atkmm-2.36_2.36.2.bb
+rename to meta-oe/recipes-gnome/atk/atkmm-2.36_2.36.3.bb
+index fa47cbd48..62ca01530 100644
+--- a/meta-oe/recipes-gnome/atk/atkmm-2.36_2.36.2.bb
++++ b/meta-oe/recipes-gnome/atk/atkmm-2.36_2.36.3.bb
+@@ -13,7 +13,7 @@ inherit gnomebase features_check
+ 
+ ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
+ 
+-SRC_URI[archive.sha256sum] = "6f62dd99f746985e573605937577ccfc944368f606a71ca46342d70e1cdae079"
++SRC_URI[archive.sha256sum] = "6ec264eaa0c4de0adb7202c600170bde9a7fbe4d466bfbe940eaf7faaa6c5974"
+ 
+ S = "${WORKDIR}/${GNOMEBN}-${PV}"
+ 
+-- 
+2.34.1
+
 
