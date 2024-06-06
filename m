@@ -1,193 +1,164 @@
-Return-Path: <wangmy@fujitsu.com>
+Return-Path: <wentao.zhang@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 802AAC27C55
-	for <webhook@archiver.kernel.org>; Thu,  6 Jun 2024 09:07:21 +0000 (UTC)
-Received: from esa1.hc1455-7.c3s2.iphmx.com (esa1.hc1455-7.c3s2.iphmx.com [207.54.90.47])
- by mx.groups.io with SMTP id smtpd.web10.9756.1717664830964561522
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EE6B3C27C52
+	for <webhook@archiver.kernel.org>; Thu,  6 Jun 2024 10:13:51 +0000 (UTC)
+Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
+ by mx.groups.io with SMTP id smtpd.web11.10925.1717668825231980954
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 06 Jun 2024 02:07:12 -0700
+ Thu, 06 Jun 2024 03:13:45 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=Sc1SP0rG;
- spf=pass (domain: fujitsu.com, ip: 207.54.90.47, mailfrom: wangmy@fujitsu.com)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1717664832; x=1749200832;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references;
-  bh=CLIuqcEORfMczFQuGcFloyF5diQnEFz36Kpd35oj7aU=;
-  b=Sc1SP0rGQFYy2ANlw5r4VKYIE6styHENYIbDdcS1uwbjmnyn5cTpUwp7
-   9viVoyEpKUJBAm8nzt/zfkz+zFSTN2M3+aqbUrZN8B/QhdJ429qpHoWUn
-   RaDiNi/7Oxi7XvEJkiuf2f8burzsupK66Eg0Wm/Xqpx6xuVyX3QbROw4O
-   LQ+2awaEGMcCMKN01XdVSNGcFBaNFksPNOtY7Hw0ucn1Euwdn2QF49mag
-   Eyc2pYpmMmUmDcsGmgRui2wEPq+mLD/sbaAL618eLDiihYwZ7se/8Zh8O
-   lIXa19z0Ljkrq7KalDuytuIRDoZi99AfwAc7SdxrrmoPxUp81k6zZ+ZvU
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,11094"; a="162136687"
-X-IronPort-AV: E=Sophos;i="6.08,218,1712588400"; 
-   d="scan'208";a="162136687"
-Received: from unknown (HELO oym-r2.gw.nic.fujitsu.com) ([210.162.30.90])
-  by esa1.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Jun 2024 18:07:11 +0900
-Received: from oym-m3.gw.nic.fujitsu.com (oym-nat-oym-m3.gw.nic.fujitsu.com [192.168.87.60])
-	by oym-r2.gw.nic.fujitsu.com (Postfix) with ESMTP id BFA29D922F
-	for <openembedded-devel@lists.openembedded.org>; Thu,  6 Jun 2024 18:07:08 +0900 (JST)
-Received: from kws-ab4.gw.nic.fujitsu.com (kws-ab4.gw.nic.fujitsu.com [192.51.206.22])
-	by oym-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 0D749D72A0
-	for <openembedded-devel@lists.openembedded.org>; Thu,  6 Jun 2024 18:07:08 +0900 (JST)
-Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab4.gw.nic.fujitsu.com (Postfix) with ESMTP id A0CD5401D8
-	for <openembedded-devel@lists.openembedded.org>; Thu,  6 Jun 2024 18:07:07 +0900 (JST)
-Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 4E2351A000A;
-	Thu,  6 Jun 2024 17:07:07 +0800 (CST)
-From: wangmy@fujitsu.com
+ dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=6887352d54=wentao.zhang@windriver.com)
+Received: from pps.filterd (m0250809.ppops.net [127.0.0.1])
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4566FCwA007486
+	for <openembedded-devel@lists.openembedded.org>; Thu, 6 Jun 2024 03:13:44 -0700
+Received: from nam10-mw2-obe.outbound.protection.outlook.com (mail-mw2nam10lp2043.outbound.protection.outlook.com [104.47.55.43])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3yg35f4v1v-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 06 Jun 2024 03:13:44 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=BP6vl7IjLAS9LawA/r4l5o9DZRclCOk8ql45W27Y22fH1tDnplpXxH5qWSEEgSLElMRIjrDM5yxUyuK5fWCh4tMYy8t4MwP+kS+1u6Ea8ZSpbYwKe5yYP7QIphWS40KSOvr3tIXGzLHc/N3wTGKcjxz8Bmjp+qlR9FK4Drj7YE6ItGbBBzkdOwb3O/V8KmZQ7yE9mcxcw+6lJVtflqaWFf16QS9qNKS9IQUm0b7XfiNw184wvidzd2oLFvPnihxe4UWzJR8J9bqWcDZ4RefBOYKkBcrqkfHqW5e8ygOcoKPFKjq7vvmQYyvfQkQO/uOvF9l+VmAlTedLXXreKquplw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ogP1yXKHdiRBUxcClyp4xHlq641Mx4hPGNSmMB2UMBg=;
+ b=K20bRJJaRtzAbopuQNr2nDJ+oVLFzNE7SvfTWEfReTp3TbnBF+R3SUSy3BEd5JQ/gZV64O2hbeQikOUucyatrB851zG2Yvr1HI+zg+2pZqrenHTYourGGgc82qNKLrC/Np3AHdNXqEgypAs8eQMGFzu2T2SoMDnqcvkLWhgqk3hTHh4Piv0PGOA+H8p8DHV7NiUEiQ5DD7Sl2Hi0e24rWfe1G1HZL06kJ385YT3qj3n30FmgAJOmHGNyc+RuTOqu/a4lVetIYbZwyleycrt0hGsz95Y930/NuphW96SawpGXIflvftXCeu+5QqRtHPG/xoQBjxN23m36BuUGgttETw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=windriver.com; dmarc=pass action=none
+ header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+Received: from SJ0PR11MB7155.namprd11.prod.outlook.com (2603:10b6:a03:48d::6)
+ by MW3PR11MB4730.namprd11.prod.outlook.com (2603:10b6:303:58::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.31; Thu, 6 Jun
+ 2024 10:13:42 +0000
+Received: from SJ0PR11MB7155.namprd11.prod.outlook.com
+ ([fe80::6638:98c1:fb6:c3d9]) by SJ0PR11MB7155.namprd11.prod.outlook.com
+ ([fe80::6638:98c1:fb6:c3d9%6]) with mapi id 15.20.7633.033; Thu, 6 Jun 2024
+ 10:13:42 +0000
+From: Wentao Zhang <wentao.zhang@windriver.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 35/36] poco: upgrade 1.12.5p2 -> 1.13.3
-Date: Thu,  6 Jun 2024 17:06:34 +0800
-Message-Id: <1717664795-13902-35-git-send-email-wangmy@fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1717664795-13902-1-git-send-email-wangmy@fujitsu.com>
-References: <1717664795-13902-1-git-send-email-wangmy@fujitsu.com>
-X-TM-AS-GCONF: 00
-X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28434.006
-X-TM-AS-User-Approved-Sender: Yes
-X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28434.006
-X-TMASE-Result: 10--10.993100-10.000000
-X-TMASE-MatchedRID: EGTy8EHGssijz0nOeth/ySrLqyE6Ur/jCZa9cSpBObmlCu6kKVgvEgyf
-	XeYFOVFHFTBB/IBXpeGFClSci0DxS31VIn2QdLBc8KdIN9q4LF+el2cAq/NuwaYafp33PlMqdYJ
-	3pC9XNt6XcV/PU+QptxcHv+b01YKmG/kkIQ/06pJKzjuZtPtIBHhKwaDYNA5ity9mj1urE9Kq0i
-	/TXguI/YAAzcwNZpHFeb+pbQtKMOcS5iXdhf8hbr+a7Hw+x9qZP8UQejhp29qysPB8dBBorYIPF
-	ubbBVyAoTssFGSH7W3mn3xyPJAJoswrDggcQ6d1GYJhRh6ssetXb09ETGBTKRHfiujuTbedS1c5
-	HPN1AYdaaTQaF8Q9iNWTXnicoB4YTweK12oEGfsTMSg6oABUs53ZbPRfc5otmyiLZetSf8mfop0
-	ytGwvXiq2rl3dzGQ1SPqUqJpSCRtkBqi2ChDY/Yl2zp5cfsW2u0ltzSAmQAomDxdaFUpBNg==
-X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
+Subject: [meta-oe][kirkstone][PATCH] meta-oe/conf/layer.conf: remove libbpf from NON_MULTILIB_RECIPES for x86 and x86-64
+Date: Thu,  6 Jun 2024 18:13:32 +0800
+Message-Id: <20240606101332.1564737-1-wentao.zhang@windriver.com>
+X-Mailer: git-send-email 2.25.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SJ0PR13CA0189.namprd13.prod.outlook.com
+ (2603:10b6:a03:2c3::14) To SJ0PR11MB7155.namprd11.prod.outlook.com
+ (2603:10b6:a03:48d::6)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ0PR11MB7155:EE_|MW3PR11MB4730:EE_
+X-MS-Office365-Filtering-Correlation-Id: df077d4f-a13f-447b-a550-08dc861157d1
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: 
+	BCL:0;ARA:13230031|376005|52116005|1800799015|366007|38350700005;
+X-Microsoft-Antispam-Message-Info: 
+	=?us-ascii?Q?ejyAIfnbrbeJtFgmaykBQ6q+42i6MxNPfeQuG/eFv4vLRuVqDtVBEKRTIPQ+?=
+ =?us-ascii?Q?VVEbaJdIUBQsZNmMtGlbRu58YDc7mEce/p5Mhdw7zv6kTrP0F7l7hQDdWT1n?=
+ =?us-ascii?Q?fKF+yA428YirgH/XsouuUS30elW80ngbjSfSEwDpsGLS69c7yvzqEIrqX9k7?=
+ =?us-ascii?Q?Pq4k85Lsh63cQIDtZ3KyKqk6cBfQe34e8bRnIJgmPJoisPTMzjIw3qKOuftG?=
+ =?us-ascii?Q?IA5RdRqfH8VFZn4RGchCesrsuM3MVFkD7nwj2RiSXmDWwEcY3yz9+WlBjygX?=
+ =?us-ascii?Q?64n9KbA/FuKSylZGSG1hlAp8mOQmVdSUszZF+rJ28lHJYUAEIdl1NfpleEef?=
+ =?us-ascii?Q?K4UHDz8TZzEifkjY7N/oTkRjYgHSA79oWOYRwDAEosynR9fBg8pPvOdF6oW3?=
+ =?us-ascii?Q?0qE3Oi9Nuth0qrUNcahjrt49m4epiWl3/KoUpT/VleDgzACkO5rcYKFUtSC0?=
+ =?us-ascii?Q?l4t3MltZpA/01ZusAHy1L4vSlXk3UC1plUZj3OycmXAZNjWuDo5QZaiFMoFl?=
+ =?us-ascii?Q?K96M/YoAclIbPsBl0sHpnF1/R2mEZIYOY+9ICv/5mury1HdSsoZ4cfbp0R+I?=
+ =?us-ascii?Q?j6o100giEOqOvlAC0ZXb9ic1xrSmICwfpev6/NLyphQonHyGHyuR7XoC8Oum?=
+ =?us-ascii?Q?aPjiZncnSXTvVtOCnMl/fdY5kSwCn5dTCTHF8SErwUrBj+Of3xAJrYeDijV6?=
+ =?us-ascii?Q?99q7kR0dlylb5sdB6YUnvkTyqWCrBHgsO/5h+z7wmDeixHsJOCbQx5r5BqAv?=
+ =?us-ascii?Q?LnNLtLH5HcJPQLTWvOiTxMd/qsvMVG4Vm3uNM6PKHBLrYPP5tyOfH1j18u5q?=
+ =?us-ascii?Q?FAoRyMq9s3sTmVVBZ38tpG6EKViv4+CvqegPJ8x8VwiAWCa2IsQw0xdvW5Dj?=
+ =?us-ascii?Q?ilfSRvkmbuiHk5Ni/Iioae6Pg65UIZQn0/Gpe3ITRkFerdUjEapoMlfymy2M?=
+ =?us-ascii?Q?sZKC54c8Hk89acRRdF9Q2WlgWTkGmPk34+tvVMVEVta43Z8+XMJ65qxTqrKL?=
+ =?us-ascii?Q?SVo5LufNL7kQotCkpff5ix95miqvdkHA88kPHwonW+ZNctWevkeyinzRD2dM?=
+ =?us-ascii?Q?scgI59qn8DM+E2kqkOrLn3BNqvI4t7dBG3WznGkHRcLkUwLwOt8JvXwn9WAk?=
+ =?us-ascii?Q?Wcx0HYj1V3O2gAq3oq4+y6dz2HFxamDGyq5HlEF/q8tYeKNbOswWGc+UMly5?=
+ =?us-ascii?Q?3osiukWxhQ68GmvDudaGQUtwXk+yFPLUlJycIiRtMKcjA7939SPi/iaWlEWn?=
+ =?us-ascii?Q?4D11jwUzwUoI+z5ZGkLsWIPRc/o5093fN8uq8pTZ9XtuhjzV08kQZhYXvF1L?=
+ =?us-ascii?Q?4CL5tXI+ATaTiWtg4XAQEQk0sUXq+Q4Q6hAt9o9RtVB/bG5wAViufu6cKzXw?=
+ =?us-ascii?Q?NnP93YU=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ0PR11MB7155.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(376005)(52116005)(1800799015)(366007)(38350700005);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?DKrIwMZz//7y5GJH3jZ5IkdGG7nmq5YB7z2h2ntRoW6ccOxhp1KygvE0nwMB?=
+ =?us-ascii?Q?tov9r5a8jWlHiT6ZwImL6/y5fIUAO84UF5hQEo2O3jbTKuXDdjF0mGWPHV7u?=
+ =?us-ascii?Q?modadCbVJW8s2ptqegtaFNT56HTVO+qeEKJnoLmfWvlUQX0YCakeL4fVqbyn?=
+ =?us-ascii?Q?50PGgWo6DzA0VoqAwrb5HRLkBfjgWJsmCu1y1P7sYx5R/7Q/PVXPw6wF2IWY?=
+ =?us-ascii?Q?THkNNdX8a80hj4Qc0BVPp/moROfXZ4TqzlDuO4Ar+hpduZelcV3q90p66ngu?=
+ =?us-ascii?Q?5x/1OQVYJstD+0OyZrwRJzpDbx1XfWVaxrcp6offShk4A7sqMO+h0oVnxJSL?=
+ =?us-ascii?Q?Fe2lzimacQF1rE1Q7p0reoKy5b0c4x6MLR4s4k5gN5CvEYTWFQZDndI4GdR6?=
+ =?us-ascii?Q?mtnOFH46pe0rP5YGQ3Q3WTwTJU+rZOZnJ2KeRk1CowpHhEoNKroUBI4jjwMW?=
+ =?us-ascii?Q?56ti5u9CIMqPanF8Tdu0OLOPjgzBER7bVgTtj9VfqnewiZlFwtcre1FA/a88?=
+ =?us-ascii?Q?ESY7p4zuMQrbBC1TN5f4pSEsAIjEHg1BXesDOpluxGvY4fM+kUBJHmc+QuSe?=
+ =?us-ascii?Q?xpdhhw1Xe9x1TrOq6vY1wLvXUdnrwnSdmx56FL39L2VdcYfOtmzLh3ntZmjq?=
+ =?us-ascii?Q?XtLhcqbqCzqvu4+9NKLI2kqYY7LQH0ZwukTn25qEVTDAwieUle5wj5/zprlB?=
+ =?us-ascii?Q?s0a/IcAA1grHlyZcgaOXfT7tzLVenl3iBlHakDQc6Df2vlNG5zLHjNXwR0D3?=
+ =?us-ascii?Q?xN1ouIhROuBVxrw0eZ3PA2t1WSUZJqULZm88qlcJnC1MEiOjKpx7ZWxagjJn?=
+ =?us-ascii?Q?MytWNJbONyViBsZRc6ecAh63LTGAz4vi7xA/i2QTTeHggguOuFOtKtg7Skn8?=
+ =?us-ascii?Q?SNwFjL+FPqqwDQjVHqFcQ1c2yJ2LVoUfdHCmC3Sre1EsqHDug9ufkQEN8P0a?=
+ =?us-ascii?Q?6mZXAHb/JB9DbX7lITd9ewoW89ZQ0C14cZVx3vks3d/Hdq62n00SOBFEXddi?=
+ =?us-ascii?Q?s1okXrAytxZDHm9sm3G3AGx9TkjWq2dBvcKT109VXNnO0RlsNX9uyh5k+qjL?=
+ =?us-ascii?Q?fEvd5F0zb2CrOMUhvkf79GAjqyLYshCPz+m+qhHMZ3JteJ0N6asGLGlAgtrl?=
+ =?us-ascii?Q?2DwoeolEKidv0IUhU3kjkdQYkiDw1KeB8wiVTXqI8ffm+ODwQJSP5duxaZdO?=
+ =?us-ascii?Q?y5iAd8BmfEWbhWBJ5kI7Txa/9dvMH15YgVb8C2WUH8g7e4tiIHia2cMMaZgp?=
+ =?us-ascii?Q?2P+MQiFnf3FfhYTqi+1Ew9Esy3wWwOeKg9imLjqVWBXzm/wl9284Mvb5m+YT?=
+ =?us-ascii?Q?ArHNHMimk3n4mZg1EkSKlEDdrJ9yFzxn8KG9/loZY+pk87M3AmG6wmsnqwtM?=
+ =?us-ascii?Q?sqXOxXoFcFxxSWCVoqPPi7aVkAObCI+zvvPb0rfzJcC3YqM//F+yvsMY38tU?=
+ =?us-ascii?Q?1FepGegRM0wPQo2Ahr9kQKmq73XJfgHfWcKtuwrul99raWaZvlIwlqNwO3jb?=
+ =?us-ascii?Q?MkgvJY2xJ6+rcP9caZRGhW8+smMJrKq6ZCgXruHgeyxovmyydBy7bPw9a++R?=
+ =?us-ascii?Q?LaP7mBu6HiHmebTgBbsoOYyRJPrZZa2xe2i8vt5AkK6ALSYrhlEuZPRw0zHW?=
+ =?us-ascii?Q?3Q=3D=3D?=
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: df077d4f-a13f-447b-a550-08dc861157d1
+X-MS-Exchange-CrossTenant-AuthSource: SJ0PR11MB7155.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Jun 2024 10:13:42.8735
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 8wwctdOGq7diAoWL+q4rZm0T0M0w9C0VXYxNV2Fnk6g9OJpwFS0sHHzjFF2ElGvVfAdlCICDdellTDPX/qzaCDmQvtM6+Lcfu+1OpkLkrNg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW3PR11MB4730
+X-Proofpoint-GUID: _UDlRkWLZ2dPXzlpoKiAI0koQElPp_LQ
+X-Proofpoint-ORIG-GUID: _UDlRkWLZ2dPXzlpoKiAI0koQElPp_LQ
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
+ definitions=2024-06-06_01,2024-06-06_02,2024-05-17_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 impostorscore=0
+ mlxlogscore=861 priorityscore=1501 adultscore=0 mlxscore=0 phishscore=0
+ clxscore=1011 malwarescore=0 spamscore=0 lowpriorityscore=0 suspectscore=0
+ bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.21.0-2405170001 definitions=main-2406060075
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 06 Jun 2024 09:07:21 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110742
+ <openembedded-devel@lists.openembedded.org>; Thu, 06 Jun 2024 10:13:51 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110745
 
-From: Wang Mingyu <wangmy@fujitsu.com>
+libbpf supports x86_64 and i.86, remove libbpf from NON_MULTILIB_RECIPES
+for x86 and x86-64
 
-0002-fix-build-Install-cmake-files-with-resolved-ENABLE_J.patch
-removed since it's included in 1.13.3
-
-0001-cppignore.lnx-Ignore-PKCS12-and-testLaunch-test.patch
-refreshed for 1.13.3
-
-Changelog:
-============
-- GH #4496 Upgrade bundled libexpat to 2.6.2
-- GH #4488 Add Poco::Util::Timer::idle() method to check if timer has any tasks scheduled
-- GH #3807 DNS.resolve() should not be sorted in HostEntry::removeDuplicates()
-- GH #4515 Upgrade bundled SQLite to 3.45.2
-- PR #4517 Optimize Net module for Android
-- GH #4505 ODBC Unicode wrappers do not check for null length pointers
-- GH #4492 Poco::BasicMemoryStreamBuf is missing seekpos()
-- GH #4486 DateTimeFormat RFC1036 Sunday name is short (should be long)
-- GH #4468 Poco::URI: don't lowercase host part if it's a Unix domain socket
-- GH #4450 Error between Poco::ActiveRecord and Poco::Data::PostgreSQL
-- GH #4435 SecureStreamSocket is not thread-safe
-- GH #4415 SecureSocketImpl::reset shouldn't close socket
-- GH #3857 Thread_POSIX.cpp shouldn't convert thread IDs to long
-- GH #3725 secure socket receiveTimeout throwing after configured timeout * 2
-
-Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
+Signed-off-by: Wentao Zhang <wentao.zhang@windriver.com>
 ---
- ...nx-Ignore-PKCS12-and-testLaunch-test.patch |  6 ++--
- ...l-cmake-files-with-resolved-ENABLE_J.patch | 32 -------------------
- .../poco/{poco_1.12.5p2.bb => poco_1.13.3.bb} |  5 ++-
- 3 files changed, 5 insertions(+), 38 deletions(-)
- delete mode 100644 meta-oe/recipes-support/poco/poco/0002-fix-build-Install-cmake-files-with-resolved-ENABLE_J.patch
- rename meta-oe/recipes-support/poco/{poco_1.12.5p2.bb => poco_1.13.3.bb} (96%)
+ meta-oe/conf/layer.conf | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-support/poco/poco/0001-cppignore.lnx-Ignore-PKCS12-and-testLaunch-test.patch b/meta-oe/recipes-support/poco/poco/0001-cppignore.lnx-Ignore-PKCS12-and-testLaunch-test.patch
-index f70e8bcc7..d172c8dbf 100644
---- a/meta-oe/recipes-support/poco/poco/0001-cppignore.lnx-Ignore-PKCS12-and-testLaunch-test.patch
-+++ b/meta-oe/recipes-support/poco/poco/0001-cppignore.lnx-Ignore-PKCS12-and-testLaunch-test.patch
-@@ -1,4 +1,4 @@
--From 879ddb725823c78c9510cfd39786adb16f3726c8 Mon Sep 17 00:00:00 2001
-+From 6b1123b313e439d8bfae3570a3e541b3aa26f3ad Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Sat, 16 Sep 2023 19:52:56 -0700
- Subject: [PATCH] cppignore.lnx: Ignore PKCS12 and testLaunch test
-@@ -48,10 +48,10 @@ Signed-off-by: Patrick Wicki <patrick.wicki@siemens.com>
-  1 file changed, 9 insertions(+)
+diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
+index 77855dc65..a254990ec 100644
+--- a/meta-oe/conf/layer.conf
++++ b/meta-oe/conf/layer.conf
+@@ -115,3 +115,6 @@ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
+ DEFAULT_TEST_SUITES:pn-meta-oe-ptest-image = " ${PTESTTESTSUITE}"
  
- diff --git a/cppignore.lnx b/cppignore.lnx
--index 2c2376526..65df4af08 100644
-+index b3288d474..9aad48ca5 100644
- --- a/cppignore.lnx
- +++ b/cppignore.lnx
--@@ -28,3 +28,12 @@ CppUnit::TestCaller<HTTPSClientSessionTest>.testProxy
-+@@ -30,3 +30,12 @@ CppUnit::TestCaller<HTTPSClientSessionTest>.testProxy
-  CppUnit::TestCaller<HTTPSStreamFactoryTest>.testProxy
-  CppUnit::TestCaller<DNSTest>.testHostByAddress
-  CppUnit::TestCaller<DNSTest>.testHostByName
-diff --git a/meta-oe/recipes-support/poco/poco/0002-fix-build-Install-cmake-files-with-resolved-ENABLE_J.patch b/meta-oe/recipes-support/poco/poco/0002-fix-build-Install-cmake-files-with-resolved-ENABLE_J.patch
-deleted file mode 100644
-index 427cb9723..000000000
---- a/meta-oe/recipes-support/poco/poco/0002-fix-build-Install-cmake-files-with-resolved-ENABLE_J.patch
-+++ /dev/null
-@@ -1,32 +0,0 @@
--From e54478c936493c0ed87e875f04127bd13642de44 Mon Sep 17 00:00:00 2001
--From: tyler92 <tyler92@inbox.ru>
--Date: Tue, 21 Nov 2023 05:07:24 +0300
--Subject: [PATCH] fix(build): Install cmake files with resolved ENABLE_JSON and
-- ENABLE_XML (#4227)
--
--Upstream-Status: Backport [https://github.com/pocoproject/poco/pull/4227]
--Signed-off-by: Adrian Freihofer <adrian.freihofer@siemens.com>
--
-----
-- Util/cmake/PocoUtilConfig.cmake | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/Util/cmake/PocoUtilConfig.cmake b/Util/cmake/PocoUtilConfig.cmake
--index 90c1eab1c..8186435e1 100644
----- a/Util/cmake/PocoUtilConfig.cmake
--+++ b/Util/cmake/PocoUtilConfig.cmake
--@@ -1,9 +1,9 @@
-- include(CMakeFindDependencyMacro)
-- find_dependency(PocoFoundation)
---if(ENABLE_XML)
--+if(@ENABLE_XML@)
-- 	find_dependency(PocoXML)
-- endif()
---if(ENABLE_JSON)
--+if(@ENABLE_JSON@)
-- 	find_dependency(PocoJSON)
-- endif()
-- include("${CMAKE_CURRENT_LIST_DIR}/PocoUtilTargets.cmake")
---- 
--2.43.0
--
-diff --git a/meta-oe/recipes-support/poco/poco_1.12.5p2.bb b/meta-oe/recipes-support/poco/poco_1.13.3.bb
-similarity index 96%
-rename from meta-oe/recipes-support/poco/poco_1.12.5p2.bb
-rename to meta-oe/recipes-support/poco/poco_1.13.3.bb
-index a0bb0b5d9..6ad577b37 100644
---- a/meta-oe/recipes-support/poco/poco_1.12.5p2.bb
-+++ b/meta-oe/recipes-support/poco/poco_1.13.3.bb
-@@ -8,13 +8,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4267f48fc738f50380cbeeb76f95cebc"
- # These dependencies are required by Foundation
- DEPENDS = "libpcre2 zlib"
- 
--SRC_URI = "git://github.com/pocoproject/poco.git;branch=master;protocol=https \
-+SRC_URI = "git://github.com/pocoproject/poco.git;branch=master-unused;protocol=https \
-            file://0001-Use-std-atomic-int-instead-of-std-atomic-bool.patch \
-            file://0001-cppignore.lnx-Ignore-PKCS12-and-testLaunch-test.patch \
-            file://run-ptest \
--           file://0002-fix-build-Install-cmake-files-with-resolved-ENABLE_J.patch \
-            "
--SRCREV = "1d6fb3e1383e559cacbada5e3f861c0dafaf5d30"
-+SRCREV = "d6bd48a94c5f03e3c69cac1b024fdad5120e3a7b"
- 
- UPSTREAM_CHECK_GITTAGREGEX = "poco-(?P<pver>\d+(\.\d+)+)"
- 
+ NON_MULTILIB_RECIPES:append = " crash pahole libbpf"
++
++NON_MULTILIB_RECIPES:remove:x86 = "libbpf"
++NON_MULTILIB_RECIPES:remove:x86-64 = "libbpf"
 -- 
-2.34.1
+2.25.1
 
 
