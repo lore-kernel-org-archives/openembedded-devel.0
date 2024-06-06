@@ -2,51 +2,51 @@ Return-Path: <wangmy@fujitsu.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ACABCC27C78
-	for <webhook@archiver.kernel.org>; Thu,  6 Jun 2024 09:07:00 +0000 (UTC)
-Received: from esa9.hc1455-7.c3s2.iphmx.com (esa9.hc1455-7.c3s2.iphmx.com [139.138.36.223])
- by mx.groups.io with SMTP id smtpd.web11.9820.1717664811634325247
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AA56DC25B75
+	for <webhook@archiver.kernel.org>; Thu,  6 Jun 2024 09:07:10 +0000 (UTC)
+Received: from esa1.hc1455-7.c3s2.iphmx.com (esa1.hc1455-7.c3s2.iphmx.com [207.54.90.47])
+ by mx.groups.io with SMTP id smtpd.web11.9828.1717664820317303594
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 06 Jun 2024 02:06:52 -0700
+ Thu, 06 Jun 2024 02:07:00 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=USl89Vti;
- spf=pass (domain: fujitsu.com, ip: 139.138.36.223, mailfrom: wangmy@fujitsu.com)
+ dkim=pass header.i=@fujitsu.com header.s=fj2 header.b=Tv+gCFU5;
+ spf=pass (domain: fujitsu.com, ip: 207.54.90.47, mailfrom: wangmy@fujitsu.com)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=fujitsu.com; i=@fujitsu.com; q=dns/txt; s=fj2;
-  t=1717664812; x=1749200812;
+  t=1717664821; x=1749200821;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references;
-  bh=pnuwQXMbIOZ/2eSrYcZomeqUEnofhhliDPC1UQakCLI=;
-  b=USl89Vti1D5G1GXJc41xSZOSPiykNQ25pNltJB0MyKAoi2rvjEebEDQB
-   XSC+kdXGRwT1AgVNtHxalKv4TkbuLILOx/OhGUsvdFDuqcJUl9YC4SfXh
-   M4LDfE1XXxsrsehHacVUjIbUzb0cILLdMnR3fulVFbxidpI5tuh/D3ra2
-   Nycp2R8u4qQ0LtCue0yMZFCYj6ePjERutrcXU+mdeNERiq+/SWwVoThaH
-   DSLshBV03xL7FCdZiG3HkbeKXvosn+1KSll0iWYNPRAjQEi+a+K+4ScGY
-   nFfhE4+dkXhxGJmkrTCdXzTMNEMFaqUwFA4hvkx/FQNhRUVx10SfEkhQf
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,11094"; a="150462568"
+  bh=W/Pz+eWFNeSPUjKGnpn9zRUxJdPOAcLdnZi6s/kaDU8=;
+  b=Tv+gCFU5aDXsz8ZslZGrwgcnWuCw33nzOW9st3nQSoDW+35pIgboTwKL
+   bmz2omMeDJP0ib1S48C7BX2qB1y+I18GNKU+JjiN86Kpdnlt9Q2brWV/H
+   jYPlIg4l9/f4oSGEi4jQaP1bUZon4CQ0vTBsB5lSRtJUBuhk5h5UB3K+a
+   vH/YQBt11to2rbLjcST/cE30MzkgJD7fwZwaG+QjBONlGbHnqf/SQyNAF
+   77YdaHsQiRrjM/MxDhsckMF9WvvJH1kUCngpOI3oiwGZsPyDAZOC6znqI
+   LStxcb8/g4ddY2BjnZIEIr68ddB8+WoRqqCOg2Pt5pR6aHWZquZQQjV4y
+   w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,11094"; a="162136671"
 X-IronPort-AV: E=Sophos;i="6.08,218,1712588400"; 
-   d="scan'208";a="150462568"
+   d="scan'208";a="162136671"
 Received: from unknown (HELO oym-r3.gw.nic.fujitsu.com) ([210.162.30.91])
-  by esa9.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Jun 2024 18:06:50 +0900
-Received: from oym-m2.gw.nic.fujitsu.com (oym-nat-oym-m2.gw.nic.fujitsu.com [192.168.87.59])
-	by oym-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id E258BD63CC
-	for <openembedded-devel@lists.openembedded.org>; Thu,  6 Jun 2024 18:06:48 +0900 (JST)
+  by esa1.hc1455-7.c3s2.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Jun 2024 18:06:58 +0900
+Received: from oym-m3.gw.nic.fujitsu.com (oym-nat-oym-m3.gw.nic.fujitsu.com [192.168.87.60])
+	by oym-r3.gw.nic.fujitsu.com (Postfix) with ESMTP id 2E27BD6482
+	for <openembedded-devel@lists.openembedded.org>; Thu,  6 Jun 2024 18:06:56 +0900 (JST)
 Received: from kws-ab3.gw.nic.fujitsu.com (kws-ab3.gw.nic.fujitsu.com [192.51.206.21])
-	by oym-m2.gw.nic.fujitsu.com (Postfix) with ESMTP id 304E2BF3D9
-	for <openembedded-devel@lists.openembedded.org>; Thu,  6 Jun 2024 18:06:48 +0900 (JST)
+	by oym-m3.gw.nic.fujitsu.com (Postfix) with ESMTP id 6C9EBD72A0
+	for <openembedded-devel@lists.openembedded.org>; Thu,  6 Jun 2024 18:06:55 +0900 (JST)
 Received: from edo.cn.fujitsu.com (edo.cn.fujitsu.com [10.167.33.5])
-	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id C04F520081323
-	for <openembedded-devel@lists.openembedded.org>; Thu,  6 Jun 2024 18:06:47 +0900 (JST)
+	by kws-ab3.gw.nic.fujitsu.com (Postfix) with ESMTP id 04C192008132A
+	for <openembedded-devel@lists.openembedded.org>; Thu,  6 Jun 2024 18:06:55 +0900 (JST)
 Received: from vm4860.g01.fujitsu.local (unknown [10.193.128.200])
-	by edo.cn.fujitsu.com (Postfix) with ESMTP id 6DA311A000A;
-	Thu,  6 Jun 2024 17:06:47 +0800 (CST)
+	by edo.cn.fujitsu.com (Postfix) with ESMTP id A62801A000A;
+	Thu,  6 Jun 2024 17:06:54 +0800 (CST)
 From: wangmy@fujitsu.com
 To: openembedded-devel@lists.openembedded.org
 Cc: Wang Mingyu <wangmy@fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH 05/36] colord-native: upgrade 1.4.6 -> 1.4.7
-Date: Thu,  6 Jun 2024 17:06:04 +0800
-Message-Id: <1717664795-13902-5-git-send-email-wangmy@fujitsu.com>
+Subject: [oe] [meta-perl] [PATCH 16/36] libcompress-raw-bzip2-perl: upgrade 2.206 -> 2.212
+Date: Thu,  6 Jun 2024 17:06:15 +0800
+Message-Id: <1717664795-13902-16-git-send-email-wangmy@fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1717664795-13902-1-git-send-email-wangmy@fujitsu.com>
 References: <1717664795-13902-1-git-send-email-wangmy@fujitsu.com>
@@ -54,90 +54,49 @@ X-TM-AS-GCONF: 00
 X-TM-AS-Product-Ver: IMSS-9.1.0.1417-9.0.0.1002-28434.006
 X-TM-AS-User-Approved-Sender: Yes
 X-TMASE-Version: IMSS-9.1.0.1417-9.0.1002-28434.006
-X-TMASE-Result: 10--0.356500-10.000000
-X-TMASE-MatchedRID: sujxEcxUy52jz0nOeth/yW03YawHJvPCnJdsOLB4zv4H4DTIEE89jFYU
-	+1qwrZwQaUuJ07rkUQzmqbB2SfYgTUWNbZfbxvwGfCwgB7jBwkZh0Eb5uGGI1Lqln+jYe7Zh1r3
-	Qk8f2AHaOlK3viUq7Ewkqgl/CBaHN5YVOgBQqdGnWX4GMszyWymo8zUxTJUAjqgN67rC7tupbvu
-	5n+BQlRUd3JVSHt+1Yedu/gVuQyeBaQiLka9EcSk7nLUqYrlslFIuBIWrdOeO1eX0jEQ9c6o052
-	PiV2j/nHH8BkCG8K5B3TaF7+lCZvhHyFkyp0mb56nHbeBu5Lnl9LQinZ4QefPcjNeVeWlqY+gtH
-	j7OwNO2I3adjBtsMrDcBlXQKEp+qZBjRm4a5kX7Z6YvvF081+32hCppIWTnQ0gU4tVabZLlcheG
-	sQGVgPfyKHgMOaCCgNTlYfPhKkTPuYksegv8lXfIMFg0InOPqz5gAnmajvOU4qCidlj1MUy0uAB
-	Di47cA
+X-TMASE-Result: 10--0.161100-10.000000
+X-TMASE-MatchedRID: hsQjHHSArR6jz0nOeth/yXg2y0j5vXZGSc4iQ7VD4M2U8ftiyKjZrdMj
+	jwb9QfV2CC8aAmGeO6lV00+whwxVQy/7QU2czuUNnVTWWiNp+v8AtH/ey8zRp8SiwizsgluQdTe
+	gpK7QnXFvQZuQp/ypDOuLFZZYlisfHxPMjOKY7A+u65UDD0aDgsRB0bsfrpPIcSqbxBgG0w4BWW
+	qv8w9M1bdp1cOvj56g6jHsTCn+15nRIMCVbqRfAqfrwdYWaeDcVRiphRdtAbkgSM4rM3fLndgfo
+	Y+jmcy+6wuMwr47Aa6CvqWrFsheUcLe0zBjeZrbFQOP52BRBXJMTsKj18q/fA==
 X-TMASE-SNAP-Result: 1.821001.0001-0-1-22:0,33:0,34:0-0
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Thu, 06 Jun 2024 09:07:00 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110711
+ <openembedded-devel@lists.openembedded.org>; Thu, 06 Jun 2024 09:07:10 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110723
 
 From: Wang Mingyu <wangmy@fujitsu.com>
 
-0001-Move-the-function-cd_icc_create_from_edid-to-avoid-u.patch
-refreshed for 1.4.7
-
-Changelog:
-===========
-- Add various hardenings to the systemd service
-- Always close the ICC profile when loading fails
-- Avoid destructing LCMS plugin twice with lcms 2.14
-- Do not make state files executable in tmpfiles.d/colord.conf
-- Fix a double free spotted by Coverity
-- Fix an error check when parsing the DTP94 data
-- Fix a -Wincompatible-pointer-types warning
-- Fix potential crash when reading from broken Huey hardware
-- Set FILE_OFFSET_BITS explicitly
-- Use a 64-bit time_t
-- Use thread context for Gamut Alarm codes
+License-Update: Copyright year updated to 2024.
 
 Signed-off-by: Wang Mingyu <wangmy@fujitsu.com>
 ---
- ...the-function-cd_icc_create_from_edid-to-avoid-u.patch | 9 +++------
- meta-oe/recipes-support/colord/colord.inc                | 4 ++--
- 2 files changed, 5 insertions(+), 8 deletions(-)
+ ...zip2-perl_2.206.bb => libcompress-raw-bzip2-perl_2.212.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-perl/recipes-perl/libcompress/{libcompress-raw-bzip2-perl_2.206.bb => libcompress-raw-bzip2-perl_2.212.bb} (79%)
 
-diff --git a/meta-oe/recipes-support/colord/colord-native/0001-Move-the-function-cd_icc_create_from_edid-to-avoid-u.patch b/meta-oe/recipes-support/colord/colord-native/0001-Move-the-function-cd_icc_create_from_edid-to-avoid-u.patch
-index aae2be8c1..a120b7311 100644
---- a/meta-oe/recipes-support/colord/colord-native/0001-Move-the-function-cd_icc_create_from_edid-to-avoid-u.patch
-+++ b/meta-oe/recipes-support/colord/colord-native/0001-Move-the-function-cd_icc_create_from_edid-to-avoid-u.patch
-@@ -1,4 +1,4 @@
--From cbb8f5c05fce1d56ae2e5fa9f57fc49c47bed5ab Mon Sep 17 00:00:00 2001
-+From d16aed3118bee1e0a7d0bc9e0f34c427a405a6d8 Mon Sep 17 00:00:00 2001
- From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
- Date: Sun, 12 May 2019 21:58:02 +0200
- Subject: [PATCH] Move the function cd_icc_create_from_edid to avoid udev
-@@ -89,10 +89,10 @@ index a5e2328..dec509a 100644
- +}
- +
- diff --git a/lib/colord/cd-icc.c b/lib/colord/cd-icc.c
--index 8beec43..398ff7a 100644
-+index 3937d8a..daf6f4d 100644
- --- a/lib/colord/cd-icc.c
- +++ b/lib/colord/cd-icc.c
--@@ -3114,68 +3114,6 @@ cd_icc_create_default (CdIcc *icc, GError **error)
-+@@ -3117,68 +3117,6 @@ cd_icc_create_default (CdIcc *icc, GError **error)
-  	return cd_icc_create_default_full (icc, CD_ICC_LOAD_FLAGS_NONE, error);
-  }
-  
-@@ -161,6 +161,3 @@ index 8beec43..398ff7a 100644
-  /**
-   * cd_icc_create_from_edid:
-   * @icc: A valid #CdIcc
---- 
--2.20.1
--
-diff --git a/meta-oe/recipes-support/colord/colord.inc b/meta-oe/recipes-support/colord/colord.inc
-index 0ae1a30fe..cafbaaa69 100644
---- a/meta-oe/recipes-support/colord/colord.inc
-+++ b/meta-oe/recipes-support/colord/colord.inc
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
-     file://meson.build;beginline=3;endline=3;md5=f42198707d793be58b274d34fd5238c3 \
- "
+diff --git a/meta-perl/recipes-perl/libcompress/libcompress-raw-bzip2-perl_2.206.bb b/meta-perl/recipes-perl/libcompress/libcompress-raw-bzip2-perl_2.212.bb
+similarity index 79%
+rename from meta-perl/recipes-perl/libcompress/libcompress-raw-bzip2-perl_2.206.bb
+rename to meta-perl/recipes-perl/libcompress/libcompress-raw-bzip2-perl_2.212.bb
+index 2bd98e73b..712073041 100644
+--- a/meta-perl/recipes-perl/libcompress/libcompress-raw-bzip2-perl_2.206.bb
++++ b/meta-perl/recipes-perl/libcompress/libcompress-raw-bzip2-perl_2.212.bb
+@@ -5,11 +5,11 @@ HOMEPAGE = "https://metacpan.org/release/Compress-Raw-Bzip2"
+ SECTION = "libs"
+ LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
  
--PV = "1.4.6"
-+PV = "1.4.7"
- SRC_URI = "https://www.freedesktop.org/software/colord/releases/${BPN}-${PV}.tar.xz"
--SRC_URI[sha256sum] = "7407631a27bfe5d1b672e7ae42777001c105d860b7b7392283c8c6300de88e6f"
-+SRC_URI[sha256sum] = "de02d9910634ae159547585cec414e450f711c27235453b4f9b38a9f2361a653"
+-LIC_FILES_CHKSUM = "file://README;beginline=8;endline=10;md5=85ab0f65a47c4c0f72dd6d033ff74ece"
++LIC_FILES_CHKSUM = "file://README;beginline=8;endline=10;md5=cd551ef796cc7fa34351ced771a3a7f9"
+ 
+ SRC_URI = "${CPAN_MIRROR}/authors/id/P/PM/PMQS/Compress-Raw-Bzip2-${PV}.tar.gz"
+ 
+-SRC_URI[sha256sum] = "212b81db1c0ae822d19928619a603bd108cb5d5c4700fc67dc7cb169e0cc6525"
++SRC_URI[sha256sum] = "6caeee843c428f45fa9646ea98dc675470db63dbac0ee3e2d8e9ee4eb58a856d"
+ 
+ DEPENDS += "bzip2"
  
 -- 
 2.34.1
