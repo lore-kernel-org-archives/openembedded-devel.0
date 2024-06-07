@@ -2,154 +2,154 @@ Return-Path: <kai.kang@windriver.com>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 82513C27C53
-	for <webhook@archiver.kernel.org>; Fri,  7 Jun 2024 07:56:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 91783C27C55
+	for <webhook@archiver.kernel.org>; Fri,  7 Jun 2024 08:27:28 +0000 (UTC)
 Received: from mx0a-0064b401.pphosted.com (mx0a-0064b401.pphosted.com [205.220.166.238])
- by mx.groups.io with SMTP id smtpd.web10.36585.1717746992648421975
+ by mx.groups.io with SMTP id smtpd.web10.36921.1717748838872079690
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 07 Jun 2024 00:56:32 -0700
+ Fri, 07 Jun 2024 01:27:18 -0700
 Authentication-Results: mx.groups.io;
  dkim=none (message not signed); spf=permerror, err=parse error for token &{10 18 %{ir}.%{v}.%{d}.spf.has.pphosted.com}: invalid domain name (domain: windriver.com, ip: 205.220.166.238, mailfrom: prvs=6888c8ef97=kai.kang@windriver.com)
 Received: from pps.filterd (m0250810.ppops.net [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4574jHKn001757
-	for <openembedded-devel@lists.openembedded.org>; Fri, 7 Jun 2024 00:56:32 -0700
+	by mx0a-0064b401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4574jHLg001757
+	for <openembedded-devel@lists.openembedded.org>; Fri, 7 Jun 2024 01:27:18 -0700
 Received: from pps.reinject (localhost [127.0.0.1])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3yfxwyx47y-1
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3yfxwyx4w3-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>; Fri, 07 Jun 2024 00:56:31 -0700 (PDT)
+	for <openembedded-devel@lists.openembedded.org>; Fri, 07 Jun 2024 01:27:17 -0700 (PDT)
 Received: from m0250810.ppops.net (m0250810.ppops.net [127.0.0.1])
-	by pps.reinject (8.18.0.8/8.18.0.8) with ESMTP id 4577uVpD018043;
-	Fri, 7 Jun 2024 00:56:31 -0700
-Received: from nam10-mw2-obe.outbound.protection.outlook.com (mail-mw2nam10lp2046.outbound.protection.outlook.com [104.47.55.46])
-	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3yfxwyx47x-1
+	by pps.reinject (8.18.0.8/8.18.0.8) with ESMTP id 4578RHTK028224;
+	Fri, 7 Jun 2024 01:27:17 -0700
+Received: from nam04-bn8-obe.outbound.protection.outlook.com (mail-bn8nam04lp2047.outbound.protection.outlook.com [104.47.74.47])
+	by mx0a-0064b401.pphosted.com (PPS) with ESMTPS id 3yfxwyx4w2-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Fri, 07 Jun 2024 00:56:31 -0700 (PDT)
+	Fri, 07 Jun 2024 01:27:17 -0700 (PDT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=f3iOwEcquQnglLD/cVgeFIx/3XiUokiGPARb2yWyQOwoR6OfLpUIUnaX/l3LBir8k1g9BhZOuK/483sfJb/PV483ybkjBnJaTYleEgCrTyPOTilu4/6ONTnE/Ko/ktxyxW7wlLfMppacK9P4I/n+VM2T4At9kFbJz72y6hFP1E1b4zoc47X7chWqxRIV3YAQIMEfHyVs53JyicepdUYc8G3UbEd6DJdukNMTCdTC7lX6N9ax2tyEvAZz0vEXCUdnyGJcVg6BCs3tcTF37oJ6l57TjOpz+HipBoCKOcW/o7Z1Zfo6DDpr2/Lhs1ryIlDcIRrKjcp7bK9rTkDxeAVjJw==
+ b=VAKCEja5UDhsSd0TH3QIIXnS4U72m5xqHLEYF48gf4XE7plpFVWsHCN3kWbADgffcV7C7lQ/ISZ1b0FpI5hUjOu/ewzyeSk7OCEsi01qUZHVQbnp5e7edd5/OWl/TWpZ1uonjj8aV7QzH4wDxaZtWu61Irdy/sEXpLDsgpg4o/ESBHFjQlktPEz9AGd+9pmtM3gNFXEkiNZ1VsEi/Fw9oLCsdMrbSupSErXFyzF71+kaWeXamU3zpoCIrF/bqPC7qtxtPQ4FfdYubg9C34cSCObhd1yPGMk/wikrNxSxJH8bx0TOxi5LhMY2ab6osNihsQ3ScjY+KYP5NZeMQzj4zw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=cPXe3t2Vtf4A89cmM8OrlXbUcb3z8t8Dymzrh4aulg4=;
- b=OC4x5usu1UylofiN6g2wg6zC/rJ5QUhaoeFGF6x6PDNSdwaA2UZFYz+/Rb3/g8C0vMV++rufFaGjYSs9S+JLWSG3tXBP7EQZjSah5q/zV5gSH6CuQ9CIl9BuRdPuvLHlIscMNCqR6mT9/wGAbvMiUXffRgVSwn18DaJv5rAt4nyBzmwvj22O2bX8Yao/7JKeESwLR9ohpwPYVHc8O3pTSPJZKfNG9VxpQbXkIf/CroBvUjVES3vMB9ho6TcwA8rnYPWQM4HI6Xk8oWB0ApUlhEev4JqOnTvjanDPtjdE/CgCmYtTbVFcffVu0nGuqZgG6hBCYh4AKnXz5XfproPpyg==
+ bh=8PE/8I04zHjvjZgLtOJlVu4jAwfPJtuuWCxS/bxtX4o=;
+ b=KOR/Ue6N3pmNeEA9qd89/V2r9djUoM327x+M/ksvwdl9kvQR+NWSssuhyV1bMsKQz6bPAimjddUCETfbZfdOtAkYQG0nX/vYNk26KR1EAlFRGUEBAURlkJrpAFeeMjoHhU4XN3jg05EZEGHsXvt53eO2eN6Jbw+PZjsafSyUaq8L+8sheMan7vuOSNwAi+fZ7fOTx9tSU8U/vMfaqLS/StOTxHHncvlVLKpiFC9xTgfbp8H9q2RsBoO1rlGIqJlXQKcSL8X1WSTvGPm8cqJOyu8iWm29kdyiEFd0AmqPKk3tVnqTj9EfMu7CldUkcw/DMFdp2htIfNwb/Wm4Fi4sVw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=windriver.com; dmarc=pass action=none
  header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
 Received: from SN7PR11MB8264.namprd11.prod.outlook.com (2603:10b6:806:26c::17)
- by CH3PR11MB8520.namprd11.prod.outlook.com (2603:10b6:610:1af::11) with
+ by PH8PR11MB6877.namprd11.prod.outlook.com (2603:10b6:510:22b::13) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.34; Fri, 7 Jun
- 2024 07:56:27 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7611.30; Fri, 7 Jun
+ 2024 08:27:12 +0000
 Received: from SN7PR11MB8264.namprd11.prod.outlook.com
  ([fe80::e92:66a8:56ff:f569]) by SN7PR11MB8264.namprd11.prod.outlook.com
  ([fe80::e92:66a8:56ff:f569%7]) with mapi id 15.20.7633.033; Fri, 7 Jun 2024
- 07:56:26 +0000
-Message-ID: <b3b42523-5dfa-44ba-a50f-e3bc0904fa95@windriver.com>
-Date: Fri, 7 Jun 2024 15:56:10 +0800
+ 08:27:12 +0000
+Message-ID: <5a60b2ad-b60c-4bbf-a1bc-6b56f8e04cee@windriver.com>
+Date: Fri, 7 Jun 2024 16:27:00 +0800
 User-Agent: Mozilla Thunderbird
-Subject: Re: [oe] [meta-oe][PATCH 2/4] uw-imap: fix compile errors of
- incompatible pointer type
+Subject: Re: [oe] [meta-networking][PATCH 4/4] daq: fix incompatible pointer
+ type error
 To: Khem Raj <raj.khem@gmail.com>
 Cc: openembedded-devel@lists.openembedded.org
 References: <20240606162307.972946-1-kai.kang@windriver.com>
- <20240606162307.972946-2-kai.kang@windriver.com>
- <CAMKF1sq_k6mYr5bp5J0kt0UO14wbtKyUeBox3iZkuZ9Vj6ztFg@mail.gmail.com>
+ <20240606162307.972946-4-kai.kang@windriver.com>
+ <CAMKF1soi8GbyLSjoAN5396abY98FoON90f=JSn_doBpvVnQg1w@mail.gmail.com>
 Content-Language: en-US
 From: Kai <kai.kang@windriver.com>
-In-Reply-To: <CAMKF1sq_k6mYr5bp5J0kt0UO14wbtKyUeBox3iZkuZ9Vj6ztFg@mail.gmail.com>
+In-Reply-To: <CAMKF1soi8GbyLSjoAN5396abY98FoON90f=JSn_doBpvVnQg1w@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-X-ClientProxiedBy: TYAPR01CA0097.jpnprd01.prod.outlook.com
- (2603:1096:404:2a::13) To SN7PR11MB8264.namprd11.prod.outlook.com
+X-ClientProxiedBy: TYAPR01CA0036.jpnprd01.prod.outlook.com
+ (2603:1096:404:28::24) To SN7PR11MB8264.namprd11.prod.outlook.com
  (2603:10b6:806:26c::17)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN7PR11MB8264:EE_|CH3PR11MB8520:EE_
-X-MS-Office365-Filtering-Correlation-Id: dd427cc7-3bec-45c3-64bd-08dc86c7553b
+X-MS-TrafficTypeDiagnostic: SN7PR11MB8264:EE_|PH8PR11MB6877:EE_
+X-MS-Office365-Filtering-Correlation-Id: bb019a22-909b-4ae6-2ef9-08dc86cba10f
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230031|366007|1800799015|376005;
+X-Microsoft-Antispam: BCL:0;ARA:13230031|1800799015|366007|376005;
 X-Microsoft-Antispam-Message-Info: 
-	=?utf-8?B?MG5NQS82MVFSZTdOclM0QW9TanB4SHFxbTF5alFYWUp5NzFpT2FPWlA1cHhy?=
- =?utf-8?B?Mlk5bUVINGV1Wkljdk1tcnVBeE5LRFppNjFBdnBWbWxyYTJDeTdBZG1ZWXJZ?=
- =?utf-8?B?MzNXVTBxUDJMdkg4akw0Y3JFYlpJRDBNeHZka2JlRFVBeU43VDR2ZExuK3pv?=
- =?utf-8?B?SWdiejNUZkxmM3VYWVNZZHMyMVNyaUpIS3hPVHlaSzNKNFlQbFBVSnVOZHgz?=
- =?utf-8?B?WGI4N0RYN09JTFYrUDA1UFcyclVQMDZheVJ5Tm5hSjZDMit0WS9kN1haeUho?=
- =?utf-8?B?dEQwa0RoRXUwKzkwQXdJZXdKclZGTDk1SkkxdEV5SHpYaGFwYS9QSkUvZjJU?=
- =?utf-8?B?eDVEaHFWemZBQ2phdXhmTlc1VW13RG5rbVBBdlJHT3J5RFd2c1UyTjErSm5O?=
- =?utf-8?B?UHFwQTdFK1lQaklwOWFDbzBRRDJhZVhLT1ovaHJTazA1dkYrTEN0VHZ6WWJt?=
- =?utf-8?B?MEl1Ymdyc3I1d2ZqalJUbzJXQ1Q0MDdHZUg5c3JaWHljK0UrRVpjRUJDaTAv?=
- =?utf-8?B?NHRuZ2E0MWkrYXZ0QkpjN1dGWElaM0UxcXRuQmxwanExTHNSZGo2VW5BdlJj?=
- =?utf-8?B?QysraERTeHBsY09Da0lRYUhpQzVGdzVHWU1kR3dLRHB3SUYvWHJNTHIvUURi?=
- =?utf-8?B?Mm1CWjNhcEhxNUJZMkFVR2tud21FaG5kU1hTY25lSStWVit3YVgwRi9sWmpn?=
- =?utf-8?B?ejVqMTRWTENiejFQM0pXdU9Qdk15YTluVjNqcXIxcG52bmpNbmZNVzRaMkFZ?=
- =?utf-8?B?SnNwaTlHZFcrSE1VMi96K25LZ0NldjBVS2tWcU1xNDFwOUtLMHdHeld3b1hB?=
- =?utf-8?B?WDBjeVMrdTI4SmZzVytNcnhBZVZ1QTgzbmpmTmUxSXZ0cmZ2akZ0SUV4MTBt?=
- =?utf-8?B?Q0g3WlVlK3d2YXE2VERBbU5kcVU0dnc1QUUzMW5EbEYrMk4rMlBvejRoRUlG?=
- =?utf-8?B?bldxcDJzRlhiR1htQU9lT2p5Sk5lRTFBRkVBTDlCcE8reGZpWFUzUW0yUCt2?=
- =?utf-8?B?ZndXcStkRXBmaXpyVHhsZTlPeUplNkJGWEl1ejhYRURIYWpuNjVtMUFxSTdV?=
- =?utf-8?B?QWV2MXExK1M5RDBDbGVBL1ZlZ1g5UG1WUTVwdmhTSTNsNTRxQ0hZUk5tQWJS?=
- =?utf-8?B?STBtNWlpc204aENuaDBraHdIcDVUcVlFRVlLUnQxREVzUU04cExwc2tRc09y?=
- =?utf-8?B?bTlHM3gxYVZZNXp6ckVUeldtaTFNOHU1QjFybW9kZTNXZ1IwL2hIUi9ZNTh0?=
- =?utf-8?B?NzhoOFhaNlNpdWlwQ0VhdWg1aXltemZXUzl3cjRPWjY0cWtXZklkSCtCV256?=
- =?utf-8?B?cFlwb1F0aEE2WFBsTmtNa3gvWkJpTnhINEw4R2Zmdm5Zbmd5dXhoT3R4T1E4?=
- =?utf-8?B?V3VTVFpheEJyM2tRdk4vK21TSG5DSDNUWS9nT05SOFlXQnRGbnl6eHRHY3Fp?=
- =?utf-8?B?TWErTGd0ZXpyVTR5eEk2cTZaeDB4YXl5dGV5ZHNFb2I3NHkrSzQ1VW1hd1BR?=
- =?utf-8?B?NmVZbTlacHJ5bkE5ckQ4cU9HTXZOQlVFQ1RjalA1NlFkb1d6TjdUVkZZTFZM?=
- =?utf-8?B?REUrZzJ5MlUzbnhWaGJMcmtIWmd1czVEZmNXODdyWUxRZVBDdkRlc21PRjdB?=
- =?utf-8?B?WjlTMEdRRWJ1RVREM0JNT1F2Q254RXBSMXVJK3g2VGpiTVJRU0Z5c0VMTGwz?=
- =?utf-8?B?cE1vOFQ4Vk9hTXg4M21ia2FXQUpydDdJQXRqZzFoQVZsTktQNDBYVUtnPT0=?=
+	=?utf-8?B?M0JnazFPRkpIL1E0azlPQSttL1gvRjNNMmd5ZUhaZjMvTy94WW9yaTZsU04r?=
+ =?utf-8?B?N2p0SjJTQy9ZeWROdHdnREVFTm5pQzRKVCtvUU1hejZIR2tNbnEydU5pakVl?=
+ =?utf-8?B?WXRjQmI1MlNzbElMTmtXV0p5V0NVZ3VKNDE4NWZtVlpySWdUcFNkcFNQMEZ6?=
+ =?utf-8?B?dk9pRVNOeDVIUkcwRU8rajVGOU5UbTRob2c3eFI0ekd3dDI5d0k1OXpraTV5?=
+ =?utf-8?B?U1dyQU5CRklHZk8rNCtRUHFSMjZXSUdLaExYWXdoZXEwMTFISnBqZnlkRTIx?=
+ =?utf-8?B?cTRvUi8rTjJGb25VdDdHblZVVEpTZ1RKL0tPV2wxd1pGdHJQOUE5N3B5Z1J6?=
+ =?utf-8?B?cnlYTkZWMm5MVS8zZVhOaktTeWRxREhPWkhlSzNZQ2RFYVJyOFFqNWlralQv?=
+ =?utf-8?B?bVNmRXZML0RDTWJpTUJoVmZxYi9TaCtLUDA3eWJRM3E2NFhxeG43eDc3Nmgz?=
+ =?utf-8?B?K3VxOVlRQUw5MnRYTjJ6bW03TXFTcERKWUtGcmpvaHlDM01HRzcwTTF1VFZK?=
+ =?utf-8?B?ZytrdGYxN2FvRC9DSWhrTmxSbW5FaDVINkNqcUx2VTlDSUFtNWQ1N001V0Zk?=
+ =?utf-8?B?UnhDMm84WW1GNVNHOVZKOG1QWXpJM0dacEJoWnN0TzNxTFFpcndMTkxXY0pK?=
+ =?utf-8?B?ZGZrWTJCcnZ2SkY5MCsyQXA3S0hmMXpQQUJWb3g4WkV4SnQxcTh0VUdwY0Jn?=
+ =?utf-8?B?N3ExK0ttcjR5RFE0WG13bkhWWExEUnhKdjBqMXFkYkJna3hSWC95OVZPdVJp?=
+ =?utf-8?B?VTFCcnFXeEV1d01ad2VXUG40NVFsNVdXaHRnelM3akluWFhsOWhwUlVTQkFo?=
+ =?utf-8?B?ZXd6eXNZbUZjWU9hZEVMYmp2bW5pSzJMTTdvODU5aGxYdDhIU3VSK3g1OUxV?=
+ =?utf-8?B?ZzVQTmR0b0R4OFV0eGVpWGd4VzA0SzgvWXRydWs4UzVkRkRTYnljUTU2L3FJ?=
+ =?utf-8?B?bmptUnhpY0I0OHBLQXRQUW4zc3J2azBYUXVXUDVKMXlYeHpxUTJNcFBUN1dn?=
+ =?utf-8?B?TjRZNDRTdkhteUV2Yks0UTM4VmJ4cnBLZjRDWmwyTkxFcjQwUlZQQXo0RVQr?=
+ =?utf-8?B?ZklkTFU2VkZyUGpUOWF0RGwxcjg4Y1dLV1VpVTJDcFd5Ymk4N1dpT1VZcnly?=
+ =?utf-8?B?dU1jdHRvRnpzSUpscEE3N3hoU2UvTFNkZW5Bd3VhMEVWbjh2YWRKWXZnVlFs?=
+ =?utf-8?B?YkZlMzYxUTV6QnNoNm52VElLaFZaWno3NHE4bkM5Z3hFWmVzVzF6Z0ZBeU1N?=
+ =?utf-8?B?N2dUaXhEcnl5YlcrNjNXWW83d0VkVFNLdU1BUXpLWkp4dWFrSGdvbWlseWg2?=
+ =?utf-8?B?SUZ6QTdJNTRNSXgvVFFlTDRTNFRpVWFrTEMrTC8wUTBzSTlOZGhia1ZudVMv?=
+ =?utf-8?B?b0J0aG0zN3F3eE44c1k2bWdxQ2I5bWlxYndpUC9vV2h6TTRERTZOOTBLNERQ?=
+ =?utf-8?B?VXM0aC9pQms1bkJGamtVQUVBS3gvbGtXSVN5N1NJZml1R0djeldhL0lZbWpB?=
+ =?utf-8?B?Tlg0UnBQL0ZkWU0wYURVS0tXVG1RVGVsVW8xRDNCQ0ZUZ09RbkhtT083Mlkr?=
+ =?utf-8?B?ejEzMWwxOUpENkZhY29VNGZGN2Y5TXNUZnFOekdlWFNMZzEvWTdhdmhNVG5L?=
+ =?utf-8?B?c3pidC9VMGdPSjV0ZUxuTTNtVGJHUlZxWnNxbC9uTnh4b0NaamMrSG9zVzk1?=
+ =?utf-8?Q?XEo+bk3ypzijLNspQLzB?=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SN7PR11MB8264.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(366007)(1800799015)(376005);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SN7PR11MB8264.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(1800799015)(366007)(376005);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?N2lJaXg5MGY1Y1BwTFZHWjdIaHAxdGJYQTRJUVR2OENnelhtWEIrblUxODNi?=
- =?utf-8?B?UWJvUFc4MkdPTnJYaEhTZzFxaDRDWVhUdGVlU0dqSDVZakgvZEVOUFZWN0tN?=
- =?utf-8?B?Mjgvbk9ubWUvQjR5NkJkNGMyaTlvNm1XRE11K2FMbEx0OXBzMDNUNzVNUFl4?=
- =?utf-8?B?VlFuUWVPVG41Q3pETmdPdElNY2pKMEVHYXpiN0JOc2orVmtvRGZ1eVdaOVFG?=
- =?utf-8?B?UVd1bWovYmV5ZDh6ZDJtZDV5K2thYjlHcUc5clpSWWl4RWQ2NEF5QlpDNDV4?=
- =?utf-8?B?L21QMm5VN1hHYlRscEloNllkSStUbXBHaFZDUTc4Q3gvSUhsNDY0WitDVkZL?=
- =?utf-8?B?NkNONFBieG9FYVIrWTZ0YUhJNTkzdytibjhPSERRR2VrZlRWeUlveGtRVVpj?=
- =?utf-8?B?YTNsTTd4dWJVYVFKUGEzczB4NnlkQW13V3BlaDVJalhMeDFpMW5abmxLMzlz?=
- =?utf-8?B?cWhQbm5NMktrZDlCLzE3T3BycXRhYUgzM0tiMEhvcGJ6YW11eTIxc3U0T3lJ?=
- =?utf-8?B?VEhxQnY2NGVacytYU2JGcDJlRWh2Q055d084Y2x0Z2NRWm0rczlwSUlXOGRZ?=
- =?utf-8?B?akJCV2ZKYk5wamFlR2Y0RyszN0FVVFM3SVc5MGZKa1lueHhkNEhHUGVwSUdE?=
- =?utf-8?B?ZFBoTHZoNkFSczE1WVVDWnhVdjBQT3k4Y000dlhNWTFkYmFpWk5tSjRRWFk4?=
- =?utf-8?B?RU56WU91MG5pY2Z6MzN6UHhsN3JPd1RYZGJkNHA3U29wT1ZWMldqc00rRkd6?=
- =?utf-8?B?VXpocmNhN3cvRVVObGdLMXhxcFlDL1BkUkN4RFJQUDJ6OFVvdlA5TTN1TEor?=
- =?utf-8?B?THlvN0VWZzlLSGVXV3BrUVlydTY2bUJkTDlRdXd5M0xhSWNaUXpEaTdCWnNy?=
- =?utf-8?B?a3VYQkhWN3R1WUxPUllQSm9QckZGaVV3blgycnJvMDJzbXJ3bHI0aFFzRE85?=
- =?utf-8?B?ZHVnb1ZQSTNVU05HU29yVnpsNk56cFpESGp6SEdGU2kxOGc5UWx1dlppUjVK?=
- =?utf-8?B?M2lTRWdhTDNFU3h4NGlWZjdWcTNWS3JucU1vaUpacGwyOGR3R0ZaZU90ZFNr?=
- =?utf-8?B?d2d0M0lUVDRkNkFyRXdxbGVaR0ZMRUpLNk81VkhUbzZyN2tjZ3Zza3A2WGZm?=
- =?utf-8?B?bE9TR1RBSXNCQndKV2RZSFJOT0U4c1VVVllUcVVtc0FHUXNxUnE4VTB1RVZX?=
- =?utf-8?B?Ymtoenc4SUJLRVoxMHZ6UUtLYVpmYXJiaS9PK2NEbjlOVVZPTFBSWnpvL3Jj?=
- =?utf-8?B?ZFY2S2VXdXBYVlZlVFVFZjBFMHNyRDI4VklDSU5KdlNaMHlBZ2RnM2xMbUU5?=
- =?utf-8?B?c3RsR3ZpeEgzNEtRUEZmaklid1p6dHJlcTNmSEpVNnpHZ1BuUElxYnZWd3lK?=
- =?utf-8?B?Qkd4YUVwUE9jdktDMW9mYy9UZkJQT3JUY1VQRVlRQ29nV0RFQmV2dm1xSURm?=
- =?utf-8?B?V2VweWE5OGsvMXRkYmFyekxYbk5pbXVNcW53anliZDZaZThNOFZ4RS9NU3JF?=
- =?utf-8?B?QzZjaVVEdFpYWDVrWFp2elBSTFFYcm5mR0h6VmVXdVBhUWM4dG54Ny9zbWJy?=
- =?utf-8?B?cy9PTmhNNVNLdmZyN0EvaFowOHFLWkhJOXk4aTIvNE9MWmVKWSttVFlBbFZW?=
- =?utf-8?B?ZkMrdTU1S0wrUlQ3RTFSa0Nsd05GVXE2blJqZ29QVGJvOERmcjdsNTNOT0pI?=
- =?utf-8?B?OVd6cks5aGRaTjk1cE9Lbm1HZGlFMk9GektJQ0ZnTXcvMDU2c0lXNnByMmRo?=
- =?utf-8?B?c0hJUnp2eTdiZTErSXJYc09pRWRBS20zenRucUl0VTNhSDNoamxVY3BDTUxH?=
- =?utf-8?B?L0VObm0xSm5HMVcwSVVXMmU3UW5NYkIrdnJLWEVGMHpWWG9peHBodks4UGVQ?=
- =?utf-8?B?YzlDc0h3TWoyVkE3VUg4QUZBcnM5eUd3UGZvMDZLbmxUWkw0UmNkNDJNZmJp?=
- =?utf-8?B?d2VxUFhIcUNqd2dzemJ0Vk4xZUFSNWpacC9NckNxTEwzV2NZdVRsbWlMYkRn?=
- =?utf-8?B?M2pvYXB5TTF3M3NEd1ZjMHF2ZUVmdTBVdjljZGVELy9oc05QZURPTFhNeTJI?=
- =?utf-8?B?bFJqUlZYRkttdzg5ZzN2T0ZwdVBodkpKamQyMlNvRENIOWFXOWlaRUQxVDlR?=
- =?utf-8?Q?GBKVhgPOVCYIW0+Vd45XoqJey?=
+	=?utf-8?B?RElnUGtvL3hFanJlenllb25uWVVSU0VQUmNQL0NVcFJ1YkRuMVAzMEtPT2NW?=
+ =?utf-8?B?a2p3ZXhQZlViRS9PN2l4U3lhRzJUUzV0K3RpamtNckp2SXd1d2NYSm5DS256?=
+ =?utf-8?B?WVVycS9uTSs1SWszcmVQR2tCb3dEMngzR2plRHFOcStrR1lycWwyNWtNalVB?=
+ =?utf-8?B?TlFQbzNpenYrNGdielEydGdSUzYrSktDenZvWmFXckhvNzc5VmxobmRhNFlZ?=
+ =?utf-8?B?elhORXVoeVBhQmtyZE5pWkVTdDhiTDRFUnNpL2EyUkt5N2pDMEJ3QXVBdFRD?=
+ =?utf-8?B?Umk2K1F5MExTbVpuT3R5cUIzNkYyREFta0w2RzdreG5mQXRvaTZQdUpJK0RN?=
+ =?utf-8?B?T25OS2lXS0dSd0g2aVFwWmQ4Yy80RnhkVEphL25yOHlaOFBMOHFqVHJjaDRM?=
+ =?utf-8?B?cElteFBDdVFaTDhpT3ptN3VzWmVFZWJ0d29MVDZZWng4d3M4TFhtdWpTcGw4?=
+ =?utf-8?B?bng5RXlJWGpaVkpPczhGZU1lTnd6ZzBnRU5HYUpZaFEvN3BTOEdaT3lMbWtx?=
+ =?utf-8?B?bUNRSURZbTI1Zy9zeU5ZSWJKL09GT0lqa3Rla1VUZG1GMzd6ZEdWRkJoLzBJ?=
+ =?utf-8?B?VjZsdDJJS1lsdGF3YmEyU3l2bjhhTDhLOW9udGc0b1MyT0x0ZFQyczdGTkdN?=
+ =?utf-8?B?NXUyVkd3dFpCaW00OVRaMXZTdHMzbHpKUWhBOC9UUldzVEp1aDRGTUlmMVpE?=
+ =?utf-8?B?b0ZHOEVac3lJZjNWYWxEMEdEUnJpTXpBV0JPYXNqLzNHcFdDZ25pRjJ2b1B4?=
+ =?utf-8?B?QlV1eS9zSGdLUTc5OGtzbDZEL1NDdHBGWEVJKzlWYzdFMUljZUF5K1didlAr?=
+ =?utf-8?B?N1BNei84M1lLR2hLQkdDUmJQYWduUnBucXNXcTBGRUFYd2o4UTFNZTg5UE9t?=
+ =?utf-8?B?bjJBdmlodGtOLzlqWkhqaTlnbXZSa1Z5T0hRcHBoYkhUQXFYNkJpYWlwUXhk?=
+ =?utf-8?B?MDFqWWllUHN5SkpmT25NYzBmcmFXMm42UWw5SUVkaGEzcXJxV3ZkUU5NMHl1?=
+ =?utf-8?B?VW5EZUVjM1FNTFIycTEyTndGQjhkKzJGWk5nVmVVTDR5dHJRWE52Sk9haXZZ?=
+ =?utf-8?B?Tk10T3cwS1RFcnByY1BPMk01WXllYnc3OGUwVmpDTngzL1AzS0crSjNlT3dL?=
+ =?utf-8?B?aFZyVzZUMUp0ekNrczVsL2IvdlZteGRaLzhuZDltRjZ6VmplcUk0ZzJzYU40?=
+ =?utf-8?B?ZmYvaitwTFkrNFU0aklmdEdpMGM2Q1pVMzBBRGtDV2cyT2Mrd3BQSkplbStk?=
+ =?utf-8?B?NktITmJyUGhQSlRJVklCc2RkdFJ5T0d2bTg3aHJ1VmtEZlpCcXZidkh1K3Nw?=
+ =?utf-8?B?UzJpblJEM2QrUy9ZRm5aMkg0bjlIRTk0NFpqMUVBUGYyZnRmWjBDUVRFVUhs?=
+ =?utf-8?B?LzVZRU5EaDIvN1l2YUZqRnZRcHFyQ1hBcnNHN2xoellOaDRqcXdpL0R6QU1N?=
+ =?utf-8?B?Q1dURVVNR3JYT2tIMy9vZWpVMEJzZ0RjOTQrakNwNTBFVkVIM3o2Qko0cW4z?=
+ =?utf-8?B?UFdFRlBwZFdlT0QrZWhMdk1DbmNzbWE1dFRPSzlNblRzZlQzOFRvSFBPZWw0?=
+ =?utf-8?B?YnVFbmpvdVdRU3IrcERiaDg3MjFqVXI2cys2emdiM0FDR1I5a0FDUzJKVUZT?=
+ =?utf-8?B?QXZEbExmOVAxOEhNWGN6dzhYR1pwQmJoWE9HUWZNcWMyRjgralg5SVVic1RT?=
+ =?utf-8?B?SmI2MFNNWm90eGEyVUZFZ1pvQkpyVGVvekpBL2FqQTJidUZraEQveUV5QThH?=
+ =?utf-8?B?UnNTejJMUWs2YzRQQnRHUVhRM3FFRzlvdFFqQ0RvSDJ2enFGSGY5S1Fnai9E?=
+ =?utf-8?B?QzNJMUh0dko3UFA2YUhyS2lwdEtRSitiMndNNDE4bTlmUEphT1dhaXp1UEJm?=
+ =?utf-8?B?Nm5ZaE9EeHRxZG5xVVlwcDh1cEYzWmxhbXZ4V3NpZnJtTUdzZnhFVVY3Rys2?=
+ =?utf-8?B?ZXdSaHZwbUVzczZTak9hS2xkU1ozdkFOZWw2RTZuL2pvY0xId1cxWGd5VVJ1?=
+ =?utf-8?B?cVBONzZnU3k1VU5OTGNZQWRUZ3BhM3cySDYyUWg1bVlyTlV6VzNPVm1rcGdB?=
+ =?utf-8?B?ME9kMm1jcVhqMTlYT1gyWWlXMEtlQlkrdmdJQWJPV3Y3c1RmZnpzZlJKa1d1?=
+ =?utf-8?Q?AncFAZGRWNl+nEIAxPjioYqZA?=
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: dd427cc7-3bec-45c3-64bd-08dc86c7553b
+X-MS-Exchange-CrossTenant-Network-Message-Id: bb019a22-909b-4ae6-2ef9-08dc86cba10f
 X-MS-Exchange-CrossTenant-AuthSource: SN7PR11MB8264.namprd11.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jun 2024 07:56:26.8908
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jun 2024 08:27:12.0419
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: qNVeKaeYLxwRmxjWkKO4RZ/1UuF/dn1BgguWCVQmxAiXhgEIjrl90s+cBI1lQyvJ8y5vUu0SpT8J74C51GuxEQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR11MB8520
-X-Proofpoint-GUID: YmLBrpQQkSlKCAQEbEpUsBQYZDHIGh9P
-X-Proofpoint-ORIG-GUID: 8bInMCIDkc3Vecnpws0hp19G36v4JcnE
+X-MS-Exchange-CrossTenant-UserPrincipalName: iChmAIcHCIpjcKef4RFY61QI8xkT0Xrs+vtazScwU1ca6QWPxsFa0LFBR+T95Hh5SuPRuREl3HV3bUVpTEh8Ig==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR11MB6877
+X-Proofpoint-GUID: AWm2z4hJC0eZTQC1FLQOXNpUQuprY4vn
+X-Proofpoint-ORIG-GUID: CZm4zd1kNpDmaDrfVZNTLcENZHTEX3pw
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
  definitions=2024-06-07_02,2024-06-06_02,2024-05-17_01
@@ -157,527 +157,116 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malware
  mlxlogscore=999 priorityscore=1501 spamscore=0 phishscore=0
  lowpriorityscore=0 bulkscore=0 mlxscore=0 clxscore=1015 adultscore=0
  suspectscore=0 impostorscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.21.0-2405170001 definitions=main-2406070055
+ scancount=1 engine=8.21.0-2405170001 definitions=main-2406070059
 Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 4574jHKn001757
+X-MIME-Autoconverted: from 8bit to quoted-printable by mx0a-0064b401.pphosted.com id 4574jHLg001757
 List-Id: <openembedded-devel.lists.openembedded.org>
 X-Webhook-Received: from li982-79.members.linode.com [45.33.32.79] by
  aws-us-west-2-korg-lkml-1.web.codeaurora.org with HTTPS for
- <openembedded-devel@lists.openembedded.org>; Fri, 07 Jun 2024 07:56:38 -0000
-X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110762
+ <openembedded-devel@lists.openembedded.org>; Fri, 07 Jun 2024 08:27:28 -0000
+X-Groupsio-URL: https://lists.openembedded.org/g/openembedded-devel/message/110763
 
-On 6/7/24 00:29, Khem Raj wrote:
-> this patch is good cleanup patch please submit it upstream as well.
-
-It seems uw-imap project has been stalled and no upstream to submit.=20
-Other uw-imap
-patches have 'Pending' status too.
-
-Regards,
-Kai
-
->
+On 6/7/24 00:32, Khem Raj wrote:
 > On Thu, Jun 6, 2024 at 9:23=E2=80=AFAM Kai Kang via lists.openembedded.=
 org
 > <kai.kang=3Dwindriver.com@lists.openembedded.org> wrote:
 >> From: Kai Kang <kai.kang@windriver.com>
 >>
->> Fix compile errors when gcc option '-Wincompatible-pointer-types' set:
+>> Fix incompatible pointer type error for daq:
 >>
->> mx.c: In function 'mx_setdate':
->> mx.c:1286:15: error: passing argument 2 of 'utime' from incompatible p=
-ointer type [-Wincompatible-pointer-types]
->>   1286 |   utime (file,tp);              /* set the times */
->>        |               ^~
->>        |               |
->>        |               time_t * {aka long int *}
+>> | ../../daq-2.0.7/os-daq-modules/daq_nfq.c: In function 'SetPktHdr':
+>> | ../../daq-2.0.7/os-daq-modules/daq_nfq.c:394:37: error: passing argu=
+ment 2 of 'nfq_get_payload' from incompatible pointer type [-Wincompatibl=
+e-pointer-types]
+>> |   394 |     int len =3D nfq_get_payload(nfad, (char**)pkt);
+>> |       |                                     ^~~~~~~~~~~
+>> |       |                                     |
+>> |       |                                     char **
 >>
 >> Signed-off-by: Kai Kang <kai.kang@windriver.com>
 >> ---
->>   ...-imap-fix-incompatible-pointer-types.patch | 354 ++++++++++++++++=
+>>   .../recipes-connectivity/daq/daq_2.0.7.bb     |  1 +
+>>   ...-fix-incompatible-pointer-type-error.patch | 30 +++++++++++++++++=
 ++
->>   .../recipes-devtools/uw-imap/uw-imap_2007f.bb |   1 +
->>   2 files changed, 355 insertions(+)
->>   create mode 100644 meta-oe/recipes-devtools/uw-imap/uw-imap/uw-imap-=
-fix-incompatible-pointer-types.patch
+>>   2 files changed, 31 insertions(+)
+>>   create mode 100644 meta-networking/recipes-connectivity/daq/files/da=
+q-fix-incompatible-pointer-type-error.patch
 >>
->> diff --git a/meta-oe/recipes-devtools/uw-imap/uw-imap/uw-imap-fix-inco=
-mpatible-pointer-types.patch b/meta-oe/recipes-devtools/uw-imap/uw-imap/u=
-w-imap-fix-incompatible-pointer-types.patch
+>> diff --git a/meta-networking/recipes-connectivity/daq/daq_2.0.7.bb b/m=
+eta-networking/recipes-connectivity/daq/daq_2.0.7.bb
+>> index 66ad83f71..8cb4c04fa 100644
+>> --- a/meta-networking/recipes-connectivity/daq/daq_2.0.7.bb
+>> +++ b/meta-networking/recipes-connectivity/daq/daq_2.0.7.bb
+>> @@ -11,6 +11,7 @@ DEPENDS =3D "libpcap libpcre libdnet bison-native li=
+bnetfilter-queue"
+>>   SRC_URI =3D "http://fossies.org/linux/misc/daq-${PV}.tar.gz \
+>>              file://disable-run-test-program-while-cross-compiling.pat=
+ch \
+>>              file://0001-correct-the-location-of-unistd.h.patch \
+>> +           file://daq-fix-incompatible-pointer-type-error.patch \
+>>              "
+>>   SRC_URI[sha256sum] =3D "bdc4e5a24d1ea492c39ee213a63c55466a2e8114b6a9=
+abed609927ae13a7705e"
+>>   # these 2 create undeclared dependency on libdnet and libnetfilter-q=
+ueue from meta-networking
+>> diff --git a/meta-networking/recipes-connectivity/daq/files/daq-fix-in=
+compatible-pointer-type-error.patch b/meta-networking/recipes-connectivit=
+y/daq/files/daq-fix-incompatible-pointer-type-error.patch
 >> new file mode 100644
->> index 000000000..7146fbbeb
+>> index 000000000..5a02d1615
 >> --- /dev/null
->> +++ b/meta-oe/recipes-devtools/uw-imap/uw-imap/uw-imap-fix-incompatibl=
-e-pointer-types.patch
->> @@ -0,0 +1,354 @@
->> +Fix compile errors when gcc option '-Wincompatible-pointer-types' set=
-:
+>> +++ b/meta-networking/recipes-connectivity/daq/files/daq-fix-incompati=
+ble-pointer-type-error.patch
+>> @@ -0,0 +1,30 @@
+>> +Fix daq incompatible pointer type error:
 >> +
->> +mx.c: In function 'mx_setdate':
->> +mx.c:1286:15: error: passing argument 2 of 'utime' from incompatible =
-pointer type [-Wincompatible-pointer-types]
->> + 1286 |   utime (file,tp);              /* set the times */
->> +      |               ^~
->> +      |               |
->> +      |               time_t * {aka long int *}
->> +
+>> +| ../../daq-2.0.7/os-daq-modules/daq_nfq.c: In function 'SetPktHdr':
+>> +| ../../daq-2.0.7/os-daq-modules/daq_nfq.c:394:37: error: passing arg=
+ument 2 of 'nfq_get_payload' from incompatible pointer type [-Wincompatib=
+le-pointer-types]
+>> +|   394 |     int len =3D nfq_get_payload(nfad, (char**)pkt);
+>> +|       |                                     ^~~~~~~~~~~
+>> +|       |                                     |
+>> +|       |                                     char **
 >> +
 >> +Upstream-Status: Pending
 >> +
+> please submit upstream as well
+It seems daq belongs to snort2 which I don't find any git repo for it.
+There are git repos of snort3 on github but none for snort2.
+
+Regards,
+Kai
+
+>
 >> +Signed-off-by: Kai Kang <kai.kang@windriver.com>
 >> +
 >> +---
->> + src/osdep/unix/mbx.c       |  12 ++++++------
->> + src/osdep/unix/mh.c        |   2 +-
->> + src/osdep/unix/mmdf.c      |  10 +++++-----
->> + src/osdep/unix/mtx.c       |  16 ++++++++--------
->> + src/osdep/unix/mx.c        |   2 +-
->> + src/osdep/unix/tenex.c     |  16 ++++++++--------
->> + src/osdep/unix/unix.c      |  10 +++++-----
->> + 7 files changed, 34 insertions(+), 34 deletions(-)
+>> + os-daq-modules/daq_nfq.c | 2 +-
+>> + 1 file changed, 1 insertion(+), 1 deletion(-)
 >> +
->> +diff --git a/src/osdep/unix/mbx.c b/src/osdep/unix/mbx.c
->> +index c8a45a5..0a587fe 100644
->> +--- a/src/osdep/unix/mbx.c
->> ++++ b/src/osdep/unix/mbx.c
->> +@@ -302,7 +302,7 @@ int mbx_isvalid (MAILSTREAM **stream,char *name,c=
-har *tmp,int *ld,char *lock,
->> +     if (sbuf.st_ctime > sbuf.st_atime) {
->> +       tp[0] =3D sbuf.st_atime;  /* preserve atime and mtime */
->> +       tp[1] =3D sbuf.st_mtime;
->> +-      utime (tmp,tp);         /* set the times */
->> ++      utime (tmp, (const struct utimbuf *)tp);                /* set=
- the times */
->> +     }
->> +   }
->> +                               /* in case INBOX but not mbx format */
->> +@@ -776,7 +776,7 @@ void mbx_flag (MAILSTREAM *stream,char *sequence,=
-char *flag,long flags)
->> +        stream->user_flags[LOCAL->ffuserflag]) || (oldpid !=3D LOCAL-=
->lastpid))
->> +       mbx_update_header (stream);
->> +     tp[0] =3D time (0);         /* make sure read comes after all th=
-at */
->> +-    utime (stream->mailbox,tp);
->> ++    utime (stream->mailbox, (const struct utimbuf *)tp);
->> +   }
->> +   if (LOCAL->ld >=3D 0) {               /* unlock now */
->> +     unlockfd (LOCAL->ld,LOCAL->lock);
->> +@@ -1075,7 +1075,7 @@ long mbx_copy (MAILSTREAM *stream,char *sequenc=
-e,char *mailbox,long options)
->> +                               /* else preserve \Marked status */
->> +   else tp[0] =3D (sbuf.st_ctime > sbuf.st_atime) ? sbuf.st_atime : t=
-ime(0);
->> +   tp[1] =3D sbuf.st_mtime;      /* preserve mtime */
->> +-  utime (file,tp);            /* set the times */
->> ++  utime (file, (const struct utimbuf *)tp);           /* set the tim=
-es */
->> +   close (fd);                 /* close the file */
->> +   MM_NOCRITICAL (stream);     /* release critical */
->> +   unlockfd (ld,lock);         /* release exclusive parse/append perm=
-ission */
->> +@@ -1213,7 +1213,7 @@ long mbx_append (MAILSTREAM *stream,char *mailb=
-ox,append_t af,void *data)
->> +                               /* else preserve \Marked status */
->> +     else tp[0] =3D (sbuf.st_ctime > sbuf.st_atime) ? sbuf.st_atime :=
- time(0);
->> +     tp[1] =3D sbuf.st_mtime;    /* preserve mtime */
->> +-    utime (file,tp);          /* set the times */
->> ++    utime (file, (const struct utimbuf *)tp);         /* set the tim=
-es */
->> +     fclose (df);              /* close the file */
->> +     MM_NOCRITICAL (dstream);  /* release critical */
->> +   }
->> +@@ -1446,7 +1446,7 @@ long mbx_parse (MAILSTREAM *stream)
->> +     time_t tp[2];
->> +     tp[0] =3D time (0);
->> +     tp[1] =3D LOCAL->filetime;
->> +-    utime (stream->mailbox,tp);
->> ++    utime (stream->mailbox, (const struct utimbuf *)tp);
->> +   }
->> +   stream->silent =3D silent;    /* can pass up events now */
->> +   mail_exists (stream,nmsgs); /* notify upper level of new mailbox s=
-ize */
->> +@@ -1814,7 +1814,7 @@ unsigned long mbx_rewrite (MAILSTREAM *stream,u=
-nsigned long *reclaimed,
->> +   fstat (LOCAL->fd,&sbuf);    /* get new write time */
->> +   tp[1] =3D LOCAL->filetime =3D sbuf.st_mtime;
->> +   tp[0] =3D time (0);           /* reset atime to now */
->> +-  utime (stream->mailbox,tp);
->> ++  utime (stream->mailbox, (const struct utimbuf *)tp);
->> +   unlockfd (ld,lock);         /* release exclusive parse/append perm=
-ission */
->> +                               /* notify upper level of new mailbox s=
-ize */
->> +   mail_exists (stream,stream->nmsgs);
->> +diff --git a/src/osdep/unix/mh.c b/src/osdep/unix/mh.c
->> +index 9264624..26f3539 100644
->> +--- a/src/osdep/unix/mh.c
->> ++++ b/src/osdep/unix/mh.c
->> +@@ -1279,5 +1279,5 @@ void mh_setdate (char *file,MESSAGECACHE *elt)
->> +   time_t tp[2];
->> +   tp[0] =3D time (0);           /* atime is now */
->> +   tp[1] =3D mail_longdate (elt);        /* modification time */
->> +-  utime (file,tp);            /* set the times */
->> ++  utime (file, (const struct utimbuf *)tp);           /* set the tim=
-es */
->> + }
->> +diff --git a/src/osdep/unix/mmdf.c b/src/osdep/unix/mmdf.c
->> +index e962434..c0adbee 100644
->> +--- a/src/osdep/unix/mmdf.c
->> ++++ b/src/osdep/unix/mmdf.c
->> +@@ -379,7 +379,7 @@ long mmdf_isvalid (char *name,char *tmp)
->> +       if ((sbuf.st_ctime > sbuf.st_atime) || (sbuf.st_mtime > sbuf.s=
-t_atime)) {
->> +       tp[0] =3D sbuf.st_atime;  /* preserve atime and mtime */
->> +       tp[1] =3D sbuf.st_mtime;
->> +-      utime (file,tp);        /* set the times */
->> ++      utime (file, (const struct utimbuf *)tp);       /* set the tim=
-es */
->> +       }
->> +     }
->> +   }
->> +@@ -1131,7 +1131,7 @@ long mmdf_copy (MAILSTREAM *stream,char *sequen=
-ce,char *mailbox,long options)
->> +   else tp[0] =3D                        /* else preserve \Marked sta=
-tus */
->> +        ((sbuf.st_ctime > sbuf.st_atime) || (sbuf.st_mtime > sbuf.st_=
-atime)) ?
->> +        sbuf.st_atime : tp[1];
->> +-  utime (file,tp);            /* set the times */
->> ++  utime (file, (const struct utimbuf *)tp);           /* set the tim=
-es */
->> +   mmdf_unlock (fd,NIL,&lock); /* unlock and close mailbox */
->> +   if (tstream) {              /* update last UID if we can */
->> +     MMDFLOCAL *local =3D (MMDFLOCAL *) tstream->local;
->> +@@ -1292,7 +1292,7 @@ long mmdf_append (MAILSTREAM *stream,char *mail=
-box,append_t af,void *data)
->> +     ret =3D NIL;                        /* return error */
->> +   }
->> +   else tp[0] =3D tp[1] - 1;     /* set atime to now-1 if successful =
-copy */
->> +-  utime (file,tp);            /* set the times */
->> ++  utime (file, (const struct utimbuf *)tp);           /* set the tim=
-es */
->> +   fclose (sf);                        /* done with scratch file */
->> +                               /* force UIDVALIDITY assignment now */
->> +   if (tstream && !tstream->uid_validity) tstream->uid_validity =3D t=
-ime (0);
->> +@@ -1550,7 +1550,7 @@ void mmdf_unlock (int fd,MAILSTREAM *stream,DOT=
-LOCK *lock)
->> +     }
->> +     else now =3D 0;             /* no time change needed */
->> +                               /* set the times, note change */
->> +-    if (now && !utime (stream->mailbox,tp)) LOCAL->filetime =3D tp[1=
-];
->> ++    if (now && !utime (stream->mailbox, (const struct utimbuf *)tp))=
- LOCAL->filetime =3D tp[1];
->> +   }
->> +   flock (fd,LOCK_UN);         /* release flock'ers */
->> +   if (!stream) close (fd);    /* close the file if no stream */
->> +@@ -2393,7 +2393,7 @@ long mmdf_rewrite (MAILSTREAM *stream,unsigned =
-long *nexp,DOTLOCK *lock,
->> +                               /* set atime to now, mtime a second ea=
-rlier */
->> +     tp[1] =3D (tp[0] =3D time (0)) - 1;
->> +                               /* set the times, note change */
->> +-    if (!utime (stream->mailbox,tp)) LOCAL->filetime =3D tp[1];
->> ++    if (!utime (stream->mailbox, (const struct utimbuf *)tp)) LOCAL-=
->filetime =3D tp[1];
->> +     close (LOCAL->fd);                /* close and reopen file */
->> +     if ((LOCAL->fd =3D open (stream->mailbox,O_RDWR,
->> +                          (long) mail_parameters (NIL,GET_MBXPROTECTI=
-ON,NIL)))
->> +diff --git a/src/osdep/unix/mtx.c b/src/osdep/unix/mtx.c
->> +index 8e6f76e..f64142b 100644
->> +--- a/src/osdep/unix/mtx.c
->> ++++ b/src/osdep/unix/mtx.c
->> +@@ -196,7 +196,7 @@ int mtx_isvalid (char *name,char *tmp)
->> +       if (sbuf.st_ctime > sbuf.st_atime) {
->> +       tp[0] =3D sbuf.st_atime;  /* preserve atime and mtime */
->> +       tp[1] =3D sbuf.st_mtime;
->> +-      utime (file,tp);        /* set the times */
->> ++      utime (file, (const struct utimbuf *)tp);       /* set the tim=
-es */
->> +       }
->> +     }
->> +   }
->> +@@ -565,7 +565,7 @@ void mtx_flag (MAILSTREAM *stream,char *sequence,=
-char *flag,long flags)
->> +     fstat (LOCAL->fd,&sbuf);  /* get current write time */
->> +     tp[1] =3D LOCAL->filetime =3D sbuf.st_mtime;
->> +     tp[0] =3D time (0);         /* make sure read comes after all th=
-at */
->> +-    utime (stream->mailbox,tp);
->> ++    utime (stream->mailbox, (const struct utimbuf *)tp);
->> +   }
->> + }
+>> +diff --git a/os-daq-modules/daq_nfq.c b/os-daq-modules/daq_nfq.c
+>> +index 4de94b6..a6de2f3 100644
+>> +--- a/os-daq-modules/daq_nfq.c
+>> ++++ b/os-daq-modules/daq_nfq.c
+>> +@@ -391,7 +391,7 @@ static inline int SetPktHdr (
+>> +     DAQ_PktHdr_t* hdr,
+>> +     uint8_t** pkt
+>> + ) {
+>> +-    int len =3D nfq_get_payload(nfad, (char**)pkt);
+>> ++    int len =3D nfq_get_payload(nfad, (unsigned char**)pkt);
 >> +
->> +@@ -834,7 +834,7 @@ long mtx_expunge (MAILSTREAM *stream,char *sequen=
-ce,long options)
->> +       fstat (LOCAL->fd,&sbuf);        /* get new write time */
->> +       tp[1] =3D LOCAL->filetime =3D sbuf.st_mtime;
->> +       tp[0] =3D time (0);               /* reset atime to now */
->> +-      utime (stream->mailbox,tp);
->> ++      utime (stream->mailbox, (const struct utimbuf *)tp);
->> +       MM_NOCRITICAL (stream); /* release critical */
->> +                               /* notify upper level of new mailbox s=
-ize */
->> +       mail_exists (stream,stream->nmsgs);
->> +@@ -929,7 +929,7 @@ long mtx_copy (MAILSTREAM *stream,char *sequence,=
-char *mailbox,long options)
->> +                               /* else preserve \Marked status */
->> +   else tp[0] =3D (sbuf.st_ctime > sbuf.st_atime) ? sbuf.st_atime : t=
-ime(0);
->> +   tp[1] =3D sbuf.st_mtime;      /* preserve mtime */
->> +-  utime (file,tp);            /* set the times */
->> ++  utime (file, (const struct utimbuf *)tp);           /* set the tim=
-es */
->> +   close (fd);                 /* close the file */
->> +   unlockfd (ld,lock);         /* release exclusive parse/append perm=
-ission */
->> +   MM_NOCRITICAL (stream);     /* release critical */
->> +@@ -946,7 +946,7 @@ long mtx_copy (MAILSTREAM *stream,char *sequence,=
-char *mailbox,long options)
->> +       fstat (LOCAL->fd,&sbuf);        /* get current write time */
->> +       tp[1] =3D LOCAL->filetime =3D sbuf.st_mtime;
->> +       tp[0] =3D time (0);               /* make sure atime remains g=
-reater */
->> +-      utime (stream->mailbox,tp);
->> ++      utime (stream->mailbox, (const struct utimbuf *)tp);
->> +     }
->> +   }
->> +   if (ret && mail_parameters (NIL,GET_COPYUID,NIL))
->> +@@ -1062,7 +1062,7 @@ long mtx_append (MAILSTREAM *stream,char *mailb=
-ox,append_t af,void *data)
->> +                               /* else preserve \Marked status */
->> +   else tp[0] =3D (sbuf.st_ctime > sbuf.st_atime) ? sbuf.st_atime : t=
-ime(0);
->> +   tp[1] =3D sbuf.st_mtime;      /* preserve mtime */
->> +-  utime (file,tp);            /* set the times */
->> ++  utime (file, (const struct utimbuf *)tp);           /* set the tim=
-es */
->> +   fclose (df);                        /* close the file */
->> +   unlockfd (ld,lock);         /* release exclusive parse/append perm=
-ission */
->> +   MM_NOCRITICAL (stream);     /* release critical */
->> +@@ -1212,7 +1212,7 @@ long mtx_parse (MAILSTREAM *stream)
->> +     time_t tp[2];
->> +     tp[0] =3D time (0);
->> +     tp[1] =3D LOCAL->filetime;
->> +-    utime (stream->mailbox,tp);
->> ++    utime (stream->mailbox, (const struct utimbuf *)tp);
->> +   }
->> +   stream->silent =3D silent;    /* can pass up events now */
->> +   mail_exists (stream,nmsgs); /* notify upper level of new mailbox s=
-ize */
->> +@@ -1312,7 +1312,7 @@ void mtx_update_status (MAILSTREAM *stream,unsi=
-gned long msgno,long syncflag)
->> +       fstat (LOCAL->fd,&sbuf);        /* get new write time */
->> +       tp[1] =3D LOCAL->filetime =3D sbuf.st_mtime;
->> +       tp[0] =3D time (0);               /* make sure read is later *=
-/
->> +-      utime (stream->mailbox,tp);
->> ++      utime (stream->mailbox, (const struct utimbuf *)tp);
->> +     }
->> +   }
->> + }
->> +diff --git a/src/osdep/unix/mx.c b/src/osdep/unix/mx.c
->> +index b5c5adf..4146409 100644
->> +--- a/src/osdep/unix/mx.c
->> ++++ b/src/osdep/unix/mx.c
->> +@@ -1283,5 +1283,5 @@ void mx_setdate (char *file,MESSAGECACHE *elt)
->> +   time_t tp[2];
->> +   tp[0] =3D time (0);           /* atime is now */
->> +   tp[1] =3D mail_longdate (elt);        /* modification time */
->> +-  utime (file,tp);            /* set the times */
->> ++  utime (file, (const struct utimbuf *)tp);           /* set the tim=
-es */
->> + }
->> +diff --git a/src/osdep/unix/tenex.c b/src/osdep/unix/tenex.c
->> +index eee61fb..622da61 100644
->> +--- a/src/osdep/unix/tenex.c
->> ++++ b/src/osdep/unix/tenex.c
->> +@@ -203,7 +203,7 @@ int tenex_isvalid (char *name,char *tmp)
->> +       if (sbuf.st_ctime > sbuf.st_atime) {
->> +       tp[0] =3D sbuf.st_atime;  /* preserve atime and mtime */
->> +       tp[1] =3D sbuf.st_mtime;
->> +-      utime (file,tp);        /* set the times */
->> ++      utime (file, (const struct utimbuf *)tp);       /* set the tim=
-es */
->> +       }
->> +     }
->> +   }
->> +@@ -654,7 +654,7 @@ void tenex_flag (MAILSTREAM *stream,char *sequenc=
-e,char *flag,long flags)
->> +     fstat (LOCAL->fd,&sbuf);  /* get current write time */
->> +     tp[1] =3D LOCAL->filetime =3D sbuf.st_mtime;
->> +     tp[0] =3D time (0);         /* make sure read comes after all th=
-at */
->> +-    utime (stream->mailbox,tp);
->> ++    utime (stream->mailbox, (const struct utimbuf *)tp);
->> +   }
->> + }
->> +
->> +@@ -924,7 +924,7 @@ long tenex_expunge (MAILSTREAM *stream,char *sequ=
-ence,long options)
->> +       fstat (LOCAL->fd,&sbuf);        /* get new write time */
->> +       tp[1] =3D LOCAL->filetime =3D sbuf.st_mtime;
->> +       tp[0] =3D time (0);               /* reset atime to now */
->> +-      utime (stream->mailbox,tp);
->> ++      utime (stream->mailbox, (const struct utimbuf *)tp);
->> +       MM_NOCRITICAL (stream); /* release critical */
->> +                               /* notify upper level of new mailbox s=
-ize */
->> +       mail_exists (stream,stream->nmsgs);
->> +@@ -1019,7 +1019,7 @@ long tenex_copy (MAILSTREAM *stream,char *seque=
-nce,char *mailbox,long options)
->> +                               /* else preserve \Marked status */
->> +   else tp[0] =3D (sbuf.st_ctime > sbuf.st_atime) ? sbuf.st_atime : t=
-ime(0);
->> +   tp[1] =3D sbuf.st_mtime;      /* preserve mtime */
->> +-  utime (file,tp);            /* set the times */
->> ++  utime (file, (const struct utimbuf *)tp);           /* set the tim=
-es */
->> +   close (fd);                 /* close the file */
->> +   unlockfd (ld,lock);         /* release exclusive parse/append perm=
-ission */
->> +   MM_NOCRITICAL (stream);     /* release critical */
->> +@@ -1036,7 +1036,7 @@ long tenex_copy (MAILSTREAM *stream,char *seque=
-nce,char *mailbox,long options)
->> +       fstat (LOCAL->fd,&sbuf);        /* get current write time */
->> +       tp[1] =3D LOCAL->filetime =3D sbuf.st_mtime;
->> +       tp[0] =3D time (0);               /* make sure atime remains g=
-reater */
->> +-      utime (stream->mailbox,tp);
->> ++      utime (stream->mailbox, (const struct utimbuf *)tp);
->> +     }
->> +   }
->> +   if (ret && mail_parameters (NIL,GET_COPYUID,NIL))
->> +@@ -1159,7 +1159,7 @@ long tenex_append (MAILSTREAM *stream,char *mai=
-lbox,append_t af,void *data)
->> +                               /* else preserve \Marked status */
->> +   else tp[0] =3D (sbuf.st_ctime > sbuf.st_atime) ? sbuf.st_atime : t=
-ime(0);
->> +   tp[1] =3D sbuf.st_mtime;      /* preserve mtime */
->> +-  utime (file,tp);            /* set the times */
->> ++  utime (file, (const struct utimbuf *)tp);           /* set the tim=
-es */
->> +   fclose (df);                        /* close the file */
->> +   unlockfd (ld,lock);         /* release exclusive parse/append perm=
-ission */
->> +   MM_NOCRITICAL (stream);     /* release critical */
->> +@@ -1324,7 +1324,7 @@ long tenex_parse (MAILSTREAM *stream)
->> +     time_t tp[2];
->> +     tp[0] =3D time (0);
->> +     tp[1] =3D LOCAL->filetime;
->> +-    utime (stream->mailbox,tp);
->> ++    utime (stream->mailbox, (const struct utimbuf *)tp);
->> +   }
->> +   stream->silent =3D silent;    /* can pass up events now */
->> +   mail_exists (stream,nmsgs); /* notify upper level of new mailbox s=
-ize */
->> +@@ -1424,7 +1424,7 @@ void tenex_update_status (MAILSTREAM *stream,un=
-signed long msgno,long syncflag)
->> +       fstat (LOCAL->fd,&sbuf);        /* get new write time */
->> +       tp[1] =3D LOCAL->filetime =3D sbuf.st_mtime;
->> +       tp[0] =3D time (0);               /* make sure read is later *=
-/
->> +-      utime (stream->mailbox,tp);
->> ++      utime (stream->mailbox, (const struct utimbuf *)tp);
->> +     }
->> +   }
->> + }
->> +diff --git a/src/osdep/unix/unix.c b/src/osdep/unix/unix.c
->> +index 86be3f9..012dc83 100644
->> +--- a/src/osdep/unix/unix.c
->> ++++ b/src/osdep/unix/unix.c
->> +@@ -232,7 +232,7 @@ DRIVER *unix_valid (char *name)
->> +       if ((sbuf.st_ctime > sbuf.st_atime) || (sbuf.st_mtime > sbuf.s=
-t_atime)) {
->> +       tp[0] =3D sbuf.st_atime;  /* yes, preserve atime and mtime */
->> +       tp[1] =3D sbuf.st_mtime;
->> +-      utime (file,tp);        /* set the times */
->> ++      utime (file, (const struct utimbuf *)tp);       /* set the tim=
-es */
->> +       }
->> +     }
->> +   }
->> +@@ -999,7 +999,7 @@ long unix_copy (MAILSTREAM *stream,char *sequence=
-,char *mailbox,long options)
->> +   else tp[0] =3D                        /* else preserve \Marked sta=
-tus */
->> +        ((sbuf.st_ctime > sbuf.st_atime) || (sbuf.st_mtime > sbuf.st_=
-atime)) ?
->> +        sbuf.st_atime : tp[1];
->> +-  utime (file,tp);            /* set the times */
->> ++  utime (file, (const struct utimbuf *)tp);           /* set the tim=
-es */
->> +   unix_unlock (fd,NIL,&lock); /* unlock and close mailbox */
->> +   if (tstream) {              /* update last UID if we can */
->> +     UNIXLOCAL *local =3D (UNIXLOCAL *) tstream->local;
->> +@@ -1160,7 +1160,7 @@ long unix_append (MAILSTREAM *stream,char *mail=
-box,append_t af,void *data)
->> +     ret =3D NIL;                        /* return error */
->> +   }
->> +   else tp[0] =3D tp[1] - 1;     /* set atime to now-1 if successful =
-copy */
->> +-  utime (file,tp);            /* set the times */
->> ++  utime (file, (const struct utimbuf *)tp);           /* set the tim=
-es */
->> +   fclose (sf);                        /* done with scratch file */
->> +                               /* force UIDVALIDITY assignment now */
->> +   if (tstream && !tstream->uid_validity) tstream->uid_validity =3D t=
-ime (0);
->> +@@ -1425,7 +1425,7 @@ void unix_unlock (int fd,MAILSTREAM *stream,DOT=
-LOCK *lock)
->> +     }
->> +     else now =3D 0;             /* no time change needed */
->> +                               /* set the times, note change */
->> +-    if (now && !utime (stream->mailbox,tp)) LOCAL->filetime =3D tp[1=
-];
->> ++    if (now && !utime (stream->mailbox, (const struct utimbuf *)tp))=
- LOCAL->filetime =3D tp[1];
->> +   }
->> +   flock (fd,LOCK_UN);         /* release flock'ers */
->> +   if (!stream) close (fd);    /* close the file if no stream */
->> +@@ -2251,7 +2251,7 @@ long unix_rewrite (MAILSTREAM *stream,unsigned =
-long *nexp,DOTLOCK *lock,
->> +                               /* set atime to now, mtime a second ea=
-rlier */
->> +     tp[1] =3D (tp[0] =3D time (0)) - 1;
->> +                               /* set the times, note change */
->> +-    if (!utime (stream->mailbox,tp)) LOCAL->filetime =3D tp[1];
->> ++    if (!utime (stream->mailbox, (const struct utimbuf *)tp)) LOCAL-=
->filetime =3D tp[1];
->> +     close (LOCAL->fd);                /* close and reopen file */
->> +     if ((LOCAL->fd =3D open (stream->mailbox,O_RDWR,
->> +                          (long) mail_parameters (NIL,GET_MBXPROTECTI=
-ON,NIL)))
->> diff --git a/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb b/meta-=
-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb
->> index 17faa3aa6..7e3bddb58 100644
->> --- a/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb
->> +++ b/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb
->> @@ -16,6 +16,7 @@ SRC_URI =3D "https://fossies.org/linux/misc/old/imap=
--${PV}.tar.gz \
->>              file://0002-tmail-Include-ctype.h-for-isdigit.patch \
->>              file://0001-Fix-Wincompatible-function-pointer-types.patc=
-h \
->>              file://uw-imap-newer-tls.patch \
->> +           file://uw-imap-fix-incompatible-pointer-types.patch \
->>              "
->>
->>   SRC_URI[md5sum] =3D "2126fd125ea26b73b20f01fcd5940369"
+>> +     if ( len <=3D 0 )
+>> +         return -1;
 >> --
 >> 2.34.1
 >>
 >>
 >> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
 >> Links: You receive all messages sent to this group.
->> View/Reply Online (#110750): https://lists.openembedded.org/g/openembe=
-dded-devel/message/110750
->> Mute This Topic: https://lists.openembedded.org/mt/106526690/1997914
+>> View/Reply Online (#110752): https://lists.openembedded.org/g/openembe=
+dded-devel/message/110752
+>> Mute This Topic: https://lists.openembedded.org/mt/106526692/1997914
 >> Group Owner: openembedded-devel+owner@lists.openembedded.org
 >> Unsubscribe: https://lists.openembedded.org/g/openembedded-devel/unsub=
  [raj.khem@gmail.com]
